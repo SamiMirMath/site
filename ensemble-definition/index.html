@@ -18,7 +18,8 @@
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
-.wrap{max-width:860px;margin:0 auto;padding:14px 16px 48px}
+.wrap{max-width:1100px;margin:0 auto;padding:14px 16px 48px}
+.narrow{max-width:720px;margin:0 auto}
 h1{font-size:1.5rem;margin:4px 0 2px}
 .lead{color:var(--muted);margin:0 0 14px}
 .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px}
@@ -41,20 +42,24 @@ button.primary{background:var(--accent);border-color:var(--accent);color:#fff;fo
 .hint{font-size:.88rem}
 .exemples{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .exemples button{font-size:.88rem;padding:5px 9px}
+.niveaux{display:flex;flex-wrap:wrap;gap:8px}
+.niveaux button{font-size:.92rem;padding:8px 16px}
+.niveau-badge{font-size:.78rem;font-weight:700;padding:2px 9px;border-radius:99px;background:var(--accent-soft);color:var(--accent);margin-left:8px;vertical-align:middle}
 details summary{cursor:pointer;font-weight:600}
 details ul{margin:.4em 0 0;padding-left:1.2em}
 .etat{font-size:.9rem;color:var(--muted);margin-top:8px}
 .barre{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin:4px 0 12px}
-.cond h3{margin:0 0 6px;font-size:1.08rem}
+#cartes .card{padding:22px 26px}
+.cond h3{margin:0 0 10px;font-size:1.18rem}
 .cond .badge{display:inline-block;font-size:.78rem;font-weight:700;padding:1px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent);margin-left:6px;vertical-align:middle}
-.cond .c{background:var(--eq);border-radius:8px;padding:8px 12px;margin:6px 0 8px;overflow-x:auto;font-size:1.08rem}
-.etape{margin:5px 0;overflow-x:auto;overflow-y:hidden}
-.res{margin-top:10px;padding-top:8px;border-top:1px dashed var(--border);font-weight:600;overflow-x:auto}
+.cond .c{background:var(--eq);border-radius:8px;padding:12px 16px;margin:8px 0 12px;overflow-x:auto;font-size:1.22rem}
+.etape{margin:9px 0;overflow-x:auto;overflow-y:hidden;font-size:1.06rem}
+.res{margin-top:14px;padding-top:12px;border-top:1px dashed var(--border);font-weight:600;overflow-x:auto;font-size:1.1rem}
 .final{border:2px solid var(--good)}
-.final .res{border:none;margin:0;padding:0;font-size:1.12rem;color:var(--good)}
-.tsigne{overflow-x:auto;margin:8px 0}
-.tsigne table{border-collapse:collapse;font-size:.95rem}
-.tsigne td{border:1px solid var(--border);padding:5px 7px;text-align:center;white-space:nowrap;min-width:26px}
+.final .res{border:none;margin:0;padding:0;font-size:1.28rem;color:var(--good)}
+.tsigne{overflow-x:auto;margin:14px 0}
+.tsigne table{border-collapse:collapse;font-size:1.12rem}
+.tsigne td{border:1px solid var(--border);padding:9px 14px;text-align:center;white-space:nowrap;min-width:32px}
 .tsigne tr:first-child td{background:var(--eq)}
 .tsigne td.lab{text-align:left;padding-right:12px}
 .tsigne tr.final td{font-weight:700;border-top:2px solid var(--fg)}
@@ -72,31 +77,45 @@ details ul{margin:.4em 0 0;padding-left:1.2em}
   <h1>Ensemble de définition</h1>
   <p class="lead">Écris une fonction : le calcul détaillé de son ED s'affiche, condition par condition.</p>
 
-  <section class="card">
-    <div class="saisie">
-      <label for="entree">f(x) =</label>
-      <input id="entree" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="ln(x-1)/(x-3)">
-    </div>
-    <div class="apercu" id="apercu"><span class="muted">Aperçu de la fonction</span></div>
-    <div class="clavier" id="clavier">
-      <button data-t="x">x</button><button data-t="ln(">ln</button><button data-t="e^(">eˣ</button><button data-t="sqrt(">√</button><button data-t="^">^</button><button data-t="/">÷</button>
-      <button data-t="(">(</button><button data-t=")">)</button><button data-t="+">+</button><button data-t="-">−</button><button data-k="back">⌫</button><button data-k="clear">C</button>
-    </div>
-    <button class="primary" id="calculer" disabled>Calculer ▶</button>
-    <div class="etat" id="etat">Chargement de Python…</div>
-    <div class="hint" style="margin-top:8px">Saisie : <code>ln(x^2-4)</code>, <code>e^(1/(x-2))</code>, <code>sqrt(x+1)</code>, <code>2ln(x)/((ln x)^2-1)</code>. Écrire <code>e^(2x)</code> avec parenthèses.</div>
-    <div class="exemples" id="exemples"></div>
-  </section>
+  <div class="narrow">
+    <section class="card exo">
+      <h2 style="margin:0 0 10px;font-size:1.1rem">🎲 Exercice au hasard</h2>
+      <div class="niveaux" id="niveaux">
+        <button class="primary" data-niveau="facile" disabled>Facile</button>
+        <button class="primary" data-niveau="moyen" disabled>Moyen</button>
+        <button class="primary" data-niveau="difficile" disabled>Difficile</button>
+        <button class="primary" data-niveau="tresDifficile" disabled>Très difficile</button>
+      </div>
+      <div class="apercu" id="exoEnonce" style="margin-top:10px"><span class="muted">Choisis un niveau pour recevoir un exercice à résoudre toi-même.</span></div>
+      <button class="primary" id="exoCorrige" hidden style="margin-top:10px">Afficher le corrigé ▶</button>
+    </section>
 
-  <details class="card">
-    <summary>Rappel de la méthode</summary>
-    <ul>
-      <li>chaque <b>logarithme</b> \(\ln(\dots)\) : son argument doit être <b>strictement positif</b> ;</li>
-      <li>chaque <b>dénominateur</b> : il doit être <b>non nul</b> ;</li>
-      <li>chaque <b>racine carrée</b> \(\sqrt{\dots}\) : son contenu doit être <b>positif ou nul</b>.</li>
-    </ul>
-    <p style="margin:.5em 0 0">Chaque condition donne un ensemble \(E_1, E_2, \dots\) et \(ED = E_1 \cap E_2 \cap \dots\)</p>
-  </details>
+    <section class="card">
+      <div class="saisie">
+        <label for="entree">f(x) =</label>
+        <input id="entree" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="ln(x-1)/(x-3)">
+      </div>
+      <div class="apercu" id="apercu"><span class="muted">Aperçu de la fonction</span></div>
+      <div class="clavier" id="clavier">
+        <button data-t="x">x</button><button data-t="ln(">ln</button><button data-t="e^(">eˣ</button><button data-t="sqrt(">√</button><button data-t="^">^</button><button data-t="/">÷</button>
+        <button data-t="(">(</button><button data-t=")">)</button><button data-t="+">+</button><button data-t="-">−</button><button data-k="back">⌫</button><button data-k="clear">C</button>
+      </div>
+      <button class="primary" id="calculer" disabled>Calculer ▶</button>
+      <div class="etat" id="etat">Chargement de Python…</div>
+      <div class="hint" style="margin-top:8px">Saisie : <code>ln(x^2-4)</code>, <code>e^(1/(x-2))</code>, <code>sqrt(x+1)</code>, <code>2ln(x)/((ln x)^2-1)</code>. Écrire <code>e^(2x)</code> avec parenthèses.</div>
+      <div class="exemples" id="exemples"></div>
+    </section>
+
+    <details class="card">
+      <summary>Rappel de la méthode</summary>
+      <ul>
+        <li>chaque <b>logarithme</b> \(\ln(\dots)\) : son argument doit être <b>strictement positif</b> ;</li>
+        <li>chaque <b>dénominateur</b> : il doit être <b>non nul</b> ;</li>
+        <li>chaque <b>racine carrée</b> \(\sqrt{\dots}\) : son contenu doit être <b>positif ou nul</b>.</li>
+      </ul>
+      <p style="margin:.5em 0 0">Chaque condition donne un ensemble \(E_1, E_2, \dots\) et \(ED = E_1 \cap E_2 \cap \dots\)</p>
+    </details>
+  </div>
 
   <section id="resultat" hidden>
     <div class="barre">
@@ -114,6 +133,16 @@ const PYODIDE="https://cdn.jsdelivr.net/pyodide/v0.27.7/full/";
 const EXEMPLES=["ln(2x-6)","ln(x^2-4)","1/ln(x)","ln(x)/(ln(x)+2)","1/(e^x-1)","ln((x-1)/(x+3))","ln(x-1)+ln(x+3)",
   "1/ln(x+2)","2ln(x)/((ln x)^2-1)","ln(x^2-5x+6)","sqrt(x^2+2x-3)","e^(1/(x^2-x-2))","ln(x^2-4x)/(x-5)","ln((x^2-1)/(x+2))",
   "1/(e^(2x)-5e^x+6)","sqrt(x ln(x+2))","sqrt(x ln(x+2)+x)","1/(ln(x-1)+ln(x-3))","sqrt(1-ln(x^2-4x+5))","sqrt(ln(x)-x+2)"];
+/* Exercices au hasard : classés par difficulté. Toutes les zéros/bornes sont exacts
+   (racines évidentes, discriminant, substitution) — aucun ne retombe sur la dichotomie
+   numérique, pour que le corrigé reste vérifiable à la main. */
+const NOMS_NIVEAUX={facile:"Facile",moyen:"Moyen",difficile:"Difficile",tresDifficile:"Très difficile"};
+const EXOS={
+  facile:["ln(2x-6)","ln(x^2-4)","1/(e^x-1)","ln(x-1)+ln(x+3)"],
+  moyen:["1/ln(x)","ln(x)/(ln(x)+2)","ln((x-1)/(x+3))","1/ln(x+2)","ln(x^2-5x+6)","sqrt(x^2+2x-3)","e^(1/(x^2-x-2))"],
+  difficile:["2ln(x)/((ln x)^2-1)","ln(x^2-4x)/(x-5)","ln((x^2-1)/(x+2))","1/(e^(2x)-5e^x+6)","sqrt(1-ln(x^2-4x+5))"],
+  tresDifficile:["sqrt(x ln(x+2))","sqrt(x ln(x+2)+x)","1/(ln(x-1)+ln(x-3))"]
+};
 let cartes=[], visibles=0;
 
 function math(el){ if(window.renderMathInElement) renderMathInElement(el,{delimiters:[{left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true}],throwOnError:false}); }
@@ -153,7 +182,9 @@ async function demarrer(){
     if(!rep.ok) throw new Error("ensemble_def.py introuvable ("+rep.status+")");
     source=await rep.text();
     await lancerWorker();
-    majEtat(); $("calculer").disabled=false; apercu();
+    majEtat(); $("calculer").disabled=false;
+    document.querySelectorAll("#niveaux button").forEach(b=>b.disabled=false);
+    apercu();
     const q=new URLSearchParams(location.search).get("f"); if(q){ $("entree").value=q; calculer(); }
   }catch(e){
     $("etat").innerHTML='<span class="err">Impossible de charger le moteur Python : '+e.message+'.</span> Ouvrez la page via un serveur (GitHub Pages, ou <code>python3 -m http.server</code>), pas en double-cliquant sur le fichier.';
@@ -205,8 +236,8 @@ function carteCondition(c){
   d.innerHTML=h; math(d); return d;
 }
 let numCalcul=0;
-async function calculer(){
-  const s=$("entree").value.trim(); if(!s||!worker) return;
+async function calculer(force){
+  const s=(typeof force==="string"?force:$("entree").value).trim(); if(!s||!worker) return;
   const moi=++numCalcul;
   $("calculer").disabled=true; $("etat").textContent="Calcul en cours…";
   let r;
@@ -258,6 +289,34 @@ function montrer(n){
 }
 $("suivant").onclick=()=>montrer(1);
 $("tout").onclick=()=>montrer(cartes.length);
+
+/* ---------- exercice au hasard ---------- */
+let exoFn=null, exoDerniers={};
+async function nouvelExercice(niveau){
+  if(!worker) return;
+  const pool=EXOS[niveau]; if(!pool) return;
+  let s; do{ s=pool[Math.floor(Math.random()*pool.length)]; }while(s===exoDerniers[niveau]&&pool.length>1);
+  exoDerniers[niveau]=s; exoFn=s;
+  $("resultat").hidden=true; $("cartes").innerHTML=""; cartes=[];
+  $("exoCorrige").hidden=false; $("exoCorrige").textContent="Afficher le corrigé ▶";
+  const box=$("exoEnonce");
+  box.innerHTML='<span class="muted">Chargement…</span>';
+  try{
+    const r=await appelPy("apercu",s,5000);
+    box.innerHTML=(r.ok?K("f(x) = "+r.tex):'<span class="err">'+r.erreur+'</span>')+
+      `<span class="niveau-badge">${NOMS_NIVEAUX[niveau]}</span>`;
+  }catch(e){ box.innerHTML='<span class="err">Erreur de chargement.</span>'; }
+  math(box);
+}
+$("niveaux").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b||b.disabled) return;
+  nouvelExercice(b.dataset.niveau);
+});
+$("exoCorrige").onclick=async()=>{
+  if(!exoFn) return;
+  await calculer(exoFn);
+  $("resultat").scrollIntoView({behavior:"smooth",block:"start"});
+};
 
 window.addEventListener("DOMContentLoaded",()=>{ document.querySelectorAll("details").forEach(math); demarrer(); });
 </script>
