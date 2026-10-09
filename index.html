@@ -4,119 +4,278 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sami Mir — Mathématiques</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#f6f5f1; --ink:#1a1d24; --muted:#6b7280; --line:#d8d5cc;
-  --accent:#1f4e79; --accent-soft:#e6eef8; --mono-bg:#ece9e1;
+  --paper:#f8f6ef; --paper-raised:#fffdf8; --ink:#1c1a16; --muted:#6e6657;
+  --line:#d9d2c0; --line-soft:#e8e2d3;
+  --accent:#6b1f2a; --accent-ink:#5a1620; --gold:#9c7a34;
 }
 @media (prefers-color-scheme: dark){
-  :root{ --paper:#14161b; --ink:#e8e6e0; --muted:#9aa3b8; --line:#2a2d35;
-         --accent:#6fb0ee; --accent-soft:#1f2c42; --mono-bg:#1d2027; }
+  :root{ --paper:#17140f; --paper-raised:#1e1a14; --ink:#ece6d8; --muted:#a79d87;
+         --line:#372f22; --line-soft:#2a241a;
+         --accent:#d79aa3; --accent-ink:#e3b4bb; --gold:#c9a24e; }
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{
   margin:0; background:var(--paper); color:var(--ink);
-  font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font:400 17px/1.65 "Source Serif 4", Georgia, "Times New Roman", serif;
+  font-optical-sizing:auto;
 }
-.wrap{max-width:760px;margin:0 auto;padding:clamp(28px,7vw,64px) 20px 80px}
+.wrap{max-width:720px; margin:0 auto; padding:clamp(40px,8vw,88px) 22px 90px}
 
-header{border-bottom:1px solid var(--line);padding-bottom:28px;margin-bottom:8px}
-h1{
-  font-size:clamp(1.7rem,4vw,2.3rem); font-weight:700; letter-spacing:-0.01em;
-  margin:0 0 10px;
+header{text-align:center; padding-bottom:30px}
+.eyebrow{
+  display:block; font-size:.74rem; font-weight:600; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--gold); margin-bottom:14px;
 }
-header p{color:var(--muted); margin:0; max-width:46ch; font-size:1.02rem}
+h1{
+  font-size:clamp(2.1rem,5.2vw,3rem); font-weight:600; letter-spacing:.01em;
+  margin:0 0 14px; font-variant-ligatures:common-ligatures;
+}
+header p{
+  color:var(--muted); margin:0 auto; max-width:40ch; font-size:1.08rem;
+  font-style:italic; line-height:1.55;
+}
+.rule{
+  margin:30px auto 0; width:100%; max-width:220px;
+  border:none; height:3px; background:
+    linear-gradient(to right, transparent, var(--line) 15%, var(--line) 85%, transparent);
+  position:relative;
+}
+.rule::after{
+  content:""; position:absolute; left:50%; top:-3px; transform:translateX(-50%);
+  width:5px; height:5px; border-radius:50%; background:var(--gold);
+}
 
 @media (prefers-reduced-motion: no-preference){
-  header{animation:rise .5s ease-out both}
-  @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  header{animation:rise .55s ease-out both}
+  @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 }
 
-section.level{padding:40px 0; border-bottom:1px solid var(--line)}
+section.level{padding:46px 0; border-bottom:1px solid var(--line-soft)}
 section.level:last-of-type{border-bottom:none}
 
-.level-head{display:flex; align-items:baseline; gap:16px; margin-bottom:18px}
+.level-head{display:flex; align-items:baseline; gap:18px; margin-bottom:22px}
 .level-num{
-  font-size:2.6rem; font-weight:700; color:var(--accent);
-  line-height:1; font-variant-numeric:tabular-nums; min-width:1.4ch;
+  font-size:1.5rem; font-weight:600; color:var(--accent); font-style:italic;
+  line-height:1; min-width:1.6em;
 }
-.level-name{font-size:1.25rem; font-weight:600; margin:0}
+.level-name{
+  font-size:1.3rem; font-weight:600; margin:0; letter-spacing:.01em;
+}
 
-.tools{display:flex; flex-direction:column; gap:2px}
+.gate{text-align:center; padding:10px 0 8px}
+.gate-q{color:var(--muted); font-style:italic; font-size:1.02rem; margin:0 0 20px}
+.gate-options{display:flex; gap:14px; justify-content:center; flex-wrap:wrap}
+.gate-btn{
+  font:600 1.1rem/1 "Source Serif 4", Georgia, serif; color:var(--ink);
+  background:var(--paper-raised); border:1px solid var(--line);
+  border-radius:4px; padding:14px 30px; cursor:pointer;
+  transition:border-color .2s ease, transform .2s ease, box-shadow .2s ease, color .2s ease;
+}
+.gate-btn:hover{
+  border-color:var(--accent); color:var(--accent-ink); transform:translateY(-2px);
+  box-shadow:0 6px 20px -10px rgba(0,0,0,.25);
+}
+
+.switcher{
+  text-align:center; color:var(--muted); font-size:.92rem; font-style:italic;
+  margin:0 0 18px;
+}
+.switcher strong{color:var(--accent); font-style:normal; font-weight:700}
+.link-btn{
+  font:inherit; font-style:italic; color:inherit; background:none; border:none;
+  padding:0; cursor:pointer; text-decoration:underline; text-decoration-color:var(--line);
+}
+.link-btn:hover{color:var(--accent)}
+
+html:not([data-track]) #content{display:none}
+html[data-track] #gate{display:none}
+
+.tracks{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
+@media (max-width:680px){ .tracks{grid-template-columns:1fr} }
+html[data-track] .tracks{display:block}
+html[data-track] .track{display:none}
+html[data-track="C"] .track[data-track="C"],
+html[data-track="Ms"] .track[data-track="Ms"],
+html[data-track="Mr"] .track[data-track="Mr"]{display:block}
+
+.track-label{
+  display:block; font-size:.72rem; font-weight:700; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 12px;
+  padding-bottom:7px; border-bottom:1px solid var(--line-soft);
+}
+html[data-track] .track-label{display:none}
+
+.tools{display:flex; flex-direction:column; gap:12px}
 .tool{
-  display:flex; align-items:baseline; justify-content:space-between; gap:16px;
-  padding:14px 0; border-top:1px solid var(--line);
+  display:block; padding:14px 16px; border-radius:3px;
+  background:var(--paper-raised); border:1px solid var(--line-soft);
+  border-left:3px solid var(--line);
+  transition:border-left-color .2s ease, transform .2s ease, box-shadow .2s ease;
 }
-.tool:first-child{border-top:none}
+.tool:hover{
+  border-left-color:var(--accent); transform:translateX(2px);
+  box-shadow:0 4px 18px -8px rgba(0,0,0,.18);
+}
 .tool a{
-  color:var(--ink); text-decoration:none; font-weight:600; font-size:1.04rem;
-  border-bottom:1px solid transparent;
+  color:var(--ink); text-decoration:none; font-weight:600; font-size:1.02rem;
+  background-image:linear-gradient(var(--accent), var(--accent));
+  background-repeat:no-repeat; background-position:0 1.2em; background-size:0% 1px;
+  transition:background-size .25s ease, color .2s ease;
 }
-.tool a:hover{border-bottom-color:var(--accent); color:var(--accent)}
-.tool .desc{color:var(--muted); font-size:.92rem; margin-top:3px}
-.tool .main{flex:1; min-width:0}
-.tag{
-  font:500 .76rem/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  background:var(--mono-bg); color:var(--muted);
-  padding:5px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0;
+.tool a:hover{color:var(--accent-ink); background-size:100% 1px}
+.tool .desc{color:var(--muted); font-size:.88rem; margin-top:5px; font-style:italic; line-height:1.45}
+
+.empty{color:var(--muted); font-size:.92rem; font-style:italic; padding:2px 0}
+
+footer{
+  margin-top:56px; padding-top:26px; border-top:1px solid var(--line-soft);
+  text-align:center; color:var(--muted); font-size:.85rem;
+  letter-spacing:.08em; text-transform:uppercase;
 }
-
-.empty{color:var(--muted); font-size:.98rem; font-style:italic; padding:6px 0}
-
-footer{margin-top:48px; color:var(--muted); font-size:.85rem}
-footer a{color:inherit}
+footer a{color:inherit; text-decoration:none; border-bottom:1px solid var(--line)}
+footer a:hover{color:var(--accent)}
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <header>
+    <span class="eyebrow">Gymnase · Mathématiques</span>
     <h1>Sami Mir</h1>
     <p>Outils interactifs pour les cours de mathématiques au gymnase.</p>
+    <hr class="rule">
   </header>
 
-  <section class="level">
-    <div class="level-head">
-      <span class="level-num">1</span>
-      <h2 class="level-name">Première année</h2>
+  <div id="gate" class="gate">
+    <p class="gate-q">Choisis ta filière pour accéder à tes outils.</p>
+    <div class="gate-options">
+      <button class="gate-btn" data-choose="C">C</button>
+      <button class="gate-btn" data-choose="Ms">Ms</button>
+      <button class="gate-btn" data-choose="Mr">Mr</button>
     </div>
-    <div class="empty">Aucun outil publié pour l'instant.</div>
-  </section>
+  </div>
 
-  <section class="level">
-    <div class="level-head">
-      <span class="level-num">2</span>
-      <h2 class="level-name">Deuxième année</h2>
-    </div>
-    <div class="tools">
-      <div class="tool">
-        <div class="main">
-          <a href="simplexe/">Programmation linéaire</a>
-          <div class="desc">Méthode algébrique et méthode géométrique, pas à pas.</div>
-        </div>
-        <span class="tag">2C · 2Mr/OS</span>
+  <div id="content">
+    <p class="switcher">Filière <strong id="currentTrack"></strong> · <button id="switchBtn" class="link-btn" type="button">changer</button></p>
+
+    <section class="level">
+      <div class="level-head">
+        <span class="level-num">I</span>
+        <h2 class="level-name">Première année</h2>
       </div>
-    </div>
-  </section>
-
-  <section class="level">
-    <div class="level-head">
-      <span class="level-num">3</span>
-      <h2 class="level-name">Troisième année</h2>
-    </div>
-    <div class="tools">
-      <div class="tool">
-        <div class="main">
-          <a href="ensemble-definition/">Ensemble de définition</a>
-          <div class="desc">Calcul détaillé, condition par condition, avec le tableau de signes.</div>
+      <div class="tracks">
+        <div class="track" data-track="C">
+          <span class="track-label">C</span>
+          <div class="empty">Aucun outil publié pour l'instant.</div>
+        </div>
+        <div class="track" data-track="Ms">
+          <span class="track-label">Ms</span>
+          <div class="empty">Aucun outil publié pour l'instant.</div>
+        </div>
+        <div class="track" data-track="Mr">
+          <span class="track-label">Mr</span>
+          <div class="empty">Aucun outil publié pour l'instant.</div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer>samimir.ch</footer>
+    <section class="level">
+      <div class="level-head">
+        <span class="level-num">II</span>
+        <h2 class="level-name">Deuxième année</h2>
+      </div>
+      <div class="tracks">
+        <div class="track" data-track="C">
+          <span class="track-label">C</span>
+          <div class="tools">
+            <div class="tool">
+              <a href="simplexe/">Programmation linéaire</a>
+              <div class="desc">Méthode algébrique et méthode géométrique, pas à pas.</div>
+            </div>
+          </div>
+        </div>
+        <div class="track" data-track="Ms">
+          <span class="track-label">Ms</span>
+          <div class="empty">Aucun outil publié pour l'instant.</div>
+        </div>
+        <div class="track" data-track="Mr">
+          <span class="track-label">Mr</span>
+          <div class="tools">
+            <div class="tool">
+              <a href="simplexe/">Programmation linéaire</a>
+              <div class="desc">Méthode algébrique et méthode géométrique, pas à pas.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="level">
+      <div class="level-head">
+        <span class="level-num">III</span>
+        <h2 class="level-name">Troisième année</h2>
+      </div>
+      <div class="tracks">
+        <div class="track" data-track="C">
+          <span class="track-label">C</span>
+          <div class="empty">Aucun outil publié pour l'instant.</div>
+        </div>
+        <div class="track" data-track="Ms">
+          <span class="track-label">Ms</span>
+          <div class="tools">
+            <div class="tool">
+              <a href="ensemble-definition/">Ensemble de définition</a>
+              <div class="desc">Calcul détaillé, condition par condition, avec le tableau de signes.</div>
+            </div>
+          </div>
+        </div>
+        <div class="track" data-track="Mr">
+          <span class="track-label">Mr</span>
+          <div class="tools">
+            <div class="tool">
+              <a href="ensemble-definition/">Ensemble de définition</a>
+              <div class="desc">Calcul détaillé, condition par condition, avec le tableau de signes.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer><a href="https://samimir.ch">samimir.ch</a></footer>
 
 </div>
+<script>
+(function(){
+  var html = document.documentElement;
+  var currentTrackEl = document.getElementById('currentTrack');
+
+  function choose(track){
+    html.setAttribute('data-track', track);
+    try{ localStorage.setItem('samimir-track', track); }catch(e){}
+    currentTrackEl.textContent = track;
+  }
+
+  document.querySelectorAll('[data-choose]').forEach(function(btn){
+    btn.addEventListener('click', function(){ choose(btn.getAttribute('data-choose')); });
+  });
+
+  document.getElementById('switchBtn').addEventListener('click', function(){
+    html.removeAttribute('data-track');
+    try{ localStorage.removeItem('samimir-track'); }catch(e){}
+  });
+
+  try{
+    var saved = localStorage.getItem('samimir-track');
+    if (saved === 'C' || saved === 'Ms' || saved === 'Mr') choose(saved);
+  }catch(e){}
+})();
+</script>
 </body>
 </html>
