@@ -24,7 +24,7 @@ from fractions import Fraction as F
 import math
 import json
 
-__all__ = ["analyser", "analyser_json", "apercu_json"]
+__all__ = ["analyser", "analyser_json", "apercu_json", "verifier_json"]
 
 
 class ErreurSaisie(Exception):
@@ -471,13 +471,15 @@ def est_affine(R):
 # 5. NOMBRES RÉELS EXACTS (affichage exact, comparaison numérique)
 # =====================================================================
 class Num:
-    def __init__(self, val, tex, q=None, genre="gen", data=None, approx=False):
+    """Réel avec écriture exacte (tex), valeur approchée (val) et forme SymPy (py)."""
+    def __init__(self, val, tex, q=None, genre="gen", data=None, approx=False, py=None):
         self.val, self.tex, self.q, self.genre, self.data, self.approx = val, tex, q, genre, data, approx
+        self.py = py if py is not None else repr(float(val))
 
     @staticmethod
     def rat(q):
         q = F(q)
-        return Num(float(q), qtex(q), q=q, genre="rat")
+        return Num(float(q), qtex(q), q=q, genre="rat", py=f"({q.numerator})/({q.denominator})")
 
     @staticmethod
     def quad(a, b, m):
@@ -492,11 +494,22 @@ class Num:
             s = str(A) + (" - " if B < 0 else " + ") + rac
         if d != 1:
             s = r"\frac{" + s + "}{" + str(d) + "}"
-        return Num(float(a) + float(b) * math.sqrt(m), s, genre="quad", data=(a, b, m))
+        return Num(float(a) + float(b) * math.sqrt(m), s, genre="quad", data=(a, b, m),
+                   py=f"(({a})+({b})*sqrt({m}))")
+
+    @staticmethod
+    def approche(v):
+        return Num(v, r"{\approx}\," + dec(v), approx=True)
 
 
 def proche(a, b):
+    if not (math.isfinite(a) and math.isfinite(b)):
+        return a == b
     return abs(a - b) <= 1e-9 * (1 + abs(a) + abs(b))
+
+
+def parenthese(t):
+    return r"\left(" + t + r"\right)" if (" + " in t or " - " in t) else t
 
 
 def exp_de(n):
@@ -504,10 +517,10 @@ def exp_de(n):
         if n.q == 0:
             return Num.rat(1)
         t = "e" if n.q == 1 else "e^{" + n.tex + "}"
-        return Num(math.exp(n.val), t, genre="exp", data=n)
+        return Num(math.exp(n.val), t, genre="exp", data=n, py=f"exp({n.py})")
     if n.genre == "ln":
         return n.data
-    return Num(math.exp(n.val), "e^{" + n.tex + "}", genre="exp", data=n)
+    return Num(math.exp(n.val), "e^{" + n.tex + "}", genre="exp", data=n, approx=n.approx, py=f"exp({n.py})")
 
 
 def ln_de(n):
@@ -518,10 +531,12 @@ def ln_de(n):
         if q == 1:
             return Num.rat(0)
         if q.numerator == 1:
-            return Num(math.log(n.val), r"-\ln(" + str(q.denominator) + ")", genre="ln", data=Num.rat(1 / q))
+            return Num(math.log(n.val), r"-\ln(" + str(q.denominator) + ")", genre="ln", data=n,
+                       py=f"-log({q.denominator})")
         t = r"\ln(" + str(q.numerator) + ")" if q.denominator == 1 else r"\ln\left(" + n.tex + r"\right)"
-        return Num(math.log(n.val), t, genre="ln", data=n)
-    return Num(math.log(n.val), r"\ln\left(" + n.tex + r"\right)", genre="ln", data=n)
+        return Num(math.log(n.val), t, genre="ln", data=n, py=f"log({n.py})")
+    return Num(math.log(n.val), r"\ln\left(" + n.tex + r"\right)", genre="ln", data=n, approx=n.approx,
+               py=f"log({n.py})")
 
 
 def carre(n):
@@ -534,11 +549,13 @@ def carre(n):
         return Num.quad(a * a + b * b * m, 2 * a * b, m)
     if n.genre == "exp" and n.data.q is not None:
         return exp_de(Num.rat(2 * n.data.q))
-    return Num(n.val ** 2, r"\left(" + n.tex + r"\right)^{2}", approx=n.approx)
+    if n.approx:
+        return Num.approche(n.val ** 2)
+    return Num(n.val ** 2, r"\left(" + n.tex + r"\right)^{2}", py=f"({n.py})**2")
 
 
 def affine_inv(n, m, b):
-    """x tel que m·x + b = n."""
+    """x tel que m·x + b = n, c.-à-d. x = n/m − b/m."""
     m, b = F(m), F(b)
     if n.q is not None:
         return Num.rat((n.q - b) / m)
@@ -547,26 +564,21 @@ def affine_inv(n, m, b):
         return Num.quad((a - b) / m, c / m, r)
     val = (n.val - float(b)) / float(m)
     if n.approx:
-        return Num(val, dec(val), approx=True)
-    if m < 0:
-        m, b, signe = -m, -b, "-"
+        return Num.approche(val)
+    al, be = 1 / m, -b / m
+    if al == 1:
+        t = n.tex
+    elif al == -1:
+        t = "-" + parenthese(n.tex)
+    elif al.numerator in (1, -1):
+        t = ("-" if al < 0 else "") + r"\frac{" + n.tex + "}{" + str(al.denominator) + "}"
     else:
-        signe = ""
-    t = n.tex
-    if b > 0:
-        t = t + " - " + qtex(b)
-    elif b < 0:
-        t = t + " + " + qtex(-b)
-    if m == 1:
-        if signe:
-            t = "-" + (r"\left(" + t + r"\right)" if b != 0 else t)
-    else:
-        if signe:
-            t = (r"\frac{" + qtex(-b) + " - " + n.tex + "}{" + qtex(m) + "}") if b != 0 else \
-                (r"-\frac{" + n.tex + "}{" + qtex(m) + "}")
-        else:
-            t = r"\frac{" + t + "}{" + qtex(m) + "}"
-    return Num(val, t)
+        t = qtex(al) + parenthese(n.tex)
+    if be > 0:
+        t += " + " + qtex(be)
+    elif be < 0:
+        t += " - " + qtex(-be)
+    return Num(val, t, py=f"(({n.py})-({b}))/({m})")
 
 
 def dec(v):
@@ -832,7 +844,7 @@ def factoriser(P, v):
         lignes += ll
     elif d >= 3:
         rs = racines_numeriques(Q)
-        nums = [Num(x, dec(x), approx=True) for x in rs]
+        nums = [Num.approche(x) for x in rs]
         facteurs.append(facteur(Q, v, nums))
         lignes.append(rf"\({ptex(Q, v)}\) n'a pas de racine rationnelle : zéros approchés "
                       + (", ".join(rf"\({v} \approx {x.tex}\)" for x in nums) if nums else "aucun zéro réel") + ".")
@@ -1252,13 +1264,487 @@ def preimage(B, S, items):
 
 
 # =====================================================================
+# 9 bis. CAS GÉNÉRAL : SIGNE FACTEUR PAR FACTEUR, CALCUL FORMEL (SymPy), NUMÉRIQUE
+# =====================================================================
+#   Quand la condition mélange x et ln/exp/√ (ex. x·ln(x+2) ≥ 0), on l'écrit comme un
+#   produit/quotient de facteurs, on étudie le signe de chaque facteur (méthode exacte,
+#   sinon SymPy, sinon dichotomie numérique) et on dresse le tableau de signes.
+
+ETAT = {"sympy_manquant": False}
+_SP = {}
+
+
+def _sympy():
+    """Module sympy s'il est disponible (Pyodide : pyodide.loadPackage('sympy')), sinon None."""
+    if "sp" in _SP:
+        return _SP["sp"]
+    try:
+        import sympy
+        _SP["sp"] = sympy
+        _SP["x"] = sympy.Symbol("x", real=True)
+        return sympy
+    except Exception:
+        return None
+
+
+def en_py(n):
+    """Arbre → chaîne lisible par SymPy."""
+    if isinstance(n, Nb):
+        return f"({n.v.numerator})/({n.v.denominator})" if n.v.denominator != 1 else f"({n.v.numerator})"
+    if isinstance(n, X):
+        return "x"
+    if isinstance(n, E):
+        return "E"
+    if isinstance(n, Neg):
+        return "(-" + en_py(n.a) + ")"
+    if isinstance(n, Fn):
+        return {"ln": "log", "exp": "exp", "sqrt": "sqrt"}[n.nom] + "(" + en_py(n.a) + ")"
+    op = {"^": "**"}.get(n.op, n.op)
+    return "(" + en_py(n.a) + op + en_py(n.b) + ")"
+
+
+def en_sympy(n):
+    sp = _sympy()
+    return sp.sympify(en_py(n), locals={"x": _SP["x"], "E": sp.E})
+
+
+def num_sympy(e):
+    sp = _sympy()
+    e = sp.nsimplify(e) if e.is_Float else e
+    v = float(sp.N(e, 30))
+    t = sp.latex(e, ln_notation=True)
+    if len(t) > 60 or e.has(sp.LambertW) or not e.is_real:
+        return Num.approche(v)
+    return Num(v, t, q=F(int(e.p), int(e.q)) if e.is_Rational else None, py=str(e))
+
+
+def depuis_sympy(S):
+    """Ensemble SymPy → liste d'intervalles. Lève NonPrisEnCharge si SymPy n'a pas conclu."""
+    sp = _sympy()
+    if S == sp.S.EmptySet:
+        return []
+    if S == sp.S.Reals:
+        return REELS
+    if isinstance(S, sp.Interval):
+        lo = None if S.start == -sp.oo else num_sympy(S.start)
+        hi = None if S.end == sp.oo else num_sympy(S.end)
+        return fusion([Iv(lo, lo is not None and not S.left_open, hi, hi is not None and not S.right_open)])
+    if isinstance(S, sp.FiniteSet):
+        pts = []
+        for p in S.args:
+            if p.is_real is False:
+                continue
+            if p.is_real is None and abs(sp.im(sp.N(p))) > 1e-12:
+                continue
+            pts.append(num_sympy(p))
+        return points(pts)
+    if isinstance(S, sp.Union):
+        out = []
+        for a in S.args:
+            out = union(out, depuis_sympy(a))
+        return out
+    if isinstance(S, sp.Intersection):
+        out = REELS
+        for a in S.args:
+            out = inter(out, depuis_sympy(a))
+        return out
+    if isinstance(S, sp.Complement):
+        return inter(depuis_sympy(S.args[0]), complement(depuis_sympy(S.args[1])))
+    raise NonPrisEnCharge("SymPy n'a pas trouvé de forme exacte.")
+
+
+def arbre_depuis_sympy(e):
+    """Expression SymPy → arbre (pour réutiliser une factorisation SymPy)."""
+    sp = _sympy()
+    if e == _SP["x"]:
+        return X()
+    if e == sp.E:
+        return E()
+    if e.is_Rational:
+        q = F(int(e.p), int(e.q))
+        return Neg(Nb(-q)) if q < 0 else Nb(q)
+    if isinstance(e, sp.Add):
+        args = [arbre_depuis_sympy(a) for a in e.as_ordered_terms()]
+        out = args[0]
+        for a in args[1:]:
+            out = Op("+", out, a)
+        return out
+    if isinstance(e, sp.Mul):
+        num, den = [], []
+        for a in e.args:
+            b, ex = a.as_base_exp()
+            if ex.is_number and ex < 0:
+                den.append(arbre_depuis_sympy(b ** (-ex)))
+            else:
+                num.append(arbre_depuis_sympy(a))
+        prod = lambda L: L[0] if len(L) == 1 else Op("*", prod(L[:-1]), L[-1])
+        top = prod(num) if num else Nb(1)
+        return Op("/", top, prod(den)) if den else top
+    if isinstance(e, sp.Pow):
+        b, ex = e.args
+        if b == sp.E:
+            return Fn("exp", arbre_depuis_sympy(ex))
+        if ex == sp.Rational(1, 2):
+            return Fn("sqrt", arbre_depuis_sympy(b))
+        if ex == -1:
+            return Op("/", Nb(1), arbre_depuis_sympy(b))
+        if ex.is_Rational:
+            return Op("^", arbre_depuis_sympy(b), arbre_depuis_sympy(ex))
+    if isinstance(e, sp.exp):
+        return Fn("exp", arbre_depuis_sympy(e.args[0]))
+    if isinstance(e, sp.log):
+        return Fn("ln", arbre_depuis_sympy(e.args[0]))
+    raise NonPrisEnCharge("expression SymPy non convertible.")
+
+
+class Incertain(Exception):
+    """Valeur hors de portée des flottants (e^(±700)…) : point inutilisable pour un test numérique."""
+
+
+def evaluer(n, x):
+    """Valeur numérique de l'arbre en x (None si non définie)."""
+    try:
+        if isinstance(n, Nb):
+            return float(n.v)
+        if isinstance(n, X):
+            return x
+        if isinstance(n, E):
+            return math.e
+        if isinstance(n, Neg):
+            a = evaluer(n.a, x)
+            return None if a is None else -a
+        if isinstance(n, Fn):
+            a = evaluer(n.a, x)
+            if a is None:
+                return None
+            if n.nom == "ln":
+                return math.log(a) if a > 0 else None
+            if n.nom == "sqrt":
+                return math.sqrt(a) if a >= 0 else None
+            if abs(a) > 700:
+                raise Incertain()
+            return math.exp(a)
+        a, b = evaluer(n.a, x), evaluer(n.b, x)
+        if a is None or b is None:
+            return None
+        if n.op == "+":
+            return a + b
+        if n.op == "-":
+            return a - b
+        if n.op == "*":
+            return a * b
+        if n.op == "/":
+            return None if b == 0 else a / b
+        e = valeur_constante(n.b)
+        if e is not None and e.denominator == 1:
+            if a == 0 and e < 0:
+                return None
+            return a ** int(e)
+        if e is not None and e.denominator % 2 == 1:
+            if a == 0 and e < 0:
+                return None
+            r = abs(a) ** float(e)
+            return -r if (a < 0 and e.numerator % 2) else r
+        if a < 0 or (a == 0 and b <= 0):
+            return None
+        return a ** b
+    except OverflowError:
+        raise Incertain()
+    except (ValueError, ZeroDivisionError):
+        return None
+
+
+def aplatir(n):
+    """n = c · ∏ h_i^{k_i} (c rationnel, k_i entiers non nuls)."""
+    c = [F(1)]
+    facs = []
+
+    def ajout(h, k):
+        for f in facs:
+            if f[0].key() == h.key():
+                f[1] += k
+                return
+        facs.append([h, k])
+
+    def rec(m, k):
+        v = valeur_constante(m)
+        if v is not None:
+            if v == 0 and k < 0:
+                raise ErreurSaisie("Division par zéro dans l'expression.")
+            c[0] *= v ** k
+        elif isinstance(m, Neg):
+            c[0] *= (-1) ** abs(k)
+            rec(m.a, k)
+        elif isinstance(m, Op) and m.op == "*":
+            rec(m.a, k)
+            rec(m.b, k)
+        elif isinstance(m, Op) and m.op == "/":
+            rec(m.a, k)
+            rec(m.b, -k)
+        elif isinstance(m, Op) and m.op == "^" and valeur_constante(m.b) is not None \
+                and valeur_constante(m.b).denominator == 1:
+            rec(m.a, k * int(valeur_constante(m.b)))
+        else:
+            ajout(m, k)
+    rec(n, 1)
+    return c[0], [(h, k) for h, k in facs if k != 0]
+
+
+def contient(S, v):
+    for iv in S:
+        if iv.lo is not None:
+            if proche(v, iv.lo.val):
+                if not iv.lf:
+                    continue
+            elif v < iv.lo.val:
+                continue
+        if iv.hi is not None:
+            if proche(v, iv.hi.val):
+                if not iv.hf:
+                    continue
+            elif v > iv.hi.val:
+                continue
+        return True
+    return False
+
+
+def domaine(h):
+    """Ensemble de définition de h (même méthode, sans le détail)."""
+    conds = []
+    conditions(h, conds)
+    D = REELS
+    for genre, A in conds:
+        D = inter(D, resoudre_condition(genre, A)[2])
+    return D
+
+
+ECHANT = sorted(set([i / 40 for i in range(-2400, 2401)] +
+                    [s * 10 ** (k / 25) for s in (-1, 1) for k in range(40, 226)]))
+
+
+def signe_numerique(h, D):
+    """P = {h > 0}, Z = {h = 0} sur D, zéros approchés par dichotomie."""
+    def f(t):
+        try:
+            return evaluer(h, t)
+        except Incertain:
+            return None
+    P, Z = [], []
+    for iv in D:
+        a, b = vlo(iv), vhi(iv)
+        xs = [t for t in ECHANT if a < t < b]
+        for bord, sens in ((a, 1), (b, -1)):
+            if math.isfinite(bord):
+                xs += [bord + sens * 10 ** (-k) * (1 + abs(bord)) for k in range(1, 10)]
+        xs = sorted(t for t in set(xs) if a < t < b)
+        if not xs:
+            continue
+        vals = [f(t) for t in xs]
+        racines = []
+        for i, t in enumerate(xs):
+            if vals[i] == 0:
+                racines.append(t)
+            elif i and vals[i - 1] not in (None, 0) and vals[i] is not None and (vals[i - 1] > 0) != (vals[i] > 0):
+                lo, hi, flo = xs[i - 1], t, vals[i - 1]
+                for _ in range(200):
+                    mid = (lo + hi) / 2
+                    fm = f(mid)
+                    if fm is None or fm == 0 or hi - lo < 1e-15 * (1 + abs(mid)):
+                        break
+                    if (fm > 0) == (flo > 0):
+                        lo, flo = mid, fm
+                    else:
+                        hi = mid
+                racines.append((lo + hi) / 2)
+        nums = []
+        for r in sorted(racines):
+            if not any(proche(r, m.val) for m in nums):
+                nums.append(Num.approche(r))
+        Z = union(Z, points(nums))
+        # bords fermés où h s'annule
+        for bord, ferme in ((iv.lo, iv.lf), (iv.hi, iv.hf)):
+            if bord is not None and ferme and f(bord.val) is not None and abs(f(bord.val)) < 1e-12:
+                Z = union(Z, points([bord]))
+        coupes = [iv.lo] + nums + [iv.hi]
+        for j in range(len(coupes) - 1):
+            lo, hi = coupes[j], coupes[j + 1]
+            l, r = (-math.inf if lo is None else lo.val), (math.inf if hi is None else hi.val)
+            ts = [t for t in xs if l < t < r and not proche(t, l) and not proche(t, r)]
+            t = ts[len(ts) // 2] if ts else ((l + r) / 2 if math.isfinite(l) and math.isfinite(r) else
+                                             (r - 1 if math.isfinite(r) else (l + 1 if math.isfinite(l) else 0.0)))
+            v = f(t)
+            if v is not None and v > 0:
+                P = union(P, [Iv(lo, False, hi, False)])
+    P = inter(P, D)
+    return fusion(P), inter(fusion(Z), D)
+
+
+def signe_facteur(h, nom):
+    """Étudie le signe d'un facteur : (D, P, Z, étapes)."""
+    ht = tex(h)
+    D = domaine(h)
+    items = []
+    if not (len(D) == 1 and D[0].lo is None and D[0].hi is None):
+        items.append(txt(rf"\({ht}\) est défini pour \({nom} \in {ens_tex(D)}\)."))
+    # 1) méthode exacte
+    try:
+        it = []
+        P = inter(preimage(h, [Iv(Num.rat(0), False, None, False)], it), D)
+        Z = inter(preimage(h, points([Num.rat(0)]), []), D)
+        items += it
+        items.append(txt(rf"Bilan : \({ht} > 0 \iff {nom} \in {ens_tex(P)}\) ; "
+                         + (rf"\({ht} = 0 \iff {nom} \in {ens_tex(Z)}\)." if Z else rf"\({ht}\) ne s'annule pas.")))
+        return D, P, Z, items, "exact"
+    except NonPrisEnCharge:
+        pass
+    # 2) calcul formel
+    sp = _sympy()
+    if sp is not None:
+        try:
+            e, xs = en_sympy(h), _SP["x"]
+            P = inter(depuis_sympy(sp.solveset(e > 0, xs, sp.S.Reals)), D)
+            Z = inter(depuis_sympy(sp.solveset(sp.Eq(e, 0), xs, sp.S.Reals)), D)
+            items.append(txt(rf"Ce facteur mélange \(x\) et une fonction transcendante : on résout avec le calcul formel (SymPy) : "
+                             rf"\({ht} > 0 \iff {nom} \in {ens_tex(P)}\) et "
+                             + (rf"\({ht} = 0 \iff {nom} \in {ens_tex(Z)}\)." if Z else rf"\({ht}\) ne s'annule pas.")))
+            return D, P, Z, items, "sympy"
+        except Exception:
+            pass
+    else:
+        ETAT["sympy_manquant"] = True
+    # 3) numérique
+    P, Z = signe_numerique(h, D)
+    items.append(txt(rf"L'équation \({ht} = 0\) n'a pas de solution exacte simple : on localise ses zéros "
+                     rf"par dichotomie (valeurs approchées). "
+                     + (rf"Zéros : \({SEP.join(z.lo.tex for z in Z)}\) ; " if Z else "Aucun zéro ; ")
+                     + rf"\({ht} > 0\) sur \({ens_tex(P)}\)."))
+    return D, P, Z, items, "numerique"
+
+
+def tableau_facteurs(c, infos, rel, expr_tex, items):
+    """Tableau de signes de c·∏ h_i^{k_i} ; renvoie {expr rel 0} (rel : '>' ou '>=')."""
+    crit = []
+    for (h, k), (D, P, Z) in infos:
+        for S in (D, P, Z):
+            for iv in S:
+                for p in (iv.lo, iv.hi):
+                    if p is not None and not any(proche(p.val, q.val) for q in crit):
+                        crit.append(p)
+    crit.sort(key=lambda p: p.val)
+    n = len(crit)
+
+    def test(i):
+        if n == 0:
+            return 0.0
+        if i == 0:
+            return crit[0].val - 1
+        if i == n:
+            return crit[-1].val + 1
+        return (crit[i - 1].val + crit[i].val) / 2
+
+    def etat(D, P, Z, k, v):
+        if not contient(D, v):
+            return "x"
+        if contient(Z, v):
+            return "||" if k < 0 else "0"
+        s = "+" if contient(P, v) else "-"
+        return "+" if (s == "-" and k % 2 == 0) else s
+
+    vals = []
+    for i in range(n + 1):
+        vals.append(test(i))
+        if i < n:
+            vals.append(crit[i].val)
+    lignes = []
+    if c < 0:
+        lignes.append({"label": qtex(c), "cells": ["-"] * len(vals)})
+    for (h, k), (D, P, Z) in infos:
+        lab = tex(h) if prec(h) >= 3 else r"\left(" + tex(h) + r"\right)"
+        if abs(k) > 1:
+            lab = (lab if prec(h) >= 3 and not isinstance(h, Fn) else r"\left(" + tex(h) + r"\right)") + "^{" + str(abs(k)) + "}"
+        elif prec(h) < 3:
+            lab = tex(h)
+        if k < 0:
+            lab += r" \ (\text{dén.})"
+        lignes.append({"label": lab, "cells": [etat(D, P, Z, k, v) for v in vals]})
+    fin = []
+    for j in range(len(vals)):
+        col = [l["cells"][j] for l in lignes]
+        if "x" in col:
+            fin.append("x")
+        elif "||" in col:
+            fin.append("||")
+        elif "0" in col:
+            fin.append("0")
+        else:
+            fin.append("-" if col.count("-") % 2 else "+")
+    lignes.append({"label": expr_tex, "cells": fin, "final": True})
+    items.append({"type": "tableau", "var": "x", "crit": [p.tex for p in crit], "rows": lignes})
+    S = []
+    for i in range(n + 1):
+        if fin[2 * i] == "+":
+            S.append(Iv(crit[i - 1] if i else None, False, crit[i] if i < n else None, False))
+        if i < n and rel == ">=" and fin[2 * i + 1] == "0":
+            S.append(Iv(crit[i], True, crit[i], True))
+    S = fusion(S)
+    if any(ch == "x" for ch in fin):
+        items.append(txt("Les zones hachurées (×) sont hors du domaine de définition de l'expression."))
+    symb = ">" if rel == ">" else r"\geq"
+    items.append(txt(rf"On lit le tableau : \({expr_tex} {symb} 0 \iff x \in {ens_tex(S)}\)."))
+    return S
+
+
+def resoudre_general(A, rel, items):
+    """Condition A rel 0 (rel ∈ '>', '>=', '=') par étude du signe de chaque facteur."""
+    c, facs = aplatir(A)
+    nonconst = [(h, k) for h, k in facs]
+    if len(nonconst) == 1 and nonconst[0][1] == 1:
+        sp = _sympy()
+        if sp is not None:
+            try:
+                fe = sp.factor(en_sympy(A))
+                c2, facs2 = aplatir(arbre_depuis_sympy(fe))
+                if len(facs2) > 1 or any(abs(k) > 1 for _, k in facs2):
+                    A2 = arbre_depuis_sympy(fe)
+                    items.append(txt(rf"On factorise (SymPy) : \({tex(A)} = {tex(A2)}\)."))
+                    c, facs = c2, facs2
+            except Exception:
+                pass
+    if len(facs) > 1 or any(abs(k) > 1 for _, k in facs):
+        items.append(txt("On étudie le signe de chaque facteur, puis on dresse le tableau de signes."))
+    infos = []
+    for h, k in facs:
+        D, P, Z, it, _ = signe_facteur(h, "x")
+        if len(facs) > 1:
+            items.append(txt(rf"<b>Signe de \({tex(h)}\)</b>"))
+        items.extend(it)
+        infos.append(((h, k), (D, P, Z)))
+    if rel == "=":
+        Dtot = REELS
+        for (h, k), (D, P, Z) in infos:
+            Dtot = inter(Dtot, D)
+            if k < 0:
+                Dtot = inter(Dtot, complement(Z))
+        Zs = []
+        for (h, k), (D, P, Z) in infos:
+            if k > 0:
+                Zs = union(Zs, Z)
+        Zs = inter(Zs, Dtot)
+        if len(facs) > 1:
+            items.append(txt("Un produit est nul si et seulement si l'un de ses facteurs (du numérateur) est nul, "
+                             "les autres étant définis."))
+        return Zs
+    return tableau_facteurs(c, infos, rel, tex(A), items)
+
+
+# =====================================================================
 # 10. CONDITIONS D'EXISTENCE ET ANALYSE COMPLÈTE
 # =====================================================================
 POURQUOI = {
     "ln": "L'argument d'un logarithme doit être strictement positif.",
     "den": "Un dénominateur doit être non nul.",
     "sqrt": "Le contenu d'une racine carrée doit être positif ou nul.",
-    "pos": "Une puissance d'exposant fractionnaire négatif exige une base strictement positive.",
+    "pos": "Une puissance a^b d'exposant non entier (a^b = e^{b ln a}) exige une base strictement positive.",
 }
 TITRE = {"ln": "logarithme", "den": "dénominateur", "sqrt": "racine carrée", "pos": "puissance"}
 
@@ -1290,8 +1776,8 @@ def conditions(n, out):
         elif n.op == "^":
             e = valeur_constante(n.b)
             if e is None:
-                raise ErreurSaisie("Exposant variable non pris en charge : écrivez plutôt e^(…) avec exp.")
-            if e.denominator % 2 == 0:
+                ajouter("pos", n.a)        # a^b = e^(b·ln a) : base > 0
+            elif e.denominator % 2 == 0:
                 ajouter("sqrt" if e > 0 else "pos", n.a)
             elif e < 0:
                 ajouter("den", n.a)
@@ -1303,30 +1789,43 @@ def resoudre_condition(genre, A):
     if genre == "den":
         cond = rf"{At} \neq 0"
         items.append(txt(rf"On cherche les valeurs interdites : on résout \({At} = 0\)."))
-        Z = preimage(A, points([Num.rat(0)]), items)
+        try:
+            it = []
+            Z = preimage(A, points([Num.rat(0)]), it)
+        except NonPrisEnCharge:
+            it = []
+            Z = resoudre_general(A, "=", it)
+        items += it
         E_ = complement(Z)
         if Z:
-            items.append(txt(rf"On exclut ces valeurs."))
+            items.append(txt(rf"Valeurs interdites : \(x \in {ens_tex(Z)}\). On les exclut."))
         else:
             items.append(txt(rf"\({At}\) ne s'annule jamais : aucune valeur interdite."))
         return cond, items, E_
     if genre in ("ln", "pos"):
-        cond, S0 = rf"{At} > 0", [Iv(Num.rat(0), False, None, False)]
+        cond, rel, S0 = rf"{At} > 0", ">", [Iv(Num.rat(0), False, None, False)]
     else:
-        cond, S0 = rf"{At} \geq 0", [Iv(Num.rat(0), True, None, False)]
+        cond, rel, S0 = rf"{At} \geq 0", ">=", [Iv(Num.rat(0), True, None, False)]
     if isinstance(A, X):
         items.append(txt(rf"La condition s'écrit directement \({cond}\)."))
-    E_ = preimage(A, S0, items)
+    try:
+        it = []
+        E_ = preimage(A, S0, it)
+    except NonPrisEnCharge:
+        it = []
+        E_ = resoudre_general(A, rel, it)
+    items += it
     return cond, items, E_
 
 
-def analyser(entree):
+def _analyser(entree):
+    ETAT["sympy_manquant"] = False
     try:
         f = lire(entree)
         conds = []
         conditions(f, conds)
     except ErreurSaisie as e:
-        return {"ok": False, "erreur": str(e)}
+        return {"ok": False, "erreur": str(e)}, None, None
     res = {"ok": True, "f_tex": tex(f), "conditions": []}
     ED = REELS
     complet = True
@@ -1336,26 +1835,80 @@ def analyser(entree):
             cond, items, E_ = resoudre_condition(genre, A)
             c.update({"cond_tex": cond, "etapes": items, "E_tex": ens_tex(E_), "resolu": True})
             ED = inter(ED, E_)
-        except NonPrisEnCharge as e:
+        except Exception as e:      # filet de sécurité : jamais de plantage de la page
             c.update({"cond_tex": {"den": rf"{tex(A)} \neq 0", "ln": rf"{tex(A)} > 0", "pos": rf"{tex(A)} > 0"}
                       .get(genre, rf"{tex(A)} \geq 0"),
-                      "etapes": [txt("Résolution exacte non prise en charge : " + str(e))],
+                      "etapes": [txt("Cette condition n'a pas pu être résolue : " + str(e))],
                       "E_tex": None, "resolu": False})
-            complet = False
-        except (ErreurSaisie, ZeroDivisionError, OverflowError, ValueError) as e:
-            c.update({"cond_tex": tex(A), "etapes": [txt("Erreur : " + str(e))], "E_tex": None, "resolu": False})
             complet = False
         res["conditions"].append(c)
     res["complet"] = complet
+    res["besoin_sympy"] = ETAT["sympy_manquant"]
     if complet:
         res["ED_tex"] = ens_tex(ED)
         if conds:
             res["inter_tex"] = r" \cap ".join(f"E_{{{c['num']}}}" for c in res["conditions"])
-    return res
+    return res, f, (ED if complet else None)
+
+
+def analyser(entree):
+    return _analyser(entree)[0]
 
 
 def analyser_json(entree):
     return json.dumps(analyser(entree), ensure_ascii=False)
+
+
+def egaux(A, B):
+    A, B = fusion(A), fusion(B)
+    if len(A) != len(B):
+        return False
+    for a, b in zip(A, B):
+        for p, q in ((a.lo, b.lo), (a.hi, b.hi)):
+            if (p is None) != (q is None) or (p is not None and not proche(p.val, q.val)):
+                return False
+        if (a.lo is not None and a.lf != b.lf) or (a.hi is not None and a.hf != b.hf):
+            return False
+    return True
+
+
+def verifier(entree):
+    """Contrôle indépendant : on évalue f numériquement en de nombreux points et on vérifie
+    que f est définie exactement aux points de l'ED trouvé (et seulement là)."""
+    res, f, ED = _analyser(entree)
+    if not res["ok"] or ED is None:
+        return {"ok": False, "msg": "Pas d'ensemble à vérifier."}
+    pts = list(ECHANT)
+    for iv in ED:
+        for p in (iv.lo, iv.hi):
+            if p is not None:
+                d = 1e-6 * (1 + abs(p.val))
+                pts += [p.val - d, p.val + d, p.val - 1e3 * d, p.val + 1e3 * d]
+    n_in = n_out = 0
+    erreurs = []
+    for t in pts:
+        if any(iv_proche(iv, t) for iv in ED):
+            continue            # trop près d'une borne : test non fiable en virgule flottante
+        try:
+            defini = evaluer(f, t) is not None
+        except Incertain:
+            continue
+        dedans = contient(ED, t)
+        if defini == dedans:
+            n_in += dedans
+            n_out += not dedans
+        else:
+            erreurs.append(t)
+    return {"ok": True, "accord": not erreurs, "n_in": n_in, "n_out": n_out,
+            "erreurs": [dec(t) for t in erreurs[:5]]}
+
+
+def iv_proche(iv, t):
+    return any(p is not None and abs(t - p.val) < 1e-9 * (1 + abs(p.val)) for p in (iv.lo, iv.hi))
+
+
+def verifier_json(entree):
+    return json.dumps(verifier(entree), ensure_ascii=False)
 
 
 def apercu_json(entree):

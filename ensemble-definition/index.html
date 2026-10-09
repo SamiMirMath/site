@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
 <style>
 :root{
   --bg:#f5f6f9; --fg:#1b2130; --muted:#5b6478; --card:#ffffff; --border:#d6dbe6;
@@ -63,6 +62,9 @@ details ul{margin:.4em 0 0;padding-left:1.2em}
 .tsigne .m{color:var(--bad);font-weight:700}
 .tsigne .vi{border-left:3px double var(--fg);border-right:3px double var(--fg);padding:5px 2px}
 .cache{display:none}
+.tsigne .hors{background:repeating-linear-gradient(45deg,transparent 0 4px,var(--border) 4px 6px);color:var(--muted)}
+.verif{margin-top:8px;font-size:.9rem}
+.verif.ok{color:var(--good)} .verif.ko{color:var(--bad);font-weight:600}
 </style>
 </head>
 <body>
@@ -108,37 +110,68 @@ details ul{margin:.4em 0 0;padding-left:1.2em}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
+const PYODIDE="https://cdn.jsdelivr.net/pyodide/v0.27.7/full/";
 const EXEMPLES=["ln(2x-6)","ln(x^2-4)","1/ln(x)","ln(x)/(ln(x)+2)","1/(e^x-1)","ln((x-1)/(x+3))","ln(x-1)+ln(x+3)",
-  "1/ln(x+2)","2ln(x)/((ln x)^2-1)","ln(x^2-5x+6)","sqrt(x^2+2x-3)","e^(1/(x^2-x-2))","ln(x^2-4x)/(x-5)","ln((x^2-1)/(x+2))","1/(e^(2x)-5e^x+6)"];
-let py=null, cartes=[], visibles=0;
+  "1/ln(x+2)","2ln(x)/((ln x)^2-1)","ln(x^2-5x+6)","sqrt(x^2+2x-3)","e^(1/(x^2-x-2))","ln(x^2-4x)/(x-5)","ln((x^2-1)/(x+2))",
+  "1/(e^(2x)-5e^x+6)","sqrt(x ln(x+2))","sqrt(x ln(x+2)+x)","sqrt(ln(x)-x+2)"];
+let cartes=[], visibles=0;
 
 function math(el){ if(window.renderMathInElement) renderMathInElement(el,{delimiters:[{left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true}],throwOnError:false}); }
 function K(t){ try{ return katex.renderToString(t,{throwOnError:false}); }catch(e){ return t; } }
 
-/* ---------- Python ---------- */
+/* ---------- Python dans un Web Worker (la page ne se fige jamais) ---------- */
+const CODE_WORKER=`
+importScripts("${PYODIDE}pyodide.js");
+let py=null;
+onmessage=async e=>{
+  const {id,fn,arg}=e.data;
+  try{
+    if(fn==="init"){ py=await loadPyodide({indexURL:"${PYODIDE}"}); py.FS.writeFile("ensemble_def.py",arg); py.runPython("import ensemble_def"); postMessage({id,r:"ok"}); return; }
+    if(fn==="sympy"){ await py.loadPackage("sympy"); py.runPython("import sympy"); postMessage({id,r:"ok"}); return; }
+    py.globals.set("arg_js",arg);
+    postMessage({id,r:py.runPython("ensemble_def."+fn+"_json(arg_js)")});
+  }catch(err){ postMessage({id,err:String(err)}); }
+};`;
+let worker=null, attente={}, nid=0, source=null, pret=null, sympyPret=null, sympyOK=false;
+function appel(fn,arg,delai){
+  return new Promise((ok,ko)=>{ const id=++nid; attente[id]={ok,ko}; worker.postMessage({id,fn,arg});
+    if(delai) setTimeout(()=>{ if(attente[id]){ delete attente[id]; ko(new Error("delai")); } },delai); });
+}
+function lancerWorker(){
+  if(worker) worker.terminate();
+  attente={}; sympyOK=false;
+  worker=new Worker(URL.createObjectURL(new Blob([CODE_WORKER],{type:"text/javascript"})));
+  worker.onmessage=e=>{ const p=attente[e.data.id]; if(!p) return; delete attente[e.data.id]; e.data.err?p.ko(new Error(e.data.err)):p.ok(e.data.r); };
+  pret=appel("init",source);
+  sympyPret=pret.then(()=>appel("sympy")).then(()=>{ sympyOK=true; majEtat(); }).catch(()=>{ majEtat(); });
+  return pret;
+}
+function majEtat(){ $("etat").textContent=sympyOK?"Python et SymPy prêts.":"Python prêt (SymPy en cours de chargement…)."; }
 async function demarrer(){
   try{
-    py=await loadPyodide();
     const rep=await fetch("ensemble_def.py",{cache:"no-cache"});
     if(!rep.ok) throw new Error("ensemble_def.py introuvable ("+rep.status+")");
-    py.FS.writeFile("ensemble_def.py",await rep.text());
-    py.runPython("import ensemble_def");
-    $("etat").textContent="Python prêt.";
-    $("calculer").disabled=false; apercu();
+    source=await rep.text();
+    await lancerWorker();
+    majEtat(); $("calculer").disabled=false; apercu();
     const q=new URLSearchParams(location.search).get("f"); if(q){ $("entree").value=q; calculer(); }
   }catch(e){
     $("etat").innerHTML='<span class="err">Impossible de charger le moteur Python : '+e.message+'.</span> Ouvrez la page via un serveur (GitHub Pages, ou <code>python3 -m http.server</code>), pas en double-cliquant sur le fichier.';
   }
 }
-function appelPy(fn,arg){ py.globals.set("arg_js",arg); return JSON.parse(py.runPython(`ensemble_def.${fn}(arg_js)`)); }
+async function appelPy(fn,arg,delai){ await pret; return JSON.parse(await appel(fn,arg,delai)); }
 
 /* ---------- saisie ---------- */
+let tAp=null;
 function apercu(){
-  const s=$("entree").value.trim(), box=$("apercu");
-  if(!s){ box.innerHTML='<span class="muted">Aperçu de la fonction</span>'; return; }
-  if(!py) return;
-  const r=appelPy("apercu_json",s);
-  box.innerHTML=r.ok?K("f(x) = "+r.tex):'<span class="err">'+r.erreur+'</span>';
+  clearTimeout(tAp);
+  tAp=setTimeout(async()=>{
+    const s=$("entree").value.trim(), box=$("apercu");
+    if(!s){ box.innerHTML='<span class="muted">Aperçu de la fonction</span>'; return; }
+    if(!worker) return;
+    try{ const r=await appelPy("apercu",s,5000); if($("entree").value.trim()!==s) return;
+      box.innerHTML=r.ok?K("f(x) = "+r.tex):'<span class="err">'+r.erreur+'</span>'; }catch(e){}
+  },150);
 }
 $("entree").addEventListener("input",apercu);
 $("entree").addEventListener("keydown",e=>{ if(e.key==="Enter"&&!$("calculer").disabled) calculer(); });
@@ -151,12 +184,13 @@ $("clavier").addEventListener("click",e=>{
   apercu();
 });
 $("exemples").innerHTML='<span class="hint" style="align-self:center">Exemples :</span>'+EXEMPLES.map(s=>`<button data-ex="${s}">${s}</button>`).join("");
-$("exemples").addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; $("entree").value=b.dataset.ex; apercu(); if(py) calculer(); });
+$("exemples").addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; $("entree").value=b.dataset.ex; apercu(); if(!$("calculer").disabled) calculer(); });
 $("calculer").onclick=calculer;
 
 /* ---------- affichage ---------- */
 function tableau(t){
-  const k=t.crit.length, cl=s=>s==="+"?'<td class="p">+</td>':s==="-"?'<td class="m">−</td>':s==="||"?'<td class="vi"></td>':`<td>${s==="0"?"0":s}</td>`;
+  const k=t.crit.length;
+  const cl=s=>s==="+"?'<td class="p">+</td>':s==="-"?'<td class="m">−</td>':s==="||"?'<td class="vi"></td>':s==="x"?'<td class="hors">×</td>':`<td>${s}</td>`;
   let h='<div class="tsigne"><table><tr><td class="lab">'+K(t.var)+'</td><td>'+K("-\\infty")+'</td>';
   for(let i=0;i<k;i++) h+='<td></td><td>'+K(t.crit[i])+'</td>';
   h+='<td></td><td>'+K("+\\infty")+'</td></tr>';
@@ -167,12 +201,37 @@ function carteCondition(c){
   const d=document.createElement("div"); d.className="card cond";
   let h=`<h3>Condition ${c.num}<span class="badge">${c.titre}</span></h3><div class="c">${K(c.cond_tex)}</div>`;
   c.etapes.forEach(it=>{ h+= it.type==="tableau"?tableau(it):`<div class="etape">${it.html}</div>`; });
-  h+= c.resolu?`<div class="res">${K(`E_{${c.num}} = `+c.E_tex)}</div>`:'<div class="res err">Condition non résolue automatiquement.</div>';
+  h+= c.resolu?`<div class="res">${K(`E_{${c.num}} = `+c.E_tex)}</div>`:'<div class="res err">Condition non résolue.</div>';
   d.innerHTML=h; math(d); return d;
 }
-function calculer(){
-  const s=$("entree").value.trim(); if(!s||!py) return;
-  const r=appelPy("analyser_json",s);
+let numCalcul=0;
+async function calculer(){
+  const s=$("entree").value.trim(); if(!s||!worker) return;
+  const moi=++numCalcul;
+  $("calculer").disabled=true; $("etat").textContent="Calcul en cours…";
+  let r;
+  try{
+    r=await appelPy("analyser",s,30000);
+    if(r.besoin_sympy){ $("etat").textContent="Chargement de SymPy pour cette fonction…"; await sympyPret; if(sympyOK) r=await appelPy("analyser",s,30000); }
+  }catch(e){
+    if(e.message==="delai"){ $("etat").textContent="Calcul trop long : moteur relancé."; lancerWorker(); }
+    r={ok:false,erreur:e.message==="delai"?"Le calcul a pris trop de temps (plus de 30 s). Essayez une écriture plus simple.":"Erreur du moteur : "+e.message};
+  }
+  $("calculer").disabled=false; majEtat();
+  if(moi!==numCalcul) return;
+  afficher(r);
+  if(r.ok&&r.complet){
+    try{ const v=await appelPy("verifier",s,20000); if(moi===numCalcul) badge(v); }catch(e){}
+  }
+}
+function badge(v){
+  const fin=cartes[cartes.length-1]; if(!fin||!v.ok) return;
+  const d=document.createElement("div");
+  if(v.accord){ d.className="verif ok"; d.textContent=`✓ Contrôle numérique indépendant : f est bien définie aux ${v.n_in} points testés dans l'ED et non définie aux ${v.n_out} points testés hors de l'ED.`; }
+  else { d.className="verif ko"; d.textContent="⚠ Le contrôle numérique signale un désaccord près de x ≈ "+v.erreurs.join(" ; ")+". Vérifiez ce résultat à la main."; }
+  fin.appendChild(d);
+}
+function afficher(r){
   $("resultat").hidden=false; const box=$("cartes"); box.innerHTML=""; cartes=[];
   if(!r.ok){ const d=document.createElement("div"); d.className="card err"; d.textContent=r.erreur; box.appendChild(d); $("suivant").disabled=$("tout").disabled=true; $("progression").textContent=""; return; }
   const tete=document.createElement("div"); tete.className="card";
@@ -182,9 +241,10 @@ function calculer(){
   box.appendChild(tete);
   r.conditions.forEach(c=>cartes.push(carteCondition(c)));
   const fin=document.createElement("div"); fin.className="card final";
-  if(!r.complet) fin.innerHTML='<div class="err">Une condition n\'a pas pu être résolue exactement : l\'ED n\'est pas calculé.</div>';
+  if(!r.complet) fin.innerHTML='<div class="err">Une condition n\'a pas pu être résolue : l\'ED n\'est pas calculé.</div>';
   else if(!r.conditions.length) fin.innerHTML=`<div class="res">${K("ED = \\mathbb{R}")}</div>`;
-  else fin.innerHTML=`<div class="muted" style="margin-bottom:4px">L'ensemble de définition est l'intersection des ensembles obtenus :</div><div class="res">${K("ED = "+r.inter_tex+" = "+r.ED_tex)}</div>`;
+  else fin.innerHTML=`<div class="muted" style="margin-bottom:4px">L'ensemble de définition est l'intersection des ensembles obtenus :</div><div class="res">${K("ED = "+r.inter_tex+" = "+r.ED_tex)}</div>`
+    +(r.ED_tex.includes("approx")?'<div class="hint">Les valeurs précédées de ≈ sont des valeurs approchées (équation sans solution exacte simple).</div>':"");
   cartes.push(fin);
   cartes.forEach(c=>{ c.classList.add("cache"); box.appendChild(c); });
   visibles=0; montrer(1);
