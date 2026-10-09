@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ensemble de définition</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
+<style>
+:root{
+  --bg:#f5f6f9; --fg:#1b2130; --muted:#5b6478; --card:#ffffff; --border:#d6dbe6;
+  --accent:#1f4e79; --accent-soft:#e6eef8; --good:#17784a; --bad:#c0392b; --eq:#f3f6fb;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#12151c; --fg:#e7eaf2; --muted:#9aa3b8; --card:#1b2030; --border:#2f374b;
+         --accent:#6fb0ee; --accent-soft:#1f2c42; --good:#4cc38a; --bad:#ff7a6b; --eq:#222a3d; }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:14px 16px 48px}
+h1{font-size:1.5rem;margin:4px 0 2px}
+.lead{color:var(--muted);margin:0 0 14px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;border:1px solid var(--border);background:var(--card);border-radius:8px;padding:7px 12px}
+button:hover{border-color:var(--accent)}
+button:disabled{opacity:.45;cursor:default}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600;padding:9px 22px}
+@media (prefers-color-scheme: dark){button.primary{color:#0b1220}}
+.saisie{display:flex;gap:8px;align-items:center}
+.saisie label{font-weight:700;white-space:nowrap}
+#entree{flex:1;min-width:0;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:var(--card);font-size:1.05rem;font-family:ui-monospace,Menlo,Consolas,monospace}
+#entree:focus{outline:2px solid var(--accent);outline-offset:1px}
+.clavier{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:10px 0}
+.clavier button{padding:9px 0;font-size:1rem}
+.apercu{min-height:2.6em;display:flex;align-items:center;overflow-x:auto;padding:4px 2px;font-size:1.1rem}
+.apercu .katex{font-size:1.15em}
+.err{color:var(--bad);font-weight:600}
+.muted,.hint{color:var(--muted)}
+.hint{font-size:.88rem}
+.exemples{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.exemples button{font-size:.88rem;padding:5px 9px}
+details summary{cursor:pointer;font-weight:600}
+details ul{margin:.4em 0 0;padding-left:1.2em}
+.etat{font-size:.9rem;color:var(--muted);margin-top:8px}
+.barre{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin:4px 0 12px}
+.cond h3{margin:0 0 6px;font-size:1.08rem}
+.cond .badge{display:inline-block;font-size:.78rem;font-weight:700;padding:1px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent);margin-left:6px;vertical-align:middle}
+.cond .c{background:var(--eq);border-radius:8px;padding:8px 12px;margin:6px 0 8px;overflow-x:auto;font-size:1.08rem}
+.etape{margin:5px 0;overflow-x:auto;overflow-y:hidden}
+.res{margin-top:10px;padding-top:8px;border-top:1px dashed var(--border);font-weight:600;overflow-x:auto}
+.final{border:2px solid var(--good)}
+.final .res{border:none;margin:0;padding:0;font-size:1.12rem;color:var(--good)}
+.tsigne{overflow-x:auto;margin:8px 0}
+.tsigne table{border-collapse:collapse;font-size:.95rem}
+.tsigne td{border:1px solid var(--border);padding:5px 7px;text-align:center;white-space:nowrap;min-width:26px}
+.tsigne tr:first-child td{background:var(--eq)}
+.tsigne td.lab{text-align:left;padding-right:12px}
+.tsigne tr.final td{font-weight:700;border-top:2px solid var(--fg)}
+.tsigne .p{color:var(--good);font-weight:700}
+.tsigne .m{color:var(--bad);font-weight:700}
+.tsigne .vi{border-left:3px double var(--fg);border-right:3px double var(--fg);padding:5px 2px}
+.cache{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Ensemble de définition</h1>
+  <p class="lead">Écris une fonction : le calcul détaillé de son ED s'affiche, condition par condition.</p>
+
+  <section class="card">
+    <div class="saisie">
+      <label for="entree">f(x) =</label>
+      <input id="entree" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="ln(x-1)/(x-3)">
+    </div>
+    <div class="apercu" id="apercu"><span class="muted">Aperçu de la fonction</span></div>
+    <div class="clavier" id="clavier">
+      <button data-t="x">x</button><button data-t="ln(">ln</button><button data-t="e^(">eˣ</button><button data-t="sqrt(">√</button><button data-t="^">^</button><button data-t="/">÷</button>
+      <button data-t="(">(</button><button data-t=")">)</button><button data-t="+">+</button><button data-t="-">−</button><button data-k="back">⌫</button><button data-k="clear">C</button>
+    </div>
+    <button class="primary" id="calculer" disabled>Calculer ▶</button>
+    <div class="etat" id="etat">Chargement de Python…</div>
+    <div class="hint" style="margin-top:8px">Saisie : <code>ln(x^2-4)</code>, <code>e^(1/(x-2))</code>, <code>sqrt(x+1)</code>, <code>2ln(x)/((ln x)^2-1)</code>. Écrire <code>e^(2x)</code> avec parenthèses.</div>
+    <div class="exemples" id="exemples"></div>
+  </section>
+
+  <details class="card">
+    <summary>Rappel de la méthode</summary>
+    <ul>
+      <li>chaque <b>logarithme</b> \(\ln(\dots)\) : son argument doit être <b>strictement positif</b> ;</li>
+      <li>chaque <b>dénominateur</b> : il doit être <b>non nul</b> ;</li>
+      <li>chaque <b>racine carrée</b> \(\sqrt{\dots}\) : son contenu doit être <b>positif ou nul</b>.</li>
+    </ul>
+    <p style="margin:.5em 0 0">Chaque condition donne un ensemble \(E_1, E_2, \dots\) et \(ED = E_1 \cap E_2 \cap \dots\)</p>
+  </details>
+
+  <section id="resultat" hidden>
+    <div class="barre">
+      <span class="muted" id="progression"></span>
+      <span><button id="suivant" class="primary">Étape suivante ▶</button> <button id="tout">Tout afficher</button></span>
+    </div>
+    <div id="cartes"></div>
+  </section>
+</div>
+
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+const EXEMPLES=["ln(2x-6)","ln(x^2-4)","1/ln(x)","ln(x)/(ln(x)+2)","1/(e^x-1)","ln((x-1)/(x+3))","ln(x-1)+ln(x+3)",
+  "1/ln(x+2)","2ln(x)/((ln x)^2-1)","ln(x^2-5x+6)","sqrt(x^2+2x-3)","e^(1/(x^2-x-2))","ln(x^2-4x)/(x-5)","ln((x^2-1)/(x+2))","1/(e^(2x)-5e^x+6)"];
+let py=null, cartes=[], visibles=0;
+
+function math(el){ if(window.renderMathInElement) renderMathInElement(el,{delimiters:[{left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true}],throwOnError:false}); }
+function K(t){ try{ return katex.renderToString(t,{throwOnError:false}); }catch(e){ return t; } }
+
+/* ---------- Python ---------- */
+async function demarrer(){
+  try{
+    py=await loadPyodide();
+    const rep=await fetch("ensemble_def.py",{cache:"no-cache"});
+    if(!rep.ok) throw new Error("ensemble_def.py introuvable ("+rep.status+")");
+    py.FS.writeFile("ensemble_def.py",await rep.text());
+    py.runPython("import ensemble_def");
+    $("etat").textContent="Python prêt.";
+    $("calculer").disabled=false; apercu();
+    const q=new URLSearchParams(location.search).get("f"); if(q){ $("entree").value=q; calculer(); }
+  }catch(e){
+    $("etat").innerHTML='<span class="err">Impossible de charger le moteur Python : '+e.message+'.</span> Ouvrez la page via un serveur (GitHub Pages, ou <code>python3 -m http.server</code>), pas en double-cliquant sur le fichier.';
+  }
+}
+function appelPy(fn,arg){ py.globals.set("arg_js",arg); return JSON.parse(py.runPython(`ensemble_def.${fn}(arg_js)`)); }
+
+/* ---------- saisie ---------- */
+function apercu(){
+  const s=$("entree").value.trim(), box=$("apercu");
+  if(!s){ box.innerHTML='<span class="muted">Aperçu de la fonction</span>'; return; }
+  if(!py) return;
+  const r=appelPy("apercu_json",s);
+  box.innerHTML=r.ok?K("f(x) = "+r.tex):'<span class="err">'+r.erreur+'</span>';
+}
+$("entree").addEventListener("input",apercu);
+$("entree").addEventListener("keydown",e=>{ if(e.key==="Enter"&&!$("calculer").disabled) calculer(); });
+$("clavier").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return; const inp=$("entree");
+  const a=inp.selectionStart??inp.value.length, z=inp.selectionEnd??a;
+  if(b.dataset.k==="clear"){ inp.value=""; }
+  else if(b.dataset.k==="back"){ if(a!==z) inp.value=inp.value.slice(0,a)+inp.value.slice(z); else if(a>0){ inp.value=inp.value.slice(0,a-1)+inp.value.slice(a); inp.setSelectionRange(a-1,a-1);} }
+  else { const t=b.dataset.t; inp.value=inp.value.slice(0,a)+t+inp.value.slice(z); inp.setSelectionRange(a+t.length,a+t.length); }
+  apercu();
+});
+$("exemples").innerHTML='<span class="hint" style="align-self:center">Exemples :</span>'+EXEMPLES.map(s=>`<button data-ex="${s}">${s}</button>`).join("");
+$("exemples").addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; $("entree").value=b.dataset.ex; apercu(); if(py) calculer(); });
+$("calculer").onclick=calculer;
+
+/* ---------- affichage ---------- */
+function tableau(t){
+  const k=t.crit.length, cl=s=>s==="+"?'<td class="p">+</td>':s==="-"?'<td class="m">−</td>':s==="||"?'<td class="vi"></td>':`<td>${s==="0"?"0":s}</td>`;
+  let h='<div class="tsigne"><table><tr><td class="lab">'+K(t.var)+'</td><td>'+K("-\\infty")+'</td>';
+  for(let i=0;i<k;i++) h+='<td></td><td>'+K(t.crit[i])+'</td>';
+  h+='<td></td><td>'+K("+\\infty")+'</td></tr>';
+  t.rows.forEach(r=>{ h+=`<tr class="${r.final?"final":""}"><td class="lab">${K(r.label)}</td><td></td>`+r.cells.map(cl).join("")+'<td></td></tr>'; });
+  return h+'</table></div>';
+}
+function carteCondition(c){
+  const d=document.createElement("div"); d.className="card cond";
+  let h=`<h3>Condition ${c.num}<span class="badge">${c.titre}</span></h3><div class="c">${K(c.cond_tex)}</div>`;
+  c.etapes.forEach(it=>{ h+= it.type==="tableau"?tableau(it):`<div class="etape">${it.html}</div>`; });
+  h+= c.resolu?`<div class="res">${K(`E_{${c.num}} = `+c.E_tex)}</div>`:'<div class="res err">Condition non résolue automatiquement.</div>';
+  d.innerHTML=h; math(d); return d;
+}
+function calculer(){
+  const s=$("entree").value.trim(); if(!s||!py) return;
+  const r=appelPy("analyser_json",s);
+  $("resultat").hidden=false; const box=$("cartes"); box.innerHTML=""; cartes=[];
+  if(!r.ok){ const d=document.createElement("div"); d.className="card err"; d.textContent=r.erreur; box.appendChild(d); $("suivant").disabled=$("tout").disabled=true; $("progression").textContent=""; return; }
+  const tete=document.createElement("div"); tete.className="card";
+  tete.innerHTML=`<div style="font-size:1.15rem;overflow-x:auto">${K("f(x) = "+r.f_tex)}</div>`+
+    (r.conditions.length?`<div class="muted" style="margin-top:4px">${r.conditions.length} condition${r.conditions.length>1?"s":""} d'existence : `+
+      r.conditions.map(c=>c.titre).join(", ")+".</div>":'<div class="muted" style="margin-top:4px">Ni logarithme, ni dénominateur, ni racine : aucune condition.</div>');
+  box.appendChild(tete);
+  r.conditions.forEach(c=>cartes.push(carteCondition(c)));
+  const fin=document.createElement("div"); fin.className="card final";
+  if(!r.complet) fin.innerHTML='<div class="err">Une condition n\'a pas pu être résolue exactement : l\'ED n\'est pas calculé.</div>';
+  else if(!r.conditions.length) fin.innerHTML=`<div class="res">${K("ED = \\mathbb{R}")}</div>`;
+  else fin.innerHTML=`<div class="muted" style="margin-bottom:4px">L'ensemble de définition est l'intersection des ensembles obtenus :</div><div class="res">${K("ED = "+r.inter_tex+" = "+r.ED_tex)}</div>`;
+  cartes.push(fin);
+  cartes.forEach(c=>{ c.classList.add("cache"); box.appendChild(c); });
+  visibles=0; montrer(1);
+}
+function montrer(n){
+  visibles=Math.min(cartes.length,visibles+n);
+  cartes.forEach((c,i)=>c.classList.toggle("cache",i>=visibles));
+  $("suivant").disabled=$("tout").disabled=visibles>=cartes.length;
+  $("progression").textContent=`Étape ${visibles} / ${cartes.length}`;
+  const der=cartes[visibles-1]; if(der&&n===1) der.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+$("suivant").onclick=()=>montrer(1);
+$("tout").onclick=()=>montrer(cartes.length);
+
+window.addEventListener("DOMContentLoaded",()=>{ document.querySelectorAll("details").forEach(math); demarrer(); });
+</script>
+</body>
+</html>
