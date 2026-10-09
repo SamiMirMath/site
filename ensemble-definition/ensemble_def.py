@@ -250,10 +250,10 @@ def valeur_constante(n):
         a, b = valeur_constante(n.a), valeur_constante(n.b)
         if a is None or b is None:
             return None
-        if n.op == "+":
-            return a + b
-        if n.op == "-":
-            return a - b
+        if n.op in "+-":
+            r = a + b if n.op == "+" else a - b
+            # compensation catastrophique (ex. ln(x²) − 2 ln x) : on arrondit à 0
+            return 0.0 if abs(r) <= 1e-12 * (abs(a) + abs(b)) else r
         if n.op == "*":
             return a * b
         if n.op == "/":
@@ -1223,13 +1223,16 @@ def resoudre_dans(R, S, v, expr_tex, items):
         items.append(txt(rf"\({contrainte_tex(expr_tex, S)} \iff {contrainte_tex(v, out)}\){rem}."))
         return out
     if any((iv.lo is not None and iv.lo.q is None) or (iv.hi is not None and iv.hi.q is None) for iv in S):
+        if deg(d) == 0 and deg(n) == 2:
+            return quad_irrationnel(pscal(n, 1 / d[0]), S, v, expr_tex, items)
         raise NonPrisEnCharge("il faudrait résoudre une équation polynomiale de second membre irrationnel.")
     res = []
     for iv in S:
         if iv.lo is not None and iv.hi is not None and proche(iv.lo.val, iv.hi.val):
             Rz = r_add(R, r_const(-iv.lo.q))
-            if iv.lo.q != 0:
-                items.append(txt(rf"\({expr_tex} = {iv.lo.tex}\)"))
+            ligne = rf"\({expr_tex} = {iv.lo.tex}\)"
+            if iv.lo.q != 0 and not (items and items[-1].get("html", "").endswith(ligne[2:])):
+                items.append(txt(ligne))
             res = union(res, resoudre_rat(Rz, "=", v, items))
             continue
         cur = REELS
@@ -1246,11 +1249,111 @@ def resoudre_dans(R, S, v, expr_tex, items):
     return res
 
 
+def racines_quad_r(P, r, v, items):
+    """Zéros de a v² + b v + c = r (r réel écrit exactement) par la forme canonique a(v − h)² + k = r."""
+    c, b, a = P[0], P[1], P[2]
+    h = -b / (2 * a)
+    k = c - b * b / (4 * a)
+    carre_tex = v if h == 0 else r"\left(" + ptex([-h, F(1)], v) + r"\right)"
+    carre_tex += "^{2}"
+    gauche = (mono_c(a) + carre_tex) + ("" if k == 0 else (" + " + qtex(k) if k > 0 else " - " + qtex(-k)))
+    # K = (r − k)/a
+    if r.q is not None:
+        Kq = (r.q - k) / a
+        Kv, Ktex = float(Kq), qtex(Kq)
+    else:
+        Kv = (r.val - float(k)) / float(a)
+        if a > 0:
+            num = r.tex if k == 0 else r.tex + (" - " + qtex(k) if k > 0 else " + " + qtex(-k))
+            Ktex = num if a == 1 else r"\frac{" + num + "}{" + qtex(a) + "}"
+        else:
+            num = ("-" + parenthese(r.tex)) if k == 0 else qtex(k) + " - " + parenthese(r.tex)
+            Ktex = num if a == -1 else r"\frac{" + num + "}{" + qtex(-a) + "}"
+    etapes = rf"\({ptex(P, v)} = {r.tex}\)"
+    if b != 0:
+        etapes += rf" \(\iff {gauche} = {r.tex}\) (forme canonique)"
+    etapes += rf" \(\iff {carre_tex} = {Ktex}\)"
+    items.append(txt(etapes + "."))
+    if Kv < -1e-12:
+        ap = "" if r.q is not None else rf" \approx {dec(Kv)}"
+        items.append(txt(rf"Or \({Ktex}{ap} < 0\) et un carré est positif : aucune solution."))
+        return []
+    if abs(Kv) <= 1e-12:
+        x0 = Num.rat(h)
+        items.append(txt(rf"\({Ktex} = 0\) : une seule solution \({v} = {x0.tex}\)."))
+        return [x0]
+    if r.q is not None:
+        kk, m = racine_q(Kq)
+        if m == 1:
+            x1, x2 = Num.rat(h - kk), Num.rat(h + kk)
+        else:
+            x1, x2 = Num.quad(h, -kk, m), Num.quad(h, kk, m)
+    else:
+        rac = r"\sqrt{" + Ktex + "}"
+        ht = "" if h == 0 else qtex(h) + " "
+        x1 = Num(float(h) - math.sqrt(Kv), (ht + "- " + rac) if h != 0 else "-" + rac)
+        x2 = Num(float(h) + math.sqrt(Kv), (ht + "+ " + rac) if h != 0 else rac)
+    ap = (lambda z: "" if z.q is not None else rf" \approx {dec(z.val)}")
+    apK = "" if r.q is not None else rf" \approx {dec(Kv)}"
+    items.append(txt(rf"Comme \({Ktex}{apK} > 0\) : \({v} = {x1.tex}{ap(x1)}\) "
+                     rf"ou \({v} = {x2.tex}{ap(x2)}\)."))
+    return [x1, x2]
+
+
+def quad_irrationnel(P, S, v, expr_tex, items):
+    """{v : P(v) ∈ S}, P trinôme, bornes de S quelconques : P(v) − r a le signe de a hors des racines."""
+    a = P[2]
+    res = []
+    for iv in fusion(S):
+        if iv.lo is not None and iv.hi is not None and proche(iv.lo.val, iv.hi.val):
+            res = union(res, points(racines_quad_r(P, iv.lo, v, items)))
+            continue
+        cur = REELS
+        for borne, ferme, haut in ((iv.lo, iv.lf, False), (iv.hi, iv.hf, True)):
+            if borne is None:
+                continue
+            rs = racines_quad_r(P, borne, v, items)
+            # ensemble où P(v) > borne (ou ≥)
+            if not rs:
+                sup = REELS if a > 0 else []
+            elif len(rs) == 1:
+                sup = complement(points(rs)) if a > 0 else []
+                if ferme:
+                    sup = union(sup, points(rs))
+            else:
+                x1, x2 = rs
+                if a > 0:
+                    sup = [Iv(None, False, x1, ferme), Iv(x2, ferme, None, False)]
+                else:
+                    sup = [Iv(x1, ferme, x2, ferme)]
+            sup = fusion(sup)
+            if haut:     # P(v) < borne (ou ≤) : complément de P(v) > borne (ou ≥) avec bords inversés
+                ens = complement(sup)
+                if ferme:
+                    ens = union(ens, points(rs))
+                else:
+                    ens = inter(ens, complement(points(rs)))
+            else:
+                ens = sup
+            symb = (GE if ferme else ">") if not haut else (LE if ferme else "<")
+            items.append(txt(rf"Le trinôme a le signe de \(a = {qtex(a)}\) à l'extérieur de ses racines : "
+                             rf"\({expr_tex} {symb} {borne.tex} \iff {v} \in {ens_tex(ens)}\)."))
+            cur = inter(cur, ens)
+        res = union(res, cur)
+    return res
+
+
 def preimage(B, S, items):
     """{x : B(x) ∈ S}, en détaillant."""
     if isinstance(B, X):
         return fusion(S)
-    dec_ = decomposer(B)
+    try:
+        dec_ = decomposer(B)
+    except NonPrisEnCharge:
+        r = via_somme_logs(B, S, items)
+        if r is None:
+            raise
+        return r
     if dec_[0] == "x":
         return resoudre_dans(dec_[1], S, "x", tex(B), items)
     _, genre, B2, R2, t_tex = dec_
@@ -1261,6 +1364,86 @@ def preimage(B, S, items):
         S_t = resoudre_dans(R2, S, "t", rtex(R2, "t"), items)
     S_B = retour_atome(genre, S_t, t_tex, tex(B2), items)
     return preimage(B2, S_B, items)
+
+
+def termes_logs(n, c, logs, k):
+    """Décompose n en Σ c_i·ln(B_i) + k (c_i entiers, k rationnel). Renvoie False si impossible."""
+    v = valeur_constante(n)
+    if v is not None:
+        k[0] += c * v
+        return True
+    if isinstance(n, Neg):
+        return termes_logs(n.a, -c, logs, k)
+    if isinstance(n, Fn) and n.nom == "ln":
+        for L in logs:
+            if L[1].key() == n.a.key():
+                L[0] += c
+                return True
+        logs.append([c, n.a])
+        return True
+    if isinstance(n, Op) and n.op in "+-":
+        return termes_logs(n.a, c, logs, k) and termes_logs(n.b, c if n.op == "+" else -c, logs, k)
+    if isinstance(n, Op) and n.op in "*/":
+        va, vb = valeur_constante(n.a), valeur_constante(n.b)
+        if n.op == "*" and va is not None:
+            return termes_logs(n.b, c * va, logs, k)
+        if vb is not None and vb != 0:
+            return termes_logs(n.a, c * vb if n.op == "*" else c / vb, logs, k)
+    return False
+
+
+def via_somme_logs(A, S, items):
+    """A = Σ c_i ln(B_i) + k : sur le domaine D des logarithmes, A = ln(∏ B_i^{c_i}) + k.
+    On résout alors la condition sur le produit, puis on ne garde que les solutions dans D."""
+    logs, k = [], [F(0)]
+    if not termes_logs(A, F(1), logs, k):
+        return None
+    logs = [(c, B) for c, B in logs if c != 0]
+    if len(logs) < 2 or any(c.denominator != 1 for c, _ in logs):
+        return None
+
+    def puiss(B, c):
+        return B if c == 1 else Op("^", B, Nb(c))
+
+    def prod(L):
+        out = L[0]
+        for b in L[1:]:
+            out = Op("*", out, b)
+        return out
+    num = [puiss(B, int(c)) for c, B in logs if c > 0]
+    den = [puiss(B, int(-c)) for c, B in logs if c < 0]
+    P = prod(num) if num else Nb(1)
+    if den:
+        P = Op("/", P, prod(den))
+    lnP = Fn("ln", P)
+    A2 = lnP if k[0] == 0 else Op("+", lnP, Nb(k[0]) if k[0] > 0 else Neg(Nb(-k[0])))
+    D = domaine(A)
+    regles = []
+    if any(c > 0 for c, _ in logs) and sum(1 for c, _ in logs if c > 0) > 1:
+        regles.append(r"\ln(a) + \ln(b) = \ln(ab)")
+    if den:
+        regles.append(r"\ln(a) - \ln(b) = \ln\left(\frac{a}{b}\right)")
+    if any(abs(c) > 1 for c, _ in logs):
+        regles.append(r"n\ln(a) = \ln(a^{n})")
+    items.append(txt(rf"Les logarithmes sont tous définis pour \(x \in D = {ens_tex(D)}\). "
+                     rf"Sur \(D\), on regroupe avec " + ", ".join(rf"\({r}\)" for r in regles)
+                     + rf" (valable car \(a, b > 0\)) : \({tex(A)} = {tex(A2)}\)."))
+    it = []
+    R = preimage(A2, S, it)
+    items.extend(it)
+    R2 = inter(R, D)
+    perdus = [iv for iv in R if not inter([iv], D)]
+    approx = lambda p: "" if p.q is not None else rf" \approx {dec(p.val)}"
+    if all(iv.lo is not None and iv.hi is not None and proche(iv.lo.val, iv.hi.val) for iv in R) and R:
+        for iv in R:
+            if not contient(D, iv.lo.val):
+                items.append(txt(rf"\(x = {iv.lo.tex}{approx(iv.lo)}\) n'est pas dans \(D\) : solution rejetée."))
+            else:
+                items.append(txt(rf"\(x = {iv.lo.tex}{approx(iv.lo)}\) est dans \(D\) : solution retenue."))
+    elif R != R2 or perdus:
+        RT = ens_tex(R) if len(fusion(R)) <= 1 else r"\left(" + ens_tex(R) + r"\right)"
+        items.append(txt(rf"On ne garde que ce qui est dans \(D\) : \(x \in {RT} \cap {ens_tex(D)} = {ens_tex(R2)}\)."))
+    return R2
 
 
 # =====================================================================
@@ -1427,10 +1610,10 @@ def evaluer(n, x):
         a, b = evaluer(n.a, x), evaluer(n.b, x)
         if a is None or b is None:
             return None
-        if n.op == "+":
-            return a + b
-        if n.op == "-":
-            return a - b
+        if n.op in "+-":
+            r = a + b if n.op == "+" else a - b
+            # compensation catastrophique (ex. ln(x²) − 2 ln x) : on arrondit à 0
+            return 0.0 if abs(r) <= 1e-12 * (abs(a) + abs(b)) else r
         if n.op == "*":
             return a * b
         if n.op == "/":
