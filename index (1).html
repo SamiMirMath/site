@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sami Mir — Mathématiques</title>
+<style>
+:root{
+  --paper:#f6f5f1; --ink:#1a1d24; --muted:#6b7280; --line:#d8d5cc;
+  --accent:#1f4e79; --accent-soft:#e6eef8; --mono-bg:#ece9e1;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --paper:#14161b; --ink:#e8e6e0; --muted:#9aa3b8; --line:#2a2d35;
+         --accent:#6fb0ee; --accent-soft:#1f2c42; --mono-bg:#1d2027; }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+}
+.wrap{max-width:760px;margin:0 auto;padding:clamp(28px,7vw,64px) 20px 80px}
+
+header{border-bottom:1px solid var(--line);padding-bottom:28px;margin-bottom:8px}
+h1{
+  font-size:clamp(1.7rem,4vw,2.3rem); font-weight:700; letter-spacing:-0.01em;
+  margin:0 0 10px;
+}
+header p{color:var(--muted); margin:0; max-width:46ch; font-size:1.02rem}
+
+@media (prefers-reduced-motion: no-preference){
+  header{animation:rise .5s ease-out both}
+  @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+}
+
+section.level{padding:40px 0; border-bottom:1px solid var(--line)}
+section.level:last-of-type{border-bottom:none}
+
+.level-head{display:flex; align-items:baseline; gap:16px; margin-bottom:18px}
+.level-num{
+  font-size:2.6rem; font-weight:700; color:var(--accent);
+  line-height:1; font-variant-numeric:tabular-nums; min-width:1.4ch;
+}
+.level-name{font-size:1.25rem; font-weight:600; margin:0}
+
+.tools{display:flex; flex-direction:column; gap:2px}
+.tool{
+  display:flex; align-items:baseline; justify-content:space-between; gap:16px;
+  padding:14px 0; border-top:1px solid var(--line);
+}
+.tool:first-child{border-top:none}
+.tool a{
+  color:var(--ink); text-decoration:none; font-weight:600; font-size:1.04rem;
+  border-bottom:1px solid transparent;
+}
+.tool a:hover{border-bottom-color:var(--accent); color:var(--accent)}
+.tool .desc{color:var(--muted); font-size:.92rem; margin-top:3px}
+.tool .main{flex:1; min-width:0}
+.tag{
+  font:500 .76rem/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  background:var(--mono-bg); color:var(--muted);
+  padding:5px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0;
+}
+
+.empty{color:var(--muted); font-size:.98rem; font-style:italic; padding:6px 0}
+
+footer{margin-top:48px; color:var(--muted); font-size:.85rem}
+footer a{color:inherit}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Sami Mir</h1>
+    <p>Outils interactifs pour les cours de mathématiques au gymnase.</p>
+  </header>
+
+  <section class="level">
+    <div class="level-head">
+      <span class="level-num">1</span>
+      <h2 class="level-name">Première année</h2>
+    </div>
+    <div class="empty">Aucun outil publié pour l'instant.</div>
+  </section>
+
+  <section class="level">
+    <div class="level-head">
+      <span class="level-num">2</span>
+      <h2 class="level-name">Deuxième année</h2>
+    </div>
+    <div class="tools">
+      <div class="tool">
+        <div class="main">
+          <a href="simplexe/">Programmation linéaire</a>
+          <div class="desc">Méthode algébrique et méthode géométrique, pas à pas.</div>
+        </div>
+        <span class="tag">2C · 2Mr/OS</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="level">
+    <div class="level-head">
+      <span class="level-num">3</span>
+      <h2 class="level-name">Troisième année</h2>
+    </div>
+    <div class="empty">Aucun outil publié pour l'instant.</div>
+  </section>
+
+  <footer>samimir.ch</footer>
+
+</div>
+</body>
+</html>
