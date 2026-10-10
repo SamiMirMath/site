@@ -285,6 +285,12 @@ def par(n, mini):
 
 def tex(n):
     if isinstance(n, Nb):
+        # un "/" dans n.txt ne peut venir que du repli ftxt() d'un Nb construit
+        # programmatiquement (jamais de la saisie utilisateur, dont le tokeniseur
+        # n'émet jamais "/" à l'intérieur d'un nombre) : on l'écrit en \frac{}{}.
+        if "/" in n.txt:
+            num, den = n.txt.split("/")
+            return r"\frac{" + num + "}{" + den + "}"
         return n.txt.replace(",", "{,}").replace(".", "{,}")
     if isinstance(n, X):
         return "x"
