@@ -694,6 +694,20 @@ def points(L):
     return fusion([Iv(p, True, p, True) for p in L])
 
 
+def points_exclus(S):
+    """Si l'ensemble S équivaut à R privé d'un nombre fini de points, renvoie la liste
+    (valeur, tex) de ces points (éventuellement vide si S = R). Sinon renvoie None.
+    Sert à préférer, dans l'affichage final, « E \\ {valeurs interdites} » à une
+    intersection quand c'est mathématiquement la même chose (A ∩ (R \\ P) = A \\ P)."""
+    S = fusion(S)
+    if not S or S[0].lo is not None or S[-1].hi is not None:
+        return None
+    if not all(S[i].hi is not None and S[i + 1].lo is not None and proche(S[i].hi.val, S[i + 1].lo.val)
+               and not S[i].hf and not S[i + 1].lf for i in range(len(S) - 1)):
+        return None
+    return [(S[i].hi.val, S[i].hi.tex) for i in range(len(S) - 1)]
+
+
 def ens_tex(S):
     S = fusion(S)
     if not S:
@@ -2012,12 +2026,14 @@ def _analyser(entree):
     res = {"ok": True, "f_tex": tex(f), "conditions": []}
     ED = REELS
     complet = True
+    E_par_cond = {}
     for i, (genre, A) in enumerate(conds, 1):
         c = {"num": i, "genre": genre, "titre": TITRE[genre], "source_tex": tex(A)}
         try:
             cond, items, E_ = resoudre_condition(genre, A)
             c.update({"cond_tex": cond, "etapes": items, "E_tex": ens_tex(E_), "resolu": True})
             ED = inter(ED, E_)
+            E_par_cond[i] = E_
         except Exception as e:      # filet de sécurité : jamais de plantage de la page
             c.update({"cond_tex": {"den": rf"{tex(A)} \neq 0", "ln": rf"{tex(A)} > 0", "pos": rf"{tex(A)} > 0"}
                       .get(genre, rf"{tex(A)} \geq 0"),
@@ -2029,9 +2045,55 @@ def _analyser(entree):
     res["besoin_sympy"] = ETAT["sympy_manquant"]
     if complet:
         res["ED_tex"] = ens_tex(ED)
-        if conds:
-            res["inter_tex"] = r" \cap ".join(f"E_{{{c['num']}}}" for c in res["conditions"])
+        if len(conds) == 1:
+            res["inter_tex"] = "E_{1}"
+        elif conds:
+            res["inter_tex"] = combinaison_tex(res["conditions"], E_par_cond)
     return res, f, (ED if complet else None)
+
+
+def _appartient(val, S):
+    for iv in S:
+        bas = iv.lo is None or val > iv.lo.val or (iv.lf and proche(val, iv.lo.val))
+        haut = iv.hi is None or val < iv.hi.val or (iv.hf and proche(val, iv.hi.val))
+        if bas and haut:
+            return True
+    return False
+
+
+def combinaison_tex(conditions_, E_par_cond):
+    """Construit « E_i ∩ E_j ... \\ {valeurs interdites} » : les conditions dont
+    l'ensemble équivaut à R privé de points (dénominateur ≠ 0, ln(...) ≠ valeur, etc.)
+    sont soustraites plutôt qu'intersectées — c'est la même chose mathématiquement
+    (A ∩ (R \\ P) = A \\ P), mais ça correspond à la façon dont les élèves raisonnent :
+    on part du domaine puis on retire les valeurs interdites, plutôt que d'intersecter."""
+    domaine_nums, points_tous = [], []
+    for c in conditions_:
+        E_ = E_par_cond.get(c["num"])
+        if E_ is None:
+            continue
+        pts = points_exclus(E_)
+        if pts is None:
+            domaine_nums.append(c["num"])
+        elif pts:
+            points_tous.extend(pts)
+
+    domaine = REELS
+    for n in domaine_nums:
+        domaine = inter(domaine, E_par_cond[n])
+    points_finaux = []
+    for val, t in points_tous:
+        if _appartient(val, domaine) and not any(proche(val, v2) for v2, _ in points_finaux):
+            points_finaux.append((val, t))
+    points_finaux.sort(key=lambda vt: vt[0])
+
+    base = r" \cap ".join(f"E_{{{n}}}" for n in domaine_nums) if domaine_nums else r"\mathbb{R}"
+    if len(domaine_nums) > 1:
+        base = r"\left(" + base + r"\right)"
+    if points_finaux:
+        pts_tex = r" \,;\, ".join(t for _, t in points_finaux)
+        return base + r" \setminus \left\{" + pts_tex + r"\right\}"
+    return base
 
 
 def analyser(entree):

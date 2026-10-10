@@ -42,9 +42,6 @@ button.primary{background:var(--accent);border-color:var(--accent);color:#fff;fo
 .hint{font-size:.88rem}
 .exemples{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .exemples button{font-size:.88rem;padding:5px 9px}
-.niveaux{display:flex;flex-wrap:wrap;gap:8px}
-.niveaux button{font-size:.92rem;padding:8px 16px}
-.niveau-badge{font-size:.78rem;font-weight:700;padding:2px 9px;border-radius:99px;background:var(--accent-soft);color:var(--accent);margin-left:8px;vertical-align:middle}
 details summary{cursor:pointer;font-weight:600}
 details ul{margin:.4em 0 0;padding-left:1.2em}
 .etat{font-size:.9rem;color:var(--muted);margin-top:8px}
@@ -70,6 +67,15 @@ details ul{margin:.4em 0 0;padding-left:1.2em}
 .tsigne .hors{background:repeating-linear-gradient(45deg,transparent 0 4px,var(--border) 4px 6px);color:var(--muted)}
 .verif{margin-top:8px;font-size:.9rem}
 .verif.ok{color:var(--good)} .verif.ko{color:var(--bad);font-weight:600}
+
+@media print{
+  :root{ --bg:#fff; --fg:#000; --muted:#444; --card:#fff; --border:#bbb; --eq:#f3f6fb; --good:#0d5c36; --bad:#9c2a1c; }
+  body{background:#fff}
+  .no-print, .verif{display:none !important}
+  .cache{display:block !important}
+  .card{box-shadow:none; break-inside:avoid}
+  .wrap{max-width:none; padding:0}
+}
 </style>
 </head>
 <body>
@@ -77,16 +83,13 @@ details ul{margin:.4em 0 0;padding-left:1.2em}
   <h1>Ensemble de définition</h1>
   <p class="lead">Écris une fonction : le calcul détaillé de son ED s'affiche, condition par condition.</p>
 
-  <div class="narrow">
+  <div class="narrow no-print">
     <section class="card exo">
-      <h2 style="margin:0 0 10px;font-size:1.1rem">🎲 Exercice au hasard</h2>
-      <div class="niveaux" id="niveaux">
-        <button class="primary" data-niveau="facile" disabled>Facile</button>
-        <button class="primary" data-niveau="moyen" disabled>Moyen</button>
-        <button class="primary" data-niveau="difficile" disabled>Difficile</button>
-        <button class="primary" data-niveau="tresDifficile" disabled>Très difficile</button>
+      <div class="barre">
+        <h2 style="margin:0;font-size:1.1rem">🎲 Exercice au hasard</h2>
+        <button class="primary" id="exoHasard" disabled>Nouvelle fonction</button>
       </div>
-      <div class="apercu" id="exoEnonce" style="margin-top:10px"><span class="muted">Choisis un niveau pour recevoir un exercice à résoudre toi-même.</span></div>
+      <div class="apercu" id="exoEnonce" style="margin-top:6px"><span class="muted">Clique sur « Nouvelle fonction » pour recevoir un exercice à résoudre toi-même.</span></div>
       <button class="primary" id="exoCorrige" hidden style="margin-top:10px">Afficher le corrigé ▶</button>
     </section>
 
@@ -118,9 +121,9 @@ details ul{margin:.4em 0 0;padding-left:1.2em}
   </div>
 
   <section id="resultat" hidden>
-    <div class="barre">
+    <div class="barre no-print">
       <span class="muted" id="progression"></span>
-      <span><button id="suivant" class="primary">Étape suivante ▶</button> <button id="tout">Tout afficher</button></span>
+      <span><button id="suivant" class="primary">Étape suivante ▶</button> <button id="tout">Tout afficher</button> <button id="pdf">Télécharger le corrigé (PDF) ⬇</button></span>
     </div>
     <div id="cartes"></div>
   </section>
@@ -133,16 +136,23 @@ const PYODIDE="https://cdn.jsdelivr.net/pyodide/v0.27.7/full/";
 const EXEMPLES=["ln(2x-6)","ln(x^2-4)","1/ln(x)","ln(x)/(ln(x)+2)","1/(e^x-1)","ln((x-1)/(x+3))","ln(x-1)+ln(x+3)",
   "1/ln(x+2)","2ln(x)/((ln x)^2-1)","ln(x^2-5x+6)","sqrt(x^2+2x-3)","e^(1/(x^2-x-2))","ln(x^2-4x)/(x-5)","ln((x^2-1)/(x+2))",
   "1/(e^(2x)-5e^x+6)","sqrt(x ln(x+2))","sqrt(x ln(x+2)+x)","1/(ln(x-1)+ln(x-3))","sqrt(1-ln(x^2-4x+5))","sqrt(ln(x)-x+2)"];
-/* Exercices au hasard : classés par difficulté. Toutes les zéros/bornes sont exacts
-   (racines évidentes, discriminant, substitution) — aucun ne retombe sur la dichotomie
-   numérique, pour que le corrigé reste vérifiable à la main. */
-const NOMS_NIVEAUX={facile:"Facile",moyen:"Moyen",difficile:"Difficile",tresDifficile:"Très difficile"};
+/* Exercices au hasard : pool interne classé par complexité (poids de tirage ci-dessous),
+   mais le niveau n'est jamais affiché à l'élève — pas d'étiquette "facile/difficile" qui
+   stresse. Toutes les zéros/bornes sont exacts (racines évidentes, discriminant,
+   substitution) — aucun ne retombe sur la dichotomie numérique, pour que le corrigé
+   reste vérifiable à la main. */
 const EXOS={
   facile:["ln(2x-6)","ln(x^2-4)","1/(e^x-1)","ln(x-1)+ln(x+3)"],
   moyen:["1/ln(x)","ln(x)/(ln(x)+2)","ln((x-1)/(x+3))","1/ln(x+2)","ln(x^2-5x+6)","sqrt(x^2+2x-3)","e^(1/(x^2-x-2))"],
   difficile:["2ln(x)/((ln x)^2-1)","ln(x^2-4x)/(x-5)","ln((x^2-1)/(x+2))","1/(e^(2x)-5e^x+6)","sqrt(1-ln(x^2-4x+5))"],
   tresDifficile:["sqrt(x ln(x+2))","sqrt(x ln(x+2)+x)","1/(ln(x-1)+ln(x-3))"]
 };
+const POIDS_NIVEAUX=[["facile",.35],["moyen",.35],["difficile",.2],["tresDifficile",.1]];
+function tirerNiveau(){
+  let r=Math.random(), acc=0;
+  for(const [n,p] of POIDS_NIVEAUX){ acc+=p; if(r<=acc) return n; }
+  return "facile";
+}
 let cartes=[], visibles=0;
 
 function math(el){ if(window.renderMathInElement) renderMathInElement(el,{delimiters:[{left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true}],throwOnError:false}); }
@@ -182,8 +192,7 @@ async function demarrer(){
     if(!rep.ok) throw new Error("ensemble_def.py introuvable ("+rep.status+")");
     source=await rep.text();
     await lancerWorker();
-    majEtat(); $("calculer").disabled=false;
-    document.querySelectorAll("#niveaux button").forEach(b=>b.disabled=false);
+    majEtat(); $("calculer").disabled=false; $("exoHasard").disabled=false;
     apercu();
     const q=new URLSearchParams(location.search).get("f"); if(q){ $("entree").value=q; calculer(); }
   }catch(e){
@@ -289,29 +298,31 @@ function montrer(n){
 }
 $("suivant").onclick=()=>montrer(1);
 $("tout").onclick=()=>montrer(cartes.length);
+const titreOrigine=document.title;
+window.addEventListener("afterprint",()=>{ document.title=titreOrigine; });
+$("pdf").onclick=()=>{
+  montrer(cartes.length);
+  document.title="Corrige-ensemble-de-definition";
+  window.print();
+};
 
 /* ---------- exercice au hasard ---------- */
-let exoFn=null, exoDerniers={};
-async function nouvelExercice(niveau){
+let exoFn=null;
+async function nouvelExercice(){
   if(!worker) return;
-  const pool=EXOS[niveau]; if(!pool) return;
-  let s; do{ s=pool[Math.floor(Math.random()*pool.length)]; }while(s===exoDerniers[niveau]&&pool.length>1);
-  exoDerniers[niveau]=s; exoFn=s;
+  let s; do{ const pool=EXOS[tirerNiveau()]; s=pool[Math.floor(Math.random()*pool.length)]; }while(s===exoFn);
+  exoFn=s;
   $("resultat").hidden=true; $("cartes").innerHTML=""; cartes=[];
   $("exoCorrige").hidden=false; $("exoCorrige").textContent="Afficher le corrigé ▶";
   const box=$("exoEnonce");
   box.innerHTML='<span class="muted">Chargement…</span>';
   try{
     const r=await appelPy("apercu",s,5000);
-    box.innerHTML=(r.ok?K("f(x) = "+r.tex):'<span class="err">'+r.erreur+'</span>')+
-      `<span class="niveau-badge">${NOMS_NIVEAUX[niveau]}</span>`;
+    box.innerHTML=r.ok?K("f(x) = "+r.tex):'<span class="err">'+r.erreur+'</span>';
   }catch(e){ box.innerHTML='<span class="err">Erreur de chargement.</span>'; }
   math(box);
 }
-$("niveaux").addEventListener("click",e=>{
-  const b=e.target.closest("button"); if(!b||b.disabled) return;
-  nouvelExercice(b.dataset.niveau);
-});
+$("exoHasard").onclick=nouvelExercice;
 $("exoCorrige").onclick=async()=>{
   if(!exoFn) return;
   await calculer(exoFn);
