@@ -1801,7 +1801,7 @@ def signe_facteur(h, nom):
             e, xs = en_sympy(h), _SP["x"]
             P = inter(depuis_sympy(sp.solveset(e > 0, xs, sp.S.Reals)), D)
             Z = inter(depuis_sympy(sp.solveset(sp.Eq(e, 0), xs, sp.S.Reals)), D)
-            items.append(txt(rf"Ce facteur mélange \(x\) et une fonction transcendante : on résout avec le calcul formel (SymPy) : "
+            items.append(txt(rf"Ce facteur mélange \(x\) et une fonction transcendante : on résout avec le calcul formel : "
                              rf"\({ht} > 0 \iff {nom} \in {ens_tex(P)}\) et "
                              + (rf"\({ht} = 0 \iff {nom} \in {ens_tex(Z)}\)." if Z else rf"\({ht}\) ne s'annule pas.")))
             return D, P, Z, items, "sympy"
@@ -1903,7 +1903,7 @@ def resoudre_general(A, rel, items):
                 c2, facs2 = aplatir(arbre_depuis_sympy(fe))
                 if len(facs2) > 1 or any(abs(k) > 1 for _, k in facs2):
                     A2 = arbre_depuis_sympy(fe)
-                    items.append(txt(rf"On factorise (SymPy) : \({tex(A)} = {tex(A2)}\)."))
+                    items.append(txt(rf"On factorise : \({tex(A)} = {tex(A2)}\)."))
                     c, facs = c2, facs2
             except Exception:
                 pass
