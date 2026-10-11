@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Étude complète de fonction</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+:root{
+  --bg:#f5f6f9; --fg:#1b2130; --muted:#5b6478; --card:#ffffff; --border:#d6dbe6;
+  --accent:#1f4e79; --accent-soft:#e6eef8; --good:#17784a; --bad:#c0392b; --eq:#f3f6fb;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#12151c; --fg:#e7eaf2; --muted:#9aa3b8; --card:#1b2030; --border:#2f374b;
+         --accent:#6fb0ee; --accent-soft:#1f2c42; --good:#4cc38a; --bad:#ff7a6b; --eq:#222a3d; }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:14px 16px 48px}
+.narrow{max-width:720px;margin:0 auto}
+h1{font-size:1.5rem;margin:4px 0 2px}
+.lead{color:var(--muted);margin:0 0 14px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;border:1px solid var(--border);background:var(--card);border-radius:8px;padding:7px 12px}
+button:hover{border-color:var(--accent)}
+button:disabled{opacity:.45;cursor:default}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600;padding:9px 22px}
+@media (prefers-color-scheme: dark){button.primary{color:#0b1220}}
+.saisie{display:flex;gap:8px;align-items:center}
+.saisie label{font-weight:700;white-space:nowrap}
+#entree{flex:1;min-width:0;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:var(--card);font-size:1.05rem;font-family:ui-monospace,Menlo,Consolas,monospace}
+#entree:focus{outline:2px solid var(--accent);outline-offset:1px}
+.clavier{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:10px 0}
+.clavier button{padding:9px 0;font-size:1rem}
+.apercu{min-height:2.6em;display:flex;align-items:center;overflow-x:auto;padding:4px 2px;font-size:1.1rem}
+.apercu .katex{font-size:1.15em}
+.err{color:var(--bad);font-weight:600}
+.muted,.hint{color:var(--muted)}
+.hint{font-size:.88rem}
+.exemples{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.exemples button{font-size:.88rem;padding:5px 9px}
+details summary{cursor:pointer;font-weight:600}
+details ul{margin:.4em 0 0;padding-left:1.2em}
+.etat{font-size:.9rem;color:var(--muted);margin-top:8px}
+.barre{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin:4px 0 12px}
+#cartes .card{padding:22px 26px}
+.cond h3{margin:0 0 10px;font-size:1.18rem}
+.cond .badge{display:inline-block;font-size:.78rem;font-weight:700;padding:1px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent);margin-left:6px;vertical-align:middle}
+.etape{margin:9px 0;overflow-x:auto;overflow-y:hidden;font-size:1.06rem}
+.res{margin-top:14px;padding-top:12px;border-top:1px dashed var(--border);font-weight:600;overflow-x:auto;font-size:1.1rem}
+.final{border:2px solid var(--good)}
+.bilan{margin-top:8px}
+.bilan li{margin:6px 0}
+.tsigne{overflow-x:auto;margin:14px 0}
+.tsigne table{border-collapse:collapse;font-size:1.12rem}
+.tsigne td{border:1px solid var(--border);padding:9px 14px;text-align:center;white-space:nowrap;min-width:32px}
+.tsigne tr:first-child td{background:var(--eq)}
+.tsigne td.lab{text-align:left;padding-right:12px}
+.tsigne tr.final td{font-weight:700;border-top:2px solid var(--fg)}
+.tsigne tr.variation td{border-top:2px solid var(--fg)}
+.tsigne .p{color:var(--good);font-weight:700}
+.tsigne .m{color:var(--bad);font-weight:700}
+.tsigne .vi{border-left:3px double var(--fg);border-right:3px double var(--fg);padding:5px 2px}
+.tsigne .pt{color:var(--accent);font-weight:700}
+.tsigne .hors{background:repeating-linear-gradient(45deg,transparent 0 4px,var(--border) 4px 6px);color:var(--muted)}
+.extrema{margin-top:10px;font-size:.98rem}
+.extrema li{margin:3px 0}
+#graphique{width:100%;height:380px;display:block;border-radius:8px;background:var(--eq)}
+.cache{display:none}
+
+@media print{
+  :root{ --bg:#fff; --fg:#000; --muted:#444; --card:#fff; --border:#bbb; --eq:#f3f6fb; --good:#0d5c36; --bad:#9c2a1c; }
+  body{background:#fff}
+  .no-print{display:none !important}
+  .cache{display:block !important}
+  .card{box-shadow:none; break-inside:avoid}
+  .wrap{max-width:none; padding:0}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Étude complète de fonction</h1>
+  <p class="lead">ED, dérivée, signe et variations, limites et asymptotes, puis le graphique — tout enchaîné.</p>
+
+  <div class="narrow no-print">
+    <section class="card exo">
+      <div class="barre">
+        <h2 style="margin:0;font-size:1.1rem">🎲 Exercice au hasard</h2>
+        <button class="primary" id="exoHasard" disabled>Nouvelle fonction</button>
+      </div>
+      <div class="apercu" id="exoEnonce" style="margin-top:6px"><span class="muted">Clique sur « Nouvelle fonction » pour recevoir un exercice à résoudre toi-même.</span></div>
+      <button class="primary" id="exoCorrige" hidden style="margin-top:10px">Afficher le corrigé ▶</button>
+    </section>
+
+    <section class="card">
+      <div class="saisie">
+        <label for="entree">f(x) =</label>
+        <input id="entree" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="(x^2-1)/(x-3)">
+      </div>
+      <div class="apercu" id="apercu"><span class="muted">Aperçu de la fonction</span></div>
+      <div class="clavier" id="clavier">
+        <button data-t="x">x</button><button data-t="ln(">ln</button><button data-t="e^(">eˣ</button><button data-t="sqrt(">√</button><button data-t="^">^</button><button data-t="/">÷</button>
+        <button data-t="(">(</button><button data-t=")">)</button><button data-t="+">+</button><button data-t="-">−</button><button data-k="back">⌫</button><button data-k="clear">C</button>
+      </div>
+      <button class="primary" id="calculer" disabled>Calculer ▶</button>
+      <div class="etat" id="etat">Chargement de Python…</div>
+      <div class="hint" style="margin-top:8px">Saisie : <code>(x^2-1)/(x-3)</code>, <code>x*ln(x)</code>, <code>e^(2x)</code>, <code>x^2*e^(-x)</code>.</div>
+      <div class="exemples" id="exemples"></div>
+    </section>
+  </div>
+
+  <section id="resultat" hidden>
+    <div class="barre no-print">
+      <span class="muted" id="progression"></span>
+      <span><button id="suivant" class="primary">Étape suivante ▶</button> <button id="tout">Tout afficher</button> <button id="pdf">Télécharger le corrigé (PDF) ⬇</button></span>
+    </div>
+    <div id="cartes"></div>
+  </section>
+</div>
+
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+const PYODIDE="https://cdn.jsdelivr.net/pyodide/v0.27.7/full/";
+const EXEMPLES=["(x^2-1)/(x-3)","x^3-3x","x^4-2x^2","x*ln(x)","e^(2x)","x^2*e^(-x)","x/(x^2+1)","ln(x)/x"];
+const EXOS={
+  facile:["x^2-4x+3","x^3-3x","e^(2x)"],
+  moyen:["x^4-2x^2","x*ln(x)","ln(x)/x"],
+  difficile:["(x^2-1)/(x-3)","x/(x^2+1)"],
+  tresDifficile:["x^2*e^(-x)"]
+};
+const POIDS_NIVEAUX=[["facile",.35],["moyen",.35],["difficile",.2],["tresDifficile",.1]];
+function tirerNiveau(){
+  let r=Math.random(), acc=0;
+  for(const [n,p] of POIDS_NIVEAUX){ acc+=p; if(r<=acc) return n; }
+  return "facile";
+}
+let cartes=[], visibles=0, derniereFonction=null;
+
+function math(el){ if(window.renderMathInElement) renderMathInElement(el,{delimiters:[{left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true}],throwOnError:false}); }
+function K(t){ try{ return katex.renderToString(t,{throwOnError:false}); }catch(e){ return t; } }
+
+/* ---------- Python dans un Web Worker ---------- */
+const CODE_WORKER=`
+importScripts("${PYODIDE}pyodide.js");
+let py=null;
+onmessage=async e=>{
+  const {id,fn,arg}=e.data;
+  try{
+    if(fn==="init"){
+      py=await loadPyodide({indexURL:"${PYODIDE}"});
+      py.FS.writeFile("ensemble_def.py",arg.ed);
+      py.FS.writeFile("derivee_variations.py",arg.dv);
+      py.FS.writeFile("limites_asymptotes.py",arg.la);
+      py.FS.writeFile("etude_complete.py",arg.ec);
+      py.runPython("import etude_complete");
+      postMessage({id,r:"ok"}); return;
+    }
+    if(fn==="sympy"){ await py.loadPackage("sympy"); py.runPython("import sympy"); postMessage({id,r:"ok"}); return; }
+    py.globals.set("arg_js",arg);
+    postMessage({id,r:py.runPython("etude_complete."+fn+"_json(arg_js)")});
+  }catch(err){ postMessage({id,err:String(err)}); }
+};`;
+let worker=null, attente={}, nid=0, source=null, pret=null, sympyPret=null, sympyOK=false;
+function appel(fn,arg,delai){
+  return new Promise((ok,ko)=>{ const id=++nid; attente[id]={ok,ko}; worker.postMessage({id,fn,arg});
+    if(delai) setTimeout(()=>{ if(attente[id]){ delete attente[id]; ko(new Error("delai")); } },delai); });
+}
+function lancerWorker(){
+  if(worker) worker.terminate();
+  attente={}; sympyOK=false;
+  worker=new Worker(URL.createObjectURL(new Blob([CODE_WORKER],{type:"text/javascript"})));
+  worker.onmessage=e=>{ const p=attente[e.data.id]; if(!p) return; delete attente[e.data.id]; e.data.err?p.ko(new Error(e.data.err)):p.ok(e.data.r); };
+  pret=appel("init",source);
+  sympyPret=pret.then(()=>appel("sympy")).then(()=>{ sympyOK=true; majEtat(); }).catch(()=>{ majEtat(); });
+  return pret;
+}
+function majEtat(){ $("etat").textContent=sympyOK?"Python et SymPy prêts.":"Python prêt (SymPy en cours de chargement…)."; }
+async function demarrer(){
+  try{
+    const [repEd,repDv,repLa,repEc]=await Promise.all([
+      fetch("../ensemble-definition/ensemble_def.py",{cache:"no-cache"}),
+      fetch("../derivee-variations/derivee_variations.py",{cache:"no-cache"}),
+      fetch("../limites-asymptotes/limites_asymptotes.py",{cache:"no-cache"}),
+      fetch("etude_complete.py",{cache:"no-cache"})
+    ]);
+    for(const [r,nom] of [[repEd,"ensemble_def.py"],[repDv,"derivee_variations.py"],[repLa,"limites_asymptotes.py"],[repEc,"etude_complete.py"]])
+      if(!r.ok) throw new Error(nom+" introuvable ("+r.status+")");
+    source={ed:await repEd.text(), dv:await repDv.text(), la:await repLa.text(), ec:await repEc.text()};
+    await lancerWorker();
+    majEtat(); $("calculer").disabled=false; $("exoHasard").disabled=false;
+    apercu();
+    const q=new URLSearchParams(location.search).get("f"); if(q){ $("entree").value=q; calculer(); }
+  }catch(e){
+    $("etat").innerHTML='<span class="err">Impossible de charger le moteur Python : '+e.message+'.</span> Ouvrez la page via un serveur (GitHub Pages, ou <code>python3 -m http.server</code>), pas en double-cliquant sur le fichier.';
+  }
+}
+async function appelPy(fn,arg,delai){ await pret; return JSON.parse(await appel(fn,arg,delai)); }
+
+/* ---------- saisie ---------- */
+let tAp=null;
+function apercu(){
+  clearTimeout(tAp);
+  tAp=setTimeout(async()=>{
+    const s=$("entree").value.trim(), box=$("apercu");
+    if(!s){ box.innerHTML='<span class="muted">Aperçu de la fonction</span>'; return; }
+    if(!worker) return;
+    try{ const r=await appelPy("apercu",s,5000); if($("entree").value.trim()!==s) return;
+      box.innerHTML=r.ok?K("f(x) = "+r.tex):'<span class="err">'+r.erreur+'</span>'; }catch(e){}
+  },150);
+}
+$("entree").addEventListener("input",apercu);
+$("entree").addEventListener("keydown",e=>{ if(e.key==="Enter"&&!$("calculer").disabled) calculer(); });
+$("clavier").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return; const inp=$("entree");
+  const a=inp.selectionStart??inp.value.length, z=inp.selectionEnd??a;
+  if(b.dataset.k==="clear"){ inp.value=""; }
+  else if(b.dataset.k==="back"){ if(a!==z) inp.value=inp.value.slice(0,a)+inp.value.slice(z); else if(a>0){ inp.value=inp.value.slice(0,a-1)+inp.value.slice(a); inp.setSelectionRange(a-1,a-1);} }
+  else { const t=b.dataset.t; inp.value=inp.value.slice(0,a)+t+inp.value.slice(z); inp.setSelectionRange(a+t.length,a+t.length); }
+  apercu();
+});
+$("exemples").innerHTML='<span class="hint" style="align-self:center">Exemples :</span>'+EXEMPLES.map(s=>`<button data-ex="${s}">${s}</button>`).join("");
+$("exemples").addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; $("entree").value=b.dataset.ex; apercu(); if(!$("calculer").disabled) calculer(); });
+$("calculer").onclick=calculer;
+
+/* ---------- rendu des tableaux (signe + variations) ---------- */
+function tableau(t){
+  const k=t.crit.length;
+  const cl=s=>{
+    if(s==="+") return '<td class="p">+</td>';
+    if(s==="-") return '<td class="m">−</td>';
+    if(s==="||"||s==="asym") return '<td class="vi"></td>';
+    if(s==="x") return '<td class="hors">×</td>';
+    if(s==="\\nearrow"||s==="\\searrow") return `<td>${K(s)}</td>`;
+    if(s==="extremum") return '<td class="pt">•</td>';
+    return `<td>${s}</td>`;
+  };
+  let h='<div class="tsigne"><table><tr><td class="lab">'+K(t.var)+'</td><td>'+K("-\\infty")+'</td>';
+  for(let i=0;i<k;i++) h+='<td></td><td>'+K(t.crit[i])+'</td>';
+  h+='<td></td><td>'+K("+\\infty")+'</td></tr>';
+  t.rows.forEach(r=>{
+    const classe=r.final?"final":r.variation?"variation":"";
+    h+=`<tr class="${classe}"><td class="lab">${K(r.label)}</td><td></td>`+r.cells.map(cl).join("")+'<td></td></tr>';
+  });
+  return h+'</table></div>';
+}
+
+/* ---------- cartes ---------- */
+function carteRappel(r){
+  const d=document.createElement("div"); d.className="card";
+  d.innerHTML=`<div style="font-size:1.15rem;overflow-x:auto">${K("f(x) = "+r.f_tex)}</div>
+    <div class="muted" style="margin-top:4px">${K("ED = "+r.ed_tex)}</div>`;
+  math(d); return d;
+}
+function carteDerivee(dv){
+  const d=document.createElement("div"); d.className="card cond";
+  let h=`<h3>Dérivée<span class="badge">calcul</span></h3>`;
+  dv.deriv_etapes.forEach(it=>{ h+=`<div class="etape">${it.html}</div>`; });
+  h+=`<div class="res">${K("f'(x) = "+dv.deriv_tex)}</div>`;
+  d.innerHTML=h; math(d); return d;
+}
+function carteSigneVariations(dv){
+  const d=document.createElement("div"); d.className="card cond";
+  let h=`<h3>Signe de f' et variations<span class="badge">tableau</span></h3>`;
+  dv.signe_etapes.forEach(it=>{ h+= it.type==="tableau"?tableau(it):`<div class="etape">${it.html}</div>`; });
+  h+=tableau(dv.table_signe);
+  if(dv.extrema.length){
+    h+='<ul class="extrema">'+dv.extrema.map(e=>
+      `<li>${e.genre} en \\(x=${e.x_tex}\\) : \\(f(${e.x_tex})=${e.f_tex}\\)</li>`).join("")+'</ul>';
+  } else {
+    h+='<div class="hint">Aucun extremum local.</div>';
+  }
+  d.innerHTML=h; math(d); return d;
+}
+function carteLimiteEtude(et){
+  const d=document.createElement("div"); d.className="card cond";
+  let h=`<h3>${K(et.ou)}<span class="badge">limite</span></h3>`;
+  et.etapes.forEach(it=>{ h+= it.type==="tableau"?tableau(it):`<div class="etape">${it.html}</div>`; });
+  d.innerHTML=h; math(d); return d;
+}
+function ligneAsymptote(a){
+  if(a.genre==="horizontale") return `Asymptote horizontale (${K(a.ou)}) : ${K("y = "+a.valeur_tex)}`;
+  if(a.genre==="oblique") return `Asymptote oblique (${K(a.ou)}) : ${K("y = "+a.equation_tex)}`;
+  if(a.genre==="verticale"){
+    const bouts=[];
+    if(a.gauche_tex) bouts.push(K("\\lim_{x\\to "+a.point_tex+"^-} f(x) = "+a.gauche_tex));
+    if(a.droite_tex) bouts.push(K("\\lim_{x\\to "+a.point_tex+"^+} f(x) = "+a.droite_tex));
+    return `Asymptote verticale : ${K("x = "+a.point_tex)} (${bouts.join(" ; ")})`;
+  }
+  if(a.genre==="trou") return `Point de discontinuité en ${K("x = "+a.point_tex)} (pas une asymptote) : ${K("f(x) \\to "+a.valeur_tex)}`;
+  return `Pas d'asymptote (${K(a.ou)}) — branche parabolique.`;
+}
+function carteBilanAsymptotes(la){
+  const d=document.createElement("div"); d.className="card";
+  let h=`<h3 style="margin:0 0 10px">Bilan des asymptotes</h3>`;
+  if(la.asymptotes.length){
+    h+='<ul class="bilan">'+la.asymptotes.map(a=>`<li>${ligneAsymptote(a)}</li>`).join("")+'</ul>';
+  } else {
+    h+='<div class="muted">Aucune asymptote détectée.</div>';
+  }
+  d.innerHTML=h; math(d); return d;
+}
+
+/* ---------- graphique ---------- */
+function joliPas(etendue){
+  const brut=etendue/8, exp=Math.floor(Math.log10(brut)), base=brut/Math.pow(10,exp);
+  const nice=base<1.5?1:base<3?2:base<7?5:10;
+  return nice*Math.pow(10,exp);
+}
+function etiquette(v){
+  const r=Math.round(v*100)/100;
+  if(Math.abs(r)<1e-9) return "0";
+  return Number.isInteger(r) ? String(r) : String(r.toFixed(2)).replace(/0+$/,"").replace(/\.$/,"");
+}
+function carteGraphique(g, extrema, asymptotes){
+  const d=document.createElement("div"); d.className="card";
+  d.innerHTML=`
+    <div class="barre" style="margin-bottom:8px">
+      <h3 style="margin:0">Graphique</h3>
+      <span class="no-print">
+        <button id="zoomMoins" type="button">−</button>
+        <button id="zoomPlus" type="button">+</button>
+        <button id="zoomReset" type="button">Réinitialiser</button>
+      </span>
+    </div>
+    <canvas id="graphique" style="touch-action:none;cursor:grab"></canvas>
+    <div class="hint" style="margin-top:6px">Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), point de discontinuité (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.</div>`;
+  const cv=d.querySelector("#graphique");
+  cv.__g=g; cv.__extrema=extrema; cv.__asymptotes=asymptotes;
+  // `vista` est la fenêtre de données qu'on veut voir, en toutes lettres
+  // (xmin,xmax,ymin,ymax) — pas de cx/rayon/échelle séparés qui peuvent diverger.
+  cv.__vista={xmin:g.xmin, xmax:g.xmax, ymin:g.ymin, ymax:g.ymax};
+  const redessiner=()=>dessinerGraphique(cv, cv.__g, extrema, asymptotes, cv.__vista);
+  // À chaque zoom/déplacement, on réinterroge Python pour EXACTEMENT la fenêtre
+  // affichée (cv.__rendu, posée par dessinerGraphique après correction d'aspect),
+  // avec une densité liée à la largeur en pixels. Pas de cache : toujours la
+  // bonne donnée pour ce qui est réellement affiché. Un court délai évite de
+  // spammer pendant un zoom/glissement continu.
+  let minuteurFenetre=null;
+  const reechantillonner=()=>{
+    clearTimeout(minuteurFenetre);
+    minuteurFenetre=setTimeout(async()=>{
+      const r=cv.__rendu; if(!r || !derniereFonction) return;
+      const largeurPx=Math.max(300, cv.getBoundingClientRect().width||640);
+      const n=Math.min(3000, Math.round(largeurPx*2.5));
+      try{
+        const rep=await appelPy("fenetre", JSON.stringify({f:derniereFonction, xmin:r.xmin, xmax:r.xmax, n}), 10000);
+        if(rep.ok){ cv.__g.segments=rep.segments; redessiner(); }
+      }catch(e){}
+    }, 150);
+  };
+  // Zoom centré sur le centre actuel (boutons +/− et réinitialiser).
+  const zoomer=k=>{
+    const v=cv.__rendu||cv.__vista;
+    const cx=(v.xmin+v.xmax)/2, cy=(v.ymin+v.ymax)/2;
+    const rx=Math.max((v.xmax-v.xmin)/2*k, 1e-4), ry=Math.max((v.ymax-v.ymin)/2*k, 1e-4);
+    cv.__vista={xmin:cx-rx, xmax:cx+rx, ymin:cy-ry, ymax:cy+ry};
+    redessiner(); reechantillonner();
+  };
+  // Zoom centré sur un point de l'écran (molette à la position du curseur, ou
+  // point médian entre deux doigts pour le pincer-zoomer) — le point sous le
+  // curseur/les doigts reste à sa place pendant le zoom, comme Desmos/GeoGebra.
+  const zoomVersPoint=(k, px, py)=>{
+    const v=cv.__rendu; if(!v) return zoomer(k);
+    const dx=v.xmin+(px-v.padL)/v.echelle;
+    const dy=v.ymin+(v.availH-(py-v.padT))/v.echelle;
+    cv.__vista={
+      xmin:dx-(dx-v.xmin)*k, xmax:dx+(v.xmax-dx)*k,
+      ymin:dy-(dy-v.ymin)*k, ymax:dy+(v.ymax-dy)*k,
+    };
+    redessiner(); reechantillonner();
+  };
+  d.querySelector("#zoomPlus").onclick=()=>zoomer(0.8);
+  d.querySelector("#zoomMoins").onclick=()=>zoomer(1.25);
+  d.querySelector("#zoomReset").onclick=()=>{ cv.__vista={xmin:g.xmin, xmax:g.xmax, ymin:g.ymin, ymax:g.ymax}; redessiner(); reechantillonner(); };
+  cv.addEventListener("wheel",e=>{
+    e.preventDefault();
+    const r=cv.getBoundingClientRect();
+    zoomVersPoint(e.deltaY>0?1.1:0.9, e.clientX-r.left, e.clientY-r.top);
+  },{passive:false});
+
+  // Glisser à un doigt/souris (déplacement) ; pincer à deux doigts (zoom centré
+  // sur le milieu des deux doigts). On suit chaque pointeur actif par son id.
+  const pointeurs=new Map();
+  let glisse=null, pincement=null;
+  const positionCanvas=e=>{ const r=cv.getBoundingClientRect(); return {x:e.clientX-r.left, y:e.clientY-r.top}; };
+  const demarrerGlisse=()=>{
+    const [p]=pointeurs.values();
+    glisse={mx:p.x,my:p.y,vista:Object.assign({},cv.__rendu||cv.__vista)};
+  };
+  const demarrerPincement=()=>{
+    const [p1,p2]=pointeurs.values();
+    pincement={
+      d0:Math.hypot(p2.x-p1.x,p2.y-p1.y)||1,
+      mx:(p1.x+p2.x)/2, my:(p1.y+p2.y)/2,
+      vista:Object.assign({},cv.__rendu||cv.__vista)
+    };
+    glisse=null;
+  };
+  cv.addEventListener("pointerdown",e=>{
+    cv.setPointerCapture(e.pointerId);
+    pointeurs.set(e.pointerId, positionCanvas(e));
+    cv.style.cursor="grabbing";
+    if(pointeurs.size===1) demarrerGlisse();
+    else if(pointeurs.size===2) demarrerPincement();
+  });
+  cv.addEventListener("pointermove",e=>{
+    if(!pointeurs.has(e.pointerId)) return;
+    pointeurs.set(e.pointerId, positionCanvas(e));
+    if(pointeurs.size>=2 && pincement){
+      const [p1,p2]=pointeurs.values();
+      const d=Math.hypot(p2.x-p1.x,p2.y-p1.y)||1;
+      const mx=(p1.x+p2.x)/2, my=(p1.y+p2.y)/2;
+      const k=pincement.d0/d; // doigts qui s'écartent (d augmente) -> k<1 -> zoom avant
+      const v=pincement.vista;
+      const cx0=(v.xmin+v.xmax)/2, cy0=(v.ymin+v.ymax)/2;
+      const rx=Math.max((v.xmax-v.xmin)/2*k, 1e-4), ry=Math.max((v.ymax-v.ymin)/2*k, 1e-4);
+      // décalage pour garder le milieu des doigts ancré (approx. par translation
+      // proportionnelle au déplacement du milieu à l'écran)
+      const r0=cv.__rendu;
+      const dmx=r0?(mx-pincement.mx)/r0.echelle:0, dmy=r0?(my-pincement.my)/r0.echelle:0;
+      cv.__vista={xmin:cx0-rx-dmx, xmax:cx0+rx-dmx, ymin:cy0-ry+dmy, ymax:cy0+ry+dmy};
+      redessiner();
+      reechantillonner();
+      return;
+    }
+    if(glisse && pointeurs.size===1){
+      const p=[...pointeurs.values()][0];
+      const dxpx=p.x-glisse.mx, dypx=p.y-glisse.my;
+      const ech=(cv.__rendu||{}).echelle||1;
+      const dx=-dxpx/ech, dy=dypx/ech;
+      cv.__vista={xmin:glisse.vista.xmin+dx, xmax:glisse.vista.xmax+dx, ymin:glisse.vista.ymin+dy, ymax:glisse.vista.ymax+dy};
+      redessiner();
+      reechantillonner();
+    }
+  });
+  const finPointeur=e=>{
+    pointeurs.delete(e.pointerId);
+    if(pointeurs.size===0){ glisse=null; pincement=null; cv.style.cursor="grab"; }
+    else if(pointeurs.size===1){ pincement=null; demarrerGlisse(); }
+  };
+  cv.addEventListener("pointerup",finPointeur);
+  cv.addEventListener("pointercancel",finPointeur);
+  requestAnimationFrame(redessiner);
+  return d;
+}
+function fleche(ctx, x, y, angle){
+  const t=7;
+  ctx.save(); ctx.translate(x,y); ctx.rotate(angle);
+  ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(-t,t*0.45); ctx.lineTo(-t,-t*0.45); ctx.closePath(); ctx.fill();
+  ctx.restore();
+}
+function dessinerGraphique(canvas, g, extrema, asymptotes, vista, forcerClair){
+  const dpr=window.devicePixelRatio||1;
+  const rect=canvas.getBoundingClientRect();
+  const W=rect.width||640, H=rect.height||380;
+  canvas.width=W*dpr; canvas.height=H*dpr;
+  const ctx=canvas.getContext("2d"); ctx.scale(dpr,dpr); ctx.clearRect(0,0,W,H);
+
+  const padL=14,padR=28,padT=24,padB=14;
+  const availW=W-padL-padR, availH=H-padT-padB;
+
+  // Cadrage à échelle égale en x et y (comme GeoGebra) : `vista` est la fenêtre
+  // de données qu'on veut voir (après zoom/déplacement) ; on l'étend sur l'axe
+  // le plus "serré" pour que 1 unité fasse le même nombre de pixels horizontalement
+  // et verticalement — sinon les pentes (ex. une asymptote oblique à 45°) seraient
+  // faussées.
+  const boite=vista||g;
+  const cx=(boite.xmin+boite.xmax)/2, cy=(boite.ymin+boite.ymax)/2;
+  const rx=Math.max((boite.xmax-boite.xmin)/2, 1e-6), ry=Math.max((boite.ymax-boite.ymin)/2, 1e-6);
+  const echelle=Math.min(availW/(2*rx), availH/(2*ry));
+  const rx2=availW/(2*echelle), ry2=availH/(2*echelle);
+  const xmin=cx-rx2, xmax=cx+rx2, ymin=cy-ry2, ymax=cy+ry2;
+  canvas.__rendu={xmin,xmax,ymin,ymax,echelle,padL,padT,availH};
+
+  const X=x=>padL+(x-xmin)*echelle;
+  const Y=y=>padT+availH-(y-ymin)*echelle;
+
+  let colFg,colMuted,colGrid,colAccent,colGood,colBg;
+  if(forcerClair){
+    colFg="#1b2130"; colMuted="#5b6478"; colGrid="#d6dbe6"; colAccent="#1f4e79";
+    colGood="#17784a"; colBg="#f3f6fb";
+  } else {
+    const cs=getComputedStyle(document.documentElement);
+    const col=n=>(cs.getPropertyValue(n)||"").trim();
+    colFg=col("--fg")||"#1b2130"; colMuted=col("--muted")||"#888";
+    colGrid=col("--border")||"#ddd"; colAccent=col("--accent")||"#1f4e79";
+    colGood=col("--good")||"#17784a"; colBg=col("--eq")||"#fff";
+  }
+
+  ctx.fillStyle=colBg; ctx.fillRect(0,0,W,H);
+
+  const pasX=joliPas(xmax-xmin), pasY=joliPas(ymax-ymin);
+  const axeX=(ymin<=0&&0<=ymax), axeY=(xmin<=0&&0<=xmax);
+  const y0=axeX?Y(0):H-padB, x0=axeY?X(0):padL;
+
+  // grille
+  ctx.strokeStyle=colGrid; ctx.lineWidth=1;
+  for(let x=Math.ceil(xmin/pasX)*pasX; x<=xmax+1e-9; x+=pasX){
+    ctx.beginPath(); ctx.moveTo(X(x),padT); ctx.lineTo(X(x),H-padB); ctx.stroke();
+  }
+  for(let y=Math.ceil(ymin/pasY)*pasY; y<=ymax+1e-9; y+=pasY){
+    ctx.beginPath(); ctx.moveTo(padL,Y(y)); ctx.lineTo(W-padR,Y(y)); ctx.stroke();
+  }
+
+  // axes avec flèches et libellés x/y
+  ctx.strokeStyle=colFg; ctx.fillStyle=colFg; ctx.lineWidth=1.4;
+  ctx.beginPath(); ctx.moveTo(padL,y0); ctx.lineTo(W-padR,y0); ctx.stroke();
+  fleche(ctx, W-padR, y0, 0);
+  ctx.font="italic 13px Georgia, serif"; ctx.fillText("x", W-padR-2, y0-9);
+  ctx.beginPath(); ctx.moveTo(x0,H-padB); ctx.lineTo(x0,padT); ctx.stroke();
+  fleche(ctx, x0, padT, -Math.PI/2);
+  ctx.fillText("y", x0+9, padT+13);
+
+  // graduations
+  ctx.font="11px system-ui"; ctx.fillStyle=colMuted;
+  for(let x=Math.ceil(xmin/pasX)*pasX; x<=xmax+1e-9; x+=pasX){
+    if(Math.abs(x)<pasX*1e-6) continue;
+    const px=X(x);
+    ctx.strokeStyle=colFg; ctx.beginPath(); ctx.moveTo(px,y0-4); ctx.lineTo(px,y0+4); ctx.stroke();
+    ctx.fillText(etiquette(x), px-6, y0+(y0<H/2?-8:16));
+  }
+  for(let y=Math.ceil(ymin/pasY)*pasY; y<=ymax+1e-9; y+=pasY){
+    if(Math.abs(y)<pasY*1e-6) continue;
+    const py=Y(y);
+    ctx.strokeStyle=colFg; ctx.beginPath(); ctx.moveTo(x0-4,py); ctx.lineTo(x0+4,py); ctx.stroke();
+    ctx.fillText(etiquette(y), x0+(x0<W/2?8:-24), py+4);
+  }
+  ctx.fillText("0", x0+(x0<W/2?6:-16), y0+(y0<H/2?-6:16));
+
+  // asymptotes (pointillé)
+  ctx.setLineDash([5,4]); ctx.strokeStyle=colAccent; ctx.lineWidth=1.2;
+  (asymptotes||[]).forEach(a=>{
+    if(a.genre==="horizontale" && a.valeur_val!=null){
+      const y=Y(a.valeur_val); ctx.beginPath(); ctx.moveTo(padL,y); ctx.lineTo(W-padR,y); ctx.stroke();
+    } else if(a.genre==="verticale" && a.point_val!=null){
+      const x=X(a.point_val); ctx.beginPath(); ctx.moveTo(x,padT); ctx.lineTo(x,H-padB); ctx.stroke();
+    } else if(a.genre==="oblique" && a.a_val!=null && a.b_val!=null){
+      const y1=a.a_val*xmin+a.b_val, y2=a.a_val*xmax+a.b_val;
+      ctx.beginPath(); ctx.moveTo(X(xmin),Y(y1)); ctx.lineTo(X(xmax),Y(y2)); ctx.stroke();
+    }
+  });
+  ctx.setLineDash([]);
+
+  // courbe — on ne lève le crayon qu'aux vrais trous (y=null, hors ED) ; sinon
+  // on laisse le canevas découper proprement aux bords (comme ylim() en
+  // matplotlib), en bornant juste les valeurs énormes (près d'une asymptote)
+  // pour rester dans des coordonnées raisonnables.
+  ctx.strokeStyle=colAccent; ctx.lineWidth=2.4; ctx.lineJoin="round"; ctx.lineCap="round";
+  ctx.save();
+  ctx.beginPath(); ctx.rect(padL,padT,availW,availH); ctx.clip();
+  const borneY=y=>Math.max(ymin-50*(ymax-ymin), Math.min(ymax+50*(ymax-ymin), y));
+  (g.segments||[]).forEach(seg=>{
+    ctx.beginPath(); let dessine=false;
+    seg.forEach(([x,y])=>{
+      if(y==null){ dessine=false; return; }
+      const px=X(x), py=Y(borneY(y));
+      if(!dessine){ ctx.moveTo(px,py); dessine=true; } else { ctx.lineTo(px,py); }
+    });
+    ctx.stroke();
+  });
+  ctx.restore();
+
+  // points de discontinuité (trou) : rond vide
+  (asymptotes||[]).forEach(a=>{
+    if(a.genre!=="trou" || a.point_val==null || a.valeur_val==null) return;
+    if(a.point_val<xmin||a.point_val>xmax||a.valeur_val<ymin||a.valeur_val>ymax) return;
+    const px=X(a.point_val), py=Y(a.valeur_val);
+    ctx.fillStyle=colBg; ctx.beginPath(); ctx.arc(px,py,4.5,0,2*Math.PI); ctx.fill();
+    ctx.strokeStyle=colAccent; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(px,py,4.5,0,2*Math.PI); ctx.stroke();
+  });
+
+  // extrema
+  (extrema||[]).forEach(e=>{
+    if(e.x_val==null || e.f_val==null) return;
+    if(e.x_val<xmin||e.x_val>xmax||e.f_val<ymin||e.f_val>ymax) return;
+    const px=X(e.x_val), py=Y(e.f_val);
+    ctx.fillStyle=colBg; ctx.beginPath(); ctx.arc(px,py,4.5,0,2*Math.PI); ctx.fill();
+    ctx.fillStyle=colGood; ctx.beginPath(); ctx.arc(px,py,3.5,0,2*Math.PI); ctx.fill();
+    ctx.fillStyle=colFg; ctx.font="11px system-ui";
+    ctx.fillText(`(${etiquette(e.x_val)} ; ${etiquette(e.f_val)})`, px+7, py-7);
+  });
+}
+
+/* ---------- calcul et affichage ---------- */
+let numCalcul=0;
+async function calculer(force){
+  const s=(typeof force==="string"?force:$("entree").value).trim(); if(!s||!worker) return;
+  const moi=++numCalcul;
+  $("calculer").disabled=true; $("etat").textContent="Calcul en cours…";
+  let r;
+  try{
+    await sympyPret;
+    r=await appelPy("etudier",s,45000);
+  }catch(e){
+    if(e.message==="delai"){ $("etat").textContent="Calcul trop long : moteur relancé."; lancerWorker(); }
+    r={ok:false,erreur:e.message==="delai"?"Le calcul a pris trop de temps. Essayez une écriture plus simple.":"Erreur du moteur : "+e.message};
+  }
+  $("calculer").disabled=false; majEtat();
+  if(moi!==numCalcul) return;
+  if(r.ok) derniereFonction=s;
+  afficher(r);
+}
+function afficher(r){
+  $("resultat").hidden=false; const box=$("cartes"); box.innerHTML=""; cartes=[];
+  if(!r.ok){ const d=document.createElement("div"); d.className="card err"; d.textContent=r.erreur; box.appendChild(d); $("suivant").disabled=$("tout").disabled=true; $("progression").textContent=""; return; }
+  cartes.push(carteRappel(r));
+  if(r.derivee.deriv_resolu){
+    cartes.push(carteDerivee(r.derivee));
+    if(r.derivee.signe_resolu) cartes.push(carteSigneVariations(r.derivee));
+  }
+  r.limites.etudes.forEach(et=>cartes.push(carteLimiteEtude(et)));
+  cartes.push(carteBilanAsymptotes(r.limites));
+  cartes.push(carteGraphique(r.graphique, r.derivee.extrema||[], r.limites.asymptotes||[]));
+  cartes.forEach(c=>{ c.classList.add("cache"); box.appendChild(c); });
+  visibles=0; montrer(1);
+}
+function montrer(n){
+  visibles=Math.min(cartes.length,visibles+n);
+  cartes.forEach((c,i)=>c.classList.toggle("cache",i>=visibles));
+  $("suivant").disabled=$("tout").disabled=visibles>=cartes.length;
+  $("progression").textContent=`Étape ${visibles} / ${cartes.length}`;
+  const der=cartes[visibles-1];
+  if(der){
+    if(n===1) der.scrollIntoView({behavior:"smooth",block:"nearest"});
+    const cv=der.querySelector && der.querySelector("#graphique");
+    if(cv) dessinerGraphique(cv, cv.__g, cv.__extrema, cv.__asymptotes, cv.__vista);
+  }
+}
+$("suivant").onclick=()=>montrer(1);
+$("tout").onclick=()=>montrer(cartes.length);
+const titreOrigine=document.title;
+window.addEventListener("afterprint",()=>{
+  document.title=titreOrigine;
+  const cv=document.getElementById("graphique");
+  if(cv && cv.__g) dessinerGraphique(cv, cv.__g, cv.__extrema, cv.__asymptotes, cv.__vista);
+});
+$("pdf").onclick=()=>{
+  montrer(cartes.length);
+  document.title="Corrige-etude-complete";
+  // Le canevas est une image figée : si l'écran est en thème sombre, il faut le
+  // redessiner en clair juste avant l'impression, sinon le fond sombre reste
+  // sur le PDF même si le reste de la page passe en clair (afterprint le
+  // redessine ensuite en thème normal, ci-dessus).
+  const cv=document.getElementById("graphique");
+  if(cv && cv.__g) dessinerGraphique(cv, cv.__g, cv.__extrema, cv.__asymptotes, cv.__vista, true);
+  window.print();
+};
+window.addEventListener("resize",()=>{
+  const cv=document.getElementById("graphique");
+  if(cv && cv.__g) dessinerGraphique(cv, cv.__g, cv.__extrema, cv.__asymptotes, cv.__vista);
+});
+
+/* ---------- exercice au hasard ---------- */
+let exoFn=null;
+async function nouvelExercice(){
+  if(!worker) return;
+  let s; do{ const pool=EXOS[tirerNiveau()]; s=pool[Math.floor(Math.random()*pool.length)]; }while(s===exoFn);
+  exoFn=s;
+  $("resultat").hidden=true; $("cartes").innerHTML=""; cartes=[];
+  $("exoCorrige").hidden=false; $("exoCorrige").textContent="Afficher le corrigé ▶";
+  const box=$("exoEnonce");
+  box.innerHTML='<span class="muted">Chargement…</span>';
+  try{
+    const r=await appelPy("apercu",s,5000);
+    box.innerHTML=r.ok?K("f(x) = "+r.tex):'<span class="err">'+r.erreur+'</span>';
+  }catch(e){ box.innerHTML='<span class="err">Erreur de chargement.</span>'; }
+  math(box);
+}
+$("exoHasard").onclick=nouvelExercice;
+$("exoCorrige").onclick=async()=>{
+  if(!exoFn) return;
+  await calculer(exoFn);
+  $("resultat").scrollIntoView({behavior:"smooth",block:"start"});
+};
+
+window.addEventListener("DOMContentLoaded",()=>{ document.querySelectorAll("details").forEach(math); demarrer(); });
+</script>
+</body>
+</html>

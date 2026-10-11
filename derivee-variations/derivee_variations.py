@@ -462,8 +462,10 @@ def etudier(entree):
                 v = _valeur_num(f, p.val)
                 valeur_tex = Num.approche(v).tex if v is not None else "?"
             else:
+                v = valeur.val
                 valeur_tex = valeur.tex
-            extrema.append({"genre": genre, "x_tex": p.tex, "f_tex": valeur_tex})
+            extrema.append({"genre": genre, "x_tex": p.tex, "f_tex": valeur_tex,
+                            "x_val": p.val, "f_val": v})
             fleche_cells.append("extremum")
         else:
             fleche_cells.append("")
