@@ -29,16 +29,20 @@ body{
 
 header{text-align:center; padding-bottom:30px}
 .eyebrow{
-  display:block; font-size:.74rem; font-weight:600; letter-spacing:.22em;
-  text-transform:uppercase; color:var(--gold); margin-bottom:14px;
+  display:block; font-size:.76rem; font-weight:700; letter-spacing:.17em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 12px;
 }
 h1{
   font-size:clamp(2.1rem,5.2vw,3rem); font-weight:600; letter-spacing:.01em;
   margin:0 0 14px; font-variant-ligatures:common-ligatures;
 }
 header p{
-  color:var(--muted); margin:0 auto; max-width:40ch; font-size:1.08rem;
+  color:var(--muted); margin:0 auto 10px; max-width:40ch; font-size:1.08rem;
   font-style:italic; line-height:1.55;
+}
+header p:last-child{margin-bottom:0}
+#mobius{
+  display:block; margin:2px auto 16px; width:140px; height:112px; opacity:.92;
 }
 .rule{
   margin:30px auto 0; width:100%; max-width:220px;
@@ -111,6 +115,11 @@ html[data-track="Mr"] .track[data-track="Mr"]{display:block}
 }
 html[data-track] .track-label{display:none}
 
+/* vue d'ensemble : les trois filières côte à côte, comme avant le gate */
+html[data-track="tous"] .tracks{display:grid}
+html[data-track="tous"] .track{display:block}
+html[data-track="tous"] .track-label{display:block}
+
 .tools{display:flex; flex-direction:column; gap:12px}
 .tool{
   display:block; padding:14px 16px; border-radius:3px;
@@ -147,8 +156,10 @@ footer a:hover{color:var(--accent)}
 
   <header>
     <span class="eyebrow">Gymnase · Mathématiques</span>
-    <h1>Bienvenue</h1>
-    <p>Outils interactifs pour les cours de mathématiques au gymnase.</p>
+    <h1>Sami Mir</h1>
+    <canvas id="mobius" aria-hidden="true"></canvas>
+    <p>Bienvenue sur samimir.ch.</p>
+    <p>Ce site met à disposition des outils interactifs que je construis pour les cours de mathématiques au gymnase. Il est destiné principalement aux gymnasiens, pour s'exercer sur la théorie et la méthode en complément des exercices faits en classe.</p>
     <hr class="rule">
   </header>
 
@@ -159,6 +170,7 @@ footer a:hover{color:var(--accent)}
       <button class="gate-btn" data-choose="Ms">Ms</button>
       <button class="gate-btn" data-choose="Mr">Mr</button>
     </div>
+    <p style="margin-top:18px"><button class="link-btn" type="button" data-choose="tous">Voir tous les outils, toutes filières confondues</button></p>
   </div>
 
   <div id="content">
@@ -280,10 +292,11 @@ footer a:hover{color:var(--accent)}
   var html = document.documentElement;
   var currentTrackEl = document.getElementById('currentTrack');
 
+  var LABELS = { tous: 'toutes (vue d\'ensemble)' };
   function choose(track){
     html.setAttribute('data-track', track);
     try{ localStorage.setItem('samimir-track', track); }catch(e){}
-    currentTrackEl.textContent = track;
+    currentTrackEl.textContent = LABELS[track] || track;
   }
 
   document.querySelectorAll('[data-choose]').forEach(function(btn){
@@ -297,8 +310,166 @@ footer a:hover{color:var(--accent)}
 
   try{
     var saved = localStorage.getItem('samimir-track');
-    if (saved === 'C' || saved === 'Ms' || saved === 'Mr') choose(saved);
+    if (saved === 'C' || saved === 'Ms' || saved === 'Mr' || saved === 'tous') choose(saved);
   }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  var canvas = document.getElementById('mobius');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+
+  var cssVar = getComputedStyle(document.documentElement);
+  var colLine = cssVar.getPropertyValue('--line').trim() || '#999';
+  var colAccent = cssVar.getPropertyValue('--accent').trim() || '#6b1f2a';
+  var colGold = cssVar.getPropertyValue('--gold').trim() || '#9c7a34';
+  var colPaper = cssVar.getPropertyValue('--paper').trim() || '#f8f6ef';
+
+  // des remplissages OPAQUES (teinte mélangée avec le fond) plutôt que de la
+  // transparence : des polygones voisins semi-transparents laissent des
+  // liserés d'anticrénelage visibles entre eux (effet "pixélisé") ; en
+  // mélangeant la couleur à l'avance, le rendu reste net à toute taille.
+  function hexVersRgb(hex){
+    hex = hex.replace('#', '');
+    if (hex.length === 3) hex = hex.split('').map(function(c){ return c + c; }).join('');
+    var n = parseInt(hex, 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  }
+  function melanger(hexAvant, hexFond, alpha){
+    var a = hexVersRgb(hexAvant), b = hexVersRgb(hexFond);
+    var r = Math.round(a[0] * alpha + b[0] * (1 - alpha));
+    var g = Math.round(a[1] * alpha + b[1] * (1 - alpha));
+    var bl = Math.round(a[2] * alpha + b[2] * (1 - alpha));
+    return 'rgb(' + r + ',' + g + ',' + bl + ')';
+  }
+  var colFaceOr = melanger(colGold, colPaper, 0.4);
+  var colFaceBordeaux = melanger(colAccent, colPaper, 0.48);
+
+  var dpr = window.devicePixelRatio || 1;
+  var W, H;
+  function dimensionner(){
+    var r = canvas.getBoundingClientRect();
+    W = r.width; H = r.height;
+    canvas.width = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  dimensionner();
+  window.addEventListener('resize', dimensionner);
+
+  // HW plus large : la fourmi passe vraiment derrière le ruban une partie du
+  // tour (vérifié numériquement), pas seulement en théorie.
+  var R = 1.0, HW = 0.5;
+  // TILT proche de 0 = vu "de profil" (écrasé en ligne), proche de π/2 = vu
+  // "de dessus" (cercle plat) : on veut une vue oblique nette entre les deux.
+  var TILT = 0.33;
+  var N = 72;
+
+  function point(u, v){
+    var x = (R + v * Math.cos(u / 2)) * Math.cos(u);
+    var y = (R + v * Math.cos(u / 2)) * Math.sin(u);
+    var z = v * Math.sin(u / 2);
+    return [x, y, z];
+  }
+
+  // normale analytique de la surface le long de la ligne centrale (v=0),
+  // fonction lisse de u uniquement : contrairement à une normale recalculée
+  // par produit vectoriel sur les 4 coins de chaque facette (instable, change
+  // de signe de façon bruitée quand la facette est vue presque de profil —
+  // c'était la cause des "ondes" sombres), celle-ci varie en douceur et donne
+  // une seule transition propre dorée/bordeaux par tour.
+  function normaleSurface(u){
+    var s2 = Math.sin(u / 2), c2 = Math.cos(u / 2);
+    var cu = Math.cos(u), su = Math.sin(u);
+    return [R * cu * s2, R * su * s2, -R * c2];
+  }
+
+  // point complet dans l'espace "caméra" (après rotation + inclinaison), pour
+  // pouvoir à la fois projeter en 2D (x, z) et calculer la normale d'une face
+  // (sa profondeur, la coordonnée y, sert au tri peintre et à l'éclairage).
+  function versCamera(p, spin){
+    var cs = Math.cos(spin), sn = Math.sin(spin);
+    var x1 = p[0] * cs - p[1] * sn;
+    var y1 = p[0] * sn + p[1] * cs;
+    var z1 = p[2];
+    var ct = Math.cos(TILT), st = Math.sin(TILT);
+    var y2 = y1 * ct - z1 * st;
+    var z2 = y1 * st + z1 * ct;
+    return [x1, y2, z2];
+  }
+
+  function dessiner(spin){
+    ctx.clearRect(0, 0, W, H);
+    var cx = W / 2, cy = H / 2;
+    var echelle = Math.min(W, H) / 3.1;
+
+    function ecran(v){ return [cx + v[0] * echelle, cy + v[2] * echelle]; }
+
+    var bordA = [], bordB = [];
+    for (var i = 0; i <= N; i++){
+      var u = (i / N) * 2 * Math.PI;
+      bordA.push(versCamera(point(u, HW), spin));
+      bordB.push(versCamera(point(u, -HW), spin));
+    }
+
+    // le ruban est une vraie surface : une facette par segment, remplie et
+    // triée par profondeur (algorithme du peintre), colorée selon la face
+    // visible — ce qui montre au passage la demi-torsion (une seule face
+    // continue, qui passe de dorée à bordeaux en faisant le tour). Pas de
+    // trait entre facettes voisines (ça fragmentait visuellement le ruban) :
+    // seul le contour extérieur est tracé, par-dessus, une fois pour toutes.
+    var facettes = [];
+    for (var i = 0; i < N; i++){
+      var u0 = (i / N) * 2 * Math.PI, u1 = ((i + 1) / N) * 2 * Math.PI;
+      var p0 = bordB[i], p1 = bordA[i], p2 = bordA[i + 1], p3 = bordB[i + 1];
+      var normale = versCamera(normaleSurface((u0 + u1) / 2), spin);
+      var profondeur = (p0[1] + p1[1] + p2[1] + p3[1]) / 4;
+      facettes.push({ idx: i, pts: [p0, p1, p2, p3], profondeur: profondeur, face: normale[1] < 0 });
+    }
+
+    var parProfondeur = facettes.slice().sort(function(a, b){ return a.profondeur - b.profondeur; });
+    parProfondeur.forEach(function(f){
+      ctx.beginPath();
+      for (var k = 0; k < 4; k++){
+        var sk = ecran(f.pts[k]);
+        if (k === 0) ctx.moveTo(sk[0], sk[1]); else ctx.lineTo(sk[0], sk[1]);
+      }
+      ctx.closePath();
+      ctx.fillStyle = f.face ? colFaceOr : colFaceBordeaux;
+      ctx.fill();
+    });
+
+    function tracerBord(pts){
+      ctx.beginPath();
+      for (var i = 0; i < pts.length; i++){
+        var s = ecran(pts[i]);
+        if (i === 0) ctx.moveTo(s[0], s[1]); else ctx.lineTo(s[0], s[1]);
+      }
+      ctx.strokeStyle = colLine;
+      ctx.lineWidth = 1.2;
+      ctx.globalAlpha = 0.75;
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    }
+    tracerBord(bordA);
+    tracerBord(bordB);
+  }
+
+  var reduitMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduitMotion){
+    dessiner(0);
+    return;
+  }
+
+  var t0 = performance.now();
+  function anime(t){
+    var dt = (t - t0) / 1000;
+    var spin = dt * (2 * Math.PI / 55);
+    dessiner(spin);
+    requestAnimationFrame(anime);
+  }
+  requestAnimationFrame(anime);
 })();
 </script>
 </body>
