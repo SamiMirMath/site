@@ -141,6 +141,7 @@ html[data-track="tous"] .track-label{display:block}
 .tool .desc{color:var(--muted); font-size:.88rem; margin-top:5px; font-style:italic; line-height:1.45}
 
 .empty{color:var(--muted); font-size:.92rem; font-style:italic; padding:2px 0}
+section.level.vide{display:none}
 
 footer{
   margin-top:56px; padding-top:26px; border-top:1px solid var(--line-soft);
@@ -159,7 +160,7 @@ footer a:hover{color:var(--accent)}
     <h1>Sami Mir</h1>
     <canvas id="mobius" aria-hidden="true"></canvas>
     <p>Bienvenue sur samimir.ch.</p>
-    <p>Ce site met à disposition des outils interactifs que je construis pour les cours de mathématiques au gymnase. Il est destiné principalement aux gymnasiens, pour s'exercer sur la théorie et la méthode en complément des exercices faits en classe.</p>
+    <p>Des outils pour s'exercer en complément du cours. On saisit un exercice ou on en tire un au hasard. La résolution est détaillée étape par étape avec les méthodes vues en classe.</p>
     <hr class="rule">
   </header>
 
@@ -229,7 +230,7 @@ footer a:hover{color:var(--accent)}
         </div>
         <div class="track" data-track="Ms">
           <span class="track-label">Ms</span>
-          <div class="empty">Aucun outil publié pour l'instant.</div>
+          <div class="empty">Outils en préparation.</div>
         </div>
         <div class="track" data-track="Mr">
           <span class="track-label">Mr</span>
@@ -251,7 +252,7 @@ footer a:hover{color:var(--accent)}
       <div class="tracks">
         <div class="track" data-track="C">
           <span class="track-label">C</span>
-          <div class="empty">Aucun outil publié pour l'instant.</div>
+          <div class="empty">Outils en préparation.</div>
         </div>
         <div class="track" data-track="Ms">
           <span class="track-label">Ms</span>
@@ -312,6 +313,11 @@ footer a:hover{color:var(--accent)}
     html.setAttribute('data-track', track);
     try{ localStorage.setItem('samimir-track', track); }catch(e){}
     currentTrackEl.textContent = LABELS[track] || track;
+    // on n'affiche pas une année qui n'a encore aucun outil pour cette filière
+    document.querySelectorAll('section.level').forEach(function(sec){
+      var sel = track === 'tous' ? '.track .tool' : '.track[data-track="' + track + '"] .tool';
+      sec.classList.toggle('vide', !sec.querySelector(sel));
+    });
   }
 
   document.querySelectorAll('[data-choose]').forEach(function(btn){
