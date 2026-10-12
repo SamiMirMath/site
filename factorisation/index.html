@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Factorisation</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+:root{
+  --bg:#f5f6f9; --fg:#1b2130; --muted:#5b6478; --card:#ffffff; --border:#d6dbe6;
+  --accent:#1f4e79; --accent-soft:#e6eef8; --good:#17784a; --bad:#c0392b; --eq:#f3f6fb;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#12151c; --fg:#e7eaf2; --muted:#9aa3b8; --card:#1b2030; --border:#2f374b;
+         --accent:#6fb0ee; --accent-soft:#1f2c42; --good:#4cc38a; --bad:#ff7a6b; --eq:#222a3d; }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:14px 16px 48px}
+.narrow{max-width:720px;margin:0 auto}
+h1{font-size:1.5rem;margin:4px 0 2px}
+.lead{color:var(--muted);margin:0 0 14px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;border:1px solid var(--border);background:var(--card);border-radius:8px;padding:7px 12px}
+button:hover{border-color:var(--accent)}
+button:disabled{opacity:.45;cursor:default}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600;padding:9px 22px}
+@media (prefers-color-scheme: dark){button.primary{color:#0b1220}}
+.saisie{display:flex;gap:8px;align-items:center}
+.saisie label{font-weight:700;white-space:nowrap}
+#entree{flex:1;min-width:0;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:var(--card);font-size:1.05rem;font-family:ui-monospace,Menlo,Consolas,monospace}
+#entree:focus{outline:2px solid var(--accent);outline-offset:1px}
+.clavier{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:10px 0}
+.clavier button{padding:9px 0;font-size:1rem}
+.apercu{min-height:2.6em;display:flex;align-items:center;overflow-x:auto;padding:4px 2px;font-size:1.1rem}
+.apercu .katex{font-size:1.15em}
+.err{color:var(--bad);font-weight:600}
+.muted,.hint{color:var(--muted)}
+.hint{font-size:.88rem}
+.exemples{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.exemples button{font-size:.88rem;padding:5px 9px}
+details summary{cursor:pointer;font-weight:600}
+details ul{margin:.4em 0 0;padding-left:1.2em}
+details ol{margin:.4em 0 0;padding-left:1.2em}
+.etat{font-size:.9rem;color:var(--muted);margin-top:8px}
+.barre{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin:4px 0 12px}
+#cartes .card{padding:22px 26px}
+.cond h3{margin:0 0 10px;font-size:1.18rem}
+.cond .badge{display:inline-block;font-size:.78rem;font-weight:700;padding:1px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent);margin-left:6px;vertical-align:middle}
+.etape{margin:9px 0;overflow-x:auto;overflow-y:hidden;font-size:1.06rem}
+.res{margin-top:14px;padding-top:12px;border-top:1px dashed var(--border);font-weight:600;overflow-x:auto;font-size:1.1rem}
+.final{border:2px solid var(--good)}
+.final .res{border:none;margin:0;padding:0;font-size:1.3rem;color:var(--good)}
+.cache{display:none}
+
+@media print{
+  :root{ --bg:#fff; --fg:#000; --muted:#444; --card:#fff; --border:#bbb; --eq:#f3f6fb; --good:#0d5c36; --bad:#9c2a1c; }
+  body{background:#fff}
+  .no-print{display:none !important}
+  .cache{display:block !important}
+  .card{box-shadow:none; break-inside:avoid}
+  .wrap{max-width:none; padding:0}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Factorisation</h1>
+  <p class="lead">Écris un polynôme (surtout un trinôme du 2e degré) : la méthode de factorisation la mieux adaptée est choisie et expliquée, étape par étape.</p>
+
+  <div class="narrow no-print">
+    <section class="card exo">
+      <div class="barre">
+        <h2 style="margin:0;font-size:1.1rem">🎲 Exercice au hasard</h2>
+        <button class="primary" id="exoHasard" disabled>Nouveau polynôme</button>
+      </div>
+      <div class="apercu" id="exoEnonce" style="margin-top:6px"><span class="muted">Clique sur « Nouveau polynôme » pour recevoir un exercice à résoudre toi-même.</span></div>
+      <button class="primary" id="exoCorrige" hidden style="margin-top:10px">Afficher le corrigé ▶</button>
+    </section>
+
+    <section class="card">
+      <div class="saisie">
+        <label for="entree">Factoriser :</label>
+        <input id="entree" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="x^2+5x-14">
+      </div>
+      <div class="apercu" id="apercu"><span class="muted">Aperçu du polynôme</span></div>
+      <div class="clavier" id="clavier">
+        <button data-t="x">x</button><button data-t="^">^</button><button data-t="/">÷</button><button data-t="(">(</button><button data-t=")">)</button><button data-k="back">⌫</button>
+        <button data-t="+">+</button><button data-t="-">−</button><button data-t="2">2</button><button data-t="3">3</button><button data-t="4">4</button><button data-k="clear">C</button>
+      </div>
+      <button class="primary" id="calculer" disabled>Factoriser ▶</button>
+      <div class="etat" id="etat">Chargement de Python…</div>
+      <div class="hint" style="margin-top:8px">Saisie : <code>x^2+5x-14</code>, <code>2x^2-32</code>, <code>6x^2-7x-3</code>. Autre lettre que x acceptée (<code>u^2-6u+8</code>, <code>9a^2+6a+1</code>…). Plusieurs lettres : <code>4x^2-12xy+9y^2</code>, <code>a^2-b^2+ac+bc</code>, <code>(a+b)^2-c^2</code>. Fractions : <code>x^2-1/4</code>.</div>
+      <div class="exemples" id="exemples"></div>
+    </section>
+
+    <details class="card">
+      <summary>Rappel de la méthode</summary>
+      <p class="hint" style="margin:.4em 0 0">Dans l'ordre où il faut les essayer :</p>
+      <ol>
+        <li><b>Mise en évidence</b> : un facteur commun à tous les termes — un nombre, une lettre, ou même une parenthèse, comme \((b-a)\) dans \(y(b-a)-x(b-a)=(b-a)(y-x)\) ?</li>
+        <li><b>Identité remarquable</b> : carré parfait \(A^2\pm2AB+B^2=(A\pm B)^2\), différence de deux carrés \(A^2-B^2=(A-B)(A+B)\), somme ou différence de deux cubes \(A^3\pm B^3=(A\pm B)(A^2\mp AB+B^2)\), cube d'un binôme \(A^3\pm3A^2B+3AB^2\pm B^3=(A\pm B)^3\) ?</li>
+        <li><b>Trinôme unitaire</b> (\(a=1\)) : méthode <b>Somme-Produit</b> — deux nombres \(u,v\) tels que \(u+v=b\) et \(u\cdot v=c\), alors \(x^2+bx+c=(x+u)(x+v)\).</li>
+        <li><b>Trinôme non unitaire</b> (\(a\neq1\)) : méthode du <b>zéro évident</b> — on cherche un zéro \(x_0\) « évident » du trinôme, puis on complète \((x-x_0)(px+q)\) en divisant (et on nettoie les fractions si besoin).</li>
+        <li>Si rien de tout ça ne marche vite : la <b>formule</b> (discriminant) — toujours valable. \(\Delta=b^2-4ac\) ; si \(\Delta>0\), \(ax^2+bx+c=a(x-x_1)(x-x_2)\) ; si \(\Delta=0\), \(a(x-x_1)^2\) ; si \(\Delta<0\), pas de factorisation réelle.</li>
+        <li><b>Changement de variable</b> : dans \(x^4-13x^2+36\), on pose \(u=x^2\) et on factorise \(u^2-13u+36\).</li>
+        <li><b>Groupements</b> : quatre termes ou plus sans facteur commun ? On les groupe pour faire apparaître un facteur commun : \(ax+bx+ay+by=x(a+b)+y(a+b)=(a+b)(x+y)\).</li>
+        <li>Degré 3 ou plus : recherche d'un <b>zéro évident</b> (parmi les diviseurs du terme constant), puis division. En dernier recours : <b>compléter le carré</b>, \(x^4+4=(x^2+2)^2-(2x)^2\).</li>
+        <li>On recommence sur chaque facteur obtenu, jusqu'à ce qu'aucun ne se factorise plus.</li>
+      </ol>
+    </details>
+  </div>
+
+  <section id="resultat" hidden>
+    <div class="barre no-print">
+      <span class="muted" id="progression"></span>
+      <span><button id="suivant" class="primary">Étape suivante ▶</button> <button id="tout">Tout afficher</button> <button id="pdf">Télécharger le corrigé (PDF) ⬇</button></span>
+    </div>
+    <div id="cartes"></div>
+  </section>
+</div>
+
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+const PYODIDE="https://cdn.jsdelivr.net/pyodide/v0.27.7/full/";
+const EXEMPLES=["x^2+5x-14","6x^2-7x-3","9x^2+24x+16","x^2+4x+2","x^4-13x^2+36","x^3-8y^3","ax+bx+ay+by","y(b-a)-x(b-a)"];
+const POIDS_NIVEAUX=[["facile",.35],["moyen",.35],["difficile",.2],["tresDifficile",.1]];
+function tirerNiveau(){
+  let r=Math.random(), acc=0;
+  for(const [n,p] of POIDS_NIVEAUX){ acc+=p; if(r<=acc) return n; }
+  return "facile";
+}
+let cartes=[], visibles=0;
+
+function math(el){ if(window.renderMathInElement) renderMathInElement(el,{delimiters:[{left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true}],throwOnError:false}); }
+function K(t){ try{ return katex.renderToString(t,{throwOnError:false}); }catch(e){ return t; } }
+
+/* ---------- Python dans un Web Worker (la page ne se fige jamais) ---------- */
+const CODE_WORKER=`
+importScripts("${PYODIDE}pyodide.js");
+let py=null;
+onmessage=async e=>{
+  const {id,fn,arg}=e.data;
+  try{
+    if(fn==="init"){
+      py=await loadPyodide({indexURL:"${PYODIDE}"});
+      py.FS.writeFile("ensemble_def.py",arg.ed);
+      py.FS.writeFile("factorisation.py",arg.fa);
+      py.runPython("import factorisation");
+      postMessage({id,r:"ok"}); return;
+    }
+    if(fn==="sympy"){ await py.loadPackage("sympy"); py.runPython("import sympy"); postMessage({id,r:"ok"}); return; }
+    py.globals.set("arg_js",arg);
+    postMessage({id,r:py.runPython("factorisation."+fn+"_json(arg_js)")});
+  }catch(err){ postMessage({id,err:String(err)}); }
+};`;
+let worker=null, attente={}, nid=0, source=null, pret=null, sympyPret=null, sympyOK=false;
+function appel(fn,arg,delai){
+  return new Promise((ok,ko)=>{ const id=++nid; attente[id]={ok,ko}; worker.postMessage({id,fn,arg});
+    if(delai) setTimeout(()=>{ if(attente[id]){ delete attente[id]; ko(new Error("delai")); } },delai); });
+}
+function lancerWorker(){
+  if(worker) worker.terminate();
+  attente={}; sympyOK=false;
+  worker=new Worker(URL.createObjectURL(new Blob([CODE_WORKER],{type:"text/javascript"})));
+  worker.onmessage=e=>{ const p=attente[e.data.id]; if(!p) return; delete attente[e.data.id]; e.data.err?p.ko(new Error(e.data.err)):p.ok(e.data.r); };
+  pret=appel("init",source);
+  // La factorisation s'appuie sur SymPy (contrôle de chaque résultat) ; on le
+  // charge en arrière-plan : l'aperçu de la saisie fonctionne déjà sans lui.
+  sympyPret=pret.then(()=>appel("sympy")).then(()=>{ sympyOK=true; majEtat(); }).catch(()=>{ majEtat(); });
+  return pret;
+}
+function majEtat(){ $("etat").textContent=sympyOK?"Prêt.":"Chargement du moteur de calcul (SymPy)…"; }
+async function demarrer(){
+  try{
+    const [repEd,repFa]=await Promise.all([
+      fetch("../ensemble-definition/ensemble_def.py",{cache:"no-cache"}),
+      fetch("factorisation.py",{cache:"no-cache"})
+    ]);
+    if(!repEd.ok) throw new Error("ensemble_def.py introuvable ("+repEd.status+")");
+    if(!repFa.ok) throw new Error("factorisation.py introuvable ("+repFa.status+")");
+    source={ed:await repEd.text(), fa:await repFa.text()};
+    await lancerWorker();
+    majEtat(); $("calculer").disabled=false; $("exoHasard").disabled=false;
+    apercu();
+    const q=new URLSearchParams(location.search).get("f"); if(q){ $("entree").value=q; calculer(); }
+  }catch(e){
+    $("etat").innerHTML='<span class="err">Impossible de charger le moteur Python : '+e.message+'.</span> Ouvrez la page via un serveur (GitHub Pages, ou <code>python3 -m http.server</code>), pas en double-cliquant sur le fichier.';
+  }
+}
+async function appelPy(fn,arg,delai){ await pret; return JSON.parse(await appel(fn,arg,delai)); }
+
+/* ---------- saisie ---------- */
+let tAp=null;
+function apercu(){
+  clearTimeout(tAp);
+  tAp=setTimeout(async()=>{
+    const s=$("entree").value.trim(), box=$("apercu");
+    if(!s){ box.innerHTML='<span class="muted">Aperçu du polynôme</span>'; return; }
+    if(!worker) return;
+    try{ const r=await appelPy("apercu",s,5000); if($("entree").value.trim()!==s) return;
+      box.innerHTML=r.ok?K(r.tex):'<span class="err">'+r.erreur+'</span>'; }catch(e){}
+  },150);
+}
+$("entree").addEventListener("input",apercu);
+$("entree").addEventListener("keydown",e=>{ if(e.key==="Enter"&&!$("calculer").disabled) calculer(); });
+$("clavier").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return; const inp=$("entree");
+  const a=inp.selectionStart??inp.value.length, z=inp.selectionEnd??a;
+  if(b.dataset.k==="clear"){ inp.value=""; }
+  else if(b.dataset.k==="back"){ if(a!==z) inp.value=inp.value.slice(0,a)+inp.value.slice(z); else if(a>0){ inp.value=inp.value.slice(0,a-1)+inp.value.slice(a); inp.setSelectionRange(a-1,a-1);} }
+  else { const t=b.dataset.t; inp.value=inp.value.slice(0,a)+t+inp.value.slice(z); inp.setSelectionRange(a+t.length,a+t.length); }
+  apercu();
+});
+$("exemples").innerHTML='<span class="hint" style="align-self:center">Exemples :</span>'+EXEMPLES.map(s=>`<button data-ex="${s}">${s}</button>`).join("");
+$("exemples").addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; $("entree").value=b.dataset.ex; apercu(); if(!$("calculer").disabled) calculer(); });
+$("calculer").onclick=calculer;
+
+/* ---------- affichage ---------- */
+function carteResultat(r){
+  const d=document.createElement("div"); d.className="card cond final";
+  let h=`<h3>Factorisation<span class="badge">${r.methode}</span></h3>`;
+  h+=`<div style="font-size:1.1rem;overflow-x:auto">${K(r.expr_tex)}</div>`;
+  r.etapes.forEach(it=>{ h+=`<div class="etape">${it.html}</div>`; });
+  h+=`<div class="res">${K(r.expr_tex+" = "+r.resultat_tex)}</div>`;
+  d.innerHTML=h; math(d); return d;
+}
+let numCalcul=0;
+async function calculer(force){
+  const s=(typeof force==="string"?force:$("entree").value).trim(); if(!s||!worker) return;
+  const moi=++numCalcul;
+  $("calculer").disabled=true;
+  let r;
+  try{
+    if(!sympyOK){ $("etat").textContent="Chargement du moteur de calcul (SymPy)… le premier calcul peut prendre quelques secondes."; await sympyPret; }
+    if(!sympyOK) throw new Error("SymPy n'a pas pu être chargé (connexion internet ?)");
+    $("etat").textContent="Calcul en cours…";
+    r=await appelPy("factoriser",s,30000);
+  }catch(e){
+    if(e.message==="delai"){ $("etat").textContent="Calcul trop long : moteur relancé."; lancerWorker(); }
+    r={ok:false,erreur:e.message==="delai"?"Le calcul a pris trop de temps. Essayez une écriture plus simple.":"Erreur du moteur : "+e.message};
+  }
+  $("calculer").disabled=false; majEtat();
+  if(moi!==numCalcul) return;
+  afficher(r);
+}
+function afficher(r){
+  $("resultat").hidden=false; const box=$("cartes"); box.innerHTML=""; cartes=[];
+  if(!r.ok){ const d=document.createElement("div"); d.className="card err"; d.textContent=r.erreur; box.appendChild(d); $("suivant").disabled=$("tout").disabled=true; $("progression").textContent=""; return; }
+  cartes.push(carteResultat(r));
+  cartes.forEach(c=>{ c.classList.add("cache"); box.appendChild(c); });
+  visibles=0; montrer(1);
+}
+function montrer(n){
+  visibles=Math.min(cartes.length,visibles+n);
+  cartes.forEach((c,i)=>c.classList.toggle("cache",i>=visibles));
+  $("suivant").disabled=$("tout").disabled=visibles>=cartes.length;
+  $("progression").textContent=`Étape ${visibles} / ${cartes.length}`;
+  const der=cartes[visibles-1]; if(der&&n===1) der.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+$("suivant").onclick=()=>montrer(1);
+$("tout").onclick=()=>montrer(cartes.length);
+const titreOrigine=document.title;
+window.addEventListener("afterprint",()=>{ document.title=titreOrigine; });
+$("pdf").onclick=()=>{
+  montrer(cartes.length);
+  document.title="Corrige-factorisation";
+  window.print();
+};
+
+/* ---------- exercice au hasard ---------- */
+let exoFn=null;
+async function nouvelExercice(){
+  if(!worker) return;
+  $("resultat").hidden=true; $("cartes").innerHTML=""; cartes=[];
+  $("exoCorrige").hidden=false; $("exoCorrige").textContent="Afficher le corrigé ▶";
+  const box=$("exoEnonce");
+  box.innerHTML='<span class="muted">Chargement…</span>';
+  try{
+    let s;
+    do{ const g=await appelPy("exercice",tirerNiveau(),5000); s=g.expr; }while(s===exoFn);
+    exoFn=s;
+    const r=await appelPy("apercu",s,5000);
+    box.innerHTML=r.ok?K("Factoriser : "+r.tex):'<span class="err">'+r.erreur+'</span>';
+  }catch(e){ box.innerHTML='<span class="err">Erreur de chargement.</span>'; }
+  math(box);
+}
+$("exoHasard").onclick=nouvelExercice;
+$("exoCorrige").onclick=async()=>{
+  if(!exoFn) return;
+  await calculer(exoFn);
+  $("resultat").scrollIntoView({behavior:"smooth",block:"start"});
+};
+
+window.addEventListener("DOMContentLoaded",()=>{ document.querySelectorAll("details").forEach(math); demarrer(); });
+</script>
+</body>
+</html>
