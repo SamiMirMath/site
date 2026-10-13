@@ -1,0 +1,5 @@
+# GitHub Pages (Jekyll) : ces dossiers restent dans le dépôt mais ne sont pas
+# publiés sur samimir.ch (documentation interne, tests automatiques).
+exclude:
+  - docs
+  - tests
