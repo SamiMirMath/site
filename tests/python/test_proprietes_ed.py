@@ -47,7 +47,7 @@ class TestProprietesEnsembleDefinition(unittest.TestCase):
 
     @unittest.expectedFailure
     def test_controle_numerique_sans_fausse_alerte(self):
-        """BUG CONNU (non corrigé) : près d'un zéro double, `evaluer` arrondit à 0 une valeur
+        """BUG CONNU (tâche T07b) : près d'un zéro double, `evaluer` arrondit à 0 une valeur
         de l'ordre de 1e-12 (seuil anti-compensation de ensemble_def.py), et le contrôle
         numérique affiché à l'élève signale un « désaccord » alors que l'ED est juste.
         Quand ce test passera, retirer @expectedFailure."""
