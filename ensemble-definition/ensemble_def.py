@@ -1493,7 +1493,8 @@ def _sympy():
 def en_py(n):
     """Arbre → chaîne lisible par SymPy."""
     if isinstance(n, Nb):
-        return f"({n.v.numerator})/({n.v.denominator})" if n.v.denominator != 1 else f"({n.v.numerator})"
+        # parenthèses extérieures indispensables : x**(1)/(2) se lirait (x**1)/2
+        return f"(({n.v.numerator})/({n.v.denominator}))" if n.v.denominator != 1 else f"({n.v.numerator})"
     if isinstance(n, X):
         return "x"
     if isinstance(n, E):
