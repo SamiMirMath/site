@@ -1,0 +1,1590 @@
+{
+ "(2x+1)/(x-1)": {
+  "asymptotes": [
+   {
+    "genre": "horizontale",
+    "ou": "x \\to -\\infty",
+    "valeur_tex": "2",
+    "valeur_val": 2.0
+   },
+   {
+    "genre": "horizontale",
+    "ou": "x \\to +\\infty",
+    "valeur_tex": "2",
+    "valeur_val": 2.0
+   },
+   {
+    "droite_tex": "+\\infty",
+    "gauche_tex": "-\\infty",
+    "genre": "verticale",
+    "ou": "x \\to 1",
+    "point_tex": "1",
+    "point_val": 1.0
+   }
+  ],
+  "ed_tex": "\\mathbb{R} \\setminus \\left\\{1\\right\\}",
+  "etudes": [
+   {
+    "etapes": [
+     {
+      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(2x + 1 = 2\\,x\\left(1 + \\dfrac{\\frac{1}{2}}{x}\\right)\\) et \\(x - 1 = x\\left(1 - \\dfrac{1}{x}\\right)\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(f(x) = \\dfrac{2\\,x\\left(1 + \\dfrac{\\frac{1}{2}}{x}\\right)}{x\\left(1 - \\dfrac{1}{x}\\right)} = 2 \\cdot \\dfrac{1 + \\dfrac{\\frac{1}{2}}{x}}{1 - \\dfrac{1}{x}}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Quand \\(x\\to-\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 + \\dfrac{\\frac{1}{2}}{x}\\) et dans \\(1 - \\dfrac{1}{x}\\) tend vers 0 : ces expressions tendent donc vers 1, et le quotient \\(\\dfrac{1 + \\dfrac{\\frac{1}{2}}{x}}{1 - \\dfrac{1}{x}}\\) tend vers 1 aussi.",
+      "type": "texte"
+     },
+     {
+      "html": "Il reste \\(f(x) \\to 2\\) : même degré, la limite est le rapport des coefficients dominants.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to -\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(2x + 1 = 2\\,x\\left(1 + \\dfrac{\\frac{1}{2}}{x}\\right)\\) et \\(x - 1 = x\\left(1 - \\dfrac{1}{x}\\right)\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(f(x) = \\dfrac{2\\,x\\left(1 + \\dfrac{\\frac{1}{2}}{x}\\right)}{x\\left(1 - \\dfrac{1}{x}\\right)} = 2 \\cdot \\dfrac{1 + \\dfrac{\\frac{1}{2}}{x}}{1 - \\dfrac{1}{x}}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Quand \\(x\\to+\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 + \\dfrac{\\frac{1}{2}}{x}\\) et dans \\(1 - \\dfrac{1}{x}\\) tend vers 0 : ces expressions tendent donc vers 1, et le quotient \\(\\dfrac{1 + \\dfrac{\\frac{1}{2}}{x}}{1 - \\dfrac{1}{x}}\\) tend vers 1 aussi.",
+      "type": "texte"
+     },
+     {
+      "html": "Il reste \\(f(x) \\to 2\\) : même degré, la limite est le rapport des coefficients dominants.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to +\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim_{x\\to 1^-} f(x) = \\dfrac{3}{0^{-}} = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\displaystyle\\lim_{x\\to 1^+} f(x) = \\dfrac{3}{0^{+}} = +\\infty\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to 1"
+   }
+  ],
+  "f_tex": "\\frac{2x + 1}{x - 1}",
+  "ok": true
+ },
+ "(2x^2+1)/(x^2-1)": {
+  "asymptotes": [
+   {
+    "genre": "horizontale",
+    "ou": "x \\to -\\infty",
+    "valeur_tex": "2",
+    "valeur_val": 2.0
+   },
+   {
+    "genre": "horizontale",
+    "ou": "x \\to +\\infty",
+    "valeur_tex": "2",
+    "valeur_val": 2.0
+   },
+   {
+    "droite_tex": "-\\infty",
+    "gauche_tex": "+\\infty",
+    "genre": "verticale",
+    "ou": "x \\to -1",
+    "point_tex": "-1",
+    "point_val": -1.0
+   },
+   {
+    "droite_tex": "+\\infty",
+    "gauche_tex": "-\\infty",
+    "genre": "verticale",
+    "ou": "x \\to 1",
+    "point_tex": "1",
+    "point_val": 1.0
+   }
+  ],
+  "ed_tex": "\\mathbb{R} \\setminus \\left\\{-1 \\,;\\, 1\\right\\}",
+  "etudes": [
+   {
+    "etapes": [
+     {
+      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(2x^{2} + 1 = 2\\,x^{2}\\left(1 + \\dfrac{\\frac{1}{2}}{x^{2}}\\right)\\) et \\(x^{2} - 1 = x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(f(x) = \\dfrac{2\\,x^{2}\\left(1 + \\dfrac{\\frac{1}{2}}{x^{2}}\\right)}{x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)} = 2 \\cdot \\dfrac{1 + \\dfrac{\\frac{1}{2}}{x^{2}}}{1 - \\dfrac{1}{x^{2}}}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Quand \\(x\\to-\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 + \\dfrac{\\frac{1}{2}}{x^{2}}\\) et dans \\(1 - \\dfrac{1}{x^{2}}\\) tend vers 0 : ces expressions tendent donc vers 1, et le quotient \\(\\dfrac{1 + \\dfrac{\\frac{1}{2}}{x^{2}}}{1 - \\dfrac{1}{x^{2}}}\\) tend vers 1 aussi.",
+      "type": "texte"
+     },
+     {
+      "html": "Il reste \\(f(x) \\to 2\\) : même degré, la limite est le rapport des coefficients dominants.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to -\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(2x^{2} + 1 = 2\\,x^{2}\\left(1 + \\dfrac{\\frac{1}{2}}{x^{2}}\\right)\\) et \\(x^{2} - 1 = x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(f(x) = \\dfrac{2\\,x^{2}\\left(1 + \\dfrac{\\frac{1}{2}}{x^{2}}\\right)}{x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)} = 2 \\cdot \\dfrac{1 + \\dfrac{\\frac{1}{2}}{x^{2}}}{1 - \\dfrac{1}{x^{2}}}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Quand \\(x\\to+\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 + \\dfrac{\\frac{1}{2}}{x^{2}}\\) et dans \\(1 - \\dfrac{1}{x^{2}}\\) tend vers 0 : ces expressions tendent donc vers 1, et le quotient \\(\\dfrac{1 + \\dfrac{\\frac{1}{2}}{x^{2}}}{1 - \\dfrac{1}{x^{2}}}\\) tend vers 1 aussi.",
+      "type": "texte"
+     },
+     {
+      "html": "Il reste \\(f(x) \\to 2\\) : même degré, la limite est le rapport des coefficients dominants.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to +\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim_{x\\to -1^-} f(x) = \\dfrac{-\\frac{3}{2}}{0^{-}} = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\displaystyle\\lim_{x\\to -1^+} f(x) = \\dfrac{-\\frac{3}{2}}{0^{+}} = -\\infty\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to -1"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim_{x\\to 1^-} f(x) = \\dfrac{\\frac{3}{2}}{0^{-}} = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\displaystyle\\lim_{x\\to 1^+} f(x) = \\dfrac{\\frac{3}{2}}{0^{+}} = +\\infty\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to 1"
+   }
+  ],
+  "f_tex": "\\frac{2x^{2} + 1}{x^{2} - 1}",
+  "ok": true
+ },
+ "(e^x-1)/x": {
+  "asymptotes": [
+   {
+    "genre": "horizontale",
+    "ou": "x \\to -\\infty",
+    "valeur_tex": "0",
+    "valeur_val": 0.0
+   },
+   {
+    "genre": "trou",
+    "ou": "x \\to 0",
+    "point_tex": "0",
+    "point_val": 0.0,
+    "valeur_tex": "1",
+    "valeur_val": 1.0
+   }
+  ],
+  "ed_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
+  "etudes": [
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = 0\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to -\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to +\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(x=0\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 0\\).",
+      "type": "texte"
+     },
+     {
+      "html": "À gauche, \\(\\displaystyle\\lim f(x) = 1\\) ; à droite, \\(\\displaystyle\\lim f(x) = 1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux limites sont finies et égales à \\(1\\) : f se prolonge par continuité en ce point, c'est un point de discontinuité (pas une asymptote).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to 0"
+   }
+  ],
+  "f_tex": "\\frac{e^{x} - 1}{x}",
+  "ok": true
+ },
+ "(x^2-1)/(x-1)": {
+  "asymptotes": [
+   {
+    "a": "1",
+    "a_val": 1.0,
+    "b": "1",
+    "b_val": 1.0,
+    "equation_tex": "x + 1",
+    "genre": "oblique",
+    "ou": "x \\to -\\infty",
+    "valeur_tex": "-\\infty"
+   },
+   {
+    "a": "1",
+    "a_val": 1.0,
+    "b": "1",
+    "b_val": 1.0,
+    "equation_tex": "x + 1",
+    "genre": "oblique",
+    "ou": "x \\to +\\infty",
+    "valeur_tex": "+\\infty"
+   },
+   {
+    "genre": "trou",
+    "ou": "x \\to 1",
+    "point_tex": "1",
+    "point_val": 1.0,
+    "valeur_tex": "2",
+    "valeur_val": 2.0
+   }
+  ],
+  "ed_tex": "\\mathbb{R} \\setminus \\left\\{1\\right\\}",
+  "etudes": [
+   {
+    "etapes": [
+     {
+      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(x^{2} - 1 = x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)\\) et \\(x - 1 = x\\left(1 - \\dfrac{1}{x}\\right)\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(f(x) = \\dfrac{x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)}{x\\left(1 - \\dfrac{1}{x}\\right)} = x \\cdot \\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{1}{x}}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Quand \\(x\\to-\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 - \\dfrac{1}{x^{2}}\\) et dans \\(1 - \\dfrac{1}{x}\\) tend vers 0 : ces expressions tendent donc vers 1, et le quotient \\(\\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{1}{x}}\\) tend vers 1 aussi.",
+      "type": "texte"
+     },
+     {
+      "html": "Il reste \\(f(x) \\to x\\) : la limite est \\(-\\infty\\), et il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2} - 1\\) par \\(x - 1\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} - 1 = \\left(x - 1\\right)\\left(x + 1\\right) + 0\\), donc \\(f(x) = x + 1 + \\dfrac{0}{x - 1}\\), et ce dernier terme tend vers 0.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to -\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(x^{2} - 1 = x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)\\) et \\(x - 1 = x\\left(1 - \\dfrac{1}{x}\\right)\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(f(x) = \\dfrac{x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)}{x\\left(1 - \\dfrac{1}{x}\\right)} = x \\cdot \\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{1}{x}}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Quand \\(x\\to+\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 - \\dfrac{1}{x^{2}}\\) et dans \\(1 - \\dfrac{1}{x}\\) tend vers 0 : ces expressions tendent donc vers 1, et le quotient \\(\\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{1}{x}}\\) tend vers 1 aussi.",
+      "type": "texte"
+     },
+     {
+      "html": "Il reste \\(f(x) \\to x\\) : la limite est \\(+\\infty\\), et il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2} - 1\\) par \\(x - 1\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} - 1 = \\left(x - 1\\right)\\left(x + 1\\right) + 0\\), donc \\(f(x) = x + 1 + \\dfrac{0}{x - 1}\\), et ce dernier terme tend vers 0.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to +\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim_{x\\to 1} f(x) = \\lim_{x\\to 1}\\dfrac{\\left(x + 1\\right)\\,\\cancel{\\left(x-1\\right)}}{\\cancel{\\left(x-1\\right)}} = \\lim_{x\\to 1} \\left(x + 1\\right) = 2\\) : la limite est finie, c'est un point de discontinuité, pas une asymptote verticale.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to 1"
+   }
+  ],
+  "f_tex": "\\frac{x^{2} - 1}{x - 1}",
+  "ok": true
+ },
+ "(x^2-1)/(x-3)": {
+  "asymptotes": [
+   {
+    "a": "1",
+    "a_val": 1.0,
+    "b": "3",
+    "b_val": 3.0,
+    "equation_tex": "x + 3",
+    "genre": "oblique",
+    "ou": "x \\to -\\infty",
+    "valeur_tex": "-\\infty"
+   },
+   {
+    "a": "1",
+    "a_val": 1.0,
+    "b": "3",
+    "b_val": 3.0,
+    "equation_tex": "x + 3",
+    "genre": "oblique",
+    "ou": "x \\to +\\infty",
+    "valeur_tex": "+\\infty"
+   },
+   {
+    "droite_tex": "+\\infty",
+    "gauche_tex": "-\\infty",
+    "genre": "verticale",
+    "ou": "x \\to 3",
+    "point_tex": "3",
+    "point_val": 3.0
+   }
+  ],
+  "ed_tex": "\\mathbb{R} \\setminus \\left\\{3\\right\\}",
+  "etudes": [
+   {
+    "etapes": [
+     {
+      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(x^{2} - 1 = x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)\\) et \\(x - 3 = x\\left(1 - \\dfrac{3}{x}\\right)\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(f(x) = \\dfrac{x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)}{x\\left(1 - \\dfrac{3}{x}\\right)} = x \\cdot \\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{3}{x}}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Quand \\(x\\to-\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 - \\dfrac{1}{x^{2}}\\) et dans \\(1 - \\dfrac{3}{x}\\) tend vers 0 : ces expressions tendent donc vers 1, et le quotient \\(\\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{3}{x}}\\) tend vers 1 aussi.",
+      "type": "texte"
+     },
+     {
+      "html": "Il reste \\(f(x) \\to x\\) : la limite est \\(-\\infty\\), et il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2} - 1\\) par \\(x - 3\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} - 1 = \\left(x - 3\\right)\\left(x + 3\\right) + 8\\), donc \\(f(x) = x + 3 + \\dfrac{8}{x - 3}\\), et ce dernier terme tend vers 0.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to -\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(x^{2} - 1 = x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)\\) et \\(x - 3 = x\\left(1 - \\dfrac{3}{x}\\right)\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(f(x) = \\dfrac{x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)}{x\\left(1 - \\dfrac{3}{x}\\right)} = x \\cdot \\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{3}{x}}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Quand \\(x\\to+\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 - \\dfrac{1}{x^{2}}\\) et dans \\(1 - \\dfrac{3}{x}\\) tend vers 0 : ces expressions tendent donc vers 1, et le quotient \\(\\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{3}{x}}\\) tend vers 1 aussi.",
+      "type": "texte"
+     },
+     {
+      "html": "Il reste \\(f(x) \\to x\\) : la limite est \\(+\\infty\\), et il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2} - 1\\) par \\(x - 3\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} - 1 = \\left(x - 3\\right)\\left(x + 3\\right) + 8\\), donc \\(f(x) = x + 3 + \\dfrac{8}{x - 3}\\), et ce dernier terme tend vers 0.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to +\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim_{x\\to 3^-} f(x) = \\dfrac{8}{0^{-}} = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\displaystyle\\lim_{x\\to 3^+} f(x) = \\dfrac{8}{0^{+}} = +\\infty\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to 3"
+   }
+  ],
+  "f_tex": "\\frac{x^{2} - 1}{x - 3}",
+  "ok": true
+ },
+ "(x^3+1)/(x-2)": {
+  "asymptotes": [
+   {
+    "genre": "aucune",
+    "ou": "x \\to -\\infty",
+    "valeur_tex": "+\\infty"
+   },
+   {
+    "genre": "aucune",
+    "ou": "x \\to +\\infty",
+    "valeur_tex": "+\\infty"
+   },
+   {
+    "droite_tex": "+\\infty",
+    "gauche_tex": "-\\infty",
+    "genre": "verticale",
+    "ou": "x \\to 2",
+    "point_tex": "2",
+    "point_val": 2.0
+   }
+  ],
+  "ed_tex": "\\mathbb{R} \\setminus \\left\\{2\\right\\}",
+  "etudes": [
+   {
+    "etapes": [
+     {
+      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(x^{3} + 1 = x^{3}\\left(1 + \\dfrac{1}{x^{3}}\\right)\\) et \\(x - 2 = x\\left(1 - \\dfrac{2}{x}\\right)\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(f(x) = \\dfrac{x^{3}\\left(1 + \\dfrac{1}{x^{3}}\\right)}{x\\left(1 - \\dfrac{2}{x}\\right)} = x^{2} \\cdot \\dfrac{1 + \\dfrac{1}{x^{3}}}{1 - \\dfrac{2}{x}}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Quand \\(x\\to-\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 + \\dfrac{1}{x^{3}}\\) et dans \\(1 - \\dfrac{2}{x}\\) tend vers 0 : ces expressions tendent donc vers 1, et le quotient \\(\\dfrac{1 + \\dfrac{1}{x^{3}}}{1 - \\dfrac{2}{x}}\\) tend vers 1 aussi.",
+      "type": "texte"
+     },
+     {
+      "html": "Il reste \\(f(x) \\to x^{2}\\) : le degré du numérateur dépasse celui du dénominateur de 2 \\(\\geq 2\\), la limite est \\(+\\infty\\) (branche parabolique, pas d'asymptote oblique).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to -\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(x^{3} + 1 = x^{3}\\left(1 + \\dfrac{1}{x^{3}}\\right)\\) et \\(x - 2 = x\\left(1 - \\dfrac{2}{x}\\right)\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(f(x) = \\dfrac{x^{3}\\left(1 + \\dfrac{1}{x^{3}}\\right)}{x\\left(1 - \\dfrac{2}{x}\\right)} = x^{2} \\cdot \\dfrac{1 + \\dfrac{1}{x^{3}}}{1 - \\dfrac{2}{x}}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Quand \\(x\\to+\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 + \\dfrac{1}{x^{3}}\\) et dans \\(1 - \\dfrac{2}{x}\\) tend vers 0 : ces expressions tendent donc vers 1, et le quotient \\(\\dfrac{1 + \\dfrac{1}{x^{3}}}{1 - \\dfrac{2}{x}}\\) tend vers 1 aussi.",
+      "type": "texte"
+     },
+     {
+      "html": "Il reste \\(f(x) \\to x^{2}\\) : le degré du numérateur dépasse celui du dénominateur de 2 \\(\\geq 2\\), la limite est \\(+\\infty\\) (branche parabolique, pas d'asymptote oblique).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to +\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim_{x\\to 2^-} f(x) = \\dfrac{9}{0^{-}} = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\displaystyle\\lim_{x\\to 2^+} f(x) = \\dfrac{9}{0^{+}} = +\\infty\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to 2"
+   }
+  ],
+  "f_tex": "\\frac{x^{3} + 1}{x - 2}",
+  "ok": true
+ },
+ "1/(x-2)": {
+  "asymptotes": [
+   {
+    "genre": "horizontale",
+    "ou": "x \\to -\\infty",
+    "valeur_tex": "0",
+    "valeur_val": 0.0
+   },
+   {
+    "genre": "horizontale",
+    "ou": "x \\to +\\infty",
+    "valeur_tex": "0",
+    "valeur_val": 0.0
+   },
+   {
+    "droite_tex": "+\\infty",
+    "gauche_tex": "-\\infty",
+    "genre": "verticale",
+    "ou": "x \\to 2",
+    "point_tex": "2",
+    "point_val": 2.0
+   }
+  ],
+  "ed_tex": "\\mathbb{R} \\setminus \\left\\{2\\right\\}",
+  "etudes": [
+   {
+    "etapes": [
+     {
+      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(1 = 1\\) et \\(x - 2 = x\\left(1 - \\dfrac{2}{x}\\right)\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(f(x) = \\dfrac{1}{x\\left(1 - \\dfrac{2}{x}\\right)} = \\dfrac{1}{x} \\cdot \\dfrac{1}{1 - \\dfrac{2}{x}}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Quand \\(x\\to-\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 - \\dfrac{2}{x}\\) tend vers 0 : cette expression tend donc vers 1, et le quotient \\(\\dfrac{1}{1 - \\dfrac{2}{x}}\\) tend vers 1 aussi.",
+      "type": "texte"
+     },
+     {
+      "html": "Il reste \\(f(x) \\to \\dfrac{1}{x}\\) avec un exposant négatif : la limite est 0.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to -\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(1 = 1\\) et \\(x - 2 = x\\left(1 - \\dfrac{2}{x}\\right)\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(f(x) = \\dfrac{1}{x\\left(1 - \\dfrac{2}{x}\\right)} = \\dfrac{1}{x} \\cdot \\dfrac{1}{1 - \\dfrac{2}{x}}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Quand \\(x\\to+\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 - \\dfrac{2}{x}\\) tend vers 0 : cette expression tend donc vers 1, et le quotient \\(\\dfrac{1}{1 - \\dfrac{2}{x}}\\) tend vers 1 aussi.",
+      "type": "texte"
+     },
+     {
+      "html": "Il reste \\(f(x) \\to \\dfrac{1}{x}\\) avec un exposant négatif : la limite est 0.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to +\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim_{x\\to 2^-} f(x) = \\dfrac{1}{0^{-}} = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\displaystyle\\lim_{x\\to 2^+} f(x) = \\dfrac{1}{0^{+}} = +\\infty\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to 2"
+   }
+  ],
+  "f_tex": "\\frac{1}{x - 2}",
+  "ok": true
+ },
+ "1/(x^2-2)": {
+  "asymptotes": [
+   {
+    "genre": "horizontale",
+    "ou": "x \\to -\\infty",
+    "valeur_tex": "0",
+    "valeur_val": 0.0
+   },
+   {
+    "genre": "horizontale",
+    "ou": "x \\to +\\infty",
+    "valeur_tex": "0",
+    "valeur_val": 0.0
+   },
+   {
+    "droite_tex": "-\\infty",
+    "gauche_tex": "+\\infty",
+    "genre": "verticale",
+    "ou": "x \\to -\\sqrt{2}",
+    "point_tex": "-\\sqrt{2}",
+    "point_val": -1.41421356
+   },
+   {
+    "droite_tex": "+\\infty",
+    "gauche_tex": "-\\infty",
+    "genre": "verticale",
+    "ou": "x \\to \\sqrt{2}",
+    "point_tex": "\\sqrt{2}",
+    "point_val": 1.41421356
+   }
+  ],
+  "ed_tex": "\\mathbb{R} \\setminus \\left\\{-\\sqrt{2} \\,;\\, \\sqrt{2}\\right\\}",
+  "etudes": [
+   {
+    "etapes": [
+     {
+      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(1 = 1\\) et \\(x^{2} - 2 = x^{2}\\left(1 - \\dfrac{2}{x^{2}}\\right)\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(f(x) = \\dfrac{1}{x^{2}\\left(1 - \\dfrac{2}{x^{2}}\\right)} = \\dfrac{1}{x^{2}} \\cdot \\dfrac{1}{1 - \\dfrac{2}{x^{2}}}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Quand \\(x\\to-\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 - \\dfrac{2}{x^{2}}\\) tend vers 0 : cette expression tend donc vers 1, et le quotient \\(\\dfrac{1}{1 - \\dfrac{2}{x^{2}}}\\) tend vers 1 aussi.",
+      "type": "texte"
+     },
+     {
+      "html": "Il reste \\(f(x) \\to \\dfrac{1}{x^{2}}\\) avec un exposant négatif : la limite est 0.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to -\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(1 = 1\\) et \\(x^{2} - 2 = x^{2}\\left(1 - \\dfrac{2}{x^{2}}\\right)\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(f(x) = \\dfrac{1}{x^{2}\\left(1 - \\dfrac{2}{x^{2}}\\right)} = \\dfrac{1}{x^{2}} \\cdot \\dfrac{1}{1 - \\dfrac{2}{x^{2}}}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Quand \\(x\\to+\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 - \\dfrac{2}{x^{2}}\\) tend vers 0 : cette expression tend donc vers 1, et le quotient \\(\\dfrac{1}{1 - \\dfrac{2}{x^{2}}}\\) tend vers 1 aussi.",
+      "type": "texte"
+     },
+     {
+      "html": "Il reste \\(f(x) \\to \\dfrac{1}{x^{2}}\\) avec un exposant négatif : la limite est 0.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to +\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "Le numérateur ne s'annule pas en \\(x=-\\sqrt{2}\\) (seul le dénominateur s'y annule) : asymptote verticale.",
+      "type": "texte"
+     },
+     {
+      "html": "À gauche, \\(f(x) \\to +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "À droite, \\(f(x) \\to -\\infty\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to -\\sqrt{2}"
+   },
+   {
+    "etapes": [
+     {
+      "html": "Le numérateur ne s'annule pas en \\(x=\\sqrt{2}\\) (seul le dénominateur s'y annule) : asymptote verticale.",
+      "type": "texte"
+     },
+     {
+      "html": "À gauche, \\(f(x) \\to -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "À droite, \\(f(x) \\to +\\infty\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to \\sqrt{2}"
+   }
+  ],
+  "f_tex": "\\frac{1}{x^{2} - 2}",
+  "ok": true
+ },
+ "1/x^2": {
+  "asymptotes": [
+   {
+    "genre": "horizontale",
+    "ou": "x \\to -\\infty",
+    "valeur_tex": "0",
+    "valeur_val": 0.0
+   },
+   {
+    "genre": "horizontale",
+    "ou": "x \\to +\\infty",
+    "valeur_tex": "0",
+    "valeur_val": 0.0
+   },
+   {
+    "droite_tex": "+\\infty",
+    "gauche_tex": "+\\infty",
+    "genre": "verticale",
+    "ou": "x \\to 0",
+    "point_tex": "0",
+    "point_val": 0.0
+   }
+  ],
+  "ed_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
+  "etudes": [
+   {
+    "etapes": [
+     {
+      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(1 = 1\\) et \\(x^{2} = x^{2}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(f(x) = \\dfrac{1}{x^{2}} = \\dfrac{1}{x^{2}}\\) exactement.",
+      "type": "texte"
+     },
+     {
+      "html": "Il reste \\(f(x) \\to \\dfrac{1}{x^{2}}\\) avec un exposant négatif : la limite est 0.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to -\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(1 = 1\\) et \\(x^{2} = x^{2}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(f(x) = \\dfrac{1}{x^{2}} = \\dfrac{1}{x^{2}}\\) exactement.",
+      "type": "texte"
+     },
+     {
+      "html": "Il reste \\(f(x) \\to \\dfrac{1}{x^{2}}\\) avec un exposant négatif : la limite est 0.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to +\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim_{x\\to 0^-} f(x) = \\dfrac{1}{0^{+}} = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\displaystyle\\lim_{x\\to 0^+} f(x) = \\dfrac{1}{0^{+}} = +\\infty\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to 0"
+   }
+  ],
+  "f_tex": "\\frac{1}{x^{2}}",
+  "ok": true
+ },
+ "e^(1/x)": {
+  "asymptotes": [
+   {
+    "genre": "horizontale",
+    "ou": "x \\to -\\infty",
+    "valeur_tex": "1",
+    "valeur_val": 1.0
+   },
+   {
+    "genre": "horizontale",
+    "ou": "x \\to +\\infty",
+    "valeur_tex": "1",
+    "valeur_val": 1.0
+   },
+   {
+    "droite_tex": "+\\infty",
+    "droite_val": null,
+    "gauche_tex": "0",
+    "gauche_val": 0.0,
+    "genre": "verticale",
+    "ou": "x \\to 0",
+    "point_tex": "0",
+    "point_val": 0.0
+   }
+  ],
+  "ed_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
+  "etudes": [
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = 1\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to -\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = 1\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to +\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(x=0\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 0\\).",
+      "type": "texte"
+     },
+     {
+      "html": "À gauche, \\(\\displaystyle\\lim f(x) = 0\\) ; à droite, \\(\\displaystyle\\lim f(x) = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Au moins une des deux limites est infinie : asymptote verticale.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to 0"
+   }
+  ],
+  "f_tex": "e^{\\frac{1}{x}}",
+  "ok": true
+ },
+ "e^(2x)": {
+  "asymptotes": [
+   {
+    "genre": "horizontale",
+    "ou": "x \\to -\\infty",
+    "valeur_tex": "0",
+    "valeur_val": 0.0
+   }
+  ],
+  "ed_tex": "\\mathbb{R}",
+  "etudes": [
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = 0\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to -\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to +\\infty"
+   }
+  ],
+  "f_tex": "e^{2x}",
+  "ok": true
+ },
+ "e^x/x": {
+  "asymptotes": [
+   {
+    "genre": "horizontale",
+    "ou": "x \\to -\\infty",
+    "valeur_tex": "0",
+    "valeur_val": 0.0
+   },
+   {
+    "droite_tex": "+\\infty",
+    "droite_val": null,
+    "gauche_tex": "-\\infty",
+    "gauche_val": null,
+    "genre": "verticale",
+    "ou": "x \\to 0",
+    "point_tex": "0",
+    "point_val": 0.0
+   }
+  ],
+  "ed_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
+  "etudes": [
+   {
+    "etapes": [
+     {
+      "html": "Produit d'une puissance de \\(x\\) et d'une exponentielle : par croissance comparée, l'exponentielle « domine » — la limite du produit est déterminée par elle.",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = 0\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to -\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "Produit d'une puissance de \\(x\\) et d'une exponentielle : par croissance comparée, l'exponentielle « domine » — la limite du produit est déterminée par elle.",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to +\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(x=0\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 0\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Produit d'une puissance de \\(x\\) et d'une exponentielle : par croissance comparée, l'exponentielle « domine » — la limite du produit est déterminée par elle.",
+      "type": "texte"
+     },
+     {
+      "html": "À gauche, \\(\\displaystyle\\lim f(x) = -\\infty\\) ; à droite, \\(\\displaystyle\\lim f(x) = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Au moins une des deux limites est infinie : asymptote verticale.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to 0"
+   }
+  ],
+  "f_tex": "\\frac{e^{x}}{x}",
+  "ok": true
+ },
+ "ln(x)": {
+  "asymptotes": [
+   {
+    "droite_tex": "-\\infty",
+    "genre": "verticale",
+    "ou": "x \\to 0^+",
+    "point_tex": "0",
+    "point_val": 0.0
+   }
+  ],
+  "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+  "etudes": [
+   {
+    "etapes": [
+     {
+      "html": "\\(x=0\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 0^{+}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = -\\infty\\) : asymptote verticale.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to 0^+"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to +\\infty"
+   }
+  ],
+  "f_tex": "\\ln(x)",
+  "ok": true
+ },
+ "ln(x-1)": {
+  "asymptotes": [
+   {
+    "droite_tex": "-\\infty",
+    "genre": "verticale",
+    "ou": "x \\to 1^+",
+    "point_tex": "1",
+    "point_val": 1.0
+   }
+  ],
+  "ed_tex": "\\left]1 \\,;\\, +\\infty\\right[",
+  "etudes": [
+   {
+    "etapes": [
+     {
+      "html": "\\(x=1\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 1^{+}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = -\\infty\\) : asymptote verticale.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to 1^+"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to +\\infty"
+   }
+  ],
+  "f_tex": "\\ln\\left(x - 1\\right)",
+  "ok": true
+ },
+ "ln(x^2-4x)/(x-5)": {
+  "asymptotes": [
+   {
+    "genre": "horizontale",
+    "ou": "x \\to -\\infty",
+    "valeur_tex": "0",
+    "valeur_val": 0.0
+   },
+   {
+    "genre": "horizontale",
+    "ou": "x \\to +\\infty",
+    "valeur_tex": "0",
+    "valeur_val": 0.0
+   },
+   {
+    "gauche_tex": "+\\infty",
+    "genre": "verticale",
+    "ou": "x \\to 0^-",
+    "point_tex": "0",
+    "point_val": 0.0
+   },
+   {
+    "droite_tex": "+\\infty",
+    "genre": "verticale",
+    "ou": "x \\to 4^+",
+    "point_tex": "4",
+    "point_val": 4.0
+   },
+   {
+    "droite_tex": "+\\infty",
+    "droite_val": null,
+    "gauche_tex": "-\\infty",
+    "gauche_val": null,
+    "genre": "verticale",
+    "ou": "x \\to 5",
+    "point_tex": "5",
+    "point_val": 5.0
+   }
+  ],
+  "ed_tex": "\\left]-\\infty \\,;\\, 0\\right[ \\cup \\left]4 \\,;\\, 5\\right[ \\cup \\left]5 \\,;\\, +\\infty\\right[",
+  "etudes": [
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = 0\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to -\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = 0\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to +\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(x=0\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 0^{-}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\) : asymptote verticale.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to 0^-"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(x=4\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 4^{+}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\) : asymptote verticale.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to 4^+"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(x=5\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 5\\).",
+      "type": "texte"
+     },
+     {
+      "html": "À gauche, \\(\\displaystyle\\lim f(x) = -\\infty\\) ; à droite, \\(\\displaystyle\\lim f(x) = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Au moins une des deux limites est infinie : asymptote verticale.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to 5"
+   }
+  ],
+  "f_tex": "\\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5}",
+  "ok": true
+ },
+ "sqrt(x^2+1)": {
+  "asymptotes": [
+   {
+    "a": "-1",
+    "a_val": -1.0,
+    "b": "0",
+    "b_val": 0.0,
+    "equation_tex": "-x",
+    "genre": "oblique",
+    "ou": "x \\to -\\infty"
+   },
+   {
+    "a": "1",
+    "a_val": 1.0,
+    "b": "0",
+    "b_val": 0.0,
+    "equation_tex": "x",
+    "genre": "oblique",
+    "ou": "x \\to +\\infty"
+   }
+  ],
+  "ed_tex": "\\mathbb{R}",
+  "etudes": [
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "On compare \\(f(x)\\) à une droite : \\(a = \\displaystyle\\lim \\frac{f(x)}{x} = -1\\) et \\(b = \\displaystyle\\lim \\left(f(x) - -1x\\right) = 0\\) sont finis (et \\(a \\neq 0\\)) : asymptote oblique.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to -\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "On compare \\(f(x)\\) à une droite : \\(a = \\displaystyle\\lim \\frac{f(x)}{x} = 1\\) et \\(b = \\displaystyle\\lim \\left(f(x) - 1x\\right) = 0\\) sont finis (et \\(a \\neq 0\\)) : asymptote oblique.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to +\\infty"
+   }
+  ],
+  "f_tex": "\\sqrt{x^{2} + 1}",
+  "ok": true
+ },
+ "sqrt(x^2-4x+5)": {
+  "asymptotes": [
+   {
+    "a": "-1",
+    "a_val": -1.0,
+    "b": "2",
+    "b_val": 2.0,
+    "equation_tex": "-x + 2",
+    "genre": "oblique",
+    "ou": "x \\to -\\infty"
+   },
+   {
+    "a": "1",
+    "a_val": 1.0,
+    "b": "-2",
+    "b_val": -2.0,
+    "equation_tex": "x - 2",
+    "genre": "oblique",
+    "ou": "x \\to +\\infty"
+   }
+  ],
+  "ed_tex": "\\mathbb{R}",
+  "etudes": [
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "On compare \\(f(x)\\) à une droite : \\(a = \\displaystyle\\lim \\frac{f(x)}{x} = -1\\) et \\(b = \\displaystyle\\lim \\left(f(x) - -1x\\right) = 2\\) sont finis (et \\(a \\neq 0\\)) : asymptote oblique.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to -\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "On compare \\(f(x)\\) à une droite : \\(a = \\displaystyle\\lim \\frac{f(x)}{x} = 1\\) et \\(b = \\displaystyle\\lim \\left(f(x) - 1x\\right) = -2\\) sont finis (et \\(a \\neq 0\\)) : asymptote oblique.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to +\\infty"
+   }
+  ],
+  "f_tex": "\\sqrt{x^{2} - 4x + 5}",
+  "ok": true
+ },
+ "x*e^x": {
+  "asymptotes": [
+   {
+    "genre": "horizontale",
+    "ou": "x \\to -\\infty",
+    "valeur_tex": "0",
+    "valeur_val": 0.0
+   }
+  ],
+  "ed_tex": "\\mathbb{R}",
+  "etudes": [
+   {
+    "etapes": [
+     {
+      "html": "Produit d'une puissance de \\(x\\) et d'une exponentielle : par croissance comparée, l'exponentielle « domine » — la limite du produit est déterminée par elle.",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = 0\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to -\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "Produit d'une puissance de \\(x\\) et d'une exponentielle : par croissance comparée, l'exponentielle « domine » — la limite du produit est déterminée par elle.",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to +\\infty"
+   }
+  ],
+  "f_tex": "x\\,e^{x}",
+  "ok": true
+ },
+ "x*ln(x^2)": {
+  "asymptotes": [
+   {
+    "genre": "trou",
+    "ou": "x \\to 0",
+    "point_tex": "0",
+    "point_val": 0.0,
+    "valeur_tex": "0",
+    "valeur_val": 0.0
+   }
+  ],
+  "ed_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
+  "etudes": [
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = -\\infty\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to -\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to +\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(x=0\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 0\\).",
+      "type": "texte"
+     },
+     {
+      "html": "À gauche, \\(\\displaystyle\\lim f(x) = 0\\) ; à droite, \\(\\displaystyle\\lim f(x) = 0\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux limites sont finies et égales à \\(0\\) : f se prolonge par continuité en ce point, c'est un point de discontinuité (pas une asymptote).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to 0"
+   }
+  ],
+  "f_tex": "x\\,\\ln\\left(x^{2}\\right)",
+  "ok": true
+ },
+ "x+ln(x)": {
+  "asymptotes": [
+   {
+    "droite_tex": "-\\infty",
+    "genre": "verticale",
+    "ou": "x \\to 0^+",
+    "point_tex": "0",
+    "point_val": 0.0
+   }
+  ],
+  "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+  "etudes": [
+   {
+    "etapes": [
+     {
+      "html": "\\(x=0\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 0^{+}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = -\\infty\\) : asymptote verticale.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to 0^+"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to +\\infty"
+   }
+  ],
+  "f_tex": "x + \\ln(x)",
+  "ok": true
+ },
+ "x/sqrt(x^2)": {
+  "asymptotes": [
+   {
+    "genre": "horizontale",
+    "ou": "x \\to -\\infty",
+    "valeur_tex": "-1",
+    "valeur_val": -1.0
+   },
+   {
+    "genre": "horizontale",
+    "ou": "x \\to +\\infty",
+    "valeur_tex": "1",
+    "valeur_val": 1.0
+   },
+   {
+    "droite_tex": "1",
+    "droite_val": 1.0,
+    "gauche_tex": "-1",
+    "gauche_val": -1.0,
+    "genre": "saut",
+    "ou": "x \\to 0",
+    "point_tex": "0",
+    "point_val": 0.0
+   }
+  ],
+  "ed_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
+  "etudes": [
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = -1\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to -\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = 1\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to +\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(x=0\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 0\\).",
+      "type": "texte"
+     },
+     {
+      "html": "À gauche, \\(\\displaystyle\\lim f(x) = -1\\) ; à droite, \\(\\displaystyle\\lim f(x) = 1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux limites sont finies mais différentes : f fait un saut en ce point (pas une asymptote).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to 0"
+   }
+  ],
+  "f_tex": "\\frac{x}{\\sqrt{x^{2}}}",
+  "ok": true
+ },
+ "x^(1/2)": {
+  "asymptotes": [],
+  "ed_tex": "\\left[0 \\,;\\, +\\infty\\right[",
+  "etudes": [
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to +\\infty"
+   }
+  ],
+  "f_tex": "\\sqrt{x}",
+  "ok": true
+ },
+ "x^2*e^(-x)": {
+  "asymptotes": [
+   {
+    "genre": "horizontale",
+    "ou": "x \\to +\\infty",
+    "valeur_tex": "0",
+    "valeur_val": 0.0
+   }
+  ],
+  "ed_tex": "\\mathbb{R}",
+  "etudes": [
+   {
+    "etapes": [
+     {
+      "html": "Produit d'une puissance de \\(x\\) et d'une exponentielle : par croissance comparée, l'exponentielle « domine » — la limite du produit est déterminée par elle.",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to -\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "Produit d'une puissance de \\(x\\) et d'une exponentielle : par croissance comparée, l'exponentielle « domine » — la limite du produit est déterminée par elle.",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\displaystyle\\lim f(x) = 0\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to +\\infty"
+   }
+  ],
+  "f_tex": "x^{2}\\,e^{-x}",
+  "ok": true
+ },
+ "x^2/(x-1)": {
+  "asymptotes": [
+   {
+    "a": "1",
+    "a_val": 1.0,
+    "b": "1",
+    "b_val": 1.0,
+    "equation_tex": "x + 1",
+    "genre": "oblique",
+    "ou": "x \\to -\\infty",
+    "valeur_tex": "-\\infty"
+   },
+   {
+    "a": "1",
+    "a_val": 1.0,
+    "b": "1",
+    "b_val": 1.0,
+    "equation_tex": "x + 1",
+    "genre": "oblique",
+    "ou": "x \\to +\\infty",
+    "valeur_tex": "+\\infty"
+   },
+   {
+    "droite_tex": "+\\infty",
+    "gauche_tex": "-\\infty",
+    "genre": "verticale",
+    "ou": "x \\to 1",
+    "point_tex": "1",
+    "point_val": 1.0
+   }
+  ],
+  "ed_tex": "\\mathbb{R} \\setminus \\left\\{1\\right\\}",
+  "etudes": [
+   {
+    "etapes": [
+     {
+      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(x^{2} = x^{2}\\) et \\(x - 1 = x\\left(1 - \\dfrac{1}{x}\\right)\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(f(x) = \\dfrac{x^{2}}{x\\left(1 - \\dfrac{1}{x}\\right)} = x \\cdot \\dfrac{1}{1 - \\dfrac{1}{x}}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Quand \\(x\\to-\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 - \\dfrac{1}{x}\\) tend vers 0 : cette expression tend donc vers 1, et le quotient \\(\\dfrac{1}{1 - \\dfrac{1}{x}}\\) tend vers 1 aussi.",
+      "type": "texte"
+     },
+     {
+      "html": "Il reste \\(f(x) \\to x\\) : la limite est \\(-\\infty\\), et il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2}\\) par \\(x - 1\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} = \\left(x - 1\\right)\\left(x + 1\\right) + 1\\), donc \\(f(x) = x + 1 + \\dfrac{1}{x - 1}\\), et ce dernier terme tend vers 0.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to -\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(x^{2} = x^{2}\\) et \\(x - 1 = x\\left(1 - \\dfrac{1}{x}\\right)\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(f(x) = \\dfrac{x^{2}}{x\\left(1 - \\dfrac{1}{x}\\right)} = x \\cdot \\dfrac{1}{1 - \\dfrac{1}{x}}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Quand \\(x\\to+\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 - \\dfrac{1}{x}\\) tend vers 0 : cette expression tend donc vers 1, et le quotient \\(\\dfrac{1}{1 - \\dfrac{1}{x}}\\) tend vers 1 aussi.",
+      "type": "texte"
+     },
+     {
+      "html": "Il reste \\(f(x) \\to x\\) : la limite est \\(+\\infty\\), et il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2}\\) par \\(x - 1\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} = \\left(x - 1\\right)\\left(x + 1\\right) + 1\\), donc \\(f(x) = x + 1 + \\dfrac{1}{x - 1}\\), et ce dernier terme tend vers 0.",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to +\\infty"
+   },
+   {
+    "etapes": [
+     {
+      "html": "\\(\\displaystyle\\lim_{x\\to 1^-} f(x) = \\dfrac{1}{0^{-}} = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\displaystyle\\lim_{x\\to 1^+} f(x) = \\dfrac{1}{0^{+}} = +\\infty\\).",
+      "type": "texte"
+     }
+    ],
+    "ou": "x \\to 1"
+   }
+  ],
+  "f_tex": "\\frac{x^{2}}{x - 1}",
+  "ok": true
+ }
+}

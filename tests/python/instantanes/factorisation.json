@@ -1,0 +1,3671 @@
+{
+ "(-3x + y - 5z)^2 - (4x - y - 5z)^2": {
+  "etapes": [
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=3x - y + 5z\\) et \\(B=4x - y - 5z\\) : \\(\\left(-3x + y - 5z\\right)^{2} - \\left(4x - y - 5z\\right)^{2} = \\left(10z - x\\right)\\left(7x - 2y\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\left(-3x + y - 5z\\right)^{2} - \\left(4x - y - 5z\\right)^{2}",
+  "methode": "Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(10z - x\\right)\\left(7x - 2y\\right)",
+  "secours": false
+ },
+ "(2x + 1)(4x + 3) + (3x - 2)(2x + 1) - (2x + 1)^2": {
+  "etapes": [
+   {
+    "html": "On met \\(\\left(2x + 1\\right)\\) en évidence (facteur commun à tous les termes) : \\(\\left(2x + 1\\right)\\left(4x + 3\\right) + \\left(3x - 2\\right)\\left(2x + 1\\right) - \\left(2x + 1\\right)^{2} = \\left(2x + 1\\right)\\left[\\left(4x + 3\\right) + \\left(3x - 2\\right) - \\left(2x + 1\\right)\\right] = \\left(2x + 1\\right)\\left(5x\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\left(2x + 1\\right)\\left(4x + 3\\right) + \\left(3x - 2\\right)\\left(2x + 1\\right) - \\left(2x + 1\\right)^{2}",
+  "methode": "Mise en évidence",
+  "ok": true,
+  "resultat_tex": "5x\\left(2x + 1\\right)",
+  "secours": false
+ },
+ "(2x+4)(x-1)": {
+  "etapes": [
+   {
+    "html": "L'expression est déjà un produit : on factorise chacun de ses facteurs.",
+    "type": "texte"
+   },
+   {
+    "html": "On met \\(2\\) en évidence (facteur commun à tous les termes) : \\(2x + 4 = 2\\left(x + 2\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\left(2x + 4\\right)\\left(x - 1\\right)",
+  "methode": "Mise en évidence",
+  "ok": true,
+  "resultat_tex": "2\\left(x + 2\\right)\\left(x - 1\\right)",
+  "secours": false
+ },
+ "(a + b)^2 + a(a + b) + a^2 - b^2": {
+  "etapes": [
+   {
+    "html": "On groupe les termes : \\(\\left(a + b\\right)^{2} + a\\left(a + b\\right) + a^{2} - b^{2} = \\left(\\left(a + b\\right)^{2} + a\\left(a + b\\right)\\right) + \\left(a^{2} - b^{2}\\right) = \\left(a + b\\right)\\left(2a + b\\right) + \\left(a - b\\right)\\left(a + b\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On met \\(\\left(a + b\\right)\\) en évidence (facteur commun à tous les termes) : \\(\\left(a + b\\right)\\left(2a + b\\right) + \\left(a - b\\right)\\left(a + b\\right) = \\left(a + b\\right)\\left[\\left(2a + b\\right) + \\left(a - b\\right)\\right] = \\left(a + b\\right)\\left(3a\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\left(a + b\\right)^{2} + a\\left(a + b\\right) + a^{2} - b^{2}",
+  "methode": "Groupements · Mise en évidence",
+  "ok": true,
+  "resultat_tex": "3a\\left(a + b\\right)",
+  "secours": false
+ },
+ "(a + b)^2 - 2(a + b)c + c^2": {
+  "etapes": [
+   {
+    "html": "On reconnaît un carré parfait (produit remarquable \\(A^2-2AB+B^2=(A-B)^2\\)) avec \\(A=a + b\\) et \\(B=c\\) : \\(\\left(a + b\\right)^{2} - 2\\left(a + b\\right)c + c^{2} = \\left(a + b - c\\right)^{2}\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\left(a + b\\right)^{2} - 2\\left(a + b\\right)c + c^{2}",
+  "methode": "Carré parfait",
+  "ok": true,
+  "resultat_tex": "\\left(a + b - c\\right)^{2}",
+  "secours": false
+ },
+ "(a + b)^2 - 7(a + b)": {
+  "etapes": [
+   {
+    "html": "On met \\(\\left(a + b\\right)\\) en évidence (facteur commun à tous les termes) : \\(\\left(a + b\\right)^{2} - 7\\left(a + b\\right) = \\left(a + b\\right)\\left[\\left(a + b\\right) - 7\\right] = \\left(a + b\\right)\\left(a + b - 7\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\left(a + b\\right)^{2} - 7\\left(a + b\\right)",
+  "methode": "Mise en évidence",
+  "ok": true,
+  "resultat_tex": "\\left(a + b\\right)\\left(a + b - 7\\right)",
+  "secours": false
+ },
+ "(a + b)^3 - (a + b)^2": {
+  "etapes": [
+   {
+    "html": "On met \\(\\left(a + b\\right)^{2}\\) en évidence (facteur commun à tous les termes) : \\(\\left(a + b\\right)^{3} - \\left(a + b\\right)^{2} = \\left(a + b\\right)^{2}\\left[\\left(a + b\\right) - 1\\right] = \\left(a + b\\right)^{2}\\left(a + b - 1\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\left(a + b\\right)^{3} - \\left(a + b\\right)^{2}",
+  "methode": "Mise en évidence",
+  "ok": true,
+  "resultat_tex": "\\left(a + b\\right)^{2}\\left(a + b - 1\\right)",
+  "secours": false
+ },
+ "(ax + 2y)^2 - (2x - 3y)^2": {
+  "etapes": [
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=ax + 2y\\) et \\(B=2x - 3y\\) : \\(\\left(ax + 2y\\right)^{2} - \\left(2x - 3y\\right)^{2} = \\left(ax - 2x + 5y\\right)\\left(ax + 2x - y\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(ax - 2x + 5y\\) ne se factorise pas davantage.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(ax + 2x - y\\) ne se factorise pas davantage.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\left(ax + 2y\\right)^{2} - \\left(2x - 3y\\right)^{2}",
+  "methode": "Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(ax - 2x + 5y\\right)\\left(ax + 2x - y\\right)",
+  "secours": false
+ },
+ "(p - x)^2": {
+  "etapes": [
+   {
+    "html": "\\(\\left(p - x\\right)^{2}\\) est déjà complètement factorisé.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\left(p - x\\right)^{2}",
+  "methode": "Déjà factorisé",
+  "ok": true,
+  "resultat_tex": "\\left(p - x\\right)^{2}",
+  "secours": false
+ },
+ "(uv)^2 - u": {
+  "etapes": [
+   {
+    "html": "On met \\(u\\) en évidence (facteur commun à tous les termes) : \\(\\left(uv\\right)^{2} - u = u\\left(uv^{2} - 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(uv^{2} - 1\\) ne se factorise pas davantage.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\left(uv\\right)^{2} - u",
+  "methode": "Mise en évidence",
+  "ok": true,
+  "resultat_tex": "u\\left(uv^{2} - 1\\right)",
+  "secours": false
+ },
+ "(x + 1)(x - 1)": {
+  "etapes": [
+   {
+    "html": "\\(\\left(x + 1\\right)\\left(x - 1\\right)\\) est déjà complètement factorisé.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\left(x + 1\\right)\\left(x - 1\\right)",
+  "methode": "Déjà factorisé",
+  "ok": true,
+  "resultat_tex": "\\left(x + 1\\right)\\left(x - 1\\right)",
+  "secours": false
+ },
+ "(x + 1)^2 - 16": {
+  "etapes": [
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x + 1\\) et \\(B=4\\) : \\(\\left(x + 1\\right)^{2} - 16 = \\left(x - 3\\right)\\left(x + 5\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\left(x + 1\\right)^{2} - 16",
+  "methode": "Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(x - 3\\right)\\left(x + 5\\right)",
+  "secours": false
+ },
+ "(x - 2y)(a - b) - (b - a)(2x + y)": {
+  "etapes": [
+   {
+    "html": "On met \\(\\left(a - b\\right)\\) en évidence (facteur commun à tous les termes) : \\(\\left(x - 2y\\right)\\left(a - b\\right) - \\left(b - a\\right)\\left(2x + y\\right) = \\left(a - b\\right)\\left[\\left(x - 2y\\right) + \\left(2x + y\\right)\\right] = \\left(a - b\\right)\\left(3x - y\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\left(x - 2y\\right)\\left(a - b\\right) - \\left(b - a\\right)\\left(2x + y\\right)",
+  "methode": "Mise en évidence",
+  "ok": true,
+  "resultat_tex": "\\left(a - b\\right)\\left(3x - y\\right)",
+  "secours": false
+ },
+ "(x+1)^2 - (x+1)": {
+  "etapes": [
+   {
+    "html": "On met \\(\\left(x + 1\\right)\\) en évidence (facteur commun à tous les termes) : \\(\\left(x + 1\\right)^{2} - \\left(x + 1\\right) = \\left(x + 1\\right)\\left[\\left(x + 1\\right) - 1\\right] = x\\left(x + 1\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\left(x + 1\\right)^{2} - \\left(x + 1\\right)",
+  "methode": "Mise en évidence",
+  "ok": true,
+  "resultat_tex": "x\\left(x + 1\\right)",
+  "secours": false
+ },
+ "(x+1)^2-(x-1)^2": {
+  "etapes": [
+   {
+    "html": "\\(\\left(x + 1\\right)^{2} - \\left(x - 1\\right)^{2}\\) est un monôme (déjà un produit) : il n'y a rien à factoriser.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\left(x + 1\\right)^{2} - \\left(x - 1\\right)^{2}",
+  "methode": "Déjà factorisé",
+  "ok": true,
+  "resultat_tex": "4x",
+  "secours": false
+ },
+ "(x^2 - 1)(x + 2)": {
+  "etapes": [
+   {
+    "html": "L'expression est déjà un produit : on factorise chacun de ses facteurs.",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x\\) et \\(B=1\\) : \\(x^{2} - 1 = \\left(x - 1\\right)\\left(x + 1\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\left(x^{2} - 1\\right)\\left(x + 2\\right)",
+  "methode": "Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(x - 1\\right)\\left(x + 1\\right)\\left(x + 2\\right)",
+  "secours": false
+ },
+ "(x^2 - 1)^2": {
+  "etapes": [
+   {
+    "html": "L'expression est déjà un produit : on factorise chacun de ses facteurs.",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x\\) et \\(B=1\\) : \\(x^{2} - 1 = \\left(x - 1\\right)\\left(x + 1\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\left(x^{2} - 1\\right)^{2}",
+  "methode": "Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(x - 1\\right)^{2}\\left(x + 1\\right)^{2}",
+  "secours": false
+ },
+ "(x^2 - 1)^2 + 4x^2": {
+  "etapes": [
+   {
+    "html": "On reconnaît un carré parfait (produit remarquable \\(A^2+2AB+B^2=(A+B)^2\\)) avec \\(A=x^{2}\\) et \\(B=1\\) : \\(\\left(x^{2} - 1\\right)^{2} + 4x^{2} = \\left(x^{2} + 1\\right)^{2}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(x^{2} + 1\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot 1 = -4\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\left(x^{2} - 1\\right)^{2} + 4x^{2}",
+  "methode": "Carré parfait · Non factorisable dans ℝ (Δ < 0)",
+  "ok": true,
+  "resultat_tex": "\\left(x^{2} + 1\\right)^{2}",
+  "secours": false
+ },
+ "(y^2 + b^2)^2 - 4b^2y^2": {
+  "etapes": [
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=b^{2} + y^{2}\\) et \\(B=2by\\) : \\(\\left(y^{2} + b^{2}\\right)^{2} - 4b^{2}y^{2} = \\left(b^{2} + y^{2} - 2by\\right)\\left(b^{2} + y^{2} + 2by\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît un carré parfait (produit remarquable \\(A^2-2AB+B^2=(A-B)^2\\)) avec \\(A=b\\) et \\(B=y\\) : \\(b^{2} + y^{2} - 2by = \\left(b - y\\right)^{2}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît un carré parfait (produit remarquable \\(A^2+2AB+B^2=(A+B)^2\\)) avec \\(A=b\\) et \\(B=y\\) : \\(b^{2} + y^{2} + 2by = \\left(b + y\\right)^{2}\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\left(y^{2} + b^{2}\\right)^{2} - 4b^{2}y^{2}",
+  "methode": "Différence de carrés · Carré parfait",
+  "ok": true,
+  "resultat_tex": "\\left(b - y\\right)^{2}\\left(b + y\\right)^{2}",
+  "secours": false
+ },
+ "-(x-1)^2": {
+  "etapes": [
+   {
+    "html": "\\(-\\left(x - 1\\right)^{2}\\) est déjà complètement factorisé.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "-\\left(x - 1\\right)^{2}",
+  "methode": "Déjà factorisé",
+  "ok": true,
+  "resultat_tex": "-\\left(x - 1\\right)^{2}",
+  "secours": false
+ },
+ "-2x^2 + 9x - 4": {
+  "etapes": [
+   {
+    "html": "On met \\(-1\\) en évidence : \\(-2x^{2} + 9x - 4 = -\\left(2x^{2} - 9x + 4\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme non unitaire \\(2x^{2} - 9x + 4\\) (\\(a=2\\)) : on cherche un zéro « évident » — on vérifie que \\(x_0=\\frac{1}{2}\\) convient.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(x - \\frac{1}{2}\\) est donc un facteur ; en divisant, on complète : \\(2x^{2} - 9x + 4 = \\left(x - \\frac{1}{2}\\right)\\left(2x - 8\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Pour écrire ça sans fraction, on multiplie le premier facteur par 2 et on divise le second par 2 (le produit ne change pas) : \\(2x^{2} - 9x + 4 = \\left(2x - 1\\right)\\left(x - 4\\right)\\) (méthode du zéro évident).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "-2x^{2} + 9x - 4",
+  "methode": "Mise en évidence · Zéro évident",
+  "ok": true,
+  "resultat_tex": "-\\left(2x - 1\\right)\\left(x - 4\\right)",
+  "secours": false
+ },
+ "-x - y": {
+  "etapes": [
+   {
+    "html": "On met \\(-1\\) en évidence (facteur commun à tous les termes) : \\(-x - y = -\\left(x + y\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "-x - y",
+  "methode": "Mise en évidence",
+  "ok": true,
+  "resultat_tex": "-\\left(x + y\\right)",
+  "secours": false
+ },
+ "-x^2 + 2x - 1": {
+  "etapes": [
+   {
+    "html": "On reconnaît l'opposé d'un carré parfait (produit remarquable \\(-\\left(A^2-2AB+B^2\\right)=-(A-B)^2\\)) avec \\(A=x\\) et \\(B=1\\) : \\(-x^{2} + 2x - 1 = -\\left(x - 1\\right)^{2}\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "-x^{2} + 2x - 1",
+  "methode": "Carré parfait",
+  "ok": true,
+  "resultat_tex": "-\\left(x - 1\\right)^{2}",
+  "secours": false
+ },
+ "-y^2 + 10y - 9": {
+  "etapes": [
+   {
+    "html": "On met \\(-1\\) en évidence : \\(-y^{2} + 10y - 9 = -\\left(y^{2} - 10y + 9\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme unitaire \\(y^{2} - 10y + 9\\) (\\(a=1\\)) : on cherche deux nombres \\(u\\) et \\(v\\) tels que \\(u+v=-10\\) et \\(u \\cdot v=9\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On trouve \\(u=-1\\) et \\(v=-9\\), car \\(-1-9=-10\\) et \\(-1\\times(-9)=9\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Méthode Somme-Produit : \\(y^{2} - 10y + 9 = \\left(y - 1\\right)\\left(y - 9\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "-y^{2} + 10y - 9",
+  "methode": "Mise en évidence · Somme-Produit",
+  "ok": true,
+  "resultat_tex": "-\\left(y - 1\\right)\\left(y - 9\\right)",
+  "secours": false
+ },
+ "0,5x^2 - 2": {
+  "etapes": [
+   {
+    "html": "On met \\(\\frac{1}{2}\\) en évidence pour travailler avec des coefficients entiers : \\(0{,}5x^{2} - 2 = \\frac{1}{2}\\left(x^{2} - 4\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x\\) et \\(B=2\\) : \\(x^{2} - 4 = \\left(x - 2\\right)\\left(x + 2\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "0{,}5x^{2} - 2",
+  "methode": "Mise en évidence · Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\frac{1}{2}\\left(x - 2\\right)\\left(x + 2\\right)",
+  "secours": false
+ },
+ "1 + 2x^2 + x^4": {
+  "etapes": [
+   {
+    "html": "On reconnaît un carré parfait (produit remarquable \\(A^2+2AB+B^2=(A+B)^2\\)) avec \\(A=1\\) et \\(B=x^{2}\\) : \\(1 + 2x^{2} + x^{4} = \\left(1 + x^{2}\\right)^{2}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(x^{2} + 1\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot 1 = -4\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "1 + 2x^{2} + x^{4}",
+  "methode": "Carré parfait · Non factorisable dans ℝ (Δ < 0)",
+  "ok": true,
+  "resultat_tex": "\\left(1 + x^{2}\\right)^{2}",
+  "secours": false
+ },
+ "1 + 9a + 27a^2 + 27a^3": {
+  "etapes": [
+   {
+    "html": "On reconnaît le cube d'un binôme (produit remarquable \\(A^3+3A^2B+3AB^2+B^3=(A+B)^3\\)) avec \\(A=1\\) et \\(B=3a\\) : \\(1 + 9a + 27a^{2} + 27a^{3} = \\left(1 + 3a\\right)^{3}\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "1 + 9a + 27a^{2} + 27a^{3}",
+  "methode": "Cube d'un binôme",
+  "ok": true,
+  "resultat_tex": "\\left(1 + 3a\\right)^{3}",
+  "secours": false
+ },
+ "1 - (x - y)^2": {
+  "etapes": [
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=1\\) et \\(B=x - y\\) : \\(1 - \\left(x - y\\right)^{2} = \\left(1 - x + y\\right)\\left(1 + x - y\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "1 - \\left(x - y\\right)^{2}",
+  "methode": "Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(1 - x + y\\right)\\left(1 + x - y\\right)",
+  "secours": false
+ },
+ "1 - x^2": {
+  "etapes": [
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=1\\) et \\(B=x\\) : \\(1 - x^{2} = \\left(1 - x\\right)\\left(1 + x\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "1 - x^{2}",
+  "methode": "Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(1 - x\\right)\\left(1 + x\\right)",
+  "secours": false
+ },
+ "12x^4 - 8x^2 + 16x": {
+  "etapes": [
+   {
+    "html": "On met \\(4x\\) en évidence (facteur commun à tous les termes) : \\(12x^{4} - 8x^{2} + 16x = 4x\\left(3x^{3} - 2x + 4\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(3x^{3} - 2x + 4\\) n'a pas de racine évidente : il ne se factorise pas davantage avec les méthodes du cours.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "12x^{4} - 8x^{2} + 16x",
+  "methode": "Mise en évidence",
+  "ok": true,
+  "resultat_tex": "4x\\left(3x^{3} - 2x + 4\\right)",
+  "secours": false
+ },
+ "16 - (3x + 2)^2": {
+  "etapes": [
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=4\\) et \\(B=3x + 2\\) : \\(16 - \\left(3x + 2\\right)^{2} = \\left(2 - 3x\\right)\\left(3x + 6\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On met \\(3\\) en évidence (facteur commun à tous les termes) : \\(3x + 6 = 3\\left(x + 2\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "16 - \\left(3x + 2\\right)^{2}",
+  "methode": "Différence de carrés · Mise en évidence",
+  "ok": true,
+  "resultat_tex": "3\\left(2 - 3x\\right)\\left(x + 2\\right)",
+  "secours": false
+ },
+ "16a^4 + 2ab^3": {
+  "etapes": [
+   {
+    "html": "On met \\(2a\\) en évidence (facteur commun à tous les termes) : \\(16a^{4} + 2ab^{3} = 2a\\left(8a^{3} + b^{3}\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une somme de deux cubes (produit remarquable \\(A^3+B^3=(A+B)\\left(A^2-AB+B^2\\right)\\)) avec \\(A=2a\\) et \\(B=b\\) : \\(8a^{3} + b^{3} = \\left(2a + b\\right)\\left(4a^{2} - 2ab + b^{2}\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(4a^{2} - 2ab + b^{2}\\) ne se factorise pas davantage.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "16a^{4} + 2ab^{3}",
+  "methode": "Mise en évidence · Somme de cubes",
+  "ok": true,
+  "resultat_tex": "2a\\left(2a + b\\right)\\left(4a^{2} - 2ab + b^{2}\\right)",
+  "secours": false
+ },
+ "16u^2 - 72u + 81": {
+  "etapes": [
+   {
+    "html": "On reconnaît un carré parfait (produit remarquable \\(A^2-2AB+B^2=(A-B)^2\\)) avec \\(A=4u\\) et \\(B=9\\) : \\(16u^{2} - 72u + 81 = \\left(4u - 9\\right)^{2}\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "16u^{2} - 72u + 81",
+  "methode": "Carré parfait",
+  "ok": true,
+  "resultat_tex": "\\left(4u - 9\\right)^{2}",
+  "secours": false
+ },
+ "16x^8 - 641x^4 + 625": {
+  "etapes": [
+   {
+    "html": "On pose \\(u = x^{4}\\) (changement de variable) : \\(16x^{8} - 641x^{4} + 625 = 16u^{2} - 641u + 625\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme non unitaire \\(16u^{2} - 641u + 625\\) (\\(a=16\\)) : on cherche un zéro « évident » — on vérifie que \\(u_0=1\\) convient.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(u - 1\\) est donc un facteur ; en divisant, on complète : \\(16u^{2} - 641u + 625 = \\left(u - 1\\right)\\left(16u - 625\\right)\\) (méthode du zéro évident).",
+    "type": "texte"
+   },
+   {
+    "html": "On revient à \\(x\\) en remplaçant \\(u\\) par \\(x^{4}\\) : \\(16x^{8} - 641x^{4} + 625 = \\left(x^{4} - 1\\right)\\left(16x^{4} - 625\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x^{2}\\) et \\(B=1\\) : \\(x^{4} - 1 = \\left(x^{2} - 1\\right)\\left(x^{2} + 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x\\) et \\(B=1\\) : \\(x^{2} - 1 = \\left(x - 1\\right)\\left(x + 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(x^{2} + 1\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot 1 = -4\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=4x^{2}\\) et \\(B=25\\) : \\(16x^{4} - 625 = \\left(4x^{2} - 25\\right)\\left(4x^{2} + 25\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=2x\\) et \\(B=5\\) : \\(4x^{2} - 25 = \\left(2x - 5\\right)\\left(2x + 5\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(4x^{2} + 25\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 4 \\cdot 25 = -400\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 4\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "16x^{8} - 641x^{4} + 625",
+  "methode": "Changement de variable · Zéro évident · Différence de carrés · Non factorisable dans ℝ (Δ < 0)",
+  "ok": true,
+  "resultat_tex": "\\left(x - 1\\right)\\left(x + 1\\right)\\left(x^{2} + 1\\right)\\left(2x - 5\\right)\\left(2x + 5\\right)\\left(4x^{2} + 25\\right)",
+  "secours": false
+ },
+ "17x^2 + 288x - 17": {
+  "etapes": [
+   {
+    "html": "Trinôme non unitaire \\(17x^{2} + 288x - 17\\) (\\(a=17\\)) : on cherche un zéro « évident » — on vérifie que \\(x_0=\\frac{1}{17}\\) convient.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(x - \\frac{1}{17}\\) est donc un facteur ; en divisant, on complète : \\(17x^{2} + 288x - 17 = \\left(x - \\frac{1}{17}\\right)\\left(17x + 289\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Pour écrire ça sans fraction, on multiplie le premier facteur par 17 et on divise le second par 17 (le produit ne change pas) : \\(17x^{2} + 288x - 17 = \\left(17x - 1\\right)\\left(x + 17\\right)\\) (méthode du zéro évident).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "17x^{2} + 288x - 17",
+  "methode": "Zéro évident",
+  "ok": true,
+  "resultat_tex": "\\left(17x - 1\\right)\\left(x + 17\\right)",
+  "secours": false
+ },
+ "2(x - y)^2": {
+  "etapes": [
+   {
+    "html": "\\(2\\left(x - y\\right)^{2}\\) est déjà complètement factorisé.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "2\\left(x - y\\right)^{2}",
+  "methode": "Déjà factorisé",
+  "ok": true,
+  "resultat_tex": "2\\left(x - y\\right)^{2}",
+  "secours": false
+ },
+ "27c^3 + 1/64": {
+  "etapes": [
+   {
+    "html": "On reconnaît une somme de deux cubes (produit remarquable \\(A^3+B^3=(A+B)\\left(A^2-AB+B^2\\right)\\)) avec \\(A=3c\\) et \\(B=\\frac{1}{4}\\) : \\(27c^{3} + \\frac{1}{64} = \\left(3c + \\frac{1}{4}\\right)\\left(9c^{2} - \\frac{3c}{4} + \\frac{1}{16}\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(9c^{2} - \\frac{3}{4}c + \\frac{1}{16}\\) : \\(\\Delta = b^2 - 4ac = (-\\frac{3}{4})^2 - 4 \\cdot 9 \\cdot (\\frac{1}{16}) = -\\frac{27}{16}\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 9\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "27c^{3} + \\frac{1}{64}",
+  "methode": "Somme de cubes · Non factorisable dans ℝ (Δ < 0)",
+  "ok": true,
+  "resultat_tex": "\\left(3c + \\frac{1}{4}\\right)\\left(9c^{2} - \\frac{3c}{4} + \\frac{1}{16}\\right)",
+  "secours": false
+ },
+ "27x^6 + 215x^3 - 8": {
+  "etapes": [
+   {
+    "html": "On pose \\(u = x^{3}\\) (changement de variable) : \\(27x^{6} + 215x^{3} - 8 = 27u^{2} + 215u - 8\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme non unitaire \\(27u^{2} + 215u - 8\\) (\\(a=27\\)) : on cherche un zéro « évident » — on vérifie que \\(u_0=\\frac{1}{27}\\) convient.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(u - \\frac{1}{27}\\) est donc un facteur ; en divisant, on complète : \\(27u^{2} + 215u - 8 = \\left(u - \\frac{1}{27}\\right)\\left(27u + 216\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Pour écrire ça sans fraction, on multiplie le premier facteur par 27 et on divise le second par 27 (le produit ne change pas) : \\(27u^{2} + 215u - 8 = \\left(27u - 1\\right)\\left(u + 8\\right)\\) (méthode du zéro évident).",
+    "type": "texte"
+   },
+   {
+    "html": "On revient à \\(x\\) en remplaçant \\(u\\) par \\(x^{3}\\) : \\(27x^{6} + 215x^{3} - 8 = \\left(27x^{3} - 1\\right)\\left(x^{3} + 8\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux cubes (produit remarquable \\(A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)\\)) avec \\(A=3x\\) et \\(B=1\\) : \\(27x^{3} - 1 = \\left(3x - 1\\right)\\left(9x^{2} + 3x + 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(9x^{2} + 3x + 1\\) : \\(\\Delta = b^2 - 4ac = 3^2 - 4 \\cdot 9 \\cdot 1 = -27\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 9\\), il est toujours positif.",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une somme de deux cubes (produit remarquable \\(A^3+B^3=(A+B)\\left(A^2-AB+B^2\\right)\\)) avec \\(A=x\\) et \\(B=2\\) : \\(x^{3} + 8 = \\left(x + 2\\right)\\left(x^{2} - 2x + 4\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(x^{2} - 2x + 4\\) : \\(\\Delta = b^2 - 4ac = (-2)^2 - 4 \\cdot 1 \\cdot 4 = -12\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "27x^{6} + 215x^{3} - 8",
+  "methode": "Changement de variable · Zéro évident · Différence de cubes · Non factorisable dans ℝ (Δ < 0) · Somme de cubes",
+  "ok": true,
+  "resultat_tex": "\\left(3x - 1\\right)\\left(9x^{2} + 3x + 1\\right)\\left(x + 2\\right)\\left(x^{2} - 2x + 4\\right)",
+  "secours": false
+ },
+ "2^3x - 8": {
+  "etapes": [
+   {
+    "html": "On met \\(8\\) en évidence (facteur commun à tous les termes) : \\(2^{3}x - 8 = 8\\left(x - 1\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "2^{3}x - 8",
+  "methode": "Mise en évidence",
+  "ok": true,
+  "resultat_tex": "8\\left(x - 1\\right)",
+  "secours": false
+ },
+ "2a(a - b) - (a - b)^2": {
+  "etapes": [
+   {
+    "html": "On met \\(\\left(a - b\\right)\\) en évidence (facteur commun à tous les termes) : \\(2a\\left(a - b\\right) - \\left(a - b\\right)^{2} = \\left(a - b\\right)\\left[2a - \\left(a - b\\right)\\right] = \\left(a - b\\right)\\left(a + b\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "2a\\left(a - b\\right) - \\left(a - b\\right)^{2}",
+  "methode": "Mise en évidence",
+  "ok": true,
+  "resultat_tex": "\\left(a - b\\right)\\left(a + b\\right)",
+  "secours": false
+ },
+ "2a^3b - a^2b^2 + b^2 - 2ab": {
+  "etapes": [
+   {
+    "html": "On met \\(b\\) en évidence (facteur commun à tous les termes) : \\(2a^{3}b - a^{2}b^{2} + b^{2} - 2ab = b\\left(2a^{3} - a^{2}b + b - 2a\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On groupe les termes : \\(2a^{3} - a^{2}b + b - 2a = \\left(2a^{3} - a^{2}b\\right) + \\left(-2a + b\\right) = a^{2}\\left(2a - b\\right) - \\left(2a - b\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On met \\(\\left(2a - b\\right)\\) en évidence (facteur commun à tous les termes) : \\(a^{2}\\left(2a - b\\right) - \\left(2a - b\\right) = \\left(2a - b\\right)\\left(a^{2} - 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=a\\) et \\(B=1\\) : \\(a^{2} - 1 = \\left(a - 1\\right)\\left(a + 1\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "2a^{3}b - a^{2}b^{2} + b^{2} - 2ab",
+  "methode": "Mise en évidence · Groupements · Différence de carrés",
+  "ok": true,
+  "resultat_tex": "b\\left(2a - b\\right)\\left(a - 1\\right)\\left(a + 1\\right)",
+  "secours": false
+ },
+ "2a^6 - 6a^4 + 6a^2 - 2": {
+  "etapes": [
+   {
+    "html": "On met \\(2\\) en évidence (facteur commun à tous les termes) : \\(2a^{6} - 6a^{4} + 6a^{2} - 2 = 2\\left(a^{6} - 3a^{4} + 3a^{2} - 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît le cube d'un binôme (produit remarquable \\(A^3-3A^2B+3AB^2-B^3=(A-B)^3\\)) avec \\(A=a^{2}\\) et \\(B=1\\) : \\(a^{6} - 3a^{4} + 3a^{2} - 1 = \\left(a^{2} - 1\\right)^{3}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=a\\) et \\(B=1\\) : \\(a^{2} - 1 = \\left(a - 1\\right)\\left(a + 1\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "2a^{6} - 6a^{4} + 6a^{2} - 2",
+  "methode": "Mise en évidence · Cube d'un binôme · Différence de carrés",
+  "ok": true,
+  "resultat_tex": "2\\left(a - 1\\right)^{3}\\left(a + 1\\right)^{3}",
+  "secours": false
+ },
+ "2x/3 + 4/3": {
+  "etapes": [
+   {
+    "html": "On met \\(\\frac{2}{3}\\) en évidence pour travailler avec des coefficients entiers : \\(\\frac{2x}{3} + \\frac{4}{3} = \\frac{2}{3}\\left(x + 2\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\frac{2x}{3} + \\frac{4}{3}",
+  "methode": "Mise en évidence",
+  "ok": true,
+  "resultat_tex": "\\frac{2}{3}\\left(x + 2\\right)",
+  "secours": false
+ },
+ "2x^2 + 198x - 200": {
+  "etapes": [
+   {
+    "html": "On met \\(2\\) en évidence (facteur commun à tous les termes) : \\(2x^{2} + 198x - 200 = 2\\left(x^{2} + 99x - 100\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme unitaire \\(x^{2} + 99x - 100\\) (\\(a=1\\)) : on cherche deux nombres \\(u\\) et \\(v\\) tels que \\(u+v=99\\) et \\(u \\cdot v=-100\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On trouve \\(u=-1\\) et \\(v=100\\), car \\(-1+100=99\\) et \\(-1\\times100=-100\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Méthode Somme-Produit : \\(x^{2} + 99x - 100 = \\left(x - 1\\right)\\left(x + 100\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "2x^{2} + 198x - 200",
+  "methode": "Mise en évidence · Somme-Produit",
+  "ok": true,
+  "resultat_tex": "2\\left(x - 1\\right)\\left(x + 100\\right)",
+  "secours": false
+ },
+ "2x^2 + 20x + 42": {
+  "etapes": [
+   {
+    "html": "On met \\(2\\) en évidence (facteur commun à tous les termes) : \\(2x^{2} + 20x + 42 = 2\\left(x^{2} + 10x + 21\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme unitaire \\(x^{2} + 10x + 21\\) (\\(a=1\\)) : on cherche deux nombres \\(u\\) et \\(v\\) tels que \\(u+v=10\\) et \\(u \\cdot v=21\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On trouve \\(u=3\\) et \\(v=7\\), car \\(3+7=10\\) et \\(3\\times7=21\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Méthode Somme-Produit : \\(x^{2} + 10x + 21 = \\left(x + 3\\right)\\left(x + 7\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "2x^{2} + 20x + 42",
+  "methode": "Mise en évidence · Somme-Produit",
+  "ok": true,
+  "resultat_tex": "2\\left(x + 3\\right)\\left(x + 7\\right)",
+  "secours": false
+ },
+ "2x^2 + 6x + 3": {
+  "etapes": [
+   {
+    "html": "Trinôme \\(2x^{2} + 6x + 3\\) : \\(\\Delta = b^2 - 4ac = 6^2 - 4 \\cdot 2 \\cdot 3 = 12\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta > 0\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-3 - \\sqrt{3}}{2}\\) et \\(x_2 = \\frac{-3 + \\sqrt{3}}{2}\\) \\((\\approx -2{,}366\\) et \\(\\approx -0{,}634)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "D'où \\(2x^{2} + 6x + 3 = 2\\left(x + \\frac{3 + \\sqrt{3}}{2}\\right)\\left(x + \\frac{3 - \\sqrt{3}}{2}\\right)\\) (on écrit \\(a\\left(x-x_1\\right)\\left(x-x_2\\right)\\)).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "2x^{2} + 6x + 3",
+  "methode": "Formule (discriminant)",
+  "ok": true,
+  "resultat_tex": "2\\left(x + \\frac{3 + \\sqrt{3}}{2}\\right)\\left(x + \\frac{3 - \\sqrt{3}}{2}\\right)",
+  "secours": false
+ },
+ "2x^2 + x + 3": {
+  "etapes": [
+   {
+    "html": "Trinôme \\(2x^{2} + x + 3\\) : \\(\\Delta = b^2 - 4ac = 1^2 - 4 \\cdot 2 \\cdot 3 = -23\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 2\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "2x^{2} + x + 3",
+  "methode": "Non factorisable dans ℝ (Δ < 0)",
+  "ok": true,
+  "resultat_tex": "2x^{2} + x + 3",
+  "secours": false
+ },
+ "2x^2 - 32": {
+  "etapes": [
+   {
+    "html": "On met \\(2\\) en évidence (facteur commun à tous les termes) : \\(2x^{2} - 32 = 2\\left(x^{2} - 16\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x\\) et \\(B=4\\) : \\(x^{2} - 16 = \\left(x - 4\\right)\\left(x + 4\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "2x^{2} - 32",
+  "methode": "Mise en évidence · Différence de carrés",
+  "ok": true,
+  "resultat_tex": "2\\left(x - 4\\right)\\left(x + 4\\right)",
+  "secours": false
+ },
+ "2x^2 - 4x - 4": {
+  "etapes": [
+   {
+    "html": "On met \\(2\\) en évidence (facteur commun à tous les termes) : \\(2x^{2} - 4x - 4 = 2\\left(x^{2} - 2x - 2\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(x^{2} - 2x - 2\\) : \\(\\Delta = b^2 - 4ac = (-2)^2 - 4 \\cdot 1 \\cdot (-2) = 12\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta > 0\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = 1 - \\sqrt{3}\\) et \\(x_2 = 1 + \\sqrt{3}\\) \\((\\approx -0{,}7321\\) et \\(\\approx 2{,}7321)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "D'où \\(x^{2} - 2x - 2 = \\left(x - 1 + \\sqrt{3}\\right)\\left(x - 1 - \\sqrt{3}\\right)\\) (on écrit \\(a\\left(x-x_1\\right)\\left(x-x_2\\right)\\)).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "2x^{2} - 4x - 4",
+  "methode": "Mise en évidence · Formule (discriminant)",
+  "ok": true,
+  "resultat_tex": "2\\left(x - 1 + \\sqrt{3}\\right)\\left(x - 1 - \\sqrt{3}\\right)",
+  "secours": false
+ },
+ "2x^2 - x - 1": {
+  "etapes": [
+   {
+    "html": "Trinôme non unitaire \\(2x^{2} - x - 1\\) (\\(a=2\\)) : on cherche un zéro « évident » — on vérifie que \\(x_0=1\\) convient.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(x - 1\\) est donc un facteur ; en divisant, on complète : \\(2x^{2} - x - 1 = \\left(x - 1\\right)\\left(2x + 1\\right)\\) (méthode du zéro évident).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "2x^{2} - x - 1",
+  "methode": "Zéro évident",
+  "ok": true,
+  "resultat_tex": "\\left(x - 1\\right)\\left(2x + 1\\right)",
+  "secours": false
+ },
+ "2x^3 + 16y^3": {
+  "etapes": [
+   {
+    "html": "On met \\(2\\) en évidence (facteur commun à tous les termes) : \\(2x^{3} + 16y^{3} = 2\\left(x^{3} + 8y^{3}\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une somme de deux cubes (produit remarquable \\(A^3+B^3=(A+B)\\left(A^2-AB+B^2\\right)\\)) avec \\(A=x\\) et \\(B=2y\\) : \\(x^{3} + 8y^{3} = \\left(x + 2y\\right)\\left(x^{2} - 2xy + 4y^{2}\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(x^{2} - 2xy + 4y^{2}\\) ne se factorise pas davantage.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "2x^{3} + 16y^{3}",
+  "methode": "Mise en évidence · Somme de cubes",
+  "ok": true,
+  "resultat_tex": "2\\left(x + 2y\\right)\\left(x^{2} - 2xy + 4y^{2}\\right)",
+  "secours": false
+ },
+ "3(x+2)": {
+  "etapes": [
+   {
+    "html": "\\(3\\left(x + 2\\right)\\) est déjà complètement factorisé.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "3\\left(x + 2\\right)",
+  "methode": "Déjà factorisé",
+  "ok": true,
+  "resultat_tex": "3\\left(x + 2\\right)",
+  "secours": false
+ },
+ "3a^3b^4 - 12a^2b^3": {
+  "etapes": [
+   {
+    "html": "On met \\(3a^{2}b^{3}\\) en évidence (facteur commun à tous les termes) : \\(3a^{3}b^{4} - 12a^{2}b^{3} = 3a^{2}b^{3}\\left(ab - 4\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(ab - 4\\) ne se factorise pas davantage.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "3a^{3}b^{4} - 12a^{2}b^{3}",
+  "methode": "Mise en évidence",
+  "ok": true,
+  "resultat_tex": "3a^{2}b^{3}\\left(ab - 4\\right)",
+  "secours": false
+ },
+ "3t^2 + 5t + 12": {
+  "etapes": [
+   {
+    "html": "Trinôme \\(3t^{2} + 5t + 12\\) : \\(\\Delta = b^2 - 4ac = 5^2 - 4 \\cdot 3 \\cdot 12 = -119\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 3\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "3t^{2} + 5t + 12",
+  "methode": "Non factorisable dans ℝ (Δ < 0)",
+  "ok": true,
+  "resultat_tex": "3t^{2} + 5t + 12",
+  "secours": false
+ },
+ "3x^2 - 27x": {
+  "etapes": [
+   {
+    "html": "On met \\(3x\\) en évidence (facteur commun à tous les termes) : \\(3x^{2} - 27x = 3x\\left(x - 9\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "3x^{2} - 27x",
+  "methode": "Mise en évidence",
+  "ok": true,
+  "resultat_tex": "3x\\left(x - 9\\right)",
+  "secours": false
+ },
+ "3x^2 - 6x - 7": {
+  "etapes": [
+   {
+    "html": "Trinôme \\(3x^{2} - 6x - 7\\) : \\(\\Delta = b^2 - 4ac = (-6)^2 - 4 \\cdot 3 \\cdot (-7) = 120\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta > 0\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{3 - \\sqrt{30}}{3}\\) et \\(x_2 = \\frac{3 + \\sqrt{30}}{3}\\) \\((\\approx -0{,}8257\\) et \\(\\approx 2{,}8257)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "D'où \\(3x^{2} - 6x - 7 = 3\\left(x - \\frac{3 - \\sqrt{30}}{3}\\right)\\left(x - \\frac{3 + \\sqrt{30}}{3}\\right)\\) (on écrit \\(a\\left(x-x_1\\right)\\left(x-x_2\\right)\\)).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "3x^{2} - 6x - 7",
+  "methode": "Formule (discriminant)",
+  "ok": true,
+  "resultat_tex": "3\\left(x - \\frac{3 - \\sqrt{30}}{3}\\right)\\left(x - \\frac{3 + \\sqrt{30}}{3}\\right)",
+  "secours": false
+ },
+ "3x^5 - 15x^3 + 12x": {
+  "etapes": [
+   {
+    "html": "On met \\(3x\\) en évidence (facteur commun à tous les termes) : \\(3x^{5} - 15x^{3} + 12x = 3x\\left(x^{4} - 5x^{2} + 4\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On pose \\(u = x^{2}\\) (changement de variable) : \\(x^{4} - 5x^{2} + 4 = u^{2} - 5u + 4\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme unitaire \\(u^{2} - 5u + 4\\) (\\(a=1\\)) : on cherche deux nombres \\(p\\) et \\(q\\) tels que \\(p+q=-5\\) et \\(p \\cdot q=4\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On trouve \\(p=-1\\) et \\(q=-4\\), car \\(-1-4=-5\\) et \\(-1\\times(-4)=4\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Méthode Somme-Produit : \\(u^{2} - 5u + 4 = \\left(u - 1\\right)\\left(u - 4\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On revient à \\(x\\) en remplaçant \\(u\\) par \\(x^{2}\\) : \\(x^{4} - 5x^{2} + 4 = \\left(x^{2} - 1\\right)\\left(x^{2} - 4\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x\\) et \\(B=1\\) : \\(x^{2} - 1 = \\left(x - 1\\right)\\left(x + 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x\\) et \\(B=2\\) : \\(x^{2} - 4 = \\left(x - 2\\right)\\left(x + 2\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "3x^{5} - 15x^{3} + 12x",
+  "methode": "Mise en évidence · Changement de variable · Somme-Produit · Différence de carrés",
+  "ok": true,
+  "resultat_tex": "3x\\left(x - 1\\right)\\left(x + 1\\right)\\left(x - 2\\right)\\left(x + 2\\right)",
+  "secours": false
+ },
+ "3z^3 + 2z^2 - 12z - 8": {
+  "etapes": [
+   {
+    "html": "On groupe les termes : \\(3z^{3} + 2z^{2} - 12z - 8 = \\left(3z^{3} + 2z^{2}\\right) + \\left(-12z - 8\\right) = z^{2}\\left(3z + 2\\right) - 4\\left(3z + 2\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On met \\(\\left(3z + 2\\right)\\) en évidence (facteur commun à tous les termes) : \\(z^{2}\\left(3z + 2\\right) - 4\\left(3z + 2\\right) = \\left(3z + 2\\right)\\left(z^{2} - 4\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=z\\) et \\(B=2\\) : \\(z^{2} - 4 = \\left(z - 2\\right)\\left(z + 2\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "3z^{3} + 2z^{2} - 12z - 8",
+  "methode": "Groupements · Mise en évidence · Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(3z + 2\\right)\\left(z - 2\\right)\\left(z + 2\\right)",
+  "secours": false
+ },
+ "4(x - 2)^2 - 1": {
+  "etapes": [
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=2\\left(x - 2\\right)\\) et \\(B=1\\) : \\(4\\left(x - 2\\right)^{2} - 1 = \\left(2x - 5\\right)\\left(2x - 3\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "4\\left(x - 2\\right)^{2} - 1",
+  "methode": "Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(2x - 5\\right)\\left(2x - 3\\right)",
+  "secours": false
+ },
+ "40x^2 + 3x - 28": {
+  "etapes": [
+   {
+    "html": "Trinôme non unitaire \\(40x^{2} + 3x - 28\\) (\\(a=40\\)) : on cherche un zéro « évident » — on vérifie que \\(x_0=\\frac{4}{5}\\) convient.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(x - \\frac{4}{5}\\) est donc un facteur ; en divisant, on complète : \\(40x^{2} + 3x - 28 = \\left(x - \\frac{4}{5}\\right)\\left(40x + 35\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Pour écrire ça sans fraction, on multiplie le premier facteur par 5 et on divise le second par 5 (le produit ne change pas) : \\(40x^{2} + 3x - 28 = \\left(5x - 4\\right)\\left(8x + 7\\right)\\) (méthode du zéro évident).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "40x^{2} + 3x - 28",
+  "methode": "Zéro évident",
+  "ok": true,
+  "resultat_tex": "\\left(5x - 4\\right)\\left(8x + 7\\right)",
+  "secours": false
+ },
+ "48z^2 - 216z + 243": {
+  "etapes": [
+   {
+    "html": "On met \\(3\\) en évidence (facteur commun à tous les termes) : \\(48z^{2} - 216z + 243 = 3\\left(16z^{2} - 72z + 81\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît un carré parfait (produit remarquable \\(A^2-2AB+B^2=(A-B)^2\\)) avec \\(A=4z\\) et \\(B=9\\) : \\(16z^{2} - 72z + 81 = \\left(4z - 9\\right)^{2}\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "48z^{2} - 216z + 243",
+  "methode": "Mise en évidence · Carré parfait",
+  "ok": true,
+  "resultat_tex": "3\\left(4z - 9\\right)^{2}",
+  "secours": false
+ },
+ "4p^2 - 12pq + 9q^2": {
+  "etapes": [
+   {
+    "html": "On reconnaît un carré parfait (produit remarquable \\(A^2-2AB+B^2=(A-B)^2\\)) avec \\(A=2p\\) et \\(B=3q\\) : \\(4p^{2} - 12pq + 9q^{2} = \\left(2p - 3q\\right)^{2}\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "4p^{2} - 12pq + 9q^{2}",
+  "methode": "Carré parfait",
+  "ok": true,
+  "resultat_tex": "\\left(2p - 3q\\right)^{2}",
+  "secours": false
+ },
+ "4x^2 - 12x - 11": {
+  "etapes": [
+   {
+    "html": "Trinôme \\(4x^{2} - 12x - 11\\) : \\(\\Delta = b^2 - 4ac = (-12)^2 - 4 \\cdot 4 \\cdot (-11) = 320\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta > 0\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{3 - 2\\sqrt{5}}{2}\\) et \\(x_2 = \\frac{3 + 2\\sqrt{5}}{2}\\) \\((\\approx -0{,}7361\\) et \\(\\approx 3{,}7361)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "D'où \\(4x^{2} - 12x - 11 = 4\\left(x - \\frac{3 - 2\\sqrt{5}}{2}\\right)\\left(x - \\frac{3 + 2\\sqrt{5}}{2}\\right)\\) (on écrit \\(a\\left(x-x_1\\right)\\left(x-x_2\\right)\\)).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "4x^{2} - 12x - 11",
+  "methode": "Formule (discriminant)",
+  "ok": true,
+  "resultat_tex": "4\\left(x - \\frac{3 - 2\\sqrt{5}}{2}\\right)\\left(x - \\frac{3 + 2\\sqrt{5}}{2}\\right)",
+  "secours": false
+ },
+ "4x^2 - 12xy + 9y^2": {
+  "etapes": [
+   {
+    "html": "On reconnaît un carré parfait (produit remarquable \\(A^2-2AB+B^2=(A-B)^2\\)) avec \\(A=2x\\) et \\(B=3y\\) : \\(4x^{2} - 12xy + 9y^{2} = \\left(2x - 3y\\right)^{2}\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "4x^{2} - 12xy + 9y^{2}",
+  "methode": "Carré parfait",
+  "ok": true,
+  "resultat_tex": "\\left(2x - 3y\\right)^{2}",
+  "secours": false
+ },
+ "4x^4 + 1": {
+  "etapes": [
+   {
+    "html": "On complète le carré (on ajoute et on retire \\(4x^{2}\\)) : \\(4x^{4} + 1 = \\left(2x^{2} + 1\\right)^{2} - \\left(2x\\right)^{2}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=2x^{2} + 1\\) et \\(B=2x\\) : \\(\\left(2x^{2} + 1\\right)^{2} - \\left(2x\\right)^{2} = \\left(2x^{2} + 1 - 2x\\right)\\left(2x^{2} + 1 + 2x\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(2x^{2} - 2x + 1\\) : \\(\\Delta = b^2 - 4ac = (-2)^2 - 4 \\cdot 2 \\cdot 1 = -4\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 2\\), il est toujours positif.",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(2x^{2} + 2x + 1\\) : \\(\\Delta = b^2 - 4ac = 2^2 - 4 \\cdot 2 \\cdot 1 = -4\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 2\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "4x^{4} + 1",
+  "methode": "Compléter le carré · Différence de carrés · Non factorisable dans ℝ (Δ < 0)",
+  "ok": true,
+  "resultat_tex": "\\left(2x^{2} + 1 - 2x\\right)\\left(2x^{2} + 1 + 2x\\right)",
+  "secours": false
+ },
+ "4z^2 + 5z + 1": {
+  "etapes": [
+   {
+    "html": "Trinôme non unitaire \\(4z^{2} + 5z + 1\\) (\\(a=4\\)) : on cherche un zéro « évident » — on vérifie que \\(z_0=-1\\) convient.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(z + 1\\) est donc un facteur ; en divisant, on complète : \\(4z^{2} + 5z + 1 = \\left(z + 1\\right)\\left(4z + 1\\right)\\) (méthode du zéro évident).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "4z^{2} + 5z + 1",
+  "methode": "Zéro évident",
+  "ok": true,
+  "resultat_tex": "\\left(z + 1\\right)\\left(4z + 1\\right)",
+  "secours": false
+ },
+ "5": {
+  "etapes": [
+   {
+    "html": "C'est un nombre : il n'y a rien à factoriser.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "5",
+  "methode": "Rien à factoriser",
+  "ok": true,
+  "resultat_tex": "5",
+  "secours": false
+ },
+ "54a^6 - 2": {
+  "etapes": [
+   {
+    "html": "On met \\(2\\) en évidence (facteur commun à tous les termes) : \\(54a^{6} - 2 = 2\\left(27a^{6} - 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux cubes (produit remarquable \\(A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)\\)) avec \\(A=3a^{2}\\) et \\(B=1\\) : \\(27a^{6} - 1 = \\left(3a^{2} - 1\\right)\\left(9a^{4} + 3a^{2} + 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(3a^{2} - 1\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 3 \\cdot (-1) = 12\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta = 12\\) n'est pas un carré parfait : les zéros de ce facteur sont irrationnels, on le garde tel quel.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(9a^{4} + 3a^{2} + 1\\) n'a pas de racine évidente : il ne se factorise pas davantage avec les méthodes du cours.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "54a^{6} - 2",
+  "methode": "Mise en évidence · Différence de cubes",
+  "ok": true,
+  "resultat_tex": "2\\left(3a^{2} - 1\\right)\\left(9a^{4} + 3a^{2} + 1\\right)",
+  "secours": false
+ },
+ "64c^6 - 91c^3 + 27": {
+  "etapes": [
+   {
+    "html": "On pose \\(u = c^{3}\\) (changement de variable) : \\(64c^{6} - 91c^{3} + 27 = 64u^{2} - 91u + 27\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme non unitaire \\(64u^{2} - 91u + 27\\) (\\(a=64\\)) : on cherche un zéro « évident » — on vérifie que \\(u_0=1\\) convient.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(u - 1\\) est donc un facteur ; en divisant, on complète : \\(64u^{2} - 91u + 27 = \\left(u - 1\\right)\\left(64u - 27\\right)\\) (méthode du zéro évident).",
+    "type": "texte"
+   },
+   {
+    "html": "On revient à \\(c\\) en remplaçant \\(u\\) par \\(c^{3}\\) : \\(64c^{6} - 91c^{3} + 27 = \\left(c^{3} - 1\\right)\\left(64c^{3} - 27\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux cubes (produit remarquable \\(A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)\\)) avec \\(A=c\\) et \\(B=1\\) : \\(c^{3} - 1 = \\left(c - 1\\right)\\left(c^{2} + c + 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(c^{2} + c + 1\\) : \\(\\Delta = b^2 - 4ac = 1^2 - 4 \\cdot 1 \\cdot 1 = -3\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux cubes (produit remarquable \\(A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)\\)) avec \\(A=4c\\) et \\(B=3\\) : \\(64c^{3} - 27 = \\left(4c - 3\\right)\\left(16c^{2} + 12c + 9\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(16c^{2} + 12c + 9\\) : \\(\\Delta = b^2 - 4ac = 12^2 - 4 \\cdot 16 \\cdot 9 = -432\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 16\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "64c^{6} - 91c^{3} + 27",
+  "methode": "Changement de variable · Zéro évident · Différence de cubes · Non factorisable dans ℝ (Δ < 0)",
+  "ok": true,
+  "resultat_tex": "\\left(c - 1\\right)\\left(c^{2} + c + 1\\right)\\left(4c - 3\\right)\\left(16c^{2} + 12c + 9\\right)",
+  "secours": false
+ },
+ "64x^6 - 1": {
+  "etapes": [
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=8x^{3}\\) et \\(B=1\\) : \\(64x^{6} - 1 = \\left(8x^{3} - 1\\right)\\left(8x^{3} + 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux cubes (produit remarquable \\(A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)\\)) avec \\(A=2x\\) et \\(B=1\\) : \\(8x^{3} - 1 = \\left(2x - 1\\right)\\left(4x^{2} + 2x + 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(4x^{2} + 2x + 1\\) : \\(\\Delta = b^2 - 4ac = 2^2 - 4 \\cdot 4 \\cdot 1 = -12\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 4\\), il est toujours positif.",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une somme de deux cubes (produit remarquable \\(A^3+B^3=(A+B)\\left(A^2-AB+B^2\\right)\\)) avec \\(A=2x\\) et \\(B=1\\) : \\(8x^{3} + 1 = \\left(2x + 1\\right)\\left(4x^{2} - 2x + 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(4x^{2} - 2x + 1\\) : \\(\\Delta = b^2 - 4ac = (-2)^2 - 4 \\cdot 4 \\cdot 1 = -12\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 4\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "64x^{6} - 1",
+  "methode": "Différence de carrés · Différence de cubes · Non factorisable dans ℝ (Δ < 0) · Somme de cubes",
+  "ok": true,
+  "resultat_tex": "\\left(2x - 1\\right)\\left(4x^{2} + 2x + 1\\right)\\left(2x + 1\\right)\\left(4x^{2} - 2x + 1\\right)",
+  "secours": false
+ },
+ "6x^2 + 5x + 1": {
+  "etapes": [
+   {
+    "html": "Trinôme non unitaire \\(6x^{2} + 5x + 1\\) (\\(a=6\\)) : on cherche un zéro « évident » — on vérifie que \\(x_0=-\\frac{1}{2}\\) convient.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(x + \\frac{1}{2}\\) est donc un facteur ; en divisant, on complète : \\(6x^{2} + 5x + 1 = \\left(x + \\frac{1}{2}\\right)\\left(6x + 2\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Pour écrire ça sans fraction, on multiplie le premier facteur par 2 et on divise le second par 2 (le produit ne change pas) : \\(6x^{2} + 5x + 1 = \\left(2x + 1\\right)\\left(3x + 1\\right)\\) (méthode du zéro évident).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "6x^{2} + 5x + 1",
+  "methode": "Zéro évident",
+  "ok": true,
+  "resultat_tex": "\\left(2x + 1\\right)\\left(3x + 1\\right)",
+  "secours": false
+ },
+ "6x^2 - 6": {
+  "etapes": [
+   {
+    "html": "On met \\(6\\) en évidence (facteur commun à tous les termes) : \\(6x^{2} - 6 = 6\\left(x^{2} - 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x\\) et \\(B=1\\) : \\(x^{2} - 1 = \\left(x - 1\\right)\\left(x + 1\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "6x^{2} - 6",
+  "methode": "Mise en évidence · Différence de carrés",
+  "ok": true,
+  "resultat_tex": "6\\left(x - 1\\right)\\left(x + 1\\right)",
+  "secours": false
+ },
+ "6x^2-7x-3": {
+  "etapes": [
+   {
+    "html": "Trinôme non unitaire \\(6x^{2} - 7x - 3\\) (\\(a=6\\)) : on cherche un zéro « évident » — on vérifie que \\(x_0=-\\frac{1}{3}\\) convient.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(x + \\frac{1}{3}\\) est donc un facteur ; en divisant, on complète : \\(6x^{2} - 7x - 3 = \\left(x + \\frac{1}{3}\\right)\\left(6x - 9\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Pour écrire ça sans fraction, on multiplie le premier facteur par 3 et on divise le second par 3 (le produit ne change pas) : \\(6x^{2} - 7x - 3 = \\left(3x + 1\\right)\\left(2x - 3\\right)\\) (méthode du zéro évident).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "6x^{2} - 7x - 3",
+  "methode": "Zéro évident",
+  "ok": true,
+  "resultat_tex": "\\left(3x + 1\\right)\\left(2x - 3\\right)",
+  "secours": false
+ },
+ "6x^2y": {
+  "etapes": [
+   {
+    "html": "\\(6x^{2}y\\) est un monôme (déjà un produit) : il n'y a rien à factoriser.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "6x^{2}y",
+  "methode": "Déjà factorisé",
+  "ok": true,
+  "resultat_tex": "6x^{2}y",
+  "secours": false
+ },
+ "7x^4 - 61x^2 - 18": {
+  "etapes": [
+   {
+    "html": "On pose \\(u = x^{2}\\) (changement de variable) : \\(7x^{4} - 61x^{2} - 18 = 7u^{2} - 61u - 18\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme non unitaire \\(7u^{2} - 61u - 18\\) (\\(a=7\\)) : on cherche un zéro « évident » — on vérifie que \\(u_0=-\\frac{2}{7}\\) convient.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(u + \\frac{2}{7}\\) est donc un facteur ; en divisant, on complète : \\(7u^{2} - 61u - 18 = \\left(u + \\frac{2}{7}\\right)\\left(7u - 63\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Pour écrire ça sans fraction, on multiplie le premier facteur par 7 et on divise le second par 7 (le produit ne change pas) : \\(7u^{2} - 61u - 18 = \\left(7u + 2\\right)\\left(u - 9\\right)\\) (méthode du zéro évident).",
+    "type": "texte"
+   },
+   {
+    "html": "On revient à \\(x\\) en remplaçant \\(u\\) par \\(x^{2}\\) : \\(7x^{4} - 61x^{2} - 18 = \\left(7x^{2} + 2\\right)\\left(x^{2} - 9\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(7x^{2} + 2\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 7 \\cdot 2 = -56\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 7\\), il est toujours positif.",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x\\) et \\(B=3\\) : \\(x^{2} - 9 = \\left(x - 3\\right)\\left(x + 3\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "7x^{4} - 61x^{2} - 18",
+  "methode": "Changement de variable · Zéro évident · Non factorisable dans ℝ (Δ < 0) · Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(7x^{2} + 2\\right)\\left(x - 3\\right)\\left(x + 3\\right)",
+  "secours": false
+ },
+ "81y^2 - 4z^2": {
+  "etapes": [
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=9y\\) et \\(B=2z\\) : \\(81y^{2} - 4z^{2} = \\left(9y - 2z\\right)\\left(9y + 2z\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "81y^{2} - 4z^{2}",
+  "methode": "Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(9y - 2z\\right)\\left(9y + 2z\\right)",
+  "secours": false
+ },
+ "8a^4x^3 - 72b^2x^3 - a^4 + 9b^2": {
+  "etapes": [
+   {
+    "html": "On groupe les termes : \\(8a^{4}x^{3} - 72b^{2}x^{3} - a^{4} + 9b^{2} = \\left(8a^{4}x^{3} - 72b^{2}x^{3}\\right) + \\left(-a^{4} + 9b^{2}\\right) = 8x^{3}\\left(a^{2} - 3b\\right)\\left(a^{2} + 3b\\right) - \\left(a^{2} - 3b\\right)\\left(a^{2} + 3b\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On met \\(\\left(a^{2} - 3b\\right)\\left(a^{2} + 3b\\right)\\) en évidence (facteur commun à tous les termes) : \\(8x^{3}\\left(a^{2} - 3b\\right)\\left(a^{2} + 3b\\right) - \\left(a^{2} - 3b\\right)\\left(a^{2} + 3b\\right) = \\left(a^{2} - 3b\\right)\\left(a^{2} + 3b\\right)\\left(8x^{3} - 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux cubes (produit remarquable \\(A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)\\)) avec \\(A=2x\\) et \\(B=1\\) : \\(8x^{3} - 1 = \\left(2x - 1\\right)\\left(4x^{2} + 2x + 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(4x^{2} + 2x + 1\\) : \\(\\Delta = b^2 - 4ac = 2^2 - 4 \\cdot 4 \\cdot 1 = -12\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 4\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "8a^{4}x^{3} - 72b^{2}x^{3} - a^{4} + 9b^{2}",
+  "methode": "Groupements · Mise en évidence · Différence de cubes · Non factorisable dans ℝ (Δ < 0)",
+  "ok": true,
+  "resultat_tex": "\\left(a^{2} - 3b\\right)\\left(a^{2} + 3b\\right)\\left(2x - 1\\right)\\left(4x^{2} + 2x + 1\\right)",
+  "secours": false
+ },
+ "8c^3 + 6c + 12c^2 + 1": {
+  "etapes": [
+   {
+    "html": "On reconnaît le cube d'un binôme (produit remarquable \\(A^3+3A^2B+3AB^2+B^3=(A+B)^3\\)) avec \\(A=2c\\) et \\(B=1\\) : \\(8c^{3} + 6c + 12c^{2} + 1 = \\left(2c + 1\\right)^{3}\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "8c^{3} + 6c + 12c^{2} + 1",
+  "methode": "Cube d'un binôme",
+  "ok": true,
+  "resultat_tex": "\\left(2c + 1\\right)^{3}",
+  "secours": false
+ },
+ "8x^3 + 27": {
+  "etapes": [
+   {
+    "html": "On reconnaît une somme de deux cubes (produit remarquable \\(A^3+B^3=(A+B)\\left(A^2-AB+B^2\\right)\\)) avec \\(A=2x\\) et \\(B=3\\) : \\(8x^{3} + 27 = \\left(2x + 3\\right)\\left(4x^{2} - 6x + 9\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(4x^{2} - 6x + 9\\) : \\(\\Delta = b^2 - 4ac = (-6)^2 - 4 \\cdot 4 \\cdot 9 = -108\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 4\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "8x^{3} + 27",
+  "methode": "Somme de cubes · Non factorisable dans ℝ (Δ < 0)",
+  "ok": true,
+  "resultat_tex": "\\left(2x + 3\\right)\\left(4x^{2} - 6x + 9\\right)",
+  "secours": false
+ },
+ "9(x - 3)^2 - 4": {
+  "etapes": [
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=3\\left(x - 3\\right)\\) et \\(B=2\\) : \\(9\\left(x - 3\\right)^{2} - 4 = \\left(3x - 11\\right)\\left(3x - 7\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "9\\left(x - 3\\right)^{2} - 4",
+  "methode": "Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(3x - 11\\right)\\left(3x - 7\\right)",
+  "secours": false
+ },
+ "9a^2 + 6a + 1": {
+  "etapes": [
+   {
+    "html": "On reconnaît un carré parfait (produit remarquable \\(A^2+2AB+B^2=(A+B)^2\\)) avec \\(A=3a\\) et \\(B=1\\) : \\(9a^{2} + 6a + 1 = \\left(3a + 1\\right)^{2}\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "9a^{2} + 6a + 1",
+  "methode": "Carré parfait",
+  "ok": true,
+  "resultat_tex": "\\left(3a + 1\\right)^{2}",
+  "secours": false
+ },
+ "9a^3 - ab^2": {
+  "etapes": [
+   {
+    "html": "On met \\(a\\) en évidence (facteur commun à tous les termes) : \\(9a^{3} - ab^{2} = a\\left(9a^{2} - b^{2}\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=3a\\) et \\(B=b\\) : \\(9a^{2} - b^{2} = \\left(3a - b\\right)\\left(3a + b\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "9a^{3} - ab^{2}",
+  "methode": "Mise en évidence · Différence de carrés",
+  "ok": true,
+  "resultat_tex": "a\\left(3a - b\\right)\\left(3a + b\\right)",
+  "secours": false
+ },
+ "9x^2 + 24x + 16": {
+  "etapes": [
+   {
+    "html": "On reconnaît un carré parfait (produit remarquable \\(A^2+2AB+B^2=(A+B)^2\\)) avec \\(A=3x\\) et \\(B=4\\) : \\(9x^{2} + 24x + 16 = \\left(3x + 4\\right)^{2}\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "9x^{2} + 24x + 16",
+  "methode": "Carré parfait",
+  "ok": true,
+  "resultat_tex": "\\left(3x + 4\\right)^{2}",
+  "secours": false
+ },
+ "9x^2 + 6x + 1": {
+  "etapes": [
+   {
+    "html": "On reconnaît un carré parfait (produit remarquable \\(A^2+2AB+B^2=(A+B)^2\\)) avec \\(A=3x\\) et \\(B=1\\) : \\(9x^{2} + 6x + 1 = \\left(3x + 1\\right)^{2}\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "9x^{2} + 6x + 1",
+  "methode": "Carré parfait",
+  "ok": true,
+  "resultat_tex": "\\left(3x + 1\\right)^{2}",
+  "secours": false
+ },
+ "9x^2 - 6x + 1": {
+  "etapes": [
+   {
+    "html": "On reconnaît un carré parfait (produit remarquable \\(A^2-2AB+B^2=(A-B)^2\\)) avec \\(A=3x\\) et \\(B=1\\) : \\(9x^{2} - 6x + 1 = \\left(3x - 1\\right)^{2}\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "9x^{2} - 6x + 1",
+  "methode": "Carré parfait",
+  "ok": true,
+  "resultat_tex": "\\left(3x - 1\\right)^{2}",
+  "secours": false
+ },
+ "9x^2+24x+16": {
+  "etapes": [
+   {
+    "html": "On reconnaît un carré parfait (produit remarquable \\(A^2+2AB+B^2=(A+B)^2\\)) avec \\(A=3x\\) et \\(B=4\\) : \\(9x^{2} + 24x + 16 = \\left(3x + 4\\right)^{2}\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "9x^{2} + 24x + 16",
+  "methode": "Carré parfait",
+  "ok": true,
+  "resultat_tex": "\\left(3x + 4\\right)^{2}",
+  "secours": false
+ },
+ "9x^4 + 16y^2 + 24x^2y": {
+  "etapes": [
+   {
+    "html": "On reconnaît un carré parfait (produit remarquable \\(A^2+2AB+B^2=(A+B)^2\\)) avec \\(A=3x^{2}\\) et \\(B=4y\\) : \\(9x^{4} + 16y^{2} + 24x^{2}y = \\left(3x^{2} + 4y\\right)^{2}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(3x^{2} + 4y\\) ne se factorise pas davantage.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "9x^{4} + 16y^{2} + 24x^{2}y",
+  "methode": "Carré parfait",
+  "ok": true,
+  "resultat_tex": "\\left(3x^{2} + 4y\\right)^{2}",
+  "secours": false
+ },
+ "9xy^2 + 18x^2y^4 - 36x^4y^2": {
+  "etapes": [
+   {
+    "html": "On met \\(9xy^{2}\\) en évidence (facteur commun à tous les termes) : \\(9xy^{2} + 18x^{2}y^{4} - 36x^{4}y^{2} = 9xy^{2}\\left(1 + 2xy^{2} - 4x^{3}\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(1 + 2xy^{2} - 4x^{3}\\) ne se factorise pas davantage.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "9xy^{2} + 18x^{2}y^{4} - 36x^{4}y^{2}",
+  "methode": "Mise en évidence",
+  "ok": true,
+  "resultat_tex": "9xy^{2}\\left(1 + 2xy^{2} - 4x^{3}\\right)",
+  "secours": false
+ },
+ "a + b + ax + bx + ay + by": {
+  "etapes": [
+   {
+    "html": "On groupe les termes : \\(a + b + ax + bx + ay + by = \\left(a + b\\right) + \\left(ax + bx\\right) + \\left(ay + by\\right) = \\left(a + b\\right) + x\\left(a + b\\right) + y\\left(a + b\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On met \\(\\left(a + b\\right)\\) en évidence (facteur commun à tous les termes) : \\(\\left(a + b\\right) + x\\left(a + b\\right) + y\\left(a + b\\right) = \\left(a + b\\right)\\left(1 + x + y\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "a + b + ax + bx + ay + by",
+  "methode": "Groupements · Mise en évidence",
+  "ok": true,
+  "resultat_tex": "\\left(a + b\\right)\\left(1 + x + y\\right)",
+  "secours": false
+ },
+ "a(a + b) - b(a + b) + (a + b)^2": {
+  "etapes": [
+   {
+    "html": "On met \\(\\left(a + b\\right)\\) en évidence (facteur commun à tous les termes) : \\(a\\left(a + b\\right) - b\\left(a + b\\right) + \\left(a + b\\right)^{2} = \\left(a + b\\right)\\left[a - b + \\left(a + b\\right)\\right] = \\left(a + b\\right)\\left(2a\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "a\\left(a + b\\right) - b\\left(a + b\\right) + \\left(a + b\\right)^{2}",
+  "methode": "Mise en évidence",
+  "ok": true,
+  "resultat_tex": "2a\\left(a + b\\right)",
+  "secours": false
+ },
+ "a^2 + 2a + 1": {
+  "etapes": [
+   {
+    "html": "On reconnaît un carré parfait (produit remarquable \\(A^2+2AB+B^2=(A+B)^2\\)) avec \\(A=a\\) et \\(B=1\\) : \\(a^{2} + 2a + 1 = \\left(a + 1\\right)^{2}\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "a^{2} + 2a + 1",
+  "methode": "Carré parfait",
+  "ok": true,
+  "resultat_tex": "\\left(a + 1\\right)^{2}",
+  "secours": false
+ },
+ "a^2 + 2ab - c^2 + b^2": {
+  "etapes": [
+   {
+    "html": "On groupe les termes : \\(a^{2} + 2ab - c^{2} + b^{2} = \\left(a^{2} + 2ab + b^{2}\\right) - c^{2} = \\left(a + b\\right)^{2} - c^{2}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=a + b\\) et \\(B=c\\) : \\(\\left(a + b\\right)^{2} - c^{2} = \\left(a + b - c\\right)\\left(a + b + c\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "a^{2} + 2ab - c^{2} + b^{2}",
+  "methode": "Groupements · Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(a + b - c\\right)\\left(a + b + c\\right)",
+  "secours": false
+ },
+ "a^2 - 1/16": {
+  "etapes": [
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=a\\) et \\(B=\\frac{1}{4}\\) : \\(a^{2} - \\frac{1}{16} = \\left(a - \\frac{1}{4}\\right)\\left(a + \\frac{1}{4}\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "a^{2} - \\frac{1}{16}",
+  "methode": "Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(a - \\frac{1}{4}\\right)\\left(a + \\frac{1}{4}\\right)",
+  "secours": false
+ },
+ "a^2 - b^2 + ac + bc": {
+  "etapes": [
+   {
+    "html": "On groupe les termes : \\(a^{2} - b^{2} + ac + bc = \\left(a^{2} - b^{2}\\right) + \\left(ac + bc\\right) = \\left(a - b\\right)\\left(a + b\\right) + c\\left(a + b\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On met \\(\\left(a + b\\right)\\) en évidence (facteur commun à tous les termes) : \\(\\left(a - b\\right)\\left(a + b\\right) + c\\left(a + b\\right) = \\left(a + b\\right)\\left[\\left(a - b\\right) + c\\right] = \\left(a + b\\right)\\left(a - b + c\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "a^{2} - b^{2} + ac + bc",
+  "methode": "Groupements · Mise en évidence",
+  "ok": true,
+  "resultat_tex": "\\left(a + b\\right)\\left(a - b + c\\right)",
+  "secours": false
+ },
+ "a^2 - b^2 + c^2": {
+  "etapes": [
+   {
+    "html": "\\(a^{2} - b^{2} + c^{2}\\) ne se factorise pas : c'est déjà sa forme la plus simple.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "a^{2} - b^{2} + c^{2}",
+  "methode": "Ne se factorise pas",
+  "ok": true,
+  "resultat_tex": "a^{2} - b^{2} + c^{2}",
+  "secours": false
+ },
+ "a^2b^2 - m^2": {
+  "etapes": [
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=ab\\) et \\(B=m\\) : \\(a^{2}b^{2} - m^{2} = \\left(ab - m\\right)\\left(ab + m\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(ab - m\\) ne se factorise pas davantage.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(ab + m\\) ne se factorise pas davantage.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "a^{2}b^{2} - m^{2}",
+  "methode": "Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(ab - m\\right)\\left(ab + m\\right)",
+  "secours": false
+ },
+ "a^3 + 3a^2 - a - 3": {
+  "etapes": [
+   {
+    "html": "On groupe les termes : \\(a^{3} + 3a^{2} - a - 3 = \\left(a^{3} + 3a^{2}\\right) + \\left(-a - 3\\right) = a^{2}\\left(a + 3\\right) - \\left(a + 3\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On met \\(\\left(a + 3\\right)\\) en évidence (facteur commun à tous les termes) : \\(a^{2}\\left(a + 3\\right) - \\left(a + 3\\right) = \\left(a + 3\\right)\\left(a^{2} - 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=a\\) et \\(B=1\\) : \\(a^{2} - 1 = \\left(a - 1\\right)\\left(a + 1\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "a^{3} + 3a^{2} - a - 3",
+  "methode": "Groupements · Mise en évidence · Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(a + 3\\right)\\left(a - 1\\right)\\left(a + 1\\right)",
+  "secours": false
+ },
+ "a^3 - 8b^3/27": {
+  "etapes": [
+   {
+    "html": "On reconnaît une différence de deux cubes (produit remarquable \\(A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)\\)) avec \\(A=a\\) et \\(B=\\frac{2b}{3}\\) : \\(a^{3} - \\frac{8b^{3}}{27} = \\left(a - \\frac{2b}{3}\\right)\\left(a^{2} + \\frac{2ab}{3} + \\frac{4b^{2}}{9}\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(a^{2} + \\frac{2ab}{3} + \\frac{4b^{2}}{9}\\) ne se factorise pas davantage.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "a^{3} - \\frac{8b^{3}}{27}",
+  "methode": "Différence de cubes",
+  "ok": true,
+  "resultat_tex": "\\left(a - \\frac{2b}{3}\\right)\\left(a^{2} + \\frac{2ab}{3} + \\frac{4b^{2}}{9}\\right)",
+  "secours": false
+ },
+ "a^3 - a^2 - a + 1": {
+  "etapes": [
+   {
+    "html": "On groupe les termes : \\(a^{3} - a^{2} - a + 1 = \\left(a^{3} - a^{2}\\right) + \\left(-a + 1\\right) = a^{2}\\left(a - 1\\right) - \\left(a - 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On met \\(\\left(a - 1\\right)\\) en évidence (facteur commun à tous les termes) : \\(a^{2}\\left(a - 1\\right) - \\left(a - 1\\right) = \\left(a - 1\\right)\\left(a^{2} - 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=a\\) et \\(B=1\\) : \\(a^{2} - 1 = \\left(a - 1\\right)\\left(a + 1\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "a^{3} - a^{2} - a + 1",
+  "methode": "Groupements · Mise en évidence · Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(a - 1\\right)^{2}\\left(a + 1\\right)",
+  "secours": false
+ },
+ "a^3x^2 - a^2x^3": {
+  "etapes": [
+   {
+    "html": "On met \\(a^{2}x^{2}\\) en évidence (facteur commun à tous les termes) : \\(a^{3}x^{2} - a^{2}x^{3} = a^{2}x^{2}\\left(a - x\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "a^{3}x^{2} - a^{2}x^{3}",
+  "methode": "Mise en évidence",
+  "ok": true,
+  "resultat_tex": "a^{2}x^{2}\\left(a - x\\right)",
+  "secours": false
+ },
+ "a^4 + 9b^2 - 6a^2b": {
+  "etapes": [
+   {
+    "html": "On reconnaît un carré parfait (produit remarquable \\(A^2-2AB+B^2=(A-B)^2\\)) avec \\(A=a^{2}\\) et \\(B=3b\\) : \\(a^{4} + 9b^{2} - 6a^{2}b = \\left(a^{2} - 3b\\right)^{2}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(a^{2} - 3b\\) ne se factorise pas davantage.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "a^{4} + 9b^{2} - 6a^{2}b",
+  "methode": "Carré parfait",
+  "ok": true,
+  "resultat_tex": "\\left(a^{2} - 3b\\right)^{2}",
+  "secours": false
+ },
+ "a^4 + a^2b^2 + b^4": {
+  "etapes": [
+   {
+    "html": "On complète le carré (on ajoute et on retire \\(a^{2}b^{2}\\)) : \\(a^{4} + a^{2}b^{2} + b^{4} = \\left(a^{2} + b^{2}\\right)^{2} - \\left(ab\\right)^{2}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=a^{2} + b^{2}\\) et \\(B=ab\\) : \\(\\left(a^{2} + b^{2}\\right)^{2} - \\left(ab\\right)^{2} = \\left(a^{2} + b^{2} - ab\\right)\\left(a^{2} + b^{2} + ab\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(a^{2} + b^{2} - ab\\) ne se factorise pas davantage.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(a^{2} + b^{2} + ab\\) ne se factorise pas davantage.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "a^{4} + a^{2}b^{2} + b^{4}",
+  "methode": "Compléter le carré · Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(a^{2} + b^{2} - ab\\right)\\left(a^{2} + b^{2} + ab\\right)",
+  "secours": false
+ },
+ "a^6 + 19a^3 - 216": {
+  "etapes": [
+   {
+    "html": "On pose \\(u = a^{3}\\) (changement de variable) : \\(a^{6} + 19a^{3} - 216 = u^{2} + 19u - 216\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme unitaire \\(u^{2} + 19u - 216\\) (\\(a=1\\)) : on cherche deux nombres \\(p\\) et \\(q\\) tels que \\(p+q=19\\) et \\(p \\cdot q=-216\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On trouve \\(p=-8\\) et \\(q=27\\), car \\(-8+27=19\\) et \\(-8\\times27=-216\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Méthode Somme-Produit : \\(u^{2} + 19u - 216 = \\left(u - 8\\right)\\left(u + 27\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On revient à \\(a\\) en remplaçant \\(u\\) par \\(a^{3}\\) : \\(a^{6} + 19a^{3} - 216 = \\left(a^{3} - 8\\right)\\left(a^{3} + 27\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux cubes (produit remarquable \\(A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)\\)) avec \\(A=a\\) et \\(B=2\\) : \\(a^{3} - 8 = \\left(a - 2\\right)\\left(a^{2} + 2a + 4\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(a^{2} + 2a + 4\\) : \\(\\Delta = b^2 - 4ac = 2^2 - 4 \\cdot 1 \\cdot 4 = -12\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une somme de deux cubes (produit remarquable \\(A^3+B^3=(A+B)\\left(A^2-AB+B^2\\right)\\)) avec \\(A=a\\) et \\(B=3\\) : \\(a^{3} + 27 = \\left(a + 3\\right)\\left(a^{2} - 3a + 9\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(a^{2} - 3a + 9\\) : \\(\\Delta = b^2 - 4ac = (-3)^2 - 4 \\cdot 1 \\cdot 9 = -27\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "a^{6} + 19a^{3} - 216",
+  "methode": "Changement de variable · Somme-Produit · Différence de cubes · Non factorisable dans ℝ (Δ < 0) · Somme de cubes",
+  "ok": true,
+  "resultat_tex": "\\left(a - 2\\right)\\left(a^{2} + 2a + 4\\right)\\left(a + 3\\right)\\left(a^{2} - 3a + 9\\right)",
+  "secours": false
+ },
+ "ax + bx + ay + by": {
+  "etapes": [
+   {
+    "html": "On groupe les termes : \\(ax + bx + ay + by = \\left(ax + bx\\right) + \\left(ay + by\\right) = x\\left(a + b\\right) + y\\left(a + b\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On met \\(\\left(a + b\\right)\\) en évidence (facteur commun à tous les termes) : \\(x\\left(a + b\\right) + y\\left(a + b\\right) = \\left(a + b\\right)\\left(x + y\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "ax + bx + ay + by",
+  "methode": "Groupements · Mise en évidence",
+  "ok": true,
+  "resultat_tex": "\\left(a + b\\right)\\left(x + y\\right)",
+  "secours": false
+ },
+ "ax+bx+ay+by": {
+  "etapes": [
+   {
+    "html": "On groupe les termes : \\(ax + bx + ay + by = \\left(ax + bx\\right) + \\left(ay + by\\right) = x\\left(a + b\\right) + y\\left(a + b\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On met \\(\\left(a + b\\right)\\) en évidence (facteur commun à tous les termes) : \\(x\\left(a + b\\right) + y\\left(a + b\\right) = \\left(a + b\\right)\\left(x + y\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "ax + bx + ay + by",
+  "methode": "Groupements · Mise en évidence",
+  "ok": true,
+  "resultat_tex": "\\left(a + b\\right)\\left(x + y\\right)",
+  "secours": false
+ },
+ "ax^2 - ay^2 + bx^2 - by^2": {
+  "etapes": [
+   {
+    "html": "On groupe les termes : \\(ax^{2} - ay^{2} + bx^{2} - by^{2} = \\left(ax^{2} - ay^{2}\\right) + \\left(bx^{2} - by^{2}\\right) = a\\left(x - y\\right)\\left(x + y\\right) + b\\left(x - y\\right)\\left(x + y\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On met \\(\\left(x - y\\right)\\left(x + y\\right)\\) en évidence (facteur commun à tous les termes) : \\(a\\left(x - y\\right)\\left(x + y\\right) + b\\left(x - y\\right)\\left(x + y\\right) = \\left(x - y\\right)\\left(x + y\\right)\\left(a + b\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "ax^{2} - ay^{2} + bx^{2} - by^{2}",
+  "methode": "Groupements · Mise en évidence",
+  "ok": true,
+  "resultat_tex": "\\left(x - y\\right)\\left(x + y\\right)\\left(a + b\\right)",
+  "secours": false
+ },
+ "b^3 - a^3": {
+  "etapes": [
+   {
+    "html": "On reconnaît une différence de deux cubes (produit remarquable \\(A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)\\)) avec \\(A=b\\) et \\(B=a\\) : \\(b^{3} - a^{3} = \\left(b - a\\right)\\left(a^{2} + ab + b^{2}\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(a^{2} + ab + b^{2}\\) ne se factorise pas davantage.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "b^{3} - a^{3}",
+  "methode": "Différence de cubes",
+  "ok": true,
+  "resultat_tex": "\\left(b - a\\right)\\left(a^{2} + ab + b^{2}\\right)",
+  "secours": false
+ },
+ "d^3 - 8 + 3(d^2 - 4d + 4)": {
+  "etapes": [
+   {
+    "html": "\\(d = 2\\) est une racine évidente (le polynôme s'annule en \\(d = 2\\)), donc \\(d - 2\\) est un facteur ; en divisant : \\(d^{3} - 8 + 3\\left(d^{2} - 4d + 4\\right) = \\left(d - 2\\right)\\left(d^{2} + 5d - 2\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(d^{2} + 5d - 2\\) : \\(\\Delta = b^2 - 4ac = 5^2 - 4 \\cdot 1 \\cdot (-2) = 33\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta = 33\\) n'est pas un carré parfait : les zéros de ce facteur sont irrationnels, on le garde tel quel.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "d^{3} - 8 + 3\\left(d^{2} - 4d + 4\\right)",
+  "methode": "Racine évidente",
+  "ok": true,
+  "resultat_tex": "\\left(d - 2\\right)\\left(d^{2} + 5d - 2\\right)",
+  "secours": false
+ },
+ "ma + ap": {
+  "etapes": [
+   {
+    "html": "On met \\(a\\) en évidence (facteur commun à tous les termes) : \\(ma + ap = a\\left(m + p\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "ma + ap",
+  "methode": "Mise en évidence",
+  "ok": true,
+  "resultat_tex": "a\\left(m + p\\right)",
+  "secours": false
+ },
+ "p^2 - (px)^2": {
+  "etapes": [
+   {
+    "html": "On met \\(p^{2}\\) en évidence (facteur commun à tous les termes) : \\(p^{2} - \\left(px\\right)^{2} = p^{2}\\left(1 - x^{2}\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=1\\) et \\(B=x\\) : \\(1 - x^{2} = \\left(1 - x\\right)\\left(1 + x\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "p^{2} - \\left(px\\right)^{2}",
+  "methode": "Mise en évidence · Différence de carrés",
+  "ok": true,
+  "resultat_tex": "p^{2}\\left(1 - x\\right)\\left(1 + x\\right)",
+  "secours": false
+ },
+ "p^2 - x^2": {
+  "etapes": [
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=p\\) et \\(B=x\\) : \\(p^{2} - x^{2} = \\left(p - x\\right)\\left(p + x\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "p^{2} - x^{2}",
+  "methode": "Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(p - x\\right)\\left(p + x\\right)",
+  "secours": false
+ },
+ "p^3 - (px)^3": {
+  "etapes": [
+   {
+    "html": "On met \\(p^{3}\\) en évidence (facteur commun à tous les termes) : \\(p^{3} - \\left(px\\right)^{3} = p^{3}\\left(1 - x^{3}\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux cubes (produit remarquable \\(A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)\\)) avec \\(A=1\\) et \\(B=x\\) : \\(1 - x^{3} = \\left(1 - x\\right)\\left(x^{2} + x + 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(x^{2} + x + 1\\) : \\(\\Delta = b^2 - 4ac = 1^2 - 4 \\cdot 1 \\cdot 1 = -3\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "p^{3} - \\left(px\\right)^{3}",
+  "methode": "Mise en évidence · Différence de cubes · Non factorisable dans ℝ (Δ < 0)",
+  "ok": true,
+  "resultat_tex": "p^{3}\\left(1 - x\\right)\\left(x^{2} + x + 1\\right)",
+  "secours": false
+ },
+ "px + p^2": {
+  "etapes": [
+   {
+    "html": "On met \\(p\\) en évidence (facteur commun à tous les termes) : \\(px + p^{2} = p\\left(x + p\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "px + p^{2}",
+  "methode": "Mise en évidence",
+  "ok": true,
+  "resultat_tex": "p\\left(x + p\\right)",
+  "secours": false
+ },
+ "sqrt(x)": {
+  "erreur": "Pas de fonction ici (ln, exp, racine…) : seulement des polynômes, par exemple x^2-4 ou ax+bx.",
+  "ok": false
+ },
+ "t^2 + t + 1/4": {
+  "etapes": [
+   {
+    "html": "On reconnaît un carré parfait (produit remarquable \\(A^2+2AB+B^2=(A+B)^2\\)) avec \\(A=t\\) et \\(B=\\frac{1}{2}\\) : \\(t^{2} + t + \\frac{1}{4} = \\left(t + \\frac{1}{2}\\right)^{2}\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "t^{2} + t + \\frac{1}{4}",
+  "methode": "Carré parfait",
+  "ok": true,
+  "resultat_tex": "\\left(t + \\frac{1}{2}\\right)^{2}",
+  "secours": false
+ },
+ "u^2 - 6u + 8": {
+  "etapes": [
+   {
+    "html": "Trinôme unitaire \\(u^{2} - 6u + 8\\) (\\(a=1\\)) : on cherche deux nombres \\(p\\) et \\(q\\) tels que \\(p+q=-6\\) et \\(p \\cdot q=8\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On trouve \\(p=-2\\) et \\(q=-4\\), car \\(-2-4=-6\\) et \\(-2\\times(-4)=8\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Méthode Somme-Produit : \\(u^{2} - 6u + 8 = \\left(u - 2\\right)\\left(u - 4\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "u^{2} - 6u + 8",
+  "methode": "Somme-Produit",
+  "ok": true,
+  "resultat_tex": "\\left(u - 2\\right)\\left(u - 4\\right)",
+  "secours": false
+ },
+ "u^3 - 12u^2 + 48u - 64": {
+  "etapes": [
+   {
+    "html": "On reconnaît le cube d'un binôme (produit remarquable \\(A^3-3A^2B+3AB^2-B^3=(A-B)^3\\)) avec \\(A=u\\) et \\(B=4\\) : \\(u^{3} - 12u^{2} + 48u - 64 = \\left(u - 4\\right)^{3}\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "u^{3} - 12u^{2} + 48u - 64",
+  "methode": "Cube d'un binôme",
+  "ok": true,
+  "resultat_tex": "\\left(u - 4\\right)^{3}",
+  "secours": false
+ },
+ "x + y": {
+  "etapes": [
+   {
+    "html": "\\(x + y\\) est de degré 1 : il n'y a rien à factoriser.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x + y",
+  "methode": "Ne se factorise pas",
+  "ok": true,
+  "resultat_tex": "x + y",
+  "secours": false
+ },
+ "x + y + xy + y^2": {
+  "etapes": [
+   {
+    "html": "On groupe les termes : \\(x + y + xy + y^{2} = \\left(x + y\\right) + \\left(xy + y^{2}\\right) = \\left(x + y\\right) + y\\left(x + y\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On met \\(\\left(x + y\\right)\\) en évidence (facteur commun à tous les termes) : \\(\\left(x + y\\right) + y\\left(x + y\\right) = \\left(x + y\\right)\\left(1 + y\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x + y + xy + y^{2}",
+  "methode": "Groupements · Mise en évidence",
+  "ok": true,
+  "resultat_tex": "\\left(x + y\\right)\\left(1 + y\\right)",
+  "secours": false
+ },
+ "x - x^3": {
+  "etapes": [
+   {
+    "html": "On met \\(x\\) en évidence (facteur commun à tous les termes) : \\(x - x^{3} = x\\left(1 - x^{2}\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=1\\) et \\(B=x\\) : \\(1 - x^{2} = \\left(1 - x\\right)\\left(1 + x\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x - x^{3}",
+  "methode": "Mise en évidence · Différence de carrés",
+  "ok": true,
+  "resultat_tex": "x\\left(1 - x\\right)\\left(1 + x\\right)",
+  "secours": false
+ },
+ "x(a-b) + (b-a)": {
+  "etapes": [
+   {
+    "html": "On met \\(\\left(a - b\\right)\\) en évidence (facteur commun à tous les termes) : \\(x\\left(a - b\\right) + \\left(b - a\\right) = \\left(a - b\\right)\\left(x - 1\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x\\left(a - b\\right) + \\left(b - a\\right)",
+  "methode": "Mise en évidence",
+  "ok": true,
+  "resultat_tex": "\\left(a - b\\right)\\left(x - 1\\right)",
+  "secours": false
+ },
+ "x(x+1) + (x+1)": {
+  "etapes": [
+   {
+    "html": "On met \\(\\left(x + 1\\right)\\) en évidence (facteur commun à tous les termes) : \\(x\\left(x + 1\\right) + \\left(x + 1\\right) = \\left(x + 1\\right)\\left(x + 1\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x\\left(x + 1\\right) + \\left(x + 1\\right)",
+  "methode": "Mise en évidence",
+  "ok": true,
+  "resultat_tex": "\\left(x + 1\\right)^{2}",
+  "secours": false
+ },
+ "x/y": {
+  "erreur": "La division n'est permise que par un nombre (sinon ce n'est pas un polynôme).",
+  "ok": false
+ },
+ "x^12 - 125": {
+  "etapes": [
+   {
+    "html": "On reconnaît une différence de deux cubes (produit remarquable \\(A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)\\)) avec \\(A=x^{4}\\) et \\(B=5\\) : \\(x^{12} - 125 = \\left(x^{4} - 5\\right)\\left(x^{8} + 5x^{4} + 25\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(x^{4} - 5\\) n'a pas de racine évidente : il ne se factorise pas davantage avec les méthodes du cours.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(x^{8} + 5x^{4} + 25\\) n'a pas de racine évidente : il ne se factorise pas davantage avec les méthodes du cours.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{12} - 125",
+  "methode": "Différence de cubes",
+  "ok": true,
+  "resultat_tex": "\\left(x^{4} - 5\\right)\\left(x^{8} + 5x^{4} + 25\\right)",
+  "secours": false
+ },
+ "x^2 + 11x + 30": {
+  "etapes": [
+   {
+    "html": "Trinôme unitaire \\(x^{2} + 11x + 30\\) (\\(a=1\\)) : on cherche deux nombres \\(u\\) et \\(v\\) tels que \\(u+v=11\\) et \\(u \\cdot v=30\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On trouve \\(u=5\\) et \\(v=6\\), car \\(5+6=11\\) et \\(5\\times6=30\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Méthode Somme-Produit : \\(x^{2} + 11x + 30 = \\left(x + 5\\right)\\left(x + 6\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{2} + 11x + 30",
+  "methode": "Somme-Produit",
+  "ok": true,
+  "resultat_tex": "\\left(x + 5\\right)\\left(x + 6\\right)",
+  "secours": false
+ },
+ "x^2 + 4": {
+  "etapes": [
+   {
+    "html": "Trinôme \\(x^{2} + 4\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot 4 = -16\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{2} + 4",
+  "methode": "Non factorisable dans ℝ (Δ < 0)",
+  "ok": true,
+  "resultat_tex": "x^{2} + 4",
+  "secours": false
+ },
+ "x^2 + 4x + 2": {
+  "etapes": [
+   {
+    "html": "Trinôme \\(x^{2} + 4x + 2\\) : \\(\\Delta = b^2 - 4ac = 4^2 - 4 \\cdot 1 \\cdot 2 = 8\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta > 0\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -2 - \\sqrt{2}\\) et \\(x_2 = -2 + \\sqrt{2}\\) \\((\\approx -3{,}4142\\) et \\(\\approx -0{,}5858)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "D'où \\(x^{2} + 4x + 2 = \\left(x + 2 + \\sqrt{2}\\right)\\left(x + 2 - \\sqrt{2}\\right)\\) (on écrit \\(a\\left(x-x_1\\right)\\left(x-x_2\\right)\\)).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{2} + 4x + 2",
+  "methode": "Formule (discriminant)",
+  "ok": true,
+  "resultat_tex": "\\left(x + 2 + \\sqrt{2}\\right)\\left(x + 2 - \\sqrt{2}\\right)",
+  "secours": false
+ },
+ "x^2 + 5x + 2": {
+  "etapes": [
+   {
+    "html": "Trinôme \\(x^{2} + 5x + 2\\) : \\(\\Delta = b^2 - 4ac = 5^2 - 4 \\cdot 1 \\cdot 2 = 17\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta > 0\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-5 - \\sqrt{17}}{2}\\) et \\(x_2 = \\frac{-5 + \\sqrt{17}}{2}\\) \\((\\approx -4{,}5616\\) et \\(\\approx -0{,}4384)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "D'où \\(x^{2} + 5x + 2 = \\left(x + \\frac{5 + \\sqrt{17}}{2}\\right)\\left(x + \\frac{5 - \\sqrt{17}}{2}\\right)\\) (on écrit \\(a\\left(x-x_1\\right)\\left(x-x_2\\right)\\)).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{2} + 5x + 2",
+  "methode": "Formule (discriminant)",
+  "ok": true,
+  "resultat_tex": "\\left(x + \\frac{5 + \\sqrt{17}}{2}\\right)\\left(x + \\frac{5 - \\sqrt{17}}{2}\\right)",
+  "secours": false
+ },
+ "x^2 + 5x + 4": {
+  "etapes": [
+   {
+    "html": "Trinôme unitaire \\(x^{2} + 5x + 4\\) (\\(a=1\\)) : on cherche deux nombres \\(u\\) et \\(v\\) tels que \\(u+v=5\\) et \\(u \\cdot v=4\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On trouve \\(u=1\\) et \\(v=4\\), car \\(1+4=5\\) et \\(1\\times4=4\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Méthode Somme-Produit : \\(x^{2} + 5x + 4 = \\left(x + 1\\right)\\left(x + 4\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{2} + 5x + 4",
+  "methode": "Somme-Produit",
+  "ok": true,
+  "resultat_tex": "\\left(x + 1\\right)\\left(x + 4\\right)",
+  "secours": false
+ },
+ "x^2 + 5x + 6": {
+  "etapes": [
+   {
+    "html": "Trinôme unitaire \\(x^{2} + 5x + 6\\) (\\(a=1\\)) : on cherche deux nombres \\(u\\) et \\(v\\) tels que \\(u+v=5\\) et \\(u \\cdot v=6\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On trouve \\(u=2\\) et \\(v=3\\), car \\(2+3=5\\) et \\(2\\times3=6\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Méthode Somme-Produit : \\(x^{2} + 5x + 6 = \\left(x + 2\\right)\\left(x + 3\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{2} + 5x + 6",
+  "methode": "Somme-Produit",
+  "ok": true,
+  "resultat_tex": "\\left(x + 2\\right)\\left(x + 3\\right)",
+  "secours": false
+ },
+ "x^2 + 5x - 14": {
+  "etapes": [
+   {
+    "html": "Trinôme unitaire \\(x^{2} + 5x - 14\\) (\\(a=1\\)) : on cherche deux nombres \\(u\\) et \\(v\\) tels que \\(u+v=5\\) et \\(u \\cdot v=-14\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On trouve \\(u=-2\\) et \\(v=7\\), car \\(-2+7=5\\) et \\(-2\\times7=-14\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Méthode Somme-Produit : \\(x^{2} + 5x - 14 = \\left(x - 2\\right)\\left(x + 7\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{2} + 5x - 14",
+  "methode": "Somme-Produit",
+  "ok": true,
+  "resultat_tex": "\\left(x - 2\\right)\\left(x + 7\\right)",
+  "secours": false
+ },
+ "x^2 + 5xy + 6y^2": {
+  "etapes": [
+   {
+    "html": "Trinôme unitaire en \\(x\\) (les autres lettres jouent le rôle de nombres) : on cherche \\(u\\) et \\(v\\) tels que \\(u+v=5y\\) et \\(u \\cdot v=6y^{2}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On trouve \\(u=2y\\) et \\(v=3y\\). Méthode Somme-Produit : \\(x^{2} + 5xy + 6y^{2} = \\left(x + 2y\\right)\\left(x + 3y\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{2} + 5xy + 6y^{2}",
+  "methode": "Somme-Produit",
+  "ok": true,
+  "resultat_tex": "\\left(x + 2y\\right)\\left(x + 3y\\right)",
+  "secours": false
+ },
+ "x^2 + 6x + 7": {
+  "etapes": [
+   {
+    "html": "Trinôme \\(x^{2} + 6x + 7\\) : \\(\\Delta = b^2 - 4ac = 6^2 - 4 \\cdot 1 \\cdot 7 = 8\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta > 0\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -3 - \\sqrt{2}\\) et \\(x_2 = -3 + \\sqrt{2}\\) \\((\\approx -4{,}4142\\) et \\(\\approx -1{,}5858)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "D'où \\(x^{2} + 6x + 7 = \\left(x + 3 + \\sqrt{2}\\right)\\left(x + 3 - \\sqrt{2}\\right)\\) (on écrit \\(a\\left(x-x_1\\right)\\left(x-x_2\\right)\\)).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{2} + 6x + 7",
+  "methode": "Formule (discriminant)",
+  "ok": true,
+  "resultat_tex": "\\left(x + 3 + \\sqrt{2}\\right)\\left(x + 3 - \\sqrt{2}\\right)",
+  "secours": false
+ },
+ "x^2 + x + 1": {
+  "etapes": [
+   {
+    "html": "Trinôme \\(x^{2} + x + 1\\) : \\(\\Delta = b^2 - 4ac = 1^2 - 4 \\cdot 1 \\cdot 1 = -3\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{2} + x + 1",
+  "methode": "Non factorisable dans ℝ (Δ < 0)",
+  "ok": true,
+  "resultat_tex": "x^{2} + x + 1",
+  "secours": false
+ },
+ "x^2 + x + 1/4": {
+  "etapes": [
+   {
+    "html": "On reconnaît un carré parfait (produit remarquable \\(A^2+2AB+B^2=(A+B)^2\\)) avec \\(A=x\\) et \\(B=\\frac{1}{2}\\) : \\(x^{2} + x + \\frac{1}{4} = \\left(x + \\frac{1}{2}\\right)^{2}\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{2} + x + \\frac{1}{4}",
+  "methode": "Carré parfait",
+  "ok": true,
+  "resultat_tex": "\\left(x + \\frac{1}{2}\\right)^{2}",
+  "secours": false
+ },
+ "x^2 + y^2": {
+  "etapes": [
+   {
+    "html": "\\(x^{2} + y^{2}\\) ne se factorise pas : c'est déjà sa forme la plus simple.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{2} + y^{2}",
+  "methode": "Ne se factorise pas",
+  "ok": true,
+  "resultat_tex": "x^{2} + y^{2}",
+  "secours": false
+ },
+ "x^2 - 12": {
+  "etapes": [
+   {
+    "html": "Trinôme \\(x^{2} - 12\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot (-12) = 48\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta > 0\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -2\\sqrt{3}\\) et \\(x_2 = 2\\sqrt{3}\\) \\((\\approx -3{,}4641\\) et \\(\\approx 3{,}4641)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "D'où \\(x^{2} - 12 = \\left(x + 2\\sqrt{3}\\right)\\left(x - 2\\sqrt{3}\\right)\\) (on écrit \\(a\\left(x-x_1\\right)\\left(x-x_2\\right)\\)).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{2} - 12",
+  "methode": "Formule (discriminant)",
+  "ok": true,
+  "resultat_tex": "\\left(x + 2\\sqrt{3}\\right)\\left(x - 2\\sqrt{3}\\right)",
+  "secours": false
+ },
+ "x^2 - 2x - 35": {
+  "etapes": [
+   {
+    "html": "Trinôme unitaire \\(x^{2} - 2x - 35\\) (\\(a=1\\)) : on cherche deux nombres \\(u\\) et \\(v\\) tels que \\(u+v=-2\\) et \\(u \\cdot v=-35\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On trouve \\(u=5\\) et \\(v=-7\\), car \\(5-7=-2\\) et \\(5\\times(-7)=-35\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Méthode Somme-Produit : \\(x^{2} - 2x - 35 = \\left(x + 5\\right)\\left(x - 7\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{2} - 2x - 35",
+  "methode": "Somme-Produit",
+  "ok": true,
+  "resultat_tex": "\\left(x + 5\\right)\\left(x - 7\\right)",
+  "secours": false
+ },
+ "x^2 - 2x - 80": {
+  "etapes": [
+   {
+    "html": "Trinôme unitaire \\(x^{2} - 2x - 80\\) (\\(a=1\\)) : on cherche deux nombres \\(u\\) et \\(v\\) tels que \\(u+v=-2\\) et \\(u \\cdot v=-80\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On trouve \\(u=8\\) et \\(v=-10\\), car \\(8-10=-2\\) et \\(8\\times(-10)=-80\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Méthode Somme-Produit : \\(x^{2} - 2x - 80 = \\left(x + 8\\right)\\left(x - 10\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{2} - 2x - 80",
+  "methode": "Somme-Produit",
+  "ok": true,
+  "resultat_tex": "\\left(x + 8\\right)\\left(x - 10\\right)",
+  "secours": false
+ },
+ "x^2 - 4 = 0": {
+  "etapes": [
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x\\) et \\(B=2\\) : \\(x^{2} - 4 = \\left(x - 2\\right)\\left(x + 2\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{2} - 4",
+  "methode": "Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(x - 2\\right)\\left(x + 2\\right)",
+  "secours": false
+ },
+ "x^2 - 5": {
+  "etapes": [
+   {
+    "html": "Trinôme \\(x^{2} - 5\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot (-5) = 20\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta > 0\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -\\sqrt{5}\\) et \\(x_2 = \\sqrt{5}\\) \\((\\approx -2{,}2361\\) et \\(\\approx 2{,}2361)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "D'où \\(x^{2} - 5 = \\left(x + \\sqrt{5}\\right)\\left(x - \\sqrt{5}\\right)\\) (on écrit \\(a\\left(x-x_1\\right)\\left(x-x_2\\right)\\)).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{2} - 5",
+  "methode": "Formule (discriminant)",
+  "ok": true,
+  "resultat_tex": "\\left(x + \\sqrt{5}\\right)\\left(x - \\sqrt{5}\\right)",
+  "secours": false
+ },
+ "x^2 - 6x + 7": {
+  "etapes": [
+   {
+    "html": "Trinôme \\(x^{2} - 6x + 7\\) : \\(\\Delta = b^2 - 4ac = (-6)^2 - 4 \\cdot 1 \\cdot 7 = 8\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta > 0\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = 3 - \\sqrt{2}\\) et \\(x_2 = 3 + \\sqrt{2}\\) \\((\\approx 1{,}5858\\) et \\(\\approx 4{,}4142)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "D'où \\(x^{2} - 6x + 7 = \\left(x - 3 + \\sqrt{2}\\right)\\left(x - 3 - \\sqrt{2}\\right)\\) (on écrit \\(a\\left(x-x_1\\right)\\left(x-x_2\\right)\\)).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{2} - 6x + 7",
+  "methode": "Formule (discriminant)",
+  "ok": true,
+  "resultat_tex": "\\left(x - 3 + \\sqrt{2}\\right)\\left(x - 3 - \\sqrt{2}\\right)",
+  "secours": false
+ },
+ "x^2 - x + 1/4": {
+  "etapes": [
+   {
+    "html": "On reconnaît un carré parfait (produit remarquable \\(A^2-2AB+B^2=(A-B)^2\\)) avec \\(A=x\\) et \\(B=\\frac{1}{2}\\) : \\(x^{2} - x + \\frac{1}{4} = \\left(x - \\frac{1}{2}\\right)^{2}\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{2} - x + \\frac{1}{4}",
+  "methode": "Carré parfait",
+  "ok": true,
+  "resultat_tex": "\\left(x - \\frac{1}{2}\\right)^{2}",
+  "secours": false
+ },
+ "x^2+4x+2": {
+  "etapes": [
+   {
+    "html": "Trinôme \\(x^{2} + 4x + 2\\) : \\(\\Delta = b^2 - 4ac = 4^2 - 4 \\cdot 1 \\cdot 2 = 8\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta > 0\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -2 - \\sqrt{2}\\) et \\(x_2 = -2 + \\sqrt{2}\\) \\((\\approx -3{,}4142\\) et \\(\\approx -0{,}5858)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "D'où \\(x^{2} + 4x + 2 = \\left(x + 2 + \\sqrt{2}\\right)\\left(x + 2 - \\sqrt{2}\\right)\\) (on écrit \\(a\\left(x-x_1\\right)\\left(x-x_2\\right)\\)).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{2} + 4x + 2",
+  "methode": "Formule (discriminant)",
+  "ok": true,
+  "resultat_tex": "\\left(x + 2 + \\sqrt{2}\\right)\\left(x + 2 - \\sqrt{2}\\right)",
+  "secours": false
+ },
+ "x^2+5x-14": {
+  "etapes": [
+   {
+    "html": "Trinôme unitaire \\(x^{2} + 5x - 14\\) (\\(a=1\\)) : on cherche deux nombres \\(u\\) et \\(v\\) tels que \\(u+v=5\\) et \\(u \\cdot v=-14\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On trouve \\(u=-2\\) et \\(v=7\\), car \\(-2+7=5\\) et \\(-2\\times7=-14\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Méthode Somme-Produit : \\(x^{2} + 5x - 14 = \\left(x - 2\\right)\\left(x + 7\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{2} + 5x - 14",
+  "methode": "Somme-Produit",
+  "ok": true,
+  "resultat_tex": "\\left(x - 2\\right)\\left(x + 7\\right)",
+  "secours": false
+ },
+ "x^2-1'000": {
+  "erreur": "Caractère non reconnu : « ' ».",
+  "ok": false
+ },
+ "x^2/2 + x - 1": {
+  "etapes": [
+   {
+    "html": "On met \\(\\frac{1}{2}\\) en évidence pour travailler avec des coefficients entiers : \\(\\frac{x^{2}}{2} + x - 1 = \\frac{1}{2}\\left(x^{2} + 2x - 2\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(x^{2} + 2x - 2\\) : \\(\\Delta = b^2 - 4ac = 2^2 - 4 \\cdot 1 \\cdot (-2) = 12\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta > 0\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -1 - \\sqrt{3}\\) et \\(x_2 = -1 + \\sqrt{3}\\) \\((\\approx -2{,}7321\\) et \\(\\approx 0{,}7321)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "D'où \\(x^{2} + 2x - 2 = \\left(x + 1 + \\sqrt{3}\\right)\\left(x + 1 - \\sqrt{3}\\right)\\) (on écrit \\(a\\left(x-x_1\\right)\\left(x-x_2\\right)\\)).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\frac{x^{2}}{2} + x - 1",
+  "methode": "Mise en évidence · Formule (discriminant)",
+  "ok": true,
+  "resultat_tex": "\\frac{1}{2}\\left(x + 1 + \\sqrt{3}\\right)\\left(x + 1 - \\sqrt{3}\\right)",
+  "secours": false
+ },
+ "x^2/2 + x - 3/2": {
+  "etapes": [
+   {
+    "html": "On met \\(\\frac{1}{2}\\) en évidence pour travailler avec des coefficients entiers : \\(\\frac{x^{2}}{2} + x - \\frac{3}{2} = \\frac{1}{2}\\left(x^{2} + 2x - 3\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme unitaire \\(x^{2} + 2x - 3\\) (\\(a=1\\)) : on cherche deux nombres \\(u\\) et \\(v\\) tels que \\(u+v=2\\) et \\(u \\cdot v=-3\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On trouve \\(u=-1\\) et \\(v=3\\), car \\(-1+3=2\\) et \\(-1\\times3=-3\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Méthode Somme-Produit : \\(x^{2} + 2x - 3 = \\left(x - 1\\right)\\left(x + 3\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\frac{x^{2}}{2} + x - \\frac{3}{2}",
+  "methode": "Mise en évidence · Somme-Produit",
+  "ok": true,
+  "resultat_tex": "\\frac{1}{2}\\left(x - 1\\right)\\left(x + 3\\right)",
+  "secours": false
+ },
+ "x^2/3 + x + 1": {
+  "etapes": [
+   {
+    "html": "Trinôme \\(\\frac{1}{3}x^{2} + x + 1\\) : \\(\\Delta = b^2 - 4ac = 1^2 - 4 \\cdot (\\frac{1}{3}) \\cdot 1 = -\\frac{1}{3}\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = \\frac{1}{3}\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\frac{x^{2}}{3} + x + 1",
+  "methode": "Non factorisable dans ℝ (Δ < 0)",
+  "ok": true,
+  "resultat_tex": "\\frac{x^{2}}{3} + x + 1",
+  "secours": false
+ },
+ "x^2/4 - 1": {
+  "etapes": [
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=\\frac{x}{2}\\) et \\(B=1\\) : \\(\\frac{x^{2}}{4} - 1 = \\left(\\frac{x}{2} - 1\\right)\\left(\\frac{x}{2} + 1\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\frac{x^{2}}{4} - 1",
+  "methode": "Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(\\frac{x}{2} - 1\\right)\\left(\\frac{x}{2} + 1\\right)",
+  "secours": false
+ },
+ "x^3 + 2x^2 + x": {
+  "etapes": [
+   {
+    "html": "On met \\(x\\) en évidence (facteur commun à tous les termes) : \\(x^{3} + 2x^{2} + x = x\\left(x^{2} + 2x + 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît un carré parfait (produit remarquable \\(A^2+2AB+B^2=(A+B)^2\\)) avec \\(A=x\\) et \\(B=1\\) : \\(x^{2} + 2x + 1 = \\left(x + 1\\right)^{2}\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{3} + 2x^{2} + x",
+  "methode": "Mise en évidence · Carré parfait",
+  "ok": true,
+  "resultat_tex": "x\\left(x + 1\\right)^{2}",
+  "secours": false
+ },
+ "x^3 + 8y^3 + 6x^2y + 12xy^2": {
+  "etapes": [
+   {
+    "html": "On reconnaît le cube d'un binôme (produit remarquable \\(A^3+3A^2B+3AB^2+B^3=(A+B)^3\\)) avec \\(A=x\\) et \\(B=2y\\) : \\(x^{3} + 8y^{3} + 6x^{2}y + 12xy^{2} = \\left(x + 2y\\right)^{3}\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{3} + 8y^{3} + 6x^{2}y + 12xy^{2}",
+  "methode": "Cube d'un binôme",
+  "ok": true,
+  "resultat_tex": "\\left(x + 2y\\right)^{3}",
+  "secours": false
+ },
+ "x^3 + 9x - 27 - 3x^2": {
+  "etapes": [
+   {
+    "html": "On groupe les termes : \\(x^{3} + 9x - 27 - 3x^{2} = \\left(x^{3} + 9x\\right) + \\left(-27 - 3x^{2}\\right) = x\\left(x^{2} + 9\\right) - 3\\left(x^{2} + 9\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On met \\(\\left(x^{2} + 9\\right)\\) en évidence (facteur commun à tous les termes) : \\(x\\left(x^{2} + 9\\right) - 3\\left(x^{2} + 9\\right) = \\left(x^{2} + 9\\right)\\left(x - 3\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(x^{2} + 9\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot 9 = -36\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{3} + 9x - 27 - 3x^{2}",
+  "methode": "Groupements · Mise en évidence · Non factorisable dans ℝ (Δ < 0)",
+  "ok": true,
+  "resultat_tex": "\\left(x^{2} + 9\\right)\\left(x - 3\\right)",
+  "secours": false
+ },
+ "x^3 + x^2 - 2x": {
+  "etapes": [
+   {
+    "html": "On met \\(x\\) en évidence (facteur commun à tous les termes) : \\(x^{3} + x^{2} - 2x = x\\left(x^{2} + x - 2\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme unitaire \\(x^{2} + x - 2\\) (\\(a=1\\)) : on cherche deux nombres \\(u\\) et \\(v\\) tels que \\(u+v=1\\) et \\(u \\cdot v=-2\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On trouve \\(u=-1\\) et \\(v=2\\), car \\(-1+2=1\\) et \\(-1\\times2=-2\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Méthode Somme-Produit : \\(x^{2} + x - 2 = \\left(x - 1\\right)\\left(x + 2\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{3} + x^{2} - 2x",
+  "methode": "Mise en évidence · Somme-Produit",
+  "ok": true,
+  "resultat_tex": "x\\left(x - 1\\right)\\left(x + 2\\right)",
+  "secours": false
+ },
+ "x^3 + x^2y + xy^2/3 + y^3/27": {
+  "etapes": [
+   {
+    "html": "On reconnaît le cube d'un binôme (produit remarquable \\(A^3+3A^2B+3AB^2+B^3=(A+B)^3\\)) avec \\(A=x\\) et \\(B=\\frac{y}{3}\\) : \\(x^{3} + x^{2}y + \\frac{xy^{2}}{3} + \\frac{y^{3}}{27} = \\left(x + \\frac{y}{3}\\right)^{3}\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{3} + x^{2}y + \\frac{xy^{2}}{3} + \\frac{y^{3}}{27}",
+  "methode": "Cube d'un binôme",
+  "ok": true,
+  "resultat_tex": "\\left(x + \\frac{y}{3}\\right)^{3}",
+  "secours": false
+ },
+ "x^3 - 2": {
+  "etapes": [
+   {
+    "html": "\\(x^{3} - 2\\) n'a pas de racine évidente : il ne se factorise pas davantage avec les méthodes du cours.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{3} - 2",
+  "methode": "Ne se factorise pas",
+  "ok": true,
+  "resultat_tex": "x^{3} - 2",
+  "secours": false
+ },
+ "x^3 - 3x^2 - x + 3": {
+  "etapes": [
+   {
+    "html": "On groupe les termes : \\(x^{3} - 3x^{2} - x + 3 = \\left(x^{3} - 3x^{2}\\right) + \\left(-x + 3\\right) = x^{2}\\left(x - 3\\right) - \\left(x - 3\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On met \\(\\left(x - 3\\right)\\) en évidence (facteur commun à tous les termes) : \\(x^{2}\\left(x - 3\\right) - \\left(x - 3\\right) = \\left(x - 3\\right)\\left(x^{2} - 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x\\) et \\(B=1\\) : \\(x^{2} - 1 = \\left(x - 1\\right)\\left(x + 1\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{3} - 3x^{2} - x + 3",
+  "methode": "Groupements · Mise en évidence · Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(x - 3\\right)\\left(x - 1\\right)\\left(x + 1\\right)",
+  "secours": false
+ },
+ "x^3 - 3x^2(a + b) + 3x(a + b)^2 - (a + b)^3": {
+  "etapes": [
+   {
+    "html": "On reconnaît le cube d'un binôme (produit remarquable \\(A^3-3A^2B+3AB^2-B^3=(A-B)^3\\)) avec \\(A=x\\) et \\(B=a + b\\) : \\(x^{3} - 3x^{2}\\left(a + b\\right) + 3x\\left(a + b\\right)^{2} - \\left(a + b\\right)^{3} = \\left(x - a - b\\right)^{3}\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{3} - 3x^{2}\\left(a + b\\right) + 3x\\left(a + b\\right)^{2} - \\left(a + b\\right)^{3}",
+  "methode": "Cube d'un binôme",
+  "ok": true,
+  "resultat_tex": "\\left(x - a - b\\right)^{3}",
+  "secours": false
+ },
+ "x^3 - 4x^2 + 4x": {
+  "etapes": [
+   {
+    "html": "On met \\(x\\) en évidence (facteur commun à tous les termes) : \\(x^{3} - 4x^{2} + 4x = x\\left(x^{2} - 4x + 4\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît un carré parfait (produit remarquable \\(A^2-2AB+B^2=(A-B)^2\\)) avec \\(A=x\\) et \\(B=2\\) : \\(x^{2} - 4x + 4 = \\left(x - 2\\right)^{2}\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{3} - 4x^{2} + 4x",
+  "methode": "Mise en évidence · Carré parfait",
+  "ok": true,
+  "resultat_tex": "x\\left(x - 2\\right)^{2}",
+  "secours": false
+ },
+ "x^3 - 8y^3": {
+  "etapes": [
+   {
+    "html": "On reconnaît une différence de deux cubes (produit remarquable \\(A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)\\)) avec \\(A=x\\) et \\(B=2y\\) : \\(x^{3} - 8y^{3} = \\left(x - 2y\\right)\\left(x^{2} + 2xy + 4y^{2}\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(x^{2} + 2xy + 4y^{2}\\) ne se factorise pas davantage.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{3} - 8y^{3}",
+  "methode": "Différence de cubes",
+  "ok": true,
+  "resultat_tex": "\\left(x - 2y\\right)\\left(x^{2} + 2xy + 4y^{2}\\right)",
+  "secours": false
+ },
+ "x^3 - 9x^2 + 23x - 15": {
+  "etapes": [
+   {
+    "html": "\\(x = 1\\) est une racine évidente (le polynôme s'annule en \\(x = 1\\)), donc \\(x - 1\\) est un facteur ; en divisant : \\(x^{3} - 9x^{2} + 23x - 15 = \\left(x - 1\\right)\\left(x^{2} - 8x + 15\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme unitaire \\(x^{2} - 8x + 15\\) (\\(a=1\\)) : on cherche deux nombres \\(u\\) et \\(v\\) tels que \\(u+v=-8\\) et \\(u \\cdot v=15\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On trouve \\(u=-3\\) et \\(v=-5\\), car \\(-3-5=-8\\) et \\(-3\\times(-5)=15\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Méthode Somme-Produit : \\(x^{2} - 8x + 15 = \\left(x - 3\\right)\\left(x - 5\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{3} - 9x^{2} + 23x - 15",
+  "methode": "Racine évidente · Somme-Produit",
+  "ok": true,
+  "resultat_tex": "\\left(x - 1\\right)\\left(x - 3\\right)\\left(x - 5\\right)",
+  "secours": false
+ },
+ "x^3-8y^3": {
+  "etapes": [
+   {
+    "html": "On reconnaît une différence de deux cubes (produit remarquable \\(A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)\\)) avec \\(A=x\\) et \\(B=2y\\) : \\(x^{3} - 8y^{3} = \\left(x - 2y\\right)\\left(x^{2} + 2xy + 4y^{2}\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(x^{2} + 2xy + 4y^{2}\\) ne se factorise pas davantage.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{3} - 8y^{3}",
+  "methode": "Différence de cubes",
+  "ok": true,
+  "resultat_tex": "\\left(x - 2y\\right)\\left(x^{2} + 2xy + 4y^{2}\\right)",
+  "secours": false
+ },
+ "x^3/2 - x/2": {
+  "etapes": [
+   {
+    "html": "On met \\(x\\) en évidence (facteur commun à tous les termes) : \\(\\frac{x^{3}}{2} - \\frac{x}{2} = x\\left(\\frac{x^{2}}{2} - \\frac{1}{2}\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On met \\(\\frac{1}{2}\\) en évidence pour travailler avec des coefficients entiers : \\(\\frac{x^{2}}{2} - \\frac{1}{2} = \\frac{1}{2}\\left(x^{2} - 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x\\) et \\(B=1\\) : \\(x^{2} - 1 = \\left(x - 1\\right)\\left(x + 1\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\frac{x^{3}}{2} - \\frac{x}{2}",
+  "methode": "Mise en évidence · Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\frac{1}{2}x\\left(x - 1\\right)\\left(x + 1\\right)",
+  "secours": false
+ },
+ "x^3/8 - 1": {
+  "etapes": [
+   {
+    "html": "On reconnaît une différence de deux cubes (produit remarquable \\(A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)\\)) avec \\(A=\\frac{x}{2}\\) et \\(B=1\\) : \\(\\frac{x^{3}}{8} - 1 = \\left(\\frac{x}{2} - 1\\right)\\left(\\frac{x^{2}}{4} + \\frac{x}{2} + 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(\\frac{1}{4}x^{2} + \\frac{1}{2}x + 1\\) : \\(\\Delta = b^2 - 4ac = (\\frac{1}{2})^2 - 4 \\cdot (\\frac{1}{4}) \\cdot 1 = -\\frac{3}{4}\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = \\frac{1}{4}\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\frac{x^{3}}{8} - 1",
+  "methode": "Différence de cubes · Non factorisable dans ℝ (Δ < 0)",
+  "ok": true,
+  "resultat_tex": "\\left(\\frac{x}{2} - 1\\right)\\left(\\frac{x^{2}}{4} + \\frac{x}{2} + 1\\right)",
+  "secours": false
+ },
+ "x^3y + 7x^2y + 6xy": {
+  "etapes": [
+   {
+    "html": "On met \\(xy\\) en évidence (facteur commun à tous les termes) : \\(x^{3}y + 7x^{2}y + 6xy = xy\\left(x^{2} + 7x + 6\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme unitaire \\(x^{2} + 7x + 6\\) (\\(a=1\\)) : on cherche deux nombres \\(u\\) et \\(v\\) tels que \\(u+v=7\\) et \\(u \\cdot v=6\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On trouve \\(u=1\\) et \\(v=6\\), car \\(1+6=7\\) et \\(1\\times6=6\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Méthode Somme-Produit : \\(x^{2} + 7x + 6 = \\left(x + 1\\right)\\left(x + 6\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{3}y + 7x^{2}y + 6xy",
+  "methode": "Mise en évidence · Somme-Produit",
+  "ok": true,
+  "resultat_tex": "xy\\left(x + 1\\right)\\left(x + 6\\right)",
+  "secours": false
+ },
+ "x^4 + 1": {
+  "etapes": [
+   {
+    "html": "\\(x^{4} + 1\\) n'a pas de racine évidente : il ne se factorise pas davantage avec les méthodes du cours.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{4} + 1",
+  "methode": "Ne se factorise pas",
+  "ok": true,
+  "resultat_tex": "x^{4} + 1",
+  "secours": false
+ },
+ "x^4 + 3x^3 - 8x - 24": {
+  "etapes": [
+   {
+    "html": "On groupe les termes : \\(x^{4} + 3x^{3} - 8x - 24 = \\left(x^{4} + 3x^{3}\\right) + \\left(-8x - 24\\right) = x^{3}\\left(x + 3\\right) - 8\\left(x + 3\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On met \\(\\left(x + 3\\right)\\) en évidence (facteur commun à tous les termes) : \\(x^{3}\\left(x + 3\\right) - 8\\left(x + 3\\right) = \\left(x + 3\\right)\\left(x^{3} - 8\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux cubes (produit remarquable \\(A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)\\)) avec \\(A=x\\) et \\(B=2\\) : \\(x^{3} - 8 = \\left(x - 2\\right)\\left(x^{2} + 2x + 4\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(x^{2} + 2x + 4\\) : \\(\\Delta = b^2 - 4ac = 2^2 - 4 \\cdot 1 \\cdot 4 = -12\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{4} + 3x^{3} - 8x - 24",
+  "methode": "Groupements · Mise en évidence · Différence de cubes · Non factorisable dans ℝ (Δ < 0)",
+  "ok": true,
+  "resultat_tex": "\\left(x + 3\\right)\\left(x - 2\\right)\\left(x^{2} + 2x + 4\\right)",
+  "secours": false
+ },
+ "x^4 + 4": {
+  "etapes": [
+   {
+    "html": "On complète le carré (on ajoute et on retire \\(4x^{2}\\)) : \\(x^{4} + 4 = \\left(x^{2} + 2\\right)^{2} - \\left(2x\\right)^{2}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x^{2} + 2\\) et \\(B=2x\\) : \\(\\left(x^{2} + 2\\right)^{2} - \\left(2x\\right)^{2} = \\left(x^{2} + 2 - 2x\\right)\\left(x^{2} + 2 + 2x\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(x^{2} - 2x + 2\\) : \\(\\Delta = b^2 - 4ac = (-2)^2 - 4 \\cdot 1 \\cdot 2 = -4\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(x^{2} + 2x + 2\\) : \\(\\Delta = b^2 - 4ac = 2^2 - 4 \\cdot 1 \\cdot 2 = -4\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{4} + 4",
+  "methode": "Compléter le carré · Différence de carrés · Non factorisable dans ℝ (Δ < 0)",
+  "ok": true,
+  "resultat_tex": "\\left(x^{2} + 2 - 2x\\right)\\left(x^{2} + 2 + 2x\\right)",
+  "secours": false
+ },
+ "x^4 + 64": {
+  "etapes": [
+   {
+    "html": "On complète le carré (on ajoute et on retire \\(16x^{2}\\)) : \\(x^{4} + 64 = \\left(x^{2} + 8\\right)^{2} - \\left(4x\\right)^{2}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x^{2} + 8\\) et \\(B=4x\\) : \\(\\left(x^{2} + 8\\right)^{2} - \\left(4x\\right)^{2} = \\left(x^{2} + 8 - 4x\\right)\\left(x^{2} + 8 + 4x\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(x^{2} - 4x + 8\\) : \\(\\Delta = b^2 - 4ac = (-4)^2 - 4 \\cdot 1 \\cdot 8 = -16\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(x^{2} + 4x + 8\\) : \\(\\Delta = b^2 - 4ac = 4^2 - 4 \\cdot 1 \\cdot 8 = -16\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{4} + 64",
+  "methode": "Compléter le carré · Différence de carrés · Non factorisable dans ℝ (Δ < 0)",
+  "ok": true,
+  "resultat_tex": "\\left(x^{2} + 8 - 4x\\right)\\left(x^{2} + 8 + 4x\\right)",
+  "secours": false
+ },
+ "x^4 + x^2 + 1": {
+  "etapes": [
+   {
+    "html": "On complète le carré (on ajoute et on retire \\(x^{2}\\)) : \\(x^{4} + x^{2} + 1 = \\left(x^{2} + 1\\right)^{2} - x^{2}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x^{2} + 1\\) et \\(B=x\\) : \\(\\left(x^{2} + 1\\right)^{2} - x^{2} = \\left(x^{2} + 1 - x\\right)\\left(x^{2} + 1 + x\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(x^{2} - x + 1\\) : \\(\\Delta = b^2 - 4ac = (-1)^2 - 4 \\cdot 1 \\cdot 1 = -3\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(x^{2} + x + 1\\) : \\(\\Delta = b^2 - 4ac = 1^2 - 4 \\cdot 1 \\cdot 1 = -3\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{4} + x^{2} + 1",
+  "methode": "Compléter le carré · Différence de carrés · Non factorisable dans ℝ (Δ < 0)",
+  "ok": true,
+  "resultat_tex": "\\left(x^{2} + 1 - x\\right)\\left(x^{2} + 1 + x\\right)",
+  "secours": false
+ },
+ "x^4 - 13x^2 + 36": {
+  "etapes": [
+   {
+    "html": "On pose \\(u = x^{2}\\) (changement de variable) : \\(x^{4} - 13x^{2} + 36 = u^{2} - 13u + 36\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme unitaire \\(u^{2} - 13u + 36\\) (\\(a=1\\)) : on cherche deux nombres \\(p\\) et \\(q\\) tels que \\(p+q=-13\\) et \\(p \\cdot q=36\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On trouve \\(p=-4\\) et \\(q=-9\\), car \\(-4-9=-13\\) et \\(-4\\times(-9)=36\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Méthode Somme-Produit : \\(u^{2} - 13u + 36 = \\left(u - 4\\right)\\left(u - 9\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On revient à \\(x\\) en remplaçant \\(u\\) par \\(x^{2}\\) : \\(x^{4} - 13x^{2} + 36 = \\left(x^{2} - 4\\right)\\left(x^{2} - 9\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x\\) et \\(B=2\\) : \\(x^{2} - 4 = \\left(x - 2\\right)\\left(x + 2\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x\\) et \\(B=3\\) : \\(x^{2} - 9 = \\left(x - 3\\right)\\left(x + 3\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{4} - 13x^{2} + 36",
+  "methode": "Changement de variable · Somme-Produit · Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(x - 2\\right)\\left(x + 2\\right)\\left(x - 3\\right)\\left(x + 3\\right)",
+  "secours": false
+ },
+ "x^4 - 29x^2 + 100": {
+  "etapes": [
+   {
+    "html": "On pose \\(u = x^{2}\\) (changement de variable) : \\(x^{4} - 29x^{2} + 100 = u^{2} - 29u + 100\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme unitaire \\(u^{2} - 29u + 100\\) (\\(a=1\\)) : on cherche deux nombres \\(p\\) et \\(q\\) tels que \\(p+q=-29\\) et \\(p \\cdot q=100\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On trouve \\(p=-4\\) et \\(q=-25\\), car \\(-4-25=-29\\) et \\(-4\\times(-25)=100\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Méthode Somme-Produit : \\(u^{2} - 29u + 100 = \\left(u - 4\\right)\\left(u - 25\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On revient à \\(x\\) en remplaçant \\(u\\) par \\(x^{2}\\) : \\(x^{4} - 29x^{2} + 100 = \\left(x^{2} - 4\\right)\\left(x^{2} - 25\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x\\) et \\(B=2\\) : \\(x^{2} - 4 = \\left(x - 2\\right)\\left(x + 2\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x\\) et \\(B=5\\) : \\(x^{2} - 25 = \\left(x - 5\\right)\\left(x + 5\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{4} - 29x^{2} + 100",
+  "methode": "Changement de variable · Somme-Produit · Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(x - 2\\right)\\left(x + 2\\right)\\left(x - 5\\right)\\left(x + 5\\right)",
+  "secours": false
+ },
+ "x^4 - y^2": {
+  "etapes": [
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x^{2}\\) et \\(B=y\\) : \\(x^{4} - y^{2} = \\left(x^{2} - y\\right)\\left(x^{2} + y\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(x^{2} - y\\) ne se factorise pas davantage.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(x^{2} + y\\) ne se factorise pas davantage.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{4} - y^{2}",
+  "methode": "Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(x^{2} - y\\right)\\left(x^{2} + y\\right)",
+  "secours": false
+ },
+ "x^4-13x^2+36": {
+  "etapes": [
+   {
+    "html": "On pose \\(u = x^{2}\\) (changement de variable) : \\(x^{4} - 13x^{2} + 36 = u^{2} - 13u + 36\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme unitaire \\(u^{2} - 13u + 36\\) (\\(a=1\\)) : on cherche deux nombres \\(p\\) et \\(q\\) tels que \\(p+q=-13\\) et \\(p \\cdot q=36\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On trouve \\(p=-4\\) et \\(q=-9\\), car \\(-4-9=-13\\) et \\(-4\\times(-9)=36\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Méthode Somme-Produit : \\(u^{2} - 13u + 36 = \\left(u - 4\\right)\\left(u - 9\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On revient à \\(x\\) en remplaçant \\(u\\) par \\(x^{2}\\) : \\(x^{4} - 13x^{2} + 36 = \\left(x^{2} - 4\\right)\\left(x^{2} - 9\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x\\) et \\(B=2\\) : \\(x^{2} - 4 = \\left(x - 2\\right)\\left(x + 2\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x\\) et \\(B=3\\) : \\(x^{2} - 9 = \\left(x - 3\\right)\\left(x + 3\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{4} - 13x^{2} + 36",
+  "methode": "Changement de variable · Somme-Produit · Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(x - 2\\right)\\left(x + 2\\right)\\left(x - 3\\right)\\left(x + 3\\right)",
+  "secours": false
+ },
+ "x^4y^3 + 3x^3y^2 + 3x^2y + x": {
+  "etapes": [
+   {
+    "html": "On met \\(x\\) en évidence (facteur commun à tous les termes) : \\(x^{4}y^{3} + 3x^{3}y^{2} + 3x^{2}y + x = x\\left(x^{3}y^{3} + 3x^{2}y^{2} + 3xy + 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît le cube d'un binôme (produit remarquable \\(A^3+3A^2B+3AB^2+B^3=(A+B)^3\\)) avec \\(A=xy\\) et \\(B=1\\) : \\(x^{3}y^{3} + 3x^{2}y^{2} + 3xy + 1 = \\left(xy + 1\\right)^{3}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(xy + 1\\) ne se factorise pas davantage.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{4}y^{3} + 3x^{3}y^{2} + 3x^{2}y + x",
+  "methode": "Mise en évidence · Cube d'un binôme",
+  "ok": true,
+  "resultat_tex": "x\\left(xy + 1\\right)^{3}",
+  "secours": false
+ },
+ "x^5 - 1 + x^4 - x": {
+  "etapes": [
+   {
+    "html": "On groupe les termes : \\(x^{5} - 1 + x^{4} - x = \\left(x^{5} + x^{4}\\right) + \\left(-1 - x\\right) = x^{4}\\left(x + 1\\right) - \\left(x + 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On met \\(\\left(x + 1\\right)\\) en évidence (facteur commun à tous les termes) : \\(x^{4}\\left(x + 1\\right) - \\left(x + 1\\right) = \\left(x + 1\\right)\\left(x^{4} - 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x^{2}\\) et \\(B=1\\) : \\(x^{4} - 1 = \\left(x^{2} - 1\\right)\\left(x^{2} + 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x\\) et \\(B=1\\) : \\(x^{2} - 1 = \\left(x - 1\\right)\\left(x + 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(x^{2} + 1\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot 1 = -4\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{5} - 1 + x^{4} - x",
+  "methode": "Groupements · Mise en évidence · Différence de carrés · Non factorisable dans ℝ (Δ < 0)",
+  "ok": true,
+  "resultat_tex": "\\left(x + 1\\right)^{2}\\left(x - 1\\right)\\left(x^{2} + 1\\right)",
+  "secours": false
+ },
+ "x^8 + 4": {
+  "etapes": [
+   {
+    "html": "On complète le carré (on ajoute et on retire \\(4x^{4}\\)) : \\(x^{8} + 4 = \\left(x^{4} + 2\\right)^{2} - \\left(2x^{2}\\right)^{2}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x^{4} + 2\\) et \\(B=2x^{2}\\) : \\(\\left(x^{4} + 2\\right)^{2} - \\left(2x^{2}\\right)^{2} = \\left(x^{4} + 2 - 2x^{2}\\right)\\left(x^{4} + 2 + 2x^{2}\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(x^{4} + 2 - 2x^{2}\\) n'a pas de racine évidente : il ne se factorise pas davantage avec les méthodes du cours.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(x^{4} + 2 + 2x^{2}\\) n'a pas de racine évidente : il ne se factorise pas davantage avec les méthodes du cours.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{8} + 4",
+  "methode": "Compléter le carré · Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(x^{4} + 2 - 2x^{2}\\right)\\left(x^{4} + 2 + 2x^{2}\\right)",
+  "secours": false
+ },
+ "x^8 - 257x^4 + 256": {
+  "etapes": [
+   {
+    "html": "On pose \\(u = x^{4}\\) (changement de variable) : \\(x^{8} - 257x^{4} + 256 = u^{2} - 257u + 256\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme unitaire \\(u^{2} - 257u + 256\\) (\\(a=1\\)) : on cherche deux nombres \\(p\\) et \\(q\\) tels que \\(p+q=-257\\) et \\(p \\cdot q=256\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On trouve \\(p=-1\\) et \\(q=-256\\), car \\(-1-256=-257\\) et \\(-1\\times(-256)=256\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Méthode Somme-Produit : \\(u^{2} - 257u + 256 = \\left(u - 1\\right)\\left(u - 256\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On revient à \\(x\\) en remplaçant \\(u\\) par \\(x^{4}\\) : \\(x^{8} - 257x^{4} + 256 = \\left(x^{4} - 1\\right)\\left(x^{4} - 256\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x^{2}\\) et \\(B=1\\) : \\(x^{4} - 1 = \\left(x^{2} - 1\\right)\\left(x^{2} + 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x\\) et \\(B=1\\) : \\(x^{2} - 1 = \\left(x - 1\\right)\\left(x + 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(x^{2} + 1\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot 1 = -4\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x^{2}\\) et \\(B=16\\) : \\(x^{4} - 256 = \\left(x^{2} - 16\\right)\\left(x^{2} + 16\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x\\) et \\(B=4\\) : \\(x^{2} - 16 = \\left(x - 4\\right)\\left(x + 4\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(x^{2} + 16\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot 16 = -64\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{8} - 257x^{4} + 256",
+  "methode": "Changement de variable · Somme-Produit · Différence de carrés · Non factorisable dans ℝ (Δ < 0)",
+  "ok": true,
+  "resultat_tex": "\\left(x - 1\\right)\\left(x + 1\\right)\\left(x^{2} + 1\\right)\\left(x - 4\\right)\\left(x + 4\\right)\\left(x^{2} + 16\\right)",
+  "secours": false
+ },
+ "xy + y": {
+  "etapes": [
+   {
+    "html": "On met \\(y\\) en évidence (facteur commun à tous les termes) : \\(xy + y = y\\left(x + 1\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "xy + y",
+  "methode": "Mise en évidence",
+  "ok": true,
+  "resultat_tex": "y\\left(x + 1\\right)",
+  "secours": false
+ },
+ "xy - 9x^3y": {
+  "etapes": [
+   {
+    "html": "On met \\(xy\\) en évidence (facteur commun à tous les termes) : \\(xy - 9x^{3}y = xy\\left(1 - 9x^{2}\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=1\\) et \\(B=3x\\) : \\(1 - 9x^{2} = \\left(1 - 3x\\right)\\left(1 + 3x\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "xy - 9x^{3}y",
+  "methode": "Mise en évidence · Différence de carrés",
+  "ok": true,
+  "resultat_tex": "xy\\left(1 - 3x\\right)\\left(1 + 3x\\right)",
+  "secours": false
+ },
+ "y(b - a) - x(b - a)": {
+  "etapes": [
+   {
+    "html": "On met \\(\\left(b - a\\right)\\) en évidence (facteur commun à tous les termes) : \\(y\\left(b - a\\right) - x\\left(b - a\\right) = \\left(b - a\\right)\\left(y - x\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "y\\left(b - a\\right) - x\\left(b - a\\right)",
+  "methode": "Mise en évidence",
+  "ok": true,
+  "resultat_tex": "\\left(b - a\\right)\\left(y - x\\right)",
+  "secours": false
+ },
+ "y(b-a)-x(b-a)": {
+  "etapes": [
+   {
+    "html": "On met \\(\\left(b - a\\right)\\) en évidence (facteur commun à tous les termes) : \\(y\\left(b - a\\right) - x\\left(b - a\\right) = \\left(b - a\\right)\\left(y - x\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "y\\left(b - a\\right) - x\\left(b - a\\right)",
+  "methode": "Mise en évidence",
+  "ok": true,
+  "resultat_tex": "\\left(b - a\\right)\\left(y - x\\right)",
+  "secours": false
+ },
+ "y^2 + 6y + 8": {
+  "etapes": [
+   {
+    "html": "Trinôme unitaire \\(y^{2} + 6y + 8\\) (\\(a=1\\)) : on cherche deux nombres \\(u\\) et \\(v\\) tels que \\(u+v=6\\) et \\(u \\cdot v=8\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On trouve \\(u=2\\) et \\(v=4\\), car \\(2+4=6\\) et \\(2\\times4=8\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Méthode Somme-Produit : \\(y^{2} + 6y + 8 = \\left(y + 2\\right)\\left(y + 4\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "y^{2} + 6y + 8",
+  "methode": "Somme-Produit",
+  "ok": true,
+  "resultat_tex": "\\left(y + 2\\right)\\left(y + 4\\right)",
+  "secours": false
+ },
+ "y^2/9 - x^2/4": {
+  "etapes": [
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=\\frac{y}{3}\\) et \\(B=\\frac{x}{2}\\) : \\(\\frac{y^{2}}{9} - \\frac{x^{2}}{4} = \\left(\\frac{y}{3} - \\frac{x}{2}\\right)\\left(\\frac{y}{3} + \\frac{x}{2}\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "\\frac{y^{2}}{9} - \\frac{x^{2}}{4}",
+  "methode": "Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(\\frac{y}{3} - \\frac{x}{2}\\right)\\left(\\frac{y}{3} + \\frac{x}{2}\\right)",
+  "secours": false
+ },
+ "z^3 + 8a^3b^6": {
+  "etapes": [
+   {
+    "html": "On reconnaît une somme de deux cubes (produit remarquable \\(A^3+B^3=(A+B)\\left(A^2-AB+B^2\\right)\\)) avec \\(A=z\\) et \\(B=2ab^{2}\\) : \\(z^{3} + 8a^{3}b^{6} = \\left(z + 2ab^{2}\\right)\\left(4a^{2}b^{4} - 2ab^{2}z + z^{2}\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(z + 2ab^{2}\\) ne se factorise pas davantage.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(4a^{2}b^{4} - 2ab^{2}z + z^{2}\\) ne se factorise pas davantage.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "z^{3} + 8a^{3}b^{6}",
+  "methode": "Somme de cubes",
+  "ok": true,
+  "resultat_tex": "\\left(z + 2ab^{2}\\right)\\left(4a^{2}b^{4} - 2ab^{2}z + z^{2}\\right)",
+  "secours": false
+ },
+ "z^3 - 6z^2 + 12z - 8": {
+  "etapes": [
+   {
+    "html": "On reconnaît le cube d'un binôme (produit remarquable \\(A^3-3A^2B+3AB^2-B^3=(A-B)^3\\)) avec \\(A=z\\) et \\(B=2\\) : \\(z^{3} - 6z^{2} + 12z - 8 = \\left(z - 2\\right)^{3}\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "z^{3} - 6z^{2} + 12z - 8",
+  "methode": "Cube d'un binôme",
+  "ok": true,
+  "resultat_tex": "\\left(z - 2\\right)^{3}",
+  "secours": false
+ },
+ "z^4 - 3z^2 + 9": {
+  "etapes": [
+   {
+    "html": "On complète le carré (on ajoute et on retire \\(9z^{2}\\)) : \\(z^{4} - 3z^{2} + 9 = \\left(z^{2} + 3\\right)^{2} - \\left(3z\\right)^{2}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=z^{2} + 3\\) et \\(B=3z\\) : \\(\\left(z^{2} + 3\\right)^{2} - \\left(3z\\right)^{2} = \\left(z^{2} + 3 - 3z\\right)\\left(z^{2} + 3 + 3z\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(z^{2} - 3z + 3\\) : \\(\\Delta = b^2 - 4ac = (-3)^2 - 4 \\cdot 1 \\cdot 3 = -3\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(z^{2} + 3z + 3\\) : \\(\\Delta = b^2 - 4ac = 3^2 - 4 \\cdot 1 \\cdot 3 = -3\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "z^{4} - 3z^{2} + 9",
+  "methode": "Compléter le carré · Différence de carrés · Non factorisable dans ℝ (Δ < 0)",
+  "ok": true,
+  "resultat_tex": "\\left(z^{2} + 3 - 3z\\right)\\left(z^{2} + 3 + 3z\\right)",
+  "secours": false
+ },
+ "z^6 + 27": {
+  "etapes": [
+   {
+    "html": "On reconnaît une somme de deux cubes (produit remarquable \\(A^3+B^3=(A+B)\\left(A^2-AB+B^2\\right)\\)) avec \\(A=z^{2}\\) et \\(B=3\\) : \\(z^{6} + 27 = \\left(z^{2} + 3\\right)\\left(z^{4} - 3z^{2} + 9\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(z^{2} + 3\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot 3 = -12\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   },
+   {
+    "html": "On complète le carré (on ajoute et on retire \\(9z^{2}\\)) : \\(z^{4} - 3z^{2} + 9 = \\left(z^{2} + 3\\right)^{2} - \\left(3z\\right)^{2}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=z^{2} + 3\\) et \\(B=3z\\) : \\(\\left(z^{2} + 3\\right)^{2} - \\left(3z\\right)^{2} = \\left(z^{2} + 3 - 3z\\right)\\left(z^{2} + 3 + 3z\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(z^{2} - 3z + 3\\) : \\(\\Delta = b^2 - 4ac = (-3)^2 - 4 \\cdot 1 \\cdot 3 = -3\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(z^{2} + 3z + 3\\) : \\(\\Delta = b^2 - 4ac = 3^2 - 4 \\cdot 1 \\cdot 3 = -3\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "z^{6} + 27",
+  "methode": "Somme de cubes · Non factorisable dans ℝ (Δ < 0) · Compléter le carré · Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(z^{2} + 3\\right)\\left(z^{2} + 3 - 3z\\right)\\left(z^{2} + 3 + 3z\\right)",
+  "secours": false
+ }
+}

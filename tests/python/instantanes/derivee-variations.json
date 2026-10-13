@@ -1,0 +1,3045 @@
+{
+ "(x+1)/(x-1)/2": {
+  "deriv_etapes": [
+   {
+    "html": "On pose \\(u(x) = x + 1\\) et \\(v(x) = x - 1\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(u'(x) = 1\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(v'(x) = 1\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\left(\\frac{x + 1}{x - 1}\\right)' = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{1\\left(x - 1\\right) - \\left(x + 1\\right) \\cdot 1}{\\left(x - 1\\right)^{2}} = \\frac{-2}{\\left(x - 1\\right)^{2}}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(f'(x) = \\dfrac{\\left(\\frac{x + 1}{x - 1}\\right)'}{2} = \\frac{-1}{\\left(x - 1\\right)^{2}}\\).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "\\frac{-1}{\\left(x - 1\\right)^{2}}",
+  "domaine_etude_tex": "\\mathbb{R} \\setminus \\left\\{1\\right\\}",
+  "ed_tex": "\\mathbb{R} \\setminus \\left\\{1\\right\\}",
+  "extrema": [],
+  "f_tex": "\\frac{\\frac{x + 1}{x - 1}}{2}",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "Le numérateur vaut \\(-1 \\neq 0\\) : aucune solution.",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "1"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "-",
+      "-",
+      "-"
+     ],
+     "label": "-1"
+    },
+    {
+     "cells": [
+      "+",
+      "||",
+      "+"
+     ],
+     "label": "\\left(x - 1\\right)^{2}\\ (\\text{dén.})"
+    },
+    {
+     "cells": [
+      "-",
+      "||",
+      "-"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "\\searrow",
+      "asym",
+      "\\searrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "(x-1)^3": {
+  "deriv_etapes": [
+   {
+    "html": "\\(\\left(x - 1\\right)^{3}\\) est de la forme \\(u^{3}\\) avec \\(u(x) = x - 1\\) (dérivée interne \\(u'(x) = 1 - 0\\)) \\(\\Rightarrow\\) \\(\\left(\\left(x - 1\\right)^{3}\\right)' = 3\\,u^{2}u' = 3\\left(x - 1\\right)^{2}\\).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "3\\left(x - 1\\right)^{2}",
+  "domaine_etude_tex": "\\mathbb{R}",
+  "ed_tex": "\\mathbb{R}",
+  "extrema": [],
+  "f_tex": "\\left(x - 1\\right)^{3}",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "On résout \\(3x^{2} - 6x + 3 = 0\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(3x^{2} - 6x + 3\\) : \\(\\Delta = b^2 - 4ac = (-6)^2 - 4 \\cdot 3 \\cdot 3 = 0\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta = 0\\) : zéro double \\(x = \\frac{-b}{2a} = 1\\), et \\(3x^{2} - 6x + 3 = 3\\left(x - 1\\right)^{2}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Solution : \\(x = 1\\).",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "1"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "+",
+      "0",
+      "+"
+     ],
+     "label": "\\left(x - 1\\right)^{2}"
+    },
+    {
+     "cells": [
+      "+",
+      "0",
+      "+"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "\\nearrow",
+      "",
+      "\\nearrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "(x^2+1)^(1/2)": {
+  "deriv_etapes": [
+   {
+    "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\sqrt{x^{2} + 1}\\) est de la forme \\(u^{\\frac{1}{2}}\\) avec \\(u(x) = x^{2} + 1\\) (dérivée interne \\(u'(x) = 2x + 0\\)) \\(\\Rightarrow\\) \\(\\left(\\sqrt{x^{2} + 1}\\right)' = \\frac{1}{2}\\,u^{\\frac{-1}{2}}u' = \\frac{x}{\\sqrt{x^{2} + 1}}\\).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "\\frac{x}{\\sqrt{x^{2} + 1}}",
+  "domaine_etude_tex": "\\mathbb{R}",
+  "ed_tex": "\\mathbb{R}",
+  "extrema": [
+   {
+    "f_tex": "1",
+    "f_val": 1.0,
+    "genre": "minimum local",
+    "x_tex": "0",
+    "x_val": 0.0
+   }
+  ],
+  "f_tex": "\\sqrt{x^{2} + 1}",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "On étudie le signe de chaque facteur, puis on dresse le tableau de signes.",
+    "type": "texte"
+   },
+   {
+    "html": "<b>Signe de \\(x\\)</b>",
+    "type": "texte"
+   },
+   {
+    "html": "Bilan : \\(x > 0 \\iff x \\in \\left]0 \\,;\\, +\\infty\\right[\\) ; \\(x = 0 \\iff x \\in \\left\\{0\\right\\}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "<b>Signe de \\(\\sqrt{x^{2} + 1}\\)</b>",
+    "type": "texte"
+   },
+   {
+    "html": "Une racine carrée est positive et la fonction carré est croissante sur \\(\\left[0 \\,;\\, +\\infty\\right[\\) : \\(\\sqrt{x^{2} + 1} > 0 \\iff x^{2} + 1 > 0\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Zéros :",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(x^{2} + 1\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot 1 = -4\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   },
+   {
+    "crit": [],
+    "rows": [
+     {
+      "cells": [
+       "+"
+      ],
+      "final": true,
+      "label": "x^{2} + 1"
+     }
+    ],
+    "type": "tableau",
+    "var": "x"
+   },
+   {
+    "html": "On lit les intervalles où \\(x^{2} + 1 > 0\\) : \\(x \\in \\mathbb{R}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Bilan : \\(\\sqrt{x^{2} + 1} > 0 \\iff x \\in \\mathbb{R}\\) ; \\(\\sqrt{x^{2} + 1}\\) ne s'annule pas.",
+    "type": "texte"
+   },
+   {
+    "html": "Un produit est nul si et seulement si l'un de ses facteurs (du numérateur) est nul, les autres étant définis.",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "0"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "-",
+      "0",
+      "+"
+     ],
+     "label": "x"
+    },
+    {
+     "cells": [
+      "+",
+      "+",
+      "+"
+     ],
+     "label": "\\sqrt{x^{2} + 1}\\ (\\text{dén.})"
+    },
+    {
+     "cells": [
+      "-",
+      "0",
+      "+"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "\\searrow",
+      "extremum",
+      "\\nearrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "(x^2-1)/(x-3)": {
+  "deriv_etapes": [
+   {
+    "html": "On pose \\(u(x) = x^{2} - 1\\) et \\(v(x) = x - 3\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(u'(x) = 2x\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(v'(x) = 1\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{2x\\,\\left(x - 3\\right) - \\left(x^{2} - 1\\right) \\cdot 1}{\\left(x - 3\\right)^{2}} = \\frac{x^{2} - 6x + 1}{\\left(x - 3\\right)^{2}}\\).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "\\frac{x^{2} - 6x + 1}{\\left(x - 3\\right)^{2}}",
+  "domaine_etude_tex": "\\mathbb{R} \\setminus \\left\\{3\\right\\}",
+  "ed_tex": "\\mathbb{R} \\setminus \\left\\{3\\right\\}",
+  "extrema": [
+   {
+    "f_tex": "6 - 4 \\sqrt{2}",
+    "f_val": 0.343145751,
+    "genre": "maximum local",
+    "x_tex": "3 - 2\\sqrt{2}",
+    "x_val": 0.171572875
+   },
+   {
+    "f_tex": "4 \\sqrt{2} + 6",
+    "f_val": 11.6568542,
+    "genre": "minimum local",
+    "x_tex": "3 + 2\\sqrt{2}",
+    "x_val": 5.82842712
+   }
+  ],
+  "f_tex": "\\frac{x^{2} - 1}{x - 3}",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "Une fraction est nulle lorsque son numérateur est nul (et son dénominateur non nul) : on résout \\(x^{2} - 6x + 1 = 0\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(x^{2} - 6x + 1\\) : \\(\\Delta = b^2 - 4ac = (-6)^2 - 4 \\cdot 1 \\cdot 1 = 32\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta > 0\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = 3 - 2\\sqrt{2}\\) et \\(x_2 = 3 + 2\\sqrt{2}\\) \\((\\approx 0{,}1716\\) et \\(\\approx 5{,}8284)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Solutions : \\(x = 3 - 2\\sqrt{2}\\), \\(x = 3 + 2\\sqrt{2}\\).",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "3 - 2\\sqrt{2}",
+    "3",
+    "3 + 2\\sqrt{2}"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "+",
+      "0",
+      "-",
+      "-",
+      "-",
+      "0",
+      "+"
+     ],
+     "label": "\\left(x^{2} - 6x + 1\\right)"
+    },
+    {
+     "cells": [
+      "+",
+      "+",
+      "+",
+      "||",
+      "+",
+      "+",
+      "+"
+     ],
+     "label": "\\left(x - 3\\right)^{2}\\ (\\text{dén.})"
+    },
+    {
+     "cells": [
+      "+",
+      "0",
+      "-",
+      "||",
+      "-",
+      "0",
+      "+"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "\\nearrow",
+      "extremum",
+      "\\searrow",
+      "asym",
+      "\\searrow",
+      "extremum",
+      "\\nearrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "-(x*ln(x))": {
+  "deriv_etapes": [
+   {
+    "html": "On pose \\(u(x) = x\\) et \\(v(x) = \\ln(x)\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(u'(x) = 1\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(v'(x) = \\frac{1}{x}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\left(x\\,\\ln(x)\\right)' = u'(x)v(x) + u(x)v'(x) = 1\\ln(x) + x\\,\\frac{1}{x} = \\ln(x) + 1\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(f'(x) = -\\left(x\\,\\ln(x)\\right)' = -\\ln(x) - 1\\).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "-\\ln(x) - 1",
+  "domaine_etude_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+  "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+  "extrema": [
+   {
+    "f_tex": "e^{-1}",
+    "f_val": 0.367879441,
+    "genre": "maximum local",
+    "x_tex": "e^{-1}",
+    "x_val": 0.367879441
+   }
+  ],
+  "f_tex": "-x\\,\\ln(x)",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "On pose \\(t = \\ln(x)\\) : \\(-\\ln(x) - 1 = -t - 1\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(-t - 1 = 0 \\iff t = -1\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\ln(x) = -1 \\iff x = e^{-1}\\)",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "0",
+    "e^{-1}"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "x",
+      "x",
+      "+",
+      "0",
+      "-"
+     ],
+     "label": "\\left(-\\ln(x) - 1\\right)"
+    },
+    {
+     "cells": [
+      "x",
+      "x",
+      "+",
+      "0",
+      "-"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "",
+      "asym",
+      "\\nearrow",
+      "extremum",
+      "\\searrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "-x^2": {
+  "deriv_etapes": [
+   {
+    "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(f'(x) = -\\left(x^{2}\\right)' = -2x\\).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "-2x",
+  "domaine_etude_tex": "\\mathbb{R}",
+  "ed_tex": "\\mathbb{R}",
+  "extrema": [
+   {
+    "f_tex": "0",
+    "f_val": 0.0,
+    "genre": "maximum local",
+    "x_tex": "0",
+    "x_val": 0.0
+   }
+  ],
+  "f_tex": "-x^{2}",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(-2x = 0 \\iff x = 0\\).",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "0"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "-",
+      "-",
+      "-"
+     ],
+     "label": "-2"
+    },
+    {
+     "cells": [
+      "-",
+      "0",
+      "+"
+     ],
+     "label": "x"
+    },
+    {
+     "cells": [
+      "+",
+      "0",
+      "-"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "\\nearrow",
+      "extremum",
+      "\\searrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "2(x^2+ln(x))": {
+  "deriv_etapes": [
+   {
+    "html": "La dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\left(x^{2} + \\ln(x)\\right)' = \\frac{2x^{2} + 1}{x}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(f'(x) = 2 \\cdot \\left(x^{2} + \\ln(x)\\right)' = \\frac{2\\left(2x^{2} + 1\\right)}{x}\\).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "\\frac{2\\left(2x^{2} + 1\\right)}{x}",
+  "domaine_etude_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+  "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+  "extrema": [],
+  "f_tex": "2\\left(x^{2} + \\ln(x)\\right)",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "Une fraction est nulle lorsque son numérateur est nul (et son dénominateur non nul) : on résout \\(4x^{2} + 2 = 0\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(4x^{2} + 2\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 4 \\cdot 2 = -32\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 4\\), il est toujours positif.",
+    "type": "texte"
+   },
+   {
+    "html": "Aucune solution réelle.",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "0"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "+",
+      "+",
+      "+"
+     ],
+     "label": "\\left(2x^{2} + 1\\right)"
+    },
+    {
+     "cells": [
+      "-",
+      "||",
+      "+"
+     ],
+     "label": "x\\ (\\text{dén.})"
+    },
+    {
+     "cells": [
+      "-",
+      "||",
+      "+"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "\\searrow",
+      "asym",
+      "\\nearrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "3(x*ln(x))": {
+  "deriv_etapes": [
+   {
+    "html": "On pose \\(u(x) = x\\) et \\(v(x) = \\ln(x)\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(u'(x) = 1\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(v'(x) = \\frac{1}{x}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\left(x\\,\\ln(x)\\right)' = u'(x)v(x) + u(x)v'(x) = 1\\ln(x) + x\\,\\frac{1}{x} = \\ln(x) + 1\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(f'(x) = 3 \\cdot \\left(x\\,\\ln(x)\\right)' = 3\\left(\\ln(x) + 1\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "3\\left(\\ln(x) + 1\\right)",
+  "domaine_etude_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+  "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+  "extrema": [
+   {
+    "f_tex": "- \\frac{3}{e}",
+    "f_val": -1.10363832,
+    "genre": "minimum local",
+    "x_tex": "e^{-1}",
+    "x_val": 0.367879441
+   }
+  ],
+  "f_tex": "3x\\,\\ln(x)",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "On pose \\(t = \\ln(x)\\) : \\(3\\left(\\ln(x) + 1\\right) = 3t + 3\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(3t + 3 = 0 \\iff t = -1\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\ln(x) = -1 \\iff x = e^{-1}\\)",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "0",
+    "e^{-1}"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "x",
+      "x",
+      "-",
+      "0",
+      "+"
+     ],
+     "label": "\\left(\\ln(x) + 1\\right)"
+    },
+    {
+     "cells": [
+      "x",
+      "x",
+      "-",
+      "0",
+      "+"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "",
+      "asym",
+      "\\searrow",
+      "extremum",
+      "\\nearrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "3x^2-4x": {
+  "deriv_etapes": [
+   {
+    "html": "La dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\left(3x^{2}\\right)' = 3 \\cdot \\left(x^{2}\\right)' = 6x\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(f'(x) = 2\\left(3x - 2\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "2\\left(3x - 2\\right)",
+  "domaine_etude_tex": "\\mathbb{R}",
+  "ed_tex": "\\mathbb{R}",
+  "extrema": [
+   {
+    "f_tex": "- \\frac{4}{3}",
+    "f_val": -1.33333333,
+    "genre": "minimum local",
+    "x_tex": "\\frac{2}{3}",
+    "x_val": 0.666666667
+   }
+  ],
+  "f_tex": "3x^{2} - 4x",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(2\\left(3x - 2\\right) = 0 \\iff x = \\frac{2}{3}\\).",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "\\frac{2}{3}"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "-",
+      "0",
+      "+"
+     ],
+     "label": "\\left(3x - 2\\right)"
+    },
+    {
+     "cells": [
+      "-",
+      "0",
+      "+"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "\\searrow",
+      "extremum",
+      "\\nearrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "e^(2x)": {
+  "deriv_etapes": [
+   {
+    "html": "\\(e^{2x}\\) est de la forme \\(e^{u}\\) avec \\(u(x) = 2x\\) (dérivée interne \\(u'(x) = 2\\)) \\(\\Rightarrow\\) \\(\\left(e^{2x}\\right)' = u' e^{u} = 2e^{2x}\\).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "2e^{2x}",
+  "domaine_etude_tex": "\\mathbb{R}",
+  "ed_tex": "\\mathbb{R}",
+  "extrema": [],
+  "f_tex": "e^{2x}",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "On pose \\(t = e^{2x}\\) : \\(2e^{2x} = 2t\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(2t = 0 \\iff t = 0\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(e^{2x} = 0\\) est impossible, car \\(e^{2x} > 0\\) pour tout réel : solution rejetée.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(2x \\in \\varnothing \\iff x \\in \\varnothing\\).",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [],
+   "rows": [
+    {
+     "cells": [
+      "+"
+     ],
+     "label": "e^{2x}"
+    },
+    {
+     "cells": [
+      "+"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "\\nearrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "e^(x^2)": {
+  "deriv_etapes": [
+   {
+    "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(e^{x^{2}}\\) est de la forme \\(e^{u}\\) avec \\(u(x) = x^{2}\\) (dérivée interne \\(u'(x) = 2x\\)) \\(\\Rightarrow\\) \\(\\left(e^{x^{2}}\\right)' = u' e^{u} = 2x\\,e^{x^{2}}\\).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "2x\\,e^{x^{2}}",
+  "domaine_etude_tex": "\\mathbb{R}",
+  "ed_tex": "\\mathbb{R}",
+  "extrema": [
+   {
+    "f_tex": "1",
+    "f_val": 1.0,
+    "genre": "minimum local",
+    "x_tex": "0",
+    "x_val": 0.0
+   }
+  ],
+  "f_tex": "e^{x^{2}}",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "On étudie le signe de chaque facteur, puis on dresse le tableau de signes.",
+    "type": "texte"
+   },
+   {
+    "html": "<b>Signe de \\(x\\)</b>",
+    "type": "texte"
+   },
+   {
+    "html": "Bilan : \\(x > 0 \\iff x \\in \\left]0 \\,;\\, +\\infty\\right[\\) ; \\(x = 0 \\iff x \\in \\left\\{0\\right\\}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "<b>Signe de \\(e^{x^{2}}\\)</b>",
+    "type": "texte"
+   },
+   {
+    "html": "Le logarithme est strictement croissant : \\(e^{x^{2}} > 0 \\iff x^{2} \\in \\mathbb{R}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Bilan : \\(e^{x^{2}} > 0 \\iff x \\in \\mathbb{R}\\) ; \\(e^{x^{2}}\\) ne s'annule pas.",
+    "type": "texte"
+   },
+   {
+    "html": "Un produit est nul si et seulement si l'un de ses facteurs (du numérateur) est nul, les autres étant définis.",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "0"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "-",
+      "0",
+      "+"
+     ],
+     "label": "x"
+    },
+    {
+     "cells": [
+      "+",
+      "+",
+      "+"
+     ],
+     "label": "e^{x^{2}}"
+    },
+    {
+     "cells": [
+      "-",
+      "0",
+      "+"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "\\searrow",
+      "extremum",
+      "\\nearrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "ln(x)/x": {
+  "deriv_etapes": [
+   {
+    "html": "On pose \\(u(x) = \\ln(x)\\) et \\(v(x) = x\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(u'(x) = \\frac{1}{x}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(v'(x) = 1\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{\\frac{1}{x}\\,x - \\ln(x) \\cdot 1}{x^{2}} = \\frac{-\\left(\\ln(x) - 1\\right)}{x^{2}}\\).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "\\frac{-\\left(\\ln(x) - 1\\right)}{x^{2}}",
+  "domaine_etude_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+  "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+  "extrema": [
+   {
+    "f_tex": "e^{-1}",
+    "f_val": 0.367879441,
+    "genre": "maximum local",
+    "x_tex": "e",
+    "x_val": 2.71828183
+   }
+  ],
+  "f_tex": "\\frac{\\ln(x)}{x}",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "On étudie le signe de chaque facteur, puis on dresse le tableau de signes.",
+    "type": "texte"
+   },
+   {
+    "html": "<b>Signe de \\(\\ln(x) - 1\\)</b>",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\ln(x) - 1\\) est défini pour \\(x \\in \\left]0 \\,;\\, +\\infty\\right[\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On pose \\(t = \\ln(x)\\) : \\(\\ln(x) - 1 = t - 1\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(t - 1 > 0 \\iff t > 1\\).",
+    "type": "texte"
+   },
+   {
+    "html": "L'exponentielle est strictement croissante et \\(\\ln\\) n'est définie que sur \\(\\left]0 \\,;\\, +\\infty\\right[\\) : \\(\\ln(x) > 1 \\iff x > e\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Bilan : \\(\\ln(x) - 1 > 0 \\iff x \\in \\left]e \\,;\\, +\\infty\\right[\\) ; \\(\\ln(x) - 1 = 0 \\iff x \\in \\left\\{e\\right\\}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "<b>Signe de \\(x\\)</b>",
+    "type": "texte"
+   },
+   {
+    "html": "Bilan : \\(x > 0 \\iff x \\in \\left]0 \\,;\\, +\\infty\\right[\\) ; \\(x = 0 \\iff x \\in \\left\\{0\\right\\}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Un produit est nul si et seulement si l'un de ses facteurs (du numérateur) est nul, les autres étant définis.",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "0",
+    "e"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "-",
+      "-",
+      "-",
+      "-",
+      "-"
+     ],
+     "label": "-1"
+    },
+    {
+     "cells": [
+      "x",
+      "x",
+      "-",
+      "0",
+      "+"
+     ],
+     "label": "\\left(\\ln(x) - 1\\right)"
+    },
+    {
+     "cells": [
+      "+",
+      "||",
+      "+",
+      "+",
+      "+"
+     ],
+     "label": "x^{2}\\ (\\text{dén.})"
+    },
+    {
+     "cells": [
+      "x",
+      "x",
+      "+",
+      "0",
+      "-"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "",
+      "asym",
+      "\\nearrow",
+      "extremum",
+      "\\searrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "ln(x^2-4)": {
+  "deriv_etapes": [
+   {
+    "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\ln\\left(x^{2} - 4\\right)\\) est de la forme \\(\\ln(u)\\) avec \\(u(x) = x^{2} - 4\\) (dérivée interne \\(u'(x) = 2x - 0\\)) \\(\\Rightarrow\\) \\(\\left(\\ln\\left(x^{2} - 4\\right)\\right)' = \\frac{u'}{u} = \\frac{2x}{\\left(x - 2\\right)\\,\\left(x + 2\\right)}\\).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "\\frac{2x}{\\left(x - 2\\right)\\,\\left(x + 2\\right)}",
+  "domaine_etude_tex": "\\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[",
+  "ed_tex": "\\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[",
+  "extrema": [],
+  "f_tex": "\\ln\\left(x^{2} - 4\\right)",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "Une fraction est nulle lorsque son numérateur est nul (et son dénominateur non nul) : on résout \\(2x = 0\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(2x = 0 \\iff x = 0\\)",
+    "type": "texte"
+   },
+   {
+    "html": "Solution : \\(x = 0\\).",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "-2",
+    "0",
+    "2"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "-",
+      "-",
+      "-",
+      "0",
+      "+",
+      "+",
+      "+"
+     ],
+     "label": "x"
+    },
+    {
+     "cells": [
+      "-",
+      "-",
+      "-",
+      "-",
+      "-",
+      "||",
+      "+"
+     ],
+     "label": "\\left(x - 2\\right)\\ (\\text{dén.})"
+    },
+    {
+     "cells": [
+      "-",
+      "||",
+      "+",
+      "+",
+      "+",
+      "+",
+      "+"
+     ],
+     "label": "\\left(x + 2\\right)\\ (\\text{dén.})"
+    },
+    {
+     "cells": [
+      "-",
+      "||",
+      "+",
+      "0",
+      "-",
+      "||",
+      "+"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "\\searrow",
+      "asym",
+      "\\nearrow",
+      "asym",
+      "\\searrow",
+      "asym",
+      "\\nearrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "sqrt(x^2)": {
+  "deriv_etapes": [
+   {
+    "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\sqrt{x^{2}}\\) est de la forme \\(\\sqrt{u}\\) avec \\(u(x) = x^{2}\\) (dérivée interne \\(u'(x) = 2x\\)) \\(\\Rightarrow\\) \\(\\left(\\sqrt{x^{2}}\\right)' = \\frac{u'}{2\\sqrt{u}} = \\frac{2x}{2\\sqrt{x^{2}}}\\).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "\\frac{2x}{2\\sqrt{x^{2}}}",
+  "domaine_etude_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
+  "ed_tex": "\\mathbb{R}",
+  "extrema": [],
+  "f_tex": "\\sqrt{x^{2}}",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "On étudie le signe de chaque facteur, puis on dresse le tableau de signes.",
+    "type": "texte"
+   },
+   {
+    "html": "<b>Signe de \\(x\\)</b>",
+    "type": "texte"
+   },
+   {
+    "html": "Bilan : \\(x > 0 \\iff x \\in \\left]0 \\,;\\, +\\infty\\right[\\) ; \\(x = 0 \\iff x \\in \\left\\{0\\right\\}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "<b>Signe de \\(\\sqrt{x^{2}}\\)</b>",
+    "type": "texte"
+   },
+   {
+    "html": "Une racine carrée est positive et la fonction carré est croissante sur \\(\\left[0 \\,;\\, +\\infty\\right[\\) : \\(\\sqrt{x^{2}} > 0 \\iff x^{2} > 0\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Zéros :",
+    "type": "texte"
+   },
+   {
+    "html": "On met \\(x^{2}\\) en évidence : \\(x^{2} = x^{2}\\left(1\\right)\\)",
+    "type": "texte"
+   },
+   {
+    "crit": [
+     "0"
+    ],
+    "rows": [
+     {
+      "cells": [
+       "+",
+       "0",
+       "+"
+      ],
+      "final": true,
+      "label": "x^{2}"
+     }
+    ],
+    "type": "tableau",
+    "var": "x"
+   },
+   {
+    "html": "On lit les intervalles où \\(x^{2} > 0\\) : \\(x \\in \\mathbb{R} \\setminus \\left\\{0\\right\\}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Bilan : \\(\\sqrt{x^{2}} > 0 \\iff x \\in \\mathbb{R} \\setminus \\left\\{0\\right\\}\\) ; \\(\\sqrt{x^{2}} = 0 \\iff x \\in \\left\\{0\\right\\}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Un produit est nul si et seulement si l'un de ses facteurs (du numérateur) est nul, les autres étant définis.",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "0"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "-",
+      "0",
+      "+"
+     ],
+     "label": "x"
+    },
+    {
+     "cells": [
+      "+",
+      "||",
+      "+"
+     ],
+     "label": "\\sqrt{x^{2}}\\ (\\text{dén.})"
+    },
+    {
+     "cells": [
+      "-",
+      "||",
+      "+"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "\\searrow",
+      "asym",
+      "\\nearrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "sqrt(x^2-4)": {
+  "deriv_etapes": [
+   {
+    "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\sqrt{x^{2} - 4}\\) est de la forme \\(\\sqrt{u}\\) avec \\(u(x) = x^{2} - 4\\) (dérivée interne \\(u'(x) = 2x - 0\\)) \\(\\Rightarrow\\) \\(\\left(\\sqrt{x^{2} - 4}\\right)' = \\frac{u'}{2\\sqrt{u}} = \\frac{x}{\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}}\\).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "\\frac{x}{\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}}",
+  "domaine_etude_tex": "\\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[",
+  "ed_tex": "\\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[",
+  "extrema": [],
+  "f_tex": "\\sqrt{x^{2} - 4}",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "On étudie le signe de chaque facteur, puis on dresse le tableau de signes.",
+    "type": "texte"
+   },
+   {
+    "html": "<b>Signe de \\(x\\)</b>",
+    "type": "texte"
+   },
+   {
+    "html": "Bilan : \\(x > 0 \\iff x \\in \\left]0 \\,;\\, +\\infty\\right[\\) ; \\(x = 0 \\iff x \\in \\left\\{0\\right\\}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "<b>Signe de \\(\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}\\)</b>",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}\\) est défini pour \\(x \\in \\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Une racine carrée est positive et la fonction carré est croissante sur \\(\\left[0 \\,;\\, +\\infty\\right[\\) : \\(\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)} > 0 \\iff \\left(x - 2\\right)\\,\\left(x + 2\\right) > 0\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Zéros :",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(x^{2} - 4\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot (-4) = 16\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 4\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -2\\) et \\(x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 2\\).",
+    "type": "texte"
+   },
+   {
+    "crit": [
+     "-2",
+     "2"
+    ],
+    "rows": [
+     {
+      "cells": [
+       "-",
+       "0",
+       "+",
+       "+",
+       "+"
+      ],
+      "label": "x + 2"
+     },
+     {
+      "cells": [
+       "-",
+       "-",
+       "-",
+       "0",
+       "+"
+      ],
+      "label": "x - 2"
+     },
+     {
+      "cells": [
+       "+",
+       "0",
+       "-",
+       "0",
+       "+"
+      ],
+      "final": true,
+      "label": "x^{2} - 4"
+     }
+    ],
+    "type": "tableau",
+    "var": "x"
+   },
+   {
+    "html": "On lit les intervalles où \\(x^{2} - 4 > 0\\) : \\(x \\in \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Bilan : \\(\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)} > 0 \\iff x \\in \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[\\) ; \\(\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)} = 0 \\iff x \\in \\left\\{-2\\right\\} \\cup \\left\\{2\\right\\}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Un produit est nul si et seulement si l'un de ses facteurs (du numérateur) est nul, les autres étant définis.",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "-2",
+    "2"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "-",
+      "-",
+      "0",
+      "+",
+      "+"
+     ],
+     "label": "x"
+    },
+    {
+     "cells": [
+      "+",
+      "||",
+      "x",
+      "||",
+      "+"
+     ],
+     "label": "\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}\\ (\\text{dén.})"
+    },
+    {
+     "cells": [
+      "-",
+      "||",
+      "x",
+      "||",
+      "+"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "\\searrow",
+      "asym",
+      "",
+      "asym",
+      "\\nearrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "sqrt(x^2-4x+5)": {
+  "deriv_etapes": [
+   {
+    "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\sqrt{x^{2} - 4x + 5}\\) est de la forme \\(\\sqrt{u}\\) avec \\(u(x) = x^{2} - 4x + 5\\) (dérivée interne \\(u'(x) = 2x - 4 + 0\\)) \\(\\Rightarrow\\) \\(\\left(\\sqrt{x^{2} - 4x + 5}\\right)' = \\frac{u'}{2\\sqrt{u}} = \\frac{x - 2}{\\sqrt{x^{2} - 4x + 5}}\\).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "\\frac{x - 2}{\\sqrt{x^{2} - 4x + 5}}",
+  "domaine_etude_tex": "\\mathbb{R}",
+  "ed_tex": "\\mathbb{R}",
+  "extrema": [
+   {
+    "f_tex": "1",
+    "f_val": 1.0,
+    "genre": "minimum local",
+    "x_tex": "2",
+    "x_val": 2.0
+   }
+  ],
+  "f_tex": "\\sqrt{x^{2} - 4x + 5}",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "On étudie le signe de chaque facteur, puis on dresse le tableau de signes.",
+    "type": "texte"
+   },
+   {
+    "html": "<b>Signe de \\(x - 2\\)</b>",
+    "type": "texte"
+   },
+   {
+    "html": "\\(x - 2 > 0 \\iff x > 2\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Bilan : \\(x - 2 > 0 \\iff x \\in \\left]2 \\,;\\, +\\infty\\right[\\) ; \\(x - 2 = 0 \\iff x \\in \\left\\{2\\right\\}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "<b>Signe de \\(\\sqrt{x^{2} - 4x + 5}\\)</b>",
+    "type": "texte"
+   },
+   {
+    "html": "Une racine carrée est positive et la fonction carré est croissante sur \\(\\left[0 \\,;\\, +\\infty\\right[\\) : \\(\\sqrt{x^{2} - 4x + 5} > 0 \\iff x^{2} - 4x + 5 > 0\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Zéros :",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(x^{2} - 4x + 5\\) : \\(\\Delta = b^2 - 4ac = (-4)^2 - 4 \\cdot 1 \\cdot 5 = -4\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
+   },
+   {
+    "crit": [],
+    "rows": [
+     {
+      "cells": [
+       "+"
+      ],
+      "final": true,
+      "label": "x^{2} - 4x + 5"
+     }
+    ],
+    "type": "tableau",
+    "var": "x"
+   },
+   {
+    "html": "On lit les intervalles où \\(x^{2} - 4x + 5 > 0\\) : \\(x \\in \\mathbb{R}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Bilan : \\(\\sqrt{x^{2} - 4x + 5} > 0 \\iff x \\in \\mathbb{R}\\) ; \\(\\sqrt{x^{2} - 4x + 5}\\) ne s'annule pas.",
+    "type": "texte"
+   },
+   {
+    "html": "Un produit est nul si et seulement si l'un de ses facteurs (du numérateur) est nul, les autres étant définis.",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "2"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "-",
+      "0",
+      "+"
+     ],
+     "label": "\\left(x - 2\\right)"
+    },
+    {
+     "cells": [
+      "+",
+      "+",
+      "+"
+     ],
+     "label": "\\sqrt{x^{2} - 4x + 5}\\ (\\text{dén.})"
+    },
+    {
+     "cells": [
+      "-",
+      "0",
+      "+"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "\\searrow",
+      "extremum",
+      "\\nearrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "x*ln(x)": {
+  "deriv_etapes": [
+   {
+    "html": "On pose \\(u(x) = x\\) et \\(v(x) = \\ln(x)\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(u'(x) = 1\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(v'(x) = \\frac{1}{x}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(f'(x) = u'(x)v(x) + u(x)v'(x) = 1\\ln(x) + x\\,\\frac{1}{x} = \\ln(x) + 1\\).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "\\ln(x) + 1",
+  "domaine_etude_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+  "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+  "extrema": [
+   {
+    "f_tex": "- \\frac{1}{e}",
+    "f_val": -0.367879441,
+    "genre": "minimum local",
+    "x_tex": "e^{-1}",
+    "x_val": 0.367879441
+   }
+  ],
+  "f_tex": "x\\,\\ln(x)",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "On pose \\(t = \\ln(x)\\) : \\(\\ln(x) + 1 = t + 1\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(t + 1 = 0 \\iff t = -1\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\ln(x) = -1 \\iff x = e^{-1}\\)",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "0",
+    "e^{-1}"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "x",
+      "x",
+      "-",
+      "0",
+      "+"
+     ],
+     "label": "\\left(\\ln(x) + 1\\right)"
+    },
+    {
+     "cells": [
+      "x",
+      "x",
+      "-",
+      "0",
+      "+"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "",
+      "asym",
+      "\\searrow",
+      "extremum",
+      "\\nearrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "x*ln(x)+x": {
+  "deriv_etapes": [
+   {
+    "html": "La dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.",
+    "type": "texte"
+   },
+   {
+    "html": "On pose \\(u(x) = x\\) et \\(v(x) = \\ln(x)\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(u'(x) = 1\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(v'(x) = \\frac{1}{x}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\left(x\\,\\ln(x)\\right)' = u'(x)v(x) + u(x)v'(x) = 1\\ln(x) + x\\,\\frac{1}{x} = \\ln(x) + 1\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(f'(x) = \\ln(x) + 2\\).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "\\ln(x) + 2",
+  "domaine_etude_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+  "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+  "extrema": [
+   {
+    "f_tex": "- \\frac{1}{e^{2}}",
+    "f_val": -0.135335283,
+    "genre": "minimum local",
+    "x_tex": "e^{-2}",
+    "x_val": 0.135335283
+   }
+  ],
+  "f_tex": "x\\,\\ln(x) + x",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "On pose \\(t = \\ln(x)\\) : \\(\\ln(x) + 2 = t + 2\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(t + 2 = 0 \\iff t = -2\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\ln(x) = -2 \\iff x = e^{-2}\\)",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "0",
+    "e^{-2}"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "x",
+      "x",
+      "-",
+      "0",
+      "+"
+     ],
+     "label": "\\left(\\ln(x) + 2\\right)"
+    },
+    {
+     "cells": [
+      "x",
+      "x",
+      "-",
+      "0",
+      "+"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "",
+      "asym",
+      "\\searrow",
+      "extremum",
+      "\\nearrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "x/(x^2+1)": {
+  "deriv_etapes": [
+   {
+    "html": "On pose \\(u(x) = x\\) et \\(v(x) = x^{2} + 1\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(u'(x) = 1\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(v'(x) = 2x\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{1\\left(x^{2} + 1\\right) - x \\cdot 2x}{\\left(x^{2} + 1\\right)^{2}} = \\frac{-\\left(x + 1\\right)\\,\\left(x - 1\\right)}{\\left(x^{2} + 1\\right)^{2}}\\).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "\\frac{-\\left(x + 1\\right)\\,\\left(x - 1\\right)}{\\left(x^{2} + 1\\right)^{2}}",
+  "domaine_etude_tex": "\\mathbb{R}",
+  "ed_tex": "\\mathbb{R}",
+  "extrema": [
+   {
+    "f_tex": "- \\frac{1}{2}",
+    "f_val": -0.5,
+    "genre": "minimum local",
+    "x_tex": "-1",
+    "x_val": -1.0
+   },
+   {
+    "f_tex": "\\frac{1}{2}",
+    "f_val": 0.5,
+    "genre": "maximum local",
+    "x_tex": "1",
+    "x_val": 1.0
+   }
+  ],
+  "f_tex": "\\frac{x}{x^{2} + 1}",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "Une fraction est nulle lorsque son numérateur est nul (et son dénominateur non nul) : on résout \\(-x^{2} + 1 = 0\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(-x^{2} + 1\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot (-1) \\cdot 1 = 4\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 2\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -1\\) et \\(x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 1\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Solutions : \\(x = -1\\), \\(x = 1\\).",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "-1",
+    "1"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "-",
+      "-",
+      "-",
+      "-",
+      "-"
+     ],
+     "label": "-1"
+    },
+    {
+     "cells": [
+      "-",
+      "0",
+      "+",
+      "+",
+      "+"
+     ],
+     "label": "\\left(x + 1\\right)"
+    },
+    {
+     "cells": [
+      "-",
+      "-",
+      "-",
+      "0",
+      "+"
+     ],
+     "label": "\\left(x - 1\\right)"
+    },
+    {
+     "cells": [
+      "+",
+      "+",
+      "+",
+      "+",
+      "+"
+     ],
+     "label": "\\left(x^{2} + 1\\right)^{2}\\ (\\text{dén.})"
+    },
+    {
+     "cells": [
+      "-",
+      "0",
+      "+",
+      "0",
+      "-"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "\\searrow",
+      "extremum",
+      "\\nearrow",
+      "extremum",
+      "\\searrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "x^(-1/2)": {
+  "deriv_etapes": [
+   {
+    "html": "\\(\\left(x^{\\frac{-1}{2}}\\right)' = \\frac{-\\frac{1}{2}}{x^{\\frac{3}{2}}}\\) (règle de la puissance).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "\\frac{-\\frac{1}{2}}{x^{\\frac{3}{2}}}",
+  "domaine_etude_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+  "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+  "extrema": [],
+  "f_tex": "x^{\\frac{-1}{2}}",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(x^{\\frac{3}{2}}\\) est défini pour \\(x \\in \\left[0 \\,;\\, +\\infty\\right[\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Ce facteur mélange \\(x\\) et une fonction transcendante : on résout avec le calcul formel : \\(x^{\\frac{3}{2}} > 0 \\iff x \\in \\left]0 \\,;\\, +\\infty\\right[\\) et \\(x^{\\frac{3}{2}} = 0 \\iff x \\in \\left\\{0\\right\\}\\).",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "0"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "-",
+      "-",
+      "-"
+     ],
+     "label": "-\\frac{1}{2}"
+    },
+    {
+     "cells": [
+      "x",
+      "||",
+      "+"
+     ],
+     "label": "x^{\\frac{3}{2}}\\ (\\text{dén.})"
+    },
+    {
+     "cells": [
+      "x",
+      "||",
+      "-"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "",
+      "asym",
+      "\\searrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "x^(1/2)": {
+  "deriv_etapes": [
+   {
+    "html": "\\(\\left(\\sqrt{x}\\right)' = \\frac{\\frac{1}{2}}{\\sqrt{x}}\\) (règle de la puissance).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "\\frac{\\frac{1}{2}}{\\sqrt{x}}",
+  "domaine_etude_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+  "ed_tex": "\\left[0 \\,;\\, +\\infty\\right[",
+  "extrema": [],
+  "f_tex": "\\sqrt{x}",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "On pose \\(t = \\sqrt{x}\\) : \\(\\frac{\\frac{1}{2}}{\\sqrt{x}} = \\frac{\\frac{1}{2}}{t}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Le numérateur vaut \\(\\frac{1}{2} \\neq 0\\) : aucune solution.",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "0"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "x",
+      "||",
+      "+"
+     ],
+     "label": "\\sqrt{x}\\ (\\text{dén.})"
+    },
+    {
+     "cells": [
+      "x",
+      "||",
+      "+"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "",
+      "asym",
+      "\\nearrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "x^(2-2)": {
+  "exception": "AttributeError",
+  "message": "'float' object has no attribute 'denominator'"
+ },
+ "x^(2/3)": {
+  "deriv_etapes": [
+   {
+    "html": "\\(\\left(x^{\\frac{2}{3}}\\right)' = \\frac{\\frac{2}{3}}{x^{\\frac{1}{3}}}\\) (règle de la puissance).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "\\frac{\\frac{2}{3}}{x^{\\frac{1}{3}}}",
+  "domaine_etude_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
+  "ed_tex": "\\mathbb{R}",
+  "extrema": [],
+  "f_tex": "x^{\\frac{2}{3}}",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "Ce facteur mélange \\(x\\) et une fonction transcendante : on résout avec le calcul formel : \\(x^{\\frac{1}{3}} > 0 \\iff x \\in \\left]0 \\,;\\, +\\infty\\right[\\) et \\(x^{\\frac{1}{3}} = 0 \\iff x \\in \\left\\{0\\right\\}\\).",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "0"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "-",
+      "||",
+      "+"
+     ],
+     "label": "x^{\\frac{1}{3}}\\ (\\text{dén.})"
+    },
+    {
+     "cells": [
+      "-",
+      "||",
+      "+"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "\\searrow",
+      "asym",
+      "\\nearrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "x^(3/2)": {
+  "deriv_etapes": [
+   {
+    "html": "\\(\\left(x^{\\frac{3}{2}}\\right)' = \\frac{3}{2}\\sqrt{x}\\) (règle de la puissance).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "\\frac{3}{2}\\sqrt{x}",
+  "domaine_etude_tex": "\\left[0 \\,;\\, +\\infty\\right[",
+  "ed_tex": "\\left[0 \\,;\\, +\\infty\\right[",
+  "extrema": [],
+  "f_tex": "x^{\\frac{3}{2}}",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "On pose \\(t = \\sqrt{x}\\) : \\(\\frac{3}{2}\\sqrt{x} = \\frac{3}{2}t\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\frac{3}{2}t = 0 \\iff t = 0\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\sqrt{x} = 0 \\iff x = 0\\)",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "0"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "x",
+      "0",
+      "+"
+     ],
+     "label": "\\sqrt{x}"
+    },
+    {
+     "cells": [
+      "x",
+      "0",
+      "+"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "",
+      "",
+      "\\nearrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "x^2*e^(-x)": {
+  "deriv_etapes": [
+   {
+    "html": "On pose \\(u(x) = x^{2}\\) et \\(v(x) = e^{-x}\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(e^{-x}\\) est de la forme \\(e^{u}\\) avec \\(u(x) = -x\\) (dérivée interne \\(u'(x) = -1\\)) \\(\\Rightarrow\\) \\(\\left(e^{-x}\\right)' = u' e^{u} = -e^{-x}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(u'(x) = 2x\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(v'(x) = -e^{-x}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(f'(x) = u'(x)v(x) + u(x)v'(x) = 2x\\,e^{-x} + x^{2}\\,\\left(-e^{-x}\\right) = -x\\,\\left(x - 2\\right)\\,e^{-x}\\).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "-x\\,\\left(x - 2\\right)\\,e^{-x}",
+  "domaine_etude_tex": "\\mathbb{R}",
+  "ed_tex": "\\mathbb{R}",
+  "extrema": [
+   {
+    "f_tex": "0",
+    "f_val": 0.0,
+    "genre": "minimum local",
+    "x_tex": "0",
+    "x_val": 0.0
+   },
+   {
+    "f_tex": "\\frac{4}{e^{2}}",
+    "f_val": 0.541341133,
+    "genre": "maximum local",
+    "x_tex": "2",
+    "x_val": 2.0
+   }
+  ],
+  "f_tex": "x^{2}\\,e^{-x}",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "On étudie le signe de chaque facteur, puis on dresse le tableau de signes.",
+    "type": "texte"
+   },
+   {
+    "html": "<b>Signe de \\(x\\)</b>",
+    "type": "texte"
+   },
+   {
+    "html": "Bilan : \\(x > 0 \\iff x \\in \\left]0 \\,;\\, +\\infty\\right[\\) ; \\(x = 0 \\iff x \\in \\left\\{0\\right\\}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "<b>Signe de \\(x - 2\\)</b>",
+    "type": "texte"
+   },
+   {
+    "html": "\\(x - 2 > 0 \\iff x > 2\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Bilan : \\(x - 2 > 0 \\iff x \\in \\left]2 \\,;\\, +\\infty\\right[\\) ; \\(x - 2 = 0 \\iff x \\in \\left\\{2\\right\\}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "<b>Signe de \\(e^{-x}\\)</b>",
+    "type": "texte"
+   },
+   {
+    "html": "Le logarithme est strictement croissant : \\(e^{-x} > 0 \\iff -x \\in \\mathbb{R}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(-x \\in \\mathbb{R} \\iff x \\in \\mathbb{R}\\) (on divise par un nombre négatif : le sens s'inverse).",
+    "type": "texte"
+   },
+   {
+    "html": "Bilan : \\(e^{-x} > 0 \\iff x \\in \\mathbb{R}\\) ; \\(e^{-x}\\) ne s'annule pas.",
+    "type": "texte"
+   },
+   {
+    "html": "Un produit est nul si et seulement si l'un de ses facteurs (du numérateur) est nul, les autres étant définis.",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "0",
+    "2"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "-",
+      "-",
+      "-",
+      "-",
+      "-"
+     ],
+     "label": "-1"
+    },
+    {
+     "cells": [
+      "-",
+      "0",
+      "+",
+      "+",
+      "+"
+     ],
+     "label": "x"
+    },
+    {
+     "cells": [
+      "-",
+      "-",
+      "-",
+      "0",
+      "+"
+     ],
+     "label": "\\left(x - 2\\right)"
+    },
+    {
+     "cells": [
+      "+",
+      "+",
+      "+",
+      "+",
+      "+"
+     ],
+     "label": "e^{-x}"
+    },
+    {
+     "cells": [
+      "-",
+      "0",
+      "+",
+      "0",
+      "-"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "\\searrow",
+      "extremum",
+      "\\nearrow",
+      "extremum",
+      "\\searrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "x^2-4x+3": {
+  "deriv_etapes": [
+   {
+    "html": "La dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(f'(x) = 2\\left(x - 2\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "2\\left(x - 2\\right)",
+  "domaine_etude_tex": "\\mathbb{R}",
+  "ed_tex": "\\mathbb{R}",
+  "extrema": [
+   {
+    "f_tex": "-1",
+    "f_val": -1.0,
+    "genre": "minimum local",
+    "x_tex": "2",
+    "x_val": 2.0
+   }
+  ],
+  "f_tex": "x^{2} - 4x + 3",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(2\\left(x - 2\\right) = 0 \\iff x = 2\\).",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "2"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "-",
+      "0",
+      "+"
+     ],
+     "label": "\\left(x - 2\\right)"
+    },
+    {
+     "cells": [
+      "-",
+      "0",
+      "+"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "\\searrow",
+      "extremum",
+      "\\nearrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "x^3": {
+  "deriv_etapes": [
+   {
+    "html": "\\(\\left(x^{3}\\right)' = 3x^{2}\\) (règle de la puissance).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "3x^{2}",
+  "domaine_etude_tex": "\\mathbb{R}",
+  "ed_tex": "\\mathbb{R}",
+  "extrema": [],
+  "f_tex": "x^{3}",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "On résout \\(3x^{2} = 0\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On met \\(x^{2}\\) en évidence : \\(3x^{2} = x^{2}\\left(3\\right)\\)",
+    "type": "texte"
+   },
+   {
+    "html": "Solution : \\(x = 0\\).",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "0"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "+",
+      "0",
+      "+"
+     ],
+     "label": "x^{2}"
+    },
+    {
+     "cells": [
+      "+",
+      "0",
+      "+"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "\\nearrow",
+      "",
+      "\\nearrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "x^3-3x": {
+  "deriv_etapes": [
+   {
+    "html": "La dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\left(x^{3}\\right)' = 3x^{2}\\) (règle de la puissance).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(f'(x) = 3\\left(x + 1\\right)\\,\\left(x - 1\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "3\\left(x + 1\\right)\\,\\left(x - 1\\right)",
+  "domaine_etude_tex": "\\mathbb{R}",
+  "ed_tex": "\\mathbb{R}",
+  "extrema": [
+   {
+    "f_tex": "2",
+    "f_val": 2.0,
+    "genre": "maximum local",
+    "x_tex": "-1",
+    "x_val": -1.0
+   },
+   {
+    "f_tex": "-2",
+    "f_val": -2.0,
+    "genre": "minimum local",
+    "x_tex": "1",
+    "x_val": 1.0
+   }
+  ],
+  "f_tex": "x^{3} - 3x",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "On résout \\(3x^{2} - 3 = 0\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(3x^{2} - 3\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 3 \\cdot (-3) = 36\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 6\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -1\\) et \\(x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 1\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Solutions : \\(x = -1\\), \\(x = 1\\).",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "-1",
+    "1"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "-",
+      "0",
+      "+",
+      "+",
+      "+"
+     ],
+     "label": "\\left(x + 1\\right)"
+    },
+    {
+     "cells": [
+      "-",
+      "-",
+      "-",
+      "0",
+      "+"
+     ],
+     "label": "\\left(x - 1\\right)"
+    },
+    {
+     "cells": [
+      "+",
+      "0",
+      "-",
+      "0",
+      "+"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "\\nearrow",
+      "extremum",
+      "\\searrow",
+      "extremum",
+      "\\nearrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "x^4-2x^2": {
+  "deriv_etapes": [
+   {
+    "html": "La dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\left(x^{4}\\right)' = 4x^{3}\\) (règle de la puissance).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\left(2x^{2}\\right)' = 2 \\cdot \\left(x^{2}\\right)' = 4x\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(f'(x) = 4x\\,\\left(x + 1\\right)\\,\\left(x - 1\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "4x\\,\\left(x + 1\\right)\\,\\left(x - 1\\right)",
+  "domaine_etude_tex": "\\mathbb{R}",
+  "ed_tex": "\\mathbb{R}",
+  "extrema": [
+   {
+    "f_tex": "-1",
+    "f_val": -1.0,
+    "genre": "minimum local",
+    "x_tex": "-1",
+    "x_val": -1.0
+   },
+   {
+    "f_tex": "0",
+    "f_val": 0.0,
+    "genre": "maximum local",
+    "x_tex": "0",
+    "x_val": 0.0
+   },
+   {
+    "f_tex": "-1",
+    "f_val": -1.0,
+    "genre": "minimum local",
+    "x_tex": "1",
+    "x_val": 1.0
+   }
+  ],
+  "f_tex": "x^{4} - 2x^{2}",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "On résout \\(4x^{3} - 4x = 0\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On met \\(x\\) en évidence : \\(4x^{3} - 4x = x\\left(4x^{2} - 4\\right)\\)",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(x^{2} - 1\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot (-1) = 4\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 2\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -1\\) et \\(x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 1\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Solutions : \\(x = -1\\), \\(x = 0\\), \\(x = 1\\).",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "-1",
+    "0",
+    "1"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "-",
+      "-",
+      "-",
+      "0",
+      "+",
+      "+",
+      "+"
+     ],
+     "label": "x"
+    },
+    {
+     "cells": [
+      "-",
+      "0",
+      "+",
+      "+",
+      "+",
+      "+",
+      "+"
+     ],
+     "label": "\\left(x + 1\\right)"
+    },
+    {
+     "cells": [
+      "-",
+      "-",
+      "-",
+      "-",
+      "-",
+      "0",
+      "+"
+     ],
+     "label": "\\left(x - 1\\right)"
+    },
+    {
+     "cells": [
+      "-",
+      "0",
+      "+",
+      "0",
+      "-",
+      "0",
+      "+"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "\\searrow",
+      "extremum",
+      "\\nearrow",
+      "extremum",
+      "\\searrow",
+      "extremum",
+      "\\nearrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "x^x": {
+  "deriv_etapes": [
+   {
+    "html": "\\(x^{x}\\) s'écrit \\(e^{x\\ln\\left(x\\right)}\\) : on dérive cette forme composée \\(\\Rightarrow\\) \\(\\left(x^{x}\\right)' = x^{x}\\,\\left(\\ln(x) + x\\,\\frac{1}{x}\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "x^{x}\\,\\left(\\ln(x) + x\\,\\frac{1}{x}\\right)",
+  "domaine_etude_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+  "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+  "extrema": [
+   {
+    "f_tex": "e^{- \\frac{1}{e}}",
+    "f_val": 0.692200628,
+    "genre": "minimum local",
+    "x_tex": "e^{-1}",
+    "x_val": 0.367879441
+   }
+  ],
+  "f_tex": "x^{x}",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "On étudie le signe de chaque facteur, puis on dresse le tableau de signes.",
+    "type": "texte"
+   },
+   {
+    "html": "<b>Signe de \\(x^{x}\\)</b>",
+    "type": "texte"
+   },
+   {
+    "html": "\\(x^{x}\\) est défini pour \\(x \\in \\left]0 \\,;\\, +\\infty\\right[\\).",
+    "type": "texte"
+   },
+   {
+    "html": "L'équation \\(x^{x} = 0\\) n'a pas de solution exacte simple : on localise ses zéros par dichotomie (valeurs approchées). Aucun zéro ; \\(x^{x} > 0\\) sur \\(\\left]0 \\,;\\, +\\infty\\right[\\).",
+    "type": "texte"
+   },
+   {
+    "html": "<b>Signe de \\(\\ln(x) + x\\,\\frac{1}{x}\\)</b>",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\ln(x) + x\\,\\frac{1}{x}\\) est défini pour \\(x \\in \\left]0 \\,;\\, +\\infty\\right[\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Ce facteur mélange \\(x\\) et une fonction transcendante : on résout avec le calcul formel : \\(\\ln(x) + x\\,\\frac{1}{x} > 0 \\iff x \\in \\left]e^{-1} \\,;\\, +\\infty\\right[\\) et \\(\\ln(x) + x\\,\\frac{1}{x} = 0 \\iff x \\in \\left\\{e^{-1}\\right\\}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Un produit est nul si et seulement si l'un de ses facteurs (du numérateur) est nul, les autres étant définis.",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "0",
+    "e^{-1}"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "x",
+      "x",
+      "+",
+      "+",
+      "+"
+     ],
+     "label": "x^{x}"
+    },
+    {
+     "cells": [
+      "x",
+      "x",
+      "-",
+      "0",
+      "+"
+     ],
+     "label": "\\left(\\ln(x) + x\\,\\frac{1}{x}\\right)"
+    },
+    {
+     "cells": [
+      "x",
+      "x",
+      "-",
+      "0",
+      "+"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "",
+      "asym",
+      "\\searrow",
+      "extremum",
+      "\\nearrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ }
+}

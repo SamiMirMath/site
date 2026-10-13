@@ -1,0 +1,2258 @@
+{
+ "": {
+  "erreur": "Entrez une expression, par exemple ln(x-1)/(x-3).",
+  "ok": false
+ },
+ "(x-1)^(2/3)": {
+  "ED_tex": "\\mathbb{R}",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [],
+  "f_tex": "\\left(x - 1\\right)^{\\frac{2}{3}}",
+  "ok": true
+ },
+ "1 000x": {
+  "ED_tex": "\\mathbb{R}",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [],
+  "f_tex": "1 \\cdot 000\\,x",
+  "ok": true
+ },
+ "1'000x": {
+  "erreur": "Caractère non reconnu : « ' ».",
+  "ok": false
+ },
+ "1/(1-1)": {
+  "erreur": "Division par zéro dans l'expression.",
+  "ok": false
+ },
+ "1/(e^(2x)-5e^x+6)": {
+  "ED_tex": "\\mathbb{R} \\setminus \\left\\{\\ln(2) \\,;\\, \\ln(3)\\right\\}",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\mathbb{R} \\setminus \\left\\{\\ln(2) \\,;\\, \\ln(3)\\right\\}",
+    "cond_tex": "e^{2x} - 5e^{x} + 6 \\neq 0",
+    "etapes": [
+     {
+      "html": "Un dénominateur doit être non nul.",
+      "type": "texte"
+     },
+     {
+      "html": "On cherche les valeurs interdites : on résout \\(e^{2x} - 5e^{x} + 6 = 0\\).",
+      "type": "texte"
+     },
+     {
+      "html": "On pose \\(t = e^{x}\\) : \\(e^{2x} - 5e^{x} + 6 = t^{2} - 5t + 6\\).",
+      "type": "texte"
+     },
+     {
+      "html": "On résout \\(t^{2} - 5t + 6 = 0\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Trinôme \\(t^{2} - 5t + 6\\) : \\(\\Delta = b^2 - 4ac = (-5)^2 - 4 \\cdot 1 \\cdot 6 = 1\\)",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 1\\) : deux zéros \\(t_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = 2\\) et \\(t_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 3\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Solutions : \\(t = 2\\), \\(t = 3\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(e^{x} = 2 \\iff x = \\ln(2)\\)",
+      "type": "texte"
+     },
+     {
+      "html": "\\(e^{x} = 3 \\iff x = \\ln(3)\\)",
+      "type": "texte"
+     },
+     {
+      "html": "Valeurs interdites : \\(x \\in \\left\\{\\ln(2)\\right\\} \\cup \\left\\{\\ln(3)\\right\\}\\). On les exclut.",
+      "type": "texte"
+     }
+    ],
+    "genre": "den",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "e^{2x} - 5e^{x} + 6",
+    "titre": "dénominateur"
+   }
+  ],
+  "f_tex": "\\frac{1}{e^{2x} - 5e^{x} + 6}",
+  "inter_tex": "E_{1}",
+  "ok": true
+ },
+ "1/(e^x-1)": {
+  "ED_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
+    "cond_tex": "e^{x} - 1 \\neq 0",
+    "etapes": [
+     {
+      "html": "Un dénominateur doit être non nul.",
+      "type": "texte"
+     },
+     {
+      "html": "On cherche les valeurs interdites : on résout \\(e^{x} - 1 = 0\\).",
+      "type": "texte"
+     },
+     {
+      "html": "On pose \\(t = e^{x}\\) : \\(e^{x} - 1 = t - 1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(t - 1 = 0 \\iff t = 1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(e^{x} = 1 \\iff x = 0\\)",
+      "type": "texte"
+     },
+     {
+      "html": "Valeurs interdites : \\(x \\in \\left\\{0\\right\\}\\). On les exclut.",
+      "type": "texte"
+     }
+    ],
+    "genre": "den",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "e^{x} - 1",
+    "titre": "dénominateur"
+   }
+  ],
+  "f_tex": "\\frac{1}{e^{x} - 1}",
+  "inter_tex": "E_{1}",
+  "ok": true
+ },
+ "1/(ln(x-1)+ln(x-3))": {
+  "ED_tex": "\\left]3 \\,;\\, 2 + \\sqrt{2}\\right[ \\cup \\left]2 + \\sqrt{2} \\,;\\, +\\infty\\right[",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\left]1 \\,;\\, +\\infty\\right[",
+    "cond_tex": "x - 1 > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 1 > 0 \\iff x > 1\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "x - 1",
+    "titre": "logarithme"
+   },
+   {
+    "E_tex": "\\left]3 \\,;\\, +\\infty\\right[",
+    "cond_tex": "x - 3 > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 3 > 0 \\iff x > 3\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 2,
+    "resolu": true,
+    "source_tex": "x - 3",
+    "titre": "logarithme"
+   },
+   {
+    "E_tex": "\\mathbb{R} \\setminus \\left\\{2 + \\sqrt{2}\\right\\}",
+    "cond_tex": "\\ln\\left(x - 1\\right) + \\ln\\left(x - 3\\right) \\neq 0",
+    "etapes": [
+     {
+      "html": "Un dénominateur doit être non nul.",
+      "type": "texte"
+     },
+     {
+      "html": "On cherche les valeurs interdites : on résout \\(\\ln\\left(x - 1\\right) + \\ln\\left(x - 3\\right) = 0\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Les logarithmes sont tous définis pour \\(x \\in D = \\left]3 \\,;\\, +\\infty\\right[\\). Sur \\(D\\), on regroupe avec \\(\\ln(a) + \\ln(b) = \\ln(ab)\\) (valable car \\(a, b > 0\\)) : \\(\\ln\\left(x - 1\\right) + \\ln\\left(x - 3\\right) = \\ln\\left(\\left(x - 1\\right)\\,\\left(x - 3\\right)\\right)\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln\\left(\\left(x - 1\\right)\\,\\left(x - 3\\right)\\right) = 0 \\iff \\left(x - 1\\right)\\,\\left(x - 3\\right) = 1\\)",
+      "type": "texte"
+     },
+     {
+      "html": "On résout \\(x^{2} - 4x + 2 = 0\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Trinôme \\(x^{2} - 4x + 2\\) : \\(\\Delta = b^2 - 4ac = (-4)^2 - 4 \\cdot 1 \\cdot 2 = 8\\)",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\Delta > 0\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = 2 - \\sqrt{2}\\) et \\(x_2 = 2 + \\sqrt{2}\\) \\((\\approx 0{,}5858\\) et \\(\\approx 3{,}4142)\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Solutions : \\(x = 2 - \\sqrt{2}\\), \\(x = 2 + \\sqrt{2}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x = 2 - \\sqrt{2} \\approx 0{,}5858\\) n'est pas dans \\(D\\) : solution rejetée.",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x = 2 + \\sqrt{2} \\approx 3{,}4142\\) est dans \\(D\\) : solution retenue.",
+      "type": "texte"
+     },
+     {
+      "html": "Valeurs interdites : \\(x \\in \\left\\{2 + \\sqrt{2}\\right\\}\\). On les exclut.",
+      "type": "texte"
+     }
+    ],
+    "genre": "den",
+    "num": 3,
+    "resolu": true,
+    "source_tex": "\\ln\\left(x - 1\\right) + \\ln\\left(x - 3\\right)",
+    "titre": "dénominateur"
+   }
+  ],
+  "f_tex": "\\frac{1}{\\ln\\left(x - 1\\right) + \\ln\\left(x - 3\\right)}",
+  "inter_tex": "\\left(E_{1} \\cap E_{2}\\right) \\setminus \\left\\{2 + \\sqrt{2}\\right\\}",
+  "ok": true
+ },
+ "1/ln(x)": {
+  "ED_tex": "\\left]0 \\,;\\, 1\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+    "cond_tex": "x > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "La condition s'écrit directement \\(x > 0\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "x",
+    "titre": "logarithme"
+   },
+   {
+    "E_tex": "\\mathbb{R} \\setminus \\left\\{1\\right\\}",
+    "cond_tex": "\\ln(x) \\neq 0",
+    "etapes": [
+     {
+      "html": "Un dénominateur doit être non nul.",
+      "type": "texte"
+     },
+     {
+      "html": "On cherche les valeurs interdites : on résout \\(\\ln(x) = 0\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln(x) = 0 \\iff x = 1\\)",
+      "type": "texte"
+     },
+     {
+      "html": "Valeurs interdites : \\(x \\in \\left\\{1\\right\\}\\). On les exclut.",
+      "type": "texte"
+     }
+    ],
+    "genre": "den",
+    "num": 2,
+    "resolu": true,
+    "source_tex": "\\ln(x)",
+    "titre": "dénominateur"
+   }
+  ],
+  "f_tex": "\\frac{1}{\\ln(x)}",
+  "inter_tex": "E_{1} \\setminus \\left\\{1\\right\\}",
+  "ok": true
+ },
+ "1/ln(x+2)": {
+  "ED_tex": "\\left]-2 \\,;\\, -1\\right[ \\cup \\left]-1 \\,;\\, +\\infty\\right[",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\left]-2 \\,;\\, +\\infty\\right[",
+    "cond_tex": "x + 2 > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 2 > 0 \\iff x > -2\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "x + 2",
+    "titre": "logarithme"
+   },
+   {
+    "E_tex": "\\mathbb{R} \\setminus \\left\\{-1\\right\\}",
+    "cond_tex": "\\ln\\left(x + 2\\right) \\neq 0",
+    "etapes": [
+     {
+      "html": "Un dénominateur doit être non nul.",
+      "type": "texte"
+     },
+     {
+      "html": "On cherche les valeurs interdites : on résout \\(\\ln\\left(x + 2\\right) = 0\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln\\left(x + 2\\right) = 0 \\iff x + 2 = 1\\)",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 2 = 1 \\iff x = -1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Valeurs interdites : \\(x \\in \\left\\{-1\\right\\}\\). On les exclut.",
+      "type": "texte"
+     }
+    ],
+    "genre": "den",
+    "num": 2,
+    "resolu": true,
+    "source_tex": "\\ln\\left(x + 2\\right)",
+    "titre": "dénominateur"
+   }
+  ],
+  "f_tex": "\\frac{1}{\\ln\\left(x + 2\\right)}",
+  "inter_tex": "E_{1} \\setminus \\left\\{-1\\right\\}",
+  "ok": true
+ },
+ "1/x^(1/3)": {
+  "ED_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
+    "cond_tex": "x^{\\frac{1}{3}} \\neq 0",
+    "etapes": [
+     {
+      "html": "Un dénominateur doit être non nul.",
+      "type": "texte"
+     },
+     {
+      "html": "On cherche les valeurs interdites : on résout \\(x^{\\frac{1}{3}} = 0\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Ce facteur mélange \\(x\\) et une fonction transcendante : on résout avec le calcul formel : \\(x^{\\frac{1}{3}} > 0 \\iff x \\in \\left]0 \\,;\\, +\\infty\\right[\\) et \\(x^{\\frac{1}{3}} = 0 \\iff x \\in \\left\\{0\\right\\}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Valeurs interdites : \\(x \\in \\left\\{0\\right\\}\\). On les exclut.",
+      "type": "texte"
+     }
+    ],
+    "genre": "den",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "x^{\\frac{1}{3}}",
+    "titre": "dénominateur"
+   }
+  ],
+  "f_tex": "\\frac{1}{x^{\\frac{1}{3}}}",
+  "inter_tex": "E_{1}",
+  "ok": true
+ },
+ "2,5x+ln(x)": {
+  "ED_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+    "cond_tex": "x > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "La condition s'écrit directement \\(x > 0\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "x",
+    "titre": "logarithme"
+   }
+  ],
+  "f_tex": "2{,}5x + \\ln(x)",
+  "inter_tex": "E_{1}",
+  "ok": true
+ },
+ "2ln(x)/((ln x)^2-1)": {
+  "ED_tex": "\\left]0 \\,;\\, e^{-1}\\right[ \\cup \\left]e^{-1} \\,;\\, e\\right[ \\cup \\left]e \\,;\\, +\\infty\\right[",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+    "cond_tex": "x > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "La condition s'écrit directement \\(x > 0\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "x",
+    "titre": "logarithme"
+   },
+   {
+    "E_tex": "\\mathbb{R} \\setminus \\left\\{e^{-1} \\,;\\, e\\right\\}",
+    "cond_tex": "\\left(\\ln(x)\\right)^{2} - 1 \\neq 0",
+    "etapes": [
+     {
+      "html": "Un dénominateur doit être non nul.",
+      "type": "texte"
+     },
+     {
+      "html": "On cherche les valeurs interdites : on résout \\(\\left(\\ln(x)\\right)^{2} - 1 = 0\\).",
+      "type": "texte"
+     },
+     {
+      "html": "On pose \\(t = \\ln(x)\\) : \\(\\left(\\ln(x)\\right)^{2} - 1 = t^{2} - 1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "On résout \\(t^{2} - 1 = 0\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Trinôme \\(t^{2} - 1\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot (-1) = 4\\)",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 2\\) : deux zéros \\(t_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -1\\) et \\(t_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Solutions : \\(t = -1\\), \\(t = 1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln(x) = -1 \\iff x = e^{-1}\\)",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln(x) = 1 \\iff x = e\\)",
+      "type": "texte"
+     },
+     {
+      "html": "Valeurs interdites : \\(x \\in \\left\\{e^{-1}\\right\\} \\cup \\left\\{e\\right\\}\\). On les exclut.",
+      "type": "texte"
+     }
+    ],
+    "genre": "den",
+    "num": 2,
+    "resolu": true,
+    "source_tex": "\\left(\\ln(x)\\right)^{2} - 1",
+    "titre": "dénominateur"
+   }
+  ],
+  "f_tex": "\\frac{2\\ln(x)}{\\left(\\ln(x)\\right)^{2} - 1}",
+  "inter_tex": "E_{1} \\setminus \\left\\{e^{-1} \\,;\\, e\\right\\}",
+  "ok": true
+ },
+ "e^(1/(x^2-x-2))": {
+  "ED_tex": "\\mathbb{R} \\setminus \\left\\{-1 \\,;\\, 2\\right\\}",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\mathbb{R} \\setminus \\left\\{-1 \\,;\\, 2\\right\\}",
+    "cond_tex": "x^{2} - x - 2 \\neq 0",
+    "etapes": [
+     {
+      "html": "Un dénominateur doit être non nul.",
+      "type": "texte"
+     },
+     {
+      "html": "On cherche les valeurs interdites : on résout \\(x^{2} - x - 2 = 0\\).",
+      "type": "texte"
+     },
+     {
+      "html": "On résout \\(x^{2} - x - 2 = 0\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Trinôme \\(x^{2} - x - 2\\) : \\(\\Delta = b^2 - 4ac = (-1)^2 - 4 \\cdot 1 \\cdot (-2) = 9\\)",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 3\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -1\\) et \\(x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 2\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Solutions : \\(x = -1\\), \\(x = 2\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Valeurs interdites : \\(x \\in \\left\\{-1\\right\\} \\cup \\left\\{2\\right\\}\\). On les exclut.",
+      "type": "texte"
+     }
+    ],
+    "genre": "den",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "x^{2} - x - 2",
+    "titre": "dénominateur"
+   }
+  ],
+  "f_tex": "e^{\\frac{1}{x^{2} - x - 2}}",
+  "inter_tex": "E_{1}",
+  "ok": true
+ },
+ "e^x/ln(e^x)": {
+  "ED_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\mathbb{R}",
+    "cond_tex": "e^{x} > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "Le logarithme est strictement croissant : \\(e^{x} > 0 \\iff x \\in \\mathbb{R}\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "e^{x}",
+    "titre": "logarithme"
+   },
+   {
+    "E_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
+    "cond_tex": "\\ln\\left(e^{x}\\right) \\neq 0",
+    "etapes": [
+     {
+      "html": "Un dénominateur doit être non nul.",
+      "type": "texte"
+     },
+     {
+      "html": "On cherche les valeurs interdites : on résout \\(\\ln\\left(e^{x}\\right) = 0\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln\\left(e^{x}\\right) = 0 \\iff e^{x} = 1\\)",
+      "type": "texte"
+     },
+     {
+      "html": "\\(e^{x} = 1 \\iff x = 0\\)",
+      "type": "texte"
+     },
+     {
+      "html": "Valeurs interdites : \\(x \\in \\left\\{0\\right\\}\\). On les exclut.",
+      "type": "texte"
+     }
+    ],
+    "genre": "den",
+    "num": 2,
+    "resolu": true,
+    "source_tex": "\\ln\\left(e^{x}\\right)",
+    "titre": "dénominateur"
+   }
+  ],
+  "f_tex": "\\frac{e^{x}}{\\ln\\left(e^{x}\\right)}",
+  "inter_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
+  "ok": true
+ },
+ "ln(": {
+  "erreur": "Expression incomplète.",
+  "ok": false
+ },
+ "ln((x-1)/(x+3))": {
+  "ED_tex": "\\left]-\\infty \\,;\\, -3\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\mathbb{R} \\setminus \\left\\{-3\\right\\}",
+    "cond_tex": "x + 3 \\neq 0",
+    "etapes": [
+     {
+      "html": "Un dénominateur doit être non nul.",
+      "type": "texte"
+     },
+     {
+      "html": "On cherche les valeurs interdites : on résout \\(x + 3 = 0\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 3 = 0 \\iff x = -3\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Valeurs interdites : \\(x \\in \\left\\{-3\\right\\}\\). On les exclut.",
+      "type": "texte"
+     }
+    ],
+    "genre": "den",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "x + 3",
+    "titre": "dénominateur"
+   },
+   {
+    "E_tex": "\\left]-\\infty \\,;\\, -3\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[",
+    "cond_tex": "\\frac{x - 1}{x + 3} > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "Zéros du numérateur :",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 1 = 0 \\iff x = 1\\)",
+      "type": "texte"
+     },
+     {
+      "html": "Zéros du dénominateur (valeurs interdites, marquées ‖) :",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 3 = 0 \\iff x = -3\\)",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-3",
+       "1"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x - 1"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "x + 3"
+       },
+       {
+        "cells": [
+         "+",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "\\frac{x - 1}{x + 3}"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "On lit les intervalles où \\(\\frac{x - 1}{x + 3} > 0\\) : \\(x \\in \\left]-\\infty \\,;\\, -3\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 2,
+    "resolu": true,
+    "source_tex": "\\frac{x - 1}{x + 3}",
+    "titre": "logarithme"
+   }
+  ],
+  "f_tex": "\\ln\\left(\\frac{x - 1}{x + 3}\\right)",
+  "inter_tex": "E_{2}",
+  "ok": true
+ },
+ "ln((x^2-1)/(x+2))": {
+  "ED_tex": "\\left]-2 \\,;\\, -1\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\mathbb{R} \\setminus \\left\\{-2\\right\\}",
+    "cond_tex": "x + 2 \\neq 0",
+    "etapes": [
+     {
+      "html": "Un dénominateur doit être non nul.",
+      "type": "texte"
+     },
+     {
+      "html": "On cherche les valeurs interdites : on résout \\(x + 2 = 0\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 2 = 0 \\iff x = -2\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Valeurs interdites : \\(x \\in \\left\\{-2\\right\\}\\). On les exclut.",
+      "type": "texte"
+     }
+    ],
+    "genre": "den",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "x + 2",
+    "titre": "dénominateur"
+   },
+   {
+    "E_tex": "\\left]-2 \\,;\\, -1\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[",
+    "cond_tex": "\\frac{x^{2} - 1}{x + 2} > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "Zéros du numérateur :",
+      "type": "texte"
+     },
+     {
+      "html": "Trinôme \\(x^{2} - 1\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot (-1) = 4\\)",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 2\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -1\\) et \\(x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Zéros du dénominateur (valeurs interdites, marquées ‖) :",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 2 = 0 \\iff x = -2\\)",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-2",
+       "-1",
+       "1"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "0",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "x + 1"
+       },
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "-",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x - 1"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "+",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "x + 2"
+       },
+       {
+        "cells": [
+         "-",
+         "||",
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "\\frac{x^{2} - 1}{x + 2}"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "On lit les intervalles où \\(\\frac{x^{2} - 1}{x + 2} > 0\\) : \\(x \\in \\left]-2 \\,;\\, -1\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 2,
+    "resolu": true,
+    "source_tex": "\\frac{x^{2} - 1}{x + 2}",
+    "titre": "logarithme"
+   }
+  ],
+  "f_tex": "\\ln\\left(\\frac{x^{2} - 1}{x + 2}\\right)",
+  "inter_tex": "E_{2}",
+  "ok": true
+ },
+ "ln(-x^2-1)": {
+  "ED_tex": "\\varnothing",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\varnothing",
+    "cond_tex": "-x^{2} - 1 > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "Zéros :",
+      "type": "texte"
+     },
+     {
+      "html": "Trinôme \\(-x^{2} - 1\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot (-1) \\cdot (-1) = -4\\)",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = -1\\), il est toujours négatif.",
+      "type": "texte"
+     },
+     {
+      "crit": [],
+      "rows": [
+       {
+        "cells": [
+         "-"
+        ],
+        "final": true,
+        "label": "-x^{2} - 1"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "On lit les intervalles où \\(-x^{2} - 1 > 0\\) : \\(x \\in \\varnothing\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "-x^{2} - 1",
+    "titre": "logarithme"
+   }
+  ],
+  "f_tex": "\\ln\\left(-x^{2} - 1\\right)",
+  "inter_tex": "E_{1}",
+  "ok": true
+ },
+ "ln(2x-6)": {
+  "ED_tex": "\\left]3 \\,;\\, +\\infty\\right[",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\left]3 \\,;\\, +\\infty\\right[",
+    "cond_tex": "2x - 6 > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x - 6 > 0 \\iff x > 3\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "2x - 6",
+    "titre": "logarithme"
+   }
+  ],
+  "f_tex": "\\ln\\left(2x - 6\\right)",
+  "inter_tex": "E_{1}",
+  "ok": true
+ },
+ "ln(ln(ln(x)))": {
+  "ED_tex": "\\left]e \\,;\\, +\\infty\\right[",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+    "cond_tex": "x > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "La condition s'écrit directement \\(x > 0\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "x",
+    "titre": "logarithme"
+   },
+   {
+    "E_tex": "\\left]1 \\,;\\, +\\infty\\right[",
+    "cond_tex": "\\ln(x) > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "L'exponentielle est strictement croissante et \\(\\ln\\) n'est définie que sur \\(\\left]0 \\,;\\, +\\infty\\right[\\) : \\(\\ln(x) > 0 \\iff x > 1\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 2,
+    "resolu": true,
+    "source_tex": "\\ln(x)",
+    "titre": "logarithme"
+   },
+   {
+    "E_tex": "\\left]e \\,;\\, +\\infty\\right[",
+    "cond_tex": "\\ln\\left(\\ln(x)\\right) > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "L'exponentielle est strictement croissante et \\(\\ln\\) n'est définie que sur \\(\\left]0 \\,;\\, +\\infty\\right[\\) : \\(\\ln\\left(\\ln(x)\\right) > 0 \\iff \\ln(x) > 1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "L'exponentielle est strictement croissante et \\(\\ln\\) n'est définie que sur \\(\\left]0 \\,;\\, +\\infty\\right[\\) : \\(\\ln(x) > 1 \\iff x > e\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 3,
+    "resolu": true,
+    "source_tex": "\\ln\\left(\\ln(x)\\right)",
+    "titre": "logarithme"
+   }
+  ],
+  "f_tex": "\\ln\\left(\\ln\\left(\\ln(x)\\right)\\right)",
+  "inter_tex": "\\left(E_{1} \\cap E_{2} \\cap E_{3}\\right)",
+  "ok": true
+ },
+ "ln(x)/(ln(x)+2)": {
+  "ED_tex": "\\left]0 \\,;\\, e^{-2}\\right[ \\cup \\left]e^{-2} \\,;\\, +\\infty\\right[",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+    "cond_tex": "x > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "La condition s'écrit directement \\(x > 0\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "x",
+    "titre": "logarithme"
+   },
+   {
+    "E_tex": "\\mathbb{R} \\setminus \\left\\{e^{-2}\\right\\}",
+    "cond_tex": "\\ln(x) + 2 \\neq 0",
+    "etapes": [
+     {
+      "html": "Un dénominateur doit être non nul.",
+      "type": "texte"
+     },
+     {
+      "html": "On cherche les valeurs interdites : on résout \\(\\ln(x) + 2 = 0\\).",
+      "type": "texte"
+     },
+     {
+      "html": "On pose \\(t = \\ln(x)\\) : \\(\\ln(x) + 2 = t + 2\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(t + 2 = 0 \\iff t = -2\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln(x) = -2 \\iff x = e^{-2}\\)",
+      "type": "texte"
+     },
+     {
+      "html": "Valeurs interdites : \\(x \\in \\left\\{e^{-2}\\right\\}\\). On les exclut.",
+      "type": "texte"
+     }
+    ],
+    "genre": "den",
+    "num": 2,
+    "resolu": true,
+    "source_tex": "\\ln(x) + 2",
+    "titre": "dénominateur"
+   }
+  ],
+  "f_tex": "\\frac{\\ln(x)}{\\ln(x) + 2}",
+  "inter_tex": "E_{1} \\setminus \\left\\{e^{-2}\\right\\}",
+  "ok": true
+ },
+ "ln(x-1)+ln(x+3)": {
+  "ED_tex": "\\left]1 \\,;\\, +\\infty\\right[",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\left]1 \\,;\\, +\\infty\\right[",
+    "cond_tex": "x - 1 > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 1 > 0 \\iff x > 1\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "x - 1",
+    "titre": "logarithme"
+   },
+   {
+    "E_tex": "\\left]-3 \\,;\\, +\\infty\\right[",
+    "cond_tex": "x + 3 > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 3 > 0 \\iff x > -3\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 2,
+    "resolu": true,
+    "source_tex": "x + 3",
+    "titre": "logarithme"
+   }
+  ],
+  "f_tex": "\\ln\\left(x - 1\\right) + \\ln\\left(x + 3\\right)",
+  "inter_tex": "\\left(E_{1} \\cap E_{2}\\right)",
+  "ok": true
+ },
+ "ln(x^2)-2ln(x)": {
+  "ED_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
+    "cond_tex": "x^{2} > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "Zéros :",
+      "type": "texte"
+     },
+     {
+      "html": "On met \\(x^{2}\\) en évidence : \\(x^{2} = x^{2}\\left(1\\right)\\)",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2}"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "On lit les intervalles où \\(x^{2} > 0\\) : \\(x \\in \\mathbb{R} \\setminus \\left\\{0\\right\\}\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "x^{2}",
+    "titre": "logarithme"
+   },
+   {
+    "E_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+    "cond_tex": "x > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "La condition s'écrit directement \\(x > 0\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 2,
+    "resolu": true,
+    "source_tex": "x",
+    "titre": "logarithme"
+   }
+  ],
+  "f_tex": "\\ln\\left(x^{2}\\right) - 2\\ln(x)",
+  "inter_tex": "E_{2}",
+  "ok": true
+ },
+ "ln(x^2-4)": {
+  "ED_tex": "\\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[",
+    "cond_tex": "x^{2} - 4 > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "Zéros :",
+      "type": "texte"
+     },
+     {
+      "html": "Trinôme \\(x^{2} - 4\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot (-4) = 16\\)",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 4\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -2\\) et \\(x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 2\\).",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-2",
+       "2"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "x + 2"
+       },
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x - 2"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2} - 4"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "On lit les intervalles où \\(x^{2} - 4 > 0\\) : \\(x \\in \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "x^{2} - 4",
+    "titre": "logarithme"
+   }
+  ],
+  "f_tex": "\\ln\\left(x^{2} - 4\\right)",
+  "inter_tex": "E_{1}",
+  "ok": true
+ },
+ "ln(x^2-4x)/(x-5)": {
+  "ED_tex": "\\left]-\\infty \\,;\\, 0\\right[ \\cup \\left]4 \\,;\\, 5\\right[ \\cup \\left]5 \\,;\\, +\\infty\\right[",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\left]-\\infty \\,;\\, 0\\right[ \\cup \\left]4 \\,;\\, +\\infty\\right[",
+    "cond_tex": "x^{2} - 4x > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "Zéros :",
+      "type": "texte"
+     },
+     {
+      "html": "On met \\(x\\) en évidence : \\(x^{2} - 4x = x\\left(x - 4\\right)\\)",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 4 = 0 \\iff x = 4\\)",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0",
+       "4"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x - 4"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2} - 4x"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "On lit les intervalles où \\(x^{2} - 4x > 0\\) : \\(x \\in \\left]-\\infty \\,;\\, 0\\right[ \\cup \\left]4 \\,;\\, +\\infty\\right[\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "x^{2} - 4x",
+    "titre": "logarithme"
+   },
+   {
+    "E_tex": "\\mathbb{R} \\setminus \\left\\{5\\right\\}",
+    "cond_tex": "x - 5 \\neq 0",
+    "etapes": [
+     {
+      "html": "Un dénominateur doit être non nul.",
+      "type": "texte"
+     },
+     {
+      "html": "On cherche les valeurs interdites : on résout \\(x - 5 = 0\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 5 = 0 \\iff x = 5\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Valeurs interdites : \\(x \\in \\left\\{5\\right\\}\\). On les exclut.",
+      "type": "texte"
+     }
+    ],
+    "genre": "den",
+    "num": 2,
+    "resolu": true,
+    "source_tex": "x - 5",
+    "titre": "dénominateur"
+   }
+  ],
+  "f_tex": "\\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5}",
+  "inter_tex": "E_{1} \\setminus \\left\\{5\\right\\}",
+  "ok": true
+ },
+ "ln(x^2-5x+6)": {
+  "ED_tex": "\\left]-\\infty \\,;\\, 2\\right[ \\cup \\left]3 \\,;\\, +\\infty\\right[",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\left]-\\infty \\,;\\, 2\\right[ \\cup \\left]3 \\,;\\, +\\infty\\right[",
+    "cond_tex": "x^{2} - 5x + 6 > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "Zéros :",
+      "type": "texte"
+     },
+     {
+      "html": "Trinôme \\(x^{2} - 5x + 6\\) : \\(\\Delta = b^2 - 4ac = (-5)^2 - 4 \\cdot 1 \\cdot 6 = 1\\)",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 1\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = 2\\) et \\(x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 3\\).",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "2",
+       "3"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "x - 2"
+       },
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x - 3"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2} - 5x + 6"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "On lit les intervalles où \\(x^{2} - 5x + 6 > 0\\) : \\(x \\in \\left]-\\infty \\,;\\, 2\\right[ \\cup \\left]3 \\,;\\, +\\infty\\right[\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "x^{2} - 5x + 6",
+    "titre": "logarithme"
+   }
+  ],
+  "f_tex": "\\ln\\left(x^{2} - 5x + 6\\right)",
+  "inter_tex": "E_{1}",
+  "ok": true
+ },
+ "sin(x)": {
+  "erreur": "Symbole inconnu « s ». La variable s'appelle x ; fonctions permises : ln, exp, sqrt (ou e^…, √).",
+  "ok": false
+ },
+ "sqrt(-x^2)": {
+  "ED_tex": "\\left\\{0\\right\\}",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\left\\{0\\right\\}",
+    "cond_tex": "-x^{2} \\geq 0",
+    "etapes": [
+     {
+      "html": "Le contenu d'une racine carrée doit être positif ou nul.",
+      "type": "texte"
+     },
+     {
+      "html": "Zéros :",
+      "type": "texte"
+     },
+     {
+      "html": "On met \\(x^{2}\\) en évidence : \\(-x^{2} = x^{2}\\left(-1\\right)\\)",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "-",
+         "-"
+        ],
+        "label": "-1"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "+"
+        ],
+        "label": "\\left(x\\right)^{2}"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "-"
+        ],
+        "final": true,
+        "label": "-x^{2}"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "On lit les intervalles où \\(-x^{2} \\geq 0\\) (zéros inclus) : \\(x \\in \\left\\{0\\right\\}\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "sqrt",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "-x^{2}",
+    "titre": "racine carrée"
+   }
+  ],
+  "f_tex": "\\sqrt{-x^{2}}",
+  "inter_tex": "E_{1}",
+  "ok": true
+ },
+ "sqrt(1-ln(x^2-4x+5))": {
+  "ED_tex": "\\left[2 - \\sqrt{e - 1} \\,;\\, 2 + \\sqrt{e - 1}\\right]",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\mathbb{R}",
+    "cond_tex": "x^{2} - 4x + 5 > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "Zéros :",
+      "type": "texte"
+     },
+     {
+      "html": "Trinôme \\(x^{2} - 4x + 5\\) : \\(\\Delta = b^2 - 4ac = (-4)^2 - 4 \\cdot 1 \\cdot 5 = -4\\)",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+      "type": "texte"
+     },
+     {
+      "crit": [],
+      "rows": [
+       {
+        "cells": [
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2} - 4x + 5"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "On lit les intervalles où \\(x^{2} - 4x + 5 > 0\\) : \\(x \\in \\mathbb{R}\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "x^{2} - 4x + 5",
+    "titre": "logarithme"
+   },
+   {
+    "E_tex": "\\left[2 - \\sqrt{e - 1} \\,;\\, 2 + \\sqrt{e - 1}\\right]",
+    "cond_tex": "1 - \\ln\\left(x^{2} - 4x + 5\\right) \\geq 0",
+    "etapes": [
+     {
+      "html": "Le contenu d'une racine carrée doit être positif ou nul.",
+      "type": "texte"
+     },
+     {
+      "html": "On pose \\(t = \\ln\\left(x^{2} - 4x + 5\\right)\\) : \\(1 - \\ln\\left(x^{2} - 4x + 5\\right) = -t + 1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(-t + 1 \\geq 0 \\iff t \\leq 1\\) (on divise par un nombre négatif : le sens s'inverse).",
+      "type": "texte"
+     },
+     {
+      "html": "L'exponentielle est strictement croissante et \\(\\ln\\) n'est définie que sur \\(\\left]0 \\,;\\, +\\infty\\right[\\) : \\(\\ln\\left(x^{2} - 4x + 5\\right) \\leq 1 \\iff 0 < x^{2} - 4x + 5 \\leq e\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} - 4x + 5 = 0\\) \\(\\iff \\left(x - 2\\right)^{2} + 1 = 0\\) (forme canonique) \\(\\iff \\left(x - 2\\right)^{2} = -1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Or \\(-1 < 0\\) et un carré est positif : aucune solution.",
+      "type": "texte"
+     },
+     {
+      "html": "Le trinôme a le signe de \\(a = 1\\) à l'extérieur de ses racines : \\(x^{2} - 4x + 5 > 0 \\iff x \\in \\mathbb{R}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} - 4x + 5 = e\\) \\(\\iff \\left(x - 2\\right)^{2} + 1 = e\\) (forme canonique) \\(\\iff \\left(x - 2\\right)^{2} = e - 1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Comme \\(e - 1 \\approx 1{,}7183 > 0\\) : \\(x = 2 - \\sqrt{e - 1} \\approx 0{,}6892\\) ou \\(x = 2 + \\sqrt{e - 1} \\approx 3{,}3108\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Le trinôme a le signe de \\(a = 1\\) à l'extérieur de ses racines : \\(x^{2} - 4x + 5 \\leq e \\iff x \\in \\left[2 - \\sqrt{e - 1} \\,;\\, 2 + \\sqrt{e - 1}\\right]\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "sqrt",
+    "num": 2,
+    "resolu": true,
+    "source_tex": "1 - \\ln\\left(x^{2} - 4x + 5\\right)",
+    "titre": "racine carrée"
+   }
+  ],
+  "f_tex": "\\sqrt{1 - \\ln\\left(x^{2} - 4x + 5\\right)}",
+  "inter_tex": "E_{2}",
+  "ok": true
+ },
+ "sqrt(ln(x)-x+2)": {
+  "ED_tex": "\\left[{\\approx}\\,0{,}1586 \\,;\\, {\\approx}\\,3{,}1462\\right]",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+    "cond_tex": "x > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "La condition s'écrit directement \\(x > 0\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "x",
+    "titre": "logarithme"
+   },
+   {
+    "E_tex": "\\left[{\\approx}\\,0{,}1586 \\,;\\, {\\approx}\\,3{,}1462\\right]",
+    "cond_tex": "\\ln(x) - x + 2 \\geq 0",
+    "etapes": [
+     {
+      "html": "Le contenu d'une racine carrée doit être positif ou nul.",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln(x) - x + 2\\) est défini pour \\(x \\in \\left]0 \\,;\\, +\\infty\\right[\\).",
+      "type": "texte"
+     },
+     {
+      "html": "L'équation \\(\\ln(x) - x + 2 = 0\\) n'a pas de solution exacte simple : on localise ses zéros par dichotomie (valeurs approchées). Zéros : \\({\\approx}\\,0{,}1586 \\,;\\, {\\approx}\\,3{,}1462\\) ; \\(\\ln(x) - x + 2 > 0\\) sur \\(\\left]{\\approx}\\,0{,}1586 \\,;\\, {\\approx}\\,3{,}1462\\right[\\).",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0",
+       "{\\approx}\\,0{,}1586",
+       "{\\approx}\\,3{,}1462"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "x",
+         "x",
+         "-",
+         "0",
+         "+",
+         "0",
+         "-"
+        ],
+        "label": "\\ln(x) - x + 2"
+       },
+       {
+        "cells": [
+         "x",
+         "x",
+         "-",
+         "0",
+         "+",
+         "0",
+         "-"
+        ],
+        "final": true,
+        "label": "\\ln(x) - x + 2"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "Les zones hachurées (×) sont hors du domaine de définition de l'expression.",
+      "type": "texte"
+     },
+     {
+      "html": "On lit le tableau : \\(\\ln(x) - x + 2 \\geq 0 \\iff x \\in \\left[{\\approx}\\,0{,}1586 \\,;\\, {\\approx}\\,3{,}1462\\right]\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "sqrt",
+    "num": 2,
+    "resolu": true,
+    "source_tex": "\\ln(x) - x + 2",
+    "titre": "racine carrée"
+   }
+  ],
+  "f_tex": "\\sqrt{\\ln(x) - x + 2}",
+  "inter_tex": "\\left(E_{1} \\cap E_{2}\\right)",
+  "ok": true
+ },
+ "sqrt(x ln(x+2))": {
+  "ED_tex": "\\left]-2 \\,;\\, -1\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\left]-2 \\,;\\, +\\infty\\right[",
+    "cond_tex": "x + 2 > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 2 > 0 \\iff x > -2\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "x + 2",
+    "titre": "logarithme"
+   },
+   {
+    "E_tex": "\\left]-2 \\,;\\, -1\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[",
+    "cond_tex": "x\\,\\ln\\left(x + 2\\right) \\geq 0",
+    "etapes": [
+     {
+      "html": "Le contenu d'une racine carrée doit être positif ou nul.",
+      "type": "texte"
+     },
+     {
+      "html": "On étudie le signe de chaque facteur, puis on dresse le tableau de signes.",
+      "type": "texte"
+     },
+     {
+      "html": "<b>Signe de \\(x\\)</b>",
+      "type": "texte"
+     },
+     {
+      "html": "Bilan : \\(x > 0 \\iff x \\in \\left]0 \\,;\\, +\\infty\\right[\\) ; \\(x = 0 \\iff x \\in \\left\\{0\\right\\}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "<b>Signe de \\(\\ln\\left(x + 2\\right)\\)</b>",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln\\left(x + 2\\right)\\) est défini pour \\(x \\in \\left]-2 \\,;\\, +\\infty\\right[\\).",
+      "type": "texte"
+     },
+     {
+      "html": "L'exponentielle est strictement croissante et \\(\\ln\\) n'est définie que sur \\(\\left]0 \\,;\\, +\\infty\\right[\\) : \\(\\ln\\left(x + 2\\right) > 0 \\iff x + 2 > 1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 2 > 1 \\iff x > -1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Bilan : \\(\\ln\\left(x + 2\\right) > 0 \\iff x \\in \\left]-1 \\,;\\, +\\infty\\right[\\) ; \\(\\ln\\left(x + 2\\right) = 0 \\iff x \\in \\left\\{-1\\right\\}\\).",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-2",
+       "-1",
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "-",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "x",
+         "x",
+         "-",
+         "0",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "\\ln\\left(x + 2\\right)"
+       },
+       {
+        "cells": [
+         "x",
+         "x",
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x\\,\\ln\\left(x + 2\\right)"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "Les zones hachurées (×) sont hors du domaine de définition de l'expression.",
+      "type": "texte"
+     },
+     {
+      "html": "On lit le tableau : \\(x\\,\\ln\\left(x + 2\\right) \\geq 0 \\iff x \\in \\left]-2 \\,;\\, -1\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "sqrt",
+    "num": 2,
+    "resolu": true,
+    "source_tex": "x\\,\\ln\\left(x + 2\\right)",
+    "titre": "racine carrée"
+   }
+  ],
+  "f_tex": "\\sqrt{x\\,\\ln\\left(x + 2\\right)}",
+  "inter_tex": "\\left(E_{1} \\cap E_{2}\\right)",
+  "ok": true
+ },
+ "sqrt(x ln(x+2)+x)": {
+  "ED_tex": "\\left]-2 \\,;\\, e^{-1} - 2\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\left]-2 \\,;\\, +\\infty\\right[",
+    "cond_tex": "x + 2 > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 2 > 0 \\iff x > -2\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "x + 2",
+    "titre": "logarithme"
+   },
+   {
+    "E_tex": "\\left]-2 \\,;\\, e^{-1} - 2\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[",
+    "cond_tex": "x\\,\\ln\\left(x + 2\\right) + x \\geq 0",
+    "etapes": [
+     {
+      "html": "Le contenu d'une racine carrée doit être positif ou nul.",
+      "type": "texte"
+     },
+     {
+      "html": "On factorise : \\(x\\,\\ln\\left(x + 2\\right) + x = x\\,\\left(\\ln\\left(x + 2\\right) + 1\\right)\\).",
+      "type": "texte"
+     },
+     {
+      "html": "On étudie le signe de chaque facteur, puis on dresse le tableau de signes.",
+      "type": "texte"
+     },
+     {
+      "html": "<b>Signe de \\(x\\)</b>",
+      "type": "texte"
+     },
+     {
+      "html": "Bilan : \\(x > 0 \\iff x \\in \\left]0 \\,;\\, +\\infty\\right[\\) ; \\(x = 0 \\iff x \\in \\left\\{0\\right\\}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "<b>Signe de \\(\\ln\\left(x + 2\\right) + 1\\)</b>",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln\\left(x + 2\\right) + 1\\) est défini pour \\(x \\in \\left]-2 \\,;\\, +\\infty\\right[\\).",
+      "type": "texte"
+     },
+     {
+      "html": "On pose \\(t = \\ln\\left(x + 2\\right)\\) : \\(\\ln\\left(x + 2\\right) + 1 = t + 1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(t + 1 > 0 \\iff t > -1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "L'exponentielle est strictement croissante et \\(\\ln\\) n'est définie que sur \\(\\left]0 \\,;\\, +\\infty\\right[\\) : \\(\\ln\\left(x + 2\\right) > -1 \\iff x + 2 > e^{-1}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 2 > e^{-1} \\iff x > e^{-1} - 2\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Bilan : \\(\\ln\\left(x + 2\\right) + 1 > 0 \\iff x \\in \\left]e^{-1} - 2 \\,;\\, +\\infty\\right[\\) ; \\(\\ln\\left(x + 2\\right) + 1 = 0 \\iff x \\in \\left\\{e^{-1} - 2\\right\\}\\).",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-2",
+       "e^{-1} - 2",
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "-",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "x",
+         "x",
+         "-",
+         "0",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "\\ln\\left(x + 2\\right) + 1"
+       },
+       {
+        "cells": [
+         "x",
+         "x",
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x\\,\\ln\\left(x + 2\\right) + x"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "Les zones hachurées (×) sont hors du domaine de définition de l'expression.",
+      "type": "texte"
+     },
+     {
+      "html": "On lit le tableau : \\(x\\,\\ln\\left(x + 2\\right) + x \\geq 0 \\iff x \\in \\left]-2 \\,;\\, e^{-1} - 2\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "sqrt",
+    "num": 2,
+    "resolu": true,
+    "source_tex": "x\\,\\ln\\left(x + 2\\right) + x",
+    "titre": "racine carrée"
+   }
+  ],
+  "f_tex": "\\sqrt{x\\,\\ln\\left(x + 2\\right) + x}",
+  "inter_tex": "\\left(E_{1} \\cap E_{2}\\right)",
+  "ok": true
+ },
+ "sqrt(x-1)/sqrt(x-1)": {
+  "ED_tex": "\\left]1 \\,;\\, +\\infty\\right[",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\left[1 \\,;\\, +\\infty\\right[",
+    "cond_tex": "x - 1 \\geq 0",
+    "etapes": [
+     {
+      "html": "Le contenu d'une racine carrée doit être positif ou nul.",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 1 \\geq 0 \\iff x \\geq 1\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "sqrt",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "x - 1",
+    "titre": "racine carrée"
+   },
+   {
+    "E_tex": "\\mathbb{R} \\setminus \\left\\{1\\right\\}",
+    "cond_tex": "\\sqrt{x - 1} \\neq 0",
+    "etapes": [
+     {
+      "html": "Un dénominateur doit être non nul.",
+      "type": "texte"
+     },
+     {
+      "html": "On cherche les valeurs interdites : on résout \\(\\sqrt{x - 1} = 0\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\sqrt{x - 1} = 0 \\iff x - 1 = 0\\)",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 1 = 0 \\iff x = 1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Valeurs interdites : \\(x \\in \\left\\{1\\right\\}\\). On les exclut.",
+      "type": "texte"
+     }
+    ],
+    "genre": "den",
+    "num": 2,
+    "resolu": true,
+    "source_tex": "\\sqrt{x - 1}",
+    "titre": "dénominateur"
+   }
+  ],
+  "f_tex": "\\frac{\\sqrt{x - 1}}{\\sqrt{x - 1}}",
+  "inter_tex": "E_{1} \\setminus \\left\\{1\\right\\}",
+  "ok": true
+ },
+ "sqrt(x^2+2x-3)": {
+  "ED_tex": "\\left]-\\infty \\,;\\, -3\\right] \\cup \\left[1 \\,;\\, +\\infty\\right[",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\left]-\\infty \\,;\\, -3\\right] \\cup \\left[1 \\,;\\, +\\infty\\right[",
+    "cond_tex": "x^{2} + 2x - 3 \\geq 0",
+    "etapes": [
+     {
+      "html": "Le contenu d'une racine carrée doit être positif ou nul.",
+      "type": "texte"
+     },
+     {
+      "html": "Zéros :",
+      "type": "texte"
+     },
+     {
+      "html": "Trinôme \\(x^{2} + 2x - 3\\) : \\(\\Delta = b^2 - 4ac = 2^2 - 4 \\cdot 1 \\cdot (-3) = 16\\)",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 4\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -3\\) et \\(x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 1\\).",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-3",
+       "1"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "x + 3"
+       },
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x - 1"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2} + 2x - 3"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "On lit les intervalles où \\(x^{2} + 2x - 3 \\geq 0\\) (zéros inclus) : \\(x \\in \\left]-\\infty \\,;\\, -3\\right] \\cup \\left[1 \\,;\\, +\\infty\\right[\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "sqrt",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "x^{2} + 2x - 3",
+    "titre": "racine carrée"
+   }
+  ],
+  "f_tex": "\\sqrt{x^{2} + 2x - 3}",
+  "inter_tex": "E_{1}",
+  "ok": true
+ },
+ "x+*2": {
+  "erreur": "Symbole inattendu « * ».",
+  "ok": false
+ },
+ "x^(1/2-1/2)": {
+  "exception": "AttributeError",
+  "message": "'float' object has no attribute 'denominator'"
+ },
+ "x^(1/3)": {
+  "ED_tex": "\\mathbb{R}",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [],
+  "f_tex": "x^{\\frac{1}{3}}",
+  "ok": true
+ },
+ "x^(2-2)": {
+  "exception": "AttributeError",
+  "message": "'float' object has no attribute 'denominator'"
+ },
+ "x^0": {
+  "ED_tex": "\\mathbb{R}",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [],
+  "f_tex": "x^{0}",
+  "ok": true
+ },
+ "x^x": {
+  "ED_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+    "cond_tex": "x > 0",
+    "etapes": [
+     {
+      "html": "Une puissance a^b d'exposant non entier (a^b = e^{b ln a}) exige une base strictement positive.",
+      "type": "texte"
+     },
+     {
+      "html": "La condition s'écrit directement \\(x > 0\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "pos",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "x",
+    "titre": "puissance"
+   }
+  ],
+  "f_tex": "x^{x}",
+  "inter_tex": "E_{1}",
+  "ok": true
+ },
+ "y = ln(x-1)": {
+  "ED_tex": "\\left]1 \\,;\\, +\\infty\\right[",
+  "besoin_sympy": false,
+  "complet": true,
+  "conditions": [
+   {
+    "E_tex": "\\left]1 \\,;\\, +\\infty\\right[",
+    "cond_tex": "x - 1 > 0",
+    "etapes": [
+     {
+      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 1 > 0 \\iff x > 1\\).",
+      "type": "texte"
+     }
+    ],
+    "genre": "ln",
+    "num": 1,
+    "resolu": true,
+    "source_tex": "x - 1",
+    "titre": "logarithme"
+   }
+  ],
+  "f_tex": "\\ln\\left(x - 1\\right)",
+  "inter_tex": "E_{1}",
+  "ok": true
+ }
+}
