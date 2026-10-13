@@ -444,6 +444,28 @@ def _etude_transcendante(f, borne, items):
     return (vg, vd), False, None, (vg_val, vd_val)
 
 
+def _bilan_deux_cotes(point, cote_tex, val, vval, items):
+    """Valeur interdite isolée (cas transcendant) : on ne conclut à une asymptote
+    verticale que si l'une des deux limites latérales est infinie."""
+    (vg, vd), (vg_val, vd_val) = val, vval
+    base = {"point_tex": point.tex, "point_val": point.val, "ou": cote_tex}
+    if r"\infty" in vg or r"\infty" in vd:
+        items.append(txt("Au moins une des deux limites est infinie : asymptote verticale."))
+        return dict(base, genre="verticale", gauche_tex=vg, droite_tex=vd,
+                    gauche_val=vg_val, droite_val=vd_val)
+    if "?" in (vg, vd):
+        items.append(txt("Ces limites n'ont pas pu être déterminées automatiquement : "
+                         "on ne conclut pas sur une éventuelle asymptote."))
+        return None
+    if vg == vd or (vg_val is not None and vd_val is not None and proche(vg_val, vd_val)):
+        items.append(txt(rf"Les deux limites sont finies et égales à \({vg}\) : f se prolonge par "
+                         r"continuité en ce point, c'est un point de discontinuité (pas une asymptote)."))
+        return dict(base, genre="trou", valeur_tex=vg, valeur_val=vg_val)
+    items.append(txt("Les deux limites sont finies mais différentes : f fait un saut en ce point "
+                     "(pas une asymptote)."))
+    return dict(base, genre="saut", gauche_tex=vg, droite_tex=vd, gauche_val=vg_val, droite_val=vd_val)
+
+
 # =====================================================================
 # Point d'entrée
 # =====================================================================
@@ -498,11 +520,7 @@ def etudier(entree):
             else:
                 val, inf, _, vval = _etude_transcendante(f, borne, items)
                 if cote == "deux":
-                    vg, vd = val
-                    vg_val, vd_val = vval
-                    asym = {"genre": "verticale", "point_tex": point.tex, "point_val": point.val,
-                            "ou": cote_tex, "gauche_tex": vg, "droite_tex": vd,
-                            "gauche_val": vg_val, "droite_val": vd_val}
+                    asym = _bilan_deux_cotes(point, cote_tex, val, vval, items)
                 else:
                     est_asymptote = r"\infty" in val
                     asym = {"genre": "verticale" if est_asymptote else "trou",
@@ -511,7 +529,8 @@ def etudier(entree):
                     if not est_asymptote:
                         asym["valeur_tex"] = val
                         asym["valeur_val"] = vval
-                res["asymptotes"].append(asym)
+                if asym is not None:
+                    res["asymptotes"].append(asym)
 
         res["etudes"].append({"ou": cote_tex, "etapes": items})
 

@@ -292,6 +292,7 @@ function ligneAsymptote(a){
     return `Asymptote verticale : ${K("x = "+a.point_tex)} (${bouts.join(" ; ")})`;
   }
   if(a.genre==="trou") return `Point de discontinuité en ${K("x = "+a.point_tex)} (pas une asymptote) : ${K("f(x) \\to "+a.valeur_tex)}`;
+  if(a.genre==="saut") return `Saut en ${K("x = "+a.point_tex)} (pas une asymptote) : ${K("\\lim_{x\\to "+a.point_tex+"^-} f(x) = "+a.gauche_tex)} ; ${K("\\lim_{x\\to "+a.point_tex+"^+} f(x) = "+a.droite_tex)}`;
   return `Pas d'asymptote (${K(a.ou)}) — branche parabolique.`;
 }
 function carteBilanAsymptotes(la){
