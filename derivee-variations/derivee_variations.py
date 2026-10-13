@@ -27,7 +27,7 @@ from fractions import Fraction as F
 
 from ensemble_def import (
     Nb, X, E, Neg, Op, Fn,
-    lire, tex, prec, valeur_constante, Num, Iv, REELS, inter, ens_tex, points, contient, proche,
+    lire, tex, par, prec, valeur_constante, Num, Iv, REELS, inter, ens_tex, points, contient, proche,
     preimage, resoudre_general, domaine, evaluer, aplatir, qtex,
     _sympy, en_sympy, arbre_depuis_sympy, num_sympy, _SP,
     txt, NonPrisEnCharge, ErreurSaisie, _analyser, apercu_json,
@@ -136,6 +136,30 @@ def _simplifier(n):
 # =====================================================================
 # Dérivation narrée
 # =====================================================================
+F_PRIME = "f'(x)"
+
+
+def _etiquette(n):
+    """Nom de la dérivée d'un morceau de f dans la narration : (morceau)'."""
+    return r"\left(" + tex(n) + r"\right)'"
+
+
+def _facteur_constant(c, g, forme, items, top, etiq):
+    """c·g, g·c ou g/c (c constant) : on dérive g (narration sous le nom (g)'),
+    puis, si cette narration a produit des lignes, on conclut pour ce niveau."""
+    avant = len(items)
+    dg = derivee_narree(g, items, top=top, etiq=_etiquette(g))
+    if forme == "c*g":
+        resultat, ecrit = _simplifier(_mul(c, dg)), rf"{par(c, 2)} \cdot {_etiquette(g)}"
+    elif forme == "g*c":
+        resultat, ecrit = _simplifier(_mul(dg, c)), rf"{_etiquette(g)} \cdot {par(c, 2)}"
+    else:
+        resultat, ecrit = _simplifier(_div(dg, c)), rf"\dfrac{{{_etiquette(g)}}}{{{tex(c)}}}"
+    if top and len(items) > avant:
+        items.append(txt(rf"\({etiq} = {ecrit} = {tex(resultat)}\)."))
+    return resultat
+
+
 REGLE_FN_FORME = {"ln": r"\ln(u)", "exp": r"e^{u}", "sqrt": r"\sqrt{u}"}
 REGLE_FN_TEX = {"ln": r"\frac{u'}{u}", "exp": r"u' e^{u}", "sqrt": r"\frac{u'}{2\sqrt{u}}"}
 
@@ -202,12 +226,13 @@ def _termes(n, signe=1, out=None):
     return out
 
 
-def _derivee_somme(n, items, top):
+def _derivee_somme(n, items, top, etiq=F_PRIME):
     termes = _termes(n)
     if top and len(termes) > 1:
         items.append(txt("La dérivée d'une somme (ou différence) est la somme (ou différence) des "
                          "dérivées : on dérive terme à terme."))
-    parties = [(signe, derivee_narree(t, items, top=top)) for signe, t in termes]
+    parties = [(signe, derivee_narree(t, items, top=top, etiq=_etiquette(t) if len(termes) > 1 else etiq))
+               for signe, t in termes]
     resultat = parties[0][1] if parties[0][0] > 0 else Neg(parties[0][1])
     for signe, dt in parties[1:]:
         resultat = _add(resultat, dt) if signe > 0 else _sub(resultat, dt)
@@ -215,19 +240,19 @@ def _derivee_somme(n, items, top):
         return resultat
     resultat = _simplifier(resultat)
     if len(termes) > 1:
-        items.append(txt(rf"\(f'(x) = {tex(resultat)}\)."))
+        items.append(txt(rf"\({etiq} = {tex(resultat)}\)."))
     return resultat
 
 
-def _derivee_produit(n, items, top):
+def _derivee_produit(n, items, top, etiq=F_PRIME):
     a, b = n.a, n.b
     ca, cb = valeur_constante(a), valeur_constante(b)
     if ca is not None and cb is not None:
         return Nb(0)
     if ca is not None:
-        return _simplifier(_mul(a, derivee_narree(b, items, top=top)))
+        return _facteur_constant(a, b, "c*g", items, top, etiq)
     if cb is not None:
-        return _simplifier(_mul(derivee_narree(a, items, top=top), b))
+        return _facteur_constant(b, a, "g*c", items, top, etiq)
     if top:
         items.append(txt(rf"On pose \(u(x) = {tex(a)}\) et \(v(x) = {tex(b)}\) : règle du produit, "
                          rf"\((uv)' = u'v + uv'\)."))
@@ -241,15 +266,15 @@ def _derivee_produit(n, items, top):
     if not top:
         return brut
     simplifie = _simplifier(brut)
-    items.append(txt(rf"\(f'(x) = u'(x)v(x) + u(x)v'(x) = {tex(brut)} = {tex(simplifie)}\)."))
+    items.append(txt(rf"\({etiq} = u'(x)v(x) + u(x)v'(x) = {tex(brut)} = {tex(simplifie)}\)."))
     return simplifie
 
 
-def _derivee_quotient(n, items, top):
+def _derivee_quotient(n, items, top, etiq=F_PRIME):
     a, b = n.a, n.b
     cb = valeur_constante(b)
     if cb is not None:
-        return _simplifier(_div(derivee_narree(a, items, top=top), b))
+        return _facteur_constant(b, a, "g/c", items, top, etiq)
     if top:
         items.append(txt(rf"On pose \(u(x) = {tex(a)}\) et \(v(x) = {tex(b)}\) : règle du quotient, "
                          rf"\(\left(\frac{{u}}{{v}}\right)' = \frac{{u'v - uv'}}{{v^2}}\)."))
@@ -263,26 +288,35 @@ def _derivee_quotient(n, items, top):
     if not top:
         return brut
     simplifie = _simplifier(brut)
-    items.append(txt(rf"\(f'(x) = \dfrac{{u'(x)v(x) - u(x)v'(x)}}{{v(x)^2}} = {tex(brut)} = {tex(simplifie)}\)."))
+    items.append(txt(rf"\({etiq} = \dfrac{{u'(x)v(x) - u(x)v'(x)}}{{v(x)^2}} = {tex(brut)} = {tex(simplifie)}\)."))
     return simplifie
 
 
-def derivee_narree(n, items, top=True):
+def derivee_narree(n, items, top=True, etiq=F_PRIME):
+    """Dérivée de n, avec narration dans items. `etiq` est le nom (tex) sous lequel
+    la narration de ce niveau annonce son résultat : f'(x) pour f elle-même,
+    (morceau)' pour un terme de somme ou ce qui suit un facteur constant."""
     if isinstance(n, (Nb, E)):
         return Nb(0)
     if isinstance(n, X):
         return Nb(1)
     if isinstance(n, Neg):
-        return Neg(derivee_narree(n.a, items, top))
+        if not top:
+            return Neg(derivee_narree(n.a, items, top))
+        avant = len(items)
+        resultat = Neg(derivee_narree(n.a, items, top, etiq=_etiquette(n.a)))
+        if len(items) > avant:
+            items.append(txt(rf"\({etiq} = -{_etiquette(n.a)} = {tex(_simplifier(resultat))}\)."))
+        return resultat
     if isinstance(n, Fn):
         return _derivee_fn(n, items)
     if isinstance(n, Op):
         if n.op in ("+", "-"):
-            return _derivee_somme(n, items, top)
+            return _derivee_somme(n, items, top, etiq)
         if n.op == "*":
-            return _derivee_produit(n, items, top)
+            return _derivee_produit(n, items, top, etiq)
         if n.op == "/":
-            return _derivee_quotient(n, items, top)
+            return _derivee_quotient(n, items, top, etiq)
         if n.op == "^":
             return _derivee_puissance(n, items)
     raise NonPrisEnCharge("dérivée non prise en charge pour ce nœud.")
