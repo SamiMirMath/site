@@ -175,7 +175,7 @@ function lancerWorker(){
   sympyPret=pret.then(()=>appel("sympy")).then(()=>{ sympyOK=true; majEtat(); }).catch(()=>{ majEtat(); });
   return pret;
 }
-function majEtat(){ $("etat").textContent=sympyOK?"Prêt.":"Chargement du moteur de calcul (SymPy)…"; }
+function majEtat(){ $("etat").textContent=sympyOK?"Prêt.":"Chargement du moteur de calcul…"; }
 async function demarrer(){
   try{
     const [repEd,repFa]=await Promise.all([
@@ -190,7 +190,8 @@ async function demarrer(){
     apercu();
     const q=new URLSearchParams(location.search).get("f"); if(q){ $("entree").value=q; calculer(); }
   }catch(e){
-    $("etat").innerHTML='<span class="err">Impossible de charger le moteur Python : '+e.message+'.</span> Ouvrez la page via un serveur (GitHub Pages, ou <code>python3 -m http.server</code>), pas en double-cliquant sur le fichier.';
+    console.error(e);
+    $("etat").innerHTML='<span class="err">Impossible de charger l\'outil de calcul.</span> Vérifiez votre connexion internet, puis rechargez la page.';
   }
 }
 async function appelPy(fn,arg,delai){ await pret; return JSON.parse(await appel(fn,arg,delai)); }
@@ -251,13 +252,13 @@ async function calculer(force){
   $("calculer").disabled=true;
   let r;
   try{
-    if(!sympyOK){ $("etat").textContent="Chargement du moteur de calcul (SymPy)… le premier calcul peut prendre quelques secondes."; await sympyPret; }
-    if(!sympyOK) throw new Error("SymPy n'a pas pu être chargé (connexion internet ?)");
+    if(!sympyOK){ $("etat").textContent="Chargement du moteur de calcul… le premier calcul peut prendre quelques secondes."; await sympyPret; }
+    if(!sympyOK) throw new Error("Le moteur de calcul n'a pas pu être chargé (connexion internet ?)");
     $("etat").textContent="Calcul en cours…";
     r=await appelPy("factoriser",s,30000);
   }catch(e){
-    if(e.message==="delai"){ $("etat").textContent="Calcul trop long : moteur relancé."; lancerWorker(); }
-    r={ok:false,erreur:e.message==="delai"?"Le calcul a pris trop de temps. Essayez une écriture plus simple.":"Erreur du moteur : "+e.message};
+    if(e.message==="delai"){ $("etat").textContent="Calcul trop long : le calcul a été relancé."; lancerWorker(); }
+    r={ok:false,erreur:e.message==="delai"?"Le calcul a pris trop de temps. Essayez une écriture plus simple.":(console.error(e),"Une erreur s\'est produite : réessayez ou simplifiez l\'écriture.")};
   }
   $("calculer").disabled=false; majEtat();
   if(moi!==numCalcul) return;
@@ -265,7 +266,7 @@ async function calculer(force){
 }
 function afficher(r){
   $("resultat").hidden=false; const box=$("cartes"); box.innerHTML=""; cartes=[];
-  if(!r.ok){ const d=document.createElement("div"); d.className="card err"; d.textContent=r.erreur; box.appendChild(d); $("suivant").disabled=$("tout").disabled=true; $("progression").textContent=""; return; }
+  if(!r.ok){ if(r.detail) console.error(r.detail); const d=document.createElement("div"); d.className="card err"; d.textContent=r.erreur; box.appendChild(d); $("suivant").disabled=$("tout").disabled=true; $("progression").textContent=""; return; }
   cartes.push(carteResultat(r));
   cartes.forEach(c=>{ c.classList.add("cache"); box.appendChild(c); });
   visibles=0; montrer(1);

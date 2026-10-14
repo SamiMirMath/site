@@ -189,7 +189,7 @@ function lancerWorker(){
   sympyPret=pret.then(()=>appel("sympy")).then(()=>{ sympyOK=true; majEtat(); }).catch(()=>{ majEtat(); });
   return pret;
 }
-function majEtat(){ $("etat").textContent=sympyOK?"Python et SymPy prêts.":"Python prêt (SymPy en cours de chargement…)."; }
+function majEtat(){ $("etat").textContent=sympyOK?"Prêt.":"Chargement du moteur de calcul…"; }
 async function demarrer(){
   try{
     const rep=await fetch("ensemble_def.py",{cache:"no-cache"});
@@ -200,7 +200,8 @@ async function demarrer(){
     apercu();
     const q=new URLSearchParams(location.search).get("f"); if(q){ $("entree").value=q; calculer(); }
   }catch(e){
-    $("etat").innerHTML='<span class="err">Impossible de charger le moteur Python : '+e.message+'.</span> Ouvrez la page via un serveur (GitHub Pages, ou <code>python3 -m http.server</code>), pas en double-cliquant sur le fichier.';
+    console.error(e);
+    $("etat").innerHTML='<span class="err">Impossible de charger l\'outil de calcul.</span> Vérifiez votre connexion internet, puis rechargez la page.';
   }
 }
 async function appelPy(fn,arg,delai){ await pret; return JSON.parse(await appel(fn,arg,delai)); }
@@ -256,6 +257,7 @@ function tableau(t){
   return h+'</table></div>';
 }
 function carteCondition(c){
+  if(c.detail) console.error(c.detail);
   const d=document.createElement("div"); d.className="card cond";
   let h=`<h3>Condition ${c.num}<span class="badge">${c.titre}</span></h3><div class="c">${K(c.cond_tex)}</div>`;
   c.etapes.forEach(it=>{ h+= it.type==="tableau"?tableau(it):`<div class="etape">${it.html}</div>`; });
@@ -270,10 +272,10 @@ async function calculer(force){
   let r;
   try{
     r=await appelPy("analyser",s,30000);
-    if(r.besoin_sympy){ $("etat").textContent="Chargement de SymPy pour cette fonction…"; await sympyPret; if(sympyOK) r=await appelPy("analyser",s,30000); }
+    if(r.besoin_sympy){ $("etat").textContent="Chargement du moteur de calcul pour cette fonction…"; await sympyPret; if(sympyOK) r=await appelPy("analyser",s,30000); }
   }catch(e){
-    if(e.message==="delai"){ $("etat").textContent="Calcul trop long : moteur relancé."; lancerWorker(); }
-    r={ok:false,erreur:e.message==="delai"?"Le calcul a pris trop de temps (plus de 30 s). Essayez une écriture plus simple.":"Erreur du moteur : "+e.message};
+    if(e.message==="delai"){ $("etat").textContent="Calcul trop long : le calcul a été relancé."; lancerWorker(); }
+    r={ok:false,erreur:e.message==="delai"?"Le calcul a pris trop de temps (plus de 30 s). Essayez une écriture plus simple.":(console.error(e),"Une erreur s\'est produite : réessayez ou simplifiez l\'écriture.")};
   }
   $("calculer").disabled=false; majEtat();
   if(moi!==numCalcul) return;
@@ -302,7 +304,7 @@ function afficher(r){
   if(!r.complet) fin.innerHTML='<div class="err">Une condition n\'a pas pu être résolue : l\'ED n\'est pas calculé.</div>';
   else if(!r.conditions.length) fin.innerHTML=`<div class="res">${K("ED = \\mathbb{R}")}</div>`;
   else fin.innerHTML=`<div class="muted" style="margin-bottom:4px">L'ensemble de définition est l'intersection des ensembles obtenus :</div><div class="res">${K("ED = "+r.inter_tex+" = "+r.ED_tex)}</div>`
-    +(r.ED_tex.includes("approx")?'<div class="hint">Les valeurs précédées de ≈ sont des valeurs approchées (équation sans solution exacte simple).</div>':"");
+    +(r.ED_tex.includes("approx")?'<div class="hint">Les valeurs précédées de ≈ ont été obtenues numériquement.</div>':"");
   cartes.push(fin);
   cartes.forEach(c=>{ c.classList.add("cache"); box.appendChild(c); });
   visibles=0; montrer(1);

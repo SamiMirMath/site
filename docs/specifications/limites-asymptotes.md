@@ -13,9 +13,10 @@ URL : `/limites-asymptotes/` · moteur : `limites-asymptotes/limites_asymptotes.
 - **f rationnelle, pôle fini** : factorisation par (x − a), simplification des facteurs communs ;
   limite finie ℓ ⇒ trou dans le graphique en (a ; ℓ) (formulation Q7 ci-dessous) ; sinon signe de
   chaque côté (0⁺ / 0⁻) ⇒ asymptote verticale. Pôle irrationnel : sonde numérique + SymPy.
-- **Cas transcendant** : valeur par SymPy, narration simple ; en ±∞ avec limite infinie, recherche
+- **Cas non rationnel (ln, exp, racines mélangés à x)** : valeur par SymPy (racine réelle pour
+  x^(p/q), q impair), narration simple ; en ±∞ avec limite infinie, recherche
   d'asymptote oblique (a = lim f/x, b = lim f − ax).
-- **Valeur interdite isolée, cas transcendant** (correction `70e6b1e`) : au moins une limite
+- **Valeur interdite isolée, cas non rationnel** (correction `70e6b1e`) : au moins une limite
   latérale infinie ⇒ asymptote verticale ; deux limites finies égales ⇒ trou ; finies et
   différentes ⇒ pas de limite en a ; limite non déterminée ⇒ aucune conclusion
   (formulations Q7 ci-dessous ; le genre « saut » de `70e6b1e` est remplacé, tâche T08b).
@@ -56,4 +57,5 @@ Ne jamais écrire « point de discontinuité » quand a ∉ ED.
 | LA-05 | Fonctions rationnelles : asymptote oblique y = ax + b telle que f(x) − (ax + b) → 0 numériquement | [auto-py] |
 | LA-06 | Sorties des exemples et exercices identiques aux instantanés | [auto-py] |
 | LA-07 | « croissance comparée » apparaît pour x²·e^(−x) (+∞), x^(1/2)·e^(−x) (+∞), ln(x)/x (+∞), x·ln(x) (0⁺), e^x − x² (+∞), x − ln(x) (+∞), x·e^x (−∞), avec la limite de référence nommée ; jamais pour x·e^x (+∞), e^x/x (0), e^(2x) (±∞) | [auto-py] |
+| LA-09 | x^(2/3), x^(1/3), x^(-1/3), x^(4/3), (x−2)^(1/3), x·x^(1/3) : limites en −∞ et en un point négatif justes dans ℝ (racine réelle) ; aucun `Infinity` ni `NaN` dans une sortie (JSON strict) | [auto-py] (`test_racines_reelles.py`, `test_json_strict.py`) |
 | LA-08 | Aucune sortie ne contient « point de discontinuité » ni le genre « saut » ; les deux formulations Q7 apparaissent mot pour mot pour (e^x−1)/x, (x²−1)/(x−1) et x/√(x²) en 0 ou 1 | [auto-py] |

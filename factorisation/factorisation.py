@@ -1584,7 +1584,7 @@ def _message_final(ctx, P, T, produit):
 def factoriser_expr(entree):
     sp = _sympy()
     if sp is None:
-        return {"ok": False, "erreur": "Le moteur de calcul (SymPy) est encore en cours de chargement, "
+        return {"ok": False, "erreur": "Le moteur de calcul est encore en cours de chargement, "
                 "réessaie dans un instant."}
     try:
         arbre = analyser(entree)
@@ -1634,7 +1634,8 @@ def factoriser_expr(entree):
     except ErreurSaisie as e:
         return {"ok": False, "erreur": str(e)}
     except Exception as e:   # ne devrait pas arriver : on le dit plutôt que de planter
-        return {"ok": False, "erreur": f"Erreur interne du moteur ({type(e).__name__} : {e})."}
+        return {"ok": False, "erreur": "Cette expression n'a pas pu être factorisée.",
+                "detail": f"{type(e).__name__} : {e}"}
 
 
 def factoriser_json(entree):

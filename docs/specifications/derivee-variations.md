@@ -26,7 +26,23 @@ URL : `/derivee-variations/` · moteur : `derivee-variations/derivee_variations.
 
 ## Conventions
 
-- Tableau de variations : flèches seules, sans valeurs ni limites (validé).
+- Tableau de variations : flèches seules, sans valeurs ni limites (validé). Les limites contre les
+  doubles barres (par ex. −∞ à gauche de la colonne −2 pour ln(x²−4)) seront ajoutées **dans l'outil
+  Étude complète seulement** ; la Dérivée garde les flèches seules (décidé le 14.10.2026).
+- **Valeur interdite de f** (borne exclue de l'ED : ln(x²−4) en ±2, ln x ou 1/x en 0) : **double barre
+  sur toute la colonne**, sur toutes les lignes (facteurs, f'(x), f(x)), un seul trait double
+  centré dans la colonne (sous la valeur de l'en-tête) et continu d'une ligne à l'autre.
+- **Zone hors de l'ED** : hachurée sur toutes les lignes, sans signe, sans flèche et sans « × » ; une
+  colonne n'existe que pour un point de l'ED ou une borne de l'ED (le point 0 de ln(x²−4), au
+  milieu de la zone hachurée, n'a pas de colonne). Même style de double barre dans le tableau de
+  signes de l'outil Ensemble de définition.
+- **Forme de f'** : un seul quotient numérateur / dénominateur, exposants négatifs au dénominateur,
+  puissances fractionnaires en racines (2/(3∛x)). Les zéros de f' sont les zéros du numérateur ;
+  les valeurs interdites de f' sont les zéros du dénominateur. Si le numérateur est constant :
+  « Le numérateur de f' vaut c : il ne s'annule jamais » ; pas de substitution « On pose t = … »
+  pour une racine seule (« ∛x = 0 ⇔ x = 0 »), seulement quand elle est nécessaire (racine dans une somme).
+- Racines : x^(p/q) avec q impair est la racine réelle (définie sur ℝ) dans tous les calculs (ED,
+  dérivée, signe, limites, graphique).
 - Point a où f est définie mais pas f' (±2 pour √(x²−4), 0 pour √(x²)) : l'ED de f' est calculé
   (validé) ; dans le tableau (tranché le 14.10.2026, Q3) :
   - ligne f'(x) : **double barre** ;
@@ -59,6 +75,9 @@ URL : `/derivee-variations/` · moteur : `derivee-variations/derivee_variations.
 | DV-07 | Aucun coefficient affiché sous la forme `\frac{\frac{…}{…}}{…}` pour la liste DV-01 | [auto-py] |
 | DV-08 | Exercices générés : f' et tableau obtenus sans valeur approchée de zéro de f' | [auto-py] |
 | DV-09 | Critère (ii) : √(x²−4) : minimum local en −2 et en 2 (f = 0) ; √(4−x²) : minimum local en −2 et en 2 (f = 0), maximum en 0 (f = 2) ; √x : minimum en 0 ; x√x : minimum en 0 ; aucun extremum de bord pour une borne ouverte (ln x en 0) | [auto-py] (`test_extrema_bornes_fermees`, échec attendu jusqu'à T06) |
+| DV-14 | Tableau de ln(x²−4) : colonnes −2 et 2 (double barre sur toutes les lignes), zone ]−2 ; 2[ hachurée, pas de colonne 0 ; sur les exemples et 150 fonctions générées, une zone est hachurée sur f' et f si et seulement si f n'y est pas définie (oracle) | [auto-py] (`test_tableau_variations.py`) |
+| DV-15 | x^(2/3) : f' = 2/(3∛x), « Le numérateur de f' vaut 2 », pas de zéro ; valeur interdite 0 ; minimum en 0. x^(1/3) : ↗ sur ℝ, aucun extremum. Cas −1/3, 4/3, (x−2)^(1/3), x·x^(1/3) avec points négatifs | [auto-py] (`test_racines_reelles.py`) |
+| DV-16 | Rendu : la double barre est centrée sous la valeur de l'en-tête et continue sur toute la hauteur, à 380 px, sur ordinateur et à l'impression | [auto-page] (Chrome, CI, T15) + [manuel] |
 | DV-10 | Tableau de √(x²−4) : ligne f'(x) avec double barre en ±2 ; ligne f(x) avec la valeur 0 en ±2, sans barre | [auto-py] |
 | DV-11 | x^(2−2) : ligne f'(x) « 0 », ligne f(x) →, aucun extremum ; √(x²)/x : « 0 » et → sur chaque intervalle, double barre en 0 (hors de l'ED) | [auto-py] (`test_tableau_variations.py`) |
 | DV-12 | x³ : ligne f'(x) « + 0 + », ligne f(x) « ↗ ↗ », aucun extremum (zéro isolé de f') | [auto-py] (`test_tableau_variations.py`) |

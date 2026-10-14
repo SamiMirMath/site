@@ -1694,7 +1694,7 @@
       "type": "texte"
      },
      {
-      "html": "L'équation \\(\\ln(x) - x + 2 = 0\\) n'a pas de solution exacte simple : on localise ses zéros par dichotomie (valeurs approchées). Zéros : \\({\\approx}\\,0{,}1586 \\,;\\, {\\approx}\\,3{,}1462\\) ; \\(\\ln(x) - x + 2 > 0\\) sur \\(\\left]{\\approx}\\,0{,}1586 \\,;\\, {\\approx}\\,3{,}1462\\right[\\).",
+      "html": "L'équation \\(\\ln(x) - x + 2 = 0\\) ne se résout pas avec les méthodes du cours : solutions obtenues numériquement : \\(x {\\approx}\\,0{,}1586\\) ; \\(x {\\approx}\\,3{,}1462\\). On en déduit \\(\\ln(x) - x + 2 > 0\\) sur \\(\\left]{\\approx}\\,0{,}1586 \\,;\\, {\\approx}\\,3{,}1462\\right[\\).",
       "type": "texte"
      },
      {

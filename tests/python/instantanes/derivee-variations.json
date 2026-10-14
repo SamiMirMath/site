@@ -3044,7 +3044,7 @@
     "type": "texte"
    },
    {
-    "html": "L'équation \\(x^{x} = 0\\) n'a pas de solution exacte simple : on localise ses zéros par dichotomie (valeurs approchées). Aucun zéro ; \\(x^{x} > 0\\) sur \\(\\left]0 \\,;\\, +\\infty\\right[\\).",
+    "html": "L'équation \\(x^{x} = 0\\) ne se résout pas avec les méthodes du cours : aucune solution réelle. On en déduit \\(x^{x} > 0\\) sur \\(\\left]0 \\,;\\, +\\infty\\right[\\).",
     "type": "texte"
    },
    {
@@ -3056,7 +3056,7 @@
     "type": "texte"
    },
    {
-    "html": "Ce facteur mélange \\(x\\) et une fonction transcendante : on résout avec le calcul formel : \\(\\ln(x) + x\\,\\frac{1}{x} > 0 \\iff x \\in \\left]e^{-1} \\,;\\, +\\infty\\right[\\) et \\(\\ln(x) + x\\,\\frac{1}{x} = 0 \\iff x \\in \\left\\{e^{-1}\\right\\}\\).",
+    "html": "Ce facteur mélange \\(x\\) et une fonction ln ou exp : on ne peut pas isoler \\(x\\). Résultat obtenu numériquement : \\(\\ln(x) + x\\,\\frac{1}{x} > 0 \\iff x \\in \\left]e^{-1} \\,;\\, +\\infty\\right[\\) et \\(\\ln(x) + x\\,\\frac{1}{x} = 0 \\iff x \\in \\left\\{e^{-1}\\right\\}\\).",
     "type": "texte"
    },
    {

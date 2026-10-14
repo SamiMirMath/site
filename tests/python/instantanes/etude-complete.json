@@ -44,7 +44,7 @@
      "type": "texte"
     },
     {
-     "html": "L'équation \\(x\\,e^{x} - e^{x} + 1 = 0\\) n'a pas de solution exacte simple : on localise ses zéros par dichotomie (valeurs approchées). Zéros : \\({\\approx}\\,0\\) ; \\(x\\,e^{x} - e^{x} + 1 > 0\\) sur \\(\\mathbb{R} \\setminus \\left\\{{\\approx}\\,0\\right\\}\\).",
+     "html": "L'équation \\(x\\,e^{x} - e^{x} + 1 = 0\\) ne se résout pas avec les méthodes du cours : solution obtenue numériquement : \\(x {\\approx}\\,0\\). On en déduit \\(x\\,e^{x} - e^{x} + 1 > 0\\) sur \\(\\mathbb{R} \\setminus \\left\\{{\\approx}\\,0\\right\\}\\).",
      "type": "texte"
     },
     {

@@ -15,10 +15,18 @@ S'applique à toutes les pages outils, sauf mention contraire pour le simplexe
    « Tout afficher ») ; la dernière carte donne le résultat encadré.
 5. **Impression / PDF** : bouton « Télécharger le corrigé (PDF) » ; toutes les cartes imprimées,
    sans boutons ni clavier ; titre de fichier explicite.
-6. **Chargement** : état lisible (« Téléchargement de Python… », « Chargement du calcul formel… »,
-   « Prêt ») ; le bouton de calcul reste désactivé jusqu'à ce que le moteur soit prêt.
+6. **Chargement** : état lisible (« Chargement du moteur de calcul… », « Prêt ») ; le bouton de
+   calcul reste désactivé jusqu'à ce que le moteur soit prêt.
 7. **Erreurs** : message en français, jamais de trace Python ; calcul de plus de 30 s interrompu
-   avec un message et relance du moteur.
+   avec un message et relance du moteur. Erreur de connexion : « Vérifiez votre connexion
+   internet, puis rechargez la page ». Le détail technique n'est écrit que dans la console
+   (`console.error`), jamais dans la page.
+7b. **Aperçu de la saisie** (décidé le 14.10.2026) : aucun message d'erreur rouge pendant la frappe ;
+   une erreur n'apparaît qu'après une pause d'environ 0,5 s, et disparaît dès que la saisie
+   redevient valide ; une réponse tardive ou perdue ne laisse jamais un ancien message.
+7c. **Vocabulaire** (décidé le 14.10.2026) : aucun texte visible ne cite une méthode interne
+   (« calcul formel », SymPy, dichotomie…) ; le mot « transcendante » est interdit partout. Si une
+   équation ne se résout pas avec les méthodes du cours : « solution obtenue numériquement : x ≈ … ».
 8. **Pied de page** : « © 2026 Sami Mir · samimir.ch », identique à l'accueil.
 
 ## Notation suisse
@@ -67,4 +75,6 @@ S'applique à toutes les pages outils, sauf mention contraire pour le simplexe
 | SOC-11 | « 1'000 » et « 1’000 » sont lus 1000 ; « 1 000 » est refusé avec un message | [auto-py] |
 | SOC-12 | Aucune valeur décimale affichée avec un point (moteurs et graduations) | [auto-py] (balayage des sorties) + [manuel] |
 | SOC-13 | Après 30 s de calcul, message « trop long » et moteur relancé ; un nouveau calcul fonctionne ensuite | [auto-page] |
+| SOC-15 | Aucune sortie de moteur ni aucune page ne contient « calcul formel », SymPy, « dichotomie », « transcend… », « exacte simple », « Erreur du moteur » ; le détail technique est dans des champs `detail` / `*_detail` à part | [auto-py] (`test_vocabulaire.py`) |
+| SOC-16 | En tapant `ln(x)/x` (clavier ou bouton ln), aucun message rouge n'apparaît pendant la frappe ni à la fin ; une saisie incomplète (`ln(`) n'affiche son erreur qu'après ≈ 0,5 s | [auto-page] (Chrome, CI, T15) |
 | SOC-14 | Chargement sur un vrai téléphone : délai jusqu'à « Prêt » relevé et noté dans `docs/` | [manuel] (enseignant) |

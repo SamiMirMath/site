@@ -357,7 +357,7 @@ def derivee_narree(n, items, top=True, etiq=F_PRIME):
             return _derivee_quotient(n, items, top, etiq)
         if n.op == "^":
             return _derivee_puissance(n, items)
-    raise NonPrisEnCharge("dérivée non prise en charge pour ce nœud.")
+    raise NonPrisEnCharge("cette fonction sort du cadre de l'outil : la dérivée n'a pas été calculée.")
 
 
 # =====================================================================
@@ -421,7 +421,8 @@ def etudier(entree):
         fprime = derivee_narree(f, items_deriv, top=True)
     except NonPrisEnCharge as e:
         res["deriv_resolu"] = False
-        res["deriv_erreur"] = str(e)
+        res["deriv_erreur"] = "Cette fonction sort du cadre de l'outil : la dérivée n'a pas été calculée."
+        res["deriv_detail"] = str(e)
         return res
     fprime = _simplifier(fprime)
     res["deriv_tex"] = tex(fprime)
@@ -462,11 +463,13 @@ def etudier(entree):
             Z = resoudre_general(fprime, "=", items_signe)
         except Exception as e:
             res["signe_resolu"] = False
-            res["signe_erreur"] = "Le signe de f'(x) n'a pas pu être étudié automatiquement : " + str(e)
+            res["signe_erreur"] = "Le signe de f'(x) n'a pas pu être étudié automatiquement."
+            res["signe_detail"] = f"{type(e).__name__} : {e}"
             return res
     except Exception as e:
         res["signe_resolu"] = False
-        res["signe_erreur"] = "Le signe de f'(x) n'a pas pu être étudié automatiquement : " + str(e)
+        res["signe_erreur"] = "Le signe de f'(x) n'a pas pu être étudié automatiquement."
+        res["signe_detail"] = f"{type(e).__name__} : {e}"
         return res
 
     # 2) Points critiques = zéros de f' (ci-dessus) ∪ bornes finies du domaine d'étude

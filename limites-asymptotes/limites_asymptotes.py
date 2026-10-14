@@ -269,7 +269,7 @@ def _etude_pole_numerique(f, N, D, point, cote, items):
                 res[cle + "_tex"] = v
         return res
     items.append(txt(rf"Le numérateur s'annule aussi en \(x={point.tex}\) : forme indéterminée "
-                     r"\(0/0\). On factorise (calcul formel) pour simplifier avant de passer à la limite."))
+                     r"\(0/0\). On factorise et on simplifie avant de passer à la limite."))
     val = _limite_sympy(f, _sympify_point(point))
     vtex, _, _, vval = _valeur_tex(val)
     if vtex == "?":

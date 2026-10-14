@@ -23,6 +23,40 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
 | `155afba` | T03 : intégration continue GitHub Actions |
 | `43f760b` | T04 : manifeste des fichiers Python par outil |
 
+## Phase B — réalisé (14.10.2026)
+
+| Tâche | Commit(s) | Contenu |
+|---|---|---|
+| T05 | `1b55deb`, `8d23921` | plantage sur constante nulle ; pas de seuil 1e-12 sur les fractions exactes |
+| T07 | `80fb69c` | graphique figé au dézoom (EC-03) ; message discret si une fenêtre échoue |
+| T08 | `44d30cf`, `4977248` | limite non déterminée jamais prise pour une asymptote ; « limite non déterminée automatiquement » |
+| T08b | `21830d7` | formulations Q7 (trou, pas de limite) ; genre `sans_limite` |
+| T06 | `1519e12` | tableau Q3 : ED de f', valeur de f sans barre, extrema (i) et (ii) |
+| T06b | `ad7552c` | fonction constante : « 0 » et flèche → ; zéro isolé (x³) inchangé |
+| T07b | `f98f63e` | plus de faux « désaccord » près d'une racine double (seuil 1e-14) |
+| — | `3793909` | JSON strict (`allow_nan=False`) ; plus de `Infinity` (x^(2/3)) |
+| — | `b548253`, `a53bb49` | racine réelle pour x^(p/q), q impair : pont SymPy, atomes racine q-ième exacts |
+| T10 | `6a1be82`, `aff5872` | f' en un quotient, coefficients entiers, racines ; narration de f' = 0 cohérente |
+| — | `e5dc17a`, `d347c5e` | énoncé « x^{3/2} = √(x³) » ; étape « on multiplie par k > 0 » |
+| — | `ef9497f`, `16e992f`, `f73e5d7`, `4dd62f1` | tableau : zones hors ED hachurées, double barre de valeur interdite centrée, sur toutes les lignes |
+| — | `b45265a` | aperçu de la saisie : pas d'erreur rouge pendant la frappe, plus de message obsolète |
+| — | C5 (`19d9a3e`) | ED de x^α (α constant, simplifié exactement), [0 ; +∞[ pour α irrationnel > 0 |
+| — | C6 | vocabulaire élève (aucune méthode interne, « transcend… » interdit), détails techniques en console |
+
+## Reste à faire dans la phase B
+
+- **T09 — croissance comparée** (débloquée, Q1) : pas commencée.
+- **T06c — limites contre les doubles barres, dans l'Étude complète seulement** (décidé le 14.10.2026) :
+  sur la ligne f(x), écrire la limite contre la barre, du côté de l'ED (−∞ à gauche de la colonne −2
+  pour ln(x²−4)) ; « limite non déterminée automatiquement » si SymPy ne conclut pas ; la Dérivée
+  garde les flèches seules. À spécifier dans `etude-complete.md` avant de commencer (limites en ±∞ aux
+  extrémités de l'ED : non, seulement contre les barres).
+- Tableau de signes de l'Ensemble de définition : la valeur interdite n'est marquée que sur la ligne du
+  quotient (les lignes de facteurs montrent « 0 ») ; à aligner sur la Dérivée si l'on veut la barre sur
+  toute la colonne (à décider).
+- Dérivée d'une puissance d'exposant constant irrationnel (x^(ln 2)) : règle générale e^{α ln x}
+  conservée (hors périmètre) ; à reprendre avec « α·x^{α−1} » si on le souhaite.
+
 ## Phase A — Filet de sécurité
 
 ### T01 — Instantanés des moteurs Python
@@ -128,7 +162,7 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
 - **Dépend** : T01, T08b.
 - **Vérification** : LA-07 ; instantanés : seules les phrases de croissance comparée changent.
 
-### T10 — Allègement des coefficients fractionnaires de f'
+### T10 — Allègement des coefficients fractionnaires de f' — **faite** (`6a1be82`, `aff5872`)
 - **Fichiers** : `derivee-variations/derivee_variations.py` (`_nettoyer`).
 - **Vérification** : DV-07 ; DV-01 inchangé (valeurs).
 
@@ -166,6 +200,10 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
   sans interface, CI seulement), migration pilote de `ensemble-definition/index.html`.
 - **Dépend** : T04, T14.
 - **Vérification** : SOC-04, SOC-06, SOC-13 sur l'outil pilote ; essai manuel sur téléphone.
+- **Tests de pages à y intégrer** (CI seulement, Chrome sans interface via le protocole DevTools, décidé le
+  14.10.2026) : aperçu de la saisie (SOC-16 : `ln(x)/x` au clavier et avec le bouton ln, pas de message
+  rouge pendant la frappe, erreur après ≈ 0,5 s) sur les cinq pages ; rendu du tableau (DV-16 : double
+  barre centrée, continue, à 380 px et sur ordinateur) ; message de repli du graphique (EC-04).
 
 ### T16 — `commun/outil.js` + `commun/rendu.js`, outil pilote
 - **But** : page outil générique (saisie, aperçu, clavier, hasard, étapes, impression) pilotée

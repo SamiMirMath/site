@@ -31,6 +31,11 @@ class ErreurSaisie(Exception):
     pass
 
 
+HORS_COURS = "on ne sait pas résoudre cette équation avec les méthodes du cours."
+HORS_CADRE = "cette fonction sort du cadre de l'outil (fonctions ln, exp ou racines de x mélangées)."
+NON_ABOUTI = "la résolution exacte n'a pas abouti pour cette condition."
+
+
 class NonPrisEnCharge(Exception):
     pass
 
@@ -990,8 +995,9 @@ def factoriser(P, v):
         rs = racines_numeriques(Q)
         nums = [Num.approche(x) for x in rs]
         facteurs.append(facteur(Q, v, nums))
-        lignes.append(rf"\({ptex(Q, v)}\) n'a pas de racine rationnelle : zéros approchés "
-                      + (", ".join(rf"\({v} \approx {x.tex}\)" for x in nums) if nums else "aucun zéro réel") + ".")
+        lignes.append(rf"\({ptex(Q, v)}\) n'a pas de racine rationnelle : "
+                      + (("solution" + ("s" if len(nums) > 1 else "") + " obtenue" + ("s" if len(nums) > 1 else "")
+                          + " numériquement : " + ", ".join(rf"\({v} {x.tex}\)" for x in nums)) if nums else "aucun zéro réel") + ".")
     return c, facteurs, lignes
 
 
@@ -1226,7 +1232,7 @@ def collecter(n, acc):
     if isinstance(n, X):
         acc["x"] = True
     elif isinstance(n, E):
-        raise NonPrisEnCharge("la constante e apparaît seule dans la condition (coefficient irrationnel).")
+        raise NonPrisEnCharge(HORS_COURS)
     elif est_atome(n):
         acc["at"].append(n)
     elif isinstance(n, Neg):
@@ -1238,7 +1244,7 @@ def collecter(n, acc):
             if d is not None:
                 collecter(d[0], acc)
             elif e is None or e.denominator != 1:
-                raise NonPrisEnCharge("puissance non entière (autre qu'une racine) dans la condition.")
+                raise NonPrisEnCharge(HORS_CADRE)
             else:
                 collecter(n.a, acc)
         else:
@@ -1271,11 +1277,10 @@ def decomposer(n):
     if not acc["at"]:
         return ("x", en_rationnelle(n, lambda a: X_R))
     if acc["x"]:
-        raise NonPrisEnCharge("la condition mélange x et une fonction ln, exp ou racine de x "
-                              "(équation transcendante : pas de résolution exacte).")
+        raise NonPrisEnCharge(HORS_COURS)
     genres = {cle_atome(a)[0] for a in acc["at"]}
     if len(genres) > 1:
-        raise NonPrisEnCharge("la condition mélange plusieurs fonctions (ln, exp, racine).")
+        raise NonPrisEnCharge(HORS_CADRE)
     genre = genres.pop()
     cles = {cle_atome(a)[1].key() for a in acc["at"]}
     if len(cles) == 1:
@@ -1294,7 +1299,7 @@ def decomposer(n):
             except NonPrisEnCharge:
                 RB = None
             if RB is None or deg(RB[1]) != 0 or deg(RB[0]) != 1 or RB[0][0] != 0:
-                raise NonPrisEnCharge("exponentielles d'arguments différents non proportionnels.")
+                raise NonPrisEnCharge(HORS_CADRE)
             coefs[B.key()] = RB[0][1] / RB[1][0]
         num = 0
         den = 1
@@ -1311,7 +1316,7 @@ def decomposer(n):
             return r_pow(([F(0), F(1)], [F(1)]), int(p))
         R = en_rationnelle(n, atomf)
         return ("t", "exp", Bg, R, "e^{" + tex(Bg) + "}")
-    raise NonPrisEnCharge("plusieurs logarithmes ou racines d'arguments différents dans la même condition.")
+    raise NonPrisEnCharge(HORS_CADRE)
 
 
 INFO = {
@@ -1422,7 +1427,7 @@ def resoudre_dans(R, S, v, expr_tex, items):
     if any((iv.lo is not None and iv.lo.q is None) or (iv.hi is not None and iv.hi.q is None) for iv in S):
         if deg(d) == 0 and deg(n) == 2:
             return quad_irrationnel(pscal(n, 1 / d[0]), S, v, expr_tex, items)
-        raise NonPrisEnCharge("il faudrait résoudre une équation polynomiale de second membre irrationnel.")
+        raise NonPrisEnCharge(HORS_COURS)
     res = []
     for iv in S:
         if iv.lo is not None and iv.hi is not None and proche(iv.lo.val, iv.hi.val):
@@ -1746,7 +1751,7 @@ def depuis_sympy(S):
         return out
     if isinstance(S, sp.Complement):
         return inter(depuis_sympy(S.args[0]), complement(depuis_sympy(S.args[1])))
-    raise NonPrisEnCharge("SymPy n'a pas trouvé de forme exacte.")
+    raise NonPrisEnCharge(NON_ABOUTI)
 
 
 def arbre_depuis_sympy(e):
@@ -1790,7 +1795,7 @@ def arbre_depuis_sympy(e):
         return Fn("exp", arbre_depuis_sympy(e.args[0]))
     if isinstance(e, sp.log):
         return Fn("ln", arbre_depuis_sympy(e.args[0]))
-    raise NonPrisEnCharge("expression SymPy non convertible.")
+    raise NonPrisEnCharge(NON_ABOUTI)
 
 
 class Incertain(Exception):
@@ -1981,6 +1986,17 @@ def signe_numerique(h, D):
     return fusion(P), inter(fusion(Z), D)
 
 
+def a_ln_exp(n):
+    """Vrai si l'arbre contient un ln ou un exp."""
+    if isinstance(n, Fn):
+        return n.nom in ("ln", "exp") or a_ln_exp(n.a)
+    if isinstance(n, Neg):
+        return a_ln_exp(n.a)
+    if isinstance(n, Op):
+        return a_ln_exp(n.a) or a_ln_exp(n.b)
+    return False
+
+
 def signe_facteur(h, nom):
     """Étudie le signe d'un facteur : (D, P, Z, étapes)."""
     ht = tex(h)
@@ -2006,8 +2022,9 @@ def signe_facteur(h, nom):
             e, xs = en_sympy_reel(h), _SP["x"]
             P = inter(depuis_sympy(sp.solveset(e > 0, xs, sp.S.Reals)), D)
             Z = inter(depuis_sympy(sp.solveset(sp.Eq(e, 0), xs, sp.S.Reals)), D)
-            items.append(txt(rf"Ce facteur mélange \(x\) et une fonction transcendante : on résout avec le calcul formel : "
-                             rf"\({ht} > 0 \iff {nom} \in {ens_tex(P)}\) et "
+            quoi = "une fonction ln ou exp" if a_ln_exp(h) else "une racine de \\(x\\)"
+            items.append(txt(rf"Ce facteur mélange \(x\) et {quoi} : on ne peut pas isoler \(x\). "
+                             rf"Résultat obtenu numériquement : \({ht} > 0 \iff {nom} \in {ens_tex(P)}\) et "
                              + (rf"\({ht} = 0 \iff {nom} \in {ens_tex(Z)}\)." if Z else rf"\({ht}\) ne s'annule pas.")))
             return D, P, Z, items, "sympy"
         except Exception:
@@ -2016,10 +2033,11 @@ def signe_facteur(h, nom):
         ETAT["sympy_manquant"] = True
     # 3) numérique
     P, Z = signe_numerique(h, D)
-    items.append(txt(rf"L'équation \({ht} = 0\) n'a pas de solution exacte simple : on localise ses zéros "
-                     rf"par dichotomie (valeurs approchées). "
-                     + (rf"Zéros : \({SEP.join(z.lo.tex for z in Z)}\) ; " if Z else "Aucun zéro ; ")
-                     + rf"\({ht} > 0\) sur \({ens_tex(P)}\)."))
+    items.append(txt(rf"L'équation \({ht} = 0\) ne se résout pas avec les méthodes du cours : "
+                     + (("solution" + ("s" if len(Z) > 1 else "") + " obtenue" + ("s" if len(Z) > 1 else "")
+                         + " numériquement : " + " ; ".join(rf"\({nom} {z.lo.tex}\)" for z in Z) + ". ")
+                        if Z else "aucune solution réelle. ")
+                     + rf"On en déduit \({ht} > 0\) sur \({ens_tex(P)}\)."))
     return D, P, Z, items, "numerique"
 
 
@@ -2246,8 +2264,8 @@ def _analyser(entree):
         except Exception as e:      # filet de sécurité : jamais de plantage de la page
             c.update({"cond_tex": {"den": rf"{tex(A)} \neq 0", "ln": rf"{tex(A)} > 0", "pos": rf"{tex(A)} > 0"}
                       .get(genre, rf"{tex(A)} \geq 0"),
-                      "etapes": [txt("Cette condition n'a pas pu être résolue : " + str(e))],
-                      "E_tex": None, "resolu": False})
+                      "etapes": [txt("Cette condition n'a pas pu être résolue automatiquement.")],
+                      "E_tex": None, "resolu": False, "detail": f"{type(e).__name__} : {e}"})
             complet = False
         res["conditions"].append(c)
     res["complet"] = complet
