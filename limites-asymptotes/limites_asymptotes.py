@@ -270,6 +270,9 @@ def _etude_pole_numerique(f, N, D, point, cote, items):
                      r"\(0/0\). On factorise (calcul formel) pour simplifier avant de passer à la limite."))
     val = _limite_sympy(f, _sympify_point(point))
     vtex, _, _, vval = _valeur_tex(val)
+    if vtex == "?":
+        items.append(txt("La limite n'a pas pu être déterminée automatiquement : on ne conclut pas sur une éventuelle asymptote."))
+        return None
     items.append(txt(rf"\(\displaystyle\lim_{{x\to {point.tex}}} f(x) = {vtex}\) : la limite est finie, "
                      r"c'est un point de discontinuité, pas une asymptote verticale."))
     return {"genre": "trou", "point_tex": point.tex, "point_val": a, "valeur_tex": vtex, "valeur_val": vval}
@@ -431,6 +434,9 @@ def _etude_transcendante(f, borne, items):
     if cote != "deux":
         val = _limite_sympy(f, cible, direction)
         vtex, inf, _, vval = _valeur_tex(val)
+        if vtex == "?":
+            items.append(txt("La limite n'a pas pu être déterminée automatiquement : on ne conclut pas sur une éventuelle asymptote."))
+            return vtex, False, None, None
         items.append(txt(rf"\(\displaystyle\lim f(x) = {vtex}\)"
                          + (" : asymptote verticale." if (borne["type"] != "inf" and inf) else
                             " : la limite est finie, f se prolonge par continuité en ce point (pas une "
@@ -501,7 +507,9 @@ def etudier(entree):
                 res["asymptotes"].append(asym)
             else:
                 val_tex, inf, extra, vval = _etude_transcendante(f, borne, items)
-                if inf is False:
+                if val_tex == "?":
+                    pass  # limite non déterminée : jamais une asymptote
+                elif inf is False:
                     res["asymptotes"].append({"genre": "horizontale", "ou": cote_tex,
                                                "valeur_tex": val_tex, "valeur_val": vval})
                 elif extra is not None:
@@ -515,18 +523,20 @@ def etudier(entree):
                 cote_tex = rf"x \to {point.tex}^{'-' if cote=='gauche' else '+'}"
             if rationnelle:
                 asym = _etude_rationnelle_pole(f, N, D, point, cote, items)
-                asym["ou"] = cote_tex
-                res["asymptotes"].append(asym)
+                if asym is not None:
+                    asym["ou"] = cote_tex
+                    res["asymptotes"].append(asym)
             else:
                 val, inf, _, vval = _etude_transcendante(f, borne, items)
                 if cote == "deux":
                     asym = _bilan_deux_cotes(point, cote_tex, val, vval, items)
                 else:
                     est_asymptote = r"\infty" in val
-                    asym = {"genre": "verticale" if est_asymptote else "trou",
-                            "point_tex": point.tex, "point_val": point.val, "ou": cote_tex,
-                            (cote + "_tex"): val}
-                    if not est_asymptote:
+                    asym = None if val == "?" else {
+                        "genre": "verticale" if est_asymptote else "trou",
+                        "point_tex": point.tex, "point_val": point.val, "ou": cote_tex,
+                        (cote + "_tex"): val}
+                    if asym is not None and not est_asymptote:
                         asym["valeur_tex"] = val
                         asym["valeur_val"] = vval
                 if asym is not None:
