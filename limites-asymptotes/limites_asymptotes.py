@@ -26,7 +26,7 @@ from ensemble_def import (
     Nb, X, E, Neg, Op, Fn,
     lire, tex, prec, valeur_constante, Num, Iv, REELS, fusion, inter, ens_tex,
     contient, proche, evaluer, aplatir, qtex, ptex, pn, deg, peval, pdivlin,
-    decomposer, r_norm,
+    decomposer, r_norm, json_strict,
     _sympy, en_sympy, arbre_depuis_sympy, num_sympy, _SP,
     txt, NonPrisEnCharge, ErreurSaisie, _analyser, apercu_json,
 )
@@ -71,9 +71,31 @@ def _limite_sympy(f, point, direction=None):
     try:
         fe = en_sympy(f)
         r = sp.limit(fe, _SP["x"], point, dir=direction) if direction else sp.limit(fe, _SP["x"], point)
-        return r
     except Exception:
         return None
+    if r.has(sp.oo, -sp.oo, sp.zoo, sp.nan) and r not in (sp.oo, -sp.oo):
+        # SymPy raisonne dans ℂ (x^(2/3) en −∞ : oo*(-1)**(2/3)) : on tranche le signe de
+        # l'infini par sondage numérique de la fonction réelle, sinon on ne conclut pas.
+        return _infini_par_sondage(f, point, direction)
+    return r
+
+
+def _infini_par_sondage(f, point, direction):
+    sp = _sympy()
+    if point in (sp.oo, -sp.oo):
+        sens = 1 if point == sp.oo else -1
+        xs = [sens * 1e8, sens * 1e12]
+    else:
+        p = float(point)
+        pas = -1 if direction == "-" else 1
+        xs = [p + pas * 1e-6, p + pas * 1e-9]
+    try:
+        v1, v2 = (evaluer(f, x) for x in xs)
+    except Exception:
+        return None
+    if v1 is None or v2 is None or abs(v1) < 10 or abs(v2) < 2 * abs(v1) or (v1 > 0) != (v2 > 0):
+        return None
+    return sp.oo if v2 > 0 else -sp.oo
 
 
 def _valeur_tex(res_sympy):
@@ -565,7 +587,7 @@ def etudier(entree):
 
 
 def etudier_json(entree):
-    return json.dumps(etudier(entree), ensure_ascii=False)
+    return json_strict(etudier(entree))
 
 
 if __name__ == "__main__":

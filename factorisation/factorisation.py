@@ -30,7 +30,7 @@ import json
 import random
 import re
 
-from ensemble_def import ErreurSaisie, trinome, racine_rationnelle, qtex, _sympy
+from ensemble_def import json_strict, ErreurSaisie, trinome, racine_rationnelle, qtex, _sympy
 
 __all__ = ["factoriser_json", "apercu_json", "exercice_json"]
 
@@ -1638,14 +1638,14 @@ def factoriser_expr(entree):
 
 
 def factoriser_json(entree):
-    return json.dumps(factoriser_expr(entree), ensure_ascii=False)
+    return json_strict(factoriser_expr(entree))
 
 
 def apercu_json(entree):
     try:
-        return json.dumps({"ok": True, "tex": tex_arbre(analyser(entree))}, ensure_ascii=False)
+        return json_strict({"ok": True, "tex": tex_arbre(analyser(entree))})
     except ErreurSaisie as e:
-        return json.dumps({"ok": False, "erreur": str(e)}, ensure_ascii=False)
+        return json_strict({"ok": False, "erreur": str(e)})
 
 
 # =====================================================================
@@ -1739,7 +1739,7 @@ def genere_exercice(niveau):
 
 
 def exercice_json(niveau):
-    return json.dumps({"ok": True, "expr": genere_exercice(niveau)}, ensure_ascii=False)
+    return json_strict({"ok": True, "expr": genere_exercice(niveau)})
 
 
 if __name__ == "__main__":

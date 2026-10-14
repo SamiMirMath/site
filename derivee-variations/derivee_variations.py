@@ -28,7 +28,7 @@ from fractions import Fraction as F
 from ensemble_def import (
     Nb, X, E, Neg, Op, Fn,
     lire, tex, par, prec, valeur_constante, Num, Iv, REELS, inter, ens_tex, points, contient, proche,
-    preimage, resoudre_general, domaine, fusion, evaluer, aplatir, qtex,
+    preimage, resoudre_general, json_strict, domaine, fusion, evaluer, aplatir, qtex,
     _sympy, en_sympy, arbre_depuis_sympy, num_sympy, _SP,
     txt, NonPrisEnCharge, ErreurSaisie, _analyser, apercu_json,
 )
@@ -554,7 +554,7 @@ def etudier(entree):
 
 
 def etudier_json(entree):
-    return json.dumps(etudier(entree), ensure_ascii=False)
+    return json_strict(etudier(entree))
 
 
 if __name__ == "__main__":

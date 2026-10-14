@@ -90,7 +90,7 @@ class TestInstantanes(unittest.TestCase):
         if REGENERER:
             os.makedirs(DOSSIER, exist_ok=True)
             with open(chemin, "w", encoding="utf-8") as f:
-                json.dump(actuel, f, ensure_ascii=False, indent=1, sort_keys=True)
+                json.dump(actuel, f, ensure_ascii=False, indent=1, sort_keys=True, allow_nan=False)
                 f.write("\n")
             self.skipTest(f"instantané régénéré : {chemin}")
         self.assertTrue(os.path.exists(chemin), f"instantané absent : lancer avec REGENERER=1 ({chemin})")

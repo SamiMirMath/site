@@ -2106,24 +2106,17 @@
    ],
    "xmax": 2.0,
    "xmin": -2.0,
-   "ymax": Infinity,
-   "ymin": -Infinity
+   "ymax": 1.62821155,
+   "ymin": -0.5
   },
   "limites": {
-   "asymptotes": [
-    {
-     "genre": "horizontale",
-     "ou": "x \\to -\\infty",
-     "valeur_tex": "{\\approx}\\,inf",
-     "valeur_val": Infinity
-    }
-   ],
+   "asymptotes": [],
    "ed_tex": "\\mathbb{R}",
    "etudes": [
     {
      "etapes": [
       {
-       "html": "\\(\\displaystyle\\lim f(x) = {\\approx}\\,inf\\).",
+       "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\).",
        "type": "texte"
       }
      ],

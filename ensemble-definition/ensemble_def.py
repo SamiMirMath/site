@@ -2109,8 +2109,25 @@ def analyser(entree):
     return _analyser(entree)[0]
 
 
+def sans_non_fini(o):
+    """Copie de o où tout flottant infini ou NaN est remplacé par None (null en JSON) : un
+    nombre infini n'a pas de représentation JSON, la page lit null comme « pas de valeur finie »."""
+    if isinstance(o, float):
+        return o if math.isfinite(o) else None
+    if isinstance(o, dict):
+        return {k: sans_non_fini(v) for k, v in o.items()}
+    if isinstance(o, (list, tuple)):
+        return [sans_non_fini(v) for v in o]
+    return o
+
+
+def json_strict(o, **options):
+    """Sérialisation JSON stricte (allow_nan=False) de toute sortie de moteur."""
+    return json.dumps(sans_non_fini(o), ensure_ascii=False, allow_nan=False, **options)
+
+
 def analyser_json(entree):
-    return json.dumps(analyser(entree), ensure_ascii=False)
+    return json_strict(analyser(entree))
 
 
 def egaux(A, B):
@@ -2162,14 +2179,14 @@ def iv_proche(iv, t):
 
 
 def verifier_json(entree):
-    return json.dumps(verifier(entree), ensure_ascii=False)
+    return json_strict(verifier(entree))
 
 
 def apercu_json(entree):
     try:
-        return json.dumps({"ok": True, "tex": tex(lire(entree))}, ensure_ascii=False)
+        return json_strict({"ok": True, "tex": tex(lire(entree))})
     except ErreurSaisie as e:
-        return json.dumps({"ok": False, "erreur": str(e)}, ensure_ascii=False)
+        return json_strict({"ok": False, "erreur": str(e)})
 
 
 # =====================================================================

@@ -8,8 +8,9 @@ seule pièce réellement nouvelle ici est le cadrage automatique et
 l'échantillonnage numérique pour le graphique.
 """
 import json
+import math
 
-from ensemble_def import lire, tex, evaluer, fusion, ErreurSaisie, Incertain, _analyser, apercu_json
+from ensemble_def import json_strict, lire, tex, evaluer, fusion, ErreurSaisie, Incertain, _analyser, apercu_json
 import derivee_variations as dv
 import limites_asymptotes as la
 
@@ -88,6 +89,7 @@ def _cadrage_et_courbe(f, ED, extrema, asymptotes):
         if asym.get("genre") == "horizontale" and asym.get("valeur_val") is not None:
             ys.append(asym["valeur_val"])
 
+    ys = [y for y in ys if math.isfinite(y)]
     if not ys:
         ys = [-1.0, 1.0]
     ylo, yhi = min(ys), max(ys)
@@ -129,7 +131,7 @@ def etudier(entree):
 
 
 def etudier_json(entree):
-    return json.dumps(etudier(entree), ensure_ascii=False)
+    return json_strict(etudier(entree))
 
 
 def fenetre(entree, xmin, xmax, n_total=500):
@@ -159,7 +161,7 @@ def fenetre(entree, xmin, xmax, n_total=500):
 
 def fenetre_json(arg_json):
     p = json.loads(arg_json)
-    return json.dumps(fenetre(p["f"], p["xmin"], p["xmax"], p.get("n", 500)), ensure_ascii=False)
+    return json_strict(fenetre(p["f"], p["xmin"], p["xmax"], p.get("n", 500)))
 
 
 if __name__ == "__main__":
