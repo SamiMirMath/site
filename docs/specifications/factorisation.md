@@ -21,9 +21,14 @@ Amaudruz, *Algèbre 1M*, §2.4, exercices 2.11 à 2.16.
 - **Une carte par méthode appliquée** (validé, après les corrections et les tests) : chaque carte
   porte le nom de la méthode en badge, l'expression traitée, les étapes, l'expression obtenue ;
   la dernière carte donne la factorisation complète.
-- Exercices au hasard générés en Python, 4 niveaux (gabarits ci-dessous, **à valider**).
+- Exercices au hasard générés en Python, 4 niveaux (gabarits ci-dessous, acceptés le 14.10.2026, Q4).
 
-## Gabarits actuels proposés pour validation (Q4)
+## Gabarits (acceptés le 14.10.2026, Q4)
+
+Règles : pondérations 35 % / 35 % / 20 % / 10 % ; paramètres entiers petits ; **racines
+distinctes, toutes exactes** (racines irrationnelles écrites avec √, jamais approchées).
+Le carré parfait (niveau difficile) a une racine double par construction : **à valider (Q8)** ;
+d'ici là, le gabarit est conservé tel quel.
 
 | Niveau | Gabarit | Exemple |
 |---|---|---|

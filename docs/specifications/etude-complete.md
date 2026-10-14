@@ -8,14 +8,15 @@ la dérivée et les limites (aucun calcul mathématique nouveau).
 - Enchaîne : ED → dérivée, signe, variations, extrema → limites et asymptotes → graphique.
 - **Graphique** : cadrage automatique (bornes de l'ED, extrema, asymptotes horizontales) ;
   courbe tracée par morceaux de l'ED ; asymptotes en pointillé ; extrema en points pleins ;
-  points de discontinuité en ronds vides ; zoom (boutons, molette, pincement), déplacement
+  trous (limite finie en une valeur interdite) en ronds vides ; zoom (boutons, molette, pincement), déplacement
   (glisser) ; rééchantillonnage de la fenêtre visible.
 - Les résultats des trois étapes sont exactement ceux des outils séparés.
 
 ## Conventions
 
-- Celles des outils séparés. Un « saut » (limites finies différentes) n'est pas dessiné comme une
-  asymptote.
+- Celles des outils séparés. Limite finie ℓ en une valeur interdite a : rond vide en (a ; ℓ)
+  (« trou dans le graphique », Q7) ; limites latérales finies et différentes : rien n'est dessiné
+  comme une asymptote (comportement actuel du graphique).
 - Graduations du graphique en notation suisse (virgule décimale).
 
 ## Critères d'acceptation

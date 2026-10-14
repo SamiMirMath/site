@@ -20,6 +20,8 @@ URL : `/ensemble-definition/` · moteur : `ensemble-definition/ensemble_def.py` 
 ## Conventions
 
 - x^(1/3) et plus généralement x^(p/q) avec q impair : **défini sur ℝ** (validé).
+- u⁰ = 1 sur ℝ (0⁰ compris), mais **l'ED de la base reste exigé** : (ln x)⁰ pour x > 0,
+  (1/x)⁰ pour x ≠ 0 (tranché le 14.10.2026, Q6 ; comportement actuel conforme).
 - Valeurs exactes en priorité (fractions, racines, e, ln) ; une valeur approchée est toujours
   marquée ≈ et accompagnée de sa méthode.
 
@@ -39,3 +41,4 @@ URL : `/ensemble-definition/` · moteur : `ensemble-definition/ensemble_def.py` 
 | ED-05 | Les exercices générés (toutes graines testées, tous niveaux) sont résolus sans valeur approchée de zéro ou de borne | [auto-py] |
 | ED-06 | Le format de sortie commun est respecté (schéma) | [auto-py] |
 | ED-07 | Le contrôle numérique ne signale aucun désaccord quand l'ED est juste, y compris près d'un zéro double (ln(x²−10x+25), 1/(x²−6x+9)) | [auto-py] (`test_controle_numerique_sans_fausse_alerte`) |
+| ED-08 | `x^0` : ED = ℝ ; `(ln(x))^0` : ]0 ; +∞[ ; `(1/x)^0` : ℝ \ {0} ; `(sqrt(x-1))^0` : [1 ; +∞[ | [auto-py] |

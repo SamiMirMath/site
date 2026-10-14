@@ -63,14 +63,20 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
 ### T05 — Bug 5 : plantage sur constante nulle (`0.0`)
 - **Fichiers** : `ensemble-definition/ensemble_def.py` (`valeur_constante`), test dédié.
 - **Dépend** : T01.
-- **Vérification** : ED-03 ; instantanés inchangés.
+- **Vérification** : ED-03, ED-08 (u⁰ = 1, ED de la base exigé : comportement actuel déjà conforme,
+  à figer par un test) ; instantanés inchangés sauf `x^(2-2)`, `x^(1/2-1/2)`.
 
-### T06 — Bug 4 : ED de f' et extremum en un point où f' n'est pas définie
-- **Fichiers** : `derivee-variations/derivee_variations.py`, test dédié.
-- **Dépend** : T01, T02. **Affichage dans le tableau bloqué par Q3** (seuls l'étape « ED de f' » et
-  la liste des extrema changent).
-- **Vérification** : DV-03, DV-04, DV-05 ; instantanés modifiés uniquement pour les fonctions où
-  ED(f') ≠ ED(f) (relus un par un).
+### T06 — Bug 4 : ED de f', extrema (i) et (ii), notation du tableau — **débloquée (Q3, 14.10.2026)**
+- **Contenu** : étape « ED de f' » quand ED(f') ≠ ED(f) ; extremum (i) en un point intérieur de
+  l'ED où f' change de signe même si f' n'y est pas définie ; extremum (ii) en toute borne fermée
+  de l'ED, nature donnée par le sens de variation adjacent ; tableau : double barre sur la ligne
+  f'(x), valeur f(a) sans barre sur la ligne f(x).
+- **Fichiers** : `derivee-variations/derivee_variations.py`, `derivee-variations/index.html` et
+  `etude-complete/index.html` (affichage d'une valeur dans la ligne f(x)), tests.
+- **Dépend** : T01, T02.
+- **Vérification** : DV-03, DV-04, DV-05, DV-09, DV-10 ; `test_aucun_extremum_manque` et
+  `test_extrema_bornes_fermees` passent (retirer `@expectedFailure`) ; instantanés modifiés
+  uniquement pour les fonctions concernées (relus un par un).
 
 ### T07 — Bug 6 : graphique figé au dézoom
 - **Fichiers** : `etude-complete/etude_complete.py` (`_echantillonner`), `etude-complete/index.html`
@@ -93,8 +99,25 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
 - **Fichiers** : `limites-asymptotes/limites_asymptotes.py`, test dédié (SymPy simulé en échec).
 - **Vérification** : LA-03.
 
-### T09 — Croissance comparée
-- **Bloquée** : Q1. **Vérification** : LA-07.
+### T08b — Vocabulaire des limites finies en une valeur interdite — **débloquée (Q7, 14.10.2026)**
+- **Contenu** : remplacer « point de discontinuité » par « f n'est pas définie en a, mais sa limite
+  y est finie (= ℓ) : pas d'asymptote verticale, trou dans le graphique en (a ; ℓ) » ; remplacer le
+  genre « saut » par « limites à gauche et à droite différentes : f n'a pas de limite en a ; pas
+  d'asymptote verticale » (nouveau nom de genre, ex. `sans_limite`).
+- **Fichiers** : `limites-asymptotes/limites_asymptotes.py` (pôle rationnel, cas transcendant un
+  côté, `_bilan_deux_cotes`), `limites-asymptotes/index.html` et `etude-complete/index.html`
+  (`ligneAsymptote`), `tests/python/test_limites_deux_cotes.py`.
+- **Dépend** : T01.
+- **Vérification** : LA-02 (adapté), LA-08 ; instantanés régénérés, diff limité au vocabulaire et
+  au nom du genre.
+
+### T09 — Croissance comparée — **débloquée (Q1, 14.10.2026)**
+- **Contenu** : ne citer la croissance comparée qu'en cas de forme indéterminée (∞/∞, 0·∞,
+  ∞ − ∞ levée par factorisation) entre x^n (n > 0 réel) et e^(ax) (a > 0) ou ln, en ±∞ ou en 0⁺
+  pour ln ; nommer la limite de référence utilisée.
+- **Fichiers** : `limites-asymptotes/limites_asymptotes.py` (`_croissance_comparee`), test dédié.
+- **Dépend** : T01, T08b.
+- **Vérification** : LA-07 ; instantanés : seules les phrases de croissance comparée changent.
 
 ### T10 — Allègement des coefficients fractionnaires de f'
 - **Fichiers** : `derivee-variations/derivee_variations.py` (`_nettoyer`).
@@ -118,7 +141,8 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
 
 ### T13 — Exercices avec graine
 - **Fichiers** : `moteur/exercices.py` (gabarits validés), `exercice(niveau, graine)` par outil, tests.
-- **Dépend** : T12. **Bloquée** : Q4 (gabarits).
+- **Dépend** : T12. Gabarits acceptés (Q4, 14.10.2026) : pondérations conservées, racines
+  distinctes et exactes (sauf réponse contraire à Q8 pour le carré parfait de la factorisation).
 - **Vérification** : FA-03, SOC-05 (moteur) ; ED-05, DV-08 ; 200 graines × 4 niveaux × outil
   résolues exactement.
 
@@ -158,7 +182,7 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
 ### T23 — Notation suisse
 - **Fichiers** : tokeniseurs (`ensemble_def.py`, `factorisation.py`), `dec()`, `commun/nombres.js`,
   graduations du graphique.
-- **Dépend** : T01. Seuil des milliers **bloqué par Q5** (la saisie et la virgule ne le sont pas).
+- **Dépend** : T01. Milliers : ’ dès 4 chiffres, saisie de ' et ’ (Q5, 14.10.2026).
 - **Vérification** : SOC-11, SOC-12.
 
 ## Phase E — Simplexe (en dernier, priorité faible)
@@ -173,7 +197,7 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
 - **Dépend** : T14, T24. **Vérification** : PL-06, PL-08, PL-10, PL-11, PL-12, SOC-01, SOC-02 ; puis liens
   `?methode=` de l'accueil (ACC-08).
 ### T28 — Exercices au hasard du simplexe
-- **Dépend** : T24, T25. **Bloquée** : Q4 (gabarits du simplexe). **Vérification** : PL-09, SOC-05.
+- **Dépend** : T24, T25. Gabarits acceptés (Q4, 14.10.2026). **Vérification** : PL-09, PL-13, SOC-05.
 
 ## Plus tard (hors plan, si les tests tiennent)
 
@@ -183,5 +207,8 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
 
 ## Ordre conseillé
 
-T01 → T02 → T03 → T04 → T05, T07, T08 (indépendantes) → T06 → T07b (priorité haute) → T11 → T12 → T14 → T15 → T16 →
-T17…T20 → T21, T22, T23 → T10 → (T09, T13 après décisions) → T24…T27 → T28 (après validation des gabarits).
+T01 → T02 → T03 → T04 (faites) → T05, T07, T08 (indépendantes) → T08b → T06 → T07b (priorité haute)
+→ T09 → T11 → T12 → T13 → T14 → T15 → T16 → T17…T20 → T21, T22, T23 → T10 → T24…T27 → T28.
+
+**Plus aucune tâche n'est bloquée** (Q1 à Q7 tranchées le 14.10.2026). Q8 (racine double du
+carré parfait en factorisation) reste ouverte ; elle ne concerne qu'un gabarit de T13.

@@ -39,7 +39,14 @@ La filière est un **guide, pas un verrou** : la comparaison des deux méthodes 
   désactivé avec la méthode géométrique ; passer en géométrique ramène à 2 variables).
 - Libellés de la page inchangés : « 2C · Méthode géométrique » et « 2Mr/OS · Méthode algébrique ».
 - **Exercices au hasard : oui**, générés avec graine pour chaque méthode, problèmes à données
-  entières et solution exacte ; gabarits et niveaux à valider (Q4 de [../a-valider.md](../a-valider.md)).
+  entières et solution exacte ; gabarits et niveaux acceptés le 14.10.2026 (Q4 de
+  [../a-valider.md](../a-valider.md)), avec ces règles :
+  - pondérations 35 % / 35 % / 20 % / 10 % ;
+  - méthode algébrique, minimisation : f a au moins un coefficient négatif (sinon optimum
+    trivial à l'origine) ;
+  - niveaux facile et moyen : aucune égalité dans le test du rapport (pas de dégénérescence) ;
+  - méthode graphique, très difficile : gabarits séparés « région non bornée, optimum fini »,
+    « problème non borné » et « infinité de solutions ».
 
 ## Évolutions prévues
 
@@ -69,4 +76,5 @@ La filière est un **guide, pas un verrou** : la comparaison des deux méthodes 
 | PL-11 | `?methode=` absent, vide ou inconnu (`?methode=xyz`) : même état initial qu'aujourd'hui (algébrique, « Exemple 2D »), aucune erreur dans la console | [auto-page] |
 | PL-12 | Avec la méthode géométrique, « 3 variables » est désactivé ; passer de l'algébrique 3D à la géométrique ramène à 2 variables | [auto-page] |
 | PL-09 | Exercices générés : déterministes pour une graine ; 200 graines × niveaux × méthode ont une solution exacte (ou un cas « non borné » / « infinité » voulu par le gabarit), vérifiée par énumération des sommets | [auto-js] |
+| PL-13 | Exercices générés : minimisation algébrique ⇒ f a un coefficient négatif ; niveaux facile et moyen ⇒ aucun ex æquo dans aucun test du rapport ; les gabarits graphiques « région non bornée, optimum fini » et « problème non borné » produisent bien chacun leur cas (vérifié par énumération) | [auto-js] |
 | PL-10 | Les libellés de la page et de l'accueil indiquent 2C → graphique et 2Mr/OS → algébrique ; aucune mention de 2Ms | [auto-py] |

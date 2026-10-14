@@ -48,5 +48,5 @@ utilisé par le site. Le code des moteurs exige Python ≥ 3.12 (syntaxe des f-s
 | Commit | Correction | Test |
 |---|---|---|
 | `14e0ee8` | Dérivée de x^(p/q) fausse (fraction mal transmise à SymPy) | `tests/python/test_derivee_puissances.py` |
-| `70e6b1e` | Asymptote verticale annoncée alors que les deux limites sont finies ; nouveau genre « saut » | `tests/python/test_limites_deux_cotes.py` |
+| `70e6b1e` | Asymptote verticale annoncée alors que les deux limites sont finies ; genre « saut » (remplacé par la formulation Q7, tâche T08b) | `tests/python/test_limites_deux_cotes.py` |
 | `a9b2a6e` | Étapes de la dérivée annonçant « f'(x) = … » pour un morceau de f | `tests/python/test_derivee_narration.py` |

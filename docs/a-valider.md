@@ -3,48 +3,67 @@
 Tant qu'une question est ouverte, **le comportement actuel est conservé** et les tâches qui en
 dépendent sont bloquées (voir [taches.md](taches.md)).
 
-## Q1 — « Croissance comparée » dans l'outil Limites
+**État au 14.10.2026 : Q1 à Q7 sont tranchées.** Seule Q8 (apparue en reportant Q4) reste ouverte ;
+elle ne bloque aucune tâche, seulement un gabarit de factorisation.
+
+## ~~Q1 — « Croissance comparée » dans l'outil Limites~~ (tranchée le 14.10.2026)
 
 **Rappel.** Les croissances comparées sont les limites de référence qui lèvent les formes
-indéterminées entre puissances, exponentielle et logarithme :
+indéterminées entre puissances, exponentielle et logarithme.
 
-- en +∞ : e^x / x^n → +∞ et x^n · e^(−x) → 0 (« l'exponentielle l'emporte sur toute puissance ») ;
-- en −∞ : x^n · e^x → 0 ;
-- en +∞ : ln(x) / x^n → 0 (n > 0) (« toute puissance l'emporte sur le logarithme ») ;
-- en 0⁺ : x^n · ln(x) → 0 (n > 0).
+**Décision.** Proposition acceptée, logarithme compris, avec les ajouts de l'enseignant :
 
-On ne les invoque que face à une **forme indéterminée** (∞/∞ ou 0·∞) entre ces deux familles.
+- La croissance comparée n'est citée que face à une **forme indéterminée** entre une puissance
+  de x et une exponentielle ou un logarithme : ∞/∞, 0·∞, et aussi **∞ − ∞ levée par
+  factorisation** (e^x − x² = e^x(1 − x²/e^x) ; x − ln x = x(1 − ln(x)/x)).
+- Lieux : en ±∞, et en 0⁺ pour le logarithme.
+- Puissances x^n avec **n > 0 réel** (pas seulement entier) ; exponentielles **e^(ax) avec a > 0**
+  (et e^(−ax) = 1/e^(ax)).
+- Limites de référence couvertes (n > 0, a > 0) :
+  - en +∞ : e^(ax)/x^n → +∞ ; x^n·e^(−ax) → 0 ; ln(x)/x^n → 0 ; x^n/ln(x) → +∞ ;
+  - en −∞ : x^n·e^(ax) → 0 (x^n défini pour x < 0, n entier) ;
+  - en 0⁺ : x^n·ln(x) → 0.
+- La phrase **nomme toujours la limite de référence utilisée**, par exemple
+  « x²·e^(−x) → 0 en +∞ par croissance comparée (lim x^n e^(−x) = 0) ».
+- Hors de ces cas (x·e^x en +∞, e^x/x en 0…), aucune mention de croissance comparée.
 
-**Aujourd'hui** (`limites_asymptotes.py:362-374`) : la phrase « par croissance comparée,
-l'exponentielle domine » apparaît dès que f est un produit d'une exponentielle et d'autre chose,
-y compris sans forme indéterminée (x·e^x en +∞ : ∞·∞ ; e^x/x en 0), et jamais pour ln.
-
-**Proposition.** Ne citer la croissance comparée que si : (a) la limite est en ±∞, ou en 0⁺ pour
-ln ; (b) il y a une forme indéterminée entre une puissance de x et e^(…) ou ln ; (c) la phrase nomme
-la limite de référence utilisée (par ex. « x² e^(−x) → 0 en +∞ par croissance comparée »).
-
-**À décider :** la proposition convient-elle ? Faut-il couvrir aussi ln ?
+Voir [specifications/limites-asymptotes.md](specifications/limites-asymptotes.md) ; débloque **T09**.
 
 ## ~~Q2 — Simplexe~~ (tranchée le 13.10.2026)
 
 - **2C : méthode graphique ; 2Mr (OS) : méthode algébrique ; 2Ms : pas d'outil de programmation linéaire.**
-- **Exercices au hasard : oui** (gabarits à valider, voir Q4).
+- `?methode=` présélectionne la méthode de la filière ; l'autre reste accessible.
+- **Exercices au hasard : oui** (gabarits : Q4).
 
 Voir [specifications/simplexe.md](specifications/simplexe.md).
 
-## Q3 — Notation dans le tableau quand f est définie mais pas f'
+## ~~Q3 — Tableau quand f est définie mais pas f'~~ (tranchée le 14.10.2026)
 
-Validé : l'ED de f' est calculé et affiché quand il diffère de celui de f.
-Ouvert : en un tel point (±2 pour √(x²−4), 0 pour √(x²)), que montrer ?
-- ligne f'(x) : double barre (f' non définie) — proposition ;
-- ligne f(x) : pas de double barre (f est définie) ; point d'extremum si f' change de signe.
-D'ici la décision, l'affichage actuel (double barre sur les deux lignes) est conservé, mais
-l'extremum mathématique sera annoncé dans la liste des extrema (bug 4).
+**Décision.**
+- Ligne f'(x) : **double barre** (f' non définie).
+- Ligne f(x) : **la valeur f(a), sans barre**.
+- Extremum local annoncé :
+  - **(i)** en un point **intérieur** de l'ED où f' change de signe, même si f' n'y est pas
+    définie (√(x²) en 0, x^(2/3) en 0) ;
+  - **(ii)** en toute **borne fermée** de l'ED (±2 pour √(x²−4), 0 pour √x) : extremum local
+    dont la nature est donnée par le sens de variation sur l'intervalle adjacent (f décroissante
+    à gauche de la borne droite ou croissante à droite de la borne gauche ⇒ minimum ; sinon maximum).
 
-## Q4 — Gabarits et niveaux des exercices au hasard
+Voir [specifications/derivee-variations.md](specifications/derivee-variations.md) (DV-04, DV-09,
+DV-10) ; débloque entièrement **T06**.
 
-Validé : génération en Python avec graine, niveaux conservés, chaque exercice résolu exactement
-dans les tests. **À valider : les gabarits.** Propositions dérivées des listes actuelles :
+## ~~Q4 — Gabarits et niveaux des exercices au hasard~~ (tranchée le 14.10.2026)
+
+**Décision.** Gabarits ci-dessous acceptés, pondérations conservées (35 % / 35 % / 20 % / 10 %),
+avec les règles suivantes :
+
+- **Paramètres** (a, b, c, k, s, p) entiers petits ; **racines distinctes, toutes exactes**.
+- **Simplexe algébrique, minimisation** : f a au moins un coefficient négatif (sinon l'optimum
+  est trivialement à l'origine).
+- **Simplexe, niveaux facile et moyen** : aucune égalité dans le test du rapport (pas de
+  dégénérescence).
+- **Simplexe graphique, très difficile** : deux gabarits séparés, « région non bornée, optimum
+  fini » et « problème non borné ».
 
 | Outil | facile | moyen | difficile | très difficile |
 |---|---|---|---|---|
@@ -52,24 +71,40 @@ dans les tests. **À valider : les gabarits.** Propositions dérivées des liste
 | Dérivée | trinôme ; x³−3k²x ; e^(ax) | x⁴−2k²x² ; x·ln(x) ; ln(x)/x ; √(trinôme à Δ<0) | (x²−a²)/(x−c) ; x/(x²+k) ; ln(x²−k²) | x²·e^(−x) |
 | Limites | 1/(x−a) ; e^(ax) ; ln(x) | (x²−a²)/(x−c) ; ln(x−a) ; 1/x² | x²/(x−a) ; √(trinôme) ; x²·e^(−x) | ln(x²−ax)/(x−c) |
 | Étude complète | comme Dérivée, facile | x⁴−2k²x² ; x·ln(x) ; ln(x)/x | (x²−a²)/(x−c) ; x/(x²+k) | x²·e^(−x) |
-| Factorisation | voir [specifications/factorisation.md](specifications/factorisation.md) |
-| Simplexe — graphique (2C) | 2 contraintes ≤, maximiser, sommets entiers | 3 contraintes dont une ≥, sommets entiers ou demi-entiers | minimiser avec contraintes ≥ ; coefficient de y négatif dans f | région non bornée ou infinité de solutions (côté parallèle aux droites f = c) |
-| Simplexe — algébrique (2Mr/OS) | 2 variables, 2 contraintes ≤ (b ≥ 0), 1 à 2 pivots | 2 variables, 3 contraintes, 2 pivots | 3 variables, 3 contraintes ≤ | 3 variables, 4 contraintes, 3 pivots ou plus ; minimisation |
+| Factorisation | voir [specifications/factorisation.md](specifications/factorisation.md) | | | |
+| Simplexe — graphique (2C) | 2 contraintes ≤, maximiser, sommets entiers | 3 contraintes dont une ≥, sommets entiers ou demi-entiers | minimiser avec contraintes ≥ ; coefficient de y négatif dans f | (a) région non bornée, optimum fini ; (b) problème non borné ; (c) infinité de solutions (côté parallèle aux droites f = c) |
+| Simplexe — algébrique (2Mr/OS) | 2 variables, 2 contraintes ≤ (b ≥ 0), 1 à 2 pivots | 2 variables, 3 contraintes, 2 pivots | 3 variables, 3 contraintes ≤ | 3 variables, 4 contraintes, 3 pivots ou plus ; minimisation (f avec un coefficient négatif) |
 
-Paramètres (a, b, c, k, s, p) entiers petits, choisis pour que toutes les racines et bornes
-soient exactes. Les pondérations actuelles (35 % / 35 % / 20 % / 10 %) sont conservées sauf avis
-contraire.
+Débloque **T13** et **T28**.
 
-## Q5 — Séparateur de milliers
+## ~~Q5 — Séparateur de milliers~~ (tranchée le 14.10.2026)
 
-Apostrophe ’ dès 4 chiffres (1’000, comme le simplexe aujourd'hui) ou dès 5 chiffres (10’000) ?
+**Décision.** Apostrophe typographique ’ **dès 4 chiffres** (1’000) ; à la saisie, ' et ’ sont
+acceptés. Voir [specifications/socle-commun.md](specifications/socle-commun.md) ; débloque
+entièrement **T23**.
 
-## Q6 — x⁰ en x = 0
+## ~~Q6 — x⁰~~ (tranchée le 14.10.2026)
 
-Aujourd'hui `x^0` a pour ED ℝ (0⁰ traité comme 1). Convention du cours : ℝ ou ℝ\{0} ?
+**Décision.** u⁰ = 1 sur ℝ (0⁰ compris), **mais l'ED de la base reste exigé** :
+(ln x)⁰ n'est défini que pour x > 0, (1/x)⁰ pour x ≠ 0.
+Le comportement actuel est déjà conforme (vérifié le 14.10.2026) ; critère ED-08 ajouté.
 
-## Q7 — Vocabulaire des discontinuités
+## ~~Q7 — Vocabulaire quand la limite en une valeur interdite est finie~~ (tranchée le 14.10.2026)
 
-Les outils écrivent « point de discontinuité (pas une asymptote) » quand la limite est finie.
-La correction `70e6b1e` ajoute « saut » (limites latérales finies et différentes, ex. x/√(x²) en 0).
-Ces deux formulations conviennent-elles au cours ?
+**Décision.** Ne plus écrire « point de discontinuité » quand a ∉ ED.
+- Limites latérales finies et égales à ℓ : « f n'est pas définie en a, mais sa limite y est
+  finie (= ℓ) : pas d'asymptote verticale, trou dans le graphique en (a ; ℓ) ».
+- Limites latérales finies et différentes : « limites à gauche et à droite différentes : f n'a
+  pas de limite en a ; pas d'asymptote verticale ». Cette formulation **remplace le genre
+  « saut »** introduit par `70e6b1e`.
+
+Voir [specifications/limites-asymptotes.md](specifications/limites-asymptotes.md) ; nouvelle
+tâche **T08b**.
+
+## Q8 — Racine double dans les gabarits de factorisation (ouverte)
+
+La règle de Q4 « racines distinctes » s'applique-t-elle aussi au gabarit factorisation
+« difficile : carré parfait (px + q)² », dont la racine double est le but même de l'exercice
+(identité remarquable) ? Proposition : la règle vise les coïncidences accidentelles entre
+paramètres ; un gabarit conçu pour une racine double (carré parfait, cube d'un binôme) la garde.
+D'ici la décision, le gabarit est conservé tel quel.

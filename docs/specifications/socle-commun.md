@@ -24,8 +24,8 @@ S'applique à toutes les pages outils, sauf mention contraire pour le simplexe
 ## Notation suisse
 
 - Virgule décimale partout (`2{,}5` en TeX, « 2,5 » en texte).
-- Séparateur de milliers : apostrophe typographique ’ (U+2019) ; en TeX `\text{’}`.
-  Seuil d'application (dès 4 ou dès 5 chiffres) : **à valider** (Q5).
+- Séparateur de milliers : apostrophe typographique ’ (U+2019) **dès 4 chiffres** (1’000) ;
+  en TeX `\text{’}` (tranché le 14.10.2026, Q5).
 - Saisie : « 2,5 » et « 2.5 » acceptés ; « 1'000 », « 1’000 » acceptés (apostrophe suivie
   d'exactement 3 chiffres) ; « 1 000 » (espace entre chiffres) refusé avec un message clair
   plutôt que lu 1·000.
