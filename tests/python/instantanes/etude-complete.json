@@ -1870,6 +1870,7 @@
    "domaine_etude_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
    "ed_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
    "extrema": [],
+   "f_constante": true,
    "f_tex": "\\frac{x}{\\sqrt{x^{2}}}",
    "ok": true,
    "signe_etapes": [
@@ -1890,18 +1891,18 @@
     "rows": [
      {
       "cells": [
-       "+",
-       "+",
-       "+"
+       "0",
+       "||",
+       "0"
       ],
       "final": true,
       "label": "f'(x)"
      },
      {
       "cells": [
-       "\\nearrow",
+       "\\rightarrow",
        "asym",
-       "\\nearrow"
+       "\\rightarrow"
       ],
       "label": "f(x)",
       "variation": true

@@ -67,6 +67,36 @@ class TestTableauQ3(unittest.TestCase):
         self.assertEqual(L["f'(x)"], ["+", "0", "+"])
         self.assertEqual(L["f(x)"], [r"\nearrow", "", r"\nearrow"])
         self.assertEqual(r["extrema"], [])
+        self.assertNotIn("f_constante", r)
+
+
+class TestFonctionConstante(unittest.TestCase):
+    def test_constante_sur_R(self):  # x^(2-2)
+        r, t, L = lignes("x^(2-2)")
+        self.assertEqual(L["f'(x)"], ["0"])
+        self.assertEqual(L["f(x)"], [r"\rightarrow"])
+        self.assertEqual(r["extrema"], [])
+        self.assertTrue(r["f_constante"])
+
+    def test_constante_par_morceaux(self):  # √(x²)/x : −1 pour x < 0, 1 pour x > 0
+        r, _, L = lignes("sqrt(x^2)/x")
+        self.assertEqual(L["f'(x)"], ["0", "||", "0"])
+        self.assertEqual(L["f(x)"], [r"\rightarrow", "asym", r"\rightarrow"])
+        self.assertEqual(r["extrema"], [])
+
+    def test_constante_hors_ed_barree(self):  # ln(x²) − 2 ln(x), ED = ]0 ; +∞[
+        r, _, L = lignes("ln(x^2)-2ln(x)")
+        self.assertEqual(L["f'(x)"], ["x", "||", "0"])
+        self.assertEqual(L["f(x)"], ["", "asym", r"\rightarrow"])
+        self.assertEqual(r["extrema"], [])
+
+    def test_valeur_constante_a_la_borne_dans_l_ed(self):
+        # f = (√x)⁰ : ED = [0 ; +∞[ (bord fermé), f ≡ 1.
+        r, _, L = lignes("sqrt(x)^0")
+        self.assertEqual(r["extrema"], [])
+        self.assertTrue(r["f_constante"])
+        self.assertEqual(L["f(x)"][1], "val:1")
+        self.assertEqual(L["f(x)"][2], r"\rightarrow")
 
 
 if __name__ == "__main__":

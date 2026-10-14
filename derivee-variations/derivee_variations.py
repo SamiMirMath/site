@@ -474,6 +474,15 @@ def etudier(entree):
             colonne = [l["cells"][2 * i + 1] for l in lignes]
             combinee.append("x" if "x" in colonne else "||" if "||" in colonne else "0" if "0" in colonne else
                              ("-" if colonne.count("-") % 2 else "+"))
+    # f' identiquement nulle (f constante sur chaque morceau de son ED) : « 0 » sur chaque
+    # intervalle de l'ED, « || » aux valeurs interdites, hors de l'ED la case est barrée.
+    f_constante = valeur_constante(fprime) == 0
+    if f_constante:
+        for i in range(2 * k + 1):
+            if i % 2 == 0:
+                combinee[i] = "0" if contient(D, _test(i // 2)) else "x"
+            else:
+                combinee[i] = "0" if contient(D, crit[i // 2].val) else "||"
     lignes.append({"label": "f'(x)", "cells": combinee, "final": True})
 
     res["signe_resolu"] = True
@@ -508,7 +517,7 @@ def etudier(entree):
     fleche_cells, extrema = [], []
     for i in range(k + 1):
         s = combinee[2 * i]
-        fleche_cells.append({"+": r"\nearrow", "-": r"\searrow"}.get(s, ""))
+        fleche_cells.append({"+": r"\nearrow", "-": r"\searrow", "0": r"\rightarrow"}.get(s, ""))
         if i >= k:
             continue
         p = crit[i]
@@ -530,12 +539,14 @@ def etudier(entree):
             v, valeur_tex = _valeur_en(p)
             extrema.append({"genre": genre, "x_tex": p.tex, "f_tex": valeur_tex,
                             "x_val": p.val, "f_val": v})
-        if not contient(D, p.val):
+        if not contient(D, p.val) or f_constante:
             v, valeur_tex = _valeur_en(p)
             fleche_cells.append("val:" + valeur_tex)
         else:
             fleche_cells.append("extremum" if genre is not None else "")
 
+    if f_constante:
+        res["f_constante"] = True
     lignes.append({"label": "f(x)", "cells": fleche_cells, "variation": True})
     res["extrema"] = extrema
 

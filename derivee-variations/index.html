@@ -242,7 +242,7 @@ function tableau(t){
     if(s==="-") return '<td class="m">−</td>';
     if(s==="||"||s==="asym") return '<td class="vi"></td>';
     if(s==="x") return '<td class="hors">×</td>';
-    if(s==="\\nearrow"||s==="\\searrow") return `<td>${K(s)}</td>`;
+    if(s==="\\nearrow"||s==="\\searrow"||s==="\\rightarrow") return `<td>${K(s)}</td>`;
     if(s.startsWith("val:")) return `<td class="pt">${K(s.slice(4))}</td>`;
     if(s==="extremum") return '<td class="pt">•</td>';
     return `<td>${s}</td>`;
@@ -278,7 +278,9 @@ function carteSigne(r){
     h+='<ul class="extrema">'+r.extrema.map(e=>
       `<li>${e.genre} en \\(x=${e.x_tex}\\) : \\(f(${e.x_tex})=${e.f_tex}\\)</li>`).join("")+'</ul>';
   } else {
-    h+='<div class="hint">Aucun extremum local : f est strictement monotone (ou n\'a que des points où f\' s\'annule sans changer de signe).</div>';
+    h+= r.f_constante
+      ? '<div class="hint">f\' est nulle sur son ensemble de définition : f est constante sur chaque intervalle, aucun extremum.</div>'
+      : '<div class="hint">Aucun extremum local : f est strictement monotone (ou n\'a que des points où f\' s\'annule sans changer de signe).</div>';
   }
   d.innerHTML=h; math(d); return d;
 }

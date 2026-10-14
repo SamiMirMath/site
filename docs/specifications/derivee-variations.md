@@ -38,6 +38,11 @@ URL : `/derivee-variations/` · moteur : `derivee-variations/derivee_variations.
     et x√x) : extremum local dont la nature vient du sens de variation sur l'intervalle adjacent
     (borne gauche : croissante à droite ⇒ minimum, décroissante ⇒ maximum ; borne droite :
     croissante à gauche ⇒ maximum, décroissante ⇒ minimum).
+- Fonction constante (décidé le 14.10.2026, T06b) : sur chaque intervalle de l'ED où f' est
+  identiquement nulle, la ligne f'(x) porte « 0 » et la ligne f(x) une **flèche horizontale →** ;
+  la valeur constante figure en toute borne de l'intervalle qui appartient à l'ED ; **aucun
+  extremum** n'est annoncé sur cet intervalle. À ne pas confondre avec un zéro **isolé** de f'
+  (x³ en 0) : « 0 » dans la colonne de 0, ↗ ↗ de part et d'autre, aucun extremum.
 - Coefficients fractionnaires : affichage à alléger (`\frac{1}{2\sqrt{x}}` plutôt que
   `\frac{\frac{1}{2}}{\sqrt{x}}`), sans changer la valeur.
 
@@ -55,3 +60,6 @@ URL : `/derivee-variations/` · moteur : `derivee-variations/derivee_variations.
 | DV-08 | Exercices générés : f' et tableau obtenus sans valeur approchée de zéro de f' | [auto-py] |
 | DV-09 | Critère (ii) : √(x²−4) : minimum local en −2 et en 2 (f = 0) ; √(4−x²) : minimum local en −2 et en 2 (f = 0), maximum en 0 (f = 2) ; √x : minimum en 0 ; x√x : minimum en 0 ; aucun extremum de bord pour une borne ouverte (ln x en 0) | [auto-py] (`test_extrema_bornes_fermees`, échec attendu jusqu'à T06) |
 | DV-10 | Tableau de √(x²−4) : ligne f'(x) avec double barre en ±2 ; ligne f(x) avec la valeur 0 en ±2, sans barre | [auto-py] |
+| DV-11 | x^(2−2) : ligne f'(x) « 0 », ligne f(x) →, aucun extremum ; √(x²)/x : « 0 » et → sur chaque intervalle, double barre en 0 (hors de l'ED) | [auto-py] (`test_tableau_variations.py`) |
+| DV-12 | x³ : ligne f'(x) « + 0 + », ligne f(x) « ↗ ↗ », aucun extremum (zéro isolé de f') | [auto-py] (`test_tableau_variations.py`) |
+| DV-13 | f constante sur [0 ; +∞[ ((√x)⁰) : la valeur 1 figure en 0 sur la ligne f(x), puis →, aucun extremum | [auto-py] (`test_tableau_variations.py`) |

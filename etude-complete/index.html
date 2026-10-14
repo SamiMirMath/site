@@ -235,7 +235,7 @@ function tableau(t){
     if(s==="-") return '<td class="m">−</td>';
     if(s==="||"||s==="asym") return '<td class="vi"></td>';
     if(s==="x") return '<td class="hors">×</td>';
-    if(s==="\\nearrow"||s==="\\searrow") return `<td>${K(s)}</td>`;
+    if(s==="\\nearrow"||s==="\\searrow"||s==="\\rightarrow") return `<td>${K(s)}</td>`;
     if(s.startsWith("val:")) return `<td class="pt">${K(s.slice(4))}</td>`;
     if(s==="extremum") return '<td class="pt">•</td>';
     return `<td>${s}</td>`;
@@ -273,7 +273,9 @@ function carteSigneVariations(dv){
     h+='<ul class="extrema">'+dv.extrema.map(e=>
       `<li>${e.genre} en \\(x=${e.x_tex}\\) : \\(f(${e.x_tex})=${e.f_tex}\\)</li>`).join("")+'</ul>';
   } else {
-    h+='<div class="hint">Aucun extremum local.</div>';
+    h+= dv.f_constante
+      ? '<div class="hint">f est constante sur chaque intervalle de son ensemble de définition : aucun extremum.</div>'
+      : '<div class="hint">Aucun extremum local.</div>';
   }
   d.innerHTML=h; math(d); return d;
 }

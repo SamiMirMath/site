@@ -78,6 +78,15 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
   `test_extrema_bornes_fermees` passent (retirer `@expectedFailure`) ; instantanés modifiés
   uniquement pour les fonctions concernées (relus un par un).
 
+### T06b — Fonction constante dans le tableau (décidée le 14.10.2026, avec T06)
+- **Contenu** : sur chaque intervalle où f' est identiquement nulle, « 0 » sur la ligne f'(x) et
+  flèche horizontale → sur la ligne f(x), avec la valeur constante aux bornes appartenant à l'ED ;
+  aucun extremum sur cet intervalle ; un zéro isolé de f' (x³) reste « 0 » avec ↗ ↗.
+- **Fichiers** : `derivee-variations/derivee_variations.py`, `derivee-variations/index.html` et
+  `etude-complete/index.html` (flèche →, message), `tests/python/test_tableau_variations.py`.
+- **Dépend** : T06.
+- **Vérification** : DV-11, DV-12, DV-13 ; instantanés modifiés uniquement pour x^(2-2) et x/√(x²).
+
 ### T07 — Bug 6 : graphique figé au dézoom
 - **Fichiers** : `etude-complete/etude_complete.py` (`_echantillonner`), `etude-complete/index.html`
   (message en cas d'échec), test dédié.

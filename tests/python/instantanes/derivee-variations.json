@@ -2275,6 +2275,7 @@
   "domaine_etude_tex": "\\mathbb{R}",
   "ed_tex": "\\mathbb{R}",
   "extrema": [],
+  "f_constante": true,
   "f_tex": "x^{2 - 2}",
   "ok": true,
   "signe_etapes": [
@@ -2293,14 +2294,14 @@
    "rows": [
     {
      "cells": [
-      "+"
+      "0"
      ],
      "final": true,
      "label": "f'(x)"
     },
     {
      "cells": [
-      "\\nearrow"
+      "\\rightarrow"
      ],
      "label": "f(x)",
      "variation": true
