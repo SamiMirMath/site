@@ -63,9 +63,12 @@ details ul{margin:.4em 0 0;padding-left:1.2em}
 .tsigne tr.final td{font-weight:700;border-top:2px solid var(--fg)}
 .tsigne .p{color:var(--good);font-weight:700}
 .tsigne .m{color:var(--bad);font-weight:700}
-.tsigne .vi{border-left:3px double var(--fg);border-right:3px double var(--fg);padding:5px 2px}
+/* Double barre d'une valeur interdite : un seul trait double, centré dans la colonne (donc sous la valeur
+   écrite dans l'en-tête), continu d'une ligne à l'autre (le pseudo-élément recouvre les filets horizontaux). */
+.tsigne td.vi{position:relative;padding:5px 2px}
+.tsigne td.vi::after{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:3px;transform:translateX(-50%);border-left:2px solid var(--fg);border-right:2px solid var(--fg);background:var(--card);z-index:1;pointer-events:none}
 .cache{display:none}
-.tsigne .hors{background:repeating-linear-gradient(45deg,transparent 0 4px,var(--border) 4px 6px);color:var(--muted)}
+.tsigne .hors{background:repeating-linear-gradient(45deg,transparent 0 4px,var(--border) 4px 6px);color:var(--muted);-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .verif{margin-top:8px;font-size:.9rem}
 .verif.ok{color:var(--good)} .verif.ko{color:var(--bad);font-weight:600}
 
