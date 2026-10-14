@@ -186,7 +186,7 @@
        "type": "texte"
       },
       {
-       "html": "Les deux limites sont finies et égales à \\(1\\) : f se prolonge par continuité en ce point, c'est un point de discontinuité (pas une asymptote).",
+       "html": "Les deux limites sont finies et égales à \\(1\\) : f n'est pas définie en \\(x=0\\), mais sa limite y est finie (\\(=1\\)) : pas d'asymptote verticale, trou dans le graphique en \\((0\\,;\\,1)\\).",
        "type": "texte"
       }
      ],
@@ -603,7 +603,7 @@
        "type": "texte"
       },
       {
-       "html": "\\(\\displaystyle\\lim f(x) = 0\\) : la limite est finie, f se prolonge par continuité en ce point (pas une asymptote).",
+       "html": "\\(\\displaystyle\\lim f(x) = 0\\) : f n'est pas définie en \\(x=0\\), mais sa limite y est finie (\\(=0\\)) : pas d'asymptote verticale, trou dans le graphique en \\((0\\,;\\,0)\\).",
        "type": "texte"
       }
      ],
@@ -1568,7 +1568,7 @@
        "type": "texte"
       },
       {
-       "html": "\\(\\displaystyle\\lim f(x) = 0\\) : la limite est finie, f se prolonge par continuité en ce point (pas une asymptote).",
+       "html": "\\(\\displaystyle\\lim f(x) = 0\\) : f n'est pas définie en \\(x=0\\), mais sa limite y est finie (\\(=0\\)) : pas d'asymptote verticale, trou dans le graphique en \\((0\\,;\\,0)\\).",
        "type": "texte"
       }
      ],
@@ -1943,7 +1943,7 @@
      "droite_val": 1.0,
      "gauche_tex": "-1",
      "gauche_val": -1.0,
-     "genre": "saut",
+     "genre": "sans_limite",
      "ou": "x \\to 0",
      "point_tex": "0",
      "point_val": 0.0
@@ -1980,7 +1980,7 @@
        "type": "texte"
       },
       {
-       "html": "Les deux limites sont finies mais différentes : f fait un saut en ce point (pas une asymptote).",
+       "html": "Limites à gauche et à droite différentes : f n'a pas de limite en \\(x=0\\) ; pas d'asymptote verticale.",
        "type": "texte"
       }
      ],

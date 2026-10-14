@@ -236,7 +236,7 @@
       "type": "texte"
      },
      {
-      "html": "Les deux limites sont finies et égales à \\(1\\) : f se prolonge par continuité en ce point, c'est un point de discontinuité (pas une asymptote).",
+      "html": "Les deux limites sont finies et égales à \\(1\\) : f n'est pas définie en \\(x=0\\), mais sa limite y est finie (\\(=1\\)) : pas d'asymptote verticale, trou dans le graphique en \\((0\\,;\\,1)\\).",
       "type": "texte"
      }
     ],
@@ -324,7 +324,7 @@
    {
     "etapes": [
      {
-      "html": "\\(\\displaystyle\\lim_{x\\to 1} f(x) = \\lim_{x\\to 1}\\dfrac{\\left(x + 1\\right)\\,\\cancel{\\left(x-1\\right)}}{\\cancel{\\left(x-1\\right)}} = \\lim_{x\\to 1} \\left(x + 1\\right) = 2\\) : la limite est finie, c'est un point de discontinuité, pas une asymptote verticale.",
+      "html": "\\(\\displaystyle\\lim_{x\\to 1} f(x) = \\lim_{x\\to 1}\\dfrac{\\left(x + 1\\right)\\,\\cancel{\\left(x-1\\right)}}{\\cancel{\\left(x-1\\right)}} = \\lim_{x\\to 1} \\left(x + 1\\right) = 2\\) : f n'est pas définie en \\(x=1\\), mais sa limite y est finie (\\(=2\\)) : pas d'asymptote verticale, trou dans le graphique en \\((1\\,;\\,2)\\).",
       "type": "texte"
      }
     ],
@@ -1323,7 +1323,7 @@
       "type": "texte"
      },
      {
-      "html": "Les deux limites sont finies et égales à \\(0\\) : f se prolonge par continuité en ce point, c'est un point de discontinuité (pas une asymptote).",
+      "html": "Les deux limites sont finies et égales à \\(0\\) : f n'est pas définie en \\(x=0\\), mais sa limite y est finie (\\(=0\\)) : pas d'asymptote verticale, trou dans le graphique en \\((0\\,;\\,0)\\).",
       "type": "texte"
      }
     ],
@@ -1390,7 +1390,7 @@
     "droite_val": 1.0,
     "gauche_tex": "-1",
     "gauche_val": -1.0,
-    "genre": "saut",
+    "genre": "sans_limite",
     "ou": "x \\to 0",
     "point_tex": "0",
     "point_val": 0.0
@@ -1427,7 +1427,7 @@
       "type": "texte"
      },
      {
-      "html": "Les deux limites sont finies mais différentes : f fait un saut en ce point (pas une asymptote).",
+      "html": "Limites à gauche et à droite différentes : f n'a pas de limite en \\(x=0\\) ; pas d'asymptote verticale.",
       "type": "texte"
      }
     ],

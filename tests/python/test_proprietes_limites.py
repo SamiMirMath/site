@@ -81,7 +81,7 @@ class TestProprietesLimites(unittest.TestCase):
                     else:
                         p = mp.mpf(a["point_val"])
                         cotes = []
-                        if g in ("verticale", "saut"):
+                        if g in ("verticale", "sans_limite"):
                             if a.get("gauche_tex"):
                                 cotes.append((-1, a["gauche_tex"], a.get("gauche_val")))
                             if a.get("droite_tex"):

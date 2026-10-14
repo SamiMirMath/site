@@ -12,7 +12,7 @@ Méthode (décidée avec l'enseignant) :
     division polynomiale exacte pour l'oblique), sans recours au calcul formel.
   - Pôle fini d'une fonction rationnelle : on factorise, on détermine le signe de
     chaque côté ⇒ asymptote verticale ; si le numérateur s'annule aussi au même
-    point (forme 0/0), c'est un point de discontinuité (trou), pas une asymptote —
+    point (forme 0/0), f n'y est pas définie mais sa limite est finie : un trou, pas une asymptote —
     le calcul formel (SymPy) tranche cette limite indéterminée.
   - Cas transcendants (ln, exp, racine mélangés à x) : le calcul formel donne la
     valeur ; la narration reste simple (substitution directe), avec mention
@@ -273,9 +273,16 @@ def _etude_pole_numerique(f, N, D, point, cote, items):
     if vtex == "?":
         items.append(txt("La limite n'a pas pu être déterminée automatiquement : on ne conclut pas sur une éventuelle asymptote."))
         return None
-    items.append(txt(rf"\(\displaystyle\lim_{{x\to {point.tex}}} f(x) = {vtex}\) : la limite est finie, "
-                     r"c'est un point de discontinuité, pas une asymptote verticale."))
+    items.append(txt(rf"\(\displaystyle\lim_{{x\to {point.tex}}} f(x) = {vtex}\) : "
+                     + _phrase_trou(point.tex, vtex)))
     return {"genre": "trou", "point_tex": point.tex, "point_val": a, "valeur_tex": vtex, "valeur_val": vval}
+
+
+def _phrase_trou(point_tex, valeur_tex):
+    """Formulation Q7 : valeur interdite où la limite (éventuellement latérale) est finie."""
+    return (rf"f n'est pas définie en \(x={point_tex}\), mais sa limite y est finie "
+            rf"(\(={valeur_tex}\)) : pas d'asymptote verticale, trou dans le graphique "
+            rf"en \(({point_tex}\,;\,{valeur_tex})\).")
 
 
 def _x_moins(a):
@@ -334,8 +341,7 @@ def _etude_rationnelle_pole(f, N, D, point, cote, items):
     if diff >= 0:
         valeur_val = 0.0 if diff > 0 else float(N2a / D2a)
         valeur = "0" if diff > 0 else qtex(N2a / D2a)
-        items.append(txt(rf"\({chaine} = {valeur}\) : la limite est finie, c'est un point de "
-                         r"discontinuité, pas une asymptote verticale."))
+        items.append(txt(rf"\({chaine} = {valeur}\) : " + _phrase_trou(point.tex, valeur)))
         return {"genre": "trou", "point_tex": point.tex, "point_val": float(a),
                 "valeur_tex": valeur, "valeur_val": valeur_val}
 
@@ -437,10 +443,13 @@ def _etude_transcendante(f, borne, items):
         if vtex == "?":
             items.append(txt("La limite n'a pas pu être déterminée automatiquement : on ne conclut pas sur une éventuelle asymptote."))
             return vtex, False, None, None
-        items.append(txt(rf"\(\displaystyle\lim f(x) = {vtex}\)"
-                         + (" : asymptote verticale." if (borne["type"] != "inf" and inf) else
-                            " : la limite est finie, f se prolonge par continuité en ce point (pas une "
-                            "asymptote)." if borne["type"] != "inf" else ".")))
+        if borne["type"] != "inf" and inf:
+            fin = " : asymptote verticale."
+        elif borne["type"] != "inf":
+            fin = " : " + _phrase_trou(point.tex, vtex)
+        else:
+            fin = "."
+        items.append(txt(rf"\(\displaystyle\lim f(x) = {vtex}\)" + fin))
         extra = _oblique_generale(f, borne["signe"], items) if (borne["type"] == "inf" and inf) else None
         return vtex, inf, extra, vval
     vg, _, _, vg_val = _valeur_tex(_limite_sympy(f, cible, "-"))
@@ -464,12 +473,12 @@ def _bilan_deux_cotes(point, cote_tex, val, vval, items):
                          "on ne conclut pas sur une éventuelle asymptote."))
         return None
     if vg == vd or (vg_val is not None and vd_val is not None and proche(vg_val, vd_val)):
-        items.append(txt(rf"Les deux limites sont finies et égales à \({vg}\) : f se prolonge par "
-                         r"continuité en ce point, c'est un point de discontinuité (pas une asymptote)."))
+        items.append(txt(rf"Les deux limites sont finies et égales à \({vg}\) : "
+                         + _phrase_trou(point.tex, vg)))
         return dict(base, genre="trou", valeur_tex=vg, valeur_val=vg_val)
-    items.append(txt("Les deux limites sont finies mais différentes : f fait un saut en ce point "
-                     "(pas une asymptote)."))
-    return dict(base, genre="saut", gauche_tex=vg, droite_tex=vd, gauche_val=vg_val, droite_val=vd_val)
+    items.append(txt("Limites à gauche et à droite différentes : f n'a pas de limite en "
+                     rf"\(x={point.tex}\) ; pas d'asymptote verticale."))
+    return dict(base, genre="sans_limite", gauche_tex=vg, droite_tex=vd, gauche_val=vg_val, droite_val=vd_val)
 
 
 # =====================================================================

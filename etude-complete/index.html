@@ -291,8 +291,8 @@ function ligneAsymptote(a){
     if(a.droite_tex) bouts.push(K("\\lim_{x\\to "+a.point_tex+"^+} f(x) = "+a.droite_tex));
     return `Asymptote verticale : ${K("x = "+a.point_tex)} (${bouts.join(" ; ")})`;
   }
-  if(a.genre==="trou") return `Point de discontinuité en ${K("x = "+a.point_tex)} (pas une asymptote) : ${K("f(x) \\to "+a.valeur_tex)}`;
-  if(a.genre==="saut") return `Saut en ${K("x = "+a.point_tex)} (pas une asymptote) : ${K("\\lim_{x\\to "+a.point_tex+"^-} f(x) = "+a.gauche_tex)} ; ${K("\\lim_{x\\to "+a.point_tex+"^+} f(x) = "+a.droite_tex)}`;
+  if(a.genre==="trou") return `Trou en ${K("("+a.point_tex+"\\,;\\,"+a.valeur_tex+")")} : f n'est pas définie en ${K("x = "+a.point_tex)}, mais ${K("f(x) \\to "+a.valeur_tex)} (pas une asymptote verticale)`;
+  if(a.genre==="sans_limite") return `Pas de limite en ${K("x = "+a.point_tex)} (pas d'asymptote verticale) : ${K("\\lim_{x\\to "+a.point_tex+"^-} f(x) = "+a.gauche_tex)} ; ${K("\\lim_{x\\to "+a.point_tex+"^+} f(x) = "+a.droite_tex)}`;
   return `Pas d'asymptote (${K(a.ou)}) — branche parabolique.`;
 }
 function carteBilanAsymptotes(la){
@@ -330,7 +330,7 @@ function carteGraphique(g, extrema, asymptotes){
     </div>
     <canvas id="graphique" style="touch-action:none;cursor:grab"></canvas>
     <div id="msgFenetre" class="hint no-print" style="margin-top:6px" hidden>La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.</div>
-    <div class="hint" style="margin-top:6px">Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), point de discontinuité (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.</div>`;
+    <div class="hint" style="margin-top:6px">Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.</div>`;
   const cv=d.querySelector("#graphique");
   cv.__g=g; cv.__extrema=extrema; cv.__asymptotes=asymptotes;
   // `vista` est la fenêtre de données qu'on veut voir, en toutes lettres
@@ -569,7 +569,7 @@ function dessinerGraphique(canvas, g, extrema, asymptotes, vista, forcerClair){
   });
   ctx.restore();
 
-  // points de discontinuité (trou) : rond vide
+  // trous (limite finie en une valeur interdite) : rond vide
   (asymptotes||[]).forEach(a=>{
     if(a.genre!=="trou" || a.point_val==null || a.valeur_val==null) return;
     if(a.point_val<xmin||a.point_val>xmax||a.valeur_val<ymin||a.valeur_val>ymax) return;
