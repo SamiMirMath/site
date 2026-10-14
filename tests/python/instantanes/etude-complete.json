@@ -852,14 +852,6 @@
      "type": "texte"
     },
     {
-     "html": "On pose \\(t = e^{2x}\\) : \\(2e^{2x} = 2t\\).",
-     "type": "texte"
-    },
-    {
-     "html": "\\(2t = 0 \\iff t = 0\\).",
-     "type": "texte"
-    },
-    {
      "html": "\\(e^{2x} = 0\\) est impossible, car \\(e^{2x} > 0\\) pour tout réel : solution rejetée.",
      "type": "texte"
     }
@@ -2043,11 +2035,7 @@
      "type": "texte"
     },
     {
-     "html": "On pose \\(t = \\sqrt[3]{x}\\) : \\(\\frac{2}{3\\sqrt[3]{x}} = \\frac{2}{3t}\\).",
-     "type": "texte"
-    },
-    {
-     "html": "Le numérateur vaut \\(\\frac{2}{3} \\neq 0\\) : aucune solution.",
+     "html": "Le numérateur de f' vaut \\(2\\) : il ne s'annule jamais, f' n'a aucun zéro (les valeurs interdites viennent du dénominateur).",
      "type": "texte"
     }
    ],

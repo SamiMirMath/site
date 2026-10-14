@@ -430,8 +430,16 @@ def etudier(entree):
             "on regarde directement le signe de part et d'autre."))
     items_signe.append(txt("On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0."))
     n_intro = len(items_signe)
+    numerateur = fprime.a if isinstance(fprime, Op) and fprime.op == "/" else fprime
+    cn = valeur_constante(numerateur)
     try:
-        Z = preimage(fprime, points([Num.rat(0)]), items_signe)
+        if cn is not None and cn != 0 and numerateur is not fprime:
+            # f' = c / D avec c constante non nulle : aucun zéro, rien à résoudre
+            items_signe.append(txt(rf"Le numérateur de f' vaut \({qtex(cn)}\) : il ne s'annule jamais, "
+                                   r"f' n'a aucun zéro (les valeurs interdites viennent du dénominateur)."))
+            Z = []
+        else:
+            Z = preimage(fprime, points([Num.rat(0)]), items_signe)
     except NonPrisEnCharge:
         items_signe = items_signe[:n_intro]
         try:

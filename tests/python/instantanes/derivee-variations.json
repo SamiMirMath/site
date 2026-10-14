@@ -35,7 +35,7 @@
     "type": "texte"
    },
    {
-    "html": "Le numérateur vaut \\(-1 \\neq 0\\) : aucune solution.",
+    "html": "Le numérateur de f' vaut \\(-1\\) : il ne s'annule jamais, f' n'a aucun zéro (les valeurs interdites viennent du dénominateur).",
     "type": "texte"
    }
   ],
@@ -897,14 +897,6 @@
   "signe_etapes": [
    {
     "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
-    "type": "texte"
-   },
-   {
-    "html": "On pose \\(t = e^{2x}\\) : \\(2e^{2x} = 2t\\).",
-    "type": "texte"
-   },
-   {
-    "html": "\\(2t = 0 \\iff t = 0\\).",
     "type": "texte"
    },
    {
@@ -2130,11 +2122,7 @@
     "type": "texte"
    },
    {
-    "html": "On pose \\(t = \\sqrt{x}\\) : \\(\\frac{-1}{2\\sqrt{x^{3}}} = \\frac{-1}{2t^{3}}\\).",
-    "type": "texte"
-   },
-   {
-    "html": "Le numérateur vaut \\(-\\frac{1}{2} \\neq 0\\) : aucune solution.",
+    "html": "Le numérateur de f' vaut \\(-1\\) : il ne s'annule jamais, f' n'a aucun zéro (les valeurs interdites viennent du dénominateur).",
     "type": "texte"
    }
   ],
@@ -2215,11 +2203,7 @@
     "type": "texte"
    },
    {
-    "html": "On pose \\(t = \\sqrt{x}\\) : \\(\\frac{1}{2\\sqrt{x}} = \\frac{1}{2t}\\).",
-    "type": "texte"
-   },
-   {
-    "html": "Le numérateur vaut \\(\\frac{1}{2} \\neq 0\\) : aucune solution.",
+    "html": "Le numérateur de f' vaut \\(1\\) : il ne s'annule jamais, f' n'a aucun zéro (les valeurs interdites viennent du dénominateur).",
     "type": "texte"
    }
   ],
@@ -2339,11 +2323,7 @@
     "type": "texte"
    },
    {
-    "html": "On pose \\(t = \\sqrt[3]{x}\\) : \\(\\frac{2}{3\\sqrt[3]{x}} = \\frac{2}{3t}\\).",
-    "type": "texte"
-   },
-   {
-    "html": "Le numérateur vaut \\(\\frac{2}{3} \\neq 0\\) : aucune solution.",
+    "html": "Le numérateur de f' vaut \\(2\\) : il ne s'annule jamais, f' n'a aucun zéro (les valeurs interdites viennent du dénominateur).",
     "type": "texte"
    }
   ],
@@ -2408,14 +2388,6 @@
   "signe_etapes": [
    {
     "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
-    "type": "texte"
-   },
-   {
-    "html": "On pose \\(t = \\sqrt{x}\\) : \\(\\frac{3\\sqrt{x}}{2} = \\frac{3}{2}t\\).",
-    "type": "texte"
-   },
-   {
-    "html": "\\(\\frac{3}{2}t = 0 \\iff t = 0\\).",
     "type": "texte"
    },
    {

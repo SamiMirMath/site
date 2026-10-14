@@ -1,6 +1,7 @@
 """C1 : x^(p/q), q impair, est défini sur ℝ (racine réelle) ; SymPy le lit dans ℂ pour x < 0.
 Le pont SymPy d'analyse écrit real_root(u, q)**p ; les résultats doivent être justes sur ℝ."""
 import json
+import re
 import unittest
 from fractions import Fraction as F
 
@@ -120,8 +121,8 @@ class TestRacinesExactes(unittest.TestCase):
 
     def test_zero_et_valeur_interdite_ne_sont_pas_confondus(self):
         t = self.textes("x^(2/3)")                       # f' = 2/(3∛x) : le numérateur ne s'annule jamais
-        self.assertIn("Le numérateur vaut", t)
-        self.assertIn("aucune solution", t)
+        self.assertIn("Le numérateur de f' vaut", t)
+        self.assertIn("il ne s'annule jamais", t)
         self.assertNotIn("= 0 \\iff x", t)               # on ne résout pas ∛x = 0 comme un zéro de f'
         r = dv.etudier("x^(2/3)")
         self.assertEqual(r["domaine_etude_tex"], ed.ens_tex(ed.inter(ed.REELS, ed.complement(ed.points([ed.Num.rat(0)])))))
@@ -194,7 +195,72 @@ class TestDeriveeEnQuotient(unittest.TestCase):
     def test_zero_du_numerateur_valeur_interdite_du_denominateur(self):
         r = dv.etudier("x^(2/3)")
         self.assertEqual(r["ed_deriv_tex"], r"\mathbb{R} \setminus \left\{0\right\}")   # 0 : valeur interdite de f'
-        self.assertTrue(any("Le numérateur vaut" in e.get("html", "") for e in r["signe_etapes"]))   # 2 ne s'annule jamais
+        self.assertTrue(any("Le numérateur de f' vaut" in e.get("html", "") for e in r["signe_etapes"]))   # 2 ne s'annule jamais
+
+
+class TestNarrationDeFPrimeEgalZero(unittest.TestCase):
+    """La phrase qui résout f' = 0 parle du numérateur AFFICHÉ de f' ; pas de substitution inutile."""
+
+    def etapes(self, entree):
+        r = dv.etudier(entree)
+        return r, [re.sub(r"\s+", " ", e["html"]) for e in r["signe_etapes"] if "html" in e]
+
+    def numerateur_affiche(self, deriv_tex):
+        m = re.match(r"\\frac\{(-?\d+)\}\{", deriv_tex)
+        return m.group(1) if m else None
+
+    def test_numerateur_constant(self):
+        for entree, num in [("x^(2/3)", "2"), ("x^(-1/3)", "-1"), ("sqrt(x)", "1"), ("x/sqrt(x)", "1"), ("ln(x)", "1")]:
+            with self.subTest(f=entree):
+                r, textes = self.etapes(entree)
+                self.assertEqual(self.numerateur_affiche(r["deriv_tex"]), num)
+                self.assertTrue(any(f"Le numérateur de f' vaut \\({num}\\) : il ne s'annule jamais" in t for t in textes), textes)
+                self.assertFalse(any("On pose" in t for t in textes), textes)
+
+    def test_racine_seule_sans_substitution(self):
+        for entree, racine in [("x^(4/3)", r"\sqrt[3]{x}"), ("x^(3/2)", r"\sqrt{x}"), ("x*sqrt(x)", r"\sqrt{x}")]:
+            with self.subTest(f=entree):
+                _, textes = self.etapes(entree)
+                self.assertIn(f"\\({racine} = 0 \\iff x = 0\\)", textes)
+                self.assertFalse(any("On pose" in t for t in textes), textes)
+
+    def test_substitution_gardee_pour_une_somme(self):
+        _, textes = self.etapes("x^(1/3)+x")
+        self.assertTrue(any(t.startswith("On pose") for t in textes))
+        self.assertTrue(any(r"on résout \(3t^{2} + 1 = 0\)" in t for t in textes), textes)   # numérateur affiché (3t²+1)/(3t²)
+        _, textes = self.etapes("sqrt(x)+x")
+        self.assertTrue(any(r"on résout \(2t + 1 = 0\)" in t for t in textes), textes)
+
+    def test_coherence_sur_tous_les_exemples(self):
+        from cas import CAS_LIMITES, entrees_page
+        for entree in dict.fromkeys(entrees_page("derivee-variations") + CAS_LIMITES["derivee-variations"]):
+            r, textes = self.etapes(entree)
+            num = self.numerateur_affiche(r.get("deriv_tex", ""))
+            if num is not None and r.get("signe_resolu"):
+                with self.subTest(f=entree):
+                    self.assertTrue(any(f"vaut \\({num}\\)" in t for t in textes), (r["deriv_tex"], textes))
+
+
+class TestCoefficientsEntiersED(unittest.TestCase):
+    """Résolution rationnelle écrite avec des coefficients entiers (comme la fraction affichée) ;
+    ni l'ED ni les conditions ne changent."""
+
+    def test_trinome_entier(self):
+        res = ed.analyser("ln(x^2/3-1/2)")
+        textes = " ".join(e["html"] for c in res["conditions"] for e in c["etapes"] if "html" in e)
+        self.assertIn(r"Trinôme \(2x^{2} - 3\)", textes)
+        self.assertNotIn(r"\frac{1}{3}x^{2}", textes)
+
+    def test_equation_entiere(self):
+        res = ed.analyser("1/(1/2*x^2-x+1/3)")
+        textes = " ".join(e["html"] for c in res["conditions"] for e in c["etapes"] if "html" in e)
+        self.assertIn(r"On résout \(3x^{2} - 6x + 2 = 0\)", textes)
+
+    def test_ensembles_inchanges(self):
+        self.assertEqual(ed.analyser("ln(x^2/3-1/2)")["ED_tex"],
+                         r"\left]-\infty \,;\, \frac{-\sqrt{6}}{2}\right[ \cup \left]\frac{\sqrt{6}}{2} \,;\, +\infty\right[")
+        self.assertEqual(ed.analyser("1/(1/2*x^2-x+1/3)")["ED_tex"],
+                         ed.analyser("1/(3x^2-6x+2)")["ED_tex"])
 
 
 if __name__ == "__main__":

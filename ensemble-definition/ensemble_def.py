@@ -459,22 +459,39 @@ def r_norm(R):
     return (n, d)
 
 
-def rtex(R, v):
+def r_entiers(R):
+    """(N, D) de la fraction R avec des coefficients entiers premiers entre eux dans leur ensemble
+    (facteur commun strictement positif : le signe et les zéros ne changent pas). C'est la forme
+    que l'on écrit au tableau : \frac{-1}{2t^{3}} et non \frac{-\frac{1}{2}}{t^{3}}."""
     n, d = r_norm(R)
-    if deg(d) == 0:
-        return ptex(n, v)
-    # dénominateurs des coefficients chassés : \frac{-1}{2t^{3}} et non \frac{-\frac{1}{2}}{t^{3}}
     L = 1
     for c in list(n) + list(d):
         L = L * F(c).denominator // math.gcd(L, F(c).denominator)
-    if L != 1:
-        n, d = [c * L for c in n], [c * L for c in d]
+    n, d = [F(c) * L for c in n], [F(c) * L for c in d]
+    g = 0
+    for c in n + d:
+        g = math.gcd(g, int(c))
+    if g > 1:
+        n, d = [c / g for c in n], [c / g for c in d]
+    return n, d
+
+
+def rtex(R, v):
+    n, d = r_entiers(R)
+    if deg(d) == 0:
+        return ptex(n, v)     # polynôme (dénominateur constant positif : même signe, mêmes zéros)
     return r"\frac{" + ptex(n, v) + "}{" + ptex(d, v) + "}"
 
 
 def est_identite(R):
     n, d = r_norm(R)
     return deg(d) == 0 and pn(n) == [0, 1]
+
+
+def est_monome(R):
+    """R(t) = c·tᵏ avec k ≥ 1 (un seul terme, dénominateur constant)."""
+    n, d = r_norm(R)
+    return deg(d) == 0 and deg(n) >= 1 and sum(1 for c in pn(n) if c != 0) == 1
 
 
 def est_affine(R):
@@ -936,7 +953,7 @@ def sg(x):
 
 def resoudre_rat(R, rel, v, items, nom_expr=None):
     """Ensemble des v tels que R(v) rel 0, rel ∈ {'>', '>=', '='}. Ajoute les explications à items."""
-    N, D = r_norm(R)
+    N, D = r_entiers(R)
     N, D = pn(N), pn(D)
     expr = nom_expr or rtex((N, D), v)
     if nul(N):
@@ -1444,6 +1461,8 @@ def preimage(B, S, items):
     _, genre, B2, R2, t_tex = dec_
     if est_identite(R2):
         S_t = fusion(S)
+    elif est_monome(R2) and all(iv.lo is not None and iv.hi is not None and iv.lo.val == 0 and iv.hi.val == 0 for iv in fusion(S)):
+        S_t = fusion(S)       # c·tᵏ = 0 ⇔ t = 0 : pas de substitution à écrire
     else:
         items.append(txt(rf"On pose \(t = {t_tex}\) : \({tex(B)} = {rtex(R2, 't')}\)."))
         S_t = resoudre_dans(R2, S, "t", rtex(R2, "t"), items)
