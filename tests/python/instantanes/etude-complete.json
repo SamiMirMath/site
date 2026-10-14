@@ -1845,7 +1845,7 @@
      "type": "texte"
     },
     {
-     "html": "\\(\\sqrt{x^{2}}\\) est de la forme \\(\\sqrt{u}\\) avec \\(u(x) = x^{2}\\) (dérivée interne \\(u'(x) = 2x\\)) \\(\\Rightarrow\\) \\(\\left(\\sqrt{x^{2}}\\right)' = \\frac{u'}{2\\sqrt{u}} = \\frac{2x}{2\\sqrt{x^{2}}}\\).",
+     "html": "\\(\\sqrt{x^{2}}\\) est de la forme \\(\\sqrt{u}\\) avec \\(u(x) = x^{2}\\) (dérivée interne \\(u'(x) = 2x\\)) \\(\\Rightarrow\\) \\(\\left(\\sqrt{x^{2}}\\right)' = \\frac{u'}{2\\sqrt{u}} = \\frac{x}{\\sqrt{x^{2}}}\\).",
      "type": "texte"
     },
     {
@@ -1853,11 +1853,11 @@
      "type": "texte"
     },
     {
-     "html": "\\(v'(x) = \\frac{2x}{2\\sqrt{x^{2}}}\\).",
+     "html": "\\(v'(x) = \\frac{x}{\\sqrt{x^{2}}}\\).",
      "type": "texte"
     },
     {
-     "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{1\\sqrt{x^{2}} - x\\,\\frac{2x}{2\\sqrt{x^{2}}}}{\\left(\\sqrt{x^{2}}\\right)^{2}} = 0\\).",
+     "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{1\\sqrt{x^{2}} - x\\,\\frac{x}{\\sqrt{x^{2}}}}{\\left(\\sqrt{x^{2}}\\right)^{2}} = 0\\).",
      "type": "texte"
     }
    ],
@@ -2013,12 +2013,12 @@
   "derivee": {
    "deriv_etapes": [
     {
-     "html": "\\(\\left(\\sqrt[3]{x^{2}}\\right)' = \\frac{\\frac{2}{3}}{\\sqrt[3]{x}}\\) (règle de la puissance).",
+     "html": "\\(\\left(\\sqrt[3]{x^{2}}\\right)' = \\frac{2}{3\\sqrt[3]{x}}\\) (règle de la puissance).",
      "type": "texte"
     }
    ],
    "deriv_resolu": true,
-   "deriv_tex": "\\frac{\\frac{2}{3}}{\\sqrt[3]{x}}",
+   "deriv_tex": "\\frac{2}{3\\sqrt[3]{x}}",
    "domaine_etude_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
    "ed_deriv_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
    "ed_tex": "\\mathbb{R}",
@@ -2043,7 +2043,7 @@
      "type": "texte"
     },
     {
-     "html": "On pose \\(t = \\sqrt[3]{x}\\) : \\(\\frac{\\frac{2}{3}}{\\sqrt[3]{x}} = \\frac{\\frac{2}{3}}{t}\\).",
+     "html": "On pose \\(t = \\sqrt[3]{x}\\) : \\(\\frac{2}{3\\sqrt[3]{x}} = \\frac{2}{3t}\\).",
      "type": "texte"
     },
     {

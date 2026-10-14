@@ -134,7 +134,8 @@ class TestRacinesExactes(unittest.TestCase):
         self.assertEqual(ed.tex(ed.lire("x^(1/3)")), r"\sqrt[3]{x}")
         self.assertEqual(ed.tex(ed.lire("x^(2/3)")), r"\sqrt[3]{x^{2}}")
         self.assertEqual(ed.tex(ed.lire("x^(1/4)")), r"\sqrt[4]{x}")
-        self.assertEqual(ed.tex(ed.lire("x^(3/2)")), r"x^{\frac{3}{2}}")     # inchangé (q = 2)
+        self.assertEqual(ed.tex(ed.lire("x^(3/2)")), r"\sqrt{x^{3}}")
+        self.assertEqual(ed.tex(ed.lire("x^(5/3)")), r"\sqrt[3]{x^{5}}")
         self.assertEqual(ed.tex(ed.lire("x^(-1/3)")), r"x^{\frac{-1}{3}}")   # inchangé (exposant négatif)
 
     def test_aplatir_u_puissance_p_sur_q(self):
@@ -152,6 +153,48 @@ class TestRacinesExactes(unittest.TestCase):
         res = ed.analyser("1/x^(1/3)")
         self.assertEqual(res["ED_tex"], r"\mathbb{R} \setminus \left\{0\right\}")
         self.assertFalse(res["besoin_sympy"])
+
+
+class TestDeriveeEnQuotient(unittest.TestCase):
+    """C3 : f' écrite en un quotient numérateur / dénominateur (DV-07)."""
+    ATTENDU = {
+        "x^(2/3)": r"\frac{2}{3\sqrt[3]{x}}",
+        "x^(1/3)": r"\frac{1}{3\sqrt[3]{x^{2}}}",
+        "x^(-1/3)": r"\frac{-1}{3\sqrt[3]{x^{4}}}",
+        "x^(4/3)": r"\frac{4\sqrt[3]{x}}{3}",
+        "x^(1/2)": r"\frac{1}{2\sqrt{x}}",
+        "x^(3/2)": r"\frac{3\sqrt{x}}{2}",
+        "x^(-1/2)": r"\frac{-1}{2\sqrt{x^{3}}}",
+        "sqrt(x^2)": r"\frac{x}{\sqrt{x^{2}}}",
+        "x^3": "3x^{2}",                       # entier : inchangé
+        "(x^2-1)/(x-3)": r"\frac{x^{2} - 6x + 1}{\left(x - 3\right)^{2}}",
+    }
+
+    def test_forme_attendue(self):
+        for entree, tex in self.ATTENDU.items():
+            with self.subTest(f=entree):
+                self.assertEqual(dv.etudier(entree)["deriv_tex"], tex)
+
+    def test_aucune_fraction_imbriquee(self):
+        for entree in list(self.ATTENDU) + ["x^(5/3)", "x^(-5/3)", "x^(1/3)+x^(2/3)", "(x-1)^(5/2)"]:
+            r = dv.etudier(entree)
+            with self.subTest(f=entree):
+                self.assertNotIn(r"\frac{\frac", r["deriv_tex"])
+                for e in r["deriv_etapes"]:
+                    self.assertNotIn(r"\frac{\frac", e["html"])
+
+    def test_dv07_tous_les_exemples(self):   # DV-07 : f' sans fraction imbriquée, pour les exemples et cas limites
+        from cas import CAS_LIMITES, entrees_page
+        for entree in dict.fromkeys(entrees_page("derivee-variations") + CAS_LIMITES["derivee-variations"]):
+            r = dv.etudier(entree)
+            if r.get("deriv_resolu"):
+                with self.subTest(f=entree):
+                    self.assertNotIn(r"\frac{\frac", r["deriv_tex"])
+
+    def test_zero_du_numerateur_valeur_interdite_du_denominateur(self):
+        r = dv.etudier("x^(2/3)")
+        self.assertEqual(r["ed_deriv_tex"], r"\mathbb{R} \setminus \left\{0\right\}")   # 0 : valeur interdite de f'
+        self.assertTrue(any("Le numérateur vaut" in e.get("html", "") for e in r["signe_etapes"]))   # 2 ne s'annule jamais
 
 
 if __name__ == "__main__":

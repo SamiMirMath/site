@@ -121,16 +121,54 @@ def _nettoyer(n):
     return n
 
 
+def _produit(facteurs):
+    out = facteurs[0]
+    for f in facteurs[1:]:
+        out = Op("*", out, f)
+    return out
+
+
+def _en_quotient(n):
+    """Écrit f' en un seul quotient numérateur / dénominateur : coefficient rationnel réparti
+    (2/3 · 1/∛x → 2/(3∛x)), exposants négatifs au dénominateur, signe au numérateur. Les facteurs
+    gardent leur ordre. Une expression déjà sans fraction (coefficient entier, exposants positifs)
+    est laissée telle quelle."""
+    try:
+        c, facs = aplatir(n)
+    except Exception:
+        return n
+    if c == 0 or (c.denominator == 1 and all(k > 0 for _, k in facs)):
+        return n
+
+    def puiss(h, k):
+        q = indice_racine(h)
+        if q is not None:           # (racine q-ième de u)^k s'écrit u^(k/q) (tex : racine q-ième de u^k)
+            e = F(k, q)
+            return h.a if e == 1 else Op("^", h.a, Nb(e))
+        return h if k == 1 else Op("^", h, Nb(F(k)))
+    haut = [puiss(h, k) for h, k in facs if k > 0]
+    bas = [puiss(h, -k) for h, k in facs if k < 0]
+    if abs(c.numerator) != 1 or not haut:
+        haut.insert(0, Nb(F(abs(c.numerator))))
+    if c.denominator != 1:
+        bas.insert(0, Nb(F(c.denominator)))
+    N = _produit(haut)
+    if c < 0:
+        N = Neg(N)
+    return Op("/", N, _produit(bas)) if bas else N
+
+
 def _simplifier(n):
     """Met f' en forme factorisée (jamais développée) : plus facile à lire, et les
-    zéros s'y lisent directement — c'est la convention demandée pour la suite."""
+    zéros s'y lisent directement — c'est la convention demandée pour la suite. Le résultat
+    est écrit en un quotient numérateur / dénominateur (_en_quotient)."""
     sp = _sympy()
     if sp is None:
-        return _nettoyer(n)
+        return _en_quotient(_nettoyer(n))
     try:
-        return _nettoyer(arbre_depuis_sympy(sp.factor(en_sympy(n))))
+        return _en_quotient(_nettoyer(arbre_depuis_sympy(sp.factor(en_sympy(n)))))
     except Exception:
-        return _nettoyer(n)
+        return _en_quotient(_nettoyer(n))
 
 
 # =====================================================================

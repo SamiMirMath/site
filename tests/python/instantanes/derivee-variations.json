@@ -1308,12 +1308,12 @@
     "type": "texte"
    },
    {
-    "html": "\\(\\sqrt{x^{2}}\\) est de la forme \\(\\sqrt{u}\\) avec \\(u(x) = x^{2}\\) (dérivée interne \\(u'(x) = 2x\\)) \\(\\Rightarrow\\) \\(\\left(\\sqrt{x^{2}}\\right)' = \\frac{u'}{2\\sqrt{u}} = \\frac{2x}{2\\sqrt{x^{2}}}\\).",
+    "html": "\\(\\sqrt{x^{2}}\\) est de la forme \\(\\sqrt{u}\\) avec \\(u(x) = x^{2}\\) (dérivée interne \\(u'(x) = 2x\\)) \\(\\Rightarrow\\) \\(\\left(\\sqrt{x^{2}}\\right)' = \\frac{u'}{2\\sqrt{u}} = \\frac{x}{\\sqrt{x^{2}}}\\).",
     "type": "texte"
    }
   ],
   "deriv_resolu": true,
-  "deriv_tex": "\\frac{2x}{2\\sqrt{x^{2}}}",
+  "deriv_tex": "\\frac{x}{\\sqrt{x^{2}}}",
   "domaine_etude_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
   "ed_deriv_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
   "ed_tex": "\\mathbb{R}",
@@ -2113,12 +2113,12 @@
  "x^(-1/2)": {
   "deriv_etapes": [
    {
-    "html": "\\(\\left(x^{\\frac{-1}{2}}\\right)' = \\frac{-\\frac{1}{2}}{x^{\\frac{3}{2}}}\\) (règle de la puissance).",
+    "html": "\\(\\left(x^{\\frac{-1}{2}}\\right)' = \\frac{-1}{2\\sqrt{x^{3}}}\\) (règle de la puissance).",
     "type": "texte"
    }
   ],
   "deriv_resolu": true,
-  "deriv_tex": "\\frac{-\\frac{1}{2}}{x^{\\frac{3}{2}}}",
+  "deriv_tex": "\\frac{-1}{2\\sqrt{x^{3}}}",
   "domaine_etude_tex": "\\left]0 \\,;\\, +\\infty\\right[",
   "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
   "extrema": [],
@@ -2130,7 +2130,7 @@
     "type": "texte"
    },
    {
-    "html": "On pose \\(t = \\sqrt{x}\\) : \\(\\frac{-\\frac{1}{2}}{x^{\\frac{3}{2}}} = \\frac{-\\frac{1}{2}}{t^{3}}\\).",
+    "html": "On pose \\(t = \\sqrt{x}\\) : \\(\\frac{-1}{2\\sqrt{x^{3}}} = \\frac{-1}{2t^{3}}\\).",
     "type": "texte"
    },
    {
@@ -2185,12 +2185,12 @@
  "x^(1/2)": {
   "deriv_etapes": [
    {
-    "html": "\\(\\left(\\sqrt{x}\\right)' = \\frac{\\frac{1}{2}}{\\sqrt{x}}\\) (règle de la puissance).",
+    "html": "\\(\\left(\\sqrt{x}\\right)' = \\frac{1}{2\\sqrt{x}}\\) (règle de la puissance).",
     "type": "texte"
    }
   ],
   "deriv_resolu": true,
-  "deriv_tex": "\\frac{\\frac{1}{2}}{\\sqrt{x}}",
+  "deriv_tex": "\\frac{1}{2\\sqrt{x}}",
   "domaine_etude_tex": "\\left]0 \\,;\\, +\\infty\\right[",
   "ed_deriv_tex": "\\left]0 \\,;\\, +\\infty\\right[",
   "ed_tex": "\\left[0 \\,;\\, +\\infty\\right[",
@@ -2215,7 +2215,7 @@
     "type": "texte"
    },
    {
-    "html": "On pose \\(t = \\sqrt{x}\\) : \\(\\frac{\\frac{1}{2}}{\\sqrt{x}} = \\frac{\\frac{1}{2}}{t}\\).",
+    "html": "On pose \\(t = \\sqrt{x}\\) : \\(\\frac{1}{2\\sqrt{x}} = \\frac{1}{2t}\\).",
     "type": "texte"
    },
    {
@@ -2309,12 +2309,12 @@
  "x^(2/3)": {
   "deriv_etapes": [
    {
-    "html": "\\(\\left(\\sqrt[3]{x^{2}}\\right)' = \\frac{\\frac{2}{3}}{\\sqrt[3]{x}}\\) (règle de la puissance).",
+    "html": "\\(\\left(\\sqrt[3]{x^{2}}\\right)' = \\frac{2}{3\\sqrt[3]{x}}\\) (règle de la puissance).",
     "type": "texte"
    }
   ],
   "deriv_resolu": true,
-  "deriv_tex": "\\frac{\\frac{2}{3}}{\\sqrt[3]{x}}",
+  "deriv_tex": "\\frac{2}{3\\sqrt[3]{x}}",
   "domaine_etude_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
   "ed_deriv_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
   "ed_tex": "\\mathbb{R}",
@@ -2339,7 +2339,7 @@
     "type": "texte"
    },
    {
-    "html": "On pose \\(t = \\sqrt[3]{x}\\) : \\(\\frac{\\frac{2}{3}}{\\sqrt[3]{x}} = \\frac{\\frac{2}{3}}{t}\\).",
+    "html": "On pose \\(t = \\sqrt[3]{x}\\) : \\(\\frac{2}{3\\sqrt[3]{x}} = \\frac{2}{3t}\\).",
     "type": "texte"
    },
    {
@@ -2386,12 +2386,12 @@
  "x^(3/2)": {
   "deriv_etapes": [
    {
-    "html": "\\(\\left(x^{\\frac{3}{2}}\\right)' = \\frac{3}{2}\\sqrt{x}\\) (règle de la puissance).",
+    "html": "\\(\\left(\\sqrt{x^{3}}\\right)' = \\frac{3\\sqrt{x}}{2}\\) (règle de la puissance).",
     "type": "texte"
    }
   ],
   "deriv_resolu": true,
-  "deriv_tex": "\\frac{3}{2}\\sqrt{x}",
+  "deriv_tex": "\\frac{3\\sqrt{x}}{2}",
   "domaine_etude_tex": "\\left[0 \\,;\\, +\\infty\\right[",
   "ed_tex": "\\left[0 \\,;\\, +\\infty\\right[",
   "extrema": [
@@ -2403,7 +2403,7 @@
     "x_val": 0.0
    }
   ],
-  "f_tex": "x^{\\frac{3}{2}}",
+  "f_tex": "\\sqrt{x^{3}}",
   "ok": true,
   "signe_etapes": [
    {
@@ -2411,7 +2411,7 @@
     "type": "texte"
    },
    {
-    "html": "On pose \\(t = \\sqrt{x}\\) : \\(\\frac{3}{2}\\sqrt{x} = \\frac{3}{2}t\\).",
+    "html": "On pose \\(t = \\sqrt{x}\\) : \\(\\frac{3\\sqrt{x}}{2} = \\frac{3}{2}t\\).",
     "type": "texte"
    },
    {

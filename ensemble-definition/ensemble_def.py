@@ -325,9 +325,9 @@ def tex(n):
     if valeur_constante(n.b) == F(1, 2):
         return r"\sqrt{" + tex(n.a) + "}"
     e = valeur_constante(n.b)
-    if e is not None and e.denominator >= 3 and 0 < e < 1:     # u^(p/q), 0 < p/q < 1 : racine q-ième de u^p
+    if e is not None and e.denominator >= 2 and e > 0:     # u^(p/q) > 0 non entier : racine q-ième de u^p
         q, p = e.denominator, e.numerator
-        return r"\sqrt[" + str(q) + "]{" + (tex(n.a) if p == 1 else tex(Op("^", n.a, Nb(F(p))))) + "}"
+        return r"\sqrt" + ("" if q == 2 else "[" + str(q) + "]") + "{" + (tex(n.a) if p == 1 else tex(Op("^", n.a, Nb(F(p))))) + "}"
     base = n.a
     atome = isinstance(base, (X, E)) or (isinstance(base, Nb) and base.v.denominator == 1 and base.v >= 0)
     bt = tex(base) if atome else r"\left(" + tex(base) + r"\right)"
@@ -463,6 +463,12 @@ def rtex(R, v):
     n, d = r_norm(R)
     if deg(d) == 0:
         return ptex(n, v)
+    # dénominateurs des coefficients chassés : \frac{-1}{2t^{3}} et non \frac{-\frac{1}{2}}{t^{3}}
+    L = 1
+    for c in list(n) + list(d):
+        L = L * F(c).denominator // math.gcd(L, F(c).denominator)
+    if L != 1:
+        n, d = [c * L for c in n], [c * L for c in d]
     return r"\frac{" + ptex(n, v) + "}{" + ptex(d, v) + "}"
 
 
