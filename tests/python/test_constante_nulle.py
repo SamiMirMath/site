@@ -25,6 +25,25 @@ class TestConstanteNulle(unittest.TestCase):
         self.assertEqual(v, 0)
         self.assertIsInstance(v, F)
 
+    def test_constante_exacte_non_nulle_jamais_arrondie(self):
+        """Le seuil 1e-12 ne vaut que pour les flottants : 1000000000001/1000000000000 − 1 = 10⁻¹²."""
+        grand = F(10) ** 12
+        v = ed.valeur_constante(ed.Op("-", ed.Nb((grand + 1) / grand), ed.Nb(F(1))))
+        self.assertEqual(v, 1 / grand)
+        self.assertEqual(ed_de("x^(1000000000001/1000000000000-1)"), ed_de("x^(1/1000000000000)"))
+        self.assertEqual(ed_de("x^(1/1000000000000)"), r"\left[0 \,;\, +\infty\right[")
+
+    def test_exposants_transcendants_sans_plantage(self):
+        for entree in ["x^(ln 2)", "x^(ln(4)-2ln(2))"]:
+            with self.subTest(f=entree):
+                self.assertEqual(ed_de(entree), r"\left]0 \,;\, +\infty\right[")
+
+    def test_valeur_constante_jamais_flottante(self):
+        for entree in ["2-2", "1/3-1/3", "2^(1-1)", "1000000000001/1000000000000-1", "ln(2)", "2*ln(2)-ln(4)"]:
+            v = ed.valeur_constante(ed.lire(entree))
+            with self.subTest(f=entree):
+                self.assertTrue(v is None or isinstance(v, F), v)
+
     def test_base_exigee_avec_exposant_zero(self):  # ED-08 (Q6), comportement déjà conforme
         attendu = {
             "x^0": r"\mathbb{R}",

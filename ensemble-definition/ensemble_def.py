@@ -251,9 +251,8 @@ def valeur_constante(n):
         if a is None or b is None:
             return None
         if n.op in "+-":
-            r = a + b if n.op == "+" else a - b
-            # compensation catastrophique (ex. ln(x²) − 2 ln x) : on arrondit à 0
-            return F(0) if abs(r) <= 1e-12 * (abs(a) + abs(b)) else r
+            # valeurs exactes (Fraction) : aucun seuil, 1000000000001/1000000000000 − 1 ≠ 0
+            return a + b if n.op == "+" else a - b
         if n.op == "*":
             return a * b
         if n.op == "/":
