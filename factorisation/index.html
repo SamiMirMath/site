@@ -36,6 +36,7 @@ button.primary{background:var(--accent);border-color:var(--accent);color:#fff;fo
 .clavier{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:10px 0}
 .clavier button{padding:9px 0;font-size:1rem}
 .apercu{min-height:2.6em;display:flex;align-items:center;overflow-x:auto;padding:4px 2px;font-size:1.1rem}
+.apercu .obsolete{opacity:.5}
 .apercu .katex{font-size:1.15em}
 .err{color:var(--bad);font-weight:600}
 .muted,.hint{color:var(--muted)}
@@ -195,15 +196,29 @@ async function demarrer(){
 async function appelPy(fn,arg,delai){ await pret; return JSON.parse(await appel(fn,arg,delai)); }
 
 /* ---------- saisie ---------- */
-let tAp=null;
+let tAp=null, seqAp=0, tFrappe=0, dernierApercu="";
+/* Aperçu de la saisie : jamais de message d'erreur rouge pendant la frappe. Dès qu'on tape, une erreur affichée
+   est effacée (on garde le dernier aperçu valide, estompé). L'erreur n'est montrée qu'après une pause d'environ
+   0,5 s sans frappe, et seulement si la réponse correspond bien à la dernière saisie ; un aperçu valide s'affiche
+   tout de suite et remplace tout message. Une réponse perdue (moteur occupé, délai dépassé) ne laisse rien d'obsolète. */
+const PAUSE_ERREUR=500;
 function apercu(){
   clearTimeout(tAp);
+  const mon=++seqAp, box=$("apercu"); tFrappe=Date.now();
+  const neutre=()=>{ box.innerHTML=dernierApercu?'<span class="obsolete">'+dernierApercu+'</span>':'<span class="muted">Aperçu du polynôme</span>'; };
+  if(box.querySelector(".err")) neutre();
   tAp=setTimeout(async()=>{
-    const s=$("entree").value.trim(), box=$("apercu");
-    if(!s){ box.innerHTML='<span class="muted">Aperçu du polynôme</span>'; return; }
+    const s=$("entree").value.trim();
+    if(!s){ dernierApercu=""; box.innerHTML='<span class="muted">Aperçu du polynôme</span>'; return; }
     if(!worker) return;
-    try{ const r=await appelPy("apercu",s,5000); if($("entree").value.trim()!==s) return;
-      box.innerHTML=r.ok?K(r.tex):'<span class="err">'+r.erreur+'</span>'; }catch(e){}
+    let r;
+    try{ r=await appelPy("apercu",s,5000); }catch(e){ if(mon===seqAp && box.querySelector(".err")) neutre(); return; }
+    if(mon!==seqAp) return;                         // une saisie plus récente est en cours
+    if(r.ok){ dernierApercu=K(r.tex); box.innerHTML=dernierApercu; return; }
+    const reste=PAUSE_ERREUR-(Date.now()-tFrappe);
+    if(reste>0) await new Promise(ok=>setTimeout(ok,reste));
+    if(mon!==seqAp) return;
+    box.innerHTML='<span class="err">'+r.erreur+'</span>';
   },150);
 }
 $("entree").addEventListener("input",apercu);
