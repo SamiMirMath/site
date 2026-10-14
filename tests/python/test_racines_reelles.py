@@ -249,7 +249,7 @@ class TestCoefficientsEntiersED(unittest.TestCase):
         res = ed.analyser("ln(x^2/3-1/2)")
         textes = " ".join(e["html"] for c in res["conditions"] for e in c["etapes"] if "html" in e)
         self.assertIn(r"Trinôme \(2x^{2} - 3\)", textes)
-        self.assertNotIn(r"\frac{1}{3}x^{2}", textes)
+        self.assertEqual(textes.count(r"\frac{1}{3}x^{2}"), 1)    # seulement dans l'étape « on multiplie par 6 »
 
     def test_equation_entiere(self):
         res = ed.analyser("1/(1/2*x^2-x+1/3)")
@@ -282,6 +282,43 @@ class TestEnonceSaisieEtRacines(unittest.TestCase):
     def test_tex_saisie_ne_laisse_pas_de_drapeau(self):
         ed.tex_saisie(ed.lire("x^(3/2)"))
         self.assertEqual(ed.tex(ed.lire("x^(3/2)")), r"\sqrt{x^{3}}")
+
+    def test_etape_montree_inegalite_et_equation(self):
+        def textes(entree):
+            return " ".join(e["html"] for c in ed.analyser(entree)["conditions"] for e in c["etapes"] if "html" in e)
+        self.assertIn(r"\(\frac{1}{3}x^{2} - \frac{1}{2} > 0 \iff 2x^{2} - 3 > 0\) (on multiplie par 6 > 0)", textes("ln(x^2/3-1/2)"))
+        self.assertIn(r"\(\frac{1}{2}x^{2} - x + \frac{1}{3} = 0 \iff 3x^{2} - 6x + 2 = 0\) (on multiplie par 6)",
+                      textes("1/(1/2*x^2-x+1/3)"))
+        self.assertIn("on multiplie le numérateur et le dénominateur par 6 > 0", textes("ln((x/2-1/3)/(x-5))"))
+        self.assertNotIn("on multiplie", textes("ln(2x^2-4)"))             # coefficients déjà entiers : rien à montrer
+
+    def test_facteur_toujours_positif(self):
+        """r_entiers ne choisit jamais un facteur négatif (le sens d'une inégalité serait inversé)."""
+        import random
+        rnd = random.Random(5)
+        for _ in range(500):
+            deg_n, deg_d = rnd.randint(0, 3), rnd.randint(0, 2)
+            n = [F(rnd.randint(-9, 9), rnd.randint(1, 7)) for _ in range(deg_n + 1)]
+            d = [F(rnd.randint(-9, 9), rnd.randint(1, 7)) for _ in range(deg_d)] + [F(rnd.choice([-5, -3, -2, -1, 1, 2, 3, 5]), rnd.randint(1, 7))]
+            if all(c == 0 for c in n):
+                continue
+            N0, D0 = ed.r_norm((n, d))
+            N, D, k = ed.r_entiers((n, d))
+            with self.subTest(n=n, d=d):
+                self.assertGreater(k, 0)
+                self.assertEqual(N, [c * k for c in N0])
+                self.assertEqual(D, [c * k for c in D0])
+                self.assertTrue(all(c.denominator == 1 for c in N + D))
+                x = 1.37                                # même valeur (donc même signe) avant et après
+                v0 = float(ed.peval(N0, x)) / float(ed.peval(D0, x))
+                v1 = float(ed.peval(N, x)) / float(ed.peval(D, x))
+                self.assertAlmostEqual(v0, v1, places=6)
+
+    def test_trinome_a_coefficient_dominant_negatif(self):
+        # −x²/3 + 1/2 > 0 ⇔ −2x² + 3 > 0 : même ensemble que la condition d'origine
+        self.assertEqual(ed.analyser("ln(-x^2/3+1/2)")["ED_tex"], ed.analyser("ln(3-2x^2)")["ED_tex"])
+        res = ed.analyser("ln(-x^2/3+1/2)")
+        self.assertEqual(res["ED_tex"], r"\left]\frac{-\sqrt{6}}{2} \,;\, \frac{\sqrt{6}}{2}\right[")
 
 
 if __name__ == "__main__":

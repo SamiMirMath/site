@@ -481,26 +481,36 @@ def r_norm(R):
 
 
 def r_entiers(R):
-    """(N, D) de la fraction R avec des coefficients entiers premiers entre eux dans leur ensemble
-    (facteur commun strictement positif : le signe et les zéros ne changent pas). C'est la forme
-    que l'on écrit au tableau : \frac{-1}{2t^{3}} et non \frac{-\frac{1}{2}}{t^{3}}."""
+    """(N, D) de la fraction R avec des coefficients entiers, obtenus en multipliant N et D par un même
+    nombre STRICTEMENT POSITIF k (jamais négatif : le sens d'une inégalité ne change donc pas). Pour une
+    fraction (D non constant) on divise aussi par le pgcd ; pour un polynôme on ne fait que chasser les
+    dénominateurs (2x² − 4 reste 2x² − 4). Renvoie (N, D, k) avec N/D = k · (N0/D0), (N0, D0) = r_norm(R)."""
     n, d = r_norm(R)
     L = 1
     for c in list(n) + list(d):
         L = L * F(c).denominator // math.gcd(L, F(c).denominator)
-    n, d = [F(c) * L for c in n], [F(c) * L for c in d]
-    g = 0
-    for c in n + d:
-        g = math.gcd(g, int(c))
-    if g > 1:
-        n, d = [c / g for c in n], [c / g for c in d]
-    return n, d
+    k = F(L)
+    if deg(d) > 0:
+        g = 0
+        for c in n + d:
+            g = math.gcd(g, int(F(c) * L))
+        if g > 1:
+            k = k / g
+    return [F(c) * k for c in n], [F(c) * k for c in d], k
 
 
 def rtex(R, v):
-    n, d = r_entiers(R)
+    n, d, _ = r_entiers(R)
     if deg(d) == 0:
         return ptex(n, v)     # polynôme (dénominateur constant positif : même signe, mêmes zéros)
+    return r"\frac{" + ptex(n, v) + "}{" + ptex(d, v) + "}"
+
+
+def rtex_brut(R, v):
+    """R écrite telle qu'elle découle de la fonction (r_norm : coefficients rationnels)."""
+    n, d = r_norm(R)
+    if deg(d) == 0:
+        return ptex(n, v)
     return r"\frac{" + ptex(n, v) + "}{" + ptex(d, v) + "}"
 
 
@@ -974,9 +984,17 @@ def sg(x):
 
 def resoudre_rat(R, rel, v, items, nom_expr=None):
     """Ensemble des v tels que R(v) rel 0, rel ∈ {'>', '>=', '='}. Ajoute les explications à items."""
-    N, D = r_entiers(R)
+    N, D, k = r_entiers(R)
     N, D = pn(N), pn(D)
     expr = nom_expr or rtex((N, D), v)
+    brut, ent = rtex_brut(R, v), rtex(R, v)
+    if k != 1 and brut != ent and not (items and ent in items[-1].get("html", "")):
+        # on chasse les dénominateurs : on montre l'étape (k > 0 : le sens de l'inégalité ne change pas)
+        signe = {">": ">", ">=": GE, "=": "="}[rel]
+        facteur = (f"on multiplie par {qtex(k)}" if k > 1 else f"on divise par {qtex(1 / k)}") + (" > 0" if rel != "=" else "")
+        if deg(D) > 0:
+            facteur = f"on multiplie le numérateur et le dénominateur par {qtex(k)}" + (" > 0" if rel != "=" else "")
+        items.append(txt(rf"\({brut} {signe} 0 \iff {ent} {signe} 0\) ({facteur})."))
     if nul(N):
         z = []
         if deg(D) > 0:
