@@ -47,7 +47,16 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
 
 ## Reste à faire dans la phase B
 
-- **T09 — croissance comparée** (débloquée, Q1) : pas commencée.
+- **T09 — croissance comparée** (débloquée, Q1) : incluse dans T29 (commit L6).
+- **T29 — Limites et asymptotes rédigées étape par étape** (décidé le 14.10.2026, Q9) : la méthode du
+  cours à la place du résultat seul, dans l'outil Limites et dans l'Étude complète. Moteur
+  `limites-asymptotes/limites_asymptotes.py` ; la valeur de chaque limite et les asymptotes ne changent
+  pas (garde-fou : repli honnête si la rédaction n'aboutit pas). Un commit par étape, chacun avec sa suite verte :
+  L0 documents ; L1 opérations et composition, forme indéterminée nommée, garde-fou, conclusion de chaque
+  borne ; L2 valeur interdite (numérateur, signe du dénominateur, ℓ/0^±) ; L3 mise en évidence (polynômes,
+  fractions rationnelles, 0/0) ; *relecture de l'enseignant* ; L4 expression conjuguée ; L5 termes
+  dominants ; L6 croissance comparée (T09) ; L7 Bernoulli-L'Hôpital ; L8 asymptote oblique ; L9 encadré
+  « Rappel de la méthode ». Critères : LA-10 à LA-20.
 - **T06c — limites contre les doubles barres, dans l'Étude complète seulement** (décidé le 14.10.2026) :
   sur la ligne f(x), écrire la limite contre la barre, du côté de l'ED (−∞ à gauche de la colonne −2
   pour ln(x²−4)) ; « limite non déterminée automatiquement » si SymPy ne conclut pas ; la Dérivée

@@ -46,6 +46,42 @@ Ne jamais écrire « point de discontinuité » quand a ∉ ED.
 - Valeur interdite au bord de l'ED (un seul côté), limite finie ℓ : même formulation que le
   premier cas, avec la limite latérale.
 
+### Rédaction détaillée (tranché le 14.10.2026, Q9)
+
+Chaque limite affichée est rédigée par la **première méthode du cours qui s'applique** :
+
+0. **Opérations et composition**, sans forme indéterminée : chaque sous-expression avec sa limite,
+   puis la règle (somme, produit, quotient, composée avec e^u, ln u, √u, u^n).
+1. **Mise en évidence** du terme dominant (en ±∞) ou factorisation par (x − a) (en une valeur) ;
+   la forme indéterminée est **nommée** (« ∞ − ∞ », « ∞/∞ », « 0·∞ », « 0/0 »).
+2. **Expression conjuguée** (∞ − ∞ et 0/0 avec une racine).
+3. **Termes dominants** : seulement en ±∞, quotient dont un membre est une composée ; jamais quand les
+   termes dominants se compensent ; la justification du remplacement est écrite.
+4. **Limites de référence et croissance comparée** (Q1 seulement, voir plus haut).
+5. **Bernoulli-L'Hôpital**, en dernier recours, avec ses quatre hypothèses écrites :
+   (a) forme 0/0 ou ∞/∞ (0·∞ et ∞ − ∞ d'abord mis en quotient) ; (b) f et g dérivables au voisinage de a
+   (sauf peut-être en a) ; (c) g'(x) ≠ 0 au voisinage de a (sauf peut-être en a) ; (d) lim f'/g' existe
+   (finie ou infinie), alors lim f/g = lim f'/g'. Au plus deux applications de suite. Si une hypothèse
+   n'est pas vérifiée ou si lim f'/g' n'existe pas, la règle n'est pas appliquée et ne conclut rien.
+
+Autres cas rédigés :
+- **Valeur interdite sans forme indéterminée** : limite du numérateur, signe du dénominateur à gauche et
+  à droite (« 8/0⁻ = −∞ »), conclusion « asymptote verticale d'équation x = a » ;
+- **Forme 0/0 en une valeur** : factoriser, simplifier, passer à la limite (avant L'Hôpital) ;
+- **Racine en −∞** : « x < 0 donc √(x²) = |x| = −x » chaque fois que x² sort d'une racine ;
+- **Asymptote oblique** : division euclidienne (fraction rationnelle) ; sinon a = lim f(x)/x puis
+  b = lim (f(x) − ax), chaque limite rédigée ; position relative au voisinage de ±∞ seulement, quand le
+  signe de f(x) − (ax + b) se lit directement ;
+- **Conclusion de chaque borne** : « asymptote horizontale d'équation y = ℓ », « asymptote verticale
+  d'équation x = a », « asymptote oblique d'équation y = ax + b », ou « pas d'asymptote … ».
+
+**Garde-fou.** La valeur de chaque limite est celle du calcul de référence (exact pour les fractions
+rationnelles, SymPy sinon). La rédaction calcule sa propre valeur : si elle ne coïncide pas, si une
+étape ne peut être justifiée ou si aucune méthode n'aboutit, toutes ses étapes sont abandonnées et la
+page écrit « Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : lim f(x) = … »,
+suivie de la conclusion habituelle. Jamais d'étape fausse. Une limite non déterminée (« ? ») reste
+sans asymptote (LA-03). Le détail technique va dans la console (clé `detail`, C6).
+
 ## Critères d'acceptation
 
 | Id | Critère | Vérif. |
@@ -59,3 +95,14 @@ Ne jamais écrire « point de discontinuité » quand a ∉ ED.
 | LA-07 | « croissance comparée » apparaît pour x²·e^(−x) (+∞), x^(1/2)·e^(−x) (+∞), ln(x)/x (+∞), x·ln(x) (0⁺), e^x − x² (+∞), x − ln(x) (+∞), x·e^x (−∞), avec la limite de référence nommée ; jamais pour x·e^x (+∞), e^x/x (0), e^(2x) (±∞) | [auto-py] |
 | LA-09 | x^(2/3), x^(1/3), x^(-1/3), x^(4/3), (x−2)^(1/3), x·x^(1/3) : limites en −∞ et en un point négatif justes dans ℝ (racine réelle) ; aucun `Infinity` ni `NaN` dans une sortie (JSON strict) | [auto-py] (`test_racines_reelles.py`, `test_json_strict.py`) |
 | LA-08 | Aucune sortie ne contient « point de discontinuité » ni le genre « saut » ; les deux formulations Q7 apparaissent mot pour mot pour (e^x−1)/x, (x²−1)/(x−1) et x/√(x²) en 0 ou 1 | [auto-py] |
+| LA-10 | Toute limite étudiée est rédigée (méthode du cours) ou suivie de la phrase de repli mot pour mot ; jamais « lim f(x) = v » seul | [auto-py] |
+| LA-11 | Garde-fou : la valeur rédigée égale la valeur de référence ; sinon repli, aucune étape de la méthode, `detail` en console | [auto-py] |
+| LA-12 | Chaque limite intermédiaire écrite est confirmée par l'oracle haute précision (corpus de `test_proprietes_limites.py`) | [auto-py] |
+| LA-13 | Une forme indéterminée levée est toujours nommée ; aucune forme indéterminée n'est annoncée quand il n'y en a pas | [auto-py] |
+| LA-14 | Valeur interdite sans forme indéterminée : limite du numérateur, signe du dénominateur de chaque côté, « ℓ/0^± », asymptote x = a | [auto-py] |
+| LA-15 | Ordre des méthodes : la première qui s'applique ; jamais L'Hôpital pour une fraction rationnelle ni quand une limite de référence s'applique | [auto-py] |
+| LA-16 | L'Hôpital : hypothèses (a) à (d) écrites ; non appliquée hors 0/0 et ∞/∞, si g' ≠ 0 n'est pas établi, ou si lim f'/g' n'est pas obtenue | [auto-py] |
+| LA-17 | Oblique : division sans « + 0 » ni « + − » (rationnelles) ; a et b rédigés (autres) ; position relative au voisinage de ±∞ quand elle se lit | [auto-py] |
+| LA-18 | Chaque borne se conclut par une phrase avec l'équation de l'asymptote, ou « pas d'asymptote … » | [auto-py] |
+| LA-19 | Écriture : coefficient 3/(2x) (pas de fraction dans une fraction) ; polynôme jamais écrit en quotient « /1 » | [auto-py] |
+| LA-20 | Racines en ±∞ : « x < 0 donc √(x²) = \|x\| = −x » en −∞ ; √(4x²+1)/(x+2) → 2 en +∞ et → −2 en −∞ ; √(x²−4x+5) : a = 1, b = −2 en +∞ et a = −1, b = 2 en −∞ ; √(x²+x) − x en −∞ : pas de forme indéterminée, +∞ | [auto-py] |

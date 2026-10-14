@@ -3,7 +3,7 @@
 Tant qu'une question est ouverte, **le comportement actuel est conservé** et les tâches qui en
 dépendent sont bloquées (voir [taches.md](taches.md)).
 
-**État au 14.10.2026 : Q1 à Q7 sont tranchées.** Seule Q8 (apparue en reportant Q4) reste ouverte ;
+**État au 14.10.2026 : Q1 à Q7 et Q9 sont tranchées.** Seule Q8 (apparue en reportant Q4) reste ouverte ;
 elle ne bloque aucune tâche, seulement un gabarit de factorisation.
 
 ## ~~Q1 — « Croissance comparée » dans l'outil Limites~~ (tranchée le 14.10.2026)
@@ -100,6 +100,33 @@ Le comportement actuel est déjà conforme (vérifié le 14.10.2026) ; critère 
 
 Voir [specifications/limites-asymptotes.md](specifications/limites-asymptotes.md) ; nouvelle
 tâche **T08b**.
+
+## ~~Q9 — Rédaction détaillée des limites et des asymptotes~~ (tranchée le 14.10.2026)
+
+**Décision.** Chaque limite est rédigée avec la méthode du cours, la première qui s'applique :
+(0) opérations et composition de limites, s'il n'y a pas de forme indéterminée ; (1) mise en
+évidence ; (2) expression conjuguée ; (3) termes dominants ; (4) limites de référence et
+croissance comparée (Q1 seulement) ; (5) Bernoulli-L'Hôpital en dernier recours.
+- **Termes dominants** : seulement en ±∞, pour un quotient dont un membre est une composée
+  (ln(x²+1), √(x²+3)…) ; jamais quand les termes dominants se compensent (∞ − ∞ : conjuguée ou
+  mise en évidence d'abord) ; la justification du remplacement est toujours écrite.
+- **Expression conjuguée** : ajoutée (∞ − ∞ et 0/0 avec une racine), juste après la mise en évidence.
+- **Limites de référence** : celles de Q1 seulement. (e^x − 1)/x en 0 ou ln(x)/(x − 1) en 1 passent
+  par Bernoulli-L'Hôpital.
+- **Bernoulli-L'Hôpital** : forme 0/0 ou ∞/∞ (0·∞ et ∞ − ∞ d'abord mis en quotient), f et g
+  dérivables au voisinage de a (sauf peut-être en a), g' ≠ 0 au voisinage de a (sauf peut-être en a),
+  lim f'/g' existe ; les quatre hypothèses sont écrites ; au plus deux applications de suite ; si une
+  hypothèse n'est pas vérifiée ou si lim f'/g' n'existe pas, la règle n'est pas appliquée et ne conclut rien.
+- **Racines en −∞** : écrire « x < 0 donc √(x²) = |x| = −x » chaque fois que x² sort d'une racine.
+- **Asymptote oblique** : division euclidienne pour une fraction rationnelle ; sinon
+  a = lim f(x)/x puis b = lim (f(x) − ax), chaque limite rédigée ; position relative au voisinage de ±∞
+  seulement, quand le signe de f(x) − (ax + b) se lit directement.
+- **Garde-fou** : la valeur de chaque limite reste celle du calcul actuel. Si la rédaction n'aboutit pas
+  ou donne une autre valeur, toutes ses étapes sont abandonnées et la page écrit « Le calcul détaillé de
+  cette limite n'est pas rédigé ici ; résultat : lim f(x) = … » (jamais une étape fausse).
+
+Voir [specifications/limites-asymptotes.md](specifications/limites-asymptotes.md) ; tâche **T29**
+(T09 y est incluse).
 
 ## Q8 — Racine double dans les gabarits de factorisation (ouverte)
 
