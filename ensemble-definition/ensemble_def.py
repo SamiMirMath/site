@@ -1489,8 +1489,11 @@ def _sympy():
         return None
 
 
-def en_py(n):
-    """Arbre → chaîne lisible par SymPy."""
+def en_py(n, reel=False):
+    """Arbre → chaîne lisible par SymPy. Avec reel=True, u^(p/q) (q impair, q > 1) est écrit avec la
+    racine réelle, real_root(u, q)**p : SymPy lit sinon x**(1/3) dans ℂ pour x < 0, alors que le cours
+    prend la racine réelle (x^(1/3) est définie sur ℝ). À réserver aux calculs d'analyse (limites,
+    signe, valeur en un point) ; une factorisation reste formelle (reel=False)."""
     if isinstance(n, Nb):
         # parenthèses extérieures indispensables : x**(1)/(2) se lirait (x**1)/2
         return f"(({n.v.numerator})/({n.v.denominator}))" if n.v.denominator != 1 else f"({n.v.numerator})"
@@ -1499,16 +1502,26 @@ def en_py(n):
     if isinstance(n, E):
         return "E"
     if isinstance(n, Neg):
-        return "(-" + en_py(n.a) + ")"
+        return "(-" + en_py(n.a, reel) + ")"
     if isinstance(n, Fn):
-        return {"ln": "log", "exp": "exp", "sqrt": "sqrt"}[n.nom] + "(" + en_py(n.a) + ")"
+        return {"ln": "log", "exp": "exp", "sqrt": "sqrt"}[n.nom] + "(" + en_py(n.a, reel) + ")"
+    if reel and n.op == "^":
+        e = valeur_constante(n.b)
+        if e is not None and e.denominator > 1 and e.denominator % 2 == 1:
+            return f"(real_root({en_py(n.a, reel)}, {e.denominator})**({e.numerator}))"
     op = {"^": "**"}.get(n.op, n.op)
-    return "(" + en_py(n.a) + op + en_py(n.b) + ")"
+    return "(" + en_py(n.a, reel) + op + en_py(n.b, reel) + ")"
 
 
 def en_sympy(n):
     sp = _sympy()
     return sp.sympify(en_py(n), locals={"x": _SP["x"], "E": sp.E})
+
+
+def en_sympy_reel(n):
+    """Comme en_sympy, avec les racines impaires réelles (voir en_py)."""
+    sp = _sympy()
+    return sp.sympify(en_py(n, reel=True), locals={"x": _SP["x"], "E": sp.E, "real_root": sp.real_root})
 
 
 def num_sympy(e):
@@ -1807,7 +1820,7 @@ def signe_facteur(h, nom):
     sp = _sympy()
     if sp is not None:
         try:
-            e, xs = en_sympy(h), _SP["x"]
+            e, xs = en_sympy_reel(h), _SP["x"]
             P = inter(depuis_sympy(sp.solveset(e > 0, xs, sp.S.Reals)), D)
             Z = inter(depuis_sympy(sp.solveset(sp.Eq(e, 0), xs, sp.S.Reals)), D)
             items.append(txt(rf"Ce facteur mélange \(x\) et une fonction transcendante : on résout avec le calcul formel : "

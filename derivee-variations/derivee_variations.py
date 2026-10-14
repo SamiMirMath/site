@@ -29,7 +29,7 @@ from ensemble_def import (
     Nb, X, E, Neg, Op, Fn,
     lire, tex, par, prec, valeur_constante, Num, Iv, REELS, inter, ens_tex, points, contient, proche,
     preimage, resoudre_general, json_strict, domaine, fusion, evaluer, aplatir, qtex,
-    _sympy, en_sympy, arbre_depuis_sympy, num_sympy, _SP,
+    _sympy, en_sympy, en_sympy_reel, arbre_depuis_sympy, num_sympy, _SP,
     txt, NonPrisEnCharge, ErreurSaisie, _analyser, apercu_json,
 )
 
@@ -332,7 +332,7 @@ def _valeur_exacte(f_tree, point):
         return None
     try:
         val = sp.sympify(point.py, locals={"sqrt": sp.sqrt, "exp": sp.exp, "log": sp.log, "pi": sp.pi})
-        fe = en_sympy(f_tree)
+        fe = en_sympy_reel(f_tree)
         r = sp.simplify(fe.subs(_SP["x"], val))
         if r.is_real is False:
             return None

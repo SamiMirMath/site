@@ -26,8 +26,9 @@ class TestPontSympyFractions(unittest.TestCase):
 
 class TestDeriveePuissancesFractionnaires(unittest.TestCase):
     CAS = ["x^(1/2)", "x^(3/2)", "x^(2/3)", "x^(-1/2)", "(x^2+1)^(1/2)", "x^0,5",
-           "(x-1)^(5/2)", "x^(1/3)+x", "x^(3/2)/(x+1)"]
-    POINTS = [0.37, 1.3, 2.9, 5.5]
+           "(x-1)^(5/2)", "x^(1/3)+x", "x^(3/2)/(x+1)",
+           "x^(1/3)", "x^(-1/3)", "x^(4/3)", "(x-2)^(1/3)", "x*x^(1/3)"]
+    POINTS = [0.37, 1.3, 2.9, 5.5, -0.37, -1.3, -2.9, -5.5]   # négatifs : racine réelle (q impair)
 
     def test_derivee_juste(self):
         for entree in self.CAS:

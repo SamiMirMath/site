@@ -20,6 +20,8 @@ CAS = [
     "x/sqrt(x^2)", "e^(1/x)", "x+ln(x)", "sqrt(x^2+1)", "sqrt(x^2-4x+5)", "ln(x^2-4x)/(x-5)",
     "x*ln(x)", "ln(x)^2/x", "e^(-x)*(x+1)", "x-ln(x)", "sqrt(x)", "1/ln(x)", "x+1/x", "x*e^(1/x)",
     "ln(1+1/x)", "sqrt(x^2+x)-x",
+    # racines réelles impaires (x^(p/q), q impair, est défini sur ℝ : SymPy le lit dans ℂ si on n'y prend garde)
+    "x^(1/3)", "x^(2/3)", "x^(-1/3)", "x^(4/3)", "(x-2)^(1/3)", "x*x^(1/3)", "(x^2-1)^(1/3)", "1/x^(1/3)", "x^(-2/3)", "ln(x^2)*x^(1/3)",
 ]
 
 # Sondes très lointaines / très proches (possibles grâce aux 50 chiffres de l'oracle) :
