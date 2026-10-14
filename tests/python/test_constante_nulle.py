@@ -34,9 +34,9 @@ class TestConstanteNulle(unittest.TestCase):
         self.assertEqual(ed_de("x^(1/1000000000000)"), r"\left[0 \,;\, +\infty\right[")
 
     def test_exposants_transcendants_sans_plantage(self):
-        for entree in ["x^(ln 2)", "x^(ln(4)-2ln(2))"]:
-            with self.subTest(f=entree):
-                self.assertEqual(ed_de(entree), r"\left]0 \,;\, +\infty\right[")
+        # règle de l'ED de x^α (C5, 14.10.2026) : α > 0 irrationnel : [0 ; +∞[ ; α = 0 (ln 4 − 2 ln 2) : ℝ
+        self.assertEqual(ed_de("x^(ln 2)"), r"\left[0 \,;\, +\infty\right[")
+        self.assertEqual(ed_de("x^(ln(4)-2ln(2))"), r"\mathbb{R}")
 
     def test_valeur_constante_jamais_flottante(self):
         for entree in ["2-2", "1/3-1/3", "2^(1-1)", "1000000000001/1000000000000-1", "ln(2)", "2*ln(2)-ln(4)"]:

@@ -23,6 +23,16 @@ def _constante(n):
     return F(v) if not isinstance(v, float) else F(0)
 
 
+def _sans_x(n):
+    if isinstance(n, ed.X):
+        return False
+    if isinstance(n, (ed.Nb, ed.E)):
+        return True
+    if isinstance(n, (ed.Neg, ed.Fn)):
+        return _sans_x(n.a)
+    return _sans_x(n.a) and _sans_x(n.b)
+
+
 def valeur(n, x):
     """Valeur de l'arbre n en x (mpf) ; None si non définie."""
     x = mp.mpf(x)
@@ -55,7 +65,14 @@ def _val(n, x):
         e = _constante(n.b)
         if e is None:
             b = _val(n.b, x)
-            if b is None or a <= 0:
+            if b is None:
+                return None
+            if _sans_x(n.b):               # exposant constant irrationnel (ou rationnel non évident)
+                if abs(b) < mp.mpf("1e-40"):
+                    return mp.mpf(1)       # exposant nul : u⁰ = 1
+                if a == 0:
+                    return mp.mpf(0) if b > 0 else None
+            if a <= 0:
                 return None
             return mp.exp(b * mp.log(a))
         if e == 0:

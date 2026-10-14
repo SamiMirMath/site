@@ -236,7 +236,62 @@ def lire(s):
     s = str(s).strip()
     if "=" in s:
         s = s.split("=")[-1]
-    return Parseur(tokeniser(s)).tout()
+    return normaliser_exposants(Parseur(tokeniser(s)).tout())
+
+
+def sans_x(n):
+    """Vrai si le sous-arbre ne contient pas la variable."""
+    if isinstance(n, X):
+        return False
+    if isinstance(n, (Nb, E)):
+        return True
+    if isinstance(n, (Neg, Fn)):
+        return sans_x(n.a)
+    return sans_x(n.a) and sans_x(n.b)
+
+
+_CLASSES_EXPOSANT = {}
+
+
+def classer_exposant(b):
+    """Nature d'un exposant constant (sans x) qui n'est pas un rationnel évident, par calcul exact :
+    ('rat', q) s'il vaut un rationnel (ln 4 − 2 ln 2 = 0), ('irr', ±1) s'il est irrationnel de signe connu,
+    None si l'on ne peut pas trancher (zéro non démontré, SymPy absent) : comportement prudent."""
+    cle = b.key()
+    if cle in _CLASSES_EXPOSANT:
+        return _CLASSES_EXPOSANT[cle]
+    sp = _sympy()
+    if sp is None:
+        ETAT["sympy_manquant"] = True
+        return None
+    res = None
+    try:
+        r = sp.simplify(sp.expand_log(en_sympy(b), force=True))
+        if r.is_Rational:
+            res = ("rat", F(int(r.p), int(r.q)))
+        else:
+            v = sp.N(r, 60)
+            if v.is_real and abs(v) > sp.Float("1e-40"):
+                res = ("irr", 1 if v > 0 else -1)
+    except Exception:
+        res = None
+    _CLASSES_EXPOSANT[cle] = res
+    return res
+
+
+def normaliser_exposants(n):
+    """Remplace un exposant constant qui vaut un rationnel sans le montrer (ln(4) − 2ln(2) = 0) par ce
+    rationnel, pour que l'ED, la dérivée et les limites le traitent comme tel. La saisie reste disponible
+    (attribut exposant_saisi, utilisé par tex_saisie)."""
+    if isinstance(n, (Neg, Fn)):
+        n.a = normaliser_exposants(n.a)
+    elif isinstance(n, Op):
+        n.a, n.b = normaliser_exposants(n.a), normaliser_exposants(n.b)
+        if n.op == "^" and not isinstance(n.b, Nb) and valeur_constante(n.b) is None and sans_x(n.b):
+            c = classer_exposant(n.b)
+            if c is not None and c[0] == "rat":
+                n.exposant_saisi, n.b = n.b, Nb(c[1])
+    return n
 
 
 def valeur_constante(n):
@@ -331,7 +386,8 @@ def tex(n):
     base = n.a
     atome = isinstance(base, (X, E)) or (isinstance(base, Nb) and base.v.denominator == 1 and base.v >= 0)
     bt = tex(base) if atome else r"\left(" + tex(base) + r"\right)"
-    return bt + "^{" + tex(n.b) + "}"
+    expo = n.exposant_saisi if (not ECRITURE["racines"] and hasattr(n, "exposant_saisi")) else n.b
+    return bt + "^{" + tex(expo) + "}"
 
 
 ECRITURE = {"racines": True}
@@ -2092,8 +2148,9 @@ POURQUOI = {
     "den": "Un dénominateur doit être non nul.",
     "sqrt": "Le contenu d'une racine carrée doit être positif ou nul.",
     "pos": "Une puissance a^b d'exposant non entier (a^b = e^{b ln a}) exige une base strictement positive.",
+    "pos0": "Une puissance a^α dont l'exposant α est irrationnel et positif est définie pour a ≥ 0 (0^α = 0).",
 }
-TITRE = {"ln": "logarithme", "den": "dénominateur", "sqrt": "racine carrée", "pos": "puissance"}
+TITRE = {"ln": "logarithme", "den": "dénominateur", "sqrt": "racine carrée", "pos": "puissance", "pos0": "puissance"}
 
 
 def conditions(n, out):
@@ -2123,7 +2180,9 @@ def conditions(n, out):
         elif n.op == "^":
             e = valeur_constante(n.b)
             if e is None:
-                ajouter("pos", n.a)        # a^b = e^(b·ln a) : base > 0
+                # a^b = e^(b·ln a) : base > 0, sauf exposant constant irrationnel > 0 : a^α défini en 0 (0^α = 0)
+                c = classer_exposant(n.b) if sans_x(n.b) else None
+                ajouter("pos0" if (c is not None and c == ("irr", 1)) else "pos", n.a)
             elif e.denominator % 2 == 0:
                 ajouter("sqrt" if e > 0 else "pos", n.a)
             elif e < 0:
