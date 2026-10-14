@@ -910,10 +910,6 @@
    {
     "html": "\\(e^{2x} = 0\\) est impossible, car \\(e^{2x} > 0\\) pour tout réel : solution rejetée.",
     "type": "texte"
-   },
-   {
-    "html": "\\(2x \\in \\varnothing \\iff x \\in \\varnothing\\).",
-    "type": "texte"
    }
   ],
   "signe_resolu": true,
@@ -2134,11 +2130,11 @@
     "type": "texte"
    },
    {
-    "html": "\\(x^{\\frac{3}{2}}\\) est défini pour \\(x \\in \\left[0 \\,;\\, +\\infty\\right[\\).",
+    "html": "On pose \\(t = \\sqrt{x}\\) : \\(\\frac{-\\frac{1}{2}}{x^{\\frac{3}{2}}} = \\frac{-\\frac{1}{2}}{t^{3}}\\).",
     "type": "texte"
    },
    {
-    "html": "Ce facteur mélange \\(x\\) et une fonction transcendante : on résout avec le calcul formel : \\(x^{\\frac{3}{2}} > 0 \\iff x \\in \\left]0 \\,;\\, +\\infty\\right[\\) et \\(x^{\\frac{3}{2}} = 0 \\iff x \\in \\left\\{0\\right\\}\\).",
+    "html": "Le numérateur vaut \\(-\\frac{1}{2} \\neq 0\\) : aucune solution.",
     "type": "texte"
    }
   ],
@@ -2162,7 +2158,7 @@
       "||",
       "+"
      ],
-     "label": "x^{\\frac{3}{2}}\\ (\\text{dén.})"
+     "label": "\\left(\\sqrt{x}\\right)^{3}\\ (\\text{dén.})"
     },
     {
      "cells": [
@@ -2313,12 +2309,12 @@
  "x^(2/3)": {
   "deriv_etapes": [
    {
-    "html": "\\(\\left(x^{\\frac{2}{3}}\\right)' = \\frac{\\frac{2}{3}}{x^{\\frac{1}{3}}}\\) (règle de la puissance).",
+    "html": "\\(\\left(\\sqrt[3]{x^{2}}\\right)' = \\frac{\\frac{2}{3}}{\\sqrt[3]{x}}\\) (règle de la puissance).",
     "type": "texte"
    }
   ],
   "deriv_resolu": true,
-  "deriv_tex": "\\frac{\\frac{2}{3}}{x^{\\frac{1}{3}}}",
+  "deriv_tex": "\\frac{\\frac{2}{3}}{\\sqrt[3]{x}}",
   "domaine_etude_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
   "ed_deriv_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
   "ed_tex": "\\mathbb{R}",
@@ -2331,7 +2327,7 @@
     "x_val": 0.0
    }
   ],
-  "f_tex": "x^{\\frac{2}{3}}",
+  "f_tex": "\\sqrt[3]{x^{2}}",
   "ok": true,
   "signe_etapes": [
    {
@@ -2343,7 +2339,11 @@
     "type": "texte"
    },
    {
-    "html": "Ce facteur mélange \\(x\\) et une fonction transcendante : on résout avec le calcul formel : \\(x^{\\frac{1}{3}} > 0 \\iff x \\in \\left]0 \\,;\\, +\\infty\\right[\\) et \\(x^{\\frac{1}{3}} = 0 \\iff x \\in \\left\\{0\\right\\}\\).",
+    "html": "On pose \\(t = \\sqrt[3]{x}\\) : \\(\\frac{\\frac{2}{3}}{\\sqrt[3]{x}} = \\frac{\\frac{2}{3}}{t}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Le numérateur vaut \\(\\frac{2}{3} \\neq 0\\) : aucune solution.",
     "type": "texte"
    }
   ],
@@ -2359,7 +2359,7 @@
       "||",
       "+"
      ],
-     "label": "x^{\\frac{1}{3}}\\ (\\text{dén.})"
+     "label": "\\sqrt[3]{x}\\ (\\text{dén.})"
     },
     {
      "cells": [

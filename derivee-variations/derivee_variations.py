@@ -29,7 +29,7 @@ from ensemble_def import (
     Nb, X, E, Neg, Op, Fn,
     lire, tex, par, prec, valeur_constante, Num, Iv, REELS, inter, ens_tex, points, contient, proche,
     preimage, resoudre_general, json_strict, domaine, fusion, evaluer, aplatir, qtex,
-    _sympy, en_sympy, en_sympy_reel, arbre_depuis_sympy, num_sympy, _SP,
+    indice_racine, _sympy, en_sympy, en_sympy_reel, arbre_depuis_sympy, num_sympy, _SP,
     txt, NonPrisEnCharge, ErreurSaisie, _analyser, apercu_json,
 )
 
@@ -455,6 +455,8 @@ def etudier(entree):
     for h, expo in facs:
         label = tex(h) if prec(h) >= 3 else r"\left(" + tex(h) + r"\right)"
         if abs(expo) > 1:
+            if indice_racine(h) is not None:
+                label = r"\left(" + label + r"\right)"
             label += "^{" + str(abs(expo)) + "}"
         if expo < 0:
             label += r"\ (\text{dén.})"

@@ -8,7 +8,7 @@
   "besoin_sympy": false,
   "complet": true,
   "conditions": [],
-  "f_tex": "\\left(x - 1\\right)^{\\frac{2}{3}}",
+  "f_tex": "\\sqrt[3]{\\left(x - 1\\right)^{2}}",
   "ok": true
  },
  "1 000x": {
@@ -359,18 +359,18 @@
   "conditions": [
    {
     "E_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
-    "cond_tex": "x^{\\frac{1}{3}} \\neq 0",
+    "cond_tex": "\\sqrt[3]{x} \\neq 0",
     "etapes": [
      {
       "html": "Un dénominateur doit être non nul.",
       "type": "texte"
      },
      {
-      "html": "On cherche les valeurs interdites : on résout \\(x^{\\frac{1}{3}} = 0\\).",
+      "html": "On cherche les valeurs interdites : on résout \\(\\sqrt[3]{x} = 0\\).",
       "type": "texte"
      },
      {
-      "html": "Ce facteur mélange \\(x\\) et une fonction transcendante : on résout avec le calcul formel : \\(x^{\\frac{1}{3}} > 0 \\iff x \\in \\left]0 \\,;\\, +\\infty\\right[\\) et \\(x^{\\frac{1}{3}} = 0 \\iff x \\in \\left\\{0\\right\\}\\).",
+      "html": "\\(\\sqrt[3]{x} = 0 \\iff x = 0\\)",
       "type": "texte"
      },
      {
@@ -381,11 +381,11 @@
     "genre": "den",
     "num": 1,
     "resolu": true,
-    "source_tex": "x^{\\frac{1}{3}}",
+    "source_tex": "\\sqrt[3]{x}",
     "titre": "dénominateur"
    }
   ],
-  "f_tex": "\\frac{1}{x^{\\frac{1}{3}}}",
+  "f_tex": "\\frac{1}{\\sqrt[3]{x}}",
   "inter_tex": "E_{1}",
   "ok": true
  },
@@ -2186,7 +2186,7 @@
   "besoin_sympy": false,
   "complet": true,
   "conditions": [],
-  "f_tex": "x^{\\frac{1}{3}}",
+  "f_tex": "\\sqrt[3]{x}",
   "ok": true
  },
  "x^(2-2)": {

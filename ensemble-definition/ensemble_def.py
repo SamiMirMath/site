@@ -324,6 +324,10 @@ def tex(n):
     # puissance
     if valeur_constante(n.b) == F(1, 2):
         return r"\sqrt{" + tex(n.a) + "}"
+    e = valeur_constante(n.b)
+    if e is not None and e.denominator >= 3 and 0 < e < 1:     # u^(p/q), 0 < p/q < 1 : racine q-ième de u^p
+        q, p = e.denominator, e.numerator
+        return r"\sqrt[" + str(q) + "]{" + (tex(n.a) if p == 1 else tex(Op("^", n.a, Nb(F(p))))) + "}"
     base = n.a
     atome = isinstance(base, (X, E)) or (isinstance(base, Nb) and base.v.denominator == 1 and base.v >= 0)
     bt = tex(base) if atome else r"\left(" + tex(base) + r"\right)"
@@ -557,6 +561,17 @@ def carre(n):
     if n.approx:
         return Num.approche(n.val ** 2)
     return Num(n.val ** 2, r"\left(" + n.tex + r"\right)^{2}", py=f"({n.py})**2")
+
+
+def puissance_num(n, q):
+    """n^q (q entier ≥ 2), exact quand n est rationnel ou de la forme a + b√m (q = 2)."""
+    if q == 2:
+        return carre(n)
+    if n.q is not None:
+        return Num.rat(n.q ** q)
+    if n.approx:
+        return Num.approche(n.val ** q)
+    return Num(n.val ** q, r"\left(" + n.tex + r"\right)^{" + str(q) + "}", py=f"({n.py})**{q}")
 
 
 def affine_inv(n, m, b):
@@ -1059,14 +1074,34 @@ def txt(s):
 # =====================================================================
 # 9. SUBSTITUTION t = ln(B), e^B, √B ET RETOUR À x
 # =====================================================================
+def indice_racine(n):
+    """q si n = u^(1/q) avec q ≥ 2 entier (racine q-ième), sinon None."""
+    if isinstance(n, Op) and n.op == "^":
+        e = valeur_constante(n.b)
+        if e is not None and e.numerator == 1 and e.denominator >= 2:
+            return e.denominator
+    return None
+
+
+def decomp_puissance_rationnelle(n):
+    """n = u^(p/q) (fraction irréductible, q ≥ 2, p ≠ ±1 ou p/q < 0) → (atome u^(1/q), p) ; sinon None.
+    Les deux écritures x^(2/3) et (∛x)² désignent la même fonction (racine réelle pour q impair)."""
+    if isinstance(n, Op) and n.op == "^":
+        e = valeur_constante(n.b)
+        if e is not None and e.denominator >= 2 and e.numerator != 1:
+            return Op("^", n.a, Nb(F(1, e.denominator))), e.numerator
+    return None
+
+
 def cle_atome(n):
-    if isinstance(n, Op):     # puissance 1/2
-        return "sqrt", n.a
+    if isinstance(n, Op):     # racine q-ième
+        q = indice_racine(n)
+        return ("sqrt" if q == 2 else f"rac{q}"), n.a
     return n.nom, n.a
 
 
 def est_atome(n):
-    return isinstance(n, Fn) or (isinstance(n, Op) and n.op == "^" and valeur_constante(n.b) == F(1, 2))
+    return isinstance(n, Fn) or indice_racine(n) is not None
 
 
 def collecter(n, acc):
@@ -1081,9 +1116,13 @@ def collecter(n, acc):
     elif isinstance(n, Op):
         if n.op == "^":
             e = valeur_constante(n.b)
-            if e is None or e.denominator != 1:
-                raise NonPrisEnCharge("puissance non entière (autre que 1/2) dans la condition.")
-            collecter(n.a, acc)
+            d = decomp_puissance_rationnelle(n)
+            if d is not None:
+                collecter(d[0], acc)
+            elif e is None or e.denominator != 1:
+                raise NonPrisEnCharge("puissance non entière (autre qu'une racine) dans la condition.")
+            else:
+                collecter(n.a, acc)
         else:
             collecter(n.a, acc)
             collecter(n.b, acc)
@@ -1096,6 +1135,9 @@ def en_rationnelle(n, atomf):
         return atomf(n)
     if isinstance(n, Neg):
         return r_neg(en_rationnelle(n.a, atomf))
+    d = decomp_puissance_rationnelle(n) if n.op == "^" else None
+    if d is not None:
+        return r_pow(atomf(d[0]), d[1])
     a = en_rationnelle(n.a, atomf)
     if n.op == "^":
         return r_pow(a, int(valeur_constante(n.b)))
@@ -1121,7 +1163,8 @@ def decomposer(n):
     if len(cles) == 1:
         B = cle_atome(acc["at"][0])[1]
         t_tex = {"ln": r"\ln\left(" + tex(B) + r"\right)" if not isinstance(B, (X, Nb)) else r"\ln(" + tex(B) + ")",
-                 "exp": "e^{" + tex(B) + "}", "sqrt": r"\sqrt{" + tex(B) + "}"}[genre]
+                 "exp": "e^{" + tex(B) + "}", "sqrt": r"\sqrt{" + tex(B) + "}"}.get(
+                     genre) or r"\sqrt[" + genre[3:] + "]{" + tex(B) + "}"
         R = en_rationnelle(n, lambda a: ([F(0), F(1)], [F(1)]))
         return ("t", genre, B, R, t_tex)
     if genre == "exp":
@@ -1201,21 +1244,36 @@ def retour_atome(genre, S, t_tex, B_tex, items):
         elif ok:
             items.append(txt(rf"Le logarithme est strictement croissant : \({contrainte_tex(t_tex, ok)} \iff {contrainte_tex(B_tex, out)}\)."))
         return out
-    # racine carrée
+    # racine q-ième (q = 2 : racine carrée ; q impair : bijection de ℝ ; q pair ≥ 4 : comme la racine carrée)
+    q = 2 if genre == "sqrt" else int(genre[3:])
+    nom = {2: "racine carrée", 3: "racine cubique"}.get(q, f"racine {q}-ième")
+    puiss = {2: "carré", 3: "cube"}.get(q, f"puissance {q}")
+    if q % 2 == 1:
+        pts = all(iv.lo is not None and iv.hi is not None and proche(iv.lo.val, iv.hi.val) for iv in S) and S
+        out = fusion([Iv(None if iv.lo is None else puissance_num(iv.lo, q), iv.lf,
+                         None if iv.hi is None else puissance_num(iv.hi, q), iv.hf) for iv in S])
+        if S:
+            if pts:
+                for iv in S:
+                    items.append(txt(rf"\({t_tex} = {iv.lo.tex} \iff {B_tex} = {puissance_num(iv.lo, q).tex}\)"))
+            else:
+                items.append(txt(rf"La {nom} est définie et strictement croissante sur \(\mathbb{{R}}\) (comme la fonction {puiss}) : "
+                                 rf"\({contrainte_tex(t_tex, S)} \iff {contrainte_tex(B_tex, out)}\)."))
+        return out
     pos = [Iv(Num.rat(0), True, None, False)]
     ok = inter(S, pos)
     pts = all(iv.lo is not None and iv.hi is not None and proche(iv.lo.val, iv.hi.val) for iv in S) and S
     if pts:
         for iv in S:
             if iv.lo.val < 0:
-                items.append(txt(rf"\({t_tex} = {iv.lo.tex}\) est impossible, car une racine carrée est positive ou nulle : solution rejetée."))
-    out = fusion([Iv(iv.lo and carre(iv.lo), iv.lf, None if iv.hi is None else carre(iv.hi), iv.hf) for iv in ok])
+                items.append(txt(rf"\({t_tex} = {iv.lo.tex}\) est impossible, car une {nom} est positive ou nulle : solution rejetée."))
+    out = fusion([Iv(iv.lo and puissance_num(iv.lo, q), iv.lf, None if iv.hi is None else puissance_num(iv.hi, q), iv.hf) for iv in ok])
     if ok:
         if pts:
             for iv in ok:
-                items.append(txt(rf"\({t_tex} = {iv.lo.tex} \iff {B_tex} = {carre(iv.lo).tex}\)"))
+                items.append(txt(rf"\({t_tex} = {iv.lo.tex} \iff {B_tex} = {puissance_num(iv.lo, q).tex}\)"))
         else:
-            items.append(txt(rf"Une racine carrée est positive et la fonction carré est croissante sur \(\left[0 \,;\, +\infty\right[\) : "
+            items.append(txt(rf"Une {nom} est positive et la fonction {puiss} est croissante sur \(\left[0 \,;\, +\infty\right[\) : "
                              rf"\({contrainte_tex(t_tex, ok)} \iff {contrainte_tex(B_tex, out)}\)."))
     return out
 
@@ -1225,6 +1283,8 @@ def resoudre_dans(R, S, v, expr_tex, items):
     S = fusion(S)
     if est_identite(R):
         return S
+    if not S:
+        return []      # aucune valeur à atteindre : pas de ligne « … ∈ ∅ ⇔ x ∈ ∅ »
     n, d = r_norm(R)
     if est_affine(R):
         m, b = n[1] / d[0], n[0] / d[0]
@@ -1703,6 +1763,9 @@ def aplatir(n):
         elif isinstance(m, Op) and m.op == "^" and valeur_constante(m.b) is not None \
                 and valeur_constante(m.b).denominator == 1:
             rec(m.a, k * int(valeur_constante(m.b)))
+        elif decomp_puissance_rationnelle(m) is not None:
+            atome, p = decomp_puissance_rationnelle(m)      # u^(p/q) = (u^(1/q))^p
+            ajout(atome, k * p)
         else:
             ajout(m, k)
     rec(n, 1)
@@ -1880,7 +1943,8 @@ def tableau_facteurs(c, infos, rel, expr_tex, items):
     for (h, k), (D, P, Z) in infos:
         lab = tex(h) if prec(h) >= 3 else r"\left(" + tex(h) + r"\right)"
         if abs(k) > 1:
-            lab = (lab if prec(h) >= 3 and not isinstance(h, Fn) else r"\left(" + tex(h) + r"\right)") + "^{" + str(abs(k)) + "}"
+            lab = (lab if prec(h) >= 3 and not isinstance(h, Fn) and indice_racine(h) is None
+                   else r"\left(" + tex(h) + r"\right)") + "^{" + str(abs(k)) + "}"
         elif prec(h) < 3:
             lab = tex(h)
         if k < 0:

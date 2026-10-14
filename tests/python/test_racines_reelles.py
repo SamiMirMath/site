@@ -104,5 +104,55 @@ class TestSigneEtVariations(unittest.TestCase):
                          [("minimum local", "0", "0")])
 
 
+class TestRacinesExactes(unittest.TestCase):
+    """C2 : x^(p/q) = (racine q-ième de x)^p est traité par les méthodes du cours, sans calcul formel."""
+
+    def textes(self, entree):
+        r = dv.etudier(entree)
+        return " ".join(e.get("html", "") for e in r["deriv_etapes"] + r["signe_etapes"])
+
+    def test_aucune_phrase_de_calcul_formel_pour_une_racine(self):
+        for entree in CAS + ["x^(3/2)", "x^(-3/2)", "x^(1/4)", "(x-1)^(2/3)", "x^(5/3)"]:
+            with self.subTest(f=entree):
+                t = self.textes(entree)
+                for mot in ("calcul formel", "transcend", "SymPy"):
+                    self.assertNotIn(mot, t)
+
+    def test_zero_et_valeur_interdite_ne_sont_pas_confondus(self):
+        t = self.textes("x^(2/3)")                       # f' = 2/(3∛x) : le numérateur ne s'annule jamais
+        self.assertIn("Le numérateur vaut", t)
+        self.assertIn("aucune solution", t)
+        self.assertNotIn("= 0 \\iff x", t)               # on ne résout pas ∛x = 0 comme un zéro de f'
+        r = dv.etudier("x^(2/3)")
+        self.assertEqual(r["domaine_etude_tex"], ed.ens_tex(ed.inter(ed.REELS, ed.complement(ed.points([ed.Num.rat(0)])))))
+
+    def test_racine_cubique_quand_le_numerateur_s_annule(self):
+        t = self.textes("x^(4/3)")                       # f' = (4/3)∛x : zéro en 0
+        self.assertIn(r"\sqrt[3]{x} = 0 \iff x = 0", t)
+
+    def test_ecriture_en_racines(self):
+        self.assertEqual(ed.tex(ed.lire("x^(1/3)")), r"\sqrt[3]{x}")
+        self.assertEqual(ed.tex(ed.lire("x^(2/3)")), r"\sqrt[3]{x^{2}}")
+        self.assertEqual(ed.tex(ed.lire("x^(1/4)")), r"\sqrt[4]{x}")
+        self.assertEqual(ed.tex(ed.lire("x^(3/2)")), r"x^{\frac{3}{2}}")     # inchangé (q = 2)
+        self.assertEqual(ed.tex(ed.lire("x^(-1/3)")), r"x^{\frac{-1}{3}}")   # inchangé (exposant négatif)
+
+    def test_aplatir_u_puissance_p_sur_q(self):
+        c, facs = ed.aplatir(ed.lire("x^(2/3)"))
+        self.assertEqual((c, [(ed.tex(h), k) for h, k in facs]), (F(1), [(r"\sqrt[3]{x}", 2)]))
+        c, facs = ed.aplatir(ed.lire("x^(-4/3)"))
+        self.assertEqual([(ed.tex(h), k) for h, k in facs], [(r"\sqrt[3]{x}", -4)])
+
+    def test_ed_et_signe_des_racines_q_impaires_sont_exacts(self):
+        for entree in ("x^(1/3)", "x^(5/3)", "(x-2)^(1/3)", "x^(1/5)"):
+            with self.subTest(f=entree):
+                res = ed.analyser(entree)
+                self.assertTrue(res["complet"])
+                self.assertEqual(res["ED_tex"], r"\mathbb{R}")
+        res = ed.analyser("1/x^(1/3)")
+        self.assertEqual(res["ED_tex"], r"\mathbb{R} \setminus \left\{0\right\}")
+        self.assertFalse(res["besoin_sympy"])
+
+
 if __name__ == "__main__":
     unittest.main()
