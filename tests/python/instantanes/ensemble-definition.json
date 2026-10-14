@@ -107,11 +107,7 @@
       "type": "texte"
      },
      {
-      "html": "On pose \\(t = e^{x}\\) : \\(e^{x} - 1 = t - 1\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(t - 1 = 0 \\iff t = 1\\).",
+      "html": "\\(e^{x} - 1 = 0 \\iff e^{x} = 1\\) (on ajoute 1).",
       "type": "texte"
      },
      {
@@ -561,10 +557,6 @@
      {
       "html": "L'argument d'un logarithme doit être strictement positif.",
       "type": "texte"
-     },
-     {
-      "html": "Le logarithme est strictement croissant : \\(e^{x} > 0 \\iff x \\in \\mathbb{R}\\).",
-      "type": "texte"
      }
     ],
     "genre": "ln",
@@ -979,7 +971,7 @@
       "type": "texte"
      },
      {
-      "html": "L'exponentielle est strictement croissante et \\(\\ln\\) n'est définie que sur \\(\\left]0 \\,;\\, +\\infty\\right[\\) : \\(\\ln(x) > 0 \\iff x > 1\\).",
+      "html": "\\(\\ln(x) > 0 \\iff x > 1\\) (exp est croissante).",
       "type": "texte"
      }
     ],
@@ -998,11 +990,11 @@
       "type": "texte"
      },
      {
-      "html": "L'exponentielle est strictement croissante et \\(\\ln\\) n'est définie que sur \\(\\left]0 \\,;\\, +\\infty\\right[\\) : \\(\\ln\\left(\\ln(x)\\right) > 0 \\iff \\ln(x) > 1\\).",
+      "html": "\\(\\ln\\left(\\ln(x)\\right) > 0 \\iff \\ln(x) > 1\\) (exp est croissante).",
       "type": "texte"
      },
      {
-      "html": "L'exponentielle est strictement croissante et \\(\\ln\\) n'est définie que sur \\(\\left]0 \\,;\\, +\\infty\\right[\\) : \\(\\ln(x) > 1 \\iff x > e\\).",
+      "html": "\\(\\ln(x) > 1 \\iff x > e\\) (exp est croissante).",
       "type": "texte"
      }
     ],
@@ -1054,11 +1046,7 @@
       "type": "texte"
      },
      {
-      "html": "On pose \\(t = \\ln(x)\\) : \\(\\ln(x) + 2 = t + 2\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(t + 2 = 0 \\iff t = -2\\).",
+      "html": "\\(\\ln(x) + 2 = 0 \\iff \\ln(x) = -2\\) (on soustrait 2).",
       "type": "texte"
      },
      {
@@ -1610,15 +1598,11 @@
       "type": "texte"
      },
      {
-      "html": "On pose \\(t = \\ln\\left(x^{2} - 4x + 5\\right)\\) : \\(1 - \\ln\\left(x^{2} - 4x + 5\\right) = -t + 1\\).",
+      "html": "\\(1 - \\ln\\left(x^{2} - 4x + 5\\right) \\geq 0 \\iff \\ln\\left(x^{2} - 4x + 5\\right) \\leq 1\\) (on isole \\(\\ln\\left(x^{2} - 4x + 5\\right)\\) du côté où son coefficient est positif).",
       "type": "texte"
      },
      {
-      "html": "\\(-t + 1 \\geq 0 \\iff t \\leq 1\\) (on divise par un nombre négatif : le sens s'inverse).",
-      "type": "texte"
-     },
-     {
-      "html": "L'exponentielle est strictement croissante et \\(\\ln\\) n'est définie que sur \\(\\left]0 \\,;\\, +\\infty\\right[\\) : \\(\\ln\\left(x^{2} - 4x + 5\\right) \\leq 1 \\iff 0 < x^{2} - 4x + 5 \\leq e\\).",
+      "html": "\\(\\ln\\left(x^{2} - 4x + 5\\right) \\leq 1 \\iff 0 < x^{2} - 4x + 5 \\leq e\\) (exp est croissante ; \\(\\ln\\) n'est définie que sur \\(\\left]0 \\,;\\, +\\infty\\right[\\)).",
       "type": "texte"
      },
      {
@@ -1806,7 +1790,7 @@
       "type": "texte"
      },
      {
-      "html": "L'exponentielle est strictement croissante et \\(\\ln\\) n'est définie que sur \\(\\left]0 \\,;\\, +\\infty\\right[\\) : \\(\\ln\\left(x + 2\\right) > 0 \\iff x + 2 > 1\\).",
+      "html": "\\(\\ln\\left(x + 2\\right) > 0 \\iff x + 2 > 1\\) (exp est croissante).",
       "type": "texte"
      },
      {
@@ -1942,15 +1926,11 @@
       "type": "texte"
      },
      {
-      "html": "On pose \\(t = \\ln\\left(x + 2\\right)\\) : \\(\\ln\\left(x + 2\\right) + 1 = t + 1\\).",
+      "html": "\\(\\ln\\left(x + 2\\right) + 1 > 0 \\iff \\ln\\left(x + 2\\right) > -1\\) (on soustrait 1).",
       "type": "texte"
      },
      {
-      "html": "\\(t + 1 > 0 \\iff t > -1\\).",
-      "type": "texte"
-     },
-     {
-      "html": "L'exponentielle est strictement croissante et \\(\\ln\\) n'est définie que sur \\(\\left]0 \\,;\\, +\\infty\\right[\\) : \\(\\ln\\left(x + 2\\right) > -1 \\iff x + 2 > e^{-1}\\).",
+      "html": "\\(\\ln\\left(x + 2\\right) > -1 \\iff x + 2 > e^{-1}\\) (exp est croissante).",
       "type": "texte"
      },
      {

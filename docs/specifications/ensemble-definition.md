@@ -19,6 +19,13 @@ URL : `/ensemble-definition/` · moteur : `ensemble-definition/ensemble_def.py` 
 - Repli (sans en nommer la méthode à l'élève) : pour un facteur qui ne se résout pas avec les méthodes du
   cours, « solution obtenue numériquement : x ≈ … » ; un mélange de x et d'un ln ou exp est annoncé
   comme tel (« on ne peut pas isoler x »).
+- **Atome au degré 1** (ln, exp ou racine, par ex. 1 − ln x > 0, e^x − 3 > 0, √x − 2 > 0) : pas de « On pose
+  t = … ». On isole l'atome du côté où son coefficient est positif (« 1 − ln x > 0 ⇔ ln x < 1 »), on
+  divise par ce coefficient (> 0), puis on applique la réciproque en l'écrivant : « ln x < 1 ⇔ x < e
+  (exp est croissante) », « e^x > 3 ⇔ x > ln 3 (ln est croissante) », « √u > c ⇔ u > c² si c ≥ 0 »
+  (« toujours vrai » si c < 0). e^u > c : toujours vrai si c ≤ 0 ; e^u < c ou e^u = c : impossible si c ≤ 0
+  (« une exponentielle est strictement positive »). La substitution t = … est réservée à l'atome au
+  degré ≥ 2 ((ln x)² − 1, e^(2x) − 3e^x + 2), avec les mêmes formulations des réciproques.
 - Quand on chasse les dénominateurs, la condition est d'abord écrite telle qu'elle découle de la fonction,
   puis l'étape est montrée : « x²/3 − 1/2 > 0 ⇔ 2x² − 3 > 0 (on multiplie par 6 > 0) » ; le facteur est
   toujours strictement positif (le sens d'une inégalité ne change jamais).

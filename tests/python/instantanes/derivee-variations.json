@@ -204,7 +204,7 @@
     "type": "texte"
    },
    {
-    "html": "Une racine carrée est positive et la fonction carré est croissante sur \\(\\left[0 \\,;\\, +\\infty\\right[\\) : \\(\\sqrt{x^{2} + 1} > 0 \\iff x^{2} + 1 > 0\\).",
+    "html": "\\(\\sqrt{x^{2} + 1} > 0 \\iff x^{2} + 1 > 0\\) (la fonction carré est croissante sur \\(\\left[0 \\,;\\, +\\infty\\right[\\)).",
     "type": "texte"
    },
    {
@@ -467,11 +467,7 @@
     "type": "texte"
    },
    {
-    "html": "On pose \\(t = \\ln(x)\\) : \\(-\\ln(x) - 1 = -t - 1\\).",
-    "type": "texte"
-   },
-   {
-    "html": "\\(-t - 1 = 0 \\iff t = -1\\).",
+    "html": "\\(-\\ln(x) - 1 = 0 \\iff \\ln(x) = -1\\) (on isole \\(\\ln(x)\\) du côté où son coefficient est positif).",
     "type": "texte"
    },
    {
@@ -746,11 +742,11 @@
     "type": "texte"
    },
    {
-    "html": "On pose \\(t = \\ln(x)\\) : \\(3\\left(\\ln(x) + 1\\right) = 3t + 3\\).",
+    "html": "\\(3\\left(\\ln(x) + 1\\right) = 0 \\iff 3\\ln(x) = -3\\) (on soustrait 3).",
     "type": "texte"
    },
    {
-    "html": "\\(3t + 3 = 0 \\iff t = -1\\).",
+    "html": "\\(3\\ln(x) = -3 \\iff \\ln(x) = -1\\) (on divise par 3).",
     "type": "texte"
    },
    {
@@ -981,10 +977,6 @@
     "type": "texte"
    },
    {
-    "html": "Le logarithme est strictement croissant : \\(e^{x^{2}} > 0 \\iff x^{2} \\in \\mathbb{R}\\).",
-    "type": "texte"
-   },
-   {
     "html": "Bilan : \\(e^{x^{2}} > 0 \\iff x \\in \\mathbb{R}\\) ; \\(e^{x^{2}}\\) ne s'annule pas.",
     "type": "texte"
    },
@@ -1093,15 +1085,11 @@
     "type": "texte"
    },
    {
-    "html": "On pose \\(t = \\ln(x)\\) : \\(\\ln(x) - 1 = t - 1\\).",
+    "html": "\\(\\ln(x) - 1 > 0 \\iff \\ln(x) > 1\\) (on ajoute 1).",
     "type": "texte"
    },
    {
-    "html": "\\(t - 1 > 0 \\iff t > 1\\).",
-    "type": "texte"
-   },
-   {
-    "html": "L'exponentielle est strictement croissante et \\(\\ln\\) n'est définie que sur \\(\\left]0 \\,;\\, +\\infty\\right[\\) : \\(\\ln(x) > 1 \\iff x > e\\).",
+    "html": "\\(\\ln(x) > 1 \\iff x > e\\) (exp est croissante).",
     "type": "texte"
    },
    {
@@ -1336,7 +1324,7 @@
     "type": "texte"
    },
    {
-    "html": "Une racine carrée est positive et la fonction carré est croissante sur \\(\\left[0 \\,;\\, +\\infty\\right[\\) : \\(\\sqrt{x^{2}} > 0 \\iff x^{2} > 0\\).",
+    "html": "\\(\\sqrt{x^{2}} > 0 \\iff x^{2} > 0\\) (la fonction carré est croissante sur \\(\\left[0 \\,;\\, +\\infty\\right[\\)).",
     "type": "texte"
    },
    {
@@ -1486,7 +1474,7 @@
     "type": "texte"
    },
    {
-    "html": "Une racine carrée est positive et la fonction carré est croissante sur \\(\\left[0 \\,;\\, +\\infty\\right[\\) : \\(\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)} > 0 \\iff \\left(x - 2\\right)\\,\\left(x + 2\\right) > 0\\).",
+    "html": "\\(\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)} > 0 \\iff \\left(x - 2\\right)\\,\\left(x + 2\\right) > 0\\) (la fonction carré est croissante sur \\(\\left[0 \\,;\\, +\\infty\\right[\\)).",
     "type": "texte"
    },
    {
@@ -1660,7 +1648,7 @@
     "type": "texte"
    },
    {
-    "html": "Une racine carrée est positive et la fonction carré est croissante sur \\(\\left[0 \\,;\\, +\\infty\\right[\\) : \\(\\sqrt{x^{2} - 4x + 5} > 0 \\iff x^{2} - 4x + 5 > 0\\).",
+    "html": "\\(\\sqrt{x^{2} - 4x + 5} > 0 \\iff x^{2} - 4x + 5 > 0\\) (la fonction carré est croissante sur \\(\\left[0 \\,;\\, +\\infty\\right[\\)).",
     "type": "texte"
    },
    {
@@ -1790,11 +1778,7 @@
     "type": "texte"
    },
    {
-    "html": "On pose \\(t = \\ln(x)\\) : \\(\\ln(x) + 1 = t + 1\\).",
-    "type": "texte"
-   },
-   {
-    "html": "\\(t + 1 = 0 \\iff t = -1\\).",
+    "html": "\\(\\ln(x) + 1 = 0 \\iff \\ln(x) = -1\\) (on soustrait 1).",
     "type": "texte"
    },
    {
@@ -1897,11 +1881,7 @@
     "type": "texte"
    },
    {
-    "html": "On pose \\(t = \\ln(x)\\) : \\(\\ln(x) + 2 = t + 2\\).",
-    "type": "texte"
-   },
-   {
-    "html": "\\(t + 2 = 0 \\iff t = -2\\).",
+    "html": "\\(\\ln(x) + 2 = 0 \\iff \\ln(x) = -2\\) (on soustrait 2).",
     "type": "texte"
    },
    {
@@ -2507,10 +2487,6 @@
     "type": "texte"
    },
    {
-    "html": "Le logarithme est strictement croissant : \\(e^{-x} > 0 \\iff -x \\in \\mathbb{R}\\).",
-    "type": "texte"
-   },
-   {
     "html": "\\(-x \\in \\mathbb{R} \\iff x \\in \\mathbb{R}\\) (on divise par un nombre négatif : le sens s'inverse).",
     "type": "texte"
    },
@@ -3056,15 +3032,11 @@
     "type": "texte"
    },
    {
-    "html": "On pose \\(t = \\ln(x)\\) : \\(\\ln(x) + 1 = t + 1\\).",
+    "html": "\\(\\ln(x) + 1 > 0 \\iff \\ln(x) > -1\\) (on soustrait 1).",
     "type": "texte"
    },
    {
-    "html": "\\(t + 1 > 0 \\iff t > -1\\).",
-    "type": "texte"
-   },
-   {
-    "html": "L'exponentielle est strictement croissante et \\(\\ln\\) n'est définie que sur \\(\\left]0 \\,;\\, +\\infty\\right[\\) : \\(\\ln(x) > -1 \\iff x > e^{-1}\\).",
+    "html": "\\(\\ln(x) > -1 \\iff x > e^{-1}\\) (exp est croissante).",
     "type": "texte"
    },
    {

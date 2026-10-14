@@ -40,6 +40,8 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
 | — | `e5dc17a`, `d347c5e` | énoncé « x^{3/2} = √(x³) » ; étape « on multiplie par k > 0 » |
 | — | `ef9497f`, `16e992f`, `f73e5d7`, `4dd62f1` | tableau : zones hors ED hachurées, double barre de valeur interdite centrée, sur toutes les lignes |
 | — | `b45265a` | aperçu de la saisie : pas d'erreur rouge pendant la frappe, plus de message obsolète |
+| — | `c2a6e53` | dérivée de u^α, α constant irrationnel : α·u^(α−1)·u' ; tableau de signes de l'ED aligné (`2bb4da8`) |
+| — | atome au degré 1 | ln, exp ou racine isolés étape par étape (sans « On pose t ») ; substitution réservée au degré ≥ 2 ; réciproques « (exp est croissante) », « (ln est croissante) » |
 | — | C5 (`19d9a3e`) | ED de x^α (α constant, simplifié exactement), [0 ; +∞[ pour α irrationnel > 0 |
 | — | C6 | vocabulaire élève (aucune méthode interne, « transcend… » interdit), détails techniques en console |
 
@@ -54,8 +56,10 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
 - Tableau de signes de l'Ensemble de définition : la valeur interdite n'est marquée que sur la ligne du
   quotient (les lignes de facteurs montrent « 0 ») ; à aligner sur la Dérivée si l'on veut la barre sur
   toute la colonne (à décider).
-- Dérivée d'une puissance d'exposant constant irrationnel (x^(ln 2)) : règle générale e^{α ln x}
-  conservée (hors périmètre) ; à reprendre avec « α·x^{α−1} » si on le souhaite.
+- Dérivée d'une puissance d'exposant constant irrationnel : faite (α·u^(α−1)·u'). Deux restes
+  d'écriture, à traiter plus tard : (1) un coefficient s'écrit « −1 + ln 3 » (ordre de SymPy) au lieu de
+  « ln 3 − 1 » ; (2) f' de x^√2·ln x reste un quotient non simplifié, (x·√2·x^(√2−1)·ln x + x^√2)/x, au lieu de
+  x^(√2−1)(√2·ln x + 1).
 
 ## Phase A — Filet de sécurité
 

@@ -1345,8 +1345,9 @@ def retour_atome(genre, S, t_tex, B_tex, items):
             for iv in S:
                 items.append(txt(rf"\({t_tex} = {iv.lo.tex} \iff {B_tex} = {exp_de(iv.lo).tex}\)"))
         else:
-            items.append(txt(rf"L'exponentielle est strictement croissante et \(\ln\) n'est définie que sur "
-                             rf"\(\left]0 \,;\, +\infty\right[\) : \({contrainte_tex(t_tex, S)} \iff {contrainte_tex(B_tex, out)}\)."))
+            restreint = any(iv.lo is None for iv in S)      # ln(B) < c : B > 0 fait partie du résultat
+            items.append(txt(rf"\({contrainte_tex(t_tex, S)} \iff {contrainte_tex(B_tex, out)}\) (exp est croissante"
+                             + (r" ; \(\ln\) n'est définie que sur \(\left]0 \,;\, +\infty\right[\)" if restreint else "") + ")."))
         return out
     if genre == "exp":
         pos = [Iv(Num.rat(0), False, None, False)]
@@ -1356,8 +1357,13 @@ def retour_atome(genre, S, t_tex, B_tex, items):
             for iv in S:
                 if iv.lo.val <= 0:
                     items.append(txt(rf"\({t_tex} = {iv.lo.tex}\) est impossible, car \({t_tex} > 0\) pour tout réel : solution rejetée."))
+        elif not ok and S:
+            items.append(txt(rf"\({contrainte_tex(t_tex, S)}\) est impossible : une exponentielle est strictement positive."))
         elif len(ok) != len(S) or any(vlo(a) != vlo(b) for a, b in zip(ok, S)):
-            items.append(txt(rf"Comme \({t_tex} > 0\) pour tout réel, on ne garde que \({t_tex} \in {ens_tex(ok)}\)."))
+            if len(S) == 1 and S[0].hi is None and S[0].lo is not None and S[0].lo.val <= 0:
+                items.append(txt(rf"\({contrainte_tex(t_tex, S)}\) est toujours vrai : une exponentielle est strictement positive."))
+            else:
+                items.append(txt(rf"Comme \({t_tex} > 0\) pour tout réel, on ne garde que \({t_tex} \in {ens_tex(ok)}\)."))
         out = []
         for iv in ok:
             lo = None if proche(iv.lo.val, 0) else ln_de(iv.lo)
@@ -1368,8 +1374,12 @@ def retour_atome(genre, S, t_tex, B_tex, items):
         if pts:
             for iv in ok:
                 items.append(txt(rf"\({t_tex} = {iv.lo.tex} \iff {B_tex} = {ln_de(iv.lo).tex}\)"))
-        elif ok:
-            items.append(txt(rf"Le logarithme est strictement croissant : \({contrainte_tex(t_tex, ok)} \iff {contrainte_tex(B_tex, out)}\)."))
+        elif ok and not (len(S) == 1 and S[0].hi is None and S[0].lo is not None and S[0].lo.val <= 0):
+            if any(iv.lo is None for iv in S):       # t < c : t > 0 est toujours vrai, on ne l'écrit pas dans la condition
+                items.append(txt(rf"\({contrainte_tex(t_tex, S)} \iff {contrainte_tex(B_tex, out)}\) "
+                                 r"(ln est croissante ; une exponentielle est strictement positive)."))
+            else:
+                items.append(txt(rf"\({contrainte_tex(t_tex, ok)} \iff {contrainte_tex(B_tex, out)}\) (ln est croissante)."))
         return out
     # racine q-ième (q = 2 : racine carrée ; q impair : bijection de ℝ ; q pair ≥ 4 : comme la racine carrée)
     q = 2 if genre == "sqrt" else int(genre[3:])
@@ -1399,9 +1409,13 @@ def retour_atome(genre, S, t_tex, B_tex, items):
         if pts:
             for iv in ok:
                 items.append(txt(rf"\({t_tex} = {iv.lo.tex} \iff {B_tex} = {puissance_num(iv.lo, q).tex}\)"))
+        elif len(S) == 1 and S[0].hi is None and S[0].lo is not None and S[0].lo.val < 0:
+            items.append(txt(rf"\({contrainte_tex(t_tex, S)}\) est vrai dès que \({t_tex}\) est définie : une {nom} est positive ou nulle."))
         else:
-            items.append(txt(rf"Une {nom} est positive et la fonction {puiss} est croissante sur \(\left[0 \,;\, +\infty\right[\) : "
-                             rf"\({contrainte_tex(t_tex, ok)} \iff {contrainte_tex(B_tex, out)}\)."))
+            items.append(txt(rf"\({contrainte_tex(t_tex, ok)} \iff {contrainte_tex(B_tex, out)}\) "
+                             rf"(la fonction {puiss} est croissante sur \(\left[0 \,;\, +\infty\right[\))."))
+    elif S and not pts:
+        items.append(txt(rf"\({contrainte_tex(t_tex, S)}\) est impossible : une {nom} est positive ou nulle."))
     return out
 
 
@@ -1549,6 +1563,69 @@ def quad_irrationnel(P, S, v, expr_tex, items):
     return res
 
 
+def forme_relation(S):
+    """(symbole, borne) si S est un point ou un intervalle à une seule borne finie rationnelle ; sinon None.
+    Le symbole écrit la relation « expression sym borne » : >, ≥, <, ≤ ou =."""
+    S = fusion(S)
+    if len(S) != 1:
+        return None
+    iv = S[0]
+    if iv.lo is not None and iv.hi is not None:
+        return ("=", iv.lo) if proche(iv.lo.val, iv.hi.val) and iv.lo.q is not None else None
+    if iv.lo is not None and iv.lo.q is not None:
+        return (GE if iv.lf else ">", iv.lo)
+    if iv.hi is not None and iv.hi.q is not None:
+        return (LE if iv.hf else "<", iv.hi)
+    return None
+
+
+SENS_OPPOSE = {">": "<", "<": ">", GE: LE, LE: GE, "=": "="}
+
+
+def isoler_atome(B, R2, S, t_tex, items):
+    """Atome A (ln, exp, racine) au degré 1 : R2(t) = α·t + β. Au lieu de poser t, on isole A en écrivant
+    chaque étape : A est isolé du côté où son coefficient est positif (le sens ne s'inverse alors jamais par
+    division), puis on divise par ce coefficient. Renvoie l'ensemble des valeurs de A (le même que celui de
+    resoudre_dans) ou None si le cas n'est pas de cette forme (le chemin par substitution prend le relais)."""
+    rel = forme_relation(S)
+    if rel is None:
+        return None
+    sym, borne = rel
+    n, _ = r_norm(R2)
+    n = pn(n)
+    if len(n) != 2 or n[1] == 0:
+        return None
+    beta, alpha = F(n[0]), F(n[1])
+    s_q = F(borne.q)
+    egal = sym == "="
+    def terme(c):
+        return t_tex if c == 1 else f"{qtex(c)}{t_tex}"
+    lignes, avant = [], f"{tex(B)} {sym} {borne.tex}"
+    if alpha > 0:
+        a, sy, rhs = alpha, sym, s_q - beta
+        if beta != 0:
+            expl = f"on soustrait {qtex(beta)}" if beta > 0 else f"on ajoute {qtex(-beta)}"
+            lignes.append(rf"\({avant} \iff {terme(a)} {sy} {qtex(rhs)}\) ({expl}).")
+            avant = f"{terme(a)} {sy} {qtex(rhs)}"
+    else:
+        a, sy, rhs = -alpha, SENS_OPPOSE[sym], beta - s_q
+        lignes.append(rf"\({avant} \iff {terme(a)} {sy} {qtex(rhs)}\) (on isole \({t_tex}\) du côté où son coefficient est positif).")
+        avant = f"{terme(a)} {sy} {qtex(rhs)}"
+    if a != 1:
+        fin = f"{t_tex} {sy} {qtex(rhs / a)}"
+        lignes.append(rf"\({avant} \iff {fin}\) (on divise par {qtex(a)}{'' if egal else ' > 0'}).")
+    elif not lignes:
+        return None
+    # ensemble correspondant, calculé par resoudre_dans (silencieusement) : les ensembles ne dépendent pas de la rédaction
+    S_t = resoudre_dans(R2, S, "t", rtex(R2, "t"), [])
+    attendu = rhs / a
+    if len(fusion(S_t)) != 1 or not any(proche(float(attendu), b.val) for iv in fusion(S_t) for b in (iv.lo, iv.hi) if b is not None):
+        return None
+    for l in lignes:
+        items.append(txt(l))
+    return S_t
+
+
 def preimage(B, S, items):
     """{x : B(x) ∈ S}, en détaillant."""
     if isinstance(B, X):
@@ -1568,8 +1645,10 @@ def preimage(B, S, items):
     elif est_monome(R2) and all(iv.lo is not None and iv.hi is not None and iv.lo.val == 0 and iv.hi.val == 0 for iv in fusion(S)):
         S_t = fusion(S)       # c·tᵏ = 0 ⇔ t = 0 : pas de substitution à écrire
     else:
-        items.append(txt(rf"On pose \(t = {t_tex}\) : \({tex(B)} = {rtex(R2, 't')}\)."))
-        S_t = resoudre_dans(R2, S, "t", rtex(R2, "t"), items)
+        S_t = isoler_atome(B, R2, S, t_tex, items) if est_affine(R2) else None
+        if S_t is None:
+            items.append(txt(rf"On pose \(t = {t_tex}\) : \({tex(B)} = {rtex(R2, 't')}\)."))
+            S_t = resoudre_dans(R2, S, "t", rtex(R2, "t"), items)
     S_B = retour_atome(genre, S_t, t_tex, tex(B2), items)
     return preimage(B2, S_B, items)
 

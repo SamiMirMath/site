@@ -505,11 +505,11 @@
      "type": "texte"
     },
     {
-     "html": "On pose \\(t = \\ln(x)\\) : \\(3\\left(\\ln(x) + 1\\right) = 3t + 3\\).",
+     "html": "\\(3\\left(\\ln(x) + 1\\right) = 0 \\iff 3\\ln(x) = -3\\) (on soustrait 3).",
      "type": "texte"
     },
     {
-     "html": "\\(3t + 3 = 0 \\iff t = -1\\).",
+     "html": "\\(3\\ln(x) = -3 \\iff \\ln(x) = -1\\) (on divise par 3).",
      "type": "texte"
     },
     {
@@ -654,10 +654,6 @@
     },
     {
      "html": "\\(e^{\\frac{1}{x}}\\) est défini pour \\(x \\in \\mathbb{R} \\setminus \\left\\{0\\right\\}\\).",
-     "type": "texte"
-    },
-    {
-     "html": "Le logarithme est strictement croissant : \\(e^{\\frac{1}{x}} > 0 \\iff \\frac{1}{x} \\in \\mathbb{R}\\).",
      "type": "texte"
     },
     {
@@ -998,15 +994,11 @@
      "type": "texte"
     },
     {
-     "html": "On pose \\(t = \\ln(x)\\) : \\(\\ln(x) - 1 = t - 1\\).",
+     "html": "\\(\\ln(x) - 1 > 0 \\iff \\ln(x) > 1\\) (on ajoute 1).",
      "type": "texte"
     },
     {
-     "html": "\\(t - 1 > 0 \\iff t > 1\\).",
-     "type": "texte"
-    },
-    {
-     "html": "L'exponentielle est strictement croissante et \\(\\ln\\) n'est définie que sur \\(\\left]0 \\,;\\, +\\infty\\right[\\) : \\(\\ln(x) > 1 \\iff x > e\\).",
+     "html": "\\(\\ln(x) > 1 \\iff x > e\\) (exp est croissante).",
      "type": "texte"
     },
     {
@@ -1222,7 +1214,7 @@
      "type": "texte"
     },
     {
-     "html": "Une racine carrée est positive et la fonction carré est croissante sur \\(\\left[0 \\,;\\, +\\infty\\right[\\) : \\(\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)} > 0 \\iff \\left(x - 2\\right)\\,\\left(x + 2\\right) > 0\\).",
+     "html": "\\(\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)} > 0 \\iff \\left(x - 2\\right)\\,\\left(x + 2\\right) > 0\\) (la fonction carré est croissante sur \\(\\left[0 \\,;\\, +\\infty\\right[\\)).",
      "type": "texte"
     },
     {
@@ -1478,11 +1470,7 @@
      "type": "texte"
     },
     {
-     "html": "On pose \\(t = \\ln(x)\\) : \\(\\ln(x) + 1 = t + 1\\).",
-     "type": "texte"
-    },
-    {
-     "html": "\\(t + 1 = 0 \\iff t = -1\\).",
+     "html": "\\(\\ln(x) + 1 = 0 \\iff \\ln(x) = -1\\) (on soustrait 1).",
      "type": "texte"
     },
     {
@@ -2209,10 +2197,6 @@
     },
     {
      "html": "<b>Signe de \\(e^{-x}\\)</b>",
-     "type": "texte"
-    },
-    {
-     "html": "Le logarithme est strictement croissant : \\(e^{-x} > 0 \\iff -x \\in \\mathbb{R}\\).",
      "type": "texte"
     },
     {
