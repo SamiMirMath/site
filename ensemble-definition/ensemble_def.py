@@ -253,7 +253,7 @@ def valeur_constante(n):
         if n.op in "+-":
             r = a + b if n.op == "+" else a - b
             # compensation catastrophique (ex. ln(x²) − 2 ln x) : on arrondit à 0
-            return 0.0 if abs(r) <= 1e-12 * (abs(a) + abs(b)) else r
+            return F(0) if abs(r) <= 1e-12 * (abs(a) + abs(b)) else r
         if n.op == "*":
             return a * b
         if n.op == "/":

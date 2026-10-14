@@ -2218,8 +2218,50 @@
   }
  },
  "x^(2-2)": {
-  "exception": "AttributeError",
-  "message": "'float' object has no attribute 'denominator'"
+  "deriv_etapes": [
+   {
+    "html": "\\(\\left(x^{2 - 2}\\right)' = 0\\) (règle de la puissance).",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "0",
+  "domaine_etude_tex": "\\mathbb{R}",
+  "ed_tex": "\\mathbb{R}",
+  "extrema": [],
+  "f_tex": "x^{2 - 2}",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(0\\) est nulle partout où elle est définie.",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [],
+   "rows": [
+    {
+     "cells": [
+      "+"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "\\nearrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
  },
  "x^(2/3)": {
   "deriv_etapes": [
