@@ -1157,6 +1157,10 @@ def resoudre_rat(R, rel, v, items, nom_expr=None):
                 fin.append("0")
             else:
                 fin.append("?")
+    for j in range(1, len(fin), 2):           # valeur interdite : double barre sur toute la colonne
+        if fin[j] == "||":
+            for ligne in lignes:
+                ligne["cells"][j] = "||"
     if len(tous) + (1 if const < 0 else 0) > 1 or fD:
         lignes.append({"label": expr, "cells": fin, "final": True})
     else:
@@ -2041,6 +2045,37 @@ def signe_facteur(h, nom):
     return D, P, Z, items, "numerique"
 
 
+def epurer_tableau(crit, lignes, fin):
+    """Présentation du tableau (même règle que l'outil Dérivée) :
+    - zone hors du domaine de l'expression : hachurée (« x ») sur TOUTES les lignes ;
+    - valeur interdite (borne exclue du domaine, zéro d'un dénominateur) : double barre « || » sur
+      toute la colonne, sur toutes les lignes ;
+    - un point critique situé au milieu d'une zone hachurée n'a pas de colonne (deux zones hachurées
+      voisines se fondent en une seule)."""
+    n = len(crit)
+    garde = []                       # indices de colonnes conservées
+    for j in range(2 * n + 1):
+        if j % 2 == 1 and fin[j] in ("x", "||") and fin[j - 1] == "x" and fin[j + 1] == "x":
+            continue                 # point critique au milieu d'une zone hors du domaine
+        if j % 2 == 0 and j > 0 and fin[j] == "x" and fin[j - 1] in ("x", "||") and (j - 1) not in garde:
+            continue                 # l'intervalle qui suivait la colonne supprimée
+        garde.append(j)
+    nouvelles = []
+    for ligne in lignes:
+        cells = [ligne["cells"][j] for j in garde]
+        nouvelles.append(dict(ligne, cells=cells))
+    fin2 = [fin[j] for j in garde]
+    for j, ch in enumerate(fin2):
+        if j % 2 == 0 and ch == "x":
+            for ligne in nouvelles:
+                ligne["cells"][j] = "x"
+        elif j % 2 == 1 and ch in ("x", "||"):
+            for ligne in nouvelles:
+                ligne["cells"][j] = "||"
+    crit2 = [crit[(j - 1) // 2] for j in garde if j % 2 == 1]
+    return crit2, nouvelles, fin2
+
+
 def tableau_facteurs(c, infos, rel, expr_tex, items):
     """Tableau de signes de c·∏ h_i^{k_i} ; renvoie {expr rel 0} (rel : '>' ou '>=')."""
     crit = []
@@ -2100,6 +2135,8 @@ def tableau_facteurs(c, infos, rel, expr_tex, items):
         else:
             fin.append("-" if col.count("-") % 2 else "+")
     lignes.append({"label": expr_tex, "cells": fin, "final": True})
+    crit, lignes, fin = epurer_tableau(crit, lignes, fin)
+    n = len(crit)
     items.append({"type": "tableau", "var": "x", "crit": [p.tex for p in crit], "rows": lignes})
     S = []
     for i in range(n + 1):
@@ -2109,7 +2146,7 @@ def tableau_facteurs(c, infos, rel, expr_tex, items):
             S.append(Iv(crit[i], True, crit[i], True))
     S = fusion(S)
     if any(ch == "x" for ch in fin):
-        items.append(txt("Les zones hachurées (×) sont hors du domaine de définition de l'expression."))
+        items.append(txt("Les zones hachurées sont hors du domaine de définition de l'expression."))
     symb = ">" if rel == ">" else r"\geq"
     items.append(txt(rf"On lit le tableau : \({expr_tex} {symb} 0 \iff x \in {ens_tex(S)}\)."))
     return S

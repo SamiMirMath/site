@@ -249,7 +249,7 @@ $("calculer").onclick=calculer;
 /* ---------- affichage ---------- */
 function tableau(t){
   const k=t.crit.length;
-  const cl=s=>s==="+"?'<td class="p">+</td>':s==="-"?'<td class="m">−</td>':s==="||"?'<td class="vi"></td>':s==="x"?'<td class="hors">×</td>':`<td>${s}</td>`;
+  const cl=s=>s==="+"?'<td class="p">+</td>':s==="-"?'<td class="m">−</td>':s==="||"?'<td class="vi"></td>':s==="x"?'<td class="hors" aria-label="hors du domaine de définition"></td>':`<td>${s}</td>`;
   let h='<div class="tsigne"><table><tr><td class="lab">'+K(t.var)+'</td><td>'+K("-\\infty")+'</td>';
   for(let i=0;i<k;i++) h+='<td></td><td>'+K(t.crit[i])+'</td>';
   h+='<td></td><td>'+K("+\\infty")+'</td></tr>';

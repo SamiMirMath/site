@@ -678,7 +678,7 @@
        {
         "cells": [
          "-",
-         "-",
+         "||",
          "-",
          "0",
          "+"
@@ -688,7 +688,7 @@
        {
         "cells": [
          "-",
-         "0",
+         "||",
          "+",
          "+",
          "+"
@@ -796,7 +796,7 @@
        {
         "cells": [
          "-",
-         "-",
+         "||",
          "-",
          "0",
          "+",
@@ -808,7 +808,7 @@
        {
         "cells": [
          "-",
-         "-",
+         "||",
          "-",
          "-",
          "-",
@@ -820,7 +820,7 @@
        {
         "cells": [
          "-",
-         "0",
+         "||",
          "+",
          "+",
          "+",
@@ -1707,7 +1707,7 @@
        {
         "cells": [
          "x",
-         "x",
+         "||",
          "-",
          "0",
          "+",
@@ -1719,7 +1719,7 @@
        {
         "cells": [
          "x",
-         "x",
+         "||",
          "-",
          "0",
          "+",
@@ -1734,7 +1734,7 @@
       "var": "x"
      },
      {
-      "html": "Les zones hachurées (×) sont hors du domaine de définition de l'expression.",
+      "html": "Les zones hachurées sont hors du domaine de définition de l'expression.",
       "type": "texte"
      },
      {
@@ -1826,8 +1826,8 @@
       "rows": [
        {
         "cells": [
-         "-",
-         "-",
+         "x",
+         "||",
          "-",
          "-",
          "-",
@@ -1839,7 +1839,7 @@
        {
         "cells": [
          "x",
-         "x",
+         "||",
          "-",
          "0",
          "+",
@@ -1851,7 +1851,7 @@
        {
         "cells": [
          "x",
-         "x",
+         "||",
          "+",
          "0",
          "-",
@@ -1866,7 +1866,7 @@
       "var": "x"
      },
      {
-      "html": "Les zones hachurées (×) sont hors du domaine de définition de l'expression.",
+      "html": "Les zones hachurées sont hors du domaine de définition de l'expression.",
       "type": "texte"
      },
      {
@@ -1970,8 +1970,8 @@
       "rows": [
        {
         "cells": [
-         "-",
-         "-",
+         "x",
+         "||",
          "-",
          "-",
          "-",
@@ -1983,7 +1983,7 @@
        {
         "cells": [
          "x",
-         "x",
+         "||",
          "-",
          "0",
          "+",
@@ -1995,7 +1995,7 @@
        {
         "cells": [
          "x",
-         "x",
+         "||",
          "+",
          "0",
          "-",
@@ -2010,7 +2010,7 @@
       "var": "x"
      },
      {
-      "html": "Les zones hachurées (×) sont hors du domaine de définition de l'expression.",
+      "html": "Les zones hachurées sont hors du domaine de définition de l'expression.",
       "type": "texte"
      },
      {
