@@ -329,6 +329,7 @@ function carteGraphique(g, extrema, asymptotes){
       </span>
     </div>
     <canvas id="graphique" style="touch-action:none;cursor:grab"></canvas>
+    <div id="msgFenetre" class="hint no-print" style="margin-top:6px" hidden>La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.</div>
     <div class="hint" style="margin-top:6px">Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), point de discontinuité (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.</div>`;
   const cv=d.querySelector("#graphique");
   cv.__g=g; cv.__extrema=extrema; cv.__asymptotes=asymptotes;
@@ -348,10 +349,12 @@ function carteGraphique(g, extrema, asymptotes){
       const r=cv.__rendu; if(!r || !derniereFonction) return;
       const largeurPx=Math.max(300, cv.getBoundingClientRect().width||640);
       const n=Math.min(3000, Math.round(largeurPx*2.5));
+      const msg=d.querySelector("#msgFenetre");
       try{
         const rep=await appelPy("fenetre", JSON.stringify({f:derniereFonction, xmin:r.xmin, xmax:r.xmax, n}), 10000);
-        if(rep.ok){ cv.__g.segments=rep.segments; redessiner(); }
-      }catch(e){}
+        if(rep.ok){ cv.__g.segments=rep.segments; redessiner(); msg.hidden=true; }
+        else msg.hidden=false;
+      }catch(e){ msg.hidden=false; }
     }, 150);
   };
   // Zoom centré sur le centre actuel (boutons +/− et réinitialiser).

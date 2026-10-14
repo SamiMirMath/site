@@ -9,7 +9,7 @@ l'échantillonnage numérique pour le graphique.
 """
 import json
 
-from ensemble_def import lire, tex, evaluer, fusion, ErreurSaisie, _analyser, apercu_json
+from ensemble_def import lire, tex, evaluer, fusion, ErreurSaisie, Incertain, _analyser, apercu_json
 import derivee_variations as dv
 import limites_asymptotes as la
 
@@ -33,7 +33,10 @@ def _echantillonner(f, a, b, n):
     pts = []
     for i in range(n):
         x = a + pad + (b - a - 2 * pad) * i / (n - 1) if n > 1 else (a + b) / 2
-        v = evaluer(f, x)
+        try:
+            v = evaluer(f, x)
+        except (Incertain, OverflowError):
+            v = None  # valeur hors de portée des flottants (e^800…) : point omis
         pts.append([x, v if (v is not None and abs(v) < 1e7) else None])
     return pts
 
