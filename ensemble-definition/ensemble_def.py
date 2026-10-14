@@ -322,16 +322,37 @@ def tex(n):
             sep = r"\,"
         return g + sep + d
     # puissance
-    if valeur_constante(n.b) == F(1, 2):
+    if ECRITURE["racines"] and valeur_constante(n.b) == F(1, 2):
         return r"\sqrt{" + tex(n.a) + "}"
     e = valeur_constante(n.b)
-    if e is not None and e.denominator >= 2 and e > 0:     # u^(p/q) > 0 non entier : racine q-ième de u^p
+    if ECRITURE["racines"] and e is not None and e.denominator >= 2 and e > 0:     # u^(p/q) > 0 non entier : racine q-ième de u^p
         q, p = e.denominator, e.numerator
         return r"\sqrt" + ("" if q == 2 else "[" + str(q) + "]") + "{" + (tex(n.a) if p == 1 else tex(Op("^", n.a, Nb(F(p))))) + "}"
     base = n.a
     atome = isinstance(base, (X, E)) or (isinstance(base, Nb) and base.v.denominator == 1 and base.v >= 0)
     bt = tex(base) if atome else r"\left(" + tex(base) + r"\right)"
     return bt + "^{" + tex(n.b) + "}"
+
+
+ECRITURE = {"racines": True}
+
+
+def tex_saisie(n):
+    """Écriture de n telle que saisie : les puissances fractionnaires restent des puissances
+    (x^{3/2}), alors que tex() les écrit en racines (\\sqrt{x^{3}})."""
+    ECRITURE["racines"] = False
+    try:
+        return tex(n)
+    finally:
+        ECRITURE["racines"] = True
+
+
+def ajouter_saisie(res, f):
+    """Ajoute res['f_saisie_tex'] si l'écriture saisie diffère de l'écriture en racines."""
+    t = tex_saisie(f)
+    if t != tex(f):
+        res["f_saisie_tex"] = t
+    return res
 
 
 # =====================================================================
@@ -2134,7 +2155,7 @@ def _analyser(entree):
         conditions(f, conds)
     except ErreurSaisie as e:
         return {"ok": False, "erreur": str(e)}, None, None
-    res = {"ok": True, "f_tex": tex(f), "conditions": []}
+    res = ajouter_saisie({"ok": True, "f_tex": tex(f), "conditions": []}, f)
     ED = REELS
     complet = True
     E_par_cond = {}

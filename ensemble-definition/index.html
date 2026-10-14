@@ -275,7 +275,7 @@ function afficher(r){
   $("resultat").hidden=false; const box=$("cartes"); box.innerHTML=""; cartes=[];
   if(!r.ok){ const d=document.createElement("div"); d.className="card err"; d.textContent=r.erreur; box.appendChild(d); $("suivant").disabled=$("tout").disabled=true; $("progression").textContent=""; return; }
   const tete=document.createElement("div"); tete.className="card";
-  tete.innerHTML=`<div style="font-size:1.15rem;overflow-x:auto">${K("f(x) = "+r.f_tex)}</div>`+
+  tete.innerHTML=`<div style="font-size:1.15rem;overflow-x:auto">${K("f(x) = "+(r.f_saisie_tex?r.f_saisie_tex+" = ":"")+r.f_tex)}</div>`+
     (r.conditions.length?`<div class="muted" style="margin-top:4px">${r.conditions.length} condition${r.conditions.length>1?"s":""} d'existence : `+
       r.conditions.map(c=>c.titre).join(", ")+".</div>":'<div class="muted" style="margin-top:4px">Ni logarithme, ni dénominateur, ni racine : aucune condition.</div>');
   box.appendChild(tete);

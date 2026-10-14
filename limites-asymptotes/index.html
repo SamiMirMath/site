@@ -222,7 +222,7 @@ $("calculer").onclick=calculer;
 /* ---------- affichage ---------- */
 function carteRappel(r){
   const d=document.createElement("div"); d.className="card";
-  d.innerHTML=`<div style="font-size:1.15rem;overflow-x:auto">${K("f(x) = "+r.f_tex)}</div>
+  d.innerHTML=`<div style="font-size:1.15rem;overflow-x:auto">${K("f(x) = "+(r.f_saisie_tex?r.f_saisie_tex+" = ":"")+r.f_tex)}</div>
     <div class="muted" style="margin-top:4px">${K("ED = "+r.ed_tex)} — détail dans l'outil « Ensemble de définition ».</div>`;
   math(d); return d;
 }

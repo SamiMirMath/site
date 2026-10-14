@@ -2023,6 +2023,7 @@
      "x_val": 0.0
     }
    ],
+   "f_saisie_tex": "x^{\\frac{2}{3}}",
    "f_tex": "\\sqrt[3]{x^{2}}",
    "ok": true,
    "signe_etapes": [
@@ -2076,6 +2077,7 @@
    }
   },
   "ed_tex": "\\mathbb{R}",
+  "f_saisie_tex": "x^{\\frac{2}{3}}",
   "f_tex": "\\sqrt[3]{x^{2}}",
   "graphique": {
    "segments": [
@@ -2120,6 +2122,7 @@
      "ou": "x \\to +\\infty"
     }
    ],
+   "f_saisie_tex": "x^{\\frac{2}{3}}",
    "f_tex": "\\sqrt[3]{x^{2}}",
    "ok": true
   },

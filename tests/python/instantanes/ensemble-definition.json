@@ -8,6 +8,7 @@
   "besoin_sympy": false,
   "complet": true,
   "conditions": [],
+  "f_saisie_tex": "\\left(x - 1\\right)^{\\frac{2}{3}}",
   "f_tex": "\\sqrt[3]{\\left(x - 1\\right)^{2}}",
   "ok": true
  },
@@ -385,6 +386,7 @@
     "titre": "dénominateur"
    }
   ],
+  "f_saisie_tex": "\\frac{1}{x^{\\frac{1}{3}}}",
   "f_tex": "\\frac{1}{\\sqrt[3]{x}}",
   "inter_tex": "E_{1}",
   "ok": true
@@ -2186,6 +2188,7 @@
   "besoin_sympy": false,
   "complet": true,
   "conditions": [],
+  "f_saisie_tex": "x^{\\frac{1}{3}}",
   "f_tex": "\\sqrt[3]{x}",
   "ok": true
  },

@@ -179,6 +179,7 @@
     "x_val": 0.0
    }
   ],
+  "f_saisie_tex": "\\left(x^{2} + 1\\right)^{\\frac{1}{2}}",
   "f_tex": "\\sqrt{x^{2} + 1}",
   "ok": true,
   "signe_etapes": [
@@ -2191,6 +2192,7 @@
     "x_val": 0.0
    }
   ],
+  "f_saisie_tex": "x^{\\frac{1}{2}}",
   "f_tex": "\\sqrt{x}",
   "ok": true,
   "signe_etapes": [
@@ -2311,6 +2313,7 @@
     "x_val": 0.0
    }
   ],
+  "f_saisie_tex": "x^{\\frac{2}{3}}",
   "f_tex": "\\sqrt[3]{x^{2}}",
   "ok": true,
   "signe_etapes": [
@@ -2383,6 +2386,7 @@
     "x_val": 0.0
    }
   ],
+  "f_saisie_tex": "x^{\\frac{3}{2}}",
   "f_tex": "\\sqrt{x^{3}}",
   "ok": true,
   "signe_etapes": [

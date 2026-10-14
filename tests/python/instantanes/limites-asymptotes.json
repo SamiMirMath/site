@@ -1451,6 +1451,7 @@
     "ou": "x \\to +\\infty"
    }
   ],
+  "f_saisie_tex": "x^{\\frac{1}{2}}",
   "f_tex": "\\sqrt{x}",
   "ok": true
  },

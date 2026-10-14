@@ -10,7 +10,7 @@ l'échantillonnage numérique pour le graphique.
 import json
 import math
 
-from ensemble_def import json_strict, lire, tex, evaluer, fusion, ErreurSaisie, Incertain, _analyser, apercu_json
+from ensemble_def import json_strict, ajouter_saisie, lire, tex, evaluer, fusion, ErreurSaisie, Incertain, _analyser, apercu_json
 import derivee_variations as dv
 import limites_asymptotes as la
 
@@ -126,6 +126,7 @@ def etudier(entree):
         "derivee": r_dv,
         "limites": r_la,
     }
+    ajouter_saisie(res, f)
     res["graphique"] = _cadrage_et_courbe(f, ED, r_dv.get("extrema", []), r_la.get("asymptotes", []))
     return res
 

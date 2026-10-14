@@ -263,5 +263,26 @@ class TestCoefficientsEntiersED(unittest.TestCase):
                          ed.analyser("1/(3x^2-6x+2)")["ED_tex"])
 
 
+class TestEnonceSaisieEtRacines(unittest.TestCase):
+    """f(x) = x^{3/2} = \\sqrt{x^{3}} : l'énoncé montre la saisie, puis la forme en racines."""
+
+    def test_champ_saisie(self):
+        import etude_complete as ec2
+        for outil in (lambda e: ed.analyser(e), dv.etudier, la.etudier, ec2.etudier):
+            r = outil("x^(3/2)")
+            self.assertEqual(r["f_tex"], r"\sqrt{x^{3}}")
+            self.assertEqual(r["f_saisie_tex"], r"x^{\frac{3}{2}}")
+        self.assertEqual(dv.etudier("x^(2/3)+x")["f_saisie_tex"], r"x^{\frac{2}{3}} + x")
+
+    def test_pas_de_champ_si_identique(self):
+        for entree in ("x^3", "ln(x)", "sqrt(x)", "x^(-1/3)"):
+            with self.subTest(f=entree):
+                self.assertNotIn("f_saisie_tex", dv.etudier(entree))
+
+    def test_tex_saisie_ne_laisse_pas_de_drapeau(self):
+        ed.tex_saisie(ed.lire("x^(3/2)"))
+        self.assertEqual(ed.tex(ed.lire("x^(3/2)")), r"\sqrt{x^{3}}")
+
+
 if __name__ == "__main__":
     unittest.main()

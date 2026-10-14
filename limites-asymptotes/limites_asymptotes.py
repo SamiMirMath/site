@@ -26,7 +26,7 @@ from ensemble_def import (
     Nb, X, E, Neg, Op, Fn,
     lire, tex, prec, valeur_constante, Num, Iv, REELS, fusion, inter, ens_tex,
     contient, proche, evaluer, aplatir, qtex, ptex, pn, deg, peval, pdivlin,
-    decomposer, r_norm, json_strict,
+    decomposer, r_norm, json_strict, ajouter_saisie,
     _sympy, en_sympy_reel, arbre_depuis_sympy, num_sympy, _SP,
     txt, NonPrisEnCharge, ErreurSaisie, _analyser, apercu_json,
 )
@@ -506,7 +506,7 @@ def etudier(entree):
     if not res_ed.get("complet"):
         return {"ok": False, "erreur": "L'ensemble de définition n'a pas pu être calculé pour cette fonction."}
 
-    res = {"ok": True, "f_tex": tex(f), "ed_tex": res_ed["ED_tex"], "etudes": [], "asymptotes": []}
+    res = ajouter_saisie({"ok": True, "f_tex": tex(f), "ed_tex": res_ed["ED_tex"], "etudes": [], "asymptotes": []}, f)
 
     try:
         dec = decomposer(f)

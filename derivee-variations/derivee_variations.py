@@ -28,7 +28,7 @@ from fractions import Fraction as F
 from ensemble_def import (
     Nb, X, E, Neg, Op, Fn,
     lire, tex, par, prec, valeur_constante, Num, Iv, REELS, inter, ens_tex, points, contient, proche,
-    preimage, resoudre_general, json_strict, domaine, fusion, evaluer, aplatir, qtex,
+    preimage, resoudre_general, json_strict, ajouter_saisie, domaine, fusion, evaluer, aplatir, qtex,
     indice_racine, _sympy, en_sympy, en_sympy_reel, arbre_depuis_sympy, num_sympy, _SP,
     txt, NonPrisEnCharge, ErreurSaisie, _analyser, apercu_json,
 )
@@ -398,7 +398,7 @@ def etudier(entree):
     if not res_ed.get("complet"):
         return {"ok": False, "erreur": "L'ensemble de définition n'a pas pu être calculé pour cette fonction."}
 
-    res = {"ok": True, "f_tex": tex(f), "ed_tex": res_ed["ED_tex"]}
+    res = ajouter_saisie({"ok": True, "f_tex": tex(f), "ed_tex": res_ed["ED_tex"]}, f)
 
     items_deriv = []
     try:
