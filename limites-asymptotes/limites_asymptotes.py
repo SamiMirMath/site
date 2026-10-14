@@ -278,6 +278,14 @@ def _etude_pole_numerique(f, N, D, point, cote, items):
     return {"genre": "trou", "point_tex": point.tex, "point_val": a, "valeur_tex": vtex, "valeur_val": vval}
 
 
+NON_DETERMINEE_TEX = r"\text{limite non déterminée automatiquement}"
+
+
+def _affichable(v):
+    """« ? » est le marqueur interne d'une limite que SymPy n'a pas donnée."""
+    return NON_DETERMINEE_TEX if v == "?" else v
+
+
 def _phrase_trou(point_tex, valeur_tex):
     """Formulation Q7 : valeur interdite où la limite (éventuellement latérale) est finie."""
     return (rf"f n'est pas définie en \(x={point_tex}\), mais sa limite y est finie "
@@ -454,8 +462,8 @@ def _etude_transcendante(f, borne, items):
         return vtex, inf, extra, vval
     vg, _, _, vg_val = _valeur_tex(_limite_sympy(f, cible, "-"))
     vd, _, _, vd_val = _valeur_tex(_limite_sympy(f, cible, "+"))
-    items.append(txt(rf"À gauche, \(\displaystyle\lim f(x) = {vg}\) ; à droite, "
-                     rf"\(\displaystyle\lim f(x) = {vd}\)."))
+    items.append(txt(rf"À gauche, \(\displaystyle\lim f(x) = {_affichable(vg)}\) ; à droite, "
+                     rf"\(\displaystyle\lim f(x) = {_affichable(vd)}\)."))
     return (vg, vd), False, None, (vg_val, vd_val)
 
 
@@ -466,7 +474,7 @@ def _bilan_deux_cotes(point, cote_tex, val, vval, items):
     base = {"point_tex": point.tex, "point_val": point.val, "ou": cote_tex}
     if r"\infty" in vg or r"\infty" in vd:
         items.append(txt("Au moins une des deux limites est infinie : asymptote verticale."))
-        return dict(base, genre="verticale", gauche_tex=vg, droite_tex=vd,
+        return dict(base, genre="verticale", gauche_tex=_affichable(vg), droite_tex=_affichable(vd),
                     gauche_val=vg_val, droite_val=vd_val)
     if "?" in (vg, vd):
         items.append(txt("Ces limites n'ont pas pu être déterminées automatiquement : "

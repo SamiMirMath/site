@@ -45,5 +45,28 @@ class TestLimiteIndeterminee(unittest.TestCase):
         self.assertIn("pas pu être déterminée", textes)
 
 
+class TestUnCoteIndetermine(unittest.TestCase):
+    """e^(1/x) en 0 : limite à gauche 0, à droite +∞. Si la gauche est indéterminée,
+    l'asymptote verticale est gardée et l'on n'affiche jamais « ? »."""
+
+    def test_asymptote_gardee_sans_point_d_interrogation(self):
+        reelle = la._limite_sympy
+
+        def une_cote(f, point, direction=None):
+            return None if direction == "-" else reelle(f, point, direction)
+
+        with mock.patch.object(la, "_limite_sympy", side_effect=une_cote):
+            r = la.etudier("e^(1/x)")
+        verticales = [a for a in r["asymptotes"] if a["genre"] == "verticale"]
+        self.assertEqual(len(verticales), 1)
+        a = verticales[0]
+        self.assertEqual(a["droite_tex"], r"+\infty")
+        self.assertEqual(a["gauche_tex"], la.NON_DETERMINEE_TEX)
+        self.assertIn("limite non déterminée automatiquement", a["gauche_tex"])
+        textes = " ".join(e["html"] for et in r["etudes"] for e in et["etapes"])
+        self.assertNotIn("?", textes)
+        self.assertIn("limite non déterminée automatiquement", textes)
+
+
 if __name__ == "__main__":
     unittest.main()
