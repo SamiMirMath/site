@@ -160,7 +160,23 @@
     {
      "etapes": [
       {
-       "html": "\\(\\displaystyle\\lim f(x) = 0\\).",
+       "html": "Or \\(e^{t} \\to 0^{+}\\) quand \\(t \\to -\\infty\\) : \\(e^{x} \\to 0^{+}\\).",
+       "type": "texte"
+      },
+      {
+       "html": "\\(e^{x} \\to 0^{+}\\) et \\(1\\) est une constante : la différence tend vers \\(-1\\).",
+       "type": "texte"
+      },
+      {
+       "html": "\\(e^{x} - 1 \\to -1\\) et \\(x \\to -\\infty\\) : le quotient tend vers \\(0^{+}\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = 0\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Asymptote horizontale d'équation \\(y = 0\\).",
        "type": "texte"
       }
      ],
@@ -169,7 +185,12 @@
     {
      "etapes": [
       {
-       "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\).",
+       "detail": "Abandon : forme indéterminée ∞/∞ non levée en \\frac{e^{x} - 1}{x}",
+       "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "La limite est infinie : pas d'asymptote horizontale.",
        "type": "texte"
       }
      ],
@@ -182,7 +203,21 @@
        "type": "texte"
       },
       {
-       "html": "À gauche, \\(\\displaystyle\\lim f(x) = 1\\) ; à droite, \\(\\displaystyle\\lim f(x) = 1\\).",
+       "html": "Limite à gauche (\\(x \\to 0^{-}\\)) :",
+       "type": "texte"
+      },
+      {
+       "detail": "Abandon : forme indéterminée 0/0 non levée en \\frac{e^{x} - 1}{x}",
+       "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to 0^{-}} f(x) = 1\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Limite à droite (\\(x \\to 0^{+}\\)) :",
+       "type": "texte"
+      },
+      {
+       "detail": "Abandon : forme indéterminée 0/0 non levée en \\frac{e^{x} - 1}{x}",
+       "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = 1\\).",
        "type": "texte"
       },
       {
@@ -603,7 +638,12 @@
        "type": "texte"
       },
       {
-       "html": "\\(\\displaystyle\\lim f(x) = 0\\) : f n'est pas définie en \\(x=0\\), mais sa limite y est finie (\\(=0\\)) : pas d'asymptote verticale, trou dans le graphique en \\((0\\,;\\,0)\\).",
+       "detail": "Abandon : forme indéterminée 0 · ∞ non levée en x\\,\\ln(x)",
+       "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = 0\\).",
+       "type": "texte"
+      },
+      {
+       "html": "f n'est pas définie en \\(x=0\\), mais sa limite y est finie (\\(=0\\)) : pas d'asymptote verticale, trou dans le graphique en \\((0\\,;\\,0)\\).",
        "type": "texte"
       }
      ],
@@ -612,7 +652,23 @@
     {
      "etapes": [
       {
-       "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\).",
+       "html": "Or \\(\\ln t \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(\\ln(x) \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "\\(x \\to +\\infty\\) et \\(\\ln(x) \\to +\\infty\\) : le produit tend vers \\(+\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Comme \\(x\\,\\ln(x) \\to +\\infty\\) et \\(3 > 0\\), on a \\(3x\\,\\ln(x) \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "La limite est infinie : pas d'asymptote horizontale.",
        "type": "texte"
       }
      ],
@@ -789,7 +845,19 @@
     {
      "etapes": [
       {
-       "html": "\\(\\displaystyle\\lim f(x) = 1\\).",
+       "html": "\\(1\\) est une constante et \\(x \\to -\\infty\\) : le quotient tend vers \\(0^{-}\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Par continuité de \\(e^{t}\\) en \\(0\\), \\(e^{\\frac{1}{x}} \\to 1\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = 1\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Asymptote horizontale d'équation \\(y = 1\\).",
        "type": "texte"
       }
      ],
@@ -798,7 +866,19 @@
     {
      "etapes": [
       {
-       "html": "\\(\\displaystyle\\lim f(x) = 1\\).",
+       "html": "\\(1\\) est une constante et \\(x \\to +\\infty\\) : le quotient tend vers \\(0^{+}\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Par continuité de \\(e^{t}\\) en \\(0\\), \\(e^{\\frac{1}{x}} \\to 1\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 1\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Asymptote horizontale d'équation \\(y = 1\\).",
        "type": "texte"
       }
      ],
@@ -811,11 +891,39 @@
        "type": "texte"
       },
       {
-       "html": "À gauche, \\(\\displaystyle\\lim f(x) = 0\\) ; à droite, \\(\\displaystyle\\lim f(x) = +\\infty\\).",
+       "html": "Limite à gauche (\\(x \\to 0^{-}\\)) :",
        "type": "texte"
       },
       {
-       "html": "Au moins une des deux limites est infinie : asymptote verticale.",
+       "html": "\\(1\\) est une constante et \\(x \\to 0^{-}\\) : \\(\\dfrac{1}{0^{-}} = -\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Or \\(e^{t} \\to 0^{+}\\) quand \\(t \\to -\\infty\\) : \\(e^{\\frac{1}{x}} \\to 0^{+}\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Donc \\(\\displaystyle\\lim_{x\\to 0^{-}} f(x) = 0\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Limite à droite (\\(x \\to 0^{+}\\)) :",
+       "type": "texte"
+      },
+      {
+       "html": "\\(1\\) est une constante et \\(x \\to 0^{+}\\) : \\(\\dfrac{1}{0^{+}} = +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Or \\(e^{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(e^{\\frac{1}{x}} \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Donc \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Au moins une des deux limites est infinie : asymptote verticale d'équation \\(x = 0\\).",
        "type": "texte"
       }
      ],
@@ -916,7 +1024,19 @@
     {
      "etapes": [
       {
-       "html": "\\(\\displaystyle\\lim f(x) = 0\\).",
+       "html": "Comme \\(x \\to -\\infty\\) et \\(2 > 0\\), on a \\(2x \\to -\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Or \\(e^{t} \\to 0^{+}\\) quand \\(t \\to -\\infty\\) : \\(e^{2x} \\to 0^{+}\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = 0\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Asymptote horizontale d'équation \\(y = 0\\).",
        "type": "texte"
       }
      ],
@@ -925,7 +1045,19 @@
     {
      "etapes": [
       {
-       "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\).",
+       "html": "Comme \\(x \\to +\\infty\\) et \\(2 > 0\\), on a \\(2x \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Or \\(e^{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(e^{2x} \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "La limite est infinie : pas d'asymptote horizontale.",
        "type": "texte"
       }
      ],
@@ -1128,7 +1260,19 @@
        "type": "texte"
       },
       {
-       "html": "\\(\\displaystyle\\lim f(x) = -\\infty\\) : asymptote verticale.",
+       "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\) : \\(\\ln(x) \\to -\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "\\(\\ln(x) \\to -\\infty\\) et \\(x \\to 0^{+}\\) : le quotient tend vers \\(-\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Donc \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = -\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Asymptote verticale d'équation \\(x = 0\\).",
        "type": "texte"
       }
      ],
@@ -1137,7 +1281,12 @@
     {
      "etapes": [
       {
-       "html": "\\(\\displaystyle\\lim f(x) = 0\\).",
+       "detail": "Abandon : forme indéterminée ∞/∞ non levée en \\frac{\\ln(x)}{x}",
+       "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 0\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Asymptote horizontale d'équation \\(y = 0\\).",
        "type": "texte"
       }
      ],
@@ -1396,7 +1545,23 @@
     {
      "etapes": [
       {
-       "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\).",
+       "html": "Or \\(t^{2} \\to +\\infty\\) quand \\(t \\to -\\infty\\) : \\(x^{2} \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "\\(x^{2} \\to +\\infty\\) et \\(4\\) est une constante : la différence tend vers \\(+\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(\\sqrt{x^{2} - 4} \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "La limite est infinie : pas d'asymptote horizontale.",
        "type": "texte"
       },
       {
@@ -1409,7 +1574,23 @@
     {
      "etapes": [
       {
-       "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\).",
+       "html": "Or \\(t^{2} \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(x^{2} \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "\\(x^{2} \\to +\\infty\\) et \\(4\\) est une constante : la différence tend vers \\(+\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(\\sqrt{x^{2} - 4} \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "La limite est infinie : pas d'asymptote horizontale.",
        "type": "texte"
       },
       {
@@ -1564,7 +1745,12 @@
        "type": "texte"
       },
       {
-       "html": "\\(\\displaystyle\\lim f(x) = 0\\) : f n'est pas définie en \\(x=0\\), mais sa limite y est finie (\\(=0\\)) : pas d'asymptote verticale, trou dans le graphique en \\((0\\,;\\,0)\\).",
+       "detail": "Abandon : forme indéterminée 0 · ∞ non levée en x\\,\\ln(x)",
+       "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = 0\\).",
+       "type": "texte"
+      },
+      {
+       "html": "f n'est pas définie en \\(x=0\\), mais sa limite y est finie (\\(=0\\)) : pas d'asymptote verticale, trou dans le graphique en \\((0\\,;\\,0)\\).",
        "type": "texte"
       }
      ],
@@ -1573,7 +1759,19 @@
     {
      "etapes": [
       {
-       "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\).",
+       "html": "Or \\(\\ln t \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(\\ln(x) \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "\\(x \\to +\\infty\\) et \\(\\ln(x) \\to +\\infty\\) : le produit tend vers \\(+\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "La limite est infinie : pas d'asymptote horizontale.",
        "type": "texte"
       }
      ],
@@ -1951,7 +2149,12 @@
     {
      "etapes": [
       {
-       "html": "\\(\\displaystyle\\lim f(x) = -1\\).",
+       "detail": "Abandon : forme indéterminée ∞/∞ non levée en \\frac{x}{\\sqrt{x^{2}}}",
+       "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = -1\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Asymptote horizontale d'équation \\(y = -1\\).",
        "type": "texte"
       }
      ],
@@ -1960,7 +2163,12 @@
     {
      "etapes": [
       {
-       "html": "\\(\\displaystyle\\lim f(x) = 1\\).",
+       "detail": "Abandon : forme indéterminée ∞/∞ non levée en \\frac{x}{\\sqrt{x^{2}}}",
+       "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 1\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Asymptote horizontale d'équation \\(y = 1\\).",
        "type": "texte"
       }
      ],
@@ -1973,7 +2181,21 @@
        "type": "texte"
       },
       {
-       "html": "À gauche, \\(\\displaystyle\\lim f(x) = -1\\) ; à droite, \\(\\displaystyle\\lim f(x) = 1\\).",
+       "html": "Limite à gauche (\\(x \\to 0^{-}\\)) :",
+       "type": "texte"
+      },
+      {
+       "detail": "Abandon : forme indéterminée 0/0 non levée en \\frac{x}{\\sqrt{x^{2}}}",
+       "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to 0^{-}} f(x) = -1\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Limite à droite (\\(x \\to 0^{+}\\)) :",
+       "type": "texte"
+      },
+      {
+       "detail": "Abandon : forme indéterminée 0/0 non levée en \\frac{x}{\\sqrt{x^{2}}}",
+       "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = 1\\).",
        "type": "texte"
       },
       {
@@ -2094,7 +2316,12 @@
     {
      "etapes": [
       {
-       "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\).",
+       "detail": "Abandon : base négative",
+       "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "La limite est infinie : pas d'asymptote horizontale.",
        "type": "texte"
       }
      ],
@@ -2103,7 +2330,15 @@
     {
      "etapes": [
       {
-       "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\).",
+       "html": "Or \\(t^{\\frac{2}{3}} \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(\\sqrt[3]{x^{2}} \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "La limite est infinie : pas d'asymptote horizontale.",
        "type": "texte"
       }
      ],
@@ -2321,11 +2556,27 @@
     {
      "etapes": [
       {
-       "html": "Produit d'une puissance de \\(x\\) et d'une exponentielle : par croissance comparée, l'exponentielle « domine » — la limite du produit est déterminée par elle.",
+       "html": "Or \\(t^{2} \\to +\\infty\\) quand \\(t \\to -\\infty\\) : \\(x^{2} \\to +\\infty\\).",
        "type": "texte"
       },
       {
-       "html": "\\(\\displaystyle\\lim f(x) = +\\infty\\).",
+       "html": "\\(x \\to -\\infty\\), donc \\(-x \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Or \\(e^{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(e^{-x} \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "\\(x^{2} \\to +\\infty\\) et \\(e^{-x} \\to +\\infty\\) : le produit tend vers \\(+\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "La limite est infinie : pas d'asymptote horizontale.",
        "type": "texte"
       }
      ],
@@ -2334,11 +2585,12 @@
     {
      "etapes": [
       {
-       "html": "Produit d'une puissance de \\(x\\) et d'une exponentielle : par croissance comparée, l'exponentielle « domine » — la limite du produit est déterminée par elle.",
+       "detail": "Abandon : forme indéterminée 0 · ∞ non levée en x^{2}\\,e^{-x}",
+       "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 0\\).",
        "type": "texte"
       },
       {
-       "html": "\\(\\displaystyle\\lim f(x) = 0\\).",
+       "html": "Asymptote horizontale d'équation \\(y = 0\\).",
        "type": "texte"
       }
      ],

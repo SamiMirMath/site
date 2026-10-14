@@ -15,9 +15,10 @@ Méthode (décidée avec l'enseignant) :
     point (forme 0/0), f n'y est pas définie mais sa limite est finie : un trou, pas une asymptote —
     le calcul formel (SymPy) tranche cette limite indéterminée.
   - Cas transcendants (ln, exp, racine mélangés à x) : le calcul formel donne la
-    valeur ; la narration reste simple (substitution directe), avec mention
-    explicite d'une croissance comparée quand un facteur polynomial et un facteur
-    exponentiel sont en compétition.
+    valeur de référence ; la rédaction (Q9) applique les règles du cours sur l'arbre
+    (opérations et composition de limites), nomme la forme indéterminée, recoupe chaque
+    limite écrite avec le calcul formel, et se replie sur le résultat seul, avec une
+    phrase honnête, dès qu'une étape ne peut pas être justifiée.
 """
 import json
 from fractions import Fraction as F
@@ -25,7 +26,7 @@ from fractions import Fraction as F
 from ensemble_def import (
     Nb, X, E, Neg, Op, Fn,
     lire, tex, prec, valeur_constante, Num, Iv, REELS, fusion, inter, ens_tex,
-    contient, proche, evaluer, aplatir, qtex, ptex, pn, deg, peval, pdivlin,
+    contient, proche, evaluer, sans_x, qtex, ptex, pn, deg, peval, pdivlin,
     decomposer, r_norm, json_strict, ajouter_saisie,
     _sympy, en_sympy_reel, arbre_depuis_sympy, num_sympy, _SP,
     txt, NonPrisEnCharge, ErreurSaisie, _analyser, apercu_json,
@@ -376,21 +377,429 @@ def _etude_rationnelle_pole(f, N, D, point, cote, items):
 
 
 # =====================================================================
-# Cas transcendant (ln, exp, racine mélangés à x) : calcul formel pour la valeur
+# Rédaction détaillée (Q9, étape 0) : algèbre des limites sur l'arbre.
+#
+# La valeur de chaque limite reste celle du calcul de référence (SymPy pour une
+# fonction non rationnelle). La rédaction recalcule chaque sous-expression avec les
+# règles du cours (somme, produit, quotient, composée avec e^u, ln u, √u, u^n), nomme
+# la forme indéterminée quand il y en a une, et recoupe chaque limite écrite avec
+# SymPy. Au moindre doute (forme indéterminée non levée, signe inconnu, écart avec
+# la référence, exception), elle abandonne TOUTES ses étapes : la page écrit alors la
+# phrase de repli et le résultat de référence, jamais une étape fausse.
 # =====================================================================
-def _croissance_comparee(f):
-    """Détecte un produit « polynôme × exponentielle » (ou inverse) pour citer la
-    croissance comparée dans la narration ; renvoie un texte ou None."""
-    try:
-        _, facs = aplatir(f)
-    except Exception:
+class Abandon(Exception):
+    """La rédaction détaillée n'aboutit pas : on garde le résultat avec la phrase de repli."""
+
+
+class FormeIndeterminee(Exception):
+    def __init__(self, nom, noeud=None):
+        super().__init__(nom)
+        self.nom, self.noeud = nom, noeud
+
+
+PHRASE_REPLI = "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : "
+
+
+def _est_nul(v):
+    return v == 0 or v.is_zero is True
+
+
+def _signe(v):
+    """Signe d'un nombre exact non nul (SymPy) ; Abandon si SymPy ne le connaît pas."""
+    if v.is_positive:
+        return 1
+    if v.is_negative:
+        return -1
+    raise Abandon(f"signe de {v} inconnu")
+
+
+class Lim:
+    """Limite d'une expression en un point : infinie (inf = ±1) ou finie (val : nombre exact SymPy).
+    ap = signe de (expression − limite) au voisinage du point (+1 : par valeurs supérieures, −1 :
+    inférieures), 0 s'il est inconnu, None pour une constante exacte. montre : écrire ℓ⁺ / ℓ⁻ (x → a⁺)."""
+    __slots__ = ("inf", "val", "ap", "montre")
+
+    def __init__(self, inf=0, val=None, ap=0, montre=False):
+        self.inf, self.val, self.ap, self.montre = inf, val, ap, montre
+
+    @staticmethod
+    def fin(val, ap=0, montre=False):
+        return Lim(0, _sympy().sympify(val), ap, montre)
+
+    @staticmethod
+    def infini(s):
+        return Lim(1 if s > 0 else -1)
+
+    def nul(self):
+        return self.inf == 0 and _est_nul(self.val)
+
+    def tex(self):
+        if self.inf:
+            return r"+\infty" if self.inf > 0 else r"-\infty"
+        if self.nul():
+            return "0^{+}" if self.ap and self.ap > 0 else "0^{-}" if self.ap and self.ap < 0 else "0"
+        n = num_sympy(self.val)
+        if n.approx:
+            raise Abandon("valeur sans écriture exacte")
+        if self.montre and self.ap:
+            return n.tex + ("^{+}" if self.ap > 0 else "^{-}")
+        return n.tex
+
+
+def _lim_depuis_sympy(r):
+    sp = _sympy()
+    if r == sp.oo:
+        return Lim.infini(1)
+    if r == -sp.oo:
+        return Lim.infini(-1)
+    if r.has(sp.oo, -sp.oo, sp.zoo, sp.nan) or r.is_finite is not True or r.is_real is False:
+        raise Abandon(f"limite SymPy inexploitable : {r}")
+    return Lim.fin(r)
+
+
+def _meme_valeur(a, b):
+    sp = _sympy()
+    if a.inf or b.inf:
+        return a.inf == b.inf
+    return abs(sp.N(a.val - b.val, 30)) < sp.Float("1e-20")
+
+
+class Pt:
+    """Point d'étude : ±∞ ou valeur finie approchée par la droite (d = +1) ou par la gauche (d = −1)."""
+
+    def __init__(self, borne, d=0):
+        if borne["type"] == "inf":
+            self.s, self.a, self.d, self.a_tex = borne["signe"], None, 0, None
+        else:
+            self.s, self.a, self.d = 0, _sympify_point(borne["point"]), d
+            self.a_tex = borne["point"].tex
+
+    def cible(self):
+        sp = _sympy()
+        return (sp.oo if self.s > 0 else -sp.oo) if self.s else self.a
+
+    def direction(self):
+        return None if self.s else ("+" if self.d > 0 else "-")
+
+    def tex(self):
+        if self.s:
+            return r"+\infty" if self.s > 0 else r"-\infty"
+        return self.a_tex + ("^{+}" if self.d > 0 else "^{-}")
+
+    def lim_x(self):
+        if self.s:
+            return Lim.infini(self.s)
+        return Lim.fin(self.a, ap=self.d, montre=True)
+
+
+# --- règles d'opérations ------------------------------------------------------
+def _ap_somme(A, B):
+    if A.ap is None:
+        return B.ap
+    if B.ap is None:
+        return A.ap
+    return A.ap if (A.ap and A.ap == B.ap) else 0
+
+
+def _ap_signe(c, ap):
+    """Signe de c·ε quand ε est de signe ap (None : ε est exactement 0)."""
+    if ap is None:
         return None
-    a_exp = any(isinstance(h, Fn) and h.nom == "exp" for h, k in facs)
-    a_poly = any(not (isinstance(h, Fn) and h.nom == "exp") for h, k in facs)
-    if a_exp and a_poly and len(facs) > 1:
-        return (r"Produit d'une puissance de \(x\) et d'une exponentielle : par croissance comparée, "
-                r"l'exponentielle « domine » — la limite du produit est déterminée par elle.")
-    return None
+    return _signe(c) * ap if ap else 0
+
+
+def _oppose(A):
+    if A.inf:
+        return Lim.infini(-A.inf)
+    return Lim.fin(-A.val, -A.ap if A.ap else A.ap)
+
+
+def _somme(A, B):
+    if A.inf and B.inf:
+        if A.inf != B.inf:
+            raise FormeIndeterminee("∞ − ∞")
+        return Lim.infini(A.inf)
+    if A.inf or B.inf:
+        return Lim.infini(A.inf or B.inf)
+    return Lim.fin(A.val + B.val, _ap_somme(A, B))
+
+
+def _produit(A, B):
+    if A.inf and B.inf:
+        return Lim.infini(A.inf * B.inf)
+    if A.inf or B.inf:
+        inf, autre = (A, B) if A.inf else (B, A)
+        if autre.nul():
+            raise FormeIndeterminee("0 · ∞")
+        return Lim.infini(inf.inf * _signe(autre.val))
+    v = A.val * B.val
+    if A.ap is None and B.ap is None:
+        ap = None
+    elif A.ap is None or B.ap is None:
+        c, u = (A, B) if A.ap is None else (B, A)
+        ap = None if c.nul() else _ap_signe(c.val, u.ap)
+    elif A.nul() and B.nul():
+        ap = A.ap * B.ap
+    elif A.nul():
+        ap = _ap_signe(B.val, A.ap)
+    elif B.nul():
+        ap = _ap_signe(A.val, B.ap)
+    else:
+        t1, t2 = _ap_signe(A.val, B.ap), _ap_signe(B.val, A.ap)
+        ap = t1 if (t1 and t1 == t2) else 0
+    return Lim.fin(v, ap)
+
+
+def _quotient(A, B):
+    if A.inf and B.inf:
+        raise FormeIndeterminee("∞/∞")
+    if A.inf:
+        if B.nul():
+            if not B.ap:
+                raise Abandon("signe du dénominateur inconnu")
+            return Lim.infini(A.inf * B.ap)
+        return Lim.infini(A.inf * _signe(B.val))
+    if B.inf:
+        return Lim.fin(0, 0 if A.nul() else _signe(A.val) * B.inf)
+    if B.nul():
+        if A.nul():
+            raise FormeIndeterminee("0/0")
+        if not B.ap:
+            raise Abandon("signe du dénominateur inconnu")
+        return Lim.infini(_signe(A.val) * B.ap)
+    v = A.val / B.val
+    if B.ap is None:
+        ap = None if A.ap is None else _ap_signe(B.val, A.ap)
+    elif A.ap is None:
+        ap = None if A.nul() else (-_ap_signe(A.val, B.ap) if B.ap else 0)
+    elif A.nul():
+        ap = _ap_signe(B.val, A.ap)
+    else:
+        t1 = _ap_signe(B.val, A.ap)
+        t2 = -_ap_signe(A.val, B.ap) if B.ap else 0
+        ap = t1 if (t1 and t1 == t2) else 0
+    return Lim.fin(v, ap)
+
+
+def _puissance_entiere(U, n):
+    pair = (n % 2 == 0)
+    if U.inf:
+        s = 1 if (U.inf > 0 or pair) else -1
+        return Lim.infini(s) if n > 0 else Lim.fin(0, s)
+    if U.nul():
+        if n > 0:
+            return Lim.fin(0, 1 if pair else U.ap)
+        if pair:
+            return Lim.infini(1)
+        if not U.ap:
+            raise Abandon("signe de la base inconnu")
+        return Lim.infini(U.ap)
+    ap = None if U.ap is None else (_signe(n * U.val ** (n - 1)) * U.ap if U.ap else 0)
+    return Lim.fin(U.val ** n, ap)
+
+
+def _puissance_reelle(U, alpha):
+    """u^α, α rationnel non entier (ou 1/2) : seulement pour une base positive."""
+    sp = _sympy()
+    if U.inf:
+        if U.inf < 0:
+            raise Abandon("base négative")
+        return Lim.infini(1) if alpha > 0 else Lim.fin(0, 1)
+    if U.nul():
+        if U.ap != 1:
+            raise Abandon("base nulle de signe inconnu")
+        return Lim.fin(0, 1) if alpha > 0 else Lim.infini(1)
+    if _signe(U.val) < 0:
+        raise Abandon("base négative")
+    ap = None if U.ap is None else (U.ap * (1 if alpha > 0 else -1) if U.ap else 0)
+    return Lim.fin(U.val ** sp.Rational(alpha.numerator, alpha.denominator), ap)
+
+
+def _exp_lim(U):
+    sp = _sympy()
+    if U.inf:
+        return Lim.infini(1) if U.inf > 0 else Lim.fin(0, 1)
+    return Lim.fin(sp.exp(U.val), U.ap)
+
+
+def _ln_lim(U):
+    sp = _sympy()
+    if U.inf:
+        if U.inf < 0:
+            raise Abandon("ln d'une quantité négative")
+        return Lim.infini(1)
+    if U.nul():
+        if U.ap != 1:
+            raise Abandon("ln de 0 de signe inconnu")
+        return Lim.infini(-1)
+    if _signe(U.val) < 0:
+        raise Abandon("ln d'une quantité négative")
+    return Lim.fin(sp.log(U.val), U.ap)
+
+
+class _Contexte:
+    """État d'une rédaction : point d'étude, phrases écrites, limites de référence (SymPy) déjà vues."""
+
+    def __init__(self, pt, f, ref_f):
+        self.pt, self.phrases, self.refs, self.ap_vus, self.dites = pt, [], {}, set(), set()
+        if ref_f is not None:
+            self.refs[f.key()] = ref_f
+
+    def ref(self, n):
+        """Limite de n selon SymPy (et signe de l'approche de 0), pour recouper la rédaction."""
+        cle = n.key()
+        L = self.refs.get(cle)
+        if L is None:
+            r = _limite_sympy(n, self.pt.cible(), self.pt.direction())
+            if r is None:
+                raise Abandon("SymPy ne conclut pas pour une sous-expression")
+            L = self.refs[cle] = _lim_depuis_sympy(r)
+        if L.nul() and cle not in self.ap_vus:
+            self.ap_vus.add(cle)
+            inv = _limite_sympy(Op("/", Nb(1), n), self.pt.cible(), self.pt.direction())
+            sp = _sympy()
+            L.ap = 1 if inv == sp.oo else -1 if inv == -sp.oo else 0
+        return L
+
+    def verifier(self, n, L):
+        """La limite écrite pour n doit être celle de SymPy (signe d'approche de 0 compris)."""
+        R = self.ref(n)
+        if not _meme_valeur(L, R):
+            raise Abandon(f"limite écrite {L.tex()} ≠ référence {R.tex()} pour {tex(n)}")
+        if L.nul() and L.ap and L.ap != R.ap:
+            raise Abandon(f"signe d'approche de 0 non confirmé pour {tex(n)}")
+
+    def phrase(self, n, s):
+        """Une phrase par sous-expression : si n a déjà été commentée, on ne la répète pas."""
+        cle = n.key()
+        if cle not in self.dites:
+            self.dites.add(cle)
+            self.phrases.append(s)
+
+
+def _const_sympy(n):
+    return en_sympy_reel(n)
+
+
+def _texl(t):
+    return rf"\({t}\)"
+
+
+def _phrase_operation(n, A, B, LA, LB, L):
+    """Phrase d'une somme, différence, produit ou quotient dont on connaît les limites des deux termes."""
+    ta, tb = tex(n.a), tex(n.b)
+    ca, cb = sans_x(n.a), sans_x(n.b)
+    if n.op == "*" and (ca or cb):
+        c, u, Lu = (n.a, n.b, LB) if ca else (n.b, n.a, LA)
+        if Lu.inf:
+            signe = ">" if _signe(_const_sympy(c)) > 0 else "<"
+            return (rf"Comme \({tex(u)} \to {Lu.tex()}\) et \({tex(c)} {signe} 0\), "
+                    rf"on a \({tex(n)} \to {L.tex()}\).")
+    if ca and not cb:
+        debut = rf"\({ta}\) est une constante et \({tb} \to {LB.tex()}\)"
+    elif cb and not ca:
+        debut = rf"\({ta} \to {LA.tex()}\) et \({tb}\) est une constante"
+    else:
+        debut = rf"\({ta} \to {LA.tex()}\) et \({tb} \to {LB.tex()}\)"
+    if n.op == "/" and LB.nul() and not LA.inf:
+        fin = rf"\(\dfrac{{{LA.tex()}}}{{{LB.tex()}}} = {L.tex()}\)"
+    else:
+        mot = {"+": "la somme", "-": "la différence", "*": "le produit", "/": "le quotient"}[n.op]
+        fin = rf"{mot} tend vers \({L.tex()}\)"
+    return debut + " : " + fin + "."
+
+
+def _phrase_fonction(n, g_tex, LU, L):
+    if not LU.inf and not L.inf and not L.nul():
+        return (rf"Par continuité de \({g_tex}\) en \({num_sympy(LU.val).tex}\), "
+                rf"\({tex(n)} \to {L.tex()}\).")
+    return rf"Or \({g_tex} \to {L.tex()}\) quand \(t \to {LU.tex()}\) : \({tex(n)} \to {L.tex()}\)."
+
+
+def _lever(n, ctx, fi):
+    """Lève une forme indéterminée par une méthode du cours (mise en évidence, conjuguée, références…).
+    Aucune n'est encore rédigée : Abandon, donc phrase de repli."""
+    raise Abandon(f"forme indéterminée {fi.nom} non levée en {tex(n)}")
+
+
+def _noeud(n, ctx):
+    """Limite de n (arbre) au point d'étude, avec une phrase par opération ; Abandon si l'on ne peut
+    pas la justifier."""
+    sp = _sympy()
+    if sans_x(n):
+        return Lim.fin(_const_sympy(n), ap=None)
+    if isinstance(n, X):
+        return ctx.pt.lim_x()
+    try:
+        if isinstance(n, Neg):
+            LU = _noeud(n.a, ctx)
+            L = _oppose(LU)
+            ctx.verifier(n, L)
+            ctx.phrase(n, rf"\({tex(n.a)} \to {LU.tex()}\), donc \({tex(n)} \to {L.tex()}\).")
+            return L
+        if isinstance(n, Op) and n.op in "+-*/":
+            A, B = _noeud(n.a, ctx), _noeud(n.b, ctx)
+            L = {"+": lambda: _somme(A, B), "-": lambda: _somme(A, _oppose(B)),
+                 "*": lambda: _produit(A, B), "/": lambda: _quotient(A, B)}[n.op]()
+            ctx.verifier(n, L)
+            ctx.phrase(n, _phrase_operation(n, n.a, n.b, A, B, L))
+            return L
+        if isinstance(n, Op) and n.op == "^":
+            alpha = valeur_constante(n.b)
+            if alpha is None:
+                raise Abandon("exposant non rationnel")
+            U = _noeud(n.a, ctx)
+            if alpha.denominator == 1:
+                if alpha == 0 or abs(alpha) > 64 or alpha == 1:
+                    raise Abandon("exposant 0, 1 ou trop grand")
+                L = _puissance_entiere(U, int(alpha))
+            else:
+                L = _puissance_reelle(U, alpha)
+            ctx.verifier(n, L)
+            ctx.phrase(n, _phrase_fonction(n, rf"t^{{{qtex(alpha)}}}", U, L))
+            return L
+        if isinstance(n, Fn):
+            U = _noeud(n.a, ctx)
+            if n.nom == "exp":
+                L, g = _exp_lim(U), r"e^{t}"
+            elif n.nom == "ln":
+                L, g = _ln_lim(U), r"\ln t"
+            else:
+                L, g = _puissance_reelle(U, F(1, 2)), r"\sqrt{t}"
+            ctx.verifier(n, L)
+            ctx.phrase(n, _phrase_fonction(n, g, U, L))
+            return L
+    except FormeIndeterminee as fi:
+        fi.noeud = n
+        return _lever(n, ctx, fi)
+    raise Abandon(f"sous-expression non prise en charge : {tex(n)}")
+
+
+def _rediger(f, pt, ref):
+    """(phrases, None) si la limite de f en pt est rédigée et coïncide avec ref (valeur SymPy), sinon
+    (None, raison technique)."""
+    try:
+        R = _lim_depuis_sympy(ref)
+        ctx = _Contexte(pt, f, R)
+        L = _noeud(f, ctx)
+        if not _meme_valeur(L, R):
+            raise Abandon(f"valeur rédigée {L.tex()} ≠ référence {R.tex()}")
+        return ctx.phrases, None
+    except Exception as e:      # rien ne doit faire échouer l'étude : on retombe sur le résultat seul
+        return None, f"{type(e).__name__} : {e}"
+
+
+def _narrer_limite(f, pt, ref, vtex, items):
+    """Étapes de lim f en pt : rédigées si possible, sinon phrase de repli et résultat de référence."""
+    lim = rf"\displaystyle\lim_{{x\to {pt.tex()}}} f(x) = {vtex}"
+    phrases, detail = _rediger(f, pt, ref)
+    if phrases is None:
+        item = txt(PHRASE_REPLI + rf"\({lim}\).")
+        item["detail"] = detail
+        items.append(item)
+    else:
+        items.extend(txt(p) for p in phrases)
+        items.append(txt(rf"Donc \({lim}\)."))
 
 
 def _equation_affine(a_tex, b_tex, var="x"):
@@ -432,40 +841,46 @@ def _oblique_generale(f, signe, items):
 
 
 def _etude_transcendante(f, borne, items):
-    sp = _sympy()
     if borne["type"] == "inf":
-        cible = sp.oo if borne["signe"] > 0 else -sp.oo
-        direction, cote = None, None
+        cote = None
     else:
         point, cote = borne["point"], borne["cote"]
-        cible = _sympify_point(point)
-        direction = {"gauche": "-", "droite": "+"}.get(cote)
         flèche = "-" if cote == "gauche" else "+" if cote == "droite" else None
         suffixe = f"^{{{flèche}}}" if flèche else ""
         items.append(txt(rf"\(x={point.tex}\) est une valeur interdite : on étudie la limite de \(f\) "
                          rf"quand \(x \to {point.tex}{suffixe}\)."))
-    note = _croissance_comparee(f)
-    if note:
-        items.append(txt(note))
     if cote != "deux":
-        val = _limite_sympy(f, cible, direction)
+        pt = Pt(borne, {"gauche": -1, "droite": 1}.get(cote, 0))
+        val = _limite_sympy(f, pt.cible(), pt.direction())
         vtex, inf, _, vval = _valeur_tex(val)
         if vtex == "?":
             items.append(txt("La limite n'a pas pu être déterminée automatiquement : on ne conclut pas sur une éventuelle asymptote."))
             return vtex, False, None, None
-        if borne["type"] != "inf" and inf:
-            fin = " : asymptote verticale."
-        elif borne["type"] != "inf":
-            fin = " : " + _phrase_trou(point.tex, vtex)
+        _narrer_limite(f, pt, val, vtex, items)
+        extra = None
+        if borne["type"] == "inf":
+            if inf:
+                items.append(txt("La limite est infinie : pas d'asymptote horizontale."))
+                extra = _oblique_generale(f, borne["signe"], items)
+            else:
+                items.append(txt(rf"Asymptote horizontale d'équation \(y = {vtex}\)."))
+        elif inf:
+            items.append(txt(rf"Asymptote verticale d'équation \(x = {point.tex}\)."))
         else:
-            fin = "."
-        items.append(txt(rf"\(\displaystyle\lim f(x) = {vtex}\)" + fin))
-        extra = _oblique_generale(f, borne["signe"], items) if (borne["type"] == "inf" and inf) else None
+            items.append(txt(_phrase_trou(point.tex, vtex)))
         return vtex, inf, extra, vval
-    vg, _, _, vg_val = _valeur_tex(_limite_sympy(f, cible, "-"))
-    vd, _, _, vd_val = _valeur_tex(_limite_sympy(f, cible, "+"))
-    items.append(txt(rf"À gauche, \(\displaystyle\lim f(x) = {_affichable(vg)}\) ; à droite, "
-                     rf"\(\displaystyle\lim f(x) = {_affichable(vd)}\)."))
+    cotes = []
+    for cle, d in (("gauche", -1), ("droite", 1)):
+        pt = Pt(borne, d)
+        val = _limite_sympy(f, pt.cible(), pt.direction())
+        vt, _, _, vv = _valeur_tex(val)
+        items.append(txt(rf"Limite à {cle} (\(x \to {pt.tex()}\)) :"))
+        if vt == "?":
+            items.append(txt(rf"\(\displaystyle\lim_{{x\to {pt.tex()}}} f(x) = {NON_DETERMINEE_TEX}\)."))
+        else:
+            _narrer_limite(f, pt, val, vt, items)
+        cotes.append((vt, vv))
+    (vg, vg_val), (vd, vd_val) = cotes
     return (vg, vd), False, None, (vg_val, vd_val)
 
 
@@ -475,7 +890,7 @@ def _bilan_deux_cotes(point, cote_tex, val, vval, items):
     (vg, vd), (vg_val, vd_val) = val, vval
     base = {"point_tex": point.tex, "point_val": point.val, "ou": cote_tex}
     if r"\infty" in vg or r"\infty" in vd:
-        items.append(txt("Au moins une des deux limites est infinie : asymptote verticale."))
+        items.append(txt(rf"Au moins une des deux limites est infinie : asymptote verticale d'équation \(x = {point.tex}\)."))
         return dict(base, genre="verticale", gauche_tex=_affichable(vg), droite_tex=_affichable(vd),
                     gauche_val=vg_val, droite_val=vd_val)
     if "?" in (vg, vd):

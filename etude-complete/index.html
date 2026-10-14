@@ -301,7 +301,7 @@ function carteSigneVariations(dv){
 function carteLimiteEtude(et){
   const d=document.createElement("div"); d.className="card cond";
   let h=`<h3>${K(et.ou)}<span class="badge">limite</span></h3>`;
-  et.etapes.forEach(it=>{ h+= it.type==="tableau"?tableau(it):`<div class="etape">${it.html}</div>`; });
+  et.etapes.forEach(it=>{ h+= it.type==="tableau"?tableau(it):`<div class="etape">${it.html}</div>`; if(it.detail) console.error(it.detail); });
   d.innerHTML=h; math(d); return d;
 }
 function ligneAsymptote(a){

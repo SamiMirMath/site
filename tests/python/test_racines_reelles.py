@@ -54,7 +54,9 @@ class TestPontReel(unittest.TestCase):
 class TestLimitesReelles(unittest.TestCase):
     def finies(self, entree):
         r = la.etudier(entree)
-        return [(e["ou"], e["etapes"][-1]["html"]) for e in r["etudes"]], r["asymptotes"]
+        # la phrase qui donne la limite (la dernière étape est la conclusion sur l'asymptote)
+        return [(e["ou"], next(t["html"] for t in reversed(e["etapes"]) if r"\lim" in t["html"]))
+                for e in r["etudes"]], r["asymptotes"]
 
     def test_x_puissance_2_sur_3(self):
         etudes, asym = self.finies("x^(2/3)")

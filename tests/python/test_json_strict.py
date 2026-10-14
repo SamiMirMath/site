@@ -45,8 +45,8 @@ class TestJsonStrict(unittest.TestCase):
         r = ec.etudier("x^(2/3)")
         self.assertEqual(list(non_finis(r)), [])
         self.assertEqual(r["limites"]["asymptotes"], [])        # f → +∞ des deux côtés
-        textes = [e["html"] for et in r["limites"]["etudes"] for e in et["etapes"]]
-        self.assertEqual(textes, [r"\(\displaystyle\lim f(x) = +\infty\)."] * 2)
+        for et in r["limites"]["etudes"]:                       # chaque borne donne la limite +∞
+            self.assertTrue(any(r"= +\infty\)" in e["html"] and r"\lim" in e["html"] for e in et["etapes"]), et)
         strict(ec.etudier_json("x^(2/3)"))
 
     def test_garde_fou_remplace_les_infinis_par_null(self):
