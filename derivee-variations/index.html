@@ -243,6 +243,7 @@ function tableau(t){
     if(s==="||"||s==="asym") return '<td class="vi"></td>';
     if(s==="x") return '<td class="hors">×</td>';
     if(s==="\\nearrow"||s==="\\searrow") return `<td>${K(s)}</td>`;
+    if(s.startsWith("val:")) return `<td class="pt">${K(s.slice(4))}</td>`;
     if(s==="extremum") return '<td class="pt">•</td>';
     return `<td>${s}</td>`;
   };

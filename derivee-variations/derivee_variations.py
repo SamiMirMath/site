@@ -28,7 +28,7 @@ from fractions import Fraction as F
 from ensemble_def import (
     Nb, X, E, Neg, Op, Fn,
     lire, tex, par, prec, valeur_constante, Num, Iv, REELS, inter, ens_tex, points, contient, proche,
-    preimage, resoudre_general, domaine, evaluer, aplatir, qtex,
+    preimage, resoudre_general, domaine, fusion, evaluer, aplatir, qtex,
     _sympy, en_sympy, arbre_depuis_sympy, num_sympy, _SP,
     txt, NonPrisEnCharge, ErreurSaisie, _analyser, apercu_json,
 )
@@ -383,11 +383,19 @@ def etudier(entree):
 
     # 1) On cherche d'abord les zéros de f' (candidats extrema) : narration explicite,
     # avant de dresser le tableau — c'est la méthode demandée.
-    items_signe = [txt("On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.")]
+    items_signe = []
+    if ens_tex(D) != ens_tex(ED):
+        res["ed_deriv_tex"] = ens_tex(D)
+        items_signe.append(txt(
+            rf"ED de f' : \(D_{{f'}} = {ens_tex(D)}\), différent de l'ED de f, \(D_f = {ens_tex(ED)}\). "
+            "On étudie le signe de f' sur cet ensemble ; là où f est définie mais pas f', "
+            "on regarde directement le signe de part et d'autre."))
+    items_signe.append(txt("On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0."))
+    n_intro = len(items_signe)
     try:
         Z = preimage(fprime, points([Num.rat(0)]), items_signe)
     except NonPrisEnCharge:
-        items_signe = items_signe[:1]
+        items_signe = items_signe[:n_intro]
         try:
             Z = resoudre_general(fprime, "=", items_signe)
         except Exception as e:
@@ -472,9 +480,31 @@ def etudier(entree):
     res["signe_etapes"] = items_signe
     res["table_signe"] = {"var": "x", "crit": [p.tex for p in crit], "rows": lignes}
 
-    # 4) Variations : une flèche par intervalle, un extremum à chaque point critique où
-    # le signe de f' change effectivement (sinon, asymptote/valeur interdite, ou zéro
-    # sans changement de signe — pas d'extremum).
+    # 4) Variations : une flèche par intervalle ; en chaque point critique de l'ED de f :
+    #  - extremum (i) : point intérieur de l'ED où f' change de signe (même si f' n'y est pas définie) ;
+    #  - extremum (ii) : borne fermée de l'ED, nature donnée par le sens de variation de
+    #    l'intervalle adjacent (Q3, 14.10.2026) ;
+    #  - jamais sur un intervalle où f est constante ; jamais hors de l'ED.
+    # Là où f est définie mais pas f' (ou f constante), la ligne f(x) porte la valeur f(a), sans barre.
+    ed_ivs = fusion(ED)
+
+    def _bornes_fermees(pt):
+        gauche = any(iv.lo is not None and iv.lf and proche(iv.lo.val, pt.val) for iv in ed_ivs)
+        droite = any(iv.hi is not None and iv.hf and proche(iv.hi.val, pt.val) for iv in ed_ivs)
+        return gauche, droite
+
+    memo = {}
+
+    def _valeur_en(pt):
+        if pt.val not in memo:
+            valeur = None if pt.approx else _valeur_exacte(f, pt)
+            if valeur is None:
+                v = _valeur_num(f, pt.val)
+                memo[pt.val] = (v, Num.approche(v).tex if v is not None else "?")
+            else:
+                memo[pt.val] = (valeur.val, valeur.tex)
+        return memo[pt.val]
+
     fleche_cells, extrema = [], []
     for i in range(k + 1):
         s = combinee[2 * i]
@@ -482,27 +512,29 @@ def etudier(entree):
         if i >= k:
             continue
         p = crit[i]
-        if not contient(D, p.val):
+        if not contient(ED, p.val):
             fleche_cells.append("asym")
             continue
         s_droite = combinee[2 * i + 2]
-        if s in ("+", "-") and s_droite in ("+", "-") and s != s_droite:
-            # "local" : un changement de signe de f' donne un extremum local — les
-            # bords du domaine (s'ils sont dans l'ED) sont à comparer séparément pour
-            # un extremum global sur un compact.
-            genre = "maximum local" if s == "+" else "minimum local"
-            valeur = None if p.approx else _valeur_exacte(f, p)
-            if valeur is None:
-                v = _valeur_num(f, p.val)
-                valeur_tex = Num.approche(v).tex if v is not None else "?"
+        gauche, droite = _bornes_fermees(p)
+        genre = None
+        if gauche != droite:   # borne fermée de l'ED : intervalle adjacent à l'intérieur de l'ED
+            if gauche:
+                genre = {"+": "minimum local", "-": "maximum local"}.get(s_droite)
             else:
-                v = valeur.val
-                valeur_tex = valeur.tex
+                genre = {"+": "maximum local", "-": "minimum local"}.get(s)
+        elif not gauche and s in ("+", "-") and s_droite in ("+", "-") and s != s_droite:
+            # "local" : un changement de signe de f' donne un extremum local
+            genre = "maximum local" if s == "+" else "minimum local"
+        if genre is not None:
+            v, valeur_tex = _valeur_en(p)
             extrema.append({"genre": genre, "x_tex": p.tex, "f_tex": valeur_tex,
                             "x_val": p.val, "f_val": v})
-            fleche_cells.append("extremum")
+        if not contient(D, p.val):
+            v, valeur_tex = _valeur_en(p)
+            fleche_cells.append("val:" + valeur_tex)
         else:
-            fleche_cells.append("")
+            fleche_cells.append("extremum" if genre is not None else "")
 
     lignes.append({"label": "f(x)", "cells": fleche_cells, "variation": True})
     res["extrema"] = extrema

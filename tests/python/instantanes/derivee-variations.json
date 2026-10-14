@@ -1319,11 +1319,24 @@
   "deriv_resolu": true,
   "deriv_tex": "\\frac{2x}{2\\sqrt{x^{2}}}",
   "domaine_etude_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
+  "ed_deriv_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
   "ed_tex": "\\mathbb{R}",
-  "extrema": [],
+  "extrema": [
+   {
+    "f_tex": "0",
+    "f_val": 0.0,
+    "genre": "minimum local",
+    "x_tex": "0",
+    "x_val": 0.0
+   }
+  ],
   "f_tex": "\\sqrt{x^{2}}",
   "ok": true,
   "signe_etapes": [
+   {
+    "html": "ED de f' : \\(D_{f'} = \\mathbb{R} \\setminus \\left\\{0\\right\\}\\), différent de l'ED de f, \\(D_f = \\mathbb{R}\\). On étudie le signe de f' sur cet ensemble ; là où f est définie mais pas f', on regarde directement le signe de part et d'autre.",
+    "type": "texte"
+   },
    {
     "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
     "type": "texte"
@@ -1421,7 +1434,7 @@
     {
      "cells": [
       "\\searrow",
-      "asym",
+      "val:0",
       "\\nearrow"
      ],
      "label": "f(x)",
@@ -1445,11 +1458,31 @@
   "deriv_resolu": true,
   "deriv_tex": "\\frac{x}{\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}}",
   "domaine_etude_tex": "\\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[",
+  "ed_deriv_tex": "\\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[",
   "ed_tex": "\\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[",
-  "extrema": [],
+  "extrema": [
+   {
+    "f_tex": "0",
+    "f_val": 0.0,
+    "genre": "minimum local",
+    "x_tex": "-2",
+    "x_val": -2.0
+   },
+   {
+    "f_tex": "0",
+    "f_val": 0.0,
+    "genre": "minimum local",
+    "x_tex": "2",
+    "x_val": 2.0
+   }
+  ],
   "f_tex": "\\sqrt{x^{2} - 4}",
   "ok": true,
   "signe_etapes": [
+   {
+    "html": "ED de f' : \\(D_{f'} = \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[\\), différent de l'ED de f, \\(D_f = \\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[\\). On étudie le signe de f' sur cet ensemble ; là où f est définie mais pas f', on regarde directement le signe de part et d'autre.",
+    "type": "texte"
+   },
    {
     "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
     "type": "texte"
@@ -1585,9 +1618,9 @@
     {
      "cells": [
       "\\searrow",
-      "asym",
+      "val:0",
       "",
-      "asym",
+      "val:0",
       "\\nearrow"
      ],
      "label": "f(x)",
@@ -2163,11 +2196,24 @@
   "deriv_resolu": true,
   "deriv_tex": "\\frac{\\frac{1}{2}}{\\sqrt{x}}",
   "domaine_etude_tex": "\\left]0 \\,;\\, +\\infty\\right[",
+  "ed_deriv_tex": "\\left]0 \\,;\\, +\\infty\\right[",
   "ed_tex": "\\left[0 \\,;\\, +\\infty\\right[",
-  "extrema": [],
+  "extrema": [
+   {
+    "f_tex": "0",
+    "f_val": 0.0,
+    "genre": "minimum local",
+    "x_tex": "0",
+    "x_val": 0.0
+   }
+  ],
   "f_tex": "\\sqrt{x}",
   "ok": true,
   "signe_etapes": [
+   {
+    "html": "ED de f' : \\(D_{f'} = \\left]0 \\,;\\, +\\infty\\right[\\), différent de l'ED de f, \\(D_f = \\left[0 \\,;\\, +\\infty\\right[\\). On étudie le signe de f' sur cet ensemble ; là où f est définie mais pas f', on regarde directement le signe de part et d'autre.",
+    "type": "texte"
+   },
    {
     "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
     "type": "texte"
@@ -2207,7 +2253,7 @@
     {
      "cells": [
       "",
-      "asym",
+      "val:0",
       "\\nearrow"
      ],
      "label": "f(x)",
@@ -2273,11 +2319,24 @@
   "deriv_resolu": true,
   "deriv_tex": "\\frac{\\frac{2}{3}}{x^{\\frac{1}{3}}}",
   "domaine_etude_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
+  "ed_deriv_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
   "ed_tex": "\\mathbb{R}",
-  "extrema": [],
+  "extrema": [
+   {
+    "f_tex": "0",
+    "f_val": 0.0,
+    "genre": "minimum local",
+    "x_tex": "0",
+    "x_val": 0.0
+   }
+  ],
   "f_tex": "x^{\\frac{2}{3}}",
   "ok": true,
   "signe_etapes": [
+   {
+    "html": "ED de f' : \\(D_{f'} = \\mathbb{R} \\setminus \\left\\{0\\right\\}\\), différent de l'ED de f, \\(D_f = \\mathbb{R}\\). On étudie le signe de f' sur cet ensemble ; là où f est définie mais pas f', on regarde directement le signe de part et d'autre.",
+    "type": "texte"
+   },
    {
     "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
     "type": "texte"
@@ -2313,7 +2372,7 @@
     {
      "cells": [
       "\\searrow",
-      "asym",
+      "val:0",
       "\\nearrow"
      ],
      "label": "f(x)",
@@ -2334,7 +2393,15 @@
   "deriv_tex": "\\frac{3}{2}\\sqrt{x}",
   "domaine_etude_tex": "\\left[0 \\,;\\, +\\infty\\right[",
   "ed_tex": "\\left[0 \\,;\\, +\\infty\\right[",
-  "extrema": [],
+  "extrema": [
+   {
+    "f_tex": "0",
+    "f_val": 0.0,
+    "genre": "minimum local",
+    "x_tex": "0",
+    "x_val": 0.0
+   }
+  ],
   "f_tex": "x^{\\frac{3}{2}}",
   "ok": true,
   "signe_etapes": [
@@ -2381,7 +2448,7 @@
     {
      "cells": [
       "",
-      "",
+      "extremum",
       "\\nearrow"
      ],
      "label": "f(x)",

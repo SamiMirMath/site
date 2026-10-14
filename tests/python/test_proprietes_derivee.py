@@ -74,8 +74,9 @@ class TestProprietesDerivee(unittest.TestCase):
                         self.assertEqual(h[:-len(r"\).")].rsplit(" = ", 1)[1], r["deriv_tex"])
 
     def test_extrema_annonces_justes(self):
-        """DV-05 (sens direct) : chaque extremum annoncé est un point de l'ED où f' change de
-        signe dans le bon sens, et la valeur annoncée est f(x)."""
+        """DV-05 (sens direct) : chaque extremum intérieur annoncé est un point de l'ED où f' change
+        de signe dans le bon sens ; en une borne fermée de l'ED (DV-09), le sens de variation de
+        l'intervalle adjacent donne la nature ; la valeur annoncée est f(x)."""
         for f in MAIN:
             r = dv.etudier(f)
             if not r.get("signe_resolu"):
@@ -87,19 +88,20 @@ class TestProprietesDerivee(unittest.TestCase):
                 with self.subTest(f=f, extremum=e["x_tex"]):
                     self.assertTrue(oracle.definie(arbre, x))
                     g, dr = oracle.derivee(arbre, x - d), oracle.derivee(arbre, x + d)
-                    self.assertIsNotNone(g)
-                    self.assertIsNotNone(dr)
-                    if e["genre"] == "maximum local":
-                        self.assertTrue(g > 0 > dr, (g, dr))
+                    maxi = e["genre"] == "maximum local"
+                    if g is not None and dr is not None:   # extremum intérieur (i)
+                        self.assertTrue(g > 0 > dr if maxi else g < 0 < dr, (g, dr))
+                    elif g is None and dr is not None:      # borne fermée gauche de l'ED (ii, DV-09)
+                        self.assertTrue(dr < 0 if maxi else dr > 0, dr)
+                    elif dr is None and g is not None:      # borne fermée droite de l'ED (ii)
+                        self.assertTrue(g > 0 if maxi else g < 0, g)
                     else:
-                        self.assertTrue(g < 0 < dr, (g, dr))
+                        self.fail("extremum sans intervalle adjacent dans l'ED")
                     self.assertLessEqual(abs(oracle.valeur(arbre, x) - e["f_val"]), 1e-9 * (1 + abs(e["f_val"])))
 
-    @unittest.expectedFailure
     def test_aucun_extremum_manque(self):
-        """BUG CONNU n° 4 (tâche T06) : en un point de l'ED de f où f' n'est pas définie mais
-        change de signe (√(x²) en 0, x^(2/3) en 0), l'extremum n'est pas annoncé.
-        Quand ce test passera, retirer @expectedFailure."""
+        """DV-04 (T06, bug n° 4 corrigé) : en un point de l'ED de f où f' n'est pas définie mais
+        change de signe (√(x²) en 0, x^(2/3) en 0), l'extremum est annoncé."""
         for f in ["sqrt(x^2)", "x^(2/3)", "sqrt(x^2-2x+1)"]:
             r = dv.etudier(f)
             with self.subTest(f=f):
@@ -116,11 +118,9 @@ class TestProprietesDerivee(unittest.TestCase):
         "-sqrt(x-1)": [("maximum local", 1, 0)],
     }
 
-    @unittest.expectedFailure
     def test_extrema_bornes_fermees(self):
-        """BUG CONNU (tâche T06, critère DV-09) : aucun extremum n'est annoncé aux bornes
-        fermées de l'ED (±2 pour √(x²−4), 0 pour √x). Quand ce test passera, retirer
-        @expectedFailure."""
+        """DV-09 (T06) : un extremum local est annoncé en toute borne fermée de l'ED
+        (±2 pour √(x²−4), 0 pour √x)."""
         for f, attendus in self.BORNES_FERMEES.items():
             r = dv.etudier(f)
             obtenus = sorted((e["genre"], round(e["x_val"], 9), round(e["f_val"], 9)) for e in r["extrema"])
