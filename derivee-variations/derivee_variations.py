@@ -485,6 +485,13 @@ def etudier(entree):
         _ajouter(iv.lo)
         _ajouter(iv.hi)
     crit.sort(key=lambda p: p.val)
+    # Une colonne n'existe que pour un point de l'ED ou une borne de l'ED : un point critique situé
+    # au milieu d'une zone hors de l'ED (0 pour ln(x²−4)) n'est pas un point d'étude.
+    ed_ivs = fusion(ED)
+
+    def _borne_de_ed(pt):
+        return any(b is not None and proche(b.val, pt.val) for iv in ed_ivs for b in (iv.lo, iv.hi))
+    crit = [pt for pt in crit if contient(ED, pt.val) or _borne_de_ed(pt)]
     k = len(crit)
 
     def _test(i):
@@ -522,7 +529,17 @@ def etudier(entree):
         return hors[j // 2] if j % 2 == 0 else (hors[(j - 1) // 2] and hors[(j + 1) // 2])
 
     def _barrer(cells):
-        return ["x" if _dans_zone_hors(j) else c for j, c in enumerate(cells)]
+        """Zone hors de l'ED : hachurée (« x »). Valeur interdite de f (borne hors de l'ED) : double barre
+        « || » sur toute la colonne, quelle que soit la ligne (facteurs, f', f)."""
+        out = []
+        for j, c in enumerate(cells):
+            if _dans_zone_hors(j):
+                out.append("x")
+            elif j % 2 == 1 and not contient(ED, crit[j // 2].val):
+                out.append("||")
+            else:
+                out.append(c)
+        return out
 
     lignes = []
     if c_const < 0:
@@ -572,8 +589,6 @@ def etudier(entree):
     #    l'intervalle adjacent (Q3, 14.10.2026) ;
     #  - jamais sur un intervalle où f est constante ; jamais hors de l'ED.
     # Là où f est définie mais pas f' (ou f constante), la ligne f(x) porte la valeur f(a), sans barre.
-    ed_ivs = fusion(ED)
-
     def _bornes_fermees(pt):
         gauche = any(iv.lo is not None and iv.lf and proche(iv.lo.val, pt.val) for iv in ed_ivs)
         droite = any(iv.hi is not None and iv.hf and proche(iv.hi.val, pt.val) for iv in ed_ivs)

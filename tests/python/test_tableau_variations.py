@@ -114,13 +114,47 @@ class TestZonesHorsED(unittest.TestCase):
     def test_ln_sur_x(self):
         r, t, L = lignes("ln(x)/x")
         self.assertEqual(t["crit"], ["0", "e"])
-        self.assertEqual(L["f'(x)"], ["x", "x", "+", "0", "-"])
+        self.assertEqual(L["f'(x)"], ["x", "||", "+", "0", "-"])
         self.assertEqual(L["f(x)"], ["x", "asym", r"\nearrow", "extremum", r"\searrow"])
 
-    def test_ed_a_deux_morceaux_et_trou_central(self):
-        r, t, L = lignes("ln(x^2-4)")            # ED = ]−∞ ; −2[ ∪ ]2 ; +∞[ : le point 0 est hors de l'ED
-        self.assertEqual(L["f'(x)"], ["-", "||", "x", "x", "x", "||", "+"])
-        self.assertEqual(L["f(x)"], [r"\searrow", "asym", "x", "x", "x", "asym", r"\nearrow"])
+    def test_valeur_interdite_double_barre_sur_toute_la_colonne(self):
+        """ln(x²−4), ED = ]−∞ ; −2[ ∪ ]2 ; +∞[ : colonnes −2 et 2 barrées sur TOUTES les lignes, zone ]−2 ; 2[ hachurée,
+        colonne 0 supprimée (point hors de l'ED qui n'est pas une borne)."""
+        r, t, L = lignes("ln(x^2-4)")
+        self.assertEqual(t["crit"], ["-2", "2"])
+        for ligne in t["rows"]:
+            cases = ligne["cells"]
+            self.assertEqual(len(cases), 5, ligne["label"])
+            self.assertEqual((cases[1], cases[2], cases[3]), ("||" if not ligne.get("variation") else "asym", "x",
+                                                              "||" if not ligne.get("variation") else "asym"), ligne["label"])
+        self.assertEqual(L["f'(x)"], ["-", "||", "x", "||", "+"])
+        self.assertEqual(L["f(x)"], [r"\searrow", "asym", "x", "asym", r"\nearrow"])
+
+    def test_bornes_hors_ed(self):
+        for entree in ("ln(x)", "1/x", "1/ln(x)", "ln(x)/x"):
+            r, t, L = lignes(entree)
+            for j in range(1, len(t["rows"][0]["cells"]), 2):
+                col = [ligne["cells"][j] for ligne in t["rows"]]
+                with self.subTest(f=entree, colonne=t["crit"][j // 2]):
+                    if col[-1] == "asym":                    # valeur interdite de f : barre sur toutes les lignes
+                        self.assertTrue(all(c in ("||", "asym") for c in col), col)
+
+    def test_borne_dans_l_ed_sans_derivee_double_barre_seulement_sur_f_prime(self):    # Q3
+        for entree in ("sqrt(x^2-4)", "sqrt(x)"):
+            r, t, L = lignes(entree)
+            j = 1
+            col = {ligne["label"]: ligne["cells"][j] for ligne in t["rows"]}
+            self.assertEqual(col["f'(x)"], "||")
+            self.assertEqual(col["f(x)"], "val:0")
+
+    def test_aucune_colonne_dans_une_zone_hors_ed(self):
+        """Une colonne n'existe que pour un point de l'ED ou une borne de l'ED."""
+        for entree in ("ln(x^2-4)", "sqrt(4-x^2)", "ln(x^2-4)/x", "ln(x)/x"):
+            r, t, L = lignes(entree)
+            cases = L["f'(x)"]
+            for j in range(2, len(cases) - 2, 2):            # intervalle j entouré de colonnes
+                with self.subTest(f=entree, intervalle=j):
+                    self.assertFalse(cases[j - 2] == "x" and cases[j] == "x", cases)
 
     def test_bornes_fermees(self):
         r, t, L = lignes("sqrt(4-x^2)")
@@ -156,3 +190,15 @@ class TestZonesHorsED(unittest.TestCase):
                     if row.get("final") or row.get("variation"):
                         with self.subTest(f=entree, ligne=row["label"], intervalle=i):
                             self.assertEqual(row["cells"][2 * i] == "x", not dedans, row["cells"])
+                    elif not dedans:            # lignes de facteurs : la zone hors de l'ED est hachurée aussi
+                        with self.subTest(f=entree, ligne=row["label"], intervalle=i):
+                            self.assertEqual(row["cells"][2 * i], "x", row["cells"])
+            for j in range(1, 2 * k, 2):         # colonne d'une valeur interdite : barre sur toutes les lignes
+                f_row = next(w for w in t["rows"] if w.get("variation"))
+                if f_row["cells"][j] == "asym":
+                    for row in t["rows"]:
+                        with self.subTest(f=entree, ligne=row["label"], colonne=j):
+                            self.assertIn(row["cells"][j], ("||", "asym"), row["cells"])
+            for j in range(2, 2 * k, 2):         # pas de colonne parasite entre deux zones hors de l'ED
+                with self.subTest(f=entree, intervalle=j):
+                    self.assertFalse(t["rows"][-1]["cells"][j - 2] == "x" and t["rows"][-1]["cells"][j] == "x")
