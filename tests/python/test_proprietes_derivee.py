@@ -106,5 +106,34 @@ class TestProprietesDerivee(unittest.TestCase):
                 self.assertTrue(any(abs(e["x_val"] - (1 if "2x" in f else 0)) < 1e-9 for e in r["extrema"]))
 
 
+    # Critère (ii) de Q3 (tranché le 14.10.2026) : extremum local en toute borne fermée de l'ED,
+    # nature donnée par le sens de variation sur l'intervalle adjacent (DV-09).
+    BORNES_FERMEES = {
+        "sqrt(x^2-4)": [("minimum local", -2, 0), ("minimum local", 2, 0)],
+        "sqrt(4-x^2)": [("minimum local", -2, 0), ("maximum local", 0, 2), ("minimum local", 2, 0)],
+        "sqrt(x)": [("minimum local", 0, 0)],
+        "x*sqrt(x)": [("minimum local", 0, 0)],
+        "-sqrt(x-1)": [("maximum local", 1, 0)],
+    }
+
+    @unittest.expectedFailure
+    def test_extrema_bornes_fermees(self):
+        """BUG CONNU (tâche T06, critère DV-09) : aucun extremum n'est annoncé aux bornes
+        fermées de l'ED (±2 pour √(x²−4), 0 pour √x). Quand ce test passera, retirer
+        @expectedFailure."""
+        for f, attendus in self.BORNES_FERMEES.items():
+            r = dv.etudier(f)
+            obtenus = sorted((e["genre"], round(e["x_val"], 9), round(e["f_val"], 9)) for e in r["extrema"])
+            with self.subTest(f=f):
+                self.assertEqual(obtenus, sorted((g, float(x), float(v)) for g, x, v in attendus))
+
+    def test_pas_d_extremum_en_borne_ouverte(self):
+        """Une borne ouverte de l'ED (ln x en 0, 1/x en 0) n'est jamais un extremum."""
+        for f, borne in [("ln(x)", 0), ("x*ln(x)", 0), ("1/x", 0), ("ln(x)/x", 0)]:
+            r = dv.etudier(f)
+            with self.subTest(f=f):
+                self.assertFalse(any(abs(e["x_val"] - borne) < 1e-9 for e in r["extrema"]))
+
+
 if __name__ == "__main__":
     unittest.main()
