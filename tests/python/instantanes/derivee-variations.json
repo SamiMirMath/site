@@ -3007,12 +3007,12 @@
  "x^x": {
   "deriv_etapes": [
    {
-    "html": "\\(x^{x}\\) s'écrit \\(e^{x\\ln\\left(x\\right)}\\) : on dérive cette forme composée \\(\\Rightarrow\\) \\(\\left(x^{x}\\right)' = x^{x}\\,\\left(\\ln(x) + x\\,\\frac{1}{x}\\right)\\).",
+    "html": "\\(x^{x}\\) s'écrit \\(e^{x\\ln\\left(x\\right)}\\) : on dérive cette forme composée \\(\\Rightarrow\\) \\(\\left(x^{x}\\right)' = x^{x}\\,\\left(\\ln(x) + 1\\right)\\).",
     "type": "texte"
    }
   ],
   "deriv_resolu": true,
-  "deriv_tex": "x^{x}\\,\\left(\\ln(x) + x\\,\\frac{1}{x}\\right)",
+  "deriv_tex": "x^{x}\\,\\left(\\ln(x) + 1\\right)",
   "domaine_etude_tex": "\\left]0 \\,;\\, +\\infty\\right[",
   "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
   "extrema": [
@@ -3048,15 +3048,27 @@
     "type": "texte"
    },
    {
-    "html": "<b>Signe de \\(\\ln(x) + x\\,\\frac{1}{x}\\)</b>",
+    "html": "<b>Signe de \\(\\ln(x) + 1\\)</b>",
     "type": "texte"
    },
    {
-    "html": "\\(\\ln(x) + x\\,\\frac{1}{x}\\) est défini pour \\(x \\in \\left]0 \\,;\\, +\\infty\\right[\\).",
+    "html": "\\(\\ln(x) + 1\\) est défini pour \\(x \\in \\left]0 \\,;\\, +\\infty\\right[\\).",
     "type": "texte"
    },
    {
-    "html": "Ce facteur mélange \\(x\\) et une fonction ln ou exp : on ne peut pas isoler \\(x\\). Résultat obtenu numériquement : \\(\\ln(x) + x\\,\\frac{1}{x} > 0 \\iff x \\in \\left]e^{-1} \\,;\\, +\\infty\\right[\\) et \\(\\ln(x) + x\\,\\frac{1}{x} = 0 \\iff x \\in \\left\\{e^{-1}\\right\\}\\).",
+    "html": "On pose \\(t = \\ln(x)\\) : \\(\\ln(x) + 1 = t + 1\\).",
+    "type": "texte"
+   },
+   {
+    "html": "\\(t + 1 > 0 \\iff t > -1\\).",
+    "type": "texte"
+   },
+   {
+    "html": "L'exponentielle est strictement croissante et \\(\\ln\\) n'est définie que sur \\(\\left]0 \\,;\\, +\\infty\\right[\\) : \\(\\ln(x) > -1 \\iff x > e^{-1}\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Bilan : \\(\\ln(x) + 1 > 0 \\iff x \\in \\left]e^{-1} \\,;\\, +\\infty\\right[\\) ; \\(\\ln(x) + 1 = 0 \\iff x \\in \\left\\{e^{-1}\\right\\}\\).",
     "type": "texte"
    },
    {
@@ -3089,7 +3101,7 @@
       "0",
       "+"
      ],
-     "label": "\\left(\\ln(x) + x\\,\\frac{1}{x}\\right)"
+     "label": "\\left(\\ln(x) + 1\\right)"
     },
     {
      "cells": [

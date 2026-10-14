@@ -29,7 +29,7 @@ from ensemble_def import (
     Nb, X, E, Neg, Op, Fn,
     lire, tex, par, prec, valeur_constante, Num, Iv, REELS, inter, ens_tex, points, contient, proche,
     preimage, resoudre_general, json_strict, ajouter_saisie, domaine, fusion, evaluer, aplatir, qtex,
-    indice_racine, _sympy, en_sympy, en_sympy_reel, arbre_depuis_sympy, num_sympy, _SP,
+    indice_racine, sans_x, _sympy, en_sympy, en_sympy_reel, arbre_depuis_sympy, num_sympy, _SP,
     txt, NonPrisEnCharge, ErreurSaisie, _analyser, apercu_json,
 )
 
@@ -225,6 +225,23 @@ def _derivee_fn(n, items):
 
 def _derivee_puissance(n, items):
     e = valeur_constante(n.b)
+    if e is None and sans_x(n.b):
+        # exposant constant irrationnel (ln 2, √2, e…) : (u^α)' = α·u^(α−1)·u', comme pour un exposant rationnel
+        if valeur_constante(n.a) is not None:
+            return Nb(0)
+        u, alpha = n.a, n.b
+        du = derivee_narree(u, items, top=False)
+        reste = Op("^", u, Op("-", alpha, Nb(F(1))))
+        resultat = _simplifier(_mul(_mul(alpha, reste), du))
+        if isinstance(u, X):
+            items.append(txt(rf"\(\left({tex(n)}\right)' = {tex(resultat)}\) (règle de la puissance, \(\alpha = {tex(alpha)}\) constant)."))
+        else:
+            items.append(txt(
+                rf"\({tex(n)}\) est de la forme \(u^{{\alpha}}\) avec \(u(x) = {tex(u)}\) et \(\alpha = {tex(alpha)}\) constant "
+                rf"(dérivée interne \(u'(x) = {tex(du)}\)) \(\Rightarrow\) "
+                rf"\(\left({tex(n)}\right)' = \alpha\,u^{{\alpha - 1}}u' = {tex(resultat)}\)."
+            ))
+        return resultat
     if e is None:
         # cas général a^b, b non constant : a^b = e^{b ln a}
         da = derivee_narree(n.a, items, top=False)
@@ -513,9 +530,11 @@ def etudier(entree):
     except Exception:
         c_const, facs = F(1), [(fprime, 1)]
 
-    def _cellule(v, expo):
+    def _cellule(v, expo, critique=False):
         if v is None:
-            return "x"
+            # facteur non défini : en un point critique de l'ED, f' n'y est pas définie (double barre) ;
+            # sur un intervalle, on est hors du domaine (zone barrée en aval)
+            return "||" if critique else "x"
         if abs(v) <= 1e-9:
             return "||" if expo < 0 else "0"
         s = "+" if v > 0 else "-"
@@ -559,7 +578,7 @@ def etudier(entree):
         for i in range(k + 1):
             cells.append(_cellule(evaluer(h, _test(i)), expo))
             if i < k:
-                cells.append(_cellule(evaluer(h, crit[i].val), expo))
+                cells.append(_cellule(evaluer(h, crit[i].val), expo, critique=True))
         lignes.append({"label": label, "cells": _barrer(cells)})
 
     combinee = []

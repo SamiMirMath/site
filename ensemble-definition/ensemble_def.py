@@ -1793,8 +1793,14 @@ def arbre_depuis_sympy(e):
             return Fn("sqrt", arbre_depuis_sympy(b))
         if ex == -1:
             return Op("/", Nb(1), arbre_depuis_sympy(b))
-        if ex.is_Rational:
-            return Op("^", arbre_depuis_sympy(b), arbre_depuis_sympy(ex))
+        if isinstance(ex, sp.Add):      # exposant constant : termes positifs d'abord (√2 − 1 et non −1 + √2)
+            termes = sorted(ex.as_ordered_terms(), key=lambda t: bool(t.could_extract_minus_sign()))
+            ex_arbre = arbre_depuis_sympy(termes[0])
+            for t in termes[1:]:
+                ex_arbre = Op("+", ex_arbre, arbre_depuis_sympy(t))
+        else:
+            ex_arbre = arbre_depuis_sympy(ex)
+        return Op("^", arbre_depuis_sympy(b), ex_arbre)      # exposant rationnel ou constant (√2, ln 3 − 2…)
     if isinstance(e, sp.exp):
         return Fn("exp", arbre_depuis_sympy(e.args[0]))
     if isinstance(e, sp.log):
