@@ -45,15 +45,24 @@ class TestProprietesEnsembleDefinition(unittest.TestCase):
                 for x in points_de_test(ED):
                     self.assertEqual(oracle.definie(arbre, x), ed.contient(ED, x), f"x = {x!r}")
 
-    @unittest.expectedFailure
     def test_controle_numerique_sans_fausse_alerte(self):
-        """BUG CONNU (tâche T07b) : près d'un zéro double, `evaluer` arrondit à 0 une valeur
-        de l'ordre de 1e-12 (seuil anti-compensation de ensemble_def.py), et le contrôle
-        numérique affiché à l'élève signale un « désaccord » alors que l'ED est juste.
-        Quand ce test passera, retirer @expectedFailure."""
+        """ED-07 (T07b) : près d'un zéro double, `evaluer` ne doit pas arrondir à 0 une valeur
+        de l'ordre de 1e-13 relatif : le contrôle numérique ne signale aucun désaccord
+        quand l'ED est juste."""
         for f in ZEROS_DOUBLES + fonctions(100, graine=7):
             with self.subTest(f=f):
                 self.assertTrue(ed.verifier(f)["accord"])
+
+    def test_cas_nommes_du_critere_ed_07(self):
+        for f in ["ln(x^2-10x+25)", "1/(x^2-6x+9)", "ln(x^2-10000x+25000000)"]:
+            with self.subTest(f=f):
+                self.assertTrue(ed.verifier(f)["accord"])
+
+    def test_compensation_exacte_toujours_arrondie(self):
+        """Le seuil ne doit pas disparaître : ln(x²) − 2 ln(x) vaut 0 au bruit près."""
+        arbre = ed.lire("ln(x^2)-2ln(x)")
+        for x in (0.3, 1.7, 42.0, 1e3):
+            self.assertEqual(ed.evaluer(arbre, x), 0.0)
 
 
 if __name__ == "__main__":

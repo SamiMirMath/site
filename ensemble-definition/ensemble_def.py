@@ -1632,8 +1632,11 @@ def evaluer(n, x):
             return None
         if n.op in "+-":
             r = a + b if n.op == "+" else a - b
-            # compensation catastrophique (ex. ln(x²) − 2 ln x) : on arrondit à 0
-            return 0.0 if abs(r) <= 1e-12 * (abs(a) + abs(b)) else r
+            # compensation catastrophique (ex. ln(x²) − 2 ln x) : on arrondit à 0 ce qui ne dépasse
+            # pas le bruit des flottants (quelques 1e-16 relatifs). Le seuil doit rester bien en
+            # dessous de 2,5e-13 : à 1e-6 d'un zéro double, (x−p)² vaut cette fraction de x² + … ,
+            # et un arrondi à 0 ferait croire f non définie (faux « désaccord » du contrôle).
+            return 0.0 if abs(r) <= 1e-14 * (abs(a) + abs(b)) else r
         if n.op == "*":
             return a * b
         if n.op == "/":
