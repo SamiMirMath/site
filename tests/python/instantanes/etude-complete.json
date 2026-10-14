@@ -475,11 +475,51 @@
     {
      "etapes": [
       {
-       "html": "\\(\\displaystyle\\lim_{x\\to 3^-} f(x) = \\dfrac{8}{0^{-}} = -\\infty\\).",
+       "html": "\\(x=3\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 3\\).",
        "type": "texte"
       },
       {
-       "html": "\\(\\displaystyle\\lim_{x\\to 3^+} f(x) = \\dfrac{8}{0^{+}} = +\\infty\\).",
+       "html": "Limite à gauche (\\(x \\to 3^{-}\\)) :",
+       "type": "texte"
+      },
+      {
+       "html": "Par substitution, \\(x^{2} - 1 \\to 3^{2} - 1 = 8\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Pour \\(x < 3\\), \\(x - 3 < 0\\) : \\(x - 3 \\to 0^{-}\\).",
+       "type": "texte"
+      },
+      {
+       "html": "\\(x^{2} - 1 \\to 8\\) et \\(x - 3 \\to 0^{-}\\) : \\(\\dfrac{8}{0^{-}} = -\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Donc \\(\\displaystyle\\lim_{x\\to 3^{-}} f(x) = -\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Limite à droite (\\(x \\to 3^{+}\\)) :",
+       "type": "texte"
+      },
+      {
+       "html": "Par substitution, \\(x^{2} - 1 \\to 3^{2} - 1 = 8\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Pour \\(x > 3\\), \\(x - 3 > 0\\) : \\(x - 3 \\to 0^{+}\\).",
+       "type": "texte"
+      },
+      {
+       "html": "\\(x^{2} - 1 \\to 8\\) et \\(x - 3 \\to 0^{+}\\) : \\(\\dfrac{8}{0^{+}} = +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Donc \\(\\displaystyle\\lim_{x\\to 3^{+}} f(x) = +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Asymptote verticale d'équation \\(x = 3\\).",
        "type": "texte"
       }
      ],

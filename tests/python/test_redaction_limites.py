@@ -44,7 +44,7 @@ class TestPhrasesExactes(unittest.TestCase):
 
     def test_logarithme_en_une_valeur_interdite(self):
         self.assertEqual(textes("ln(x-1)", r"x \to 1^+")[1:], [
-            r"\(x \to 1^{+}\) et \(1\) est une constante : la différence tend vers \(0^{+}\).",
+            r"Pour \(x > 1\), \(x - 1 > 0\) : \(x - 1 \to 0^{+}\).",
             r"Or \(\ln t \to -\infty\) quand \(t \to 0^{+}\) : \(\ln\left(x - 1\right) \to -\infty\).",
             r"Donc \(\displaystyle\lim_{x\to 1^{+}} f(x) = -\infty\).",
             r"Asymptote verticale d'équation \(x = 1\).",
@@ -75,6 +75,86 @@ class TestPhrasesExactes(unittest.TestCase):
     def test_une_sous_expression_n_est_commentee_qu_une_fois(self):
         t = textes("(e^x+1)/(e^x-1)", r"x \to -\infty")
         self.assertEqual(sum(1 for p in t if p.startswith(r"Or \(e^{t}")), 1)
+
+
+class TestValeursInterdites(unittest.TestCase):
+    """L2 : valeur interdite sans forme indéterminée — limite du numérateur, signe du dénominateur de chaque
+    côté, ℓ/0^±, asymptote verticale (LA-14, LA-18)."""
+
+    def test_fraction_rationnelle(self):
+        self.assertEqual(textes("(x^2-1)/(x-3)", r"x \to 3"), [
+            r"\(x=3\) est une valeur interdite : on étudie la limite de \(f\) quand \(x \to 3\).",
+            r"Limite à gauche (\(x \to 3^{-}\)) :",
+            r"Par substitution, \(x^{2} - 1 \to 3^{2} - 1 = 8\).",
+            r"Pour \(x < 3\), \(x - 3 < 0\) : \(x - 3 \to 0^{-}\).",
+            r"\(x^{2} - 1 \to 8\) et \(x - 3 \to 0^{-}\) : \(\dfrac{8}{0^{-}} = -\infty\).",
+            r"Donc \(\displaystyle\lim_{x\to 3^{-}} f(x) = -\infty\).",
+            r"Limite à droite (\(x \to 3^{+}\)) :",
+            r"Par substitution, \(x^{2} - 1 \to 3^{2} - 1 = 8\).",
+            r"Pour \(x > 3\), \(x - 3 > 0\) : \(x - 3 \to 0^{+}\).",
+            r"\(x^{2} - 1 \to 8\) et \(x - 3 \to 0^{+}\) : \(\dfrac{8}{0^{+}} = +\infty\).",
+            r"Donc \(\displaystyle\lim_{x\to 3^{+}} f(x) = +\infty\).",
+            r"Asymptote verticale d'équation \(x = 3\).",
+        ])
+
+    def test_denominateur_oppose(self):
+        t = textes("5/(3-x)", r"x \to 3")
+        self.assertIn(r"Pour \(x < 3\), \(3 - x = -\left(x - 3\right)\), \(3 - x > 0\) : \(3 - x \to 0^{+}\).", t)
+        self.assertIn(r"\(5\) est une constante et \(3 - x \to 0^{+}\) : \(\dfrac{5}{0^{+}} = +\infty\).", t)
+
+    def test_carre_et_signe_du_quotient(self):
+        t = textes("1/(x-1)^2", r"x \to 1")
+        self.assertEqual(t.count(r"Quand \(x \to 1^{-}\), \(\left(x - 1\right)^{2} \to 0^{+}\) (carré)."), 1)
+        self.assertEqual(t.count(r"\(1\) est une constante et \(\left(x - 1\right)^{2} \to 0^{+}\) : "
+                                 r"\(\dfrac{1}{0^{+}} = +\infty\)."), 2)
+
+    def test_denominateur_factorise_pour_connaitre_son_signe(self):
+        t = textes("(x^2-3)/(x^3-3x)", r"x \to 0")
+        self.assertIn(r"\(x^{3} - 3x = x\,\left(x^{2} - 3\right)\) ; quand \(x \to 0^{-}\), "
+                      r"\(x^{2} - 3 \to -3\) et \(x \to 0^{-}\) : \(x^{3} - 3x \to 0^{+}\).", t)
+        self.assertIn(r"\(x^{2} - 3 \to -3\) et \(x^{3} - 3x \to 0^{+}\) : \(\dfrac{-3}{0^{+}} = -\infty\).", t)
+
+    def test_pole_irrationnel(self):
+        t = textes("1/(x^2-2)", r"x \to \sqrt{2}")
+        self.assertIn(r"Limite à gauche (\(x \to {\sqrt{2}}^{-}\)) :", t)
+        self.assertIn(r"\(1\) est une constante et \(x^{2} - 2 \to 0^{-}\) : \(\dfrac{1}{0^{-}} = -\infty\).", t)
+        self.assertEqual(t[-1], r"Asymptote verticale d'équation \(x = \sqrt{2}\).")
+
+    def test_zero_de_signe_connu_en_un_point_irrationnel(self):
+        t = textes("ln(x^2-3)", r"x \to \sqrt{3}^+")
+        self.assertIn(r"\(x^{2} \to 3\) et \(3\) est une constante : la différence tend vers \(0^{+}\).", t)
+
+    def test_zero_de_signe_inconnu_donne_le_repli(self):
+        """Pas de factorisation possible au point irrationnel d'un polynôme de degré 3 : le signe n'est pas inventé."""
+        etape = etapes("ln(x^3-3x)", r"x \to \sqrt{3}^+")[1]
+        self.assertEqual(etape["html"], REPLI + r"\(\displaystyle\lim_{x\to {\sqrt{3}}^{+}} f(x) = -\infty\).")
+        self.assertIn("signe inconnu", etape["detail"])
+
+    def test_factorisation_dans_un_logarithme(self):
+        t = textes("ln(x^2-4x)/(x-5)", r"x \to 4^+")
+        self.assertIn(r"\(x^{2} - 4x = x\,\left(x - 4\right)\) ; quand \(x \to 4^{+}\), \(x \to 4\) et "
+                      r"\(x - 4 \to 0^{+}\) : \(x^{2} - 4x \to 0^{+}\).", t)
+        self.assertEqual(t[-1], r"Asymptote verticale d'équation \(x = 4\).")
+
+    def test_chaque_pole_sans_facteur_commun_est_redige(self):
+        for entree in ["1/(x-2)", "(2x+1)/(x-1)", "x^2/(x-1)", "1/x^2", "(x^3+1)/(x-2)", "(2x^2+1)/(x^2-1)", "1/(x^2-2)"]:
+            r = la.etudier(entree)
+            for etude in r["etudes"]:
+                if "infty" in etude["ou"]:
+                    continue
+                with self.subTest(f=entree, ou=etude["ou"]):
+                    t = [e["html"] for e in etude["etapes"]]
+                    self.assertFalse(any(p.startswith(REPLI) for p in t), t)
+                    self.assertEqual(sum(1 for p in t if p.startswith("Donc ")), 2)
+                    self.assertTrue(t[-1].startswith("Asymptote verticale d'équation"), t[-1])
+
+    def test_garde_fou_sur_un_pole_rationnel(self):
+        with mock.patch.object(la, "_noeud", side_effect=la.Abandon("essai")):
+            avec = la.etudier("1/(x-2)")
+        normal = la.etudier("1/(x-2)")
+        self.assertEqual(avec["asymptotes"], normal["asymptotes"])
+        t = [e["html"] for e in next(e for e in avec["etudes"] if e["ou"] == r"x \to 2")["etapes"]]
+        self.assertEqual(sum(1 for p in t if p.startswith(REPLI)), 2)
 
 
 class TestFormeIndeterminee(unittest.TestCase):

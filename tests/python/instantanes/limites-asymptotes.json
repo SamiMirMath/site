@@ -69,11 +69,51 @@
    {
     "etapes": [
      {
-      "html": "\\(\\displaystyle\\lim_{x\\to 1^-} f(x) = \\dfrac{3}{0^{-}} = -\\infty\\).",
+      "html": "\\(x=1\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 1\\).",
       "type": "texte"
      },
      {
-      "html": "\\(\\displaystyle\\lim_{x\\to 1^+} f(x) = \\dfrac{3}{0^{+}} = +\\infty\\).",
+      "html": "Limite à gauche (\\(x \\to 1^{-}\\)) :",
+      "type": "texte"
+     },
+     {
+      "html": "Par substitution, \\(2x + 1 \\to 2 \\cdot 1 + 1 = 3\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Pour \\(x < 1\\), \\(x - 1 < 0\\) : \\(x - 1 \\to 0^{-}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x + 1 \\to 3\\) et \\(x - 1 \\to 0^{-}\\) : \\(\\dfrac{3}{0^{-}} = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to 1^{-}} f(x) = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Limite à droite (\\(x \\to 1^{+}\\)) :",
+      "type": "texte"
+     },
+     {
+      "html": "Par substitution, \\(2x + 1 \\to 2 \\cdot 1 + 1 = 3\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Pour \\(x > 1\\), \\(x - 1 > 0\\) : \\(x - 1 \\to 0^{+}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x + 1 \\to 3\\) et \\(x - 1 \\to 0^{+}\\) : \\(\\dfrac{3}{0^{+}} = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to 1^{+}} f(x) = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale d'équation \\(x = 1\\).",
       "type": "texte"
      }
     ],
@@ -161,11 +201,51 @@
    {
     "etapes": [
      {
-      "html": "\\(\\displaystyle\\lim_{x\\to -1^-} f(x) = \\dfrac{-\\frac{3}{2}}{0^{-}} = +\\infty\\).",
+      "html": "\\(x=-1\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to -1\\).",
       "type": "texte"
      },
      {
-      "html": "\\(\\displaystyle\\lim_{x\\to -1^+} f(x) = \\dfrac{-\\frac{3}{2}}{0^{+}} = -\\infty\\).",
+      "html": "Limite à gauche (\\(x \\to -1^{-}\\)) :",
+      "type": "texte"
+     },
+     {
+      "html": "Par substitution, \\(2x^{2} + 1 \\to 2 \\cdot \\left(-1\\right)^{2} + 1 = 3\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} - 1 = \\left(x - 1\\right)\\,\\left(x + 1\\right)\\) ; quand \\(x \\to -1^{-}\\), \\(x - 1 \\to -2\\) et \\(x + 1 \\to 0^{-}\\) : \\(x^{2} - 1 \\to 0^{+}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x^{2} + 1 \\to 3\\) et \\(x^{2} - 1 \\to 0^{+}\\) : \\(\\dfrac{3}{0^{+}} = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to -1^{-}} f(x) = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Limite à droite (\\(x \\to -1^{+}\\)) :",
+      "type": "texte"
+     },
+     {
+      "html": "Par substitution, \\(2x^{2} + 1 \\to 2 \\cdot \\left(-1\\right)^{2} + 1 = 3\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} - 1 = \\left(x - 1\\right)\\,\\left(x + 1\\right)\\) ; quand \\(x \\to -1^{+}\\), \\(x - 1 \\to -2\\) et \\(x + 1 \\to 0^{+}\\) : \\(x^{2} - 1 \\to 0^{-}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x^{2} + 1 \\to 3\\) et \\(x^{2} - 1 \\to 0^{-}\\) : \\(\\dfrac{3}{0^{-}} = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to -1^{+}} f(x) = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale d'équation \\(x = -1\\).",
       "type": "texte"
      }
     ],
@@ -174,11 +254,51 @@
    {
     "etapes": [
      {
-      "html": "\\(\\displaystyle\\lim_{x\\to 1^-} f(x) = \\dfrac{\\frac{3}{2}}{0^{-}} = -\\infty\\).",
+      "html": "\\(x=1\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 1\\).",
       "type": "texte"
      },
      {
-      "html": "\\(\\displaystyle\\lim_{x\\to 1^+} f(x) = \\dfrac{\\frac{3}{2}}{0^{+}} = +\\infty\\).",
+      "html": "Limite à gauche (\\(x \\to 1^{-}\\)) :",
+      "type": "texte"
+     },
+     {
+      "html": "Par substitution, \\(2x^{2} + 1 \\to 2 \\cdot 1^{2} + 1 = 3\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} - 1 = \\left(x + 1\\right)\\,\\left(x - 1\\right)\\) ; quand \\(x \\to 1^{-}\\), \\(x + 1 \\to 2\\) et \\(x - 1 \\to 0^{-}\\) : \\(x^{2} - 1 \\to 0^{-}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x^{2} + 1 \\to 3\\) et \\(x^{2} - 1 \\to 0^{-}\\) : \\(\\dfrac{3}{0^{-}} = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to 1^{-}} f(x) = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Limite à droite (\\(x \\to 1^{+}\\)) :",
+      "type": "texte"
+     },
+     {
+      "html": "Par substitution, \\(2x^{2} + 1 \\to 2 \\cdot 1^{2} + 1 = 3\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} - 1 = \\left(x + 1\\right)\\,\\left(x - 1\\right)\\) ; quand \\(x \\to 1^{+}\\), \\(x + 1 \\to 2\\) et \\(x - 1 \\to 0^{+}\\) : \\(x^{2} - 1 \\to 0^{+}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x^{2} + 1 \\to 3\\) et \\(x^{2} - 1 \\to 0^{+}\\) : \\(\\dfrac{3}{0^{+}} = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to 1^{+}} f(x) = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale d'équation \\(x = 1\\).",
       "type": "texte"
      }
     ],
@@ -447,11 +567,51 @@
    {
     "etapes": [
      {
-      "html": "\\(\\displaystyle\\lim_{x\\to 3^-} f(x) = \\dfrac{8}{0^{-}} = -\\infty\\).",
+      "html": "\\(x=3\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 3\\).",
       "type": "texte"
      },
      {
-      "html": "\\(\\displaystyle\\lim_{x\\to 3^+} f(x) = \\dfrac{8}{0^{+}} = +\\infty\\).",
+      "html": "Limite à gauche (\\(x \\to 3^{-}\\)) :",
+      "type": "texte"
+     },
+     {
+      "html": "Par substitution, \\(x^{2} - 1 \\to 3^{2} - 1 = 8\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Pour \\(x < 3\\), \\(x - 3 < 0\\) : \\(x - 3 \\to 0^{-}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} - 1 \\to 8\\) et \\(x - 3 \\to 0^{-}\\) : \\(\\dfrac{8}{0^{-}} = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to 3^{-}} f(x) = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Limite à droite (\\(x \\to 3^{+}\\)) :",
+      "type": "texte"
+     },
+     {
+      "html": "Par substitution, \\(x^{2} - 1 \\to 3^{2} - 1 = 8\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Pour \\(x > 3\\), \\(x - 3 > 0\\) : \\(x - 3 \\to 0^{+}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} - 1 \\to 8\\) et \\(x - 3 \\to 0^{+}\\) : \\(\\dfrac{8}{0^{+}} = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to 3^{+}} f(x) = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale d'équation \\(x = 3\\).",
       "type": "texte"
      }
     ],
@@ -529,11 +689,51 @@
    {
     "etapes": [
      {
-      "html": "\\(\\displaystyle\\lim_{x\\to 2^-} f(x) = \\dfrac{9}{0^{-}} = -\\infty\\).",
+      "html": "\\(x=2\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 2\\).",
       "type": "texte"
      },
      {
-      "html": "\\(\\displaystyle\\lim_{x\\to 2^+} f(x) = \\dfrac{9}{0^{+}} = +\\infty\\).",
+      "html": "Limite à gauche (\\(x \\to 2^{-}\\)) :",
+      "type": "texte"
+     },
+     {
+      "html": "Par substitution, \\(x^{3} + 1 \\to 2^{3} + 1 = 9\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Pour \\(x < 2\\), \\(x - 2 < 0\\) : \\(x - 2 \\to 0^{-}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{3} + 1 \\to 9\\) et \\(x - 2 \\to 0^{-}\\) : \\(\\dfrac{9}{0^{-}} = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to 2^{-}} f(x) = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Limite à droite (\\(x \\to 2^{+}\\)) :",
+      "type": "texte"
+     },
+     {
+      "html": "Par substitution, \\(x^{3} + 1 \\to 2^{3} + 1 = 9\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Pour \\(x > 2\\), \\(x - 2 > 0\\) : \\(x - 2 \\to 0^{+}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{3} + 1 \\to 9\\) et \\(x - 2 \\to 0^{+}\\) : \\(\\dfrac{9}{0^{+}} = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to 2^{+}} f(x) = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale d'équation \\(x = 2\\).",
       "type": "texte"
      }
     ],
@@ -613,11 +813,43 @@
    {
     "etapes": [
      {
-      "html": "\\(\\displaystyle\\lim_{x\\to 2^-} f(x) = \\dfrac{1}{0^{-}} = -\\infty\\).",
+      "html": "\\(x=2\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 2\\).",
       "type": "texte"
      },
      {
-      "html": "\\(\\displaystyle\\lim_{x\\to 2^+} f(x) = \\dfrac{1}{0^{+}} = +\\infty\\).",
+      "html": "Limite à gauche (\\(x \\to 2^{-}\\)) :",
+      "type": "texte"
+     },
+     {
+      "html": "Pour \\(x < 2\\), \\(x - 2 < 0\\) : \\(x - 2 \\to 0^{-}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(1\\) est une constante et \\(x - 2 \\to 0^{-}\\) : \\(\\dfrac{1}{0^{-}} = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to 2^{-}} f(x) = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Limite à droite (\\(x \\to 2^{+}\\)) :",
+      "type": "texte"
+     },
+     {
+      "html": "Pour \\(x > 2\\), \\(x - 2 > 0\\) : \\(x - 2 \\to 0^{+}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(1\\) est une constante et \\(x - 2 \\to 0^{+}\\) : \\(\\dfrac{1}{0^{+}} = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to 2^{+}} f(x) = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale d'équation \\(x = 2\\).",
       "type": "texte"
      }
     ],
@@ -705,15 +937,51 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur ne s'annule pas en \\(x=-\\sqrt{2}\\) (seul le dénominateur s'y annule) : asymptote verticale.",
+      "html": "\\(x=-\\sqrt{2}\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to -\\sqrt{2}\\).",
       "type": "texte"
      },
      {
-      "html": "À gauche, \\(f(x) \\to +\\infty\\).",
+      "html": "Limite à gauche (\\(x \\to {-\\sqrt{2}}^{-}\\)) :",
       "type": "texte"
      },
      {
-      "html": "À droite, \\(f(x) \\to -\\infty\\).",
+      "html": "Par continuité de \\(t^{2}\\) en \\(- \\sqrt{2}\\), \\(x^{2} \\to 2\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} \\to 2\\) et \\(2\\) est une constante : la différence tend vers \\(0^{+}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(1\\) est une constante et \\(x^{2} - 2 \\to 0^{+}\\) : \\(\\dfrac{1}{0^{+}} = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to {-\\sqrt{2}}^{-}} f(x) = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Limite à droite (\\(x \\to {-\\sqrt{2}}^{+}\\)) :",
+      "type": "texte"
+     },
+     {
+      "html": "Par continuité de \\(t^{2}\\) en \\(- \\sqrt{2}\\), \\(x^{2} \\to 2\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} \\to 2\\) et \\(2\\) est une constante : la différence tend vers \\(0^{-}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(1\\) est une constante et \\(x^{2} - 2 \\to 0^{-}\\) : \\(\\dfrac{1}{0^{-}} = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to {-\\sqrt{2}}^{+}} f(x) = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale d'équation \\(x = -\\sqrt{2}\\).",
       "type": "texte"
      }
     ],
@@ -722,15 +990,51 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur ne s'annule pas en \\(x=\\sqrt{2}\\) (seul le dénominateur s'y annule) : asymptote verticale.",
+      "html": "\\(x=\\sqrt{2}\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to \\sqrt{2}\\).",
       "type": "texte"
      },
      {
-      "html": "À gauche, \\(f(x) \\to -\\infty\\).",
+      "html": "Limite à gauche (\\(x \\to {\\sqrt{2}}^{-}\\)) :",
       "type": "texte"
      },
      {
-      "html": "À droite, \\(f(x) \\to +\\infty\\).",
+      "html": "Par continuité de \\(t^{2}\\) en \\(\\sqrt{2}\\), \\(x^{2} \\to 2\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} \\to 2\\) et \\(2\\) est une constante : la différence tend vers \\(0^{-}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(1\\) est une constante et \\(x^{2} - 2 \\to 0^{-}\\) : \\(\\dfrac{1}{0^{-}} = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to {\\sqrt{2}}^{-}} f(x) = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Limite à droite (\\(x \\to {\\sqrt{2}}^{+}\\)) :",
+      "type": "texte"
+     },
+     {
+      "html": "Par continuité de \\(t^{2}\\) en \\(\\sqrt{2}\\), \\(x^{2} \\to 2\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} \\to 2\\) et \\(2\\) est une constante : la différence tend vers \\(0^{+}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(1\\) est une constante et \\(x^{2} - 2 \\to 0^{+}\\) : \\(\\dfrac{1}{0^{+}} = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to {\\sqrt{2}}^{+}} f(x) = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale d'équation \\(x = \\sqrt{2}\\).",
       "type": "texte"
      }
     ],
@@ -802,11 +1106,43 @@
    {
     "etapes": [
      {
-      "html": "\\(\\displaystyle\\lim_{x\\to 0^-} f(x) = \\dfrac{1}{0^{+}} = +\\infty\\).",
+      "html": "\\(x=0\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 0\\).",
       "type": "texte"
      },
      {
-      "html": "\\(\\displaystyle\\lim_{x\\to 0^+} f(x) = \\dfrac{1}{0^{+}} = +\\infty\\).",
+      "html": "Limite à gauche (\\(x \\to 0^{-}\\)) :",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} = \\left(x\\right)^{2}\\) ; quand \\(x \\to 0^{-}\\), \\(\\left(x\\right)^{2} \\to 0^{+}\\) : \\(x^{2} \\to 0^{+}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(1\\) est une constante et \\(x^{2} \\to 0^{+}\\) : \\(\\dfrac{1}{0^{+}} = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to 0^{-}} f(x) = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Limite à droite (\\(x \\to 0^{+}\\)) :",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} = \\left(x\\right)^{2}\\) ; quand \\(x \\to 0^{+}\\), \\(\\left(x\\right)^{2} \\to 0^{+}\\) : \\(x^{2} \\to 0^{+}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(1\\) est une constante et \\(x^{2} \\to 0^{+}\\) : \\(\\dfrac{1}{0^{+}} = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale d'équation \\(x = 0\\).",
       "type": "texte"
      }
     ],
@@ -1169,7 +1505,7 @@
       "type": "texte"
      },
      {
-      "html": "\\(x \\to 1^{+}\\) et \\(1\\) est une constante : la différence tend vers \\(0^{+}\\).",
+      "html": "Pour \\(x > 1\\), \\(x - 1 > 0\\) : \\(x - 1 \\to 0^{+}\\).",
       "type": "texte"
      },
      {
@@ -1288,15 +1624,7 @@
       "type": "texte"
      },
      {
-      "html": "Or \\(t^{2} \\to 0^{+}\\) quand \\(t \\to 0^{-}\\) : \\(x^{2} \\to 0^{+}\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(4\\) est une constante et \\(x \\to 0^{-}\\) : le produit tend vers \\(0^{-}\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x^{2} \\to 0^{+}\\) et \\(4x \\to 0^{-}\\) : la différence tend vers \\(0^{+}\\).",
+      "html": "\\(x^{2} - 4x = x\\,\\left(x - 4\\right)\\) ; quand \\(x \\to 0^{-}\\), \\(x - 4 \\to -4\\) et \\(x \\to 0^{-}\\) : \\(x^{2} - 4x \\to 0^{+}\\).",
       "type": "texte"
      },
      {
@@ -1304,7 +1632,7 @@
       "type": "texte"
      },
      {
-      "html": "\\(x \\to 0^{-}\\) et \\(5\\) est une constante : la différence tend vers \\(-5\\).",
+      "html": "Par substitution, \\(x - 5 \\to 0 - 5 = -5\\).",
       "type": "texte"
      },
      {
@@ -1329,8 +1657,23 @@
       "type": "texte"
      },
      {
-      "detail": "Abandon : ln de 0 de signe inconnu",
-      "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to 4^{+}} f(x) = +\\infty\\).",
+      "html": "\\(x^{2} - 4x = x\\,\\left(x - 4\\right)\\) ; quand \\(x \\to 4^{+}\\), \\(x \\to 4\\) et \\(x - 4 \\to 0^{+}\\) : \\(x^{2} - 4x \\to 0^{+}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\) : \\(\\ln\\left(x^{2} - 4x\\right) \\to -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Par substitution, \\(x - 5 \\to 4 - 5 = -1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln\\left(x^{2} - 4x\\right) \\to -\\infty\\) et \\(x - 5 \\to -1\\) : le quotient tend vers \\(+\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to 4^{+}} f(x) = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -1351,15 +1694,7 @@
       "type": "texte"
      },
      {
-      "html": "Par continuité de \\(t^{2}\\) en \\(5\\), \\(x^{2} \\to 25\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(4\\) est une constante et \\(x \\to 5^{-}\\) : le produit tend vers \\(20\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x^{2} \\to 25\\) et \\(4x \\to 20\\) : la différence tend vers \\(5\\).",
+      "html": "Par substitution, \\(x^{2} - 4x \\to 5^{2} - 4 \\cdot 5 = 5\\).",
       "type": "texte"
      },
      {
@@ -1367,7 +1702,7 @@
       "type": "texte"
      },
      {
-      "html": "\\(x \\to 5^{-}\\) et \\(5\\) est une constante : la différence tend vers \\(0^{-}\\).",
+      "html": "Pour \\(x < 5\\), \\(x - 5 < 0\\) : \\(x - 5 \\to 0^{-}\\).",
       "type": "texte"
      },
      {
@@ -1383,15 +1718,7 @@
       "type": "texte"
      },
      {
-      "html": "Par continuité de \\(t^{2}\\) en \\(5\\), \\(x^{2} \\to 25\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(4\\) est une constante et \\(x \\to 5^{+}\\) : le produit tend vers \\(20\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x^{2} \\to 25\\) et \\(4x \\to 20\\) : la différence tend vers \\(5\\).",
+      "html": "Par substitution, \\(x^{2} - 4x \\to 5^{2} - 4 \\cdot 5 = 5\\).",
       "type": "texte"
      },
      {
@@ -1399,7 +1726,7 @@
       "type": "texte"
      },
      {
-      "html": "\\(x \\to 5^{+}\\) et \\(5\\) est une constante : la différence tend vers \\(0^{+}\\).",
+      "html": "Pour \\(x > 5\\), \\(x - 5 > 0\\) : \\(x - 5 \\to 0^{+}\\).",
       "type": "texte"
      },
      {
@@ -2050,11 +2377,51 @@
    {
     "etapes": [
      {
-      "html": "\\(\\displaystyle\\lim_{x\\to 1^-} f(x) = \\dfrac{1}{0^{-}} = -\\infty\\).",
+      "html": "\\(x=1\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 1\\).",
       "type": "texte"
      },
      {
-      "html": "\\(\\displaystyle\\lim_{x\\to 1^+} f(x) = \\dfrac{1}{0^{+}} = +\\infty\\).",
+      "html": "Limite à gauche (\\(x \\to 1^{-}\\)) :",
+      "type": "texte"
+     },
+     {
+      "html": "Par substitution, \\(x^{2} \\to 1^{2} = 1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Pour \\(x < 1\\), \\(x - 1 < 0\\) : \\(x - 1 \\to 0^{-}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} \\to 1\\) et \\(x - 1 \\to 0^{-}\\) : \\(\\dfrac{1}{0^{-}} = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to 1^{-}} f(x) = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Limite à droite (\\(x \\to 1^{+}\\)) :",
+      "type": "texte"
+     },
+     {
+      "html": "Par substitution, \\(x^{2} \\to 1^{2} = 1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Pour \\(x > 1\\), \\(x - 1 > 0\\) : \\(x - 1 \\to 0^{+}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} \\to 1\\) et \\(x - 1 \\to 0^{+}\\) : \\(\\dfrac{1}{0^{+}} = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to 1^{+}} f(x) = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale d'équation \\(x = 1\\).",
       "type": "texte"
      }
     ],
