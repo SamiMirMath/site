@@ -386,6 +386,22 @@ def _valeur_num(f_tree, x):
         return None
 
 
+def _aligner_sur(D, ED):
+    """Les bornes de D obtenues numériquement (valeurs approchées) qui coïncident, à 1e-6 près,
+    avec une borne exacte de l'ED sont remplacées par celle-ci : sinon un même point apparaît deux
+    fois dans le tableau (≈ 0,2929 et (2 − √2)/2) et l'on prend l'un pour un point de l'ED."""
+    exactes = [p for iv in ED for p in (iv.lo, iv.hi) if p is not None and not p.approx]
+
+    def snap(p):
+        if p is None or not p.approx:
+            return p
+        for e in exactes:
+            if abs(e.val - p.val) <= 1e-6 * (1 + abs(e.val)):
+                return e
+        return p
+    return fusion([Iv(snap(iv.lo), iv.lf, snap(iv.hi), iv.hf) for iv in D])
+
+
 def etudier(entree):
     try:
         f = lire(entree)
@@ -416,7 +432,7 @@ def etudier(entree):
         D_fprime = domaine(fprime)
     except Exception:
         D_fprime = REELS
-    D = inter(ED, D_fprime)
+    D = _aligner_sur(inter(ED, D_fprime), ED)
     res["domaine_etude_tex"] = ens_tex(D)
 
     # 1) On cherche d'abord les zéros de f' (candidats extrema) : narration explicite,
@@ -495,9 +511,22 @@ def etudier(entree):
         s = "+" if v > 0 else "-"
         return "+" if (s == "-" and expo % 2 == 0) else s
 
+    # Intervalles hors de l'ED de f : ni signe ni flèche, case barrée (« x ») sur toutes les lignes.
+    # Chaque intervalle entre deux points critiques est entièrement dans l'ED ou entièrement dehors
+    # (les bornes de l'ED sont des points critiques).
+    hors = [not contient(ED, _test(i)) for i in range(k + 1)]
+
+    def _dans_zone_hors(j):
+        """Case j du tableau (intervalle si j pair, point critique si j impair) entièrement hors de l'ED :
+        un point critique ne l'est que si l'intervalle de chaque côté l'est."""
+        return hors[j // 2] if j % 2 == 0 else (hors[(j - 1) // 2] and hors[(j + 1) // 2])
+
+    def _barrer(cells):
+        return ["x" if _dans_zone_hors(j) else c for j, c in enumerate(cells)]
+
     lignes = []
     if c_const < 0:
-        lignes.append({"label": qtex(c_const), "cells": ["-"] * (2 * k + 1)})
+        lignes.append({"label": qtex(c_const), "cells": _barrer(["-"] * (2 * k + 1))})
     for h, expo in facs:
         label = tex(h) if prec(h) >= 3 else r"\left(" + tex(h) + r"\right)"
         if abs(expo) > 1:
@@ -511,7 +540,7 @@ def etudier(entree):
             cells.append(_cellule(evaluer(h, _test(i)), expo))
             if i < k:
                 cells.append(_cellule(evaluer(h, crit[i].val), expo))
-        lignes.append({"label": label, "cells": cells})
+        lignes.append({"label": label, "cells": _barrer(cells)})
 
     combinee = []
     for i in range(k + 1):
@@ -528,9 +557,9 @@ def etudier(entree):
     if f_constante:
         for i in range(2 * k + 1):
             if i % 2 == 0:
-                combinee[i] = "0" if contient(D, _test(i // 2)) else "x"
+                combinee[i] = "x" if hors[i // 2] else "0" if contient(D, _test(i // 2)) else "x"
             else:
-                combinee[i] = "0" if contient(D, crit[i // 2].val) else "||"
+                combinee[i] = "x" if _dans_zone_hors(i) else "0" if contient(D, crit[i // 2].val) else "||"
     lignes.append({"label": "f'(x)", "cells": combinee, "final": True})
 
     res["signe_resolu"] = True
@@ -565,12 +594,12 @@ def etudier(entree):
     fleche_cells, extrema = [], []
     for i in range(k + 1):
         s = combinee[2 * i]
-        fleche_cells.append({"+": r"\nearrow", "-": r"\searrow", "0": r"\rightarrow"}.get(s, ""))
+        fleche_cells.append({"+": r"\nearrow", "-": r"\searrow", "0": r"\rightarrow", "x": "x"}.get(s, ""))
         if i >= k:
             continue
         p = crit[i]
         if not contient(ED, p.val):
-            fleche_cells.append("asym")
+            fleche_cells.append("x" if _dans_zone_hors(2 * i + 1) else "asym")
             continue
         s_droite = combinee[2 * i + 2]
         gauche, droite = _bornes_fermees(p)

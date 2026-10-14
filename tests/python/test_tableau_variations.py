@@ -87,7 +87,7 @@ class TestFonctionConstante(unittest.TestCase):
     def test_constante_hors_ed_barree(self):  # ln(x²) − 2 ln(x), ED = ]0 ; +∞[
         r, _, L = lignes("ln(x^2)-2ln(x)")
         self.assertEqual(L["f'(x)"], ["x", "||", "0"])
-        self.assertEqual(L["f(x)"], ["", "asym", r"\rightarrow"])
+        self.assertEqual(L["f(x)"], ["x", "asym", r"\rightarrow"])
         self.assertEqual(r["extrema"], [])
 
     def test_valeur_constante_a_la_borne_dans_l_ed(self):
@@ -101,3 +101,58 @@ class TestFonctionConstante(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestZonesHorsED(unittest.TestCase):
+    """C4 : jamais de signe ni de flèche hors de l'ED de f ; ces zones sont barrées (« x »)."""
+
+    def test_ln(self):
+        r, t, L = lignes("ln(x)")
+        self.assertEqual(L["f'(x)"], ["x", "||", "+"])
+        self.assertEqual(L["f(x)"], ["x", "asym", r"\nearrow"])
+
+    def test_ln_sur_x(self):
+        r, t, L = lignes("ln(x)/x")
+        self.assertEqual(t["crit"], ["0", "e"])
+        self.assertEqual(L["f'(x)"], ["x", "x", "+", "0", "-"])
+        self.assertEqual(L["f(x)"], ["x", "asym", r"\nearrow", "extremum", r"\searrow"])
+
+    def test_ed_a_deux_morceaux_et_trou_central(self):
+        r, t, L = lignes("ln(x^2-4)")            # ED = ]−∞ ; −2[ ∪ ]2 ; +∞[ : le point 0 est hors de l'ED
+        self.assertEqual(L["f'(x)"], ["-", "||", "x", "x", "x", "||", "+"])
+        self.assertEqual(L["f(x)"], [r"\searrow", "asym", "x", "x", "x", "asym", r"\nearrow"])
+
+    def test_bornes_fermees(self):
+        r, t, L = lignes("sqrt(4-x^2)")
+        self.assertEqual(L["f(x)"][0], "x")
+        self.assertEqual(L["f(x)"][-1], "x")
+        self.assertEqual(L["f(x)"][1:-1], ["val:0", r"\nearrow", "extremum", r"\searrow", "val:0"])
+
+    def test_pas_de_doublon_de_points_critiques(self):
+        r, t, L = lignes("1/(2x^2-4x+1)")        # pôles irrationnels : (2 ± √2)/2 ne doivent apparaître qu'une fois
+        self.assertEqual(t["crit"], [r"\frac{2 - \sqrt{2}}{2}", "1", r"\frac{2 + \sqrt{2}}{2}"])
+        self.assertEqual(L["f(x)"], [r"\nearrow", "asym", r"\nearrow", "extremum", r"\searrow", "asym", r"\searrow"])
+
+    def test_x_exactement_hors_de_l_ed(self):
+        """Pour des exemples et 150 fonctions générées : sur chaque intervalle, les lignes f'(x) et f(x) sont
+        barrées si et seulement si f n'est pas définie (oracle haute précision)."""
+        import oracle
+        from generateurs import fonctions
+        from cas import CAS_LIMITES, entrees_page
+        with open(dv.__file__, encoding="utf-8") as f:
+            src = f.read().replace('"rows": lignes}', '"rows": lignes, "crit_val": [p.val for p in crit]}')
+        ns = {"__name__": "dv_instr"}
+        exec(compile(src, "dv_instr", "exec"), ns)
+        for entree in list(dict.fromkeys(entrees_page("derivee-variations") + CAS_LIMITES["derivee-variations"])) + fonctions(150, graine=3):
+            r = ns["etudier"](entree)
+            if not r.get("signe_resolu"):
+                continue
+            t, arbre = r["table_signe"], ed.lire(entree)
+            cv, k = t["crit_val"], len(t["crit_val"])
+            for i in range(k + 1):
+                x = 0.0 if k == 0 else cv[0] - 1 if i == 0 else cv[-1] + 1 if i == k else (cv[i - 1] + cv[i]) / 2
+                dedans = oracle.definie(arbre, x)
+                for row in t["rows"]:
+                    if row.get("final") or row.get("variation"):
+                        with self.subTest(f=entree, ligne=row["label"], intervalle=i):
+                            self.assertEqual(row["cells"][2 * i] == "x", not dedans, row["cells"])
