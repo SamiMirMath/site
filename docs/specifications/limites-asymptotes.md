@@ -52,23 +52,30 @@ Chaque limite affichée est rédigée par la **première méthode du cours qui s
 
 0. **Opérations et composition**, sans forme indéterminée : chaque sous-expression avec sa limite,
    puis la règle (somme, produit, quotient, composée avec e^u, ln u, √u, u^n).
-1. **Mise en évidence** du terme dominant (en ±∞) ou factorisation par (x − a) (en une valeur) ;
-   la forme indéterminée est **nommée** (« ∞ − ∞ », « ∞/∞ », « 0·∞ », « 0/0 »).
+1. **Mise en évidence** du terme de plus haut degré (en ±∞) ou factorisation par (x − a) (en une valeur) ;
+   la forme indéterminée est **nommée** (« ∞ − ∞ », « ∞/∞ », « 0·∞ », « 0/0 »). Tout se fait avec des
+   **égalités exactes**, jamais avec un équivalent (voir ci-dessous). Les racines de polynômes passent
+   aussi par la mise en évidence.
 2. **Expression conjuguée** (∞ − ∞ et 0/0 avec une racine).
-3. **Termes dominants** : seulement en ±∞, quotient dont un membre est une composée ; jamais quand les
-   termes dominants se compensent ; la justification du remplacement est écrite.
-4. **Limites de référence et croissance comparée** (Q1 seulement, voir plus haut).
-5. **Bernoulli-L'Hôpital**, en dernier recours, avec ses quatre hypothèses écrites :
+3. **Limites de référence et croissance comparée** (Q1 seulement, voir plus haut).
+4. **Bernoulli-L'Hôpital**, en dernier recours, avec ses quatre hypothèses écrites :
    (a) forme 0/0 ou ∞/∞ (0·∞ et ∞ − ∞ d'abord mis en quotient) ; (b) f et g dérivables au voisinage de a
    (sauf peut-être en a) ; (c) g'(x) ≠ 0 au voisinage de a (sauf peut-être en a) ; (d) lim f'/g' existe
    (finie ou infinie), alors lim f/g = lim f'/g'. Au plus deux applications de suite. Si une hypothèse
    n'est pas vérifiée ou si lim f'/g' n'existe pas, la règle n'est pas appliquée et ne conclut rien.
 
+**Pas d'équivalent** (décidé le 15.10.2026). Ni le symbole ∼, ni le mot « équivalent », ni « se comporte
+comme », dans aucune sortie. La méthode « termes dominants » est supprimée : tout passe par la mise en
+évidence, écrite en égalités exactes.
+- **Racine de polynôme en ±∞** : √(4x²+1) = √(x²(4 + 1/x²)) = |x|·√(4 + 1/x²), puis |x| = x (x > 0) ou
+  |x| = −x (x < 0), puis simplification. En −∞ : f(x) = −x·√(4 + 1/x²)/(x(1 + 2/x)) = −√(4 + 1/x²)/(1 + 2/x) → −2.
+- **Après une conjuguée** : x/(√(x²+x) + x) = x/(x(√(1 + 1/x) + 1)) = 1/(√(1 + 1/x) + 1) → 1/2.
+
 Autres cas rédigés :
 - **Valeur interdite sans forme indéterminée** : limite du numérateur, signe du dénominateur à gauche et
   à droite (« 8/0⁻ = −∞ »), conclusion « asymptote verticale d'équation x = a » ;
 - **Forme 0/0 en une valeur** : factoriser, simplifier, passer à la limite (avant L'Hôpital) ;
-- **Racine en −∞** : « x < 0 donc √(x²) = |x| = −x » chaque fois que x² sort d'une racine ;
+- **Racine en −∞** : « x < 0 donc √(x²) = |x| = −x » chaque fois que x² sort d'une racine (mise en évidence) ;
 - **Asymptote oblique** : division euclidienne (fraction rationnelle) ; sinon a = lim f(x)/x puis
   b = lim (f(x) − ax), chaque limite rédigée ; position relative au voisinage de ±∞ seulement, quand le
   signe de f(x) − (ax + b) se lit directement ;
@@ -149,7 +156,8 @@ Modèle (1/(x² − 2) en −√2) :
 | LA-26 | Jamais « x est positif (il vaut 4) » : une variable ne « vaut » pas la valeur vers laquelle elle tend (« proche de » si besoin), y compris dans la justification en texte | [auto-py] |
 | LA-27 | Chaque valeur interdite se termine par sa conclusion ; une seule limite latérale infinie : « asymptote verticale d'équation x = 0 (du côté droit) ; à gauche, f(x) → 0 » | [auto-py] |
 | LA-28 | Toute ligne qui lit un signe dans un tableau renvoie à lui (« cf. tableau de signes de X ») ; chaque tableau est titré « Signe de X » ; ln(x²−4x)/(x−5) : phrase de repli seulement en ±∞ | [auto-py] |
-| LA-29 | Termes dominants (L5) : en ±∞, quotient ou produit dont un membre est une racine ; chaque membre est remplacé par son terme dominant avec la justification « rapport → 1 » ; « x < 0 donc √(x²) = \|x\| = −x » en −∞ ; jamais pour une fraction rationnelle ni quand les termes dominants d'une somme se compensent | [auto-py] |
+| LA-29 | Mise en évidence sous une racine (L5, retouche du 15.10) : en ±∞, quotient ou produit dont un membre est une racine ; √(4x²+1) = √(x²(4 + 1/x²)) = \|x\|√(4 + 1/x²), puis \|x\| = x ou −x, simplification, limite de ce qui reste ; « x < 0 donc √(x²) = \|x\| = −x » en −∞ ; jamais d'équivalent ; jamais pour une fraction rationnelle ni quand les termes de plus haut degré d'une somme se compensent | [auto-py] |
 | LA-30 | Expression conjuguée (L4) : ∞ − ∞ avec une racine en ±∞ (√(x²+x) − x → 1/2 en +∞ ; en −∞ pas de forme indéterminée, +∞) ; 0/0 avec une racine en une valeur ((√(x+3) − 2)/(x − 1) → 1/4) ; jamais sans racine | [auto-py] |
 | LA-31 | Croissance comparée (L6, T09, Q1) : citée seulement devant une forme indéterminée, limite de référence nommée ; mise en évidence de l'exponentielle (e^x − x² = e^x(1 − x²e^(−x)), (e^x+1)/(e^x−1)) ; jamais pour x·e^x en +∞, e^x/x en 0, e^(2x) | [auto-py] |
 | LA-32 | Bernoulli-L'Hôpital (L7) : en dernier recours, hypothèses (a) à (d) écrites (ln(x²−4x)/(x−5) en ±∞, (e^x−1)/x en 0, ln(x)/(x−1) en 1, x·ln(x²) en 0) ; jamais hors forme 0/0 ou ∞/∞, jamais pour une fraction rationnelle ni quand une limite de référence s'applique ; non appliquée (phrase de repli) si g' ≠ 0 ou lim f'/g' n'est pas établi ; au plus deux applications de suite | [auto-py] |
+| LA-33 | Aucune sortie ne contient « ∼ », « équivalent » ni « se comporte comme » | [auto-py] (`test_vocabulaire.py`) |

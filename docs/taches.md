@@ -54,8 +54,9 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
   pas (garde-fou : repli honnête si la rédaction n'aboutit pas). Un commit par étape, chacun avec sa suite verte :
   L0 documents ; L1 opérations et composition, forme indéterminée nommée, garde-fou, conclusion de chaque
   borne ; L2 valeur interdite (numérateur, signe du dénominateur, ℓ/0^±) ; L3 mise en évidence (polynômes,
-  fractions rationnelles, 0/0) ; *relecture de l'enseignant* ; L4 expression conjuguée ; L5 termes
-  dominants ; L6 croissance comparée (T09) ; L7 Bernoulli-L'Hôpital ; L8 asymptote oblique ; L9 encadré
+  fractions rationnelles, 0/0) ; *relecture de l'enseignant* ; L4 expression conjuguée ; L5 mise
+  en évidence sous une racine (les « termes dominants » sont supprimés : ni ∼, ni « équivalent », ni
+  « se comporte comme », décidé le 15.10.2026) ; L6 croissance comparée (T09) ; L7 Bernoulli-L'Hôpital ; L8 asymptote oblique ; L9 encadré
   « Rappel de la méthode ». Critères : LA-10 à LA-20.
 - **T06c — limites contre les doubles barres, dans l'Étude complète seulement** (décidé le 14.10.2026) :
   sur la ligne f(x), écrire la limite contre la barre, du côté de l'ED (−∞ à gauche de la colonne −2

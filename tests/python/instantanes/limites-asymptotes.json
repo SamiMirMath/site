@@ -2562,19 +2562,19 @@
       "type": "texte"
      },
      {
-      "html": "Au voisinage de \\(-\\infty\\), on remplace chaque membre par son terme dominant.",
+      "html": "\\(\\sqrt{x^{2}} = |x|\\).",
       "type": "texte"
      },
      {
-      "html": "Comme \\(x < 0\\), \\(\\sqrt{x^{2}} = |x| = -x\\).",
+      "html": "Comme \\(x < 0\\), \\(\\sqrt{x^{2}} = |x| = -x\\), donc \\(\\sqrt{x^{2}} = -x\\).",
       "type": "texte"
      },
      {
-      "html": "\\(\\sqrt{x^{2}} = |x| = -x\\).",
+      "html": "Donc \\(\\frac{x}{\\sqrt{x^{2}}} = \\frac{x}{-x} = -1\\).",
       "type": "texte"
      },
      {
-      "html": "Donc \\(\\frac{x}{\\sqrt{x^{2}}} \\sim \\dfrac{x}{-x} = -1\\), d'où \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = -1\\).",
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = -1\\).",
       "type": "texte"
      },
      {
@@ -2599,15 +2599,19 @@
       "type": "texte"
      },
      {
-      "html": "Au voisinage de \\(+\\infty\\), on remplace chaque membre par son terme dominant.",
+      "html": "\\(\\sqrt{x^{2}} = |x|\\).",
       "type": "texte"
      },
      {
-      "html": "\\(\\sqrt{x^{2}} = |x| = x\\) (car \\(x > 0\\)).",
+      "html": "Comme \\(x > 0\\), \\(|x| = x\\), donc \\(\\sqrt{x^{2}} = x\\).",
       "type": "texte"
      },
      {
-      "html": "Donc \\(\\frac{x}{\\sqrt{x^{2}}} \\sim \\dfrac{x}{x} = 1\\), d'où \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 1\\).",
+      "html": "Donc \\(\\frac{x}{\\sqrt{x^{2}}} = \\frac{x}{x} = 1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 1\\).",
       "type": "texte"
      },
      {

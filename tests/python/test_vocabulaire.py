@@ -1,5 +1,7 @@
 """C6 : aucun texte visible par l'élève ne cite une méthode interne (calcul formel, SymPy, dichotomie…) ni
-ne qualifie une racine ou une puissance de « transcendante » (le mot est interdit partout)."""
+ne qualifie une racine ou une puissance de « transcendante » (le mot est interdit partout).
+Les équivalents sont interdits partout, dans toutes les sorties de tous les outils : ni le symbole ∼ (\\sim),
+ni le mot « équivalent », ni « se comporte comme » (on met en évidence, avec des égalités exactes)."""
 import json
 import os
 import re
@@ -13,7 +15,7 @@ import limites_asymptotes as la
 from cas import CAS_LIMITES, entrees_page, entrees_factorisation
 
 INTERDITS = re.compile(r"calcul formel|sympy|transcend|dichotom|exacte simple|valeurs? approchée|moteur python|erreur du moteur"
-                       r"|erreur interne|formel", re.I)
+                       r"|erreur interne|formel|∼|~|\\sim|équivalent|se comporte comme", re.I)
 DOSSIER_INSTANTANES = os.path.join(os.path.dirname(__file__), "instantanes")
 EXEMPLES_RACINES = ["x^(1/3)", "x^(2/3)", "x^(4/3)", "x^(1/3)+x", "sqrt(x)+x", "ln(x)-x+3", "sqrt(ln(x)-x+2)", "x^3-x+1",
                     "ln(x)/(x^3-2x+5)", "x^(ln(2))", "x^(ln(4)-2ln(2))", "ln(x)+x^2-3", "e^x-x^2", "x*e^x-2", "(ln x)^2-x"]
@@ -82,7 +84,7 @@ class TestVocabulairePages(unittest.TestCase):
 
     def test_pages(self):
         motifs = re.compile(r"SymPy|calcul formel|transcend|dichotom|exacte simple|valeurs approchées|moteur Python|Erreur du moteur"
-                            r"|via un serveur|python3 -m http", re.I if False else 0)
+                            r"|via un serveur|python3 -m http|∼|\\sim|équivalent|se comporte comme", re.I if False else 0)
         for page in self.PAGES:
             chemin = os.path.join(RACINE, page, "index.html")
             with self.subTest(page=page or "accueil"):

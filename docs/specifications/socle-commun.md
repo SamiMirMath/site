@@ -27,6 +27,9 @@ S'applique à toutes les pages outils, sauf mention contraire pour le simplexe
 7c. **Vocabulaire** (décidé le 14.10.2026) : aucun texte visible ne cite une méthode interne
    (« calcul formel », SymPy, dichotomie…) ; le mot « transcendante » est interdit partout. Si une
    équation ne se résout pas avec les méthodes du cours : « solution obtenue numériquement : x ≈ … ».
+   **Les équivalents sont interdits partout** (décidé le 15.10.2026) : ni le symbole ∼ (`\sim`), ni le mot
+   « équivalent », ni « se comporte comme », dans toutes les sorties de tous les outils. On met en évidence,
+   avec des égalités exactes (√(4x²+1) = √(x²(4 + 1/x²)) = |x|·√(4 + 1/x²)).
 8. **Pied de page** : « © 2026 Sami Mir · samimir.ch », identique à l'accueil.
 
 ## Notation suisse
@@ -75,6 +78,6 @@ S'applique à toutes les pages outils, sauf mention contraire pour le simplexe
 | SOC-11 | « 1'000 » et « 1’000 » sont lus 1000 ; « 1 000 » est refusé avec un message | [auto-py] |
 | SOC-12 | Aucune valeur décimale affichée avec un point (moteurs et graduations) | [auto-py] (balayage des sorties) + [manuel] |
 | SOC-13 | Après 30 s de calcul, message « trop long » et moteur relancé ; un nouveau calcul fonctionne ensuite | [auto-page] |
-| SOC-15 | Aucune sortie de moteur ni aucune page ne contient « calcul formel », SymPy, « dichotomie », « transcend… », « exacte simple », « Erreur du moteur » ; le détail technique est dans des champs `detail` / `*_detail` à part | [auto-py] (`test_vocabulaire.py`) |
+| SOC-15 | Aucune sortie de moteur ni aucune page ne contient « calcul formel », SymPy, « dichotomie », « transcend… », « exacte simple », « Erreur du moteur », ni équivalent (« ∼ », « équivalent », « se comporte comme ») ; le détail technique est dans des champs `detail` / `*_detail` à part | [auto-py] (`test_vocabulaire.py`) |
 | SOC-16 | En tapant `ln(x)/x` (clavier ou bouton ln), aucun message rouge n'apparaît pendant la frappe ni à la fin ; une saisie incomplète (`ln(`) n'affiche son erreur qu'après ≈ 0,5 s | [auto-page] (Chrome, CI, T15) |
 | SOC-14 | Chargement sur un vrai téléphone : délai jusqu'à « Prêt » relevé et noté dans `docs/` | [manuel] (enseignant) |

@@ -1350,7 +1350,7 @@ def _lever(n, ctx, fi):
     raise Abandon(f"forme indéterminée {fi.nom} non levée en {tex(n)}")
 
 
-# --- méthode : termes dominants (en ±∞, quotient ou produit dont un membre contient une racine) -----
+# --- méthode : mise en évidence sous une racine (en ±∞, quotient ou produit dont un membre contient une racine)
 def _est_racine(n):
     """L'argument de n s'il s'agit d'une racine carrée (√u ou u^(1/2)), sinon None."""
     if isinstance(n, Fn) and n.nom == "sqrt":
@@ -1374,22 +1374,10 @@ def _rat(q):
     return _sympy().Rational(q.numerator, q.denominator)
 
 
-def _terme_dom_tex(c, k):
-    r"""c·x^k avec c exact (SymPy) : 2x, -x, \sqrt{3}\,x^{2}, 5."""
-    if k == 0:
-        return num_sympy(c).tex
-    puiss = "x" if k == 1 else f"x^{{{k}}}"
-    if c == 1:
-        return puiss
-    if c == -1:
-        return "-" + puiss
-    return num_sympy(c).tex + r"\," + puiss
-
-
 def _dominant(n, s):
-    """Terme dominant (c, k) de n en s∞ : n ~ c·x^k, c exact SymPy ; None si n n'est pas de cette forme ou si
-    les termes dominants d'une somme se compensent. √Q (Q de degré 2k, coefficient dominant q > 0) ~ √q·|x|^k
-    = √q·(s x)^k."""
+    """Terme dominant (c, k) de n en s∞ (n = c·x^k·(1 + …), c exact SymPy) ; None si n n'est pas de cette forme ou
+    si les termes de plus haut degré d'une somme se compensent. √Q (Q de degré 2k, coefficient dominant q > 0) a
+    pour terme dominant √q·|x|^k = √q·(s x)^k. Sert de garde-fou : la rédaction écrit sa propre mise en évidence."""
     sp = _sympy()
     if sans_x(n):
         v = valeur_constante(n)
@@ -1424,15 +1412,6 @@ def _dominant(n, s):
     return None
 
 
-def _lim_dominant(c, k, s):
-    """Limite de c·x^k en s∞."""
-    if k < 0:
-        return Lim.fin(0, _signe(c) * (s if k % 2 else 1))
-    if k == 0:
-        return Lim.fin(c)
-    return Lim.infini(_signe(c) * (s if k % 2 else 1))
-
-
 def _feuilles(n, signe=1):
     """Termes d'une somme (ou d'une différence) : [(terme, signe)]."""
     if isinstance(n, Op) and n.op in "+-":
@@ -1442,94 +1421,175 @@ def _feuilles(n, signe=1):
     return [(n, signe)]
 
 
-def _equivalent_membre(M, s):
-    """Lignes « M ~ terme dominant » et justifications « rapport → 1 » d'un membre (None si non pris en charge)."""
-    sp = _sympy()
-    eq, just = [], []
+def _puissance_x(e):
+    return X() if e == 1 else Op("^", X(), Nb(F(e)))
+
+
+def _terme_laurent(c, e):
+    """(négatif ?, arbre) de |c|·x^e pour un exposant entier e ; si e < 0 : |c|/x^|e| avec le coefficient en haut
+    et en bas (3/(2x), jamais une fraction dans une fraction)."""
+    a = abs(F(c))
+    if e == 0:
+        return c < 0, Nb(a)
+    if e > 0:
+        return c < 0, (_puissance_x(e) if a == 1 else Op("*", Nb(a), _puissance_x(e)))
+    bas = _puissance_x(-e) if a.denominator == 1 else Op("*", Nb(F(a.denominator)), _puissance_x(-e))
+    return c < 0, Op("/", Nb(F(a.numerator)), bas)
+
+
+def _somme_termes(termes):
+    """Somme de [(négatif ?, arbre)] écrite avec + et - (un premier terme négatif devient Neg)."""
+    arbre = Neg(termes[0][1]) if termes[0][0] else termes[0][1]
+    for neg, t in termes[1:]:
+        arbre = Op("-" if neg else "+", arbre, t)
+    return arbre
+
+
+def _produit_arbres(facteurs):
+    arbre = facteurs[0]
+    for f in facteurs[1:]:
+        arbre = Op("*", arbre, f)
+    return arbre
+
+
+def _est_un(t):
+    return isinstance(t, Nb) and t.v == 1
+
+
+def _racine_en_evidence(t, Q, s):
+    """√Q (Q de degré 2m, coefficient dominant q > 0) en s∞ : √Q = √(x^{2m}(q + …)) = |x|^m√(q + …) puis |x|^m = ±x^m.
+    Renvoie (lignes, signe de |x|^m = ±x^m, arbre du facteur √(q + …) ; Nb(1) si q est un carré qui sort)."""
+    m = deg(Q) // 2
+    interieur = _somme_termes([_terme_laurent(Q[j], j - 2 * m) for j in range(2 * m, -1, -1) if Q[j] != 0])
+    absx = "|x|" if m == 1 else rf"|x|^{{{m}}}"
+    seul = len(_polynome_a_termes(Q)) == 1
+    q = Q[-1]
+    racine_q = _sympy().sqrt(_rat(q))
+    if seul and racine_q.is_Rational:                    # √(4x²) = 2|x| : le coefficient sort tel quel
+        coef = "" if racine_q == 1 else num_sympy(racine_q).tex
+        lignes = [rf"\({tex(t)} = {coef}{absx}\)."]
+        facteur, k_sortant = Nb(F(1)), F(int(racine_q.p), int(racine_q.q))
+    elif seul:
+        lignes = [rf"\({tex(t)} = \sqrt{{{qtex(q)}}}\,{absx}\)."]
+        facteur, k_sortant = Fn("sqrt", Nb(q)), F(1)
+    else:
+        lignes = [rf"\({tex(t)} = \sqrt{{{_monome_tex(F(1), 2 * m)}\left({tex(interieur)}\right)}} = {absx}\sqrt{{{tex(interieur)}}}\)."]
+        facteur, k_sortant = Fn("sqrt", interieur), F(1)
+    signe = -1 if (s < 0 and m % 2) else 1
+    resultat = Op("*", _puissance_x(m), facteur) if not _est_un(facteur) else _puissance_x(m)
+    if racine_q.is_Rational and seul and racine_q != 1:
+        resultat = Op("*", Nb(F(int(racine_q.p), int(racine_q.q))), resultat) if not _est_un(facteur) else \
+            Op("*", Nb(F(int(racine_q.p), int(racine_q.q))), _puissance_x(m))
+    if signe < 0:
+        resultat = Neg(resultat)
+    donc = rf"donc \({tex(t)} = {tex(resultat)}\)."
+    if s < 0 and m % 2:
+        lignes.append((r"Comme \(x < 0\), \(\sqrt{x^{2}} = |x| = -x\), " if m == 1 else
+                       rf"Comme \(x < 0\), \(|x|^{{{m}}} = -x^{{{m}}}\) (\({m}\) est impair), ") + donc)
+    elif s < 0:
+        lignes.append(rf"Comme \(x < 0\), \(|x|^{{{m}}} = x^{{{m}}}\) (\({m}\) est pair), " + donc)
+    else:
+        lignes.append((r"Comme \(x > 0\), \(|x| = x\), " if m == 1 else rf"Comme \(x > 0\), \(|x|^{{{m}}} = x^{{{m}}}\), ") + donc)
+    return lignes, (-1 if (s < 0 and m % 2) else 1) * k_sortant, facteur, m
+
+
+def _membre_en_evidence(M, s):
+    """Mise en évidence de x^k dans un membre M (somme de monômes et de racines de polynômes de degré pair) en s∞ :
+    M = coef·x^k·R, où R vaut (constante non nulle) + (termes en 1/x^j). Renvoie un dictionnaire (coef, k, R,
+    lignes) ; None si M n'est pas de cette forme ou si ses termes de plus haut degré se compensent."""
+    if _dominant(M, s) is None:
+        return None
     feuilles = _feuilles(M)
-    for t, _ in feuilles:
+    termes = []                                           # [(signe, tex ou None, P ou racine)] dans l'ordre de M
+    for t, sg in feuilles:
         r = _est_racine(t)
         if r is not None:
             Q = _poly_ou_const(r)
             if Q is None or deg(Q) == 0 or deg(Q) % 2 or Q[-1] <= 0:
                 return None
-            k = deg(Q) // 2
-            tete = _monome_tex(Q[-1], 2 * k)
-            sq = sp.sqrt(_rat(Q[-1]))
-            coef = "" if sq == 1 else num_sympy(sq).tex
-            absx = "|x|" if k == 1 else rf"|x|^{{{k}}}"
-            c_final = sq * (s ** k)
-            if s < 0 and k % 2:
-                eq.append(r"Comme \(x < 0\), \(\sqrt{x^{2}} = |x| = -x\).")
-            fin = _terme_dom_tex(c_final, k)
-            if s > 0 and k % 2:
-                suffixe = r" (car \(x > 0\))"
-            elif k % 2 == 0:
-                suffixe = rf" (car \(|x|^{{{k}}} = x^{{{k}}}\))"
-            else:
-                suffixe = ""
-            interieur = _facteur_detaille(Q, 2 * k)[1]
-            if interieur == "1":                      # √(q x^{2k}) tel quel : égalité, pas d'équivalent
-                eq.append(rf"\({tex(t)} = {coef}{absx} = {fin}\){suffixe}.")
-            else:
-                eq.append(rf"\({tex(t)} \sim \sqrt{{{tete}}} = {coef}{absx} = {fin}\){suffixe}.")
-            if interieur != "1":
-                just.append(rf"\(\dfrac{{{tex(t)}}}{{\sqrt{{{tete}}}}} = \sqrt{{{interieur}}} \to 1\)")
-        else:
-            P = _polynome_de(t)
-            if P is not None and len(_polynome_a_termes(P)) > 1:
-                tete = _monome_tex(P[-1], deg(P))
-                eq.append(rf"\({tex(t)} \sim {tete}\).")
-                just.append(rf"\(\dfrac{{{tex(t)}}}{{{tete}}} = {_facteur_detaille(P, deg(P))[1]} \to 1\)")
-            elif P is None and not sans_x(t) and not isinstance(t, X):
-                return None
-    if len(feuilles) > 1:
-        d = _dominant(M, s)
-        if d is None:
+            termes.append(("racine", sg, t, Q))
+            continue
+        P = _poly_ou_const(t)
+        if P is None:
+            if sans_x(t):
+                continue                                  # constante nulle
             return None
-        eq.append(rf"\({tex(M)} \sim {_terme_dom_tex(*d)}\).")
-    return eq, just
+        termes.append(("poly", sg, t, P))
+    if not termes:
+        return None
+    if len(termes) == 1 and termes[0][0] == "racine":     # un seul terme : une racine
+        _, sg, t, Q = termes[0]
+        lignes, signe, facteur, m = _racine_en_evidence(t, Q, s)
+        return {"coef": sg * signe, "k": m, "R": facteur, "lignes": lignes}
+    if all(genre == "poly" for genre, _, _, _ in termes):    # polynôme : M = c·x^k(1 + …)
+        P = [F(0)]
+        for _, sg, _, Pi in termes:
+            P = padd(P, pscal(Pi, F(sg)))
+        k, c = deg(P), P[deg(P)]
+        t = [(False, Nb(F(1)))] + [_terme_laurent(P[j] / c, j - k) for j in range(k - 1, -1, -1) if P[j] != 0]
+        return {"coef": c, "k": k, "R": _somme_termes(t) if len(t) > 1 else Nb(F(1)), "lignes": []}
+    # somme dont une racine : chaque terme divisé par x^k
+    k = max(deg(P) // 2 if genre == "racine" else deg(P) for genre, _, _, P in termes)
+    lignes, t_arbres = [], []
+    for genre, sg, t, P in termes:
+        if genre == "racine":
+            ls, signe, facteur, m = _racine_en_evidence(t, P, s)
+            lignes += ls
+            if _est_un(facteur):                          # racine d'un monôme à coefficient entier
+                t_arbres.append(_terme_laurent(sg * signe, m - k))
+            else:
+                rac = facteur if m == k else Op("/", facteur, _puissance_x(k - m))
+                t_arbres.append((sg * signe < 0, rac))
+        else:
+            for j in range(deg(P), -1, -1):
+                if P[j] != 0:
+                    t_arbres.append(_terme_laurent(sg * P[j], j - k))
+    return {"coef": F(1), "k": k, "R": _somme_termes(t_arbres), "lignes": lignes, "somme": True}
 
 
-def _termes_dominants(n, ctx, fi):
-    """En ±∞ : on remplace chaque membre par son terme dominant, en justifiant que leur rapport tend vers 1.
-    Jamais quand les termes dominants d'une somme se compensent (alors : conjuguée ou mise en évidence)."""
+def _evidence_racine(n, ctx, fi):
+    """En ±∞, quotient ou produit dont un membre contient une racine : on met x^k en évidence dans chaque membre
+    (√(4x² + 1) = √(x²(4 + 1/x²)) = |x|√(4 + 1/x²), puis |x| = ±x), on simplifie, puis on calcule la limite de ce qui
+    reste. Jamais quand les termes de plus haut degré d'une somme se compensent (alors : expression conjuguée)."""
     s = ctx.pt.s
     if not s or not _contient_racine(n) or not isinstance(n, Op) or n.op not in "*/":
         return None
-    D = _dominant(n, s)
-    if D is None:
+    A, B = _membre_en_evidence(n.a, s), _membre_en_evidence(n.b, s)
+    if A is None or B is None:
         return None
-    c, k = D
-    lignes, justif = [_ligne_fi(n, fi, ctx), rf"Au voisinage de \({ctx.pt.tex()}\), on remplace chaque membre par son terme dominant."], []
-    dom = []
-    for M in (n.a, n.b):
-        r = _equivalent_membre(M, s)
-        d = _dominant(M, s)
-        if r is None or d is None:
-            return None
-        eq, ju = r
-        lignes += eq
-        justif += ju
-        dom.append(_terme_dom_tex(*d))
-    if justif:
-        lignes.append("En effet, le rapport de chaque membre à son terme dominant tend vers 1 : " + _enumerer(justif) + ".")
-    L = _lim_dominant(c, k, s)
-    # garde-fou : le rapport n / (c x^k) tend bien vers 1 (valeurs numériques lointaines)
-    for t in (1e4, 1e6):
-        x = s * t
-        v = evaluer(n, x)
-        ref = float(c) * x ** k
-        if v is None or abs(v / ref - 1) > 5e-2:
-            raise Abandon("le terme dominant ne reproduit pas la fonction")
-    res = _terme_dom_tex(c, k)
-    if n.op == "/":
-        equiv = rf"\dfrac{{{dom[0]}}}{{{dom[1]}}} = {res}"
-    else:
-        equiv = rf"{dom[0]} \cdot {dom[1]} = {res}"
-    math, pre = ctx.dire(n, L)
-    lignes.append(rf"Donc \({tex(n)} \sim {equiv}\), d'où {math}.")
-    return L, lignes + pre
+    lignes = [_ligne_fi(n, fi, ctx)]
+    for M, mb in ((n.a, A), (n.b, B)):
+        lignes += mb["lignes"]
+        tete = _produit_arbres([t for t in (Nb(abs(mb["coef"])) if abs(mb["coef"]) != 1 else None,
+                                             _puissance_x(mb["k"]) if mb["k"] else None) if t is not None] or [Nb(F(1))])
+        mb["tete"] = Neg(tete) if mb["coef"] < 0 else tete
+        mb["evid"] = mb["tete"] if _est_un(mb["R"]) else Op("*", mb["tete"], mb["R"])
+        if (not mb["lignes"] or mb.get("somme")) and not _est_un(mb["R"]):
+            lignes.append(rf"On met \({tex(mb['tete'])}\) en évidence : \({tex(M)} = {tex(mb['evid'])}\).")
+    coef = A["coef"] / B["coef"] if n.op == "/" else A["coef"] * B["coef"]
+    d = A["k"] - B["k"] if n.op == "/" else A["k"] + B["k"]
+    haut, bas = [], []
+    if abs(coef.numerator) != 1:
+        haut.append(Nb(F(abs(coef.numerator))))
+    if coef.denominator != 1:
+        bas.append(Nb(F(coef.denominator)))
+    if d > 0:
+        haut.append(_puissance_x(d))
+    elif d < 0:
+        bas.append(_puissance_x(-d))
+    if not _est_un(A["R"]):
+        haut.append(A["R"])
+    if not _est_un(B["R"]):
+        (bas if n.op == "/" else haut).append(B["R"])
+    num = _produit_arbres(haut) if haut else Nb(F(1))
+    g = Op("/", num, _produit_arbres(bas)) if bas else num
+    if coef < 0:
+        g = Neg(g)
+    evid = Op(n.op, A["evid"], B["evid"])
+    _meme_fonction(n, g, ctx)
+    lignes.append(rf"Donc \({tex(n)} = {tex(evid)} = {tex(g)}\).")
+    L, lg = _noeud(g, ctx)
+    return L, lignes + lg
 
 
 # --- méthode : expression conjuguée (∞ − ∞ en ±∞ ; 0/0 en une valeur) -----------------------------
@@ -2147,8 +2207,8 @@ def _simplifier_zero_sur_zero(n, ctx, fi):
     return L, lignes + lg
 
 
-# ordre du cours : mise en évidence, conjuguée, termes dominants, croissance comparée, L'Hôpital
-METHODES[:] = [_simplifier_zero_sur_zero, _evidence_exp, _conjuguee, _termes_dominants, _comparee_pure, _lhopital]
+# ordre du cours : mise en évidence, conjuguée, mise en évidence sous une racine, croissance comparée, L'Hôpital
+METHODES[:] = [_simplifier_zero_sur_zero, _evidence_exp, _conjuguee, _evidence_racine, _comparee_pure, _lhopital]
 
 
 def _silencieux(n, L, ctx):

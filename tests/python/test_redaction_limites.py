@@ -441,62 +441,78 @@ class TestZeroSurZero(unittest.TestCase):
                 self.assertFalse(any("0/0" in e["html"] for e in etude["etapes"]), (entree, etude["ou"]))
 
 
-class TestTermesDominants(unittest.TestCase):
-    """L5 : en ±∞, quotient dont un membre est une racine — chaque membre est remplacé par son terme dominant,
-    le remplacement est justifié (rapport → 1) et « x < 0 donc √(x²) = |x| = −x » est écrit en −∞ (LA-20)."""
+class TestEvidenceRacine(unittest.TestCase):
+    """L5 : en ±∞, quotient dont un membre est une racine — on met x^k en évidence dans chaque membre, en égalités
+    exactes (√(4x²+1) = √(x²(4 + 1/x²)) = |x|√(4 + 1/x²), puis |x| = ±x), sans équivalent ; « x < 0 donc
+    √(x²) = |x| = −x » est écrit en −∞ (LA-20, LA-29)."""
 
     def test_racine_sur_affine_en_plus_l_infini(self):
         t = textes("sqrt(4x^2+1)/(x+2)", r"x \to +\infty")
-        self.assertEqual(t[3:], [
+        self.assertEqual(t[3:9], [
             r"Le numérateur \(\sqrt{4x^{2} + 1}\) tend vers \(+\infty\) et le dénominateur \(x + 2\) tend vers "
             r"\(+\infty\) : forme indéterminée « \(\infty/\infty\) ».",
-            r"Au voisinage de \(+\infty\), on remplace chaque membre par son terme dominant.",
-            r"\(\sqrt{4x^{2} + 1} \sim \sqrt{4\,x^{2}} = 2|x| = 2\,x\) (car \(x > 0\)).",
-            r"\(x + 2 \sim x\).",
-            r"En effet, le rapport de chaque membre à son terme dominant tend vers 1 : "
-            r"\(\dfrac{\sqrt{4x^{2} + 1}}{\sqrt{4\,x^{2}}} = \sqrt{1 + \dfrac{1}{4x^{2}}} \to 1\).",
-            r"Donc \(\frac{\sqrt{4x^{2} + 1}}{x + 2} \sim \dfrac{2\,x}{x} = 2\), "
-            r"d'où \(\displaystyle\lim_{x\to +\infty} f(x) = 2\).",
+            r"\(\sqrt{4x^{2} + 1} = \sqrt{x^{2}\left(4 + \frac{1}{x^{2}}\right)} = |x|\sqrt{4 + \frac{1}{x^{2}}}\).",
+            r"Comme \(x > 0\), \(|x| = x\), donc \(\sqrt{4x^{2} + 1} = x\,\sqrt{4 + \frac{1}{x^{2}}}\).",
+            r"On met \(x\) en évidence : \(x + 2 = x\,\left(1 + \frac{2}{x}\right)\).",
+            r"Donc \(\frac{\sqrt{4x^{2} + 1}}{x + 2} = \frac{x\,\sqrt{4 + \frac{1}{x^{2}}}}{x\,\left(1 + \frac{2}{x}\right)} = "
+            r"\frac{\sqrt{4 + \frac{1}{x^{2}}}}{1 + \frac{2}{x}}\).",
+            r"Le numérateur vaut \(1\) et le dénominateur \(x^{2}\) tend vers \(+\infty\), donc \(\frac{1}{x^{2}} \to 0\).",
+        ])
+        self.assertEqual(t[-3:], [
+            r"\(\sqrt{4 + \frac{1}{x^{2}}} \to 2\) et \(1 + \frac{2}{x} \to 1\), donc "
+            r"\(\frac{\sqrt{4 + \frac{1}{x^{2}}}}{1 + \frac{2}{x}} \to 2\).",
+            r"Donc \(\displaystyle\lim_{x\to +\infty} f(x) = 2\).",
             r"Asymptote horizontale d'équation \(y = 2\).",
         ])
 
     def test_racine_sur_affine_en_moins_l_infini(self):
         t = textes("sqrt(4x^2+1)/(x+2)", r"x \to -\infty")
-        self.assertIn(r"Comme \(x < 0\), \(\sqrt{x^{2}} = |x| = -x\).", t)
-        self.assertIn(r"\(\sqrt{4x^{2} + 1} \sim \sqrt{4\,x^{2}} = 2|x| = -2\,x\).", t)
-        self.assertIn(r"Donc \(\frac{\sqrt{4x^{2} + 1}}{x + 2} \sim \dfrac{-2\,x}{x} = -2\), "
-                      r"d'où \(\displaystyle\lim_{x\to -\infty} f(x) = -2\).", t)
+        self.assertIn(r"Comme \(x < 0\), \(\sqrt{x^{2}} = |x| = -x\), donc \(\sqrt{4x^{2} + 1} = -x\,\sqrt{4 + \frac{1}{x^{2}}}\).", t)
+        self.assertIn(r"Donc \(\frac{\sqrt{4x^{2} + 1}}{x + 2} = \frac{-x\,\sqrt{4 + \frac{1}{x^{2}}}}{x\,\left(1 + \frac{2}{x}\right)} = "
+                      r"-\frac{\sqrt{4 + \frac{1}{x^{2}}}}{1 + \frac{2}{x}}\).", t)
+        self.assertIn(r"\(-\frac{\sqrt{4 + \frac{1}{x^{2}}}}{1 + \frac{2}{x}} \to -2\).", t)
+        self.assertIn(r"Donc \(\displaystyle\lim_{x\to -\infty} f(x) = -2\).", t)
 
     def test_pente_d_une_racine_de_trinome(self):             # a = lim f(x)/x pour √(x²−4x+5)
-        self.assertIn(r"d'où \(\displaystyle\lim_{x\to +\infty} f(x) = 1\).", " ".join(textes("sqrt(x^2-4x+5)/x", r"x \to +\infty")))
+        self.assertIn(r"Donc \(\displaystyle\lim_{x\to +\infty} f(x) = 1\).", textes("sqrt(x^2-4x+5)/x", r"x \to +\infty"))
         t = textes("sqrt(x^2-4x+5)/x", r"x \to -\infty")
-        self.assertIn(r"Comme \(x < 0\), \(\sqrt{x^{2}} = |x| = -x\).", t)
-        self.assertIn(r"d'où \(\displaystyle\lim_{x\to -\infty} f(x) = -1\).", " ".join(t))
+        self.assertIn(r"Comme \(x < 0\), \(\sqrt{x^{2}} = |x| = -x\), donc \(\sqrt{x^{2} - 4x + 5} = "
+                      r"-x\,\sqrt{1 - \frac{4}{x} + \frac{5}{x^{2}}}\).", t)
+        self.assertIn(r"Donc \(\displaystyle\lim_{x\to -\infty} f(x) = -1\).", t)
 
     def test_racine_d_un_carre(self):
         t = textes("x/sqrt(x^2)", r"x \to -\infty")
-        self.assertIn(r"\(\sqrt{x^{2}} = |x| = -x\).", t)
-        self.assertIn(r"Donc \(\frac{x}{\sqrt{x^{2}}} \sim \dfrac{x}{-x} = -1\), d'où "
-                      r"\(\displaystyle\lim_{x\to -\infty} f(x) = -1\).", t)
+        self.assertIn(r"Comme \(x < 0\), \(\sqrt{x^{2}} = |x| = -x\), donc \(\sqrt{x^{2}} = -x\).", t)
+        self.assertIn(r"Donc \(\frac{x}{\sqrt{x^{2}}} = \frac{x}{-x} = -1\).", t)
+        self.assertIn(r"Donc \(\displaystyle\lim_{x\to -\infty} f(x) = -1\).", t)
 
     def test_somme_de_racines_au_denominateur(self):
         t = textes("sqrt(x^2+1)/(sqrt(x^2+4)+1)", r"x \to +\infty")
-        self.assertIn(r"\(\sqrt{x^{2} + 4} + 1 \sim x\).", t)
+        self.assertIn(r"On met \(x\) en évidence : \(\sqrt{x^{2} + 4} + 1 = x\,\left(\sqrt{1 + \frac{4}{x^{2}}} + \frac{1}{x}\right)\).", t)
+        self.assertIn(r"Donc \(\displaystyle\lim_{x\to +\infty} f(x) = 1\).", t)
 
     def test_jamais_pour_une_fraction_rationnelle_ni_quand_les_termes_se_compensent(self):
         for entree in ["(2x^2+3x)/(x^2+1)", "x^3-3x", "x^2/(x-1)", "1/(x-2)"]:
             for etude in la.etudier(entree)["etudes"]:
-                self.assertFalse(any("terme dominant" in e["html"] for e in etude["etapes"]), (entree, etude["ou"]))
-        # √(x²+x) − x en +∞ : les termes dominants se compensent (∞ − ∞) : pas de remplacement par les dominants
+                self.assertFalse(any("|x|" in e["html"] for e in etude["etapes"]), (entree, etude["ou"]))
+        # √(x²+x) − x en +∞ : les termes de plus haut degré se compensent (∞ − ∞) : l'expression conjuguée passe d'abord
         t = textes("sqrt(x^2+x)-x", r"x \to +\infty")
-        premiere = next(i for i, p in enumerate(t) if "terme dominant" in p)
+        premiere = next(i for i, p in enumerate(t) if "|x|" in p)
         self.assertTrue(any("conjuguée" in p for p in t[:premiere]), t)
 
     def test_garde_fou(self):
-        with mock.patch.object(la, "_dominant", side_effect=lambda n, s: (la._sympy().Integer(3), 1)):
+        with mock.patch.object(la, "_meme_fonction", side_effect=la.Abandon("réécriture fausse")):
             t = etapes("sqrt(4x^2+1)/(x+2)", r"x \to +\infty")
         self.assertTrue(any(REPLI[1:] in e["html"] for e in t))
-        self.assertFalse(any("terme dominant" in e["html"] for e in t))
+        self.assertFalse(any("|x|" in e["html"] for e in t))
+
+    def test_aucun_equivalent(self):                 # ni « ∼ », ni « équivalent », ni « se comporte comme »
+        for entree in ["sqrt(4x^2+1)/(x+2)", "sqrt(x^2+x)-x", "x/sqrt(x^2)", "ln(x^2+1)/x", "sqrt(x^2+1)/(sqrt(x^2+4)+1)"]:
+            r = la.etudier(entree)
+            for etude in r["etudes"]:
+                for e in etude["etapes"]:
+                    for mot in (r"\sim", "∼", "équivalent", "se comporte comme", "terme dominant"):
+                        self.assertNotIn(mot, e["html"], (entree, etude["ou"]))
 
 
 class TestConjuguee(unittest.TestCase):
@@ -512,7 +528,9 @@ class TestConjuguee(unittest.TestCase):
             r"\dfrac{x}{\sqrt{x^{2} + x} + x}\).",
         ])
         self.assertIn(r"Donc \(\displaystyle\lim_{x\to +\infty} f(x) = \frac{1}{2}\).", t)
-        self.assertIn(r"\(\sqrt{x^{2} + x} + x \sim 2\,x\).", t)
+        self.assertIn(r"Donc \(\frac{x}{\sqrt{x^{2} + x} + x} = \frac{x}{x\,\left(\sqrt{1 + \frac{1}{x}} + 1\right)} = "
+                      r"\frac{1}{\sqrt{1 + \frac{1}{x}} + 1}\).", t)
+        self.assertIn(r"\(\frac{1}{\sqrt{1 + \frac{1}{x}} + 1} \to \frac{1}{2}\).", t)
 
     def test_racine_moins_x_en_moins_l_infini_pas_de_forme_indeterminee(self):
         t = textes("sqrt(x^2+x)-x", r"x \to -\infty")
@@ -522,11 +540,11 @@ class TestConjuguee(unittest.TestCase):
 
     def test_ordonnee_a_l_origine_d_une_asymptote_oblique(self):   # b = lim (f(x) − ax)
         plus = " ".join(textes("sqrt(x^2-4x+5)-x", r"x \to +\infty"))
-        self.assertIn(r"d'où \(\displaystyle\frac{-4x + 5}{\sqrt{x^{2} - 4x + 5} + x} \to -2\)".replace(r"\displaystyle", ""), plus)
+        self.assertIn(r"\(-\frac{4\left(1 - \frac{5}{4x}\right)}{\sqrt{1 - \frac{4}{x} + \frac{5}{x^{2}}} + 1} \to -2\)", plus)
         self.assertIn(r"\lim_{x\to +\infty} f(x) = -2", plus)
         moins = " ".join(textes("sqrt(x^2-4x+5)+x", r"x \to -\infty"))
         self.assertIn("expression conjuguée", moins)
-        self.assertIn(r"Comme \(x < 0\), \(\sqrt{x^{2}} = |x| = -x\).", moins)
+        self.assertIn(r"Comme \(x < 0\), \(\sqrt{x^{2}} = |x| = -x\), donc", moins)
         self.assertIn(r"\lim_{x\to -\infty} f(x) = 2", moins)
 
     def test_zero_sur_zero_conjuguee_du_numerateur(self):
