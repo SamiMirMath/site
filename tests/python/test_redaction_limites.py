@@ -564,16 +564,76 @@ class TestConjuguee(unittest.TestCase):
         self.assertFalse(any("conjuguée" in e["html"] for e in t))
 
 
+class TestCroissanceComparee(unittest.TestCase):
+    """L6 / T09 (Q1) : la croissance comparée n'est citée que devant une forme indéterminée, avec la limite de
+    référence nommée ; mise en évidence de l'exponentielle (LA-07)."""
+
+    def test_x2_exp_moins_x(self):
+        t = textes("x^2*e^(-x)", r"x \to +\infty")
+        i = next(i for i, p in enumerate(t) if "forme indéterminée" in p)
+        self.assertEqual(t[i], r"\(x^{2} \to +\infty\) et \(e^{-x} \to 0^{+}\) : forme indéterminée « \(0 \cdot \infty\) ».")
+        self.assertEqual(t[i + 1], r"Par croissance comparée (limite de référence : \(\lim_{x\to +\infty} x^{n}e^{-ax} = 0\) "
+                                   r"pour \(a > 0\) et \(n > 0\)), \(x^{2}\,e^{-x} \to 0\).")
+        self.assertEqual(t[i + 2], r"Donc \(\displaystyle\lim_{x\to +\infty} f(x) = 0\).")
+
+    def test_liste_de_la_specification(self):
+        cas = [("x^2*e^(-x)", r"x \to +\infty", "x^{n}e^{-ax} = 0"), ("x^(1/2)*e^(-x)", r"x \to +\infty", "x^{n}e^{-ax} = 0"),
+               ("ln(x)/x", r"x \to +\infty", r"\dfrac{\ln x}{x^{n}} = 0"), ("x*ln(x)", r"x \to 0^+", r"x^{n}\ln x = 0"),
+               ("e^x-x^2", r"x \to +\infty", "x^{n}e^{-ax} = 0"), ("x-ln(x)", r"x \to +\infty", r"\dfrac{\ln x}{x^{n}} = 0"),
+               ("x*e^x", r"x \to -\infty", "x^{n}e^{ax} = 0"), ("e^x/x", r"x \to +\infty", r"\dfrac{e^{ax}}{x^{n}} = +\infty"),
+               ("e^(2x)/x^3", r"x \to +\infty", r"\dfrac{e^{ax}}{x^{n}} = +\infty")]
+        for entree, ou, reference in cas:
+            with self.subTest(f=entree):
+                t = " ".join(textes(entree, ou))
+                self.assertIn("croissance comparée", t)
+                self.assertIn(reference, t)
+                self.assertIn("forme indéterminée", t)
+
+    def test_jamais_hors_forme_indeterminee(self):
+        for entree, ou in [("x*e^x", r"x \to +\infty"), ("e^x/x", r"x \to 0"), ("e^(2x)", r"x \to +\infty"),
+                           ("e^(2x)", r"x \to -\infty"), ("x^2*e^(-x)", r"x \to -\infty"), ("ln(x)/x", r"x \to 0^+")]:
+            with self.subTest(f=entree, ou=ou):
+                self.assertFalse(any("croissance comparée" in p for p in textes(entree, ou)))
+
+    def test_toute_mention_suit_une_forme_indeterminee(self):
+        for entree, ou, t in TestStyle().tous_les_textes():
+            for i, p in enumerate(t):
+                if "croissance comparée" in p:
+                    with self.subTest(f=entree, ou=ou):
+                        self.assertTrue(any("forme indéterminée" in q for q in t[:i + 1]), t)
+
+    def test_mise_en_evidence_de_l_exponentielle(self):
+        t = textes("e^x-x^2", r"x \to +\infty")
+        self.assertIn(r"On met \(e^{x}\) en évidence : \(e^{x} - x^{2} = e^{x}\,\left(1 - x^{2}\,e^{-x}\right)\).", t)
+        self.assertIn(r"\(e^{x} \to +\infty\) et \(1 - x^{2}\,e^{-x} \to 1\), donc "
+                      r"\(e^{x}\,\left(1 - x^{2}\,e^{-x}\right) \to +\infty\).", t)
+        t = textes("(e^x+1)/(e^x-1)", r"x \to +\infty")
+        self.assertIn(r"On met \(e^{x}\) en évidence : \(e^{x} + 1 = e^{x}\,\left(1 + e^{-x}\right)\) et "
+                      r"\(e^{x} - 1 = e^{x}\,\left(1 - e^{-x}\right)\).", t)
+        self.assertIn(r"Donc \(\frac{e^{x} + 1}{e^{x} - 1} = \frac{1 + e^{-x}}{1 - e^{-x}}\).", t)
+
+    def test_polynome_devant_l_exponentielle(self):
+        t = textes("e^(-x)*(x+1)", r"x \to +\infty")
+        self.assertIn(r"On met en évidence le terme de plus haut degré : \(x + 1 = x\left(1 + \dfrac{1}{x}\right)\).", t)
+
+    def test_garde_fou(self):
+        with mock.patch.object(la, "_reference", return_value=("puissance_exp_neg", la.Lim.infini(1))):
+            t = etapes("x^2*e^(-x)", r"x \to +\infty")
+        self.assertTrue(any(REPLI[1:] in e["html"] for e in t))
+
+
 class TestFormeIndeterminee(unittest.TestCase):
     """Sans méthode pour la lever (L1), la rédaction est abandonnée : phrase de repli, jamais d'étape fausse."""
 
     def test_repli_mot_pour_mot_et_detail_en_console(self):
-        etape = etapes("x*e^x", r"x \to -\infty")[0]
+        with mock.patch.object(la, "METHODES", []):          # aucune méthode du cours : la forme n'est pas levée
+            etape = etapes("x*e^x", r"x \to -\infty")[0]
         self.assertEqual(etape["html"], REPLI + r"\(\displaystyle\lim_{x\to -\infty} f(x) = 0\).")
         self.assertIn("0 · ∞", etape["detail"])
 
     def test_repli_garde_la_conclusion(self):
-        t = textes("x*e^x", r"x \to -\infty")
+        with mock.patch.object(la, "METHODES", []):
+            t = textes("x*e^x", r"x \to -\infty")
         self.assertEqual(len(t), 2)
         self.assertEqual(t[1], r"Asymptote horizontale d'équation \(y = 0\).")
 

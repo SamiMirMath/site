@@ -964,7 +964,10 @@ class _Contexte:
         (« lim f(x) = L » ou « f(x) → L »). Un zéro de signe connu est toujours justifié."""
         pre = []
         if L.nul() and L.ap and not isinstance(n, X) and n is not self.f:
-            pre = self.justifier(n, L)
+            try:
+                pre = self.justifier(n, L)
+            except Abandon:
+                L = Lim.fin(0, 0)           # le signe n'est pas justifiable : on ne l'affirme pas
         if n is self.f:
             self.racine_dite = True
             if self.mode == "limite":
@@ -1289,10 +1292,16 @@ FI_TEX = {"∞ − ∞": r"\infty - \infty", "0 · ∞": r"0 \cdot \infty", "∞
 def _ligne_fi(n, fi):
     """« Le numérateur tend vers … et le dénominateur tend vers … : forme indéterminée « ∞/∞ ». »"""
     nom = rf"« \({FI_TEX[fi.nom]}\) »"
+
+    def lim(noeud, L):
+        evident = isinstance(noeud, X) or (isinstance(noeud, Fn) and noeud.nom == "exp")
+        return L.tex(bool(evident and L.nul() and L.ap))
+
+    a, b = lim(n.a, fi.A), lim(n.b, fi.B)
     if isinstance(n, Op) and n.op == "/":
-        return (rf"Le numérateur \({tex(n.a)}\) tend vers \({fi.A.tex(False)}\) et le dénominateur "
-                rf"\({tex(n.b)}\) tend vers \({fi.B.tex(False)}\) : forme indéterminée {nom}.")
-    return rf"\({tex(n.a)} \to {fi.A.tex(False)}\) et \({tex(n.b)} \to {fi.B.tex(False)}\) : forme indéterminée {nom}."
+        return (rf"Le numérateur \({tex(n.a)}\) tend vers \({a}\) et le dénominateur "
+                rf"\({tex(n.b)}\) tend vers \({b}\) : forme indéterminée {nom}.")
+    return rf"\({tex(n.a)} \to {a}\) et \({tex(n.b)} \to {b}\) : forme indéterminée {nom}."
 
 
 def _meme_fonction(n, g, ctx):
@@ -1649,10 +1658,265 @@ def _conjuguee(n, ctx, fi):
     return _conjuguee_zero_sur_zero(n, ctx, fi)
 
 
-METHODES.insert(0, _conjuguee)
 
 
-METHODES.append(_termes_dominants)
+# --- méthode : croissance comparée (Q1) et mise en évidence d'une exponentielle ---------------------
+def _classer_facteur(h, k):
+    """Facteur h^k d'un produit : ('x', exposant) | ('exp', b) pour e^{bx} | ('ln', exposant) | ('poly', P, k)."""
+    if isinstance(h, X):
+        return ("x", F(k))
+    r = _est_racine(h)
+    if r is not None and isinstance(r, X):
+        return ("x", F(k, 2))
+    if isinstance(h, Op) and h.op == "^" and isinstance(h.a, X):
+        alpha = valeur_constante(h.b)
+        return ("x", k * alpha) if alpha is not None else None
+    if isinstance(h, Fn) and h.nom == "exp":
+        P = _polynome_de(h.a)
+        return ("exp", P[1] * k) if (P is not None and deg(P) == 1 and P[0] == 0) else None
+    if isinstance(h, Fn) and h.nom == "ln" and isinstance(h.a, X):
+        return ("ln", F(k))
+    P = _polynome_de(h)
+    return ("poly", P, k) if P is not None else None
+
+
+def _params_pur(n):
+    """n = C·x^N·e^{Bx}·(ln x)^q·∏ P_i^k_i : (C, N, B, q, [(P_i, k_i)]) ; None si n n'est pas de cette forme."""
+    try:
+        c, facs = aplatir(n)
+    except Exception:
+        return None
+    C, N, B, q, polys = F(c), F(0), F(0), F(0), []
+    for h, k in facs:
+        cl = _classer_facteur(h, k)
+        if cl is None:
+            return None
+        if cl[0] == "x":
+            N += cl[1]
+        elif cl[0] == "exp":
+            B += cl[1]
+        elif cl[0] == "ln":
+            q += cl[1]
+        else:
+            P, kk = cl[1], cl[2]
+            if len(_polynome_a_termes(P)) == 1:         # monôme c·x^m
+                C *= P[-1] ** kk
+                N += deg(P) * kk
+            else:
+                polys.append((P, kk))
+    return C, N, B, q, polys
+
+
+def _arbre_pur(N, B, q):
+    """x^N · e^{Bx} · (ln x)^q  (q = ±1) sous forme de quotient d'arbres ; Nb(1) si tout est nul."""
+    haut, bas = [], []
+    if N != 0:
+        puiss = X() if abs(N) == 1 else Op("^", X(), Nb(abs(N)))
+        (haut if N > 0 else bas).append(puiss)
+    if B != 0:
+        arg = X() if B == 1 else (Neg(X()) if B == -1 else (Op("*", Nb(B), X()) if B > 0 else Neg(Op("*", Nb(-B), X()))))
+        haut.append(Fn("exp", arg))
+    if q != 0:
+        if abs(q) != 1:
+            raise Abandon("puissance de ln non prise en charge")
+        (haut if q > 0 else bas).append(Fn("ln", X()))
+
+    def produit(L):
+        t = L[0]
+        for u in L[1:]:
+            t = Op("*", t, u)
+        return t
+    if not haut and not bas:
+        return Nb(F(1))
+    if not bas:
+        return produit(haut)
+    return Op("/", produit(haut) if haut else Nb(F(1)), produit(bas))
+
+
+def _arbre_avec_coefficient(C, pur):
+    if C == 1:
+        return pur
+    if isinstance(pur, Nb):
+        return Nb(abs(C)) if C > 0 else Neg(Nb(-C))
+    return Op("*", Nb(C), pur) if C > 0 else Neg(Op("*", Nb(-C), pur))
+
+
+REFERENCES = {
+    "exp_sur_puissance": (r"\lim_{x\to +\infty} \dfrac{e^{ax}}{x^{n}} = +\infty", r"pour \(a > 0\) et \(n > 0\)"),
+    "puissance_exp_neg": (r"\lim_{x\to +\infty} x^{n}e^{-ax} = 0", r"pour \(a > 0\) et \(n > 0\)"),
+    "puissance_exp_moins_inf": (r"\lim_{x\to -\infty} x^{n}e^{ax} = 0", r"pour \(a > 0\) et \(n\) entier positif"),
+    "ln_sur_puissance": (r"\lim_{x\to +\infty} \dfrac{\ln x}{x^{n}} = 0", r"pour \(n > 0\)"),
+    "puissance_sur_ln": (r"\lim_{x\to +\infty} \dfrac{x^{n}}{\ln x} = +\infty", r"pour \(n > 0\)"),
+    "puissance_ln_zero": (r"\lim_{x\to 0^{+}} x^{n}\ln x = 0", r"pour \(n > 0\)"),
+}
+
+
+def _reference(N, B, q, pt):
+    """(nom de la limite de référence, limite) pour C·x^N e^{Bx} (ln x)^q au point d'étude, ou None."""
+    s = pt.s
+    if s and q == 0 and B != 0:
+        if s > 0 and B > 0 and N < 0:
+            return "exp_sur_puissance", Lim.infini(1)
+        if s > 0 and B < 0 and N > 0:
+            return "puissance_exp_neg", Lim.fin(0, 1)
+        if s < 0 and B > 0 and N > 0 and N.denominator == 1:
+            return "puissance_exp_moins_inf", Lim.fin(0, 1 if int(N) % 2 == 0 else -1)
+    elif s and B == 0 and q == 1 and N < 0 and s > 0:
+        return "ln_sur_puissance", Lim.fin(0, 1)
+    elif s and B == 0 and q == -1 and N > 0 and s > 0:
+        return "puissance_sur_ln", Lim.infini(1)
+    elif not s and pt.a == 0 and pt.d > 0 and B == 0 and q == 1 and N > 0:
+        return "puissance_ln_zero", Lim.fin(0, -1)
+    return None
+
+
+def _ligne_reference(nom):
+    lim, cond = REFERENCES[nom]
+    return rf"limite de référence : \({lim}\) {cond}"
+
+
+def _comparee_pure(n, ctx, fi):
+    """Produit ou quotient de x^n, e^{ax}, ln x (Q1) : on nomme la limite de référence utilisée ; un facteur
+    polynôme est d'abord mis sous la forme c·x^m(1 + …)."""
+    if not isinstance(n, Op) or n.op not in "*/":
+        return None
+    r = _params_pur(n)
+    if r is None:
+        return None
+    C, N, B, q, polys = r
+    if polys:
+        return _comparee_avec_polynomes(n, ctx, fi, C, N, B, q, polys)
+    ref = _reference(N, B, q, ctx.pt)
+    if ref is None or C == 0:
+        return None
+    nom, Lref = ref
+    pur = _arbre_pur(N, B, q)
+    L = Lref if C > 0 else (_oppose(Lref) if not Lref.nul() else Lim.fin(0, -Lref.ap))
+    if L.nul():
+        L = Lim.fin(0, Lref.ap * (1 if C > 0 else -1))
+    ligne = rf"Par croissance comparée ({_ligne_reference(nom)}), \({tex(pur)} \to {Lref.tex(False)}\)"
+    if C != 1 or tex(pur) != tex(n):
+        ligne += rf", donc \({tex(n)} \to {L.tex(False)}\)"
+    return L, [_ligne_fi(n, fi), ligne + "."]
+
+
+def _comparee_avec_polynomes(n, ctx, fi, C, N, B, q, polys):
+    """(x + 1)e^{-x} : on met x en évidence dans le polynôme, puis on conclut avec le produit sans polynôme."""
+    sp = _sympy()
+    lignes, crochets = [_ligne_fi(n, fi)], None
+    x = _SP["x"]
+    for P, k in polys:
+        m = deg(P)
+        tete, interieur, complet, termes = _facteur_detaille(P, m)
+        lignes.append(rf"On met en évidence le terme de plus haut degré : \({ptex(P, 'x')} = {complet}\).")
+        C, N = C * P[-1] ** k, N + m * k
+        expr = sum(_rat(c) * x ** i for i, c in enumerate(P)) / (_rat(P[-1]) * x ** m)
+        bt = arbre_depuis_sympy(sp.expand(expr))
+        facteur = bt if k == 1 else (Op("^", bt, Nb(F(k))) if k > 0 else Op("/", Nb(F(1)), Op("^", bt, Nb(F(-k)))))
+        crochets = facteur if crochets is None else Op("*", crochets, facteur)
+    g = Op("*", _arbre_avec_coefficient(C, _arbre_pur(N, B, q)), crochets)
+    _meme_fonction(n, g, ctx)
+    lignes.append(rf"Donc \({tex(n)} = {tex(g)}\).")
+    L, lg = _noeud(g, ctx)
+    return L, lignes + lg
+
+
+def _termes_de_somme(S, s):
+    """[(signe, (C, N, B, q))] des termes purs de S, ou None."""
+    out = []
+    for t, sg in _feuilles(S):
+        r = _params_pur(t)
+        if r is None or r[4]:
+            return None
+        C, N, B, q, _ = r
+        out.append((sg, (C, N, B, q)))
+    return out
+
+
+def _evidence_somme(S, s):
+    """Met en évidence le terme dominant d'une somme de termes purs (exponentielle, puissance, ln) en s∞ :
+    S = D·(1 + …). Renvoie (paramètres de D, arbre de D, arbre du crochet) ou None."""
+    termes = _termes_de_somme(S, s)
+    if termes is None or len(termes) < 2:
+        return None
+    cle = lambda p: (p[2] * s, p[1], p[3])
+    ordre = sorted(range(len(termes)), key=lambda i: cle(termes[i][1]), reverse=True)
+    i0 = ordre[0]
+    if cle(termes[i0][1]) == cle(termes[ordre[1]][1]):
+        return None
+    sg0, (C0, N0, B0, q0) = termes[i0]
+    exp_dominante = B0 * s > 0
+    poly_sur_ln = B0 == 0 and q0 == 0 and N0 > 0 and any(p[3] != 0 for _, p in termes)
+    if not (exp_dominante or poly_sur_ln):
+        return None
+    coef0 = sg0 * C0
+    crochet = Nb(F(1))
+    for i, (sg, (C, N, B, q)) in enumerate(termes):
+        if i == i0:
+            continue
+        c = (sg * C) / coef0
+        if abs(q - q0) > 1:
+            return None
+        pur = _arbre_pur(N - N0, B - B0, q - q0)
+        t = _arbre_avec_coefficient(abs(c), pur)
+        crochet = Op("+" if c > 0 else "-", crochet, t)
+    D = _arbre_avec_coefficient(abs(coef0), _arbre_pur(N0, B0, q0))
+    if coef0 < 0:
+        D = Neg(D)
+    return (C0 * sg0, N0, B0, q0), D, crochet
+
+
+def _evidence_exp(n, ctx, fi):
+    """∞ − ∞ ou ∞/∞ avec une somme dont le terme dominant est une exponentielle (ou x devant ln x) : on met
+    ce terme en évidence ; les termes restants se traitent par croissance comparée."""
+    s = ctx.pt.s
+    if not s or not isinstance(n, Op):
+        return None
+    lignes = [_ligne_fi(n, fi)]
+    if n.op in "+-" and fi.nom == "∞ − ∞":
+        r = _evidence_somme(n, s)
+        if r is None:
+            return None
+        _, D, crochet = r
+        g = Op("*", D, crochet)
+        lignes.append(rf"On met \({tex(D)}\) en évidence : \({tex(n)} = {tex(g)}\).")
+    elif n.op == "/" and fi.nom == "∞/∞":
+        cotes = []
+        for S in (n.a, n.b):
+            r = _evidence_somme(S, s) if (isinstance(S, Op) and S.op in "+-") else None
+            if r is not None:
+                cotes.append((S, r[0], r[1], r[2]))
+            else:
+                p = _params_pur(S)
+                if p is None or p[4]:
+                    return None
+                cotes.append((S, (p[0], p[1], p[2], p[3]), None, None))
+        if cotes[0][2] is None and cotes[1][2] is None:
+            return None
+        (C1, N1, B1, q1), (C2, N2, B2, q2) = cotes[0][1], cotes[1][1]
+        pur = _arbre_avec_coefficient(C1 / C2, _arbre_pur(N1 - N2, B1 - B2, q1 - q2))
+        morceaux = [(S, d, cr) for S, _, d, cr in cotes if d is not None]
+        evid = " et ".join(rf"\({tex(S)} = {tex(Op('*', d, cr))}\)" for S, d, cr in morceaux)
+        cle_dom = tex(morceaux[0][1])
+        lignes.append(rf"On met \({cle_dom}\) en évidence : {evid}.")
+        neutre = isinstance(pur, Nb) and pur.v == 1
+        haut = [t for t in (None if neutre else pur, cotes[0][3]) if t is not None]
+        g = haut[0] if len(haut) == 1 else (Op("*", haut[0], haut[1]) if haut else Nb(F(1)))
+        if cotes[1][3] is not None:
+            g = Op("/", g, cotes[1][3])
+        lignes.append(rf"Donc \({tex(n)} = {tex(g)}\).")
+    else:
+        return None
+    _meme_fonction(n, g, ctx)
+    L, lg = _noeud(g, ctx)
+    return L, lignes + lg
+
+
+
+
+
+# ordre du cours : mise en évidence, conjuguée, termes dominants, croissance comparée (puis L'Hôpital)
+METHODES[:] = [_evidence_exp, _conjuguee, _termes_dominants, _comparee_pure]
 
 
 def _silencieux(n, L, ctx):

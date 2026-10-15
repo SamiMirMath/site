@@ -177,8 +177,47 @@
     {
      "etapes": [
       {
-       "detail": "Abandon : forme indéterminée ∞/∞ non levée en \\frac{e^{x} - 1}{x}",
-       "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+       "html": "Or \\(e^{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(e^{x} \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "\\(e^{x} - 1 \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Le numérateur \\(e^{x} - 1\\) tend vers \\(+\\infty\\) et le dénominateur \\(x\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+       "type": "texte"
+      },
+      {
+       "html": "On met \\(e^{x}\\) en évidence : \\(e^{x} - 1 = e^{x}\\,\\left(1 - e^{-x}\\right)\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Donc \\(\\frac{e^{x} - 1}{x} = \\frac{e^{x}}{x}\\,\\left(1 - e^{-x}\\right)\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Le numérateur \\(e^{x}\\) tend vers \\(+\\infty\\) et le dénominateur \\(x\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+       "type": "texte"
+      },
+      {
+       "html": "Par croissance comparée (limite de référence : \\(\\lim_{x\\to +\\infty} \\dfrac{e^{ax}}{x^{n}} = +\\infty\\) pour \\(a > 0\\) et \\(n > 0\\)), \\(\\frac{e^{x}}{x} \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Quand \\(x \\to +\\infty\\), \\(-x \\to -\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Or \\(e^{t} \\to 0^{+}\\) quand \\(t \\to -\\infty\\), donc \\(e^{-x} \\to 0^{+}\\).",
+       "type": "texte"
+      },
+      {
+       "html": "\\(\\frac{e^{x}}{x} \\to +\\infty\\) et \\(1 - e^{-x} \\to 1\\), donc \\(\\frac{e^{x}}{x}\\,\\left(1 - e^{-x}\\right) \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
        "type": "texte"
       },
       {
@@ -686,8 +725,19 @@
        "type": "texte"
       },
       {
-       "detail": "Abandon : forme indéterminée 0 · ∞ non levée en x\\,\\ln(x)",
-       "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = 0\\).",
+       "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\), donc \\(\\ln(x) \\to -\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "\\(x \\to 0^{+}\\) et \\(\\ln(x) \\to -\\infty\\) : forme indéterminée « \\(0 \\cdot \\infty\\) ».",
+       "type": "texte"
+      },
+      {
+       "html": "Par croissance comparée (limite de référence : \\(\\lim_{x\\to 0^{+}} x^{n}\\ln x = 0\\) pour \\(n > 0\\)), \\(x\\,\\ln(x) \\to 0\\).",
+       "type": "texte"
+      },
+      {
+       "html": "\\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = 0\\).",
        "type": "texte"
       },
       {
@@ -1323,8 +1373,19 @@
     {
      "etapes": [
       {
-       "detail": "Abandon : forme indéterminée ∞/∞ non levée en \\frac{\\ln(x)}{x}",
-       "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 0\\).",
+       "html": "Or \\(\\ln t \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\ln(x) \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Le numérateur \\(\\ln(x)\\) tend vers \\(+\\infty\\) et le dénominateur \\(x\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+       "type": "texte"
+      },
+      {
+       "html": "Par croissance comparée (limite de référence : \\(\\lim_{x\\to +\\infty} \\dfrac{\\ln x}{x^{n}} = 0\\) pour \\(n > 0\\)), \\(\\frac{\\ln(x)}{x} \\to 0\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 0\\).",
        "type": "texte"
       },
       {
@@ -1796,8 +1857,19 @@
        "type": "texte"
       },
       {
-       "detail": "Abandon : forme indéterminée 0 · ∞ non levée en x\\,\\ln(x)",
-       "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = 0\\).",
+       "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\), donc \\(\\ln(x) \\to -\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "\\(x \\to 0^{+}\\) et \\(\\ln(x) \\to -\\infty\\) : forme indéterminée « \\(0 \\cdot \\infty\\) ».",
+       "type": "texte"
+      },
+      {
+       "html": "Par croissance comparée (limite de référence : \\(\\lim_{x\\to 0^{+}} x^{n}\\ln x = 0\\) pour \\(n > 0\\)), \\(x\\,\\ln(x) \\to 0\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Donc \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = 0\\).",
        "type": "texte"
       },
       {
@@ -2686,8 +2758,27 @@
     {
      "etapes": [
       {
-       "detail": "Abandon : forme indéterminée 0 · ∞ non levée en x^{2}\\,e^{-x}",
-       "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 0\\).",
+       "html": "Or \\(t^{2} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(x^{2} \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Quand \\(x \\to +\\infty\\), \\(-x \\to -\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Or \\(e^{t} \\to 0^{+}\\) quand \\(t \\to -\\infty\\), donc \\(e^{-x} \\to 0^{+}\\).",
+       "type": "texte"
+      },
+      {
+       "html": "\\(x^{2} \\to +\\infty\\) et \\(e^{-x} \\to 0^{+}\\) : forme indéterminée « \\(0 \\cdot \\infty\\) ».",
+       "type": "texte"
+      },
+      {
+       "html": "Par croissance comparée (limite de référence : \\(\\lim_{x\\to +\\infty} x^{n}e^{-ax} = 0\\) pour \\(a > 0\\) et \\(n > 0\\)), \\(x^{2}\\,e^{-x} \\to 0\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 0\\).",
        "type": "texte"
       },
       {
