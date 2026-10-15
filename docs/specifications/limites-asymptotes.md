@@ -149,3 +149,4 @@ Modèle (1/(x² − 2) en −√2) :
 | LA-26 | Jamais « x est positif (il vaut 4) » : une variable ne « vaut » pas la valeur vers laquelle elle tend (« proche de » si besoin), y compris dans la justification en texte | [auto-py] |
 | LA-27 | Chaque valeur interdite se termine par sa conclusion ; une seule limite latérale infinie : « asymptote verticale d'équation x = 0 (du côté droit) ; à gauche, f(x) → 0 » | [auto-py] |
 | LA-28 | Toute ligne qui lit un signe dans un tableau renvoie à lui (« cf. tableau de signes de X ») ; chaque tableau est titré « Signe de X » ; ln(x²−4x)/(x−5) : phrase de repli seulement en ±∞ | [auto-py] |
+| LA-29 | Termes dominants (L5) : en ±∞, quotient ou produit dont un membre est une racine ; chaque membre est remplacé par son terme dominant avec la justification « rapport → 1 » ; « x < 0 donc √(x²) = \|x\| = −x » en −∞ ; jamais pour une fraction rationnelle ni quand les termes dominants d'une somme se compensent | [auto-py] |

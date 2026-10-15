@@ -538,9 +538,13 @@ class Abandon(Exception):
 
 
 class FormeIndeterminee(Exception):
+    """Forme indéterminée rencontrée en un nœud : son nom, le nœud, les limites et les lignes des deux opérandes."""
+
     def __init__(self, nom, noeud=None):
         super().__init__(nom)
         self.nom, self.noeud = nom, noeud
+        self.A = self.B = None
+        self.la, self.lb = [], []
 
 
 PHRASE_REPLI = "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : "
@@ -907,6 +911,7 @@ class _Contexte:
         self.refs, self.ap_vus, self.justifies = {}, set(), set()
         self.racine_dite = False
         self.demandes = []
+        self.profondeur = 0
         if ref_f is not None:
             self.refs[f.key()] = ref_f
 
@@ -1278,10 +1283,245 @@ def _noeud_rationnel_infini(n, ctx):
     return L, phrases
 
 
+FI_TEX = {"∞ − ∞": r"\infty - \infty", "0 · ∞": r"0 \cdot \infty", "∞/∞": r"\infty/\infty", "0/0": "0/0"}
+
+
+def _ligne_fi(n, fi):
+    """« Le numérateur tend vers … et le dénominateur tend vers … : forme indéterminée « ∞/∞ ». »"""
+    nom = rf"« \({FI_TEX[fi.nom]}\) »"
+    if isinstance(n, Op) and n.op == "/":
+        return (rf"Le numérateur \({tex(n.a)}\) tend vers \({fi.A.tex(False)}\) et le dénominateur "
+                rf"\({tex(n.b)}\) tend vers \({fi.B.tex(False)}\) : forme indéterminée {nom}.")
+    return rf"\({tex(n.a)} \to {fi.A.tex(False)}\) et \({tex(n.b)} \to {fi.B.tex(False)}\) : forme indéterminée {nom}."
+
+
+def _meme_fonction(n, g, ctx):
+    """Garde-fou numérique : n et g (réécriture de n) prennent les mêmes valeurs près du point d'étude."""
+    pt = ctx.pt
+    if pt.s:
+        xs = [pt.s * t for t in (7.0, 23.0, 61.0, 310.0)]
+    else:
+        a = float(pt.a)
+        h = (0.013, 0.037, 0.11, 0.23)
+        xs = [a + (pt.d or 1) * t for t in h] + ([a - t for t in h] if not pt.d else [])
+    bons = 0
+    for x in xs:
+        try:
+            u, v = evaluer(n, x), evaluer(g, x)
+        except Exception:
+            continue
+        if u is None or v is None:
+            continue
+        if abs(u - v) > 1e-7 * (1 + abs(u) + abs(v)):
+            raise Abandon(f"la réécriture n'est pas équivalente en x = {x}")
+        bons += 1
+    if bons < 2:
+        raise Abandon("réécriture non vérifiable numériquement")
+
+
+METHODES = []          # méthodes du cours, dans l'ordre : chacune renvoie (Lim, lignes) ou None si elle ne s'applique pas
+
+
 def _lever(n, ctx, fi):
-    """Lève une forme indéterminée par une méthode du cours (mise en évidence, conjuguée, références…).
-    Aucune n'est encore rédigée ici : Abandon, donc phrase de repli."""
+    """Lève une forme indéterminée par la première méthode du cours qui s'applique (Q9) ; Abandon sinon."""
+    if ctx.profondeur >= 4:
+        raise Abandon("trop de réécritures successives")
+    ctx.profondeur += 1
+    try:
+        for methode in METHODES:
+            r = methode(n, ctx, fi)
+            if r is not None:
+                L, lignes = r
+                ctx.verifier(n, L)
+                return L, fi.la + fi.lb + lignes
+    finally:
+        ctx.profondeur -= 1
     raise Abandon(f"forme indéterminée {fi.nom} non levée en {tex(n)}")
+
+
+# --- méthode : termes dominants (en ±∞, quotient ou produit dont un membre contient une racine) -----
+def _est_racine(n):
+    """L'argument de n s'il s'agit d'une racine carrée (√u ou u^(1/2)), sinon None."""
+    if isinstance(n, Fn) and n.nom == "sqrt":
+        return n.a
+    if isinstance(n, Op) and n.op == "^" and valeur_constante(n.b) == F(1, 2):
+        return n.a
+    return None
+
+
+def _contient_racine(n):
+    if _est_racine(n) is not None:
+        return True
+    if isinstance(n, (Neg, Fn)):
+        return _contient_racine(n.a)
+    if isinstance(n, Op):
+        return _contient_racine(n.a) or _contient_racine(n.b)
+    return False
+
+
+def _rat(q):
+    return _sympy().Rational(q.numerator, q.denominator)
+
+
+def _terme_dom_tex(c, k):
+    r"""c·x^k avec c exact (SymPy) : 2x, -x, \sqrt{3}\,x^{2}, 5."""
+    if k == 0:
+        return num_sympy(c).tex
+    puiss = "x" if k == 1 else f"x^{{{k}}}"
+    if c == 1:
+        return puiss
+    if c == -1:
+        return "-" + puiss
+    return num_sympy(c).tex + r"\," + puiss
+
+
+def _dominant(n, s):
+    """Terme dominant (c, k) de n en s∞ : n ~ c·x^k, c exact SymPy ; None si n n'est pas de cette forme ou si
+    les termes dominants d'une somme se compensent. √Q (Q de degré 2k, coefficient dominant q > 0) ~ √q·|x|^k
+    = √q·(s x)^k."""
+    sp = _sympy()
+    if sans_x(n):
+        v = valeur_constante(n)
+        return (_rat(v), 0) if v else None
+    P = _polynome_de(n)
+    if P is not None:
+        return _rat(P[-1]), deg(P)
+    r = _est_racine(n)
+    if r is not None:
+        Q = _poly_ou_const(r)
+        if Q is None or deg(Q) == 0 or deg(Q) % 2 or Q[-1] <= 0:
+            return None
+        k = deg(Q) // 2
+        return sp.sqrt(_rat(Q[-1])) * (s ** k), k
+    if isinstance(n, Neg):
+        d = _dominant(n.a, s)
+        return (-d[0], d[1]) if d else None
+    if isinstance(n, Op):
+        da, db = _dominant(n.a, s), _dominant(n.b, s)
+        if da is None or db is None:
+            return None
+        if n.op == "*":
+            return da[0] * db[0], da[1] + db[1]
+        if n.op == "/":
+            return da[0] / db[0], da[1] - db[1]
+        if n.op in "+-":
+            sg = 1 if n.op == "+" else -1
+            if da[1] != db[1]:
+                return da if da[1] > db[1] else (sg * db[0], db[1])
+            c = da[0] + sg * db[0]
+            return (c, da[1]) if c != 0 else None
+    return None
+
+
+def _lim_dominant(c, k, s):
+    """Limite de c·x^k en s∞."""
+    if k < 0:
+        return Lim.fin(0, _signe(c) * (s if k % 2 else 1))
+    if k == 0:
+        return Lim.fin(c)
+    return Lim.infini(_signe(c) * (s if k % 2 else 1))
+
+
+def _feuilles(n, signe=1):
+    """Termes d'une somme (ou d'une différence) : [(terme, signe)]."""
+    if isinstance(n, Op) and n.op in "+-":
+        return _feuilles(n.a, signe) + _feuilles(n.b, signe if n.op == "+" else -signe)
+    if isinstance(n, Neg):
+        return _feuilles(n.a, -signe)
+    return [(n, signe)]
+
+
+def _equivalent_membre(M, s):
+    """Lignes « M ~ terme dominant » et justifications « rapport → 1 » d'un membre (None si non pris en charge)."""
+    sp = _sympy()
+    eq, just = [], []
+    feuilles = _feuilles(M)
+    for t, _ in feuilles:
+        r = _est_racine(t)
+        if r is not None:
+            Q = _poly_ou_const(r)
+            if Q is None or deg(Q) == 0 or deg(Q) % 2 or Q[-1] <= 0:
+                return None
+            k = deg(Q) // 2
+            tete = _monome_tex(Q[-1], 2 * k)
+            sq = sp.sqrt(_rat(Q[-1]))
+            coef = "" if sq == 1 else num_sympy(sq).tex
+            absx = "|x|" if k == 1 else rf"|x|^{{{k}}}"
+            c_final = sq * (s ** k)
+            if s < 0 and k % 2:
+                eq.append(r"Comme \(x < 0\), \(\sqrt{x^{2}} = |x| = -x\).")
+            fin = _terme_dom_tex(c_final, k)
+            if s > 0 and k % 2:
+                suffixe = r" (car \(x > 0\))"
+            elif k % 2 == 0:
+                suffixe = rf" (car \(|x|^{{{k}}} = x^{{{k}}}\))"
+            else:
+                suffixe = ""
+            interieur = _facteur_detaille(Q, 2 * k)[1]
+            if interieur == "1":                      # √(q x^{2k}) tel quel : égalité, pas d'équivalent
+                eq.append(rf"\({tex(t)} = {coef}{absx} = {fin}\){suffixe}.")
+            else:
+                eq.append(rf"\({tex(t)} \sim \sqrt{{{tete}}} = {coef}{absx} = {fin}\){suffixe}.")
+            if interieur != "1":
+                just.append(rf"\(\dfrac{{{tex(t)}}}{{\sqrt{{{tete}}}}} = \sqrt{{{interieur}}} \to 1\)")
+        else:
+            P = _polynome_de(t)
+            if P is not None and len(_polynome_a_termes(P)) > 1:
+                tete = _monome_tex(P[-1], deg(P))
+                eq.append(rf"\({tex(t)} \sim {tete}\).")
+                just.append(rf"\(\dfrac{{{tex(t)}}}{{{tete}}} = {_facteur_detaille(P, deg(P))[1]} \to 1\)")
+            elif P is None and not sans_x(t) and not isinstance(t, X):
+                return None
+    if len(feuilles) > 1:
+        d = _dominant(M, s)
+        if d is None:
+            return None
+        eq.append(rf"\({tex(M)} \sim {_terme_dom_tex(*d)}\).")
+    return eq, just
+
+
+def _termes_dominants(n, ctx, fi):
+    """En ±∞ : on remplace chaque membre par son terme dominant, en justifiant que leur rapport tend vers 1.
+    Jamais quand les termes dominants d'une somme se compensent (alors : conjuguée ou mise en évidence)."""
+    s = ctx.pt.s
+    if not s or not _contient_racine(n) or not isinstance(n, Op) or n.op not in "*/":
+        return None
+    D = _dominant(n, s)
+    if D is None:
+        return None
+    c, k = D
+    lignes, justif = [_ligne_fi(n, fi), rf"Au voisinage de \({ctx.pt.tex()}\), on remplace chaque membre par son terme dominant."], []
+    dom = []
+    for M in (n.a, n.b):
+        r = _equivalent_membre(M, s)
+        d = _dominant(M, s)
+        if r is None or d is None:
+            return None
+        eq, ju = r
+        lignes += eq
+        justif += ju
+        dom.append(_terme_dom_tex(*d))
+    if justif:
+        lignes.append("En effet, le rapport de chaque membre à son terme dominant tend vers 1 : " + _enumerer(justif) + ".")
+    L = _lim_dominant(c, k, s)
+    # garde-fou : le rapport n / (c x^k) tend bien vers 1 (valeurs numériques lointaines)
+    for t in (1e4, 1e6):
+        x = s * t
+        v = evaluer(n, x)
+        ref = float(c) * x ** k
+        if v is None or abs(v / ref - 1) > 5e-2:
+            raise Abandon("le terme dominant ne reproduit pas la fonction")
+    res = _terme_dom_tex(c, k)
+    if n.op == "/":
+        equiv = rf"\dfrac{{{dom[0]}}}{{{dom[1]}}} = {res}"
+    else:
+        equiv = rf"{dom[0]} \cdot {dom[1]} = {res}"
+    math, pre = ctx.dire(n, L)
+    lignes.append(rf"Donc \({tex(n)} \sim {equiv}\), d'où {math}.")
+    return L, lignes + pre
+
+
+METHODES.append(_termes_dominants)
 
 
 def _silencieux(n, L, ctx):
@@ -1353,8 +1593,12 @@ def _noeud(n, ctx):
                 L = _quotient(A, B)
                 ctx.verifier(n, L)
                 return L, _lignes_pole(n, ctx, A, la, B, L)
-            L = {"+": lambda: _somme(A, B), "-": lambda: _somme(A, _oppose(B)),
-                 "*": lambda: _produit(A, B), "/": lambda: _quotient(A, B)}[n.op]()
+            try:
+                L = {"+": lambda: _somme(A, B), "-": lambda: _somme(A, _oppose(B)),
+                     "*": lambda: _produit(A, B), "/": lambda: _quotient(A, B)}[n.op]()
+            except FormeIndeterminee as fi:
+                fi.A, fi.B, fi.la, fi.lb = A, B, la, lb
+                raise
             ctx.verifier(n, L)
             if _silencieux(n, L, ctx):
                 return L, []

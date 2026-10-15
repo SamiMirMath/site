@@ -441,6 +441,63 @@ class TestZeroSurZero(unittest.TestCase):
                 self.assertFalse(any("0/0" in e["html"] for e in etude["etapes"]), (entree, etude["ou"]))
 
 
+class TestTermesDominants(unittest.TestCase):
+    """L5 : en ±∞, quotient dont un membre est une racine — chaque membre est remplacé par son terme dominant,
+    le remplacement est justifié (rapport → 1) et « x < 0 donc √(x²) = |x| = −x » est écrit en −∞ (LA-20)."""
+
+    def test_racine_sur_affine_en_plus_l_infini(self):
+        t = textes("sqrt(4x^2+1)/(x+2)", r"x \to +\infty")
+        self.assertEqual(t[3:], [
+            r"Le numérateur \(\sqrt{4x^{2} + 1}\) tend vers \(+\infty\) et le dénominateur \(x + 2\) tend vers "
+            r"\(+\infty\) : forme indéterminée « \(\infty/\infty\) ».",
+            r"Au voisinage de \(+\infty\), on remplace chaque membre par son terme dominant.",
+            r"\(\sqrt{4x^{2} + 1} \sim \sqrt{4\,x^{2}} = 2|x| = 2\,x\) (car \(x > 0\)).",
+            r"\(x + 2 \sim x\).",
+            r"En effet, le rapport de chaque membre à son terme dominant tend vers 1 : "
+            r"\(\dfrac{\sqrt{4x^{2} + 1}}{\sqrt{4\,x^{2}}} = \sqrt{1 + \dfrac{1}{4x^{2}}} \to 1\).",
+            r"Donc \(\frac{\sqrt{4x^{2} + 1}}{x + 2} \sim \dfrac{2\,x}{x} = 2\), "
+            r"d'où \(\displaystyle\lim_{x\to +\infty} f(x) = 2\).",
+            r"Asymptote horizontale d'équation \(y = 2\).",
+        ])
+
+    def test_racine_sur_affine_en_moins_l_infini(self):
+        t = textes("sqrt(4x^2+1)/(x+2)", r"x \to -\infty")
+        self.assertIn(r"Comme \(x < 0\), \(\sqrt{x^{2}} = |x| = -x\).", t)
+        self.assertIn(r"\(\sqrt{4x^{2} + 1} \sim \sqrt{4\,x^{2}} = 2|x| = -2\,x\).", t)
+        self.assertIn(r"Donc \(\frac{\sqrt{4x^{2} + 1}}{x + 2} \sim \dfrac{-2\,x}{x} = -2\), "
+                      r"d'où \(\displaystyle\lim_{x\to -\infty} f(x) = -2\).", t)
+
+    def test_pente_d_une_racine_de_trinome(self):             # a = lim f(x)/x pour √(x²−4x+5)
+        self.assertIn(r"d'où \(\displaystyle\lim_{x\to +\infty} f(x) = 1\).", " ".join(textes("sqrt(x^2-4x+5)/x", r"x \to +\infty")))
+        t = textes("sqrt(x^2-4x+5)/x", r"x \to -\infty")
+        self.assertIn(r"Comme \(x < 0\), \(\sqrt{x^{2}} = |x| = -x\).", t)
+        self.assertIn(r"d'où \(\displaystyle\lim_{x\to -\infty} f(x) = -1\).", " ".join(t))
+
+    def test_racine_d_un_carre(self):
+        t = textes("x/sqrt(x^2)", r"x \to -\infty")
+        self.assertIn(r"\(\sqrt{x^{2}} = |x| = -x\).", t)
+        self.assertIn(r"Donc \(\frac{x}{\sqrt{x^{2}}} \sim \dfrac{x}{-x} = -1\), d'où "
+                      r"\(\displaystyle\lim_{x\to -\infty} f(x) = -1\).", t)
+
+    def test_somme_de_racines_au_denominateur(self):
+        t = textes("sqrt(x^2+1)/(sqrt(x^2+4)+1)", r"x \to +\infty")
+        self.assertIn(r"\(\sqrt{x^{2} + 4} + 1 \sim x\).", t)
+
+    def test_jamais_pour_une_fraction_rationnelle_ni_quand_les_termes_se_compensent(self):
+        for entree in ["(2x^2+3x)/(x^2+1)", "x^3-3x", "x^2/(x-1)", "1/(x-2)"]:
+            for etude in la.etudier(entree)["etudes"]:
+                self.assertFalse(any("terme dominant" in e["html"] for e in etude["etapes"]), (entree, etude["ou"]))
+        # √(x²+x) − x en +∞ : les termes dominants se compensent (∞ − ∞) : pas de remplacement par les dominants
+        t = textes("sqrt(x^2+x)-x", r"x \to +\infty")
+        self.assertFalse(any("terme dominant" in p for p in t), t)
+
+    def test_garde_fou(self):
+        with mock.patch.object(la, "_dominant", side_effect=lambda n, s: (la._sympy().Integer(3), 1)):
+            t = etapes("sqrt(4x^2+1)/(x+2)", r"x \to +\infty")
+        self.assertTrue(any(REPLI[1:] in e["html"] for e in t))
+        self.assertFalse(any("terme dominant" in e["html"] for e in t))
+
+
 class TestFormeIndeterminee(unittest.TestCase):
     """Sans méthode pour la lever (L1), la rédaction est abandonnée : phrase de repli, jamais d'étape fausse."""
 

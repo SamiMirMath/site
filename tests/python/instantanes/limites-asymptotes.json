@@ -2216,8 +2216,31 @@
    {
     "etapes": [
      {
-      "detail": "Abandon : forme indéterminée ∞/∞ non levée en \\frac{x}{\\sqrt{x^{2}}}",
-      "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = -1\\).",
+      "html": "Or \\(t^{2} \\to +\\infty\\) quand \\(t \\to -\\infty\\), donc \\(x^{2} \\to +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\sqrt{x^{2}} \\to +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Le numérateur \\(x\\) tend vers \\(-\\infty\\) et le dénominateur \\(\\sqrt{x^{2}}\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+      "type": "texte"
+     },
+     {
+      "html": "Au voisinage de \\(-\\infty\\), on remplace chaque membre par son terme dominant.",
+      "type": "texte"
+     },
+     {
+      "html": "Comme \\(x < 0\\), \\(\\sqrt{x^{2}} = |x| = -x\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\sqrt{x^{2}} = |x| = -x\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\frac{x}{\\sqrt{x^{2}}} \\sim \\dfrac{x}{-x} = -1\\), d'où \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = -1\\).",
       "type": "texte"
      },
      {
@@ -2230,8 +2253,27 @@
    {
     "etapes": [
      {
-      "detail": "Abandon : forme indéterminée ∞/∞ non levée en \\frac{x}{\\sqrt{x^{2}}}",
-      "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 1\\).",
+      "html": "Or \\(t^{2} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(x^{2} \\to +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\sqrt{x^{2}} \\to +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Le numérateur \\(x\\) tend vers \\(+\\infty\\) et le dénominateur \\(\\sqrt{x^{2}}\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+      "type": "texte"
+     },
+     {
+      "html": "Au voisinage de \\(+\\infty\\), on remplace chaque membre par son terme dominant.",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\sqrt{x^{2}} = |x| = x\\) (car \\(x > 0\\)).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\frac{x}{\\sqrt{x^{2}}} \\sim \\dfrac{x}{x} = 1\\), d'où \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 1\\).",
       "type": "texte"
      },
      {
