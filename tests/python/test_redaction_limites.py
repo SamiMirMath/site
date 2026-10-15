@@ -157,6 +157,133 @@ class TestValeursInterdites(unittest.TestCase):
         self.assertEqual(sum(1 for p in t if p.startswith(REPLI)), 2)
 
 
+class TestMiseEnEvidence(unittest.TestCase):
+    """L3 : polynômes et fractions rationnelles en ±∞ — forme indéterminée nommée, terme dominant mis en
+    évidence, chaque terme écrit (LA-13, LA-18, LA-19)."""
+
+    def test_polynome_infini_moins_infini(self):
+        self.assertEqual(textes("x^3-3x", r"x \to -\infty"), [
+            r"\(x^{3} \to -\infty\) et \(-3x \to +\infty\) : forme indéterminée « \(\infty - \infty\) ».",
+            r"On met en évidence le terme de plus haut degré : "
+            r"\(x^{3} - 3x = x^{3}\left(1 - \dfrac{3}{x^{2}}\right)\).",
+            r"Quand \(x \to -\infty\), \(\dfrac{3}{x^{2}} \to 0\), donc \(1 - \dfrac{3}{x^{2}} \to 1\).",
+            r"Comme \(x^{3} \to -\infty\) et que le facteur entre parenthèses tend vers 1, "
+            r"\(x^{3} - 3x \to -\infty\).",
+            r"Donc \(\displaystyle\lim_{x\to -\infty} f(x) = -\infty\).",
+            "La limite est infinie : pas d'asymptote horizontale.",
+            r"Le polynôme est de degré 3 \(\geq 2\) : pas d'asymptote oblique (branche parabolique).",
+        ])
+
+    def test_polynome_sans_forme_indeterminee(self):
+        t = textes("x^3+x", r"x \to -\infty")
+        self.assertEqual(t[0], r"\(x^{3} \to -\infty\) et \(x \to -\infty\) : la somme tend vers \(-\infty\).")
+        self.assertFalse(any("indéterminée" in p or "mise en évidence" in p for p in t))
+
+    def test_fraction_rationnelle_infini_sur_infini(self):
+        self.assertEqual(textes("(2x^2+3x)/(x^2+1)", r"x \to +\infty"), [
+            r"Le numérateur tend vers \(+\infty\) et le dénominateur tend vers \(+\infty\) "
+            r"(limite de leur terme de plus haut degré) : forme indéterminée « \(\infty/\infty\) ».",
+            r"On met en évidence le terme de plus haut degré : "
+            r"\(2x^{2} + 3x = 2\,x^{2}\left(1 + \dfrac{3}{2x}\right)\) et "
+            r"\(x^{2} + 1 = x^{2}\left(1 + \dfrac{1}{x^{2}}\right)\).",
+            r"Donc \(\frac{2x^{2} + 3x}{x^{2} + 1} = \dfrac{2\,x^{2}\left(1 + \dfrac{3}{2x}\right)}"
+            r"{x^{2}\left(1 + \dfrac{1}{x^{2}}\right)} = 2 \cdot \dfrac{1 + \dfrac{3}{2x}}{1 + \dfrac{1}{x^{2}}}\).",
+            r"Quand \(x \to +\infty\), \(\dfrac{3}{2x} \to 0\) et \(\dfrac{1}{x^{2}} \to 0\) : "
+            r"le quotient \(\dfrac{1 + \dfrac{3}{2x}}{1 + \dfrac{1}{x^{2}}}\) tend vers 1.",
+            r"Le quotient tend vers 1 : la limite est \(2\) (rapport des coefficients dominants).",
+            r"Donc \(\displaystyle\lim_{x\to +\infty} f(x) = 2\).",
+            r"Asymptote horizontale d'équation \(y = 2\).",
+        ])
+
+    def test_numerateur_constant_pas_de_mise_en_evidence(self):
+        self.assertEqual(textes("1/(x-2)", r"x \to -\infty"), [
+            r"Le numérateur est la constante \(1\) et le dénominateur tend vers \(-\infty\) "
+            r"(limite de son terme de plus haut degré) : le quotient tend vers \(0\).",
+            r"Donc \(\displaystyle\lim_{x\to -\infty} f(x) = 0\).",
+            r"Asymptote horizontale d'équation \(y = 0\).",
+        ])
+
+    def test_degre_du_numerateur_superieur(self):
+        t = textes("x^2/(x-1)", r"x \to +\infty")
+        self.assertIn(r"Le quotient tend vers 1 et \(x \to +\infty\) : la limite est \(+\infty\).", t)
+        self.assertIn("La limite est infinie : pas d'asymptote horizontale.", t)
+        self.assertTrue(any(p.startswith("Le degré du numérateur dépasse celui du dénominateur de 1") for p in t))
+
+    def test_racine_d_un_trinome_avec_et_sans_forme_indeterminee(self):
+        moins = textes("sqrt(x^2-4x+5)", r"x \to -\infty")
+        plus = textes("sqrt(x^2-4x+5)", r"x \to +\infty")
+        self.assertEqual(moins[0], r"\(x^{2} \to +\infty\), \(-4x \to +\infty\) et \(5\) est une constante "
+                                   r": la somme tend vers \(+\infty\).")
+        self.assertEqual(plus[0], r"\(x^{2} \to +\infty\), \(-4x \to -\infty\) et \(5\) est une constante "
+                                  r": forme indéterminée « \(\infty - \infty\) ».")
+        self.assertIn(r"On met en évidence le terme de plus haut degré : "
+                      r"\(x^{2} - 4x + 5 = x^{2}\left(1 - \dfrac{4}{x} + \dfrac{5}{x^{2}}\right)\).", plus)
+        self.assertIn(r"Or \(\sqrt{t} \to +\infty\) quand \(t \to +\infty\) : "
+                      r"\(\sqrt{x^{2} - 4x + 5} \to +\infty\).", plus)
+
+    def test_ecriture_des_coefficients(self):          # LA-19
+        for entree in ["2x^2-x+1", "(2x^2+3x)/(x^2+1)", "(3x+1)/(2x-4)", "x^3-3x", "(x^2+1)/(3x^2-6)"]:
+            r = la.etudier(entree)
+            for etude in r["etudes"]:
+                for e in etude["etapes"]:
+                    with self.subTest(f=entree, ou=etude["ou"]):
+                        self.assertNotIn(r"\dfrac{\frac", e["html"])
+                        self.assertNotIn(r"\frac{\frac", e["html"])
+                        self.assertNotIn("}{1}", e["html"].replace(r"\dfrac{1}{1}", ""))
+                        self.assertNotIn("\\right)}{1}", e["html"])
+        t = " ".join(textes("(3x+1)/(2x-4)", r"x \to +\infty"))
+        self.assertIn(r"3\,x\left(1 + \dfrac{1}{3x}\right)", t)
+        self.assertIn(r"2\,x\left(1 - \dfrac{2}{x}\right)", t)
+
+    def test_somme_de_fractions_ramenee_a_une_fraction(self):
+        t = textes("x^2/(x-1)-x", r"x \to +\infty")
+        self.assertEqual(t[0], r"On écrit \(f\) sous la forme d'une seule fraction : \(f(x) = \frac{x}{x - 1}\).")
+        self.assertEqual(t[-2:], [r"Donc \(\displaystyle\lim_{x\to +\infty} f(x) = 1\).",
+                                  r"Asymptote horizontale d'équation \(y = 1\)."])
+
+    def test_garde_fou_polynome_et_fraction(self):
+        for entree, ou in [("x^3-3x", r"x \to +\infty"), ("(2x^2+3x)/(x^2+1)", r"x \to +\infty")]:
+            with self.subTest(f=entree):
+                normal = la.etudier(entree)
+                with mock.patch.object(la, "_phrases_polynome_infini", return_value=(["faux"], la.Lim.infini(-1))), \
+                        mock.patch.object(la, "_phrases_fraction_infini", return_value=(["faux"], la.Lim.infini(-1))):
+                    faux = la.etudier(entree)
+                self.assertEqual(faux["asymptotes"], normal["asymptotes"])
+                t = [e["html"] for e in next(e for e in faux["etudes"] if e["ou"] == ou)["etapes"]]
+                self.assertTrue(t[0].startswith(REPLI), t)
+                self.assertNotIn("faux", " ".join(t))
+
+
+class TestZeroSurZero(unittest.TestCase):
+    """L3 : forme 0/0 en une valeur — nommée, on factorise, on simplifie, puis on passe à la limite."""
+
+    def test_trou(self):
+        self.assertEqual(textes("(x^2-1)/(x-1)", r"x \to 1"), [
+            r"\(x=1\) est une valeur interdite : on étudie la limite de \(f\) quand \(x \to 1\).",
+            r"Le numérateur et le dénominateur tendent vers \(0\) quand \(x \to 1\) : "
+            r"forme indéterminée « \(0/0\) ».",
+            r"On factorise le numérateur et le dénominateur par \(\left(x-1\right)\) et l'on simplifie "
+            r"(pour \(x \neq 1\)) : \(f(x) = \dfrac{\left(x + 1\right)\,\cancel{\left(x-1\right)}}"
+            r"{\cancel{\left(x-1\right)}} = x + 1\).",
+            r"Par substitution, \(x + 1 \to 1 + 1 = 2\).",
+            r"Donc \(\displaystyle\lim_{x\to 1} f(x) = 2\).",
+            r"f n'est pas définie en \(x=1\), mais sa limite y est finie (\(=2\)) : pas d'asymptote verticale, "
+            r"trou dans le graphique en \((1\,;\,2)\).",
+        ])
+
+    def test_pole_restant_apres_simplification(self):
+        t = textes("(x^2-4)/(x^2-4x+4)", r"x \to 2")
+        self.assertIn("forme indéterminée « \\(0/0\\) ».", " ".join(t))
+        self.assertIn(r"Pour \(x < 2\), \(x - 2 < 0\) : \(x - 2 \to 0^{-}\).", t)
+        self.assertIn(r"\(x + 2 \to 4\) et \(x - 2 \to 0^{-}\) : \(\dfrac{4}{0^{-}} = -\infty\).", t)
+        self.assertEqual(t[-1], r"Asymptote verticale d'équation \(x = 2\).")
+
+    def test_aucune_forme_zero_sur_zero_sans_facteur_commun(self):
+        for entree in ["1/(x-2)", "(x^2-1)/(x-3)", "1/x^2"]:
+            for etude in la.etudier(entree)["etudes"]:
+                self.assertFalse(any("0/0" in e["html"] for e in etude["etapes"]), (entree, etude["ou"]))
+
+
 class TestFormeIndeterminee(unittest.TestCase):
     """Sans méthode pour la lever (L1), la rédaction est abandonnée : phrase de repli, jamais d'étape fausse."""
 

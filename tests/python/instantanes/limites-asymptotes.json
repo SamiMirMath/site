@@ -27,19 +27,31 @@
    {
     "etapes": [
      {
-      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(2x + 1 = 2\\,x\\left(1 + \\dfrac{\\frac{1}{2}}{x}\\right)\\) et \\(x - 1 = x\\left(1 - \\dfrac{1}{x}\\right)\\).",
+      "html": "Le numérateur tend vers \\(-\\infty\\) et le dénominateur tend vers \\(-\\infty\\) (limite de leur terme de plus haut degré) : forme indéterminée « \\(\\infty/\\infty\\) ».",
       "type": "texte"
      },
      {
-      "html": "Donc \\(f(x) = \\dfrac{2\\,x\\left(1 + \\dfrac{\\frac{1}{2}}{x}\\right)}{x\\left(1 - \\dfrac{1}{x}\\right)} = 2 \\cdot \\dfrac{1 + \\dfrac{\\frac{1}{2}}{x}}{1 - \\dfrac{1}{x}}\\).",
+      "html": "On met en évidence le terme de plus haut degré : \\(2x + 1 = 2\\,x\\left(1 + \\dfrac{1}{2x}\\right)\\) et \\(x - 1 = x\\left(1 - \\dfrac{1}{x}\\right)\\).",
       "type": "texte"
      },
      {
-      "html": "Quand \\(x\\to-\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 + \\dfrac{\\frac{1}{2}}{x}\\) et dans \\(1 - \\dfrac{1}{x}\\) tend vers 0 : ces expressions tendent donc vers 1, et le quotient \\(\\dfrac{1 + \\dfrac{\\frac{1}{2}}{x}}{1 - \\dfrac{1}{x}}\\) tend vers 1 aussi.",
+      "html": "Donc \\(\\frac{2x + 1}{x - 1} = \\dfrac{2\\,x\\left(1 + \\dfrac{1}{2x}\\right)}{x\\left(1 - \\dfrac{1}{x}\\right)} = 2 \\cdot \\dfrac{1 + \\dfrac{1}{2x}}{1 - \\dfrac{1}{x}}\\).",
       "type": "texte"
      },
      {
-      "html": "Il reste \\(f(x) \\to 2\\) : même degré, la limite est le rapport des coefficients dominants.",
+      "html": "Quand \\(x \\to -\\infty\\), \\(\\dfrac{1}{2x} \\to 0\\) et \\(\\dfrac{1}{x} \\to 0\\) : le quotient \\(\\dfrac{1 + \\dfrac{1}{2x}}{1 - \\dfrac{1}{x}}\\) tend vers 1.",
+      "type": "texte"
+     },
+     {
+      "html": "Le quotient tend vers 1 : la limite est \\(2\\) (rapport des coefficients dominants).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = 2\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale d'équation \\(y = 2\\).",
       "type": "texte"
      }
     ],
@@ -48,19 +60,31 @@
    {
     "etapes": [
      {
-      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(2x + 1 = 2\\,x\\left(1 + \\dfrac{\\frac{1}{2}}{x}\\right)\\) et \\(x - 1 = x\\left(1 - \\dfrac{1}{x}\\right)\\).",
+      "html": "Le numérateur tend vers \\(+\\infty\\) et le dénominateur tend vers \\(+\\infty\\) (limite de leur terme de plus haut degré) : forme indéterminée « \\(\\infty/\\infty\\) ».",
       "type": "texte"
      },
      {
-      "html": "Donc \\(f(x) = \\dfrac{2\\,x\\left(1 + \\dfrac{\\frac{1}{2}}{x}\\right)}{x\\left(1 - \\dfrac{1}{x}\\right)} = 2 \\cdot \\dfrac{1 + \\dfrac{\\frac{1}{2}}{x}}{1 - \\dfrac{1}{x}}\\).",
+      "html": "On met en évidence le terme de plus haut degré : \\(2x + 1 = 2\\,x\\left(1 + \\dfrac{1}{2x}\\right)\\) et \\(x - 1 = x\\left(1 - \\dfrac{1}{x}\\right)\\).",
       "type": "texte"
      },
      {
-      "html": "Quand \\(x\\to+\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 + \\dfrac{\\frac{1}{2}}{x}\\) et dans \\(1 - \\dfrac{1}{x}\\) tend vers 0 : ces expressions tendent donc vers 1, et le quotient \\(\\dfrac{1 + \\dfrac{\\frac{1}{2}}{x}}{1 - \\dfrac{1}{x}}\\) tend vers 1 aussi.",
+      "html": "Donc \\(\\frac{2x + 1}{x - 1} = \\dfrac{2\\,x\\left(1 + \\dfrac{1}{2x}\\right)}{x\\left(1 - \\dfrac{1}{x}\\right)} = 2 \\cdot \\dfrac{1 + \\dfrac{1}{2x}}{1 - \\dfrac{1}{x}}\\).",
       "type": "texte"
      },
      {
-      "html": "Il reste \\(f(x) \\to 2\\) : même degré, la limite est le rapport des coefficients dominants.",
+      "html": "Quand \\(x \\to +\\infty\\), \\(\\dfrac{1}{2x} \\to 0\\) et \\(\\dfrac{1}{x} \\to 0\\) : le quotient \\(\\dfrac{1 + \\dfrac{1}{2x}}{1 - \\dfrac{1}{x}}\\) tend vers 1.",
+      "type": "texte"
+     },
+     {
+      "html": "Le quotient tend vers 1 : la limite est \\(2\\) (rapport des coefficients dominants).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 2\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale d'équation \\(y = 2\\).",
       "type": "texte"
      }
     ],
@@ -159,19 +183,31 @@
    {
     "etapes": [
      {
-      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(2x^{2} + 1 = 2\\,x^{2}\\left(1 + \\dfrac{\\frac{1}{2}}{x^{2}}\\right)\\) et \\(x^{2} - 1 = x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)\\).",
+      "html": "Le numérateur tend vers \\(+\\infty\\) et le dénominateur tend vers \\(+\\infty\\) (limite de leur terme de plus haut degré) : forme indéterminée « \\(\\infty/\\infty\\) ».",
       "type": "texte"
      },
      {
-      "html": "Donc \\(f(x) = \\dfrac{2\\,x^{2}\\left(1 + \\dfrac{\\frac{1}{2}}{x^{2}}\\right)}{x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)} = 2 \\cdot \\dfrac{1 + \\dfrac{\\frac{1}{2}}{x^{2}}}{1 - \\dfrac{1}{x^{2}}}\\).",
+      "html": "On met en évidence le terme de plus haut degré : \\(2x^{2} + 1 = 2\\,x^{2}\\left(1 + \\dfrac{1}{2x^{2}}\\right)\\) et \\(x^{2} - 1 = x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)\\).",
       "type": "texte"
      },
      {
-      "html": "Quand \\(x\\to-\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 + \\dfrac{\\frac{1}{2}}{x^{2}}\\) et dans \\(1 - \\dfrac{1}{x^{2}}\\) tend vers 0 : ces expressions tendent donc vers 1, et le quotient \\(\\dfrac{1 + \\dfrac{\\frac{1}{2}}{x^{2}}}{1 - \\dfrac{1}{x^{2}}}\\) tend vers 1 aussi.",
+      "html": "Donc \\(\\frac{2x^{2} + 1}{x^{2} - 1} = \\dfrac{2\\,x^{2}\\left(1 + \\dfrac{1}{2x^{2}}\\right)}{x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)} = 2 \\cdot \\dfrac{1 + \\dfrac{1}{2x^{2}}}{1 - \\dfrac{1}{x^{2}}}\\).",
       "type": "texte"
      },
      {
-      "html": "Il reste \\(f(x) \\to 2\\) : même degré, la limite est le rapport des coefficients dominants.",
+      "html": "Quand \\(x \\to -\\infty\\), \\(\\dfrac{1}{2x^{2}} \\to 0\\) et \\(\\dfrac{1}{x^{2}} \\to 0\\) : le quotient \\(\\dfrac{1 + \\dfrac{1}{2x^{2}}}{1 - \\dfrac{1}{x^{2}}}\\) tend vers 1.",
+      "type": "texte"
+     },
+     {
+      "html": "Le quotient tend vers 1 : la limite est \\(2\\) (rapport des coefficients dominants).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = 2\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale d'équation \\(y = 2\\).",
       "type": "texte"
      }
     ],
@@ -180,19 +216,31 @@
    {
     "etapes": [
      {
-      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(2x^{2} + 1 = 2\\,x^{2}\\left(1 + \\dfrac{\\frac{1}{2}}{x^{2}}\\right)\\) et \\(x^{2} - 1 = x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)\\).",
+      "html": "Le numérateur tend vers \\(+\\infty\\) et le dénominateur tend vers \\(+\\infty\\) (limite de leur terme de plus haut degré) : forme indéterminée « \\(\\infty/\\infty\\) ».",
       "type": "texte"
      },
      {
-      "html": "Donc \\(f(x) = \\dfrac{2\\,x^{2}\\left(1 + \\dfrac{\\frac{1}{2}}{x^{2}}\\right)}{x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)} = 2 \\cdot \\dfrac{1 + \\dfrac{\\frac{1}{2}}{x^{2}}}{1 - \\dfrac{1}{x^{2}}}\\).",
+      "html": "On met en évidence le terme de plus haut degré : \\(2x^{2} + 1 = 2\\,x^{2}\\left(1 + \\dfrac{1}{2x^{2}}\\right)\\) et \\(x^{2} - 1 = x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)\\).",
       "type": "texte"
      },
      {
-      "html": "Quand \\(x\\to+\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 + \\dfrac{\\frac{1}{2}}{x^{2}}\\) et dans \\(1 - \\dfrac{1}{x^{2}}\\) tend vers 0 : ces expressions tendent donc vers 1, et le quotient \\(\\dfrac{1 + \\dfrac{\\frac{1}{2}}{x^{2}}}{1 - \\dfrac{1}{x^{2}}}\\) tend vers 1 aussi.",
+      "html": "Donc \\(\\frac{2x^{2} + 1}{x^{2} - 1} = \\dfrac{2\\,x^{2}\\left(1 + \\dfrac{1}{2x^{2}}\\right)}{x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)} = 2 \\cdot \\dfrac{1 + \\dfrac{1}{2x^{2}}}{1 - \\dfrac{1}{x^{2}}}\\).",
       "type": "texte"
      },
      {
-      "html": "Il reste \\(f(x) \\to 2\\) : même degré, la limite est le rapport des coefficients dominants.",
+      "html": "Quand \\(x \\to +\\infty\\), \\(\\dfrac{1}{2x^{2}} \\to 0\\) et \\(\\dfrac{1}{x^{2}} \\to 0\\) : le quotient \\(\\dfrac{1 + \\dfrac{1}{2x^{2}}}{1 - \\dfrac{1}{x^{2}}}\\) tend vers 1.",
+      "type": "texte"
+     },
+     {
+      "html": "Le quotient tend vers 1 : la limite est \\(2\\) (rapport des coefficients dominants).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 2\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale d'équation \\(y = 2\\).",
       "type": "texte"
      }
     ],
@@ -437,19 +485,35 @@
    {
     "etapes": [
      {
-      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(x^{2} - 1 = x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)\\) et \\(x - 1 = x\\left(1 - \\dfrac{1}{x}\\right)\\).",
+      "html": "Le numérateur tend vers \\(+\\infty\\) et le dénominateur tend vers \\(-\\infty\\) (limite de leur terme de plus haut degré) : forme indéterminée « \\(\\infty/\\infty\\) ».",
       "type": "texte"
      },
      {
-      "html": "Donc \\(f(x) = \\dfrac{x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)}{x\\left(1 - \\dfrac{1}{x}\\right)} = x \\cdot \\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{1}{x}}\\).",
+      "html": "On met en évidence le terme de plus haut degré : \\(x^{2} - 1 = x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)\\) et \\(x - 1 = x\\left(1 - \\dfrac{1}{x}\\right)\\).",
       "type": "texte"
      },
      {
-      "html": "Quand \\(x\\to-\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 - \\dfrac{1}{x^{2}}\\) et dans \\(1 - \\dfrac{1}{x}\\) tend vers 0 : ces expressions tendent donc vers 1, et le quotient \\(\\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{1}{x}}\\) tend vers 1 aussi.",
+      "html": "Donc \\(\\frac{x^{2} - 1}{x - 1} = \\dfrac{x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)}{x\\left(1 - \\dfrac{1}{x}\\right)} = x \\cdot \\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{1}{x}}\\).",
       "type": "texte"
      },
      {
-      "html": "Il reste \\(f(x) \\to x\\) : la limite est \\(-\\infty\\), et il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2} - 1\\) par \\(x - 1\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} - 1 = \\left(x - 1\\right)\\left(x + 1\\right) + 0\\), donc \\(f(x) = x + 1 + \\dfrac{0}{x - 1}\\), et ce dernier terme tend vers 0.",
+      "html": "Quand \\(x \\to -\\infty\\), \\(\\dfrac{1}{x^{2}} \\to 0\\) et \\(\\dfrac{1}{x} \\to 0\\) : le quotient \\(\\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{1}{x}}\\) tend vers 1.",
+      "type": "texte"
+     },
+     {
+      "html": "Le quotient tend vers 1 et \\(x \\to -\\infty\\) : la limite est \\(-\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "La limite est infinie : pas d'asymptote horizontale.",
+      "type": "texte"
+     },
+     {
+      "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2} - 1\\) par \\(x - 1\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} - 1 = \\left(x - 1\\right)\\left(x + 1\\right)\\), donc \\(f(x) = x + 1\\) là où f est définie : la courbe est contenue dans la droite.",
       "type": "texte"
      }
     ],
@@ -458,19 +522,35 @@
    {
     "etapes": [
      {
-      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(x^{2} - 1 = x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)\\) et \\(x - 1 = x\\left(1 - \\dfrac{1}{x}\\right)\\).",
+      "html": "Le numérateur tend vers \\(+\\infty\\) et le dénominateur tend vers \\(+\\infty\\) (limite de leur terme de plus haut degré) : forme indéterminée « \\(\\infty/\\infty\\) ».",
       "type": "texte"
      },
      {
-      "html": "Donc \\(f(x) = \\dfrac{x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)}{x\\left(1 - \\dfrac{1}{x}\\right)} = x \\cdot \\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{1}{x}}\\).",
+      "html": "On met en évidence le terme de plus haut degré : \\(x^{2} - 1 = x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)\\) et \\(x - 1 = x\\left(1 - \\dfrac{1}{x}\\right)\\).",
       "type": "texte"
      },
      {
-      "html": "Quand \\(x\\to+\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 - \\dfrac{1}{x^{2}}\\) et dans \\(1 - \\dfrac{1}{x}\\) tend vers 0 : ces expressions tendent donc vers 1, et le quotient \\(\\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{1}{x}}\\) tend vers 1 aussi.",
+      "html": "Donc \\(\\frac{x^{2} - 1}{x - 1} = \\dfrac{x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)}{x\\left(1 - \\dfrac{1}{x}\\right)} = x \\cdot \\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{1}{x}}\\).",
       "type": "texte"
      },
      {
-      "html": "Il reste \\(f(x) \\to x\\) : la limite est \\(+\\infty\\), et il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2} - 1\\) par \\(x - 1\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} - 1 = \\left(x - 1\\right)\\left(x + 1\\right) + 0\\), donc \\(f(x) = x + 1 + \\dfrac{0}{x - 1}\\), et ce dernier terme tend vers 0.",
+      "html": "Quand \\(x \\to +\\infty\\), \\(\\dfrac{1}{x^{2}} \\to 0\\) et \\(\\dfrac{1}{x} \\to 0\\) : le quotient \\(\\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{1}{x}}\\) tend vers 1.",
+      "type": "texte"
+     },
+     {
+      "html": "Le quotient tend vers 1 et \\(x \\to +\\infty\\) : la limite est \\(+\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "La limite est infinie : pas d'asymptote horizontale.",
+      "type": "texte"
+     },
+     {
+      "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2} - 1\\) par \\(x - 1\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} - 1 = \\left(x - 1\\right)\\left(x + 1\\right)\\), donc \\(f(x) = x + 1\\) là où f est définie : la courbe est contenue dans la droite.",
       "type": "texte"
      }
     ],
@@ -479,7 +559,27 @@
    {
     "etapes": [
      {
-      "html": "\\(\\displaystyle\\lim_{x\\to 1} f(x) = \\lim_{x\\to 1}\\dfrac{\\left(x + 1\\right)\\,\\cancel{\\left(x-1\\right)}}{\\cancel{\\left(x-1\\right)}} = \\lim_{x\\to 1} \\left(x + 1\\right) = 2\\) : f n'est pas définie en \\(x=1\\), mais sa limite y est finie (\\(=2\\)) : pas d'asymptote verticale, trou dans le graphique en \\((1\\,;\\,2)\\).",
+      "html": "\\(x=1\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Le numérateur et le dénominateur tendent vers \\(0\\) quand \\(x \\to 1\\) : forme indéterminée « \\(0/0\\) ».",
+      "type": "texte"
+     },
+     {
+      "html": "On factorise le numérateur et le dénominateur par \\(\\left(x-1\\right)\\) et l'on simplifie (pour \\(x \\neq 1\\)) : \\(f(x) = \\dfrac{\\left(x + 1\\right)\\,\\cancel{\\left(x-1\\right)}}{\\cancel{\\left(x-1\\right)}} = x + 1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Par substitution, \\(x + 1 \\to 1 + 1 = 2\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to 1} f(x) = 2\\).",
+      "type": "texte"
+     },
+     {
+      "html": "f n'est pas définie en \\(x=1\\), mais sa limite y est finie (\\(=2\\)) : pas d'asymptote verticale, trou dans le graphique en \\((1\\,;\\,2)\\).",
       "type": "texte"
      }
     ],
@@ -525,19 +625,35 @@
    {
     "etapes": [
      {
-      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(x^{2} - 1 = x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)\\) et \\(x - 3 = x\\left(1 - \\dfrac{3}{x}\\right)\\).",
+      "html": "Le numérateur tend vers \\(+\\infty\\) et le dénominateur tend vers \\(-\\infty\\) (limite de leur terme de plus haut degré) : forme indéterminée « \\(\\infty/\\infty\\) ».",
       "type": "texte"
      },
      {
-      "html": "Donc \\(f(x) = \\dfrac{x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)}{x\\left(1 - \\dfrac{3}{x}\\right)} = x \\cdot \\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{3}{x}}\\).",
+      "html": "On met en évidence le terme de plus haut degré : \\(x^{2} - 1 = x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)\\) et \\(x - 3 = x\\left(1 - \\dfrac{3}{x}\\right)\\).",
       "type": "texte"
      },
      {
-      "html": "Quand \\(x\\to-\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 - \\dfrac{1}{x^{2}}\\) et dans \\(1 - \\dfrac{3}{x}\\) tend vers 0 : ces expressions tendent donc vers 1, et le quotient \\(\\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{3}{x}}\\) tend vers 1 aussi.",
+      "html": "Donc \\(\\frac{x^{2} - 1}{x - 3} = \\dfrac{x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)}{x\\left(1 - \\dfrac{3}{x}\\right)} = x \\cdot \\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{3}{x}}\\).",
       "type": "texte"
      },
      {
-      "html": "Il reste \\(f(x) \\to x\\) : la limite est \\(-\\infty\\), et il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2} - 1\\) par \\(x - 3\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} - 1 = \\left(x - 3\\right)\\left(x + 3\\right) + 8\\), donc \\(f(x) = x + 3 + \\dfrac{8}{x - 3}\\), et ce dernier terme tend vers 0.",
+      "html": "Quand \\(x \\to -\\infty\\), \\(\\dfrac{1}{x^{2}} \\to 0\\) et \\(\\dfrac{3}{x} \\to 0\\) : le quotient \\(\\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{3}{x}}\\) tend vers 1.",
+      "type": "texte"
+     },
+     {
+      "html": "Le quotient tend vers 1 et \\(x \\to -\\infty\\) : la limite est \\(-\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "La limite est infinie : pas d'asymptote horizontale.",
+      "type": "texte"
+     },
+     {
+      "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2} - 1\\) par \\(x - 3\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} - 1 = \\left(x - 3\\right)\\left(x + 3\\right) + 8\\), donc \\(f(x) = x + 3 + \\dfrac{8}{x - 3}\\), et ce dernier terme tend vers 0.",
       "type": "texte"
      }
     ],
@@ -546,19 +662,35 @@
    {
     "etapes": [
      {
-      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(x^{2} - 1 = x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)\\) et \\(x - 3 = x\\left(1 - \\dfrac{3}{x}\\right)\\).",
+      "html": "Le numérateur tend vers \\(+\\infty\\) et le dénominateur tend vers \\(+\\infty\\) (limite de leur terme de plus haut degré) : forme indéterminée « \\(\\infty/\\infty\\) ».",
       "type": "texte"
      },
      {
-      "html": "Donc \\(f(x) = \\dfrac{x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)}{x\\left(1 - \\dfrac{3}{x}\\right)} = x \\cdot \\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{3}{x}}\\).",
+      "html": "On met en évidence le terme de plus haut degré : \\(x^{2} - 1 = x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)\\) et \\(x - 3 = x\\left(1 - \\dfrac{3}{x}\\right)\\).",
       "type": "texte"
      },
      {
-      "html": "Quand \\(x\\to+\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 - \\dfrac{1}{x^{2}}\\) et dans \\(1 - \\dfrac{3}{x}\\) tend vers 0 : ces expressions tendent donc vers 1, et le quotient \\(\\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{3}{x}}\\) tend vers 1 aussi.",
+      "html": "Donc \\(\\frac{x^{2} - 1}{x - 3} = \\dfrac{x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)}{x\\left(1 - \\dfrac{3}{x}\\right)} = x \\cdot \\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{3}{x}}\\).",
       "type": "texte"
      },
      {
-      "html": "Il reste \\(f(x) \\to x\\) : la limite est \\(+\\infty\\), et il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2} - 1\\) par \\(x - 3\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} - 1 = \\left(x - 3\\right)\\left(x + 3\\right) + 8\\), donc \\(f(x) = x + 3 + \\dfrac{8}{x - 3}\\), et ce dernier terme tend vers 0.",
+      "html": "Quand \\(x \\to +\\infty\\), \\(\\dfrac{1}{x^{2}} \\to 0\\) et \\(\\dfrac{3}{x} \\to 0\\) : le quotient \\(\\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{3}{x}}\\) tend vers 1.",
+      "type": "texte"
+     },
+     {
+      "html": "Le quotient tend vers 1 et \\(x \\to +\\infty\\) : la limite est \\(+\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "La limite est infinie : pas d'asymptote horizontale.",
+      "type": "texte"
+     },
+     {
+      "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2} - 1\\) par \\(x - 3\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} - 1 = \\left(x - 3\\right)\\left(x + 3\\right) + 8\\), donc \\(f(x) = x + 3 + \\dfrac{8}{x - 3}\\), et ce dernier terme tend vers 0.",
       "type": "texte"
      }
     ],
@@ -647,19 +779,35 @@
    {
     "etapes": [
      {
-      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(x^{3} + 1 = x^{3}\\left(1 + \\dfrac{1}{x^{3}}\\right)\\) et \\(x - 2 = x\\left(1 - \\dfrac{2}{x}\\right)\\).",
+      "html": "Le numérateur tend vers \\(-\\infty\\) et le dénominateur tend vers \\(-\\infty\\) (limite de leur terme de plus haut degré) : forme indéterminée « \\(\\infty/\\infty\\) ».",
       "type": "texte"
      },
      {
-      "html": "Donc \\(f(x) = \\dfrac{x^{3}\\left(1 + \\dfrac{1}{x^{3}}\\right)}{x\\left(1 - \\dfrac{2}{x}\\right)} = x^{2} \\cdot \\dfrac{1 + \\dfrac{1}{x^{3}}}{1 - \\dfrac{2}{x}}\\).",
+      "html": "On met en évidence le terme de plus haut degré : \\(x^{3} + 1 = x^{3}\\left(1 + \\dfrac{1}{x^{3}}\\right)\\) et \\(x - 2 = x\\left(1 - \\dfrac{2}{x}\\right)\\).",
       "type": "texte"
      },
      {
-      "html": "Quand \\(x\\to-\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 + \\dfrac{1}{x^{3}}\\) et dans \\(1 - \\dfrac{2}{x}\\) tend vers 0 : ces expressions tendent donc vers 1, et le quotient \\(\\dfrac{1 + \\dfrac{1}{x^{3}}}{1 - \\dfrac{2}{x}}\\) tend vers 1 aussi.",
+      "html": "Donc \\(\\frac{x^{3} + 1}{x - 2} = \\dfrac{x^{3}\\left(1 + \\dfrac{1}{x^{3}}\\right)}{x\\left(1 - \\dfrac{2}{x}\\right)} = x^{2} \\cdot \\dfrac{1 + \\dfrac{1}{x^{3}}}{1 - \\dfrac{2}{x}}\\).",
       "type": "texte"
      },
      {
-      "html": "Il reste \\(f(x) \\to x^{2}\\) : le degré du numérateur dépasse celui du dénominateur de 2 \\(\\geq 2\\), la limite est \\(+\\infty\\) (branche parabolique, pas d'asymptote oblique).",
+      "html": "Quand \\(x \\to -\\infty\\), \\(\\dfrac{1}{x^{3}} \\to 0\\) et \\(\\dfrac{2}{x} \\to 0\\) : le quotient \\(\\dfrac{1 + \\dfrac{1}{x^{3}}}{1 - \\dfrac{2}{x}}\\) tend vers 1.",
+      "type": "texte"
+     },
+     {
+      "html": "Le quotient tend vers 1 et \\(x^{2} \\to +\\infty\\) : la limite est \\(+\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "La limite est infinie : pas d'asymptote horizontale.",
+      "type": "texte"
+     },
+     {
+      "html": "Le degré du numérateur dépasse celui du dénominateur de 2 \\(\\geq 2\\) : pas d'asymptote oblique (branche parabolique).",
       "type": "texte"
      }
     ],
@@ -668,19 +816,35 @@
    {
     "etapes": [
      {
-      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(x^{3} + 1 = x^{3}\\left(1 + \\dfrac{1}{x^{3}}\\right)\\) et \\(x - 2 = x\\left(1 - \\dfrac{2}{x}\\right)\\).",
+      "html": "Le numérateur tend vers \\(+\\infty\\) et le dénominateur tend vers \\(+\\infty\\) (limite de leur terme de plus haut degré) : forme indéterminée « \\(\\infty/\\infty\\) ».",
       "type": "texte"
      },
      {
-      "html": "Donc \\(f(x) = \\dfrac{x^{3}\\left(1 + \\dfrac{1}{x^{3}}\\right)}{x\\left(1 - \\dfrac{2}{x}\\right)} = x^{2} \\cdot \\dfrac{1 + \\dfrac{1}{x^{3}}}{1 - \\dfrac{2}{x}}\\).",
+      "html": "On met en évidence le terme de plus haut degré : \\(x^{3} + 1 = x^{3}\\left(1 + \\dfrac{1}{x^{3}}\\right)\\) et \\(x - 2 = x\\left(1 - \\dfrac{2}{x}\\right)\\).",
       "type": "texte"
      },
      {
-      "html": "Quand \\(x\\to+\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 + \\dfrac{1}{x^{3}}\\) et dans \\(1 - \\dfrac{2}{x}\\) tend vers 0 : ces expressions tendent donc vers 1, et le quotient \\(\\dfrac{1 + \\dfrac{1}{x^{3}}}{1 - \\dfrac{2}{x}}\\) tend vers 1 aussi.",
+      "html": "Donc \\(\\frac{x^{3} + 1}{x - 2} = \\dfrac{x^{3}\\left(1 + \\dfrac{1}{x^{3}}\\right)}{x\\left(1 - \\dfrac{2}{x}\\right)} = x^{2} \\cdot \\dfrac{1 + \\dfrac{1}{x^{3}}}{1 - \\dfrac{2}{x}}\\).",
       "type": "texte"
      },
      {
-      "html": "Il reste \\(f(x) \\to x^{2}\\) : le degré du numérateur dépasse celui du dénominateur de 2 \\(\\geq 2\\), la limite est \\(+\\infty\\) (branche parabolique, pas d'asymptote oblique).",
+      "html": "Quand \\(x \\to +\\infty\\), \\(\\dfrac{1}{x^{3}} \\to 0\\) et \\(\\dfrac{2}{x} \\to 0\\) : le quotient \\(\\dfrac{1 + \\dfrac{1}{x^{3}}}{1 - \\dfrac{2}{x}}\\) tend vers 1.",
+      "type": "texte"
+     },
+     {
+      "html": "Le quotient tend vers 1 et \\(x^{2} \\to +\\infty\\) : la limite est \\(+\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "La limite est infinie : pas d'asymptote horizontale.",
+      "type": "texte"
+     },
+     {
+      "html": "Le degré du numérateur dépasse celui du dénominateur de 2 \\(\\geq 2\\) : pas d'asymptote oblique (branche parabolique).",
       "type": "texte"
      }
     ],
@@ -771,19 +935,15 @@
    {
     "etapes": [
      {
-      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(1 = 1\\) et \\(x - 2 = x\\left(1 - \\dfrac{2}{x}\\right)\\).",
+      "html": "Le numérateur est la constante \\(1\\) et le dénominateur tend vers \\(-\\infty\\) (limite de son terme de plus haut degré) : le quotient tend vers \\(0\\).",
       "type": "texte"
      },
      {
-      "html": "Donc \\(f(x) = \\dfrac{1}{x\\left(1 - \\dfrac{2}{x}\\right)} = \\dfrac{1}{x} \\cdot \\dfrac{1}{1 - \\dfrac{2}{x}}\\).",
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = 0\\).",
       "type": "texte"
      },
      {
-      "html": "Quand \\(x\\to-\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 - \\dfrac{2}{x}\\) tend vers 0 : cette expression tend donc vers 1, et le quotient \\(\\dfrac{1}{1 - \\dfrac{2}{x}}\\) tend vers 1 aussi.",
-      "type": "texte"
-     },
-     {
-      "html": "Il reste \\(f(x) \\to \\dfrac{1}{x}\\) avec un exposant négatif : la limite est 0.",
+      "html": "Asymptote horizontale d'équation \\(y = 0\\).",
       "type": "texte"
      }
     ],
@@ -792,19 +952,15 @@
    {
     "etapes": [
      {
-      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(1 = 1\\) et \\(x - 2 = x\\left(1 - \\dfrac{2}{x}\\right)\\).",
+      "html": "Le numérateur est la constante \\(1\\) et le dénominateur tend vers \\(+\\infty\\) (limite de son terme de plus haut degré) : le quotient tend vers \\(0\\).",
       "type": "texte"
      },
      {
-      "html": "Donc \\(f(x) = \\dfrac{1}{x\\left(1 - \\dfrac{2}{x}\\right)} = \\dfrac{1}{x} \\cdot \\dfrac{1}{1 - \\dfrac{2}{x}}\\).",
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 0\\).",
       "type": "texte"
      },
      {
-      "html": "Quand \\(x\\to+\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 - \\dfrac{2}{x}\\) tend vers 0 : cette expression tend donc vers 1, et le quotient \\(\\dfrac{1}{1 - \\dfrac{2}{x}}\\) tend vers 1 aussi.",
-      "type": "texte"
-     },
-     {
-      "html": "Il reste \\(f(x) \\to \\dfrac{1}{x}\\) avec un exposant négatif : la limite est 0.",
+      "html": "Asymptote horizontale d'équation \\(y = 0\\).",
       "type": "texte"
      }
     ],
@@ -895,19 +1051,15 @@
    {
     "etapes": [
      {
-      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(1 = 1\\) et \\(x^{2} - 2 = x^{2}\\left(1 - \\dfrac{2}{x^{2}}\\right)\\).",
+      "html": "Le numérateur est la constante \\(1\\) et le dénominateur tend vers \\(+\\infty\\) (limite de son terme de plus haut degré) : le quotient tend vers \\(0\\).",
       "type": "texte"
      },
      {
-      "html": "Donc \\(f(x) = \\dfrac{1}{x^{2}\\left(1 - \\dfrac{2}{x^{2}}\\right)} = \\dfrac{1}{x^{2}} \\cdot \\dfrac{1}{1 - \\dfrac{2}{x^{2}}}\\).",
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = 0\\).",
       "type": "texte"
      },
      {
-      "html": "Quand \\(x\\to-\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 - \\dfrac{2}{x^{2}}\\) tend vers 0 : cette expression tend donc vers 1, et le quotient \\(\\dfrac{1}{1 - \\dfrac{2}{x^{2}}}\\) tend vers 1 aussi.",
-      "type": "texte"
-     },
-     {
-      "html": "Il reste \\(f(x) \\to \\dfrac{1}{x^{2}}\\) avec un exposant négatif : la limite est 0.",
+      "html": "Asymptote horizontale d'équation \\(y = 0\\).",
       "type": "texte"
      }
     ],
@@ -916,19 +1068,15 @@
    {
     "etapes": [
      {
-      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(1 = 1\\) et \\(x^{2} - 2 = x^{2}\\left(1 - \\dfrac{2}{x^{2}}\\right)\\).",
+      "html": "Le numérateur est la constante \\(1\\) et le dénominateur tend vers \\(+\\infty\\) (limite de son terme de plus haut degré) : le quotient tend vers \\(0\\).",
       "type": "texte"
      },
      {
-      "html": "Donc \\(f(x) = \\dfrac{1}{x^{2}\\left(1 - \\dfrac{2}{x^{2}}\\right)} = \\dfrac{1}{x^{2}} \\cdot \\dfrac{1}{1 - \\dfrac{2}{x^{2}}}\\).",
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 0\\).",
       "type": "texte"
      },
      {
-      "html": "Quand \\(x\\to+\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 - \\dfrac{2}{x^{2}}\\) tend vers 0 : cette expression tend donc vers 1, et le quotient \\(\\dfrac{1}{1 - \\dfrac{2}{x^{2}}}\\) tend vers 1 aussi.",
-      "type": "texte"
-     },
-     {
-      "html": "Il reste \\(f(x) \\to \\dfrac{1}{x^{2}}\\) avec un exposant négatif : la limite est 0.",
+      "html": "Asymptote horizontale d'équation \\(y = 0\\).",
       "type": "texte"
      }
     ],
@@ -1072,15 +1220,15 @@
    {
     "etapes": [
      {
-      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(1 = 1\\) et \\(x^{2} = x^{2}\\).",
+      "html": "Le numérateur est la constante \\(1\\) et le dénominateur tend vers \\(+\\infty\\) (limite de son terme de plus haut degré) : le quotient tend vers \\(0\\).",
       "type": "texte"
      },
      {
-      "html": "Donc \\(f(x) = \\dfrac{1}{x^{2}} = \\dfrac{1}{x^{2}}\\) exactement.",
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = 0\\).",
       "type": "texte"
      },
      {
-      "html": "Il reste \\(f(x) \\to \\dfrac{1}{x^{2}}\\) avec un exposant négatif : la limite est 0.",
+      "html": "Asymptote horizontale d'équation \\(y = 0\\).",
       "type": "texte"
      }
     ],
@@ -1089,15 +1237,15 @@
    {
     "etapes": [
      {
-      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(1 = 1\\) et \\(x^{2} = x^{2}\\).",
+      "html": "Le numérateur est la constante \\(1\\) et le dénominateur tend vers \\(+\\infty\\) (limite de son terme de plus haut degré) : le quotient tend vers \\(0\\).",
       "type": "texte"
      },
      {
-      "html": "Donc \\(f(x) = \\dfrac{1}{x^{2}} = \\dfrac{1}{x^{2}}\\) exactement.",
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 0\\).",
       "type": "texte"
      },
      {
-      "html": "Il reste \\(f(x) \\to \\dfrac{1}{x^{2}}\\) avec un exposant négatif : la limite est 0.",
+      "html": "Asymptote horizontale d'équation \\(y = 0\\).",
       "type": "texte"
      }
     ],
@@ -1182,7 +1330,7 @@
    {
     "etapes": [
      {
-      "html": "\\(1\\) est une constante et \\(x \\to -\\infty\\) : le quotient tend vers \\(0^{-}\\).",
+      "html": "Le numérateur est la constante \\(1\\) et le dénominateur tend vers \\(-\\infty\\) (limite de son terme de plus haut degré) : le quotient tend vers \\(0\\).",
       "type": "texte"
      },
      {
@@ -1203,7 +1351,7 @@
    {
     "etapes": [
      {
-      "html": "\\(1\\) est une constante et \\(x \\to +\\infty\\) : le quotient tend vers \\(0^{+}\\).",
+      "html": "Le numérateur est la constante \\(1\\) et le dénominateur tend vers \\(+\\infty\\) (limite de son terme de plus haut degré) : le quotient tend vers \\(0\\).",
       "type": "texte"
      },
      {
@@ -1526,7 +1674,7 @@
    {
     "etapes": [
      {
-      "html": "\\(x \\to +\\infty\\) et \\(1\\) est une constante : la différence tend vers \\(+\\infty\\).",
+      "html": "\\(x \\to +\\infty\\) et \\(-1\\) est une constante : la somme tend vers \\(+\\infty\\).",
       "type": "texte"
      },
      {
@@ -1606,7 +1754,7 @@
    {
     "etapes": [
      {
-      "detail": "Abandon : forme indéterminée ∞ − ∞ non levée en x^{2} - 4x",
+      "detail": "Abandon : forme indéterminée ∞/∞ non levée en \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5}",
       "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 0\\).",
       "type": "texte"
      },
@@ -1774,10 +1922,6 @@
    {
     "etapes": [
      {
-      "html": "Or \\(t^{2} \\to +\\infty\\) quand \\(t \\to -\\infty\\) : \\(x^{2} \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
       "html": "\\(x^{2} \\to +\\infty\\) et \\(1\\) est une constante : la somme tend vers \\(+\\infty\\).",
       "type": "texte"
      },
@@ -1802,10 +1946,6 @@
    },
    {
     "etapes": [
-     {
-      "html": "Or \\(t^{2} \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(x^{2} \\to +\\infty\\).",
-      "type": "texte"
-     },
      {
       "html": "\\(x^{2} \\to +\\infty\\) et \\(1\\) est une constante : la somme tend vers \\(+\\infty\\).",
       "type": "texte"
@@ -1859,19 +1999,7 @@
    {
     "etapes": [
      {
-      "html": "Or \\(t^{2} \\to +\\infty\\) quand \\(t \\to -\\infty\\) : \\(x^{2} \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Comme \\(x \\to -\\infty\\) et \\(4 > 0\\), on a \\(4x \\to -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x^{2} \\to +\\infty\\) et \\(4x \\to -\\infty\\) : la différence tend vers \\(+\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x^{2} - 4x \\to +\\infty\\) et \\(5\\) est une constante : la somme tend vers \\(+\\infty\\).",
+      "html": "\\(x^{2} \\to +\\infty\\), \\(-4x \\to +\\infty\\) et \\(5\\) est une constante : la somme tend vers \\(+\\infty\\).",
       "type": "texte"
      },
      {
@@ -1896,8 +2024,27 @@
    {
     "etapes": [
      {
-      "detail": "Abandon : forme indéterminée ∞ − ∞ non levée en x^{2} - 4x",
-      "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+      "html": "\\(x^{2} \\to +\\infty\\), \\(-4x \\to -\\infty\\) et \\(5\\) est une constante : forme indéterminée « \\(\\infty - \\infty\\) ».",
+      "type": "texte"
+     },
+     {
+      "html": "On met en évidence le terme de plus haut degré : \\(x^{2} - 4x + 5 = x^{2}\\left(1 - \\dfrac{4}{x} + \\dfrac{5}{x^{2}}\\right)\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Quand \\(x \\to +\\infty\\), \\(\\dfrac{4}{x} \\to 0\\) et \\(\\dfrac{5}{x^{2}} \\to 0\\), donc \\(1 - \\dfrac{4}{x} + \\dfrac{5}{x^{2}} \\to 1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Comme \\(x^{2} \\to +\\infty\\) et que le facteur entre parenthèses tend vers 1, \\(x^{2} - 4x + 5 \\to +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(\\sqrt{x^{2} - 4x + 5} \\to +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -2335,19 +2482,35 @@
    {
     "etapes": [
      {
-      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(x^{2} = x^{2}\\) et \\(x - 1 = x\\left(1 - \\dfrac{1}{x}\\right)\\).",
+      "html": "Le numérateur tend vers \\(+\\infty\\) et le dénominateur tend vers \\(-\\infty\\) (limite de leur terme de plus haut degré) : forme indéterminée « \\(\\infty/\\infty\\) ».",
       "type": "texte"
      },
      {
-      "html": "Donc \\(f(x) = \\dfrac{x^{2}}{x\\left(1 - \\dfrac{1}{x}\\right)} = x \\cdot \\dfrac{1}{1 - \\dfrac{1}{x}}\\).",
+      "html": "On met en évidence le terme de plus haut degré : \\(x - 1 = x\\left(1 - \\dfrac{1}{x}\\right)\\).",
       "type": "texte"
      },
      {
-      "html": "Quand \\(x\\to-\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 - \\dfrac{1}{x}\\) tend vers 0 : cette expression tend donc vers 1, et le quotient \\(\\dfrac{1}{1 - \\dfrac{1}{x}}\\) tend vers 1 aussi.",
+      "html": "Donc \\(\\frac{x^{2}}{x - 1} = \\dfrac{x^{2}}{x\\left(1 - \\dfrac{1}{x}\\right)} = x \\cdot \\dfrac{1}{1 - \\dfrac{1}{x}}\\).",
       "type": "texte"
      },
      {
-      "html": "Il reste \\(f(x) \\to x\\) : la limite est \\(-\\infty\\), et il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2}\\) par \\(x - 1\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} = \\left(x - 1\\right)\\left(x + 1\\right) + 1\\), donc \\(f(x) = x + 1 + \\dfrac{1}{x - 1}\\), et ce dernier terme tend vers 0.",
+      "html": "Quand \\(x \\to -\\infty\\), \\(\\dfrac{1}{x} \\to 0\\) : le quotient \\(\\dfrac{1}{1 - \\dfrac{1}{x}}\\) tend vers 1.",
+      "type": "texte"
+     },
+     {
+      "html": "Le quotient tend vers 1 et \\(x \\to -\\infty\\) : la limite est \\(-\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "La limite est infinie : pas d'asymptote horizontale.",
+      "type": "texte"
+     },
+     {
+      "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2}\\) par \\(x - 1\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} = \\left(x - 1\\right)\\left(x + 1\\right) + 1\\), donc \\(f(x) = x + 1 + \\dfrac{1}{x - 1}\\), et ce dernier terme tend vers 0.",
       "type": "texte"
      }
     ],
@@ -2356,19 +2519,35 @@
    {
     "etapes": [
      {
-      "html": "On factorise le numérateur et le dénominateur par leur terme de plus haut degré : \\(x^{2} = x^{2}\\) et \\(x - 1 = x\\left(1 - \\dfrac{1}{x}\\right)\\).",
+      "html": "Le numérateur tend vers \\(+\\infty\\) et le dénominateur tend vers \\(+\\infty\\) (limite de leur terme de plus haut degré) : forme indéterminée « \\(\\infty/\\infty\\) ».",
       "type": "texte"
      },
      {
-      "html": "Donc \\(f(x) = \\dfrac{x^{2}}{x\\left(1 - \\dfrac{1}{x}\\right)} = x \\cdot \\dfrac{1}{1 - \\dfrac{1}{x}}\\).",
+      "html": "On met en évidence le terme de plus haut degré : \\(x - 1 = x\\left(1 - \\dfrac{1}{x}\\right)\\).",
       "type": "texte"
      },
      {
-      "html": "Quand \\(x\\to+\\infty\\), chaque terme en \\(1/x^k\\) dans \\(1 - \\dfrac{1}{x}\\) tend vers 0 : cette expression tend donc vers 1, et le quotient \\(\\dfrac{1}{1 - \\dfrac{1}{x}}\\) tend vers 1 aussi.",
+      "html": "Donc \\(\\frac{x^{2}}{x - 1} = \\dfrac{x^{2}}{x\\left(1 - \\dfrac{1}{x}\\right)} = x \\cdot \\dfrac{1}{1 - \\dfrac{1}{x}}\\).",
       "type": "texte"
      },
      {
-      "html": "Il reste \\(f(x) \\to x\\) : la limite est \\(+\\infty\\), et il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2}\\) par \\(x - 1\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} = \\left(x - 1\\right)\\left(x + 1\\right) + 1\\), donc \\(f(x) = x + 1 + \\dfrac{1}{x - 1}\\), et ce dernier terme tend vers 0.",
+      "html": "Quand \\(x \\to +\\infty\\), \\(\\dfrac{1}{x} \\to 0\\) : le quotient \\(\\dfrac{1}{1 - \\dfrac{1}{x}}\\) tend vers 1.",
+      "type": "texte"
+     },
+     {
+      "html": "Le quotient tend vers 1 et \\(x \\to +\\infty\\) : la limite est \\(+\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "La limite est infinie : pas d'asymptote horizontale.",
+      "type": "texte"
+     },
+     {
+      "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2}\\) par \\(x - 1\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} = \\left(x - 1\\right)\\left(x + 1\\right) + 1\\), donc \\(f(x) = x + 1 + \\dfrac{1}{x - 1}\\), et ce dernier terme tend vers 0.",
       "type": "texte"
      }
     ],

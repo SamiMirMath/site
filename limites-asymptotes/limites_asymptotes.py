@@ -26,7 +26,7 @@ from fractions import Fraction as F
 from ensemble_def import (
     Nb, X, E, Neg, Op, Fn,
     lire, tex, prec, valeur_constante, Num, Iv, REELS, fusion, inter, ens_tex,
-    contient, proche, evaluer, sans_x, qtex, ptex, pn, deg, peval, pdivlin,
+    contient, proche, evaluer, sans_x, qtex, ptex, pn, deg, peval, pdivlin, pmul, nul,
     decomposer, r_norm, json_strict, ajouter_saisie,
     _sympy, en_sympy_reel, arbre_depuis_sympy, num_sympy, _SP,
     txt, NonPrisEnCharge, ErreurSaisie, _analyser, apercu_json,
@@ -139,98 +139,196 @@ def _monome_tex(c, k):
 
 
 def _terme_tex(ratio, k):
-    """ratio·x^k, k pouvant être négatif (écrit alors comme une fraction)."""
+    """ratio·x^k, k pouvant être négatif (écrit alors comme une fraction : 3/(2x), 1/x², -5/x)."""
     if k >= 0:
         return _monome_tex(ratio, k)
     p = "x" if k == -1 else f"x^{{{-k}}}"
-    if ratio == 1:
-        return rf"\dfrac{{1}}{{{p}}}"
-    if ratio == -1:
-        return rf"-\dfrac{{1}}{{{p}}}"
-    return rf"\dfrac{{{qtex(ratio)}}}{{{p}}}"
+    signe = "-" if ratio < 0 else ""
+    num, den = abs(ratio.numerator), ratio.denominator
+    return rf"{signe}\dfrac{{{num}}}{{{p if den == 1 else str(den) + p}}}"
 
 
 def _facteur_detaille(P, n):
     """P(x) = a_n·x^n·(1 + ... ), avec CHAQUE terme restant écrit explicitement
     (jamais de « ... ») : ex. x^2 - 1 = x^2(1 - 1/x^2).
-    Renvoie (tête a_n·x^n, parenthèse intérieure, expression complète)."""
+    Renvoie (tête a_n·x^n, parenthèse intérieure, expression complète, termes intérieurs [(signe, tex)])."""
     an = P[n]
     interieur = "1"
+    termes = []
     for k in range(n - 1, -1, -1):
         c = P[k] if k < len(P) else F(0)
         if c == 0:
             continue
         ratio = c / an
-        if ratio < 0:
-            interieur += " - " + _terme_tex(-ratio, k - n)
-        else:
-            interieur += " + " + _terme_tex(ratio, k - n)
+        t = _terme_tex(abs(ratio), k - n)
+        termes.append(("-" if ratio < 0 else "+", t))
+        interieur += (" - " if ratio < 0 else " + ") + t
     tete = _monome_tex(an, n)
     complet = tete if interieur == "1" else tete + r"\left(" + interieur + r"\right)"
-    return tete, interieur, complet
+    return tete, interieur, complet, termes
 
 
-def _etude_rationnelle_infini(N, D, signe, items):
+def _enumerer(elements):
+    """A ; A et B ; A, B et C."""
+    return elements[0] if len(elements) == 1 else ", ".join(elements[:-1]) + " et " + elements[-1]
+
+
+def _terme_signe_tex(P, k):
+    """Terme c·x^k de P, avec son signe (-3x, x^{3}, 5)."""
+    return ptex(pn([F(0)] * k + [P[k]]), "x")
+
+
+def _polynome_a_termes(P):
+    return [k for k in range(len(P) - 1, -1, -1) if P[k] != 0]
+
+
+def _limite_polynome_infini(P, s):
+    """Limite en s∞ d'un polynôme : celle de son terme de plus haut degré (Lim)."""
+    n = deg(P)
+    if n == 0:
+        return Lim.fin(P[0], None)
+    return Lim.infini(_signe(P[n]) * (s if n % 2 else 1))
+
+
+def _phrases_polynome_infini(P, s, n_tex):
+    """Somme de plusieurs termes en s∞ : limite de chaque terme, puis règle de la somme ; si deux termes
+    divergent en sens contraire (∞ − ∞), mise en évidence du terme de plus haut degré.
+    Renvoie (phrases, Lim)."""
+    vers = r"+\infty" if s > 0 else r"-\infty"
+    ks = _polynome_a_termes(P)
+    non_const = [k for k in ks if k >= 1]
+    parts = [rf"\({_terme_signe_tex(P, k)} \to {Lim.infini(_signe(P[k]) * (s if k % 2 else 1)).tex()}\)"
+             for k in non_const]
+    if 0 in ks:
+        parts.append(rf"\({qtex(P[0])}\) est une constante")
+    enum = _enumerer(parts)
+    signes = {_signe(P[k]) * (s if k % 2 else 1) for k in non_const}
+    n = deg(P)
+    tete_lim = Lim.infini(_signe(P[n]) * (s if n % 2 else 1))
+    if len(signes) == 1:
+        return [enum + rf" : la somme tend vers \({tete_lim.tex()}\)."], tete_lim
+    tete, interieur, complet, termes = _facteur_detaille(P, n)
+    nuls = _enumerer([rf"\({t} \to 0\)" for _, t in termes])
+    phrases = [
+        enum + r" : forme indéterminée « \(\infty - \infty\) ».",
+        rf"On met en évidence le terme de plus haut degré : \({n_tex} = {complet}\).",
+        rf"Quand \(x \to {vers}\), {nuls}, donc \({interieur} \to 1\).",
+        rf"Comme \({tete} \to {tete_lim.tex()}\) et que le facteur entre parenthèses tend vers 1, "
+        rf"\({n_tex} \to {tete_lim.tex()}\).",
+    ]
+    return phrases, tete_lim
+
+
+def _phrases_fraction_infini(N, D, s, n_tex):
+    """Quotient de deux polynômes (D non constant) en s∞. Renvoie (phrases, Lim)."""
+    vers = r"+\infty" if s > 0 else r"-\infty"
+    n, m = deg(N), deg(D)
+    LD = _limite_polynome_infini(D, s)
+    if n == 0:
+        c = N[0]
+        lim = Lim.fin(0, _signe(c) * LD.inf)
+        return [rf"Le numérateur est la constante \({qtex(c)}\) et le dénominateur tend vers \({LD.tex()}\) "
+                rf"(limite de son terme de plus haut degré) : le quotient tend vers \(0\)."], lim
+    LN = _limite_polynome_infini(N, s)
+    an, bm = N[n], D[m]
+    ratio = an / bm
+    teteN, intN, Nf, termesN = _facteur_detaille(N, n)
+    teteD, intD, Df, termesD = _facteur_detaille(D, m)
+    phrases = [rf"Le numérateur tend vers \({LN.tex()}\) et le dénominateur tend vers \({LD.tex()}\) "
+               r"(limite de leur terme de plus haut degré) : forme indéterminée « \(\infty/\infty\) »."]
+    equations = []
+    if intN != "1":
+        equations.append(rf"\({ptex(N, 'x')} = {Nf}\)")
+    if intD != "1":
+        equations.append(rf"\({ptex(D, 'x')} = {Df}\)")
+    if equations:
+        phrases.append("On met en évidence le terme de plus haut degré : " + " et ".join(equations) + ".")
+    tete = _terme_tex(ratio, n - m)
+    tete_prod = "" if tete == "1" else tete + r" \cdot "
+    if intN == "1" and intD == "1":
+        phrases.append(rf"Donc \({n_tex} = \dfrac{{{Nf}}}{{{Df}}} = {tete}\).")
+    else:
+        phrases.append(rf"Donc \({n_tex} = \dfrac{{{Nf}}}{{{Df}}} = {tete_prod}\dfrac{{{intN}}}{{{intD}}}\).")
+        nuls = []
+        for _, t in termesN + termesD:
+            if t not in nuls:
+                nuls.append(t)
+        liste = _enumerer([rf"\({t} \to 0\)" for t in nuls])
+        phrases.append(rf"Quand \(x \to {vers}\), {liste} : le quotient "
+                       rf"\(\dfrac{{{intN}}}{{{intD}}}\) tend vers 1.")
+    k = n - m
+    if k < 0:
+        sgn = _signe(ratio) * (s if (-k) % 2 else 1)
+        lim = Lim.fin(0, sgn)
+        phrases.append(rf"Le quotient tend vers 1 et \({tete} \to 0\) : la limite est \(0\).")
+    elif k == 0:
+        lim = Lim.fin(ratio)
+        phrases.append(rf"Le quotient tend vers 1 : la limite est \({qtex(ratio)}\) "
+                       r"(rapport des coefficients dominants).")
+    else:
+        lim = Lim.infini(_signe(ratio) * (s if k % 2 else 1))
+        phrases.append(rf"Le quotient tend vers 1 et \({tete} \to {lim.tex()}\) : la limite est \({lim.tex()}\).")
+    return phrases, lim
+
+
+def _etude_rationnelle_infini(f, N, D, signe, items):
     n, m = deg(N), deg(D)
     an, bm = N[-1], D[-1]
-    vers = r"+\infty" if signe > 0 else r"-\infty"
-    teteN, intN, Nf = _facteur_detaille(N, n)
-    teteD, intD, Df = _facteur_detaille(D, m)
-    items.append(txt(
-        rf"On factorise le numérateur et le dénominateur par leur terme de plus haut degré : "
-        rf"\({ptex(N,'x')} = {Nf}\) et \({ptex(D,'x')} = {Df}\)."
-    ))
     ratio = an / bm
-    non_triviaux = [t for t in (intN, intD) if t != "1"]
-    if intN == "1" and intD == "1":
-        items.append(txt(rf"Donc \(f(x) = \dfrac{{{Nf}}}{{{Df}}} = {_terme_tex(ratio, n - m)}\) exactement."))
-    else:
-        items.append(txt(
-            rf"Donc \(f(x) = \dfrac{{{Nf}}}{{{Df}}} = {_terme_tex(ratio, n - m)} \cdot "
-            rf"\dfrac{{{intN}}}{{{intD}}}\)."
-        ))
-        sujet, verbe = ("ces expressions", "tendent") if len(non_triviaux) > 1 else ("cette expression", "tend")
-        items.append(txt(
-            rf"Quand \(x\to{vers}\), chaque terme en \(1/x^k\) dans "
-            + " et dans ".join(rf"\({t}\)" for t in non_triviaux) +
-            rf" tend vers 0 : {sujet} {verbe} donc vers 1, "
-            r"et le quotient \(\dfrac{" + intN + r"}{" + intD + r"}\) tend vers 1 aussi."
-        ))
-    if n < m:
-        items.append(txt(
-            rf"Il reste \(f(x) \to {_terme_tex(ratio, n-m)}\) avec un exposant négatif : "
-            r"la limite est 0."
-        ))
-        return {"genre": "horizontale", "valeur_tex": "0", "valeur_val": 0.0}
-    if n == m:
-        items.append(txt(rf"Il reste \(f(x) \to {qtex(ratio)}\) : même degré, la limite est le rapport "
-                         r"des coefficients dominants."))
-        return {"genre": "horizontale", "valeur_tex": qtex(ratio), "valeur_val": float(ratio)}
-    # n > m : signe de x^(n-m) selon la parité et la direction
+    vers = r"+\infty" if signe > 0 else r"-\infty"
     k = n - m
-    signe_xk = 1 if (signe > 0 or k % 2 == 0) else -1
-    signe_final = 1 if (ratio > 0) == (signe_xk > 0) else -1
-    val_tex = r"+\infty" if signe_final > 0 else r"-\infty"
+    k_signe_xk = signe if k % 2 else 1
+    if n < m:
+        ref, vtex = _sympy().Integer(0), "0"
+        res = {"genre": "horizontale", "valeur_tex": "0", "valeur_val": 0.0}
+    elif n == m:
+        ref, vtex = _sympy().Rational(ratio.numerator, ratio.denominator), qtex(ratio)
+        res = {"genre": "horizontale", "valeur_tex": vtex, "valeur_val": float(ratio)}
+    else:
+        signe_final = 1 if (ratio > 0) == (k_signe_xk > 0) else -1
+        val_tex = r"+\infty" if signe_final > 0 else r"-\infty"
+        ref, vtex = (_sympy().oo if signe_final > 0 else -_sympy().oo), val_tex
+        res = None
+    pt = Pt({"type": "inf", "signe": signe})
+    # f est d'abord rédigée telle qu'elle est écrite ; si sa forme ne s'y prête pas (somme de fractions…),
+    # on la ramène à une seule fraction N/D
+    _narrer_limite(f, pt, ref, vtex, items,
+                   alternative=(_arbre_fraction(N, D), r"On écrit \(f\) sous la forme d'une seule fraction : "
+                                rf"\(f(x) = {tex(_arbre_fraction(N, D))}\)."))
+    if n <= m:
+        items.append(txt(rf"Asymptote horizontale d'équation \(y = {vtex}\)."))
+        return res
+    items.append(txt("La limite est infinie : pas d'asymptote horizontale."))
     if k == 1:
         Q, R = _pdiv(N, D)
-        items.append(txt(
-            rf"Il reste \(f(x) \to {_terme_tex(ratio, k)}\) : la limite est \({val_tex}\), et il y a une "
-            r"asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, "
-            rf"\({ptex(N,'x')}\) par \({ptex(D,'x')}\) (voir le chapitre « Division polynomiale ») : "
-            rf"\({ptex(N,'x')} = \left({ptex(D,'x')}\right)\left({ptex(Q,'x')}\right) + {ptex(R,'x')}\), "
-            rf"donc \(f(x) = {ptex(Q,'x')} + \dfrac{{{ptex(R,'x')}}}{{{ptex(D,'x')}}}\), "
-            r"et ce dernier terme tend vers 0."
-        ))
+        if deg(D) == 0:
+            items.append(txt(rf"Le polynôme est de degré 1 : sa courbe est la droite d'équation "
+                             rf"\(y = {ptex(Q,'x')}\), qui est son propre asymptote oblique."))
+        else:
+            debut = (r"Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. "
+                     r"On effectue la division polynomiale du numérateur par le dénominateur, "
+                     rf"\({ptex(N,'x')}\) par \({ptex(D,'x')}\) (voir le chapitre « Division polynomiale ») : ")
+            if nul(R):
+                items.append(txt(debut + rf"\({ptex(N,'x')} = \left({ptex(D,'x')}\right)\left({ptex(Q,'x')}\right)\), "
+                                 rf"donc \(f(x) = {ptex(Q,'x')}\) là où f est définie : la courbe est contenue dans la droite."))
+            else:
+                items.append(txt(
+                    debut + rf"\({ptex(N,'x')} = \left({ptex(D,'x')}\right)\left({ptex(Q,'x')}\right) + {ptex(R,'x')}\), "
+                    rf"donc \(f(x) = {ptex(Q,'x')} + \dfrac{{{ptex(R,'x')}}}{{{ptex(D,'x')}}}\), "
+                    r"et ce dernier terme tend vers 0."
+                ))
         a = Q[1] if len(Q) > 1 else F(0)
         b = Q[0] if Q else F(0)
         return {"genre": "oblique", "a": qtex(a), "b": qtex(b), "a_val": float(a), "b_val": float(b),
-                "equation_tex": ptex(Q, "x"), "valeur_tex": val_tex}
-    items.append(txt(
-        rf"Il reste \(f(x) \to {_terme_tex(ratio, k)}\) : le degré du numérateur dépasse celui du "
-        rf"dénominateur de {k} \(\geq 2\), la limite est \({val_tex}\) "
-        r"(branche parabolique, pas d'asymptote oblique)."
-    ))
-    return {"genre": "aucune", "valeur_tex": val_tex}
+                "equation_tex": ptex(Q, "x"), "valeur_tex": vtex}
+    if deg(D) == 0:
+        items.append(txt(rf"Le polynôme est de degré {n} \(\geq 2\) : pas d'asymptote oblique (branche parabolique)."))
+    else:
+        items.append(txt(
+            rf"Le degré du numérateur dépasse celui du dénominateur de {k} \(\geq 2\) : "
+            r"pas d'asymptote oblique (branche parabolique)."
+        ))
+    return {"genre": "aucune", "valeur_tex": vtex}
 
 
 # =====================================================================
@@ -322,81 +420,95 @@ def _produit_tex(*parts):
     return r"\,".join(parts) if parts else "1"
 
 
+def _sans_parentheses(t):
+    """Retire \\left( … \\right) quand ils entourent à eux seuls toute l'expression."""
+    d, g = r"\left(", r"\right)"
+    if not (t.startswith(d) and t.endswith(g)):
+        return t
+    prof, i = 0, 0
+    while i < len(t):
+        if t.startswith(d, i):
+            prof, i = prof + 1, i + len(d)
+        elif t.startswith(g, i):
+            prof, i = prof - 1, i + len(g)
+            if prof == 0 and i < len(t):
+                return t
+        else:
+            i += 1
+    return t[len(d):-len(g)]
+
+
+def _puissance_binome(a, k):
+    """Coefficients de (x − a)^k."""
+    P = [F(1)]
+    for _ in range(k):
+        P = pmul(P, [-F(a), F(1)])
+    return P
+
+
 def _etude_rationnelle_pole(f, N, D, point, cote, items):
     if point.q is None:
         return _etude_pole_numerique(f, N, D, point, cote, items)
+    sp = _sympy()
     a = point.q
     xa = _x_moins(a)
     N2, multN = _facteur_racine(N, a)
     D2, multD = _facteur_racine(D, a)
     N2a, D2a = peval(N2, a), peval(D2, a)
-    fac_N2 = qtex(N2a) if deg(N2) == 0 else ptex(N2, "x")
-    fac_D2 = qtex(D2a) if deg(D2) == 0 else ptex(D2, "x")
-    f_tex = tex(f)
     mult = min(multN, multD)
     diff = multN - multD
-
+    borne = {"type": "fini", "point": point, "cote": cote}
+    items.append(txt(rf"\(x={point.tex}\) est une valeur interdite : on étudie la limite de \(f\) "
+                     rf"quand \(x \to {point.tex}\)."))
+    g = f
     if mult > 0:
-        # facteur(s) (x-a) communs au numérateur et au dénominateur : on les barre.
+        # facteur(s) (x − a) communs au numérateur et au dénominateur : forme indéterminée 0/0
+        fac_N2 = qtex(N2a) if deg(N2) == 0 else ptex(N2, "x")
+        fac_D2 = qtex(D2a) if deg(D2) == 0 else ptex(D2, "x")
         fac_N2_prod = fac_N2 if deg(N2) == 0 else r"\left(" + fac_N2 + r"\right)"
         fac_D2_prod = fac_D2 if deg(D2) == 0 else r"\left(" + fac_D2 + r"\right)"
         commun = _facteur_tex(xa, mult)
         barre = r"\cancel{" + commun + "}"
         reste_haut = _produit_tex(_facteur_tex(xa, diff) if diff > 0 else "", fac_N2_prod)
         num_chaine = _produit_tex(reste_haut, barre)
-        den_chaine = _produit_tex(barre, fac_D2_prod if diff >= 0 else _facteur_tex(xa, -diff) + r"\," + fac_D2_prod)
+        den_chaine = _produit_tex(barre, fac_D2_prod if diff >= 0 else _produit_tex(_facteur_tex(xa, -diff), fac_D2_prod))
         simplifie_haut = reste_haut if reste_haut else "1"
         simplifie_bas = fac_D2 if diff >= 0 else _produit_tex(_facteur_tex(xa, -diff), fac_D2)
-        simplifie = simplifie_haut if simplifie_bas == "1" else r"\dfrac{" + simplifie_haut + "}{" + simplifie_bas + "}"
-        chaine = (
-            rf"\displaystyle\lim_{{x\to {point.tex}}} f(x) = "
-            rf"\lim_{{x\to {point.tex}}}\dfrac{{{num_chaine}}}{{{den_chaine}}} = "
-            rf"\lim_{{x\to {point.tex}}} {simplifie}"
-        )
-    else:
-        chaine = rf"\displaystyle\lim_{{x\to {point.tex}}} f(x) = \lim_{{x\to {point.tex}}} {f_tex}"
+        haut, bas = _sans_parentheses(simplifie_haut), _sans_parentheses(simplifie_bas)
+        simplifie = haut if bas == "1" else r"\dfrac{" + haut + "}{" + bas + "}"
+        items.append(txt(rf"Le numérateur et le dénominateur tendent vers \(0\) quand \(x \to {point.tex}\) : "
+                         r"forme indéterminée « \(0/0\) »."))
+        items.append(txt(rf"On factorise le numérateur et le dénominateur par \(\left({xa}\right)\) et l'on simplifie "
+                         rf"(pour \(x \neq {point.tex}\)) : "
+                         rf"\(f(x) = \dfrac{{{num_chaine}}}{{{den_chaine}}} = {simplifie}\)."))
+        g = _arbre_fraction(pmul(N2, _puissance_binome(a, max(diff, 0))),
+                            pmul(D2, _puissance_binome(a, max(-diff, 0))))
 
     if diff >= 0:
-        valeur_val = 0.0 if diff > 0 else float(N2a / D2a)
-        valeur = "0" if diff > 0 else qtex(N2a / D2a)
-        items.append(txt(rf"\({chaine} = {valeur}\) : " + _phrase_trou(point.tex, valeur)))
+        valeur = N2a / D2a if diff == 0 else F(0)
+        vtex = qtex(valeur)
+        _narrer_limite(g, Pt(borne), sp.Rational(valeur.numerator, valeur.denominator), vtex, items)
+        items.append(txt(_phrase_trou(point.tex, vtex)))
         return {"genre": "trou", "point_tex": point.tex, "point_val": float(a),
-                "valeur_tex": valeur, "valeur_val": valeur_val}
+                "valeur_tex": vtex, "valeur_val": float(valeur)}
 
+    # pôle : signe du facteur (x − a)^k de chaque côté, signe de N2(a)/D2(a)
     k = -diff
     ratio = N2a / D2a
     res = {"genre": "verticale", "point_tex": point.tex, "point_val": float(a)}
-    signes = {}
     for sens, cle in ((-1, "gauche"), (1, "droite")):
         if cote not in (cle, "deux"):
             continue
         signe_facteur = 1 if (k % 2 == 0 or sens > 0) else -1
         signe_final = 1 if (ratio > 0) == (signe_facteur > 0) else -1
-        signes[cle] = (signe_facteur, signe_final)
         res[cle + "_tex"] = r"+\infty" if signe_final > 0 else r"-\infty"
-    if mult == 0:
-        # pas de facteur commun : opérations sur les limites, exactement comme pour une fonction quelconque
-        sp = _sympy()
-        borne = {"type": "fini", "point": point, "cote": cote}
-        items.append(txt(rf"\(x={point.tex}\) est une valeur interdite : on étudie la limite de \(f\) "
-                         rf"quand \(x \to {point.tex}\)."))
 
-        def ref_de(pt):
-            cle = "gauche" if pt.d < 0 else "droite"
-            sf, sfinal = signes[cle]
-            return (sp.oo if sfinal > 0 else -sp.oo), res[cle + "_tex"], None
+    def ref_de(pt):
+        v = res["gauche_tex" if pt.d < 0 else "droite_tex"]
+        return (sp.oo if v == r"+\infty" else -sp.oo), v, None
 
-        _narrer_cotes(f, borne, items, ref_de, cotes=tuple(signes))
-        items.append(txt(rf"Asymptote verticale d'équation \(x = {point.tex}\)."))
-        return res
-    for cle, (signe_facteur, signe_final) in signes.items():
-        zero_tex = "0^{+}" if signe_facteur > 0 else "0^{-}"
-        exposant = "^-" if cle == "gauche" else "^+"
-        items.append(txt(
-            rf"\(\displaystyle\lim_{{x\to {point.tex}{exposant}}} f(x) = "
-            + rf"\lim_{{x\to {point.tex}{exposant}}}\dfrac{{{num_chaine}}}{{{den_chaine}}} = "
-            + rf"\dfrac{{{qtex(ratio)}}}{{{zero_tex}}} = {res[cle + '_tex']}\)."
-        ))
+    _narrer_cotes(g, borne, items, ref_de, cotes=tuple(c for c in ("gauche", "droite") if c + "_tex" in res))
+    items.append(txt(rf"Asymptote verticale d'équation \(x = {point.tex}\)."))
     return res
 
 
@@ -505,11 +617,13 @@ class Pt:
         return (sp.oo if self.s > 0 else -sp.oo) if self.s else self.a
 
     def direction(self):
-        return None if self.s else ("+" if self.d > 0 else "-")
+        return None if (self.s or not self.d) else ("+" if self.d > 0 else "-")
 
     def tex(self):
         if self.s:
             return r"+\infty" if self.s > 0 else r"-\infty"
+        if not self.d:
+            return self.a_tex
         base = self.a_tex if self.a_tex.lstrip("-").isdigit() else "{" + self.a_tex + "}"
         return base + ("^{+}" if self.d > 0 else "^{-}")
 
@@ -699,6 +813,12 @@ class _Contexte:
         if L.nul() and L.ap and L.ap != R.ap:
             raise Abandon(f"signe d'approche de 0 non confirmé pour {tex(n)}")
 
+    def phrases_de(self, n, liste):
+        cle = n.key()
+        if cle not in self.dites:
+            self.dites.add(cle)
+            self.phrases.extend(liste)
+
     def phrase(self, n, s):
         """Une phrase par sous-expression : si n a déjà été commentée, on ne la répète pas."""
         cle = n.key()
@@ -797,6 +917,42 @@ def _polynome_de(n):
     return P if deg(P) >= 1 else None
 
 
+def _arbre_poly(P):
+    """Arbre d'un polynôme à coefficients rationnels (pour réécrire une fraction rationnelle N/D)."""
+    P = pn(P)
+    termes = []
+    for k in range(len(P) - 1, -1, -1):
+        c = P[k]
+        if c == 0:
+            continue
+        puiss = X() if k == 1 else Op("^", X(), Nb(F(k)))
+        if k == 0:
+            t = Nb(abs(c))
+        elif abs(c) == 1:
+            t = puiss
+        else:
+            t = Op("*", Nb(abs(c)), puiss)
+        termes.append((c < 0, t))
+    if not termes:
+        return Nb(F(0))
+    arbre = Neg(termes[0][1]) if termes[0][0] else termes[0][1]
+    for neg, t in termes[1:]:
+        arbre = Op("-" if neg else "+", arbre, t)
+    return arbre
+
+
+def _arbre_fraction(N, D):
+    return _arbre_poly(N) if deg(D) == 0 and D[0] == 1 else Op("/", _arbre_poly(N), _arbre_poly(D))
+
+
+def _poly_ou_const(n):
+    """Coefficients d'un polynôme en x ou d'une constante rationnelle non nulle ; None sinon."""
+    if sans_x(n):
+        v = valeur_constante(n)
+        return [F(v)] if v else None
+    return _polynome_de(n)
+
+
 def _noeud_polynome(n, ctx):
     """Polynôme en un point rationnel : la limite est la valeur P(a) (substitution) ; si P(a) = 0, le signe
     d'approche vient de la factorisation P = (x − a)^m Q(x). Renvoie None si n n'est pas un tel polynôme."""
@@ -808,7 +964,7 @@ def _noeud_polynome(n, ctx):
         return None
     a = F(int(pt.a.p), int(pt.a.q))
     v = peval(P, a)
-    if v != 0:
+    if v != 0 or not pt.d:         # (pt.d = 0 : limite des deux côtés, sans signe d'approche à donner)
         sub = _subst_tex(P, a)
         egal = rf"{sub} = {qtex(v)}" if sub != qtex(v) else sub
         ctx.phrase(n, rf"Par substitution, \({tex(n)} \to {egal}\).")
@@ -854,6 +1010,30 @@ def _noeud_polynome(n, ctx):
     return L
 
 
+def _noeud_rationnel_infini(n, ctx):
+    """Polynôme à plusieurs termes ou quotient de deux polynômes en ±∞ : règle de la somme, ou mise en
+    évidence du terme de plus haut degré quand les termes se compensent (∞ − ∞, ∞/∞).
+    Renvoie None si n n'est pas de cette forme."""
+    s = ctx.pt.s
+    if not s:
+        return None
+    P = _polynome_de(n)
+    if P is not None:
+        if len(_polynome_a_termes(P)) < 2:
+            return None
+        phrases, L = _phrases_polynome_infini(P, s, tex(n))
+    elif isinstance(n, Op) and n.op == "/":
+        A, B = _poly_ou_const(n.a), _poly_ou_const(n.b)
+        if A is None or B is None or deg(B) < 1:
+            return None
+        phrases, L = _phrases_fraction_infini(A, B, s, tex(n))
+    else:
+        return None
+    ctx.verifier(n, L, exact=True)
+    ctx.phrases_de(n, phrases)
+    return L
+
+
 def _lever(n, ctx, fi):
     """Lève une forme indéterminée par une méthode du cours (mise en évidence, conjuguée, références…).
     Aucune n'est encore rédigée : Abandon, donc phrase de repli."""
@@ -868,7 +1048,7 @@ def _noeud(n, ctx):
         return Lim.fin(_const_sympy(n), ap=None)
     if isinstance(n, X):
         return ctx.pt.lim_x()
-    L = _noeud_polynome(n, ctx)
+    L = _noeud_polynome(n, ctx) if not ctx.pt.s else _noeud_rationnel_infini(n, ctx)
     if L is not None:
         return L
     try:
@@ -930,10 +1110,18 @@ def _rediger(f, pt, ref):
         return None, f"{type(e).__name__} : {e}"
 
 
-def _narrer_limite(f, pt, ref, vtex, items):
-    """Étapes de lim f en pt : rédigées si possible, sinon phrase de repli et résultat de référence."""
+def _narrer_limite(f, pt, ref, vtex, items, alternative=None):
+    """Étapes de lim f en pt : rédigées si possible, sinon phrase de repli et résultat de référence.
+    alternative = (arbre équivalent, phrase d'introduction) : essayée si f, telle qu'elle est écrite, résiste."""
     lim = rf"\displaystyle\lim_{{x\to {pt.tex()}}} f(x) = {vtex}"
     phrases, detail = _rediger(f, pt, ref)
+    if phrases is None and alternative is not None:
+        g, intro = alternative
+        phrases2, detail2 = _rediger(g, pt, ref)
+        if phrases2 is not None:
+            phrases, detail = [intro] + phrases2, None
+        else:
+            detail = f"{detail} ; sous forme de fraction : {detail2}"
     if phrases is None:
         item = txt(PHRASE_REPLI + rf"\({lim}\).")
         item["detail"] = detail
@@ -1092,7 +1280,7 @@ def etudier(entree):
         if borne["type"] == "inf":
             cote_tex = r"x \to +\infty" if borne["signe"] > 0 else r"x \to -\infty"
             if rationnelle:
-                asym = _etude_rationnelle_infini(N, D, borne["signe"], items)
+                asym = _etude_rationnelle_infini(f, N, D, borne["signe"], items)
                 asym["ou"] = cote_tex
                 res["asymptotes"].append(asym)
             else:
