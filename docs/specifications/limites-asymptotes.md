@@ -164,7 +164,7 @@ Modèle (1/(x² − 2) en −√2) :
 | LA-14 | Valeur interdite sans forme indéterminée : limite du numérateur, signe du dénominateur de chaque côté, « ℓ/0^± », asymptote x = a | [auto-py] |
 | LA-15 | Ordre des méthodes : la première qui s'applique ; jamais L'Hôpital pour une fraction rationnelle ni quand une limite de référence s'applique | [auto-py] |
 | LA-16 | L'Hôpital : hypothèses (a) à (d) écrites ; non appliquée hors 0/0 et ∞/∞, si g' ≠ 0 n'est pas établi, ou si lim f'/g' n'est pas obtenue | [auto-py] |
-| LA-17 | Oblique : division sans « + 0 » ni « + − » (rationnelles) ; a et b rédigés (autres) ; position relative au voisinage de ±∞ quand elle se lit | [auto-py] |
+| LA-17 | Oblique (L8) : fraction rationnelle = division euclidienne écrite sans « + 0 » ni « + − » (N = D·Q ± R, f(x) = Q ± R/D), f(x) − (ax + b) = R/D → 0 en chaîne d'égalités, puis position relative près de ±∞ (signes de R et de D) ; autres fonctions : a = lim f(x)/x puis b = lim (f(x) − ax), chacune en chaîne d'égalités (racines en −∞ comprises) ; position relative seulement quand le signe de f(x) − (ax + b) se lit (√Q ± affine : ±r/(√Q + W)) | [auto-py] (`TestOblique`) |
 | LA-18 | Chaque borne se conclut par une phrase avec l'équation de l'asymptote, ou « pas d'asymptote … » | [auto-py] |
 | LA-19 | Écriture : coefficient 3/(2x) (pas de fraction dans une fraction) ; polynôme jamais écrit en quotient « /1 » | [auto-py] |
 | LA-20 | Racines en ±∞ : « x < 0 donc √(x²) = \|x\| = −x » en −∞ ; √(4x²+1)/(x+2) → 2 en +∞ et → −2 en −∞ ; √(x²−4x+5) : a = 1, b = −2 en +∞ et a = −1, b = 2 en −∞ ; √(x²+x) − x en −∞ : pas de forme indéterminée, +∞ | [auto-py] |

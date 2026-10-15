@@ -615,6 +615,7 @@ class TestConjuguee(unittest.TestCase):
 
     def test_racine_moins_x_en_moins_l_infini_pas_de_forme_indeterminee(self):
         t = textes("sqrt(x^2+x)-x", r"x \to -\infty")
+        t = t[:next(i for i, p in enumerate(t) if p.startswith("On cherche une asymptote oblique"))]   # la limite de f seule
         self.assertFalse(any("conjuguée" in p for p in t), t)
         self.assertIn(r"\(\sqrt{x^{2} + x} \to +\infty\) et \(x \to -\infty\), donc "
                       r"\(\displaystyle\lim_{x\to -\infty} f(x) = +\infty\).", t)
@@ -819,6 +820,63 @@ class TestLHopital(unittest.TestCase):
             t = textes("(e^x-1)/x", r"x \to 0")
         self.assertTrue(any(REPLI[1:] in p for p in t))
         self.assertFalse(any("Bernoulli" in p for p in t))
+
+
+class TestOblique(unittest.TestCase):
+    """L8 : asymptote oblique — division euclidienne (sans « + 0 » ni « + - ») pour une fraction rationnelle ;
+    a = lim f(x)/x puis b = lim (f(x) − ax), chaque limite en chaîne d'égalités, sinon ; position relative (LA-17)."""
+
+    def apres(self, entree, ou):
+        t = textes(entree, ou)
+        return t[next(i for i, p in enumerate(t) if p.startswith("On cherche une asymptote oblique")):]
+
+    def test_division_euclidienne_x2_moins_1_sur_x_moins_3(self):
+        t = textes("(x^2-1)/(x-3)", r"x \to +\infty")
+        self.assertIn(r"\[x^{2} - 1 = \left(x - 3\right)\,\left(x + 3\right) + 8\]", t)
+        self.assertIn(r"Donc \(f(x) = x + 3 + \dfrac{8}{x - 3}\), d'où :", t)
+        reste = next(p for p in t if p.startswith(r"\[\begin{aligned}\lim_{x\to +\infty} \left(f(x) - "))
+        self.assertIn(r"&= \lim_{x\to +\infty} \dfrac{8}{x - 3} = 0", reste)
+        self.assertIn(r"Asymptote oblique d'équation \(y = x + 3\).", t)
+        self.assertIn("la courbe est au-dessus de la droite", t[-1])
+        self.assertIn("la courbe est au-dessous de la droite", textes("(x^2-1)/(x-3)", r"x \to -\infty")[-1])
+
+    def test_jamais_plus_zero_ni_plus_moins(self):
+        for entree in ["(x^2-1)/(x-3)", "(x^3+1)/(x^2+1)", "(x^2-4x+3)/(x-1)", "(x^2+1)/(1-x)", "(2x^2+1)/(x-1)"]:
+            for etude in la.etudier(entree)["etudes"]:
+                for e in etude["etapes"]:
+                    for mauvais in ("+ 0", "+ -", "+ −", " + \\dfrac{-", " + \\left(-"):
+                        self.assertNotIn(mauvais, e["html"], (entree, etude["ou"]))
+
+    def test_reste_negatif_et_division_exacte(self):
+        t = textes("(x^3+1)/(x^2+1)", r"x \to +\infty")
+        self.assertIn(r"\[x^{3} + 1 = \left(x^{2} + 1\right)\,x - x + 1\]", t)
+        self.assertIn(r"Donc \(f(x) = x - \dfrac{x - 1}{x^{2} + 1}\), d'où :", t)
+        t = textes("(x^2-4x+3)/(x-1)", r"x \to +\infty")
+        self.assertIn(r"\[x^{2} - 4x + 3 = \left(x - 1\right)\,\left(x - 3\right)\]", t)
+        self.assertTrue(any("la courbe est contenue dans la droite" in p for p in t))
+
+    def test_racine_a_puis_b_en_plus_et_moins_l_infini(self):        # LA-20
+        for ou, a, b in [(r"x \to +\infty", "1", "-2"), (r"x \to -\infty", "-1", "2")]:
+            suite = self.apres("sqrt(x^2-4x+5)", ou)
+            chaine_a = next(p for p in suite if p.startswith(r"\[") and r"\dfrac{f(x)}{x}" in p)
+            chaine_b = next(p for p in suite if p.startswith(r"\[") and r"\left(f(x) " in p)
+            self.assertIn(f"= {a} \\qquad", chaine_a)
+            self.assertIn(f"= {b} \\qquad", chaine_b)
+            if ou.endswith(r"-\infty"):
+                self.assertIn(r"x < 0 \text{ donc } |x| = -x", chaine_a)
+            self.assertTrue(any("sont finis (et \\(a \\neq 0\\)) : asymptote oblique" in p for p in suite))
+            self.assertIn("la courbe est au-dessus de la droite", suite[-1])
+
+    def test_racine_moins_x_en_moins_l_infini(self):
+        suite = " ".join(self.apres("sqrt(x^2+x)-x", r"x \to -\infty"))
+        self.assertIn("= - \\frac{1}{2}", suite)
+        self.assertIn(r"y = -2x - \frac{1}{2}", suite)
+        self.assertIn("la courbe est au-dessous de la droite", suite)
+        self.assertNotIn(REPLI[1:], suite)
+
+    def test_pas_de_position_quand_le_signe_ne_se_lit_pas(self):
+        for etude in la.etudier("e^x-x^2")["etudes"]:
+            self.assertFalse(any("Position relative" in e["html"] for e in etude["etapes"]))
 
 
 class TestFormeIndeterminee(unittest.TestCase):

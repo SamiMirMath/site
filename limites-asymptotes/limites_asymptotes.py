@@ -269,6 +269,73 @@ def _phrases_fraction_infini(N, D, s, n_tex):
     return phrases, lim
 
 
+def _suite_signee(P):
+    """« + 3x - 2 » ou « - x + 4 » : le polynôme P à la suite d'une expression, jamais « + - »."""
+    s = ptex(P, "x")
+    return " - " + s[1:].lstrip() if s.startswith("-") else " + " + s
+
+
+def _fraction_signee(R, D):
+    """« + \\dfrac{8}{x - 3} » ou « - \\dfrac{x - 4}{x^2 + 1} » : le signe de R sort de la fraction."""
+    if R[-1] < 0:
+        return rf" - \dfrac{{{ptex(pscal(R, F(-1)), 'x')}}}{{{ptex(D, 'x')}}}"
+    return rf" + \dfrac{{{ptex(R, 'x')}}}{{{ptex(D, 'x')}}}"
+
+
+def _signe_en_infini(P, s):
+    """Signe de P(x) près de s∞ (terme de plus haut degré)."""
+    return _signe(P[deg(P)]) * (s if deg(P) % 2 else 1)
+
+
+def _mot_signe(sg):
+    return "positif" if sg > 0 else "négatif"
+
+
+def _egalites(gauche, droites):
+    """Formule affichée : A = B = C, une égalité par ligne (le signe = aligné)."""
+    return (r"\[\begin{aligned}" + gauche + " &= " + droites[0] + "".join(r" \\ &= " + l for l in droites[1:])
+            + r"\end{aligned}\]")
+
+
+def _facteur_poly(P):
+    """Polynôme écrit comme facteur d'un produit : entre parenthèses seulement s'il a plusieurs termes."""
+    s = ptex(P, "x")
+    return rf"\left({s}\right)" if len(_polynome_a_termes(P)) > 1 else s
+
+
+def _oblique_rationnelle(items, N, D, Q, R, s):
+    """deg N = deg D + 1 : division euclidienne N = D·Q + R (sans « + 0 » ni « + - »), f(x) − (ax + b) = R/D → 0,
+    puis position relative de la courbe et de la droite."""
+    vers = r"+\infty" if s > 0 else r"-\infty"
+    ntex, dtex, qtex_, rtex = ptex(N, "x"), ptex(D, "x"), ptex(Q, "x"), ptex(R, "x")
+    items.append(txt(r"Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. "
+                     r"On effectue la division euclidienne de \(" + ntex + r"\) par \(" + dtex + r"\) :"))
+    produit = rf"{_facteur_poly(D)}\,{_facteur_poly(Q)}"
+    if nul(R):
+        items.append(txt(rf"\[{ntex} = {produit}\]"))
+        items.append(txt(rf"Donc \(f(x) = {qtex_}\) là où f est définie : la courbe est contenue dans la droite "
+                         rf"\(y = {qtex_}\)."))
+        return
+    items.append(txt(rf"\[{ntex} = {produit}{_suite_signee(R)}\]"))
+    items.append(txt(rf"Donc \(f(x) = {qtex_}{_fraction_signee(R, D)}\), d'où :"))
+    reste = rf"\dfrac{{{rtex}}}{{{dtex}}}"
+    pt = Pt({"type": "inf", "signe": s})
+    ch = Chaine(pt, rf"f(x) - {_facteur_poly(Q)}", Op("+", X(), X()))
+    ch.lim(reste, rf"f(x) - {_facteur_poly(Q)} = {reste}")
+    ch.val("0", r"\text{le degré du numérateur est inférieur à celui du dénominateur}"
+           if deg(R) >= 1 else rf"\text{{numérateur constant, dénominateur }} \to {vers}")
+    ch.complete = True
+    items.append(txt(ch.html()))
+    items.append(txt(rf"Asymptote oblique d'équation \(y = {qtex_}\)."))
+    # position relative : signe de R/D près de s∞
+    sr, sd = _signe_en_infini(R, s), _signe_en_infini(D, s)
+    sg = sr * sd
+    items.append(txt(
+        rf"Position relative, près de \({vers}\) : \({rtex}\) est {_mot_signe(sr)} et \({dtex}\) est {_mot_signe(sd)}, "
+        rf"donc \(f(x) - {_facteur_poly(Q)}\) est {_mot_signe(sg)} : la courbe est "
+        + ("au-dessus" if sg > 0 else "au-dessous") + " de la droite."))
+
+
 def _etude_rationnelle_infini(f, N, D, signe, items):
     n, m = deg(N), deg(D)
     an, bm = N[-1], D[-1]
@@ -303,18 +370,7 @@ def _etude_rationnelle_infini(f, N, D, signe, items):
             items.append(txt(rf"Le polynôme est de degré 1 : sa courbe est la droite d'équation "
                              rf"\(y = {ptex(Q,'x')}\), qui est son propre asymptote oblique."))
         else:
-            debut = (r"Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. "
-                     r"On effectue la division polynomiale du numérateur par le dénominateur, "
-                     rf"\({ptex(N,'x')}\) par \({ptex(D,'x')}\) (voir le chapitre « Division polynomiale ») : ")
-            if nul(R):
-                items.append(txt(debut + rf"\({ptex(N,'x')} = \left({ptex(D,'x')}\right)\left({ptex(Q,'x')}\right)\), "
-                                 rf"donc \(f(x) = {ptex(Q,'x')}\) là où f est définie : la courbe est contenue dans la droite."))
-            else:
-                items.append(txt(
-                    debut + rf"\({ptex(N,'x')} = \left({ptex(D,'x')}\right)\left({ptex(Q,'x')}\right) + {ptex(R,'x')}\), "
-                    rf"donc \(f(x) = {ptex(Q,'x')} + \dfrac{{{ptex(R,'x')}}}{{{ptex(D,'x')}}}\), "
-                    r"et ce dernier terme tend vers 0."
-                ))
+            _oblique_rationnelle(items, N, D, Q, R, signe)
         a = Q[1] if len(Q) > 1 else F(0)
         b = Q[0] if Q else F(0)
         return {"genre": "oblique", "a": qtex(a), "b": qtex(b), "a_val": float(a), "b_val": float(b),
@@ -923,8 +979,9 @@ class _Contexte:
     """État d'une rédaction : point d'étude, limites de référence (SymPy) déjà vues, signes déjà justifiés.
     mode : "limite" (conclusion « lim f(x) = … »), "fleche" (une des deux lignes à gauche / à droite)."""
 
-    def __init__(self, pt, f, ref_f, mode="limite"):
+    def __init__(self, pt, f, ref_f, mode="limite", label="f(x)", label_somme=False):
         self.pt, self.f, self.mode = pt, f, mode
+        self.label, self.label_somme = label, label_somme           # ce dont on prend la limite : f(x), f(x)/x, f(x) - x…
         self.refs, self.ap_vus, self.justifies = {}, set(), set()
         self.racine_dite = False
         self.demandes = []
@@ -976,7 +1033,9 @@ class _Contexte:
 
     def chaine(self, n):
         """Chaîne d'égalités pour la limite de n (« lim f(x) = … » pour f elle-même)."""
-        return Chaine(self.pt, "f(x)" if n is self.f else tex(n), None if n is self.f else n)
+        if n is self.f:
+            return Chaine(self.pt, self.label, Op("+", X(), X()) if self.label_somme else None)
+        return Chaine(self.pt, tex(n), n)
 
     def cote(self):
         mot = "À gauche" if self.pt.d < 0 else "À droite"
@@ -995,8 +1054,8 @@ class _Contexte:
         if n is self.f:
             self.racine_dite = True
             if self.mode == "limite":
-                return rf"\(\displaystyle\lim_{{x\to {self.pt.tex()}}} f(x) = {L.tex(False)}\)", pre
-            return rf"\(f(x) \to {L.tex(False)}\)", pre
+                return rf"\(\displaystyle\lim_{{x\to {self.pt.tex()}}} {self.label} = {L.tex(False)}\)", pre
+            return rf"\({self.label} \to {L.tex(False)}\)", pre
         return rf"\({tex(n)} \to {L.tex()}\)", pre
 
     def justifier(self, n, L, force=False):
@@ -2859,18 +2918,19 @@ def _noeud(n, ctx):
 def _sans_doublons(lignes):
     vues, out = set(), []
     for l in lignes:
-        if l not in vues:
-            vues.add(l)
+        cle = l.html() if isinstance(l, Chaine) else l
+        if cle not in vues:
+            vues.add(cle)
             out.append(l)
     return out
 
 
-def _rediger(f, pt, ref, mode="limite"):
+def _rediger(f, pt, ref, mode="limite", label="f(x)", label_somme=False):
     """(lignes, None) si la limite de f en pt est rédigée et coïncide avec ref (valeur SymPy), sinon
     (None, raison technique)."""
     try:
         R = _lim_depuis_sympy(ref)
-        ctx = _Contexte(pt, f, R, mode)
+        ctx = _Contexte(pt, f, R, mode, label, label_somme)
         L, lignes = _noeud(f, ctx)
         if not _meme_valeur(L, R):
             raise Abandon(f"valeur rédigée {L.tex()} ≠ référence {R.tex()}")
@@ -2878,32 +2938,32 @@ def _rediger(f, pt, ref, mode="limite"):
         for genre, noeud in ctx.demandes:
             TABLEAUX.utiliser(genre, noeud)
         if mode == "limite" and not ctx.racine_dite:
-            lignes.append(rf"Donc \(\displaystyle\lim_{{x\to {pt.tex()}}} f(x) = {L.tex(False)}\).")
+            lignes.append(rf"Donc \(\displaystyle\lim_{{x\to {pt.tex()}}} {label} = {L.tex(False)}\).")
         return lignes, None
     except Exception as e:      # rien ne doit faire échouer l'étude : on retombe sur le résultat seul
         return None, f"{type(e).__name__} : {e}"
 
 
-def _repli(pt, vtex, detail):
-    lim = rf"\displaystyle\lim_{{x\to {pt.tex()}}} f(x) = {vtex}"
+def _repli(pt, vtex, detail, label="f(x)"):
+    lim = rf"\displaystyle\lim_{{x\to {pt.tex()}}} {label} = {vtex}"
     item = txt(PHRASE_REPLI + rf"\({lim}\).")
     item["detail"] = detail
     return item
 
 
-def _narrer_limite(f, pt, ref, vtex, items, alternative=None):
+def _narrer_limite(f, pt, ref, vtex, items, alternative=None, label="f(x)", label_somme=False):
     """Étapes de lim f en pt : rédigées si possible, sinon phrase de repli et résultat de référence.
     alternative = (arbre équivalent, phrase d'introduction) : essayée si f, telle qu'elle est écrite, résiste."""
-    lignes, detail = _rediger(f, pt, ref)
+    lignes, detail = _rediger(f, pt, ref, "limite", label, label_somme)
     if lignes is None and alternative is not None:
         g, intro = alternative
-        lignes2, detail2 = _rediger(g, pt, ref)
+        lignes2, detail2 = _rediger(g, pt, ref, "limite", label, label_somme)
         if lignes2 is not None:
             lignes, detail = [intro] + lignes2, None
         else:
             detail = f"{detail} ; sous forme de fraction : {detail2}"
     if lignes is None:
-        items.append(_repli(pt, vtex, detail))
+        items.append(_repli(pt, vtex, detail, label))
     else:
         items.extend(txt(l) for l in lignes)
 
@@ -2912,7 +2972,7 @@ def _equation_affine(a_tex, b_tex, var="x"):
     """Combine a et b (déjà en tex) en « ax + b » proprement (signes, a=±1)."""
     partie_a = var if a_tex == "1" else ("-" + var if a_tex == "-1" else a_tex + var)
     if b_tex.startswith("-"):
-        return partie_a + " - " + b_tex[1:]
+        return partie_a + " - " + b_tex[1:].lstrip()
     if b_tex == "0":
         return partie_a
     return partie_a + " + " + b_tex
@@ -2937,13 +2997,101 @@ def _oblique_generale(f, signe, items):
     except Exception:
         return None
     a_tex, b_tex = num_sympy(a_val).tex, num_sympy(b_val).tex
-    items.append(txt(
-        rf"On compare \(f(x)\) à une droite : \(a = \displaystyle\lim \frac{{f(x)}}{{x}} = {a_tex}\) et "
-        rf"\(b = \displaystyle\lim \left(f(x) - {a_tex}x\right) = {b_tex}\) sont finis (et \(a \neq 0\)) : "
-        r"asymptote oblique."
-    ))
+    eq = _equation_affine(a_tex, b_tex)
+    items.append(txt(r"On cherche une asymptote oblique d'équation \(y = ax + b\) : \(a = \displaystyle\lim \frac{f(x)}{x}\), "
+                     r"puis \(b = \displaystyle\lim \left(f(x) - ax\right)\)."))
+    pt = Pt({"type": "inf", "signe": signe})
+    a_rat = F(int(a_val.p), int(a_val.q)) if a_val.is_Rational else None
+    if a_rat is None:
+        items.append(txt(rf"\(a = {a_tex}\) et \(b = {b_tex}\) sont finis (et \(a \neq 0\)) : asymptote oblique d'équation \(y = {eq}\)."))
+    else:
+        _narrer_limite(Op("/", f, X()), pt, a_val, a_tex, items, label=r"\dfrac{f(x)}{x}")
+        fb = _arbre_moins_ax(f, a_rat)
+        coef = "" if abs(a_rat) == 1 else qtex(abs(a_rat))
+        _narrer_limite(fb, pt, b_val, b_tex, items, label=rf"f(x) {'-' if a_rat > 0 else '+'} {coef}x", label_somme=True)
+        items.append(txt(rf"\(a = {a_tex}\) et \(b = {b_tex}\) sont finis (et \(a \neq 0\)) : "
+                         rf"asymptote oblique d'équation \(y = {eq}\)."))
+        items.extend(_position_racine(f, a_rat, F(int(b_val.p), int(b_val.q)) if b_val.is_Rational else None, signe))
     return {"genre": "oblique", "a": a_tex, "b": b_tex, "a_val": float(a_val), "b_val": float(b_val),
-            "equation_tex": _equation_affine(a_tex, b_tex)}
+            "equation_tex": eq}
+
+
+def _arbre_moins_ax(f, a):
+    """f(x) − a·x écrit en regroupant le polynôme : √(x² + x) − x + 2x devient √(x² + x) + x. Arbre générique sinon."""
+    terme = X() if abs(a) == 1 else Op("*", Nb(abs(a)), X())
+    generique = Op("-" if a > 0 else "+", f, terme)
+    feuilles = _feuilles(f)
+    racines = [(u, sg) for u, sg in feuilles if _est_racine(u) is not None]
+    if not racines:
+        return generique
+    v = [F(0)]
+    for u, sg in feuilles:
+        if _est_racine(u) is None:
+            P = _poly_ou_const(u)
+            if P is None:
+                if sans_x(u):
+                    continue
+                return generique
+            v = padd(v, pscal(P, F(sg)))
+    v = padd(v, [F(0), -a])
+    arbre = None
+    for u, sg in racines:
+        arbre = (Neg(u) if sg < 0 else u) if arbre is None else Op("-" if sg < 0 else "+", arbre, u)
+    if nul(v):
+        return arbre
+    return Op("-", arbre, _arbre_poly(pscal(v, F(-1)))) if v[deg(v)] < 0 else Op("+", arbre, _arbre_poly(v))
+
+
+def _position_racine(f, a, b, s):
+    """Position relative de la courbe de f = ±√Q + (affine), Q du second degré, et de son asymptote y = ax + b près de s∞,
+    quand le signe de f(x) − (ax + b) se lit directement : ±(√Q − W) = ±r/(√Q + W), r constante, √Q + W > 0.
+    Renvoie une liste d'items (vide si le cas n'est pas de cette forme ou si le signe n'est pas confirmé)."""
+    if b is None:
+        return []
+    feuilles = _feuilles(f)
+    racines = [(u, sg) for u, sg in feuilles if _est_racine(u) is not None]
+    if len(racines) != 1:
+        return []
+    rac, ur = racines[0]
+    Q = _poly_ou_const(_est_racine(rac))
+    if Q is None or deg(Q) != 2:
+        return []
+    v = [F(0)]
+    for u, sg in feuilles:
+        if _est_racine(u) is None:
+            P = _poly_ou_const(u)
+            if P is not None:
+                v = padd(v, pscal(P, F(sg)))
+    if deg(v) > 1:
+        return []
+    w = padd([b, a], pscal(v, F(-1)))                    # ax + b − v
+    W = pscal(w, F(ur))                                  # f(x) − (ax + b) = ur·(√Q − W)
+    r = padd(Q, pscal(pmul(W, W), F(-1)))
+    if deg(r) != 0 or r[0] == 0:
+        return []
+    sg = ur * (1 if r[0] > 0 else -1)
+    for x in (s * 1e3, s * 1e5):                          # le signe annoncé est confirmé numériquement
+        val = evaluer(f, x)
+        if val is None or (val - (float(a) * x + float(b))) * sg <= 0:
+            return []
+    vers = r"+\infty" if s > 0 else r"-\infty"
+    qt, wt, rt = ptex(Q, "x"), ptex(W, "x"), qtex(r[0])
+    racine = rf"\sqrt{{{qt}}}"
+    gauche = rf"\sqrt{{{qt}}} - \left({wt}\right)"
+    gauche_h = rf"f(x) - \left({_equation_affine(qtex(a), qtex(b))}\right)"
+    droite0 = gauche if ur > 0 else rf"-\left({gauche}\right)"
+    suite = rf"\dfrac{{{qt} - \left({wt}\right)^{{2}}}}{{{racine} + {_entre_parentheses(wt)}}}"
+    ligne2 = (suite if ur > 0 else "-" + suite)
+    ligne3 = rf"\dfrac{{{rt}}}{{{racine} + {_entre_parentheses(wt)}}}" if ur > 0 else rf"-\dfrac{{{rt}}}{{{racine} + {_entre_parentheses(wt)}}}"
+    return [txt(_egalites(gauche_h, [droite0, ligne2, ligne3])),
+            txt(rf"Près de \({vers}\), \({racine} + {_entre_parentheses(wt)}\) est positif (\({racine} - {_entre_parentheses(wt)}\) tend vers 0 "
+                rf"et \({racine} > 0\)), et {_mot_signe_r(ur, r[0])} : \(f(x) - \left({_equation_affine(qtex(a), qtex(b))}\right)\) est "
+                f"{_mot_signe(sg)} : la courbe est " + ("au-dessus" if sg > 0 else "au-dessous") + " de la droite.")]
+
+
+def _mot_signe_r(u, r):
+    """« la constante 8 est positive » (précédée du signe − pour −√Q…)."""
+    return (rf"la constante \({qtex(r)}\) est {'positive' if r > 0 else 'négative'}" + ("" if u > 0 else ", précédée du signe −"))
 
 
 def _narrer_cotes(f, borne, items, ref_de, cotes=("gauche", "droite")):

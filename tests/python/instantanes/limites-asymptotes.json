@@ -454,7 +454,15 @@
       "type": "texte"
      },
      {
-      "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2} - 1\\) par \\(x - 1\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} - 1 = \\left(x - 1\\right)\\left(x + 1\\right)\\), donc \\(f(x) = x + 1\\) là où f est définie : la courbe est contenue dans la droite.",
+      "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division euclidienne de \\(x^{2} - 1\\) par \\(x - 1\\) :",
+      "type": "texte"
+     },
+     {
+      "html": "\\[x^{2} - 1 = \\left(x - 1\\right)\\,\\left(x + 1\\right)\\]",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(f(x) = x + 1\\) là où f est définie : la courbe est contenue dans la droite \\(y = x + 1\\).",
       "type": "texte"
      }
     ],
@@ -475,7 +483,15 @@
       "type": "texte"
      },
      {
-      "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2} - 1\\) par \\(x - 1\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} - 1 = \\left(x - 1\\right)\\left(x + 1\\right)\\), donc \\(f(x) = x + 1\\) là où f est définie : la courbe est contenue dans la droite.",
+      "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division euclidienne de \\(x^{2} - 1\\) par \\(x - 1\\) :",
+      "type": "texte"
+     },
+     {
+      "html": "\\[x^{2} - 1 = \\left(x - 1\\right)\\,\\left(x + 1\\right)\\]",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(f(x) = x + 1\\) là où f est définie : la courbe est contenue dans la droite \\(y = x + 1\\).",
       "type": "texte"
      }
     ],
@@ -555,7 +571,27 @@
       "type": "texte"
      },
      {
-      "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2} - 1\\) par \\(x - 3\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} - 1 = \\left(x - 3\\right)\\left(x + 3\\right) + 8\\), donc \\(f(x) = x + 3 + \\dfrac{8}{x - 3}\\), et ce dernier terme tend vers 0.",
+      "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division euclidienne de \\(x^{2} - 1\\) par \\(x - 3\\) :",
+      "type": "texte"
+     },
+     {
+      "html": "\\[x^{2} - 1 = \\left(x - 3\\right)\\,\\left(x + 3\\right) + 8\\]",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(f(x) = x + 3 + \\dfrac{8}{x - 3}\\), d'où :",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\left(f(x) - \\left(x + 3\\right)\\right) &= \\lim_{x\\to -\\infty} \\dfrac{8}{x - 3} = 0 \\qquad \\left(f(x) - \\left(x + 3\\right) = \\dfrac{8}{x - 3} \\; ;\\; \\text{numérateur constant, dénominateur } \\to -\\infty\\right)\\end{aligned}\\]",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote oblique d'équation \\(y = x + 3\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Position relative, près de \\(-\\infty\\) : \\(8\\) est positif et \\(x - 3\\) est négatif, donc \\(f(x) - \\left(x + 3\\right)\\) est négatif : la courbe est au-dessous de la droite.",
       "type": "texte"
      }
     ],
@@ -576,7 +612,27 @@
       "type": "texte"
      },
      {
-      "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2} - 1\\) par \\(x - 3\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} - 1 = \\left(x - 3\\right)\\left(x + 3\\right) + 8\\), donc \\(f(x) = x + 3 + \\dfrac{8}{x - 3}\\), et ce dernier terme tend vers 0.",
+      "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division euclidienne de \\(x^{2} - 1\\) par \\(x - 3\\) :",
+      "type": "texte"
+     },
+     {
+      "html": "\\[x^{2} - 1 = \\left(x - 3\\right)\\,\\left(x + 3\\right) + 8\\]",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(f(x) = x + 3 + \\dfrac{8}{x - 3}\\), d'où :",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\left(f(x) - \\left(x + 3\\right)\\right) &= \\lim_{x\\to +\\infty} \\dfrac{8}{x - 3} = 0 \\qquad \\left(f(x) - \\left(x + 3\\right) = \\dfrac{8}{x - 3} \\; ;\\; \\text{numérateur constant, dénominateur } \\to +\\infty\\right)\\end{aligned}\\]",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote oblique d'équation \\(y = x + 3\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Position relative, près de \\(+\\infty\\) : \\(8\\) est positif et \\(x - 3\\) est positif, donc \\(f(x) - \\left(x + 3\\right)\\) est positif : la courbe est au-dessus de la droite.",
       "type": "texte"
      }
     ],
@@ -1800,7 +1856,51 @@
       "type": "texte"
      },
      {
-      "html": "On compare \\(f(x)\\) à une droite : \\(a = \\displaystyle\\lim \\frac{f(x)}{x} = -1\\) et \\(b = \\displaystyle\\lim \\left(f(x) - -1x\\right) = 0\\) sont finis (et \\(a \\neq 0\\)) : asymptote oblique.",
+      "html": "On cherche une asymptote oblique d'équation \\(y = ax + b\\) : \\(a = \\displaystyle\\lim \\frac{f(x)}{x}\\), puis \\(b = \\displaystyle\\lim \\left(f(x) - ax\\right)\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} \\to +\\infty\\), donc \\(x^{2} + 1 \\to +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\sqrt{x^{2} + 1} \\to +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Le numérateur \\(\\sqrt{x^{2} + 1}\\) tend vers \\(+\\infty\\) et le dénominateur \\(x\\) tend vers \\(-\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\dfrac{f(x)}{x} &= \\lim_{x\\to -\\infty} \\dfrac{\\sqrt{x^{2}\\left(1 + \\frac{1}{x^{2}}\\right)}}{x} \\qquad \\left(x^{2} + 1 = x^{2}\\left(1 + \\frac{1}{x^{2}}\\right)\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{|x|\\sqrt{1 + \\frac{1}{x^{2}}}}{x} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{-x\\,\\sqrt{1 + \\frac{1}{x^{2}}}}{x} \\qquad \\left(x < 0 \\text{ donc } |x| = -x\\right) \\\\ &= \\lim_{x\\to -\\infty} -\\sqrt{1 + \\frac{1}{x^{2}}} = -\\sqrt{1} = -1 \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{1}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} \\to +\\infty\\), donc \\(x^{2} + 1 \\to +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\sqrt{x^{2} + 1} \\to +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\sqrt{x^{2} + 1} \\to +\\infty\\) et \\(x \\to -\\infty\\) : forme indéterminée « \\(\\infty - \\infty\\) ».",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\left(f(x) + x\\right) &= \\lim_{x\\to -\\infty} \\dfrac{\\left(\\sqrt{x^{2} + 1} + x\\right)\\left(\\sqrt{x^{2} + 1} - x\\right)}{\\sqrt{x^{2} + 1} - x} \\qquad \\left(\\text{on multiplie et on divise par la conjuguée } \\sqrt{x^{2} + 1} - x\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{\\left(x^{2} + 1\\right) - x^{2}}{\\sqrt{x^{2} + 1} - x} \\qquad \\left((a - b)(a + b) = a^{2} - b^{2}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{1}{\\sqrt{x^{2} + 1} - x} = \\dfrac{1}{+\\infty - \\left(-\\infty\\right)} = 0 \\qquad \\left(\\sqrt{x^{2} + 1} \\to +\\infty\\right)\\end{aligned}\\]",
+      "type": "texte"
+     },
+     {
+      "html": "\\(a = -1\\) et \\(b = 0\\) sont finis (et \\(a \\neq 0\\)) : asymptote oblique d'équation \\(y = -x\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}f(x) - \\left(-x\\right) &= \\sqrt{x^{2} + 1} - \\left(-x\\right) \\\\ &= \\dfrac{x^{2} + 1 - \\left(-x\\right)^{2}}{\\sqrt{x^{2} + 1} + -x} \\\\ &= \\dfrac{1}{\\sqrt{x^{2} + 1} + -x}\\end{aligned}\\]",
+      "type": "texte"
+     },
+     {
+      "html": "Près de \\(-\\infty\\), \\(\\sqrt{x^{2} + 1} + -x\\) est positif (\\(\\sqrt{x^{2} + 1} - -x\\) tend vers 0 et \\(\\sqrt{x^{2} + 1} > 0\\)), et la constante \\(1\\) est positive : \\(f(x) - \\left(-x\\right)\\) est positif : la courbe est au-dessus de la droite.",
       "type": "texte"
      }
     ],
@@ -1821,7 +1921,51 @@
       "type": "texte"
      },
      {
-      "html": "On compare \\(f(x)\\) à une droite : \\(a = \\displaystyle\\lim \\frac{f(x)}{x} = 1\\) et \\(b = \\displaystyle\\lim \\left(f(x) - 1x\\right) = 0\\) sont finis (et \\(a \\neq 0\\)) : asymptote oblique.",
+      "html": "On cherche une asymptote oblique d'équation \\(y = ax + b\\) : \\(a = \\displaystyle\\lim \\frac{f(x)}{x}\\), puis \\(b = \\displaystyle\\lim \\left(f(x) - ax\\right)\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} \\to +\\infty\\), donc \\(x^{2} + 1 \\to +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\sqrt{x^{2} + 1} \\to +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Le numérateur \\(\\sqrt{x^{2} + 1}\\) tend vers \\(+\\infty\\) et le dénominateur \\(x\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\dfrac{f(x)}{x} &= \\lim_{x\\to +\\infty} \\dfrac{\\sqrt{x^{2}\\left(1 + \\frac{1}{x^{2}}\\right)}}{x} \\qquad \\left(x^{2} + 1 = x^{2}\\left(1 + \\frac{1}{x^{2}}\\right)\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{|x|\\sqrt{1 + \\frac{1}{x^{2}}}}{x} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x\\,\\sqrt{1 + \\frac{1}{x^{2}}}}{x} \\qquad \\left(x > 0 \\text{ donc } |x| = x\\right) \\\\ &= \\lim_{x\\to +\\infty} \\sqrt{1 + \\frac{1}{x^{2}}} = \\sqrt{1} = 1 \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{1}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} \\to +\\infty\\), donc \\(x^{2} + 1 \\to +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\sqrt{x^{2} + 1} \\to +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\sqrt{x^{2} + 1} \\to +\\infty\\) et \\(x \\to +\\infty\\) : forme indéterminée « \\(\\infty - \\infty\\) ».",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\left(f(x) - x\\right) &= \\lim_{x\\to +\\infty} \\dfrac{\\left(\\sqrt{x^{2} + 1} - x\\right)\\left(\\sqrt{x^{2} + 1} + x\\right)}{\\sqrt{x^{2} + 1} + x} \\qquad \\left(\\text{on multiplie et on divise par la conjuguée } \\sqrt{x^{2} + 1} + x\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{\\left(x^{2} + 1\\right) - x^{2}}{\\sqrt{x^{2} + 1} + x} \\qquad \\left((a - b)(a + b) = a^{2} - b^{2}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{1}{\\sqrt{x^{2} + 1} + x} = \\dfrac{1}{+\\infty + \\left(+\\infty\\right)} = 0 \\qquad \\left(\\sqrt{x^{2} + 1} \\to +\\infty\\right)\\end{aligned}\\]",
+      "type": "texte"
+     },
+     {
+      "html": "\\(a = 1\\) et \\(b = 0\\) sont finis (et \\(a \\neq 0\\)) : asymptote oblique d'équation \\(y = x\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}f(x) - \\left(x\\right) &= \\sqrt{x^{2} + 1} - \\left(x\\right) \\\\ &= \\dfrac{x^{2} + 1 - \\left(x\\right)^{2}}{\\sqrt{x^{2} + 1} + x} \\\\ &= \\dfrac{1}{\\sqrt{x^{2} + 1} + x}\\end{aligned}\\]",
+      "type": "texte"
+     },
+     {
+      "html": "Près de \\(+\\infty\\), \\(\\sqrt{x^{2} + 1} + x\\) est positif (\\(\\sqrt{x^{2} + 1} - x\\) tend vers 0 et \\(\\sqrt{x^{2} + 1} > 0\\)), et la constante \\(1\\) est positive : \\(f(x) - \\left(x\\right)\\) est positif : la courbe est au-dessus de la droite.",
       "type": "texte"
      }
     ],
@@ -1870,7 +2014,63 @@
       "type": "texte"
      },
      {
-      "html": "On compare \\(f(x)\\) à une droite : \\(a = \\displaystyle\\lim \\frac{f(x)}{x} = -1\\) et \\(b = \\displaystyle\\lim \\left(f(x) - -1x\\right) = 2\\) sont finis (et \\(a \\neq 0\\)) : asymptote oblique.",
+      "html": "On cherche une asymptote oblique d'équation \\(y = ax + b\\) : \\(a = \\displaystyle\\lim \\frac{f(x)}{x}\\), puis \\(b = \\displaystyle\\lim \\left(f(x) - ax\\right)\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} \\to +\\infty\\) et \\(-4x \\to +\\infty\\), donc \\(x^{2} - 4x + 5 \\to +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\sqrt{x^{2} - 4x + 5} \\to +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Le numérateur \\(\\sqrt{x^{2} - 4x + 5}\\) tend vers \\(+\\infty\\) et le dénominateur \\(x\\) tend vers \\(-\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\dfrac{f(x)}{x} &= \\lim_{x\\to -\\infty} \\dfrac{\\sqrt{x^{2}\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right)}}{x} \\qquad \\left(x^{2} - 4x + 5 = x^{2}\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right)\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{|x|\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}}}{x} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{-x\\,\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}}}{x} \\qquad \\left(x < 0 \\text{ donc } |x| = -x\\right) \\\\ &= \\lim_{x\\to -\\infty} -\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} = -\\sqrt{1} = -1 \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{4}{x} \\to 0 \\; ;\\; \\frac{5}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} \\to +\\infty\\) et \\(-4x \\to +\\infty\\), donc \\(x^{2} - 4x + 5 \\to +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\sqrt{x^{2} - 4x + 5} \\to +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\sqrt{x^{2} - 4x + 5} \\to +\\infty\\) et \\(x \\to -\\infty\\) : forme indéterminée « \\(\\infty - \\infty\\) ».",
+      "type": "texte"
+     },
+     {
+      "html": "\\(-4x \\to +\\infty\\), donc \\(-4x + 5 \\to +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\sqrt{x^{2} - 4x + 5} \\to +\\infty\\) et \\(x \\to -\\infty\\), donc \\(\\sqrt{x^{2} - 4x + 5} - x \\to +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Le numérateur \\(-4x + 5\\) tend vers \\(+\\infty\\) et le dénominateur \\(\\sqrt{x^{2} - 4x + 5} - x\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\left(f(x) + x\\right) &= \\lim_{x\\to -\\infty} \\dfrac{\\left(\\sqrt{x^{2} - 4x + 5} + x\\right)\\left(\\sqrt{x^{2} - 4x + 5} - x\\right)}{\\sqrt{x^{2} - 4x + 5} - x} \\qquad \\left(\\text{on multiplie et on divise par la conjuguée } \\sqrt{x^{2} - 4x + 5} - x\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{\\left(x^{2} - 4x + 5\\right) - x^{2}}{\\sqrt{x^{2} - 4x + 5} - x} \\qquad \\left((a - b)(a + b) = a^{2} - b^{2}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{-4x + 5}{\\sqrt{x^{2} - 4x + 5} - x} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{-4x\\,\\left(1 - \\frac{5}{4x}\\right)}{\\sqrt{x^{2}\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right)} - x} \\qquad \\left(-4x + 5 = -4x\\,\\left(1 - \\frac{5}{4x}\\right) ,\\; x^{2} - 4x + 5 = x^{2}\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right) ,\\; \\sqrt{x^{2} - 4x + 5} - x = x\\,\\left(-\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} - 1\\right)\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{-4x\\,\\left(1 - \\frac{5}{4x}\\right)}{|x|\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} - x} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{-4x\\,\\left(1 - \\frac{5}{4x}\\right)}{-x\\,\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} - x} \\qquad \\left(x < 0 \\text{ donc } |x| = -x\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{-4x\\,\\left(1 - \\frac{5}{4x}\\right)}{x\\,\\left(-\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} - 1\\right)} \\qquad \\left(\\text{on met } x \\text{ en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} -\\frac{4\\left(1 - \\frac{5}{4x}\\right)}{-\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} - 1} = -\\left(\\dfrac{4 \\cdot 1}{-\\sqrt{1} - 1}\\right) = 2 \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{5}{4x} \\to 0 \\; ;\\; \\frac{4}{x} \\to 0 \\; ;\\; \\frac{5}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
+      "type": "texte"
+     },
+     {
+      "html": "\\(a = -1\\) et \\(b = 2\\) sont finis (et \\(a \\neq 0\\)) : asymptote oblique d'équation \\(y = -x + 2\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}f(x) - \\left(-x + 2\\right) &= \\sqrt{x^{2} - 4x + 5} - \\left(-x + 2\\right) \\\\ &= \\dfrac{x^{2} - 4x + 5 - \\left(-x + 2\\right)^{2}}{\\sqrt{x^{2} - 4x + 5} + \\left(-x + 2\\right)} \\\\ &= \\dfrac{1}{\\sqrt{x^{2} - 4x + 5} + \\left(-x + 2\\right)}\\end{aligned}\\]",
+      "type": "texte"
+     },
+     {
+      "html": "Près de \\(-\\infty\\), \\(\\sqrt{x^{2} - 4x + 5} + \\left(-x + 2\\right)\\) est positif (\\(\\sqrt{x^{2} - 4x + 5} - \\left(-x + 2\\right)\\) tend vers 0 et \\(\\sqrt{x^{2} - 4x + 5} > 0\\)), et la constante \\(1\\) est positive : \\(f(x) - \\left(-x + 2\\right)\\) est positif : la courbe est au-dessus de la droite.",
       "type": "texte"
      }
     ],
@@ -1895,7 +2095,71 @@
       "type": "texte"
      },
      {
-      "html": "On compare \\(f(x)\\) à une droite : \\(a = \\displaystyle\\lim \\frac{f(x)}{x} = 1\\) et \\(b = \\displaystyle\\lim \\left(f(x) - 1x\\right) = -2\\) sont finis (et \\(a \\neq 0\\)) : asymptote oblique.",
+      "html": "On cherche une asymptote oblique d'équation \\(y = ax + b\\) : \\(a = \\displaystyle\\lim \\frac{f(x)}{x}\\), puis \\(b = \\displaystyle\\lim \\left(f(x) - ax\\right)\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} \\to +\\infty\\) et \\(-4x \\to -\\infty\\) : forme indéterminée « \\(\\infty - \\infty\\) ».",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\left(x^{2} - 4x + 5\\right) &= \\lim_{x\\to +\\infty} x^{2}\\,\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right) = \\left(+\\infty\\right) \\cdot 1 = +\\infty \\qquad \\left(\\text{on met } x^{2} \\text{ en évidence} \\; ;\\; \\frac{4}{x} \\to 0 \\; ;\\; \\frac{5}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
+      "type": "texte"
+     },
+     {
+      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\sqrt{x^{2} - 4x + 5} \\to +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Le numérateur \\(\\sqrt{x^{2} - 4x + 5}\\) tend vers \\(+\\infty\\) et le dénominateur \\(x\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\dfrac{f(x)}{x} &= \\lim_{x\\to +\\infty} \\dfrac{\\sqrt{x^{2}\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right)}}{x} \\qquad \\left(x^{2} - 4x + 5 = x^{2}\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right)\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{|x|\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}}}{x} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x\\,\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}}}{x} \\qquad \\left(x > 0 \\text{ donc } |x| = x\\right) \\\\ &= \\lim_{x\\to +\\infty} \\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} = \\sqrt{1} = 1 \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{4}{x} \\to 0 \\; ;\\; \\frac{5}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} \\to +\\infty\\) et \\(-4x \\to -\\infty\\) : forme indéterminée « \\(\\infty - \\infty\\) ».",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\left(x^{2} - 4x + 5\\right) &= \\lim_{x\\to +\\infty} x^{2}\\,\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right) = \\left(+\\infty\\right) \\cdot 1 = +\\infty \\qquad \\left(\\text{on met } x^{2} \\text{ en évidence} \\; ;\\; \\frac{4}{x} \\to 0 \\; ;\\; \\frac{5}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
+      "type": "texte"
+     },
+     {
+      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\sqrt{x^{2} - 4x + 5} \\to +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\sqrt{x^{2} - 4x + 5} \\to +\\infty\\) et \\(x \\to +\\infty\\) : forme indéterminée « \\(\\infty - \\infty\\) ».",
+      "type": "texte"
+     },
+     {
+      "html": "\\(-4x \\to -\\infty\\), donc \\(-4x + 5 \\to -\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\sqrt{x^{2} - 4x + 5} \\to +\\infty\\) et \\(x \\to +\\infty\\), donc \\(\\sqrt{x^{2} - 4x + 5} + x \\to +\\infty\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Le numérateur \\(-4x + 5\\) tend vers \\(-\\infty\\) et le dénominateur \\(\\sqrt{x^{2} - 4x + 5} + x\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\left(f(x) - x\\right) &= \\lim_{x\\to +\\infty} \\dfrac{\\left(\\sqrt{x^{2} - 4x + 5} - x\\right)\\left(\\sqrt{x^{2} - 4x + 5} + x\\right)}{\\sqrt{x^{2} - 4x + 5} + x} \\qquad \\left(\\text{on multiplie et on divise par la conjuguée } \\sqrt{x^{2} - 4x + 5} + x\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{\\left(x^{2} - 4x + 5\\right) - x^{2}}{\\sqrt{x^{2} - 4x + 5} + x} \\qquad \\left((a - b)(a + b) = a^{2} - b^{2}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{-4x + 5}{\\sqrt{x^{2} - 4x + 5} + x} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{-4x\\,\\left(1 - \\frac{5}{4x}\\right)}{\\sqrt{x^{2}\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right)} + x} \\qquad \\left(-4x + 5 = -4x\\,\\left(1 - \\frac{5}{4x}\\right) ,\\; x^{2} - 4x + 5 = x^{2}\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right) ,\\; \\sqrt{x^{2} - 4x + 5} + x = x\\,\\left(\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} + 1\\right)\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{-4x\\,\\left(1 - \\frac{5}{4x}\\right)}{|x|\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} + x} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{-4x\\,\\left(1 - \\frac{5}{4x}\\right)}{x\\,\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} + x} \\qquad \\left(x > 0 \\text{ donc } |x| = x\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{-4x\\,\\left(1 - \\frac{5}{4x}\\right)}{x\\,\\left(\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} + 1\\right)} \\qquad \\left(\\text{on met } x \\text{ en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} -\\frac{4\\left(1 - \\frac{5}{4x}\\right)}{\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} + 1} = -\\left(\\dfrac{4 \\cdot 1}{\\sqrt{1} + 1}\\right) = -2 \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{5}{4x} \\to 0 \\; ;\\; \\frac{4}{x} \\to 0 \\; ;\\; \\frac{5}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
+      "type": "texte"
+     },
+     {
+      "html": "\\(a = 1\\) et \\(b = -2\\) sont finis (et \\(a \\neq 0\\)) : asymptote oblique d'équation \\(y = x - 2\\).",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}f(x) - \\left(x - 2\\right) &= \\sqrt{x^{2} - 4x + 5} - \\left(x - 2\\right) \\\\ &= \\dfrac{x^{2} - 4x + 5 - \\left(x - 2\\right)^{2}}{\\sqrt{x^{2} - 4x + 5} + \\left(x - 2\\right)} \\\\ &= \\dfrac{1}{\\sqrt{x^{2} - 4x + 5} + \\left(x - 2\\right)}\\end{aligned}\\]",
+      "type": "texte"
+     },
+     {
+      "html": "Près de \\(+\\infty\\), \\(\\sqrt{x^{2} - 4x + 5} + \\left(x - 2\\right)\\) est positif (\\(\\sqrt{x^{2} - 4x + 5} - \\left(x - 2\\right)\\) tend vers 0 et \\(\\sqrt{x^{2} - 4x + 5} > 0\\)), et la constante \\(1\\) est positive : \\(f(x) - \\left(x - 2\\right)\\) est positif : la courbe est au-dessus de la droite.",
       "type": "texte"
      }
     ],
@@ -2419,7 +2683,27 @@
       "type": "texte"
      },
      {
-      "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2}\\) par \\(x - 1\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} = \\left(x - 1\\right)\\left(x + 1\\right) + 1\\), donc \\(f(x) = x + 1 + \\dfrac{1}{x - 1}\\), et ce dernier terme tend vers 0.",
+      "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division euclidienne de \\(x^{2}\\) par \\(x - 1\\) :",
+      "type": "texte"
+     },
+     {
+      "html": "\\[x^{2} = \\left(x - 1\\right)\\,\\left(x + 1\\right) + 1\\]",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(f(x) = x + 1 + \\dfrac{1}{x - 1}\\), d'où :",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\left(f(x) - \\left(x + 1\\right)\\right) &= \\lim_{x\\to -\\infty} \\dfrac{1}{x - 1} = 0 \\qquad \\left(f(x) - \\left(x + 1\\right) = \\dfrac{1}{x - 1} \\; ;\\; \\text{numérateur constant, dénominateur } \\to -\\infty\\right)\\end{aligned}\\]",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote oblique d'équation \\(y = x + 1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Position relative, près de \\(-\\infty\\) : \\(1\\) est positif et \\(x - 1\\) est négatif, donc \\(f(x) - \\left(x + 1\\right)\\) est négatif : la courbe est au-dessous de la droite.",
       "type": "texte"
      }
     ],
@@ -2440,7 +2724,27 @@
       "type": "texte"
      },
      {
-      "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2}\\) par \\(x - 1\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} = \\left(x - 1\\right)\\left(x + 1\\right) + 1\\), donc \\(f(x) = x + 1 + \\dfrac{1}{x - 1}\\), et ce dernier terme tend vers 0.",
+      "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division euclidienne de \\(x^{2}\\) par \\(x - 1\\) :",
+      "type": "texte"
+     },
+     {
+      "html": "\\[x^{2} = \\left(x - 1\\right)\\,\\left(x + 1\\right) + 1\\]",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(f(x) = x + 1 + \\dfrac{1}{x - 1}\\), d'où :",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\left(f(x) - \\left(x + 1\\right)\\right) &= \\lim_{x\\to +\\infty} \\dfrac{1}{x - 1} = 0 \\qquad \\left(f(x) - \\left(x + 1\\right) = \\dfrac{1}{x - 1} \\; ;\\; \\text{numérateur constant, dénominateur } \\to +\\infty\\right)\\end{aligned}\\]",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote oblique d'équation \\(y = x + 1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Position relative, près de \\(+\\infty\\) : \\(1\\) est positif et \\(x - 1\\) est positif, donc \\(f(x) - \\left(x + 1\\right)\\) est positif : la courbe est au-dessus de la droite.",
       "type": "texte"
      }
     ],

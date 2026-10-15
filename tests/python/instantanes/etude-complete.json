@@ -467,7 +467,27 @@
        "type": "texte"
       },
       {
-       "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2} - 1\\) par \\(x - 3\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} - 1 = \\left(x - 3\\right)\\left(x + 3\\right) + 8\\), donc \\(f(x) = x + 3 + \\dfrac{8}{x - 3}\\), et ce dernier terme tend vers 0.",
+       "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division euclidienne de \\(x^{2} - 1\\) par \\(x - 3\\) :",
+       "type": "texte"
+      },
+      {
+       "html": "\\[x^{2} - 1 = \\left(x - 3\\right)\\,\\left(x + 3\\right) + 8\\]",
+       "type": "texte"
+      },
+      {
+       "html": "Donc \\(f(x) = x + 3 + \\dfrac{8}{x - 3}\\), d'où :",
+       "type": "texte"
+      },
+      {
+       "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\left(f(x) - \\left(x + 3\\right)\\right) &= \\lim_{x\\to -\\infty} \\dfrac{8}{x - 3} = 0 \\qquad \\left(f(x) - \\left(x + 3\\right) = \\dfrac{8}{x - 3} \\; ;\\; \\text{numérateur constant, dénominateur } \\to -\\infty\\right)\\end{aligned}\\]",
+       "type": "texte"
+      },
+      {
+       "html": "Asymptote oblique d'équation \\(y = x + 3\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Position relative, près de \\(-\\infty\\) : \\(8\\) est positif et \\(x - 3\\) est négatif, donc \\(f(x) - \\left(x + 3\\right)\\) est négatif : la courbe est au-dessous de la droite.",
        "type": "texte"
       }
      ],
@@ -488,7 +508,27 @@
        "type": "texte"
       },
       {
-       "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division polynomiale du numérateur par le dénominateur, \\(x^{2} - 1\\) par \\(x - 3\\) (voir le chapitre « Division polynomiale ») : \\(x^{2} - 1 = \\left(x - 3\\right)\\left(x + 3\\right) + 8\\), donc \\(f(x) = x + 3 + \\dfrac{8}{x - 3}\\), et ce dernier terme tend vers 0.",
+       "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division euclidienne de \\(x^{2} - 1\\) par \\(x - 3\\) :",
+       "type": "texte"
+      },
+      {
+       "html": "\\[x^{2} - 1 = \\left(x - 3\\right)\\,\\left(x + 3\\right) + 8\\]",
+       "type": "texte"
+      },
+      {
+       "html": "Donc \\(f(x) = x + 3 + \\dfrac{8}{x - 3}\\), d'où :",
+       "type": "texte"
+      },
+      {
+       "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\left(f(x) - \\left(x + 3\\right)\\right) &= \\lim_{x\\to +\\infty} \\dfrac{8}{x - 3} = 0 \\qquad \\left(f(x) - \\left(x + 3\\right) = \\dfrac{8}{x - 3} \\; ;\\; \\text{numérateur constant, dénominateur } \\to +\\infty\\right)\\end{aligned}\\]",
+       "type": "texte"
+      },
+      {
+       "html": "Asymptote oblique d'équation \\(y = x + 3\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Position relative, près de \\(+\\infty\\) : \\(8\\) est positif et \\(x - 3\\) est positif, donc \\(f(x) - \\left(x + 3\\right)\\) est positif : la courbe est au-dessus de la droite.",
        "type": "texte"
       }
      ],
@@ -1617,7 +1657,51 @@
        "type": "texte"
       },
       {
-       "html": "On compare \\(f(x)\\) à une droite : \\(a = \\displaystyle\\lim \\frac{f(x)}{x} = -1\\) et \\(b = \\displaystyle\\lim \\left(f(x) - -1x\\right) = 0\\) sont finis (et \\(a \\neq 0\\)) : asymptote oblique.",
+       "html": "On cherche une asymptote oblique d'équation \\(y = ax + b\\) : \\(a = \\displaystyle\\lim \\frac{f(x)}{x}\\), puis \\(b = \\displaystyle\\lim \\left(f(x) - ax\\right)\\).",
+       "type": "texte"
+      },
+      {
+       "html": "\\(x^{2} \\to +\\infty\\), donc \\(x^{2} - 4 \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\sqrt{x^{2} - 4} \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Le numérateur \\(\\sqrt{x^{2} - 4}\\) tend vers \\(+\\infty\\) et le dénominateur \\(x\\) tend vers \\(-\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+       "type": "texte"
+      },
+      {
+       "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\dfrac{f(x)}{x} &= \\lim_{x\\to -\\infty} \\dfrac{\\sqrt{x^{2}\\left(1 - \\frac{4}{x^{2}}\\right)}}{x} \\qquad \\left(x^{2} - 4 = x^{2}\\left(1 - \\frac{4}{x^{2}}\\right)\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{|x|\\sqrt{1 - \\frac{4}{x^{2}}}}{x} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{-x\\,\\sqrt{1 - \\frac{4}{x^{2}}}}{x} \\qquad \\left(x < 0 \\text{ donc } |x| = -x\\right) \\\\ &= \\lim_{x\\to -\\infty} -\\sqrt{1 - \\frac{4}{x^{2}}} = -\\sqrt{1} = -1 \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{4}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
+       "type": "texte"
+      },
+      {
+       "html": "\\(x^{2} \\to +\\infty\\), donc \\(x^{2} - 4 \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\sqrt{x^{2} - 4} \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "\\(\\sqrt{x^{2} - 4} \\to +\\infty\\) et \\(x \\to -\\infty\\) : forme indéterminée « \\(\\infty - \\infty\\) ».",
+       "type": "texte"
+      },
+      {
+       "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\left(f(x) + x\\right) &= \\lim_{x\\to -\\infty} \\dfrac{\\left(\\sqrt{x^{2} - 4} + x\\right)\\left(\\sqrt{x^{2} - 4} - x\\right)}{\\sqrt{x^{2} - 4} - x} \\qquad \\left(\\text{on multiplie et on divise par la conjuguée } \\sqrt{x^{2} - 4} - x\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{\\left(x^{2} - 4\\right) - x^{2}}{\\sqrt{x^{2} - 4} - x} \\qquad \\left((a - b)(a + b) = a^{2} - b^{2}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{-4}{\\sqrt{x^{2} - 4} - x} = \\dfrac{-4}{+\\infty - \\left(-\\infty\\right)} = 0 \\qquad \\left(\\sqrt{x^{2} - 4} \\to +\\infty\\right)\\end{aligned}\\]",
+       "type": "texte"
+      },
+      {
+       "html": "\\(a = -1\\) et \\(b = 0\\) sont finis (et \\(a \\neq 0\\)) : asymptote oblique d'équation \\(y = -x\\).",
+       "type": "texte"
+      },
+      {
+       "html": "\\[\\begin{aligned}f(x) - \\left(-x\\right) &= \\sqrt{x^{2} - 4} - \\left(-x\\right) \\\\ &= \\dfrac{x^{2} - 4 - \\left(-x\\right)^{2}}{\\sqrt{x^{2} - 4} + -x} \\\\ &= \\dfrac{-4}{\\sqrt{x^{2} - 4} + -x}\\end{aligned}\\]",
+       "type": "texte"
+      },
+      {
+       "html": "Près de \\(-\\infty\\), \\(\\sqrt{x^{2} - 4} + -x\\) est positif (\\(\\sqrt{x^{2} - 4} - -x\\) tend vers 0 et \\(\\sqrt{x^{2} - 4} > 0\\)), et la constante \\(-4\\) est négative : \\(f(x) - \\left(-x\\right)\\) est négatif : la courbe est au-dessous de la droite.",
        "type": "texte"
       }
      ],
@@ -1638,7 +1722,51 @@
        "type": "texte"
       },
       {
-       "html": "On compare \\(f(x)\\) à une droite : \\(a = \\displaystyle\\lim \\frac{f(x)}{x} = 1\\) et \\(b = \\displaystyle\\lim \\left(f(x) - 1x\\right) = 0\\) sont finis (et \\(a \\neq 0\\)) : asymptote oblique.",
+       "html": "On cherche une asymptote oblique d'équation \\(y = ax + b\\) : \\(a = \\displaystyle\\lim \\frac{f(x)}{x}\\), puis \\(b = \\displaystyle\\lim \\left(f(x) - ax\\right)\\).",
+       "type": "texte"
+      },
+      {
+       "html": "\\(x^{2} \\to +\\infty\\), donc \\(x^{2} - 4 \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\sqrt{x^{2} - 4} \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Le numérateur \\(\\sqrt{x^{2} - 4}\\) tend vers \\(+\\infty\\) et le dénominateur \\(x\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+       "type": "texte"
+      },
+      {
+       "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\dfrac{f(x)}{x} &= \\lim_{x\\to +\\infty} \\dfrac{\\sqrt{x^{2}\\left(1 - \\frac{4}{x^{2}}\\right)}}{x} \\qquad \\left(x^{2} - 4 = x^{2}\\left(1 - \\frac{4}{x^{2}}\\right)\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{|x|\\sqrt{1 - \\frac{4}{x^{2}}}}{x} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x\\,\\sqrt{1 - \\frac{4}{x^{2}}}}{x} \\qquad \\left(x > 0 \\text{ donc } |x| = x\\right) \\\\ &= \\lim_{x\\to +\\infty} \\sqrt{1 - \\frac{4}{x^{2}}} = \\sqrt{1} = 1 \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{4}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
+       "type": "texte"
+      },
+      {
+       "html": "\\(x^{2} \\to +\\infty\\), donc \\(x^{2} - 4 \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\sqrt{x^{2} - 4} \\to +\\infty\\).",
+       "type": "texte"
+      },
+      {
+       "html": "\\(\\sqrt{x^{2} - 4} \\to +\\infty\\) et \\(x \\to +\\infty\\) : forme indéterminée « \\(\\infty - \\infty\\) ».",
+       "type": "texte"
+      },
+      {
+       "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\left(f(x) - x\\right) &= \\lim_{x\\to +\\infty} \\dfrac{\\left(\\sqrt{x^{2} - 4} - x\\right)\\left(\\sqrt{x^{2} - 4} + x\\right)}{\\sqrt{x^{2} - 4} + x} \\qquad \\left(\\text{on multiplie et on divise par la conjuguée } \\sqrt{x^{2} - 4} + x\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{\\left(x^{2} - 4\\right) - x^{2}}{\\sqrt{x^{2} - 4} + x} \\qquad \\left((a - b)(a + b) = a^{2} - b^{2}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{-4}{\\sqrt{x^{2} - 4} + x} = \\dfrac{-4}{+\\infty + \\left(+\\infty\\right)} = 0 \\qquad \\left(\\sqrt{x^{2} - 4} \\to +\\infty\\right)\\end{aligned}\\]",
+       "type": "texte"
+      },
+      {
+       "html": "\\(a = 1\\) et \\(b = 0\\) sont finis (et \\(a \\neq 0\\)) : asymptote oblique d'équation \\(y = x\\).",
+       "type": "texte"
+      },
+      {
+       "html": "\\[\\begin{aligned}f(x) - \\left(x\\right) &= \\sqrt{x^{2} - 4} - \\left(x\\right) \\\\ &= \\dfrac{x^{2} - 4 - \\left(x\\right)^{2}}{\\sqrt{x^{2} - 4} + x} \\\\ &= \\dfrac{-4}{\\sqrt{x^{2} - 4} + x}\\end{aligned}\\]",
+       "type": "texte"
+      },
+      {
+       "html": "Près de \\(+\\infty\\), \\(\\sqrt{x^{2} - 4} + x\\) est positif (\\(\\sqrt{x^{2} - 4} - x\\) tend vers 0 et \\(\\sqrt{x^{2} - 4} > 0\\)), et la constante \\(-4\\) est négative : \\(f(x) - \\left(x\\right)\\) est négatif : la courbe est au-dessous de la droite.",
        "type": "texte"
       }
      ],
