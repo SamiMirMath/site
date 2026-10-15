@@ -55,6 +55,21 @@ details ul{margin:.4em 0 0;padding-left:1.2em}
 .final{border:2px solid var(--good)}
 .bilan{margin-top:8px}
 .bilan li{margin:6px 0}
+.tsigne{overflow-x:auto;margin:14px 0}
+.tsigne table{border-collapse:collapse;font-size:1.12rem}
+.tsigne td{border:1px solid var(--border);padding:9px 14px;text-align:center;white-space:nowrap;min-width:32px}
+.tsigne tr:first-child td{background:var(--eq)}
+.tsigne td.lab{text-align:left;padding-right:12px}
+.tsigne tr.final td{font-weight:700;border-top:2px solid var(--fg)}
+.tsigne tr.variation td{border-top:2px solid var(--fg)}
+.tsigne .p{color:var(--good);font-weight:700}
+.tsigne .m{color:var(--bad);font-weight:700}
+/* Double barre d'une valeur interdite : un seul trait double, centré dans la colonne (donc sous la valeur
+   écrite dans l'en-tête), continu d'une ligne à l'autre (le pseudo-élément recouvre les filets horizontaux). */
+.tsigne td.vi{position:relative;padding:5px 2px}
+.tsigne td.vi::after{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:3px;transform:translateX(-50%);border-left:2px solid var(--fg);border-right:2px solid var(--fg);background:var(--card);z-index:1;pointer-events:none}
+.tsigne .pt{color:var(--accent);font-weight:700}
+.tsigne .hors{background:repeating-linear-gradient(45deg,transparent 0 4px,var(--border) 4px 6px);color:var(--muted);-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .cache{display:none}
 
 @media print{
@@ -242,10 +257,39 @@ function carteRappel(r){
     <div class="muted" style="margin-top:4px">${K("ED = "+r.ed_tex)} — détail dans l'outil « Ensemble de définition ».</div>`;
   math(d); return d;
 }
+/* ---------- rendu des tableaux de signes (même rendu que les outils ED et Dérivée) ---------- */
+function tableau(t){
+  const k=t.crit.length;
+  const cl=s=>{
+    if(s==="+") return '<td class="p">+</td>';
+    if(s==="-") return '<td class="m">−</td>';
+    if(s==="||"||s==="asym") return '<td class="vi"></td>';
+    if(s==="x") return '<td class="hors" aria-label="hors de l\'ensemble de définition"></td>';
+    if(s==="\\nearrow"||s==="\\searrow"||s==="\\rightarrow") return `<td>${K(s)}</td>`;
+    if(s.startsWith("val:")) return `<td class="pt">${K(s.slice(4))}</td>`;
+    if(s==="extremum") return '<td class="pt">•</td>';
+    return `<td>${s}</td>`;
+  };
+  let h='<div class="tsigne"><table><tr><td class="lab">'+K(t.var)+'</td><td>'+K("-\\infty")+'</td>';
+  for(let i=0;i<k;i++) h+='<td></td><td>'+K(t.crit[i])+'</td>';
+  h+='<td></td><td>'+K("+\\infty")+'</td></tr>';
+  t.rows.forEach(r=>{
+    const classe=r.final?"final":r.variation?"variation":"";
+    h+=`<tr class="${classe}"><td class="lab">${K(r.label)}</td><td></td>`+r.cells.map(cl).join("")+'<td></td></tr>';
+  });
+  return h+'</table></div>';
+}
+
 function carteEtude(et){
   const d=document.createElement("div"); d.className="card cond";
   let h=`<h3>${K(et.ou)}<span class="badge">limite</span></h3>`;
-  et.etapes.forEach(it=>{ h+=`<div class="etape">${it.html}</div>`; if(it.detail) console.error(it.detail); });
+  et.etapes.forEach(it=>{ h+= it.type==="tableau"?tableau(it):`<div class="etape">${it.html}</div>`; if(it.detail) console.error(it.detail); });
+  d.innerHTML=h; math(d); return d;
+}
+function carteTableaux(items){
+  const d=document.createElement("div"); d.className="card cond";
+  let h=`<h3>Tableaux de signes<span class="badge">tableau</span></h3>`;
+  items.forEach(it=>{ h+= it.type==="tableau"?tableau(it):`<div class="etape">${it.html}</div>`; });
   d.innerHTML=h; math(d); return d;
 }
 function ligneAsymptote(a){
@@ -292,6 +336,7 @@ function afficher(r){
   $("resultat").hidden=false; const box=$("cartes"); box.innerHTML=""; cartes=[];
   if(!r.ok){ const d=document.createElement("div"); d.className="card err"; d.textContent=r.erreur; box.appendChild(d); $("suivant").disabled=$("tout").disabled=true; $("progression").textContent=""; return; }
   cartes.push(carteRappel(r));
+  if((r.tableaux_signe||[]).length) cartes.push(carteTableaux(r.tableaux_signe));
   r.etudes.forEach(et=>cartes.push(carteEtude(et)));
   cartes.push(carteBilan(r));
   cartes.forEach(c=>{ c.classList.add("cache"); box.appendChild(c); });

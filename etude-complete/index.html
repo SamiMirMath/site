@@ -298,6 +298,12 @@ function carteSigneVariations(dv){
   }
   d.innerHTML=h; math(d); return d;
 }
+function carteTableaux(items){
+  const d=document.createElement("div"); d.className="card cond";
+  let h=`<h3>Tableaux de signes<span class="badge">tableau</span></h3>`;
+  items.forEach(it=>{ h+= it.type==="tableau"?tableau(it):`<div class="etape">${it.html}</div>`; });
+  d.innerHTML=h; math(d); return d;
+}
 function carteLimiteEtude(et){
   const d=document.createElement("div"); d.className="card cond";
   let h=`<h3>${K(et.ou)}<span class="badge">limite</span></h3>`;
@@ -639,6 +645,7 @@ function afficher(r){
     cartes.push(carteDerivee(r.derivee));
     if(r.derivee.signe_resolu) cartes.push(carteSigneVariations(r.derivee));
   }
+  if((r.limites.tableaux_signe||[]).length) cartes.push(carteTableaux(r.limites.tableaux_signe));
   r.limites.etudes.forEach(et=>cartes.push(carteLimiteEtude(et)));
   cartes.push(carteBilanAsymptotes(r.limites));
   cartes.push(carteGraphique(r.graphique, r.derivee.extrema||[], r.limites.asymptotes||[]));

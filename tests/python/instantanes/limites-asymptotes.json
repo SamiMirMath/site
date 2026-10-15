@@ -97,19 +97,15 @@
       "type": "texte"
      },
      {
-      "html": "Le numérateur \\(2x + 1\\) vaut \\(2 \\cdot 1 + 1 = 3\\) et le dénominateur \\(x - 1\\) tend vers \\(0\\).",
+      "html": "Le numérateur \\(2x + 1\\) vaut \\(2 \\cdot 1 + 1 = 3\\) et le dénominateur \\(x - 1\\) tend vers \\(0\\) (voir le tableau de signes).",
       "type": "texte"
      },
      {
-      "html": "Signe de \\(x - 1\\) : négatif pour \\(x < 1\\), positif pour \\(x > 1\\).",
+      "html": "À gauche de \\(1\\), le dénominateur est négatif : il tend vers \\(0^{-}\\), donc \\(f(x) \\to \\dfrac{3}{0^{-}} = -\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "À gauche : \\(x - 1 \\to 0^{-}\\), donc \\(f(x) \\to \\dfrac{3}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "À droite : \\(x - 1 \\to 0^{+}\\), donc \\(f(x) \\to \\dfrac{3}{0^{+}} = +\\infty\\).",
+      "html": "À droite de \\(1\\), le dénominateur est positif : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{3}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -121,7 +117,31 @@
    }
   ],
   "f_tex": "\\frac{2x + 1}{x - 1}",
-  "ok": true
+  "ok": true,
+  "tableaux_signe": [
+   {
+    "html": "Signe du dénominateur \\(x - 1\\) :",
+    "type": "texte"
+   },
+   {
+    "crit": [
+     "1"
+    ],
+    "rows": [
+     {
+      "cells": [
+       "-",
+       "||",
+       "+"
+      ],
+      "final": true,
+      "label": "x - 1"
+     }
+    ],
+    "type": "tableau",
+    "var": "x"
+   }
+  ]
  },
  "(2x^2+1)/(x^2-1)": {
   "asymptotes": [
@@ -229,19 +249,15 @@
       "type": "texte"
      },
      {
-      "html": "Le numérateur \\(2x^{2} + 1\\) vaut \\(2\\left(-1\\right)^{2} + 1 = 3\\) et le dénominateur \\(x^{2} - 1\\) tend vers \\(0\\).",
+      "html": "Le numérateur \\(2x^{2} + 1\\) vaut \\(2\\left(-1\\right)^{2} + 1 = 3\\) et le dénominateur \\(x^{2} - 1\\) tend vers \\(0\\) (voir le tableau de signes).",
       "type": "texte"
      },
      {
-      "html": "Signe de \\(x^{2} - 1 = \\left(x - 1\\right)\\,\\left(x + 1\\right)\\) : près de \\(-1\\), \\(x - 1\\) est négatif (il vaut \\(-2\\)), donc \\(x^{2} - 1\\) est positif pour \\(x < -1\\), négatif pour \\(x > -1\\).",
+      "html": "À gauche de \\(-1\\), le dénominateur est positif : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{3}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "À gauche : \\(x^{2} - 1 \\to 0^{+}\\), donc \\(f(x) \\to \\dfrac{3}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "À droite : \\(x^{2} - 1 \\to 0^{-}\\), donc \\(f(x) \\to \\dfrac{3}{0^{-}} = -\\infty\\).",
+      "html": "À droite de \\(-1\\), le dénominateur est négatif : il tend vers \\(0^{-}\\), donc \\(f(x) \\to \\dfrac{3}{0^{-}} = -\\infty\\).",
       "type": "texte"
      },
      {
@@ -258,19 +274,15 @@
       "type": "texte"
      },
      {
-      "html": "Le numérateur \\(2x^{2} + 1\\) vaut \\(2 \\cdot 1^{2} + 1 = 3\\) et le dénominateur \\(x^{2} - 1\\) tend vers \\(0\\).",
+      "html": "Le numérateur \\(2x^{2} + 1\\) vaut \\(2 \\cdot 1^{2} + 1 = 3\\) et le dénominateur \\(x^{2} - 1\\) tend vers \\(0\\) (voir le tableau de signes).",
       "type": "texte"
      },
      {
-      "html": "Signe de \\(x^{2} - 1 = \\left(x + 1\\right)\\,\\left(x - 1\\right)\\) : près de \\(1\\), \\(x + 1\\) est positif (il vaut \\(2\\)), donc \\(x^{2} - 1\\) est négatif pour \\(x < 1\\), positif pour \\(x > 1\\).",
+      "html": "À gauche de \\(1\\), le dénominateur est négatif : il tend vers \\(0^{-}\\), donc \\(f(x) \\to \\dfrac{3}{0^{-}} = -\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "À gauche : \\(x^{2} - 1 \\to 0^{-}\\), donc \\(f(x) \\to \\dfrac{3}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "À droite : \\(x^{2} - 1 \\to 0^{+}\\), donc \\(f(x) \\to \\dfrac{3}{0^{+}} = +\\infty\\).",
+      "html": "À droite de \\(1\\), le dénominateur est positif : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{3}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -282,7 +294,54 @@
    }
   ],
   "f_tex": "\\frac{2x^{2} + 1}{x^{2} - 1}",
-  "ok": true
+  "ok": true,
+  "tableaux_signe": [
+   {
+    "html": "Signe du dénominateur \\(x^{2} - 1\\) :",
+    "type": "texte"
+   },
+   {
+    "crit": [
+     "-1",
+     "1"
+    ],
+    "rows": [
+     {
+      "cells": [
+       "-",
+       "||",
+       "+",
+       "||",
+       "+"
+      ],
+      "label": "x + 1 \\ (\\text{dén.})"
+     },
+     {
+      "cells": [
+       "-",
+       "||",
+       "-",
+       "||",
+       "+"
+      ],
+      "label": "x - 1 \\ (\\text{dén.})"
+     },
+     {
+      "cells": [
+       "+",
+       "||",
+       "-",
+       "||",
+       "+"
+      ],
+      "final": true,
+      "label": "x^{2} - 1"
+     }
+    ],
+    "type": "tableau",
+    "var": "x"
+   }
+  ]
  },
  "(e^x-1)/x": {
   "asymptotes": [
@@ -354,7 +413,8 @@
    }
   ],
   "f_tex": "\\frac{e^{x} - 1}{x}",
-  "ok": true
+  "ok": true,
+  "tableaux_signe": []
  },
  "(x^2-1)/(x-1)": {
   "asymptotes": [
@@ -490,7 +550,8 @@
    }
   ],
   "f_tex": "\\frac{x^{2} - 1}{x - 1}",
-  "ok": true
+  "ok": true,
+  "tableaux_signe": []
  },
  "(x^2-1)/(x-3)": {
   "asymptotes": [
@@ -606,19 +667,15 @@
       "type": "texte"
      },
      {
-      "html": "Le numérateur \\(x^{2} - 1\\) vaut \\(3^{2} - 1 = 8\\) et le dénominateur \\(x - 3\\) tend vers \\(0\\).",
+      "html": "Le numérateur \\(x^{2} - 1\\) vaut \\(3^{2} - 1 = 8\\) et le dénominateur \\(x - 3\\) tend vers \\(0\\) (voir le tableau de signes).",
       "type": "texte"
      },
      {
-      "html": "Signe de \\(x - 3\\) : négatif pour \\(x < 3\\), positif pour \\(x > 3\\).",
+      "html": "À gauche de \\(3\\), le dénominateur est négatif : il tend vers \\(0^{-}\\), donc \\(f(x) \\to \\dfrac{8}{0^{-}} = -\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "À gauche : \\(x - 3 \\to 0^{-}\\), donc \\(f(x) \\to \\dfrac{8}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "À droite : \\(x - 3 \\to 0^{+}\\), donc \\(f(x) \\to \\dfrac{8}{0^{+}} = +\\infty\\).",
+      "html": "À droite de \\(3\\), le dénominateur est positif : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{8}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -630,7 +687,31 @@
    }
   ],
   "f_tex": "\\frac{x^{2} - 1}{x - 3}",
-  "ok": true
+  "ok": true,
+  "tableaux_signe": [
+   {
+    "html": "Signe du dénominateur \\(x - 3\\) :",
+    "type": "texte"
+   },
+   {
+    "crit": [
+     "3"
+    ],
+    "rows": [
+     {
+      "cells": [
+       "-",
+       "||",
+       "+"
+      ],
+      "final": true,
+      "label": "x - 3"
+     }
+    ],
+    "type": "tableau",
+    "var": "x"
+   }
+  ]
  },
  "(x^3+1)/(x-2)": {
   "asymptotes": [
@@ -736,19 +817,15 @@
       "type": "texte"
      },
      {
-      "html": "Le numérateur \\(x^{3} + 1\\) vaut \\(2^{3} + 1 = 9\\) et le dénominateur \\(x - 2\\) tend vers \\(0\\).",
+      "html": "Le numérateur \\(x^{3} + 1\\) vaut \\(2^{3} + 1 = 9\\) et le dénominateur \\(x - 2\\) tend vers \\(0\\) (voir le tableau de signes).",
       "type": "texte"
      },
      {
-      "html": "Signe de \\(x - 2\\) : négatif pour \\(x < 2\\), positif pour \\(x > 2\\).",
+      "html": "À gauche de \\(2\\), le dénominateur est négatif : il tend vers \\(0^{-}\\), donc \\(f(x) \\to \\dfrac{9}{0^{-}} = -\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "À gauche : \\(x - 2 \\to 0^{-}\\), donc \\(f(x) \\to \\dfrac{9}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "À droite : \\(x - 2 \\to 0^{+}\\), donc \\(f(x) \\to \\dfrac{9}{0^{+}} = +\\infty\\).",
+      "html": "À droite de \\(2\\), le dénominateur est positif : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{9}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -760,7 +837,31 @@
    }
   ],
   "f_tex": "\\frac{x^{3} + 1}{x - 2}",
-  "ok": true
+  "ok": true,
+  "tableaux_signe": [
+   {
+    "html": "Signe du dénominateur \\(x - 2\\) :",
+    "type": "texte"
+   },
+   {
+    "crit": [
+     "2"
+    ],
+    "rows": [
+     {
+      "cells": [
+       "-",
+       "||",
+       "+"
+      ],
+      "final": true,
+      "label": "x - 2"
+     }
+    ],
+    "type": "tableau",
+    "var": "x"
+   }
+  ]
  },
  "1/(x-2)": {
   "asymptotes": [
@@ -828,19 +929,15 @@
       "type": "texte"
      },
      {
-      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x - 2\\) tend vers \\(0\\).",
+      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x - 2\\) tend vers \\(0\\) (voir le tableau de signes).",
       "type": "texte"
      },
      {
-      "html": "Signe de \\(x - 2\\) : négatif pour \\(x < 2\\), positif pour \\(x > 2\\).",
+      "html": "À gauche de \\(2\\), le dénominateur est négatif : il tend vers \\(0^{-}\\), donc \\(f(x) \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "À gauche : \\(x - 2 \\to 0^{-}\\), donc \\(f(x) \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "À droite : \\(x - 2 \\to 0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
+      "html": "À droite de \\(2\\), le dénominateur est positif : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -852,7 +949,31 @@
    }
   ],
   "f_tex": "\\frac{1}{x - 2}",
-  "ok": true
+  "ok": true,
+  "tableaux_signe": [
+   {
+    "html": "Signe du dénominateur \\(x - 2\\) :",
+    "type": "texte"
+   },
+   {
+    "crit": [
+     "2"
+    ],
+    "rows": [
+     {
+      "cells": [
+       "-",
+       "||",
+       "+"
+      ],
+      "final": true,
+      "label": "x - 2"
+     }
+    ],
+    "type": "tableau",
+    "var": "x"
+   }
+  ]
  },
  "1/(x^2-2)": {
   "asymptotes": [
@@ -928,19 +1049,15 @@
       "type": "texte"
      },
      {
-      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x^{2} - 2\\) tend vers \\(0\\).",
+      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x^{2} - 2\\) tend vers \\(0\\) (voir le tableau de signes).",
       "type": "texte"
      },
      {
-      "html": "Signe de \\(x^{2} - 2\\) (trinôme, racines \\(- \\sqrt{2}\\) et \\(\\sqrt{2}\\)) : positif pour \\(x < - \\sqrt{2}\\), négatif entre \\(- \\sqrt{2}\\) et \\(\\sqrt{2}\\).",
+      "html": "À gauche de \\(-\\sqrt{2}\\), le dénominateur est positif : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "À gauche : \\(x^{2} - 2 \\to 0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "À droite : \\(x^{2} - 2 \\to 0^{-}\\), donc \\(f(x) \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
+      "html": "À droite de \\(-\\sqrt{2}\\), le dénominateur est négatif : il tend vers \\(0^{-}\\), donc \\(f(x) \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
       "type": "texte"
      },
      {
@@ -957,19 +1074,15 @@
       "type": "texte"
      },
      {
-      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x^{2} - 2\\) tend vers \\(0\\).",
+      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x^{2} - 2\\) tend vers \\(0\\) (voir le tableau de signes).",
       "type": "texte"
      },
      {
-      "html": "Signe de \\(x^{2} - 2\\) (trinôme, racines \\(- \\sqrt{2}\\) et \\(\\sqrt{2}\\)) : négatif entre \\(- \\sqrt{2}\\) et \\(\\sqrt{2}\\), positif pour \\(x > \\sqrt{2}\\).",
+      "html": "À gauche de \\(\\sqrt{2}\\), le dénominateur est négatif : il tend vers \\(0^{-}\\), donc \\(f(x) \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "À gauche : \\(x^{2} - 2 \\to 0^{-}\\), donc \\(f(x) \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "À droite : \\(x^{2} - 2 \\to 0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
+      "html": "À droite de \\(\\sqrt{2}\\), le dénominateur est positif : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -981,7 +1094,34 @@
    }
   ],
   "f_tex": "\\frac{1}{x^{2} - 2}",
-  "ok": true
+  "ok": true,
+  "tableaux_signe": [
+   {
+    "html": "Signe du dénominateur \\(x^{2} - 2\\) :",
+    "type": "texte"
+   },
+   {
+    "crit": [
+     "-\\sqrt{2}",
+     "\\sqrt{2}"
+    ],
+    "rows": [
+     {
+      "cells": [
+       "+",
+       "||",
+       "-",
+       "||",
+       "+"
+      ],
+      "final": true,
+      "label": "x^{2} - 2"
+     }
+    ],
+    "type": "tableau",
+    "var": "x"
+   }
+  ]
  },
  "1/x^2": {
   "asymptotes": [
@@ -1049,15 +1189,15 @@
       "type": "texte"
      },
      {
-      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x^{2}\\) tend vers \\(0\\).",
+      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x^{2}\\) tend vers \\(0\\) (voir le tableau de signes).",
       "type": "texte"
      },
      {
-      "html": "Signe de \\(x^{2}\\) : positif pour \\(x \\neq 0\\), car une puissance paire est positive.",
+      "html": "De part et d'autre de \\(0\\), le dénominateur est positif : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "\\(x^{2} \\to 0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to 0} f(x) = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -1069,7 +1209,31 @@
    }
   ],
   "f_tex": "\\frac{1}{x^{2}}",
-  "ok": true
+  "ok": true,
+  "tableaux_signe": [
+   {
+    "html": "Signe du dénominateur \\(x^{2}\\) :",
+    "type": "texte"
+   },
+   {
+    "crit": [
+     "0"
+    ],
+    "rows": [
+     {
+      "cells": [
+       "+",
+       "||",
+       "+"
+      ],
+      "final": true,
+      "label": "x^{2}"
+     }
+    ],
+    "type": "tableau",
+    "var": "x"
+   }
+  ]
  },
  "e^(1/x)": {
   "asymptotes": [
@@ -1139,15 +1303,11 @@
       "type": "texte"
      },
      {
-      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x\\) tend vers \\(0\\).",
+      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x\\) tend vers \\(0\\) (voir le tableau de signes).",
       "type": "texte"
      },
      {
-      "html": "Signe de \\(x\\) : négatif pour \\(x < 0\\), positif pour \\(x > 0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "À gauche : \\(x \\to 0^{-}\\), donc \\(\\frac{1}{x} \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
+      "html": "À gauche de \\(0\\), le dénominateur est négatif : il tend vers \\(0^{-}\\), donc \\(\\frac{1}{x} \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
       "type": "texte"
      },
      {
@@ -1155,7 +1315,7 @@
       "type": "texte"
      },
      {
-      "html": "À droite : \\(x \\to 0^{+}\\), donc \\(\\frac{1}{x} \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
+      "html": "À droite de \\(0\\), le dénominateur est positif : il tend vers \\(0^{+}\\), donc \\(\\frac{1}{x} \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -1171,7 +1331,31 @@
    }
   ],
   "f_tex": "e^{\\frac{1}{x}}",
-  "ok": true
+  "ok": true,
+  "tableaux_signe": [
+   {
+    "html": "Signe du dénominateur \\(x\\) :",
+    "type": "texte"
+   },
+   {
+    "crit": [
+     "0"
+    ],
+    "rows": [
+     {
+      "cells": [
+       "-",
+       "||",
+       "+"
+      ],
+      "final": true,
+      "label": "x"
+     }
+    ],
+    "type": "tableau",
+    "var": "x"
+   }
+  ]
  },
  "e^(2x)": {
   "asymptotes": [
@@ -1220,7 +1404,8 @@
    }
   ],
   "f_tex": "e^{2x}",
-  "ok": true
+  "ok": true,
+  "tableaux_signe": []
  },
  "e^x/x": {
   "asymptotes": [
@@ -1281,19 +1466,15 @@
       "type": "texte"
      },
      {
-      "html": "Le numérateur \\(e^{x}\\) vaut \\(e^{0} = 1\\) et le dénominateur \\(x\\) tend vers \\(0\\).",
+      "html": "Le numérateur \\(e^{x}\\) vaut \\(e^{0} = 1\\) et le dénominateur \\(x\\) tend vers \\(0\\) (voir le tableau de signes).",
       "type": "texte"
      },
      {
-      "html": "Signe de \\(x\\) : négatif pour \\(x < 0\\), positif pour \\(x > 0\\).",
+      "html": "À gauche de \\(0\\), le dénominateur est négatif : il tend vers \\(0^{-}\\), donc \\(f(x) \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "À gauche : \\(x \\to 0^{-}\\), donc \\(f(x) \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "À droite : \\(x \\to 0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
+      "html": "À droite de \\(0\\), le dénominateur est positif : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -1305,7 +1486,31 @@
    }
   ],
   "f_tex": "\\frac{e^{x}}{x}",
-  "ok": true
+  "ok": true,
+  "tableaux_signe": [
+   {
+    "html": "Signe du dénominateur \\(x\\) :",
+    "type": "texte"
+   },
+   {
+    "crit": [
+     "0"
+    ],
+    "rows": [
+     {
+      "cells": [
+       "-",
+       "||",
+       "+"
+      ],
+      "final": true,
+      "label": "x"
+     }
+    ],
+    "type": "tableau",
+    "var": "x"
+   }
+  ]
  },
  "ln(x)": {
   "asymptotes": [
@@ -1351,7 +1556,8 @@
    }
   ],
   "f_tex": "\\ln(x)",
-  "ok": true
+  "ok": true,
+  "tableaux_signe": []
  },
  "ln(x-1)": {
   "asymptotes": [
@@ -1372,11 +1578,11 @@
       "type": "texte"
      },
      {
-      "html": "Signe de \\(x - 1\\) : positif pour \\(x > 1\\).",
+      "html": "À droite de \\(1\\), l'argument \\(x - 1\\) est positif : il tend vers \\(0^{+}\\).",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\) et \\(x - 1 \\to 0^{+}\\), donc \\(\\displaystyle\\lim_{x\\to 1^{+}} f(x) = -\\infty\\).",
+      "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\), donc \\(\\displaystyle\\lim_{x\\to 1^{+}} f(x) = -\\infty\\).",
       "type": "texte"
      },
      {
@@ -1405,7 +1611,31 @@
    }
   ],
   "f_tex": "\\ln\\left(x - 1\\right)",
-  "ok": true
+  "ok": true,
+  "tableaux_signe": [
+   {
+    "html": "Signe de l'argument du logarithme \\(x - 1\\) :",
+    "type": "texte"
+   },
+   {
+    "crit": [
+     "1"
+    ],
+    "rows": [
+     {
+      "cells": [
+       "-",
+       "0",
+       "+"
+      ],
+      "final": true,
+      "label": "x - 1"
+     }
+    ],
+    "type": "tableau",
+    "var": "x"
+   }
+  ]
  },
  "ln(x^2-4x)/(x-5)": {
   "asymptotes": [
@@ -1483,11 +1713,11 @@
       "type": "texte"
      },
      {
-      "html": "Signe de \\(x^{2} - 4x = x\\,\\left(x - 4\\right)\\) : près de \\(0\\), \\(x - 4\\) est négatif (il vaut \\(-4\\)), donc \\(x^{2} - 4x\\) est positif pour \\(x < 0\\).",
+      "html": "À gauche de \\(0\\), l'argument \\(x^{2} - 4x\\) est positif : il tend vers \\(0^{+}\\).",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\) et \\(x^{2} - 4x \\to 0^{+}\\), donc \\(\\ln\\left(x^{2} - 4x\\right) \\to -\\infty\\).",
+      "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\), donc \\(\\ln\\left(x^{2} - 4x\\right) \\to -\\infty\\).",
       "type": "texte"
      },
      {
@@ -1508,11 +1738,11 @@
       "type": "texte"
      },
      {
-      "html": "Signe de \\(x^{2} - 4x = x\\,\\left(x - 4\\right)\\) : près de \\(4\\), \\(x\\) est positif (il vaut \\(4\\)), donc \\(x^{2} - 4x\\) est positif pour \\(x > 4\\).",
+      "html": "À droite de \\(4\\), l'argument \\(x^{2} - 4x\\) est positif : il tend vers \\(0^{+}\\).",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\) et \\(x^{2} - 4x \\to 0^{+}\\), donc \\(\\ln\\left(x^{2} - 4x\\right) \\to -\\infty\\).",
+      "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\), donc \\(\\ln\\left(x^{2} - 4x\\right) \\to -\\infty\\).",
       "type": "texte"
      },
      {
@@ -1533,19 +1763,15 @@
       "type": "texte"
      },
      {
-      "html": "Le numérateur \\(\\ln\\left(x^{2} - 4x\\right)\\) vaut \\(\\ln\\left(5^{2} - 4 \\cdot 5\\right) = \\ln{\\left(5 \\right)}\\) et le dénominateur \\(x - 5\\) tend vers \\(0\\).",
+      "html": "Le numérateur \\(\\ln\\left(x^{2} - 4x\\right)\\) vaut \\(\\ln\\left(5^{2} - 4 \\cdot 5\\right) = \\ln{\\left(5 \\right)}\\) et le dénominateur \\(x - 5\\) tend vers \\(0\\) (voir le tableau de signes).",
       "type": "texte"
      },
      {
-      "html": "Signe de \\(x - 5\\) : négatif pour \\(x < 5\\), positif pour \\(x > 5\\).",
+      "html": "À gauche de \\(5\\), le dénominateur est négatif : il tend vers \\(0^{-}\\), donc \\(f(x) \\to \\dfrac{\\ln{\\left(5 \\right)}}{0^{-}} = -\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "À gauche : \\(x - 5 \\to 0^{-}\\), donc \\(f(x) \\to \\dfrac{\\ln{\\left(5 \\right)}}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "À droite : \\(x - 5 \\to 0^{+}\\), donc \\(f(x) \\to \\dfrac{\\ln{\\left(5 \\right)}}{0^{+}} = +\\infty\\).",
+      "html": "À droite de \\(5\\), le dénominateur est positif : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{\\ln{\\left(5 \\right)}}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -1557,7 +1783,76 @@
    }
   ],
   "f_tex": "\\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5}",
-  "ok": true
+  "ok": true,
+  "tableaux_signe": [
+   {
+    "html": "Signe de l'argument du logarithme \\(x^{2} - 4x\\) :",
+    "type": "texte"
+   },
+   {
+    "crit": [
+     "0",
+     "4"
+    ],
+    "rows": [
+     {
+      "cells": [
+       "-",
+       "0",
+       "+",
+       "+",
+       "+"
+      ],
+      "label": "x"
+     },
+     {
+      "cells": [
+       "-",
+       "-",
+       "-",
+       "0",
+       "+"
+      ],
+      "label": "x - 4"
+     },
+     {
+      "cells": [
+       "+",
+       "0",
+       "-",
+       "0",
+       "+"
+      ],
+      "final": true,
+      "label": "x^{2} - 4x"
+     }
+    ],
+    "type": "tableau",
+    "var": "x"
+   },
+   {
+    "html": "Signe du dénominateur \\(x - 5\\) :",
+    "type": "texte"
+   },
+   {
+    "crit": [
+     "5"
+    ],
+    "rows": [
+     {
+      "cells": [
+       "-",
+       "||",
+       "+"
+      ],
+      "final": true,
+      "label": "x - 5"
+     }
+    ],
+    "type": "tableau",
+    "var": "x"
+   }
+  ]
  },
  "sqrt(x^2+1)": {
   "asymptotes": [
@@ -1626,7 +1921,8 @@
    }
   ],
   "f_tex": "\\sqrt{x^{2} + 1}",
-  "ok": true
+  "ok": true,
+  "tableaux_signe": []
  },
  "sqrt(x^2-4x+5)": {
   "asymptotes": [
@@ -1707,7 +2003,8 @@
    }
   ],
   "f_tex": "\\sqrt{x^{2} - 4x + 5}",
-  "ok": true
+  "ok": true,
+  "tableaux_signe": []
  },
  "x*e^x": {
   "asymptotes": [
@@ -1753,7 +2050,8 @@
    }
   ],
   "f_tex": "x\\,e^{x}",
-  "ok": true
+  "ok": true,
+  "tableaux_signe": []
  },
  "x*ln(x^2)": {
   "asymptotes": [
@@ -1830,7 +2128,8 @@
    }
   ],
   "f_tex": "x\\,\\ln\\left(x^{2}\\right)",
-  "ok": true
+  "ok": true,
+  "tableaux_signe": []
  },
  "x+ln(x)": {
   "asymptotes": [
@@ -1884,7 +2183,8 @@
    }
   ],
   "f_tex": "x + \\ln(x)",
-  "ok": true
+  "ok": true,
+  "tableaux_signe": []
  },
  "x/sqrt(x^2)": {
   "asymptotes": [
@@ -1966,7 +2266,8 @@
    }
   ],
   "f_tex": "\\frac{x}{\\sqrt{x^{2}}}",
-  "ok": true
+  "ok": true,
+  "tableaux_signe": []
  },
  "x^(1/2)": {
   "asymptotes": [],
@@ -1988,7 +2289,8 @@
   ],
   "f_saisie_tex": "x^{\\frac{1}{2}}",
   "f_tex": "\\sqrt{x}",
-  "ok": true
+  "ok": true,
+  "tableaux_signe": []
  },
  "x^2*e^(-x)": {
   "asymptotes": [
@@ -2042,7 +2344,8 @@
    }
   ],
   "f_tex": "x^{2}\\,e^{-x}",
-  "ok": true
+  "ok": true,
+  "tableaux_signe": []
  },
  "x^2/(x-1)": {
   "asymptotes": [
@@ -2158,19 +2461,15 @@
       "type": "texte"
      },
      {
-      "html": "Le numérateur \\(x^{2}\\) vaut \\(1^{2} = 1\\) et le dénominateur \\(x - 1\\) tend vers \\(0\\).",
+      "html": "Le numérateur \\(x^{2}\\) vaut \\(1^{2} = 1\\) et le dénominateur \\(x - 1\\) tend vers \\(0\\) (voir le tableau de signes).",
       "type": "texte"
      },
      {
-      "html": "Signe de \\(x - 1\\) : négatif pour \\(x < 1\\), positif pour \\(x > 1\\).",
+      "html": "À gauche de \\(1\\), le dénominateur est négatif : il tend vers \\(0^{-}\\), donc \\(f(x) \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "À gauche : \\(x - 1 \\to 0^{-}\\), donc \\(f(x) \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "À droite : \\(x - 1 \\to 0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
+      "html": "À droite de \\(1\\), le dénominateur est positif : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -2182,6 +2481,30 @@
    }
   ],
   "f_tex": "\\frac{x^{2}}{x - 1}",
-  "ok": true
+  "ok": true,
+  "tableaux_signe": [
+   {
+    "html": "Signe du dénominateur \\(x - 1\\) :",
+    "type": "texte"
+   },
+   {
+    "crit": [
+     "1"
+    ],
+    "rows": [
+     {
+      "cells": [
+       "-",
+       "||",
+       "+"
+      ],
+      "final": true,
+      "label": "x - 1"
+     }
+    ],
+    "type": "tableau",
+    "var": "x"
+   }
+  ]
  }
 }

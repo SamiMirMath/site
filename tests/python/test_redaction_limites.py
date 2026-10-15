@@ -44,9 +44,8 @@ class TestPhrasesExactes(unittest.TestCase):
     def test_logarithme_en_une_valeur_interdite(self):
         self.assertEqual(textes("ln(x-1)", r"x \to 1^+"), [
             r"\(x = 1\) est une valeur interdite : on étudie la limite de \(f\) quand \(x \to 1^{+}\).",
-            r"Signe de \(x - 1\) : positif pour \(x > 1\).",
-            r"Or \(\ln t \to -\infty\) quand \(t \to 0^{+}\) et \(x - 1 \to 0^{+}\), "
-            r"donc \(\displaystyle\lim_{x\to 1^{+}} f(x) = -\infty\).",
+            r"À droite de \(1\), l'argument \(x - 1\) est positif : il tend vers \(0^{+}\).",
+            r"Or \(\ln t \to -\infty\) quand \(t \to 0^{+}\), donc \(\displaystyle\lim_{x\to 1^{+}} f(x) = -\infty\).",
             r"Asymptote verticale d'équation \(x = 1\).",
         ])
 
@@ -60,11 +59,12 @@ class TestPhrasesExactes(unittest.TestCase):
     def test_inverse_d_un_zero_de_signe_connu(self):
         self.assertEqual(textes("e^(1/x)", r"x \to 0"), [
             r"\(x = 0\) est une valeur interdite.",
-            r"Le numérateur vaut \(1\) et le dénominateur \(x\) tend vers \(0\).",
-            r"Signe de \(x\) : négatif pour \(x < 0\), positif pour \(x > 0\).",
-            r"À gauche : \(x \to 0^{-}\), donc \(\frac{1}{x} \to \dfrac{1}{0^{-}} = -\infty\).",
+            r"Le numérateur vaut \(1\) et le dénominateur \(x\) tend vers \(0\) (voir le tableau de signes).",
+            r"À gauche de \(0\), le dénominateur est négatif : il tend vers \(0^{-}\), "
+            r"donc \(\frac{1}{x} \to \dfrac{1}{0^{-}} = -\infty\).",
             r"Or \(e^{t} \to 0^{+}\) quand \(t \to -\infty\), donc \(f(x) \to 0\).",
-            r"À droite : \(x \to 0^{+}\), donc \(\frac{1}{x} \to \dfrac{1}{0^{+}} = +\infty\).",
+            r"À droite de \(0\), le dénominateur est positif : il tend vers \(0^{+}\), "
+            r"donc \(\frac{1}{x} \to \dfrac{1}{0^{+}} = +\infty\).",
             r"Or \(e^{t} \to +\infty\) quand \(t \to +\infty\), donc \(f(x) \to +\infty\).",
             r"Au moins une des deux limites est infinie : asymptote verticale d'équation \(x = 0\).",
         ])
@@ -73,10 +73,12 @@ class TestPhrasesExactes(unittest.TestCase):
         self.assertEqual(textes("ln(x^2-4x)/(x-5)", r"x \to 5"), [
             r"\(x = 5\) est une valeur interdite.",
             r"Le numérateur \(\ln\left(x^{2} - 4x\right)\) vaut "
-            r"\(\ln\left(5^{2} - 4 \cdot 5\right) = \ln{\left(5 \right)}\) et le dénominateur \(x - 5\) tend vers \(0\).",
-            r"Signe de \(x - 5\) : négatif pour \(x < 5\), positif pour \(x > 5\).",
-            r"À gauche : \(x - 5 \to 0^{-}\), donc \(f(x) \to \dfrac{\ln{\left(5 \right)}}{0^{-}} = -\infty\).",
-            r"À droite : \(x - 5 \to 0^{+}\), donc \(f(x) \to \dfrac{\ln{\left(5 \right)}}{0^{+}} = +\infty\).",
+            r"\(\ln\left(5^{2} - 4 \cdot 5\right) = \ln{\left(5 \right)}\) et le dénominateur \(x - 5\) "
+            r"tend vers \(0\) (voir le tableau de signes).",
+            r"À gauche de \(5\), le dénominateur est négatif : il tend vers \(0^{-}\), "
+            r"donc \(f(x) \to \dfrac{\ln{\left(5 \right)}}{0^{-}} = -\infty\).",
+            r"À droite de \(5\), le dénominateur est positif : il tend vers \(0^{+}\), "
+            r"donc \(f(x) \to \dfrac{\ln{\left(5 \right)}}{0^{+}} = +\infty\).",
             r"Au moins une des deux limites est infinie : asymptote verticale d'équation \(x = 5\).",
         ])
 
@@ -86,83 +88,82 @@ class TestPhrasesExactes(unittest.TestCase):
         self.assertIn(r"\(e^{x} + 1 \to 1\) et \(e^{x} - 1 \to -1\), donc \(\displaystyle\lim_{x\to -\infty} f(x) = -1\).", t)
 
 
+def sans_tableau():
+    """Le moteur de signe ne construit aucun tableau : la justification reste en texte."""
+    return mock.patch.object(la, "_construire_tableau", return_value=None)
+
+
 class TestValeursInterdites(unittest.TestCase):
-    """Valeur interdite sans forme indéterminée : la partie commune une seule fois (valeur interdite,
-    numérateur, signe du dénominateur), puis une ligne par côté (LA-14, LA-18, règles de style 2 et 3)."""
+    """Valeur interdite sans forme indéterminée : le signe du dénominateur se lit dans le tableau de signes
+    (un seul, en tête), puis une ligne par côté (LA-14, LA-18, LA-25)."""
 
     def test_modele_de_l_enseignant(self):
         self.assertEqual(textes("1/(x^2-2)", r"x \to \sqrt{2}"), [
             r"\(x = \sqrt{2}\) est une valeur interdite.",
-            r"Le numérateur vaut \(1\) et le dénominateur \(x^{2} - 2\) tend vers \(0\).",
-            r"Signe de \(x^{2} - 2\) (trinôme, racines \(- \sqrt{2}\) et \(\sqrt{2}\)) : "
-            r"négatif entre \(- \sqrt{2}\) et \(\sqrt{2}\), positif pour \(x > \sqrt{2}\).",
-            r"À gauche : \(x^{2} - 2 \to 0^{-}\), donc \(f(x) \to \dfrac{1}{0^{-}} = -\infty\).",
-            r"À droite : \(x^{2} - 2 \to 0^{+}\), donc \(f(x) \to \dfrac{1}{0^{+}} = +\infty\).",
+            r"Le numérateur vaut \(1\) et le dénominateur \(x^{2} - 2\) tend vers \(0\) (voir le tableau de signes).",
+            r"À gauche de \(\sqrt{2}\), le dénominateur est négatif : il tend vers \(0^{-}\), "
+            r"donc \(f(x) \to \dfrac{1}{0^{-}} = -\infty\).",
+            r"À droite de \(\sqrt{2}\), le dénominateur est positif : il tend vers \(0^{+}\), "
+            r"donc \(f(x) \to \dfrac{1}{0^{+}} = +\infty\).",
             r"Asymptote verticale d'équation \(x = \sqrt{2}\).",
         ])
-        t = textes("1/(x^2-2)", r"x \to -\sqrt{2}")
-        self.assertEqual(t[2], r"Signe de \(x^{2} - 2\) (trinôme, racines \(- \sqrt{2}\) et \(\sqrt{2}\)) : "
-                               r"positif pour \(x < - \sqrt{2}\), négatif entre \(- \sqrt{2}\) et \(\sqrt{2}\).")
-        self.assertEqual(t[3], r"À gauche : \(x^{2} - 2 \to 0^{+}\), donc \(f(x) \to \dfrac{1}{0^{+}} = +\infty\).")
-        self.assertEqual(t[4], r"À droite : \(x^{2} - 2 \to 0^{-}\), donc \(f(x) \to \dfrac{1}{0^{-}} = -\infty\).")
 
     def test_fraction_rationnelle(self):
         self.assertEqual(textes("(x^2-1)/(x-3)", r"x \to 3"), [
             r"\(x = 3\) est une valeur interdite.",
-            r"Le numérateur \(x^{2} - 1\) vaut \(3^{2} - 1 = 8\) et le dénominateur \(x - 3\) tend vers \(0\).",
-            r"Signe de \(x - 3\) : négatif pour \(x < 3\), positif pour \(x > 3\).",
-            r"À gauche : \(x - 3 \to 0^{-}\), donc \(f(x) \to \dfrac{8}{0^{-}} = -\infty\).",
-            r"À droite : \(x - 3 \to 0^{+}\), donc \(f(x) \to \dfrac{8}{0^{+}} = +\infty\).",
+            r"Le numérateur \(x^{2} - 1\) vaut \(3^{2} - 1 = 8\) et le dénominateur \(x - 3\) tend vers \(0\) "
+            r"(voir le tableau de signes).",
+            r"À gauche de \(3\), le dénominateur est négatif : il tend vers \(0^{-}\), "
+            r"donc \(f(x) \to \dfrac{8}{0^{-}} = -\infty\).",
+            r"À droite de \(3\), le dénominateur est positif : il tend vers \(0^{+}\), "
+            r"donc \(f(x) \to \dfrac{8}{0^{+}} = +\infty\).",
             r"Asymptote verticale d'équation \(x = 3\).",
         ])
 
     def test_denominateur_oppose(self):
         t = textes("5/(3-x)", r"x \to 3")
-        self.assertEqual(t[1], r"Le numérateur vaut \(5\) et le dénominateur \(3 - x\) tend vers \(0\).")
-        self.assertEqual(t[2], r"Signe de \(3 - x = -\left(x - 3\right)\) : positif pour \(x < 3\), négatif pour \(x > 3\).")
-        self.assertEqual(t[3], r"À gauche : \(3 - x \to 0^{+}\), donc \(f(x) \to \dfrac{5}{0^{+}} = +\infty\).")
+        self.assertEqual(t[2], r"À gauche de \(3\), le dénominateur est positif : il tend vers \(0^{+}\), "
+                               r"donc \(f(x) \to \dfrac{5}{0^{+}} = +\infty\).")
 
     def test_meme_limite_des_deux_cotes_une_seule_conclusion(self):
         self.assertEqual(textes("1/(x-1)^2", r"x \to 1"), [
             r"\(x = 1\) est une valeur interdite.",
-            r"Le numérateur vaut \(1\) et le dénominateur \(\left(x - 1\right)^{2}\) tend vers \(0\).",
-            r"Signe de \(\left(x - 1\right)^{2}\) : positif pour \(x \neq 1\), car une puissance paire est positive.",
-            r"\(\left(x - 1\right)^{2} \to 0^{+}\), donc \(f(x) \to \dfrac{1}{0^{+}} = +\infty\).",
+            r"Le numérateur vaut \(1\) et le dénominateur \(\left(x - 1\right)^{2}\) tend vers \(0\) "
+            r"(voir le tableau de signes).",
+            r"De part et d'autre de \(1\), le dénominateur est positif : il tend vers \(0^{+}\), "
+            r"donc \(f(x) \to \dfrac{1}{0^{+}} = +\infty\).",
+            r"Donc \(\displaystyle\lim_{x\to 1} f(x) = +\infty\).",
             r"Asymptote verticale d'équation \(x = 1\).",
         ])
 
-    def test_denominateur_factorise_pour_connaitre_son_signe(self):
+    def test_denominateur_factorise(self):
         t = textes("(x^2-3)/(x^3-3x)", r"x \to 0")
-        self.assertEqual(t[1], r"Le numérateur \(x^{2} - 3\) vaut \(0^{2} - 3 = -3\) et le dénominateur "
-                               r"\(x^{3} - 3x\) tend vers \(0\).")
-        self.assertEqual(t[2], r"Signe de \(x^{3} - 3x = x\,\left(x^{2} - 3\right)\) : près de \(0\), "
-                               r"\(x^{2} - 3\) est négatif (il vaut \(-3\)), donc \(x^{3} - 3x\) est positif pour "
-                               r"\(x < 0\), négatif pour \(x > 0\).")
-        self.assertEqual(t[3], r"À gauche : \(x^{3} - 3x \to 0^{+}\), donc \(f(x) \to \dfrac{-3}{0^{+}} = -\infty\).")
+        self.assertEqual(t[2], r"À gauche de \(0\), le dénominateur est positif : il tend vers \(0^{+}\), "
+                               r"donc \(f(x) \to \dfrac{-3}{0^{+}} = -\infty\).")
 
     def test_signe_par_la_monotonie(self):
         t = textes("(e^x+1)/(e^x-1)", r"x \to 0")
         self.assertEqual(t[1], r"Le numérateur \(e^{x} + 1\) vaut \(e^{0} + 1 = 2\) et le dénominateur "
-                               r"\(e^{x} - 1\) tend vers \(0\).")
-        self.assertEqual(t[2], r"Signe de \(e^{x} - 1\) : \(e^{x}\) est croissante et vaut \(1\) en \(x = 0\), "
-                               r"donc \(e^{x} - 1\) est négatif pour \(x < 0\), positif pour \(x > 0\).")
+                               r"\(e^{x} - 1\) tend vers \(0\) (voir le tableau de signes).")
+        self.assertEqual(t[2], r"À gauche de \(0\), le dénominateur est négatif : il tend vers \(0^{-}\), "
+                               r"donc \(f(x) \to \dfrac{2}{0^{-}} = -\infty\).")
+
+    def test_argument_d_un_logarithme_lu_dans_son_tableau(self):
+        t = textes("ln(x^2-4x)/(x-5)", r"x \to 4^+")
+        self.assertEqual(t[1], r"À droite de \(4\), l'argument \(x^{2} - 4x\) est positif : il tend vers \(0^{+}\).")
+        self.assertEqual(t[2], r"Or \(\ln t \to -\infty\) quand \(t \to 0^{+}\), donc \(\ln\left(x^{2} - 4x\right) \to -\infty\).")
+        self.assertEqual(t[-1], r"Asymptote verticale d'équation \(x = 4\).")
 
     def test_zero_de_signe_connu_en_un_point_irrationnel(self):
         t = textes("ln(x^2-3)", r"x \to \sqrt{3}^+")
-        self.assertEqual(t[1], r"Signe de \(x^{2} - 3\) (trinôme, racines \(- \sqrt{3}\) et \(\sqrt{3}\)) : "
-                               r"positif pour \(x > \sqrt{3}\).")
+        self.assertEqual(t[1], r"À droite de \(\sqrt{3}\), l'argument \(x^{2} - 3\) est positif : il tend vers \(0^{+}\).")
 
     def test_zero_de_signe_inconnu_donne_le_repli(self):
-        """Pas de factorisation possible au point irrationnel d'un polynôme de degré 3 : le signe n'est pas inventé."""
-        etape = etapes("ln(x^3-3x)", r"x \to \sqrt{3}^+")[1]
+        """Pas de tableau ni de factorisation au point irrationnel d'un polynôme de degré 3 : le signe n'est pas inventé."""
+        with sans_tableau():
+            etape = etapes("ln(x^3-3x)", r"x \to \sqrt{3}^+")[1]
         self.assertEqual(etape["html"], REPLI + r"\(\displaystyle\lim_{x\to {\sqrt{3}}^{+}} f(x) = -\infty\).")
         self.assertIn("signe inconnu", etape["detail"])
-
-    def test_factorisation_dans_un_logarithme(self):
-        t = textes("ln(x^2-4x)/(x-5)", r"x \to 4^+")
-        self.assertEqual(t[1], r"Signe de \(x^{2} - 4x = x\,\left(x - 4\right)\) : près de \(4\), \(x\) est positif "
-                               r"(il vaut \(4\)), donc \(x^{2} - 4x\) est positif pour \(x > 4\).")
-        self.assertEqual(t[-1], r"Asymptote verticale d'équation \(x = 4\).")
 
     def test_chaque_pole_sans_facteur_commun_est_redige(self):
         for entree in ["1/(x-2)", "(2x+1)/(x-1)", "x^2/(x-1)", "1/x^2", "(x^3+1)/(x-2)", "(2x^2+1)/(x^2-1)", "1/(x^2-2)"]:
@@ -174,7 +175,7 @@ class TestValeursInterdites(unittest.TestCase):
                     t = [e["html"] for e in etude["etapes"]]
                     self.assertFalse(any(p.startswith(REPLI) for p in t), t)
                     self.assertEqual(sum(1 for p in t if p.startswith("Le numérateur")), 1)
-                    self.assertEqual(sum(1 for p in t if p.startswith("Signe de")), 1)
+                    self.assertTrue(any(p.startswith(("À gauche de", "De part et d'autre de")) for p in t), t)
                     self.assertTrue(t[-1].startswith("Asymptote verticale d'équation"), t[-1])
 
     def test_garde_fou_sur_un_pole_rationnel(self):
@@ -185,6 +186,75 @@ class TestValeursInterdites(unittest.TestCase):
         t = [e["html"] for e in next(e for e in avec["etudes"] if e["ou"] == r"x \to 2")["etapes"]]
         self.assertEqual(sum(1 for p in t if REPLI[1:] in p), 2)       # un repli par côté (limites différentes)
         self.assertTrue(t[1].startswith("À gauche : ") and t[2].startswith("À droite : "), t)
+
+
+class TestTableauxDeSignes(unittest.TestCase):
+    """Le signe d'un dénominateur (ou de l'argument d'un ln qui tend vers 0) vient du tableau de signes de
+    l'outil « Ensemble de définition » : un tableau en tête, valeurs interdites en double barre (LA-25)."""
+
+    def tableaux(self, entree):
+        return [i for i in la.etudier(entree)["tableaux_signe"] if i.get("type") == "tableau"]
+
+    def test_1_sur_x2_moins_2(self):
+        (t,) = self.tableaux("1/(x^2-2)")
+        self.assertEqual(t["crit"], [r"-\sqrt{2}", r"\sqrt{2}"])
+        self.assertEqual([(r["label"], r["cells"]) for r in t["rows"]], [("x^{2} - 2", ["+", "||", "-", "||", "+"])])
+
+    def test_x_plus_1_sur_x2_moins_4(self):
+        (t,) = self.tableaux("(x+1)/(x^2-4)")
+        self.assertEqual(t["crit"], ["-2", "2"])
+        self.assertEqual([r["cells"] for r in t["rows"]],
+                         [["-", "||", "-", "||", "+"], ["-", "||", "+", "||", "+"], ["+", "||", "-", "||", "+"]])
+        self.assertTrue(t["rows"][-1]["final"])
+
+    def test_exponentielle(self):
+        (t,) = self.tableaux("(e^x+1)/(e^x-1)")
+        self.assertEqual((t["crit"], t["rows"][-1]["cells"]), (["0"], ["-", "||", "+"]))
+
+    def test_logarithme_puis_denominateur(self):
+        ln, den = self.tableaux("ln(x^2-4x)/(x-5)")
+        self.assertEqual(ln["crit"], ["0", "4"])
+        self.assertEqual(ln["rows"][-1]["cells"], ["+", "0", "-", "0", "+"])
+        self.assertEqual((den["crit"], den["rows"][-1]["cells"]), (["5"], ["-", "||", "+"]))
+        titres = [i["html"] for i in la.etudier("ln(x^2-4x)/(x-5)")["tableaux_signe"] if i["type"] == "texte"]
+        self.assertEqual(titres, [r"Signe de l'argument du logarithme \(x^{2} - 4x\) :",
+                                  r"Signe du dénominateur \(x - 5\) :"])
+
+    def test_x2_moins_1_sur_x_moins_3(self):
+        (t,) = self.tableaux("(x^2-1)/(x-3)")
+        self.assertEqual((t["crit"], t["rows"][-1]["cells"]), (["3"], ["-", "||", "+"]))
+
+    def test_aucun_tableau_sans_valeur_interdite_a_signe(self):
+        for entree in ["e^(2x)", "x^2/2", "x^3-3x", "(2x+1)/(x^2+1)"]:
+            self.assertEqual(la.etudier(entree)["tableaux_signe"], [], entree)
+
+    def test_le_tableau_est_lu_et_les_deux_cotes_concordent(self):
+        """La lecture du tableau et le signe calculé par les règles sur les limites doivent coïncider."""
+        for entree in ["1/(x^2-2)", "(x+1)/(x^2-4)", "(e^x+1)/(e^x-1)", "1/(x^2-4x+4)", "(x^2+1)/(x^3-x)"]:
+            r = la.etudier(entree)
+            textes_ = " ".join(e["html"] for et in r["etudes"] for e in et["etapes"])
+            self.assertIn("voir le tableau de signes", textes_, entree)
+            self.assertNotIn("Signe de", textes_, entree)
+
+    def test_sans_tableau_on_garde_la_justification_en_texte(self):
+        with sans_tableau():
+            r = la.etudier("1/(x^2-2)")
+        self.assertEqual(r["tableaux_signe"], [])
+        t = [e["html"] for e in next(e for e in r["etudes"] if e["ou"] == r"x \to \sqrt{2}")["etapes"]]
+        self.assertEqual(t[2], r"Signe de \(x^{2} - 2\) (trinôme, racines \(- \sqrt{2}\) et \(\sqrt{2}\)) : "
+                               r"négatif entre \(- \sqrt{2}\) et \(\sqrt{2}\), positif pour \(x > \sqrt{2}\).")
+        self.assertEqual(t[3], r"À gauche : \(x^{2} - 2 \to 0^{-}\), donc \(f(x) \to \dfrac{1}{0^{-}} = -\infty\).")
+
+    def test_un_tableau_qui_contredit_le_calcul_donne_le_repli(self):
+        class Faux(la.TableauSigne):
+            def lire(self, pt):
+                return -super().lire(pt)
+        vrai = la._construire_tableau("den", la.lire("x-3"))
+        faux = Faux(vrai.genre, vrai.A, vrai.c, vrai.infos, [])
+        with mock.patch.object(la.TABLEAUX, "chercher", return_value=faux):
+            t = etapes("(x^2-1)/(x-3)", r"x \to 3")
+        self.assertTrue(any(REPLI[1:] in e["html"] for e in t))
+        self.assertTrue(any("contredit" in e.get("detail", "") for e in t))
 
 
 class TestMiseEnEvidence(unittest.TestCase):
@@ -304,9 +374,10 @@ class TestZeroSurZero(unittest.TestCase):
     def test_pole_restant_apres_simplification(self):
         t = textes("(x^2-4)/(x^2-4x+4)", r"x \to 2")
         self.assertIn("forme indéterminée « \\(0/0\\) ».", " ".join(t))
-        self.assertIn(r"Le numérateur \(x + 2\) vaut \(2 + 2 = 4\) et le dénominateur \(x - 2\) tend vers \(0\).", t)
-        self.assertIn(r"Signe de \(x - 2\) : négatif pour \(x < 2\), positif pour \(x > 2\).", t)
-        self.assertIn(r"À gauche : \(x - 2 \to 0^{-}\), donc \(f(x) \to \dfrac{4}{0^{-}} = -\infty\).", t)
+        self.assertIn(r"Le numérateur \(x + 2\) vaut \(2 + 2 = 4\) et le dénominateur \(x - 2\) tend vers \(0\) "
+                      r"(voir le tableau de signes).", t)
+        self.assertIn(r"À gauche de \(2\), le dénominateur est négatif : il tend vers \(0^{-}\), "
+                      r"donc \(f(x) \to \dfrac{4}{0^{-}} = -\infty\).", t)
         self.assertEqual(t[-1], r"Asymptote verticale d'équation \(x = 2\).")
 
     def test_aucune_forme_zero_sur_zero_sans_facteur_commun(self):
@@ -464,12 +535,19 @@ class TestStyle(unittest.TestCase):
             if any(REPLI[1:] in p for p in t):
                 continue
             for i, p in enumerate(t):
-                if "tend vers \\(0\\)." in p and p.startswith("Le numérateur"):
+                if p.startswith("Le numérateur") and "tend vers \\(0\\)" in p:
                     with self.subTest(f=entree, ou=ou):
-                        self.assertTrue(t[i + 1].startswith("Signe de"), (t[i], t[i + 1]))
+                        suite = t[i + 1] if "tableau de signes" in p else None
+                        if suite is None:
+                            self.assertTrue(t[i + 1].startswith("Signe de"), (t[i], t[i + 1]))
+                        else:
+                            self.assertTrue(suite.startswith(("À gauche de", "À droite de", "De part et d'autre de")), suite)
                 if r"quand \(t \to 0^{+}\) et" in p:
                     with self.subTest(f=entree, ou=ou):
                         self.assertTrue(any(q.startswith("Signe de") for q in t[:i]), t)
+                if "l'argument" in p and p.startswith(("À gauche de", "À droite de")):
+                    with self.subTest(f=entree, ou=ou):
+                        self.assertIn("tend vers", p)
 
     def test_valeur_interdite_partie_commune_une_seule_fois(self):       # LA-23
         for entree in ["1/(x-2)", "(x^2-1)/(x-3)", "1/(x^2-2)", "(e^x+1)/(e^x-1)", "e^(1/x)", "ln(x^2-4x)/(x-5)",

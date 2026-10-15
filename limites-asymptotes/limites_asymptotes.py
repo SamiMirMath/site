@@ -30,6 +30,7 @@ from ensemble_def import (
     decomposer, r_norm, json_strict, ajouter_saisie,
     _sympy, en_sympy_reel, arbre_depuis_sympy, num_sympy, _SP,
     txt, NonPrisEnCharge, ErreurSaisie, _analyser, apercu_json,
+    signe_facteur, tableau_facteurs, en_sympy, aplatir,
 )
 
 __all__ = ["etudier", "etudier_json", "apercu_json"]
@@ -790,6 +791,114 @@ def _ln_lim(U):
     return Lim.fin(sp.log(U.val), U.ap)
 
 
+# --- tableaux de signes (même moteur que l'outil « Ensemble de définition ») -------------------------
+class TableauSigne:
+    """Tableau de signes du dénominateur ou de l'argument d'un ln, construit par le moteur de l'outil ED."""
+
+    def __init__(self, genre, A, c, infos, items):
+        self.genre, self.A, self.c, self.infos = genre, A, c, infos
+        self.crit = []
+        for (h, k), (D, P, Z) in infos:
+            for S in (D, P, Z):
+                for iv in S:
+                    for pt in (iv.lo, iv.hi):
+                        if pt is not None and not any(proche(pt.val, q.val) for q in self.crit):
+                            self.crit.append(pt)
+        self.crit.sort(key=lambda q: q.val)
+        T = tex(A)
+        titre = (rf"Signe du dénominateur \({T}\) :" if genre == "den"
+                 else rf"Signe de l'argument du logarithme \({T}\) :")
+        gardes = []
+        for i in items:
+            if i.get("type") == "tableau":
+                lignes = i["rows"]
+                if len(lignes) == 2 and lignes[0]["cells"] == lignes[1]["cells"]:
+                    i = dict(i, rows=[lignes[1]])          # un seul facteur : la ligne du facteur répète celle du produit
+                gardes.append(i)
+            elif str(i.get("html", "")).startswith("Les zones hachurées"):
+                gardes.append(i)
+        self.items = [txt(titre)] + gardes
+
+    def signe_en(self, v):
+        s = 1 if self.c > 0 else -1
+        for (h, k), (D, P, Z) in self.infos:
+            if not contient(D, v) or contient(Z, v):
+                return None
+            sf = 1 if contient(P, v) else -1
+            s *= 1 if (sf < 0 and k % 2 == 0) else sf
+        return s
+
+    def lire(self, pt):
+        """Signe de l'expression juste à gauche / à droite du point d'étude (pt.d = ∓1), ou None."""
+        if pt.s or not pt.d:
+            return None
+        try:
+            a = float(pt.a)
+        except Exception:
+            return None
+        if not any(proche(q.val, a) for q in self.crit):
+            return None
+        autres = [q.val for q in self.crit if not proche(q.val, a) and (q.val - a) * pt.d > 0]
+        v = (a + (min(autres) if pt.d > 0 else max(autres))) / 2 if autres else a + pt.d
+        return self.signe_en(v)
+
+
+def _construire_tableau(genre, A):
+    """Tableau de signes de A (genre « den » : dénominateur, les zéros sont des valeurs interdites ; genre
+    « ln » : argument d'un logarithme). None si le moteur de signe ne peut pas le construire."""
+    if sans_x(A):
+        return None
+    c, facs = aplatir(A)
+    sp = _sympy()
+    if len(facs) == 1 and facs[0][1] == 1 and sp is not None:
+        try:
+            A2 = arbre_depuis_sympy(sp.factor(en_sympy(A)))
+            c2, facs2 = aplatir(A2)
+            if len(facs2) > 1 or any(abs(k) > 1 for _, k in facs2):
+                c, facs = c2, facs2
+        except Exception:
+            pass
+    if not facs:
+        return None
+    infos = []
+    for h, k in facs:
+        D, P, Z, _, mode = signe_facteur(h, "x")
+        infos.append(((h, -k if genre == "den" else k), (D, P, Z)))
+    items = []
+    tableau_facteurs(c, infos, ">", tex(A), items)
+    return TableauSigne(genre, A, c, infos, items)
+
+
+class _RegistreTableaux:
+    """Les tableaux de signes construits pendant une étude, et ceux que la rédaction a réellement utilisés."""
+
+    def __init__(self):
+        self.reset()
+
+    def reset(self):
+        self.tables, self.utilises = {}, []
+
+    def chercher(self, genre, A):
+        cle = (genre, A.key())
+        if cle not in self.tables:
+            try:
+                self.tables[cle] = _construire_tableau(genre, A)
+            except Exception:
+                self.tables[cle] = None
+        return self.tables[cle]
+
+    def utiliser(self, genre, A):
+        cle = (genre, A.key())
+        if cle not in self.utilises:
+            self.utilises.append(cle)
+
+    def items(self):
+        return [i for cle in self.utilises for i in self.tables[cle].items]
+
+
+TABLEAUX = _RegistreTableaux()
+
+
 class _Contexte:
     """État d'une rédaction : point d'étude, limites de référence (SymPy) déjà vues, signes déjà justifiés.
     mode : "limite" (conclusion « lim f(x) = … »), "fleche" (une des deux lignes à gauche / à droite)."""
@@ -798,6 +907,7 @@ class _Contexte:
         self.pt, self.f, self.mode = pt, f, mode
         self.refs, self.ap_vus, self.justifies = {}, set(), set()
         self.racine_dite = False
+        self.demandes = []
         if ref_f is not None:
             self.refs[f.key()] = ref_f
 
@@ -827,6 +937,22 @@ class _Contexte:
             raise Abandon(f"limite écrite {L.tex()} ≠ référence {R.tex()} pour {tex(n)}")
         if L.nul() and L.ap and L.ap != R.ap:
             raise Abandon(f"signe d'approche de 0 non confirmé pour {tex(n)}")
+
+    def lecture(self, genre, n, L):
+        """Signe de n (qui tend vers 0 avec un signe d'approche) lu dans le tableau de signes : +1 / −1,
+        ou None s'il n'y a pas de tableau (on garde alors la justification en texte)."""
+        t = TABLEAUX.chercher(genre, n)
+        s = t.lire(self.pt) if t is not None else None
+        if s is None:
+            return None
+        if s != L.ap:
+            raise Abandon("le tableau de signes contredit le signe calculé")
+        self.demandes.append((genre, n))
+        return s
+
+    def cote(self):
+        mot = "À gauche" if self.pt.d < 0 else "À droite"
+        return rf"{mot} de \({self.pt.a_tex}\)"
 
     # --- écriture -------------------------------------------------------------
     def dire(self, n, L):
@@ -1164,7 +1290,8 @@ def _silencieux(n, L, ctx):
 
 
 def _lignes_pole(n, ctx, A, la, B, L):
-    """Quotient dont le dénominateur tend vers 0 : numérateur, signe du dénominateur, puis la limite."""
+    """Quotient dont le dénominateur tend vers 0 : numérateur, puis le signe du dénominateur lu dans le tableau
+    de signes (ou justifié en texte si le tableau est impossible), puis la limite."""
     pt = ctx.pt
     lignes = []
     if sans_x(n.a):
@@ -1175,8 +1302,9 @@ def _lignes_pole(n, ctx, A, la, B, L):
     else:
         lignes += la
         num = rf"Le numérateur \({tex(n.a)}\) tend vers \({A.tex(False)}\)"
-    lignes.append(num + rf" et le dénominateur \({tex(n.b)}\) tend vers \(0\).")
-    lignes += ctx.justifier(n.b, B, force=True)
+    lu = ctx.lecture("den", n.b, B)
+    complement = " (voir le tableau de signes)" if lu is not None else ""
+    lignes.append(num + rf" et le dénominateur \({tex(n.b)}\) tend vers \(0\){complement}.")
     s = "+" if B.ap > 0 else "-"
     fraction = rf"\dfrac{{{A.tex(False)}}}{{0^{{{s}}}}} = {L.tex(False)}"
     if n is ctx.f:
@@ -1187,7 +1315,12 @@ def _lignes_pole(n, ctx, A, la, B, L):
             fin = rf"\(f(x) \to {fraction}\)"
     else:
         fin = rf"\({tex(n)} \to {fraction}\)"
-    lignes.append(rf"\({tex(n.b)} \to 0^{{{s}}}\), donc {fin}.")
+    if lu is not None:
+        mot = "positif" if lu > 0 else "négatif"
+        lignes.append(rf"{ctx.cote()}, le dénominateur est {mot} : il tend vers \(0^{{{s}}}\), donc {fin}.")
+    else:
+        lignes += ctx.justifier(n.b, B, force=True)
+        lignes.append(rf"\({tex(n.b)} \to 0^{{{s}}}\), donc {fin}.")
     return lignes
 
 
@@ -1263,12 +1396,22 @@ def _noeud(n, ctx):
             return L, []
         # le signe d'un argument qui tend vers 0 ne sert que pour ln et pour une puissance
         besoin_signe = U.nul() and U.ap and not (isinstance(n, Fn) and n.nom in ("exp", "sqrt"))
-        pre = ctx.justifier(n.a, U) if besoin_signe else []
+        pre, rappel = [], ""
+        if besoin_signe and not isinstance(n.a, X):
+            if isinstance(n, Fn):
+                genre, quoi, accord = "ln", "l'argument", ("positif", "négatif", "il")
+            else:
+                genre, quoi, accord = ("den" if valeur_constante(n.b) < 0 else "ln"), "la base", ("positive", "négative", "elle")
+            lu_signe = ctx.lecture(genre, n.a, U)
+            if lu_signe is not None:
+                s0 = "+" if U.ap > 0 else "-"
+                pre = [rf"{ctx.cote()}, {quoi} \({tex(n.a)}\) est {accord[0] if lu_signe > 0 else accord[1]} : "
+                       rf"{accord[2]} tend vers \(0^{{{s0}}}\)."]
+            else:
+                pre = ctx.justifier(n.a, U)
+                rappel = rf" et \({tex(n.a)} \to {U.tex()}\)"
         u_tex = U.tex(bool(besoin_signe))
         math, pre_n = ctx.dire(n, L)
-        rappel = ""
-        if besoin_signe and not isinstance(n.a, X):
-            rappel = rf" et \({tex(n.a)} \to {U.tex()}\)"
         return L, lu + pre + pre_n + [rf"Or \({g} \to {L.tex()}\) quand \(t \to {u_tex}\){rappel}, donc {math}."]
     except FormeIndeterminee as fi:
         fi.noeud = n
@@ -1294,6 +1437,8 @@ def _rediger(f, pt, ref, mode="limite"):
         if not _meme_valeur(L, R):
             raise Abandon(f"valeur rédigée {L.tex()} ≠ référence {R.tex()}")
         lignes = _sans_doublons(lignes)
+        for genre, noeud in ctx.demandes:
+            TABLEAUX.utiliser(genre, noeud)
         if mode == "limite" and not ctx.racine_dite:
             lignes.append(rf"Donc \(\displaystyle\lim_{{x\to {pt.tex()}}} f(x) = {L.tex(False)}\).")
         return lignes, None
@@ -1410,16 +1555,27 @@ def _narrer_cotes(f, borne, items, ref_de, cotes=("gauche", "droite")):
 
 
 def _fusion_cotes(gauche, droite):
-    """Lignes communes une seule fois, lignes propres à chaque côté précédées de « À gauche : » / « À droite : »."""
+    """Lignes communes une seule fois, lignes propres à chaque côté précédées de « À gauche : » / « À droite : »
+    (sauf si elles commencent déjà par « À gauche de a, … »). Deux lignes qui ne diffèrent que par le côté
+    deviennent « De part et d'autre de a, … »."""
     import difflib
+    import re
+    motif = re.compile(r"^À (?:gauche|droite) de (.+?), ")
+
+    def normal(l):
+        return motif.sub(r"@ de \1, ", l)
+
     sortie = []
-    for tag, i1, i2, j1, j2 in difflib.SequenceMatcher(None, gauche, droite, autojunk=False).get_opcodes():
+    ng, nd = [normal(l) for l in gauche], [normal(l) for l in droite]
+    for tag, i1, i2, j1, j2 in difflib.SequenceMatcher(None, ng, nd, autojunk=False).get_opcodes():
         if tag == "equal":
-            sortie.extend(gauche[i1:i2])
+            for lg, ld in zip(gauche[i1:i2], droite[j1:j2]):
+                m = motif.match(lg)
+                sortie.append(lg if lg == ld else motif.sub(rf"De part et d'autre de \1, ", lg) if m else lg)
             continue
         for lignes, prefixe in ((gauche[i1:i2], "À gauche : "), (droite[j1:j2], "À droite : ")):
             if lignes:
-                sortie.append(prefixe + lignes[0])
+                sortie.append(lignes[0] if motif.match(lignes[0]) else prefixe + lignes[0])
                 sortie.extend(lignes[1:])
     return sortie
 
@@ -1502,6 +1658,7 @@ def etudier(entree):
     if not res_ed.get("complet"):
         return {"ok": False, "erreur": "L'ensemble de définition n'a pas pu être calculé pour cette fonction."}
 
+    TABLEAUX.reset()
     res = ajouter_saisie({"ok": True, "f_tex": tex(f), "ed_tex": res_ed["ED_tex"], "etudes": [], "asymptotes": []}, f)
 
     try:
@@ -1559,6 +1716,7 @@ def etudier(entree):
 
         res["etudes"].append({"ou": cote_tex, "etapes": items})
 
+    res["tableaux_signe"] = TABLEAUX.items()
     return res
 
 

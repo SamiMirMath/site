@@ -208,7 +208,8 @@
     }
    ],
    "f_tex": "\\frac{e^{x} - 1}{x}",
-   "ok": true
+   "ok": true,
+   "tableaux_signe": []
   },
   "ok": true
  },
@@ -490,19 +491,15 @@
        "type": "texte"
       },
       {
-       "html": "Le numérateur \\(x^{2} - 1\\) vaut \\(3^{2} - 1 = 8\\) et le dénominateur \\(x - 3\\) tend vers \\(0\\).",
+       "html": "Le numérateur \\(x^{2} - 1\\) vaut \\(3^{2} - 1 = 8\\) et le dénominateur \\(x - 3\\) tend vers \\(0\\) (voir le tableau de signes).",
        "type": "texte"
       },
       {
-       "html": "Signe de \\(x - 3\\) : négatif pour \\(x < 3\\), positif pour \\(x > 3\\).",
+       "html": "À gauche de \\(3\\), le dénominateur est négatif : il tend vers \\(0^{-}\\), donc \\(f(x) \\to \\dfrac{8}{0^{-}} = -\\infty\\).",
        "type": "texte"
       },
       {
-       "html": "À gauche : \\(x - 3 \\to 0^{-}\\), donc \\(f(x) \\to \\dfrac{8}{0^{-}} = -\\infty\\).",
-       "type": "texte"
-      },
-      {
-       "html": "À droite : \\(x - 3 \\to 0^{+}\\), donc \\(f(x) \\to \\dfrac{8}{0^{+}} = +\\infty\\).",
+       "html": "À droite de \\(3\\), le dénominateur est positif : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{8}{0^{+}} = +\\infty\\).",
        "type": "texte"
       },
       {
@@ -514,7 +511,31 @@
     }
    ],
    "f_tex": "\\frac{x^{2} - 1}{x - 3}",
-   "ok": true
+   "ok": true,
+   "tableaux_signe": [
+    {
+     "html": "Signe du dénominateur \\(x - 3\\) :",
+     "type": "texte"
+    },
+    {
+     "crit": [
+      "3"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "-",
+        "||",
+        "+"
+       ],
+       "final": true,
+       "label": "x - 3"
+      }
+     ],
+     "type": "tableau",
+     "var": "x"
+    }
+   ]
   },
   "ok": true
  },
@@ -699,7 +720,8 @@
     }
    ],
    "f_tex": "3x\\,\\ln(x)",
-   "ok": true
+   "ok": true,
+   "tableaux_signe": []
   },
   "ok": true
  },
@@ -906,15 +928,11 @@
        "type": "texte"
       },
       {
-       "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x\\) tend vers \\(0\\).",
+       "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x\\) tend vers \\(0\\) (voir le tableau de signes).",
        "type": "texte"
       },
       {
-       "html": "Signe de \\(x\\) : négatif pour \\(x < 0\\), positif pour \\(x > 0\\).",
-       "type": "texte"
-      },
-      {
-       "html": "À gauche : \\(x \\to 0^{-}\\), donc \\(\\frac{1}{x} \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
+       "html": "À gauche de \\(0\\), le dénominateur est négatif : il tend vers \\(0^{-}\\), donc \\(\\frac{1}{x} \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
        "type": "texte"
       },
       {
@@ -922,7 +940,7 @@
        "type": "texte"
       },
       {
-       "html": "À droite : \\(x \\to 0^{+}\\), donc \\(\\frac{1}{x} \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
+       "html": "À droite de \\(0\\), le dénominateur est positif : il tend vers \\(0^{+}\\), donc \\(\\frac{1}{x} \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
        "type": "texte"
       },
       {
@@ -938,7 +956,31 @@
     }
    ],
    "f_tex": "e^{\\frac{1}{x}}",
-   "ok": true
+   "ok": true,
+   "tableaux_signe": [
+    {
+     "html": "Signe du dénominateur \\(x\\) :",
+     "type": "texte"
+    },
+    {
+     "crit": [
+      "0"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "-",
+        "||",
+        "+"
+       ],
+       "final": true,
+       "label": "x"
+      }
+     ],
+     "type": "tableau",
+     "var": "x"
+    }
+   ]
   },
   "ok": true
  },
@@ -1064,7 +1106,8 @@
     }
    ],
    "f_tex": "e^{2x}",
-   "ok": true
+   "ok": true,
+   "tableaux_signe": []
   },
   "ok": true
  },
@@ -1263,15 +1306,11 @@
        "type": "texte"
       },
       {
-       "html": "Le numérateur \\(\\ln(x)\\) tend vers \\(-\\infty\\) et le dénominateur \\(x\\) tend vers \\(0\\).",
+       "html": "Le numérateur \\(\\ln(x)\\) tend vers \\(-\\infty\\) et le dénominateur \\(x\\) tend vers \\(0\\) (voir le tableau de signes).",
        "type": "texte"
       },
       {
-       "html": "Signe de \\(x\\) : positif pour \\(x > 0\\).",
-       "type": "texte"
-      },
-      {
-       "html": "\\(x \\to 0^{+}\\), donc \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = \\dfrac{-\\infty}{0^{+}} = -\\infty\\).",
+       "html": "À droite de \\(0\\), le dénominateur est positif : il tend vers \\(0^{+}\\), donc \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = \\dfrac{-\\infty}{0^{+}} = -\\infty\\).",
        "type": "texte"
       },
       {
@@ -1297,7 +1336,31 @@
     }
    ],
    "f_tex": "\\frac{\\ln(x)}{x}",
-   "ok": true
+   "ok": true,
+   "tableaux_signe": [
+    {
+     "html": "Signe du dénominateur \\(x\\) :",
+     "type": "texte"
+    },
+    {
+     "crit": [
+      "0"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "-",
+        "||",
+        "+"
+       ],
+       "final": true,
+       "label": "x"
+      }
+     ],
+     "type": "tableau",
+     "var": "x"
+    }
+   ]
   },
   "ok": true
  },
@@ -1589,7 +1652,8 @@
     }
    ],
    "f_tex": "\\sqrt{x^{2} - 4}",
-   "ok": true
+   "ok": true,
+   "tableaux_signe": []
   },
   "ok": true
  },
@@ -1762,7 +1826,8 @@
     }
    ],
    "f_tex": "x\\,\\ln(x)",
-   "ok": true
+   "ok": true,
+   "tableaux_signe": []
   },
   "ok": true
  },
@@ -2014,7 +2079,8 @@
     }
    ],
    "f_tex": "\\frac{x}{x^{2} + 1}",
-   "ok": true
+   "ok": true,
+   "tableaux_signe": []
   },
   "ok": true
  },
@@ -2206,7 +2272,8 @@
     }
    ],
    "f_tex": "\\frac{x}{\\sqrt{x^{2}}}",
-   "ok": true
+   "ok": true,
+   "tableaux_signe": []
   },
   "ok": true
  },
@@ -2342,7 +2409,8 @@
    ],
    "f_saisie_tex": "x^{\\frac{2}{3}}",
    "f_tex": "\\sqrt[3]{x^{2}}",
-   "ok": true
+   "ok": true,
+   "tableaux_signe": []
   },
   "ok": true
  },
@@ -2589,7 +2657,8 @@
     }
    ],
    "f_tex": "x^{2}\\,e^{-x}",
-   "ok": true
+   "ok": true,
+   "tableaux_signe": []
   },
   "ok": true
  },
@@ -2763,7 +2832,8 @@
     }
    ],
    "f_tex": "x^{2} - 4x + 3",
-   "ok": true
+   "ok": true,
+   "tableaux_signe": []
   },
   "ok": true
  },
@@ -2985,7 +3055,8 @@
     }
    ],
    "f_tex": "x^{3} - 3x",
-   "ok": true
+   "ok": true,
+   "tableaux_signe": []
   },
   "ok": true
  },
@@ -3247,7 +3318,8 @@
     }
    ],
    "f_tex": "x^{4} - 2x^{2}",
-   "ok": true
+   "ok": true,
+   "tableaux_signe": []
   },
   "ok": true
  }

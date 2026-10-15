@@ -92,20 +92,24 @@ mécanique interne (le détail technique va dans la clé `detail` / `controles_d
    évidente s'écrit en une fois (« x² − 2 → 0 »). Une valeur définie se dit « vaut » (« le numérateur
    vaut 3² − 1 = 8 »).
 2. **Le signe d'un dénominateur qui tend vers 0 est toujours justifié** (de même celui d'un argument de ln
-   qui tend vers 0) : par sa factorisation (« x² − 4x = x(x − 4) : près de 4, x est positif… »), par le
-   signe du trinôme (« positif à l'extérieur des racines »), par « x − 3 < 0 pour x < 3 », ou par la
-   monotonie (« e^x est croissante et vaut 1 en 0, donc e^x − 1 est négatif pour x < 0 »). Si le signe ne
-   peut pas être justifié, la limite est donnée avec la phrase de repli.
+   qui tend vers 0), **par un tableau de signes**, construit par le même moteur de signe et rendu comme
+   dans les outils « Ensemble de définition » et « Dérivée » (lignes des facteurs, puis le produit ; valeur
+   interdite en double barre centrée). Un seul tableau par dénominateur et par argument de ln, en tête de
+   l'étude (carte « Tableaux de signes », clé `tableaux_signe`), puis deux lignes courtes lues dans le
+   tableau : « À gauche de 2, le dénominateur est négatif : il tend vers 0⁻, donc f(x) → 3/0⁻ = −∞. ».
+   Si le tableau ne peut pas être construit, la justification reste en texte (factorisation, signe du
+   trinôme, « x − 3 < 0 pour x < 3 », monotonie) ; si rien ne justifie le signe, la limite est donnée avec la
+   phrase de repli. Jamais « x vaut 4 » pour une variable qui tend vers 4.
 3. **Valeur interdite** : la partie commune une seule fois (valeur interdite, limite du numérateur, signe du
    dénominateur), puis une ligne courte « À gauche : … » et « À droite : … ». Si les deux côtés donnent la
    même limite, une seule conclusion.
 
 Modèle (1/(x² − 2) en −√2) :
 > x = −√2 est une valeur interdite.
-> Le numérateur vaut 1 et le dénominateur x² − 2 tend vers 0.
-> Signe de x² − 2 (trinôme, racines −√2 et √2) : positif pour x < −√2, négatif entre −√2 et √2.
-> À gauche : x² − 2 → 0⁺, donc f(x) → 1/0⁺ = +∞.
-> À droite : x² − 2 → 0⁻, donc f(x) → 1/0⁻ = −∞.
+> Le numérateur vaut 1 et le dénominateur x² − 2 tend vers 0 (voir le tableau de signes).
+> (tableau de signes de x² − 2, racines ±√2, en tête de l'étude)
+> À gauche de −√2, le dénominateur est positif : il tend vers 0⁺, donc f(x) → 1/0⁺ = +∞.
+> À droite de −√2, le dénominateur est négatif : il tend vers 0⁻, donc f(x) → 1/0⁻ = −∞.
 > Asymptote verticale d'équation x = −√2.
 
 ## Critères d'acceptation
@@ -136,3 +140,4 @@ Modèle (1/(x² − 2) en −√2) :
 | LA-22 | Tout dénominateur qui tend vers 0 est suivi d'une ligne « Signe de … » ; tout argument de ln qui tend vers 0 en est précédé | [auto-py] |
 | LA-23 | Valeur interdite à deux côtés : « est une valeur interdite », « Le numérateur », « Signe de » une seule fois ; au plus une ligne « À gauche » et une « À droite » ; une seule conclusion si les limites sont égales | [auto-py] |
 | LA-24 | Aucun mot de la mécanique interne (SymPy, Abandon, exception, nœud, arbre) dans un texte affiché | [auto-py] |
+| LA-25 | Tableau de signes en tête (clé `tableaux_signe`) pour 1/(x²−2), (x+1)/(x²−4), (eˣ+1)/(eˣ−1), ln(x²−4x)/(x−5), (x²−1)/(x−3) : colonnes = valeurs interdites ou zéros, double barre pour un dénominateur ; la lecture du tableau coïncide avec le signe calculé ; sans tableau possible, justification en texte | [auto-py] ; rendu [manuel] |
