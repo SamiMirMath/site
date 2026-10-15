@@ -96,7 +96,8 @@ mécanique interne (le détail technique va dans la clé `detail` / `controles_d
    dans les outils « Ensemble de définition » et « Dérivée » (lignes des facteurs, puis le produit ; valeur
    interdite en double barre centrée). Un seul tableau par dénominateur et par argument de ln, en tête de
    l'étude (carte « Tableaux de signes », clé `tableaux_signe`), puis deux lignes courtes lues dans le
-   tableau : « À gauche de 2, le dénominateur est négatif : il tend vers 0⁻, donc f(x) → 3/0⁻ = −∞. ».
+   tableau, avec un renvoi explicite : « À gauche de 2, le dénominateur est négatif (cf. tableau de signes de x − 2) :
+   il tend vers 0⁻, donc f(x) → 3/0⁻ = −∞. » ; chaque tableau est titré « Signe de x − 2 ».
    Si le tableau ne peut pas être construit, la justification reste en texte (factorisation, signe du
    trinôme, « x − 3 < 0 pour x < 3 », monotonie) ; si rien ne justifie le signe, la limite est donnée avec la
    phrase de repli. Jamais « x vaut 4 » pour une variable qui tend vers 4.
@@ -112,8 +113,8 @@ Modèle (1/(x² − 2) en −√2) :
 > x = −√2 est une valeur interdite.
 > Le numérateur vaut 1 et le dénominateur x² − 2 tend vers 0 (voir le tableau de signes).
 > (tableau de signes de x² − 2, racines ±√2, en tête de l'étude)
-> À gauche de −√2, le dénominateur est positif : il tend vers 0⁺, donc f(x) → 1/0⁺ = +∞.
-> À droite de −√2, le dénominateur est négatif : il tend vers 0⁻, donc f(x) → 1/0⁻ = −∞.
+> À gauche de −√2, le dénominateur est positif (cf. tableau de signes de x² − 2) : il tend vers 0⁺, donc f(x) → 1/0⁺ = +∞.
+> À droite de −√2, le dénominateur est négatif (cf. tableau de signes de x² − 2) : il tend vers 0⁻, donc f(x) → 1/0⁻ = −∞.
 > Asymptote verticale d'équation x = −√2.
 
 ## Critères d'acceptation
@@ -147,3 +148,4 @@ Modèle (1/(x² − 2) en −√2) :
 | LA-25 | Tableau de signes en tête (clé `tableaux_signe`) pour 1/(x²−2), (x+1)/(x²−4), (eˣ+1)/(eˣ−1), ln(x²−4x)/(x−5), (x²−1)/(x−3) : colonnes = valeurs interdites ou zéros, double barre pour un dénominateur ; la lecture du tableau coïncide avec le signe calculé ; sans tableau possible, justification en texte | [auto-py] ; rendu [manuel] |
 | LA-26 | Jamais « x est positif (il vaut 4) » : une variable ne « vaut » pas la valeur vers laquelle elle tend (« proche de » si besoin), y compris dans la justification en texte | [auto-py] |
 | LA-27 | Chaque valeur interdite se termine par sa conclusion ; une seule limite latérale infinie : « asymptote verticale d'équation x = 0 (du côté droit) ; à gauche, f(x) → 0 » | [auto-py] |
+| LA-28 | Toute ligne qui lit un signe dans un tableau renvoie à lui (« cf. tableau de signes de X ») ; chaque tableau est titré « Signe de X » ; ln(x²−4x)/(x−5) : phrase de repli seulement en ±∞ | [auto-py] |

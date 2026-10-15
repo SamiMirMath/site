@@ -806,8 +806,7 @@ class TableauSigne:
                             self.crit.append(pt)
         self.crit.sort(key=lambda q: q.val)
         T = tex(A)
-        titre = (rf"Signe du dénominateur \({T}\) :" if genre == "den"
-                 else rf"Signe de l'argument du logarithme \({T}\) :")
+        titre = rf"Signe de \({T}\) :"
         gardes = []
         for i in items:
             if i.get("type") == "tableau":
@@ -1304,8 +1303,7 @@ def _lignes_pole(n, ctx, A, la, B, L):
         lignes += la
         num = rf"Le numérateur \({tex(n.a)}\) tend vers \({A.tex(False)}\)"
     lu = ctx.lecture("den", n.b, B)
-    complement = " (voir le tableau de signes)" if lu is not None else ""
-    lignes.append(num + rf" et le dénominateur \({tex(n.b)}\) tend vers \(0\){complement}.")
+    lignes.append(num + rf" et le dénominateur \({tex(n.b)}\) tend vers \(0\).")
     s = "+" if B.ap > 0 else "-"
     fraction = rf"\dfrac{{{A.tex(False)}}}{{0^{{{s}}}}} = {L.tex(False)}"
     if n is ctx.f:
@@ -1318,7 +1316,8 @@ def _lignes_pole(n, ctx, A, la, B, L):
         fin = rf"\({tex(n)} \to {fraction}\)"
     if lu is not None:
         mot = "positif" if lu > 0 else "négatif"
-        lignes.append(rf"{ctx.cote()}, le dénominateur est {mot} : il tend vers \(0^{{{s}}}\), donc {fin}.")
+        lignes.append(rf"{ctx.cote()}, le dénominateur est {mot} (cf. tableau de signes de \({tex(n.b)}\)) : "
+                      rf"il tend vers \(0^{{{s}}}\), donc {fin}.")
     else:
         lignes += ctx.justifier(n.b, B, force=True)
         lignes.append(rf"\({tex(n.b)} \to 0^{{{s}}}\), donc {fin}.")
@@ -1406,8 +1405,8 @@ def _noeud(n, ctx):
             lu_signe = ctx.lecture(genre, n.a, U)
             if lu_signe is not None:
                 s0 = "+" if U.ap > 0 else "-"
-                pre = [rf"{ctx.cote()}, {quoi} \({tex(n.a)}\) est {accord[0] if lu_signe > 0 else accord[1]} : "
-                       rf"{accord[2]} tend vers \(0^{{{s0}}}\)."]
+                pre = [rf"{ctx.cote()}, {quoi} \({tex(n.a)}\) est {accord[0] if lu_signe > 0 else accord[1]} "
+                       rf"(cf. tableau de signes de \({tex(n.a)}\)) : {accord[2]} tend vers \(0^{{{s0}}}\)."]
             else:
                 pre = ctx.justifier(n.a, U)
                 rappel = rf" et \({tex(n.a)} \to {U.tex()}\)"

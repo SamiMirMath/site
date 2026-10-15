@@ -491,15 +491,15 @@
        "type": "texte"
       },
       {
-       "html": "Le numérateur \\(x^{2} - 1\\) vaut \\(3^{2} - 1 = 8\\) et le dénominateur \\(x - 3\\) tend vers \\(0\\) (voir le tableau de signes).",
+       "html": "Le numérateur \\(x^{2} - 1\\) vaut \\(3^{2} - 1 = 8\\) et le dénominateur \\(x - 3\\) tend vers \\(0\\).",
        "type": "texte"
       },
       {
-       "html": "À gauche de \\(3\\), le dénominateur est négatif : il tend vers \\(0^{-}\\), donc \\(f(x) \\to \\dfrac{8}{0^{-}} = -\\infty\\).",
+       "html": "À gauche de \\(3\\), le dénominateur est négatif (cf. tableau de signes de \\(x - 3\\)) : il tend vers \\(0^{-}\\), donc \\(f(x) \\to \\dfrac{8}{0^{-}} = -\\infty\\).",
        "type": "texte"
       },
       {
-       "html": "À droite de \\(3\\), le dénominateur est positif : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{8}{0^{+}} = +\\infty\\).",
+       "html": "À droite de \\(3\\), le dénominateur est positif (cf. tableau de signes de \\(x - 3\\)) : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{8}{0^{+}} = +\\infty\\).",
        "type": "texte"
       },
       {
@@ -514,7 +514,7 @@
    "ok": true,
    "tableaux_signe": [
     {
-     "html": "Signe du dénominateur \\(x - 3\\) :",
+     "html": "Signe de \\(x - 3\\) :",
      "type": "texte"
     },
     {
@@ -928,11 +928,11 @@
        "type": "texte"
       },
       {
-       "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x\\) tend vers \\(0\\) (voir le tableau de signes).",
+       "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x\\) tend vers \\(0\\).",
        "type": "texte"
       },
       {
-       "html": "À gauche de \\(0\\), le dénominateur est négatif : il tend vers \\(0^{-}\\), donc \\(\\frac{1}{x} \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
+       "html": "À gauche de \\(0\\), le dénominateur est négatif (cf. tableau de signes de \\(x\\)) : il tend vers \\(0^{-}\\), donc \\(\\frac{1}{x} \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
        "type": "texte"
       },
       {
@@ -940,7 +940,7 @@
        "type": "texte"
       },
       {
-       "html": "À droite de \\(0\\), le dénominateur est positif : il tend vers \\(0^{+}\\), donc \\(\\frac{1}{x} \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
+       "html": "À droite de \\(0\\), le dénominateur est positif (cf. tableau de signes de \\(x\\)) : il tend vers \\(0^{+}\\), donc \\(\\frac{1}{x} \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
        "type": "texte"
       },
       {
@@ -959,7 +959,7 @@
    "ok": true,
    "tableaux_signe": [
     {
-     "html": "Signe du dénominateur \\(x\\) :",
+     "html": "Signe de \\(x\\) :",
      "type": "texte"
     },
     {
@@ -1306,11 +1306,11 @@
        "type": "texte"
       },
       {
-       "html": "Le numérateur \\(\\ln(x)\\) tend vers \\(-\\infty\\) et le dénominateur \\(x\\) tend vers \\(0\\) (voir le tableau de signes).",
+       "html": "Le numérateur \\(\\ln(x)\\) tend vers \\(-\\infty\\) et le dénominateur \\(x\\) tend vers \\(0\\).",
        "type": "texte"
       },
       {
-       "html": "À droite de \\(0\\), le dénominateur est positif : il tend vers \\(0^{+}\\), donc \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = \\dfrac{-\\infty}{0^{+}} = -\\infty\\).",
+       "html": "À droite de \\(0\\), le dénominateur est positif (cf. tableau de signes de \\(x\\)) : il tend vers \\(0^{+}\\), donc \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = \\dfrac{-\\infty}{0^{+}} = -\\infty\\).",
        "type": "texte"
       },
       {
@@ -1339,7 +1339,7 @@
    "ok": true,
    "tableaux_signe": [
     {
-     "html": "Signe du dénominateur \\(x\\) :",
+     "html": "Signe de \\(x\\) :",
      "type": "texte"
     },
     {
