@@ -1592,6 +1592,77 @@ def _evidence_racine(n, ctx, fi):
     return L, lignes + lg
 
 
+def _evidence_ln(n, ctx, fi):
+    """ln(u)/v en ±∞ avec u et v polynômes : ln(u) = ln(x^k(c + …)) = k ln|x| + ln(c + …), puis croissance comparée
+    (ln x / x^p → 0) pour le terme en ln|x| ; avant Bernoulli-L'Hôpital. Seulement si u = x^k(c + …) avec x^k > 0."""
+    s = ctx.pt.s
+    if not s or not isinstance(n, Op) or n.op != "/" or not (isinstance(n.a, Fn) and n.a.nom == "ln"):
+        return None
+    u, v = _polynome_de(n.a.a), _polynome_de(n.b)
+    if u is None or v is None or deg(v) < 1:
+        return None
+    k, c = deg(u), u[deg(u)]
+    if c <= 0 or (s < 0 and k % 2):
+        return None
+    V = _membre_en_evidence(n.b, s)
+    if V is None:
+        return None
+    p = V["k"]
+    termes = [_terme_laurent(u[j], j - k) for j in range(k, -1, -1) if u[j] != 0]
+    ru = _somme_termes(termes) if len(termes) > 1 else None
+    absx = r"\ln|x|" if k == 1 else rf"{k}\ln|x|"
+    ln_u = tex(n.a)
+    if ru is not None:
+        egal = rf"\ln\left({_monome_tex(F(1), k)}\left({tex(ru)}\right)\right) = {absx} + \ln\left({tex(ru)}\right)"
+    else:
+        egal = rf"\ln\left({tex(n.a.a)}\right) = " + (absx if c == 1 else rf"\ln {qtex(c)} + {absx}")
+    lignes = [_ligne_fi(n, fi, ctx), rf"\({ln_u} = {egal}\)."]
+    if V["lignes"] or not _est_un(V["R"]):
+        tete = _produit_arbres([t for t in (Nb(abs(V["coef"])) if abs(V["coef"]) != 1 else None,
+                                             _puissance_x(p) if p else None) if t is not None] or [Nb(F(1))])
+        tete = Neg(tete) if V["coef"] < 0 else tete
+        lignes.append(rf"On met \({tex(tete)}\) en évidence : \({tex(n.b)} = {tex(Op('*', tete, V['R']))}\).")
+    xp = "x" if p == 1 else f"x^{{{p}}}"
+    A = rf"\dfrac{{\ln|x|}}{{{xp}}}"
+    B = rf"\dfrac{{\ln\left({tex(ru)}\right)}}{{{xp}}}" if ru is not None else (rf"\dfrac{{\ln {qtex(c)}}}{{{xp}}}" if c != 1 else None)
+    corps = (A if k == 1 else rf"{k}\,{A}") + (f" + {B}" if B else "")
+    facteur_v = V["coef"] if _est_un(V["R"]) else None
+    if V["coef"] == 1 and _est_un(V["R"]):
+        donc = rf"\({tex(n)} = {corps}\)"
+    else:
+        den = _produit_arbres([t for t in (Nb(abs(V["coef"])) if abs(V["coef"]) != 1 else None,
+                                            None if _est_un(V["R"]) else V["R"]) if t is not None])
+        pref = rf"\dfrac{{1}}{{{tex(den)}}}" if V["coef"] > 0 else rf"-\dfrac{{1}}{{{tex(den)}}}"
+        donc = rf"\({tex(n)} = {pref}\left({corps}\right)\)" if B else rf"\({tex(n)} = {pref}\,{corps}\)"
+    lignes.append("Donc " + donc + ".")
+    # croissance comparée pour ln|x| / x^p
+    ref = _ligne_reference("ln_sur_puissance")
+    if s > 0:
+        lignes.append(rf"Comme \(x > 0\), \(|x| = x\) et, par croissance comparée ({ref}), \({A} \to 0\).")
+    else:
+        signe = "" if p % 2 == 0 else "-"
+        tp = "t" if p == 1 else f"t^{{{p}}}"
+        lignes.append(rf"Comme \(x < 0\), \(|x| = -x\). En posant \(t = -x\) (\(t \to +\infty\)) : \({A} = {signe}\dfrac{{\ln t}}{{{tp}}}\) ; "
+                      rf"par croissance comparée ({ref}), \(\dfrac{{\ln t}}{{{tp}}} \to 0\), donc \({A} \to 0\).")
+    if B:
+        arbre_B = Op("/", Fn("ln", ru) if ru is not None else Fn("ln", Nb(c)), _puissance_x(p))
+        LB, lb = _noeud(arbre_B, ctx)
+        lignes += lb
+    if not _est_un(V["R"]):
+        LR, lr = _noeud(V["R"], ctx)
+        lignes += lr
+    ap = _signe(V["coef"]) * (s if p % 2 else 1)
+    L = Lim.fin(0, ap)
+    math, pre = ctx.dire(n, L)
+    lignes += pre
+    if V["coef"] == 1 and _est_un(V["R"]):
+        lignes.append(("Les deux termes tendent vers 0, donc " if B else "Le terme tend vers 0, donc ") + math + ".")
+    else:
+        lignes.append(("Les deux termes de la parenthèse tendent vers 0 et le facteur qui la précède a une limite finie, donc "
+                       if B else "Le terme tend vers 0 et le facteur qui le précède a une limite finie, donc ") + math + ".")
+    return L, lignes
+
+
 # --- méthode : expression conjuguée (∞ − ∞ en ±∞ ; 0/0 en une valeur) -----------------------------
 def _carre_poly(n):
     """Polynôme P tel que n² = P, pour n polynôme, √(polynôme) ou l'opposé de l'un d'eux ; None sinon."""
@@ -2208,7 +2279,7 @@ def _simplifier_zero_sur_zero(n, ctx, fi):
 
 
 # ordre du cours : mise en évidence, conjuguée, mise en évidence sous une racine, croissance comparée, L'Hôpital
-METHODES[:] = [_simplifier_zero_sur_zero, _evidence_exp, _conjuguee, _evidence_racine, _comparee_pure, _lhopital]
+METHODES[:] = [_simplifier_zero_sur_zero, _evidence_exp, _conjuguee, _evidence_racine, _comparee_pure, _evidence_ln, _lhopital]
 
 
 def _silencieux(n, L, ctx):

@@ -70,6 +70,9 @@ comme », dans aucune sortie. La méthode « termes dominants » est supprimée 
 - **Racine de polynôme en ±∞** : √(4x²+1) = √(x²(4 + 1/x²)) = |x|·√(4 + 1/x²), puis |x| = x (x > 0) ou
   |x| = −x (x < 0), puis simplification. En −∞ : f(x) = −x·√(4 + 1/x²)/(x(1 + 2/x)) = −√(4 + 1/x²)/(1 + 2/x) → −2.
 - **Après une conjuguée** : x/(√(x²+x) + x) = x/(x(√(1 + 1/x) + 1)) = 1/(√(1 + 1/x) + 1) → 1/2.
+- **ln d'un polynôme en ±∞** : ln(x²+1) = ln(x²(1 + 1/x²)) = 2 ln|x| + ln(1 + 1/x²). Pour ln(u)/v
+  (u, v polynômes), on écrit ln(u) = k ln|x| + ln(c + …), on met x^p en évidence dans v, puis on conclut
+  par **croissance comparée** (ln x / x^n → 0 ; en −∞ avec t = −x), **avant** Bernoulli-L'Hôpital.
 
 Autres cas rédigés :
 - **Valeur interdite sans forme indéterminée** : limite du numérateur, signe du dénominateur à gauche et
@@ -159,5 +162,6 @@ Modèle (1/(x² − 2) en −√2) :
 | LA-29 | Mise en évidence sous une racine (L5, retouche du 15.10) : en ±∞, quotient ou produit dont un membre est une racine ; √(4x²+1) = √(x²(4 + 1/x²)) = \|x\|√(4 + 1/x²), puis \|x\| = x ou −x, simplification, limite de ce qui reste ; « x < 0 donc √(x²) = \|x\| = −x » en −∞ ; jamais d'équivalent ; jamais pour une fraction rationnelle ni quand les termes de plus haut degré d'une somme se compensent | [auto-py] |
 | LA-30 | Expression conjuguée (L4) : ∞ − ∞ avec une racine en ±∞ (√(x²+x) − x → 1/2 en +∞ ; en −∞ pas de forme indéterminée, +∞) ; 0/0 avec une racine en une valeur ((√(x+3) − 2)/(x − 1) → 1/4) ; jamais sans racine | [auto-py] |
 | LA-31 | Croissance comparée (L6, T09, Q1) : citée seulement devant une forme indéterminée, limite de référence nommée ; mise en évidence de l'exponentielle (e^x − x² = e^x(1 − x²e^(−x)), (e^x+1)/(e^x−1)) ; jamais pour x·e^x en +∞, e^x/x en 0, e^(2x) | [auto-py] |
-| LA-32 | Bernoulli-L'Hôpital (L7) : en dernier recours, hypothèses (a) à (d) écrites (ln(x²−4x)/(x−5) en ±∞, (e^x−1)/x en 0, ln(x)/(x−1) en 1, x·ln(x²) en 0) ; jamais hors forme 0/0 ou ∞/∞, jamais pour une fraction rationnelle ni quand une limite de référence s'applique ; non appliquée (phrase de repli) si g' ≠ 0 ou lim f'/g' n'est pas établi ; au plus deux applications de suite | [auto-py] |
+| LA-32 | Bernoulli-L'Hôpital (L7) : en dernier recours, hypothèses (a) à (d) écrites ((e^x−1)/x en 0, ln(x)/(x−1) en 1, x·ln(x²) en 0 ; ln(x²−4x)/(x−5) en ±∞ ne passe plus par la règle : mise en évidence de ln puis croissance comparée) ; jamais hors forme 0/0 ou ∞/∞, jamais pour une fraction rationnelle ni quand une limite de référence s'applique ; non appliquée (phrase de repli) si g' ≠ 0 ou lim f'/g' n'est pas établi ; au plus deux applications de suite | [auto-py] |
 | LA-33 | Aucune sortie ne contient « ∼ », « équivalent » ni « se comporte comme » | [auto-py] (`test_vocabulaire.py`) |
+| LA-34 | ln(u)/v en ±∞ (u, v polynômes) : ln(u) = k ln\|x\| + ln(c + …), v mis en évidence, puis croissance comparée (limite de référence nommée) ; jamais Bernoulli-L'Hôpital pour ln(x²+1)/x et ln(x²−4x)/(x−5) en ±∞ | [auto-py] |

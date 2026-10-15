@@ -515,6 +515,37 @@ class TestEvidenceRacine(unittest.TestCase):
                         self.assertNotIn(mot, e["html"], (entree, etude["ou"]))
 
 
+class TestEvidenceLn(unittest.TestCase):
+    """Retouche 2 : ln(u)/v en ±∞ avec u polynôme : ln(u) = k ln|x| + ln(c + …), puis croissance comparée
+    (ln x / x^n → 0), avant Bernoulli-L'Hôpital."""
+
+    def test_ln_de_x_carre_plus_1_sur_x(self):
+        t = textes("ln(x^2+1)/x", r"x \to +\infty")
+        self.assertIn(r"\(\ln\left(x^{2} + 1\right) = \ln\left(x^{2}\left(1 + \frac{1}{x^{2}}\right)\right) = "
+                      r"2\ln|x| + \ln\left(1 + \frac{1}{x^{2}}\right)\).", t)
+        self.assertIn(r"Donc \(\frac{\ln\left(x^{2} + 1\right)}{x} = 2\,\dfrac{\ln|x|}{x} + "
+                      r"\dfrac{\ln\left(1 + \frac{1}{x^{2}}\right)}{x}\).", t)
+        i = next(i for i, p in enumerate(t) if "croissance comparée" in p)
+        self.assertIn(r"\lim_{x\to +\infty} \dfrac{\ln x}{x^{n}} = 0", t[i])
+        self.assertIn(r"Les deux termes tendent vers 0, donc \(\displaystyle\lim_{x\to +\infty} f(x) = 0\).", t)
+        self.assertFalse(any("Bernoulli" in p for p in t))
+
+    def test_en_moins_l_infini_on_pose_t_egal_moins_x(self):
+        t = textes("ln(x^2+1)/x", r"x \to -\infty")
+        self.assertTrue(any(r"En posant \(t = -x\)" in p and "croissance comparée" in p for p in t), t)
+        self.assertIn(r"Les deux termes tendent vers 0, donc \(\displaystyle\lim_{x\to -\infty} f(x) = 0\).", t)
+        self.assertFalse(any("Bernoulli" in p for p in t))
+
+    def test_denominateur_mis_en_evidence(self):
+        t = textes("ln(x^2-4x)/(x-5)", r"x \to +\infty")
+        self.assertIn(r"On met \(x\) en évidence : \(x - 5 = x\,\left(1 - \frac{5}{x}\right)\).", t)
+        self.assertFalse(any("Bernoulli" in p for p in t))
+
+    def test_avant_l_hopital_seulement_pour_ln_de_polynome(self):
+        for entree, ou in [("ln(x)/(x-1)", r"x \to 1"), ("x*ln(x^2)", r"x \to 0")]:
+            self.assertTrue(any("Bernoulli" in p for p in textes(entree, ou)), entree)
+
+
 class TestConjuguee(unittest.TestCase):
     """L4 : expression conjuguée — ∞ − ∞ avec une racine en ±∞, 0/0 avec une racine en une valeur (LA-20)."""
 
@@ -667,27 +698,9 @@ class TestLHopital(unittest.TestCase):
         self.assertIn(r"On calcule \(f'(x) = \frac{1}{x}\) et \(g'(x) = 1\).", t)
         self.assertIn(r"\lim_{x\to 1} \dfrac{f'(x)}{g'(x)} = 1", t)
 
-    def test_ln_de_trinome_sur_affine_en_plus_l_infini(self):
-        t = textes("ln(x^2-4x)/(x-5)", r"x \to +\infty")
-        i = next(i for i, p in enumerate(t) if p.startswith("On applique la règle"))
-        self.assertEqual(t[i:i + 7], [
-            r"On applique la règle de Bernoulli-L'Hôpital avec \(f(x) = \ln\left(x^{2} - 4x\right)\) et \(g(x) = x - 5\). "
-            r"Vérifions les hypothèses :",
-            r"(a) forme indéterminée « \(\infty/\infty\) » : vérifiée ;",
-            r"(b) \(f\) et \(g\) sont dérivables sur \(\left]4 \,;\, +\infty\right[\), donc au voisinage de \(+\infty\) : vérifiée ;",
-            r"On calcule \(f'(x) = \frac{2x - 4}{x^{2} - 4x}\) et \(g'(x) = 1\).",
-            r"(c) \(g'(x) = 1 \neq 0\) au voisinage de \(+\infty\) : vérifiée ;",
-            r"(d) \(\dfrac{f'(x)}{g'(x)} = \frac{2x - 4}{x^{2} - 4x}\).",
-            r"Le numérateur tend vers \(+\infty\) et le dénominateur tend vers \(+\infty\) (limite de leur terme de plus haut degré) : "
-            r"forme indéterminée « \(\infty/\infty\) ».",
-        ])
-        self.assertIn(r"La limite de \(\dfrac{f'(x)}{g'(x)}\) existe et vaut \(0\) : (d) est vérifiée.", t)
-        self.assertIn(r"Donc \(\displaystyle\lim_{x\to +\infty} f(x) = 0\).", t)
-
-    def test_ln_de_trinome_sur_affine_en_moins_l_infini(self):
-        t = textes("ln(x^2-4x)/(x-5)", r"x \to -\infty")
-        self.assertIn(r"(b) \(f\) et \(g\) sont dérivables sur \(\left]-\infty \,;\, 0\right[\), donc au voisinage de \(-\infty\) : vérifiée ;", t)
-        self.assertIn(r"Donc \(\displaystyle\lim_{x\to -\infty} f(x) = 0\).", t)
+    def test_ln_de_trinome_sur_affine_ne_passe_plus_par_la_regle(self):     # retouche 2 : mise en évidence de ln, avant L'Hôpital
+        for ou in (r"x \to +\infty", r"x \to -\infty"):
+            self.assertFalse(any("Bernoulli" in p for p in textes("ln(x^2-4x)/(x-5)", ou)), ou)
 
     def test_produit_mis_en_quotient(self):
         t = " ".join(textes("x*ln(x^2)", r"x \to 0"))
@@ -740,7 +753,7 @@ class TestLHopital(unittest.TestCase):
         self.assertTrue(any(REPLI[1:] in p for p in t))
 
     def test_au_plus_deux_applications_de_suite(self):
-        for entree in ["(e^x-1)/x", "ln(x)/(x-1)", "x*ln(x^2)", "ln(x)^2/x", "ln(x^2-4x)/(x-5)", "x*e^(1/x)"]:
+        for entree in ["(e^x-1)/x", "ln(x)/(x-1)", "x*ln(x^2)", "ln(x)^2/x", "x*e^(1/x)"]:
             for etude in la.etudier(entree)["etudes"]:
                 with self.subTest(f=entree, ou=etude["ou"]):
                     self.assertLessEqual(sum(1 for e in etude["etapes"] if e["html"].startswith("On applique la règle")), 2)
