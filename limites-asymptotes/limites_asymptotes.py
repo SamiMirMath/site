@@ -1038,13 +1038,14 @@ class _Contexte:
                 fact = (xa if m == 1 else f"x^{{{m}}}") + r"\," + q_par
             else:
                 fact = q_par + r"\," + facteur_a
+            proche = "" if q_tex == "x" else rf" (proche de \({qtex(c)}\))"
             if m % 2 == 0:
                 fin = (rf"donc \({T}\) est {mot(sr)} de part et d'autre de \({a_tex}\)" if pt.deux
                        else rf"donc \({T}\) est {mot(sr)}")
                 return (rf"Signe de \({T} = {fact}\) : \({facteur_a}\) est positif et près de \({a_tex}\), "
-                        rf"\({q_tex}\) est {mot(sr)} (il vaut \({qtex(c)}\)), {fin}.")
-            return (rf"Signe de \({T} = {fact}\) : près de \({a_tex}\), \({q_tex}\) est {mot(sr)} "
-                    rf"(il vaut \({qtex(c)}\)), donc \({T}\) est {enonce}.")
+                        rf"\({q_tex}\) est {mot(sr)}{proche}, {fin}.")
+            return (rf"Signe de \({T} = {fact}\) : près de \({a_tex}\), \({q_tex}\) est {mot(sr)}{proche}, "
+                    rf"donc \({T}\) est {enonce}.")
         # point irrationnel : trinôme à deux racines réelles
         sp = _sympy()
         if deg(P) != 2:

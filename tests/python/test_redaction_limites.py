@@ -502,7 +502,7 @@ class TestStyle(unittest.TestCase):
     """Règles de style (LA-21 à LA-24) : élève moyen de gymnase, une idée par ligne, rien de mécanique."""
 
     INTERDITES = [r"par continuité", r"est une constante", r"la différence tend vers", r"la somme tend vers",
-                  r"le produit tend vers", r"le quotient tend vers \\\(", r"Par substitution"]
+                  r"le produit tend vers", r"le quotient tend vers \\\(", r"Par substitution", r"il vaut"]
     CORPUS = (TestToutEstEcritOuReplie.ENTREES + CAS + ["(x^2-1)/(x-1)", "(x^2-4)/(x^2-4x+4)", "1/(x-1)^2",
               "5/(3-x)", "(x^2-3)/(x^3-3x)", "1/(x^2-2)", "ln(x^2-3)", "ln(x^3-3x)", "x^2/(x-1)-x", "(x+1)/(x-1)/2"])
 
@@ -563,6 +563,18 @@ class TestStyle(unittest.TestCase):
                     self.assertLessEqual(sum(1 for p in t if p.startswith("Signe de")), 1)
                     self.assertLessEqual(sum(1 for p in t if p.startswith("À gauche")), 1)
                     self.assertLessEqual(sum(1 for p in t if p.startswith("À droite")), 1)
+
+    def test_une_variable_ne_vaut_jamais_sa_limite(self):               # LA-26
+        """Même sans tableau de signes (justification en texte), on n'écrit pas « x est positif (il vaut 4) »."""
+        import re
+        entrees = ["(x^2-1)/(x-3)", "1/(x^2-2)", "(x+1)/(x^2-4)", "(x^2-3)/(x^3-3x)", "1/(x-1)^2", "5/(3-x)",
+                   "(e^x+1)/(e^x-1)", "ln(x^2-4x)/(x-5)", "ln(x^2-3)", "e^(1/x)", "1/x^2", "(2x^2+1)/(x^2-1)"]
+        with sans_tableau():
+            for entree in entrees:
+                for etude in la.etudier(entree)["etudes"]:
+                    for e in etude["etapes"]:
+                        with self.subTest(f=entree, ou=etude["ou"]):
+                            self.assertIsNone(re.search(r"il vaut", e["html"]), e["html"])
 
     def test_une_phrase_ne_cite_que_le_vocabulaire_du_cours(self):       # LA-24
         for entree, ou, t in self.tous_les_textes():

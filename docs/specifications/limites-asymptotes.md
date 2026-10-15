@@ -141,3 +141,4 @@ Modèle (1/(x² − 2) en −√2) :
 | LA-23 | Valeur interdite à deux côtés : « est une valeur interdite », « Le numérateur », « Signe de » une seule fois ; au plus une ligne « À gauche » et une « À droite » ; une seule conclusion si les limites sont égales | [auto-py] |
 | LA-24 | Aucun mot de la mécanique interne (SymPy, Abandon, exception, nœud, arbre) dans un texte affiché | [auto-py] |
 | LA-25 | Tableau de signes en tête (clé `tableaux_signe`) pour 1/(x²−2), (x+1)/(x²−4), (eˣ+1)/(eˣ−1), ln(x²−4x)/(x−5), (x²−1)/(x−3) : colonnes = valeurs interdites ou zéros, double barre pour un dénominateur ; la lecture du tableau coïncide avec le signe calculé ; sans tableau possible, justification en texte | [auto-py] ; rendu [manuel] |
+| LA-26 | Jamais « x est positif (il vaut 4) » : une variable ne « vaut » pas la valeur vers laquelle elle tend (« proche de » si besoin), y compris dans la justification en texte | [auto-py] |
