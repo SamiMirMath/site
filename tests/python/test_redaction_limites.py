@@ -546,6 +546,31 @@ class TestEvidenceLn(unittest.TestCase):
             self.assertTrue(any("Bernoulli" in p for p in textes(entree, ou)), entree)
 
 
+class TestRacineCarreeParfaite(unittest.TestCase):
+    """√(x²) = |x| (et √(u²) = |u|) en une valeur : on lit le signe de u de chaque côté, sans repli."""
+
+    def test_x_sur_racine_de_x_carre_en_zero(self):
+        t = textes("x/sqrt(x^2)", r"x \to 0")
+        self.assertFalse(any(REPLI[1:] in p for p in t), t)
+        self.assertIn(r"À gauche de \(0\), \(x\) est négatif, donc \(\sqrt{x^{2}} = |x| = -x\).", t)
+        self.assertIn(r"Donc \(\frac{x}{\sqrt{x^{2}}} = \frac{x}{|x|} = \frac{x}{-x}\).", t)
+        self.assertIn(r"À droite de \(0\), \(x\) est positif, donc \(\sqrt{x^{2}} = |x| = x\).", t)
+        self.assertIn(r"Donc \(\frac{x}{\sqrt{x^{2}}} = \frac{x}{|x|} = \frac{x}{x}\).", t)
+
+    def test_valeurs_a_gauche_et_a_droite(self):
+        r = la.etudier("x/sqrt(x^2)")
+        e = next(e for e in r["etudes"] if e["ou"] == r"x \to 0")
+        textes_all = " ".join(x["html"] for x in e["etapes"])
+        self.assertIn(r"\cancel{\left(x\right)}}{-\cancel{\left(x\right)}} = -1", textes_all)
+        self.assertIn(r"\cancel{\left(x\right)}}{\cancel{\left(x\right)}} = 1", textes_all)
+        self.assertIn("f n'a pas de limite en", textes_all)
+
+    def test_racine_d_un_carre_decale(self):         # √((x − 1)²) = |x − 1|
+        t = " ".join(textes("(x-1)/sqrt(x^2-2x+1)", r"x \to 1"))
+        self.assertIn(r"À gauche de \(1\), \(x - 1\) est négatif, donc \(\sqrt{x^{2} - 2x + 1} = |x - 1| = -\left(x - 1\right)\).", t)
+        self.assertIn(r"À droite de \(1\), \(x - 1\) est positif, donc \(\sqrt{x^{2} - 2x + 1} = |x - 1| = x - 1\).", t)
+
+
 class TestConjuguee(unittest.TestCase):
     """L4 : expression conjuguée — ∞ − ∞ avec une racine en ±∞, 0/0 avec une racine en une valeur (LA-20)."""
 
@@ -747,8 +772,11 @@ class TestLHopital(unittest.TestCase):
         self.assertTrue(any(REPLI[1:] in p for p in t))
 
     def test_boucle_sur_une_forme_indeterminee_donne_le_repli(self):
-        """x/√(x²) en 0 : f'/g' retombe sur une forme 0/0 ; après deux applications on ne conclut pas par la règle."""
-        t = textes("x/sqrt(x^2)", r"x \to 0")
+        """x/√(x²) en 0, sans la lecture de √(x²) = |x| : f'/g' retombe sur une forme 0/0 ; après deux applications
+        on ne conclut pas par la règle."""
+        sans_abs = [m for m in la.METHODES if m is not la._racine_carre_parfait]
+        with mock.patch.object(la, "METHODES", sans_abs):
+            t = textes("x/sqrt(x^2)", r"x \to 0")
         self.assertFalse(any("Bernoulli" in p for p in t), t)
         self.assertTrue(any(REPLI[1:] in p for p in t))
 

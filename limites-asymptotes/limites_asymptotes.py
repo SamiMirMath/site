@@ -1232,7 +1232,9 @@ def _arbre_poly(P):
 
 
 def _arbre_fraction(N, D):
-    return _arbre_poly(N) if deg(D) == 0 and D[0] == 1 else Op("/", _arbre_poly(N), _arbre_poly(D))
+    if deg(D) == 0 and D[0] in (1, -1):
+        return _arbre_poly(pscal(N, D[0]))
+    return Op("/", _arbre_poly(N), _arbre_poly(D))
 
 
 def _poly_ou_const(n):
@@ -1661,6 +1663,80 @@ def _evidence_ln(n, ctx, fi):
         lignes.append(("Les deux termes de la parenthèse tendent vers 0 et le facteur qui la précède a une limite finie, donc "
                        if B else "Le terme tend vers 0 et le facteur qui le précède a une limite finie, donc ") + math + ".")
     return L, lignes
+
+
+# --- méthode : √(u²) = |u| (en une valeur, d'un seul côté) ---------------------------------------
+def _racine_carree_de(Q):
+    """Polynôme P (Fractions) tel que P² = Q, ou None si Q n'est pas le carré d'un polynôme à coefficients rationnels."""
+    sp = _sympy()
+    x = _SP["x"]
+    c, facteurs = sp.factor_list(sum(_rat(co) * x ** i for i, co in enumerate(Q)))
+    r = sp.sqrt(c)
+    if not r.is_Rational or any(m % 2 for _, m in facteurs):
+        return None
+    P = r * sp.Mul(*[f ** (m // 2) for f, m in facteurs])
+    coefs = sp.Poly(P, x).all_coeffs()[::-1]
+    return pn([F(int(co.p), int(co.q)) for co in coefs])
+
+
+def _remplacer_racines(n, table):
+    """n où chaque racine de la table {clé : arbre} est remplacée par son arbre."""
+    if isinstance(n, (Nb, X, E)):
+        return n
+    if n.key() in table:
+        return table[n.key()]
+    if isinstance(n, Neg):
+        return Neg(_remplacer_racines(n.a, table))
+    if isinstance(n, Fn):
+        return Fn(n.nom, _remplacer_racines(n.a, table))
+    return Op(n.op, _remplacer_racines(n.a, table), _remplacer_racines(n.b, table))
+
+
+def _racines_a_remplacer(n, out):
+    r = _est_racine(n)
+    if r is not None:
+        Q = _poly_ou_const(r)
+        if Q is not None and deg(Q) >= 2 and deg(Q) % 2 == 0:
+            P = _racine_carree_de(Q)
+            if P is not None:
+                out.append((n, P))
+                return
+    if isinstance(n, (Neg, Fn)):
+        _racines_a_remplacer(n.a, out)
+    elif isinstance(n, Op):
+        _racines_a_remplacer(n.a, out)
+        _racines_a_remplacer(n.b, out)
+
+
+def _racine_carre_parfait(n, ctx, fi):
+    """En une valeur, d'un seul côté : √(u²) = |u|, et |u| = u ou −u selon le signe de u de ce côté. Reconnaît la
+    racine d'un carré (x² = x·x, (x − 2)², …) ; le signe de u se lit sur sa factorisation en (x − a)."""
+    pt = ctx.pt
+    if pt.s or not pt.d or not pt.a.is_Rational:
+        return None
+    trouvees = []
+    _racines_a_remplacer(n, trouvees)
+    if not trouvees:
+        return None
+    a = F(int(pt.a.p), int(pt.a.q))
+    table, lignes, avec_abs, vus = {}, [_ligne_fi(n, fi, ctx)], tex(n), set()
+    for racine, P in trouvees:
+        if racine.key() in vus:
+            continue
+        vus.add(racine.key())
+        reste, mult = _facteur_racine(P, a)
+        sg = _signe(peval(reste, a)) * (pt.d if mult % 2 else 1)
+        arbre = _arbre_poly(P)
+        table[racine.key()] = arbre if sg > 0 else Neg(arbre)
+        u = tex(arbre)
+        avec_abs = avec_abs.replace(tex(racine), rf"|{u}|")
+        lignes.append(rf"{ctx.cote()}, \({u}\) est {'positif' if sg > 0 else 'négatif'}, donc "
+                      rf"\({tex(racine)} = |{u}| = {tex(table[racine.key()])}\).")
+    g = _remplacer_racines(n, table)
+    _meme_fonction(n, g, ctx)
+    lignes.append(rf"Donc \({tex(n)} = {avec_abs} = {tex(g)}\).")
+    L, lg = _noeud(g, ctx)
+    return L, lignes + lg
 
 
 # --- méthode : expression conjuguée (∞ − ∞ en ±∞ ; 0/0 en une valeur) -----------------------------
@@ -2264,22 +2340,22 @@ def _simplifier_zero_sur_zero(n, ctx, fi):
     xa = _x_moins(a)
     barre = r"\cancel{" + _facteur_tex(xa, m) + "}"
     g = _arbre_fraction(N2, D2)
-    haut = _produit_tex(barre, _facteur_ou_vide(N2))
-    bas = _produit_tex(barre, _facteur_ou_vide(D2))
+    haut = ("-" if N2 == [-1] else "") + _produit_tex(barre, "" if N2 in ([1], [-1]) else _facteur_ou_vide(N2))
+    bas = ("-" if D2 == [-1] else "") + _produit_tex(barre, "" if D2 in ([1], [-1]) else _facteur_ou_vide(D2))
     lignes = [
         _ligne_fi(n, fi, ctx),
         rf"On factorise le numérateur et le dénominateur par \(\left({xa}\right)\) et l'on simplifie (pour \(x \neq {pt.a_tex}\)) : "
         rf"\({tex(n)} = \dfrac{{{haut}}}{{{bas}}} = {tex(g)}\).",
     ]
     L, lg = _noeud(g, ctx)
-    if not lg:
+    if not lg and not sans_x(g):
         sub, val = _tex_en(g, pt), L.tex(False)
         lg = [rf"Quand \(x \to {pt.a_tex}\), \({tex(g)} \to {sub if sub == val else sub + ' = ' + val}\)."]
     return L, lignes + lg
 
 
 # ordre du cours : mise en évidence, conjuguée, mise en évidence sous une racine, croissance comparée, L'Hôpital
-METHODES[:] = [_simplifier_zero_sur_zero, _evidence_exp, _conjuguee, _evidence_racine, _comparee_pure, _evidence_ln, _lhopital]
+METHODES[:] = [_racine_carre_parfait, _simplifier_zero_sur_zero, _evidence_exp, _conjuguee, _evidence_racine, _comparee_pure, _evidence_ln, _lhopital]
 
 
 def _silencieux(n, L, ctx):

@@ -2604,13 +2604,39 @@
       "type": "texte"
      },
      {
-      "detail": "Abandon : forme indéterminée 0/0 non levée en \\frac{x}{\\sqrt{x^{2}}}",
-      "html": "À gauche : le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to 0^{-}} f(x) = -1\\).",
+      "html": "Le numérateur \\(x\\) tend vers \\(0\\) et le dénominateur \\(\\sqrt{x^{2}}\\) tend vers \\(0\\) : forme indéterminée « \\(0/0\\) ».",
       "type": "texte"
      },
      {
-      "detail": "Abandon : forme indéterminée 0/0 non levée en \\frac{x}{\\sqrt{x^{2}}}",
-      "html": "À droite : le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = 1\\).",
+      "html": "À gauche de \\(0\\), \\(x\\) est négatif, donc \\(\\sqrt{x^{2}} = |x| = -x\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\frac{x}{\\sqrt{x^{2}}} = \\frac{x}{|x|} = \\frac{x}{-x}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Le numérateur \\(x\\) tend vers \\(0\\) et le dénominateur \\(-x\\) tend vers \\(0\\) : forme indéterminée « \\(0/0\\) ».",
+      "type": "texte"
+     },
+     {
+      "html": "On factorise le numérateur et le dénominateur par \\(\\left(x\\right)\\) et l'on simplifie (pour \\(x \\neq 0\\)) : \\(\\frac{x}{-x} = \\dfrac{\\cancel{\\left(x\\right)}}{-\\cancel{\\left(x\\right)}} = -1\\).",
+      "type": "texte"
+     },
+     {
+      "html": "À droite de \\(0\\), \\(x\\) est positif, donc \\(\\sqrt{x^{2}} = |x| = x\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(\\frac{x}{\\sqrt{x^{2}}} = \\frac{x}{|x|} = \\frac{x}{x}\\).",
+      "type": "texte"
+     },
+     {
+      "html": "Le numérateur \\(x\\) tend vers \\(0\\) et le dénominateur \\(x\\) tend vers \\(0\\) : forme indéterminée « \\(0/0\\) ».",
+      "type": "texte"
+     },
+     {
+      "html": "On factorise le numérateur et le dénominateur par \\(\\left(x\\right)\\) et l'on simplifie (pour \\(x \\neq 0\\)) : \\(\\frac{x}{x} = \\dfrac{\\cancel{\\left(x\\right)}}{\\cancel{\\left(x\\right)}} = 1\\).",
       "type": "texte"
      },
      {

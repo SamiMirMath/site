@@ -114,6 +114,7 @@ seulement) ; (4) Bernoulli-L'Hôpital en dernier recours.
   (en −∞ : f(x) = −x·√(4 + 1/x²)/(x(1 + 2/x)) = −√(4 + 1/x²)/(1 + 2/x) → −2). Après une conjuguée :
   x/(√(x²+x) + x) = 1/(√(1 + 1/x) + 1) → 1/2. ln d'un polynôme : ln(x²+1) = ln(x²(1 + 1/x²)) =
   2 ln|x| + ln(1 + 1/x²), puis croissance comparée (ln x / x^n → 0) **avant** Bernoulli-L'Hôpital.
+- **√(x²) = |x|** (et √(u²) = |u|) est reconnu : x/√(x²) en 0 donne x/|x|, −1 à gauche et 1 à droite.
 - **Expression conjuguée** : ajoutée (∞ − ∞ et 0/0 avec une racine), juste après la mise en évidence.
 - **Limites de référence** : celles de Q1 seulement. (e^x − 1)/x en 0 ou ln(x)/(x − 1) en 1 passent
   par Bernoulli-L'Hôpital.

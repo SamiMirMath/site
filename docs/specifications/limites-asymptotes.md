@@ -73,6 +73,8 @@ comme », dans aucune sortie. La méthode « termes dominants » est supprimée 
 - **ln d'un polynôme en ±∞** : ln(x²+1) = ln(x²(1 + 1/x²)) = 2 ln|x| + ln(1 + 1/x²). Pour ln(u)/v
   (u, v polynômes), on écrit ln(u) = k ln|x| + ln(c + …), on met x^p en évidence dans v, puis on conclut
   par **croissance comparée** (ln x / x^n → 0 ; en −∞ avec t = −x), **avant** Bernoulli-L'Hôpital.
+- **√(x²) = |x|** (et √(u²) = |u|) : reconnu en une valeur, d'un seul côté ; x/√(x²) en 0 donne x/|x|, soit
+  −1 à gauche (x < 0) et 1 à droite (x > 0), sans phrase de repli. Le signe de u se lit sur sa factorisation en (x − a).
 
 Autres cas rédigés :
 - **Valeur interdite sans forme indéterminée** : limite du numérateur, signe du dénominateur à gauche et
@@ -132,7 +134,7 @@ Modèle (1/(x² − 2) en −√2) :
 | Id | Critère | Vérif. |
 |---|---|---|
 | LA-01 | Aucune asymptote « verticale » n'est annoncée sans au moins une limite latérale infinie | [auto-py] (existe : `test_limites_deux_cotes.py`) |
-| LA-02 | (e^x−1)/x et x·ln(x²) en 0 : limite finie, trou en (0 ; 1) et (0 ; 0) ; x/√(x²) en 0 : limites −1 et 1, pas de limite en 0 ; jamais d'asymptote verticale | [auto-py] (existe : `test_limites_deux_cotes.py`, à adapter en T08b) |
+| LA-02 | (e^x−1)/x et x·ln(x²) en 0 : limite finie, trou en (0 ; 1) et (0 ; 0) ; x/√(x²) en 0 : limites −1 et 1 (rédigées avec |x|), pas de limite en 0 ; jamais d'asymptote verticale | [auto-py] (existe : `test_limites_deux_cotes.py`, à adapter en T08b) |
 | LA-03 | Une limite non déterminée (« ? ») n'est jamais enregistrée comme asymptote, en ±∞ comme en un point | [auto-py] |
 | LA-04 | Pour ≥ 40 fonctions, chaque limite annoncée est confirmée par une sonde numérique (x = ±10⁶, a ± 10⁻⁶) ou par `sympy.limit` indépendamment | [auto-py] |
 | LA-05 | Fonctions rationnelles : asymptote oblique y = ax + b telle que f(x) − (ax + b) → 0 numériquement | [auto-py] |
@@ -165,3 +167,4 @@ Modèle (1/(x² − 2) en −√2) :
 | LA-32 | Bernoulli-L'Hôpital (L7) : en dernier recours, hypothèses (a) à (d) écrites ((e^x−1)/x en 0, ln(x)/(x−1) en 1, x·ln(x²) en 0 ; ln(x²−4x)/(x−5) en ±∞ ne passe plus par la règle : mise en évidence de ln puis croissance comparée) ; jamais hors forme 0/0 ou ∞/∞, jamais pour une fraction rationnelle ni quand une limite de référence s'applique ; non appliquée (phrase de repli) si g' ≠ 0 ou lim f'/g' n'est pas établi ; au plus deux applications de suite | [auto-py] |
 | LA-33 | Aucune sortie ne contient « ∼ », « équivalent » ni « se comporte comme » | [auto-py] (`test_vocabulaire.py`) |
 | LA-34 | ln(u)/v en ±∞ (u, v polynômes) : ln(u) = k ln\|x\| + ln(c + …), v mis en évidence, puis croissance comparée (limite de référence nommée) ; jamais Bernoulli-L'Hôpital pour ln(x²+1)/x et ln(x²−4x)/(x−5) en ±∞ | [auto-py] |
+| LA-35 | √(x²) = \|x\| : x/√(x²) en 0 se rédige (x/\|x\| = −1 à gauche, 1 à droite), sans phrase de repli ; (x−1)/√((x−1)²) en 1 de même | [auto-py] |
