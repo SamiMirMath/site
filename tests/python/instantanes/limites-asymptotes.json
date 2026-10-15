@@ -93,47 +93,23 @@
    {
     "etapes": [
      {
-      "html": "\\(x=1\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 1\\).",
+      "html": "\\(x = 1\\) est une valeur interdite.",
       "type": "texte"
      },
      {
-      "html": "Limite à gauche (\\(x \\to 1^{-}\\)) :",
+      "html": "Le numérateur \\(2x + 1\\) vaut \\(2 \\cdot 1 + 1 = 3\\) et le dénominateur \\(x - 1\\) tend vers \\(0\\).",
       "type": "texte"
      },
      {
-      "html": "Par substitution, \\(2x + 1 \\to 2 \\cdot 1 + 1 = 3\\).",
+      "html": "Signe de \\(x - 1\\) : négatif pour \\(x < 1\\), positif pour \\(x > 1\\).",
       "type": "texte"
      },
      {
-      "html": "Pour \\(x < 1\\), \\(x - 1 < 0\\) : \\(x - 1 \\to 0^{-}\\).",
+      "html": "À gauche : \\(x - 1 \\to 0^{-}\\), donc \\(f(x) \\to \\dfrac{3}{0^{-}} = -\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "\\(2x + 1 \\to 3\\) et \\(x - 1 \\to 0^{-}\\) : \\(\\dfrac{3}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 1^{-}} f(x) = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Limite à droite (\\(x \\to 1^{+}\\)) :",
-      "type": "texte"
-     },
-     {
-      "html": "Par substitution, \\(2x + 1 \\to 2 \\cdot 1 + 1 = 3\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Pour \\(x > 1\\), \\(x - 1 > 0\\) : \\(x - 1 \\to 0^{+}\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(2x + 1 \\to 3\\) et \\(x - 1 \\to 0^{+}\\) : \\(\\dfrac{3}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 1^{+}} f(x) = +\\infty\\).",
+      "html": "À droite : \\(x - 1 \\to 0^{+}\\), donc \\(f(x) \\to \\dfrac{3}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -249,47 +225,23 @@
    {
     "etapes": [
      {
-      "html": "\\(x=-1\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to -1\\).",
+      "html": "\\(x = -1\\) est une valeur interdite.",
       "type": "texte"
      },
      {
-      "html": "Limite à gauche (\\(x \\to -1^{-}\\)) :",
+      "html": "Le numérateur \\(2x^{2} + 1\\) vaut \\(2\\left(-1\\right)^{2} + 1 = 3\\) et le dénominateur \\(x^{2} - 1\\) tend vers \\(0\\).",
       "type": "texte"
      },
      {
-      "html": "Par substitution, \\(2x^{2} + 1 \\to 2 \\cdot \\left(-1\\right)^{2} + 1 = 3\\).",
+      "html": "Signe de \\(x^{2} - 1 = \\left(x - 1\\right)\\,\\left(x + 1\\right)\\) : près de \\(-1\\), \\(x - 1\\) est négatif (il vaut \\(-2\\)), donc \\(x^{2} - 1\\) est positif pour \\(x < -1\\), négatif pour \\(x > -1\\).",
       "type": "texte"
      },
      {
-      "html": "\\(x^{2} - 1 = \\left(x - 1\\right)\\,\\left(x + 1\\right)\\) ; quand \\(x \\to -1^{-}\\), \\(x - 1 \\to -2\\) et \\(x + 1 \\to 0^{-}\\) : \\(x^{2} - 1 \\to 0^{+}\\).",
+      "html": "À gauche : \\(x^{2} - 1 \\to 0^{+}\\), donc \\(f(x) \\to \\dfrac{3}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "\\(2x^{2} + 1 \\to 3\\) et \\(x^{2} - 1 \\to 0^{+}\\) : \\(\\dfrac{3}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to -1^{-}} f(x) = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Limite à droite (\\(x \\to -1^{+}\\)) :",
-      "type": "texte"
-     },
-     {
-      "html": "Par substitution, \\(2x^{2} + 1 \\to 2 \\cdot \\left(-1\\right)^{2} + 1 = 3\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x^{2} - 1 = \\left(x - 1\\right)\\,\\left(x + 1\\right)\\) ; quand \\(x \\to -1^{+}\\), \\(x - 1 \\to -2\\) et \\(x + 1 \\to 0^{+}\\) : \\(x^{2} - 1 \\to 0^{-}\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(2x^{2} + 1 \\to 3\\) et \\(x^{2} - 1 \\to 0^{-}\\) : \\(\\dfrac{3}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to -1^{+}} f(x) = -\\infty\\).",
+      "html": "À droite : \\(x^{2} - 1 \\to 0^{-}\\), donc \\(f(x) \\to \\dfrac{3}{0^{-}} = -\\infty\\).",
       "type": "texte"
      },
      {
@@ -302,47 +254,23 @@
    {
     "etapes": [
      {
-      "html": "\\(x=1\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 1\\).",
+      "html": "\\(x = 1\\) est une valeur interdite.",
       "type": "texte"
      },
      {
-      "html": "Limite à gauche (\\(x \\to 1^{-}\\)) :",
+      "html": "Le numérateur \\(2x^{2} + 1\\) vaut \\(2 \\cdot 1^{2} + 1 = 3\\) et le dénominateur \\(x^{2} - 1\\) tend vers \\(0\\).",
       "type": "texte"
      },
      {
-      "html": "Par substitution, \\(2x^{2} + 1 \\to 2 \\cdot 1^{2} + 1 = 3\\).",
+      "html": "Signe de \\(x^{2} - 1 = \\left(x + 1\\right)\\,\\left(x - 1\\right)\\) : près de \\(1\\), \\(x + 1\\) est positif (il vaut \\(2\\)), donc \\(x^{2} - 1\\) est négatif pour \\(x < 1\\), positif pour \\(x > 1\\).",
       "type": "texte"
      },
      {
-      "html": "\\(x^{2} - 1 = \\left(x + 1\\right)\\,\\left(x - 1\\right)\\) ; quand \\(x \\to 1^{-}\\), \\(x + 1 \\to 2\\) et \\(x - 1 \\to 0^{-}\\) : \\(x^{2} - 1 \\to 0^{-}\\).",
+      "html": "À gauche : \\(x^{2} - 1 \\to 0^{-}\\), donc \\(f(x) \\to \\dfrac{3}{0^{-}} = -\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "\\(2x^{2} + 1 \\to 3\\) et \\(x^{2} - 1 \\to 0^{-}\\) : \\(\\dfrac{3}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 1^{-}} f(x) = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Limite à droite (\\(x \\to 1^{+}\\)) :",
-      "type": "texte"
-     },
-     {
-      "html": "Par substitution, \\(2x^{2} + 1 \\to 2 \\cdot 1^{2} + 1 = 3\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x^{2} - 1 = \\left(x + 1\\right)\\,\\left(x - 1\\right)\\) ; quand \\(x \\to 1^{+}\\), \\(x + 1 \\to 2\\) et \\(x - 1 \\to 0^{+}\\) : \\(x^{2} - 1 \\to 0^{+}\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(2x^{2} + 1 \\to 3\\) et \\(x^{2} - 1 \\to 0^{+}\\) : \\(\\dfrac{3}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 1^{+}} f(x) = +\\infty\\).",
+      "html": "À droite : \\(x^{2} - 1 \\to 0^{+}\\), donc \\(f(x) \\to \\dfrac{3}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -378,19 +306,11 @@
    {
     "etapes": [
      {
-      "html": "Or \\(e^{t} \\to 0^{+}\\) quand \\(t \\to -\\infty\\) : \\(e^{x} \\to 0^{+}\\).",
+      "html": "Or \\(e^{t} \\to 0^{+}\\) quand \\(t \\to -\\infty\\), donc \\(e^{x} \\to 0^{+}\\).",
       "type": "texte"
      },
      {
-      "html": "\\(e^{x} \\to 0^{+}\\) et \\(1\\) est une constante : la différence tend vers \\(-1\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(e^{x} - 1 \\to -1\\) et \\(x \\to -\\infty\\) : le quotient tend vers \\(0^{+}\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = 0\\).",
+      "html": "\\(e^{x} - 1 \\to -1\\) et \\(x \\to -\\infty\\), donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = 0\\).",
       "type": "texte"
      },
      {
@@ -417,25 +337,12 @@
    {
     "etapes": [
      {
-      "html": "\\(x=0\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 0\\).",
+      "html": "\\(x = 0\\) est une valeur interdite.",
       "type": "texte"
      },
      {
-      "html": "Limite à gauche (\\(x \\to 0^{-}\\)) :",
-      "type": "texte"
-     },
-     {
-      "detail": "Abandon : forme indéterminée 0/0 non levée en \\frac{e^{x} - 1}{x}",
-      "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to 0^{-}} f(x) = 1\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Limite à droite (\\(x \\to 0^{+}\\)) :",
-      "type": "texte"
-     },
-     {
-      "detail": "Abandon : forme indéterminée 0/0 non levée en \\frac{e^{x} - 1}{x}",
-      "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = 1\\).",
+      "detail": "Abandon : forme indéterminée 0/0 non levée en \\frac{e^{x} - 1}{x} | Abandon : forme indéterminée 0/0 non levée en \\frac{e^{x} - 1}{x}",
+      "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to 0} f(x) = 1\\).",
       "type": "texte"
      },
      {
@@ -559,7 +466,7 @@
    {
     "etapes": [
      {
-      "html": "\\(x=1\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 1\\).",
+      "html": "\\(x = 1\\) est une valeur interdite.",
       "type": "texte"
      },
      {
@@ -571,11 +478,7 @@
       "type": "texte"
      },
      {
-      "html": "Par substitution, \\(x + 1 \\to 1 + 1 = 2\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 1} f(x) = 2\\).",
+      "html": "Donc \\(\\displaystyle\\lim_{x\\to 1} f(x) = \\lim_{x\\to 1} \\left(x + 1\\right) = 1 + 1 = 2\\).",
       "type": "texte"
      },
      {
@@ -699,47 +602,23 @@
    {
     "etapes": [
      {
-      "html": "\\(x=3\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 3\\).",
+      "html": "\\(x = 3\\) est une valeur interdite.",
       "type": "texte"
      },
      {
-      "html": "Limite à gauche (\\(x \\to 3^{-}\\)) :",
+      "html": "Le numérateur \\(x^{2} - 1\\) vaut \\(3^{2} - 1 = 8\\) et le dénominateur \\(x - 3\\) tend vers \\(0\\).",
       "type": "texte"
      },
      {
-      "html": "Par substitution, \\(x^{2} - 1 \\to 3^{2} - 1 = 8\\).",
+      "html": "Signe de \\(x - 3\\) : négatif pour \\(x < 3\\), positif pour \\(x > 3\\).",
       "type": "texte"
      },
      {
-      "html": "Pour \\(x < 3\\), \\(x - 3 < 0\\) : \\(x - 3 \\to 0^{-}\\).",
+      "html": "À gauche : \\(x - 3 \\to 0^{-}\\), donc \\(f(x) \\to \\dfrac{8}{0^{-}} = -\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "\\(x^{2} - 1 \\to 8\\) et \\(x - 3 \\to 0^{-}\\) : \\(\\dfrac{8}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 3^{-}} f(x) = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Limite à droite (\\(x \\to 3^{+}\\)) :",
-      "type": "texte"
-     },
-     {
-      "html": "Par substitution, \\(x^{2} - 1 \\to 3^{2} - 1 = 8\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Pour \\(x > 3\\), \\(x - 3 > 0\\) : \\(x - 3 \\to 0^{+}\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x^{2} - 1 \\to 8\\) et \\(x - 3 \\to 0^{+}\\) : \\(\\dfrac{8}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 3^{+}} f(x) = +\\infty\\).",
+      "html": "À droite : \\(x - 3 \\to 0^{+}\\), donc \\(f(x) \\to \\dfrac{8}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -853,47 +732,23 @@
    {
     "etapes": [
      {
-      "html": "\\(x=2\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 2\\).",
+      "html": "\\(x = 2\\) est une valeur interdite.",
       "type": "texte"
      },
      {
-      "html": "Limite à gauche (\\(x \\to 2^{-}\\)) :",
+      "html": "Le numérateur \\(x^{3} + 1\\) vaut \\(2^{3} + 1 = 9\\) et le dénominateur \\(x - 2\\) tend vers \\(0\\).",
       "type": "texte"
      },
      {
-      "html": "Par substitution, \\(x^{3} + 1 \\to 2^{3} + 1 = 9\\).",
+      "html": "Signe de \\(x - 2\\) : négatif pour \\(x < 2\\), positif pour \\(x > 2\\).",
       "type": "texte"
      },
      {
-      "html": "Pour \\(x < 2\\), \\(x - 2 < 0\\) : \\(x - 2 \\to 0^{-}\\).",
+      "html": "À gauche : \\(x - 2 \\to 0^{-}\\), donc \\(f(x) \\to \\dfrac{9}{0^{-}} = -\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "\\(x^{3} + 1 \\to 9\\) et \\(x - 2 \\to 0^{-}\\) : \\(\\dfrac{9}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 2^{-}} f(x) = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Limite à droite (\\(x \\to 2^{+}\\)) :",
-      "type": "texte"
-     },
-     {
-      "html": "Par substitution, \\(x^{3} + 1 \\to 2^{3} + 1 = 9\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Pour \\(x > 2\\), \\(x - 2 > 0\\) : \\(x - 2 \\to 0^{+}\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x^{3} + 1 \\to 9\\) et \\(x - 2 \\to 0^{+}\\) : \\(\\dfrac{9}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 2^{+}} f(x) = +\\infty\\).",
+      "html": "À droite : \\(x - 2 \\to 0^{+}\\), donc \\(f(x) \\to \\dfrac{9}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -935,7 +790,7 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur est la constante \\(1\\) et le dénominateur tend vers \\(-\\infty\\) (limite de son terme de plus haut degré) : le quotient tend vers \\(0\\).",
+      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x - 2\\) tend vers \\(-\\infty\\) (limite de son terme de plus haut degré), donc \\(\\frac{1}{x - 2} \\to 0\\).",
       "type": "texte"
      },
      {
@@ -952,7 +807,7 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur est la constante \\(1\\) et le dénominateur tend vers \\(+\\infty\\) (limite de son terme de plus haut degré) : le quotient tend vers \\(0\\).",
+      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x - 2\\) tend vers \\(+\\infty\\) (limite de son terme de plus haut degré), donc \\(\\frac{1}{x - 2} \\to 0\\).",
       "type": "texte"
      },
      {
@@ -969,39 +824,23 @@
    {
     "etapes": [
      {
-      "html": "\\(x=2\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 2\\).",
+      "html": "\\(x = 2\\) est une valeur interdite.",
       "type": "texte"
      },
      {
-      "html": "Limite à gauche (\\(x \\to 2^{-}\\)) :",
+      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x - 2\\) tend vers \\(0\\).",
       "type": "texte"
      },
      {
-      "html": "Pour \\(x < 2\\), \\(x - 2 < 0\\) : \\(x - 2 \\to 0^{-}\\).",
+      "html": "Signe de \\(x - 2\\) : négatif pour \\(x < 2\\), positif pour \\(x > 2\\).",
       "type": "texte"
      },
      {
-      "html": "\\(1\\) est une constante et \\(x - 2 \\to 0^{-}\\) : \\(\\dfrac{1}{0^{-}} = -\\infty\\).",
+      "html": "À gauche : \\(x - 2 \\to 0^{-}\\), donc \\(f(x) \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 2^{-}} f(x) = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Limite à droite (\\(x \\to 2^{+}\\)) :",
-      "type": "texte"
-     },
-     {
-      "html": "Pour \\(x > 2\\), \\(x - 2 > 0\\) : \\(x - 2 \\to 0^{+}\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(1\\) est une constante et \\(x - 2 \\to 0^{+}\\) : \\(\\dfrac{1}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 2^{+}} f(x) = +\\infty\\).",
+      "html": "À droite : \\(x - 2 \\to 0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -1051,7 +890,7 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur est la constante \\(1\\) et le dénominateur tend vers \\(+\\infty\\) (limite de son terme de plus haut degré) : le quotient tend vers \\(0\\).",
+      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x^{2} - 2\\) tend vers \\(+\\infty\\) (limite de son terme de plus haut degré), donc \\(\\frac{1}{x^{2} - 2} \\to 0\\).",
       "type": "texte"
      },
      {
@@ -1068,7 +907,7 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur est la constante \\(1\\) et le dénominateur tend vers \\(+\\infty\\) (limite de son terme de plus haut degré) : le quotient tend vers \\(0\\).",
+      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x^{2} - 2\\) tend vers \\(+\\infty\\) (limite de son terme de plus haut degré), donc \\(\\frac{1}{x^{2} - 2} \\to 0\\).",
       "type": "texte"
      },
      {
@@ -1085,47 +924,23 @@
    {
     "etapes": [
      {
-      "html": "\\(x=-\\sqrt{2}\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to -\\sqrt{2}\\).",
+      "html": "\\(x = -\\sqrt{2}\\) est une valeur interdite.",
       "type": "texte"
      },
      {
-      "html": "Limite à gauche (\\(x \\to {-\\sqrt{2}}^{-}\\)) :",
+      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x^{2} - 2\\) tend vers \\(0\\).",
       "type": "texte"
      },
      {
-      "html": "Par continuité de \\(t^{2}\\) en \\(- \\sqrt{2}\\), \\(x^{2} \\to 2\\).",
+      "html": "Signe de \\(x^{2} - 2\\) (trinôme, racines \\(- \\sqrt{2}\\) et \\(\\sqrt{2}\\)) : positif pour \\(x < - \\sqrt{2}\\), négatif entre \\(- \\sqrt{2}\\) et \\(\\sqrt{2}\\).",
       "type": "texte"
      },
      {
-      "html": "\\(x^{2} \\to 2\\) et \\(2\\) est une constante : la différence tend vers \\(0^{+}\\).",
+      "html": "À gauche : \\(x^{2} - 2 \\to 0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "\\(1\\) est une constante et \\(x^{2} - 2 \\to 0^{+}\\) : \\(\\dfrac{1}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to {-\\sqrt{2}}^{-}} f(x) = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Limite à droite (\\(x \\to {-\\sqrt{2}}^{+}\\)) :",
-      "type": "texte"
-     },
-     {
-      "html": "Par continuité de \\(t^{2}\\) en \\(- \\sqrt{2}\\), \\(x^{2} \\to 2\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x^{2} \\to 2\\) et \\(2\\) est une constante : la différence tend vers \\(0^{-}\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(1\\) est une constante et \\(x^{2} - 2 \\to 0^{-}\\) : \\(\\dfrac{1}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to {-\\sqrt{2}}^{+}} f(x) = -\\infty\\).",
+      "html": "À droite : \\(x^{2} - 2 \\to 0^{-}\\), donc \\(f(x) \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
       "type": "texte"
      },
      {
@@ -1138,47 +953,23 @@
    {
     "etapes": [
      {
-      "html": "\\(x=\\sqrt{2}\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to \\sqrt{2}\\).",
+      "html": "\\(x = \\sqrt{2}\\) est une valeur interdite.",
       "type": "texte"
      },
      {
-      "html": "Limite à gauche (\\(x \\to {\\sqrt{2}}^{-}\\)) :",
+      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x^{2} - 2\\) tend vers \\(0\\).",
       "type": "texte"
      },
      {
-      "html": "Par continuité de \\(t^{2}\\) en \\(\\sqrt{2}\\), \\(x^{2} \\to 2\\).",
+      "html": "Signe de \\(x^{2} - 2\\) (trinôme, racines \\(- \\sqrt{2}\\) et \\(\\sqrt{2}\\)) : négatif entre \\(- \\sqrt{2}\\) et \\(\\sqrt{2}\\), positif pour \\(x > \\sqrt{2}\\).",
       "type": "texte"
      },
      {
-      "html": "\\(x^{2} \\to 2\\) et \\(2\\) est une constante : la différence tend vers \\(0^{-}\\).",
+      "html": "À gauche : \\(x^{2} - 2 \\to 0^{-}\\), donc \\(f(x) \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "\\(1\\) est une constante et \\(x^{2} - 2 \\to 0^{-}\\) : \\(\\dfrac{1}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to {\\sqrt{2}}^{-}} f(x) = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Limite à droite (\\(x \\to {\\sqrt{2}}^{+}\\)) :",
-      "type": "texte"
-     },
-     {
-      "html": "Par continuité de \\(t^{2}\\) en \\(\\sqrt{2}\\), \\(x^{2} \\to 2\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x^{2} \\to 2\\) et \\(2\\) est une constante : la différence tend vers \\(0^{+}\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(1\\) est une constante et \\(x^{2} - 2 \\to 0^{+}\\) : \\(\\dfrac{1}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to {\\sqrt{2}}^{+}} f(x) = +\\infty\\).",
+      "html": "À droite : \\(x^{2} - 2 \\to 0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -1220,7 +1011,7 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur est la constante \\(1\\) et le dénominateur tend vers \\(+\\infty\\) (limite de son terme de plus haut degré) : le quotient tend vers \\(0\\).",
+      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x^{2}\\) tend vers \\(+\\infty\\), donc \\(\\frac{1}{x^{2}} \\to 0\\).",
       "type": "texte"
      },
      {
@@ -1237,7 +1028,7 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur est la constante \\(1\\) et le dénominateur tend vers \\(+\\infty\\) (limite de son terme de plus haut degré) : le quotient tend vers \\(0\\).",
+      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x^{2}\\) tend vers \\(+\\infty\\), donc \\(\\frac{1}{x^{2}} \\to 0\\).",
       "type": "texte"
      },
      {
@@ -1254,39 +1045,19 @@
    {
     "etapes": [
      {
-      "html": "\\(x=0\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 0\\).",
+      "html": "\\(x = 0\\) est une valeur interdite.",
       "type": "texte"
      },
      {
-      "html": "Limite à gauche (\\(x \\to 0^{-}\\)) :",
+      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x^{2}\\) tend vers \\(0\\).",
       "type": "texte"
      },
      {
-      "html": "\\(x^{2} = \\left(x\\right)^{2}\\) ; quand \\(x \\to 0^{-}\\), \\(\\left(x\\right)^{2} \\to 0^{+}\\) : \\(x^{2} \\to 0^{+}\\).",
+      "html": "Signe de \\(x^{2}\\) : positif pour \\(x \\neq 0\\), car une puissance paire est positive.",
       "type": "texte"
      },
      {
-      "html": "\\(1\\) est une constante et \\(x^{2} \\to 0^{+}\\) : \\(\\dfrac{1}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 0^{-}} f(x) = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Limite à droite (\\(x \\to 0^{+}\\)) :",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x^{2} = \\left(x\\right)^{2}\\) ; quand \\(x \\to 0^{+}\\), \\(\\left(x\\right)^{2} \\to 0^{+}\\) : \\(x^{2} \\to 0^{+}\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(1\\) est une constante et \\(x^{2} \\to 0^{+}\\) : \\(\\dfrac{1}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = +\\infty\\).",
+      "html": "\\(x^{2} \\to 0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -1330,15 +1101,11 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur est la constante \\(1\\) et le dénominateur tend vers \\(-\\infty\\) (limite de son terme de plus haut degré) : le quotient tend vers \\(0\\).",
+      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x\\) tend vers \\(-\\infty\\), donc \\(\\frac{1}{x} \\to 0\\).",
       "type": "texte"
      },
      {
-      "html": "Par continuité de \\(e^{t}\\) en \\(0\\), \\(e^{\\frac{1}{x}} \\to 1\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = 1\\).",
+      "html": "Or \\(e^{t} \\to 1\\) quand \\(t \\to 0\\), donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = 1\\).",
       "type": "texte"
      },
      {
@@ -1351,15 +1118,11 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur est la constante \\(1\\) et le dénominateur tend vers \\(+\\infty\\) (limite de son terme de plus haut degré) : le quotient tend vers \\(0\\).",
+      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x\\) tend vers \\(+\\infty\\), donc \\(\\frac{1}{x} \\to 0\\).",
       "type": "texte"
      },
      {
-      "html": "Par continuité de \\(e^{t}\\) en \\(0\\), \\(e^{\\frac{1}{x}} \\to 1\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 1\\).",
+      "html": "Or \\(e^{t} \\to 1\\) quand \\(t \\to 0\\), donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 1\\).",
       "type": "texte"
      },
      {
@@ -1372,39 +1135,31 @@
    {
     "etapes": [
      {
-      "html": "\\(x=0\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 0\\).",
+      "html": "\\(x = 0\\) est une valeur interdite.",
       "type": "texte"
      },
      {
-      "html": "Limite à gauche (\\(x \\to 0^{-}\\)) :",
+      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x\\) tend vers \\(0\\).",
       "type": "texte"
      },
      {
-      "html": "\\(1\\) est une constante et \\(x \\to 0^{-}\\) : \\(\\dfrac{1}{0^{-}} = -\\infty\\).",
+      "html": "Signe de \\(x\\) : négatif pour \\(x < 0\\), positif pour \\(x > 0\\).",
       "type": "texte"
      },
      {
-      "html": "Or \\(e^{t} \\to 0^{+}\\) quand \\(t \\to -\\infty\\) : \\(e^{\\frac{1}{x}} \\to 0^{+}\\).",
+      "html": "À gauche : \\(x \\to 0^{-}\\), donc \\(\\frac{1}{x} \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 0^{-}} f(x) = 0\\).",
+      "html": "Or \\(e^{t} \\to 0^{+}\\) quand \\(t \\to -\\infty\\), donc \\(f(x) \\to 0\\).",
       "type": "texte"
      },
      {
-      "html": "Limite à droite (\\(x \\to 0^{+}\\)) :",
+      "html": "À droite : \\(x \\to 0^{+}\\), donc \\(\\frac{1}{x} \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "\\(1\\) est une constante et \\(x \\to 0^{+}\\) : \\(\\dfrac{1}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Or \\(e^{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(e^{\\frac{1}{x}} \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = +\\infty\\).",
+      "html": "Or \\(e^{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(f(x) \\to +\\infty\\).",
       "type": "texte"
      },
      {
@@ -1432,15 +1187,11 @@
    {
     "etapes": [
      {
-      "html": "Comme \\(x \\to -\\infty\\) et \\(2 > 0\\), on a \\(2x \\to -\\infty\\).",
+      "html": "Quand \\(x \\to -\\infty\\), \\(2x \\to -\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "Or \\(e^{t} \\to 0^{+}\\) quand \\(t \\to -\\infty\\) : \\(e^{2x} \\to 0^{+}\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = 0\\).",
+      "html": "Or \\(e^{t} \\to 0^{+}\\) quand \\(t \\to -\\infty\\), donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = 0\\).",
       "type": "texte"
      },
      {
@@ -1453,15 +1204,11 @@
    {
     "etapes": [
      {
-      "html": "Comme \\(x \\to +\\infty\\) et \\(2 > 0\\), on a \\(2x \\to +\\infty\\).",
+      "html": "Quand \\(x \\to +\\infty\\), \\(2x \\to +\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "Or \\(e^{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(e^{2x} \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+      "html": "Or \\(e^{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -1499,15 +1246,11 @@
    {
     "etapes": [
      {
-      "html": "Or \\(e^{t} \\to 0^{+}\\) quand \\(t \\to -\\infty\\) : \\(e^{x} \\to 0^{+}\\).",
+      "html": "Or \\(e^{t} \\to 0^{+}\\) quand \\(t \\to -\\infty\\), donc \\(e^{x} \\to 0^{+}\\).",
       "type": "texte"
      },
      {
-      "html": "\\(e^{x} \\to 0^{+}\\) et \\(x \\to -\\infty\\) : le quotient tend vers \\(0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = 0\\).",
+      "html": "\\(e^{x} \\to 0^{+}\\) et \\(x \\to -\\infty\\), donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = 0\\).",
       "type": "texte"
      },
      {
@@ -1534,39 +1277,23 @@
    {
     "etapes": [
      {
-      "html": "\\(x=0\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 0\\).",
+      "html": "\\(x = 0\\) est une valeur interdite.",
       "type": "texte"
      },
      {
-      "html": "Limite à gauche (\\(x \\to 0^{-}\\)) :",
+      "html": "Le numérateur \\(e^{x}\\) vaut \\(e^{0} = 1\\) et le dénominateur \\(x\\) tend vers \\(0\\).",
       "type": "texte"
      },
      {
-      "html": "Par continuité de \\(e^{t}\\) en \\(0\\), \\(e^{x} \\to 1\\).",
+      "html": "Signe de \\(x\\) : négatif pour \\(x < 0\\), positif pour \\(x > 0\\).",
       "type": "texte"
      },
      {
-      "html": "\\(e^{x} \\to 1\\) et \\(x \\to 0^{-}\\) : \\(\\dfrac{1}{0^{-}} = -\\infty\\).",
+      "html": "À gauche : \\(x \\to 0^{-}\\), donc \\(f(x) \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 0^{-}} f(x) = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Limite à droite (\\(x \\to 0^{+}\\)) :",
-      "type": "texte"
-     },
-     {
-      "html": "Par continuité de \\(e^{t}\\) en \\(0\\), \\(e^{x} \\to 1\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(e^{x} \\to 1\\) et \\(x \\to 0^{+}\\) : \\(\\dfrac{1}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = +\\infty\\).",
+      "html": "À droite : \\(x \\to 0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -1595,15 +1322,11 @@
    {
     "etapes": [
      {
-      "html": "\\(x=0\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 0^{+}\\).",
+      "html": "\\(x = 0\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 0^{+}\\).",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\) : \\(\\ln(x) \\to -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = -\\infty\\).",
+      "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\), donc \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = -\\infty\\).",
       "type": "texte"
      },
      {
@@ -1616,11 +1339,7 @@
    {
     "etapes": [
      {
-      "html": "Or \\(\\ln t \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(\\ln(x) \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+      "html": "Or \\(\\ln t \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -1649,19 +1368,15 @@
    {
     "etapes": [
      {
-      "html": "\\(x=1\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 1^{+}\\).",
+      "html": "\\(x = 1\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 1^{+}\\).",
       "type": "texte"
      },
      {
-      "html": "Pour \\(x > 1\\), \\(x - 1 > 0\\) : \\(x - 1 \\to 0^{+}\\).",
+      "html": "Signe de \\(x - 1\\) : positif pour \\(x > 1\\).",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\) : \\(\\ln\\left(x - 1\\right) \\to -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 1^{+}} f(x) = -\\infty\\).",
+      "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\) et \\(x - 1 \\to 0^{+}\\), donc \\(\\displaystyle\\lim_{x\\to 1^{+}} f(x) = -\\infty\\).",
       "type": "texte"
      },
      {
@@ -1674,15 +1389,11 @@
    {
     "etapes": [
      {
-      "html": "\\(x \\to +\\infty\\) et \\(-1\\) est une constante : la somme tend vers \\(+\\infty\\).",
+      "html": "\\(x \\to +\\infty\\), donc \\(x - 1 \\to +\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\ln t \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(\\ln\\left(x - 1\\right) \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+      "html": "Or \\(\\ln t \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -1768,27 +1479,19 @@
    {
     "etapes": [
      {
-      "html": "\\(x=0\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 0^{-}\\).",
+      "html": "\\(x = 0\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 0^{-}\\).",
       "type": "texte"
      },
      {
-      "html": "\\(x^{2} - 4x = x\\,\\left(x - 4\\right)\\) ; quand \\(x \\to 0^{-}\\), \\(x - 4 \\to -4\\) et \\(x \\to 0^{-}\\) : \\(x^{2} - 4x \\to 0^{+}\\).",
+      "html": "Signe de \\(x^{2} - 4x = x\\,\\left(x - 4\\right)\\) : près de \\(0\\), \\(x - 4\\) est négatif (il vaut \\(-4\\)), donc \\(x^{2} - 4x\\) est positif pour \\(x < 0\\).",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\) : \\(\\ln\\left(x^{2} - 4x\\right) \\to -\\infty\\).",
+      "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\) et \\(x^{2} - 4x \\to 0^{+}\\), donc \\(\\ln\\left(x^{2} - 4x\\right) \\to -\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "Par substitution, \\(x - 5 \\to 0 - 5 = -5\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(\\ln\\left(x^{2} - 4x\\right) \\to -\\infty\\) et \\(x - 5 \\to -5\\) : le quotient tend vers \\(+\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 0^{-}} f(x) = +\\infty\\).",
+      "html": "\\(\\ln\\left(x^{2} - 4x\\right) \\to -\\infty\\) et \\(x - 5 \\to -5\\), donc \\(\\displaystyle\\lim_{x\\to 0^{-}} f(x) = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -1801,27 +1504,19 @@
    {
     "etapes": [
      {
-      "html": "\\(x=4\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 4^{+}\\).",
+      "html": "\\(x = 4\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 4^{+}\\).",
       "type": "texte"
      },
      {
-      "html": "\\(x^{2} - 4x = x\\,\\left(x - 4\\right)\\) ; quand \\(x \\to 4^{+}\\), \\(x \\to 4\\) et \\(x - 4 \\to 0^{+}\\) : \\(x^{2} - 4x \\to 0^{+}\\).",
+      "html": "Signe de \\(x^{2} - 4x = x\\,\\left(x - 4\\right)\\) : près de \\(4\\), \\(x\\) est positif (il vaut \\(4\\)), donc \\(x^{2} - 4x\\) est positif pour \\(x > 4\\).",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\) : \\(\\ln\\left(x^{2} - 4x\\right) \\to -\\infty\\).",
+      "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\) et \\(x^{2} - 4x \\to 0^{+}\\), donc \\(\\ln\\left(x^{2} - 4x\\right) \\to -\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "Par substitution, \\(x - 5 \\to 4 - 5 = -1\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(\\ln\\left(x^{2} - 4x\\right) \\to -\\infty\\) et \\(x - 5 \\to -1\\) : le quotient tend vers \\(+\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 4^{+}} f(x) = +\\infty\\).",
+      "html": "\\(\\ln\\left(x^{2} - 4x\\right) \\to -\\infty\\) et \\(x - 5 \\to -1\\), donc \\(\\displaystyle\\lim_{x\\to 4^{+}} f(x) = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -1834,55 +1529,23 @@
    {
     "etapes": [
      {
-      "html": "\\(x=5\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 5\\).",
+      "html": "\\(x = 5\\) est une valeur interdite.",
       "type": "texte"
      },
      {
-      "html": "Limite à gauche (\\(x \\to 5^{-}\\)) :",
+      "html": "Le numérateur \\(\\ln\\left(x^{2} - 4x\\right)\\) vaut \\(\\ln\\left(5^{2} - 4 \\cdot 5\\right) = \\ln{\\left(5 \\right)}\\) et le dénominateur \\(x - 5\\) tend vers \\(0\\).",
       "type": "texte"
      },
      {
-      "html": "Par substitution, \\(x^{2} - 4x \\to 5^{2} - 4 \\cdot 5 = 5\\).",
+      "html": "Signe de \\(x - 5\\) : négatif pour \\(x < 5\\), positif pour \\(x > 5\\).",
       "type": "texte"
      },
      {
-      "html": "Par continuité de \\(\\ln t\\) en \\(5\\), \\(\\ln\\left(x^{2} - 4x\\right) \\to \\ln{\\left(5 \\right)}\\).",
+      "html": "À gauche : \\(x - 5 \\to 0^{-}\\), donc \\(f(x) \\to \\dfrac{\\ln{\\left(5 \\right)}}{0^{-}} = -\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "Pour \\(x < 5\\), \\(x - 5 < 0\\) : \\(x - 5 \\to 0^{-}\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(\\ln\\left(x^{2} - 4x\\right) \\to \\ln{\\left(5 \\right)}\\) et \\(x - 5 \\to 0^{-}\\) : \\(\\dfrac{\\ln{\\left(5 \\right)}}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 5^{-}} f(x) = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Limite à droite (\\(x \\to 5^{+}\\)) :",
-      "type": "texte"
-     },
-     {
-      "html": "Par substitution, \\(x^{2} - 4x \\to 5^{2} - 4 \\cdot 5 = 5\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Par continuité de \\(\\ln t\\) en \\(5\\), \\(\\ln\\left(x^{2} - 4x\\right) \\to \\ln{\\left(5 \\right)}\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Pour \\(x > 5\\), \\(x - 5 > 0\\) : \\(x - 5 \\to 0^{+}\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(\\ln\\left(x^{2} - 4x\\right) \\to \\ln{\\left(5 \\right)}\\) et \\(x - 5 \\to 0^{+}\\) : \\(\\dfrac{\\ln{\\left(5 \\right)}}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 5^{+}} f(x) = +\\infty\\).",
+      "html": "À droite : \\(x - 5 \\to 0^{+}\\), donc \\(f(x) \\to \\dfrac{\\ln{\\left(5 \\right)}}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -1922,15 +1585,11 @@
    {
     "etapes": [
      {
-      "html": "\\(x^{2} \\to +\\infty\\) et \\(1\\) est une constante : la somme tend vers \\(+\\infty\\).",
+      "html": "\\(x^{2} \\to +\\infty\\), donc \\(x^{2} + 1 \\to +\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(\\sqrt{x^{2} + 1} \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = +\\infty\\).",
+      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -1947,15 +1606,11 @@
    {
     "etapes": [
      {
-      "html": "\\(x^{2} \\to +\\infty\\) et \\(1\\) est une constante : la somme tend vers \\(+\\infty\\).",
+      "html": "\\(x^{2} \\to +\\infty\\), donc \\(x^{2} + 1 \\to +\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(\\sqrt{x^{2} + 1} \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -1999,15 +1654,11 @@
    {
     "etapes": [
      {
-      "html": "\\(x^{2} \\to +\\infty\\), \\(-4x \\to +\\infty\\) et \\(5\\) est une constante : la somme tend vers \\(+\\infty\\).",
+      "html": "\\(x^{2} \\to +\\infty\\) et \\(-4x \\to +\\infty\\), donc \\(x^{2} - 4x + 5 \\to +\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(\\sqrt{x^{2} - 4x + 5} \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = +\\infty\\).",
+      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -2024,7 +1675,7 @@
    {
     "etapes": [
      {
-      "html": "\\(x^{2} \\to +\\infty\\), \\(-4x \\to -\\infty\\) et \\(5\\) est une constante : forme indéterminée « \\(\\infty - \\infty\\) ».",
+      "html": "\\(x^{2} \\to +\\infty\\) et \\(-4x \\to -\\infty\\) : forme indéterminée « \\(\\infty - \\infty\\) ».",
       "type": "texte"
      },
      {
@@ -2040,11 +1691,7 @@
       "type": "texte"
      },
      {
-      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(\\sqrt{x^{2} - 4x + 5} \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -2090,15 +1737,11 @@
    {
     "etapes": [
      {
-      "html": "Or \\(e^{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(e^{x} \\to +\\infty\\).",
+      "html": "Or \\(e^{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(e^{x} \\to +\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "\\(x \\to +\\infty\\) et \\(e^{x} \\to +\\infty\\) : le produit tend vers \\(+\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+      "html": "\\(x \\to +\\infty\\) et \\(e^{x} \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -2128,19 +1771,15 @@
    {
     "etapes": [
      {
-      "html": "Or \\(t^{2} \\to +\\infty\\) quand \\(t \\to -\\infty\\) : \\(x^{2} \\to +\\infty\\).",
+      "html": "Or \\(t^{2} \\to +\\infty\\) quand \\(t \\to -\\infty\\), donc \\(x^{2} \\to +\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\ln t \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(\\ln\\left(x^{2}\\right) \\to +\\infty\\).",
+      "html": "Or \\(\\ln t \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\ln\\left(x^{2}\\right) \\to +\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "\\(x \\to -\\infty\\) et \\(\\ln\\left(x^{2}\\right) \\to +\\infty\\) : le produit tend vers \\(-\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = -\\infty\\).",
+      "html": "\\(x \\to -\\infty\\) et \\(\\ln\\left(x^{2}\\right) \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = -\\infty\\).",
       "type": "texte"
      },
      {
@@ -2153,19 +1792,15 @@
    {
     "etapes": [
      {
-      "html": "Or \\(t^{2} \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(x^{2} \\to +\\infty\\).",
+      "html": "Or \\(t^{2} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(x^{2} \\to +\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\ln t \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(\\ln\\left(x^{2}\\right) \\to +\\infty\\).",
+      "html": "Or \\(\\ln t \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\ln\\left(x^{2}\\right) \\to +\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "\\(x \\to +\\infty\\) et \\(\\ln\\left(x^{2}\\right) \\to +\\infty\\) : le produit tend vers \\(+\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+      "html": "\\(x \\to +\\infty\\) et \\(\\ln\\left(x^{2}\\right) \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -2178,25 +1813,12 @@
    {
     "etapes": [
      {
-      "html": "\\(x=0\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 0\\).",
+      "html": "\\(x = 0\\) est une valeur interdite.",
       "type": "texte"
      },
      {
-      "html": "Limite à gauche (\\(x \\to 0^{-}\\)) :",
-      "type": "texte"
-     },
-     {
-      "detail": "Abandon : forme indéterminée 0 · ∞ non levée en x\\,\\ln\\left(x^{2}\\right)",
-      "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to 0^{-}} f(x) = 0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Limite à droite (\\(x \\to 0^{+}\\)) :",
-      "type": "texte"
-     },
-     {
-      "detail": "Abandon : forme indéterminée 0 · ∞ non levée en x\\,\\ln\\left(x^{2}\\right)",
-      "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = 0\\).",
+      "detail": "Abandon : forme indéterminée 0 · ∞ non levée en x\\,\\ln\\left(x^{2}\\right) | Abandon : forme indéterminée 0 · ∞ non levée en x\\,\\ln\\left(x^{2}\\right)",
+      "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to 0} f(x) = 0\\).",
       "type": "texte"
      },
      {
@@ -2225,19 +1847,15 @@
    {
     "etapes": [
      {
-      "html": "\\(x=0\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 0^{+}\\).",
+      "html": "\\(x = 0\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 0^{+}\\).",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\) : \\(\\ln(x) \\to -\\infty\\).",
+      "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\), donc \\(\\ln(x) \\to -\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "\\(x \\to 0^{+}\\) et \\(\\ln(x) \\to -\\infty\\) : la somme tend vers \\(-\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = -\\infty\\).",
+      "html": "\\(x \\to 0^{+}\\) et \\(\\ln(x) \\to -\\infty\\), donc \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = -\\infty\\).",
       "type": "texte"
      },
      {
@@ -2250,15 +1868,11 @@
    {
     "etapes": [
      {
-      "html": "Or \\(\\ln t \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(\\ln(x) \\to +\\infty\\).",
+      "html": "Or \\(\\ln t \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\ln(x) \\to +\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "\\(x \\to +\\infty\\) et \\(\\ln(x) \\to +\\infty\\) : la somme tend vers \\(+\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+      "html": "\\(x \\to +\\infty\\) et \\(\\ln(x) \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -2330,25 +1944,17 @@
    {
     "etapes": [
      {
-      "html": "\\(x=0\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Limite à gauche (\\(x \\to 0^{-}\\)) :",
+      "html": "\\(x = 0\\) est une valeur interdite.",
       "type": "texte"
      },
      {
       "detail": "Abandon : forme indéterminée 0/0 non levée en \\frac{x}{\\sqrt{x^{2}}}",
-      "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to 0^{-}} f(x) = -1\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Limite à droite (\\(x \\to 0^{+}\\)) :",
+      "html": "À gauche : le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to 0^{-}} f(x) = -1\\).",
       "type": "texte"
      },
      {
       "detail": "Abandon : forme indéterminée 0/0 non levée en \\frac{x}{\\sqrt{x^{2}}}",
-      "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = 1\\).",
+      "html": "À droite : le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = 1\\).",
       "type": "texte"
      },
      {
@@ -2369,11 +1975,7 @@
    {
     "etapes": [
      {
-      "html": "Or \\(t^{\\frac{1}{2}} \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(\\sqrt{x} \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -2402,23 +2004,19 @@
    {
     "etapes": [
      {
-      "html": "Or \\(t^{2} \\to +\\infty\\) quand \\(t \\to -\\infty\\) : \\(x^{2} \\to +\\infty\\).",
+      "html": "Or \\(t^{2} \\to +\\infty\\) quand \\(t \\to -\\infty\\), donc \\(x^{2} \\to +\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "\\(x \\to -\\infty\\), donc \\(-x \\to +\\infty\\).",
+      "html": "Quand \\(x \\to -\\infty\\), \\(-x \\to +\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "Or \\(e^{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\) : \\(e^{-x} \\to +\\infty\\).",
+      "html": "Or \\(e^{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(e^{-x} \\to +\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "\\(x^{2} \\to +\\infty\\) et \\(e^{-x} \\to +\\infty\\) : le produit tend vers \\(+\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = +\\infty\\).",
+      "html": "\\(x^{2} \\to +\\infty\\) et \\(e^{-x} \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -2556,47 +2154,23 @@
    {
     "etapes": [
      {
-      "html": "\\(x=1\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 1\\).",
+      "html": "\\(x = 1\\) est une valeur interdite.",
       "type": "texte"
      },
      {
-      "html": "Limite à gauche (\\(x \\to 1^{-}\\)) :",
+      "html": "Le numérateur \\(x^{2}\\) vaut \\(1^{2} = 1\\) et le dénominateur \\(x - 1\\) tend vers \\(0\\).",
       "type": "texte"
      },
      {
-      "html": "Par substitution, \\(x^{2} \\to 1^{2} = 1\\).",
+      "html": "Signe de \\(x - 1\\) : négatif pour \\(x < 1\\), positif pour \\(x > 1\\).",
       "type": "texte"
      },
      {
-      "html": "Pour \\(x < 1\\), \\(x - 1 < 0\\) : \\(x - 1 \\to 0^{-}\\).",
+      "html": "À gauche : \\(x - 1 \\to 0^{-}\\), donc \\(f(x) \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
       "type": "texte"
      },
      {
-      "html": "\\(x^{2} \\to 1\\) et \\(x - 1 \\to 0^{-}\\) : \\(\\dfrac{1}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 1^{-}} f(x) = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Limite à droite (\\(x \\to 1^{+}\\)) :",
-      "type": "texte"
-     },
-     {
-      "html": "Par substitution, \\(x^{2} \\to 1^{2} = 1\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Pour \\(x > 1\\), \\(x - 1 > 0\\) : \\(x - 1 \\to 0^{+}\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x^{2} \\to 1\\) et \\(x - 1 \\to 0^{+}\\) : \\(\\dfrac{1}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 1^{+}} f(x) = +\\infty\\).",
+      "html": "À droite : \\(x - 1 \\to 0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {

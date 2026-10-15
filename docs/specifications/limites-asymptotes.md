@@ -82,6 +82,32 @@ page écrit « Le calcul détaillé de cette limite n'est pas rédigé ici ; ré
 suivie de la conclusion habituelle. Jamais d'étape fausse. Une limite non déterminée (« ? ») reste
 sans asymptote (LA-03). Le détail technique va dans la console (clé `detail`, C6).
 
+### Style de rédaction (tranché le 14.10.2026)
+
+Public visé : un élève moyen de gymnase. Une idée par ligne, le vocabulaire du cours, aucun détail de la
+mécanique interne (le détail technique va dans la clé `detail` / `controles_detail`, non affichée).
+
+1. **Phrases interdites** : « par continuité de », « est une constante », « la somme / la différence /
+   le produit tend vers » quand c'est évident. Une constante se remplace directement ; une limite
+   évidente s'écrit en une fois (« x² − 2 → 0 »). Une valeur définie se dit « vaut » (« le numérateur
+   vaut 3² − 1 = 8 »).
+2. **Le signe d'un dénominateur qui tend vers 0 est toujours justifié** (de même celui d'un argument de ln
+   qui tend vers 0) : par sa factorisation (« x² − 4x = x(x − 4) : près de 4, x est positif… »), par le
+   signe du trinôme (« positif à l'extérieur des racines »), par « x − 3 < 0 pour x < 3 », ou par la
+   monotonie (« e^x est croissante et vaut 1 en 0, donc e^x − 1 est négatif pour x < 0 »). Si le signe ne
+   peut pas être justifié, la limite est donnée avec la phrase de repli.
+3. **Valeur interdite** : la partie commune une seule fois (valeur interdite, limite du numérateur, signe du
+   dénominateur), puis une ligne courte « À gauche : … » et « À droite : … ». Si les deux côtés donnent la
+   même limite, une seule conclusion.
+
+Modèle (1/(x² − 2) en −√2) :
+> x = −√2 est une valeur interdite.
+> Le numérateur vaut 1 et le dénominateur x² − 2 tend vers 0.
+> Signe de x² − 2 (trinôme, racines −√2 et √2) : positif pour x < −√2, négatif entre −√2 et √2.
+> À gauche : x² − 2 → 0⁺, donc f(x) → 1/0⁺ = +∞.
+> À droite : x² − 2 → 0⁻, donc f(x) → 1/0⁻ = −∞.
+> Asymptote verticale d'équation x = −√2.
+
 ## Critères d'acceptation
 
 | Id | Critère | Vérif. |
@@ -106,3 +132,7 @@ sans asymptote (LA-03). Le détail technique va dans la console (clé `detail`, 
 | LA-18 | Chaque borne se conclut par une phrase avec l'équation de l'asymptote, ou « pas d'asymptote … » | [auto-py] |
 | LA-19 | Écriture : coefficient 3/(2x) (pas de fraction dans une fraction) ; polynôme jamais écrit en quotient « /1 » | [auto-py] |
 | LA-20 | Racines en ±∞ : « x < 0 donc √(x²) = \|x\| = −x » en −∞ ; √(4x²+1)/(x+2) → 2 en +∞ et → −2 en −∞ ; √(x²−4x+5) : a = 1, b = −2 en +∞ et a = −1, b = 2 en −∞ ; √(x²+x) − x en −∞ : pas de forme indéterminée, +∞ | [auto-py] |
+| LA-21 | Aucune phrase interdite (« par continuité de », « est une constante », « la somme / la différence / le produit tend vers », « Par substitution ») dans les instantanés, les exemples, les exercices et le corpus de tests | [auto-py] |
+| LA-22 | Tout dénominateur qui tend vers 0 est suivi d'une ligne « Signe de … » ; tout argument de ln qui tend vers 0 en est précédé | [auto-py] |
+| LA-23 | Valeur interdite à deux côtés : « est une valeur interdite », « Le numérateur », « Signe de » une seule fois ; au plus une ligne « À gauche » et une « À droite » ; une seule conclusion si les limites sont égales | [auto-py] |
+| LA-24 | Aucun mot de la mécanique interne (SymPy, Abandon, exception, nœud, arbre) dans un texte affiché | [auto-py] |
