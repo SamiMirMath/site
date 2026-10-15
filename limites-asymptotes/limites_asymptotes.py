@@ -1627,8 +1627,15 @@ def _bilan_deux_cotes(point, cote_tex, val, vval, items):
     verticale que si l'une des deux limites latérales est infinie."""
     (vg, vd), (vg_val, vd_val) = val, vval
     base = {"point_tex": point.tex, "point_val": point.val, "ou": cote_tex}
-    if r"\infty" in vg or r"\infty" in vd:
-        items.append(txt(rf"Au moins une des deux limites est infinie : asymptote verticale d'équation \(x = {point.tex}\)."))
+    inf_g, inf_d = r"\infty" in vg, r"\infty" in vd
+    if inf_g or inf_d:
+        if inf_g and inf_d:
+            conclusion = rf"Asymptote verticale d'équation \(x = {point.tex}\)."
+        else:
+            cote, autre, v_autre = ("droit", "gauche", vg) if inf_d else ("gauche", "droite", vd)
+            conclusion = (rf"Asymptote verticale d'équation \(x = {point.tex}\) (du côté {cote}) ; "
+                          rf"à {autre}, \(f(x) \to {_affichable(v_autre)}\).")
+        items.append(txt(conclusion))
         return dict(base, genre="verticale", gauche_tex=_affichable(vg), droite_tex=_affichable(vd),
                     gauche_val=vg_val, droite_val=vd_val)
     if "?" in (vg, vd):

@@ -948,7 +948,7 @@
        "type": "texte"
       },
       {
-       "html": "Au moins une des deux limites est infinie : asymptote verticale d'équation \\(x = 0\\).",
+       "html": "Asymptote verticale d'équation \\(x = 0\\) (du côté droit) ; à gauche, \\(f(x) \\to 0\\).",
        "type": "texte"
       }
      ],

@@ -66,7 +66,7 @@ class TestPhrasesExactes(unittest.TestCase):
             r"À droite de \(0\), le dénominateur est positif : il tend vers \(0^{+}\), "
             r"donc \(\frac{1}{x} \to \dfrac{1}{0^{+}} = +\infty\).",
             r"Or \(e^{t} \to +\infty\) quand \(t \to +\infty\), donc \(f(x) \to +\infty\).",
-            r"Au moins une des deux limites est infinie : asymptote verticale d'équation \(x = 0\).",
+            r"Asymptote verticale d'équation \(x = 0\) (du côté droit) ; à gauche, \(f(x) \to 0\).",
         ])
 
     def test_quotient_dont_le_denominateur_tend_vers_zero(self):
@@ -79,7 +79,7 @@ class TestPhrasesExactes(unittest.TestCase):
             r"donc \(f(x) \to \dfrac{\ln{\left(5 \right)}}{0^{-}} = -\infty\).",
             r"À droite de \(5\), le dénominateur est positif : il tend vers \(0^{+}\), "
             r"donc \(f(x) \to \dfrac{\ln{\left(5 \right)}}{0^{+}} = +\infty\).",
-            r"Au moins une des deux limites est infinie : asymptote verticale d'équation \(x = 5\).",
+            r"Asymptote verticale d'équation \(x = 5\).",
         ])
 
     def test_une_sous_expression_n_est_commentee_qu_une_fois(self):
@@ -91,6 +91,38 @@ class TestPhrasesExactes(unittest.TestCase):
 def sans_tableau():
     """Le moteur de signe ne construit aucun tableau : la justification reste en texte."""
     return mock.patch.object(la, "_construire_tableau", return_value=None)
+
+
+class TestConclusionDesValeursInterdites(unittest.TestCase):
+    """Chaque valeur interdite se termine par sa conclusion : asymptote (avec le côté si un seul côté est infini),
+    trou, ou absence de limite (LA-27)."""
+
+    def conclusion(self, entree, ou):
+        return textes(entree, ou)[-1]
+
+    def test_un_seul_cote_infini(self):
+        self.assertEqual(self.conclusion("e^(1/x)", r"x \to 0"),
+                         r"Asymptote verticale d'équation \(x = 0\) (du côté droit) ; à gauche, \(f(x) \to 0\).")
+        self.assertEqual(self.conclusion("e^(-1/x)", r"x \to 0"),
+                         r"Asymptote verticale d'équation \(x = 0\) (du côté gauche) ; à droite, \(f(x) \to 0\).")
+
+    def test_deux_cotes_infinis(self):
+        self.assertEqual(self.conclusion("(e^x+1)/(e^x-1)", r"x \to 0"), r"Asymptote verticale d'équation \(x = 0\).")
+
+    def test_trou_et_absence_de_limite(self):
+        self.assertTrue(self.conclusion("(e^x-1)/x", r"x \to 0").startswith("Les deux limites sont finies et égales à"))
+        self.assertTrue(self.conclusion("x/sqrt(x^2)", r"x \to 0").startswith("Limites à gauche et à droite différentes"))
+
+    def test_chaque_valeur_interdite_a_une_conclusion(self):
+        concluantes = ("Asymptote verticale", "Les deux limites sont finies", "Limites à gauche et à droite différentes",
+                       "f n'est pas définie en", "Ces limites n'ont pas pu", "La limite n'a pas pu")
+        for entree in ["1/(x-2)", "(x^2-1)/(x-1)", "1/(x^2-2)", "(x^2-3)/(x^3-3x)", "e^(1/x)", "ln(x)", "ln(x-1)",
+                       "(e^x-1)/x", "x/sqrt(x^2)", "x*ln(x^2)", "ln(x^2-4x)/(x-5)", "1/ln(x)", "e^x/x", "x*e^(1/x)"]:
+            for etude in la.etudier(entree)["etudes"]:
+                if "infty" in etude["ou"]:
+                    continue
+                with self.subTest(f=entree, ou=etude["ou"]):
+                    self.assertTrue(etude["etapes"][-1]["html"].startswith(concluantes), etude["etapes"][-1]["html"])
 
 
 class TestValeursInterdites(unittest.TestCase):

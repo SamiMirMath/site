@@ -104,6 +104,10 @@ mécanique interne (le détail technique va dans la clé `detail` / `controles_d
    dénominateur), puis une ligne courte « À gauche : … » et « À droite : … ». Si les deux côtés donnent la
    même limite, une seule conclusion.
 
+4. **Conclusion de chaque valeur interdite** : asymptote verticale, trou ou absence de limite. Quand une
+   seule limite latérale est infinie (e^(1/x) en 0 : 0 à gauche, +∞ à droite), on écrit « asymptote verticale
+   d'équation x = 0 (du côté droit) ; à gauche, f(x) → 0 ».
+
 Modèle (1/(x² − 2) en −√2) :
 > x = −√2 est une valeur interdite.
 > Le numérateur vaut 1 et le dénominateur x² − 2 tend vers 0 (voir le tableau de signes).
@@ -142,3 +146,4 @@ Modèle (1/(x² − 2) en −√2) :
 | LA-24 | Aucun mot de la mécanique interne (SymPy, Abandon, exception, nœud, arbre) dans un texte affiché | [auto-py] |
 | LA-25 | Tableau de signes en tête (clé `tableaux_signe`) pour 1/(x²−2), (x+1)/(x²−4), (eˣ+1)/(eˣ−1), ln(x²−4x)/(x−5), (x²−1)/(x−3) : colonnes = valeurs interdites ou zéros, double barre pour un dénominateur ; la lecture du tableau coïncide avec le signe calculé ; sans tableau possible, justification en texte | [auto-py] ; rendu [manuel] |
 | LA-26 | Jamais « x est positif (il vaut 4) » : une variable ne « vaut » pas la valeur vers laquelle elle tend (« proche de » si besoin), y compris dans la justification en texte | [auto-py] |
+| LA-27 | Chaque valeur interdite se termine par sa conclusion ; une seule limite latérale infinie : « asymptote verticale d'équation x = 0 (du côté droit) ; à gauche, f(x) → 0 » | [auto-py] |
