@@ -17,6 +17,7 @@ Ce dossier n'est **pas publié** sur le site (`_config.yml` l'exclut de GitHub P
 | [specifications/factorisation.md](specifications/factorisation.md) | Outil « Factorisation » (1re C/Ms/Mr) |
 | [specifications/simplexe.md](specifications/simplexe.md) | Outil « Programmation linéaire » (2e) |
 | [a-valider.md](a-valider.md) | Questions ouvertes : rien n'est changé sur ces points tant qu'elles ne sont pas tranchées |
+| [guide-redaction.md](guide-redaction.md) | Format de rédaction des corrigés (minimum de lignes) : règles R1–R11 et 7 exemples de référence |
 | [taches.md](taches.md) | Découpage en tâches indépendantes, chacune avec sa vérification |
 
 ## Lancer les tests en local
