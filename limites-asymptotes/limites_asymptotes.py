@@ -26,7 +26,7 @@ from fractions import Fraction as F
 from ensemble_def import (
     Nb, X, E, Neg, Op, Fn,
     lire, tex, prec, valeur_constante, Num, Iv, REELS, fusion, inter, ens_tex,
-    contient, proche, evaluer, sans_x, qtex, ptex, pn, deg, peval, pdivlin, pmul, nul,
+    contient, proche, evaluer, sans_x, qtex, ptex, pn, deg, peval, pdivlin, pmul, nul, padd, pscal,
     decomposer, r_norm, json_strict, ajouter_saisie,
     _sympy, en_sympy_reel, arbre_depuis_sympy, num_sympy, _SP,
     txt, NonPrisEnCharge, ErreurSaisie, _analyser, apercu_json,
@@ -1521,6 +1521,137 @@ def _termes_dominants(n, ctx, fi):
     return L, lignes + pre
 
 
+# --- méthode : expression conjuguée (∞ − ∞ en ±∞ ; 0/0 en une valeur) -----------------------------
+def _carre_poly(n):
+    """Polynôme P tel que n² = P, pour n polynôme, √(polynôme) ou l'opposé de l'un d'eux ; None sinon."""
+    if isinstance(n, Neg):
+        return _carre_poly(n.a)
+    r = _est_racine(n)
+    if r is not None:
+        return _poly_ou_const(r)
+    W = _poly_ou_const(n)
+    return pmul(W, W) if W is not None else None
+
+
+def _entre_parentheses(t):
+    return r"\left(" + t + r"\right)" if (" + " in t or " - " in t) else t
+
+
+def _carre_tex(n):
+    """Écriture de n² une fois la racine disparue : x^{2} + x pour √(x^2 + x), x^{2} pour x."""
+    r = _est_racine(n)
+    if r is not None:
+        return tex(r)
+    return tex(Op("^", n.a if isinstance(n, Neg) else n, Nb(F(2))))
+
+
+def _diviser_binome(P, a, m):
+    """P / (x − a)^m (division exacte, a rationnel)."""
+    for _ in range(m):
+        P, reste = pdivlin(P, a)
+        if reste != 0:
+            raise Abandon("division par (x − a) non exacte")
+    return P
+
+
+def _conjuguee_difference(n, ctx, fi):
+    """U ± V avec ∞ − ∞ : (U ± V)(U ∓ V)/(U ∓ V) = (U² − V²)/(U ∓ V), puis on continue avec cette fraction."""
+    if fi.nom != "∞ − ∞" or not ctx.pt.s:
+        return None
+    U, V = n.a, n.b
+    PU, PV = _carre_poly(U), _carre_poly(V)
+    if PU is None or PV is None or not (_est_racine(U) is not None or _est_racine(V) is not None):
+        return None
+    R = padd(PU, pscal(PV, -1))
+    if nul(R):
+        return None
+    sigma = 1 if n.op == "+" else -1
+    conj = Op("-", U, V) if sigma > 0 else Op("+", U, V)
+    g = Op("/", _arbre_poly(R), conj)
+    _meme_fonction(n, g, ctx)
+    carres = rf"{_entre_parentheses(_carre_tex(U))} - {_entre_parentheses(_carre_tex(V))}"
+    lignes = [
+        _ligne_fi(n, fi),
+        rf"On multiplie et on divise par l'expression conjuguée \({tex(conj)}\) :",
+        rf"\({tex(n)} = \dfrac{{\left({tex(n)}\right)\left({tex(conj)}\right)}}{{{tex(conj)}}} = "
+        rf"\dfrac{{{carres}}}{{{tex(conj)}}} = \dfrac{{{tex(g.a)}}}{{{tex(conj)}}}\).",
+    ]
+    L, lg = _noeud(g, ctx)
+    return L, lignes + lg
+
+
+def _facteur_ou_vide(P):
+    """tex d'un polynôme sauf s'il vaut 1 (facteur neutre d'un produit)."""
+    return "" if (deg(P) == 0 and P[0] == 1) else _entre_parentheses(tex(_arbre_poly(P)))
+
+
+def _conjuguee_zero_sur_zero(n, ctx, fi):
+    """0/0 en un point rationnel, avec une différence de racines au numérateur (ou au dénominateur) sur un
+    polynôme : on multiplie par la conjuguée, on factorise et on simplifie par (x − a)."""
+    pt = ctx.pt
+    if fi.nom != "0/0" or pt.s or not pt.a.is_Rational or not (isinstance(n, Op) and n.op == "/"):
+        return None
+    a = F(int(pt.a.p), int(pt.a.q))
+    for racine_au_numerateur in (True, False):
+        W, Z = (n.a, n.b) if racine_au_numerateur else (n.b, n.a)       # W : différence avec racine, Z : l'autre
+        if not (isinstance(W, Op) and W.op in "+-"):
+            continue
+        PU, PV, PZ = _carre_poly(W.a), _carre_poly(W.b), _poly_ou_const(Z)
+        if PU is None or PV is None or PZ is None or not (_est_racine(W.a) is not None or _est_racine(W.b) is not None):
+            continue
+        R = padd(PU, pscal(PV, -1))
+        if nul(R) or peval(R, a) != 0:
+            continue
+        m = min(_facteur_racine(R, a)[1], _facteur_racine(PZ, a)[1])
+        if m == 0:
+            continue
+        conj = Op("-", W.a, W.b) if W.op == "+" else Op("+", W.a, W.b)
+        R2, Z2 = _diviser_binome(R, a, m), _diviser_binome(PZ, a, m)
+        xa = _x_moins(a)
+        barre = r"\cancel{" + (_facteur_tex(xa, m) if a != 0 else ("x" if m == 1 else f"x^{{{m}}}")) + "}"
+        carres = _entre_parentheses(_carre_tex(W.a)) + " - " + _entre_parentheses(_carre_tex(W.b))
+        tz, tw = _facteur_ou_vide(PZ), tex(W)
+        tc = _entre_parentheses(tex(conj))
+        R_tex = tex(_arbre_poly(R))
+        if racine_au_numerateur:
+            g = Op("/", _arbre_poly(R2), conj if not _facteur_ou_vide(Z2) else Op("*", _arbre_poly(Z2), conj))
+            egalites = (rf"\dfrac{{\left({tw}\right){tc}}}{{{_produit_tex(tz, tc)}}} = "
+                        rf"\dfrac{{{carres}}}{{{_produit_tex(tz, tc)}}} = \dfrac{{{R_tex}}}{{{_produit_tex(tz, tc)}}}")
+            haut = _produit_tex(barre, _facteur_ou_vide(R2))
+            bas = _produit_tex(barre, _facteur_ou_vide(Z2), tc)
+        else:
+            haut_g = Op("*", _arbre_poly(Z2), conj) if _facteur_ou_vide(Z2) else conj
+            g = haut_g if not _facteur_ou_vide(R2) else Op("/", haut_g, _arbre_poly(R2))
+            egalites = (rf"\dfrac{{{_produit_tex(tz, tc)}}}{{\left({tw}\right){tc}}} = "
+                        rf"\dfrac{{{_produit_tex(tz, tc)}}}{{{carres}}} = \dfrac{{{_produit_tex(tz, tc)}}}{{{R_tex}}}")
+            haut = _produit_tex(barre, _facteur_ou_vide(Z2), tc)
+            bas = _produit_tex(barre, _facteur_ou_vide(R2))
+        _meme_fonction(n, g, ctx)
+        cote = "numérateur" if racine_au_numerateur else "dénominateur"
+        lignes = [
+            _ligne_fi(n, fi),
+            rf"On multiplie le numérateur et le dénominateur par l'expression conjuguée \({tex(conj)}\) du {cote} :",
+            rf"\({tex(n)} = {egalites}\).",
+            rf"On factorise et on simplifie par \({xa if a == 0 else chr(92) + 'left(' + xa + chr(92) + 'right)'}\) (pour \(x \neq {pt.a_tex}\)) : "
+            rf"\(f(x) = \dfrac{{{haut}}}{{{bas}}} = {tex(g)}\).",
+        ]
+        L, lg = _noeud(g, ctx)
+        if not lg:                                   # g est définie au point : sa valeur est la limite
+            sub, val = _tex_en(g, pt), L.tex(False)
+            lg = [rf"Quand \(x \to {pt.a_tex}\), \({tex(g)} \to {sub if sub == val else sub + ' = ' + val}\)."]
+        return L, lignes + lg
+    return None
+
+
+def _conjuguee(n, ctx, fi):
+    if isinstance(n, Op) and n.op in "+-":
+        return _conjuguee_difference(n, ctx, fi)
+    return _conjuguee_zero_sur_zero(n, ctx, fi)
+
+
+METHODES.insert(0, _conjuguee)
+
+
 METHODES.append(_termes_dominants)
 
 
@@ -1776,9 +1907,10 @@ def _narrer_cotes(f, borne, items, ref_de, cotes=("gauche", "droite")):
         lg, dg = _rediger(f, pg, vg_ref, "fleche")
         ld, dd = _rediger(f, pd, vd_ref, "fleche")
         if lg is not None and ld is not None:
-            for ligne in _fusion_cotes(lg, ld):
+            fusion = _fusion_cotes(lg, ld)
+            for ligne in fusion:
                 items.append(txt(ligne))
-            if vg == vd and lg != ld:
+            if vg == vd and not any(r"\lim_{x\to" in ligne for ligne in fusion):
                 items.append(txt(rf"Donc \(\displaystyle\lim_{{x\to {borne['point'].tex}}} f(x) = {vg}\)."))
             return sortie
         if lg is None and ld is None and vg == vd:

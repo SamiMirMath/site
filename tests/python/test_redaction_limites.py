@@ -489,13 +489,79 @@ class TestTermesDominants(unittest.TestCase):
                 self.assertFalse(any("terme dominant" in e["html"] for e in etude["etapes"]), (entree, etude["ou"]))
         # √(x²+x) − x en +∞ : les termes dominants se compensent (∞ − ∞) : pas de remplacement par les dominants
         t = textes("sqrt(x^2+x)-x", r"x \to +\infty")
-        self.assertFalse(any("terme dominant" in p for p in t), t)
+        premiere = next(i for i, p in enumerate(t) if "terme dominant" in p)
+        self.assertTrue(any("conjuguée" in p for p in t[:premiere]), t)
 
     def test_garde_fou(self):
         with mock.patch.object(la, "_dominant", side_effect=lambda n, s: (la._sympy().Integer(3), 1)):
             t = etapes("sqrt(4x^2+1)/(x+2)", r"x \to +\infty")
         self.assertTrue(any(REPLI[1:] in e["html"] for e in t))
         self.assertFalse(any("terme dominant" in e["html"] for e in t))
+
+
+class TestConjuguee(unittest.TestCase):
+    """L4 : expression conjuguée — ∞ − ∞ avec une racine en ±∞, 0/0 avec une racine en une valeur (LA-20)."""
+
+    def test_racine_moins_x_en_plus_l_infini(self):
+        t = textes("sqrt(x^2+x)-x", r"x \to +\infty")
+        i = t.index(r"\(\sqrt{x^{2} + x} \to +\infty\) et \(x \to +\infty\) : forme indéterminée « \(\infty - \infty\) ».")
+        self.assertEqual(t[i + 1:i + 3], [
+            r"On multiplie et on divise par l'expression conjuguée \(\sqrt{x^{2} + x} + x\) :",
+            r"\(\sqrt{x^{2} + x} - x = \dfrac{\left(\sqrt{x^{2} + x} - x\right)\left(\sqrt{x^{2} + x} + x\right)}"
+            r"{\sqrt{x^{2} + x} + x} = \dfrac{\left(x^{2} + x\right) - x^{2}}{\sqrt{x^{2} + x} + x} = "
+            r"\dfrac{x}{\sqrt{x^{2} + x} + x}\).",
+        ])
+        self.assertIn(r"Donc \(\displaystyle\lim_{x\to +\infty} f(x) = \frac{1}{2}\).", t)
+        self.assertIn(r"\(\sqrt{x^{2} + x} + x \sim 2\,x\).", t)
+
+    def test_racine_moins_x_en_moins_l_infini_pas_de_forme_indeterminee(self):
+        t = textes("sqrt(x^2+x)-x", r"x \to -\infty")
+        self.assertFalse(any("conjuguée" in p for p in t), t)
+        self.assertIn(r"\(\sqrt{x^{2} + x} \to +\infty\) et \(x \to -\infty\), donc "
+                      r"\(\displaystyle\lim_{x\to -\infty} f(x) = +\infty\).", t)
+
+    def test_ordonnee_a_l_origine_d_une_asymptote_oblique(self):   # b = lim (f(x) − ax)
+        plus = " ".join(textes("sqrt(x^2-4x+5)-x", r"x \to +\infty"))
+        self.assertIn(r"d'où \(\displaystyle\frac{-4x + 5}{\sqrt{x^{2} - 4x + 5} + x} \to -2\)".replace(r"\displaystyle", ""), plus)
+        self.assertIn(r"\lim_{x\to +\infty} f(x) = -2", plus)
+        moins = " ".join(textes("sqrt(x^2-4x+5)+x", r"x \to -\infty"))
+        self.assertIn("expression conjuguée", moins)
+        self.assertIn(r"Comme \(x < 0\), \(\sqrt{x^{2}} = |x| = -x\).", moins)
+        self.assertIn(r"\lim_{x\to -\infty} f(x) = 2", moins)
+
+    def test_zero_sur_zero_conjuguee_du_numerateur(self):
+        t = textes("(sqrt(x+3)-2)/(x-1)", r"x \to 1")
+        self.assertEqual(t[:7], [
+            r"\(x = 1\) est une valeur interdite.",
+            r"Le numérateur \(\sqrt{x + 3} - 2\) tend vers \(0\) et le dénominateur \(x - 1\) tend vers \(0\) : "
+            r"forme indéterminée « \(0/0\) ».",
+            r"On multiplie le numérateur et le dénominateur par l'expression conjuguée \(\sqrt{x + 3} + 2\) du numérateur :",
+            r"\(\frac{\sqrt{x + 3} - 2}{x - 1} = \dfrac{\left(\sqrt{x + 3} - 2\right)\left(\sqrt{x + 3} + 2\right)}"
+            r"{\left(x - 1\right)\,\left(\sqrt{x + 3} + 2\right)} = \dfrac{\left(x + 3\right) - 2^{2}}"
+            r"{\left(x - 1\right)\,\left(\sqrt{x + 3} + 2\right)} = \dfrac{x - 1}"
+            r"{\left(x - 1\right)\,\left(\sqrt{x + 3} + 2\right)}\).",
+            r"On factorise et on simplifie par \(\left(x-1\right)\) (pour \(x \neq 1\)) : "
+            r"\(f(x) = \dfrac{\cancel{\left(x-1\right)}}{\cancel{\left(x-1\right)}\,\left(\sqrt{x + 3} + 2\right)} = "
+            r"\frac{1}{\sqrt{x + 3} + 2}\).",
+            r"Quand \(x \to 1\), \(\frac{1}{\sqrt{x + 3} + 2} \to \frac{1}{\sqrt{1 + 3} + 2} = \frac{1}{4}\).",
+            r"Donc \(\displaystyle\lim_{x\to 1} f(x) = \frac{1}{4}\).",
+        ])
+
+    def test_zero_sur_zero_conjuguee_du_denominateur(self):
+        t = " ".join(textes("(x-1)/(sqrt(x+3)-2)", r"x \to 1"))
+        self.assertIn("conjuguée \\(\\sqrt{x + 3} + 2\\) du dénominateur", t)
+        self.assertIn(r"\lim_{x\to 1} f(x) = 4", t)
+
+    def test_jamais_sans_racine(self):
+        for entree in ["x^3-3x", "(x^2-1)/(x-1)", "x^2-4x", "e^x-1"]:
+            for etude in la.etudier(entree)["etudes"]:
+                self.assertFalse(any("conjuguée" in e["html"] for e in etude["etapes"]), (entree, etude["ou"]))
+
+    def test_garde_fou(self):
+        with mock.patch.object(la, "_carre_poly", side_effect=lambda n: [la.F(1), la.F(1)]):
+            t = etapes("sqrt(x^2+x)-x", r"x \to +\infty")
+        self.assertTrue(any(REPLI[1:] in e["html"] for e in t))
+        self.assertFalse(any("conjuguée" in e["html"] for e in t))
 
 
 class TestFormeIndeterminee(unittest.TestCase):
