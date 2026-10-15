@@ -219,13 +219,13 @@ class TestValeursInterdites(unittest.TestCase):
 
 
 class TestLogarithmeSurAffine(unittest.TestCase):
-    """ln(x²−4x)/(x−5) : seules les bornes ±∞ (forme ∞/∞, méthodes L6/L7) donnent la phrase de repli ;
-    en 0⁻, 4⁺, 5⁻ et 5⁺ tout est rédigé."""
+    """ln(x²−4x)/(x−5) : toutes les bornes sont rédigées (±∞ par Bernoulli-L'Hôpital depuis L7, 0⁻, 4⁺, 5⁻ et 5⁺
+    par les règles sur les limites) ; aucune phrase de repli."""
 
     def test_repli_seulement_en_l_infini(self):
         r = la.etudier("ln(x^2-4x)/(x-5)")
         avec_repli = {e["ou"] for e in r["etudes"] if any(REPLI[1:] in st["html"] for st in e["etapes"])}
-        self.assertEqual(avec_repli, {r"x \to -\infty", r"x \to +\infty"})
+        self.assertEqual(avec_repli, set())          # ±∞ : ∞/∞ levée par Bernoulli-L'Hôpital (L7)
 
     def test_chaque_ligne_qui_lit_un_tableau_y_renvoie(self):
         t0 = textes("ln(x^2-4x)/(x-5)", r"x \to 0^-")
@@ -622,6 +622,118 @@ class TestCroissanceComparee(unittest.TestCase):
         self.assertTrue(any(REPLI[1:] in e["html"] for e in t))
 
 
+class TestLHopital(unittest.TestCase):
+    """L7 : règle de Bernoulli-L'Hôpital en dernier recours, quatre hypothèses vérifiées ET écrites (LA-15, LA-16)."""
+
+    def test_exponentielle_moins_1_sur_x_en_0(self):
+        t = textes("(e^x-1)/x", r"x \to 0")
+        i = next(i for i, p in enumerate(t) if p.startswith("On applique la règle"))
+        self.assertEqual(t[i:i + 10], [
+            r"On applique la règle de Bernoulli-L'Hôpital avec \(f(x) = e^{x} - 1\) et \(g(x) = x\). Vérifions les hypothèses :",
+            r"(a) forme indéterminée « \(0/0\) » : vérifiée ;",
+            r"(b) \(f\) et \(g\) sont dérivables sur \(\mathbb{R}\), donc au voisinage de \(0\) (sauf peut-être en \(0\)) : vérifiée ;",
+            r"On calcule \(f'(x) = e^{x}\) et \(g'(x) = 1\).",
+            r"(c) \(g'(x) = 1 \neq 0\) au voisinage de \(0\) (sauf peut-être en \(0\)) : vérifiée ;",
+            r"(d) \(\dfrac{f'(x)}{g'(x)} = e^{x}\).",
+            r"Quand \(x \to 0\), \(e^{x} \to e^{0} = 1\).",
+            r"La limite de \(\dfrac{f'(x)}{g'(x)}\) existe et vaut \(1\) : (d) est vérifiée.",
+            r"D'après la règle de Bernoulli-L'Hôpital, \(\displaystyle\lim_{x\to 0} \dfrac{f(x)}{g(x)} = "
+            r"\lim_{x\to 0} \dfrac{f'(x)}{g'(x)} = 1\).",
+            r"Les deux limites sont finies et égales à \(1\) : f n'est pas définie en \(x=0\), mais sa limite y est finie "
+            r"(\(=1\)) : pas d'asymptote verticale, trou dans le graphique en \((0\,;\,1)\).",
+        ])
+
+    def test_logarithme_sur_x_moins_1_en_1(self):
+        t = " ".join(textes("ln(x)/(x-1)", r"x \to 1"))
+        self.assertIn(r"(b) \(f\) et \(g\) sont dérivables sur \(\left]0 \,;\, +\infty\right[\)", t)
+        self.assertIn(r"On calcule \(f'(x) = \frac{1}{x}\) et \(g'(x) = 1\).", t)
+        self.assertIn(r"\lim_{x\to 1} \dfrac{f'(x)}{g'(x)} = 1", t)
+
+    def test_ln_de_trinome_sur_affine_en_plus_l_infini(self):
+        t = textes("ln(x^2-4x)/(x-5)", r"x \to +\infty")
+        i = next(i for i, p in enumerate(t) if p.startswith("On applique la règle"))
+        self.assertEqual(t[i:i + 7], [
+            r"On applique la règle de Bernoulli-L'Hôpital avec \(f(x) = \ln\left(x^{2} - 4x\right)\) et \(g(x) = x - 5\). "
+            r"Vérifions les hypothèses :",
+            r"(a) forme indéterminée « \(\infty/\infty\) » : vérifiée ;",
+            r"(b) \(f\) et \(g\) sont dérivables sur \(\left]4 \,;\, +\infty\right[\), donc au voisinage de \(+\infty\) : vérifiée ;",
+            r"On calcule \(f'(x) = \frac{2x - 4}{x^{2} - 4x}\) et \(g'(x) = 1\).",
+            r"(c) \(g'(x) = 1 \neq 0\) au voisinage de \(+\infty\) : vérifiée ;",
+            r"(d) \(\dfrac{f'(x)}{g'(x)} = \frac{2x - 4}{x^{2} - 4x}\).",
+            r"Le numérateur tend vers \(+\infty\) et le dénominateur tend vers \(+\infty\) (limite de leur terme de plus haut degré) : "
+            r"forme indéterminée « \(\infty/\infty\) ».",
+        ])
+        self.assertIn(r"La limite de \(\dfrac{f'(x)}{g'(x)}\) existe et vaut \(0\) : (d) est vérifiée.", t)
+        self.assertIn(r"Donc \(\displaystyle\lim_{x\to +\infty} f(x) = 0\).", t)
+
+    def test_ln_de_trinome_sur_affine_en_moins_l_infini(self):
+        t = textes("ln(x^2-4x)/(x-5)", r"x \to -\infty")
+        self.assertIn(r"(b) \(f\) et \(g\) sont dérivables sur \(\left]-\infty \,;\, 0\right[\), donc au voisinage de \(-\infty\) : vérifiée ;", t)
+        self.assertIn(r"Donc \(\displaystyle\lim_{x\to -\infty} f(x) = 0\).", t)
+
+    def test_produit_mis_en_quotient(self):
+        t = " ".join(textes("x*ln(x^2)", r"x \to 0"))
+        self.assertIn(r"On écrit \(x\,\ln\left(x^{2}\right) = \dfrac{\ln\left(x^{2}\right)}{\frac{1}{x}}\) pour obtenir un quotient.", t)
+        self.assertIn(r"(b) \(f\) et \(g\) sont dérivables sur", t)
+        self.assertIn(r"\dfrac{f'(x)}{g'(x)} = -2x", t)
+
+    def test_une_seconde_forme_se_traite_par_croissance_comparee(self):
+        t = textes("ln(x)^2/x", r"x \to +\infty")
+        self.assertIn("(d) \\(\\dfrac{f'(x)}{g'(x)} = \\frac{2\\ln(x)}{x}\\).", t)
+        self.assertTrue(any("croissance comparée" in p for p in t))
+
+    def test_jamais_hors_forme_indeterminee(self):
+        for entree, ou in [("(x+1)/x", r"x \to 0"), ("1/(x-2)", r"x \to 2"), ("e^x/x", r"x \to 0"), ("x*e^x", r"x \to +\infty"),
+                           ("ln(x)/(x-1)", r"x \to 0^+")]:
+            with self.subTest(f=entree, ou=ou):
+                self.assertFalse(any("Bernoulli" in p for p in textes(entree, ou)))
+
+    def test_jamais_pour_une_fraction_rationnelle_ni_une_limite_de_reference(self):    # LA-15
+        for entree in ["(x^2-1)/(x-1)", "(x^2-4)/(x^2-4x+4)", "(2x^2+3x)/(x^2+1)", "x^2/(x-1)", "e^((x^2-1)/(x-1))"]:
+            for etude in la.etudier(entree)["etudes"]:
+                self.assertFalse(any("Bernoulli" in e["html"] for e in etude["etapes"]), (entree, etude["ou"]))
+        for entree, ou in [("x^2*e^(-x)", r"x \to +\infty"), ("ln(x)/x", r"x \to +\infty"), ("x*ln(x)", r"x \to 0^+"),
+                           ("e^x-x^2", r"x \to +\infty"), ("x*e^x", r"x \to -\infty"), ("x-ln(x)", r"x \to +\infty")]:
+            self.assertFalse(any("Bernoulli" in p for p in textes(entree, ou)), entree)
+
+    def test_non_appliquee_si_g_prime_n_est_pas_non_nul(self):
+        with mock.patch.object(la, "_g_prime_non_nul", return_value=None):
+            t = textes("(e^x-1)/x", r"x \to 0")
+        self.assertFalse(any("Bernoulli" in p for p in t))
+        self.assertTrue(any(REPLI[1:] in p for p in t))
+
+    def test_non_appliquee_si_la_limite_du_quotient_des_derivees_n_est_pas_obtenue(self):
+        reel = la._noeud
+
+        def sans_derivees(n, ctx):
+            if ctx.nb_lhopital:
+                raise la.Abandon("limite de f'/g' non obtenue")
+            return reel(n, ctx)
+
+        with mock.patch.object(la, "_noeud", side_effect=sans_derivees):
+            t = textes("(e^x-1)/x", r"x \to 0")
+        self.assertFalse(any("Bernoulli" in p for p in t))
+        self.assertTrue(any(REPLI[1:] in p for p in t))
+
+    def test_boucle_sur_une_forme_indeterminee_donne_le_repli(self):
+        """x/√(x²) en 0 : f'/g' retombe sur une forme 0/0 ; après deux applications on ne conclut pas par la règle."""
+        t = textes("x/sqrt(x^2)", r"x \to 0")
+        self.assertFalse(any("Bernoulli" in p for p in t), t)
+        self.assertTrue(any(REPLI[1:] in p for p in t))
+
+    def test_au_plus_deux_applications_de_suite(self):
+        for entree in ["(e^x-1)/x", "ln(x)/(x-1)", "x*ln(x^2)", "ln(x)^2/x", "ln(x^2-4x)/(x-5)", "x*e^(1/x)"]:
+            for etude in la.etudier(entree)["etudes"]:
+                with self.subTest(f=entree, ou=etude["ou"]):
+                    self.assertLessEqual(sum(1 for e in etude["etapes"] if e["html"].startswith("On applique la règle")), 2)
+
+    def test_garde_fou(self):
+        with mock.patch.object(la, "_arbre_propre", side_effect=lambda t: la.Nb(la.F(7))):
+            t = textes("(e^x-1)/x", r"x \to 0")
+        self.assertTrue(any(REPLI[1:] in p for p in t))
+        self.assertFalse(any("Bernoulli" in p for p in t))
+
+
 class TestFormeIndeterminee(unittest.TestCase):
     """Sans méthode pour la lever (L1), la rédaction est abandonnée : phrase de repli, jamais d'étape fausse."""
 
@@ -773,7 +885,7 @@ class TestStyle(unittest.TestCase):
             if any(REPLI[1:] in p for p in t):
                 continue
             for i, p in enumerate(t):
-                if p.startswith("Le numérateur") and "tend vers \\(0\\)" in p:
+                if p.startswith("Le numérateur") and "tend vers \\(0\\)" in p and "forme indéterminée" not in p:
                     with self.subTest(f=entree, ou=ou):
                         suite = t[i + 1]
                         self.assertTrue(suite.startswith(("Signe de", "À gauche de", "À droite de", "De part et d'autre de")), suite)

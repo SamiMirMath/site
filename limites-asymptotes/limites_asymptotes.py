@@ -30,7 +30,7 @@ from ensemble_def import (
     decomposer, r_norm, json_strict, ajouter_saisie,
     _sympy, en_sympy_reel, arbre_depuis_sympy, num_sympy, _SP,
     txt, NonPrisEnCharge, ErreurSaisie, _analyser, apercu_json,
-    signe_facteur, tableau_facteurs, en_sympy, aplatir,
+    signe_facteur, tableau_facteurs, en_sympy, aplatir, domaine, complement,
 )
 
 __all__ = ["etudier", "etudier_json", "apercu_json"]
@@ -912,6 +912,7 @@ class _Contexte:
         self.racine_dite = False
         self.demandes = []
         self.profondeur = 0
+        self.nb_lhopital = 0
         if ref_f is not None:
             self.refs[f.key()] = ref_f
 
@@ -1289,13 +1290,14 @@ def _noeud_rationnel_infini(n, ctx):
 FI_TEX = {"∞ − ∞": r"\infty - \infty", "0 · ∞": r"0 \cdot \infty", "∞/∞": r"\infty/\infty", "0/0": "0/0"}
 
 
-def _ligne_fi(n, fi):
+def _ligne_fi(n, fi, ctx=None):
     """« Le numérateur tend vers … et le dénominateur tend vers … : forme indéterminée « ∞/∞ ». »"""
     nom = rf"« \({FI_TEX[fi.nom]}\) »"
 
     def lim(noeud, L):
         evident = isinstance(noeud, X) or (isinstance(noeud, Fn) and noeud.nom == "exp")
-        return L.tex(bool(evident and L.nul() and L.ap))
+        deux_cotes = ctx is not None and ctx.pt.deux and not ctx.pt.s        # le signe dépend du côté : pas de ligne propre à un côté
+        return L.tex(bool(evident and L.nul() and L.ap and not deux_cotes))
 
     a, b = lim(n.a, fi.A), lim(n.b, fi.B)
     if isinstance(n, Op) and n.op == "/":
@@ -1499,7 +1501,7 @@ def _termes_dominants(n, ctx, fi):
     if D is None:
         return None
     c, k = D
-    lignes, justif = [_ligne_fi(n, fi), rf"Au voisinage de \({ctx.pt.tex()}\), on remplace chaque membre par son terme dominant."], []
+    lignes, justif = [_ligne_fi(n, fi, ctx), rf"Au voisinage de \({ctx.pt.tex()}\), on remplace chaque membre par son terme dominant."], []
     dom = []
     for M in (n.a, n.b):
         r = _equivalent_membre(M, s)
@@ -1580,7 +1582,7 @@ def _conjuguee_difference(n, ctx, fi):
     _meme_fonction(n, g, ctx)
     carres = rf"{_entre_parentheses(_carre_tex(U))} - {_entre_parentheses(_carre_tex(V))}"
     lignes = [
-        _ligne_fi(n, fi),
+        _ligne_fi(n, fi, ctx),
         rf"On multiplie et on divise par l'expression conjuguée \({tex(conj)}\) :",
         rf"\({tex(n)} = \dfrac{{\left({tex(n)}\right)\left({tex(conj)}\right)}}{{{tex(conj)}}} = "
         rf"\dfrac{{{carres}}}{{{tex(conj)}}} = \dfrac{{{tex(g.a)}}}{{{tex(conj)}}}\).",
@@ -1638,7 +1640,7 @@ def _conjuguee_zero_sur_zero(n, ctx, fi):
         _meme_fonction(n, g, ctx)
         cote = "numérateur" if racine_au_numerateur else "dénominateur"
         lignes = [
-            _ligne_fi(n, fi),
+            _ligne_fi(n, fi, ctx),
             rf"On multiplie le numérateur et le dénominateur par l'expression conjuguée \({tex(conj)}\) du {cote} :",
             rf"\({tex(n)} = {egalites}\).",
             rf"On factorise et on simplifie par \({xa if a == 0 else chr(92) + 'left(' + xa + chr(92) + 'right)'}\) (pour \(x \neq {pt.a_tex}\)) : "
@@ -1785,6 +1787,9 @@ def _comparee_pure(n, ctx, fi):
         return None
     C, N, B, q, polys = r
     if polys:
+        # un facteur polynôme est mis sous la forme c·x^m(1 + …) seulement en ±∞ et si une limite de référence suit
+        if not ctx.pt.s or _reference(N + sum(deg(P) * k for P, k in polys), B, q, ctx.pt) is None:
+            return None
         return _comparee_avec_polynomes(n, ctx, fi, C, N, B, q, polys)
     ref = _reference(N, B, q, ctx.pt)
     if ref is None or C == 0:
@@ -1797,13 +1802,13 @@ def _comparee_pure(n, ctx, fi):
     ligne = rf"Par croissance comparée ({_ligne_reference(nom)}), \({tex(pur)} \to {Lref.tex(False)}\)"
     if C != 1 or tex(pur) != tex(n):
         ligne += rf", donc \({tex(n)} \to {L.tex(False)}\)"
-    return L, [_ligne_fi(n, fi), ligne + "."]
+    return L, [_ligne_fi(n, fi, ctx), ligne + "."]
 
 
 def _comparee_avec_polynomes(n, ctx, fi, C, N, B, q, polys):
     """(x + 1)e^{-x} : on met x en évidence dans le polynôme, puis on conclut avec le produit sans polynôme."""
     sp = _sympy()
-    lignes, crochets = [_ligne_fi(n, fi)], None
+    lignes, crochets = [_ligne_fi(n, fi, ctx)], None
     x = _SP["x"]
     for P, k in polys:
         m = deg(P)
@@ -1872,7 +1877,7 @@ def _evidence_exp(n, ctx, fi):
     s = ctx.pt.s
     if not s or not isinstance(n, Op):
         return None
-    lignes = [_ligne_fi(n, fi)]
+    lignes = [_ligne_fi(n, fi, ctx)]
     if n.op in "+-" and fi.nom == "∞ − ∞":
         r = _evidence_somme(n, s)
         if r is None:
@@ -1915,8 +1920,235 @@ def _evidence_exp(n, ctx, fi):
 
 
 
-# ordre du cours : mise en évidence, conjuguée, termes dominants, croissance comparée (puis L'Hôpital)
-METHODES[:] = [_evidence_exp, _conjuguee, _termes_dominants, _comparee_pure]
+# --- méthode : règle de Bernoulli-L'Hôpital (dernier recours), hypothèses vérifiées et écrites ---------
+def _racines_de(n, out):
+    r = _est_racine(n)
+    if r is not None:
+        out.append(r)
+    if isinstance(n, (Neg, Fn)):
+        _racines_de(n.a, out)
+    elif isinstance(n, Op):
+        _racines_de(n.a, out)
+        _racines_de(n.b, out)
+    return out
+
+
+def _intervalle_derivable(f, g, ctx):
+    """Intervalles ouverts, au voisinage du point d'étude, où f et g sont définies et dérivables (une racine
+    carrée n'est pas dérivable là où son argument s'annule) ; None si on ne peut pas l'affirmer. Pour une valeur
+    interdite étudiée des deux côtés, les deux côtés sont réunis."""
+    pt = ctx.pt
+    try:
+        D = fusion(inter(domaine(f), domaine(g)))
+    except Exception:
+        return None
+    for h in (f, g):
+        for arg in _racines_de(h, []):
+            if sans_x(arg):
+                continue
+            try:
+                Z = signe_facteur(arg, "x")[2]
+            except Exception:
+                return None
+            D = fusion(inter(D, complement(Z)))
+    ouverts = [Iv(iv.lo, False, iv.hi, False) for iv in D if iv.lo is None or iv.hi is None or iv.lo.val < iv.hi.val]
+    if pt.s:
+        voisins = [iv for iv in ouverts if (iv.hi is None if pt.s > 0 else iv.lo is None)]
+        return voisins or None
+    a = float(pt.a)
+
+    def a_gauche(iv):
+        return (iv.hi is not None and proche(iv.hi.val, a)) or ((iv.lo is None or iv.lo.val < a) and (iv.hi is None or iv.hi.val > a))
+
+    def a_droite(iv):
+        return (iv.lo is not None and proche(iv.lo.val, a)) or ((iv.lo is None or iv.lo.val < a) and (iv.hi is None or iv.hi.val > a))
+
+    cotes = (-1, 1) if pt.deux else (pt.d,)
+    voisins = []
+    for d in cotes:
+        trouves = [iv for iv in ouverts if (a_gauche(iv) if d < 0 else a_droite(iv))]
+        if not trouves:
+            return None
+        voisins += [iv for iv in trouves if iv not in voisins]
+    return voisins
+
+
+def _g_prime_non_nul(gp, I, ctx):
+    """Texte qui établit g'(x) ≠ 0 au voisinage du point d'étude (sauf peut-être en lui), ou None."""
+    pt = ctx.pt
+    if sans_x(gp):
+        v = valeur_constante(gp)
+        return (rf"\(g'(x) = {tex(gp)} \neq 0\)", False) if v else None
+    try:
+        D, P, Z, _, _ = signe_facteur(gp, "x")
+        Z = fusion(inter(Z, I))
+        if not pt.s:
+            a = float(pt.a)
+            Z = [iv for iv in Z if not (iv.lo is not None and proche(iv.lo.val, a))]
+    except Exception:
+        return None
+    if Z:
+        return None
+    return rf"\(g'(x) = {tex(gp)}\) ne s'annule pas sur \({ens_tex(I)}\)", True
+
+
+def _nettoyer_arbre(t):
+    """-1·u devient -u, 1·u devient u (sortie de arbre_depuis_sympy)."""
+    if isinstance(t, Neg):
+        return Neg(_nettoyer_arbre(t.a))
+    if isinstance(t, Fn):
+        return Fn(t.nom, _nettoyer_arbre(t.a))
+    if isinstance(t, Op):
+        a, b = _nettoyer_arbre(t.a), _nettoyer_arbre(t.b)
+        if t.op == "*":
+            if isinstance(a, Neg) and isinstance(a.a, Nb) and a.a.v == 1:
+                return Neg(b)
+            if isinstance(a, Nb) and a.v == 1:
+                return b
+            if isinstance(b, Nb) and b.v == 1:
+                return a
+        return Op(t.op, a, b)
+    return t
+
+
+def _arbre_propre(arbre):
+    """Une fraction rationnelle revient sous la forme N/D de polynômes développés (2x - 4)/(x^2 - 4x)."""
+    try:
+        dec = decomposer(arbre)
+        if dec[0] == "x":
+            N, D = dec[1]
+            if not nul(N):
+                return _arbre_fraction(N, D) if not (deg(D) == 0) else _arbre_poly([c / D[0] for c in N])
+    except Exception:
+        pass
+    return _nettoyer_arbre(arbre)
+
+
+def _derivee(h):
+    sp = _sympy()
+    e = en_sympy_reel(h)
+    return sp.diff(e, _SP["x"])
+
+
+def _candidats_lhopital(n, ctx, fi):
+    """(f, g, lignes d'introduction) : f/g est une forme 0/0 ou ∞/∞ égale à n."""
+    if isinstance(n, Op) and n.op == "/" and fi.nom in ("0/0", "∞/∞"):
+        return [(n.a, n.b, [], fi.nom)]
+    if isinstance(n, Op) and n.op == "*" and fi.nom == "0 · ∞":
+        out = []
+        for u, v in ((n.b, n.a), (n.a, n.b)):            # u/(1/v) : on met d'abord au dénominateur le facteur qui tend vers 0
+            g = Op("/", Nb(F(1)), v)
+            out.append((u, g, [rf"On écrit \({tex(n)} = \dfrac{{{tex(u)}}}{{{tex(g)}}}\) pour obtenir un quotient."], None))
+        return out
+    return []
+
+
+def _lhopital(n, ctx, fi):
+    if ctx.nb_lhopital >= 2:
+        return None
+    if isinstance(n, Op) and n.op == "/" and _poly_ou_const(n.a) is not None and _poly_ou_const(n.b) is not None:
+        return None                                  # fraction rationnelle : mise en évidence ou factorisation, jamais L'Hôpital
+    for f, g, intro, nom in _candidats_lhopital(n, ctx, fi):
+        try:
+            r = _lhopital_avec(n, f, g, intro, nom, ctx, fi)
+        except Abandon:
+            r = None
+        if r is not None:
+            return r
+    return None
+
+
+def _lhopital_avec(n, f, g, intro, nom, ctx, fi):
+    sp = _sympy()
+    pt = ctx.pt
+    # (a) forme indéterminée 0/0 ou ∞/∞
+    if nom is None:
+        Lf, _ = _noeud(f, ctx)
+        Lg, _ = _noeud(g, ctx)
+        if Lf.nul() and Lg.nul():
+            nom = "0/0"
+        elif Lf.inf and Lg.inf:
+            nom = "∞/∞"
+        else:
+            return None
+    # (b) dérivabilité au voisinage du point
+    I = _intervalle_derivable(f, g, ctx)
+    if I is None:
+        return None
+    # dérivées et leur quotient
+    fp, gp = _derivee(f), _derivee(g)
+    try:
+        f_arbre, g_arbre = _arbre_propre(arbre_depuis_sympy(fp)), _arbre_propre(arbre_depuis_sympy(gp))
+        q_arbre = _arbre_propre(arbre_depuis_sympy(sp.simplify(fp / gp)))
+    except Exception:
+        return None
+    # (c) g' ≠ 0 au voisinage
+    res_c = _g_prime_non_nul(g_arbre, I, ctx)
+    if res_c is None:
+        return None
+    texte_c, avec_donc = res_c
+    ctx.nb_lhopital += 1
+    try:
+        L, lg = _noeud(q_arbre, ctx)
+    finally:
+        ctx.nb_lhopital -= 1
+    if not lg:                                       # défini au point : sa valeur est la limite
+        sub, val = _tex_en(q_arbre, pt) if not pt.s else tex(q_arbre), L.tex(False)
+        lg = [rf"Quand \(x \to {pt.a_tex if not pt.s else pt.tex()}\), \({tex(q_arbre)} \to {sub if sub == val else sub + ' = ' + val}\)."]
+    vers = pt.tex()
+    vers_lim = pt.a_tex if (pt.deux and not pt.s) else pt.tex()
+    ens = ens_tex(I)
+    point = rf"\({vers}\)" if pt.s else rf"\({pt.a_tex}\) (sauf peut-être en \({pt.a_tex}\))"
+    nom_tex = rf"« \({FI_TEX[nom]}\) »"
+    lignes = intro + [
+        rf"On applique la règle de Bernoulli-L'Hôpital avec \(f(x) = {tex(f)}\) et \(g(x) = {tex(g)}\). "
+        r"Vérifions les hypothèses :",
+        rf"(a) forme indéterminée {nom_tex} : vérifiée ;",
+        rf"(b) \(f\) et \(g\) sont dérivables sur \({ens}\), donc au voisinage de {point} : vérifiée ;",
+        rf"On calcule \(f'(x) = {tex(f_arbre)}\) et \(g'(x) = {tex(g_arbre)}\).",
+        (rf"(c) {texte_c}, donc \(g'(x) \neq 0\) au voisinage de {point} : vérifiée ;" if avec_donc
+         else rf"(c) {texte_c} au voisinage de {point} : vérifiée ;"),
+        rf"(d) \(\dfrac{{f'(x)}}{{g'(x)}} = {tex(q_arbre)}\).",
+    ] + lg + [
+        rf"La limite de \(\dfrac{{f'(x)}}{{g'(x)}}\) existe et vaut \({L.tex(False)}\) : (d) est vérifiée.",
+        rf"D'après la règle de Bernoulli-L'Hôpital, \(\displaystyle\lim_{{x\to {vers_lim}}} \dfrac{{f(x)}}{{g(x)}} = "
+        rf"\lim_{{x\to {vers_lim}}} \dfrac{{f'(x)}}{{g'(x)}} = {L.tex(False)}\).",
+    ]
+    return L, [_ligne_fi(n, fi, ctx)] + lignes
+
+
+def _simplifier_zero_sur_zero(n, ctx, fi):
+    """Quotient de deux polynômes en 0/0 en un point rationnel : on factorise par (x − a), on simplifie, puis on continue."""
+    pt = ctx.pt
+    if fi.nom != "0/0" or pt.s or not pt.a.is_Rational or not (isinstance(n, Op) and n.op == "/"):
+        return None
+    N, D = _poly_ou_const(n.a), _poly_ou_const(n.b)
+    if N is None or D is None:
+        return None
+    a = F(int(pt.a.p), int(pt.a.q))
+    m = min(_facteur_racine(N, a)[1], _facteur_racine(D, a)[1])
+    if m == 0:
+        return None
+    N2, D2 = _diviser_binome(N, a, m), _diviser_binome(D, a, m)
+    xa = _x_moins(a)
+    barre = r"\cancel{" + _facteur_tex(xa, m) + "}"
+    g = _arbre_fraction(N2, D2)
+    haut = _produit_tex(barre, _facteur_ou_vide(N2))
+    bas = _produit_tex(barre, _facteur_ou_vide(D2))
+    lignes = [
+        _ligne_fi(n, fi, ctx),
+        rf"On factorise le numérateur et le dénominateur par \(\left({xa}\right)\) et l'on simplifie (pour \(x \neq {pt.a_tex}\)) : "
+        rf"\({tex(n)} = \dfrac{{{haut}}}{{{bas}}} = {tex(g)}\).",
+    ]
+    L, lg = _noeud(g, ctx)
+    if not lg:
+        sub, val = _tex_en(g, pt), L.tex(False)
+        lg = [rf"Quand \(x \to {pt.a_tex}\), \({tex(g)} \to {sub if sub == val else sub + ' = ' + val}\)."]
+    return L, lignes + lg
+
+
+# ordre du cours : mise en évidence, conjuguée, termes dominants, croissance comparée, L'Hôpital
+METHODES[:] = [_simplifier_zero_sur_zero, _evidence_exp, _conjuguee, _termes_dominants, _comparee_pure, _lhopital]
 
 
 def _silencieux(n, L, ctx):

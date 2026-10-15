@@ -234,8 +234,43 @@
        "type": "texte"
       },
       {
-       "detail": "Abandon : forme indéterminée 0/0 non levée en \\frac{e^{x} - 1}{x} | Abandon : forme indéterminée 0/0 non levée en \\frac{e^{x} - 1}{x}",
-       "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to 0} f(x) = 1\\).",
+       "html": "Le numérateur \\(e^{x} - 1\\) tend vers \\(0\\) et le dénominateur \\(x\\) tend vers \\(0\\) : forme indéterminée « \\(0/0\\) ».",
+       "type": "texte"
+      },
+      {
+       "html": "On applique la règle de Bernoulli-L'Hôpital avec \\(f(x) = e^{x} - 1\\) et \\(g(x) = x\\). Vérifions les hypothèses :",
+       "type": "texte"
+      },
+      {
+       "html": "(a) forme indéterminée « \\(0/0\\) » : vérifiée ;",
+       "type": "texte"
+      },
+      {
+       "html": "(b) \\(f\\) et \\(g\\) sont dérivables sur \\(\\mathbb{R}\\), donc au voisinage de \\(0\\) (sauf peut-être en \\(0\\)) : vérifiée ;",
+       "type": "texte"
+      },
+      {
+       "html": "On calcule \\(f'(x) = e^{x}\\) et \\(g'(x) = 1\\).",
+       "type": "texte"
+      },
+      {
+       "html": "(c) \\(g'(x) = 1 \\neq 0\\) au voisinage de \\(0\\) (sauf peut-être en \\(0\\)) : vérifiée ;",
+       "type": "texte"
+      },
+      {
+       "html": "(d) \\(\\dfrac{f'(x)}{g'(x)} = e^{x}\\).",
+       "type": "texte"
+      },
+      {
+       "html": "Quand \\(x \\to 0\\), \\(e^{x} \\to e^{0} = 1\\).",
+       "type": "texte"
+      },
+      {
+       "html": "La limite de \\(\\dfrac{f'(x)}{g'(x)}\\) existe et vaut \\(1\\) : (d) est vérifiée.",
+       "type": "texte"
+      },
+      {
+       "html": "D'après la règle de Bernoulli-L'Hôpital, \\(\\displaystyle\\lim_{x\\to 0} \\dfrac{f(x)}{g(x)} = \\lim_{x\\to 0} \\dfrac{f'(x)}{g'(x)} = 1\\).",
        "type": "texte"
       },
       {
