@@ -19,7 +19,9 @@ URL : `/derivee-variations/` · moteur : `derivee-variations/derivee_variations.
 3. **ED de f'** : si l'ED de f' diffère de celui de f, il est **calculé et affiché** comme une étape
    (validé). Exemple : √(x²−4), ED(f) = ]−∞;−2] ∪ [2;+∞[, ED(f') = ]−∞;−2[ ∪ ]2;+∞[.
 4. **Signe de f'** : zéros de f' d'abord (narration), puis tableau de signes avec une ligne par
-   facteur de f' et la ligne f'(x).
+   facteur de f' **dont le signe change** et la ligne f'(x) ; un facteur de signe évident n'a pas de ligne, il est
+   justifié en une phrase suivie de « donc f'(x) est du signe de … » (socle 7c) ; exemple √(4x²+1)/(x+2),
+   f'(x) = (8x−1)/(√(4x²+1)(x+2)²) : tableau de 8x − 1 seulement, colonnes −2 (double barre) et 1/8.
 5. **Variations** : ligne f(x) en **flèches seules** (validé), points d'extremum marqués ;
    en un point où f est définie mais pas f', la ligne f(x) porte la valeur f(a) (Q3) ;
    liste des extrema locaux avec valeur exacte de f quand c'est possible (sinon ≈).

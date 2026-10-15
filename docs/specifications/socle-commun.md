@@ -27,6 +27,14 @@ S'applique à toutes les pages outils, sauf mention contraire pour le simplexe
 7c. **Vocabulaire** (décidé le 14.10.2026) : aucun texte visible ne cite une méthode interne
    (« calcul formel », SymPy, dichotomie…) ; le mot « transcendante » est interdit partout. Si une
    équation ne se résout pas avec les méthodes du cours : « solution obtenue numériquement : x ≈ … ».
+   **Facteurs de signe évident** (décidé le 15.10.2026) : dans tout tableau de signes (ED, Dérivée,
+   Étude complète, Limites), un facteur dont le signe est évident n'a PAS de ligne ; il est justifié en une phrase
+   (« √(4x²+1) > 0 » ; « (x+2)² > 0 pour x ≠ −2 » ; « e^u > 0 » ; constante : son signe), puis « donc f'(x) est du
+   signe de … ». Le tableau ne contient que les facteurs qui changent de signe ; la valeur interdite ou le zéro d'un
+   facteur retiré garde sa colonne (double barre pour une valeur interdite). Si tous les facteurs sont évidents :
+   pas de tableau, une phrase. Sont évidents : exponentielle, constante, puissance paire, racine d'une expression
+   strictement positive, polynôme sans zéro réel et positif ; ne le sont pas : une racine dont l'argument s'annule
+   (√(x−2), √(x²)), une racine impaire.
    **Les équivalents sont interdits partout** (décidé le 15.10.2026) : ni le symbole ∼ (`\sim`), ni le mot
    « équivalent », ni « se comporte comme », dans toutes les sorties de tous les outils. On met en évidence,
    avec des égalités exactes (√(4x²+1) = √(x²(4 + 1/x²)) = |x|·√(4 + 1/x²)).

@@ -160,7 +160,7 @@ class TestValeursInterdites(unittest.TestCase):
         self.assertEqual(textes("1/(x-1)^2", r"x \to 1"), [
             r"\(x = 1\) est une valeur interdite.",
             r"Le numérateur vaut \(1\) et le dénominateur \(\left(x - 1\right)^{2}\) tend vers \(0\).",
-            r"De part et d'autre de \(1\), le dénominateur est positif (cf. tableau de signes de \(\left(x - 1\right)^{2}\)) : il tend vers \(0^{+}\), "
+            r"De part et d'autre de \(1\), le dénominateur est positif (\(\left(x - 1\right)^{2} > 0\) pour \(x \neq 1\)) : il tend vers \(0^{+}\), "
             r"donc \(f(x) \to \dfrac{1}{0^{+}} = +\infty\).",
             r"Donc \(\displaystyle\lim_{x\to 1} f(x) = +\infty\).",
             r"Asymptote verticale d'équation \(x = 1\).",
@@ -286,11 +286,29 @@ class TestTableauxDeSignes(unittest.TestCase):
 
     def test_le_tableau_est_lu_et_les_deux_cotes_concordent(self):
         """La lecture du tableau et le signe calculé par les règles sur les limites doivent coïncider."""
-        for entree in ["1/(x^2-2)", "(x+1)/(x^2-4)", "(e^x+1)/(e^x-1)", "1/(x^2-4x+4)", "(x^2+1)/(x^3-x)"]:
+        for entree in ["1/(x^2-2)", "(x+1)/(x^2-4)", "(e^x+1)/(e^x-1)", "(x^2+1)/(x^3-x)"]:
             r = la.etudier(entree)
             textes_ = " ".join(e["html"] for et in r["etudes"] for e in et["etapes"])
             self.assertIn("cf. tableau de signes de", textes_, entree)
             self.assertNotIn("Signe de", textes_, entree)
+
+    def test_facteurs_evidents_sans_ligne_ni_tableau(self):
+        """Un facteur de signe évident (carré, exponentielle, racine d'une expression positive) n'a pas de ligne ;
+        si tous le sont, pas de tableau : la lecture cite la phrase."""
+        r = la.etudier("1/(x^2-4x+4)")
+        self.assertEqual(r["tableaux_signe"], [])
+        textes_ = " ".join(e["html"] for et in r["etudes"] for e in et["etapes"])
+        self.assertIn(r"le dénominateur est positif (\(\left(x - 2\right)^{2} > 0\) pour \(x \neq 2\))", textes_)
+        self.assertNotIn("cf. tableau", textes_)
+        # un carré parmi d'autres facteurs : pas de ligne pour (x + 2)², mais sa valeur interdite garde sa colonne
+        r = la.etudier("1/((x-1)*(x+2)^2)")
+        tab = next(i for i in r["tableaux_signe"] if i.get("type") == "tableau")
+        self.assertEqual(tab["crit"], ["-2", "1"])
+        self.assertEqual(len(tab["rows"]), 1)
+        self.assertEqual(tab["rows"][0]["cells"], ["-", "||", "-", "||", "+"])
+        textes_ = " ".join(i.get("html", "") for i in r["tableaux_signe"])
+        self.assertIn(r"\(\left(x + 2\right)^{2} > 0\) pour \(x \neq -2\)", textes_)
+        self.assertIn("est du signe de", textes_)
 
     def test_sans_tableau_on_garde_la_justification_en_texte(self):
         with sans_tableau():

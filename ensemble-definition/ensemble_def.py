@@ -22,6 +22,7 @@ Principe :
 """
 from fractions import Fraction as F
 import math
+import re
 import json
 
 __all__ = ["analyser", "analyser_json", "apercu_json", "verifier_json"]
@@ -1044,6 +1045,22 @@ def sg(x):
     return "+" if x > 0 else "-"
 
 
+def _facteur_evident_rat(f, poly):
+    """Phrase (tex) si le facteur polynomial f (à racines réelles dans f["racines"]) est de signe évident : puissance
+    paire, ou polynôme sans zéro réel et positif ; None sinon (le facteur garde sa ligne)."""
+    lab = re.sub(r"\\left\((\w+)\\right\)\^", r"\1^", f["tex"])        # (x)^2 s'écrit x^2
+    if f["mult"] % 2 == 0:
+        zs = [r.tex for r in f["racines"]]
+        if not zs:
+            return rf"\({lab} > 0\)"
+        if len(zs) == 1:
+            return rf"\({lab} > 0\) pour \(x \neq {zs[0]}\)"
+        return rf"\({lab} > 0\) pour \(x \notin \left\{{{' ; '.join(zs)}\right\}}\)"
+    if not f["racines"] and peval(poly, F(0)) > 0:
+        return rf"\({lab} > 0\)"
+    return None
+
+
 def resoudre_rat(R, rel, v, items, nom_expr=None):
     """Ensemble des v tels que R(v) rel 0, rel ∈ {'>', '>=', '='}. Ajoute les explications à items."""
     N, D, k = r_entiers(R)
@@ -1134,12 +1151,16 @@ def resoudre_rat(R, rel, v, items, nom_expr=None):
     lignes = []
     tous = [(f, False) for f in fN] + [(f, True) for f in fD]
     if const < 0:
-        lignes.append({"label": qtex(const), "cells": cellules(lambda x: float(const), [], k, test, crit)})
+        lignes.append({"label": qtex(const), "cells": cellules(lambda x: float(const), [], k, test, crit), "_ev": True})
+    evid = []                                  # phrases des facteurs de signe évident (pas de ligne)
     for f, est_den in tous:
         poly = f["poly"]
         mult = f["mult"]
         fn = (lambda p, m: (lambda x: float(peval(p, x)) ** m))(poly, mult)
-        lignes.append({"label": f["tex"], "cells": cellules(fn, f["racines"], k, test, crit)})
+        ev = _facteur_evident_rat(f, poly)
+        if ev:
+            evid.append(ev)
+        lignes.append({"label": f["tex"], "cells": cellules(fn, f["racines"], k, test, crit), "_ev": bool(ev)})
     # ligne finale
     fin = []
     for i in range(k + 1):
@@ -1161,12 +1182,24 @@ def resoudre_rat(R, rel, v, items, nom_expr=None):
         if fin[j] == "||":
             for ligne in lignes:
                 ligne["cells"][j] = "||"
-    if len(tous) + (1 if const < 0 else 0) > 1 or fD:
+    fusionne = not (len(tous) + (1 if const < 0 else 0) > 1 or fD)      # une seule ligne : elle est aussi la ligne finale
+    if not fusionne:
         lignes.append({"label": expr, "cells": fin, "final": True})
     else:
         lignes[-1]["final"] = True
         lignes[-1]["label"] = expr if (deg(D) == 0 and const > 0 and len(tous) == 1) else lignes[-1]["label"]
-    items.append({"type": "tableau", "var": v, "crit": [c.tex for c in crit], "rows": lignes})
+    if const < 0:
+        evid.insert(0, rf"\({qtex(const)} < 0\)")
+    if evid:                                   # facteurs de signe évident : une phrase, pas de ligne
+        items.append(txt(" ; ".join(evid) + "."))
+    gardees = [dict((a, b) for a, b in l.items() if a != "_ev") for l in lignes
+               if not l.get("_ev") or (l.get("final") and not fusionne)]
+    if len(gardees) > (0 if fusionne else 1):
+        reste = [f["tex"] for (f, _), l in zip(tous, lignes[1 if const < 0 else 0:]) if not l.get("_ev")]
+        if evid and reste:
+            prod = " ".join(r if len(reste) == 1 else r for r in reste)
+            items.append(txt(rf"Donc \({expr}\) est du signe {'contraire ' if const < 0 else ''}de \({prod}\)."))
+        items.append({"type": "tableau", "var": v, "crit": [c.tex for c in crit], "rows": gardees})
 
     S = []
     for i in range(k + 1):
@@ -2161,6 +2194,57 @@ def epurer_tableau(crit, lignes, fin):
     return crit2, nouvelles, fin2
 
 
+def _tous_reels(S):
+    return len(S) == 1 and S[0].lo is None and S[0].hi is None
+
+
+def _etiquette_facteur(h):
+    return tex(h) if prec(h) >= 3 else r"\left(" + tex(h) + r"\right)"
+
+
+def phrase_evidente(h, k, D, P, Z):
+    """Phrase (tex) qui justifie en une fois le signe d'un facteur de signe évident : h > 0 partout (exponentielle,
+    racine d'une expression strictement positive, polynôme sans zéro) ou puissance paire de h (positive là où h ne
+    s'annule pas). None si le signe n'est pas évident : le facteur garde sa ligne dans le tableau."""
+    if not _tous_reels(D):
+        return None
+    if not Z and _tous_reels(P):
+        return rf"\({tex(h)} > 0\)"
+    if k % 2 == 0:
+        lab = (_etiquette_facteur(h) if not isinstance(h, Fn) and indice_racine(h) is None else r"\left(" + tex(h) + r"\right)")
+        lab += "^{" + str(abs(k)) + "}"
+        zs = [iv.lo.tex for iv in Z if iv.lo is not None]
+        if not zs:
+            return rf"\({lab} > 0\)"
+        if len(zs) == 1:
+            return rf"\({lab} > 0\) pour \(x \neq {zs[0]}\)"
+        return rf"\({lab} > 0\) pour \(x \notin \left\{{{' ; '.join(zs)}\right\}}\)"
+    return None
+
+
+def analyser_evidents(c, infos, expr_tex):
+    """Facteurs de signe évident d'un produit c·∏ h^k : (phrases à écrire, indices des facteurs évidents,
+    conclusion « donc expr est du signe de … » ou None). Un facteur évident n'a pas de ligne dans le tableau."""
+    phrases, ev = [], set()
+    for i, ((h, k), (D, P, Z)) in enumerate(infos):
+        ph = phrase_evidente(h, k, D, P, Z)
+        if ph:
+            phrases.append(ph)
+            ev.add(i)
+    if c < 0:
+        phrases.append(rf"\({qtex(c)} < 0\)")
+    reste = [infos[i][0][0] for i in range(len(infos)) if i not in ev]
+    concl = None
+    if phrases and reste:
+        prod = " ".join(tex(h) if len(reste) == 1 else _etiquette_facteur(h) for h in reste)
+        concl = rf"Donc \({expr_tex}\) est du signe {'contraire ' if c < 0 else ''}de \({prod}\)."
+    elif phrases:                         # tous les facteurs sont évidents : le signe ne change jamais
+        nul = any(k > 0 and Z for i, ((h, k), (D, P, Z)) in enumerate(infos) if i in ev)
+        concl = (rf"Donc \({expr_tex}\) est {'négatif' if c < 0 else 'positif'}"
+                 + (" ou nul" if nul else "") + " : il ne change jamais de signe.")
+    return phrases, ev, concl
+
+
 def tableau_facteurs(c, infos, rel, expr_tex, items):
     """Tableau de signes de c·∏ h_i^{k_i} ; renvoie {expr rel 0} (rel : '>' ou '>=')."""
     crit = []
@@ -2195,10 +2279,11 @@ def tableau_facteurs(c, infos, rel, expr_tex, items):
         vals.append(test(i))
         if i < n:
             vals.append(crit[i].val)
+    phrases, evidents, concl = analyser_evidents(c, infos, expr_tex)
     lignes = []
     if c < 0:
-        lignes.append({"label": qtex(c), "cells": ["-"] * len(vals)})
-    for (h, k), (D, P, Z) in infos:
+        lignes.append({"label": qtex(c), "cells": ["-"] * len(vals), "_ev": True})
+    for i, ((h, k), (D, P, Z)) in enumerate(infos):
         lab = tex(h) if prec(h) >= 3 else r"\left(" + tex(h) + r"\right)"
         if abs(k) > 1:
             lab = (lab if prec(h) >= 3 and not isinstance(h, Fn) and indice_racine(h) is None
@@ -2207,7 +2292,7 @@ def tableau_facteurs(c, infos, rel, expr_tex, items):
             lab = tex(h)
         if k < 0:
             lab += r" \ (\text{dén.})"
-        lignes.append({"label": lab, "cells": [etat(D, P, Z, k, v) for v in vals]})
+        lignes.append({"label": lab, "cells": [etat(D, P, Z, k, v) for v in vals], "_ev": i in evidents})
     fin = []
     for j in range(len(vals)):
         col = [l["cells"][j] for l in lignes]
@@ -2222,7 +2307,13 @@ def tableau_facteurs(c, infos, rel, expr_tex, items):
     lignes.append({"label": expr_tex, "cells": fin, "final": True})
     crit, lignes, fin = epurer_tableau(crit, lignes, fin)
     n = len(crit)
-    items.append({"type": "tableau", "var": "x", "crit": [p.tex for p in crit], "rows": lignes})
+    if phrases:                           # facteurs de signe évident : une phrase, pas de ligne
+        items.append(txt(" ; ".join(phrases) + "."))
+    gardees = [dict((a, b) for a, b in l.items() if a != "_ev") for l in lignes if l.get("final") or not l.get("_ev")]
+    if len(gardees) > 1:
+        if concl:
+            items.append(txt(concl))
+        items.append({"type": "tableau", "var": "x", "crit": [p.tex for p in crit], "rows": gardees})
     S = []
     for i in range(n + 1):
         if fin[2 * i] == "+":
@@ -2258,9 +2349,10 @@ def resoudre_general(A, rel, items):
     infos = []
     for h, k in facs:
         D, P, Z, it, _ = signe_facteur(h, "x")
-        if len(facs) > 1:
-            items.append(txt(rf"<b>Signe de \({tex(h)}\)</b>"))
-        items.extend(it)
+        if not phrase_evidente(h, k, D, P, Z):
+            if len(facs) > 1:
+                items.append(txt(rf"<b>Signe de \({tex(h)}\)</b>"))
+            items.extend(it)
         infos.append(((h, k), (D, P, Z)))
     if rel == "=":
         Dtot = REELS

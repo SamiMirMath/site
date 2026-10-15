@@ -1267,7 +1267,7 @@
       "type": "texte"
      },
      {
-      "html": "De part et d'autre de \\(0\\), le dénominateur est positif (cf. tableau de signes de \\(x^{2}\\)) : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
+      "html": "De part et d'autre de \\(0\\), le dénominateur est positif (\\(x^{2} > 0\\) pour \\(x \\neq 0\\)) : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
       "type": "texte"
      },
      {
@@ -1284,30 +1284,7 @@
   ],
   "f_tex": "\\frac{1}{x^{2}}",
   "ok": true,
-  "tableaux_signe": [
-   {
-    "html": "Signe de \\(x^{2}\\) :",
-    "type": "texte"
-   },
-   {
-    "crit": [
-     "0"
-    ],
-    "rows": [
-     {
-      "cells": [
-       "+",
-       "||",
-       "+"
-      ],
-      "final": true,
-      "label": "x^{2}"
-     }
-    ],
-    "type": "tableau",
-    "var": "x"
-   }
-  ]
+  "tableaux_signe": []
  },
  "e^(1/x)": {
   "asymptotes": [
@@ -2333,7 +2310,7 @@
       "type": "texte"
      },
      {
-      "html": "De part et d'autre de \\(0\\), l'argument \\(x^{2}\\) est positif (cf. tableau de signes de \\(x^{2}\\)) : il tend vers \\(0^{+}\\).",
+      "html": "De part et d'autre de \\(0\\), l'argument \\(x^{2}\\) est positif (\\(x^{2} > 0\\) pour \\(x \\neq 0\\)) : il tend vers \\(0^{+}\\).",
       "type": "texte"
      },
      {
@@ -2395,28 +2372,6 @@
   "f_tex": "x\\,\\ln\\left(x^{2}\\right)",
   "ok": true,
   "tableaux_signe": [
-   {
-    "html": "Signe de \\(x^{2}\\) :",
-    "type": "texte"
-   },
-   {
-    "crit": [
-     "0"
-    ],
-    "rows": [
-     {
-      "cells": [
-       "+",
-       "0",
-       "+"
-      ],
-      "final": true,
-      "label": "x^{2}"
-     }
-    ],
-    "type": "tableau",
-    "var": "x"
-   },
    {
     "html": "Signe de \\(x\\) :",
     "type": "texte"

@@ -30,7 +30,7 @@ from ensemble_def import (
     lire, tex, par, prec, valeur_constante, Num, Iv, REELS, inter, ens_tex, points, contient, proche,
     preimage, resoudre_general, json_strict, ajouter_saisie, domaine, fusion, evaluer, aplatir, qtex,
     indice_racine, sans_x, _sympy, en_sympy, en_sympy_reel, arbre_depuis_sympy, num_sympy, _SP,
-    txt, NonPrisEnCharge, ErreurSaisie, _analyser, apercu_json,
+    txt, NonPrisEnCharge, ErreurSaisie, _analyser, apercu_json, signe_facteur, analyser_evidents,
 )
 
 __all__ = ["etudier", "etudier_json", "apercu_json"]
@@ -599,6 +599,19 @@ def etudier(entree):
                 combinee[i] = "x" if hors[i // 2] else "0" if contient(D, _test(i // 2)) else "x"
             else:
                 combinee[i] = "x" if _dans_zone_hors(i) else "0" if contient(D, crit[i // 2].val) else "||"
+    # Facteurs de signe évident (exponentielle, racine d'une expression positive, carré…) : une phrase, pas de ligne.
+    # Les colonnes (zéros, valeurs interdites) restent : la ligne f'(x) a été calculée avec tous les facteurs.
+    try:
+        infos = [((h, expo), signe_facteur(h, "x")[:3]) for h, expo in facs]
+        phrases, evidents, concl = analyser_evidents(c_const, infos, "f'(x)")
+    except Exception:
+        phrases, evidents, concl = [], set(), None
+    if phrases:
+        retirer = ([0] if c_const < 0 else []) + [(1 if c_const < 0 else 0) + i for i in evidents]
+        lignes = [l for j, l in enumerate(lignes) if j not in retirer]
+        items_signe.append(txt(" ; ".join(phrases) + "."))
+        if concl:
+            items_signe.append(txt(concl))
     lignes.append({"label": "f'(x)", "cells": combinee, "final": True})
 
     res["signe_resolu"] = True

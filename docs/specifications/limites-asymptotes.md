@@ -106,7 +106,7 @@ mécanique interne (le détail technique va dans la clé `detail` / `controles_d
 2. **Le signe d'un dénominateur qui tend vers 0 est toujours justifié** (de même celui d'un argument de ln
    qui tend vers 0), **par un tableau de signes**, construit par le même moteur de signe et rendu comme
    dans les outils « Ensemble de définition » et « Dérivée » (lignes des facteurs, puis le produit ; valeur
-   interdite en double barre centrée). Un seul tableau par dénominateur et par argument de ln, en tête de
+   interdite en double barre centrée). Les facteurs de signe évident n'ont pas de ligne (socle 7c) ; si tous le sont, pas de tableau et la lecture cite la phrase (« le dénominateur est positif ((x − 1)² > 0 pour x ≠ 1) »). Un seul tableau par dénominateur et par argument de ln, en tête de
    l'étude (carte « Tableaux de signes », clé `tableaux_signe`), puis deux lignes courtes lues dans le
    tableau, avec un renvoi explicite : « À gauche de 2, le dénominateur est négatif (cf. tableau de signes de x − 2) :
    il tend vers 0⁻, donc f(x) → 3/0⁻ = −∞. » ; chaque tableau est titré « Signe de x − 2 ».
@@ -168,3 +168,4 @@ Modèle (1/(x² − 2) en −√2) :
 | LA-33 | Aucune sortie ne contient « ∼ », « équivalent » ni « se comporte comme » | [auto-py] (`test_vocabulaire.py`) |
 | LA-34 | ln(u)/v en ±∞ (u, v polynômes) : ln(u) = k ln\|x\| + ln(c + …), v mis en évidence, puis croissance comparée (limite de référence nommée) ; jamais Bernoulli-L'Hôpital pour ln(x²+1)/x et ln(x²−4x)/(x−5) en ±∞ | [auto-py] |
 | LA-35 | √(x²) = \|x\| : x/√(x²) en 0 se rédige (x/\|x\| = −1 à gauche, 1 à droite), sans phrase de repli ; (x−1)/√((x−1)²) en 1 de même | [auto-py] |
+| LA-36 | Facteurs de signe évident (carré, exponentielle, racine d'une expression positive, constante) : aucune ligne dans les tableaux de signes de Dérivée, Étude complète, ED et Limites ; phrase puis « donc … est du signe de … » ; la valeur interdite d'un facteur retiré garde sa colonne ; √(4x²+1)/(x+2) : tableau de 8x − 1 seul | [auto-py] (`test_facteurs_evidents.py`) |

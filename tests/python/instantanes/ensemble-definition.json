@@ -1139,22 +1139,8 @@
       "type": "texte"
      },
      {
-      "crit": [
-       "0"
-      ],
-      "rows": [
-       {
-        "cells": [
-         "+",
-         "0",
-         "+"
-        ],
-        "final": true,
-        "label": "x^{2}"
-       }
-      ],
-      "type": "tableau",
-      "var": "x"
+      "html": "\\(x^{2} > 0\\) pour \\(x \\neq 0\\).",
+      "type": "texte"
      },
      {
       "html": "On lit les intervalles où \\(x^{2} > 0\\) : \\(x \\in \\mathbb{R} \\setminus \\left\\{0\\right\\}\\).",
@@ -1490,38 +1476,8 @@
       "type": "texte"
      },
      {
-      "crit": [
-       "0"
-      ],
-      "rows": [
-       {
-        "cells": [
-         "-",
-         "-",
-         "-"
-        ],
-        "label": "-1"
-       },
-       {
-        "cells": [
-         "+",
-         "0",
-         "+"
-        ],
-        "label": "\\left(x\\right)^{2}"
-       },
-       {
-        "cells": [
-         "-",
-         "0",
-         "-"
-        ],
-        "final": true,
-        "label": "-x^{2}"
-       }
-      ],
-      "type": "tableau",
-      "var": "x"
+      "html": "\\(-1 < 0\\) ; \\(x^{2} > 0\\) pour \\(x \\neq 0\\).",
+      "type": "texte"
      },
      {
       "html": "On lit les intervalles où \\(-x^{2} \\geq 0\\) (zéros inclus) : \\(x \\in \\left\\{0\\right\\}\\).",
@@ -1565,18 +1521,8 @@
       "type": "texte"
      },
      {
-      "crit": [],
-      "rows": [
-       {
-        "cells": [
-         "+"
-        ],
-        "final": true,
-        "label": "x^{2} - 4x + 5"
-       }
-      ],
-      "type": "tableau",
-      "var": "x"
+      "html": "\\(x^{2} - 4x + 5 > 0\\).",
+      "type": "texte"
      },
      {
       "html": "On lit les intervalles où \\(x^{2} - 4x + 5 > 0\\) : \\(x \\in \\mathbb{R}\\).",

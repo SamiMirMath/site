@@ -811,16 +811,27 @@ class TableauSigne:
         self.crit.sort(key=lambda q: q.val)
         T = tex(A)
         titre = rf"Signe de \({T}\) :"
-        gardes = []
+        avant, tab, hach = [], None, []
         for i in items:
             if i.get("type") == "tableau":
                 lignes = i["rows"]
                 if len(lignes) == 2 and lignes[0]["cells"] == lignes[1]["cells"]:
                     i = dict(i, rows=[lignes[1]])          # un seul facteur : la ligne du facteur répète celle du produit
-                gardes.append(i)
+                tab = i
             elif str(i.get("html", "")).startswith("Les zones hachurées"):
-                gardes.append(i)
-        self.items = [txt(titre)] + gardes
+                hach.append(i)
+            elif not str(i.get("html", "")).startswith("On lit"):
+                avant.append(i)                            # phrases des facteurs de signe évident
+        # tous les facteurs sont évidents : pas de tableau, la lecture renvoie à la phrase qui les justifie
+        self.sans_tableau = tab is None
+        self.phrase = avant[0]["html"].rstrip(".") if avant else None
+        self.items = [] if tab is None else [txt(titre)] + avant + [tab] + hach
+
+    def renvoi(self):
+        """« cf. tableau de signes de A », ou la phrase d'évidence quand il n'y a pas de tableau."""
+        if self.sans_tableau and self.phrase:
+            return self.phrase
+        return rf"cf. tableau de signes de \({tex(self.A)}\)"
 
     def signe_en(self, v):
         s = 1 if self.c > 0 else -1
@@ -911,6 +922,7 @@ class _Contexte:
         self.refs, self.ap_vus, self.justifies = {}, set(), set()
         self.racine_dite = False
         self.demandes = []
+        self.renvois = {}
         self.profondeur = 0
         self.nb_lhopital = 0
         if ref_f is not None:
@@ -953,6 +965,7 @@ class _Contexte:
         if s != L.ap:
             raise Abandon("le tableau de signes contredit le signe calculé")
         self.demandes.append((genre, n))
+        self.renvois[(genre, n.key())] = t.renvoi()
         return s
 
     def cote(self):
@@ -2390,7 +2403,7 @@ def _lignes_pole(n, ctx, A, la, B, L):
         fin = rf"\({tex(n)} \to {fraction}\)"
     if lu is not None:
         mot = "positif" if lu > 0 else "négatif"
-        lignes.append(rf"{ctx.cote()}, le dénominateur est {mot} (cf. tableau de signes de \({tex(n.b)}\)) : "
+        lignes.append(rf"{ctx.cote()}, le dénominateur est {mot} ({ctx.renvois[("den", n.b.key())]}) : "
                       rf"il tend vers \(0^{{{s}}}\), donc {fin}.")
     else:
         lignes += ctx.justifier(n.b, B, force=True)
@@ -2484,7 +2497,7 @@ def _noeud(n, ctx):
             if lu_signe is not None:
                 s0 = "+" if U.ap > 0 else "-"
                 pre = [rf"{ctx.cote()}, {quoi} \({tex(n.a)}\) est {accord[0] if lu_signe > 0 else accord[1]} "
-                       rf"(cf. tableau de signes de \({tex(n.a)}\)) : {accord[2]} tend vers \(0^{{{s0}}}\)."]
+                       rf"({ctx.renvois[(genre, n.a.key())]}) : {accord[2]} tend vers \(0^{{{s0}}}\)."]
             else:
                 pre = ctx.justifier(n.a, U)
                 rappel = rf" et \({tex(n.a)} \to {U.tex()}\)"
