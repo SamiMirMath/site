@@ -121,6 +121,21 @@ mécanique interne (le détail technique va dans la clé `detail` / `controles_d
    seule limite latérale est infinie (e^(1/x) en 0 : 0 à gauche, +∞ à droite), on écrit « asymptote verticale
    d'équation x = 0 (du côté droit) ; à gauche, f(x) → 0 ».
 
+5. **Chaîne d'égalités** (décidé le 15.10.2026) : chaque méthode rédigée (mise en évidence, expression conjuguée,
+   croissance comparée, Bernoulli-L'Hôpital, simplification 0/0, √(u²) = |u|) s'écrit comme au tableau, en une
+   formule affichée `lim f(x) = lim … = … = valeur`, plutôt qu'en phrases successives. Le texte se limite à la forme
+   indéterminée nommée avant la chaîne, aux justifications courtes entre parenthèses, et à la conclusion (asymptote).
+   Les limites par opérations (L1/L2 : sommes, produits, valeur interdite avec tableau de signes) gardent leurs
+   lignes courtes. Exemple (√(4x²+1)/(x+2) en −∞) :
+   > lim f(x) = lim √(x²(4 + 1/x²)) / (x(1 + 2/x))   (4x²+1 = x²(4 + 1/x²), x+2 = x(1 + 2/x))
+   >          = lim |x|√(4 + 1/x²) / (x(1 + 2/x))   (√(x²) = |x|)
+   >          = lim −x√(4 + 1/x²) / (x(1 + 2/x))   (x < 0, donc |x| = −x)
+   >          = lim −√(4 + 1/x²) / (1 + 2/x) = −√4 / 1 = −2   (on simplifie par x ; 1/x² → 0, 2/x → 0)
+   Une chaîne de méthode appelée sur le reste (la mise en évidence après la conjuguée) prolonge la même chaîne ; un
+   morceau qui demande sa propre méthode (x²e^(−x) dans e^x − x²) a sa chaîne écrite avant. Chaque limite de référence
+   cite son point (lim_{x→+∞} ln x / xⁿ = 0 ; en −∞, avec t = −x → +∞). Quand √(u²) = |u| ramène à une fraction
+   simplifiable (x/√(x²) en 0 : x/|x| = x/(−x) = −1), la simplification est dans la même chaîne : pas de « 0/0 » répété.
+
 Modèle (1/(x² − 2) en −√2) :
 > x = −√2 est une valeur interdite.
 > Le numérateur vaut 1 et le dénominateur x² − 2 tend vers 0 (voir le tableau de signes).
@@ -169,3 +184,4 @@ Modèle (1/(x² − 2) en −√2) :
 | LA-34 | ln(u)/v en ±∞ (u, v polynômes) : ln(u) = k ln\|x\| + ln(c + …), v mis en évidence, puis croissance comparée (limite de référence nommée) ; jamais Bernoulli-L'Hôpital pour ln(x²+1)/x et ln(x²−4x)/(x−5) en ±∞ | [auto-py] |
 | LA-35 | √(x²) = \|x\| : x/√(x²) en 0 se rédige (x/\|x\| = −1 à gauche, 1 à droite), sans phrase de repli ; (x−1)/√((x−1)²) en 1 de même | [auto-py] |
 | LA-36 | Facteurs de signe évident (carré, exponentielle, racine d'une expression positive, constante) : aucune ligne dans les tableaux de signes de Dérivée, Étude complète, ED et Limites ; phrase puis « donc … est du signe de … » ; la valeur interdite d'un facteur retiré garde sa colonne ; √(4x²+1)/(x+2) : tableau de 8x − 1 seul | [auto-py] (`test_facteurs_evidents.py`) |
+| LA-37 | Chaîne d'égalités : mise en évidence (√(4x²+1)/(x+2) en ±∞, (x²−1)/(x−3), ln(x²+1)/x), conjuguée (√(x²+x) − x en +∞ : une seule chaîne), croissance comparée, L'Hôpital et 0/0 s'écrivent en une formule affichée `lim f(x) = lim … = valeur` avec justifications entre parenthèses ; forme indéterminée nommée avant la chaîne, asymptote après ; x/√(x²) en 0 : une seule ligne « 0/0 » | [auto-py] |

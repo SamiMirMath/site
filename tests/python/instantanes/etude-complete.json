@@ -181,35 +181,15 @@
        "type": "texte"
       },
       {
-       "html": "On met \\(e^{x}\\) en évidence : \\(e^{x} - 1 = e^{x}\\,\\left(1 - e^{-x}\\right)\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Donc \\(\\frac{e^{x} - 1}{x} = \\frac{e^{x}}{x}\\,\\left(1 - e^{-x}\\right)\\).",
-       "type": "texte"
-      },
-      {
        "html": "Le numérateur \\(e^{x}\\) tend vers \\(+\\infty\\) et le dénominateur \\(x\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
        "type": "texte"
       },
       {
-       "html": "Par croissance comparée (limite de référence : \\(\\lim_{x\\to +\\infty} \\dfrac{e^{ax}}{x^{n}} = +\\infty\\) pour \\(a > 0\\) et \\(n > 0\\)), \\(\\frac{e^{x}}{x} \\to +\\infty\\).",
+       "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x}}{x} = +\\infty \\qquad \\left(\\frac{e^{x}}{x} \\to +\\infty \\text{ : croissance comparée, } \\lim_{x\\to +\\infty} \\dfrac{e^{ax}}{x^{n}} = +\\infty \\text{ pour } a > 0 \\text{ et } n > 0\\right)\\end{aligned}\\]",
        "type": "texte"
       },
       {
-       "html": "Quand \\(x \\to +\\infty\\), \\(-x \\to -\\infty\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Or \\(e^{t} \\to 0^{+}\\) quand \\(t \\to -\\infty\\), donc \\(e^{-x} \\to 0^{+}\\).",
-       "type": "texte"
-      },
-      {
-       "html": "\\(\\frac{e^{x}}{x} \\to +\\infty\\) et \\(1 - e^{-x} \\to 1\\), donc \\(\\frac{e^{x}}{x}\\,\\left(1 - e^{-x}\\right) \\to +\\infty\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+       "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} f(x) &= \\lim_{x\\to +\\infty} \\frac{e^{x}}{x}\\,\\left(1 - e^{-x}\\right) = \\left(+\\infty\\right) \\cdot 1 = +\\infty \\qquad \\left(\\text{on met } e^{x} \\text{ en évidence} ,\\; e^{x} - 1 = e^{x}\\,\\left(1 - e^{-x}\\right) \\; ;\\; \\frac{e^{x}}{x} \\to +\\infty \\; ;\\; e^{-x} \\to 0\\right)\\end{aligned}\\]",
        "type": "texte"
       },
       {
@@ -250,19 +230,19 @@
        "type": "texte"
       },
       {
-       "html": "(d) \\(\\dfrac{f'(x)}{g'(x)} = e^{x}\\).",
+       "html": "(d) Calculons la limite de \\(\\dfrac{f'(x)}{g'(x)}\\) :",
        "type": "texte"
       },
       {
-       "html": "Quand \\(x \\to 0\\), \\(e^{x} \\to e^{0} = 1\\).",
+       "html": "\\[\\begin{aligned}\\lim_{x\\to 0} \\dfrac{f'(x)}{g'(x)} &= \\lim_{x\\to 0} e^{x} = e^{0} = 1\\end{aligned}\\]",
        "type": "texte"
       },
       {
-       "html": "La limite de \\(\\dfrac{f'(x)}{g'(x)}\\) existe et vaut \\(1\\) : (d) est vérifiée.",
+       "html": "La limite de \\(\\dfrac{f'(x)}{g'(x)}\\) existe et vaut \\(1\\) : (d) est vérifiée, donc la règle s'applique :",
        "type": "texte"
       },
       {
-       "html": "D'après la règle de Bernoulli-L'Hôpital, \\(\\displaystyle\\lim_{x\\to 0} \\dfrac{f(x)}{g(x)} = \\lim_{x\\to 0} \\dfrac{f'(x)}{g'(x)} = 1\\).",
+       "html": "\\[\\begin{aligned}\\lim_{x\\to 0} f(x) &= \\lim_{x\\to 0} \\dfrac{f'(x)}{g'(x)} = 1 \\qquad \\left(\\text{règle de Bernoulli-L'Hôpital}\\right)\\end{aligned}\\]",
        "type": "texte"
       },
       {
@@ -475,27 +455,11 @@
     {
      "etapes": [
       {
-       "html": "Le numérateur tend vers \\(+\\infty\\) et le dénominateur tend vers \\(-\\infty\\) (limite de leur terme de plus haut degré) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+       "html": "Le numérateur \\(x^{2} - 1\\) tend vers \\(+\\infty\\) et le dénominateur \\(x - 3\\) tend vers \\(-\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
        "type": "texte"
       },
       {
-       "html": "On met en évidence le terme de plus haut degré : \\(x^{2} - 1 = x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)\\) et \\(x - 3 = x\\left(1 - \\dfrac{3}{x}\\right)\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Donc \\(\\frac{x^{2} - 1}{x - 3} = \\dfrac{x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)}{x\\left(1 - \\dfrac{3}{x}\\right)} = x \\cdot \\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{3}{x}}\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Quand \\(x \\to -\\infty\\), \\(\\dfrac{1}{x^{2}} \\to 0\\) et \\(\\dfrac{3}{x} \\to 0\\) : le quotient \\(\\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{3}{x}}\\) tend vers 1.",
-       "type": "texte"
-      },
-      {
-       "html": "Le quotient tend vers 1 et \\(x \\to -\\infty\\) : la limite est \\(-\\infty\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = -\\infty\\).",
+       "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} f(x) &= \\lim_{x\\to -\\infty} \\dfrac{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{x\\,\\left(1 - \\frac{3}{x}\\right)} \\qquad \\left(x^{2} - 1 = x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right) ,\\; x - 3 = x\\,\\left(1 - \\frac{3}{x}\\right)\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{x\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{1 - \\frac{3}{x}} = \\dfrac{\\left(-\\infty\\right) \\cdot 1}{1} = -\\infty \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{1}{x^{2}} \\to 0 \\; ;\\; \\frac{3}{x} \\to 0\\right)\\end{aligned}\\]",
        "type": "texte"
       },
       {
@@ -512,27 +476,11 @@
     {
      "etapes": [
       {
-       "html": "Le numérateur tend vers \\(+\\infty\\) et le dénominateur tend vers \\(+\\infty\\) (limite de leur terme de plus haut degré) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+       "html": "Le numérateur \\(x^{2} - 1\\) tend vers \\(+\\infty\\) et le dénominateur \\(x - 3\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
        "type": "texte"
       },
       {
-       "html": "On met en évidence le terme de plus haut degré : \\(x^{2} - 1 = x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)\\) et \\(x - 3 = x\\left(1 - \\dfrac{3}{x}\\right)\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Donc \\(\\frac{x^{2} - 1}{x - 3} = \\dfrac{x^{2}\\left(1 - \\dfrac{1}{x^{2}}\\right)}{x\\left(1 - \\dfrac{3}{x}\\right)} = x \\cdot \\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{3}{x}}\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Quand \\(x \\to +\\infty\\), \\(\\dfrac{1}{x^{2}} \\to 0\\) et \\(\\dfrac{3}{x} \\to 0\\) : le quotient \\(\\dfrac{1 - \\dfrac{1}{x^{2}}}{1 - \\dfrac{3}{x}}\\) tend vers 1.",
-       "type": "texte"
-      },
-      {
-       "html": "Le quotient tend vers 1 et \\(x \\to +\\infty\\) : la limite est \\(+\\infty\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+       "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} f(x) &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{x\\,\\left(1 - \\frac{3}{x}\\right)} \\qquad \\left(x^{2} - 1 = x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right) ,\\; x - 3 = x\\,\\left(1 - \\frac{3}{x}\\right)\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{x\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{1 - \\frac{3}{x}} = \\dfrac{\\left(+\\infty\\right) \\cdot 1}{1} = +\\infty \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{1}{x^{2}} \\to 0 \\; ;\\; \\frac{3}{x} \\to 0\\right)\\end{aligned}\\]",
        "type": "texte"
       },
       {
@@ -756,7 +704,7 @@
        "type": "texte"
       },
       {
-       "html": "Par croissance comparée (limite de référence : \\(\\lim_{x\\to 0^{+}} x^{n}\\ln x = 0\\) pour \\(n > 0\\)), \\(x\\,\\ln(x) \\to 0\\).",
+       "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} x\\,\\ln(x) = 0 \\qquad \\left(x\\,\\ln(x) \\to 0 \\text{ : croissance comparée, } \\lim_{x\\to 0^{+}} x^{n}\\ln x = 0 \\text{ pour } n > 0\\right)\\end{aligned}\\]",
        "type": "texte"
       },
       {
@@ -1370,11 +1318,7 @@
        "type": "texte"
       },
       {
-       "html": "Par croissance comparée (limite de référence : \\(\\lim_{x\\to +\\infty} \\dfrac{\\ln x}{x^{n}} = 0\\) pour \\(n > 0\\)), \\(\\frac{\\ln(x)}{x} \\to 0\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 0\\).",
+       "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} f(x) = 0 \\qquad \\left(\\frac{\\ln(x)}{x} \\to 0 \\text{ : croissance comparée, } \\lim_{x\\to +\\infty} \\dfrac{\\ln x}{x^{n}} = 0 \\text{ pour } n > 0\\right)\\end{aligned}\\]",
        "type": "texte"
       },
       {
@@ -1854,11 +1798,7 @@
        "type": "texte"
       },
       {
-       "html": "Par croissance comparée (limite de référence : \\(\\lim_{x\\to 0^{+}} x^{n}\\ln x = 0\\) pour \\(n > 0\\)), \\(x\\,\\ln(x) \\to 0\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Donc \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = 0\\).",
+       "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} f(x) = 0 \\qquad \\left(x\\,\\ln(x) \\to 0 \\text{ : croissance comparée, } \\lim_{x\\to 0^{+}} x^{n}\\ln x = 0 \\text{ pour } n > 0\\right)\\end{aligned}\\]",
        "type": "texte"
       },
       {
@@ -2063,27 +2003,11 @@
     {
      "etapes": [
       {
-       "html": "Le numérateur tend vers \\(-\\infty\\) et le dénominateur tend vers \\(+\\infty\\) (limite de leur terme de plus haut degré) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+       "html": "Le numérateur \\(x\\) tend vers \\(-\\infty\\) et le dénominateur \\(x^{2} + 1\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
        "type": "texte"
       },
       {
-       "html": "On met en évidence le terme de plus haut degré : \\(x^{2} + 1 = x^{2}\\left(1 + \\dfrac{1}{x^{2}}\\right)\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Donc \\(\\frac{x}{x^{2} + 1} = \\dfrac{x}{x^{2}\\left(1 + \\dfrac{1}{x^{2}}\\right)} = \\dfrac{1}{x} \\cdot \\dfrac{1}{1 + \\dfrac{1}{x^{2}}}\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Quand \\(x \\to -\\infty\\), \\(\\dfrac{1}{x^{2}} \\to 0\\) : le quotient \\(\\dfrac{1}{1 + \\dfrac{1}{x^{2}}}\\) tend vers 1.",
-       "type": "texte"
-      },
-      {
-       "html": "Le quotient tend vers 1 et \\(\\dfrac{1}{x} \\to 0\\) : la limite est \\(0\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = 0\\).",
+       "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} f(x) &= \\lim_{x\\to -\\infty} \\dfrac{x}{x^{2}\\,\\left(1 + \\frac{1}{x^{2}}\\right)} \\qquad \\left(x^{2} + 1 = x^{2}\\,\\left(1 + \\frac{1}{x^{2}}\\right)\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{1}{x\\,\\left(1 + \\frac{1}{x^{2}}\\right)} = \\dfrac{1}{\\left(-\\infty\\right) \\cdot 1} = 0 \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{1}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
        "type": "texte"
       },
       {
@@ -2096,27 +2020,11 @@
     {
      "etapes": [
       {
-       "html": "Le numérateur tend vers \\(+\\infty\\) et le dénominateur tend vers \\(+\\infty\\) (limite de leur terme de plus haut degré) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+       "html": "Le numérateur \\(x\\) tend vers \\(+\\infty\\) et le dénominateur \\(x^{2} + 1\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
        "type": "texte"
       },
       {
-       "html": "On met en évidence le terme de plus haut degré : \\(x^{2} + 1 = x^{2}\\left(1 + \\dfrac{1}{x^{2}}\\right)\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Donc \\(\\frac{x}{x^{2} + 1} = \\dfrac{x}{x^{2}\\left(1 + \\dfrac{1}{x^{2}}\\right)} = \\dfrac{1}{x} \\cdot \\dfrac{1}{1 + \\dfrac{1}{x^{2}}}\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Quand \\(x \\to +\\infty\\), \\(\\dfrac{1}{x^{2}} \\to 0\\) : le quotient \\(\\dfrac{1}{1 + \\dfrac{1}{x^{2}}}\\) tend vers 1.",
-       "type": "texte"
-      },
-      {
-       "html": "Le quotient tend vers 1 et \\(\\dfrac{1}{x} \\to 0\\) : la limite est \\(0\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 0\\).",
+       "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} f(x) &= \\lim_{x\\to +\\infty} \\dfrac{x}{x^{2}\\,\\left(1 + \\frac{1}{x^{2}}\\right)} \\qquad \\left(x^{2} + 1 = x^{2}\\,\\left(1 + \\frac{1}{x^{2}}\\right)\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{1}{x\\,\\left(1 + \\frac{1}{x^{2}}\\right)} = \\dfrac{1}{\\left(+\\infty\\right) \\cdot 1} = 0 \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{1}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
        "type": "texte"
       },
       {
@@ -2283,19 +2191,7 @@
        "type": "texte"
       },
       {
-       "html": "\\(\\sqrt{x^{2}} = |x|\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Comme \\(x < 0\\), \\(\\sqrt{x^{2}} = |x| = -x\\), donc \\(\\sqrt{x^{2}} = -x\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Donc \\(\\frac{x}{\\sqrt{x^{2}}} = \\frac{x}{-x} = -1\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = -1\\).",
+       "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} f(x) &= \\lim_{x\\to -\\infty} \\dfrac{x}{\\sqrt{x^{2}}} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x}{|x|} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x}{-x} \\qquad \\left(x < 0 \\text{ donc } |x| = -x\\right) \\\\ &= \\lim_{x\\to -\\infty} -1 = -1 \\qquad \\left(\\text{on simplifie par } x\\right)\\end{aligned}\\]",
        "type": "texte"
       },
       {
@@ -2320,19 +2216,7 @@
        "type": "texte"
       },
       {
-       "html": "\\(\\sqrt{x^{2}} = |x|\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Comme \\(x > 0\\), \\(|x| = x\\), donc \\(\\sqrt{x^{2}} = x\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Donc \\(\\frac{x}{\\sqrt{x^{2}}} = \\frac{x}{x} = 1\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 1\\).",
+       "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} f(x) &= \\lim_{x\\to +\\infty} \\dfrac{x}{\\sqrt{x^{2}}} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x}{|x|} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x}{x} \\qquad \\left(x > 0 \\text{ donc } |x| = x\\right) \\\\ &= \\lim_{x\\to +\\infty} 1 = 1 \\qquad \\left(\\text{on simplifie par } x\\right)\\end{aligned}\\]",
        "type": "texte"
       },
       {
@@ -2353,35 +2237,19 @@
        "type": "texte"
       },
       {
-       "html": "À gauche de \\(0\\), \\(x\\) est négatif, donc \\(\\sqrt{x^{2}} = |x| = -x\\).",
+       "html": "À gauche :",
        "type": "texte"
       },
       {
-       "html": "Donc \\(\\frac{x}{\\sqrt{x^{2}}} = \\frac{x}{|x|} = \\frac{x}{-x}\\).",
+       "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{-}} f(x) &= \\lim_{x\\to 0^{-}} \\frac{x}{|x|} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to 0^{-}} \\frac{x}{-x} \\qquad \\left(x < 0 \\text{ à gauche de } 0 \\text{, donc } |x| = -x\\right) \\\\ &= \\lim_{x\\to 0^{-}} -1 = -1 \\qquad \\left(\\text{on simplifie par } x \\text{ (} x \\neq 0\\text{)}\\right)\\end{aligned}\\]",
        "type": "texte"
       },
       {
-       "html": "Le numérateur \\(x\\) tend vers \\(0\\) et le dénominateur \\(-x\\) tend vers \\(0\\) : forme indéterminée « \\(0/0\\) ».",
+       "html": "À droite :",
        "type": "texte"
       },
       {
-       "html": "On factorise le numérateur et le dénominateur par \\(\\left(x\\right)\\) et l'on simplifie (pour \\(x \\neq 0\\)) : \\(\\frac{x}{-x} = \\dfrac{\\cancel{\\left(x\\right)}}{-\\cancel{\\left(x\\right)}} = -1\\).",
-       "type": "texte"
-      },
-      {
-       "html": "À droite de \\(0\\), \\(x\\) est positif, donc \\(\\sqrt{x^{2}} = |x| = x\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Donc \\(\\frac{x}{\\sqrt{x^{2}}} = \\frac{x}{|x|} = \\frac{x}{x}\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Le numérateur \\(x\\) tend vers \\(0\\) et le dénominateur \\(x\\) tend vers \\(0\\) : forme indéterminée « \\(0/0\\) ».",
-       "type": "texte"
-      },
-      {
-       "html": "On factorise le numérateur et le dénominateur par \\(\\left(x\\right)\\) et l'on simplifie (pour \\(x \\neq 0\\)) : \\(\\frac{x}{x} = \\dfrac{\\cancel{\\left(x\\right)}}{\\cancel{\\left(x\\right)}} = 1\\).",
+       "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} f(x) &= \\lim_{x\\to 0^{+}} \\frac{x}{|x|} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to 0^{+}} \\frac{x}{x} \\qquad \\left(x > 0 \\text{ à droite de } 0 \\text{, donc } |x| = x\\right) \\\\ &= \\lim_{x\\to 0^{+}} 1 = 1 \\qquad \\left(\\text{on simplifie par } x \\text{ (} x \\neq 0\\text{)}\\right)\\end{aligned}\\]",
        "type": "texte"
       },
       {
@@ -2757,11 +2625,7 @@
        "type": "texte"
       },
       {
-       "html": "Par croissance comparée (limite de référence : \\(\\lim_{x\\to +\\infty} x^{n}e^{-ax} = 0\\) pour \\(a > 0\\) et \\(n > 0\\)), \\(x^{2}\\,e^{-x} \\to 0\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 0\\).",
+       "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} f(x) = 0 \\qquad \\left(x^{2}\\,e^{-x} \\to 0 \\text{ : croissance comparée, } \\lim_{x\\to +\\infty} x^{n}e^{-ax} = 0 \\text{ pour } a > 0 \\text{ et } n > 0\\right)\\end{aligned}\\]",
        "type": "texte"
       },
       {
@@ -2920,19 +2784,7 @@
        "type": "texte"
       },
       {
-       "html": "On met en évidence le terme de plus haut degré : \\(x^{2} - 4x + 3 = x^{2}\\left(1 - \\dfrac{4}{x} + \\dfrac{3}{x^{2}}\\right)\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Quand \\(x \\to +\\infty\\), \\(\\dfrac{4}{x} \\to 0\\) et \\(\\dfrac{3}{x^{2}} \\to 0\\), donc \\(1 - \\dfrac{4}{x} + \\dfrac{3}{x^{2}} \\to 1\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Comme \\(x^{2} \\to +\\infty\\) et que le facteur entre parenthèses tend vers 1, \\(x^{2} - 4x + 3 \\to +\\infty\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+       "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} f(x) &= \\lim_{x\\to +\\infty} x^{2}\\,\\left(1 - \\frac{4}{x} + \\frac{3}{x^{2}}\\right) = \\left(+\\infty\\right) \\cdot 1 = +\\infty \\qquad \\left(\\text{on met } x^{2} \\text{ en évidence} \\; ;\\; \\frac{4}{x} \\to 0 \\; ;\\; \\frac{3}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
        "type": "texte"
       },
       {
@@ -3110,19 +2962,7 @@
        "type": "texte"
       },
       {
-       "html": "On met en évidence le terme de plus haut degré : \\(x^{3} - 3x = x^{3}\\left(1 - \\dfrac{3}{x^{2}}\\right)\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Quand \\(x \\to -\\infty\\), \\(\\dfrac{3}{x^{2}} \\to 0\\), donc \\(1 - \\dfrac{3}{x^{2}} \\to 1\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Comme \\(x^{3} \\to -\\infty\\) et que le facteur entre parenthèses tend vers 1, \\(x^{3} - 3x \\to -\\infty\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = -\\infty\\).",
+       "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} f(x) &= \\lim_{x\\to -\\infty} x^{3}\\,\\left(1 - \\frac{3}{x^{2}}\\right) = \\left(-\\infty\\right) \\cdot 1 = -\\infty \\qquad \\left(\\text{on met } x^{3} \\text{ en évidence} \\; ;\\; \\frac{3}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
        "type": "texte"
       },
       {
@@ -3143,19 +2983,7 @@
        "type": "texte"
       },
       {
-       "html": "On met en évidence le terme de plus haut degré : \\(x^{3} - 3x = x^{3}\\left(1 - \\dfrac{3}{x^{2}}\\right)\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Quand \\(x \\to +\\infty\\), \\(\\dfrac{3}{x^{2}} \\to 0\\), donc \\(1 - \\dfrac{3}{x^{2}} \\to 1\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Comme \\(x^{3} \\to +\\infty\\) et que le facteur entre parenthèses tend vers 1, \\(x^{3} - 3x \\to +\\infty\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+       "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} f(x) &= \\lim_{x\\to +\\infty} x^{3}\\,\\left(1 - \\frac{3}{x^{2}}\\right) = \\left(+\\infty\\right) \\cdot 1 = +\\infty \\qquad \\left(\\text{on met } x^{3} \\text{ en évidence} \\; ;\\; \\frac{3}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
        "type": "texte"
       },
       {
@@ -3373,19 +3201,7 @@
        "type": "texte"
       },
       {
-       "html": "On met en évidence le terme de plus haut degré : \\(x^{4} - 2x^{2} = x^{4}\\left(1 - \\dfrac{2}{x^{2}}\\right)\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Quand \\(x \\to -\\infty\\), \\(\\dfrac{2}{x^{2}} \\to 0\\), donc \\(1 - \\dfrac{2}{x^{2}} \\to 1\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Comme \\(x^{4} \\to +\\infty\\) et que le facteur entre parenthèses tend vers 1, \\(x^{4} - 2x^{2} \\to +\\infty\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = +\\infty\\).",
+       "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} f(x) &= \\lim_{x\\to -\\infty} x^{4}\\,\\left(1 - \\frac{2}{x^{2}}\\right) = \\left(+\\infty\\right) \\cdot 1 = +\\infty \\qquad \\left(\\text{on met } x^{4} \\text{ en évidence} \\; ;\\; \\frac{2}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
        "type": "texte"
       },
       {
@@ -3406,19 +3222,7 @@
        "type": "texte"
       },
       {
-       "html": "On met en évidence le terme de plus haut degré : \\(x^{4} - 2x^{2} = x^{4}\\left(1 - \\dfrac{2}{x^{2}}\\right)\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Quand \\(x \\to +\\infty\\), \\(\\dfrac{2}{x^{2}} \\to 0\\), donc \\(1 - \\dfrac{2}{x^{2}} \\to 1\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Comme \\(x^{4} \\to +\\infty\\) et que le facteur entre parenthèses tend vers 1, \\(x^{4} - 2x^{2} \\to +\\infty\\).",
-       "type": "texte"
-      },
-      {
-       "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+       "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} f(x) &= \\lim_{x\\to +\\infty} x^{4}\\,\\left(1 - \\frac{2}{x^{2}}\\right) = \\left(+\\infty\\right) \\cdot 1 = +\\infty \\qquad \\left(\\text{on met } x^{4} \\text{ en évidence} \\; ;\\; \\frac{2}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
        "type": "texte"
       },
       {

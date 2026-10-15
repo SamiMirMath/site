@@ -336,14 +336,12 @@ class TestMiseEnEvidence(unittest.TestCase):
     évidence, chaque terme écrit (LA-13, LA-18, LA-19)."""
 
     def test_polynome_infini_moins_infini(self):
-        self.assertEqual(textes("x^3-3x", r"x \to -\infty"), [
-            r"\(x^{3} \to -\infty\) et \(-3x \to +\infty\) : forme indéterminée « \(\infty - \infty\) ».",
-            r"On met en évidence le terme de plus haut degré : "
-            r"\(x^{3} - 3x = x^{3}\left(1 - \dfrac{3}{x^{2}}\right)\).",
-            r"Quand \(x \to -\infty\), \(\dfrac{3}{x^{2}} \to 0\), donc \(1 - \dfrac{3}{x^{2}} \to 1\).",
-            r"Comme \(x^{3} \to -\infty\) et que le facteur entre parenthèses tend vers 1, "
-            r"\(x^{3} - 3x \to -\infty\).",
-            r"Donc \(\displaystyle\lim_{x\to -\infty} f(x) = -\infty\).",
+        t = textes("x^3-3x", r"x \to -\infty")
+        self.assertEqual(t[0], r"\(x^{3} \to -\infty\) et \(-3x \to +\infty\) : forme indéterminée « \(\infty - \infty\) ».")
+        self.assertEqual(t[1], r"\[\begin{aligned}\lim_{x\to -\infty} f(x) &= \lim_{x\to -\infty} x^{3}\,\left(1 - \frac{3}{x^{2}}\right) = "
+                               r"\left(-\infty\right) \cdot 1 = -\infty \qquad \left(\text{on met } x^{3} \text{ en évidence} \; ;\; "
+                               r"\frac{3}{x^{2}} \to 0\right)\end{aligned}\]")
+        self.assertEqual(t[2:], [
             "La limite est infinie : pas d'asymptote horizontale.",
             r"Le polynôme est de degré 3 \(\geq 2\) : pas d'asymptote oblique (branche parabolique).",
         ])
@@ -354,20 +352,16 @@ class TestMiseEnEvidence(unittest.TestCase):
         self.assertFalse(any("indéterminée" in p or "mise en évidence" in p for p in t))
 
     def test_fraction_rationnelle_infini_sur_infini(self):
-        self.assertEqual(textes("(2x^2+3x)/(x^2+1)", r"x \to +\infty"), [
-            r"Le numérateur tend vers \(+\infty\) et le dénominateur tend vers \(+\infty\) "
-            r"(limite de leur terme de plus haut degré) : forme indéterminée « \(\infty/\infty\) ».",
-            r"On met en évidence le terme de plus haut degré : "
-            r"\(2x^{2} + 3x = 2\,x^{2}\left(1 + \dfrac{3}{2x}\right)\) et "
-            r"\(x^{2} + 1 = x^{2}\left(1 + \dfrac{1}{x^{2}}\right)\).",
-            r"Donc \(\frac{2x^{2} + 3x}{x^{2} + 1} = \dfrac{2\,x^{2}\left(1 + \dfrac{3}{2x}\right)}"
-            r"{x^{2}\left(1 + \dfrac{1}{x^{2}}\right)} = 2 \cdot \dfrac{1 + \dfrac{3}{2x}}{1 + \dfrac{1}{x^{2}}}\).",
-            r"Quand \(x \to +\infty\), \(\dfrac{3}{2x} \to 0\) et \(\dfrac{1}{x^{2}} \to 0\) : "
-            r"le quotient \(\dfrac{1 + \dfrac{3}{2x}}{1 + \dfrac{1}{x^{2}}}\) tend vers 1.",
-            r"Le quotient tend vers 1 : la limite est \(2\) (rapport des coefficients dominants).",
-            r"Donc \(\displaystyle\lim_{x\to +\infty} f(x) = 2\).",
-            r"Asymptote horizontale d'équation \(y = 2\).",
-        ])
+        t = textes("(2x^2+3x)/(x^2+1)", r"x \to +\infty")
+        self.assertEqual(t[0], r"Le numérateur \(2x^{2} + 3x\) tend vers \(+\infty\) et le dénominateur \(x^{2} + 1\) tend vers \(+\infty\) : "
+                               r"forme indéterminée « \(\infty/\infty\) ».")
+        self.assertEqual(t[1],
+                         r"\[\begin{aligned}\lim_{x\to +\infty} f(x) &= \lim_{x\to +\infty} \dfrac{2x^{2}\,\left(1 + \frac{3}{2x}\right)}"
+                         r"{x^{2}\,\left(1 + \frac{1}{x^{2}}\right)} \qquad \left(2x^{2} + 3x = 2x^{2}\,\left(1 + \frac{3}{2x}\right) ,\; "
+                         r"x^{2} + 1 = x^{2}\,\left(1 + \frac{1}{x^{2}}\right)\right) \\ "
+                         r"&= \lim_{x\to +\infty} \frac{2\left(1 + \frac{3}{2x}\right)}{1 + \frac{1}{x^{2}}} = \dfrac{2 \cdot 1}{1} = 2 "
+                         r"\qquad \left(\text{on simplifie par } x^{2} \; ;\; \frac{3}{2x} \to 0 \; ;\; \frac{1}{x^{2}} \to 0\right)\end{aligned}\]")
+        self.assertEqual(t[2:], [r"Asymptote horizontale d'équation \(y = 2\)."])
 
     def test_numerateur_constant_pas_de_mise_en_evidence(self):
         self.assertEqual(textes("1/(x-2)", r"x \to -\infty"), [
@@ -379,7 +373,8 @@ class TestMiseEnEvidence(unittest.TestCase):
 
     def test_degre_du_numerateur_superieur(self):
         t = textes("x^2/(x-1)", r"x \to +\infty")
-        self.assertIn(r"Le quotient tend vers 1 et \(x \to +\infty\) : la limite est \(+\infty\).", t)
+        ch = chaine("x^2/(x-1)", r"x \to +\infty")
+        self.assertIn(r"\dfrac{+\infty}{1} = +\infty", ch)
         self.assertIn("La limite est infinie : pas d'asymptote horizontale.", t)
         self.assertTrue(any(p.startswith("Le degré du numérateur dépasse celui du dénominateur de 1") for p in t))
 
@@ -391,10 +386,8 @@ class TestMiseEnEvidence(unittest.TestCase):
             r"Or \(\sqrt{t} \to +\infty\) quand \(t \to +\infty\), donc \(\displaystyle\lim_{x\to -\infty} f(x) = +\infty\).",
         ])
         self.assertEqual(plus[0], r"\(x^{2} \to +\infty\) et \(-4x \to -\infty\) : forme indéterminée « \(\infty - \infty\) ».")
-        self.assertIn(r"On met en évidence le terme de plus haut degré : "
-                      r"\(x^{2} - 4x + 5 = x^{2}\left(1 - \dfrac{4}{x} + \dfrac{5}{x^{2}}\right)\).", plus)
-        self.assertIn(r"Or \(\sqrt{t} \to +\infty\) quand \(t \to +\infty\), "
-                      r"donc \(\displaystyle\lim_{x\to +\infty} f(x) = +\infty\).", plus)
+        self.assertIn(r"\lim_{x\to +\infty} \left(x^{2} - 4x + 5\right) &= \lim_{x\to +\infty} x^{2}\,\left(1 - \frac{4}{x} + \frac{5}{x^{2}}\right)", " ".join(plus))
+        self.assertIn(r"= \left(+\infty\right) \cdot 1 = +\infty", " ".join(plus))
 
     def test_ecriture_des_coefficients(self):          # LA-19
         for entree in ["2x^2-x+1", "(2x^2+3x)/(x^2+1)", "(3x+1)/(2x-4)", "x^3-3x", "(x^2+1)/(3x^2-6)"]:
@@ -404,24 +397,23 @@ class TestMiseEnEvidence(unittest.TestCase):
                     with self.subTest(f=entree, ou=etude["ou"]):
                         self.assertNotIn(r"\dfrac{\frac", e["html"])
                         self.assertNotIn(r"\frac{\frac", e["html"])
-                        self.assertNotIn("}{1}", e["html"].replace(r"\dfrac{1}{1}", ""))
                         self.assertNotIn("\\right)}{1}", e["html"])
-        t = " ".join(textes("(3x+1)/(2x-4)", r"x \to +\infty"))
-        self.assertIn(r"3\,x\left(1 + \dfrac{1}{3x}\right)", t)
-        self.assertIn(r"2\,x\left(1 - \dfrac{2}{x}\right)", t)
+        t = chaine("(3x+1)/(2x-4)", r"x \to +\infty")
+        self.assertIn(r"3x\,\left(1 + \frac{1}{3x}\right)", t)
+        self.assertIn(r"2x\,\left(1 - \frac{2}{x}\right)", t)
 
     def test_somme_de_fractions_ramenee_a_une_fraction(self):
         t = textes("x^2/(x-1)-x", r"x \to +\infty")
         self.assertEqual(t[0], r"On écrit \(f\) sous la forme d'une seule fraction : \(f(x) = \frac{x}{x - 1}\).")
-        self.assertEqual(t[-2:], [r"Donc \(\displaystyle\lim_{x\to +\infty} f(x) = 1\).",
-                                  r"Asymptote horizontale d'équation \(y = 1\)."])
+        self.assertIn(r"= \dfrac{1}{1} = 1", t[-2])
+        self.assertEqual(t[-1], r"Asymptote horizontale d'équation \(y = 1\).")
 
     def test_garde_fou_polynome_et_fraction(self):
         for entree, ou in [("x^3-3x", r"x \to +\infty"), ("(2x^2+3x)/(x^2+1)", r"x \to +\infty")]:
             with self.subTest(f=entree):
                 normal = la.etudier(entree)
                 with mock.patch.object(la, "_phrases_polynome_infini", return_value=(["faux"], la.Lim.infini(-1))), \
-                        mock.patch.object(la, "_phrases_fraction_infini", return_value=(["faux"], la.Lim.infini(-1))):
+                        mock.patch.object(la, "_evidence_quotient", return_value=(la.Lim.infini(-1), ["faux"])):
                     faux = la.etudier(entree)
                 self.assertEqual(faux["asymptotes"], normal["asymptotes"])
                 t = [e["html"] for e in next(e for e in faux["etudes"] if e["ou"] == ou)["etapes"]]
@@ -433,17 +425,17 @@ class TestZeroSurZero(unittest.TestCase):
     """L3 : forme 0/0 en une valeur — nommée, on factorise, on simplifie, puis on passe à la limite."""
 
     def test_trou(self):
-        self.assertEqual(textes("(x^2-1)/(x-1)", r"x \to 1"), [
+        t = textes("(x^2-1)/(x-1)", r"x \to 1")
+        self.assertEqual(t[:2], [
             r"\(x = 1\) est une valeur interdite.",
-            r"Le numérateur et le dénominateur tendent vers \(0\) quand \(x \to 1\) : "
-            r"forme indéterminée « \(0/0\) ».",
-            r"On factorise le numérateur et le dénominateur par \(\left(x-1\right)\) et l'on simplifie "
-            r"(pour \(x \neq 1\)) : \(f(x) = \dfrac{\left(x + 1\right)\,\cancel{\left(x-1\right)}}"
-            r"{\cancel{\left(x-1\right)}} = x + 1\).",
-            r"Donc \(\displaystyle\lim_{x\to 1} f(x) = \lim_{x\to 1} \left(x + 1\right) = 1 + 1 = 2\).",
-            r"f n'est pas définie en \(x=1\), mais sa limite y est finie (\(=2\)) : pas d'asymptote verticale, "
-            r"trou dans le graphique en \((1\,;\,2)\).",
+            r"Le numérateur et le dénominateur tendent vers \(0\) quand \(x \to 1\) : forme indéterminée « \(0/0\) ».",
         ])
+        self.assertEqual(t[2],
+                         r"\[\begin{aligned}\lim_{x\to 1} f(x) &= \lim_{x\to 1} \dfrac{\left(x + 1\right)\,\cancel{\left(x-1\right)}}"
+                         r"{\cancel{\left(x-1\right)}} \qquad \left(\text{on factorise par } \left(x-1\right)\right) \\ "
+                         r"&= \lim_{x\to 1} \left(x + 1\right) = 1 + 1 = 2 \qquad \left(\text{on simplifie} \; (x \neq 1)\right)\end{aligned}\]")
+        self.assertEqual(t[3], r"f n'est pas définie en \(x=1\), mais sa limite y est finie (\(=2\)) : pas d'asymptote verticale, "
+                               r"trou dans le graphique en \((1\,;\,2)\).")
 
     def test_pole_restant_apres_simplification(self):
         t = textes("(x^2-4)/(x^2-4x+4)", r"x \to 2")
@@ -459,64 +451,65 @@ class TestZeroSurZero(unittest.TestCase):
                 self.assertFalse(any("0/0" in e["html"] for e in etude["etapes"]), (entree, etude["ou"]))
 
 
+def chaine(entree, ou):
+    """La chaîne d'égalités (formule affichée) de l'étude, ou ''. Chaque ligne est séparée par ' \\\\ '."""
+    return " ".join(p for p in textes(entree, ou) if p.startswith(r"\["))
+
+
 class TestEvidenceRacine(unittest.TestCase):
-    """L5 : en ±∞, quotient dont un membre est une racine — on met x^k en évidence dans chaque membre, en égalités
-    exactes (√(4x²+1) = √(x²(4 + 1/x²)) = |x|√(4 + 1/x²), puis |x| = ±x), sans équivalent ; « x < 0 donc
-    √(x²) = |x| = −x » est écrit en −∞ (LA-20, LA-29)."""
+    """L5 (chaîne d'égalités, règle du 15.10) : en ±∞, quotient dont un membre est une racine — on met x^k en évidence
+    dans chaque membre, en égalités exactes (√(4x²+1) = √(x²(4 + 1/x²)) = |x|√(4 + 1/x²), puis |x| = ±x), sans
+    équivalent ; « x < 0 donc |x| = −x » est écrit en −∞ (LA-20, LA-29)."""
+
+    def test_racine_sur_affine_en_moins_l_infini(self):            # l'exemple de l'enseignant
+        t = textes("sqrt(4x^2+1)/(x+2)", r"x \to -\infty")
+        ch = chaine("sqrt(4x^2+1)/(x+2)", r"x \to -\infty")
+        self.assertEqual(sum(1 for p in t if p.startswith(r"\[")), 1)
+        for morceau in [
+            r"\lim_{x\to -\infty} f(x) &= \lim_{x\to -\infty} \dfrac{\sqrt{x^{2}\left(4 + \frac{1}{x^{2}}\right)}}{x\,\left(1 + \frac{2}{x}\right)}",
+            r"&= \lim_{x\to -\infty} \dfrac{|x|\sqrt{4 + \frac{1}{x^{2}}}}{x\,\left(1 + \frac{2}{x}\right)}",
+            r"&= \lim_{x\to -\infty} \dfrac{-x\,\sqrt{4 + \frac{1}{x^{2}}}}{x\,\left(1 + \frac{2}{x}\right)}",
+            r"\left(x < 0 \text{ donc } |x| = -x\right)",
+            r"&= \lim_{x\to -\infty} -\frac{\sqrt{4 + \frac{1}{x^{2}}}}{1 + \frac{2}{x}} = -\dfrac{\sqrt{4}}{1} = -2",
+        ]:
+            self.assertIn(morceau, ch)
+        # le texte se limite à la forme indéterminée avant la chaîne et à la conclusion (asymptote) après
+        i = next(i for i, p in enumerate(t) if p.startswith(r"\["))
+        self.assertIn("forme indéterminée « \\(\\infty/\\infty\\) »", t[i - 1])
+        self.assertEqual(t[i + 1:], [r"Asymptote horizontale d'équation \(y = -2\)."])
 
     def test_racine_sur_affine_en_plus_l_infini(self):
-        t = textes("sqrt(4x^2+1)/(x+2)", r"x \to +\infty")
-        self.assertEqual(t[3:9], [
-            r"Le numérateur \(\sqrt{4x^{2} + 1}\) tend vers \(+\infty\) et le dénominateur \(x + 2\) tend vers "
-            r"\(+\infty\) : forme indéterminée « \(\infty/\infty\) ».",
-            r"\(\sqrt{4x^{2} + 1} = \sqrt{x^{2}\left(4 + \frac{1}{x^{2}}\right)} = |x|\sqrt{4 + \frac{1}{x^{2}}}\).",
-            r"Comme \(x > 0\), \(|x| = x\), donc \(\sqrt{4x^{2} + 1} = x\,\sqrt{4 + \frac{1}{x^{2}}}\).",
-            r"On met \(x\) en évidence : \(x + 2 = x\,\left(1 + \frac{2}{x}\right)\).",
-            r"Donc \(\frac{\sqrt{4x^{2} + 1}}{x + 2} = \frac{x\,\sqrt{4 + \frac{1}{x^{2}}}}{x\,\left(1 + \frac{2}{x}\right)} = "
-            r"\frac{\sqrt{4 + \frac{1}{x^{2}}}}{1 + \frac{2}{x}}\).",
-            r"Le numérateur vaut \(1\) et le dénominateur \(x^{2}\) tend vers \(+\infty\), donc \(\frac{1}{x^{2}} \to 0\).",
-        ])
-        self.assertEqual(t[-3:], [
-            r"\(\sqrt{4 + \frac{1}{x^{2}}} \to 2\) et \(1 + \frac{2}{x} \to 1\), donc "
-            r"\(\frac{\sqrt{4 + \frac{1}{x^{2}}}}{1 + \frac{2}{x}} \to 2\).",
-            r"Donc \(\displaystyle\lim_{x\to +\infty} f(x) = 2\).",
-            r"Asymptote horizontale d'équation \(y = 2\).",
-        ])
-
-    def test_racine_sur_affine_en_moins_l_infini(self):
-        t = textes("sqrt(4x^2+1)/(x+2)", r"x \to -\infty")
-        self.assertIn(r"Comme \(x < 0\), \(\sqrt{x^{2}} = |x| = -x\), donc \(\sqrt{4x^{2} + 1} = -x\,\sqrt{4 + \frac{1}{x^{2}}}\).", t)
-        self.assertIn(r"Donc \(\frac{\sqrt{4x^{2} + 1}}{x + 2} = \frac{-x\,\sqrt{4 + \frac{1}{x^{2}}}}{x\,\left(1 + \frac{2}{x}\right)} = "
-                      r"-\frac{\sqrt{4 + \frac{1}{x^{2}}}}{1 + \frac{2}{x}}\).", t)
-        self.assertIn(r"\(-\frac{\sqrt{4 + \frac{1}{x^{2}}}}{1 + \frac{2}{x}} \to -2\).", t)
-        self.assertIn(r"Donc \(\displaystyle\lim_{x\to -\infty} f(x) = -2\).", t)
+        ch = chaine("sqrt(4x^2+1)/(x+2)", r"x \to +\infty")
+        self.assertIn(r"\left(x > 0 \text{ donc } |x| = x\right)", ch)
+        self.assertIn(r"&= \lim_{x\to +\infty} \dfrac{x\,\sqrt{4 + \frac{1}{x^{2}}}}{x\,\left(1 + \frac{2}{x}\right)}", ch)
+        self.assertIn(r"= \dfrac{\sqrt{4}}{1} = 2", ch)
 
     def test_pente_d_une_racine_de_trinome(self):             # a = lim f(x)/x pour √(x²−4x+5)
-        self.assertIn(r"Donc \(\displaystyle\lim_{x\to +\infty} f(x) = 1\).", textes("sqrt(x^2-4x+5)/x", r"x \to +\infty"))
-        t = textes("sqrt(x^2-4x+5)/x", r"x \to -\infty")
-        self.assertIn(r"Comme \(x < 0\), \(\sqrt{x^{2}} = |x| = -x\), donc \(\sqrt{x^{2} - 4x + 5} = "
-                      r"-x\,\sqrt{1 - \frac{4}{x} + \frac{5}{x^{2}}}\).", t)
-        self.assertIn(r"Donc \(\displaystyle\lim_{x\to -\infty} f(x) = -1\).", t)
+        self.assertIn(r"= \sqrt{1} = 1", chaine("sqrt(x^2-4x+5)/x", r"x \to +\infty"))
+        ch = chaine("sqrt(x^2-4x+5)/x", r"x \to -\infty")
+        self.assertIn(r"\left(x < 0 \text{ donc } |x| = -x\right)", ch)
+        self.assertIn(r"= -\sqrt{1} = -1", ch)
 
     def test_racine_d_un_carre(self):
-        t = textes("x/sqrt(x^2)", r"x \to -\infty")
-        self.assertIn(r"Comme \(x < 0\), \(\sqrt{x^{2}} = |x| = -x\), donc \(\sqrt{x^{2}} = -x\).", t)
-        self.assertIn(r"Donc \(\frac{x}{\sqrt{x^{2}}} = \frac{x}{-x} = -1\).", t)
-        self.assertIn(r"Donc \(\displaystyle\lim_{x\to -\infty} f(x) = -1\).", t)
+        ch = chaine("x/sqrt(x^2)", r"x \to -\infty")
+        self.assertIn(r"\dfrac{x}{-x}", ch)
+        self.assertIn(r"x < 0 \text{ donc } |x| = -x", ch)
+        self.assertIn(r"= -1", ch)
 
     def test_somme_de_racines_au_denominateur(self):
-        t = textes("sqrt(x^2+1)/(sqrt(x^2+4)+1)", r"x \to +\infty")
-        self.assertIn(r"On met \(x\) en évidence : \(\sqrt{x^{2} + 4} + 1 = x\,\left(\sqrt{1 + \frac{4}{x^{2}}} + \frac{1}{x}\right)\).", t)
-        self.assertIn(r"Donc \(\displaystyle\lim_{x\to +\infty} f(x) = 1\).", t)
+        ch = chaine("sqrt(x^2+1)/(sqrt(x^2+4)+1)", r"x \to +\infty")
+        self.assertIn(r"\sqrt{x^{2} + 4} + 1 = x\,\left(\sqrt{1 + \frac{4}{x^{2}}} + \frac{1}{x}\right)", ch)
+        self.assertIn(r"\text{on met } x \text{ en évidence}", ch)
+        self.assertIn(r"= 1", ch)
 
     def test_jamais_pour_une_fraction_rationnelle_ni_quand_les_termes_se_compensent(self):
         for entree in ["(2x^2+3x)/(x^2+1)", "x^3-3x", "x^2/(x-1)", "1/(x-2)"]:
             for etude in la.etudier(entree)["etudes"]:
                 self.assertFalse(any("|x|" in e["html"] for e in etude["etapes"]), (entree, etude["ou"]))
         # √(x²+x) − x en +∞ : les termes de plus haut degré se compensent (∞ − ∞) : l'expression conjuguée passe d'abord
-        t = textes("sqrt(x^2+x)-x", r"x \to +\infty")
-        premiere = next(i for i, p in enumerate(t) if "|x|" in p)
-        self.assertTrue(any("conjuguée" in p for p in t[:premiere]), t)
+        ch = chaine("sqrt(x^2+x)-x", r"x \to +\infty")
+        self.assertIn("conjuguée", ch)
+        self.assertLess(ch.index("conjuguée"), ch.index("|x|"))
 
     def test_garde_fou(self):
         with mock.patch.object(la, "_meme_fonction", side_effect=la.Abandon("réécriture fausse")):
@@ -533,31 +526,44 @@ class TestEvidenceRacine(unittest.TestCase):
                         self.assertNotIn(mot, e["html"], (entree, etude["ou"]))
 
 
+class TestChaineEtReferences(unittest.TestCase):
+    def test_chaque_limite_de_reference_cite_son_point(self):
+        for nom, (lim, cond) in la.REFERENCES.items():
+            self.assertRegex(lim, r"\\lim_\{x\\to [^}]+\}", nom)
+
+    def test_une_chaine_commence_par_lim_f_et_se_termine_par_la_valeur(self):
+        for entree, ou, valeur in [("sqrt(4x^2+1)/(x+2)", r"x \to -\infty", "-2"), ("(x^2-1)/(x-3)", r"x \to +\infty", r"+\infty"),
+                                   ("e^x-x^2", r"x \to +\infty", r"+\infty"),
+                                   ("(sqrt(x+3)-2)/(x-1)", r"x \to 1", r"\frac{1}{4}")]:
+            ch = chaine(entree, ou)
+            with self.subTest(f=entree, ou=ou):
+                self.assertTrue(ch.startswith(r"\[\begin{aligned}\lim_{x\to"), ch[:60])
+                self.assertIn("f(x)", ch.split("&=")[0] if "&=" in ch else ch)
+                self.assertTrue(ch.endswith(r"\end{aligned}\]"))
+
+
 class TestEvidenceLn(unittest.TestCase):
     """Retouche 2 : ln(u)/v en ±∞ avec u polynôme : ln(u) = k ln|x| + ln(c + …), puis croissance comparée
-    (ln x / x^n → 0), avant Bernoulli-L'Hôpital."""
+    (ln x / x^n → 0), avant Bernoulli-L'Hôpital — en chaîne d'égalités."""
 
     def test_ln_de_x_carre_plus_1_sur_x(self):
-        t = textes("ln(x^2+1)/x", r"x \to +\infty")
-        self.assertIn(r"\(\ln\left(x^{2} + 1\right) = \ln\left(x^{2}\left(1 + \frac{1}{x^{2}}\right)\right) = "
-                      r"2\ln|x| + \ln\left(1 + \frac{1}{x^{2}}\right)\).", t)
-        self.assertIn(r"Donc \(\frac{\ln\left(x^{2} + 1\right)}{x} = 2\,\dfrac{\ln|x|}{x} + "
-                      r"\dfrac{\ln\left(1 + \frac{1}{x^{2}}\right)}{x}\).", t)
-        i = next(i for i, p in enumerate(t) if "croissance comparée" in p)
-        self.assertIn(r"\lim_{x\to +\infty} \dfrac{\ln x}{x^{n}} = 0", t[i])
-        self.assertIn(r"Les deux termes tendent vers 0, donc \(\displaystyle\lim_{x\to +\infty} f(x) = 0\).", t)
-        self.assertFalse(any("Bernoulli" in p for p in t))
+        ch = chaine("ln(x^2+1)/x", r"x \to +\infty")
+        self.assertIn(r"\ln\left(x^{2}\left(1 + \frac{1}{x^{2}}\right)\right)", ch)
+        self.assertIn(r"2\ln|x| + \ln\left(1 + \frac{1}{x^{2}}\right)", ch)
+        self.assertIn(r"2\,\dfrac{\ln|x|}{x} + \dfrac{\ln\left(1 + \frac{1}{x^{2}}\right)}{x} = 2 \cdot 0 + 0 = 0", ch)
+        self.assertIn(r"\text{ : croissance comparée, } \lim_{x\to +\infty} \dfrac{\ln x}{x^{n}} = 0", ch)
+        self.assertFalse(any("Bernoulli" in p for p in textes("ln(x^2+1)/x", r"x \to +\infty")))
 
     def test_en_moins_l_infini_on_pose_t_egal_moins_x(self):
-        t = textes("ln(x^2+1)/x", r"x \to -\infty")
-        self.assertTrue(any(r"En posant \(t = -x\)" in p and "croissance comparée" in p for p in t), t)
-        self.assertIn(r"Les deux termes tendent vers 0, donc \(\displaystyle\lim_{x\to -\infty} f(x) = 0\).", t)
-        self.assertFalse(any("Bernoulli" in p for p in t))
+        ch = chaine("ln(x^2+1)/x", r"x \to -\infty")
+        self.assertIn(r"t = -x \to +\infty", ch)
+        self.assertIn(r"\lim_{t\to +\infty} \dfrac{\ln t}{t^{n}} = 0", ch)
+        self.assertFalse(any("Bernoulli" in p for p in textes("ln(x^2+1)/x", r"x \to -\infty")))
 
     def test_denominateur_mis_en_evidence(self):
-        t = textes("ln(x^2-4x)/(x-5)", r"x \to +\infty")
-        self.assertIn(r"On met \(x\) en évidence : \(x - 5 = x\,\left(1 - \frac{5}{x}\right)\).", t)
-        self.assertFalse(any("Bernoulli" in p for p in t))
+        ch = chaine("ln(x^2-4x)/(x-5)", r"x \to +\infty")
+        self.assertIn(r"x - 5 = x\,\left(1 - \frac{5}{x}\right)", ch)
+        self.assertFalse(any("Bernoulli" in p for p in textes("ln(x^2-4x)/(x-5)", r"x \to +\infty")))
 
     def test_avant_l_hopital_seulement_pour_ln_de_polynome(self):
         for entree, ou in [("ln(x)/(x-1)", r"x \to 1"), ("x*ln(x^2)", r"x \to 0")]:
@@ -565,28 +571,26 @@ class TestEvidenceLn(unittest.TestCase):
 
 
 class TestRacineCarreeParfaite(unittest.TestCase):
-    """√(x²) = |x| (et √(u²) = |u|) en une valeur : on lit le signe de u de chaque côté, sans repli."""
+    """√(x²) = |x| (et √(u²) = |u|) en une valeur : on lit le signe de u de chaque côté, sans repli, sans « 0/0 » répété."""
 
     def test_x_sur_racine_de_x_carre_en_zero(self):
         t = textes("x/sqrt(x^2)", r"x \to 0")
         self.assertFalse(any(REPLI[1:] in p for p in t), t)
-        self.assertIn(r"À gauche de \(0\), \(x\) est négatif, donc \(\sqrt{x^{2}} = |x| = -x\).", t)
-        self.assertIn(r"Donc \(\frac{x}{\sqrt{x^{2}}} = \frac{x}{|x|} = \frac{x}{-x}\).", t)
-        self.assertIn(r"À droite de \(0\), \(x\) est positif, donc \(\sqrt{x^{2}} = |x| = x\).", t)
-        self.assertIn(r"Donc \(\frac{x}{\sqrt{x^{2}}} = \frac{x}{|x|} = \frac{x}{x}\).", t)
-
-    def test_valeurs_a_gauche_et_a_droite(self):
-        r = la.etudier("x/sqrt(x^2)")
-        e = next(e for e in r["etudes"] if e["ou"] == r"x \to 0")
-        textes_all = " ".join(x["html"] for x in e["etapes"])
-        self.assertIn(r"\cancel{\left(x\right)}}{-\cancel{\left(x\right)}} = -1", textes_all)
-        self.assertIn(r"\cancel{\left(x\right)}}{\cancel{\left(x\right)}} = 1", textes_all)
-        self.assertIn("f n'a pas de limite en", textes_all)
+        self.assertEqual(sum(1 for p in t if "forme indéterminée" in p), 1)       # pas de « 0/0 » après √(x²) = −x
+        gauche = t[t.index("À gauche :") + 1]
+        droite = t[t.index("À droite :") + 1]
+        self.assertIn(r"\lim_{x\to 0^{-}} f(x) &= \lim_{x\to 0^{-}} \frac{x}{|x|}", gauche)
+        self.assertIn(r"\lim_{x\to 0^{-}} \frac{x}{-x}", gauche)
+        self.assertIn(r"x < 0 \text{ à gauche de } 0 \text{, donc } |x| = -x", gauche)
+        self.assertIn(r"\lim_{x\to 0^{-}} -1 = -1", gauche)
+        self.assertIn(r"x > 0 \text{ à droite de } 0 \text{, donc } |x| = x", droite)
+        self.assertIn(r"\lim_{x\to 0^{+}} 1 = 1", droite)
+        self.assertIn("f n'a pas de limite en", " ".join(t))
 
     def test_racine_d_un_carre_decale(self):         # √((x − 1)²) = |x − 1|
         t = " ".join(textes("(x-1)/sqrt(x^2-2x+1)", r"x \to 1"))
-        self.assertIn(r"À gauche de \(1\), \(x - 1\) est négatif, donc \(\sqrt{x^{2} - 2x + 1} = |x - 1| = -\left(x - 1\right)\).", t)
-        self.assertIn(r"À droite de \(1\), \(x - 1\) est positif, donc \(\sqrt{x^{2} - 2x + 1} = |x - 1| = x - 1\).", t)
+        self.assertIn(r"x - 1 < 0 \text{ à gauche de } 1 \text{, donc } |x - 1| = -\left(x - 1\right)", t)
+        self.assertIn(r"x - 1 > 0 \text{ à droite de } 1 \text{, donc } |x - 1| = x - 1", t)
 
 
 class TestConjuguee(unittest.TestCase):
@@ -594,17 +598,20 @@ class TestConjuguee(unittest.TestCase):
 
     def test_racine_moins_x_en_plus_l_infini(self):
         t = textes("sqrt(x^2+x)-x", r"x \to +\infty")
-        i = t.index(r"\(\sqrt{x^{2} + x} \to +\infty\) et \(x \to +\infty\) : forme indéterminée « \(\infty - \infty\) ».")
-        self.assertEqual(t[i + 1:i + 3], [
-            r"On multiplie et on divise par l'expression conjuguée \(\sqrt{x^{2} + x} + x\) :",
-            r"\(\sqrt{x^{2} + x} - x = \dfrac{\left(\sqrt{x^{2} + x} - x\right)\left(\sqrt{x^{2} + x} + x\right)}"
-            r"{\sqrt{x^{2} + x} + x} = \dfrac{\left(x^{2} + x\right) - x^{2}}{\sqrt{x^{2} + x} + x} = "
-            r"\dfrac{x}{\sqrt{x^{2} + x} + x}\).",
-        ])
-        self.assertIn(r"Donc \(\displaystyle\lim_{x\to +\infty} f(x) = \frac{1}{2}\).", t)
-        self.assertIn(r"Donc \(\frac{x}{\sqrt{x^{2} + x} + x} = \frac{x}{x\,\left(\sqrt{1 + \frac{1}{x}} + 1\right)} = "
-                      r"\frac{1}{\sqrt{1 + \frac{1}{x}} + 1}\).", t)
-        self.assertIn(r"\(\frac{1}{\sqrt{1 + \frac{1}{x}} + 1} \to \frac{1}{2}\).", t)
+        ch = chaine("sqrt(x^2+x)-x", r"x \to +\infty")
+        self.assertEqual(sum(1 for p in t if p.startswith(r"\[")), 1)         # une seule chaîne : la conjuguée puis la mise en évidence
+        for morceau in [
+            r"\text{on multiplie et on divise par la conjuguée } \sqrt{x^{2} + x} + x",
+            r"(a - b)(a + b) = a^{2} - b^{2}",
+            r"\dfrac{\left(x^{2} + x\right) - x^{2}}{\sqrt{x^{2} + x} + x}",
+            r"\lim_{x\to +\infty} \frac{x}{\sqrt{x^{2} + x} + x}",
+            r"\left(x > 0 \text{ donc } |x| = x\right)",
+            r"= \lim_{x\to +\infty} \frac{1}{\sqrt{1 + \frac{1}{x}} + 1} = \dfrac{1}{\sqrt{1} + 1} = \frac{1}{2}",
+        ]:
+            self.assertIn(morceau, ch)
+        self.assertTrue(any("forme indéterminée « \\(\\infty - \\infty\\) »" in p for p in t))
+        self.assertTrue(any("forme indéterminée « \\(\\infty/\\infty\\) »" in p for p in t))
+        self.assertEqual(t[-1], r"Asymptote horizontale d'équation \(y = \frac{1}{2}\).")
 
     def test_racine_moins_x_en_moins_l_infini_pas_de_forme_indeterminee(self):
         t = textes("sqrt(x^2+x)-x", r"x \to -\infty")
@@ -613,36 +620,37 @@ class TestConjuguee(unittest.TestCase):
                       r"\(\displaystyle\lim_{x\to -\infty} f(x) = +\infty\).", t)
 
     def test_ordonnee_a_l_origine_d_une_asymptote_oblique(self):   # b = lim (f(x) − ax)
-        plus = " ".join(textes("sqrt(x^2-4x+5)-x", r"x \to +\infty"))
-        self.assertIn(r"\(-\frac{4\left(1 - \frac{5}{4x}\right)}{\sqrt{1 - \frac{4}{x} + \frac{5}{x^{2}}} + 1} \to -2\)", plus)
-        self.assertIn(r"\lim_{x\to +\infty} f(x) = -2", plus)
-        moins = " ".join(textes("sqrt(x^2-4x+5)+x", r"x \to -\infty"))
-        self.assertIn("expression conjuguée", moins)
-        self.assertIn(r"Comme \(x < 0\), \(\sqrt{x^{2}} = |x| = -x\), donc", moins)
-        self.assertIn(r"\lim_{x\to -\infty} f(x) = 2", moins)
+        plus = chaine("sqrt(x^2-4x+5)-x", r"x \to +\infty")
+        self.assertIn(r"-\frac{4\left(1 - \frac{5}{4x}\right)}{\sqrt{1 - \frac{4}{x} + \frac{5}{x^{2}}} + 1} = -\left(\dfrac{4 \cdot 1}{\sqrt{1} + 1}\right) = -2", plus)
+        moins = chaine("sqrt(x^2-4x+5)+x", r"x \to -\infty")
+        self.assertIn("conjuguée", moins)
+        self.assertIn(r"x < 0 \text{ donc } |x| = -x", moins)
+        self.assertIn("= 2", moins)
 
     def test_zero_sur_zero_conjuguee_du_numerateur(self):
         t = textes("(sqrt(x+3)-2)/(x-1)", r"x \to 1")
-        self.assertEqual(t[:7], [
+        self.assertEqual(t[:2], [
             r"\(x = 1\) est une valeur interdite.",
             r"Le numérateur \(\sqrt{x + 3} - 2\) tend vers \(0\) et le dénominateur \(x - 1\) tend vers \(0\) : "
             r"forme indéterminée « \(0/0\) ».",
-            r"On multiplie le numérateur et le dénominateur par l'expression conjuguée \(\sqrt{x + 3} + 2\) du numérateur :",
-            r"\(\frac{\sqrt{x + 3} - 2}{x - 1} = \dfrac{\left(\sqrt{x + 3} - 2\right)\left(\sqrt{x + 3} + 2\right)}"
-            r"{\left(x - 1\right)\,\left(\sqrt{x + 3} + 2\right)} = \dfrac{\left(x + 3\right) - 2^{2}}"
-            r"{\left(x - 1\right)\,\left(\sqrt{x + 3} + 2\right)} = \dfrac{x - 1}"
-            r"{\left(x - 1\right)\,\left(\sqrt{x + 3} + 2\right)}\).",
-            r"On factorise et on simplifie par \(\left(x-1\right)\) (pour \(x \neq 1\)) : "
-            r"\(f(x) = \dfrac{\cancel{\left(x-1\right)}}{\cancel{\left(x-1\right)}\,\left(\sqrt{x + 3} + 2\right)} = "
-            r"\frac{1}{\sqrt{x + 3} + 2}\).",
-            r"Quand \(x \to 1\), \(\frac{1}{\sqrt{x + 3} + 2} \to \frac{1}{\sqrt{1 + 3} + 2} = \frac{1}{4}\).",
-            r"Donc \(\displaystyle\lim_{x\to 1} f(x) = \frac{1}{4}\).",
         ])
+        ch = t[2]
+        for morceau in [
+            r"\lim_{x\to 1} f(x) &= \lim_{x\to 1} \dfrac{\left(\sqrt{x + 3} - 2\right)\left(\sqrt{x + 3} + 2\right)}"
+            r"{\left(x - 1\right)\,\left(\sqrt{x + 3} + 2\right)}",
+            r"\text{on multiplie par la conjuguée } \sqrt{x + 3} + 2 \text{ du numérateur}",
+            r"\dfrac{\left(x + 3\right) - 2^{2}}{\left(x - 1\right)\,\left(\sqrt{x + 3} + 2\right)}",
+            r"\dfrac{x - 1}{\left(x - 1\right)\,\left(\sqrt{x + 3} + 2\right)}",
+            r"\text{on factorise par } \left(x-1\right)",
+            r"= \lim_{x\to 1} \frac{1}{\sqrt{x + 3} + 2} = \frac{1}{\sqrt{1 + 3} + 2} = \frac{1}{4}",
+        ]:
+            self.assertIn(morceau, ch)
+        self.assertEqual(sum(1 for p in t if p.startswith(r"\[")), 1)         # les deux côtés donnent la même chaîne : une seule
 
     def test_zero_sur_zero_conjuguee_du_denominateur(self):
-        t = " ".join(textes("(x-1)/(sqrt(x+3)-2)", r"x \to 1"))
-        self.assertIn("conjuguée \\(\\sqrt{x + 3} + 2\\) du dénominateur", t)
-        self.assertIn(r"\lim_{x\to 1} f(x) = 4", t)
+        ch = chaine("(x-1)/(sqrt(x+3)-2)", r"x \to 1")
+        self.assertIn(r"\text{on multiplie par la conjuguée } \sqrt{x + 3} + 2 \text{ du dénominateur}", ch)
+        self.assertIn("= 4", ch)
 
     def test_jamais_sans_racine(self):
         for entree in ["x^3-3x", "(x^2-1)/(x-1)", "x^2-4x", "e^x-1"]:
@@ -664,9 +672,10 @@ class TestCroissanceComparee(unittest.TestCase):
         t = textes("x^2*e^(-x)", r"x \to +\infty")
         i = next(i for i, p in enumerate(t) if "forme indéterminée" in p)
         self.assertEqual(t[i], r"\(x^{2} \to +\infty\) et \(e^{-x} \to 0^{+}\) : forme indéterminée « \(0 \cdot \infty\) ».")
-        self.assertEqual(t[i + 1], r"Par croissance comparée (limite de référence : \(\lim_{x\to +\infty} x^{n}e^{-ax} = 0\) "
-                                   r"pour \(a > 0\) et \(n > 0\)), \(x^{2}\,e^{-x} \to 0\).")
-        self.assertEqual(t[i + 2], r"Donc \(\displaystyle\lim_{x\to +\infty} f(x) = 0\).")
+        self.assertEqual(t[i + 1], r"\[\begin{aligned}\lim_{x\to +\infty} f(x) = 0 \qquad \left(x^{2}\,e^{-x} \to 0 "
+                                   r"\text{ : croissance comparée, } \lim_{x\to +\infty} x^{n}e^{-ax} = 0 \text{ pour } "
+                                   r"a > 0 \text{ et } n > 0\right)\end{aligned}\]")
+        self.assertEqual(t[i + 2], r"Asymptote horizontale d'équation \(y = 0\).")
 
     def test_liste_de_la_specification(self):
         cas = [("x^2*e^(-x)", r"x \to +\infty", "x^{n}e^{-ax} = 0"), ("x^(1/2)*e^(-x)", r"x \to +\infty", "x^{n}e^{-ax} = 0"),
@@ -695,18 +704,19 @@ class TestCroissanceComparee(unittest.TestCase):
                         self.assertTrue(any("forme indéterminée" in q for q in t[:i + 1]), t)
 
     def test_mise_en_evidence_de_l_exponentielle(self):
-        t = textes("e^x-x^2", r"x \to +\infty")
-        self.assertIn(r"On met \(e^{x}\) en évidence : \(e^{x} - x^{2} = e^{x}\,\left(1 - x^{2}\,e^{-x}\right)\).", t)
-        self.assertIn(r"\(e^{x} \to +\infty\) et \(1 - x^{2}\,e^{-x} \to 1\), donc "
-                      r"\(e^{x}\,\left(1 - x^{2}\,e^{-x}\right) \to +\infty\).", t)
-        t = textes("(e^x+1)/(e^x-1)", r"x \to +\infty")
-        self.assertIn(r"On met \(e^{x}\) en évidence : \(e^{x} + 1 = e^{x}\,\left(1 + e^{-x}\right)\) et "
-                      r"\(e^{x} - 1 = e^{x}\,\left(1 - e^{-x}\right)\).", t)
-        self.assertIn(r"Donc \(\frac{e^{x} + 1}{e^{x} - 1} = \frac{1 + e^{-x}}{1 - e^{-x}}\).", t)
+        ch = chaine("e^x-x^2", r"x \to +\infty")
+        self.assertIn(r"\lim_{x\to +\infty} f(x) &= \lim_{x\to +\infty} e^{x}\,\left(1 - x^{2}\,e^{-x}\right) = "
+                      r"\left(+\infty\right) \cdot 1 = +\infty", ch)
+        self.assertIn(r"\text{on met } e^{x} \text{ en évidence}", ch)
+        self.assertIn(r"x^{2}\,e^{-x} \to 0", ch)
+        ch = chaine("(e^x+1)/(e^x-1)", r"x \to +\infty")
+        self.assertIn(r"e^{x} + 1 = e^{x}\,\left(1 + e^{-x}\right) ,\; e^{x} - 1 = e^{x}\,\left(1 - e^{-x}\right)", ch)
+        self.assertIn(r"\frac{1 + e^{-x}}{1 - e^{-x}} = \dfrac{1}{1} = 1", ch)
 
     def test_polynome_devant_l_exponentielle(self):
-        t = textes("e^(-x)*(x+1)", r"x \to +\infty")
-        self.assertIn(r"On met en évidence le terme de plus haut degré : \(x + 1 = x\left(1 + \dfrac{1}{x}\right)\).", t)
+        ch = chaine("e^(-x)*(x+1)", r"x \to +\infty")
+        self.assertIn(r"x + 1 = x\left(1 + \dfrac{1}{x}\right)", ch)
+        self.assertIn(r"\lim_{x\to +\infty} x\,e^{-x}\,\left(1 + \frac{1}{x}\right) = 0 \cdot 1 = 0", ch)
 
     def test_garde_fou(self):
         with mock.patch.object(la, "_reference", return_value=("puissance_exp_neg", la.Lim.infini(1))):
@@ -720,26 +730,25 @@ class TestLHopital(unittest.TestCase):
     def test_exponentielle_moins_1_sur_x_en_0(self):
         t = textes("(e^x-1)/x", r"x \to 0")
         i = next(i for i, p in enumerate(t) if p.startswith("On applique la règle"))
-        self.assertEqual(t[i:i + 10], [
+        self.assertEqual(t[i:i + 9], [
             r"On applique la règle de Bernoulli-L'Hôpital avec \(f(x) = e^{x} - 1\) et \(g(x) = x\). Vérifions les hypothèses :",
             r"(a) forme indéterminée « \(0/0\) » : vérifiée ;",
             r"(b) \(f\) et \(g\) sont dérivables sur \(\mathbb{R}\), donc au voisinage de \(0\) (sauf peut-être en \(0\)) : vérifiée ;",
             r"On calcule \(f'(x) = e^{x}\) et \(g'(x) = 1\).",
             r"(c) \(g'(x) = 1 \neq 0\) au voisinage de \(0\) (sauf peut-être en \(0\)) : vérifiée ;",
-            r"(d) \(\dfrac{f'(x)}{g'(x)} = e^{x}\).",
-            r"Quand \(x \to 0\), \(e^{x} \to e^{0} = 1\).",
-            r"La limite de \(\dfrac{f'(x)}{g'(x)}\) existe et vaut \(1\) : (d) est vérifiée.",
-            r"D'après la règle de Bernoulli-L'Hôpital, \(\displaystyle\lim_{x\to 0} \dfrac{f(x)}{g(x)} = "
-            r"\lim_{x\to 0} \dfrac{f'(x)}{g'(x)} = 1\).",
-            r"Les deux limites sont finies et égales à \(1\) : f n'est pas définie en \(x=0\), mais sa limite y est finie "
-            r"(\(=1\)) : pas d'asymptote verticale, trou dans le graphique en \((0\,;\,1)\).",
+            r"(d) Calculons la limite de \(\dfrac{f'(x)}{g'(x)}\) :",
+            r"\[\begin{aligned}\lim_{x\to 0} \dfrac{f'(x)}{g'(x)} &= \lim_{x\to 0} e^{x} = e^{0} = 1\end{aligned}\]",
+            r"La limite de \(\dfrac{f'(x)}{g'(x)}\) existe et vaut \(1\) : (d) est vérifiée, donc la règle s'applique :",
+            r"\[\begin{aligned}\lim_{x\to 0} f(x) &= \lim_{x\to 0} \dfrac{f'(x)}{g'(x)} = 1 \qquad "
+            r"\left(\text{règle de Bernoulli-L'Hôpital}\right)\end{aligned}\]",
         ])
+        self.assertIn("trou dans le graphique en \\((0\\,;\\,1)\\)", t[i + 9])
 
     def test_logarithme_sur_x_moins_1_en_1(self):
         t = " ".join(textes("ln(x)/(x-1)", r"x \to 1"))
         self.assertIn(r"(b) \(f\) et \(g\) sont dérivables sur \(\left]0 \,;\, +\infty\right[\)", t)
         self.assertIn(r"On calcule \(f'(x) = \frac{1}{x}\) et \(g'(x) = 1\).", t)
-        self.assertIn(r"\lim_{x\to 1} \dfrac{f'(x)}{g'(x)} = 1", t)
+        self.assertIn(r"\lim_{x\to 1} \dfrac{f'(x)}{g'(x)} &= \lim_{x\to 1} \frac{1}{x} = \frac{1}{1} = 1", t)
 
     def test_ln_de_trinome_sur_affine_ne_passe_plus_par_la_regle(self):     # retouche 2 : mise en évidence de ln, avant L'Hôpital
         for ou in (r"x \to +\infty", r"x \to -\infty"):
@@ -749,12 +758,13 @@ class TestLHopital(unittest.TestCase):
         t = " ".join(textes("x*ln(x^2)", r"x \to 0"))
         self.assertIn(r"On écrit \(x\,\ln\left(x^{2}\right) = \dfrac{\ln\left(x^{2}\right)}{\frac{1}{x}}\) pour obtenir un quotient.", t)
         self.assertIn(r"(b) \(f\) et \(g\) sont dérivables sur", t)
-        self.assertIn(r"\dfrac{f'(x)}{g'(x)} = -2x", t)
+        self.assertIn(r"\lim_{x\to 0} -2x = -2 \cdot 0 = 0", t)
 
     def test_une_seconde_forme_se_traite_par_croissance_comparee(self):
         t = textes("ln(x)^2/x", r"x \to +\infty")
-        self.assertIn("(d) \\(\\dfrac{f'(x)}{g'(x)} = \\frac{2\\ln(x)}{x}\\).", t)
+        self.assertIn(r"\lim_{x\to +\infty} \dfrac{f'(x)}{g'(x)} &= \lim_{x\to +\infty} \frac{2\ln(x)}{x}", " ".join(t))
         self.assertTrue(any("croissance comparée" in p for p in t))
+        self.assertEqual(sum(1 for p in t if "croissance comparée" in p), 1)
 
     def test_jamais_hors_forme_indeterminee(self):
         for entree, ou in [("(x+1)/x", r"x \to 0"), ("1/(x-2)", r"x \to 2"), ("e^x/x", r"x \to 0"), ("x*e^x", r"x \to +\infty"),

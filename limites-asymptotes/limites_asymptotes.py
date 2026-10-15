@@ -191,31 +191,29 @@ def _limite_polynome_infini(P, s):
     return Lim.infini(_signe(P[n]) * (s if n % 2 else 1))
 
 
-def _phrases_polynome_infini(P, s, n_tex):
+def _phrases_polynome_infini(P, s, n, ctx):
     """Somme de plusieurs termes en s∞ : limite de chaque terme, puis règle de la somme ; si deux termes
-    divergent en sens contraire (∞ − ∞), mise en évidence du terme de plus haut degré.
-    Renvoie (phrases, Lim)."""
-    vers = r"+\infty" if s > 0 else r"-\infty"
+    divergent en sens contraire (∞ − ∞), chaîne d'égalités avec mise en évidence du terme de plus haut degré.
+    Renvoie (lignes, Lim)."""
+    n_tex = tex(n)
     ks = _polynome_a_termes(P)
     non_const = [k for k in ks if k >= 1]
     parts = [rf"\({_terme_signe_tex(P, k)} \to {Lim.infini(_signe(P[k]) * (s if k % 2 else 1)).tex()}\)"
              for k in non_const]
     enum = _enumerer(parts)
     signes = {_signe(P[k]) * (s if k % 2 else 1) for k in non_const}
-    n = deg(P)
-    tete_lim = Lim.infini(_signe(P[n]) * (s if n % 2 else 1))
+    deg_ = deg(P)
+    tete_lim = Lim.infini(_signe(P[deg_]) * (s if deg_ % 2 else 1))
     if len(signes) == 1:
         return [enum + rf", donc \({n_tex} \to {tete_lim.tex()}\)."], tete_lim
-    tete, interieur, complet, termes = _facteur_detaille(P, n)
-    nuls = _enumerer([rf"\({t} \to 0\)" for _, t in termes])
-    phrases = [
-        enum + r" : forme indéterminée « \(\infty - \infty\) ».",
-        rf"On met en évidence le terme de plus haut degré : \({n_tex} = {complet}\).",
-        rf"Quand \(x \to {vers}\), {nuls}, donc \({interieur} \to 1\).",
-        rf"Comme \({tete} \to {tete_lim.tex()}\) et que le facteur entre parenthèses tend vers 1, "
-        rf"\({n_tex} \to {tete_lim.tex()}\).",
-    ]
-    return phrases, tete_lim
+    A = _membre_en_evidence(n, s)
+    g = A["evid"]
+    ch = ctx.chaine(n)
+    ch.lim(tex(g), rf"\text{{on met }} {tex(_tete_tex(A['coef'], A['k']))} \text{{ en évidence}}", g)
+    avant = _conclure(ch, g, tete_lim, ctx)
+    if ch.complete and n is ctx.f:
+        ctx.racine_dite = True
+    return [enum + r" : forme indéterminée « \(\infty - \infty\) »."] + avant + [ch], tete_lim
 
 
 def _phrases_fraction_infini(N, D, s, n_tex):
@@ -462,6 +460,7 @@ def _etude_rationnelle_pole(f, N, D, point, cote, items):
     borne = {"type": "fini", "point": point, "cote": cote}
     items.append(txt(rf"\(x = {point.tex}\) est une valeur interdite."))
     g = f
+    chaine0 = None
     if mult > 0:
         # facteur(s) (x − a) communs au numérateur et au dénominateur : forme indéterminée 0/0
         fac_N2 = qtex(N2a) if deg(N2) == 0 else ptex(N2, "x")
@@ -479,11 +478,11 @@ def _etude_rationnelle_pole(f, N, D, point, cote, items):
         simplifie = haut if bas == "1" else r"\dfrac{" + haut + "}{" + bas + "}"
         items.append(txt(rf"Le numérateur et le dénominateur tendent vers \(0\) quand \(x \to {point.tex}\) : "
                          r"forme indéterminée « \(0/0\) »."))
-        items.append(txt(rf"On factorise le numérateur et le dénominateur par \(\left({xa}\right)\) et l'on simplifie "
-                         rf"(pour \(x \neq {point.tex}\)) : "
-                         rf"\(f(x) = \dfrac{{{num_chaine}}}{{{den_chaine}}} = {simplifie}\)."))
         g = _arbre_fraction(pmul(N2, _puissance_binome(a, max(diff, 0))),
                             pmul(D2, _puissance_binome(a, max(-diff, 0))))
+        chaine0 = Chaine(Pt(borne), "f(x)")
+        chaine0.lim(rf"\dfrac{{{num_chaine}}}{{{den_chaine}}}", rf"\text{{on factorise par }} \left({xa}\right)")
+        chaine0.lim(simplifie, rf"\text{{on simplifie}} \; (x \neq {point.tex})", g)
 
     if diff >= 0:
         valeur = N2a / D2a if diff == 0 else F(0)
@@ -492,10 +491,15 @@ def _etude_rationnelle_pole(f, N, D, point, cote, items):
         pt0 = Pt(borne)
         sub = _tex_en(g, pt0)
         if peval(Ng, a) / peval(Dg, a) == valeur:
-            egal = vtex if sub == vtex else rf"{sub} = {vtex}"
-            g_tex = tex(g) if isinstance(g, Op) and g.op in "*/" else r"\left(" + tex(g) + r"\right)"
-            items.append(txt(rf"Donc \(\displaystyle\lim_{{x\to {point.tex}}} f(x) = "
-                             rf"\lim_{{x\to {point.tex}}} {g_tex} = {egal}\)."))
+            if chaine0 is not None:
+                chaine0.val(sub)
+                chaine0.val(vtex, force=sub == vtex)
+                items.append(txt(chaine0.html()))
+            else:
+                egal = vtex if sub == vtex else rf"{sub} = {vtex}"
+                g_tex = tex(g) if isinstance(g, Op) and g.op in "*/" else r"\left(" + tex(g) + r"\right)"
+                items.append(txt(rf"Donc \(\displaystyle\lim_{{x\to {point.tex}}} f(x) = "
+                                 rf"\lim_{{x\to {point.tex}}} {g_tex} = {egal}\)."))
         else:
             items.append(_repli(pt0, vtex, "valeur simplifiée incohérente"))
         items.append(txt(_phrase_trou(point.tex, vtex)))
@@ -503,6 +507,8 @@ def _etude_rationnelle_pole(f, N, D, point, cote, items):
                 "valeur_tex": vtex, "valeur_val": float(valeur)}
 
     # pôle : signe du facteur (x − a)^k de chaque côté, signe de N2(a)/D2(a)
+    if chaine0 is not None:
+        items.append(txt(chaine0.html()))
     k = -diff
     ratio = N2a / D2a
     res = {"genre": "verticale", "point_tex": point.tex, "point_val": float(a)}
@@ -968,6 +974,10 @@ class _Contexte:
         self.renvois[(genre, n.key())] = t.renvoi()
         return s
 
+    def chaine(self, n):
+        """Chaîne d'égalités pour la limite de n (« lim f(x) = … » pour f elle-même)."""
+        return Chaine(self.pt, "f(x)" if n is self.f else tex(n), None if n is self.f else n)
+
     def cote(self):
         mot = "À gauche" if self.pt.d < 0 else "À droite"
         return rf"{mot} de \({self.pt.a_tex}\)"
@@ -1290,12 +1300,19 @@ def _noeud_rationnel_infini(n, ctx):
     if P is not None:
         if len(_polynome_a_termes(P)) < 2:
             return None
-        phrases, L = _phrases_polynome_infini(P, s, tex(n))
+        phrases, L = _phrases_polynome_infini(P, s, n, ctx)
     elif isinstance(n, Op) and n.op == "/":
         A, B = _poly_ou_const(n.a), _poly_ou_const(n.b)
         if A is None or B is None or deg(B) < 1:
             return None
-        phrases, L = _phrases_fraction_infini(A, B, s, tex(n))
+        if deg(A) == 0:
+            phrases, L = _phrases_fraction_infini(A, B, s, tex(n))
+        else:
+            fi = FormeIndeterminee("∞/∞", n)
+            fi.A, fi.B = _limite_polynome_infini(A, s), _limite_polynome_infini(B, s)
+            L, phrases = _evidence_quotient(n, ctx, fi)
+            fi.la = fi.lb = []
+            phrases = phrases
     else:
         return None
     ctx.verifier(n, L, exact=True)
@@ -1363,6 +1380,215 @@ def _lever(n, ctx, fi):
     finally:
         ctx.profondeur -= 1
     raise Abandon(f"forme indéterminée {fi.nom} non levée en {tex(n)}")
+
+
+# --- chaîne d'égalités : lim f(x) = lim … = … = valeur (une seule formule, justifications entre parenthèses) ----
+class Chaine:
+    """Pas d'un calcul de limite écrits comme au tableau :
+        lim f(x) = lim A         (justification)
+                 = lim B         (justification)
+                 = valeur.
+    pas = [(genre, tex, justification, arbre)] ; genre « lim » (nouvelle ligne) ou « val » (même ligne, après « = »)."""
+
+    def __init__(self, pt, debut, arbre=None):
+        self.pt = pt
+        self.pas = [("lim", debut, None, arbre)]
+        self.complete = False                      # la dernière égalité est la valeur de la limite
+
+    def lim(self, tex_, just=None, arbre=None):
+        if self.pas[-1][1] == tex_ and self.pas[-1][0] == "lim":
+            if just:                               # même expression : la justification s'ajoute
+                g, t_, j, a = self.pas[-1]
+                self.pas[-1] = (g, t_, rf"{j}\; ;\; {just}" if j else just, a)
+            return self
+        self.pas.append(("lim", tex_, just, arbre))
+        return self
+
+    def val(self, tex_, just=None, force=False):
+        if self.pas[-1][1] == tex_ and not force:
+            if just:
+                g, t_, j, a = self.pas[-1]
+                self.pas[-1] = (g, t_, rf"{j}\; ;\; {just}" if j else just, a)
+            return self
+        self.pas.append(("val", tex_, just, None))
+        return self
+
+    def suite(self, autre):
+        """Prolonge cette chaîne par une autre qui commence par la même expression (méthode appelée sur le reste)."""
+        self.pas += autre.pas[1:]
+        self.complete = autre.complete
+        return self
+
+    def html(self):
+        lim = rf"\lim_{{x\to {self.pt.tex()}}}"
+
+        def arg(tex_, arbre):
+            somme = isinstance(arbre, Op) and arbre.op in "+-" or (isinstance(arbre, Neg) and isinstance(arbre.a, Op)
+                                                                   and arbre.a.op in "+-")
+            return rf"\left({tex_}\right)" if somme else tex_
+        groupes = []                                # [[tex, [justifications]]]
+        for genre, tex_, just, arbre in self.pas:
+            if genre == "lim":
+                groupes.append([f"{lim} {arg(tex_, arbre)}", []])
+            else:
+                groupes[-1][0] += f" = {tex_}"
+            if just:
+                groupes[-1][1].append(just)
+
+        def ecrit(g):
+            return g[0] + ((r" \qquad \left(" + r" \; ;\; ".join(g[1]) + r"\right)") if g[1] else "")
+        if len(groupes) == 1:
+            corps = ecrit(groupes[0])
+        else:
+            corps = r" \\ ".join([f"{groupes[0][0]} &= {ecrit(groupes[1])}"] + [f"&= {ecrit(g)}" for g in groupes[2:]])
+        return r"\[\begin{aligned}" + corps + r"\end{aligned}\]"
+
+
+def _est_forme_indeterminee(g, ctx):
+    """True si g est, à sa racine, une forme indéterminée (une méthode du cours la lève)."""
+    if not (isinstance(g, Op) and g.op in "+-*/"):
+        return False
+    A, _ = _noeud(g.a, ctx)
+    B, _ = _noeud(g.b, ctx)
+    try:
+        _combine(g.op, A, B)
+    except FormeIndeterminee:
+        return True
+    except Exception:
+        return False
+    return False
+
+
+def _prolonger(ch, g, L, narration, ctx):
+    """Prolonge la chaîne ch (qui s'arrête à « lim g ») : par la chaîne qu'une méthode a écrite pour g quand g est lui-même
+    une forme indéterminée (fusion), sinon par les dernières égalités (g avec la limite de chaque morceau, puis la
+    valeur). Renvoie les lignes à écrire autour : (avant la chaîne, après la chaîne)."""
+    if _est_forme_indeterminee(g, ctx):
+        idx = next((i for i in range(len(narration) - 1, -1, -1) if isinstance(narration[i], Chaine)), None)
+        if idx is not None:
+            ch.suite(narration[idx])
+            return [l for l in narration[:idx]], [l for l in narration[idx + 1:]]
+    avant = _conclure(ch, g, L, ctx)
+    return avant, ([] if ch.complete else [l for l in narration])
+
+
+def _tout_texte(lignes):
+    """Les lignes d'une rédaction, la chaîne d'égalités (si présente) écrite en formule."""
+    return [l.html() if isinstance(l, Chaine) else l for l in lignes]
+
+
+def _petite(n):
+    """True si n vaut c/x^j (j ≥ 1) : un infiniment petit en ±∞."""
+    if not (isinstance(n, Op) and n.op == "/" and sans_x(n.a)):
+        return False
+    b = n.b
+    while isinstance(b, Op) and b.op == "*" and sans_x(b.a):
+        b = b.b
+    return isinstance(b, X) or (isinstance(b, Op) and b.op == "^" and isinstance(b.a, X) and valeur_constante(b.b) is not None
+                                and valeur_constante(b.b) > 0)
+
+
+def _combine(op, A, B):
+    """Limite de A op B (règles d'opérations) ; FormeIndeterminee si l'on ne peut pas conclure."""
+    return {"+": lambda: _somme(A, B), "-": lambda: _somme(A, _oppose(B)),
+            "*": lambda: _produit(A, B), "/": lambda: _quotient(A, B)}[op]()
+
+
+def _avec_limites(n, ctx, notes, avant):
+    """n écrit avec la limite de chaque morceau : c/x^j → 0 (terme nul supprimé d'une somme), x → ±∞, un morceau qui
+    demandait une méthode (forme indéterminée) → sa valeur, sa chaîne écrite à part (avant). Renvoie (tex, infini ?)
+    ou None si n n'est pas ainsi évaluable. notes : justifications « c/x^j → 0 »."""
+    pt = ctx.pt
+
+    def note(t):
+        if t not in notes:
+            notes.append(t)
+
+    def par(t, infini):
+        return rf"\left({t}\right)" if (infini or t.startswith("-") or t.startswith("+")) else t
+
+    def feuille(m):
+        Lm, lg = _noeud(m, ctx)
+        avant.extend(lg)
+        note(rf"{tex(m)} \to {Lm.tex(False)}")
+        return Lm.tex(False), bool(Lm.inf)
+    if sans_x(n):
+        return tex(n), False
+    if isinstance(n, X):
+        return pt.lim_x().tex(), True
+    if pt.s and _petite(n):
+        note(rf"{tex(n)} \to 0")
+        return "0", False
+    if isinstance(n, Neg):
+        r = _avec_limites(n.a, ctx, notes, avant)
+        if r is None:
+            return None
+        t, inf = r
+        return "-" + (rf"\left({t}\right)" if (" + " in t or " - " in t or inf) else t), inf
+    if isinstance(n, Fn):
+        r = _avec_limites(n.a, ctx, notes, avant)
+        if r is None:
+            return None
+        t, inf = r
+        if inf:                                       # e^{+∞}, ln(+∞) : on écrit la limite du morceau
+            Lm, _ = _noeud(n, ctx)
+            note(rf"{tex(n)} \to {Lm.tex(False)}")
+            return Lm.tex(False), bool(Lm.inf)
+        return {"sqrt": rf"\sqrt{{{t}}}", "ln": rf"\ln {t if t.lstrip('-').isdigit() else par(t, False)}",
+                "exp": rf"e^{{{t}}}"}[n.nom], False
+    if isinstance(n, Op) and n.op == "^" and valeur_constante(n.b) is not None:
+        r = _avec_limites(n.a, ctx, notes, avant)
+        if r is None:
+            return None
+        t, inf = r
+        if inf:                                       # x^3 → +∞ : on écrit la limite du morceau
+            Lm, _ = _noeud(n, ctx)
+            return Lm.tex(False), bool(Lm.inf)
+        return rf"{par(t, False) if (' ' in t or t.startswith('-')) else t}^{{{tex(n.b)}}}", False
+    if isinstance(n, Op) and n.op in "+-*/":
+        A, _ = _noeud(n.a, ctx)
+        B, _ = _noeud(n.b, ctx)
+        if n.op == "/" and B.nul() and not A.nul():
+            return None
+        try:
+            _combine(n.op, A, B)
+        except FormeIndeterminee:                     # ce morceau est une forme indéterminée : une méthode le lève
+            return feuille(n)
+        ra, rb = _avec_limites(n.a, ctx, notes, avant), _avec_limites(n.b, ctx, notes, avant)
+        if ra is None or rb is None:
+            return None
+        (ta, ia), (tb, ib) = ra, rb
+        if n.op in "+-":
+            if tb == "0":
+                return ta, ia
+            if ta == "0":
+                return ("-" + par(tb, False) if n.op == "-" else tb), ib
+            return ta + (" + " if n.op == "+" else " - ") + (rf"\left({tb}\right)" if (ib or tb.startswith("-")) else tb), ia or ib
+        if n.op == "*":
+            return par(ta, ia) + r" \cdot " + par(tb, ib), ia or ib
+        return rf"\dfrac{{{ta}}}{{{tb}}}", ia or ib
+    return None
+
+
+def _conclure(ch, g, L, ctx):
+    """Dernières égalités de la chaîne ch pour la limite de g (de valeur L) : g avec la limite de chaque morceau, puis la
+    valeur. Renvoie les lignes à écrire AVANT la chaîne (chaînes des morceaux déjà levés) ; ch.complete si la valeur est
+    écrite."""
+    pt = ctx.pt
+    avant, notes = [], []
+    if pt.s:
+        r = _avec_limites(g, ctx, notes, avant)
+        sub = r[0] if r is not None else None
+    else:
+        sub = _tex_en(g, pt) if _defini_en(g, ctx) else None
+    if sub is None:
+        return []
+    just = (r" \; ;\; ".join(notes)) if notes else None
+    v = L.tex(False)
+    ch.val(sub, just)
+    ch.val(v, force=ch.pas[-1][0] == "lim" and ch.pas[-1][1] == v)
+    ch.complete = True
+    return avant
 
 
 # --- méthode : mise en évidence sous une racine (en ±∞, quotient ou produit dont un membre contient une racine)
@@ -1471,51 +1697,68 @@ def _est_un(t):
     return isinstance(t, Nb) and t.v == 1
 
 
+def _abs_tex(m):
+    return "|x|" if m == 1 else rf"|x|^{{{m}}}"
+
+
+def _just_abs(s, m):
+    """Justification de |x|^m = ±x^m selon le signe de x."""
+    if s > 0:
+        return rf"x > 0 \text{{ donc }} {_abs_tex(m)} = x" + ("" if m == 1 else f"^{{{m}}}")
+    if m % 2:
+        return rf"x < 0 \text{{ donc }} {_abs_tex(m)} = -x" + ("" if m == 1 else f"^{{{m}}}")
+    return rf"x < 0 \text{{ et }} {m} \text{{ est pair, donc }} {_abs_tex(m)} = x^{{{m}}}"
+
+
 def _racine_en_evidence(t, Q, s):
-    """√Q (Q de degré 2m, coefficient dominant q > 0) en s∞ : √Q = √(x^{2m}(q + …)) = |x|^m√(q + …) puis |x|^m = ±x^m.
-    Renvoie (lignes, signe de |x|^m = ±x^m, arbre du facteur √(q + …) ; Nb(1) si q est un carré qui sort)."""
+    """√Q (Q de degré 2m, coefficient dominant q > 0) en s∞ : √Q = √(x^{2m}(q + …)) = |x|^m√(q + …) = ±x^m√(q + …).
+    Renvoie un dictionnaire : m ; stades t0, t1 (tex, sans signe) ; coef (±√q si q est un carré, sinon ±1) ; facteur
+    (arbre de √(q + …), Nb(1) si le coefficient sort) ; eq (égalité de la mise en évidence, ou None)."""
     m = deg(Q) // 2
     interieur = _somme_termes([_terme_laurent(Q[j], j - 2 * m) for j in range(2 * m, -1, -1) if Q[j] != 0])
-    absx = "|x|" if m == 1 else rf"|x|^{{{m}}}"
+    absx = _abs_tex(m)
     seul = len(_polynome_a_termes(Q)) == 1
     q = Q[-1]
     racine_q = _sympy().sqrt(_rat(q))
-    if seul and racine_q.is_Rational:                    # √(4x²) = 2|x| : le coefficient sort tel quel
-        coef = "" if racine_q == 1 else num_sympy(racine_q).tex
-        lignes = [rf"\({tex(t)} = {coef}{absx}\)."]
-        facteur, k_sortant = Nb(F(1)), F(int(racine_q.p), int(racine_q.q))
-    elif seul:
-        lignes = [rf"\({tex(t)} = \sqrt{{{qtex(q)}}}\,{absx}\)."]
-        facteur, k_sortant = Fn("sqrt", Nb(q)), F(1)
-    else:
-        lignes = [rf"\({tex(t)} = \sqrt{{{_monome_tex(F(1), 2 * m)}\left({tex(interieur)}\right)}} = {absx}\sqrt{{{tex(interieur)}}}\)."]
-        facteur, k_sortant = Fn("sqrt", interieur), F(1)
     signe = -1 if (s < 0 and m % 2) else 1
-    resultat = Op("*", _puissance_x(m), facteur) if not _est_un(facteur) else _puissance_x(m)
-    if racine_q.is_Rational and seul and racine_q != 1:
-        resultat = Op("*", Nb(F(int(racine_q.p), int(racine_q.q))), resultat) if not _est_un(facteur) else \
-            Op("*", Nb(F(int(racine_q.p), int(racine_q.q))), _puissance_x(m))
-    if signe < 0:
-        resultat = Neg(resultat)
-    donc = rf"donc \({tex(t)} = {tex(resultat)}\)."
-    if s < 0 and m % 2:
-        lignes.append((r"Comme \(x < 0\), \(\sqrt{x^{2}} = |x| = -x\), " if m == 1 else
-                       rf"Comme \(x < 0\), \(|x|^{{{m}}} = -x^{{{m}}}\) (\({m}\) est impair), ") + donc)
-    elif s < 0:
-        lignes.append(rf"Comme \(x < 0\), \(|x|^{{{m}}} = x^{{{m}}}\) (\({m}\) est pair), " + donc)
-    else:
-        lignes.append((r"Comme \(x > 0\), \(|x| = x\), " if m == 1 else rf"Comme \(x > 0\), \(|x|^{{{m}}} = x^{{{m}}}\), ") + donc)
-    return lignes, (-1 if (s < 0 and m % 2) else 1) * k_sortant, facteur, m
+    if seul and racine_q.is_Rational:                    # √(4x²) = 2|x| : le coefficient sort tel quel
+        rq = F(int(racine_q.p), int(racine_q.q))
+        t1 = ("" if rq == 1 else num_sympy(racine_q).tex) + absx
+        return {"m": m, "t0": tex(t), "t1": t1, "coef": signe * rq, "facteur": Nb(F(1)), "eq": None}
+    if seul:
+        return {"m": m, "t0": tex(t), "t1": rf"\sqrt{{{qtex(q)}}}\,{absx}", "coef": F(signe),
+                "facteur": Fn("sqrt", Nb(q)), "eq": None}
+    t0 = rf"\sqrt{{{_monome_tex(F(1), 2 * m)}\left({tex(interieur)}\right)}}"
+    eq = rf"{tex(_arbre_poly(Q))} = {_monome_tex(F(1), 2 * m)}\left({tex(interieur)}\right)"
+    return {"m": m, "t0": t0, "t1": rf"{absx}\sqrt{{{tex(interieur)}}}", "coef": F(signe),
+            "facteur": Fn("sqrt", interieur), "eq": eq}
+
+
+def _tete_tex(coef, k):
+    """Arbre de coef·x^k (coef Fraction signé)."""
+    facteurs = [t for t in (Nb(abs(coef)) if abs(coef) != 1 else None, _puissance_x(k) if k else None) if t is not None]
+    tete = _produit_arbres(facteurs or [Nb(F(1))])
+    return Neg(tete) if coef < 0 else tete
+
+
+def _somme_tex(termes):
+    """[(négatif ?, tex)] → « a + b - c »."""
+    out = ""
+    for i, (neg, t) in enumerate(termes):
+        out += ("-" if neg else "") + t if i == 0 else (" - " if neg else " + ") + t
+    return out
 
 
 def _membre_en_evidence(M, s):
     """Mise en évidence de x^k dans un membre M (somme de monômes et de racines de polynômes de degré pair) en s∞ :
-    M = coef·x^k·R, où R vaut (constante non nulle) + (termes en 1/x^j). Renvoie un dictionnaire (coef, k, R,
-    lignes) ; None si M n'est pas de cette forme ou si ses termes de plus haut degré se compensent."""
+    M = coef·x^k·R, où R vaut (constante non nulle) + (termes en 1/x^j). Renvoie un dictionnaire : coef, k, R (arbre),
+    evid (arbre coef·x^k·R), stades (tex des écritures successives, de la racine mise en évidence à M = x^k·R),
+    eqs (égalités de mise en évidence), absm (exposants m des |x|^m), somme (plusieurs termes) ; None si M n'est pas
+    de cette forme ou si ses termes de plus haut degré se compensent."""
     if _dominant(M, s) is None:
         return None
     feuilles = _feuilles(M)
-    termes = []                                           # [(signe, tex ou None, P ou racine)] dans l'ordre de M
+    termes = []                                           # [(genre, signe, feuille, polynôme)] dans l'ordre de M
     for t, sg in feuilles:
         r = _est_racine(t)
         if r is not None:
@@ -1532,55 +1775,88 @@ def _membre_en_evidence(M, s):
         termes.append(("poly", sg, t, P))
     if not termes:
         return None
-    if len(termes) == 1 and termes[0][0] == "racine":     # un seul terme : une racine
-        _, sg, t, Q = termes[0]
-        lignes, signe, facteur, m = _racine_en_evidence(t, Q, s)
-        return {"coef": sg * signe, "k": m, "R": facteur, "lignes": lignes}
-    if all(genre == "poly" for genre, _, _, _ in termes):    # polynôme : M = c·x^k(1 + …)
+    if all(genre == "poly" for genre, _, _, _ in termes):            # polynôme : M = c·x^k(1 + …)
         P = [F(0)]
         for _, sg, _, Pi in termes:
             P = padd(P, pscal(Pi, F(sg)))
         k, c = deg(P), P[deg(P)]
         t = [(False, Nb(F(1)))] + [_terme_laurent(P[j] / c, j - k) for j in range(k - 1, -1, -1) if P[j] != 0]
-        return {"coef": c, "k": k, "R": _somme_termes(t) if len(t) > 1 else Nb(F(1)), "lignes": []}
-    # somme dont une racine : chaque terme divisé par x^k
+        R = _somme_termes(t) if len(t) > 1 else Nb(F(1))
+        evid = _produit_arbres([_tete_tex(c, k), R]) if not _est_un(R) else _tete_tex(c, k)
+        eqs = [rf"{tex(M)} = {tex(evid)}"] if not _est_un(R) else []
+        return {"coef": c, "k": k, "R": R, "evid": evid, "stades": [tex(evid)] * 4, "eqs": eqs, "absm": [],
+                "somme": False}
     k = max(deg(P) // 2 if genre == "racine" else deg(P) for genre, _, _, P in termes)
-    lignes, t_arbres = [], []
+    if len(termes) == 1:                                  # un seul terme : une racine
+        _, sg, t, Q = termes[0]
+        rac = _racine_en_evidence(t, Q, s)
+        coef = sg * rac["coef"]
+        R = rac["facteur"]
+        evid = _produit_arbres([_tete_tex(coef, rac["m"]), R]) if not _est_un(R) else _tete_tex(coef, rac["m"])
+        neg = "-" if sg < 0 else ""
+        return {"coef": coef, "k": rac["m"], "R": R, "evid": evid, "somme": False, "absm": [rac["m"]],
+                "stades": [neg + rac["t0"], neg + rac["t1"], tex(evid), tex(evid)],
+                "eqs": [rac["eq"]] if rac["eq"] else []}
+    # somme dont une racine : chaque terme divisé par x^k
+    s0, s1, s2, eqs, absm, t_arbres = [], [], [], [], [], []
     for genre, sg, t, P in termes:
         if genre == "racine":
-            ls, signe, facteur, m = _racine_en_evidence(t, P, s)
-            lignes += ls
-            if _est_un(facteur):                          # racine d'un monôme à coefficient entier
-                t_arbres.append(_terme_laurent(sg * signe, m - k))
+            rac = _racine_en_evidence(t, P, s)
+            m = rac["m"]
+            absm.append(m)
+            if rac["eq"]:
+                eqs.append(rac["eq"])
+            coef = sg * rac["coef"]
+            reste = _produit_arbres([_tete_tex(abs(coef), m), rac["facteur"]]) if not _est_un(rac["facteur"]) else _tete_tex(abs(coef), m)
+            s0.append((sg < 0, rac["t0"]))
+            s1.append((sg < 0, rac["t1"]))
+            s2.append((coef < 0, tex(reste)))
+            if _est_un(rac["facteur"]):
+                t_arbres.append(_terme_laurent(coef, m - k))
             else:
-                rac = facteur if m == k else Op("/", facteur, _puissance_x(k - m))
-                t_arbres.append((sg * signe < 0, rac))
+                r_ = rac["facteur"] if m == k else Op("/", rac["facteur"], _puissance_x(k - m))
+                t_arbres.append((coef < 0, r_))
         else:
+            ts = []
             for j in range(deg(P), -1, -1):
                 if P[j] != 0:
+                    neg_, a_ = _terme_laurent(sg * P[j], j)
+                    ts.append((neg_, tex(a_)))
                     t_arbres.append(_terme_laurent(sg * P[j], j - k))
-    return {"coef": F(1), "k": k, "R": _somme_termes(t_arbres), "lignes": lignes, "somme": True}
+            for lst in (s0, s1, s2):
+                lst.extend(ts)
+    R = _somme_termes(t_arbres)
+    evid = Op("*", _puissance_x(k), R) if k else R
+    return {"coef": F(1), "k": k, "R": R, "evid": evid, "somme": True, "absm": absm,
+            "stades": [_somme_tex(s0), _somme_tex(s1), _somme_tex(s2), tex(evid)],
+            "eqs": eqs + [rf"{tex(M)} = {tex(evid)}"]}
+
+
+def _forme(op, a, b):
+    """Quotient ou produit de deux écritures (tex) de membres."""
+    if op == "/":
+        return rf"\dfrac{{{a}}}{{{b}}}"
+    return rf"{a}\,{b}"
 
 
 def _evidence_racine(n, ctx, fi):
-    """En ±∞, quotient ou produit dont un membre contient une racine : on met x^k en évidence dans chaque membre
-    (√(4x² + 1) = √(x²(4 + 1/x²)) = |x|√(4 + 1/x²), puis |x| = ±x), on simplifie, puis on calcule la limite de ce qui
-    reste. Jamais quand les termes de plus haut degré d'une somme se compensent (alors : expression conjuguée)."""
+    """En ±∞, quotient ou produit dont un membre contient une racine : chaîne d'égalités
+    √(4x² + 1) = √(x²(4 + 1/x²)) = |x|√(4 + 1/x²) = ±x√(4 + 1/x²), simplification, puis limite de ce qui reste.
+    Jamais quand les termes de plus haut degré d'une somme se compensent (alors : expression conjuguée)."""
+    if not _contient_racine(n):
+        return None
+    return _evidence_quotient(n, ctx, fi)
+
+
+def _evidence_quotient(n, ctx, fi):
+    """Quotient ou produit de deux membres (polynômes, racines de polynômes) en ±∞ : on met x^k en évidence dans chaque
+    membre, on simplifie, puis on calcule la limite de ce qui reste (chaîne d'égalités)."""
     s = ctx.pt.s
-    if not s or not _contient_racine(n) or not isinstance(n, Op) or n.op not in "*/":
+    if not s or not isinstance(n, Op) or n.op not in "*/":
         return None
     A, B = _membre_en_evidence(n.a, s), _membre_en_evidence(n.b, s)
     if A is None or B is None:
         return None
-    lignes = [_ligne_fi(n, fi, ctx)]
-    for M, mb in ((n.a, A), (n.b, B)):
-        lignes += mb["lignes"]
-        tete = _produit_arbres([t for t in (Nb(abs(mb["coef"])) if abs(mb["coef"]) != 1 else None,
-                                             _puissance_x(mb["k"]) if mb["k"] else None) if t is not None] or [Nb(F(1))])
-        mb["tete"] = Neg(tete) if mb["coef"] < 0 else tete
-        mb["evid"] = mb["tete"] if _est_un(mb["R"]) else Op("*", mb["tete"], mb["R"])
-        if (not mb["lignes"] or mb.get("somme")) and not _est_un(mb["R"]):
-            lignes.append(rf"On met \({tex(mb['tete'])}\) en évidence : \({tex(M)} = {tex(mb['evid'])}\).")
     coef = A["coef"] / B["coef"] if n.op == "/" else A["coef"] * B["coef"]
     d = A["k"] - B["k"] if n.op == "/" else A["k"] + B["k"]
     haut, bas = [], []
@@ -1600,15 +1876,31 @@ def _evidence_racine(n, ctx, fi):
     g = Op("/", num, _produit_arbres(bas)) if bas else num
     if coef < 0:
         g = Neg(g)
-    evid = Op(n.op, A["evid"], B["evid"])
     _meme_fonction(n, g, ctx)
-    lignes.append(rf"Donc \({tex(n)} = {tex(evid)} = {tex(g)}\).")
-    L, lg = _noeud(g, ctx)
-    return L, lignes + lg
+    L, narration = _noeud(g, ctx)
+    ch = ctx.chaine(n)
+    stades = [_forme(n.op, A["stades"][i] if not (n.op == "*" and A["somme"]) else rf"\left({A['stades'][i]}\right)",
+                     B["stades"][i] if not (n.op == "*" and B["somme"]) else rf"\left({B['stades'][i]}\right)")
+              for i in range(4)]
+    eqs = A["eqs"] + [e for e in B["eqs"] if e not in A["eqs"]]
+    ch.lim(stades[0], r" ,\; ".join(eqs) if eqs else None)
+    ms = sorted(set(A["absm"] + B["absm"]))
+    if ms:
+        ch.lim(stades[1], r"\sqrt{x^{2}} = |x|")
+        ch.lim(stades[2], r" ,\; ".join(_just_abs(s, m) for m in ms))
+    if stades[3] != stades[2]:
+        ch.lim(stades[3], rf"\text{{on met }} {tex(_puissance_x(max(A['k'], B['k'])))} \text{{ en évidence}}")
+    commun = min(A["k"], B["k"]) if n.op == "/" else 0
+    just_simpl = rf"\text{{on simplifie par }} {tex(_puissance_x(commun))}" if commun and n.op == "/" else None
+    ch.lim(tex(g), just_simpl, g)
+    avant = _conclure(ch, g, L, ctx)
+    if ch.complete and n is ctx.f:
+        ctx.racine_dite = True
+    return L, [_ligne_fi(n, fi, ctx)] + avant + [ch] + ([] if ch.complete else narration)
 
 
 def _evidence_ln(n, ctx, fi):
-    """ln(u)/v en ±∞ avec u et v polynômes : ln(u) = ln(x^k(c + …)) = k ln|x| + ln(c + …), puis croissance comparée
+    """ln(u)/v en ±∞ avec u et v polynômes : ln(u) = k ln|x| + ln(c + …), puis croissance comparée
     (ln x / x^p → 0) pour le terme en ln|x| ; avant Bernoulli-L'Hôpital. Seulement si u = x^k(c + …) avec x^k > 0."""
     s = ctx.pt.s
     if not s or not isinstance(n, Op) or n.op != "/" or not (isinstance(n.a, Fn) and n.a.nom == "ln"):
@@ -1625,57 +1917,63 @@ def _evidence_ln(n, ctx, fi):
     p = V["k"]
     termes = [_terme_laurent(u[j], j - k) for j in range(k, -1, -1) if u[j] != 0]
     ru = _somme_termes(termes) if len(termes) > 1 else None
-    absx = r"\ln|x|" if k == 1 else rf"{k}\ln|x|"
-    ln_u = tex(n.a)
-    if ru is not None:
-        egal = rf"\ln\left({_monome_tex(F(1), k)}\left({tex(ru)}\right)\right) = {absx} + \ln\left({tex(ru)}\right)"
-    else:
-        egal = rf"\ln\left({tex(n.a.a)}\right) = " + (absx if c == 1 else rf"\ln {qtex(c)} + {absx}")
-    lignes = [_ligne_fi(n, fi, ctx), rf"\({ln_u} = {egal}\)."]
-    if V["lignes"] or not _est_un(V["R"]):
-        tete = _produit_arbres([t for t in (Nb(abs(V["coef"])) if abs(V["coef"]) != 1 else None,
-                                             _puissance_x(p) if p else None) if t is not None] or [Nb(F(1))])
-        tete = Neg(tete) if V["coef"] < 0 else tete
-        lignes.append(rf"On met \({tex(tete)}\) en évidence : \({tex(n.b)} = {tex(Op('*', tete, V['R']))}\).")
     xp = "x" if p == 1 else f"x^{{{p}}}"
-    A = rf"\dfrac{{\ln|x|}}{{{xp}}}"
-    B = rf"\dfrac{{\ln\left({tex(ru)}\right)}}{{{xp}}}" if ru is not None else (rf"\dfrac{{\ln {qtex(c)}}}{{{xp}}}" if c != 1 else None)
-    corps = (A if k == 1 else rf"{k}\,{A}") + (f" + {B}" if B else "")
-    facteur_v = V["coef"] if _est_un(V["R"]) else None
-    if V["coef"] == 1 and _est_un(V["R"]):
-        donc = rf"\({tex(n)} = {corps}\)"
+    absx = r"\ln|x|" if k == 1 else rf"{k}\ln|x|"
+    ln_c = rf"\ln {qtex(c)}"
+    # numérateur : ln(x^k(c + …)) = k ln|x| + ln(c + …)
+    if ru is not None:
+        f0 = rf"\ln\left({_monome_tex(F(1), k)}\left({tex(ru)}\right)\right)"
+        f1 = rf"{absx} + \ln\left({tex(ru)}\right)"
+        eq_u = rf"{tex(n.a.a)} = {_monome_tex(F(1), k)}\left({tex(ru)}\right)"
+        B = rf"\dfrac{{\ln\left({tex(ru)}\right)}}{{{xp}}}"
+    else:
+        f0 = rf"\ln\left({tex(n.a.a)}\right)"
+        f1 = absx if c == 1 else rf"{ln_c} + {absx}"
+        eq_u = None
+        B = rf"\dfrac{{{ln_c}}}{{{xp}}}" if c != 1 else None
+    den_evid = V["stades"][3]
+    ch = ctx.chaine(n)
+    just0 = (", ".join([e for e in ([eq_u] if eq_u else []) + V["eqs"]])) or None
+    ch.lim(rf"\dfrac{{{f0}}}{{{den_evid}}}", just0)
+    just1 = r"\ln(ab) = \ln a + \ln b" + (rf" ,\; \ln x^{{{k}}} = {k}\ln|x|" if k > 1 else "")
+    ch.lim(rf"\dfrac{{{f1}}}{{{den_evid}}}", just1)
+    A_ = rf"\dfrac{{\ln|x|}}{{{xp}}}"
+    corps = (A_ if k == 1 else rf"{k}\,{A_}") + (f" + {B}" if B else "")
+    sans_pref = V["coef"] == 1 and _est_un(V["R"])
+    if sans_pref:
+        f2 = corps
     else:
         den = _produit_arbres([t for t in (Nb(abs(V["coef"])) if abs(V["coef"]) != 1 else None,
                                             None if _est_un(V["R"]) else V["R"]) if t is not None])
-        pref = rf"\dfrac{{1}}{{{tex(den)}}}" if V["coef"] > 0 else rf"-\dfrac{{1}}{{{tex(den)}}}"
-        donc = rf"\({tex(n)} = {pref}\left({corps}\right)\)" if B else rf"\({tex(n)} = {pref}\,{corps}\)"
-    lignes.append("Donc " + donc + ".")
-    # croissance comparée pour ln|x| / x^p
-    ref = _ligne_reference("ln_sur_puissance")
+        f2 = rf"{'-' if V['coef'] < 0 else ''}\dfrac{{1}}{{{tex(den)}}}\left({corps}\right)"
+    ch.lim(f2, rf"\text{{on divise par }} {xp}")
+    # limites : croissance comparée pour ln|x|/x^p, puis le reste
+    ref = REFERENCES["ln_sur_puissance"][0]
     if s > 0:
-        lignes.append(rf"Comme \(x > 0\), \(|x| = x\) et, par croissance comparée ({ref}), \({A} \to 0\).")
+        j_cc = rf"{A_} \to 0 \text{{ : croissance comparée, }} {ref}"
     else:
-        signe = "" if p % 2 == 0 else "-"
         tp = "t" if p == 1 else f"t^{{{p}}}"
-        lignes.append(rf"Comme \(x < 0\), \(|x| = -x\). En posant \(t = -x\) (\(t \to +\infty\)) : \({A} = {signe}\dfrac{{\ln t}}{{{tp}}}\) ; "
-                      rf"par croissance comparée ({ref}), \(\dfrac{{\ln t}}{{{tp}}} \to 0\), donc \({A} \to 0\).")
+        signe = "" if p % 2 == 0 else "-"
+        j_cc = (rf"t = -x \to +\infty ,\; {A_} = {signe}\dfrac{{\ln t}}{{{tp}}} \to 0 \text{{ : croissance comparée, }} "
+                r"\lim_{t\to +\infty} \dfrac{\ln t}{t^{n}} = 0")
+    justs = [j_cc]
     if B:
-        arbre_B = Op("/", Fn("ln", ru) if ru is not None else Fn("ln", Nb(c)), _puissance_x(p))
-        LB, lb = _noeud(arbre_B, ctx)
-        lignes += lb
-    if not _est_un(V["R"]):
-        LR, lr = _noeud(V["R"], ctx)
-        lignes += lr
+        justs.append(rf"{B} \to 0 \text{{ (numérateur fini, dénominateur }} \to \pm\infty \text{{)}}")
+    nul = r"2 \cdot 0" if k == 2 else (r"0" if k == 1 else rf"{k} \cdot 0")
+    valeur = nul + (" + 0" if B else "")
+    if not sans_pref and abs(V["coef"]) != 1:
+        valeur = rf"{'-' if V['coef'] < 0 else ''}\dfrac{{1}}{{{qtex(abs(V['coef']))}}}\left({valeur}\right)"
+    elif V["coef"] < 0:
+        valeur = rf"-\left({valeur}\right)"
     ap = _signe(V["coef"]) * (s if p % 2 else 1)
     L = Lim.fin(0, ap)
+    ch.val(valeur, r" ;\; ".join(justs))
+    ch.val("0")
+    ch.complete = True
     math, pre = ctx.dire(n, L)
-    lignes += pre
-    if V["coef"] == 1 and _est_un(V["R"]):
-        lignes.append(("Les deux termes tendent vers 0, donc " if B else "Le terme tend vers 0, donc ") + math + ".")
-    else:
-        lignes.append(("Les deux termes de la parenthèse tendent vers 0 et le facteur qui la précède a une limite finie, donc "
-                       if B else "Le terme tend vers 0 et le facteur qui le précède a une limite finie, donc ") + math + ".")
-    return L, lignes
+    if n is ctx.f:
+        ctx.racine_dite = True
+    return L, [_ligne_fi(n, fi, ctx), ch] + pre
 
 
 # --- méthode : √(u²) = |u| (en une valeur, d'un seul côté) ---------------------------------------
@@ -1721,9 +2019,17 @@ def _racines_a_remplacer(n, out):
         _racines_a_remplacer(n.b, out)
 
 
+def _simplifier_par_x_moins_a(N, D, a):
+    """Fraction N/D de deux polynômes (Fractions) : (m, N2, D2) après simplification par (x − a)^m, m maximal."""
+    m = min(_facteur_racine(N, a)[1], _facteur_racine(D, a)[1])
+    if m == 0:
+        return 0, N, D
+    return m, _diviser_binome(N, a, m), _diviser_binome(D, a, m)
+
+
 def _racine_carre_parfait(n, ctx, fi):
-    """En une valeur, d'un seul côté : √(u²) = |u|, et |u| = u ou −u selon le signe de u de ce côté. Reconnaît la
-    racine d'un carré (x² = x·x, (x − 2)², …) ; le signe de u se lit sur sa factorisation en (x − a)."""
+    """En une valeur, d'un seul côté : √(u²) = |u|, et |u| = u ou −u selon le signe de u de ce côté (u s'annule en
+    a : son signe se lit sur la factorisation en (x − a)). Chaîne d'égalités, puis simplification si possible."""
     pt = ctx.pt
     if pt.s or not pt.d or not pt.a.is_Rational:
         return None
@@ -1732,7 +2038,7 @@ def _racine_carre_parfait(n, ctx, fi):
     if not trouvees:
         return None
     a = F(int(pt.a.p), int(pt.a.q))
-    table, lignes, avec_abs, vus = {}, [_ligne_fi(n, fi, ctx)], tex(n), set()
+    table, avec_abs, vus, justs = {}, tex(n), set(), []
     for racine, P in trouvees:
         if racine.key() in vus:
             continue
@@ -1743,13 +2049,35 @@ def _racine_carre_parfait(n, ctx, fi):
         table[racine.key()] = arbre if sg > 0 else Neg(arbre)
         u = tex(arbre)
         avec_abs = avec_abs.replace(tex(racine), rf"|{u}|")
-        lignes.append(rf"{ctx.cote()}, \({u}\) est {'positif' if sg > 0 else 'négatif'}, donc "
-                      rf"\({tex(racine)} = |{u}| = {tex(table[racine.key()])}\).")
+        cote = "gauche" if pt.d < 0 else "droite"
+        justs.append(rf"{u} {'>' if sg > 0 else '<'} 0 \text{{ à {cote} de }} {pt.a_tex} \text{{, donc }} |{u}| = "
+                     + (u if sg > 0 else rf"-{_entre_parentheses(u)}"))
     g = _remplacer_racines(n, table)
     _meme_fonction(n, g, ctx)
-    lignes.append(rf"Donc \({tex(n)} = {avec_abs} = {tex(g)}\).")
-    L, lg = _noeud(g, ctx)
-    return L, lignes + lg
+    ch = ctx.chaine(n)
+    ch.lim(avec_abs, r" ,\; ".join(rf"\sqrt{{{_entre_parentheses(tex(_arbre_poly(P)))}^{{2}}}} = |{tex(_arbre_poly(P))}|"
+                                    for P in dict((r.key(), P) for r, P in trouvees).values()))
+    ch.lim(tex(g), r" ,\; ".join(justs), g)
+    # g est une fraction de polynômes avec un facteur commun (x − a) : on simplifie dans la même chaîne
+    N, D = (_poly_ou_const(g.a), _poly_ou_const(g.b)) if isinstance(g, Op) and g.op == "/" else (None, None)
+    g2 = g
+    if N is not None and D is not None:
+        m, N2, D2 = _simplifier_par_x_moins_a(N, D, a)
+        if m:
+            g2 = _arbre_fraction(N2, D2)
+            fx = tex(_arbre_poly([-a, F(1)])) if a else "x"
+            ch.lim(tex(g2), rf"\text{{on simplifie par }} {fx} \text{{ (}} x \neq {pt.a_tex}\text{{)}}", g2)
+    L, narration = _noeud(g2, ctx)
+    avant = _conclure(ch, g2, L, ctx)
+    if ch.complete and n is ctx.f:
+        ctx.racine_dite = True
+    if ch.complete:
+        return L, [_ligne_fi(n, fi, ctx)] + avant + [ch]
+    return L, [_ligne_fi(n, fi, ctx)] + avant + [ch] + [l for l in narration if not _est_ligne_fi(l)]
+
+
+def _est_ligne_fi(l):
+    return isinstance(l, str) and "forme indéterminée" in l
 
 
 # --- méthode : expression conjuguée (∞ − ∞ en ±∞ ; 0/0 en une valeur) -----------------------------
@@ -1801,14 +2129,16 @@ def _conjuguee_difference(n, ctx, fi):
     g = Op("/", _arbre_poly(R), conj)
     _meme_fonction(n, g, ctx)
     carres = rf"{_entre_parentheses(_carre_tex(U))} - {_entre_parentheses(_carre_tex(V))}"
-    lignes = [
-        _ligne_fi(n, fi, ctx),
-        rf"On multiplie et on divise par l'expression conjuguée \({tex(conj)}\) :",
-        rf"\({tex(n)} = \dfrac{{\left({tex(n)}\right)\left({tex(conj)}\right)}}{{{tex(conj)}}} = "
-        rf"\dfrac{{{carres}}}{{{tex(conj)}}} = \dfrac{{{tex(g.a)}}}{{{tex(conj)}}}\).",
-    ]
-    L, lg = _noeud(g, ctx)
-    return L, lignes + lg
+    L, narration = _noeud(g, ctx)
+    ch = ctx.chaine(n)
+    ch.lim(rf"\dfrac{{\left({tex(n)}\right)\left({tex(conj)}\right)}}{{{tex(conj)}}}",
+           rf"\text{{on multiplie et on divise par la conjuguée }} {tex(conj)}")
+    ch.lim(rf"\dfrac{{{carres}}}{{{tex(conj)}}}", r"(a - b)(a + b) = a^{2} - b^{2}")
+    ch.lim(tex(g), None, g)
+    avant, apres = _prolonger(ch, g, L, narration, ctx)
+    if ch.complete and n is ctx.f:
+        ctx.racine_dite = True
+    return L, [_ligne_fi(n, fi, ctx)] + avant + [ch] + apres
 
 
 def _facteur_ou_vide(P):
@@ -1846,31 +2176,31 @@ def _conjuguee_zero_sur_zero(n, ctx, fi):
         R_tex = tex(_arbre_poly(R))
         if racine_au_numerateur:
             g = Op("/", _arbre_poly(R2), conj if not _facteur_ou_vide(Z2) else Op("*", _arbre_poly(Z2), conj))
-            egalites = (rf"\dfrac{{\left({tw}\right){tc}}}{{{_produit_tex(tz, tc)}}} = "
-                        rf"\dfrac{{{carres}}}{{{_produit_tex(tz, tc)}}} = \dfrac{{{R_tex}}}{{{_produit_tex(tz, tc)}}}")
+            egalites = (rf"\dfrac{{\left({tw}\right){tc}}}{{{_produit_tex(tz, tc)}}}",
+                        rf"\dfrac{{{carres}}}{{{_produit_tex(tz, tc)}}}", rf"\dfrac{{{R_tex}}}{{{_produit_tex(tz, tc)}}}")
             haut = _produit_tex(barre, _facteur_ou_vide(R2))
             bas = _produit_tex(barre, _facteur_ou_vide(Z2), tc)
         else:
             haut_g = Op("*", _arbre_poly(Z2), conj) if _facteur_ou_vide(Z2) else conj
             g = haut_g if not _facteur_ou_vide(R2) else Op("/", haut_g, _arbre_poly(R2))
-            egalites = (rf"\dfrac{{{_produit_tex(tz, tc)}}}{{\left({tw}\right){tc}}} = "
-                        rf"\dfrac{{{_produit_tex(tz, tc)}}}{{{carres}}} = \dfrac{{{_produit_tex(tz, tc)}}}{{{R_tex}}}")
+            egalites = (rf"\dfrac{{{_produit_tex(tz, tc)}}}{{\left({tw}\right){tc}}}",
+                        rf"\dfrac{{{_produit_tex(tz, tc)}}}{{{carres}}}", rf"\dfrac{{{_produit_tex(tz, tc)}}}{{{R_tex}}}")
             haut = _produit_tex(barre, _facteur_ou_vide(Z2), tc)
             bas = _produit_tex(barre, _facteur_ou_vide(R2))
         _meme_fonction(n, g, ctx)
         cote = "numérateur" if racine_au_numerateur else "dénominateur"
-        lignes = [
-            _ligne_fi(n, fi, ctx),
-            rf"On multiplie le numérateur et le dénominateur par l'expression conjuguée \({tex(conj)}\) du {cote} :",
-            rf"\({tex(n)} = {egalites}\).",
-            rf"On factorise et on simplifie par \({xa if a == 0 else chr(92) + 'left(' + xa + chr(92) + 'right)'}\) (pour \(x \neq {pt.a_tex}\)) : "
-            rf"\(f(x) = \dfrac{{{haut}}}{{{bas}}} = {tex(g)}\).",
-        ]
-        L, lg = _noeud(g, ctx)
-        if not lg:                                   # g est définie au point : sa valeur est la limite
-            sub, val = _tex_en(g, pt), L.tex(False)
-            lg = [rf"Quand \(x \to {pt.a_tex}\), \({tex(g)} \to {sub if sub == val else sub + ' = ' + val}\)."]
-        return L, lignes + lg
+        L, narration = _noeud(g, ctx)
+        ch = ctx.chaine(n)
+        etapes = egalites                              # (S1, S2, S3) selon la position de la racine
+        ch.lim(etapes[0], rf"\text{{on multiplie par la conjuguée }} {tex(conj)} \text{{ du {cote}}}")
+        ch.lim(etapes[1], r"(a - b)(a + b) = a^{2} - b^{2}")
+        ch.lim(etapes[2], None)
+        ch.lim(rf"\dfrac{{{haut}}}{{{bas}}}", rf"\text{{on factorise par }} \left({xa}\right)")
+        ch.lim(tex(g), rf"\text{{on simplifie}} \; (x \neq {pt.a_tex})", g)
+        avant, apres = _prolonger(ch, g, L, narration, ctx)
+        if ch.complete and n is ctx.f:
+            ctx.racine_dite = True
+        return L, [_ligne_fi(n, fi, ctx)] + avant + [ch] + apres
     return None
 
 
@@ -1964,12 +2294,12 @@ def _arbre_avec_coefficient(C, pur):
 
 
 REFERENCES = {
-    "exp_sur_puissance": (r"\lim_{x\to +\infty} \dfrac{e^{ax}}{x^{n}} = +\infty", r"pour \(a > 0\) et \(n > 0\)"),
-    "puissance_exp_neg": (r"\lim_{x\to +\infty} x^{n}e^{-ax} = 0", r"pour \(a > 0\) et \(n > 0\)"),
-    "puissance_exp_moins_inf": (r"\lim_{x\to -\infty} x^{n}e^{ax} = 0", r"pour \(a > 0\) et \(n\) entier positif"),
-    "ln_sur_puissance": (r"\lim_{x\to +\infty} \dfrac{\ln x}{x^{n}} = 0", r"pour \(n > 0\)"),
-    "puissance_sur_ln": (r"\lim_{x\to +\infty} \dfrac{x^{n}}{\ln x} = +\infty", r"pour \(n > 0\)"),
-    "puissance_ln_zero": (r"\lim_{x\to 0^{+}} x^{n}\ln x = 0", r"pour \(n > 0\)"),
+    "exp_sur_puissance": (r"\lim_{x\to +\infty} \dfrac{e^{ax}}{x^{n}} = +\infty", r"a > 0 \text{ et } n > 0"),
+    "puissance_exp_neg": (r"\lim_{x\to +\infty} x^{n}e^{-ax} = 0", r"a > 0 \text{ et } n > 0"),
+    "puissance_exp_moins_inf": (r"\lim_{x\to -\infty} x^{n}e^{ax} = 0", r"a > 0 \text{ et } n \text{ entier positif}"),
+    "ln_sur_puissance": (r"\lim_{x\to +\infty} \dfrac{\ln x}{x^{n}} = 0", r"n > 0"),
+    "puissance_sur_ln": (r"\lim_{x\to +\infty} \dfrac{x^{n}}{\ln x} = +\infty", r"n > 0"),
+    "puissance_ln_zero": (r"\lim_{x\to 0^{+}} x^{n}\ln x = 0", r"n > 0"),
 }
 
 
@@ -1994,7 +2324,7 @@ def _reference(N, B, q, pt):
 
 def _ligne_reference(nom):
     lim, cond = REFERENCES[nom]
-    return rf"limite de référence : \({lim}\) {cond}"
+    return rf"limite de référence : \({lim}\) pour \({cond}\)"
 
 
 def _comparee_pure(n, ctx, fi):
@@ -2019,21 +2349,27 @@ def _comparee_pure(n, ctx, fi):
     L = Lref if C > 0 else (_oppose(Lref) if not Lref.nul() else Lim.fin(0, -Lref.ap))
     if L.nul():
         L = Lim.fin(0, Lref.ap * (1 if C > 0 else -1))
-    ligne = rf"Par croissance comparée ({_ligne_reference(nom)}), \({tex(pur)} \to {Lref.tex(False)}\)"
+    lim_ref, cond = REFERENCES[nom]
+    ch = ctx.chaine(n)
+    just = rf"{tex(pur)} \to {Lref.tex(False)} \text{{ : croissance comparée, }} {lim_ref} \text{{ pour }} {cond}"
     if C != 1 or tex(pur) != tex(n):
-        ligne += rf", donc \({tex(n)} \to {L.tex(False)}\)"
-    return L, [_ligne_fi(n, fi, ctx), ligne + "."]
+        ch.lim(rf"{tex(_arbre_avec_coefficient(C, pur))}", None)
+    ch.val(L.tex(False), just)
+    ch.complete = True
+    if n is ctx.f:
+        ctx.racine_dite = True
+    return L, [_ligne_fi(n, fi, ctx), ch]
 
 
 def _comparee_avec_polynomes(n, ctx, fi, C, N, B, q, polys):
     """(x + 1)e^{-x} : on met x en évidence dans le polynôme, puis on conclut avec le produit sans polynôme."""
     sp = _sympy()
-    lignes, crochets = [_ligne_fi(n, fi, ctx)], None
+    egalites, crochets = [], None
     x = _SP["x"]
     for P, k in polys:
         m = deg(P)
         tete, interieur, complet, termes = _facteur_detaille(P, m)
-        lignes.append(rf"On met en évidence le terme de plus haut degré : \({ptex(P, 'x')} = {complet}\).")
+        egalites.append(rf"{ptex(P, 'x')} = {complet}")
         C, N = C * P[-1] ** k, N + m * k
         expr = sum(_rat(c) * x ** i for i, c in enumerate(P)) / (_rat(P[-1]) * x ** m)
         bt = arbre_depuis_sympy(sp.expand(expr))
@@ -2041,9 +2377,13 @@ def _comparee_avec_polynomes(n, ctx, fi, C, N, B, q, polys):
         crochets = facteur if crochets is None else Op("*", crochets, facteur)
     g = Op("*", _arbre_avec_coefficient(C, _arbre_pur(N, B, q)), crochets)
     _meme_fonction(n, g, ctx)
-    lignes.append(rf"Donc \({tex(n)} = {tex(g)}\).")
-    L, lg = _noeud(g, ctx)
-    return L, lignes + lg
+    L, narration = _noeud(g, ctx)
+    ch = ctx.chaine(n)
+    ch.lim(tex(g), ", ".join(egalites))
+    avant, apres = _prolonger(ch, g, L, narration, ctx)
+    if ch.complete and n is ctx.f:
+        ctx.racine_dite = True
+    return L, [_ligne_fi(n, fi, ctx)] + avant + [ch] + apres
 
 
 def _termes_de_somme(S, s):
@@ -2097,14 +2437,13 @@ def _evidence_exp(n, ctx, fi):
     s = ctx.pt.s
     if not s or not isinstance(n, Op):
         return None
-    lignes = [_ligne_fi(n, fi, ctx)]
     if n.op in "+-" and fi.nom == "∞ − ∞":
         r = _evidence_somme(n, s)
         if r is None:
             return None
         _, D, crochet = r
         g = Op("*", D, crochet)
-        lignes.append(rf"On met \({tex(D)}\) en évidence : \({tex(n)} = {tex(g)}\).")
+        just = rf"\text{{on met }} {tex(D)} \text{{ en évidence}}"
     elif n.op == "/" and fi.nom == "∞/∞":
         cotes = []
         for S in (n.a, n.b):
@@ -2121,23 +2460,24 @@ def _evidence_exp(n, ctx, fi):
         (C1, N1, B1, q1), (C2, N2, B2, q2) = cotes[0][1], cotes[1][1]
         pur = _arbre_avec_coefficient(C1 / C2, _arbre_pur(N1 - N2, B1 - B2, q1 - q2))
         morceaux = [(S, d, cr) for S, _, d, cr in cotes if d is not None]
-        evid = " et ".join(rf"\({tex(S)} = {tex(Op('*', d, cr))}\)" for S, d, cr in morceaux)
+        evid = " ,\\; ".join(rf"{tex(S)} = {tex(Op('*', d, cr))}" for S, d, cr in morceaux)
         cle_dom = tex(morceaux[0][1])
-        lignes.append(rf"On met \({cle_dom}\) en évidence : {evid}.")
         neutre = isinstance(pur, Nb) and pur.v == 1
         haut = [t for t in (None if neutre else pur, cotes[0][3]) if t is not None]
         g = haut[0] if len(haut) == 1 else (Op("*", haut[0], haut[1]) if haut else Nb(F(1)))
         if cotes[1][3] is not None:
             g = Op("/", g, cotes[1][3])
-        lignes.append(rf"Donc \({tex(n)} = {tex(g)}\).")
+        just = rf"\text{{on met }} {cle_dom} \text{{ en évidence}} ,\; {evid}"
     else:
         return None
     _meme_fonction(n, g, ctx)
-    L, lg = _noeud(g, ctx)
-    return L, lignes + lg
-
-
-
+    L, narration = _noeud(g, ctx)
+    ch = ctx.chaine(n)
+    ch.lim(tex(g), just, g)
+    avant, apres = _prolonger(ch, g, L, narration, ctx)
+    if ch.complete and n is ctx.f:
+        ctx.racine_dite = True
+    return L, [_ligne_fi(n, fi, ctx)] + avant + [ch] + apres
 
 
 # --- méthode : règle de Bernoulli-L'Hôpital (dernier recours), hypothèses vérifiées et écrites ---------
@@ -2310,16 +2650,25 @@ def _lhopital_avec(n, f, g, intro, nom, ctx, fi):
     ctx.nb_lhopital += 1
     try:
         L, lg = _noeud(q_arbre, ctx)
+        chA = Chaine(pt, r"\dfrac{f'(x)}{g'(x)}")
+        chA.lim(tex(q_arbre), None, q_arbre)
+        avant, apres = _prolonger(chA, q_arbre, L, lg, ctx)
     finally:
         ctx.nb_lhopital -= 1
-    if not lg:                                       # défini au point : sa valeur est la limite
-        sub, val = _tex_en(q_arbre, pt) if not pt.s else tex(q_arbre), L.tex(False)
-        lg = [rf"Quand \(x \to {pt.a_tex if not pt.s else pt.tex()}\), \({tex(q_arbre)} \to {sub if sub == val else sub + ' = ' + val}\)."]
     vers = pt.tex()
-    vers_lim = pt.a_tex if (pt.deux and not pt.s) else pt.tex()
     ens = ens_tex(I)
     point = rf"\({vers}\)" if pt.s else rf"\({pt.a_tex}\) (sauf peut-être en \({pt.a_tex}\))"
     nom_tex = rf"« \({FI_TEX[nom]}\) »"
+    chB = ctx.chaine(n)
+    if tex(n) != tex(Op("/", f, g)) and n is not ctx.f:
+        chB.lim(rf"\dfrac{{f(x)}}{{g(x)}}", None)
+    elif n is ctx.f and tex(n) != tex(Op("/", f, g)):
+        chB.lim(rf"\dfrac{{{tex(f)}}}{{{tex(g)}}}", None)
+    chB.lim(r"\dfrac{f'(x)}{g'(x)}", r"\text{règle de Bernoulli-L'Hôpital}")
+    chB.val(L.tex(False))
+    chB.complete = True
+    if n is ctx.f:
+        ctx.racine_dite = True
     lignes = intro + [
         rf"On applique la règle de Bernoulli-L'Hôpital avec \(f(x) = {tex(f)}\) et \(g(x) = {tex(g)}\). "
         r"Vérifions les hypothèses :",
@@ -2328,11 +2677,11 @@ def _lhopital_avec(n, f, g, intro, nom, ctx, fi):
         rf"On calcule \(f'(x) = {tex(f_arbre)}\) et \(g'(x) = {tex(g_arbre)}\).",
         (rf"(c) {texte_c}, donc \(g'(x) \neq 0\) au voisinage de {point} : vérifiée ;" if avec_donc
          else rf"(c) {texte_c} au voisinage de {point} : vérifiée ;"),
-        rf"(d) \(\dfrac{{f'(x)}}{{g'(x)}} = {tex(q_arbre)}\).",
-    ] + lg + [
-        rf"La limite de \(\dfrac{{f'(x)}}{{g'(x)}}\) existe et vaut \({L.tex(False)}\) : (d) est vérifiée.",
-        rf"D'après la règle de Bernoulli-L'Hôpital, \(\displaystyle\lim_{{x\to {vers_lim}}} \dfrac{{f(x)}}{{g(x)}} = "
-        rf"\lim_{{x\to {vers_lim}}} \dfrac{{f'(x)}}{{g'(x)}} = {L.tex(False)}\).",
+        r"(d) Calculons la limite de \(\dfrac{f'(x)}{g'(x)}\) :",
+    ] + avant + [chA] + apres + [
+        rf"La limite de \(\dfrac{{f'(x)}}{{g'(x)}}\) existe et vaut \({L.tex(False)}\) : (d) est vérifiée, "
+        r"donc la règle s'applique :",
+        chB,
     ]
     return L, [_ligne_fi(n, fi, ctx)] + lignes
 
@@ -2355,16 +2704,14 @@ def _simplifier_zero_sur_zero(n, ctx, fi):
     g = _arbre_fraction(N2, D2)
     haut = ("-" if N2 == [-1] else "") + _produit_tex(barre, "" if N2 in ([1], [-1]) else _facteur_ou_vide(N2))
     bas = ("-" if D2 == [-1] else "") + _produit_tex(barre, "" if D2 in ([1], [-1]) else _facteur_ou_vide(D2))
-    lignes = [
-        _ligne_fi(n, fi, ctx),
-        rf"On factorise le numérateur et le dénominateur par \(\left({xa}\right)\) et l'on simplifie (pour \(x \neq {pt.a_tex}\)) : "
-        rf"\({tex(n)} = \dfrac{{{haut}}}{{{bas}}} = {tex(g)}\).",
-    ]
-    L, lg = _noeud(g, ctx)
-    if not lg and not sans_x(g):
-        sub, val = _tex_en(g, pt), L.tex(False)
-        lg = [rf"Quand \(x \to {pt.a_tex}\), \({tex(g)} \to {sub if sub == val else sub + ' = ' + val}\)."]
-    return L, lignes + lg
+    L, narration = _noeud(g, ctx)
+    ch = ctx.chaine(n)
+    ch.lim(rf"\dfrac{{{haut}}}{{{bas}}}", rf"\text{{on factorise par }} \left({xa}\right)")
+    ch.lim(tex(g), rf"\text{{on simplifie}} \; (x \neq {pt.a_tex})", g)
+    avant = _conclure(ch, g, L, ctx)
+    if ch.complete and n is ctx.f:
+        ctx.racine_dite = True
+    return L, [_ligne_fi(n, fi, ctx)] + avant + [ch] + ([] if ch.complete else narration)
 
 
 # ordre du cours : mise en évidence, conjuguée, mise en évidence sous une racine, croissance comparée, L'Hôpital
@@ -2403,7 +2750,7 @@ def _lignes_pole(n, ctx, A, la, B, L):
         fin = rf"\({tex(n)} \to {fraction}\)"
     if lu is not None:
         mot = "positif" if lu > 0 else "négatif"
-        lignes.append(rf"{ctx.cote()}, le dénominateur est {mot} ({ctx.renvois[("den", n.b.key())]}) : "
+        lignes.append(rf"{ctx.cote()}, le dénominateur est {mot} ({ctx.renvois[('den', n.b.key())]}) : "
                       rf"il tend vers \(0^{{{s}}}\), donc {fin}.")
     else:
         lignes += ctx.justifier(n.b, B, force=True)
@@ -2527,7 +2874,7 @@ def _rediger(f, pt, ref, mode="limite"):
         L, lignes = _noeud(f, ctx)
         if not _meme_valeur(L, R):
             raise Abandon(f"valeur rédigée {L.tex()} ≠ référence {R.tex()}")
-        lignes = _sans_doublons(lignes)
+        lignes = _tout_texte(_sans_doublons(lignes))
         for genre, noeud in ctx.demandes:
             TABLEAUX.utiliser(genre, noeud)
         if mode == "limite" and not ctx.racine_dite:
@@ -2641,9 +2988,17 @@ def _narrer_cotes(f, borne, items, ref_de, cotes=("gauche", "droite")):
         premier = bloc[0]["html"]
         if premier.startswith(PHRASE_REPLI):
             premier = "l" + premier[1:]
-        bloc[0] = dict(bloc[0], html=prefixe + premier)
+        morceaux = _avec_prefixe(prefixe, premier)
+        bloc[:1] = [txt(l) for l in morceaux[:-1]] + [dict(bloc[0], html=morceaux[-1])]
         items.extend(bloc)
     return sortie
+
+
+def _avec_prefixe(prefixe, ligne):
+    """« À gauche : » devant une ligne ; devant une formule affichée (chaîne d'égalités), sur sa propre ligne."""
+    if ligne.startswith("\\["):
+        return [prefixe.strip(), ligne]
+    return [prefixe + ligne]
 
 
 def _fusion_cotes(gauche, droite):
@@ -2654,7 +3009,11 @@ def _fusion_cotes(gauche, droite):
     import re
     motif = re.compile(r"^À (?:gauche|droite) de (.+?), ")
 
+    unilatere = re.compile(r"\\lim_\{x\\to ([^{}]+?)\^\{[+-]\}\}")
+
     def normal(l):
+        if l.startswith("\\["):                  # chaîne d'égalités : la même calcul des deux côtés s'écrit une fois
+            return unilatere.sub(r"\\lim_{x\\to \1}", l)
         return motif.sub(r"@ de \1, ", l)
 
     sortie = []
@@ -2663,11 +3022,17 @@ def _fusion_cotes(gauche, droite):
         if tag == "equal":
             for lg, ld in zip(gauche[i1:i2], droite[j1:j2]):
                 m = motif.match(lg)
-                sortie.append(lg if lg == ld else motif.sub(rf"De part et d'autre de \1, ", lg) if m else lg)
+                if lg.startswith("\\["):
+                    sortie.append(normal(lg))
+                else:
+                    sortie.append(lg if lg == ld else motif.sub(rf"De part et d'autre de \1, ", lg) if m else lg)
             continue
         for lignes, prefixe in ((gauche[i1:i2], "À gauche : "), (droite[j1:j2], "À droite : ")):
             if lignes:
-                sortie.append(lignes[0] if motif.match(lignes[0]) else prefixe + lignes[0])
+                if motif.match(lignes[0]):
+                    sortie.append(lignes[0])
+                else:
+                    sortie.extend(_avec_prefixe(prefixe, lignes[0]))
                 sortie.extend(lignes[1:])
     return sortie
 
