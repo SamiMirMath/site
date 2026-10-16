@@ -104,7 +104,7 @@ f(x)     | +∞  ↘  −∞ ‖  ░░░░░░  ‖ −∞  ↗  +∞
 | EC-10 | Sur le corpus (liste DV-01 et exemples), chaque valeur écrite contre une barre ou en ±∞ est égale à la limite correspondante de la partie Limites quand celle-ci la donne ; sinon « ? » et la phrase | [auto-py] (propriété) |
 | EC-11 | La double barre est sur toutes les lignes de la colonne interdite, f'(x) comprise (C) | [auto-py] |
 | EC-12 | Les sorties de l'outil Dérivée sont identiques à avant T06c, sauf la double barre sur f'(x) à toute valeur interdite (instantanés relus un par un) | [auto-py] |
-| EC-13 | Rendu à 380 px sans défilement horizontal de la page, double barre continue | [auto-page] + [manuel] |
+| EC-13 | Rendu à 360 px **sans défilement horizontal** pour les tableaux à 1 ou 2 valeurs critiques (A, B, C, ln(x²−4)) ; plus larges : défilement avec la 1re colonne (libellés) fixe ; double barre continue ; même feuille `tableaux.css` pour les quatre outils ; valeurs jamais sous 0,85 em, aucune information supprimée | [manuel] (captures 360 et 900 px, 16.10.2026) ; feuille commune [auto-py] (`test_tableaux_css.py`) |
 
 ## Critères d'acceptation
 

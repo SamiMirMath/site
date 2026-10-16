@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Étude complète de fonction</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../tableaux.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
 <style>
@@ -55,26 +56,6 @@ details ul{margin:.4em 0 0;padding-left:1.2em}
 .final{border:2px solid var(--good)}
 .bilan{margin-top:8px}
 .bilan li{margin:6px 0}
-.tsigne{overflow-x:auto;margin:14px 0}
-.tsigne table{border-collapse:collapse;font-size:1.12rem}
-.tsigne td{border:1px solid var(--border);padding:9px 14px;text-align:center;white-space:nowrap;min-width:32px}
-.tsigne tr:first-child td{background:var(--eq)}
-.tsigne td.lab{text-align:left;padding-right:12px}
-.tsigne tr.final td{font-weight:700;border-top:2px solid var(--fg)}
-.tsigne tr.variation td{border-top:2px solid var(--fg)}
-.tsigne .p{color:var(--good);font-weight:700}
-.tsigne .m{color:var(--bad);font-weight:700}
-/* Double barre d'une valeur interdite : un seul trait double, centré dans la colonne (donc sous la valeur
-   écrite dans l'en-tête), continu d'une ligne à l'autre (le pseudo-élément recouvre les filets horizontaux). */
-.tsigne td.vi{position:relative;padding:5px 2px}
-.tsigne td.vi::after{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:3px;transform:translateX(-50%);border-left:2px solid var(--fg);border-right:2px solid var(--fg);background:var(--card);z-index:1;pointer-events:none}
-.tsigne .pt{color:var(--accent);font-weight:700}
-/* Limites contre une double barre (T06c) : une moitié de chaque côté du trait, qui reste centré. */
-.tsigne .lm{display:flex}
-.tsigne .lm>span{flex:1 1 0;min-width:2.4em;padding:0 9px}
-.tsigne .lm>.lg{text-align:right}
-.tsigne .lm>.ld{text-align:left}
-.tsigne .hors{background:repeating-linear-gradient(45deg,transparent 0 4px,var(--border) 4px 6px);color:var(--muted);-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .extrema{margin-top:10px;font-size:.98rem}
 .extrema li{margin:3px 0}
 #graphique{width:100%;height:380px;display:block;border-radius:8px;background:var(--eq)}
@@ -257,7 +238,7 @@ function tableau(t, lim){
   const colLim={}; ((lim&&lim.colonnes)||[]).forEach(c=>{ colLim[c.j]=c; });
   const val=v=>v==null?"":(v==="?"?"?":K(v));
   const cl=(s,j)=>{
-    if(s==="asym"&&colLim[j]) return `<td class="vi"><div class="lm"><span class="lg">${val(colLim[j].gauche)}</span><span class="ld">${val(colLim[j].droite)}</span></div></td>`;
+    if(s==="asym"&&colLim[j]) return `<td class="vi"><div class="lm"><span class="lg">${val(colLim[j].gauche)}<i aria-hidden="true">${val(colLim[j].droite)}</i></span><span class="ld">${val(colLim[j].droite)}<i aria-hidden="true">${val(colLim[j].gauche)}</i></span></div></td>`;
     if(s==="+") return '<td class="p">+</td>';
     if(s==="-") return '<td class="m">−</td>';
     if(s==="||"||s==="asym") return '<td class="vi"></td>';
