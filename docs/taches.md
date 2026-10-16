@@ -55,11 +55,12 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
   R7 (`459feef`, `6034f68`), Ensemble de définition R10 (`5190d98`, `2c58766`), Dérivée R11 (`bb1640e`).
   Les « termes dominants » sont supprimés (décidé le 15.10.2026). Critères LA-10 à LA-20.
   *Relecture de l'enseignant* : faite (exemples Limites, Dérivée et Ensemble de définition relus pendant la rédaction allégée).
-- **T06c — À FAIRE (aucun commit) — limites contre les doubles barres, dans l'Étude complète seulement** (décidé le 14.10.2026) :
-  sur la ligne f(x), écrire la limite contre la barre, du côté de l'ED (−∞ à gauche de la colonne −2
-  pour ln(x²−4)) ; « limite non déterminée automatiquement » si SymPy ne conclut pas ; la Dérivée
-  garde les flèches seules. À spécifier dans `etude-complete.md` avant de commencer (limites en ±∞ aux
-  extrémités de l'ED : non, seulement contre les barres).
+- **T06c — faite (`55a4730`, 16.10.2026) — limites contre les doubles barres et en ±∞ quand l'ED y va, dans
+  l'Étude complète seulement** (décidé le 14.10.2026, ±∞ ajouté le 16.10.2026, spec dans `etude-complete.md`) :
+  sur la ligne f(x), limite contre chaque double barre, du côté de l'ED (−∞ à gauche de la colonne −2 pour
+  ln(x²−4)), et limite en −∞ / +∞ sous l'en-tête ; « ? » et une phrase si SymPy ne conclut pas ; une seule
+  source de calcul (celle de la partie Limites), test sur le corpus (EC-10) ; la Dérivée garde les flèches
+  seules, mais la double barre figure maintenant sur f'(x) à toute valeur interdite (trou compris).
 - Tableau de signes de l'Ensemble de définition : **fait** (`2bb4da8`, `459feef`, `2c58766` : une ligne par
   facteur, barre simple pour un facteur non nul sur une colonne critique, double barre réservée aux valeurs interdites).
 - Dérivée d'une puissance d'exposant constant irrationnel : **faite** (α·u^(α−1)·u' ; ordre « ln 3 − 1 » `dbb6d93` ;
