@@ -715,16 +715,17 @@ class TestCroissanceComparee(unittest.TestCase):
 
 
 class TestLHopital(unittest.TestCase):
-    """L7 : règle de Bernoulli-L'Hôpital en dernier recours ; une parenthèse nomme les hypothèses (dérivables, g' ≠ 0, la limite de
-    f'/g' existe), la forme 0/0 ou ∞/∞ est annoncée en tête de chaîne (LA-15, LA-16)."""
+    """L7 : règle de Bernoulli-L'Hôpital en dernier recours ; une parenthèse nomme les hypothèses (dérivables, (g)' ≠ 0 ; f désigne
+    déjà la fonction étudiée : jamais « g'(x) » ni « f'/g' » dans la sortie), la forme 0/0 ou ∞/∞ est annoncée en tête de chaîne
+    (LA-15, LA-16)."""
 
     def test_exponentielle_moins_1_sur_x_en_0(self):
         t = textes("(e^x-1)/x", r"x \to 0")
         self.assertEqual(t, [
             r"\[\begin{aligned}\lim_{x\to 0} \frac{e^{x} - 1}{x} &= \text{« }\dfrac{e^{0} - 1}{0}\text{ »} = "
             r"\text{« }\dfrac{1 - 1}{0}\text{ »} = \text{« }\dfrac{0}{0}\text{ »}\text{ : forme indéterminée} \\ "
-            r"&= \lim_{x\to 0} e^{x} = e^{0} = 1 \qquad \left(\text{Bernoulli-L'Hôpital : } e^{x} - 1 \text{ et } x "
-            r"\text{ dérivables sur } \mathbb{R} ,\; g'(x) = 1 \neq 0 ,\; \text{la limite de } \dfrac{f'}{g'} \text{ existe}\right)"
+            r"&= \lim_{x\to 0} \frac{e^{x}}{1} = 1 \qquad \left(\text{Bernoulli-L'Hôpital : } e^{x} - 1 \text{ et } x "
+            r"\text{ dérivables sur } \mathbb{R} ,\; x' = 1 \neq 0\right)"
             r"\end{aligned}\]",
             r"Limite finie : pas d'asymptote verticale, trou dans le graphique en \((0\,;\,1)\).",
         ])
@@ -734,11 +735,17 @@ class TestLHopital(unittest.TestCase):
         self.assertEqual(t, [
             r"\[\begin{aligned}\lim_{x\to 1} \frac{\ln(x)}{x - 1} &= \text{« }\dfrac{\ln 1}{0}\text{ »} = "
             r"\text{« }\dfrac{0}{0}\text{ »}\text{ : forme indéterminée} \\ "
-            r"&= \lim_{x\to 1} \frac{1}{x} = \frac{1}{1} = 1 \qquad \left(\text{Bernoulli-L'Hôpital : } \ln(x) \text{ et } x - 1 "
-            r"\text{ dérivables sur } \left]0 \,;\, +\infty\right[ ,\; g'(x) = 1 \neq 0 ,\; \text{la limite de } \dfrac{f'}{g'} "
-            r"\text{ existe}\right)\end{aligned}\]",
+            r"&= \lim_{x\to 1} \frac{\frac{1}{x}}{1} = 1 \qquad \left(\text{Bernoulli-L'Hôpital : } \ln(x) \text{ et } x - 1 "
+            r"\text{ dérivables sur } \left]0 \,;\, +\infty\right[ ,\; \left(x - 1\right)' = 1 \neq 0\right)\end{aligned}\]",
             r"Limite finie : pas d'asymptote verticale, trou dans le graphique en \((1\,;\,1)\).",
         ])
+
+    def test_jamais_g_prime_de_x_ni_f_prime_sur_g_prime(self):
+        for entree, ou in [("(e^x-1)/x", r"x \to 0"), ("ln(x)/(x-1)", r"x \to 1"), ("x*ln(x^2)", r"x \to 0"), ("ln(x)^2/x", INF)]:
+            t = " ".join(textes(entree, ou))
+            self.assertIn("Bernoulli", t, entree)
+            for interdit in ["g'(x)", r"\dfrac{f'}{g'}", "f'/g'", "existe"]:
+                self.assertNotIn(interdit, t, (entree, interdit))
 
     def test_ln_de_trinome_sur_affine_ne_passe_plus_par_la_regle(self):     # retouche 2 : mise en évidence de ln, avant L'Hôpital
         for ou in (INF, MINF):
@@ -807,8 +814,8 @@ class TestLHopital(unittest.TestCase):
                     self.assertLessEqual(sum(e["html"].count("Bernoulli-L'Hôpital") for e in etude["etapes"]), 2)
 
     def test_garde_fou(self):
-        with mock.patch.object(la, "_arbre_propre", side_effect=lambda t: la.Nb(la.F(7))):
-            t = textes("(e^x-1)/x", r"x \to 0")
+        with mock.patch.object(la, "_arbre_propre", side_effect=lambda t: la.Nb(la.F(7))):     # 7/7 = 1 ≠ 2
+            t = textes("(e^(2x)-1)/x", r"x \to 0")
         self.assertTrue(any(REPLI[1:] in p for p in t))
         self.assertFalse(any("Bernoulli" in p for p in t))
 

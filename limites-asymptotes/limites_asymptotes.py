@@ -2684,12 +2684,14 @@ def _intervalle_derivable(f, g, ctx):
     return voisins
 
 
-def _g_prime_non_nul(gp, I, ctx):
-    """Tex qui établit g'(x) ≠ 0 au voisinage du point d'étude (sauf peut-être en lui), ou None."""
+def _g_prime_non_nul(g, gp, I, ctx):
+    """Tex qui établit que la dérivée du dénominateur ne s'annule pas au voisinage du point d'étude (sauf peut-être en lui),
+    écrite (g)' = … ≠ 0 (f désigne déjà la fonction étudiée : ni « g'(x) » ni « f'/g' »), ou None."""
     pt = ctx.pt
+    deriv = rf"{tex(g)}'" if isinstance(g, X) else rf"\left({tex(g)}\right)'"
     if sans_x(gp):
         v = valeur_constante(gp)
-        return rf"g'(x) = {tex(gp)} \neq 0" if v else None
+        return rf"{deriv} = {tex(gp)} \neq 0" if v else None
     try:
         D, P, Z, _, _ = signe_facteur(gp, "x")
         Z = fusion(inter(Z, I))
@@ -2700,7 +2702,7 @@ def _g_prime_non_nul(gp, I, ctx):
         return None
     if Z:
         return None
-    return rf"g'(x) = {tex(gp)} \text{{ ne s'annule pas sur }} {ens_tex(I)}"
+    return rf"{deriv} = {tex(gp)} \text{{ ne s'annule pas sur }} {ens_tex(I)}"
 
 
 def _nettoyer_arbre(t):
@@ -2798,20 +2800,38 @@ def _lhopital_avec(n, f, g, intro, nom, ctx, fi):
     except Exception:
         return None
     # (c) g' ≠ 0 au voisinage
-    texte_c = _g_prime_non_nul(g_arbre, I, ctx)
+    texte_c = _g_prime_non_nul(g, g_arbre, I, ctx)
     if texte_c is None:
         return None
     ctx.nb_lhopital += 1
+    brut = None
     try:
+        if sans_x(g_arbre):                              # g' constante : on garde f'/g' tel quel, (1/x)/1, si la substitution suffit
+            brut = Op("/", f_arbre, g_arbre)
+            c0 = len(ctx.cf)
+            try:
+                Lb, lgb = _noeud(brut, ctx)
+            except Abandon:
+                Lb = None
+            if Lb is not None and not any(isinstance(l, Chaine) for l in lgb):
+                q_arbre = brut
+            else:
+                brut = None
+                del ctx.cf[c0:]
         L, lg = _noeud(q_arbre, ctx)
         ch = ctx.chaine(n)
         if intro:                                        # produit mis en quotient : u·v = u/(1/v)
             ch.lim(rf"\dfrac{{{tex(f)}}}{{{tex(g)}}}", rf"\text{{on écrit un quotient de la forme }} « \infty/\infty »"
                    if nom == "∞/∞" else r"\text{on écrit un quotient de la forme } « 0/0 »", Op("/", f, g))
         hyp = (rf"\text{{Bernoulli-L'Hôpital : }} {tex(f)} \text{{ et }} {tex(g)} \text{{ dérivables sur }} {ens_tex(I)} ,\; "
-               rf"{texte_c} ,\; \text{{la limite de }} \dfrac{{f'}}{{g'}} \text{{ existe}}")
+               rf"{texte_c}")
         ch.lim(tex(q_arbre), hyp, q_arbre)
-        avant, apres = _prolonger(ch, q_arbre, L, lg, ctx)
+        if brut is not None:                             # (1/x)/1 = 1 : la valeur suit directement, sans substitution
+            ch.val(L.tex(False), force=True)
+            ch.complete = True
+            avant, apres = list(lg), []
+        else:
+            avant, apres = _prolonger(ch, q_arbre, L, lg, ctx)
     finally:
         ctx.nb_lhopital -= 1
     _annoncer(ch, n, fi, ctx)

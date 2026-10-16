@@ -56,9 +56,13 @@ signe de chaque facteur ». Avant le tableau, une seule ligne : zéros et valeur
 tend vers 0, même affine** (x − 3, x − 5), en tête de l'étude. Justification courte dans la ligne de la
 limite : `(x − 3 < 0 : cf. tableau de signes)`.
 
-**R9. Bernoulli-L'Hôpital** : forme annoncée (R2), puis `= lim f'/g'` avec les hypothèses toutes
-nommées en une parenthèse (dérivables sur …, g' ≠ 0 au voisinage) ; l'existence de lim f'/g' est la
-chaîne elle-même. Si une hypothèse n'est pas vérifiée, la règle n'est pas appliquée (phrase de repli).
+**R9. Bernoulli-L'Hôpital** : forme annoncée (R2), puis `= lim` du quotient des dérivées, avec les
+hypothèses toutes nommées en une parenthèse (dérivables sur …, `(dénominateur)' ≠ 0`). f désigne déjà
+la fonction étudiée : jamais « f'/g' » ni « g'(x) » dans la sortie ; le dénominateur est nommé par son
+expression, `(x − 1)' = 1 ≠ 0`. Quand la dérivée du dénominateur est une constante, le quotient est
+écrit tel quel, `(1/x)/1`, et la valeur suit directement. Chaque membre de la chaîne garde son
+`lim_(x→a)`. L'existence de la limite du quotient des dérivées est la chaîne elle-même (pas de phrase).
+Si une hypothèse n'est pas vérifiée, la règle n'est pas appliquée (phrase de repli).
 
 **R10. Ensemble de définition** : une carte par condition, sans phrase de rappel de la règle, « condition
 ⇔ solution » ; une racine au dénominateur = une seule condition A > 0 ; Δ au plus une fois, en une ligne ;
@@ -183,8 +187,7 @@ Asymptote horizontale : y = 0.
 
 ```
 lim_(x→1) ln(x)/(x − 1) = « ln 1/0 » = « 0/0 » : forme indéterminée
-   = lim_(x→1) (1/x)/1          (Bernoulli-L'Hôpital : ln x et x − 1 dérivables sur ]0 ; +∞[, (x − 1)' = 1 ≠ 0)
-   = 1
+   = lim_(x→1) (1/x)/1 = 1      (Bernoulli-L'Hôpital : ln x et x − 1 dérivables sur ]0 ; +∞[, (x − 1)' = 1 ≠ 0)
 Limite finie : pas d'asymptote verticale, trou dans le graphique en (1 ; 1).
 ```
 

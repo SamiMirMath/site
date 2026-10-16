@@ -73,6 +73,8 @@ Chaque limite affichée est rédigée par la **première méthode du cours qui s
    (sauf peut-être en a) ; (c) g'(x) ≠ 0 au voisinage de a (sauf peut-être en a) ; (d) lim f'/g' existe
    (finie ou infinie), alors lim f/g = lim f'/g'. Au plus deux applications de suite. Si une hypothèse
    n'est pas vérifiée ou si lim f'/g' n'existe pas, la règle n'est pas appliquée et ne conclut rien.
+   Dans la sortie, f désigne la fonction étudiée : jamais « f'/g' » ni « g'(x) » ; les hypothèses s'écrivent
+   « (x − 1)' = 1 ≠ 0 » (guide de rédaction, R9).
 
 **Pas d'équivalent** (décidé le 15.10.2026). Ni le symbole ∼, ni le mot « équivalent », ni « se comporte
 comme », dans aucune sortie. La méthode « termes dominants » est supprimée : tout passe par la mise en
