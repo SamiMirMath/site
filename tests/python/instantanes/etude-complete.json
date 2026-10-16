@@ -177,7 +177,19 @@
    "ok": true,
    "tableaux_signe": []
   },
-  "ok": true
+  "ok": true,
+  "variations_limites": {
+   "colonnes": [
+    {
+     "droite": "1",
+     "gauche": "1",
+     "j": 1
+    }
+   ],
+   "moins_inf": "0",
+   "non_determinees": [],
+   "plus_inf": "+\\infty"
+  }
  },
  "(x^2-1)/(x-3)": {
   "derivee": {
@@ -439,7 +451,19 @@
     }
    ]
   },
-  "ok": true
+  "ok": true,
+  "variations_limites": {
+   "colonnes": [
+    {
+     "droite": "+\\infty",
+     "gauche": "-\\infty",
+     "j": 3
+    }
+   ],
+   "moins_inf": "-\\infty",
+   "non_determinees": [],
+   "plus_inf": "+\\infty"
+  }
  },
  "3(x*ln(x))": {
   "derivee": {
@@ -618,7 +642,19 @@
    "ok": true,
    "tableaux_signe": []
   },
-  "ok": true
+  "ok": true,
+  "variations_limites": {
+   "colonnes": [
+    {
+     "droite": "0",
+     "gauche": null,
+     "j": 1
+    }
+   ],
+   "moins_inf": null,
+   "non_determinees": [],
+   "plus_inf": "+\\infty"
+  }
  },
  "e^(1/x)": {
   "derivee": {
@@ -825,7 +861,19 @@
     }
    ]
   },
-  "ok": true
+  "ok": true,
+  "variations_limites": {
+   "colonnes": [
+    {
+     "droite": "+\\infty",
+     "gauche": "0",
+     "j": 1
+    }
+   ],
+   "moins_inf": "1",
+   "non_determinees": [],
+   "plus_inf": "1"
+  }
  },
  "e^(2x)": {
   "derivee": {
@@ -942,7 +990,13 @@
    "ok": true,
    "tableaux_signe": []
   },
-  "ok": true
+  "ok": true,
+  "variations_limites": {
+   "colonnes": [],
+   "moins_inf": "0",
+   "non_determinees": [],
+   "plus_inf": "+\\infty"
+  }
  },
  "ln(x)/x": {
   "derivee": {
@@ -1154,7 +1208,19 @@
     }
    ]
   },
-  "ok": true
+  "ok": true,
+  "variations_limites": {
+   "colonnes": [
+    {
+     "droite": "-\\infty",
+     "gauche": null,
+     "j": 1
+    }
+   ],
+   "moins_inf": null,
+   "non_determinees": [],
+   "plus_inf": "0"
+  }
  },
  "sqrt(x^2-4)": {
   "derivee": {
@@ -1374,7 +1440,13 @@
    "ok": true,
    "tableaux_signe": []
   },
-  "ok": true
+  "ok": true,
+  "variations_limites": {
+   "colonnes": [],
+   "moins_inf": "+\\infty",
+   "non_determinees": [],
+   "plus_inf": "+\\infty"
+  }
  },
  "x*ln(x)": {
   "derivee": {
@@ -1535,7 +1607,19 @@
    "ok": true,
    "tableaux_signe": []
   },
-  "ok": true
+  "ok": true,
+  "variations_limites": {
+   "colonnes": [
+    {
+     "droite": "0",
+     "gauche": null,
+     "j": 1
+    }
+   ],
+   "moins_inf": null,
+   "non_determinees": [],
+   "plus_inf": "+\\infty"
+  }
  },
  "x/(x^2+1)": {
   "derivee": {
@@ -1732,7 +1816,13 @@
    "ok": true,
    "tableaux_signe": []
   },
-  "ok": true
+  "ok": true,
+  "variations_limites": {
+   "colonnes": [],
+   "moins_inf": "0",
+   "non_determinees": [],
+   "plus_inf": "0"
+  }
  },
  "x/sqrt(x^2)": {
   "derivee": {
@@ -1921,7 +2011,19 @@
    "ok": true,
    "tableaux_signe": []
   },
-  "ok": true
+  "ok": true,
+  "variations_limites": {
+   "colonnes": [
+    {
+     "droite": "1",
+     "gauche": "-1",
+     "j": 1
+    }
+   ],
+   "moins_inf": "-1",
+   "non_determinees": [],
+   "plus_inf": "1"
+  }
  },
  "x^(2/3)": {
   "derivee": {
@@ -2054,7 +2156,13 @@
    "ok": true,
    "tableaux_signe": []
   },
-  "ok": true
+  "ok": true,
+  "variations_limites": {
+   "colonnes": [],
+   "moins_inf": "+\\infty",
+   "non_determinees": [],
+   "plus_inf": "+\\infty"
+  }
  },
  "x^2*e^(-x)": {
   "derivee": {
@@ -2245,7 +2353,13 @@
    "ok": true,
    "tableaux_signe": []
   },
-  "ok": true
+  "ok": true,
+  "variations_limites": {
+   "colonnes": [],
+   "moins_inf": "+\\infty",
+   "non_determinees": [],
+   "plus_inf": "0"
+  }
  },
  "x^2-4x+3": {
   "derivee": {
@@ -2396,7 +2510,13 @@
    "ok": true,
    "tableaux_signe": []
   },
-  "ok": true
+  "ok": true,
+  "variations_limites": {
+   "colonnes": [],
+   "moins_inf": "+\\infty",
+   "non_determinees": [],
+   "plus_inf": "+\\infty"
+  }
  },
  "x^3-3x": {
   "derivee": {
@@ -2573,7 +2693,13 @@
    "ok": true,
    "tableaux_signe": []
   },
-  "ok": true
+  "ok": true,
+  "variations_limites": {
+   "colonnes": [],
+   "moins_inf": "-\\infty",
+   "non_determinees": [],
+   "plus_inf": "+\\infty"
+  }
  },
  "x^4-2x^2": {
   "derivee": {
@@ -2788,6 +2914,12 @@
    "ok": true,
    "tableaux_signe": []
   },
-  "ok": true
+  "ok": true,
+  "variations_limites": {
+   "colonnes": [],
+   "moins_inf": "+\\infty",
+   "non_determinees": [],
+   "plus_inf": "+\\infty"
+  }
  }
 }

@@ -721,6 +721,11 @@ def etudier(entree):
             colonne = [l["cells"][2 * i + 1] for l in lignes]
             combinee.append("x" if "x" in colonne else "||" if "||" in colonne else "0" if "0" in colonne else
                              ("-" if colonne.count("-") % 2 else "+"))
+    # Valeur interdite de f : double barre sur f'(x) aussi quand aucune ligne de facteur ne la porte
+    # (trou de (x²−1)/(x−1), où f' = 1).
+    for j in range(1, 2 * k + 1, 2):
+        if combinee[j] not in ("x", "||") and not contient(ED, crit[j // 2].val):
+            combinee[j] = "||"
     # f' identiquement nulle (f constante sur chaque morceau de son ED) : « 0 » sur chaque
     # intervalle de l'ED, « || » aux valeurs interdites, hors de l'ED la case est barrée.
     f_constante = valeur_constante(fprime) == 0

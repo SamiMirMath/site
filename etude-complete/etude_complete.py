@@ -100,6 +100,35 @@ def _cadrage_et_courbe(f, ED, extrema, asymptotes):
     return {"xmin": xmin, "xmax": xmax, "ymin": ymin, "ymax": ymax, "segments": segments}
 
 
+def limites_du_tableau(table, bornes):
+    """T06c : limites à écrire sur la ligne f(x) du tableau de variations. Les valeurs sont celles de la
+    partie Limites (`bornes`, même calcul) ; ici on ne fait que les placer.
+    - colonnes : pour chaque valeur interdite (double barre), la limite à gauche et à droite, `None` du
+      côté d'une zone hors de l'ED (hachurée) ;
+    - moins_inf / plus_inf : limite en −∞ / +∞ quand l'ED y va ;
+    - non_determinees : bornes (tex) dont la limite est « ? » (phrase sous le tableau)."""
+    cells = next(l["cells"] for l in table["rows"] if l.get("variation"))
+    crit = table["crit"]
+    res = {"colonnes": [], "moins_inf": None, "plus_inf": None, "non_determinees": []}
+    for b in bornes:
+        if b["type"] == "inf":
+            res["moins_inf" if b["signe"] < 0 else "plus_inf"] = b["tex"]
+            if b["tex"] == "?":
+                res["non_determinees"].append(r"-\infty" if b["signe"] < 0 else r"+\infty")
+            continue
+        if b["point_tex"] not in crit:
+            continue
+        j = 2 * crit.index(b["point_tex"]) + 1
+        col = {"j": j, "gauche": None, "droite": None}
+        for cote, voisine, signe in (("gauche", j - 1, "-"), ("droite", j + 1, "+")):
+            if b.get(cote) is not None and cells[voisine] != "x":
+                col[cote] = b[cote]
+                if b[cote] == "?":
+                    res["non_determinees"].append(f"{b['point_tex']}^{{{signe}}}")
+        res["colonnes"].append(col)
+    return res
+
+
 def etudier(entree):
     try:
         f = lire(entree)
@@ -115,9 +144,10 @@ def etudier(entree):
     r_dv = dv.etudier(entree)
     if not r_dv.get("ok"):
         return r_dv
-    r_la = la.etudier(entree)
+    r_la = la.etudier(entree, avec_bornes=True)
     if not r_la.get("ok"):
         return r_la
+    bornes = r_la.pop("limites_bornes")    # hors de la partie Limites, qui reste celle de l'outil séparé
 
     res = {
         "ok": True,
@@ -127,6 +157,8 @@ def etudier(entree):
         "limites": r_la,
     }
     ajouter_saisie(res, f)
+    if r_dv.get("signe_resolu"):
+        res["variations_limites"] = limites_du_tableau(r_dv["table_signe"], bornes)
     res["graphique"] = _cadrage_et_courbe(f, ED, r_dv.get("extrema", []), r_la.get("asymptotes", []))
     return res
 

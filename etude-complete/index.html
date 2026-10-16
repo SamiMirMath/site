@@ -69,6 +69,11 @@ details ul{margin:.4em 0 0;padding-left:1.2em}
 .tsigne td.vi{position:relative;padding:5px 2px}
 .tsigne td.vi::after{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:3px;transform:translateX(-50%);border-left:2px solid var(--fg);border-right:2px solid var(--fg);background:var(--card);z-index:1;pointer-events:none}
 .tsigne .pt{color:var(--accent);font-weight:700}
+/* Limites contre une double barre (T06c) : une moitié de chaque côté du trait, qui reste centré. */
+.tsigne .lm{display:flex}
+.tsigne .lm>span{flex:1 1 0;min-width:2.4em;padding:0 9px}
+.tsigne .lm>.lg{text-align:right}
+.tsigne .lm>.ld{text-align:left}
 .tsigne .hors{background:repeating-linear-gradient(45deg,transparent 0 4px,var(--border) 4px 6px);color:var(--muted);-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .extrema{margin-top:10px;font-size:.98rem}
 .extrema li{margin:3px 0}
@@ -247,9 +252,12 @@ $("exemples").addEventListener("click",e=>{ const b=e.target.closest("button"); 
 $("calculer").onclick=calculer;
 
 /* ---------- rendu des tableaux (signe + variations) ---------- */
-function tableau(t){
+function tableau(t, lim){
   const k=t.crit.length;
-  const cl=s=>{
+  const colLim={}; ((lim&&lim.colonnes)||[]).forEach(c=>{ colLim[c.j]=c; });
+  const val=v=>v==null?"":(v==="?"?"?":K(v));
+  const cl=(s,j)=>{
+    if(s==="asym"&&colLim[j]) return `<td class="vi"><div class="lm"><span class="lg">${val(colLim[j].gauche)}</span><span class="ld">${val(colLim[j].droite)}</span></div></td>`;
     if(s==="+") return '<td class="p">+</td>';
     if(s==="-") return '<td class="m">−</td>';
     if(s==="||"||s==="asym") return '<td class="vi"></td>';
@@ -264,7 +272,8 @@ function tableau(t){
   h+='<td></td><td>'+K("+\\infty")+'</td></tr>';
   t.rows.forEach(r=>{
     const classe=r.final?"final":r.variation?"variation":"";
-    h+=`<tr class="${classe}"><td class="lab">${K(r.label)}</td><td></td>`+r.cells.map(cl).join("")+'<td></td></tr>';
+    const bord=v=>`<td>${r.variation&&lim&&v!=null?val(v):""}</td>`;
+    h+=`<tr class="${classe}"><td class="lab">${K(r.label)}</td>${bord(lim&&lim.moins_inf)}`+r.cells.map(cl).join("")+bord(lim&&lim.plus_inf)+'</tr>';
   });
   return h+'</table></div>';
 }
@@ -283,11 +292,12 @@ function carteDerivee(dv){
   h+=`<div class="res">${K("f'(x) = "+dv.deriv_tex)}</div>`;
   d.innerHTML=h; math(d); return d;
 }
-function carteSigneVariations(dv){
+function carteSigneVariations(dv, lim){
   const d=document.createElement("div"); d.className="card cond";
   let h=`<h3>Signe de f' et variations<span class="badge">tableau</span></h3>`;
   dv.signe_etapes.forEach(it=>{ h+= it.type==="tableau"?tableau(it):`<div class="etape">${it.html}</div>`; });
-  h+=tableau(dv.table_signe);
+  h+=tableau(dv.table_signe, lim);
+  ((lim&&lim.non_determinees)||[]).forEach(o=>{ h+=`<div class="hint">Limite non déterminée automatiquement en ${K(o)}.</div>`; });
   if(dv.extrema.length){
     h+='<ul class="extrema">'+dv.extrema.map(e=>
       `<li>${e.genre} en \\(x=${e.x_tex}\\) : \\(f(${e.x_tex})=${e.f_tex}\\)</li>`).join("")+'</ul>';
@@ -643,7 +653,7 @@ function afficher(r){
   cartes.push(carteRappel(r));
   if(r.derivee.deriv_resolu){
     cartes.push(carteDerivee(r.derivee));
-    if(r.derivee.signe_resolu) cartes.push(carteSigneVariations(r.derivee));
+    if(r.derivee.signe_resolu) cartes.push(carteSigneVariations(r.derivee, r.variations_limites));
   }
   if((r.limites.tableaux_signe||[]).length) cartes.push(carteTableaux(r.limites.tableaux_signe));
   r.limites.etudes.forEach(et=>cartes.push(carteLimiteEtude(et)));

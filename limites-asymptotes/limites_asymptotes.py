@@ -3238,7 +3238,18 @@ def _bilan_deux_cotes(point, cote_tex, val, vval, items):
 # =====================================================================
 # Point d'entrée
 # =====================================================================
-def etudier(entree):
+def _valeurs_pole(asym, cote):
+    """Limites latérales (gauche/droite, selon `cote`) d'une étude rationnelle en un point fini :
+    trou = même valeur des deux côtés, pôle = signe de chaque côté, étude sans conclusion = « ? »."""
+    cotes = ("gauche", "droite") if cote == "deux" else (cote,)
+    if asym is None:
+        return {c: "?" for c in cotes}
+    if asym["genre"] == "trou":
+        return {c: asym["valeur_tex"] for c in cotes}
+    return {c: asym[c + "_tex"] for c in cotes}
+
+
+def etudier(entree, avec_bornes=False):
     try:
         f = lire(entree)
     except ErreurSaisie as e:
@@ -3252,6 +3263,7 @@ def etudier(entree):
 
     TABLEAUX.reset()
     res = ajouter_saisie({"ok": True, "f_tex": tex(f), "ed_tex": res_ed["ED_tex"], "etudes": [], "asymptotes": []}, f)
+    bornes_val = []
 
     try:
         dec = decomposer(f)
@@ -3270,8 +3282,10 @@ def etudier(entree):
                 asym = _etude_rationnelle_infini(f, N, D, borne["signe"], items, vues)
                 asym["ou"] = cote_tex
                 res["asymptotes"].append(asym)
+                val_borne = asym["valeur_tex"]
             else:
                 val_tex, inf, extra, vval = _etude_transcendante(f, borne, items)
+                val_borne = val_tex
                 if val_tex == "?":
                     pass  # limite non déterminée : jamais une asymptote
                 elif inf is False:
@@ -3291,8 +3305,10 @@ def etudier(entree):
                 if asym is not None:
                     asym["ou"] = cote_tex
                     res["asymptotes"].append(asym)
+                val_borne = _valeurs_pole(asym, cote)
             else:
                 val, inf, _, vval = _etude_transcendante(f, borne, items)
+                val_borne = val if cote == "deux" else {cote: val}
                 if cote == "deux":
                     asym = _bilan_deux_cotes(point, cote_tex, val, vval, items)
                 else:
@@ -3307,9 +3323,20 @@ def etudier(entree):
                 if asym is not None:
                     res["asymptotes"].append(asym)
 
+        # Valeurs de cette borne, reprises telles quelles par le tableau de variations de l'Étude complète
+        # (T06c) : une seule source de calcul, jamais un second calcul indépendant. « ? » : non déterminée.
+        if borne["type"] == "inf":
+            bornes_val.append({"type": "inf", "signe": borne["signe"], "tex": val_borne})
+        else:
+            cotes = {"gauche": val_borne[0], "droite": val_borne[1]} if isinstance(val_borne, tuple) else val_borne
+            bornes_val.append({"type": "fini", "point_tex": point.tex, "point_val": point.val,
+                               "gauche": cotes.get("gauche"), "droite": cotes.get("droite")})
+
         res["etudes"].append({"ou": cote_tex, "etapes": items})
 
     res["tableaux_signe"] = TABLEAUX.items()
+    if avec_bornes:       # réservé à l'Étude complète : la sortie de l'outil Limites reste inchangée
+        res["limites_bornes"] = bornes_val
     return res
 
 
