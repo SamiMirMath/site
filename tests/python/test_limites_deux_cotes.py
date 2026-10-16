@@ -77,8 +77,7 @@ class TestVocabulaireQ7(unittest.TestCase):
             with self.subTest(f=entree):
                 _, textes, genres = textes_et_genres(entree)
                 self.assertIn("trou", genres)
-                dernier = next(t for t in textes if "sa limite y est finie" in t)
-                self.assertIn("f n'est pas définie en", dernier)
+                dernier = next(t for t in textes if t.startswith("Limite finie"))
                 self.assertIn("pas d'asymptote verticale, trou dans le graphique en", dernier)
 
     def test_formulation_sans_limite(self):

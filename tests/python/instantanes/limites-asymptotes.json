@@ -27,15 +27,11 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur \\(2x + 1\\) tend vers \\(-\\infty\\) et le dénominateur \\(x - 1\\) tend vers \\(-\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{2x + 1}{x - 1} &= \\text{« }\\dfrac{-\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x\\,\\left(2 + \\frac{1}{x}\\right)}{x\\,\\left(1 - \\frac{1}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{2 + \\frac{1}{x}}{1 - \\frac{1}{x}} = 2\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} f(x) &= \\lim_{x\\to -\\infty} \\dfrac{2x\\,\\left(1 + \\frac{1}{2x}\\right)}{x\\,\\left(1 - \\frac{1}{x}\\right)} \\qquad \\left(2x + 1 = 2x\\,\\left(1 + \\frac{1}{2x}\\right) ,\\; x - 1 = x\\,\\left(1 - \\frac{1}{x}\\right)\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{2\\left(1 + \\frac{1}{2x}\\right)}{1 - \\frac{1}{x}} = \\dfrac{2 \\cdot 1}{1} = 2 \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{1}{2x} \\to 0 \\; ;\\; \\frac{1}{x} \\to 0\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale d'équation \\(y = 2\\).",
+      "html": "Asymptote horizontale : \\(y = 2\\).",
       "type": "texte"
      }
     ],
@@ -44,15 +40,11 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur \\(2x + 1\\) tend vers \\(+\\infty\\) et le dénominateur \\(x - 1\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{2x + 1}{x - 1} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x\\,\\left(2 + \\frac{1}{x}\\right)}{x\\,\\left(1 - \\frac{1}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{2 + \\frac{1}{x}}{1 - \\frac{1}{x}} = 2\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} f(x) &= \\lim_{x\\to +\\infty} \\dfrac{2x\\,\\left(1 + \\frac{1}{2x}\\right)}{x\\,\\left(1 - \\frac{1}{x}\\right)} \\qquad \\left(2x + 1 = 2x\\,\\left(1 + \\frac{1}{2x}\\right) ,\\; x - 1 = x\\,\\left(1 - \\frac{1}{x}\\right)\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{2\\left(1 + \\frac{1}{2x}\\right)}{1 - \\frac{1}{x}} = \\dfrac{2 \\cdot 1}{1} = 2 \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{1}{2x} \\to 0 \\; ;\\; \\frac{1}{x} \\to 0\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale d'équation \\(y = 2\\).",
+      "html": "Asymptote horizontale : \\(y = 2\\).",
       "type": "texte"
      }
     ],
@@ -61,23 +53,15 @@
    {
     "etapes": [
      {
-      "html": "\\(x = 1\\) est une valeur interdite.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 1^{-}} \\frac{2x + 1}{x - 1} = \\text{« }\\dfrac{3}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x - 1 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Le numérateur \\(2x + 1\\) vaut \\(2 \\cdot 1 + 1 = 3\\) et le dénominateur \\(x - 1\\) tend vers \\(0\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 1^{+}} \\frac{2x + 1}{x - 1} = \\text{« }\\dfrac{3}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x - 1 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "À gauche de \\(1\\), le dénominateur est négatif (cf. tableau de signes de \\(x - 1\\)) : il tend vers \\(0^{-}\\), donc \\(f(x) \\to \\dfrac{3}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "À droite de \\(1\\), le dénominateur est positif (cf. tableau de signes de \\(x - 1\\)) : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{3}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote verticale d'équation \\(x = 1\\).",
+      "html": "Asymptote verticale : \\(x = 1\\).",
       "type": "texte"
      }
     ],
@@ -147,15 +131,11 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur \\(2x^{2} + 1\\) tend vers \\(+\\infty\\) et le dénominateur \\(x^{2} - 1\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{2x^{2} + 1}{x^{2} - 1} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x^{2}\\,\\left(2 + \\frac{1}{x^{2}}\\right)}{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{2 + \\frac{1}{x^{2}}}{1 - \\frac{1}{x^{2}}} = 2\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} f(x) &= \\lim_{x\\to -\\infty} \\dfrac{2x^{2}\\,\\left(1 + \\frac{1}{2x^{2}}\\right)}{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)} \\qquad \\left(2x^{2} + 1 = 2x^{2}\\,\\left(1 + \\frac{1}{2x^{2}}\\right) ,\\; x^{2} - 1 = x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{2\\left(1 + \\frac{1}{2x^{2}}\\right)}{1 - \\frac{1}{x^{2}}} = \\dfrac{2 \\cdot 1}{1} = 2 \\qquad \\left(\\text{on simplifie par } x^{2} \\; ;\\; \\frac{1}{2x^{2}} \\to 0 \\; ;\\; \\frac{1}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale d'équation \\(y = 2\\).",
+      "html": "Asymptote horizontale : \\(y = 2\\).",
       "type": "texte"
      }
     ],
@@ -164,15 +144,11 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur \\(2x^{2} + 1\\) tend vers \\(+\\infty\\) et le dénominateur \\(x^{2} - 1\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{2x^{2} + 1}{x^{2} - 1} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}\\,\\left(2 + \\frac{1}{x^{2}}\\right)}{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{2 + \\frac{1}{x^{2}}}{1 - \\frac{1}{x^{2}}} = 2\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} f(x) &= \\lim_{x\\to +\\infty} \\dfrac{2x^{2}\\,\\left(1 + \\frac{1}{2x^{2}}\\right)}{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)} \\qquad \\left(2x^{2} + 1 = 2x^{2}\\,\\left(1 + \\frac{1}{2x^{2}}\\right) ,\\; x^{2} - 1 = x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{2\\left(1 + \\frac{1}{2x^{2}}\\right)}{1 - \\frac{1}{x^{2}}} = \\dfrac{2 \\cdot 1}{1} = 2 \\qquad \\left(\\text{on simplifie par } x^{2} \\; ;\\; \\frac{1}{2x^{2}} \\to 0 \\; ;\\; \\frac{1}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale d'équation \\(y = 2\\).",
+      "html": "Asymptote horizontale : \\(y = 2\\).",
       "type": "texte"
      }
     ],
@@ -181,23 +157,15 @@
    {
     "etapes": [
      {
-      "html": "\\(x = -1\\) est une valeur interdite.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -1^{-}} \\frac{2x^{2} + 1}{x^{2} - 1} = \\text{« }\\dfrac{3}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x^{2} - 1 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Le numérateur \\(2x^{2} + 1\\) vaut \\(2\\left(-1\\right)^{2} + 1 = 3\\) et le dénominateur \\(x^{2} - 1\\) tend vers \\(0\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -1^{+}} \\frac{2x^{2} + 1}{x^{2} - 1} = \\text{« }\\dfrac{3}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x^{2} - 1 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "À gauche de \\(-1\\), le dénominateur est positif (cf. tableau de signes de \\(x^{2} - 1\\)) : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{3}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "À droite de \\(-1\\), le dénominateur est négatif (cf. tableau de signes de \\(x^{2} - 1\\)) : il tend vers \\(0^{-}\\), donc \\(f(x) \\to \\dfrac{3}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote verticale d'équation \\(x = -1\\).",
+      "html": "Asymptote verticale : \\(x = -1\\).",
       "type": "texte"
      }
     ],
@@ -206,23 +174,15 @@
    {
     "etapes": [
      {
-      "html": "\\(x = 1\\) est une valeur interdite.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 1^{-}} \\frac{2x^{2} + 1}{x^{2} - 1} = \\text{« }\\dfrac{3}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x^{2} - 1 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Le numérateur \\(2x^{2} + 1\\) vaut \\(2 \\cdot 1^{2} + 1 = 3\\) et le dénominateur \\(x^{2} - 1\\) tend vers \\(0\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 1^{+}} \\frac{2x^{2} + 1}{x^{2} - 1} = \\text{« }\\dfrac{3}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x^{2} - 1 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "À gauche de \\(1\\), le dénominateur est négatif (cf. tableau de signes de \\(x^{2} - 1\\)) : il tend vers \\(0^{-}\\), donc \\(f(x) \\to \\dfrac{3}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "À droite de \\(1\\), le dénominateur est positif (cf. tableau de signes de \\(x^{2} - 1\\)) : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{3}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote verticale d'équation \\(x = 1\\).",
+      "html": "Asymptote verticale : \\(x = 1\\).",
       "type": "texte"
      }
     ],
@@ -250,7 +210,7 @@
        "||",
        "+"
       ],
-      "label": "x + 1 \\ (\\text{dén.})"
+      "label": "x + 1"
      },
      {
       "cells": [
@@ -260,7 +220,7 @@
        "||",
        "+"
       ],
-      "label": "x - 1 \\ (\\text{dén.})"
+      "label": "x - 1"
      },
      {
       "cells": [
@@ -301,15 +261,11 @@
    {
     "etapes": [
      {
-      "html": "Or \\(e^{t} \\to 0^{+}\\) quand \\(t \\to -\\infty\\), donc \\(e^{x} \\to 0^{+}\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{e^{x} - 1}{x} = \\text{« }\\dfrac{e^{-\\infty} - 1}{-\\infty}\\text{ »} = \\text{« }\\dfrac{0^{+} - 1}{-\\infty}\\text{ »} = \\text{« }\\dfrac{-1}{-\\infty}\\text{ »} = 0\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "\\(e^{x} - 1 \\to -1\\) et \\(x \\to -\\infty\\), donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = 0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale d'équation \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\).",
       "type": "texte"
      }
     ],
@@ -318,31 +274,11 @@
    {
     "etapes": [
      {
-      "html": "Or \\(e^{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(e^{x} \\to +\\infty\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x}}{x} &= \\text{« }\\dfrac{e^{+\\infty}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= +\\infty \\qquad \\left(\\text{croissance comparée : } \\lim_{x\\to +\\infty} \\dfrac{e^{ax}}{x^{n}} = +\\infty\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "\\(e^{x} - 1 \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Le numérateur \\(e^{x} - 1\\) tend vers \\(+\\infty\\) et le dénominateur \\(x\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
-      "type": "texte"
-     },
-     {
-      "html": "Le numérateur \\(e^{x}\\) tend vers \\(+\\infty\\) et le dénominateur \\(x\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x}}{x} = +\\infty \\qquad \\left(\\frac{e^{x}}{x} \\to +\\infty \\text{ : croissance comparée, } \\lim_{x\\to +\\infty} \\dfrac{e^{ax}}{x^{n}} = +\\infty \\text{ pour } a > 0 \\text{ et } n > 0\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} f(x) &= \\lim_{x\\to +\\infty} \\frac{e^{x}}{x}\\,\\left(1 - e^{-x}\\right) = \\left(+\\infty\\right) \\cdot 1 = +\\infty \\qquad \\left(\\text{on met } e^{x} \\text{ en évidence} ,\\; e^{x} - 1 = e^{x}\\,\\left(1 - e^{-x}\\right) \\; ;\\; \\frac{e^{x}}{x} \\to +\\infty \\; ;\\; e^{-x} \\to 0\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "La limite est infinie : pas d'asymptote horizontale.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x} - 1}{x} &= \\text{« }\\dfrac{e^{+\\infty} - 1}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty - 1}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{e^{x}}{x}\\,\\left(1 - e^{-x}\\right) = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty \\qquad \\left(\\text{mise en évidence}\\right)\\end{aligned}\\]",
       "type": "texte"
      }
     ],
@@ -351,51 +287,11 @@
    {
     "etapes": [
      {
-      "html": "\\(x = 0\\) est une valeur interdite.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0} \\frac{e^{x} - 1}{x} &= \\text{« }\\dfrac{e^{0} - 1}{0}\\text{ »} = \\text{« }\\dfrac{1 - 1}{0}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 0} e^{x} = e^{0} = 1 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } e^{x} - 1 \\text{ et } x \\text{ dérivables sur } \\mathbb{R} ,\\; g'(x) = 1 \\neq 0 ,\\; \\text{la limite de } \\dfrac{f'}{g'} \\text{ existe}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Le numérateur \\(e^{x} - 1\\) tend vers \\(0\\) et le dénominateur \\(x\\) tend vers \\(0\\) : forme indéterminée « \\(0/0\\) ».",
-      "type": "texte"
-     },
-     {
-      "html": "On applique la règle de Bernoulli-L'Hôpital avec \\(f(x) = e^{x} - 1\\) et \\(g(x) = x\\). Vérifions les hypothèses :",
-      "type": "texte"
-     },
-     {
-      "html": "(a) forme indéterminée « \\(0/0\\) » : vérifiée ;",
-      "type": "texte"
-     },
-     {
-      "html": "(b) \\(f\\) et \\(g\\) sont dérivables sur \\(\\mathbb{R}\\), donc au voisinage de \\(0\\) (sauf peut-être en \\(0\\)) : vérifiée ;",
-      "type": "texte"
-     },
-     {
-      "html": "On calcule \\(f'(x) = e^{x}\\) et \\(g'(x) = 1\\).",
-      "type": "texte"
-     },
-     {
-      "html": "(c) \\(g'(x) = 1 \\neq 0\\) au voisinage de \\(0\\) (sauf peut-être en \\(0\\)) : vérifiée ;",
-      "type": "texte"
-     },
-     {
-      "html": "(d) Calculons la limite de \\(\\dfrac{f'(x)}{g'(x)}\\) :",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to 0} \\dfrac{f'(x)}{g'(x)} &= \\lim_{x\\to 0} e^{x} = e^{0} = 1\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "La limite de \\(\\dfrac{f'(x)}{g'(x)}\\) existe et vaut \\(1\\) : (d) est vérifiée, donc la règle s'applique :",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to 0} f(x) &= \\lim_{x\\to 0} \\dfrac{f'(x)}{g'(x)} = 1 \\qquad \\left(\\text{règle de Bernoulli-L'Hôpital}\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Les deux limites sont finies et égales à \\(1\\) : f n'est pas définie en \\(x=0\\), mais sa limite y est finie (\\(=1\\)) : pas d'asymptote verticale, trou dans le graphique en \\((0\\,;\\,1)\\).",
+      "html": "Limite finie : pas d'asymptote verticale, trou dans le graphique en \\((0\\,;\\,1)\\).",
       "type": "texte"
      }
     ],
@@ -442,27 +338,15 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur \\(x^{2} - 1\\) tend vers \\(+\\infty\\) et le dénominateur \\(x - 1\\) tend vers \\(-\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{x^{2} - 1}{x - 1} &= \\text{« }\\dfrac{+\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{x\\,\\left(1 - \\frac{1}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{x\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{1 - \\frac{1}{x}} = \\text{« }-\\infty \\cdot 1\\text{ »} = -\\infty\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} f(x) &= \\lim_{x\\to -\\infty} \\dfrac{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{x\\,\\left(1 - \\frac{1}{x}\\right)} \\qquad \\left(x^{2} - 1 = x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right) ,\\; x - 1 = x\\,\\left(1 - \\frac{1}{x}\\right)\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{x\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{1 - \\frac{1}{x}} = \\dfrac{\\left(-\\infty\\right) \\cdot 1}{1} = -\\infty \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{1}{x^{2}} \\to 0 \\; ;\\; \\frac{1}{x} \\to 0\\right)\\end{aligned}\\]",
+      "html": "Division euclidienne : \\(x^{2} - 1 = \\left(x - 1\\right)\\,\\left(x + 1\\right)\\), donc \\(f(x) = x + 1\\) là où f est définie.",
       "type": "texte"
      },
      {
-      "html": "La limite est infinie : pas d'asymptote horizontale.",
-      "type": "texte"
-     },
-     {
-      "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division euclidienne de \\(x^{2} - 1\\) par \\(x - 1\\) :",
-      "type": "texte"
-     },
-     {
-      "html": "\\[x^{2} - 1 = \\left(x - 1\\right)\\,\\left(x + 1\\right)\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(f(x) = x + 1\\) là où f est définie : la courbe est contenue dans la droite \\(y = x + 1\\).",
+      "html": "Asymptote oblique : \\(y = x + 1\\) (la courbe est contenue dans cette droite).",
       "type": "texte"
      }
     ],
@@ -471,27 +355,15 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur \\(x^{2} - 1\\) tend vers \\(+\\infty\\) et le dénominateur \\(x - 1\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x^{2} - 1}{x - 1} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{x\\,\\left(1 - \\frac{1}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{x\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{1 - \\frac{1}{x}} = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} f(x) &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{x\\,\\left(1 - \\frac{1}{x}\\right)} \\qquad \\left(x^{2} - 1 = x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right) ,\\; x - 1 = x\\,\\left(1 - \\frac{1}{x}\\right)\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{x\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{1 - \\frac{1}{x}} = \\dfrac{\\left(+\\infty\\right) \\cdot 1}{1} = +\\infty \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{1}{x^{2}} \\to 0 \\; ;\\; \\frac{1}{x} \\to 0\\right)\\end{aligned}\\]",
+      "html": "Même division : \\(f(x) = x + 1\\) là où f est définie.",
       "type": "texte"
      },
      {
-      "html": "La limite est infinie : pas d'asymptote horizontale.",
-      "type": "texte"
-     },
-     {
-      "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division euclidienne de \\(x^{2} - 1\\) par \\(x - 1\\) :",
-      "type": "texte"
-     },
-     {
-      "html": "\\[x^{2} - 1 = \\left(x - 1\\right)\\,\\left(x + 1\\right)\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(f(x) = x + 1\\) là où f est définie : la courbe est contenue dans la droite \\(y = x + 1\\).",
+      "html": "Asymptote oblique : \\(y = x + 1\\) (la courbe est contenue dans cette droite).",
       "type": "texte"
      }
     ],
@@ -500,19 +372,11 @@
    {
     "etapes": [
      {
-      "html": "\\(x = 1\\) est une valeur interdite.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 1} \\frac{x^{2} - 1}{x - 1} &= \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 1} \\dfrac{\\left(x + 1\\right)\\,\\cancel{\\left(x - 1\\right)}}{\\cancel{\\left(x - 1\\right)}} \\qquad \\left(\\text{on factorise par } \\left(x - 1\\right)\\right) \\\\ &= \\lim_{x\\to 1} \\left(x + 1\\right) = 1 + 1 = 2 \\qquad \\left(\\text{on simplifie}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Le numérateur et le dénominateur tendent vers \\(0\\) quand \\(x \\to 1\\) : forme indéterminée « \\(0/0\\) ».",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to 1} f(x) &= \\lim_{x\\to 1} \\dfrac{\\left(x + 1\\right)\\,\\cancel{\\left(x-1\\right)}}{\\cancel{\\left(x-1\\right)}} \\qquad \\left(\\text{on factorise par } \\left(x-1\\right)\\right) \\\\ &= \\lim_{x\\to 1} \\left(x + 1\\right) = 1 + 1 = 2 \\qquad \\left(\\text{on simplifie} \\; (x \\neq 1)\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "f n'est pas définie en \\(x=1\\), mais sa limite y est finie (\\(=2\\)) : pas d'asymptote verticale, trou dans le graphique en \\((1\\,;\\,2)\\).",
+      "html": "Limite finie : pas d'asymptote verticale, trou dans le graphique en \\((1\\,;\\,2)\\).",
       "type": "texte"
      }
     ],
@@ -559,39 +423,19 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur \\(x^{2} - 1\\) tend vers \\(+\\infty\\) et le dénominateur \\(x - 3\\) tend vers \\(-\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{x^{2} - 1}{x - 3} &= \\text{« }\\dfrac{+\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{x\\,\\left(1 - \\frac{3}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{x\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{1 - \\frac{3}{x}} = \\text{« }-\\infty \\cdot 1\\text{ »} = -\\infty\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} f(x) &= \\lim_{x\\to -\\infty} \\dfrac{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{x\\,\\left(1 - \\frac{3}{x}\\right)} \\qquad \\left(x^{2} - 1 = x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right) ,\\; x - 3 = x\\,\\left(1 - \\frac{3}{x}\\right)\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{x\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{1 - \\frac{3}{x}} = \\dfrac{\\left(-\\infty\\right) \\cdot 1}{1} = -\\infty \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{1}{x^{2}} \\to 0 \\; ;\\; \\frac{3}{x} \\to 0\\right)\\end{aligned}\\]",
+      "html": "Division euclidienne : \\(x^{2} - 1 = \\left(x - 3\\right)\\,\\left(x + 3\\right) + 8\\), donc \\(f(x) = x + 3 + \\dfrac{8}{x - 3}\\).",
       "type": "texte"
      },
      {
-      "html": "La limite est infinie : pas d'asymptote horizontale.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\left(f(x) - \\left(x + 3\\right)\\right) = \\lim_{x\\to -\\infty} \\dfrac{8}{x - 3} = \\text{« }\\dfrac{8}{-\\infty}\\text{ »} = 0 \\text{ : asymptote oblique } y = x + 3\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division euclidienne de \\(x^{2} - 1\\) par \\(x - 3\\) :",
-      "type": "texte"
-     },
-     {
-      "html": "\\[x^{2} - 1 = \\left(x - 3\\right)\\,\\left(x + 3\\right) + 8\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(f(x) = x + 3 + \\dfrac{8}{x - 3}\\), d'où :",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\left(f(x) - \\left(x + 3\\right)\\right) &= \\lim_{x\\to -\\infty} \\dfrac{8}{x - 3} = 0 \\qquad \\left(f(x) - \\left(x + 3\\right) = \\dfrac{8}{x - 3} \\; ;\\; \\text{numérateur constant, dénominateur } \\to -\\infty\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote oblique d'équation \\(y = x + 3\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Position relative, près de \\(-\\infty\\) : \\(8\\) est positif et \\(x - 3\\) est négatif, donc \\(f(x) - \\left(x + 3\\right)\\) est négatif : la courbe est au-dessous de la droite.",
+      "html": "\\(\\dfrac{8}{x - 3} < 0\\) pour \\(x < 3\\) : la courbe est au-dessous de l'asymptote.",
       "type": "texte"
      }
     ],
@@ -600,39 +444,11 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur \\(x^{2} - 1\\) tend vers \\(+\\infty\\) et le dénominateur \\(x - 3\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x^{2} - 1}{x - 3} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{x\\,\\left(1 - \\frac{3}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{x\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{1 - \\frac{3}{x}} = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} f(x) &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{x\\,\\left(1 - \\frac{3}{x}\\right)} \\qquad \\left(x^{2} - 1 = x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right) ,\\; x - 3 = x\\,\\left(1 - \\frac{3}{x}\\right)\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{x\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{1 - \\frac{3}{x}} = \\dfrac{\\left(+\\infty\\right) \\cdot 1}{1} = +\\infty \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{1}{x^{2}} \\to 0 \\; ;\\; \\frac{3}{x} \\to 0\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "La limite est infinie : pas d'asymptote horizontale.",
-      "type": "texte"
-     },
-     {
-      "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division euclidienne de \\(x^{2} - 1\\) par \\(x - 3\\) :",
-      "type": "texte"
-     },
-     {
-      "html": "\\[x^{2} - 1 = \\left(x - 3\\right)\\,\\left(x + 3\\right) + 8\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(f(x) = x + 3 + \\dfrac{8}{x - 3}\\), d'où :",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\left(f(x) - \\left(x + 3\\right)\\right) &= \\lim_{x\\to +\\infty} \\dfrac{8}{x - 3} = 0 \\qquad \\left(f(x) - \\left(x + 3\\right) = \\dfrac{8}{x - 3} \\; ;\\; \\text{numérateur constant, dénominateur } \\to +\\infty\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote oblique d'équation \\(y = x + 3\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Position relative, près de \\(+\\infty\\) : \\(8\\) est positif et \\(x - 3\\) est positif, donc \\(f(x) - \\left(x + 3\\right)\\) est positif : la courbe est au-dessus de la droite.",
+      "html": "Même division : \\(f(x) - \\left(x + 3\\right) = \\dfrac{8}{x - 3}\\) tend vers \\(0\\) : asymptote oblique \\(y = x + 3\\) ; \\(\\dfrac{8}{x - 3} > 0\\) pour \\(x > 3\\) : la courbe est au-dessus de l'asymptote.",
       "type": "texte"
      }
     ],
@@ -641,23 +457,15 @@
    {
     "etapes": [
      {
-      "html": "\\(x = 3\\) est une valeur interdite.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 3^{-}} \\frac{x^{2} - 1}{x - 3} = \\text{« }\\dfrac{8}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x - 3 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Le numérateur \\(x^{2} - 1\\) vaut \\(3^{2} - 1 = 8\\) et le dénominateur \\(x - 3\\) tend vers \\(0\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 3^{+}} \\frac{x^{2} - 1}{x - 3} = \\text{« }\\dfrac{8}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x - 3 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "À gauche de \\(3\\), le dénominateur est négatif (cf. tableau de signes de \\(x - 3\\)) : il tend vers \\(0^{-}\\), donc \\(f(x) \\to \\dfrac{8}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "À droite de \\(3\\), le dénominateur est positif (cf. tableau de signes de \\(x - 3\\)) : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{8}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote verticale d'équation \\(x = 3\\).",
+      "html": "Asymptote verticale : \\(x = 3\\).",
       "type": "texte"
      }
     ],
@@ -717,19 +525,11 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur \\(x^{3} + 1\\) tend vers \\(-\\infty\\) et le dénominateur \\(x - 2\\) tend vers \\(-\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{x^{3} + 1}{x - 2} &= \\text{« }\\dfrac{-\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x^{3}\\,\\left(1 + \\frac{1}{x^{3}}\\right)}{x\\,\\left(1 - \\frac{2}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{x^{2}\\,\\left(1 + \\frac{1}{x^{3}}\\right)}{1 - \\frac{2}{x}} = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} f(x) &= \\lim_{x\\to -\\infty} \\dfrac{x^{3}\\,\\left(1 + \\frac{1}{x^{3}}\\right)}{x\\,\\left(1 - \\frac{2}{x}\\right)} \\qquad \\left(x^{3} + 1 = x^{3}\\,\\left(1 + \\frac{1}{x^{3}}\\right) ,\\; x - 2 = x\\,\\left(1 - \\frac{2}{x}\\right)\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{x^{2}\\,\\left(1 + \\frac{1}{x^{3}}\\right)}{1 - \\frac{2}{x}} = \\dfrac{\\left(+\\infty\\right) \\cdot 1}{1} = +\\infty \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{1}{x^{3}} \\to 0 \\; ;\\; \\frac{2}{x} \\to 0\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "La limite est infinie : pas d'asymptote horizontale.",
-      "type": "texte"
-     },
-     {
-      "html": "Le degré du numérateur dépasse celui du dénominateur de 2 \\(\\geq 2\\) : pas d'asymptote oblique (branche parabolique).",
+      "html": "Pas d'asymptote oblique : branche parabolique.",
       "type": "texte"
      }
     ],
@@ -738,19 +538,11 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur \\(x^{3} + 1\\) tend vers \\(+\\infty\\) et le dénominateur \\(x - 2\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x^{3} + 1}{x - 2} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{3}\\,\\left(1 + \\frac{1}{x^{3}}\\right)}{x\\,\\left(1 - \\frac{2}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{x^{2}\\,\\left(1 + \\frac{1}{x^{3}}\\right)}{1 - \\frac{2}{x}} = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} f(x) &= \\lim_{x\\to +\\infty} \\dfrac{x^{3}\\,\\left(1 + \\frac{1}{x^{3}}\\right)}{x\\,\\left(1 - \\frac{2}{x}\\right)} \\qquad \\left(x^{3} + 1 = x^{3}\\,\\left(1 + \\frac{1}{x^{3}}\\right) ,\\; x - 2 = x\\,\\left(1 - \\frac{2}{x}\\right)\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{x^{2}\\,\\left(1 + \\frac{1}{x^{3}}\\right)}{1 - \\frac{2}{x}} = \\dfrac{\\left(+\\infty\\right) \\cdot 1}{1} = +\\infty \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{1}{x^{3}} \\to 0 \\; ;\\; \\frac{2}{x} \\to 0\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "La limite est infinie : pas d'asymptote horizontale.",
-      "type": "texte"
-     },
-     {
-      "html": "Le degré du numérateur dépasse celui du dénominateur de 2 \\(\\geq 2\\) : pas d'asymptote oblique (branche parabolique).",
+      "html": "Pas d'asymptote oblique : branche parabolique.",
       "type": "texte"
      }
     ],
@@ -759,23 +551,15 @@
    {
     "etapes": [
      {
-      "html": "\\(x = 2\\) est une valeur interdite.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 2^{-}} \\frac{x^{3} + 1}{x - 2} = \\text{« }\\dfrac{9}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x - 2 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Le numérateur \\(x^{3} + 1\\) vaut \\(2^{3} + 1 = 9\\) et le dénominateur \\(x - 2\\) tend vers \\(0\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 2^{+}} \\frac{x^{3} + 1}{x - 2} = \\text{« }\\dfrac{9}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x - 2 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "À gauche de \\(2\\), le dénominateur est négatif (cf. tableau de signes de \\(x - 2\\)) : il tend vers \\(0^{-}\\), donc \\(f(x) \\to \\dfrac{9}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "À droite de \\(2\\), le dénominateur est positif (cf. tableau de signes de \\(x - 2\\)) : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{9}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote verticale d'équation \\(x = 2\\).",
+      "html": "Asymptote verticale : \\(x = 2\\).",
       "type": "texte"
      }
     ],
@@ -837,15 +621,11 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x - 2\\) tend vers \\(-\\infty\\) (limite de son terme de plus haut degré), donc \\(\\frac{1}{x - 2} \\to 0\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{1}{x - 2} = \\text{« }\\dfrac{1}{-\\infty}\\text{ »} = 0\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = 0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale d'équation \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\).",
       "type": "texte"
      }
     ],
@@ -854,15 +634,11 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x - 2\\) tend vers \\(+\\infty\\) (limite de son terme de plus haut degré), donc \\(\\frac{1}{x - 2} \\to 0\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{1}{x - 2} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale d'équation \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\).",
       "type": "texte"
      }
     ],
@@ -871,23 +647,15 @@
    {
     "etapes": [
      {
-      "html": "\\(x = 2\\) est une valeur interdite.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 2^{-}} \\frac{1}{x - 2} = \\text{« }\\dfrac{1}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x - 2 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x - 2\\) tend vers \\(0\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 2^{+}} \\frac{1}{x - 2} = \\text{« }\\dfrac{1}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x - 2 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "À gauche de \\(2\\), le dénominateur est négatif (cf. tableau de signes de \\(x - 2\\)) : il tend vers \\(0^{-}\\), donc \\(f(x) \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "À droite de \\(2\\), le dénominateur est positif (cf. tableau de signes de \\(x - 2\\)) : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote verticale d'équation \\(x = 2\\).",
+      "html": "Asymptote verticale : \\(x = 2\\).",
       "type": "texte"
      }
     ],
@@ -957,15 +725,11 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x^{2} - 2\\) tend vers \\(+\\infty\\) (limite de son terme de plus haut degré), donc \\(\\frac{1}{x^{2} - 2} \\to 0\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{1}{x^{2} - 2} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = 0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale d'équation \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\).",
       "type": "texte"
      }
     ],
@@ -974,15 +738,11 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x^{2} - 2\\) tend vers \\(+\\infty\\) (limite de son terme de plus haut degré), donc \\(\\frac{1}{x^{2} - 2} \\to 0\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{1}{x^{2} - 2} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale d'équation \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\).",
       "type": "texte"
      }
     ],
@@ -991,23 +751,15 @@
    {
     "etapes": [
      {
-      "html": "\\(x = -\\sqrt{2}\\) est une valeur interdite.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to {-\\sqrt{2}}^{-}} \\frac{1}{x^{2} - 2} = \\text{« }\\dfrac{1}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x^{2} - 2 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x^{2} - 2\\) tend vers \\(0\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to {-\\sqrt{2}}^{+}} \\frac{1}{x^{2} - 2} = \\text{« }\\dfrac{1}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x^{2} - 2 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "À gauche de \\(-\\sqrt{2}\\), le dénominateur est positif (cf. tableau de signes de \\(x^{2} - 2\\)) : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "À droite de \\(-\\sqrt{2}\\), le dénominateur est négatif (cf. tableau de signes de \\(x^{2} - 2\\)) : il tend vers \\(0^{-}\\), donc \\(f(x) \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote verticale d'équation \\(x = -\\sqrt{2}\\).",
+      "html": "Asymptote verticale : \\(x = -\\sqrt{2}\\).",
       "type": "texte"
      }
     ],
@@ -1016,23 +768,15 @@
    {
     "etapes": [
      {
-      "html": "\\(x = \\sqrt{2}\\) est une valeur interdite.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to {\\sqrt{2}}^{-}} \\frac{1}{x^{2} - 2} = \\text{« }\\dfrac{1}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x^{2} - 2 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x^{2} - 2\\) tend vers \\(0\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to {\\sqrt{2}}^{+}} \\frac{1}{x^{2} - 2} = \\text{« }\\dfrac{1}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x^{2} - 2 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "À gauche de \\(\\sqrt{2}\\), le dénominateur est négatif (cf. tableau de signes de \\(x^{2} - 2\\)) : il tend vers \\(0^{-}\\), donc \\(f(x) \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "À droite de \\(\\sqrt{2}\\), le dénominateur est positif (cf. tableau de signes de \\(x^{2} - 2\\)) : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote verticale d'équation \\(x = \\sqrt{2}\\).",
+      "html": "Asymptote verticale : \\(x = \\sqrt{2}\\).",
       "type": "texte"
      }
     ],
@@ -1097,15 +841,11 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x^{2}\\) tend vers \\(+\\infty\\), donc \\(\\frac{1}{x^{2}} \\to 0\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{1}{x^{2}} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = 0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale d'équation \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\).",
       "type": "texte"
      }
     ],
@@ -1114,15 +854,11 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x^{2}\\) tend vers \\(+\\infty\\), donc \\(\\frac{1}{x^{2}} \\to 0\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{1}{x^{2}} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale d'équation \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\).",
       "type": "texte"
      }
     ],
@@ -1131,23 +867,11 @@
    {
     "etapes": [
      {
-      "html": "\\(x = 0\\) est une valeur interdite.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0} \\frac{1}{x^{2}} = \\text{« }\\dfrac{1}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x^{2} > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x^{2}\\) tend vers \\(0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "De part et d'autre de \\(0\\), le dénominateur est positif (\\(x^{2} > 0\\) pour \\(x \\neq 0\\)) : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(\\displaystyle\\lim_{x\\to 0} f(x) = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote verticale d'équation \\(x = 0\\).",
+      "html": "Asymptote verticale : \\(x = 0\\).",
       "type": "texte"
      }
     ],
@@ -1156,7 +880,30 @@
   ],
   "f_tex": "\\frac{1}{x^{2}}",
   "ok": true,
-  "tableaux_signe": []
+  "tableaux_signe": [
+   {
+    "html": "Signe de \\(x^{2}\\) :",
+    "type": "texte"
+   },
+   {
+    "crit": [
+     "0"
+    ],
+    "rows": [
+     {
+      "cells": [
+       "+",
+       "||",
+       "+"
+      ],
+      "final": true,
+      "label": "x^{2}"
+     }
+    ],
+    "type": "tableau",
+    "var": "x"
+   }
+  ]
  },
  "e^(1/x)": {
   "asymptotes": [
@@ -1188,15 +935,11 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x\\) tend vers \\(-\\infty\\), donc \\(\\frac{1}{x} \\to 0\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} e^{\\frac{1}{x}} = \\text{« }e^{\\dfrac{1}{-\\infty}}\\text{ »} = \\text{« }e^{0^{-}}\\text{ »} = 1\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Or \\(e^{t} \\to 1\\) quand \\(t \\to 0\\), donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = 1\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale d'équation \\(y = 1\\).",
+      "html": "Asymptote horizontale : \\(y = 1\\).",
       "type": "texte"
      }
     ],
@@ -1205,15 +948,11 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x\\) tend vers \\(+\\infty\\), donc \\(\\frac{1}{x} \\to 0\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} e^{\\frac{1}{x}} = \\text{« }e^{\\dfrac{1}{+\\infty}}\\text{ »} = \\text{« }e^{0^{+}}\\text{ »} = 1\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Or \\(e^{t} \\to 1\\) quand \\(t \\to 0\\), donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = 1\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale d'équation \\(y = 1\\).",
+      "html": "Asymptote horizontale : \\(y = 1\\).",
       "type": "texte"
      }
     ],
@@ -1222,31 +961,15 @@
    {
     "etapes": [
      {
-      "html": "\\(x = 0\\) est une valeur interdite.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{-}} e^{\\frac{1}{x}} = \\text{« }e^{\\dfrac{1}{0^{-}}}\\text{ »} = \\text{« }e^{-\\infty}\\text{ »} = 0 \\qquad \\left(x < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Le numérateur vaut \\(1\\) et le dénominateur \\(x\\) tend vers \\(0\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} e^{\\frac{1}{x}} = \\text{« }e^{\\dfrac{1}{0^{+}}}\\text{ »} = \\text{« }e^{+\\infty}\\text{ »} = +\\infty \\qquad \\left(x > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "À gauche de \\(0\\), le dénominateur est négatif (cf. tableau de signes de \\(x\\)) : il tend vers \\(0^{-}\\), donc \\(\\frac{1}{x} \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Or \\(e^{t} \\to 0^{+}\\) quand \\(t \\to -\\infty\\), donc \\(f(x) \\to 0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "À droite de \\(0\\), le dénominateur est positif (cf. tableau de signes de \\(x\\)) : il tend vers \\(0^{+}\\), donc \\(\\frac{1}{x} \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Or \\(e^{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(f(x) \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote verticale d'équation \\(x = 0\\) (du côté droit) ; à gauche, \\(f(x) \\to 0\\).",
+      "html": "Asymptote verticale : \\(x = 0\\) (du côté droit) ; à gauche, \\(f(x) \\to 0\\).",
       "type": "texte"
      }
     ],
@@ -1294,15 +1017,11 @@
    {
     "etapes": [
      {
-      "html": "Quand \\(x \\to -\\infty\\), \\(2x \\to -\\infty\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} e^{2x} = \\text{« }e^{-\\infty}\\text{ »} = 0\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Or \\(e^{t} \\to 0^{+}\\) quand \\(t \\to -\\infty\\), donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = 0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale d'équation \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\).",
       "type": "texte"
      }
     ],
@@ -1311,15 +1030,7 @@
    {
     "etapes": [
      {
-      "html": "Quand \\(x \\to +\\infty\\), \\(2x \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Or \\(e^{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "La limite est infinie : pas d'asymptote horizontale.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} e^{2x} = \\text{« }e^{+\\infty}\\text{ »} = +\\infty\\end{aligned}\\]",
       "type": "texte"
      }
     ],
@@ -1354,15 +1065,11 @@
    {
     "etapes": [
      {
-      "html": "Or \\(e^{t} \\to 0^{+}\\) quand \\(t \\to -\\infty\\), donc \\(e^{x} \\to 0^{+}\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{e^{x}}{x} = \\text{« }\\dfrac{e^{-\\infty}}{-\\infty}\\text{ »} = \\text{« }\\dfrac{0^{+}}{-\\infty}\\text{ »} = 0\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "\\(e^{x} \\to 0^{+}\\) et \\(x \\to -\\infty\\), donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = 0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale d'équation \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\).",
       "type": "texte"
      }
     ],
@@ -1371,19 +1078,7 @@
    {
     "etapes": [
      {
-      "html": "Or \\(e^{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(e^{x} \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Le numérateur \\(e^{x}\\) tend vers \\(+\\infty\\) et le dénominateur \\(x\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} f(x) = +\\infty \\qquad \\left(\\frac{e^{x}}{x} \\to +\\infty \\text{ : croissance comparée, } \\lim_{x\\to +\\infty} \\dfrac{e^{ax}}{x^{n}} = +\\infty \\text{ pour } a > 0 \\text{ et } n > 0\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "La limite est infinie : pas d'asymptote horizontale.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x}}{x} &= \\text{« }\\dfrac{e^{+\\infty}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= +\\infty \\qquad \\left(\\text{croissance comparée : } \\lim_{x\\to +\\infty} \\dfrac{e^{ax}}{x^{n}} = +\\infty\\right)\\end{aligned}\\]",
       "type": "texte"
      }
     ],
@@ -1392,23 +1087,15 @@
    {
     "etapes": [
      {
-      "html": "\\(x = 0\\) est une valeur interdite.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{-}} \\frac{e^{x}}{x} = \\text{« }\\dfrac{e^{0^{-}}}{0^{-}}\\text{ »} = \\text{« }\\dfrac{1}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Le numérateur \\(e^{x}\\) vaut \\(e^{0} = 1\\) et le dénominateur \\(x\\) tend vers \\(0\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} \\frac{e^{x}}{x} = \\text{« }\\dfrac{e^{0^{+}}}{0^{+}}\\text{ »} = \\text{« }\\dfrac{1}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "À gauche de \\(0\\), le dénominateur est négatif (cf. tableau de signes de \\(x\\)) : il tend vers \\(0^{-}\\), donc \\(f(x) \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "À droite de \\(0\\), le dénominateur est positif (cf. tableau de signes de \\(x\\)) : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote verticale d'équation \\(x = 0\\).",
+      "html": "Asymptote verticale : \\(x = 0\\).",
       "type": "texte"
      }
     ],
@@ -1457,15 +1144,11 @@
    {
     "etapes": [
      {
-      "html": "\\(x = 0\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 0^{+}\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} \\ln(x) = \\text{« }\\ln\\left(0^{+}\\right)\\text{ »} = -\\infty\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\), donc \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote verticale d'équation \\(x = 0\\).",
+      "html": "Asymptote verticale : \\(x = 0\\).",
       "type": "texte"
      }
     ],
@@ -1474,11 +1157,7 @@
    {
     "etapes": [
      {
-      "html": "Or \\(\\ln t \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "La limite est infinie : pas d'asymptote horizontale.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\ln(x) = \\text{« }\\ln\\left(+\\infty\\right)\\text{ »} = +\\infty\\end{aligned}\\]",
       "type": "texte"
      }
     ],
@@ -1504,19 +1183,11 @@
    {
     "etapes": [
      {
-      "html": "\\(x = 1\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 1^{+}\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 1^{+}} \\ln\\left(x - 1\\right) = \\text{« }\\ln\\left(0^{+}\\right)\\text{ »} = -\\infty \\qquad \\left(x - 1 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "À droite de \\(1\\), l'argument \\(x - 1\\) est positif (cf. tableau de signes de \\(x - 1\\)) : il tend vers \\(0^{+}\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\), donc \\(\\displaystyle\\lim_{x\\to 1^{+}} f(x) = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote verticale d'équation \\(x = 1\\).",
+      "html": "Asymptote verticale : \\(x = 1\\).",
       "type": "texte"
      }
     ],
@@ -1525,15 +1196,7 @@
    {
     "etapes": [
      {
-      "html": "\\(x \\to +\\infty\\), donc \\(x - 1 \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Or \\(\\ln t \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "La limite est infinie : pas d'asymptote horizontale.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\ln\\left(x - 1\\right) = \\text{« }\\ln\\left(+\\infty\\right)\\text{ »} = +\\infty\\end{aligned}\\]",
       "type": "texte"
      }
     ],
@@ -1611,27 +1274,11 @@
    {
     "etapes": [
      {
-      "html": "\\(x^{2} \\to +\\infty\\) et \\(-4x \\to +\\infty\\), donc \\(x^{2} - 4x \\to +\\infty\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} &= \\text{« }\\dfrac{\\ln\\left(+\\infty + \\infty\\right)}{-\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{\\ln\\left(x^{2}\\left(1 - \\frac{4}{x}\\right)\\right)}{x\\,\\left(1 - \\frac{5}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{2\\ln|x| + \\ln\\left(1 - \\frac{4}{x}\\right)}{x\\,\\left(1 - \\frac{5}{x}\\right)} \\qquad \\left(\\text{propriétés de } \\ln\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{1}{1 - \\frac{5}{x}}\\left(2\\,\\dfrac{\\ln|x|}{x} + \\dfrac{\\ln\\left(1 - \\frac{4}{x}\\right)}{x}\\right) = 2 \\cdot 0 + 0 = 0 \\qquad \\left(t = -x \\to +\\infty ,\\; \\dfrac{\\ln|x|}{x} = -\\dfrac{\\ln t}{t} \\text{ : croissance comparée, } \\lim_{t\\to +\\infty} \\dfrac{\\ln t}{t^{n}} = 0\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\ln t \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\ln\\left(x^{2} - 4x\\right) \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x \\to -\\infty\\), donc \\(x - 5 \\to -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Le numérateur \\(\\ln\\left(x^{2} - 4x\\right)\\) tend vers \\(+\\infty\\) et le dénominateur \\(x - 5\\) tend vers \\(-\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} f(x) &= \\lim_{x\\to -\\infty} \\dfrac{\\ln\\left(x^{2}\\left(1 - \\frac{4}{x}\\right)\\right)}{x\\,\\left(1 - \\frac{5}{x}\\right)} \\qquad \\left(x^{2} - 4x = x^{2}\\left(1 - \\frac{4}{x}\\right), x - 5 = x\\,\\left(1 - \\frac{5}{x}\\right)\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{2\\ln|x| + \\ln\\left(1 - \\frac{4}{x}\\right)}{x\\,\\left(1 - \\frac{5}{x}\\right)} \\qquad \\left(\\ln(ab) = \\ln a + \\ln b ,\\; \\ln x^{2} = 2\\ln|x|\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{1}{1 - \\frac{5}{x}}\\left(2\\,\\dfrac{\\ln|x|}{x} + \\dfrac{\\ln\\left(1 - \\frac{4}{x}\\right)}{x}\\right) = 2 \\cdot 0 + 0 = 0 \\qquad \\left(\\text{on divise par } x \\; ;\\; t = -x \\to +\\infty ,\\; \\dfrac{\\ln|x|}{x} = -\\dfrac{\\ln t}{t} \\to 0 \\text{ : croissance comparée, } \\lim_{t\\to +\\infty} \\dfrac{\\ln t}{t^{n}} = 0 ;\\; \\dfrac{\\ln\\left(1 - \\frac{4}{x}\\right)}{x} \\to 0 \\text{ (numérateur fini, dénominateur } \\to \\pm\\infty \\text{)}\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale d'équation \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\).",
       "type": "texte"
      }
     ],
@@ -1640,31 +1287,11 @@
    {
     "etapes": [
      {
-      "html": "\\(x^{2} \\to +\\infty\\) et \\(-4x \\to -\\infty\\) : forme indéterminée « \\(\\infty - \\infty\\) ».",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\qquad \\left(\\text{le terme dominant de } x^{2} - 4x \\text{ est } x^{2}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{\\ln\\left(x^{2}\\left(1 - \\frac{4}{x}\\right)\\right)}{x\\,\\left(1 - \\frac{5}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{2\\ln x + \\ln\\left(1 - \\frac{4}{x}\\right)}{x\\,\\left(1 - \\frac{5}{x}\\right)} \\qquad \\left(\\text{propriétés de } \\ln\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{1}{1 - \\frac{5}{x}}\\left(2\\,\\dfrac{\\ln x}{x} + \\dfrac{\\ln\\left(1 - \\frac{4}{x}\\right)}{x}\\right) = 2 \\cdot 0 + 0 = 0 \\qquad \\left(\\text{croissance comparée : } \\lim_{x\\to +\\infty} \\dfrac{\\ln x}{x^{n}} = 0\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\left(x^{2} - 4x\\right) &= \\lim_{x\\to +\\infty} x^{2}\\,\\left(1 - \\frac{4}{x}\\right) = \\left(+\\infty\\right) \\cdot 1 = +\\infty \\qquad \\left(\\text{on met } x^{2} \\text{ en évidence} \\; ;\\; \\frac{4}{x} \\to 0\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Or \\(\\ln t \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\ln\\left(x^{2} - 4x\\right) \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x \\to +\\infty\\), donc \\(x - 5 \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Le numérateur \\(\\ln\\left(x^{2} - 4x\\right)\\) tend vers \\(+\\infty\\) et le dénominateur \\(x - 5\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} f(x) &= \\lim_{x\\to +\\infty} \\dfrac{\\ln\\left(x^{2}\\left(1 - \\frac{4}{x}\\right)\\right)}{x\\,\\left(1 - \\frac{5}{x}\\right)} \\qquad \\left(x^{2} - 4x = x^{2}\\left(1 - \\frac{4}{x}\\right), x - 5 = x\\,\\left(1 - \\frac{5}{x}\\right)\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{2\\ln|x| + \\ln\\left(1 - \\frac{4}{x}\\right)}{x\\,\\left(1 - \\frac{5}{x}\\right)} \\qquad \\left(\\ln(ab) = \\ln a + \\ln b ,\\; \\ln x^{2} = 2\\ln|x|\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{1}{1 - \\frac{5}{x}}\\left(2\\,\\dfrac{\\ln|x|}{x} + \\dfrac{\\ln\\left(1 - \\frac{4}{x}\\right)}{x}\\right) = 2 \\cdot 0 + 0 = 0 \\qquad \\left(\\text{on divise par } x \\; ;\\; \\dfrac{\\ln|x|}{x} \\to 0 \\text{ : croissance comparée, } \\lim_{x\\to +\\infty} \\dfrac{\\ln x}{x^{n}} = 0 ;\\; \\dfrac{\\ln\\left(1 - \\frac{4}{x}\\right)}{x} \\to 0 \\text{ (numérateur fini, dénominateur } \\to \\pm\\infty \\text{)}\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale d'équation \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\).",
       "type": "texte"
      }
     ],
@@ -1673,23 +1300,11 @@
    {
     "etapes": [
      {
-      "html": "\\(x = 0\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 0^{-}\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{-}} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} = \\text{« }\\dfrac{\\ln\\left(0^{+}\\right)}{-5}\\text{ »} = \\text{« }\\dfrac{-\\infty}{-5}\\text{ »} = +\\infty \\qquad \\left(x^{2} - 4x > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "À gauche de \\(0\\), l'argument \\(x^{2} - 4x\\) est positif (cf. tableau de signes de \\(x^{2} - 4x\\)) : il tend vers \\(0^{+}\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\), donc \\(\\ln\\left(x^{2} - 4x\\right) \\to -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(\\ln\\left(x^{2} - 4x\\right) \\to -\\infty\\) et \\(x - 5 \\to -5\\), donc \\(\\displaystyle\\lim_{x\\to 0^{-}} f(x) = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote verticale d'équation \\(x = 0\\).",
+      "html": "Asymptote verticale : \\(x = 0\\).",
       "type": "texte"
      }
     ],
@@ -1698,23 +1313,11 @@
    {
     "etapes": [
      {
-      "html": "\\(x = 4\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 4^{+}\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 4^{+}} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} = \\text{« }\\dfrac{\\ln\\left(0^{+}\\right)}{-1}\\text{ »} = \\text{« }\\dfrac{-\\infty}{-1}\\text{ »} = +\\infty \\qquad \\left(x^{2} - 4x > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "À droite de \\(4\\), l'argument \\(x^{2} - 4x\\) est positif (cf. tableau de signes de \\(x^{2} - 4x\\)) : il tend vers \\(0^{+}\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\), donc \\(\\ln\\left(x^{2} - 4x\\right) \\to -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(\\ln\\left(x^{2} - 4x\\right) \\to -\\infty\\) et \\(x - 5 \\to -1\\), donc \\(\\displaystyle\\lim_{x\\to 4^{+}} f(x) = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote verticale d'équation \\(x = 4\\).",
+      "html": "Asymptote verticale : \\(x = 4\\).",
       "type": "texte"
      }
     ],
@@ -1723,23 +1326,15 @@
    {
     "etapes": [
      {
-      "html": "\\(x = 5\\) est une valeur interdite.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 5^{-}} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} = \\text{« }\\dfrac{\\ln 5}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x - 5 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Le numérateur \\(\\ln\\left(x^{2} - 4x\\right)\\) vaut \\(\\ln\\left(5^{2} - 4 \\cdot 5\\right) = \\ln{\\left(5 \\right)}\\) et le dénominateur \\(x - 5\\) tend vers \\(0\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 5^{+}} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} = \\text{« }\\dfrac{\\ln 5}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x - 5 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "À gauche de \\(5\\), le dénominateur est négatif (cf. tableau de signes de \\(x - 5\\)) : il tend vers \\(0^{-}\\), donc \\(f(x) \\to \\dfrac{\\ln{\\left(5 \\right)}}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "À droite de \\(5\\), le dénominateur est positif (cf. tableau de signes de \\(x - 5\\)) : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{\\ln{\\left(5 \\right)}}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote verticale d'équation \\(x = 5\\).",
+      "html": "Asymptote verticale : \\(x = 5\\).",
       "type": "texte"
      }
     ],
@@ -1844,63 +1439,27 @@
    {
     "etapes": [
      {
-      "html": "\\(x^{2} \\to +\\infty\\), donc \\(x^{2} + 1 \\to +\\infty\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\sqrt{x^{2} + 1} = \\text{« }\\sqrt{+\\infty}\\text{ »} = +\\infty\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = +\\infty\\).",
+      "html": "\\[\\begin{aligned}a = \\lim_{x\\to -\\infty} \\frac{\\sqrt{x^{2} + 1}}{x} &= \\text{« }\\dfrac{\\sqrt{+\\infty}}{-\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{\\sqrt{x^{2}\\left(1 + \\frac{1}{x^{2}}\\right)}}{x} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{-x\\,\\sqrt{1 + \\frac{1}{x^{2}}}}{x} \\qquad \\left(x < 0 \\text{ : } \\sqrt{x^{2}} = |x| = -x\\right) \\\\ &= \\lim_{x\\to -\\infty} -\\sqrt{1 + \\frac{1}{x^{2}}} = -1\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "La limite est infinie : pas d'asymptote horizontale.",
+      "html": "\\[\\begin{aligned}b = \\lim_{x\\to -\\infty} \\left(\\sqrt{x^{2} + 1} + x\\right) &= \\text{« }\\sqrt{+\\infty} - \\infty\\text{ »} = \\text{« }+\\infty - \\infty\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\frac{1}{\\sqrt{x^{2} + 1} - x} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0 \\qquad \\left(\\text{conjuguée}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "On cherche une asymptote oblique d'équation \\(y = ax + b\\) : \\(a = \\displaystyle\\lim \\frac{f(x)}{x}\\), puis \\(b = \\displaystyle\\lim \\left(f(x) - ax\\right)\\).",
+      "html": "Asymptote oblique : \\(y = -x\\).",
       "type": "texte"
      },
      {
-      "html": "\\(x^{2} \\to +\\infty\\), donc \\(x^{2} + 1 \\to +\\infty\\).",
+      "html": "\\[\\begin{aligned}f(x) - \\left(-x\\right) &= \\sqrt{x^{2} + 1} + x \\\\ &= \\dfrac{1}{\\sqrt{x^{2} + 1} - x} \\qquad \\left(\\text{conjuguée}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\sqrt{x^{2} + 1} \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Le numérateur \\(\\sqrt{x^{2} + 1}\\) tend vers \\(+\\infty\\) et le dénominateur \\(x\\) tend vers \\(-\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\dfrac{f(x)}{x} &= \\lim_{x\\to -\\infty} \\dfrac{\\sqrt{x^{2}\\left(1 + \\frac{1}{x^{2}}\\right)}}{x} \\qquad \\left(x^{2} + 1 = x^{2}\\left(1 + \\frac{1}{x^{2}}\\right)\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{|x|\\sqrt{1 + \\frac{1}{x^{2}}}}{x} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{-x\\,\\sqrt{1 + \\frac{1}{x^{2}}}}{x} \\qquad \\left(x < 0 \\text{ donc } |x| = -x\\right) \\\\ &= \\lim_{x\\to -\\infty} -\\sqrt{1 + \\frac{1}{x^{2}}} = -\\sqrt{1} = -1 \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{1}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x^{2} \\to +\\infty\\), donc \\(x^{2} + 1 \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\sqrt{x^{2} + 1} \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(\\sqrt{x^{2} + 1} \\to +\\infty\\) et \\(x \\to -\\infty\\) : forme indéterminée « \\(\\infty - \\infty\\) ».",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\left(f(x) + x\\right) &= \\lim_{x\\to -\\infty} \\dfrac{\\left(\\sqrt{x^{2} + 1} + x\\right)\\left(\\sqrt{x^{2} + 1} - x\\right)}{\\sqrt{x^{2} + 1} - x} \\qquad \\left(\\text{on multiplie et on divise par la conjuguée } \\sqrt{x^{2} + 1} - x\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{\\left(x^{2} + 1\\right) - x^{2}}{\\sqrt{x^{2} + 1} - x} \\qquad \\left((a - b)(a + b) = a^{2} - b^{2}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{1}{\\sqrt{x^{2} + 1} - x} = \\dfrac{1}{+\\infty - \\left(-\\infty\\right)} = 0 \\qquad \\left(\\sqrt{x^{2} + 1} \\to +\\infty\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "\\(a = -1\\) et \\(b = 0\\) sont finis (et \\(a \\neq 0\\)) : asymptote oblique d'équation \\(y = -x\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}f(x) - \\left(-x\\right) &= \\sqrt{x^{2} + 1} - \\left(-x\\right) \\\\ &= \\dfrac{x^{2} + 1 - \\left(-x\\right)^{2}}{\\sqrt{x^{2} + 1} + -x} \\\\ &= \\dfrac{1}{\\sqrt{x^{2} + 1} + -x}\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Près de \\(-\\infty\\), \\(\\sqrt{x^{2} + 1} + -x\\) est positif (\\(\\sqrt{x^{2} + 1} - -x\\) tend vers 0 et \\(\\sqrt{x^{2} + 1} > 0\\)), et la constante \\(1\\) est positive : \\(f(x) - \\left(-x\\right)\\) est positif : la courbe est au-dessus de la droite.",
+      "html": "\\(f(x) - \\left(-x\\right) > 0\\) pour \\(x < 0\\) : la courbe est au-dessus de l'asymptote.",
       "type": "texte"
      }
     ],
@@ -1909,63 +1468,27 @@
    {
     "etapes": [
      {
-      "html": "\\(x^{2} \\to +\\infty\\), donc \\(x^{2} + 1 \\to +\\infty\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\sqrt{x^{2} + 1} = \\text{« }\\sqrt{+\\infty}\\text{ »} = +\\infty\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+      "html": "\\[\\begin{aligned}a = \\lim_{x\\to +\\infty} \\frac{\\sqrt{x^{2} + 1}}{x} &= \\text{« }\\dfrac{\\sqrt{+\\infty}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{\\sqrt{x^{2}\\left(1 + \\frac{1}{x^{2}}\\right)}}{x} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x\\,\\sqrt{1 + \\frac{1}{x^{2}}}}{x} \\qquad \\left(x > 0 \\text{ : } \\sqrt{x^{2}} = |x| = x\\right) \\\\ &= \\lim_{x\\to +\\infty} \\sqrt{1 + \\frac{1}{x^{2}}} = 1\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "La limite est infinie : pas d'asymptote horizontale.",
+      "html": "\\[\\begin{aligned}b = \\lim_{x\\to +\\infty} \\left(\\sqrt{x^{2} + 1} - x\\right) &= \\text{« }\\sqrt{+\\infty} - \\infty\\text{ »} = \\text{« }+\\infty - \\infty\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{1}{\\sqrt{x^{2} + 1} + x} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0 \\qquad \\left(\\text{conjuguée}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "On cherche une asymptote oblique d'équation \\(y = ax + b\\) : \\(a = \\displaystyle\\lim \\frac{f(x)}{x}\\), puis \\(b = \\displaystyle\\lim \\left(f(x) - ax\\right)\\).",
+      "html": "Asymptote oblique : \\(y = x\\).",
       "type": "texte"
      },
      {
-      "html": "\\(x^{2} \\to +\\infty\\), donc \\(x^{2} + 1 \\to +\\infty\\).",
+      "html": "\\[\\begin{aligned}f(x) - \\left(x\\right) &= \\sqrt{x^{2} + 1} - x \\\\ &= \\dfrac{1}{\\sqrt{x^{2} + 1} + x} \\qquad \\left(\\text{conjuguée}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\sqrt{x^{2} + 1} \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Le numérateur \\(\\sqrt{x^{2} + 1}\\) tend vers \\(+\\infty\\) et le dénominateur \\(x\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\dfrac{f(x)}{x} &= \\lim_{x\\to +\\infty} \\dfrac{\\sqrt{x^{2}\\left(1 + \\frac{1}{x^{2}}\\right)}}{x} \\qquad \\left(x^{2} + 1 = x^{2}\\left(1 + \\frac{1}{x^{2}}\\right)\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{|x|\\sqrt{1 + \\frac{1}{x^{2}}}}{x} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x\\,\\sqrt{1 + \\frac{1}{x^{2}}}}{x} \\qquad \\left(x > 0 \\text{ donc } |x| = x\\right) \\\\ &= \\lim_{x\\to +\\infty} \\sqrt{1 + \\frac{1}{x^{2}}} = \\sqrt{1} = 1 \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{1}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x^{2} \\to +\\infty\\), donc \\(x^{2} + 1 \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\sqrt{x^{2} + 1} \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(\\sqrt{x^{2} + 1} \\to +\\infty\\) et \\(x \\to +\\infty\\) : forme indéterminée « \\(\\infty - \\infty\\) ».",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\left(f(x) - x\\right) &= \\lim_{x\\to +\\infty} \\dfrac{\\left(\\sqrt{x^{2} + 1} - x\\right)\\left(\\sqrt{x^{2} + 1} + x\\right)}{\\sqrt{x^{2} + 1} + x} \\qquad \\left(\\text{on multiplie et on divise par la conjuguée } \\sqrt{x^{2} + 1} + x\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{\\left(x^{2} + 1\\right) - x^{2}}{\\sqrt{x^{2} + 1} + x} \\qquad \\left((a - b)(a + b) = a^{2} - b^{2}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{1}{\\sqrt{x^{2} + 1} + x} = \\dfrac{1}{+\\infty + \\left(+\\infty\\right)} = 0 \\qquad \\left(\\sqrt{x^{2} + 1} \\to +\\infty\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "\\(a = 1\\) et \\(b = 0\\) sont finis (et \\(a \\neq 0\\)) : asymptote oblique d'équation \\(y = x\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}f(x) - \\left(x\\right) &= \\sqrt{x^{2} + 1} - \\left(x\\right) \\\\ &= \\dfrac{x^{2} + 1 - \\left(x\\right)^{2}}{\\sqrt{x^{2} + 1} + x} \\\\ &= \\dfrac{1}{\\sqrt{x^{2} + 1} + x}\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Près de \\(+\\infty\\), \\(\\sqrt{x^{2} + 1} + x\\) est positif (\\(\\sqrt{x^{2} + 1} - x\\) tend vers 0 et \\(\\sqrt{x^{2} + 1} > 0\\)), et la constante \\(1\\) est positive : \\(f(x) - \\left(x\\right)\\) est positif : la courbe est au-dessus de la droite.",
+      "html": "\\(f(x) - \\left(x\\right) > 0\\) pour \\(x > 0\\) : la courbe est au-dessus de l'asymptote.",
       "type": "texte"
      }
     ],
@@ -2002,75 +1525,27 @@
    {
     "etapes": [
      {
-      "html": "\\(x^{2} \\to +\\infty\\) et \\(-4x \\to +\\infty\\), donc \\(x^{2} - 4x + 5 \\to +\\infty\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\sqrt{x^{2} - 4x + 5} = \\text{« }\\sqrt{+\\infty + \\infty}\\text{ »} = +\\infty\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = +\\infty\\).",
+      "html": "\\[\\begin{aligned}a = \\lim_{x\\to -\\infty} \\frac{\\sqrt{x^{2} - 4x + 5}}{x} &= \\text{« }\\dfrac{\\sqrt{+\\infty + \\infty}}{-\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{\\sqrt{x^{2}\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right)}}{x} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{-x\\,\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}}}{x} \\qquad \\left(x < 0 \\text{ : } \\sqrt{x^{2}} = |x| = -x\\right) \\\\ &= \\lim_{x\\to -\\infty} -\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} = -1\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "La limite est infinie : pas d'asymptote horizontale.",
+      "html": "\\[\\begin{aligned}b = \\lim_{x\\to -\\infty} \\left(\\sqrt{x^{2} - 4x + 5} + x\\right) &= \\text{« }\\sqrt{+\\infty + \\infty} - \\infty\\text{ »} = \\text{« }+\\infty - \\infty\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\frac{-4x + 5}{\\sqrt{x^{2} - 4x + 5} - x} \\qquad \\left(\\text{conjuguée}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x\\,\\left(-4 + \\frac{5}{x}\\right)}{\\sqrt{x^{2}\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right)} - x} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x\\,\\left(-4 + \\frac{5}{x}\\right)}{-x\\,\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} - x} \\qquad \\left(x < 0 \\text{ : } \\sqrt{x^{2}} = |x| = -x\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{-4 + \\frac{5}{x}}{-\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} - 1} = 2\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "On cherche une asymptote oblique d'équation \\(y = ax + b\\) : \\(a = \\displaystyle\\lim \\frac{f(x)}{x}\\), puis \\(b = \\displaystyle\\lim \\left(f(x) - ax\\right)\\).",
+      "html": "Asymptote oblique : \\(y = -x + 2\\).",
       "type": "texte"
      },
      {
-      "html": "\\(x^{2} \\to +\\infty\\) et \\(-4x \\to +\\infty\\), donc \\(x^{2} - 4x + 5 \\to +\\infty\\).",
+      "html": "\\[\\begin{aligned}f(x) - \\left(-x + 2\\right) &= \\sqrt{x^{2} - 4x + 5} + x - 2 \\\\ &= \\dfrac{1}{\\sqrt{x^{2} - 4x + 5} - x + 2} \\qquad \\left(\\text{conjuguée}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\sqrt{x^{2} - 4x + 5} \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Le numérateur \\(\\sqrt{x^{2} - 4x + 5}\\) tend vers \\(+\\infty\\) et le dénominateur \\(x\\) tend vers \\(-\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\dfrac{f(x)}{x} &= \\lim_{x\\to -\\infty} \\dfrac{\\sqrt{x^{2}\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right)}}{x} \\qquad \\left(x^{2} - 4x + 5 = x^{2}\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right)\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{|x|\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}}}{x} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{-x\\,\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}}}{x} \\qquad \\left(x < 0 \\text{ donc } |x| = -x\\right) \\\\ &= \\lim_{x\\to -\\infty} -\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} = -\\sqrt{1} = -1 \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{4}{x} \\to 0 \\; ;\\; \\frac{5}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x^{2} \\to +\\infty\\) et \\(-4x \\to +\\infty\\), donc \\(x^{2} - 4x + 5 \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\sqrt{x^{2} - 4x + 5} \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(\\sqrt{x^{2} - 4x + 5} \\to +\\infty\\) et \\(x \\to -\\infty\\) : forme indéterminée « \\(\\infty - \\infty\\) ».",
-      "type": "texte"
-     },
-     {
-      "html": "\\(-4x \\to +\\infty\\), donc \\(-4x + 5 \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(\\sqrt{x^{2} - 4x + 5} \\to +\\infty\\) et \\(x \\to -\\infty\\), donc \\(\\sqrt{x^{2} - 4x + 5} - x \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Le numérateur \\(-4x + 5\\) tend vers \\(+\\infty\\) et le dénominateur \\(\\sqrt{x^{2} - 4x + 5} - x\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\left(f(x) + x\\right) &= \\lim_{x\\to -\\infty} \\dfrac{\\left(\\sqrt{x^{2} - 4x + 5} + x\\right)\\left(\\sqrt{x^{2} - 4x + 5} - x\\right)}{\\sqrt{x^{2} - 4x + 5} - x} \\qquad \\left(\\text{on multiplie et on divise par la conjuguée } \\sqrt{x^{2} - 4x + 5} - x\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{\\left(x^{2} - 4x + 5\\right) - x^{2}}{\\sqrt{x^{2} - 4x + 5} - x} \\qquad \\left((a - b)(a + b) = a^{2} - b^{2}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{-4x + 5}{\\sqrt{x^{2} - 4x + 5} - x} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{-4x\\,\\left(1 - \\frac{5}{4x}\\right)}{\\sqrt{x^{2}\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right)} - x} \\qquad \\left(-4x + 5 = -4x\\,\\left(1 - \\frac{5}{4x}\\right) ,\\; x^{2} - 4x + 5 = x^{2}\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right) ,\\; \\sqrt{x^{2} - 4x + 5} - x = x\\,\\left(-\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} - 1\\right)\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{-4x\\,\\left(1 - \\frac{5}{4x}\\right)}{|x|\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} - x} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{-4x\\,\\left(1 - \\frac{5}{4x}\\right)}{-x\\,\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} - x} \\qquad \\left(x < 0 \\text{ donc } |x| = -x\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{-4x\\,\\left(1 - \\frac{5}{4x}\\right)}{x\\,\\left(-\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} - 1\\right)} \\qquad \\left(\\text{on met } x \\text{ en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} -\\frac{4\\left(1 - \\frac{5}{4x}\\right)}{-\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} - 1} = -\\left(\\dfrac{4 \\cdot 1}{-\\sqrt{1} - 1}\\right) = 2 \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{5}{4x} \\to 0 \\; ;\\; \\frac{4}{x} \\to 0 \\; ;\\; \\frac{5}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "\\(a = -1\\) et \\(b = 2\\) sont finis (et \\(a \\neq 0\\)) : asymptote oblique d'équation \\(y = -x + 2\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}f(x) - \\left(-x + 2\\right) &= \\sqrt{x^{2} - 4x + 5} - \\left(-x + 2\\right) \\\\ &= \\dfrac{x^{2} - 4x + 5 - \\left(-x + 2\\right)^{2}}{\\sqrt{x^{2} - 4x + 5} + \\left(-x + 2\\right)} \\\\ &= \\dfrac{1}{\\sqrt{x^{2} - 4x + 5} + \\left(-x + 2\\right)}\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Près de \\(-\\infty\\), \\(\\sqrt{x^{2} - 4x + 5} + \\left(-x + 2\\right)\\) est positif (\\(\\sqrt{x^{2} - 4x + 5} - \\left(-x + 2\\right)\\) tend vers 0 et \\(\\sqrt{x^{2} - 4x + 5} > 0\\)), et la constante \\(1\\) est positive : \\(f(x) - \\left(-x + 2\\right)\\) est positif : la courbe est au-dessus de la droite.",
+      "html": "\\(f(x) - \\left(-x + 2\\right) > 0\\) pour \\(x < 2\\) : la courbe est au-dessus de l'asymptote.",
       "type": "texte"
      }
     ],
@@ -2079,87 +1554,27 @@
    {
     "etapes": [
      {
-      "html": "\\(x^{2} \\to +\\infty\\) et \\(-4x \\to -\\infty\\) : forme indéterminée « \\(\\infty - \\infty\\) ».",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\sqrt{x^{2} - 4x + 5} = \\text{« }\\sqrt{+\\infty}\\text{ »} = +\\infty \\qquad \\left(\\text{le terme dominant de } x^{2} - 4x + 5 \\text{ est } x^{2}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\left(x^{2} - 4x + 5\\right) &= \\lim_{x\\to +\\infty} x^{2}\\,\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right) = \\left(+\\infty\\right) \\cdot 1 = +\\infty \\qquad \\left(\\text{on met } x^{2} \\text{ en évidence} \\; ;\\; \\frac{4}{x} \\to 0 \\; ;\\; \\frac{5}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
+      "html": "\\[\\begin{aligned}a = \\lim_{x\\to +\\infty} \\frac{\\sqrt{x^{2} - 4x + 5}}{x} &= \\text{« }\\dfrac{\\sqrt{+\\infty}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\qquad \\left(\\text{le terme dominant de } x^{2} - 4x + 5 \\text{ est } x^{2}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{\\sqrt{x^{2}\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right)}}{x} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x\\,\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}}}{x} \\qquad \\left(x > 0 \\text{ : } \\sqrt{x^{2}} = |x| = x\\right) \\\\ &= \\lim_{x\\to +\\infty} \\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} = 1\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
+      "html": "\\[\\begin{aligned}b = \\lim_{x\\to +\\infty} \\left(\\sqrt{x^{2} - 4x + 5} - x\\right) &= \\text{« }\\sqrt{+\\infty} - \\infty\\text{ »} = \\text{« }+\\infty - \\infty\\text{ »}\\text{ : forme indéterminée} \\qquad \\left(\\text{le terme dominant de } x^{2} - 4x + 5 \\text{ est } x^{2}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{-4x + 5}{\\sqrt{x^{2} - 4x + 5} + x} \\qquad \\left(\\text{conjuguée}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x\\,\\left(-4 + \\frac{5}{x}\\right)}{\\sqrt{x^{2}\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right)} + x} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x\\,\\left(-4 + \\frac{5}{x}\\right)}{x\\,\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} + x} \\qquad \\left(x > 0 \\text{ : } \\sqrt{x^{2}} = |x| = x\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{-4 + \\frac{5}{x}}{\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} + 1} = -2\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "La limite est infinie : pas d'asymptote horizontale.",
+      "html": "Asymptote oblique : \\(y = x - 2\\).",
       "type": "texte"
      },
      {
-      "html": "On cherche une asymptote oblique d'équation \\(y = ax + b\\) : \\(a = \\displaystyle\\lim \\frac{f(x)}{x}\\), puis \\(b = \\displaystyle\\lim \\left(f(x) - ax\\right)\\).",
+      "html": "\\[\\begin{aligned}f(x) - \\left(x - 2\\right) &= \\sqrt{x^{2} - 4x + 5} - x + 2 \\\\ &= \\dfrac{1}{\\sqrt{x^{2} - 4x + 5} + x - 2} \\qquad \\left(\\text{conjuguée}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "\\(x^{2} \\to +\\infty\\) et \\(-4x \\to -\\infty\\) : forme indéterminée « \\(\\infty - \\infty\\) ».",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\left(x^{2} - 4x + 5\\right) &= \\lim_{x\\to +\\infty} x^{2}\\,\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right) = \\left(+\\infty\\right) \\cdot 1 = +\\infty \\qquad \\left(\\text{on met } x^{2} \\text{ en évidence} \\; ;\\; \\frac{4}{x} \\to 0 \\; ;\\; \\frac{5}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\sqrt{x^{2} - 4x + 5} \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Le numérateur \\(\\sqrt{x^{2} - 4x + 5}\\) tend vers \\(+\\infty\\) et le dénominateur \\(x\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\dfrac{f(x)}{x} &= \\lim_{x\\to +\\infty} \\dfrac{\\sqrt{x^{2}\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right)}}{x} \\qquad \\left(x^{2} - 4x + 5 = x^{2}\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right)\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{|x|\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}}}{x} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x\\,\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}}}{x} \\qquad \\left(x > 0 \\text{ donc } |x| = x\\right) \\\\ &= \\lim_{x\\to +\\infty} \\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} = \\sqrt{1} = 1 \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{4}{x} \\to 0 \\; ;\\; \\frac{5}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x^{2} \\to +\\infty\\) et \\(-4x \\to -\\infty\\) : forme indéterminée « \\(\\infty - \\infty\\) ».",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\left(x^{2} - 4x + 5\\right) &= \\lim_{x\\to +\\infty} x^{2}\\,\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right) = \\left(+\\infty\\right) \\cdot 1 = +\\infty \\qquad \\left(\\text{on met } x^{2} \\text{ en évidence} \\; ;\\; \\frac{4}{x} \\to 0 \\; ;\\; \\frac{5}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\sqrt{x^{2} - 4x + 5} \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(\\sqrt{x^{2} - 4x + 5} \\to +\\infty\\) et \\(x \\to +\\infty\\) : forme indéterminée « \\(\\infty - \\infty\\) ».",
-      "type": "texte"
-     },
-     {
-      "html": "\\(-4x \\to -\\infty\\), donc \\(-4x + 5 \\to -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(\\sqrt{x^{2} - 4x + 5} \\to +\\infty\\) et \\(x \\to +\\infty\\), donc \\(\\sqrt{x^{2} - 4x + 5} + x \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Le numérateur \\(-4x + 5\\) tend vers \\(-\\infty\\) et le dénominateur \\(\\sqrt{x^{2} - 4x + 5} + x\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\left(f(x) - x\\right) &= \\lim_{x\\to +\\infty} \\dfrac{\\left(\\sqrt{x^{2} - 4x + 5} - x\\right)\\left(\\sqrt{x^{2} - 4x + 5} + x\\right)}{\\sqrt{x^{2} - 4x + 5} + x} \\qquad \\left(\\text{on multiplie et on divise par la conjuguée } \\sqrt{x^{2} - 4x + 5} + x\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{\\left(x^{2} - 4x + 5\\right) - x^{2}}{\\sqrt{x^{2} - 4x + 5} + x} \\qquad \\left((a - b)(a + b) = a^{2} - b^{2}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{-4x + 5}{\\sqrt{x^{2} - 4x + 5} + x} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{-4x\\,\\left(1 - \\frac{5}{4x}\\right)}{\\sqrt{x^{2}\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right)} + x} \\qquad \\left(-4x + 5 = -4x\\,\\left(1 - \\frac{5}{4x}\\right) ,\\; x^{2} - 4x + 5 = x^{2}\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right) ,\\; \\sqrt{x^{2} - 4x + 5} + x = x\\,\\left(\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} + 1\\right)\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{-4x\\,\\left(1 - \\frac{5}{4x}\\right)}{|x|\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} + x} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{-4x\\,\\left(1 - \\frac{5}{4x}\\right)}{x\\,\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} + x} \\qquad \\left(x > 0 \\text{ donc } |x| = x\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{-4x\\,\\left(1 - \\frac{5}{4x}\\right)}{x\\,\\left(\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} + 1\\right)} \\qquad \\left(\\text{on met } x \\text{ en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} -\\frac{4\\left(1 - \\frac{5}{4x}\\right)}{\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} + 1} = -\\left(\\dfrac{4 \\cdot 1}{\\sqrt{1} + 1}\\right) = -2 \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{5}{4x} \\to 0 \\; ;\\; \\frac{4}{x} \\to 0 \\; ;\\; \\frac{5}{x^{2}} \\to 0\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "\\(a = 1\\) et \\(b = -2\\) sont finis (et \\(a \\neq 0\\)) : asymptote oblique d'équation \\(y = x - 2\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}f(x) - \\left(x - 2\\right) &= \\sqrt{x^{2} - 4x + 5} - \\left(x - 2\\right) \\\\ &= \\dfrac{x^{2} - 4x + 5 - \\left(x - 2\\right)^{2}}{\\sqrt{x^{2} - 4x + 5} + \\left(x - 2\\right)} \\\\ &= \\dfrac{1}{\\sqrt{x^{2} - 4x + 5} + \\left(x - 2\\right)}\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Près de \\(+\\infty\\), \\(\\sqrt{x^{2} - 4x + 5} + \\left(x - 2\\right)\\) est positif (\\(\\sqrt{x^{2} - 4x + 5} - \\left(x - 2\\right)\\) tend vers 0 et \\(\\sqrt{x^{2} - 4x + 5} > 0\\)), et la constante \\(1\\) est positive : \\(f(x) - \\left(x - 2\\right)\\) est positif : la courbe est au-dessus de la droite.",
+      "html": "\\(f(x) - \\left(x - 2\\right) > 0\\) pour \\(x > 2\\) : la courbe est au-dessus de l'asymptote.",
       "type": "texte"
      }
     ],
@@ -2184,19 +1599,11 @@
    {
     "etapes": [
      {
-      "html": "Or \\(e^{t} \\to 0^{+}\\) quand \\(t \\to -\\infty\\), donc \\(e^{x} \\to 0^{+}\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} x\\,e^{x} &= \\text{« }-\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }-\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= 0 \\qquad \\left(\\text{croissance comparée : } \\lim_{x\\to -\\infty} x^{n}e^{ax} = 0\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "\\(x \\to -\\infty\\) et \\(e^{x} \\to 0^{+}\\) : forme indéterminée « \\(0 \\cdot \\infty\\) ».",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} f(x) = 0 \\qquad \\left(x\\,e^{x} \\to 0 \\text{ : croissance comparée, } \\lim_{x\\to -\\infty} x^{n}e^{ax} = 0 \\text{ pour } a > 0 \\text{ et } n \\text{ entier positif}\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale d'équation \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\).",
       "type": "texte"
      }
     ],
@@ -2205,15 +1612,7 @@
    {
     "etapes": [
      {
-      "html": "Or \\(e^{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(e^{x} \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x \\to +\\infty\\) et \\(e^{x} \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "La limite est infinie : pas d'asymptote horizontale.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} x\\,e^{x} = \\text{« }+\\infty \\cdot e^{+\\infty}\\text{ »} = \\text{« }+\\infty \\cdot +\\infty\\text{ »} = +\\infty\\end{aligned}\\]",
       "type": "texte"
      }
     ],
@@ -2240,19 +1639,7 @@
    {
     "etapes": [
      {
-      "html": "Or \\(t^{2} \\to +\\infty\\) quand \\(t \\to -\\infty\\), donc \\(x^{2} \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Or \\(\\ln t \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\ln\\left(x^{2}\\right) \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x \\to -\\infty\\) et \\(\\ln\\left(x^{2}\\right) \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "La limite est infinie : pas d'asymptote horizontale.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} x\\,\\ln\\left(x^{2}\\right) = \\text{« }-\\infty \\cdot \\ln\\left(+\\infty\\right)\\text{ »} = \\text{« }-\\infty \\cdot +\\infty\\text{ »} = -\\infty\\end{aligned}\\]",
       "type": "texte"
      }
     ],
@@ -2261,19 +1648,7 @@
    {
     "etapes": [
      {
-      "html": "Or \\(t^{2} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(x^{2} \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Or \\(\\ln t \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\ln\\left(x^{2}\\right) \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x \\to +\\infty\\) et \\(\\ln\\left(x^{2}\\right) \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "La limite est infinie : pas d'asymptote horizontale.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} x\\,\\ln\\left(x^{2}\\right) = \\text{« }+\\infty \\cdot \\ln\\left(+\\infty\\right)\\text{ »} = \\text{« }+\\infty \\cdot +\\infty\\text{ »} = +\\infty\\end{aligned}\\]",
       "type": "texte"
      }
     ],
@@ -2282,63 +1657,15 @@
    {
     "etapes": [
      {
-      "html": "\\(x = 0\\) est une valeur interdite.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{-}} x\\,\\ln\\left(x^{2}\\right) &= \\text{« }0^{-} \\cdot \\ln\\left(0^{+}\\right)\\text{ »} = \\text{« }0^{-} \\cdot \\left(-\\infty\\right)\\text{ »}\\text{ : forme indéterminée} \\qquad \\left(x^{2} > 0 \\text{ : cf. tableau de signes}\\right) \\\\ &= \\lim_{x\\to 0^{-}} \\dfrac{\\ln\\left(x^{2}\\right)}{\\frac{1}{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &= \\lim_{x\\to 0^{-}} -2x = -2 \\cdot 0 = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln\\left(x^{2}\\right) \\text{ et } \\frac{1}{x} \\text{ dérivables sur } \\mathbb{R} \\setminus \\left\\{0\\right\\} ,\\; g'(x) = \\frac{-1}{x^{2}} \\text{ ne s'annule pas sur } \\mathbb{R} \\setminus \\left\\{0\\right\\} ,\\; \\text{la limite de } \\dfrac{f'}{g'} \\text{ existe}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "De part et d'autre de \\(0\\), l'argument \\(x^{2}\\) est positif (\\(x^{2} > 0\\) pour \\(x \\neq 0\\)) : il tend vers \\(0^{+}\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} x\\,\\ln\\left(x^{2}\\right) &= \\text{« }0^{+} \\cdot \\ln\\left(0^{+}\\right)\\text{ »} = \\text{« }0^{+} \\cdot \\left(-\\infty\\right)\\text{ »}\\text{ : forme indéterminée} \\qquad \\left(x^{2} > 0 \\text{ : cf. tableau de signes}\\right) \\\\ &= \\lim_{x\\to 0^{+}} \\dfrac{\\ln\\left(x^{2}\\right)}{\\frac{1}{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &= \\lim_{x\\to 0^{+}} -2x = -2 \\cdot 0 = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln\\left(x^{2}\\right) \\text{ et } \\frac{1}{x} \\text{ dérivables sur } \\mathbb{R} \\setminus \\left\\{0\\right\\} ,\\; g'(x) = \\frac{-1}{x^{2}} \\text{ ne s'annule pas sur } \\mathbb{R} \\setminus \\left\\{0\\right\\} ,\\; \\text{la limite de } \\dfrac{f'}{g'} \\text{ existe}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\), donc \\(\\ln\\left(x^{2}\\right) \\to -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x \\to 0\\) et \\(\\ln\\left(x^{2}\\right) \\to -\\infty\\) : forme indéterminée « \\(0 \\cdot \\infty\\) ».",
-      "type": "texte"
-     },
-     {
-      "html": "On écrit \\(x\\,\\ln\\left(x^{2}\\right) = \\dfrac{\\ln\\left(x^{2}\\right)}{\\frac{1}{x}}\\) pour obtenir un quotient.",
-      "type": "texte"
-     },
-     {
-      "html": "On applique la règle de Bernoulli-L'Hôpital avec \\(f(x) = \\ln\\left(x^{2}\\right)\\) et \\(g(x) = \\frac{1}{x}\\). Vérifions les hypothèses :",
-      "type": "texte"
-     },
-     {
-      "html": "(a) forme indéterminée « \\(\\infty/\\infty\\) » : vérifiée ;",
-      "type": "texte"
-     },
-     {
-      "html": "(b) \\(f\\) et \\(g\\) sont dérivables sur \\(\\mathbb{R} \\setminus \\left\\{0\\right\\}\\), donc au voisinage de \\(0\\) (sauf peut-être en \\(0\\)) : vérifiée ;",
-      "type": "texte"
-     },
-     {
-      "html": "On calcule \\(f'(x) = \\frac{2}{x}\\) et \\(g'(x) = \\frac{-1}{x^{2}}\\).",
-      "type": "texte"
-     },
-     {
-      "html": "(c) \\(g'(x) = \\frac{-1}{x^{2}}\\) ne s'annule pas sur \\(\\mathbb{R} \\setminus \\left\\{0\\right\\}\\), donc \\(g'(x) \\neq 0\\) au voisinage de \\(0\\) (sauf peut-être en \\(0\\)) : vérifiée ;",
-      "type": "texte"
-     },
-     {
-      "html": "(d) Calculons la limite de \\(\\dfrac{f'(x)}{g'(x)}\\) :",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to 0} \\dfrac{f'(x)}{g'(x)} &= \\lim_{x\\to 0} -2x = -2 \\cdot 0 = 0\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "La limite de \\(\\dfrac{f'(x)}{g'(x)}\\) existe et vaut \\(0\\) : (d) est vérifiée, donc la règle s'applique :",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to 0} f(x) &= \\lim_{x\\to 0} \\dfrac{\\ln\\left(x^{2}\\right)}{\\frac{1}{x}} \\\\ &= \\lim_{x\\to 0} \\dfrac{f'(x)}{g'(x)} = 0 \\qquad \\left(\\text{règle de Bernoulli-L'Hôpital}\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Les deux limites sont finies et égales à \\(0\\) : f n'est pas définie en \\(x=0\\), mais sa limite y est finie (\\(=0\\)) : pas d'asymptote verticale, trou dans le graphique en \\((0\\,;\\,0)\\).",
+      "html": "Limite finie : pas d'asymptote verticale, trou dans le graphique en \\((0\\,;\\,0)\\).",
       "type": "texte"
      }
     ],
@@ -2348,6 +1675,28 @@
   "f_tex": "x\\,\\ln\\left(x^{2}\\right)",
   "ok": true,
   "tableaux_signe": [
+   {
+    "html": "Signe de \\(x^{2}\\) :",
+    "type": "texte"
+   },
+   {
+    "crit": [
+     "0"
+    ],
+    "rows": [
+     {
+      "cells": [
+       "+",
+       "0",
+       "+"
+      ],
+      "final": true,
+      "label": "x^{2}"
+     }
+    ],
+    "type": "tableau",
+    "var": "x"
+   },
    {
     "html": "Signe de \\(x\\) :",
     "type": "texte"
@@ -2387,19 +1736,11 @@
    {
     "etapes": [
      {
-      "html": "\\(x = 0\\) est une valeur interdite : on étudie la limite de \\(f\\) quand \\(x \\to 0^{+}\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} \\left(x + \\ln(x)\\right) = \\text{« }0^{+} + \\ln\\left(0^{+}\\right)\\text{ »} = \\text{« }0^{+} - \\infty\\text{ »} = -\\infty\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\ln t \\to -\\infty\\) quand \\(t \\to 0^{+}\\), donc \\(\\ln(x) \\to -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x \\to 0^{+}\\) et \\(\\ln(x) \\to -\\infty\\), donc \\(\\displaystyle\\lim_{x\\to 0^{+}} f(x) = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote verticale d'équation \\(x = 0\\).",
+      "html": "Asymptote verticale : \\(x = 0\\).",
       "type": "texte"
      }
     ],
@@ -2408,15 +1749,7 @@
    {
     "etapes": [
      {
-      "html": "Or \\(\\ln t \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\ln(x) \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x \\to +\\infty\\) et \\(\\ln(x) \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "La limite est infinie : pas d'asymptote horizontale.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\left(x + \\ln(x)\\right) = \\text{« }+\\infty + \\ln\\left(+\\infty\\right)\\text{ »} = \\text{« }+\\infty + \\infty\\text{ »} = +\\infty\\end{aligned}\\]",
       "type": "texte"
      }
     ],
@@ -2457,23 +1790,11 @@
    {
     "etapes": [
      {
-      "html": "Or \\(t^{2} \\to +\\infty\\) quand \\(t \\to -\\infty\\), donc \\(x^{2} \\to +\\infty\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{x}{\\sqrt{x^{2}}} &= \\text{« }\\dfrac{-\\infty}{\\sqrt{+\\infty}}\\text{ »} = \\text{« }\\dfrac{-\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x}{-x} \\qquad \\left(x < 0 \\text{ : } \\sqrt{x^{2}} = |x| = -x\\right) \\\\ &= \\lim_{x\\to -\\infty} -1 = -1\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\sqrt{x^{2}} \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Le numérateur \\(x\\) tend vers \\(-\\infty\\) et le dénominateur \\(\\sqrt{x^{2}}\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} f(x) &= \\lim_{x\\to -\\infty} \\dfrac{x}{\\sqrt{x^{2}}} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x}{|x|} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x}{-x} \\qquad \\left(x < 0 \\text{ donc } |x| = -x\\right) \\\\ &= \\lim_{x\\to -\\infty} -1 = -1 \\qquad \\left(\\text{on simplifie par } x\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale d'équation \\(y = -1\\).",
+      "html": "Asymptote horizontale : \\(y = -1\\).",
       "type": "texte"
      }
     ],
@@ -2482,23 +1803,11 @@
    {
     "etapes": [
      {
-      "html": "Or \\(t^{2} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(x^{2} \\to +\\infty\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x}{\\sqrt{x^{2}}} &= \\text{« }\\dfrac{+\\infty}{\\sqrt{+\\infty}}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x}{x} \\qquad \\left(x > 0 \\text{ : } \\sqrt{x^{2}} = |x| = x\\right) \\\\ &= \\lim_{x\\to +\\infty} 1 = 1\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\sqrt{x^{2}} \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Le numérateur \\(x\\) tend vers \\(+\\infty\\) et le dénominateur \\(\\sqrt{x^{2}}\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} f(x) &= \\lim_{x\\to +\\infty} \\dfrac{x}{\\sqrt{x^{2}}} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x}{|x|} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x}{x} \\qquad \\left(x > 0 \\text{ donc } |x| = x\\right) \\\\ &= \\lim_{x\\to +\\infty} 1 = 1 \\qquad \\left(\\text{on simplifie par } x\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale d'équation \\(y = 1\\).",
+      "html": "Asymptote horizontale : \\(y = 1\\).",
       "type": "texte"
      }
     ],
@@ -2507,27 +1816,11 @@
    {
     "etapes": [
      {
-      "html": "\\(x = 0\\) est une valeur interdite.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{-}} \\frac{x}{\\sqrt{x^{2}}} &= \\text{« }\\dfrac{0}{\\sqrt{0}}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 0^{-}} \\frac{x}{|x|} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to 0^{-}} \\frac{x}{-x} \\qquad \\left(x < 0 \\text{ : } |x| = -x\\right) \\\\ &= \\lim_{x\\to 0^{-}} -1 = -1 \\qquad \\left(\\text{on simplifie}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Le numérateur \\(x\\) tend vers \\(0\\) et le dénominateur \\(\\sqrt{x^{2}}\\) tend vers \\(0\\) : forme indéterminée « \\(0/0\\) ».",
-      "type": "texte"
-     },
-     {
-      "html": "À gauche :",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{-}} f(x) &= \\lim_{x\\to 0^{-}} \\frac{x}{|x|} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to 0^{-}} \\frac{x}{-x} \\qquad \\left(x < 0 \\text{ à gauche de } 0 \\text{, donc } |x| = -x\\right) \\\\ &= \\lim_{x\\to 0^{-}} -1 = -1 \\qquad \\left(\\text{on simplifie par } x \\text{ (} x \\neq 0\\text{)}\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "À droite :",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} f(x) &= \\lim_{x\\to 0^{+}} \\frac{x}{|x|} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to 0^{+}} \\frac{x}{x} \\qquad \\left(x > 0 \\text{ à droite de } 0 \\text{, donc } |x| = x\\right) \\\\ &= \\lim_{x\\to 0^{+}} 1 = 1 \\qquad \\left(\\text{on simplifie par } x \\text{ (} x \\neq 0\\text{)}\\right)\\end{aligned}\\]",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} \\frac{x}{\\sqrt{x^{2}}} &= \\text{« }\\dfrac{0}{\\sqrt{0}}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 0^{+}} \\frac{x}{|x|} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to 0^{+}} \\frac{x}{x} \\qquad \\left(x > 0 \\text{ : } |x| = x\\right) \\\\ &= \\lim_{x\\to 0^{+}} 1 = 1 \\qquad \\left(\\text{on simplifie}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
@@ -2549,11 +1842,7 @@
    {
     "etapes": [
      {
-      "html": "Or \\(\\sqrt{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to +\\infty} f(x) = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "La limite est infinie : pas d'asymptote horizontale.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\sqrt{x} = \\text{« }\\left(+\\infty\\right)^{\\frac{1}{2}}\\text{ »} = +\\infty\\end{aligned}\\]",
       "type": "texte"
      }
     ],
@@ -2579,23 +1868,7 @@
    {
     "etapes": [
      {
-      "html": "Or \\(t^{2} \\to +\\infty\\) quand \\(t \\to -\\infty\\), donc \\(x^{2} \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Quand \\(x \\to -\\infty\\), \\(-x \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Or \\(e^{t} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(e^{-x} \\to +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x^{2} \\to +\\infty\\) et \\(e^{-x} \\to +\\infty\\), donc \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "La limite est infinie : pas d'asymptote horizontale.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} x^{2}\\,e^{-x} = \\text{« }+\\infty \\cdot e^{+\\infty}\\text{ »} = \\text{« }+\\infty \\cdot +\\infty\\text{ »} = +\\infty\\end{aligned}\\]",
       "type": "texte"
      }
     ],
@@ -2604,27 +1877,11 @@
    {
     "etapes": [
      {
-      "html": "Or \\(t^{2} \\to +\\infty\\) quand \\(t \\to +\\infty\\), donc \\(x^{2} \\to +\\infty\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} x^{2}\\,e^{-x} &= \\text{« }+\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }+\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= 0 \\qquad \\left(\\text{croissance comparée : } \\lim_{x\\to +\\infty} x^{n}e^{-ax} = 0\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Quand \\(x \\to +\\infty\\), \\(-x \\to -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Or \\(e^{t} \\to 0^{+}\\) quand \\(t \\to -\\infty\\), donc \\(e^{-x} \\to 0^{+}\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x^{2} \\to +\\infty\\) et \\(e^{-x} \\to 0^{+}\\) : forme indéterminée « \\(0 \\cdot \\infty\\) ».",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} f(x) = 0 \\qquad \\left(x^{2}\\,e^{-x} \\to 0 \\text{ : croissance comparée, } \\lim_{x\\to +\\infty} x^{n}e^{-ax} = 0 \\text{ pour } a > 0 \\text{ et } n > 0\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale d'équation \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\).",
       "type": "texte"
      }
     ],
@@ -2671,39 +1928,19 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur \\(x^{2}\\) tend vers \\(+\\infty\\) et le dénominateur \\(x - 1\\) tend vers \\(-\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{x^{2}}{x - 1} &= \\text{« }\\dfrac{+\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x^{2}}{x\\,\\left(1 - \\frac{1}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{x}{1 - \\frac{1}{x}} = -\\infty\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} f(x) &= \\lim_{x\\to -\\infty} \\dfrac{x^{2}}{x\\,\\left(1 - \\frac{1}{x}\\right)} \\qquad \\left(x - 1 = x\\,\\left(1 - \\frac{1}{x}\\right)\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{x}{1 - \\frac{1}{x}} = \\dfrac{-\\infty}{1} = -\\infty \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{1}{x} \\to 0\\right)\\end{aligned}\\]",
+      "html": "Division euclidienne : \\(x^{2} = \\left(x - 1\\right)\\,\\left(x + 1\\right) + 1\\), donc \\(f(x) = x + 1 + \\dfrac{1}{x - 1}\\).",
       "type": "texte"
      },
      {
-      "html": "La limite est infinie : pas d'asymptote horizontale.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\left(f(x) - \\left(x + 1\\right)\\right) = \\lim_{x\\to -\\infty} \\dfrac{1}{x - 1} = \\text{« }\\dfrac{1}{-\\infty}\\text{ »} = 0 \\text{ : asymptote oblique } y = x + 1\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division euclidienne de \\(x^{2}\\) par \\(x - 1\\) :",
-      "type": "texte"
-     },
-     {
-      "html": "\\[x^{2} = \\left(x - 1\\right)\\,\\left(x + 1\\right) + 1\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(f(x) = x + 1 + \\dfrac{1}{x - 1}\\), d'où :",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\left(f(x) - \\left(x + 1\\right)\\right) &= \\lim_{x\\to -\\infty} \\dfrac{1}{x - 1} = 0 \\qquad \\left(f(x) - \\left(x + 1\\right) = \\dfrac{1}{x - 1} \\; ;\\; \\text{numérateur constant, dénominateur } \\to -\\infty\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote oblique d'équation \\(y = x + 1\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Position relative, près de \\(-\\infty\\) : \\(1\\) est positif et \\(x - 1\\) est négatif, donc \\(f(x) - \\left(x + 1\\right)\\) est négatif : la courbe est au-dessous de la droite.",
+      "html": "\\(\\dfrac{1}{x - 1} < 0\\) pour \\(x < 1\\) : la courbe est au-dessous de l'asymptote.",
       "type": "texte"
      }
     ],
@@ -2712,39 +1949,11 @@
    {
     "etapes": [
      {
-      "html": "Le numérateur \\(x^{2}\\) tend vers \\(+\\infty\\) et le dénominateur \\(x - 1\\) tend vers \\(+\\infty\\) : forme indéterminée « \\(\\infty/\\infty\\) ».",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x^{2}}{x - 1} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}}{x\\,\\left(1 - \\frac{1}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{x}{1 - \\frac{1}{x}} = +\\infty\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} f(x) &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}}{x\\,\\left(1 - \\frac{1}{x}\\right)} \\qquad \\left(x - 1 = x\\,\\left(1 - \\frac{1}{x}\\right)\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{x}{1 - \\frac{1}{x}} = \\dfrac{+\\infty}{1} = +\\infty \\qquad \\left(\\text{on simplifie par } x \\; ;\\; \\frac{1}{x} \\to 0\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "La limite est infinie : pas d'asymptote horizontale.",
-      "type": "texte"
-     },
-     {
-      "html": "Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. On effectue la division euclidienne de \\(x^{2}\\) par \\(x - 1\\) :",
-      "type": "texte"
-     },
-     {
-      "html": "\\[x^{2} = \\left(x - 1\\right)\\,\\left(x + 1\\right) + 1\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Donc \\(f(x) = x + 1 + \\dfrac{1}{x - 1}\\), d'où :",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\left(f(x) - \\left(x + 1\\right)\\right) &= \\lim_{x\\to +\\infty} \\dfrac{1}{x - 1} = 0 \\qquad \\left(f(x) - \\left(x + 1\\right) = \\dfrac{1}{x - 1} \\; ;\\; \\text{numérateur constant, dénominateur } \\to +\\infty\\right)\\end{aligned}\\]",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote oblique d'équation \\(y = x + 1\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Position relative, près de \\(+\\infty\\) : \\(1\\) est positif et \\(x - 1\\) est positif, donc \\(f(x) - \\left(x + 1\\right)\\) est positif : la courbe est au-dessus de la droite.",
+      "html": "Même division : \\(f(x) - \\left(x + 1\\right) = \\dfrac{1}{x - 1}\\) tend vers \\(0\\) : asymptote oblique \\(y = x + 1\\) ; \\(\\dfrac{1}{x - 1} > 0\\) pour \\(x > 1\\) : la courbe est au-dessus de l'asymptote.",
       "type": "texte"
      }
     ],
@@ -2753,23 +1962,15 @@
    {
     "etapes": [
      {
-      "html": "\\(x = 1\\) est une valeur interdite.",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 1^{-}} \\frac{x^{2}}{x - 1} = \\text{« }\\dfrac{1}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x - 1 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "Le numérateur \\(x^{2}\\) vaut \\(1^{2} = 1\\) et le dénominateur \\(x - 1\\) tend vers \\(0\\).",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 1^{+}} \\frac{x^{2}}{x - 1} = \\text{« }\\dfrac{1}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x - 1 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "type": "texte"
      },
      {
-      "html": "À gauche de \\(1\\), le dénominateur est négatif (cf. tableau de signes de \\(x - 1\\)) : il tend vers \\(0^{-}\\), donc \\(f(x) \\to \\dfrac{1}{0^{-}} = -\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "À droite de \\(1\\), le dénominateur est positif (cf. tableau de signes de \\(x - 1\\)) : il tend vers \\(0^{+}\\), donc \\(f(x) \\to \\dfrac{1}{0^{+}} = +\\infty\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote verticale d'équation \\(x = 1\\).",
+      "html": "Asymptote verticale : \\(x = 1\\).",
       "type": "texte"
      }
     ],

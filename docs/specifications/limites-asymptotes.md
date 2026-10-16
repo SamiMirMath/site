@@ -46,7 +46,17 @@ Ne jamais écrire « point de discontinuité » quand a ∉ ED.
 - Valeur interdite au bord de l'ED (un seul côté), limite finie ℓ : même formulation que le
   premier cas, avec la limite latérale.
 
-### Rédaction détaillée (tranché le 14.10.2026, Q9)
+### Rédaction (guide du 15.10.2026, prioritaire)
+
+La rédaction visible suit [../guide-redaction.md](../guide-redaction.md), qui **remplace** les sous-sections « Rédaction détaillée » (phrases
+d'annonce), « Style de rédaction » (points 1 à 5) et le modèle ci-dessous : forme annoncée en une ligne par substitution des limites
+(`lim f = « √(+∞)/(−∞) » = « +∞/−∞ » : forme indéterminée`), chaîne d'égalités à justifications courtes, une ligne par côté
+(`lim_(x→3⁻) … = « 8/0⁻ » = −∞  (x − 3 < 0 : cf. tableau de signes)`), tableau de signes TOUJOURS donné pour un dénominateur ou un
+argument de ln qui tend vers 0 (même affine), une ligne par facteur y compris évident ou constant, conclusions courtes
+(« Asymptote verticale : x = 3. », « Limite finie : pas d'asymptote verticale, trou dans le graphique en (a ; ℓ). »), division
+euclidienne écrite une fois, L'Hôpital en une parenthèse qui nomme les hypothèses. Les méthodes, leur ordre et le garde-fou sont inchangés.
+
+### Rédaction détaillée (tranché le 14.10.2026, Q9 ; formulations remplacées par le guide)
 
 Chaque limite affichée est rédigée par la **première méthode du cours qui s'applique** :
 
@@ -156,7 +166,7 @@ Modèle (1/(x² − 2) en −√2) :
 | LA-06 | Sorties des exemples et exercices identiques aux instantanés | [auto-py] |
 | LA-07 | « croissance comparée » apparaît pour x²·e^(−x) (+∞), x^(1/2)·e^(−x) (+∞), ln(x)/x (+∞), x·ln(x) (0⁺), e^x − x² (+∞), x − ln(x) (+∞), x·e^x (−∞), avec la limite de référence nommée ; jamais pour x·e^x (+∞), e^x/x (0), e^(2x) (±∞) | [auto-py] |
 | LA-09 | x^(2/3), x^(1/3), x^(-1/3), x^(4/3), (x−2)^(1/3), x·x^(1/3) : limites en −∞ et en un point négatif justes dans ℝ (racine réelle) ; aucun `Infinity` ni `NaN` dans une sortie (JSON strict) | [auto-py] (`test_racines_reelles.py`, `test_json_strict.py`) |
-| LA-08 | Aucune sortie ne contient « point de discontinuité » ni le genre « saut » ; les deux formulations Q7 apparaissent mot pour mot pour (e^x−1)/x, (x²−1)/(x−1) et x/√(x²) en 0 ou 1 | [auto-py] |
+| LA-08 | Aucune sortie ne contient « point de discontinuité » ni le genre « saut » ; la formulation Q7 raccourcie « Limite finie : pas d'asymptote verticale, trou dans le graphique en (a ; ℓ). » apparaît pour (e^x−1)/x, (x²−1)/(x−1) et x·ln(x) ; x/√(x²) en 0 : « Limites à gauche et à droite différentes … » | [auto-py] |
 | LA-10 | Toute limite étudiée est rédigée (méthode du cours) ou suivie de la phrase de repli mot pour mot ; jamais « lim f(x) = v » seul | [auto-py] |
 | LA-11 | Garde-fou : la valeur rédigée égale la valeur de référence ; sinon repli, aucune étape de la méthode, `detail` en console | [auto-py] |
 | LA-12 | Chaque limite intermédiaire écrite est confirmée par l'oracle haute précision (corpus de `test_proprietes_limites.py`) | [auto-py] |
@@ -169,13 +179,13 @@ Modèle (1/(x² − 2) en −√2) :
 | LA-19 | Écriture : coefficient 3/(2x) (pas de fraction dans une fraction) ; polynôme jamais écrit en quotient « /1 » | [auto-py] |
 | LA-20 | Racines en ±∞ : « x < 0 donc √(x²) = \|x\| = −x » en −∞ ; √(4x²+1)/(x+2) → 2 en +∞ et → −2 en −∞ ; √(x²−4x+5) : a = 1, b = −2 en +∞ et a = −1, b = 2 en −∞ ; √(x²+x) − x en −∞ : pas de forme indéterminée, +∞ | [auto-py] |
 | LA-21 | Aucune phrase interdite (« par continuité de », « est une constante », « la somme / la différence / le produit tend vers », « Par substitution ») dans les instantanés, les exemples, les exercices et le corpus de tests | [auto-py] |
-| LA-22 | Tout dénominateur qui tend vers 0 est suivi d'une ligne « Signe de … » ; tout argument de ln qui tend vers 0 en est précédé | [auto-py] |
-| LA-23 | Valeur interdite à deux côtés : « est une valeur interdite », « Le numérateur », « Signe de » une seule fois ; au plus une ligne « À gauche » et une « À droite » ; une seule conclusion si les limites sont égales | [auto-py] |
+| LA-22 | Tout dénominateur qui tend vers 0⁺ / 0⁻ (ou argument de ln, hors x seul) porte « cf. tableau de signes » dans la parenthèse de sa ligne, ou est précédé d'une ligne « Signe de … » si le tableau est impossible | [auto-py] |
+| LA-23 | Valeur interdite : au plus une ligne `lim` par côté (une seule si les deux côtés s'écrivent pareil), puis la conclusion ; aucune phrase « est une valeur interdite », « Le numérateur … » | [auto-py] |
 | LA-24 | Aucun mot de la mécanique interne (SymPy, Abandon, exception, nœud, arbre) dans un texte affiché | [auto-py] |
-| LA-25 | Tableau de signes en tête (clé `tableaux_signe`) pour 1/(x²−2), (x+1)/(x²−4), (eˣ+1)/(eˣ−1), ln(x²−4x)/(x−5), (x²−1)/(x−3) : colonnes = valeurs interdites ou zéros, double barre pour un dénominateur ; la lecture du tableau coïncide avec le signe calculé ; sans tableau possible, justification en texte | [auto-py] ; rendu [manuel] |
+| LA-25 | Tableau de signes en tête (clé `tableaux_signe`) : colonnes = valeurs interdites ou zéros, double barre pour un dénominateur, une ligne par facteur (évident ou non) et par constante, puis le produit ; un dénominateur affine a son tableau (x − 3, x − 5) | [auto-py] ; rendu [manuel] |
 | LA-26 | Jamais « x est positif (il vaut 4) » : une variable ne « vaut » pas la valeur vers laquelle elle tend (« proche de » si besoin), y compris dans la justification en texte | [auto-py] |
 | LA-27 | Chaque valeur interdite se termine par sa conclusion ; une seule limite latérale infinie : « asymptote verticale d'équation x = 0 (du côté droit) ; à gauche, f(x) → 0 » | [auto-py] |
-| LA-28 | Toute ligne qui lit un signe dans un tableau renvoie à lui (« cf. tableau de signes de X ») ; chaque tableau est titré « Signe de X » ; ln(x²−4x)/(x−5) : phrase de repli seulement en ±∞ | [auto-py] |
+| LA-28 | Chaque parenthèse « (X > 0 : cf. tableau de signes) » renvoie à un tableau titré « Signe de X » présent dans la même étude | [auto-py] |
 | LA-29 | Mise en évidence sous une racine (L5, retouche du 15.10) : en ±∞, quotient ou produit dont un membre est une racine ; √(4x²+1) = √(x²(4 + 1/x²)) = \|x\|√(4 + 1/x²), puis \|x\| = x ou −x, simplification, limite de ce qui reste ; « x < 0 donc √(x²) = \|x\| = −x » en −∞ ; jamais d'équivalent ; jamais pour une fraction rationnelle ni quand les termes de plus haut degré d'une somme se compensent | [auto-py] |
 | LA-30 | Expression conjuguée (L4) : ∞ − ∞ avec une racine en ±∞ (√(x²+x) − x → 1/2 en +∞ ; en −∞ pas de forme indéterminée, +∞) ; 0/0 avec une racine en une valeur ((√(x+3) − 2)/(x − 1) → 1/4) ; jamais sans racine | [auto-py] |
 | LA-31 | Croissance comparée (L6, T09, Q1) : citée seulement devant une forme indéterminée, limite de référence nommée ; mise en évidence de l'exponentielle (e^x − x² = e^x(1 − x²e^(−x)), (e^x+1)/(e^x−1)) ; jamais pour x·e^x en +∞, e^x/x en 0, e^(2x) | [auto-py] |
@@ -183,7 +193,7 @@ Modèle (1/(x² − 2) en −√2) :
 | LA-33 | Aucune sortie ne contient « ∼ », « équivalent » ni « se comporte comme » | [auto-py] (`test_vocabulaire.py`) |
 | LA-34 | ln(u)/v en ±∞ (u, v polynômes) : ln(u) = k ln\|x\| + ln(c + …), v mis en évidence, puis croissance comparée (limite de référence nommée) ; jamais Bernoulli-L'Hôpital pour ln(x²+1)/x et ln(x²−4x)/(x−5) en ±∞ | [auto-py] |
 | LA-35 | √(x²) = \|x\| : x/√(x²) en 0 se rédige (x/\|x\| = −1 à gauche, 1 à droite), sans phrase de repli ; (x−1)/√((x−1)²) en 1 de même | [auto-py] |
-| LA-36 | Facteurs de signe évident (carré, exponentielle, racine d'une expression positive, constante) : aucune ligne dans les tableaux de signes de Dérivée, Étude complète, ED et Limites ; phrase puis « donc … est du signe de … » ; la valeur interdite d'un facteur retiré garde sa colonne ; √(4x²+1)/(x+2) : tableau de 8x − 1 seul | [auto-py] (`test_facteurs_evidents.py`) |
-| LA-37 | Chaîne d'égalités : mise en évidence (√(4x²+1)/(x+2) en ±∞, (x²−1)/(x−3), ln(x²+1)/x), conjuguée (√(x²+x) − x en +∞ : une seule chaîne), croissance comparée, L'Hôpital et 0/0 s'écrivent en une formule affichée `lim f(x) = lim … = valeur` avec justifications entre parenthèses ; forme indéterminée nommée avant la chaîne, asymptote après ; x/√(x²) en 0 : une seule ligne « 0/0 » | [auto-py] |
+| LA-36 | Facteurs de signe évident (carré, exponentielle, racine, constante) : une ligne dans le tableau de signes, aucune phrase ni « donc … est du signe de … » | [auto-py] (`test_redaction_limites.py`, `TestTableauxDeSignes`) |
+| LA-37 | Chaîne d'égalités : forme annoncée en tête (`lim f = « … » = « … » : forme indéterminée`), mise en évidence de la puissance de x seule, une seule ligne pour √(x²) = |x| = ±x, conjuguée en une ligne, croissance comparée avec sa limite de référence ; plus de « on simplifie par x » ni de refactorisation en justification | [auto-py] |
 | LA-38 | Encadré « Rappel de la méthode » (page Limites, L9) : opérations, puis mise en évidence, expression conjuguée, croissance comparée, Bernoulli-L'Hôpital dans cet ordre ; chaîne d'égalités ; asymptotes horizontale, verticale, trou, oblique (division euclidienne, a puis b, position relative) ; aucun équivalent | [auto-py] (`test_rappel_methode.py`) |
 | LA-39 | Chaque formule écrite par le moteur est équilibrée (accolades, \\left/\\right, aligned) | [auto-py] (`test_rappel_methode.py`) |

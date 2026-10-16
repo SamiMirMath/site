@@ -21,6 +21,7 @@ Méthode (décidée avec l'enseignant) :
     phrase honnête, dès qu'une étape ne peut pas être justifiée.
 """
 import json
+import re
 from fractions import Fraction as F
 
 from ensemble_def import (
@@ -191,82 +192,29 @@ def _limite_polynome_infini(P, s):
     return Lim.infini(_signe(P[n]) * (s if n % 2 else 1))
 
 
-def _phrases_polynome_infini(P, s, n, ctx):
-    """Somme de plusieurs termes en s∞ : limite de chaque terme, puis règle de la somme ; si deux termes
-    divergent en sens contraire (∞ − ∞), chaîne d'égalités avec mise en évidence du terme de plus haut degré.
-    Renvoie (lignes, Lim)."""
-    n_tex = tex(n)
-    ks = _polynome_a_termes(P)
-    non_const = [k for k in ks if k >= 1]
-    parts = [rf"\({_terme_signe_tex(P, k)} \to {Lim.infini(_signe(P[k]) * (s if k % 2 else 1)).tex()}\)"
-             for k in non_const]
-    enum = _enumerer(parts)
-    signes = {_signe(P[k]) * (s if k % 2 else 1) for k in non_const}
-    deg_ = deg(P)
-    tete_lim = Lim.infini(_signe(P[deg_]) * (s if deg_ % 2 else 1))
-    if len(signes) == 1:
-        return [enum + rf", donc \({n_tex} \to {tete_lim.tex()}\)."], tete_lim
+def _polynome_infini(P, s, n, ctx):
+    """Somme de plusieurs termes en s∞. Termes de même sens : la limite est celle du terme de plus haut degré (rien à écrire).
+    Termes opposés : si n est la limite étudiée, forme indéterminée « ∞ − ∞ » levée par une chaîne (mise en évidence) ; sinon
+    le terme dominant donne la limite (remarque en mots, voir _atome). Renvoie (Lim, lignes)."""
+    ks = [k for k in _polynome_a_termes(P) if k >= 1]
+    signes = {_signe(P[k]) * (s if k % 2 else 1) for k in ks}
+    tete_lim = Lim.infini(_signe(P[deg(P)]) * (s if deg(P) % 2 else 1))
+    if len(signes) == 1 or n is not ctx.f:
+        return tete_lim, []
     A = _membre_en_evidence(n, s)
     g = A["evid"]
     ch = ctx.chaine(n)
-    ch.lim(tex(g), rf"\text{{on met }} {tex(_tete_tex(A['coef'], A['k']))} \text{{ en évidence}}", g)
+    ctx.remarques = []
+    ch.annoncer(_guil(_atome(n, ctx, True)) + r"\text{ : forme indéterminée}")
+    ch.lim(tex(g), r"\text{mise en évidence}", g)
     avant = _conclure(ch, g, tete_lim, ctx)
-    if ch.complete and n is ctx.f:
-        ctx.racine_dite = True
-    return [enum + r" : forme indéterminée « \(\infty - \infty\) »."] + avant + [ch], tete_lim
+    return tete_lim, avant + [ch]
 
 
-def _phrases_fraction_infini(N, D, s, n_tex):
-    """Quotient de deux polynômes (D non constant) en s∞. Renvoie (phrases, Lim)."""
-    vers = r"+\infty" if s > 0 else r"-\infty"
-    n, m = deg(N), deg(D)
+def _fraction_const_infini(N, D, s):
+    """Constante sur polynôme non constant en s∞ : la limite est 0 (la chaîne écrit « c/±∞ » = 0)."""
     LD = _limite_polynome_infini(D, s)
-    if n == 0:
-        c = N[0]
-        lim = Lim.fin(0, _signe(c) * LD.inf)
-        parenthese = "" if len(_polynome_a_termes(D)) == 1 else " (limite de son terme de plus haut degré)"
-        return [rf"Le numérateur vaut \({qtex(c)}\) et le dénominateur \({ptex(D, 'x')}\) tend vers \({LD.tex()}\)"
-                rf"{parenthese}, donc \({n_tex} \to 0\)."], lim
-    LN = _limite_polynome_infini(N, s)
-    an, bm = N[n], D[m]
-    ratio = an / bm
-    teteN, intN, Nf, termesN = _facteur_detaille(N, n)
-    teteD, intD, Df, termesD = _facteur_detaille(D, m)
-    phrases = [rf"Le numérateur tend vers \({LN.tex()}\) et le dénominateur tend vers \({LD.tex()}\) "
-               r"(limite de leur terme de plus haut degré) : forme indéterminée « \(\infty/\infty\) »."]
-    equations = []
-    if intN != "1":
-        equations.append(rf"\({ptex(N, 'x')} = {Nf}\)")
-    if intD != "1":
-        equations.append(rf"\({ptex(D, 'x')} = {Df}\)")
-    if equations:
-        phrases.append("On met en évidence le terme de plus haut degré : " + " et ".join(equations) + ".")
-    tete = _terme_tex(ratio, n - m)
-    tete_prod = "" if tete == "1" else tete + r" \cdot "
-    if intN == "1" and intD == "1":
-        phrases.append(rf"Donc \({n_tex} = \dfrac{{{Nf}}}{{{Df}}} = {tete}\).")
-    else:
-        phrases.append(rf"Donc \({n_tex} = \dfrac{{{Nf}}}{{{Df}}} = {tete_prod}\dfrac{{{intN}}}{{{intD}}}\).")
-        nuls = []
-        for _, t in termesN + termesD:
-            if t not in nuls:
-                nuls.append(t)
-        liste = _enumerer([rf"\({t} \to 0\)" for t in nuls])
-        phrases.append(rf"Quand \(x \to {vers}\), {liste} : le quotient "
-                       rf"\(\dfrac{{{intN}}}{{{intD}}}\) tend vers 1.")
-    k = n - m
-    if k < 0:
-        sgn = _signe(ratio) * (s if (-k) % 2 else 1)
-        lim = Lim.fin(0, sgn)
-        phrases.append(rf"Le quotient tend vers 1 et \({tete} \to 0\) : la limite est \(0\).")
-    elif k == 0:
-        lim = Lim.fin(ratio)
-        phrases.append(rf"Le quotient tend vers 1 : la limite est \({qtex(ratio)}\) "
-                       r"(rapport des coefficients dominants).")
-    else:
-        lim = Lim.infini(_signe(ratio) * (s if k % 2 else 1))
-        phrases.append(rf"Le quotient tend vers 1 et \({tete} \to {lim.tex()}\) : la limite est \({lim.tex()}\).")
-    return phrases, lim
+    return Lim.fin(0, _signe(N[0]) * LD.inf)
 
 
 def _suite_signee(P):
@@ -303,44 +251,67 @@ def _facteur_poly(P):
     return rf"\left({s}\right)" if len(_polynome_a_termes(P)) > 1 else s
 
 
-def _oblique_rationnelle(items, N, D, Q, R, s):
+def _borne_signe(R, D, s):
+    """Borne au-delà de laquelle R/D garde son signe près de s∞ (plus grande racine réelle de R et D en +∞, plus petite en −∞) :
+    (tex de la borne, None) ; (None, None) si R et D n'ont aucune racine réelle ; ("", None) si la borne n'a pas d'écriture exacte."""
+    sp = _sympy()
+    x = _SP["x"]
+    racines = []
+    for P in (R, D):
+        if deg(P) >= 1:
+            racines += list(sp.real_roots(sp.Poly(sum(_rat(c) * x ** i for i, c in enumerate(P)), x)))
+    if not racines:
+        return None, None
+    r = max(racines, key=lambda r: float(sp.N(r))) if s > 0 else min(racines, key=lambda r: float(sp.N(r)))
+    n = num_sympy(r)
+    return ("" if n.approx else n.tex), None
+
+
+def _oblique_rationnelle(items, N, D, Q, R, s, vues):
     """deg N = deg D + 1 : division euclidienne N = D·Q + R (sans « + 0 » ni « + - »), f(x) − (ax + b) = R/D → 0,
-    puis position relative de la courbe et de la droite."""
+    puis position relative de la courbe et de la droite. La division n'est écrite qu'une fois (−∞ puis +∞)."""
     vers = r"+\infty" if s > 0 else r"-\infty"
     ntex, dtex, qtex_, rtex = ptex(N, "x"), ptex(D, "x"), ptex(Q, "x"), ptex(R, "x")
-    items.append(txt(r"Le degré du numérateur dépasse celui du dénominateur de 1 : il y a une asymptote oblique. "
-                     r"On effectue la division euclidienne de \(" + ntex + r"\) par \(" + dtex + r"\) :"))
     produit = rf"{_facteur_poly(D)}\,{_facteur_poly(Q)}"
+    cle = (tuple(N), tuple(D))
+    deja = cle in vues
+    vues[cle] = True
     if nul(R):
-        items.append(txt(rf"\[{ntex} = {produit}\]"))
-        items.append(txt(rf"Donc \(f(x) = {qtex_}\) là où f est définie : la courbe est contenue dans la droite "
-                         rf"\(y = {qtex_}\)."))
+        if deja:
+            items.append(txt(rf"Même division : \(f(x) = {qtex_}\) là où f est définie."))
+        else:
+            items.append(txt(rf"Division euclidienne : \({ntex} = {produit}\), donc \(f(x) = {qtex_}\) là où f est définie."))
+        items.append(txt(rf"Asymptote oblique : \(y = {qtex_}\) (la courbe est contenue dans cette droite)."))
         return
-    items.append(txt(rf"\[{ntex} = {produit}{_suite_signee(R)}\]"))
-    items.append(txt(rf"Donc \(f(x) = {qtex_}{_fraction_signee(R, D)}\), d'où :"))
     reste = rf"\dfrac{{{rtex}}}{{{dtex}}}"
+    sg = _signe_en_infini(R, s) * _signe_en_infini(D, s)
+    borne, _ = _borne_signe(R, D, s)
+    pour = rf" pour \(x {'>' if s > 0 else '<'} {borne}\)" if borne else ""
+    position = rf"\({reste} {'>' if sg > 0 else '<'} 0\){pour} : la courbe est " + ("au-dessus" if sg > 0 else "au-dessous")
+    if deja:
+        items.append(txt(rf"Même division : \(f(x) - {_facteur_poly(Q)} = {reste}\) tend vers \(0\) : asymptote oblique \(y = {qtex_}\) ; "
+                         + position + " de l'asymptote."))
+        return
+    items.append(txt(rf"Division euclidienne : \({ntex} = {produit}{_suite_signee(R)}\), "
+                     rf"donc \(f(x) = {qtex_}{_fraction_signee(R, D)}\)."))
     pt = Pt({"type": "inf", "signe": s})
     ch = Chaine(pt, rf"f(x) - {_facteur_poly(Q)}", Op("+", X(), X()))
-    ch.lim(reste, rf"f(x) - {_facteur_poly(Q)} = {reste}")
-    ch.val("0", r"\text{le degré du numérateur est inférieur à celui du dénominateur}"
-           if deg(R) >= 1 else rf"\text{{numérateur constant, dénominateur }} \to {vers}")
+    ch.lim(reste)
+    conclusion = rf"0 \text{{ : asymptote oblique }} y = {qtex_}"
+    if deg(R) >= 1:
+        ch.val(conclusion, r"\text{le degré du numérateur est inférieur à celui du dénominateur}")
+    else:
+        ch.val(_guil(rf"\dfrac{{{rtex}}}{{{_limite_polynome_infini(D, s).tex()}}}"))
+        ch.val(conclusion)
     ch.complete = True
     items.append(txt(ch.html()))
-    items.append(txt(rf"Asymptote oblique d'équation \(y = {qtex_}\)."))
-    # position relative : signe de R/D près de s∞
-    sr, sd = _signe_en_infini(R, s), _signe_en_infini(D, s)
-    sg = sr * sd
-    items.append(txt(
-        rf"Position relative, près de \({vers}\) : \({rtex}\) est {_mot_signe(sr)} et \({dtex}\) est {_mot_signe(sd)}, "
-        rf"donc \(f(x) - {_facteur_poly(Q)}\) est {_mot_signe(sg)} : la courbe est "
-        + ("au-dessus" if sg > 0 else "au-dessous") + " de la droite."))
+    items.append(txt(position + " de l'asymptote."))
 
 
-def _etude_rationnelle_infini(f, N, D, signe, items):
+def _etude_rationnelle_infini(f, N, D, signe, items, vues=None):
     n, m = deg(N), deg(D)
     an, bm = N[-1], D[-1]
     ratio = an / bm
-    vers = r"+\infty" if signe > 0 else r"-\infty"
     k = n - m
     k_signe_xk = signe if k % 2 else 1
     if n < m:
@@ -361,27 +332,19 @@ def _etude_rationnelle_infini(f, N, D, signe, items):
                    alternative=(_arbre_fraction(N, D), r"On écrit \(f\) sous la forme d'une seule fraction : "
                                 rf"\(f(x) = {tex(_arbre_fraction(N, D))}\)."))
     if n <= m:
-        items.append(txt(rf"Asymptote horizontale d'équation \(y = {vtex}\)."))
+        items.append(txt(rf"Asymptote horizontale : \(y = {vtex}\)."))
         return res
-    items.append(txt("La limite est infinie : pas d'asymptote horizontale."))
     if k == 1:
         Q, R = _pdiv(N, D)
         if deg(D) == 0:
-            items.append(txt(rf"Le polynôme est de degré 1 : sa courbe est la droite d'équation "
-                             rf"\(y = {ptex(Q,'x')}\), qui est son propre asymptote oblique."))
+            items.append(txt(rf"Asymptote oblique : \(y = {ptex(Q,'x')}\) (la courbe est cette droite)."))
         else:
-            _oblique_rationnelle(items, N, D, Q, R, signe)
+            _oblique_rationnelle(items, N, D, Q, R, signe, {} if vues is None else vues)
         a = Q[1] if len(Q) > 1 else F(0)
         b = Q[0] if Q else F(0)
         return {"genre": "oblique", "a": qtex(a), "b": qtex(b), "a_val": float(a), "b_val": float(b),
                 "equation_tex": ptex(Q, "x"), "valeur_tex": vtex}
-    if deg(D) == 0:
-        items.append(txt(rf"Le polynôme est de degré {n} \(\geq 2\) : pas d'asymptote oblique (branche parabolique)."))
-    else:
-        items.append(txt(
-            rf"Le degré du numérateur dépasse celui du dénominateur de {k} \(\geq 2\) : "
-            r"pas d'asymptote oblique (branche parabolique)."
-        ))
+    items.append(txt("Pas d'asymptote oblique : branche parabolique."))
     return {"genre": "aucune", "valeur_tex": vtex}
 
 
@@ -418,18 +381,14 @@ def _etude_pole_numerique(f, N, D, point, cote, items):
                 res[cle + "_tex"] = _signe_tex(a + dx)
         sp = _sympy()
         borne = {"type": "fini", "point": point, "cote": cote}
-        items.append(txt(rf"\(x = {point.tex}\) est une valeur interdite."))
 
         def ref_de(pt):
             v = res["gauche_tex" if pt.d < 0 else "droite_tex"]
             return (sp.oo if v == r"+\infty" else -sp.oo), v, None
 
         _narrer_cotes(f, borne, items, ref_de, cotes=tuple(c for c in ("gauche", "droite") if c + "_tex" in res))
-        items.append(txt(rf"Asymptote verticale d'équation \(x = {point.tex}\)."))
+        items.append(txt(rf"Asymptote verticale : \(x = {point.tex}\)."))
         return res
-    items.append(txt(rf"\(x = {point.tex}\) est une valeur interdite."))
-    items.append(txt(rf"Le numérateur et le dénominateur tendent vers \(0\) quand \(x \to {point.tex}\) : "
-                     r"forme indéterminée « \(0/0\) »."))
     val = _limite_sympy(f, _sympify_point(point))
     vtex, _, _, vval = _valeur_tex(val)
     if vtex == "?":
@@ -451,9 +410,8 @@ def _affichable(v):
 
 
 def _phrase_trou(point_tex, valeur_tex):
-    """Formulation Q7 : valeur interdite où la limite (éventuellement latérale) est finie."""
-    return (rf"f n'est pas définie en \(x={point_tex}\), mais sa limite y est finie "
-            rf"(\(={valeur_tex}\)) : pas d'asymptote verticale, trou dans le graphique "
+    """Formulation Q7 (raccourcie le 15.10.2026) : valeur interdite où la limite (éventuellement latérale) est finie."""
+    return (rf"Limite finie : pas d'asymptote verticale, trou dans le graphique "
             rf"en \(({point_tex}\,;\,{valeur_tex})\).")
 
 
@@ -461,7 +419,7 @@ def _x_moins(a):
     """tex de (x - a), correctement signé : a peut être négatif."""
     if a == 0:
         return "x"
-    return f"x-{qtex(a)}" if a > 0 else f"x+{qtex(-a)}"
+    return f"x - {qtex(a)}" if a > 0 else f"x + {qtex(-a)}"
 
 
 def _facteur_tex(base_tex, k):
@@ -514,7 +472,6 @@ def _etude_rationnelle_pole(f, N, D, point, cote, items):
     mult = min(multN, multD)
     diff = multN - multD
     borne = {"type": "fini", "point": point, "cote": cote}
-    items.append(txt(rf"\(x = {point.tex}\) est une valeur interdite."))
     g = f
     chaine0 = None
     if mult > 0:
@@ -532,13 +489,12 @@ def _etude_rationnelle_pole(f, N, D, point, cote, items):
         simplifie_bas = fac_D2 if diff >= 0 else _produit_tex(_facteur_tex(xa, -diff), fac_D2)
         haut, bas = _sans_parentheses(simplifie_haut), _sans_parentheses(simplifie_bas)
         simplifie = haut if bas == "1" else r"\dfrac{" + haut + "}{" + bas + "}"
-        items.append(txt(rf"Le numérateur et le dénominateur tendent vers \(0\) quand \(x \to {point.tex}\) : "
-                         r"forme indéterminée « \(0/0\) »."))
         g = _arbre_fraction(pmul(N2, _puissance_binome(a, max(diff, 0))),
                             pmul(D2, _puissance_binome(a, max(-diff, 0))))
-        chaine0 = Chaine(Pt(borne), "f(x)")
+        chaine0 = Chaine(Pt(borne), tex(f), f)
+        chaine0.annoncer(_guil(r"\dfrac{0}{0}") + r"\text{ : forme indéterminée}")
         chaine0.lim(rf"\dfrac{{{num_chaine}}}{{{den_chaine}}}", rf"\text{{on factorise par }} \left({xa}\right)")
-        chaine0.lim(simplifie, rf"\text{{on simplifie}} \; (x \neq {point.tex})", g)
+        chaine0.lim(simplifie, r"\text{on simplifie}", g)
 
     if diff >= 0:
         valeur = N2a / D2a if diff == 0 else F(0)
@@ -546,16 +502,10 @@ def _etude_rationnelle_pole(f, N, D, point, cote, items):
         Ng, Dg = pmul(N2, _puissance_binome(a, max(diff, 0))), pmul(D2, _puissance_binome(a, 0))
         pt0 = Pt(borne)
         sub = _tex_en(g, pt0)
-        if peval(Ng, a) / peval(Dg, a) == valeur:
-            if chaine0 is not None:
-                chaine0.val(sub)
-                chaine0.val(vtex, force=sub == vtex)
-                items.append(txt(chaine0.html()))
-            else:
-                egal = vtex if sub == vtex else rf"{sub} = {vtex}"
-                g_tex = tex(g) if isinstance(g, Op) and g.op in "*/" else r"\left(" + tex(g) + r"\right)"
-                items.append(txt(rf"Donc \(\displaystyle\lim_{{x\to {point.tex}}} f(x) = "
-                                 rf"\lim_{{x\to {point.tex}}} {g_tex} = {egal}\)."))
+        if peval(Ng, a) / peval(Dg, a) == valeur and chaine0 is not None:
+            chaine0.val(sub)
+            chaine0.val(vtex, force=sub == vtex)
+            items.append(txt(chaine0.html()))
         else:
             items.append(_repli(pt0, vtex, "valeur simplifiée incohérente"))
         items.append(txt(_phrase_trou(point.tex, vtex)))
@@ -580,7 +530,7 @@ def _etude_rationnelle_pole(f, N, D, point, cote, items):
         return (sp.oo if v == r"+\infty" else -sp.oo), v, None
 
     _narrer_cotes(g, borne, items, ref_de, cotes=tuple(c for c in ("gauche", "droite") if c + "_tex" in res))
-    items.append(txt(rf"Asymptote verticale d'équation \(x = {point.tex}\)."))
+    items.append(txt(rf"Asymptote verticale : \(x = {point.tex}\)."))
     return res
 
 
@@ -627,6 +577,14 @@ def _signe(v):
     raise Abandon(f"signe de {v} inconnu")
 
 
+_LN_SYMPY = re.compile(r"\\ln\{\\left\(([^()]*?) \\right\)\}")
+
+
+def _joli(t):
+    r"""\ln{\left(5 \right)} (SymPy) s'écrit \ln 5."""
+    return _LN_SYMPY.sub(r"\\ln \1", t)
+
+
 class Lim:
     """Limite d'une expression en un point : infinie (inf = ±1) ou finie (val : nombre exact SymPy).
     ap = signe de (expression − limite) au voisinage du point (+1 : par valeurs supérieures, −1 :
@@ -658,8 +616,8 @@ class Lim:
         if n.approx:
             raise Abandon("valeur sans écriture exacte")
         if self.montre and self.ap:
-            return n.tex + ("^{+}" if self.ap > 0 else "^{-}")
-        return n.tex
+            return _joli(n.tex) + ("^{+}" if self.ap > 0 else "^{-}")
+        return _joli(n.tex)
 
 
 def _lim_depuis_sympy(r):
@@ -873,27 +831,20 @@ class TableauSigne:
         self.crit.sort(key=lambda q: q.val)
         T = tex(A)
         titre = rf"Signe de \({T}\) :"
-        avant, tab, hach = [], None, []
+        tab, hach = None, []
         for i in items:
             if i.get("type") == "tableau":
-                lignes = i["rows"]
+                lignes = [dict(r, label=r["label"].replace(r" \ (\text{dén.})", "")) for r in i["rows"]]
                 if len(lignes) == 2 and lignes[0]["cells"] == lignes[1]["cells"]:
-                    i = dict(i, rows=[lignes[1]])          # un seul facteur : la ligne du facteur répète celle du produit
-                tab = i
+                    lignes = [dict(lignes[1], label=lignes[0]["label"])]    # un seul facteur : une seule ligne
+                tab = dict(i, rows=lignes)
             elif str(i.get("html", "")).startswith("Les zones hachurées"):
                 hach.append(i)
-            elif not str(i.get("html", "")).startswith("On lit"):
-                avant.append(i)                            # phrases des facteurs de signe évident
-        # tous les facteurs sont évidents : pas de tableau, la lecture renvoie à la phrase qui les justifie
-        self.sans_tableau = tab is None
-        self.phrase = avant[0]["html"].rstrip(".") if avant else None
-        self.items = [] if tab is None else [txt(titre)] + avant + [tab] + hach
+        self.items = [] if tab is None else [txt(titre), tab] + hach
 
     def renvoi(self):
-        """« cf. tableau de signes de A », ou la phrase d'évidence quand il n'y a pas de tableau."""
-        if self.sans_tableau and self.phrase:
-            return self.phrase
-        return rf"cf. tableau de signes de \({tex(self.A)}\)"
+        """« cf. tableau de signes »."""
+        return "cf. tableau de signes"
 
     def signe_en(self, v):
         s = 1 if self.c > 0 else -1
@@ -941,7 +892,7 @@ def _construire_tableau(genre, A):
         D, P, Z, _, mode = signe_facteur(h, "x")
         infos.append(((h, -k if genre == "den" else k), (D, P, Z)))
     items = []
-    tableau_facteurs(c, infos, ">", tex(A), items)
+    tableau_facteurs(c, infos, ">", tex(A), items, toutes_lignes=True)
     return TableauSigne(genre, A, c, infos, items)
 
 
@@ -976,16 +927,18 @@ TABLEAUX = _RegistreTableaux()
 
 
 class _Contexte:
-    """État d'une rédaction : point d'étude, limites de référence (SymPy) déjà vues, signes déjà justifiés.
-    mode : "limite" (conclusion « lim f(x) = … »), "fleche" (une des deux lignes à gauche / à droite)."""
+    """État d'une rédaction : point d'étude, limites de référence (SymPy) déjà vues, signes déjà justifiés."""
 
-    def __init__(self, pt, f, ref_f, mode="limite", label="f(x)", label_somme=False):
-        self.pt, self.f, self.mode = pt, f, mode
-        self.label, self.label_somme = label, label_somme           # ce dont on prend la limite : f(x), f(x)/x, f(x) - x…
+    def __init__(self, pt, f, ref_f, prefixe=None):
+        self.pt, self.f, self.prefixe = pt, f, prefixe
         self.refs, self.ap_vus, self.justifies = {}, set(), set()
-        self.racine_dite = False
         self.demandes = []
-        self.renvois = {}
+        self.lims = {}                 # limite de chaque morceau déjà étudié
+        self.cf = []                   # justifications de signe (« x − 3 < 0 : cf. tableau de signes »)
+        self.remarques = []            # « le terme dominant de … est … »
+        self.sz = True                 # écrire 0⁺ / 0⁻ dans les niveaux de substitution
+        self.liste = False             # un morceau a montré ses termes (« +∞ + ∞ »)
+        self.sans_liste = False        # ne pas montrer les termes d'un morceau : sa limite seulement
         self.profondeur = 0
         self.nb_lhopital = 0
         if ref_f is not None:
@@ -1028,35 +981,42 @@ class _Contexte:
         if s != L.ap:
             raise Abandon("le tableau de signes contredit le signe calculé")
         self.demandes.append((genre, n))
-        self.renvois[(genre, n.key())] = t.renvoi()
         return s
 
     def chaine(self, n):
-        """Chaîne d'égalités pour la limite de n (« lim f(x) = … » pour f elle-même)."""
-        if n is self.f:
-            return Chaine(self.pt, self.label, Op("+", X(), X()) if self.label_somme else None)
-        return Chaine(self.pt, tex(n), n)
+        """Chaîne d'égalités pour la limite de n (la tête est n lui-même)."""
+        ch = Chaine(self.pt, tex(n), n, self.prefixe if n is self.f else None)
+        ch.est_f = n is self.f
+        ch.noeud = n
+        return ch
 
-    def cote(self):
-        mot = "À gauche" if self.pt.d < 0 else "À droite"
-        return rf"{mot} de \({self.pt.a_tex}\)"
+    def lim_de(self, n):
+        """Limite d'un morceau déjà étudié (ou étudié maintenant)."""
+        L = self.lims.get(n.key())
+        if L is None:
+            L = _noeud(n, self)[0]
+        return L
 
-    # --- écriture -------------------------------------------------------------
-    def dire(self, n, L):
-        """(« n → L » en tex, lignes de justification). Pour f elle-même : la conclusion du mode
-        (« lim f(x) = L » ou « f(x) → L »). Un zéro de signe connu est toujours justifié."""
-        pre = []
-        if L.nul() and L.ap and not isinstance(n, X) and n is not self.f:
-            try:
-                pre = self.justifier(n, L)
-            except Abandon:
-                L = Lim.fin(0, 0)           # le signe n'est pas justifiable : on ne l'affirme pas
-        if n is self.f:
-            self.racine_dite = True
-            if self.mode == "limite":
-                return rf"\(\displaystyle\lim_{{x\to {self.pt.tex()}}} {self.label} = {L.tex(False)}\)", pre
-            return rf"\({self.label} \to {L.tex(False)}\)", pre
-        return rf"\({tex(n)} \to {L.tex()}\)", pre
+    def remarque(self, t):
+        if t not in self.remarques:
+            self.remarques.append(t)
+
+    def noter(self, expr, s, tableau):
+        """Justification de signe de la dernière ligne de la chaîne : « x − 3 < 0 : cf. tableau de signes »."""
+        t = rf"{tex(expr)} {'>' if s > 0 else '<'} 0" + (r" \text{ : cf. tableau de signes}" if tableau else "")
+        if t not in self.cf:
+            self.cf.append(t)
+
+    def signe_de(self, expr, U, genre):
+        """Signe de expr (qui tend vers 0 avec un signe d'approche) : lu dans le tableau de signes, sinon justifié par une
+        ligne de texte. Renvoie les lignes de texte éventuelles."""
+        lu = self.lecture(genre, expr, U)
+        if lu is not None:
+            self.noter(expr, lu, True)
+            return []
+        lignes = self.justifier(expr, U, force=True)
+        self.noter(expr, U.ap, False)
+        return lignes
 
     def justifier(self, n, L, force=False):
         """Lignes qui justifient le signe de n, qui tend vers 0 (force : même pour la variable x seule).
@@ -1359,13 +1319,13 @@ def _noeud_rationnel_infini(n, ctx):
     if P is not None:
         if len(_polynome_a_termes(P)) < 2:
             return None
-        phrases, L = _phrases_polynome_infini(P, s, n, ctx)
+        L, phrases = _polynome_infini(P, s, n, ctx)
     elif isinstance(n, Op) and n.op == "/":
         A, B = _poly_ou_const(n.a), _poly_ou_const(n.b)
         if A is None or B is None or deg(B) < 1:
             return None
         if deg(A) == 0:
-            phrases, L = _phrases_fraction_infini(A, B, s, tex(n))
+            phrases, L = [], _fraction_const_infini(A, B, s)
         else:
             fi = FormeIndeterminee("∞/∞", n)
             fi.A, fi.B = _limite_polynome_infini(A, s), _limite_polynome_infini(B, s)
@@ -1381,20 +1341,221 @@ def _noeud_rationnel_infini(n, ctx):
 FI_TEX = {"∞ − ∞": r"\infty - \infty", "0 · ∞": r"0 \cdot \infty", "∞/∞": r"\infty/\infty", "0/0": "0/0"}
 
 
-def _ligne_fi(n, fi, ctx=None):
-    """« Le numérateur tend vers … et le dénominateur tend vers … : forme indéterminée « ∞/∞ ». »"""
-    nom = rf"« \({FI_TEX[fi.nom]}\) »"
+def _guil(t):
+    """Substitution des limites, entre guillemets : « +∞/−∞ »."""
+    return r"\text{« }" + t + r"\text{ »}"
 
-    def lim(noeud, L):
-        evident = isinstance(noeud, X) or (isinstance(noeud, Fn) and noeud.nom == "exp")
-        deux_cotes = ctx is not None and ctx.pt.deux and not ctx.pt.s        # le signe dépend du côté : pas de ligne propre à un côté
-        return L.tex(bool(evident and L.nul() and L.ap and not deux_cotes))
 
-    a, b = lim(n.a, fi.A), lim(n.b, fi.B)
-    if isinstance(n, Op) and n.op == "/":
-        return (rf"Le numérateur \({tex(n.a)}\) tend vers \({a}\) et le dénominateur "
-                rf"\({tex(n.b)}\) tend vers \({b}\) : forme indéterminée {nom}.")
-    return rf"\({tex(n.a)} \to {a}\) et \({tex(n.b)} \to {b}\) : forme indéterminée {nom}."
+class _Ecr:
+    """Écriture d'un morceau : jeton (nombre, ±∞, 0⁺ …), somme (entre parenthèses dans un produit) ou autre."""
+    __slots__ = ("t", "genre")
+
+    def __init__(self, t, genre=None):
+        self.t = t
+        self.genre = genre or ("somme" if " " in t else "jeton")
+
+    def neg(self):
+        return self.t.startswith("-")
+
+
+_HAUTEURS = {}
+
+
+def _est_atome(n):
+    """Constante ou polynôme en x : une seule pièce dont on écrit la limite."""
+    return sans_x(n) or isinstance(n, X) or _polynome_de(n) is not None
+
+
+def _hauteur(n):
+    """Nombre de couches d'opérations au-dessus des pièces (constantes et polynômes) : 0 pour une pièce."""
+    cle = n.key()
+    h = _HAUTEURS.get(cle)
+    if h is None:
+        if _est_atome(n):
+            h = 0
+        elif isinstance(n, (Neg, Fn)):
+            h = _hauteur(n.a) + 1
+        elif isinstance(n, Op):
+            h = max(_hauteur(n.a), _hauteur(n.b)) + 1
+        else:
+            h = 0
+        _HAUTEURS[cle] = h
+    return h
+
+
+def _somme_de_limites(lims):
+    """« +∞ + ∞ », « +∞ − ∞ » : limites des termes d'une somme, signes gardés."""
+    t = lims[0].tex()
+    for l in lims[1:]:
+        t += (" + " if l.inf > 0 else " - ") + r"\infty"
+    return t
+
+
+def _atome(n, ctx, haut):
+    """Écriture, au niveau 1, de la limite d'une constante ou d'un polynôme. En ±∞, une somme dont les termes vont dans le même
+    sens (ou la limite étudiée elle-même, haut) montre ses termes : « +∞ + ∞ » ; des termes opposés dans un morceau :
+    le terme dominant donne la limite (remarque entre parenthèses, en mots)."""
+    pt = ctx.pt
+    if sans_x(n):
+        return tex(n)
+    if isinstance(n, X):
+        if pt.s:
+            return pt.lim_x().tex()
+        return Lim.fin(0, pt.d).tex(ctx.sz) if pt.a == 0 else Lim.fin(pt.a).tex()
+    if not pt.s:
+        return ctx.lim_de(n).tex(ctx.sz)
+    P = _polynome_de(n)
+    L = _limite_polynome_infini(P, pt.s)
+    ks = [k for k in _polynome_a_termes(P) if k >= 1]
+    if len(ks) < 2:
+        return L.tex()
+    lims = [Lim.infini(_signe(P[k]) * (pt.s if k % 2 else 1)) for k in ks]
+    if len({l.inf for l in lims}) == 1 or haut:
+        if ctx.sans_liste:
+            return L.tex()
+        ctx.liste = True
+        return _somme_de_limites(lims)
+    k = deg(P)
+    ctx.remarque(rf"\text{{le terme dominant de }} {tex(n)} \text{{ est }} {tex(_tete_tex(P[k], k))}")
+    return L.tex()
+
+
+def _signe_terme(e):
+    """(négatif ?, valeur absolue en tex) d'un terme écrit avec son signe."""
+    if e.genre == "jeton" and e.t[:1] in "+-":
+        return e.t[0] == "-", e.t[1:]
+    return False, e.t
+
+
+def _somme_ecr(a, b, op):
+    neg, mag = _signe_terme(b)
+    if b.genre == "somme" and op == "-":
+        mag, neg = rf"\left({b.t}\right)", False
+    return _Ecr(a.t + (" - " if neg != (op == "-") else " + ") + mag, "somme")
+
+
+def _facteur(e, premier):
+    return rf"\left({e.t}\right)" if (e.genre == "somme" or (not premier and e.neg())) else e.t
+
+
+def _niveau(n, j, ctx):
+    """Écriture de n au niveau j : les morceaux de hauteur < j sont remplacés par leur limite, les autres gardent leur forme."""
+    h = _hauteur(n)
+    if h <= j - 1:
+        if (h == 0 and j == 1) or isinstance(n, X):
+            return _Ecr(_atome(n, ctx, False))
+        return _Ecr(ctx.lim_de(n).tex(ctx.sz))
+    if isinstance(n, Neg):
+        a = _niveau(n.a, j, ctx)
+        return _Ecr("-" + (rf"\left({a.t}\right)" if a.genre == "somme" or a.neg() else a.t), "autre")
+    if isinstance(n, Fn):
+        a = _niveau(n.a, j, ctx)
+        if n.nom == "ln":
+            if a.genre == "jeton" and not a.neg() and r"\infty" not in a.t and "^{" not in a.t:
+                return _Ecr(rf"\ln {a.t}", "autre")
+            return _Ecr(rf"\ln\left({a.t}\right)", "autre")
+        if n.nom == "sqrt":
+            return _Ecr(rf"\sqrt{{{a.t}}}", "autre")
+        return _Ecr(rf"e^{{{a.t}}}", "autre")
+    if isinstance(n, Op):
+        a, b = _niveau(n.a, j, ctx), _niveau(n.b, j, ctx)
+        if n.op == "/":
+            return _Ecr(rf"\dfrac{{{a.t}}}{{{b.t}}}", "autre")
+        if n.op == "*":
+            return _Ecr(_facteur(a, True) + r" \cdot " + _facteur(b, False), "autre")
+        if n.op == "^":
+            base = rf"\left({a.t}\right)" if (a.genre != "jeton" or a.neg() or r"\infty" in a.t) else a.t
+            return _Ecr(rf"{base}^{{{tex(n.b)}}}", "autre")
+        return _somme_ecr(a, b, n.op)
+    raise Abandon(f"écriture de {tex(n)} impossible")
+
+
+def _niveaux(n, ctx, signes_zero=True):
+    """Écritures successives de n avec les limites substituées (le dernier niveau est la « forme » : limite de chaque
+    opérande), sans répétition. signes_zero : écrire 0⁺ / 0⁻ (sinon 0, pour la forme 0/0)."""
+    ctx.sz = signes_zero
+    ctx.liste = False
+    try:
+        H = _hauteur(n)
+        if H == 0:
+            res = [_atome(n, ctx, True)] if (ctx.pt.s and not sans_x(n)) else []
+        else:
+            res = [_niveau(n, j, ctx).t for j in range(1, H + 1)]
+            if H == 1 and ctx.liste and isinstance(n, Op):                  # la forme montre des sommes de termes : on écrit aussi leurs limites
+                ctx.sans_liste = True
+                res.append(_niveau(n, 1, ctx).t)
+    finally:
+        ctx.sz = True
+        ctx.sans_liste = False
+    out = []
+    for t in res:
+        if not out or out[-1] != t:
+            out.append(t)
+    return out
+
+
+def _annoncer(ch, n, fi, ctx):
+    """Tête de la chaîne : lim n = « substitution » = « forme » : forme indéterminée (guide de rédaction, R2)."""
+    ctx.remarques = []
+    niv = _niveaux(n, ctx, signes_zero=(fi.nom != "0/0"))
+    if not niv:
+        niv = [FI_TEX[fi.nom]]
+    ch.cf_tete = list(getattr(fi, "cf_tete", []))
+    ch.annoncer(" = ".join(_guil(t) for t in niv) + r"\text{ : forme indéterminée}", ctx.remarques + ch.cf_tete)
+    ctx.remarques = []
+    return ch
+
+
+def _facteurs(n, out):
+    """Facteurs d'un produit (les produits imbriqués sont aplatis)."""
+    if isinstance(n, Op) and n.op == "*":
+        _facteurs(n.a, out)
+        _facteurs(n.b, out)
+    else:
+        out.append(n)
+
+
+def _forme_conclusion(g, ctx):
+    """Limite de chaque facteur de g, signes gardés : « +∞ · 1 » (un dénominateur de limite 1 n'est pas écrit)."""
+    if isinstance(g, Op) and g.op in "*/":
+        haut, bas = [], []
+        _facteurs(g.a if g.op == "/" else g, haut)
+        if g.op == "/":
+            _facteurs(g.b, bas)
+        haut = [_Ecr(ctx.lim_de(f).tex()) for f in haut]
+        bas = [_Ecr(ctx.lim_de(f).tex()) for f in bas]
+        t = r" \cdot ".join(_facteur(e, i == 0) for i, e in enumerate(haut))
+        if bas and not (len(bas) == 1 and bas[0].t == "1"):
+            t = rf"\dfrac{{{t}}}{{{r' \cdot '.join(_facteur(e, i == 0) for i, e in enumerate(bas))}}}"
+        return t
+    if isinstance(g, Neg):
+        t = _forme_conclusion(g.a, ctx)
+        return None if t is None else "-" + rf"\left({t}\right)"
+    H = _hauteur(g)
+    return _niveau(g, H, ctx).t if H >= 1 else None
+
+
+def _chaine_directe(f, L, ctx):
+    """Chaîne de f quand aucune méthode n'est nécessaire : lim f = « substitution » = « limites » = valeur (justifications)."""
+    pt = ctx.pt
+    ch = ctx.chaine(f)
+    ctx.remarques = []
+    niv = _niveaux(f, ctx)
+    valeur = L.tex(False)
+    if len(niv) == 1 and niv[0] == valeur:
+        niv = []
+    if not niv and not pt.s and _defini_en(f, ctx):
+        sub = _tex_en(f, pt)
+        if sub != valeur:
+            ch.val(sub)
+    for t in niv:
+        ch.val(_guil(t))
+    just = list(ctx.cf) + list(ctx.remarques)
+    ch.val(valeur, r" \; ;\; ".join(just) if just else None, force=True)
+    ch.complete = True
+    ctx.remarques = []
+    ctx.cf = []
+    return ch
 
 
 def _meme_fonction(n, g, ctx):
@@ -1424,18 +1585,31 @@ def _meme_fonction(n, g, ctx):
 METHODES = []          # méthodes du cours, dans l'ordre : chacune renvoie (Lim, lignes) ou None si elle ne s'applique pas
 
 
-def _lever(n, ctx, fi):
-    """Lève une forme indéterminée par la première méthode du cours qui s'applique (Q9) ; Abandon sinon."""
+def _lever(n, ctx, fi, n0=None):
+    """Lève une forme indéterminée par la première méthode du cours qui s'applique (Q9) ; Abandon sinon. Les signes lus pour
+    les opérandes de n vont sur la ligne d'annonce de sa chaîne, ceux lus ensuite sur sa dernière ligne."""
     if ctx.profondeur >= 4:
         raise Abandon("trop de réécritures successives")
+    n0 = len(ctx.cf) if n0 is None else n0
+    fi.cf_tete = ctx.cf[n0:]
+    del ctx.cf[n0:]
     ctx.profondeur += 1
     try:
         for methode in METHODES:
             r = methode(n, ctx, fi)
-            if r is not None:
-                L, lignes = r
-                ctx.verifier(n, L)
-                return L, fi.la + fi.lb + lignes
+            if r is None:
+                del ctx.cf[n0:]
+                continue
+            L, lignes = r
+            ctx.verifier(n, L)
+            queue = ctx.cf[n0:]
+            del ctx.cf[n0:]
+            ch = next((l for l in lignes if isinstance(l, Chaine) and l.noeud is n), None)
+            if ch is not None:
+                ch.cf += queue
+            else:
+                ctx.cf.extend(queue)
+            return L, fi.la + fi.lb + lignes
     finally:
         ctx.profondeur -= 1
     raise Abandon(f"forme indéterminée {fi.nom} non levée en {tex(n)}")
@@ -1443,16 +1617,24 @@ def _lever(n, ctx, fi):
 
 # --- chaîne d'égalités : lim f(x) = lim … = … = valeur (une seule formule, justifications entre parenthèses) ----
 class Chaine:
-    """Pas d'un calcul de limite écrits comme au tableau :
-        lim f(x) = lim A         (justification)
-                 = lim B         (justification)
-                 = valeur.
-    pas = [(genre, tex, justification, arbre)] ; genre « lim » (nouvelle ligne) ou « val » (même ligne, après « = »)."""
+    """Calcul d'une limite écrit comme au tableau (guide de rédaction, R3) :
+        lim f = « substitution » = « forme » : forme indéterminée
+              = lim A         (justification)
+              = valeur.
+    pas = [(genre, tex, justification, arbre)] ; genre « lim » (nouvelle ligne) ou « val » (même ligne, après « = »).
+    prefixe : « a » ou « b » (a = lim …) ; annonce : suite de la tête de la chaîne ; cf : justifications de la dernière ligne
+    (signe d'un dénominateur lu dans un tableau)."""
 
-    def __init__(self, pt, debut, arbre=None):
+    def __init__(self, pt, debut, arbre=None, prefixe=None):
         self.pt = pt
         self.pas = [("lim", debut, None, arbre)]
         self.complete = False                      # la dernière égalité est la valeur de la limite
+        self.prefixe = prefixe
+        self.annonce = None
+        self.est_f = False                         # c'est la chaîne de la limite étudiée (pas celle d'un morceau)
+        self.noeud = None                          # le morceau dont la chaîne calcule la limite
+        self.cf_tete = []                          # justifications de signe de la ligne d'annonce
+        self.cf = []                               # justifications de signe de la dernière ligne
 
     def lim(self, tex_, just=None, arbre=None):
         if self.pas[-1][1] == tex_ and self.pas[-1][0] == "lim":
@@ -1476,6 +1658,15 @@ class Chaine:
         """Prolonge cette chaîne par une autre qui commence par la même expression (méthode appelée sur le reste)."""
         self.pas += autre.pas[1:]
         self.complete = autre.complete
+        self.cf += autre.cf_tete + autre.cf
+        return self
+
+    def annoncer(self, tex_, remarques=None):
+        """Tête de la chaîne : « substitution » = « forme » : forme indéterminée (+ remarques entre parenthèses)."""
+        self.annonce = tex_
+        if remarques:
+            g, t_, j, a = self.pas[0]
+            self.pas[0] = (g, t_, r" \; ;\; ".join(remarques), a)
         return self
 
     def html(self):
@@ -1485,21 +1676,37 @@ class Chaine:
             somme = isinstance(arbre, Op) and arbre.op in "+-" or (isinstance(arbre, Neg) and isinstance(arbre.a, Op)
                                                                    and arbre.a.op in "+-")
             return rf"\left({tex_}\right)" if somme else tex_
-        groupes = []                                # [[tex, [justifications]]]
-        for genre, tex_, just, arbre in self.pas:
-            if genre == "lim":
-                groupes.append([f"{lim} {arg(tex_, arbre)}", []])
+        lignes = []                                 # [gauche, corps, [justifications], ligne d'annonce ?]
+        for i, (genre, tex_, just, arbre) in enumerate(self.pas):
+            js = [just] if just else []
+            if i == 0:
+                gauche = (rf"{self.prefixe} = " if self.prefixe else "") + f"{lim} {arg(tex_, arbre)}"
+                lignes.append([gauche, self.annonce, js, bool(self.annonce)])
+            elif genre == "lim":
+                corps = f"{lim} {arg(tex_, arbre)}"
+                if lignes[-1][1] is None:
+                    lignes[-1][1] = corps
+                    lignes[-1][2] += js
+                else:
+                    lignes.append(["", corps, js, False])
+            elif lignes[-1][3]:                     # la ligne d'annonce est close : la valeur a sa propre ligne
+                lignes.append(["", tex_, js, False])
+            elif lignes[-1][1] is None:
+                lignes[-1][1] = tex_
+                lignes[-1][2] += js
             else:
-                groupes[-1][0] += f" = {tex_}"
-            if just:
-                groupes[-1][1].append(just)
+                lignes[-1][1] += f" = {tex_}"
+                lignes[-1][2] += js
+        lignes[-1][2] += self.cf
 
-        def ecrit(g):
-            return g[0] + ((r" \qquad \left(" + r" \; ;\; ".join(g[1]) + r"\right)") if g[1] else "")
-        if len(groupes) == 1:
-            corps = ecrit(groupes[0])
+        def ecrit(l):
+            gauche, corps, js, _ = l
+            return corps + ((r" \qquad \left(" + r" \; ;\; ".join(js) + r"\right)") if js else "")
+        if len(lignes) == 1:
+            g, c, js, _ = lignes[0]
+            corps = f"{g} = {ecrit(lignes[0])}" if c is not None else g
         else:
-            corps = r" \\ ".join([f"{groupes[0][0]} &= {ecrit(groupes[1])}"] + [f"&= {ecrit(g)}" for g in groupes[2:]])
+            corps = r" \\ ".join((f"{l[0]} &= {ecrit(l)}" if l[0] else f"&= {ecrit(l)}") for l in lignes)
         return r"\[\begin{aligned}" + corps + r"\end{aligned}\]"
 
 
@@ -1520,31 +1727,20 @@ def _est_forme_indeterminee(g, ctx):
 
 def _prolonger(ch, g, L, narration, ctx):
     """Prolonge la chaîne ch (qui s'arrête à « lim g ») : par la chaîne qu'une méthode a écrite pour g quand g est lui-même
-    une forme indéterminée (fusion), sinon par les dernières égalités (g avec la limite de chaque morceau, puis la
-    valeur). Renvoie les lignes à écrire autour : (avant la chaîne, après la chaîne)."""
+    une forme indéterminée (fusion), sinon par les dernières égalités (limite de chaque facteur, puis la valeur). Renvoie les
+    lignes à écrire autour : (avant la chaîne, après la chaîne) ; avant : chaînes des morceaux de g levés à part."""
     if _est_forme_indeterminee(g, ctx):
         idx = next((i for i in range(len(narration) - 1, -1, -1) if isinstance(narration[i], Chaine)), None)
         if idx is not None:
             ch.suite(narration[idx])
             return [l for l in narration[:idx]], [l for l in narration[idx + 1:]]
-    avant = _conclure(ch, g, L, ctx)
-    return avant, ([] if ch.complete else [l for l in narration])
+    _conclure(ch, g, L, ctx)
+    return [l for l in narration], []
 
 
 def _tout_texte(lignes):
     """Les lignes d'une rédaction, la chaîne d'égalités (si présente) écrite en formule."""
     return [l.html() if isinstance(l, Chaine) else l for l in lignes]
-
-
-def _petite(n):
-    """True si n vaut c/x^j (j ≥ 1) : un infiniment petit en ±∞."""
-    if not (isinstance(n, Op) and n.op == "/" and sans_x(n.a)):
-        return False
-    b = n.b
-    while isinstance(b, Op) and b.op == "*" and sans_x(b.a):
-        b = b.b
-    return isinstance(b, X) or (isinstance(b, Op) and b.op == "^" and isinstance(b.a, X) and valeur_constante(b.b) is not None
-                                and valeur_constante(b.b) > 0)
 
 
 def _combine(op, A, B):
@@ -1553,101 +1749,26 @@ def _combine(op, A, B):
             "*": lambda: _produit(A, B), "/": lambda: _quotient(A, B)}[op]()
 
 
-def _avec_limites(n, ctx, notes, avant):
-    """n écrit avec la limite de chaque morceau : c/x^j → 0 (terme nul supprimé d'une somme), x → ±∞, un morceau qui
-    demandait une méthode (forme indéterminée) → sa valeur, sa chaîne écrite à part (avant). Renvoie (tex, infini ?)
-    ou None si n n'est pas ainsi évaluable. notes : justifications « c/x^j → 0 »."""
-    pt = ctx.pt
-
-    def note(t):
-        if t not in notes:
-            notes.append(t)
-
-    def par(t, infini):
-        return rf"\left({t}\right)" if (infini or t.startswith("-") or t.startswith("+")) else t
-
-    def feuille(m):
-        Lm, lg = _noeud(m, ctx)
-        avant.extend(lg)
-        note(rf"{tex(m)} \to {Lm.tex(False)}")
-        return Lm.tex(False), bool(Lm.inf)
-    if sans_x(n):
-        return tex(n), False
-    if isinstance(n, X):
-        return pt.lim_x().tex(), True
-    if pt.s and _petite(n):
-        note(rf"{tex(n)} \to 0")
-        return "0", False
-    if isinstance(n, Neg):
-        r = _avec_limites(n.a, ctx, notes, avant)
-        if r is None:
-            return None
-        t, inf = r
-        return "-" + (rf"\left({t}\right)" if (" + " in t or " - " in t or inf) else t), inf
-    if isinstance(n, Fn):
-        r = _avec_limites(n.a, ctx, notes, avant)
-        if r is None:
-            return None
-        t, inf = r
-        if inf:                                       # e^{+∞}, ln(+∞) : on écrit la limite du morceau
-            Lm, _ = _noeud(n, ctx)
-            note(rf"{tex(n)} \to {Lm.tex(False)}")
-            return Lm.tex(False), bool(Lm.inf)
-        return {"sqrt": rf"\sqrt{{{t}}}", "ln": rf"\ln {t if t.lstrip('-').isdigit() else par(t, False)}",
-                "exp": rf"e^{{{t}}}"}[n.nom], False
-    if isinstance(n, Op) and n.op == "^" and valeur_constante(n.b) is not None:
-        r = _avec_limites(n.a, ctx, notes, avant)
-        if r is None:
-            return None
-        t, inf = r
-        if inf:                                       # x^3 → +∞ : on écrit la limite du morceau
-            Lm, _ = _noeud(n, ctx)
-            return Lm.tex(False), bool(Lm.inf)
-        return rf"{par(t, False) if (' ' in t or t.startswith('-')) else t}^{{{tex(n.b)}}}", False
-    if isinstance(n, Op) and n.op in "+-*/":
-        A, _ = _noeud(n.a, ctx)
-        B, _ = _noeud(n.b, ctx)
-        if n.op == "/" and B.nul() and not A.nul():
-            return None
-        try:
-            _combine(n.op, A, B)
-        except FormeIndeterminee:                     # ce morceau est une forme indéterminée : une méthode le lève
-            return feuille(n)
-        ra, rb = _avec_limites(n.a, ctx, notes, avant), _avec_limites(n.b, ctx, notes, avant)
-        if ra is None or rb is None:
-            return None
-        (ta, ia), (tb, ib) = ra, rb
-        if n.op in "+-":
-            if tb == "0":
-                return ta, ia
-            if ta == "0":
-                return ("-" + par(tb, False) if n.op == "-" else tb), ib
-            return ta + (" + " if n.op == "+" else " - ") + (rf"\left({tb}\right)" if (ib or tb.startswith("-")) else tb), ia or ib
-        if n.op == "*":
-            return par(ta, ia) + r" \cdot " + par(tb, ib), ia or ib
-        return rf"\dfrac{{{ta}}}{{{tb}}}", ia or ib
-    return None
-
-
 def _conclure(ch, g, L, ctx):
-    """Dernières égalités de la chaîne ch pour la limite de g (de valeur L) : g avec la limite de chaque morceau, puis la
-    valeur. Renvoie les lignes à écrire AVANT la chaîne (chaînes des morceaux déjà levés) ; ch.complete si la valeur est
-    écrite."""
+    """Dernières égalités de la chaîne ch pour la limite de g (de valeur L) : la limite de chaque facteur quand elle apprend
+    quelque chose (±∞, 0⁺, 0⁻), puis la valeur. Renvoie [] (compatibilité : les chaînes des morceaux sont dans la narration)."""
     pt = ctx.pt
-    avant, notes = [], []
+    valeur = L.tex(False)
     if pt.s:
-        r = _avec_limites(g, ctx, notes, avant)
-        sub = r[0] if r is not None else None
-    else:
-        sub = _tex_en(g, pt) if _defini_en(g, ctx) else None
-    if sub is None:
-        return []
-    just = (r" \; ;\; ".join(notes)) if notes else None
-    v = L.tex(False)
-    ch.val(sub, just)
-    ch.val(v, force=ch.pas[-1][0] == "lim" and ch.pas[-1][1] == v)
+        saved, ctx.remarques = ctx.remarques, []
+        try:
+            t = _forme_conclusion(g, ctx)
+        finally:
+            ctx.remarques = saved
+        if t is not None and (r"\infty" in t or "0^{" in t) and t != valeur:
+            ch.val(_guil(t))
+    elif _defini_en(g, ctx):
+        sub = _tex_en(g, pt)
+        if sub != valeur:
+            ch.val(sub)
+    ch.val(valeur, force=ch.pas[-1][0] == "lim" and ch.pas[-1][1] == valeur)
     ch.complete = True
-    return avant
+    return []
 
 
 # --- méthode : mise en évidence sous une racine (en ±∞, quotient ou produit dont un membre contient une racine)
@@ -1760,13 +1881,13 @@ def _abs_tex(m):
     return "|x|" if m == 1 else rf"|x|^{{{m}}}"
 
 
-def _just_abs(s, m):
-    """Justification de |x|^m = ±x^m selon le signe de x."""
+def _just_racine(s, m):
+    """Justification de √(x^{2m}) = |x|^m = ±x^m selon le signe de x (en ±∞)."""
+    xm = "x" if m == 1 else f"x^{{{m}}}"
+    racine = r"\sqrt{x^{2}}" if m == 1 else rf"\sqrt{{x^{{{2 * m}}}}}"
     if s > 0:
-        return rf"x > 0 \text{{ donc }} {_abs_tex(m)} = x" + ("" if m == 1 else f"^{{{m}}}")
-    if m % 2:
-        return rf"x < 0 \text{{ donc }} {_abs_tex(m)} = -x" + ("" if m == 1 else f"^{{{m}}}")
-    return rf"x < 0 \text{{ et }} {m} \text{{ est pair, donc }} {_abs_tex(m)} = x^{{{m}}}"
+        return rf"x > 0 \text{{ : }} {racine} = {_abs_tex(m)} = {xm}"
+    return rf"x < 0 \text{{ : }} {racine} = {_abs_tex(m)} = {'-' if m % 2 else ''}{xm}"
 
 
 def _racine_en_evidence(t, Q, s):
@@ -1839,12 +1960,16 @@ def _membre_en_evidence(M, s):
         for _, sg, _, Pi in termes:
             P = padd(P, pscal(Pi, F(sg)))
         k, c = deg(P), P[deg(P)]
-        t = [(False, Nb(F(1)))] + [_terme_laurent(P[j] / c, j - k) for j in range(k - 1, -1, -1) if P[j] != 0]
-        R = _somme_termes(t) if len(t) > 1 else Nb(F(1))
-        evid = _produit_arbres([_tete_tex(c, k), R]) if not _est_un(R) else _tete_tex(c, k)
-        eqs = [rf"{tex(M)} = {tex(evid)}"] if not _est_un(R) else []
-        return {"coef": c, "k": k, "R": R, "evid": evid, "stades": [tex(evid)] * 4, "eqs": eqs, "absm": [],
-                "somme": False}
+        if len(_polynome_a_termes(P)) == 1:               # monôme c·x^k
+            R = Nb(F(1))
+            evid = _tete_tex(c, k)
+            return {"coef": c, "lead": c, "k": k, "R": R, "evid": evid, "stades": [tex(evid)] * 4, "eqs": [],
+                    "absm": [], "somme": False}
+        t = [_terme_laurent(P[j], j - k) for j in range(k, -1, -1) if P[j] != 0]     # x^k(c + … ) : le coefficient reste dans la parenthèse
+        R = _somme_termes(t)
+        evid = Op("*", _puissance_x(k), R) if k else R
+        return {"coef": F(1), "lead": c, "k": k, "R": R, "evid": evid, "stades": [tex(evid)] * 4,
+                "eqs": [rf"{tex(M)} = {tex(evid)}"], "absm": [], "somme": False}
     k = max(deg(P) // 2 if genre == "racine" else deg(P) for genre, _, _, P in termes)
     if len(termes) == 1:                                  # un seul terme : une racine
         _, sg, t, Q = termes[0]
@@ -1941,21 +2066,17 @@ def _evidence_quotient(n, ctx, fi):
     stades = [_forme(n.op, A["stades"][i] if not (n.op == "*" and A["somme"]) else rf"\left({A['stades'][i]}\right)",
                      B["stades"][i] if not (n.op == "*" and B["somme"]) else rf"\left({B['stades'][i]}\right)")
               for i in range(4)]
-    eqs = A["eqs"] + [e for e in B["eqs"] if e not in A["eqs"]]
-    ch.lim(stades[0], r" ,\; ".join(eqs) if eqs else None)
+    if stades[0].replace(r"\dfrac", r"\frac") != tex(n).replace(r"\dfrac", r"\frac"):
+        ch.lim(stades[0], r"\text{mise en évidence}")
     ms = sorted(set(A["absm"] + B["absm"]))
     if ms:
-        ch.lim(stades[1], r"\sqrt{x^{2}} = |x|")
-        ch.lim(stades[2], r" ,\; ".join(_just_abs(s, m) for m in ms))
-    if stades[3] != stades[2]:
-        ch.lim(stades[3], rf"\text{{on met }} {tex(_puissance_x(max(A['k'], B['k'])))} \text{{ en évidence}}")
-    commun = min(A["k"], B["k"]) if n.op == "/" else 0
-    just_simpl = rf"\text{{on simplifie par }} {tex(_puissance_x(commun))}" if commun and n.op == "/" else None
-    ch.lim(tex(g), just_simpl, g)
-    avant = _conclure(ch, g, L, ctx)
-    if ch.complete and n is ctx.f:
-        ctx.racine_dite = True
-    return L, [_ligne_fi(n, fi, ctx)] + avant + [ch] + ([] if ch.complete else narration)
+        ch.lim(stades[2], r" ,\; ".join(_just_racine(s, m) for m in ms))
+    elif stades[3] != stades[0]:
+        ch.lim(stades[3], r"\text{mise en évidence}")
+    ch.lim(tex(g), None, g)
+    _conclure(ch, g, L, ctx)
+    _annoncer(ch, n, fi, ctx)
+    return L, list(narration) + [ch]
 
 
 def _evidence_ln(n, ctx, fi):
@@ -1977,26 +2098,23 @@ def _evidence_ln(n, ctx, fi):
     termes = [_terme_laurent(u[j], j - k) for j in range(k, -1, -1) if u[j] != 0]
     ru = _somme_termes(termes) if len(termes) > 1 else None
     xp = "x" if p == 1 else f"x^{{{p}}}"
-    absx = r"\ln|x|" if k == 1 else rf"{k}\ln|x|"
+    lnx = r"\ln x" if s > 0 else r"\ln|x|"
+    absx = lnx if k == 1 else rf"{k}{lnx}"
     ln_c = rf"\ln {qtex(c)}"
     # numérateur : ln(x^k(c + …)) = k ln|x| + ln(c + …)
     if ru is not None:
         f0 = rf"\ln\left({_monome_tex(F(1), k)}\left({tex(ru)}\right)\right)"
         f1 = rf"{absx} + \ln\left({tex(ru)}\right)"
-        eq_u = rf"{tex(n.a.a)} = {_monome_tex(F(1), k)}\left({tex(ru)}\right)"
         B = rf"\dfrac{{\ln\left({tex(ru)}\right)}}{{{xp}}}"
     else:
         f0 = rf"\ln\left({tex(n.a.a)}\right)"
         f1 = absx if c == 1 else rf"{ln_c} + {absx}"
-        eq_u = None
         B = rf"\dfrac{{{ln_c}}}{{{xp}}}" if c != 1 else None
     den_evid = V["stades"][3]
     ch = ctx.chaine(n)
-    just0 = (", ".join([e for e in ([eq_u] if eq_u else []) + V["eqs"]])) or None
-    ch.lim(rf"\dfrac{{{f0}}}{{{den_evid}}}", just0)
-    just1 = r"\ln(ab) = \ln a + \ln b" + (rf" ,\; \ln x^{{{k}}} = {k}\ln|x|" if k > 1 else "")
-    ch.lim(rf"\dfrac{{{f1}}}{{{den_evid}}}", just1)
-    A_ = rf"\dfrac{{\ln|x|}}{{{xp}}}"
+    ch.lim(rf"\dfrac{{{f0}}}{{{den_evid}}}", r"\text{mise en évidence}")
+    ch.lim(rf"\dfrac{{{f1}}}{{{den_evid}}}", r"\text{propriétés de } \ln")
+    A_ = rf"\dfrac{{{lnx}}}{{{xp}}}"
     corps = (A_ if k == 1 else rf"{k}\,{A_}") + (f" + {B}" if B else "")
     sans_pref = V["coef"] == 1 and _est_un(V["R"])
     if sans_pref:
@@ -2005,34 +2123,29 @@ def _evidence_ln(n, ctx, fi):
         den = _produit_arbres([t for t in (Nb(abs(V["coef"])) if abs(V["coef"]) != 1 else None,
                                             None if _est_un(V["R"]) else V["R"]) if t is not None])
         f2 = rf"{'-' if V['coef'] < 0 else ''}\dfrac{{1}}{{{tex(den)}}}\left({corps}\right)"
-    ch.lim(f2, rf"\text{{on divise par }} {xp}")
-    # limites : croissance comparée pour ln|x|/x^p, puis le reste
+    ch.lim(f2)
+    # croissance comparée pour ln|x|/x^p
     ref = REFERENCES["ln_sur_puissance"][0]
     if s > 0:
-        j_cc = rf"{A_} \to 0 \text{{ : croissance comparée, }} {ref}"
+        j_cc = rf"\text{{croissance comparée : }} {ref}"
     else:
         tp = "t" if p == 1 else f"t^{{{p}}}"
         signe = "" if p % 2 == 0 else "-"
-        j_cc = (rf"t = -x \to +\infty ,\; {A_} = {signe}\dfrac{{\ln t}}{{{tp}}} \to 0 \text{{ : croissance comparée, }} "
+        j_cc = (rf"t = -x \to +\infty ,\; {A_} = {signe}\dfrac{{\ln t}}{{{tp}}} \text{{ : croissance comparée, }} "
                 r"\lim_{t\to +\infty} \dfrac{\ln t}{t^{n}} = 0")
-    justs = [j_cc]
-    if B:
-        justs.append(rf"{B} \to 0 \text{{ (numérateur fini, dénominateur }} \to \pm\infty \text{{)}}")
     nul = r"2 \cdot 0" if k == 2 else (r"0" if k == 1 else rf"{k} \cdot 0")
     valeur = nul + (" + 0" if B else "")
     if not sans_pref and abs(V["coef"]) != 1:
         valeur = rf"{'-' if V['coef'] < 0 else ''}\dfrac{{1}}{{{qtex(abs(V['coef']))}}}\left({valeur}\right)"
     elif V["coef"] < 0:
         valeur = rf"-\left({valeur}\right)"
-    ap = _signe(V["coef"]) * (s if p % 2 else 1)
+    ap = _signe(V.get("lead", V["coef"])) * (s if p % 2 else 1)
     L = Lim.fin(0, ap)
-    ch.val(valeur, r" ;\; ".join(justs))
+    ch.val(valeur, j_cc)
     ch.val("0")
     ch.complete = True
-    math, pre = ctx.dire(n, L)
-    if n is ctx.f:
-        ctx.racine_dite = True
-    return L, [_ligne_fi(n, fi, ctx), ch] + pre
+    _annoncer(ch, n, fi, ctx)
+    return L, [ch]
 
 
 # --- méthode : √(u²) = |u| (en une valeur, d'un seul côté) ---------------------------------------
@@ -2108,8 +2221,7 @@ def _racine_carre_parfait(n, ctx, fi):
         table[racine.key()] = arbre if sg > 0 else Neg(arbre)
         u = tex(arbre)
         avec_abs = avec_abs.replace(tex(racine), rf"|{u}|")
-        cote = "gauche" if pt.d < 0 else "droite"
-        justs.append(rf"{u} {'>' if sg > 0 else '<'} 0 \text{{ à {cote} de }} {pt.a_tex} \text{{, donc }} |{u}| = "
+        justs.append(rf"{u} {'>' if sg > 0 else '<'} 0 \text{{ : }} |{u}| = "
                      + (u if sg > 0 else rf"-{_entre_parentheses(u)}"))
     g = _remplacer_racines(n, table)
     _meme_fonction(n, g, ctx)
@@ -2124,19 +2236,11 @@ def _racine_carre_parfait(n, ctx, fi):
         m, N2, D2 = _simplifier_par_x_moins_a(N, D, a)
         if m:
             g2 = _arbre_fraction(N2, D2)
-            fx = tex(_arbre_poly([-a, F(1)])) if a else "x"
-            ch.lim(tex(g2), rf"\text{{on simplifie par }} {fx} \text{{ (}} x \neq {pt.a_tex}\text{{)}}", g2)
+            ch.lim(tex(g2), r"\text{on simplifie}", g2)
     L, narration = _noeud(g2, ctx)
-    avant = _conclure(ch, g2, L, ctx)
-    if ch.complete and n is ctx.f:
-        ctx.racine_dite = True
-    if ch.complete:
-        return L, [_ligne_fi(n, fi, ctx)] + avant + [ch]
-    return L, [_ligne_fi(n, fi, ctx)] + avant + [ch] + [l for l in narration if not _est_ligne_fi(l)]
-
-
-def _est_ligne_fi(l):
-    return isinstance(l, str) and "forme indéterminée" in l
+    _conclure(ch, g2, L, ctx)
+    _annoncer(ch, n, fi, ctx)
+    return L, list(narration) + [ch]
 
 
 # --- méthode : expression conjuguée (∞ − ∞ en ±∞ ; 0/0 en une valeur) -----------------------------
@@ -2187,17 +2291,12 @@ def _conjuguee_difference(n, ctx, fi):
     conj = Op("-", U, V) if sigma > 0 else Op("+", U, V)
     g = Op("/", _arbre_poly(R), conj)
     _meme_fonction(n, g, ctx)
-    carres = rf"{_entre_parentheses(_carre_tex(U))} - {_entre_parentheses(_carre_tex(V))}"
     L, narration = _noeud(g, ctx)
     ch = ctx.chaine(n)
-    ch.lim(rf"\dfrac{{\left({tex(n)}\right)\left({tex(conj)}\right)}}{{{tex(conj)}}}",
-           rf"\text{{on multiplie et on divise par la conjuguée }} {tex(conj)}")
-    ch.lim(rf"\dfrac{{{carres}}}{{{tex(conj)}}}", r"(a - b)(a + b) = a^{2} - b^{2}")
-    ch.lim(tex(g), None, g)
+    ch.lim(tex(g), r"\text{conjuguée}", g)
     avant, apres = _prolonger(ch, g, L, narration, ctx)
-    if ch.complete and n is ctx.f:
-        ctx.racine_dite = True
-    return L, [_ligne_fi(n, fi, ctx)] + avant + [ch] + apres
+    _annoncer(ch, n, fi, ctx)
+    return L, avant + [ch] + apres
 
 
 def _facteur_ou_vide(P):
@@ -2247,19 +2346,13 @@ def _conjuguee_zero_sur_zero(n, ctx, fi):
             haut = _produit_tex(barre, _facteur_ou_vide(Z2), tc)
             bas = _produit_tex(barre, _facteur_ou_vide(R2))
         _meme_fonction(n, g, ctx)
-        cote = "numérateur" if racine_au_numerateur else "dénominateur"
         L, narration = _noeud(g, ctx)
         ch = ctx.chaine(n)
-        etapes = egalites                              # (S1, S2, S3) selon la position de la racine
-        ch.lim(etapes[0], rf"\text{{on multiplie par la conjuguée }} {tex(conj)} \text{{ du {cote}}}")
-        ch.lim(etapes[1], r"(a - b)(a + b) = a^{2} - b^{2}")
-        ch.lim(etapes[2], None)
-        ch.lim(rf"\dfrac{{{haut}}}{{{bas}}}", rf"\text{{on factorise par }} \left({xa}\right)")
-        ch.lim(tex(g), rf"\text{{on simplifie}} \; (x \neq {pt.a_tex})", g)
+        ch.lim(rf"\dfrac{{{haut}}}{{{bas}}}", rf"\text{{conjuguée, puis factorisation par }} \left({xa}\right)")
+        ch.lim(tex(g), r"\text{on simplifie}", g)
         avant, apres = _prolonger(ch, g, L, narration, ctx)
-        if ch.complete and n is ctx.f:
-            ctx.racine_dite = True
-        return L, [_ligne_fi(n, fi, ctx)] + avant + [ch] + apres
+        _annoncer(ch, n, fi, ctx)
+        return L, avant + [ch] + apres
     return None
 
 
@@ -2410,14 +2503,13 @@ def _comparee_pure(n, ctx, fi):
         L = Lim.fin(0, Lref.ap * (1 if C > 0 else -1))
     lim_ref, cond = REFERENCES[nom]
     ch = ctx.chaine(n)
-    just = rf"{tex(pur)} \to {Lref.tex(False)} \text{{ : croissance comparée, }} {lim_ref} \text{{ pour }} {cond}"
+    just = rf"\text{{croissance comparée : }} {lim_ref}"
     if C != 1 or tex(pur) != tex(n):
         ch.lim(rf"{tex(_arbre_avec_coefficient(C, pur))}", None)
     ch.val(L.tex(False), just)
     ch.complete = True
-    if n is ctx.f:
-        ctx.racine_dite = True
-    return L, [_ligne_fi(n, fi, ctx), ch]
+    _annoncer(ch, n, fi, ctx)
+    return L, [ch]
 
 
 def _comparee_avec_polynomes(n, ctx, fi, C, N, B, q, polys):
@@ -2430,19 +2522,23 @@ def _comparee_avec_polynomes(n, ctx, fi, C, N, B, q, polys):
         tete, interieur, complet, termes = _facteur_detaille(P, m)
         egalites.append(rf"{ptex(P, 'x')} = {complet}")
         C, N = C * P[-1] ** k, N + m * k
-        expr = sum(_rat(c) * x ** i for i, c in enumerate(P)) / (_rat(P[-1]) * x ** m)
-        bt = arbre_depuis_sympy(sp.expand(expr))
-        facteur = bt if k == 1 else (Op("^", bt, Nb(F(k))) if k > 0 else Op("/", Nb(F(1)), Op("^", bt, Nb(F(-k)))))
+        bt = _somme_termes([(False, Nb(F(1)))] + [_terme_laurent(P[j] / P[-1], j - m) for j in range(m - 1, -1, -1) if P[j] != 0]) \
+            if len(_polynome_a_termes(P)) > 1 else Nb(F(1))
+        if k == 1:
+            facteur = bt
+        elif k == -1:
+            facteur = Op("/", Nb(F(1)), bt)
+        else:
+            facteur = Op("^", bt, Nb(F(k))) if k > 0 else Op("/", Nb(F(1)), Op("^", bt, Nb(F(-k))))
         crochets = facteur if crochets is None else Op("*", crochets, facteur)
     g = Op("*", _arbre_avec_coefficient(C, _arbre_pur(N, B, q)), crochets)
     _meme_fonction(n, g, ctx)
     L, narration = _noeud(g, ctx)
     ch = ctx.chaine(n)
-    ch.lim(tex(g), ", ".join(egalites))
+    ch.lim(tex(g), r"\text{mise en évidence}")
     avant, apres = _prolonger(ch, g, L, narration, ctx)
-    if ch.complete and n is ctx.f:
-        ctx.racine_dite = True
-    return L, [_ligne_fi(n, fi, ctx)] + avant + [ch] + apres
+    _annoncer(ch, n, fi, ctx)
+    return L, avant + [ch] + apres
 
 
 def _termes_de_somme(S, s):
@@ -2502,7 +2598,7 @@ def _evidence_exp(n, ctx, fi):
             return None
         _, D, crochet = r
         g = Op("*", D, crochet)
-        just = rf"\text{{on met }} {tex(D)} \text{{ en évidence}}"
+        just = r"\text{mise en évidence}"
     elif n.op == "/" and fi.nom == "∞/∞":
         cotes = []
         for S in (n.a, n.b):
@@ -2518,15 +2614,12 @@ def _evidence_exp(n, ctx, fi):
             return None
         (C1, N1, B1, q1), (C2, N2, B2, q2) = cotes[0][1], cotes[1][1]
         pur = _arbre_avec_coefficient(C1 / C2, _arbre_pur(N1 - N2, B1 - B2, q1 - q2))
-        morceaux = [(S, d, cr) for S, _, d, cr in cotes if d is not None]
-        evid = " ,\\; ".join(rf"{tex(S)} = {tex(Op('*', d, cr))}" for S, d, cr in morceaux)
-        cle_dom = tex(morceaux[0][1])
         neutre = isinstance(pur, Nb) and pur.v == 1
         haut = [t for t in (None if neutre else pur, cotes[0][3]) if t is not None]
         g = haut[0] if len(haut) == 1 else (Op("*", haut[0], haut[1]) if haut else Nb(F(1)))
         if cotes[1][3] is not None:
             g = Op("/", g, cotes[1][3])
-        just = rf"\text{{on met }} {cle_dom} \text{{ en évidence}} ,\; {evid}"
+        just = r"\text{mise en évidence}"
     else:
         return None
     _meme_fonction(n, g, ctx)
@@ -2534,9 +2627,8 @@ def _evidence_exp(n, ctx, fi):
     ch = ctx.chaine(n)
     ch.lim(tex(g), just, g)
     avant, apres = _prolonger(ch, g, L, narration, ctx)
-    if ch.complete and n is ctx.f:
-        ctx.racine_dite = True
-    return L, [_ligne_fi(n, fi, ctx)] + avant + [ch] + apres
+    _annoncer(ch, n, fi, ctx)
+    return L, avant + [ch] + apres
 
 
 # --- méthode : règle de Bernoulli-L'Hôpital (dernier recours), hypothèses vérifiées et écrites ---------
@@ -2593,11 +2685,11 @@ def _intervalle_derivable(f, g, ctx):
 
 
 def _g_prime_non_nul(gp, I, ctx):
-    """Texte qui établit g'(x) ≠ 0 au voisinage du point d'étude (sauf peut-être en lui), ou None."""
+    """Tex qui établit g'(x) ≠ 0 au voisinage du point d'étude (sauf peut-être en lui), ou None."""
     pt = ctx.pt
     if sans_x(gp):
         v = valeur_constante(gp)
-        return (rf"\(g'(x) = {tex(gp)} \neq 0\)", False) if v else None
+        return rf"g'(x) = {tex(gp)} \neq 0" if v else None
     try:
         D, P, Z, _, _ = signe_facteur(gp, "x")
         Z = fusion(inter(Z, I))
@@ -2608,7 +2700,7 @@ def _g_prime_non_nul(gp, I, ctx):
         return None
     if Z:
         return None
-    return rf"\(g'(x) = {tex(gp)}\) ne s'annule pas sur \({ens_tex(I)}\)", True
+    return rf"g'(x) = {tex(gp)} \text{{ ne s'annule pas sur }} {ens_tex(I)}"
 
 
 def _nettoyer_arbre(t):
@@ -2668,12 +2760,14 @@ def _lhopital(n, ctx, fi):
     if isinstance(n, Op) and n.op == "/" and _poly_ou_const(n.a) is not None and _poly_ou_const(n.b) is not None:
         return None                                  # fraction rationnelle : mise en évidence ou factorisation, jamais L'Hôpital
     for f, g, intro, nom in _candidats_lhopital(n, ctx, fi):
+        c0 = len(ctx.cf)
         try:
             r = _lhopital_avec(n, f, g, intro, nom, ctx, fi)
         except Abandon:
             r = None
         if r is not None:
             return r
+        del ctx.cf[c0:]
     return None
 
 
@@ -2682,8 +2776,10 @@ def _lhopital_avec(n, f, g, intro, nom, ctx, fi):
     pt = ctx.pt
     # (a) forme indéterminée 0/0 ou ∞/∞
     if nom is None:
+        c0 = len(ctx.cf)
         Lf, _ = _noeud(f, ctx)
         Lg, _ = _noeud(g, ctx)
+        del ctx.cf[c0:]                                  # les signes lus ici ne servent qu'à reconnaître la forme
         if Lf.nul() and Lg.nul():
             nom = "0/0"
         elif Lf.inf and Lg.inf:
@@ -2702,47 +2798,24 @@ def _lhopital_avec(n, f, g, intro, nom, ctx, fi):
     except Exception:
         return None
     # (c) g' ≠ 0 au voisinage
-    res_c = _g_prime_non_nul(g_arbre, I, ctx)
-    if res_c is None:
+    texte_c = _g_prime_non_nul(g_arbre, I, ctx)
+    if texte_c is None:
         return None
-    texte_c, avec_donc = res_c
     ctx.nb_lhopital += 1
     try:
         L, lg = _noeud(q_arbre, ctx)
-        chA = Chaine(pt, r"\dfrac{f'(x)}{g'(x)}")
-        chA.lim(tex(q_arbre), None, q_arbre)
-        avant, apres = _prolonger(chA, q_arbre, L, lg, ctx)
+        ch = ctx.chaine(n)
+        if intro:                                        # produit mis en quotient : u·v = u/(1/v)
+            ch.lim(rf"\dfrac{{{tex(f)}}}{{{tex(g)}}}", rf"\text{{on écrit un quotient de la forme }} « \infty/\infty »"
+                   if nom == "∞/∞" else r"\text{on écrit un quotient de la forme } « 0/0 »", Op("/", f, g))
+        hyp = (rf"\text{{Bernoulli-L'Hôpital : }} {tex(f)} \text{{ et }} {tex(g)} \text{{ dérivables sur }} {ens_tex(I)} ,\; "
+               rf"{texte_c} ,\; \text{{la limite de }} \dfrac{{f'}}{{g'}} \text{{ existe}}")
+        ch.lim(tex(q_arbre), hyp, q_arbre)
+        avant, apres = _prolonger(ch, q_arbre, L, lg, ctx)
     finally:
         ctx.nb_lhopital -= 1
-    vers = pt.tex()
-    ens = ens_tex(I)
-    point = rf"\({vers}\)" if pt.s else rf"\({pt.a_tex}\) (sauf peut-être en \({pt.a_tex}\))"
-    nom_tex = rf"« \({FI_TEX[nom]}\) »"
-    chB = ctx.chaine(n)
-    if tex(n) != tex(Op("/", f, g)) and n is not ctx.f:
-        chB.lim(rf"\dfrac{{f(x)}}{{g(x)}}", None)
-    elif n is ctx.f and tex(n) != tex(Op("/", f, g)):
-        chB.lim(rf"\dfrac{{{tex(f)}}}{{{tex(g)}}}", None)
-    chB.lim(r"\dfrac{f'(x)}{g'(x)}", r"\text{règle de Bernoulli-L'Hôpital}")
-    chB.val(L.tex(False))
-    chB.complete = True
-    if n is ctx.f:
-        ctx.racine_dite = True
-    lignes = intro + [
-        rf"On applique la règle de Bernoulli-L'Hôpital avec \(f(x) = {tex(f)}\) et \(g(x) = {tex(g)}\). "
-        r"Vérifions les hypothèses :",
-        rf"(a) forme indéterminée {nom_tex} : vérifiée ;",
-        rf"(b) \(f\) et \(g\) sont dérivables sur \({ens}\), donc au voisinage de {point} : vérifiée ;",
-        rf"On calcule \(f'(x) = {tex(f_arbre)}\) et \(g'(x) = {tex(g_arbre)}\).",
-        (rf"(c) {texte_c}, donc \(g'(x) \neq 0\) au voisinage de {point} : vérifiée ;" if avec_donc
-         else rf"(c) {texte_c} au voisinage de {point} : vérifiée ;"),
-        r"(d) Calculons la limite de \(\dfrac{f'(x)}{g'(x)}\) :",
-    ] + avant + [chA] + apres + [
-        rf"La limite de \(\dfrac{{f'(x)}}{{g'(x)}}\) existe et vaut \({L.tex(False)}\) : (d) est vérifiée, "
-        r"donc la règle s'applique :",
-        chB,
-    ]
-    return L, [_ligne_fi(n, fi, ctx)] + lignes
+    _annoncer(ch, n, fi, ctx)
+    return L, avant + [ch] + apres
 
 
 def _simplifier_zero_sur_zero(n, ctx, fi):
@@ -2766,60 +2839,29 @@ def _simplifier_zero_sur_zero(n, ctx, fi):
     L, narration = _noeud(g, ctx)
     ch = ctx.chaine(n)
     ch.lim(rf"\dfrac{{{haut}}}{{{bas}}}", rf"\text{{on factorise par }} \left({xa}\right)")
-    ch.lim(tex(g), rf"\text{{on simplifie}} \; (x \neq {pt.a_tex})", g)
-    avant = _conclure(ch, g, L, ctx)
-    if ch.complete and n is ctx.f:
-        ctx.racine_dite = True
-    return L, [_ligne_fi(n, fi, ctx)] + avant + [ch] + ([] if ch.complete else narration)
+    ch.lim(tex(g), r"\text{on simplifie}", g)
+    _conclure(ch, g, L, ctx)
+    _annoncer(ch, n, fi, ctx)
+    return L, list(narration) + [ch]
 
 
 # ordre du cours : mise en évidence, conjuguée, mise en évidence sous une racine, croissance comparée, L'Hôpital
 METHODES[:] = [_racine_carre_parfait, _simplifier_zero_sur_zero, _evidence_exp, _conjuguee, _evidence_racine, _comparee_pure, _evidence_ln, _lhopital]
 
 
-def _silencieux(n, L, ctx):
-    """Un nœud défini au point d'étude, de limite finie, n'a rien à raconter : sa limite est sa valeur."""
-    return not ctx.pt.s and not L.inf and _defini_en(n, ctx)
 
-
-def _lignes_pole(n, ctx, A, la, B, L):
-    """Quotient dont le dénominateur tend vers 0 : numérateur, puis le signe du dénominateur lu dans le tableau
-    de signes (ou justifié en texte si le tableau est impossible), puis la limite."""
-    pt = ctx.pt
-    lignes = []
-    if sans_x(n.a):
-        num = rf"Le numérateur vaut \({A.tex(False)}\)"
-    elif not A.inf and _defini_en(n.a, ctx):
-        sub, val = _tex_en(n.a, pt), A.tex(False)
-        num = rf"Le numérateur \({tex(n.a)}\) vaut \({sub if sub == val else sub + ' = ' + val}\)"
-    else:
-        lignes += la
-        num = rf"Le numérateur \({tex(n.a)}\) tend vers \({A.tex(False)}\)"
-    lu = ctx.lecture("den", n.b, B)
-    lignes.append(num + rf" et le dénominateur \({tex(n.b)}\) tend vers \(0\).")
-    s = "+" if B.ap > 0 else "-"
-    fraction = rf"\dfrac{{{A.tex(False)}}}{{0^{{{s}}}}} = {L.tex(False)}"
-    if n is ctx.f:
-        ctx.racine_dite = True
-        if ctx.mode == "limite":
-            fin = rf"\(\displaystyle\lim_{{x\to {pt.tex()}}} f(x) = {fraction}\)"
-        else:
-            fin = rf"\(f(x) \to {fraction}\)"
-    else:
-        fin = rf"\({tex(n)} \to {fraction}\)"
-    if lu is not None:
-        mot = "positif" if lu > 0 else "négatif"
-        lignes.append(rf"{ctx.cote()}, le dénominateur est {mot} ({ctx.renvois[('den', n.b.key())]}) : "
-                      rf"il tend vers \(0^{{{s}}}\), donc {fin}.")
-    else:
-        lignes += ctx.justifier(n.b, B, force=True)
-        lignes.append(rf"\({tex(n.b)} \to 0^{{{s}}}\), donc {fin}.")
-    return lignes
 
 
 def _noeud(n, ctx):
-    """(limite de n au point d'étude, lignes qui l'expliquent) ; Abandon si l'on ne peut pas la justifier."""
+    """(limite de n au point d'étude, chaînes d'égalités qui la justifient) ; Abandon si l'on ne peut pas la justifier."""
+    L, lignes = _noeud_calcul(n, ctx)
+    ctx.lims[n.key()] = L
+    return L, lignes
+
+
+def _noeud_calcul(n, ctx):
     pt = ctx.pt
+    n0 = len(ctx.cf)
     if sans_x(n):
         return Lim.fin(_const_sympy(n), None), []
     if isinstance(n, X):
@@ -2832,11 +2874,7 @@ def _noeud(n, ctx):
             U, lu = _noeud(n.a, ctx)
             L = _oppose(U)
             ctx.verifier(n, L)
-            if _silencieux(n, L, ctx):
-                return L, []
-            math, pre = ctx.dire(n, L)
-            debut = rf"Quand \(x \to {pt.tex()}\), " if isinstance(n.a, X) and n is not ctx.f else ""
-            return L, lu + pre + [debut + math + "."]
+            return L, lu
         if isinstance(n, Op) and n.op in "+-*/":
             A, la = _noeud(n.a, ctx)
             B, lb = _noeud(n.b, ctx)
@@ -2845,7 +2883,7 @@ def _noeud(n, ctx):
                     raise Abandon("signe du dénominateur inconnu")
                 L = _quotient(A, B)
                 ctx.verifier(n, L)
-                return L, _lignes_pole(n, ctx, A, la, B, L)
+                return L, la + lb + ctx.signe_de(n.b, B, "den")
             try:
                 L = {"+": lambda: _somme(A, B), "-": lambda: _somme(A, _oppose(B)),
                      "*": lambda: _produit(A, B), "/": lambda: _quotient(A, B)}[n.op]()
@@ -2853,19 +2891,7 @@ def _noeud(n, ctx):
                 fi.A, fi.B, fi.la, fi.lb = A, B, la, lb
                 raise
             ctx.verifier(n, L)
-            if _silencieux(n, L, ctx):
-                return L, []
-            math, pre = ctx.dire(n, L)
-            ca, cb = sans_x(n.a), sans_x(n.b)
-            if ca or cb:        # une constante se remplace directement : on ne répète pas l'autre terme
-                autre = n.b if ca else n.a
-                debut = rf"Quand \(x \to {pt.tex()}\), " if isinstance(autre, X) and n is not ctx.f else ""
-                return L, la + lb + pre + [debut + math + "."]
-            ma, pa = ctx.dire(n.a, A)
-            mb, pb = ctx.dire(n.b, B)
-            la = [l for l in la if l != ma + "."]
-            lb = [l for l in lb if l != mb + "."]
-            return L, la + lb + pa + pb + pre + [f"{ma} et {mb}, donc {math}."]
+            return L, la + lb
         if isinstance(n, Op) and n.op == "^":
             alpha = valeur_constante(n.b)
             if alpha is None:
@@ -2877,42 +2903,27 @@ def _noeud(n, ctx):
                 L = _puissance_entiere(U, int(alpha))
             else:
                 L = _puissance_reelle(U, alpha)
-            g = r"\sqrt{t}" if alpha == F(1, 2) else rf"t^{{{qtex(alpha)}}}"
         elif isinstance(n, Fn):
             U, lu = _noeud(n.a, ctx)
             if n.nom == "exp":
-                L, g = _exp_lim(U), r"e^{t}"
+                L = _exp_lim(U)
             elif n.nom == "ln":
-                L, g = _ln_lim(U), r"\ln t"
+                L = _ln_lim(U)
             else:
-                L, g = _puissance_reelle(U, F(1, 2)), r"\sqrt{t}"
+                L = _puissance_reelle(U, F(1, 2))
         else:
             raise Abandon(f"sous-expression non prise en charge : {tex(n)}")
         ctx.verifier(n, L)
-        if _silencieux(n, L, ctx):
-            return L, []
         # le signe d'un argument qui tend vers 0 ne sert que pour ln et pour une puissance
         besoin_signe = U.nul() and U.ap and not (isinstance(n, Fn) and n.nom in ("exp", "sqrt"))
-        pre, rappel = [], ""
+        pre = []
         if besoin_signe and not isinstance(n.a, X):
-            if isinstance(n, Fn):
-                genre, quoi, accord = "ln", "l'argument", ("positif", "négatif", "il")
-            else:
-                genre, quoi, accord = ("den" if valeur_constante(n.b) < 0 else "ln"), "la base", ("positive", "négative", "elle")
-            lu_signe = ctx.lecture(genre, n.a, U)
-            if lu_signe is not None:
-                s0 = "+" if U.ap > 0 else "-"
-                pre = [rf"{ctx.cote()}, {quoi} \({tex(n.a)}\) est {accord[0] if lu_signe > 0 else accord[1]} "
-                       rf"({ctx.renvois[(genre, n.a.key())]}) : {accord[2]} tend vers \(0^{{{s0}}}\)."]
-            else:
-                pre = ctx.justifier(n.a, U)
-                rappel = rf" et \({tex(n.a)} \to {U.tex()}\)"
-        u_tex = U.tex(bool(besoin_signe))
-        math, pre_n = ctx.dire(n, L)
-        return L, lu + pre + pre_n + [rf"Or \({g} \to {L.tex()}\) quand \(t \to {u_tex}\){rappel}, donc {math}."]
+            genre = "ln" if isinstance(n, Fn) else ("den" if valeur_constante(n.b) < 0 else "ln")
+            pre = ctx.signe_de(n.a, U, genre)
+        return L, lu + pre
     except FormeIndeterminee as fi:
         fi.noeud = n
-        return _lever(n, ctx, fi)
+        return _lever(n, ctx, fi, n0)
 
 
 def _sans_doublons(lignes):
@@ -2925,20 +2936,24 @@ def _sans_doublons(lignes):
     return out
 
 
-def _rediger(f, pt, ref, mode="limite", label="f(x)", label_somme=False):
+def _rediger(f, pt, ref, prefixe=None):
     """(lignes, None) si la limite de f en pt est rédigée et coïncide avec ref (valeur SymPy), sinon
     (None, raison technique)."""
     try:
         R = _lim_depuis_sympy(ref)
-        ctx = _Contexte(pt, f, R, mode, label, label_somme)
+        ctx = _Contexte(pt, f, R, prefixe)
         L, lignes = _noeud(f, ctx)
         if not _meme_valeur(L, R):
             raise Abandon(f"valeur rédigée {L.tex()} ≠ référence {R.tex()}")
-        lignes = _tout_texte(_sans_doublons(lignes))
+        lignes = _sans_doublons(lignes)
+        chaine_f = next((l for l in lignes if isinstance(l, Chaine) and l.est_f), None)
+        if chaine_f is None:
+            lignes = lignes + [_chaine_directe(f, L, ctx)]
+        else:
+            chaine_f.cf += ctx.cf
+        lignes = _tout_texte(lignes)
         for genre, noeud in ctx.demandes:
             TABLEAUX.utiliser(genre, noeud)
-        if mode == "limite" and not ctx.racine_dite:
-            lignes.append(rf"Donc \(\displaystyle\lim_{{x\to {pt.tex()}}} {label} = {L.tex(False)}\).")
         return lignes, None
     except Exception as e:      # rien ne doit faire échouer l'étude : on retombe sur le résultat seul
         return None, f"{type(e).__name__} : {e}"
@@ -2951,13 +2966,13 @@ def _repli(pt, vtex, detail, label="f(x)"):
     return item
 
 
-def _narrer_limite(f, pt, ref, vtex, items, alternative=None, label="f(x)", label_somme=False):
+def _narrer_limite(f, pt, ref, vtex, items, alternative=None, label="f(x)", prefixe=None):
     """Étapes de lim f en pt : rédigées si possible, sinon phrase de repli et résultat de référence.
     alternative = (arbre équivalent, phrase d'introduction) : essayée si f, telle qu'elle est écrite, résiste."""
-    lignes, detail = _rediger(f, pt, ref, "limite", label, label_somme)
+    lignes, detail = _rediger(f, pt, ref, prefixe)
     if lignes is None and alternative is not None:
         g, intro = alternative
-        lignes2, detail2 = _rediger(g, pt, ref, "limite", label, label_somme)
+        lignes2, detail2 = _rediger(g, pt, ref, prefixe)
         if lignes2 is not None:
             lignes, detail = [intro] + lignes2, None
         else:
@@ -2998,19 +3013,16 @@ def _oblique_generale(f, signe, items):
         return None
     a_tex, b_tex = num_sympy(a_val).tex, num_sympy(b_val).tex
     eq = _equation_affine(a_tex, b_tex)
-    items.append(txt(r"On cherche une asymptote oblique d'équation \(y = ax + b\) : \(a = \displaystyle\lim \frac{f(x)}{x}\), "
-                     r"puis \(b = \displaystyle\lim \left(f(x) - ax\right)\)."))
     pt = Pt({"type": "inf", "signe": signe})
     a_rat = F(int(a_val.p), int(a_val.q)) if a_val.is_Rational else None
     if a_rat is None:
-        items.append(txt(rf"\(a = {a_tex}\) et \(b = {b_tex}\) sont finis (et \(a \neq 0\)) : asymptote oblique d'équation \(y = {eq}\)."))
+        items.append(txt(rf"Asymptote oblique : \(y = {eq}\) (\(a = {a_tex}\), \(b = {b_tex}\))."))
     else:
-        _narrer_limite(Op("/", f, X()), pt, a_val, a_tex, items, label=r"\dfrac{f(x)}{x}")
+        _narrer_limite(Op("/", f, X()), pt, a_val, a_tex, items, label=r"\dfrac{f(x)}{x}", prefixe="a")
         fb = _arbre_moins_ax(f, a_rat)
         coef = "" if abs(a_rat) == 1 else qtex(abs(a_rat))
-        _narrer_limite(fb, pt, b_val, b_tex, items, label=rf"f(x) {'-' if a_rat > 0 else '+'} {coef}x", label_somme=True)
-        items.append(txt(rf"\(a = {a_tex}\) et \(b = {b_tex}\) sont finis (et \(a \neq 0\)) : "
-                         rf"asymptote oblique d'équation \(y = {eq}\)."))
+        _narrer_limite(fb, pt, b_val, b_tex, items, label=rf"f(x) {'-' if a_rat > 0 else '+'} {coef}x", prefixe="b")
+        items.append(txt(rf"Asymptote oblique : \(y = {eq}\)."))
         items.extend(_position_racine(f, a_rat, F(int(b_val.p), int(b_val.q)) if b_val.is_Rational else None, signe))
     return {"genre": "oblique", "a": a_tex, "b": b_tex, "a_val": float(a_val), "b_val": float(b_val),
             "equation_tex": eq}
@@ -3074,29 +3086,28 @@ def _position_racine(f, a, b, s):
         val = evaluer(f, x)
         if val is None or (val - (float(a) * x + float(b))) * sg <= 0:
             return []
-    vers = r"+\infty" if s > 0 else r"-\infty"
-    qt, wt, rt = ptex(Q, "x"), ptex(W, "x"), qtex(r[0])
+    qt, rt = ptex(Q, "x"), qtex(r[0])
     racine = rf"\sqrt{{{qt}}}"
-    gauche = rf"\sqrt{{{qt}}} - \left({wt}\right)"
+    gauche = racine + ("" if nul(W) else _suite_signee(pscal(W, F(-1))))                    # √Q − W
+    conj = racine + ("" if nul(W) else _suite_signee(W))                                    # √Q + W
     gauche_h = rf"f(x) - \left({_equation_affine(qtex(a), qtex(b))}\right)"
     droite0 = gauche if ur > 0 else rf"-\left({gauche}\right)"
-    suite = rf"\dfrac{{{qt} - \left({wt}\right)^{{2}}}}{{{racine} + {_entre_parentheses(wt)}}}"
-    ligne2 = (suite if ur > 0 else "-" + suite)
-    ligne3 = rf"\dfrac{{{rt}}}{{{racine} + {_entre_parentheses(wt)}}}" if ur > 0 else rf"-\dfrac{{{rt}}}{{{racine} + {_entre_parentheses(wt)}}}"
-    return [txt(_egalites(gauche_h, [droite0, ligne2, ligne3])),
-            txt(rf"Près de \({vers}\), \({racine} + {_entre_parentheses(wt)}\) est positif (\({racine} - {_entre_parentheses(wt)}\) tend vers 0 "
-                rf"et \({racine} > 0\)), et {_mot_signe_r(ur, r[0])} : \(f(x) - \left({_equation_affine(qtex(a), qtex(b))}\right)\) est "
-                f"{_mot_signe(sg)} : la courbe est " + ("au-dessus" if sg > 0 else "au-dessous") + " de la droite.")]
-
-
-def _mot_signe_r(u, r):
-    """« la constante 8 est positive » (précédée du signe − pour −√Q…)."""
-    return (rf"la constante \({qtex(r)}\) est {'positive' if r > 0 else 'négative'}" + ("" if u > 0 else ", précédée du signe −"))
+    ligne3 = rf"\dfrac{{{rt}}}{{{conj}}}" if ur > 0 else rf"-\dfrac{{{rt}}}{{{conj}}}"
+    formule = (r"\[\begin{aligned}" + gauche_h + " &= " + droite0 + r" \\ &= " + ligne3
+               + r" \qquad \left(\text{conjuguée}\right)\end{aligned}\]")
+    # √Q + W est positif là où W l'est : région de W > 0 qui contient le voisinage de s∞
+    w1 = W[1] if len(W) > 1 else F(0)
+    pour = ""
+    if w1 != 0 and (w1 > 0) == (s > 0):
+        pour = rf" pour \(x {'>' if s > 0 else '<'} {qtex(-W[0] / w1)}\)"
+    return [txt(formule),
+            txt(rf"\(f(x) - \left({_equation_affine(qtex(a), qtex(b))}\right) {'>' if sg > 0 else '<'} 0\){pour} : "
+                "la courbe est " + ("au-dessus" if sg > 0 else "au-dessous") + " de l'asymptote.")]
 
 
 def _narrer_cotes(f, borne, items, ref_de, cotes=("gauche", "droite")):
-    """Limites à gauche et à droite d'une valeur interdite : la partie commune une seule fois, puis une
-    ligne courte par côté ; une seule conclusion si les deux côtés donnent la même limite.
+    """Limites à gauche et à droite d'une valeur interdite : une ligne par côté (chaque ligne porte son côté dans lim) ; si les
+    deux côtés s'écrivent de la même façon, une seule ligne (limite en a).
     ref_de(pt) donne la valeur de référence (SymPy ou exacte), son écriture tex et sa valeur numérique.
     Renvoie [(tex, valeur), …]."""
     cas = []
@@ -3115,74 +3126,30 @@ def _narrer_cotes(f, borne, items, ref_de, cotes=("gauche", "droite")):
         return sortie
     (_, pg, vg_ref, vg, _), (_, pd, vd_ref, vd, _) = cas
     if "?" not in (vg, vd):
-        lg, dg = _rediger(f, pg, vg_ref, "fleche")
-        ld, dd = _rediger(f, pd, vd_ref, "fleche")
+        lg, dg = _rediger(f, pg, vg_ref)
+        ld, dd = _rediger(f, pd, vd_ref)
         if lg is not None and ld is not None:
-            fusion = _fusion_cotes(lg, ld)
-            for ligne in fusion:
+            for ligne in _fusion_cotes(lg, ld, pg, pd, Pt(borne, 0)):
                 items.append(txt(ligne))
-            if vg == vd and not any(r"\lim_{x\to" in ligne for ligne in fusion):
-                items.append(txt(rf"Donc \(\displaystyle\lim_{{x\to {borne['point'].tex}}} f(x) = {vg}\)."))
             return sortie
         if lg is None and ld is None and vg == vd:
             items.append(_repli(Pt(borne, 0), vg, f"{dg} | {dd}"))
             return sortie
-    for (cle, pt, val, vt, _), prefixe in zip(cas, ("À gauche : ", "À droite : ")):
+    for cle, pt, val, vt, _ in cas:
         if vt == "?":
-            items.append(txt(prefixe + rf"\(\displaystyle\lim_{{x\to {pt.tex()}}} f(x) = {NON_DETERMINEE_TEX}\)."))
-            continue
-        bloc = []
-        _narrer_limite(f, pt, val, vt, bloc)
-        premier = bloc[0]["html"]
-        if premier.startswith(PHRASE_REPLI):
-            premier = "l" + premier[1:]
-        morceaux = _avec_prefixe(prefixe, premier)
-        bloc[:1] = [txt(l) for l in morceaux[:-1]] + [dict(bloc[0], html=morceaux[-1])]
-        items.extend(bloc)
+            items.append(txt(rf"\(\displaystyle\lim_{{x\to {pt.tex()}}} f(x) = {NON_DETERMINEE_TEX}\)."))
+        else:
+            _narrer_limite(f, pt, val, vt, items)
     return sortie
 
 
-def _avec_prefixe(prefixe, ligne):
-    """« À gauche : » devant une ligne ; devant une formule affichée (chaîne d'égalités), sur sa propre ligne."""
-    if ligne.startswith("\\["):
-        return [prefixe.strip(), ligne]
-    return [prefixe + ligne]
-
-
-def _fusion_cotes(gauche, droite):
-    """Lignes communes une seule fois, lignes propres à chaque côté précédées de « À gauche : » / « À droite : »
-    (sauf si elles commencent déjà par « À gauche de a, … »). Deux lignes qui ne diffèrent que par le côté
-    deviennent « De part et d'autre de a, … »."""
-    import difflib
-    import re
-    motif = re.compile(r"^À (?:gauche|droite) de (.+?), ")
-
-    unilatere = re.compile(r"\\lim_\{x\\to ([^{}]+?)\^\{[+-]\}\}")
-
-    def normal(l):
-        if l.startswith("\\["):                  # chaîne d'égalités : la même calcul des deux côtés s'écrit une fois
-            return unilatere.sub(r"\\lim_{x\\to \1}", l)
-        return motif.sub(r"@ de \1, ", l)
-
-    sortie = []
-    ng, nd = [normal(l) for l in gauche], [normal(l) for l in droite]
-    for tag, i1, i2, j1, j2 in difflib.SequenceMatcher(None, ng, nd, autojunk=False).get_opcodes():
-        if tag == "equal":
-            for lg, ld in zip(gauche[i1:i2], droite[j1:j2]):
-                m = motif.match(lg)
-                if lg.startswith("\\["):
-                    sortie.append(normal(lg))
-                else:
-                    sortie.append(lg if lg == ld else motif.sub(rf"De part et d'autre de \1, ", lg) if m else lg)
-            continue
-        for lignes, prefixe in ((gauche[i1:i2], "À gauche : "), (droite[j1:j2], "À droite : ")):
-            if lignes:
-                if motif.match(lignes[0]):
-                    sortie.append(lignes[0])
-                else:
-                    sortie.extend(_avec_prefixe(prefixe, lignes[0]))
-                sortie.extend(lignes[1:])
-    return sortie
+def _fusion_cotes(gauche, droite, pg, pd, p0):
+    """Lignes des deux côtés : si elles ne diffèrent que par le côté, elles sont écrites une fois (limite en a) ; sinon
+    celles de gauche, puis celles de droite (chaque ligne porte son côté dans lim)."""
+    def neutre(lignes, p):
+        return [l.replace(rf"\lim_{{x\to {p.tex()}}}", rf"\lim_{{x\to {p0.tex()}}}") for l in lignes]
+    ng, nd = neutre(gauche, pg), neutre(droite, pd)
+    return ng if ng == nd else list(gauche) + list(droite)
 
 
 def _etude_transcendante(f, borne, items):
@@ -3190,12 +3157,6 @@ def _etude_transcendante(f, borne, items):
         cote = None
     else:
         point, cote = borne["point"], borne["cote"]
-        if cote == "deux":
-            items.append(txt(rf"\(x = {point.tex}\) est une valeur interdite."))
-        else:
-            vers = Pt(borne, {"gauche": -1, "droite": 1}[cote]).tex()
-            items.append(txt(rf"\(x = {point.tex}\) est une valeur interdite : on étudie la limite de \(f\) "
-                             rf"quand \(x \to {vers}\)."))
     if cote != "deux":
         pt = Pt(borne, {"gauche": -1, "droite": 1}.get(cote, 0))
         val = _limite_sympy(f, pt.cible(), pt.direction())
@@ -3207,12 +3168,11 @@ def _etude_transcendante(f, borne, items):
         extra = None
         if borne["type"] == "inf":
             if inf:
-                items.append(txt("La limite est infinie : pas d'asymptote horizontale."))
                 extra = _oblique_generale(f, borne["signe"], items)
             else:
-                items.append(txt(rf"Asymptote horizontale d'équation \(y = {vtex}\)."))
+                items.append(txt(rf"Asymptote horizontale : \(y = {vtex}\)."))
         elif inf:
-            items.append(txt(rf"Asymptote verticale d'équation \(x = {point.tex}\)."))
+            items.append(txt(rf"Asymptote verticale : \(x = {point.tex}\)."))
         else:
             items.append(txt(_phrase_trou(point.tex, vtex)))
         return vtex, inf, extra, vval
@@ -3234,10 +3194,10 @@ def _bilan_deux_cotes(point, cote_tex, val, vval, items):
     inf_g, inf_d = r"\infty" in vg, r"\infty" in vd
     if inf_g or inf_d:
         if inf_g and inf_d:
-            conclusion = rf"Asymptote verticale d'équation \(x = {point.tex}\)."
+            conclusion = rf"Asymptote verticale : \(x = {point.tex}\)."
         else:
             cote, autre, v_autre = ("droit", "gauche", vg) if inf_d else ("gauche", "droite", vd)
-            conclusion = (rf"Asymptote verticale d'équation \(x = {point.tex}\) (du côté {cote}) ; "
+            conclusion = (rf"Asymptote verticale : \(x = {point.tex}\) (du côté {cote}) ; "
                           rf"à {autre}, \(f(x) \to {_affichable(v_autre)}\).")
         items.append(txt(conclusion))
         return dict(base, genre="verticale", gauche_tex=_affichable(vg), droite_tex=_affichable(vd),
@@ -3247,8 +3207,7 @@ def _bilan_deux_cotes(point, cote_tex, val, vval, items):
                          "on ne conclut pas sur une éventuelle asymptote."))
         return None
     if vg == vd or (vg_val is not None and vd_val is not None and proche(vg_val, vd_val)):
-        items.append(txt(rf"Les deux limites sont finies et égales à \({vg}\) : "
-                         + _phrase_trou(point.tex, vg)))
+        items.append(txt(_phrase_trou(point.tex, vg)))
         return dict(base, genre="trou", valeur_tex=vg, valeur_val=vg_val)
     items.append(txt("Limites à gauche et à droite différentes : f n'a pas de limite en "
                      rf"\(x={point.tex}\) ; pas d'asymptote verticale."))
@@ -3281,12 +3240,13 @@ def etudier(entree):
     if rationnelle:
         N, D = r_norm(dec[1])
 
+    vues = {}                                   # divisions euclidiennes déjà écrites (−∞ puis +∞)
     for borne in _bornes(ED):
         items = []
         if borne["type"] == "inf":
             cote_tex = r"x \to +\infty" if borne["signe"] > 0 else r"x \to -\infty"
             if rationnelle:
-                asym = _etude_rationnelle_infini(f, N, D, borne["signe"], items)
+                asym = _etude_rationnelle_infini(f, N, D, borne["signe"], items, vues)
                 asym["ou"] = cote_tex
                 res["asymptotes"].append(asym)
             else:

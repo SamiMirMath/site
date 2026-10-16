@@ -2245,8 +2245,11 @@ def analyser_evidents(c, infos, expr_tex):
     return phrases, ev, concl
 
 
-def tableau_facteurs(c, infos, rel, expr_tex, items):
-    """Tableau de signes de c·∏ h_i^{k_i} ; renvoie {expr rel 0} (rel : '>' ou '>=')."""
+def tableau_facteurs(c, infos, rel, expr_tex, items, toutes_lignes=False):
+    """Tableau de signes de c·∏ h_i^{k_i} ; renvoie {expr rel 0} (rel : '>' ou '>=').
+    toutes_lignes (guide de rédaction, 15.10.2026) : une ligne par facteur, évident ou non, et par constante (positive
+    ou négative), puis la ligne du quotient ; aucune phrase sur le signe d'un facteur, aucune conclusion « donc … est
+    du signe de … »."""
     crit = []
     for (h, k), (D, P, Z) in infos:
         for S in (D, P, Z):
@@ -2280,9 +2283,13 @@ def tableau_facteurs(c, infos, rel, expr_tex, items):
         if i < n:
             vals.append(crit[i].val)
     phrases, evidents, concl = analyser_evidents(c, infos, expr_tex)
+    if toutes_lignes:
+        phrases, evidents, concl = [], set(), None
     lignes = []
     if c < 0:
-        lignes.append({"label": qtex(c), "cells": ["-"] * len(vals), "_ev": True})
+        lignes.append({"label": qtex(c), "cells": ["-"] * len(vals), "_ev": not toutes_lignes})
+    elif toutes_lignes and c != 1:
+        lignes.append({"label": qtex(c), "cells": ["+"] * len(vals), "_ev": False})
     for i, ((h, k), (D, P, Z)) in enumerate(infos):
         lab = tex(h) if prec(h) >= 3 else r"\left(" + tex(h) + r"\right)"
         if abs(k) > 1:
