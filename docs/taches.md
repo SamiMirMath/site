@@ -54,7 +54,7 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
   [guide-redaction.md](guide-redaction.md) (`c4604ce`, `de086aa`, `8c1fbc2`, `1957da2`), tableaux de signes
   R7 (`459feef`, `6034f68`), Ensemble de définition R10 (`5190d98`, `2c58766`), Dérivée R11 (`bb1640e`).
   Les « termes dominants » sont supprimés (décidé le 15.10.2026). Critères LA-10 à LA-20.
-  Reste : *relecture de l'enseignant* (étape prévue après L3, aucune trace dans git).
+  *Relecture de l'enseignant* : faite (exemples Limites, Dérivée et Ensemble de définition relus pendant la rédaction allégée).
 - **T06c — À FAIRE (aucun commit) — limites contre les doubles barres, dans l'Étude complète seulement** (décidé le 14.10.2026) :
   sur la ligne f(x), écrire la limite contre la barre, du côté de l'ED (−∞ à gauche de la colonne −2
   pour ln(x²−4)) ; « limite non déterminée automatiquement » si SymPy ne conclut pas ; la Dérivée
@@ -62,10 +62,8 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
   extrémités de l'ED : non, seulement contre les barres).
 - Tableau de signes de l'Ensemble de définition : **fait** (`2bb4da8`, `459feef`, `2c58766` : une ligne par
   facteur, barre simple pour un facteur non nul sur une colonne critique, double barre réservée aux valeurs interdites).
-- Dérivée d'une puissance d'exposant constant irrationnel : faite (α·u^(α−1)·u'). Deux restes
-  d'écriture, à traiter plus tard : (1) un coefficient s'écrit « −1 + ln 3 » (ordre de SymPy) au lieu de
-  « ln 3 − 1 » ; (2) f' de x^√2·ln x reste un quotient non simplifié, (x·√2·x^(√2−1)·ln x + x^√2)/x, au lieu de
-  x^(√2−1)(√2·ln x + 1).
+- Dérivée d'une puissance d'exposant constant irrationnel : **faite** (α·u^(α−1)·u' ; ordre « ln 3 − 1 » `dbb6d93` ;
+  f' de x^√2·ln x en x^(√2−1)(√2 ln x + 1) `8cd50c3`).
 
 ## Phase A — Filet de sécurité
 
