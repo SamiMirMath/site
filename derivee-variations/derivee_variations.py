@@ -199,7 +199,8 @@ def _contient_x(n):
 
 def _ordre_naturel(n):
     """Ordre d'écriture des sommes : termes en x d'abord (ordre de SymPy), constantes ensuite, les
-    constantes positives avant les négatives (« ln 3 − 1 », jamais « −1 + ln 3 »)."""
+    constantes positives avant les négatives (« ln 3 − 1 », jamais « −1 + ln 3 ») ; si la somme
+    commencerait par un moins, un terme positif passe devant (« 1 − ln 2·ln x »)."""
     if isinstance(n, Neg):
         return Neg(_ordre_naturel(n.a))
     if isinstance(n, Fn):
@@ -209,8 +210,13 @@ def _ordre_naturel(n):
     if n.op not in ("+", "-"):
         return Op(n.op, _ordre_naturel(n.a), _ordre_naturel(n.b))
     termes = [(sg, _ordre_naturel(t)) for sg, t in _termes(n)]
-    termes = [(sg, t) if not (isinstance(t, Nb) and t.v < 0) else (-sg, Nb(-t.v)) for sg, t in termes]
+    termes = [(-sg, t2) if neg else (sg, t) for sg, t in termes for t2, neg in [_pos_et_signe(t)]]
     termes.sort(key=lambda st: (not _contient_x(st[1]) , (st[0] < 0) and not _contient_x(st[1])))
+    if termes[0][0] < 0:                  # une somme ne commence pas par un moins : premier terme positif devant
+        for i, st in enumerate(termes):
+            if st[0] > 0:
+                termes.insert(0, termes.pop(i))
+                break
     out = termes[0][1] if termes[0][0] > 0 else Neg(termes[0][1])
     for sg, t in termes[1:]:
         out = Op("+" if sg > 0 else "-", out, t)

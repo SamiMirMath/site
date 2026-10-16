@@ -74,6 +74,11 @@ class TestDeriveeExposantIrrationnel(unittest.TestCase):
         self.assertIn("règle du produit", textes)
         self.assertEqual(dv.etudier("x^(ln(3)-1)+x")["deriv_tex"], r"\frac{\ln(3) - 1}{x^{2 - \ln(3)}} + 1")
 
+    def test_somme_ne_commence_pas_par_un_moins(self):
+        """« 1 − ln 2·ln x », pas « −ln 2·ln x + 1 »."""
+        r = dv.etudier("ln(x)/x^(ln(2))")
+        self.assertEqual(r["deriv_tex"], r"\frac{1 - \ln(2)\,\ln(x)}{x^{\ln(2) + 1}}")
+
     def test_conforme_oracle(self):
         for entree in CAS:
             res, arbre, ED = ed._analyser(entree)
