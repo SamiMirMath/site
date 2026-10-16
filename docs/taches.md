@@ -47,25 +47,21 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
 
 ## Reste à faire dans la phase B
 
-- **T09 — croissance comparée** (débloquée, Q1) : incluse dans T29 (commit L6).
-- **T29 — Limites et asymptotes rédigées étape par étape** (décidé le 14.10.2026, Q9) : la méthode du
-  cours à la place du résultat seul, dans l'outil Limites et dans l'Étude complète. Moteur
-  `limites-asymptotes/limites_asymptotes.py` ; la valeur de chaque limite et les asymptotes ne changent
-  pas (garde-fou : repli honnête si la rédaction n'aboutit pas). Un commit par étape, chacun avec sa suite verte :
-  L0 documents ; L1 opérations et composition, forme indéterminée nommée, garde-fou, conclusion de chaque
-  borne ; L2 valeur interdite (numérateur, signe du dénominateur, ℓ/0^±) ; L3 mise en évidence (polynômes,
-  fractions rationnelles, 0/0) ; *relecture de l'enseignant* ; L4 expression conjuguée ; L5 mise
-  en évidence sous une racine (les « termes dominants » sont supprimés : ni ∼, ni « équivalent », ni
-  « se comporte comme », décidé le 15.10.2026) ; L6 croissance comparée (T09) ; L7 Bernoulli-L'Hôpital ; L8 asymptote oblique ; L9 encadré
-  « Rappel de la méthode ». Critères : LA-10 à LA-20.
-- **T06c — limites contre les doubles barres, dans l'Étude complète seulement** (décidé le 14.10.2026) :
+- **T09 — croissance comparée** : **faite** (`f953e40`, L6 de T29).
+- **T29 — Limites et asymptotes rédigées étape par étape** : **faite, L0 à L9** (16.10.2026) —
+  L0 `b526701` ; L1 `fcb5bfb` ; L2 `350c891` ; L3 `a1f8e92` ; L4 `79040f4` ; L5 `fbc44c7` ; L6 `f953e40` ;
+  L7 `0b4b14c` ; L8 `59f95f7` ; L9 `1bf807a`. Suites : rédaction minimale selon
+  [guide-redaction.md](guide-redaction.md) (`c4604ce`, `de086aa`, `8c1fbc2`, `1957da2`), tableaux de signes
+  R7 (`459feef`, `6034f68`), Ensemble de définition R10 (`5190d98`, `2c58766`), Dérivée R11 (`bb1640e`).
+  Les « termes dominants » sont supprimés (décidé le 15.10.2026). Critères LA-10 à LA-20.
+  Reste : *relecture de l'enseignant* (étape prévue après L3, aucune trace dans git).
+- **T06c — À FAIRE (aucun commit) — limites contre les doubles barres, dans l'Étude complète seulement** (décidé le 14.10.2026) :
   sur la ligne f(x), écrire la limite contre la barre, du côté de l'ED (−∞ à gauche de la colonne −2
   pour ln(x²−4)) ; « limite non déterminée automatiquement » si SymPy ne conclut pas ; la Dérivée
   garde les flèches seules. À spécifier dans `etude-complete.md` avant de commencer (limites en ±∞ aux
   extrémités de l'ED : non, seulement contre les barres).
-- Tableau de signes de l'Ensemble de définition : la valeur interdite n'est marquée que sur la ligne du
-  quotient (les lignes de facteurs montrent « 0 ») ; à aligner sur la Dérivée si l'on veut la barre sur
-  toute la colonne (à décider).
+- Tableau de signes de l'Ensemble de définition : **fait** (`2bb4da8`, `459feef`, `2c58766` : une ligne par
+  facteur, barre simple pour un facteur non nul sur une colonne critique, double barre réservée aux valeurs interdites).
 - Dérivée d'une puissance d'exposant constant irrationnel : faite (α·u^(α−1)·u'). Deux restes
   d'écriture, à traiter plus tard : (1) un coefficient s'écrit « −1 + ln 3 » (ordre de SymPy) au lieu de
   « ln 3 − 1 » ; (2) f' de x^√2·ln x reste un quotient non simplifié, (x·√2·x^(√2−1)·ln x + x^√2)/x, au lieu de
