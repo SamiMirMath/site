@@ -38,5 +38,31 @@ class TestNarrationDerivee(unittest.TestCase):
                     self.assertTrue(proches(ed.evaluer(fp, t), attendu))
 
 
+class TestSansOperationNeutre(unittest.TestCase):
+    """Guide R11 : jamais de « + 0 », « - 0 », « · 1 », « / 1 » dans les étapes (u'(x) = 8x, pas 8x + 0)."""
+    ENTREES = CAS + ["sqrt(4x^2+1)/(x+2)", "ln(x^2+1)/x", "(x^3+2x)^4*e^x", "sqrt(x^2-3x+2)", "(2x+1)/(x^2+1)",
+                     "e^(x^2+1)", "ln(x^2+1)", "(x^2+1)^3", "x/(x^2+4)", "sqrt(x^2+1)*e^x", "x^(1/3)*(x^2+1)"]
+
+    def test_aucune_operation_neutre(self):
+        import re
+        motif = re.compile(r"(?:[+-] 0(?![\d.,{])|\\cdot 1(?![\d.,{])|\\frac\{[^{}]*\}\{1\}|\\dfrac\{[^{}]*\}\{1\})")
+        for entree in self.ENTREES:
+            r = dv.etudier(entree)
+            for it in r["deriv_etapes"]:
+                with self.subTest(f=entree, ligne=it["html"]):
+                    self.assertIsNone(motif.search(it["html"]), it["html"])
+
+    def test_derivee_interne_sans_zero(self):
+        h = " ".join(it["html"] for it in dv.etudier("sqrt(4x^2+1)/(x+2)")["deriv_etapes"])
+        self.assertIn(r"u'(x) = 8x\)", h)
+        self.assertNotIn("8x + 0", h)
+
+    def test_pas_de_den_dans_les_libelles_du_tableau(self):
+        for entree in ("sqrt(4x^2+1)/(x+2)", "(2x+1)/(x^2+1)", "ln(x^2+1)/x"):
+            for ligne in dv.etudier(entree)["table_signe"]["rows"]:
+                with self.subTest(f=entree, ligne=ligne["label"]):
+                    self.assertNotIn("dén", ligne["label"])
+
+
 if __name__ == "__main__":
     unittest.main()

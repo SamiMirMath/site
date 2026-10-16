@@ -28,13 +28,13 @@ class TestDerivee(unittest.TestCase):
     def test_racine_positive_et_carre_au_denominateur(self):                # exemple 4 du guide
         r = dv.etudier("sqrt(4x^2+1)/(x+2)")
         labels = [l["label"] for l in r["table_signe"]["rows"]]
-        self.assertEqual(labels, [r"\left(8x - 1\right)", r"\sqrt{4x^{2} + 1}\ (\text{dén.})",
-                                  r"\left(x + 2\right)^{2}\ (\text{dén.})", "f'(x)", "f(x)"])
+        self.assertEqual(labels, [r"\left(8x - 1\right)", r"\sqrt{4x^{2} + 1}",
+                                  r"\left(x + 2\right)^{2}", "f'(x)", "f(x)"])
         self.assertEqual(r["table_signe"]["crit"], ["-2", r"\frac{1}{8}"])
         lignes = {l["label"]: l["cells"] for l in r["table_signe"]["rows"]}
         self.assertEqual(lignes["f'(x)"], ["-", "||", "-", "0", "+"])      # double barre en −2
-        self.assertEqual(lignes[r"\sqrt{4x^{2} + 1}\ (\text{dén.})"], ["+", "||", "+", "+", "+"])
-        self.assertEqual(lignes[r"\left(x + 2\right)^{2}\ (\text{dén.})"], ["+", "||", "+", "+", "+"])
+        self.assertEqual(lignes[r"\sqrt{4x^{2} + 1}"], ["+", "||", "+", "+", "+"])
+        self.assertEqual(lignes[r"\left(x + 2\right)^{2}"], ["+", "||", "+", "+", "+"])
         t = phrases(r["signe_etapes"])
         self.assertEqual(t, [r"\(f'(x) = \frac{8x - 1}{\sqrt{4x^{2} + 1}\,\left(x + 2\right)^{2}} = 0 \iff 8x - 1 = 0 \iff "
                              r"x = \frac{1}{8}\) ; valeur interdite : \(x = -2\)."])
@@ -81,8 +81,8 @@ class TestDerivee(unittest.TestCase):
     def test_etude_complete_suit(self):
         r = ec.etudier("sqrt(4x^2+1)/(x+2)")
         labels = [l["label"] for l in r["derivee"]["table_signe"]["rows"]]
-        self.assertEqual(labels, [r"\left(8x - 1\right)", r"\sqrt{4x^{2} + 1}\ (\text{dén.})",
-                                  r"\left(x + 2\right)^{2}\ (\text{dén.})", "f'(x)", "f(x)"])
+        self.assertEqual(labels, [r"\left(8x - 1\right)", r"\sqrt{4x^{2} + 1}",
+                                  r"\left(x + 2\right)^{2}", "f'(x)", "f(x)"])
 
 
 class TestEnsembleDefinition(unittest.TestCase):

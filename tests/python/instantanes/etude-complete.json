@@ -19,7 +19,7 @@
      "type": "texte"
     },
     {
-     "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{e^{x}\\,x - \\left(e^{x} - 1\\right) \\cdot 1}{x^{2}} = \\frac{x\\,e^{x} - e^{x} + 1}{x^{2}}\\).",
+     "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{e^{x}\\,x - \\left(e^{x} - 1\\right)}{x^{2}} = \\frac{x\\,e^{x} - e^{x} + 1}{x^{2}}\\).",
      "type": "texte"
     }
    ],
@@ -56,7 +56,7 @@
        "||",
        "+"
       ],
-      "label": "x^{2}\\ (\\text{dén.})"
+      "label": "x^{2}"
      },
      {
       "cells": [
@@ -199,7 +199,7 @@
      "type": "texte"
     },
     {
-     "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{2x\\,\\left(x - 3\\right) - \\left(x^{2} - 1\\right) \\cdot 1}{\\left(x - 3\\right)^{2}} = \\frac{x^{2} - 6x + 1}{\\left(x - 3\\right)^{2}}\\).",
+     "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{2x\\,\\left(x - 3\\right) - \\left(x^{2} - 1\\right)}{\\left(x - 3\\right)^{2}} = \\frac{x^{2} - 6x + 1}{\\left(x - 3\\right)^{2}}\\).",
      "type": "texte"
     }
    ],
@@ -261,7 +261,7 @@
        "+",
        "+"
       ],
-      "label": "\\left(x - 3\\right)^{2}\\ (\\text{dén.})"
+      "label": "\\left(x - 3\\right)^{2}"
      },
      {
       "cells": [
@@ -461,7 +461,7 @@
      "type": "texte"
     },
     {
-     "html": "\\(\\left(x\\,\\ln(x)\\right)' = u'(x)v(x) + u(x)v'(x) = 1\\ln(x) + x\\,\\frac{1}{x} = \\ln(x) + 1\\).",
+     "html": "\\(\\left(x\\,\\ln(x)\\right)' = u'(x)v(x) + u(x)v'(x) = \\ln(x) + x\\,\\frac{1}{x} = \\ln(x) + 1\\).",
      "type": "texte"
     },
     {
@@ -624,7 +624,7 @@
   "derivee": {
    "deriv_etapes": [
     {
-     "html": "\\(e^{\\frac{1}{x}}\\) est de la forme \\(e^{u}\\) avec \\(u(x) = \\frac{1}{x}\\) (dérivée interne \\(u'(x) = \\frac{0x - 1 \\cdot 1}{x^{2}}\\)) \\(\\Rightarrow\\) \\(\\left(e^{\\frac{1}{x}}\\right)' = u' e^{u} = \\frac{-e^{\\frac{1}{x}}}{x^{2}}\\).",
+     "html": "\\(e^{\\frac{1}{x}}\\) est de la forme \\(e^{u}\\) avec \\(u(x) = \\frac{1}{x}\\) (dérivée interne \\(u'(x) = \\frac{-1}{x^{2}}\\)) \\(\\Rightarrow\\) \\(\\left(e^{\\frac{1}{x}}\\right)' = u' e^{u} = \\frac{-e^{\\frac{1}{x}}}{x^{2}}\\).",
      "type": "texte"
     }
    ],
@@ -669,7 +669,7 @@
        "||",
        "+"
       ],
-      "label": "x^{2}\\ (\\text{dén.})"
+      "label": "x^{2}"
      },
      {
       "cells": [
@@ -964,7 +964,7 @@
      "type": "texte"
     },
     {
-     "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{\\frac{1}{x}\\,x - \\ln(x) \\cdot 1}{x^{2}} = \\frac{-\\left(\\ln(x) - 1\\right)}{x^{2}}\\).",
+     "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{\\frac{1}{x}\\,x - \\ln(x)}{x^{2}} = \\frac{-\\left(\\ln(x) - 1\\right)}{x^{2}}\\).",
      "type": "texte"
     }
    ],
@@ -1032,7 +1032,7 @@
        "+",
        "+"
       ],
-      "label": "x^{2}\\ (\\text{dén.})"
+      "label": "x^{2}"
      },
      {
       "cells": [
@@ -1164,7 +1164,7 @@
      "type": "texte"
     },
     {
-     "html": "\\(\\sqrt{x^{2} - 4}\\) est de la forme \\(\\sqrt{u}\\) avec \\(u(x) = x^{2} - 4\\) (dérivée interne \\(u'(x) = 2x - 0\\)) \\(\\Rightarrow\\) \\(\\left(\\sqrt{x^{2} - 4}\\right)' = \\frac{u'}{2\\sqrt{u}} = \\frac{x}{\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}}\\).",
+     "html": "\\(\\sqrt{x^{2} - 4}\\) est de la forme \\(\\sqrt{u}\\) avec \\(u(x) = x^{2} - 4\\) (dérivée interne \\(u'(x) = 2x\\)) \\(\\Rightarrow\\) \\(\\left(\\sqrt{x^{2} - 4}\\right)' = \\frac{u'}{2\\sqrt{u}} = \\frac{x}{\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}}\\).",
      "type": "texte"
     }
    ],
@@ -1226,7 +1226,7 @@
        "||",
        "+"
       ],
-      "label": "\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}\\ (\\text{dén.})"
+      "label": "\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}"
      },
      {
       "cells": [
@@ -1396,7 +1396,7 @@
      "type": "texte"
     },
     {
-     "html": "\\(f'(x) = u'(x)v(x) + u(x)v'(x) = 1\\ln(x) + x\\,\\frac{1}{x} = \\ln(x) + 1\\).",
+     "html": "\\(f'(x) = u'(x)v(x) + u(x)v'(x) = \\ln(x) + x\\,\\frac{1}{x} = \\ln(x) + 1\\).",
      "type": "texte"
     }
    ],
@@ -1557,7 +1557,7 @@
      "type": "texte"
     },
     {
-     "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{1\\left(x^{2} + 1\\right) - x \\cdot 2x}{\\left(x^{2} + 1\\right)^{2}} = \\frac{-\\left(x + 1\\right)\\,\\left(x - 1\\right)}{\\left(x^{2} + 1\\right)^{2}}\\).",
+     "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{x^{2} + 1 - x \\cdot 2x}{\\left(x^{2} + 1\\right)^{2}} = \\frac{-\\left(x + 1\\right)\\,\\left(x - 1\\right)}{\\left(x^{2} + 1\\right)^{2}}\\).",
      "type": "texte"
     }
    ],
@@ -1634,7 +1634,7 @@
        "+",
        "+"
       ],
-      "label": "\\left(x^{2} + 1\\right)^{2}\\ (\\text{dén.})"
+      "label": "\\left(x^{2} + 1\\right)^{2}"
      },
      {
       "cells": [
@@ -1758,7 +1758,7 @@
      "type": "texte"
     },
     {
-     "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{1\\sqrt{x^{2}} - x\\,\\frac{x}{\\sqrt{x^{2}}}}{\\left(\\sqrt{x^{2}}\\right)^{2}} = 0\\).",
+     "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{\\sqrt{x^{2}} - x\\,\\frac{x}{\\sqrt{x^{2}}}}{\\left(\\sqrt{x^{2}}\\right)^{2}} = 0\\).",
      "type": "texte"
     }
    ],
@@ -1978,7 +1978,7 @@
        "||",
        "+"
       ],
-      "label": "\\sqrt[3]{x}\\ (\\text{dén.})"
+      "label": "\\sqrt[3]{x}"
      },
      {
       "cells": [

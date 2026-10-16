@@ -121,6 +121,33 @@ def _nettoyer(n):
     return n
 
 
+def _epurer(n):
+    """Supprime les opérations neutres d'une écriture non simplifiée (guide R11) : « + 0 », « - 0 », « · 1 »,
+    « 1 · », « / 1 », « ^1 » ; un facteur 0 donne 0. Ne fait aucun autre calcul."""
+    def est(m, v):
+        return isinstance(m, Nb) and m.v == v
+    if isinstance(n, Neg):
+        return Neg(_epurer(n.a))
+    if isinstance(n, Fn):
+        return Fn(n.nom, _epurer(n.a))
+    if not isinstance(n, Op):
+        return n
+    a, b = _epurer(n.a), _epurer(n.b)
+    if n.op == "+":
+        return a if est(b, 0) else b if est(a, 0) else Op("+", a, b)
+    if n.op == "-":
+        return a if est(b, 0) else Neg(b) if est(a, 0) else Op("-", a, b)
+    if n.op == "*":
+        if est(a, 0) or est(b, 0):
+            return Nb(0)
+        return b if est(a, 1) else a if est(b, 1) else Op("*", a, b)
+    if n.op == "/":
+        return Nb(0) if est(a, 0) else a if est(b, 1) else Op("/", a, b)
+    if n.op == "^" and est(b, 1):
+        return a
+    return Op(n.op, a, b)
+
+
 def _produit(facteurs):
     out = facteurs[0]
     for f in facteurs[1:]:
@@ -217,7 +244,7 @@ def _derivee_fn(n, items):
     else:
         items.append(txt(
             rf"\({tex(n)}\) est de la forme \({REGLE_FN_FORME[n.nom]}\) avec "
-            rf"\(u(x) = {tex(u)}\) (dérivée interne \(u'(x) = {tex(du)}\)) \(\Rightarrow\) "
+            rf"\(u(x) = {tex(u)}\) (dérivée interne \(u'(x) = {tex(_epurer(du))}\)) \(\Rightarrow\) "
             rf"\(\left({tex(n)}\right)' = {REGLE_FN_TEX[n.nom]} = {tex(resultat)}\)."
         ))
     return resultat
@@ -238,7 +265,7 @@ def _derivee_puissance(n, items):
         else:
             items.append(txt(
                 rf"\({tex(n)}\) est de la forme \(u^{{\alpha}}\) avec \(u(x) = {tex(u)}\) et \(\alpha = {tex(alpha)}\) constant "
-                rf"(dérivée interne \(u'(x) = {tex(du)}\)) \(\Rightarrow\) "
+                rf"(dérivée interne \(u'(x) = {tex(_epurer(du))}\)) \(\Rightarrow\) "
                 rf"\(\left({tex(n)}\right)' = \alpha\,u^{{\alpha - 1}}u' = {tex(resultat)}\)."
             ))
         return resultat
@@ -263,7 +290,7 @@ def _derivee_puissance(n, items):
     else:
         items.append(txt(
             rf"\({tex(n)}\) est de la forme \(u^{{{tex(Nb(e))}}}\) avec \(u(x) = {tex(u)}\) "
-            rf"(dérivée interne \(u'(x) = {tex(du)}\)) \(\Rightarrow\) "
+            rf"(dérivée interne \(u'(x) = {tex(_epurer(du))}\)) \(\Rightarrow\) "
             rf"\(\left({tex(n)}\right)' = {tex(Nb(e))}\,u^{{{tex(Nb(e - 1))}}}u' = {tex(resultat)}\)."
         ))
     return resultat
@@ -317,7 +344,7 @@ def _derivee_produit(n, items, top, etiq=F_PRIME):
         ua, ub = _simplifier(ua), _simplifier(ub)
         items.append(txt(rf"\(u'(x) = {tex(ua)}\)."))
         items.append(txt(rf"\(v'(x) = {tex(ub)}\)."))
-    brut = _add(_mul(ua, b), _mul(a, ub))
+    brut = _epurer(_add(_mul(ua, b), _mul(a, ub)))
     if not top:
         return brut
     simplifie = _simplifier(brut)
@@ -339,7 +366,7 @@ def _derivee_quotient(n, items, top, etiq=F_PRIME):
         ua, ub = _simplifier(ua), _simplifier(ub)
         items.append(txt(rf"\(u'(x) = {tex(ua)}\)."))
         items.append(txt(rf"\(v'(x) = {tex(ub)}\)."))
-    brut = _div(_sub(_mul(ua, b), _mul(a, ub)), _pow(b, Nb(2)))
+    brut = _epurer(_div(_sub(_mul(ua, b), _mul(a, ub)), _pow(b, Nb(2))))
     if not top:
         return brut
     simplifie = _simplifier(brut)
@@ -634,8 +661,6 @@ def etudier(entree):
             if indice_racine(h) is not None:
                 label = r"\left(" + label + r"\right)"
             label += "^{" + str(abs(expo)) + "}"
-        if expo < 0:
-            label += r"\ (\text{dén.})"
         cells = []
         for i in range(k + 1):
             cells.append(_cellule(evaluer(h, _test(i)), expo))
