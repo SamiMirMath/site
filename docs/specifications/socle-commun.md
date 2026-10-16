@@ -30,7 +30,8 @@ S'applique à toutes les pages outils, sauf mention contraire pour le simplexe
    **Facteurs de signe évident** (remplacé le 15.10.2026, voir [../guide-redaction.md](../guide-redaction.md) R7) : dans tout
    tableau de signes, TOUJOURS une ligne par facteur du numérateur et du dénominateur (y compris x²+1, √(4x²+1), (x+2)², eˣ, une
    constante), puis la ligne du quotient ; aucune phrase ne justifie le signe d'un facteur évident ou affine, plus de « donc f'(x) est
-   du signe de … ». Appliqué à l'outil Limites ; Dérivée, ED et Étude complète suivent (tâches suivantes).
+   du signe de … ». Appliqué à Limites, Dérivée (16.10.2026), ED et Étude complète (qui reprend Dérivée). Un tableau sans colonne (aucun zéro ni valeur
+   interdite) n'est pas dessiné ; un facteur non affine qui demande une étape délicate (ln(x) − 1 > 0 ⇔ ln(x) > 1) la garde.
    **Les équivalents sont interdits partout** (décidé le 15.10.2026) : ni le symbole ∼ (`\sim`), ni le mot
    « équivalent », ni « se comporte comme », dans toutes les sorties de tous les outils. On met en évidence,
    avec des égalités exactes (√(4x²+1) = √(x²(4 + 1/x²)) = |x|·√(4 + 1/x²)).

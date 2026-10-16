@@ -880,20 +880,6 @@
       "type": "texte"
      },
      {
-      "crit": [],
-      "rows": [
-       {
-        "cells": [
-         "-"
-        ],
-        "final": true,
-        "label": "-x^{2} - 1"
-       }
-      ],
-      "type": "tableau",
-      "var": "x"
-     },
-     {
       "html": "On lit les intervalles où \\(-x^{2} - 1 > 0\\) : \\(x \\in \\varnothing\\).",
       "type": "texte"
      }
@@ -1139,8 +1125,22 @@
       "type": "texte"
      },
      {
-      "html": "\\(x^{2} > 0\\) pour \\(x \\neq 0\\).",
-      "type": "texte"
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2}"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
      },
      {
       "html": "On lit les intervalles où \\(x^{2} > 0\\) : \\(x \\in \\mathbb{R} \\setminus \\left\\{0\\right\\}\\).",
@@ -1476,8 +1476,38 @@
       "type": "texte"
      },
      {
-      "html": "\\(-1 < 0\\) ; \\(x^{2} > 0\\) pour \\(x \\neq 0\\).",
-      "type": "texte"
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "-",
+         "-"
+        ],
+        "label": "-1"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "+"
+        ],
+        "label": "x^{2}"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "-"
+        ],
+        "final": true,
+        "label": "-x^{2}"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
      },
      {
       "html": "On lit les intervalles où \\(-x^{2} \\geq 0\\) (zéros inclus) : \\(x \\in \\left\\{0\\right\\}\\).",
@@ -1518,10 +1548,6 @@
      },
      {
       "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x^{2} - 4x + 5 > 0\\).",
       "type": "texte"
      },
      {
@@ -1716,18 +1742,6 @@
       "type": "texte"
      },
      {
-      "html": "On étudie le signe de chaque facteur, puis on dresse le tableau de signes.",
-      "type": "texte"
-     },
-     {
-      "html": "<b>Signe de \\(x\\)</b>",
-      "type": "texte"
-     },
-     {
-      "html": "Bilan : \\(x > 0 \\iff x \\in \\left]0 \\,;\\, +\\infty\\right[\\) ; \\(x = 0 \\iff x \\in \\left\\{0\\right\\}\\).",
-      "type": "texte"
-     },
-     {
       "html": "<b>Signe de \\(\\ln\\left(x + 2\\right)\\)</b>",
       "type": "texte"
      },
@@ -1741,10 +1755,6 @@
      },
      {
       "html": "\\(x + 2 > 1 \\iff x > -1\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Bilan : \\(\\ln\\left(x + 2\\right) > 0 \\iff x \\in \\left]-1 \\,;\\, +\\infty\\right[\\) ; \\(\\ln\\left(x + 2\\right) = 0 \\iff x \\in \\left\\{-1\\right\\}\\).",
       "type": "texte"
      },
      {
@@ -1852,18 +1862,6 @@
       "type": "texte"
      },
      {
-      "html": "On étudie le signe de chaque facteur, puis on dresse le tableau de signes.",
-      "type": "texte"
-     },
-     {
-      "html": "<b>Signe de \\(x\\)</b>",
-      "type": "texte"
-     },
-     {
-      "html": "Bilan : \\(x > 0 \\iff x \\in \\left]0 \\,;\\, +\\infty\\right[\\) ; \\(x = 0 \\iff x \\in \\left\\{0\\right\\}\\).",
-      "type": "texte"
-     },
-     {
       "html": "<b>Signe de \\(\\ln\\left(x + 2\\right) + 1\\)</b>",
       "type": "texte"
      },
@@ -1881,10 +1879,6 @@
      },
      {
       "html": "\\(x + 2 > e^{-1} \\iff x > e^{-1} - 2\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Bilan : \\(\\ln\\left(x + 2\\right) + 1 > 0 \\iff x \\in \\left]e^{-1} - 2 \\,;\\, +\\infty\\right[\\) ; \\(\\ln\\left(x + 2\\right) + 1 = 0 \\iff x \\in \\left\\{e^{-1} - 2\\right\\}\\).",
       "type": "texte"
      },
      {

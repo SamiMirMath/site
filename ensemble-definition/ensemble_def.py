@@ -943,7 +943,7 @@ def racines_numeriques(Q):
 def facteur(poly, v, racines, mult=1):
     t = ptex(poly, v)
     if mult > 1:
-        t = r"\left(" + t + r"\right)^{" + str(mult) + "}"
+        t = (t if t == v else r"\left(" + t + r"\right)") + "^{" + str(mult) + "}"
     return {"poly": pscal(pn(poly), 1), "mult": mult, "tex": t, "racines": racines}
 
 
@@ -1045,22 +1045,6 @@ def sg(x):
     return "+" if x > 0 else "-"
 
 
-def _facteur_evident_rat(f, poly):
-    """Phrase (tex) si le facteur polynomial f (à racines réelles dans f["racines"]) est de signe évident : puissance
-    paire, ou polynôme sans zéro réel et positif ; None sinon (le facteur garde sa ligne)."""
-    lab = re.sub(r"\\left\((\w+)\\right\)\^", r"\1^", f["tex"])        # (x)^2 s'écrit x^2
-    if f["mult"] % 2 == 0:
-        zs = [r.tex for r in f["racines"]]
-        if not zs:
-            return rf"\({lab} > 0\)"
-        if len(zs) == 1:
-            return rf"\({lab} > 0\) pour \(x \neq {zs[0]}\)"
-        return rf"\({lab} > 0\) pour \(x \notin \left\{{{' ; '.join(zs)}\right\}}\)"
-    if not f["racines"] and peval(poly, F(0)) > 0:
-        return rf"\({lab} > 0\)"
-    return None
-
-
 def resoudre_rat(R, rel, v, items, nom_expr=None):
     """Ensemble des v tels que R(v) rel 0, rel ∈ {'>', '>=', '='}. Ajoute les explications à items."""
     N, D, k = r_entiers(R)
@@ -1150,17 +1134,13 @@ def resoudre_rat(R, rel, v, items, nom_expr=None):
 
     lignes = []
     tous = [(f, False) for f in fN] + [(f, True) for f in fD]
-    if const < 0:
-        lignes.append({"label": qtex(const), "cells": cellules(lambda x: float(const), [], k, test, crit), "_ev": True})
-    evid = []                                  # phrases des facteurs de signe évident (pas de ligne)
-    for f, est_den in tous:
+    if const != 1:                             # guide de rédaction, R7 : une ligne par constante, positive ou négative
+        lignes.append({"label": qtex(const), "cells": cellules(lambda x: float(const), [], k, test, crit)})
+    for f, est_den in tous:                    # ... et une ligne par facteur, même évident
         poly = f["poly"]
         mult = f["mult"]
         fn = (lambda p, m: (lambda x: float(peval(p, x)) ** m))(poly, mult)
-        ev = _facteur_evident_rat(f, poly)
-        if ev:
-            evid.append(ev)
-        lignes.append({"label": f["tex"], "cells": cellules(fn, f["racines"], k, test, crit), "_ev": bool(ev)})
+        lignes.append({"label": f["tex"], "cells": cellules(fn, f["racines"], k, test, crit)})
     # ligne finale
     fin = []
     for i in range(k + 1):
@@ -1182,24 +1162,14 @@ def resoudre_rat(R, rel, v, items, nom_expr=None):
         if fin[j] == "||":
             for ligne in lignes:
                 ligne["cells"][j] = "||"
-    fusionne = not (len(tous) + (1 if const < 0 else 0) > 1 or fD)      # une seule ligne : elle est aussi la ligne finale
+    fusionne = not (len(tous) + (1 if const != 1 else 0) > 1 or fD)      # une seule ligne : elle est aussi la ligne finale
     if not fusionne:
         lignes.append({"label": expr, "cells": fin, "final": True})
     else:
         lignes[-1]["final"] = True
         lignes[-1]["label"] = expr if (deg(D) == 0 and const > 0 and len(tous) == 1) else lignes[-1]["label"]
-    if const < 0:
-        evid.insert(0, rf"\({qtex(const)} < 0\)")
-    if evid:                                   # facteurs de signe évident : une phrase, pas de ligne
-        items.append(txt(" ; ".join(evid) + "."))
-    gardees = [dict((a, b) for a, b in l.items() if a != "_ev") for l in lignes
-               if not l.get("_ev") or (l.get("final") and not fusionne)]
-    if len(gardees) > (0 if fusionne else 1):
-        reste = [f["tex"] for (f, _), l in zip(tous, lignes[1 if const < 0 else 0:]) if not l.get("_ev")]
-        if evid and reste:
-            prod = " ".join(r if len(reste) == 1 else r for r in reste)
-            items.append(txt(rf"Donc \({expr}\) est du signe {'contraire ' if const < 0 else ''}de \({prod}\)."))
-        items.append({"type": "tableau", "var": v, "crit": [c.tex for c in crit], "rows": gardees})
+    if crit:                                   # sans zéro ni valeur interdite, le tableau n'aurait qu'une colonne : rien à lire
+        items.append({"type": "tableau", "var": v, "crit": [c.tex for c in crit], "rows": lignes})
 
     S = []
     for i in range(k + 1):
@@ -2222,34 +2192,10 @@ def phrase_evidente(h, k, D, P, Z):
     return None
 
 
-def analyser_evidents(c, infos, expr_tex):
-    """Facteurs de signe évident d'un produit c·∏ h^k : (phrases à écrire, indices des facteurs évidents,
-    conclusion « donc expr est du signe de … » ou None). Un facteur évident n'a pas de ligne dans le tableau."""
-    phrases, ev = [], set()
-    for i, ((h, k), (D, P, Z)) in enumerate(infos):
-        ph = phrase_evidente(h, k, D, P, Z)
-        if ph:
-            phrases.append(ph)
-            ev.add(i)
-    if c < 0:
-        phrases.append(rf"\({qtex(c)} < 0\)")
-    reste = [infos[i][0][0] for i in range(len(infos)) if i not in ev]
-    concl = None
-    if phrases and reste:
-        prod = " ".join(tex(h) if len(reste) == 1 else _etiquette_facteur(h) for h in reste)
-        concl = rf"Donc \({expr_tex}\) est du signe {'contraire ' if c < 0 else ''}de \({prod}\)."
-    elif phrases:                         # tous les facteurs sont évidents : le signe ne change jamais
-        nul = any(k > 0 and Z for i, ((h, k), (D, P, Z)) in enumerate(infos) if i in ev)
-        concl = (rf"Donc \({expr_tex}\) est {'négatif' if c < 0 else 'positif'}"
-                 + (" ou nul" if nul else "") + " : il ne change jamais de signe.")
-    return phrases, ev, concl
-
-
-def tableau_facteurs(c, infos, rel, expr_tex, items, toutes_lignes=False):
+def tableau_facteurs(c, infos, rel, expr_tex, items):
     """Tableau de signes de c·∏ h_i^{k_i} ; renvoie {expr rel 0} (rel : '>' ou '>=').
-    toutes_lignes (guide de rédaction, 15.10.2026) : une ligne par facteur, évident ou non, et par constante (positive
-    ou négative), puis la ligne du quotient ; aucune phrase sur le signe d'un facteur, aucune conclusion « donc … est
-    du signe de … »."""
+    Guide de rédaction (R7) : une ligne par facteur, évident ou non, et par constante (positive ou négative), puis la
+    ligne du quotient ; aucune phrase sur le signe d'un facteur, aucune conclusion « donc … est du signe de … »."""
     crit = []
     for (h, k), (D, P, Z) in infos:
         for S in (D, P, Z):
@@ -2282,15 +2228,10 @@ def tableau_facteurs(c, infos, rel, expr_tex, items, toutes_lignes=False):
         vals.append(test(i))
         if i < n:
             vals.append(crit[i].val)
-    phrases, evidents, concl = analyser_evidents(c, infos, expr_tex)
-    if toutes_lignes:
-        phrases, evidents, concl = [], set(), None
     lignes = []
-    if c < 0:
-        lignes.append({"label": qtex(c), "cells": ["-"] * len(vals), "_ev": not toutes_lignes})
-    elif toutes_lignes and c != 1:
-        lignes.append({"label": qtex(c), "cells": ["+"] * len(vals), "_ev": False})
-    for i, ((h, k), (D, P, Z)) in enumerate(infos):
+    if c != 1:
+        lignes.append({"label": qtex(c), "cells": ["-" if c < 0 else "+"] * len(vals)})
+    for (h, k), (D, P, Z) in infos:
         lab = tex(h) if prec(h) >= 3 else r"\left(" + tex(h) + r"\right)"
         if abs(k) > 1:
             lab = (lab if prec(h) >= 3 and not isinstance(h, Fn) and indice_racine(h) is None
@@ -2299,7 +2240,7 @@ def tableau_facteurs(c, infos, rel, expr_tex, items, toutes_lignes=False):
             lab = tex(h)
         if k < 0:
             lab += r" \ (\text{dén.})"
-        lignes.append({"label": lab, "cells": [etat(D, P, Z, k, v) for v in vals], "_ev": i in evidents})
+        lignes.append({"label": lab, "cells": [etat(D, P, Z, k, v) for v in vals]})
     fin = []
     for j in range(len(vals)):
         col = [l["cells"][j] for l in lignes]
@@ -2314,13 +2255,8 @@ def tableau_facteurs(c, infos, rel, expr_tex, items, toutes_lignes=False):
     lignes.append({"label": expr_tex, "cells": fin, "final": True})
     crit, lignes, fin = epurer_tableau(crit, lignes, fin)
     n = len(crit)
-    if phrases:                           # facteurs de signe évident : une phrase, pas de ligne
-        items.append(txt(" ; ".join(phrases) + "."))
-    gardees = [dict((a, b) for a, b in l.items() if a != "_ev") for l in lignes if l.get("final") or not l.get("_ev")]
-    if len(gardees) > 1:
-        if concl:
-            items.append(txt(concl))
-        items.append({"type": "tableau", "var": "x", "crit": [p.tex for p in crit], "rows": gardees})
+    if len(lignes) > 1:
+        items.append({"type": "tableau", "var": "x", "crit": [p.tex for p in crit], "rows": lignes})
     S = []
     for i in range(n + 1):
         if fin[2 * i] == "+":
@@ -2333,6 +2269,20 @@ def tableau_facteurs(c, infos, rel, expr_tex, items, toutes_lignes=False):
     symb = ">" if rel == ">" else r"\geq"
     items.append(txt(rf"On lit le tableau : \({expr_tex} {symb} 0 \iff x \in {ens_tex(S)}\)."))
     return S
+
+
+def _est_affine(h):
+    """h = ax + b (a ≠ 0), écrit avec nombres, x et + − × : son zéro se lit, il n'est jamais justifié."""
+    def poly(n):
+        if isinstance(n, (Nb, X)):
+            return True
+        if isinstance(n, Neg):
+            return poly(n.a)
+        return isinstance(n, Op) and n.op in "+-*" and poly(n.a) and poly(n.b)
+    if not poly(h):
+        return False
+    v = [evaluer(h, t) for t in (0.0, 1.0, 2.0)]
+    return None not in v and abs(v[0] - 2 * v[1] + v[2]) <= 1e-9 and abs(v[1] - v[0]) > 1e-9
 
 
 def resoudre_general(A, rel, items):
@@ -2351,15 +2301,15 @@ def resoudre_general(A, rel, items):
                     c, facs = c2, facs2
             except Exception:
                 pass
-    if len(facs) > 1 or any(abs(k) > 1 for _, k in facs):
-        items.append(txt("On étudie le signe de chaque facteur, puis on dresse le tableau de signes."))
     infos = []
     for h, k in facs:
         D, P, Z, it, _ = signe_facteur(h, "x")
-        if not phrase_evidente(h, k, D, P, Z):
+        # guide de rédaction (R7) : le signe d'un facteur évident ou affine n'est jamais justifié ; un facteur qui demande une
+        # étape délicate (isoler ln(x) : on ajoute 1) la garde, sans « Bilan »
+        if not phrase_evidente(h, k, D, P, Z) and not _est_affine(h):
             if len(facs) > 1:
                 items.append(txt(rf"<b>Signe de \({tex(h)}\)</b>"))
-            items.extend(it)
+            items.extend(i for i in it if not str(i.get("html", "")).startswith("Bilan"))
         infos.append(((h, k), (D, P, Z)))
     if rel == "=":
         Dtot = REELS
@@ -2372,9 +2322,6 @@ def resoudre_general(A, rel, items):
             if k > 0:
                 Zs = union(Zs, Z)
         Zs = inter(Zs, Dtot)
-        if len(facs) > 1:
-            items.append(txt("Un produit est nul si et seulement si l'un de ses facteurs (du numérateur) est nul, "
-                             "les autres étant définis."))
         return Zs
     return tableau_facteurs(c, infos, rel, tex(A), items)
 

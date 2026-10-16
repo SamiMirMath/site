@@ -892,7 +892,7 @@ def _construire_tableau(genre, A):
         D, P, Z, _, mode = signe_facteur(h, "x")
         infos.append(((h, -k if genre == "den" else k), (D, P, Z)))
     items = []
-    tableau_facteurs(c, infos, ">", tex(A), items, toutes_lignes=True)
+    tableau_facteurs(c, infos, ">", tex(A), items)
     return TableauSigne(genre, A, c, infos, items)
 
 

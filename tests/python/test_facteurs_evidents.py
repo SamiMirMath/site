@@ -85,5 +85,52 @@ class TestDerivee(unittest.TestCase):
                                   r"\left(x + 2\right)^{2}\ (\text{dén.})", "f'(x)", "f(x)"])
 
 
+class TestEnsembleDefinition(unittest.TestCase):
+    def conditions(self, entree):
+        return ed.analyser(entree)["conditions"]
+
+    def tableaux(self, entree):
+        return [i for c in self.conditions(entree) for i in c["etapes"] if i.get("type") == "tableau"]
+
+    def test_carre_garde_sa_ligne(self):
+        (tab,) = self.tableaux("sqrt((x+2)^2*(x-1))")
+        self.assertEqual(tab["crit"], ["-2", "1"])
+        self.assertEqual([l["label"] for l in tab["rows"]], ["x - 1", r"\left(x + 2\right)^{2}", "x^{3} + 3x^{2} - 4"])
+        self.assertEqual(tab["rows"][1]["cells"], ["+", "0", "+", "+", "+"])
+        self.assertEqual(tab["rows"][-1]["cells"], ["-", "0", "-", "0", "+"])      # zéro du carré : colonne conservée
+
+    def test_constantes_positive_et_negative_ont_leur_ligne(self):
+        (tab,) = self.tableaux("ln(2x^2-8)")
+        self.assertEqual([l["label"] for l in tab["rows"]], ["2", "x + 2", "x - 2", "2x^{2} - 8"])
+        self.assertEqual(tab["rows"][0]["cells"], ["+"] * 5)
+        (tab,) = self.tableaux("sqrt(4-x^2)")
+        self.assertEqual([l["label"] for l in tab["rows"]], ["-1", "x + 2", "x - 2", "-x^{2} + 4"])
+        self.assertEqual(tab["rows"][0]["cells"], ["-"] * 5)
+
+    def test_polynome_toujours_positif_sans_tableau(self):                  # aucune colonne : rien à lire
+        self.assertEqual(self.tableaux("ln(x^2+1)"), [])
+        self.assertEqual(self.tableaux("sqrt(4x^2+1)"), [])
+
+    def test_exemple_7_du_guide(self):
+        (tab,) = self.tableaux("ln(x+1)/sqrt(4-x^2)")
+        self.assertEqual([l["label"] for l in tab["rows"]], ["-1", "x + 2", "x - 2", "-x^{2} + 4"])
+        self.assertEqual(self.conditions("ln(x+1)/sqrt(4-x^2)")[0]["etapes"][1]["html"], r"\(x + 1 > 0 \iff x > -1\).")
+
+    def test_aucune_phrase_de_signe_sur_tous_les_exemples(self):
+        from cas import CAS_LIMITES, entrees_page
+        for entree in dict.fromkeys(entrees_page("ensemble-definition") + CAS_LIMITES["ensemble-definition"]):
+            r = ed.analyser(entree)
+            if not r.get("ok"):
+                continue
+            with self.subTest(f=entree):
+                # le titre « Signe de ln(x + 2) » reste devant l'étude d'un facteur qui n'est ni évident ni affine (étape délicate)
+                sans_phrase_de_signe(self, [i["html"] for c in r["conditions"] for i in c["etapes"]
+                                            if i.get("type") == "texte" and not i["html"].startswith("<b>Signe de")])
+                for c in r["conditions"]:
+                    for i in c["etapes"]:
+                        if i.get("type") == "tableau":
+                            self.assertEqual(i["rows"][-1].get("final"), True)
+
+
 if __name__ == "__main__":
     unittest.main()
