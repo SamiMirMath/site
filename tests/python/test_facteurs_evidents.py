@@ -95,7 +95,7 @@ class TestEnsembleDefinition(unittest.TestCase):
     def test_carre_garde_sa_ligne(self):
         (tab,) = self.tableaux("sqrt((x+2)^2*(x-1))")
         self.assertEqual(tab["crit"], ["-2", "1"])
-        self.assertEqual([l["label"] for l in tab["rows"]], ["x - 1", r"\left(x + 2\right)^{2}", "x^{3} + 3x^{2} - 4"])
+        self.assertEqual([l["label"] for l in tab["rows"]], ["x - 1", r"\left(x + 2\right)^{2}", r"\left(x + 2\right)^{2}\,\left(x - 1\right)"])
         self.assertEqual(tab["rows"][1]["cells"], ["+", "0", "+", "+", "+"])
         self.assertEqual(tab["rows"][-1]["cells"], ["-", "0", "-", "0", "+"])      # zéro du carré : colonne conservée
 
@@ -104,17 +104,41 @@ class TestEnsembleDefinition(unittest.TestCase):
         self.assertEqual([l["label"] for l in tab["rows"]], ["2", "x + 2", "x - 2", "2x^{2} - 8"])
         self.assertEqual(tab["rows"][0]["cells"], ["+"] * 5)
         (tab,) = self.tableaux("sqrt(4-x^2)")
-        self.assertEqual([l["label"] for l in tab["rows"]], ["-1", "x + 2", "x - 2", "-x^{2} + 4"])
-        self.assertEqual(tab["rows"][0]["cells"], ["-"] * 5)
+        self.assertEqual([l["label"] for l in tab["rows"]], ["2 - x", "2 + x", "4 - x^{2}"])      # a² − b² : constante 1, ordre de l'élève
 
     def test_polynome_toujours_positif_sans_tableau(self):                  # aucune colonne : rien à lire
         self.assertEqual(self.tableaux("ln(x^2+1)"), [])
         self.assertEqual(self.tableaux("sqrt(4x^2+1)"), [])
 
     def test_exemple_7_du_guide(self):
+        r = ed.analyser("ln(x+1)/sqrt(4-x^2)")
+        c1, c2 = r["conditions"]                      # racine au dénominateur = UNE condition (A > 0)
+        self.assertEqual((c1["titre"], c2["titre"]), ("logarithme", "racine au dénominateur"))
+        self.assertEqual(c1["cond_tex"], "x + 1 > 0")
+        self.assertEqual([e["html"] for e in c1["etapes"]], [r"\(x + 1 > 0 \iff x > -1\)."])
+        self.assertEqual(c2["cond_tex"], "4 - x^{2} > 0")
         (tab,) = self.tableaux("ln(x+1)/sqrt(4-x^2)")
-        self.assertEqual([l["label"] for l in tab["rows"]], ["-1", "x + 2", "x - 2", "-x^{2} + 4"])
-        self.assertEqual(self.conditions("ln(x+1)/sqrt(4-x^2)")[0]["etapes"][1]["html"], r"\(x + 1 > 0 \iff x > -1\).")
+        self.assertEqual([l["label"] for l in tab["rows"]], ["2 - x", "2 + x", "4 - x^{2}"])
+        self.assertEqual([e["html"] for e in c2["etapes"] if e["type"] == "texte"], [
+            r"\(4 - x^{2} = (2 - x)(2 + x)\) : zéros \(-2\) et \(2\).",
+            r"\(4 - x^{2} > 0 \iff x \in \left]-2 \,;\, 2\right[\)."])
+        self.assertEqual(r["inter_tex"], r"\left]-1 \,;\, +\infty\right[ \cap \left]-2 \,;\, 2\right[")
+        self.assertEqual(r["ED_tex"], r"\left]-1 \,;\, 2\right[")
+
+    def test_delta_ecrit_une_seule_fois(self):
+        for entree in ("1/sqrt(x^2-5)", "sqrt(x^2-3x+2)", "ln(x^3-3x)", "1/(x^2-5)"):
+            textes = " ".join(e["html"] for c in ed.analyser(entree)["conditions"] for e in c["etapes"] if "html" in e)
+            with self.subTest(f=entree):
+                self.assertEqual(textes.count(r"\Delta = b^2"), 1)
+                self.assertNotIn(r"\Delta > 0", textes)
+
+    def test_aucune_phrase_de_rappel_de_la_regle(self):
+        for entree in ("ln(x+1)/sqrt(4-x^2)", "1/(x-3)", "sqrt(x)", "x^(1/3)/x"):
+            for c in ed.analyser(entree)["conditions"]:
+                for e in c["etapes"]:
+                    with self.subTest(f=entree):
+                        for mot in ("doit être", "On cherche", "On résout", "On les exclut", "s'écrit directement"):
+                            self.assertNotIn(mot, e.get("html", ""))
 
     def test_aucune_phrase_de_signe_sur_tous_les_exemples(self):
         from cas import CAS_LIMITES, entrees_page

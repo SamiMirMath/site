@@ -947,8 +947,32 @@ def facteur(poly, v, racines, mult=1):
     return {"poly": pscal(pn(poly), 1), "mult": mult, "tex": t, "racines": racines}
 
 
-def factoriser(P, v):
-    """Renvoie (constante c, facteurs, lignes d'explication) avec P = c·∏ facteurs."""
+def difference_de_carres(P, v, nom):
+    """P = α + βx² avec α et β de signes contraires, de valeurs absolues des carrés rationnels : (a − bx)(a + bx) ou
+    (bx − a)(bx + a), constante 1. None sinon."""
+    if P[1] != 0 or P[0] * P[2] >= 0:
+        return None
+    (a, ma), (b, mb) = racine_q(abs(P[0])), racine_q(abs(P[2]))
+    if ma != 1 or mb != 1:
+        return None
+    if P[2] < 0:
+        f1, f2 = [a, -b], [a, b]
+    else:
+        f1, f2 = [-a, b], [a, b]
+    z = a / b
+    g1, g2 = facteur(f1, v, [Num.rat(z)]), facteur(f2, v, [Num.rat(-z)])
+    if P[2] < 0:                  # 4 - x² = (2 - x)(2 + x) : la constante d'abord, comme dans l'écriture de l'élève
+        mono = ("" if b == 1 else qtex(b)) + v
+        g1["tex"], g2["tex"] = f"{qtex(a)} - {mono}", f"{qtex(a)} + {mono}"
+    ligne = (rf"\({nom or ptex(P, v)} = ({g1['tex']})({g2['tex']})\) : "
+             rf"zéros \({qtex(-z)}\) et \({qtex(z)}\).")
+    return F(1), [g1, g2], [ligne]
+
+
+def factoriser(P, v, nom=None, redige=False):
+    """Renvoie (constante c, facteurs, lignes d'explication) avec P = c·∏ facteurs.
+    redige (guide R10, ensemble de définition) : a² − b² factorisé directement, sinon Δ et zéros en une ligne ;
+    nom : écriture du polynôme dans ces lignes (celle de l'élève)."""
     P = pn(P)
     n = deg(P)
     lignes = []
@@ -959,7 +983,11 @@ def factoriser(P, v):
         lignes.append(rf"\({ptex(P, v)} = 0 \iff {v} = {qtex(r)}\)")
         return F(1), [facteur(P, v, [Num.rat(r)])], lignes
     if n == 2 and P[0] != 0:
-        return trinome(P, v, lignes, entier=True)
+        if redige:
+            dc = difference_de_carres(P, v, nom)
+            if dc is not None:
+                return dc
+        return trinome(P, v, lignes, entier=True, nom=nom, compact=redige)
     c = P[-1]
     Q = pscal(P, 1 / c)
     facteurs = []
@@ -989,7 +1017,7 @@ def factoriser(P, v):
         facteurs.append(facteur(Q, v, [Num.rat(r)]))
         lignes.append(rf"\({ptex(Q, v)} = 0 \iff {v} = {qtex(r)}\)")
     elif d == 2:
-        cc, ff, ll = trinome(Q, v, [], entier=False)
+        cc, ff, ll = (redige and difference_de_carres(Q, v, None)) or trinome(Q, v, [], entier=False, compact=redige)
         facteurs += ff
         lignes += ll
     elif d >= 3:
@@ -1002,30 +1030,44 @@ def factoriser(P, v):
     return c, facteurs, lignes
 
 
-def trinome(P, v, lignes, entier):
+def trinome(P, v, lignes, entier, nom=None, compact=False):
+    """nom : écriture du trinôme dans la ligne de Δ (celle de l'élève : 4 - x², pas -x² + 4).
+    compact (guide R10) : Δ et les zéros en UNE ligne."""
     c0, b, a = P[0], P[1], P[2]
     D = b * b - 4 * a * c0
-    T = ptex(P, v)
+    T = nom or ptex(P, v)
     lignes.append(rf"Trinôme \({T}\) : \(\Delta = b^2 - 4ac = {par_q(b)}^2 - 4 \cdot {par_q(a)} \cdot {par_q(c0)} = {qtex(D)}\)")
+
+    def suite(complet, court):
+        """Deuxième ligne (guide : Δ > 0, … ) ou, en mode compact, la fin de la ligne de Δ."""
+        if compact:
+            lignes[-1] += court
+        else:
+            lignes.append(complet)
+
     if D < 0:
         signe = "positif" if a > 0 else "négatif"
-        lignes.append(rf"\(\Delta < 0\) : aucun zéro ; le trinôme garde le signe de \(a = {qtex(a)}\), il est toujours {signe}.")
+        suite(rf"\(\Delta < 0\) : aucun zéro ; le trinôme garde le signe de \(a = {qtex(a)}\), il est toujours {signe}.",
+              rf" : aucun zéro ; le trinôme garde le signe de \(a = {qtex(a)}\), il est toujours {signe}.")
         return F(1), [facteur(P, v, [])], lignes
     if D == 0:
         r = -b / (2 * a)
-        lignes.append(rf"\(\Delta = 0\) : zéro double \({v} = \frac{{-b}}{{2a}} = {qtex(r)}\), et \({T} = {mono_c(a)}\left({ptex([-r, F(1)], v)}\right)^{{2}}\).")
+        suite(rf"\(\Delta = 0\) : zéro double \({v} = \frac{{-b}}{{2a}} = {qtex(r)}\), et \({T} = {mono_c(a)}\left({ptex([-r, F(1)], v)}\right)^{{2}}\).",
+              rf" : zéro double \({v} = {qtex(r)}\), et \({T} = {mono_c(a)}\left({ptex([-r, F(1)], v)}\right)^{{2}}\).")
         return a, [facteur([-r, F(1)], v, [Num.rat(r)], 2)], lignes
     k, m = racine_q(D)
     if m == 1:
         r1, r2 = sorted([(-b - k) / (2 * a), (-b + k) / (2 * a)])
-        lignes.append(rf"\(\Delta > 0\), \(\sqrt{{\Delta}} = {qtex(k)}\) : deux zéros \({v}_1 = \frac{{-b - \sqrt{{\Delta}}}}{{2a}} = {qtex(r1)}\) "
-                      rf"et \({v}_2 = \frac{{-b + \sqrt{{\Delta}}}}{{2a}} = {qtex(r2)}\).")
+        suite(rf"\(\Delta > 0\), \(\sqrt{{\Delta}} = {qtex(k)}\) : deux zéros \({v}_1 = \frac{{-b - \sqrt{{\Delta}}}}{{2a}} = {qtex(r1)}\) "
+              rf"et \({v}_2 = \frac{{-b + \sqrt{{\Delta}}}}{{2a}} = {qtex(r2)}\).",
+              rf", \(\sqrt{{\Delta}} = {qtex(k)}\) : zéros \({v}_1 = {qtex(r1)}\) et \({v}_2 = {qtex(r2)}\).")
         return a, [facteur([-r1, F(1)], v, [Num.rat(r1)]), facteur([-r2, F(1)], v, [Num.rat(r2)])], lignes
     x1 = Num.quad(-b / (2 * a), -k / (2 * a), m)
     x2 = Num.quad(-b / (2 * a), k / (2 * a), m)
     x1, x2 = sorted([x1, x2], key=lambda z: z.val)
-    lignes.append(rf"\(\Delta > 0\) : deux zéros \({v}_1 = \frac{{-b - \sqrt{{\Delta}}}}{{2a}} = {x1.tex}\) "
-                  rf"et \({v}_2 = {x2.tex}\) \((\approx {dec(x1.val)}\) et \(\approx {dec(x2.val)})\).")
+    suite(rf"\(\Delta > 0\) : deux zéros \({v}_1 = \frac{{-b - \sqrt{{\Delta}}}}{{2a}} = {x1.tex}\) "
+          rf"et \({v}_2 = {x2.tex}\) \((\approx {dec(x1.val)}\) et \(\approx {dec(x2.val)})\).",
+          rf" : zéros \({v}_1 = {x1.tex}\) et \({v}_2 = {x2.tex}\) \((\approx {dec(x1.val)}\) et \(\approx {dec(x2.val)})\).")
     return F(1), [facteur(P, v, [x1, x2])], lignes
 
 
@@ -1068,9 +1110,10 @@ def resoudre_rat(R, rel, v, items, nom_expr=None):
             return []
         items.append(txt(rf"\({expr}\) est nulle partout où elle est définie."))
         return complement(points(z))
-    cN, fN, lN = factoriser(N, v)
+    nom_N = nom_expr if (deg(D) == 0 and D[0] == 1 and brut == ent) else None     # N est alors toute l'expression de l'élève
+    cN, fN, lN = factoriser(N, v, nom=nom_N, redige=True)
     if deg(D) > 0:
-        cD, fD, lD = factoriser(D, v)
+        cD, fD, lD = factoriser(D, v, redige=True)
     else:
         cD, fD, lD = D[0], [], []
     const = cN / cD
@@ -1109,7 +1152,8 @@ def resoudre_rat(R, rel, v, items, nom_expr=None):
                          + ("toujours vraie." if ok else "toujours fausse.")))
         return REELS if ok else []
     if lN:
-        items.append(txt("Zéros du numérateur :" if fD else "Zéros :"))
+        if fD:
+            items.append(txt("Zéros du numérateur :"))
         for l in lN:
             items.append(txt(l))
     if lD:
@@ -1181,10 +1225,7 @@ def resoudre_rat(R, rel, v, items, nom_expr=None):
             S.append(Iv(crit[i], True, crit[i], True))
     S = fusion(S)
     symb = ">" if rel == ">" else r"\geq"
-    items.append(txt(rf"On lit les intervalles où \({expr} {symb} 0\)" +
-                     (" (les zéros sont inclus, les valeurs interdites exclues)" if rel == ">=" and zD else
-                      " (zéros inclus)" if rel == ">=" else "") +
-                     rf" : \({v} \in {ens_tex(S)}\)."))
+    items.append(txt(rf"\({expr} {symb} 0 \iff {v} \in {ens_tex(S)}\)."))
     return S
 
 
@@ -1463,7 +1504,7 @@ def resoudre_dans(R, S, v, expr_tex, items):
             Rl = r_add(R, r_const(-iv.lo.q))
             if iv.lo.q != 0:
                 items.append(txt(rf"\({expr_tex} {GE if iv.lf else '>'} {iv.lo.tex} \iff {rtex(r_norm(Rl), v)} {GE if iv.lf else '>'} 0\)"))
-            cur = inter(cur, resoudre_rat(Rl, ">=" if iv.lf else ">", v, items))
+            cur = inter(cur, resoudre_rat(Rl, ">=" if iv.lf else ">", v, items, nom_expr=expr_tex if iv.lo.q == 0 else None))
         if iv.hi is not None:
             Rh = r_add(r_const(iv.hi.q), r_neg(R))
             items.append(txt(rf"\({expr_tex} {LE if iv.hf else '<'} {iv.hi.tex} \iff {rtex(r_norm(Rh), v)} {GE if iv.hf else '>'} 0\)"))
@@ -2238,8 +2279,6 @@ def tableau_facteurs(c, infos, rel, expr_tex, items):
                    else r"\left(" + tex(h) + r"\right)") + "^{" + str(abs(k)) + "}"
         elif prec(h) < 3:
             lab = tex(h)
-        if k < 0:
-            lab += r" \ (\text{dén.})"
         lignes.append({"label": lab, "cells": [etat(D, P, Z, k, v) for v in vals]})
     fin = []
     for j in range(len(vals)):
@@ -2267,7 +2306,7 @@ def tableau_facteurs(c, infos, rel, expr_tex, items):
     if any(ch == "x" for ch in fin):
         items.append(txt("Les zones hachurées sont hors du domaine de définition de l'expression."))
     symb = ">" if rel == ">" else r"\geq"
-    items.append(txt(rf"On lit le tableau : \({expr_tex} {symb} 0 \iff x \in {ens_tex(S)}\)."))
+    items.append(txt(rf"\({expr_tex} {symb} 0 \iff x \in {ens_tex(S)}\)."))
     return S
 
 
@@ -2335,8 +2374,9 @@ POURQUOI = {
     "sqrt": "Le contenu d'une racine carrée doit être positif ou nul.",
     "pos": "Une puissance a^b d'exposant non entier (a^b = e^{b ln a}) exige une base strictement positive.",
     "pos0": "Une puissance a^α dont l'exposant α est irrationnel et positif est définie pour a ≥ 0 (0^α = 0).",
-}
-TITRE = {"ln": "logarithme", "den": "dénominateur", "sqrt": "racine carrée", "pos": "puissance", "pos0": "puissance"}
+}   # (plus affichées depuis le guide de rédaction R10 : « condition ⇔ solution », sans rappel de la règle)
+TITRE = {"ln": "logarithme", "den": "dénominateur", "sqrt": "racine carrée", "pos": "puissance", "pos0": "puissance",
+         "rden": "racine au dénominateur"}
 
 
 def conditions(n, out):
@@ -2360,6 +2400,11 @@ def conditions(n, out):
             ajouter("sqrt", n.a)
     elif isinstance(n, Op):
         conditions(n.a, out)
+        if n.op == "/" and isinstance(n.b, Fn) and n.b.nom == "sqrt":
+            # racine au dénominateur (guide R10) : √A ≥ 0 et √A ≠ 0 forment UNE condition, A > 0
+            conditions(n.b.a, out)
+            ajouter("rden", n.b.a)
+            return
         conditions(n.b, out)
         if n.op == "/":
             ajouter("den", n.b)
@@ -2376,30 +2421,33 @@ def conditions(n, out):
 
 
 def resoudre_condition(genre, A):
-    items = [txt(POURQUOI[genre])]
+    items = []
     At = tex(A)
     if genre == "den":
         cond = rf"{At} \neq 0"
-        items.append(txt(rf"On cherche les valeurs interdites : on résout \({At} = 0\)."))
         try:
             it = []
             Z = preimage(A, points([Num.rat(0)]), it)
         except NonPrisEnCharge:
             it = []
             Z = resoudre_general(A, "=", it)
-        items += it
+        # guide R10 : « condition ⇔ solution », sans « On résout … » ni « Solutions : … » ; la ligne finale remplace
+        # l'unique ligne « A = 0 ⇔ x = r » d'un dénominateur affine
+        it = [i for i in it if not str(i.get("html", "")).startswith(("On résout", "Solution", "Aucune solution"))]
         E_ = complement(Z)
         if Z:
-            items.append(txt(rf"Valeurs interdites : \(x \in {ens_tex(Z)}\). On les exclut."))
+            pts = [iv.lo.tex for iv in Z]
+            sol = rf"x \neq {pts[0]}" if len(pts) == 1 else rf"x \notin \left\{{{' \\,;\\, '.join(pts)}\right\}}"
+            if len(it) == 1 and re.search(r"= 0 \\iff x = [^:]*\\\)\.?$", str(it[0].get("html", ""))):
+                it = []
+            it.append(txt(rf"\({cond} \iff {sol}\)."))
         else:
-            items.append(txt(rf"\({At}\) ne s'annule jamais : aucune valeur interdite."))
-        return cond, items, E_
-    if genre in ("ln", "pos"):
+            it.append(txt(rf"\({At}\) ne s'annule jamais : aucune valeur interdite."))
+        return cond, it, E_
+    if genre in ("ln", "pos", "rden"):
         cond, rel, S0 = rf"{At} > 0", ">", [Iv(Num.rat(0), False, None, False)]
     else:
         cond, rel, S0 = rf"{At} \geq 0", ">=", [Iv(Num.rat(0), True, None, False)]
-    if isinstance(A, X):
-        items.append(txt(rf"La condition s'écrit directement \({cond}\)."))
     try:
         it = []
         E_ = preimage(A, S0, it)
@@ -2430,7 +2478,7 @@ def _analyser(entree):
             ED = inter(ED, E_)
             E_par_cond[i] = E_
         except Exception as e:      # filet de sécurité : jamais de plantage de la page
-            c.update({"cond_tex": {"den": rf"{tex(A)} \neq 0", "ln": rf"{tex(A)} > 0", "pos": rf"{tex(A)} > 0"}
+            c.update({"cond_tex": {"den": rf"{tex(A)} \neq 0", "ln": rf"{tex(A)} > 0", "pos": rf"{tex(A)} > 0", "rden": rf"{tex(A)} > 0"}
                       .get(genre, rf"{tex(A)} \geq 0"),
                       "etapes": [txt("Cette condition n'a pas pu être résolue automatiquement.")],
                       "E_tex": None, "resolu": False, "detail": f"{type(e).__name__} : {e}"})
@@ -2440,9 +2488,7 @@ def _analyser(entree):
     res["besoin_sympy"] = ETAT["sympy_manquant"]
     if complet:
         res["ED_tex"] = ens_tex(ED)
-        if len(conds) == 1:
-            res["inter_tex"] = "E_{1}"
-        elif conds:
+        if len(conds) > 1:                  # une seule condition : ED = E_1, rien à combiner
             res["inter_tex"] = combinaison_tex(res["conditions"], E_par_cond)
     return res, f, (ED if complet else None)
 
@@ -2482,8 +2528,10 @@ def combinaison_tex(conditions_, E_par_cond):
             points_finaux.append((val, t))
     points_finaux.sort(key=lambda vt: vt[0])
 
-    base = r" \cap ".join(f"E_{{{n}}}" for n in domaine_nums) if domaine_nums else r"\mathbb{R}"
-    if len(domaine_nums) > 1:
+    base = r" \cap ".join(ens_tex(E_par_cond[n]) for n in domaine_nums) if domaine_nums else r"\mathbb{R}"
+    if len(domaine_nums) > 1 and points_finaux:
+        base = r"\left(" + base + r"\right)"
+    if points_finaux and (r"\cup" in base or r"\cap" in base) and not base.startswith(r"\left("):
         base = r"\left(" + base + r"\right)"
     if points_finaux:
         pts_tex = r" \,;\, ".join(t for _, t in points_finaux)
@@ -2594,7 +2642,7 @@ def _texte(res):
                     out.append(f"      {r['label']:<28} " + " ".join(f"{x:>2}" for x in r["cells"]))
         out.append(f"   E_{c['num']} = {c['E_tex']}")
     if res["complet"]:
-        out.append(f"\nED = {res.get('inter_tex', '')} = {res['ED_tex']}")
+        out.append("\nED = " + (res["inter_tex"] + " = " if "inter_tex" in res else "") + res["ED_tex"])
     return "\n".join(out)
 
 

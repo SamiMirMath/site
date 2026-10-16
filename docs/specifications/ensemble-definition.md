@@ -11,11 +11,13 @@ URL : `/ensemble-definition/` · moteur : `ensemble-definition/ensemble_def.py` 
   argument de logarithme > 0 ; dénominateur ≠ 0 ; contenu de racine carrée ≥ 0 ;
   base > 0 pour une puissance d'exposant non constant ou de dénominateur pair négatif ;
   base ≥ 0 pour une puissance d'exposant constant irrationnel positif (règle de x^α ci-dessous).
-- Une carte par condition : rappel de la règle, résolution détaillée (factorisation, Δ, racines
+- Une carte par condition (guide R10 : sans rappel de la règle, « condition ⇔ solution » ; une racine au
+  dénominateur est UNE condition A > 0 ; ordre des termes de l'élève ; a² − b² factorisé, sinon Δ écrit
+  une seule fois) : résolution détaillée (factorisation, Δ, racines
   évidentes, tableau de signes, substitution t = ln(B), e^B, √B puis retour à x, sommes de ln),
   ensemble E_i.
-- Carte finale : ED = combinaison des E_i (les conditions « ≠ » sont écrites comme des
-  exclusions `\ {…}`), forme simplifiée, contrôle numérique indépendant (≈ 5 000 points).
+- Carte finale : ED = intersection écrite avec les ensembles eux-mêmes (« ]−1 ; +∞[ ∩ ]−2 ; 2[ = ]−1 ; 2[ » ;
+  les conditions « ≠ » sont écrites comme des exclusions `\ {…}`), forme simplifiée, contrôle numérique indépendant (≈ 5 000 points).
 - Repli (sans en nommer la méthode à l'élève) : pour un facteur qui ne se résout pas avec les méthodes du
   cours, « solution obtenue numériquement : x ≈ … » ; un mélange de x et d'un ln ou exp est annoncé
   comme tel (« on ne peut pas isoler x »).

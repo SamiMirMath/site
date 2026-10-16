@@ -66,7 +66,8 @@ Si une hypothèse n'est pas vérifiée, la règle n'est pas appliquée (phrase d
 
 **R10. Ensemble de définition** : une carte par condition, sans phrase de rappel de la règle, « condition
 ⇔ solution » ; une racine au dénominateur = une seule condition A > 0 ; Δ au plus une fois, en une ligne ;
-dernière ligne « ED = E₁ ∩ E₂ = … ».
+ordre des termes de l'élève (4 − x², pas −x² + 4) ; a² − b² factorisé directement ((2 − x)(2 + x)), sinon
+Δ ; un seul tableau ; dernière ligne avec les ensembles : « ED = ]−1 ; +∞[ ∩ ]−2 ; 2[ = ]−1 ; 2[ ».
 
 **R11. Dérivée** : pas de ligne pour une dérivée de référence (x², affine) ni de « + 0 » ; u, u', v, v'
 sur une ligne ; l'étape délicate (chasser une racine du numérateur) est écrite.
@@ -197,10 +198,10 @@ Limite finie : pas d'asymptote verticale, trou dans le graphique en (1 ; 1).
 Logarithme : x + 1 > 0 ⇔ x > −1.
 
 Racine au dénominateur : 4 − x² > 0.
-4 − x² = (2 + x)(2 − x) : zéros −2 et 2.
+4 − x² = (2 − x)(2 + x) : zéros −2 et 2.
 x       | −∞    −2     2     +∞
-2 + x   |   −   0   +   |   +
 2 − x   |   +   |   +   0   −
+2 + x   |   −   0   +   |   +
 4 − x²  |   −   0   +   0   −
 4 − x² > 0 ⇔ x ∈ ]−2 ; 2[.
 

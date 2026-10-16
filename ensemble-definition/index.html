@@ -303,7 +303,7 @@ function afficher(r){
   const fin=document.createElement("div"); fin.className="card final";
   if(!r.complet) fin.innerHTML='<div class="err">Une condition n\'a pas pu être résolue : l\'ED n\'est pas calculé.</div>';
   else if(!r.conditions.length) fin.innerHTML=`<div class="res">${K("ED = \\mathbb{R}")}</div>`;
-  else fin.innerHTML=`<div class="muted" style="margin-bottom:4px">L'ensemble de définition est l'intersection des ensembles obtenus :</div><div class="res">${K("ED = "+r.inter_tex+" = "+r.ED_tex)}</div>`
+  else fin.innerHTML=`<div class="res">${K("ED = "+(r.inter_tex?r.inter_tex+" = ":"")+r.ED_tex)}</div>`
     +(r.ED_tex.includes("approx")?'<div class="hint">Les valeurs précédées de ≈ ont été obtenues numériquement.</div>':"");
   cartes.push(fin);
   cartes.forEach(c=>{ c.classList.add("cache"); box.appendChild(c); });

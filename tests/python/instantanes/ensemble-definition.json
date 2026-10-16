@@ -38,31 +38,11 @@
     "cond_tex": "e^{2x} - 5e^{x} + 6 \\neq 0",
     "etapes": [
      {
-      "html": "Un dénominateur doit être non nul.",
-      "type": "texte"
-     },
-     {
-      "html": "On cherche les valeurs interdites : on résout \\(e^{2x} - 5e^{x} + 6 = 0\\).",
-      "type": "texte"
-     },
-     {
       "html": "On pose \\(t = e^{x}\\) : \\(e^{2x} - 5e^{x} + 6 = t^{2} - 5t + 6\\).",
       "type": "texte"
      },
      {
-      "html": "On résout \\(t^{2} - 5t + 6 = 0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Trinôme \\(t^{2} - 5t + 6\\) : \\(\\Delta = b^2 - 4ac = (-5)^2 - 4 \\cdot 1 \\cdot 6 = 1\\)",
-      "type": "texte"
-     },
-     {
-      "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 1\\) : deux zéros \\(t_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = 2\\) et \\(t_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 3\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Solutions : \\(t = 2\\), \\(t = 3\\).",
+      "html": "Trinôme \\(t^{2} - 5t + 6\\) : \\(\\Delta = b^2 - 4ac = (-5)^2 - 4 \\cdot 1 \\cdot 6 = 1\\), \\(\\sqrt{\\Delta} = 1\\) : zéros \\(t_1 = 2\\) et \\(t_2 = 3\\).",
       "type": "texte"
      },
      {
@@ -74,7 +54,7 @@
       "type": "texte"
      },
      {
-      "html": "Valeurs interdites : \\(x \\in \\left\\{\\ln(2)\\right\\} \\cup \\left\\{\\ln(3)\\right\\}\\). On les exclut.",
+      "html": "\\(e^{2x} - 5e^{x} + 6 \\neq 0 \\iff x \\notin \\left\\{\\ln(2) \\,;\\, \\ln(3)\\right\\}\\).",
       "type": "texte"
      }
     ],
@@ -86,7 +66,6 @@
    }
   ],
   "f_tex": "\\frac{1}{e^{2x} - 5e^{x} + 6}",
-  "inter_tex": "E_{1}",
   "ok": true
  },
  "1/(e^x-1)": {
@@ -99,14 +78,6 @@
     "cond_tex": "e^{x} - 1 \\neq 0",
     "etapes": [
      {
-      "html": "Un dénominateur doit être non nul.",
-      "type": "texte"
-     },
-     {
-      "html": "On cherche les valeurs interdites : on résout \\(e^{x} - 1 = 0\\).",
-      "type": "texte"
-     },
-     {
       "html": "\\(e^{x} - 1 = 0 \\iff e^{x} = 1\\) (on ajoute 1).",
       "type": "texte"
      },
@@ -115,7 +86,7 @@
       "type": "texte"
      },
      {
-      "html": "Valeurs interdites : \\(x \\in \\left\\{0\\right\\}\\). On les exclut.",
+      "html": "\\(e^{x} - 1 \\neq 0 \\iff x \\neq 0\\).",
       "type": "texte"
      }
     ],
@@ -127,7 +98,6 @@
    }
   ],
   "f_tex": "\\frac{1}{e^{x} - 1}",
-  "inter_tex": "E_{1}",
   "ok": true
  },
  "1/(ln(x-1)+ln(x-3))": {
@@ -139,10 +109,6 @@
     "E_tex": "\\left]1 \\,;\\, +\\infty\\right[",
     "cond_tex": "x - 1 > 0",
     "etapes": [
-     {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
-      "type": "texte"
-     },
      {
       "html": "\\(x - 1 > 0 \\iff x > 1\\).",
       "type": "texte"
@@ -159,10 +125,6 @@
     "cond_tex": "x - 3 > 0",
     "etapes": [
      {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
-      "type": "texte"
-     },
-     {
       "html": "\\(x - 3 > 0 \\iff x > 3\\).",
       "type": "texte"
      }
@@ -178,14 +140,6 @@
     "cond_tex": "\\ln\\left(x - 1\\right) + \\ln\\left(x - 3\\right) \\neq 0",
     "etapes": [
      {
-      "html": "Un dénominateur doit être non nul.",
-      "type": "texte"
-     },
-     {
-      "html": "On cherche les valeurs interdites : on résout \\(\\ln\\left(x - 1\\right) + \\ln\\left(x - 3\\right) = 0\\).",
-      "type": "texte"
-     },
-     {
       "html": "Les logarithmes sont tous définis pour \\(x \\in D = \\left]3 \\,;\\, +\\infty\\right[\\). Sur \\(D\\), on regroupe avec \\(\\ln(a) + \\ln(b) = \\ln(ab)\\) (valable car \\(a, b > 0\\)) : \\(\\ln\\left(x - 1\\right) + \\ln\\left(x - 3\\right) = \\ln\\left(\\left(x - 1\\right)\\,\\left(x - 3\\right)\\right)\\).",
       "type": "texte"
      },
@@ -194,19 +148,7 @@
       "type": "texte"
      },
      {
-      "html": "On résout \\(x^{2} - 4x + 2 = 0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Trinôme \\(x^{2} - 4x + 2\\) : \\(\\Delta = b^2 - 4ac = (-4)^2 - 4 \\cdot 1 \\cdot 2 = 8\\)",
-      "type": "texte"
-     },
-     {
-      "html": "\\(\\Delta > 0\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = 2 - \\sqrt{2}\\) et \\(x_2 = 2 + \\sqrt{2}\\) \\((\\approx 0{,}5858\\) et \\(\\approx 3{,}4142)\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Solutions : \\(x = 2 - \\sqrt{2}\\), \\(x = 2 + \\sqrt{2}\\).",
+      "html": "Trinôme \\(x^{2} - 4x + 2\\) : \\(\\Delta = b^2 - 4ac = (-4)^2 - 4 \\cdot 1 \\cdot 2 = 8\\) : zéros \\(x_1 = 2 - \\sqrt{2}\\) et \\(x_2 = 2 + \\sqrt{2}\\) \\((\\approx 0{,}5858\\) et \\(\\approx 3{,}4142)\\).",
       "type": "texte"
      },
      {
@@ -218,7 +160,7 @@
       "type": "texte"
      },
      {
-      "html": "Valeurs interdites : \\(x \\in \\left\\{2 + \\sqrt{2}\\right\\}\\). On les exclut.",
+      "html": "\\(\\ln\\left(x - 1\\right) + \\ln\\left(x - 3\\right) \\neq 0 \\iff x \\neq 2 + \\sqrt{2}\\).",
       "type": "texte"
      }
     ],
@@ -230,7 +172,7 @@
    }
   ],
   "f_tex": "\\frac{1}{\\ln\\left(x - 1\\right) + \\ln\\left(x - 3\\right)}",
-  "inter_tex": "\\left(E_{1} \\cap E_{2}\\right) \\setminus \\left\\{2 + \\sqrt{2}\\right\\}",
+  "inter_tex": "\\left(\\left]1 \\,;\\, +\\infty\\right[ \\cap \\left]3 \\,;\\, +\\infty\\right[\\right) \\setminus \\left\\{2 + \\sqrt{2}\\right\\}",
   "ok": true
  },
  "1/ln(x)": {
@@ -241,16 +183,7 @@
    {
     "E_tex": "\\left]0 \\,;\\, +\\infty\\right[",
     "cond_tex": "x > 0",
-    "etapes": [
-     {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
-      "type": "texte"
-     },
-     {
-      "html": "La condition s'écrit directement \\(x > 0\\).",
-      "type": "texte"
-     }
-    ],
+    "etapes": [],
     "genre": "ln",
     "num": 1,
     "resolu": true,
@@ -262,19 +195,7 @@
     "cond_tex": "\\ln(x) \\neq 0",
     "etapes": [
      {
-      "html": "Un dénominateur doit être non nul.",
-      "type": "texte"
-     },
-     {
-      "html": "On cherche les valeurs interdites : on résout \\(\\ln(x) = 0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(\\ln(x) = 0 \\iff x = 1\\)",
-      "type": "texte"
-     },
-     {
-      "html": "Valeurs interdites : \\(x \\in \\left\\{1\\right\\}\\). On les exclut.",
+      "html": "\\(\\ln(x) \\neq 0 \\iff x \\neq 1\\).",
       "type": "texte"
      }
     ],
@@ -286,7 +207,7 @@
    }
   ],
   "f_tex": "\\frac{1}{\\ln(x)}",
-  "inter_tex": "E_{1} \\setminus \\left\\{1\\right\\}",
+  "inter_tex": "\\left]0 \\,;\\, +\\infty\\right[ \\setminus \\left\\{1\\right\\}",
   "ok": true
  },
  "1/ln(x+2)": {
@@ -298,10 +219,6 @@
     "E_tex": "\\left]-2 \\,;\\, +\\infty\\right[",
     "cond_tex": "x + 2 > 0",
     "etapes": [
-     {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
-      "type": "texte"
-     },
      {
       "html": "\\(x + 2 > 0 \\iff x > -2\\).",
       "type": "texte"
@@ -318,14 +235,6 @@
     "cond_tex": "\\ln\\left(x + 2\\right) \\neq 0",
     "etapes": [
      {
-      "html": "Un dénominateur doit être non nul.",
-      "type": "texte"
-     },
-     {
-      "html": "On cherche les valeurs interdites : on résout \\(\\ln\\left(x + 2\\right) = 0\\).",
-      "type": "texte"
-     },
-     {
       "html": "\\(\\ln\\left(x + 2\\right) = 0 \\iff x + 2 = 1\\)",
       "type": "texte"
      },
@@ -334,7 +243,7 @@
       "type": "texte"
      },
      {
-      "html": "Valeurs interdites : \\(x \\in \\left\\{-1\\right\\}\\). On les exclut.",
+      "html": "\\(\\ln\\left(x + 2\\right) \\neq 0 \\iff x \\neq -1\\).",
       "type": "texte"
      }
     ],
@@ -346,7 +255,7 @@
    }
   ],
   "f_tex": "\\frac{1}{\\ln\\left(x + 2\\right)}",
-  "inter_tex": "E_{1} \\setminus \\left\\{-1\\right\\}",
+  "inter_tex": "\\left]-2 \\,;\\, +\\infty\\right[ \\setminus \\left\\{-1\\right\\}",
   "ok": true
  },
  "1/x^(1/3)": {
@@ -359,19 +268,7 @@
     "cond_tex": "\\sqrt[3]{x} \\neq 0",
     "etapes": [
      {
-      "html": "Un dénominateur doit être non nul.",
-      "type": "texte"
-     },
-     {
-      "html": "On cherche les valeurs interdites : on résout \\(\\sqrt[3]{x} = 0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(\\sqrt[3]{x} = 0 \\iff x = 0\\)",
-      "type": "texte"
-     },
-     {
-      "html": "Valeurs interdites : \\(x \\in \\left\\{0\\right\\}\\). On les exclut.",
+      "html": "\\(\\sqrt[3]{x} \\neq 0 \\iff x \\neq 0\\).",
       "type": "texte"
      }
     ],
@@ -384,7 +281,6 @@
   ],
   "f_saisie_tex": "\\frac{1}{x^{\\frac{1}{3}}}",
   "f_tex": "\\frac{1}{\\sqrt[3]{x}}",
-  "inter_tex": "E_{1}",
   "ok": true
  },
  "2,5x+ln(x)": {
@@ -395,16 +291,7 @@
    {
     "E_tex": "\\left]0 \\,;\\, +\\infty\\right[",
     "cond_tex": "x > 0",
-    "etapes": [
-     {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
-      "type": "texte"
-     },
-     {
-      "html": "La condition s'écrit directement \\(x > 0\\).",
-      "type": "texte"
-     }
-    ],
+    "etapes": [],
     "genre": "ln",
     "num": 1,
     "resolu": true,
@@ -413,7 +300,6 @@
    }
   ],
   "f_tex": "2{,}5x + \\ln(x)",
-  "inter_tex": "E_{1}",
   "ok": true
  },
  "2ln(x)/((ln x)^2-1)": {
@@ -424,16 +310,7 @@
    {
     "E_tex": "\\left]0 \\,;\\, +\\infty\\right[",
     "cond_tex": "x > 0",
-    "etapes": [
-     {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
-      "type": "texte"
-     },
-     {
-      "html": "La condition s'écrit directement \\(x > 0\\).",
-      "type": "texte"
-     }
-    ],
+    "etapes": [],
     "genre": "ln",
     "num": 1,
     "resolu": true,
@@ -445,31 +322,11 @@
     "cond_tex": "\\left(\\ln(x)\\right)^{2} - 1 \\neq 0",
     "etapes": [
      {
-      "html": "Un dénominateur doit être non nul.",
-      "type": "texte"
-     },
-     {
-      "html": "On cherche les valeurs interdites : on résout \\(\\left(\\ln(x)\\right)^{2} - 1 = 0\\).",
-      "type": "texte"
-     },
-     {
       "html": "On pose \\(t = \\ln(x)\\) : \\(\\left(\\ln(x)\\right)^{2} - 1 = t^{2} - 1\\).",
       "type": "texte"
      },
      {
-      "html": "On résout \\(t^{2} - 1 = 0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Trinôme \\(t^{2} - 1\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot (-1) = 4\\)",
-      "type": "texte"
-     },
-     {
-      "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 2\\) : deux zéros \\(t_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -1\\) et \\(t_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 1\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Solutions : \\(t = -1\\), \\(t = 1\\).",
+      "html": "\\(t^{2} - 1 = (t - 1)(t + 1)\\) : zéros \\(-1\\) et \\(1\\).",
       "type": "texte"
      },
      {
@@ -481,7 +338,7 @@
       "type": "texte"
      },
      {
-      "html": "Valeurs interdites : \\(x \\in \\left\\{e^{-1}\\right\\} \\cup \\left\\{e\\right\\}\\). On les exclut.",
+      "html": "\\(\\left(\\ln(x)\\right)^{2} - 1 \\neq 0 \\iff x \\notin \\left\\{e^{-1} \\,;\\, e\\right\\}\\).",
       "type": "texte"
      }
     ],
@@ -493,7 +350,7 @@
    }
   ],
   "f_tex": "\\frac{2\\ln(x)}{\\left(\\ln(x)\\right)^{2} - 1}",
-  "inter_tex": "E_{1} \\setminus \\left\\{e^{-1} \\,;\\, e\\right\\}",
+  "inter_tex": "\\left]0 \\,;\\, +\\infty\\right[ \\setminus \\left\\{e^{-1} \\,;\\, e\\right\\}",
   "ok": true
  },
  "e^(1/(x^2-x-2))": {
@@ -506,31 +363,11 @@
     "cond_tex": "x^{2} - x - 2 \\neq 0",
     "etapes": [
      {
-      "html": "Un dénominateur doit être non nul.",
+      "html": "Trinôme \\(x^{2} - x - 2\\) : \\(\\Delta = b^2 - 4ac = (-1)^2 - 4 \\cdot 1 \\cdot (-2) = 9\\), \\(\\sqrt{\\Delta} = 3\\) : zéros \\(x_1 = -1\\) et \\(x_2 = 2\\).",
       "type": "texte"
      },
      {
-      "html": "On cherche les valeurs interdites : on résout \\(x^{2} - x - 2 = 0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "On résout \\(x^{2} - x - 2 = 0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Trinôme \\(x^{2} - x - 2\\) : \\(\\Delta = b^2 - 4ac = (-1)^2 - 4 \\cdot 1 \\cdot (-2) = 9\\)",
-      "type": "texte"
-     },
-     {
-      "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 3\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -1\\) et \\(x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 2\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Solutions : \\(x = -1\\), \\(x = 2\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Valeurs interdites : \\(x \\in \\left\\{-1\\right\\} \\cup \\left\\{2\\right\\}\\). On les exclut.",
+      "html": "\\(x^{2} - x - 2 \\neq 0 \\iff x \\notin \\left\\{-1 \\,;\\, 2\\right\\}\\).",
       "type": "texte"
      }
     ],
@@ -542,7 +379,6 @@
    }
   ],
   "f_tex": "e^{\\frac{1}{x^{2} - x - 2}}",
-  "inter_tex": "E_{1}",
   "ok": true
  },
  "e^x/ln(e^x)": {
@@ -553,12 +389,7 @@
    {
     "E_tex": "\\mathbb{R}",
     "cond_tex": "e^{x} > 0",
-    "etapes": [
-     {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
-      "type": "texte"
-     }
-    ],
+    "etapes": [],
     "genre": "ln",
     "num": 1,
     "resolu": true,
@@ -570,14 +401,6 @@
     "cond_tex": "\\ln\\left(e^{x}\\right) \\neq 0",
     "etapes": [
      {
-      "html": "Un dénominateur doit être non nul.",
-      "type": "texte"
-     },
-     {
-      "html": "On cherche les valeurs interdites : on résout \\(\\ln\\left(e^{x}\\right) = 0\\).",
-      "type": "texte"
-     },
-     {
       "html": "\\(\\ln\\left(e^{x}\\right) = 0 \\iff e^{x} = 1\\)",
       "type": "texte"
      },
@@ -586,7 +409,7 @@
       "type": "texte"
      },
      {
-      "html": "Valeurs interdites : \\(x \\in \\left\\{0\\right\\}\\). On les exclut.",
+      "html": "\\(\\ln\\left(e^{x}\\right) \\neq 0 \\iff x \\neq 0\\).",
       "type": "texte"
      }
     ],
@@ -615,19 +438,7 @@
     "cond_tex": "x + 3 \\neq 0",
     "etapes": [
      {
-      "html": "Un dénominateur doit être non nul.",
-      "type": "texte"
-     },
-     {
-      "html": "On cherche les valeurs interdites : on résout \\(x + 3 = 0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x + 3 = 0 \\iff x = -3\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Valeurs interdites : \\(x \\in \\left\\{-3\\right\\}\\). On les exclut.",
+      "html": "\\(x + 3 \\neq 0 \\iff x \\neq -3\\).",
       "type": "texte"
      }
     ],
@@ -641,10 +452,6 @@
     "E_tex": "\\left]-\\infty \\,;\\, -3\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[",
     "cond_tex": "\\frac{x - 1}{x + 3} > 0",
     "etapes": [
-     {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
-      "type": "texte"
-     },
      {
       "html": "Zéros du numérateur :",
       "type": "texte"
@@ -703,7 +510,7 @@
       "var": "x"
      },
      {
-      "html": "On lit les intervalles où \\(\\frac{x - 1}{x + 3} > 0\\) : \\(x \\in \\left]-\\infty \\,;\\, -3\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[\\).",
+      "html": "\\(\\frac{x - 1}{x + 3} > 0 \\iff x \\in \\left]-\\infty \\,;\\, -3\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[\\).",
       "type": "texte"
      }
     ],
@@ -715,7 +522,7 @@
    }
   ],
   "f_tex": "\\ln\\left(\\frac{x - 1}{x + 3}\\right)",
-  "inter_tex": "E_{2}",
+  "inter_tex": "\\left]-\\infty \\,;\\, -3\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[",
   "ok": true
  },
  "ln((x^2-1)/(x+2))": {
@@ -728,19 +535,7 @@
     "cond_tex": "x + 2 \\neq 0",
     "etapes": [
      {
-      "html": "Un dénominateur doit être non nul.",
-      "type": "texte"
-     },
-     {
-      "html": "On cherche les valeurs interdites : on résout \\(x + 2 = 0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x + 2 = 0 \\iff x = -2\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Valeurs interdites : \\(x \\in \\left\\{-2\\right\\}\\). On les exclut.",
+      "html": "\\(x + 2 \\neq 0 \\iff x \\neq -2\\).",
       "type": "texte"
      }
     ],
@@ -755,19 +550,11 @@
     "cond_tex": "\\frac{x^{2} - 1}{x + 2} > 0",
     "etapes": [
      {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
-      "type": "texte"
-     },
-     {
       "html": "Zéros du numérateur :",
       "type": "texte"
      },
      {
-      "html": "Trinôme \\(x^{2} - 1\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot (-1) = 4\\)",
-      "type": "texte"
-     },
-     {
-      "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 2\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -1\\) et \\(x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 1\\).",
+      "html": "\\(x^{2} - 1 = (x - 1)(x + 1)\\) : zéros \\(-1\\) et \\(1\\).",
       "type": "texte"
      },
      {
@@ -790,24 +577,24 @@
          "-",
          "||",
          "-",
-         "0",
-         "+",
-         "+",
-         "+"
-        ],
-        "label": "x + 1"
-       },
-       {
-        "cells": [
-         "-",
-         "||",
-         "-",
          "-",
          "-",
          "0",
          "+"
         ],
         "label": "x - 1"
+       },
+       {
+        "cells": [
+         "-",
+         "||",
+         "-",
+         "0",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "x + 1"
        },
        {
         "cells": [
@@ -839,7 +626,7 @@
       "var": "x"
      },
      {
-      "html": "On lit les intervalles où \\(\\frac{x^{2} - 1}{x + 2} > 0\\) : \\(x \\in \\left]-2 \\,;\\, -1\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[\\).",
+      "html": "\\(\\frac{x^{2} - 1}{x + 2} > 0 \\iff x \\in \\left]-2 \\,;\\, -1\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[\\).",
       "type": "texte"
      }
     ],
@@ -851,7 +638,7 @@
    }
   ],
   "f_tex": "\\ln\\left(\\frac{x^{2} - 1}{x + 2}\\right)",
-  "inter_tex": "E_{2}",
+  "inter_tex": "\\left]-2 \\,;\\, -1\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[",
   "ok": true
  },
  "ln(-x^2-1)": {
@@ -864,23 +651,11 @@
     "cond_tex": "-x^{2} - 1 > 0",
     "etapes": [
      {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "html": "Trinôme \\(-x^{2} - 1\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot (-1) \\cdot (-1) = -4\\) : aucun zéro ; le trinôme garde le signe de \\(a = -1\\), il est toujours négatif.",
       "type": "texte"
      },
      {
-      "html": "Zéros :",
-      "type": "texte"
-     },
-     {
-      "html": "Trinôme \\(-x^{2} - 1\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot (-1) \\cdot (-1) = -4\\)",
-      "type": "texte"
-     },
-     {
-      "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = -1\\), il est toujours négatif.",
-      "type": "texte"
-     },
-     {
-      "html": "On lit les intervalles où \\(-x^{2} - 1 > 0\\) : \\(x \\in \\varnothing\\).",
+      "html": "\\(-x^{2} - 1 > 0 \\iff x \\in \\varnothing\\).",
       "type": "texte"
      }
     ],
@@ -892,7 +667,6 @@
    }
   ],
   "f_tex": "\\ln\\left(-x^{2} - 1\\right)",
-  "inter_tex": "E_{1}",
   "ok": true
  },
  "ln(2x-6)": {
@@ -904,10 +678,6 @@
     "E_tex": "\\left]3 \\,;\\, +\\infty\\right[",
     "cond_tex": "2x - 6 > 0",
     "etapes": [
-     {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
-      "type": "texte"
-     },
      {
       "html": "\\(2x - 6 > 0 \\iff x > 3\\).",
       "type": "texte"
@@ -921,7 +691,6 @@
    }
   ],
   "f_tex": "\\ln\\left(2x - 6\\right)",
-  "inter_tex": "E_{1}",
   "ok": true
  },
  "ln(ln(ln(x)))": {
@@ -932,16 +701,7 @@
    {
     "E_tex": "\\left]0 \\,;\\, +\\infty\\right[",
     "cond_tex": "x > 0",
-    "etapes": [
-     {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
-      "type": "texte"
-     },
-     {
-      "html": "La condition s'écrit directement \\(x > 0\\).",
-      "type": "texte"
-     }
-    ],
+    "etapes": [],
     "genre": "ln",
     "num": 1,
     "resolu": true,
@@ -952,10 +712,6 @@
     "E_tex": "\\left]1 \\,;\\, +\\infty\\right[",
     "cond_tex": "\\ln(x) > 0",
     "etapes": [
-     {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
-      "type": "texte"
-     },
      {
       "html": "\\(\\ln(x) > 0 \\iff x > 1\\) (exp est croissante).",
       "type": "texte"
@@ -971,10 +727,6 @@
     "E_tex": "\\left]e \\,;\\, +\\infty\\right[",
     "cond_tex": "\\ln\\left(\\ln(x)\\right) > 0",
     "etapes": [
-     {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
-      "type": "texte"
-     },
      {
       "html": "\\(\\ln\\left(\\ln(x)\\right) > 0 \\iff \\ln(x) > 1\\) (exp est croissante).",
       "type": "texte"
@@ -992,7 +744,7 @@
    }
   ],
   "f_tex": "\\ln\\left(\\ln\\left(\\ln(x)\\right)\\right)",
-  "inter_tex": "\\left(E_{1} \\cap E_{2} \\cap E_{3}\\right)",
+  "inter_tex": "\\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]1 \\,;\\, +\\infty\\right[ \\cap \\left]e \\,;\\, +\\infty\\right[",
   "ok": true
  },
  "ln(x)/(ln(x)+2)": {
@@ -1003,16 +755,7 @@
    {
     "E_tex": "\\left]0 \\,;\\, +\\infty\\right[",
     "cond_tex": "x > 0",
-    "etapes": [
-     {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
-      "type": "texte"
-     },
-     {
-      "html": "La condition s'écrit directement \\(x > 0\\).",
-      "type": "texte"
-     }
-    ],
+    "etapes": [],
     "genre": "ln",
     "num": 1,
     "resolu": true,
@@ -1024,14 +767,6 @@
     "cond_tex": "\\ln(x) + 2 \\neq 0",
     "etapes": [
      {
-      "html": "Un dénominateur doit être non nul.",
-      "type": "texte"
-     },
-     {
-      "html": "On cherche les valeurs interdites : on résout \\(\\ln(x) + 2 = 0\\).",
-      "type": "texte"
-     },
-     {
       "html": "\\(\\ln(x) + 2 = 0 \\iff \\ln(x) = -2\\) (on soustrait 2).",
       "type": "texte"
      },
@@ -1040,7 +775,7 @@
       "type": "texte"
      },
      {
-      "html": "Valeurs interdites : \\(x \\in \\left\\{e^{-2}\\right\\}\\). On les exclut.",
+      "html": "\\(\\ln(x) + 2 \\neq 0 \\iff x \\neq e^{-2}\\).",
       "type": "texte"
      }
     ],
@@ -1052,7 +787,7 @@
    }
   ],
   "f_tex": "\\frac{\\ln(x)}{\\ln(x) + 2}",
-  "inter_tex": "E_{1} \\setminus \\left\\{e^{-2}\\right\\}",
+  "inter_tex": "\\left]0 \\,;\\, +\\infty\\right[ \\setminus \\left\\{e^{-2}\\right\\}",
   "ok": true
  },
  "ln(x-1)+ln(x+3)": {
@@ -1064,10 +799,6 @@
     "E_tex": "\\left]1 \\,;\\, +\\infty\\right[",
     "cond_tex": "x - 1 > 0",
     "etapes": [
-     {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
-      "type": "texte"
-     },
      {
       "html": "\\(x - 1 > 0 \\iff x > 1\\).",
       "type": "texte"
@@ -1084,10 +815,6 @@
     "cond_tex": "x + 3 > 0",
     "etapes": [
      {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
-      "type": "texte"
-     },
-     {
       "html": "\\(x + 3 > 0 \\iff x > -3\\).",
       "type": "texte"
      }
@@ -1100,7 +827,7 @@
    }
   ],
   "f_tex": "\\ln\\left(x - 1\\right) + \\ln\\left(x + 3\\right)",
-  "inter_tex": "\\left(E_{1} \\cap E_{2}\\right)",
+  "inter_tex": "\\left]1 \\,;\\, +\\infty\\right[ \\cap \\left]-3 \\,;\\, +\\infty\\right[",
   "ok": true
  },
  "ln(x^2)-2ln(x)": {
@@ -1112,14 +839,6 @@
     "E_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
     "cond_tex": "x^{2} > 0",
     "etapes": [
-     {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
-      "type": "texte"
-     },
-     {
-      "html": "Zéros :",
-      "type": "texte"
-     },
      {
       "html": "On met \\(x^{2}\\) en évidence : \\(x^{2} = x^{2}\\left(1\\right)\\)",
       "type": "texte"
@@ -1143,7 +862,7 @@
       "var": "x"
      },
      {
-      "html": "On lit les intervalles où \\(x^{2} > 0\\) : \\(x \\in \\mathbb{R} \\setminus \\left\\{0\\right\\}\\).",
+      "html": "\\(x^{2} > 0 \\iff x \\in \\mathbb{R} \\setminus \\left\\{0\\right\\}\\).",
       "type": "texte"
      }
     ],
@@ -1156,16 +875,7 @@
    {
     "E_tex": "\\left]0 \\,;\\, +\\infty\\right[",
     "cond_tex": "x > 0",
-    "etapes": [
-     {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
-      "type": "texte"
-     },
-     {
-      "html": "La condition s'écrit directement \\(x > 0\\).",
-      "type": "texte"
-     }
-    ],
+    "etapes": [],
     "genre": "ln",
     "num": 2,
     "resolu": true,
@@ -1174,7 +884,7 @@
    }
   ],
   "f_tex": "\\ln\\left(x^{2}\\right) - 2\\ln(x)",
-  "inter_tex": "E_{2}",
+  "inter_tex": "\\left]0 \\,;\\, +\\infty\\right[",
   "ok": true
  },
  "ln(x^2-4)": {
@@ -1187,19 +897,7 @@
     "cond_tex": "x^{2} - 4 > 0",
     "etapes": [
      {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
-      "type": "texte"
-     },
-     {
-      "html": "Zéros :",
-      "type": "texte"
-     },
-     {
-      "html": "Trinôme \\(x^{2} - 4\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot (-4) = 16\\)",
-      "type": "texte"
-     },
-     {
-      "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 4\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -2\\) et \\(x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 2\\).",
+      "html": "\\(x^{2} - 4 = (x - 2)(x + 2)\\) : zéros \\(-2\\) et \\(2\\).",
       "type": "texte"
      },
      {
@@ -1211,22 +909,22 @@
        {
         "cells": [
          "-",
-         "0",
-         "+",
-         "+",
-         "+"
-        ],
-        "label": "x + 2"
-       },
-       {
-        "cells": [
-         "-",
          "-",
          "-",
          "0",
          "+"
         ],
         "label": "x - 2"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "x + 2"
        },
        {
         "cells": [
@@ -1244,7 +942,7 @@
       "var": "x"
      },
      {
-      "html": "On lit les intervalles où \\(x^{2} - 4 > 0\\) : \\(x \\in \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[\\).",
+      "html": "\\(x^{2} - 4 > 0 \\iff x \\in \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[\\).",
       "type": "texte"
      }
     ],
@@ -1256,7 +954,6 @@
    }
   ],
   "f_tex": "\\ln\\left(x^{2} - 4\\right)",
-  "inter_tex": "E_{1}",
   "ok": true
  },
  "ln(x^2-4x)/(x-5)": {
@@ -1268,14 +965,6 @@
     "E_tex": "\\left]-\\infty \\,;\\, 0\\right[ \\cup \\left]4 \\,;\\, +\\infty\\right[",
     "cond_tex": "x^{2} - 4x > 0",
     "etapes": [
-     {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
-      "type": "texte"
-     },
-     {
-      "html": "Zéros :",
-      "type": "texte"
-     },
      {
       "html": "On met \\(x\\) en évidence : \\(x^{2} - 4x = x\\left(x - 4\\right)\\)",
       "type": "texte"
@@ -1326,7 +1015,7 @@
       "var": "x"
      },
      {
-      "html": "On lit les intervalles où \\(x^{2} - 4x > 0\\) : \\(x \\in \\left]-\\infty \\,;\\, 0\\right[ \\cup \\left]4 \\,;\\, +\\infty\\right[\\).",
+      "html": "\\(x^{2} - 4x > 0 \\iff x \\in \\left]-\\infty \\,;\\, 0\\right[ \\cup \\left]4 \\,;\\, +\\infty\\right[\\).",
       "type": "texte"
      }
     ],
@@ -1341,19 +1030,7 @@
     "cond_tex": "x - 5 \\neq 0",
     "etapes": [
      {
-      "html": "Un dénominateur doit être non nul.",
-      "type": "texte"
-     },
-     {
-      "html": "On cherche les valeurs interdites : on résout \\(x - 5 = 0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x - 5 = 0 \\iff x = 5\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Valeurs interdites : \\(x \\in \\left\\{5\\right\\}\\). On les exclut.",
+      "html": "\\(x - 5 \\neq 0 \\iff x \\neq 5\\).",
       "type": "texte"
      }
     ],
@@ -1365,7 +1042,7 @@
    }
   ],
   "f_tex": "\\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5}",
-  "inter_tex": "E_{1} \\setminus \\left\\{5\\right\\}",
+  "inter_tex": "\\left(\\left]-\\infty \\,;\\, 0\\right[ \\cup \\left]4 \\,;\\, +\\infty\\right[\\right) \\setminus \\left\\{5\\right\\}",
   "ok": true
  },
  "ln(x^2-5x+6)": {
@@ -1378,19 +1055,7 @@
     "cond_tex": "x^{2} - 5x + 6 > 0",
     "etapes": [
      {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
-      "type": "texte"
-     },
-     {
-      "html": "Zéros :",
-      "type": "texte"
-     },
-     {
-      "html": "Trinôme \\(x^{2} - 5x + 6\\) : \\(\\Delta = b^2 - 4ac = (-5)^2 - 4 \\cdot 1 \\cdot 6 = 1\\)",
-      "type": "texte"
-     },
-     {
-      "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 1\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = 2\\) et \\(x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 3\\).",
+      "html": "Trinôme \\(x^{2} - 5x + 6\\) : \\(\\Delta = b^2 - 4ac = (-5)^2 - 4 \\cdot 1 \\cdot 6 = 1\\), \\(\\sqrt{\\Delta} = 1\\) : zéros \\(x_1 = 2\\) et \\(x_2 = 3\\).",
       "type": "texte"
      },
      {
@@ -1435,7 +1100,7 @@
       "var": "x"
      },
      {
-      "html": "On lit les intervalles où \\(x^{2} - 5x + 6 > 0\\) : \\(x \\in \\left]-\\infty \\,;\\, 2\\right[ \\cup \\left]3 \\,;\\, +\\infty\\right[\\).",
+      "html": "\\(x^{2} - 5x + 6 > 0 \\iff x \\in \\left]-\\infty \\,;\\, 2\\right[ \\cup \\left]3 \\,;\\, +\\infty\\right[\\).",
       "type": "texte"
      }
     ],
@@ -1447,7 +1112,6 @@
    }
   ],
   "f_tex": "\\ln\\left(x^{2} - 5x + 6\\right)",
-  "inter_tex": "E_{1}",
   "ok": true
  },
  "sin(x)": {
@@ -1463,14 +1127,6 @@
     "E_tex": "\\left\\{0\\right\\}",
     "cond_tex": "-x^{2} \\geq 0",
     "etapes": [
-     {
-      "html": "Le contenu d'une racine carrée doit être positif ou nul.",
-      "type": "texte"
-     },
-     {
-      "html": "Zéros :",
-      "type": "texte"
-     },
      {
       "html": "On met \\(x^{2}\\) en évidence : \\(-x^{2} = x^{2}\\left(-1\\right)\\)",
       "type": "texte"
@@ -1510,7 +1166,7 @@
       "var": "x"
      },
      {
-      "html": "On lit les intervalles où \\(-x^{2} \\geq 0\\) (zéros inclus) : \\(x \\in \\left\\{0\\right\\}\\).",
+      "html": "\\(-x^{2} \\geq 0 \\iff x \\in \\left\\{0\\right\\}\\).",
       "type": "texte"
      }
     ],
@@ -1522,7 +1178,6 @@
    }
   ],
   "f_tex": "\\sqrt{-x^{2}}",
-  "inter_tex": "E_{1}",
   "ok": true
  },
  "sqrt(1-ln(x^2-4x+5))": {
@@ -1535,23 +1190,11 @@
     "cond_tex": "x^{2} - 4x + 5 > 0",
     "etapes": [
      {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
+      "html": "Trinôme \\(x^{2} - 4x + 5\\) : \\(\\Delta = b^2 - 4ac = (-4)^2 - 4 \\cdot 1 \\cdot 5 = -4\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
       "type": "texte"
      },
      {
-      "html": "Zéros :",
-      "type": "texte"
-     },
-     {
-      "html": "Trinôme \\(x^{2} - 4x + 5\\) : \\(\\Delta = b^2 - 4ac = (-4)^2 - 4 \\cdot 1 \\cdot 5 = -4\\)",
-      "type": "texte"
-     },
-     {
-      "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
-      "type": "texte"
-     },
-     {
-      "html": "On lit les intervalles où \\(x^{2} - 4x + 5 > 0\\) : \\(x \\in \\mathbb{R}\\).",
+      "html": "\\(x^{2} - 4x + 5 > 0 \\iff x \\in \\mathbb{R}\\).",
       "type": "texte"
      }
     ],
@@ -1565,10 +1208,6 @@
     "E_tex": "\\left[2 - \\sqrt{e - 1} \\,;\\, 2 + \\sqrt{e - 1}\\right]",
     "cond_tex": "1 - \\ln\\left(x^{2} - 4x + 5\\right) \\geq 0",
     "etapes": [
-     {
-      "html": "Le contenu d'une racine carrée doit être positif ou nul.",
-      "type": "texte"
-     },
      {
       "html": "\\(1 - \\ln\\left(x^{2} - 4x + 5\\right) \\geq 0 \\iff \\ln\\left(x^{2} - 4x + 5\\right) \\leq 1\\) (on isole \\(\\ln\\left(x^{2} - 4x + 5\\right)\\) du côté où son coefficient est positif).",
       "type": "texte"
@@ -1610,7 +1249,7 @@
    }
   ],
   "f_tex": "\\sqrt{1 - \\ln\\left(x^{2} - 4x + 5\\right)}",
-  "inter_tex": "E_{2}",
+  "inter_tex": "\\left[2 - \\sqrt{e - 1} \\,;\\, 2 + \\sqrt{e - 1}\\right]",
   "ok": true
  },
  "sqrt(ln(x)-x+2)": {
@@ -1621,16 +1260,7 @@
    {
     "E_tex": "\\left]0 \\,;\\, +\\infty\\right[",
     "cond_tex": "x > 0",
-    "etapes": [
-     {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
-      "type": "texte"
-     },
-     {
-      "html": "La condition s'écrit directement \\(x > 0\\).",
-      "type": "texte"
-     }
-    ],
+    "etapes": [],
     "genre": "ln",
     "num": 1,
     "resolu": true,
@@ -1641,10 +1271,6 @@
     "E_tex": "\\left[{\\approx}\\,0{,}1586 \\,;\\, {\\approx}\\,3{,}1462\\right]",
     "cond_tex": "\\ln(x) - x + 2 \\geq 0",
     "etapes": [
-     {
-      "html": "Le contenu d'une racine carrée doit être positif ou nul.",
-      "type": "texte"
-     },
      {
       "html": "\\(\\ln(x) - x + 2\\) est défini pour \\(x \\in \\left]0 \\,;\\, +\\infty\\right[\\).",
       "type": "texte"
@@ -1694,7 +1320,7 @@
       "type": "texte"
      },
      {
-      "html": "On lit le tableau : \\(\\ln(x) - x + 2 \\geq 0 \\iff x \\in \\left[{\\approx}\\,0{,}1586 \\,;\\, {\\approx}\\,3{,}1462\\right]\\).",
+      "html": "\\(\\ln(x) - x + 2 \\geq 0 \\iff x \\in \\left[{\\approx}\\,0{,}1586 \\,;\\, {\\approx}\\,3{,}1462\\right]\\).",
       "type": "texte"
      }
     ],
@@ -1706,7 +1332,7 @@
    }
   ],
   "f_tex": "\\sqrt{\\ln(x) - x + 2}",
-  "inter_tex": "\\left(E_{1} \\cap E_{2}\\right)",
+  "inter_tex": "\\left]0 \\,;\\, +\\infty\\right[ \\cap \\left[{\\approx}\\,0{,}1586 \\,;\\, {\\approx}\\,3{,}1462\\right]",
   "ok": true
  },
  "sqrt(x ln(x+2))": {
@@ -1718,10 +1344,6 @@
     "E_tex": "\\left]-2 \\,;\\, +\\infty\\right[",
     "cond_tex": "x + 2 > 0",
     "etapes": [
-     {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
-      "type": "texte"
-     },
      {
       "html": "\\(x + 2 > 0 \\iff x > -2\\).",
       "type": "texte"
@@ -1737,10 +1359,6 @@
     "E_tex": "\\left]-2 \\,;\\, -1\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[",
     "cond_tex": "x\\,\\ln\\left(x + 2\\right) \\geq 0",
     "etapes": [
-     {
-      "html": "Le contenu d'une racine carrée doit être positif ou nul.",
-      "type": "texte"
-     },
      {
       "html": "<b>Signe de \\(\\ln\\left(x + 2\\right)\\)</b>",
       "type": "texte"
@@ -1810,7 +1428,7 @@
       "type": "texte"
      },
      {
-      "html": "On lit le tableau : \\(x\\,\\ln\\left(x + 2\\right) \\geq 0 \\iff x \\in \\left]-2 \\,;\\, -1\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[\\).",
+      "html": "\\(x\\,\\ln\\left(x + 2\\right) \\geq 0 \\iff x \\in \\left]-2 \\,;\\, -1\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[\\).",
       "type": "texte"
      }
     ],
@@ -1822,7 +1440,7 @@
    }
   ],
   "f_tex": "\\sqrt{x\\,\\ln\\left(x + 2\\right)}",
-  "inter_tex": "\\left(E_{1} \\cap E_{2}\\right)",
+  "inter_tex": "\\left]-2 \\,;\\, +\\infty\\right[ \\cap \\left]-2 \\,;\\, -1\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[",
   "ok": true
  },
  "sqrt(x ln(x+2)+x)": {
@@ -1834,10 +1452,6 @@
     "E_tex": "\\left]-2 \\,;\\, +\\infty\\right[",
     "cond_tex": "x + 2 > 0",
     "etapes": [
-     {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
-      "type": "texte"
-     },
      {
       "html": "\\(x + 2 > 0 \\iff x > -2\\).",
       "type": "texte"
@@ -1853,10 +1467,6 @@
     "E_tex": "\\left]-2 \\,;\\, e^{-1} - 2\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[",
     "cond_tex": "x\\,\\ln\\left(x + 2\\right) + x \\geq 0",
     "etapes": [
-     {
-      "html": "Le contenu d'une racine carrée doit être positif ou nul.",
-      "type": "texte"
-     },
      {
       "html": "On factorise : \\(x\\,\\ln\\left(x + 2\\right) + x = x\\,\\left(\\ln\\left(x + 2\\right) + 1\\right)\\).",
       "type": "texte"
@@ -1934,7 +1544,7 @@
       "type": "texte"
      },
      {
-      "html": "On lit le tableau : \\(x\\,\\ln\\left(x + 2\\right) + x \\geq 0 \\iff x \\in \\left]-2 \\,;\\, e^{-1} - 2\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[\\).",
+      "html": "\\(x\\,\\ln\\left(x + 2\\right) + x \\geq 0 \\iff x \\in \\left]-2 \\,;\\, e^{-1} - 2\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[\\).",
       "type": "texte"
      }
     ],
@@ -1946,7 +1556,7 @@
    }
   ],
   "f_tex": "\\sqrt{x\\,\\ln\\left(x + 2\\right) + x}",
-  "inter_tex": "\\left(E_{1} \\cap E_{2}\\right)",
+  "inter_tex": "\\left]-2 \\,;\\, +\\infty\\right[ \\cap \\left]-2 \\,;\\, e^{-1} - 2\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[",
   "ok": true
  },
  "sqrt(x-1)/sqrt(x-1)": {
@@ -1959,10 +1569,6 @@
     "cond_tex": "x - 1 \\geq 0",
     "etapes": [
      {
-      "html": "Le contenu d'une racine carrée doit être positif ou nul.",
-      "type": "texte"
-     },
-     {
       "html": "\\(x - 1 \\geq 0 \\iff x \\geq 1\\).",
       "type": "texte"
      }
@@ -1974,39 +1580,23 @@
     "titre": "racine carrée"
    },
    {
-    "E_tex": "\\mathbb{R} \\setminus \\left\\{1\\right\\}",
-    "cond_tex": "\\sqrt{x - 1} \\neq 0",
+    "E_tex": "\\left]1 \\,;\\, +\\infty\\right[",
+    "cond_tex": "x - 1 > 0",
     "etapes": [
      {
-      "html": "Un dénominateur doit être non nul.",
-      "type": "texte"
-     },
-     {
-      "html": "On cherche les valeurs interdites : on résout \\(\\sqrt{x - 1} = 0\\).",
-      "type": "texte"
-     },
-     {
-      "html": "\\(\\sqrt{x - 1} = 0 \\iff x - 1 = 0\\)",
-      "type": "texte"
-     },
-     {
-      "html": "\\(x - 1 = 0 \\iff x = 1\\).",
-      "type": "texte"
-     },
-     {
-      "html": "Valeurs interdites : \\(x \\in \\left\\{1\\right\\}\\). On les exclut.",
+      "html": "\\(x - 1 > 0 \\iff x > 1\\).",
       "type": "texte"
      }
     ],
-    "genre": "den",
+    "genre": "rden",
     "num": 2,
     "resolu": true,
-    "source_tex": "\\sqrt{x - 1}",
-    "titre": "dénominateur"
+    "source_tex": "x - 1",
+    "titre": "racine au dénominateur"
    }
   ],
   "f_tex": "\\frac{\\sqrt{x - 1}}{\\sqrt{x - 1}}",
-  "inter_tex": "E_{1} \\setminus \\left\\{1\\right\\}",
+  "inter_tex": "\\left[1 \\,;\\, +\\infty\\right[ \\cap \\left]1 \\,;\\, +\\infty\\right[",
   "ok": true
  },
  "sqrt(x^2+2x-3)": {
@@ -2019,19 +1609,7 @@
     "cond_tex": "x^{2} + 2x - 3 \\geq 0",
     "etapes": [
      {
-      "html": "Le contenu d'une racine carrée doit être positif ou nul.",
-      "type": "texte"
-     },
-     {
-      "html": "Zéros :",
-      "type": "texte"
-     },
-     {
-      "html": "Trinôme \\(x^{2} + 2x - 3\\) : \\(\\Delta = b^2 - 4ac = 2^2 - 4 \\cdot 1 \\cdot (-3) = 16\\)",
-      "type": "texte"
-     },
-     {
-      "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 4\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -3\\) et \\(x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 1\\).",
+      "html": "Trinôme \\(x^{2} + 2x - 3\\) : \\(\\Delta = b^2 - 4ac = 2^2 - 4 \\cdot 1 \\cdot (-3) = 16\\), \\(\\sqrt{\\Delta} = 4\\) : zéros \\(x_1 = -3\\) et \\(x_2 = 1\\).",
       "type": "texte"
      },
      {
@@ -2076,7 +1654,7 @@
       "var": "x"
      },
      {
-      "html": "On lit les intervalles où \\(x^{2} + 2x - 3 \\geq 0\\) (zéros inclus) : \\(x \\in \\left]-\\infty \\,;\\, -3\\right] \\cup \\left[1 \\,;\\, +\\infty\\right[\\).",
+      "html": "\\(x^{2} + 2x - 3 \\geq 0 \\iff x \\in \\left]-\\infty \\,;\\, -3\\right] \\cup \\left[1 \\,;\\, +\\infty\\right[\\).",
       "type": "texte"
      }
     ],
@@ -2088,7 +1666,6 @@
    }
   ],
   "f_tex": "\\sqrt{x^{2} + 2x - 3}",
-  "inter_tex": "E_{1}",
   "ok": true
  },
  "x+*2": {
@@ -2136,16 +1713,7 @@
    {
     "E_tex": "\\left]0 \\,;\\, +\\infty\\right[",
     "cond_tex": "x > 0",
-    "etapes": [
-     {
-      "html": "Une puissance a^b d'exposant non entier (a^b = e^{b ln a}) exige une base strictement positive.",
-      "type": "texte"
-     },
-     {
-      "html": "La condition s'écrit directement \\(x > 0\\).",
-      "type": "texte"
-     }
-    ],
+    "etapes": [],
     "genre": "pos",
     "num": 1,
     "resolu": true,
@@ -2154,7 +1722,6 @@
    }
   ],
   "f_tex": "x^{x}",
-  "inter_tex": "E_{1}",
   "ok": true
  },
  "y = ln(x-1)": {
@@ -2166,10 +1733,6 @@
     "E_tex": "\\left]1 \\,;\\, +\\infty\\right[",
     "cond_tex": "x - 1 > 0",
     "etapes": [
-     {
-      "html": "L'argument d'un logarithme doit être strictement positif.",
-      "type": "texte"
-     },
      {
       "html": "\\(x - 1 > 0 \\iff x > 1\\).",
       "type": "texte"
@@ -2183,7 +1746,6 @@
    }
   ],
   "f_tex": "\\ln\\left(x - 1\\right)",
-  "inter_tex": "E_{1}",
   "ok": true
  }
 }

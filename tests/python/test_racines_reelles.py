@@ -254,7 +254,7 @@ class TestCoefficientsEntiersED(unittest.TestCase):
     def test_equation_entiere(self):
         res = ed.analyser("1/(1/2*x^2-x+1/3)")
         textes = " ".join(e["html"] for c in res["conditions"] for e in c["etapes"] if "html" in e)
-        self.assertIn(r"On résout \(3x^{2} - 6x + 2 = 0\)", textes)
+        self.assertIn(r"Trinôme \(3x^{2} - 6x + 2\)", textes)
 
     def test_ensembles_inchanges(self):
         self.assertEqual(ed.analyser("ln(x^2/3-1/2)")["ED_tex"],
