@@ -185,17 +185,50 @@ def _en_quotient(n):
     return Op("/", N, _produit(bas)) if bas else N
 
 
+def _contient_x(n):
+    if isinstance(n, X):
+        return True
+    if isinstance(n, Neg):
+        return _contient_x(n.a)
+    if isinstance(n, Fn):
+        return _contient_x(n.a)
+    if isinstance(n, Op):
+        return _contient_x(n.a) or _contient_x(n.b)
+    return False
+
+
+def _ordre_naturel(n):
+    """Ordre d'écriture des sommes : termes en x d'abord (ordre de SymPy), constantes ensuite, les
+    constantes positives avant les négatives (« ln 3 − 1 », jamais « −1 + ln 3 »)."""
+    if isinstance(n, Neg):
+        return Neg(_ordre_naturel(n.a))
+    if isinstance(n, Fn):
+        return Fn(n.nom, _ordre_naturel(n.a))
+    if not isinstance(n, Op):
+        return n
+    if n.op not in ("+", "-"):
+        return Op(n.op, _ordre_naturel(n.a), _ordre_naturel(n.b))
+    termes = [(sg, _ordre_naturel(t)) for sg, t in _termes(n)]
+    termes = [(sg, t) if not (isinstance(t, Nb) and t.v < 0) else (-sg, Nb(-t.v)) for sg, t in termes]
+    termes.sort(key=lambda st: (not _contient_x(st[1]) , (st[0] < 0) and not _contient_x(st[1])))
+    out = termes[0][1] if termes[0][0] > 0 else Neg(termes[0][1])
+    for sg, t in termes[1:]:
+        out = Op("+" if sg > 0 else "-", out, t)
+    return out
+
+
 def _simplifier(n):
     """Met f' en forme factorisée (jamais développée) : plus facile à lire, et les
     zéros s'y lisent directement — c'est la convention demandée pour la suite. Le résultat
     est écrit en un quotient numérateur / dénominateur (_en_quotient)."""
     sp = _sympy()
     if sp is None:
-        return _en_quotient(_nettoyer(n))
+        return _en_quotient(_ordre_naturel(_nettoyer(n)))
     try:
-        return _en_quotient(_nettoyer(arbre_depuis_sympy(sp.factor(en_sympy(n)))))
+        e = en_sympy(n)
+        return _en_quotient(_ordre_naturel(_nettoyer(arbre_depuis_sympy(sp.factor(e)))))
     except Exception:
-        return _en_quotient(_nettoyer(n))
+        return _en_quotient(_ordre_naturel(_nettoyer(n)))
 
 
 # =====================================================================

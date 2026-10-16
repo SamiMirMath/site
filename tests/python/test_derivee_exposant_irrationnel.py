@@ -54,6 +54,17 @@ class TestDeriveeExposantIrrationnel(unittest.TestCase):
         self.assertEqual(L["f'(x)"], ["x", "0", "+"])
         self.assertEqual([(e["genre"], e["x_tex"]) for e in r["extrema"]], [("minimum local", "0")])
 
+    def test_ordre_naturel_constante_en_dernier(self):
+        """« ln 3 − 1 », jamais « −1 + ln 3 » : constantes positives avant négatives, après les termes en x."""
+        r = dv.etudier("x^(ln(3)-1)")
+        self.assertEqual(r["deriv_tex"], r"\frac{\ln(3) - 1}{x^{2 - \ln(3)}}")
+        for entree in CAS + ["x^(ln(3)-1)", "x^(ln(3)-1)+x", "x^(ln(3)-2)*ln(x)", "(ln(3)-1)*x^2", "x^2+ln(2)-3"]:
+            r = dv.etudier(entree)
+            textes = [r.get("deriv_tex", "")] + [e["html"] for e in r.get("deriv_etapes", [])]
+            for t in textes:
+                with self.subTest(f=entree):
+                    self.assertNotRegex(t, r"(?<![\w}])-\d+ \+ \\(ln|sqrt)", t)
+
     def test_conforme_oracle(self):
         for entree in CAS:
             res, arbre, ED = ed._analyser(entree)
