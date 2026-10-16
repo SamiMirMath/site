@@ -138,7 +138,7 @@ class TestRacinesExactes(unittest.TestCase):
         self.assertEqual(ed.tex(ed.lire("x^(1/4)")), r"\sqrt[4]{x}")
         self.assertEqual(ed.tex(ed.lire("x^(3/2)")), r"\sqrt{x^{3}}")
         self.assertEqual(ed.tex(ed.lire("x^(5/3)")), r"\sqrt[3]{x^{5}}")
-        self.assertEqual(ed.tex(ed.lire("x^(-1/3)")), r"x^{\frac{-1}{3}}")   # inchangé (exposant négatif)
+        self.assertEqual(ed.tex(ed.lire("x^(-1/3)")), r"x^{-\frac{1}{3}}")   # le signe devant la fraction
 
     def test_aplatir_u_puissance_p_sur_q(self):
         c, facs = ed.aplatir(ed.lire("x^(2/3)"))

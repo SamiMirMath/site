@@ -350,6 +350,8 @@ def tex(n):
         # n'émet jamais "/" à l'intérieur d'un nombre) : on l'écrit en \frac{}{}.
         if "/" in n.txt:
             num, den = n.txt.split("/")
+            if num.startswith("-"):          # le signe devant la fraction : -\frac{1}{3}, jamais \frac{-1}{3}
+                return "-" + r"\frac{" + num[1:] + "}{" + den + "}"
             return r"\frac{" + num + "}{" + den + "}"
         return n.txt.replace(",", "{,}").replace(".", "{,}")
     if isinstance(n, X):
@@ -372,6 +374,8 @@ def tex(n):
     if n.op == "-":
         return tex(n.a) + " - " + par(n.b, 2)
     if n.op == "/":
+        if isinstance(n.a, Neg) and isinstance(n.a.a, Nb) and isinstance(n.b, Nb):     # exposant -1/3 : -\frac{1}{3}
+            return "-" + r"\frac{" + tex(n.a.a) + "}{" + tex(n.b) + "}"
         return r"\frac{" + tex(n.a) + "}{" + tex(n.b) + "}"
     if n.op == "*":
         g, d = par(n.a, 1.5), par(n.b, 2)
@@ -1179,7 +1183,7 @@ def resoudre_rat(R, rel, v, items, nom_expr=None):
     lignes = []
     tous = [(f, False) for f in fN] + [(f, True) for f in fD]
     if const != 1:                             # guide de rédaction, R7 : une ligne par constante, positive ou négative
-        lignes.append({"label": qtex(const), "cells": cellules(lambda x: float(const), [], k, test, crit)})
+        lignes.append({"label": qtex(const), "cells": cellules(lambda x: float(const), [], k, test, crit), "constante": True})
     for f, est_den in tous:                    # ... et une ligne par facteur, même évident
         poly = f["poly"]
         mult = f["mult"]
@@ -1206,6 +1210,7 @@ def resoudre_rat(R, rel, v, items, nom_expr=None):
         if fin[j] == "||":
             for ligne in lignes:
                 ligne["cells"][j] = "||"
+    _barres_simples(lignes)
     fusionne = not (len(tous) + (1 if const != 1 else 0) > 1 or fD)      # une seule ligne : elle est aussi la ligne finale
     if not fusionne:
         lignes.append({"label": expr, "cells": fin, "final": True})
@@ -1227,6 +1232,19 @@ def resoudre_rat(R, rel, v, items, nom_expr=None):
     symb = ">" if rel == ">" else r"\geq"
     items.append(txt(rf"\({expr} {symb} 0 \iff {v} \in {ens_tex(S)}\)."))
     return S
+
+
+def _barres_simples(lignes):
+    """Guide R7 : sur la colonne d'une valeur critique, une ligne de facteur qui ne s'y annule pas porte un trait simple
+    « | » (le signe est celui des deux côtés) ; « ‖ » est réservé aux valeurs interdites, « 0 » aux zéros. Les lignes de
+    constantes gardent leur signe."""
+    for ligne in lignes:
+        constante = ligne.pop("constante", False)
+        if constante or ligne.get("final"):
+            continue
+        for j in range(1, len(ligne["cells"]), 2):
+            if ligne["cells"][j] in ("+", "-"):
+                ligne["cells"][j] = "|"
 
 
 def cellules(fn, racines, k, test, crit):
@@ -2233,7 +2251,7 @@ def phrase_evidente(h, k, D, P, Z):
     return None
 
 
-def tableau_facteurs(c, infos, rel, expr_tex, items):
+def tableau_facteurs(c, infos, rel, expr_tex, items, barres=False):
     """Tableau de signes de c·∏ h_i^{k_i} ; renvoie {expr rel 0} (rel : '>' ou '>=').
     Guide de rédaction (R7) : une ligne par facteur, évident ou non, et par constante (positive ou négative), puis la
     ligne du quotient ; aucune phrase sur le signe d'un facteur, aucune conclusion « donc … est du signe de … »."""
@@ -2271,7 +2289,7 @@ def tableau_facteurs(c, infos, rel, expr_tex, items):
             vals.append(crit[i].val)
     lignes = []
     if c != 1:
-        lignes.append({"label": qtex(c), "cells": ["-" if c < 0 else "+"] * len(vals)})
+        lignes.append({"label": qtex(c), "cells": ["-" if c < 0 else "+"] * len(vals), "constante": True})
     for (h, k), (D, P, Z) in infos:
         lab = tex(h) if prec(h) >= 3 else r"\left(" + tex(h) + r"\right)"
         if abs(k) > 1:
@@ -2293,6 +2311,10 @@ def tableau_facteurs(c, infos, rel, expr_tex, items):
             fin.append("-" if col.count("-") % 2 else "+")
     lignes.append({"label": expr_tex, "cells": fin, "final": True})
     crit, lignes, fin = epurer_tableau(crit, lignes, fin)
+    if barres:
+        _barres_simples(lignes)
+    for ligne in lignes:
+        ligne.pop("constante", None)
     n = len(crit)
     if len(lignes) > 1:
         items.append({"type": "tableau", "var": "x", "crit": [p.tex for p in crit], "rows": lignes})
@@ -2362,7 +2384,7 @@ def resoudre_general(A, rel, items):
                 Zs = union(Zs, Z)
         Zs = inter(Zs, Dtot)
         return Zs
-    return tableau_facteurs(c, infos, rel, tex(A), items)
+    return tableau_facteurs(c, infos, rel, tex(A), items, barres=True)
 
 
 # =====================================================================
@@ -2640,7 +2662,6 @@ def _texte(res):
                 out.append("   Tableau de signes (" + it["var"] + ") : " + " | ".join(it["crit"]))
                 for r in it["rows"]:
                     out.append(f"      {r['label']:<28} " + " ".join(f"{x:>2}" for x in r["cells"]))
-        out.append(f"   E_{c['num']} = {c['E_tex']}")
     if res["complet"]:
         out.append("\nED = " + (res["inter_tex"] + " = " if "inter_tex" in res else "") + res["ED_tex"])
     return "\n".join(out)

@@ -67,10 +67,16 @@ Si une hypothèse n'est pas vérifiée, la règle n'est pas appliquée (phrase d
 **R10. Ensemble de définition** : une carte par condition, sans phrase de rappel de la règle, « condition
 ⇔ solution » ; une racine au dénominateur = une seule condition A > 0 ; Δ au plus une fois, en une ligne ;
 ordre des termes de l'élève (4 − x², pas −x² + 4) ; a² − b² factorisé directement ((2 − x)(2 + x)), sinon
-Δ ; un seul tableau ; dernière ligne avec les ensembles : « ED = ]−1 ; +∞[ ∩ ]−2 ; 2[ = ]−1 ; 2[ ».
+Δ ; un seul tableau ; aucune répétition : le titre de la carte ne porte pas l'inégalité (« Condition 1
+(logarithme) »), elle s'écrit une seule fois, dans la première ligne « x + 1 > 0 ⇔ x > −1 », et il n'y a pas de ligne
+« E₁ = … » ; dernière ligne avec les ensembles : « ED = ]−1 ; +∞[ ∩ ]−2 ; 2[ = ]−1 ; 2[ ». Dans un tableau,
+« ‖ » est réservé aux valeurs interdites ; une ligne de facteur qui ne s'annule pas sur la colonne d'une valeur
+critique y porte un trait simple « | » (en −2 pour 2 − x, en 2 pour 2 + x).
 
-**R11. Dérivée** : pas de ligne pour une dérivée de référence (x², affine) ni de « + 0 » ; u, u', v, v'
-sur une ligne ; l'étape délicate (chasser une racine du numérateur) est écrite.
+**R11. Dérivée** : les justifications restent TOUJOURS, car les élèves les oublient : « (x²)' = 2x (règle de la
+puissance) », « (ln x)' = 1/x (règle de base) », règle du produit, du quotient, de la chaîne (« de la forme √u »).
+Seules les opérations neutres sont supprimées : jamais « + 0 », « − 0 », « · 1 », « 1 · » ni équivalents
+(u'(x) = 8x, pas 8x + 0). u, u', v, v' sur une ligne ; l'étape délicate (chasser une racine du numérateur) est écrite.
 
 Inchangé : interdiction des équivalents, phrase de repli, virgule décimale, garde-fou des valeurs.
 
@@ -195,15 +201,16 @@ Limite finie : pas d'asymptote verticale, trou dans le graphique en (1 ; 1).
 ### 7. Ensemble de définition : ln(x + 1)/√(4 − x²)
 
 ```
-Logarithme : x + 1 > 0 ⇔ x > −1.
+Condition 1 (logarithme)
+x + 1 > 0 ⇔ x > −1
 
-Racine au dénominateur : 4 − x² > 0.
+Condition 2 (racine au dénominateur)
 4 − x² = (2 − x)(2 + x) : zéros −2 et 2.
 x       | −∞    −2     2     +∞
 2 − x   |   +   |   +   0   −
 2 + x   |   −   0   +   |   +
 4 − x²  |   −   0   +   0   −
-4 − x² > 0 ⇔ x ∈ ]−2 ; 2[.
+4 − x² > 0 ⇔ x ∈ ]−2 ; 2[
 
 ED = ]−1 ; +∞[ ∩ ]−2 ; 2[ = ]−1 ; 2[
 ```

@@ -26,7 +26,7 @@ from fractions import Fraction as F
 
 from ensemble_def import (
     Nb, X, E, Neg, Op, Fn,
-    lire, tex as _tex_ed, prec, valeur_constante, Num, Iv, REELS, fusion, inter, ens_tex,
+    lire, tex, prec, valeur_constante, Num, Iv, REELS, fusion, inter, ens_tex,
     contient, proche, evaluer, sans_x, qtex, ptex, pn, deg, peval, pdivlin, pmul, nul, padd, pscal,
     decomposer, r_norm, json_strict, ajouter_saisie,
     _sympy, en_sympy_reel, arbre_depuis_sympy, num_sympy, _SP,
@@ -34,13 +34,6 @@ from ensemble_def import (
     signe_facteur, tableau_facteurs, en_sympy, aplatir, domaine, complement,
 )
 
-
-_FRAC_NEG = re.compile(r"\\frac\{-(\d+)\}\{(\d+)\}")
-
-
-def tex(n):
-    """tex() de l'ensemble de définition, avec le signe devant la fraction : -\\frac{1}{3}, jamais \\frac{-1}{3}."""
-    return _FRAC_NEG.sub(r"-\\frac{\1}{\2}", _tex_ed(n))
 
 __all__ = ["etudier", "etudier_json", "apercu_json"]
 

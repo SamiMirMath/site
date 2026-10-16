@@ -96,7 +96,7 @@ class TestEnsembleDefinition(unittest.TestCase):
         (tab,) = self.tableaux("sqrt((x+2)^2*(x-1))")
         self.assertEqual(tab["crit"], ["-2", "1"])
         self.assertEqual([l["label"] for l in tab["rows"]], ["x - 1", r"\left(x + 2\right)^{2}", r"\left(x + 2\right)^{2}\,\left(x - 1\right)"])
-        self.assertEqual(tab["rows"][1]["cells"], ["+", "0", "+", "+", "+"])
+        self.assertEqual(tab["rows"][1]["cells"], ["+", "0", "+", "|", "+"])
         self.assertEqual(tab["rows"][-1]["cells"], ["-", "0", "-", "0", "+"])      # zéro du carré : colonne conservée
 
     def test_constantes_positive_et_negative_ont_leur_ligne(self):
@@ -124,6 +124,24 @@ class TestEnsembleDefinition(unittest.TestCase):
             r"\(4 - x^{2} > 0 \iff x \in \left]-2 \,;\, 2\right[\)."])
         self.assertEqual(r["inter_tex"], r"\left]-1 \,;\, +\infty\right[ \cap \left]-2 \,;\, 2\right[")
         self.assertEqual(r["ED_tex"], r"\left]-1 \,;\, 2\right[")
+
+    def test_trait_simple_sur_un_facteur_non_nul_et_double_barre_reservee(self):
+        (tab,) = self.tableaux("ln(x+1)/sqrt(4-x^2)")
+        lignes = {l["label"]: l["cells"] for l in tab["rows"]}
+        self.assertEqual(lignes["2 - x"], ["+", "|", "+", "0", "-"])         # en −2 : 2 − x ne s'annule pas
+        self.assertEqual(lignes["2 + x"], ["-", "0", "+", "|", "+"])         # en 2 : 2 + x ne s'annule pas
+        self.assertEqual(lignes["4 - x^{2}"], ["-", "0", "+", "0", "-"])
+        for entree in ("ln(x+1)/sqrt(4-x^2)", "ln(x^2-4x)", "ln(2x^2-8)", "sqrt(x^2-3x+2)"):    # pas de ‖ sans valeur interdite
+            for t in self.tableaux(entree):
+                self.assertFalse(any("||" in l["cells"] for l in t["rows"]), entree)
+
+    def test_aucune_repetition_dans_une_carte(self):
+        for entree in ("ln(x+1)/sqrt(4-x^2)", "1/(x-3)", "ln(x^2-4x)/(x-5)", "sqrt(x)/(x^2-1)"):
+            for c in ed.analyser(entree)["conditions"]:
+                textes = [e["html"] for e in c["etapes"] if e.get("type") == "texte"]
+                with self.subTest(f=entree, carte=c["num"]):
+                    self.assertEqual(len(textes), len(set(textes)))
+                    self.assertLessEqual(sum(t.startswith(r"\(" + c["cond_tex"]) for t in textes), 1)   # écrite une fois (sinon dans le titre de la page)
 
     def test_delta_ecrit_une_seule_fois(self):
         for entree in ("1/sqrt(x^2-5)", "sqrt(x^2-3x+2)", "ln(x^3-3x)", "1/(x^2-5)"):

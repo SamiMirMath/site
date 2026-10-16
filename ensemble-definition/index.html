@@ -65,6 +65,8 @@ details ul{margin:.4em 0 0;padding-left:1.2em}
 .tsigne .m{color:var(--bad);font-weight:700}
 /* Double barre d'une valeur interdite : un seul trait double, centré dans la colonne (donc sous la valeur
    écrite dans l'en-tête), continu d'une ligne à l'autre (le pseudo-élément recouvre les filets horizontaux). */
+.tsigne td.bar{position:relative;padding:5px 2px}
+.tsigne td.bar::after{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;border-left:2px solid var(--fg);transform:translateX(-50%);pointer-events:none}
 .tsigne td.vi{position:relative;padding:5px 2px}
 .tsigne td.vi::after{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:3px;transform:translateX(-50%);border-left:2px solid var(--fg);border-right:2px solid var(--fg);background:var(--card);z-index:1;pointer-events:none}
 .cache{display:none}
@@ -249,7 +251,7 @@ $("calculer").onclick=calculer;
 /* ---------- affichage ---------- */
 function tableau(t){
   const k=t.crit.length;
-  const cl=s=>s==="+"?'<td class="p">+</td>':s==="-"?'<td class="m">−</td>':s==="||"?'<td class="vi"></td>':s==="x"?'<td class="hors" aria-label="hors du domaine de définition"></td>':`<td>${s}</td>`;
+  const cl=s=>s==="+"?'<td class="p">+</td>':s==="-"?'<td class="m">−</td>':s==="||"?'<td class="vi"></td>':s==="|"?'<td class="bar"></td>':s==="x"?'<td class="hors" aria-label="hors du domaine de définition"></td>':`<td>${s}</td>`;
   let h='<div class="tsigne"><table><tr><td class="lab">'+K(t.var)+'</td><td>'+K("-\\infty")+'</td>';
   for(let i=0;i<k;i++) h+='<td></td><td>'+K(t.crit[i])+'</td>';
   h+='<td></td><td>'+K("+\\infty")+'</td></tr>';
@@ -259,9 +261,11 @@ function tableau(t){
 function carteCondition(c){
   if(c.detail) console.error(c.detail);
   const d=document.createElement("div"); d.className="card cond";
-  let h=`<h3>Condition ${c.num}<span class="badge">${c.titre}</span></h3><div class="c">${K(c.cond_tex)}</div>`;
+  /* le titre ne porte pas l'inégalité : elle s'écrit dans la première ligne (« condition ⇔ solution »), sinon ici */
+  const ecrite=c.etapes.some(it=>it.type==="texte"&&it.html.startsWith("\\("+c.cond_tex));
+  let h=`<h3>Condition ${c.num}<span class="badge">${c.titre}</span></h3>`+(ecrite?"":`<div class="c">${K(c.cond_tex)}</div>`);
   c.etapes.forEach(it=>{ h+= it.type==="tableau"?tableau(it):`<div class="etape">${it.html}</div>`; });
-  h+= c.resolu?`<div class="res">${K(`E_{${c.num}} = `+c.E_tex)}</div>`:'<div class="res err">Condition non résolue.</div>';
+  if(!c.resolu) h+='<div class="res err">Condition non résolue.</div>';
   d.innerHTML=h; math(d); return d;
 }
 let numCalcul=0;

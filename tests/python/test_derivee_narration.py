@@ -57,6 +57,18 @@ class TestSansOperationNeutre(unittest.TestCase):
         self.assertIn(r"u'(x) = 8x\)", h)
         self.assertNotIn("8x + 0", h)
 
+    def test_justification_d_une_derivee_de_reference_presente(self):
+        """Guide R11 : les justifications restent TOUJOURS (les élèves les oublient)."""
+        def etapes(entree):
+            return " ".join(it["html"] for it in dv.etudier(entree)["deriv_etapes"])
+        self.assertIn(r"\(\left(x^{2}\right)' = 2x\) (règle de la puissance)", etapes("x^2*ln(x)"))
+        self.assertIn(r"\(\left(x^{3}\right)' = 3x^{2}\) (règle de la puissance)", etapes("(x^3+2x)^4*e^x"))
+        self.assertIn(r"\(\left(\ln(x)\right)' = \frac{1}{x}\) (règle de base)", etapes("x^2*ln(x)"))
+        self.assertIn(r"\(\left(e^{x}\right)' = e^{x}\) (règle de base)", etapes("(x^3+2x)^4*e^x"))
+        self.assertIn("règle du quotient", etapes("sqrt(4x^2+1)/(x+2)"))
+        self.assertIn("règle du produit", etapes("x^2*ln(x)"))
+        self.assertIn(r"est de la forme \(\sqrt{u}\)", etapes("sqrt(4x^2+1)/(x+2)"))
+
     def test_pas_de_den_dans_les_libelles_du_tableau(self):
         for entree in ("sqrt(4x^2+1)/(x+2)", "(2x+1)/(x^2+1)", "ln(x^2+1)/x"):
             for ligne in dv.etudier(entree)["table_signe"]["rows"]:

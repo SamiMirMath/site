@@ -150,7 +150,7 @@
     "type": "texte"
    },
    {
-    "html": "\\(\\sqrt{x^{2} + 1}\\) est de la forme \\(u^{\\frac{1}{2}}\\) avec \\(u(x) = x^{2} + 1\\) (dérivée interne \\(u'(x) = 2x\\)) \\(\\Rightarrow\\) \\(\\left(\\sqrt{x^{2} + 1}\\right)' = \\frac{1}{2}\\,u^{\\frac{-1}{2}}u' = \\frac{x}{\\sqrt{x^{2} + 1}}\\).",
+    "html": "\\(\\sqrt{x^{2} + 1}\\) est de la forme \\(u^{\\frac{1}{2}}\\) avec \\(u(x) = x^{2} + 1\\) (dérivée interne \\(u'(x) = 2x\\)) \\(\\Rightarrow\\) \\(\\left(\\sqrt{x^{2} + 1}\\right)' = \\frac{1}{2}\\,u^{-\\frac{1}{2}}u' = \\frac{x}{\\sqrt{x^{2} + 1}}\\).",
     "type": "texte"
    }
   ],
@@ -1718,7 +1718,7 @@
  "x^(-1/2)": {
   "deriv_etapes": [
    {
-    "html": "\\(\\left(x^{\\frac{-1}{2}}\\right)' = \\frac{-1}{2\\sqrt{x^{3}}}\\) (règle de la puissance).",
+    "html": "\\(\\left(x^{-\\frac{1}{2}}\\right)' = \\frac{-1}{2\\sqrt{x^{3}}}\\) (règle de la puissance).",
     "type": "texte"
    }
   ],
@@ -1727,7 +1727,7 @@
   "domaine_etude_tex": "\\left]0 \\,;\\, +\\infty\\right[",
   "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
   "extrema": [],
-  "f_tex": "x^{\\frac{-1}{2}}",
+  "f_tex": "x^{-\\frac{1}{2}}",
   "ok": true,
   "signe_etapes": [
    {
