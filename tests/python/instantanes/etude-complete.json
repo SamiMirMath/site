@@ -32,31 +32,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
-     "type": "texte"
-    },
-    {
-     "html": "On étudie le signe de chaque facteur, puis on dresse le tableau de signes.",
-     "type": "texte"
-    },
-    {
-     "html": "<b>Signe de \\(x\\,e^{x} - e^{x} + 1\\)</b>",
-     "type": "texte"
-    },
-    {
-     "html": "L'équation \\(x\\,e^{x} - e^{x} + 1 = 0\\) ne se résout pas avec les méthodes du cours : solution obtenue numériquement : \\(x {\\approx}\\,0\\). On en déduit \\(x\\,e^{x} - e^{x} + 1 > 0\\) sur \\(\\mathbb{R} \\setminus \\left\\{{\\approx}\\,0\\right\\}\\).",
-     "type": "texte"
-    },
-    {
-     "html": "Un produit est nul si et seulement si l'un de ses facteurs (du numérateur) est nul, les autres étant définis.",
-     "type": "texte"
-    },
-    {
-     "html": "\\(x^{2} > 0\\) pour \\(x \\neq 0\\).",
-     "type": "texte"
-    },
-    {
-     "html": "Donc \\(f'(x)\\) est du signe de \\(x\\,e^{x} - e^{x} + 1\\).",
+     "html": "\\(f'(x) = \\frac{x\\,e^{x} - e^{x} + 1}{x^{2}}\\) ne s'annule jamais ; valeur interdite : \\(x = 0\\).",
      "type": "texte"
     }
    ],
@@ -73,6 +49,14 @@
        "+"
       ],
       "label": "\\left(x\\,e^{x} - e^{x} + 1\\right)"
+     },
+     {
+      "cells": [
+       "+",
+       "||",
+       "+"
+      ],
+      "label": "x^{2}\\ (\\text{dén.})"
      },
      {
       "cells": [
@@ -243,31 +227,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
-     "type": "texte"
-    },
-    {
-     "html": "Une fraction est nulle lorsque son numérateur est nul (et son dénominateur non nul) : on résout \\(x^{2} - 6x + 1 = 0\\).",
-     "type": "texte"
-    },
-    {
-     "html": "Trinôme \\(x^{2} - 6x + 1\\) : \\(\\Delta = b^2 - 4ac = (-6)^2 - 4 \\cdot 1 \\cdot 1 = 32\\)",
-     "type": "texte"
-    },
-    {
-     "html": "\\(\\Delta > 0\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = 3 - 2\\sqrt{2}\\) et \\(x_2 = 3 + 2\\sqrt{2}\\) \\((\\approx 0{,}1716\\) et \\(\\approx 5{,}8284)\\).",
-     "type": "texte"
-    },
-    {
-     "html": "Solutions : \\(x = 3 - 2\\sqrt{2}\\), \\(x = 3 + 2\\sqrt{2}\\).",
-     "type": "texte"
-    },
-    {
-     "html": "\\(\\left(x - 3\\right)^{2} > 0\\) pour \\(x \\neq 3\\).",
-     "type": "texte"
-    },
-    {
-     "html": "Donc \\(f'(x)\\) est du signe de \\(x^{2} - 6x + 1\\).",
+     "html": "\\(f'(x) = \\frac{x^{2} - 6x + 1}{\\left(x - 3\\right)^{2}} = 0 \\iff x^{2} - 6x + 1 = 0 \\iff x = 3 - 2\\sqrt{2} \\text{ ou } x = 3 + 2\\sqrt{2}\\) ; valeur interdite : \\(x = 3\\).",
      "type": "texte"
     }
    ],
@@ -290,6 +250,18 @@
        "+"
       ],
       "label": "\\left(x^{2} - 6x + 1\\right)"
+     },
+     {
+      "cells": [
+       "+",
+       "+",
+       "+",
+       "||",
+       "+",
+       "+",
+       "+"
+      ],
+      "label": "\\left(x - 3\\right)^{2}\\ (\\text{dén.})"
      },
      {
       "cells": [
@@ -514,19 +486,15 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
-     "type": "texte"
-    },
-    {
-     "html": "\\(3\\left(\\ln(x) + 1\\right) = 0 \\iff 3\\ln(x) = -3\\) (on soustrait 3).",
-     "type": "texte"
-    },
-    {
-     "html": "\\(3\\ln(x) = -3 \\iff \\ln(x) = -1\\) (on divise par 3).",
+     "html": "\\(\\ln(x) + 1 = 0 \\iff \\ln(x) = -1\\) (on soustrait 1).",
      "type": "texte"
     },
     {
      "html": "\\(\\ln(x) = -1 \\iff x = e^{-1}\\)",
+     "type": "texte"
+    },
+    {
+     "html": "\\(f'(x) = 3\\left(\\ln(x) + 1\\right) = 0 \\iff \\ln(x) + 1 = 0 \\iff x = e^{-1}\\).",
      "type": "texte"
     }
    ],
@@ -537,6 +505,16 @@
      "e^{-1}"
     ],
     "rows": [
+     {
+      "cells": [
+       "x",
+       "||",
+       "+",
+       "+",
+       "+"
+      ],
+      "label": "3"
+     },
      {
       "cells": [
        "x",
@@ -659,35 +637,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
-     "type": "texte"
-    },
-    {
-     "html": "On étudie le signe de chaque facteur, puis on dresse le tableau de signes.",
-     "type": "texte"
-    },
-    {
-     "html": "<b>Signe de \\(e^{\\frac{1}{x}}\\)</b>",
-     "type": "texte"
-    },
-    {
-     "html": "\\(e^{\\frac{1}{x}}\\) est défini pour \\(x \\in \\mathbb{R} \\setminus \\left\\{0\\right\\}\\).",
-     "type": "texte"
-    },
-    {
-     "html": "Bilan : \\(e^{\\frac{1}{x}} > 0 \\iff x \\in \\mathbb{R} \\setminus \\left\\{0\\right\\}\\) ; \\(e^{\\frac{1}{x}}\\) ne s'annule pas.",
-     "type": "texte"
-    },
-    {
-     "html": "Un produit est nul si et seulement si l'un de ses facteurs (du numérateur) est nul, les autres étant définis.",
-     "type": "texte"
-    },
-    {
-     "html": "\\(x^{2} > 0\\) pour \\(x \\neq 0\\) ; \\(-1 < 0\\).",
-     "type": "texte"
-    },
-    {
-     "html": "Donc \\(f'(x)\\) est du signe contraire de \\(e^{\\frac{1}{x}}\\).",
+     "html": "\\(f'(x) = \\frac{-e^{\\frac{1}{x}}}{x^{2}}\\) ne s'annule jamais ; valeur interdite : \\(x = 0\\).",
      "type": "texte"
     }
    ],
@@ -699,11 +649,27 @@
     "rows": [
      {
       "cells": [
+       "-",
+       "||",
+       "-"
+      ],
+      "label": "-1"
+     },
+     {
+      "cells": [
        "+",
        "||",
        "+"
       ],
       "label": "e^{\\frac{1}{x}}"
+     },
+     {
+      "cells": [
+       "+",
+       "||",
+       "+"
+      ],
+      "label": "x^{2}\\ (\\text{dén.})"
      },
      {
       "cells": [
@@ -878,19 +844,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
-     "type": "texte"
-    },
-    {
-     "html": "\\(e^{2x} = 0\\) est impossible, car \\(e^{2x} > 0\\) pour tout réel : solution rejetée.",
-     "type": "texte"
-    },
-    {
-     "html": "\\(e^{2x} > 0\\).",
-     "type": "texte"
-    },
-    {
-     "html": "Donc \\(f'(x)\\) est positif : il ne change jamais de signe.",
+     "html": "\\(f'(x) = 2e^{2x}\\) ne s'annule jamais.",
      "type": "texte"
     }
    ],
@@ -898,6 +852,18 @@
    "table_signe": {
     "crit": [],
     "rows": [
+     {
+      "cells": [
+       "+"
+      ],
+      "label": "2"
+     },
+     {
+      "cells": [
+       "+"
+      ],
+      "label": "e^{2x}"
+     },
      {
       "cells": [
        "+"
@@ -1019,43 +985,15 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
+     "html": "\\(\\ln(x) - 1 = 0 \\iff \\ln(x) = 1\\) (on ajoute 1).",
      "type": "texte"
     },
     {
-     "html": "On étudie le signe de chaque facteur, puis on dresse le tableau de signes.",
+     "html": "\\(\\ln(x) = 1 \\iff x = e\\)",
      "type": "texte"
     },
     {
-     "html": "<b>Signe de \\(\\ln(x) - 1\\)</b>",
-     "type": "texte"
-    },
-    {
-     "html": "\\(\\ln(x) - 1\\) est défini pour \\(x \\in \\left]0 \\,;\\, +\\infty\\right[\\).",
-     "type": "texte"
-    },
-    {
-     "html": "\\(\\ln(x) - 1 > 0 \\iff \\ln(x) > 1\\) (on ajoute 1).",
-     "type": "texte"
-    },
-    {
-     "html": "\\(\\ln(x) > 1 \\iff x > e\\) (exp est croissante).",
-     "type": "texte"
-    },
-    {
-     "html": "Bilan : \\(\\ln(x) - 1 > 0 \\iff x \\in \\left]e \\,;\\, +\\infty\\right[\\) ; \\(\\ln(x) - 1 = 0 \\iff x \\in \\left\\{e\\right\\}\\).",
-     "type": "texte"
-    },
-    {
-     "html": "Un produit est nul si et seulement si l'un de ses facteurs (du numérateur) est nul, les autres étant définis.",
-     "type": "texte"
-    },
-    {
-     "html": "\\(x^{2} > 0\\) pour \\(x \\neq 0\\) ; \\(-1 < 0\\).",
-     "type": "texte"
-    },
-    {
-     "html": "Donc \\(f'(x)\\) est du signe contraire de \\(\\ln(x) - 1\\).",
+     "html": "\\(f'(x) = \\frac{-\\left(\\ln(x) - 1\\right)}{x^{2}} = 0 \\iff \\ln(x) - 1 = 0 \\iff x = e\\).",
      "type": "texte"
     }
    ],
@@ -1071,10 +1009,30 @@
        "x",
        "||",
        "-",
+       "-",
+       "-"
+      ],
+      "label": "-1"
+     },
+     {
+      "cells": [
+       "x",
+       "||",
+       "-",
        "0",
        "+"
       ],
       "label": "\\left(\\ln(x) - 1\\right)"
+     },
+     {
+      "cells": [
+       "x",
+       "||",
+       "+",
+       "+",
+       "+"
+      ],
+      "label": "x^{2}\\ (\\text{dén.})"
      },
      {
       "cells": [
@@ -1235,100 +1193,11 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "ED de f' : \\(D_{f'} = \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[\\), différent de l'ED de f, \\(D_f = \\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[\\). On étudie le signe de f' sur cet ensemble ; là où f est définie mais pas f', on regarde directement le signe de part et d'autre.",
+     "html": "ED de f' : \\(D_{f'} = \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[\\), différent de l'ED de f, \\(D_f = \\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[\\).",
      "type": "texte"
     },
     {
-     "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
-     "type": "texte"
-    },
-    {
-     "html": "On étudie le signe de chaque facteur, puis on dresse le tableau de signes.",
-     "type": "texte"
-    },
-    {
-     "html": "<b>Signe de \\(x\\)</b>",
-     "type": "texte"
-    },
-    {
-     "html": "Bilan : \\(x > 0 \\iff x \\in \\left]0 \\,;\\, +\\infty\\right[\\) ; \\(x = 0 \\iff x \\in \\left\\{0\\right\\}\\).",
-     "type": "texte"
-    },
-    {
-     "html": "<b>Signe de \\(\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}\\)</b>",
-     "type": "texte"
-    },
-    {
-     "html": "\\(\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}\\) est défini pour \\(x \\in \\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[\\).",
-     "type": "texte"
-    },
-    {
-     "html": "\\(\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)} > 0 \\iff \\left(x - 2\\right)\\,\\left(x + 2\\right) > 0\\) (la fonction carré est croissante sur \\(\\left[0 \\,;\\, +\\infty\\right[\\)).",
-     "type": "texte"
-    },
-    {
-     "html": "Zéros :",
-     "type": "texte"
-    },
-    {
-     "html": "Trinôme \\(x^{2} - 4\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot (-4) = 16\\)",
-     "type": "texte"
-    },
-    {
-     "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 4\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -2\\) et \\(x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 2\\).",
-     "type": "texte"
-    },
-    {
-     "crit": [
-      "-2",
-      "2"
-     ],
-     "rows": [
-      {
-       "cells": [
-        "-",
-        "0",
-        "+",
-        "+",
-        "+"
-       ],
-       "label": "x + 2"
-      },
-      {
-       "cells": [
-        "-",
-        "-",
-        "-",
-        "0",
-        "+"
-       ],
-       "label": "x - 2"
-      },
-      {
-       "cells": [
-        "+",
-        "0",
-        "-",
-        "0",
-        "+"
-       ],
-       "final": true,
-       "label": "x^{2} - 4"
-      }
-     ],
-     "type": "tableau",
-     "var": "x"
-    },
-    {
-     "html": "On lit les intervalles où \\(x^{2} - 4 > 0\\) : \\(x \\in \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[\\).",
-     "type": "texte"
-    },
-    {
-     "html": "Bilan : \\(\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)} > 0 \\iff x \\in \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[\\) ; \\(\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)} = 0 \\iff x \\in \\left\\{-2\\right\\} \\cup \\left\\{2\\right\\}\\).",
-     "type": "texte"
-    },
-    {
-     "html": "Un produit est nul si et seulement si l'un de ses facteurs (du numérateur) est nul, les autres étant définis.",
+     "html": "\\(f'(x) = \\frac{x}{\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}}\\) ne s'annule jamais.",
      "type": "texte"
     }
    ],
@@ -1548,15 +1417,15 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
-     "type": "texte"
-    },
-    {
      "html": "\\(\\ln(x) + 1 = 0 \\iff \\ln(x) = -1\\) (on soustrait 1).",
      "type": "texte"
     },
     {
      "html": "\\(\\ln(x) = -1 \\iff x = e^{-1}\\)",
+     "type": "texte"
+    },
+    {
+     "html": "\\(f'(x) = \\ln(x) + 1 = 0 \\iff x = e^{-1}\\).",
      "type": "texte"
     }
    ],
@@ -1716,31 +1585,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
-     "type": "texte"
-    },
-    {
-     "html": "Une fraction est nulle lorsque son numérateur est nul (et son dénominateur non nul) : on résout \\(-x^{2} + 1 = 0\\).",
-     "type": "texte"
-    },
-    {
-     "html": "Trinôme \\(-x^{2} + 1\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot (-1) \\cdot 1 = 4\\)",
-     "type": "texte"
-    },
-    {
-     "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 2\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -1\\) et \\(x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 1\\).",
-     "type": "texte"
-    },
-    {
-     "html": "Solutions : \\(x = -1\\), \\(x = 1\\).",
-     "type": "texte"
-    },
-    {
-     "html": "\\(x^{2} + 1 > 0\\) ; \\(-1 < 0\\).",
-     "type": "texte"
-    },
-    {
-     "html": "Donc \\(f'(x)\\) est du signe contraire de \\(\\left(x + 1\\right) \\left(x - 1\\right)\\).",
+     "html": "\\(f'(x) = \\frac{-\\left(x + 1\\right)\\,\\left(x - 1\\right)}{\\left(x^{2} + 1\\right)^{2}} = 0 \\iff x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 1\\).",
      "type": "texte"
     }
    ],
@@ -1751,6 +1596,16 @@
      "1"
     ],
     "rows": [
+     {
+      "cells": [
+       "-",
+       "-",
+       "-",
+       "-",
+       "-"
+      ],
+      "label": "-1"
+     },
      {
       "cells": [
        "-",
@@ -1770,6 +1625,16 @@
        "+"
       ],
       "label": "\\left(x - 1\\right)"
+     },
+     {
+      "cells": [
+       "+",
+       "+",
+       "+",
+       "+",
+       "+"
+      ],
+      "label": "\\left(x^{2} + 1\\right)^{2}\\ (\\text{dén.})"
      },
      {
       "cells": [
@@ -1907,10 +1772,6 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
-     "type": "texte"
-    },
-    {
      "html": "\\(0\\) est nulle partout où elle est définie.",
      "type": "texte"
     }
@@ -1921,6 +1782,14 @@
      "0"
     ],
     "rows": [
+     {
+      "cells": [
+       "+",
+       "||",
+       "+"
+      ],
+      "label": "0"
+     },
      {
       "cells": [
        "0",
@@ -2081,15 +1950,11 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "ED de f' : \\(D_{f'} = \\mathbb{R} \\setminus \\left\\{0\\right\\}\\), différent de l'ED de f, \\(D_f = \\mathbb{R}\\). On étudie le signe de f' sur cet ensemble ; là où f est définie mais pas f', on regarde directement le signe de part et d'autre.",
+     "html": "ED de f' : \\(D_{f'} = \\mathbb{R} \\setminus \\left\\{0\\right\\}\\), différent de l'ED de f, \\(D_f = \\mathbb{R}\\).",
      "type": "texte"
     },
     {
-     "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
-     "type": "texte"
-    },
-    {
-     "html": "Le numérateur de f' vaut \\(2\\) : il ne s'annule jamais, f' n'a aucun zéro (les valeurs interdites viennent du dénominateur).",
+     "html": "\\(f'(x) = \\frac{2}{3\\sqrt[3]{x}}\\) ne s'annule jamais ; valeur interdite : \\(x = 0\\).",
      "type": "texte"
     }
    ],
@@ -2099,6 +1964,14 @@
      "0"
     ],
     "rows": [
+     {
+      "cells": [
+       "+",
+       "+",
+       "+"
+      ],
+      "label": "\\frac{2}{3}"
+     },
      {
       "cells": [
        "-",
@@ -2235,43 +2108,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
-     "type": "texte"
-    },
-    {
-     "html": "On étudie le signe de chaque facteur, puis on dresse le tableau de signes.",
-     "type": "texte"
-    },
-    {
-     "html": "<b>Signe de \\(x\\)</b>",
-     "type": "texte"
-    },
-    {
-     "html": "Bilan : \\(x > 0 \\iff x \\in \\left]0 \\,;\\, +\\infty\\right[\\) ; \\(x = 0 \\iff x \\in \\left\\{0\\right\\}\\).",
-     "type": "texte"
-    },
-    {
-     "html": "<b>Signe de \\(x - 2\\)</b>",
-     "type": "texte"
-    },
-    {
-     "html": "\\(x - 2 > 0 \\iff x > 2\\).",
-     "type": "texte"
-    },
-    {
-     "html": "Bilan : \\(x - 2 > 0 \\iff x \\in \\left]2 \\,;\\, +\\infty\\right[\\) ; \\(x - 2 = 0 \\iff x \\in \\left\\{2\\right\\}\\).",
-     "type": "texte"
-    },
-    {
-     "html": "Un produit est nul si et seulement si l'un de ses facteurs (du numérateur) est nul, les autres étant définis.",
-     "type": "texte"
-    },
-    {
-     "html": "\\(e^{-x} > 0\\) ; \\(-1 < 0\\).",
-     "type": "texte"
-    },
-    {
-     "html": "Donc \\(f'(x)\\) est du signe contraire de \\(x \\left(x - 2\\right)\\).",
+     "html": "\\(f'(x) = -x\\,\\left(x - 2\\right)\\,e^{-x} = 0 \\iff x = 0 \\text{ ou } x - 2 = 0 \\iff x = 0 \\text{ ou } x = 2\\).",
      "type": "texte"
     }
    ],
@@ -2282,6 +2119,16 @@
      "2"
     ],
     "rows": [
+     {
+      "cells": [
+       "-",
+       "-",
+       "-",
+       "-",
+       "-"
+      ],
+      "label": "-1"
+     },
      {
       "cells": [
        "-",
@@ -2301,6 +2148,16 @@
        "+"
       ],
       "label": "\\left(x - 2\\right)"
+     },
+     {
+      "cells": [
+       "+",
+       "+",
+       "+",
+       "+",
+       "+"
+      ],
+      "label": "e^{-x}"
      },
      {
       "cells": [
@@ -2423,11 +2280,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
-     "type": "texte"
-    },
-    {
-     "html": "\\(2\\left(x - 2\\right) = 0 \\iff x = 2\\).",
+     "html": "\\(f'(x) = 2\\left(x - 2\\right) = 0 \\iff x - 2 = 0 \\iff x = 2\\).",
      "type": "texte"
     }
    ],
@@ -2437,6 +2290,14 @@
      "2"
     ],
     "rows": [
+     {
+      "cells": [
+       "+",
+       "+",
+       "+"
+      ],
+      "label": "2"
+     },
      {
       "cells": [
        "-",
@@ -2577,23 +2438,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
-     "type": "texte"
-    },
-    {
-     "html": "On résout \\(3x^{2} - 3 = 0\\).",
-     "type": "texte"
-    },
-    {
-     "html": "Trinôme \\(3x^{2} - 3\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 3 \\cdot (-3) = 36\\)",
-     "type": "texte"
-    },
-    {
-     "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 6\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -1\\) et \\(x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 1\\).",
-     "type": "texte"
-    },
-    {
-     "html": "Solutions : \\(x = -1\\), \\(x = 1\\).",
+     "html": "\\(f'(x) = 3\\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 1\\).",
      "type": "texte"
     }
    ],
@@ -2604,6 +2449,16 @@
      "1"
     ],
     "rows": [
+     {
+      "cells": [
+       "+",
+       "+",
+       "+",
+       "+",
+       "+"
+      ],
+      "label": "3"
+     },
      {
       "cells": [
        "-",
@@ -2775,27 +2630,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0.",
-     "type": "texte"
-    },
-    {
-     "html": "On résout \\(4x^{3} - 4x = 0\\).",
-     "type": "texte"
-    },
-    {
-     "html": "On met \\(x\\) en évidence : \\(4x^{3} - 4x = x\\left(4x^{2} - 4\\right)\\)",
-     "type": "texte"
-    },
-    {
-     "html": "Trinôme \\(x^{2} - 1\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot (-1) = 4\\)",
-     "type": "texte"
-    },
-    {
-     "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 2\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -1\\) et \\(x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 1\\).",
-     "type": "texte"
-    },
-    {
-     "html": "Solutions : \\(x = -1\\), \\(x = 0\\), \\(x = 1\\).",
+     "html": "\\(f'(x) = 4x\\,\\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x = 0 \\text{ ou } x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 0 \\text{ ou } x = 1\\).",
      "type": "texte"
     }
    ],
@@ -2807,6 +2642,18 @@
      "1"
     ],
     "rows": [
+     {
+      "cells": [
+       "+",
+       "+",
+       "+",
+       "+",
+       "+",
+       "+",
+       "+"
+      ],
+      "label": "4"
+     },
      {
       "cells": [
        "-",

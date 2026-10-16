@@ -18,10 +18,13 @@ URL : `/derivee-variations/` · moteur : `derivee-variations/derivee_variations.
    - SymPy ne sert qu'à mettre f' sous forme **factorisée** (jamais développée).
 3. **ED de f'** : si l'ED de f' diffère de celui de f, il est **calculé et affiché** comme une étape
    (validé). Exemple : √(x²−4), ED(f) = ]−∞;−2] ∪ [2;+∞[, ED(f') = ]−∞;−2[ ∪ ]2;+∞[.
-4. **Signe de f'** : zéros de f' d'abord (narration), puis tableau de signes avec une ligne par
-   facteur de f' **dont le signe change** et la ligne f'(x) ; un facteur de signe évident n'a pas de ligne, il est
-   justifié en une phrase suivie de « donc f'(x) est du signe de … » (socle 7c) ; exemple √(4x²+1)/(x+2),
-   f'(x) = (8x−1)/(√(4x²+1)(x+2)²) : tableau de 8x − 1 seulement, colonnes −2 (double barre) et 1/8.
+4. **Signe de f'** (guide de rédaction R7, 16.10.2026) : une seule ligne avant le tableau — zéros de f' et valeurs
+   interdites —, puis un tableau de signes avec **une ligne par facteur** du numérateur et du dénominateur, évident ou non
+   (x² + 1, √(4x² + 1), (x + 2)², eˣ), une ligne par constante (positive : « 3 : + + + » ; négative : « −1 : − − − »), puis
+   la ligne f'(x). Aucune phrase ne justifie le signe d'un facteur : ni « donc f'(x) est du signe de … », ni « Bilan », ni
+   « Un produit est nul si et seulement si … ». Exemple √(4x²+1)/(x+2), f'(x) = (8x−1)/(√(4x²+1)(x+2)²) :
+   « f'(x) = … = 0 ⇔ 8x − 1 = 0 ⇔ x = 1/8 ; valeur interdite : x = −2 », puis lignes 8x − 1, √(4x²+1), (x+2)², f'(x).
+   Un zéro qui demande une étape délicate (ln(x) + 1 = 0 ⇔ ln(x) = −1 : on soustrait 1) garde cette étape.
 5. **Variations** : ligne f(x) en **flèches seules** (validé), points d'extremum marqués ;
    en un point où f est définie mais pas f', la ligne f(x) porte la valeur f(a) (Q3) ;
    liste des extrema locaux avec valeur exacte de f quand c'est possible (sinon ≈).
@@ -78,7 +81,7 @@ URL : `/derivee-variations/` · moteur : `derivee-variations/derivee_variations.
 | DV-08 | Exercices générés : f' et tableau obtenus sans valeur approchée de zéro de f' | [auto-py] |
 | DV-09 | Critère (ii) : √(x²−4) : minimum local en −2 et en 2 (f = 0) ; √(4−x²) : minimum local en −2 et en 2 (f = 0), maximum en 0 (f = 2) ; √x : minimum en 0 ; x√x : minimum en 0 ; aucun extremum de bord pour une borne ouverte (ln x en 0) | [auto-py] (`test_extrema_bornes_fermees`, échec attendu jusqu'à T06) |
 | DV-14 | Tableau de ln(x²−4) : colonnes −2 et 2 (double barre sur toutes les lignes), zone ]−2 ; 2[ hachurée, pas de colonne 0 ; sur les exemples et 150 fonctions générées, une zone est hachurée sur f' et f si et seulement si f n'y est pas définie (oracle) | [auto-py] (`test_tableau_variations.py`) |
-| DV-15 | x^(2/3) : f' = 2/(3∛x), « Le numérateur de f' vaut 2 », pas de zéro ; valeur interdite 0 ; minimum en 0. x^(1/3) : ↗ sur ℝ, aucun extremum. Cas −1/3, 4/3, (x−2)^(1/3), x·x^(1/3) avec points négatifs | [auto-py] (`test_racines_reelles.py`) |
+| DV-15 | x^(2/3) : f' = 2/(3∛x), « ne s'annule jamais ; valeur interdite : x = 0 » ; valeur interdite 0 ; minimum en 0. x^(1/3) : ↗ sur ℝ, aucun extremum. Cas −1/3, 4/3, (x−2)^(1/3), x·x^(1/3) avec points négatifs | [auto-py] (`test_racines_reelles.py`) |
 | DV-16 | Rendu : la double barre est centrée sous la valeur de l'en-tête et continue sur toute la hauteur, à 380 px, sur ordinateur et à l'impression | [auto-page] (Chrome, CI, T15) + [manuel] |
 | DV-10 | Tableau de √(x²−4) : ligne f'(x) avec double barre en ±2 ; ligne f(x) avec la valeur 0 en ±2, sans barre | [auto-py] |
 | DV-11 | x^(2−2) : ligne f'(x) « 0 », ligne f(x) →, aucun extremum ; √(x²)/x : « 0 » et → sur chaque intervalle, double barre en 0 (hors de l'ED) | [auto-py] (`test_tableau_variations.py`) |

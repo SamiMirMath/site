@@ -73,7 +73,7 @@ class TestIsolerAtome(unittest.TestCase):
     def test_cas_de_la_derivee(self):
         r = dv.etudier("ln(x)/x")                                      # f' = −(ln x − 1)/x²
         textes_dv = " ".join(e.get("html", "") for e in r["signe_etapes"])
-        self.assertIn(r"\ln(x) - 1 > 0 \iff \ln(x) > 1\) (on ajoute 1)", textes_dv)
+        self.assertIn(r"\ln(x) - 1 = 0 \iff \ln(x) = 1\) (on ajoute 1)", textes_dv)      # le zéro seul : plus de phrase de signe
         self.assertNotIn("On pose", textes_dv)
         r = dv.etudier("x*ln(x)")                                      # f' = ln x + 1
         textes_dv = " ".join(e.get("html", "") for e in r["signe_etapes"])

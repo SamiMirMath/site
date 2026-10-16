@@ -30,7 +30,7 @@ from ensemble_def import (
     lire, tex, par, prec, valeur_constante, Num, Iv, REELS, inter, ens_tex, points, contient, proche,
     preimage, resoudre_general, json_strict, ajouter_saisie, domaine, fusion, evaluer, aplatir, qtex,
     indice_racine, sans_x, _sympy, en_sympy, en_sympy_reel, arbre_depuis_sympy, num_sympy, _SP,
-    txt, NonPrisEnCharge, ErreurSaisie, _analyser, apercu_json, signe_facteur, analyser_evidents,
+    txt, NonPrisEnCharge, ErreurSaisie, _analyser, apercu_json, signe_facteur, complement,
 )
 
 __all__ = ["etudier", "etudier_json", "apercu_json"]
@@ -419,6 +419,64 @@ def _aligner_sur(D, ED):
     return fusion([Iv(snap(iv.lo), iv.lf, snap(iv.hi), iv.hf) for iv in D])
 
 
+def _est_polynome(n):
+    """Arbre formé de nombres, de x, de +, −, ×, et de puissances entières : le zéro se lit sans explication."""
+    if isinstance(n, (Nb, X)):
+        return True
+    if isinstance(n, Neg):
+        return _est_polynome(n.a)
+    if isinstance(n, Op) and n.op in "+-*":
+        return _est_polynome(n.a) and _est_polynome(n.b)
+    if isinstance(n, Op) and n.op == "^":
+        e = valeur_constante(n.b)
+        return e is not None and e.denominator == 1 and e > 0 and _est_polynome(n.a)
+    return False
+
+
+def _point_isole(iv):
+    return iv.lo is not None and iv.hi is not None and iv.lf and iv.hf and proche(iv.lo.val, iv.hi.val)
+
+
+def _ligne_zeros(fprime, c_const, facs, Z, D, items):
+    """La ligne qui précède le tableau (guide de rédaction, R7) : zéros de f' et valeurs interdites, sans phrase sur le signe
+    d'un facteur ; None si les zéros ne sont pas des points isolés. Un facteur qui n'est pas un polynôme et qui s'annule garde
+    l'explication de son zéro (ln(x) + 1 = 0 ⇔ ln(x) = −1 : on soustrait 1), ajoutée à items avant la ligne."""
+    if not all(_point_isole(iv) for iv in Z):
+        return None
+    zeros = sorted((iv.lo for iv in Z), key=lambda p: p.val)
+    interdites = sorted((iv.lo for iv in complement(D) if _point_isole(iv)), key=lambda p: p.val)
+    equations = []
+    for h, expo in facs:
+        if expo < 0:
+            continue
+        zh = [z for z in zeros if (evaluer(h, z.val) is not None and abs(evaluer(h, z.val)) <= 1e-9)]
+        if not zh:
+            continue
+        equations.append(f"{tex(h)} = 0")
+        if not _est_polynome(h):
+            explication = []
+            try:
+                preimage(h, points([Num.rat(0)]), explication)
+            except Exception:
+                explication = []
+            items.extend(explication)
+    finale = r" \text{ ou } ".join(f"x = {z.tex}" for z in zeros)
+    if not zeros:
+        ligne = rf"\(f'(x) = {tex(fprime)}\) ne s'annule jamais"
+    else:
+        etapes = [rf"f'(x) = {tex(fprime)} = 0"]
+        if len(facs) > 1 or c_const != 1 or facs[0][1] != 1:
+            moyen = r" \text{ ou } ".join(equations)
+            if moyen != finale:
+                etapes.append(moyen)
+        etapes.append(finale)
+        ligne = r"\(" + r" \iff ".join(etapes) + r"\)"
+    if interdites:
+        ligne += (" ; valeur interdite : " if len(interdites) == 1 else " ; valeurs interdites : ")
+        ligne += " ; ".join(rf"\(x = {p.tex}\)" for p in interdites)
+    return ligne + "."
+
+
 def etudier(entree):
     try:
         f = lire(entree)
@@ -459,25 +517,20 @@ def etudier(entree):
     if ens_tex(D) != ens_tex(ED):
         res["ed_deriv_tex"] = ens_tex(D)
         items_signe.append(txt(
-            rf"ED de f' : \(D_{{f'}} = {ens_tex(D)}\), différent de l'ED de f, \(D_f = {ens_tex(ED)}\). "
-            "On étudie le signe de f' sur cet ensemble ; là où f est définie mais pas f', "
-            "on regarde directement le signe de part et d'autre."))
-    items_signe.append(txt("On cherche d'abord les zéros de f'(x) : on résout f'(x) = 0."))
+            rf"ED de f' : \(D_{{f'}} = {ens_tex(D)}\), différent de l'ED de f, \(D_f = {ens_tex(ED)}\)."))
     n_intro = len(items_signe)
     numerateur = fprime.a if isinstance(fprime, Op) and fprime.op == "/" else fprime
     cn = valeur_constante(numerateur)
+    resolution = []                                      # la résolution détaillée de f' = 0 ne sert que de repli
     try:
         if cn is not None and cn != 0 and numerateur is not fprime:
-            # f' = c / D avec c constante non nulle : aucun zéro, rien à résoudre
-            items_signe.append(txt(rf"Le numérateur de f' vaut \({qtex(cn)}\) : il ne s'annule jamais, "
-                                   r"f' n'a aucun zéro (les valeurs interdites viennent du dénominateur)."))
-            Z = []
+            Z = []                                       # f' = c / D avec c constante non nulle : aucun zéro
         else:
-            Z = preimage(fprime, points([Num.rat(0)]), items_signe)
+            Z = preimage(fprime, points([Num.rat(0)]), resolution)
     except NonPrisEnCharge:
-        items_signe = items_signe[:n_intro]
+        resolution = []
         try:
-            Z = resoudre_general(fprime, "=", items_signe)
+            Z = resoudre_general(fprime, "=", resolution)
         except Exception as e:
             res["signe_resolu"] = False
             res["signe_erreur"] = "Le signe de f'(x) n'a pas pu être étudié automatiquement."
@@ -488,6 +541,17 @@ def etudier(entree):
         res["signe_erreur"] = "Le signe de f'(x) n'a pas pu être étudié automatiquement."
         res["signe_detail"] = f"{type(e).__name__} : {e}"
         return res
+    # Guide de rédaction (R7) : une seule ligne avant le tableau — zéros et valeurs interdites ; aucune phrase sur le signe
+    # d'un facteur.
+    try:
+        c_const, facs = aplatir(fprime)
+    except Exception:
+        c_const, facs = F(1), [(fprime, 1)]
+    ligne = _ligne_zeros(fprime, c_const, facs, Z, D, items_signe)
+    if ligne is None:                                    # zéros non isolés (f' nulle sur un intervalle…) : résolution détaillée
+        items_signe.extend(resolution)
+    else:
+        items_signe.append(txt(ligne))
 
     # 2) Points critiques = zéros de f' (ci-dessus) ∪ bornes finies du domaine d'étude
     # (valeurs interdites, asymptotes) — une seule liste, servant à la fois aux tests
@@ -525,10 +589,6 @@ def etudier(entree):
 
     # 3) Une ligne par facteur de f' (f' étant gardée factorisée, cf. plus haut), puis
     # la ligne combinée — même présentation qu'un tableau de signes « papier ».
-    try:
-        c_const, facs = aplatir(fprime)
-    except Exception:
-        c_const, facs = F(1), [(fprime, 1)]
 
     def _cellule(v, expo, critique=False):
         if v is None:
@@ -566,6 +626,8 @@ def etudier(entree):
     lignes = []
     if c_const < 0:
         lignes.append({"label": qtex(c_const), "cells": _barrer(["-"] * (2 * k + 1))})
+    elif c_const != 1:
+        lignes.append({"label": qtex(c_const), "cells": _barrer(["+"] * (2 * k + 1))})
     for h, expo in facs:
         label = tex(h) if prec(h) >= 3 else r"\left(" + tex(h) + r"\right)"
         if abs(expo) > 1:
@@ -599,19 +661,6 @@ def etudier(entree):
                 combinee[i] = "x" if hors[i // 2] else "0" if contient(D, _test(i // 2)) else "x"
             else:
                 combinee[i] = "x" if _dans_zone_hors(i) else "0" if contient(D, crit[i // 2].val) else "||"
-    # Facteurs de signe évident (exponentielle, racine d'une expression positive, carré…) : une phrase, pas de ligne.
-    # Les colonnes (zéros, valeurs interdites) restent : la ligne f'(x) a été calculée avec tous les facteurs.
-    try:
-        infos = [((h, expo), signe_facteur(h, "x")[:3]) for h, expo in facs]
-        phrases, evidents, concl = analyser_evidents(c_const, infos, "f'(x)")
-    except Exception:
-        phrases, evidents, concl = [], set(), None
-    if phrases:
-        retirer = ([0] if c_const < 0 else []) + [(1 if c_const < 0 else 0) + i for i in evidents]
-        lignes = [l for j, l in enumerate(lignes) if j not in retirer]
-        items_signe.append(txt(" ; ".join(phrases) + "."))
-        if concl:
-            items_signe.append(txt(concl))
     lignes.append({"label": "f'(x)", "cells": combinee, "final": True})
 
     res["signe_resolu"] = True

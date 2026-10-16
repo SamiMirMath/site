@@ -123,8 +123,7 @@ class TestRacinesExactes(unittest.TestCase):
 
     def test_zero_et_valeur_interdite_ne_sont_pas_confondus(self):
         t = self.textes("x^(2/3)")                       # f' = 2/(3∛x) : le numérateur ne s'annule jamais
-        self.assertIn("Le numérateur de f' vaut", t)
-        self.assertIn("il ne s'annule jamais", t)
+        self.assertIn("ne s'annule jamais ; valeur interdite : \\(x = 0\\)", t)
         self.assertNotIn("= 0 \\iff x", t)               # on ne résout pas ∛x = 0 comme un zéro de f'
         r = dv.etudier("x^(2/3)")
         self.assertEqual(r["domaine_etude_tex"], ed.ens_tex(ed.inter(ed.REELS, ed.complement(ed.points([ed.Num.rat(0)])))))
@@ -197,7 +196,7 @@ class TestDeriveeEnQuotient(unittest.TestCase):
     def test_zero_du_numerateur_valeur_interdite_du_denominateur(self):
         r = dv.etudier("x^(2/3)")
         self.assertEqual(r["ed_deriv_tex"], r"\mathbb{R} \setminus \left\{0\right\}")   # 0 : valeur interdite de f'
-        self.assertTrue(any("Le numérateur de f' vaut" in e.get("html", "") for e in r["signe_etapes"]))   # 2 ne s'annule jamais
+        self.assertTrue(any("ne s'annule jamais ; valeur interdite : \\(x = 0\\)" in e.get("html", "") for e in r["signe_etapes"]))
 
 
 class TestNarrationDeFPrimeEgalZero(unittest.TestCase):
@@ -216,22 +215,21 @@ class TestNarrationDeFPrimeEgalZero(unittest.TestCase):
             with self.subTest(f=entree):
                 r, textes = self.etapes(entree)
                 self.assertEqual(self.numerateur_affiche(r["deriv_tex"]), num)
-                self.assertTrue(any(f"Le numérateur de f' vaut \\({num}\\) : il ne s'annule jamais" in t for t in textes), textes)
+                self.assertTrue(any("ne s'annule jamais" in t and t.startswith(r"\(f'(x) = " + r["deriv_tex"]) for t in textes), textes)
                 self.assertFalse(any("On pose" in t for t in textes), textes)
 
     def test_racine_seule_sans_substitution(self):
         for entree, racine in [("x^(4/3)", r"\sqrt[3]{x}"), ("x^(3/2)", r"\sqrt{x}"), ("x*sqrt(x)", r"\sqrt{x}")]:
             with self.subTest(f=entree):
                 _, textes = self.etapes(entree)
-                self.assertIn(f"\\({racine} = 0 \\iff x = 0\\)", textes)
+                self.assertTrue(any(f"{racine} = 0 \\iff x = 0\\)" in t for t in textes), textes)
                 self.assertFalse(any("On pose" in t for t in textes), textes)
 
-    def test_substitution_gardee_pour_une_somme(self):
+    def test_somme_sans_substitution_ni_phrase_de_signe(self):
+        """x^(1/3) + x : f' = (3t² + 1)/(3t²) ne s'annule jamais — une ligne, pas de substitution (guide R7)."""
         _, textes = self.etapes("x^(1/3)+x")
-        self.assertTrue(any(t.startswith("On pose") for t in textes))
-        self.assertTrue(any(r"on résout \(3t^{2} + 1 = 0\)" in t for t in textes), textes)   # numérateur affiché (3t²+1)/(3t²)
-        _, textes = self.etapes("sqrt(x)+x")
-        self.assertTrue(any(r"on résout \(2t + 1 = 0\)" in t for t in textes), textes)
+        self.assertFalse(any(t.startswith("On pose") for t in textes), textes)
+        self.assertTrue(any("ne s'annule jamais ; valeur interdite" in t for t in textes), textes)
 
     def test_coherence_sur_tous_les_exemples(self):
         from cas import CAS_LIMITES, entrees_page
@@ -240,7 +238,7 @@ class TestNarrationDeFPrimeEgalZero(unittest.TestCase):
             num = self.numerateur_affiche(r.get("deriv_tex", ""))
             if num is not None and r.get("signe_resolu"):
                 with self.subTest(f=entree):
-                    self.assertTrue(any(f"vaut \\({num}\\)" in t for t in textes), (r["deriv_tex"], textes))
+                    self.assertTrue(any(t.startswith(r"\(f'(x) = " + r["deriv_tex"]) for t in textes), (r["deriv_tex"], textes))
 
 
 class TestCoefficientsEntiersED(unittest.TestCase):
