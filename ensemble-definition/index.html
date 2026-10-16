@@ -159,8 +159,8 @@ function tirerNiveau(){
 }
 let cartes=[], visibles=0;
 
-function math(el){ if(window.renderMathInElement) renderMathInElement(el,{delimiters:[{left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true}],throwOnError:false}); }
-function K(t){ try{ return katex.renderToString(t,{throwOnError:false}); }catch(e){ return t; } }
+function math(el){ if(window.renderMathInElement) renderMathInElement(el,{delimiters:[{left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true}],throwOnError:false,strict:"ignore"}); }
+function K(t){ try{ return katex.renderToString(t,{throwOnError:false,strict:"ignore"}); }catch(e){ return t; } }
 
 /* ---------- Python dans un Web Worker (la page ne se fige jamais) ---------- */
 const CODE_WORKER=`

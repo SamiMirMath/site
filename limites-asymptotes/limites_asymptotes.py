@@ -26,13 +26,21 @@ from fractions import Fraction as F
 
 from ensemble_def import (
     Nb, X, E, Neg, Op, Fn,
-    lire, tex, prec, valeur_constante, Num, Iv, REELS, fusion, inter, ens_tex,
+    lire, tex as _tex_ed, prec, valeur_constante, Num, Iv, REELS, fusion, inter, ens_tex,
     contient, proche, evaluer, sans_x, qtex, ptex, pn, deg, peval, pdivlin, pmul, nul, padd, pscal,
     decomposer, r_norm, json_strict, ajouter_saisie,
     _sympy, en_sympy_reel, arbre_depuis_sympy, num_sympy, _SP,
     txt, NonPrisEnCharge, ErreurSaisie, _analyser, apercu_json,
     signe_facteur, tableau_facteurs, en_sympy, aplatir, domaine, complement,
 )
+
+
+_FRAC_NEG = re.compile(r"\\frac\{-(\d+)\}\{(\d+)\}")
+
+
+def tex(n):
+    """tex() de l'ensemble de définition, avec le signe devant la fraction : -\\frac{1}{3}, jamais \\frac{-1}{3}."""
+    return _FRAC_NEG.sub(r"-\\frac{\1}{\2}", _tex_ed(n))
 
 __all__ = ["etudier", "etudier_json", "apercu_json"]
 
@@ -1464,7 +1472,7 @@ def _niveau(n, j, ctx):
         if n.op == "*":
             return _Ecr(_facteur(a, True) + r" \cdot " + _facteur(b, False), "autre")
         if n.op == "^":
-            base = rf"\left({a.t}\right)" if (a.genre != "jeton" or a.neg() or r"\infty" in a.t) else a.t
+            base = rf"\left({a.t}\right)" if (a.genre != "jeton" or a.neg() or r"\infty" in a.t or "^" in a.t) else a.t
             return _Ecr(rf"{base}^{{{tex(n.b)}}}", "autre")
         return _somme_ecr(a, b, n.op)
     raise Abandon(f"écriture de {tex(n)} impossible")

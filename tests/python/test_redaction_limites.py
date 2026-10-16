@@ -1007,7 +1007,8 @@ class TestStyle(unittest.TestCase):
                   r"est une valeur interdite", r"Le numérateur", r"tend vers \\\(\+\\infty\\\) et", r"pas d'asymptote horizontale",
                   r"Or \\\(", r"quand \\\(t \\to"]
     CORPUS = (TestToutEstEcritOuReplie.ENTREES + CAS + ["(x^2-1)/(x-1)", "(x^2-4)/(x^2-4x+4)", "1/(x-1)^2",
-              "5/(3-x)", "(x^2-3)/(x^3-3x)", "1/(x^2-2)", "ln(x^2-3)", "ln(x^3-3x)", "x^2/(x-1)-x", "(x+1)/(x-1)/2"])
+              "5/(3-x)", "(x^2-3)/(x^3-3x)", "1/(x^2-2)", "ln(x^2-3)", "ln(x^3-3x)", "x^2/(x-1)-x", "(x+1)/(x-1)/2",
+              "x^(1/3)", "x^(-1/3)", "1/x^(1/3)", "x^(1/3)/(x-1)", "(x-1)^(1/3)/(x-1)", "x^(1/3)/x^(-1/3)", "x^(2/3)/x"])
 
     def tous_les_textes(self):
         import json, os
@@ -1093,6 +1094,34 @@ class TestStyle(unittest.TestCase):
             formules_ = [p for p in t if p.startswith(r"\[")]
             with self.subTest(f=entree, ou=ou):
                 self.assertEqual(len(formules_), len(set(formules_)), entree)
+
+    @staticmethod
+    def double_exposant(tex):
+        """Position d'un exposant posé sur un exposant (a^{b}^{c}) ou sur un indice (a_{b}^{c}^{d}), ou None."""
+        i = 0
+        while i < len(tex):
+            if tex[i] == "^" and i + 1 < len(tex) and tex[i + 1] == "{":
+                prof, j = 0, i + 1
+                while j < len(tex):
+                    prof += (tex[j] == "{") - (tex[j] == "}")
+                    j += 1
+                    if prof == 0:
+                        break
+                if j < len(tex) and tex[j] == "^":
+                    return j
+            i += 1
+        return None
+
+    def test_le_detecteur_de_double_exposant_detecte(self):
+        self.assertIsNotNone(self.double_exposant(r"0^{+}^{\frac{1}{3}}"))
+        self.assertIsNone(self.double_exposant(r"\left(0^{+}\right)^{-\frac{1}{3}}"))
+        self.assertIsNone(self.double_exposant(r"e^{x^{2}}"))
+
+    def test_aucun_double_exposant(self):                                # 0⁺ à la puissance : (0^{+})^{p}, jamais 0^{+}^{p}
+        for entree, ou, t in self.tous_les_textes():
+            for phrase in t:
+                with self.subTest(f=entree, ou=ou):
+                    self.assertIsNone(self.double_exposant(phrase), phrase)
 
 
 if __name__ == "__main__":
