@@ -65,6 +65,15 @@ class TestDeriveeExposantIrrationnel(unittest.TestCase):
                 with self.subTest(f=entree):
                     self.assertNotRegex(t, r"(?<![\w}])-\d+ \+ \\(ln|sqrt)", t)
 
+    def test_forme_factorisee_puissance_irrationnelle(self):
+        """f' de x^√2·ln x = x^(√2−1)(√2 ln x + 1) (sert à l'étude du signe) ; les justifications restent (R11)."""
+        r = dv.etudier("x^(sqrt(2))*ln(x)")
+        self.assertEqual(r["deriv_tex"], r"x^{\sqrt{2} - 1}\,\left(\sqrt{2}\,\ln(x) + 1\right)")
+        textes = " ".join(e["html"] for e in r["deriv_etapes"])
+        self.assertIn("règle de la puissance", textes)
+        self.assertIn("règle du produit", textes)
+        self.assertEqual(dv.etudier("x^(ln(3)-1)+x")["deriv_tex"], r"\frac{\ln(3) - 1}{x^{2 - \ln(3)}} + 1")
+
     def test_conforme_oracle(self):
         for entree in CAS:
             res, arbre, ED = ed._analyser(entree)

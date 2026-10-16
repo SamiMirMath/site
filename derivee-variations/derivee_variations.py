@@ -226,7 +226,12 @@ def _simplifier(n):
         return _en_quotient(_ordre_naturel(_nettoyer(n)))
     try:
         e = en_sympy(n)
-        return _en_quotient(_ordre_naturel(_nettoyer(arbre_depuis_sympy(sp.factor(e)))))
+        irrationnel = any(not p.exp.is_Rational for p in e.atoms(sp.Pow))
+        if irrationnel:
+            # exposant constant irrationnel : x^α·ln x + x^α/x → x^(α−1)(α ln x + 1) (les puissances de x se combinent)
+            e = sp.powsimp(sp.expand(e))
+            e = sp.collect(e, [q for q in e.atoms(sp.Pow) if not q.exp.is_Rational])
+        return _en_quotient(_ordre_naturel(_nettoyer(arbre_depuis_sympy(e if irrationnel else sp.factor(e)))))
     except Exception:
         return _en_quotient(_ordre_naturel(_nettoyer(n)))
 
