@@ -208,15 +208,23 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
 
 ## Phase D — Pages communes
 
-### T14 — `commun/style.css` (identité de l'accueil, contraste AA)
+### T14 — `commun/style.css` — **faite, aspect inchangé** (`7656eef`, 17.10.2026)
+- La nouvelle identité de l'accueil (contraste AA, SOC-03) reste à faire, en tâche séparée après les migrations T16 à T20.
 - **Fichiers** : `commun/style.css`, `tests/python/test_contrastes.py`.
 - **Vérification** : SOC-03, ACC-05.
 
-### T15 — Client Pyodide commun + tests de pages en CI
+### T15 — Client Pyodide commun + tests de pages en CI — **faite** (17.10.2026 : étape 0 `0797de9`, client commun et pilote ED)
 - **Fichiers** : `commun/moteur-python.js`, `commun/worker-pyodide.js`, `tests/pages/` (navigateur
   sans interface, CI seulement), migration pilote de `ensemble-definition/index.html`.
 - **Dépend** : T04, T14.
 - **Vérification** : SOC-04, SOC-06, SOC-13 sur l'outil pilote ; essai manuel sur téléphone.
+- **Réalisé** : `commun/moteur-python.js` (client : lit `moteur/manifeste.json`, télécharge les fichiers, worker, délais, relance),
+  `commun/worker-pyodide.js` (vrai fichier ; la version de Pyodide vient du manifeste seulement), page Ensemble de définition migrée
+  (chargement uniquement), `test_manifeste.py` adapté aux deux modes ; `tests/pages/` (Chrome sans interface piloté depuis Python, local et
+  CI) : rendu égal aux références (`test_rendu.py`, 5 pages, ≈ 300 entrées), comportement commun (`test_comportement.py` : SOC-04, SOC-06,
+  SOC-16 ; SOC-13 au niveau du client commun, la phrase « Calcul trop long » restant dans la page jusqu'à T16) ; job CI `pages` (corpus réduit : 3 entrées par outil dont une erreur, ≈ 3 min en local, estimé 6 à 10 min sur GitHub ; le
+  corpus complet reste en local, `CORPUS=reduit` pour l'autre).
+  Reste à la main : essai sur téléphone (Safari, worker en fichier), blocage de jsDelivr, délai jusqu'à « Prêt » (SOC-14).
 - **Tests de pages à y intégrer** (CI seulement, Chrome sans interface via le protocole DevTools, décidé le
   14.10.2026) : aperçu de la saisie (SOC-16 : `ln(x)/x` au clavier et avec le bouton ln, pas de message
   rouge pendant la frappe, erreur après ≈ 0,5 s) sur les cinq pages ; rendu du tableau (DV-16 : double
