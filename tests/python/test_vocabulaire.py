@@ -40,7 +40,8 @@ class TestVocabulaireEleve(unittest.TestCase):
             self.assertIsNone(m, f"{ou} : « {m.group(0) if m else ''} » dans : {t[:160]}")
 
     def test_instantanes(self):
-        for nom in sorted(os.listdir(DOSSIER_INSTANTANES)):
+        for nom in sorted(os.path.relpath(os.path.join(d, n), DOSSIER_INSTANTANES)
+                          for d, _, noms in os.walk(DOSSIER_INSTANTANES) for n in noms if n.endswith(".json")):
             with open(os.path.join(DOSSIER_INSTANTANES, nom), encoding="utf-8") as f:
                 data = json.load(f)
             for entree, sortie in data.items():

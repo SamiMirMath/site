@@ -21,6 +21,12 @@ OUTILS_ENTREES["factorisation"] = entrees_factorisation()
 DOSSIER_INSTANTANES = os.path.join(os.path.dirname(__file__), "instantanes")
 
 
+def fichiers_json(dossier):
+    """Chemins relatifs des .json du dossier, sous-dossiers compris (instantanes/resoudre/…)."""
+    return sorted(os.path.relpath(os.path.join(d, n), dossier)
+                  for d, _, noms in os.walk(dossier) for n in noms if n.endswith(".json"))
+
+
 def refuse(constante):
     raise AssertionError(f"constante JSON non standard : {constante}")
 
@@ -78,7 +84,7 @@ class TestJsonStrict(unittest.TestCase):
                 strict(fa.factoriser_json(entree))
 
     def test_fichiers_d_instantanes_en_json_strict(self):
-        for nom in sorted(os.listdir(DOSSIER_INSTANTANES)):
+        for nom in fichiers_json(DOSSIER_INSTANTANES):
             with self.subTest(fichier=nom), open(os.path.join(DOSSIER_INSTANTANES, nom), encoding="utf-8") as f:
                 strict(f.read())
 
