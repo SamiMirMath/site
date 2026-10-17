@@ -121,15 +121,41 @@ Schéma de `resoudre` (T12, `moteur/sortie.py` : constructeurs et `valider()`, f
   y ajoute `limites` (T06c).
 - `resultat` est un bloc (et non un champ de carte) : l'ordre d'affichage est explicite.
 - `entete` : carte toujours visible, hors compteur d'étapes (l'Ensemble de définition seulement ; les
-  autres outils comptent leur carte « Fonction » comme première étape). Uniformiser se décidera en T16.
-- Pas de `controle` : le contrôle numérique de l'ED reste un appel séparé (`verifier_json`), lancé après
-  l'affichage ; `fenetre_json` (recalcul du graphique au zoom) reste aussi séparée.
+  autres outils comptent leur carte « Fonction » comme première étape). Décidé en T16 : on ne change pas
+  l'aspect, la différence reste.
+- `titre_masque: true` (clé facultative de carte, T16) : la carte a un `titre` dans les données, mais la page
+  ne l'affiche pas (cartes « Fonction » et carte finale de l'ED).
+- Pas de `controle` dans `resoudre` : le contrôle numérique de l'ED est un appel séparé, `controle` (T16 :
+  `{ok, accord, texte}`, la phrase est écrite en Python), lancé par la page après l'affichage ;
+  `fenetre_json` (recalcul du graphique au zoom) reste aussi séparée.
 - Les textes que les pages composaient en JS (nombre de conditions, phrases des extrema et des
   asymptotes, « Condition non résolue », valeurs ≈) sont écrits par les adaptateurs.
 - Adaptateurs : un `resoudre_<outil>.py` par outil (`resoudre`, `resoudre_json`, `apercu_json`), à côté du
   moteur, qui ne change pas. Les pages continuent d'appeler les anciennes fonctions (`analyser_json`,
   `etudier_json`, `factoriser_json`) jusqu'à leur migration (T17 à T20), qui chargera `sortie.py` et
   `resoudre_<outil>.py` et mettra le manifeste à jour.
+
+### Rendu commun et page générique (T16, `commun/rendu.js` et `commun/outil.js`)
+
+`rendu.js` transforme une carte en HTML ; les règles y sont écrites une seule fois :
+
+| Élément du format | Rendu |
+|---|---|
+| carte | `card` ; `+ cond` si elle a un badge ; `+ final` si style `final` ; style `erreur` : `card err` avec le seul message |
+| titre | `<h3>titre<span class="badge">badge</span></h3>` (`titre_tex` en formule) ; sans badge, `<h3>` simple ; `titre_masque` : rien |
+| `texte` | `etape` (défaut) → `.etape` ; `discret` → `.muted` ; `indice` → `.hint` |
+| `formule` | carte à titre masqué → `.enonce` ; sinon `.c` |
+| `resultat` / `erreur` | `.res` / `.res.err` (dans une carte `final` : `.err`) |
+| `liste` | `<ul class="extrema|bilan">` |
+| `tableau` | tableau de signes ; `limites` et `graphique` viennent en T19 (`ajouterBloc`) |
+
+`outil.js` : `monterOutil({outil, titrePdf, exemples, exos, poids, prefixe?, sympyAvant?, apres?})` monte le
+comportement commun (client Python, aperçu, clavier, exemples, calcul, cartes cachées puis révélées,
+PDF, exercice) sur le **HTML statique** de la page, qui garde ses `id`. `apres({entree, appelPy,
+derniereCarte, actuel})` est le crochet propre à l'outil (ED : badge du contrôle numérique). Le test
+`test_source_unique.py` interdit les phrases de corrigé dans les pages migrées, `rendu.js` et `outil.js`.
+Le manifeste a une clé `anciennes` : fonctions que seules des pages en cache appellent encore.
+
 - Fichiers à plat dans Pyodide comme `noyau.py` (`test_resoudre_import.py`) ; la fonction `exercice(niveau, graine)`
   est l'objet de T13.
 

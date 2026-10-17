@@ -62,7 +62,7 @@ URL : `/ensemble-definition/` · moteur : `ensemble-definition/ensemble_def.py` 
 | ED-03 | `x^(2-2)` et `x^(1/2-1/2)` ne provoquent pas d'exception et donnent le même ED que `x^0` | [auto-py] |
 | ED-04 | Toute entrée de la liste des saisies invalides donne `ok: false` et un message en français | [auto-py] |
 | ED-05 | Les exercices générés (toutes graines testées, tous niveaux) sont résolus sans valeur approchée de zéro ou de borne | [auto-py] |
-| ED-06 | Le format de sortie commun est respecté (schéma) : en-tête, une carte par condition, carte finale, textes de l'en-tête et « Condition non résolue » écrits par le moteur ; instantanés `instantanes/resoudre/ensemble-definition.json` | [auto-py] (`test_resoudre_ed.py`, `test_sortie.py`) |
+| ED-06 | Le format de sortie commun est respecté (schéma) : en-tête, une carte par condition, carte finale, textes de l'en-tête et « Condition non résolue » écrits par le moteur ; instantanés `instantanes/resoudre/ensemble-definition.json` | [auto-py] (`test_resoudre_ed.py`, `test_sortie.py`) ; page : rendu égal aux références (T16, `tests/pages`), aucune phrase de corrigé dans la page (`test_source_unique.py`), phrase du contrôle numérique écrite par `controle` (`test_controle_ed.py`) |
 | ED-07 | Le contrôle numérique ne signale aucun désaccord quand l'ED est juste, y compris près d'un zéro double (ln(x²−10x+25), 1/(x²−6x+9)) | [auto-py] (`test_controle_numerique_sans_fausse_alerte`) |
 | ED-09 | Règle de l'ED de x^α (30 exposants : 0, entiers, p/q, irrationnels, exposants simplifiables) conforme à l'oracle haute précision | [auto-py] (`test_exposant_constant.py`) |
 | ED-08 | `x^0` : ED = ℝ ; `(ln(x))^0` : ]0 ; +∞[ ; `(1/x)^0` : ℝ \ {0} ; `(sqrt(x-1))^0` : [1 ; +∞[ | [auto-py] |

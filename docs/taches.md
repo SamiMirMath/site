@@ -230,7 +230,14 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
   rouge pendant la frappe, erreur après ≈ 0,5 s) sur les cinq pages ; rendu du tableau (DV-16 : double
   barre centrée, continue, à 380 px et sur ordinateur) ; message de repli du graphique (EC-04).
 
-### T16 — `commun/outil.js` + `commun/rendu.js`, outil pilote
+### T16 — `commun/outil.js` + `commun/rendu.js`, outil pilote — **faite** (17.10.2026 : Python `c2c7c82`, rendu et page ED `6458dd2`)
+- **Réalisé** : `titre_masque` et `resoudre_ed.controle` (phrase du contrôle numérique en Python) ; `commun/rendu.js` (règles de
+  rendu des cartes et blocs, voir choix-techniques.md) ; `commun/outil.js` (`monterOutil`, config de page, crochet `apres`) ;
+  page de l'ED réduite à ses exemples, ses exercices et sa config (aucun texte de corrigé en JS) ; manifeste (`resoudre_ed`, clé
+  `anciennes`) ; rendu égal aux 41 références, 50 captures identiques au pixel ; tests `test_source_unique.py` (source unique, SOC-10),
+  SOC-07, SOC-09, SOC-13 (page), banc de rendu des instantanés des 5 outils (`test_comportement.py`). Job CI `pages` : 30 min
+  (corpus réduit ≈ 6 min en local).
+- **Report** : SOC-01 (lien « ← samimir.ch » et pied de page) avec la nouvelle identité visuelle, pour les 5 pages d'un coup.
 - **But** : page outil générique (saisie, aperçu, clavier, hasard, étapes, impression) pilotée
   par une config.
 - **Dépend** : T12, T15.
