@@ -14,11 +14,13 @@ from test_instantanes import normaliser, resumer_segments, REGENERER
 from cas import CAS_LIMITES, entrees_factorisation, entrees_page
 import resoudre_fa
 import resoudre_ed
+import resoudre_dv
 
 DOSSIER = os.path.join(os.path.dirname(__file__), "instantanes", "resoudre")
 
 OUTILS = {
     "ensemble-definition": (resoudre_ed.resoudre, lambda: entrees_page("ensemble-definition") + CAS_LIMITES["ensemble-definition"]),
+    "derivee-variations": (resoudre_dv.resoudre, lambda: entrees_page("derivee-variations") + CAS_LIMITES["derivee-variations"]),
     "factorisation": (resoudre_fa.resoudre, entrees_factorisation),
 }
 
@@ -54,6 +56,9 @@ class TestInstantanesResoudre(unittest.TestCase):
 
     def test_ensemble_definition(self):
         self.verifier_outil("ensemble-definition")
+
+    def test_derivee_variations(self):
+        self.verifier_outil("derivee-variations")
 
     def test_factorisation(self):
         self.verifier_outil("factorisation")

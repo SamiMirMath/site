@@ -1,0 +1,3592 @@
+{
+ "(x+1)/(x-1)/2": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{\\frac{x + 1}{x - 1}}{2}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R} \\setminus \\left\\{1\\right\\}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "On pose \\(u(x) = x + 1\\) et \\(v(x) = x - 1\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(u'(x) = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(v'(x) = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(\\frac{x + 1}{x - 1}\\right)' = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{x - 1 - \\left(x + 1\\right)}{\\left(x - 1\\right)^{2}} = \\frac{-2}{\\left(x - 1\\right)^{2}}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = \\dfrac{\\left(\\frac{x + 1}{x - 1}\\right)'}{2} = \\frac{-1}{\\left(x - 1\\right)^{2}}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = \\frac{-1}{\\left(x - 1\\right)^{2}}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = \\frac{-1}{\\left(x - 1\\right)^{2}}\\) ne s'annule jamais ; valeur interdite : \\(x = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "1"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "||",
+         "-"
+        ],
+        "label": "-1"
+       },
+       {
+        "cells": [
+         "+",
+         "||",
+         "+"
+        ],
+        "label": "\\left(x - 1\\right)^{2}"
+       },
+       {
+        "cells": [
+         "-",
+         "||",
+         "-"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\searrow",
+         "asym",
+         "\\searrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "Aucun extremum local : f est strictement monotone (ou n'a que des points où f' s'annule sans changer de signe).",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{\\frac{x + 1}{x - 1}}{2}",
+  "erreur": null,
+  "ok": true
+ },
+ "(x-1)^3": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\left(x - 1\\right)^{3}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "\\(\\left(x - 1\\right)^{3}\\) est de la forme \\(u^{3}\\) avec \\(u(x) = x - 1\\) (dérivée interne \\(u'(x) = 1\\)) \\(\\Rightarrow\\) \\(\\left(\\left(x - 1\\right)^{3}\\right)' = 3\\,u^{2}u' = 3\\left(x - 1\\right)^{2}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = 3\\left(x - 1\\right)^{2}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = 3\\left(x - 1\\right)^{2} = 0 \\iff x - 1 = 0 \\iff x = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "1"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "3"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "+"
+        ],
+        "label": "\\left(x - 1\\right)^{2}"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\nearrow",
+         "",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "Aucun extremum local : f est strictement monotone (ou n'a que des points où f' s'annule sans changer de signe).",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = \\left(x - 1\\right)^{3}",
+  "erreur": null,
+  "ok": true
+ },
+ "(x^2+1)^(1/2)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\left(x^{2} + 1\\right)^{\\frac{1}{2}} = \\sqrt{x^{2} + 1}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\sqrt{x^{2} + 1}\\) est de la forme \\(u^{\\frac{1}{2}}\\) avec \\(u(x) = x^{2} + 1\\) (dérivée interne \\(u'(x) = 2x\\)) \\(\\Rightarrow\\) \\(\\left(\\sqrt{x^{2} + 1}\\right)' = \\frac{1}{2}\\,u^{-\\frac{1}{2}}u' = \\frac{x}{\\sqrt{x^{2} + 1}}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = \\frac{x}{\\sqrt{x^{2} + 1}}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = \\frac{x}{\\sqrt{x^{2} + 1}} = 0 \\iff x = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "\\sqrt{x^{2} + 1}"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\searrow",
+         "extremum",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "minimum local en \\(x=0\\) : \\(f(0)=1\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = \\left(x^{2} + 1\\right)^{\\frac{1}{2}} = \\sqrt{x^{2} + 1}",
+  "erreur": null,
+  "ok": true
+ },
+ "(x^2-1)/(x-3)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{x^{2} - 1}{x - 3}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R} \\setminus \\left\\{3\\right\\}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "On pose \\(u(x) = x^{2} - 1\\) et \\(v(x) = x - 3\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(u'(x) = 2x\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(v'(x) = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{2x\\,\\left(x - 3\\right) - \\left(x^{2} - 1\\right)}{\\left(x - 3\\right)^{2}} = \\frac{x^{2} - 6x + 1}{\\left(x - 3\\right)^{2}}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = \\frac{x^{2} - 6x + 1}{\\left(x - 3\\right)^{2}}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = \\frac{x^{2} - 6x + 1}{\\left(x - 3\\right)^{2}} = 0 \\iff x^{2} - 6x + 1 = 0 \\iff x = 3 - 2\\sqrt{2} \\text{ ou } x = 3 + 2\\sqrt{2}\\) ; valeur interdite : \\(x = 3\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "3 - 2\\sqrt{2}",
+       "3",
+       "3 + 2\\sqrt{2}"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(x^{2} - 6x + 1\\right)"
+       },
+       {
+        "cells": [
+         "+",
+         "+",
+         "+",
+         "||",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "\\left(x - 3\\right)^{2}"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\nearrow",
+         "extremum",
+         "\\searrow",
+         "asym",
+         "\\searrow",
+         "extremum",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "maximum local en \\(x=3 - 2\\sqrt{2}\\) : \\(f(3 - 2\\sqrt{2})=6 - 4 \\sqrt{2}\\)",
+       "minimum local en \\(x=3 + 2\\sqrt{2}\\) : \\(f(3 + 2\\sqrt{2})=4 \\sqrt{2} + 6\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{x^{2} - 1}{x - 3}",
+  "erreur": null,
+  "ok": true
+ },
+ "-(x*ln(x))": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = -x\\,\\ln(x)",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left]0 \\,;\\, +\\infty\\right[\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "On pose \\(u(x) = x\\) et \\(v(x) = \\ln(x)\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(u'(x) = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(v'(x) = \\frac{1}{x}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(x\\,\\ln(x)\\right)' = u'(x)v(x) + u(x)v'(x) = \\ln(x) + x\\,\\frac{1}{x} = \\ln(x) + 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = -\\left(x\\,\\ln(x)\\right)' = -\\ln(x) - 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = -\\ln(x) - 1",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(-\\ln(x) - 1 = 0 \\iff \\ln(x) = -1\\) (on isole \\(\\ln(x)\\) du côté où son coefficient est positif).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln(x) = -1 \\iff x = e^{-1}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = -\\ln(x) - 1 = 0 \\iff x = e^{-1}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0",
+       "e^{-1}"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "x",
+         "||",
+         "+",
+         "0",
+         "-"
+        ],
+        "label": "\\left(-\\ln(x) - 1\\right)"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "+",
+         "0",
+         "-"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "x",
+         "asym",
+         "\\nearrow",
+         "extremum",
+         "\\searrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "maximum local en \\(x=e^{-1}\\) : \\(f(e^{-1})=e^{-1}\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = -x\\,\\ln(x)",
+  "erreur": null,
+  "ok": true
+ },
+ "-x^2": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = -x^{2}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = -\\left(x^{2}\\right)' = -2x\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = -2x",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = -2x = 0 \\iff x = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "-",
+         "-"
+        ],
+        "label": "-2"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\nearrow",
+         "extremum",
+         "\\searrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "maximum local en \\(x=0\\) : \\(f(0)=0\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = -x^{2}",
+  "erreur": null,
+  "ok": true
+ },
+ "2(x^2+ln(x))": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = 2\\left(x^{2} + \\ln(x)\\right)",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left]0 \\,;\\, +\\infty\\right[\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "La dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(x^{2} + \\ln(x)\\right)' = \\frac{2x^{2} + 1}{x}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = 2 \\cdot \\left(x^{2} + \\ln(x)\\right)' = \\frac{2\\left(2x^{2} + 1\\right)}{x}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = \\frac{2\\left(2x^{2} + 1\\right)}{x}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = \\frac{2\\left(2x^{2} + 1\\right)}{x}\\) ne s'annule jamais.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "x",
+         "||",
+         "+"
+        ],
+        "label": "2"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "+"
+        ],
+        "label": "\\left(2x^{2} + 1\\right)"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "x",
+         "asym",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "Aucun extremum local : f est strictement monotone (ou n'a que des points où f' s'annule sans changer de signe).",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = 2\\left(x^{2} + \\ln(x)\\right)",
+  "erreur": null,
+  "ok": true
+ },
+ "3(x*ln(x))": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = 3x\\,\\ln(x)",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left]0 \\,;\\, +\\infty\\right[\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "On pose \\(u(x) = x\\) et \\(v(x) = \\ln(x)\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(u'(x) = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(v'(x) = \\frac{1}{x}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(x\\,\\ln(x)\\right)' = u'(x)v(x) + u(x)v'(x) = \\ln(x) + x\\,\\frac{1}{x} = \\ln(x) + 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = 3 \\cdot \\left(x\\,\\ln(x)\\right)' = 3\\left(\\ln(x) + 1\\right)\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = 3\\left(\\ln(x) + 1\\right)",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(\\ln(x) + 1 = 0 \\iff \\ln(x) = -1\\) (on soustrait 1).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln(x) = -1 \\iff x = e^{-1}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = 3\\left(\\ln(x) + 1\\right) = 0 \\iff \\ln(x) + 1 = 0 \\iff x = e^{-1}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0",
+       "e^{-1}"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "x",
+         "||",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "3"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(\\ln(x) + 1\\right)"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "x",
+         "asym",
+         "\\searrow",
+         "extremum",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "minimum local en \\(x=e^{-1}\\) : \\(f(e^{-1})=- \\frac{3}{e}\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = 3x\\,\\ln(x)",
+  "erreur": null,
+  "ok": true
+ },
+ "3x^2-4x": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = 3x^{2} - 4x",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "La dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(3x^{2}\\right)' = 3 \\cdot \\left(x^{2}\\right)' = 6x\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = 2\\left(3x - 2\\right)\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = 2\\left(3x - 2\\right)",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = 2\\left(3x - 2\\right) = 0 \\iff 3x - 2 = 0 \\iff x = \\frac{2}{3}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "\\frac{2}{3}"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "2"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(3x - 2\\right)"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\searrow",
+         "extremum",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "minimum local en \\(x=\\frac{2}{3}\\) : \\(f(\\frac{2}{3})=- \\frac{4}{3}\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = 3x^{2} - 4x",
+  "erreur": null,
+  "ok": true
+ },
+ "e^(2x)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = e^{2x}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "\\(e^{2x}\\) est de la forme \\(e^{u}\\) avec \\(u(x) = 2x\\) (dérivée interne \\(u'(x) = 2\\)) \\(\\Rightarrow\\) \\(\\left(e^{2x}\\right)' = u' e^{u} = 2e^{2x}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = 2e^{2x}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = 2e^{2x}\\) ne s'annule jamais.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [],
+      "rows": [
+       {
+        "cells": [
+         "+"
+        ],
+        "label": "2"
+       },
+       {
+        "cells": [
+         "+"
+        ],
+        "label": "e^{2x}"
+       },
+       {
+        "cells": [
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "Aucun extremum local : f est strictement monotone (ou n'a que des points où f' s'annule sans changer de signe).",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = e^{2x}",
+  "erreur": null,
+  "ok": true
+ },
+ "e^(x^2)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = e^{x^{2}}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(e^{x^{2}}\\) est de la forme \\(e^{u}\\) avec \\(u(x) = x^{2}\\) (dérivée interne \\(u'(x) = 2x\\)) \\(\\Rightarrow\\) \\(\\left(e^{x^{2}}\\right)' = u' e^{u} = 2x\\,e^{x^{2}}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = 2x\\,e^{x^{2}}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = 2x\\,e^{x^{2}} = 0 \\iff x = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "2"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "e^{x^{2}}"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\searrow",
+         "extremum",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "minimum local en \\(x=0\\) : \\(f(0)=1\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = e^{x^{2}}",
+  "erreur": null,
+  "ok": true
+ },
+ "ln(x)/x": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{\\ln(x)}{x}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left]0 \\,;\\, +\\infty\\right[\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "On pose \\(u(x) = \\ln(x)\\) et \\(v(x) = x\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(u'(x) = \\frac{1}{x}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(v'(x) = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{\\frac{1}{x}\\,x - \\ln(x)}{x^{2}} = \\frac{-\\left(\\ln(x) - 1\\right)}{x^{2}}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = \\frac{-\\left(\\ln(x) - 1\\right)}{x^{2}}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(\\ln(x) - 1 = 0 \\iff \\ln(x) = 1\\) (on ajoute 1).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln(x) = 1 \\iff x = e\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = \\frac{-\\left(\\ln(x) - 1\\right)}{x^{2}} = 0 \\iff \\ln(x) - 1 = 0 \\iff x = e\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0",
+       "e"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "-",
+         "-"
+        ],
+        "label": "-1"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(\\ln(x) - 1\\right)"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "x^{2}"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "+",
+         "0",
+         "-"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "x",
+         "asym",
+         "\\nearrow",
+         "extremum",
+         "\\searrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "maximum local en \\(x=e\\) : \\(f(e)=e^{-1}\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{\\ln(x)}{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "ln(x^2-4)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\ln\\left(x^{2} - 4\\right)",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln\\left(x^{2} - 4\\right)\\) est de la forme \\(\\ln(u)\\) avec \\(u(x) = x^{2} - 4\\) (dérivée interne \\(u'(x) = 2x\\)) \\(\\Rightarrow\\) \\(\\left(\\ln\\left(x^{2} - 4\\right)\\right)' = \\frac{u'}{u} = \\frac{2x}{\\left(x - 2\\right)\\,\\left(x + 2\\right)}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = \\frac{2x}{\\left(x - 2\\right)\\,\\left(x + 2\\right)}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = \\frac{2x}{\\left(x - 2\\right)\\,\\left(x + 2\\right)} = 0 \\iff x = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-2",
+       "2"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "||",
+         "x",
+         "||",
+         "+"
+        ],
+        "label": "2"
+       },
+       {
+        "cells": [
+         "-",
+         "||",
+         "x",
+         "||",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "-",
+         "||",
+         "x",
+         "||",
+         "+"
+        ],
+        "label": "\\left(x - 2\\right)"
+       },
+       {
+        "cells": [
+         "-",
+         "||",
+         "x",
+         "||",
+         "+"
+        ],
+        "label": "\\left(x + 2\\right)"
+       },
+       {
+        "cells": [
+         "-",
+         "||",
+         "x",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\searrow",
+         "asym",
+         "x",
+         "asym",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "Aucun extremum local : f est strictement monotone (ou n'a que des points où f' s'annule sans changer de signe).",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = \\ln\\left(x^{2} - 4\\right)",
+  "erreur": null,
+  "ok": true
+ },
+ "sqrt(x^2)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\sqrt{x^{2}}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\sqrt{x^{2}}\\) est de la forme \\(\\sqrt{u}\\) avec \\(u(x) = x^{2}\\) (dérivée interne \\(u'(x) = 2x\\)) \\(\\Rightarrow\\) \\(\\left(\\sqrt{x^{2}}\\right)' = \\frac{u'}{2\\sqrt{u}} = \\frac{x}{\\sqrt{x^{2}}}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = \\frac{x}{\\sqrt{x^{2}}}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "ED de f' : \\(D_{f'} = \\mathbb{R} \\setminus \\left\\{0\\right\\}\\), différent de l'ED de f, \\(D_f = \\mathbb{R}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = \\frac{x}{\\sqrt{x^{2}}}\\) ne s'annule jamais ; valeur interdite : \\(x = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "+",
+         "||",
+         "+"
+        ],
+        "label": "\\sqrt{x^{2}}"
+       },
+       {
+        "cells": [
+         "-",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\searrow",
+         "val:0",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "minimum local en \\(x=0\\) : \\(f(0)=0\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = \\sqrt{x^{2}}",
+  "erreur": null,
+  "ok": true
+ },
+ "sqrt(x^2-4)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\sqrt{x^{2} - 4}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\sqrt{x^{2} - 4}\\) est de la forme \\(\\sqrt{u}\\) avec \\(u(x) = x^{2} - 4\\) (dérivée interne \\(u'(x) = 2x\\)) \\(\\Rightarrow\\) \\(\\left(\\sqrt{x^{2} - 4}\\right)' = \\frac{u'}{2\\sqrt{u}} = \\frac{x}{\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = \\frac{x}{\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "ED de f' : \\(D_{f'} = \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[\\), différent de l'ED de f, \\(D_f = \\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = \\frac{x}{\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}}\\) ne s'annule jamais.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-2",
+       "2"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "-",
+         "x",
+         "+",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "+",
+         "||",
+         "x",
+         "||",
+         "+"
+        ],
+        "label": "\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}"
+       },
+       {
+        "cells": [
+         "-",
+         "||",
+         "x",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\searrow",
+         "val:0",
+         "x",
+         "val:0",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "minimum local en \\(x=-2\\) : \\(f(-2)=0\\)",
+       "minimum local en \\(x=2\\) : \\(f(2)=0\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = \\sqrt{x^{2} - 4}",
+  "erreur": null,
+  "ok": true
+ },
+ "sqrt(x^2-4x+5)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\sqrt{x^{2} - 4x + 5}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\sqrt{x^{2} - 4x + 5}\\) est de la forme \\(\\sqrt{u}\\) avec \\(u(x) = x^{2} - 4x + 5\\) (dérivée interne \\(u'(x) = 2x - 4\\)) \\(\\Rightarrow\\) \\(\\left(\\sqrt{x^{2} - 4x + 5}\\right)' = \\frac{u'}{2\\sqrt{u}} = \\frac{x - 2}{\\sqrt{x^{2} - 4x + 5}}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = \\frac{x - 2}{\\sqrt{x^{2} - 4x + 5}}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = \\frac{x - 2}{\\sqrt{x^{2} - 4x + 5}} = 0 \\iff x - 2 = 0 \\iff x = 2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "2"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(x - 2\\right)"
+       },
+       {
+        "cells": [
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "\\sqrt{x^{2} - 4x + 5}"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\searrow",
+         "extremum",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "minimum local en \\(x=2\\) : \\(f(2)=1\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = \\sqrt{x^{2} - 4x + 5}",
+  "erreur": null,
+  "ok": true
+ },
+ "x*ln(x)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = x\\,\\ln(x)",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left]0 \\,;\\, +\\infty\\right[\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "On pose \\(u(x) = x\\) et \\(v(x) = \\ln(x)\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(u'(x) = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(v'(x) = \\frac{1}{x}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = u'(x)v(x) + u(x)v'(x) = \\ln(x) + x\\,\\frac{1}{x} = \\ln(x) + 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = \\ln(x) + 1",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(\\ln(x) + 1 = 0 \\iff \\ln(x) = -1\\) (on soustrait 1).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln(x) = -1 \\iff x = e^{-1}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = \\ln(x) + 1 = 0 \\iff x = e^{-1}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0",
+       "e^{-1}"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(\\ln(x) + 1\\right)"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "x",
+         "asym",
+         "\\searrow",
+         "extremum",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "minimum local en \\(x=e^{-1}\\) : \\(f(e^{-1})=- \\frac{1}{e}\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = x\\,\\ln(x)",
+  "erreur": null,
+  "ok": true
+ },
+ "x*ln(x)+x": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = x\\,\\ln(x) + x",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left]0 \\,;\\, +\\infty\\right[\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "La dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "On pose \\(u(x) = x\\) et \\(v(x) = \\ln(x)\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(u'(x) = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(v'(x) = \\frac{1}{x}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(x\\,\\ln(x)\\right)' = u'(x)v(x) + u(x)v'(x) = \\ln(x) + x\\,\\frac{1}{x} = \\ln(x) + 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = \\ln(x) + 2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = \\ln(x) + 2",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(\\ln(x) + 2 = 0 \\iff \\ln(x) = -2\\) (on soustrait 2).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln(x) = -2 \\iff x = e^{-2}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = \\ln(x) + 2 = 0 \\iff x = e^{-2}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0",
+       "e^{-2}"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(\\ln(x) + 2\\right)"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "x",
+         "asym",
+         "\\searrow",
+         "extremum",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "minimum local en \\(x=e^{-2}\\) : \\(f(e^{-2})=- \\frac{1}{e^{2}}\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = x\\,\\ln(x) + x",
+  "erreur": null,
+  "ok": true
+ },
+ "x/(x^2+1)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{x}{x^{2} + 1}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "On pose \\(u(x) = x\\) et \\(v(x) = x^{2} + 1\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(u'(x) = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(v'(x) = 2x\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{x^{2} + 1 - x \\cdot 2x}{\\left(x^{2} + 1\\right)^{2}} = \\frac{-\\left(x + 1\\right)\\,\\left(x - 1\\right)}{\\left(x^{2} + 1\\right)^{2}}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = \\frac{-\\left(x + 1\\right)\\,\\left(x - 1\\right)}{\\left(x^{2} + 1\\right)^{2}}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = \\frac{-\\left(x + 1\\right)\\,\\left(x - 1\\right)}{\\left(x^{2} + 1\\right)^{2}} = 0 \\iff x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-1",
+       "1"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "-",
+         "-"
+        ],
+        "label": "-1"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "\\left(x + 1\\right)"
+       },
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(x - 1\\right)"
+       },
+       {
+        "cells": [
+         "+",
+         "+",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "\\left(x^{2} + 1\\right)^{2}"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "0",
+         "-"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\searrow",
+         "extremum",
+         "\\nearrow",
+         "extremum",
+         "\\searrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "minimum local en \\(x=-1\\) : \\(f(-1)=- \\frac{1}{2}\\)",
+       "maximum local en \\(x=1\\) : \\(f(1)=\\frac{1}{2}\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{x}{x^{2} + 1}",
+  "erreur": null,
+  "ok": true
+ },
+ "x^(-1/2)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = x^{-\\frac{1}{2}}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left]0 \\,;\\, +\\infty\\right[\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "\\(\\left(x^{-\\frac{1}{2}}\\right)' = \\frac{-1}{2\\sqrt{x^{3}}}\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = \\frac{-1}{2\\sqrt{x^{3}}}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = \\frac{-1}{2\\sqrt{x^{3}}}\\) ne s'annule jamais.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "x",
+         "||",
+         "-"
+        ],
+        "label": "-\\frac{1}{2}"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "+"
+        ],
+        "label": "\\left(\\sqrt{x}\\right)^{3}"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "-"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "x",
+         "asym",
+         "\\searrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "Aucun extremum local : f est strictement monotone (ou n'a que des points où f' s'annule sans changer de signe).",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = x^{-\\frac{1}{2}}",
+  "erreur": null,
+  "ok": true
+ },
+ "x^(1/2)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = x^{\\frac{1}{2}} = \\sqrt{x}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left[0 \\,;\\, +\\infty\\right[\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "\\(\\left(\\sqrt{x}\\right)' = \\frac{1}{2\\sqrt{x}}\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = \\frac{1}{2\\sqrt{x}}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "ED de f' : \\(D_{f'} = \\left]0 \\,;\\, +\\infty\\right[\\), différent de l'ED de f, \\(D_f = \\left[0 \\,;\\, +\\infty\\right[\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = \\frac{1}{2\\sqrt{x}}\\) ne s'annule jamais.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "x",
+         "+",
+         "+"
+        ],
+        "label": "\\frac{1}{2}"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "+"
+        ],
+        "label": "\\sqrt{x}"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "x",
+         "val:0",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "minimum local en \\(x=0\\) : \\(f(0)=0\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = x^{\\frac{1}{2}} = \\sqrt{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "x^(2-2)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = x^{2 - 2}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "\\(\\left(x^{2 - 2}\\right)' = 0\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = 0",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(0\\) est nulle partout où elle est définie.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [],
+      "rows": [
+       {
+        "cells": [
+         "+"
+        ],
+        "label": "0"
+       },
+       {
+        "cells": [
+         "0"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\rightarrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "f' est nulle sur son ensemble de définition : f est constante sur chaque intervalle, aucun extremum.",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = x^{2 - 2}",
+  "erreur": null,
+  "ok": true
+ },
+ "x^(2/3)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = x^{\\frac{2}{3}} = \\sqrt[3]{x^{2}}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "\\(\\left(\\sqrt[3]{x^{2}}\\right)' = \\frac{2}{3\\sqrt[3]{x}}\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = \\frac{2}{3\\sqrt[3]{x}}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "ED de f' : \\(D_{f'} = \\mathbb{R} \\setminus \\left\\{0\\right\\}\\), différent de l'ED de f, \\(D_f = \\mathbb{R}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = \\frac{2}{3\\sqrt[3]{x}}\\) ne s'annule jamais ; valeur interdite : \\(x = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "\\frac{2}{3}"
+       },
+       {
+        "cells": [
+         "-",
+         "||",
+         "+"
+        ],
+        "label": "\\sqrt[3]{x}"
+       },
+       {
+        "cells": [
+         "-",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\searrow",
+         "val:0",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "minimum local en \\(x=0\\) : \\(f(0)=0\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = x^{\\frac{2}{3}} = \\sqrt[3]{x^{2}}",
+  "erreur": null,
+  "ok": true
+ },
+ "x^(3/2)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = x^{\\frac{3}{2}} = \\sqrt{x^{3}}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left[0 \\,;\\, +\\infty\\right[\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "\\(\\left(\\sqrt{x^{3}}\\right)' = \\frac{3\\sqrt{x}}{2}\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = \\frac{3\\sqrt{x}}{2}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(\\sqrt{x} = 0 \\iff x = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = \\frac{3\\sqrt{x}}{2} = 0 \\iff \\sqrt{x} = 0 \\iff x = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "x",
+         "+",
+         "+"
+        ],
+        "label": "\\frac{3}{2}"
+       },
+       {
+        "cells": [
+         "x",
+         "0",
+         "+"
+        ],
+        "label": "\\sqrt{x}"
+       },
+       {
+        "cells": [
+         "x",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "x",
+         "extremum",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "minimum local en \\(x=0\\) : \\(f(0)=0\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = x^{\\frac{3}{2}} = \\sqrt{x^{3}}",
+  "erreur": null,
+  "ok": true
+ },
+ "x^2*e^(-x)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = x^{2}\\,e^{-x}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "On pose \\(u(x) = x^{2}\\) et \\(v(x) = e^{-x}\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(e^{-x}\\) est de la forme \\(e^{u}\\) avec \\(u(x) = -x\\) (dérivée interne \\(u'(x) = -1\\)) \\(\\Rightarrow\\) \\(\\left(e^{-x}\\right)' = u' e^{u} = -e^{-x}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(u'(x) = 2x\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(v'(x) = -e^{-x}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = u'(x)v(x) + u(x)v'(x) = 2x\\,e^{-x} + x^{2}\\,\\left(-e^{-x}\\right) = -x\\,\\left(x - 2\\right)\\,e^{-x}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = -x\\,\\left(x - 2\\right)\\,e^{-x}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = -x\\,\\left(x - 2\\right)\\,e^{-x} = 0 \\iff x = 0 \\text{ ou } x - 2 = 0 \\iff x = 0 \\text{ ou } x = 2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0",
+       "2"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "-",
+         "-"
+        ],
+        "label": "-1"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(x - 2\\right)"
+       },
+       {
+        "cells": [
+         "+",
+         "+",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "e^{-x}"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "0",
+         "-"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\searrow",
+         "extremum",
+         "\\nearrow",
+         "extremum",
+         "\\searrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "minimum local en \\(x=0\\) : \\(f(0)=0\\)",
+       "maximum local en \\(x=2\\) : \\(f(2)=\\frac{4}{e^{2}}\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = x^{2}\\,e^{-x}",
+  "erreur": null,
+  "ok": true
+ },
+ "x^2-4x+3": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = x^{2} - 4x + 3",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "La dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = 2\\left(x - 2\\right)\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = 2\\left(x - 2\\right)",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = 2\\left(x - 2\\right) = 0 \\iff x - 2 = 0 \\iff x = 2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "2"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "2"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(x - 2\\right)"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\searrow",
+         "extremum",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "minimum local en \\(x=2\\) : \\(f(2)=-1\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = x^{2} - 4x + 3",
+  "erreur": null,
+  "ok": true
+ },
+ "x^3": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = x^{3}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "\\(\\left(x^{3}\\right)' = 3x^{2}\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = 3x^{2}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = 3x^{2} = 0 \\iff x = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "3"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "+"
+        ],
+        "label": "x^{2}"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\nearrow",
+         "",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "Aucun extremum local : f est strictement monotone (ou n'a que des points où f' s'annule sans changer de signe).",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = x^{3}",
+  "erreur": null,
+  "ok": true
+ },
+ "x^3-3x": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = x^{3} - 3x",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "La dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(x^{3}\\right)' = 3x^{2}\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = 3\\left(x + 1\\right)\\,\\left(x - 1\\right)\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = 3\\left(x + 1\\right)\\,\\left(x - 1\\right)",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = 3\\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-1",
+       "1"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "+",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "3"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "\\left(x + 1\\right)"
+       },
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(x - 1\\right)"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\nearrow",
+         "extremum",
+         "\\searrow",
+         "extremum",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "maximum local en \\(x=-1\\) : \\(f(-1)=2\\)",
+       "minimum local en \\(x=1\\) : \\(f(1)=-2\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = x^{3} - 3x",
+  "erreur": null,
+  "ok": true
+ },
+ "x^4-2x^2": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = x^{4} - 2x^{2}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "La dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(x^{4}\\right)' = 4x^{3}\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(2x^{2}\\right)' = 2 \\cdot \\left(x^{2}\\right)' = 4x\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = 4x\\,\\left(x + 1\\right)\\,\\left(x - 1\\right)\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = 4x\\,\\left(x + 1\\right)\\,\\left(x - 1\\right)",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = 4x\\,\\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x = 0 \\text{ ou } x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 0 \\text{ ou } x = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-1",
+       "0",
+       "1"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "+",
+         "+",
+         "+",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "4"
+       },
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "0",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "+",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "\\left(x + 1\\right)"
+       },
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "-",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(x - 1\\right)"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\searrow",
+         "extremum",
+         "\\nearrow",
+         "extremum",
+         "\\searrow",
+         "extremum",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "minimum local en \\(x=-1\\) : \\(f(-1)=-1\\)",
+       "maximum local en \\(x=0\\) : \\(f(0)=0\\)",
+       "minimum local en \\(x=1\\) : \\(f(1)=-1\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = x^{4} - 2x^{2}",
+  "erreur": null,
+  "ok": true
+ },
+ "x^x": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = x^{x}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left]0 \\,;\\, +\\infty\\right[\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "\\(x^{x}\\) s'écrit \\(e^{x\\ln\\left(x\\right)}\\) : on dérive cette forme composée \\(\\Rightarrow\\) \\(\\left(x^{x}\\right)' = x^{x}\\,\\left(\\ln(x) + 1\\right)\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = x^{x}\\,\\left(\\ln(x) + 1\\right)",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(\\ln(x) + 1 = 0 \\iff \\ln(x) = -1\\) (on soustrait 1).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln(x) = -1 \\iff x = e^{-1}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = x^{x}\\,\\left(\\ln(x) + 1\\right) = 0 \\iff \\ln(x) + 1 = 0 \\iff x = e^{-1}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0",
+       "e^{-1}"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "x",
+         "||",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "x^{x}"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(\\ln(x) + 1\\right)"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "x",
+         "asym",
+         "\\searrow",
+         "extremum",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "minimum local en \\(x=e^{-1}\\) : \\(f(e^{-1})=e^{- \\frac{1}{e}}\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   }
+  ],
+  "enonce_tex": "f(x) = x^{x}",
+  "erreur": null,
+  "ok": true
+ }
+}
