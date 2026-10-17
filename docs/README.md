@@ -19,6 +19,7 @@ Ce dossier n'est **pas publié** sur le site (`_config.yml` l'exclut de GitHub P
 | [a-valider.md](a-valider.md) | Questions ouvertes : rien n'est changé sur ces points tant qu'elles ne sont pas tranchées |
 | [guide-redaction.md](guide-redaction.md) | Format de rédaction des corrigés (minimum de lignes) : règles R1–R11 et 7 exemples de référence |
 | [taches.md](taches.md) | Découpage en tâches indépendantes, chacune avec sa vérification |
+| [futur_outils.md](futur_outils.md) | Outils proposés d'après le plan d'études DGEP (non spécifiés, à choisir) |
 
 ## Lancer les tests en local
 

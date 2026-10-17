@@ -241,6 +241,117 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
 - **Dépend** : T01. Milliers : ’ dès 4 chiffres, saisie de ' et ’ (Q5, 14.10.2026).
 - **Vérification** : SOC-11, SOC-12.
 
+## Phase F — Nouveaux outils (avant la phase E)
+
+Les outils viennent de [futur_outils.md](futur_outils.md) (numéros « # » ci-dessous). Ils se placent
+**avant le simplexe** : ils comblent des années sans outil (1re n'a que la factorisation) alors que
+le simplexe existe déjà et fonctionne. Tâches **N01 à N26**, une par outil.
+
+### Prérequis communs
+
+- **T11, T12, T13** (noyau public, format `resoudre()`, exercices avec graine) : sans eux, chaque
+  moteur importerait des noms privés de `ensemble_def.py` et écrirait un adaptateur jeté ensuite.
+- **T16 puis T17 à T20** (page générique prouvée sur les quatre pages existantes), **T22**
+  (registre : un outil = une entrée + ACC-01 à ACC-08), **T23** (notation suisse : décimaux des
+  statistiques et probabilités, tokeniseurs modifiés une seule fois).
+- **Graphique réutilisable** : T19 doit livrer le graphique de l'Étude complète comme module
+  (`commun/graphique.js`) et non comme code de page ; il sert à N01, N05, N11, N22, N25, N26.
+  Si T19 ne le fait pas, une tâche d'extraction précède N01.
+- **Une seule tâche d'outil à la fois**, et jamais en parallèle d'une migration T17 à T20.
+
+### Gabarit d'une tâche d'outil (étapes = commits)
+
+1. **Spécification** `docs/specifications/<outil>.md` : critères d'acceptation numérotés (préfixe
+   propre à l'outil), questions pour l'enseignant dans [a-valider.md](a-valider.md). Comportement
+   à trancher avant le code, comme pour les outils actuels.
+2. **Moteur Python** (`resoudre()` + gabarits d'exercices T13) avec : tests de propriétés contre un
+   oracle indépendant (comme T02), instantanés (comme T01), entrée dans `moteur/manifeste.json`.
+3. **Page** (configuration de la page générique, pas de page copiée), exemples de rédaction ajoutés
+   à [guide-redaction.md](guide-redaction.md), test de page en CI.
+4. **Registre** : entrée dans `commun/registre.json` (année, filières) ; le lien sur l'accueil n'est
+   posé qu'après relecture des exemples par l'enseignant.
+
+### Briques communes (créées par le premier outil qui en a besoin)
+
+| Brique | Créée par | Réutilisée par |
+|---|---|---|
+| Graphique de fonction réutilisable | T19 | N01, N05, N11, N22, N25, N26 |
+| Analyse d'équations, inéquations et systèmes (`=`, `≤`, plusieurs lignes) et affichage de l'ensemble solution | N02 | N03, N04, N05, N06, N11, N08, N18, N21 |
+| Figure plane SVG (repère, points, vecteurs, droites, cercles, angles) | N08 (cercle trigonométrique) | N09, N16, N17, N18, N21 |
+| Champs de saisie typés (nombres, listes, vecteurs, points, matrices, tableaux de données) | N12 | N13, N14, N15, N16, N17, N23 |
+| Calcul exact sur matrices (Gauss) | N06 | N23, N24 |
+
+### Ordre et dépendances
+
+**Vague 1 — Pilote et résolution** (analyse de la 2e et algèbre de la 1re)
+
+| Tâche | Outil (#) | Niveau | Dépend | Remarque |
+|---|---|---|---|---|
+| N01 | Tangente en un point (6) | 2e Ms/Mr | prérequis, graphique | **Pilote** : petit, réutilise la dérivée ; premier outil entièrement natif, il valide T16 à T22 avant les gros chantiers |
+| N02 | Équations et inéquations (1) | 1re Ms/Mr | N01 | Crée l'analyse d'équations ; réutilise le tableau de signes et l'ensemble de définition |
+| N03 | Équations exponentielles et logarithmiques (5) | 2e Ms/Mr | N02 | ED d'abord, puis changement de variable comme en factorisation |
+| N04 | Tangente depuis un point extérieur (6, suite) | 2e Ms/Mr | N01, N02 | Étend N01 (équation en t) |
+| N05 | Optimisation (7) | 2e Ms/Mr | N01, N02 | **À valider** : forme de l'énoncé (fonction donnée sur un intervalle, ou contrainte à éliminer) |
+| N06 | Systèmes d'équations (3) | 1re Ms/Mr | N02 | Crée le calcul exact sur matrices |
+| N07 | Division euclidienne et Horner (2) | 1re Ms/Mr | T21 | Se recoupe avec la factorisation |
+
+**Vague 2 — Trigonométrie** (1re/2e)
+
+| Tâche | Outil (#) | Niveau | Dépend | Remarque |
+|---|---|---|---|---|
+| N08 | Équations trigonométriques (4) | 1re Mr, 2e Ms/Mr | N02 | Crée la figure plane (cercle trigonométrique) ; familles de solutions périodiques |
+| N09 | Triangle quelconque (16) | 1re Ms/Mr | N08 | Sinus, cosinus, aire |
+
+**Vague 3 — Intégrale** (3e)
+
+| Tâche | Outil (#) | Niveau | Dépend | Remarque |
+|---|---|---|---|---|
+| N10 | Primitives et intégrale définie (8) | 3e Ms/Mr | T17 (dérivée migrée) | Règles de dérivation lues à l'envers ; mêmes étapes minimales que la dérivée |
+| N11 | Aire entre courbes et volume de révolution (9) | 3e Ms/Mr | N10, N02 | Les bornes sont les intersections de f et g (équation de N02) |
+
+**Vague 4 — Dénombrement, probabilités, statistique** (indépendante des vagues 1 à 3 : peut passer plus tôt si l'enseignant en a besoin)
+
+| Tâche | Outil (#) | Niveau | Dépend | Remarque |
+|---|---|---|---|---|
+| N12 | Champs de saisie typés | — | prérequis | Brique seule, vérifiée sur une page de test |
+| N13 | Dénombrement (13) | 3e Ms/Mr | N12 | Formule justifiée, pas seulement le résultat |
+| N14 | Probabilités (14) | 3e Ms/Mr | N13 | Arbre pondéré (composant propre) |
+| N15 | Statistique descriptive (15) | 1re Ms/Mr | N12, T23 | Décimaux suisses ; variance/écart type exacts |
+
+**Vague 5 — Géométrie analytique**
+
+| Tâche | Outil (#) | Niveau | Dépend | Remarque |
+|---|---|---|---|---|
+| N16 | Vecteurs (11) | 1re Ms/Mr (+ appui 3C→2M) | N08 (figure), N12 | Produit vectoriel et mixte : Mr seulement |
+| N17 | Droites du plan (10) | 2e Ms/Mr | N16 | |
+| N18 | Cercle et tangentes (12) | 3e Ms/Mr | N17, N02 | Tangentes issues d'un point : équation du 2e degré |
+
+**Vague 6 — Niveau renforcé (Mr)**
+
+| Tâche | Outil (#) | Dépend | Remarque |
+|---|---|---|---|
+| N19 | Convexité et points d'inflexion (19) | T19 | Prolonge l'Étude complète ; **peut se faire dès T19 terminée**, avant le reste de la phase F |
+| N20 | Intégration avancée (22) | N10, N07 | Parties, changement de variable, éléments simples |
+| N21 | Nombres complexes (17) | N02, N08 (figure) | Plan d'Argand ; équations dans ℂ |
+| N22 | Suites et limites (18) | graphique, Limites | Réutilise le moteur de limites (n → ∞) |
+| N23 | Algèbre linéaire (20) | N06, N12 | Le plus gros chantier : à découper en sous-tâches (matrices et déterminants, espaces vectoriels, valeurs propres) dans sa spécification |
+| N24 | Géométrie dans l'espace (21) | N16, N17, N23 | **À valider** : rendu 3D (schéma statique ou projection) |
+
+**Vague 7 — Option applications des mathématiques**
+
+| Tâche | Outil (#) | Dépend | Remarque |
+|---|---|---|---|
+| N25 | Résolution approchée d'équations (23) | N01, graphique | Newton = tangente de N01 qui coupe l'axe ; erreur affichée |
+| N26 | Simulateur de modèles (24) | N22, graphique | |
+| — | Projections, axonométrie, perspective (25) | — | Hors plan : tracé interactif lourd, à rediscuter |
+
+### Vérification de la phase
+
+Pour chaque outil : sa spécification relue par l'enseignant avant le code ; la suite complète
+verte (CLAUDE.md) ; instantanés de **tous** les autres moteurs inchangés ; ACC-01 à ACC-08 verts
+avec la nouvelle entrée du registre ; un exemple par niveau (Ms, Mr) relu avant de lier l'outil
+sur l'accueil.
+
 ## Phase E — Simplexe (en dernier, priorité faible)
 
 ### T24 — Extraire `simplexe/lp.js` et le tester (Node, CI)
@@ -264,7 +375,10 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
 ## Ordre conseillé
 
 T01 → T02 → T03 → T04 (faites) → T05, T07, T08 (indépendantes) → T08b → T06 → T07b (priorité haute)
-→ T09 → T11 → T12 → T13 → T14 → T15 → T16 → T17…T20 → T21, T22, T23 → T10 → T24…T27 → T28.
+→ T09 → T11 → T12 → T13 → T14 → T15 → T16 → T17…T20 → T21, T22, T23 → T10
+→ **phase F (N01 → N26, vagues 1 à 7)** → T24…T27 → T28.
+Les spécifications des outils de la phase F (étape 1 du gabarit) peuvent être rédigées dès maintenant :
+ce sont des documents, ils ne touchent pas au code.
 
 **Plus aucune tâche n'est bloquée** (Q1 à Q7 tranchées le 14.10.2026). Q8 (racine double du
 carré parfait en factorisation) reste ouverte ; elle ne concerne qu'un gabarit de T13.
