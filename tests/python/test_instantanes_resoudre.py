@@ -11,12 +11,14 @@ import unittest
 
 import moteurs  # noqa: F401  (chemins des moteurs)
 from test_instantanes import normaliser, resumer_segments, REGENERER
-from cas import entrees_factorisation
+from cas import CAS_LIMITES, entrees_factorisation, entrees_page
 import resoudre_fa
+import resoudre_ed
 
 DOSSIER = os.path.join(os.path.dirname(__file__), "instantanes", "resoudre")
 
 OUTILS = {
+    "ensemble-definition": (resoudre_ed.resoudre, lambda: entrees_page("ensemble-definition") + CAS_LIMITES["ensemble-definition"]),
     "factorisation": (resoudre_fa.resoudre, entrees_factorisation),
 }
 
@@ -49,6 +51,9 @@ class TestInstantanesResoudre(unittest.TestCase):
         for entree in actuel:
             with self.subTest(outil=outil, entree=entree):
                 self.assertEqual(actuel[entree], reference[entree])
+
+    def test_ensemble_definition(self):
+        self.verifier_outil("ensemble-definition")
 
     def test_factorisation(self):
         self.verifier_outil("factorisation")

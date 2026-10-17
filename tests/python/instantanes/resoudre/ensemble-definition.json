@@ -1,0 +1,2557 @@
+{
+ "": {
+  "erreur": "Entrez une expression, par exemple ln(x-1)/(x-3).",
+  "ok": false
+ },
+ "(x-1)^(2/3)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\mathbb{R}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\left(x - 1\\right)^{\\frac{2}{3}} = \\sqrt[3]{\\left(x - 1\\right)^{2}}",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\left(x - 1\\right)^{\\frac{2}{3}} = \\sqrt[3]{\\left(x - 1\\right)^{2}}",
+     "type": "formule"
+    },
+    {
+     "html": "Ni logarithme, ni dénominateur, ni racine : aucune condition.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "1 000x": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\mathbb{R}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = 1 \\cdot 000\\,x",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = 1 \\cdot 000\\,x",
+     "type": "formule"
+    },
+    {
+     "html": "Ni logarithme, ni dénominateur, ni racine : aucune condition.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "1'000x": {
+  "erreur": "Caractère non reconnu : « ' ».",
+  "ok": false
+ },
+ "1/(1-1)": {
+  "erreur": "Division par zéro dans l'expression.",
+  "ok": false
+ },
+ "1/(e^(2x)-5e^x+6)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "dénominateur",
+    "blocs": [
+     {
+      "html": "On pose \\(t = e^{x}\\) : \\(e^{2x} - 5e^{x} + 6 = t^{2} - 5t + 6\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Trinôme \\(t^{2} - 5t + 6\\) : \\(\\Delta = b^2 - 4ac = (-5)^2 - 4 \\cdot 1 \\cdot 6 = 1\\), \\(\\sqrt{\\Delta} = 1\\) : zéros \\(t_1 = 2\\) et \\(t_2 = 3\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(e^{x} = 2 \\iff x = \\ln(2)\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(e^{x} = 3 \\iff x = \\ln(3)\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(e^{2x} - 5e^{x} + 6 \\neq 0 \\iff x \\notin \\left\\{\\ln(2) \\,;\\, \\ln(3)\\right\\}\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\mathbb{R} \\setminus \\left\\{\\ln(2) \\,;\\, \\ln(3)\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{1}{e^{2x} - 5e^{x} + 6}",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\frac{1}{e^{2x} - 5e^{x} + 6}",
+     "type": "formule"
+    },
+    {
+     "html": "1 condition d'existence : dénominateur.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "1/(e^x-1)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "dénominateur",
+    "blocs": [
+     {
+      "html": "\\(e^{x} - 1 = 0 \\iff e^{x} = 1\\) (on ajoute 1).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(e^{x} = 1 \\iff x = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(e^{x} - 1 \\neq 0 \\iff x \\neq 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{1}{e^{x} - 1}",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\frac{1}{e^{x} - 1}",
+     "type": "formule"
+    },
+    {
+     "html": "1 condition d'existence : dénominateur.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "1/(ln(x-1)+ln(x-3))": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "html": "\\(x - 1 > 0 \\iff x > 1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "html": "\\(x - 3 > 0 \\iff x > 3\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 2"
+   },
+   {
+    "badge": "dénominateur",
+    "blocs": [
+     {
+      "html": "Les logarithmes sont tous définis pour \\(x \\in D = \\left]3 \\,;\\, +\\infty\\right[\\). Sur \\(D\\), on regroupe avec \\(\\ln(a) + \\ln(b) = \\ln(ab)\\) (valable car \\(a, b > 0\\)) : \\(\\ln\\left(x - 1\\right) + \\ln\\left(x - 3\\right) = \\ln\\left(\\left(x - 1\\right)\\,\\left(x - 3\\right)\\right)\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln\\left(\\left(x - 1\\right)\\,\\left(x - 3\\right)\\right) = 0 \\iff \\left(x - 1\\right)\\,\\left(x - 3\\right) = 1\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Trinôme \\(x^{2} - 4x + 2\\) : \\(\\Delta = b^2 - 4ac = (-4)^2 - 4 \\cdot 1 \\cdot 2 = 8\\) : zéros \\(x_1 = 2 - \\sqrt{2}\\) et \\(x_2 = 2 + \\sqrt{2}\\) \\((\\approx 0{,}5858\\) et \\(\\approx 3{,}4142)\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x = 2 - \\sqrt{2} \\approx 0{,}5858\\) n'est pas dans \\(D\\) : solution rejetée.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x = 2 + \\sqrt{2} \\approx 3{,}4142\\) est dans \\(D\\) : solution retenue.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln\\left(x - 1\\right) + \\ln\\left(x - 3\\right) \\neq 0 \\iff x \\neq 2 + \\sqrt{2}\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\left(\\left]1 \\,;\\, +\\infty\\right[ \\cap \\left]3 \\,;\\, +\\infty\\right[\\right) \\setminus \\left\\{2 + \\sqrt{2}\\right\\} = \\left]3 \\,;\\, 2 + \\sqrt{2}\\right[ \\cup \\left]2 + \\sqrt{2} \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{1}{\\ln\\left(x - 1\\right) + \\ln\\left(x - 3\\right)}",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\frac{1}{\\ln\\left(x - 1\\right) + \\ln\\left(x - 3\\right)}",
+     "type": "formule"
+    },
+    {
+     "html": "3 conditions d'existence : logarithme, logarithme, dénominateur.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "1/ln(x)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "badge": "dénominateur",
+    "blocs": [
+     {
+      "html": "\\(\\ln(x) \\neq 0 \\iff x \\neq 1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ \\setminus \\left\\{1\\right\\} = \\left]0 \\,;\\, 1\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{1}{\\ln(x)}",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\frac{1}{\\ln(x)}",
+     "type": "formule"
+    },
+    {
+     "html": "2 conditions d'existence : logarithme, dénominateur.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "1/ln(x+2)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "html": "\\(x + 2 > 0 \\iff x > -2\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "badge": "dénominateur",
+    "blocs": [
+     {
+      "html": "\\(\\ln\\left(x + 2\\right) = 0 \\iff x + 2 = 1\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 2 = 1 \\iff x = -1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln\\left(x + 2\\right) \\neq 0 \\iff x \\neq -1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\left]-2 \\,;\\, +\\infty\\right[ \\setminus \\left\\{-1\\right\\} = \\left]-2 \\,;\\, -1\\right[ \\cup \\left]-1 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{1}{\\ln\\left(x + 2\\right)}",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\frac{1}{\\ln\\left(x + 2\\right)}",
+     "type": "formule"
+    },
+    {
+     "html": "2 conditions d'existence : logarithme, dénominateur.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "1/x^(1/3)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "dénominateur",
+    "blocs": [
+     {
+      "html": "\\(\\sqrt[3]{x} \\neq 0 \\iff x \\neq 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{1}{x^{\\frac{1}{3}}} = \\frac{1}{\\sqrt[3]{x}}",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\frac{1}{x^{\\frac{1}{3}}} = \\frac{1}{\\sqrt[3]{x}}",
+     "type": "formule"
+    },
+    {
+     "html": "1 condition d'existence : dénominateur.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "2,5x+ln(x)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = 2{,}5x + \\ln(x)",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = 2{,}5x + \\ln(x)",
+     "type": "formule"
+    },
+    {
+     "html": "1 condition d'existence : logarithme.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "2ln(x)/((ln x)^2-1)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "badge": "dénominateur",
+    "blocs": [
+     {
+      "html": "On pose \\(t = \\ln(x)\\) : \\(\\left(\\ln(x)\\right)^{2} - 1 = t^{2} - 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(t^{2} - 1 = (t - 1)(t + 1)\\) : zéros \\(-1\\) et \\(1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln(x) = -1 \\iff x = e^{-1}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln(x) = 1 \\iff x = e\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(\\ln(x)\\right)^{2} - 1 \\neq 0 \\iff x \\notin \\left\\{e^{-1} \\,;\\, e\\right\\}\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ \\setminus \\left\\{e^{-1} \\,;\\, e\\right\\} = \\left]0 \\,;\\, e^{-1}\\right[ \\cup \\left]e^{-1} \\,;\\, e\\right[ \\cup \\left]e \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{2\\ln(x)}{\\left(\\ln(x)\\right)^{2} - 1}",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\frac{2\\ln(x)}{\\left(\\ln(x)\\right)^{2} - 1}",
+     "type": "formule"
+    },
+    {
+     "html": "2 conditions d'existence : logarithme, dénominateur.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "e^(1/(x^2-x-2))": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "dénominateur",
+    "blocs": [
+     {
+      "html": "Trinôme \\(x^{2} - x - 2\\) : \\(\\Delta = b^2 - 4ac = (-1)^2 - 4 \\cdot 1 \\cdot (-2) = 9\\), \\(\\sqrt{\\Delta} = 3\\) : zéros \\(x_1 = -1\\) et \\(x_2 = 2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} - x - 2 \\neq 0 \\iff x \\notin \\left\\{-1 \\,;\\, 2\\right\\}\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\mathbb{R} \\setminus \\left\\{-1 \\,;\\, 2\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = e^{\\frac{1}{x^{2} - x - 2}}",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = e^{\\frac{1}{x^{2} - x - 2}}",
+     "type": "formule"
+    },
+    {
+     "html": "1 condition d'existence : dénominateur.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "e^x/ln(e^x)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "tex": "e^{x} > 0",
+      "type": "formule"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "badge": "dénominateur",
+    "blocs": [
+     {
+      "html": "\\(\\ln\\left(e^{x}\\right) = 0 \\iff e^{x} = 1\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(e^{x} = 1 \\iff x = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln\\left(e^{x}\\right) \\neq 0 \\iff x \\neq 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\mathbb{R} \\setminus \\left\\{0\\right\\} = \\mathbb{R} \\setminus \\left\\{0\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{e^{x}}{\\ln\\left(e^{x}\\right)}",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\frac{e^{x}}{\\ln\\left(e^{x}\\right)}",
+     "type": "formule"
+    },
+    {
+     "html": "2 conditions d'existence : logarithme, dénominateur.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "ln(": {
+  "erreur": "Expression incomplète.",
+  "ok": false
+ },
+ "ln((x-1)/(x+3))": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "dénominateur",
+    "blocs": [
+     {
+      "html": "\\(x + 3 \\neq 0 \\iff x \\neq -3\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "html": "Zéros du numérateur :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 1 = 0 \\iff x = 1\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Zéros du dénominateur (valeurs interdites, marquées ‖) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 3 = 0 \\iff x = -3\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-3",
+       "1"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x - 1"
+       },
+       {
+        "cells": [
+         "-",
+         "||",
+         "+",
+         "|",
+         "+"
+        ],
+        "label": "x + 3"
+       },
+       {
+        "cells": [
+         "+",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "\\frac{x - 1}{x + 3}"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "\\(\\frac{x - 1}{x + 3} > 0 \\iff x \\in \\left]-\\infty \\,;\\, -3\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\left]-\\infty \\,;\\, -3\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[ = \\left]-\\infty \\,;\\, -3\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\ln\\left(\\frac{x - 1}{x + 3}\\right)",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\ln\\left(\\frac{x - 1}{x + 3}\\right)",
+     "type": "formule"
+    },
+    {
+     "html": "2 conditions d'existence : dénominateur, logarithme.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "ln((x^2-1)/(x+2))": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "dénominateur",
+    "blocs": [
+     {
+      "html": "\\(x + 2 \\neq 0 \\iff x \\neq -2\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "html": "Zéros du numérateur :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} - 1 = (x - 1)(x + 1)\\) : zéros \\(-1\\) et \\(1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Zéros du dénominateur (valeurs interdites, marquées ‖) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 2 = 0 \\iff x = -2\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-2",
+       "-1",
+       "1"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "||",
+         "-",
+         "|",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x - 1"
+       },
+       {
+        "cells": [
+         "-",
+         "||",
+         "-",
+         "0",
+         "+",
+         "|",
+         "+"
+        ],
+        "label": "x + 1"
+       },
+       {
+        "cells": [
+         "-",
+         "||",
+         "+",
+         "|",
+         "+",
+         "|",
+         "+"
+        ],
+        "label": "x + 2"
+       },
+       {
+        "cells": [
+         "-",
+         "||",
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "\\frac{x^{2} - 1}{x + 2}"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "\\(\\frac{x^{2} - 1}{x + 2} > 0 \\iff x \\in \\left]-2 \\,;\\, -1\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\left]-2 \\,;\\, -1\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[ = \\left]-2 \\,;\\, -1\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\ln\\left(\\frac{x^{2} - 1}{x + 2}\\right)",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\ln\\left(\\frac{x^{2} - 1}{x + 2}\\right)",
+     "type": "formule"
+    },
+    {
+     "html": "2 conditions d'existence : dénominateur, logarithme.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "ln(-x^2-1)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "html": "Trinôme \\(-x^{2} - 1\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot (-1) \\cdot (-1) = -4\\) : aucun zéro ; le trinôme garde le signe de \\(a = -1\\), il est toujours négatif.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(-x^{2} - 1 > 0 \\iff x \\in \\varnothing\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\varnothing",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\ln\\left(-x^{2} - 1\\right)",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\ln\\left(-x^{2} - 1\\right)",
+     "type": "formule"
+    },
+    {
+     "html": "1 condition d'existence : logarithme.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "ln(2x-6)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "html": "\\(2x - 6 > 0 \\iff x > 3\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\left]3 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\ln\\left(2x - 6\\right)",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\ln\\left(2x - 6\\right)",
+     "type": "formule"
+    },
+    {
+     "html": "1 condition d'existence : logarithme.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "ln(ln(ln(x)))": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\ln(x) > 0 \\iff x > 1\\) (exp est croissante).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 2"
+   },
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\ln\\left(\\ln(x)\\right) > 0 \\iff \\ln(x) > 1\\) (exp est croissante).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln(x) > 1 \\iff x > e\\) (exp est croissante).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]1 \\,;\\, +\\infty\\right[ \\cap \\left]e \\,;\\, +\\infty\\right[ = \\left]e \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\ln\\left(\\ln\\left(\\ln(x)\\right)\\right)",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\ln\\left(\\ln\\left(\\ln(x)\\right)\\right)",
+     "type": "formule"
+    },
+    {
+     "html": "3 conditions d'existence : logarithme, logarithme, logarithme.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "ln(x)/(ln(x)+2)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "badge": "dénominateur",
+    "blocs": [
+     {
+      "html": "\\(\\ln(x) + 2 = 0 \\iff \\ln(x) = -2\\) (on soustrait 2).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln(x) = -2 \\iff x = e^{-2}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln(x) + 2 \\neq 0 \\iff x \\neq e^{-2}\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ \\setminus \\left\\{e^{-2}\\right\\} = \\left]0 \\,;\\, e^{-2}\\right[ \\cup \\left]e^{-2} \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{\\ln(x)}{\\ln(x) + 2}",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\frac{\\ln(x)}{\\ln(x) + 2}",
+     "type": "formule"
+    },
+    {
+     "html": "2 conditions d'existence : logarithme, dénominateur.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "ln(x-1)+ln(x+3)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "html": "\\(x - 1 > 0 \\iff x > 1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "html": "\\(x + 3 > 0 \\iff x > -3\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\left]1 \\,;\\, +\\infty\\right[ \\cap \\left]-3 \\,;\\, +\\infty\\right[ = \\left]1 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\ln\\left(x - 1\\right) + \\ln\\left(x + 3\\right)",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\ln\\left(x - 1\\right) + \\ln\\left(x + 3\\right)",
+     "type": "formule"
+    },
+    {
+     "html": "2 conditions d'existence : logarithme, logarithme.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "ln(x^2)-2ln(x)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "html": "On met \\(x^{2}\\) en évidence : \\(x^{2} = x^{2}\\left(1\\right)\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2}"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "\\(x^{2} > 0 \\iff x \\in \\mathbb{R} \\setminus \\left\\{0\\right\\}\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\ln\\left(x^{2}\\right) - 2\\ln(x)",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\ln\\left(x^{2}\\right) - 2\\ln(x)",
+     "type": "formule"
+    },
+    {
+     "html": "2 conditions d'existence : logarithme, logarithme.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "ln(x^2-4)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "html": "\\(x^{2} - 4 = (x - 2)(x + 2)\\) : zéros \\(-2\\) et \\(2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-2",
+       "2"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "|",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x - 2"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "|",
+         "+"
+        ],
+        "label": "x + 2"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2} - 4"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "\\(x^{2} - 4 > 0 \\iff x \\in \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\ln\\left(x^{2} - 4\\right)",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\ln\\left(x^{2} - 4\\right)",
+     "type": "formule"
+    },
+    {
+     "html": "1 condition d'existence : logarithme.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "ln(x^2-4x)/(x-5)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "html": "On met \\(x\\) en évidence : \\(x^{2} - 4x = x\\left(x - 4\\right)\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 4 = 0 \\iff x = 4\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0",
+       "4"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "|",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "-",
+         "|",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x - 4"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2} - 4x"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "\\(x^{2} - 4x > 0 \\iff x \\in \\left]-\\infty \\,;\\, 0\\right[ \\cup \\left]4 \\,;\\, +\\infty\\right[\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "badge": "dénominateur",
+    "blocs": [
+     {
+      "html": "\\(x - 5 \\neq 0 \\iff x \\neq 5\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\left(\\left]-\\infty \\,;\\, 0\\right[ \\cup \\left]4 \\,;\\, +\\infty\\right[\\right) \\setminus \\left\\{5\\right\\} = \\left]-\\infty \\,;\\, 0\\right[ \\cup \\left]4 \\,;\\, 5\\right[ \\cup \\left]5 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5}",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5}",
+     "type": "formule"
+    },
+    {
+     "html": "2 conditions d'existence : logarithme, dénominateur.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "ln(x^2-5x+6)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "html": "Trinôme \\(x^{2} - 5x + 6\\) : \\(\\Delta = b^2 - 4ac = (-5)^2 - 4 \\cdot 1 \\cdot 6 = 1\\), \\(\\sqrt{\\Delta} = 1\\) : zéros \\(x_1 = 2\\) et \\(x_2 = 3\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "2",
+       "3"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "|",
+         "+"
+        ],
+        "label": "x - 2"
+       },
+       {
+        "cells": [
+         "-",
+         "|",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x - 3"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2} - 5x + 6"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "\\(x^{2} - 5x + 6 > 0 \\iff x \\in \\left]-\\infty \\,;\\, 2\\right[ \\cup \\left]3 \\,;\\, +\\infty\\right[\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\left]-\\infty \\,;\\, 2\\right[ \\cup \\left]3 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\ln\\left(x^{2} - 5x + 6\\right)",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\ln\\left(x^{2} - 5x + 6\\right)",
+     "type": "formule"
+    },
+    {
+     "html": "1 condition d'existence : logarithme.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "sin(x)": {
+  "erreur": "Symbole inconnu « s ». La variable s'appelle x ; fonctions permises : ln, exp, sqrt (ou e^…, √).",
+  "ok": false
+ },
+ "sqrt(-x^2)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "racine carrée",
+    "blocs": [
+     {
+      "html": "On met \\(x^{2}\\) en évidence : \\(-x^{2} = x^{2}\\left(-1\\right)\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "-",
+         "-"
+        ],
+        "label": "-1"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "+"
+        ],
+        "label": "x^{2}"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "-"
+        ],
+        "final": true,
+        "label": "-x^{2}"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "\\(-x^{2} \\geq 0 \\iff x \\in \\left\\{0\\right\\}\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\left\\{0\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\sqrt{-x^{2}}",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\sqrt{-x^{2}}",
+     "type": "formule"
+    },
+    {
+     "html": "1 condition d'existence : racine carrée.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "sqrt(1-ln(x^2-4x+5))": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "html": "Trinôme \\(x^{2} - 4x + 5\\) : \\(\\Delta = b^2 - 4ac = (-4)^2 - 4 \\cdot 1 \\cdot 5 = -4\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} - 4x + 5 > 0 \\iff x \\in \\mathbb{R}\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "badge": "racine carrée",
+    "blocs": [
+     {
+      "html": "\\(1 - \\ln\\left(x^{2} - 4x + 5\\right) \\geq 0 \\iff \\ln\\left(x^{2} - 4x + 5\\right) \\leq 1\\) (on isole \\(\\ln\\left(x^{2} - 4x + 5\\right)\\) du côté où son coefficient est positif).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln\\left(x^{2} - 4x + 5\\right) \\leq 1 \\iff 0 < x^{2} - 4x + 5 \\leq e\\) (exp est croissante ; \\(\\ln\\) n'est définie que sur \\(\\left]0 \\,;\\, +\\infty\\right[\\)).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} - 4x + 5 = 0\\) \\(\\iff \\left(x - 2\\right)^{2} + 1 = 0\\) (forme canonique) \\(\\iff \\left(x - 2\\right)^{2} = -1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Or \\(-1 < 0\\) et un carré est positif : aucune solution.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Le trinôme a le signe de \\(a = 1\\) à l'extérieur de ses racines : \\(x^{2} - 4x + 5 > 0 \\iff x \\in \\mathbb{R}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} - 4x + 5 = e\\) \\(\\iff \\left(x - 2\\right)^{2} + 1 = e\\) (forme canonique) \\(\\iff \\left(x - 2\\right)^{2} = e - 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Comme \\(e - 1 \\approx 1{,}7183 > 0\\) : \\(x = 2 - \\sqrt{e - 1} \\approx 0{,}6892\\) ou \\(x = 2 + \\sqrt{e - 1} \\approx 3{,}3108\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Le trinôme a le signe de \\(a = 1\\) à l'extérieur de ses racines : \\(x^{2} - 4x + 5 \\leq e \\iff x \\in \\left[2 - \\sqrt{e - 1} \\,;\\, 2 + \\sqrt{e - 1}\\right]\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\left[2 - \\sqrt{e - 1} \\,;\\, 2 + \\sqrt{e - 1}\\right] = \\left[2 - \\sqrt{e - 1} \\,;\\, 2 + \\sqrt{e - 1}\\right]",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\sqrt{1 - \\ln\\left(x^{2} - 4x + 5\\right)}",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\sqrt{1 - \\ln\\left(x^{2} - 4x + 5\\right)}",
+     "type": "formule"
+    },
+    {
+     "html": "2 conditions d'existence : logarithme, racine carrée.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "sqrt(ln(x)-x+2)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "badge": "racine carrée",
+    "blocs": [
+     {
+      "html": "\\(\\ln(x) - x + 2\\) est défini pour \\(x \\in \\left]0 \\,;\\, +\\infty\\right[\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "L'équation \\(\\ln(x) - x + 2 = 0\\) ne se résout pas avec les méthodes du cours : solutions obtenues numériquement : \\(x {\\approx}\\,0{,}1586\\) ; \\(x {\\approx}\\,3{,}1462\\). On en déduit \\(\\ln(x) - x + 2 > 0\\) sur \\(\\left]{\\approx}\\,0{,}1586 \\,;\\, {\\approx}\\,3{,}1462\\right[\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0",
+       "{\\approx}\\,0{,}1586",
+       "{\\approx}\\,3{,}1462"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "0",
+         "+",
+         "0",
+         "-"
+        ],
+        "label": "\\ln(x) - x + 2"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "0",
+         "+",
+         "0",
+         "-"
+        ],
+        "final": true,
+        "label": "\\ln(x) - x + 2"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "Les zones hachurées sont hors du domaine de définition de l'expression.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln(x) - x + 2 \\geq 0 \\iff x \\in \\left[{\\approx}\\,0{,}1586 \\,;\\, {\\approx}\\,3{,}1462\\right]\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left[{\\approx}\\,0{,}1586 \\,;\\, {\\approx}\\,3{,}1462\\right] = \\left[{\\approx}\\,0{,}1586 \\,;\\, {\\approx}\\,3{,}1462\\right]",
+      "type": "resultat"
+     },
+     {
+      "html": "Les valeurs précédées de ≈ ont été obtenues numériquement.",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\sqrt{\\ln(x) - x + 2}",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\sqrt{\\ln(x) - x + 2}",
+     "type": "formule"
+    },
+    {
+     "html": "2 conditions d'existence : logarithme, racine carrée.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "sqrt(x ln(x+2))": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "html": "\\(x + 2 > 0 \\iff x > -2\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "badge": "racine carrée",
+    "blocs": [
+     {
+      "html": "<b>Signe de \\(\\ln\\left(x + 2\\right)\\)</b>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln\\left(x + 2\\right)\\) est défini pour \\(x \\in \\left]-2 \\,;\\, +\\infty\\right[\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln\\left(x + 2\\right) > 0 \\iff x + 2 > 1\\) (exp est croissante).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 2 > 1 \\iff x > -1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-2",
+       "-1",
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "|",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "0",
+         "+",
+         "|",
+         "+"
+        ],
+        "label": "\\ln\\left(x + 2\\right)"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x\\,\\ln\\left(x + 2\\right)"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "Les zones hachurées sont hors du domaine de définition de l'expression.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x\\,\\ln\\left(x + 2\\right) \\geq 0 \\iff x \\in \\left]-2 \\,;\\, -1\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\left]-2 \\,;\\, +\\infty\\right[ \\cap \\left]-2 \\,;\\, -1\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[ = \\left]-2 \\,;\\, -1\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\sqrt{x\\,\\ln\\left(x + 2\\right)}",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\sqrt{x\\,\\ln\\left(x + 2\\right)}",
+     "type": "formule"
+    },
+    {
+     "html": "2 conditions d'existence : logarithme, racine carrée.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "sqrt(x ln(x+2)+x)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "html": "\\(x + 2 > 0 \\iff x > -2\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "badge": "racine carrée",
+    "blocs": [
+     {
+      "html": "On factorise : \\(x\\,\\ln\\left(x + 2\\right) + x = x\\,\\left(\\ln\\left(x + 2\\right) + 1\\right)\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<b>Signe de \\(\\ln\\left(x + 2\\right) + 1\\)</b>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln\\left(x + 2\\right) + 1\\) est défini pour \\(x \\in \\left]-2 \\,;\\, +\\infty\\right[\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln\\left(x + 2\\right) + 1 > 0 \\iff \\ln\\left(x + 2\\right) > -1\\) (on soustrait 1).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln\\left(x + 2\\right) > -1 \\iff x + 2 > e^{-1}\\) (exp est croissante).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 2 > e^{-1} \\iff x > e^{-1} - 2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-2",
+       "e^{-1} - 2",
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "|",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "0",
+         "+",
+         "|",
+         "+"
+        ],
+        "label": "\\ln\\left(x + 2\\right) + 1"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x\\,\\ln\\left(x + 2\\right) + x"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "Les zones hachurées sont hors du domaine de définition de l'expression.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x\\,\\ln\\left(x + 2\\right) + x \\geq 0 \\iff x \\in \\left]-2 \\,;\\, e^{-1} - 2\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\left]-2 \\,;\\, +\\infty\\right[ \\cap \\left]-2 \\,;\\, e^{-1} - 2\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[ = \\left]-2 \\,;\\, e^{-1} - 2\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\sqrt{x\\,\\ln\\left(x + 2\\right) + x}",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\sqrt{x\\,\\ln\\left(x + 2\\right) + x}",
+     "type": "formule"
+    },
+    {
+     "html": "2 conditions d'existence : logarithme, racine carrée.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "sqrt(x-1)/sqrt(x-1)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "racine carrée",
+    "blocs": [
+     {
+      "html": "\\(x - 1 \\geq 0 \\iff x \\geq 1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "badge": "racine au dénominateur",
+    "blocs": [
+     {
+      "html": "\\(x - 1 > 0 \\iff x > 1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\left[1 \\,;\\, +\\infty\\right[ \\cap \\left]1 \\,;\\, +\\infty\\right[ = \\left]1 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{\\sqrt{x - 1}}{\\sqrt{x - 1}}",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\frac{\\sqrt{x - 1}}{\\sqrt{x - 1}}",
+     "type": "formule"
+    },
+    {
+     "html": "2 conditions d'existence : racine carrée, racine au dénominateur.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "sqrt(x^2+2x-3)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "racine carrée",
+    "blocs": [
+     {
+      "html": "Trinôme \\(x^{2} + 2x - 3\\) : \\(\\Delta = b^2 - 4ac = 2^2 - 4 \\cdot 1 \\cdot (-3) = 16\\), \\(\\sqrt{\\Delta} = 4\\) : zéros \\(x_1 = -3\\) et \\(x_2 = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-3",
+       "1"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "|",
+         "+"
+        ],
+        "label": "x + 3"
+       },
+       {
+        "cells": [
+         "-",
+         "|",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x - 1"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2} + 2x - 3"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "\\(x^{2} + 2x - 3 \\geq 0 \\iff x \\in \\left]-\\infty \\,;\\, -3\\right] \\cup \\left[1 \\,;\\, +\\infty\\right[\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\left]-\\infty \\,;\\, -3\\right] \\cup \\left[1 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\sqrt{x^{2} + 2x - 3}",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\sqrt{x^{2} + 2x - 3}",
+     "type": "formule"
+    },
+    {
+     "html": "1 condition d'existence : racine carrée.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "x+*2": {
+  "erreur": "Symbole inattendu « * ».",
+  "ok": false
+ },
+ "x^(1/2-1/2)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\mathbb{R}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = x^{\\frac{1}{2} - \\frac{1}{2}}",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = x^{\\frac{1}{2} - \\frac{1}{2}}",
+     "type": "formule"
+    },
+    {
+     "html": "Ni logarithme, ni dénominateur, ni racine : aucune condition.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "x^(1/3)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\mathbb{R}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = x^{\\frac{1}{3}} = \\sqrt[3]{x}",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = x^{\\frac{1}{3}} = \\sqrt[3]{x}",
+     "type": "formule"
+    },
+    {
+     "html": "Ni logarithme, ni dénominateur, ni racine : aucune condition.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "x^(2-2)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\mathbb{R}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = x^{2 - 2}",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = x^{2 - 2}",
+     "type": "formule"
+    },
+    {
+     "html": "Ni logarithme, ni dénominateur, ni racine : aucune condition.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "x^0": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\mathbb{R}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = x^{0}",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = x^{0}",
+     "type": "formule"
+    },
+    {
+     "html": "Ni logarithme, ni dénominateur, ni racine : aucune condition.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "x^x": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "puissance",
+    "blocs": [
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = x^{x}",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = x^{x}",
+     "type": "formule"
+    },
+    {
+     "html": "1 condition d'existence : puissance.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ },
+ "y = ln(x-1)": {
+  "besoin_sympy": false,
+  "cartes": [
+   {
+    "badge": "logarithme",
+    "blocs": [
+     {
+      "html": "\\(x - 1 > 0 \\iff x > 1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Condition 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "ED = \\left]1 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Ensemble de définition"
+   }
+  ],
+  "enonce_tex": "f(x) = \\ln\\left(x - 1\\right)",
+  "entete": {
+   "blocs": [
+    {
+     "tex": "f(x) = \\ln\\left(x - 1\\right)",
+     "type": "formule"
+    },
+    {
+     "html": "1 condition d'existence : logarithme.",
+     "style": "discret",
+     "type": "texte"
+    }
+   ],
+   "style": "normal",
+   "titre": "Fonction"
+  },
+  "erreur": null,
+  "ok": true
+ }
+}

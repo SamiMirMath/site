@@ -26,7 +26,7 @@ BLOCS = {
     "tableau": ({"var", "crit", "rows"}, {"limites"}),
     "graphique": ({"xmin", "xmax", "ymin", "ymax", "segments", "extrema", "asymptotes"}, {"recalculable"}),
 }
-CARTE = ({"titre", "style", "blocs"}, {"titre_tex", "badge"})
+CARTE = ({"titre", "style", "blocs"}, {"titre_tex", "badge", "detail"})
 LIGNE = ({"label", "cells"}, {"final", "variation"})
 SORTIE_OK = ({"ok", "erreur", "enonce_tex", "cartes"}, {"entete", "besoin_sympy", "detail"})
 SORTIE_KO = ({"ok", "erreur"}, {"detail"})
@@ -61,8 +61,10 @@ def liste(items, style=None):
     return b
 
 
-def carte(titre, blocs, style="normal", badge=None, titre_tex=None):
+def carte(titre, blocs, style="normal", badge=None, titre_tex=None, detail=None):
     c = {"titre": titre, "style": style, "blocs": list(blocs)}
+    if detail:
+        c["detail"] = detail
     if badge:
         c["badge"] = badge
     if titre_tex:

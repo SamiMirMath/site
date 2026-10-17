@@ -79,6 +79,12 @@ class TestValidateur(unittest.TestCase):
     def test_texte_vide(self):
         self._refuse(lambda s: s["cartes"][0]["blocs"][0].update(html=""), "html vide")
 
+    def test_detail_technique_sur_la_carte(self):
+        s = exemple()
+        s["cartes"][0]["detail"] = "ValueError : boum"
+        self.assertEqual(so.valider(s), [])
+        self.assertEqual(so.carte("t", [], detail="d")["detail"], "d")
+
     def test_limites_du_tableau(self):
         s = exemple()
         s["cartes"][0]["blocs"][2]["limites"] = {"colonnes": [], "moins_inf": "1", "plus_inf": "1", "non_determinees": []}
