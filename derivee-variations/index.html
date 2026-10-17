@@ -29,13 +29,13 @@
         <label for="entree">f(x) =</label>
         <input id="entree" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="(x^2-1)/(x-3)">
       </div>
-      <div class="apercu" id="apercu"><span class="muted">Aperçu de la fonction</span></div>
+      <div class="apercu" id="apercu" aria-live="polite"><span class="muted">Aperçu de la fonction</span></div>
       <div class="clavier" id="clavier">
-        <button data-t="x">x</button><button data-t="ln(">ln</button><button data-t="e^(">eˣ</button><button data-t="sqrt(">√</button><button data-t="^">^</button><button data-t="/">÷</button>
-        <button data-t="(">(</button><button data-t=")">)</button><button data-t="+">+</button><button data-t="-">−</button><button data-k="back">⌫</button><button data-k="clear">C</button>
+        <button data-t="x">x</button><button aria-label="logarithme népérien" data-t="ln(">ln</button><button aria-label="exponentielle" data-t="e^(">eˣ</button><button aria-label="racine carrée" data-t="sqrt(">√</button><button aria-label="puissance" data-t="^">^</button><button aria-label="divisé par" data-t="/">÷</button>
+        <button aria-label="parenthèse ouvrante" data-t="(">(</button><button aria-label="parenthèse fermante" data-t=")">)</button><button aria-label="plus" data-t="+">+</button><button aria-label="moins" data-t="-">−</button><button aria-label="effacer le dernier caractère" data-k="back">⌫</button><button aria-label="tout effacer" data-k="clear">C</button>
       </div>
       <button class="primary" id="calculer" disabled>Calculer ▶</button>
-      <div class="etat" id="etat">Chargement de Python…</div>
+      <div class="etat" id="etat" aria-live="polite">Chargement de Python…</div>
       <div class="hint" style="margin-top:8px">Saisie : <code>x^3-3x</code>, <code>(x^2-1)/(x-3)</code>, <code>x*ln(x)</code>, <code>e^(2x)</code>. Écrire <code>e^(2x)</code> avec parenthèses.</div>
       <div class="exemples" id="exemples"></div>
     </section>
@@ -61,10 +61,8 @@
   </section>
 </div>
 
-<script>
-"use strict";
-const $=id=>document.getElementById(id);
-const PYODIDE="https://cdn.jsdelivr.net/pyodide/v0.27.7/full/";
+<script type="module">
+import { monterOutil } from "../commun/outil.js";
 const EXEMPLES=["x^2-4x+3","x^3-3x","x^4-2x^2","(x^2-1)/(x-3)","x/(x^2+1)","x*ln(x)","ln(x)/x",
   "e^(2x)","x^2*e^(-x)","ln(x^2-4)","sqrt(x^2-4x+5)","(x-1)^3"];
 const EXOS={
@@ -73,245 +71,13 @@ const EXOS={
   difficile:["(x^2-1)/(x-3)","x/(x^2+1)","ln(x^2-4)"],
   tresDifficile:["x^2*e^(-x)"]
 };
-const POIDS_NIVEAUX=[["facile",.35],["moyen",.35],["difficile",.2],["tresDifficile",.1]];
-function tirerNiveau(){
-  let r=Math.random(), acc=0;
-  for(const [n,p] of POIDS_NIVEAUX){ acc+=p; if(r<=acc) return n; }
-  return "facile";
-}
-let cartes=[], visibles=0;
-
-function math(el){ if(window.renderMathInElement) renderMathInElement(el,{delimiters:[{left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true}],throwOnError:false,strict:"ignore"}); }
-function K(t){ try{ return katex.renderToString(t,{throwOnError:false,strict:"ignore"}); }catch(e){ return t; } }
-
-/* ---------- Python dans un Web Worker (la page ne se fige jamais) ---------- */
-const CODE_WORKER=`
-importScripts("${PYODIDE}pyodide.js");
-let py=null;
-onmessage=async e=>{
-  const {id,fn,arg}=e.data;
-  try{
-    if(fn==="init"){
-      py=await loadPyodide({indexURL:"${PYODIDE}"});
-      py.FS.writeFile("ensemble_def.py",arg.ed);
-      py.FS.writeFile("noyau.py",arg.no);
-      py.FS.writeFile("derivee_variations.py",arg.dv);
-      py.runPython("import derivee_variations");
-      postMessage({id,r:"ok"}); return;
-    }
-    if(fn==="sympy"){ await py.loadPackage("sympy"); py.runPython("import sympy"); postMessage({id,r:"ok"}); return; }
-    py.globals.set("arg_js",arg);
-    postMessage({id,r:py.runPython("derivee_variations."+fn+"_json(arg_js)")});
-  }catch(err){ postMessage({id,err:String(err)}); }
-};`;
-let worker=null, attente={}, nid=0, source=null, pret=null, sympyPret=null, sympyOK=false;
-function appel(fn,arg,delai){
-  return new Promise((ok,ko)=>{ const id=++nid; attente[id]={ok,ko}; worker.postMessage({id,fn,arg});
-    if(delai) setTimeout(()=>{ if(attente[id]){ delete attente[id]; ko(new Error("delai")); } },delai); });
-}
-function lancerWorker(){
-  if(worker) worker.terminate();
-  attente={}; sympyOK=false;
-  worker=new Worker(URL.createObjectURL(new Blob([CODE_WORKER],{type:"text/javascript"})));
-  worker.onmessage=e=>{ const p=attente[e.data.id]; if(!p) return; delete attente[e.data.id]; e.data.err?p.ko(new Error(e.data.err)):p.ok(e.data.r); };
-  pret=appel("init",source);
-  sympyPret=pret.then(()=>appel("sympy")).then(()=>{ sympyOK=true; majEtat(); }).catch(()=>{ majEtat(); });
-  return pret;
-}
-function majEtat(){ $("etat").textContent=sympyOK?"Prêt.":"Chargement du moteur de calcul…"; }
-async function demarrer(){
-  try{
-    const [repEd,repNo,repDv]=await Promise.all([
-      fetch("../ensemble-definition/ensemble_def.py",{cache:"no-cache"}),
-      fetch("../moteur/noyau.py",{cache:"no-cache"}),
-      fetch("derivee_variations.py",{cache:"no-cache"})
-    ]);
-    if(!repEd.ok) throw new Error("ensemble_def.py introuvable ("+repEd.status+")");
-    if(!repNo.ok) throw new Error("noyau.py introuvable ("+repNo.status+")");
-    if(!repDv.ok) throw new Error("derivee_variations.py introuvable ("+repDv.status+")");
-    source={ed:await repEd.text(), no:await repNo.text(), dv:await repDv.text()};
-    await lancerWorker();
-    majEtat(); $("calculer").disabled=false; $("exoHasard").disabled=false;
-    apercu();
-    const q=new URLSearchParams(location.search).get("f"); if(q){ $("entree").value=q; calculer(); }
-  }catch(e){
-    console.error(e);
-    $("etat").innerHTML='<span class="err">Impossible de charger l\'outil de calcul.</span> Vérifiez votre connexion internet, puis rechargez la page.';
-  }
-}
-async function appelPy(fn,arg,delai){ await pret; return JSON.parse(await appel(fn,arg,delai)); }
-
-/* ---------- saisie ---------- */
-let tAp=null, seqAp=0, tFrappe=0, dernierApercu="";
-/* Aperçu de la saisie : jamais de message d'erreur rouge pendant la frappe. Dès qu'on tape, une erreur affichée
-   est effacée (on garde le dernier aperçu valide, estompé). L'erreur n'est montrée qu'après une pause d'environ
-   0,5 s sans frappe, et seulement si la réponse correspond bien à la dernière saisie ; un aperçu valide s'affiche
-   tout de suite et remplace tout message. Une réponse perdue (moteur occupé, délai dépassé) ne laisse rien d'obsolète. */
-const PAUSE_ERREUR=500;
-function apercu(){
-  clearTimeout(tAp);
-  const mon=++seqAp, box=$("apercu"); tFrappe=Date.now();
-  const neutre=()=>{ box.innerHTML=dernierApercu?'<span class="obsolete">'+dernierApercu+'</span>':'<span class="muted">Aperçu de la fonction</span>'; };
-  if(box.querySelector(".err")) neutre();
-  tAp=setTimeout(async()=>{
-    const s=$("entree").value.trim();
-    if(!s){ dernierApercu=""; box.innerHTML='<span class="muted">Aperçu de la fonction</span>'; return; }
-    if(!worker) return;
-    let r;
-    try{ r=await appelPy("apercu",s,5000); }catch(e){ if(mon===seqAp && box.querySelector(".err")) neutre(); return; }
-    if(mon!==seqAp) return;                         // une saisie plus récente est en cours
-    if(r.ok){ dernierApercu=K("f(x) = "+r.tex); box.innerHTML=dernierApercu; return; }
-    const reste=PAUSE_ERREUR-(Date.now()-tFrappe);
-    if(reste>0) await new Promise(ok=>setTimeout(ok,reste));
-    if(mon!==seqAp) return;
-    box.innerHTML='<span class="err">'+r.erreur+'</span>';
-  },150);
-}
-$("entree").addEventListener("input",apercu);
-$("entree").addEventListener("keydown",e=>{ if(e.key==="Enter"&&!$("calculer").disabled) calculer(); });
-$("clavier").addEventListener("click",e=>{
-  const b=e.target.closest("button"); if(!b) return; const inp=$("entree");
-  const a=inp.selectionStart??inp.value.length, z=inp.selectionEnd??a;
-  if(b.dataset.k==="clear"){ inp.value=""; }
-  else if(b.dataset.k==="back"){ if(a!==z) inp.value=inp.value.slice(0,a)+inp.value.slice(z); else if(a>0){ inp.value=inp.value.slice(0,a-1)+inp.value.slice(a); inp.setSelectionRange(a-1,a-1);} }
-  else { const t=b.dataset.t; inp.value=inp.value.slice(0,a)+t+inp.value.slice(z); inp.setSelectionRange(a+t.length,a+t.length); }
-  apercu();
+monterOutil({
+  outil:"derivee-variations",
+  titrePdf:"Corrige-derivee-variations",
+  sympyAvant:true,
+  exemples:EXEMPLES, exos:EXOS,
+  poids:[["facile",.35],["moyen",.35],["difficile",.2],["tresDifficile",.1]]
 });
-$("exemples").innerHTML='<span class="hint" style="align-self:center">Exemples :</span>'+EXEMPLES.map(s=>`<button data-ex="${s}">${s}</button>`).join("");
-$("exemples").addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; $("entree").value=b.dataset.ex; apercu(); if(!$("calculer").disabled) calculer(); });
-$("calculer").onclick=calculer;
-
-/* ---------- affichage ---------- */
-function tableau(t){
-  const k=t.crit.length;
-  const cl=s=>{
-    if(s==="+") return '<td class="p">+</td>';
-    if(s==="-") return '<td class="m">−</td>';
-    if(s==="||"||s==="asym") return '<td class="vi"></td>';
-    if(s==="x") return '<td class="hors" aria-label="hors de l\'ensemble de définition"></td>';
-    if(s==="\\nearrow"||s==="\\searrow"||s==="\\rightarrow") return `<td>${K(s)}</td>`;
-    if(s.startsWith("val:")) return `<td class="pt">${K(s.slice(4))}</td>`;
-    if(s==="extremum") return '<td class="pt">•</td>';
-    return `<td>${s}</td>`;
-  };
-  let h='<div class="tsigne"><table><tr><td class="lab">'+K(t.var)+'</td><td>'+K("-\\infty")+'</td>';
-  for(let i=0;i<k;i++) h+='<td></td><td>'+K(t.crit[i])+'</td>';
-  h+='<td></td><td>'+K("+\\infty")+'</td></tr>';
-  t.rows.forEach(r=>{
-    const classe=r.final?"final":r.variation?"variation":"";
-    h+=`<tr class="${classe}"><td class="lab">${K(r.label)}</td><td></td>`+r.cells.map(cl).join("")+'<td></td></tr>';
-  });
-  return h+'</table></div>';
-}
-function carteRappel(r){
-  const d=document.createElement("div"); d.className="card";
-  d.innerHTML=`<div style="font-size:1.15rem;overflow-x:auto">${K("f(x) = "+(r.f_saisie_tex?r.f_saisie_tex+" = ":"")+r.f_tex)}</div>
-    <div class="muted" style="margin-top:4px">${K("ED = "+r.ed_tex)} — détail dans l'outil « Ensemble de définition ».</div>`;
-  math(d); return d;
-}
-function carteDerivee(r){
-  const d=document.createElement("div"); d.className="card cond";
-  let h=`<h3>Dérivée<span class="badge">calcul</span></h3>`;
-  r.deriv_etapes.forEach(it=>{ h+=`<div class="etape">${it.html}</div>`; });
-  h+=`<div class="res">${K("f'(x) = "+r.deriv_tex)}</div>`;
-  d.innerHTML=h; math(d); return d;
-}
-function carteSigne(r){
-  const d=document.createElement("div"); d.className="card cond";
-  let h=`<h3>Signe de f' et variations<span class="badge">tableau</span></h3>`;
-  r.signe_etapes.forEach(it=>{ h+= it.type==="tableau"?tableau(it):`<div class="etape">${it.html}</div>`; });
-  h+=tableau(r.table_signe);
-  if(r.extrema.length){
-    h+='<ul class="extrema">'+r.extrema.map(e=>
-      `<li>${e.genre} en \\(x=${e.x_tex}\\) : \\(f(${e.x_tex})=${e.f_tex}\\)</li>`).join("")+'</ul>';
-  } else {
-    h+= r.f_constante
-      ? '<div class="hint">f\' est nulle sur son ensemble de définition : f est constante sur chaque intervalle, aucun extremum.</div>'
-      : '<div class="hint">Aucun extremum local : f est strictement monotone (ou n\'a que des points où f\' s\'annule sans changer de signe).</div>';
-  }
-  d.innerHTML=h; math(d); return d;
-}
-let numCalcul=0;
-async function calculer(force){
-  const s=(typeof force==="string"?force:$("entree").value).trim(); if(!s||!worker) return;
-  const moi=++numCalcul;
-  $("calculer").disabled=true; $("etat").textContent="Calcul en cours…";
-  let r;
-  try{
-    await sympyPret;
-    r=await appelPy("etudier",s,30000);
-  }catch(e){
-    if(e.message==="delai"){ $("etat").textContent="Calcul trop long : le calcul a été relancé."; lancerWorker(); }
-    r={ok:false,erreur:e.message==="delai"?"Le calcul a pris trop de temps (plus de 30 s). Essayez une écriture plus simple.":(console.error(e),"Une erreur s\'est produite : réessayez ou simplifiez l\'écriture.")};
-  }
-  $("calculer").disabled=false; majEtat();
-  if(moi!==numCalcul) return;
-  afficher(r);
-}
-function afficher(r){
-  $("resultat").hidden=false; const box=$("cartes"); box.innerHTML=""; cartes=[];
-  if(!r.ok){ const d=document.createElement("div"); d.className="card err"; d.textContent=r.erreur; box.appendChild(d); $("suivant").disabled=$("tout").disabled=true; $("progression").textContent=""; return; }
-  cartes.push(carteRappel(r));
-  if(!r.deriv_resolu){
-    const d=document.createElement("div"); d.className="card err";
-    if(r.deriv_detail) console.error(r.deriv_detail);
-    d.textContent=r.deriv_erreur;
-    cartes.push(d);
-  } else {
-    cartes.push(carteDerivee(r));
-    if(!r.signe_resolu){
-      const d=document.createElement("div"); d.className="card err";
-      if(r.signe_detail) console.error(r.signe_detail);
-      d.textContent=r.signe_erreur;
-      cartes.push(d);
-    } else {
-      cartes.push(carteSigne(r));
-    }
-  }
-  cartes.forEach(c=>{ c.classList.add("cache"); box.appendChild(c); });
-  visibles=0; montrer(1);
-}
-function montrer(n){
-  visibles=Math.min(cartes.length,visibles+n);
-  cartes.forEach((c,i)=>c.classList.toggle("cache",i>=visibles));
-  $("suivant").disabled=$("tout").disabled=visibles>=cartes.length;
-  $("progression").textContent=`Étape ${visibles} / ${cartes.length}`;
-  const der=cartes[visibles-1]; if(der&&n===1) der.scrollIntoView({behavior:"smooth",block:"nearest"});
-}
-$("suivant").onclick=()=>montrer(1);
-$("tout").onclick=()=>montrer(cartes.length);
-const titreOrigine=document.title;
-window.addEventListener("afterprint",()=>{ document.title=titreOrigine; });
-$("pdf").onclick=()=>{
-  montrer(cartes.length);
-  document.title="Corrige-derivee-variations";
-  window.print();
-};
-
-/* ---------- exercice au hasard ---------- */
-let exoFn=null;
-async function nouvelExercice(){
-  if(!worker) return;
-  let s; do{ const pool=EXOS[tirerNiveau()]; s=pool[Math.floor(Math.random()*pool.length)]; }while(s===exoFn);
-  exoFn=s;
-  $("resultat").hidden=true; $("cartes").innerHTML=""; cartes=[];
-  $("exoCorrige").hidden=false; $("exoCorrige").textContent="Afficher le corrigé ▶";
-  const box=$("exoEnonce");
-  box.innerHTML='<span class="muted">Chargement…</span>';
-  try{
-    const r=await appelPy("apercu",s,5000);
-    box.innerHTML=r.ok?K("f(x) = "+r.tex):'<span class="err">'+r.erreur+'</span>';
-  }catch(e){ box.innerHTML='<span class="err">Erreur de chargement.</span>'; }
-  math(box);
-}
-$("exoHasard").onclick=nouvelExercice;
-$("exoCorrige").onclick=async()=>{
-  if(!exoFn) return;
-  await calculer(exoFn);
-  $("resultat").scrollIntoView({behavior:"smooth",block:"start"});
-};
-
-window.addEventListener("DOMContentLoaded",()=>{ document.querySelectorAll("details").forEach(math); demarrer(); });
 </script>
 </body>
 </html>

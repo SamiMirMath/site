@@ -14,9 +14,10 @@
       "anciennes": ["analyser", "verifier"]
     },
     "derivee-variations": {
-      "module": "derivee_variations",
-      "fichiers": ["ensemble-definition/ensemble_def.py", "moteur/noyau.py", "derivee-variations/derivee_variations.py"],
-      "fonctions": ["apercu", "etudier"]
+      "module": "resoudre_dv",
+      "fichiers": ["ensemble-definition/ensemble_def.py", "moteur/noyau.py", "moteur/sortie.py", "derivee-variations/derivee_variations.py",
+                   "derivee-variations/resoudre_dv.py"],
+      "fonctions": ["resoudre", "apercu"]
     },
     "limites-asymptotes": {
       "module": "limites_asymptotes",
