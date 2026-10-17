@@ -16,6 +16,7 @@ import resoudre_fa
 import resoudre_ed
 import resoudre_dv
 import resoudre_la
+import resoudre_ec
 
 DOSSIER = os.path.join(os.path.dirname(__file__), "instantanes", "resoudre")
 
@@ -23,6 +24,7 @@ OUTILS = {
     "ensemble-definition": (resoudre_ed.resoudre, lambda: entrees_page("ensemble-definition") + CAS_LIMITES["ensemble-definition"]),
     "derivee-variations": (resoudre_dv.resoudre, lambda: entrees_page("derivee-variations") + CAS_LIMITES["derivee-variations"]),
     "limites-asymptotes": (resoudre_la.resoudre, lambda: entrees_page("limites-asymptotes") + CAS_LIMITES["limites-asymptotes"]),
+    "etude-complete": (resoudre_ec.resoudre, lambda: entrees_page("etude-complete") + CAS_LIMITES["etude-complete"]),
     "factorisation": (resoudre_fa.resoudre, entrees_factorisation),
 }
 
@@ -64,6 +66,9 @@ class TestInstantanesResoudre(unittest.TestCase):
 
     def test_limites_asymptotes(self):
         self.verifier_outil("limites-asymptotes")
+
+    def test_etude_complete(self):
+        self.verifier_outil("etude-complete")
 
     def test_factorisation(self):
         self.verifier_outil("factorisation")

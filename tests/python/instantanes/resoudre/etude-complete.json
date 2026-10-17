@@ -1,0 +1,3930 @@
+{
+ "(e^x-1)/x": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{e^{x} - 1}{x}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}\\)",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "On pose \\(u(x) = e^{x} - 1\\) et \\(v(x) = x\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(e^{x}\\right)' = e^{x}\\) (règle de base).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(u'(x) = e^{x}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(v'(x) = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{e^{x}\\,x - \\left(e^{x} - 1\\right)}{x^{2}} = \\frac{x\\,e^{x} - e^{x} + 1}{x^{2}}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = \\frac{x\\,e^{x} - e^{x} + 1}{x^{2}}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = \\frac{x\\,e^{x} - e^{x} + 1}{x^{2}}\\) ne s'annule jamais ; valeur interdite : \\(x = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "limites": {
+       "colonnes": [
+        {
+         "droite": "1",
+         "gauche": "1",
+         "j": 1
+        }
+       ],
+       "moins_inf": "0",
+       "non_determinees": [],
+       "plus_inf": "+\\infty"
+      },
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "||",
+         "+"
+        ],
+        "label": "\\left(x\\,e^{x} - e^{x} + 1\\right)"
+       },
+       {
+        "cells": [
+         "+",
+         "||",
+         "+"
+        ],
+        "label": "x^{2}"
+       },
+       {
+        "cells": [
+         "+",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\nearrow",
+         "asym",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "Aucun extremum local.",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{e^{x} - 1}{x} = \\text{« }\\dfrac{e^{-\\infty} - 1}{-\\infty}\\text{ »} = \\text{« }\\dfrac{0^{+} - 1}{-\\infty}\\text{ »} = \\text{« }\\dfrac{-1}{-\\infty}\\text{ »} = 0\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x}}{x} &= \\text{« }\\dfrac{e^{+\\infty}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= +\\infty \\qquad \\left(\\text{croissance comparée : } \\lim_{x\\to +\\infty} \\dfrac{e^{ax}}{x^{n}} = +\\infty\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x} - 1}{x} &= \\text{« }\\dfrac{e^{+\\infty} - 1}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty - 1}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{e^{x}}{x}\\,\\left(1 - e^{-x}\\right) = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty \\qquad \\left(\\text{mise en évidence}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0} \\frac{e^{x} - 1}{x} &= \\text{« }\\dfrac{e^{0} - 1}{0}\\text{ »} = \\text{« }\\dfrac{1 - 1}{0}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 0} \\frac{e^{x}}{1} = 1 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } e^{x} - 1 \\text{ et } x \\text{ dérivables sur } \\mathbb{R} ,\\; x' = 1 \\neq 0\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Limite finie : pas d'asymptote verticale, trou dans le graphique en \\((0\\,;\\,1)\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 0"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)",
+       "Trou en \\((0\\,;\\,1)\\) : f n'est pas définie en \\(x = 0\\), mais \\(f(x) \\to 1\\) (pas une asymptote verticale)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "blocs": [
+     {
+      "asymptotes": [
+       {
+        "genre": "horizontale",
+        "ou": "x \\to -\\infty",
+        "valeur_tex": "0",
+        "valeur_val": 0.0
+       },
+       {
+        "genre": "trou",
+        "ou": "x \\to 0",
+        "point_tex": "0",
+        "point_val": 0.0,
+        "valeur_tex": "1",
+        "valeur_val": 1.0
+       }
+      ],
+      "extrema": [],
+      "recalculable": true,
+      "segments": [
+       {
+        "dernier": [
+         -0.008,
+         0.996010645
+        ],
+        "empreinte": "7386be9806a0ed26",
+        "n": 200,
+        "premier": [
+         -1.992,
+         0.433522938
+        ]
+       },
+       {
+        "dernier": [
+         1.992,
+         3.17780094
+        ],
+        "empreinte": "0e484480ab95bf0f",
+        "n": 200,
+        "premier": [
+         0.008,
+         1.00401069
+        ]
+       }
+      ],
+      "type": "graphique",
+      "xmax": 2.0,
+      "xmin": -2.0,
+      "ymax": 3.07516389,
+      "ymin": -0.615032778
+     },
+     {
+      "html": "Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Graphique"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{e^{x} - 1}{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "(x^2-1)/(x-3)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{x^{2} - 1}{x - 3}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R} \\setminus \\left\\{3\\right\\}\\)",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "On pose \\(u(x) = x^{2} - 1\\) et \\(v(x) = x - 3\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(u'(x) = 2x\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(v'(x) = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{2x\\,\\left(x - 3\\right) - \\left(x^{2} - 1\\right)}{\\left(x - 3\\right)^{2}} = \\frac{x^{2} - 6x + 1}{\\left(x - 3\\right)^{2}}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = \\frac{x^{2} - 6x + 1}{\\left(x - 3\\right)^{2}}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = \\frac{x^{2} - 6x + 1}{\\left(x - 3\\right)^{2}} = 0 \\iff x^{2} - 6x + 1 = 0 \\iff x = 3 - 2\\sqrt{2} \\text{ ou } x = 3 + 2\\sqrt{2}\\) ; valeur interdite : \\(x = 3\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "3 - 2\\sqrt{2}",
+       "3",
+       "3 + 2\\sqrt{2}"
+      ],
+      "limites": {
+       "colonnes": [
+        {
+         "droite": "+\\infty",
+         "gauche": "-\\infty",
+         "j": 3
+        }
+       ],
+       "moins_inf": "-\\infty",
+       "non_determinees": [],
+       "plus_inf": "+\\infty"
+      },
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(x^{2} - 6x + 1\\right)"
+       },
+       {
+        "cells": [
+         "+",
+         "+",
+         "+",
+         "||",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "\\left(x - 3\\right)^{2}"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\nearrow",
+         "extremum",
+         "\\searrow",
+         "asym",
+         "\\searrow",
+         "extremum",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "maximum local en \\(x=3 - 2\\sqrt{2}\\) : \\(f(3 - 2\\sqrt{2})=6 - 4 \\sqrt{2}\\)",
+       "minimum local en \\(x=3 + 2\\sqrt{2}\\) : \\(f(3 + 2\\sqrt{2})=4 \\sqrt{2} + 6\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "Signe de \\(x - 3\\) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "3"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "x - 3"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Tableaux de signes"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{x^{2} - 1}{x - 3} &= \\text{« }\\dfrac{+\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{x\\,\\left(1 - \\frac{3}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{x\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{1 - \\frac{3}{x}} = \\text{« }-\\infty \\cdot 1\\text{ »} = -\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Division euclidienne : \\(x^{2} - 1 = \\left(x - 3\\right)\\,\\left(x + 3\\right) + 8\\), donc \\(f(x) = x + 3 + \\dfrac{8}{x - 3}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\left(f(x) - \\left(x + 3\\right)\\right) = \\lim_{x\\to -\\infty} \\dfrac{8}{x - 3} = \\text{« }\\dfrac{8}{-\\infty}\\text{ »} = 0 \\text{ : asymptote oblique } y = x + 3\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\dfrac{8}{x - 3} < 0\\) pour \\(x < 3\\) : la courbe est au-dessous de l'asymptote.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x^{2} - 1}{x - 3} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{x\\,\\left(1 - \\frac{3}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{x\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{1 - \\frac{3}{x}} = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Même division : \\(f(x) - \\left(x + 3\\right) = \\dfrac{8}{x - 3}\\) tend vers \\(0\\) : asymptote oblique \\(y = x + 3\\) ; \\(\\dfrac{8}{x - 3} > 0\\) pour \\(x > 3\\) : la courbe est au-dessus de l'asymptote.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 3^{-}} \\frac{x^{2} - 1}{x - 3} = \\text{« }\\dfrac{8}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x - 3 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 3^{+}} \\frac{x^{2} - 1}{x - 3} = \\text{« }\\dfrac{8}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x - 3 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 3\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 3"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote oblique (\\(x \\to -\\infty\\)) : \\(y = x + 3\\)",
+       "Asymptote oblique (\\(x \\to +\\infty\\)) : \\(y = x + 3\\)",
+       "Asymptote verticale : \\(x = 3\\) (\\(\\lim_{x\\to 3^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 3^+} f(x) = +\\infty\\))"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "blocs": [
+     {
+      "asymptotes": [
+       {
+        "a": "1",
+        "a_val": 1.0,
+        "b": "3",
+        "b_val": 3.0,
+        "equation_tex": "x + 3",
+        "genre": "oblique",
+        "ou": "x \\to -\\infty",
+        "valeur_tex": "-\\infty"
+       },
+       {
+        "a": "1",
+        "a_val": 1.0,
+        "b": "3",
+        "b_val": 3.0,
+        "equation_tex": "x + 3",
+        "genre": "oblique",
+        "ou": "x \\to +\\infty",
+        "valeur_tex": "+\\infty"
+       },
+       {
+        "droite_tex": "+\\infty",
+        "gauche_tex": "-\\infty",
+        "genre": "verticale",
+        "ou": "x \\to 3",
+        "point_tex": "3",
+        "point_val": 3.0
+       }
+      ],
+      "extrema": [
+       {
+        "f_tex": "6 - 4 \\sqrt{2}",
+        "f_val": 0.343145751,
+        "genre": "maximum local",
+        "x_tex": "3 - 2\\sqrt{2}",
+        "x_val": 0.171572875
+       },
+       {
+        "f_tex": "4 \\sqrt{2} + 6",
+        "f_val": 11.6568542,
+        "genre": "minimum local",
+        "x_tex": "3 + 2\\sqrt{2}",
+        "x_val": 5.82842712
+       }
+      ],
+      "recalculable": true,
+      "segments": [
+       {
+        "dernier": [
+         2.97737258,
+         -347.576018
+        ],
+        "empreinte": "e21b096c8c1a41ab",
+        "n": 199,
+        "premier": [
+         -2.63422683,
+         -1.05411997
+        ]
+       },
+       {
+        "dernier": [
+         8.63422683,
+         13.05412
+        ],
+        "empreinte": "2a6fe7c9128d72a4",
+        "n": 199,
+        "premier": [
+         3.02262742,
+         359.576018
+        ]
+       }
+      ],
+      "type": "graphique",
+      "xmax": 8.65685425,
+      "xmin": -2.65685425,
+      "ymax": 18.1125002,
+      "ymin": -6.11250022
+     },
+     {
+      "html": "Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Graphique"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{x^{2} - 1}{x - 3}",
+  "erreur": null,
+  "ok": true
+ },
+ "3(x*ln(x))": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = 3x\\,\\ln(x)",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left]0 \\,;\\, +\\infty\\right[\\)",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "On pose \\(u(x) = x\\) et \\(v(x) = \\ln(x)\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(u'(x) = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(v'(x) = \\frac{1}{x}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(x\\,\\ln(x)\\right)' = u'(x)v(x) + u(x)v'(x) = \\ln(x) + x\\,\\frac{1}{x} = \\ln(x) + 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = 3 \\cdot \\left(x\\,\\ln(x)\\right)' = 3\\left(\\ln(x) + 1\\right)\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = 3\\left(\\ln(x) + 1\\right)",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(\\ln(x) + 1 = 0 \\iff \\ln(x) = -1\\) (on soustrait 1).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln(x) = -1 \\iff x = e^{-1}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = 3\\left(\\ln(x) + 1\\right) = 0 \\iff \\ln(x) + 1 = 0 \\iff x = e^{-1}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0",
+       "e^{-1}"
+      ],
+      "limites": {
+       "colonnes": [
+        {
+         "droite": "0",
+         "gauche": null,
+         "j": 1
+        }
+       ],
+       "moins_inf": null,
+       "non_determinees": [],
+       "plus_inf": "+\\infty"
+      },
+      "rows": [
+       {
+        "cells": [
+         "x",
+         "||",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "3"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(\\ln(x) + 1\\right)"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "x",
+         "asym",
+         "\\searrow",
+         "extremum",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "minimum local en \\(x=e^{-1}\\) : \\(f(e^{-1})=- \\frac{3}{e}\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} x\\,\\ln(x) &= \\text{« }0^{+} \\cdot \\ln\\left(0^{+}\\right)\\text{ »} = \\text{« }0^{+} \\cdot \\left(-\\infty\\right)\\text{ »}\\text{ : forme indéterminée} \\\\ &= 0 \\qquad \\left(\\text{croissance comparée : } \\lim_{x\\to 0^{+}} x^{n}\\ln x = 0\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} 3x\\,\\ln(x) = \\text{« }3 \\cdot 0^{+} \\cdot \\ln\\left(0^{+}\\right)\\text{ »} = \\text{« }3 \\cdot 0^{+} \\cdot \\left(-\\infty\\right)\\text{ »} = \\text{« }3 \\cdot 0^{-}\\text{ »} = 0\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Limite finie : pas d'asymptote verticale, trou dans le graphique en \\((0\\,;\\,0)\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 0^+"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} 3x\\,\\ln(x) = \\text{« }3 \\cdot +\\infty \\cdot \\ln\\left(+\\infty\\right)\\text{ »} = \\text{« }3 \\cdot +\\infty \\cdot +\\infty\\text{ »} = \\text{« }3 \\cdot +\\infty\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Trou en \\((0\\,;\\,0)\\) : f n'est pas définie en \\(x = 0\\), mais \\(f(x) \\to 0\\) (pas une asymptote verticale)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "blocs": [
+     {
+      "asymptotes": [
+       {
+        "droite_tex": "0",
+        "genre": "trou",
+        "ou": "x \\to 0^+",
+        "point_tex": "0",
+        "point_val": 0.0,
+        "valeur_tex": "0",
+        "valeur_val": 0.0
+       }
+      ],
+      "extrema": [
+       {
+        "f_tex": "- \\frac{3}{e}",
+        "f_val": -1.10363832,
+        "genre": "minimum local",
+        "x_tex": "e^{-1}",
+        "x_val": 0.367879441
+       }
+      ],
+      "recalculable": true,
+      "segments": [
+       {
+        "dernier": [
+         2.35840792,
+         6.07044848
+        ],
+        "empreinte": "7888e2e77ddcf9a0",
+        "n": 319,
+        "premier": [
+         0.00947151776,
+         -0.132396648
+        ]
+       }
+      ],
+      "type": "graphique",
+      "xmax": 2.36787944,
+      "xmin": -0.6,
+      "ymax": 4.80639139,
+      "ymin": -2.28564427
+     },
+     {
+      "html": "Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Graphique"
+   }
+  ],
+  "enonce_tex": "f(x) = 3x\\,\\ln(x)",
+  "erreur": null,
+  "ok": true
+ },
+ "e^(1/x)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = e^{\\frac{1}{x}}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}\\)",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "\\(e^{\\frac{1}{x}}\\) est de la forme \\(e^{u}\\) avec \\(u(x) = \\frac{1}{x}\\) (dérivée interne \\(u'(x) = \\frac{-1}{x^{2}}\\)) \\(\\Rightarrow\\) \\(\\left(e^{\\frac{1}{x}}\\right)' = u' e^{u} = \\frac{-e^{\\frac{1}{x}}}{x^{2}}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = \\frac{-e^{\\frac{1}{x}}}{x^{2}}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = \\frac{-e^{\\frac{1}{x}}}{x^{2}}\\) ne s'annule jamais ; valeur interdite : \\(x = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "limites": {
+       "colonnes": [
+        {
+         "droite": "+\\infty",
+         "gauche": "0",
+         "j": 1
+        }
+       ],
+       "moins_inf": "1",
+       "non_determinees": [],
+       "plus_inf": "1"
+      },
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "||",
+         "-"
+        ],
+        "label": "-1"
+       },
+       {
+        "cells": [
+         "+",
+         "||",
+         "+"
+        ],
+        "label": "e^{\\frac{1}{x}}"
+       },
+       {
+        "cells": [
+         "+",
+         "||",
+         "+"
+        ],
+        "label": "x^{2}"
+       },
+       {
+        "cells": [
+         "-",
+         "||",
+         "-"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\searrow",
+         "asym",
+         "\\searrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "Aucun extremum local.",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "Signe de \\(x\\) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "x"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Tableaux de signes"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} e^{\\frac{1}{x}} = \\text{« }e^{\\dfrac{1}{-\\infty}}\\text{ »} = \\text{« }e^{0^{-}}\\text{ »} = 1\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} e^{\\frac{1}{x}} = \\text{« }e^{\\dfrac{1}{+\\infty}}\\text{ »} = \\text{« }e^{0^{+}}\\text{ »} = 1\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{-}} e^{\\frac{1}{x}} = \\text{« }e^{\\dfrac{1}{0^{-}}}\\text{ »} = \\text{« }e^{-\\infty}\\text{ »} = 0 \\qquad \\left(x < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} e^{\\frac{1}{x}} = \\text{« }e^{\\dfrac{1}{0^{+}}}\\text{ »} = \\text{« }e^{+\\infty}\\text{ »} = +\\infty \\qquad \\left(x > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 0\\) (du côté droit) ; à gauche, \\(f(x) \\to 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 0"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 1\\)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 1\\)",
+       "Asymptote verticale : \\(x = 0\\) (\\(\\lim_{x\\to 0^-} f(x) = 0\\) ; \\(\\lim_{x\\to 0^+} f(x) = +\\infty\\))"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "blocs": [
+     {
+      "asymptotes": [
+       {
+        "genre": "horizontale",
+        "ou": "x \\to -\\infty",
+        "valeur_tex": "1",
+        "valeur_val": 1.0
+       },
+       {
+        "genre": "horizontale",
+        "ou": "x \\to +\\infty",
+        "valeur_tex": "1",
+        "valeur_val": 1.0
+       },
+       {
+        "droite_tex": "+\\infty",
+        "droite_val": null,
+        "gauche_tex": "0",
+        "gauche_val": 0.0,
+        "genre": "verticale",
+        "ou": "x \\to 0",
+        "point_tex": "0",
+        "point_val": 0.0
+       }
+      ],
+      "extrema": [],
+      "recalculable": true,
+      "segments": [
+       {
+        "dernier": [
+         -0.008,
+         5.16642063e-55
+        ],
+        "empreinte": "903d52c6c47a9681",
+        "n": 200,
+        "premier": [
+         -1.992,
+         0.605313949
+        ]
+       },
+       {
+        "dernier": [
+         1.992,
+         1.65203528
+        ],
+        "empreinte": "2973f1f8cb34c9d4",
+        "n": 200,
+        "premier": [
+         0.008,
+         null
+        ]
+       }
+      ],
+      "type": "graphique",
+      "xmax": 2.0,
+      "xmin": -2.0,
+      "ymax": 14.5839905,
+      "ymin": -2.81409627
+     },
+     {
+      "html": "Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Graphique"
+   }
+  ],
+  "enonce_tex": "f(x) = e^{\\frac{1}{x}}",
+  "erreur": null,
+  "ok": true
+ },
+ "e^(2x)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = e^{2x}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\)",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "\\(e^{2x}\\) est de la forme \\(e^{u}\\) avec \\(u(x) = 2x\\) (dérivée interne \\(u'(x) = 2\\)) \\(\\Rightarrow\\) \\(\\left(e^{2x}\\right)' = u' e^{u} = 2e^{2x}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = 2e^{2x}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = 2e^{2x}\\) ne s'annule jamais.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [],
+      "limites": {
+       "colonnes": [],
+       "moins_inf": "0",
+       "non_determinees": [],
+       "plus_inf": "+\\infty"
+      },
+      "rows": [
+       {
+        "cells": [
+         "+"
+        ],
+        "label": "2"
+       },
+       {
+        "cells": [
+         "+"
+        ],
+        "label": "e^{2x}"
+       },
+       {
+        "cells": [
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "Aucun extremum local.",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} e^{2x} = \\text{« }e^{-\\infty}\\text{ »} = 0\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} e^{2x} = \\text{« }e^{+\\infty}\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "blocs": [
+     {
+      "asymptotes": [
+       {
+        "genre": "horizontale",
+        "ou": "x \\to -\\infty",
+        "valeur_tex": "0",
+        "valeur_val": 0.0
+       }
+      ],
+      "extrema": [],
+      "recalculable": true,
+      "segments": [
+       {
+        "dernier": [
+         1.984,
+         52.8786677
+        ],
+        "empreinte": "b432b4e87042448b",
+        "n": 400,
+        "premier": [
+         -1.984,
+         0.0189112178
+        ]
+       }
+      ],
+      "type": "graphique",
+      "xmax": 2.0,
+      "xmin": -2.0,
+      "ymax": 13.7337366,
+      "ymin": -2.74674732
+     },
+     {
+      "html": "Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Graphique"
+   }
+  ],
+  "enonce_tex": "f(x) = e^{2x}",
+  "erreur": null,
+  "ok": true
+ },
+ "ln(x)/x": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{\\ln(x)}{x}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left]0 \\,;\\, +\\infty\\right[\\)",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "On pose \\(u(x) = \\ln(x)\\) et \\(v(x) = x\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(u'(x) = \\frac{1}{x}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(v'(x) = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{\\frac{1}{x}\\,x - \\ln(x)}{x^{2}} = \\frac{-\\left(\\ln(x) - 1\\right)}{x^{2}}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = \\frac{-\\left(\\ln(x) - 1\\right)}{x^{2}}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(\\ln(x) - 1 = 0 \\iff \\ln(x) = 1\\) (on ajoute 1).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln(x) = 1 \\iff x = e\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = \\frac{-\\left(\\ln(x) - 1\\right)}{x^{2}} = 0 \\iff \\ln(x) - 1 = 0 \\iff x = e\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0",
+       "e"
+      ],
+      "limites": {
+       "colonnes": [
+        {
+         "droite": "-\\infty",
+         "gauche": null,
+         "j": 1
+        }
+       ],
+       "moins_inf": null,
+       "non_determinees": [],
+       "plus_inf": "0"
+      },
+      "rows": [
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "-",
+         "-"
+        ],
+        "label": "-1"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(\\ln(x) - 1\\right)"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "x^{2}"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "+",
+         "0",
+         "-"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "x",
+         "asym",
+         "\\nearrow",
+         "extremum",
+         "\\searrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "maximum local en \\(x=e\\) : \\(f(e)=e^{-1}\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "Signe de \\(x\\) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "x"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Tableaux de signes"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} \\frac{\\ln(x)}{x} = \\text{« }\\dfrac{\\ln\\left(0^{+}\\right)}{0^{+}}\\text{ »} = \\text{« }\\dfrac{-\\infty}{0^{+}}\\text{ »} = -\\infty \\qquad \\left(x > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 0^+"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln(x)}{x} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= 0 \\qquad \\left(\\text{croissance comparée : } \\lim_{x\\to +\\infty} \\dfrac{\\ln x}{x^{n}} = 0\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote verticale : \\(x = 0\\) (\\(\\lim_{x\\to 0^+} f(x) = -\\infty\\))",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "blocs": [
+     {
+      "asymptotes": [
+       {
+        "droite_tex": "-\\infty",
+        "genre": "verticale",
+        "ou": "x \\to 0^+",
+        "point_tex": "0",
+        "point_val": 0.0
+       },
+       {
+        "genre": "horizontale",
+        "ou": "x \\to +\\infty",
+        "valeur_tex": "0",
+        "valeur_val": 0.0
+       }
+      ],
+      "extrema": [
+       {
+        "f_tex": "e^{-1}",
+        "f_val": 0.367879441,
+        "genre": "maximum local",
+        "x_tex": "e",
+        "x_val": 2.71828183
+       }
+      ],
+      "recalculable": true,
+      "segments": [
+       {
+        "dernier": [
+         4.6994087,
+         0.329283276
+        ],
+        "empreinte": "a3184065a571454d",
+        "n": 354,
+        "premier": [
+         0.0188731273,
+         -210.352855
+        ]
+       }
+      ],
+      "type": "graphique",
+      "xmax": 4.71828183,
+      "xmin": -0.6,
+      "ymax": 0.867879441,
+      "ymin": -0.557474901
+     },
+     {
+      "html": "Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Graphique"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{\\ln(x)}{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "sqrt(x^2-4)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\sqrt{x^{2} - 4}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[\\)",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\sqrt{x^{2} - 4}\\) est de la forme \\(\\sqrt{u}\\) avec \\(u(x) = x^{2} - 4\\) (dérivée interne \\(u'(x) = 2x\\)) \\(\\Rightarrow\\) \\(\\left(\\sqrt{x^{2} - 4}\\right)' = \\frac{u'}{2\\sqrt{u}} = \\frac{x}{\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = \\frac{x}{\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "ED de f' : \\(D_{f'} = \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[\\), différent de l'ED de f, \\(D_f = \\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = \\frac{x}{\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}}\\) ne s'annule jamais.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-2",
+       "2"
+      ],
+      "limites": {
+       "colonnes": [],
+       "moins_inf": "+\\infty",
+       "non_determinees": [],
+       "plus_inf": "+\\infty"
+      },
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "-",
+         "x",
+         "+",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "+",
+         "||",
+         "x",
+         "||",
+         "+"
+        ],
+        "label": "\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}"
+       },
+       {
+        "cells": [
+         "-",
+         "||",
+         "x",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\searrow",
+         "val:0",
+         "x",
+         "val:0",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "minimum local en \\(x=-2\\) : \\(f(-2)=0\\)",
+       "minimum local en \\(x=2\\) : \\(f(2)=0\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\sqrt{x^{2} - 4} = \\text{« }\\sqrt{+\\infty}\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}a = \\lim_{x\\to -\\infty} \\frac{\\sqrt{x^{2} - 4}}{x} &= \\text{« }\\dfrac{\\sqrt{+\\infty}}{-\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{\\sqrt{x^{2}\\left(1 - \\frac{4}{x^{2}}\\right)}}{x} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{-x\\,\\sqrt{1 - \\frac{4}{x^{2}}}}{x} \\qquad \\left(x < 0 \\text{ : } \\sqrt{x^{2}} = |x| = -x\\right) \\\\ &= \\lim_{x\\to -\\infty} -\\sqrt{1 - \\frac{4}{x^{2}}} = -1\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}b = \\lim_{x\\to -\\infty} \\left(\\sqrt{x^{2} - 4} + x\\right) &= \\text{« }\\sqrt{+\\infty} - \\infty\\text{ »} = \\text{« }+\\infty - \\infty\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\frac{-4}{\\sqrt{x^{2} - 4} - x} = \\text{« }\\dfrac{-4}{+\\infty}\\text{ »} = 0 \\qquad \\left(\\text{conjuguée}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote oblique : \\(y = -x\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}f(x) - \\left(-x\\right) &= \\sqrt{x^{2} - 4} + x \\\\ &= \\dfrac{-4}{\\sqrt{x^{2} - 4} - x} \\qquad \\left(\\text{conjuguée}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(x) - \\left(-x\\right) < 0\\) pour \\(x < 0\\) : la courbe est au-dessous de l'asymptote.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\sqrt{x^{2} - 4} = \\text{« }\\sqrt{+\\infty}\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}a = \\lim_{x\\to +\\infty} \\frac{\\sqrt{x^{2} - 4}}{x} &= \\text{« }\\dfrac{\\sqrt{+\\infty}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{\\sqrt{x^{2}\\left(1 - \\frac{4}{x^{2}}\\right)}}{x} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x\\,\\sqrt{1 - \\frac{4}{x^{2}}}}{x} \\qquad \\left(x > 0 \\text{ : } \\sqrt{x^{2}} = |x| = x\\right) \\\\ &= \\lim_{x\\to +\\infty} \\sqrt{1 - \\frac{4}{x^{2}}} = 1\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}b = \\lim_{x\\to +\\infty} \\left(\\sqrt{x^{2} - 4} - x\\right) &= \\text{« }\\sqrt{+\\infty} - \\infty\\text{ »} = \\text{« }+\\infty - \\infty\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{-4}{\\sqrt{x^{2} - 4} + x} = \\text{« }\\dfrac{-4}{+\\infty}\\text{ »} = 0 \\qquad \\left(\\text{conjuguée}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote oblique : \\(y = x\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}f(x) - \\left(x\\right) &= \\sqrt{x^{2} - 4} - x \\\\ &= \\dfrac{-4}{\\sqrt{x^{2} - 4} + x} \\qquad \\left(\\text{conjuguée}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(x) - \\left(x\\right) < 0\\) pour \\(x > 0\\) : la courbe est au-dessous de l'asymptote.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote oblique (\\(x \\to -\\infty\\)) : \\(y = -x\\)",
+       "Asymptote oblique (\\(x \\to +\\infty\\)) : \\(y = x\\)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "blocs": [
+     {
+      "asymptotes": [
+       {
+        "a": "-1",
+        "a_val": -1.0,
+        "b": "0",
+        "b_val": 0.0,
+        "equation_tex": "-x",
+        "genre": "oblique",
+        "ou": "x \\to -\\infty"
+       },
+       {
+        "a": "1",
+        "a_val": 1.0,
+        "b": "0",
+        "b_val": 0.0,
+        "equation_tex": "x",
+        "genre": "oblique",
+        "ou": "x \\to +\\infty"
+       }
+      ],
+      "extrema": [
+       {
+        "f_tex": "0",
+        "f_val": 0.0,
+        "genre": "minimum local",
+        "x_tex": "-2",
+        "x_val": -2.0
+       },
+       {
+        "f_tex": "0",
+        "f_val": 0.0,
+        "genre": "minimum local",
+        "x_tex": "2",
+        "x_val": 2.0
+       }
+      ],
+      "recalculable": true,
+      "segments": [
+       {
+        "dernier": [
+         -2.008,
+         0.179064234
+        ],
+        "empreinte": "dda8835217be4383",
+        "n": 100,
+        "premier": [
+         -3.992,
+         3.45486092
+        ]
+       },
+       {
+        "dernier": [
+         3.992,
+         3.45486092
+        ],
+        "empreinte": "553d2ddce5b1b60a",
+        "n": 100,
+        "premier": [
+         2.008,
+         0.179064234
+        ]
+       }
+      ],
+      "type": "graphique",
+      "xmax": 4.0,
+      "xmin": -4.0,
+      "ymax": 3.72840855,
+      "ymin": -0.74568171
+     },
+     {
+      "html": "Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Graphique"
+   }
+  ],
+  "enonce_tex": "f(x) = \\sqrt{x^{2} - 4}",
+  "erreur": null,
+  "ok": true
+ },
+ "x*ln(x)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = x\\,\\ln(x)",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left]0 \\,;\\, +\\infty\\right[\\)",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "On pose \\(u(x) = x\\) et \\(v(x) = \\ln(x)\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(u'(x) = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(v'(x) = \\frac{1}{x}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = u'(x)v(x) + u(x)v'(x) = \\ln(x) + x\\,\\frac{1}{x} = \\ln(x) + 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = \\ln(x) + 1",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(\\ln(x) + 1 = 0 \\iff \\ln(x) = -1\\) (on soustrait 1).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\ln(x) = -1 \\iff x = e^{-1}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = \\ln(x) + 1 = 0 \\iff x = e^{-1}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0",
+       "e^{-1}"
+      ],
+      "limites": {
+       "colonnes": [
+        {
+         "droite": "0",
+         "gauche": null,
+         "j": 1
+        }
+       ],
+       "moins_inf": null,
+       "non_determinees": [],
+       "plus_inf": "+\\infty"
+      },
+      "rows": [
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(\\ln(x) + 1\\right)"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "x",
+         "asym",
+         "\\searrow",
+         "extremum",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "minimum local en \\(x=e^{-1}\\) : \\(f(e^{-1})=- \\frac{1}{e}\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} x\\,\\ln(x) &= \\text{« }0^{+} \\cdot \\ln\\left(0^{+}\\right)\\text{ »} = \\text{« }0^{+} \\cdot \\left(-\\infty\\right)\\text{ »}\\text{ : forme indéterminée} \\\\ &= 0 \\qquad \\left(\\text{croissance comparée : } \\lim_{x\\to 0^{+}} x^{n}\\ln x = 0\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Limite finie : pas d'asymptote verticale, trou dans le graphique en \\((0\\,;\\,0)\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 0^+"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} x\\,\\ln(x) = \\text{« }+\\infty \\cdot \\ln\\left(+\\infty\\right)\\text{ »} = \\text{« }+\\infty \\cdot +\\infty\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Trou en \\((0\\,;\\,0)\\) : f n'est pas définie en \\(x = 0\\), mais \\(f(x) \\to 0\\) (pas une asymptote verticale)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "blocs": [
+     {
+      "asymptotes": [
+       {
+        "droite_tex": "0",
+        "genre": "trou",
+        "ou": "x \\to 0^+",
+        "point_tex": "0",
+        "point_val": 0.0,
+        "valeur_tex": "0",
+        "valeur_val": 0.0
+       }
+      ],
+      "extrema": [
+       {
+        "f_tex": "- \\frac{1}{e}",
+        "f_val": -0.367879441,
+        "genre": "minimum local",
+        "x_tex": "e^{-1}",
+        "x_val": 0.367879441
+       }
+      ],
+      "recalculable": true,
+      "segments": [
+       {
+        "dernier": [
+         2.35840792,
+         2.02348283
+        ],
+        "empreinte": "ebe59e70c9f1e682",
+        "n": 319,
+        "premier": [
+         0.00947151776,
+         -0.0441322161
+        ]
+       }
+      ],
+      "type": "graphique",
+      "xmax": 2.36787944,
+      "xmin": -0.6,
+      "ymax": 1.70812848,
+      "ymin": -0.867879441
+     },
+     {
+      "html": "Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Graphique"
+   }
+  ],
+  "enonce_tex": "f(x) = x\\,\\ln(x)",
+  "erreur": null,
+  "ok": true
+ },
+ "x/(x^2+1)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{x}{x^{2} + 1}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\)",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "On pose \\(u(x) = x\\) et \\(v(x) = x^{2} + 1\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(u'(x) = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(v'(x) = 2x\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{x^{2} + 1 - x \\cdot 2x}{\\left(x^{2} + 1\\right)^{2}} = \\frac{-\\left(x + 1\\right)\\,\\left(x - 1\\right)}{\\left(x^{2} + 1\\right)^{2}}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = \\frac{-\\left(x + 1\\right)\\,\\left(x - 1\\right)}{\\left(x^{2} + 1\\right)^{2}}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = \\frac{-\\left(x + 1\\right)\\,\\left(x - 1\\right)}{\\left(x^{2} + 1\\right)^{2}} = 0 \\iff x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-1",
+       "1"
+      ],
+      "limites": {
+       "colonnes": [],
+       "moins_inf": "0",
+       "non_determinees": [],
+       "plus_inf": "0"
+      },
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "-",
+         "-"
+        ],
+        "label": "-1"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "\\left(x + 1\\right)"
+       },
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(x - 1\\right)"
+       },
+       {
+        "cells": [
+         "+",
+         "+",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "\\left(x^{2} + 1\\right)^{2}"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "0",
+         "-"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\searrow",
+         "extremum",
+         "\\nearrow",
+         "extremum",
+         "\\searrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "minimum local en \\(x=-1\\) : \\(f(-1)=- \\frac{1}{2}\\)",
+       "maximum local en \\(x=1\\) : \\(f(1)=\\frac{1}{2}\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{x}{x^{2} + 1} &= \\text{« }\\dfrac{-\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x}{x^{2}\\,\\left(1 + \\frac{1}{x^{2}}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{1}{x\\,\\left(1 + \\frac{1}{x^{2}}\\right)} = \\text{« }\\dfrac{1}{-\\infty \\cdot 1}\\text{ »} = 0\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x}{x^{2} + 1} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x}{x^{2}\\,\\left(1 + \\frac{1}{x^{2}}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{1}{x\\,\\left(1 + \\frac{1}{x^{2}}\\right)} = \\text{« }\\dfrac{1}{+\\infty \\cdot 1}\\text{ »} = 0\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "blocs": [
+     {
+      "asymptotes": [
+       {
+        "genre": "horizontale",
+        "ou": "x \\to -\\infty",
+        "valeur_tex": "0",
+        "valeur_val": 0.0
+       },
+       {
+        "genre": "horizontale",
+        "ou": "x \\to +\\infty",
+        "valeur_tex": "0",
+        "valeur_val": 0.0
+       }
+      ],
+      "extrema": [
+       {
+        "f_tex": "- \\frac{1}{2}",
+        "f_val": -0.5,
+        "genre": "minimum local",
+        "x_tex": "-1",
+        "x_val": -1.0
+       },
+       {
+        "f_tex": "\\frac{1}{2}",
+        "f_val": 0.5,
+        "genre": "maximum local",
+        "x_tex": "1",
+        "x_val": 1.0
+       }
+      ],
+      "recalculable": true,
+      "segments": [
+       {
+        "dernier": [
+         2.976,
+         0.301930407
+        ],
+        "empreinte": "f650a43414993e43",
+        "n": 400,
+        "premier": [
+         -2.976,
+         -0.301930407
+        ]
+       }
+      ],
+      "type": "graphique",
+      "xmax": 3.0,
+      "xmin": -3.0,
+      "ymax": 1.0,
+      "ymin": -1.0
+     },
+     {
+      "html": "Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Graphique"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{x}{x^{2} + 1}",
+  "erreur": null,
+  "ok": true
+ },
+ "x/sqrt(x^2)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{x}{\\sqrt{x^{2}}}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}\\)",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "On pose \\(u(x) = x\\) et \\(v(x) = \\sqrt{x^{2}}\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\sqrt{x^{2}}\\) est de la forme \\(\\sqrt{u}\\) avec \\(u(x) = x^{2}\\) (dérivée interne \\(u'(x) = 2x\\)) \\(\\Rightarrow\\) \\(\\left(\\sqrt{x^{2}}\\right)' = \\frac{u'}{2\\sqrt{u}} = \\frac{x}{\\sqrt{x^{2}}}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(u'(x) = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(v'(x) = \\frac{x}{\\sqrt{x^{2}}}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{\\sqrt{x^{2}} - x\\,\\frac{x}{\\sqrt{x^{2}}}}{\\left(\\sqrt{x^{2}}\\right)^{2}} = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = 0",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(0\\) est nulle partout où elle est définie.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "limites": {
+       "colonnes": [
+        {
+         "droite": "1",
+         "gauche": "-1",
+         "j": 1
+        }
+       ],
+       "moins_inf": "-1",
+       "non_determinees": [],
+       "plus_inf": "1"
+      },
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "||",
+         "+"
+        ],
+        "label": "0"
+       },
+       {
+        "cells": [
+         "0",
+         "||",
+         "0"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\rightarrow",
+         "asym",
+         "\\rightarrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "f est constante sur chaque intervalle de son ensemble de définition : aucun extremum.",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{x}{\\sqrt{x^{2}}} &= \\text{« }\\dfrac{-\\infty}{\\sqrt{+\\infty}}\\text{ »} = \\text{« }\\dfrac{-\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x}{-x} \\qquad \\left(x < 0 \\text{ : } \\sqrt{x^{2}} = |x| = -x\\right) \\\\ &= \\lim_{x\\to -\\infty} -1 = -1\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = -1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x}{\\sqrt{x^{2}}} &= \\text{« }\\dfrac{+\\infty}{\\sqrt{+\\infty}}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x}{x} \\qquad \\left(x > 0 \\text{ : } \\sqrt{x^{2}} = |x| = x\\right) \\\\ &= \\lim_{x\\to +\\infty} 1 = 1\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{-}} \\frac{x}{\\sqrt{x^{2}}} &= \\text{« }\\dfrac{0}{\\sqrt{0}}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 0^{-}} \\frac{x}{|x|} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to 0^{-}} \\frac{x}{-x} \\qquad \\left(x < 0 \\text{ : } |x| = -x\\right) \\\\ &= \\lim_{x\\to 0^{-}} -1 = -1 \\qquad \\left(\\text{on simplifie}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} \\frac{x}{\\sqrt{x^{2}}} &= \\text{« }\\dfrac{0}{\\sqrt{0}}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 0^{+}} \\frac{x}{|x|} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to 0^{+}} \\frac{x}{x} \\qquad \\left(x > 0 \\text{ : } |x| = x\\right) \\\\ &= \\lim_{x\\to 0^{+}} 1 = 1 \\qquad \\left(\\text{on simplifie}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Limites à gauche et à droite différentes : f n'a pas de limite en \\(x=0\\) ; pas d'asymptote verticale.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 0"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = -1\\)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 1\\)",
+       "Pas de limite en \\(x = 0\\) (pas d'asymptote verticale) : \\(\\lim_{x\\to 0^-} f(x) = -1\\) ; \\(\\lim_{x\\to 0^+} f(x) = 1\\)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "blocs": [
+     {
+      "asymptotes": [
+       {
+        "genre": "horizontale",
+        "ou": "x \\to -\\infty",
+        "valeur_tex": "-1",
+        "valeur_val": -1.0
+       },
+       {
+        "genre": "horizontale",
+        "ou": "x \\to +\\infty",
+        "valeur_tex": "1",
+        "valeur_val": 1.0
+       },
+       {
+        "droite_tex": "1",
+        "droite_val": 1.0,
+        "gauche_tex": "-1",
+        "gauche_val": -1.0,
+        "genre": "sans_limite",
+        "ou": "x \\to 0",
+        "point_tex": "0",
+        "point_val": 0.0
+       }
+      ],
+      "extrema": [],
+      "recalculable": true,
+      "segments": [
+       {
+        "dernier": [
+         -0.008,
+         -1.0
+        ],
+        "empreinte": "0ad76bb84f9119fc",
+        "n": 200,
+        "premier": [
+         -1.992,
+         -1.0
+        ]
+       },
+       {
+        "dernier": [
+         1.992,
+         1.0
+        ],
+        "empreinte": "3a07cf016fdb4e53",
+        "n": 200,
+        "premier": [
+         0.008,
+         1.0
+        ]
+       }
+      ],
+      "type": "graphique",
+      "xmax": 2.0,
+      "xmin": -2.0,
+      "ymax": 1.5,
+      "ymin": -1.5
+     },
+     {
+      "html": "Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Graphique"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{x}{\\sqrt{x^{2}}}",
+  "erreur": null,
+  "ok": true
+ },
+ "x^(2/3)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = x^{\\frac{2}{3}} = \\sqrt[3]{x^{2}}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\)",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "\\(\\left(\\sqrt[3]{x^{2}}\\right)' = \\frac{2}{3\\sqrt[3]{x}}\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = \\frac{2}{3\\sqrt[3]{x}}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "ED de f' : \\(D_{f'} = \\mathbb{R} \\setminus \\left\\{0\\right\\}\\), différent de l'ED de f, \\(D_f = \\mathbb{R}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = \\frac{2}{3\\sqrt[3]{x}}\\) ne s'annule jamais ; valeur interdite : \\(x = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "limites": {
+       "colonnes": [],
+       "moins_inf": "+\\infty",
+       "non_determinees": [],
+       "plus_inf": "+\\infty"
+      },
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "\\frac{2}{3}"
+       },
+       {
+        "cells": [
+         "-",
+         "||",
+         "+"
+        ],
+        "label": "\\sqrt[3]{x}"
+       },
+       {
+        "cells": [
+         "-",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\searrow",
+         "val:0",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "minimum local en \\(x=0\\) : \\(f(0)=0\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "detail": "Abandon : base négative",
+      "html": "Le calcul détaillé de cette limite n'est pas rédigé ici ; résultat : \\(\\displaystyle\\lim_{x\\to -\\infty} f(x) = +\\infty\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\sqrt[3]{x^{2}} = \\text{« }\\left(+\\infty\\right)^{\\frac{2}{3}}\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "html": "Aucune asymptote détectée.",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "blocs": [
+     {
+      "asymptotes": [],
+      "extrema": [
+       {
+        "f_tex": "0",
+        "f_val": 0.0,
+        "genre": "minimum local",
+        "x_tex": "0",
+        "x_val": 0.0
+       }
+      ],
+      "recalculable": true,
+      "segments": [
+       {
+        "dernier": [
+         1.984,
+         1.57892358
+        ],
+        "empreinte": "93edcbedbbb29793",
+        "n": 400,
+        "premier": [
+         -1.984,
+         1.57892358
+        ]
+       }
+      ],
+      "type": "graphique",
+      "xmax": 2.0,
+      "xmin": -2.0,
+      "ymax": 1.62821155,
+      "ymin": -0.5
+     },
+     {
+      "html": "Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Graphique"
+   }
+  ],
+  "enonce_tex": "f(x) = x^{\\frac{2}{3}} = \\sqrt[3]{x^{2}}",
+  "erreur": null,
+  "ok": true
+ },
+ "x^2*e^(-x)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = x^{2}\\,e^{-x}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\)",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "On pose \\(u(x) = x^{2}\\) et \\(v(x) = e^{-x}\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(e^{-x}\\) est de la forme \\(e^{u}\\) avec \\(u(x) = -x\\) (dérivée interne \\(u'(x) = -1\\)) \\(\\Rightarrow\\) \\(\\left(e^{-x}\\right)' = u' e^{u} = -e^{-x}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(u'(x) = 2x\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(v'(x) = -e^{-x}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = u'(x)v(x) + u(x)v'(x) = 2x\\,e^{-x} + x^{2}\\,\\left(-e^{-x}\\right) = -x\\,\\left(x - 2\\right)\\,e^{-x}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = -x\\,\\left(x - 2\\right)\\,e^{-x}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = -x\\,\\left(x - 2\\right)\\,e^{-x} = 0 \\iff x = 0 \\text{ ou } x - 2 = 0 \\iff x = 0 \\text{ ou } x = 2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0",
+       "2"
+      ],
+      "limites": {
+       "colonnes": [],
+       "moins_inf": "+\\infty",
+       "non_determinees": [],
+       "plus_inf": "0"
+      },
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "-",
+         "-"
+        ],
+        "label": "-1"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(x - 2\\right)"
+       },
+       {
+        "cells": [
+         "+",
+         "+",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "e^{-x}"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "0",
+         "-"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\searrow",
+         "extremum",
+         "\\nearrow",
+         "extremum",
+         "\\searrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "minimum local en \\(x=0\\) : \\(f(0)=0\\)",
+       "maximum local en \\(x=2\\) : \\(f(2)=\\frac{4}{e^{2}}\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} x^{2}\\,e^{-x} = \\text{« }+\\infty \\cdot e^{+\\infty}\\text{ »} = \\text{« }+\\infty \\cdot +\\infty\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} x^{2}\\,e^{-x} &= \\text{« }+\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }+\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= 0 \\qquad \\left(\\text{croissance comparée : } \\lim_{x\\to +\\infty} x^{n}e^{-ax} = 0\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "blocs": [
+     {
+      "asymptotes": [
+       {
+        "genre": "horizontale",
+        "ou": "x \\to +\\infty",
+        "valeur_tex": "0",
+        "valeur_val": 0.0
+       }
+      ],
+      "extrema": [
+       {
+        "f_tex": "0",
+        "f_val": 0.0,
+        "genre": "minimum local",
+        "x_tex": "0",
+        "x_val": 0.0
+       },
+       {
+        "f_tex": "\\frac{4}{e^{2}}",
+        "f_val": 0.541341133,
+        "genre": "maximum local",
+        "x_tex": "2",
+        "x_val": 2.0
+       }
+      ],
+      "recalculable": true,
+      "segments": [
+       {
+        "dernier": [
+         3.976,
+         0.296577289
+        ],
+        "empreinte": "94178f29f208a270",
+        "n": 400,
+        "premier": [
+         -1.976,
+         28.166947
+        ]
+       }
+      ],
+      "type": "graphique",
+      "xmax": 4.0,
+      "xmin": -2.0,
+      "ymax": 1.9120913,
+      "ymin": -0.5
+     },
+     {
+      "html": "Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Graphique"
+   }
+  ],
+  "enonce_tex": "f(x) = x^{2}\\,e^{-x}",
+  "erreur": null,
+  "ok": true
+ },
+ "x^2-4x+3": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = x^{2} - 4x + 3",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\)",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "La dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = 2\\left(x - 2\\right)\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = 2\\left(x - 2\\right)",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = 2\\left(x - 2\\right) = 0 \\iff x - 2 = 0 \\iff x = 2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "2"
+      ],
+      "limites": {
+       "colonnes": [],
+       "moins_inf": "+\\infty",
+       "non_determinees": [],
+       "plus_inf": "+\\infty"
+      },
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "2"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(x - 2\\right)"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\searrow",
+         "extremum",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "minimum local en \\(x=2\\) : \\(f(2)=-1\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\left(x^{2} - 4x + 3\\right) = \\text{« }+\\infty + \\infty\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Pas d'asymptote oblique : branche parabolique.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\left(x^{2} - 4x + 3\\right) &= \\text{« }+\\infty - \\infty\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} x^{2}\\,\\left(1 - \\frac{4}{x} + \\frac{3}{x^{2}}\\right) = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty \\qquad \\left(\\text{mise en évidence}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Pas d'asymptote oblique : branche parabolique.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Pas d'asymptote (\\(x \\to -\\infty\\)) — branche parabolique.",
+       "Pas d'asymptote (\\(x \\to +\\infty\\)) — branche parabolique."
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "blocs": [
+     {
+      "asymptotes": [
+       {
+        "genre": "aucune",
+        "ou": "x \\to -\\infty",
+        "valeur_tex": "+\\infty"
+       },
+       {
+        "genre": "aucune",
+        "ou": "x \\to +\\infty",
+        "valeur_tex": "+\\infty"
+       }
+      ],
+      "extrema": [
+       {
+        "f_tex": "-1",
+        "f_val": -1.0,
+        "genre": "minimum local",
+        "x_tex": "2",
+        "x_val": 2.0
+       }
+      ],
+      "recalculable": true,
+      "segments": [
+       {
+        "dernier": [
+         3.984,
+         2.936256
+        ],
+        "empreinte": "816874989d17cef2",
+        "n": 400,
+        "premier": [
+         0.016,
+         2.936256
+        ]
+       }
+      ],
+      "type": "graphique",
+      "xmax": 4.0,
+      "xmin": 0.0,
+      "ymax": 0.936056838,
+      "ymin": -1.5
+     },
+     {
+      "html": "Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Graphique"
+   }
+  ],
+  "enonce_tex": "f(x) = x^{2} - 4x + 3",
+  "erreur": null,
+  "ok": true
+ },
+ "x^3-3x": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = x^{3} - 3x",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\)",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "La dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(x^{3}\\right)' = 3x^{2}\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = 3\\left(x + 1\\right)\\,\\left(x - 1\\right)\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = 3\\left(x + 1\\right)\\,\\left(x - 1\\right)",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = 3\\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-1",
+       "1"
+      ],
+      "limites": {
+       "colonnes": [],
+       "moins_inf": "-\\infty",
+       "non_determinees": [],
+       "plus_inf": "+\\infty"
+      },
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "+",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "3"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "\\left(x + 1\\right)"
+       },
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(x - 1\\right)"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\nearrow",
+         "extremum",
+         "\\searrow",
+         "extremum",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "maximum local en \\(x=-1\\) : \\(f(-1)=2\\)",
+       "minimum local en \\(x=1\\) : \\(f(1)=-2\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\left(x^{3} - 3x\\right) &= \\text{« }-\\infty + \\infty\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} x^{3}\\,\\left(1 - \\frac{3}{x^{2}}\\right) = \\text{« }-\\infty \\cdot 1\\text{ »} = -\\infty \\qquad \\left(\\text{mise en évidence}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Pas d'asymptote oblique : branche parabolique.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\left(x^{3} - 3x\\right) &= \\text{« }+\\infty - \\infty\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} x^{3}\\,\\left(1 - \\frac{3}{x^{2}}\\right) = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty \\qquad \\left(\\text{mise en évidence}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Pas d'asymptote oblique : branche parabolique.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Pas d'asymptote (\\(x \\to -\\infty\\)) — branche parabolique.",
+       "Pas d'asymptote (\\(x \\to +\\infty\\)) — branche parabolique."
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "blocs": [
+     {
+      "asymptotes": [
+       {
+        "genre": "aucune",
+        "ou": "x \\to -\\infty",
+        "valeur_tex": "-\\infty"
+       },
+       {
+        "genre": "aucune",
+        "ou": "x \\to +\\infty",
+        "valeur_tex": "+\\infty"
+       }
+      ],
+      "extrema": [
+       {
+        "f_tex": "2",
+        "f_val": 2.0,
+        "genre": "maximum local",
+        "x_tex": "-1",
+        "x_val": -1.0
+       },
+       {
+        "f_tex": "-2",
+        "f_val": -2.0,
+        "genre": "minimum local",
+        "x_tex": "1",
+        "x_val": 1.0
+       }
+      ],
+      "recalculable": true,
+      "segments": [
+       {
+        "dernier": [
+         2.976,
+         17.4291702
+        ],
+        "empreinte": "d466b40288ace53b",
+        "n": 400,
+        "premier": [
+         -2.976,
+         -17.4291702
+        ]
+       }
+      ],
+      "type": "graphique",
+      "xmax": 3.0,
+      "xmin": -3.0,
+      "ymax": 3.0,
+      "ymin": -3.0
+     },
+     {
+      "html": "Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Graphique"
+   }
+  ],
+  "enonce_tex": "f(x) = x^{3} - 3x",
+  "erreur": null,
+  "ok": true
+ },
+ "x^4-2x^2": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = x^{4} - 2x^{2}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\)",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "La dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(x^{4}\\right)' = 4x^{3}\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(2x^{2}\\right)' = 2 \\cdot \\left(x^{2}\\right)' = 4x\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = 4x\\,\\left(x + 1\\right)\\,\\left(x - 1\\right)\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = 4x\\,\\left(x + 1\\right)\\,\\left(x - 1\\right)",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = 4x\\,\\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x = 0 \\text{ ou } x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 0 \\text{ ou } x = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-1",
+       "0",
+       "1"
+      ],
+      "limites": {
+       "colonnes": [],
+       "moins_inf": "+\\infty",
+       "non_determinees": [],
+       "plus_inf": "+\\infty"
+      },
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "+",
+         "+",
+         "+",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "4"
+       },
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "0",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "+",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "\\left(x + 1\\right)"
+       },
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "-",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(x - 1\\right)"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\searrow",
+         "extremum",
+         "\\nearrow",
+         "extremum",
+         "\\searrow",
+         "extremum",
+         "\\nearrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "items": [
+       "minimum local en \\(x=-1\\) : \\(f(-1)=-1\\)",
+       "maximum local en \\(x=0\\) : \\(f(0)=0\\)",
+       "minimum local en \\(x=1\\) : \\(f(1)=-1\\)"
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\left(x^{4} - 2x^{2}\\right) &= \\text{« }+\\infty - \\infty\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} x^{4}\\,\\left(1 - \\frac{2}{x^{2}}\\right) = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty \\qquad \\left(\\text{mise en évidence}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Pas d'asymptote oblique : branche parabolique.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\left(x^{4} - 2x^{2}\\right) &= \\text{« }+\\infty - \\infty\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} x^{4}\\,\\left(1 - \\frac{2}{x^{2}}\\right) = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty \\qquad \\left(\\text{mise en évidence}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Pas d'asymptote oblique : branche parabolique.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Pas d'asymptote (\\(x \\to -\\infty\\)) — branche parabolique.",
+       "Pas d'asymptote (\\(x \\to +\\infty\\)) — branche parabolique."
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "blocs": [
+     {
+      "asymptotes": [
+       {
+        "genre": "aucune",
+        "ou": "x \\to -\\infty",
+        "valeur_tex": "+\\infty"
+       },
+       {
+        "genre": "aucune",
+        "ou": "x \\to +\\infty",
+        "valeur_tex": "+\\infty"
+       }
+      ],
+      "extrema": [
+       {
+        "f_tex": "-1",
+        "f_val": -1.0,
+        "genre": "minimum local",
+        "x_tex": "-1",
+        "x_val": -1.0
+       },
+       {
+        "f_tex": "0",
+        "f_val": 0.0,
+        "genre": "maximum local",
+        "x_tex": "0",
+        "x_val": 0.0
+       },
+       {
+        "f_tex": "-1",
+        "f_val": -1.0,
+        "genre": "minimum local",
+        "x_tex": "1",
+        "x_val": 1.0
+       }
+      ],
+      "recalculable": true,
+      "segments": [
+       {
+        "dernier": [
+         2.976,
+         60.7257864
+        ],
+        "empreinte": "213905ba82b65ae0",
+        "n": 400,
+        "premier": [
+         -2.976,
+         60.7257864
+        ]
+       }
+      ],
+      "type": "graphique",
+      "xmax": 3.0,
+      "xmin": -3.0,
+      "ymax": 5.22241456,
+      "ymin": -2.24448291
+     },
+     {
+      "html": "Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Graphique"
+   }
+  ],
+  "enonce_tex": "f(x) = x^{4} - 2x^{2}",
+  "erreur": null,
+  "ok": true
+ }
+}
