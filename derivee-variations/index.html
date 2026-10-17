@@ -155,6 +155,7 @@ onmessage=async e=>{
     if(fn==="init"){
       py=await loadPyodide({indexURL:"${PYODIDE}"});
       py.FS.writeFile("ensemble_def.py",arg.ed);
+      py.FS.writeFile("noyau.py",arg.no);
       py.FS.writeFile("derivee_variations.py",arg.dv);
       py.runPython("import derivee_variations");
       postMessage({id,r:"ok"}); return;
@@ -181,13 +182,15 @@ function lancerWorker(){
 function majEtat(){ $("etat").textContent=sympyOK?"Prêt.":"Chargement du moteur de calcul…"; }
 async function demarrer(){
   try{
-    const [repEd,repDv]=await Promise.all([
+    const [repEd,repNo,repDv]=await Promise.all([
       fetch("../ensemble-definition/ensemble_def.py",{cache:"no-cache"}),
+      fetch("../moteur/noyau.py",{cache:"no-cache"}),
       fetch("derivee_variations.py",{cache:"no-cache"})
     ]);
     if(!repEd.ok) throw new Error("ensemble_def.py introuvable ("+repEd.status+")");
+    if(!repNo.ok) throw new Error("noyau.py introuvable ("+repNo.status+")");
     if(!repDv.ok) throw new Error("derivee_variations.py introuvable ("+repDv.status+")");
-    source={ed:await repEd.text(), dv:await repDv.text()};
+    source={ed:await repEd.text(), no:await repNo.text(), dv:await repDv.text()};
     await lancerWorker();
     majEtat(); $("calculer").disabled=false; $("exoHasard").disabled=false;
     apercu();

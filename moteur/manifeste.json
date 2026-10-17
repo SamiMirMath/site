@@ -14,23 +14,23 @@
     },
     "derivee-variations": {
       "module": "derivee_variations",
-      "fichiers": ["ensemble-definition/ensemble_def.py", "derivee-variations/derivee_variations.py"],
+      "fichiers": ["ensemble-definition/ensemble_def.py", "moteur/noyau.py", "derivee-variations/derivee_variations.py"],
       "fonctions": ["apercu", "etudier"]
     },
     "limites-asymptotes": {
       "module": "limites_asymptotes",
-      "fichiers": ["ensemble-definition/ensemble_def.py", "limites-asymptotes/limites_asymptotes.py"],
+      "fichiers": ["ensemble-definition/ensemble_def.py", "moteur/noyau.py", "limites-asymptotes/limites_asymptotes.py"],
       "fonctions": ["apercu", "etudier"]
     },
     "etude-complete": {
       "module": "etude_complete",
-      "fichiers": ["ensemble-definition/ensemble_def.py", "derivee-variations/derivee_variations.py",
+      "fichiers": ["ensemble-definition/ensemble_def.py", "moteur/noyau.py", "derivee-variations/derivee_variations.py",
                    "limites-asymptotes/limites_asymptotes.py", "etude-complete/etude_complete.py"],
       "fonctions": ["apercu", "etudier", "fenetre"]
     },
     "factorisation": {
       "module": "factorisation",
-      "fichiers": ["ensemble-definition/ensemble_def.py", "factorisation/factorisation.py"],
+      "fichiers": ["ensemble-definition/ensemble_def.py", "moteur/noyau.py", "factorisation/factorisation.py"],
       "fonctions": ["apercu", "exercice", "factoriser"]
     }
   }

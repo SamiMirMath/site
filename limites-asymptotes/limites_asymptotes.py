@@ -24,13 +24,13 @@ import json
 import re
 from fractions import Fraction as F
 
-from ensemble_def import (
+from noyau import (
     Nb, X, E, Neg, Op, Fn,
     lire, tex, prec, valeur_constante, Num, Iv, REELS, fusion, inter, ens_tex,
     contient, proche, evaluer, sans_x, qtex, ptex, pn, deg, peval, pdivlin, pmul, nul, padd, pscal,
     decomposer, r_norm, json_strict, ajouter_saisie,
-    _sympy, en_sympy_reel, arbre_depuis_sympy, num_sympy, _SP,
-    txt, NonPrisEnCharge, ErreurSaisie, _analyser, apercu_json,
+    charger_sympy, en_sympy_reel, arbre_depuis_sympy, num_sympy, SYMPY,
+    txt, NonPrisEnCharge, ErreurSaisie, analyser_complet, apercu_json,
     signe_facteur, tableau_facteurs, en_sympy, aplatir, domaine, complement,
 )
 
@@ -63,18 +63,18 @@ def _pdiv(N, D):
 
 
 def _sympify_point(num):
-    sp = _sympy()
+    sp = charger_sympy()
     return sp.sympify(num.py, locals={"sqrt": sp.sqrt, "exp": sp.exp, "log": sp.log, "pi": sp.pi})
 
 
 def _limite_sympy(f, point, direction=None):
     """point : sp.oo, -sp.oo, ou objet SymPy exact. direction : '+', '-' ou None."""
-    sp = _sympy()
+    sp = charger_sympy()
     if sp is None:
         return None
     try:
         fe = en_sympy_reel(f)
-        r = sp.limit(fe, _SP["x"], point, dir=direction) if direction else sp.limit(fe, _SP["x"], point)
+        r = sp.limit(fe, SYMPY["x"], point, dir=direction) if direction else sp.limit(fe, SYMPY["x"], point)
     except Exception:
         return None
     if r.has(sp.oo, -sp.oo, sp.zoo, sp.nan) and r not in (sp.oo, -sp.oo):
@@ -84,7 +84,7 @@ def _limite_sympy(f, point, direction=None):
 
 def _valeur_tex(res_sympy):
     """Valeur SymPy (finie, +oo, -oo, ou autre) → (texte tex, est_infinie, est_plus, valeur_num)."""
-    sp = _sympy()
+    sp = charger_sympy()
     if res_sympy is None:
         return "?", False, None, None
     if res_sympy == sp.oo:
@@ -255,8 +255,8 @@ def _facteur_poly(P):
 def _borne_signe(R, D, s):
     """Borne au-delà de laquelle R/D garde son signe près de s∞ (plus grande racine réelle de R et D en +∞, plus petite en −∞) :
     (tex de la borne, None) ; (None, None) si R et D n'ont aucune racine réelle ; ("", None) si la borne n'a pas d'écriture exacte."""
-    sp = _sympy()
-    x = _SP["x"]
+    sp = charger_sympy()
+    x = SYMPY["x"]
     racines = []
     for P in (R, D):
         if deg(P) >= 1:
@@ -316,15 +316,15 @@ def _etude_rationnelle_infini(f, N, D, signe, items, vues=None):
     k = n - m
     k_signe_xk = signe if k % 2 else 1
     if n < m:
-        ref, vtex = _sympy().Integer(0), "0"
+        ref, vtex = charger_sympy().Integer(0), "0"
         res = {"genre": "horizontale", "valeur_tex": "0", "valeur_val": 0.0}
     elif n == m:
-        ref, vtex = _sympy().Rational(ratio.numerator, ratio.denominator), qtex(ratio)
+        ref, vtex = charger_sympy().Rational(ratio.numerator, ratio.denominator), qtex(ratio)
         res = {"genre": "horizontale", "valeur_tex": vtex, "valeur_val": float(ratio)}
     else:
         signe_final = 1 if (ratio > 0) == (k_signe_xk > 0) else -1
         val_tex = r"+\infty" if signe_final > 0 else r"-\infty"
-        ref, vtex = (_sympy().oo if signe_final > 0 else -_sympy().oo), val_tex
+        ref, vtex = (charger_sympy().oo if signe_final > 0 else -charger_sympy().oo), val_tex
         res = None
     pt = Pt({"type": "inf", "signe": signe})
     # f est d'abord rédigée telle qu'elle est écrite ; si sa forme ne s'y prête pas (somme de fractions…),
@@ -380,7 +380,7 @@ def _etude_pole_numerique(f, N, D, point, cote, items):
         for cle, dx in (("gauche", -1e-6), ("droite", 1e-6)):
             if cote in (cle, "deux"):
                 res[cle + "_tex"] = _signe_tex(a + dx)
-        sp = _sympy()
+        sp = charger_sympy()
         borne = {"type": "fini", "point": point, "cote": cote}
 
         def ref_de(pt):
@@ -464,7 +464,7 @@ def _puissance_binome(a, k):
 def _etude_rationnelle_pole(f, N, D, point, cote, items):
     if point.q is None:
         return _etude_pole_numerique(f, N, D, point, cote, items)
-    sp = _sympy()
+    sp = charger_sympy()
     a = point.q
     xa = _x_moins(a)
     N2, multN = _facteur_racine(N, a)
@@ -597,7 +597,7 @@ class Lim:
 
     @staticmethod
     def fin(val, ap=0, montre=False):
-        return Lim(0, _sympy().sympify(val), ap, montre)
+        return Lim(0, charger_sympy().sympify(val), ap, montre)
 
     @staticmethod
     def infini(s):
@@ -622,7 +622,7 @@ class Lim:
 
 
 def _lim_depuis_sympy(r):
-    sp = _sympy()
+    sp = charger_sympy()
     if r == sp.oo:
         return Lim.infini(1)
     if r == -sp.oo:
@@ -633,7 +633,7 @@ def _lim_depuis_sympy(r):
 
 
 def _meme_valeur(a, b):
-    sp = _sympy()
+    sp = charger_sympy()
     if a.inf or b.inf:
         return a.inf == b.inf
     return abs(sp.N(a.val - b.val, 30)) < sp.Float("1e-20")
@@ -651,7 +651,7 @@ class Pt:
             self.a_tex = borne["point"].tex
 
     def cible(self):
-        sp = _sympy()
+        sp = charger_sympy()
         return (sp.oo if self.s > 0 else -sp.oo) if self.s else self.a
 
     def direction(self):
@@ -779,7 +779,7 @@ def _puissance_entiere(U, n):
 
 def _puissance_reelle(U, alpha):
     """u^α, α rationnel non entier (ou 1/2) : seulement pour une base positive."""
-    sp = _sympy()
+    sp = charger_sympy()
     if U.inf:
         if U.inf < 0:
             raise Abandon("base négative")
@@ -795,14 +795,14 @@ def _puissance_reelle(U, alpha):
 
 
 def _exp_lim(U):
-    sp = _sympy()
+    sp = charger_sympy()
     if U.inf:
         return Lim.infini(1) if U.inf > 0 else Lim.fin(0, 1)
     return Lim.fin(sp.exp(U.val), U.ap)
 
 
 def _ln_lim(U):
-    sp = _sympy()
+    sp = charger_sympy()
     if U.inf:
         if U.inf < 0:
             raise Abandon("ln d'une quantité négative")
@@ -877,7 +877,7 @@ def _construire_tableau(genre, A):
     if sans_x(A):
         return None
     c, facs = aplatir(A)
-    sp = _sympy()
+    sp = charger_sympy()
     if len(facs) == 1 and facs[0][1] == 1 and sp is not None:
         try:
             A2 = arbre_depuis_sympy(sp.factor(en_sympy(A)))
@@ -957,7 +957,7 @@ class _Contexte:
         if L.nul() and cle not in self.ap_vus:
             self.ap_vus.add(cle)
             inv = _limite_sympy(Op("/", Nb(1), n), self.pt.cible(), self.pt.direction())
-            sp = _sympy()
+            sp = charger_sympy()
             L.ap = 1 if inv == sp.oo else -1 if inv == -sp.oo else 0
         return L
 
@@ -1098,10 +1098,10 @@ class _Contexte:
             return (rf"Signe de \({T} = {fact}\) : près de \({a_tex}\), \({q_tex}\) est {mot(sr)}{proche}, "
                     rf"donc \({T}\) est {enonce}.")
         # point irrationnel : trinôme à deux racines réelles
-        sp = _sympy()
+        sp = charger_sympy()
         if deg(P) != 2:
             return None
-        x = _SP["x"]
+        x = SYMPY["x"]
         expr = sum(sp.Rational(c.numerator, c.denominator) * x ** k for k, c in enumerate(P))
         racines = sorted(sp.solve(expr, x), key=lambda r: float(sp.N(r)))
         if len(racines) != 2 or not all(r.is_real for r in racines):
@@ -1125,7 +1125,7 @@ class _Contexte:
         """n = F(x) − c, F(x) + c, c − F(x), c + F(x) ou F(x) seul, avec F monotone et la bonne valeur en a :
         le signe de n vient de la monotonie de F."""
         pt = self.pt
-        sp = _sympy()
+        sp = charger_sympy()
         facteur = 1
         if isinstance(n, Op) and n.op in "+-" and sans_x(n.a) != sans_x(n.b):
             c = _const_sympy(n.a if sans_x(n.a) else n.b)
@@ -1138,7 +1138,7 @@ class _Contexte:
         mu = _monotonie(F_)
         if not mu:
             return None
-        valeur = en_sympy_reel(F_).subs(_SP["x"], pt.a)
+        valeur = en_sympy_reel(F_).subs(SYMPY["x"], pt.a)
         if abs(sp.N(valeur - cible, 30)) > sp.Float("1e-25"):
             return None
         mu_n = mu * facteur
@@ -1793,14 +1793,14 @@ def _contient_racine(n):
 
 
 def _rat(q):
-    return _sympy().Rational(q.numerator, q.denominator)
+    return charger_sympy().Rational(q.numerator, q.denominator)
 
 
 def _dominant(n, s):
     """Terme dominant (c, k) de n en s∞ (n = c·x^k·(1 + …), c exact SymPy) ; None si n n'est pas de cette forme ou
     si les termes de plus haut degré d'une somme se compensent. √Q (Q de degré 2k, coefficient dominant q > 0) a
     pour terme dominant √q·|x|^k = √q·(s x)^k. Sert de garde-fou : la rédaction écrit sa propre mise en évidence."""
-    sp = _sympy()
+    sp = charger_sympy()
     if sans_x(n):
         v = valeur_constante(n)
         return (_rat(v), 0) if v else None
@@ -1900,7 +1900,7 @@ def _racine_en_evidence(t, Q, s):
     absx = _abs_tex(m)
     seul = len(_polynome_a_termes(Q)) == 1
     q = Q[-1]
-    racine_q = _sympy().sqrt(_rat(q))
+    racine_q = charger_sympy().sqrt(_rat(q))
     signe = -1 if (s < 0 and m % 2) else 1
     if seul and racine_q.is_Rational:                    # √(4x²) = 2|x| : le coefficient sort tel quel
         rq = F(int(racine_q.p), int(racine_q.q))
@@ -2152,8 +2152,8 @@ def _evidence_ln(n, ctx, fi):
 # --- méthode : √(u²) = |u| (en une valeur, d'un seul côté) ---------------------------------------
 def _racine_carree_de(Q):
     """Polynôme P (Fractions) tel que P² = Q, ou None si Q n'est pas le carré d'un polynôme à coefficients rationnels."""
-    sp = _sympy()
-    x = _SP["x"]
+    sp = charger_sympy()
+    x = SYMPY["x"]
     c, facteurs = sp.factor_list(sum(_rat(co) * x ** i for i, co in enumerate(Q)))
     r = sp.sqrt(c)
     if not r.is_Rational or any(m % 2 for _, m in facteurs):
@@ -2515,9 +2515,9 @@ def _comparee_pure(n, ctx, fi):
 
 def _comparee_avec_polynomes(n, ctx, fi, C, N, B, q, polys):
     """(x + 1)e^{-x} : on met x en évidence dans le polynôme, puis on conclut avec le produit sans polynôme."""
-    sp = _sympy()
+    sp = charger_sympy()
     egalites, crochets = [], None
-    x = _SP["x"]
+    x = SYMPY["x"]
     for P, k in polys:
         m = deg(P)
         tete, interieur, complet, termes = _facteur_detaille(P, m)
@@ -2739,9 +2739,9 @@ def _arbre_propre(arbre):
 
 
 def _derivee(h):
-    sp = _sympy()
+    sp = charger_sympy()
     e = en_sympy_reel(h)
-    return sp.diff(e, _SP["x"])
+    return sp.diff(e, SYMPY["x"])
 
 
 def _candidats_lhopital(n, ctx, fi):
@@ -2775,7 +2775,7 @@ def _lhopital(n, ctx, fi):
 
 
 def _lhopital_avec(n, f, g, intro, nom, ctx, fi):
-    sp = _sympy()
+    sp = charger_sympy()
     pt = ctx.pt
     # (a) forme indéterminée 0/0 ou ∞/∞
     if nom is None:
@@ -3017,10 +3017,10 @@ def _equation_affine(a_tex, b_tex, var="x"):
 def _oblique_generale(f, signe, items):
     """Cherche une asymptote oblique d'une fonction quelconque (pas seulement
     rationnelle) : a = lim f(x)/x, b = lim [f(x) - ax], via le calcul formel."""
-    sp = _sympy()
+    sp = charger_sympy()
     if sp is None:
         return None
-    x = _SP["x"]
+    x = SYMPY["x"]
     cible = sp.oo if signe > 0 else -sp.oo
     try:
         fe = en_sympy_reel(f)
@@ -3255,7 +3255,7 @@ def etudier(entree, avec_bornes=False):
     except ErreurSaisie as e:
         return {"ok": False, "erreur": str(e)}
 
-    res_ed, _, ED = _analyser(entree)
+    res_ed, _, ED = analyser_complet(entree)
     if not res_ed.get("ok"):
         return {"ok": False, "erreur": res_ed["erreur"]}
     if not res_ed.get("complet"):

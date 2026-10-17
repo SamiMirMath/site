@@ -30,7 +30,7 @@ import json
 import random
 import re
 
-from ensemble_def import json_strict, ErreurSaisie, trinome, racine_rationnelle, qtex, _sympy
+from noyau import json_strict, ErreurSaisie, trinome, racine_rationnelle, qtex, charger_sympy
 
 __all__ = ["factoriser_json", "apercu_json", "exercice_json"]
 
@@ -1582,7 +1582,7 @@ def _message_final(ctx, P, T, produit):
 
 
 def factoriser_expr(entree):
-    sp = _sympy()
+    sp = charger_sympy()
     if sp is None:
         return {"ok": False, "erreur": "Le moteur de calcul est encore en cours de chargement, "
                 "réessaie dans un instant."}

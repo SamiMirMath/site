@@ -10,7 +10,7 @@ l'échantillonnage numérique pour le graphique.
 import json
 import math
 
-from ensemble_def import json_strict, ajouter_saisie, lire, tex, evaluer, fusion, ErreurSaisie, Incertain, _analyser, apercu_json
+from noyau import json_strict, ajouter_saisie, lire, tex, evaluer, fusion, ErreurSaisie, Incertain, analyser_complet, apercu_json
 import derivee_variations as dv
 import limites_asymptotes as la
 
@@ -135,7 +135,7 @@ def etudier(entree):
     except ErreurSaisie as e:
         return {"ok": False, "erreur": str(e)}
 
-    res_ed, _, ED = _analyser(entree)
+    res_ed, _, ED = analyser_complet(entree)
     if not res_ed.get("ok"):
         return {"ok": False, "erreur": res_ed["erreur"]}
     if not res_ed.get("complet"):
@@ -177,7 +177,7 @@ def fenetre(entree, xmin, xmax, n_total=500):
         f = lire(entree)
     except ErreurSaisie as e:
         return {"ok": False, "erreur": str(e)}
-    res_ed, _, ED = _analyser(entree)
+    res_ed, _, ED = analyser_complet(entree)
     if not res_ed.get("ok") or not res_ed.get("complet"):
         return {"ok": False, "erreur": "ED indisponible."}
     segments = []

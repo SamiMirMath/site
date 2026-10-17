@@ -25,12 +25,12 @@ import json
 
 from fractions import Fraction as F
 
-from ensemble_def import (
+from noyau import (
     Nb, X, E, Neg, Op, Fn,
     lire, tex, par, prec, valeur_constante, Num, Iv, REELS, inter, ens_tex, points, contient, proche,
     preimage, resoudre_general, json_strict, ajouter_saisie, domaine, fusion, evaluer, aplatir, qtex,
-    indice_racine, sans_x, _sympy, en_sympy, en_sympy_reel, arbre_depuis_sympy, num_sympy, _SP,
-    txt, NonPrisEnCharge, ErreurSaisie, _analyser, apercu_json, signe_facteur, complement,
+    indice_racine, sans_x, charger_sympy, en_sympy, en_sympy_reel, arbre_depuis_sympy, num_sympy, SYMPY,
+    txt, NonPrisEnCharge, ErreurSaisie, analyser_complet, apercu_json, signe_facteur, complement,
 )
 
 __all__ = ["etudier", "etudier_json", "apercu_json"]
@@ -227,7 +227,7 @@ def _simplifier(n):
     """Met f' en forme factorisée (jamais développée) : plus facile à lire, et les
     zéros s'y lisent directement — c'est la convention demandée pour la suite. Le résultat
     est écrit en un quotient numérateur / dénominateur (_en_quotient)."""
-    sp = _sympy()
+    sp = charger_sympy()
     if sp is None:
         return _en_quotient(_ordre_naturel(_nettoyer(n)))
     try:
@@ -453,13 +453,13 @@ def derivee_narree(n, items, top=True, etiq=F_PRIME):
 # =====================================================================
 def _valeur_exacte(f_tree, point):
     """f(point) en forme exacte (objet Num) si possible via SymPy, sinon None."""
-    sp = _sympy()
+    sp = charger_sympy()
     if sp is None or point.py is None:
         return None
     try:
         val = sp.sympify(point.py, locals={"sqrt": sp.sqrt, "exp": sp.exp, "log": sp.log, "pi": sp.pi})
         fe = en_sympy_reel(f_tree)
-        r = sp.simplify(fe.subs(_SP["x"], val))
+        r = sp.simplify(fe.subs(SYMPY["x"], val))
         if r.is_real is False:
             return None
         return num_sympy(r)
@@ -554,7 +554,7 @@ def etudier(entree):
     except ErreurSaisie as e:
         return {"ok": False, "erreur": str(e)}
 
-    res_ed, _, ED = _analyser(entree)
+    res_ed, _, ED = analyser_complet(entree)
     if not res_ed.get("ok"):
         return {"ok": False, "erreur": res_ed["erreur"]}
     if not res_ed.get("complet"):

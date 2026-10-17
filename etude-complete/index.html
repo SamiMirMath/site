@@ -144,6 +144,7 @@ onmessage=async e=>{
     if(fn==="init"){
       py=await loadPyodide({indexURL:"${PYODIDE}"});
       py.FS.writeFile("ensemble_def.py",arg.ed);
+      py.FS.writeFile("noyau.py",arg.no);
       py.FS.writeFile("derivee_variations.py",arg.dv);
       py.FS.writeFile("limites_asymptotes.py",arg.la);
       py.FS.writeFile("etude_complete.py",arg.ec);
@@ -172,15 +173,16 @@ function lancerWorker(){
 function majEtat(){ $("etat").textContent=sympyOK?"Prêt.":"Chargement du moteur de calcul…"; }
 async function demarrer(){
   try{
-    const [repEd,repDv,repLa,repEc]=await Promise.all([
+    const [repEd,repNo,repDv,repLa,repEc]=await Promise.all([
       fetch("../ensemble-definition/ensemble_def.py",{cache:"no-cache"}),
+      fetch("../moteur/noyau.py",{cache:"no-cache"}),
       fetch("../derivee-variations/derivee_variations.py",{cache:"no-cache"}),
       fetch("../limites-asymptotes/limites_asymptotes.py",{cache:"no-cache"}),
       fetch("etude_complete.py",{cache:"no-cache"})
     ]);
-    for(const [r,nom] of [[repEd,"ensemble_def.py"],[repDv,"derivee_variations.py"],[repLa,"limites_asymptotes.py"],[repEc,"etude_complete.py"]])
+    for(const [r,nom] of [[repEd,"ensemble_def.py"],[repNo,"noyau.py"],[repDv,"derivee_variations.py"],[repLa,"limites_asymptotes.py"],[repEc,"etude_complete.py"]])
       if(!r.ok) throw new Error(nom+" introuvable ("+r.status+")");
-    source={ed:await repEd.text(), dv:await repDv.text(), la:await repLa.text(), ec:await repEc.text()};
+    source={ed:await repEd.text(), no:await repNo.text(), dv:await repDv.text(), la:await repLa.text(), ec:await repEc.text()};
     await lancerWorker();
     majEtat(); $("calculer").disabled=false; $("exoHasard").disabled=false;
     apercu();

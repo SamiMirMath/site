@@ -166,6 +166,7 @@ onmessage=async e=>{
     if(fn==="init"){
       py=await loadPyodide({indexURL:"${PYODIDE}"});
       py.FS.writeFile("ensemble_def.py",arg.ed);
+      py.FS.writeFile("noyau.py",arg.no);
       py.FS.writeFile("limites_asymptotes.py",arg.la);
       py.runPython("import limites_asymptotes");
       postMessage({id,r:"ok"}); return;
@@ -192,13 +193,15 @@ function lancerWorker(){
 function majEtat(){ $("etat").textContent=sympyOK?"Prêt.":"Chargement du moteur de calcul…"; }
 async function demarrer(){
   try{
-    const [repEd,repLa]=await Promise.all([
+    const [repEd,repNo,repLa]=await Promise.all([
       fetch("../ensemble-definition/ensemble_def.py",{cache:"no-cache"}),
+      fetch("../moteur/noyau.py",{cache:"no-cache"}),
       fetch("limites_asymptotes.py",{cache:"no-cache"})
     ]);
     if(!repEd.ok) throw new Error("ensemble_def.py introuvable ("+repEd.status+")");
+    if(!repNo.ok) throw new Error("noyau.py introuvable ("+repNo.status+")");
     if(!repLa.ok) throw new Error("limites_asymptotes.py introuvable ("+repLa.status+")");
-    source={ed:await repEd.text(), la:await repLa.text()};
+    source={ed:await repEd.text(), no:await repNo.text(), la:await repLa.text()};
     await lancerWorker();
     majEtat(); $("calculer").disabled=false; $("exoHasard").disabled=false;
     apercu();

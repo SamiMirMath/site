@@ -150,6 +150,7 @@ onmessage=async e=>{
     if(fn==="init"){
       py=await loadPyodide({indexURL:"${PYODIDE}"});
       py.FS.writeFile("ensemble_def.py",arg.ed);
+      py.FS.writeFile("noyau.py",arg.no);
       py.FS.writeFile("factorisation.py",arg.fa);
       py.runPython("import factorisation");
       postMessage({id,r:"ok"}); return;
@@ -178,13 +179,15 @@ function lancerWorker(){
 function majEtat(){ $("etat").textContent=sympyOK?"Prêt.":"Chargement du moteur de calcul…"; }
 async function demarrer(){
   try{
-    const [repEd,repFa]=await Promise.all([
+    const [repEd,repNo,repFa]=await Promise.all([
       fetch("../ensemble-definition/ensemble_def.py",{cache:"no-cache"}),
+      fetch("../moteur/noyau.py",{cache:"no-cache"}),
       fetch("factorisation.py",{cache:"no-cache"})
     ]);
     if(!repEd.ok) throw new Error("ensemble_def.py introuvable ("+repEd.status+")");
+    if(!repNo.ok) throw new Error("noyau.py introuvable ("+repNo.status+")");
     if(!repFa.ok) throw new Error("factorisation.py introuvable ("+repFa.status+")");
-    source={ed:await repEd.text(), fa:await repFa.text()};
+    source={ed:await repEd.text(), no:await repNo.text(), fa:await repFa.text()};
     await lancerWorker();
     majEtat(); $("calculer").disabled=false; $("exoHasard").disabled=false;
     apercu();
