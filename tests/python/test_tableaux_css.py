@@ -1,4 +1,4 @@
-"""Tableaux de signe et de variations : une seule feuille de style (tableaux.css) pour tous les outils,
+"""Tableaux de signe et de variations : une seule feuille de style (commun/style.css) pour tous les outils,
 resserrée à 360 px, 1re colonne (libellés) fixe pendant le défilement. Le rendu à 360 px et à 900 px se
 vérifie en capture (voir docs/specifications/etude-complete.md, EC-13)."""
 import os
@@ -20,12 +20,12 @@ class TestFeuilleCommune(unittest.TestCase):
         for outil in OUTILS:
             with self.subTest(outil=outil):
                 page = lire(outil + "/index.html")
-                self.assertIn('<link rel="stylesheet" href="../tableaux.css">', page)
+                self.assertIn('<link rel="stylesheet" href="../commun/style.css">', page)
                 self.assertEqual(re.findall(r"^\.tsigne[^\n]*", page, re.M), [],
-                                 "règle .tsigne dans la page : elle doit être dans tableaux.css")
+                                 "règle .tsigne dans la page : elle doit être dans commun/style.css")
 
     def test_feuille(self):
-        css = lire("tableaux.css")
+        css = lire("commun/style.css")
         self.assertIn("position:sticky;left:0", css)                       # libellés fixes
         self.assertIn("@media (max-width:480px)", css)                     # petit écran
         petit = css[css.index("@media (max-width:480px)"):css.index("@media print")]

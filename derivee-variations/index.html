@@ -5,70 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dérivée, signe et variations</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
-<link rel="stylesheet" href="../tableaux.css">
+<link rel="stylesheet" href="../commun/style.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<style>
-:root{
-  --bg:#f5f6f9; --fg:#1b2130; --muted:#5b6478; --card:#ffffff; --border:#d6dbe6;
-  --accent:#1f4e79; --accent-soft:#e6eef8; --good:#17784a; --bad:#c0392b; --eq:#f3f6fb;
-}
-@media (prefers-color-scheme: dark){
-  :root{ --bg:#12151c; --fg:#e7eaf2; --muted:#9aa3b8; --card:#1b2030; --border:#2f374b;
-         --accent:#6fb0ee; --accent-soft:#1f2c42; --good:#4cc38a; --bad:#ff7a6b; --eq:#222a3d; }
-}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
-.wrap{max-width:1100px;margin:0 auto;padding:14px 16px 48px}
-.narrow{max-width:720px;margin:0 auto}
-h1{font-size:1.5rem;margin:4px 0 2px}
-.lead{color:var(--muted);margin:0 0 14px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px}
-button,input{font:inherit;color:inherit}
-button{cursor:pointer;border:1px solid var(--border);background:var(--card);border-radius:8px;padding:7px 12px}
-button:hover{border-color:var(--accent)}
-button:disabled{opacity:.45;cursor:default}
-button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600;padding:9px 22px}
-@media (prefers-color-scheme: dark){button.primary{color:#0b1220}}
-.saisie{display:flex;gap:8px;align-items:center}
-.saisie label{font-weight:700;white-space:nowrap}
-#entree{flex:1;min-width:0;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:var(--card);font-size:1.05rem;font-family:ui-monospace,Menlo,Consolas,monospace}
-#entree:focus{outline:2px solid var(--accent);outline-offset:1px}
-.clavier{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:10px 0}
-.clavier button{padding:9px 0;font-size:1rem}
-.apercu{min-height:2.6em;display:flex;align-items:center;overflow-x:auto;padding:4px 2px;font-size:1.1rem}
-.apercu .obsolete{opacity:.5}
-.apercu .katex{font-size:1.15em}
-.err{color:var(--bad);font-weight:600}
-.muted,.hint{color:var(--muted)}
-.hint{font-size:.88rem}
-.exemples{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
-.exemples button{font-size:.88rem;padding:5px 9px}
-details summary{cursor:pointer;font-weight:600}
-details ul{margin:.4em 0 0;padding-left:1.2em}
-.etat{font-size:.9rem;color:var(--muted);margin-top:8px}
-.barre{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin:4px 0 12px}
-#cartes .card{padding:22px 26px}
-.cond h3{margin:0 0 10px;font-size:1.18rem}
-.cond .badge{display:inline-block;font-size:.78rem;font-weight:700;padding:1px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent);margin-left:6px;vertical-align:middle}
-.cond .c{background:var(--eq);border-radius:8px;padding:12px 16px;margin:8px 0 12px;overflow-x:auto;font-size:1.22rem}
-.etape{margin:9px 0;overflow-x:auto;overflow-y:hidden;font-size:1.06rem}
-.res{margin-top:14px;padding-top:12px;border-top:1px dashed var(--border);font-weight:600;overflow-x:auto;font-size:1.1rem}
-.final{border:2px solid var(--good)}
-.final .res{border:none;margin:0;padding:0;font-size:1.28rem;color:var(--good)}
-.cache{display:none}
-.extrema{margin-top:10px;font-size:.98rem}
-.extrema li{margin:3px 0}
-
-@media print{
-  :root{ --bg:#fff; --fg:#000; --muted:#444; --card:#fff; --border:#bbb; --eq:#f3f6fb; --good:#0d5c36; --bad:#9c2a1c; }
-  body{background:#fff}
-  .no-print{display:none !important}
-  .cache{display:block !important}
-  .card{box-shadow:none; break-inside:avoid}
-  .wrap{max-width:none; padding:0}
-}
-</style>
 </head>
 <body>
 <div class="wrap">
