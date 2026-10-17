@@ -15,12 +15,30 @@ DOSSIER_REFERENCES = os.path.join(os.path.dirname(__file__), "references")
 OUTILS = ["ensemble-definition", "derivee-variations", "limites-asymptotes", "etude-complete", "factorisation"]
 
 
+# Entrées de page ajoutées au corpus des moteurs : une saisie invalide par outil (la carte d'erreur est un rendu à part entière).
+ERREURS = {"derivee-variations": ["ln("], "limites-asymptotes": ["ln("], "etude-complete": ["ln("]}
+
+# Corpus réduit (CI) : 3 entrées par outil, dont une erreur ; le corpus complet reste pour le local.
+REDUIT = {
+    "ensemble-definition": ["ln(x^2-4x)/(x-5)", "sqrt(ln(x)-x+2)", "ln("],
+    "derivee-variations": ["ln(x)/x", "x^(2-2)", "ln("],
+    "limites-asymptotes": ["(x^2-1)/(x-3)", "(x^2-1)/(x-1)", "ln("],
+    "etude-complete": ["e^(1/x)", "x^2*e^(-x)", "ln("],
+    "factorisation": ["x^2+5x-14", "(a + b)^2 - 7(a + b)", "sqrt(x)"],
+}
+
+
 def entrees(outil):
     if outil == "factorisation":
         liste = entrees_factorisation()
     else:
         liste = entrees_page(outil) + CAS_LIMITES[outil]
-    return [e for e in dict.fromkeys(liste) if e.strip()]      # champ vide : le bouton ne fait rien
+    liste = liste + ERREURS.get(outil, [])
+    liste = [e for e in dict.fromkeys(liste) if e.strip()]      # champ vide : le bouton ne fait rien
+    if os.environ.get("CORPUS") == "reduit":
+        liste = [e for e in liste if e in REDUIT[outil]]
+        assert len(liste) == len(REDUIT[outil]), f"corpus réduit de {outil} : entrée absente du corpus"
+    return liste
 
 
 # Contenu normalisé de #cartes (injecté dans la page).

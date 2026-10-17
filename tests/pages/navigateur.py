@@ -77,6 +77,13 @@ class Page:
             time.sleep(pas)
         raise TimeoutError(f"condition non atteinte en {delai} s : {condition_js}")
 
+    def taper(self, selecteur, texte, pause=0.03):
+        """Tape `texte` caractère par caractère dans le champ `selecteur` (un événement `input` par touche)."""
+        self.evaluer(f"document.querySelector({selecteur!r}).focus()")
+        for c in texte:
+            self.appel("Input.insertText", text=c)
+            time.sleep(pause)
+
     def capture(self, chemin):
         import base64
         d = self.appel("Page.captureScreenshot", format="png", captureBeyondViewport=True)["data"]
@@ -132,7 +139,15 @@ class Navigateur:
 
     def ouvrir(self, chemin):
         """Ouvre `chemin` (relatif à la racine du site) dans un nouvel onglet ; renvoie la Page."""
+        # un seul onglet à la fois : chaque page lance un worker Pyodide (plusieurs dizaines de Mo), les laisser
+        # s'accumuler fait dépasser les délais de chargement
+        for ancien in getattr(self, "_cibles", []):
+            try:
+                self._appel("Target.closeTarget", targetId=ancien)
+            except ErreurPage:
+                pass
         cible = self._appel("Target.createTarget", url="about:blank")["targetId"]
+        self._cibles = [cible]
         session = self._appel("Target.attachToTarget", targetId=cible, flatten=True)["sessionId"]
         page = Page(self.ws, session)
         page.appel("Page.enable")

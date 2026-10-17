@@ -65,10 +65,9 @@
   </section>
 </div>
 
-<script>
-"use strict";
+<script type="module">
+import { MoteurPython } from "../commun/moteur-python.js";
 const $=id=>document.getElementById(id);
-const PYODIDE="https://cdn.jsdelivr.net/pyodide/v0.27.7/full/";
 const EXEMPLES=["ln(2x-6)","ln(x^2-4)","1/ln(x)","ln(x)/(ln(x)+2)","1/(e^x-1)","ln((x-1)/(x+3))","ln(x-1)+ln(x+3)",
   "1/ln(x+2)","2ln(x)/((ln x)^2-1)","ln(x^2-5x+6)","sqrt(x^2+2x-3)","e^(1/(x^2-x-2))","ln(x^2-4x)/(x-5)","ln((x^2-1)/(x+2))",
   "1/(e^(2x)-5e^x+6)","sqrt(x ln(x+2))","sqrt(x ln(x+2)+x)","1/(ln(x-1)+ln(x-3))","sqrt(1-ln(x^2-4x+5))","sqrt(ln(x)-x+2)"];
@@ -94,40 +93,13 @@ let cartes=[], visibles=0;
 function math(el){ if(window.renderMathInElement) renderMathInElement(el,{delimiters:[{left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true}],throwOnError:false,strict:"ignore"}); }
 function K(t){ try{ return katex.renderToString(t,{throwOnError:false,strict:"ignore"}); }catch(e){ return t; } }
 
-/* ---------- Python dans un Web Worker (la page ne se fige jamais) ---------- */
-const CODE_WORKER=`
-importScripts("${PYODIDE}pyodide.js");
-let py=null;
-onmessage=async e=>{
-  const {id,fn,arg}=e.data;
-  try{
-    if(fn==="init"){ py=await loadPyodide({indexURL:"${PYODIDE}"}); py.FS.writeFile("ensemble_def.py",arg); py.runPython("import ensemble_def"); postMessage({id,r:"ok"}); return; }
-    if(fn==="sympy"){ await py.loadPackage("sympy"); py.runPython("import sympy"); postMessage({id,r:"ok"}); return; }
-    py.globals.set("arg_js",arg);
-    postMessage({id,r:py.runPython("ensemble_def."+fn+"_json(arg_js)")});
-  }catch(err){ postMessage({id,err:String(err)}); }
-};`;
-let worker=null, attente={}, nid=0, source=null, pret=null, sympyPret=null, sympyOK=false;
-function appel(fn,arg,delai){
-  return new Promise((ok,ko)=>{ const id=++nid; attente[id]={ok,ko}; worker.postMessage({id,fn,arg});
-    if(delai) setTimeout(()=>{ if(attente[id]){ delete attente[id]; ko(new Error("delai")); } },delai); });
-}
-function lancerWorker(){
-  if(worker) worker.terminate();
-  attente={}; sympyOK=false;
-  worker=new Worker(URL.createObjectURL(new Blob([CODE_WORKER],{type:"text/javascript"})));
-  worker.onmessage=e=>{ const p=attente[e.data.id]; if(!p) return; delete attente[e.data.id]; e.data.err?p.ko(new Error(e.data.err)):p.ok(e.data.r); };
-  pret=appel("init",source);
-  sympyPret=pret.then(()=>appel("sympy")).then(()=>{ sympyOK=true; majEtat(); }).catch(()=>{ majEtat(); });
-  return pret;
-}
-function majEtat(){ $("etat").textContent=sympyOK?"Prêt.":"Chargement du moteur de calcul…"; }
+/* ---------- Python dans un Web Worker (commun/moteur-python.js) ---------- */
+const moteur=new MoteurPython("ensemble-definition",{surEtat:()=>majEtat()});
+const appelPy=(fn,arg,delai)=>moteur.appelPy(fn,arg,delai);
+function majEtat(){ $("etat").textContent=moteur.sympyOK?"Prêt.":"Chargement du moteur de calcul…"; }
 async function demarrer(){
   try{
-    const rep=await fetch("ensemble_def.py",{cache:"no-cache"});
-    if(!rep.ok) throw new Error("ensemble_def.py introuvable ("+rep.status+")");
-    source=await rep.text();
-    await lancerWorker();
+    await moteur.demarrer();
     majEtat(); $("calculer").disabled=false; $("exoHasard").disabled=false;
     apercu();
     const q=new URLSearchParams(location.search).get("f"); if(q){ $("entree").value=q; calculer(); }
@@ -136,7 +108,6 @@ async function demarrer(){
     $("etat").innerHTML='<span class="err">Impossible de charger l\'outil de calcul.</span> Vérifiez votre connexion internet, puis rechargez la page.';
   }
 }
-async function appelPy(fn,arg,delai){ await pret; return JSON.parse(await appel(fn,arg,delai)); }
 
 /* ---------- saisie ---------- */
 let tAp=null, seqAp=0, tFrappe=0, dernierApercu="";
@@ -153,7 +124,7 @@ function apercu(){
   tAp=setTimeout(async()=>{
     const s=$("entree").value.trim();
     if(!s){ dernierApercu=""; box.innerHTML='<span class="muted">Aperçu de la fonction</span>'; return; }
-    if(!worker) return;
+    if(!moteur.worker) return;
     let r;
     try{ r=await appelPy("apercu",s,5000); }catch(e){ if(mon===seqAp && box.querySelector(".err")) neutre(); return; }
     if(mon!==seqAp) return;                         // une saisie plus récente est en cours
@@ -200,15 +171,15 @@ function carteCondition(c){
 }
 let numCalcul=0;
 async function calculer(force){
-  const s=(typeof force==="string"?force:$("entree").value).trim(); if(!s||!worker) return;
+  const s=(typeof force==="string"?force:$("entree").value).trim(); if(!s||!moteur.worker) return;
   const moi=++numCalcul;
   $("calculer").disabled=true; $("etat").textContent="Calcul en cours…";
   let r;
   try{
     r=await appelPy("analyser",s,30000);
-    if(r.besoin_sympy){ $("etat").textContent="Chargement du moteur de calcul pour cette fonction…"; await sympyPret; if(sympyOK) r=await appelPy("analyser",s,30000); }
+    if(r.besoin_sympy){ $("etat").textContent="Chargement du moteur de calcul pour cette fonction…"; await moteur.sympyPret; if(moteur.sympyOK) r=await appelPy("analyser",s,30000); }
   }catch(e){
-    if(e.message==="delai"){ $("etat").textContent="Calcul trop long : le calcul a été relancé."; lancerWorker(); }
+    if(e.message==="delai"){ $("etat").textContent="Calcul trop long : le calcul a été relancé."; moteur.relancer(); }
     r={ok:false,erreur:e.message==="delai"?"Le calcul a pris trop de temps (plus de 30 s). Essayez une écriture plus simple.":(console.error(e),"Une erreur s\'est produite : réessayez ou simplifiez l\'écriture.")};
   }
   $("calculer").disabled=false; majEtat();
@@ -263,7 +234,7 @@ $("pdf").onclick=()=>{
 /* ---------- exercice au hasard ---------- */
 let exoFn=null;
 async function nouvelExercice(){
-  if(!worker) return;
+  if(!moteur.worker) return;
   let s; do{ const pool=EXOS[tirerNiveau()]; s=pool[Math.floor(Math.random()*pool.length)]; }while(s===exoFn);
   exoFn=s;
   $("resultat").hidden=true; $("cartes").innerHTML=""; cartes=[];

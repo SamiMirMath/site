@@ -6,6 +6,7 @@ Chrome sans interface + réseau (Pyodide et KaTeX viennent de jsDelivr) ; ~ 1 mi
     uv run -q --no-project --python 3.12 --with sympy==1.13.3 --with websockets \
         python -m unittest discover -s tests/pages
     OUTILS=etude-complete uv run … python -m unittest discover -s tests/pages    # une seule page
+    CORPUS=reduit uv run …                                                       # 3 entrées par outil (celui de la CI)
 
 Après un changement VOULU du rendu : capturer_references.py, puis relire le diff git."""
 import json
@@ -15,7 +16,7 @@ import unittest
 
 sys.path.insert(0, os.path.dirname(__file__))
 from navigateur import Navigateur
-from rendu import DOSSIER_REFERENCES, OUTILS, attendre_pret, capturer
+from rendu import DOSSIER_REFERENCES, OUTILS, attendre_pret, capturer, entrees
 
 CHOISIS = [o for o in os.environ.get("OUTILS", "").split(",") if o] or OUTILS
 
@@ -36,9 +37,12 @@ class TestRendu(unittest.TestCase):
             reference = json.load(f)
         page = self.nav.ouvrir(f"{outil}/index.html")
         attendre_pret(page)
-        for entree, attendu in reference.items():
+        if os.environ.get("CORPUS") != "reduit":
+            self.assertEqual(sorted(reference), sorted(entrees(outil)),
+                             "références et corpus différents : relancer capturer_references.py")
+        for entree in entrees(outil):             # CORPUS=reduit : 3 entrées par outil (CI)
             with self.subTest(outil=outil, entree=entree):
-                self.assertEqual(capturer(page, entree), attendu)
+                self.assertEqual(capturer(page, entree), reference[entree])
 
     def test_ensemble_definition(self):
         self.verifier_outil("ensemble-definition")

@@ -1556,6 +1556,25 @@
   ],
   "progression_finale": "Étape 6 / 6"
  },
+ "ln(": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Expression incomplète.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
  "ln(x)": {
   "au_depart": {
    "progression": "Étape 1 / 4",

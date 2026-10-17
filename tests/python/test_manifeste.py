@@ -21,9 +21,21 @@ OUTILS = MANIFESTE["outils"]
 VERSIONS = MANIFESTE["versions"]
 
 
+def lire(chemin):
+    with open(os.path.join(RACINE, chemin), encoding="utf-8") as f:
+        return f.read()
+
+
 def page(dossier):
     with open(os.path.join(RACINE, dossier, "index.html"), encoding="utf-8") as f:
         return f.read()
+
+
+CLIENT = "../commun/moteur-python.js"
+
+
+def utilise_pyodide(src):
+    return "loadPyodide" in src or CLIENT in src
 
 
 def importer_isole(fichiers, module, fonctions):
@@ -47,19 +59,33 @@ def importer_isole(fichiers, module, fonctions):
 class TestManifeste(unittest.TestCase):
     def test_tous_les_outils_pyodide_sont_declares(self):
         avec_pyodide = {d for d in os.listdir(RACINE)
-                        if os.path.isfile(os.path.join(RACINE, d, "index.html")) and "loadPyodide" in page(d)}
+                        if os.path.isfile(os.path.join(RACINE, d, "index.html")) and utilise_pyodide(page(d))}
         self.assertEqual(set(OUTILS), avec_pyodide)
 
     def test_conforme_aux_pages(self):
         for dossier, o in OUTILS.items():
             s = page(dossier)
             with self.subTest(outil=dossier):
-                charges = {os.path.normpath(os.path.join(dossier, c)) for c in re.findall(r'fetch\("([^"]+\.py)"', s)}
-                self.assertEqual(charges, {os.path.normpath(c) for c in o["fichiers"]}, "fichiers téléchargés")
-                ecrits = set(re.findall(r'writeFile\("([^"]+)"', s))
-                self.assertEqual(ecrits, {os.path.basename(c) for c in o["fichiers"]}, "fichiers écrits dans Pyodide")
-                self.assertIn(f'runPython("import {o["module"]}")', s)
+                if CLIENT in s:
+                    # client commun : les fichiers viennent du manifeste, la page ne nomme que l'outil et ses appels
+                    self.assertIn(f'new MoteurPython("{dossier}"', s)
+                    self.assertNotIn("loadPyodide", s)
+                    self.assertNotIn("writeFile(", s)
+                else:
+                    charges = {os.path.normpath(os.path.join(dossier, c)) for c in re.findall(r'fetch\("([^"]+\.py)"', s)}
+                    self.assertEqual(charges, {os.path.normpath(c) for c in o["fichiers"]}, "fichiers téléchargés")
+                    ecrits = set(re.findall(r'writeFile\("([^"]+)"', s))
+                    self.assertEqual(ecrits, {os.path.basename(c) for c in o["fichiers"]}, "fichiers écrits dans Pyodide")
+                    self.assertIn(f'runPython("import {o["module"]}")', s)
                 self.assertEqual(set(re.findall(r'appelPy\("([a-z_]+)"', s)), set(o["fonctions"]), "fonctions appelées")
+
+    def test_client_commun_et_worker(self):
+        client, worker = lire("commun/moteur-python.js"), lire("commun/worker-pyodide.js")
+        self.assertIn('manifeste.json', client)
+        self.assertIn('new Worker(new URL("worker-pyodide.js", import.meta.url))', client)
+        self.assertNotIn("Blob", client + worker)                      # vrai fichier, plus de Blob
+        self.assertNotRegex(client + worker, r"pyodide/v\d")           # la version vient du manifeste seulement
+        self.assertIn("importScripts(arg.indexURL", worker)
 
     def test_import_avec_les_seuls_fichiers_du_manifeste(self):
         for dossier, o in OUTILS.items():
@@ -79,10 +105,13 @@ class TestManifeste(unittest.TestCase):
                     self.assertFalse(ok, f"{retire} n'est pas nécessaire")
 
     def test_versions_coherentes(self):
-        """La version de Pyodide des pages et celles de la CI sont celles du manifeste."""
+        """La version de Pyodide (pages à worker intégré, client commun) et celles de la CI sont celles du manifeste."""
         for dossier in OUTILS:
             with self.subTest(page=dossier):
-                self.assertIn(f'const PYODIDE="https://cdn.jsdelivr.net/pyodide/v{VERSIONS["pyodide"]}/full/"', page(dossier))
+                if CLIENT not in page(dossier):
+                    self.assertIn(f'const PYODIDE="https://cdn.jsdelivr.net/pyodide/v{VERSIONS["pyodide"]}/full/"', page(dossier))
+                else:
+                    self.assertNotRegex(page(dossier), r"pyodide/v\d")
         with open(os.path.join(RACINE, ".github", "workflows", "tests.yml"), encoding="utf-8") as f:
             ci = f.read()
         self.assertIn(f'python-version: "{VERSIONS["python"]}"', ci)
