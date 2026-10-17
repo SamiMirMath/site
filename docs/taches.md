@@ -177,7 +177,7 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
 
 ## Phase C — Interface Python publique (ensemble_def.py intact)
 
-### T11 — `moteur/noyau.py`
+### T11 — `moteur/noyau.py` — **faite** (`0e019bf`, 17.10.2026)
 - **But** : réexporter sous des noms publics ce que les autres moteurs prennent au noyau.
 - **Fichiers** : `moteur/noyau.py` ; imports de `derivee_variations.py`, `limites_asymptotes.py`,
   `etude_complete.py`, `factorisation.py` ; `moteur/manifeste.json` ; pages (fichier en plus à charger).
@@ -185,6 +185,10 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
 - **Vérification** : test d'analyse syntaxique : aucun module hors `noyau.py` n'importe de nom
   commençant par « _ » depuis `ensemble_def` ; `git diff` vide sur `ensemble_def.py` ;
   instantanés inchangés.
+- **Réalisé** : 58 noms réexportés ; `_sympy` → `charger_sympy`, `_SP` → `SYMPY`, `_analyser` →
+  `analyser_complet` ; les quatre moteurs et leurs pages (sauf l'Ensemble de définition, qui n'importe
+  pas le noyau) chargent `noyau.py` ; test `tests/python/test_noyau.py`. Les tests qui appellent
+  `ensemble_def._…` directement sont inchangés (ils testent le noyau lui-même).
 
 ### T12 — Format de sortie commun
 - **Fichiers** : `moteur/sortie.py`, une fonction `resoudre()` par outil (adaptateur), test de schéma.
