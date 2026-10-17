@@ -1,0 +1,2675 @@
+{
+ "(2x+1)/(x-1)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{2x + 1}{x - 1}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R} \\setminus \\left\\{1\\right\\}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "Signe de \\(x - 1\\) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "1"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "x - 1"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Tableaux de signes"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{2x + 1}{x - 1} &= \\text{« }\\dfrac{-\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x\\,\\left(2 + \\frac{1}{x}\\right)}{x\\,\\left(1 - \\frac{1}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{2 + \\frac{1}{x}}{1 - \\frac{1}{x}} = 2\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 2\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{2x + 1}{x - 1} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x\\,\\left(2 + \\frac{1}{x}\\right)}{x\\,\\left(1 - \\frac{1}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{2 + \\frac{1}{x}}{1 - \\frac{1}{x}} = 2\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 2\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 1^{-}} \\frac{2x + 1}{x - 1} = \\text{« }\\dfrac{3}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x - 1 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 1^{+}} \\frac{2x + 1}{x - 1} = \\text{« }\\dfrac{3}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x - 1 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 1"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 2\\)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 2\\)",
+       "Asymptote verticale : \\(x = 1\\) (\\(\\lim_{x\\to 1^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 1^+} f(x) = +\\infty\\))"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{2x + 1}{x - 1}",
+  "erreur": null,
+  "ok": true
+ },
+ "(2x^2+1)/(x^2-1)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{2x^{2} + 1}{x^{2} - 1}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R} \\setminus \\left\\{-1 \\,;\\, 1\\right\\}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "Signe de \\(x^{2} - 1\\) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-1",
+       "1"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "||",
+         "+",
+         "||",
+         "+"
+        ],
+        "label": "x + 1"
+       },
+       {
+        "cells": [
+         "-",
+         "||",
+         "-",
+         "||",
+         "+"
+        ],
+        "label": "x - 1"
+       },
+       {
+        "cells": [
+         "+",
+         "||",
+         "-",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2} - 1"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Tableaux de signes"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{2x^{2} + 1}{x^{2} - 1} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x^{2}\\,\\left(2 + \\frac{1}{x^{2}}\\right)}{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{2 + \\frac{1}{x^{2}}}{1 - \\frac{1}{x^{2}}} = 2\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 2\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{2x^{2} + 1}{x^{2} - 1} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}\\,\\left(2 + \\frac{1}{x^{2}}\\right)}{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{2 + \\frac{1}{x^{2}}}{1 - \\frac{1}{x^{2}}} = 2\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 2\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -1^{-}} \\frac{2x^{2} + 1}{x^{2} - 1} = \\text{« }\\dfrac{3}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x^{2} - 1 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -1^{+}} \\frac{2x^{2} + 1}{x^{2} - 1} = \\text{« }\\dfrac{3}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x^{2} - 1 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = -1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -1"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 1^{-}} \\frac{2x^{2} + 1}{x^{2} - 1} = \\text{« }\\dfrac{3}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x^{2} - 1 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 1^{+}} \\frac{2x^{2} + 1}{x^{2} - 1} = \\text{« }\\dfrac{3}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x^{2} - 1 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 1"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 2\\)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 2\\)",
+       "Asymptote verticale : \\(x = -1\\) (\\(\\lim_{x\\to -1^-} f(x) = +\\infty\\) ; \\(\\lim_{x\\to -1^+} f(x) = -\\infty\\))",
+       "Asymptote verticale : \\(x = 1\\) (\\(\\lim_{x\\to 1^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 1^+} f(x) = +\\infty\\))"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{2x^{2} + 1}{x^{2} - 1}",
+  "erreur": null,
+  "ok": true
+ },
+ "(e^x-1)/x": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{e^{x} - 1}{x}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{e^{x} - 1}{x} = \\text{« }\\dfrac{e^{-\\infty} - 1}{-\\infty}\\text{ »} = \\text{« }\\dfrac{0^{+} - 1}{-\\infty}\\text{ »} = \\text{« }\\dfrac{-1}{-\\infty}\\text{ »} = 0\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x}}{x} &= \\text{« }\\dfrac{e^{+\\infty}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= +\\infty \\qquad \\left(\\text{croissance comparée : } \\lim_{x\\to +\\infty} \\dfrac{e^{ax}}{x^{n}} = +\\infty\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x} - 1}{x} &= \\text{« }\\dfrac{e^{+\\infty} - 1}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty - 1}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{e^{x}}{x}\\,\\left(1 - e^{-x}\\right) = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty \\qquad \\left(\\text{mise en évidence}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0} \\frac{e^{x} - 1}{x} &= \\text{« }\\dfrac{e^{0} - 1}{0}\\text{ »} = \\text{« }\\dfrac{1 - 1}{0}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 0} \\frac{e^{x}}{1} = 1 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } e^{x} - 1 \\text{ et } x \\text{ dérivables sur } \\mathbb{R} ,\\; x' = 1 \\neq 0\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Limite finie : pas d'asymptote verticale, trou dans le graphique en \\((0\\,;\\,1)\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 0"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)",
+       "Trou en \\((0\\,;\\,1)\\) : f n'est pas définie en \\(x = 0\\), mais \\(f(x) \\to 1\\) (pas une asymptote verticale)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{e^{x} - 1}{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "(x^2-1)/(x-1)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{x^{2} - 1}{x - 1}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R} \\setminus \\left\\{1\\right\\}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{x^{2} - 1}{x - 1} &= \\text{« }\\dfrac{+\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{x\\,\\left(1 - \\frac{1}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{x\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{1 - \\frac{1}{x}} = \\text{« }-\\infty \\cdot 1\\text{ »} = -\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Division euclidienne : \\(x^{2} - 1 = \\left(x - 1\\right)\\,\\left(x + 1\\right)\\), donc \\(f(x) = x + 1\\) là où f est définie.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote oblique : \\(y = x + 1\\) (la courbe est contenue dans cette droite).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x^{2} - 1}{x - 1} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{x\\,\\left(1 - \\frac{1}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{x\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{1 - \\frac{1}{x}} = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Même division : \\(f(x) = x + 1\\) là où f est définie.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote oblique : \\(y = x + 1\\) (la courbe est contenue dans cette droite).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 1} \\frac{x^{2} - 1}{x - 1} &= \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 1} \\dfrac{\\left(x + 1\\right)\\,\\cancel{\\left(x - 1\\right)}}{\\cancel{\\left(x - 1\\right)}} \\qquad \\left(\\text{on factorise par } \\left(x - 1\\right)\\right) \\\\ &= \\lim_{x\\to 1} \\left(x + 1\\right) = 1 + 1 = 2 \\qquad \\left(\\text{on simplifie}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Limite finie : pas d'asymptote verticale, trou dans le graphique en \\((1\\,;\\,2)\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 1"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote oblique (\\(x \\to -\\infty\\)) : \\(y = x + 1\\)",
+       "Asymptote oblique (\\(x \\to +\\infty\\)) : \\(y = x + 1\\)",
+       "Trou en \\((1\\,;\\,2)\\) : f n'est pas définie en \\(x = 1\\), mais \\(f(x) \\to 2\\) (pas une asymptote verticale)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{x^{2} - 1}{x - 1}",
+  "erreur": null,
+  "ok": true
+ },
+ "(x^2-1)/(x-3)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{x^{2} - 1}{x - 3}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R} \\setminus \\left\\{3\\right\\}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "Signe de \\(x - 3\\) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "3"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "x - 3"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Tableaux de signes"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{x^{2} - 1}{x - 3} &= \\text{« }\\dfrac{+\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{x\\,\\left(1 - \\frac{3}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{x\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{1 - \\frac{3}{x}} = \\text{« }-\\infty \\cdot 1\\text{ »} = -\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Division euclidienne : \\(x^{2} - 1 = \\left(x - 3\\right)\\,\\left(x + 3\\right) + 8\\), donc \\(f(x) = x + 3 + \\dfrac{8}{x - 3}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\left(f(x) - \\left(x + 3\\right)\\right) = \\lim_{x\\to -\\infty} \\dfrac{8}{x - 3} = \\text{« }\\dfrac{8}{-\\infty}\\text{ »} = 0 \\text{ : asymptote oblique } y = x + 3\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\dfrac{8}{x - 3} < 0\\) pour \\(x < 3\\) : la courbe est au-dessous de l'asymptote.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x^{2} - 1}{x - 3} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{x\\,\\left(1 - \\frac{3}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{x\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{1 - \\frac{3}{x}} = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Même division : \\(f(x) - \\left(x + 3\\right) = \\dfrac{8}{x - 3}\\) tend vers \\(0\\) : asymptote oblique \\(y = x + 3\\) ; \\(\\dfrac{8}{x - 3} > 0\\) pour \\(x > 3\\) : la courbe est au-dessus de l'asymptote.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 3^{-}} \\frac{x^{2} - 1}{x - 3} = \\text{« }\\dfrac{8}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x - 3 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 3^{+}} \\frac{x^{2} - 1}{x - 3} = \\text{« }\\dfrac{8}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x - 3 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 3\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 3"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote oblique (\\(x \\to -\\infty\\)) : \\(y = x + 3\\)",
+       "Asymptote oblique (\\(x \\to +\\infty\\)) : \\(y = x + 3\\)",
+       "Asymptote verticale : \\(x = 3\\) (\\(\\lim_{x\\to 3^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 3^+} f(x) = +\\infty\\))"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{x^{2} - 1}{x - 3}",
+  "erreur": null,
+  "ok": true
+ },
+ "(x^3+1)/(x-2)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{x^{3} + 1}{x - 2}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R} \\setminus \\left\\{2\\right\\}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "Signe de \\(x - 2\\) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "2"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "x - 2"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Tableaux de signes"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{x^{3} + 1}{x - 2} &= \\text{« }\\dfrac{-\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x^{3}\\,\\left(1 + \\frac{1}{x^{3}}\\right)}{x\\,\\left(1 - \\frac{2}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{x^{2}\\,\\left(1 + \\frac{1}{x^{3}}\\right)}{1 - \\frac{2}{x}} = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Pas d'asymptote oblique : branche parabolique.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x^{3} + 1}{x - 2} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{3}\\,\\left(1 + \\frac{1}{x^{3}}\\right)}{x\\,\\left(1 - \\frac{2}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{x^{2}\\,\\left(1 + \\frac{1}{x^{3}}\\right)}{1 - \\frac{2}{x}} = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Pas d'asymptote oblique : branche parabolique.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 2^{-}} \\frac{x^{3} + 1}{x - 2} = \\text{« }\\dfrac{9}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x - 2 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 2^{+}} \\frac{x^{3} + 1}{x - 2} = \\text{« }\\dfrac{9}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x - 2 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 2\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 2"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Pas d'asymptote (\\(x \\to -\\infty\\)) — branche parabolique.",
+       "Pas d'asymptote (\\(x \\to +\\infty\\)) — branche parabolique.",
+       "Asymptote verticale : \\(x = 2\\) (\\(\\lim_{x\\to 2^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 2^+} f(x) = +\\infty\\))"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{x^{3} + 1}{x - 2}",
+  "erreur": null,
+  "ok": true
+ },
+ "1/(x-2)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{1}{x - 2}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R} \\setminus \\left\\{2\\right\\}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "Signe de \\(x - 2\\) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "2"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "x - 2"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Tableaux de signes"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{1}{x - 2} = \\text{« }\\dfrac{1}{-\\infty}\\text{ »} = 0\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{1}{x - 2} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 2^{-}} \\frac{1}{x - 2} = \\text{« }\\dfrac{1}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x - 2 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 2^{+}} \\frac{1}{x - 2} = \\text{« }\\dfrac{1}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x - 2 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 2\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 2"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)",
+       "Asymptote verticale : \\(x = 2\\) (\\(\\lim_{x\\to 2^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 2^+} f(x) = +\\infty\\))"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{1}{x - 2}",
+  "erreur": null,
+  "ok": true
+ },
+ "1/(x^2-2)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{1}{x^{2} - 2}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R} \\setminus \\left\\{-\\sqrt{2} \\,;\\, \\sqrt{2}\\right\\}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "Signe de \\(x^{2} - 2\\) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-\\sqrt{2}",
+       "\\sqrt{2}"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "||",
+         "-",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2} - 2"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Tableaux de signes"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{1}{x^{2} - 2} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{1}{x^{2} - 2} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to {-\\sqrt{2}}^{-}} \\frac{1}{x^{2} - 2} = \\text{« }\\dfrac{1}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x^{2} - 2 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to {-\\sqrt{2}}^{+}} \\frac{1}{x^{2} - 2} = \\text{« }\\dfrac{1}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x^{2} - 2 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = -\\sqrt{2}\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\sqrt{2}"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to {\\sqrt{2}}^{-}} \\frac{1}{x^{2} - 2} = \\text{« }\\dfrac{1}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x^{2} - 2 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to {\\sqrt{2}}^{+}} \\frac{1}{x^{2} - 2} = \\text{« }\\dfrac{1}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x^{2} - 2 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = \\sqrt{2}\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to \\sqrt{2}"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)",
+       "Asymptote verticale : \\(x = -\\sqrt{2}\\) (\\(\\lim_{x\\to -\\sqrt{2}^-} f(x) = +\\infty\\) ; \\(\\lim_{x\\to -\\sqrt{2}^+} f(x) = -\\infty\\))",
+       "Asymptote verticale : \\(x = \\sqrt{2}\\) (\\(\\lim_{x\\to \\sqrt{2}^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to \\sqrt{2}^+} f(x) = +\\infty\\))"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{1}{x^{2} - 2}",
+  "erreur": null,
+  "ok": true
+ },
+ "1/x^2": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{1}{x^{2}}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "Signe de \\(x^{2}\\) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2}"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Tableaux de signes"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{1}{x^{2}} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{1}{x^{2}} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0} \\frac{1}{x^{2}} = \\text{« }\\dfrac{1}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x^{2} > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 0"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)",
+       "Asymptote verticale : \\(x = 0\\) (\\(\\lim_{x\\to 0^-} f(x) = +\\infty\\) ; \\(\\lim_{x\\to 0^+} f(x) = +\\infty\\))"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{1}{x^{2}}",
+  "erreur": null,
+  "ok": true
+ },
+ "e^(1/x)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = e^{\\frac{1}{x}}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "Signe de \\(x\\) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "x"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Tableaux de signes"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} e^{\\frac{1}{x}} = \\text{« }e^{\\dfrac{1}{-\\infty}}\\text{ »} = \\text{« }e^{0^{-}}\\text{ »} = 1\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} e^{\\frac{1}{x}} = \\text{« }e^{\\dfrac{1}{+\\infty}}\\text{ »} = \\text{« }e^{0^{+}}\\text{ »} = 1\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{-}} e^{\\frac{1}{x}} = \\text{« }e^{\\dfrac{1}{0^{-}}}\\text{ »} = \\text{« }e^{-\\infty}\\text{ »} = 0 \\qquad \\left(x < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} e^{\\frac{1}{x}} = \\text{« }e^{\\dfrac{1}{0^{+}}}\\text{ »} = \\text{« }e^{+\\infty}\\text{ »} = +\\infty \\qquad \\left(x > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 0\\) (du côté droit) ; à gauche, \\(f(x) \\to 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 0"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 1\\)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 1\\)",
+       "Asymptote verticale : \\(x = 0\\) (\\(\\lim_{x\\to 0^-} f(x) = 0\\) ; \\(\\lim_{x\\to 0^+} f(x) = +\\infty\\))"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = e^{\\frac{1}{x}}",
+  "erreur": null,
+  "ok": true
+ },
+ "e^(2x)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = e^{2x}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} e^{2x} = \\text{« }e^{-\\infty}\\text{ »} = 0\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} e^{2x} = \\text{« }e^{+\\infty}\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = e^{2x}",
+  "erreur": null,
+  "ok": true
+ },
+ "e^x/x": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{e^{x}}{x}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "Signe de \\(x\\) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "x"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Tableaux de signes"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{e^{x}}{x} = \\text{« }\\dfrac{e^{-\\infty}}{-\\infty}\\text{ »} = \\text{« }\\dfrac{0^{+}}{-\\infty}\\text{ »} = 0\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x}}{x} &= \\text{« }\\dfrac{e^{+\\infty}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= +\\infty \\qquad \\left(\\text{croissance comparée : } \\lim_{x\\to +\\infty} \\dfrac{e^{ax}}{x^{n}} = +\\infty\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{-}} \\frac{e^{x}}{x} = \\text{« }\\dfrac{e^{0^{-}}}{0^{-}}\\text{ »} = \\text{« }\\dfrac{1}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} \\frac{e^{x}}{x} = \\text{« }\\dfrac{e^{0^{+}}}{0^{+}}\\text{ »} = \\text{« }\\dfrac{1}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 0"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)",
+       "Asymptote verticale : \\(x = 0\\) (\\(\\lim_{x\\to 0^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 0^+} f(x) = +\\infty\\))"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{e^{x}}{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "ln(x)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\ln(x)",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left]0 \\,;\\, +\\infty\\right[\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} \\ln(x) = \\text{« }\\ln\\left(0^{+}\\right)\\text{ »} = -\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 0^+"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\ln(x) = \\text{« }\\ln\\left(+\\infty\\right)\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote verticale : \\(x = 0\\) (\\(\\lim_{x\\to 0^+} f(x) = -\\infty\\))"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = \\ln(x)",
+  "erreur": null,
+  "ok": true
+ },
+ "ln(x-1)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\ln\\left(x - 1\\right)",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left]1 \\,;\\, +\\infty\\right[\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "Signe de \\(x - 1\\) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "1"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x - 1"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Tableaux de signes"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 1^{+}} \\ln\\left(x - 1\\right) = \\text{« }\\ln\\left(0^{+}\\right)\\text{ »} = -\\infty \\qquad \\left(x - 1 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 1^+"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\ln\\left(x - 1\\right) = \\text{« }\\ln\\left(+\\infty\\right)\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote verticale : \\(x = 1\\) (\\(\\lim_{x\\to 1^+} f(x) = -\\infty\\))"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = \\ln\\left(x - 1\\right)",
+  "erreur": null,
+  "ok": true
+ },
+ "ln(x^2-4x)/(x-5)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left]-\\infty \\,;\\, 0\\right[ \\cup \\left]4 \\,;\\, 5\\right[ \\cup \\left]5 \\,;\\, +\\infty\\right[\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "Signe de \\(x^{2} - 4x\\) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0",
+       "4"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x - 4"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2} - 4x"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "Signe de \\(x - 5\\) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "5"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "x - 5"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Tableaux de signes"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} &= \\text{« }\\dfrac{\\ln\\left(+\\infty + \\infty\\right)}{-\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{\\ln\\left(x^{2}\\left(1 - \\frac{4}{x}\\right)\\right)}{x\\,\\left(1 - \\frac{5}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{2\\ln|x| + \\ln\\left(1 - \\frac{4}{x}\\right)}{x\\,\\left(1 - \\frac{5}{x}\\right)} \\qquad \\left(\\text{propriétés de } \\ln\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{1}{1 - \\frac{5}{x}}\\left(2\\,\\dfrac{\\ln|x|}{x} + \\dfrac{\\ln\\left(1 - \\frac{4}{x}\\right)}{x}\\right) = 2 \\cdot 0 + 0 = 0 \\qquad \\left(t = -x \\to +\\infty ,\\; \\dfrac{\\ln|x|}{x} = -\\dfrac{\\ln t}{t} \\text{ : croissance comparée, } \\lim_{t\\to +\\infty} \\dfrac{\\ln t}{t^{n}} = 0\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\qquad \\left(\\text{le terme dominant de } x^{2} - 4x \\text{ est } x^{2}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{\\ln\\left(x^{2}\\left(1 - \\frac{4}{x}\\right)\\right)}{x\\,\\left(1 - \\frac{5}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{2\\ln x + \\ln\\left(1 - \\frac{4}{x}\\right)}{x\\,\\left(1 - \\frac{5}{x}\\right)} \\qquad \\left(\\text{propriétés de } \\ln\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{1}{1 - \\frac{5}{x}}\\left(2\\,\\dfrac{\\ln x}{x} + \\dfrac{\\ln\\left(1 - \\frac{4}{x}\\right)}{x}\\right) = 2 \\cdot 0 + 0 = 0 \\qquad \\left(\\text{croissance comparée : } \\lim_{x\\to +\\infty} \\dfrac{\\ln x}{x^{n}} = 0\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{-}} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} = \\text{« }\\dfrac{\\ln\\left(0^{+}\\right)}{-5}\\text{ »} = \\text{« }\\dfrac{-\\infty}{-5}\\text{ »} = +\\infty \\qquad \\left(x^{2} - 4x > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 0^-"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 4^{+}} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} = \\text{« }\\dfrac{\\ln\\left(0^{+}\\right)}{-1}\\text{ »} = \\text{« }\\dfrac{-\\infty}{-1}\\text{ »} = +\\infty \\qquad \\left(x^{2} - 4x > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 4\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 4^+"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 5^{-}} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} = \\text{« }\\dfrac{\\ln 5}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x - 5 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 5^{+}} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} = \\text{« }\\dfrac{\\ln 5}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x - 5 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 5\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 5"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)",
+       "Asymptote verticale : \\(x = 0\\) (\\(\\lim_{x\\to 0^-} f(x) = +\\infty\\))",
+       "Asymptote verticale : \\(x = 4\\) (\\(\\lim_{x\\to 4^+} f(x) = +\\infty\\))",
+       "Asymptote verticale : \\(x = 5\\) (\\(\\lim_{x\\to 5^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 5^+} f(x) = +\\infty\\))"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5}",
+  "erreur": null,
+  "ok": true
+ },
+ "sqrt(x^2+1)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\sqrt{x^{2} + 1}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\sqrt{x^{2} + 1} = \\text{« }\\sqrt{+\\infty}\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}a = \\lim_{x\\to -\\infty} \\frac{\\sqrt{x^{2} + 1}}{x} &= \\text{« }\\dfrac{\\sqrt{+\\infty}}{-\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{\\sqrt{x^{2}\\left(1 + \\frac{1}{x^{2}}\\right)}}{x} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{-x\\,\\sqrt{1 + \\frac{1}{x^{2}}}}{x} \\qquad \\left(x < 0 \\text{ : } \\sqrt{x^{2}} = |x| = -x\\right) \\\\ &= \\lim_{x\\to -\\infty} -\\sqrt{1 + \\frac{1}{x^{2}}} = -1\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}b = \\lim_{x\\to -\\infty} \\left(\\sqrt{x^{2} + 1} + x\\right) &= \\text{« }\\sqrt{+\\infty} - \\infty\\text{ »} = \\text{« }+\\infty - \\infty\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\frac{1}{\\sqrt{x^{2} + 1} - x} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0 \\qquad \\left(\\text{conjuguée}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote oblique : \\(y = -x\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}f(x) - \\left(-x\\right) &= \\sqrt{x^{2} + 1} + x \\\\ &= \\dfrac{1}{\\sqrt{x^{2} + 1} - x} \\qquad \\left(\\text{conjuguée}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(x) - \\left(-x\\right) > 0\\) pour \\(x < 0\\) : la courbe est au-dessus de l'asymptote.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\sqrt{x^{2} + 1} = \\text{« }\\sqrt{+\\infty}\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}a = \\lim_{x\\to +\\infty} \\frac{\\sqrt{x^{2} + 1}}{x} &= \\text{« }\\dfrac{\\sqrt{+\\infty}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{\\sqrt{x^{2}\\left(1 + \\frac{1}{x^{2}}\\right)}}{x} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x\\,\\sqrt{1 + \\frac{1}{x^{2}}}}{x} \\qquad \\left(x > 0 \\text{ : } \\sqrt{x^{2}} = |x| = x\\right) \\\\ &= \\lim_{x\\to +\\infty} \\sqrt{1 + \\frac{1}{x^{2}}} = 1\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}b = \\lim_{x\\to +\\infty} \\left(\\sqrt{x^{2} + 1} - x\\right) &= \\text{« }\\sqrt{+\\infty} - \\infty\\text{ »} = \\text{« }+\\infty - \\infty\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{1}{\\sqrt{x^{2} + 1} + x} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0 \\qquad \\left(\\text{conjuguée}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote oblique : \\(y = x\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}f(x) - \\left(x\\right) &= \\sqrt{x^{2} + 1} - x \\\\ &= \\dfrac{1}{\\sqrt{x^{2} + 1} + x} \\qquad \\left(\\text{conjuguée}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(x) - \\left(x\\right) > 0\\) pour \\(x > 0\\) : la courbe est au-dessus de l'asymptote.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote oblique (\\(x \\to -\\infty\\)) : \\(y = -x\\)",
+       "Asymptote oblique (\\(x \\to +\\infty\\)) : \\(y = x\\)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = \\sqrt{x^{2} + 1}",
+  "erreur": null,
+  "ok": true
+ },
+ "sqrt(x^2-4x+5)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\sqrt{x^{2} - 4x + 5}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\sqrt{x^{2} - 4x + 5} = \\text{« }\\sqrt{+\\infty + \\infty}\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}a = \\lim_{x\\to -\\infty} \\frac{\\sqrt{x^{2} - 4x + 5}}{x} &= \\text{« }\\dfrac{\\sqrt{+\\infty + \\infty}}{-\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{\\sqrt{x^{2}\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right)}}{x} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{-x\\,\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}}}{x} \\qquad \\left(x < 0 \\text{ : } \\sqrt{x^{2}} = |x| = -x\\right) \\\\ &= \\lim_{x\\to -\\infty} -\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} = -1\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}b = \\lim_{x\\to -\\infty} \\left(\\sqrt{x^{2} - 4x + 5} + x\\right) &= \\text{« }\\sqrt{+\\infty + \\infty} - \\infty\\text{ »} = \\text{« }+\\infty - \\infty\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\frac{-4x + 5}{\\sqrt{x^{2} - 4x + 5} - x} \\qquad \\left(\\text{conjuguée}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x\\,\\left(-4 + \\frac{5}{x}\\right)}{\\sqrt{x^{2}\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right)} - x} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x\\,\\left(-4 + \\frac{5}{x}\\right)}{-x\\,\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} - x} \\qquad \\left(x < 0 \\text{ : } \\sqrt{x^{2}} = |x| = -x\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{-4 + \\frac{5}{x}}{-\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} - 1} = 2\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote oblique : \\(y = -x + 2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}f(x) - \\left(-x + 2\\right) &= \\sqrt{x^{2} - 4x + 5} + x - 2 \\\\ &= \\dfrac{1}{\\sqrt{x^{2} - 4x + 5} - x + 2} \\qquad \\left(\\text{conjuguée}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(x) - \\left(-x + 2\\right) > 0\\) pour \\(x < 2\\) : la courbe est au-dessus de l'asymptote.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\sqrt{x^{2} - 4x + 5} = \\text{« }\\sqrt{+\\infty}\\text{ »} = +\\infty \\qquad \\left(\\text{le terme dominant de } x^{2} - 4x + 5 \\text{ est } x^{2}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}a = \\lim_{x\\to +\\infty} \\frac{\\sqrt{x^{2} - 4x + 5}}{x} &= \\text{« }\\dfrac{\\sqrt{+\\infty}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\qquad \\left(\\text{le terme dominant de } x^{2} - 4x + 5 \\text{ est } x^{2}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{\\sqrt{x^{2}\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right)}}{x} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x\\,\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}}}{x} \\qquad \\left(x > 0 \\text{ : } \\sqrt{x^{2}} = |x| = x\\right) \\\\ &= \\lim_{x\\to +\\infty} \\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} = 1\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}b = \\lim_{x\\to +\\infty} \\left(\\sqrt{x^{2} - 4x + 5} - x\\right) &= \\text{« }\\sqrt{+\\infty} - \\infty\\text{ »} = \\text{« }+\\infty - \\infty\\text{ »}\\text{ : forme indéterminée} \\qquad \\left(\\text{le terme dominant de } x^{2} - 4x + 5 \\text{ est } x^{2}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{-4x + 5}{\\sqrt{x^{2} - 4x + 5} + x} \\qquad \\left(\\text{conjuguée}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x\\,\\left(-4 + \\frac{5}{x}\\right)}{\\sqrt{x^{2}\\left(1 - \\frac{4}{x} + \\frac{5}{x^{2}}\\right)} + x} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x\\,\\left(-4 + \\frac{5}{x}\\right)}{x\\,\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} + x} \\qquad \\left(x > 0 \\text{ : } \\sqrt{x^{2}} = |x| = x\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{-4 + \\frac{5}{x}}{\\sqrt{1 - \\frac{4}{x} + \\frac{5}{x^{2}}} + 1} = -2\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote oblique : \\(y = x - 2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}f(x) - \\left(x - 2\\right) &= \\sqrt{x^{2} - 4x + 5} - x + 2 \\\\ &= \\dfrac{1}{\\sqrt{x^{2} - 4x + 5} + x - 2} \\qquad \\left(\\text{conjuguée}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(x) - \\left(x - 2\\right) > 0\\) pour \\(x > 2\\) : la courbe est au-dessus de l'asymptote.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote oblique (\\(x \\to -\\infty\\)) : \\(y = -x + 2\\)",
+       "Asymptote oblique (\\(x \\to +\\infty\\)) : \\(y = x - 2\\)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = \\sqrt{x^{2} - 4x + 5}",
+  "erreur": null,
+  "ok": true
+ },
+ "x*e^x": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = x\\,e^{x}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} x\\,e^{x} &= \\text{« }-\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }-\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= 0 \\qquad \\left(\\text{croissance comparée : } \\lim_{x\\to -\\infty} x^{n}e^{ax} = 0\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} x\\,e^{x} = \\text{« }+\\infty \\cdot e^{+\\infty}\\text{ »} = \\text{« }+\\infty \\cdot +\\infty\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = x\\,e^{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "x*ln(x^2)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = x\\,\\ln\\left(x^{2}\\right)",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "Signe de \\(x^{2}\\) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2}"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "Signe de \\(x\\) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "x"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Tableaux de signes"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} x\\,\\ln\\left(x^{2}\\right) = \\text{« }-\\infty \\cdot \\ln\\left(+\\infty\\right)\\text{ »} = \\text{« }-\\infty \\cdot +\\infty\\text{ »} = -\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} x\\,\\ln\\left(x^{2}\\right) = \\text{« }+\\infty \\cdot \\ln\\left(+\\infty\\right)\\text{ »} = \\text{« }+\\infty \\cdot +\\infty\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{-}} x\\,\\ln\\left(x^{2}\\right) &= \\text{« }0^{-} \\cdot \\ln\\left(0^{+}\\right)\\text{ »} = \\text{« }0^{-} \\cdot \\left(-\\infty\\right)\\text{ »}\\text{ : forme indéterminée} \\qquad \\left(x^{2} > 0 \\text{ : cf. tableau de signes}\\right) \\\\ &= \\lim_{x\\to 0^{-}} \\dfrac{\\ln\\left(x^{2}\\right)}{\\frac{1}{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &= \\lim_{x\\to 0^{-}} -2x = -2 \\cdot 0 = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln\\left(x^{2}\\right) \\text{ et } \\frac{1}{x} \\text{ dérivables sur } \\mathbb{R} \\setminus \\left\\{0\\right\\} ,\\; \\left(\\frac{1}{x}\\right)' = \\frac{-1}{x^{2}} \\text{ ne s'annule pas sur } \\mathbb{R} \\setminus \\left\\{0\\right\\}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} x\\,\\ln\\left(x^{2}\\right) &= \\text{« }0^{+} \\cdot \\ln\\left(0^{+}\\right)\\text{ »} = \\text{« }0^{+} \\cdot \\left(-\\infty\\right)\\text{ »}\\text{ : forme indéterminée} \\qquad \\left(x^{2} > 0 \\text{ : cf. tableau de signes}\\right) \\\\ &= \\lim_{x\\to 0^{+}} \\dfrac{\\ln\\left(x^{2}\\right)}{\\frac{1}{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &= \\lim_{x\\to 0^{+}} -2x = -2 \\cdot 0 = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln\\left(x^{2}\\right) \\text{ et } \\frac{1}{x} \\text{ dérivables sur } \\mathbb{R} \\setminus \\left\\{0\\right\\} ,\\; \\left(\\frac{1}{x}\\right)' = \\frac{-1}{x^{2}} \\text{ ne s'annule pas sur } \\mathbb{R} \\setminus \\left\\{0\\right\\}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Limite finie : pas d'asymptote verticale, trou dans le graphique en \\((0\\,;\\,0)\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 0"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Trou en \\((0\\,;\\,0)\\) : f n'est pas définie en \\(x = 0\\), mais \\(f(x) \\to 0\\) (pas une asymptote verticale)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = x\\,\\ln\\left(x^{2}\\right)",
+  "erreur": null,
+  "ok": true
+ },
+ "x+ln(x)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = x + \\ln(x)",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left]0 \\,;\\, +\\infty\\right[\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} \\left(x + \\ln(x)\\right) = \\text{« }0^{+} + \\ln\\left(0^{+}\\right)\\text{ »} = \\text{« }0^{+} - \\infty\\text{ »} = -\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 0^+"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\left(x + \\ln(x)\\right) = \\text{« }+\\infty + \\ln\\left(+\\infty\\right)\\text{ »} = \\text{« }+\\infty + \\infty\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote verticale : \\(x = 0\\) (\\(\\lim_{x\\to 0^+} f(x) = -\\infty\\))"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = x + \\ln(x)",
+  "erreur": null,
+  "ok": true
+ },
+ "x/sqrt(x^2)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{x}{\\sqrt{x^{2}}}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{x}{\\sqrt{x^{2}}} &= \\text{« }\\dfrac{-\\infty}{\\sqrt{+\\infty}}\\text{ »} = \\text{« }\\dfrac{-\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x}{-x} \\qquad \\left(x < 0 \\text{ : } \\sqrt{x^{2}} = |x| = -x\\right) \\\\ &= \\lim_{x\\to -\\infty} -1 = -1\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = -1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x}{\\sqrt{x^{2}}} &= \\text{« }\\dfrac{+\\infty}{\\sqrt{+\\infty}}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x}{x} \\qquad \\left(x > 0 \\text{ : } \\sqrt{x^{2}} = |x| = x\\right) \\\\ &= \\lim_{x\\to +\\infty} 1 = 1\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{-}} \\frac{x}{\\sqrt{x^{2}}} &= \\text{« }\\dfrac{0}{\\sqrt{0}}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 0^{-}} \\frac{x}{|x|} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to 0^{-}} \\frac{x}{-x} \\qquad \\left(x < 0 \\text{ : } |x| = -x\\right) \\\\ &= \\lim_{x\\to 0^{-}} -1 = -1 \\qquad \\left(\\text{on simplifie}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} \\frac{x}{\\sqrt{x^{2}}} &= \\text{« }\\dfrac{0}{\\sqrt{0}}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 0^{+}} \\frac{x}{|x|} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to 0^{+}} \\frac{x}{x} \\qquad \\left(x > 0 \\text{ : } |x| = x\\right) \\\\ &= \\lim_{x\\to 0^{+}} 1 = 1 \\qquad \\left(\\text{on simplifie}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Limites à gauche et à droite différentes : f n'a pas de limite en \\(x=0\\) ; pas d'asymptote verticale.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 0"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = -1\\)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 1\\)",
+       "Pas de limite en \\(x = 0\\) (pas d'asymptote verticale) : \\(\\lim_{x\\to 0^-} f(x) = -1\\) ; \\(\\lim_{x\\to 0^+} f(x) = 1\\)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{x}{\\sqrt{x^{2}}}",
+  "erreur": null,
+  "ok": true
+ },
+ "x^(1/2)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = x^{\\frac{1}{2}} = \\sqrt{x}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left[0 \\,;\\, +\\infty\\right[\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\sqrt{x} = \\text{« }\\left(+\\infty\\right)^{\\frac{1}{2}}\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "html": "Aucune asymptote détectée.",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = x^{\\frac{1}{2}} = \\sqrt{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "x^2*e^(-x)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = x^{2}\\,e^{-x}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} x^{2}\\,e^{-x} = \\text{« }+\\infty \\cdot e^{+\\infty}\\text{ »} = \\text{« }+\\infty \\cdot +\\infty\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} x^{2}\\,e^{-x} &= \\text{« }+\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }+\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= 0 \\qquad \\left(\\text{croissance comparée : } \\lim_{x\\to +\\infty} x^{n}e^{-ax} = 0\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = x^{2}\\,e^{-x}",
+  "erreur": null,
+  "ok": true
+ },
+ "x^2/(x-1)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{x^{2}}{x - 1}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R} \\setminus \\left\\{1\\right\\}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "Signe de \\(x - 1\\) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "1"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "x - 1"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Tableaux de signes"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{x^{2}}{x - 1} &= \\text{« }\\dfrac{+\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x^{2}}{x\\,\\left(1 - \\frac{1}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{x}{1 - \\frac{1}{x}} = -\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Division euclidienne : \\(x^{2} = \\left(x - 1\\right)\\,\\left(x + 1\\right) + 1\\), donc \\(f(x) = x + 1 + \\dfrac{1}{x - 1}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\left(f(x) - \\left(x + 1\\right)\\right) = \\lim_{x\\to -\\infty} \\dfrac{1}{x - 1} = \\text{« }\\dfrac{1}{-\\infty}\\text{ »} = 0 \\text{ : asymptote oblique } y = x + 1\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\dfrac{1}{x - 1} < 0\\) pour \\(x < 1\\) : la courbe est au-dessous de l'asymptote.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x^{2}}{x - 1} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}}{x\\,\\left(1 - \\frac{1}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{x}{1 - \\frac{1}{x}} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Même division : \\(f(x) - \\left(x + 1\\right) = \\dfrac{1}{x - 1}\\) tend vers \\(0\\) : asymptote oblique \\(y = x + 1\\) ; \\(\\dfrac{1}{x - 1} > 0\\) pour \\(x > 1\\) : la courbe est au-dessus de l'asymptote.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 1^{-}} \\frac{x^{2}}{x - 1} = \\text{« }\\dfrac{1}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x - 1 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 1^{+}} \\frac{x^{2}}{x - 1} = \\text{« }\\dfrac{1}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x - 1 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 1"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote oblique (\\(x \\to -\\infty\\)) : \\(y = x + 1\\)",
+       "Asymptote oblique (\\(x \\to +\\infty\\)) : \\(y = x + 1\\)",
+       "Asymptote verticale : \\(x = 1\\) (\\(\\lim_{x\\to 1^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 1^+} f(x) = +\\infty\\))"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{x^{2}}{x - 1}",
+  "erreur": null,
+  "ok": true
+ }
+}
