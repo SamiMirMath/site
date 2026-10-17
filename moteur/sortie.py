@@ -4,7 +4,7 @@ sortie.py — Format de sortie commun des outils (D2) : constructeurs et validat
 Python pur, bibliothèque standard seulement. Une sortie de `resoudre()` est un dict :
 
     {ok, erreur, detail?, enonce_tex, entete?, cartes: [carte], besoin_sympy?}
-    carte = {titre, titre_tex?, badge?, style, blocs: [bloc]}
+    carte = {titre, titre_tex?, titre_masque?, badge?, style, blocs: [bloc]}
     bloc  = texte | formule | resultat | erreur | liste | tableau | graphique
 
 `valider(sortie)` renvoie la liste des écarts au schéma (vide si la sortie est conforme).
@@ -26,7 +26,7 @@ BLOCS = {
     "tableau": ({"var", "crit", "rows"}, {"limites"}),
     "graphique": ({"xmin", "xmax", "ymin", "ymax", "segments", "extrema", "asymptotes"}, {"recalculable"}),
 }
-CARTE = ({"titre", "style", "blocs"}, {"titre_tex", "badge", "detail"})
+CARTE = ({"titre", "style", "blocs"}, {"titre_tex", "badge", "detail", "titre_masque"})
 LIGNE = ({"label", "cells"}, {"final", "variation"})
 SORTIE_OK = ({"ok", "erreur", "enonce_tex", "cartes"}, {"entete", "besoin_sympy", "detail"})
 SORTIE_KO = ({"ok", "erreur"}, {"detail"})
@@ -61,8 +61,10 @@ def liste(items, style=None):
     return b
 
 
-def carte(titre, blocs, style="normal", badge=None, titre_tex=None, detail=None):
+def carte(titre, blocs, style="normal", badge=None, titre_tex=None, detail=None, titre_masque=False):
     c = {"titre": titre, "style": style, "blocs": list(blocs)}
+    if titre_masque:
+        c["titre_masque"] = True      # le titre reste dans les données mais la page ne l'affiche pas
     if detail:
         c["detail"] = detail
     if badge:
@@ -189,6 +191,8 @@ def _valider_carte(c, chemin, ecarts):
         return
     if c.get("style") not in STYLES_CARTE:
         ecarts.append(f"{chemin} : style « {c.get('style')} » inconnu")
+    if "titre_masque" in c and c["titre_masque"] is not True:
+        ecarts.append(f"{chemin} : titre_masque doit être true")
     if not isinstance(c.get("blocs"), list):
         ecarts.append(f"{chemin} : blocs doit être une liste")
         return

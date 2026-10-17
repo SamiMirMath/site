@@ -4,12 +4,13 @@ resoudre_ed.py — Adaptateur « format de sortie commun » (moteur/sortie.py) d
 Reproduit les cartes que la page affiche aujourd'hui à partir de `analyser` : l'en-tête (hors
 compteur d'étapes), une carte par condition, la carte finale. Les textes que la page composait
 en JS (nombre de conditions, « Condition non résolue », valeurs ≈) sont écrits ici.
-Le contrôle numérique (`verifier_json`) reste un appel séparé, lancé après l'affichage.
+Le contrôle numérique (`controle`, qui compose sa phrase) reste un appel séparé, lancé après l'affichage.
 """
-from ensemble_def import analyser, apercu_json, json_strict
+from ensemble_def import analyser, apercu_json, json_strict, verifier
+from ensemble_def import analyser_json, verifier_json   # noqa: F401  anciennes pages en cache (retirés à la clôture des migrations)
 import sortie as so
 
-__all__ = ["resoudre", "resoudre_json", "apercu_json"]
+__all__ = ["resoudre", "resoudre_json", "controle", "controle_json", "apercu_json", "analyser_json", "verifier_json"]
 
 
 def _enonce(r):
@@ -22,7 +23,7 @@ def _entete(r):
         phrase = f"{n} condition{'s' if n > 1 else ''} d'existence : " + ", ".join(c["titre"] for c in r["conditions"]) + "."
     else:
         phrase = "Ni logarithme, ni dénominateur, ni racine : aucune condition."
-    return so.carte("Fonction", [so.formule(_enonce(r)), so.texte(phrase, style="discret")])
+    return so.carte("Fonction", [so.formule(_enonce(r)), so.texte(phrase, style="discret")], titre_masque=True)
 
 
 def _carte_condition(c):
@@ -41,13 +42,13 @@ def _carte_condition(c):
 
 def _carte_finale(r):
     if not r["complet"]:
-        return so.carte("Ensemble de définition", [so.erreur("Une condition n'a pas pu être résolue : l'ED n'est pas calculé.")], style="final")
+        return so.carte("Ensemble de définition", [so.erreur("Une condition n'a pas pu être résolue : l'ED n'est pas calculé.")], style="final", titre_masque=True)
     if not r["conditions"]:
-        return so.carte("Ensemble de définition", [so.resultat("ED = \\mathbb{R}")], style="final")
+        return so.carte("Ensemble de définition", [so.resultat("ED = \\mathbb{R}")], style="final", titre_masque=True)
     blocs = [so.resultat("ED = " + (r["inter_tex"] + " = " if r.get("inter_tex") else "") + r["ED_tex"])]
     if "approx" in r["ED_tex"]:
         blocs.append(so.texte("Les valeurs précédées de ≈ ont été obtenues numériquement.", style="indice"))
-    return so.carte("Ensemble de définition", blocs, style="final")
+    return so.carte("Ensemble de définition", blocs, style="final", titre_masque=True)
 
 
 def resoudre(entree):
@@ -60,3 +61,22 @@ def resoudre(entree):
 
 def resoudre_json(entree):
     return json_strict(resoudre(entree))
+
+
+def controle(entree):
+    """Contrôle numérique indépendant, avec la phrase affichée sous la dernière carte :
+    {ok, accord, texte} (ok faux : rien à afficher, l'ED n'est pas calculé)."""
+    v = verifier(entree)
+    if not v["ok"]:
+        return {"ok": False, "accord": False, "texte": v["msg"]}
+    if v["accord"]:
+        texte = (f"✓ Contrôle numérique indépendant : f est bien définie aux {v['n_in']} points testés dans l'ED "
+                 f"et non définie aux {v['n_out']} points testés hors de l'ED.")
+    else:
+        texte = ("⚠ Le contrôle numérique signale un désaccord près de x ≈ " + " ; ".join(str(x) for x in v["erreurs"])
+                 + ". Vérifiez ce résultat à la main.")
+    return {"ok": True, "accord": v["accord"], "texte": texte}
+
+
+def controle_json(entree):
+    return json_strict(controle(entree))

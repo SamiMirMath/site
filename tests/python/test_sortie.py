@@ -85,6 +85,14 @@ class TestValidateur(unittest.TestCase):
         self.assertEqual(so.valider(s), [])
         self.assertEqual(so.carte("t", [], detail="d")["detail"], "d")
 
+    def test_titre_masque(self):
+        c = so.carte("Fonction", [so.formule("f")], titre_masque=True)
+        self.assertIs(c["titre_masque"], True)
+        self.assertNotIn("titre_masque", so.carte("t", []))
+        self.assertEqual(so.valider(so.sortie_ok("f", [c])), [])
+        c["titre_masque"] = "oui"
+        self.assertTrue(so.valider(so.sortie_ok("f", [c])))
+
     def test_limites_du_tableau(self):
         s = exemple()
         s["cartes"][0]["blocs"][2]["limites"] = {"colonnes": [], "moins_inf": "1", "plus_inf": "1", "non_determinees": []}

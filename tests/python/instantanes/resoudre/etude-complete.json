@@ -14,7 +14,8 @@
      }
     ],
     "style": "normal",
-    "titre": "Fonction"
+    "titre": "Fonction",
+    "titre_masque": true
    },
    {
     "badge": "calcul",
@@ -274,7 +275,8 @@
      }
     ],
     "style": "normal",
-    "titre": "Fonction"
+    "titre": "Fonction",
+    "titre_masque": true
    },
    {
     "badge": "calcul",
@@ -630,7 +632,8 @@
      }
     ],
     "style": "normal",
-    "titre": "Fonction"
+    "titre": "Fonction",
+    "titre_masque": true
    },
    {
     "badge": "calcul",
@@ -888,7 +891,8 @@
      }
     ],
     "style": "normal",
-    "titre": "Fonction"
+    "titre": "Fonction",
+    "titre_masque": true
    },
    {
     "badge": "calcul",
@@ -1180,7 +1184,8 @@
      }
     ],
     "style": "normal",
-    "titre": "Fonction"
+    "titre": "Fonction",
+    "titre_masque": true
    },
    {
     "badge": "calcul",
@@ -1360,7 +1365,8 @@
      }
     ],
     "style": "normal",
-    "titre": "Fonction"
+    "titre": "Fonction",
+    "titre_masque": true
    },
    {
     "badge": "calcul",
@@ -1658,7 +1664,8 @@
      }
     ],
     "style": "normal",
-    "titre": "Fonction"
+    "titre": "Fonction",
+    "titre_masque": true
    },
    {
     "badge": "calcul",
@@ -1955,7 +1962,8 @@
      }
     ],
     "style": "normal",
-    "titre": "Fonction"
+    "titre": "Fonction",
+    "titre_masque": true
    },
    {
     "badge": "calcul",
@@ -2193,7 +2201,8 @@
      }
     ],
     "style": "normal",
-    "titre": "Fonction"
+    "titre": "Fonction",
+    "titre_masque": true
    },
    {
     "badge": "calcul",
@@ -2462,7 +2471,8 @@
      }
     ],
     "style": "normal",
-    "titre": "Fonction"
+    "titre": "Fonction",
+    "titre_masque": true
    },
    {
     "badge": "calcul",
@@ -2733,7 +2743,8 @@
      }
     ],
     "style": "normal",
-    "titre": "Fonction"
+    "titre": "Fonction",
+    "titre_masque": true
    },
    {
     "badge": "calcul",
@@ -2925,7 +2936,8 @@
      }
     ],
     "style": "normal",
-    "titre": "Fonction"
+    "titre": "Fonction",
+    "titre_masque": true
    },
    {
     "badge": "calcul",
@@ -3187,7 +3199,8 @@
      }
     ],
     "style": "normal",
-    "titre": "Fonction"
+    "titre": "Fonction",
+    "titre_masque": true
    },
    {
     "badge": "calcul",
@@ -3407,7 +3420,8 @@
      }
     ],
     "style": "normal",
-    "titre": "Fonction"
+    "titre": "Fonction",
+    "titre_masque": true
    },
    {
     "badge": "calcul",
@@ -3654,7 +3668,8 @@
      }
     ],
     "style": "normal",
-    "titre": "Fonction"
+    "titre": "Fonction",
+    "titre_masque": true
    },
    {
     "badge": "calcul",

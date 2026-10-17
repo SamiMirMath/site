@@ -20,7 +20,8 @@ def enonce(r):
 
 
 def carte_rappel(r, suffixe_ed=""):
-    return so.carte("Fonction", [so.formule(enonce(r)), so.texte("\\(ED = " + r["ed_tex"] + "\\)" + suffixe_ed, style="discret")])
+    return so.carte("Fonction", [so.formule(enonce(r)), so.texte("\\(ED = " + r["ed_tex"] + "\\)" + suffixe_ed, style="discret")],
+                    titre_masque=True)
 
 
 def carte_derivee(r):
