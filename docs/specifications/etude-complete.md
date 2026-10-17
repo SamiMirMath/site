@@ -117,3 +117,4 @@ f(x)     | +∞  ↘  −∞ ‖  ░░░░░░  ‖ −∞  ↗  +∞
 | EC-05 | Sur téléphone, un glissement vertical à un doigt sur le graphique fait défiler la page ; deux doigts zooment et déplacent | [manuel] |
 | EC-06 | Graduations sans point décimal | [auto-page] |
 | EC-07 | Le graphique est imprimé (image) dans le PDF | [manuel] |
+| EC-13 | `resoudre()` (T12) respecte le schéma de sortie commun, ses cartes sont dans l'ordre de la page, celles de la dérivée et des limites sont les cartes des outils séparés, les limites figurent dans le tableau de variations ; instantanés `instantanes/resoudre/etude-complete.json` | [auto-py] (`test_resoudre_ec.py`) |

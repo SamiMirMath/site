@@ -51,3 +51,4 @@ changement de variable, mise en évidence composée.
 | FA-05 | `(x+1)^2-(x-1)^2` : la méthode annoncée n'est pas « Déjà factorisé » | [auto-py] |
 | FA-06 | Saisie d'une fonction (ln, sqrt…) ou division par une lettre : message en français | [auto-py] |
 | FA-07 | Aucun calcul de la batterie FA-01 ne dépasse 2 s en natif (≈ 10 s dans Pyodide) | [auto-py] |
+| FA-08 | `resoudre()` (T12) respecte le schéma de sortie commun pour toute la batterie FA-01 : une carte finale (badge = méthode), aucun texte perdu, erreurs en français ; instantanés `instantanes/resoudre/factorisation.json` | [auto-py] (`test_resoudre_fa.py`) |

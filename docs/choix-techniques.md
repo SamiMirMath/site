@@ -86,36 +86,52 @@ apercu(entree: str) -> dict          # {"ok": True, "tex": ...} ou {"ok": False,
 exercice(niveau: str, graine: int) -> dict   # {"ok": True, "entree": "...", "niveau": ..., "graine": ...}
 ```
 
-Schéma de `resoudre` :
+Schéma de `resoudre` (T12, `moteur/sortie.py` : constructeurs et `valider()`, fait le 17.10.2026) :
 
 ```json
 {
   "ok": true,
   "erreur": null,
   "enonce_tex": "f(x) = \\ln(x-1)",
+  "entete": {"titre": "Fonction", "style": "normal", "blocs": ["…"]},
   "cartes": [
     {
       "titre": "Condition 1",
       "badge": "logarithme",
+      "style": "normal",
       "blocs": [
-        {"type": "texte", "html": "…"},
+        {"type": "texte", "html": "…", "style": "etape"},
         {"type": "formule", "tex": "…"},
-        {"type": "tableau_signes", "var": "x", "crit": ["…"], "rows": [{"label": "…", "cells": ["+", "0", "-"], "final": false}]},
-        {"type": "tableau_variations", "…": "…"},
-        {"type": "liste", "items": ["…"]},
-        {"type": "graphique", "xmin": 0, "xmax": 1, "ymin": 0, "ymax": 1, "segments": [], "asymptotes": [], "points": []}
-      ],
-      "resultat_tex": "E_1 = \\left]1;+\\infty\\right["
+        {"type": "tableau", "var": "x", "crit": ["…"], "rows": [{"label": "…", "cells": ["+", "0", "-"], "final": false}]},
+        {"type": "liste", "items": ["…"], "style": "extrema"},
+        {"type": "graphique", "xmin": 0, "xmax": 1, "ymin": 0, "ymax": 1, "segments": [], "extrema": [], "asymptotes": [], "recalculable": true},
+        {"type": "resultat", "tex": "E_1 = \\left]1;+\\infty\\right["}
+      ]
     }
   ],
-  "resultat_tex": "ED = \\left]1;+\\infty\\right[",
-  "controle": {"ok": true, "texte": "…"}
+  "besoin_sympy": false
 }
 ```
 
-- `ok: false` ⇒ `erreur` est un message en français destiné à l'élève, **jamais une trace Python**.
-- Les anciennes fonctions (`analyser_json`, `etudier_json`, `factoriser_json`) restent
-  disponibles tant que toutes les pages ne sont pas migrées.
+- `ok: false` ⇒ `erreur` est un message en français destiné à l'élève, **jamais une trace Python** ;
+  le détail technique va dans `detail` (console), à côté de `erreur`, sur une carte ou sur un bloc `texte`.
+- Styles : carte `normal | etape | final | erreur` ; `texte` `etape | discret | indice` ; `liste` `extrema | bilan`.
+- Un seul type `tableau` : le format déjà produit par les moteurs d'analyse (cases `+ - 0 | || x asym
+  extremum \nearrow \searrow \rightarrow val:<tex>`, une ligne de `2·len(crit)+1` cases). L'Étude complète
+  y ajoute `limites` (T06c).
+- `resultat` est un bloc (et non un champ de carte) : l'ordre d'affichage est explicite.
+- `entete` : carte toujours visible, hors compteur d'étapes (l'Ensemble de définition seulement ; les
+  autres outils comptent leur carte « Fonction » comme première étape). Uniformiser se décidera en T16.
+- Pas de `controle` : le contrôle numérique de l'ED reste un appel séparé (`verifier_json`), lancé après
+  l'affichage ; `fenetre_json` (recalcul du graphique au zoom) reste aussi séparée.
+- Les textes que les pages composaient en JS (nombre de conditions, phrases des extrema et des
+  asymptotes, « Condition non résolue », valeurs ≈) sont écrits par les adaptateurs.
+- Adaptateurs : un `resoudre_<outil>.py` par outil (`resoudre`, `resoudre_json`, `apercu_json`), à côté du
+  moteur, qui ne change pas. Les pages continuent d'appeler les anciennes fonctions (`analyser_json`,
+  `etudier_json`, `factoriser_json`) jusqu'à leur migration (T17 à T20), qui chargera `sortie.py` et
+  `resoudre_<outil>.py` et mettra le manifeste à jour.
+- Fichiers à plat dans Pyodide comme `noyau.py` (`test_resoudre_import.py`) ; la fonction `exercice(niveau, graine)`
+  est l'objet de T13.
 
 ## Options écartées
 

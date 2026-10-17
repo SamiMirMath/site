@@ -87,3 +87,4 @@ URL : `/derivee-variations/` · moteur : `derivee-variations/derivee_variations.
 | DV-11 | x^(2−2) : ligne f'(x) « 0 », ligne f(x) →, aucun extremum ; √(x²)/x : « 0 » et → sur chaque intervalle, double barre en 0 (hors de l'ED) | [auto-py] (`test_tableau_variations.py`) |
 | DV-12 | x³ : ligne f'(x) « + 0 + », ligne f(x) « ↗ ↗ », aucun extremum (zéro isolé de f') | [auto-py] (`test_tableau_variations.py`) |
 | DV-13 | f constante sur [0 ; +∞[ ((√x)⁰) : la valeur 1 figure en 0 sur la ligne f(x), puis →, aucun extremum | [auto-py] (`test_tableau_variations.py`) |
+| DV-14 | `resoudre()` (T12) respecte le schéma de sortie commun, contient tous les textes de l'ancienne sortie et les phrases des extrema que la page composait en JS ; instantanés `instantanes/resoudre/derivee-variations.json` | [auto-py] (`test_resoudre_dv.py`) |

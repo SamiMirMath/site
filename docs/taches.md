@@ -190,10 +190,14 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
   pas le noyau) chargent `noyau.py` ; test `tests/python/test_noyau.py`. Les tests qui appellent
   `ensemble_def._…` directement sont inchangés (ils testent le noyau lui-même).
 
-### T12 — Format de sortie commun
+### T12 — Format de sortie commun — **faite** (`2a9353f` à `043dd73` + docs, 17.10.2026)
 - **Fichiers** : `moteur/sortie.py`, une fonction `resoudre()` par outil (adaptateur), test de schéma.
 - **Dépend** : T11.
 - **Vérification** : ED-06 et équivalents ; anciennes fonctions `*_json` inchangées (instantanés).
+- **Réalisé** : `moteur/sortie.py` (constructeurs + `valider()`), un adaptateur `resoudre_<outil>.py` par outil
+  (`resoudre`, `resoudre_json`, `apercu_json`), instantanés `tests/python/instantanes/resoudre/`, critères DV-14, LA-40,
+  EC-13, FA-08, ED-06 ; schéma réel dans [choix-techniques.md](choix-techniques.md). Pages et moteurs inchangés ;
+  les pages passeront à `resoudre()` en T17 à T20.
 
 ### T13 — Exercices avec graine
 - **Fichiers** : `moteur/exercices.py` (gabarits validés), `exercice(niveau, graine)` par outil, tests.
