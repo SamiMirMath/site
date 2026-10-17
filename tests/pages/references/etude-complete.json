@@ -1,0 +1,4485 @@
+{
+ "(e^x-1)/x": {
+  "au_depart": {
+   "progression": "Étape 1 / 8",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\frac{e^{x} - 1}{x}⟧ ⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "DérivéecalculOn pose ⟦u(x) = e^{x} - 1⟧ et ⟦v(x) = x⟧ : règle du quotient, ⟦\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}⟧.⟦\\left(e^{x}\\right)' = e^{x}⟧ (règle de base).⟦u'(x) = e^{x}⟧.⟦v'(x) = 1⟧.⟦f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{e^{x}\\,x - \\left(e^{x} - 1\\right)}{x^{2}} = \\frac{x\\,e^{x} - e^{x} + 1}{x^{2}}⟧.⟦f'(x) = \\frac{x\\,e^{x} - e^{x} + 1}{x^{2}}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x\\,e^{x} - e^{x} + 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x^{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "vi",
+         "⟦1⟧⟦1⟧⟦1⟧⟦1⟧"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{x\\,e^{x} - e^{x} + 1}{x^{2}}⟧ ne s'annule jamais ; valeur interdite : ⟦x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦\\left(x\\,e^{x} - e^{x} + 1\\right)⟧++⟦x^{2}⟧++⟦f'(x)⟧++⟦f(x)⟧⟦0⟧⟦\\nearrow⟧⟦1⟧⟦1⟧⟦1⟧⟦1⟧⟦\\nearrow⟧⟦+\\infty⟧Aucun extremum local.",
+    "titre": "Signe de f' et variationstableau"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{e^{x} - 1}{x} = \\text{« }\\dfrac{e^{-\\infty} - 1}{-\\infty}\\text{ »} = \\text{« }\\dfrac{0^{+} - 1}{-\\infty}\\text{ »} = \\text{« }\\dfrac{-1}{-\\infty}\\text{ »} = 0\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "titre": "⟦x \\to -\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x}}{x} &= \\text{« }\\dfrac{e^{+\\infty}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= +\\infty \\qquad \\left(\\text{croissance comparée : } \\lim_{x\\to +\\infty} \\dfrac{e^{ax}}{x^{n}} = +\\infty\\right)\\end{aligned}⟧⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x} - 1}{x} &= \\text{« }\\dfrac{e^{+\\infty} - 1}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty - 1}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{e^{x}}{x}\\,\\left(1 - e^{-x}\\right) = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty \\qquad \\left(\\text{mise en évidence}\\right)\\end{aligned}⟧",
+    "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to 0⟧limite⟦\\begin{aligned}\\lim_{x\\to 0} \\frac{e^{x} - 1}{x} &= \\text{« }\\dfrac{e^{0} - 1}{0}\\text{ »} = \\text{« }\\dfrac{1 - 1}{0}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 0} \\frac{e^{x}}{1} = 1 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } e^{x} - 1 \\text{ et } x \\text{ dérivables sur } \\mathbb{R} ,\\; x' = 1 \\neq 0\\right)\\end{aligned}⟧Limite finie : pas d'asymptote verticale, trou dans le graphique en ⟦(0\\,;\\,1)⟧.",
+    "titre": "⟦x \\to 0⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [
+     [
+      "bilan",
+      [
+       "Asymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 0⟧",
+       "Trou en ⟦(0\\,;\\,1)⟧ : f n'est pas définie en ⟦x = 0⟧, mais ⟦f(x) \\to 1⟧ (pas une asymptote verticale)"
+      ]
+     ]
+    ],
+    "tableaux": [],
+    "texte": "Bilan des asymptotesAsymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 0⟧Trou en ⟦(0\\,;\\,1)⟧ : f n'est pas définie en ⟦x = 0⟧, mais ⟦f(x) \\to 1⟧ (pas une asymptote verticale)",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "titre": "Graphique"
+   }
+  ],
+  "progression_finale": "Étape 8 / 8"
+ },
+ "(x^2-1)/(x-3)": {
+  "au_depart": {
+   "progression": "Étape 1 / 9",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\frac{x^{2} - 1}{x - 3}⟧ ⟦ED = \\mathbb{R} \\setminus \\left\\{3\\right\\}⟧",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "DérivéecalculOn pose ⟦u(x) = x^{2} - 1⟧ et ⟦v(x) = x - 3⟧ : règle du quotient, ⟦\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}⟧.⟦\\left(x^{2}\\right)' = 2x⟧ (règle de la puissance).⟦u'(x) = 2x⟧.⟦v'(x) = 1⟧.⟦f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{2x\\,\\left(x - 3\\right) - \\left(x^{2} - 1\\right)}{\\left(x - 3\\right)^{2}} = \\frac{x^{2} - 6x + 1}{\\left(x - 3\\right)^{2}}⟧.⟦f'(x) = \\frac{x^{2} - 6x + 1}{\\left(x - 3\\right)^{2}}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "maximum local en ⟦x=3 - 2\\sqrt{2}⟧ : ⟦f(3 - 2\\sqrt{2})=6 - 4 \\sqrt{2}⟧",
+       "minimum local en ⟦x=3 + 2\\sqrt{2}⟧ : ⟦f(3 + 2\\sqrt{2})=4 \\sqrt{2} + 6⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦3 - 2\\sqrt{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦3⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦3 + 2\\sqrt{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x^{2} - 6x + 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x - 3\\right)^{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "vi",
+         "⟦-\\infty⟧⟦+\\infty⟧⟦+\\infty⟧⟦-\\infty⟧"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{x^{2} - 6x + 1}{\\left(x - 3\\right)^{2}} = 0 \\iff x^{2} - 6x + 1 = 0 \\iff x = 3 - 2\\sqrt{2} \\text{ ou } x = 3 + 2\\sqrt{2}⟧ ; valeur interdite : ⟦x = 3⟧.⟦x⟧⟦-\\infty⟧⟦3 - 2\\sqrt{2}⟧⟦3⟧⟦3 + 2\\sqrt{2}⟧⟦+\\infty⟧⟦\\left(x^{2} - 6x + 1\\right)⟧+0−−0+⟦\\left(x - 3\\right)^{2}⟧++++++⟦f'(x)⟧+0−−0+⟦f(x)⟧⟦-\\infty⟧⟦\\nearrow⟧•⟦\\searrow⟧⟦-\\infty⟧⟦+\\infty⟧⟦+\\infty⟧⟦-\\infty⟧⟦\\searrow⟧•⟦\\nearrow⟧⟦+\\infty⟧maximum local en ⟦x=3 - 2\\sqrt{2}⟧ : ⟦f(3 - 2\\sqrt{2})=6 - 4 \\sqrt{2}⟧minimum local en ⟦x=3 + 2\\sqrt{2}⟧ : ⟦f(3 + 2\\sqrt{2})=4 \\sqrt{2} + 6⟧",
+    "titre": "Signe de f' et variationstableau"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦3⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x - 3⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Tableaux de signestableauSigne de ⟦x - 3⟧ :⟦x⟧⟦-\\infty⟧⟦3⟧⟦+\\infty⟧⟦x - 3⟧−+",
+    "titre": "Tableaux de signestableau"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{x^{2} - 1}{x - 3} &= \\text{« }\\dfrac{+\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{x\\,\\left(1 - \\frac{3}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{x\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{1 - \\frac{3}{x}} = \\text{« }-\\infty \\cdot 1\\text{ »} = -\\infty\\end{aligned}⟧Division euclidienne : ⟦x^{2} - 1 = \\left(x - 3\\right)\\,\\left(x + 3\\right) + 8⟧, donc ⟦f(x) = x + 3 + \\dfrac{8}{x - 3}⟧.⟦\\begin{aligned}\\lim_{x\\to -\\infty} \\left(f(x) - \\left(x + 3\\right)\\right) = \\lim_{x\\to -\\infty} \\dfrac{8}{x - 3} = \\text{« }\\dfrac{8}{-\\infty}\\text{ »} = 0 \\text{ : asymptote oblique } y = x + 3\\end{aligned}⟧⟦\\dfrac{8}{x - 3} < 0⟧ pour ⟦x < 3⟧ : la courbe est au-dessous de l'asymptote.",
+    "titre": "⟦x \\to -\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x^{2} - 1}{x - 3} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{x\\,\\left(1 - \\frac{3}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{x\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{1 - \\frac{3}{x}} = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty\\end{aligned}⟧Même division : ⟦f(x) - \\left(x + 3\\right) = \\dfrac{8}{x - 3}⟧ tend vers ⟦0⟧ : asymptote oblique ⟦y = x + 3⟧ ; ⟦\\dfrac{8}{x - 3} > 0⟧ pour ⟦x > 3⟧ : la courbe est au-dessus de l'asymptote.",
+    "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to 3⟧limite⟦\\begin{aligned}\\lim_{x\\to 3^{-}} \\frac{x^{2} - 1}{x - 3} = \\text{« }\\dfrac{8}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x - 3 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}⟧⟦\\begin{aligned}\\lim_{x\\to 3^{+}} \\frac{x^{2} - 1}{x - 3} = \\text{« }\\dfrac{8}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x - 3 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}⟧Asymptote verticale : ⟦x = 3⟧.",
+    "titre": "⟦x \\to 3⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [
+     [
+      "bilan",
+      [
+       "Asymptote oblique (⟦x \\to -\\infty⟧) : ⟦y = x + 3⟧",
+       "Asymptote oblique (⟦x \\to +\\infty⟧) : ⟦y = x + 3⟧",
+       "Asymptote verticale : ⟦x = 3⟧ (⟦\\lim_{x\\to 3^-} f(x) = -\\infty⟧ ; ⟦\\lim_{x\\to 3^+} f(x) = +\\infty⟧)"
+      ]
+     ]
+    ],
+    "tableaux": [],
+    "texte": "Bilan des asymptotesAsymptote oblique (⟦x \\to -\\infty⟧) : ⟦y = x + 3⟧Asymptote oblique (⟦x \\to +\\infty⟧) : ⟦y = x + 3⟧Asymptote verticale : ⟦x = 3⟧ (⟦\\lim_{x\\to 3^-} f(x) = -\\infty⟧ ; ⟦\\lim_{x\\to 3^+} f(x) = +\\infty⟧)",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "titre": "Graphique"
+   }
+  ],
+  "progression_finale": "Étape 9 / 9"
+ },
+ "3(x*ln(x))": {
+  "au_depart": {
+   "progression": "Étape 1 / 7",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = 3x\\,\\ln(x)⟧ ⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "DérivéecalculOn pose ⟦u(x) = x⟧ et ⟦v(x) = \\ln(x)⟧ : règle du produit, ⟦(uv)' = u'v + uv'⟧.⟦\\left(\\ln(x)\\right)' = \\frac{1}{x}⟧ (règle de base).⟦u'(x) = 1⟧.⟦v'(x) = \\frac{1}{x}⟧.⟦\\left(x\\,\\ln(x)\\right)' = u'(x)v(x) + u(x)v'(x) = \\ln(x) + x\\,\\frac{1}{x} = \\ln(x) + 1⟧.⟦f'(x) = 3 \\cdot \\left(x\\,\\ln(x)\\right)' = 3\\left(\\ln(x) + 1\\right)⟧.⟦f'(x) = 3\\left(\\ln(x) + 1\\right)⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=- \\frac{3}{e}⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦e^{-1}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦3⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(\\ln(x) + 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         "⟦0⟧⟦0⟧"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦\\ln(x) + 1 = 0 \\iff \\ln(x) = -1⟧ (on soustrait 1).⟦\\ln(x) = -1 \\iff x = e^{-1}⟧⟦f'(x) = 3\\left(\\ln(x) + 1\\right) = 0 \\iff \\ln(x) + 1 = 0 \\iff x = e^{-1}⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e^{-1}⟧⟦+\\infty⟧⟦3⟧+++⟦\\left(\\ln(x) + 1\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦0⟧⟦0⟧⟦\\searrow⟧•⟦\\nearrow⟧⟦+\\infty⟧minimum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=- \\frac{3}{e}⟧",
+    "titre": "Signe de f' et variationstableau"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to 0^+⟧limite⟦\\begin{aligned}\\lim_{x\\to 0^{+}} x\\,\\ln(x) &= \\text{« }0^{+} \\cdot \\ln\\left(0^{+}\\right)\\text{ »} = \\text{« }0^{+} \\cdot \\left(-\\infty\\right)\\text{ »}\\text{ : forme indéterminée} \\\\ &= 0 \\qquad \\left(\\text{croissance comparée : } \\lim_{x\\to 0^{+}} x^{n}\\ln x = 0\\right)\\end{aligned}⟧⟦\\begin{aligned}\\lim_{x\\to 0^{+}} 3x\\,\\ln(x) = \\text{« }3 \\cdot 0^{+} \\cdot \\ln\\left(0^{+}\\right)\\text{ »} = \\text{« }3 \\cdot 0^{+} \\cdot \\left(-\\infty\\right)\\text{ »} = \\text{« }3 \\cdot 0^{-}\\text{ »} = 0\\end{aligned}⟧Limite finie : pas d'asymptote verticale, trou dans le graphique en ⟦(0\\,;\\,0)⟧.",
+    "titre": "⟦x \\to 0^+⟧limite"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} 3x\\,\\ln(x) = \\text{« }3 \\cdot +\\infty \\cdot \\ln\\left(+\\infty\\right)\\text{ »} = \\text{« }3 \\cdot +\\infty \\cdot +\\infty\\text{ »} = \\text{« }3 \\cdot +\\infty\\text{ »} = +\\infty\\end{aligned}⟧",
+    "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [
+     [
+      "bilan",
+      [
+       "Trou en ⟦(0\\,;\\,0)⟧ : f n'est pas définie en ⟦x = 0⟧, mais ⟦f(x) \\to 0⟧ (pas une asymptote verticale)"
+      ]
+     ]
+    ],
+    "tableaux": [],
+    "texte": "Bilan des asymptotesTrou en ⟦(0\\,;\\,0)⟧ : f n'est pas définie en ⟦x = 0⟧, mais ⟦f(x) \\to 0⟧ (pas une asymptote verticale)",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "titre": "Graphique"
+   }
+  ],
+  "progression_finale": "Étape 7 / 7"
+ },
+ "e^(1/x)": {
+  "au_depart": {
+   "progression": "Étape 1 / 9",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = e^{\\frac{1}{x}}⟧ ⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Dérivéecalcul⟦e^{\\frac{1}{x}}⟧ est de la forme ⟦e^{u}⟧ avec ⟦u(x) = \\frac{1}{x}⟧ (dérivée interne ⟦u'(x) = \\frac{-1}{x^{2}}⟧) ⟦\\Rightarrow⟧ ⟦\\left(e^{\\frac{1}{x}}\\right)' = u' e^{u} = \\frac{-e^{\\frac{1}{x}}}{x^{2}}⟧.⟦f'(x) = \\frac{-e^{\\frac{1}{x}}}{x^{2}}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦-1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦e^{\\frac{1}{x}}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x^{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         "⟦1⟧"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "vi",
+         "⟦0⟧⟦+\\infty⟧⟦+\\infty⟧⟦0⟧"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "",
+         "⟦1⟧"
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{-e^{\\frac{1}{x}}}{x^{2}}⟧ ne s'annule jamais ; valeur interdite : ⟦x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦-1⟧−−⟦e^{\\frac{1}{x}}⟧++⟦x^{2}⟧++⟦f'(x)⟧−−⟦f(x)⟧⟦1⟧⟦\\searrow⟧⟦0⟧⟦+\\infty⟧⟦+\\infty⟧⟦0⟧⟦\\searrow⟧⟦1⟧Aucun extremum local.",
+    "titre": "Signe de f' et variationstableau"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Tableaux de signestableauSigne de ⟦x⟧ :⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦x⟧−+",
+    "titre": "Tableaux de signestableau"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} e^{\\frac{1}{x}} = \\text{« }e^{\\dfrac{1}{-\\infty}}\\text{ »} = \\text{« }e^{0^{-}}\\text{ »} = 1\\end{aligned}⟧Asymptote horizontale : ⟦y = 1⟧.",
+    "titre": "⟦x \\to -\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} e^{\\frac{1}{x}} = \\text{« }e^{\\dfrac{1}{+\\infty}}\\text{ »} = \\text{« }e^{0^{+}}\\text{ »} = 1\\end{aligned}⟧Asymptote horizontale : ⟦y = 1⟧.",
+    "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to 0⟧limite⟦\\begin{aligned}\\lim_{x\\to 0^{-}} e^{\\frac{1}{x}} = \\text{« }e^{\\dfrac{1}{0^{-}}}\\text{ »} = \\text{« }e^{-\\infty}\\text{ »} = 0 \\qquad \\left(x < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}⟧⟦\\begin{aligned}\\lim_{x\\to 0^{+}} e^{\\frac{1}{x}} = \\text{« }e^{\\dfrac{1}{0^{+}}}\\text{ »} = \\text{« }e^{+\\infty}\\text{ »} = +\\infty \\qquad \\left(x > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}⟧Asymptote verticale : ⟦x = 0⟧ (du côté droit) ; à gauche, ⟦f(x) \\to 0⟧.",
+    "titre": "⟦x \\to 0⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [
+     [
+      "bilan",
+      [
+       "Asymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 1⟧",
+       "Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 1⟧",
+       "Asymptote verticale : ⟦x = 0⟧ (⟦\\lim_{x\\to 0^-} f(x) = 0⟧ ; ⟦\\lim_{x\\to 0^+} f(x) = +\\infty⟧)"
+      ]
+     ]
+    ],
+    "tableaux": [],
+    "texte": "Bilan des asymptotesAsymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 1⟧Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 1⟧Asymptote verticale : ⟦x = 0⟧ (⟦\\lim_{x\\to 0^-} f(x) = 0⟧ ; ⟦\\lim_{x\\to 0^+} f(x) = +\\infty⟧)",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "titre": "Graphique"
+   }
+  ],
+  "progression_finale": "Étape 9 / 9"
+ },
+ "e^(2x)": {
+  "au_depart": {
+   "progression": "Étape 1 / 7",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = e^{2x}⟧ ⟦ED = \\mathbb{R}⟧",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Dérivéecalcul⟦e^{2x}⟧ est de la forme ⟦e^{u}⟧ avec ⟦u(x) = 2x⟧ (dérivée interne ⟦u'(x) = 2⟧) ⟦\\Rightarrow⟧ ⟦\\left(e^{2x}\\right)' = u' e^{u} = 2e^{2x}⟧.⟦f'(x) = 2e^{2x}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦e^{2x}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 2e^{2x}⟧ ne s'annule jamais.⟦x⟧⟦-\\infty⟧⟦+\\infty⟧⟦2⟧+⟦e^{2x}⟧+⟦f'(x)⟧+⟦f(x)⟧⟦0⟧⟦\\nearrow⟧⟦+\\infty⟧Aucun extremum local.",
+    "titre": "Signe de f' et variationstableau"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} e^{2x} = \\text{« }e^{-\\infty}\\text{ »} = 0\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "titre": "⟦x \\to -\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} e^{2x} = \\text{« }e^{+\\infty}\\text{ »} = +\\infty\\end{aligned}⟧",
+    "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [
+     [
+      "bilan",
+      [
+       "Asymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 0⟧"
+      ]
+     ]
+    ],
+    "tableaux": [],
+    "texte": "Bilan des asymptotesAsymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 0⟧",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "titre": "Graphique"
+   }
+  ],
+  "progression_finale": "Étape 7 / 7"
+ },
+ "ln(x)/x": {
+  "au_depart": {
+   "progression": "Étape 1 / 8",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\frac{\\ln(x)}{x}⟧ ⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "DérivéecalculOn pose ⟦u(x) = \\ln(x)⟧ et ⟦v(x) = x⟧ : règle du quotient, ⟦\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}⟧.⟦\\left(\\ln(x)\\right)' = \\frac{1}{x}⟧ (règle de base).⟦u'(x) = \\frac{1}{x}⟧.⟦v'(x) = 1⟧.⟦f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{\\frac{1}{x}\\,x - \\ln(x)}{x^{2}} = \\frac{-\\left(\\ln(x) - 1\\right)}{x^{2}}⟧.⟦f'(x) = \\frac{-\\left(\\ln(x) - 1\\right)}{x^{2}}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "maximum local en ⟦x=e⟧ : ⟦f(e)=e^{-1}⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦e⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦-1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(\\ln(x) - 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x^{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         "⟦-\\infty⟧⟦-\\infty⟧"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦\\ln(x) - 1 = 0 \\iff \\ln(x) = 1⟧ (on ajoute 1).⟦\\ln(x) = 1 \\iff x = e⟧⟦f'(x) = \\frac{-\\left(\\ln(x) - 1\\right)}{x^{2}} = 0 \\iff \\ln(x) - 1 = 0 \\iff x = e⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e⟧⟦+\\infty⟧⟦-1⟧−−−⟦\\left(\\ln(x) - 1\\right)⟧−0+⟦x^{2}⟧+++⟦f'(x)⟧+0−⟦f(x)⟧⟦-\\infty⟧⟦-\\infty⟧⟦\\nearrow⟧•⟦\\searrow⟧⟦0⟧maximum local en ⟦x=e⟧ : ⟦f(e)=e^{-1}⟧",
+    "titre": "Signe de f' et variationstableau"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Tableaux de signestableauSigne de ⟦x⟧ :⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦x⟧−+",
+    "titre": "Tableaux de signestableau"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to 0^+⟧limite⟦\\begin{aligned}\\lim_{x\\to 0^{+}} \\frac{\\ln(x)}{x} = \\text{« }\\dfrac{\\ln\\left(0^{+}\\right)}{0^{+}}\\text{ »} = \\text{« }\\dfrac{-\\infty}{0^{+}}\\text{ »} = -\\infty \\qquad \\left(x > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}⟧Asymptote verticale : ⟦x = 0⟧.",
+    "titre": "⟦x \\to 0^+⟧limite"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln(x)}{x} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= 0 \\qquad \\left(\\text{croissance comparée : } \\lim_{x\\to +\\infty} \\dfrac{\\ln x}{x^{n}} = 0\\right)\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [
+     [
+      "bilan",
+      [
+       "Asymptote verticale : ⟦x = 0⟧ (⟦\\lim_{x\\to 0^+} f(x) = -\\infty⟧)",
+       "Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 0⟧"
+      ]
+     ]
+    ],
+    "tableaux": [],
+    "texte": "Bilan des asymptotesAsymptote verticale : ⟦x = 0⟧ (⟦\\lim_{x\\to 0^+} f(x) = -\\infty⟧)Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 0⟧",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "titre": "Graphique"
+   }
+  ],
+  "progression_finale": "Étape 8 / 8"
+ },
+ "sqrt(x^2-4)": {
+  "au_depart": {
+   "progression": "Étape 1 / 7",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\sqrt{x^{2} - 4}⟧ ⟦ED = \\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[⟧",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Dérivéecalcul⟦\\left(x^{2}\\right)' = 2x⟧ (règle de la puissance).⟦\\sqrt{x^{2} - 4}⟧ est de la forme ⟦\\sqrt{u}⟧ avec ⟦u(x) = x^{2} - 4⟧ (dérivée interne ⟦u'(x) = 2x⟧) ⟦\\Rightarrow⟧ ⟦\\left(\\sqrt{x^{2} - 4}\\right)' = \\frac{u'}{2\\sqrt{u}} = \\frac{x}{\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}}⟧.⟦f'(x) = \\frac{x}{\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=-2⟧ : ⟦f(-2)=0⟧",
+       "minimum local en ⟦x=2⟧ : ⟦f(2)=0⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "⟦0⟧"
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "pt",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableauED de f' : ⟦D_{f'} = \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[⟧, différent de l'ED de f, ⟦D_f = \\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[⟧.⟦f'(x) = \\frac{x}{\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}}⟧ ne s'annule jamais.⟦x⟧⟦-\\infty⟧⟦-2⟧⟦2⟧⟦+\\infty⟧⟦x⟧−−++⟦\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}⟧++⟦f'(x)⟧−+⟦f(x)⟧⟦+\\infty⟧⟦\\searrow⟧⟦0⟧⟦0⟧⟦\\nearrow⟧⟦+\\infty⟧minimum local en ⟦x=-2⟧ : ⟦f(-2)=0⟧minimum local en ⟦x=2⟧ : ⟦f(2)=0⟧",
+    "titre": "Signe de f' et variationstableau"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} \\sqrt{x^{2} - 4} = \\text{« }\\sqrt{+\\infty}\\text{ »} = +\\infty\\end{aligned}⟧⟦\\begin{aligned}a = \\lim_{x\\to -\\infty} \\frac{\\sqrt{x^{2} - 4}}{x} &= \\text{« }\\dfrac{\\sqrt{+\\infty}}{-\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{\\sqrt{x^{2}\\left(1 - \\frac{4}{x^{2}}\\right)}}{x} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{-x\\,\\sqrt{1 - \\frac{4}{x^{2}}}}{x} \\qquad \\left(x < 0 \\text{ : } \\sqrt{x^{2}} = |x| = -x\\right) \\\\ &= \\lim_{x\\to -\\infty} -\\sqrt{1 - \\frac{4}{x^{2}}} = -1\\end{aligned}⟧⟦\\begin{aligned}b = \\lim_{x\\to -\\infty} \\left(\\sqrt{x^{2} - 4} + x\\right) &= \\text{« }\\sqrt{+\\infty} - \\infty\\text{ »} = \\text{« }+\\infty - \\infty\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\frac{-4}{\\sqrt{x^{2} - 4} - x} = \\text{« }\\dfrac{-4}{+\\infty}\\text{ »} = 0 \\qquad \\left(\\text{conjuguée}\\right)\\end{aligned}⟧Asymptote oblique : ⟦y = -x⟧.⟦\\begin{aligned}f(x) - \\left(-x\\right) &= \\sqrt{x^{2} - 4} + x \\\\ &= \\dfrac{-4}{\\sqrt{x^{2} - 4} - x} \\qquad \\left(\\text{conjuguée}\\right)\\end{aligned}⟧⟦f(x) - \\left(-x\\right) < 0⟧ pour ⟦x < 0⟧ : la courbe est au-dessous de l'asymptote.",
+    "titre": "⟦x \\to -\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\sqrt{x^{2} - 4} = \\text{« }\\sqrt{+\\infty}\\text{ »} = +\\infty\\end{aligned}⟧⟦\\begin{aligned}a = \\lim_{x\\to +\\infty} \\frac{\\sqrt{x^{2} - 4}}{x} &= \\text{« }\\dfrac{\\sqrt{+\\infty}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{\\sqrt{x^{2}\\left(1 - \\frac{4}{x^{2}}\\right)}}{x} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x\\,\\sqrt{1 - \\frac{4}{x^{2}}}}{x} \\qquad \\left(x > 0 \\text{ : } \\sqrt{x^{2}} = |x| = x\\right) \\\\ &= \\lim_{x\\to +\\infty} \\sqrt{1 - \\frac{4}{x^{2}}} = 1\\end{aligned}⟧⟦\\begin{aligned}b = \\lim_{x\\to +\\infty} \\left(\\sqrt{x^{2} - 4} - x\\right) &= \\text{« }\\sqrt{+\\infty} - \\infty\\text{ »} = \\text{« }+\\infty - \\infty\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{-4}{\\sqrt{x^{2} - 4} + x} = \\text{« }\\dfrac{-4}{+\\infty}\\text{ »} = 0 \\qquad \\left(\\text{conjuguée}\\right)\\end{aligned}⟧Asymptote oblique : ⟦y = x⟧.⟦\\begin{aligned}f(x) - \\left(x\\right) &= \\sqrt{x^{2} - 4} - x \\\\ &= \\dfrac{-4}{\\sqrt{x^{2} - 4} + x} \\qquad \\left(\\text{conjuguée}\\right)\\end{aligned}⟧⟦f(x) - \\left(x\\right) < 0⟧ pour ⟦x > 0⟧ : la courbe est au-dessous de l'asymptote.",
+    "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [
+     [
+      "bilan",
+      [
+       "Asymptote oblique (⟦x \\to -\\infty⟧) : ⟦y = -x⟧",
+       "Asymptote oblique (⟦x \\to +\\infty⟧) : ⟦y = x⟧"
+      ]
+     ]
+    ],
+    "tableaux": [],
+    "texte": "Bilan des asymptotesAsymptote oblique (⟦x \\to -\\infty⟧) : ⟦y = -x⟧Asymptote oblique (⟦x \\to +\\infty⟧) : ⟦y = x⟧",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "titre": "Graphique"
+   }
+  ],
+  "progression_finale": "Étape 7 / 7"
+ },
+ "x*ln(x)": {
+  "au_depart": {
+   "progression": "Étape 1 / 7",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = x\\,\\ln(x)⟧ ⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "DérivéecalculOn pose ⟦u(x) = x⟧ et ⟦v(x) = \\ln(x)⟧ : règle du produit, ⟦(uv)' = u'v + uv'⟧.⟦\\left(\\ln(x)\\right)' = \\frac{1}{x}⟧ (règle de base).⟦u'(x) = 1⟧.⟦v'(x) = \\frac{1}{x}⟧.⟦f'(x) = u'(x)v(x) + u(x)v'(x) = \\ln(x) + x\\,\\frac{1}{x} = \\ln(x) + 1⟧.⟦f'(x) = \\ln(x) + 1⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=- \\frac{1}{e}⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦e^{-1}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(\\ln(x) + 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         "⟦0⟧⟦0⟧"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦\\ln(x) + 1 = 0 \\iff \\ln(x) = -1⟧ (on soustrait 1).⟦\\ln(x) = -1 \\iff x = e^{-1}⟧⟦f'(x) = \\ln(x) + 1 = 0 \\iff x = e^{-1}⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e^{-1}⟧⟦+\\infty⟧⟦\\left(\\ln(x) + 1\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦0⟧⟦0⟧⟦\\searrow⟧•⟦\\nearrow⟧⟦+\\infty⟧minimum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=- \\frac{1}{e}⟧",
+    "titre": "Signe de f' et variationstableau"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to 0^+⟧limite⟦\\begin{aligned}\\lim_{x\\to 0^{+}} x\\,\\ln(x) &= \\text{« }0^{+} \\cdot \\ln\\left(0^{+}\\right)\\text{ »} = \\text{« }0^{+} \\cdot \\left(-\\infty\\right)\\text{ »}\\text{ : forme indéterminée} \\\\ &= 0 \\qquad \\left(\\text{croissance comparée : } \\lim_{x\\to 0^{+}} x^{n}\\ln x = 0\\right)\\end{aligned}⟧Limite finie : pas d'asymptote verticale, trou dans le graphique en ⟦(0\\,;\\,0)⟧.",
+    "titre": "⟦x \\to 0^+⟧limite"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} x\\,\\ln(x) = \\text{« }+\\infty \\cdot \\ln\\left(+\\infty\\right)\\text{ »} = \\text{« }+\\infty \\cdot +\\infty\\text{ »} = +\\infty\\end{aligned}⟧",
+    "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [
+     [
+      "bilan",
+      [
+       "Trou en ⟦(0\\,;\\,0)⟧ : f n'est pas définie en ⟦x = 0⟧, mais ⟦f(x) \\to 0⟧ (pas une asymptote verticale)"
+      ]
+     ]
+    ],
+    "tableaux": [],
+    "texte": "Bilan des asymptotesTrou en ⟦(0\\,;\\,0)⟧ : f n'est pas définie en ⟦x = 0⟧, mais ⟦f(x) \\to 0⟧ (pas une asymptote verticale)",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "titre": "Graphique"
+   }
+  ],
+  "progression_finale": "Étape 7 / 7"
+ },
+ "x/(x^2+1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 7",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\frac{x}{x^{2} + 1}⟧ ⟦ED = \\mathbb{R}⟧",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "DérivéecalculOn pose ⟦u(x) = x⟧ et ⟦v(x) = x^{2} + 1⟧ : règle du quotient, ⟦\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}⟧.⟦\\left(x^{2}\\right)' = 2x⟧ (règle de la puissance).⟦u'(x) = 1⟧.⟦v'(x) = 2x⟧.⟦f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{x^{2} + 1 - x \\cdot 2x}{\\left(x^{2} + 1\\right)^{2}} = \\frac{-\\left(x + 1\\right)\\,\\left(x - 1\\right)}{\\left(x^{2} + 1\\right)^{2}}⟧.⟦f'(x) = \\frac{-\\left(x + 1\\right)\\,\\left(x - 1\\right)}{\\left(x^{2} + 1\\right)^{2}}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=-1⟧ : ⟦f(-1)=- \\frac{1}{2}⟧",
+       "maximum local en ⟦x=1⟧ : ⟦f(1)=\\frac{1}{2}⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦-1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x + 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x - 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x^{2} + 1\\right)^{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{-\\left(x + 1\\right)\\,\\left(x - 1\\right)}{\\left(x^{2} + 1\\right)^{2}} = 0 \\iff x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 1⟧.⟦x⟧⟦-\\infty⟧⟦-1⟧⟦1⟧⟦+\\infty⟧⟦-1⟧−−−−−⟦\\left(x + 1\\right)⟧−0+++⟦\\left(x - 1\\right)⟧−−−0+⟦\\left(x^{2} + 1\\right)^{2}⟧+++++⟦f'(x)⟧−0+0−⟦f(x)⟧⟦0⟧⟦\\searrow⟧•⟦\\nearrow⟧•⟦\\searrow⟧⟦0⟧minimum local en ⟦x=-1⟧ : ⟦f(-1)=- \\frac{1}{2}⟧maximum local en ⟦x=1⟧ : ⟦f(1)=\\frac{1}{2}⟧",
+    "titre": "Signe de f' et variationstableau"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{x}{x^{2} + 1} &= \\text{« }\\dfrac{-\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x}{x^{2}\\,\\left(1 + \\frac{1}{x^{2}}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{1}{x\\,\\left(1 + \\frac{1}{x^{2}}\\right)} = \\text{« }\\dfrac{1}{-\\infty \\cdot 1}\\text{ »} = 0\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "titre": "⟦x \\to -\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x}{x^{2} + 1} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x}{x^{2}\\,\\left(1 + \\frac{1}{x^{2}}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{1}{x\\,\\left(1 + \\frac{1}{x^{2}}\\right)} = \\text{« }\\dfrac{1}{+\\infty \\cdot 1}\\text{ »} = 0\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [
+     [
+      "bilan",
+      [
+       "Asymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 0⟧",
+       "Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 0⟧"
+      ]
+     ]
+    ],
+    "tableaux": [],
+    "texte": "Bilan des asymptotesAsymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 0⟧Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 0⟧",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "titre": "Graphique"
+   }
+  ],
+  "progression_finale": "Étape 7 / 7"
+ },
+ "x/sqrt(x^2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 8",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\frac{x}{\\sqrt{x^{2}}}⟧ ⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "DérivéecalculOn pose ⟦u(x) = x⟧ et ⟦v(x) = \\sqrt{x^{2}}⟧ : règle du quotient, ⟦\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}⟧.⟦\\left(x^{2}\\right)' = 2x⟧ (règle de la puissance).⟦\\sqrt{x^{2}}⟧ est de la forme ⟦\\sqrt{u}⟧ avec ⟦u(x) = x^{2}⟧ (dérivée interne ⟦u'(x) = 2x⟧) ⟦\\Rightarrow⟧ ⟦\\left(\\sqrt{x^{2}}\\right)' = \\frac{u'}{2\\sqrt{u}} = \\frac{x}{\\sqrt{x^{2}}}⟧.⟦u'(x) = 1⟧.⟦v'(x) = \\frac{x}{\\sqrt{x^{2}}}⟧.⟦f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{\\sqrt{x^{2}} - x\\,\\frac{x}{\\sqrt{x^{2}}}}{\\left(\\sqrt{x^{2}}\\right)^{2}} = 0⟧.⟦f'(x) = 0⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         "⟦-1⟧"
+        ],
+        [
+         "",
+         "⟦\\rightarrow⟧"
+        ],
+        [
+         "vi",
+         "⟦-1⟧⟦1⟧⟦1⟧⟦-1⟧"
+        ],
+        [
+         "",
+         "⟦\\rightarrow⟧"
+        ],
+        [
+         "",
+         "⟦1⟧"
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦0⟧ est nulle partout où elle est définie.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦0⟧++⟦f'(x)⟧00⟦f(x)⟧⟦-1⟧⟦\\rightarrow⟧⟦-1⟧⟦1⟧⟦1⟧⟦-1⟧⟦\\rightarrow⟧⟦1⟧f est constante sur chaque intervalle de son ensemble de définition : aucun extremum.",
+    "titre": "Signe de f' et variationstableau"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{x}{\\sqrt{x^{2}}} &= \\text{« }\\dfrac{-\\infty}{\\sqrt{+\\infty}}\\text{ »} = \\text{« }\\dfrac{-\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x}{-x} \\qquad \\left(x < 0 \\text{ : } \\sqrt{x^{2}} = |x| = -x\\right) \\\\ &= \\lim_{x\\to -\\infty} -1 = -1\\end{aligned}⟧Asymptote horizontale : ⟦y = -1⟧.",
+    "titre": "⟦x \\to -\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x}{\\sqrt{x^{2}}} &= \\text{« }\\dfrac{+\\infty}{\\sqrt{+\\infty}}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x}{x} \\qquad \\left(x > 0 \\text{ : } \\sqrt{x^{2}} = |x| = x\\right) \\\\ &= \\lim_{x\\to +\\infty} 1 = 1\\end{aligned}⟧Asymptote horizontale : ⟦y = 1⟧.",
+    "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to 0⟧limite⟦\\begin{aligned}\\lim_{x\\to 0^{-}} \\frac{x}{\\sqrt{x^{2}}} &= \\text{« }\\dfrac{0}{\\sqrt{0}}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 0^{-}} \\frac{x}{|x|} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to 0^{-}} \\frac{x}{-x} \\qquad \\left(x < 0 \\text{ : } |x| = -x\\right) \\\\ &= \\lim_{x\\to 0^{-}} -1 = -1 \\qquad \\left(\\text{on simplifie}\\right)\\end{aligned}⟧⟦\\begin{aligned}\\lim_{x\\to 0^{+}} \\frac{x}{\\sqrt{x^{2}}} &= \\text{« }\\dfrac{0}{\\sqrt{0}}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 0^{+}} \\frac{x}{|x|} \\qquad \\left(\\sqrt{x^{2}} = |x|\\right) \\\\ &= \\lim_{x\\to 0^{+}} \\frac{x}{x} \\qquad \\left(x > 0 \\text{ : } |x| = x\\right) \\\\ &= \\lim_{x\\to 0^{+}} 1 = 1 \\qquad \\left(\\text{on simplifie}\\right)\\end{aligned}⟧Limites à gauche et à droite différentes : f n'a pas de limite en ⟦x=0⟧ ; pas d'asymptote verticale.",
+    "titre": "⟦x \\to 0⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [
+     [
+      "bilan",
+      [
+       "Asymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = -1⟧",
+       "Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 1⟧",
+       "Pas de limite en ⟦x = 0⟧ (pas d'asymptote verticale) : ⟦\\lim_{x\\to 0^-} f(x) = -1⟧ ; ⟦\\lim_{x\\to 0^+} f(x) = 1⟧"
+      ]
+     ]
+    ],
+    "tableaux": [],
+    "texte": "Bilan des asymptotesAsymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = -1⟧Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 1⟧Pas de limite en ⟦x = 0⟧ (pas d'asymptote verticale) : ⟦\\lim_{x\\to 0^-} f(x) = -1⟧ ; ⟦\\lim_{x\\to 0^+} f(x) = 1⟧",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "titre": "Graphique"
+   }
+  ],
+  "progression_finale": "Étape 8 / 8"
+ },
+ "x^(2/3)": {
+  "au_depart": {
+   "progression": "Étape 1 / 7",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = x^{\\frac{2}{3}} = \\sqrt[3]{x^{2}}⟧ ⟦ED = \\mathbb{R}⟧",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Dérivéecalcul⟦\\left(\\sqrt[3]{x^{2}}\\right)' = \\frac{2}{3\\sqrt[3]{x}}⟧ (règle de la puissance).⟦f'(x) = \\frac{2}{3\\sqrt[3]{x}}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=0⟧ : ⟦f(0)=0⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\frac{2}{3}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\sqrt[3]{x}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableauED de f' : ⟦D_{f'} = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧, différent de l'ED de f, ⟦D_f = \\mathbb{R}⟧.⟦f'(x) = \\frac{2}{3\\sqrt[3]{x}}⟧ ne s'annule jamais ; valeur interdite : ⟦x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦\\frac{2}{3}⟧+++⟦\\sqrt[3]{x}⟧−+⟦f'(x)⟧−+⟦f(x)⟧⟦+\\infty⟧⟦\\searrow⟧⟦0⟧⟦\\nearrow⟧⟦+\\infty⟧minimum local en ⟦x=0⟧ : ⟦f(0)=0⟧",
+    "titre": "Signe de f' et variationstableau"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to -\\infty⟧limiteLe calcul détaillé de cette limite n'est pas rédigé ici ; résultat : ⟦\\displaystyle\\lim_{x\\to -\\infty} f(x) = +\\infty⟧.",
+    "titre": "⟦x \\to -\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\sqrt[3]{x^{2}} = \\text{« }\\left(+\\infty\\right)^{\\frac{2}{3}}\\text{ »} = +\\infty\\end{aligned}⟧",
+    "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Bilan des asymptotesAucune asymptote détectée.",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "titre": "Graphique"
+   }
+  ],
+  "progression_finale": "Étape 7 / 7"
+ },
+ "x^2*e^(-x)": {
+  "au_depart": {
+   "progression": "Étape 1 / 7",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = x^{2}\\,e^{-x}⟧ ⟦ED = \\mathbb{R}⟧",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "DérivéecalculOn pose ⟦u(x) = x^{2}⟧ et ⟦v(x) = e^{-x}⟧ : règle du produit, ⟦(uv)' = u'v + uv'⟧.⟦\\left(x^{2}\\right)' = 2x⟧ (règle de la puissance).⟦e^{-x}⟧ est de la forme ⟦e^{u}⟧ avec ⟦u(x) = -x⟧ (dérivée interne ⟦u'(x) = -1⟧) ⟦\\Rightarrow⟧ ⟦\\left(e^{-x}\\right)' = u' e^{u} = -e^{-x}⟧.⟦u'(x) = 2x⟧.⟦v'(x) = -e^{-x}⟧.⟦f'(x) = u'(x)v(x) + u(x)v'(x) = 2x\\,e^{-x} + x^{2}\\,\\left(-e^{-x}\\right) = -x\\,\\left(x - 2\\right)\\,e^{-x}⟧.⟦f'(x) = -x\\,\\left(x - 2\\right)\\,e^{-x}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=0⟧ : ⟦f(0)=0⟧",
+       "maximum local en ⟦x=2⟧ : ⟦f(2)=\\frac{4}{e^{2}}⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦-1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x - 2\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦e^{-x}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = -x\\,\\left(x - 2\\right)\\,e^{-x} = 0 \\iff x = 0 \\text{ ou } x - 2 = 0 \\iff x = 0 \\text{ ou } x = 2⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦2⟧⟦+\\infty⟧⟦-1⟧−−−−−⟦x⟧−0+++⟦\\left(x - 2\\right)⟧−−−0+⟦e^{-x}⟧+++++⟦f'(x)⟧−0+0−⟦f(x)⟧⟦+\\infty⟧⟦\\searrow⟧•⟦\\nearrow⟧•⟦\\searrow⟧⟦0⟧minimum local en ⟦x=0⟧ : ⟦f(0)=0⟧maximum local en ⟦x=2⟧ : ⟦f(2)=\\frac{4}{e^{2}}⟧",
+    "titre": "Signe de f' et variationstableau"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} x^{2}\\,e^{-x} = \\text{« }+\\infty \\cdot e^{+\\infty}\\text{ »} = \\text{« }+\\infty \\cdot +\\infty\\text{ »} = +\\infty\\end{aligned}⟧",
+    "titre": "⟦x \\to -\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} x^{2}\\,e^{-x} &= \\text{« }+\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }+\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= 0 \\qquad \\left(\\text{croissance comparée : } \\lim_{x\\to +\\infty} x^{n}e^{-ax} = 0\\right)\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [
+     [
+      "bilan",
+      [
+       "Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 0⟧"
+      ]
+     ]
+    ],
+    "tableaux": [],
+    "texte": "Bilan des asymptotesAsymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 0⟧",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "titre": "Graphique"
+   }
+  ],
+  "progression_finale": "Étape 7 / 7"
+ },
+ "x^2-4x+3": {
+  "au_depart": {
+   "progression": "Étape 1 / 7",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = x^{2} - 4x + 3⟧ ⟦ED = \\mathbb{R}⟧",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "DérivéecalculLa dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.⟦\\left(x^{2}\\right)' = 2x⟧ (règle de la puissance).⟦f'(x) = 2\\left(x - 2\\right)⟧.⟦f'(x) = 2\\left(x - 2\\right)⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=2⟧ : ⟦f(2)=-1⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x - 2\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 2\\left(x - 2\\right) = 0 \\iff x - 2 = 0 \\iff x = 2⟧.⟦x⟧⟦-\\infty⟧⟦2⟧⟦+\\infty⟧⟦2⟧+++⟦\\left(x - 2\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦+\\infty⟧⟦\\searrow⟧•⟦\\nearrow⟧⟦+\\infty⟧minimum local en ⟦x=2⟧ : ⟦f(2)=-1⟧",
+    "titre": "Signe de f' et variationstableau"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} \\left(x^{2} - 4x + 3\\right) = \\text{« }+\\infty + \\infty\\text{ »} = +\\infty\\end{aligned}⟧Pas d'asymptote oblique : branche parabolique.",
+    "titre": "⟦x \\to -\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\left(x^{2} - 4x + 3\\right) &= \\text{« }+\\infty - \\infty\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} x^{2}\\,\\left(1 - \\frac{4}{x} + \\frac{3}{x^{2}}\\right) = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty \\qquad \\left(\\text{mise en évidence}\\right)\\end{aligned}⟧Pas d'asymptote oblique : branche parabolique.",
+    "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [
+     [
+      "bilan",
+      [
+       "Pas d'asymptote (⟦x \\to -\\infty⟧) — branche parabolique.",
+       "Pas d'asymptote (⟦x \\to +\\infty⟧) — branche parabolique."
+      ]
+     ]
+    ],
+    "tableaux": [],
+    "texte": "Bilan des asymptotesPas d'asymptote (⟦x \\to -\\infty⟧) — branche parabolique.Pas d'asymptote (⟦x \\to +\\infty⟧) — branche parabolique.",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "titre": "Graphique"
+   }
+  ],
+  "progression_finale": "Étape 7 / 7"
+ },
+ "x^3-3x": {
+  "au_depart": {
+   "progression": "Étape 1 / 7",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = x^{3} - 3x⟧ ⟦ED = \\mathbb{R}⟧",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "DérivéecalculLa dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.⟦\\left(x^{3}\\right)' = 3x^{2}⟧ (règle de la puissance).⟦f'(x) = 3\\left(x + 1\\right)\\,\\left(x - 1\\right)⟧.⟦f'(x) = 3\\left(x + 1\\right)\\,\\left(x - 1\\right)⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "maximum local en ⟦x=-1⟧ : ⟦f(-1)=2⟧",
+       "minimum local en ⟦x=1⟧ : ⟦f(1)=-2⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦3⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x + 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x - 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 3\\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 1⟧.⟦x⟧⟦-\\infty⟧⟦-1⟧⟦1⟧⟦+\\infty⟧⟦3⟧+++++⟦\\left(x + 1\\right)⟧−0+++⟦\\left(x - 1\\right)⟧−−−0+⟦f'(x)⟧+0−0+⟦f(x)⟧⟦-\\infty⟧⟦\\nearrow⟧•⟦\\searrow⟧•⟦\\nearrow⟧⟦+\\infty⟧maximum local en ⟦x=-1⟧ : ⟦f(-1)=2⟧minimum local en ⟦x=1⟧ : ⟦f(1)=-2⟧",
+    "titre": "Signe de f' et variationstableau"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} \\left(x^{3} - 3x\\right) &= \\text{« }-\\infty + \\infty\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} x^{3}\\,\\left(1 - \\frac{3}{x^{2}}\\right) = \\text{« }-\\infty \\cdot 1\\text{ »} = -\\infty \\qquad \\left(\\text{mise en évidence}\\right)\\end{aligned}⟧Pas d'asymptote oblique : branche parabolique.",
+    "titre": "⟦x \\to -\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\left(x^{3} - 3x\\right) &= \\text{« }+\\infty - \\infty\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} x^{3}\\,\\left(1 - \\frac{3}{x^{2}}\\right) = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty \\qquad \\left(\\text{mise en évidence}\\right)\\end{aligned}⟧Pas d'asymptote oblique : branche parabolique.",
+    "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [
+     [
+      "bilan",
+      [
+       "Pas d'asymptote (⟦x \\to -\\infty⟧) — branche parabolique.",
+       "Pas d'asymptote (⟦x \\to +\\infty⟧) — branche parabolique."
+      ]
+     ]
+    ],
+    "tableaux": [],
+    "texte": "Bilan des asymptotesPas d'asymptote (⟦x \\to -\\infty⟧) — branche parabolique.Pas d'asymptote (⟦x \\to +\\infty⟧) — branche parabolique.",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "titre": "Graphique"
+   }
+  ],
+  "progression_finale": "Étape 7 / 7"
+ },
+ "x^4-2x^2": {
+  "au_depart": {
+   "progression": "Étape 1 / 7",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = x^{4} - 2x^{2}⟧ ⟦ED = \\mathbb{R}⟧",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "DérivéecalculLa dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.⟦\\left(x^{4}\\right)' = 4x^{3}⟧ (règle de la puissance).⟦\\left(x^{2}\\right)' = 2x⟧ (règle de la puissance).⟦\\left(2x^{2}\\right)' = 2 \\cdot \\left(x^{2}\\right)' = 4x⟧.⟦f'(x) = 4x\\,\\left(x + 1\\right)\\,\\left(x - 1\\right)⟧.⟦f'(x) = 4x\\,\\left(x + 1\\right)\\,\\left(x - 1\\right)⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=-1⟧ : ⟦f(-1)=-1⟧",
+       "maximum local en ⟦x=0⟧ : ⟦f(0)=0⟧",
+       "minimum local en ⟦x=1⟧ : ⟦f(1)=-1⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦4⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x + 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x - 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 4x\\,\\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x = 0 \\text{ ou } x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 0 \\text{ ou } x = 1⟧.⟦x⟧⟦-\\infty⟧⟦-1⟧⟦0⟧⟦1⟧⟦+\\infty⟧⟦4⟧+++++++⟦x⟧−−−0+++⟦\\left(x + 1\\right)⟧−0+++++⟦\\left(x - 1\\right)⟧−−−−−0+⟦f'(x)⟧−0+0−0+⟦f(x)⟧⟦+\\infty⟧⟦\\searrow⟧•⟦\\nearrow⟧•⟦\\searrow⟧•⟦\\nearrow⟧⟦+\\infty⟧minimum local en ⟦x=-1⟧ : ⟦f(-1)=-1⟧maximum local en ⟦x=0⟧ : ⟦f(0)=0⟧minimum local en ⟦x=1⟧ : ⟦f(1)=-1⟧",
+    "titre": "Signe de f' et variationstableau"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} \\left(x^{4} - 2x^{2}\\right) &= \\text{« }+\\infty - \\infty\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} x^{4}\\,\\left(1 - \\frac{2}{x^{2}}\\right) = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty \\qquad \\left(\\text{mise en évidence}\\right)\\end{aligned}⟧Pas d'asymptote oblique : branche parabolique.",
+    "titre": "⟦x \\to -\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\left(x^{4} - 2x^{2}\\right) &= \\text{« }+\\infty - \\infty\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} x^{4}\\,\\left(1 - \\frac{2}{x^{2}}\\right) = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty \\qquad \\left(\\text{mise en évidence}\\right)\\end{aligned}⟧Pas d'asymptote oblique : branche parabolique.",
+    "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [
+     [
+      "bilan",
+      [
+       "Pas d'asymptote (⟦x \\to -\\infty⟧) — branche parabolique.",
+       "Pas d'asymptote (⟦x \\to +\\infty⟧) — branche parabolique."
+      ]
+     ]
+    ],
+    "tableaux": [],
+    "texte": "Bilan des asymptotesPas d'asymptote (⟦x \\to -\\infty⟧) — branche parabolique.Pas d'asymptote (⟦x \\to +\\infty⟧) — branche parabolique.",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "titre": "Graphique"
+   }
+  ],
+  "progression_finale": "Étape 7 / 7"
+ }
+}

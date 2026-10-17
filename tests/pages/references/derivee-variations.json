@@ -1,0 +1,6575 @@
+{
+ "(x+1)/(x-1)/2": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\frac{\\frac{x + 1}{x - 1}}{2}⟧ ⟦ED = \\mathbb{R} \\setminus \\left\\{1\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "DérivéecalculOn pose ⟦u(x) = x + 1⟧ et ⟦v(x) = x - 1⟧ : règle du quotient, ⟦\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}⟧.⟦u'(x) = 1⟧.⟦v'(x) = 1⟧.⟦\\left(\\frac{x + 1}{x - 1}\\right)' = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{x - 1 - \\left(x + 1\\right)}{\\left(x - 1\\right)^{2}} = \\frac{-2}{\\left(x - 1\\right)^{2}}⟧.⟦f'(x) = \\dfrac{\\left(\\frac{x + 1}{x - 1}\\right)'}{2} = \\frac{-1}{\\left(x - 1\\right)^{2}}⟧.⟦f'(x) = \\frac{-1}{\\left(x - 1\\right)^{2}}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦-1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x - 1\\right)^{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{-1}{\\left(x - 1\\right)^{2}}⟧ ne s'annule jamais ; valeur interdite : ⟦x = 1⟧.⟦x⟧⟦-\\infty⟧⟦1⟧⟦+\\infty⟧⟦-1⟧−−⟦\\left(x - 1\\right)^{2}⟧++⟦f'(x)⟧−−⟦f(x)⟧⟦\\searrow⟧⟦\\searrow⟧Aucun extremum local : f est strictement monotone (ou n'a que des points où f' s'annule sans changer de signe).",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "(x-1)^3": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\left(x - 1\\right)^{3}⟧ ⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Dérivéecalcul⟦\\left(x - 1\\right)^{3}⟧ est de la forme ⟦u^{3}⟧ avec ⟦u(x) = x - 1⟧ (dérivée interne ⟦u'(x) = 1⟧) ⟦\\Rightarrow⟧ ⟦\\left(\\left(x - 1\\right)^{3}\\right)' = 3\\,u^{2}u' = 3\\left(x - 1\\right)^{2}⟧.⟦f'(x) = 3\\left(x - 1\\right)^{2}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦3⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x - 1\\right)^{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 3\\left(x - 1\\right)^{2} = 0 \\iff x - 1 = 0 \\iff x = 1⟧.⟦x⟧⟦-\\infty⟧⟦1⟧⟦+\\infty⟧⟦3⟧+++⟦\\left(x - 1\\right)^{2}⟧+0+⟦f'(x)⟧+0+⟦f(x)⟧⟦\\nearrow⟧⟦\\nearrow⟧Aucun extremum local : f est strictement monotone (ou n'a que des points où f' s'annule sans changer de signe).",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "(x^2+1)^(1/2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\left(x^{2} + 1\\right)^{\\frac{1}{2}} = \\sqrt{x^{2} + 1}⟧ ⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Dérivéecalcul⟦\\left(x^{2}\\right)' = 2x⟧ (règle de la puissance).⟦\\sqrt{x^{2} + 1}⟧ est de la forme ⟦u^{\\frac{1}{2}}⟧ avec ⟦u(x) = x^{2} + 1⟧ (dérivée interne ⟦u'(x) = 2x⟧) ⟦\\Rightarrow⟧ ⟦\\left(\\sqrt{x^{2} + 1}\\right)' = \\frac{1}{2}\\,u^{-\\frac{1}{2}}u' = \\frac{x}{\\sqrt{x^{2} + 1}}⟧.⟦f'(x) = \\frac{x}{\\sqrt{x^{2} + 1}}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=0⟧ : ⟦f(0)=1⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\sqrt{x^{2} + 1}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{x}{\\sqrt{x^{2} + 1}} = 0 \\iff x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦x⟧−0+⟦\\sqrt{x^{2} + 1}⟧+++⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧•⟦\\nearrow⟧minimum local en ⟦x=0⟧ : ⟦f(0)=1⟧",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "(x^2-1)/(x-3)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\frac{x^{2} - 1}{x - 3}⟧ ⟦ED = \\mathbb{R} \\setminus \\left\\{3\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "DérivéecalculOn pose ⟦u(x) = x^{2} - 1⟧ et ⟦v(x) = x - 3⟧ : règle du quotient, ⟦\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}⟧.⟦\\left(x^{2}\\right)' = 2x⟧ (règle de la puissance).⟦u'(x) = 2x⟧.⟦v'(x) = 1⟧.⟦f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{2x\\,\\left(x - 3\\right) - \\left(x^{2} - 1\\right)}{\\left(x - 3\\right)^{2}} = \\frac{x^{2} - 6x + 1}{\\left(x - 3\\right)^{2}}⟧.⟦f'(x) = \\frac{x^{2} - 6x + 1}{\\left(x - 3\\right)^{2}}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "maximum local en ⟦x=3 - 2\\sqrt{2}⟧ : ⟦f(3 - 2\\sqrt{2})=6 - 4 \\sqrt{2}⟧",
+       "minimum local en ⟦x=3 + 2\\sqrt{2}⟧ : ⟦f(3 + 2\\sqrt{2})=4 \\sqrt{2} + 6⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦3 - 2\\sqrt{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦3⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦3 + 2\\sqrt{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x^{2} - 6x + 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x - 3\\right)^{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{x^{2} - 6x + 1}{\\left(x - 3\\right)^{2}} = 0 \\iff x^{2} - 6x + 1 = 0 \\iff x = 3 - 2\\sqrt{2} \\text{ ou } x = 3 + 2\\sqrt{2}⟧ ; valeur interdite : ⟦x = 3⟧.⟦x⟧⟦-\\infty⟧⟦3 - 2\\sqrt{2}⟧⟦3⟧⟦3 + 2\\sqrt{2}⟧⟦+\\infty⟧⟦\\left(x^{2} - 6x + 1\\right)⟧+0−−0+⟦\\left(x - 3\\right)^{2}⟧++++++⟦f'(x)⟧+0−−0+⟦f(x)⟧⟦\\nearrow⟧•⟦\\searrow⟧⟦\\searrow⟧•⟦\\nearrow⟧maximum local en ⟦x=3 - 2\\sqrt{2}⟧ : ⟦f(3 - 2\\sqrt{2})=6 - 4 \\sqrt{2}⟧minimum local en ⟦x=3 + 2\\sqrt{2}⟧ : ⟦f(3 + 2\\sqrt{2})=4 \\sqrt{2} + 6⟧",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "-(x*ln(x))": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = -x\\,\\ln(x)⟧ ⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "DérivéecalculOn pose ⟦u(x) = x⟧ et ⟦v(x) = \\ln(x)⟧ : règle du produit, ⟦(uv)' = u'v + uv'⟧.⟦\\left(\\ln(x)\\right)' = \\frac{1}{x}⟧ (règle de base).⟦u'(x) = 1⟧.⟦v'(x) = \\frac{1}{x}⟧.⟦\\left(x\\,\\ln(x)\\right)' = u'(x)v(x) + u(x)v'(x) = \\ln(x) + x\\,\\frac{1}{x} = \\ln(x) + 1⟧.⟦f'(x) = -\\left(x\\,\\ln(x)\\right)' = -\\ln(x) - 1⟧.⟦f'(x) = -\\ln(x) - 1⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "maximum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=e^{-1}⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦e^{-1}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(-\\ln(x) - 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦-\\ln(x) - 1 = 0 \\iff \\ln(x) = -1⟧ (on isole ⟦\\ln(x)⟧ du côté où son coefficient est positif).⟦\\ln(x) = -1 \\iff x = e^{-1}⟧⟦f'(x) = -\\ln(x) - 1 = 0 \\iff x = e^{-1}⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e^{-1}⟧⟦+\\infty⟧⟦\\left(-\\ln(x) - 1\\right)⟧+0−⟦f'(x)⟧+0−⟦f(x)⟧⟦\\nearrow⟧•⟦\\searrow⟧maximum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=e^{-1}⟧",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "-x^2": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = -x^{2}⟧ ⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Dérivéecalcul⟦\\left(x^{2}\\right)' = 2x⟧ (règle de la puissance).⟦f'(x) = -\\left(x^{2}\\right)' = -2x⟧.⟦f'(x) = -2x⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "maximum local en ⟦x=0⟧ : ⟦f(0)=0⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦-2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = -2x = 0 \\iff x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦-2⟧−−−⟦x⟧−0+⟦f'(x)⟧+0−⟦f(x)⟧⟦\\nearrow⟧•⟦\\searrow⟧maximum local en ⟦x=0⟧ : ⟦f(0)=0⟧",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "2(x^2+ln(x))": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = 2\\left(x^{2} + \\ln(x)\\right)⟧ ⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "DérivéecalculLa dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.⟦\\left(x^{2}\\right)' = 2x⟧ (règle de la puissance).⟦\\left(\\ln(x)\\right)' = \\frac{1}{x}⟧ (règle de base).⟦\\left(x^{2} + \\ln(x)\\right)' = \\frac{2x^{2} + 1}{x}⟧.⟦f'(x) = 2 \\cdot \\left(x^{2} + \\ln(x)\\right)' = \\frac{2\\left(2x^{2} + 1\\right)}{x}⟧.⟦f'(x) = \\frac{2\\left(2x^{2} + 1\\right)}{x}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(2x^{2} + 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{2\\left(2x^{2} + 1\\right)}{x}⟧ ne s'annule jamais.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦2⟧+⟦\\left(2x^{2} + 1\\right)⟧+⟦x⟧+⟦f'(x)⟧+⟦f(x)⟧⟦\\nearrow⟧Aucun extremum local : f est strictement monotone (ou n'a que des points où f' s'annule sans changer de signe).",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "3(x*ln(x))": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = 3x\\,\\ln(x)⟧ ⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "DérivéecalculOn pose ⟦u(x) = x⟧ et ⟦v(x) = \\ln(x)⟧ : règle du produit, ⟦(uv)' = u'v + uv'⟧.⟦\\left(\\ln(x)\\right)' = \\frac{1}{x}⟧ (règle de base).⟦u'(x) = 1⟧.⟦v'(x) = \\frac{1}{x}⟧.⟦\\left(x\\,\\ln(x)\\right)' = u'(x)v(x) + u(x)v'(x) = \\ln(x) + x\\,\\frac{1}{x} = \\ln(x) + 1⟧.⟦f'(x) = 3 \\cdot \\left(x\\,\\ln(x)\\right)' = 3\\left(\\ln(x) + 1\\right)⟧.⟦f'(x) = 3\\left(\\ln(x) + 1\\right)⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=- \\frac{3}{e}⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦e^{-1}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦3⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(\\ln(x) + 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦\\ln(x) + 1 = 0 \\iff \\ln(x) = -1⟧ (on soustrait 1).⟦\\ln(x) = -1 \\iff x = e^{-1}⟧⟦f'(x) = 3\\left(\\ln(x) + 1\\right) = 0 \\iff \\ln(x) + 1 = 0 \\iff x = e^{-1}⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e^{-1}⟧⟦+\\infty⟧⟦3⟧+++⟦\\left(\\ln(x) + 1\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧•⟦\\nearrow⟧minimum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=- \\frac{3}{e}⟧",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "3x^2-4x": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = 3x^{2} - 4x⟧ ⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "DérivéecalculLa dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.⟦\\left(x^{2}\\right)' = 2x⟧ (règle de la puissance).⟦\\left(3x^{2}\\right)' = 3 \\cdot \\left(x^{2}\\right)' = 6x⟧.⟦f'(x) = 2\\left(3x - 2\\right)⟧.⟦f'(x) = 2\\left(3x - 2\\right)⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=\\frac{2}{3}⟧ : ⟦f(\\frac{2}{3})=- \\frac{4}{3}⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\frac{2}{3}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(3x - 2\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 2\\left(3x - 2\\right) = 0 \\iff 3x - 2 = 0 \\iff x = \\frac{2}{3}⟧.⟦x⟧⟦-\\infty⟧⟦\\frac{2}{3}⟧⟦+\\infty⟧⟦2⟧+++⟦\\left(3x - 2\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧•⟦\\nearrow⟧minimum local en ⟦x=\\frac{2}{3}⟧ : ⟦f(\\frac{2}{3})=- \\frac{4}{3}⟧",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "e^(2x)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = e^{2x}⟧ ⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Dérivéecalcul⟦e^{2x}⟧ est de la forme ⟦e^{u}⟧ avec ⟦u(x) = 2x⟧ (dérivée interne ⟦u'(x) = 2⟧) ⟦\\Rightarrow⟧ ⟦\\left(e^{2x}\\right)' = u' e^{u} = 2e^{2x}⟧.⟦f'(x) = 2e^{2x}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦e^{2x}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 2e^{2x}⟧ ne s'annule jamais.⟦x⟧⟦-\\infty⟧⟦+\\infty⟧⟦2⟧+⟦e^{2x}⟧+⟦f'(x)⟧+⟦f(x)⟧⟦\\nearrow⟧Aucun extremum local : f est strictement monotone (ou n'a que des points où f' s'annule sans changer de signe).",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "e^(x^2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = e^{x^{2}}⟧ ⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Dérivéecalcul⟦\\left(x^{2}\\right)' = 2x⟧ (règle de la puissance).⟦e^{x^{2}}⟧ est de la forme ⟦e^{u}⟧ avec ⟦u(x) = x^{2}⟧ (dérivée interne ⟦u'(x) = 2x⟧) ⟦\\Rightarrow⟧ ⟦\\left(e^{x^{2}}\\right)' = u' e^{u} = 2x\\,e^{x^{2}}⟧.⟦f'(x) = 2x\\,e^{x^{2}}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=0⟧ : ⟦f(0)=1⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦e^{x^{2}}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 2x\\,e^{x^{2}} = 0 \\iff x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦2⟧+++⟦x⟧−0+⟦e^{x^{2}}⟧+++⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧•⟦\\nearrow⟧minimum local en ⟦x=0⟧ : ⟦f(0)=1⟧",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "ln(x)/x": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\frac{\\ln(x)}{x}⟧ ⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "DérivéecalculOn pose ⟦u(x) = \\ln(x)⟧ et ⟦v(x) = x⟧ : règle du quotient, ⟦\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}⟧.⟦\\left(\\ln(x)\\right)' = \\frac{1}{x}⟧ (règle de base).⟦u'(x) = \\frac{1}{x}⟧.⟦v'(x) = 1⟧.⟦f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{\\frac{1}{x}\\,x - \\ln(x)}{x^{2}} = \\frac{-\\left(\\ln(x) - 1\\right)}{x^{2}}⟧.⟦f'(x) = \\frac{-\\left(\\ln(x) - 1\\right)}{x^{2}}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "maximum local en ⟦x=e⟧ : ⟦f(e)=e^{-1}⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦e⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦-1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(\\ln(x) - 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x^{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦\\ln(x) - 1 = 0 \\iff \\ln(x) = 1⟧ (on ajoute 1).⟦\\ln(x) = 1 \\iff x = e⟧⟦f'(x) = \\frac{-\\left(\\ln(x) - 1\\right)}{x^{2}} = 0 \\iff \\ln(x) - 1 = 0 \\iff x = e⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e⟧⟦+\\infty⟧⟦-1⟧−−−⟦\\left(\\ln(x) - 1\\right)⟧−0+⟦x^{2}⟧+++⟦f'(x)⟧+0−⟦f(x)⟧⟦\\nearrow⟧•⟦\\searrow⟧maximum local en ⟦x=e⟧ : ⟦f(e)=e^{-1}⟧",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "ln(x^2-4)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\ln\\left(x^{2} - 4\\right)⟧ ⟦ED = \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Dérivéecalcul⟦\\left(x^{2}\\right)' = 2x⟧ (règle de la puissance).⟦\\ln\\left(x^{2} - 4\\right)⟧ est de la forme ⟦\\ln(u)⟧ avec ⟦u(x) = x^{2} - 4⟧ (dérivée interne ⟦u'(x) = 2x⟧) ⟦\\Rightarrow⟧ ⟦\\left(\\ln\\left(x^{2} - 4\\right)\\right)' = \\frac{u'}{u} = \\frac{2x}{\\left(x - 2\\right)\\,\\left(x + 2\\right)}⟧.⟦f'(x) = \\frac{2x}{\\left(x - 2\\right)\\,\\left(x + 2\\right)}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x - 2\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x + 2\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{2x}{\\left(x - 2\\right)\\,\\left(x + 2\\right)} = 0 \\iff x = 0⟧.⟦x⟧⟦-\\infty⟧⟦-2⟧⟦2⟧⟦+\\infty⟧⟦2⟧++⟦x⟧−+⟦\\left(x - 2\\right)⟧−+⟦\\left(x + 2\\right)⟧−+⟦f'(x)⟧−+⟦f(x)⟧⟦\\searrow⟧⟦\\nearrow⟧Aucun extremum local : f est strictement monotone (ou n'a que des points où f' s'annule sans changer de signe).",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "sqrt(x^2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\sqrt{x^{2}}⟧ ⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Dérivéecalcul⟦\\left(x^{2}\\right)' = 2x⟧ (règle de la puissance).⟦\\sqrt{x^{2}}⟧ est de la forme ⟦\\sqrt{u}⟧ avec ⟦u(x) = x^{2}⟧ (dérivée interne ⟦u'(x) = 2x⟧) ⟦\\Rightarrow⟧ ⟦\\left(\\sqrt{x^{2}}\\right)' = \\frac{u'}{2\\sqrt{u}} = \\frac{x}{\\sqrt{x^{2}}}⟧.⟦f'(x) = \\frac{x}{\\sqrt{x^{2}}}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=0⟧ : ⟦f(0)=0⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\sqrt{x^{2}}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableauED de f' : ⟦D_{f'} = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧, différent de l'ED de f, ⟦D_f = \\mathbb{R}⟧.⟦f'(x) = \\frac{x}{\\sqrt{x^{2}}}⟧ ne s'annule jamais ; valeur interdite : ⟦x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦x⟧−0+⟦\\sqrt{x^{2}}⟧++⟦f'(x)⟧−+⟦f(x)⟧⟦\\searrow⟧⟦0⟧⟦\\nearrow⟧minimum local en ⟦x=0⟧ : ⟦f(0)=0⟧",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "sqrt(x^2-4)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\sqrt{x^{2} - 4}⟧ ⟦ED = \\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Dérivéecalcul⟦\\left(x^{2}\\right)' = 2x⟧ (règle de la puissance).⟦\\sqrt{x^{2} - 4}⟧ est de la forme ⟦\\sqrt{u}⟧ avec ⟦u(x) = x^{2} - 4⟧ (dérivée interne ⟦u'(x) = 2x⟧) ⟦\\Rightarrow⟧ ⟦\\left(\\sqrt{x^{2} - 4}\\right)' = \\frac{u'}{2\\sqrt{u}} = \\frac{x}{\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}}⟧.⟦f'(x) = \\frac{x}{\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=-2⟧ : ⟦f(-2)=0⟧",
+       "minimum local en ⟦x=2⟧ : ⟦f(2)=0⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "⟦0⟧"
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "pt",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableauED de f' : ⟦D_{f'} = \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[⟧, différent de l'ED de f, ⟦D_f = \\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[⟧.⟦f'(x) = \\frac{x}{\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}}⟧ ne s'annule jamais.⟦x⟧⟦-\\infty⟧⟦-2⟧⟦2⟧⟦+\\infty⟧⟦x⟧−−++⟦\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}⟧++⟦f'(x)⟧−+⟦f(x)⟧⟦\\searrow⟧⟦0⟧⟦0⟧⟦\\nearrow⟧minimum local en ⟦x=-2⟧ : ⟦f(-2)=0⟧minimum local en ⟦x=2⟧ : ⟦f(2)=0⟧",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "sqrt(x^2-4x+5)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\sqrt{x^{2} - 4x + 5}⟧ ⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Dérivéecalcul⟦\\left(x^{2}\\right)' = 2x⟧ (règle de la puissance).⟦\\sqrt{x^{2} - 4x + 5}⟧ est de la forme ⟦\\sqrt{u}⟧ avec ⟦u(x) = x^{2} - 4x + 5⟧ (dérivée interne ⟦u'(x) = 2x - 4⟧) ⟦\\Rightarrow⟧ ⟦\\left(\\sqrt{x^{2} - 4x + 5}\\right)' = \\frac{u'}{2\\sqrt{u}} = \\frac{x - 2}{\\sqrt{x^{2} - 4x + 5}}⟧.⟦f'(x) = \\frac{x - 2}{\\sqrt{x^{2} - 4x + 5}}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=2⟧ : ⟦f(2)=1⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x - 2\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\sqrt{x^{2} - 4x + 5}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{x - 2}{\\sqrt{x^{2} - 4x + 5}} = 0 \\iff x - 2 = 0 \\iff x = 2⟧.⟦x⟧⟦-\\infty⟧⟦2⟧⟦+\\infty⟧⟦\\left(x - 2\\right)⟧−0+⟦\\sqrt{x^{2} - 4x + 5}⟧+++⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧•⟦\\nearrow⟧minimum local en ⟦x=2⟧ : ⟦f(2)=1⟧",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "x*ln(x)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = x\\,\\ln(x)⟧ ⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "DérivéecalculOn pose ⟦u(x) = x⟧ et ⟦v(x) = \\ln(x)⟧ : règle du produit, ⟦(uv)' = u'v + uv'⟧.⟦\\left(\\ln(x)\\right)' = \\frac{1}{x}⟧ (règle de base).⟦u'(x) = 1⟧.⟦v'(x) = \\frac{1}{x}⟧.⟦f'(x) = u'(x)v(x) + u(x)v'(x) = \\ln(x) + x\\,\\frac{1}{x} = \\ln(x) + 1⟧.⟦f'(x) = \\ln(x) + 1⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=- \\frac{1}{e}⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦e^{-1}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(\\ln(x) + 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦\\ln(x) + 1 = 0 \\iff \\ln(x) = -1⟧ (on soustrait 1).⟦\\ln(x) = -1 \\iff x = e^{-1}⟧⟦f'(x) = \\ln(x) + 1 = 0 \\iff x = e^{-1}⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e^{-1}⟧⟦+\\infty⟧⟦\\left(\\ln(x) + 1\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧•⟦\\nearrow⟧minimum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=- \\frac{1}{e}⟧",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "x*ln(x)+x": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = x\\,\\ln(x) + x⟧ ⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "DérivéecalculLa dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.On pose ⟦u(x) = x⟧ et ⟦v(x) = \\ln(x)⟧ : règle du produit, ⟦(uv)' = u'v + uv'⟧.⟦\\left(\\ln(x)\\right)' = \\frac{1}{x}⟧ (règle de base).⟦u'(x) = 1⟧.⟦v'(x) = \\frac{1}{x}⟧.⟦\\left(x\\,\\ln(x)\\right)' = u'(x)v(x) + u(x)v'(x) = \\ln(x) + x\\,\\frac{1}{x} = \\ln(x) + 1⟧.⟦f'(x) = \\ln(x) + 2⟧.⟦f'(x) = \\ln(x) + 2⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=e^{-2}⟧ : ⟦f(e^{-2})=- \\frac{1}{e^{2}}⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦e^{-2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(\\ln(x) + 2\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦\\ln(x) + 2 = 0 \\iff \\ln(x) = -2⟧ (on soustrait 2).⟦\\ln(x) = -2 \\iff x = e^{-2}⟧⟦f'(x) = \\ln(x) + 2 = 0 \\iff x = e^{-2}⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e^{-2}⟧⟦+\\infty⟧⟦\\left(\\ln(x) + 2\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧•⟦\\nearrow⟧minimum local en ⟦x=e^{-2}⟧ : ⟦f(e^{-2})=- \\frac{1}{e^{2}}⟧",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "x/(x^2+1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\frac{x}{x^{2} + 1}⟧ ⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "DérivéecalculOn pose ⟦u(x) = x⟧ et ⟦v(x) = x^{2} + 1⟧ : règle du quotient, ⟦\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}⟧.⟦\\left(x^{2}\\right)' = 2x⟧ (règle de la puissance).⟦u'(x) = 1⟧.⟦v'(x) = 2x⟧.⟦f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{x^{2} + 1 - x \\cdot 2x}{\\left(x^{2} + 1\\right)^{2}} = \\frac{-\\left(x + 1\\right)\\,\\left(x - 1\\right)}{\\left(x^{2} + 1\\right)^{2}}⟧.⟦f'(x) = \\frac{-\\left(x + 1\\right)\\,\\left(x - 1\\right)}{\\left(x^{2} + 1\\right)^{2}}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=-1⟧ : ⟦f(-1)=- \\frac{1}{2}⟧",
+       "maximum local en ⟦x=1⟧ : ⟦f(1)=\\frac{1}{2}⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦-1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x + 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x - 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x^{2} + 1\\right)^{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{-\\left(x + 1\\right)\\,\\left(x - 1\\right)}{\\left(x^{2} + 1\\right)^{2}} = 0 \\iff x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 1⟧.⟦x⟧⟦-\\infty⟧⟦-1⟧⟦1⟧⟦+\\infty⟧⟦-1⟧−−−−−⟦\\left(x + 1\\right)⟧−0+++⟦\\left(x - 1\\right)⟧−−−0+⟦\\left(x^{2} + 1\\right)^{2}⟧+++++⟦f'(x)⟧−0+0−⟦f(x)⟧⟦\\searrow⟧•⟦\\nearrow⟧•⟦\\searrow⟧minimum local en ⟦x=-1⟧ : ⟦f(-1)=- \\frac{1}{2}⟧maximum local en ⟦x=1⟧ : ⟦f(1)=\\frac{1}{2}⟧",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "x^(-1/2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = x^{-\\frac{1}{2}}⟧ ⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Dérivéecalcul⟦\\left(x^{-\\frac{1}{2}}\\right)' = \\frac{-1}{2\\sqrt{x^{3}}}⟧ (règle de la puissance).⟦f'(x) = \\frac{-1}{2\\sqrt{x^{3}}}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦-\\frac{1}{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(\\sqrt{x}\\right)^{3}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{-1}{2\\sqrt{x^{3}}}⟧ ne s'annule jamais.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦-\\frac{1}{2}⟧−⟦\\left(\\sqrt{x}\\right)^{3}⟧+⟦f'(x)⟧−⟦f(x)⟧⟦\\searrow⟧Aucun extremum local : f est strictement monotone (ou n'a que des points où f' s'annule sans changer de signe).",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "x^(1/2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = x^{\\frac{1}{2}} = \\sqrt{x}⟧ ⟦ED = \\left[0 \\,;\\, +\\infty\\right[⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Dérivéecalcul⟦\\left(\\sqrt{x}\\right)' = \\frac{1}{2\\sqrt{x}}⟧ (règle de la puissance).⟦f'(x) = \\frac{1}{2\\sqrt{x}}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=0⟧ : ⟦f(0)=0⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\frac{1}{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\sqrt{x}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "pt",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableauED de f' : ⟦D_{f'} = \\left]0 \\,;\\, +\\infty\\right[⟧, différent de l'ED de f, ⟦D_f = \\left[0 \\,;\\, +\\infty\\right[⟧.⟦f'(x) = \\frac{1}{2\\sqrt{x}}⟧ ne s'annule jamais.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦\\frac{1}{2}⟧++⟦\\sqrt{x}⟧+⟦f'(x)⟧+⟦f(x)⟧⟦0⟧⟦\\nearrow⟧minimum local en ⟦x=0⟧ : ⟦f(0)=0⟧",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "x^(2-2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = x^{2 - 2}⟧ ⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Dérivéecalcul⟦\\left(x^{2 - 2}\\right)' = 0⟧ (règle de la puissance).⟦f'(x) = 0⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\rightarrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦0⟧ est nulle partout où elle est définie.⟦x⟧⟦-\\infty⟧⟦+\\infty⟧⟦0⟧+⟦f'(x)⟧0⟦f(x)⟧⟦\\rightarrow⟧f' est nulle sur son ensemble de définition : f est constante sur chaque intervalle, aucun extremum.",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "x^(2/3)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = x^{\\frac{2}{3}} = \\sqrt[3]{x^{2}}⟧ ⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Dérivéecalcul⟦\\left(\\sqrt[3]{x^{2}}\\right)' = \\frac{2}{3\\sqrt[3]{x}}⟧ (règle de la puissance).⟦f'(x) = \\frac{2}{3\\sqrt[3]{x}}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=0⟧ : ⟦f(0)=0⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\frac{2}{3}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\sqrt[3]{x}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableauED de f' : ⟦D_{f'} = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧, différent de l'ED de f, ⟦D_f = \\mathbb{R}⟧.⟦f'(x) = \\frac{2}{3\\sqrt[3]{x}}⟧ ne s'annule jamais ; valeur interdite : ⟦x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦\\frac{2}{3}⟧+++⟦\\sqrt[3]{x}⟧−+⟦f'(x)⟧−+⟦f(x)⟧⟦\\searrow⟧⟦0⟧⟦\\nearrow⟧minimum local en ⟦x=0⟧ : ⟦f(0)=0⟧",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "x^(3/2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = x^{\\frac{3}{2}} = \\sqrt{x^{3}}⟧ ⟦ED = \\left[0 \\,;\\, +\\infty\\right[⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Dérivéecalcul⟦\\left(\\sqrt{x^{3}}\\right)' = \\frac{3\\sqrt{x}}{2}⟧ (règle de la puissance).⟦f'(x) = \\frac{3\\sqrt{x}}{2}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=0⟧ : ⟦f(0)=0⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\frac{3}{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\sqrt{x}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦\\sqrt{x} = 0 \\iff x = 0⟧⟦f'(x) = \\frac{3\\sqrt{x}}{2} = 0 \\iff \\sqrt{x} = 0 \\iff x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦\\frac{3}{2}⟧++⟦\\sqrt{x}⟧0+⟦f'(x)⟧0+⟦f(x)⟧•⟦\\nearrow⟧minimum local en ⟦x=0⟧ : ⟦f(0)=0⟧",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "x^2*e^(-x)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = x^{2}\\,e^{-x}⟧ ⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "DérivéecalculOn pose ⟦u(x) = x^{2}⟧ et ⟦v(x) = e^{-x}⟧ : règle du produit, ⟦(uv)' = u'v + uv'⟧.⟦\\left(x^{2}\\right)' = 2x⟧ (règle de la puissance).⟦e^{-x}⟧ est de la forme ⟦e^{u}⟧ avec ⟦u(x) = -x⟧ (dérivée interne ⟦u'(x) = -1⟧) ⟦\\Rightarrow⟧ ⟦\\left(e^{-x}\\right)' = u' e^{u} = -e^{-x}⟧.⟦u'(x) = 2x⟧.⟦v'(x) = -e^{-x}⟧.⟦f'(x) = u'(x)v(x) + u(x)v'(x) = 2x\\,e^{-x} + x^{2}\\,\\left(-e^{-x}\\right) = -x\\,\\left(x - 2\\right)\\,e^{-x}⟧.⟦f'(x) = -x\\,\\left(x - 2\\right)\\,e^{-x}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=0⟧ : ⟦f(0)=0⟧",
+       "maximum local en ⟦x=2⟧ : ⟦f(2)=\\frac{4}{e^{2}}⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦-1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x - 2\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦e^{-x}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = -x\\,\\left(x - 2\\right)\\,e^{-x} = 0 \\iff x = 0 \\text{ ou } x - 2 = 0 \\iff x = 0 \\text{ ou } x = 2⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦2⟧⟦+\\infty⟧⟦-1⟧−−−−−⟦x⟧−0+++⟦\\left(x - 2\\right)⟧−−−0+⟦e^{-x}⟧+++++⟦f'(x)⟧−0+0−⟦f(x)⟧⟦\\searrow⟧•⟦\\nearrow⟧•⟦\\searrow⟧minimum local en ⟦x=0⟧ : ⟦f(0)=0⟧maximum local en ⟦x=2⟧ : ⟦f(2)=\\frac{4}{e^{2}}⟧",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "x^2-4x+3": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = x^{2} - 4x + 3⟧ ⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "DérivéecalculLa dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.⟦\\left(x^{2}\\right)' = 2x⟧ (règle de la puissance).⟦f'(x) = 2\\left(x - 2\\right)⟧.⟦f'(x) = 2\\left(x - 2\\right)⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=2⟧ : ⟦f(2)=-1⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x - 2\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 2\\left(x - 2\\right) = 0 \\iff x - 2 = 0 \\iff x = 2⟧.⟦x⟧⟦-\\infty⟧⟦2⟧⟦+\\infty⟧⟦2⟧+++⟦\\left(x - 2\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧•⟦\\nearrow⟧minimum local en ⟦x=2⟧ : ⟦f(2)=-1⟧",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "x^3": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = x^{3}⟧ ⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Dérivéecalcul⟦\\left(x^{3}\\right)' = 3x^{2}⟧ (règle de la puissance).⟦f'(x) = 3x^{2}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦3⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x^{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 3x^{2} = 0 \\iff x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦3⟧+++⟦x^{2}⟧+0+⟦f'(x)⟧+0+⟦f(x)⟧⟦\\nearrow⟧⟦\\nearrow⟧Aucun extremum local : f est strictement monotone (ou n'a que des points où f' s'annule sans changer de signe).",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "x^3-3x": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = x^{3} - 3x⟧ ⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "DérivéecalculLa dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.⟦\\left(x^{3}\\right)' = 3x^{2}⟧ (règle de la puissance).⟦f'(x) = 3\\left(x + 1\\right)\\,\\left(x - 1\\right)⟧.⟦f'(x) = 3\\left(x + 1\\right)\\,\\left(x - 1\\right)⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "maximum local en ⟦x=-1⟧ : ⟦f(-1)=2⟧",
+       "minimum local en ⟦x=1⟧ : ⟦f(1)=-2⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦3⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x + 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x - 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 3\\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 1⟧.⟦x⟧⟦-\\infty⟧⟦-1⟧⟦1⟧⟦+\\infty⟧⟦3⟧+++++⟦\\left(x + 1\\right)⟧−0+++⟦\\left(x - 1\\right)⟧−−−0+⟦f'(x)⟧+0−0+⟦f(x)⟧⟦\\nearrow⟧•⟦\\searrow⟧•⟦\\nearrow⟧maximum local en ⟦x=-1⟧ : ⟦f(-1)=2⟧minimum local en ⟦x=1⟧ : ⟦f(1)=-2⟧",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "x^4-2x^2": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = x^{4} - 2x^{2}⟧ ⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "DérivéecalculLa dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.⟦\\left(x^{4}\\right)' = 4x^{3}⟧ (règle de la puissance).⟦\\left(x^{2}\\right)' = 2x⟧ (règle de la puissance).⟦\\left(2x^{2}\\right)' = 2 \\cdot \\left(x^{2}\\right)' = 4x⟧.⟦f'(x) = 4x\\,\\left(x + 1\\right)\\,\\left(x - 1\\right)⟧.⟦f'(x) = 4x\\,\\left(x + 1\\right)\\,\\left(x - 1\\right)⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=-1⟧ : ⟦f(-1)=-1⟧",
+       "maximum local en ⟦x=0⟧ : ⟦f(0)=0⟧",
+       "minimum local en ⟦x=1⟧ : ⟦f(1)=-1⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦4⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x + 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x - 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 4x\\,\\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x = 0 \\text{ ou } x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 0 \\text{ ou } x = 1⟧.⟦x⟧⟦-\\infty⟧⟦-1⟧⟦0⟧⟦1⟧⟦+\\infty⟧⟦4⟧+++++++⟦x⟧−−−0+++⟦\\left(x + 1\\right)⟧−0+++++⟦\\left(x - 1\\right)⟧−−−−−0+⟦f'(x)⟧−0+0−0+⟦f(x)⟧⟦\\searrow⟧•⟦\\nearrow⟧•⟦\\searrow⟧•⟦\\nearrow⟧minimum local en ⟦x=-1⟧ : ⟦f(-1)=-1⟧maximum local en ⟦x=0⟧ : ⟦f(0)=0⟧minimum local en ⟦x=1⟧ : ⟦f(1)=-1⟧",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "x^x": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = x^{x}⟧ ⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Dérivéecalcul⟦x^{x}⟧ s'écrit ⟦e^{x\\ln\\left(x\\right)}⟧ : on dérive cette forme composée ⟦\\Rightarrow⟧ ⟦\\left(x^{x}\\right)' = x^{x}\\,\\left(\\ln(x) + 1\\right)⟧.⟦f'(x) = x^{x}\\,\\left(\\ln(x) + 1\\right)⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=e^{- \\frac{1}{e}}⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦e^{-1}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x^{x}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(\\ln(x) + 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦\\ln(x) + 1 = 0 \\iff \\ln(x) = -1⟧ (on soustrait 1).⟦\\ln(x) = -1 \\iff x = e^{-1}⟧⟦f'(x) = x^{x}\\,\\left(\\ln(x) + 1\\right) = 0 \\iff \\ln(x) + 1 = 0 \\iff x = e^{-1}⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e^{-1}⟧⟦+\\infty⟧⟦x^{x}⟧+++⟦\\left(\\ln(x) + 1\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧•⟦\\nearrow⟧minimum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=e^{- \\frac{1}{e}}⟧",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ }
+}

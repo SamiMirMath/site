@@ -33,6 +33,21 @@ uv run -q --no-project --python 3.12 --with sympy==1.13.3 python -m unittest dis
 Versions de référence : **Python 3.12 et SymPy 1.13.3**, identiques à celles de Pyodide 0.27.7
 utilisé par le site. Le code des moteurs exige Python ≥ 3.12 (syntaxe des f-strings).
 
+## Tests de pages (navigateur, local et CI)
+
+Chrome sans interface piloté depuis Python (Google Chrome installé ; Node inutile). Réseau requis
+(Pyodide et KaTeX viennent de jsDelivr). Hors de `tests/python` : la commande ci-dessus ne les lance pas.
+
+```sh
+# le rendu de chaque page est égal à la référence (tests/pages/references/*.json), ~ 3 min
+uv run -q --no-project --python 3.12 --with sympy==1.13.3 --with websockets \
+    python -m unittest discover -s tests/pages          # OUTILS=etude-complete pour une seule page
+# après un changement VOULU du rendu : régénérer puis relire le diff git
+uv run -q --no-project --python 3.12 --with sympy==1.13.3 --with websockets python tests/pages/capturer_references.py [outil …]
+# captures d'écran avant/après un changement de CSS (non versionnées)
+… --with pillow python tests/pages/captures.py enregistrer DOSSIER   puis   comparer AVANT APRES
+```
+
 ## Conventions de ces documents
 
 - Chaque critère d'acceptation a un identifiant (`ED-03`, `SOC-12`…) et un mode de vérification :

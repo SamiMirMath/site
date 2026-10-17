@@ -1,0 +1,3262 @@
+{
+ "(x-1)^(2/3)": {
+  "au_depart": {
+   "progression": "Étape 1 / 1",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\left(x - 1\\right)^{\\frac{2}{3}} = \\sqrt[3]{\\left(x - 1\\right)^{2}}⟧Ni logarithme, ni dénominateur, ni racine : aucune condition.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\mathbb{R}⟧✓ Contrôle numérique indépendant : f est bien définie aux 5173 points testés dans l'ED et non définie aux 0 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 1 / 1"
+ },
+ "1 000x": {
+  "au_depart": {
+   "progression": "Étape 1 / 1",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = 1 \\cdot 000\\,x⟧Ni logarithme, ni dénominateur, ni racine : aucune condition.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\mathbb{R}⟧✓ Contrôle numérique indépendant : f est bien définie aux 5173 points testés dans l'ED et non définie aux 0 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 1 / 1"
+ },
+ "1'000x": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Caractère non reconnu : « ' ».",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "1/(1-1)": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Division par zéro dans l'expression.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "1/(e^(2x)-5e^x+6)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\frac{1}{e^{2x} - 5e^{x} + 6}⟧1 condition d'existence : dénominateur.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1dénominateurOn pose ⟦t = e^{x}⟧ : ⟦e^{2x} - 5e^{x} + 6 = t^{2} - 5t + 6⟧.Trinôme ⟦t^{2} - 5t + 6⟧ : ⟦\\Delta = b^2 - 4ac = (-5)^2 - 4 \\cdot 1 \\cdot 6 = 1⟧, ⟦\\sqrt{\\Delta} = 1⟧ : zéros ⟦t_1 = 2⟧ et ⟦t_2 = 3⟧.⟦e^{x} = 2 \\iff x = \\ln(2)⟧⟦e^{x} = 3 \\iff x = \\ln(3)⟧⟦e^{2x} - 5e^{x} + 6 \\neq 0 \\iff x \\notin \\left\\{\\ln(2) \\,;\\, \\ln(3)\\right\\}⟧.",
+    "titre": "Condition 1dénominateur"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\mathbb{R} \\setminus \\left\\{\\ln(2) \\,;\\, \\ln(3)\\right\\}⟧✓ Contrôle numérique indépendant : f est bien définie aux 4865 points testés dans l'ED et non définie aux 0 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "1/(e^x-1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\frac{1}{e^{x} - 1}⟧1 condition d'existence : dénominateur.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1dénominateur⟦e^{x} - 1 = 0 \\iff e^{x} = 1⟧ (on ajoute 1).⟦e^{x} = 1 \\iff x = 0⟧⟦e^{x} - 1 \\neq 0 \\iff x \\neq 0⟧.",
+    "titre": "Condition 1dénominateur"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧✓ Contrôle numérique indépendant : f est bien définie aux 4872 points testés dans l'ED et non définie aux 0 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "1/(ln(x-1)+ln(x-3))": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\frac{1}{\\ln\\left(x - 1\\right) + \\ln\\left(x - 3\\right)}⟧3 conditions d'existence : logarithme, logarithme, dénominateur.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1logarithme⟦x - 1 > 0 \\iff x > 1⟧.",
+    "titre": "Condition 1logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 2logarithme⟦x - 3 > 0 \\iff x > 3⟧.",
+    "titre": "Condition 2logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 3dénominateurLes logarithmes sont tous définis pour ⟦x \\in D = \\left]3 \\,;\\, +\\infty\\right[⟧. Sur ⟦D⟧, on regroupe avec ⟦\\ln(a) + \\ln(b) = \\ln(ab)⟧ (valable car ⟦a, b > 0⟧) : ⟦\\ln\\left(x - 1\\right) + \\ln\\left(x - 3\\right) = \\ln\\left(\\left(x - 1\\right)\\,\\left(x - 3\\right)\\right)⟧.⟦\\ln\\left(\\left(x - 1\\right)\\,\\left(x - 3\\right)\\right) = 0 \\iff \\left(x - 1\\right)\\,\\left(x - 3\\right) = 1⟧Trinôme ⟦x^{2} - 4x + 2⟧ : ⟦\\Delta = b^2 - 4ac = (-4)^2 - 4 \\cdot 1 \\cdot 2 = 8⟧ : zéros ⟦x_1 = 2 - \\sqrt{2}⟧ et ⟦x_2 = 2 + \\sqrt{2}⟧ ⟦(\\approx 0{,}5858⟧ et ⟦\\approx 3{,}4142)⟧.⟦x = 2 - \\sqrt{2} \\approx 0{,}5858⟧ n'est pas dans ⟦D⟧ : solution rejetée.⟦x = 2 + \\sqrt{2} \\approx 3{,}4142⟧ est dans ⟦D⟧ : solution retenue.⟦\\ln\\left(x - 1\\right) + \\ln\\left(x - 3\\right) \\neq 0 \\iff x \\neq 2 + \\sqrt{2}⟧.",
+    "titre": "Condition 3dénominateur"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\left(\\left]1 \\,;\\, +\\infty\\right[ \\cap \\left]3 \\,;\\, +\\infty\\right[\\right) \\setminus \\left\\{2 + \\sqrt{2}\\right\\} = \\left]3 \\,;\\, 2 + \\sqrt{2}\\right[ \\cup \\left]2 + \\sqrt{2} \\,;\\, +\\infty\\right[⟧✓ Contrôle numérique indépendant : f est bien définie aux 2476 points testés dans l'ED et non définie aux 2708 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "1/ln(x)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\frac{1}{\\ln(x)}⟧2 conditions d'existence : logarithme, dénominateur.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1logarithme⟦x > 0⟧",
+    "titre": "Condition 1logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 2dénominateur⟦\\ln(x) \\neq 0 \\iff x \\neq 1⟧.",
+    "titre": "Condition 2dénominateur"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\setminus \\left\\{1\\right\\} = \\left]0 \\,;\\, 1\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[⟧✓ Contrôle numérique indépendant : f est bien définie aux 2595 points testés dans l'ED et non définie aux 2588 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "1/ln(x+2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\frac{1}{\\ln\\left(x + 2\\right)}⟧2 conditions d'existence : logarithme, dénominateur.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1logarithme⟦x + 2 > 0 \\iff x > -2⟧.",
+    "titre": "Condition 1logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 2dénominateur⟦\\ln\\left(x + 2\\right) = 0 \\iff x + 2 = 1⟧⟦x + 2 = 1 \\iff x = -1⟧.⟦\\ln\\left(x + 2\\right) \\neq 0 \\iff x \\neq -1⟧.",
+    "titre": "Condition 2dénominateur"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\left]-2 \\,;\\, +\\infty\\right[ \\setminus \\left\\{-1\\right\\} = \\left]-2 \\,;\\, -1\\right[ \\cup \\left]-1 \\,;\\, +\\infty\\right[⟧✓ Contrôle numérique indépendant : f est bien définie aux 2675 points testés dans l'ED et non définie aux 2508 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "1/x^(1/3)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\frac{1}{x^{\\frac{1}{3}}} = \\frac{1}{\\sqrt[3]{x}}⟧1 condition d'existence : dénominateur.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1dénominateur⟦\\sqrt[3]{x} \\neq 0 \\iff x \\neq 0⟧.",
+    "titre": "Condition 1dénominateur"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧✓ Contrôle numérique indépendant : f est bien définie aux 5180 points testés dans l'ED et non définie aux 0 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2,5x+ln(x)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = 2{,}5x + \\ln(x)⟧1 condition d'existence : logarithme.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1logarithme⟦x > 0⟧",
+    "titre": "Condition 1logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧✓ Contrôle numérique indépendant : f est bien définie aux 2588 points testés dans l'ED et non définie aux 2588 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2ln(x)/((ln x)^2-1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\frac{2\\ln(x)}{\\left(\\ln(x)\\right)^{2} - 1}⟧2 conditions d'existence : logarithme, dénominateur.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1logarithme⟦x > 0⟧",
+    "titre": "Condition 1logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 2dénominateurOn pose ⟦t = \\ln(x)⟧ : ⟦\\left(\\ln(x)\\right)^{2} - 1 = t^{2} - 1⟧.⟦t^{2} - 1 = (t - 1)(t + 1)⟧ : zéros ⟦-1⟧ et ⟦1⟧.⟦\\ln(x) = -1 \\iff x = e^{-1}⟧⟦\\ln(x) = 1 \\iff x = e⟧⟦\\left(\\ln(x)\\right)^{2} - 1 \\neq 0 \\iff x \\notin \\left\\{e^{-1} \\,;\\, e\\right\\}⟧.",
+    "titre": "Condition 2dénominateur"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\setminus \\left\\{e^{-1} \\,;\\, e\\right\\} = \\left]0 \\,;\\, e^{-1}\\right[ \\cup \\left]e^{-1} \\,;\\, e\\right[ \\cup \\left]e \\,;\\, +\\infty\\right[⟧✓ Contrôle numérique indépendant : f est bien définie aux 2604 points testés dans l'ED et non définie aux 2588 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "e^(1/(x^2-x-2))": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = e^{\\frac{1}{x^{2} - x - 2}}⟧1 condition d'existence : dénominateur.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1dénominateurTrinôme ⟦x^{2} - x - 2⟧ : ⟦\\Delta = b^2 - 4ac = (-1)^2 - 4 \\cdot 1 \\cdot (-2) = 9⟧, ⟦\\sqrt{\\Delta} = 3⟧ : zéros ⟦x_1 = -1⟧ et ⟦x_2 = 2⟧.⟦x^{2} - x - 2 \\neq 0 \\iff x \\notin \\left\\{-1 \\,;\\, 2\\right\\}⟧.",
+    "titre": "Condition 1dénominateur"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\mathbb{R} \\setminus \\left\\{-1 \\,;\\, 2\\right\\}⟧✓ Contrôle numérique indépendant : f est bien définie aux 5179 points testés dans l'ED et non définie aux 0 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "e^x/ln(e^x)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\frac{e^{x}}{\\ln\\left(e^{x}\\right)}⟧2 conditions d'existence : logarithme, dénominateur.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1logarithme⟦e^{x} > 0⟧",
+    "titre": "Condition 1logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 2dénominateur⟦\\ln\\left(e^{x}\\right) = 0 \\iff e^{x} = 1⟧⟦e^{x} = 1 \\iff x = 0⟧⟦\\ln\\left(e^{x}\\right) \\neq 0 \\iff x \\neq 0⟧.",
+    "titre": "Condition 2dénominateur"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\} = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧✓ Contrôle numérique indépendant : f est bien définie aux 4872 points testés dans l'ED et non définie aux 0 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "ln(": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Expression incomplète.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "ln((x-1)/(x+3))": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\ln\\left(\\frac{x - 1}{x + 3}\\right)⟧2 conditions d'existence : dénominateur, logarithme.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1dénominateur⟦x + 3 \\neq 0 \\iff x \\neq -3⟧.",
+    "titre": "Condition 1dénominateur"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-3⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x - 1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x + 3⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "bar",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\frac{x - 1}{x + 3}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Condition 2logarithmeZéros du numérateur :⟦x - 1 = 0 \\iff x = 1⟧Zéros du dénominateur (valeurs interdites, marquées ‖) :⟦x + 3 = 0 \\iff x = -3⟧⟦x⟧⟦-\\infty⟧⟦-3⟧⟦1⟧⟦+\\infty⟧⟦x - 1⟧−−0+⟦x + 3⟧−++⟦\\frac{x - 1}{x + 3}⟧+−0+⟦\\frac{x - 1}{x + 3} > 0 \\iff x \\in \\left]-\\infty \\,;\\, -3\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[⟧.",
+    "titre": "Condition 2logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\left]-\\infty \\,;\\, -3\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[ = \\left]-\\infty \\,;\\, -3\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[⟧✓ Contrôle numérique indépendant : f est bien définie aux 5016 points testés dans l'ED et non définie aux 163 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "ln((x^2-1)/(x+2))": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\ln\\left(\\frac{x^{2} - 1}{x + 2}\\right)⟧2 conditions d'existence : dénominateur, logarithme.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1dénominateur⟦x + 2 \\neq 0 \\iff x \\neq -2⟧.",
+    "titre": "Condition 1dénominateur"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x - 1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "bar",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x + 1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "bar",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x + 2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "bar",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "bar",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\frac{x^{2} - 1}{x + 2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Condition 2logarithmeZéros du numérateur :⟦x^{2} - 1 = (x - 1)(x + 1)⟧ : zéros ⟦-1⟧ et ⟦1⟧.Zéros du dénominateur (valeurs interdites, marquées ‖) :⟦x + 2 = 0 \\iff x = -2⟧⟦x⟧⟦-\\infty⟧⟦-2⟧⟦-1⟧⟦1⟧⟦+\\infty⟧⟦x - 1⟧−−−0+⟦x + 1⟧−−0++⟦x + 2⟧−+++⟦\\frac{x^{2} - 1}{x + 2}⟧−+0−0+⟦\\frac{x^{2} - 1}{x + 2} > 0 \\iff x \\in \\left]-2 \\,;\\, -1\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[⟧.",
+    "titre": "Condition 2logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\left]-2 \\,;\\, -1\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[ = \\left]-2 \\,;\\, -1\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[⟧✓ Contrôle numérique indépendant : f est bien définie aux 2591 points testés dans l'ED et non définie aux 2591 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "ln(-x^2-1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\ln\\left(-x^{2} - 1\\right)⟧1 condition d'existence : logarithme.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1logarithmeTrinôme ⟦-x^{2} - 1⟧ : ⟦\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot (-1) \\cdot (-1) = -4⟧ : aucun zéro ; le trinôme garde le signe de ⟦a = -1⟧, il est toujours négatif.⟦-x^{2} - 1 > 0 \\iff x \\in \\varnothing⟧.",
+    "titre": "Condition 1logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\varnothing⟧✓ Contrôle numérique indépendant : f est bien définie aux 0 points testés dans l'ED et non définie aux 5173 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "ln(2x-6)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\ln\\left(2x - 6\\right)⟧1 condition d'existence : logarithme.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1logarithme⟦2x - 6 > 0 \\iff x > 3⟧.",
+    "titre": "Condition 1logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\left]3 \\,;\\, +\\infty\\right[⟧✓ Contrôle numérique indépendant : f est bien définie aux 2468 points testés dans l'ED et non définie aux 2708 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "ln(ln(ln(x)))": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\ln\\left(\\ln\\left(\\ln(x)\\right)\\right)⟧3 conditions d'existence : logarithme, logarithme, logarithme.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1logarithme⟦x > 0⟧",
+    "titre": "Condition 1logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 2logarithme⟦\\ln(x) > 0 \\iff x > 1⟧ (exp est croissante).",
+    "titre": "Condition 2logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 3logarithme⟦\\ln\\left(\\ln(x)\\right) > 0 \\iff \\ln(x) > 1⟧ (exp est croissante).⟦\\ln(x) > 1 \\iff x > e⟧ (exp est croissante).",
+    "titre": "Condition 3logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]1 \\,;\\, +\\infty\\right[ \\cap \\left]e \\,;\\, +\\infty\\right[ = \\left]e \\,;\\, +\\infty\\right[⟧✓ Contrôle numérique indépendant : f est bien définie aux 2480 points testés dans l'ED et non définie aux 2697 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "ln(x)/(ln(x)+2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\frac{\\ln(x)}{\\ln(x) + 2}⟧2 conditions d'existence : logarithme, dénominateur.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1logarithme⟦x > 0⟧",
+    "titre": "Condition 1logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 2dénominateur⟦\\ln(x) + 2 = 0 \\iff \\ln(x) = -2⟧ (on soustrait 2).⟦\\ln(x) = -2 \\iff x = e^{-2}⟧⟦\\ln(x) + 2 \\neq 0 \\iff x \\neq e^{-2}⟧.",
+    "titre": "Condition 2dénominateur"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\setminus \\left\\{e^{-2}\\right\\} = \\left]0 \\,;\\, e^{-2}\\right[ \\cup \\left]e^{-2} \\,;\\, +\\infty\\right[⟧✓ Contrôle numérique indépendant : f est bien définie aux 2596 points testés dans l'ED et non définie aux 2588 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "ln(x-1)+ln(x+3)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\ln\\left(x - 1\\right) + \\ln\\left(x + 3\\right)⟧2 conditions d'existence : logarithme, logarithme.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1logarithme⟦x - 1 > 0 \\iff x > 1⟧.",
+    "titre": "Condition 1logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 2logarithme⟦x + 3 > 0 \\iff x > -3⟧.",
+    "titre": "Condition 2logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\left]1 \\,;\\, +\\infty\\right[ \\cap \\left]-3 \\,;\\, +\\infty\\right[ = \\left]1 \\,;\\, +\\infty\\right[⟧✓ Contrôle numérique indépendant : f est bien définie aux 2548 points testés dans l'ED et non définie aux 2628 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "ln(x^2)-2ln(x)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\ln\\left(x^{2}\\right) - 2\\ln(x)⟧2 conditions d'existence : logarithme, logarithme.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x^{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Condition 1logarithmeOn met ⟦x^{2}⟧ en évidence : ⟦x^{2} = x^{2}\\left(1\\right)⟧⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦x^{2}⟧+0+⟦x^{2} > 0 \\iff x \\in \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧.",
+    "titre": "Condition 1logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 2logarithme⟦x > 0⟧",
+    "titre": "Condition 2logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\left]0 \\,;\\, +\\infty\\right[ = \\left]0 \\,;\\, +\\infty\\right[⟧✓ Contrôle numérique indépendant : f est bien définie aux 2588 points testés dans l'ED et non définie aux 2588 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "ln(x^2-4)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\ln\\left(x^{2} - 4\\right)⟧1 condition d'existence : logarithme.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x - 2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "bar",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x + 2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "bar",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x^{2} - 4⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Condition 1logarithme⟦x^{2} - 4 = (x - 2)(x + 2)⟧ : zéros ⟦-2⟧ et ⟦2⟧.⟦x⟧⟦-\\infty⟧⟦-2⟧⟦2⟧⟦+\\infty⟧⟦x - 2⟧−−0+⟦x + 2⟧−0++⟦x^{2} - 4⟧+0−0+⟦x^{2} - 4 > 0 \\iff x \\in \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[⟧.",
+    "titre": "Condition 1logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[⟧✓ Contrôle numérique indépendant : f est bien définie aux 5016 points testés dans l'ED et non définie aux 163 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "ln(x^2-4x)/(x-5)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5}⟧2 conditions d'existence : logarithme, dénominateur.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦4⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "bar",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x - 4⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "bar",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x^{2} - 4x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Condition 1logarithmeOn met ⟦x⟧ en évidence : ⟦x^{2} - 4x = x\\left(x - 4\\right)⟧⟦x - 4 = 0 \\iff x = 4⟧⟦x⟧⟦-\\infty⟧⟦0⟧⟦4⟧⟦+\\infty⟧⟦x⟧−0++⟦x - 4⟧−−0+⟦x^{2} - 4x⟧+0−0+⟦x^{2} - 4x > 0 \\iff x \\in \\left]-\\infty \\,;\\, 0\\right[ \\cup \\left]4 \\,;\\, +\\infty\\right[⟧.",
+    "titre": "Condition 1logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 2dénominateur⟦x - 5 \\neq 0 \\iff x \\neq 5⟧.",
+    "titre": "Condition 2dénominateur"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\left(\\left]-\\infty \\,;\\, 0\\right[ \\cup \\left]4 \\,;\\, +\\infty\\right[\\right) \\setminus \\left\\{5\\right\\} = \\left]-\\infty \\,;\\, 0\\right[ \\cup \\left]4 \\,;\\, 5\\right[ \\cup \\left]5 \\,;\\, +\\infty\\right[⟧✓ Contrôle numérique indépendant : f est bien définie aux 5023 points testés dans l'ED et non définie aux 163 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "ln(x^2-5x+6)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\ln\\left(x^{2} - 5x + 6\\right)⟧1 condition d'existence : logarithme.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦3⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x - 2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "bar",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x - 3⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "bar",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x^{2} - 5x + 6⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Condition 1logarithmeTrinôme ⟦x^{2} - 5x + 6⟧ : ⟦\\Delta = b^2 - 4ac = (-5)^2 - 4 \\cdot 1 \\cdot 6 = 1⟧, ⟦\\sqrt{\\Delta} = 1⟧ : zéros ⟦x_1 = 2⟧ et ⟦x_2 = 3⟧.⟦x⟧⟦-\\infty⟧⟦2⟧⟦3⟧⟦+\\infty⟧⟦x - 2⟧−0++⟦x - 3⟧−−0+⟦x^{2} - 5x + 6⟧+0−0+⟦x^{2} - 5x + 6 > 0 \\iff x \\in \\left]-\\infty \\,;\\, 2\\right[ \\cup \\left]3 \\,;\\, +\\infty\\right[⟧.",
+    "titre": "Condition 1logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\left]-\\infty \\,;\\, 2\\right[ \\cup \\left]3 \\,;\\, +\\infty\\right[⟧✓ Contrôle numérique indépendant : f est bien définie aux 5136 points testés dans l'ED et non définie aux 43 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "sin(x)": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Symbole inconnu « s ». La variable s'appelle x ; fonctions permises : ln, exp, sqrt (ou e^…, √).",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "sqrt(-x^2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\sqrt{-x^{2}}⟧1 condition d'existence : racine carrée.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦-1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x^{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦-x^{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Condition 1racine carréeOn met ⟦x^{2}⟧ en évidence : ⟦-x^{2} = x^{2}\\left(-1\\right)⟧⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦-1⟧−−−⟦x^{2}⟧+0+⟦-x^{2}⟧−0−⟦-x^{2} \\geq 0 \\iff x \\in \\left\\{0\\right\\}⟧.",
+    "titre": "Condition 1racine carrée"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\left\\{0\\right\\}⟧✓ Contrôle numérique indépendant : f est bien définie aux 0 points testés dans l'ED et non définie aux 5180 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "sqrt(1-ln(x^2-4x+5))": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\sqrt{1 - \\ln\\left(x^{2} - 4x + 5\\right)}⟧2 conditions d'existence : logarithme, racine carrée.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1logarithmeTrinôme ⟦x^{2} - 4x + 5⟧ : ⟦\\Delta = b^2 - 4ac = (-4)^2 - 4 \\cdot 1 \\cdot 5 = -4⟧ : aucun zéro ; le trinôme garde le signe de ⟦a = 1⟧, il est toujours positif.⟦x^{2} - 4x + 5 > 0 \\iff x \\in \\mathbb{R}⟧.",
+    "titre": "Condition 1logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 2racine carrée⟦1 - \\ln\\left(x^{2} - 4x + 5\\right) \\geq 0 \\iff \\ln\\left(x^{2} - 4x + 5\\right) \\leq 1⟧ (on isole ⟦\\ln\\left(x^{2} - 4x + 5\\right)⟧ du côté où son coefficient est positif).⟦\\ln\\left(x^{2} - 4x + 5\\right) \\leq 1 \\iff 0 < x^{2} - 4x + 5 \\leq e⟧ (exp est croissante ; ⟦\\ln⟧ n'est définie que sur ⟦\\left]0 \\,;\\, +\\infty\\right[⟧).⟦x^{2} - 4x + 5 = 0⟧ ⟦\\iff \\left(x - 2\\right)^{2} + 1 = 0⟧ (forme canonique) ⟦\\iff \\left(x - 2\\right)^{2} = -1⟧.Or ⟦-1 < 0⟧ et un carré est positif : aucune solution.Le trinôme a le signe de ⟦a = 1⟧ à l'extérieur de ses racines : ⟦x^{2} - 4x + 5 > 0 \\iff x \\in \\mathbb{R}⟧.⟦x^{2} - 4x + 5 = e⟧ ⟦\\iff \\left(x - 2\\right)^{2} + 1 = e⟧ (forme canonique) ⟦\\iff \\left(x - 2\\right)^{2} = e - 1⟧.Comme ⟦e - 1 \\approx 1{,}7183 > 0⟧ : ⟦x = 2 - \\sqrt{e - 1} \\approx 0{,}6892⟧ ou ⟦x = 2 + \\sqrt{e - 1} \\approx 3{,}3108⟧.Le trinôme a le signe de ⟦a = 1⟧ à l'extérieur de ses racines : ⟦x^{2} - 4x + 5 \\leq e \\iff x \\in \\left[2 - \\sqrt{e - 1} \\,;\\, 2 + \\sqrt{e - 1}\\right]⟧.",
+    "titre": "Condition 2racine carrée"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\left[2 - \\sqrt{e - 1} \\,;\\, 2 + \\sqrt{e - 1}\\right] = \\left[2 - \\sqrt{e - 1} \\,;\\, 2 + \\sqrt{e - 1}\\right]⟧✓ Contrôle numérique indépendant : f est bien définie aux 109 points testés dans l'ED et non définie aux 5072 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "sqrt(ln(x)-x+2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\sqrt{\\ln(x) - x + 2}⟧2 conditions d'existence : logarithme, racine carrée.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1logarithme⟦x > 0⟧",
+    "titre": "Condition 1logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦{\\approx}\\,0{,}1586⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦{\\approx}\\,3{,}1462⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\ln(x) - x + 2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\ln(x) - x + 2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Condition 2racine carrée⟦\\ln(x) - x + 2⟧ est défini pour ⟦x \\in \\left]0 \\,;\\, +\\infty\\right[⟧.L'équation ⟦\\ln(x) - x + 2 = 0⟧ ne se résout pas avec les méthodes du cours : solutions obtenues numériquement : ⟦x {\\approx}\\,0{,}1586⟧ ; ⟦x {\\approx}\\,3{,}1462⟧. On en déduit ⟦\\ln(x) - x + 2 > 0⟧ sur ⟦\\left]{\\approx}\\,0{,}1586 \\,;\\, {\\approx}\\,3{,}1462\\right[⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦{\\approx}\\,0{,}1586⟧⟦{\\approx}\\,3{,}1462⟧⟦+\\infty⟧⟦\\ln(x) - x + 2⟧−0+0−⟦\\ln(x) - x + 2⟧−0+0−Les zones hachurées sont hors du domaine de définition de l'expression.⟦\\ln(x) - x + 2 \\geq 0 \\iff x \\in \\left[{\\approx}\\,0{,}1586 \\,;\\, {\\approx}\\,3{,}1462\\right]⟧.",
+    "titre": "Condition 2racine carrée"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left[{\\approx}\\,0{,}1586 \\,;\\, {\\approx}\\,3{,}1462\\right] = \\left[{\\approx}\\,0{,}1586 \\,;\\, {\\approx}\\,3{,}1462\\right]⟧Les valeurs précédées de ≈ ont été obtenues numériquement.✓ Contrôle numérique indépendant : f est bien définie aux 123 points testés dans l'ED et non définie aux 5058 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "sqrt(x ln(x+2))": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\sqrt{x\\,\\ln\\left(x + 2\\right)}⟧2 conditions d'existence : logarithme, racine carrée.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1logarithme⟦x + 2 > 0 \\iff x > -2⟧.",
+    "titre": "Condition 1logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "bar",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\ln\\left(x + 2\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "bar",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x\\,\\ln\\left(x + 2\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Condition 2racine carréeSigne de ⟦\\ln\\left(x + 2\\right)⟧⟦\\ln\\left(x + 2\\right)⟧ est défini pour ⟦x \\in \\left]-2 \\,;\\, +\\infty\\right[⟧.⟦\\ln\\left(x + 2\\right) > 0 \\iff x + 2 > 1⟧ (exp est croissante).⟦x + 2 > 1 \\iff x > -1⟧.⟦x⟧⟦-\\infty⟧⟦-2⟧⟦-1⟧⟦0⟧⟦+\\infty⟧⟦x⟧−−0+⟦\\ln\\left(x + 2\\right)⟧−0++⟦x\\,\\ln\\left(x + 2\\right)⟧+0−0+Les zones hachurées sont hors du domaine de définition de l'expression.⟦x\\,\\ln\\left(x + 2\\right) \\geq 0 \\iff x \\in \\left]-2 \\,;\\, -1\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[⟧.",
+    "titre": "Condition 2racine carrée"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\left]-2 \\,;\\, +\\infty\\right[ \\cap \\left]-2 \\,;\\, -1\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[ = \\left]-2 \\,;\\, -1\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[⟧✓ Contrôle numérique indépendant : f est bien définie aux 2631 points testés dans l'ED et non définie aux 2551 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "sqrt(x ln(x+2)+x)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\sqrt{x\\,\\ln\\left(x + 2\\right) + x}⟧2 conditions d'existence : logarithme, racine carrée.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1logarithme⟦x + 2 > 0 \\iff x > -2⟧.",
+    "titre": "Condition 1logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦e^{-1} - 2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "bar",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\ln\\left(x + 2\\right) + 1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "bar",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x\\,\\ln\\left(x + 2\\right) + x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Condition 2racine carréeOn factorise : ⟦x\\,\\ln\\left(x + 2\\right) + x = x\\,\\left(\\ln\\left(x + 2\\right) + 1\\right)⟧.Signe de ⟦\\ln\\left(x + 2\\right) + 1⟧⟦\\ln\\left(x + 2\\right) + 1⟧ est défini pour ⟦x \\in \\left]-2 \\,;\\, +\\infty\\right[⟧.⟦\\ln\\left(x + 2\\right) + 1 > 0 \\iff \\ln\\left(x + 2\\right) > -1⟧ (on soustrait 1).⟦\\ln\\left(x + 2\\right) > -1 \\iff x + 2 > e^{-1}⟧ (exp est croissante).⟦x + 2 > e^{-1} \\iff x > e^{-1} - 2⟧.⟦x⟧⟦-\\infty⟧⟦-2⟧⟦e^{-1} - 2⟧⟦0⟧⟦+\\infty⟧⟦x⟧−−0+⟦\\ln\\left(x + 2\\right) + 1⟧−0++⟦x\\,\\ln\\left(x + 2\\right) + x⟧+0−0+Les zones hachurées sont hors du domaine de définition de l'expression.⟦x\\,\\ln\\left(x + 2\\right) + x \\geq 0 \\iff x \\in \\left]-2 \\,;\\, e^{-1} - 2\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[⟧.",
+    "titre": "Condition 2racine carrée"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\left]-2 \\,;\\, +\\infty\\right[ \\cap \\left]-2 \\,;\\, e^{-1} - 2\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[ = \\left]-2 \\,;\\, e^{-1} - 2\\right] \\cup \\left[0 \\,;\\, +\\infty\\right[⟧✓ Contrôle numérique indépendant : f est bien définie aux 2606 points testés dans l'ED et non définie aux 2577 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "sqrt(x-1)/sqrt(x-1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\frac{\\sqrt{x - 1}}{\\sqrt{x - 1}}⟧2 conditions d'existence : racine carrée, racine au dénominateur.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1racine carrée⟦x - 1 \\geq 0 \\iff x \\geq 1⟧.",
+    "titre": "Condition 1racine carrée"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 2racine au dénominateur⟦x - 1 > 0 \\iff x > 1⟧.",
+    "titre": "Condition 2racine au dénominateur"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\left[1 \\,;\\, +\\infty\\right[ \\cap \\left]1 \\,;\\, +\\infty\\right[ = \\left]1 \\,;\\, +\\infty\\right[⟧✓ Contrôle numérique indépendant : f est bien définie aux 2548 points testés dans l'ED et non définie aux 2628 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "sqrt(x^2+2x-3)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\sqrt{x^{2} + 2x - 3}⟧1 condition d'existence : racine carrée.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-3⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x + 3⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "bar",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x - 1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "bar",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x^{2} + 2x - 3⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Condition 1racine carréeTrinôme ⟦x^{2} + 2x - 3⟧ : ⟦\\Delta = b^2 - 4ac = 2^2 - 4 \\cdot 1 \\cdot (-3) = 16⟧, ⟦\\sqrt{\\Delta} = 4⟧ : zéros ⟦x_1 = -3⟧ et ⟦x_2 = 1⟧.⟦x⟧⟦-\\infty⟧⟦-3⟧⟦1⟧⟦+\\infty⟧⟦x + 3⟧−0++⟦x - 1⟧−−0+⟦x^{2} + 2x - 3⟧+0−0+⟦x^{2} + 2x - 3 \\geq 0 \\iff x \\in \\left]-\\infty \\,;\\, -3\\right] \\cup \\left[1 \\,;\\, +\\infty\\right[⟧.",
+    "titre": "Condition 1racine carrée"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\left]-\\infty \\,;\\, -3\\right] \\cup \\left[1 \\,;\\, +\\infty\\right[⟧✓ Contrôle numérique indépendant : f est bien définie aux 5016 points testés dans l'ED et non définie aux 163 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "x+*2": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Symbole inattendu « * ».",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "x^(1/2-1/2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 1",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = x^{\\frac{1}{2} - \\frac{1}{2}}⟧Ni logarithme, ni dénominateur, ni racine : aucune condition.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\mathbb{R}⟧✓ Contrôle numérique indépendant : f est bien définie aux 5173 points testés dans l'ED et non définie aux 0 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 1 / 1"
+ },
+ "x^(1/3)": {
+  "au_depart": {
+   "progression": "Étape 1 / 1",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = x^{\\frac{1}{3}} = \\sqrt[3]{x}⟧Ni logarithme, ni dénominateur, ni racine : aucune condition.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\mathbb{R}⟧✓ Contrôle numérique indépendant : f est bien définie aux 5173 points testés dans l'ED et non définie aux 0 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 1 / 1"
+ },
+ "x^(2-2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 1",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = x^{2 - 2}⟧Ni logarithme, ni dénominateur, ni racine : aucune condition.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\mathbb{R}⟧✓ Contrôle numérique indépendant : f est bien définie aux 5173 points testés dans l'ED et non définie aux 0 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 1 / 1"
+ },
+ "x^0": {
+  "au_depart": {
+   "progression": "Étape 1 / 1",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = x^{0}⟧Ni logarithme, ni dénominateur, ni racine : aucune condition.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\mathbb{R}⟧✓ Contrôle numérique indépendant : f est bien définie aux 5173 points testés dans l'ED et non définie aux 0 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 1 / 1"
+ },
+ "x^x": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = x^{x}⟧1 condition d'existence : puissance.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1puissance⟦x > 0⟧",
+    "titre": "Condition 1puissance"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧✓ Contrôle numérique indépendant : f est bien définie aux 2416 points testés dans l'ED et non définie aux 2588 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "y = ln(x-1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = \\ln\\left(x - 1\\right)⟧1 condition d'existence : logarithme.",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1logarithme⟦x - 1 > 0 \\iff x > 1⟧.",
+    "titre": "Condition 1logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦ED = \\left]1 \\,;\\, +\\infty\\right[⟧✓ Contrôle numérique indépendant : f est bien définie aux 2548 points testés dans l'ED et non définie aux 2628 points testés hors de l'ED.",
+    "titre": null
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ }
+}
