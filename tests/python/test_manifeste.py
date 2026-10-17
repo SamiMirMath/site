@@ -32,10 +32,11 @@ def page(dossier):
 
 
 CLIENT = "../commun/moteur-python.js"
+OUTIL = "../commun/outil.js"          # page générique (T16) : monterOutil({outil: …}) ; le client est dans outil.js
 
 
 def utilise_pyodide(src):
-    return "loadPyodide" in src or CLIENT in src
+    return "loadPyodide" in src or CLIENT in src or OUTIL in src
 
 
 def importer_isole(fichiers, module, fonctions):
@@ -66,6 +67,16 @@ class TestManifeste(unittest.TestCase):
         for dossier, o in OUTILS.items():
             s = page(dossier)
             with self.subTest(outil=dossier):
+                if OUTIL in s:
+                    # page générique : la page ne nomme que l'outil ; les appels sont ceux d'outil.js et de sa config
+                    self.assertIn(f'outil:"{dossier}"', s)
+                    self.assertNotIn("loadPyodide", s)
+                    self.assertNotIn("new Worker", s)
+                    appels = set(re.findall(r'appelPy\("([a-z_]+)"', s + lire("commun/outil.js")))
+                    self.assertTrue(appels <= set(o["fonctions"]), appels - set(o["fonctions"]))
+                    self.assertEqual(set(o["fonctions"]) - appels, set(o.get("anciennes", [])),
+                                     "fonctions non appelées = anciennes (pages en cache)")
+                    continue
                 if CLIENT in s:
                     # client commun : les fichiers viennent du manifeste, la page ne nomme que l'outil et ses appels
                     self.assertIn(f'new MoteurPython("{dossier}"', s)
@@ -78,6 +89,11 @@ class TestManifeste(unittest.TestCase):
                     self.assertEqual(ecrits, {os.path.basename(c) for c in o["fichiers"]}, "fichiers écrits dans Pyodide")
                     self.assertIn(f'runPython("import {o["module"]}")', s)
                 self.assertEqual(set(re.findall(r'appelPy\("([a-z_]+)"', s)), set(o["fonctions"]), "fonctions appelées")
+
+    def test_outil_utilise_le_client_commun(self):
+        outil = lire("commun/outil.js")
+        self.assertIn('from "./moteur-python.js"', outil)
+        self.assertNotIn("loadPyodide", outil)
 
     def test_client_commun_et_worker(self):
         client, worker = lire("commun/moteur-python.js"), lire("commun/worker-pyodide.js")
@@ -108,7 +124,7 @@ class TestManifeste(unittest.TestCase):
         """La version de Pyodide (pages à worker intégré, client commun) et celles de la CI sont celles du manifeste."""
         for dossier in OUTILS:
             with self.subTest(page=dossier):
-                if CLIENT not in page(dossier):
+                if CLIENT not in page(dossier) and OUTIL not in page(dossier):
                     self.assertIn(f'const PYODIDE="https://cdn.jsdelivr.net/pyodide/v{VERSIONS["pyodide"]}/full/"', page(dossier))
                 else:
                     self.assertNotRegex(page(dossier), r"pyodide/v\d")

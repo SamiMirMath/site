@@ -1,6 +1,7 @@
 """Tests de pages — comportement commun des cinq outils (socle-commun.md), indépendant de la façon dont la
 page est construite : `?f=` (SOC-04), saisie invalide (SOC-06), aperçu sans message rouge pendant la frappe
-(SOC-16), délai dépassé puis relance du moteur (SOC-13, au niveau du client commun)."""
+(SOC-16), étapes (SOC-07), largeur à 360 px (SOC-09), délai dépassé puis relance du moteur (SOC-13), rendu commun
+des sorties de resoudre() (commun/rendu.js)."""
 import json
 import os
 import sys
@@ -11,6 +12,10 @@ from urllib.parse import quote
 sys.path.insert(0, os.path.dirname(__file__))
 from navigateur import Navigateur
 from rendu import OUTILS, attendre_pret
+
+RACINE = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+CALCUL = {"ensemble-definition": "ln(x^2-4x)/(x-5)", "derivee-variations": "ln(x)/x", "limites-asymptotes": "(x^2-1)/(x-3)",
+          "etude-complete": "x^2*e^(-x)", "factorisation": "x^2+5x-14"}
 
 CHOISIS = [o for o in os.environ.get("OUTILS", "").split(",") if o] or OUTILS
 EXEMPLE = {"ensemble-definition": "ln(x-1)", "derivee-variations": "x^2", "limites-asymptotes": "1/x",
@@ -89,6 +94,83 @@ class TestComportement(unittest.TestCase):
         page.attendre("document.querySelector('#apercu .katex')", 10)
         self.assertEqual(page.evaluer("document.querySelector('#entree').value"), "ln(x)/x")
 
+    def calculer(self, page, entree):
+        page.evaluer(f"document.querySelector('#entree').value = {entree!r}; document.querySelector('#calculer').click()")
+        page.attendre("document.querySelector('#cartes').children.length > 0 && !document.querySelector('#calculer').disabled", 120)
+
+    def test_soc07_etapes(self):
+        """« Étape suivante » révèle exactement une carte, « Tout afficher » toutes ; le compteur est juste."""
+        for outil in OUTILS:
+            with self.subTest(outil=outil):
+                if outil not in CHOISIS:
+                    continue
+                page = self.ouvrir(outil)
+                self.calculer(page, CALCUL[outil])
+                etat = lambda: page.evaluer("""(() => {
+                    const m = document.querySelector('#progression').textContent.match(/(\\d+) \\/ (\\d+)/);
+                    return [+m[1], +m[2], document.querySelectorAll('#cartes .cache').length];
+                })()""")
+                k, m, caches = etat()
+                self.assertEqual((k, caches), (1, m - 1))
+                while k < m:
+                    page.evaluer("document.querySelector('#suivant').click()")
+                    k2, m2, c2 = etat()
+                    self.assertEqual((k2, m2, c2), (k + 1, m, m - k - 1))
+                    k = k2
+                self.assertTrue(page.evaluer("document.querySelector('#suivant').disabled"))
+                # « Tout afficher » depuis le début
+                self.calculer(page, CALCUL[outil])
+                page.evaluer("document.querySelector('#tout').click()")
+                self.assertEqual(etat(), [m, m, 0])
+
+    def test_soc09_pas_de_defilement_horizontal_a_360_px(self):
+        for outil in OUTILS:
+            with self.subTest(outil=outil):
+                if outil not in CHOISIS:
+                    continue
+                page = self.ouvrir(outil)
+                page.taille(360)
+                self.calculer(page, CALCUL[outil])
+                page.evaluer("document.querySelector('#tout').click()")
+                time.sleep(1.0)
+                largeur = page.evaluer("[document.documentElement.scrollWidth, window.innerWidth]")
+                self.assertLessEqual(largeur[0], largeur[1], largeur)
+                page.taille(1100)
+
+    def test_soc13_page_delai_depasse_puis_relance(self):
+        """Page migrée (commun/outil.js) : délai dépassé → message, moteur relancé, le calcul suivant réussit."""
+        page = self.ouvrir("ensemble-definition")
+        page.evaluer("window.__delaiCalcul = 1")
+        self.calculer(page, "ln(x-1)")
+        self.assertIn("trop de temps", page.evaluer("document.querySelector('#cartes .err').textContent"))
+        page.evaluer("window.__delaiCalcul = 0")
+        attendre_pret(page)                                            # nouveau moteur prêt
+        self.calculer(page, "ln(x-1)")
+        self.assertFalse(page.evaluer("document.querySelector('#cartes .err')"))
+        self.assertTrue(page.evaluer("!!document.querySelector('#cartes .card.final')"))
+
+    def test_rendu_commun_des_instantanes(self):
+        """commun/rendu.js rend sans exception, sans « undefined » ni « [object », chaque sortie de resoudre()
+        des cinq outils (instantanés de tests/python/instantanes/resoudre)."""
+        page = self.ouvrir("ensemble-definition")
+        dossier = os.path.join(RACINE, "tests", "python", "instantanes", "resoudre")
+        for outil in OUTILS:
+            with open(os.path.join(dossier, outil + ".json"), encoding="utf-8") as f:
+                sorties = [v for v in json.load(f).values() if "exception" not in v]
+            with self.subTest(outil=outil):
+                res = page.evaluer("""(async (sorties) => {
+                    const { rendreCarte, rendreErreur } = await import('/commun/rendu.js');
+                    const vus = [];
+                    for (const s of sorties) {
+                        const els = s.ok ? [s.entete, ...s.cartes].filter(Boolean).map(rendreCarte) : [rendreErreur(s)];
+                        for (const el of els) vus.push(el.innerHTML + el.textContent);
+                    }
+                    return vus.filter(h => /undefined|\\[object|NaN/.test(h)).length + ':' + vus.length;
+                })(""" + json.dumps(sorties) + ")")
+                mauvais, total = res.split(":")
+                self.assertEqual(mauvais, "0", res)
+                self.assertGreater(int(total), 0)
+
     def test_soc13_delai_depasse_puis_relance(self):
         page = self.ouvrir("ensemble-definition")
         res = page.evaluer("""(async () => {
@@ -96,9 +178,9 @@ class TestComportement(unittest.TestCase):
             const m = new MoteurPython('ensemble-definition');
             await m.demarrer();
             let e1 = null;
-            try { await m.appelPy('analyser', 'ln(x-1)', 1); } catch (e) { e1 = e.message; }
+            try { await m.appelPy('resoudre', 'ln(x-1)', 1); } catch (e) { e1 = e.message; }
             m.relancer();
-            const r = await m.appelPy('analyser', 'ln(x-1)', 120000);
+            const r = await m.appelPy('resoudre', 'ln(x-1)', 120000);
             return [e1, r.ok];
         })()""")
         self.assertEqual(res, ["delai", True])

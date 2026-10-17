@@ -1,5 +1,5 @@
 {
-  "_note": "Fichiers Python chargés dans Pyodide par chaque outil (chemins depuis la racine du site), module importé et fonctions appelées par la page (suffixe _json). Vérifié par tests/python/test_manifeste.py.",
+  "_note": "Fichiers Python chargés dans Pyodide par chaque outil (chemins depuis la racine du site), module importé et fonctions appelées par la page (suffixe _json). « anciennes » : fonctions que seules des pages restées en cache appellent encore (à retirer après quelques jours en ligne). Vérifié par tests/python/test_manifeste.py.",
   "versions": {
     "pyodide": "0.27.7",
     "python": "3.12",
@@ -8,9 +8,10 @@
   },
   "outils": {
     "ensemble-definition": {
-      "module": "ensemble_def",
-      "fichiers": ["ensemble-definition/ensemble_def.py"],
-      "fonctions": ["analyser", "apercu", "verifier"]
+      "module": "resoudre_ed",
+      "fichiers": ["ensemble-definition/ensemble_def.py", "moteur/sortie.py", "ensemble-definition/resoudre_ed.py"],
+      "fonctions": ["resoudre", "apercu", "controle", "analyser", "verifier"],
+      "anciennes": ["analyser", "verifier"]
     },
     "derivee-variations": {
       "module": "derivee_variations",
