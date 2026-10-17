@@ -55,6 +55,26 @@ tests/
 | D11 | **Simplexe reste en JS** (pas de Pyodide) | Instantané sur téléphone, déjà exact (BigInt). Priorité faible, traité en dernier. |
 | D12 | `docs/` et `tests/` **exclus de la publication** (`_config.yml`) | Fait (`88b7b0f`). Attention : Jekyll ignore aussi les dossiers commençant par « _ » ; ne jamais nommer ainsi un dossier à publier. |
 
+### Précautions pour `moteur/noyau.py` (D6, fait en T11, `0e019bf`)
+
+- **Tout passe par le noyau** : un moteur n'importe jamais `ensemble_def` directement. Une fonction
+  du noyau devenue utile ailleurs s'ajoute à la liste d'import de `noyau.py`, sous un nom public si
+  elle est privée (comme `_sympy` → `charger_sympy`). `tests/python/test_noyau.py` le vérifie.
+- **Réexporter, rien de plus** : aucune logique dans `noyau.py`. `SYMPY` est le même dict que `_SP`
+  (pas une copie) : on le lit, on ne le réaffecte jamais.
+- **Fichiers à plat dans Pyodide** : `ensemble_def.py` et `noyau.py` sont écrits côte à côte, sans
+  dossier. `moteur/` n'est pas un paquet Python : pas de `from moteur.noyau import …`, qui
+  casserait l'import dans le navigateur (le test d'import isolé du manifeste le détecte).
+- **Déclaration par outil** : chaque outil qui utilise le noyau liste `moteur/noyau.py` dans
+  `moteur/manifeste.json` et le charge dans sa page (`fetch` + `writeFile`) ; `test_manifeste.py`
+  vérifie les deux. Vaut aussi pour les outils de la phase F.
+- **Simulations de test** : simuler un nom là où il est utilisé. Simuler `noyau.charger_sympy`
+  n'atteint ni `ensemble_def` ni les moteurs, qui ont déjà leur copie du nom.
+- **Mise en ligne** : GitHub Pages garde le HTML en cache une dizaine de minutes. Après un push qui
+  change les fichiers chargés par une page, un élève dont l'ancienne page est en cache peut voir
+  une erreur d'import jusqu'au rechargement : éviter de pousser juste avant un cours ou un devoir,
+  et essayer chaque page touchée dans un navigateur avant de pousser.
+
 ## Format de sortie commun (D2)
 
 Chaque outil Python expose trois fonctions publiques (via un adaptateur, sans modifier
