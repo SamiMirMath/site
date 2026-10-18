@@ -1,0 +1,194 @@
+{
+ "e_1_x--360-sombre--glisser": {
+  "appels": 967,
+  "sha": "d0485f21129a78870c60"
+ },
+ "e_1_x--360-sombre--impression": {
+  "appels": 969,
+  "sha": "525c9cf17da6afd493b3"
+ },
+ "e_1_x--360-sombre--initial": {
+  "appels": 969,
+  "sha": "3a836e1884c6de226b40"
+ },
+ "e_1_x--360-sombre--moins": {
+  "appels": 1010,
+  "sha": "6f0df16569591273635e"
+ },
+ "e_1_x--360-sombre--molette": {
+  "appels": 978,
+  "sha": "f6d6c75e2fcfcfa20b10"
+ },
+ "e_1_x--360-sombre--pincer": {
+  "appels": 958,
+  "sha": "4cde0ce9ce4bec02aae2"
+ },
+ "e_1_x--360-sombre--plus": {
+  "appels": 989,
+  "sha": "f8c5fa9fdcab0101827e"
+ },
+ "e_1_x--360-sombre--reset": {
+  "appels": 969,
+  "sha": "3a836e1884c6de226b40"
+ },
+ "e_1_x--clair--glisser": {
+  "appels": 1969,
+  "sha": "289027c6c4dc03584c9b"
+ },
+ "e_1_x--clair--impression": {
+  "appels": 1972,
+  "sha": "1328cec126348a23595d"
+ },
+ "e_1_x--clair--initial": {
+  "appels": 616,
+  "sha": "a0f8c54608bfe91ed7f2"
+ },
+ "e_1_x--clair--moins": {
+  "appels": 2010,
+  "sha": "80d1039385fdb0d6cb4d"
+ },
+ "e_1_x--clair--molette": {
+  "appels": 1930,
+  "sha": "5bf5ce491bcd03d71af4"
+ },
+ "e_1_x--clair--pincer": {
+  "appels": 1990,
+  "sha": "52c4d1e28ba1c242c6ce"
+ },
+ "e_1_x--clair--plus": {
+  "appels": 1931,
+  "sha": "dae11d3b5af57ec41ed9"
+ },
+ "e_1_x--clair--reset": {
+  "appels": 1972,
+  "sha": "1328cec126348a23595d"
+ },
+ "x_2_1_x_1--360-sombre--glisser": {
+  "appels": 1002,
+  "sha": "7328b2cf7fe19feb8d4c"
+ },
+ "x_2_1_x_1--360-sombre--impression": {
+  "appels": 1017,
+  "sha": "b2d0dc28ecd34be1112a"
+ },
+ "x_2_1_x_1--360-sombre--initial": {
+  "appels": 1017,
+  "sha": "362e6b577993c0fe1cbd"
+ },
+ "x_2_1_x_1--360-sombre--moins": {
+  "appels": 997,
+  "sha": "cc58fec4a23426ea87ad"
+ },
+ "x_2_1_x_1--360-sombre--molette": {
+  "appels": 966,
+  "sha": "9f24ea3e6bbdf844d8b7"
+ },
+ "x_2_1_x_1--360-sombre--pincer": {
+  "appels": 988,
+  "sha": "a8d66604d166fe4a8b03"
+ },
+ "x_2_1_x_1--360-sombre--plus": {
+  "appels": 977,
+  "sha": "b58bd5482264b0f20f4c"
+ },
+ "x_2_1_x_1--360-sombre--reset": {
+  "appels": 1017,
+  "sha": "362e6b577993c0fe1cbd"
+ },
+ "x_2_1_x_1--clair--glisser": {
+  "appels": 2012,
+  "sha": "3e01a4705da2d66c596b"
+ },
+ "x_2_1_x_1--clair--impression": {
+  "appels": 1997,
+  "sha": "352313fb96803db1ea36"
+ },
+ "x_2_1_x_1--clair--initial": {
+  "appels": 647,
+  "sha": "ec986c420e3b68946c59"
+ },
+ "x_2_1_x_1--clair--moins": {
+  "appels": 1977,
+  "sha": "5a0baa1599d52ea32a70"
+ },
+ "x_2_1_x_1--clair--molette": {
+  "appels": 1972,
+  "sha": "deddc57c5f9e035c7fd0"
+ },
+ "x_2_1_x_1--clair--pincer": {
+  "appels": 1972,
+  "sha": "f039b09f196c75b9a0f1"
+ },
+ "x_2_1_x_1--clair--plus": {
+  "appels": 1963,
+  "sha": "e22516eba5d374987c3b"
+ },
+ "x_2_1_x_1--clair--reset": {
+  "appels": 1997,
+  "sha": "352313fb96803db1ea36"
+ },
+ "x_2_e_x--360-sombre--glisser": {
+  "appels": 953,
+  "sha": "e884e077d6088db120ba"
+ },
+ "x_2_e_x--360-sombre--impression": {
+  "appels": 974,
+  "sha": "6e2d10d4ee56bba455c8"
+ },
+ "x_2_e_x--360-sombre--initial": {
+  "appels": 974,
+  "sha": "a4f292e6bdab6207620a"
+ },
+ "x_2_e_x--360-sombre--moins": {
+  "appels": 994,
+  "sha": "9df451e166fa4b9f4c61"
+ },
+ "x_2_e_x--360-sombre--molette": {
+  "appels": 994,
+  "sha": "5c6c4ed0f09da7831b69"
+ },
+ "x_2_e_x--360-sombre--pincer": {
+  "appels": 983,
+  "sha": "bb09c4900a3b8589bca3"
+ },
+ "x_2_e_x--360-sombre--plus": {
+  "appels": 974,
+  "sha": "443a2e1a7d99f94ddb25"
+ },
+ "x_2_e_x--360-sombre--reset": {
+  "appels": 974,
+  "sha": "a4f292e6bdab6207620a"
+ },
+ "x_2_e_x--clair--glisser": {
+  "appels": 1944,
+  "sha": "c06ef59951ba2caef604"
+ },
+ "x_2_e_x--clair--impression": {
+  "appels": 1954,
+  "sha": "80775befd02e1c1a5a43"
+ },
+ "x_2_e_x--clair--initial": {
+  "appels": 604,
+  "sha": "37d2ae0c75c43228e47b"
+ },
+ "x_2_e_x--clair--moins": {
+  "appels": 1974,
+  "sha": "cb20f0f8880bf0adc22b"
+ },
+ "x_2_e_x--clair--molette": {
+  "appels": 1974,
+  "sha": "59be0b7e5a6a53294565"
+ },
+ "x_2_e_x--clair--pincer": {
+  "appels": 2018,
+  "sha": "63a85f835e2866d84f5f"
+ },
+ "x_2_e_x--clair--plus": {
+  "appels": 1964,
+  "sha": "aa65e162cae017e1fd1b"
+ },
+ "x_2_e_x--clair--reset": {
+  "appels": 1954,
+  "sha": "80775befd02e1c1a5a43"
+ }
+}

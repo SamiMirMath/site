@@ -90,8 +90,8 @@ class Page:
         with open(chemin, "wb") as f:
             f.write(base64.b64decode(d))
 
-    def taille(self, largeur, hauteur=900, sombre=False, imprimante=False):
-        self.appel("Emulation.setDeviceMetricsOverride", width=largeur, height=hauteur, deviceScaleFactor=1, mobile=False)
+    def taille(self, largeur, hauteur=900, sombre=False, imprimante=False, dpr=1):
+        self.appel("Emulation.setDeviceMetricsOverride", width=largeur, height=hauteur, deviceScaleFactor=dpr, mobile=False)
         feats = [{"name": "prefers-color-scheme", "value": "dark" if sombre else "light"}]
         self.appel("Emulation.setEmulatedMedia", media="print" if imprimante else "screen", features=feats)
 
@@ -137,8 +137,9 @@ class Navigateur:
                     raise ErreurPage(m["error"])
                 return m["result"]
 
-    def ouvrir(self, chemin):
-        """Ouvre `chemin` (relatif à la racine du site) dans un nouvel onglet ; renvoie la Page."""
+    def ouvrir(self, chemin, script_initial=None):
+        """Ouvre `chemin` (relatif à la racine du site) dans un nouvel onglet ; renvoie la Page.
+        `script_initial` : JavaScript exécuté dans la page avant tout autre script (banc du graphique)."""
         # un seul onglet à la fois : chaque page lance un worker Pyodide (plusieurs dizaines de Mo), les laisser
         # s'accumuler fait dépasser les délais de chargement
         for ancien in getattr(self, "_cibles", []):
@@ -152,6 +153,8 @@ class Navigateur:
         page = Page(self.ws, session)
         page.appel("Page.enable")
         page.appel("Runtime.enable")
+        if script_initial:
+            page.appel("Page.addScriptToEvaluateOnNewDocument", source=script_initial)
         page.appel("Page.navigate", url=f"http://127.0.0.1:{self.port_http}/{chemin}")
         return page
 
