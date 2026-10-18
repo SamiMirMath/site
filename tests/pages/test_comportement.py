@@ -4,6 +4,7 @@ page est construite : `?f=` (SOC-04), saisie invalide (SOC-06), aperçu sans mes
 des sorties de resoudre() (commun/rendu.js)."""
 import json
 import os
+import re
 import sys
 import time
 import unittest
@@ -11,7 +12,7 @@ from urllib.parse import quote
 
 sys.path.insert(0, os.path.dirname(__file__))
 from navigateur import Navigateur
-from rendu import OUTILS, attendre_pret
+from rendu import DOSSIER_REFERENCES, JS_CAPTURE, OUTILS, attendre_pret
 
 RACINE = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 CALCUL = {"ensemble-definition": "ln(x^2-4x)/(x-5)", "derivee-variations": "ln(x)/x", "limites-asymptotes": "(x^2-1)/(x-3)",
@@ -23,6 +24,12 @@ EXEMPLE = {"ensemble-definition": "ln(x-1)", "derivee-variations": "x^2", "limit
 INVALIDE = {"ensemble-definition": "ln(", "derivee-variations": "ln(", "limites-asymptotes": "ln(",
             "etude-complete": "ln(", "factorisation": "sqrt(x)"}
 ANALYSE = ["ensemble-definition", "derivee-variations", "limites-asymptotes", "etude-complete"]
+
+
+def sans_espaces(cartes):
+    """Les cartes sans l'espace entre la formule et la ligne « ED = … » : la page d'origine en mettait une, invisible
+    (même écart que pour les pages Dérivée et Limites, T17 et T18)."""
+    return [dict(c, texte=re.sub(r"\s+", "", c["texte"])) for c in cartes]
 
 
 class TestComportement(unittest.TestCase):
@@ -170,6 +177,30 @@ class TestComportement(unittest.TestCase):
                 mauvais, total = res.split(":")
                 self.assertEqual(mauvais, "0", res)
                 self.assertGreater(int(total), 0)
+
+    def test_rendu_commun_de_l_etude_complete_egal_a_l_ancienne_page(self):
+        """EC (T19) : rendre avec commun/rendu.js les sorties de resoudre() de l'Étude complète donne les mêmes cartes
+        que la page d'origine, enregistrées dans references/etude-complete.json (classes, titres, textes, formules,
+        tableaux avec les limites dans la ligne de variation, listes). La carte du graphique (dernière) est exclue :
+        elle est vérifiée par le banc du graphique."""
+        page = self.ouvrir("ensemble-definition")                       # n'importe quelle page qui charge KaTeX et rendu.js
+        with open(os.path.join(RACINE, "tests", "python", "instantanes", "resoudre", "etude-complete.json"), encoding="utf-8") as f:
+            sorties = {e: s for e, s in json.load(f).items() if s.get("ok")}
+        with open(os.path.join(DOSSIER_REFERENCES, "etude-complete.json"), encoding="utf-8") as f:
+            references = json.load(f)
+        self.assertGreater(len(sorties), 10)
+        for entree, sortie in sorties.items():
+            with self.subTest(entree=entree):
+                page.evaluer("document.querySelector('#cartes').innerHTML = ''")
+                page.evaluer("""(async (s) => {
+                    const { rendreCarte } = await import('/commun/rendu.js');
+                    for (const c of [s.entete, ...s.cartes].filter(Boolean)) document.querySelector('#cartes').appendChild(rendreCarte(c));
+                })(""" + json.dumps(sortie) + ")")
+                rendu = page.evaluer(JS_CAPTURE)["cartes"]
+                attendu = references[entree]["cartes"]
+                self.assertEqual(len(rendu), len(attendu))
+                self.assertEqual(rendu[-1]["titre"], "Graphique")
+                self.assertEqual(sans_espaces(rendu[:-1]), sans_espaces(attendu[:-1]))
 
     def test_soc13_delai_depasse_puis_relance(self):
         page = self.ouvrir("ensemble-definition")

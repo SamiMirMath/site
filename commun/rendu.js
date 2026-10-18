@@ -27,7 +27,22 @@ export function math(el) {
   if (window.renderMathInElement) renderMathInElement(el, { delimiters: DELIMITEURS, throwOnError: false, strict: "ignore" });
 }
 
-function cellule(s) {
+/* Valeur d'une limite : « ? » telle quelle, sinon une formule ; rien si elle est absente. */
+function valeurLimite(v) {
+  return v == null ? "" : v === "?" ? "?" : K(v);
+}
+
+/* Colonne interdite avec limites (tableau.limites.colonnes) : limite à gauche et à droite du trait. Chaque moitié
+   contient aussi, invisible, la valeur de l'autre (`i`) pour que les deux moitiés aient la même largeur et que le trait
+   reste centré. */
+function celluleLimites(c) {
+  const g = valeurLimite(c.gauche), d = valeurLimite(c.droite);
+  return `<td class="vi"><div class="lm"><span class="lg">${g}<i aria-hidden="true">${d}</i></span>` +
+    `<span class="ld">${d}<i aria-hidden="true">${g}</i></span></div></td>`;
+}
+
+function cellule(s, j, limites) {
+  if (s === "asym" && limites[j]) return celluleLimites(limites[j]);
   if (s === "+") return '<td class="p">+</td>';
   if (s === "-") return '<td class="m">−</td>';
   if (s === "||" || s === "asym") return '<td class="vi"></td>';
@@ -39,13 +54,20 @@ function cellule(s) {
   return `<td>${s}</td>`;
 }
 
+/* Tableau de signes ou de variations. `limites` (Étude complète seulement) : valeurs en ±∞ dans les cases du bord de la
+   ligne de variation, et des deux côtés d'une colonne interdite (case « asym »). */
 export function rendreTableau(t) {
+  const lim = t.limites || null;
+  const parColonne = {};
+  ((lim && lim.colonnes) || []).forEach(c => { parColonne[c.j] = c; });
   let h = '<div class="tsigne"><table><tr><td class="lab">' + K(t.var) + "</td><td>" + K("-\\infty") + "</td>";
   for (const c of t.crit) h += "<td></td><td>" + K(c) + "</td>";
   h += "<td></td><td>" + K("+\\infty") + "</td></tr>";
   for (const r of t.rows) {
     const classe = r.final ? "final" : r.variation ? "variation" : "";
-    h += `<tr class="${classe}"><td class="lab">${K(r.label)}</td><td></td>` + r.cells.map(cellule).join("") + "<td></td></tr>";
+    const bord = v => `<td>${r.variation && lim ? valeurLimite(v) : ""}</td>`;
+    h += `<tr class="${classe}"><td class="lab">${K(r.label)}</td>${bord(lim && lim.moins_inf)}` +
+      r.cells.map((c, j) => cellule(c, j, parColonne)).join("") + bord(lim && lim.plus_inf) + "</tr>";
   }
   return h + "</table></div>";
 }
