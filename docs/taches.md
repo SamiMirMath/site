@@ -249,7 +249,11 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
   manifeste (`resoudre_dv`, fonctions `resoudre` et `apercu`) ; SOC-10 et source unique étendus à la page ; 31 références
   inchangées au caractère près (seul l'espace entre la formule et la ligne « ED = … » disparaît, invisible : références
   regénérées) ; 50 captures identiques. Aucun changement de Python.
-- T18 Limites, T19 Étude complète (+ EC-04, EC-05, EC-06), T20 Factorisation.
+- T18 Limites — **faite** (17.10.2026) : page réduite à ses exemples, ses exercices et sa config (`sympyAvant: true`) ;
+  manifeste (`resoudre_la`, fonctions `resoudre` et `apercu`) ; SOC-10 et source unique étendus à la page ; 24 références sur 25
+  changent d'une seule chose, l'espace entre la formule et la ligne « ED = … » (invisible : 50 captures sans écart au-delà du bruit de
+  rendu) ; aucun changement de Python.
+- T19 Étude complète (+ EC-04, EC-05, EC-06), T20 Factorisation.
 - **Dépend** : T16. **Vérification** : mêmes critères SOC + critères de page de l'outil ;
   instantanés des moteurs inchangés.
 

@@ -20,9 +20,10 @@
       "fonctions": ["resoudre", "apercu"]
     },
     "limites-asymptotes": {
-      "module": "limites_asymptotes",
-      "fichiers": ["ensemble-definition/ensemble_def.py", "moteur/noyau.py", "limites-asymptotes/limites_asymptotes.py"],
-      "fonctions": ["apercu", "etudier"]
+      "module": "resoudre_la",
+      "fichiers": ["ensemble-definition/ensemble_def.py", "moteur/noyau.py", "moteur/sortie.py", "limites-asymptotes/limites_asymptotes.py",
+                   "limites-asymptotes/resoudre_la.py"],
+      "fonctions": ["resoudre", "apercu"]
     },
     "etude-complete": {
       "module": "etude_complete",

@@ -11,7 +11,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\frac{2x + 1}{x - 1}⟧ ⟦ED = \\mathbb{R} \\setminus \\left\\{1\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "texte": "⟦f(x) = \\frac{2x + 1}{x - 1}⟧⟦ED = \\mathbb{R} \\setminus \\left\\{1\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
     "titre": null
    },
    {
@@ -149,7 +149,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\frac{2x^{2} + 1}{x^{2} - 1}⟧ ⟦ED = \\mathbb{R} \\setminus \\left\\{-1 \\,;\\, 1\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "texte": "⟦f(x) = \\frac{2x^{2} + 1}{x^{2} - 1}⟧⟦ED = \\mathbb{R} \\setminus \\left\\{-1 \\,;\\, 1\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
     "titre": null
    },
    {
@@ -388,7 +388,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\frac{e^{x} - 1}{x}⟧ ⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "texte": "⟦f(x) = \\frac{e^{x} - 1}{x}⟧⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
     "titre": null
    },
    {
@@ -454,7 +454,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\frac{x^{2} - 1}{x - 1}⟧ ⟦ED = \\mathbb{R} \\setminus \\left\\{1\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "texte": "⟦f(x) = \\frac{x^{2} - 1}{x - 1}⟧⟦ED = \\mathbb{R} \\setminus \\left\\{1\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
     "titre": null
    },
    {
@@ -521,7 +521,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\frac{x^{2} - 1}{x - 3}⟧ ⟦ED = \\mathbb{R} \\setminus \\left\\{3\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "texte": "⟦f(x) = \\frac{x^{2} - 1}{x - 3}⟧⟦ED = \\mathbb{R} \\setminus \\left\\{3\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
     "titre": null
    },
    {
@@ -659,7 +659,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\frac{x^{3} + 1}{x - 2}⟧ ⟦ED = \\mathbb{R} \\setminus \\left\\{2\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "texte": "⟦f(x) = \\frac{x^{3} + 1}{x - 2}⟧⟦ED = \\mathbb{R} \\setminus \\left\\{2\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
     "titre": null
    },
    {
@@ -797,7 +797,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\frac{1}{x - 2}⟧ ⟦ED = \\mathbb{R} \\setminus \\left\\{2\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "texte": "⟦f(x) = \\frac{1}{x - 2}⟧⟦ED = \\mathbb{R} \\setminus \\left\\{2\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
     "titre": null
    },
    {
@@ -935,7 +935,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\frac{1}{x^{2} - 2}⟧ ⟦ED = \\mathbb{R} \\setminus \\left\\{-\\sqrt{2} \\,;\\, \\sqrt{2}\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "texte": "⟦f(x) = \\frac{1}{x^{2} - 2}⟧⟦ED = \\mathbb{R} \\setminus \\left\\{-\\sqrt{2} \\,;\\, \\sqrt{2}\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
     "titre": null
    },
    {
@@ -1100,7 +1100,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\frac{1}{x^{2}}⟧ ⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "texte": "⟦f(x) = \\frac{1}{x^{2}}⟧⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
     "titre": null
    },
    {
@@ -1238,7 +1238,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = e^{\\frac{1}{x}}⟧ ⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "texte": "⟦f(x) = e^{\\frac{1}{x}}⟧⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
     "titre": null
    },
    {
@@ -1376,7 +1376,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = e^{2x}⟧ ⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "texte": "⟦f(x) = e^{2x}⟧⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
     "titre": null
    },
    {
@@ -1431,7 +1431,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\frac{e^{x}}{x}⟧ ⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "texte": "⟦f(x) = \\frac{e^{x}}{x}⟧⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
     "titre": null
    },
    {
@@ -1587,7 +1587,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\ln(x)⟧ ⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧ — détail dans l'outil « Ensemble de définition ».",
+    "texte": "⟦f(x) = \\ln(x)⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧ — détail dans l'outil « Ensemble de définition ».",
     "titre": null
    },
    {
@@ -1642,7 +1642,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\ln\\left(x - 1\\right)⟧ ⟦ED = \\left]1 \\,;\\, +\\infty\\right[⟧ — détail dans l'outil « Ensemble de définition ».",
+    "texte": "⟦f(x) = \\ln\\left(x - 1\\right)⟧⟦ED = \\left]1 \\,;\\, +\\infty\\right[⟧ — détail dans l'outil « Ensemble de définition ».",
     "titre": null
    },
    {
@@ -1768,7 +1768,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5}⟧ ⟦ED = \\left]-\\infty \\,;\\, 0\\right[ \\cup \\left]4 \\,;\\, 5\\right[ \\cup \\left]5 \\,;\\, +\\infty\\right[⟧ — détail dans l'outil « Ensemble de définition ».",
+    "texte": "⟦f(x) = \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5}⟧⟦ED = \\left]-\\infty \\,;\\, 0\\right[ \\cup \\left]4 \\,;\\, 5\\right[ \\cup \\left]5 \\,;\\, +\\infty\\right[⟧ — détail dans l'outil « Ensemble de définition ».",
     "titre": null
    },
    {
@@ -2078,7 +2078,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\sqrt{x^{2} + 1}⟧ ⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "texte": "⟦f(x) = \\sqrt{x^{2} + 1}⟧⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
     "titre": null
    },
    {
@@ -2134,7 +2134,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\sqrt{x^{2} - 4x + 5}⟧ ⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "texte": "⟦f(x) = \\sqrt{x^{2} - 4x + 5}⟧⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
     "titre": null
    },
    {
@@ -2190,7 +2190,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = x\\,e^{x}⟧ ⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "texte": "⟦f(x) = x\\,e^{x}⟧⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
     "titre": null
    },
    {
@@ -2245,7 +2245,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = x\\,\\ln\\left(x^{2}\\right)⟧ ⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "texte": "⟦f(x) = x\\,\\ln\\left(x^{2}\\right)⟧⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
     "titre": null
    },
    {
@@ -2441,7 +2441,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = x + \\ln(x)⟧ ⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧ — détail dans l'outil « Ensemble de définition ».",
+    "texte": "⟦f(x) = x + \\ln(x)⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧ — détail dans l'outil « Ensemble de définition ».",
     "titre": null
    },
    {
@@ -2496,7 +2496,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\frac{x}{\\sqrt{x^{2}}}⟧ ⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "texte": "⟦f(x) = \\frac{x}{\\sqrt{x^{2}}}⟧⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
     "titre": null
    },
    {
@@ -2563,7 +2563,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = x^{\\frac{1}{2}} = \\sqrt{x}⟧ ⟦ED = \\left[0 \\,;\\, +\\infty\\right[⟧ — détail dans l'outil « Ensemble de définition ».",
+    "texte": "⟦f(x) = x^{\\frac{1}{2}} = \\sqrt{x}⟧⟦ED = \\left[0 \\,;\\, +\\infty\\right[⟧ — détail dans l'outil « Ensemble de définition ».",
     "titre": null
    },
    {
@@ -2601,7 +2601,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = x^{2}\\,e^{-x}⟧ ⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "texte": "⟦f(x) = x^{2}\\,e^{-x}⟧⟦ED = \\mathbb{R}⟧ — détail dans l'outil « Ensemble de définition ».",
     "titre": null
    },
    {
@@ -2656,7 +2656,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\frac{x^{2}}{x - 1}⟧ ⟦ED = \\mathbb{R} \\setminus \\left\\{1\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "texte": "⟦f(x) = \\frac{x^{2}}{x - 1}⟧⟦ED = \\mathbb{R} \\setminus \\left\\{1\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
     "titre": null
    },
    {
