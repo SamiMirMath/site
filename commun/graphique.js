@@ -160,3 +160,134 @@ export function dessinerGraphique(canvas, g, extrema, asymptotes, vista, forcerC
   });
 }
 
+
+/* Interaction : zoom (boutons, molette, pincement), déplacement (glisser) et rééchantillonnage de la courbe.
+
+   monterGraphique({ canvas, plus, moins, reinit, message }, { g, extrema, asymptotes, fenetre })
+     canvas, plus, moins, reinit   le <canvas> et les trois boutons (zoom +, zoom −, réinitialiser)
+     message                       élément caché affiché quand la courbe n'a pas pu être recalculée
+     fenetre(xmin, xmax, n)        promesse des segments de la courbe sur [xmin ; xmax] avec n points ;
+                                   null (ou une erreur) si le calcul échoue, undefined s'il n'y a rien à recalculer
+   En cas d'échec, la courbe affichée reste celle de la dernière fenêtre réussie et le message apparaît.
+   Laisse sur le canvas __g, __extrema, __asymptotes et __vista (fenêtre voulue). Renvoie { redessiner(forcerClair) }. */
+export function monterGraphique({ canvas: cv, plus, moins, reinit, message }, { g, extrema, asymptotes, fenetre }) {
+  cv.__g=g; cv.__extrema=extrema; cv.__asymptotes=asymptotes;
+  // `vista` est la fenêtre de données qu'on veut voir, en toutes lettres
+  // (xmin,xmax,ymin,ymax) — pas de cx/rayon/échelle séparés qui peuvent diverger.
+  cv.__vista={xmin:g.xmin, xmax:g.xmax, ymin:g.ymin, ymax:g.ymax};
+  const redessiner=()=>dessinerGraphique(cv, cv.__g, extrema, asymptotes, cv.__vista);
+  // À chaque zoom/déplacement, on réinterroge le moteur (fenetre) pour EXACTEMENT la fenêtre
+  // affichée (cv.__rendu, posée par dessinerGraphique après correction d'aspect),
+  // avec une densité liée à la largeur en pixels. Pas de cache : toujours la
+  // bonne donnée pour ce qui est réellement affiché. Un court délai évite de
+  // spammer pendant un zoom/glissement continu.
+  let minuteurFenetre=null;
+  const reechantillonner=()=>{
+    clearTimeout(minuteurFenetre);
+    minuteurFenetre=setTimeout(async()=>{
+      const r=cv.__rendu; if(!r) return;
+      const largeurPx=Math.max(300, cv.getBoundingClientRect().width||640);
+      const n=Math.min(3000, Math.round(largeurPx*2.5));
+      try{
+        const segments=await fenetre(r.xmin, r.xmax, n);
+        if(segments===undefined) return;                          // rien à recalculer
+        if(segments){ cv.__g.segments=segments; redessiner(); message.hidden=true; }
+        else message.hidden=false;
+      }catch(e){ message.hidden=false; }
+    }, 150);
+  };
+  // Zoom centré sur le centre actuel (boutons +/− et réinitialiser).
+  const zoomer=k=>{
+    const v=cv.__rendu||cv.__vista;
+    const cx=(v.xmin+v.xmax)/2, cy=(v.ymin+v.ymax)/2;
+    const rx=Math.max((v.xmax-v.xmin)/2*k, 1e-4), ry=Math.max((v.ymax-v.ymin)/2*k, 1e-4);
+    cv.__vista={xmin:cx-rx, xmax:cx+rx, ymin:cy-ry, ymax:cy+ry};
+    redessiner(); reechantillonner();
+  };
+  // Zoom centré sur un point de l'écran (molette à la position du curseur, ou
+  // point médian entre deux doigts pour le pincer-zoomer) — le point sous le
+  // curseur/les doigts reste à sa place pendant le zoom, comme Desmos/GeoGebra.
+  const zoomVersPoint=(k, px, py)=>{
+    const v=cv.__rendu; if(!v) return zoomer(k);
+    const dx=v.xmin+(px-v.padL)/v.echelle;
+    const dy=v.ymin+(v.availH-(py-v.padT))/v.echelle;
+    cv.__vista={
+      xmin:dx-(dx-v.xmin)*k, xmax:dx+(v.xmax-dx)*k,
+      ymin:dy-(dy-v.ymin)*k, ymax:dy+(v.ymax-dy)*k,
+    };
+    redessiner(); reechantillonner();
+  };
+  plus.onclick=()=>zoomer(0.8);
+  moins.onclick=()=>zoomer(1.25);
+  reinit.onclick=()=>{ cv.__vista={xmin:g.xmin, xmax:g.xmax, ymin:g.ymin, ymax:g.ymax}; redessiner(); reechantillonner(); };
+  cv.addEventListener("wheel",e=>{
+    e.preventDefault();
+    const r=cv.getBoundingClientRect();
+    zoomVersPoint(e.deltaY>0?1.1:0.9, e.clientX-r.left, e.clientY-r.top);
+  },{passive:false});
+
+  // Glisser à un doigt/souris (déplacement) ; pincer à deux doigts (zoom centré
+  // sur le milieu des deux doigts). On suit chaque pointeur actif par son id.
+  const pointeurs=new Map();
+  let glisse=null, pincement=null;
+  const positionCanvas=e=>{ const r=cv.getBoundingClientRect(); return {x:e.clientX-r.left, y:e.clientY-r.top}; };
+  const demarrerGlisse=()=>{
+    const [p]=pointeurs.values();
+    glisse={mx:p.x,my:p.y,vista:Object.assign({},cv.__rendu||cv.__vista)};
+  };
+  const demarrerPincement=()=>{
+    const [p1,p2]=pointeurs.values();
+    pincement={
+      d0:Math.hypot(p2.x-p1.x,p2.y-p1.y)||1,
+      mx:(p1.x+p2.x)/2, my:(p1.y+p2.y)/2,
+      vista:Object.assign({},cv.__rendu||cv.__vista)
+    };
+    glisse=null;
+  };
+  cv.addEventListener("pointerdown",e=>{
+    cv.setPointerCapture(e.pointerId);
+    pointeurs.set(e.pointerId, positionCanvas(e));
+    cv.style.cursor="grabbing";
+    if(pointeurs.size===1) demarrerGlisse();
+    else if(pointeurs.size===2) demarrerPincement();
+  });
+  cv.addEventListener("pointermove",e=>{
+    if(!pointeurs.has(e.pointerId)) return;
+    pointeurs.set(e.pointerId, positionCanvas(e));
+    if(pointeurs.size>=2 && pincement){
+      const [p1,p2]=pointeurs.values();
+      const d=Math.hypot(p2.x-p1.x,p2.y-p1.y)||1;
+      const mx=(p1.x+p2.x)/2, my=(p1.y+p2.y)/2;
+      const k=pincement.d0/d; // doigts qui s'écartent (d augmente) -> k<1 -> zoom avant
+      const v=pincement.vista;
+      const cx0=(v.xmin+v.xmax)/2, cy0=(v.ymin+v.ymax)/2;
+      const rx=Math.max((v.xmax-v.xmin)/2*k, 1e-4), ry=Math.max((v.ymax-v.ymin)/2*k, 1e-4);
+      // décalage pour garder le milieu des doigts ancré (approx. par translation
+      // proportionnelle au déplacement du milieu à l'écran)
+      const r0=cv.__rendu;
+      const dmx=r0?(mx-pincement.mx)/r0.echelle:0, dmy=r0?(my-pincement.my)/r0.echelle:0;
+      cv.__vista={xmin:cx0-rx-dmx, xmax:cx0+rx-dmx, ymin:cy0-ry+dmy, ymax:cy0+ry+dmy};
+      redessiner();
+      reechantillonner();
+      return;
+    }
+    if(glisse && pointeurs.size===1){
+      const p=[...pointeurs.values()][0];
+      const dxpx=p.x-glisse.mx, dypx=p.y-glisse.my;
+      const ech=(cv.__rendu||{}).echelle||1;
+      const dx=-dxpx/ech, dy=dypx/ech;
+      cv.__vista={xmin:glisse.vista.xmin+dx, xmax:glisse.vista.xmax+dx, ymin:glisse.vista.ymin+dy, ymax:glisse.vista.ymax+dy};
+      redessiner();
+      reechantillonner();
+    }
+  });
+  const finPointeur=e=>{
+    pointeurs.delete(e.pointerId);
+    if(pointeurs.size===0){ glisse=null; pincement=null; cv.style.cursor="grab"; }
+    else if(pointeurs.size===1){ pincement=null; demarrerGlisse(); }
+  };
+  cv.addEventListener("pointerup",finPointeur);
+  cv.addEventListener("pointercancel",finPointeur);
+  requestAnimationFrame(redessiner);
+  return { redessiner: forcerClair=>dessinerGraphique(cv, cv.__g, cv.__extrema, cv.__asymptotes, cv.__vista, forcerClair) };
+}
