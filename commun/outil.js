@@ -9,6 +9,9 @@
                    exemples: EXEMPLES, exos: EXOS, poids: [["facile", .35], ...], apres: async (ctx) => {...} });
 
    Options : prefixe (« f(x) = », devant l'aperçu), sympyAvant (attendre SymPy avant tout calcul),
+   delaiCalcul (ms, 30000 par défaut : au-delà, « Calcul trop long » et le moteur est relancé),
+   greffons (blocs à comportement, voir rendu.js ajouterGreffon : le graphique de commun/graphique.js ; ils reçoivent
+   { appelPy, entree } où `entree` est la saisie dont la carte est le corrigé),
    apres({entree, appelPy, derniereCarte, actuel}) appelé après l'affichage d'un corrigé réussi
    (`actuel()` devient faux si un autre calcul a commencé).
 
@@ -16,11 +19,11 @@
    Les textes du corrigé viennent de `resoudre()` (Python) et sont rendus par commun/rendu.js.
    Test : `window.__delaiCalcul` (ms) remplace le délai de 30 s. */
 import { MoteurPython } from "./moteur-python.js";
-import { K, math, rendreCarte, rendreErreur } from "./rendu.js";
+import { K, math, ajouterGreffon, rendreCarte, rendreErreur } from "./rendu.js";
 
 const $ = id => document.getElementById(id);
 const PAUSE_ERREUR = 500;
-const DELAI_CALCUL = 30000;
+const DELAI_CALCUL = 30000;      // par défaut ; la config peut le changer (delaiCalcul)
 
 export function monterOutil(config) {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => demarrerOutil(config));
@@ -28,7 +31,8 @@ export function monterOutil(config) {
 }
 
 function demarrerOutil(config) {
-  const { outil, prefixe = "f(x) = ", titrePdf, exemples = [], exos = {}, poids = [], sympyAvant = false, apres } = config;
+  const { outil, prefixe = "f(x) = ", titrePdf, exemples = [], exos = {}, poids = [], sympyAvant = false, delaiCalcul = DELAI_CALCUL, greffons = [], apres } = config;
+  greffons.forEach(ajouterGreffon);
   const moteur = new MoteurPython(outil, { surEtat: () => majEtat() });
   const appelPy = (fn, arg, delai) => moteur.appelPy(fn, arg, delai);
   let cartes = [], visibles = 0, numCalcul = 0;
@@ -107,7 +111,7 @@ function demarrerOutil(config) {
     const moi = ++numCalcul;
     $("calculer").disabled = true;
     $("etat").textContent = "Calcul en cours…";
-    const delai = window.__delaiCalcul || DELAI_CALCUL;
+    const delai = window.__delaiCalcul || delaiCalcul;
     let r;
     try {
       if (sympyAvant) await moteur.sympyPret;
@@ -119,18 +123,18 @@ function demarrerOutil(config) {
       }
     } catch (e) {
       if (e.message === "delai") { $("etat").textContent = "Calcul trop long : le calcul a été relancé."; moteur.relancer(); }
-      r = { ok: false, erreur: e.message === "delai" ? "Le calcul a pris trop de temps (plus de 30 s). Essayez une écriture plus simple." : (console.error(e), "Une erreur s'est produite : réessayez ou simplifiez l'écriture.") };
+      r = { ok: false, erreur: e.message === "delai" ? `Le calcul a pris trop de temps (plus de ${delaiCalcul / 1000} s). Essayez une écriture plus simple.` : (console.error(e), "Une erreur s'est produite : réessayez ou simplifiez l'écriture.") };
     }
     $("calculer").disabled = false;
     majEtat();
     if (moi !== numCalcul) return;
-    afficher(r);
+    afficher(r, s);
     if (r.ok && apres) {
       try { await apres({ entree: s, appelPy, derniereCarte: () => cartes[cartes.length - 1], actuel: () => moi === numCalcul }); } catch (e) { /* le contrôle est facultatif */ }
     }
   }
 
-  function afficher(r) {
+  function afficher(r, entree) {
     $("resultat").hidden = false;
     const box = $("cartes");
     box.innerHTML = "";
@@ -141,8 +145,9 @@ function demarrerOutil(config) {
       $("progression").textContent = "";
       return;
     }
-    if (r.entete) box.appendChild(rendreCarte(r.entete));       // toujours visible, hors du compteur d'étapes
-    cartes = r.cartes.map(rendreCarte);
+    const contexte = { appelPy, entree };
+    if (r.entete) box.appendChild(rendreCarte(r.entete, contexte));       // toujours visible, hors du compteur d'étapes
+    cartes = r.cartes.map(c => rendreCarte(c, contexte));
     cartes.forEach(c => { c.classList.add("cache"); box.appendChild(c); });
     visibles = 0;
     montrer(1);

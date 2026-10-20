@@ -64,7 +64,9 @@ JS_TRACE = r"""
     const d = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, nom);
     Object.defineProperty(HTMLCanvasElement.prototype, nom, { ...d, set: function (v) { T.push(['size.' + nom, ser(v)]); d.set.call(this, v); } });
   }
-  window.print = () => {};          // l'impression réelle bloquerait ; le clic sur « PDF » redessine déjà en clair avant d'appeler print()
+  // L'impression réelle bloquerait. print() annonce l'impression comme le navigateur (beforeprint), sans afterprint :
+  // l'ancienne page redessinait en clair au clic sur « PDF », la nouvelle au beforeprint ; le dernier dessin est le même.
+  window.print = () => { window.dispatchEvent(new Event('beforeprint')); };
 })();
 """
 
@@ -126,6 +128,9 @@ def pincer(page):
     page.appel("Input.dispatchTouchEvent", type="touchStart", touchPoints=pts(30))
     for d, dx in ((40, 0), (55, 10), (70, 20), (85, 30)):
         page.appel("Input.dispatchTouchEvent", type="touchMove", touchPoints=pts(d, dx))
+        # Chrome fusionne les mouvements arrivés dans la même image, et la translation du pincement dépend de l'échelle courante
+        # (donc du nombre de mouvements traités) : une image entre deux mouvements rend le résultat reproductible.
+        page.evaluer("new Promise(r => { const t = setTimeout(r, 200); requestAnimationFrame(() => requestAnimationFrame(() => { clearTimeout(t); r(); })); })")
     page.appel("Input.dispatchTouchEvent", type="touchEnd", touchPoints=[])
     page.appel("Emulation.setTouchEmulationEnabled", enabled=False)
 

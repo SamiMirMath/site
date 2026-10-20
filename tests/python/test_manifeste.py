@@ -72,7 +72,8 @@ class TestManifeste(unittest.TestCase):
                     self.assertIn(f'outil:"{dossier}"', s)
                     self.assertNotIn("loadPyodide", s)
                     self.assertNotIn("new Worker", s)
-                    appels = set(re.findall(r'appelPy\("([a-z_]+)"', s + lire("commun/outil.js")))
+                    greffons = lire("commun/graphique.js") if "graphique.js" in s else ""         # greffon de bloc : ses appels sont ceux de la page
+                    appels = set(re.findall(r'appelPy\("([a-z_]+)"', s + lire("commun/outil.js") + greffons))
                     self.assertTrue(appels <= set(o["fonctions"]), appels - set(o["fonctions"]))
                     self.assertEqual(set(o["fonctions"]) - appels, set(o.get("anciennes", [])),
                                      "fonctions non appelées = anciennes (pages en cache)")

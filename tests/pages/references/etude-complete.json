@@ -11,7 +11,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\frac{e^{x} - 1}{x}⟧ ⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "texte": "⟦f(x) = \\frac{e^{x} - 1}{x}⟧⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
     "titre": null
    },
    {
@@ -235,7 +235,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -253,7 +253,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\frac{x^{2} - 1}{x - 3}⟧ ⟦ED = \\mathbb{R} \\setminus \\left\\{3\\right\\}⟧",
+    "texte": "⟦f(x) = \\frac{x^{2} - 1}{x - 3}⟧⟦ED = \\mathbb{R} \\setminus \\left\\{3\\right\\}⟧",
     "titre": null
    },
    {
@@ -637,7 +637,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -655,7 +655,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = 3x\\,\\ln(x)⟧ ⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "texte": "⟦f(x) = 3x\\,\\ln(x)⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
     "titre": null
    },
    {
@@ -915,7 +915,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -933,7 +933,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = e^{\\frac{1}{x}}⟧ ⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "texte": "⟦f(x) = e^{\\frac{1}{x}}⟧⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
     "titre": null
    },
    {
@@ -1258,7 +1258,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -1276,7 +1276,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = e^{2x}⟧ ⟦ED = \\mathbb{R}⟧",
+    "texte": "⟦f(x) = e^{2x}⟧⟦ED = \\mathbb{R}⟧",
     "titre": null
    },
    {
@@ -1449,7 +1449,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -1486,7 +1486,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\frac{\\ln(x)}{x}⟧ ⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "texte": "⟦f(x) = \\frac{\\ln(x)}{x}⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
     "titre": null
    },
    {
@@ -1855,7 +1855,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -1873,7 +1873,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\sqrt{x^{2} - 4}⟧ ⟦ED = \\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[⟧",
+    "texte": "⟦f(x) = \\sqrt{x^{2} - 4}⟧⟦ED = \\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[⟧",
     "titre": null
    },
    {
@@ -2135,7 +2135,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -2153,7 +2153,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = x\\,\\ln(x)⟧ ⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "texte": "⟦f(x) = x\\,\\ln(x)⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
     "titre": null
    },
    {
@@ -2376,7 +2376,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -2394,7 +2394,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\frac{x}{x^{2} + 1}⟧ ⟦ED = \\mathbb{R}⟧",
+    "texte": "⟦f(x) = \\frac{x}{x^{2} + 1}⟧⟦ED = \\mathbb{R}⟧",
     "titre": null
    },
    {
@@ -2730,7 +2730,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -2748,7 +2748,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\frac{x}{\\sqrt{x^{2}}}⟧ ⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "texte": "⟦f(x) = \\frac{x}{\\sqrt{x^{2}}}⟧⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
     "titre": null
    },
    {
@@ -2944,7 +2944,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -2962,7 +2962,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = x^{\\frac{2}{3}} = \\sqrt[3]{x^{2}}⟧ ⟦ED = \\mathbb{R}⟧",
+    "texte": "⟦f(x) = x^{\\frac{2}{3}} = \\sqrt[3]{x^{2}}⟧⟦ED = \\mathbb{R}⟧",
     "titre": null
    },
    {
@@ -3175,7 +3175,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -3193,7 +3193,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = x^{2}\\,e^{-x}⟧ ⟦ED = \\mathbb{R}⟧",
+    "texte": "⟦f(x) = x^{2}\\,e^{-x}⟧⟦ED = \\mathbb{R}⟧",
     "titre": null
    },
    {
@@ -3528,7 +3528,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -3546,7 +3546,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = x^{2} - 4x + 3⟧ ⟦ED = \\mathbb{R}⟧",
+    "texte": "⟦f(x) = x^{2} - 4x + 3⟧⟦ED = \\mathbb{R}⟧",
     "titre": null
    },
    {
@@ -3767,7 +3767,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -3785,7 +3785,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = x^{3} - 3x⟧ ⟦ED = \\mathbb{R}⟧",
+    "texte": "⟦f(x) = x^{3} - 3x⟧⟦ED = \\mathbb{R}⟧",
     "titre": null
    },
    {
@@ -4084,7 +4084,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -4102,7 +4102,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = x^{4} - 2x^{2}⟧ ⟦ED = \\mathbb{R}⟧",
+    "texte": "⟦f(x) = x^{4} - 2x^{2}⟧⟦ED = \\mathbb{R}⟧",
     "titre": null
    },
    {
@@ -4495,7 +4495,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas] La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie. Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],

@@ -288,6 +288,51 @@ export function monterGraphique({ canvas: cv, plus, moins, reinit, message }, { 
   };
   cv.addEventListener("pointerup",finPointeur);
   cv.addEventListener("pointercancel",finPointeur);
-  requestAnimationFrame(redessiner);
-  return { redessiner: forcerClair=>dessinerGraphique(cv, cv.__g, cv.__extrema, cv.__asymptotes, cv.__vista, forcerClair) };
+  const retoucher=forcerClair=>dessinerGraphique(cv, cv.__g, cv.__extrema, cv.__asymptotes, cv.__vista, forcerClair);
+  // Le canvas se redessine seul quand sa taille change (fenêtre, carte révélée : cachée, il a une largeur nulle) et autour
+  // de l'impression : le canvas est une image figée, redessinée en clair juste avant, sinon le fond sombre reste sur le
+  // papier. Les écouteurs de la fenêtre disparaissent quand le canvas quitte la page (nouveau calcul).
+  const ecouter=(type, fn)=>{
+    const f=e=>{ if(cv.isConnected) fn(e); else window.removeEventListener(type, f); };
+    window.addEventListener(type, f);
+  };
+  ecouter("resize", ()=>retoucher());
+  ecouter("beforeprint", ()=>retoucher(true));
+  ecouter("afterprint", ()=>retoucher());
+  if(window.ResizeObserver) new ResizeObserver(()=>{ if(cv.getBoundingClientRect().width) retoucher(); }).observe(cv);
+  else requestAnimationFrame(redessiner);
+  return { redessiner: retoucher };
 }
+
+/* Greffon de commun/rendu.js pour le bloc « graphique » de la sortie d'un moteur :
+     { type: "graphique", xmin, xmax, ymin, ymax, segments, extrema, asymptotes, recalculable }
+   Le titre de la carte vient des données ; ce greffon ajoute les boutons de zoom à droite du titre, le canvas et le
+   message d'échec. Si `recalculable`, un zoom ou un déplacement redemande la courbe au moteur : appel
+   appelPy("fenetre", JSON {f: saisie, xmin, xmax, n}) → { ok, segments } (resoudre_ec.fenetre_json).
+   Les identifiants (graphique, zoomPlus…) sont ceux de la page d'origine, que les tests utilisent : un seul graphique par page. */
+const MESSAGE_ECHEC = "La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.";
+const DELAI_FENETRE = 10000;
+
+export const greffonGraphique = {
+  type: "graphique",
+  barre: () => `
+        <button id="zoomMoins" type="button">−</button>
+        <button id="zoomPlus" type="button">+</button>
+        <button id="zoomReset" type="button">Réinitialiser</button>
+      `,
+  rendu: () => `<canvas id="graphique" class="graphique" style="touch-action:none;cursor:grab"></canvas>` +
+    `<div id="msgFenetre" class="hint no-print" style="margin-top:6px" hidden>${MESSAGE_ECHEC}</div>`,
+  activer: (carte, b, contexte) => {
+    const { appelPy, entree } = contexte || {};
+    const fenetre = b.recalculable && appelPy && entree
+      ? async (xmin, xmax, n) => {
+        const rep = await appelPy("fenetre", JSON.stringify({ f: entree, xmin, xmax, n }), DELAI_FENETRE);
+        return rep.ok ? rep.segments : null;
+      }
+      : async () => undefined;
+    monterGraphique({
+      canvas: carte.querySelector("#graphique"), plus: carte.querySelector("#zoomPlus"), moins: carte.querySelector("#zoomMoins"),
+      reinit: carte.querySelector("#zoomReset"), message: carte.querySelector("#msgFenetre"),
+    }, { g: { xmin: b.xmin, xmax: b.xmax, ymin: b.ymin, ymax: b.ymax, segments: b.segments }, extrema: b.extrema || [], asymptotes: b.asymptotes || [], fenetre });
+  },
+};

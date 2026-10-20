@@ -5,14 +5,17 @@ Assemble les cartes de `resoudre_dv` (dérivée, signe et variations, avec les l
 tableau) et de `resoudre_la` (tableaux de signes, limites, bilan), puis la carte du graphique,
 dans l'ordre où la page les affiche aujourd'hui. La recalculation du graphique au zoom reste
 l'appel séparé `fenetre_json`.
+
+`etudier_json` (ancienne page, avant T19) est réexportée : une page restée en cache qui lit le nouveau
+manifeste continue de fonctionner. À retirer à la clôture, après quelques jours en ligne.
 """
 from noyau import json_strict
 import sortie as so
 import resoudre_dv as rdv
 import resoudre_la as rla
-from etude_complete import etudier, apercu_json, fenetre_json
+from etude_complete import etudier, etudier_json, apercu_json, fenetre_json
 
-__all__ = ["resoudre", "resoudre_json", "apercu_json", "fenetre_json"]
+__all__ = ["resoudre", "resoudre_json", "apercu_json", "fenetre_json", "etudier_json"]
 
 AIDE_GRAPHIQUE = ("Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). "
                   "Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.")

@@ -15,7 +15,12 @@
      liste      <ul class="extrema|bilan">
      tableau    tableau de signes ou de variations (voir cellule())
    Un bloc de type inconnu n'est pas affiché (message dans la console), jamais une exception.
-   `ajouterBloc(type, fn)` enregistre un rendu supplémentaire (le graphique, en T19). */
+   `ajouterBloc(type, fn)` enregistre un rendu supplémentaire.
+   `ajouterGreffon({ type, rendu, barre, activer })` enregistre un bloc qui a aussi du comportement (le graphique, T19) :
+     rendu(bloc, carte)             HTML du bloc
+     barre(bloc, carte)             facultatif : boutons placés à droite du titre de la carte (la carte garde son titre, tiré des données)
+     activer(carte, bloc, contexte) facultatif : appelé une fois la carte construite (événements) ; `carte` est son élément,
+                                    `contexte` celui que reçoit rendreCarte(carte, contexte) (outil.js : { appelPy, entree }). */
 
 const DELIMITEURS = [{ left: "\\(", right: "\\)", display: false }, { left: "\\[", right: "\\]", display: true }];
 
@@ -90,17 +95,28 @@ const BLOCS = {
   tableau: b => rendreTableau(b),
 };
 
+const BARRES = {};
+const ACTIVATIONS = {};
+
 export function ajouterBloc(type, fn) {
   BLOCS[type] = fn;
+}
+
+export function ajouterGreffon({ type, rendu, barre, activer }) {
+  BLOCS[type] = rendu;
+  if (barre) BARRES[type] = barre;
+  if (activer) ACTIVATIONS[type] = activer;
 }
 
 function titre(c) {
   if (c.titre_masque) return "";
   const t = c.titre_tex ? K(c.titre_tex) : c.titre;
+  const barre = c.blocs.map(b => (BARRES[b.type] ? BARRES[b.type](b, c) : "")).join("");
+  if (barre) return `<div class="barre" style="margin-bottom:8px"><h3 style="margin:0">${t}</h3><span class="no-print">${barre}</span></div>`;
   return c.badge ? `<h3>${t}<span class="badge">${c.badge}</span></h3>` : `<h3 style="margin:0 0 10px">${t}</h3>`;
 }
 
-export function rendreCarte(c) {
+export function rendreCarte(c, contexte) {
   const d = document.createElement("div");
   if (c.detail) console.error(c.detail);
   if (c.style === "erreur") {
@@ -117,6 +133,7 @@ export function rendreCarte(c) {
   }
   d.innerHTML = h;
   math(d);
+  for (const b of c.blocs) if (ACTIVATIONS[b.type]) ACTIVATIONS[b.type](d, b, contexte);
   return d;
 }
 

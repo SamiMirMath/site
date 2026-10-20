@@ -8,7 +8,7 @@ import unittest
 
 from moteurs import RACINE
 
-MIGREES = ["ensemble-definition", "derivee-variations", "limites-asymptotes"]
+MIGREES = ["ensemble-definition", "derivee-variations", "limites-asymptotes", "etude-complete"]
 PHRASES = ["conditions d'existence", "condition d'existence", "Condition non résolue", "obtenues numériquement",
            "Contrôle numérique", "Ni logarithme", "aucune condition", "Aucun extremum", "ligneAsymptote",
            "branche parabolique", "Une condition n'a pas pu être résolue"]
@@ -21,7 +21,7 @@ def lire(chemin):
 
 class TestSourceUnique(unittest.TestCase):
     def test_aucune_phrase_de_corrige_en_js(self):
-        for chemin in [f"{o}/index.html" for o in MIGREES] + ["commun/outil.js", "commun/rendu.js"]:
+        for chemin in [f"{o}/index.html" for o in MIGREES] + ["commun/outil.js", "commun/rendu.js", "commun/graphique.js"]:
             src = lire(chemin)
             for phrase in PHRASES:
                 with self.subTest(fichier=chemin, phrase=phrase):

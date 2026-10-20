@@ -26,10 +26,12 @@
       "fonctions": ["resoudre", "apercu"]
     },
     "etude-complete": {
-      "module": "etude_complete",
-      "fichiers": ["ensemble-definition/ensemble_def.py", "moteur/noyau.py", "derivee-variations/derivee_variations.py",
-                   "limites-asymptotes/limites_asymptotes.py", "etude-complete/etude_complete.py"],
-      "fonctions": ["apercu", "etudier", "fenetre"]
+      "module": "resoudre_ec",
+      "fichiers": ["ensemble-definition/ensemble_def.py", "moteur/noyau.py", "moteur/sortie.py", "derivee-variations/derivee_variations.py",
+                   "derivee-variations/resoudre_dv.py", "limites-asymptotes/limites_asymptotes.py", "limites-asymptotes/resoudre_la.py",
+                   "etude-complete/etude_complete.py", "etude-complete/resoudre_ec.py"],
+      "fonctions": ["resoudre", "apercu", "fenetre", "etudier"],
+      "anciennes": ["etudier"]
     },
     "factorisation": {
       "module": "factorisation",
