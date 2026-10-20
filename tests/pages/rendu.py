@@ -73,8 +73,18 @@ JS_CAPTURE = r"""
 
 
 def attendre_pret(page, delai=240):
-    page.attendre("document.querySelector('#etat') && document.querySelector('#etat').textContent === 'Prêt.' "
-                  "&& !document.querySelector('#calculer').disabled", delai)
+    """Attend « Prêt. ». À l'expiration, le message dit où en est le chargement : texte de #etat (« Chargement de Python… »,
+    « Chargement du moteur de calcul… », ou rien) et dernières lignes de la console. Une page lente laisse #etat avancer,
+    une page bloquée le laisse figé."""
+    try:
+        page.attendre("document.querySelector('#etat') && document.querySelector('#etat').textContent === 'Prêt.' "
+                      "&& !document.querySelector('#calculer').disabled", delai)
+    except TimeoutError as e:
+        try:
+            etat = page.evaluer("(document.querySelector('#etat') || {}).textContent")
+        except Exception as ex:                  # page plantée ou fermée
+            etat = f"(illisible : {ex})"
+        raise TimeoutError(f"{e}\n  #etat : {etat!r}\n  console : {page.console[-5:]}") from None
 
 
 def capturer(page, entree):

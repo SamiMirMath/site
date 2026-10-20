@@ -26,10 +26,11 @@ INVALIDE = {"ensemble-definition": "ln(", "derivee-variations": "ln(", "limites-
 ANALYSE = ["ensemble-definition", "derivee-variations", "limites-asymptotes", "etude-complete"]
 
 
-def sans_espaces(cartes):
-    """Les cartes sans l'espace entre la formule et la ligne « ED = … » : la page d'origine en mettait une, invisible
-    (même écart que pour les pages Dérivée et Limites, T17 et T18)."""
-    return [dict(c, texte=re.sub(r"\s+", "", c["texte"])) for c in cartes]
+def sans_espace_entre_formules(cartes):
+    """Les cartes sans l'espace entre deux formules (⟧ ⟦) dans le texte : la page d'origine en mettait un entre la formule
+    et la ligne « ED = … », invisible (même écart que pour les pages Dérivée et Limites, T17 et T18). Les autres espaces,
+    et tous les autres champs, restent comparés tels quels."""
+    return [dict(c, texte=re.sub(r"⟧\s+⟦", "⟧⟦", c["texte"])) for c in cartes]
 
 
 class TestComportement(unittest.TestCase):
@@ -200,7 +201,7 @@ class TestComportement(unittest.TestCase):
                 attendu = references[entree]["cartes"]
                 self.assertEqual(len(rendu), len(attendu))
                 self.assertEqual(rendu[-1]["titre"], "Graphique")
-                self.assertEqual(sans_espaces(rendu[:-1]), sans_espaces(attendu[:-1]))
+                self.assertEqual(sans_espace_entre_formules(rendu[:-1]), sans_espace_entre_formules(attendu[:-1]))
 
     def test_soc13_delai_depasse_puis_relance(self):
         page = self.ouvrir("ensemble-definition")
