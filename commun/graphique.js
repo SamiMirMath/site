@@ -17,10 +17,13 @@ export function joliPas(etendue){
   const nice=base<1.5?1:base<3?2:base<7?5:10;
   return nice*Math.pow(10,exp);
 }
+/* Tout nombre écrit sur le graphique (graduations, coordonnées des extrema) passe par cette seule fonction : au plus deux
+   décimales, sans zéros inutiles, virgule décimale (EC-06). T23 (notation suisse) la remplacera par commun/nombres.js. */
 export function etiquette(v){
   const r=Math.round(v*100)/100;
   if(Math.abs(r)<1e-9) return "0";
-  return Number.isInteger(r) ? String(r) : String(r.toFixed(2)).replace(/0+$/,"").replace(/\.$/,"");
+  const texte=Number.isInteger(r) ? String(r) : String(r.toFixed(2)).replace(/0+$/,"").replace(/\.$/,"");
+  return texte.replace(".", ",");
 }
 export function fleche(ctx, x, y, angle){
   const t=7;
@@ -104,7 +107,7 @@ export function dessinerGraphique(canvas, g, extrema, asymptotes, vista, forcerC
     ctx.strokeStyle=colFg; ctx.beginPath(); ctx.moveTo(x0-4,py); ctx.lineTo(x0+4,py); ctx.stroke();
     ctx.fillText(etiquette(y), x0+(x0<W/2?8:-24), py+4);
   }
-  ctx.fillText("0", x0+(x0<W/2?6:-16), y0+(y0<H/2?-6:16));
+  ctx.fillText(etiquette(0), x0+(x0<W/2?6:-16), y0+(y0<H/2?-6:16));
 
   // asymptotes (pointillé)
   ctx.setLineDash([5,4]); ctx.strokeStyle=colAccent; ctx.lineWidth=1.2;

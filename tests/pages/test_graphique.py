@@ -1,7 +1,7 @@
 """Graphique de l'Étude complète : la trace des appels canvas de chaque scénario (3 fonctions × 2 vues × 8 états : tracé
 initial, boutons, molette, glisser, pincer, impression) est égale à l'empreinte enregistrée dans
 references/graphique-traces.json. EC-04 : si le calcul de la fenêtre échoue, la courbe reste celle de la dernière fenêtre
-réussie et un message discret l'indique. Aucune police n'entre dans la trace (le dessin n'appelle pas measureText), donc
+réussie et un message discret l'indique. EC-06 : aucun nombre du graphique n'est écrit avec un point décimal. Aucune police n'entre dans la trace (le dessin n'appelle pas measureText), donc
 elle est la même en local et en CI. Voir graphique.py pour le détail des niveaux de preuve.
 
     OUTILS=etude-complete uv run … python -m unittest tests/pages/test_graphique.py
@@ -10,6 +10,7 @@ Après un changement VOULU du dessin : graphique.py references, puis relire le d
 changé : graphique.py enregistrer <avant> / <après> puis comparer."""
 import json
 import os
+import re
 import sys
 import unittest
 
@@ -62,6 +63,27 @@ class TestGraphique(unittest.TestCase):
             attendre_calme(page)
             self.assertFalse(message(), "le message doit disparaître quand la fenêtre est recalculée")
             self.assertNotEqual(segments(), depart, "la courbe doit être recalculée pour la nouvelle fenêtre")
+
+    def test_ec06_graduations_sans_point_decimal(self):
+        if CHOISIS and "etude-complete" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        with Navigateur() as nav:
+            page = nav.ouvrir(PAGE, JS_TRACE)
+            attendre_pret(page)
+            etiquettes = page.evaluer("""(async () => {
+                const { etiquette } = await import('/commun/graphique.js');
+                return [0, 3, -2, 0.5, 2.25, -1.5, 0.54, 10.5, 1e-12, 0.004, 100.1].map(etiquette);
+            })()""")
+            self.assertEqual(etiquettes, ["0", "3", "-2", "0,5", "2,25", "-1,5", "0,54", "10,5", "0", "0", "100,1"])
+            # sur le canvas : x^2*e^(-x) a un extremum en (2 ; 0,54) ; deux zooms avant donnent des graduations fractionnaires
+            calculer(page, "x^2*e^(-x)")
+            for _ in range(3):
+                cliquer(page, "#zoomPlus")
+                attendre_calme(page)
+            textes = page.evaluer("window.__trace.filter(e => e[0] === 'fillText').map(e => String(e[1]))")
+            self.assertTrue(textes)
+            self.assertEqual([t for t in textes if re.search(r"\d\.\d", t)], [], "point décimal sur le graphique")
+            self.assertTrue([t for t in textes if re.search(r"\d,\d", t)], "aucune virgule : la vérification serait vide")
 
 
 if __name__ == "__main__":
