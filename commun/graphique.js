@@ -229,51 +229,62 @@ export function monterGraphique({ canvas: cv, plus, moins, reinit, message }, { 
     zoomVersPoint(e.deltaY>0?1.1:0.9, e.clientX-r.left, e.clientY-r.top);
   },{passive:false});
 
-  // Glisser à un doigt/souris (déplacement) ; pincer à deux doigts (zoom centré
-  // sur le milieu des deux doigts). On suit chaque pointeur actif par son id.
-  const pointeurs=new Map();
-  let glisse=null, pincement=null;
+  // Souris ou stylet : glisser déplace la courbe. Écran tactile : un doigt fait défiler la page (touch-action le laisse au
+  // navigateur : pointercancel), deux doigts déplacent ET zooment. Le geste à deux doigts se calcule depuis l'état au début
+  // du geste (fenêtre affichée, écart et milieu des doigts) : le point de la courbe qui était sous le milieu des doigts y
+  // reste, quel que soit le nombre de mouvements que le navigateur livre (il en fusionne) et même quand l'échelle change.
+  const pointeurs=new Map();          // souris, stylet : id → position dans le canvas
+  const doigts=new Map();             // doigts : id → position dans le canvas
+  let glisse=null, geste=null;
   const positionCanvas=e=>{ const r=cv.getBoundingClientRect(); return {x:e.clientX-r.left, y:e.clientY-r.top}; };
   const demarrerGlisse=()=>{
     const [p]=pointeurs.values();
     glisse={mx:p.x,my:p.y,vista:Object.assign({},cv.__rendu||cv.__vista)};
   };
-  const demarrerPincement=()=>{
-    const [p1,p2]=pointeurs.values();
-    pincement={
-      d0:Math.hypot(p2.x-p1.x,p2.y-p1.y)||1,
-      mx:(p1.x+p2.x)/2, my:(p1.y+p2.y)/2,
-      vista:Object.assign({},cv.__rendu||cv.__vista)
+  const demarrerGeste=()=>{
+    const r=cv.__rendu;
+    if(doigts.size!==2 || !r){ geste=null; return; }
+    const [p1,p2]=doigts.values();
+    const mx=(p1.x+p2.x)/2, my=(p1.y+p2.y)/2;
+    geste={
+      r:Object.assign({},r),                                          // fenêtre affichée au début du geste
+      d0:Math.hypot(p2.x-p1.x,p2.y-p1.y)||1,                          // écart des doigts au début
+      X:r.xmin+(mx-r.padL)/r.echelle, Y:r.ymin+(r.availH-(my-r.padT))/r.echelle,   // point de la courbe sous le milieu des doigts
     };
-    glisse=null;
+  };
+  const appliquerGeste=()=>{
+    const [p1,p2]=doigts.values();
+    const {r,d0,X,Y}=geste;
+    const d=Math.hypot(p2.x-p1.x,p2.y-p1.y)||1;
+    const mx=(p1.x+p2.x)/2, my=(p1.y+p2.y)/2;
+    const largeur=(r.xmax-r.xmin)*r.echelle, hauteur=r.availH;        // zone de tracé en pixels
+    // doigts qui s'écartent → échelle plus grande ; la demi-étendue de la fenêtre ne descend jamais sous 1e-4
+    const e=Math.min(r.echelle*d/d0, Math.min(largeur,hauteur)/2e-4);
+    // le point (X, Y) doit se trouver sous le milieu actuel des doigts
+    const xmin=X-(mx-r.padL)/e, ymin=Y-(r.availH-(my-r.padT))/e;
+    cv.__vista={xmin, xmax:xmin+largeur/e, ymin, ymax:ymin+hauteur/e};
+    redessiner();
+    reechantillonner();
   };
   cv.addEventListener("pointerdown",e=>{
     cv.setPointerCapture(e.pointerId);
+    if(e.pointerType==="touch"){
+      doigts.set(e.pointerId, positionCanvas(e));
+      demarrerGeste();
+      return;
+    }
     pointeurs.set(e.pointerId, positionCanvas(e));
     cv.style.cursor="grabbing";
     if(pointeurs.size===1) demarrerGlisse();
-    else if(pointeurs.size===2) demarrerPincement();
   });
   cv.addEventListener("pointermove",e=>{
-    if(!pointeurs.has(e.pointerId)) return;
-    pointeurs.set(e.pointerId, positionCanvas(e));
-    if(pointeurs.size>=2 && pincement){
-      const [p1,p2]=pointeurs.values();
-      const d=Math.hypot(p2.x-p1.x,p2.y-p1.y)||1;
-      const mx=(p1.x+p2.x)/2, my=(p1.y+p2.y)/2;
-      const k=pincement.d0/d; // doigts qui s'écartent (d augmente) -> k<1 -> zoom avant
-      const v=pincement.vista;
-      const cx0=(v.xmin+v.xmax)/2, cy0=(v.ymin+v.ymax)/2;
-      const rx=Math.max((v.xmax-v.xmin)/2*k, 1e-4), ry=Math.max((v.ymax-v.ymin)/2*k, 1e-4);
-      // décalage pour garder le milieu des doigts ancré (approx. par translation
-      // proportionnelle au déplacement du milieu à l'écran)
-      const r0=cv.__rendu;
-      const dmx=r0?(mx-pincement.mx)/r0.echelle:0, dmy=r0?(my-pincement.my)/r0.echelle:0;
-      cv.__vista={xmin:cx0-rx-dmx, xmax:cx0+rx-dmx, ymin:cy0-ry+dmy, ymax:cy0+ry+dmy};
-      redessiner();
-      reechantillonner();
+    if(doigts.has(e.pointerId)){
+      doigts.set(e.pointerId, positionCanvas(e));
+      if(geste) appliquerGeste();
       return;
     }
+    if(!pointeurs.has(e.pointerId)) return;
+    pointeurs.set(e.pointerId, positionCanvas(e));
     if(glisse && pointeurs.size===1){
       const p=[...pointeurs.values()][0];
       const dxpx=p.x-glisse.mx, dypx=p.y-glisse.my;
@@ -285,12 +296,19 @@ export function monterGraphique({ canvas: cv, plus, moins, reinit, message }, { 
     }
   });
   const finPointeur=e=>{
+    if(doigts.delete(e.pointerId)){ demarrerGeste(); return; }          // 2 doigts restants : nouveau geste ; sinon aucun
     pointeurs.delete(e.pointerId);
-    if(pointeurs.size===0){ glisse=null; pincement=null; cv.style.cursor="grab"; }
-    else if(pointeurs.size===1){ pincement=null; demarrerGlisse(); }
+    if(pointeurs.size===0){ glisse=null; cv.style.cursor="grab"; }
   };
   cv.addEventListener("pointerup",finPointeur);
   cv.addEventListener("pointercancel",finPointeur);
+  // Un doigt = défilement de la page (touch-action: pan-x pan-y, commun/style.css). Dès que deux doigts touchent le canvas, le
+  // navigateur ne doit plus défiler : seul preventDefault() sur l'événement tactile le garantit (un pointer event ne peut pas
+  // annuler un geste que le navigateur a déjà pris en charge). Si le défilement à un doigt est déjà lancé quand le deuxième doigt
+  // arrive, il continue (événement non annulable) : il faut lever les doigts et recommencer.
+  const reserverDeuxDoigts=e=>{ if(e.targetTouches.length>=2 && e.cancelable) e.preventDefault(); };
+  cv.addEventListener("touchstart",reserverDeuxDoigts,{passive:false});
+  cv.addEventListener("touchmove",reserverDeuxDoigts,{passive:false});
   const retoucher=forcerClair=>dessinerGraphique(cv, cv.__g, cv.__extrema, cv.__asymptotes, cv.__vista, forcerClair);
   // Le canvas se redessine seul quand sa taille change (fenêtre, carte révélée : cachée, il a une largeur nulle) et autour
   // de l'impression : le canvas est une image figée, redessinée en clair juste avant, sinon le fond sombre reste sur le
@@ -324,7 +342,7 @@ export const greffonGraphique = {
         <button id="zoomPlus" type="button">+</button>
         <button id="zoomReset" type="button">Réinitialiser</button>
       `,
-  rendu: () => `<canvas id="graphique" class="graphique" style="touch-action:none;cursor:grab"></canvas>` +
+  rendu: () => `<canvas id="graphique" class="graphique" style="cursor:grab"></canvas>` +
     `<div id="msgFenetre" class="hint no-print" style="margin-top:6px" hidden>${MESSAGE_ECHEC}</div>`,
   activer: (carte, b, contexte) => {
     const { appelPy, entree } = contexte || {};

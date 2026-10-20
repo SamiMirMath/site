@@ -121,18 +121,25 @@ def glisser(page):
     page.appel("Input.dispatchMouseEvent", type="mouseReleased", x=x + 120, y=y + 48, button="left", buttons=0, clickCount=1)
 
 
-def pincer(page):
-    c = centre(page)
+def doigts(page, images, pause=0):
+    """Geste tactile : `images` = liste d'images, chacune la liste des positions (x, y) des doigts, en pixels de la fenêtre.
+    Le premier touche, les suivants bougent, puis tous se lèvent. Aucune attente entre deux mouvements par défaut :
+    Chrome peut en fusionner, le résultat d'un geste ne doit pas en dépendre."""
+    points = lambda image: [{"x": x, "y": y, "id": i} for i, (x, y) in enumerate(image)]
     page.appel("Emulation.setTouchEmulationEnabled", enabled=True, maxTouchPoints=2)
-    pts = lambda d, dx=0: [{"x": c["x"] - d + dx, "y": c["y"], "id": 0}, {"x": c["x"] + d + dx, "y": c["y"], "id": 1}]
-    page.appel("Input.dispatchTouchEvent", type="touchStart", touchPoints=pts(30))
-    for d, dx in ((40, 0), (55, 10), (70, 20), (85, 30)):
-        page.appel("Input.dispatchTouchEvent", type="touchMove", touchPoints=pts(d, dx))
-        # Chrome fusionne les mouvements arrivés dans la même image, et la translation du pincement dépend de l'échelle courante
-        # (donc du nombre de mouvements traités) : une image entre deux mouvements rend le résultat reproductible.
-        page.evaluer("new Promise(r => { const t = setTimeout(r, 200); requestAnimationFrame(() => requestAnimationFrame(() => { clearTimeout(t); r(); })); })")
+    page.appel("Input.dispatchTouchEvent", type="touchStart", touchPoints=points(images[0]))
+    for image in images[1:]:
+        page.appel("Input.dispatchTouchEvent", type="touchMove", touchPoints=points(image))
+        if pause:
+            time.sleep(pause)
     page.appel("Input.dispatchTouchEvent", type="touchEnd", touchPoints=[])
     page.appel("Emulation.setTouchEmulationEnabled", enabled=False)
+
+
+def pincer(page):
+    c = centre(page)
+    pts = lambda d, dx=0: [(c["x"] - d + dx, c["y"]), (c["x"] + d + dx, c["y"])]
+    doigts(page, [pts(30)] + [pts(d, dx) for d, dx in ((40, 0), (55, 10), (70, 20), (85, 30))])
 
 
 ACTIONS = {
