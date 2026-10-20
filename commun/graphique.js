@@ -309,6 +309,7 @@ export function monterGraphique({ canvas: cv, plus, moins, reinit, message }, { 
    Le titre de la carte vient des données ; ce greffon ajoute les boutons de zoom à droite du titre, le canvas et le
    message d'échec. Si `recalculable`, un zoom ou un déplacement redemande la courbe au moteur : appel
    appelPy("fenetre", JSON {f: saisie, xmin, xmax, n}) → { ok, segments } (resoudre_ec.fenetre_json).
+   Test (EC-04) : window.__echecFenetre = "refus" (le moteur répond ok:false) ou "exception" fait échouer le calcul de la fenêtre.
    Les identifiants (graphique, zoomPlus…) sont ceux de la page d'origine, que les tests utilisent : un seul graphique par page. */
 const MESSAGE_ECHEC = "La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.";
 const DELAI_FENETRE = 10000;
@@ -326,6 +327,8 @@ export const greffonGraphique = {
     const { appelPy, entree } = contexte || {};
     const fenetre = b.recalculable && appelPy && entree
       ? async (xmin, xmax, n) => {
+        if (window.__echecFenetre === "exception") throw new Error("échec simulé");
+        if (window.__echecFenetre) return null;
         const rep = await appelPy("fenetre", JSON.stringify({ f: entree, xmin, xmax, n }), DELAI_FENETRE);
         return rep.ok ? rep.segments : null;
       }
