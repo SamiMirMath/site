@@ -42,6 +42,14 @@ class _Silencieux(http.server.SimpleHTTPRequestHandler):
         pass
 
 
+class _Serveur(http.server.ThreadingHTTPServer):
+    """Un fil par requête (ThreadingHTTPServer) et une file de connexions assez grande. Une page télécharge en parallèle tous
+    les fichiers Python de son outil (9 pour l'Étude complète) alors que Chrome ouvre jusqu'à 6 connexions par hôte : avec la file
+    de 5 par défaut, un serveur qui n'accepte plus pendant un instant (machine chargée) fait réinitialiser des connexions
+    (ConnectionResetError, vu sur macOS avec 12 connexions simultanées), donc « Failed to fetch » dans moteur-python.js."""
+    request_queue_size = 128
+
+
 class ErreurPage(Exception):
     pass
 
@@ -103,7 +111,7 @@ class Navigateur:
 
     def __enter__(self):
         gestionnaire = functools.partial(_Silencieux, directory=RACINE)
-        self.serveur = http.server.ThreadingHTTPServer(("127.0.0.1", self.port_http), gestionnaire)
+        self.serveur = _Serveur(("127.0.0.1", self.port_http), gestionnaire)
         self.port_http = self.serveur.server_address[1]
         threading.Thread(target=self.serveur.serve_forever, daemon=True).start()
         self.profil = tempfile.mkdtemp(prefix="chrome-tests-")
