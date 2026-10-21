@@ -420,12 +420,17 @@ l'élève, un « Calcul en cours… » qui dure parce que SymPy se charge encore
 - **Vérification** : test de page avec un téléchargement ralenti ou coupé (même principe que SOC-13), le message apparaît puis disparaît
   si le chargement aboutit.
 
-### T30 — Tests de pages sans réseau (Pyodide en copie locale)
+### T30 — Tests de pages sans réseau (Pyodide en copie locale) — FAITE le 2026-10-21
 - Les tests de pages chargent Pyodide 0.27.7, SymPy, mpmath et KaTeX depuis une copie locale servie par le serveur de test, plus depuis
   jsDelivr. Les pages gardent leurs URL de production ; le test redirige les requêtes (interception DevTools) vers la copie.
 - La copie (≈ 18 Mo, voir « Coût d'un Pyodide auto-hébergé » dans [choix-techniques.md](choix-techniques.md)) n'est **pas** versionnée :
   téléchargée une fois dans un dossier ignoré par git, mise en cache dans la CI.
 - **Vérification** : suite de pages verte avec le réseau coupé ; plus aucun « Prêt. » non atteint dû au CDN.
+- **Fait** : Pyodide 0.27.7, SymPy et mpmath seulement (`tests/pages/pyodide_local.py`, copie dans `tests/pages/pyodide-local/`) ;
+  **KaTeX reste sur jsDelivr** (la page l'a en `defer`, les tests passent sans, mais le réseau reste nécessaire pour le rendu des formules).
+  Les requêtes vers `cdn.jsdelivr.net/pyodide/` sont interceptées (Fetch DevTools sur l'onglet, qui voit aussi celles du worker) et réécrites
+  vers le serveur de test ; envoyer les corps par DevTools (base64) rendait la suite plus lente que le CDN (899 s contre 682 s).
+  Durée de la suite de pages : 682 s avant, 587 s après (4 tests de plus). Version de la copie ≠ pages : le test échoue.
 
 ### T31 — Temps d'attente : libellé et mesure en Suisse
 - (a) **Libellé** : pendant l'attente de SymPy (`sympyAvant`, pages Dérivée, Limites, Étude complète), l'état affiche « Calcul en cours… »

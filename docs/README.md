@@ -35,10 +35,13 @@ utilisé par le site. Le code des moteurs exige Python ≥ 3.12 (syntaxe des f-s
 
 ## Tests de pages (navigateur, local et CI)
 
-Chrome sans interface piloté depuis Python (Google Chrome installé ; Node inutile). Réseau requis
-(Pyodide et KaTeX viennent de jsDelivr). Hors de `tests/python` : la commande ci-dessus ne les lance pas.
+Chrome sans interface piloté depuis Python (Google Chrome installé ; Node inutile). Pyodide, SymPy et mpmath
+viennent d'une copie locale non versionnée (`tests/pages/pyodide-local/`, ≈ 18 Mo) ; KaTeX vient encore de jsDelivr
+(réseau requis). Hors de `tests/python` : la commande ci-dessus ne les lance pas.
 
 ```sh
+# une fois (et à chaque changement de version de Pyodide dans moteur/manifeste.json) : télécharger la copie
+python3 tests/pages/pyodide_local.py
 # le rendu de chaque page est égal à la référence (tests/pages/references/*.json), ~ 3 min
 uv run -q --no-project --python 3.12 --with sympy==1.13.3 --with websockets \
     python -m unittest discover -s tests/pages          # OUTILS=etude-complete pour une seule page

@@ -64,7 +64,19 @@ jobs:
       - name: Installer les dépendances des tests de pages
         run: python -m pip install --disable-pip-version-check sympy==1.13.3 mpmath==1.3.0 websockets
 
-      # Chrome est préinstallé sur ubuntu-latest ; Pyodide et KaTeX viennent de jsDelivr.
+      # Copie locale de Pyodide + SymPy (≈ 18 Mo), non versionnée : mise en cache entre deux exécutions. La clé change
+      # avec le manifeste (version de Pyodide) ; le script ne télécharge que si la copie manque, et les tests échouent
+      # si sa version diffère de celle des pages.
+      - name: Cache de la copie locale de Pyodide
+        uses: actions/cache@v4
+        with:
+          path: tests/pages/pyodide-local
+          key: pyodide-local-${{ hashFiles('moteur/manifeste.json', 'tests/pages/pyodide_local.py') }}
+
+      - name: Copie locale de Pyodide
+        run: python tests/pages/pyodide_local.py
+
+      # Chrome est préinstallé sur ubuntu-latest ; KaTeX vient de jsDelivr, Pyodide de la copie locale.
       # Corpus réduit (3 entrées par outil dont une erreur) : le corpus complet (≈ 300 entrées) se lance en local.
       - name: Tests de pages
         env:

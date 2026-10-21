@@ -1,7 +1,7 @@
 """Tests de pages — le rendu de chaque page outil est égal à la référence enregistrée dans
 tests/pages/references/<outil>.json (cartes, textes et formules, structure des tableaux, compteur).
 
-Chrome sans interface + réseau (Pyodide et KaTeX viennent de jsDelivr) ; ~ 1 min par page.
+Chrome sans interface ; Pyodide vient de la copie locale (pyodide_local.py), KaTeX de jsDelivr ; ~ 1 min par page.
 
     uv run -q --no-project --python 3.12 --with sympy==1.13.3 --with websockets \
         python -m unittest discover -s tests/pages

@@ -1,7 +1,9 @@
 """Chrome sans interface piloté par le protocole DevTools (CDP), pour les tests de pages (T15).
 
 Python seulement : `uv run -q --no-project --python 3.12 --with websockets python …`. Le site est servi
-par un petit serveur HTTP local (le dépôt tel quel) ; Pyodide et KaTeX viennent de jsDelivr (réseau requis).
+par un petit serveur HTTP local (le dépôt tel quel) ; KaTeX vient de jsDelivr (réseau requis). Pyodide, SymPy et mpmath viennent
+de la copie locale (pyodide_local.py, T30) : les requêtes que les pages adressent à jsDelivr sont interceptées (domaine Fetch du
+protocole DevTools, y compris dans le worker) et servies depuis la copie ; seul ce serveur de test redirige, les URL des pages ne changent pas.
 
     with Navigateur() as nav:
         page = nav.ouvrir("ensemble-definition/?f=ln(x-1)")
@@ -17,9 +19,13 @@ import subprocess
 import tempfile
 import threading
 import time
+import queue
+import urllib.parse
 import urllib.request
 
 from websockets.sync.client import connect
+
+import pyodide_local
 
 RACINE = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 CHEMINS_CHROME = (
@@ -41,6 +47,11 @@ class _Silencieux(http.server.SimpleHTTPRequestHandler):
     def log_message(self, *a):
         pass
 
+    def end_headers(self):
+        # les requêtes de Pyodide réécrites vers la copie locale gardent leur nature « cross-origin » pour Chrome
+        self.send_header("Access-Control-Allow-Origin", "*")
+        super().end_headers()
+
 
 class _Serveur(http.server.ThreadingHTTPServer):
     """Un fil par requête (ThreadingHTTPServer) et une file de connexions assez grande. Une page télécharge en parallèle tous
@@ -48,6 +59,109 @@ class _Serveur(http.server.ThreadingHTTPServer):
     de 5 par défaut, un serveur qui n'accepte plus pendant un instant (machine chargée) fait réinitialiser des connexions
     (ConnectionResetError, vu sur macOS avec 12 connexions simultanées), donc « Failed to fetch » dans moteur-python.js."""
     request_queue_size = 128
+
+
+class _Intercepteur(threading.Thread):
+    """Sert depuis la copie locale les requêtes vers https://cdn.jsdelivr.net/pyodide/ de chaque onglet suivi, y compris celles
+    de son worker (le worker de Pyodide charge pyodide.asm.wasm et les paquets lui-même : le domaine Fetch de la page les voit, sans
+    qu'il faille s'attacher au worker, qui ne le prend pas en charge). Connexion DevTools à part : la page et ses
+    commandes ne sont jamais bloquées par ce fil. Une requête hors de la copie reçoit un 404 (jamais le réseau)."""
+    def __init__(self, url_ws, port_http, dossier, version):
+        super().__init__(daemon=True)
+        self.ws = connect(url_ws, max_size=None)
+        self.port_http, self.dossier, self.version = port_http, dossier, version
+        self.a_suivre = queue.Queue()
+        self.arret = threading.Event()
+        self.servies, self.refusees = [], []
+        self._recus = queue.Queue()  # événements arrivés pendant l'attente d'une réponse : traités par run(), jamais en cascade
+        self._n = 0
+        self.start()
+
+    def surveiller(self, cible):
+        """Attend que l'onglet `cible` soit intercepté : à appeler avant d'y naviguer."""
+        resultat = {"fait": threading.Event()}
+        self.a_suivre.put((cible, resultat))
+        if not resultat["fait"].wait(30):
+            raise RuntimeError("interception de Pyodide impossible (délai)")
+        if "erreur" in resultat:
+            raise RuntimeError(f"interception de Pyodide impossible : {resultat['erreur']}")
+
+    def _envoyer(self, methode, session=None, **params):
+        self._n += 1
+        msg = {"id": self._n, "method": methode, "params": params}
+        if session:
+            msg["sessionId"] = session
+        self.ws.send(json.dumps(msg))
+        return self._n
+
+    def _appel(self, methode, session=None, **params):
+        i = self._envoyer(methode, session, **params)
+        while True:
+            m = json.loads(self.ws.recv(timeout=30))
+            if m.get("id") == i:
+                if "error" in m:
+                    raise ErreurPage(m["error"])
+                return m["result"]
+            self._recus.put(m)
+
+    def _intercepter(self, session):
+        self._appel("Fetch.enable", session, patterns=[{"urlPattern": pyodide_local.PREFIXE_CDN + "*"}])
+
+    def _evenement(self, m):
+        methode, p = m.get("method"), m.get("params", {})
+        if methode == "Fetch.requestPaused":
+            self._repondre(m["sessionId"], p["requestId"], p["request"]["url"])
+
+    def _repondre(self, session, requete, url):
+        try:
+            self._servir(session, requete, url)
+        except ErreurPage:
+            pass  # l'onglet a été fermé ou a navigué pendant l'attente : la requête n'existe plus
+
+    def _servir(self, session, requete, url):
+        chemin = urllib.parse.urlparse(url).path
+        prefixe = f"/pyodide/v{self.version}/full/"
+        nom = chemin[len(prefixe):] if chemin.startswith(prefixe) else None
+        if not nom or "/" in nom or not os.path.isfile(os.path.join(self.dossier, nom)):
+            self.refusees.append(url)
+            self._appel("Fetch.fulfillRequest", session, requestId=requete, responseCode=404, responsePhrase="Absent de la copie locale")
+            return
+        # réécriture vers le serveur de test (même origine que la page) plutôt qu'un corps envoyé par DevTools : 18 Mo en base64
+        # à chaque page ralentissaient la suite, alors que le cache HTTP de Chrome garde ces fichiers d'une page à la suivante
+        self.servies.append(nom)
+        self._appel("Fetch.continueRequest", session, requestId=requete,
+                    url=f"http://127.0.0.1:{self.port_http}/{os.path.relpath(self.dossier, RACINE)}/{nom}")
+
+    def run(self):
+        try:
+            while not self.arret.is_set():
+                try:
+                    cible, resultat = self.a_suivre.get_nowait()
+                except queue.Empty:
+                    pass
+                else:
+                    try:
+                        session = self._appel("Target.attachToTarget", targetId=cible, flatten=True)["sessionId"]
+                        self._intercepter(session)
+                    except ErreurPage as e:
+                        resultat["erreur"] = e
+                    resultat["fait"].set()
+                try:
+                    m = self._recus.get_nowait()
+                except queue.Empty:
+                    try:
+                        m = json.loads(self.ws.recv(timeout=0.05))
+                    except TimeoutError:
+                        continue
+                self._evenement(m)
+        except Exception:
+            if not self.arret.is_set():
+                raise
+
+    def fermer(self):
+        self.arret.set()
+        self.join(5)
+        self.ws.close()
 
 
 class ErreurPage(Exception):
@@ -110,6 +224,7 @@ class Navigateur:
         self.port_http = port_http
 
     def __enter__(self):
+        pyodide_local.verifier()  # copie présente, complète, de la version des pages : sinon le test échoue ici, avec la marche à suivre
         gestionnaire = functools.partial(_Silencieux, directory=RACINE)
         self.serveur = _Serveur(("127.0.0.1", self.port_http), gestionnaire)
         self.port_http = self.serveur.server_address[1]
@@ -129,6 +244,7 @@ class Navigateur:
         if not url:
             raise RuntimeError("Chrome ne répond pas")
         self.ws = connect(url, max_size=None)
+        self.intercepteur = _Intercepteur(url, self.port_http, pyodide_local.DOSSIER, pyodide_local.version_attendue())
         return self
 
     def _appel(self, methode, session=None, **params):
@@ -157,6 +273,7 @@ class Navigateur:
                 pass
         cible = self._appel("Target.createTarget", url="about:blank")["targetId"]
         self._cibles = [cible]
+        self.intercepteur.surveiller(cible)
         session = self._appel("Target.attachToTarget", targetId=cible, flatten=True)["sessionId"]
         page = Page(self.ws, session)
         page.appel("Page.enable")
@@ -168,6 +285,7 @@ class Navigateur:
 
     def __exit__(self, *exc):
         try:
+            self.intercepteur.fermer()
             self.ws.close()
         finally:
             self.proc.terminate()
