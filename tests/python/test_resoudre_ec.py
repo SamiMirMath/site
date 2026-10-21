@@ -1,5 +1,5 @@
 """T12 — etude-complete/resoudre_ec.py : sortie du format commun, sans rien perdre de l'ancienne,
-cartes dans l'ordre de la page, et cohérence avec les sorties des outils séparés (EC-01)."""
+cartes dans l'ordre de la page (EC-14), et cohérence avec les sorties des outils séparés (EC-01)."""
 import json
 import unittest
 

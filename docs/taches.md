@@ -196,7 +196,7 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
 - **Vérification** : ED-06 et équivalents ; anciennes fonctions `*_json` inchangées (instantanés).
 - **Réalisé** : `moteur/sortie.py` (constructeurs + `valider()`), un adaptateur `resoudre_<outil>.py` par outil
   (`resoudre`, `resoudre_json`, `apercu_json`), instantanés `tests/python/instantanes/resoudre/`, critères DV-14, LA-40,
-  EC-13, FA-08, ED-06 ; schéma réel dans [choix-techniques.md](choix-techniques.md). Pages et moteurs inchangés ;
+  EC-14, FA-08, ED-06 ; schéma réel dans [choix-techniques.md](choix-techniques.md). Pages et moteurs inchangés ;
   les pages passeront à `resoudre()` en T17 à T20.
 
 ### T13 — Exercices avec graine
@@ -253,7 +253,16 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
   manifeste (`resoudre_la`, fonctions `resoudre` et `apercu`) ; SOC-10 et source unique étendus à la page ; 24 références sur 25
   changent d'une seule chose, l'espace entre la formule et la ligne « ED = … » (invisible : 50 captures sans écart au-delà du bruit de
   rendu) ; aucun changement de Python.
-- T19 Étude complète (+ EC-04, EC-05, EC-06), T20 Factorisation.
+- T19 Étude complète — **faite** (21.10.2026, 10 commits : `13c7a5a`, `97fc5cb`, `a47ae1c`, `68b5dbb`, `0fbdc18`, `b6c29c9`, `618be7f`,
+  `42f568f`, `b5b7eb9`, `7d5acf4`) : page réduite à ses exemples, ses exercices et sa config (`sympyAvant`, `delaiCalcul: 45000`, greffon
+  graphique) ; `commun/graphique.js` réutilisable (dessin, `monterGraphique`, `greffonGraphique`) ; `rendu.js` rend `tableau.limites` et les
+  greffons ; manifeste `resoudre_ec` (`etudier` gardée comme ancienne). Preuve (banc `tests/pages/graphique.py`, voir
+  [choix-techniques.md](choix-techniques.md)) : bruit mesuré nul ; commits 2 à 4 : 192 scénarios identiques en trace et en pixels, 10 captures
+  identiques à l'octet ; EC-06 : seuls des `fillText` fractionnaires changent (628 étiquettes) ; EC-05 : seuls les 24 pincements changent.
+  EC-04, EC-05, EC-06 testés (`test_graphique.py`) ; EC-05 et EC-07 vérifiés au doigt sur téléphone (14 vérifications, 21.10.2026). Défaut
+  de l'ancien code corrigé : la translation du pincement dépendait du nombre de `pointermove`. Critère `resoudre()` renuméroté EC-14 (EC-13
+  désigne le rendu à 360 px).
+- T20 Factorisation.
 - **Dépend** : T16. **Vérification** : mêmes critères SOC + critères de page de l'outil ;
   instantanés des moteurs inchangés.
 
@@ -397,6 +406,38 @@ sur l'accueil.
 ### T28 — Exercices au hasard du simplexe
 - **Dépend** : T24, T25. Gabarits acceptés (Q4, 14.10.2026). **Vérification** : PL-09, PL-13, SOC-05.
 
+## Après T19 — chargement et temps d'attente (tickets du 21.10.2026)
+
+Origine : sur la suite de tests, des « Prêt. » non atteints (un `fetch` local réinitialisé ; une page restée figée sur « Chargement du moteur
+de calcul… » pendant 150 s, cause non établie) ; sur
+l'élève, un « Calcul en cours… » qui dure parce que SymPy se charge encore. Trois tickets indépendants de T20 à T23.
+
+### T29 — Message quand le chargement est trop long
+- Si le chargement de Python ou du moteur (SymPy) dépasse un délai, la page affiche « Le chargement prend plus de temps que prévu, recharge la
+  page ». Aujourd'hui, un chargement qui reste bloqué n'a ni délai ni nouvel essai (observé une fois sur 16 ouvertures de page).
+- **Fichiers** : `commun/outil.js`, `commun/moteur-python.js` (texte d'interface, écrit une fois dans `outil.js`). Délai à fixer d'après les
+  mesures de T31.
+- **Vérification** : test de page avec un téléchargement ralenti ou coupé (même principe que SOC-13), le message apparaît puis disparaît
+  si le chargement aboutit.
+
+### T30 — Tests de pages sans réseau (Pyodide en copie locale)
+- Les tests de pages chargent Pyodide 0.27.7, SymPy, mpmath et KaTeX depuis une copie locale servie par le serveur de test, plus depuis
+  jsDelivr. Les pages gardent leurs URL de production ; le test redirige les requêtes (interception DevTools) vers la copie.
+- La copie (≈ 18 Mo, voir « Coût d'un Pyodide auto-hébergé » dans [choix-techniques.md](choix-techniques.md)) n'est **pas** versionnée :
+  téléchargée une fois dans un dossier ignoré par git, mise en cache dans la CI.
+- **Vérification** : suite de pages verte avec le réseau coupé ; plus aucun « Prêt. » non atteint dû au CDN.
+
+### T31 — Temps d'attente : libellé et mesure en Suisse
+- (a) **Libellé** : pendant l'attente de SymPy (`sympyAvant`, pages Dérivée, Limites, Étude complète), l'état affiche « Calcul en cours… »
+  alors que le calcul n'a pas commencé. Afficher « Chargement du moteur de calcul pour cette fonction… » (texte déjà dans `outil.js`), et
+  décider si « Calculer » doit rester actif avant « Prêt. ».
+- (b) **Mesure en Suisse** (téléphone, Wi-Fi et 4G/5G ; Safari iOS et Chrome Android) : durée jusqu'à « Prêt. » à froid et avec cache, durée du
+  premier calcul, pour les pages à `sympyAvant`. Référence prise le 21.10.2026 sur Mac, Wi-Fi, charge faible : ≈ 17 s à froid jusqu'à « Prêt. »
+  (Python prêt vers 9 s, SymPy vers 17 s) ; une fois prêt, les 8 exemples de l'Étude complète prennent de 0,2 à 1,2 s ; ≈ 10 Mo transférés.
+- (c) **Décision d'après les chiffres** : rien, préchargement du moteur dès l'accueil, ou auto-hébergement de Pyodide
+  (coût et conséquences dans [choix-techniques.md](choix-techniques.md)).
+- **Vérification** : tableau des mesures (appareil, navigateur, réseau, durées) ajouté à cette fiche ; libellé vérifié par un test de page.
+
 ## Plus tard (hors plan, si les tests tiennent)
 
 - Découpage de `ensemble_def.py` en modules (`moteur/expr.py`, `poly.py`, `ensembles.py`…),
@@ -407,7 +448,7 @@ sur l'accueil.
 
 T01 → T02 → T03 → T04 (faites) → T05, T07, T08 (indépendantes) → T08b → T06 → T07b (priorité haute)
 → T09 → T11 → T12 → T13 → T14 → T15 → T16 → T17…T20 → T21, T22, T23 → T10
-→ **phase F (N01 → N26, vagues 1 à 7)** → T24…T27 → T28.
+→ **phase F (N01 → N26, vagues 1 à 7)** → T24…T27 → T28 ; T29, T30, T31 (chargement) : après T19, indépendantes.
 Les spécifications des outils de la phase F (étape 1 du gabarit) peuvent être rédigées dès maintenant :
 ce sont des documents, ils ne touchent pas au code.
 

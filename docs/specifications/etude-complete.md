@@ -8,8 +8,9 @@ la dérivée et les limites (aucun calcul mathématique nouveau).
 - Enchaîne : ED → dérivée, signe, variations, extrema → limites et asymptotes → graphique.
 - **Graphique** : cadrage automatique (bornes de l'ED, extrema, asymptotes horizontales) ;
   courbe tracée par morceaux de l'ED ; asymptotes en pointillé ; extrema en points pleins ;
-  trous (limite finie en une valeur interdite) en ronds vides ; zoom (boutons, molette, pincement), déplacement
-  (glisser) ; rééchantillonnage de la fenêtre visible.
+  trous (limite finie en une valeur interdite) en ronds vides ; rééchantillonnage de la fenêtre visible.
+  **Souris** : molette et boutons (zoom), glisser (déplacement). **Écran tactile** : un doigt fait défiler la page (la courbe ne
+  bouge pas), deux doigts déplacent et zooment la courbe, le point sous le milieu des doigts y reste (T19, EC-05).
 - Les résultats des trois étapes sont exactement ceux des outils séparés.
 
 ## Conventions
@@ -113,8 +114,8 @@ f(x)     | +∞  ↘  −∞ ‖  ░░░░░░  ‖ −∞  ↗  +∞
 | EC-01 | Pour chaque exemple, les parties dérivée et limites sont identiques aux sorties des outils séparés | [auto-py] |
 | EC-02 | L'ED n'est calculé qu'une fois par étude, et `fenetre()` ne recalcule pas l'ED (mise en cache par entrée) | [auto-py] (compteur d'appels) |
 | EC-03 | `fenetre("e^x", -10, 800)`, `fenetre("e^(-x)", -1000, 10)`, `fenetre("x^2*e^(-x)", -2000, 2000)` réussissent ; les points non calculables sont omis | [auto-py] |
-| EC-04 | En cas d'échec de `fenetre`, la courbe affichée reste celle de la dernière fenêtre réussie et un message discret l'indique | [auto-page] |
-| EC-05 | Sur téléphone, un glissement vertical à un doigt sur le graphique fait défiler la page ; deux doigts zooment et déplacent | [manuel] |
-| EC-06 | Graduations sans point décimal | [auto-page] |
-| EC-07 | Le graphique est imprimé (image) dans le PDF | [manuel] |
-| EC-13 | `resoudre()` (T12) respecte le schéma de sortie commun, ses cartes sont dans l'ordre de la page, celles de la dérivée et des limites sont les cartes des outils séparés, les limites figurent dans le tableau de variations ; instantanés `instantanes/resoudre/etude-complete.json` | [auto-py] (`test_resoudre_ec.py`) |
+| EC-04 | En cas d'échec de `fenetre`, la courbe affichée reste celle de la dernière fenêtre réussie et un message discret l'indique | [auto-page] (`test_graphique.py`, crochet `window.__echecFenetre`) |
+| EC-05 | Sur téléphone, un glissement vertical à un doigt sur le graphique fait défiler la page ; deux doigts zooment et déplacent, sans faire défiler la page, et le point de la courbe sous le milieu des doigts y reste quel que soit le nombre de mouvements livrés par le navigateur | [auto-page] (`test_graphique.py`, émulation tactile de Chrome) + [manuel] (14 vérifications sur téléphone, 21.10.2026) |
+| EC-06 | Graduations et coordonnées du graphique sans point décimal (virgule), par la seule fonction `etiquette()` | [auto-page] (`test_graphique.py`) |
+| EC-07 | Le graphique est imprimé (image) dans le PDF, en clair même en mode sombre | [manuel] (vérifié sur téléphone, 21.10.2026) |
+| EC-14 | `resoudre()` (T12) respecte le schéma de sortie commun, ses cartes sont dans l'ordre de la page, celles de la dérivée et des limites sont les cartes des outils séparés, les limites figurent dans le tableau de variations ; instantanés `instantanes/resoudre/etude-complete.json` | [auto-py] (`test_resoudre_ec.py`) |

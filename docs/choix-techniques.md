@@ -147,14 +147,61 @@ Schéma de `resoudre` (T12, `moteur/sortie.py` : constructeurs et `valider()`, f
 | `formule` | carte à titre masqué → `.enonce` ; sinon `.c` |
 | `resultat` / `erreur` | `.res` / `.res.err` (dans une carte `final` : `.err`) |
 | `liste` | `<ul class="extrema|bilan">` |
-| `tableau` | tableau de signes ; `limites` et `graphique` viennent en T19 (`ajouterBloc`) |
+| `tableau` | tableau de signes ; `limites` (Étude complète) : valeurs en ±∞ dans les cases du bord de la ligne de variation et de part et d'autre d'une colonne interdite |
+| `graphique` | greffon (`ajouterGreffon`), voir « Graphique réutilisable » ci-dessous |
 
-`outil.js` : `monterOutil({outil, titrePdf, exemples, exos, poids, prefixe?, sympyAvant?, apres?})` monte le
+`outil.js` : `monterOutil({outil, titrePdf, exemples, exos, poids, prefixe?, sympyAvant?, delaiCalcul?, greffons?, apres?})` monte le
 comportement commun (client Python, aperçu, clavier, exemples, calcul, cartes cachées puis révélées,
 PDF, exercice) sur le **HTML statique** de la page, qui garde ses `id`. `apres({entree, appelPy,
 derniereCarte, actuel})` est le crochet propre à l'outil (ED : badge du contrôle numérique). Le test
 `test_source_unique.py` interdit les phrases de corrigé dans les pages migrées, `rendu.js` et `outil.js`.
 Le manifeste a une clé `anciennes` : fonctions que seules des pages en cache appellent encore.
+`delaiCalcul` (ms, 30 000 par défaut ; 45 000 pour l'Étude complète, comme avant) fixe le délai au-delà duquel le calcul est
+abandonné et le moteur relancé. `greffons` : blocs à comportement, voir ci-dessous.
+
+### Graphique réutilisable (T19, `commun/graphique.js`)
+
+Livré comme module (et non comme code de page) pour les outils de la phase F (N01, N05, N11, N22, N25, N26).
+
+- **`rendu.js`** : `ajouterGreffon({type, rendu, barre?, activer?})`. `rendu(bloc, carte)` donne le HTML du bloc ; `barre(bloc, carte)`
+  place des boutons à droite du **titre de la carte** (le titre reste tiré des données : la barre de titre est un `.barre` avec
+  le `<h3>`) ; `activer(carte, bloc, contexte)` est appelé une fois la carte construite. `rendreCarte(carte, contexte)` et
+  `monterOutil` transmettent `contexte = { appelPy, entree }` (`entree` : la saisie dont la carte est le corrigé).
+- **`graphique.js`** : `dessinerGraphique(canvas, g, extrema, asymptotes, vista, forcerClair)` (dessin, échelle égale en x et en y),
+  `monterGraphique(éléments, {g, extrema, asymptotes, fenetre})` (interaction), `greffonGraphique` (bloc `graphique` de
+  `moteur/sortie.py`). La page l'active par `monterOutil({greffons: [greffonGraphique]})` et ne contient plus aucun code de graphique.
+- **Recalcul de la courbe** : si le bloc est `recalculable`, un zoom ou un déplacement appelle
+  `appelPy("fenetre", JSON {f: saisie, xmin, xmax, n})` → `{ok, segments}` (`resoudre_ec.fenetre_json`). Si le calcul échoue (`ok:false`
+  ou erreur), la courbe reste celle de la dernière fenêtre réussie et un message discret l'indique (EC-04).
+- **Redessin** : le canvas se redessine seul quand sa taille change (`ResizeObserver` et `resize` : une carte cachée a une largeur nulle)
+  et autour de l'impression (`beforeprint` : couleurs du thème clair, `afterprint` : thème de l'écran), donc aussi avec Ctrl+P. Les écouteurs
+  de la fenêtre disparaissent quand le canvas quitte la page.
+- **Gestes** : souris et stylet, molette zoome autour du pointeur, glisser déplace. Écran tactile : `touch-action: pan-x pan-y` (un doigt =
+  la page défile, la courbe ne bouge pas) et écouteurs `touchstart`/`touchmove` non passifs qui font `preventDefault()` dès que deux doigts
+  touchent le canvas (un pointer event ne peut pas annuler un geste déjà pris en charge par le navigateur). Le geste à deux doigts est
+  calculé **depuis l'état au début du geste** (fenêtre affichée, écart et milieu des doigts) : le point de la courbe sous le milieu des doigts y
+  reste, quel que soit le nombre de `pointermove` livrés (Chrome en fusionne ; l'ancien calcul, qui divisait par l'échelle courante, laissait glisser
+  le point). Limite connue : si le défilement à un doigt est déjà lancé quand le deuxième doigt arrive, il continue ; il faut lever les doigts.
+- **Nombres** : tout nombre écrit sur le graphique passe par `etiquette()` (au plus deux décimales, virgule) ; T23 la remplacera par `commun/nombres.js`.
+- **Limite actuelle** : un seul graphique par page (les `id` `graphique`, `zoomPlus`, `zoomMoins`, `zoomReset`, `msgFenetre` sont fixes, les tests
+  les utilisent) ; le module n'interroge aucun `id` global. Un préfixe d'`id` sera ajouté au premier outil qui en a besoin.
+- **Crochets de test** : `window.__echecFenetre` (`"refus"` : le moteur répond `ok:false` ; `"exception"` : erreur), `window.__delaiCalcul` (ms).
+
+### Preuve que le graphique ne change pas (banc `tests/pages/graphique.py`)
+
+- **Trace des appels canvas** : chaque appel du contexte 2D avec ses arguments arrondis à 1e-4. Le dessin n'utilise pas `measureText` : la trace
+  ne dépend d'aucune police, ses empreintes sont versionnées (`tests/pages/references/graphique-traces.json`) et rejouées en CI
+  (3 fonctions × 2 vues × 8 états, ≈ 2,3 min). Matrice complète, en local : 6 fonctions × 4 vues (clair, sombre, 360 px, dpr 2) × 8 états
+  (tracé initial, +, −, réinitialiser, molette, glisser, pincer, impression) ≈ 8 min. Molette, glisser et pincer passent par de vrais
+  événements DevTools (un événement synthétique ferait échouer `setPointerCapture`).
+- **Pixels du canvas** et **captures de page** (`tests/pages/captures.py`) : comparés sur la même machine, jamais versionnés.
+- **Bruit mesuré** (18.10.2026, même code rechargé) : 0 trace et 0 pixel d'écart sur 10 × 48 scénarios ; 0 pixel sur 10 × 10 captures de
+  `etude-complete`, d'où un plancher de 20 px pour cette page (`BRUIT_PAGE`), 400 px pour les autres.
+- **Un changement voulu** se prouve par ce qui change : EC-06 ne change que des `fillText` fractionnaires (`.` → `,`) ; EC-05 ne change que les
+  scénarios `pincer`.
+- **Serveur de test** : un fil par requête et une file de 128 connexions (la file de 5 par défaut réinitialise des connexions quand le
+  serveur n'accepte plus un instant : `Failed to fetch` au chargement des fichiers Python). À l'expiration de « Prêt. », `attendre_pret`
+  donne le texte de `#etat` et la console.
 
 - Fichiers à plat dans Pyodide comme `noyau.py` (`test_resoudre_import.py`) ; la fonction `exercice(niveau, graine)`
   est l'objet de T13.
