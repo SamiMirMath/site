@@ -262,7 +262,11 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
   EC-04, EC-05, EC-06 testés (`test_graphique.py`) ; EC-05 et EC-07 vérifiés au doigt sur téléphone (14 vérifications, 21.10.2026). Défaut
   de l'ancien code corrigé : la translation du pincement dépendait du nombre de `pointermove`. Critère `resoudre()` renuméroté EC-14 (EC-13
   désigne le rendu à 360 px).
-- T20 Factorisation.
+- T20 Factorisation — **faite** (22.10.2026) : page réduite à ses exemples et sa config (`sympyAvant`, `prefixe:""`, `prefixeExo:"Factoriser : "`,
+  `exercicePython:"exercice"`) ; manifeste `resoudre_fa` (fonctions `resoudre`, `apercu`, `exercice`), l'ancien `factoriser` n'est plus appelé ;
+  `outil.js` gagne `exercicePython` (tirage de l'exercice par niveau en Python) et `prefixeExo`, et lit le texte d'attente de l'aperçu dans la
+  page (« Aperçu du polynôme ») ; SOC-10 : `aria-live` et `aria-label` ajoutés à la page ; SOC-10 et source unique étendus. Rendu : les
+  références de la page (corpus complet) passent sans régénération ; aucun changement de Python hors l'export de `exercice_json`.
 - **Dépend** : T16. **Vérification** : mêmes critères SOC + critères de page de l'outil ;
   instantanés des moteurs inchangés.
 

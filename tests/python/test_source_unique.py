@@ -8,7 +8,7 @@ import unittest
 
 from moteurs import RACINE
 
-MIGREES = ["ensemble-definition", "derivee-variations", "limites-asymptotes", "etude-complete"]
+MIGREES = ["ensemble-definition", "derivee-variations", "limites-asymptotes", "etude-complete", "factorisation"]
 PHRASES = ["conditions d'existence", "condition d'existence", "Condition non résolue", "obtenues numériquement",
            "Contrôle numérique", "Ni logarithme", "aucune condition", "Aucun extremum", "ligneAsymptote",
            "branche parabolique", "Une condition n'a pas pu être résolue"]

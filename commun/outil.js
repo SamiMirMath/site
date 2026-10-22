@@ -8,7 +8,9 @@
      monterOutil({ outil: "ensemble-definition", titrePdf: "Corrige-ensemble-de-definition",
                    exemples: EXEMPLES, exos: EXOS, poids: [["facile", .35], ...], apres: async (ctx) => {...} });
 
-   Options : prefixe (« f(x) = », devant l'aperçu), sympyAvant (attendre SymPy avant tout calcul),
+   Options : prefixe (« f(x) = », devant l'aperçu et l'énoncé de l'exercice), prefixeExo (devant l'énoncé de l'exercice seulement,
+   si différent : « Factoriser : »), exercicePython (nom de la fonction Python qui tire l'exercice d'un niveau, renvoie {ok, expr} ;
+   sans elle, le tirage se fait en JS dans `exos`), sympyAvant (attendre SymPy avant tout calcul),
    delaiCalcul (ms, 30000 par défaut : au-delà, « Calcul trop long » et le moteur est relancé),
    greffons (blocs à comportement, voir rendu.js ajouterGreffon : le graphique de commun/graphique.js ; ils reçoivent
    { appelPy, entree } où `entree` est la saisie dont la carte est le corrigé),
@@ -31,7 +33,7 @@ export function monterOutil(config) {
 }
 
 function demarrerOutil(config) {
-  const { outil, prefixe = "f(x) = ", titrePdf, exemples = [], exos = {}, poids = [], sympyAvant = false, delaiCalcul = DELAI_CALCUL, greffons = [], apres } = config;
+  const { outil, prefixe = "f(x) = ", prefixeExo = prefixe, exercicePython = null, titrePdf, exemples = [], exos = {}, poids = [], sympyAvant = false, delaiCalcul = DELAI_CALCUL, greffons = [], apres } = config;
   greffons.forEach(ajouterGreffon);
   const moteur = new MoteurPython(outil, { surEtat: () => majEtat() });
   const appelPy = (fn, arg, delai) => moteur.appelPy(fn, arg, delai);
@@ -60,15 +62,16 @@ function demarrerOutil(config) {
      0,5 s sans frappe, et seulement si la réponse correspond bien à la dernière saisie ; un aperçu valide s'affiche
      tout de suite et remplace tout message. Une réponse perdue (moteur occupé, délai dépassé) ne laisse rien d'obsolète. */
   let tAp = null, seqAp = 0, tFrappe = 0, dernierApercu = "";
+  const apercuVide = $("apercu").innerHTML;             // le texte d'attente (« Aperçu de la fonction », « du polynôme ») est celui de la page
   function apercu() {
     clearTimeout(tAp);
     const mon = ++seqAp, box = $("apercu");
     tFrappe = Date.now();
-    const neutre = () => { box.innerHTML = dernierApercu ? '<span class="obsolete">' + dernierApercu + "</span>" : '<span class="muted">Aperçu de la fonction</span>'; };
+    const neutre = () => { box.innerHTML = dernierApercu ? '<span class="obsolete">' + dernierApercu + "</span>" : apercuVide; };
     if (box.querySelector(".err")) neutre();
     tAp = setTimeout(async () => {
       const s = $("entree").value.trim();
-      if (!s) { dernierApercu = ""; box.innerHTML = '<span class="muted">Aperçu de la fonction</span>'; return; }
+      if (!s) { dernierApercu = ""; box.innerHTML = apercuVide; return; }
       if (!moteur.worker) return;
       let r;
       try { r = await appelPy("apercu", s, 5000); } catch (e) { if (mon === seqAp && box.querySelector(".err")) neutre(); return; }
@@ -173,7 +176,7 @@ function demarrerOutil(config) {
     window.print();
   };
 
-  /* ---------- exercice au hasard (tirage JS par niveaux, jusqu'à T13) ---------- */
+  /* ---------- exercice au hasard (tirage par niveaux : en JS dans `exos`, ou en Python avec `exercicePython`) ---------- */
   function tirerNiveau() {
     let r = Math.random(), acc = 0;
     for (const [n, p] of poids) { acc += p; if (r <= acc) return n; }
@@ -182,9 +185,6 @@ function demarrerOutil(config) {
   let exoCourant = null;
   async function nouvelExercice() {
     if (!moteur.worker) return;
-    let s;
-    do { const pool = exos[tirerNiveau()]; s = pool[Math.floor(Math.random() * pool.length)]; } while (s === exoCourant);
-    exoCourant = s;
     $("resultat").hidden = true;
     $("cartes").innerHTML = "";
     cartes = [];
@@ -193,8 +193,14 @@ function demarrerOutil(config) {
     const box = $("exoEnonce");
     box.innerHTML = '<span class="muted">Chargement…</span>';
     try {
+      let s;
+      do {
+        if (exercicePython) s = (await appelPy(exercicePython, tirerNiveau(), 5000)).expr;
+        else { const pool = exos[tirerNiveau()]; s = pool[Math.floor(Math.random() * pool.length)]; }
+      } while (s === exoCourant);
+      exoCourant = s;
       const r = await appelPy("apercu", s, 5000);
-      box.innerHTML = r.ok ? K(prefixe + r.tex) : '<span class="err">' + r.erreur + "</span>";
+      box.innerHTML = r.ok ? K(prefixeExo + r.tex) : '<span class="err">' + r.erreur + "</span>";
     } catch (e) { box.innerHTML = '<span class="err">Erreur de chargement.</span>'; }
     math(box);
   }

@@ -34,9 +34,10 @@
       "anciennes": ["etudier"]
     },
     "factorisation": {
-      "module": "factorisation",
-      "fichiers": ["ensemble-definition/ensemble_def.py", "moteur/noyau.py", "factorisation/factorisation.py"],
-      "fonctions": ["apercu", "exercice", "factoriser"]
+      "module": "resoudre_fa",
+      "fichiers": ["ensemble-definition/ensemble_def.py", "moteur/noyau.py", "moteur/sortie.py", "factorisation/factorisation.py",
+                   "factorisation/resoudre_fa.py"],
+      "fonctions": ["resoudre", "apercu", "exercice"]
     }
   }
 }

@@ -1,7 +1,7 @@
 """Tests de pages — comportement commun des cinq outils (socle-commun.md), indépendant de la façon dont la
 page est construite : `?f=` (SOC-04), saisie invalide (SOC-06), aperçu sans message rouge pendant la frappe
 (SOC-16), étapes (SOC-07), largeur à 360 px (SOC-09), délai dépassé puis relance du moteur (SOC-13), rendu commun
-des sorties de resoudre() (commun/rendu.js), libellé pendant le chargement de SymPy (T31)."""
+des sorties de resoudre() (commun/rendu.js), libellé pendant le chargement de SymPy (T31), exercice tiré en Python (T20)."""
 import json
 import os
 import re
@@ -48,6 +48,22 @@ class TestComportement(unittest.TestCase):
         page = self.nav.ouvrir(f"{outil}/index.html{requete}")
         attendre_pret(page)
         return page
+
+    def test_t20_factorisation_exercice_tire_en_python(self):
+        """Factorisation : « Nouveau polynôme » tire un exercice en Python (énoncé « Factoriser : … »), « Afficher le corrigé » donne la carte finale."""
+        if "factorisation" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.ouvrir("factorisation")
+        for _ in range(2):
+            page.evaluer("document.querySelector('#exoHasard').click()")
+            page.attendre("document.querySelector('#exoEnonce annotation')", 30)
+            self.assertTrue(page.evaluer("document.querySelector('#exoEnonce annotation').textContent").startswith("Factoriser : "))
+        enonce = page.evaluer("document.querySelector('#exoEnonce annotation').textContent")
+        page.evaluer("document.querySelector('#exoCorrige').click()")
+        page.attendre("document.querySelector('#cartes .card.final .badge')", 60)
+        self.assertEqual(page.evaluer("document.querySelector('#entree').value"), "")        # le corrigé ne touche pas à la saisie
+        self.assertIn(page.evaluer("document.querySelector('#cartes .card.final .res annotation').textContent").split(" = ")[0].replace(" ", ""),
+                      enonce.replace(" ", "").replace("Factoriser:", ""))
 
     def test_t31_libelle_pendant_le_chargement_de_sympy(self):
         """Pages à `sympyAvant` : un calcul lancé avant « Prêt. » affiche « Chargement du moteur de calcul pour cette fonction… »

@@ -6,9 +6,9 @@ finale (titre « Factorisation », badge = méthode), l'expression, les étapes,
 """
 from noyau import json_strict
 import sortie as so
-from factorisation import factoriser_expr, apercu_json
+from factorisation import factoriser_expr, apercu_json, exercice_json
 
-__all__ = ["resoudre", "resoudre_json", "apercu_json"]
+__all__ = ["resoudre", "resoudre_json", "apercu_json", "exercice_json"]
 
 
 def resoudre(entree):
