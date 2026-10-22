@@ -110,11 +110,13 @@ function demarrerOutil(config) {
     if (!s || !moteur.worker) return;
     const moi = ++numCalcul;
     $("calculer").disabled = true;
-    $("etat").textContent = "Calcul en cours…";
+    // SymPy pas encore chargé : le calcul n'a pas commencé, on le dit (« Calcul en cours… » viendrait ensuite)
+    const attendSympy = sympyAvant && !moteur.sympyOK;
+    $("etat").textContent = attendSympy ? "Chargement du moteur de calcul pour cette fonction…" : "Calcul en cours…";
     const delai = window.__delaiCalcul || delaiCalcul;
     let r;
     try {
-      if (sympyAvant) await moteur.sympyPret;
+      if (attendSympy) { await moteur.sympyPret; $("etat").textContent = "Calcul en cours…"; }
       r = await appelPy("resoudre", s, delai);
       if (r.besoin_sympy) {
         $("etat").textContent = "Chargement du moteur de calcul pour cette fonction…";

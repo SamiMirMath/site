@@ -1,7 +1,7 @@
 """Tests de pages — comportement commun des cinq outils (socle-commun.md), indépendant de la façon dont la
 page est construite : `?f=` (SOC-04), saisie invalide (SOC-06), aperçu sans message rouge pendant la frappe
 (SOC-16), étapes (SOC-07), largeur à 360 px (SOC-09), délai dépassé puis relance du moteur (SOC-13), rendu commun
-des sorties de resoudre() (commun/rendu.js)."""
+des sorties de resoudre() (commun/rendu.js), libellé pendant le chargement de SymPy (T31)."""
 import json
 import os
 import re
@@ -48,6 +48,27 @@ class TestComportement(unittest.TestCase):
         page = self.nav.ouvrir(f"{outil}/index.html{requete}")
         attendre_pret(page)
         return page
+
+    def test_t31_libelle_pendant_le_chargement_de_sympy(self):
+        """Pages à `sympyAvant` : un calcul lancé avant « Prêt. » affiche « Chargement du moteur de calcul pour cette fonction… »
+        (le calcul n'a pas commencé), puis « Calcul en cours… » quand SymPy est là, puis « Prêt. »."""
+        for outil in ("derivee-variations", "limites-asymptotes", "etude-complete"):
+            with self.subTest(outil=outil):
+                if outil not in CHOISIS:
+                    continue
+                page = self.nav.ouvrir(f"{outil}/index.html")
+                page.attendre("document.querySelector('#etat').textContent === 'Chargement du moteur de calcul…' "
+                              "&& !document.querySelector('#calculer').disabled", 240, pas=0.02)
+                page.evaluer(f"""(() => {{
+                    const etat = document.querySelector('#etat'), vu = window.__etats = [];
+                    new MutationObserver(() => {{ const t = etat.textContent; if (vu[vu.length - 1] !== t) vu.push(t); }})
+                        .observe(etat, {{ childList: true, characterData: true, subtree: true }});
+                    document.querySelector('#entree').value = {CALCUL[outil]!r}; document.querySelector('#calculer').click(); }})()""")
+                page.attendre("document.querySelector('#cartes').children.length > 0 && !document.querySelector('#calculer').disabled", 120)
+                historique = [t for t in page.evaluer("window.__etats")]
+                self.assertEqual(historique[-1], "Prêt.")
+                historique = [t for i, t in enumerate(historique) if t != "Prêt." or i == len(historique) - 1]   # « Prêt. » passe un instant quand SymPy arrive
+                self.assertEqual(historique, ["Chargement du moteur de calcul pour cette fonction…", "Calcul en cours…", "Prêt."])
 
     def test_soc04_parametre_f(self):
         for outil in OUTILS:

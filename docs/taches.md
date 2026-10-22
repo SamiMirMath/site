@@ -432,16 +432,21 @@ l'élève, un « Calcul en cours… » qui dure parce que SymPy se charge encore
   vers le serveur de test ; envoyer les corps par DevTools (base64) rendait la suite plus lente que le CDN (899 s contre 682 s).
   Durée de la suite de pages : 682 s avant, 587 s après (4 tests de plus). Version de la copie ≠ pages : le test échoue.
 
-### T31 — Temps d'attente : libellé et mesure en Suisse
-- (a) **Libellé** : pendant l'attente de SymPy (`sympyAvant`, pages Dérivée, Limites, Étude complète), l'état affiche « Calcul en cours… »
+### T31 — Temps d'attente : libellé et mesure en Suisse — (a) FAITE le 2026-10-22 ; (b) et (c) restent à faire
+- (a) **Libellé** (faite) : pendant l'attente de SymPy (`sympyAvant`, pages Dérivée, Limites, Étude complète), l'état affiche « Calcul en cours… »
   alors que le calcul n'a pas commencé. Afficher « Chargement du moteur de calcul pour cette fonction… » (texte déjà dans `outil.js`), et
   décider si « Calculer » doit rester actif avant « Prêt. ».
+  **Fait** (`commun/outil.js`) : un calcul lancé avant l'arrivée de SymPy affiche « Chargement du moteur de calcul pour cette fonction… »,
+  puis « Calcul en cours… » une fois SymPy chargé, puis « Prêt. » ; test de page `test_t31_libelle_pendant_le_chargement_de_sympy`
+  (échoue avec l'ancien code). **Décision : « Calculer » reste actif** avant « Prêt. » : le clic met le calcul en attente, le libellé
+  dit pourquoi, et `?f=` lance déjà le calcul à l'ouverture ; le désactiver obligerait à revenir cliquer.
 - (b) **Mesure en Suisse** (téléphone, Wi-Fi et 4G/5G ; Safari iOS et Chrome Android) : durée jusqu'à « Prêt. » à froid et avec cache, durée du
   premier calcul, pour les pages à `sympyAvant`. Référence prise le 21.10.2026 sur Mac, Wi-Fi, charge faible : ≈ 17 s à froid jusqu'à « Prêt. »
   (Python prêt vers 9 s, SymPy vers 17 s) ; une fois prêt, les 8 exemples de l'Étude complète prennent de 0,2 à 1,2 s ; ≈ 10 Mo transférés.
 - (c) **Décision d'après les chiffres** : rien, préchargement du moteur dès l'accueil, ou auto-hébergement de Pyodide
   (coût et conséquences dans [choix-techniques.md](choix-techniques.md)).
-- **Vérification** : tableau des mesures (appareil, navigateur, réseau, durées) ajouté à cette fiche ; libellé vérifié par un test de page.
+- **Vérification** : tableau des mesures (appareil, navigateur, réseau, durées) ajouté à cette fiche ; libellé vérifié par un test de page (fait).
+- **Reste** : (b) mesures sur téléphone, à faire par l'enseignant ; (c) décision d'après ces chiffres.
 
 ## Plus tard (hors plan, si les tests tiennent)
 
