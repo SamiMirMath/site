@@ -3,7 +3,7 @@ initial, boutons, molette, glisser, pincer, impression) est égale à l'empreint
 references/graphique-traces.json. EC-04 : si le calcul de la fenêtre échoue, la courbe reste celle de la dernière fenêtre
 réussie et un message discret l'indique. EC-06 : aucun nombre du graphique n'est écrit avec un point décimal. EC-05 : sur écran tactile, un doigt fait défiler la
 page (la courbe ne bouge pas) ; deux doigts déplacent et zooment la courbe sans faire défiler la page, et le point de la
-courbe sous le milieu des doigts reste sous le milieu des doigts, quel que soit le nombre de mouvements livrés par le navigateur. Aucune police n'entre dans la trace (le dessin n'appelle pas measureText), donc
+courbe sous le milieu des doigts reste sous le milieu des doigts, quel que soit le nombre de mouvements livrés par le navigateur. Aucune police n'entre dans la trace (le dessin n'appelle pas measureText) et la molette vise un point exact du canvas, donc
 elle est la même en local et en CI. Voir graphique.py pour le détail des niveaux de preuve.
 
     OUTILS=etude-complete uv run … python -m unittest tests/pages/test_graphique.py
@@ -20,7 +20,7 @@ import unittest
 
 sys.path.insert(0, os.path.dirname(__file__))
 from graphique import (FONCTIONS_SUITE, JS_TRACE, PAGE, REFERENCES, VUES_SUITE, attendre_calme, calculer, centre, cliquer, doigts,
-                       empreintes, jouer)
+                       empreintes, jouer, molette)
 from navigateur import Navigateur
 from rendu import attendre_pret
 
@@ -139,6 +139,25 @@ class TestGraphique(unittest.TestCase):
             for champ in ("xmin", "xmax", "ymin", "ymax"):
                 self.assertAlmostEqual(finaux[0][champ], finaux[1][champ], delta=1e-6 * abs(finaux[0]["xmax"] - finaux[0]["xmin"]),
                                        msg=f"la fenêtre finale ({champ}) dépend du nombre de mouvements")
+
+    def test_molette_independante_de_la_position_fractionnaire_du_canvas(self):
+        """La trace de la molette était fausse en CI (Linux) : la position du canvas dans la page n'y est pas entière et les
+        coordonnées de souris sont arrondies. Décaler le canvas de 0,4 px ne doit pas changer la fenêtre obtenue."""
+        if CHOISIS and "etude-complete" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        fenetres = []
+        with Navigateur() as nav:
+            for decalage in (0, 0.4):
+                page = nav.ouvrir(PAGE, JS_TRACE)
+                attendre_pret(page)
+                calculer(page, "x^2*e^(-x)")
+                attendre_calme(page)
+                page.evaluer(f"""(() => {{ const cv = document.querySelector('#graphique');
+                    cv.style.position = 'relative'; cv.style.left = cv.style.top = '{decalage}px'; }})()""")
+                molette(page)
+                attendre_calme(page)
+                fenetres.append(page.evaluer("document.querySelector('#graphique').__vista"))
+        self.assertEqual(fenetres[0], fenetres[1])
 
 
 if __name__ == "__main__":

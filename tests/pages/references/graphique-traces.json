@@ -17,7 +17,7 @@
  },
  "e_1_x--360-sombre--molette": {
   "appels": 978,
-  "sha": "f6d6c75e2fcfcfa20b10"
+  "sha": "41ecdffb5aa29d572861"
  },
  "e_1_x--360-sombre--pincer": {
   "appels": 978,
@@ -49,7 +49,7 @@
  },
  "e_1_x--clair--molette": {
   "appels": 1930,
-  "sha": "5bf5ce491bcd03d71af4"
+  "sha": "890983fe0d6071520f4a"
  },
  "e_1_x--clair--pincer": {
   "appels": 2001,
@@ -81,7 +81,7 @@
  },
  "x_2_1_x_1--360-sombre--molette": {
   "appels": 966,
-  "sha": "6bcede7f6e23c37fe1bd"
+  "sha": "9bd8415134ecd3aea24b"
  },
  "x_2_1_x_1--360-sombre--pincer": {
   "appels": 988,
@@ -145,7 +145,7 @@
  },
  "x_2_e_x--360-sombre--molette": {
   "appels": 994,
-  "sha": "67547b0f63c55625e783"
+  "sha": "96865e34833607efac08"
  },
  "x_2_e_x--360-sombre--pincer": {
   "appels": 973,
@@ -177,7 +177,7 @@
  },
  "x_2_e_x--clair--molette": {
   "appels": 1974,
-  "sha": "da0b16ccc64720f408ab"
+  "sha": "48343652c0bca38ad674"
  },
  "x_2_e_x--clair--pincer": {
   "appels": 2039,

@@ -9,8 +9,9 @@ Trois niveaux de preuve, du plus strict au plus lâche :
 
 Chaque scénario = une fonction × une vue (largeur, thème, devicePixelRatio) × un état (tracé initial, boutons,
 molette, glisser, pincer, impression). Le canvas a une largeur CSS fixe par vue : la trace ne dépend pas de la mise en
-page. Molette, glisser et pincer passent par le protocole DevTools (événements réels : un événement synthétique ferait
-échouer setPointerCapture).
+page. Glisser et pincer passent par le protocole DevTools (événements réels : un événement synthétique ferait échouer
+setPointerCapture) ; ils sont relatifs. La molette est un événement synthétique aux coordonnées exactes dans le canvas : par
+DevTools, les coordonnées sont arrondies à l'entier et le point visé dépendait de la mise en page (échec en CI sous Linux).
 
     uv run -q --no-project --python 3.12 --with sympy==1.13.3 --with websockets --with pillow \
         python tests/pages/graphique.py enregistrer /chemin/avant [complet]
@@ -106,9 +107,19 @@ def cliquer(page, selecteur):
 
 
 def molette(page):
-    c = centre(page)
-    for dy in (-100, -100):
-        page.appel("Input.dispatchMouseEvent", type="mouseWheel", x=c["x"] + 60, y=c["y"] - 30, deltaX=0, deltaY=dy)
+    """Deux crans vers le haut, à (+60, -30) px du centre du canvas, en coordonnées exactes. Ni DevTools ni le constructeur
+    de WheelEvent ne le permettent : les deux arrondissent clientX et clientY à l'entier, donc le point visé dans le canvas
+    dépendait de la fraction de sa position dans la page (largeur et hauteur du contenu, donc polices) et la trace de la
+    molette différait entre Mac et Linux (CI). On pose donc clientX et clientY (flottants) sur l'événement lui-même. Le
+    gestionnaire ne lit que le signe de deltaY et ces coordonnées ; pas de setPointerCapture ici, contrairement au glisser."""
+    page.evaluer("""(() => { const cv = document.querySelector('#graphique'); cv.scrollIntoView({ block: 'center' });
+        const r = cv.getBoundingClientRect();
+        for (let i = 0; i < 2; i++) {
+            const e = new WheelEvent('wheel', { bubbles: true, cancelable: true, deltaY: -100 });
+            Object.defineProperty(e, 'clientX', { value: r.left + r.width / 2 + 60 });
+            Object.defineProperty(e, 'clientY', { value: r.top + r.height / 2 - 30 });
+            cv.dispatchEvent(e);
+        } })()""")
 
 
 def glisser(page):
