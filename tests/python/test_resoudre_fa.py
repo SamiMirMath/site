@@ -69,6 +69,12 @@ class TestResoudreFactorisation(unittest.TestCase):
         r = fa.factoriser_expr("(x+1)^2-(x-1)^2")
         self.assertEqual((r["methode"], r["resultat_tex"], r["secours"]), ("Différence de carrés", "4x", False))
         self.assertEqual(fa.factoriser_expr("(x+2)^2-(x-2)^2")["resultat_tex"], "8x")
+        # la rédaction : [(x + 1) − (x − 1)] · [(x + 1) + (x − 1)] = 2 · 2x = 4x
+        self.assertIn(r"= \left[\left(x + 1\right) - \left(x - 1\right)\right] \cdot \left[\left(x + 1\right) + \left(x - 1\right)\right] = 2 \cdot 2x = 4x",
+                      r["etapes"][0]["html"])
+        # le résultat n'est pas « rien à factoriser » quand la réduction laisse un polynôme à factoriser : (x+3)² − (x−1)² = 4 · (2x + 2) = 8(x + 1)
+        r = fa.factoriser_expr("(x+3)^2-(x-1)^2")
+        self.assertEqual((r["methode"], r["resultat_tex"]), ("Différence de carrés · Mise en évidence", r"8\left(x + 1\right)"))
 
     def test_fa10_forme_sans_fraction(self):
         """FA-10 : zéros rationnels p/q : a(x − p₁/q₁)(x − p₂/q₂) = c(q₁x − p₁)(q₂x − p₂), c = a/(q₁q₂) entier ; zéros irrationnels : a(x − x₁)(x − x₂)."""

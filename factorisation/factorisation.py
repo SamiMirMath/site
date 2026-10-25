@@ -734,12 +734,13 @@ def fact(P, ctx, ecrits=None, tex_hint=None, prof=0, ident=False):
     if prof > PROF_MAX:
         return repli(P, ctx, T, prof)
     monos = termes_monomes(ctx, P)
+    if ecrits and len(ecrits) >= 2 and (len(monos) == 1 or sp.Poly(P, *_gens(P)).total_degree() == 1):
+        # une somme écrite qui se réduit à un monôme ou au 1er degré, (x+1)² − (x−1)² = 4x, (x+3)² − (x−1)² = 8x + 8 :
+        # l'identité se lit sur les termes écrits (FA-05)
+        m = reconnaitre_identite(ctx, ecrits)
+        if m:
+            return appliquer_identite(m, ctx, T, prof)
     if len(monos) == 1:
-        if ecrits and len(ecrits) >= 2:
-            # une somme écrite qui se réduit à un monôme, (x+1)² − (x−1)² = 4x : l'identité se lit sur les termes écrits (FA-05)
-            m = reconnaitre_identite(ctx, ecrits)
-            if m:
-                return appliquer_identite(m, ctx, T, prof)
         t = monos[0]
         return t.coef, [Facteur(b, str(b), e) for b, e in t.bases]
     if not ecrits or len(ecrits) < 2:
@@ -948,9 +949,23 @@ def appliquer_identite(m, ctx, T, prof):
     if genre == "diff_carres":
         e1, t1 = _binome(ctx, A, B, -1)
         e2, t2 = _binome(ctx, A, B, 1)
-        ctx.dire(rf"On reconnaît une différence de deux carrés (produit remarquable "
-                 rf"\(A^2-B^2=(A-B)(A+B)\)) avec \(A={At}\) et \(B={Bt}\) : "
-                 rf"\({T} = \left({t1}\right)\left({t2}\right)\).")
+        if any(len(sp.Add.make_args(sp.expand(x.valeur()))) > 1 for x in (A, B)):
+            # A ou B est une somme : on écrit [A − B]·[A + B] tel quel, puis on réduit ; (x+1)² − (x−1)² = 2 · 2x = 4x
+            def par(x, tex):
+                return rf"\left({tex}\right)" if len(sp.Add.make_args(sp.expand(x.valeur()))) > 1 else tex
+            pA, pB = par(A, At), par(B, Bt)
+            def facteur(e, tex):
+                return tex if len(sp.Add.make_args(e)) == 1 else rf"\left({tex}\right)"
+            suite = rf" = {facteur(e1, t1)} \cdot {facteur(e2, t2)}"
+            if all(len(termes_monomes(ctx, e)) == 1 for e in (e1, e2) if not e.is_number):
+                suite += rf" = {ctx.tex_poly(sp.expand(e1 * e2))}"      # plus rien à factoriser : on conclut
+            ctx.dire(rf"On reconnaît une différence de deux carrés (produit remarquable "
+                     rf"\(A^2-B^2=(A-B)(A+B)\)) avec \(A={At}\) et \(B={Bt}\) : "
+                     rf"\({T} = \left[{pA} - {pB}\right] \cdot \left[{pA} + {pB}\right]{suite}\).")
+        else:
+            ctx.dire(rf"On reconnaît une différence de deux carrés (produit remarquable "
+                     rf"\(A^2-B^2=(A-B)(A+B)\)) avec \(A={At}\) et \(B={Bt}\) : "
+                     rf"\({T} = \left({t1}\right)\left({t2}\right)\).")
         ctx.methode("Différence de carrés")
         c1, f1 = fact(e1, ctx, tex_hint=t1, prof=prof + 1, ident=True)
         c2, f2 = fact(e2, ctx, tex_hint=t2, prof=prof + 1, ident=True)

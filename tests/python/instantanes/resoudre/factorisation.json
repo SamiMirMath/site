@@ -5,7 +5,7 @@
     "badge": "Différence de carrés",
     "blocs": [
      {
-      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=3x - y + 5z\\) et \\(B=4x - y - 5z\\) : \\(\\left(-3x + y - 5z\\right)^{2} - \\left(4x - y - 5z\\right)^{2} = \\left(10z - x\\right)\\left(7x - 2y\\right)\\).",
+      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=3x - y + 5z\\) et \\(B=4x - y - 5z\\) : \\(\\left(-3x + y - 5z\\right)^{2} - \\left(4x - y - 5z\\right)^{2} = \\left[\\left(3x - y + 5z\\right) - \\left(4x - y - 5z\\right)\\right] \\cdot \\left[\\left(3x - y + 5z\\right) + \\left(4x - y - 5z\\right)\\right] = \\left(10z - x\\right) \\cdot \\left(7x - 2y\\right)\\).",
       "style": "etape",
       "type": "texte"
      }
@@ -254,13 +254,47 @@
   "erreur": null,
   "ok": true
  },
+ "(a+b)^2-(a-b)^2": {
+  "cartes": [
+   {
+    "badge": "Différence de carrés",
+    "blocs": [
+     {
+      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=a + b\\) et \\(B=a - b\\) : \\(\\left(a + b\\right)^{2} - \\left(a - b\\right)^{2} = \\left[\\left(a + b\\right) - \\left(a - b\\right)\\right] \\cdot \\left[\\left(a + b\\right) + \\left(a - b\\right)\\right] = 2b \\cdot 2a = 4ab\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Différence de carrés",
+    "blocs": [
+     {
+      "tex": "\\left(a + b\\right)^{2} - \\left(a - b\\right)^{2}",
+      "type": "formule"
+     },
+     {
+      "tex": "\\left(a + b\\right)^{2} - \\left(a - b\\right)^{2} = 4ab",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Factorisation"
+   }
+  ],
+  "enonce_tex": "\\left(a + b\\right)^{2} - \\left(a - b\\right)^{2}",
+  "erreur": null,
+  "ok": true
+ },
  "(ax + 2y)^2 - (2x - 3y)^2": {
   "cartes": [
    {
     "badge": "Différence de carrés",
     "blocs": [
      {
-      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=ax + 2y\\) et \\(B=2x - 3y\\) : \\(\\left(ax + 2y\\right)^{2} - \\left(2x - 3y\\right)^{2} = \\left(ax - 2x + 5y\\right)\\left(ax + 2x - y\\right)\\).",
+      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=ax + 2y\\) et \\(B=2x - 3y\\) : \\(\\left(ax + 2y\\right)^{2} - \\left(2x - 3y\\right)^{2} = \\left[\\left(ax + 2y\\right) - \\left(2x - 3y\\right)\\right] \\cdot \\left[\\left(ax + 2y\\right) + \\left(2x - 3y\\right)\\right] = \\left(ax - 2x + 5y\\right) \\cdot \\left(ax + 2x - y\\right)\\).",
       "style": "etape",
       "type": "texte"
      },
@@ -397,7 +431,7 @@
     "badge": "Différence de carrés",
     "blocs": [
      {
-      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x + 1\\) et \\(B=4\\) : \\(\\left(x + 1\\right)^{2} - 16 = \\left(x - 3\\right)\\left(x + 5\\right)\\).",
+      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x + 1\\) et \\(B=4\\) : \\(\\left(x + 1\\right)^{2} - 16 = \\left[\\left(x + 1\\right) - 4\\right] \\cdot \\left[\\left(x + 1\\right) + 4\\right] = \\left(x - 3\\right) \\cdot \\left(x + 5\\right)\\).",
       "style": "etape",
       "type": "texte"
      }
@@ -499,7 +533,7 @@
     "badge": "Différence de carrés",
     "blocs": [
      {
-      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x + 1\\) et \\(B=x - 1\\) : \\(\\left(x + 1\\right)^{2} - \\left(x - 1\\right)^{2} = \\left(2\\right)\\left(2x\\right)\\).",
+      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x + 1\\) et \\(B=x - 1\\) : \\(\\left(x + 1\\right)^{2} - \\left(x - 1\\right)^{2} = \\left[\\left(x + 1\\right) - \\left(x - 1\\right)\\right] \\cdot \\left[\\left(x + 1\\right) + \\left(x - 1\\right)\\right] = 2 \\cdot 2x = 4x\\).",
       "style": "etape",
       "type": "texte"
      }
@@ -524,6 +558,52 @@
    }
   ],
   "enonce_tex": "\\left(x + 1\\right)^{2} - \\left(x - 1\\right)^{2}",
+  "erreur": null,
+  "ok": true
+ },
+ "(x+3)^2-(x-1)^2": {
+  "cartes": [
+   {
+    "badge": "Différence de carrés",
+    "blocs": [
+     {
+      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x + 3\\) et \\(B=x - 1\\) : \\(\\left(x + 3\\right)^{2} - \\left(x - 1\\right)^{2} = \\left[\\left(x + 3\\right) - \\left(x - 1\\right)\\right] \\cdot \\left[\\left(x + 3\\right) + \\left(x - 1\\right)\\right] = 4 \\cdot \\left(2x + 2\\right)\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Mise en évidence",
+    "blocs": [
+     {
+      "html": "On met \\(2\\) en évidence (facteur commun à tous les termes) : \\(2x + 2 = 2\\left(x + 1\\right)\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Différence de carrés · Mise en évidence",
+    "blocs": [
+     {
+      "tex": "\\left(x + 3\\right)^{2} - \\left(x - 1\\right)^{2}",
+      "type": "formule"
+     },
+     {
+      "tex": "\\left(x + 3\\right)^{2} - \\left(x - 1\\right)^{2} = 8\\left(x + 1\\right)",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Factorisation"
+   }
+  ],
+  "enonce_tex": "\\left(x + 3\\right)^{2} - \\left(x - 1\\right)^{2}",
   "erreur": null,
   "ok": true
  },
@@ -662,7 +742,7 @@
     "badge": "Différence de carrés",
     "blocs": [
      {
-      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=b^{2} + y^{2}\\) et \\(B=2by\\) : \\(\\left(y^{2} + b^{2}\\right)^{2} - 4b^{2}y^{2} = \\left(b^{2} + y^{2} - 2by\\right)\\left(b^{2} + y^{2} + 2by\\right)\\).",
+      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=b^{2} + y^{2}\\) et \\(B=2by\\) : \\(\\left(y^{2} + b^{2}\\right)^{2} - 4b^{2}y^{2} = \\left[\\left(b^{2} + y^{2}\\right) - 2by\\right] \\cdot \\left[\\left(b^{2} + y^{2}\\right) + 2by\\right] = \\left(b^{2} + y^{2} - 2by\\right) \\cdot \\left(b^{2} + y^{2} + 2by\\right)\\).",
       "style": "etape",
       "type": "texte"
      }
@@ -1056,7 +1136,7 @@
     "badge": "Différence de carrés",
     "blocs": [
      {
-      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=1\\) et \\(B=x - y\\) : \\(1 - \\left(x - y\\right)^{2} = \\left(1 - x + y\\right)\\left(1 + x - y\\right)\\).",
+      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=1\\) et \\(B=x - y\\) : \\(1 - \\left(x - y\\right)^{2} = \\left[1 - \\left(x - y\\right)\\right] \\cdot \\left[1 + \\left(x - y\\right)\\right] = \\left(1 - x + y\\right) \\cdot \\left(1 + x - y\\right)\\).",
       "style": "etape",
       "type": "texte"
      }
@@ -1163,7 +1243,7 @@
     "badge": "Différence de carrés",
     "blocs": [
      {
-      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=4\\) et \\(B=3x + 2\\) : \\(16 - \\left(3x + 2\\right)^{2} = \\left(2 - 3x\\right)\\left(3x + 6\\right)\\).",
+      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=4\\) et \\(B=3x + 2\\) : \\(16 - \\left(3x + 2\\right)^{2} = \\left[4 - \\left(3x + 2\\right)\\right] \\cdot \\left[4 + \\left(3x + 2\\right)\\right] = \\left(2 - 3x\\right) \\cdot \\left(3x + 6\\right)\\).",
       "style": "etape",
       "type": "texte"
      }
@@ -2658,7 +2738,7 @@
     "badge": "Différence de carrés",
     "blocs": [
      {
-      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=2\\left(x - 2\\right)\\) et \\(B=1\\) : \\(4\\left(x - 2\\right)^{2} - 1 = \\left(2x - 5\\right)\\left(2x - 3\\right)\\).",
+      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=2\\left(x - 2\\right)\\) et \\(B=1\\) : \\(4\\left(x - 2\\right)^{2} - 1 = \\left[\\left(2\\left(x - 2\\right)\\right) - 1\\right] \\cdot \\left[\\left(2\\left(x - 2\\right)\\right) + 1\\right] = \\left(2x - 5\\right) \\cdot \\left(2x - 3\\right)\\).",
       "style": "etape",
       "type": "texte"
      }
@@ -2911,7 +2991,7 @@
     "badge": "Différence de carrés",
     "blocs": [
      {
-      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=2x^{2} + 1\\) et \\(B=2x\\) : \\(\\left(2x^{2} + 1\\right)^{2} - \\left(2x\\right)^{2} = \\left(2x^{2} + 1 - 2x\\right)\\left(2x^{2} + 1 + 2x\\right)\\).",
+      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=2x^{2} + 1\\) et \\(B=2x\\) : \\(\\left(2x^{2} + 1\\right)^{2} - \\left(2x\\right)^{2} = \\left[\\left(2x^{2} + 1\\right) - 2x\\right] \\cdot \\left[\\left(2x^{2} + 1\\right) + 2x\\right] = \\left(2x^{2} + 1 - 2x\\right) \\cdot \\left(2x^{2} + 1 + 2x\\right)\\).",
       "style": "etape",
       "type": "texte"
      }
@@ -3799,7 +3879,7 @@
     "badge": "Différence de carrés",
     "blocs": [
      {
-      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=3\\left(x - 3\\right)\\) et \\(B=2\\) : \\(9\\left(x - 3\\right)^{2} - 4 = \\left(3x - 11\\right)\\left(3x - 7\\right)\\).",
+      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=3\\left(x - 3\\right)\\) et \\(B=2\\) : \\(9\\left(x - 3\\right)^{2} - 4 = \\left[\\left(3\\left(x - 3\\right)\\right) - 2\\right] \\cdot \\left[\\left(3\\left(x - 3\\right)\\right) + 2\\right] = \\left(3x - 11\\right) \\cdot \\left(3x - 7\\right)\\).",
       "style": "etape",
       "type": "texte"
      }
@@ -4253,7 +4333,7 @@
     "badge": "Différence de carrés",
     "blocs": [
      {
-      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=a + b\\) et \\(B=c\\) : \\(\\left(a + b\\right)^{2} - c^{2} = \\left(a + b - c\\right)\\left(a + b + c\\right)\\).",
+      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=a + b\\) et \\(B=c\\) : \\(\\left(a + b\\right)^{2} - c^{2} = \\left[\\left(a + b\\right) - c\\right] \\cdot \\left[\\left(a + b\\right) + c\\right] = \\left(a + b - c\\right) \\cdot \\left(a + b + c\\right)\\).",
       "style": "etape",
       "type": "texte"
      }
@@ -4678,7 +4758,7 @@
     "badge": "Différence de carrés",
     "blocs": [
      {
-      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=a^{2} + b^{2}\\) et \\(B=ab\\) : \\(\\left(a^{2} + b^{2}\\right)^{2} - \\left(ab\\right)^{2} = \\left(a^{2} + b^{2} - ab\\right)\\left(a^{2} + b^{2} + ab\\right)\\).",
+      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=a^{2} + b^{2}\\) et \\(B=ab\\) : \\(\\left(a^{2} + b^{2}\\right)^{2} - \\left(ab\\right)^{2} = \\left[\\left(a^{2} + b^{2}\\right) - ab\\right] \\cdot \\left[\\left(a^{2} + b^{2}\\right) + ab\\right] = \\left(a^{2} + b^{2} - ab\\right) \\cdot \\left(a^{2} + b^{2} + ab\\right)\\).",
       "style": "etape",
       "type": "texte"
      },
@@ -7486,7 +7566,7 @@
     "badge": "Différence de carrés",
     "blocs": [
      {
-      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x^{2} + 2\\) et \\(B=2x\\) : \\(\\left(x^{2} + 2\\right)^{2} - \\left(2x\\right)^{2} = \\left(x^{2} + 2 - 2x\\right)\\left(x^{2} + 2 + 2x\\right)\\).",
+      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x^{2} + 2\\) et \\(B=2x\\) : \\(\\left(x^{2} + 2\\right)^{2} - \\left(2x\\right)^{2} = \\left[\\left(x^{2} + 2\\right) - 2x\\right] \\cdot \\left[\\left(x^{2} + 2\\right) + 2x\\right] = \\left(x^{2} + 2 - 2x\\right) \\cdot \\left(x^{2} + 2 + 2x\\right)\\).",
       "style": "etape",
       "type": "texte"
      }
@@ -7559,7 +7639,7 @@
     "badge": "Différence de carrés",
     "blocs": [
      {
-      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x^{2} + 8\\) et \\(B=4x\\) : \\(\\left(x^{2} + 8\\right)^{2} - \\left(4x\\right)^{2} = \\left(x^{2} + 8 - 4x\\right)\\left(x^{2} + 8 + 4x\\right)\\).",
+      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x^{2} + 8\\) et \\(B=4x\\) : \\(\\left(x^{2} + 8\\right)^{2} - \\left(4x\\right)^{2} = \\left[\\left(x^{2} + 8\\right) - 4x\\right] \\cdot \\left[\\left(x^{2} + 8\\right) + 4x\\right] = \\left(x^{2} + 8 - 4x\\right) \\cdot \\left(x^{2} + 8 + 4x\\right)\\).",
       "style": "etape",
       "type": "texte"
      }
@@ -7632,7 +7712,7 @@
     "badge": "Différence de carrés",
     "blocs": [
      {
-      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x^{2} + 1\\) et \\(B=x\\) : \\(\\left(x^{2} + 1\\right)^{2} - x^{2} = \\left(x^{2} + 1 - x\\right)\\left(x^{2} + 1 + x\\right)\\).",
+      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x^{2} + 1\\) et \\(B=x\\) : \\(\\left(x^{2} + 1\\right)^{2} - x^{2} = \\left[\\left(x^{2} + 1\\right) - x\\right] \\cdot \\left[\\left(x^{2} + 1\\right) + x\\right] = \\left(x^{2} + 1 - x\\right) \\cdot \\left(x^{2} + 1 + x\\right)\\).",
       "style": "etape",
       "type": "texte"
      }
@@ -8135,7 +8215,7 @@
     "badge": "Différence de carrés",
     "blocs": [
      {
-      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x^{4} + 2\\) et \\(B=2x^{2}\\) : \\(\\left(x^{4} + 2\\right)^{2} - \\left(2x^{2}\\right)^{2} = \\left(x^{4} + 2 - 2x^{2}\\right)\\left(x^{4} + 2 + 2x^{2}\\right)\\).",
+      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x^{4} + 2\\) et \\(B=2x^{2}\\) : \\(\\left(x^{4} + 2\\right)^{2} - \\left(2x^{2}\\right)^{2} = \\left[\\left(x^{4} + 2\\right) - 2x^{2}\\right] \\cdot \\left[\\left(x^{4} + 2\\right) + 2x^{2}\\right] = \\left(x^{4} + 2 - 2x^{2}\\right) \\cdot \\left(x^{4} + 2 + 2x^{2}\\right)\\).",
       "style": "etape",
       "type": "texte"
      },
@@ -8631,7 +8711,7 @@
     "badge": "Différence de carrés",
     "blocs": [
      {
-      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=z^{2} + 3\\) et \\(B=3z\\) : \\(\\left(z^{2} + 3\\right)^{2} - \\left(3z\\right)^{2} = \\left(z^{2} + 3 - 3z\\right)\\left(z^{2} + 3 + 3z\\right)\\).",
+      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=z^{2} + 3\\) et \\(B=3z\\) : \\(\\left(z^{2} + 3\\right)^{2} - \\left(3z\\right)^{2} = \\left[\\left(z^{2} + 3\\right) - 3z\\right] \\cdot \\left[\\left(z^{2} + 3\\right) + 3z\\right] = \\left(z^{2} + 3 - 3z\\right) \\cdot \\left(z^{2} + 3 + 3z\\right)\\).",
       "style": "etape",
       "type": "texte"
      }
@@ -8733,7 +8813,7 @@
     "badge": "Différence de carrés",
     "blocs": [
      {
-      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=z^{2} + 3\\) et \\(B=3z\\) : \\(\\left(z^{2} + 3\\right)^{2} - \\left(3z\\right)^{2} = \\left(z^{2} + 3 - 3z\\right)\\left(z^{2} + 3 + 3z\\right)\\).",
+      "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=z^{2} + 3\\) et \\(B=3z\\) : \\(\\left(z^{2} + 3\\right)^{2} - \\left(3z\\right)^{2} = \\left[\\left(z^{2} + 3\\right) - 3z\\right] \\cdot \\left[\\left(z^{2} + 3\\right) + 3z\\right] = \\left(z^{2} + 3 - 3z\\right) \\cdot \\left(z^{2} + 3 + 3z\\right)\\).",
       "style": "etape",
       "type": "texte"
      }
