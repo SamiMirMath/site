@@ -65,6 +65,23 @@ class TestComportement(unittest.TestCase):
         self.assertIn(page.evaluer("document.querySelector('#cartes .card.final .res annotation').textContent").split(" = ")[0].replace(" ", ""),
                       enonce.replace(" ", "").replace("Factoriser:", ""))
 
+    def test_t21_factorisation_une_carte_par_application(self):
+        """FA-04 : x⁴ − 13x² + 36 donne 4 cartes d'étape (une par application de méthode) puis le bilan ; « Étape suivante » les montre une à une."""
+        if "factorisation" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.ouvrir("factorisation")
+        page.evaluer("document.querySelector('#entree').value = 'x^4-13x^2+36'; document.querySelector('#calculer').click()")
+        page.attendre("document.querySelector('#cartes').children.length > 0 && !document.querySelector('#calculer').disabled", 120)
+        self.assertEqual(page.evaluer("document.querySelector('#progression').textContent"), "Étape 1 / 5")
+        self.assertEqual(page.evaluer("[...document.querySelectorAll('#cartes .card')].map(c => c.querySelector('.badge').textContent)"),
+                         ["Changement de variable", "Somme-Produit", "Changement de variable", "Différence de carrés",
+                          "Changement de variable · Somme-Produit · Différence de carrés"])
+        self.assertEqual(page.evaluer("document.querySelectorAll('#cartes .card:not(.cache)').length"), 1)
+        page.evaluer("document.querySelector('#suivant').click()")
+        self.assertEqual(page.evaluer("document.querySelectorAll('#cartes .card:not(.cache)').length"), 2)
+        page.evaluer("document.querySelector('#tout').click()")
+        self.assertEqual(page.evaluer("document.querySelector('#cartes .card:last-child').classList.contains('final')"), True)
+
     def test_t31_libelle_pendant_le_chargement_de_sympy(self):
         """Pages à `sympyAvant` : un calcul lancé avant « Prêt. » affiche « Chargement du moteur de calcul pour cette fonction… »
         (le calcul n'a pas commencé), puis « Calcul en cours… » quand SymPy est là, puis « Prêt. »."""

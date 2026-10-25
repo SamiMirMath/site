@@ -30,7 +30,7 @@ import json
 import random
 import re
 
-from noyau import json_strict, ErreurSaisie, trinome, racine_rationnelle, qtex, charger_sympy
+from noyau import json_strict, ErreurSaisie, trinome, qtex, charger_sympy
 
 __all__ = ["factoriser_json", "apercu_json", "exercice_json"]
 
@@ -344,15 +344,31 @@ class Ctx:
         self.sp = sp
         self.noms = set(lettres)
         self.etapes = []
+        self.groupes = []     # méthode de chaque étape (parallèle à etapes) ; None = étape sans méthode propre
+        self._marque = 0      # première étape pas encore rattachée à une méthode
         self.methodes = []
         self.reel = False   # True si l'expression est un trinôme à une variable (formule sur R)
 
     def dire(self, html):
         self.etapes.append({"type": "texte", "html": html})
+        self.groupes.append(None)
+
+    def inserer(self, i, html):
+        self.etapes.insert(i, {"type": "texte", "html": html})
+        self.groupes.insert(i, None)
+        if i < self._marque:
+            self._marque += 1
+
+    def marquer(self, m=None):
+        """Rattache à la méthode `m` les étapes dites depuis le dernier marquage (T21 : une carte par application)."""
+        for i in range(self._marque, len(self.etapes)):
+            self.groupes[i] = m
+        self._marque = len(self.etapes)
 
     def methode(self, m):
         if m not in self.methodes:
             self.methodes.append(m)
+        self.marquer(m)
 
     def paire_libre(self):
         for a, b in (("u", "v"), ("p", "q"), ("m", "n"), ("r", "s"), ("k", "l")):
@@ -719,6 +735,11 @@ def fact(P, ctx, ecrits=None, tex_hint=None, prof=0, ident=False):
         return repli(P, ctx, T, prof)
     monos = termes_monomes(ctx, P)
     if len(monos) == 1:
+        if ecrits and len(ecrits) >= 2:
+            # une somme écrite qui se réduit à un monôme, (x+1)² − (x−1)² = 4x : l'identité se lit sur les termes écrits (FA-05)
+            m = reconnaitre_identite(ctx, ecrits)
+            if m:
+                return appliquer_identite(m, ctx, T, prof)
         t = monos[0]
         return t.coef, [Facteur(b, str(b), e) for b, e in t.bases]
     if not ecrits or len(ecrits) < 2:
@@ -1029,6 +1050,7 @@ def fact_une_variable(P, t, ctx, ecrits, monos, T, prof):
         elif ctx.irreductible(P):
             ctx.dire(rf"\({T}\) n'a pas de racine évidente : il ne se factorise pas davantage "
                      rf"avec les méthodes du cours.")
+            ctx.marquer()
             return sp.Integer(1), [Facteur(P, T, 1)]
         return contenu_fractionnaire(P, ctx, T, prof)
     if n == 2:
@@ -1036,6 +1058,7 @@ def fact_une_variable(P, t, ctx, ecrits, monos, T, prof):
     if ctx.irreductible(P):
         ctx.dire(rf"\({T}\) n'a pas de racine évidente : il ne se factorise pas davantage "
                  rf"avec les méthodes du cours.")
+        ctx.marquer()
         return sp.Integer(1), [Facteur(P, T, 1)]
     for essai in (changement_variable, groupements_essai, racine_evidente, completer_carre):
         r = essai(P, t, ctx, ecrits, monos, T, prof)
@@ -1142,29 +1165,7 @@ def trinome_methodes(P, t, coeffs, ctx, T):
             ctx.dire(rf"Méthode Somme-Produit : \({T} = \left({f1.tex}\right)\left({f2.tex}\right)\).")
             ctx.methode("Somme-Produit")
             return combiner(ctx, sp.Integer(1), [f1, f2])
-    elif entiers and a != 1 and abs(a) <= BORNE and abs(c0) <= BORNE:
-        r = racine_rationnelle([c0, b, a])
-        if r is not None:
-            p, q = r.numerator, r.denominator
-            racine = sp.Rational(p, q)
-            L = sp.expand(q * t - p)
-            Q = sp.expand(sp.cancel(P / L))
-            Lt, Qt = ctx.tex_poly(L), ctx.tex_poly(Q)
-            fac_r = tex_facteur_racine_rat(r, v)
-            ctx.dire(rf"Trinôme non unitaire \({T}\) (\(a={qtex(a)}\)) : on cherche un zéro « évident » — "
-                     rf"on vérifie que \({v}_0={qtex(r)}\) convient.")
-            if q == 1:
-                ctx.dire(rf"\({fac_r}\) est donc un facteur ; en divisant, on complète : "
-                         rf"\({T} = \left({Lt}\right)\left({Qt}\right)\) (méthode du zéro évident).")
-            else:
-                Q1 = sp.expand(sp.cancel(P / (t - racine)))
-                ctx.dire(rf"\({fac_r}\) est donc un facteur ; en divisant, on complète : "
-                         rf"\({T} = \left({fac_r}\right)\left({ctx.tex_poly(Q1)}\right)\).")
-                ctx.dire(rf"Pour écrire ça sans fraction, on multiplie le premier facteur par {q} et on "
-                         rf"divise le second par {q} (le produit ne change pas) : "
-                         rf"\({T} = \left({Lt}\right)\left({Qt}\right)\) (méthode du zéro évident).")
-            ctx.methode("Zéro évident")
-            return combiner(ctx, sp.Integer(1), [Facteur(L, Lt), Facteur(Q, Qt)])
+    # a ≠ 1 : pas de zéro « évident » (les zéros p/q ne se testent pas à la main) : on passe à la formule du discriminant
 
     # la formule (discriminant)
     c_const, facteurs, lignes = trinome([c0, b, a], v, [], entier=True)
@@ -1180,6 +1181,7 @@ def trinome_methodes(P, t, coeffs, ctx, T):
             ctx.dire(lignes[0])
             ctx.dire(rf"\(\Delta = {qtex(D)}\) n'est pas un carré parfait : les zéros de ce facteur sont "
                      rf"irrationnels, on le garde tel quel.")
+            ctx.marquer()
             return sp.Integer(1), [Facteur(P, T, 1)]
         for l in lignes:
             ctx.dire(l)
@@ -1200,13 +1202,6 @@ def trinome_methodes(P, t, coeffs, ctx, T):
         e = sp.expand(sum(sp.Rational(c.numerator, c.denominator) * t ** k for k, c in enumerate(f["poly"])))
         out.append(Facteur(e, ctx.tex_poly(e), f["mult"]))
     return combiner(ctx, sp.Rational(c_const.numerator, c_const.denominator), out)
-
-
-def tex_facteur_racine_rat(r, v):
-    """(v − r) pour un rationnel r (Fraction)."""
-    if r == 0:
-        return v
-    return v + (" - " + qtex(r) if r > 0 else " + " + qtex(-r))
 
 
 def changement_variable(P, t, ctx, ecrits, monos, T, prof):
@@ -1236,6 +1231,7 @@ def changement_variable(P, t, ctx, ecrits, monos, T, prof):
     facts_t = [Facteur(e, ctx.tex_poly(e), m) for e, m in retour]
     ctx.dire(rf"On revient à \({t}\) en remplaçant \({u}\) par \({t}^{{{k}}}\) : "
              rf"\({T} = {tex_produit(ctx, cq, facts_t)}\).")
+    ctx.methode("Changement de variable")
     const, out = cq, []
     for f in facts_t:
         c, ff = fact(f.expr, ctx, tex_hint=f.tex, prof=prof + 1)
@@ -1245,23 +1241,38 @@ def changement_variable(P, t, ctx, ecrits, monos, T, prof):
     return combiner(ctx, const, out)
 
 
+def racine_entiere(coeffs):
+    """Un zéro ENTIER de P (coefficients par puissance croissante) : on teste les diviseurs du terme constant, ± (la méthode du
+    cours ; pas de zéros p/q). None s'il n'y en a pas, ou si le terme constant est trop grand."""
+    den = 1
+    for c in coeffs:
+        den = den * c.denominator // math.gcd(den, c.denominator)
+    entiers = [int(c * den) for c in coeffs]
+    a0 = abs(entiers[0])
+    if a0 == 0 or a0 > BORNE:
+        return None
+    for d in sorted(diviseurs_entiers(a0)):
+        for r in (d, -d):
+            v = 0
+            for c in reversed(entiers):
+                v = v * r + c
+            if v == 0:
+                return F(r)
+    return None
+
+
 def racine_evidente(P, t, ctx, ecrits, monos, T, prof):
     sp = ctx.sp
     coeffs = _coeffs(ctx, P, t)
-    r = racine_rationnelle(coeffs)
-    if r is None or r == 0:
+    r = racine_entiere(coeffs)
+    if r is None:
         return None
-    p, q = r.numerator, r.denominator
-    L = sp.expand(q * t - p)
+    p = r.numerator
+    L = sp.expand(t - p)
     Q = sp.expand(sp.cancel(P / L))
     Lt, Qt = ctx.tex_poly(L), ctx.tex_poly(Q)
-    if q == 1:
-        ctx.dire(rf"\({t} = {p}\) est une racine évidente (le polynôme s'annule en \({t} = {p}\)), donc "
-                 rf"\({Lt}\) est un facteur ; en divisant : \({T} = \left({Lt}\right)\left({Qt}\right)\).")
-    else:
-        ctx.dire(rf"\({t} = {qtex(r)}\) est une racine évidente (le polynôme s'annule en cette valeur), donc "
-                 rf"\({Lt}\) est un facteur (il s'annule aussi en \({t} = {qtex(r)}\)) ; en divisant : "
-                 rf"\({T} = \left({Lt}\right)\left({Qt}\right)\).")
+    ctx.dire(rf"\({t} = {p}\) est une racine évidente (le polynôme s'annule en \({t} = {p}\)), donc "
+             rf"\({Lt}\) est un facteur ; en divisant : \({T} = \left({Lt}\right)\left({Qt}\right)\).")
     ctx.methode("Racine évidente")
     c2, f2 = fact(Q, ctx, tex_hint=Qt, prof=prof + 1)
     return combiner(ctx, c2, [Facteur(L, Lt)] + f2)
@@ -1276,6 +1287,7 @@ def fact_plusieurs_variables(P, ctx, ecrits, monos, T, prof):
     if ctx.irreductible(P):
         if sp.Poly(P, *_gens(P)).total_degree() >= 2 and ctx.etapes:
             ctx.dire(rf"\({T}\) ne se factorise pas davantage.")
+            ctx.marquer()
         return sp.Integer(1), [Facteur(P, T, 1)]
     if ctx.contenu(P).q != 1:
         return contenu_fractionnaire(P, ctx, T, prof)
@@ -1563,8 +1575,7 @@ def _produit_ecrit(arbre, ctx, syms, prof=1):
     avant = len(ctx.etapes)
     visiter(arbre, 1)
     if len(ctx.etapes) > avant:
-        ctx.etapes.insert(avant, {"type": "texte",
-                                  "html": "L'expression est déjà un produit : on factorise chacun de ses facteurs."})
+        ctx.inserer(avant, "L'expression est déjà un produit : on factorise chacun de ses facteurs.")
     return combiner(ctx, const, facts)
 
 
@@ -1581,11 +1592,12 @@ def _message_final(ctx, P, T, produit):
     return rf"\({T}\) ne se factorise pas : c'est déjà sa forme la plus simple."
 
 
-def factoriser_expr(entree):
+def _factoriser(entree):
+    """(résultat, ctx) : ctx.groupes donne la méthode de chaque étape (T21) ; ctx est None en cas d'erreur."""
     sp = charger_sympy()
     if sp is None:
         return {"ok": False, "erreur": "Le moteur de calcul est encore en cours de chargement, "
-                "réessaie dans un instant."}
+                "réessaie dans un instant."}, None
     try:
         arbre = analyser(entree)
         lettres = sorted(lettres_arbre(arbre))
@@ -1594,7 +1606,7 @@ def factoriser_expr(entree):
         P = sp.expand(vers_sympy(ctx, syms, arbre))
         T = tex_arbre(arbre)
         if P == 0:
-            return {"ok": False, "erreur": "L'expression vaut 0 : il n'y a rien à factoriser."}
+            return {"ok": False, "erreur": "L'expression vaut 0 : il n'y a rien à factoriser."}, None
         gens = _gens(P)
         ctx.reel = len(gens) == 1 and sp.degree(P, gens[0]) == 2
         a = _sans_parentheses(arbre)
@@ -1630,12 +1642,16 @@ def factoriser_expr(entree):
             "etapes": ctx.etapes,
             "resultat_tex": tex_produit(ctx, const, facts),
             "secours": secours,   # True = une méthode a produit un résultat faux (bug à corriger)
-        }
+        }, ctx
     except ErreurSaisie as e:
-        return {"ok": False, "erreur": str(e)}
+        return {"ok": False, "erreur": str(e)}, None
     except Exception as e:   # ne devrait pas arriver : on le dit plutôt que de planter
         return {"ok": False, "erreur": "Cette expression n'a pas pu être factorisée.",
-                "detail": f"{type(e).__name__} : {e}"}
+                "detail": f"{type(e).__name__} : {e}"}, None
+
+
+def factoriser_expr(entree):
+    return _factoriser(entree)[0]
 
 
 def factoriser_json(entree):

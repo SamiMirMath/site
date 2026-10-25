@@ -204,12 +204,12 @@
  "(x+1)^2-(x-1)^2": {
   "etapes": [
    {
-    "html": "\\(\\left(x + 1\\right)^{2} - \\left(x - 1\\right)^{2}\\) est un monôme (déjà un produit) : il n'y a rien à factoriser.",
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x + 1\\) et \\(B=x - 1\\) : \\(\\left(x + 1\\right)^{2} - \\left(x - 1\\right)^{2} = \\left(2\\right)\\left(2x\\right)\\).",
     "type": "texte"
    }
   ],
   "expr_tex": "\\left(x + 1\\right)^{2} - \\left(x - 1\\right)^{2}",
-  "methode": "Déjà factorisé",
+  "methode": "Différence de carrés",
   "ok": true,
   "resultat_tex": "4x",
   "secours": false
@@ -310,22 +310,18 @@
     "type": "texte"
    },
    {
-    "html": "Trinôme non unitaire \\(2x^{2} - 9x + 4\\) (\\(a=2\\)) : on cherche un zéro « évident » — on vérifie que \\(x_0=\\frac{1}{2}\\) convient.",
+    "html": "Trinôme \\(2x^{2} - 9x + 4\\) : \\(\\Delta = b^2 - 4ac = (-9)^2 - 4 \\cdot 2 \\cdot 4 = 49\\)",
     "type": "texte"
    },
    {
-    "html": "\\(x - \\frac{1}{2}\\) est donc un facteur ; en divisant, on complète : \\(2x^{2} - 9x + 4 = \\left(x - \\frac{1}{2}\\right)\\left(2x - 8\\right)\\).",
-    "type": "texte"
-   },
-   {
-    "html": "Pour écrire ça sans fraction, on multiplie le premier facteur par 2 et on divise le second par 2 (le produit ne change pas) : \\(2x^{2} - 9x + 4 = \\left(2x - 1\\right)\\left(x - 4\\right)\\) (méthode du zéro évident).",
+    "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 7\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{1}{2}\\) et \\(x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 4\\).",
     "type": "texte"
    }
   ],
   "expr_tex": "-2x^{2} + 9x - 4",
-  "methode": "Mise en évidence · Zéro évident",
+  "methode": "Mise en évidence · Formule (discriminant)",
   "ok": true,
-  "resultat_tex": "-\\left(2x - 1\\right)\\left(x - 4\\right)",
+  "resultat_tex": "-2\\left(x - \\frac{1}{2}\\right)\\left(x - 4\\right)",
   "secours": false
  },
  "-x - y": {
@@ -531,15 +527,15 @@
     "type": "texte"
    },
    {
-    "html": "Trinôme non unitaire \\(16u^{2} - 641u + 625\\) (\\(a=16\\)) : on cherche un zéro « évident » — on vérifie que \\(u_0=1\\) convient.",
+    "html": "Trinôme \\(16u^{2} - 641u + 625\\) : \\(\\Delta = b^2 - 4ac = (-641)^2 - 4 \\cdot 16 \\cdot 625 = 370881\\)",
     "type": "texte"
    },
    {
-    "html": "\\(u - 1\\) est donc un facteur ; en divisant, on complète : \\(16u^{2} - 641u + 625 = \\left(u - 1\\right)\\left(16u - 625\\right)\\) (méthode du zéro évident).",
+    "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 609\\) : deux zéros \\(u_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = 1\\) et \\(u_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{625}{16}\\).",
     "type": "texte"
    },
    {
-    "html": "On revient à \\(x\\) en remplaçant \\(u\\) par \\(x^{4}\\) : \\(16x^{8} - 641x^{4} + 625 = \\left(x^{4} - 1\\right)\\left(16x^{4} - 625\\right)\\).",
+    "html": "On revient à \\(x\\) en remplaçant \\(u\\) par \\(x^{4}\\) : \\(16x^{8} - 641x^{4} + 625 = 16\\left(x^{4} - 1\\right)\\left(x^{4} - \\frac{625}{16}\\right)\\).",
     "type": "texte"
    },
    {
@@ -559,47 +555,43 @@
     "type": "texte"
    },
    {
-    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=4x^{2}\\) et \\(B=25\\) : \\(16x^{4} - 625 = \\left(4x^{2} - 25\\right)\\left(4x^{2} + 25\\right)\\).",
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x^{2}\\) et \\(B=\\frac{25}{4}\\) : \\(x^{4} - \\frac{625}{16} = \\left(x^{2} - \\frac{25}{4}\\right)\\left(x^{2} + \\frac{25}{4}\\right)\\).",
     "type": "texte"
    },
    {
-    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=2x\\) et \\(B=5\\) : \\(4x^{2} - 25 = \\left(2x - 5\\right)\\left(2x + 5\\right)\\).",
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=x\\) et \\(B=\\frac{5}{2}\\) : \\(x^{2} - \\frac{25}{4} = \\left(x - \\frac{5}{2}\\right)\\left(x + \\frac{5}{2}\\right)\\).",
     "type": "texte"
    },
    {
-    "html": "Trinôme \\(4x^{2} + 25\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 4 \\cdot 25 = -400\\)",
+    "html": "Trinôme \\(x^{2} + \\frac{25}{4}\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot (\\frac{25}{4}) = -25\\)",
     "type": "texte"
    },
    {
-    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 4\\), il est toujours positif.",
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
     "type": "texte"
    }
   ],
   "expr_tex": "16x^{8} - 641x^{4} + 625",
-  "methode": "Changement de variable · Zéro évident · Différence de carrés · Non factorisable dans ℝ (Δ < 0)",
+  "methode": "Changement de variable · Formule (discriminant) · Différence de carrés · Non factorisable dans ℝ (Δ < 0)",
   "ok": true,
-  "resultat_tex": "\\left(x - 1\\right)\\left(x + 1\\right)\\left(x^{2} + 1\\right)\\left(2x - 5\\right)\\left(2x + 5\\right)\\left(4x^{2} + 25\\right)",
+  "resultat_tex": "16\\left(x - 1\\right)\\left(x + 1\\right)\\left(x^{2} + 1\\right)\\left(x - \\frac{5}{2}\\right)\\left(x + \\frac{5}{2}\\right)\\left(x^{2} + \\frac{25}{4}\\right)",
   "secours": false
  },
  "17x^2 + 288x - 17": {
   "etapes": [
    {
-    "html": "Trinôme non unitaire \\(17x^{2} + 288x - 17\\) (\\(a=17\\)) : on cherche un zéro « évident » — on vérifie que \\(x_0=\\frac{1}{17}\\) convient.",
+    "html": "Trinôme \\(17x^{2} + 288x - 17\\) : \\(\\Delta = b^2 - 4ac = 288^2 - 4 \\cdot 17 \\cdot (-17) = 84100\\)",
     "type": "texte"
    },
    {
-    "html": "\\(x - \\frac{1}{17}\\) est donc un facteur ; en divisant, on complète : \\(17x^{2} + 288x - 17 = \\left(x - \\frac{1}{17}\\right)\\left(17x + 289\\right)\\).",
-    "type": "texte"
-   },
-   {
-    "html": "Pour écrire ça sans fraction, on multiplie le premier facteur par 17 et on divise le second par 17 (le produit ne change pas) : \\(17x^{2} + 288x - 17 = \\left(17x - 1\\right)\\left(x + 17\\right)\\) (méthode du zéro évident).",
+    "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 290\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -17\\) et \\(x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{1}{17}\\).",
     "type": "texte"
    }
   ],
   "expr_tex": "17x^{2} + 288x - 17",
-  "methode": "Zéro évident",
+  "methode": "Formule (discriminant)",
   "ok": true,
-  "resultat_tex": "\\left(17x - 1\\right)\\left(x + 17\\right)",
+  "resultat_tex": "17\\left(x + 17\\right)\\left(x - \\frac{1}{17}\\right)",
   "secours": false
  },
  "2(x - y)^2": {
@@ -643,31 +635,15 @@
     "type": "texte"
    },
    {
-    "html": "Trinôme non unitaire \\(27u^{2} + 215u - 8\\) (\\(a=27\\)) : on cherche un zéro « évident » — on vérifie que \\(u_0=\\frac{1}{27}\\) convient.",
+    "html": "Trinôme \\(27u^{2} + 215u - 8\\) : \\(\\Delta = b^2 - 4ac = 215^2 - 4 \\cdot 27 \\cdot (-8) = 47089\\)",
     "type": "texte"
    },
    {
-    "html": "\\(u - \\frac{1}{27}\\) est donc un facteur ; en divisant, on complète : \\(27u^{2} + 215u - 8 = \\left(u - \\frac{1}{27}\\right)\\left(27u + 216\\right)\\).",
+    "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 217\\) : deux zéros \\(u_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -8\\) et \\(u_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{1}{27}\\).",
     "type": "texte"
    },
    {
-    "html": "Pour écrire ça sans fraction, on multiplie le premier facteur par 27 et on divise le second par 27 (le produit ne change pas) : \\(27u^{2} + 215u - 8 = \\left(27u - 1\\right)\\left(u + 8\\right)\\) (méthode du zéro évident).",
-    "type": "texte"
-   },
-   {
-    "html": "On revient à \\(x\\) en remplaçant \\(u\\) par \\(x^{3}\\) : \\(27x^{6} + 215x^{3} - 8 = \\left(27x^{3} - 1\\right)\\left(x^{3} + 8\\right)\\).",
-    "type": "texte"
-   },
-   {
-    "html": "On reconnaît une différence de deux cubes (produit remarquable \\(A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)\\)) avec \\(A=3x\\) et \\(B=1\\) : \\(27x^{3} - 1 = \\left(3x - 1\\right)\\left(9x^{2} + 3x + 1\\right)\\).",
-    "type": "texte"
-   },
-   {
-    "html": "Trinôme \\(9x^{2} + 3x + 1\\) : \\(\\Delta = b^2 - 4ac = 3^2 - 4 \\cdot 9 \\cdot 1 = -27\\)",
-    "type": "texte"
-   },
-   {
-    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 9\\), il est toujours positif.",
+    "html": "On revient à \\(x\\) en remplaçant \\(u\\) par \\(x^{3}\\) : \\(27x^{6} + 215x^{3} - 8 = 27\\left(x^{3} + 8\\right)\\left(x^{3} - \\frac{1}{27}\\right)\\).",
     "type": "texte"
    },
    {
@@ -681,12 +657,24 @@
    {
     "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
     "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux cubes (produit remarquable \\(A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)\\)) avec \\(A=x\\) et \\(B=\\frac{1}{3}\\) : \\(x^{3} - \\frac{1}{27} = \\left(x - \\frac{1}{3}\\right)\\left(x^{2} + \\frac{x}{3} + \\frac{1}{9}\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(x^{2} + \\frac{1}{3}x + \\frac{1}{9}\\) : \\(\\Delta = b^2 - 4ac = (\\frac{1}{3})^2 - 4 \\cdot 1 \\cdot (\\frac{1}{9}) = -\\frac{1}{3}\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
+    "type": "texte"
    }
   ],
   "expr_tex": "27x^{6} + 215x^{3} - 8",
-  "methode": "Changement de variable · Zéro évident · Différence de cubes · Non factorisable dans ℝ (Δ < 0) · Somme de cubes",
+  "methode": "Changement de variable · Formule (discriminant) · Somme de cubes · Non factorisable dans ℝ (Δ < 0) · Différence de cubes",
   "ok": true,
-  "resultat_tex": "\\left(3x - 1\\right)\\left(9x^{2} + 3x + 1\\right)\\left(x + 2\\right)\\left(x^{2} - 2x + 4\\right)",
+  "resultat_tex": "27\\left(x + 2\\right)\\left(x^{2} - 2x + 4\\right)\\left(x - \\frac{1}{3}\\right)\\left(x^{2} + \\frac{x}{3} + \\frac{1}{9}\\right)",
   "secours": false
  },
  "2^3x - 8": {
@@ -907,18 +895,18 @@
  "2x^2 - x - 1": {
   "etapes": [
    {
-    "html": "Trinôme non unitaire \\(2x^{2} - x - 1\\) (\\(a=2\\)) : on cherche un zéro « évident » — on vérifie que \\(x_0=1\\) convient.",
+    "html": "Trinôme \\(2x^{2} - x - 1\\) : \\(\\Delta = b^2 - 4ac = (-1)^2 - 4 \\cdot 2 \\cdot (-1) = 9\\)",
     "type": "texte"
    },
    {
-    "html": "\\(x - 1\\) est donc un facteur ; en divisant, on complète : \\(2x^{2} - x - 1 = \\left(x - 1\\right)\\left(2x + 1\\right)\\) (méthode du zéro évident).",
+    "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 3\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -\\frac{1}{2}\\) et \\(x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 1\\).",
     "type": "texte"
    }
   ],
   "expr_tex": "2x^{2} - x - 1",
-  "methode": "Zéro évident",
+  "methode": "Formule (discriminant)",
   "ok": true,
-  "resultat_tex": "\\left(x - 1\\right)\\left(2x + 1\\right)",
+  "resultat_tex": "2\\left(x + \\frac{1}{2}\\right)\\left(x - 1\\right)",
   "secours": false
  },
  "2x^3 + 16y^3": {
@@ -1101,22 +1089,18 @@
  "40x^2 + 3x - 28": {
   "etapes": [
    {
-    "html": "Trinôme non unitaire \\(40x^{2} + 3x - 28\\) (\\(a=40\\)) : on cherche un zéro « évident » — on vérifie que \\(x_0=\\frac{4}{5}\\) convient.",
+    "html": "Trinôme \\(40x^{2} + 3x - 28\\) : \\(\\Delta = b^2 - 4ac = 3^2 - 4 \\cdot 40 \\cdot (-28) = 4489\\)",
     "type": "texte"
    },
    {
-    "html": "\\(x - \\frac{4}{5}\\) est donc un facteur ; en divisant, on complète : \\(40x^{2} + 3x - 28 = \\left(x - \\frac{4}{5}\\right)\\left(40x + 35\\right)\\).",
-    "type": "texte"
-   },
-   {
-    "html": "Pour écrire ça sans fraction, on multiplie le premier facteur par 5 et on divise le second par 5 (le produit ne change pas) : \\(40x^{2} + 3x - 28 = \\left(5x - 4\\right)\\left(8x + 7\\right)\\) (méthode du zéro évident).",
+    "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 67\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -\\frac{7}{8}\\) et \\(x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{4}{5}\\).",
     "type": "texte"
    }
   ],
   "expr_tex": "40x^{2} + 3x - 28",
-  "methode": "Zéro évident",
+  "methode": "Formule (discriminant)",
   "ok": true,
-  "resultat_tex": "\\left(5x - 4\\right)\\left(8x + 7\\right)",
+  "resultat_tex": "40\\left(x + \\frac{7}{8}\\right)\\left(x - \\frac{4}{5}\\right)",
   "secours": false
  },
  "48z^2 - 216z + 243": {
@@ -1219,18 +1203,18 @@
  "4z^2 + 5z + 1": {
   "etapes": [
    {
-    "html": "Trinôme non unitaire \\(4z^{2} + 5z + 1\\) (\\(a=4\\)) : on cherche un zéro « évident » — on vérifie que \\(z_0=-1\\) convient.",
+    "html": "Trinôme \\(4z^{2} + 5z + 1\\) : \\(\\Delta = b^2 - 4ac = 5^2 - 4 \\cdot 4 \\cdot 1 = 9\\)",
     "type": "texte"
    },
    {
-    "html": "\\(z + 1\\) est donc un facteur ; en divisant, on complète : \\(4z^{2} + 5z + 1 = \\left(z + 1\\right)\\left(4z + 1\\right)\\) (méthode du zéro évident).",
+    "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 3\\) : deux zéros \\(z_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -1\\) et \\(z_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = -\\frac{1}{4}\\).",
     "type": "texte"
    }
   ],
   "expr_tex": "4z^{2} + 5z + 1",
-  "methode": "Zéro évident",
+  "methode": "Formule (discriminant)",
   "ok": true,
-  "resultat_tex": "\\left(z + 1\\right)\\left(4z + 1\\right)",
+  "resultat_tex": "4\\left(z + 1\\right)\\left(z + \\frac{1}{4}\\right)",
   "secours": false
  },
  "5": {
@@ -1282,15 +1266,27 @@
     "type": "texte"
    },
    {
-    "html": "Trinôme non unitaire \\(64u^{2} - 91u + 27\\) (\\(a=64\\)) : on cherche un zéro « évident » — on vérifie que \\(u_0=1\\) convient.",
+    "html": "Trinôme \\(64u^{2} - 91u + 27\\) : \\(\\Delta = b^2 - 4ac = (-91)^2 - 4 \\cdot 64 \\cdot 27 = 1369\\)",
     "type": "texte"
    },
    {
-    "html": "\\(u - 1\\) est donc un facteur ; en divisant, on complète : \\(64u^{2} - 91u + 27 = \\left(u - 1\\right)\\left(64u - 27\\right)\\) (méthode du zéro évident).",
+    "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 37\\) : deux zéros \\(u_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{27}{64}\\) et \\(u_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 1\\).",
     "type": "texte"
    },
    {
-    "html": "On revient à \\(c\\) en remplaçant \\(u\\) par \\(c^{3}\\) : \\(64c^{6} - 91c^{3} + 27 = \\left(c^{3} - 1\\right)\\left(64c^{3} - 27\\right)\\).",
+    "html": "On revient à \\(c\\) en remplaçant \\(u\\) par \\(c^{3}\\) : \\(64c^{6} - 91c^{3} + 27 = 64\\left(c^{3} - \\frac{27}{64}\\right)\\left(c^{3} - 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux cubes (produit remarquable \\(A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)\\)) avec \\(A=c\\) et \\(B=\\frac{3}{4}\\) : \\(c^{3} - \\frac{27}{64} = \\left(c - \\frac{3}{4}\\right)\\left(c^{2} + \\frac{3c}{4} + \\frac{9}{16}\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Trinôme \\(c^{2} + \\frac{3}{4}c + \\frac{9}{16}\\) : \\(\\Delta = b^2 - 4ac = (\\frac{3}{4})^2 - 4 \\cdot 1 \\cdot (\\frac{9}{16}) = -\\frac{27}{16}\\)",
+    "type": "texte"
+   },
+   {
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
     "type": "texte"
    },
    {
@@ -1304,24 +1300,12 @@
    {
     "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
     "type": "texte"
-   },
-   {
-    "html": "On reconnaît une différence de deux cubes (produit remarquable \\(A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)\\)) avec \\(A=4c\\) et \\(B=3\\) : \\(64c^{3} - 27 = \\left(4c - 3\\right)\\left(16c^{2} + 12c + 9\\right)\\).",
-    "type": "texte"
-   },
-   {
-    "html": "Trinôme \\(16c^{2} + 12c + 9\\) : \\(\\Delta = b^2 - 4ac = 12^2 - 4 \\cdot 16 \\cdot 9 = -432\\)",
-    "type": "texte"
-   },
-   {
-    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 16\\), il est toujours positif.",
-    "type": "texte"
    }
   ],
   "expr_tex": "64c^{6} - 91c^{3} + 27",
-  "methode": "Changement de variable · Zéro évident · Différence de cubes · Non factorisable dans ℝ (Δ < 0)",
+  "methode": "Changement de variable · Formule (discriminant) · Différence de cubes · Non factorisable dans ℝ (Δ < 0)",
   "ok": true,
-  "resultat_tex": "\\left(c - 1\\right)\\left(c^{2} + c + 1\\right)\\left(4c - 3\\right)\\left(16c^{2} + 12c + 9\\right)",
+  "resultat_tex": "64\\left(c - \\frac{3}{4}\\right)\\left(c^{2} + \\frac{3c}{4} + \\frac{9}{16}\\right)\\left(c - 1\\right)\\left(c^{2} + c + 1\\right)",
   "secours": false
  },
  "64x^6 - 1": {
@@ -1364,22 +1348,18 @@
  "6x^2 + 5x + 1": {
   "etapes": [
    {
-    "html": "Trinôme non unitaire \\(6x^{2} + 5x + 1\\) (\\(a=6\\)) : on cherche un zéro « évident » — on vérifie que \\(x_0=-\\frac{1}{2}\\) convient.",
+    "html": "Trinôme \\(6x^{2} + 5x + 1\\) : \\(\\Delta = b^2 - 4ac = 5^2 - 4 \\cdot 6 \\cdot 1 = 1\\)",
     "type": "texte"
    },
    {
-    "html": "\\(x + \\frac{1}{2}\\) est donc un facteur ; en divisant, on complète : \\(6x^{2} + 5x + 1 = \\left(x + \\frac{1}{2}\\right)\\left(6x + 2\\right)\\).",
-    "type": "texte"
-   },
-   {
-    "html": "Pour écrire ça sans fraction, on multiplie le premier facteur par 2 et on divise le second par 2 (le produit ne change pas) : \\(6x^{2} + 5x + 1 = \\left(2x + 1\\right)\\left(3x + 1\\right)\\) (méthode du zéro évident).",
+    "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 1\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -\\frac{1}{2}\\) et \\(x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = -\\frac{1}{3}\\).",
     "type": "texte"
    }
   ],
   "expr_tex": "6x^{2} + 5x + 1",
-  "methode": "Zéro évident",
+  "methode": "Formule (discriminant)",
   "ok": true,
-  "resultat_tex": "\\left(2x + 1\\right)\\left(3x + 1\\right)",
+  "resultat_tex": "6\\left(x + \\frac{1}{2}\\right)\\left(x + \\frac{1}{3}\\right)",
   "secours": false
  },
  "6x^2 - 6": {
@@ -1402,22 +1382,18 @@
  "6x^2-7x-3": {
   "etapes": [
    {
-    "html": "Trinôme non unitaire \\(6x^{2} - 7x - 3\\) (\\(a=6\\)) : on cherche un zéro « évident » — on vérifie que \\(x_0=-\\frac{1}{3}\\) convient.",
+    "html": "Trinôme \\(6x^{2} - 7x - 3\\) : \\(\\Delta = b^2 - 4ac = (-7)^2 - 4 \\cdot 6 \\cdot (-3) = 121\\)",
     "type": "texte"
    },
    {
-    "html": "\\(x + \\frac{1}{3}\\) est donc un facteur ; en divisant, on complète : \\(6x^{2} - 7x - 3 = \\left(x + \\frac{1}{3}\\right)\\left(6x - 9\\right)\\).",
-    "type": "texte"
-   },
-   {
-    "html": "Pour écrire ça sans fraction, on multiplie le premier facteur par 3 et on divise le second par 3 (le produit ne change pas) : \\(6x^{2} - 7x - 3 = \\left(3x + 1\\right)\\left(2x - 3\\right)\\) (méthode du zéro évident).",
+    "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 11\\) : deux zéros \\(x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -\\frac{1}{3}\\) et \\(x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{3}{2}\\).",
     "type": "texte"
    }
   ],
   "expr_tex": "6x^{2} - 7x - 3",
-  "methode": "Zéro évident",
+  "methode": "Formule (discriminant)",
   "ok": true,
-  "resultat_tex": "\\left(3x + 1\\right)\\left(2x - 3\\right)",
+  "resultat_tex": "6\\left(x + \\frac{1}{3}\\right)\\left(x - \\frac{3}{2}\\right)",
   "secours": false
  },
  "6x^2y": {
@@ -1440,27 +1416,23 @@
     "type": "texte"
    },
    {
-    "html": "Trinôme non unitaire \\(7u^{2} - 61u - 18\\) (\\(a=7\\)) : on cherche un zéro « évident » — on vérifie que \\(u_0=-\\frac{2}{7}\\) convient.",
+    "html": "Trinôme \\(7u^{2} - 61u - 18\\) : \\(\\Delta = b^2 - 4ac = (-61)^2 - 4 \\cdot 7 \\cdot (-18) = 4225\\)",
     "type": "texte"
    },
    {
-    "html": "\\(u + \\frac{2}{7}\\) est donc un facteur ; en divisant, on complète : \\(7u^{2} - 61u - 18 = \\left(u + \\frac{2}{7}\\right)\\left(7u - 63\\right)\\).",
+    "html": "\\(\\Delta > 0\\), \\(\\sqrt{\\Delta} = 65\\) : deux zéros \\(u_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} = -\\frac{2}{7}\\) et \\(u_2 = \\frac{-b + \\sqrt{\\Delta}}{2a} = 9\\).",
     "type": "texte"
    },
    {
-    "html": "Pour écrire ça sans fraction, on multiplie le premier facteur par 7 et on divise le second par 7 (le produit ne change pas) : \\(7u^{2} - 61u - 18 = \\left(7u + 2\\right)\\left(u - 9\\right)\\) (méthode du zéro évident).",
+    "html": "On revient à \\(x\\) en remplaçant \\(u\\) par \\(x^{2}\\) : \\(7x^{4} - 61x^{2} - 18 = 7\\left(x^{2} + \\frac{2}{7}\\right)\\left(x^{2} - 9\\right)\\).",
     "type": "texte"
    },
    {
-    "html": "On revient à \\(x\\) en remplaçant \\(u\\) par \\(x^{2}\\) : \\(7x^{4} - 61x^{2} - 18 = \\left(7x^{2} + 2\\right)\\left(x^{2} - 9\\right)\\).",
+    "html": "Trinôme \\(x^{2} + \\frac{2}{7}\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot (\\frac{2}{7}) = -\\frac{8}{7}\\)",
     "type": "texte"
    },
    {
-    "html": "Trinôme \\(7x^{2} + 2\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 7 \\cdot 2 = -56\\)",
-    "type": "texte"
-   },
-   {
-    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 7\\), il est toujours positif.",
+    "html": "\\(\\Delta < 0\\) : aucun zéro ; le trinôme garde le signe de \\(a = 1\\), il est toujours positif.",
     "type": "texte"
    },
    {
@@ -1469,9 +1441,9 @@
    }
   ],
   "expr_tex": "7x^{4} - 61x^{2} - 18",
-  "methode": "Changement de variable · Zéro évident · Non factorisable dans ℝ (Δ < 0) · Différence de carrés",
+  "methode": "Changement de variable · Formule (discriminant) · Non factorisable dans ℝ (Δ < 0) · Différence de carrés",
   "ok": true,
-  "resultat_tex": "\\left(7x^{2} + 2\\right)\\left(x - 3\\right)\\left(x + 3\\right)",
+  "resultat_tex": "7\\left(x^{2} + \\frac{2}{7}\\right)\\left(x - 3\\right)\\left(x + 3\\right)",
   "secours": false
  },
  "81y^2 - 4z^2": {

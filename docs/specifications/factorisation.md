@@ -12,15 +12,19 @@ Amaudruz, *Algèbre 1M*, §2.4, exercices 2.11 à 2.16.
   1. mise en évidence (y compris d'un facteur composé comme (a − b)) ;
   2. identités remarquables (différence de carrés, carré parfait, somme/différence de cubes,
      cube d'un binôme) ;
-  3. trinôme : Somme-Produit (a = 1), zéro évident (a ≠ 1), formule du discriminant ;
+  3. trinôme : Somme-Produit (a = 1), sinon formule du discriminant (pas de « zéro évident » p/q : on ne teste pas à la main
+     des valeurs fractionnaires, d'où a(x − x₁)(x − x₂) pour (2x + 1)(3x − 1), décision du 25.10.2026) ;
   4. changement de variable u = x^n ;
   5. groupements ;
-  6. zéro évident et division (degré ≥ 3) ; compléter le carré en dernier recours.
+  6. racine évidente et division (degré ≥ 3) : on teste les diviseurs entiers du terme constant, ± (jamais p/q) ;
+     compléter le carré en dernier recours.
 - Contrôle final : le produit affiché, redéveloppé, redonne exactement l'expression ; sinon repli
   sur la factorisation directe de SymPy, annoncée comme telle.
-- **Une carte par méthode appliquée** (validé, après les corrections et les tests) : chaque carte
-  porte le nom de la méthode en badge, l'expression traitée, les étapes, l'expression obtenue ;
-  la dernière carte donne la factorisation complète.
+- **Une carte par application de méthode** (validé, T21, 25.10.2026) : « Étape k » avec la méthode en badge, les étapes de
+  cette application (chaque phrase écrit déjà l'expression traitée et l'expression obtenue), dans l'ordre du calcul ; des
+  applications consécutives de la même méthode (x² − 4 puis x² − 9, deux différences de carrés) sont dans une même carte, et
+  une étape sans méthode propre (« ne se factorise pas davantage ») suit la carte précédente. La dernière carte
+  « Factorisation » (badge = toutes les méthodes) donne l'expression et la factorisation complète.
 - Exercices au hasard générés en Python, 4 niveaux (gabarits ci-dessous, acceptés le 14.10.2026, Q4).
 
 ## Gabarits (acceptés le 14.10.2026, Q4)
@@ -47,8 +51,9 @@ changement de variable, mise en évidence composée.
 | FA-01 | Pour toute entrée de la batterie (exercices Amaudruz 2.11–2.16, Javet §2.2, exemples de la page, 500 exercices générés), le résultat redéveloppé = l'entrée et `secours` est faux | [auto-py] |
 | FA-02 | Chaque facteur du résultat est irréductible sur ℚ (sur ℝ pour un trinôme seul à Δ > 0) | [auto-py] |
 | FA-03 | `exercice(niveau, graine)` est déterministe et produit l'un des gabarits validés du niveau | [auto-py] |
-| FA-04 | Une carte par méthode appliquée ; le nombre de cartes = nombre de méthodes listées dans le badge + 1 (bilan) | [auto-py] + [auto-page] |
-| FA-05 | `(x+1)^2-(x-1)^2` : la méthode annoncée n'est pas « Déjà factorisé » | [auto-py] |
+| FA-04 | Une carte par application de méthode : nombre de cartes = nombre de suites consécutives de même méthode + 1 (bilan) ; deux cartes voisines n'ont jamais la même méthode ; aucune étape perdue ni déplacée ; exemple x⁴ − 13x² + 36 : Changement de variable, Somme-Produit, Changement de variable, Différence de carrés, bilan | [auto-py] (`test_resoudre_fa.py`) + [auto-page] |
+| FA-05 | `(x+1)^2-(x-1)^2` : méthode « Différence de carrés » (A = x + 1, B = x − 1, produit 2 · 2x = 4x), pas « Déjà factorisé » | [auto-py] |
+| FA-09 | Le zéro évident ne teste que les diviseurs entiers du terme constant (degré ≥ 3) ; un trinôme a ≠ 1 passe par le discriminant | [auto-py] |
 | FA-06 | Saisie d'une fonction (ln, sqrt…) ou division par une lettre : message en français | [auto-py] |
 | FA-07 | Aucun calcul de la batterie FA-01 ne dépasse 2 s en natif (≈ 10 s dans Pyodide) | [auto-py] |
 | FA-08 | `resoudre()` (T12) respecte le schéma de sortie commun pour toute la batterie FA-01 : une carte finale (badge = méthode), aucun texte perdu, erreurs en français ; instantanés `instantanes/resoudre/factorisation.json` | [auto-py] (`test_resoudre_fa.py`) |

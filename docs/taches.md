@@ -270,8 +270,14 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
 - **Dépend** : T16. **Vérification** : mêmes critères SOC + critères de page de l'outil ;
   instantanés des moteurs inchangés.
 
-### T21 — Factorisation : une carte par méthode
-- **Dépend** : T12, T20. **Vérification** : FA-04, FA-05.
+### T21 — Factorisation : une carte par méthode — **faite** (25.10.2026)
+- **Dépend** : T12, T20. **Vérification** : FA-04, FA-05, FA-09.
+- **Réalisé** : `Ctx.groupes` (méthode de chaque étape) et `_factoriser()` dans `factorisation.py` ; `resoudre_fa.py` regroupe les
+  étapes consécutives de même méthode (« Étape k », badge = méthode) puis la carte « Factorisation » (bilan). `factoriser_expr` et
+  `factoriser_json` gardent leur format (pages en cache). FA-05 : `(x+1)^2-(x-1)^2` = différence de carrés, `4x`.
+- **Décision de l'enseignant (25.10.2026)** : plus de « zéro évident » p/q. Un trinôme a ≠ 1 passe par le discriminant
+  (`a(x − x₁)(x − x₂)`, ex. 6x² − 7x − 3 = 6(x + 1/3)(x − 3/2)) ; la « racine évidente » (degré ≥ 3) ne teste que les diviseurs
+  entiers du terme constant (FA-09). Instantanés régénérés : 12 entrées changées, toutes relues (méthode annoncée, résultat vérifié).
 
 ### T22 — Accueil : registre, sans-JS, contraste, animation sobre
 - **Fichiers** : `commun/registre.json`, `index.html`, `tests/python/test_accueil.py`.
