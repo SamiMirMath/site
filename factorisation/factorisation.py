@@ -1063,23 +1063,17 @@ def fact_une_variable(P, t, ctx, ecrits, monos, T, prof):
             if D < 0 or (not carre and not ctx.reel):
                 return trinome_methodes(P, t, coeffs, ctx, T)
         elif ctx.irreductible(P):
-            ctx.dire(rf"\({T}\) n'a pas de racine évidente : il ne se factorise pas davantage "
-                     rf"avec les méthodes du cours.")
-            ctx.marquer()
-            return sp.Integer(1), [Facteur(P, T, 1)]
+            return sans_methode_irreductible(P, ctx, T, prof, t, coeffs)
         return contenu_fractionnaire(P, ctx, T, prof)
     if n == 2:
         return trinome_methodes(P, t, coeffs, ctx, T)
     if ctx.irreductible(P):
-        ctx.dire(rf"\({T}\) n'a pas de racine évidente : il ne se factorise pas davantage "
-                 rf"avec les méthodes du cours.")
-        ctx.marquer()
-        return sp.Integer(1), [Facteur(P, T, 1)]
+        return sans_methode_irreductible(P, ctx, T, prof, t, coeffs)
     for essai in (changement_variable, groupements_essai, racine_evidente, completer_carre):
         r = essai(P, t, ctx, ecrits, monos, T, prof)
         if r:
             return r
-    return repli(P, ctx, T, prof)
+    return repli(P, ctx, T, prof, t, coeffs)
 
 
 def contenu_fractionnaire(P, ctx, T, prof):
@@ -1327,10 +1321,7 @@ def fact_plusieurs_variables(P, ctx, ecrits, monos, T, prof):
     if r:
         return r
     if ctx.irreductible(P):
-        if sp.Poly(P, *_gens(P)).total_degree() >= 2 and ctx.etapes:
-            ctx.dire(rf"\({T}\) ne se factorise pas davantage.")
-            ctx.marquer()
-        return sp.Integer(1), [Facteur(P, T, 1)]
+        return sans_methode_irreductible(P, ctx, T, prof)
     if ctx.contenu(P).q != 1:
         return contenu_fractionnaire(P, ctx, T, prof)
     # les groupements (méthode du cours) avant le Somme-Produit « à plusieurs
@@ -1556,8 +1547,86 @@ def completer_carre(P, t, ctx, ecrits, monos, T, prof):
     return None
 
 
-# ---------- 4.7 repli : la factorisation calculée directement ----------
-def repli(P, ctx, T, prof):
+# ---------- 4.7 aucune méthode du cours : on le dit, on ne l'affirme jamais sans le justifier ----------
+AUCUNE_METHODE = "Aucune méthode du cours"
+MAX_DIVISEURS_MONTRES = 6
+
+
+def _valeurs_testees(coeffs):
+    """(diviseurs, [(r, P(r))]) : les diviseurs entiers du terme constant (après dénominateur commun) et les valeurs de P en d puis −d ;
+    None si le terme constant est trop grand pour les tester."""
+    den = 1
+    for c in coeffs:
+        den = den * c.denominator // math.gcd(den, c.denominator)
+    a0 = abs(int(coeffs[0] * den))
+    if a0 == 0 or a0 > BORNE:
+        return None
+    divs = sorted(diviseurs_entiers(a0))
+    valeurs = []
+    for d in divs:
+        for r in (d, -d):
+            v = F(0)
+            for c in reversed(coeffs):
+                v = v * r + c
+            valeurs.append((r, v))
+    return divs, valeurs
+
+
+def _pourquoi_aucune(ctx, T, t=None, coeffs=None):
+    """Pourquoi aucune méthode du cours ne conclut. Une seule lettre (degré ≥ 3) : les valeurs de P aux diviseurs entiers du terme
+    constant ; sinon, la liste des méthodes essayées."""
+    if t is None:
+        return (rf"Aucune méthode du cours ne s'applique à \({T}\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : "
+                rf"on ne peut pas conclure avec ces méthodes.")
+    essai = _valeurs_testees(coeffs)
+    if essai is None:
+        return (rf"Le terme constant de \(P({t}) = {T}\) est trop grand pour tester ses diviseurs à la main : "
+                rf"la recherche d'une racine entière ne permet pas de conclure.")
+    divs, valeurs = essai
+    montres = valeurs[:2 * MAX_DIVISEURS_MONTRES]
+    suite = ", …" if len(divs) > MAX_DIVISEURS_MONTRES else ""
+    ensemble = ", ".join(rf"\pm{d}" for d in divs[:MAX_DIVISEURS_MONTRES]) + suite
+    vals = ", ".join(rf"\(P({r}) = {qtex(v)}\)" for r, v in montres) + suite
+    reste = " (les autres diviseurs ne l'annulent pas non plus)" if suite else ""
+    return (rf"On cherche une racine entière de \(P({t}) = {T}\) parmi les diviseurs du terme constant (\({ensemble}\)) : {vals}. "
+            rf"Aucun diviseur entier du terme constant n'annule \(P\){reste} : la recherche d'une racine entière ne permet pas de conclure.")
+
+
+def _developpement(ctx, c, facts):
+    """Chaîne d'égalités qui redéveloppe c·Π facteurs, un facteur après l'autre : (2x − 1)(3x − 1)(5x + 1) = (6x² − 5x + 1)(5x + 1) = 30x³ − 19x² + 1."""
+    sp = ctx.sp
+
+    def par(f):
+        return (f.tex if f.est_lettre else rf"\left({f.tex}\right)") + (f"^{{{f.mult}}}" if f.mult > 1 else "")
+    chaine = [tex_produit(ctx, c, facts)]
+    acc = sp.Rational(c)
+    for k, f in enumerate(facts):
+        acc = sp.expand(acc * f.expr ** f.mult)
+        if k == len(facts) - 1:
+            chaine.append(ctx.tex_poly(acc))
+        elif k > 0 or c != 1 or f.mult > 1:
+            chaine.append(rf"\left({ctx.tex_poly(acc)}\right)" + "".join(par(g) for g in facts[k + 1:]))
+    return " = ".join(chaine)
+
+
+def _fin_sans_methode(ctx, prof):
+    """Toute l'expression (prof = 0) : la méthode annoncée est « Aucune méthode du cours » ; un facteur : l'étape suit la carte précédente."""
+    if prof == 0:
+        ctx.methode(AUCUNE_METHODE)
+    else:
+        ctx.marquer()
+
+
+def sans_methode_irreductible(P, ctx, T, prof, t=None, coeffs=None):
+    """P n'a pas de facteur à coefficients rationnels : on le garde tel quel, après avoir dit pourquoi les méthodes ne concluent pas."""
+    ctx.dire(_pourquoi_aucune(ctx, T, t, coeffs))
+    ctx.dire(rf"On peut montrer que \({T}\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.")
+    _fin_sans_methode(ctx, prof)
+    return ctx.sp.Integer(1), [Facteur(P, T, 1)]
+
+
+def repli(P, ctx, T, prof, t=None, coeffs=None):
+    """Aucune méthode du cours ne conclut, mais P se factorise : on le dit, on écrit le résultat et on le vérifie en développant."""
     sp = ctx.sp
     c, lst = sp.factor_list(P)
     c = sp.Rational(c)
@@ -1570,9 +1639,10 @@ def repli(P, ctx, T, prof):
         cf, bf = ctx.normaliser(f)
         c *= cf ** m
         facts.append(Facteur(bf, ctx.tex_poly(bf), m))
-    ctx.dire(rf"Aucune des méthodes du cours ne s'applique directement ici ; la factorisation complète est : "
-             rf"\({T} = {tex_produit(ctx, c, facts)}\).")
-    ctx.methode("Calcul direct")
+    ctx.dire(_pourquoi_aucune(ctx, T, t, coeffs))
+    ctx.dire(rf"\({T}\) se factorise quand même : \({T} = {tex_produit(ctx, c, facts)}\).")
+    ctx.dire(rf"Vérification : en développant, on retrouve \({T}\) : \({_developpement(ctx, c, facts)}\).")
+    _fin_sans_methode(ctx, prof)
     return combiner(ctx, c, facts)
 
 
@@ -1631,7 +1701,7 @@ def _message_final(ctx, P, T, produit):
         return rf"\({T}\) est déjà complètement factorisé."
     if sp.Poly(P, *_gens(P)).total_degree() == 1:
         return rf"\({T}\) est de degré 1 : il n'y a rien à factoriser."
-    return rf"\({T}\) ne se factorise pas : c'est déjà sa forme la plus simple."
+    return rf"Aucune méthode du cours ne s'applique à \({T}\) : on ne peut pas conclure avec ces méthodes."
 
 
 def _factoriser(entree):
@@ -1675,8 +1745,10 @@ def _factoriser(entree):
             badge = "Rien à factoriser"
         elif produit or len(termes_monomes(ctx, P)) == 1:
             badge = "Déjà factorisé"
+        elif sp.Poly(P, *_gens(P)).total_degree() <= 1:
+            badge = "Rien à factoriser"
         else:
-            badge = "Ne se factorise pas"
+            badge = AUCUNE_METHODE
         return {
             "ok": True,
             "expr_tex": T,

@@ -15,7 +15,7 @@ LETTRES = {c: sp.Symbol(c) for c in "abcdefghijklmnopqrstuvwxyz"}
 N_GENERES = 500
 # Étapes qui contiennent une chaîne d'égalités vérifiable (les autres sont du texte).
 MOTS = ("en évidence", "On reconnaît", "Méthode Somme-Produit", "on complète", "en divisant",
-        "On groupe", "On revient", "D'où", "factorisation complète", "sans fraction", "on factorise")
+        "On groupe", "On revient", "D'où", "factorisation complète", "sans fraction", "on factorise", "Vérification")
 NON_POLYNOMES = {"sqrt(x)", "x/y", "x^2-1'000"}   # refusés avec un message (FA-06)
 
 

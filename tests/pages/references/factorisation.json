@@ -262,7 +262,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Différence de carrésOn reconnaît une différence de deux carrés (produit remarquable ⟦A^2-B^2=(A-B)(A+B)⟧) avec ⟦A=ax + 2y⟧ et ⟦B=2x - 3y⟧ : ⟦\\left(ax + 2y\\right)^{2} - \\left(2x - 3y\\right)^{2} = \\left[\\left(ax + 2y\\right) - \\left(2x - 3y\\right)\\right] \\cdot \\left[\\left(ax + 2y\\right) + \\left(2x - 3y\\right)\\right] = \\left(ax - 2x + 5y\\right) \\cdot \\left(ax + 2x - y\\right)⟧.⟦ax - 2x + 5y⟧ ne se factorise pas davantage.⟦ax + 2x - y⟧ ne se factorise pas davantage.",
+    "texte": "Étape 1Différence de carrésOn reconnaît une différence de deux carrés (produit remarquable ⟦A^2-B^2=(A-B)(A+B)⟧) avec ⟦A=ax + 2y⟧ et ⟦B=2x - 3y⟧ : ⟦\\left(ax + 2y\\right)^{2} - \\left(2x - 3y\\right)^{2} = \\left[\\left(ax + 2y\\right) - \\left(2x - 3y\\right)\\right] \\cdot \\left[\\left(ax + 2y\\right) + \\left(2x - 3y\\right)\\right] = \\left(ax - 2x + 5y\\right) \\cdot \\left(ax + 2x - y\\right)⟧.Aucune méthode du cours ne s'applique à ⟦ax - 2x + 5y⟧ (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.On peut montrer que ⟦ax - 2x + 5y⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.Aucune méthode du cours ne s'applique à ⟦ax + 2x - y⟧ (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.On peut montrer que ⟦ax + 2x - y⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "titre": "Étape 1Différence de carrés"
    },
    {
@@ -312,7 +312,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Mise en évidenceOn met ⟦u⟧ en évidence (facteur commun à tous les termes) : ⟦\\left(uv\\right)^{2} - u = u\\left(uv^{2} - 1\\right)⟧.⟦uv^{2} - 1⟧ ne se factorise pas davantage.",
+    "texte": "Étape 1Mise en évidenceOn met ⟦u⟧ en évidence (facteur commun à tous les termes) : ⟦\\left(uv\\right)^{2} - u = u\\left(uv^{2} - 1\\right)⟧.Aucune méthode du cours ne s'applique à ⟦uv^{2} - 1⟧ (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.On peut montrer que ⟦uv^{2} - 1⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "titre": "Étape 1Mise en évidence"
    },
    {
@@ -992,7 +992,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Mise en évidenceOn met ⟦4x⟧ en évidence (facteur commun à tous les termes) : ⟦12x^{4} - 8x^{2} + 16x = 4x\\left(3x^{3} - 2x + 4\\right)⟧.⟦3x^{3} - 2x + 4⟧ n'a pas de racine évidente : il ne se factorise pas davantage avec les méthodes du cours.",
+    "texte": "Étape 1Mise en évidenceOn met ⟦4x⟧ en évidence (facteur commun à tous les termes) : ⟦12x^{4} - 8x^{2} + 16x = 4x\\left(3x^{3} - 2x + 4\\right)⟧.On cherche une racine entière de ⟦P(x) = 3x^{3} - 2x + 4⟧ parmi les diviseurs du terme constant (⟦\\pm1, \\pm2, \\pm4⟧) : ⟦P(1) = 5⟧, ⟦P(-1) = 3⟧, ⟦P(2) = 24⟧, ⟦P(-2) = -16⟧, ⟦P(4) = 188⟧, ⟦P(-4) = -180⟧. Aucun diviseur entier du terme constant n'annule ⟦P⟧ : la recherche d'une racine entière ne permet pas de conclure.On peut montrer que ⟦3x^{3} - 2x + 4⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "titre": "Étape 1Mise en évidence"
    },
    {
@@ -1072,7 +1072,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Somme de cubesOn reconnaît une somme de deux cubes (produit remarquable ⟦A^3+B^3=(A+B)\\left(A^2-AB+B^2\\right)⟧) avec ⟦A=2a⟧ et ⟦B=b⟧ : ⟦8a^{3} + b^{3} = \\left(2a + b\\right)\\left(4a^{2} - 2ab + b^{2}\\right)⟧.⟦4a^{2} - 2ab + b^{2}⟧ ne se factorise pas davantage.",
+    "texte": "Étape 2Somme de cubesOn reconnaît une somme de deux cubes (produit remarquable ⟦A^3+B^3=(A+B)\\left(A^2-AB+B^2\\right)⟧) avec ⟦A=2a⟧ et ⟦B=b⟧ : ⟦8a^{3} + b^{3} = \\left(2a + b\\right)\\left(4a^{2} - 2ab + b^{2}\\right)⟧.Aucune méthode du cours ne s'applique à ⟦4a^{2} - 2ab + b^{2}⟧ (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.On peut montrer que ⟦4a^{2} - 2ab + b^{2}⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "titre": "Étape 2Somme de cubes"
    },
    {
@@ -1862,7 +1862,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Somme de cubesOn reconnaît une somme de deux cubes (produit remarquable ⟦A^3+B^3=(A+B)\\left(A^2-AB+B^2\\right)⟧) avec ⟦A=x⟧ et ⟦B=2y⟧ : ⟦x^{3} + 8y^{3} = \\left(x + 2y\\right)\\left(x^{2} - 2xy + 4y^{2}\\right)⟧.⟦x^{2} - 2xy + 4y^{2}⟧ ne se factorise pas davantage.",
+    "texte": "Étape 2Somme de cubesOn reconnaît une somme de deux cubes (produit remarquable ⟦A^3+B^3=(A+B)\\left(A^2-AB+B^2\\right)⟧) avec ⟦A=x⟧ et ⟦B=2y⟧ : ⟦x^{3} + 8y^{3} = \\left(x + 2y\\right)\\left(x^{2} - 2xy + 4y^{2}\\right)⟧.Aucune méthode du cours ne s'applique à ⟦x^{2} - 2xy + 4y^{2}⟧ (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.On peut montrer que ⟦x^{2} - 2xy + 4y^{2}⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "titre": "Étape 2Somme de cubes"
    },
    {
@@ -1899,6 +1899,36 @@
   ],
   "progression_finale": "Étape 1 / 1"
  },
+ "30x^3-19x^2+1": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Aucune méthode du coursOn cherche une racine entière de ⟦P(x) = 30x^{3} - 19x^{2} + 1⟧ parmi les diviseurs du terme constant (⟦\\pm1⟧) : ⟦P(1) = 12⟧, ⟦P(-1) = -48⟧. Aucun diviseur entier du terme constant n'annule ⟦P⟧ : la recherche d'une racine entière ne permet pas de conclure.⟦30x^{3} - 19x^{2} + 1⟧ se factorise quand même : ⟦30x^{3} - 19x^{2} + 1 = \\left(2x - 1\\right)\\left(3x - 1\\right)\\left(5x + 1\\right)⟧.Vérification : en développant, on retrouve ⟦30x^{3} - 19x^{2} + 1⟧ : ⟦\\left(2x - 1\\right)\\left(3x - 1\\right)\\left(5x + 1\\right) = \\left(6x^{2} - 5x + 1\\right)\\left(5x + 1\\right) = 30x^{3} - 19x^{2} + 1⟧.",
+    "titre": "Étape 1Aucune méthode du cours"
+   },
+   {
+    "classes": [
+     "card",
+     "cond",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "FactorisationAucune méthode du cours⟦30x^{3} - 19x^{2} + 1⟧⟦30x^{3} - 19x^{2} + 1 = \\left(2x - 1\\right)\\left(3x - 1\\right)\\left(5x + 1\\right)⟧",
+    "titre": "FactorisationAucune méthode du cours"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
  "3a^3b^4 - 12a^2b^3": {
   "au_depart": {
    "progression": "Étape 1 / 2",
@@ -1912,7 +1942,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Mise en évidenceOn met ⟦3a^{2}b^{3}⟧ en évidence (facteur commun à tous les termes) : ⟦3a^{3}b^{4} - 12a^{2}b^{3} = 3a^{2}b^{3}\\left(ab - 4\\right)⟧.⟦ab - 4⟧ ne se factorise pas davantage.",
+    "texte": "Étape 1Mise en évidenceOn met ⟦3a^{2}b^{3}⟧ en évidence (facteur commun à tous les termes) : ⟦3a^{3}b^{4} - 12a^{2}b^{3} = 3a^{2}b^{3}\\left(ab - 4\\right)⟧.Aucune méthode du cours ne s'applique à ⟦ab - 4⟧ (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.On peut montrer que ⟦ab - 4⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "titre": "Étape 1Mise en évidence"
    },
    {
@@ -2452,7 +2482,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Différence de cubesOn reconnaît une différence de deux cubes (produit remarquable ⟦A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)⟧) avec ⟦A=3a^{2}⟧ et ⟦B=1⟧ : ⟦27a^{6} - 1 = \\left(3a^{2} - 1\\right)\\left(9a^{4} + 3a^{2} + 1\\right)⟧.Trinôme ⟦3a^{2} - 1⟧ : ⟦\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 3 \\cdot (-1) = 12⟧⟦\\Delta = 12⟧ n'est pas un carré parfait : les zéros de ce facteur sont irrationnels, on le garde tel quel.⟦9a^{4} + 3a^{2} + 1⟧ n'a pas de racine évidente : il ne se factorise pas davantage avec les méthodes du cours.",
+    "texte": "Étape 2Différence de cubesOn reconnaît une différence de deux cubes (produit remarquable ⟦A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)⟧) avec ⟦A=3a^{2}⟧ et ⟦B=1⟧ : ⟦27a^{6} - 1 = \\left(3a^{2} - 1\\right)\\left(9a^{4} + 3a^{2} + 1\\right)⟧.Trinôme ⟦3a^{2} - 1⟧ : ⟦\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 3 \\cdot (-1) = 12⟧⟦\\Delta = 12⟧ n'est pas un carré parfait : les zéros de ce facteur sont irrationnels, on le garde tel quel.On cherche une racine entière de ⟦P(a) = 9a^{4} + 3a^{2} + 1⟧ parmi les diviseurs du terme constant (⟦\\pm1⟧) : ⟦P(1) = 13⟧, ⟦P(-1) = 13⟧. Aucun diviseur entier du terme constant n'annule ⟦P⟧ : la recherche d'une racine entière ne permet pas de conclure.On peut montrer que ⟦9a^{4} + 3a^{2} + 1⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "titre": "Étape 2Différence de cubes"
    },
    {
@@ -2979,6 +3009,56 @@
   ],
   "progression_finale": "Étape 3 / 3"
  },
+ "8x^3-12x^2-2x+3": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1GroupementsOn groupe les termes : ⟦8x^{3} - 12x^{2} - 2x + 3 = \\left(8x^{3} - 12x^{2}\\right) + \\left(-2x + 3\\right) = 4x^{2}\\left(2x - 3\\right) - \\left(2x - 3\\right)⟧.",
+    "titre": "Étape 1Groupements"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Mise en évidenceOn met ⟦\\left(2x - 3\\right)⟧ en évidence (facteur commun à tous les termes) : ⟦4x^{2}\\left(2x - 3\\right) - \\left(2x - 3\\right) = \\left(2x - 3\\right)\\left(4x^{2} - 1\\right)⟧.",
+    "titre": "Étape 2Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Différence de carrésOn reconnaît une différence de deux carrés (produit remarquable ⟦A^2-B^2=(A-B)(A+B)⟧) avec ⟦A=2x⟧ et ⟦B=1⟧ : ⟦4x^{2} - 1 = \\left(2x - 1\\right)\\left(2x + 1\\right)⟧.",
+    "titre": "Étape 3Différence de carrés"
+   },
+   {
+    "classes": [
+     "card",
+     "cond",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "FactorisationGroupements · Mise en évidence · Différence de carrés⟦8x^{3} - 12x^{2} - 2x + 3⟧⟦8x^{3} - 12x^{2} - 2x + 3 = \\left(2x - 3\\right)\\left(2x - 1\\right)\\left(2x + 1\\right)⟧",
+    "titre": "FactorisationGroupements · Mise en évidence · Différence de carrés"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
  "9(x - 3)^2 - 4": {
   "au_depart": {
    "progression": "Étape 1 / 2",
@@ -3212,7 +3292,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Carré parfaitOn reconnaît un carré parfait (produit remarquable ⟦A^2+2AB+B^2=(A+B)^2⟧) avec ⟦A=3x^{2}⟧ et ⟦B=4y⟧ : ⟦9x^{4} + 16y^{2} + 24x^{2}y = \\left(3x^{2} + 4y\\right)^{2}⟧.⟦3x^{2} + 4y⟧ ne se factorise pas davantage.",
+    "texte": "Étape 1Carré parfaitOn reconnaît un carré parfait (produit remarquable ⟦A^2+2AB+B^2=(A+B)^2⟧) avec ⟦A=3x^{2}⟧ et ⟦B=4y⟧ : ⟦9x^{4} + 16y^{2} + 24x^{2}y = \\left(3x^{2} + 4y\\right)^{2}⟧.Aucune méthode du cours ne s'applique à ⟦3x^{2} + 4y⟧ (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.On peut montrer que ⟦3x^{2} + 4y⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "titre": "Étape 1Carré parfait"
    },
    {
@@ -3242,7 +3322,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Mise en évidenceOn met ⟦9xy^{2}⟧ en évidence (facteur commun à tous les termes) : ⟦9xy^{2} + 18x^{2}y^{4} - 36x^{4}y^{2} = 9xy^{2}\\left(1 + 2xy^{2} - 4x^{3}\\right)⟧.⟦1 + 2xy^{2} - 4x^{3}⟧ ne se factorise pas davantage.",
+    "texte": "Étape 1Mise en évidenceOn met ⟦9xy^{2}⟧ en évidence (facteur commun à tous les termes) : ⟦9xy^{2} + 18x^{2}y^{4} - 36x^{4}y^{2} = 9xy^{2}\\left(1 + 2xy^{2} - 4x^{3}\\right)⟧.Aucune méthode du cours ne s'applique à ⟦1 + 2xy^{2} - 4x^{3}⟧ (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.On peut montrer que ⟦1 + 2xy^{2} - 4x^{3}⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "titre": "Étape 1Mise en évidence"
    },
    {
@@ -3471,10 +3551,20 @@
  },
  "a^2 - b^2 + c^2": {
   "au_depart": {
-   "progression": "Étape 1 / 1",
+   "progression": "Étape 1 / 2",
    "visibles": 1
   },
   "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Aucune méthode du coursAucune méthode du cours ne s'applique à ⟦a^{2} - b^{2} + c^{2}⟧ (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.On peut montrer que ⟦a^{2} - b^{2} + c^{2}⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
+    "titre": "Étape 1Aucune méthode du cours"
+   },
    {
     "classes": [
      "card",
@@ -3483,11 +3573,11 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "FactorisationNe se factorise pas⟦a^{2} - b^{2} + c^{2}⟧⟦a^{2} - b^{2} + c^{2}⟧ ne se factorise pas : c'est déjà sa forme la plus simple.⟦a^{2} - b^{2} + c^{2} = a^{2} - b^{2} + c^{2}⟧",
-    "titre": "FactorisationNe se factorise pas"
+    "texte": "FactorisationAucune méthode du cours⟦a^{2} - b^{2} + c^{2}⟧⟦a^{2} - b^{2} + c^{2} = a^{2} - b^{2} + c^{2}⟧",
+    "titre": "FactorisationAucune méthode du cours"
    }
   ],
-  "progression_finale": "Étape 1 / 1"
+  "progression_finale": "Étape 2 / 2"
  },
  "a^2b^2 - m^2": {
   "au_depart": {
@@ -3502,7 +3592,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Différence de carrésOn reconnaît une différence de deux carrés (produit remarquable ⟦A^2-B^2=(A-B)(A+B)⟧) avec ⟦A=ab⟧ et ⟦B=m⟧ : ⟦a^{2}b^{2} - m^{2} = \\left(ab - m\\right)\\left(ab + m\\right)⟧.⟦ab - m⟧ ne se factorise pas davantage.⟦ab + m⟧ ne se factorise pas davantage.",
+    "texte": "Étape 1Différence de carrésOn reconnaît une différence de deux carrés (produit remarquable ⟦A^2-B^2=(A-B)(A+B)⟧) avec ⟦A=ab⟧ et ⟦B=m⟧ : ⟦a^{2}b^{2} - m^{2} = \\left(ab - m\\right)\\left(ab + m\\right)⟧.Aucune méthode du cours ne s'applique à ⟦ab - m⟧ (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.On peut montrer que ⟦ab - m⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.Aucune méthode du cours ne s'applique à ⟦ab + m⟧ (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.On peut montrer que ⟦ab + m⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "titre": "Étape 1Différence de carrés"
    },
    {
@@ -3582,7 +3672,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Différence de cubesOn reconnaît une différence de deux cubes (produit remarquable ⟦A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)⟧) avec ⟦A=a⟧ et ⟦B=\\frac{2b}{3}⟧ : ⟦a^{3} - \\frac{8b^{3}}{27} = \\left(a - \\frac{2b}{3}\\right)\\left(a^{2} + \\frac{2ab}{3} + \\frac{4b^{2}}{9}\\right)⟧.⟦a^{2} + \\frac{2ab}{3} + \\frac{4b^{2}}{9}⟧ ne se factorise pas davantage.",
+    "texte": "Étape 1Différence de cubesOn reconnaît une différence de deux cubes (produit remarquable ⟦A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)⟧) avec ⟦A=a⟧ et ⟦B=\\frac{2b}{3}⟧ : ⟦a^{3} - \\frac{8b^{3}}{27} = \\left(a - \\frac{2b}{3}\\right)\\left(a^{2} + \\frac{2ab}{3} + \\frac{4b^{2}}{9}\\right)⟧.Aucune méthode du cours ne s'applique à ⟦a^{2} + \\frac{2ab}{3} + \\frac{4b^{2}}{9}⟧ (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.On peut montrer que ⟦a^{2} + \\frac{2ab}{3} + \\frac{4b^{2}}{9}⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "titre": "Étape 1Différence de cubes"
    },
    {
@@ -3692,7 +3782,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Carré parfaitOn reconnaît un carré parfait (produit remarquable ⟦A^2-2AB+B^2=(A-B)^2⟧) avec ⟦A=a^{2}⟧ et ⟦B=3b⟧ : ⟦a^{4} + 9b^{2} - 6a^{2}b = \\left(a^{2} - 3b\\right)^{2}⟧.⟦a^{2} - 3b⟧ ne se factorise pas davantage.",
+    "texte": "Étape 1Carré parfaitOn reconnaît un carré parfait (produit remarquable ⟦A^2-2AB+B^2=(A-B)^2⟧) avec ⟦A=a^{2}⟧ et ⟦B=3b⟧ : ⟦a^{4} + 9b^{2} - 6a^{2}b = \\left(a^{2} - 3b\\right)^{2}⟧.Aucune méthode du cours ne s'applique à ⟦a^{2} - 3b⟧ (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.On peut montrer que ⟦a^{2} - 3b⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "titre": "Étape 1Carré parfait"
    },
    {
@@ -3732,7 +3822,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Différence de carrésOn reconnaît une différence de deux carrés (produit remarquable ⟦A^2-B^2=(A-B)(A+B)⟧) avec ⟦A=a^{2} + b^{2}⟧ et ⟦B=ab⟧ : ⟦\\left(a^{2} + b^{2}\\right)^{2} - \\left(ab\\right)^{2} = \\left[\\left(a^{2} + b^{2}\\right) - ab\\right] \\cdot \\left[\\left(a^{2} + b^{2}\\right) + ab\\right] = \\left(a^{2} + b^{2} - ab\\right) \\cdot \\left(a^{2} + b^{2} + ab\\right)⟧.⟦a^{2} + b^{2} - ab⟧ ne se factorise pas davantage.⟦a^{2} + b^{2} + ab⟧ ne se factorise pas davantage.",
+    "texte": "Étape 2Différence de carrésOn reconnaît une différence de deux carrés (produit remarquable ⟦A^2-B^2=(A-B)(A+B)⟧) avec ⟦A=a^{2} + b^{2}⟧ et ⟦B=ab⟧ : ⟦\\left(a^{2} + b^{2}\\right)^{2} - \\left(ab\\right)^{2} = \\left[\\left(a^{2} + b^{2}\\right) - ab\\right] \\cdot \\left[\\left(a^{2} + b^{2}\\right) + ab\\right] = \\left(a^{2} + b^{2} - ab\\right) \\cdot \\left(a^{2} + b^{2} + ab\\right)⟧.Aucune méthode du cours ne s'applique à ⟦a^{2} + b^{2} - ab⟧ (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.On peut montrer que ⟦a^{2} + b^{2} - ab⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.Aucune méthode du cours ne s'applique à ⟦a^{2} + b^{2} + ab⟧ (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.On peut montrer que ⟦a^{2} + b^{2} + ab⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "titre": "Étape 2Différence de carrés"
    },
    {
@@ -3972,7 +4062,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Différence de cubesOn reconnaît une différence de deux cubes (produit remarquable ⟦A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)⟧) avec ⟦A=b⟧ et ⟦B=a⟧ : ⟦b^{3} - a^{3} = \\left(b - a\\right)\\left(a^{2} + ab + b^{2}\\right)⟧.⟦a^{2} + ab + b^{2}⟧ ne se factorise pas davantage.",
+    "texte": "Étape 1Différence de cubesOn reconnaît une différence de deux cubes (produit remarquable ⟦A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)⟧) avec ⟦A=b⟧ et ⟦B=a⟧ : ⟦b^{3} - a^{3} = \\left(b - a\\right)\\left(a^{2} + ab + b^{2}\\right)⟧.Aucune méthode du cours ne s'applique à ⟦a^{2} + ab + b^{2}⟧ (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.On peut montrer que ⟦a^{2} + ab + b^{2}⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "titre": "Étape 1Différence de cubes"
    },
    {
@@ -4322,8 +4412,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "FactorisationNe se factorise pas⟦x + y⟧⟦x + y⟧ est de degré 1 : il n'y a rien à factoriser.⟦x + y = x + y⟧",
-    "titre": "FactorisationNe se factorise pas"
+    "texte": "FactorisationRien à factoriser⟦x + y⟧⟦x + y⟧ est de degré 1 : il n'y a rien à factoriser.⟦x + y = x + y⟧",
+    "titre": "FactorisationRien à factoriser"
    }
   ],
   "progression_finale": "Étape 1 / 1"
@@ -4500,7 +4590,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Différence de cubesOn reconnaît une différence de deux cubes (produit remarquable ⟦A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)⟧) avec ⟦A=x^{4}⟧ et ⟦B=5⟧ : ⟦x^{12} - 125 = \\left(x^{4} - 5\\right)\\left(x^{8} + 5x^{4} + 25\\right)⟧.⟦x^{4} - 5⟧ n'a pas de racine évidente : il ne se factorise pas davantage avec les méthodes du cours.⟦x^{8} + 5x^{4} + 25⟧ n'a pas de racine évidente : il ne se factorise pas davantage avec les méthodes du cours.",
+    "texte": "Étape 1Différence de cubesOn reconnaît une différence de deux cubes (produit remarquable ⟦A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)⟧) avec ⟦A=x^{4}⟧ et ⟦B=5⟧ : ⟦x^{12} - 125 = \\left(x^{4} - 5\\right)\\left(x^{8} + 5x^{4} + 25\\right)⟧.On cherche une racine entière de ⟦P(x) = x^{4} - 5⟧ parmi les diviseurs du terme constant (⟦\\pm1, \\pm5⟧) : ⟦P(1) = -4⟧, ⟦P(-1) = -4⟧, ⟦P(5) = 620⟧, ⟦P(-5) = 620⟧. Aucun diviseur entier du terme constant n'annule ⟦P⟧ : la recherche d'une racine entière ne permet pas de conclure.On peut montrer que ⟦x^{4} - 5⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.On cherche une racine entière de ⟦P(x) = x^{8} + 5x^{4} + 25⟧ parmi les diviseurs du terme constant (⟦\\pm1, \\pm5, \\pm25⟧) : ⟦P(1) = 31⟧, ⟦P(-1) = 31⟧, ⟦P(5) = 393775⟧, ⟦P(-5) = 393775⟧, ⟦P(25) = 152589843775⟧, ⟦P(-25) = 152589843775⟧. Aucun diviseur entier du terme constant n'annule ⟦P⟧ : la recherche d'une racine entière ne permet pas de conclure.On peut montrer que ⟦x^{8} + 5x^{4} + 25⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "titre": "Étape 1Différence de cubes"
    },
    {
@@ -4849,10 +4939,20 @@
  },
  "x^2 + y^2": {
   "au_depart": {
-   "progression": "Étape 1 / 1",
+   "progression": "Étape 1 / 2",
    "visibles": 1
   },
   "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Aucune méthode du coursAucune méthode du cours ne s'applique à ⟦x^{2} + y^{2}⟧ (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.On peut montrer que ⟦x^{2} + y^{2}⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
+    "titre": "Étape 1Aucune méthode du cours"
+   },
    {
     "classes": [
      "card",
@@ -4861,11 +4961,11 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "FactorisationNe se factorise pas⟦x^{2} + y^{2}⟧⟦x^{2} + y^{2}⟧ ne se factorise pas : c'est déjà sa forme la plus simple.⟦x^{2} + y^{2} = x^{2} + y^{2}⟧",
-    "titre": "FactorisationNe se factorise pas"
+    "texte": "FactorisationAucune méthode du cours⟦x^{2} + y^{2}⟧⟦x^{2} + y^{2} = x^{2} + y^{2}⟧",
+    "titre": "FactorisationAucune méthode du cours"
    }
   ],
-  "progression_finale": "Étape 1 / 1"
+  "progression_finale": "Étape 2 / 2"
  },
  "x^2 - 12": {
   "au_depart": {
@@ -5133,6 +5233,36 @@
     "tableaux": [],
     "texte": "FactorisationSomme-Produit⟦x^{2} + 5x - 14⟧⟦x^{2} + 5x - 14 = \\left(x - 2\\right)\\left(x + 7\\right)⟧",
     "titre": "FactorisationSomme-Produit"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "x^2+y^2": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Aucune méthode du coursAucune méthode du cours ne s'applique à ⟦x^{2} + y^{2}⟧ (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.On peut montrer que ⟦x^{2} + y^{2}⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
+    "titre": "Étape 1Aucune méthode du cours"
+   },
+   {
+    "classes": [
+     "card",
+     "cond",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "FactorisationAucune méthode du cours⟦x^{2} + y^{2}⟧⟦x^{2} + y^{2} = x^{2} + y^{2}⟧",
+    "titre": "FactorisationAucune méthode du cours"
    }
   ],
   "progression_finale": "Étape 2 / 2"
@@ -5488,10 +5618,20 @@
  },
  "x^3 - 2": {
   "au_depart": {
-   "progression": "Étape 1 / 1",
+   "progression": "Étape 1 / 2",
    "visibles": 1
   },
   "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Aucune méthode du coursOn cherche une racine entière de ⟦P(x) = x^{3} - 2⟧ parmi les diviseurs du terme constant (⟦\\pm1, \\pm2⟧) : ⟦P(1) = -1⟧, ⟦P(-1) = -3⟧, ⟦P(2) = 6⟧, ⟦P(-2) = -10⟧. Aucun diviseur entier du terme constant n'annule ⟦P⟧ : la recherche d'une racine entière ne permet pas de conclure.On peut montrer que ⟦x^{3} - 2⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
+    "titre": "Étape 1Aucune méthode du cours"
+   },
    {
     "classes": [
      "card",
@@ -5500,11 +5640,11 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "FactorisationNe se factorise pas⟦x^{3} - 2⟧⟦x^{3} - 2⟧ n'a pas de racine évidente : il ne se factorise pas davantage avec les méthodes du cours.⟦x^{3} - 2 = x^{3} - 2⟧",
-    "titre": "FactorisationNe se factorise pas"
+    "texte": "FactorisationAucune méthode du cours⟦x^{3} - 2⟧⟦x^{3} - 2 = x^{3} - 2⟧",
+    "titre": "FactorisationAucune méthode du cours"
    }
   ],
-  "progression_finale": "Étape 1 / 1"
+  "progression_finale": "Étape 2 / 2"
  },
  "x^3 - 3x^2 - x + 3": {
   "au_depart": {
@@ -5639,7 +5779,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Différence de cubesOn reconnaît une différence de deux cubes (produit remarquable ⟦A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)⟧) avec ⟦A=x⟧ et ⟦B=2y⟧ : ⟦x^{3} - 8y^{3} = \\left(x - 2y\\right)\\left(x^{2} + 2xy + 4y^{2}\\right)⟧.⟦x^{2} + 2xy + 4y^{2}⟧ ne se factorise pas davantage.",
+    "texte": "Étape 1Différence de cubesOn reconnaît une différence de deux cubes (produit remarquable ⟦A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)⟧) avec ⟦A=x⟧ et ⟦B=2y⟧ : ⟦x^{3} - 8y^{3} = \\left(x - 2y\\right)\\left(x^{2} + 2xy + 4y^{2}\\right)⟧.Aucune méthode du cours ne s'applique à ⟦x^{2} + 2xy + 4y^{2}⟧ (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.On peut montrer que ⟦x^{2} + 2xy + 4y^{2}⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "titre": "Étape 1Différence de cubes"
    },
    {
@@ -5696,6 +5836,36 @@
   ],
   "progression_finale": "Étape 3 / 3"
  },
+ "x^3-2": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Aucune méthode du coursOn cherche une racine entière de ⟦P(x) = x^{3} - 2⟧ parmi les diviseurs du terme constant (⟦\\pm1, \\pm2⟧) : ⟦P(1) = -1⟧, ⟦P(-1) = -3⟧, ⟦P(2) = 6⟧, ⟦P(-2) = -10⟧. Aucun diviseur entier du terme constant n'annule ⟦P⟧ : la recherche d'une racine entière ne permet pas de conclure.On peut montrer que ⟦x^{3} - 2⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
+    "titre": "Étape 1Aucune méthode du cours"
+   },
+   {
+    "classes": [
+     "card",
+     "cond",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "FactorisationAucune méthode du cours⟦x^{3} - 2⟧⟦x^{3} - 2 = x^{3} - 2⟧",
+    "titre": "FactorisationAucune méthode du cours"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
  "x^3-8y^3": {
   "au_depart": {
    "progression": "Étape 1 / 2",
@@ -5709,7 +5879,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Différence de cubesOn reconnaît une différence de deux cubes (produit remarquable ⟦A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)⟧) avec ⟦A=x⟧ et ⟦B=2y⟧ : ⟦x^{3} - 8y^{3} = \\left(x - 2y\\right)\\left(x^{2} + 2xy + 4y^{2}\\right)⟧.⟦x^{2} + 2xy + 4y^{2}⟧ ne se factorise pas davantage.",
+    "texte": "Étape 1Différence de cubesOn reconnaît une différence de deux cubes (produit remarquable ⟦A^3-B^3=(A-B)\\left(A^2+AB+B^2\\right)⟧) avec ⟦A=x⟧ et ⟦B=2y⟧ : ⟦x^{3} - 8y^{3} = \\left(x - 2y\\right)\\left(x^{2} + 2xy + 4y^{2}\\right)⟧.Aucune méthode du cours ne s'applique à ⟦x^{2} + 2xy + 4y^{2}⟧ (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.On peut montrer que ⟦x^{2} + 2xy + 4y^{2}⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "titre": "Étape 1Différence de cubes"
    },
    {
@@ -5848,10 +6018,20 @@
  },
  "x^4 + 1": {
   "au_depart": {
-   "progression": "Étape 1 / 1",
+   "progression": "Étape 1 / 2",
    "visibles": 1
   },
   "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Aucune méthode du coursOn cherche une racine entière de ⟦P(x) = x^{4} + 1⟧ parmi les diviseurs du terme constant (⟦\\pm1⟧) : ⟦P(1) = 2⟧, ⟦P(-1) = 2⟧. Aucun diviseur entier du terme constant n'annule ⟦P⟧ : la recherche d'une racine entière ne permet pas de conclure.On peut montrer que ⟦x^{4} + 1⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
+    "titre": "Étape 1Aucune méthode du cours"
+   },
    {
     "classes": [
      "card",
@@ -5860,11 +6040,11 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "FactorisationNe se factorise pas⟦x^{4} + 1⟧⟦x^{4} + 1⟧ n'a pas de racine évidente : il ne se factorise pas davantage avec les méthodes du cours.⟦x^{4} + 1 = x^{4} + 1⟧",
-    "titre": "FactorisationNe se factorise pas"
+    "texte": "FactorisationAucune méthode du cours⟦x^{4} + 1⟧⟦x^{4} + 1 = x^{4} + 1⟧",
+    "titre": "FactorisationAucune méthode du cours"
    }
   ],
-  "progression_finale": "Étape 1 / 1"
+  "progression_finale": "Étape 2 / 2"
  },
  "x^4 + 3x^3 - 8x - 24": {
   "au_depart": {
@@ -6209,7 +6389,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Différence de carrésOn reconnaît une différence de deux carrés (produit remarquable ⟦A^2-B^2=(A-B)(A+B)⟧) avec ⟦A=x^{2}⟧ et ⟦B=y⟧ : ⟦x^{4} - y^{2} = \\left(x^{2} - y\\right)\\left(x^{2} + y\\right)⟧.⟦x^{2} - y⟧ ne se factorise pas davantage.⟦x^{2} + y⟧ ne se factorise pas davantage.",
+    "texte": "Étape 1Différence de carrésOn reconnaît une différence de deux carrés (produit remarquable ⟦A^2-B^2=(A-B)(A+B)⟧) avec ⟦A=x^{2}⟧ et ⟦B=y⟧ : ⟦x^{4} - y^{2} = \\left(x^{2} - y\\right)\\left(x^{2} + y\\right)⟧.Aucune méthode du cours ne s'applique à ⟦x^{2} - y⟧ (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.On peut montrer que ⟦x^{2} - y⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.Aucune méthode du cours ne s'applique à ⟦x^{2} + y⟧ (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.On peut montrer que ⟦x^{2} + y⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "titre": "Étape 1Différence de carrés"
    },
    {
@@ -6309,7 +6489,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Cube d'un binômeOn reconnaît le cube d'un binôme (produit remarquable ⟦A^3+3A^2B+3AB^2+B^3=(A+B)^3⟧) avec ⟦A=xy⟧ et ⟦B=1⟧ : ⟦x^{3}y^{3} + 3x^{2}y^{2} + 3xy + 1 = \\left(xy + 1\\right)^{3}⟧.⟦xy + 1⟧ ne se factorise pas davantage.",
+    "texte": "Étape 2Cube d'un binômeOn reconnaît le cube d'un binôme (produit remarquable ⟦A^3+3A^2B+3AB^2+B^3=(A+B)^3⟧) avec ⟦A=xy⟧ et ⟦B=1⟧ : ⟦x^{3}y^{3} + 3x^{2}y^{2} + 3xy + 1 = \\left(xy + 1\\right)^{3}⟧.Aucune méthode du cours ne s'applique à ⟦xy + 1⟧ (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.On peut montrer que ⟦xy + 1⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "titre": "Étape 2Cube d'un binôme"
    },
    {
@@ -6409,7 +6589,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Différence de carrésOn reconnaît une différence de deux carrés (produit remarquable ⟦A^2-B^2=(A-B)(A+B)⟧) avec ⟦A=x^{4} + 2⟧ et ⟦B=2x^{2}⟧ : ⟦\\left(x^{4} + 2\\right)^{2} - \\left(2x^{2}\\right)^{2} = \\left[\\left(x^{4} + 2\\right) - 2x^{2}\\right] \\cdot \\left[\\left(x^{4} + 2\\right) + 2x^{2}\\right] = \\left(x^{4} + 2 - 2x^{2}\\right) \\cdot \\left(x^{4} + 2 + 2x^{2}\\right)⟧.⟦x^{4} + 2 - 2x^{2}⟧ n'a pas de racine évidente : il ne se factorise pas davantage avec les méthodes du cours.⟦x^{4} + 2 + 2x^{2}⟧ n'a pas de racine évidente : il ne se factorise pas davantage avec les méthodes du cours.",
+    "texte": "Étape 2Différence de carrésOn reconnaît une différence de deux carrés (produit remarquable ⟦A^2-B^2=(A-B)(A+B)⟧) avec ⟦A=x^{4} + 2⟧ et ⟦B=2x^{2}⟧ : ⟦\\left(x^{4} + 2\\right)^{2} - \\left(2x^{2}\\right)^{2} = \\left[\\left(x^{4} + 2\\right) - 2x^{2}\\right] \\cdot \\left[\\left(x^{4} + 2\\right) + 2x^{2}\\right] = \\left(x^{4} + 2 - 2x^{2}\\right) \\cdot \\left(x^{4} + 2 + 2x^{2}\\right)⟧.On cherche une racine entière de ⟦P(x) = x^{4} + 2 - 2x^{2}⟧ parmi les diviseurs du terme constant (⟦\\pm1, \\pm2⟧) : ⟦P(1) = 1⟧, ⟦P(-1) = 1⟧, ⟦P(2) = 10⟧, ⟦P(-2) = 10⟧. Aucun diviseur entier du terme constant n'annule ⟦P⟧ : la recherche d'une racine entière ne permet pas de conclure.On peut montrer que ⟦x^{4} + 2 - 2x^{2}⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.On cherche une racine entière de ⟦P(x) = x^{4} + 2 + 2x^{2}⟧ parmi les diviseurs du terme constant (⟦\\pm1, \\pm2⟧) : ⟦P(1) = 5⟧, ⟦P(-1) = 5⟧, ⟦P(2) = 26⟧, ⟦P(-2) = 26⟧. Aucun diviseur entier du terme constant n'annule ⟦P⟧ : la recherche d'une racine entière ne permet pas de conclure.On peut montrer que ⟦x^{4} + 2 + 2x^{2}⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "titre": "Étape 2Différence de carrés"
    },
    {
@@ -6719,7 +6899,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Somme de cubesOn reconnaît une somme de deux cubes (produit remarquable ⟦A^3+B^3=(A+B)\\left(A^2-AB+B^2\\right)⟧) avec ⟦A=z⟧ et ⟦B=2ab^{2}⟧ : ⟦z^{3} + 8a^{3}b^{6} = \\left(z + 2ab^{2}\\right)\\left(4a^{2}b^{4} - 2ab^{2}z + z^{2}\\right)⟧.⟦z + 2ab^{2}⟧ ne se factorise pas davantage.⟦4a^{2}b^{4} - 2ab^{2}z + z^{2}⟧ ne se factorise pas davantage.",
+    "texte": "Étape 1Somme de cubesOn reconnaît une somme de deux cubes (produit remarquable ⟦A^3+B^3=(A+B)\\left(A^2-AB+B^2\\right)⟧) avec ⟦A=z⟧ et ⟦B=2ab^{2}⟧ : ⟦z^{3} + 8a^{3}b^{6} = \\left(z + 2ab^{2}\\right)\\left(4a^{2}b^{4} - 2ab^{2}z + z^{2}\\right)⟧.Aucune méthode du cours ne s'applique à ⟦z + 2ab^{2}⟧ (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.On peut montrer que ⟦z + 2ab^{2}⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.Aucune méthode du cours ne s'applique à ⟦4a^{2}b^{4} - 2ab^{2}z + z^{2}⟧ (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.On peut montrer que ⟦4a^{2}b^{4} - 2ab^{2}z + z^{2}⟧ n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "titre": "Étape 1Somme de cubes"
    },
    {

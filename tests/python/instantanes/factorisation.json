@@ -118,11 +118,19 @@
     "type": "texte"
    },
    {
-    "html": "\\(ax - 2x + 5y\\) ne se factorise pas davantage.",
+    "html": "Aucune méthode du cours ne s'applique à \\(ax - 2x + 5y\\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.",
     "type": "texte"
    },
    {
-    "html": "\\(ax + 2x - y\\) ne se factorise pas davantage.",
+    "html": "On peut montrer que \\(ax - 2x + 5y\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
+    "type": "texte"
+   },
+   {
+    "html": "Aucune méthode du cours ne s'applique à \\(ax + 2x - y\\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(ax + 2x - y\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "type": "texte"
    }
   ],
@@ -152,7 +160,11 @@
     "type": "texte"
    },
    {
-    "html": "\\(uv^{2} - 1\\) ne se factorise pas davantage.",
+    "html": "Aucune méthode du cours ne s'applique à \\(uv^{2} - 1\\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(uv^{2} - 1\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "type": "texte"
    }
   ],
@@ -497,7 +509,11 @@
     "type": "texte"
    },
    {
-    "html": "\\(3x^{3} - 2x + 4\\) n'a pas de racine évidente : il ne se factorise pas davantage avec les méthodes du cours.",
+    "html": "On cherche une racine entière de \\(P(x) = 3x^{3} - 2x + 4\\) parmi les diviseurs du terme constant (\\(\\pm1, \\pm2, \\pm4\\)) : \\(P(1) = 5\\), \\(P(-1) = 3\\), \\(P(2) = 24\\), \\(P(-2) = -16\\), \\(P(4) = 188\\), \\(P(-4) = -180\\). Aucun diviseur entier du terme constant n'annule \\(P\\) : la recherche d'une racine entière ne permet pas de conclure.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(3x^{3} - 2x + 4\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "type": "texte"
    }
   ],
@@ -535,7 +551,11 @@
     "type": "texte"
    },
    {
-    "html": "\\(4a^{2} - 2ab + b^{2}\\) ne se factorise pas davantage.",
+    "html": "Aucune méthode du cours ne s'applique à \\(4a^{2} - 2ab + b^{2}\\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(4a^{2} - 2ab + b^{2}\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "type": "texte"
    }
   ],
@@ -990,7 +1010,11 @@
     "type": "texte"
    },
    {
-    "html": "\\(x^{2} - 2xy + 4y^{2}\\) ne se factorise pas davantage.",
+    "html": "Aucune méthode du cours ne s'applique à \\(x^{2} - 2xy + 4y^{2}\\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(x^{2} - 2xy + 4y^{2}\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "type": "texte"
    }
   ],
@@ -1013,6 +1037,27 @@
   "resultat_tex": "3\\left(x + 2\\right)",
   "secours": false
  },
+ "30x^3-19x^2+1": {
+  "etapes": [
+   {
+    "html": "On cherche une racine entière de \\(P(x) = 30x^{3} - 19x^{2} + 1\\) parmi les diviseurs du terme constant (\\(\\pm1\\)) : \\(P(1) = 12\\), \\(P(-1) = -48\\). Aucun diviseur entier du terme constant n'annule \\(P\\) : la recherche d'une racine entière ne permet pas de conclure.",
+    "type": "texte"
+   },
+   {
+    "html": "\\(30x^{3} - 19x^{2} + 1\\) se factorise quand même : \\(30x^{3} - 19x^{2} + 1 = \\left(2x - 1\\right)\\left(3x - 1\\right)\\left(5x + 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "Vérification : en développant, on retrouve \\(30x^{3} - 19x^{2} + 1\\) : \\(\\left(2x - 1\\right)\\left(3x - 1\\right)\\left(5x + 1\\right) = \\left(6x^{2} - 5x + 1\\right)\\left(5x + 1\\right) = 30x^{3} - 19x^{2} + 1\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "30x^{3} - 19x^{2} + 1",
+  "methode": "Aucune méthode du cours",
+  "ok": true,
+  "resultat_tex": "\\left(2x - 1\\right)\\left(3x - 1\\right)\\left(5x + 1\\right)",
+  "secours": false
+ },
  "3a^3b^4 - 12a^2b^3": {
   "etapes": [
    {
@@ -1020,7 +1065,11 @@
     "type": "texte"
    },
    {
-    "html": "\\(ab - 4\\) ne se factorise pas davantage.",
+    "html": "Aucune méthode du cours ne s'applique à \\(ab - 4\\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(ab - 4\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "type": "texte"
    }
   ],
@@ -1335,7 +1384,11 @@
     "type": "texte"
    },
    {
-    "html": "\\(9a^{4} + 3a^{2} + 1\\) n'a pas de racine évidente : il ne se factorise pas davantage avec les méthodes du cours.",
+    "html": "On cherche une racine entière de \\(P(a) = 9a^{4} + 3a^{2} + 1\\) parmi les diviseurs du terme constant (\\(\\pm1\\)) : \\(P(1) = 13\\), \\(P(-1) = 13\\). Aucun diviseur entier du terme constant n'annule \\(P\\) : la recherche d'une racine entière ne permet pas de conclure.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(9a^{4} + 3a^{2} + 1\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "type": "texte"
    }
   ],
@@ -1640,6 +1693,27 @@
   "resultat_tex": "\\left(2x + 3\\right)\\left(4x^{2} - 6x + 9\\right)",
   "secours": false
  },
+ "8x^3-12x^2-2x+3": {
+  "etapes": [
+   {
+    "html": "On groupe les termes : \\(8x^{3} - 12x^{2} - 2x + 3 = \\left(8x^{3} - 12x^{2}\\right) + \\left(-2x + 3\\right) = 4x^{2}\\left(2x - 3\\right) - \\left(2x - 3\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On met \\(\\left(2x - 3\\right)\\) en évidence (facteur commun à tous les termes) : \\(4x^{2}\\left(2x - 3\\right) - \\left(2x - 3\\right) = \\left(2x - 3\\right)\\left(4x^{2} - 1\\right)\\).",
+    "type": "texte"
+   },
+   {
+    "html": "On reconnaît une différence de deux carrés (produit remarquable \\(A^2-B^2=(A-B)(A+B)\\)) avec \\(A=2x\\) et \\(B=1\\) : \\(4x^{2} - 1 = \\left(2x - 1\\right)\\left(2x + 1\\right)\\).",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "8x^{3} - 12x^{2} - 2x + 3",
+  "methode": "Groupements · Mise en évidence · Différence de carrés",
+  "ok": true,
+  "resultat_tex": "\\left(2x - 3\\right)\\left(2x - 1\\right)\\left(2x + 1\\right)",
+  "secours": false
+ },
  "9(x - 3)^2 - 4": {
   "etapes": [
    {
@@ -1742,7 +1816,11 @@
     "type": "texte"
    },
    {
-    "html": "\\(3x^{2} + 4y\\) ne se factorise pas davantage.",
+    "html": "Aucune méthode du cours ne s'applique à \\(3x^{2} + 4y\\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(3x^{2} + 4y\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "type": "texte"
    }
   ],
@@ -1759,7 +1837,11 @@
     "type": "texte"
    },
    {
-    "html": "\\(1 + 2xy^{2} - 4x^{3}\\) ne se factorise pas davantage.",
+    "html": "Aucune méthode du cours ne s'applique à \\(1 + 2xy^{2} - 4x^{3}\\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(1 + 2xy^{2} - 4x^{3}\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "type": "texte"
    }
   ],
@@ -1862,12 +1944,16 @@
  "a^2 - b^2 + c^2": {
   "etapes": [
    {
-    "html": "\\(a^{2} - b^{2} + c^{2}\\) ne se factorise pas : c'est déjà sa forme la plus simple.",
+    "html": "Aucune méthode du cours ne s'applique à \\(a^{2} - b^{2} + c^{2}\\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(a^{2} - b^{2} + c^{2}\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "type": "texte"
    }
   ],
   "expr_tex": "a^{2} - b^{2} + c^{2}",
-  "methode": "Ne se factorise pas",
+  "methode": "Aucune méthode du cours",
   "ok": true,
   "resultat_tex": "a^{2} - b^{2} + c^{2}",
   "secours": false
@@ -1879,11 +1965,19 @@
     "type": "texte"
    },
    {
-    "html": "\\(ab - m\\) ne se factorise pas davantage.",
+    "html": "Aucune méthode du cours ne s'applique à \\(ab - m\\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.",
     "type": "texte"
    },
    {
-    "html": "\\(ab + m\\) ne se factorise pas davantage.",
+    "html": "On peut montrer que \\(ab - m\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
+    "type": "texte"
+   },
+   {
+    "html": "Aucune méthode du cours ne s'applique à \\(ab + m\\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(ab + m\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "type": "texte"
    }
   ],
@@ -1921,7 +2015,11 @@
     "type": "texte"
    },
    {
-    "html": "\\(a^{2} + \\frac{2ab}{3} + \\frac{4b^{2}}{9}\\) ne se factorise pas davantage.",
+    "html": "Aucune méthode du cours ne s'applique à \\(a^{2} + \\frac{2ab}{3} + \\frac{4b^{2}}{9}\\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(a^{2} + \\frac{2ab}{3} + \\frac{4b^{2}}{9}\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "type": "texte"
    }
   ],
@@ -1972,7 +2070,11 @@
     "type": "texte"
    },
    {
-    "html": "\\(a^{2} - 3b\\) ne se factorise pas davantage.",
+    "html": "Aucune méthode du cours ne s'applique à \\(a^{2} - 3b\\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(a^{2} - 3b\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "type": "texte"
    }
   ],
@@ -1993,11 +2095,19 @@
     "type": "texte"
    },
    {
-    "html": "\\(a^{2} + b^{2} - ab\\) ne se factorise pas davantage.",
+    "html": "Aucune méthode du cours ne s'applique à \\(a^{2} + b^{2} - ab\\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.",
     "type": "texte"
    },
    {
-    "html": "\\(a^{2} + b^{2} + ab\\) ne se factorise pas davantage.",
+    "html": "On peut montrer que \\(a^{2} + b^{2} - ab\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
+    "type": "texte"
+   },
+   {
+    "html": "Aucune méthode du cours ne s'applique à \\(a^{2} + b^{2} + ab\\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(a^{2} + b^{2} + ab\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "type": "texte"
    }
   ],
@@ -2118,7 +2228,11 @@
     "type": "texte"
    },
    {
-    "html": "\\(a^{2} + ab + b^{2}\\) ne se factorise pas davantage.",
+    "html": "Aucune méthode du cours ne s'applique à \\(a^{2} + ab + b^{2}\\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(a^{2} + ab + b^{2}\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "type": "texte"
    }
   ],
@@ -2289,7 +2403,7 @@
    }
   ],
   "expr_tex": "x + y",
-  "methode": "Ne se factorise pas",
+  "methode": "Rien à factoriser",
   "ok": true,
   "resultat_tex": "x + y",
   "secours": false
@@ -2365,11 +2479,19 @@
     "type": "texte"
    },
    {
-    "html": "\\(x^{4} - 5\\) n'a pas de racine évidente : il ne se factorise pas davantage avec les méthodes du cours.",
+    "html": "On cherche une racine entière de \\(P(x) = x^{4} - 5\\) parmi les diviseurs du terme constant (\\(\\pm1, \\pm5\\)) : \\(P(1) = -4\\), \\(P(-1) = -4\\), \\(P(5) = 620\\), \\(P(-5) = 620\\). Aucun diviseur entier du terme constant n'annule \\(P\\) : la recherche d'une racine entière ne permet pas de conclure.",
     "type": "texte"
    },
    {
-    "html": "\\(x^{8} + 5x^{4} + 25\\) n'a pas de racine évidente : il ne se factorise pas davantage avec les méthodes du cours.",
+    "html": "On peut montrer que \\(x^{4} - 5\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
+    "type": "texte"
+   },
+   {
+    "html": "On cherche une racine entière de \\(P(x) = x^{8} + 5x^{4} + 25\\) parmi les diviseurs du terme constant (\\(\\pm1, \\pm5, \\pm25\\)) : \\(P(1) = 31\\), \\(P(-1) = 31\\), \\(P(5) = 393775\\), \\(P(-5) = 393775\\), \\(P(25) = 152589843775\\), \\(P(-25) = 152589843775\\). Aucun diviseur entier du terme constant n'annule \\(P\\) : la recherche d'une racine entière ne permet pas de conclure.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(x^{8} + 5x^{4} + 25\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "type": "texte"
    }
   ],
@@ -2593,12 +2715,16 @@
  "x^2 + y^2": {
   "etapes": [
    {
-    "html": "\\(x^{2} + y^{2}\\) ne se factorise pas : c'est déjà sa forme la plus simple.",
+    "html": "Aucune méthode du cours ne s'applique à \\(x^{2} + y^{2}\\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(x^{2} + y^{2}\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "type": "texte"
    }
   ],
   "expr_tex": "x^{2} + y^{2}",
-  "methode": "Ne se factorise pas",
+  "methode": "Aucune méthode du cours",
   "ok": true,
   "resultat_tex": "x^{2} + y^{2}",
   "secours": false
@@ -2774,6 +2900,23 @@
   "methode": "Somme-Produit",
   "ok": true,
   "resultat_tex": "\\left(x - 2\\right)\\left(x + 7\\right)",
+  "secours": false
+ },
+ "x^2+y^2": {
+  "etapes": [
+   {
+    "html": "Aucune méthode du cours ne s'applique à \\(x^{2} + y^{2}\\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(x^{2} + y^{2}\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{2} + y^{2}",
+  "methode": "Aucune méthode du cours",
+  "ok": true,
+  "resultat_tex": "x^{2} + y^{2}",
   "secours": false
  },
  "x^2-1'000": {
@@ -2956,12 +3099,16 @@
  "x^3 - 2": {
   "etapes": [
    {
-    "html": "\\(x^{3} - 2\\) n'a pas de racine évidente : il ne se factorise pas davantage avec les méthodes du cours.",
+    "html": "On cherche une racine entière de \\(P(x) = x^{3} - 2\\) parmi les diviseurs du terme constant (\\(\\pm1, \\pm2\\)) : \\(P(1) = -1\\), \\(P(-1) = -3\\), \\(P(2) = 6\\), \\(P(-2) = -10\\). Aucun diviseur entier du terme constant n'annule \\(P\\) : la recherche d'une racine entière ne permet pas de conclure.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(x^{3} - 2\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "type": "texte"
    }
   ],
   "expr_tex": "x^{3} - 2",
-  "methode": "Ne se factorise pas",
+  "methode": "Aucune méthode du cours",
   "ok": true,
   "resultat_tex": "x^{3} - 2",
   "secours": false
@@ -3024,7 +3171,11 @@
     "type": "texte"
    },
    {
-    "html": "\\(x^{2} + 2xy + 4y^{2}\\) ne se factorise pas davantage.",
+    "html": "Aucune méthode du cours ne s'applique à \\(x^{2} + 2xy + 4y^{2}\\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(x^{2} + 2xy + 4y^{2}\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "type": "texte"
    }
   ],
@@ -3059,6 +3210,23 @@
   "resultat_tex": "\\left(x - 1\\right)\\left(x - 3\\right)\\left(x - 5\\right)",
   "secours": false
  },
+ "x^3-2": {
+  "etapes": [
+   {
+    "html": "On cherche une racine entière de \\(P(x) = x^{3} - 2\\) parmi les diviseurs du terme constant (\\(\\pm1, \\pm2\\)) : \\(P(1) = -1\\), \\(P(-1) = -3\\), \\(P(2) = 6\\), \\(P(-2) = -10\\). Aucun diviseur entier du terme constant n'annule \\(P\\) : la recherche d'une racine entière ne permet pas de conclure.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(x^{3} - 2\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
+    "type": "texte"
+   }
+  ],
+  "expr_tex": "x^{3} - 2",
+  "methode": "Aucune méthode du cours",
+  "ok": true,
+  "resultat_tex": "x^{3} - 2",
+  "secours": false
+ },
  "x^3-8y^3": {
   "etapes": [
    {
@@ -3066,7 +3234,11 @@
     "type": "texte"
    },
    {
-    "html": "\\(x^{2} + 2xy + 4y^{2}\\) ne se factorise pas davantage.",
+    "html": "Aucune méthode du cours ne s'applique à \\(x^{2} + 2xy + 4y^{2}\\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(x^{2} + 2xy + 4y^{2}\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "type": "texte"
    }
   ],
@@ -3146,12 +3318,16 @@
  "x^4 + 1": {
   "etapes": [
    {
-    "html": "\\(x^{4} + 1\\) n'a pas de racine évidente : il ne se factorise pas davantage avec les méthodes du cours.",
+    "html": "On cherche une racine entière de \\(P(x) = x^{4} + 1\\) parmi les diviseurs du terme constant (\\(\\pm1\\)) : \\(P(1) = 2\\), \\(P(-1) = 2\\). Aucun diviseur entier du terme constant n'annule \\(P\\) : la recherche d'une racine entière ne permet pas de conclure.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(x^{4} + 1\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "type": "texte"
    }
   ],
   "expr_tex": "x^{4} + 1",
-  "methode": "Ne se factorise pas",
+  "methode": "Aucune méthode du cours",
   "ok": true,
   "resultat_tex": "x^{4} + 1",
   "secours": false
@@ -3365,11 +3541,19 @@
     "type": "texte"
    },
    {
-    "html": "\\(x^{2} - y\\) ne se factorise pas davantage.",
+    "html": "Aucune méthode du cours ne s'applique à \\(x^{2} - y\\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.",
     "type": "texte"
    },
    {
-    "html": "\\(x^{2} + y\\) ne se factorise pas davantage.",
+    "html": "On peut montrer que \\(x^{2} - y\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
+    "type": "texte"
+   },
+   {
+    "html": "Aucune méthode du cours ne s'applique à \\(x^{2} + y\\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(x^{2} + y\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "type": "texte"
    }
   ],
@@ -3427,7 +3611,11 @@
     "type": "texte"
    },
    {
-    "html": "\\(xy + 1\\) ne se factorise pas davantage.",
+    "html": "Aucune méthode du cours ne s'applique à \\(xy + 1\\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(xy + 1\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "type": "texte"
    }
   ],
@@ -3481,11 +3669,19 @@
     "type": "texte"
    },
    {
-    "html": "\\(x^{4} + 2 - 2x^{2}\\) n'a pas de racine évidente : il ne se factorise pas davantage avec les méthodes du cours.",
+    "html": "On cherche une racine entière de \\(P(x) = x^{4} + 2 - 2x^{2}\\) parmi les diviseurs du terme constant (\\(\\pm1, \\pm2\\)) : \\(P(1) = 1\\), \\(P(-1) = 1\\), \\(P(2) = 10\\), \\(P(-2) = 10\\). Aucun diviseur entier du terme constant n'annule \\(P\\) : la recherche d'une racine entière ne permet pas de conclure.",
     "type": "texte"
    },
    {
-    "html": "\\(x^{4} + 2 + 2x^{2}\\) n'a pas de racine évidente : il ne se factorise pas davantage avec les méthodes du cours.",
+    "html": "On peut montrer que \\(x^{4} + 2 - 2x^{2}\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
+    "type": "texte"
+   },
+   {
+    "html": "On cherche une racine entière de \\(P(x) = x^{4} + 2 + 2x^{2}\\) parmi les diviseurs du terme constant (\\(\\pm1, \\pm2\\)) : \\(P(1) = 5\\), \\(P(-1) = 5\\), \\(P(2) = 26\\), \\(P(-2) = 26\\). Aucun diviseur entier du terme constant n'annule \\(P\\) : la recherche d'une racine entière ne permet pas de conclure.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(x^{4} + 2 + 2x^{2}\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "type": "texte"
    }
   ],
@@ -3653,11 +3849,19 @@
     "type": "texte"
    },
    {
-    "html": "\\(z + 2ab^{2}\\) ne se factorise pas davantage.",
+    "html": "Aucune méthode du cours ne s'applique à \\(z + 2ab^{2}\\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.",
     "type": "texte"
    },
    {
-    "html": "\\(4a^{2}b^{4} - 2ab^{2}z + z^{2}\\) ne se factorise pas davantage.",
+    "html": "On peut montrer que \\(z + 2ab^{2}\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
+    "type": "texte"
+   },
+   {
+    "html": "Aucune méthode du cours ne s'applique à \\(4a^{2}b^{4} - 2ab^{2}z + z^{2}\\) (pas de facteur commun, pas d'identité remarquable, pas de groupement) : on ne peut pas conclure avec ces méthodes.",
+    "type": "texte"
+   },
+   {
+    "html": "On peut montrer que \\(4a^{2}b^{4} - 2ab^{2}z + z^{2}\\) n'a pas de facteur à coefficients rationnels : on le garde tel quel.",
     "type": "texte"
    }
   ],

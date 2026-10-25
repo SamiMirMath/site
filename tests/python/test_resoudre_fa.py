@@ -56,7 +56,7 @@ class TestResoudreFactorisation(unittest.TestCase):
     def test_fa04_etape_sans_methode_suit_la_carte_precedente(self):
         s = rfa.resoudre("x^3-8y^3")
         self.assertEqual([c["badge"] for c in s["cartes"]], ["Différence de cubes", "Différence de cubes"])
-        self.assertIn("ne se factorise pas davantage", s["cartes"][0]["blocs"][-1]["html"])
+        self.assertIn("On peut montrer que", s["cartes"][0]["blocs"][-1]["html"])           # le facteur irréductible : justifié, dans la carte précédente
         s = rfa.resoudre("x^4-1")
         self.assertEqual([c["badge"] for c in s["cartes"][:-1]], ["Différence de carrés", "Non factorisable dans ℝ (Δ < 0)"])
 
@@ -110,6 +110,49 @@ class TestResoudreFactorisation(unittest.TestCase):
             fa._forme_sans_fraction = original
         self.assertGreaterEqual(len(vus), 10)
         self.assertEqual([c for c in vus if c != 1], [])
+
+    def test_fa11_jamais_de_conclusion_sans_justification(self):
+        """FA-11 : « ne se factorise pas davantage » et « sa forme la plus simple » n'apparaissent jamais ; ni « SymPy » ni « calcul exact » dans le texte de l'élève."""
+        interdits = ("ne se factorise pas davantage", "forme la plus simple", "ne se factorise pas :", "SymPy", "sympy", "calcul exact", "Calcul direct")
+        for entree in entrees_factorisation():
+            r = fa.factoriser_expr(entree)
+            if not r["ok"]:
+                continue
+            textes = " ".join(e["html"] for e in r["etapes"]) + " " + r["methode"]
+            for mot in interdits:
+                with self.subTest(entree=entree, mot=mot):
+                    self.assertNotIn(mot, textes)
+
+    def test_fa11_sans_racine_entiere(self):
+        """Degré ≥ 3 sans racine entière : les valeurs testées, « ne permet pas de conclure », puis « on peut montrer » ou « se factorise quand même » + vérification."""
+        r = fa.factoriser_expr("x^3-2")
+        self.assertEqual(r["methode"], "Aucune méthode du cours")
+        h = r["etapes"][0]["html"]
+        for valeur in (r"P(1) = -1", r"P(-1) = -3", r"P(2) = 6", r"P(-2) = -10"):
+            self.assertIn(valeur, h)
+        self.assertIn("Aucun diviseur entier du terme constant n'annule", h)
+        self.assertIn("ne permet pas de conclure", h)
+        self.assertIn("On peut montrer que", r["etapes"][1]["html"])
+        self.assertEqual(r["resultat_tex"], "x^{3} - 2")
+        r = fa.factoriser_expr("30x^3-19x^2+1")
+        self.assertEqual((r["methode"], r["resultat_tex"]), ("Aucune méthode du cours", r"\left(2x - 1\right)\left(3x - 1\right)\left(5x + 1\right)"))
+        self.assertIn("se factorise quand même", r["etapes"][1]["html"])
+        self.assertIn(r"Vérification : en développant, on retrouve", r["etapes"][2]["html"])
+        self.assertIn(r"= \left(6x^{2} - 5x + 1\right)\left(5x + 1\right) = 30x^{3} - 19x^{2} + 1", r["etapes"][2]["html"])
+        s = rfa.resoudre("x^3-2")
+        self.assertEqual([c["badge"] for c in s["cartes"]], ["Aucune méthode du cours", "Aucune méthode du cours"])
+
+    def test_fa11_8x3_se_factorise_par_groupements(self):
+        r = fa.factoriser_expr("8x^3-12x^2-2x+3")
+        self.assertTrue(r["methode"].startswith("Groupements"))
+        self.assertEqual(r["resultat_tex"], r"\left(2x - 3\right)\left(2x - 1\right)\left(2x + 1\right)")
+
+    def test_fa11_plusieurs_lettres(self):
+        r = fa.factoriser_expr("x^2+y^2")
+        self.assertEqual(r["methode"], "Aucune méthode du cours")
+        self.assertIn("Aucune méthode du cours ne s'applique", r["etapes"][0]["html"])
+        self.assertIn("On peut montrer que", r["etapes"][1]["html"])
+        self.assertEqual(fa.factoriser_expr("x+4")["methode"], "Rien à factoriser")
 
     def test_zero_evident_seulement_entier(self):
         """Pas de zéro p/q : un trinôme a ≠ 1 passe par le discriminant ; au-delà, on teste les diviseurs du terme constant."""

@@ -23,7 +23,7 @@ Amaudruz, *Algèbre 1M*, §2.4, exercices 2.11 à 2.16.
 - **Une carte par application de méthode** (validé, T21, 25.10.2026) : « Étape k » avec la méthode en badge, les étapes de
   cette application (chaque phrase écrit déjà l'expression traitée et l'expression obtenue), dans l'ordre du calcul ; des
   applications consécutives de la même méthode (x² − 4 puis x² − 9, deux différences de carrés) sont dans une même carte, et
-  une étape sans méthode propre (« ne se factorise pas davantage ») suit la carte précédente. La dernière carte
+  une étape sans méthode propre (un facteur dont on a justifié qu'il ne se factorise pas) suit la carte précédente. La dernière carte
   « Factorisation » (badge = toutes les méthodes) donne l'expression et la factorisation complète.
 - Exercices au hasard générés en Python, 4 niveaux (gabarits ci-dessous, acceptés le 14.10.2026, Q4).
 
@@ -55,6 +55,7 @@ changement de variable, mise en évidence composée.
 | FA-05 | `(x+1)^2-(x-1)^2` : méthode « Différence de carrés », rédigée [(x + 1) − (x − 1)] · [(x + 1) + (x − 1)] = 2 · 2x = 4x (A et B sont des sommes : on écrit les crochets tels quels, puis on réduit), pas « Déjà factorisé » ; de même (x+3)² − (x−1)² = 4 · (2x + 2) = 8(x + 1) (et non « degré 1 : rien à factoriser ») | [auto-py] |
 | FA-09 | Le zéro évident ne teste que les diviseurs entiers du terme constant (degré ≥ 3) ; un trinôme a ≠ 1 passe par le discriminant | [auto-py] |
 | FA-10 | Zéros rationnels p₁/q₁ et p₂/q₂ (discriminant) : après « a(x − p₁/q₁)(x − p₂/q₂) », le coefficient se découpe en q₁·q₂ (c = a/(q₁q₂) = 1 par le lemme de Gauss, coefficients premiers entre eux) : ex. 6(x + 1/3)(x − 3/2) = 3(x + 1/3) · 2(x − 3/2) = (3x + 1)(2x − 3) ; zéros irrationnels : on garde a(x − x₁)(x − x₂) | [auto-py] |
+| FA-11 | Jamais « ne se factorise pas davantage » ni « forme la plus simple » : une conclusion « on garde tel quel » est justifiée (Δ < 0 au degré 2 ; sinon « On peut montrer que … n'a pas de facteur à coefficients rationnels »). Degré ≥ 3 sans racine entière : on écrit les valeurs P(±d) pour les diviseurs d du terme constant (x³ − 2 : P(1) = −1, P(−1) = −3, P(2) = 6, P(−2) = −10), « Aucun diviseur entier du terme constant n'annule P : la recherche d'une racine entière ne permet pas de conclure », puis « On peut montrer que … » (irréductible) ou « … se factorise quand même : » + résultat + « Vérification : en développant, on retrouve … » avec le développement (30x³ − 19x² + 1 = (2x − 1)(3x − 1)(5x + 1)). Plusieurs lettres : « Aucune méthode du cours ne s'applique (…) : on ne peut pas conclure avec ces méthodes. » Badge « Aucune méthode du cours ». Jamais « SymPy » ni « calcul exact » dans le texte de l'élève | [auto-py] |
 | FA-06 | Saisie d'une fonction (ln, sqrt…) ou division par une lettre : message en français | [auto-py] |
 | FA-07 | Aucun calcul de la batterie FA-01 ne dépasse 2 s en natif (≈ 10 s dans Pyodide) | [auto-py] |
 | FA-08 | `resoudre()` (T12) respecte le schéma de sortie commun pour toute la batterie FA-01 : une carte finale (badge = méthode), aucun texte perdu, erreurs en français ; instantanés `instantanes/resoudre/factorisation.json` | [auto-py] (`test_resoudre_fa.py`) |
