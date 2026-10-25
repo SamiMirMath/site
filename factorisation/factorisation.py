@@ -1201,7 +1201,31 @@ def trinome_methodes(P, t, coeffs, ctx, T):
     for f in facteurs:
         e = sp.expand(sum(sp.Rational(c.numerator, c.denominator) * t ** k for k, c in enumerate(f["poly"])))
         out.append(Facteur(e, ctx.tex_poly(e), f["mult"]))
-    return combiner(ctx, sp.Rational(c_const.numerator, c_const.denominator), out)
+    const = sp.Rational(c_const.numerator, c_const.denominator)
+    sans = _forme_sans_fraction(ctx, t, T, v, const, out, [-F(f["poly"][0]) for f in facteurs]) if entiers and len(facteurs) == 2 else None
+    if sans:
+        return combiner(ctx, *sans)
+    return combiner(ctx, const, out)
+
+
+def _forme_sans_fraction(ctx, t, T, v, const, fractions, racines):
+    """Deux zéros rationnels distincts p₁/q₁ et p₂/q₂ : a(x − p₁/q₁)(x − p₂/q₂) = c(q₁x − p₁)(q₂x − p₂), avec c = a/(q₁q₂), entier
+    (lemme de Gauss : les coefficients sont premiers entre eux). Écrit les deux lignes et renvoie (c, facteurs), ou None s'il n'y a
+    aucune fraction à chasser (zéros entiers) ou si c n'est pas entier."""
+    sp = ctx.sp
+    r1, r2 = sorted(racines)
+    q1, q2 = r1.denominator, r2.denominator
+    c = F(int(const.p), int(const.q)) / (q1 * q2)
+    if (q1 == 1 and q2 == 1) or c.denominator != 1 or any(f.mult != 1 for f in fractions):
+        return None
+    L = [sp.expand(q * t - r.numerator) for q, r in ((q1, r1), (q2, r2))]
+    facts = [Facteur(e, ctx.tex_poly(e)) for e in L]
+    c = sp.Integer(c.numerator)
+    ctx.dire(rf"D'où \({T} = {tex_produit(ctx, const, fractions)}\) (on écrit \(a\left({v}-{v}_1\right)\left({v}-{v}_2\right)\)).")
+    ctx.dire(rf"Sans fraction : comme \({v}-\frac{{p}}{{q}} = \frac{{1}}{{q}}\left(q{v}-p\right)\), on met les dénominateurs en facteur : "
+             rf"\({tex_produit(ctx, const, fractions)} = \frac{{{qtex(F(int(const.p), int(const.q)))}}}{{{q1} \cdot {q2}}}"
+             rf"\left({facts[0].tex}\right)\left({facts[1].tex}\right) = {tex_produit(ctx, c, facts)}\).")
+    return c, facts
 
 
 def changement_variable(P, t, ctx, ecrits, monos, T, prof):

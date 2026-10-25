@@ -70,6 +70,22 @@ class TestResoudreFactorisation(unittest.TestCase):
         self.assertEqual((r["methode"], r["resultat_tex"], r["secours"]), ("Différence de carrés", "4x", False))
         self.assertEqual(fa.factoriser_expr("(x+2)^2-(x-2)^2")["resultat_tex"], "8x")
 
+    def test_fa10_forme_sans_fraction(self):
+        """FA-10 : zéros rationnels p/q : a(x − p₁/q₁)(x − p₂/q₂) = c(q₁x − p₁)(q₂x − p₂), c = a/(q₁q₂) entier ; zéros irrationnels : a(x − x₁)(x − x₂)."""
+        r = fa.factoriser_expr("6x^2-7x-3")
+        self.assertEqual(r["resultat_tex"], r"\left(3x + 1\right)\left(2x - 3\right)")
+        self.assertIn(r"6\left(x + \frac{1}{3}\right)\left(x - \frac{3}{2}\right) = \frac{6}{3 \cdot 2}", r["etapes"][-1]["html"])
+        self.assertEqual(fa.factoriser_expr("3x^2+2x-1")["resultat_tex"], r"\left(x + 1\right)\left(3x - 1\right)")
+        self.assertIn(r"\sqrt{2}", fa.factoriser_expr("x^2+4x+2")["resultat_tex"])           # irrationnels : a(x − x₁)(x − x₂)
+        self.assertNotIn("Sans fraction", " ".join(e["html"] for e in fa.factoriser_expr("x^2+4x+2")["etapes"]))
+        for p1, q1, p2, q2 in ((1, 3, 3, 2), (-5, 7, 2, 9), (4, 5, -3, 8), (1, 2, -1, 2), (7, 4, 5, 3), (-2, 3, -3, 5)):
+            with self.subTest(racines=(p1, q1, p2, q2)):
+                a, b, c = q1 * q2, -(p1 * q2 + p2 * q1), p1 * p2          # (q1 x − p1)(q2 x − p2), premiers entre eux si les fractions sont réduites
+                entree = f"{a}x^2 + {b}x + {c}".replace("+ -", "- ")
+                r = fa.factoriser_expr(entree)
+                self.assertNotIn("frac", r["resultat_tex"], entree)
+                self.assertFalse(r["secours"])
+
     def test_zero_evident_seulement_entier(self):
         """Pas de zéro p/q : un trinôme a ≠ 1 passe par le discriminant ; au-delà, on teste les diviseurs du terme constant."""
         for entree in ("6x^2-7x-3", "3x^2+2x-1", "2x^2+5x+2"):

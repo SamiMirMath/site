@@ -13,7 +13,7 @@ Amaudruz, *Algèbre 1M*, §2.4, exercices 2.11 à 2.16.
   2. identités remarquables (différence de carrés, carré parfait, somme/différence de cubes,
      cube d'un binôme) ;
   3. trinôme : Somme-Produit (a = 1), sinon formule du discriminant (pas de « zéro évident » p/q : on ne teste pas à la main
-     des valeurs fractionnaires, d'où a(x − x₁)(x − x₂) pour (2x + 1)(3x − 1), décision du 25.10.2026) ;
+     des valeurs fractionnaires, décision du 25.10.2026), puis écriture sans fraction c(q₁x − p₁)(q₂x − p₂) si les zéros sont rationnels (FA-10) ;
   4. changement de variable u = x^n ;
   5. groupements ;
   6. racine évidente et division (degré ≥ 3) : on teste les diviseurs entiers du terme constant, ± (jamais p/q) ;
@@ -54,6 +54,7 @@ changement de variable, mise en évidence composée.
 | FA-04 | Une carte par application de méthode : nombre de cartes = nombre de suites consécutives de même méthode + 1 (bilan) ; deux cartes voisines n'ont jamais la même méthode ; aucune étape perdue ni déplacée ; exemple x⁴ − 13x² + 36 : Changement de variable, Somme-Produit, Changement de variable, Différence de carrés, bilan | [auto-py] (`test_resoudre_fa.py`) + [auto-page] |
 | FA-05 | `(x+1)^2-(x-1)^2` : méthode « Différence de carrés » (A = x + 1, B = x − 1, produit 2 · 2x = 4x), pas « Déjà factorisé » | [auto-py] |
 | FA-09 | Le zéro évident ne teste que les diviseurs entiers du terme constant (degré ≥ 3) ; un trinôme a ≠ 1 passe par le discriminant | [auto-py] |
+| FA-10 | Zéros rationnels p₁/q₁ et p₂/q₂ (discriminant) : après « a(x − p₁/q₁)(x − p₂/q₂) », une dernière égalité sans fraction c(q₁x − p₁)(q₂x − p₂), c = a/(q₁q₂) entier (lemme de Gauss) ; ex. 6(x + 1/3)(x − 3/2) = (3x + 1)(2x − 3) ; zéros irrationnels : on garde a(x − x₁)(x − x₂) | [auto-py] |
 | FA-06 | Saisie d'une fonction (ln, sqrt…) ou division par une lettre : message en français | [auto-py] |
 | FA-07 | Aucun calcul de la batterie FA-01 ne dépasse 2 s en natif (≈ 10 s dans Pyodide) | [auto-py] |
 | FA-08 | `resoudre()` (T12) respecte le schéma de sortie commun pour toute la batterie FA-01 : une carte finale (badge = méthode), aucun texte perdu, erreurs en français ; instantanés `instantanes/resoudre/factorisation.json` | [auto-py] (`test_resoudre_fa.py`) |
