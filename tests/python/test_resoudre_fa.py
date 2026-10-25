@@ -80,7 +80,7 @@ class TestResoudreFactorisation(unittest.TestCase):
         """FA-10 : zéros rationnels p/q : a(x − p₁/q₁)(x − p₂/q₂) = c(q₁x − p₁)(q₂x − p₂), c = a/(q₁q₂) entier ; zéros irrationnels : a(x − x₁)(x − x₂)."""
         r = fa.factoriser_expr("6x^2-7x-3")
         self.assertEqual(r["resultat_tex"], r"\left(3x + 1\right)\left(2x - 3\right)")
-        self.assertIn(r"6\left(x + \frac{1}{3}\right)\left(x - \frac{3}{2}\right) = \frac{6}{3 \cdot 2}", r["etapes"][-1]["html"])
+        self.assertIn(r"6\left(x + \frac{1}{3}\right)\left(x - \frac{3}{2}\right) = 3\left(x + \frac{1}{3}\right) \cdot 2\left(x - \frac{3}{2}\right) = \left(3x + 1\right)\left(2x - 3\right)", r["etapes"][-1]["html"])
         self.assertEqual(fa.factoriser_expr("3x^2+2x-1")["resultat_tex"], r"\left(x + 1\right)\left(3x - 1\right)")
         self.assertIn(r"\sqrt{2}", fa.factoriser_expr("x^2+4x+2")["resultat_tex"])           # irrationnels : a(x − x₁)(x − x₂)
         self.assertNotIn("Sans fraction", " ".join(e["html"] for e in fa.factoriser_expr("x^2+4x+2")["etapes"]))
@@ -91,6 +91,25 @@ class TestResoudreFactorisation(unittest.TestCase):
                 r = fa.factoriser_expr(entree)
                 self.assertNotIn("frac", r["resultat_tex"], entree)
                 self.assertFalse(r["secours"])
+
+    def test_fa10_le_coefficient_restant_vaut_un(self):
+        """Lemme de Gauss : après avoir mis les dénominateurs dans les parenthèses, il ne reste aucun facteur (c = 1), sur toute la batterie."""
+        vus = []
+        original = fa._forme_sans_fraction
+
+        def espion(*a, **k):
+            r = original(*a, **k)
+            if r:
+                vus.append(int(r[0]))
+            return r
+        fa._forme_sans_fraction = espion
+        try:
+            for entree in entrees_factorisation():
+                fa.factoriser_expr(entree)
+        finally:
+            fa._forme_sans_fraction = original
+        self.assertGreaterEqual(len(vus), 10)
+        self.assertEqual([c for c in vus if c != 1], [])
 
     def test_zero_evident_seulement_entier(self):
         """Pas de zéro p/q : un trinôme a ≠ 1 passe par le discriminant ; au-delà, on teste les diviseurs du terme constant."""

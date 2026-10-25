@@ -847,7 +847,7 @@
       "type": "texte"
      },
      {
-      "html": "Sans fraction : comme \\(x-\\frac{p}{q} = \\frac{1}{q}\\left(qx-p\\right)\\), on met les dénominateurs en facteur : \\(2\\left(x - \\frac{1}{2}\\right)\\left(x - 4\\right) = \\frac{2}{2 \\cdot 1}\\left(2x - 1\\right)\\left(x - 4\\right) = \\left(2x - 1\\right)\\left(x - 4\\right)\\).",
+      "html": "Sans fraction : on met le dénominateur de chaque zéro dans sa parenthèse, \\(q\\left(x-\\frac{p}{q}\\right) = qx-p\\) ; le coefficient \\(2\\) vaut \\(2 \\cdot 1\\) : \\(2\\left(x - \\frac{1}{2}\\right)\\left(x - 4\\right) = 2\\left(x - \\frac{1}{2}\\right) \\cdot \\left(x - 4\\right) = \\left(2x - 1\\right)\\left(x - 4\\right)\\).",
       "style": "etape",
       "type": "texte"
      }
@@ -1408,7 +1408,7 @@
       "type": "texte"
      },
      {
-      "html": "Sans fraction : comme \\(u-\\frac{p}{q} = \\frac{1}{q}\\left(qu-p\\right)\\), on met les dénominateurs en facteur : \\(16\\left(u - 1\\right)\\left(u - \\frac{625}{16}\\right) = \\frac{16}{1 \\cdot 16}\\left(u - 1\\right)\\left(16u - 625\\right) = \\left(u - 1\\right)\\left(16u - 625\\right)\\).",
+      "html": "Sans fraction : on met le dénominateur de chaque zéro dans sa parenthèse, \\(q\\left(u-\\frac{p}{q}\\right) = qu-p\\) ; le coefficient \\(16\\) vaut \\(1 \\cdot 16\\) : \\(16\\left(u - 1\\right)\\left(u - \\frac{625}{16}\\right) = \\left(u - 1\\right) \\cdot 16\\left(u - \\frac{625}{16}\\right) = \\left(u - 1\\right)\\left(16u - 625\\right)\\).",
       "style": "etape",
       "type": "texte"
      },
@@ -1530,7 +1530,7 @@
       "type": "texte"
      },
      {
-      "html": "Sans fraction : comme \\(x-\\frac{p}{q} = \\frac{1}{q}\\left(qx-p\\right)\\), on met les dénominateurs en facteur : \\(17\\left(x + 17\\right)\\left(x - \\frac{1}{17}\\right) = \\frac{17}{1 \\cdot 17}\\left(x + 17\\right)\\left(17x - 1\\right) = \\left(x + 17\\right)\\left(17x - 1\\right)\\).",
+      "html": "Sans fraction : on met le dénominateur de chaque zéro dans sa parenthèse, \\(q\\left(x-\\frac{p}{q}\\right) = qx-p\\) ; le coefficient \\(17\\) vaut \\(1 \\cdot 17\\) : \\(17\\left(x + 17\\right)\\left(x - \\frac{1}{17}\\right) = \\left(x + 17\\right) \\cdot 17\\left(x - \\frac{1}{17}\\right) = \\left(x + 17\\right)\\left(17x - 1\\right)\\).",
       "style": "etape",
       "type": "texte"
      }
@@ -1676,7 +1676,7 @@
       "type": "texte"
      },
      {
-      "html": "Sans fraction : comme \\(u-\\frac{p}{q} = \\frac{1}{q}\\left(qu-p\\right)\\), on met les dénominateurs en facteur : \\(27\\left(u + 8\\right)\\left(u - \\frac{1}{27}\\right) = \\frac{27}{1 \\cdot 27}\\left(u + 8\\right)\\left(27u - 1\\right) = \\left(u + 8\\right)\\left(27u - 1\\right)\\).",
+      "html": "Sans fraction : on met le dénominateur de chaque zéro dans sa parenthèse, \\(q\\left(u-\\frac{p}{q}\\right) = qu-p\\) ; le coefficient \\(27\\) vaut \\(1 \\cdot 27\\) : \\(27\\left(u + 8\\right)\\left(u - \\frac{1}{27}\\right) = \\left(u + 8\\right) \\cdot 27\\left(u - \\frac{1}{27}\\right) = \\left(u + 8\\right)\\left(27u - 1\\right)\\).",
       "style": "etape",
       "type": "texte"
      },
@@ -2315,7 +2315,7 @@
       "type": "texte"
      },
      {
-      "html": "Sans fraction : comme \\(x-\\frac{p}{q} = \\frac{1}{q}\\left(qx-p\\right)\\), on met les dénominateurs en facteur : \\(2\\left(x + \\frac{1}{2}\\right)\\left(x - 1\\right) = \\frac{2}{2 \\cdot 1}\\left(2x + 1\\right)\\left(x - 1\\right) = \\left(2x + 1\\right)\\left(x - 1\\right)\\).",
+      "html": "Sans fraction : on met le dénominateur de chaque zéro dans sa parenthèse, \\(q\\left(x-\\frac{p}{q}\\right) = qx-p\\) ; le coefficient \\(2\\) vaut \\(2 \\cdot 1\\) : \\(2\\left(x + \\frac{1}{2}\\right)\\left(x - 1\\right) = 2\\left(x + \\frac{1}{2}\\right) \\cdot \\left(x - 1\\right) = \\left(2x + 1\\right)\\left(x - 1\\right)\\).",
       "style": "etape",
       "type": "texte"
      }
@@ -2787,7 +2787,7 @@
       "type": "texte"
      },
      {
-      "html": "Sans fraction : comme \\(x-\\frac{p}{q} = \\frac{1}{q}\\left(qx-p\\right)\\), on met les dénominateurs en facteur : \\(40\\left(x + \\frac{7}{8}\\right)\\left(x - \\frac{4}{5}\\right) = \\frac{40}{8 \\cdot 5}\\left(8x + 7\\right)\\left(5x - 4\\right) = \\left(8x + 7\\right)\\left(5x - 4\\right)\\).",
+      "html": "Sans fraction : on met le dénominateur de chaque zéro dans sa parenthèse, \\(q\\left(x-\\frac{p}{q}\\right) = qx-p\\) ; le coefficient \\(40\\) vaut \\(8 \\cdot 5\\) : \\(40\\left(x + \\frac{7}{8}\\right)\\left(x - \\frac{4}{5}\\right) = 8\\left(x + \\frac{7}{8}\\right) \\cdot 5\\left(x - \\frac{4}{5}\\right) = \\left(8x + 7\\right)\\left(5x - 4\\right)\\).",
       "style": "etape",
       "type": "texte"
      }
@@ -3067,7 +3067,7 @@
       "type": "texte"
      },
      {
-      "html": "Sans fraction : comme \\(z-\\frac{p}{q} = \\frac{1}{q}\\left(qz-p\\right)\\), on met les dénominateurs en facteur : \\(4\\left(z + 1\\right)\\left(z + \\frac{1}{4}\\right) = \\frac{4}{1 \\cdot 4}\\left(z + 1\\right)\\left(4z + 1\\right) = \\left(z + 1\\right)\\left(4z + 1\\right)\\).",
+      "html": "Sans fraction : on met le dénominateur de chaque zéro dans sa parenthèse, \\(q\\left(z-\\frac{p}{q}\\right) = qz-p\\) ; le coefficient \\(4\\) vaut \\(1 \\cdot 4\\) : \\(4\\left(z + 1\\right)\\left(z + \\frac{1}{4}\\right) = \\left(z + 1\\right) \\cdot 4\\left(z + \\frac{1}{4}\\right) = \\left(z + 1\\right)\\left(4z + 1\\right)\\).",
       "style": "etape",
       "type": "texte"
      }
@@ -3223,7 +3223,7 @@
       "type": "texte"
      },
      {
-      "html": "Sans fraction : comme \\(u-\\frac{p}{q} = \\frac{1}{q}\\left(qu-p\\right)\\), on met les dénominateurs en facteur : \\(64\\left(u - \\frac{27}{64}\\right)\\left(u - 1\\right) = \\frac{64}{64 \\cdot 1}\\left(64u - 27\\right)\\left(u - 1\\right) = \\left(64u - 27\\right)\\left(u - 1\\right)\\).",
+      "html": "Sans fraction : on met le dénominateur de chaque zéro dans sa parenthèse, \\(q\\left(u-\\frac{p}{q}\\right) = qu-p\\) ; le coefficient \\(64\\) vaut \\(64 \\cdot 1\\) : \\(64\\left(u - \\frac{27}{64}\\right)\\left(u - 1\\right) = 64\\left(u - \\frac{27}{64}\\right) \\cdot \\left(u - 1\\right) = \\left(64u - 27\\right)\\left(u - 1\\right)\\).",
       "style": "etape",
       "type": "texte"
      },
@@ -3427,7 +3427,7 @@
       "type": "texte"
      },
      {
-      "html": "Sans fraction : comme \\(x-\\frac{p}{q} = \\frac{1}{q}\\left(qx-p\\right)\\), on met les dénominateurs en facteur : \\(6\\left(x + \\frac{1}{2}\\right)\\left(x + \\frac{1}{3}\\right) = \\frac{6}{2 \\cdot 3}\\left(2x + 1\\right)\\left(3x + 1\\right) = \\left(2x + 1\\right)\\left(3x + 1\\right)\\).",
+      "html": "Sans fraction : on met le dénominateur de chaque zéro dans sa parenthèse, \\(q\\left(x-\\frac{p}{q}\\right) = qx-p\\) ; le coefficient \\(6\\) vaut \\(2 \\cdot 3\\) : \\(6\\left(x + \\frac{1}{2}\\right)\\left(x + \\frac{1}{3}\\right) = 2\\left(x + \\frac{1}{2}\\right) \\cdot 3\\left(x + \\frac{1}{3}\\right) = \\left(2x + 1\\right)\\left(3x + 1\\right)\\).",
       "style": "etape",
       "type": "texte"
      }
@@ -3522,7 +3522,7 @@
       "type": "texte"
      },
      {
-      "html": "Sans fraction : comme \\(x-\\frac{p}{q} = \\frac{1}{q}\\left(qx-p\\right)\\), on met les dénominateurs en facteur : \\(6\\left(x + \\frac{1}{3}\\right)\\left(x - \\frac{3}{2}\\right) = \\frac{6}{3 \\cdot 2}\\left(3x + 1\\right)\\left(2x - 3\\right) = \\left(3x + 1\\right)\\left(2x - 3\\right)\\).",
+      "html": "Sans fraction : on met le dénominateur de chaque zéro dans sa parenthèse, \\(q\\left(x-\\frac{p}{q}\\right) = qx-p\\) ; le coefficient \\(6\\) vaut \\(3 \\cdot 2\\) : \\(6\\left(x + \\frac{1}{3}\\right)\\left(x - \\frac{3}{2}\\right) = 3\\left(x + \\frac{1}{3}\\right) \\cdot 2\\left(x - \\frac{3}{2}\\right) = \\left(3x + 1\\right)\\left(2x - 3\\right)\\).",
       "style": "etape",
       "type": "texte"
      }
@@ -3617,7 +3617,7 @@
       "type": "texte"
      },
      {
-      "html": "Sans fraction : comme \\(u-\\frac{p}{q} = \\frac{1}{q}\\left(qu-p\\right)\\), on met les dénominateurs en facteur : \\(7\\left(u + \\frac{2}{7}\\right)\\left(u - 9\\right) = \\frac{7}{7 \\cdot 1}\\left(7u + 2\\right)\\left(u - 9\\right) = \\left(7u + 2\\right)\\left(u - 9\\right)\\).",
+      "html": "Sans fraction : on met le dénominateur de chaque zéro dans sa parenthèse, \\(q\\left(u-\\frac{p}{q}\\right) = qu-p\\) ; le coefficient \\(7\\) vaut \\(7 \\cdot 1\\) : \\(7\\left(u + \\frac{2}{7}\\right)\\left(u - 9\\right) = 7\\left(u + \\frac{2}{7}\\right) \\cdot \\left(u - 9\\right) = \\left(7u + 2\\right)\\left(u - 9\\right)\\).",
       "style": "etape",
       "type": "texte"
      },

@@ -1224,9 +1224,9 @@ def trinome_methodes(P, t, coeffs, ctx, T):
 
 
 def _forme_sans_fraction(ctx, t, T, v, const, fractions, racines):
-    """Deux zéros rationnels distincts p₁/q₁ et p₂/q₂ : a(x − p₁/q₁)(x − p₂/q₂) = c(q₁x − p₁)(q₂x − p₂), avec c = a/(q₁q₂), entier
-    (lemme de Gauss : les coefficients sont premiers entre eux). Écrit les deux lignes et renvoie (c, facteurs), ou None s'il n'y a
-    aucune fraction à chasser (zéros entiers) ou si c n'est pas entier."""
+    """Deux zéros rationnels distincts p₁/q₁ et p₂/q₂ : a(x − p₁/q₁)(x − p₂/q₂) = c·q₁(x − p₁/q₁)·q₂(x − p₂/q₂) = c(q₁x − p₁)(q₂x − p₂),
+    avec a = c·q₁q₂ ; c vaut ±1 (lemme de Gauss : les coefficients sont premiers entre eux), donc 1 car a > 0. Écrit les deux lignes et
+    renvoie (c, facteurs), ou None s'il n'y a aucune fraction à chasser (zéros entiers) ou si c n'est pas entier."""
     sp = ctx.sp
     r1, r2 = sorted(racines)
     q1, q2 = r1.denominator, r2.denominator
@@ -1236,10 +1236,13 @@ def _forme_sans_fraction(ctx, t, T, v, const, fractions, racines):
     L = [sp.expand(q * t - r.numerator) for q, r in ((q1, r1), (q2, r2))]
     facts = [Facteur(e, ctx.tex_poly(e)) for e in L]
     c = sp.Integer(c.numerator)
+    morceaux = [(rf"{q}" if q != 1 else "") + rf"\left({f.tex}\right)" for q, f in ((q1, fractions[0]), (q2, fractions[1]))]
     ctx.dire(rf"D'où \({T} = {tex_produit(ctx, const, fractions)}\) (on écrit \(a\left({v}-{v}_1\right)\left({v}-{v}_2\right)\)).")
-    ctx.dire(rf"Sans fraction : comme \({v}-\frac{{p}}{{q}} = \frac{{1}}{{q}}\left(q{v}-p\right)\), on met les dénominateurs en facteur : "
-             rf"\({tex_produit(ctx, const, fractions)} = \frac{{{qtex(F(int(const.p), int(const.q)))}}}{{{q1} \cdot {q2}}}"
-             rf"\left({facts[0].tex}\right)\left({facts[1].tex}\right) = {tex_produit(ctx, c, facts)}\).")
+    a_tex = qtex(F(int(const.p), int(const.q)))
+    egal = tex_produit(ctx, const, fractions)
+    ctx.dire(rf"Sans fraction : on met le dénominateur de chaque zéro dans sa parenthèse, \(q\left({v}-\frac{{p}}{{q}}\right) = q{v}-p\) ; "
+             rf"le coefficient \({a_tex}\) vaut \({q1} \cdot {q2}\)" + ("" if c == 1 else rf" (et le facteur restant \({c}\))")
+             + rf" : \({egal} = {'' if c == 1 else f'{c} \\cdot '}{morceaux[0]} \cdot {morceaux[1]} = {tex_produit(ctx, c, facts)}\).")
     return c, facts
 
 
