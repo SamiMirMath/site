@@ -207,7 +207,7 @@ def analyser(entree):
     if "=" in s:
         gauche, _, droite = s.partition("=")
         if droite.strip() not in ("", "0"):
-            raise ErreurSaisie("Écris seulement l'expression à factoriser (sans « = »).")
+            raise ErreurSaisie("Écrivez seulement l'expression à factoriser (sans « = »).")
         s = gauche
     if _FONCTIONS.search(s):
         raise ErreurSaisie("Pas de fonction ici (ln, exp, racine…) : seulement des polynômes, "
@@ -1709,7 +1709,7 @@ def _factoriser(entree):
     sp = charger_sympy()
     if sp is None:
         return {"ok": False, "erreur": "Le moteur de calcul est encore en cours de chargement, "
-                "réessaie dans un instant."}, None
+                "réessayez dans un instant."}, None
     try:
         arbre = analyser(entree)
         lettres = sorted(lettres_arbre(arbre))

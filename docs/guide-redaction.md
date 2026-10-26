@@ -78,6 +78,13 @@ puissance) », « (ln x)' = 1/x (règle de base) », règle du produit, du quoti
 Seules les opérations neutres sont supprimées : jamais « + 0 », « − 0 », « · 1 », « 1 · » ni équivalents
 (u'(x) = 8x, pas 8x + 0). u, u', v, v' sur une ligne ; l'étape délicate (chasser une racine du numérateur) est écrite.
 
+**R12. Vouvoiement.** L'enseignant vouvoie ses élèves : tout texte qui leur est destiné vouvoie — messages d'erreur
+(« Écrivez une équation », « Ouvrez une parenthèse : ln(x). », « Choisissez une autre lettre »), invites des pages (« Cliquez sur … »,
+« à résoudre vous-même »), accroches, rappels de méthode, boutons. Jamais tu, ton, ta, tes, toi, ni impératif en -e ou -s
+(« choisis », « écris », « ouvre », « mets », « clique », « réessaie »). Le corrigé reste à la forme impersonnelle (« on », infinitif).
+Vérifié par `tests/python/test_vocabulaire.py` (`TestVouvoiement` : littéraux des moteurs, pages, `commun/*.js`, registre ;
+les corrigés de tous les instantanés) avec le détecteur `aides_sortie.TUTOIEMENT`, qui ne signale un impératif en -e qu'en début de phrase (« Utilise la règle »), jamais « on utilise la règle ».
+
 Inchangé : interdiction des équivalents, phrase de repli, virgule décimale, garde-fou des valeurs.
 
 ---

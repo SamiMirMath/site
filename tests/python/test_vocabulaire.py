@@ -13,6 +13,7 @@ import etude_complete as ec
 import factorisation as fa
 import limites_asymptotes as la
 from cas import CAS_LIMITES, entrees_page, entrees_factorisation
+from aides_sortie import TUTOIEMENT, chaines_litterales
 
 INTERDITS = re.compile(r"calcul formel|sympy|transcend|dichotom|exacte simple|valeurs? approchée|moteur python|erreur du moteur"
                        r"|erreur interne|formel|∼|~|\\sim|équivalent|se comporte comme", re.I)
@@ -38,6 +39,8 @@ class TestVocabulaireEleve(unittest.TestCase):
         for t in chaines(o):
             m = INTERDITS.search(t)
             self.assertIsNone(m, f"{ou} : « {m.group(0) if m else ''} » dans : {t[:160]}")
+            m = TUTOIEMENT.search(t)
+            self.assertIsNone(m, f"{ou} : tutoiement « {m.group(0).strip() if m else ''} » dans : {t[:160]}")
 
     def test_instantanes(self):
         for nom in sorted(os.path.relpath(os.path.join(d, n), DOSSIER_INSTANTANES)
@@ -69,6 +72,53 @@ class TestVocabulaireEleve(unittest.TestCase):
         c = res["conditions"][0]
         self.assertEqual(c["etapes"][0]["html"], "Cette condition n'a pas pu être résolue automatiquement.")
         self.assertIn("boom interne", c["detail"])
+
+
+class TestVouvoiement(unittest.TestCase):
+    """L'enseignant vouvoie ses élèves : aucun texte destiné à l'élève (messages d'erreur, corrigés, pages, rappels de méthode) ne tutoie.
+    Détecteur : aides_sortie.TUTOIEMENT (tu/ton/ta/tes/toi, impératifs « choisis », « ouvre », « mets »…, impératifs en début de phrase)."""
+
+    DOSSIERS_MOTEURS = ["ensemble-definition", "derivee-variations", "limites-asymptotes", "etude-complete", "factorisation",
+                        "exponentielles-logarithmes", "moteur"]
+    PAS_UN_TEXTE_ELEVE = {"construire_roues.py"}          # script de construction des roues : aucun texte pour l'élève
+
+    def fichiers_python(self):
+        for dossier in self.DOSSIERS_MOTEURS:
+            for nom in sorted(os.listdir(os.path.join(RACINE, dossier))):
+                if nom.endswith(".py") and nom not in self.PAS_UN_TEXTE_ELEVE:
+                    yield os.path.join(RACINE, dossier, nom)
+
+    def test_litteraux_des_moteurs(self):
+        """Tout littéral texte des moteurs (hors docstrings) : messages d'erreur, phrases du corrigé, y compris celles qu'aucune entrée de
+        test ne fait apparaître."""
+        vus = 0
+        for chemin in self.fichiers_python():
+            for ligne, texte in chaines_litterales(chemin):
+                vus += 1
+                with self.subTest(fichier=os.path.relpath(chemin, RACINE), ligne=ligne):
+                    m = TUTOIEMENT.search(texte)
+                    self.assertIsNone(m, f"« {m.group(0).strip() if m else ''} » dans : {texte[:160]}")
+        self.assertGreater(vus, 1000)
+
+    def test_pages_et_textes_communs(self):
+        fichiers = ["index.html"] + [os.path.join(d, "index.html") for d in sorted(os.listdir(RACINE))
+                                      if os.path.isfile(os.path.join(RACINE, d, "index.html"))]
+        fichiers += [os.path.join("commun", n) for n in sorted(os.listdir(os.path.join(RACINE, "commun"))) if n.endswith(".js")]
+        for f in fichiers:
+            with self.subTest(fichier=f):
+                texte = texte_visible(os.path.join(RACINE, f))
+                attributs = " ".join(re.findall(r'(?:placeholder|aria-label|title|alt)="([^"]*)"', texte))
+                texte = re.sub(r"<[^>]*>", " ", texte) + "\n" + attributs
+                for ligne in texte.splitlines():
+                    m = TUTOIEMENT.search(ligne)
+                    self.assertIsNone(m, f"« {m.group(0).strip() if m else ''} » dans : {ligne.strip()[:200]}")
+
+    def test_registre(self):
+        with open(os.path.join(RACINE, "commun", "registre.json"), encoding="utf-8") as f:
+            registre = json.load(f)
+        for o in registre["outils"]:
+            for champ in ("titre", "description"):
+                self.assertIsNone(TUTOIEMENT.search(o[champ]), o[champ])
 
 
 def texte_visible(chemin):
