@@ -1505,16 +1505,29 @@ def _classe(n):
     return "log" if _contient_log(n) else "poly"
 
 
+def _est_polynome(n):
+    """Vrai si n est un polynôme en l'inconnue, de degré quelconque : x³ + 1, 2x − 5."""
+    if isinstance(n, (Nb, Var)):
+        return True
+    if isinstance(n, Neg):
+        return _est_polynome(n.a)
+    if isinstance(n, Op):
+        if n.op == "/":
+            return _est_polynome(n.a) and not variables(n.b)
+        return _est_polynome(n.a) and _est_polynome(n.b)
+    if isinstance(n, Pow):
+        k = _const(n.b)
+        return _est_polynome(n.a) and k is not None and k.denominator == 1 and 0 <= k <= 64
+    return False
+
+
 def _hors_arbre(n, nul=False):
-    """Vrai si l'arbre contient une forme sans méthode dans le cours : l'inconnue dans une base et dans un exposant (x^x), un exposant qui n'est pas
-    un polynôme de degré 2 au plus (2^(x³), 2^√x), une exponentielle multipliée ou divisée par un facteur en x (x · 2^x, sauf produit égal à 0),
-    une somme de deux exponentielles de bases différentes (2^x + 3^x)."""
+    """Vrai si l'arbre contient une forme sans méthode dans le cours : l'inconnue dans une base et dans un exposant (x^x), un exposant qui n'est
+    pas un polynôme (2^√x), une exponentielle multipliée ou divisée par un facteur en x (x · 2^x, sauf produit égal à 0), une somme de deux
+    exponentielles de bases différentes (2^x + 3^x). Un exposant polynomial de degré 3 (2^(x³) = 8) n'est pas hors programme : le logarithme
+    donne une équation du 3ᵉ degré, que l'outil ne traite pas encore."""
     if isinstance(n, Pow) and variables(n.b):
-        if variables(n.a):
-            return True
-        try:
-            _poly(n.b, None)
-        except _Hors:
+        if variables(n.a) or not _est_polynome(n.b):
             return True
     if isinstance(n, Op) and n.op in "*/":
         facteurs = _aplatir(n) if n.op == "*" else [n.a, n.b]

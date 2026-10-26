@@ -1109,9 +1109,9 @@ class TestBasesDifferentes(unittest.TestCase):
 class TestMessagesNonResolu(unittest.TestCase):
     """EL-11 : deux messages. « ne se résout pas avec les méthodes du cours » seulement pour un vrai hors-programme ;
     « ne traite pas encore » pour une forme du programme que l'outil ne gère pas encore."""
-    HORS_PROGRAMME = ["x*2^x=8", "2^x+3^x=5", "x^x=4", "2^(x^3)=8", "2^x=x+1", "2^(sqrt(x))=4", "x/2^x=1", "x*e^x=1", "2^x=3^x+x"]
+    HORS_PROGRAMME = ["x*2^x=8", "2^x+3^x=5", "x^x=4", "2^x=x+1", "2^(sqrt(x))=4", "2^(1/x)=4", "x/2^x=1", "x*e^x=1", "2^x=3^x+x"]
     PAS_ENCORE = ["log(x)=2", "ln(x)=3", "e^x=e^3", "-2^x=-3^(x+1)", "e^x=e^(x+1)", "10^x*(x-4)=0", "2^x+2^(x+1)=12", "e^x+e^(-x)=3",
-                  "2^(x^2)=5", "log(x)+log(x-1)=1", "x^2=4", "2x+1=9"]
+                  "2^(x^2)=5", "log(x)+log(x-1)=1", "x^2=4", "2x+1=9", "2^(x^3)=8", "2^(x^3)=3^x", "5^(x^3+1)=7"]
 
     def message(self, saisie):
         s = el.analyser_saisie(saisie)
