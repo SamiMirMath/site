@@ -880,10 +880,46 @@ def _facteurs(n, x):
     return [_facteur(f, x) for f in _aplatir(n)]
 
 
+_DECIMAUX = False        # vrai pendant la résolution d'un énoncé qui contient un décimal (voir _avec_decimaux)
+
+
+def _a_des_decimaux(n):
+    """Vrai si l'arbre contient un nombre écrit en décimal (0,7 ; 1,045)."""
+    if isinstance(n, Nb):
+        return n.dec is not None
+    enfants = [getattr(n, nom, None) for nom in getattr(n, "__slots__", ()) if nom != "nom"]
+    return any(_a_des_decimaux(e) for e in enfants if isinstance(e, Noeud))
+
+
+def _avec_decimaux(methode):
+    """Pendant l'appel, `_nb_exact` écrit en décimal fini (1,9025 ; 0,27) les valeurs calculées à partir d'un énoncé qui contient un décimal."""
+    def appel(*args):
+        global _DECIMAUX
+        avant, _DECIMAUX = _DECIMAUX, _DECIMAUX or any(_a_des_decimaux(a) for a in args if isinstance(a, Noeud))
+        try:
+            return methode(*args)
+        finally:
+            _DECIMAUX = avant
+    appel.__name__, appel.__doc__ = methode.__name__, methode.__doc__
+    return appel
+
+
 def _nb_exact(v):
-    """Nb(v) : toute valeur exacte calculée s'écrit en fraction (5/2, 761/400, 1/10), jamais en décimal ; les décimaux écrits dans l'énoncé
-    gardent leur écriture (Nb.dec)."""
-    return Nb(F(v))
+    """Nb(v) pour une valeur exacte calculée (règle R13) : en fraction (5/2, 1/10, 3/2) quand le calcul part d'entiers ou de puissances ;
+    en décimal fini (1,9025 ; −0,27) quand l'énoncé contient un décimal et que la valeur est un décimal fini."""
+    v = F(v)
+    if not _DECIMAUX:
+        return Nb(v)
+    d, k2, k5 = v.denominator, 0, 0
+    while d % 2 == 0:
+        d, k2 = d // 2, k2 + 1
+    while d % 5 == 0:
+        d, k5 = d // 5, k5 + 1
+    k = max(k2, k5)
+    if v.denominator == 1 or d != 1 or k > 8:
+        return Nb(v)
+    chiffres = str(int(abs(v) * 10 ** k)).rjust(k + 1, "0")
+    return Nb(v, chiffres[:-k] + "," + chiffres[-k:])
 
 
 def _isoler(g, d, x, prop=None):
@@ -1069,6 +1105,7 @@ def _racines_du_second_degre(a, b, delta):
     return [racine_signe(-1), racine_signe(1)]
 
 
+@_avec_decimaux
 def meme_base(g, d, x):
     """Corrigé de g = d par la méthode « même base », ou None si elle ne s'applique pas (la constante n'est pas une puissance de la
     base, second membre ≤ 0, exposant non polynomial…). Renvoie {genre, inconnue, enonce, base, etapes, solutions, remarque}."""
@@ -1144,6 +1181,7 @@ def _suite_lineaire(chaine, p, q0, c, x, ecrit=None):
     return solution
 
 
+@_avec_decimaux
 def logarithme(g, d, x):
     """Corrigé de a^f = b par les logarithmes (a constante > 0, ≠ 1, ou e ; f du 1er degré), après avoir isolé l'exponentielle ;
     S = ∅ si le second membre est ≤ 0. None si la méthode ne s'applique pas."""
@@ -1318,6 +1356,7 @@ def _cote(n, x):
     return F(1), None, n
 
 
+@_avec_decimaux
 def bases_differentes(g, d, x):
     """Corrigé de k·a^f = m·b^h (bases différentes ou base e, f et h du 1er degré, k et m des constantes) : log (ln si une base est e) des deux
     membres, puis les termes en x regroupés comme dans une équation du premier degré (corrigé 2.24). None si la méthode ne s'applique pas."""
@@ -1444,6 +1483,7 @@ def _base_du_logarithme(base):
     return base, v
 
 
+@_avec_decimaux
 def logarithmique(g, d, x):
     """Corrigé de log_a(u) = c par la définition du logarithme (u polynôme de degré ≤ 2 en x, ou logarithmes imbriqués, ou base inconnue
     log_x(n) = k), après avoir isolé le logarithme. None si la méthode ne s'applique pas."""
@@ -1588,6 +1628,7 @@ def _encadrement(y, a):
     return j, a ** j, a ** (j + 1)
 
 
+@_avec_decimaux
 def calculer_logarithme(g):
     """Corrigé du calcul de log_a(y) (a et y sans inconnue) : y = aᵏ donne k (64 = 8², log₈(64) = 2 ; √2 = 4^(1/4), log₄(√2) = 1/4),
     sinon changement de base et valeur approchée (log₂(50) = log(50)/log(2) ≈ 5,644). None si le calcul sort de ces formes."""
@@ -1667,6 +1708,7 @@ def tex_resultat(r):
 # =====================================================================
 # 11. PRODUIT NUL ET PREMIER DEGRÉ À CONSTANTES LOGARITHMIQUES
 # =====================================================================
+@_avec_decimaux
 def produit_nul(g, d, x):
     """Corrigé de P1 · P2 · … = 0 quand chaque facteur = 0 se résout par « même base » ou « logarithme » (10^x(10^x − 4) = 0)."""
     try:
@@ -1715,6 +1757,7 @@ def _contient_log(n):
     return False
 
 
+@_avec_decimaux
 def lineaire_logarithmes(g, d, x):
     """Corrigé de p·x + q = c où c est une constante qui contient un logarithme (x = ln(3) ; 2x = ln(0,1))."""
     try:

@@ -485,6 +485,15 @@ l'élève, un « Calcul en cours… » qui dure parce que SymPy se charge encore
   `commun/registre.json`, `index.html`.
 - **Vérification** : EL-01 à EL-18 ; suite complète verte ; instantanés des autres moteurs inchangés.
 
+### T34 — Relire les autres outils avec la règle R13 (fractions et notation scientifique) — **après le test des 3C**
+- Demande de l'enseignant (26.10.2026) : la règle R13 du [guide de rédaction](guide-redaction.md) vaut pour **tous** les outils, pas seulement « Exponentielles et logarithmes » :
+  valeurs exactes calculées à partir d'entiers ou de puissances en **fractions** ; **décimaux de l'énoncé gardés** (exposant compris) et décimal fini conservé quand le calcul part de décimaux ;
+  très grands et très petits nombres en **notation scientifique**. Seul l'outil de T33 l'applique aujourd'hui.
+- **Étapes** : 1 relever, outil par outil (factorisation, étude complète, dérivée, limites, ensemble de définition, simplexe, accueil), les endroits où un décimal ou un grand nombre est écrit
+  (corrigés, instantanés, exemples du guide) ; 2 présenter la liste à l'enseignant (**arrêt : validation**, certains décimaux sont voulus : arrondis, virgule du simplexe) ; 3 appliquer, un commit par outil,
+  instantanés mis à jour un outil à la fois ; 4 `moteur/nombres.py` (T23) : y reprendre `tex_approx` (notation scientifique) si l'enseignant le valide.
+- **Vérification** : suite complète verte ; instantanés des outils non touchés inchangés ; relecture par l'enseignant.
+
 ## Plus tard (hors plan, si les tests tiennent)
 
 - Découpage de `ensemble_def.py` en modules (`moteur/expr.py`, `poly.py`, `ensembles.py`…),
@@ -499,6 +508,7 @@ l'élève, un « Calcul en cours… » qui dure parce que SymPy se charge encore
 T01 → T02 → T03 → T04 (faites) → T05, T07, T08 (indépendantes) → T08b → T06 → T07b (priorité haute)
 → T09 → T11 → T12 → T13 → T14 → T15 → T16 → T17…T20 → T21, T22, T23 → T10
 → **phase F (N01 → N26, vagues 1 à 7)** → T24…T27 → T28 ; T29, T30, T31 (chargement) : après T19, indépendantes.
+**T33** (outil des 3C) passe avant T23 ; **T34** (règle R13 dans les autres outils) vient juste après le test des 3C, avant T23.
 Les spécifications des outils de la phase F (étape 1 du gabarit) peuvent être rédigées dès maintenant :
 ce sont des documents, ils ne touchent pas au code.
 

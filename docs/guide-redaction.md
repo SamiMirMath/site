@@ -85,9 +85,11 @@ Seules les opérations neutres sont supprimées : jamais « + 0 », « − 0 »,
 Vérifié par `tests/python/test_vocabulaire.py` (`TestVouvoiement` : littéraux des moteurs, pages, `commun/*.js`, registre ;
 les corrigés de tous les instantanés) avec le détecteur `aides_sortie.TUTOIEMENT`, qui ne signale un impératif en -e qu'en début de phrase (« Utilise la règle »), jamais « on utilise la règle ».
 
-**R13. Fractions et notation scientifique** (décision du 26.10.2026, pour tous les outils). L'enseignant privilégie les fractions : toute valeur
-exacte **calculée** s'écrit en fraction (5/2, 761/400, 1/10), jamais en décimal (2,5 ; 1,9025 ; 0,1). Un nombre **écrit dans l'énoncé**
-(0,7 ; 1,045 ; −0,02) garde l'écriture de l'énoncé. Les très grands et très petits nombres s'écrivent en **notation scientifique** :
+**R13. Fractions et notation scientifique** (décision du 26.10.2026, corrigée le même jour, pour tous les outils). L'enseignant privilégie les
+fractions : toute valeur exacte que l'outil **calcule à partir d'entiers ou de puissances** s'écrit en fraction (log x = 5/2, 10⁻¹ = 1/10, log₉(27) = 3/2),
+jamais en décimal. Les **décimaux de l'énoncé gardent leur écriture partout, exposant compris** : log(x) = −0,27 donne x = 10^(−0,27) ≈ 0,537 (pas 10^(−27/100)).
+Quand le calcul part de décimaux de l'énoncé et donne un **décimal fini**, on garde le décimal comme le corrigé : 2000 · 1,045ⁿ = 3805 donne 1,045ⁿ = 1,9025 (pas 761/400) ;
+un résultat qui n'est pas un décimal fini reste une fraction (3e^x = 0,65 donne e^x = 13/60). Les très grands et très petits nombres s'écrivent en **notation scientifique** :
 puissances de 10 laissées telles quelles (10¹⁰, 10⁻⁴) et valeurs approchées en `3,162 × 10⁻⁵` ou `1 × 10¹⁰` sous 10⁻³ et dès 10⁶. Les valeurs
 approchées « ≈ » restent à virgule décimale. Appliquée à l'outil Exponentielles et logarithmes (`tex_approx`, `_nb_exact`) ; **les autres outils
 n'ont pas encore été relus avec cette règle.**
