@@ -620,7 +620,7 @@ BATTERIE_E2 = [
     ("2^(-x)=3", [-1.585]), ("18=2*3^x+1", [2.0]) if False else ("20=2*3^x+2", [2.0]), ("100=2^x", [6.644]), ("5^x/2=3", [1.113]),
     ("exp(x)=7", [1.946]), ("2^(x/2)=5", [4.644]),
 ]
-SANS_E2 = ["x*2^x=8", "2^x+3^x=5", "x^x=4", "2^(x^2)=5", "log(x)=2", "ln(x)=3", "2^(x^3)=8", "e^x=e^3", "e^x=2^x",
+SANS_E2 = ["x*2^x=8", "2^x+3^x=5", "x^x=4", "2^(x^2)=5", "log(x)=2", "ln(x)=3", "2^(x^3)=8", "e^x=e^3",
            "x^2=4", "2x+1=9", "sqrt(2)^x=3", "3^(x^2+1)=7", "10^x*(x-4)=0", "2*10^x=0*x"]
 
 
@@ -862,8 +862,12 @@ BATTERIE_E3 = [
     ("2^(x-1)=5^(x+1)", -2.513), ("2^(x/2)=3^(x-1)", 1.461), ("(1/2)^x=3^(x+1)", -0.613), ("1,5^x=2^(x+1)", -2.409),
     ("10^x=3^(x+1)", 0.912), ("10^(x-1)=3^x", 1.912), ("0,1^x=2^(x+1)", -0.231), ("3^(2x)=2^(3x+1)", 5.885),
     ("7^(x+2)=2^(3-x)", -0.687), ("2^(-x)=3^(1-x)", 2.710),
+    # facteurs constants (k·a^f = m·b^h) et base e (ln des deux membres)
+    ("2*2^x=3^x", 1.710), ("3*2^x=5*3^(x-1)", 1.450), ("10*2^x=3^x", 5.679), ("2*2^(x-1)=3^x", 0.0), ("0,5*3^x=2^(x+1)", 3.419),
+    ("5*10^x=2^x", -1.0), ("3^x*2=5*2^x", 2.260),
+    ("e^x=2^x", 0.0), ("e^x=2^(x+1)", 2.259), ("2*e^x=3^x", 7.029), ("e^(2x)=3^(x-1)", -1.219), ("3^(x+1)=e^x", -11.141),
 ]
-SANS_E3 = ["e^x=2^x", "2^(x^2)=3^x", "2*2^x=3^x", "x*2^x=8", "2^x+3^x=5", "2^(x^3)=3^x", "x^x=3^x"]
+SANS_E3 = ["2^(x^2)=3^x", "x*2^x=8", "2^x+3^x=5", "2^(x^3)=3^x", "x^x=3^x", "-2^x=-3^(x+1)", "e^x=e^(x+1)", "2^x+1=3^x", "2^x=3^x+x"]
 
 
 class TestBasesDifferentes(unittest.TestCase):
@@ -899,16 +903,19 @@ class TestBasesDifferentes(unittest.TestCase):
         self.assertEqual(lignes("2^(x-1)=3^x"), [
             debut("2^{x - 1}", "3^{x}", r"(x - 1) \cdot \log(2)", r"x \cdot \log(3)").replace(r"\log(2^{x - 1})", r"\log(2^{x - 1})")
             + r" \iff x \cdot \log(2) - \log(2) = x \cdot \log(3) \iff x(\log(2) - \log(3)) = \log(2) "
-              r"\iff x = \frac{\log(2)}{\log(2) - \log(3)} = \frac{\log(2)}{\log\left(\frac{2}{3}\right)} \quad \text{(log a − log b = log(a/b))}"])
+              r"\iff x = \frac{\log(2)}{\log(2) - \log(3)} \quad \text{(car } \log(2) - \log(3) \neq 0\text{)} "
+              r"= \frac{\log(2)}{\log\left(\frac{2}{3}\right)} \quad \text{(log a − log b = log(a/b))}"])
         self.assertEqual(lignes("4^(x+1)=6^(3x)"), [
             debut("4^{x + 1}", "6^{3x}", r"(x + 1) \cdot \log(4)", r"3x \cdot \log(6)")
             + r" \iff x \cdot \log(4) + \log(4) = 3x \cdot \log(6) \iff \log(4) = x(3\log(6) - \log(4)) "
-              r"\iff x = \frac{\log(4)}{3\log(6) - \log(4)} = \frac{\log(4)}{\log(54)} \quad \text{(propriétés des logarithmes)}",
+              r"\iff x = \frac{\log(4)}{3\log(6) - \log(4)} \quad \text{(car } 3\log(6) - \log(4) \neq 0\text{)} "
+              r"= \frac{\log(4)}{\log(54)} \quad \text{(propriétés des logarithmes)}",
             r"3\log(6) - \log(4) = \log\left(\frac{6^{3}}{4}\right) \quad \text{(propriétés des logarithmes)} = \log(54)"])
         self.assertEqual(lignes("2^(x+4)=3^(x-1)"), [
             debut("2^{x + 4}", "3^{x - 1}", r"(x + 4) \cdot \log(2)", r"(x - 1) \cdot \log(3)")
             + r" \iff x \cdot \log(2) + 4\log(2) = x \cdot \log(3) - \log(3) \iff \log(3) + 4\log(2) = x(\log(3) - \log(2)) "
-              r"\iff x = \frac{\log(3) + 4\log(2)}{\log(3) - \log(2)} = \frac{\log(48)}{\log(1{,}5)} \quad \text{(propriétés des logarithmes)}",
+              r"\iff x = \frac{\log(3) + 4\log(2)}{\log(3) - \log(2)} \quad \text{(car } \log(3) - \log(2) \neq 0\text{)} "
+              r"= \frac{\log(48)}{\log(1{,}5)} \quad \text{(propriétés des logarithmes)}",
             r"\log(3) + 4\log(2) = \log(3 \cdot 2^{4}) \quad \text{(propriétés des logarithmes)} = \log(48)",
             r"\log(3) - \log(2) = \log\left(\frac{3}{2}\right) \quad \text{(propriétés des logarithmes)} = \log(1{,}5)"])
 
@@ -932,7 +939,7 @@ class TestBasesDifferentes(unittest.TestCase):
         self.assertIn(r"\iff x(\log(2) - \log(3)) = \log(2) \iff", lignes("2^(x-1)=3^x"))
         self.assertIn(r"\iff \log(4) = x(3\log(6) - \log(4)) \iff", lignes("4^(x+1)=6^(3x)"))
         self.assertIn(r"\iff \log(3) + 4\log(2) = x(\log(3) - \log(2)) \iff", lignes("2^(x+4)=3^(x-1)"))
-        self.assertIn(r"\iff x(\log(3) - \log(2)) = 0 \iff x = \frac{0}{\log(3) - \log(2)} = 0", lignes("3^x=2^x"))
+        self.assertIn(r"\iff x(\log(3) - \log(2)) = 0 \iff x = 0 \quad \text{(car } \log(3) - \log(2) \neq 0\text{)}", lignes("3^x=2^x"))
         self.assertIn(r"\iff x(\log(3) - \log(2)) = \log(3) \iff", lignes("2^(-x)=3^(1-x)"))      # les termes positifs d'abord : jamais −log(2) + log(3)
 
     def test_regroupement_seulement_ici(self):
@@ -967,11 +974,17 @@ class TestBasesDifferentes(unittest.TestCase):
                 r = corriger(saisie)
                 self.assertEqual([c["titre"] for c in r["etapes"]], ["Bases différentes"])
                 lignes = r["etapes"][0]["lignes"]
+                self.assertEqual(r["genre"], "bases_differentes")
                 for ligne in lignes:
                     for p in ligne.props + [ligne.note]:
-                        self.assertTrue(p is None or p in el.PROPRIETES, (saisie, p))
-                props = [p for p in lignes[0].props if p is not None]
-                self.assertEqual(props[:2], [el.PROP_LOG_DEUX_MEMBRES, el.PROP_LOG_PUISSANCE])
+                        self.assertTrue(p is None or p in el.PROPRIETES or isinstance(p, el.Car), (saisie, p))
+                props = [p for p in lignes[0].props if p is not None and not isinstance(p, el.Car)]
+                if "e^" in saisie:
+                    self.assertEqual(props[0], el.PROP_LN_DEUX_MEMBRES)
+                    self.assertIn(el.PROP_LN_E, props)
+                else:
+                    self.assertEqual(props[0], el.PROP_LOG_DEUX_MEMBRES)
+                    self.assertIn(el.PROP_LOG_PUISSANCE, props)
                 for ligne in lignes[1:]:                       # lignes « car … » : des « = » seulement
                     self.assertEqual(set(ligne.liens), {"="})
 
@@ -1000,15 +1013,74 @@ class TestBasesDifferentes(unittest.TestCase):
                             a, b = evaluer(droite(e), MP.mpf("0.37")), evaluer(suivant, MP.mpf("0.37"))
                             self.assertLessEqual(abs(a - b), MP.mpf("1e-20") * (1 + abs(a)), (saisie, el.tex_chaine(ligne)))
 
-    def test_log_pour_les_bases_ordinaires_jamais_ln_ni_point_decimal(self):
+    def test_ln_avec_une_base_e_log_sinon_jamais_de_point_decimal(self):
         for saisie, _ in BATTERIE_E3:
             with self.subTest(saisie):
                 r = corriger(saisie)
                 texte = " ".join(el.tex_chaine(l) for c in r["etapes"] for l in c["lignes"]) + el.tex_solution(r)
-                self.assertNotIn("\\ln", texte)
+                self.assertNotIn("\\log" if "e^" in saisie else "\\ln", texte)          # ln dès qu'une base est e, log sinon
                 self.assertNotIn("\\log_", texte)
                 self.assertIsNone(re.search(r"\d\.\d", texte), texte)
                 self.assertIsNone(TUTOIEMENT.search(re.sub(r"\\[a-z]+", " ", texte)), texte)
+
+    def test_redaction_avec_la_base_e(self):
+        """ln aux deux membres dès qu'une base est e (ln(e^A) = A), les termes en x réunis, puis « car … ≠ 0 »."""
+        lignes = lambda s: [el.tex_chaine(l) for c in corriger(s)["etapes"] for l in c["lignes"]]
+        self.assertEqual(lignes("e^x=2^x"), [
+            r"e^{x} = 2^{x} \iff \ln(e^{x}) = \ln(2^{x}) \quad \text{(ln des deux membres)} \iff x = x \cdot \ln(2) \quad \text{(ln(e^A) = A)} "
+            r"\iff x - x \cdot \ln(2) = 0 \iff x(1 - \ln(2)) = 0 \iff x = 0 \quad \text{(car } 1 - \ln(2) \neq 0\text{)}"])
+        self.assertEqual(lignes("e^x=2^(x+1)"), [
+            r"e^{x} = 2^{x + 1} \iff \ln(e^{x}) = \ln(2^{x + 1}) \quad \text{(ln des deux membres)} \iff x = (x + 1) \cdot \ln(2) "
+            r"\quad \text{(ln(e^A) = A)} \iff x = x \cdot \ln(2) + \ln(2) \iff x - x \cdot \ln(2) = \ln(2) \iff x(1 - \ln(2)) = \ln(2) "
+            r"\iff x = \frac{\ln(2)}{1 - \ln(2)} \quad \text{(car } 1 - \ln(2) \neq 0\text{)}"])
+        self.assertEqual(el.tex_solution(corriger("e^x=2^(x+1)")), r"S = \left\{\frac{\ln(2)}{1 - \ln(2)}\right\} \text{, soit } x \approx 2{,}259")
+        self.assertEqual(el.tex_solution(corriger("e^x=2^x")), r"S = \left\{0\right\}")
+        self.assertEqual(el.tex_solution(corriger("2*e^x=3^x")), r"S = \left\{\frac{\ln(2)}{\ln(3) - 1}\right\} \text{, soit } x \approx 7{,}029")
+
+    def test_facteurs_constants(self):
+        """k·a^f = m·b^h : log(k) + log(a^f) (log(ab) = log a + log b), puis le même regroupement ; log(10) = 1 ; les constantes de même base se réunissent."""
+        lignes = lambda s: [el.tex_chaine(l) for c in corriger(s)["etapes"] for l in c["lignes"]]
+        self.assertEqual(lignes("2*2^x=3^x")[0],
+                         r"2 \cdot 2^{x} = 3^{x} \iff \log(2 \cdot 2^{x}) = \log(3^{x}) \quad \text{(log des deux membres)} "
+                         r"\iff \log(2) + \log(2^{x}) = \log(3^{x}) \quad \text{(log(ab) = log a + log b)} "
+                         r"\iff \log(2) + x \cdot \log(2) = x \cdot \log(3) \quad \text{(log(a^A) = A · log(a))} "
+                         r"\iff x \cdot \log(2) + \log(2) = x \cdot \log(3) \iff \log(2) = x(\log(3) - \log(2)) "
+                         r"\iff x = \frac{\log(2)}{\log(3) - \log(2)} \quad \text{(car } \log(3) - \log(2) \neq 0\text{)} "
+                         r"= \frac{\log(2)}{\log(1{,}5)} \quad \text{(log a − log b = log(a/b))}")
+        self.assertIn(r"\iff x \cdot \log(2) + 1 = x \cdot \log(3) \quad \text{(log(10ᵏ) = k)} \iff 1 = x(\log(3) - \log(2))", lignes("10*2^x=3^x")[0])
+        self.assertIn(r"\iff x \cdot \log(2) = x \cdot \log(3)", lignes("2*2^(x-1)=3^x")[0])      # 2 · 2^(x−1) = 2^x : les constantes se compensent
+        self.assertEqual(el.tex_solution(corriger("2*2^(x-1)=3^x")), r"S = \left\{0\right\}")
+        un = corriger("1*2^x=3^(x+1)")                                             # un facteur 1 n'écrit ni log(1) ni la ligne log(ab)
+        texte = " ".join(el.tex_chaine(l) for c in un["etapes"] for l in c["lignes"])
+        self.assertNotIn(r"\log(1)", texte)
+        self.assertNotIn(el.PROP_LOG_SOMME, texte)
+        self.assertEqual([el.tex(n) for n in un["solutions"]], [el.tex(n) for n in corriger("2^x=3^(x+1)")["solutions"]])
+
+    def test_signes_des_facteurs(self):
+        for saisie in ["2*3^x=-5*2^x", "-2^x=3^(x+1)", "3^x=-2*2^(x+1)", "-3^x=2*5^x"]:
+            with self.subTest(saisie):
+                r = corriger(saisie)
+                self.assertEqual([c["titre"] for c in r["etapes"]], ["Aucune solution"])
+                self.assertEqual(r["solutions"], [])
+                self.assertEqual(el.tex_solution(r), r"S = \varnothing")
+                self.assertIn(el.PROP_EXPO_POSITIVE, [l.note for l in r["etapes"][0]["lignes"]])
+        self.assertEqual([el.tex_chaine(l) for l in corriger("2*3^x=-5*2^x")["etapes"][0]["lignes"]], [
+            r"2 \cdot 3^{x} > 0 \quad \text{(une exponentielle est strictement positive)}",
+            r"-5 \cdot 2^{x} < 0 \quad \text{(aucune solution)}"])
+
+    def test_chaque_division_est_justifiee(self):
+        """Toute chaîne qui divise par un coefficient logarithmique le dit : « car D ≠ 0 », avec D qui n'est pas nul."""
+        for saisie, _ in BATTERIE_E3:
+            with self.subTest(saisie):
+                ligne = corriger(saisie)["etapes"][0]["lignes"][0]
+                cars = [(e, p) for e, p in zip(ligne.elements[1:], ligne.props) if isinstance(p, el.Car)]
+                self.assertEqual(len(cars), 1)
+                element, car = cars[0]
+                self.assertIsInstance(element, Eq)
+                self.assertEqual(element.g, X)
+                self.assertGreater(abs(evaluer(car.expr)), MP.mpf("1e-6"))
+                if isinstance(element.d, Op):
+                    self.assertEqual(el.tex(element.d.b), el.tex(car.expr))          # le diviseur de la ligne est bien celui du « car »
 
     def test_les_autres_methodes_gardent_la_priorite(self):
         for saisie, genre in [("4^(x+1)=8^(2x)", "meme_base"), ("2^x=100", "logarithme"), ("2^x=8", "meme_base"), ("3^x=2", "logarithme"),
@@ -1032,6 +1104,39 @@ class TestBasesDifferentes(unittest.TestCase):
                 irrationnelle = not isinstance(corriger(saisie)["solutions"][0], Nb)
                 self.assertTrue(t.startswith("S = "), t)
                 self.assertEqual(r"\approx" in t, irrationnelle, t)
+
+
+class TestMessagesNonResolu(unittest.TestCase):
+    """EL-11 : deux messages. « ne se résout pas avec les méthodes du cours » seulement pour un vrai hors-programme ;
+    « ne traite pas encore » pour une forme du programme que l'outil ne gère pas encore."""
+    HORS_PROGRAMME = ["x*2^x=8", "2^x+3^x=5", "x^x=4", "2^(x^3)=8", "2^x=x+1", "2^(sqrt(x))=4", "x/2^x=1", "x*e^x=1", "2^x=3^x+x"]
+    PAS_ENCORE = ["log(x)=2", "ln(x)=3", "e^x=e^3", "-2^x=-3^(x+1)", "e^x=e^(x+1)", "10^x*(x-4)=0", "2^x+2^(x+1)=12", "e^x+e^(-x)=3",
+                  "2^(x^2)=5", "log(x)+log(x-1)=1", "x^2=4", "2x+1=9"]
+
+    def message(self, saisie):
+        s = el.analyser_saisie(saisie)
+        self.assertIsNone(el.corriger_equation(s.g, s.d, s.inconnue), saisie)
+        return el.message_non_resolu(s.g, s.d, s.inconnue)
+
+    def test_textes_exacts(self):
+        self.assertEqual(el.MESSAGE_HORS_PROGRAMME, "Cette équation ne se résout pas avec les méthodes du cours.")
+        self.assertEqual(el.MESSAGE_PAS_ENCORE, "Cet outil ne traite pas encore ce type d'équation.")
+
+    def test_vrais_hors_programme(self):
+        for saisie in self.HORS_PROGRAMME:
+            with self.subTest(saisie):
+                self.assertEqual(self.message(saisie), el.MESSAGE_HORS_PROGRAMME)
+
+    def test_formes_du_programme_pas_encore_gerees(self):
+        for saisie in self.PAS_ENCORE:
+            with self.subTest(saisie):
+                self.assertEqual(self.message(saisie), el.MESSAGE_PAS_ENCORE)
+
+    def test_aucun_hors_programme_ne_donne_de_solution(self):
+        for saisie, _ in BATTERIE_E1 + BATTERIE_E2 + BATTERIE_E3:
+            with self.subTest(saisie):
+                s = el.analyser_saisie(saisie)
+                self.assertFalse(el.hors_programme(s.g, s.d, s.inconnue), saisie)
 
 
 class TestNotationSuisse(unittest.TestCase):

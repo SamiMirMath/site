@@ -16,13 +16,14 @@ rien de 2M n'est codé ici : ni ensemble de définition, ni équations à plusie
 |---|---|---|---|
 | E1 | Même base : a^A = a^B ⇔ A = B | 2.13 a-o, exemples p. 22-23 | 1 |
 | E2 | Isoler l'exponentielle, puis logarithme ; ∅ si le second membre est ≤ 0 ; produit nul | 2.18, 2.21, 2.23, p. 26 n° 1-2, p. 29 | 2 |
-| E3 | Bases différentes des deux côtés | 2.24, p. 26 n° 3 | 3 |
+| E3 | Bases différentes des deux côtés (facteurs constants et base e compris) | 2.24, p. 26 n° 3 | 3 |
 | E4 | Équation logarithmique en une étape (définition du logarithme), logarithmes imbriqués, base inconnue | 2.15 e-g j-l, 2.18 c d f, 2.21 d, 2.22 | 4 |
 | C1 | Calculer log_a(y) (saisie sans « = ») | 2.15 a-d h i, 2.20 | 5 |
 | C2, C3, E5 | Propriétés avec log 2 ≈ 0,301 (2.25) ; encadrement (2.16) ; inconnue dans la base a¹² = 1,5 (2.5) | | si le temps le permet |
 
-**Entrées hors programme** (x·2^x = 8…) : l'outil affiche « Cette équation ne se résout pas avec les méthodes du cours. » (EL-11). À poser à l'étape 7, quand
-l'adaptateur `resoudre_el.py` décide ce qui s'affiche : tant que les méthodes E2 à E4 manquent, le moteur renvoie seulement « méthode non applicable » en interne.
+**Quand aucune méthode ne s'applique** (EL-11), deux messages distincts (décision du 26.10.2026) : « Cette équation ne se résout pas avec les méthodes du cours. » seulement pour un vrai
+hors-programme (x·2^x = 8…), « Cet outil ne traite pas encore ce type d'équation. » pour une forme du programme que l'outil ne gère pas encore. Le moteur fournit le choix
+(`message_non_resolu`) ; l'adaptateur `resoudre_el.py` (étape 7) l'affiche.
 
 Hors de cette version : interprétation des applications en années entières (l'outil résout, n ≈ 14,6, et s'arrête), mode « problème
 en mots », tâtonnement (2.14), graphiques (2.1, 2.9, 2.12), écrire un nombre comme puissance de 10 ou de e (2.17, 2.19).
@@ -55,21 +56,30 @@ non carré, les lignes « Δ = … » et « x = … ou x = … » suivent la cha
 Propriétés nommées (liste fermée, testée) : (on isole le terme exponentiel), (même base : a^A = a^B ⇔ A = B), ((aᵐ)ⁿ = aᵐⁿ),
 (aᵐ · aⁿ = aᵐ⁺ⁿ), (1 = a⁰), (log des deux membres), (log(a^A) = A · log(a)), (ln(a^A) = A · ln(a)), (log a − log b = log(a/b)), (log a + log b = log(ab)), (propriétés des logarithmes),
 (définition du logarithme), (log(10ᵏ) = k), (ln(1) = 0), (une exponentielle est strictement positive), (aucune solution),
-(un produit est nul si l'un des facteurs est nul), (formule du discriminant), (changement de base).
+(un produit est nul si l'un des facteurs est nul), (formule du discriminant), (changement de base), (log(ab) = log a + log b), (ln des deux membres), (ln(e^A) = A),
+ainsi que la justification de division (car D ≠ 0), où D est le coefficient logarithmique (1 − ln 2, log 2 − log 3).
 
 **Cartes de la méthode « logarithme »** (étape 3) : « Isoler l'exponentielle » (si besoin), puis « Définition du logarithme » (base 10 ou base e : `10^f = b ⇔ f = log(b)`,
 `e^f = b ⇔ f = ln(b)`) ou « Logarithme des deux membres » (toute autre base) ou « Aucune solution » (second membre ≤ 0). Un produit nul donne « Produit nul » (la ligne
 `P₁·P₂ = 0 ⇔ P₁ = 0 ou P₂ = 0`), puis une carte « Facteur 1 », « Facteur 2 »… qui reprend les lignes de la résolution de chaque facteur. Une équation du premier
 degré dont le second membre contient un logarithme (x = ln 3, 2x = ln(0,1)) a la carte « Équation du premier degré » (aucune carte quand x est déjà isolé).
 
-**Carte de la méthode « bases différentes »** (étape 4, corrigé 2.24) : une carte « Bases différentes », une seule chaîne : `a^f = b^h ⇔ log(a^f) = log(b^h)` (log des deux membres)
-`⇔ f · log(a) = h · log(b)` (log(a^A) = A · log(a)), le développement `x · log(2) − log(2) = …`, puis les termes en x mis en facteur **du côté qui laisse la constante positive**
-(`x(log 2 − log 3) = log 2` en 2.24 a ; `log 4 = x(3 log 6 − log 4)` en b ; `log 3 + 4 log 2 = x(log 3 − log 2)` en c), les termes positifs d'abord, `x = N / D`, puis
-`= log(N') / log(D')` avec N et D regroupés en un seul logarithme. La propriété de ce dernier lien est (log a − log b = log(a/b)) quand il n'y a que des différences de deux logarithmes,
-(log a + log b = log(ab)) pour des sommes de deux logarithmes, (propriétés des logarithmes) sinon, et chaque regroupement non immédiat est montré dans une ligne « car » en dessous
-(`3 log 6 − log 4 = log(6³/4) = log 54`). log(10ᵏ) = k : une base 10ᵏ n'écrit pas de logarithme (`x(1 − log 3) = log 3`), et aucun regroupement n'est alors fait. Les bases sont écrites comme
-dans l'énoncé ((1/2)^x garde log(1/2)). Quand il n'y a pas de constante (3^x = 2^x), la chaîne se termine par `x = 0 / (log 3 − log 2) = 0`. Hors de cette méthode (message « ne se résout pas
-avec les méthodes du cours ») : une base e, un exposant du 2ᵉ degré ou plus, un facteur constant devant l'exponentielle (2·2^x = 3^x), une somme d'exponentielles.
+**Carte de la méthode « bases différentes »** (étape 4, corrigé 2.24) : `k · a^f = m · b^h` (k et m constantes facultatives, f et h du 1er degré). Une carte « Bases différentes », une seule chaîne :
+`k·a^f = m·b^h ⇔ log(k·a^f) = log(m·b^h)` (log des deux membres), puis, s'il y a des facteurs constants, `⇔ log(k) + log(a^f) = log(m) + log(b^h)` (log(ab) = log a + log b),
+`⇔ log(k) + f · log(a) = log(m) + h · log(b)` (log(a^A) = A · log(a)), le développement `x · log(2) − log(2) = …`, puis les termes en x mis en facteur **du côté qui laisse la constante positive**
+(`x(log 2 − log 3) = log 2` en 2.24 a ; `log 4 = x(3 log 6 − log 4)` en b ; `log 3 + 4 log 2 = x(log 3 − log 2)` en c), les termes positifs d'abord, les constantes de même logarithme réunies
+(2 · 2^(x−1) = 3^x donne x log 2 = x log 3), `x = N / D (car D ≠ 0)`, puis `= log(N') / log(D')` avec N et D regroupés en un seul logarithme. La propriété de ce dernier lien est
+(log a − log b = log(a/b)) quand il n'y a que des différences de deux logarithmes, (log a + log b = log(ab)) pour des sommes de deux logarithmes, (propriétés des logarithmes) sinon, et chaque
+regroupement non immédiat est montré dans une ligne « car » en dessous (`3 log 6 − log 4 = log(6³/4) = log 54`). log(10ᵏ) = k : une base ou un facteur 10ᵏ n'écrit pas de logarithme
+(`x(1 − log 3) = log 3`), et aucun regroupement n'est alors fait. Les bases sont écrites comme dans l'énoncé ((1/2)^x garde log(1/2)). Quand il n'y a pas de constante (3^x = 2^x), la chaîne se
+termine par `x(log 3 − log 2) = 0 ⇔ x = 0 (car log 3 − log 2 ≠ 0)`.
+
+**Base e** : dès qu'une base e apparaît, on applique **ln** (pas log) aux deux membres, avec ln(e^A) = A (la ligne `ln(e^x) = ln(2^x) ⇔ x = x · ln(2)` porte cette seule propriété ; ln(2^x) = x · ln(2) y est implicite),
+et les termes en x sont réunis sur une ligne à part avant la mise en facteur : `e^x = 2^x ⇔ ln(e^x) = ln(2^x) ⇔ x = x·ln(2) ⇔ x − x·ln(2) = 0 ⇔ x(1 − ln(2)) = 0 ⇔ x = 0` (car 1 − ln(2) ≠ 0), S = {0} ;
+`e^x = 2^(x+1)` donne `x = ln(2) / (1 − ln(2))`, soit x ≈ 2,259. Avec une base e, aucun regroupement en un seul logarithme (le dénominateur contient le nombre 1 = ln e).
+
+**Signes** : `k · a^f` et `m · b^h` de signes contraires donnent S = ∅ (« une exponentielle est strictement positive », carte « Aucune solution ») ; deux membres négatifs (−2^x = −3^(x+1)) ne sont pas encore traités.
+Hors de la méthode : un exposant du 2ᵉ degré ou plus, une somme d'exponentielles (message hors-programme si les bases diffèrent, EL-11), e^x = e^(x+1) (même base e, pas encore traité).
 
 **Isoler x** : `x − a = c` donne `x = a + c` (corrigé 2.23 d : x = 1 + 1/log(3), jamais c + a) ; `x + a = c` donne `x = c − a` ; `p·x = c` donne `x = c/p` (non simplifié : Q11).
 
@@ -112,7 +122,7 @@ Solution : `S = {−3 ; 1}`.
 **5. Bases différentes — 2^(x−1) = 3^x** (2.24 a), comme le moteur le produit (une carte « Bases différentes »)
 `2^(x−1) = 3^x ⇔ log(2^(x−1)) = log(3^x)` (log des deux membres) `⇔ (x − 1) · log(2) = x · log(3)` (log(a^A) = A · log(a))
 `⇔ x · log(2) − log(2) = x · log(3) ⇔ x(log(2) − log(3)) = log(2)`
-`⇔ x = log(2) / (log(2) − log(3)) = log(2) / log(2/3)` (log a − log b = log(a/b)). Solution : `S = {log(2) / log(2/3)}`, soit `x ≈ −1,710`.
+`⇔ x = log(2) / (log(2) − log(3))` (car log(2) − log(3) ≠ 0) `= log(2) / log(2/3)` (log a − log b = log(a/b)). Solution : `S = {log(2) / log(2/3)}`, soit `x ≈ −1,710`.
 Variante 2.24 b, 4^(x+1) = 6^(3x) : `… ⇔ log(4) = x(3 log(6) − log(4)) ⇔ x = log(4) / (3 log(6) − log(4)) = log(4) / log(54)` (propriétés des logarithmes),
 suivi de la ligne `3 log(6) − log(4) = log(6³/4) = log(54)`.
 
@@ -157,12 +167,12 @@ discriminant non carré** (le moteur sait écrire des racines irrationnelles, le
 | EL-03 | Tokeniseur : `ln`, `exp`, `log2`, `log_3`, `log10`, `sqrt` lus comme fonctions avant les lettres ; `2x`, `3ln(x)`, `xlog(x)` multiplication implicite ; `e^x = 7` : e est la constante ; `e` comme seule lettre, `2e = 5`, `e^2 = e` : refusés avec le message prévu ; `x + e = 3` accepté | [auto-py] |
 | EL-04 | Tout le TeX vient de l'arbre : une équation en e^x ne produit que `\ln`, une équation en base 10 que `\log` ; `exp_log.py` et `resoudre_el.py` ne contiennent ni `latex(` ni `arbre_depuis_sympy` | [auto-py] (analyse du texte source) |
 | EL-05 | `log` = base 10, `ln` = base e, `log_a` = base a, sur toute la batterie (valeur numérique de chaque membre) | [auto-py] |
-| EL-06 | Chaque ligne « ⇔ » porte une propriété tirée de la liste fermée ci-dessus ; aucune ligne sans justification, sauf l'arithmétique évidente (x + 1 = 3 ⇔ x = 2) | [auto-py] |
+| EL-06 | Chaque ligne « ⇔ » porte une propriété tirée de la liste fermée ci-dessus (la division par un coefficient logarithmique porte « car D ≠ 0 », D ≠ 0 vérifié) ; aucune ligne sans justification, sauf l'arithmétique évidente (x + 1 = 3 ⇔ x = 2) | [auto-py] |
 | EL-07 | Exact puis ≈ : chaque « ≈ » suit une valeur exacte sur la même ligne ; 3 décimales ; virgule décimale ; aucun point décimal (SOC-12) ; **notation suisse (Q5, Q12) : ’ dès 4 chiffres sur la partie entière seulement** (−99’999’995, 1’234,567, 0,0001), `\text{’}` en TeX ; saisie de ' et ’ lue 1000, « 1 000 » refusé avec un message (`moteur/nombres.py`) | [auto-py] |
 | EL-08 | Second membre ≤ 0 (a^f = b, b ≤ 0, k·a^f = b avec b/k ≤ 0) : S = ∅ justifié par « une exponentielle est strictement positive », jamais par un logarithme d'un nombre négatif | [auto-py] |
 | EL-09 | Équations logarithmiques : aucune carte d'ensemble de définition ; une vérification de chaque solution (argument > 0) ; base inconnue : condition annoncée, solution rejetée si x ≤ 0 ou x = 1 (log_x(256) = 4 : S = {4}) | [auto-py] |
 | EL-10 | `log(x^2) = 2` donne S = {−10 ; 10} par la définition ; aucune sortie ne contient « 2 log|x| » ni « 2\log\left|x\right| » | [auto-py] |
-| EL-11 | **Entrée hors programme** (x·2^x = 8, 2^x + 3^x = 5, x^x = 4, 2^(x³) = 8, plusieurs logarithmes sommés, inconnue dans une base et dans un exposant à la fois) : le texte affiché à l'élève est exactement « Cette équation ne se résout pas avec les méthodes du cours. » (décision du 26.10.2026) ; jamais « non applicable », jamais une étape fausse ni une valeur numérique donnée comme solution ; détail technique dans `detail` seulement. Une inéquation garde son message de lecture (« Les inéquations ne sont pas traitées par cet outil : écrivez une équation avec =. ») | [auto-py] |
+| EL-11 | **Deux messages quand aucune méthode ne s'applique** (décision du 26.10.2026). (a) **Vrai hors-programme** (x·2^x = 8, 2^x + 3^x = 5, x^x = 4, 2^(x³) = 8, 2^x = x + 1, inconnue dans une base et dans un exposant à la fois) : le texte est exactement « Cette équation ne se résout pas avec les méthodes du cours. ». (b) **Forme du programme pas encore gérée** (log(x) = 2 tant que E4 manque, e^x = e^3, −2^x = −3^(x+1), 10^x·(x − 4) = 0, plusieurs logarithmes sommés, 2M) : « Cet outil ne traite pas encore ce type d'équation. ». Le moteur choisit (`message_non_resolu`) : hors-programme = l'inconnue dans une base et un exposant, un exposant qui n'est pas un polynôme de degré 2 au plus, une exponentielle multipliée ou divisée par un facteur en x (sauf produit égal à 0), une somme d'exponentielles de bases différentes, une exponentielle et un terme en x sans exponentielle de part et d'autre du signe =. Jamais « non applicable », jamais une étape fausse ni une valeur numérique donnée comme solution ; détail technique dans `detail` seulement. Une inéquation garde son message de lecture (« Les inéquations ne sont pas traitées par cet outil : écrivez une équation avec =. ») | [auto-py] |
 | EL-12 | Aucune sortie ne contient le vocabulaire interdit de SOC-15 (`test_vocabulaire.py` étendu) ; JSON strict | [auto-py] |
 | EL-13 | `exercice(niveau, graine)` est déterministe, produit un gabarit du niveau, et le moteur le résout (oracle EL-02) pour 500 graines | [auto-py] |
 | EL-14 | Manifeste (`test_manifeste`, `test_resoudre_import`) et instantanés de l'outil ; **les instantanés de tous les autres moteurs sont inchangés** | [auto-py] |
