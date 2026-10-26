@@ -598,6 +598,67 @@ class TestMemeBase(unittest.TestCase):
         self.assertIn("2{,}25 = 1{,}5^{2}", texte)
 
 
+class TestNotationSuisse(unittest.TestCase):
+    """Q5 (14.10.2026), Q12 (26.10.2026) : ’ dès 4 chiffres sur la partie entière seulement (1’234,567), virgule décimale ;
+    saisie de ' et ’ ; « 1 000 » refusé. Fonctions de moteur/nombres.py."""
+
+    def test_affichage(self):
+        for n, attendu in [(Nb(1000), "1\\text{’}000"), (Nb(999), "999"), (Nb(F(-99999995)), "-99\\text{’}999\\text{’}995"),
+                           (Nb(1234567), "1\\text{’}234\\text{’}567"), (Nb(F(3, 2)), "\\frac{3}{2}"),
+                           (Nb(F(1000, 3)), "\\frac{1\\text{’}000}{3}"), (Nb(F(-1, 16)), "-\\frac{1}{16}"), (Nb(0), "0"),
+                           (Nb(F(1234567, 1000), "1234,567"), "1\\text{’}234{,}567"), (Nb(F(1, 10000), "0,0001"), "0{,}0001"),
+                           (Nb(F(12345678901, 100000), "123456,78901"), "123\\text{’}456{,}78901")]:
+            with self.subTest(attendu):
+                self.assertEqual(el.tex(n), attendu)
+
+    def test_equations_avec_grands_nombres(self):
+        for saisie, attendu in [("2000*1,045^n=3805", "2\\text{’}000 \\cdot 1{,}045^{n} = 3\\text{’}805"),
+                                ("log(5-x)=10^8", "\\log(5 - x) = 10^{8}"), ("x=5-100000000", "x = 5 - 100\\text{’}000\\text{’}000"),
+                                ("7200000*1,03^n=746000000", "7\\text{’}200\\text{’}000 \\cdot 1{,}03^{n} = 746\\text{’}000\\text{’}000"),
+                                ("10^x=0,0001", "10^{x} = 0{,}0001"), ("x=12345,6789", "x = 12\\text{’}345{,}6789")]:
+            with self.subTest(saisie):
+                self.assertEqual(el.tex_saisie(*el.lire_membres(saisie)), attendu)
+
+    def test_saisie_avec_apostrophes(self):
+        for s, v in [("1'000", F(1000)), ("1’000", F(1000)), ("1'234'567", F(1234567)), ("12’345", F(12345)), ("1’234,567", F(1234567, 1000)),
+                     ("1'234.5", F(12345, 10)), ("999", F(999)), ("1234567", F(1234567)), ("0,0001", F(1, 10000))]:
+            with self.subTest(s):
+                self.assertEqual(lire(s), Nb(v))
+        self.assertEqual(el.tex(lire("1’234,567")), "1\\text{’}234{,}567")      # la saisie est réécrite en notation suisse
+
+    def test_espace_dans_un_nombre_refuse(self):
+        for s in ["1 000", "10 000", "7 200 000x=1", "x=1 000", "2 100", "1\u00a0000"]:
+            with self.subTest(s):
+                with self.assertRaises(ErreurSaisie) as c:
+                    el.lire_membres(s)
+                self.assertEqual(str(c.exception), "Pas d'espace dans un nombre : écrivez 1000 ou 1’000.")
+        # deux nombres qui ne ressemblent pas à des milliers : l'ancien message
+        with self.assertRaises(ErreurSaisie) as c:
+            el.lire_membres("2 3x = 5")
+        self.assertIn("Un nombre ne peut pas suivre", str(c.exception))
+
+    def test_apostrophes_mal_placees(self):
+        for s in ["1'00", "1'0000", "12'34", "1'", "1’00x=1", "x=1'2"]:
+            with self.subTest(s):
+                with self.assertRaises(ErreurSaisie) as c:
+                    el.lire_membres(s)
+                self.assertEqual(str(c.exception), "Une apostrophe dans un nombre est suivie d'exactement 3 chiffres : 1’000.")
+
+    def test_jamais_d_apostrophe_droite_ni_de_point_decimal_dans_le_tex(self):
+        for s in ["1'000x=1'234,5", "x=1’234.5678", "10^x=0.0001", "2000*1.045^n=3805"]:
+            t = el.tex_saisie(*el.lire_membres(s))
+            self.assertNotIn("'", t)
+            self.assertIsNone(re.search(r"\d\.\d", t), t)
+
+    def test_les_corriges_n_ecrivent_pas_de_separateur_dans_les_decimales_ni_sous_4_chiffres(self):
+        for saisie, _ in BATTERIE_E1:
+            for carte in corrige(saisie)["etapes"]:
+                for ligne in carte["lignes"]:
+                    t = el.tex_chaine(ligne)
+                    self.assertIsNone(re.search(r"\{,\}\d*\\text\{’\}", t), t)             # pas de ’ après la virgule
+                    self.assertIsNone(re.search(r"(?<![\d])\d{1,3}\\text\{’\}\d{1,2}(?!\d)", t), t)      # groupes de 3 chiffres exactement
+
+
 class TestSource(unittest.TestCase):
     def source(self, nom):
         with open(os.path.join(RACINE, "exponentielles-logarithmes", nom), encoding="utf-8") as f:

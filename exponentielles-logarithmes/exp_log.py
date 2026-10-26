@@ -22,6 +22,7 @@ from functools import reduce
 from math import gcd, isqrt
 
 from noyau import ErreurSaisie, json_strict
+from nombres import (MOTIF_ESPACE_DANS_UN_NOMBRE, MOTIF_SAISIE, formater_decimal, formater_entier, nettoyer_saisie)
 
 __all__ = ["Nb", "Var", "E", "Neg", "Op", "Pow", "Fn", "Log", "tex", "variables", "lire_membres", "analyser_saisie", "tex_saisie",
            "apercu", "apercu_json", "Saisie"]
@@ -143,13 +144,14 @@ def contient_e(n):
 # 2. TEX (écrit par l'arbre, jamais par SymPy)
 # =====================================================================
 def _nb_tex(n):
+    """Notation suisse (Q5) : ’ dès 4 chiffres sur la partie entière, virgule décimale (moteur/nombres.py)."""
     v = n.val
     if n.dec is not None:
-        s = n.dec.replace(",", "{,}")
+        s = formater_decimal(n.dec, tex=True)
     elif v.denominator == 1:
-        s = str(abs(v.numerator))
+        s = formater_entier(abs(v.numerator), tex=True)
     else:
-        s = r"\frac{" + str(abs(v.numerator)) + "}{" + str(v.denominator) + "}"
+        s = r"\frac{" + formater_entier(abs(v.numerator), tex=True) + "}{" + formater_entier(v.denominator, tex=True) + "}"
     return "-" + s if v < 0 else s
 
 
@@ -219,7 +221,6 @@ def tex_saisie(g, d=None):
 # =====================================================================
 Tok = namedtuple("Tok", "type val base")      # type : num, var, fn, op ; base : seulement pour log
 
-_NOMBRE = re.compile(r"\d+(?:[.,]\d+)?|[.,]\d+")
 _BASE_SOULIGNEE = re.compile(r"_(\d+(?:[.,]\d+)?|[a-z])")
 _BASE_COLLEE = re.compile(r"\d+")
 _SYMBOLES = str.maketrans({"−": "-", "–": "-", "×": "*", "·": "*", "⋅": "*", "÷": "/"})
@@ -258,9 +259,14 @@ def tokeniser(texte):
             toks.append(Tok("fn", "sqrt", None))
             i += 1
         elif c in "0123456789.,":
-            m = _NOMBRE.match(s, i)
+            m = MOTIF_SAISIE.match(s, i)
             if not m:
                 raise ErreurSaisie(f"Caractère non reconnu : « {c} ».")
+            suivant = s[m.end():m.end() + 1]
+            if suivant in ("'", "’") or (suivant.isdigit() and ("'" in m.group(0) or "’" in m.group(0))):
+                raise ErreurSaisie("Une apostrophe dans un nombre est suivie d'exactement 3 chiffres : 1’000.")
+            if m.group(0).isdigit() and MOTIF_ESPACE_DANS_UN_NOMBRE.match(s, m.end()):
+                raise ErreurSaisie("Pas d'espace dans un nombre : écrivez 1000 ou 1’000.")
             toks.append(Tok("num", m.group(0), None))
             i = m.end()
         elif c.isalpha() and c.isascii():
@@ -292,8 +298,8 @@ def tokeniser(texte):
 # 4. ANALYSEUR SYNTAXIQUE
 # =====================================================================
 def _nombre(brut):
-    t = brut.replace(",", ".")
-    return Nb(F(t), brut.replace(".", ",") if "." in t else None)
+    t = nettoyer_saisie(brut)
+    return Nb(F(t), t.replace(".", ",") if "." in t else None)
 
 
 def _base(nom_base):
