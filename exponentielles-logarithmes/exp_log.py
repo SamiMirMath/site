@@ -23,7 +23,8 @@ from noyau import ErreurSaisie, json_strict
 __all__ = ["Nb", "Var", "E", "Neg", "Op", "Pow", "Fn", "Log", "tex", "variables", "lire_membres", "analyser_saisie", "tex_saisie",
            "apercu", "apercu_json", "Saisie"]
 
-MESSAGE_E = "La lettre e désigne le nombre e ≈ 2,718 : choisis une autre lettre pour l'inconnue."
+MESSAGE_E = "La lettre e désigne le nombre e ≈ 2,718 : choisissez une autre lettre pour l'inconnue."
+MESSAGE_EXPOSANT = "Mettez l'exposant entre parenthèses : e^(-0,02t)."
 
 
 # =====================================================================
@@ -249,7 +250,7 @@ def tokeniser(texte):
             i += 1
         elif c == "√":
             if s[i + 1:i + 2] != "(":
-                raise ErreurSaisie("Après √, écris une parenthèse : √(x).")
+                raise ErreurSaisie("Après √, écrivez une parenthèse : √(x).")
             toks.append(Tok("fn", "sqrt", None))
             i += 1
         elif c in "0123456789.,":
@@ -267,9 +268,9 @@ def tokeniser(texte):
                     k += 1
                 if s[k:k + 1] != "(":
                     if nom == "log" and s[j:j + 1] == "_":
-                        raise ErreurSaisie("Pour une autre base, écris log_2(x) ou log_a(x) : un nombre ou une lettre après le tiret bas.")
+                        raise ErreurSaisie("Pour une autre base, écrivez log_2(x) ou log_a(x) : un nombre ou une lettre après le tiret bas.")
                     suite = nom + ("_" + base if base else "")
-                    raise ErreurSaisie(f"Après {suite}, ouvre une parenthèse : {suite}(x).")
+                    raise ErreurSaisie(f"Après {suite}, ouvrez une parenthèse : {suite}(x).")
                 toks.append(Tok("fn", nom, base))
                 i = j
             else:
@@ -339,7 +340,7 @@ class _Parseur:
         while self.est_op("+", "-"):
             op = self.prendre().val
             if self.est_op("+", "-"):
-                raise ErreurSaisie("Deux signes à la suite : utilise des parenthèses, par exemple 3 + (-2).")
+                raise ErreurSaisie("Deux signes à la suite : utilisez des parenthèses, par exemple 3 + (-2).")
             n = Op(op, n, self.produit())
         return n
 
@@ -354,9 +355,9 @@ class _Parseur:
             elif p is not None and (p.type in ("num", "var", "fn") or (p.type == "op" and p.val == "(")):
                 if p.type == "num":
                     raise ErreurSaisie("Un nombre ne peut pas suivre directement une lettre, une parenthèse ou un autre nombre : "
-                                       "écris 2x (nombre devant), ou 2*3 avec le signe *.")
+                                       "écrivez 2x (nombre devant), ou 2*3 avec le signe *.")
                 if dernier == "/":
-                    raise ErreurSaisie("Ajoute des parenthèses après la division : 1/(2x) ou (1/2)x.")
+                    raise ErreurSaisie("Ajoutez des parenthèses après la division : 1/(2x) ou (1/2)x.")
                 n = Op("*", n, self.puissance())
                 dernier = "*"
             else:
@@ -370,12 +371,22 @@ class _Parseur:
         return base
 
     def exposant(self):
-        if self.est_op("-"):
-            self.prendre()
-            return Neg(self.puissance())
-        if self.est_op("+"):
-            self.prendre()
-        return self.puissance()
+        """Exposant : un seul nombre, une seule lettre, ou une parenthèse. Tout le reste (signe, fonction, nombre ou lettre suivi
+        d'une autre lettre, d'une fonction ou d'une parenthèse, autre puissance) demande des parenthèses."""
+        p = self.pic()
+        if p is None:
+            raise ErreurSaisie("Il manque l'exposant après le signe ^.")
+        if (p.type == "op" and p.val in "+-") or p.type == "fn":
+            raise ErreurSaisie(MESSAGE_EXPOSANT)
+        n = self.atome()
+        if self.est_op("^"):
+            raise ErreurSaisie("Mettez les exposants entre parenthèses : 2^(3^2) ou (2^3)^2.")
+        s = self.pic()
+        if s is not None and p.type in ("num", "var"):
+            colle = s.type == "var" or (p.type == "num" and (s.type == "fn" or (s.type == "op" and s.val == "(")))
+            if colle:
+                raise ErreurSaisie(MESSAGE_EXPOSANT)
+        return n
 
     def atome(self):
         p = self.prendre()
@@ -403,7 +414,7 @@ class _Parseur:
         if p.val == ")":
             raise ErreurSaisie("Parenthèse fermante en trop.")
         if p.val in _INEGALITES:
-            raise ErreurSaisie("Les inéquations ne sont pas traitées par cet outil : écris une équation avec =.")
+            raise ErreurSaisie("Les inéquations ne sont pas traitées par cet outil : écrivez une équation avec =.")
         raise ErreurSaisie(f"Il manque un terme avant « {p.val} ».")
 
 
@@ -412,9 +423,9 @@ def lire_membres(texte):
     se détecte dans `analyser_saisie`."""
     toks = tokeniser(texte)
     if not toks:
-        raise ErreurSaisie("Écris une équation, par exemple 3^(x+1) = 27.")
+        raise ErreurSaisie("Écrivez une équation, par exemple 3^(x+1) = 27.")
     if any(t.type == "op" and t.val in _INEGALITES for t in toks):
-        raise ErreurSaisie("Les inéquations ne sont pas traitées par cet outil : écris une équation avec =.")
+        raise ErreurSaisie("Les inéquations ne sont pas traitées par cet outil : écrivez une équation avec =.")
     egaux = [i for i, t in enumerate(toks) if t.type == "op" and t.val == "="]
     if len(egaux) > 1:
         raise ErreurSaisie("Un seul signe = dans une équation.")
@@ -436,13 +447,13 @@ def analyser_saisie(texte):
     g, d = lire_membres(texte)
     if d is None:
         if variables(g):
-            raise ErreurSaisie("Écris une équation (avec =), ou une expression sans lettre pour calculer un logarithme.")
+            raise ErreurSaisie("Écrivez une équation (avec =), ou une expression sans lettre pour calculer un logarithme.")
         return Saisie("calcul", g, None, None)
     inconnues = sorted(variables(g) | variables(d))
     if not inconnues:
         raise ErreurSaisie(MESSAGE_E if contient_e(g) or contient_e(d) else "Il faut une inconnue : une lettre, par exemple x.")
     if len(inconnues) > 1:
-        raise ErreurSaisie("Une seule inconnue : tu as écrit " + " et ".join(inconnues) + ".")
+        raise ErreurSaisie("Une seule inconnue : vous avez écrit " + " et ".join(inconnues) + ".")
     return Saisie("equation", g, d, inconnues[0])
 
 

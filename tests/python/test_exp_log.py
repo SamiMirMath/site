@@ -8,6 +8,7 @@ import unittest
 from fractions import Fraction as F
 
 from moteurs import RACINE
+from aides_sortie import TUTOIEMENT, chaines_litterales
 import exp_log as el
 from exp_log import Nb, Var, E, Neg, Op, Pow, Fn, Log
 from noyau import ErreurSaisie
@@ -72,8 +73,8 @@ class TestTokeniseur(unittest.TestCase):
 
     def test_priorites_et_associativite(self):
         self.assertEqual(lire("-x^2"), Neg(Pow(X, Nb(2))))
-        self.assertEqual(lire("2^3^2"), Pow(Nb(2), Pow(Nb(3), Nb(2))))
-        self.assertEqual(lire("2^-x"), Pow(Nb(2), Neg(X)))
+        self.assertEqual(lire("2^x+1"), Op("+", Pow(Nb(2), X), Nb(1)))
+        self.assertEqual(lire("2^(-x)"), Pow(Nb(2), Neg(X)))
         self.assertEqual(lire("x-1-2"), Op("-", Op("-", X, Nb(1)), Nb(2)))
         self.assertEqual(lire("8/2/2"), Op("/", Op("/", Nb(8), Nb(2)), Nb(2)))
         self.assertEqual(lire("2x^2"), Op("*", Nb(2), Pow(X, Nb(2))))
@@ -97,8 +98,8 @@ class TestErreurs(unittest.TestCase):
         self.assertNotIn("Traceback", m)
 
     def test_syntaxe(self):
-        self.refuse("", "Écris une équation")
-        self.refuse("   ", "Écris une équation")
+        self.refuse("", "Écrivez une équation")
+        self.refuse("   ", "Écrivez une équation")
         self.refuse("3^(x+1", "parenthèse fermante")
         self.refuse("3^x+1)", "Parenthèse fermante en trop")
         self.refuse("(x+1)=)", "Parenthèse fermante en trop")
@@ -112,9 +113,9 @@ class TestErreurs(unittest.TestCase):
         self.refuse("2+-3=x", "Deux signes")
 
     def test_fonctions_sans_parentheses(self):
-        self.refuse("ln x = 3", "Après ln, ouvre une parenthèse")
-        self.refuse("exp x", "Après exp, ouvre une parenthèse")
-        self.refuse("log2 x = 4", "Après log_2, ouvre une parenthèse")
+        self.refuse("ln x = 3", "Après ln, ouvrez une parenthèse")
+        self.refuse("exp x", "Après exp, ouvrez une parenthèse")
+        self.refuse("log2 x = 4", "Après log_2, ouvrez une parenthèse")
         self.refuse("sqrt x", "Après sqrt")
         self.refuse("√x", "Après √")
         self.refuse("log_(x)", "Pour une autre base")
@@ -137,10 +138,10 @@ class TestErreurs(unittest.TestCase):
                 self.refuse(s, "strictement positive et différente de 1")
 
     def test_equation_ou_calcul(self):
-        self.refuse("3^x", "Écris une équation", analyser=True)
-        self.refuse("2x+1", "Écris une équation", analyser=True)
+        self.refuse("3^x", "Écrivez une équation", analyser=True)
+        self.refuse("2x+1", "Écrivez une équation", analyser=True)
         self.refuse("3=4", "Il faut une inconnue", analyser=True)
-        self.refuse("x+y=3", "Une seule inconnue : tu as écrit x et y", analyser=True)
+        self.refuse("x+y=3", "Une seule inconnue : vous avez écrit x et y", analyser=True)
         self.refuse("2^(x+y)=8", "Une seule inconnue", analyser=True)
         s = el.analyser_saisie("log_4(sqrt(2))")
         self.assertEqual((s.genre, s.d, s.inconnue), ("calcul", None, None))
@@ -254,6 +255,96 @@ class TestApercu(unittest.TestCase):
                 if not r["ok"]:
                     self.assertTrue(r["erreur"])
                     self.assertNotIn("Traceback", r["erreur"])
+
+
+class TestExposants(unittest.TestCase):
+    """L'exposant est un seul nombre, une seule lettre, ou une parenthèse : sinon l'élève doit mettre des parenthèses."""
+
+    def test_l_exposant_s_arrete_au_premier_terme(self):
+        g = lire("2^x+1")
+        self.assertEqual(g, Op("+", Pow(Nb(2), X), Nb(1)))
+        self.assertEqual(el.tex(g), "2^{x} + 1")
+        self.assertEqual(lire("x^2+1"), Op("+", Pow(X, Nb(2)), Nb(1)))
+        self.assertEqual(lire("2^x*3"), Op("*", Pow(Nb(2), X), Nb(3)))
+
+    def test_exposants_composes_exigent_des_parentheses(self):
+        for s in ["e^-0,02t", "2^-x", "2^+x", "e^-1", "e^0,02t", "2^3x", "2^xy", "2^sqrt(x)", "2^ln(x)", "e^2(x+1)", "e^2ln(x)",
+                  "2^x^2*3", "x^2y"]:
+            with self.subTest(s):
+                with self.assertRaises(ErreurSaisie) as c:
+                    el.lire_membres(s)
+                self.assertIn("exposant", str(c.exception).lower(), s)
+        for s in ["e^-0,02t", "2^-x", "e^0,02t", "2^3x", "2^sqrt(x)", "e^2(x+1)"]:
+            with self.assertRaises(ErreurSaisie) as c:
+                el.lire_membres(s)
+            self.assertEqual(str(c.exception), "Mettez l'exposant entre parenthèses : e^(-0,02t).", s)
+        self.assertEqual(el.MESSAGE_EXPOSANT, "Mettez l'exposant entre parenthèses : e^(-0,02t).")
+
+    def test_puissance_de_puissance(self):
+        with self.assertRaises(ErreurSaisie) as c:
+            el.lire_membres("2^3^2")
+        self.assertIn("Mettez les exposants entre parenthèses", str(c.exception))
+        self.assertEqual(lire("2^(3^2)"), Pow(Nb(2), Pow(Nb(3), Nb(2))))
+        self.assertEqual(lire("(2^3)^2"), Pow(Pow(Nb(2), Nb(3)), Nb(2)))
+
+    def test_exposants_acceptes(self):
+        self.assertEqual(lire("e^(-0,02t)"), Pow(E(), Neg(Op("*", Nb(F(1, 50)), Var("t")))))
+        self.assertEqual(lire("2^(-x)"), Pow(Nb(2), Neg(X)))
+        self.assertEqual(lire("x^2"), Pow(X, Nb(2)))
+        self.assertEqual(lire("2^x"), Pow(Nb(2), X))
+        self.assertEqual(lire("1,03^n"), Pow(Nb(F(103, 100)), Var("n")))
+        self.assertEqual(lire("e^x"), Pow(E(), X))
+        self.assertEqual(lire("2^e"), Pow(Nb(2), E()))
+        self.assertEqual(lire("x^(1/2)"), Pow(X, Op("/", Nb(1), Nb(2))))
+        # une lettre en exposant, puis une parenthèse ou une fonction : le produit est sans ambiguïté
+        self.assertEqual(lire("10^x(10^x-4)=0")[0], Op("*", Pow(Nb(10), X), Op("-", Pow(Nb(10), X), Nb(4))))
+        self.assertEqual(lire("2^x ln(x)"), Op("*", Pow(Nb(2), X), Log(X, E())))
+
+    def test_equations_du_cours(self):
+        self.assertEqual(lire("4^(3x+1)=8"), (Pow(Nb(4), Op("+", Op("*", Nb(3), X), Nb(1))), Nb(8)))
+        self.assertEqual(lire("37e^(-0,02t)=25"),
+                         (Op("*", Nb(37), Pow(E(), Neg(Op("*", Nb(F(1, 50)), Var("t"))))), Nb(25)))
+        self.assertEqual(el.tex_saisie(*el.lire_membres("4^(3x+1)=8")), "4^{3x + 1} = 8")
+        self.assertEqual(el.tex_saisie(*el.lire_membres("37e^(-0,02t)=25")), "37e^{-0{,}02t} = 25")
+        self.assertEqual(el.analyser_saisie("37e^(-0,02t)=25").inconnue, "t")
+        self.assertEqual(el.analyser_saisie("4^(3x+1)=8").inconnue, "x")
+
+
+class TestVouvoiement(unittest.TestCase):
+    """Les messages destinés à l'élève vouvoient : « Choisissez une autre lettre », « Ouvrez une parenthèse : ln(x). »."""
+
+    MAUVAISES_SAISIES = ["", "   ", "3^(x+1", "3^x+1)", "x==3", "=3", "x+*3=1", "x+#", "2+-3=x", "ln x = 3", "exp x", "log2 x = 4", "sqrt x",
+                         "√x", "log_(x)", "2 3x = 5", "x2 = 5", "1/2x = 3", "x<3", "log_1(x)=2", "3^x", "2x+1", "3=4", "x+y=3", "2e=5",
+                         "e^2=e", "e=3", "e^-0,02t", "2^3^2", "x^", "e^0,02t"]
+
+    def messages(self):
+        for s in self.MAUVAISES_SAISIES:
+            try:
+                el.analyser_saisie(s)
+            except ErreurSaisie as e:
+                yield s, str(e)
+
+    def test_messages_d_erreur(self):
+        vus = list(self.messages())
+        self.assertEqual(len(vus), len(self.MAUVAISES_SAISIES))
+        for s, m in vus:
+            with self.subTest(s):
+                self.assertIsNone(TUTOIEMENT.search(m), m)
+
+    def test_vouvoiement_dans_les_messages_connus(self):
+        self.assertEqual(el.MESSAGE_E, "La lettre e désigne le nombre e ≈ 2,718 : choisissez une autre lettre pour l'inconnue.")
+        r = el.apercu("ln x = 3")
+        self.assertEqual(r["erreur"], "Après ln, ouvrez une parenthèse : ln(x).")
+        with self.assertRaises(ErreurSaisie) as c:
+            el.analyser_saisie("x+y=3")
+        self.assertEqual(str(c.exception), "Une seule inconnue : vous avez écrit x et y.")
+
+    def test_aucun_texte_du_fichier_ne_tutoie(self):
+        """Tout littéral texte de exp_log.py (hors docstrings), pas seulement ceux que les entrées ci-dessus font apparaître."""
+        chemin = os.path.join(RACINE, "exponentielles-logarithmes", "exp_log.py")
+        for ligne, texte in chaines_litterales(chemin):
+            with self.subTest(ligne=ligne):
+                self.assertIsNone(TUTOIEMENT.search(texte), texte)
 
 
 class TestSource(unittest.TestCase):

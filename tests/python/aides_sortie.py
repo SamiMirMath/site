@@ -1,7 +1,38 @@
-"""Aides communes aux tests du format de sortie commun (T12)."""
+"""Aides communes aux tests du format de sortie commun (T12) et au vouvoiement des textes destinés à l'élève."""
+import ast
 import json
+import re
 
 import sortie as so
+
+# Vouvoiement : l'enseignant vouvoie ses élèves. Trois familles, pour limiter les faux positifs :
+#  - pronoms et possessifs de la 2e personne du singulier (tu, ton, ta, tes, toi) ;
+#  - impératifs en -e/-s peu ambigus, n'importe où (« choisis », « ouvre », « mets »…) ;
+#  - impératifs en début de phrase ou de chaîne, avec la majuscule : une phrase française ne commence pas par un verbe conjugué à la
+#    3e personne sans sujet (« Écris… », « Utilise… ») ; « on utilise » au milieu d'une phrase n'est donc jamais signalé.
+_IMPERATIFS_DEBUT = ("Choisis|Saisis|Écris|Ouvre|Mets|Tape|Clique|Essaie|Vérifie|Utilise|Ajoute|Regarde|Rappelle|Retiens|Pense|Observe|"
+                     "Calcule|Résous|Cherche|Prends|Fais|Donne|Simplifie|Développe|Factorise|Dérive|Trace|Complète|Lis|Relis|Reprends|"
+                     "Recommence|Reviens|Appuie|Sélectionne|Trouve|Conserve|Corrige|Réessaie|Recharge|Patiente|Attends|Passe|Compare|"
+                     "Évite|Commence|Continue|Vois|Rédige|Justifie|Explique")
+TUTOIEMENT = re.compile(
+    r"(?i:\b(?:tu|ton|ta|tes|toi|toi-même)\b)"
+    r"|(?i:\b(?:choisis|saisis|écris|ouvre|mets|essaie|clique|réessaie|retiens|reviens|appuie|patiente)\b)"
+    r"|(?:^|[.:;!?»)]\s+|[«(]\s*)(?:" + _IMPERATIFS_DEBUT + r")\b(?![-\w])", re.M)
+
+
+def chaines_litterales(chemin):
+    """[(ligne, texte)] des littéraux texte d'un fichier Python, docstrings exclues : ce que l'élève peut lire (messages d'erreur,
+    phrases du corrigé). Les morceaux d'une f-string sont des littéraux séparés."""
+    with open(chemin, encoding="utf-8") as f:
+        arbre = ast.parse(f.read())
+    docstrings = set()
+    for n in ast.walk(arbre):
+        if isinstance(n, (ast.Module, ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)) and n.body:
+            premier = n.body[0]
+            if isinstance(premier, ast.Expr) and isinstance(premier.value, ast.Constant) and isinstance(premier.value.value, str):
+                docstrings.add(id(premier.value))
+    return [(n.lineno, n.value) for n in ast.walk(arbre)
+            if isinstance(n, ast.Constant) and isinstance(n.value, str) and id(n) not in docstrings]
 
 
 def chaines(v, exclure=()):
