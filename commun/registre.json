@@ -1,0 +1,47 @@
+{
+  "_note": "Source unique de la liste des outils (T22). L'accueil (index.html) reste du HTML écrit à la main : tests/python/test_accueil.py vérifie qu'il contient exactement ces outils, dans cet ordre, pour chaque année et chaque filière (ACC-01). « filieres » : année (1, 2, 3) -> filières. Un outil de plus = une entrée ici + sa carte dans index.html. Pas encore de « parametres » ni de « descriptions » par filière : le simplexe les aura avec T27 (liens ?methode=…, ACC-08).",
+  "outils": [
+    {
+      "id": "factorisation",
+      "chemin": "factorisation/",
+      "titre": "Factorisation",
+      "description": "Mise en évidence, identités remarquables, Somme-Produit, groupements… étape par étape.",
+      "filieres": {"1": ["C", "Ms", "Mr"]}
+    },
+    {
+      "id": "simplexe",
+      "chemin": "simplexe/",
+      "titre": "Programmation linéaire",
+      "description": "Méthode algébrique et méthode géométrique, pas à pas.",
+      "filieres": {"2": ["C", "Mr"]}
+    },
+    {
+      "id": "ensemble-definition",
+      "chemin": "ensemble-definition/",
+      "titre": "Ensemble de définition",
+      "description": "Calcul détaillé, condition par condition, avec le tableau de signes.",
+      "filieres": {"3": ["Ms", "Mr"]}
+    },
+    {
+      "id": "derivee-variations",
+      "chemin": "derivee-variations/",
+      "titre": "Dérivée, signe et variations",
+      "description": "Calcul de f', tableau de signes et tableau de variations, étape par étape.",
+      "filieres": {"3": ["Ms", "Mr"]}
+    },
+    {
+      "id": "limites-asymptotes",
+      "chemin": "limites-asymptotes/",
+      "titre": "Limites et asymptotes",
+      "description": "Limites aux bornes de l'ED et asymptotes horizontales, verticales, obliques.",
+      "filieres": {"3": ["Ms", "Mr"]}
+    },
+    {
+      "id": "etude-complete",
+      "chemin": "etude-complete/",
+      "titre": "Étude complète de fonction",
+      "description": "ED, dérivée, variations, limites, asymptotes et graphique — tout enchaîné.",
+      "filieres": {"3": ["Ms", "Mr"]}
+    }
+  ]
+}

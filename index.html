@@ -7,11 +7,23 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet">
+<script>
+/* Sans JavaScript, tout reste visible (voir les règles html[data-js] plus bas). Ici : le script est là, et la filière enregistrée est posée avant le
+   premier affichage (pas de clignotement de la porte). */
+(function(){
+  var html = document.documentElement;
+  html.setAttribute('data-js', '');
+  try{
+    var saved = localStorage.getItem('samimir-track');
+    if (saved === 'C' || saved === 'Ms' || saved === 'Mr' || saved === 'tous') html.setAttribute('data-track', saved);
+  }catch(e){}
+})();
+</script>
 <style>
 :root{
   --paper:#f8f6ef; --paper-raised:#fffdf8; --ink:#1c1a16; --muted:#6e6657;
   --line:#d9d2c0; --line-soft:#e8e2d3;
-  --accent:#6b1f2a; --accent-ink:#5a1620; --gold:#9c7a34;
+  --accent:#6b1f2a; --accent-ink:#5a1620; --gold:#84672c;
 }
 @media (prefers-color-scheme: dark){
   :root{ --paper:#17140f; --paper-raised:#1e1a14; --ink:#ece6d8; --muted:#a79d87;
@@ -41,6 +53,7 @@ header p{
   font-style:italic; line-height:1.55;
 }
 header p:last-child{margin-bottom:0}
+html:not([data-js]) #mobius{display:none}      /* sans JavaScript, le canvas resterait un grand blanc */
 #mobius{
   display:block; margin:2px auto 16px; width:140px; height:112px; opacity:.92;
 }
@@ -87,6 +100,7 @@ section.level:last-of-type{border-bottom:none}
 }
 
 .switcher{
+  display:none;
   text-align:center; color:var(--muted); font-size:.92rem; font-style:italic;
   margin:0 0 18px;
 }
@@ -97,28 +111,27 @@ section.level:last-of-type{border-bottom:none}
 }
 .link-btn:hover{color:var(--accent)}
 
-html:not([data-track]) #content{display:none}
-html[data-track] #gate{display:none}
+/* Sans JavaScript (ACC-03) : la porte est cachée et toutes les filières sont affichées côte à côte. Le script pose data-js sur <html> ;
+   alors seulement, la porte apparaît tant qu'aucune filière n'est choisie, et le choix filtre les colonnes. */
+#gate{display:none}
+html[data-js]:not([data-track]) #gate{display:block}
+html[data-js]:not([data-track]) #content{display:none}
+html[data-js][data-track] .switcher{display:block}
 
 .tracks{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
 @media (max-width:680px){ .tracks{grid-template-columns:1fr} }
-html[data-track] .tracks{display:block}
-html[data-track] .track{display:none}
-html[data-track="C"] .track[data-track="C"],
-html[data-track="Ms"] .track[data-track="Ms"],
-html[data-track="Mr"] .track[data-track="Mr"]{display:block}
+html[data-js][data-track]:not([data-track="tous"]) .tracks{display:block}
+html[data-js][data-track]:not([data-track="tous"]) .track{display:none}
+html[data-js][data-track="C"] .track[data-track="C"],
+html[data-js][data-track="Ms"] .track[data-track="Ms"],
+html[data-js][data-track="Mr"] .track[data-track="Mr"]{display:block}
 
 .track-label{
   display:block; font-size:.72rem; font-weight:700; letter-spacing:.14em;
   text-transform:uppercase; color:var(--gold); margin:0 0 12px;
   padding-bottom:7px; border-bottom:1px solid var(--line-soft);
 }
-html[data-track] .track-label{display:none}
-
-/* vue d'ensemble : les trois filières côte à côte, comme avant le gate */
-html[data-track="tous"] .tracks{display:grid}
-html[data-track="tous"] .track{display:block}
-html[data-track="tous"] .track-label{display:block}
+html[data-js][data-track]:not([data-track="tous"]) .track-label{display:none}
 
 .tools{display:flex; flex-direction:column; gap:12px}
 .tool{
@@ -329,10 +342,8 @@ footer a:hover{color:var(--accent)}
     try{ localStorage.removeItem('samimir-track'); }catch(e){}
   });
 
-  try{
-    var saved = localStorage.getItem('samimir-track');
-    if (saved === 'C' || saved === 'Ms' || saved === 'Mr' || saved === 'tous') choose(saved);
-  }catch(e){}
+  var courant = html.getAttribute('data-track');      // posée dans <head> d'après la filière enregistrée
+  if (courant) choose(courant);
 })();
 </script>
 <script>
@@ -341,11 +352,8 @@ footer a:hover{color:var(--accent)}
   if (!canvas || !canvas.getContext) return;
   var ctx = canvas.getContext('2d');
 
-  var cssVar = getComputedStyle(document.documentElement);
-  var colLine = cssVar.getPropertyValue('--line').trim() || '#999';
-  var colAccent = cssVar.getPropertyValue('--accent').trim() || '#6b1f2a';
-  var colGold = cssVar.getPropertyValue('--gold').trim() || '#9c7a34';
-  var colPaper = cssVar.getPropertyValue('--paper').trim() || '#f8f6ef';
+  // les couleurs sont relues à chaque changement de thème clair/sombre (lireCouleurs), sans recharger la page
+  var colLine, colFaceOr, colFaceBordeaux;
 
   // des remplissages OPAQUES (teinte mélangée avec le fond) plutôt que de la
   // transparence : des polygones voisins semi-transparents laissent des
@@ -364,8 +372,16 @@ footer a:hover{color:var(--accent)}
     var bl = Math.round(a[2] * alpha + b[2] * (1 - alpha));
     return 'rgb(' + r + ',' + g + ',' + bl + ')';
   }
-  var colFaceOr = melanger(colGold, colPaper, 0.4);
-  var colFaceBordeaux = melanger(colAccent, colPaper, 0.48);
+  function lireCouleurs(){
+    var cssVar = getComputedStyle(document.documentElement);
+    var colAccent = cssVar.getPropertyValue('--accent').trim() || '#6b1f2a';
+    var colGold = cssVar.getPropertyValue('--gold').trim() || '#84672c';
+    var colPaper = cssVar.getPropertyValue('--paper').trim() || '#f8f6ef';
+    colLine = cssVar.getPropertyValue('--line').trim() || '#999';
+    colFaceOr = melanger(colGold, colPaper, 0.4);
+    colFaceBordeaux = melanger(colAccent, colPaper, 0.48);
+  }
+  lireCouleurs();
 
   var dpr = window.devicePixelRatio || 1;
   var W, H;
@@ -379,8 +395,7 @@ footer a:hover{color:var(--accent)}
   dimensionner();
   window.addEventListener('resize', dimensionner);
 
-  // HW plus large : la fourmi passe vraiment derrière le ruban une partie du
-  // tour (vérifié numériquement), pas seulement en théorie.
+  // demi-largeur du ruban (R = rayon de la ligne centrale)
   var R = 1.0, HW = 0.5;
   // TILT proche de 0 = vu "de profil" (écrasé en ligne), proche de π/2 = vu
   // "de dessus" (cercle plat) : on veut une vue oblique nette entre les deux.
@@ -477,20 +492,50 @@ footer a:hover{color:var(--accent)}
     tracerBord(bordB);
   }
 
+  var mqSombre = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
   var reduitMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var spin = 0;
+
+  function sombre(){
+    lireCouleurs();
+    dessiner(spin);          // même à l'arrêt (mouvement réduit, hors écran) : le ruban prend tout de suite les couleurs du nouveau thème
+  }
+  if (mqSombre){
+    if (mqSombre.addEventListener) mqSombre.addEventListener('change', sombre);
+    else if (mqSombre.addListener) mqSombre.addListener(sombre);
+  }
+
   if (reduitMotion){
     dessiner(0);
     return;
   }
 
-  var t0 = performance.now();
+  // Sobre : la boucle d'animation ne tourne que si le ruban est à l'écran ET l'onglet visible (ACC-06) ; elle reprend là où elle s'était arrêtée.
+  var visible = true, enCours = false, derniere = 0;
   function anime(t){
-    var dt = (t - t0) / 1000;
-    var spin = dt * (2 * Math.PI / 55);
+    if (!(visible && !document.hidden)){ enCours = false; return; }
+    spin += (t - derniere) / 1000 * (2 * Math.PI / 55);
+    derniere = t;
     dessiner(spin);
     requestAnimationFrame(anime);
   }
-  requestAnimationFrame(anime);
+  function mettreAJourBoucle(){
+    var doitTourner = visible && !document.hidden;
+    if (doitTourner && !enCours){
+      enCours = true;
+      derniere = performance.now();
+      requestAnimationFrame(anime);
+    }
+  }
+  document.addEventListener('visibilitychange', mettreAJourBoucle);
+  if ('IntersectionObserver' in window){
+    new IntersectionObserver(function(entrees){
+      visible = entrees[entrees.length - 1].isIntersecting;
+      mettreAJourBoucle();
+    }).observe(canvas);
+  }
+  dessiner(0);
+  mettreAJourBoucle();
 })();
 </script>
 </body>

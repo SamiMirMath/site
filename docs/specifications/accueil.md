@@ -7,12 +7,15 @@
   au choix. Une année sans outil pour la filière choisie est masquée.
 - Pour chaque année (I, II, III) et chaque filière : liste des outils (titre + description + lien).
 - **Sans JavaScript** : tous les outils de toutes les filières sont visibles et les liens
-  fonctionnent (le choix de filière est une amélioration apportée par le JS).
+  fonctionnent (le choix de filière est une amélioration apportée par le JS). Mécanisme (T22) : le CSS de base montre tout (trois colonnes par
+  année) et cache la porte ; un petit script dans `<head>` pose `data-js` sur `<html>` puis `data-track` (filière enregistrée) avant le premier
+  affichage ; les règles qui cachent le contenu ou filtrent par filière sont toutes sous `html[data-js]`. Le canvas du ruban est caché sans JS.
 - Pied de page « © 2026 Sami Mir · samimir.ch ».
 
 ## Registre `commun/registre.json`
 
-Source unique de la liste des outils, lue par les tests (l'accueil reste du HTML écrit à la main).
+Source unique de la liste des outils, lue par les tests (l'accueil reste du HTML écrit à la main). Fait en T22 : 6 outils, 13 cartes
+(année I : 3, année II : 2, année III : 8). `parametres` et `descriptions` (par filière) n'existent pas encore : ils arrivent avec T27.
 
 ```json
 {
@@ -54,9 +57,9 @@ diffère selon la filière.
 |---|---|---|
 | ACC-01 | L'ensemble des couples (année, filière, chemin, titre, description) présents dans `index.html` est exactement celui du registre | [auto-py] |
 | ACC-02 | Chaque `chemin` du registre existe et contient un `index.html` | [auto-py] |
-| ACC-03 | Sans JavaScript, tous les liens d'outils sont visibles (aucune règle CSS ne masque `#content` en l'absence de `data-track`) | [auto-py] (analyse CSS) + [auto-page] JS désactivé |
+| ACC-03 | Sans JavaScript, tous les liens d'outils sont visibles (aucune règle CSS ne masque `#content` hors de `html[data-js]`) ; les 13 cartes du registre | [auto-py] (analyse CSS) + [auto-page] JS désactivé |
 | ACC-04 | Avec JS, choisir « Ms » masque les années sans outil Ms et affiche le choix courant | [auto-page] |
 | ACC-05 | Le texte doré (`--gold`) a un contraste ≥ 4,5:1 sur `--paper` et `--paper-raised` (ex. `#84672c` : 4,9:1) ; le mode sombre reste ≥ 4,5:1 | [auto-py] |
 | ACC-06 | L'animation ne consomme aucune image (`requestAnimationFrame`) quand le canvas est hors écran | [auto-page] |
 | ACC-07 | Le commentaire périmé « fourmi » est supprimé | revue |
-| ACC-08 | En 2e année : 2C pointe vers `simplexe/?methode=geometrique`, 2Mr vers `simplexe/?methode=algebrique`, aucun lien vers le simplexe en 2Ms | [auto-py] |
+| ACC-08 | En 2e année : 2C pointe vers `simplexe/?methode=geometrique`, 2Mr vers `simplexe/?methode=algebrique`, aucun lien vers le simplexe en 2Ms | [auto-py] (T27 : la page du simplexe doit d'abord comprendre le paramètre ; jusque-là 2C et 2Mr gardent `simplexe/`) |

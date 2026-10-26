@@ -279,7 +279,10 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
   (`a(x − x₁)(x − x₂)`, ex. 6x² − 7x − 3 = 6(x + 1/3)(x − 3/2)) ; la « racine évidente » (degré ≥ 3) ne teste que les diviseurs
   entiers du terme constant (FA-09). Instantanés régénérés : 12 entrées changées, toutes relues (méthode annoncée, résultat vérifié).
 
-### T22 — Accueil : registre, sans-JS, contraste, animation sobre
+### T22 — Accueil : registre, sans-JS, contraste, animation sobre — **faite** (26.10.2026)
+- **Fait** : `commun/registre.json` (6 outils, 13 cartes) vérifié contre `index.html` (`tests/python/test_accueil.py` : ACC-01, 02, 03, 05, 07 ; `tests/pages/test_accueil.py` : ACC-03 sans JS,
+  ACC-04, ACC-06, thème). Sans JavaScript tout est visible (`data-js`) ; `--gold` clair `#84672c` (4,9:1) ; le ruban s'arrête hors écran, onglet caché, et suit le thème
+  sans recharger ; commentaires « fourmi » supprimés. **ACC-08 reporté à T27** (la page du simplexe ne comprend pas encore `?methode=`).
 - **Fichiers** : `commun/registre.json`, `index.html`, `tests/python/test_accueil.py`.
 - **Vérification** : ACC-01 à ACC-08. Les liens `?methode=` de la 2e année ne sont posés qu'une
   fois T27 en ligne (la page doit d'abord comprendre le paramètre) ; d'ici là, 2C et 2Mr gardent
