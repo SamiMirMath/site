@@ -659,9 +659,9 @@ class TestLogarithme(unittest.TestCase):
         for saisie, exact in [
             ("2^x=100", r"\frac{2}{\log(2)}"), ("10^x=8", r"\log(8)"), ("e^x=7", r"\ln(7)"), ("3e^x=0,65", r"\ln\left(\frac{13}{60}\right)"),
             ("e^(-0,01x)=0,7", r"\frac{\ln(0{,}7)}{-0{,}01}"), ("37*e^(-0,02t)=25", r"\frac{\ln\left(\frac{25}{37}\right)}{-0{,}02}"),
-            ("3^(x-1)=10", r"\frac{1}{\log(3)} + 1"), ("5^(2x+3)=7", r"\frac{\frac{\log(7)}{\log(5)} - 3}{2}"),
+            ("3^(x-1)=10", r"1 + \frac{1}{\log(3)}"), ("5^(2x+3)=7", r"\frac{\frac{\log(7)}{\log(5)} - 3}{2}"),
             ("10^(2x)=0,7", r"\frac{\log(0{,}7)}{2}"), ("10^(3x)=25", r"\frac{\log(25)}{3}"), ("12^x=49", r"\frac{\log(49)}{\log(12)}"),
-            ("1,04^x=100", r"\frac{2}{\log(1{,}04)}"), ("4^(x-4)=20", r"\frac{\log(20)}{\log(4)} + 4"),
+            ("1,04^x=100", r"\frac{2}{\log(1{,}04)}"), ("4^(x-4)=20", r"4 + \frac{\log(20)}{\log(4)}"),
             ("2000*1,045^n=3805", r"\frac{\log(1{,}9025)}{\log(1{,}045)}"), ("0,8^n=0,5", r"\frac{\log(0{,}5)}{\log(0{,}8)}"),
             ("(1/2)^x=3", r"\frac{\log(3)}{\log\left(\frac{1}{2}\right)}"), ("2x=ln(0,1)", r"\frac{\ln(0{,}1)}{2}"),
             ("x=ln(3)", r"\ln(3)"), ("10^(-x)=8", r"-\log(8)"), ("e^x=1", "0"), ("4^(2x+1)=60", r"\frac{\frac{\log(60)}{\log(4)} - 1}{2}"),
@@ -775,6 +775,60 @@ class TestLogarithme(unittest.TestCase):
                 self.assertNotIn("\\log_", texte)
                 self.assertIsNone(re.search(r"\d\.\d", texte), texte)
                 self.assertIsNone(TUTOIEMENT.search(re.sub(r"\\[a-z]+", " ", texte)), texte)
+
+    def test_x_moins_a_donne_a_plus_le_second_membre(self):
+        """x − a = c donne x = a + c (corrigé 2.23 d : x = 1 + 1/log(3)), jamais c + a ; x + a = c donne c − a."""
+        ligne = lambda s: el.tex_chaine(corriger(s)["etapes"][-1]["lignes"][0])
+        self.assertTrue(ligne("3^(x-1)=10").endswith(r"x - 1 = \frac{1}{\log(3)} \iff x = 1 + \frac{1}{\log(3)}"))
+        self.assertTrue(ligne("4^(x-4)=20").endswith(r"x - 4 = \frac{\log(20)}{\log(4)} \iff x = 4 + \frac{\log(20)}{\log(4)}"))
+        self.assertTrue(ligne("5^(2x-3)=7").endswith(
+            r"2x - 3 = \frac{\log(7)}{\log(5)} \iff 2x = 3 + \frac{\log(7)}{\log(5)} \iff x = \frac{3 + \frac{\log(7)}{\log(5)}}{2}"))
+        self.assertTrue(ligne("5^(2x+3)=7").endswith(
+            r"2x + 3 = \frac{\log(7)}{\log(5)} \iff 2x = \frac{\log(7)}{\log(5)} - 3 \iff x = \frac{\frac{\log(7)}{\log(5)} - 3}{2}"))
+        self.assertEqual([el.tex(n) for n in corriger("10^(x-3)=7")["solutions"]], [r"3 + \log(7)"])
+        self.assertEqual([el.tex(n) for n in corriger("e^(x+3)=7")["solutions"]], [r"\ln(7) - 3"])
+
+    def test_x_deja_isole_a_quand_meme_une_ligne_finale(self):
+        """x = ln(3) : aucune carte de méthode, mais l'élève voit « S = {ln(3)}, soit x ≈ 1,099 » (l'adaptateur de l'étape 7 en fait la carte finale)."""
+        r = corriger("x=ln(3)")
+        self.assertEqual(r["etapes"], [])
+        self.assertEqual([el.tex(n) for n in r["solutions"]], [r"\ln(3)"])
+        self.assertEqual(el.tex_solution(r), r"S = \left\{\ln(3)\right\} \text{, soit } x \approx 1{,}099")
+        self.assertEqual(el.tex_solution(corriger("ln(3)=x")), r"S = \left\{\ln(3)\right\} \text{, soit } x \approx 1{,}099")
+        self.assertEqual(el.tex_solution(corriger("t=ln(0,5)")), r"S = \left\{\ln(0{,}5)\right\} \text{, soit } t \approx -0{,}693")
+
+    def test_ligne_finale(self):
+        for saisie, attendu in [
+            ("2^x=100", r"S = \left\{\frac{2}{\log(2)}\right\} \text{, soit } x \approx 6{,}644"),
+            ("3^x=27", r"S = \left\{3\right\}"), ("4^x=8", r"S = \left\{\frac{3}{2}\right\}"), ("5^(8x)=-25", r"S = \varnothing"),
+            ("2^(x+1)=2*2^x", r"S = \mathbb{R}"), ("2^(x+1)=2^(x+3)", r"S = \varnothing"),
+            ("2x=ln(0,1)", r"S = \left\{\frac{\ln(0{,}1)}{2}\right\} \text{, soit } x \approx -1{,}151"),
+            ("(10^(-x)-1)*(10^(-x)-8)=0", r"S = \left\{-\log(8) \,;\, 0\right\} \text{, soit } x \approx -0{,}903 \text{ ou } x = 0"),
+            ("2^(x^2)=2^(2x+1)", r"S = \left\{1 - \sqrt{2} \,;\, 1 + \sqrt{2}\right\} \text{, soit } x \approx -0{,}414 \text{ ou } x \approx 2{,}414"),
+            ("2^(x^2)*4^x=8", r"S = \left\{-3 \,;\, 1\right\}"),
+            ("2000*1,045^n=3805", r"S = \left\{\frac{\log(1{,}9025)}{\log(1{,}045)}\right\} \text{, soit } n \approx 14{,}612"),
+            ("1,04^x=100", r"S = \left\{\frac{2}{\log(1{,}04)}\right\} \text{, soit } x \approx 117{,}417"),
+            ("10^(x+3)=117000", r"S = \left\{\log(117\text{’}000) - 3\right\} \text{, soit } x \approx 2{,}068")]:
+            with self.subTest(saisie):
+                self.assertEqual(el.tex_solution(corriger(saisie)), attendu)
+
+    def test_ligne_finale_partout_et_conforme(self):
+        """Toute équation de la batterie a sa ligne finale : « S = … » ; un « ≈ » vient toujours après la valeur exacte, 3 décimales, virgule ;
+        « soit » seulement s'il y a une valeur non rationnelle ; pas de point décimal ni de tutoiement."""
+        for saisie, _ in BATTERIE_E1 + BATTERIE_E2:
+            with self.subTest(saisie):
+                r = el.corriger_equation(*(lambda s: (s.g, s.d, s.inconnue))(el.analyser_saisie(saisie)))
+                t = el.tex_solution(r)
+                self.assertTrue(t.startswith("S = "), t)
+                irrationnelle = bool(r["solutions"]) and any(not isinstance(n, Nb) for n in r["solutions"])
+                self.assertEqual(r"\approx" in t, irrationnelle, t)
+                self.assertEqual(r"\text{, soit }" in t, irrationnelle, t)
+                if irrationnelle:
+                    self.assertLess(t.index(r"\right\}"), t.index(r"\approx"))
+                    for approx in re.findall(r"\\approx (-?[\d\\text{’}]+\{,\}\d+)", t):
+                        self.assertEqual(len(approx.split("{,}")[1]), 3, approx)
+                self.assertIsNone(re.search(r"\d\.\d", t), t)
+                self.assertIsNone(TUTOIEMENT.search(re.sub(r"\\[a-z]+", " ", t)), t)
 
     def test_hors_programme_ou_autre_methode(self):
         for saisie in SANS_E2:

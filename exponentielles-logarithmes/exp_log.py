@@ -1092,7 +1092,8 @@ def _suite_lineaire(chaine, p, q0, c, x):
     La forme est celle que donne la chaîne : on ne simplifie pas c/p (ln(25/37)/(−0,02), jamais −50·ln(25/37))."""
     haut = c
     if q0 != 0:
-        haut = Op("-", c, _nb_exact(q0)) if q0 > 0 else Op("+", c, _nb_exact(-q0))
+        # x + a = c donne c − a ; x − a = c donne a + c (corrigé 2.23 d : x = 1 + 1/log(3), jamais 1/log(3) + 1)
+        haut = Op("-", c, _nb_exact(q0)) if q0 > 0 else Op("+", _nb_exact(-q0), c)
         chaine.ajouter(Eq(_arbre_poly([F(0), p], x), haut), "⇔")
     if p == 1:
         return haut
@@ -1244,6 +1245,22 @@ def _lineaire_logarithmes(g, d, x):
     etapes = [_carte("Équation du premier degré", [chaine])] if chaine.liens else []
     return {"genre": "lineaire", "inconnue": x, "enonce": Eq(g, d), "base": None, "etapes": etapes, "solutions": [solution],
             "remarque": None}
+
+
+def tex_solution(r):
+    """Ligne finale du corrigé : l'ensemble solution (valeur exacte), puis « soit x ≈ … » (3 décimales) quand une solution n'est pas un
+    rationnel. Elle existe même quand aucune carte de méthode ne précède (x = ln 3 : S = {ln(3)}, soit x ≈ 1,099)."""
+    sols = r["solutions"]
+    if sols is None:
+        return r"S = \mathbb{R}"
+    if not sols:
+        return r"S = \varnothing"
+    s = r"S = \left\{" + r" \,;\, ".join(tex(n) for n in sols) + r"\right\}"
+    if all(isinstance(n, Nb) for n in sols):
+        return s
+    x = r["inconnue"]
+    parts = [x + (" = " + tex(n) if isinstance(n, Nb) else r" \approx " + formater_decimal(f"{valeur(n):.3f}", tex=True)) for n in sols]
+    return s + r" \text{, soit } " + r" \text{ ou } ".join(parts)
 
 
 def corriger_equation(g, d, x):
