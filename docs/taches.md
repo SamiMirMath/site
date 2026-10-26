@@ -292,6 +292,10 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
 - **Fichiers** : tokeniseurs (`ensemble_def.py`, `factorisation.py`), `dec()`, `commun/nombres.js`,
   graduations du graphique.
 - **Dépend** : T01. Milliers : ’ dès 4 chiffres, saisie de ' et ’ (Q5, 14.10.2026).
+- **Déjà fait par T33 (Q12, `657806d`)** : la partie Python du formatage, dans `moteur/nombres.py` (`grouper`, `formater_entier`, `formater_decimal`,
+  `nettoyer_saisie`, motifs de saisie), appliquée à l'outil Exponentielles et logarithmes ; règle précisée : séparateur sur la partie entière seulement
+  (1’234,567, jamais dans les décimales). **Reste pour T23** : réutiliser ces fonctions dans les tokeniseurs de `ensemble_def.py` et `factorisation.py` et dans
+  `dec()`, écrire `commun/nombres.js` (même règle), les graduations du graphique, et régénérer les instantanés.
 - **Vérification** : SOC-11, SOC-12.
 
 ## Phase F — Nouveaux outils (avant la phase E)
@@ -472,7 +476,7 @@ l'élève, un « Calcul en cours… » qui dure parce que SymPy se charge encore
 - Demande de l'enseignant : un outil pour le prochain test des 3C (polycopié 3C (chapitre 2), pp. 17-40). C'est l'outil N03 de la
   phase F, **sans attendre N02** : il porte sa propre lecture de la saisie (`log` = base 10, `log_a`, `e` constante) et n'utilise pas l'outil
   Ensemble de définition (le polycopié n'en parle pas ; les 2M l'auront, plus tard).
-- **Spécification** : [specifications/exponentielles-logarithmes.md](specifications/exponentielles-logarithmes.md) (EL-01 à EL-17), questions Q10 à Q12.
+- **Spécification** : [specifications/exponentielles-logarithmes.md](specifications/exponentielles-logarithmes.md) (EL-01 à EL-17), questions Q10 à Q12 (tranchées le 26.10.2026).
 - **Étapes (un commit chacune, aucun push)** : 0 spécification (**arrêt : l'enseignant valide les formulations**) ; 1 lecture, arbre, TeX, aperçu ;
   2 même base (E1) ; 3 isoler puis logarithme (E2) ; 4 bases différentes (E3) ; 5 équations logarithmiques (E4) ; 6 calcul de log_a(y) (C1) ;
   7 adaptateur `resoudre_el.py`, manifeste, instantanés, vocabulaire, propriétés ; 8 page + pool C + test de page + exemples dans le guide

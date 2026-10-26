@@ -1,7 +1,7 @@
 # Outil « Exponentielles et logarithmes » (3C)
 
 URL : `/exponentielles-logarithmes/` · moteur : `exponentielles-logarithmes/exp_log.py` (SymPy obligatoire pour décider,
-jamais pour écrire) · adaptateur : `resoudre_el.py`. Spécification du 26.10.2026, **à valider par l'enseignant avant tout code**.
+jamais pour écrire) · adaptateur : `resoudre_el.py`. Spécification du 26.10.2026, validée par étapes par l'enseignant (questions Q10 à Q12 tranchées le 26.10.2026).
 
 Références : polycopié 3C (chapitre 2), *Mathématiques 3 ECG*, « Exponentielles et logarithmes », pages imprimées 17 à 40
 (pages 18 à 41 du PDF, version du 14.04.2026) ; corrigé détaillé de l'enseignant (`3C_Exponentielles_Logarithmes_Corrige.pdf`,
@@ -36,6 +36,8 @@ en mots », tâtonnement (2.14), graphiques (2.1, 2.9, 2.12), écrire un nombre 
 - **`e` est toujours le nombre e** et ne peut pas être l'inconnue : message « La lettre e désigne le nombre e ≈ 2,718 : choisis une
   autre lettre pour l'inconnue. » Les noms de fonction (`sqrt`, `exp`, `ln`, `log_a`, `log2`, `log`) sont reconnus **avant** les lettres
   isolées, du plus long au plus court.
+- **Notation suisse** (Q5, Q12) : apostrophe typographique ’ dès 4 chiffres, **partie entière seulement** (−99’999’995, 1’234,567, 0,0001), `\text{’}` en TeX ; saisie de ' et ’ lue 1000 ;
+  « 1 000 » refusé (« Pas d'espace dans un nombre : écrivez 1000 ou 1’000. »). Fonctions dans `moteur/nombres.py`, réutilisables par T23.
 - Affichage : `\log`, `\ln`, `\log_{2}` écrits **par notre arbre**, jamais par SymPy (SymPy écrit `log` pour `ln`). Virgule décimale.
   Valeurs approchées avec « ≈ », jamais avec « ≅ » ni « ~ ». L'expression « valeur approchée » n'est pas écrite (SOC-15).
 
@@ -56,7 +58,8 @@ Propriétés nommées (liste fermée, testée) : (on isole le terme exponentiel)
 (changement de base).
 
 **Valeur exacte d'abord, puis ≈** à 3 décimales (corrigé p. 1), jamais un « ≈ » sans la valeur exacte juste avant sur la même ligne.
-log(10^k) = k et ln(e^k) = k sont évalués ; sinon la valeur exacte est gardée telle quelle.
+log(10^k) = k et ln(e^k) = k sont évalués ; log a − log b est regroupé en log(a/b) seulement dans les bases différentes (E3) ; sinon la valeur exacte
+est gardée **telle que la donne la chaîne** : `ln(25/37)/(−0,02)` n'est pas simplifié en `−50 · ln(25/37)` (Q11).
 
 **Pas d'ensemble de définition en 3C** : le polycopié n'en parle nulle part. Seules deux justifications, celles de ton corrigé :
 - logarithme dont l'argument contient l'inconnue : **Vérification** après la résolution, « 5 − x = 10⁸ > 0 : le logarithme est bien défini. ✓ » ;
@@ -96,8 +99,8 @@ Solution : `S = {−3 ; 1}`.
 `⇔ x = log(2) / (log(2) − log(3)) = log(2) / log(2/3)` (log a − log b = log(a/b)) `≈ −1,710`.
 
 **6. Logarithme — log(5 − x) = 8** (2.15 l)
-`log(5 − x) = 8 ⇔ 5 − x = 10⁸` (définition du logarithme) `⇔ x = 5 − 10⁸ = −99999995`.
-Vérification : `5 − x = 10⁸ > 0`, le logarithme est bien défini ✓. `S = {−99999995}` (séparateur des milliers : voir Q12).
+`log(5 − x) = 8 ⇔ 5 − x = 10⁸` (définition du logarithme) `⇔ x = 5 − 10⁸ = −99’999’995`.
+Vérification : `5 − x = 10⁸ > 0`, le logarithme est bien défini ✓. `S = {−99’999’995}`.
 
 **7. Base inconnue — log_x(256) = 4** (2.22 b)
 Condition : `x > 0` et `x ≠ 1` (une base de logarithme est strictement positive et différente de 1).
@@ -109,19 +112,23 @@ Condition : `x > 0` et `x ≠ 1` (une base de logarithme est strictement positiv
 
 **9. Application — 37 · e^(−0,02t) = 25** (p. 29)
 `37 · e^(−0,02t) = 25 ⇔ e^(−0,02t) = 25/37` (on isole le terme exponentiel) `⇔ −0,02t = ln(25/37)` (définition du logarithme)
-`⇔ t = ln(25/37) / (−0,02) = −50 · ln(25/37) ≈ 19,602`.
+`⇔ t = ln(25/37) / (−0,02) ≈ 19,602` (la forme que donne la chaîne, non simplifiée en −50 · ln(25/37) : Q11).
 
 ## Exercices au hasard (pool C)
 
 Générés en Python (`exercice(niveau, graine)`, déterministe), inconnue **x**, énoncés **variantes** de ceux du polycopié. Pool M séparé, plus
-tard (clé prévue, rien de codé). Gabarits **à valider (Q10)** :
+tard (clé prévue, rien de codé). Gabarits **validés (Q10, 26.10.2026)** :
 
 | Niveau (poids) | Gabarit | Exemple |
 |---|---|---|
-| facile (35 %) | a^(px+q) = a^k avec a ∈ {2, 3, 5, 10}, p ∈ [1 ; 3], solution entière ; ou log(x) = k, ln(x) = c, log_a(x) = k | 3^(2x+1) = 81 ; log₂(x) = 5 |
-| moyen (35 %) | k · a^(px+q) = b avec b/k puissance exacte ; bases puissances d'une même base (4, 8, 9, 25, 27) ; log(5 − x) = k | 4^(3x+1) = 8 ; 2 · 3^(x−1) = 18 |
-| logarithme (20 %) | a^(px+q) = b sans puissance exacte ; k · e^(cx) = b ; a^x = −b (∅) | 4^(2x+1) = 60 ; 5^(8x) = −25 |
+| facile (30 %) | a^(px+q) = a^k avec a ∈ {2, 3, 5, 10}, p ∈ [1 ; 3], solution entière ; ou log(x) = k, ln(x) = c, log_a(x) = k | 3^(2x+1) = 81 ; log₂(x) = 5 |
+| moyen (30 %) | k · a^(px+q) = b avec b/k puissance exacte ; bases puissances d'une même base (4, 8, 9, 25, 27) ; log(5 − x) = k | 4^(3x+1) = 8 ; 2 · 3^(x−1) = 18 |
+| logarithme (30 %) | a^(px+q) = b sans puissance exacte ; k · e^(cx) = b ; a^x = −b (∅) | 4^(2x+1) = 60 ; 5^(8x) = −25 |
 | difficile (10 %) | bases différentes a^(x+p) = b^(qx) ; a^(x²)·b^x = c ; log_x(n) = k avec n = m^k ; log(log(x)) = c | 2^(x−1) = 3^x ; log_x(256) = 4 |
+
+Contraintes du générateur (Q10, 26.10.2026) : quand x² est en exposant, le trinôme obtenu a des racines **entières ou rationnelles simples, jamais un
+discriminant non carré** (le moteur sait écrire des racines irrationnelles, le générateur n'en propose pas) ; environ **1 exercice sur 10 du niveau
+« logarithme »** a un second membre ≤ 0 (S = ∅, par exemple 5^(8x) = −25).
 
 ## Critères d'acceptation
 
@@ -133,7 +140,7 @@ tard (clé prévue, rien de codé). Gabarits **à valider (Q10)** :
 | EL-04 | Tout le TeX vient de l'arbre : une équation en e^x ne produit que `\ln`, une équation en base 10 que `\log` ; `exp_log.py` et `resoudre_el.py` ne contiennent ni `latex(` ni `arbre_depuis_sympy` | [auto-py] (analyse du texte source) |
 | EL-05 | `log` = base 10, `ln` = base e, `log_a` = base a, sur toute la batterie (valeur numérique de chaque membre) | [auto-py] |
 | EL-06 | Chaque ligne « ⇔ » porte une propriété tirée de la liste fermée ci-dessus ; aucune ligne sans justification, sauf l'arithmétique évidente (x + 1 = 3 ⇔ x = 2) | [auto-py] |
-| EL-07 | Exact puis ≈ : chaque « ≈ » suit une valeur exacte sur la même ligne ; 3 décimales ; virgule décimale ; aucun point décimal (SOC-12) | [auto-py] |
+| EL-07 | Exact puis ≈ : chaque « ≈ » suit une valeur exacte sur la même ligne ; 3 décimales ; virgule décimale ; aucun point décimal (SOC-12) ; **notation suisse (Q5, Q12) : ’ dès 4 chiffres sur la partie entière seulement** (−99’999’995, 1’234,567, 0,0001), `\text{’}` en TeX ; saisie de ' et ’ lue 1000, « 1 000 » refusé avec un message (`moteur/nombres.py`) | [auto-py] |
 | EL-08 | Second membre ≤ 0 (a^f = b, b ≤ 0, k·a^f = b avec b/k ≤ 0) : S = ∅ justifié par « une exponentielle est strictement positive », jamais par un logarithme d'un nombre négatif | [auto-py] |
 | EL-09 | Équations logarithmiques : aucune carte d'ensemble de définition ; une vérification de chaque solution (argument > 0) ; base inconnue : condition annoncée, solution rejetée si x ≤ 0 ou x = 1 (log_x(256) = 4 : S = {4}) | [auto-py] |
 | EL-10 | `log(x^2) = 2` donne S = {−10 ; 10} par la définition ; aucune sortie ne contient « 2 log|x| » ni « 2\log\left|x\right| » | [auto-py] |

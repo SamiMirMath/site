@@ -4,8 +4,8 @@ Tant qu'une question est ouverte, **le comportement actuel est conservé** et le
 dépendent sont bloquées (voir [taches.md](taches.md)).
 
 **État au 14.10.2026 : Q1 à Q7 et Q9 sont tranchées.** Seule Q8 (apparue en reportant Q4) reste ouverte ;
-elle ne bloque aucune tâche, seulement un gabarit de factorisation. **Q10 à Q12 (26.10.2026)** concernent l'outil
-Exponentielles et logarithmes : elles ne bloquent pas son moteur, seulement les gabarits d'exercices et deux détails d'écriture.
+elle ne bloque aucune tâche, seulement un gabarit de factorisation. **Q10 à Q12 (outil Exponentielles et logarithmes)
+sont tranchées le 26.10.2026.**
 
 ## ~~Q1 — « Croissance comparée » dans l'outil Limites~~ (tranchée le 14.10.2026)
 
@@ -142,21 +142,21 @@ La règle de Q4 « racines distinctes » s'applique-t-elle aussi au gabarit fact
 paramètres ; un gabarit conçu pour une racine double (carré parfait, cube d'un binôme) la garde.
 D'ici la décision, le gabarit est conservé tel quel.
 
-## Q10 — Exercices au hasard de « Exponentielles et logarithmes » : gabarits et pondérations (ouverte, 26.10.2026)
+## ~~Q10 — Exercices au hasard de « Exponentielles et logarithmes » : gabarits et pondérations~~ (tranchée le 26.10.2026)
 
-Quatre niveaux (facile 35 %, moyen 35 %, logarithme 20 %, difficile 10 %), énoncés variantes de ceux du polycopié, pool C seulement ;
-tableau dans [specifications/exponentielles-logarithmes.md](specifications/exponentielles-logarithmes.md). Les gabarits conviennent-ils, et le
-niveau « difficile » (bases différentes, a^(x²)·b^x = c, log_x(n) = k, log(log(x)) = c) est-il bien du 3C ? D'ici la réponse, ces gabarits
-servent de proposition ; le pool M reste à faire avec les 2M.
+**Décision.** Le niveau « difficile » est validé : tous les types (bases différentes, a^(x²)·b^x = c, log_x(n) = k, log(log(x)) = c) sont dans le chapitre 3C.
+Pondérations **30 % / 30 % / 30 % / 10 %** (facile / moyen / logarithme / difficile) au lieu de 35 / 35 / 20 / 10. Contraintes du générateur :
+- x² en exposant : trinôme à racines entières ou rationnelles simples, **jamais de discriminant non carré** ;
+- environ **1 exercice sur 10 du niveau « logarithme »** a un second membre ≤ 0 (S = ∅, par exemple 5^(8x) = −25).
+Voir [specifications/exponentielles-logarithmes.md](specifications/exponentielles-logarithmes.md) ; pool C seulement, le pool M viendra avec les 2M.
 
-## Q11 — Forme du résultat exact (ouverte, 26.10.2026)
+## ~~Q11 — Forme du résultat exact~~ (tranchée le 26.10.2026)
 
-Le corrigé simplifie log 2 − log 3 en log(2/3) (2.24 a, b, c) mais écrit 2.23 d `x = 1 + 1/log 3` sans autre transformation. Proposition : on évalue
-log(10^k) = k et ln(e^k) = k ; on regroupe log a − log b en log(a/b) seulement dans les équations de bases différentes (E3), comme le corrigé ;
-ailleurs la valeur exacte reste celle que donne la chaîne (t = −50 · ln(25/37), pas 50 · ln(37/25)). La forme `ln(25/37)/(−0,02)` est-elle
-simplifiée en `−50 · ln(25/37)` ?
+**Décision.** log(10^k) = k et ln(e^k) = k sont évalués ; log a − log b est regroupé en log(a/b) seulement dans les équations de bases différentes (E3), comme
+le corrigé (2.24). Ailleurs la valeur exacte reste **celle que donne la chaîne** : `ln(25/37)/(−0,02)` n'est **pas** simplifié en `−50 · ln(25/37)`.
 
-## Q12 — Séparateur des milliers dans les résultats (ouverte, 26.10.2026)
+## ~~Q12 — Séparateur des milliers dans les résultats~~ (tranchée le 26.10.2026)
 
-Le corrigé écrit « −99 999 995 » ; la décision Q5 du 14.10.2026 est ’ dès 4 chiffres, mais la notation suisse n'est livrée qu'avec T23. D'ici là
-l'outil écrit les entiers sans séparateur (−99999995). T23 les mettra en conformité avec le reste du site.
+**Décision.** La règle Q5 est appliquée dès maintenant dans cet outil : apostrophe typographique ’ **dès 4 chiffres, sur la partie entière seulement**
+(−99’999’995, 1’234,567, 0,0001), jamais de séparateur dans les décimales ; saisie de ' et ’ lue 1000 ; « 1 000 » refusé avec un message. Fait en `657806d` ;
+les fonctions de formatage sont dans `moteur/nombres.py` (`grouper`, `formater_entier`, `formater_decimal`, `nettoyer_saisie`), à réutiliser par **T23**.
