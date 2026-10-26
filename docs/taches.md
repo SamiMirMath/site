@@ -486,6 +486,9 @@ l'élève, un « Calcul en cours… » qui dure parce que SymPy se charge encore
 - Découpage de `ensemble_def.py` en modules (`moteur/expr.py`, `poly.py`, `ensembles.py`…),
   vérifié par les instantanés et les propriétés.
 - Auto-hébergement de Pyodide (coût dans [choix-techniques.md](choix-techniques.md)).
+- **Déplacer `docs/` dans un dépôt privé** quand le moteur passera sur un serveur (décision du 26.10.2026). D'ici là, `docs/` reste ici, hors du
+  site (`_config.yml`) ; on n'y retire ni les décisions de l'enseignant ni les références, qui sont le journal du plan. À ce moment : copier
+  `docs/` dans le dépôt privé, le retirer de celui-ci, et adapter les chemins qui le citent (`tests/python/`, commentaires `docs/choix-techniques.md`).
 
 ## Ordre conseillé
 
