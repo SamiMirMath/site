@@ -7,7 +7,7 @@ import sys
 
 RACINE = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 for dossier in ("ensemble-definition", "moteur", "derivee-variations", "limites-asymptotes",
-                "etude-complete", "factorisation"):
+                "etude-complete", "factorisation", "exponentielles-logarithmes"):
     chemin = os.path.join(RACINE, dossier)
     if chemin not in sys.path:
         sys.path.insert(0, chemin)
