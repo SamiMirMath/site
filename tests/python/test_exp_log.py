@@ -7,10 +7,12 @@ import re
 import unittest
 from fractions import Fraction as F
 
+import mpmath as mp
+
 from moteurs import RACINE
 from aides_sortie import TUTOIEMENT, chaines_litterales
 import exp_log as el
-from exp_log import Nb, Var, E, Neg, Op, Pow, Fn, Log
+from exp_log import Nb, Var, E, Neg, Op, Pow, Fn, Log, Eq
 from noyau import ErreurSaisie
 
 X = Var("x")
@@ -178,6 +180,8 @@ TEX = [
     ("-x^2+1", "-x^{2} + 1"),
     ("2-(x+1)", "2 - (x + 1)"),
     ("(1/2)^x", "\\left(\\frac{1}{2}\\right)^{x}"),
+    ("x(x-2)=0", "x(x - 2) = 0"),
+    ("(2^2)^x", "(2^{2})^{x}"),
     ("log(log(log(x)))=0", "\\log(\\log(\\log(x))) = 0"),
 ]
 
@@ -345,6 +349,235 @@ class TestVouvoiement(unittest.TestCase):
         for ligne, texte in chaines_litterales(chemin):
             with self.subTest(ligne=ligne):
                 self.assertIsNone(TUTOIEMENT.search(texte), texte)
+
+
+# ---------------------------------------------------------------------
+# Étape 2 : méthode « même base » (E1)
+# ---------------------------------------------------------------------
+MP = mp.MPContext()          # contexte isolé : ne change pas la précision globale de mpmath (les autres tests l'utilisent)
+MP.dps = 30
+
+
+def evaluer(n, x=None):
+    """Oracle indépendant du moteur : valeur d'un arbre avec mpmath."""
+    if isinstance(n, Nb):
+        return MP.mpf(n.val.numerator) / n.val.denominator
+    if isinstance(n, Var):
+        return MP.mpf(x)
+    if isinstance(n, E):
+        return MP.e
+    if isinstance(n, Neg):
+        return -evaluer(n.a, x)
+    if isinstance(n, Op):
+        a, b = evaluer(n.a, x), evaluer(n.b, x)
+        return a + b if n.op == "+" else a - b if n.op == "*" and False else (a - b if n.op == "-" else (a * b if n.op == "*" else a / b))
+    if isinstance(n, Pow):
+        return MP.power(evaluer(n.a, x), evaluer(n.b, x))
+    if isinstance(n, Fn):
+        return MP.sqrt(evaluer(n.a, x))
+    if isinstance(n, Log):
+        return MP.log(evaluer(n.a, x)) / (MP.log(10) if n.base is None else MP.log(evaluer(n.base, x)))
+    raise TypeError(n)
+
+
+def vrai(eq, x):
+    """L'équation est vérifiée en x (écart relatif < 1e-15)."""
+    g, d = evaluer(eq.g, x), evaluer(eq.d, x)
+    return abs(g - d) <= MP.mpf("1e-15") * (1 + abs(g) + abs(d))
+
+
+def element_vrai(e, x):
+    return any(vrai(q, x) for q in e.eqs) if isinstance(e, el.Ou) else vrai(e, x)
+
+
+def corrige(saisie):
+    s = el.analyser_saisie(saisie)
+    return el.meme_base(s.g, s.d, s.inconnue)
+
+
+def val(x):
+    return MP.mpf(x.numerator) / x.denominator
+
+
+# (saisie, solutions exactes) : exercices 2.13 a-o du polycopié et exemples p. 22-23
+BATTERIE_E1 = [
+    ("7^(2x+1)=7^9", [F(4)]), ("3^x=27", [F(3)]), ("10^x=1/100", [F(-2)]), ("2*3^(x-1)=18", [F(3)]),
+    ("4^(-x)=2^6", [F(-3)]), ("4^x=8", [F(3, 2)]), ("3^x=9^(2x+3)", [F(-2)]), ("10^(x+2)=(10^2)^x", [F(2)]),
+    ("5^(3x+2)=(5^x)^2", [F(-2)]), ("11^(2x+1)=1", [F(-1, 2)]), ("2^(x+7)=4^(5x+2)", [F(1, 3)]),
+    ("8^(3x+2)=1/16", [F(-10, 9)]), ("(25^x)^2=5^0*5^(x+3)", [F(1)]), ("2^x=2*4^(x-1)", [F(1)]),
+    ("2^(x^2)*4^x=8", [F(-3), F(1)]),
+    ("3^(x+1)-27=0", [F(2)]), ("10^(2x)=0,01", [F(-1)]), ("3*2^(x^2+1)=96", [F(-2), F(2)]), ("4^(3x+1)=8", [F(1, 6)]),
+    # autres formes de la même méthode
+    ("18=2*3^(x-1)", [F(3)]), ("3(2^x+1)=9", [F(1)]), ("-2^x=-8", [F(3)]), ("5-2^x=1", [F(2)]), ("2^x/4=2", [F(3)]),
+    ("(1/2)^x=8", [F(-3)]), ("9^x=1/3", [F(-1, 2)]), ("2^(x/2)=8", [F(6)]), ("2^(-x)=8", [F(-3)]), ("4^x=16", [F(2)]),
+    ("1,5^x=2,25", [F(2)]), ("2^(x^2)=8^x", [F(0), F(3)]), ("2^(x+1)=2*2^x", None), ("2^(x+1)=2^(x+3)", []),
+    ("2^(x^2)=2^(x-5)", []), ("9^(x^2)=3^(x+1)", [F(-1, 2), F(1)]),
+]
+SANS_E1 = ["3^x=20", "2^x=0", "2^x=-4", "5^(8x)=-25", "e^x=7", "2^x+3^x=5", "x^2=4", "log(x)=2", "3^x=2^x", "2^x=3^(x+1)",
+           "2^(x^3)=8", "2^(x^2)*3^x=6", "x*2^x=8", "x^x=4", "sqrt(2)^x=4", "3^x=2"]
+
+
+class TestMemeBase(unittest.TestCase):
+    def test_batterie(self):
+        for saisie, attendu in BATTERIE_E1:
+            with self.subTest(saisie):
+                r = corrige(saisie)
+                self.assertIsNotNone(r)
+                if attendu is None:
+                    self.assertIsNone(r["solutions"])
+                    continue
+                self.assertEqual(len(r["solutions"]), len(attendu))
+                for n, v in zip(r["solutions"], attendu):
+                    self.assertEqual(n, Nb(v))
+                    self.assertAlmostEqual(el.valeur(n), float(v), places=12)
+
+    def test_solution_irrationnelle(self):
+        r = corrige("2^(x^2)=2^(2x+1)")
+        self.assertEqual([el.tex(n) for n in r["solutions"]], ["1 - \\sqrt{2}", "1 + \\sqrt{2}"])
+        for n in r["solutions"]:
+            self.assertTrue(vrai(Eq(*el.lire_membres("2^(x^2)=2^(2x+1)")), evaluer(n)))
+        r = corrige("3^(x^2)=3^(2x+3)")        # x² − 2x − 3 = 0 : racines entières
+        self.assertEqual(r["solutions"], [Nb(-1), Nb(3)])
+        r = corrige("2^(x^2)=2^(3x+1)")        # Δ = 13
+        self.assertEqual([round(el.valeur(n), 9) for n in r["solutions"]], [round((3 - 13 ** 0.5) / 2, 9), round((3 + 13 ** 0.5) / 2, 9)])
+        r = corrige("2^(x^2)=2^(4x+2)")        # x = 2 ± √6, 6 sans facteur carré
+        self.assertEqual([el.tex(n) for n in r["solutions"]], ["2 - \\sqrt{6}", "2 + \\sqrt{6}"])
+        r = corrige("2^(x^2)=2^(6x+2)")        # Δ = 44 = 4·11 : x = 3 ± √11
+        self.assertEqual([el.tex(n) for n in r["solutions"]], ["3 - \\sqrt{11}", "3 + \\sqrt{11}"])
+        r = corrige("2^(2x^2)=2^(x+3)")        # 2x² − x − 3 = 0 : x = −1 ou 3/2, a ≠ 1 : par le discriminant
+        self.assertEqual(r["solutions"], [Nb(F(-1)), Nb(F(3, 2))])
+
+    def test_oracle_les_solutions_verifient_l_equation_de_l_enonce(self):
+        for saisie, attendu in BATTERIE_E1:
+            if not attendu:
+                continue
+            with self.subTest(saisie):
+                s = el.analyser_saisie(saisie)
+                for v in attendu:
+                    self.assertTrue(vrai(Eq(s.g, s.d), val(v)), f"{saisie} : x = {v}")
+
+    def test_aucune_autre_solution_dans_l_intervalle(self):
+        """Le nombre de racines de g − d sur [−8 ; 8] (changements de signe) est celui des solutions annoncées."""
+        for saisie, attendu in BATTERIE_E1:
+            if attendu is None or len(attendu) == 0:
+                continue
+            with self.subTest(saisie):
+                s = el.analyser_saisie(saisie)
+                pas, signes, k = 0.01, [], 0
+                for i in range(-800, 801):
+                    x = MP.mpf(i) * MP.mpf("0.01") + MP.mpf("0.000123")
+                    g = evaluer(s.g, x) - evaluer(s.d, x)
+                    signes.append(1 if g > 0 else -1)
+                racines = sum(1 for a, b in zip(signes, signes[1:]) if a != b)
+                self.assertEqual(racines, len([v for v in attendu if -8 < v < 8]), saisie)
+
+    def test_chaines_les_egalites_sont_justes_pour_tout_x(self):
+        """Une chaîne « a = b = c » d'expressions : tous les éléments ont la même valeur, pour des x quelconques."""
+        for saisie, attendu in BATTERIE_E1:
+            with self.subTest(saisie):
+                for carte in corrige(saisie)["etapes"]:
+                    for ligne in carte["lignes"]:
+                        if "=" not in ligne.liens:
+                            continue
+                        elements = ligne.elements
+                        if isinstance(elements[0], Var) and elements[0].nom == "Δ":      # Δ = b² − 4ac = valeur : Δ n'est pas l'inconnue
+                            elements = elements[1:]
+                        for x in ["0.37", "-1.4", "2.3", "0.9", "-0.2"]:
+                            v = [evaluer(e, MP.mpf(x)) for e in elements]
+                            for w in v[1:]:
+                                self.assertLessEqual(abs(w - v[0]), MP.mpf("1e-20") * (1 + abs(v[0])), (saisie, el.tex_chaine(ligne)))
+
+    def test_chaines_les_equivalences_gardent_les_solutions(self):
+        """Une chaîne « E₀ ⇔ E₁ ⇔ … » : chaque équation est vérifiée aux solutions et pas aux autres points d'une grille."""
+        for saisie, attendu in BATTERIE_E1:
+            if attendu is None:
+                continue
+            with self.subTest(saisie):
+                sols = [val(v) for v in attendu]
+                grille = [MP.mpf(i) / 4 + MP.mpf("0.0371") for i in range(-40, 41)]
+                for carte in corrige(saisie)["etapes"]:
+                    for ligne in carte["lignes"]:
+                        if "⇔" not in ligne.liens:
+                            continue
+                        for e in ligne.elements:
+                            if not isinstance(e, (Eq, el.Ou)):
+                                continue
+                            for x in sols:
+                                if isinstance(e, Eq) and "Δ" in el.tex(e.g):
+                                    continue
+                                self.assertTrue(element_vrai(e, x), (saisie, el.tex_element(e), x))
+                            for x in grille:
+                                self.assertFalse(element_vrai(e, x), (saisie, el.tex_element(e), x))
+
+    def test_proprietes_nommees(self):
+        """Toute propriété affichée est dans la liste fermée, et le passage de a^A = a^B à A = B porte « même base »."""
+        for saisie, attendu in BATTERIE_E1:
+            with self.subTest(saisie):
+                r = corrige(saisie)
+                for carte in r["etapes"]:
+                    for ligne in carte["lignes"]:
+                        for p in ligne.props:
+                            self.assertTrue(p is None or p in el.PROPRIETES, (saisie, p))
+                derniere = r["etapes"][-1]
+                self.assertEqual(derniere["titre"], "Égalité des exposants")
+                self.assertEqual(derniere["lignes"][0].props[0], el.PROP_MEME_BASE)
+
+    def test_cartes(self):
+        titres = lambda s: [c["titre"] for c in corrige(s)["etapes"]]
+        self.assertEqual(titres("7^(2x+1)=7^9"), ["Égalité des exposants"])
+        self.assertEqual(titres("3^x=27"), ["Même base", "Égalité des exposants"])
+        self.assertEqual(titres("3^(x+1)-27=0"), ["Isoler l'exponentielle", "Même base", "Égalité des exposants"])
+        self.assertEqual(titres("2*3^(x-1)=18"), ["Isoler l'exponentielle", "Même base", "Égalité des exposants"])
+        self.assertEqual(titres("5^(3x+2)=(5^x)^2"), ["Même base", "Égalité des exposants"])
+
+    def test_base_choisie(self):
+        for saisie, base in [("4^(-x)=2^6", 2), ("4^x=8", 2), ("3^x=9^(2x+3)", 3), ("8^(3x+2)=1/16", 2), ("(25^x)^2=5^0*5^(x+3)", 5),
+                             ("4^x=16", 4), ("(1/2)^x=8", 2), ("9^x=1/3", 3), ("2^x=2*4^(x-1)", 2), ("1,5^x=2,25", F(3, 2)),
+                             ("11^(2x+1)=1", 11), ("10^(2x)=0,01", 10), ("2^(x+7)=4^(5x+2)", 2)]:
+            with self.subTest(saisie):
+                self.assertEqual(corrige(saisie)["base"], F(base))
+
+    def test_rien_a_dire_ou_methode_non_applicable(self):
+        for saisie in SANS_E1:
+            with self.subTest(saisie):
+                s = el.analyser_saisie(saisie)
+                self.assertIsNone(el.meme_base(s.g, s.d, s.inconnue))
+
+    def test_ecriture_du_corrige(self):
+        lignes = lambda s: [el.tex_chaine(l) for c in corrige(s)["etapes"] for l in c["lignes"]]
+        self.assertEqual(lignes("3^(x+1)-27=0"), [
+            r"3^{x + 1} - 27 = 0 \iff 3^{x + 1} = 27 \quad \text{(on isole le terme exponentiel)}",
+            r"27 = 3^{3}",
+            r"3^{x + 1} = 3^{3} \iff x + 1 = 3 \quad \text{(même base : a^A = a^B ⇔ A = B)} \iff x = 2"])
+        self.assertEqual(lignes("2*3^(x-1)=18")[0], r"2 \cdot 3^{x - 1} = 18 \iff 3^{x - 1} = 9 \quad \text{(on isole le terme exponentiel)}")
+        self.assertEqual(lignes("18=2*3^(x-1)")[0], r"18 = 2 \cdot 3^{x - 1} \iff 9 = 3^{x - 1} \quad \text{(on isole le terme exponentiel)}")
+        self.assertEqual(lignes("2^(x+7)=4^(5x+2)")[0],
+                         r"4^{5x + 2} = (2^{2})^{5x + 2} = 2^{2(5x + 2)} \quad \text{((aᵐ)ⁿ = aᵐⁿ)} = 2^{10x + 4}")
+        self.assertEqual(lignes("(25^x)^2=5^0*5^(x+3)")[0],
+                         r"(25^{x})^{2} = 25^{2x} \quad \text{((aᵐ)ⁿ = aᵐⁿ)} = (5^{2})^{2x} = 5^{4x} \quad \text{((aᵐ)ⁿ = aᵐⁿ)}")
+        self.assertEqual(lignes("11^(2x+1)=1")[0], r"1 = 11^{0} \quad \text{(1 = a⁰)}")
+        self.assertEqual(lignes("2^(x^2)*4^x=8")[-1],
+                         r"2^{x^{2} + 2x} = 2^{3} \iff x^{2} + 2x = 3 \quad \text{(même base : a^A = a^B ⇔ A = B)} \iff x^{2} + 2x - 3 = 0 "
+                         r"\iff (x + 3)(x - 1) = 0 \iff x = -3 \text{ ou } x = 1 \quad \text{(un produit est nul si l'un des facteurs est nul)}")
+
+    def test_le_tex_du_corrige_vient_de_l_arbre(self):
+        """Aucun \\ln ni \\log dans une équation à même base ; virgule décimale (SOC-12) ; aucun mot interdit ni tutoiement."""
+        for saisie, _ in BATTERIE_E1:
+            with self.subTest(saisie):
+                for carte in corrige(saisie)["etapes"]:
+                    self.assertIsNone(TUTOIEMENT.search(carte["titre"]))
+                    for ligne in carte["lignes"]:
+                        t = el.tex_chaine(ligne)
+                        self.assertNotIn("\\ln", t)
+                        self.assertNotIn("\\log", t)
+                        self.assertIsNone(re.search(r"\d\.\d", t), t)
+                        self.assertIsNone(TUTOIEMENT.search(re.sub(r"\\[a-z]+", " ", t)), t)
+
+    def test_decimaux_gardes_tels_qu_ecrits(self):
+        r = corrige("1,5^x=2,25")
+        texte = " ".join(el.tex_chaine(l) for c in r["etapes"] for l in c["lignes"])
+        self.assertIn("1{,}5", texte)
+        self.assertIn("2{,}25 = 1{,}5^{2}", texte)
 
 
 class TestSource(unittest.TestCase):
