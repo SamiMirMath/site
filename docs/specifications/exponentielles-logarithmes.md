@@ -49,7 +49,10 @@ en mots », tâtonnement (2.14), graphiques (2.1, 2.9, 2.12), écrire un nombre 
 
 Une carte par application de méthode, comme la Factorisation (T21) : « Étape k », méthode en badge, chaîne de « ⇔ » une étape par ligne,
 **propriété nommée entre parenthèses (1 à 5 mots)** à chaque ligne, carte finale « Solution ».
-Dans la sortie de `resoudre_el.py` : chaque ligne du moteur est un bloc `texte` (style `etape`) qui contient son TeX entre `\(` et `\)` (le « < » est écrit `&lt;`), la remarque du moteur
+**Mise en page (décision du 26.10.2026, règle R14 du guide)** : une chaîne s'affiche **une étape par ligne** comme le corrigé, le ⇔ en début de ligne et aligné, la propriété à droite de la ligne, sous l'expression
+sur un écran étroit (≤ 820 px) : aucun défilement horizontal à 360 px, y compris la ligne du discriminant et `−99’999’995` (test de page sur toute la batterie). Réalisation : `rangees_chaine` (moteur : `[(lien, expression, propriété)]`),
+puis une grille CSS `.chaine` (page) ; ce n'est pas l'environnement `aligned` de KaTeX, parce qu'une ligne d'`aligned` ne peut pas passer à la ligne ni la propriété passer sous l'expression à 360 px.
+Dans la sortie de `resoudre_el.py` : chaque chaîne est un bloc `texte` (style `etape`) `<div class="chaine">` de lignes `<div class="ligne">` (lien, expression et propriété en trois `span`), chaque TeX entre `\(` et `\)` (le « < » est écrit `&lt;`), la remarque du moteur
 (« Δ < 0 : l'équation n'a aucune solution réelle. ») est le dernier bloc de la dernière carte d'étapes, et la carte finale est « Solution » (bloc `resultat` = `tex_solution`) pour une équation,
 « Résultat » (`tex_resultat`) pour un calcul.
 
@@ -180,6 +183,8 @@ tard (clé prévue, rien de codé). Gabarits **validés (Q10, 26.10.2026)** :
 Contraintes du générateur (Q10, 26.10.2026) : quand x² est en exposant, le trinôme obtenu a des racines **entières ou rationnelles simples, jamais un
 discriminant non carré** (le moteur sait écrire des racines irrationnelles, le générateur n'en propose pas) ; environ **1 exercice sur 10 du niveau
 « logarithme »** a un second membre ≤ 0 (S = ∅, par exemple 5^(8x) = −25).
+**Réalisation** (`exercice(niveau, graine)` dans `exp_log.py`, `exercice_json(niveau)` pour la page ; niveaux `facile`, `moyen`, `logarithme`, `difficile`, énoncé « Résoudre : … ») : a^(x²)·b^x = c n'est tiré qu'avec b et c puissances de a (2^(x²)·4^x = 8, 3^(x²)·27^x = 81 : même base, racines entières −3 et 1 ou −4 et 1), jamais avec des bases différentes ;
+les bases différentes viennent de a^(x+p) = b^(qx) avec a et b deux nombres de {2, 3, 5, 6, 7, 10} (jamais une puissance de l'autre) ; le niveau « logarithme » n'a jamais un second membre qui soit une puissance de la base (ni b/k pour k·a^f = b).
 **Le pool n'a jamais d'exposant de degré 3 ou plus** (2^(x³) = 8, décision du 26.10.2026) : le logarithme le résoudrait, mais ce n'est pas un exercice du cours. Le degré 2 ne vient que de a^(x²)·b^x = c et de a^(x²) = a^(rx+s) avec des racines simples (Q10).
 
 ## Critères d'acceptation
@@ -200,7 +205,7 @@ discriminant non carré** (le moteur sait écrire des racines irrationnelles, le
 | EL-12 | Aucune sortie ne contient le vocabulaire interdit de SOC-15 (`test_vocabulaire.py` étendu) ; JSON strict | [auto-py] |
 | EL-13 | `exercice(niveau, graine)` est déterministe, produit un gabarit du niveau, aucun exposant de degré supérieur à 2, et le moteur le résout (oracle EL-02) pour 500 graines | [auto-py] |
 | EL-14 | Manifeste (`test_manifeste`, `test_resoudre_import`) et instantanés de l'outil ; **les instantanés de tous les autres moteurs sont inchangés** | [auto-py] |
-| EL-15 | Page : rendu de la batterie égal à `tests/pages/references/exponentielles-logarithmes.json` ; clavier avec log, ln, log_, e, = ; exercice au hasard (pool C) et corrigé | [auto-page] |
+| EL-15 | Page : rendu de la batterie égal à `tests/pages/references/exponentielles-logarithmes.json` ; clavier avec log, ln, log_, e, = ; exercice au hasard (pool C) et corrigé ; une étape par ligne et aucun défilement horizontal à 360 px pour toute la batterie ; propriété à droite sur grand écran, sous l'expression sur écran étroit | [auto-page] |
 | EL-16 | Registre et accueil (cellule III/C) : description « Équations exponentielles et logarithmiques, calcul de logarithmes, étape par étape. » identique dans `commun/registre.json` et `index.html` (ACC-01) ; posés après relecture des exemples | [auto-py] + [manuel] |
 | EL-17 | Les exemples de rédaction 1 à 9 ci-dessus, relus à l'écran sur téléphone et comparés au corrigé, sont validés | [manuel] |
 | EL-18 | **Ligne finale** : toute équation résolue se termine par « S = {valeur exacte} », suivie de « , soit x ≈ … » (3 décimales, virgule, ’ dès 4 chiffres) quand une solution n'est pas un rationnel (avec plusieurs solutions : « soit x ≈ −0,903 ou x = 0 ») ; S = ∅ et S = ℝ ont aussi leur ligne. **Elle existe même quand x est déjà isolé** : x = ln(3) n'a aucune carte de méthode, mais la sortie élève contient la carte finale « S = {ln(3)}, soit x ≈ 1,099 ». La composition est testée dès l'étape 3 (`tex_solution`) ; la carte finale de la sortie de `resoudre_el` l'est à l'étape 7 | [auto-py] |

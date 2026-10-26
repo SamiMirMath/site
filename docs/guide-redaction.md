@@ -96,6 +96,13 @@ n'ont pas encore été relus avec cette règle.**
 
 Inchangé : interdiction des équivalents, phrase de repli, virgule décimale, garde-fou des valeurs.
 
+**R14. Une chaîne de ⇔ s'écrit une étape par ligne** (décision du 26.10.2026, outil « Exponentielles et logarithmes »), comme le corrigé de
+l'enseignant : le ⇔ en début de ligne, les ⇔ alignés les uns sous les autres, l'expression à côté, la **propriété nommée à droite de la ligne**
+(sous l'expression sur un écran étroit, jamais de défilement horizontal à 360 px). Des égalités qui se suivent sans propriété restent sur la même
+ligne (`√2 = 2^(1/2) = 4^(1/4)`, `Δ = 1² − 4·1·2 = −7`) ; une suite d'égalités qui a une propriété repart sur une nouvelle ligne dont le « = » est
+aligné sous celui de la ligne d'au-dessus (`x = log(2)/(log(2) − log(3))` puis `= log(2)/log(2/3)`). Les autres outils ne sont pas encore concernés.
+
+
 ---
 
 ## Exemples de référence
@@ -232,3 +239,18 @@ ED = ]−1 ; +∞[ ∩ ]−2 ; 2[ = ]−1 ; 2[
 ```
 Trinôme sans factorisation visible : une seule ligne « Δ = 16 : zéros −2 et 2, donc −x² + 4 =
 (x + 2)(2 − x) » ; jamais Δ deux fois.
+
+### 8. Exponentielles et logarithmes : 2^(x − 1) = 3^x (bases différentes)
+
+```
+Étape 1 · Bases différentes
+        2^(x−1) = 3^x
+⇔       log(2^(x−1)) = log(3^x)                       (log des deux membres)
+⇔       (x − 1)·log(2) = x·log(3)                     (log(a^A) = A · log(a))
+⇔       x·log(2) − log(2) = x·log(3)
+⇔       x(log(2) − log(3)) = log(2)
+⇔       x = log(2)/(log(2) − log(3))                  (car log(2) − log(3) ≠ 0)
+          = log(2)/log(2/3)                           (log a − log b = log(a/b))
+Solution : S = { log(2)/log(2/3) }, soit x ≈ −1,710
+```
+Les neuf exemples de rédaction de la spécification (`specifications/exponentielles-logarithmes.md`) suivent la même mise en page.

@@ -10,14 +10,20 @@ from html import escape
 from noyau import ErreurSaisie, json_strict
 import sortie as so
 import exp_log as el
-from exp_log import apercu_json
+from exp_log import apercu_json, exercice_json
 
-__all__ = ["resoudre", "resoudre_json", "apercu_json"]
+__all__ = ["resoudre", "resoudre_json", "apercu_json", "exercice_json"]
 
 
 def _ligne(chaine):
-    """Une ligne du corrigé : sa chaîne de « ⇔ » ou de « = » en TeX, dans une carte d'étapes (comme la Factorisation)."""
-    return so.texte(r"\(" + escape(el.tex_chaine(chaine), quote=False) + r"\)", style="etape")
+    """Une chaîne du corrigé, une étape par ligne : le lien (⇔) à gauche, l'expression, la propriété à droite (commun à la page :
+    grille `.chaine` de exponentielles-logarithmes/index.html, la propriété passe sous l'expression sur un écran étroit)."""
+    rangees = "".join(
+        '<div class="ligne"><span class="lien">' + (r"\(" + lien + r"\)" if lien else "") + '</span>'
+        '<span class="expr">' + r"\(" + escape(expr, quote=False) + r"\)" + '</span>'
+        '<span class="prop">' + (escape(prop, quote=False) if prop else "") + "</span></div>"
+        for lien, expr, prop in el.rangees_chaine(chaine))
+    return so.texte('<div class="chaine">' + rangees + "</div>", style="etape")
 
 
 def _cartes(r):

@@ -44,7 +44,7 @@
       "module": "resoudre_el",
       "fichiers": ["ensemble-definition/ensemble_def.py", "moteur/noyau.py", "moteur/nombres.py", "moteur/sortie.py",
                    "exponentielles-logarithmes/exp_log.py", "exponentielles-logarithmes/resoudre_el.py"],
-      "fonctions": ["resoudre", "apercu"]
+      "fonctions": ["resoudre", "apercu", "exercice"]
     }
   }
 }

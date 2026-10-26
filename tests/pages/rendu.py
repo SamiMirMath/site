@@ -10,9 +10,11 @@ import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "python"))
 from cas import CAS_LIMITES, entrees_page, entrees_factorisation  # noqa: E402
+from cas_el import entrees_el  # noqa: E402
 
 DOSSIER_REFERENCES = os.path.join(os.path.dirname(__file__), "references")
-OUTILS = ["ensemble-definition", "derivee-variations", "limites-asymptotes", "etude-complete", "factorisation"]
+OUTILS = ["ensemble-definition", "derivee-variations", "limites-asymptotes", "etude-complete", "factorisation",
+          "exponentielles-logarithmes"]
 
 
 # Entrées de page ajoutées au corpus des moteurs : une saisie invalide par outil (la carte d'erreur est un rendu à part entière).
@@ -25,12 +27,15 @@ REDUIT = {
     "limites-asymptotes": ["(x^2-1)/(x-3)", "(x^2-1)/(x-1)", "ln("],
     "etude-complete": ["e^(1/x)", "x^2*e^(-x)", "ln("],
     "factorisation": ["x^2+5x-14", "(a + b)^2 - 7(a + b)", "sqrt(x)"],
+    "exponentielles-logarithmes": ["2^(x-1)=3^x", "log(5-x)=8", "x*2^x=8"],
 }
 
 
 def entrees(outil):
     if outil == "factorisation":
         liste = entrees_factorisation()
+    elif outil == "exponentielles-logarithmes":
+        liste = entrees_el()
     else:
         liste = entrees_page(outil) + CAS_LIMITES[outil]
     liste = liste + ERREURS.get(outil, [])

@@ -1,0 +1,7022 @@
+{
+ "(1/2)^x=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦\\left(\\frac{1}{2}\\right)^{x} = 3⟧⟦\\iff⟧⟦\\log\\left(\\left(\\frac{1}{2}\\right)^{x}\\right) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log\\left(\\frac{1}{2}\\right) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log\\left(\\frac{1}{2}\\right)}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(3)}{\\log\\left(\\frac{1}{2}\\right)}\\right\\} \\text{, soit } x \\approx -1{,}585⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "(1/2)^x=3^(x+1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦\\left(\\frac{1}{2}\\right)^{x} = 3^{x + 1}⟧⟦\\iff⟧⟦\\log\\left(\\left(\\frac{1}{2}\\right)^{x}\\right) = \\log(3^{x + 1})⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log\\left(\\frac{1}{2}\\right) = (x + 1) \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log\\left(\\frac{1}{2}\\right) = x \\cdot \\log(3) + \\log(3)⟧⟦\\iff⟧⟦x\\left(\\log\\left(\\frac{1}{2}\\right) - \\log(3)\\right) = \\log(3)⟧⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log\\left(\\frac{1}{2}\\right) - \\log(3)}⟧(car ⟦\\log\\left(\\frac{1}{2}\\right) - \\log(3) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(3)}{\\log\\left(\\frac{1}{6}\\right)}⟧(log a − log b = log(a/b))",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(3)}{\\log\\left(\\frac{1}{6}\\right)}\\right\\} \\text{, soit } x \\approx -0{,}613⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "(1/2)^x=8": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦\\left(\\frac{1}{2}\\right)^{x} = (2^{-1})^{x} = 2^{-x}⟧((aᵐ)ⁿ = aᵐⁿ)⟦8 = 2^{3}⟧⟦2^{-x} = 2^{3}⟧⟦\\iff⟧⟦-x = 3⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x = -3⟧",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "(10^(-x)-1)*(10^(-x)-8)=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Produit nul⟦(10^{-x} - 1)(10^{-x} - 8) = 0⟧⟦\\iff⟧⟦10^{-x} - 1 = 0 \\text{ ou } 10^{-x} - 8 = 0⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 1Produit nul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Facteur 1⟦10^{-x} - 1 = 0⟧⟦\\iff⟧⟦10^{-x} = 1⟧(on isole le terme exponentiel)⟦1 = 10^{0}⟧(1 = a⁰)⟦10^{-x} = 10^{0}⟧⟦\\iff⟧⟦-x = 0⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x = 0⟧",
+    "titre": "Étape 2Facteur 1"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Facteur 2⟦10^{-x} - 8 = 0⟧⟦\\iff⟧⟦10^{-x} = 8⟧(on isole le terme exponentiel)⟦10^{-x} = 8⟧⟦\\iff⟧⟦-x = \\log(8)⟧(définition du logarithme)⟦\\iff⟧⟦x = -\\log(8)⟧",
+    "titre": "Étape 3Facteur 2"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-\\log(8) \\,;\\, 0\\right\\} \\text{, soit } x \\approx -0{,}903 \\text{ ou } x = 0⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "(25^x)^2=5^0*5^(x+3)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦(25^{x})^{2} = 25^{2x}⟧((aᵐ)ⁿ = aᵐⁿ)⟦\\phantom{(25^{x})^{2}} = (5^{2})^{2x} = 5^{4x}⟧((aᵐ)ⁿ = aᵐⁿ)⟦5^{0} \\cdot 5^{x + 3} = 5^{x + 3}⟧(aᵐ · aⁿ = aᵐ⁺ⁿ)⟦5^{4x} = 5^{x + 3}⟧⟦\\iff⟧⟦4x = x + 3⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦3x = 3⟧⟦\\iff⟧⟦x = 1⟧",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{1\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "(x+1=3": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Il manque une parenthèse fermante.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "-2^x=-10": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Isoler l'exponentielle⟦-2^{x} = -10⟧⟦\\iff⟧⟦2^{x} = 10⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Isoler l'exponentielle"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦2^{x} = 10⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(10)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(10)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) = 1⟧(log(10ᵏ) = k)⟦\\iff⟧⟦x = \\frac{1}{\\log(2)}⟧",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{1}{\\log(2)}\\right\\} \\text{, soit } x \\approx 3{,}322⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "-2^x=-3^(x+1)": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "-2^x=-8": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Isoler l'exponentielle⟦-2^{x} = -8⟧⟦\\iff⟧⟦2^{x} = 8⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Isoler l'exponentielle"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Même base⟦8 = 2^{3}⟧⟦2^{x} = 2^{3}⟧⟦\\iff⟧⟦x = 3⟧(même base : a^A = a^B ⇔ A = B)",
+    "titre": "Étape 2Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "-log(x)=2": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Isoler le logarithme⟦-\\log(x) = 2⟧⟦\\iff⟧⟦\\log(x) = -2⟧(on isole le logarithme)",
+    "titre": "Étape 1Isoler le logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Définition du logarithme⟦\\log(x) = -2⟧⟦\\iff⟧⟦x = 10^{-2} = \\frac{1}{100}⟧(définition du logarithme)",
+    "titre": "Étape 2Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{1}{100}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "0,1^x=2^(x+1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦0{,}1^{x} = 2^{x + 1}⟧⟦\\iff⟧⟦\\log(0{,}1^{x}) = \\log(2^{x + 1})⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(0{,}1) = (x + 1) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦-x = x \\cdot \\log(2) + \\log(2)⟧(log(10ᵏ) = k)⟦\\iff⟧⟦x(-1 - \\log(2)) = \\log(2)⟧⟦\\iff⟧⟦x = \\frac{\\log(2)}{-1 - \\log(2)}⟧(car ⟦-1 - \\log(2) \\neq 0⟧)",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(2)}{-1 - \\log(2)}\\right\\} \\text{, soit } x \\approx -0{,}231⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "0,5*3^x=2^(x+1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦0{,}5 \\cdot 3^{x} = 2^{x + 1}⟧⟦\\iff⟧⟦\\log(0{,}5 \\cdot 3^{x}) = \\log(2^{x + 1})⟧(log des deux membres)⟦\\iff⟧⟦\\log(0{,}5) + \\log(3^{x}) = \\log(2^{x + 1})⟧(log(ab) = log a + log b)⟦\\iff⟧⟦\\log(0{,}5) + x \\cdot \\log(3) = (x + 1) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(3) + \\log(0{,}5) = x \\cdot \\log(2) + \\log(2)⟧⟦\\iff⟧⟦x(\\log(3) - \\log(2)) = \\log(2) - \\log(0{,}5)⟧⟦\\iff⟧⟦x = \\frac{\\log(2) - \\log(0{,}5)}{\\log(3) - \\log(2)}⟧(car ⟦\\log(3) - \\log(2) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(4)}{\\log(1{,}5)}⟧(log a − log b = log(a/b))",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(4)}{\\log(1{,}5)}\\right\\} \\text{, soit } x \\approx 3{,}419⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "0,8^n=0,5": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦0{,}8^{n} = 0{,}5⟧⟦\\iff⟧⟦\\log(0{,}8^{n}) = \\log(0{,}5)⟧(log des deux membres)⟦\\iff⟧⟦n \\cdot \\log(0{,}8) = \\log(0{,}5)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦n = \\frac{\\log(0{,}5)}{\\log(0{,}8)}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(0{,}5)}{\\log(0{,}8)}\\right\\} \\text{, soit } n \\approx 3{,}106⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "1,0325^n=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦1{,}0325^{n} = 3⟧⟦\\iff⟧⟦\\log(1{,}0325^{n}) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦n \\cdot \\log(1{,}0325) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦n = \\frac{\\log(3)}{\\log(1{,}0325)}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(3)}{\\log(1{,}0325)}\\right\\} \\text{, soit } n \\approx 34{,}350⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "1,0375^n=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦1{,}0375^{n} = 3⟧⟦\\iff⟧⟦\\log(1{,}0375^{n}) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦n \\cdot \\log(1{,}0375) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦n = \\frac{\\log(3)}{\\log(1{,}0375)}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(3)}{\\log(1{,}0375)}\\right\\} \\text{, soit } n \\approx 29{,}842⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "1,04^x=100": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦1{,}04^{x} = 100⟧⟦\\iff⟧⟦\\log(1{,}04^{x}) = \\log(100)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(1{,}04) = \\log(100)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(1{,}04) = 2⟧(log(10ᵏ) = k)⟦\\iff⟧⟦x = \\frac{2}{\\log(1{,}04)}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{2}{\\log(1{,}04)}\\right\\} \\text{, soit } x \\approx 117{,}417⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "1,5^x=2,25": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦2{,}25 = 1{,}5^{2}⟧⟦1{,}5^{x} = 1{,}5^{2}⟧⟦\\iff⟧⟦x = 2⟧(même base : a^A = a^B ⇔ A = B)",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "1,5^x=2^(x+1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦1{,}5^{x} = 2^{x + 1}⟧⟦\\iff⟧⟦\\log(1{,}5^{x}) = \\log(2^{x + 1})⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(1{,}5) = (x + 1) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(1{,}5) = x \\cdot \\log(2) + \\log(2)⟧⟦\\iff⟧⟦x(\\log(1{,}5) - \\log(2)) = \\log(2)⟧⟦\\iff⟧⟦x = \\frac{\\log(2)}{\\log(1{,}5) - \\log(2)}⟧(car ⟦\\log(1{,}5) - \\log(2) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(2)}{\\log(0{,}75)}⟧(log a − log b = log(a/b))",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(2)}{\\log(0{,}75)}\\right\\} \\text{, soit } x \\approx -2{,}409⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "10*2^x=3^x": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦10 \\cdot 2^{x} = 3^{x}⟧⟦\\iff⟧⟦\\log(10 \\cdot 2^{x}) = \\log(3^{x})⟧(log des deux membres)⟦\\iff⟧⟦\\log(10) + \\log(2^{x}) = \\log(3^{x})⟧(log(ab) = log a + log b)⟦\\iff⟧⟦\\log(10) + x \\cdot \\log(2) = x \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) + 1 = x \\cdot \\log(3)⟧(log(10ᵏ) = k)⟦\\iff⟧⟦1 = x(\\log(3) - \\log(2))⟧⟦\\iff⟧⟦x = \\frac{1}{\\log(3) - \\log(2)}⟧(car ⟦\\log(3) - \\log(2) \\neq 0⟧)",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{1}{\\log(3) - \\log(2)}\\right\\} \\text{, soit } x \\approx 5{,}679⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "100=2^x": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦100 = 2^{x}⟧⟦\\iff⟧⟦2^{x} = 100⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(100)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(100)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) = 2⟧(log(10ᵏ) = k)⟦\\iff⟧⟦x = \\frac{2}{\\log(2)}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{2}{\\log(2)}\\right\\} \\text{, soit } x \\approx 6{,}644⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "10^(2x)=0,01": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦0{,}01 = 10^{-2}⟧⟦10^{2x} = 10^{-2}⟧⟦\\iff⟧⟦2x = -2⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x = -1⟧",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-1\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "10^(2x)=0,7": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦10^{2x} = 0{,}7⟧⟦\\iff⟧⟦2x = \\log(0{,}7)⟧(définition du logarithme)⟦\\iff⟧⟦x = \\frac{\\log(0{,}7)}{2}⟧",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(0{,}7)}{2}\\right\\} \\text{, soit } x \\approx -0{,}077⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "10^(3x)=25": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦10^{3x} = 25⟧⟦\\iff⟧⟦3x = \\log(25)⟧(définition du logarithme)⟦\\iff⟧⟦x = \\frac{\\log(25)}{3}⟧",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(25)}{3}\\right\\} \\text{, soit } x \\approx 0{,}466⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "10^(x+2)=(10^2)^x": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦(10^{2})^{x} = 10^{2x}⟧((aᵐ)ⁿ = aᵐⁿ)⟦10^{x + 2} = 10^{2x}⟧⟦\\iff⟧⟦x + 2 = 2x⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦-x = -2⟧⟦\\iff⟧⟦x = 2⟧",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "10^(x-1)=3^x": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦10^{x - 1} = 3^{x}⟧⟦\\iff⟧⟦\\log(10^{x - 1}) = \\log(3^{x})⟧(log des deux membres)⟦\\iff⟧⟦(x - 1) \\cdot \\log(10) = x \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x - 1 = x \\cdot \\log(3)⟧(log(10ᵏ) = k)⟦\\iff⟧⟦x(1 - \\log(3)) = 1⟧⟦\\iff⟧⟦x = \\frac{1}{1 - \\log(3)}⟧(car ⟦1 - \\log(3) \\neq 0⟧)",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{1}{1 - \\log(3)}\\right\\} \\text{, soit } x \\approx 1{,}912⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "10^x*(10^x-4)=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Produit nul⟦10^{x} \\cdot (10^{x} - 4) = 0⟧⟦\\iff⟧⟦10^{x} = 0 \\text{ ou } 10^{x} - 4 = 0⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 1Produit nul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Facteur 1⟦10^{x} > 0⟧(une exponentielle est strictement positive)⟦10^{x} = 0⟧(aucune solution)",
+    "titre": "Étape 2Facteur 1"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Facteur 2⟦10^{x} - 4 = 0⟧⟦\\iff⟧⟦10^{x} = 4⟧(on isole le terme exponentiel)⟦10^{x} = 4⟧⟦\\iff⟧⟦x = \\log(4)⟧(définition du logarithme)",
+    "titre": "Étape 3Facteur 2"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\log(4)\\right\\} \\text{, soit } x \\approx 0{,}602⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "10^x*(x-4)=0": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "10^x=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Aucune solution⟦10^{x} > 0⟧(une exponentielle est strictement positive)⟦10^{x} = 0⟧(aucune solution)",
+    "titre": "Étape 1Aucune solution"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "10^x=0,65": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦10^{x} = 0{,}65⟧⟦\\iff⟧⟦x = \\log(0{,}65)⟧(définition du logarithme)",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\log(0{,}65)\\right\\} \\text{, soit } x \\approx -0{,}187⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "10^x=1/100": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦\\frac{1}{100} = 10^{-2}⟧⟦10^{x} = 10^{-2}⟧⟦\\iff⟧⟦x = -2⟧(même base : a^A = a^B ⇔ A = B)",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-2\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "10^x=3^(x+1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦10^{x} = 3^{x + 1}⟧⟦\\iff⟧⟦\\log(10^{x}) = \\log(3^{x + 1})⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(10) = (x + 1) \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = x \\cdot \\log(3) + \\log(3)⟧(log(10ᵏ) = k)⟦\\iff⟧⟦x(1 - \\log(3)) = \\log(3)⟧⟦\\iff⟧⟦x = \\frac{\\log(3)}{1 - \\log(3)}⟧(car ⟦1 - \\log(3) \\neq 0⟧)",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(3)}{1 - \\log(3)}\\right\\} \\text{, soit } x \\approx 0{,}912⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "10^x=5": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦10^{x} = 5⟧⟦\\iff⟧⟦x = \\log(5)⟧(définition du logarithme)",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\log(5)\\right\\} \\text{, soit } x \\approx 0{,}699⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "10^x=8": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦10^{x} = 8⟧⟦\\iff⟧⟦x = \\log(8)⟧(définition du logarithme)",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\log(8)\\right\\} \\text{, soit } x \\approx 0{,}903⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "11^(2x+1)=1": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦1 = 11^{0}⟧(1 = a⁰)⟦11^{2x + 1} = 11^{0}⟧⟦\\iff⟧⟦2x + 1 = 0⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦2x = -1⟧⟦\\iff⟧⟦x = -\\frac{1}{2}⟧",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-\\frac{1}{2}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "12^x=49": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦12^{x} = 49⟧⟦\\iff⟧⟦\\log(12^{x}) = \\log(49)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(12) = \\log(49)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(49)}{\\log(12)}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(49)}{\\log(12)}\\right\\} \\text{, soit } x \\approx 1{,}566⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "18=2*3^(x-1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Isoler l'exponentielle⟦18 = 2 \\cdot 3^{x - 1}⟧⟦\\iff⟧⟦9 = 3^{x - 1}⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Isoler l'exponentielle"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Même base⟦9 = 3^{2}⟧⟦3^{2} = 3^{x - 1}⟧⟦\\iff⟧⟦2 = x - 1⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x = 3⟧",
+    "titre": "Étape 2Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "2 000^x=3": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Pas d'espace dans un nombre : écrivez 1000 ou 1’000.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "2*10^x=0*x": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cette équation ne se résout pas avec les méthodes du cours.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "2*2^(x-1)=3^x": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦2 \\cdot 2^{x - 1} = 3^{x}⟧⟦\\iff⟧⟦\\log(2 \\cdot 2^{x - 1}) = \\log(3^{x})⟧(log des deux membres)⟦\\iff⟧⟦\\log(2) + \\log(2^{x - 1}) = \\log(3^{x})⟧(log(ab) = log a + log b)⟦\\iff⟧⟦\\log(2) + (x - 1) \\cdot \\log(2) = x \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) = x \\cdot \\log(3)⟧⟦\\iff⟧⟦x(\\log(2) - \\log(3)) = 0⟧⟦\\iff⟧⟦x = 0⟧(car ⟦\\log(2) - \\log(3) \\neq 0⟧)",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{0\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2*2^x=3^x": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦2 \\cdot 2^{x} = 3^{x}⟧⟦\\iff⟧⟦\\log(2 \\cdot 2^{x}) = \\log(3^{x})⟧(log des deux membres)⟦\\iff⟧⟦\\log(2) + \\log(2^{x}) = \\log(3^{x})⟧(log(ab) = log a + log b)⟦\\iff⟧⟦\\log(2) + x \\cdot \\log(2) = x \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) + \\log(2) = x \\cdot \\log(3)⟧⟦\\iff⟧⟦\\log(2) = x(\\log(3) - \\log(2))⟧⟦\\iff⟧⟦x = \\frac{\\log(2)}{\\log(3) - \\log(2)}⟧(car ⟦\\log(3) - \\log(2) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(2)}{\\log\\left(\\frac{3}{2}\\right)}⟧(log a − log b = log(a/b))",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(2)}{\\log\\left(\\frac{3}{2}\\right)}\\right\\} \\text{, soit } x \\approx 1{,}710⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2*3^(x-1)=18": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Isoler l'exponentielle⟦2 \\cdot 3^{x - 1} = 18⟧⟦\\iff⟧⟦3^{x - 1} = 9⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Isoler l'exponentielle"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Même base⟦9 = 3^{2}⟧⟦3^{x - 1} = 3^{2}⟧⟦\\iff⟧⟦x - 1 = 2⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x = 3⟧",
+    "titre": "Étape 2Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "2*3^x=-6": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Isoler l'exponentielle⟦2 \\cdot 3^{x} = -6⟧⟦\\iff⟧⟦3^{x} = -3⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Isoler l'exponentielle"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Aucune solution⟦3^{x} > 0⟧(une exponentielle est strictement positive)⟦-3 < 0⟧(aucune solution)",
+    "titre": "Étape 2Aucune solution"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "2*e^x=3^x": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦2e^{x} = 3^{x}⟧⟦\\iff⟧⟦\\ln(2e^{x}) = \\ln(3^{x})⟧(ln des deux membres)⟦\\iff⟧⟦\\ln(2) + \\ln(e^{x}) = \\ln(3^{x})⟧(log(ab) = log a + log b)⟦\\iff⟧⟦\\ln(2) + x = x \\cdot \\ln(3)⟧(ln(e^A) = A)⟦\\iff⟧⟦x + \\ln(2) = x \\cdot \\ln(3)⟧⟦\\iff⟧⟦\\ln(2) = x \\cdot \\ln(3) - x⟧⟦\\iff⟧⟦\\ln(2) = x(\\ln(3) - 1)⟧⟦\\iff⟧⟦x = \\frac{\\ln(2)}{\\ln(3) - 1}⟧(car ⟦\\ln(3) - 1 \\neq 0⟧)",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\ln(2)}{\\ln(3) - 1}\\right\\} \\text{, soit } x \\approx 7{,}029⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2+3": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Écrivez une équation (avec =) ou un logarithme à calculer, par exemple log_2(50).",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "2000*1,045^n=3805": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Isoler l'exponentielle⟦2\\text{’}000 \\cdot 1{,}045^{n} = 3\\text{’}805⟧⟦\\iff⟧⟦1{,}045^{n} = 1{,}9025⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Isoler l'exponentielle"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦1{,}045^{n} = 1{,}9025⟧⟦\\iff⟧⟦\\log(1{,}045^{n}) = \\log(1{,}9025)⟧(log des deux membres)⟦\\iff⟧⟦n \\cdot \\log(1{,}045) = \\log(1{,}9025)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦n = \\frac{\\log(1{,}9025)}{\\log(1{,}045)}⟧",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(1{,}9025)}{\\log(1{,}045)}\\right\\} \\text{, soit } n \\approx 14{,}612⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "20=2*3^x+2": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Isoler l'exponentielle⟦20 = 2 \\cdot 3^{x} + 2⟧⟦\\iff⟧⟦18 = 2 \\cdot 3^{x}⟧(on isole le terme exponentiel)⟦\\iff⟧⟦9 = 3^{x}⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Isoler l'exponentielle"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Même base⟦9 = 3^{2}⟧⟦3^{2} = 3^{x}⟧⟦\\iff⟧⟦2 = x⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x = 2⟧",
+    "titre": "Étape 2Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "2^(-x)=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{-x} = 3⟧⟦\\iff⟧⟦\\log(2^{-x}) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦(-x) \\cdot \\log(2) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦-x = \\frac{\\log(3)}{\\log(2)}⟧⟦\\iff⟧⟦x = -\\frac{\\log(3)}{\\log(2)}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-\\frac{\\log(3)}{\\log(2)}\\right\\} \\text{, soit } x \\approx -1{,}585⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2^(-x)=3^(1-x)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦2^{-x} = 3^{1 - x}⟧⟦\\iff⟧⟦\\log(2^{-x}) = \\log(3^{1 - x})⟧(log des deux membres)⟦\\iff⟧⟦(-x) \\cdot \\log(2) = (1 - x) \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦-x \\cdot \\log(2) = -x \\cdot \\log(3) + \\log(3)⟧⟦\\iff⟧⟦x(\\log(3) - \\log(2)) = \\log(3)⟧⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log(3) - \\log(2)}⟧(car ⟦\\log(3) - \\log(2) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(3)}{\\log\\left(\\frac{3}{2}\\right)}⟧(log a − log b = log(a/b))",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(3)}{\\log\\left(\\frac{3}{2}\\right)}\\right\\} \\text{, soit } x \\approx 2{,}710⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2^(-x)=3^x": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦2^{-x} = 3^{x}⟧⟦\\iff⟧⟦\\log(2^{-x}) = \\log(3^{x})⟧(log des deux membres)⟦\\iff⟧⟦(-x) \\cdot \\log(2) = x \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦-x \\cdot \\log(2) = x \\cdot \\log(3)⟧⟦\\iff⟧⟦x(-\\log(2) - \\log(3)) = 0⟧⟦\\iff⟧⟦x = 0⟧(car ⟦-\\log(2) - \\log(3) \\neq 0⟧)",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{0\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2^(-x)=8": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦8 = 2^{3}⟧⟦2^{-x} = 2^{3}⟧⟦\\iff⟧⟦-x = 3⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x = -3⟧",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2^(1-x)=3^(x+1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦2^{1 - x} = 3^{x + 1}⟧⟦\\iff⟧⟦\\log(2^{1 - x}) = \\log(3^{x + 1})⟧(log des deux membres)⟦\\iff⟧⟦(1 - x) \\cdot \\log(2) = (x + 1) \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦-x \\cdot \\log(2) + \\log(2) = x \\cdot \\log(3) + \\log(3)⟧⟦\\iff⟧⟦x(-\\log(2) - \\log(3)) = \\log(3) - \\log(2)⟧⟦\\iff⟧⟦x = \\frac{\\log(3) - \\log(2)}{-\\log(2) - \\log(3)}⟧(car ⟦-\\log(2) - \\log(3) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log\\left(\\frac{3}{2}\\right)}{\\log\\left(\\frac{1}{6}\\right)}⟧(propriétés des logarithmes)⟦\\log(3) - \\log(2) = \\log\\left(\\frac{3}{2}\\right)⟧(propriétés des logarithmes)⟦-\\log(2) - \\log(3) = \\log\\left(\\frac{1}{2 \\cdot 3}\\right)⟧(propriétés des logarithmes)⟦\\phantom{-\\log(2) - \\log(3)} = \\log\\left(\\frac{1}{6}\\right)⟧",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log\\left(\\frac{3}{2}\\right)}{\\log\\left(\\frac{1}{6}\\right)}\\right\\} \\text{, soit } x \\approx -0{,}226⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2^(1/x)=4": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cette équation ne se résout pas avec les méthodes du cours.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "2^(sqrt(x))=4": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cette équation ne se résout pas avec les méthodes du cours.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "2^(x+1)=2*2^x": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦2 \\cdot 2^{x} = 2^{1} \\cdot 2^{x} = 2^{x + 1}⟧(aᵐ · aⁿ = aᵐ⁺ⁿ)⟦2^{x + 1} = 2^{x + 1}⟧⟦\\iff⟧⟦x + 1 = x + 1⟧(même base : a^A = a^B ⇔ A = B)Cette égalité est vraie pour tout nombre réel.",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\mathbb{R}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2^(x+1)=2^(x+3)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦2^{x + 1} = 2^{x + 3}⟧⟦\\iff⟧⟦x + 1 = x + 3⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦1 = 3⟧Cette égalité est fausse : l'équation n'a aucune solution.",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2^(x+4)=3^(x-1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦2^{x + 4} = 3^{x - 1}⟧⟦\\iff⟧⟦\\log(2^{x + 4}) = \\log(3^{x - 1})⟧(log des deux membres)⟦\\iff⟧⟦(x + 4) \\cdot \\log(2) = (x - 1) \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) + 4\\log(2) = x \\cdot \\log(3) - \\log(3)⟧⟦\\iff⟧⟦\\log(3) + 4\\log(2) = x(\\log(3) - \\log(2))⟧⟦\\iff⟧⟦x = \\frac{\\log(3) + 4\\log(2)}{\\log(3) - \\log(2)}⟧(car ⟦\\log(3) - \\log(2) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(48)}{\\log\\left(\\frac{3}{2}\\right)}⟧(propriétés des logarithmes)⟦\\log(3) + 4\\log(2) = \\log(3 \\cdot 2^{4})⟧(propriétés des logarithmes)⟦\\phantom{\\log(3) + 4\\log(2)} = \\log(48)⟧⟦\\log(3) - \\log(2) = \\log\\left(\\frac{3}{2}\\right)⟧(propriétés des logarithmes)",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(48)}{\\log\\left(\\frac{3}{2}\\right)}\\right\\} \\text{, soit } x \\approx 9{,}548⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2^(x+7)=4^(5x+2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦4^{5x + 2} = (2^{2})^{5x + 2} = 2^{2(5x + 2)}⟧((aᵐ)ⁿ = aᵐⁿ)⟦\\phantom{4^{5x + 2}} = 2^{10x + 4}⟧⟦2^{x + 7} = 2^{10x + 4}⟧⟦\\iff⟧⟦x + 7 = 10x + 4⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦-9x = -3⟧⟦\\iff⟧⟦x = \\frac{1}{3}⟧",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{1}{3}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2^(x-1)=3^x": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦2^{x - 1} = 3^{x}⟧⟦\\iff⟧⟦\\log(2^{x - 1}) = \\log(3^{x})⟧(log des deux membres)⟦\\iff⟧⟦(x - 1) \\cdot \\log(2) = x \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) - \\log(2) = x \\cdot \\log(3)⟧⟦\\iff⟧⟦x(\\log(2) - \\log(3)) = \\log(2)⟧⟦\\iff⟧⟦x = \\frac{\\log(2)}{\\log(2) - \\log(3)}⟧(car ⟦\\log(2) - \\log(3) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(2)}{\\log\\left(\\frac{2}{3}\\right)}⟧(log a − log b = log(a/b))",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(2)}{\\log\\left(\\frac{2}{3}\\right)}\\right\\} \\text{, soit } x \\approx -1{,}710⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2^(x-1)=5^(x+1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦2^{x - 1} = 5^{x + 1}⟧⟦\\iff⟧⟦\\log(2^{x - 1}) = \\log(5^{x + 1})⟧(log des deux membres)⟦\\iff⟧⟦(x - 1) \\cdot \\log(2) = (x + 1) \\cdot \\log(5)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) - \\log(2) = x \\cdot \\log(5) + \\log(5)⟧⟦\\iff⟧⟦x(\\log(2) - \\log(5)) = \\log(2) + \\log(5)⟧⟦\\iff⟧⟦x = \\frac{\\log(2) + \\log(5)}{\\log(2) - \\log(5)}⟧(car ⟦\\log(2) - \\log(5) \\neq 0⟧)⟦\\phantom{x} = \\frac{1}{\\log\\left(\\frac{2}{5}\\right)}⟧(propriétés des logarithmes)⟦\\log(2) + \\log(5) = \\log(2 \\cdot 5)⟧(propriétés des logarithmes)⟦\\phantom{\\log(2) + \\log(5)} = 1⟧(log(10ᵏ) = k)⟦\\log(2) - \\log(5) = \\log\\left(\\frac{2}{5}\\right)⟧(propriétés des logarithmes)",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{1}{\\log\\left(\\frac{2}{5}\\right)}\\right\\} \\text{, soit } x \\approx -2{,}513⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2^(x/2)=3^(x-1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦2^{\\frac{x}{2}} = 3^{x - 1}⟧⟦\\iff⟧⟦\\log\\left(2^{\\frac{x}{2}}\\right) = \\log(3^{x - 1})⟧(log des deux membres)⟦\\iff⟧⟦\\frac{x}{2} \\cdot \\log(2) = (x - 1) \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦\\frac{1}{2}x \\cdot \\log(2) = x \\cdot \\log(3) - \\log(3)⟧⟦\\iff⟧⟦\\log(3) = x\\left(\\log(3) - \\frac{1}{2}\\log(2)\\right)⟧⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log(3) - \\frac{1}{2}\\log(2)}⟧(car ⟦\\log(3) - \\frac{1}{2}\\log(2) \\neq 0⟧)",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(3)}{\\log(3) - \\frac{1}{2}\\log(2)}\\right\\} \\text{, soit } x \\approx 1{,}461⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2^(x/2)=5": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{\\frac{x}{2}} = 5⟧⟦\\iff⟧⟦\\log\\left(2^{\\frac{x}{2}}\\right) = \\log(5)⟧(log des deux membres)⟦\\iff⟧⟦\\frac{x}{2} \\cdot \\log(2) = \\log(5)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦\\frac{x}{2} = \\frac{\\log(5)}{\\log(2)}⟧⟦\\iff⟧⟦x = \\frac{\\frac{\\log(5)}{\\log(2)}}{\\frac{1}{2}}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\frac{\\log(5)}{\\log(2)}}{\\frac{1}{2}}\\right\\} \\text{, soit } x \\approx 4{,}644⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2^(x/2)=8": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦8 = 2^{3}⟧⟦2^{\\frac{x}{2}} = 2^{3}⟧⟦\\iff⟧⟦\\frac{x}{2} = 3⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦\\frac{1}{2}x = 3⟧⟦\\iff⟧⟦x = 6⟧",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{6\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2^(x^2)*3^x=6": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "2^(x^2)*4^x=8": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦2^{x^{2}} \\cdot 4^{x} = 2^{x^{2}} \\cdot (2^{2})^{x} = 2^{x^{2}} \\cdot 2^{2x}⟧((aᵐ)ⁿ = aᵐⁿ)⟦\\phantom{2^{x^{2}} \\cdot 4^{x}} = 2^{x^{2} + 2x}⟧(aᵐ · aⁿ = aᵐ⁺ⁿ)⟦8 = 2^{3}⟧⟦2^{x^{2} + 2x} = 2^{3}⟧⟦\\iff⟧⟦x^{2} + 2x = 3⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x^{2} + 2x - 3 = 0⟧⟦\\iff⟧⟦(x + 3)(x - 1) = 0⟧⟦\\iff⟧⟦x = -3 \\text{ ou } x = 1⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-3 \\,;\\, 1\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2^(x^2)=2^(x-5)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦2^{x^{2}} = 2^{x - 5}⟧⟦\\iff⟧⟦x^{2} = x - 5⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x^{2} - x + 5 = 0⟧⟦Δ = (-1)^{2} - 4 \\cdot 1 \\cdot 5 = -19⟧Δ < 0 : l'équation n'a aucune solution réelle.",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2^(x^2)=3^x": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "2^(x^2)=5": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "2^(x^2)=8^x": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦8^{x} = (2^{3})^{x} = 2^{3x}⟧((aᵐ)ⁿ = aᵐⁿ)⟦2^{x^{2}} = 2^{3x}⟧⟦\\iff⟧⟦x^{2} = 3x⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x^{2} - 3x = 0⟧⟦\\iff⟧⟦x(x - 3) = 0⟧⟦\\iff⟧⟦x = 0 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{0 \\,;\\, 3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2^(x^3)=3^x": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "2^(x^3)=8": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "2^x+1=3^x": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "2^x+2^(x+1)=12": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "2^x+3^x=5": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cette équation ne se résout pas avec les méthodes du cours.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "2^x/4=2": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Isoler l'exponentielle⟦\\frac{2^{x}}{4} = 2⟧⟦\\iff⟧⟦2^{x} = 8⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Isoler l'exponentielle"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Même base⟦8 = 2^{3}⟧⟦2^{x} = 2^{3}⟧⟦\\iff⟧⟦x = 3⟧(même base : a^A = a^B ⇔ A = B)",
+    "titre": "Étape 2Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "2^x=-4": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Aucune solution⟦2^{x} > 0⟧(une exponentielle est strictement positive)⟦-4 < 0⟧(aucune solution)",
+    "titre": "Étape 1Aucune solution"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2^x=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Aucune solution⟦2^{x} > 0⟧(une exponentielle est strictement positive)⟦2^{x} = 0⟧(aucune solution)",
+    "titre": "Étape 1Aucune solution"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2^x=100": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x} = 100⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(100)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(100)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) = 2⟧(log(10ᵏ) = k)⟦\\iff⟧⟦x = \\frac{2}{\\log(2)}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{2}{\\log(2)}\\right\\} \\text{, soit } x \\approx 6{,}644⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2^x=2*4^(x-1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦2 \\cdot 4^{x - 1} = 2^{1} \\cdot (2^{2})^{x - 1} = 2^{1} \\cdot 2^{2(x - 1)}⟧((aᵐ)ⁿ = aᵐⁿ)⟦\\phantom{2 \\cdot 4^{x - 1}} = 2^{1} \\cdot 2^{2x - 2} = 2^{2x - 1}⟧(aᵐ · aⁿ = aᵐ⁺ⁿ)⟦2^{x} = 2^{2x - 1}⟧⟦\\iff⟧⟦x = 2x - 1⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦-x = -1⟧⟦\\iff⟧⟦x = 1⟧",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{1\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2^x=3^(x+1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦2^{x} = 3^{x + 1}⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(3^{x + 1})⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = (x + 1) \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) = x \\cdot \\log(3) + \\log(3)⟧⟦\\iff⟧⟦x(\\log(2) - \\log(3)) = \\log(3)⟧⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log(2) - \\log(3)}⟧(car ⟦\\log(2) - \\log(3) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(3)}{\\log\\left(\\frac{2}{3}\\right)}⟧(log a − log b = log(a/b))",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(3)}{\\log\\left(\\frac{2}{3}\\right)}\\right\\} \\text{, soit } x \\approx -2{,}710⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "2^x=3^x+x": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cette équation ne se résout pas avec les méthodes du cours.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "2^x=x+1": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cette équation ne se résout pas avec les méthodes du cours.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "2^x>=3": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Les inéquations ne sont pas traitées par cet outil : écrivez une équation avec =.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "2e=5": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "La lettre e désigne le nombre e ≈ 2,718 : choisissez une autre lettre pour l'inconnue.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "2lg(x)=4": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "La fonction lg n'est pas traitée par cet outil.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "2log(5)": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type de calcul.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "2log(x)-5=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Isoler le logarithme⟦2\\log(x) - 5 = 0⟧⟦\\iff⟧⟦2\\log(x) = 5⟧(on isole le logarithme)⟦\\iff⟧⟦\\log(x) = \\frac{5}{2}⟧(on isole le logarithme)",
+    "titre": "Étape 1Isoler le logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Définition du logarithme⟦\\log(x) = \\frac{5}{2}⟧⟦\\iff⟧⟦x = 10^{\\frac{5}{2}} = 100\\sqrt{10}⟧(définition du logarithme)",
+    "titre": "Étape 2Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{100\\sqrt{10}\\right\\} \\text{, soit } x \\approx 316{,}228⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "2log_3(x)=10": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Isoler le logarithme⟦2\\log_{3}(x) = 10⟧⟦\\iff⟧⟦\\log_{3}(x) = 5⟧(on isole le logarithme)",
+    "titre": "Étape 1Isoler le logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Définition du logarithme⟦\\log_{3}(x) = 5⟧⟦\\iff⟧⟦x = 3^{5} = 243⟧(définition du logarithme)",
+    "titre": "Étape 2Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{243\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "2x+1=9": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "2x=ln(0,1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Équation du premier degré⟦2x = \\ln(0{,}1)⟧⟦\\iff⟧⟦x = \\frac{\\ln(0{,}1)}{2}⟧",
+    "titre": "Étape 1Équation du premier degré"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\ln(0{,}1)}{2}\\right\\} \\text{, soit } x \\approx -1{,}151⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "3(2^x+1)=9": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Isoler l'exponentielle⟦3(2^{x} + 1) = 9⟧⟦\\iff⟧⟦2^{x} + 1 = 3⟧(on isole le terme exponentiel)⟦\\iff⟧⟦2^{x} = 2⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Isoler l'exponentielle"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Même base⟦2 = 2^{1}⟧⟦2^{x} = 2^{1}⟧⟦\\iff⟧⟦x = 1⟧(même base : a^A = a^B ⇔ A = B)",
+    "titre": "Étape 2Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{1\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "3*2^(x^2+1)=96": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Isoler l'exponentielle⟦3 \\cdot 2^{x^{2} + 1} = 96⟧⟦\\iff⟧⟦2^{x^{2} + 1} = 32⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Isoler l'exponentielle"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Même base⟦32 = 2^{5}⟧⟦2^{x^{2} + 1} = 2^{5}⟧⟦\\iff⟧⟦x^{2} + 1 = 5⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x^{2} - 4 = 0⟧⟦\\iff⟧⟦(x + 2)(x - 2) = 0⟧⟦\\iff⟧⟦x = -2 \\text{ ou } x = 2⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 2Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-2 \\,;\\, 2\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "3*2^x=5": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Isoler l'exponentielle⟦3 \\cdot 2^{x} = 5⟧⟦\\iff⟧⟦2^{x} = \\frac{5}{3}⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Isoler l'exponentielle"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦2^{x} = \\frac{5}{3}⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log\\left(\\frac{5}{3}\\right)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log\\left(\\frac{5}{3}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log\\left(\\frac{5}{3}\\right)}{\\log(2)}⟧",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log\\left(\\frac{5}{3}\\right)}{\\log(2)}\\right\\} \\text{, soit } x \\approx 0{,}737⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "3*2^x=5*3^(x-1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦3 \\cdot 2^{x} = 5 \\cdot 3^{x - 1}⟧⟦\\iff⟧⟦\\log(3 \\cdot 2^{x}) = \\log(5 \\cdot 3^{x - 1})⟧(log des deux membres)⟦\\iff⟧⟦\\log(3) + \\log(2^{x}) = \\log(5) + \\log(3^{x - 1})⟧(log(ab) = log a + log b)⟦\\iff⟧⟦\\log(3) + x \\cdot \\log(2) = \\log(5) + (x - 1) \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) + \\log(3) = x \\cdot \\log(3) - \\log(3) + \\log(5)⟧⟦\\iff⟧⟦2\\log(3) - \\log(5) = x(\\log(3) - \\log(2))⟧⟦\\iff⟧⟦x = \\frac{2\\log(3) - \\log(5)}{\\log(3) - \\log(2)}⟧(car ⟦\\log(3) - \\log(2) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log\\left(\\frac{9}{5}\\right)}{\\log\\left(\\frac{3}{2}\\right)}⟧(propriétés des logarithmes)⟦2\\log(3) - \\log(5) = \\log\\left(\\frac{3^{2}}{5}\\right)⟧(propriétés des logarithmes)⟦\\phantom{2\\log(3) - \\log(5)} = \\log\\left(\\frac{9}{5}\\right)⟧⟦\\log(3) - \\log(2) = \\log\\left(\\frac{3}{2}\\right)⟧(propriétés des logarithmes)",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log\\left(\\frac{9}{5}\\right)}{\\log\\left(\\frac{3}{2}\\right)}\\right\\} \\text{, soit } x \\approx 1{,}450⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "37*e^(-0,02t)=25": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Isoler l'exponentielle⟦37e^{-0{,}02t} = 25⟧⟦\\iff⟧⟦e^{-0{,}02t} = \\frac{25}{37}⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Isoler l'exponentielle"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Définition du logarithme⟦e^{-0{,}02t} = \\frac{25}{37}⟧⟦\\iff⟧⟦-0{,}02t = \\ln\\left(\\frac{25}{37}\\right)⟧(définition du logarithme)⟦\\iff⟧⟦t = \\frac{\\ln\\left(\\frac{25}{37}\\right)}{-0{,}02}⟧",
+    "titre": "Étape 2Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\ln\\left(\\frac{25}{37}\\right)}{-0{,}02}\\right\\} \\text{, soit } t \\approx 19{,}602⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "3=log(x)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦3 = \\log(x)⟧⟦\\iff⟧⟦\\log(x) = 3⟧⟦\\iff⟧⟦x = 10^{3} = 1\\text{’}000⟧(définition du logarithme)",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{1\\text{’}000\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "3^(2x)=2^(3x+1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦3^{2x} = 2^{3x + 1}⟧⟦\\iff⟧⟦\\log(3^{2x}) = \\log(2^{3x + 1})⟧(log des deux membres)⟦\\iff⟧⟦2x \\cdot \\log(3) = (3x + 1) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦2x \\cdot \\log(3) = 3x \\cdot \\log(2) + \\log(2)⟧⟦\\iff⟧⟦x(2\\log(3) - 3\\log(2)) = \\log(2)⟧⟦\\iff⟧⟦x = \\frac{\\log(2)}{2\\log(3) - 3\\log(2)}⟧(car ⟦2\\log(3) - 3\\log(2) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(2)}{\\log\\left(\\frac{9}{8}\\right)}⟧(propriétés des logarithmes)⟦2\\log(3) - 3\\log(2) = \\log\\left(\\frac{3^{2}}{2^{3}}\\right)⟧(propriétés des logarithmes)⟦\\phantom{2\\log(3) - 3\\log(2)} = \\log\\left(\\frac{9}{8}\\right)⟧",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(2)}{\\log\\left(\\frac{9}{8}\\right)}\\right\\} \\text{, soit } x \\approx 5{,}885⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "3^(x+1)-27=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Isoler l'exponentielle⟦3^{x + 1} - 27 = 0⟧⟦\\iff⟧⟦3^{x + 1} = 27⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Isoler l'exponentielle"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Même base⟦27 = 3^{3}⟧⟦3^{x + 1} = 3^{3}⟧⟦\\iff⟧⟦x + 1 = 3⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x = 2⟧",
+    "titre": "Étape 2Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "3^(x+1)=2^x": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦3^{x + 1} = 2^{x}⟧⟦\\iff⟧⟦\\log(3^{x + 1}) = \\log(2^{x})⟧(log des deux membres)⟦\\iff⟧⟦(x + 1) \\cdot \\log(3) = x \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(3) + \\log(3) = x \\cdot \\log(2)⟧⟦\\iff⟧⟦\\log(3) = x(\\log(2) - \\log(3))⟧⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log(2) - \\log(3)}⟧(car ⟦\\log(2) - \\log(3) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(3)}{\\log\\left(\\frac{2}{3}\\right)}⟧(log a − log b = log(a/b))",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(3)}{\\log\\left(\\frac{2}{3}\\right)}\\right\\} \\text{, soit } x \\approx -2{,}710⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "3^(x+1)=e^x": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦3^{x + 1} = e^{x}⟧⟦\\iff⟧⟦\\ln(3^{x + 1}) = \\ln(e^{x})⟧(ln des deux membres)⟦\\iff⟧⟦(x + 1) \\cdot \\ln(3) = x⟧(ln(e^A) = A)⟦\\iff⟧⟦x \\cdot \\ln(3) + \\ln(3) = x⟧⟦\\iff⟧⟦\\ln(3) = x - x \\cdot \\ln(3)⟧⟦\\iff⟧⟦\\ln(3) = x(1 - \\ln(3))⟧⟦\\iff⟧⟦x = \\frac{\\ln(3)}{1 - \\ln(3)}⟧(car ⟦1 - \\ln(3) \\neq 0⟧)",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\ln(3)}{1 - \\ln(3)}\\right\\} \\text{, soit } x \\approx -11{,}141⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "3^(x-1)=10": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦3^{x - 1} = 10⟧⟦\\iff⟧⟦\\log(3^{x - 1}) = \\log(10)⟧(log des deux membres)⟦\\iff⟧⟦(x - 1) \\cdot \\log(3) = \\log(10)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x - 1) \\cdot \\log(3) = 1⟧(log(10ᵏ) = k)⟦\\iff⟧⟦x - 1 = \\frac{1}{\\log(3)}⟧⟦\\iff⟧⟦x = 1 + \\frac{1}{\\log(3)}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{1 + \\frac{1}{\\log(3)}\\right\\} \\text{, soit } x \\approx 3{,}096⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "3^(x^2+1)=7": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "3^x*2=5*2^x": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦3^{x} \\cdot 2 = 5 \\cdot 2^{x}⟧⟦\\iff⟧⟦\\log(3^{x} \\cdot 2) = \\log(5 \\cdot 2^{x})⟧(log des deux membres)⟦\\iff⟧⟦\\log(2) + \\log(3^{x}) = \\log(5) + \\log(2^{x})⟧(log(ab) = log a + log b)⟦\\iff⟧⟦\\log(2) + x \\cdot \\log(3) = \\log(5) + x \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(3) + \\log(2) = x \\cdot \\log(2) + \\log(5)⟧⟦\\iff⟧⟦x(\\log(3) - \\log(2)) = \\log(5) - \\log(2)⟧⟦\\iff⟧⟦x = \\frac{\\log(5) - \\log(2)}{\\log(3) - \\log(2)}⟧(car ⟦\\log(3) - \\log(2) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log\\left(\\frac{5}{2}\\right)}{\\log\\left(\\frac{3}{2}\\right)}⟧(log a − log b = log(a/b))",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log\\left(\\frac{5}{2}\\right)}{\\log\\left(\\frac{3}{2}\\right)}\\right\\} \\text{, soit } x \\approx 2{,}260⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "3^x=": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Il manque un membre de l'équation (avant ou après le signe =).",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "3^x=2": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦3^{x} = 2⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(2)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(2)}{\\log(3)}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(2)}{\\log(3)}\\right\\} \\text{, soit } x \\approx 0{,}631⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "3^x=20": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦3^{x} = 20⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(20)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(20)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(20)}{\\log(3)}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(20)}{\\log(3)}\\right\\} \\text{, soit } x \\approx 2{,}727⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "3^x=27": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦27 = 3^{3}⟧⟦3^{x} = 3^{3}⟧⟦\\iff⟧⟦x = 3⟧(même base : a^A = a^B ⇔ A = B)",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "3^x=2=1": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Un seul signe = dans une équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "3^x=2^x": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦3^{x} = 2^{x}⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(2^{x})⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(3) = x \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x(\\log(3) - \\log(2)) = 0⟧⟦\\iff⟧⟦x = 0⟧(car ⟦\\log(3) - \\log(2) \\neq 0⟧)",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{0\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "3^x=9^(2x+3)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦9^{2x + 3} = (3^{2})^{2x + 3} = 3^{2(2x + 3)}⟧((aᵐ)ⁿ = aᵐⁿ)⟦\\phantom{9^{2x + 3}} = 3^{4x + 6}⟧⟦3^{x} = 3^{4x + 6}⟧⟦\\iff⟧⟦x = 4x + 6⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦-3x = 6⟧⟦\\iff⟧⟦x = -2⟧",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-2\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "3e^x=0,65": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Isoler l'exponentielle⟦3e^{x} = 0{,}65⟧⟦\\iff⟧⟦e^{x} = \\frac{13}{60}⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Isoler l'exponentielle"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Définition du logarithme⟦e^{x} = \\frac{13}{60}⟧⟦\\iff⟧⟦x = \\ln\\left(\\frac{13}{60}\\right)⟧(définition du logarithme)",
+    "titre": "Étape 2Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\ln\\left(\\frac{13}{60}\\right)\\right\\} \\text{, soit } x \\approx -1{,}529⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "4^(-x)=2^6": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦4^{-x} = (2^{2})^{-x} = 2^{-2x}⟧((aᵐ)ⁿ = aᵐⁿ)⟦2^{-2x} = 2^{6}⟧⟦\\iff⟧⟦-2x = 6⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x = -3⟧",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "4^(2x+1)=60": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦4^{2x + 1} = 60⟧⟦\\iff⟧⟦\\log(4^{2x + 1}) = \\log(60)⟧(log des deux membres)⟦\\iff⟧⟦(2x + 1) \\cdot \\log(4) = \\log(60)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦2x + 1 = \\frac{\\log(60)}{\\log(4)}⟧⟦\\iff⟧⟦2x = \\frac{\\log(60)}{\\log(4)} - 1⟧⟦\\iff⟧⟦x = \\frac{\\frac{\\log(60)}{\\log(4)} - 1}{2}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\frac{\\log(60)}{\\log(4)} - 1}{2}\\right\\} \\text{, soit } x \\approx 0{,}977⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "4^(3x+1)=8": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦4^{3x + 1} = (2^{2})^{3x + 1} = 2^{2(3x + 1)}⟧((aᵐ)ⁿ = aᵐⁿ)⟦\\phantom{4^{3x + 1}} = 2^{6x + 2}⟧⟦8 = 2^{3}⟧⟦2^{6x + 2} = 2^{3}⟧⟦\\iff⟧⟦6x + 2 = 3⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦6x = 1⟧⟦\\iff⟧⟦x = \\frac{1}{6}⟧",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{1}{6}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "4^(x+1)=6^(3x)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦4^{x + 1} = 6^{3x}⟧⟦\\iff⟧⟦\\log(4^{x + 1}) = \\log(6^{3x})⟧(log des deux membres)⟦\\iff⟧⟦(x + 1) \\cdot \\log(4) = 3x \\cdot \\log(6)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(4) + \\log(4) = 3x \\cdot \\log(6)⟧⟦\\iff⟧⟦\\log(4) = x(3\\log(6) - \\log(4))⟧⟦\\iff⟧⟦x = \\frac{\\log(4)}{3\\log(6) - \\log(4)}⟧(car ⟦3\\log(6) - \\log(4) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(4)}{\\log(54)}⟧(propriétés des logarithmes)⟦3\\log(6) - \\log(4) = \\log\\left(\\frac{6^{3}}{4}\\right)⟧(propriétés des logarithmes)⟦\\phantom{3\\log(6) - \\log(4)} = \\log(54)⟧",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(4)}{\\log(54)}\\right\\} \\text{, soit } x \\approx 0{,}348⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "4^(x-4)=20": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦4^{x - 4} = 20⟧⟦\\iff⟧⟦\\log(4^{x - 4}) = \\log(20)⟧(log des deux membres)⟦\\iff⟧⟦(x - 4) \\cdot \\log(4) = \\log(20)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x - 4 = \\frac{\\log(20)}{\\log(4)}⟧⟦\\iff⟧⟦x = 4 + \\frac{\\log(20)}{\\log(4)}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{4 + \\frac{\\log(20)}{\\log(4)}\\right\\} \\text{, soit } x \\approx 6{,}161⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "4^x=16": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦16 = 4^{2}⟧⟦4^{x} = 4^{2}⟧⟦\\iff⟧⟦x = 2⟧(même base : a^A = a^B ⇔ A = B)",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "4^x=8": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦4^{x} = (2^{2})^{x} = 2^{2x}⟧((aᵐ)ⁿ = aᵐⁿ)⟦8 = 2^{3}⟧⟦2^{2x} = 2^{3}⟧⟦\\iff⟧⟦2x = 3⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x = \\frac{3}{2}⟧",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{3}{2}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "5": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Écrivez une équation (avec =) ou un logarithme à calculer, par exemple log_2(50).",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "5*10^x=2^x": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦5 \\cdot 10^{x} = 2^{x}⟧⟦\\iff⟧⟦\\log(5 \\cdot 10^{x}) = \\log(2^{x})⟧(log des deux membres)⟦\\iff⟧⟦\\log(5) + \\log(10^{x}) = \\log(2^{x})⟧(log(ab) = log a + log b)⟦\\iff⟧⟦\\log(5) + x \\cdot \\log(10) = x \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x + \\log(5) = x \\cdot \\log(2)⟧(log(10ᵏ) = k)⟦\\iff⟧⟦\\log(5) = x(\\log(2) - 1)⟧⟦\\iff⟧⟦x = \\frac{\\log(5)}{\\log(2) - 1}⟧(car ⟦\\log(2) - 1 \\neq 0⟧)",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(5)}{\\log(2) - 1}\\right\\} \\text{, soit } x \\approx -1{,}000⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "5-2^x=1": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Isoler l'exponentielle⟦5 - 2^{x} = 1⟧⟦\\iff⟧⟦2^{x} = 4⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Isoler l'exponentielle"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Même base⟦4 = 2^{2}⟧⟦2^{x} = 2^{2}⟧⟦\\iff⟧⟦x = 2⟧(même base : a^A = a^B ⇔ A = B)",
+    "titre": "Étape 2Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "5^(2x+1)=3^(x+2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦5^{2x + 1} = 3^{x + 2}⟧⟦\\iff⟧⟦\\log(5^{2x + 1}) = \\log(3^{x + 2})⟧(log des deux membres)⟦\\iff⟧⟦(2x + 1) \\cdot \\log(5) = (x + 2) \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦2x \\cdot \\log(5) + \\log(5) = x \\cdot \\log(3) + 2\\log(3)⟧⟦\\iff⟧⟦x(2\\log(5) - \\log(3)) = 2\\log(3) - \\log(5)⟧⟦\\iff⟧⟦x = \\frac{2\\log(3) - \\log(5)}{2\\log(5) - \\log(3)}⟧(car ⟦2\\log(5) - \\log(3) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log\\left(\\frac{9}{5}\\right)}{\\log\\left(\\frac{25}{3}\\right)}⟧(propriétés des logarithmes)⟦2\\log(3) - \\log(5) = \\log\\left(\\frac{3^{2}}{5}\\right)⟧(propriétés des logarithmes)⟦\\phantom{2\\log(3) - \\log(5)} = \\log\\left(\\frac{9}{5}\\right)⟧⟦2\\log(5) - \\log(3) = \\log\\left(\\frac{5^{2}}{3}\\right)⟧(propriétés des logarithmes)⟦\\phantom{2\\log(5) - \\log(3)} = \\log\\left(\\frac{25}{3}\\right)⟧",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log\\left(\\frac{9}{5}\\right)}{\\log\\left(\\frac{25}{3}\\right)}\\right\\} \\text{, soit } x \\approx 0{,}277⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "5^(2x+3)=7": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦5^{2x + 3} = 7⟧⟦\\iff⟧⟦\\log(5^{2x + 3}) = \\log(7)⟧(log des deux membres)⟦\\iff⟧⟦(2x + 3) \\cdot \\log(5) = \\log(7)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦2x + 3 = \\frac{\\log(7)}{\\log(5)}⟧⟦\\iff⟧⟦2x = \\frac{\\log(7)}{\\log(5)} - 3⟧⟦\\iff⟧⟦x = \\frac{\\frac{\\log(7)}{\\log(5)} - 3}{2}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\frac{\\log(7)}{\\log(5)} - 3}{2}\\right\\} \\text{, soit } x \\approx -0{,}895⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "5^(3x+2)=(5^x)^2": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦(5^{x})^{2} = 5^{2x}⟧((aᵐ)ⁿ = aᵐⁿ)⟦5^{3x + 2} = 5^{2x}⟧⟦\\iff⟧⟦3x + 2 = 2x⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x = -2⟧",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-2\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "5^(8x)=-25": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Aucune solution⟦5^{8x} > 0⟧(une exponentielle est strictement positive)⟦-25 < 0⟧(aucune solution)",
+    "titre": "Étape 1Aucune solution"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "5^(x^3+1)=7": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "5^x/2=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Isoler l'exponentielle⟦\\frac{5^{x}}{2} = 3⟧⟦\\iff⟧⟦5^{x} = 6⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Isoler l'exponentielle"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦5^{x} = 6⟧⟦\\iff⟧⟦\\log(5^{x}) = \\log(6)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(5) = \\log(6)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(6)}{\\log(5)}⟧",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(6)}{\\log(5)}\\right\\} \\text{, soit } x \\approx 1{,}113⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "7^(2x+1)=7^9": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦7^{2x + 1} = 7^{9}⟧⟦\\iff⟧⟦2x + 1 = 9⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦2x = 8⟧⟦\\iff⟧⟦x = 4⟧",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{4\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "7^(x+2)=2^(3-x)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦7^{x + 2} = 2^{3 - x}⟧⟦\\iff⟧⟦\\log(7^{x + 2}) = \\log(2^{3 - x})⟧(log des deux membres)⟦\\iff⟧⟦(x + 2) \\cdot \\log(7) = (3 - x) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(7) + 2\\log(7) = -x \\cdot \\log(2) + 3\\log(2)⟧⟦\\iff⟧⟦2\\log(7) - 3\\log(2) = x(-\\log(2) - \\log(7))⟧⟦\\iff⟧⟦x = \\frac{2\\log(7) - 3\\log(2)}{-\\log(2) - \\log(7)}⟧(car ⟦-\\log(2) - \\log(7) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log\\left(\\frac{49}{8}\\right)}{\\log\\left(\\frac{1}{14}\\right)}⟧(propriétés des logarithmes)⟦2\\log(7) - 3\\log(2) = \\log\\left(\\frac{7^{2}}{2^{3}}\\right)⟧(propriétés des logarithmes)⟦\\phantom{2\\log(7) - 3\\log(2)} = \\log\\left(\\frac{49}{8}\\right)⟧⟦-\\log(2) - \\log(7) = \\log\\left(\\frac{1}{2 \\cdot 7}\\right)⟧(propriétés des logarithmes)⟦\\phantom{-\\log(2) - \\log(7)} = \\log\\left(\\frac{1}{14}\\right)⟧",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log\\left(\\frac{49}{8}\\right)}{\\log\\left(\\frac{1}{14}\\right)}\\right\\} \\text{, soit } x \\approx -0{,}687⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "8=log(2x+1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦8 = \\log(2x + 1)⟧⟦\\iff⟧⟦\\log(2x + 1) = 8⟧⟦\\iff⟧⟦2x + 1 = 10^{8}⟧(définition du logarithme)⟦\\iff⟧⟦2x = 10^{8} - 1⟧⟦\\iff⟧⟦x = \\frac{10^{8} - 1}{2} = \\frac{99\\text{’}999\\text{’}999}{2}⟧",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Vérification⟦2x + 1 = 10^{8} > 0⟧(le logarithme est bien défini) ⟦\\checkmark⟧",
+    "titre": "Étape 2Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{99\\text{’}999\\text{’}999}{2}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "8^(3x+2)=1/16": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦8^{3x + 2} = (2^{3})^{3x + 2} = 2^{3(3x + 2)}⟧((aᵐ)ⁿ = aᵐⁿ)⟦\\phantom{8^{3x + 2}} = 2^{9x + 6}⟧⟦\\frac{1}{16} = 2^{-4}⟧⟦2^{9x + 6} = 2^{-4}⟧⟦\\iff⟧⟦9x + 6 = -4⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦9x = -10⟧⟦\\iff⟧⟦x = -\\frac{10}{9}⟧",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-\\frac{10}{9}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "9^(x^2)=3^(x+1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦9^{x^{2}} = (3^{2})^{x^{2}} = 3^{2x^{2}}⟧((aᵐ)ⁿ = aᵐⁿ)⟦3^{2x^{2}} = 3^{x + 1}⟧⟦\\iff⟧⟦2x^{2} = x + 1⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦2x^{2} - x - 1 = 0⟧⟦Δ = (-1)^{2} - 4 \\cdot 2 \\cdot (-1) = 9⟧⟦x = -\\frac{1}{2} \\text{ ou } x = 1⟧",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-\\frac{1}{2} \\,;\\, 1\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "9^x=1/3": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Même base⟦9^{x} = (3^{2})^{x} = 3^{2x}⟧((aᵐ)ⁿ = aᵐⁿ)⟦\\frac{1}{3} = 3^{-1}⟧⟦3^{2x} = 3^{-1}⟧⟦\\iff⟧⟦2x = -1⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x = -\\frac{1}{2}⟧",
+    "titre": "Étape 1Même base"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-\\frac{1}{2}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "=3": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Il manque un membre de l'équation (avant ou après le signe =).",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "cos(x)=1": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "La fonction cos n'est pas traitée par cet outil.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "e": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Écrivez une équation (avec =) ou un logarithme à calculer, par exemple log_2(50).",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "e^(-0,01x)=0,7": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦e^{-0{,}01x} = 0{,}7⟧⟦\\iff⟧⟦-0{,}01x = \\ln(0{,}7)⟧(définition du logarithme)⟦\\iff⟧⟦x = \\frac{\\ln(0{,}7)}{-0{,}01}⟧",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\ln(0{,}7)}{-0{,}01}\\right\\} \\text{, soit } x \\approx 35{,}667⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "e^(0,05t)=2": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦e^{0{,}05t} = 2⟧⟦\\iff⟧⟦0{,}05t = \\ln(2)⟧(définition du logarithme)⟦\\iff⟧⟦t = \\frac{\\ln(2)}{0{,}05}⟧",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\ln(2)}{0{,}05}\\right\\} \\text{, soit } t \\approx 13{,}863⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "e^(2x)=3^(x-1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦e^{2x} = 3^{x - 1}⟧⟦\\iff⟧⟦\\ln(e^{2x}) = \\ln(3^{x - 1})⟧(ln des deux membres)⟦\\iff⟧⟦2x = (x - 1) \\cdot \\ln(3)⟧(ln(e^A) = A)⟦\\iff⟧⟦2x = x \\cdot \\ln(3) - \\ln(3)⟧⟦\\iff⟧⟦\\ln(3) = x \\cdot \\ln(3) - 2x⟧⟦\\iff⟧⟦\\ln(3) = x(\\ln(3) - 2)⟧⟦\\iff⟧⟦x = \\frac{\\ln(3)}{\\ln(3) - 2}⟧(car ⟦\\ln(3) - 2 \\neq 0⟧)",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\ln(3)}{\\ln(3) - 2}\\right\\} \\text{, soit } x \\approx -1{,}219⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "e^-0,02t=1": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Mettez l'exposant entre parenthèses : e^(-0,02t).",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "e^x+e^(-x)=3": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "e^x=1": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦e^{x} = 1⟧⟦\\iff⟧⟦x = 0⟧(ln(1) = 0)",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{0\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "e^x=2^(x+1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦e^{x} = 2^{x + 1}⟧⟦\\iff⟧⟦\\ln(e^{x}) = \\ln(2^{x + 1})⟧(ln des deux membres)⟦\\iff⟧⟦x = (x + 1) \\cdot \\ln(2)⟧(ln(e^A) = A)⟦\\iff⟧⟦x = x \\cdot \\ln(2) + \\ln(2)⟧⟦\\iff⟧⟦x - x \\cdot \\ln(2) = \\ln(2)⟧⟦\\iff⟧⟦x(1 - \\ln(2)) = \\ln(2)⟧⟦\\iff⟧⟦x = \\frac{\\ln(2)}{1 - \\ln(2)}⟧(car ⟦1 - \\ln(2) \\neq 0⟧)",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\ln(2)}{1 - \\ln(2)}\\right\\} \\text{, soit } x \\approx 2{,}259⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "e^x=2^x": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Bases différentes⟦e^{x} = 2^{x}⟧⟦\\iff⟧⟦\\ln(e^{x}) = \\ln(2^{x})⟧(ln des deux membres)⟦\\iff⟧⟦x = x \\cdot \\ln(2)⟧(ln(e^A) = A)⟦\\iff⟧⟦x - x \\cdot \\ln(2) = 0⟧⟦\\iff⟧⟦x(1 - \\ln(2)) = 0⟧⟦\\iff⟧⟦x = 0⟧(car ⟦1 - \\ln(2) \\neq 0⟧)",
+    "titre": "Étape 1Bases différentes"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{0\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "e^x=7": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦e^{x} = 7⟧⟦\\iff⟧⟦x = \\ln(7)⟧(définition du logarithme)",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\ln(7)\\right\\} \\text{, soit } x \\approx 1{,}946⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "e^x=e^(x+1)": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "e^x=e^3": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "exp(x)=7": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦e^{x} = 7⟧⟦\\iff⟧⟦x = \\ln(7)⟧(définition du logarithme)",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\ln(7)\\right\\} \\text{, soit } x \\approx 1{,}946⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "lg(x)=2": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "La fonction lg n'est pas traitée par cet outil.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "ln(0)": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Le logarithme d'un nombre négatif ou nul n'est pas défini.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "ln(1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦\\ln(1) = 0⟧(ln(1) = 0)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\ln(1) = 0⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "ln(2-x)=1": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\ln(2 - x) = 1⟧⟦\\iff⟧⟦2 - x = e⟧(définition du logarithme)⟦\\iff⟧⟦x = 2 - e⟧",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Vérification⟦2 - x = e > 0⟧(le logarithme est bien défini) ⟦\\checkmark⟧",
+    "titre": "Étape 2Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2 - e\\right\\} \\text{, soit } x \\approx -0{,}718⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "ln(7)": {
+  "au_depart": {
+   "progression": "Étape 1 / 1",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\ln(7) \\approx 1{,}946⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 1 / 1"
+ },
+ "ln(e)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦\\ln(e) = 1⟧(ln(e^k) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\ln(e) = 1⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "ln(e^3)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦\\ln(e^{3}) = 3⟧(ln(e^k) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\ln(e^{3}) = 3⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "ln(ln(x))=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\ln(\\ln(x)) = 0⟧⟦\\iff⟧⟦\\ln(x) = e^{0} = 1⟧(définition du logarithme)⟦\\iff⟧⟦x = e⟧(définition du logarithme)",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{e\\right\\} \\text{, soit } x \\approx 2{,}718⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "ln(x)=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\ln(x) = 0⟧⟦\\iff⟧⟦x = e^{0} = 1⟧(définition du logarithme)",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{1\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "ln(x)=1": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\ln(x) = 1⟧⟦\\iff⟧⟦x = e⟧(définition du logarithme)",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{e\\right\\} \\text{, soit } x \\approx 2{,}718⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "ln(x)=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\ln(x) = 3⟧⟦\\iff⟧⟦x = e^{3}⟧(définition du logarithme)",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{e^{3}\\right\\} \\text{, soit } x \\approx 20{,}086⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log x = 2": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Après log, ouvrez une parenthèse : log(x).",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "log(-3-x)=1": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\log(-3 - x) = 1⟧⟦\\iff⟧⟦-3 - x = 10^{1}⟧(définition du logarithme)⟦\\iff⟧⟦x = -3 - 10^{1} = -13⟧",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Vérification⟦-3 - x = 10^{1} > 0⟧(le logarithme est bien défini) ⟦\\checkmark⟧",
+    "titre": "Étape 2Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-13\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "log(-5)": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Le logarithme d'un nombre négatif ou nul n'est pas défini.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "log(-x)=2": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\log(-x) = 2⟧⟦\\iff⟧⟦-x = 10^{2}⟧(définition du logarithme)⟦\\iff⟧⟦x = -10^{2} = -100⟧",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Vérification⟦-x = 10^{2} > 0⟧(le logarithme est bien défini) ⟦\\checkmark⟧",
+    "titre": "Étape 2Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-100\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "log(0)": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Le logarithme d'un nombre négatif ou nul n'est pas défini.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "log(0,001)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦0{,}001 = 10^{-3}⟧⟦\\log(0{,}001) = \\log(10^{-3}) = -3⟧(log(10ᵏ) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log(0{,}001) = -3⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log(0,01)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦0{,}01 = 10^{-2}⟧⟦\\log(0{,}01) = \\log(10^{-2}) = -2⟧(log(10ᵏ) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log(0{,}01) = -2⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log(1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦1 = 10^{0}⟧⟦\\log(1) = \\log(10^{0}) = 0⟧(log(10ᵏ) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log(1) = 0⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log(1/100000)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦\\frac{1}{100\\text{’}000} = 10^{-5}⟧⟦\\log\\left(\\frac{1}{100\\text{’}000}\\right) = \\log(10^{-5}) = -5⟧(log(10ᵏ) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log\\left(\\frac{1}{100\\text{’}000}\\right) = -5⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log(1000000)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦1\\text{’}000\\text{’}000 = 10^{6}⟧⟦\\log(1\\text{’}000\\text{’}000) = \\log(10^{6}) = 6⟧(log(10ᵏ) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log(1\\text{’}000\\text{’}000) = 6⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log(10^(1/2))": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦10^{\\frac{1}{2}} = 10^{\\frac{1}{2}}⟧⟦\\log\\left(10^{\\frac{1}{2}}\\right) = \\log\\left(10^{\\frac{1}{2}}\\right) = \\frac{1}{2}⟧(log(10ᵏ) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log\\left(10^{\\frac{1}{2}}\\right) = \\frac{1}{2}⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log(10^3)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦10^{3} = 10^{3}⟧⟦\\log(10^{3}) = \\log(10^{3}) = 3⟧(log(10ᵏ) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log(10^{3}) = 3⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log(2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦2 \\text{ n'est pas une puissance de } 10⟧(⟦10^{0} = 1 < 2 < 10 = 10^{1}⟧)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log(2) \\approx 0{,}301⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log(2)+log(3)": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type de calcul.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "log(2x+1)=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\log(2x + 1) = 3⟧⟦\\iff⟧⟦2x + 1 = 10^{3}⟧(définition du logarithme)⟦\\iff⟧⟦2x = 10^{3} - 1⟧⟦\\iff⟧⟦x = \\frac{10^{3} - 1}{2} = \\frac{999}{2}⟧",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Vérification⟦2x + 1 = 10^{3} > 0⟧(le logarithme est bien défini) ⟦\\checkmark⟧",
+    "titre": "Étape 2Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{999}{2}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "log(3-2x)=1": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\log(3 - 2x) = 1⟧⟦\\iff⟧⟦3 - 2x = 10^{1}⟧(définition du logarithme)⟦\\iff⟧⟦-2x = 10^{1} - 3⟧⟦\\iff⟧⟦x = \\frac{10^{1} - 3}{-2} = -\\frac{7}{2}⟧",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Vérification⟦3 - 2x = 10^{1} > 0⟧(le logarithme est bien défini) ⟦\\checkmark⟧",
+    "titre": "Étape 2Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-\\frac{7}{2}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "log(5-x)=8": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\log(5 - x) = 8⟧⟦\\iff⟧⟦5 - x = 10^{8}⟧(définition du logarithme)⟦\\iff⟧⟦x = 5 - 10^{8} = -99\\text{’}999\\text{’}995⟧",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Vérification⟦5 - x = 10^{8} > 0⟧(le logarithme est bien défini) ⟦\\checkmark⟧",
+    "titre": "Étape 2Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-99\\text{’}999\\text{’}995\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "log(50)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦50 \\text{ n'est pas une puissance de } 10⟧(⟦10^{1} = 10 < 50 < 100 = 10^{2}⟧)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log(50) \\approx 1{,}699⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log(log(log(x)))=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\log(\\log(\\log(x))) = 0⟧⟦\\iff⟧⟦\\log(\\log(x)) = 10^{0} = 1⟧(définition du logarithme)⟦\\iff⟧⟦\\log(x) = 10^{1} = 10⟧(définition du logarithme)⟦\\iff⟧⟦x = 10^{10}⟧(définition du logarithme)",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{10^{10}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log(log(x))=1": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\log(\\log(x)) = 1⟧⟦\\iff⟧⟦\\log(x) = 10^{1} = 10⟧(définition du logarithme)⟦\\iff⟧⟦x = 10^{10}⟧(définition du logarithme)",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{10^{10}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log(log(x-1))=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\log(\\log(x - 1)) = 0⟧⟦\\iff⟧⟦\\log(x - 1) = 10^{0} = 1⟧(définition du logarithme)⟦\\iff⟧⟦x - 1 = 10^{1}⟧(définition du logarithme)⟦\\iff⟧⟦x = 1 + 10^{1} = 11⟧",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{11\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log(sqrt(10))": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦\\sqrt{10} = 10^{\\frac{1}{2}}⟧⟦\\log(\\sqrt{10}) = \\log\\left(10^{\\frac{1}{2}}\\right) = \\frac{1}{2}⟧(log(10ᵏ) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log(\\sqrt{10}) = \\frac{1}{2}⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log(x)+1=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Isoler le logarithme⟦\\log(x) + 1 = 3⟧⟦\\iff⟧⟦\\log(x) = 2⟧(on isole le logarithme)",
+    "titre": "Étape 1Isoler le logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Définition du logarithme⟦\\log(x) = 2⟧⟦\\iff⟧⟦x = 10^{2} = 100⟧(définition du logarithme)",
+    "titre": "Étape 2Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{100\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "log(x)+log(x-1)=1": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "log(x)/2=1": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Isoler le logarithme⟦\\frac{\\log(x)}{2} = 1⟧⟦\\iff⟧⟦\\log(x) = 2⟧(on isole le logarithme)",
+    "titre": "Étape 1Isoler le logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Définition du logarithme⟦\\log(x) = 2⟧⟦\\iff⟧⟦x = 10^{2} = 100⟧(définition du logarithme)",
+    "titre": "Étape 2Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{100\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "log(x)=-0,27": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\log(x) = -0{,}27⟧⟦\\iff⟧⟦x = 10^{-0{,}27}⟧(définition du logarithme)",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{10^{-0{,}27}\\right\\} \\text{, soit } x \\approx 0{,}537⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log(x)=-1": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\log(x) = -1⟧⟦\\iff⟧⟦x = 10^{-1} = \\frac{1}{10}⟧(définition du logarithme)",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{1}{10}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log(x)=-4": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\log(x) = -4⟧⟦\\iff⟧⟦x = 10^{-4}⟧(définition du logarithme)",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{10^{-4}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log(x)=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\log(x) = 0⟧⟦\\iff⟧⟦x = 10^{0} = 1⟧(définition du logarithme)",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{1\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log(x)=1,5": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\log(x) = 1{,}5⟧⟦\\iff⟧⟦x = 10^{1{,}5} = 10\\sqrt{10}⟧(définition du logarithme)",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{10\\sqrt{10}\\right\\} \\text{, soit } x \\approx 31{,}623⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log(x)=2": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\log(x) = 2⟧⟦\\iff⟧⟦x = 10^{2} = 100⟧(définition du logarithme)",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{100\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log(x)=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\log(x) = 3⟧⟦\\iff⟧⟦x = 10^{3} = 1\\text{’}000⟧(définition du logarithme)",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{1\\text{’}000\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log(x)=log(5)": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "log(x^2)=2": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\log(x^{2}) = 2⟧⟦\\iff⟧⟦x^{2} = 10^{2} = 100⟧(définition du logarithme)⟦\\iff⟧⟦x^{2} - 100 = 0⟧⟦\\iff⟧⟦(x + 10)(x - 10) = 0⟧⟦\\iff⟧⟦x = -10 \\text{ ou } x = 10⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Vérification⟦x^{2} = 10^{2} > 0⟧(le logarithme est bien défini) ⟦\\checkmark⟧",
+    "titre": "Étape 2Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-10 \\,;\\, 10\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "log(x^2+1)=-1": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "log(x^2+x+3)+1=1": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Isoler le logarithme⟦\\log(x^{2} + x + 3) + 1 = 1⟧⟦\\iff⟧⟦\\log(x^{2} + x + 3) = 0⟧(on isole le logarithme)",
+    "titre": "Étape 1Isoler le logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Définition du logarithme⟦\\log(x^{2} + x + 3) = 0⟧⟦\\iff⟧⟦x^{2} + x + 3 = 10^{0} = 1⟧(définition du logarithme)⟦\\iff⟧⟦x^{2} + x + 2 = 0⟧⟦Δ = 1^{2} - 4 \\cdot 1 \\cdot 2 = -7⟧Δ < 0 : l'équation n'a aucune solution réelle.",
+    "titre": "Étape 2Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "log(x^2+x+3)=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\log(x^{2} + x + 3) = 0⟧⟦\\iff⟧⟦x^{2} + x + 3 = 10^{0} = 1⟧(définition du logarithme)⟦\\iff⟧⟦x^{2} + x + 2 = 0⟧⟦Δ = 1^{2} - 4 \\cdot 1 \\cdot 2 = -7⟧Δ < 0 : l'équation n'a aucune solution réelle.",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log(x^2-3x)=1": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\log(x^{2} - 3x) = 1⟧⟦\\iff⟧⟦x^{2} - 3x = 10^{1} = 10⟧(définition du logarithme)⟦\\iff⟧⟦x^{2} - 3x - 10 = 0⟧⟦\\iff⟧⟦(x + 2)(x - 5) = 0⟧⟦\\iff⟧⟦x = -2 \\text{ ou } x = 5⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Vérification⟦x^{2} - 3x = 10^{1} > 0⟧(le logarithme est bien défini) ⟦\\checkmark⟧",
+    "titre": "Étape 2Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-2 \\,;\\, 5\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "log2(64)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦64 = 2^{6}⟧⟦\\log_{2}(64) = \\log_{2}(2^{6}) = 6⟧(log_a(a^k) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log_{2}(64) = 6⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log2(x)=4": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\log_{2}(x) = 4⟧⟦\\iff⟧⟦x = 2^{4} = 16⟧(définition du logarithme)",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{16\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log5(x)=-2": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\log_{5}(x) = -2⟧⟦\\iff⟧⟦x = 5^{-2} = \\frac{1}{25}⟧(définition du logarithme)",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{1}{25}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_1(x)=2": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "La base d'un logarithme est strictement positive et différente de 1.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "log_1,5(2,25)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦2{,}25 = 1{,}5^{2}⟧⟦\\log_{1{,}5}(2{,}25) = \\log_{1{,}5}(1{,}5^{2}) = 2⟧(log_a(a^k) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log_{1{,}5}(2{,}25) = 2⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_10(1000)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦1\\text{’}000 = 10^{3}⟧⟦\\log(1\\text{’}000) = \\log(10^{3}) = 3⟧(log(10ᵏ) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log(1\\text{’}000) = 3⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_100(10)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦10 = 100^{\\frac{1}{2}}⟧⟦\\log_{100}(10) = \\log_{100}\\left(100^{\\frac{1}{2}}\\right) = \\frac{1}{2}⟧(log_a(a^k) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log_{100}(10) = \\frac{1}{2}⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_2(0,125)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦0{,}125 = 2^{-3}⟧⟦\\log_{2}(0{,}125) = \\log_{2}(2^{-3}) = -3⟧(log_a(a^k) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log_{2}(0{,}125) = -3⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_2(1/8)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦\\frac{1}{8} = 2^{-3}⟧⟦\\log_{2}\\left(\\frac{1}{8}\\right) = \\log_{2}(2^{-3}) = -3⟧(log_a(a^k) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log_{2}\\left(\\frac{1}{8}\\right) = -3⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_2(10)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦10 \\text{ n'est pas une puissance de } 2⟧(⟦2^{3} = 8 < 10 < 16 = 2^{4}⟧)⟦\\log_{2}(10) = \\frac{\\log(10)}{\\log(2)}⟧(changement de base)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log_{2}(10) = \\frac{\\log(10)}{\\log(2)} \\approx 3{,}322⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_2(50)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦50 \\text{ n'est pas une puissance de } 2⟧(⟦2^{5} = 32 < 50 < 64 = 2^{6}⟧)⟦\\log_{2}(50) = \\frac{\\log(50)}{\\log(2)}⟧(changement de base)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log_{2}(50) = \\frac{\\log(50)}{\\log(2)} \\approx 5{,}644⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_2(e)": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type de calcul.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "log_2(sqrt(3))": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦\\sqrt{3} \\text{ n'est pas une puissance de } 2⟧⟦\\log_{2}(\\sqrt{3}) = \\frac{\\log(\\sqrt{3})}{\\log(2)}⟧(changement de base)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log_{2}(\\sqrt{3}) = \\frac{\\log(\\sqrt{3})}{\\log(2)} \\approx 0{,}792⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_2(sqrt(8))": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦\\sqrt{8} = 2^{\\frac{3}{2}}⟧⟦\\log_{2}(\\sqrt{8}) = \\log_{2}\\left(2^{\\frac{3}{2}}\\right) = \\frac{3}{2}⟧(log_a(a^k) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log_{2}(\\sqrt{8}) = \\frac{3}{2}⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_2(x)=4": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Définition du logarithme⟦\\log_{2}(x) = 4⟧⟦\\iff⟧⟦x = 2^{4} = 16⟧(définition du logarithme)",
+    "titre": "Étape 1Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{16\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_20(20)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦20 = 20^{1}⟧⟦\\log_{20}(20) = \\log_{20}(20^{1}) = 1⟧(log_a(a^k) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log_{20}(20) = 1⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_25(sqrt(5))": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦\\sqrt{5} = 5^{\\frac{1}{2}} = \\left(25^{\\frac{1}{2}}\\right)^{\\frac{1}{2}} = 25^{\\frac{1}{4}}⟧⟦\\log_{25}(\\sqrt{5}) = \\log_{25}\\left(25^{\\frac{1}{4}}\\right) = \\frac{1}{4}⟧(log_a(a^k) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log_{25}(\\sqrt{5}) = \\frac{1}{4}⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_27(1/9)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦\\frac{1}{9} = 3^{-2} = \\left(27^{\\frac{1}{3}}\\right)^{-2} = 27^{-\\frac{2}{3}}⟧⟦\\log_{27}\\left(\\frac{1}{9}\\right) = \\log_{27}\\left(27^{-\\frac{2}{3}}\\right) = -\\frac{2}{3}⟧(log_a(a^k) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log_{27}\\left(\\frac{1}{9}\\right) = -\\frac{2}{3}⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_3(10)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦10 \\text{ n'est pas une puissance de } 3⟧(⟦3^{2} = 9 < 10 < 27 = 3^{3}⟧)⟦\\log_{3}(10) = \\frac{\\log(10)}{\\log(3)}⟧(changement de base)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log_{3}(10) = \\frac{\\log(10)}{\\log(3)} \\approx 2{,}096⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_3(sqrt(2))": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦\\sqrt{2} \\text{ n'est pas une puissance de } 3⟧⟦\\log_{3}(\\sqrt{2}) = \\frac{\\log(\\sqrt{2})}{\\log(3)}⟧(changement de base)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log_{3}(\\sqrt{2}) = \\frac{\\log(\\sqrt{2})}{\\log(3)} \\approx 0{,}315⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_4(0,3)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦0{,}3 \\text{ n'est pas une puissance de } 4⟧(⟦4^{-1} = 0{,}25 < 0{,}3 < 1 = 4^{0}⟧)⟦\\log_{4}(0{,}3) = \\frac{\\log(0{,}3)}{\\log(4)}⟧(changement de base)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log_{4}(0{,}3) = \\frac{\\log(0{,}3)}{\\log(4)} \\approx -0{,}868⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_4(8)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦8 = 2^{3} = \\left(4^{\\frac{1}{2}}\\right)^{3} = 4^{\\frac{3}{2}}⟧⟦\\log_{4}(8) = \\log_{4}\\left(4^{\\frac{3}{2}}\\right) = \\frac{3}{2}⟧(log_a(a^k) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log_{4}(8) = \\frac{3}{2}⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_4(sqrt(2))": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦\\sqrt{2} = 2^{\\frac{1}{2}} = \\left(4^{\\frac{1}{2}}\\right)^{\\frac{1}{2}} = 4^{\\frac{1}{4}}⟧⟦\\log_{4}(\\sqrt{2}) = \\log_{4}\\left(4^{\\frac{1}{4}}\\right) = \\frac{1}{4}⟧(log_a(a^k) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log_{4}(\\sqrt{2}) = \\frac{1}{4}⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_5(0,2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦0{,}2 = 5^{-1}⟧⟦\\log_{5}(0{,}2) = \\log_{5}(5^{-1}) = -1⟧(log_a(a^k) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log_{5}(0{,}2) = -1⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_5(0,3)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦0{,}3 \\text{ n'est pas une puissance de } 5⟧(⟦5^{-1} = 0{,}2 < 0{,}3 < 1 = 5^{0}⟧)⟦\\log_{5}(0{,}3) = \\frac{\\log(0{,}3)}{\\log(5)}⟧(changement de base)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log_{5}(0{,}3) = \\frac{\\log(0{,}3)}{\\log(5)} \\approx -0{,}748⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_5(1/25)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦\\frac{1}{25} = 5^{-2}⟧⟦\\log_{5}\\left(\\frac{1}{25}\\right) = \\log_{5}(5^{-2}) = -2⟧(log_a(a^k) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log_{5}\\left(\\frac{1}{25}\\right) = -2⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_6(2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦2 \\text{ n'est pas une puissance de } 6⟧(⟦6^{0} = 1 < 2 < 6 = 6^{1}⟧)⟦\\log_{6}(2) = \\frac{\\log(2)}{\\log(6)}⟧(changement de base)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log_{6}(2) = \\frac{\\log(2)}{\\log(6)} \\approx 0{,}387⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_7(1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦1 = 7^{0}⟧⟦\\log_{7}(1) = \\log_{7}(7^{0}) = 0⟧(log_a(a^k) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log_{7}(1) = 0⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_8(2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦2 = 8^{\\frac{1}{3}}⟧⟦\\log_{8}(2) = \\log_{8}\\left(8^{\\frac{1}{3}}\\right) = \\frac{1}{3}⟧(log_a(a^k) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log_{8}(2) = \\frac{1}{3}⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_8(64)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦64 = 8^{2}⟧⟦\\log_{8}(64) = \\log_{8}(8^{2}) = 2⟧(log_a(a^k) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log_{8}(64) = 2⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_9(27)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Calcul⟦27 = 3^{3} = \\left(9^{\\frac{1}{2}}\\right)^{3} = 9^{\\frac{3}{2}}⟧⟦\\log_{9}(27) = \\log_{9}\\left(9^{\\frac{3}{2}}\\right) = \\frac{3}{2}⟧(log_a(a^k) = k)",
+    "titre": "Étape 1Calcul"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Résultat⟦\\log_{9}(27) = \\frac{3}{2}⟧",
+    "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_x(1/16)=4": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Condition⟦x > 0 \\text{ et } x \\neq 1⟧(une base de logarithme est strictement positive et différente de 1)",
+    "titre": "Étape 1Condition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Définition du logarithme⟦\\log_{x}\\left(\\frac{1}{16}\\right) = 4⟧⟦\\iff⟧⟦x^{4} = \\frac{1}{16}⟧(définition du logarithme)⟦\\iff⟧⟦x = \\frac{1}{2} \\text{ ou } x = -\\frac{1}{2}⟧⟦x = \\frac{1}{2}⟧(seule la solution positive convient)",
+    "titre": "Étape 2Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{1}{2}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "log_x(1/8)=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Condition⟦x > 0 \\text{ et } x \\neq 1⟧(une base de logarithme est strictement positive et différente de 1)",
+    "titre": "Étape 1Condition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Définition du logarithme⟦\\log_{x}\\left(\\frac{1}{8}\\right) = 3⟧⟦\\iff⟧⟦x^{3} = \\frac{1}{8}⟧(définition du logarithme)⟦\\iff⟧⟦x = \\frac{1}{2}⟧",
+    "titre": "Étape 2Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{1}{2}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "log_x(16)=2": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Condition⟦x > 0 \\text{ et } x \\neq 1⟧(une base de logarithme est strictement positive et différente de 1)",
+    "titre": "Étape 1Condition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Définition du logarithme⟦\\log_{x}(16) = 2⟧⟦\\iff⟧⟦x^{2} = 16⟧(définition du logarithme)⟦\\iff⟧⟦x = 4 \\text{ ou } x = -4⟧⟦x = 4⟧(seule la solution positive convient)",
+    "titre": "Étape 2Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{4\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "log_x(2)=3": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "log_x(256)=4": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Condition⟦x > 0 \\text{ et } x \\neq 1⟧(une base de logarithme est strictement positive et différente de 1)",
+    "titre": "Étape 1Condition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Définition du logarithme⟦\\log_{x}(256) = 4⟧⟦\\iff⟧⟦x^{4} = 256⟧(définition du logarithme)⟦\\iff⟧⟦x = 4 \\text{ ou } x = -4⟧⟦x = 4⟧(seule la solution positive convient)",
+    "titre": "Étape 2Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{4\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "log_x(8)=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Condition⟦x > 0 \\text{ et } x \\neq 1⟧(une base de logarithme est strictement positive et différente de 1)",
+    "titre": "Étape 1Condition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Définition du logarithme⟦\\log_{x}(8) = 3⟧⟦\\iff⟧⟦x^{3} = 8⟧(définition du logarithme)⟦\\iff⟧⟦x = 2⟧",
+    "titre": "Étape 2Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "log_x(81)=4": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Condition⟦x > 0 \\text{ et } x \\neq 1⟧(une base de logarithme est strictement positive et différente de 1)",
+    "titre": "Étape 1Condition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Définition du logarithme⟦\\log_{x}(81) = 4⟧⟦\\iff⟧⟦x^{4} = 81⟧(définition du logarithme)⟦\\iff⟧⟦x = 3 \\text{ ou } x = -3⟧⟦x = 3⟧(seule la solution positive convient)",
+    "titre": "Étape 2Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "sin x = 0": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Une seule inconnue : vous avez écrit i et n et s et x.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "sin(x)=0": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "La fonction sin n'est pas traitée par cet outil.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "sqrt(2)": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Écrivez une équation (avec =) ou un logarithme à calculer, par exemple log_2(50).",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "sqrt(2)^x=3": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "sqrt(2)^x=4": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "tan(x)=2": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "La fonction tan n'est pas traitée par cet outil.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "x*2^x=8": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cette équation ne se résout pas avec les méthodes du cours.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "x*e^x=1": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cette équation ne se résout pas avec les méthodes du cours.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "x+1)=3": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Parenthèse fermante en trop.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "x+y=3": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Une seule inconnue : vous avez écrit x et y.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "x/2^x=1": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cette équation ne se résout pas avec les méthodes du cours.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "x<3": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Les inéquations ne sont pas traitées par cet outil : écrivez une équation avec =.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "x=ln(3)": {
+  "au_depart": {
+   "progression": "Étape 1 / 1",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\ln(3)\\right\\} \\text{, soit } x \\approx 1{,}099⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 1 / 1"
+ },
+ "x^2=4": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "x^x=3^x": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cette équation ne se résout pas avec les méthodes du cours.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "x^x=4": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cette équation ne se résout pas avec les méthodes du cours.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ }
+}

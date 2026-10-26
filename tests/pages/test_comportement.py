@@ -13,16 +13,18 @@ from urllib.parse import quote
 sys.path.insert(0, os.path.dirname(__file__))
 from navigateur import Navigateur
 from rendu import DOSSIER_REFERENCES, JS_CAPTURE, OUTILS, attendre_pret
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "python"))
+from cas_el import entrees_el  # noqa: E402
 
 RACINE = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 CALCUL = {"ensemble-definition": "ln(x^2-4x)/(x-5)", "derivee-variations": "ln(x)/x", "limites-asymptotes": "(x^2-1)/(x-3)",
-          "etude-complete": "x^2*e^(-x)", "factorisation": "x^2+5x-14"}
+          "etude-complete": "x^2*e^(-x)", "factorisation": "x^2+5x-14", "exponentielles-logarithmes": "2^(x-1)=3^x"}
 
 CHOISIS = [o for o in os.environ.get("OUTILS", "").split(",") if o] or OUTILS
 EXEMPLE = {"ensemble-definition": "ln(x-1)", "derivee-variations": "x^2", "limites-asymptotes": "1/x",
-           "etude-complete": "x^2", "factorisation": "x^2-1"}
+           "etude-complete": "x^2", "factorisation": "x^2-1", "exponentielles-logarithmes": "3^(x+1)=27"}
 INVALIDE = {"ensemble-definition": "ln(", "derivee-variations": "ln(", "limites-asymptotes": "ln(",
-            "etude-complete": "ln(", "factorisation": "sqrt(x)"}
+            "etude-complete": "ln(", "factorisation": "sqrt(x)", "exponentielles-logarithmes": "x<3"}
 ANALYSE = ["ensemble-definition", "derivee-variations", "limites-asymptotes", "etude-complete"]
 
 
@@ -81,6 +83,71 @@ class TestComportement(unittest.TestCase):
         self.assertEqual(page.evaluer("document.querySelectorAll('#cartes .card:not(.cache)').length"), 2)
         page.evaluer("document.querySelector('#tout').click()")
         self.assertEqual(page.evaluer("document.querySelector('#cartes .card:last-child').classList.contains('final')"), True)
+
+    def test_t33_el_exercice_tire_en_python(self):
+        """Exponentielles et logarithmes : « Nouvelle équation » tire un exercice en Python (énoncé « Résoudre : … ») de chacun des niveaux
+        du pool, et « Afficher le corrigé » donne la carte finale « Solution » (ou une erreur de lecture : jamais)."""
+        if "exponentielles-logarithmes" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.ouvrir("exponentielles-logarithmes")
+        for _ in range(6):
+            page.evaluer("document.querySelector('#exoHasard').click()")
+            page.attendre("document.querySelector('#exoEnonce annotation')", 30)
+            enonce = page.evaluer("document.querySelector('#exoEnonce annotation').textContent")
+            self.assertTrue(enonce.startswith("Résoudre : "), enonce)
+            page.evaluer("document.querySelector('#exoCorrige').click()")
+            page.attendre("document.querySelector('#cartes .card.final')", 60)
+            self.assertEqual(page.evaluer("document.querySelector('#entree').value"), "")        # le corrigé ne touche pas à la saisie
+            self.assertFalse(page.evaluer("document.querySelector('#cartes .err')"), enonce)
+            self.assertEqual(page.evaluer("document.querySelector('#cartes .card.final h3').textContent"), "Solution")
+
+    def test_t33_el_clavier_virtuel(self):
+        """Le clavier de la page écrit log_10(x)=e : log_, un nombre, parenthèses, =, e, et ln(, sqrt(, virgule."""
+        if "exponentielles-logarithmes" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.ouvrir("exponentielles-logarithmes")
+        page.evaluer("document.querySelector('#entree').value=''")
+        for t in ("log_", "10", "(", "x", ")", "=", "e"):
+            page.evaluer("document.querySelector(" + json.dumps(f'#clavier button[data-t="{t}"]') + ").click()")
+        self.assertEqual(page.evaluer("document.querySelector('#entree').value"), "log_10(x)=e")
+        page.attendre("document.querySelector('#apercu .katex')", 10)
+        self.assertFalse(page.evaluer("document.querySelector('#apercu .err')"))
+
+    def test_t33_el_une_etape_par_ligne_sans_defilement_a_360_px(self):
+        """Chaque chaîne de ⇔ est une grille « lien · expression · propriété » : à 360 px, aucune entrée de la batterie ne fait défiler la
+        page ni aucun élément du corrigé (le ⇔ à gauche, la propriété sous l'expression), y compris la ligne du discriminant Δ et −99’999’995."""
+        if "exponentielles-logarithmes" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.ouvrir("exponentielles-logarithmes")
+        page.taille(360)
+        entrees = [e for e in entrees_el() if e.strip()]
+        for e in entrees + ["log(x^2+x+3)=0"]:
+            with self.subTest(entree=e):
+                self.calculer(page, e)
+                page.evaluer("document.querySelector('#tout') && !document.querySelector('#tout').disabled && document.querySelector('#tout').click()")
+                debordements = page.evaluer("""(() => {
+                    const trop = [...document.querySelectorAll('#cartes *')].filter(n => n.scrollWidth > n.clientWidth + 1 && n.clientWidth > 0
+                        && !n.closest('.katex') && getComputedStyle(n).display !== 'inline')
+                        .map(n => n.className + ' ' + n.scrollWidth + '>' + n.clientWidth);
+                    return [document.documentElement.scrollWidth, window.innerWidth, trop.slice(0, 5)];
+                })()""")
+                self.assertLessEqual(debordements[0], debordements[1], debordements)
+                self.assertEqual(debordements[2], [], debordements)
+        page.taille(1100)
+        self.calculer(page, "log(5-x)=8")
+        self.assertEqual(page.evaluer("document.querySelectorAll('#cartes .chaine').length"), 2)
+        # sur grand écran la propriété est à droite de la ligne (3e colonne), sur écran étroit sous l'expression
+        self.calculer(page, "2^(x-1)=3^x")
+        page.evaluer("document.querySelector('#tout').click()")
+        haut = lambda s: page.evaluer(f"(() => {{ const r = document.querySelector('#cartes .chaine {s}').getBoundingClientRect(); return [r.top, r.left]; }})()")
+        self.assertAlmostEqual(haut(".ligne:nth-child(2) .prop")[0], haut(".ligne:nth-child(2) .expr")[0], delta=40)       # même ligne
+        self.assertGreater(haut(".ligne:nth-child(2) .prop")[1], haut(".ligne:nth-child(2) .expr")[1])
+        page.taille(360)
+        self.calculer(page, "2^(x-1)=3^x")
+        page.evaluer("document.querySelector('#tout').click()")
+        self.assertGreater(haut(".ligne:nth-child(2) .prop")[0], haut(".ligne:nth-child(2) .expr")[0])
+        self.assertEqual(haut(".ligne:nth-child(2) .prop")[1], haut(".ligne:nth-child(2) .expr")[1])
+        page.taille(1100)
 
     def test_t31_libelle_pendant_le_chargement_de_sympy(self):
         """Pages à `sympyAvant` : un calcul lancé avant « Prêt. » affiche « Chargement du moteur de calcul pour cette fonction… »

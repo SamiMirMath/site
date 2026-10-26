@@ -16,6 +16,7 @@ Interface : `lire_membres(texte)` (syntaxe seule, sert à l'aperçu), `analyser_
 """
 from fractions import Fraction as F
 import math
+import random
 import re
 from collections import namedtuple
 from functools import reduce
@@ -739,11 +740,12 @@ class Positif:
 
 
 class Texte:
-    """Une condition déjà écrite en TeX (x > 0 et x ≠ 1)."""
-    __slots__ = ("tex",)
+    """Une condition déjà écrite en TeX (x > 0 et x ≠ 1) ; `detail` : un complément en TeX qui s'affiche entre parenthèses, à droite de la
+    ligne dans la page (l'encadrement 2⁵ = 32 < 50 < 64 = 2⁶)."""
+    __slots__ = ("tex", "detail")
 
-    def __init__(self, tex):
-        self.tex = tex
+    def __init__(self, tex, detail=None):
+        self.tex, self.detail = tex, detail
 
 
 class Ou:
@@ -775,7 +777,7 @@ def tex_element(e):
     if isinstance(e, Positif):
         return tex(e.expr) + " = " + tex(e.valeur) + " > 0"
     if isinstance(e, Texte):
-        return e.tex
+        return e.tex + (r" \quad (" + e.detail + ")" if e.detail else "")
     if isinstance(e, Ou):
         return r" \text{ ou } ".join(tex_element(q) for q in e.eqs)
     if isinstance(e, Rel):
@@ -795,6 +797,44 @@ def tex_chaine(c):
     if c.note:
         s += r" \quad \text{(" + c.note + ")}" + (r" \; \checkmark" if c.note == PROP_BIEN_DEFINI else "")
     return s
+
+
+def _gauche(e):
+    """TeX du membre de gauche auquel un lien « = » se rattache : x dans `x = N/D`, l'expression elle-même dans une chaîne de « = »."""
+    if isinstance(e, Eq):
+        return tex(e.g)
+    if isinstance(e, (Positif, Texte, Ou, Rel)):
+        return None
+    return tex(e)
+
+
+def rangees_chaine(c):
+    """La chaîne en lignes alignées, une étape par ligne comme le corrigé : [(lien, expression, propriété)], les trois en TeX/texte.
+    `lien` : « \\iff » ou vide ; `expression` : un élément après un « ⇔ » ; les liens « = » prolongent la ligne (`√2 = 2^(1/2) = 4^(1/4)`)
+    jusqu'à une propriété, après laquelle la suite commence une nouvelle ligne `{} = suite`, alignée sous le « = » précédent ;
+    `propriété` : le texte entre parenthèses (le TeX y est entre `\\(` et `\\)`), ou None. La page met le lien dans une première colonne,
+    l'expression dans la deuxième et la propriété à droite (sous l'expression sur un écran étroit)."""
+    premier = c.elements[0]
+    rangees = [["", premier.tex if isinstance(premier, Texte) else tex_element(premier),
+                r"(\(" + premier.detail + r"\))" if isinstance(premier, Texte) and premier.detail else None]]
+    ancre = _gauche(premier)
+    for e, lien, prop in zip(c.elements[1:], c.liens, c.props):
+        if lien == "⇔":
+            rangees.append([r"\iff", tex_element(e), None])
+            ancre = _gauche(e)
+        elif rangees[-1][2] is None:                                  # pas de propriété sur la ligne : la suite d'égalités continue
+            rangees[-1][1] += " = " + tex_element(e)
+        else:                                                         # nouvelle ligne, son « = » sous celui de la ligne d'au-dessus
+            cale = r"\phantom{" + ancre + "}" if ancre and len(ancre) <= 30 else ""
+            rangees.append(["", cale + " = " + tex_element(e), None])
+        if isinstance(prop, Car):
+            rangees[-1][2] = r"(car \(" + tex(prop.expr) + r" \neq 0\))"
+        elif prop:
+            rangees[-1][2] = "(" + prop + ")"
+    if c.note:
+        note = "(" + c.note + ")" + (r" \(\checkmark\)" if c.note == PROP_BIEN_DEFINI else "")
+        rangees[-1][2] = note if rangees[-1][2] is None else rangees[-1][2] + " " + note
+    return [tuple(r) for r in rangees]
 
 
 PROP_PUISSANCE = "(aᵐ)ⁿ = aᵐⁿ"
@@ -1707,9 +1747,9 @@ def _calculer_logarithme(g):
     texte_base = tex(base_noeud)
     if q is not None and b > 1:
         j, bas, haut = _encadrement(q, b)
-        lignes.append(Chaine([Texte(tex(arg) + r" \text{ n'est pas une puissance de } " + texte_base + r" \quad ("
-                              + tex(Pow(base_noeud, Nb(j))) + " = " + tex(_nb_exact(bas)) + " < " + tex(arg) + " < " + tex(_nb_exact(haut))
-                              + " = " + tex(Pow(base_noeud, Nb(j + 1))) + ")")]))
+        lignes.append(Chaine([Texte(tex(arg) + r" \text{ n'est pas une puissance de } " + texte_base,
+                                    detail=tex(Pow(base_noeud, Nb(j))) + " = " + tex(_nb_exact(bas)) + " < " + tex(arg) + " < "
+                                    + tex(_nb_exact(haut)) + " = " + tex(Pow(base_noeud, Nb(j + 1))))]))
     else:
         lignes.append(Chaine([Texte(tex(arg) + r" \text{ n'est pas une puissance de } " + texte_base)]))
     if base is not None:
@@ -1940,3 +1980,122 @@ def message_calcul_non_resolu(g):
         if a is not None and a <= 0:
             return MESSAGE_ARGUMENT_NON_POSITIF
     return MESSAGE_CALCUL_PAS_ENCORE
+
+
+# =====================================================================
+# 13. EXERCICES AU HASARD (pool C)
+# =====================================================================
+NIVEAUX = ("facile", "moyen", "logarithme", "difficile")
+
+
+def _lineaire_texte(p, q, x="x"):
+    """px + q écrit comme un élève : x, 2x, x+1, 3x-2."""
+    t = x if p == 1 else f"{p}{x}"
+    return t if q == 0 else f"{t}+{q}" if q > 0 else f"{t}{q}"
+
+
+def _expo_texte(base, p, q):
+    """base^(px+q), sans parenthèses quand l'exposant est x seul."""
+    return f"{base}^x" if (p, q) == (1, 0) else f"{base}^({_lineaire_texte(p, q)})"
+
+
+def _puissance_de_la_racine(b, a):
+    """Vrai si b est une puissance entière de la racine de a (a = 4 : 2, 4, 8, 16… ; a = 7 : 7, 49…) : l'équation relèverait de la même base."""
+    r = next(r for r in range(2, a + 1) if _exposant_entier(F(a), F(r)) is not None)
+    while b % r == 0:
+        b //= r
+    return b == 1
+
+
+def _gabarit_facile(rng):
+    if rng.random() < 0.6:                                       # a^(px+q) = a^k, solution entière
+        a = rng.choice([2, 3, 5, 10])
+        kmax = {2: 6, 3: 4, 5: 3, 10: 3}[a]
+        while True:
+            p, x0, q = rng.randint(1, 3), rng.randint(-3, 4), rng.randint(-3, 3)
+            if 1 <= p * x0 + q <= kmax:
+                return f"{_expo_texte(a, p, q)}={a ** (p * x0 + q)}"
+    forme = rng.choice(["log", "ln", "log_a"])                    # définition du logarithme
+    if forme == "log":
+        return f"log(x)={rng.choice([-2, -1, 1, 2, 3, 4])}"
+    if forme == "ln":
+        return f"ln(x)={rng.choice([-1, 1, 2, 3])}"
+    a = rng.choice([2, 3, 5])
+    return f"log_{a}(x)={rng.choice([-2, -1, 1, 2, 3] + ([4, 5] if a == 2 else [4] if a == 3 else []))}"
+
+
+def _gabarit_moyen(rng):
+    famille = rng.choice(["facteur", "meme_racine", "argument"])
+    if famille == "facteur":                                      # k * a^(px+q) = k * a^m
+        a, k = rng.choice([2, 3, 5]), rng.choice([2, 3, 4, 5])
+        while True:
+            p, x0, q = rng.randint(1, 2), rng.randint(-2, 4), rng.randint(-3, 3)
+            m = p * x0 + q
+            if 1 <= m <= (4 if a == 2 else 3):
+                return f"{k}*{_expo_texte(a, p, q)}={k * a ** m}"
+    if famille == "meme_racine":                                  # 4^(3x+1) = 8 : bases puissances d'une même base
+        r = rng.choice([2, 3, 5])
+        s, t = rng.choice([(2, 3), (2, 1), (3, 2), (3, 1), (1, 2), (1, 3)]) if r != 5 else rng.choice([(2, 1), (1, 2)])
+        while True:
+            p, q = rng.randint(1, 3), rng.randint(-2, 2)
+            x0 = (F(t, s) - q) / p
+            if x0.denominator <= 6:
+                return f"{_expo_texte(r ** s, p, q)}={r ** t}"
+    c = rng.randint(1, 3)                                         # log(q - x) = c, log(px + q) = c
+    if rng.random() < 0.5:
+        return f"log({rng.randint(1, 9)}-x)={c}"
+    return f"log({rng.randint(2, 4)}x+{rng.randint(1, 5)})={c}"
+
+
+def _gabarit_logarithme(rng):
+    tirage = rng.random()
+    if tirage < 0.10:                                             # second membre négatif : S = ∅
+        return f"{rng.choice([2, 3, 5, 7])}^({_lineaire_texte(rng.randint(1, 8), 0)})=-{rng.randint(3, 60)}"
+    if tirage < 0.40:                                             # k * e^(cx) = b
+        k = rng.choice([2, 3, 5, 10, 20, 37, 50])
+        c = rng.choice(["0,02", "0,05", "0,1", "0,5", "-0,02", "-0,05", "-0,1", "-0,5"])
+        b = rng.choice([v for v in range(3, 100) if v != k])
+        return f"{k}*e^({c}x)={b}"
+    a = rng.choice([2, 3, 4, 5, 6, 7])
+    b = rng.choice([v for v in range(5, 100) if not _puissance_de_la_racine(v, a)])
+    p, q = rng.randint(1, 3), rng.randint(-3, 3)
+    if tirage < 0.70:                                             # a^(px+q) = b
+        return f"{_expo_texte(a, p, q)}={b}"
+    if tirage < 0.90:                                             # k * a^(px+q) = b, avec b/k qui n'est pas une puissance de a
+        k = rng.choice([2, 3, 4, 5])
+        b = rng.choice([v for v in range(5, 100) if v % k or not _puissance_de_la_racine(v // k, a)])
+        return f"{k}*{_expo_texte(a, p, q)}={b}"
+    return f"e^({_lineaire_texte(p, q)})={b}"
+
+
+def _gabarit_difficile(rng):
+    tirage = rng.random()
+    if tirage < 0.40:                                             # bases différentes : a^(x+p) = b^(qx)
+        a, b = rng.sample([2, 3, 5, 6, 7, 10], 2)
+        p, q = rng.choice([-3, -2, -1, 1, 2, 3]), rng.randint(1, 3)
+        return f"{a}^({_lineaire_texte(1, p)})={b}^({_lineaire_texte(q, 0)})" if q > 1 else f"{a}^({_lineaire_texte(1, p)})={b}^x"
+    if tirage < 0.65:                                             # a^(x²) · b^x = c, b et c puissances de a : racines entières
+        a = rng.choice([2, 3, 5])
+        s, t = rng.choice([(2, 3), (3, 4)])
+        return f"{a}^(x^2)*{a ** s}^x={a ** t}"
+    if tirage < 0.85:                                             # base inconnue : log_x(m^k) = k
+        k = rng.choice([2, 3, 4])
+        m = rng.choice([2, 3, 4, 5] if k < 4 else [2, 3, 4])
+        return f"log_x({m ** k})={k}"
+    return f"log(log(x))={rng.choice([0, 1])}"                     # log(log(x)) = c
+
+
+_GABARITS = {"facile": _gabarit_facile, "moyen": _gabarit_moyen, "logarithme": _gabarit_logarithme, "difficile": _gabarit_difficile}
+
+
+def exercice(niveau, graine):
+    """Exercice du niveau (facile, moyen, logarithme, difficile), déterministe : la même graine donne le même énoncé. Aucun exposant de
+    degré 3 ou plus ; quand x² est en exposant, les racines sont entières. Renvoie {ok, expr, niveau}."""
+    if niveau not in _GABARITS:
+        return {"ok": False, "erreur": "Niveau d'exercice inconnu."}
+    return {"ok": True, "expr": _GABARITS[niveau](random.Random(f"{niveau}:{graine}")), "niveau": niveau}
+
+
+def exercice_json(niveau):
+    """Appelé par la page : un exercice du niveau demandé, graine tirée au hasard."""
+    return json_strict(exercice(niveau, random.randrange(2 ** 31)))

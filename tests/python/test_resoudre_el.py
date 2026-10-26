@@ -1,6 +1,7 @@
 """T33 (étape 7) — Adaptateur resoudre_el.py de l'outil « Exponentielles et logarithmes » : format de sortie commun (moteur/sortie.py),
 cartes « Étape k » + carte finale (EL-18), messages quand aucune méthode ne s'applique (EL-11), JSON strict."""
 import json
+import re
 import unittest
 
 import moteurs  # noqa: F401  (chemins des moteurs)
@@ -33,7 +34,7 @@ class TestFormat(unittest.TestCase):
             s = rel.resoudre(entree)
             for b in textes(s) if s["ok"] else []:
                 vus += 1
-                self.assertNotIn("<", b["html"], entree)
+                self.assertNotIn("<", re.sub(r"</?(div|span)[^>]*>", "", b["html"]), entree)
         self.assertGreater(vus, 300)
         s = rel.resoudre("5^(8x)=-25")
         self.assertTrue(any("&lt;" in b["html"] for b in textes(s)))
@@ -44,6 +45,77 @@ class TestFormat(unittest.TestCase):
 
     def test_aperçu_est_celui_du_moteur(self):
         self.assertEqual(rel.apercu_json("3^(x+1)=27"), el.apercu_json("3^(x+1)=27"))
+
+
+def chaines_du_moteur(entree):
+    s = el.analyser_saisie(entree)
+    r = el.calculer_logarithme(s.g) if s.genre == "calcul" else el.corriger_equation(s.g, s.d, s.inconnue)
+    return [ligne for c in r["etapes"] for ligne in c["lignes"]] if r else []
+
+
+class TestLignesAlignees(unittest.TestCase):
+    """Une chaîne s'affiche une étape par ligne : lien à gauche, expression, propriété à droite (EL, demande du 26.10.2026)."""
+
+    def test_les_liens_les_elements_et_les_proprietes_du_moteur(self):
+        """Un ⇔ ouvre une ligne ; un « = » prolonge la ligne tant qu'elle n'a pas de propriété ; chaque propriété est écrite une seule fois, dans
+        l'ordre ; chaque élément est écrit dans l'ordre."""
+        vues = 0
+        for entree in EQUATIONS + CALCULS:
+            for chaine in chaines_du_moteur(entree):
+                rangees = el.rangees_chaine(chaine)
+                with self.subTest(entree=entree):
+                    self.assertEqual(rangees[0][0], "")
+                    self.assertEqual(sum(1 for r in rangees if r[0]), chaine.liens.count("⇔"))
+                    self.assertLessEqual(len(rangees), len(chaine.elements))
+                    self.assertGreaterEqual(len(rangees), 1 + chaine.liens.count("⇔"))
+                    toutes = " ".join(r[1] for r in rangees).replace(r"\phantom", "")
+                    position = 0
+                    for e in chaine.elements:
+                        texte = e.tex if isinstance(e, el.Texte) else el.tex_element(e)
+                        position = toutes.index(texte, position) + len(texte)
+                    vues += 1
+        self.assertGreater(vues, 300)
+
+    def test_rien_ne_se_perd_par_rapport_a_la_ligne_unique(self):
+        """Les mêmes éléments et les mêmes propriétés que `tex_chaine`, répartis en lignes."""
+        for entree in EQUATIONS + CALCULS:
+            for chaine in chaines_du_moteur(entree):
+                with self.subTest(entree=entree):
+                    rangees = el.rangees_chaine(chaine)
+                    ligne = el.tex_chaine(chaine)
+                    for e in chaine.elements:
+                        self.assertIn(el.tex_element(e), ligne)
+                    if not chaine.note and not isinstance(chaine.elements[0], el.Texte):
+                        voulues = ["(" + p + ")" if isinstance(p, str) else r"(car \(" + el.tex(p.expr) + r" \neq 0\))" for p in chaine.props if p]
+                        self.assertEqual([r[2] for r in rangees if r[2]], voulues)
+
+    def test_suite_d_egalites_alignee_sous_le_premier_signe_egal(self):
+        rangees = el.rangees_chaine(chaines_du_moteur("2^(x-1)=3^x")[0])
+        self.assertEqual(rangees[-1][0], "")
+        self.assertTrue(rangees[-1][1].startswith(r"\phantom{x} = "), rangees[-1])
+        self.assertEqual(rangees[-2][2], r"(car \(\log(2) - \log(3) \neq 0\))")
+        self.assertEqual(rangees[-1][2], "(log a − log b = log(a/b))")
+        # sans propriété sur la ligne, les égalités se suivent sur la même ligne
+        calcul = el.rangees_chaine(chaines_du_moteur("log_4(sqrt(2))")[0])
+        self.assertEqual(calcul, [("", r"\sqrt{2} = 2^{\frac{1}{2}} = \left(4^{\frac{1}{2}}\right)^{\frac{1}{2}} = 4^{\frac{1}{4}}", None)])
+        calcul = el.rangees_chaine(chaines_du_moteur("log_4(sqrt(2))")[1])
+        self.assertEqual(len(calcul), 1)
+        self.assertEqual(calcul[0][2], "(log_a(a^k) = k)")
+        delta = el.rangees_chaine(chaines_du_moteur("log(x^2+x+3)=0")[1])
+        self.assertEqual(delta, [("", "Δ = 1^{2} - 4 \cdot 1 \cdot 2 = -7", None)])
+
+    def test_la_note_de_verification_porte_la_coche(self):
+        rangees = el.rangees_chaine(chaines_du_moteur("log(5-x)=8")[-1])
+        self.assertEqual(rangees, [("", r"5 - x = 10^{8} > 0", r"(le logarithme est bien défini) \(\checkmark\)")])
+
+    def test_le_html_de_la_page(self):
+        s = rel.resoudre("2^(x-1)=3^x")
+        html = s["cartes"][0]["blocs"][0]["html"]
+        self.assertTrue(html.startswith('<div class="chaine"><div class="ligne"><span class="lien"></span><span class="expr">'))
+        self.assertEqual(html.count('<div class="ligne">'), 7)
+        self.assertEqual(html.count(r'<span class="lien">\(\iff\)</span>'), 5)
+        self.assertIn('<span class="prop">(log des deux membres)</span>', html)
+        self.assertIn(r'<span class="prop">(car \(\log(2) - \log(3) \neq 0\))</span>', html)
 
 
 class TestCartes(unittest.TestCase):

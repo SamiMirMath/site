@@ -59,6 +59,9 @@ class TestRendu(unittest.TestCase):
     def test_factorisation(self):
         self.verifier_outil("factorisation")
 
+    def test_exponentielles_logarithmes(self):
+        self.verifier_outil("exponentielles-logarithmes")
+
 
 if __name__ == "__main__":
     unittest.main()

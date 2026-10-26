@@ -140,7 +140,7 @@ def texte_visible(chemin):
 
 
 class TestVocabulairePages(unittest.TestCase):
-    PAGES = ["ensemble-definition", "derivee-variations", "limites-asymptotes", "etude-complete", "factorisation", ""]
+    PAGES = ["ensemble-definition", "derivee-variations", "limites-asymptotes", "etude-complete", "factorisation", "exponentielles-logarithmes", ""]
 
     def test_pages(self):
         motifs = re.compile(r"SymPy|calcul formel|transcend|dichotom|exacte simple|valeurs approchées|moteur Python|Erreur du moteur"
