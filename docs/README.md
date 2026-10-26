@@ -15,6 +15,7 @@ Ce dossier n'est **pas publié** sur le site (`_config.yml` l'exclut de GitHub P
 | [specifications/limites-asymptotes.md](specifications/limites-asymptotes.md) | Outil « Limites et asymptotes » (3e Ms/Mr) |
 | [specifications/etude-complete.md](specifications/etude-complete.md) | Outil « Étude complète de fonction » (3e Ms/Mr) |
 | [specifications/factorisation.md](specifications/factorisation.md) | Outil « Factorisation » (1re C/Ms/Mr) |
+| [specifications/exponentielles-logarithmes.md](specifications/exponentielles-logarithmes.md) | Outil « Exponentielles et logarithmes » (3C ; 2M plus tard) |
 | [specifications/simplexe.md](specifications/simplexe.md) | Outil « Programmation linéaire » (2e) |
 | [a-valider.md](a-valider.md) | Questions ouvertes : rien n'est changé sur ces points tant qu'elles ne sont pas tranchées |
 | [guide-redaction.md](guide-redaction.md) | Format de rédaction des corrigés (minimum de lignes) : règles R1–R11 et 7 exemples de référence |

@@ -342,7 +342,7 @@ le simplexe existe déjà et fonctionne. Tâches **N01 à N26**, une par outil.
 |---|---|---|---|---|
 | N01 | Tangente en un point (6) | 2e Ms/Mr | prérequis, graphique | **Pilote** : petit, réutilise la dérivée ; premier outil entièrement natif, il valide T16 à T22 avant les gros chantiers |
 | N02 | Équations et inéquations (1) | 1re Ms/Mr | N01 | Crée l'analyse d'équations ; réutilise le tableau de signes et l'ensemble de définition |
-| N03 | Équations exponentielles et logarithmiques (5) | 2e Ms/Mr | N02 | ED d'abord, puis changement de variable comme en factorisation |
+| N03 | Équations exponentielles et logarithmiques (5) | 2e Ms/Mr | N02 | ED d'abord, puis changement de variable comme en factorisation. **Version 3C faite avant, sous T33** (sans ED ; la version 2M reprendra le moteur de T33 et ajoutera l'ED) |
 | N04 | Tangente depuis un point extérieur (6, suite) | 2e Ms/Mr | N01, N02 | Étend N01 (équation en t) |
 | N05 | Optimisation (7) | 2e Ms/Mr | N01, N02 | **À valider** : forme de l'énoncé (fonction donnée sur un intervalle, ou contrainte à éliminer) |
 | N06 | Systèmes d'équations (3) | 1re Ms/Mr | N02 | Crée le calcul exact sur matrices |
@@ -467,6 +467,19 @@ l'élève, un « Calcul en cours… » qui dure parce que SymPy se charge encore
   (coût et conséquences dans [choix-techniques.md](choix-techniques.md)).
 - **Vérification** : tableau des mesures (appareil, navigateur, réseau, durées) ajouté à cette fiche ; libellé vérifié par un test de page (fait).
 - **Reste** : (b) mesures sur téléphone, à faire par l'enseignant ; (c) décision d'après ces chiffres.
+
+### T33 — Outil « Exponentielles et logarithmes » (3C) — priorité du 26.10.2026, **avant T23**
+- Demande de l'enseignant : un outil pour le prochain test des 3C (polycopié 3C (chapitre 2), pp. 17-40). C'est l'outil N03 de la
+  phase F, **sans attendre N02** : il porte sa propre lecture de la saisie (`log` = base 10, `log_a`, `e` constante) et n'utilise pas l'outil
+  Ensemble de définition (le polycopié n'en parle pas ; les 2M l'auront, plus tard).
+- **Spécification** : [specifications/exponentielles-logarithmes.md](specifications/exponentielles-logarithmes.md) (EL-01 à EL-17), questions Q10 à Q12.
+- **Étapes (un commit chacune, aucun push)** : 0 spécification (**arrêt : l'enseignant valide les formulations**) ; 1 lecture, arbre, TeX, aperçu ;
+  2 même base (E1) ; 3 isoler puis logarithme (E2) ; 4 bases différentes (E3) ; 5 équations logarithmiques (E4) ; 6 calcul de log_a(y) (C1) ;
+  7 adaptateur `resoudre_el.py`, manifeste, instantanés, vocabulaire, propriétés ; 8 page + pool C + test de page + exemples dans le guide
+  (**arrêt : relecture à l'écran**) ; 9 registre et accueil ; 10 si le temps le permet : C2, C3, E5.
+- **Fichiers** : `exponentielles-logarithmes/` (nouveau), `moteur/manifeste.json`, `tests/python/moteurs.py`, `cas_el.py`, `test_exp_log.py`,
+  `commun/registre.json`, `index.html`.
+- **Vérification** : EL-01 à EL-17 ; suite complète verte ; instantanés des autres moteurs inchangés.
 
 ## Plus tard (hors plan, si les tests tiennent)
 
