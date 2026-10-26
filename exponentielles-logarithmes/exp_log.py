@@ -31,6 +31,9 @@ MESSAGE_E = "La lettre e désigne le nombre e ≈ 2,718 : choisissez une autre l
 MESSAGE_EXPOSANT = "Mettez l'exposant entre parenthèses : e^(-0,02t)."
 MESSAGE_HORS_PROGRAMME = "Cette équation ne se résout pas avec les méthodes du cours."
 MESSAGE_PAS_ENCORE = "Cet outil ne traite pas encore ce type d'équation."
+MESSAGE_PAS_UN_LOGARITHME = "Écrivez une équation (avec =) ou un logarithme à calculer, par exemple log_2(50)."
+MESSAGE_CALCUL_PAS_ENCORE = "Cet outil ne traite pas encore ce type de calcul."
+MESSAGE_ARGUMENT_NON_POSITIF = "Le logarithme d'un nombre négatif ou nul n'est pas défini."
 
 
 # =====================================================================
@@ -1908,3 +1911,15 @@ def message_non_resolu(g, d, x):
     """Le message à afficher quand `corriger_equation` ne trouve aucune méthode : « ne se résout pas avec les méthodes du cours » pour un
     vrai hors-programme, « ne traite pas encore » pour une forme du programme que l'outil ne gère pas encore."""
     return MESSAGE_HORS_PROGRAMME if hors_programme(g, d, x) else MESSAGE_PAS_ENCORE
+
+
+def message_calcul_non_resolu(g):
+    """Le message à afficher quand `calculer_logarithme` renvoie None : pas un logarithme, argument négatif ou nul (une base invalide est
+    refusée à la lecture), ou calcul pas encore traité (2 log 5, log 2 + log 3, argument avec e)."""
+    if not _contient_log(g):
+        return MESSAGE_PAS_UN_LOGARITHME
+    if isinstance(g, Log):
+        a = _const(g.a)
+        if a is not None and a <= 0:
+            return MESSAGE_ARGUMENT_NON_POSITIF
+    return MESSAGE_CALCUL_PAS_ENCORE

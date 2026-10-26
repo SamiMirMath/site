@@ -12,7 +12,9 @@ import derivee_variations as dv
 import etude_complete as ec
 import factorisation as fa
 import limites_asymptotes as la
+import resoudre_el
 from cas import CAS_LIMITES, entrees_page, entrees_factorisation
+from cas_el import entrees_el
 from aides_sortie import TUTOIEMENT, chaines_litterales
 
 INTERDITS = re.compile(r"calcul formel|sympy|transcend|dichotom|exacte simple|valeurs? approchée|moteur python|erreur du moteur"
@@ -63,6 +65,13 @@ class TestVocabulaireEleve(unittest.TestCase):
         for entree in entrees_factorisation():
             with self.subTest(entree=entree):
                 self.verifie(fa.factoriser_expr(entree), f"factorisation {entree}")
+
+    def test_exponentielles_logarithmes(self):
+        """EL-12 : la sortie élève de l'adaptateur (cartes, erreurs, aperçu) ne contient aucun mot interdit ni tutoiement."""
+        for entree in entrees_el():
+            with self.subTest(entree=entree):
+                self.verifie(resoudre_el.resoudre(entree), f"exponentielles-logarithmes {entree}")
+                self.verifie(resoudre_el.apercu_json(entree), f"aperçu {entree}")
 
     def test_erreurs_generiques_et_detail_a_part(self):
         # une erreur de condition : message générique, détail technique dans un champ à part (console)

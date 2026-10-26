@@ -20,6 +20,8 @@ OUTILS = {
     "etude-complete": (BASE + [DV, LA, "derivee-variations/resoudre_dv.py", "limites-asymptotes/resoudre_la.py",
                                "etude-complete/etude_complete.py", "etude-complete/resoudre_ec.py"], "resoudre_ec", "1/x"),
     "factorisation": (BASE + ["factorisation/factorisation.py", "factorisation/resoudre_fa.py"], "resoudre_fa", "x^2-1"),
+    "exponentielles-logarithmes": (BASE + ["moteur/nombres.py", "exponentielles-logarithmes/exp_log.py",
+                                           "exponentielles-logarithmes/resoudre_el.py"], "resoudre_el", "3^(x+1)=27"),
 }
 
 

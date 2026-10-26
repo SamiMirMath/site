@@ -10,6 +10,8 @@ from fractions import Fraction as F
 import mpmath as mp
 
 from moteurs import RACINE
+import cas_el
+from cas_el import (BATTERIE_C1, BATTERIE_E1, BATTERIE_E2, BATTERIE_E3, BATTERIE_E4, SANS_E1, SANS_E2, SANS_E3)
 from aides_sortie import TUTOIEMENT, chaines_litterales
 import exp_log as el
 from exp_log import Nb, Var, E, Neg, Op, Pow, Fn, Log, Eq
@@ -399,22 +401,6 @@ def val(x):
     return MP.mpf(x.numerator) / x.denominator
 
 
-# (saisie, solutions exactes) : exercices 2.13 a-o du polycopié et exemples p. 22-23
-BATTERIE_E1 = [
-    ("7^(2x+1)=7^9", [F(4)]), ("3^x=27", [F(3)]), ("10^x=1/100", [F(-2)]), ("2*3^(x-1)=18", [F(3)]),
-    ("4^(-x)=2^6", [F(-3)]), ("4^x=8", [F(3, 2)]), ("3^x=9^(2x+3)", [F(-2)]), ("10^(x+2)=(10^2)^x", [F(2)]),
-    ("5^(3x+2)=(5^x)^2", [F(-2)]), ("11^(2x+1)=1", [F(-1, 2)]), ("2^(x+7)=4^(5x+2)", [F(1, 3)]),
-    ("8^(3x+2)=1/16", [F(-10, 9)]), ("(25^x)^2=5^0*5^(x+3)", [F(1)]), ("2^x=2*4^(x-1)", [F(1)]),
-    ("2^(x^2)*4^x=8", [F(-3), F(1)]),
-    ("3^(x+1)-27=0", [F(2)]), ("10^(2x)=0,01", [F(-1)]), ("3*2^(x^2+1)=96", [F(-2), F(2)]), ("4^(3x+1)=8", [F(1, 6)]),
-    # autres formes de la même méthode
-    ("18=2*3^(x-1)", [F(3)]), ("3(2^x+1)=9", [F(1)]), ("-2^x=-8", [F(3)]), ("5-2^x=1", [F(2)]), ("2^x/4=2", [F(3)]),
-    ("(1/2)^x=8", [F(-3)]), ("9^x=1/3", [F(-1, 2)]), ("2^(x/2)=8", [F(6)]), ("2^(-x)=8", [F(-3)]), ("4^x=16", [F(2)]),
-    ("1,5^x=2,25", [F(2)]), ("2^(x^2)=8^x", [F(0), F(3)]), ("2^(x+1)=2*2^x", None), ("2^(x+1)=2^(x+3)", []),
-    ("2^(x^2)=2^(x-5)", []), ("9^(x^2)=3^(x+1)", [F(-1, 2), F(1)]),
-]
-SANS_E1 = ["3^x=20", "2^x=0", "2^x=-4", "5^(8x)=-25", "e^x=7", "2^x+3^x=5", "x^2=4", "log(x)=2", "3^x=2^x", "2^x=3^(x+1)",
-           "2^(x^3)=8", "2^(x^2)*3^x=6", "x*2^x=8", "x^x=4", "sqrt(2)^x=4", "3^x=2"]
 
 
 class TestMemeBase(unittest.TestCase):
@@ -606,22 +592,6 @@ def corriger(saisie):
     return el.corriger_equation(s.g, s.d, s.inconnue)
 
 
-# (saisie, solutions arrondies à 10⁻³) : exercices 2.18, 2.21, 2.23 (solutions p. 38-39), p. 26, p. 28-29, 2.26, 2.27, 2.32
-BATTERIE_E2 = [
-    ("10^x=8", [0.903]), ("10^x=0,65", [-0.187]), ("10^(2x)=0,7", [-0.077]), ("10^x*(10^x-4)=0", [0.602]), ("10^(3x)=25", [0.466]),
-    ("(10^(-x)-1)*(10^(-x)-8)=0", [-0.903, 0.0]),
-    ("e^x=7", [1.946]), ("3e^x=0,65", [-1.529]), ("x=ln(3)", [1.099]), ("2x=ln(0,1)", [-1.151]), ("e^(-0,01x)=0,7", [35.667]),
-    ("2^x=100", [6.644]), ("10^x=5", [0.699]), ("3^(x-1)=10", [3.096]), ("5^(2x+3)=7", [-0.895]), ("1,04^x=100", [117.417]),
-    ("4^(x-4)=20", [6.161]), ("5^(8x)=-25", []), ("12^x=49", [1.566]),
-    ("3^x=20", [2.727]), ("4^(2x+1)=60", [0.977]), ("1,0325^n=3", [34.35]), ("0,8^n=0,5", [3.106]), ("37*e^(-0,02t)=25", [19.602]),
-    ("2000*1,045^n=3805", [14.612]), ("1,0375^n=3", [29.842]), ("e^(0,05t)=2", [13.863]),
-    # autres formes
-    ("2*3^x=-6", []), ("10^x=0", []), ("3*2^x=5", [0.737]), ("-2^x=-10", [3.322]), ("e^x=1", [0.0]), ("(1/2)^x=3", [-1.585]),
-    ("2^(-x)=3", [-1.585]), ("18=2*3^x+1", [2.0]) if False else ("20=2*3^x+2", [2.0]), ("100=2^x", [6.644]), ("5^x/2=3", [1.113]),
-    ("exp(x)=7", [1.946]), ("2^(x/2)=5", [4.644]),
-]
-SANS_E2 = ["x*2^x=8", "2^x+3^x=5", "x^x=4", "2^(x^2)=5", "2^(x^3)=8", "e^x=e^3",
-           "x^2=4", "2x+1=9", "sqrt(2)^x=3", "3^(x^2+1)=7", "10^x*(x-4)=0", "2*10^x=0*x"]
 
 
 class TestLogarithme(unittest.TestCase):
@@ -886,19 +856,6 @@ class TestLogarithme(unittest.TestCase):
 # ---------------------------------------------------------------------
 # Étape 4 : méthode « bases différentes » (E3)
 # ---------------------------------------------------------------------
-# (saisie, solution arrondie à 10⁻³) : exercice 2.24 a-c du corrigé, p. 26 n° 3, puis d'autres formes
-BATTERIE_E3 = [
-    ("2^(x-1)=3^x", -1.710), ("4^(x+1)=6^(3x)", 0.348), ("2^(x+4)=3^(x-1)", 9.548), ("2^x=3^(x+1)", -2.710),
-    ("3^x=2^x", 0.0), ("2^(-x)=3^x", 0.0), ("3^(x+1)=2^x", -2.710), ("5^(2x+1)=3^(x+2)", 0.277), ("2^(1-x)=3^(x+1)", -0.226),
-    ("2^(x-1)=5^(x+1)", -2.513), ("2^(x/2)=3^(x-1)", 1.461), ("(1/2)^x=3^(x+1)", -0.613), ("1,5^x=2^(x+1)", -2.409),
-    ("10^x=3^(x+1)", 0.912), ("10^(x-1)=3^x", 1.912), ("0,1^x=2^(x+1)", -0.231), ("3^(2x)=2^(3x+1)", 5.885),
-    ("7^(x+2)=2^(3-x)", -0.687), ("2^(-x)=3^(1-x)", 2.710),
-    # facteurs constants (k·a^f = m·b^h) et base e (ln des deux membres)
-    ("2*2^x=3^x", 1.710), ("3*2^x=5*3^(x-1)", 1.450), ("10*2^x=3^x", 5.679), ("2*2^(x-1)=3^x", 0.0), ("0,5*3^x=2^(x+1)", 3.419),
-    ("5*10^x=2^x", -1.0), ("3^x*2=5*2^x", 2.260),
-    ("e^x=2^x", 0.0), ("e^x=2^(x+1)", 2.259), ("2*e^x=3^x", 7.029), ("e^(2x)=3^(x-1)", -1.219), ("3^(x+1)=e^x", -11.141),
-]
-SANS_E3 = ["2^(x^2)=3^x", "x*2^x=8", "2^x+3^x=5", "2^(x^3)=3^x", "x^x=3^x", "-2^x=-3^(x+1)", "e^x=e^(x+1)", "2^x+1=3^x", "2^x=3^x+x"]
 
 
 class TestBasesDifferentes(unittest.TestCase):
@@ -1140,19 +1097,6 @@ class TestBasesDifferentes(unittest.TestCase):
 # ---------------------------------------------------------------------
 # Étape 5 : équations logarithmiques (E4)
 # ---------------------------------------------------------------------
-# (saisie, solutions) : exercices 2.15 e-g j-l, 2.18 c d f, 2.21 d, 2.22 a-c du corrigé, puis d'autres formes
-BATTERIE_E4 = [
-    ("log(x)=3", [1000.0]), ("log(x)=-1", [0.1]), ("log(x)=-4", [0.0001]), ("log(x)=0", [1.0]), ("log(log(log(x)))=0", [1e10]),
-    ("log(5-x)=8", [-99999995.0]), ("log(x)=1,5", [31.623]), ("log(x)=-0,27", [0.537]), ("2log(x)-5=0", [316.228]),
-    ("ln(x)=3", [20.086]), ("log2(x)=4", [16.0]), ("2log_3(x)=10", [243.0]), ("log_x(256)=4", [4.0]),
-    # autres formes
-    ("log_2(x)=4", [16.0]), ("ln(x)=0", [1.0]), ("ln(x)=1", [2.718]), ("3=log(x)", [1000.0]), ("log(x)+1=3", [100.0]),
-    ("log(x)/2=1", [100.0]), ("-log(x)=2", [0.01]), ("log(x^2)=2", [-10.0, 10.0]), ("log(2x+1)=3", [499.5]), ("8=log(2x+1)", [49999999.5]),
-    ("log(x^2-3x)=1", [-2.0, 5.0]), ("log(x^2+x+3)=0", []), ("ln(2-x)=1", [-0.718]), ("log(-3-x)=1", [-13.0]), ("log(3-2x)=1", [-3.5]),
-    ("log(-x)=2", [-100.0]), ("log_x(16)=2", [4.0]), ("log_x(81)=4", [3.0]), ("log_x(8)=3", [2.0]), ("log_x(1/8)=3", [0.5]),
-    ("log_x(1/16)=4", [0.5]), ("log(log(x))=0,5", [10 ** (10 ** 0.5)]) if False else ("log(log(x))=1", [1e10]),
-    ("log5(x)=-2", [0.04]), ("ln(ln(x))=0", [2.718]), ("log(log(x-1))=0", [11.0]),
-]
 
 
 class TestLogarithmique(unittest.TestCase):
@@ -1335,18 +1279,6 @@ def calculer(saisie):
     return el.calculer_logarithme(el.analyser_saisie(saisie).g)
 
 
-# (saisie, valeur exacte rationnelle ou None, valeur approchée) : exercices 2.15 a-d h i, 2.20 a-h et d'autres formes
-BATTERIE_C1 = [
-    ("log(1000000)", F(6)), ("log(1)", F(0)), ("log(1/100000)", F(-5)), ("log(0,001)", F(-3)), ("log(sqrt(10))", F(1, 2)), ("log(0,01)", F(-2)),
-    ("log2(64)", F(6)), ("log_8(64)", F(2)), ("log_5(1/25)", F(-2)), ("log_5(0,2)", F(-1)), ("log_7(1)", F(0)), ("log_20(20)", F(1)),
-    ("log_2(1/8)", F(-3)), ("log_4(sqrt(2))", F(1, 4)),
-    # autres formes
-    ("log_9(27)", F(3, 2)), ("log_8(2)", F(1, 3)), ("log_4(8)", F(3, 2)), ("log_25(sqrt(5))", F(1, 4)), ("log_2(0,125)", F(-3)), ("log(10^3)", F(3)),
-    ("log(10^(1/2))", F(1, 2)), ("log_27(1/9)", F(-2, 3)), ("log_2(sqrt(8))", F(3, 2)), ("log_100(10)", F(1, 2)), ("log_1,5(2,25)", F(2)),
-    ("ln(1)", F(0)), ("ln(e)", F(1)), ("ln(e^3)", F(3)), ("log_10(1000)", F(3)),
-    ("log_2(50)", 5.644), ("log(50)", 1.699), ("ln(7)", 1.946), ("log_3(10)", 2.096), ("log_2(sqrt(3))", 0.792), ("log_5(0,3)", -0.748),
-    ("log_4(0,3)", -0.868), ("log(2)", 0.301), ("log_6(2)", 0.387), ("log_2(10)", 3.322), ("log_3(sqrt(2))", 0.315),
-]
 
 
 class TestCalculLogarithme(unittest.TestCase):
@@ -1443,9 +1375,8 @@ class TestCalculLogarithme(unittest.TestCase):
 class TestMessagesNonResolu(unittest.TestCase):
     """EL-11 : deux messages. « ne se résout pas avec les méthodes du cours » seulement pour un vrai hors-programme ;
     « ne traite pas encore » pour une forme du programme que l'outil ne gère pas encore."""
-    HORS_PROGRAMME = ["x*2^x=8", "2^x+3^x=5", "x^x=4", "2^x=x+1", "2^(sqrt(x))=4", "2^(1/x)=4", "x/2^x=1", "x*e^x=1", "2^x=3^x+x"]
-    PAS_ENCORE = ["log(x)=log(5)", "log_x(2)=3", "log(x^2+1)=-1", "e^x=e^3", "-2^x=-3^(x+1)", "e^x=e^(x+1)", "10^x*(x-4)=0", "2^x+2^(x+1)=12", "e^x+e^(-x)=3",
-                  "2^(x^2)=5", "log(x)+log(x-1)=1", "x^2=4", "2x+1=9", "2^(x^3)=8", "2^(x^3)=3^x", "5^(x^3+1)=7"]
+    HORS_PROGRAMME = cas_el.HORS_PROGRAMME
+    PAS_ENCORE = cas_el.PAS_ENCORE
 
     def message(self, saisie):
         s = el.analyser_saisie(saisie)
@@ -1541,7 +1472,7 @@ class TestSource(unittest.TestCase):
 
     def test_le_tex_ne_vient_jamais_de_sympy(self):
         """EL-04 : aucun appel à un écrivain TeX de SymPy ni à la conversion SymPy → arbre, et pas d'import de SymPy pour écrire."""
-        for nom in ["exp_log.py"]:
+        for nom in ["exp_log.py", "resoudre_el.py"]:
             s = self.source(nom)
             self.assertIsNone(re.search(r"\blatex\s*\(", s), nom)
             self.assertNotIn("arbre_depuis_sympy", s, nom)

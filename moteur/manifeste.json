@@ -39,6 +39,12 @@
       "fichiers": ["ensemble-definition/ensemble_def.py", "moteur/noyau.py", "moteur/sortie.py", "factorisation/factorisation.py",
                    "factorisation/resoudre_fa.py"],
       "fonctions": ["resoudre", "apercu", "exercice"]
+    },
+    "exponentielles-logarithmes": {
+      "module": "resoudre_el",
+      "fichiers": ["ensemble-definition/ensemble_def.py", "moteur/noyau.py", "moteur/nombres.py", "moteur/sortie.py",
+                   "exponentielles-logarithmes/exp_log.py", "exponentielles-logarithmes/resoudre_el.py"],
+      "fonctions": ["resoudre", "apercu"]
     }
   }
 }

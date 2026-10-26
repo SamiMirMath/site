@@ -12,11 +12,13 @@ import unittest
 import moteurs  # noqa: F401  (chemins des moteurs)
 from test_instantanes import normaliser, resumer_segments, REGENERER
 from cas import CAS_LIMITES, entrees_factorisation, entrees_page
+from cas_el import entrees_el
 import resoudre_fa
 import resoudre_ed
 import resoudre_dv
 import resoudre_la
 import resoudre_ec
+import resoudre_el
 
 DOSSIER = os.path.join(os.path.dirname(__file__), "instantanes", "resoudre")
 
@@ -26,6 +28,7 @@ OUTILS = {
     "limites-asymptotes": (resoudre_la.resoudre, lambda: entrees_page("limites-asymptotes") + CAS_LIMITES["limites-asymptotes"]),
     "etude-complete": (resoudre_ec.resoudre, lambda: entrees_page("etude-complete") + CAS_LIMITES["etude-complete"]),
     "factorisation": (resoudre_fa.resoudre, entrees_factorisation),
+    "exponentielles-logarithmes": (resoudre_el.resoudre, entrees_el),
 }
 
 
@@ -72,6 +75,9 @@ class TestInstantanesResoudre(unittest.TestCase):
 
     def test_factorisation(self):
         self.verifier_outil("factorisation")
+
+    def test_exponentielles_logarithmes(self):
+        self.verifier_outil("exponentielles-logarithmes")
 
 
 if __name__ == "__main__":

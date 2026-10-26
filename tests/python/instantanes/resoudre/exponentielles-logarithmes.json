@@ -1,0 +1,6714 @@
+{
+ "": {
+  "erreur": "Écrivez une équation, par exemple 3^(x+1) = 27.",
+  "ok": false
+ },
+ "(1/2)^x=3": {
+  "cartes": [
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "\\(\\left(\\frac{1}{2}\\right)^{x} = 3 \\iff \\log\\left(\\left(\\frac{1}{2}\\right)^{x}\\right) = \\log(3) \\quad \\text{(log des deux membres)} \\iff x \\cdot \\log\\left(\\frac{1}{2}\\right) = \\log(3) \\quad \\text{(log(a^A) = A · log(a))} \\iff x = \\frac{\\log(3)}{\\log\\left(\\frac{1}{2}\\right)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(3)}{\\log\\left(\\frac{1}{2}\\right)}\\right\\} \\text{, soit } x \\approx -1{,}585",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\left(\\frac{1}{2}\\right)^{x} = 3",
+  "erreur": null,
+  "ok": true
+ },
+ "(1/2)^x=3^(x+1)": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(\\left(\\frac{1}{2}\\right)^{x} = 3^{x + 1} \\iff \\log\\left(\\left(\\frac{1}{2}\\right)^{x}\\right) = \\log(3^{x + 1}) \\quad \\text{(log des deux membres)} \\iff x \\cdot \\log\\left(\\frac{1}{2}\\right) = (x + 1) \\cdot \\log(3) \\quad \\text{(log(a^A) = A · log(a))} \\iff x \\cdot \\log\\left(\\frac{1}{2}\\right) = x \\cdot \\log(3) + \\log(3) \\iff x\\left(\\log\\left(\\frac{1}{2}\\right) - \\log(3)\\right) = \\log(3) \\iff x = \\frac{\\log(3)}{\\log\\left(\\frac{1}{2}\\right) - \\log(3)} \\quad \\text{(car } \\log\\left(\\frac{1}{2}\\right) - \\log(3) \\neq 0\\text{)} = \\frac{\\log(3)}{\\log\\left(\\frac{1}{6}\\right)} \\quad \\text{(log a − log b = log(a/b))}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(3)}{\\log\\left(\\frac{1}{6}\\right)}\\right\\} \\text{, soit } x \\approx -0{,}613",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\left(\\frac{1}{2}\\right)^{x} = 3^{x + 1}",
+  "erreur": null,
+  "ok": true
+ },
+ "(1/2)^x=8": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(\\left(\\frac{1}{2}\\right)^{x} = (2^{-1})^{x} = 2^{-x} \\quad \\text{((aᵐ)ⁿ = aᵐⁿ)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(8 = 2^{3}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2^{-x} = 2^{3} \\iff -x = 3 \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff x = -3\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-3\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\left(\\frac{1}{2}\\right)^{x} = 8",
+  "erreur": null,
+  "ok": true
+ },
+ "(10^(-x)-1)*(10^(-x)-8)=0": {
+  "cartes": [
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "html": "\\((10^{-x} - 1)(10^{-x} - 8) = 0 \\iff 10^{-x} - 1 = 0 \\text{ ou } 10^{-x} - 8 = 0 \\quad \\text{(un produit est nul si l'un des facteurs est nul)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Facteur 1",
+    "blocs": [
+     {
+      "html": "\\(10^{-x} - 1 = 0 \\iff 10^{-x} = 1 \\quad \\text{(on isole le terme exponentiel)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(1 = 10^{0} \\quad \\text{(1 = a⁰)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(10^{-x} = 10^{0} \\iff -x = 0 \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff x = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Facteur 2",
+    "blocs": [
+     {
+      "html": "\\(10^{-x} - 8 = 0 \\iff 10^{-x} = 8 \\quad \\text{(on isole le terme exponentiel)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(10^{-x} = 8 \\iff -x = \\log(8) \\quad \\text{(définition du logarithme)} \\iff x = -\\log(8)\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-\\log(8) \\,;\\, 0\\right\\} \\text{, soit } x \\approx -0{,}903 \\text{ ou } x = 0",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "(10^{-x} - 1)(10^{-x} - 8) = 0",
+  "erreur": null,
+  "ok": true
+ },
+ "(25^x)^2=5^0*5^(x+3)": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\((25^{x})^{2} = 25^{2x} \\quad \\text{((aᵐ)ⁿ = aᵐⁿ)} = (5^{2})^{2x} = 5^{4x} \\quad \\text{((aᵐ)ⁿ = aᵐⁿ)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(5^{0} \\cdot 5^{x + 3} = 5^{x + 3} \\quad \\text{(aᵐ · aⁿ = aᵐ⁺ⁿ)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(5^{4x} = 5^{x + 3} \\iff 4x = x + 3 \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff 3x = 3 \\iff x = 1\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{1\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "(25^{x})^{2} = 5^{0} \\cdot 5^{x + 3}",
+  "erreur": null,
+  "ok": true
+ },
+ "(x+1=3": {
+  "erreur": "Il manque une parenthèse fermante.",
+  "ok": false
+ },
+ "-2^x=-10": {
+  "cartes": [
+   {
+    "badge": "Isoler l'exponentielle",
+    "blocs": [
+     {
+      "html": "\\(-2^{x} = -10 \\iff 2^{x} = 10 \\quad \\text{(on isole le terme exponentiel)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "\\(2^{x} = 10 \\iff \\log(2^{x}) = \\log(10) \\quad \\text{(log des deux membres)} \\iff x \\cdot \\log(2) = \\log(10) \\quad \\text{(log(a^A) = A · log(a))} \\iff x \\cdot \\log(2) = 1 \\quad \\text{(log(10ᵏ) = k)} \\iff x = \\frac{1}{\\log(2)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{1}{\\log(2)}\\right\\} \\text{, soit } x \\approx 3{,}322",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "-2^{x} = -10",
+  "erreur": null,
+  "ok": true
+ },
+ "-2^x=-3^(x+1)": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "-2^x=-8": {
+  "cartes": [
+   {
+    "badge": "Isoler l'exponentielle",
+    "blocs": [
+     {
+      "html": "\\(-2^{x} = -8 \\iff 2^{x} = 8 \\quad \\text{(on isole le terme exponentiel)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(8 = 2^{3}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2^{x} = 2^{3} \\iff x = 3 \\quad \\text{(même base : a^A = a^B ⇔ A = B)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{3\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "-2^{x} = -8",
+  "erreur": null,
+  "ok": true
+ },
+ "-log(x)=2": {
+  "cartes": [
+   {
+    "badge": "Isoler le logarithme",
+    "blocs": [
+     {
+      "html": "\\(-\\log(x) = 2 \\iff \\log(x) = -2 \\quad \\text{(on isole le logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log(x) = -2 \\iff x = 10^{-2} = \\frac{1}{100} \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{1}{100}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "-\\log(x) = 2",
+  "erreur": null,
+  "ok": true
+ },
+ "0,1^x=2^(x+1)": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(0{,}1^{x} = 2^{x + 1} \\iff \\log(0{,}1^{x}) = \\log(2^{x + 1}) \\quad \\text{(log des deux membres)} \\iff x \\cdot \\log(0{,}1) = (x + 1) \\cdot \\log(2) \\quad \\text{(log(a^A) = A · log(a))} \\iff -x = x \\cdot \\log(2) + \\log(2) \\quad \\text{(log(10ᵏ) = k)} \\iff x(-1 - \\log(2)) = \\log(2) \\iff x = \\frac{\\log(2)}{-1 - \\log(2)} \\quad \\text{(car } -1 - \\log(2) \\neq 0\\text{)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(2)}{-1 - \\log(2)}\\right\\} \\text{, soit } x \\approx -0{,}231",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "0{,}1^{x} = 2^{x + 1}",
+  "erreur": null,
+  "ok": true
+ },
+ "0,5*3^x=2^(x+1)": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(0{,}5 \\cdot 3^{x} = 2^{x + 1} \\iff \\log(0{,}5 \\cdot 3^{x}) = \\log(2^{x + 1}) \\quad \\text{(log des deux membres)} \\iff \\log(0{,}5) + \\log(3^{x}) = \\log(2^{x + 1}) \\quad \\text{(log(ab) = log a + log b)} \\iff \\log(0{,}5) + x \\cdot \\log(3) = (x + 1) \\cdot \\log(2) \\quad \\text{(log(a^A) = A · log(a))} \\iff x \\cdot \\log(3) + \\log(0{,}5) = x \\cdot \\log(2) + \\log(2) \\iff x(\\log(3) - \\log(2)) = \\log(2) - \\log(0{,}5) \\iff x = \\frac{\\log(2) - \\log(0{,}5)}{\\log(3) - \\log(2)} \\quad \\text{(car } \\log(3) - \\log(2) \\neq 0\\text{)} = \\frac{\\log(4)}{\\log(1{,}5)} \\quad \\text{(log a − log b = log(a/b))}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(4)}{\\log(1{,}5)}\\right\\} \\text{, soit } x \\approx 3{,}419",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "0{,}5 \\cdot 3^{x} = 2^{x + 1}",
+  "erreur": null,
+  "ok": true
+ },
+ "0,8^n=0,5": {
+  "cartes": [
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "\\(0{,}8^{n} = 0{,}5 \\iff \\log(0{,}8^{n}) = \\log(0{,}5) \\quad \\text{(log des deux membres)} \\iff n \\cdot \\log(0{,}8) = \\log(0{,}5) \\quad \\text{(log(a^A) = A · log(a))} \\iff n = \\frac{\\log(0{,}5)}{\\log(0{,}8)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(0{,}5)}{\\log(0{,}8)}\\right\\} \\text{, soit } n \\approx 3{,}106",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "0{,}8^{n} = 0{,}5",
+  "erreur": null,
+  "ok": true
+ },
+ "1,0325^n=3": {
+  "cartes": [
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "\\(1{,}0325^{n} = 3 \\iff \\log(1{,}0325^{n}) = \\log(3) \\quad \\text{(log des deux membres)} \\iff n \\cdot \\log(1{,}0325) = \\log(3) \\quad \\text{(log(a^A) = A · log(a))} \\iff n = \\frac{\\log(3)}{\\log(1{,}0325)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(3)}{\\log(1{,}0325)}\\right\\} \\text{, soit } n \\approx 34{,}350",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "1{,}0325^{n} = 3",
+  "erreur": null,
+  "ok": true
+ },
+ "1,0375^n=3": {
+  "cartes": [
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "\\(1{,}0375^{n} = 3 \\iff \\log(1{,}0375^{n}) = \\log(3) \\quad \\text{(log des deux membres)} \\iff n \\cdot \\log(1{,}0375) = \\log(3) \\quad \\text{(log(a^A) = A · log(a))} \\iff n = \\frac{\\log(3)}{\\log(1{,}0375)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(3)}{\\log(1{,}0375)}\\right\\} \\text{, soit } n \\approx 29{,}842",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "1{,}0375^{n} = 3",
+  "erreur": null,
+  "ok": true
+ },
+ "1,04^x=100": {
+  "cartes": [
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "\\(1{,}04^{x} = 100 \\iff \\log(1{,}04^{x}) = \\log(100) \\quad \\text{(log des deux membres)} \\iff x \\cdot \\log(1{,}04) = \\log(100) \\quad \\text{(log(a^A) = A · log(a))} \\iff x \\cdot \\log(1{,}04) = 2 \\quad \\text{(log(10ᵏ) = k)} \\iff x = \\frac{2}{\\log(1{,}04)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{2}{\\log(1{,}04)}\\right\\} \\text{, soit } x \\approx 117{,}417",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "1{,}04^{x} = 100",
+  "erreur": null,
+  "ok": true
+ },
+ "1,5^x=2,25": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(2{,}25 = 1{,}5^{2}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(1{,}5^{x} = 1{,}5^{2} \\iff x = 2 \\quad \\text{(même base : a^A = a^B ⇔ A = B)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{2\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "1{,}5^{x} = 2{,}25",
+  "erreur": null,
+  "ok": true
+ },
+ "1,5^x=2^(x+1)": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(1{,}5^{x} = 2^{x + 1} \\iff \\log(1{,}5^{x}) = \\log(2^{x + 1}) \\quad \\text{(log des deux membres)} \\iff x \\cdot \\log(1{,}5) = (x + 1) \\cdot \\log(2) \\quad \\text{(log(a^A) = A · log(a))} \\iff x \\cdot \\log(1{,}5) = x \\cdot \\log(2) + \\log(2) \\iff x(\\log(1{,}5) - \\log(2)) = \\log(2) \\iff x = \\frac{\\log(2)}{\\log(1{,}5) - \\log(2)} \\quad \\text{(car } \\log(1{,}5) - \\log(2) \\neq 0\\text{)} = \\frac{\\log(2)}{\\log(0{,}75)} \\quad \\text{(log a − log b = log(a/b))}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(2)}{\\log(0{,}75)}\\right\\} \\text{, soit } x \\approx -2{,}409",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "1{,}5^{x} = 2^{x + 1}",
+  "erreur": null,
+  "ok": true
+ },
+ "10*2^x=3^x": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(10 \\cdot 2^{x} = 3^{x} \\iff \\log(10 \\cdot 2^{x}) = \\log(3^{x}) \\quad \\text{(log des deux membres)} \\iff \\log(10) + \\log(2^{x}) = \\log(3^{x}) \\quad \\text{(log(ab) = log a + log b)} \\iff \\log(10) + x \\cdot \\log(2) = x \\cdot \\log(3) \\quad \\text{(log(a^A) = A · log(a))} \\iff x \\cdot \\log(2) + 1 = x \\cdot \\log(3) \\quad \\text{(log(10ᵏ) = k)} \\iff 1 = x(\\log(3) - \\log(2)) \\iff x = \\frac{1}{\\log(3) - \\log(2)} \\quad \\text{(car } \\log(3) - \\log(2) \\neq 0\\text{)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{1}{\\log(3) - \\log(2)}\\right\\} \\text{, soit } x \\approx 5{,}679",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "10 \\cdot 2^{x} = 3^{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "100=2^x": {
+  "cartes": [
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "\\(100 = 2^{x} \\iff 2^{x} = 100 \\iff \\log(2^{x}) = \\log(100) \\quad \\text{(log des deux membres)} \\iff x \\cdot \\log(2) = \\log(100) \\quad \\text{(log(a^A) = A · log(a))} \\iff x \\cdot \\log(2) = 2 \\quad \\text{(log(10ᵏ) = k)} \\iff x = \\frac{2}{\\log(2)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{2}{\\log(2)}\\right\\} \\text{, soit } x \\approx 6{,}644",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "100 = 2^{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "10^(2x)=0,01": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(0{,}01 = 10^{-2}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(10^{2x} = 10^{-2} \\iff 2x = -2 \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff x = -1\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-1\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "10^{2x} = 0{,}01",
+  "erreur": null,
+  "ok": true
+ },
+ "10^(2x)=0,7": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(10^{2x} = 0{,}7 \\iff 2x = \\log(0{,}7) \\quad \\text{(définition du logarithme)} \\iff x = \\frac{\\log(0{,}7)}{2}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(0{,}7)}{2}\\right\\} \\text{, soit } x \\approx -0{,}077",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "10^{2x} = 0{,}7",
+  "erreur": null,
+  "ok": true
+ },
+ "10^(3x)=25": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(10^{3x} = 25 \\iff 3x = \\log(25) \\quad \\text{(définition du logarithme)} \\iff x = \\frac{\\log(25)}{3}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(25)}{3}\\right\\} \\text{, soit } x \\approx 0{,}466",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "10^{3x} = 25",
+  "erreur": null,
+  "ok": true
+ },
+ "10^(x+2)=(10^2)^x": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\((10^{2})^{x} = 10^{2x} \\quad \\text{((aᵐ)ⁿ = aᵐⁿ)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(10^{x + 2} = 10^{2x} \\iff x + 2 = 2x \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff -x = -2 \\iff x = 2\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{2\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "10^{x + 2} = (10^{2})^{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "10^(x-1)=3^x": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(10^{x - 1} = 3^{x} \\iff \\log(10^{x - 1}) = \\log(3^{x}) \\quad \\text{(log des deux membres)} \\iff (x - 1) \\cdot \\log(10) = x \\cdot \\log(3) \\quad \\text{(log(a^A) = A · log(a))} \\iff x - 1 = x \\cdot \\log(3) \\quad \\text{(log(10ᵏ) = k)} \\iff x(1 - \\log(3)) = 1 \\iff x = \\frac{1}{1 - \\log(3)} \\quad \\text{(car } 1 - \\log(3) \\neq 0\\text{)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{1}{1 - \\log(3)}\\right\\} \\text{, soit } x \\approx 1{,}912",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "10^{x - 1} = 3^{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "10^x*(10^x-4)=0": {
+  "cartes": [
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "html": "\\(10^{x} \\cdot (10^{x} - 4) = 0 \\iff 10^{x} = 0 \\text{ ou } 10^{x} - 4 = 0 \\quad \\text{(un produit est nul si l'un des facteurs est nul)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Facteur 1",
+    "blocs": [
+     {
+      "html": "\\(10^{x} &gt; 0 \\quad \\text{(une exponentielle est strictement positive)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(10^{x} = 0 \\quad \\text{(aucune solution)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Facteur 2",
+    "blocs": [
+     {
+      "html": "\\(10^{x} - 4 = 0 \\iff 10^{x} = 4 \\quad \\text{(on isole le terme exponentiel)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(10^{x} = 4 \\iff x = \\log(4) \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\log(4)\\right\\} \\text{, soit } x \\approx 0{,}602",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "10^{x} \\cdot (10^{x} - 4) = 0",
+  "erreur": null,
+  "ok": true
+ },
+ "10^x*(x-4)=0": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "10^x=0": {
+  "cartes": [
+   {
+    "badge": "Aucune solution",
+    "blocs": [
+     {
+      "html": "\\(10^{x} &gt; 0 \\quad \\text{(une exponentielle est strictement positive)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(10^{x} = 0 \\quad \\text{(aucune solution)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\varnothing",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "10^{x} = 0",
+  "erreur": null,
+  "ok": true
+ },
+ "10^x=0,65": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(10^{x} = 0{,}65 \\iff x = \\log(0{,}65) \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\log(0{,}65)\\right\\} \\text{, soit } x \\approx -0{,}187",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "10^{x} = 0{,}65",
+  "erreur": null,
+  "ok": true
+ },
+ "10^x=1/100": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(\\frac{1}{100} = 10^{-2}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(10^{x} = 10^{-2} \\iff x = -2 \\quad \\text{(même base : a^A = a^B ⇔ A = B)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-2\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "10^{x} = \\frac{1}{100}",
+  "erreur": null,
+  "ok": true
+ },
+ "10^x=3^(x+1)": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(10^{x} = 3^{x + 1} \\iff \\log(10^{x}) = \\log(3^{x + 1}) \\quad \\text{(log des deux membres)} \\iff x \\cdot \\log(10) = (x + 1) \\cdot \\log(3) \\quad \\text{(log(a^A) = A · log(a))} \\iff x = x \\cdot \\log(3) + \\log(3) \\quad \\text{(log(10ᵏ) = k)} \\iff x(1 - \\log(3)) = \\log(3) \\iff x = \\frac{\\log(3)}{1 - \\log(3)} \\quad \\text{(car } 1 - \\log(3) \\neq 0\\text{)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(3)}{1 - \\log(3)}\\right\\} \\text{, soit } x \\approx 0{,}912",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "10^{x} = 3^{x + 1}",
+  "erreur": null,
+  "ok": true
+ },
+ "10^x=5": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(10^{x} = 5 \\iff x = \\log(5) \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\log(5)\\right\\} \\text{, soit } x \\approx 0{,}699",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "10^{x} = 5",
+  "erreur": null,
+  "ok": true
+ },
+ "10^x=8": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(10^{x} = 8 \\iff x = \\log(8) \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\log(8)\\right\\} \\text{, soit } x \\approx 0{,}903",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "10^{x} = 8",
+  "erreur": null,
+  "ok": true
+ },
+ "11^(2x+1)=1": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(1 = 11^{0} \\quad \\text{(1 = a⁰)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(11^{2x + 1} = 11^{0} \\iff 2x + 1 = 0 \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff 2x = -1 \\iff x = -\\frac{1}{2}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-\\frac{1}{2}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "11^{2x + 1} = 1",
+  "erreur": null,
+  "ok": true
+ },
+ "12^x=49": {
+  "cartes": [
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "\\(12^{x} = 49 \\iff \\log(12^{x}) = \\log(49) \\quad \\text{(log des deux membres)} \\iff x \\cdot \\log(12) = \\log(49) \\quad \\text{(log(a^A) = A · log(a))} \\iff x = \\frac{\\log(49)}{\\log(12)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(49)}{\\log(12)}\\right\\} \\text{, soit } x \\approx 1{,}566",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "12^{x} = 49",
+  "erreur": null,
+  "ok": true
+ },
+ "18=2*3^(x-1)": {
+  "cartes": [
+   {
+    "badge": "Isoler l'exponentielle",
+    "blocs": [
+     {
+      "html": "\\(18 = 2 \\cdot 3^{x - 1} \\iff 9 = 3^{x - 1} \\quad \\text{(on isole le terme exponentiel)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(9 = 3^{2}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(3^{2} = 3^{x - 1} \\iff 2 = x - 1 \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff x = 3\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{3\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "18 = 2 \\cdot 3^{x - 1}",
+  "erreur": null,
+  "ok": true
+ },
+ "2 000^x=3": {
+  "erreur": "Pas d'espace dans un nombre : écrivez 1000 ou 1’000.",
+  "ok": false
+ },
+ "2*10^x=0*x": {
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
+  "ok": false
+ },
+ "2*2^(x-1)=3^x": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(2 \\cdot 2^{x - 1} = 3^{x} \\iff \\log(2 \\cdot 2^{x - 1}) = \\log(3^{x}) \\quad \\text{(log des deux membres)} \\iff \\log(2) + \\log(2^{x - 1}) = \\log(3^{x}) \\quad \\text{(log(ab) = log a + log b)} \\iff \\log(2) + (x - 1) \\cdot \\log(2) = x \\cdot \\log(3) \\quad \\text{(log(a^A) = A · log(a))} \\iff x \\cdot \\log(2) = x \\cdot \\log(3) \\iff x(\\log(2) - \\log(3)) = 0 \\iff x = 0 \\quad \\text{(car } \\log(2) - \\log(3) \\neq 0\\text{)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{0\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2 \\cdot 2^{x - 1} = 3^{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "2*2^x=3^x": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(2 \\cdot 2^{x} = 3^{x} \\iff \\log(2 \\cdot 2^{x}) = \\log(3^{x}) \\quad \\text{(log des deux membres)} \\iff \\log(2) + \\log(2^{x}) = \\log(3^{x}) \\quad \\text{(log(ab) = log a + log b)} \\iff \\log(2) + x \\cdot \\log(2) = x \\cdot \\log(3) \\quad \\text{(log(a^A) = A · log(a))} \\iff x \\cdot \\log(2) + \\log(2) = x \\cdot \\log(3) \\iff \\log(2) = x(\\log(3) - \\log(2)) \\iff x = \\frac{\\log(2)}{\\log(3) - \\log(2)} \\quad \\text{(car } \\log(3) - \\log(2) \\neq 0\\text{)} = \\frac{\\log(2)}{\\log\\left(\\frac{3}{2}\\right)} \\quad \\text{(log a − log b = log(a/b))}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(2)}{\\log\\left(\\frac{3}{2}\\right)}\\right\\} \\text{, soit } x \\approx 1{,}710",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2 \\cdot 2^{x} = 3^{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "2*3^(x-1)=18": {
+  "cartes": [
+   {
+    "badge": "Isoler l'exponentielle",
+    "blocs": [
+     {
+      "html": "\\(2 \\cdot 3^{x - 1} = 18 \\iff 3^{x - 1} = 9 \\quad \\text{(on isole le terme exponentiel)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(9 = 3^{2}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(3^{x - 1} = 3^{2} \\iff x - 1 = 2 \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff x = 3\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{3\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2 \\cdot 3^{x - 1} = 18",
+  "erreur": null,
+  "ok": true
+ },
+ "2*3^x=-6": {
+  "cartes": [
+   {
+    "badge": "Isoler l'exponentielle",
+    "blocs": [
+     {
+      "html": "\\(2 \\cdot 3^{x} = -6 \\iff 3^{x} = -3 \\quad \\text{(on isole le terme exponentiel)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Aucune solution",
+    "blocs": [
+     {
+      "html": "\\(3^{x} &gt; 0 \\quad \\text{(une exponentielle est strictement positive)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(-3 &lt; 0 \\quad \\text{(aucune solution)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\varnothing",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2 \\cdot 3^{x} = -6",
+  "erreur": null,
+  "ok": true
+ },
+ "2*e^x=3^x": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(2e^{x} = 3^{x} \\iff \\ln(2e^{x}) = \\ln(3^{x}) \\quad \\text{(ln des deux membres)} \\iff \\ln(2) + \\ln(e^{x}) = \\ln(3^{x}) \\quad \\text{(log(ab) = log a + log b)} \\iff \\ln(2) + x = x \\cdot \\ln(3) \\quad \\text{(ln(e^A) = A)} \\iff x + \\ln(2) = x \\cdot \\ln(3) \\iff \\ln(2) = x \\cdot \\ln(3) - x \\iff \\ln(2) = x(\\ln(3) - 1) \\iff x = \\frac{\\ln(2)}{\\ln(3) - 1} \\quad \\text{(car } \\ln(3) - 1 \\neq 0\\text{)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\ln(2)}{\\ln(3) - 1}\\right\\} \\text{, soit } x \\approx 7{,}029",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2e^{x} = 3^{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "2+3": {
+  "erreur": "Écrivez une équation (avec =) ou un logarithme à calculer, par exemple log_2(50).",
+  "ok": false
+ },
+ "2000*1,045^n=3805": {
+  "cartes": [
+   {
+    "badge": "Isoler l'exponentielle",
+    "blocs": [
+     {
+      "html": "\\(2\\text{’}000 \\cdot 1{,}045^{n} = 3\\text{’}805 \\iff 1{,}045^{n} = 1{,}9025 \\quad \\text{(on isole le terme exponentiel)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "\\(1{,}045^{n} = 1{,}9025 \\iff \\log(1{,}045^{n}) = \\log(1{,}9025) \\quad \\text{(log des deux membres)} \\iff n \\cdot \\log(1{,}045) = \\log(1{,}9025) \\quad \\text{(log(a^A) = A · log(a))} \\iff n = \\frac{\\log(1{,}9025)}{\\log(1{,}045)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(1{,}9025)}{\\log(1{,}045)}\\right\\} \\text{, soit } n \\approx 14{,}612",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2\\text{’}000 \\cdot 1{,}045^{n} = 3\\text{’}805",
+  "erreur": null,
+  "ok": true
+ },
+ "20=2*3^x+2": {
+  "cartes": [
+   {
+    "badge": "Isoler l'exponentielle",
+    "blocs": [
+     {
+      "html": "\\(20 = 2 \\cdot 3^{x} + 2 \\iff 18 = 2 \\cdot 3^{x} \\quad \\text{(on isole le terme exponentiel)} \\iff 9 = 3^{x} \\quad \\text{(on isole le terme exponentiel)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(9 = 3^{2}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(3^{2} = 3^{x} \\iff 2 = x \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff x = 2\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{2\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "20 = 2 \\cdot 3^{x} + 2",
+  "erreur": null,
+  "ok": true
+ },
+ "2^(-x)=3": {
+  "cartes": [
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "\\(2^{-x} = 3 \\iff \\log(2^{-x}) = \\log(3) \\quad \\text{(log des deux membres)} \\iff (-x) \\cdot \\log(2) = \\log(3) \\quad \\text{(log(a^A) = A · log(a))} \\iff -x = \\frac{\\log(3)}{\\log(2)} \\iff x = -\\frac{\\log(3)}{\\log(2)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-\\frac{\\log(3)}{\\log(2)}\\right\\} \\text{, soit } x \\approx -1{,}585",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{-x} = 3",
+  "erreur": null,
+  "ok": true
+ },
+ "2^(-x)=3^(1-x)": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(2^{-x} = 3^{1 - x} \\iff \\log(2^{-x}) = \\log(3^{1 - x}) \\quad \\text{(log des deux membres)} \\iff (-x) \\cdot \\log(2) = (1 - x) \\cdot \\log(3) \\quad \\text{(log(a^A) = A · log(a))} \\iff -x \\cdot \\log(2) = -x \\cdot \\log(3) + \\log(3) \\iff x(\\log(3) - \\log(2)) = \\log(3) \\iff x = \\frac{\\log(3)}{\\log(3) - \\log(2)} \\quad \\text{(car } \\log(3) - \\log(2) \\neq 0\\text{)} = \\frac{\\log(3)}{\\log\\left(\\frac{3}{2}\\right)} \\quad \\text{(log a − log b = log(a/b))}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(3)}{\\log\\left(\\frac{3}{2}\\right)}\\right\\} \\text{, soit } x \\approx 2{,}710",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{-x} = 3^{1 - x}",
+  "erreur": null,
+  "ok": true
+ },
+ "2^(-x)=3^x": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(2^{-x} = 3^{x} \\iff \\log(2^{-x}) = \\log(3^{x}) \\quad \\text{(log des deux membres)} \\iff (-x) \\cdot \\log(2) = x \\cdot \\log(3) \\quad \\text{(log(a^A) = A · log(a))} \\iff -x \\cdot \\log(2) = x \\cdot \\log(3) \\iff x(-\\log(2) - \\log(3)) = 0 \\iff x = 0 \\quad \\text{(car } -\\log(2) - \\log(3) \\neq 0\\text{)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{0\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{-x} = 3^{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "2^(-x)=8": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(8 = 2^{3}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2^{-x} = 2^{3} \\iff -x = 3 \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff x = -3\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-3\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{-x} = 8",
+  "erreur": null,
+  "ok": true
+ },
+ "2^(1-x)=3^(x+1)": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(2^{1 - x} = 3^{x + 1} \\iff \\log(2^{1 - x}) = \\log(3^{x + 1}) \\quad \\text{(log des deux membres)} \\iff (1 - x) \\cdot \\log(2) = (x + 1) \\cdot \\log(3) \\quad \\text{(log(a^A) = A · log(a))} \\iff -x \\cdot \\log(2) + \\log(2) = x \\cdot \\log(3) + \\log(3) \\iff x(-\\log(2) - \\log(3)) = \\log(3) - \\log(2) \\iff x = \\frac{\\log(3) - \\log(2)}{-\\log(2) - \\log(3)} \\quad \\text{(car } -\\log(2) - \\log(3) \\neq 0\\text{)} = \\frac{\\log\\left(\\frac{3}{2}\\right)}{\\log\\left(\\frac{1}{6}\\right)} \\quad \\text{(propriétés des logarithmes)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log(3) - \\log(2) = \\log\\left(\\frac{3}{2}\\right) \\quad \\text{(propriétés des logarithmes)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(-\\log(2) - \\log(3) = \\log\\left(\\frac{1}{2 \\cdot 3}\\right) \\quad \\text{(propriétés des logarithmes)} = \\log\\left(\\frac{1}{6}\\right)\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log\\left(\\frac{3}{2}\\right)}{\\log\\left(\\frac{1}{6}\\right)}\\right\\} \\text{, soit } x \\approx -0{,}226",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{1 - x} = 3^{x + 1}",
+  "erreur": null,
+  "ok": true
+ },
+ "2^(1/x)=4": {
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
+  "ok": false
+ },
+ "2^(sqrt(x))=4": {
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
+  "ok": false
+ },
+ "2^(x+1)=2*2^x": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(2 \\cdot 2^{x} = 2^{1} \\cdot 2^{x} = 2^{x + 1} \\quad \\text{(aᵐ · aⁿ = aᵐ⁺ⁿ)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2^{x + 1} = 2^{x + 1} \\iff x + 1 = x + 1 \\quad \\text{(même base : a^A = a^B ⇔ A = B)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Cette égalité est vraie pour tout nombre réel.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\mathbb{R}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{x + 1} = 2 \\cdot 2^{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "2^(x+1)=2^(x+3)": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(2^{x + 1} = 2^{x + 3} \\iff x + 1 = x + 3 \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff 1 = 3\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Cette égalité est fausse : l'équation n'a aucune solution.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\varnothing",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{x + 1} = 2^{x + 3}",
+  "erreur": null,
+  "ok": true
+ },
+ "2^(x+4)=3^(x-1)": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(2^{x + 4} = 3^{x - 1} \\iff \\log(2^{x + 4}) = \\log(3^{x - 1}) \\quad \\text{(log des deux membres)} \\iff (x + 4) \\cdot \\log(2) = (x - 1) \\cdot \\log(3) \\quad \\text{(log(a^A) = A · log(a))} \\iff x \\cdot \\log(2) + 4\\log(2) = x \\cdot \\log(3) - \\log(3) \\iff \\log(3) + 4\\log(2) = x(\\log(3) - \\log(2)) \\iff x = \\frac{\\log(3) + 4\\log(2)}{\\log(3) - \\log(2)} \\quad \\text{(car } \\log(3) - \\log(2) \\neq 0\\text{)} = \\frac{\\log(48)}{\\log\\left(\\frac{3}{2}\\right)} \\quad \\text{(propriétés des logarithmes)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log(3) + 4\\log(2) = \\log(3 \\cdot 2^{4}) \\quad \\text{(propriétés des logarithmes)} = \\log(48)\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log(3) - \\log(2) = \\log\\left(\\frac{3}{2}\\right) \\quad \\text{(propriétés des logarithmes)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(48)}{\\log\\left(\\frac{3}{2}\\right)}\\right\\} \\text{, soit } x \\approx 9{,}548",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{x + 4} = 3^{x - 1}",
+  "erreur": null,
+  "ok": true
+ },
+ "2^(x+7)=4^(5x+2)": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(4^{5x + 2} = (2^{2})^{5x + 2} = 2^{2(5x + 2)} \\quad \\text{((aᵐ)ⁿ = aᵐⁿ)} = 2^{10x + 4}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2^{x + 7} = 2^{10x + 4} \\iff x + 7 = 10x + 4 \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff -9x = -3 \\iff x = \\frac{1}{3}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{1}{3}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{x + 7} = 4^{5x + 2}",
+  "erreur": null,
+  "ok": true
+ },
+ "2^(x-1)=3^x": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(2^{x - 1} = 3^{x} \\iff \\log(2^{x - 1}) = \\log(3^{x}) \\quad \\text{(log des deux membres)} \\iff (x - 1) \\cdot \\log(2) = x \\cdot \\log(3) \\quad \\text{(log(a^A) = A · log(a))} \\iff x \\cdot \\log(2) - \\log(2) = x \\cdot \\log(3) \\iff x(\\log(2) - \\log(3)) = \\log(2) \\iff x = \\frac{\\log(2)}{\\log(2) - \\log(3)} \\quad \\text{(car } \\log(2) - \\log(3) \\neq 0\\text{)} = \\frac{\\log(2)}{\\log\\left(\\frac{2}{3}\\right)} \\quad \\text{(log a − log b = log(a/b))}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(2)}{\\log\\left(\\frac{2}{3}\\right)}\\right\\} \\text{, soit } x \\approx -1{,}710",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{x - 1} = 3^{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "2^(x-1)=5^(x+1)": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(2^{x - 1} = 5^{x + 1} \\iff \\log(2^{x - 1}) = \\log(5^{x + 1}) \\quad \\text{(log des deux membres)} \\iff (x - 1) \\cdot \\log(2) = (x + 1) \\cdot \\log(5) \\quad \\text{(log(a^A) = A · log(a))} \\iff x \\cdot \\log(2) - \\log(2) = x \\cdot \\log(5) + \\log(5) \\iff x(\\log(2) - \\log(5)) = \\log(2) + \\log(5) \\iff x = \\frac{\\log(2) + \\log(5)}{\\log(2) - \\log(5)} \\quad \\text{(car } \\log(2) - \\log(5) \\neq 0\\text{)} = \\frac{1}{\\log\\left(\\frac{2}{5}\\right)} \\quad \\text{(propriétés des logarithmes)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log(2) + \\log(5) = \\log(2 \\cdot 5) \\quad \\text{(propriétés des logarithmes)} = 1 \\quad \\text{(log(10ᵏ) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log(2) - \\log(5) = \\log\\left(\\frac{2}{5}\\right) \\quad \\text{(propriétés des logarithmes)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{1}{\\log\\left(\\frac{2}{5}\\right)}\\right\\} \\text{, soit } x \\approx -2{,}513",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{x - 1} = 5^{x + 1}",
+  "erreur": null,
+  "ok": true
+ },
+ "2^(x/2)=3^(x-1)": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(2^{\\frac{x}{2}} = 3^{x - 1} \\iff \\log\\left(2^{\\frac{x}{2}}\\right) = \\log(3^{x - 1}) \\quad \\text{(log des deux membres)} \\iff \\frac{x}{2} \\cdot \\log(2) = (x - 1) \\cdot \\log(3) \\quad \\text{(log(a^A) = A · log(a))} \\iff \\frac{1}{2}x \\cdot \\log(2) = x \\cdot \\log(3) - \\log(3) \\iff \\log(3) = x\\left(\\log(3) - \\frac{1}{2}\\log(2)\\right) \\iff x = \\frac{\\log(3)}{\\log(3) - \\frac{1}{2}\\log(2)} \\quad \\text{(car } \\log(3) - \\frac{1}{2}\\log(2) \\neq 0\\text{)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(3)}{\\log(3) - \\frac{1}{2}\\log(2)}\\right\\} \\text{, soit } x \\approx 1{,}461",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{\\frac{x}{2}} = 3^{x - 1}",
+  "erreur": null,
+  "ok": true
+ },
+ "2^(x/2)=5": {
+  "cartes": [
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "\\(2^{\\frac{x}{2}} = 5 \\iff \\log\\left(2^{\\frac{x}{2}}\\right) = \\log(5) \\quad \\text{(log des deux membres)} \\iff \\frac{x}{2} \\cdot \\log(2) = \\log(5) \\quad \\text{(log(a^A) = A · log(a))} \\iff \\frac{x}{2} = \\frac{\\log(5)}{\\log(2)} \\iff x = \\frac{\\frac{\\log(5)}{\\log(2)}}{\\frac{1}{2}}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\frac{\\log(5)}{\\log(2)}}{\\frac{1}{2}}\\right\\} \\text{, soit } x \\approx 4{,}644",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{\\frac{x}{2}} = 5",
+  "erreur": null,
+  "ok": true
+ },
+ "2^(x/2)=8": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(8 = 2^{3}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2^{\\frac{x}{2}} = 2^{3} \\iff \\frac{x}{2} = 3 \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff \\frac{1}{2}x = 3 \\iff x = 6\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{6\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{\\frac{x}{2}} = 8",
+  "erreur": null,
+  "ok": true
+ },
+ "2^(x^2)*3^x=6": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "2^(x^2)*4^x=8": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(2^{x^{2}} \\cdot 4^{x} = 2^{x^{2}} \\cdot (2^{2})^{x} = 2^{x^{2}} \\cdot 2^{2x} \\quad \\text{((aᵐ)ⁿ = aᵐⁿ)} = 2^{x^{2} + 2x} \\quad \\text{(aᵐ · aⁿ = aᵐ⁺ⁿ)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(8 = 2^{3}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2^{x^{2} + 2x} = 2^{3} \\iff x^{2} + 2x = 3 \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff x^{2} + 2x - 3 = 0 \\iff (x + 3)(x - 1) = 0 \\iff x = -3 \\text{ ou } x = 1 \\quad \\text{(un produit est nul si l'un des facteurs est nul)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-3 \\,;\\, 1\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{x^{2}} \\cdot 4^{x} = 8",
+  "erreur": null,
+  "ok": true
+ },
+ "2^(x^2)=2^(x-5)": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(2^{x^{2}} = 2^{x - 5} \\iff x^{2} = x - 5 \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff x^{2} - x + 5 = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(Δ = (-1)^{2} - 4 \\cdot 1 \\cdot 5 = -19\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Δ &lt; 0 : l'équation n'a aucune solution réelle.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\varnothing",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{x^{2}} = 2^{x - 5}",
+  "erreur": null,
+  "ok": true
+ },
+ "2^(x^2)=3^x": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "2^(x^2)=5": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "2^(x^2)=8^x": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(8^{x} = (2^{3})^{x} = 2^{3x} \\quad \\text{((aᵐ)ⁿ = aᵐⁿ)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2^{x^{2}} = 2^{3x} \\iff x^{2} = 3x \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff x^{2} - 3x = 0 \\iff x(x - 3) = 0 \\iff x = 0 \\text{ ou } x = 3 \\quad \\text{(un produit est nul si l'un des facteurs est nul)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{0 \\,;\\, 3\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{x^{2}} = 8^{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "2^(x^3)=3^x": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "2^(x^3)=8": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "2^x+1=3^x": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "2^x+2^(x+1)=12": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "2^x+3^x=5": {
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
+  "ok": false
+ },
+ "2^x/4=2": {
+  "cartes": [
+   {
+    "badge": "Isoler l'exponentielle",
+    "blocs": [
+     {
+      "html": "\\(\\frac{2^{x}}{4} = 2 \\iff 2^{x} = 8 \\quad \\text{(on isole le terme exponentiel)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(8 = 2^{3}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2^{x} = 2^{3} \\iff x = 3 \\quad \\text{(même base : a^A = a^B ⇔ A = B)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{3\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\frac{2^{x}}{4} = 2",
+  "erreur": null,
+  "ok": true
+ },
+ "2^x=-4": {
+  "cartes": [
+   {
+    "badge": "Aucune solution",
+    "blocs": [
+     {
+      "html": "\\(2^{x} &gt; 0 \\quad \\text{(une exponentielle est strictement positive)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(-4 &lt; 0 \\quad \\text{(aucune solution)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\varnothing",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{x} = -4",
+  "erreur": null,
+  "ok": true
+ },
+ "2^x=0": {
+  "cartes": [
+   {
+    "badge": "Aucune solution",
+    "blocs": [
+     {
+      "html": "\\(2^{x} &gt; 0 \\quad \\text{(une exponentielle est strictement positive)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2^{x} = 0 \\quad \\text{(aucune solution)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\varnothing",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{x} = 0",
+  "erreur": null,
+  "ok": true
+ },
+ "2^x=100": {
+  "cartes": [
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "\\(2^{x} = 100 \\iff \\log(2^{x}) = \\log(100) \\quad \\text{(log des deux membres)} \\iff x \\cdot \\log(2) = \\log(100) \\quad \\text{(log(a^A) = A · log(a))} \\iff x \\cdot \\log(2) = 2 \\quad \\text{(log(10ᵏ) = k)} \\iff x = \\frac{2}{\\log(2)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{2}{\\log(2)}\\right\\} \\text{, soit } x \\approx 6{,}644",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{x} = 100",
+  "erreur": null,
+  "ok": true
+ },
+ "2^x=2*4^(x-1)": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(2 \\cdot 4^{x - 1} = 2^{1} \\cdot (2^{2})^{x - 1} = 2^{1} \\cdot 2^{2(x - 1)} \\quad \\text{((aᵐ)ⁿ = aᵐⁿ)} = 2^{1} \\cdot 2^{2x - 2} = 2^{2x - 1} \\quad \\text{(aᵐ · aⁿ = aᵐ⁺ⁿ)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2^{x} = 2^{2x - 1} \\iff x = 2x - 1 \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff -x = -1 \\iff x = 1\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{1\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{x} = 2 \\cdot 4^{x - 1}",
+  "erreur": null,
+  "ok": true
+ },
+ "2^x=3^(x+1)": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(2^{x} = 3^{x + 1} \\iff \\log(2^{x}) = \\log(3^{x + 1}) \\quad \\text{(log des deux membres)} \\iff x \\cdot \\log(2) = (x + 1) \\cdot \\log(3) \\quad \\text{(log(a^A) = A · log(a))} \\iff x \\cdot \\log(2) = x \\cdot \\log(3) + \\log(3) \\iff x(\\log(2) - \\log(3)) = \\log(3) \\iff x = \\frac{\\log(3)}{\\log(2) - \\log(3)} \\quad \\text{(car } \\log(2) - \\log(3) \\neq 0\\text{)} = \\frac{\\log(3)}{\\log\\left(\\frac{2}{3}\\right)} \\quad \\text{(log a − log b = log(a/b))}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(3)}{\\log\\left(\\frac{2}{3}\\right)}\\right\\} \\text{, soit } x \\approx -2{,}710",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{x} = 3^{x + 1}",
+  "erreur": null,
+  "ok": true
+ },
+ "2^x=3^x+x": {
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
+  "ok": false
+ },
+ "2^x=x+1": {
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
+  "ok": false
+ },
+ "2^x>=3": {
+  "erreur": "Les inéquations ne sont pas traitées par cet outil : écrivez une équation avec =.",
+  "ok": false
+ },
+ "2e=5": {
+  "erreur": "La lettre e désigne le nombre e ≈ 2,718 : choisissez une autre lettre pour l'inconnue.",
+  "ok": false
+ },
+ "2log(5)": {
+  "erreur": "Cet outil ne traite pas encore ce type de calcul.",
+  "ok": false
+ },
+ "2log(x)-5=0": {
+  "cartes": [
+   {
+    "badge": "Isoler le logarithme",
+    "blocs": [
+     {
+      "html": "\\(2\\log(x) - 5 = 0 \\iff 2\\log(x) = 5 \\quad \\text{(on isole le logarithme)} \\iff \\log(x) = \\frac{5}{2} \\quad \\text{(on isole le logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log(x) = \\frac{5}{2} \\iff x = 10^{\\frac{5}{2}} = 100\\sqrt{10} \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{100\\sqrt{10}\\right\\} \\text{, soit } x \\approx 316{,}228",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2\\log(x) - 5 = 0",
+  "erreur": null,
+  "ok": true
+ },
+ "2log_3(x)=10": {
+  "cartes": [
+   {
+    "badge": "Isoler le logarithme",
+    "blocs": [
+     {
+      "html": "\\(2\\log_{3}(x) = 10 \\iff \\log_{3}(x) = 5 \\quad \\text{(on isole le logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log_{3}(x) = 5 \\iff x = 3^{5} = 243 \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{243\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2\\log_{3}(x) = 10",
+  "erreur": null,
+  "ok": true
+ },
+ "2x+1=9": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "2x=ln(0,1)": {
+  "cartes": [
+   {
+    "badge": "Équation du premier degré",
+    "blocs": [
+     {
+      "html": "\\(2x = \\ln(0{,}1) \\iff x = \\frac{\\ln(0{,}1)}{2}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\ln(0{,}1)}{2}\\right\\} \\text{, soit } x \\approx -1{,}151",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2x = \\ln(0{,}1)",
+  "erreur": null,
+  "ok": true
+ },
+ "3(2^x+1)=9": {
+  "cartes": [
+   {
+    "badge": "Isoler l'exponentielle",
+    "blocs": [
+     {
+      "html": "\\(3(2^{x} + 1) = 9 \\iff 2^{x} + 1 = 3 \\quad \\text{(on isole le terme exponentiel)} \\iff 2^{x} = 2 \\quad \\text{(on isole le terme exponentiel)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(2 = 2^{1}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2^{x} = 2^{1} \\iff x = 1 \\quad \\text{(même base : a^A = a^B ⇔ A = B)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{1\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3(2^{x} + 1) = 9",
+  "erreur": null,
+  "ok": true
+ },
+ "3*2^(x^2+1)=96": {
+  "cartes": [
+   {
+    "badge": "Isoler l'exponentielle",
+    "blocs": [
+     {
+      "html": "\\(3 \\cdot 2^{x^{2} + 1} = 96 \\iff 2^{x^{2} + 1} = 32 \\quad \\text{(on isole le terme exponentiel)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(32 = 2^{5}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2^{x^{2} + 1} = 2^{5} \\iff x^{2} + 1 = 5 \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff x^{2} - 4 = 0 \\iff (x + 2)(x - 2) = 0 \\iff x = -2 \\text{ ou } x = 2 \\quad \\text{(un produit est nul si l'un des facteurs est nul)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-2 \\,;\\, 2\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3 \\cdot 2^{x^{2} + 1} = 96",
+  "erreur": null,
+  "ok": true
+ },
+ "3*2^x=5": {
+  "cartes": [
+   {
+    "badge": "Isoler l'exponentielle",
+    "blocs": [
+     {
+      "html": "\\(3 \\cdot 2^{x} = 5 \\iff 2^{x} = \\frac{5}{3} \\quad \\text{(on isole le terme exponentiel)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "\\(2^{x} = \\frac{5}{3} \\iff \\log(2^{x}) = \\log\\left(\\frac{5}{3}\\right) \\quad \\text{(log des deux membres)} \\iff x \\cdot \\log(2) = \\log\\left(\\frac{5}{3}\\right) \\quad \\text{(log(a^A) = A · log(a))} \\iff x = \\frac{\\log\\left(\\frac{5}{3}\\right)}{\\log(2)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log\\left(\\frac{5}{3}\\right)}{\\log(2)}\\right\\} \\text{, soit } x \\approx 0{,}737",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3 \\cdot 2^{x} = 5",
+  "erreur": null,
+  "ok": true
+ },
+ "3*2^x=5*3^(x-1)": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(3 \\cdot 2^{x} = 5 \\cdot 3^{x - 1} \\iff \\log(3 \\cdot 2^{x}) = \\log(5 \\cdot 3^{x - 1}) \\quad \\text{(log des deux membres)} \\iff \\log(3) + \\log(2^{x}) = \\log(5) + \\log(3^{x - 1}) \\quad \\text{(log(ab) = log a + log b)} \\iff \\log(3) + x \\cdot \\log(2) = \\log(5) + (x - 1) \\cdot \\log(3) \\quad \\text{(log(a^A) = A · log(a))} \\iff x \\cdot \\log(2) + \\log(3) = x \\cdot \\log(3) - \\log(3) + \\log(5) \\iff 2\\log(3) - \\log(5) = x(\\log(3) - \\log(2)) \\iff x = \\frac{2\\log(3) - \\log(5)}{\\log(3) - \\log(2)} \\quad \\text{(car } \\log(3) - \\log(2) \\neq 0\\text{)} = \\frac{\\log\\left(\\frac{9}{5}\\right)}{\\log\\left(\\frac{3}{2}\\right)} \\quad \\text{(propriétés des logarithmes)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2\\log(3) - \\log(5) = \\log\\left(\\frac{3^{2}}{5}\\right) \\quad \\text{(propriétés des logarithmes)} = \\log\\left(\\frac{9}{5}\\right)\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log(3) - \\log(2) = \\log\\left(\\frac{3}{2}\\right) \\quad \\text{(propriétés des logarithmes)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log\\left(\\frac{9}{5}\\right)}{\\log\\left(\\frac{3}{2}\\right)}\\right\\} \\text{, soit } x \\approx 1{,}450",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3 \\cdot 2^{x} = 5 \\cdot 3^{x - 1}",
+  "erreur": null,
+  "ok": true
+ },
+ "37*e^(-0,02t)=25": {
+  "cartes": [
+   {
+    "badge": "Isoler l'exponentielle",
+    "blocs": [
+     {
+      "html": "\\(37e^{-0{,}02t} = 25 \\iff e^{-0{,}02t} = \\frac{25}{37} \\quad \\text{(on isole le terme exponentiel)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(e^{-0{,}02t} = \\frac{25}{37} \\iff -0{,}02t = \\ln\\left(\\frac{25}{37}\\right) \\quad \\text{(définition du logarithme)} \\iff t = \\frac{\\ln\\left(\\frac{25}{37}\\right)}{-0{,}02}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\ln\\left(\\frac{25}{37}\\right)}{-0{,}02}\\right\\} \\text{, soit } t \\approx 19{,}602",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "37e^{-0{,}02t} = 25",
+  "erreur": null,
+  "ok": true
+ },
+ "3=log(x)": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(3 = \\log(x) \\iff \\log(x) = 3 \\iff x = 10^{3} = 1\\text{’}000 \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{1\\text{’}000\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3 = \\log(x)",
+  "erreur": null,
+  "ok": true
+ },
+ "3^(2x)=2^(3x+1)": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(3^{2x} = 2^{3x + 1} \\iff \\log(3^{2x}) = \\log(2^{3x + 1}) \\quad \\text{(log des deux membres)} \\iff 2x \\cdot \\log(3) = (3x + 1) \\cdot \\log(2) \\quad \\text{(log(a^A) = A · log(a))} \\iff 2x \\cdot \\log(3) = 3x \\cdot \\log(2) + \\log(2) \\iff x(2\\log(3) - 3\\log(2)) = \\log(2) \\iff x = \\frac{\\log(2)}{2\\log(3) - 3\\log(2)} \\quad \\text{(car } 2\\log(3) - 3\\log(2) \\neq 0\\text{)} = \\frac{\\log(2)}{\\log\\left(\\frac{9}{8}\\right)} \\quad \\text{(propriétés des logarithmes)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2\\log(3) - 3\\log(2) = \\log\\left(\\frac{3^{2}}{2^{3}}\\right) \\quad \\text{(propriétés des logarithmes)} = \\log\\left(\\frac{9}{8}\\right)\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(2)}{\\log\\left(\\frac{9}{8}\\right)}\\right\\} \\text{, soit } x \\approx 5{,}885",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3^{2x} = 2^{3x + 1}",
+  "erreur": null,
+  "ok": true
+ },
+ "3^(x+1)-27=0": {
+  "cartes": [
+   {
+    "badge": "Isoler l'exponentielle",
+    "blocs": [
+     {
+      "html": "\\(3^{x + 1} - 27 = 0 \\iff 3^{x + 1} = 27 \\quad \\text{(on isole le terme exponentiel)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(27 = 3^{3}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(3^{x + 1} = 3^{3} \\iff x + 1 = 3 \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff x = 2\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{2\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3^{x + 1} - 27 = 0",
+  "erreur": null,
+  "ok": true
+ },
+ "3^(x+1)=2^x": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(3^{x + 1} = 2^{x} \\iff \\log(3^{x + 1}) = \\log(2^{x}) \\quad \\text{(log des deux membres)} \\iff (x + 1) \\cdot \\log(3) = x \\cdot \\log(2) \\quad \\text{(log(a^A) = A · log(a))} \\iff x \\cdot \\log(3) + \\log(3) = x \\cdot \\log(2) \\iff \\log(3) = x(\\log(2) - \\log(3)) \\iff x = \\frac{\\log(3)}{\\log(2) - \\log(3)} \\quad \\text{(car } \\log(2) - \\log(3) \\neq 0\\text{)} = \\frac{\\log(3)}{\\log\\left(\\frac{2}{3}\\right)} \\quad \\text{(log a − log b = log(a/b))}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(3)}{\\log\\left(\\frac{2}{3}\\right)}\\right\\} \\text{, soit } x \\approx -2{,}710",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3^{x + 1} = 2^{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "3^(x+1)=e^x": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(3^{x + 1} = e^{x} \\iff \\ln(3^{x + 1}) = \\ln(e^{x}) \\quad \\text{(ln des deux membres)} \\iff (x + 1) \\cdot \\ln(3) = x \\quad \\text{(ln(e^A) = A)} \\iff x \\cdot \\ln(3) + \\ln(3) = x \\iff \\ln(3) = x - x \\cdot \\ln(3) \\iff \\ln(3) = x(1 - \\ln(3)) \\iff x = \\frac{\\ln(3)}{1 - \\ln(3)} \\quad \\text{(car } 1 - \\ln(3) \\neq 0\\text{)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\ln(3)}{1 - \\ln(3)}\\right\\} \\text{, soit } x \\approx -11{,}141",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3^{x + 1} = e^{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "3^(x-1)=10": {
+  "cartes": [
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "\\(3^{x - 1} = 10 \\iff \\log(3^{x - 1}) = \\log(10) \\quad \\text{(log des deux membres)} \\iff (x - 1) \\cdot \\log(3) = \\log(10) \\quad \\text{(log(a^A) = A · log(a))} \\iff (x - 1) \\cdot \\log(3) = 1 \\quad \\text{(log(10ᵏ) = k)} \\iff x - 1 = \\frac{1}{\\log(3)} \\iff x = 1 + \\frac{1}{\\log(3)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{1 + \\frac{1}{\\log(3)}\\right\\} \\text{, soit } x \\approx 3{,}096",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3^{x - 1} = 10",
+  "erreur": null,
+  "ok": true
+ },
+ "3^(x^2+1)=7": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "3^x*2=5*2^x": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(3^{x} \\cdot 2 = 5 \\cdot 2^{x} \\iff \\log(3^{x} \\cdot 2) = \\log(5 \\cdot 2^{x}) \\quad \\text{(log des deux membres)} \\iff \\log(2) + \\log(3^{x}) = \\log(5) + \\log(2^{x}) \\quad \\text{(log(ab) = log a + log b)} \\iff \\log(2) + x \\cdot \\log(3) = \\log(5) + x \\cdot \\log(2) \\quad \\text{(log(a^A) = A · log(a))} \\iff x \\cdot \\log(3) + \\log(2) = x \\cdot \\log(2) + \\log(5) \\iff x(\\log(3) - \\log(2)) = \\log(5) - \\log(2) \\iff x = \\frac{\\log(5) - \\log(2)}{\\log(3) - \\log(2)} \\quad \\text{(car } \\log(3) - \\log(2) \\neq 0\\text{)} = \\frac{\\log\\left(\\frac{5}{2}\\right)}{\\log\\left(\\frac{3}{2}\\right)} \\quad \\text{(log a − log b = log(a/b))}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log\\left(\\frac{5}{2}\\right)}{\\log\\left(\\frac{3}{2}\\right)}\\right\\} \\text{, soit } x \\approx 2{,}260",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3^{x} \\cdot 2 = 5 \\cdot 2^{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "3^x=": {
+  "erreur": "Il manque un membre de l'équation (avant ou après le signe =).",
+  "ok": false
+ },
+ "3^x=2": {
+  "cartes": [
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "\\(3^{x} = 2 \\iff \\log(3^{x}) = \\log(2) \\quad \\text{(log des deux membres)} \\iff x \\cdot \\log(3) = \\log(2) \\quad \\text{(log(a^A) = A · log(a))} \\iff x = \\frac{\\log(2)}{\\log(3)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(2)}{\\log(3)}\\right\\} \\text{, soit } x \\approx 0{,}631",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3^{x} = 2",
+  "erreur": null,
+  "ok": true
+ },
+ "3^x=20": {
+  "cartes": [
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "\\(3^{x} = 20 \\iff \\log(3^{x}) = \\log(20) \\quad \\text{(log des deux membres)} \\iff x \\cdot \\log(3) = \\log(20) \\quad \\text{(log(a^A) = A · log(a))} \\iff x = \\frac{\\log(20)}{\\log(3)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(20)}{\\log(3)}\\right\\} \\text{, soit } x \\approx 2{,}727",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3^{x} = 20",
+  "erreur": null,
+  "ok": true
+ },
+ "3^x=27": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(27 = 3^{3}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(3^{x} = 3^{3} \\iff x = 3 \\quad \\text{(même base : a^A = a^B ⇔ A = B)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{3\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3^{x} = 27",
+  "erreur": null,
+  "ok": true
+ },
+ "3^x=2=1": {
+  "erreur": "Un seul signe = dans une équation.",
+  "ok": false
+ },
+ "3^x=2^x": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(3^{x} = 2^{x} \\iff \\log(3^{x}) = \\log(2^{x}) \\quad \\text{(log des deux membres)} \\iff x \\cdot \\log(3) = x \\cdot \\log(2) \\quad \\text{(log(a^A) = A · log(a))} \\iff x(\\log(3) - \\log(2)) = 0 \\iff x = 0 \\quad \\text{(car } \\log(3) - \\log(2) \\neq 0\\text{)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{0\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3^{x} = 2^{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "3^x=9^(2x+3)": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(9^{2x + 3} = (3^{2})^{2x + 3} = 3^{2(2x + 3)} \\quad \\text{((aᵐ)ⁿ = aᵐⁿ)} = 3^{4x + 6}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(3^{x} = 3^{4x + 6} \\iff x = 4x + 6 \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff -3x = 6 \\iff x = -2\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-2\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3^{x} = 9^{2x + 3}",
+  "erreur": null,
+  "ok": true
+ },
+ "3e^x=0,65": {
+  "cartes": [
+   {
+    "badge": "Isoler l'exponentielle",
+    "blocs": [
+     {
+      "html": "\\(3e^{x} = 0{,}65 \\iff e^{x} = \\frac{13}{60} \\quad \\text{(on isole le terme exponentiel)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(e^{x} = \\frac{13}{60} \\iff x = \\ln\\left(\\frac{13}{60}\\right) \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\ln\\left(\\frac{13}{60}\\right)\\right\\} \\text{, soit } x \\approx -1{,}529",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3e^{x} = 0{,}65",
+  "erreur": null,
+  "ok": true
+ },
+ "4^(-x)=2^6": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(4^{-x} = (2^{2})^{-x} = 2^{-2x} \\quad \\text{((aᵐ)ⁿ = aᵐⁿ)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2^{-2x} = 2^{6} \\iff -2x = 6 \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff x = -3\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-3\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "4^{-x} = 2^{6}",
+  "erreur": null,
+  "ok": true
+ },
+ "4^(2x+1)=60": {
+  "cartes": [
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "\\(4^{2x + 1} = 60 \\iff \\log(4^{2x + 1}) = \\log(60) \\quad \\text{(log des deux membres)} \\iff (2x + 1) \\cdot \\log(4) = \\log(60) \\quad \\text{(log(a^A) = A · log(a))} \\iff 2x + 1 = \\frac{\\log(60)}{\\log(4)} \\iff 2x = \\frac{\\log(60)}{\\log(4)} - 1 \\iff x = \\frac{\\frac{\\log(60)}{\\log(4)} - 1}{2}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\frac{\\log(60)}{\\log(4)} - 1}{2}\\right\\} \\text{, soit } x \\approx 0{,}977",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "4^{2x + 1} = 60",
+  "erreur": null,
+  "ok": true
+ },
+ "4^(3x+1)=8": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(4^{3x + 1} = (2^{2})^{3x + 1} = 2^{2(3x + 1)} \\quad \\text{((aᵐ)ⁿ = aᵐⁿ)} = 2^{6x + 2}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(8 = 2^{3}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2^{6x + 2} = 2^{3} \\iff 6x + 2 = 3 \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff 6x = 1 \\iff x = \\frac{1}{6}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{1}{6}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "4^{3x + 1} = 8",
+  "erreur": null,
+  "ok": true
+ },
+ "4^(x+1)=6^(3x)": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(4^{x + 1} = 6^{3x} \\iff \\log(4^{x + 1}) = \\log(6^{3x}) \\quad \\text{(log des deux membres)} \\iff (x + 1) \\cdot \\log(4) = 3x \\cdot \\log(6) \\quad \\text{(log(a^A) = A · log(a))} \\iff x \\cdot \\log(4) + \\log(4) = 3x \\cdot \\log(6) \\iff \\log(4) = x(3\\log(6) - \\log(4)) \\iff x = \\frac{\\log(4)}{3\\log(6) - \\log(4)} \\quad \\text{(car } 3\\log(6) - \\log(4) \\neq 0\\text{)} = \\frac{\\log(4)}{\\log(54)} \\quad \\text{(propriétés des logarithmes)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(3\\log(6) - \\log(4) = \\log\\left(\\frac{6^{3}}{4}\\right) \\quad \\text{(propriétés des logarithmes)} = \\log(54)\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(4)}{\\log(54)}\\right\\} \\text{, soit } x \\approx 0{,}348",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "4^{x + 1} = 6^{3x}",
+  "erreur": null,
+  "ok": true
+ },
+ "4^(x-4)=20": {
+  "cartes": [
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "\\(4^{x - 4} = 20 \\iff \\log(4^{x - 4}) = \\log(20) \\quad \\text{(log des deux membres)} \\iff (x - 4) \\cdot \\log(4) = \\log(20) \\quad \\text{(log(a^A) = A · log(a))} \\iff x - 4 = \\frac{\\log(20)}{\\log(4)} \\iff x = 4 + \\frac{\\log(20)}{\\log(4)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{4 + \\frac{\\log(20)}{\\log(4)}\\right\\} \\text{, soit } x \\approx 6{,}161",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "4^{x - 4} = 20",
+  "erreur": null,
+  "ok": true
+ },
+ "4^x=16": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(16 = 4^{2}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(4^{x} = 4^{2} \\iff x = 2 \\quad \\text{(même base : a^A = a^B ⇔ A = B)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{2\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "4^{x} = 16",
+  "erreur": null,
+  "ok": true
+ },
+ "4^x=8": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(4^{x} = (2^{2})^{x} = 2^{2x} \\quad \\text{((aᵐ)ⁿ = aᵐⁿ)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(8 = 2^{3}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2^{2x} = 2^{3} \\iff 2x = 3 \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff x = \\frac{3}{2}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{3}{2}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "4^{x} = 8",
+  "erreur": null,
+  "ok": true
+ },
+ "5": {
+  "erreur": "Écrivez une équation (avec =) ou un logarithme à calculer, par exemple log_2(50).",
+  "ok": false
+ },
+ "5*10^x=2^x": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(5 \\cdot 10^{x} = 2^{x} \\iff \\log(5 \\cdot 10^{x}) = \\log(2^{x}) \\quad \\text{(log des deux membres)} \\iff \\log(5) + \\log(10^{x}) = \\log(2^{x}) \\quad \\text{(log(ab) = log a + log b)} \\iff \\log(5) + x \\cdot \\log(10) = x \\cdot \\log(2) \\quad \\text{(log(a^A) = A · log(a))} \\iff x + \\log(5) = x \\cdot \\log(2) \\quad \\text{(log(10ᵏ) = k)} \\iff \\log(5) = x(\\log(2) - 1) \\iff x = \\frac{\\log(5)}{\\log(2) - 1} \\quad \\text{(car } \\log(2) - 1 \\neq 0\\text{)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(5)}{\\log(2) - 1}\\right\\} \\text{, soit } x \\approx -1{,}000",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "5 \\cdot 10^{x} = 2^{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "5-2^x=1": {
+  "cartes": [
+   {
+    "badge": "Isoler l'exponentielle",
+    "blocs": [
+     {
+      "html": "\\(5 - 2^{x} = 1 \\iff 2^{x} = 4 \\quad \\text{(on isole le terme exponentiel)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(4 = 2^{2}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2^{x} = 2^{2} \\iff x = 2 \\quad \\text{(même base : a^A = a^B ⇔ A = B)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{2\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "5 - 2^{x} = 1",
+  "erreur": null,
+  "ok": true
+ },
+ "5^(2x+1)=3^(x+2)": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(5^{2x + 1} = 3^{x + 2} \\iff \\log(5^{2x + 1}) = \\log(3^{x + 2}) \\quad \\text{(log des deux membres)} \\iff (2x + 1) \\cdot \\log(5) = (x + 2) \\cdot \\log(3) \\quad \\text{(log(a^A) = A · log(a))} \\iff 2x \\cdot \\log(5) + \\log(5) = x \\cdot \\log(3) + 2\\log(3) \\iff x(2\\log(5) - \\log(3)) = 2\\log(3) - \\log(5) \\iff x = \\frac{2\\log(3) - \\log(5)}{2\\log(5) - \\log(3)} \\quad \\text{(car } 2\\log(5) - \\log(3) \\neq 0\\text{)} = \\frac{\\log\\left(\\frac{9}{5}\\right)}{\\log\\left(\\frac{25}{3}\\right)} \\quad \\text{(propriétés des logarithmes)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2\\log(3) - \\log(5) = \\log\\left(\\frac{3^{2}}{5}\\right) \\quad \\text{(propriétés des logarithmes)} = \\log\\left(\\frac{9}{5}\\right)\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2\\log(5) - \\log(3) = \\log\\left(\\frac{5^{2}}{3}\\right) \\quad \\text{(propriétés des logarithmes)} = \\log\\left(\\frac{25}{3}\\right)\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log\\left(\\frac{9}{5}\\right)}{\\log\\left(\\frac{25}{3}\\right)}\\right\\} \\text{, soit } x \\approx 0{,}277",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "5^{2x + 1} = 3^{x + 2}",
+  "erreur": null,
+  "ok": true
+ },
+ "5^(2x+3)=7": {
+  "cartes": [
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "\\(5^{2x + 3} = 7 \\iff \\log(5^{2x + 3}) = \\log(7) \\quad \\text{(log des deux membres)} \\iff (2x + 3) \\cdot \\log(5) = \\log(7) \\quad \\text{(log(a^A) = A · log(a))} \\iff 2x + 3 = \\frac{\\log(7)}{\\log(5)} \\iff 2x = \\frac{\\log(7)}{\\log(5)} - 3 \\iff x = \\frac{\\frac{\\log(7)}{\\log(5)} - 3}{2}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\frac{\\log(7)}{\\log(5)} - 3}{2}\\right\\} \\text{, soit } x \\approx -0{,}895",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "5^{2x + 3} = 7",
+  "erreur": null,
+  "ok": true
+ },
+ "5^(3x+2)=(5^x)^2": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\((5^{x})^{2} = 5^{2x} \\quad \\text{((aᵐ)ⁿ = aᵐⁿ)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(5^{3x + 2} = 5^{2x} \\iff 3x + 2 = 2x \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff x = -2\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-2\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "5^{3x + 2} = (5^{x})^{2}",
+  "erreur": null,
+  "ok": true
+ },
+ "5^(8x)=-25": {
+  "cartes": [
+   {
+    "badge": "Aucune solution",
+    "blocs": [
+     {
+      "html": "\\(5^{8x} &gt; 0 \\quad \\text{(une exponentielle est strictement positive)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(-25 &lt; 0 \\quad \\text{(aucune solution)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\varnothing",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "5^{8x} = -25",
+  "erreur": null,
+  "ok": true
+ },
+ "5^(x^3+1)=7": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "5^x/2=3": {
+  "cartes": [
+   {
+    "badge": "Isoler l'exponentielle",
+    "blocs": [
+     {
+      "html": "\\(\\frac{5^{x}}{2} = 3 \\iff 5^{x} = 6 \\quad \\text{(on isole le terme exponentiel)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "\\(5^{x} = 6 \\iff \\log(5^{x}) = \\log(6) \\quad \\text{(log des deux membres)} \\iff x \\cdot \\log(5) = \\log(6) \\quad \\text{(log(a^A) = A · log(a))} \\iff x = \\frac{\\log(6)}{\\log(5)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(6)}{\\log(5)}\\right\\} \\text{, soit } x \\approx 1{,}113",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\frac{5^{x}}{2} = 3",
+  "erreur": null,
+  "ok": true
+ },
+ "7^(2x+1)=7^9": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(7^{2x + 1} = 7^{9} \\iff 2x + 1 = 9 \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff 2x = 8 \\iff x = 4\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{4\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "7^{2x + 1} = 7^{9}",
+  "erreur": null,
+  "ok": true
+ },
+ "7^(x+2)=2^(3-x)": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(7^{x + 2} = 2^{3 - x} \\iff \\log(7^{x + 2}) = \\log(2^{3 - x}) \\quad \\text{(log des deux membres)} \\iff (x + 2) \\cdot \\log(7) = (3 - x) \\cdot \\log(2) \\quad \\text{(log(a^A) = A · log(a))} \\iff x \\cdot \\log(7) + 2\\log(7) = -x \\cdot \\log(2) + 3\\log(2) \\iff 2\\log(7) - 3\\log(2) = x(-\\log(2) - \\log(7)) \\iff x = \\frac{2\\log(7) - 3\\log(2)}{-\\log(2) - \\log(7)} \\quad \\text{(car } -\\log(2) - \\log(7) \\neq 0\\text{)} = \\frac{\\log\\left(\\frac{49}{8}\\right)}{\\log\\left(\\frac{1}{14}\\right)} \\quad \\text{(propriétés des logarithmes)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2\\log(7) - 3\\log(2) = \\log\\left(\\frac{7^{2}}{2^{3}}\\right) \\quad \\text{(propriétés des logarithmes)} = \\log\\left(\\frac{49}{8}\\right)\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(-\\log(2) - \\log(7) = \\log\\left(\\frac{1}{2 \\cdot 7}\\right) \\quad \\text{(propriétés des logarithmes)} = \\log\\left(\\frac{1}{14}\\right)\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log\\left(\\frac{49}{8}\\right)}{\\log\\left(\\frac{1}{14}\\right)}\\right\\} \\text{, soit } x \\approx -0{,}687",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "7^{x + 2} = 2^{3 - x}",
+  "erreur": null,
+  "ok": true
+ },
+ "8=log(2x+1)": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(8 = \\log(2x + 1) \\iff \\log(2x + 1) = 8 \\iff 2x + 1 = 10^{8} \\quad \\text{(définition du logarithme)} \\iff 2x = 10^{8} - 1 \\iff x = \\frac{10^{8} - 1}{2} = \\frac{99\\text{’}999\\text{’}999}{2}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "\\(2x + 1 = 10^{8} &gt; 0 \\quad \\text{(le logarithme est bien défini)} \\; \\checkmark\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{99\\text{’}999\\text{’}999}{2}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "8 = \\log(2x + 1)",
+  "erreur": null,
+  "ok": true
+ },
+ "8^(3x+2)=1/16": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(8^{3x + 2} = (2^{3})^{3x + 2} = 2^{3(3x + 2)} \\quad \\text{((aᵐ)ⁿ = aᵐⁿ)} = 2^{9x + 6}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\frac{1}{16} = 2^{-4}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2^{9x + 6} = 2^{-4} \\iff 9x + 6 = -4 \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff 9x = -10 \\iff x = -\\frac{10}{9}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-\\frac{10}{9}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "8^{3x + 2} = \\frac{1}{16}",
+  "erreur": null,
+  "ok": true
+ },
+ "9^(x^2)=3^(x+1)": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(9^{x^{2}} = (3^{2})^{x^{2}} = 3^{2x^{2}} \\quad \\text{((aᵐ)ⁿ = aᵐⁿ)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(3^{2x^{2}} = 3^{x + 1} \\iff 2x^{2} = x + 1 \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff 2x^{2} - x - 1 = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(Δ = (-1)^{2} - 4 \\cdot 2 \\cdot (-1) = 9\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x = -\\frac{1}{2} \\text{ ou } x = 1\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-\\frac{1}{2} \\,;\\, 1\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "9^{x^{2}} = 3^{x + 1}",
+  "erreur": null,
+  "ok": true
+ },
+ "9^x=1/3": {
+  "cartes": [
+   {
+    "badge": "Même base",
+    "blocs": [
+     {
+      "html": "\\(9^{x} = (3^{2})^{x} = 3^{2x} \\quad \\text{((aᵐ)ⁿ = aᵐⁿ)}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\frac{1}{3} = 3^{-1}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(3^{2x} = 3^{-1} \\iff 2x = -1 \\quad \\text{(même base : a^A = a^B ⇔ A = B)} \\iff x = -\\frac{1}{2}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-\\frac{1}{2}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "9^{x} = \\frac{1}{3}",
+  "erreur": null,
+  "ok": true
+ },
+ "=3": {
+  "erreur": "Il manque un membre de l'équation (avant ou après le signe =).",
+  "ok": false
+ },
+ "e": {
+  "erreur": "Écrivez une équation (avec =) ou un logarithme à calculer, par exemple log_2(50).",
+  "ok": false
+ },
+ "e^(-0,01x)=0,7": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(e^{-0{,}01x} = 0{,}7 \\iff -0{,}01x = \\ln(0{,}7) \\quad \\text{(définition du logarithme)} \\iff x = \\frac{\\ln(0{,}7)}{-0{,}01}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\ln(0{,}7)}{-0{,}01}\\right\\} \\text{, soit } x \\approx 35{,}667",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "e^{-0{,}01x} = 0{,}7",
+  "erreur": null,
+  "ok": true
+ },
+ "e^(0,05t)=2": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(e^{0{,}05t} = 2 \\iff 0{,}05t = \\ln(2) \\quad \\text{(définition du logarithme)} \\iff t = \\frac{\\ln(2)}{0{,}05}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\ln(2)}{0{,}05}\\right\\} \\text{, soit } t \\approx 13{,}863",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "e^{0{,}05t} = 2",
+  "erreur": null,
+  "ok": true
+ },
+ "e^(2x)=3^(x-1)": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(e^{2x} = 3^{x - 1} \\iff \\ln(e^{2x}) = \\ln(3^{x - 1}) \\quad \\text{(ln des deux membres)} \\iff 2x = (x - 1) \\cdot \\ln(3) \\quad \\text{(ln(e^A) = A)} \\iff 2x = x \\cdot \\ln(3) - \\ln(3) \\iff \\ln(3) = x \\cdot \\ln(3) - 2x \\iff \\ln(3) = x(\\ln(3) - 2) \\iff x = \\frac{\\ln(3)}{\\ln(3) - 2} \\quad \\text{(car } \\ln(3) - 2 \\neq 0\\text{)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\ln(3)}{\\ln(3) - 2}\\right\\} \\text{, soit } x \\approx -1{,}219",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "e^{2x} = 3^{x - 1}",
+  "erreur": null,
+  "ok": true
+ },
+ "e^-0,02t=1": {
+  "erreur": "Mettez l'exposant entre parenthèses : e^(-0,02t).",
+  "ok": false
+ },
+ "e^x+e^(-x)=3": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "e^x=1": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(e^{x} = 1 \\iff x = 0 \\quad \\text{(ln(1) = 0)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{0\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "e^{x} = 1",
+  "erreur": null,
+  "ok": true
+ },
+ "e^x=2^(x+1)": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(e^{x} = 2^{x + 1} \\iff \\ln(e^{x}) = \\ln(2^{x + 1}) \\quad \\text{(ln des deux membres)} \\iff x = (x + 1) \\cdot \\ln(2) \\quad \\text{(ln(e^A) = A)} \\iff x = x \\cdot \\ln(2) + \\ln(2) \\iff x - x \\cdot \\ln(2) = \\ln(2) \\iff x(1 - \\ln(2)) = \\ln(2) \\iff x = \\frac{\\ln(2)}{1 - \\ln(2)} \\quad \\text{(car } 1 - \\ln(2) \\neq 0\\text{)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\ln(2)}{1 - \\ln(2)}\\right\\} \\text{, soit } x \\approx 2{,}259",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "e^{x} = 2^{x + 1}",
+  "erreur": null,
+  "ok": true
+ },
+ "e^x=2^x": {
+  "cartes": [
+   {
+    "badge": "Bases différentes",
+    "blocs": [
+     {
+      "html": "\\(e^{x} = 2^{x} \\iff \\ln(e^{x}) = \\ln(2^{x}) \\quad \\text{(ln des deux membres)} \\iff x = x \\cdot \\ln(2) \\quad \\text{(ln(e^A) = A)} \\iff x - x \\cdot \\ln(2) = 0 \\iff x(1 - \\ln(2)) = 0 \\iff x = 0 \\quad \\text{(car } 1 - \\ln(2) \\neq 0\\text{)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{0\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "e^{x} = 2^{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "e^x=7": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(e^{x} = 7 \\iff x = \\ln(7) \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\ln(7)\\right\\} \\text{, soit } x \\approx 1{,}946",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "e^{x} = 7",
+  "erreur": null,
+  "ok": true
+ },
+ "e^x=e^(x+1)": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "e^x=e^3": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "exp(x)=7": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(e^{x} = 7 \\iff x = \\ln(7) \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\ln(7)\\right\\} \\text{, soit } x \\approx 1{,}946",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "e^{x} = 7",
+  "erreur": null,
+  "ok": true
+ },
+ "ln(0)": {
+  "erreur": "Le logarithme d'un nombre négatif ou nul n'est pas défini.",
+  "ok": false
+ },
+ "ln(1)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(\\ln(1) = 0 \\quad \\text{(ln(1) = 0)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\ln(1) = 0",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\ln(1)",
+  "erreur": null,
+  "ok": true
+ },
+ "ln(2-x)=1": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\ln(2 - x) = 1 \\iff 2 - x = e \\quad \\text{(définition du logarithme)} \\iff x = 2 - e\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "\\(2 - x = e &gt; 0 \\quad \\text{(le logarithme est bien défini)} \\; \\checkmark\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{2 - e\\right\\} \\text{, soit } x \\approx -0{,}718",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\ln(2 - x) = 1",
+  "erreur": null,
+  "ok": true
+ },
+ "ln(7)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "\\ln(7) \\approx 1{,}946",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\ln(7)",
+  "erreur": null,
+  "ok": true
+ },
+ "ln(e)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(\\ln(e) = 1 \\quad \\text{(ln(e^k) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\ln(e) = 1",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\ln(e)",
+  "erreur": null,
+  "ok": true
+ },
+ "ln(e^3)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(\\ln(e^{3}) = 3 \\quad \\text{(ln(e^k) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\ln(e^{3}) = 3",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\ln(e^{3})",
+  "erreur": null,
+  "ok": true
+ },
+ "ln(ln(x))=0": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\ln(\\ln(x)) = 0 \\iff \\ln(x) = e^{0} = 1 \\quad \\text{(définition du logarithme)} \\iff x = e \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{e\\right\\} \\text{, soit } x \\approx 2{,}718",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\ln(\\ln(x)) = 0",
+  "erreur": null,
+  "ok": true
+ },
+ "ln(x)=0": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\ln(x) = 0 \\iff x = e^{0} = 1 \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{1\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\ln(x) = 0",
+  "erreur": null,
+  "ok": true
+ },
+ "ln(x)=1": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\ln(x) = 1 \\iff x = e \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{e\\right\\} \\text{, soit } x \\approx 2{,}718",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\ln(x) = 1",
+  "erreur": null,
+  "ok": true
+ },
+ "ln(x)=3": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\ln(x) = 3 \\iff x = e^{3} \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{e^{3}\\right\\} \\text{, soit } x \\approx 20{,}086",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\ln(x) = 3",
+  "erreur": null,
+  "ok": true
+ },
+ "log x = 2": {
+  "erreur": "Après log, ouvrez une parenthèse : log(x).",
+  "ok": false
+ },
+ "log(-3-x)=1": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log(-3 - x) = 1 \\iff -3 - x = 10^{1} \\quad \\text{(définition du logarithme)} \\iff x = -3 - 10^{1} = -13\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "\\(-3 - x = 10^{1} &gt; 0 \\quad \\text{(le logarithme est bien défini)} \\; \\checkmark\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-13\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(-3 - x) = 1",
+  "erreur": null,
+  "ok": true
+ },
+ "log(-5)": {
+  "erreur": "Le logarithme d'un nombre négatif ou nul n'est pas défini.",
+  "ok": false
+ },
+ "log(-x)=2": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log(-x) = 2 \\iff -x = 10^{2} \\quad \\text{(définition du logarithme)} \\iff x = -10^{2} = -100\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "\\(-x = 10^{2} &gt; 0 \\quad \\text{(le logarithme est bien défini)} \\; \\checkmark\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-100\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(-x) = 2",
+  "erreur": null,
+  "ok": true
+ },
+ "log(0)": {
+  "erreur": "Le logarithme d'un nombre négatif ou nul n'est pas défini.",
+  "ok": false
+ },
+ "log(0,001)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(0{,}001 = 10^{-3}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log(0{,}001) = \\log(10^{-3}) = -3 \\quad \\text{(log(10ᵏ) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log(0{,}001) = -3",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log(0{,}001)",
+  "erreur": null,
+  "ok": true
+ },
+ "log(0,01)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(0{,}01 = 10^{-2}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log(0{,}01) = \\log(10^{-2}) = -2 \\quad \\text{(log(10ᵏ) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log(0{,}01) = -2",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log(0{,}01)",
+  "erreur": null,
+  "ok": true
+ },
+ "log(1)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(1 = 10^{0}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log(1) = \\log(10^{0}) = 0 \\quad \\text{(log(10ᵏ) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log(1) = 0",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log(1)",
+  "erreur": null,
+  "ok": true
+ },
+ "log(1/100000)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(\\frac{1}{100\\text{’}000} = 10^{-5}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log\\left(\\frac{1}{100\\text{’}000}\\right) = \\log(10^{-5}) = -5 \\quad \\text{(log(10ᵏ) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log\\left(\\frac{1}{100\\text{’}000}\\right) = -5",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log\\left(\\frac{1}{100\\text{’}000}\\right)",
+  "erreur": null,
+  "ok": true
+ },
+ "log(1000000)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(1\\text{’}000\\text{’}000 = 10^{6}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log(1\\text{’}000\\text{’}000) = \\log(10^{6}) = 6 \\quad \\text{(log(10ᵏ) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log(1\\text{’}000\\text{’}000) = 6",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log(1\\text{’}000\\text{’}000)",
+  "erreur": null,
+  "ok": true
+ },
+ "log(10^(1/2))": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(10^{\\frac{1}{2}} = 10^{\\frac{1}{2}}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log\\left(10^{\\frac{1}{2}}\\right) = \\log\\left(10^{\\frac{1}{2}}\\right) = \\frac{1}{2} \\quad \\text{(log(10ᵏ) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log\\left(10^{\\frac{1}{2}}\\right) = \\frac{1}{2}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log\\left(10^{\\frac{1}{2}}\\right)",
+  "erreur": null,
+  "ok": true
+ },
+ "log(10^3)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(10^{3} = 10^{3}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log(10^{3}) = \\log(10^{3}) = 3 \\quad \\text{(log(10ᵏ) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log(10^{3}) = 3",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log(10^{3})",
+  "erreur": null,
+  "ok": true
+ },
+ "log(2)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(2 \\text{ n'est pas une puissance de } 10 \\quad (10^{0} = 1 &lt; 2 &lt; 10 = 10^{1})\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log(2) \\approx 0{,}301",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log(2)",
+  "erreur": null,
+  "ok": true
+ },
+ "log(2)+log(3)": {
+  "erreur": "Cet outil ne traite pas encore ce type de calcul.",
+  "ok": false
+ },
+ "log(2x+1)=3": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log(2x + 1) = 3 \\iff 2x + 1 = 10^{3} \\quad \\text{(définition du logarithme)} \\iff 2x = 10^{3} - 1 \\iff x = \\frac{10^{3} - 1}{2} = \\frac{999}{2}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "\\(2x + 1 = 10^{3} &gt; 0 \\quad \\text{(le logarithme est bien défini)} \\; \\checkmark\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{999}{2}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(2x + 1) = 3",
+  "erreur": null,
+  "ok": true
+ },
+ "log(3-2x)=1": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log(3 - 2x) = 1 \\iff 3 - 2x = 10^{1} \\quad \\text{(définition du logarithme)} \\iff -2x = 10^{1} - 3 \\iff x = \\frac{10^{1} - 3}{-2} = -\\frac{7}{2}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "\\(3 - 2x = 10^{1} &gt; 0 \\quad \\text{(le logarithme est bien défini)} \\; \\checkmark\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-\\frac{7}{2}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(3 - 2x) = 1",
+  "erreur": null,
+  "ok": true
+ },
+ "log(5-x)=8": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log(5 - x) = 8 \\iff 5 - x = 10^{8} \\quad \\text{(définition du logarithme)} \\iff x = 5 - 10^{8} = -99\\text{’}999\\text{’}995\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "\\(5 - x = 10^{8} &gt; 0 \\quad \\text{(le logarithme est bien défini)} \\; \\checkmark\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-99\\text{’}999\\text{’}995\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(5 - x) = 8",
+  "erreur": null,
+  "ok": true
+ },
+ "log(50)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(50 \\text{ n'est pas une puissance de } 10 \\quad (10^{1} = 10 &lt; 50 &lt; 100 = 10^{2})\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log(50) \\approx 1{,}699",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log(50)",
+  "erreur": null,
+  "ok": true
+ },
+ "log(log(log(x)))=0": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log(\\log(\\log(x))) = 0 \\iff \\log(\\log(x)) = 10^{0} = 1 \\quad \\text{(définition du logarithme)} \\iff \\log(x) = 10^{1} = 10 \\quad \\text{(définition du logarithme)} \\iff x = 10^{10} \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{10^{10}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(\\log(\\log(x))) = 0",
+  "erreur": null,
+  "ok": true
+ },
+ "log(log(x))=1": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log(\\log(x)) = 1 \\iff \\log(x) = 10^{1} = 10 \\quad \\text{(définition du logarithme)} \\iff x = 10^{10} \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{10^{10}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(\\log(x)) = 1",
+  "erreur": null,
+  "ok": true
+ },
+ "log(log(x-1))=0": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log(\\log(x - 1)) = 0 \\iff \\log(x - 1) = 10^{0} = 1 \\quad \\text{(définition du logarithme)} \\iff x - 1 = 10^{1} \\quad \\text{(définition du logarithme)} \\iff x = 1 + 10^{1} = 11\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{11\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(\\log(x - 1)) = 0",
+  "erreur": null,
+  "ok": true
+ },
+ "log(sqrt(10))": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(\\sqrt{10} = 10^{\\frac{1}{2}}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log(\\sqrt{10}) = \\log\\left(10^{\\frac{1}{2}}\\right) = \\frac{1}{2} \\quad \\text{(log(10ᵏ) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log(\\sqrt{10}) = \\frac{1}{2}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log(\\sqrt{10})",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x)+1=3": {
+  "cartes": [
+   {
+    "badge": "Isoler le logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log(x) + 1 = 3 \\iff \\log(x) = 2 \\quad \\text{(on isole le logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log(x) = 2 \\iff x = 10^{2} = 100 \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{100\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x) + 1 = 3",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x)+log(x-1)=1": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "log(x)/2=1": {
+  "cartes": [
+   {
+    "badge": "Isoler le logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\frac{\\log(x)}{2} = 1 \\iff \\log(x) = 2 \\quad \\text{(on isole le logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log(x) = 2 \\iff x = 10^{2} = 100 \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{100\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\frac{\\log(x)}{2} = 1",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x)=-0,27": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log(x) = -0{,}27 \\iff x = 10^{-0{,}27} \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{10^{-0{,}27}\\right\\} \\text{, soit } x \\approx 0{,}537",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x) = -0{,}27",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x)=-1": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log(x) = -1 \\iff x = 10^{-1} = \\frac{1}{10} \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{1}{10}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x) = -1",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x)=-4": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log(x) = -4 \\iff x = 10^{-4} \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{10^{-4}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x) = -4",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x)=0": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log(x) = 0 \\iff x = 10^{0} = 1 \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{1\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x) = 0",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x)=1,5": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log(x) = 1{,}5 \\iff x = 10^{1{,}5} = 10\\sqrt{10} \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{10\\sqrt{10}\\right\\} \\text{, soit } x \\approx 31{,}623",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x) = 1{,}5",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x)=2": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log(x) = 2 \\iff x = 10^{2} = 100 \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{100\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x) = 2",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x)=3": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log(x) = 3 \\iff x = 10^{3} = 1\\text{’}000 \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{1\\text{’}000\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x) = 3",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x)=log(5)": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "log(x^2)=2": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log(x^{2}) = 2 \\iff x^{2} = 10^{2} = 100 \\quad \\text{(définition du logarithme)} \\iff x^{2} - 100 = 0 \\iff (x + 10)(x - 10) = 0 \\iff x = -10 \\text{ ou } x = 10 \\quad \\text{(un produit est nul si l'un des facteurs est nul)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "\\(x^{2} = 10^{2} &gt; 0 \\quad \\text{(le logarithme est bien défini)} \\; \\checkmark\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-10 \\,;\\, 10\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x^{2}) = 2",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x^2+1)=-1": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "log(x^2+x+3)+1=1": {
+  "cartes": [
+   {
+    "badge": "Isoler le logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log(x^{2} + x + 3) + 1 = 1 \\iff \\log(x^{2} + x + 3) = 0 \\quad \\text{(on isole le logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log(x^{2} + x + 3) = 0 \\iff x^{2} + x + 3 = 10^{0} = 1 \\quad \\text{(définition du logarithme)} \\iff x^{2} + x + 2 = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(Δ = 1^{2} - 4 \\cdot 1 \\cdot 2 = -7\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Δ &lt; 0 : l'équation n'a aucune solution réelle.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\varnothing",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x^{2} + x + 3) + 1 = 1",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x^2+x+3)=0": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log(x^{2} + x + 3) = 0 \\iff x^{2} + x + 3 = 10^{0} = 1 \\quad \\text{(définition du logarithme)} \\iff x^{2} + x + 2 = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(Δ = 1^{2} - 4 \\cdot 1 \\cdot 2 = -7\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Δ &lt; 0 : l'équation n'a aucune solution réelle.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\varnothing",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x^{2} + x + 3) = 0",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x^2-3x)=1": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log(x^{2} - 3x) = 1 \\iff x^{2} - 3x = 10^{1} = 10 \\quad \\text{(définition du logarithme)} \\iff x^{2} - 3x - 10 = 0 \\iff (x + 2)(x - 5) = 0 \\iff x = -2 \\text{ ou } x = 5 \\quad \\text{(un produit est nul si l'un des facteurs est nul)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "\\(x^{2} - 3x = 10^{1} &gt; 0 \\quad \\text{(le logarithme est bien défini)} \\; \\checkmark\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-2 \\,;\\, 5\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x^{2} - 3x) = 1",
+  "erreur": null,
+  "ok": true
+ },
+ "log2(64)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(64 = 2^{6}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log_{2}(64) = \\log_{2}(2^{6}) = 6 \\quad \\text{(log_a(a^k) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log_{2}(64) = 6",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log_{2}(64)",
+  "erreur": null,
+  "ok": true
+ },
+ "log2(x)=4": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log_{2}(x) = 4 \\iff x = 2^{4} = 16 \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{16\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{2}(x) = 4",
+  "erreur": null,
+  "ok": true
+ },
+ "log5(x)=-2": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log_{5}(x) = -2 \\iff x = 5^{-2} = \\frac{1}{25} \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{1}{25}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{5}(x) = -2",
+  "erreur": null,
+  "ok": true
+ },
+ "log_1(x)=2": {
+  "erreur": "La base d'un logarithme est strictement positive et différente de 1.",
+  "ok": false
+ },
+ "log_1,5(2,25)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(2{,}25 = 1{,}5^{2}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log_{1{,}5}(2{,}25) = \\log_{1{,}5}(1{,}5^{2}) = 2 \\quad \\text{(log_a(a^k) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log_{1{,}5}(2{,}25) = 2",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log_{1{,}5}(2{,}25)",
+  "erreur": null,
+  "ok": true
+ },
+ "log_10(1000)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(1\\text{’}000 = 10^{3}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log(1\\text{’}000) = \\log(10^{3}) = 3 \\quad \\text{(log(10ᵏ) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log(1\\text{’}000) = 3",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log(1\\text{’}000)",
+  "erreur": null,
+  "ok": true
+ },
+ "log_100(10)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(10 = 100^{\\frac{1}{2}}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log_{100}(10) = \\log_{100}\\left(100^{\\frac{1}{2}}\\right) = \\frac{1}{2} \\quad \\text{(log_a(a^k) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log_{100}(10) = \\frac{1}{2}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log_{100}(10)",
+  "erreur": null,
+  "ok": true
+ },
+ "log_2(0,125)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(0{,}125 = 2^{-3}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log_{2}(0{,}125) = \\log_{2}(2^{-3}) = -3 \\quad \\text{(log_a(a^k) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log_{2}(0{,}125) = -3",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log_{2}(0{,}125)",
+  "erreur": null,
+  "ok": true
+ },
+ "log_2(1/8)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(\\frac{1}{8} = 2^{-3}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log_{2}\\left(\\frac{1}{8}\\right) = \\log_{2}(2^{-3}) = -3 \\quad \\text{(log_a(a^k) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log_{2}\\left(\\frac{1}{8}\\right) = -3",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log_{2}\\left(\\frac{1}{8}\\right)",
+  "erreur": null,
+  "ok": true
+ },
+ "log_2(10)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(10 \\text{ n'est pas une puissance de } 2 \\quad (2^{3} = 8 &lt; 10 &lt; 16 = 2^{4})\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log_{2}(10) = \\frac{\\log(10)}{\\log(2)} \\quad \\text{(changement de base)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log_{2}(10) = \\frac{\\log(10)}{\\log(2)} \\approx 3{,}322",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log_{2}(10)",
+  "erreur": null,
+  "ok": true
+ },
+ "log_2(50)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(50 \\text{ n'est pas une puissance de } 2 \\quad (2^{5} = 32 &lt; 50 &lt; 64 = 2^{6})\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log_{2}(50) = \\frac{\\log(50)}{\\log(2)} \\quad \\text{(changement de base)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log_{2}(50) = \\frac{\\log(50)}{\\log(2)} \\approx 5{,}644",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log_{2}(50)",
+  "erreur": null,
+  "ok": true
+ },
+ "log_2(e)": {
+  "erreur": "Cet outil ne traite pas encore ce type de calcul.",
+  "ok": false
+ },
+ "log_2(sqrt(3))": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(\\sqrt{3} \\text{ n'est pas une puissance de } 2\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log_{2}(\\sqrt{3}) = \\frac{\\log(\\sqrt{3})}{\\log(2)} \\quad \\text{(changement de base)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log_{2}(\\sqrt{3}) = \\frac{\\log(\\sqrt{3})}{\\log(2)} \\approx 0{,}792",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log_{2}(\\sqrt{3})",
+  "erreur": null,
+  "ok": true
+ },
+ "log_2(sqrt(8))": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(\\sqrt{8} = 2^{\\frac{3}{2}}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log_{2}(\\sqrt{8}) = \\log_{2}\\left(2^{\\frac{3}{2}}\\right) = \\frac{3}{2} \\quad \\text{(log_a(a^k) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log_{2}(\\sqrt{8}) = \\frac{3}{2}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log_{2}(\\sqrt{8})",
+  "erreur": null,
+  "ok": true
+ },
+ "log_2(x)=4": {
+  "cartes": [
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log_{2}(x) = 4 \\iff x = 2^{4} = 16 \\quad \\text{(définition du logarithme)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{16\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{2}(x) = 4",
+  "erreur": null,
+  "ok": true
+ },
+ "log_20(20)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(20 = 20^{1}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log_{20}(20) = \\log_{20}(20^{1}) = 1 \\quad \\text{(log_a(a^k) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log_{20}(20) = 1",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log_{20}(20)",
+  "erreur": null,
+  "ok": true
+ },
+ "log_25(sqrt(5))": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(\\sqrt{5} = 5^{\\frac{1}{2}} = \\left(25^{\\frac{1}{2}}\\right)^{\\frac{1}{2}} = 25^{\\frac{1}{4}}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log_{25}(\\sqrt{5}) = \\log_{25}\\left(25^{\\frac{1}{4}}\\right) = \\frac{1}{4} \\quad \\text{(log_a(a^k) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log_{25}(\\sqrt{5}) = \\frac{1}{4}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log_{25}(\\sqrt{5})",
+  "erreur": null,
+  "ok": true
+ },
+ "log_27(1/9)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(\\frac{1}{9} = 3^{-2} = \\left(27^{\\frac{1}{3}}\\right)^{-2} = 27^{-\\frac{2}{3}}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log_{27}\\left(\\frac{1}{9}\\right) = \\log_{27}\\left(27^{-\\frac{2}{3}}\\right) = -\\frac{2}{3} \\quad \\text{(log_a(a^k) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log_{27}\\left(\\frac{1}{9}\\right) = -\\frac{2}{3}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log_{27}\\left(\\frac{1}{9}\\right)",
+  "erreur": null,
+  "ok": true
+ },
+ "log_3(10)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(10 \\text{ n'est pas une puissance de } 3 \\quad (3^{2} = 9 &lt; 10 &lt; 27 = 3^{3})\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log_{3}(10) = \\frac{\\log(10)}{\\log(3)} \\quad \\text{(changement de base)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log_{3}(10) = \\frac{\\log(10)}{\\log(3)} \\approx 2{,}096",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log_{3}(10)",
+  "erreur": null,
+  "ok": true
+ },
+ "log_3(sqrt(2))": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(\\sqrt{2} \\text{ n'est pas une puissance de } 3\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log_{3}(\\sqrt{2}) = \\frac{\\log(\\sqrt{2})}{\\log(3)} \\quad \\text{(changement de base)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log_{3}(\\sqrt{2}) = \\frac{\\log(\\sqrt{2})}{\\log(3)} \\approx 0{,}315",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log_{3}(\\sqrt{2})",
+  "erreur": null,
+  "ok": true
+ },
+ "log_4(0,3)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(0{,}3 \\text{ n'est pas une puissance de } 4 \\quad (4^{-1} = 0{,}25 &lt; 0{,}3 &lt; 1 = 4^{0})\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log_{4}(0{,}3) = \\frac{\\log(0{,}3)}{\\log(4)} \\quad \\text{(changement de base)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log_{4}(0{,}3) = \\frac{\\log(0{,}3)}{\\log(4)} \\approx -0{,}868",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log_{4}(0{,}3)",
+  "erreur": null,
+  "ok": true
+ },
+ "log_4(8)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(8 = 2^{3} = \\left(4^{\\frac{1}{2}}\\right)^{3} = 4^{\\frac{3}{2}}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log_{4}(8) = \\log_{4}\\left(4^{\\frac{3}{2}}\\right) = \\frac{3}{2} \\quad \\text{(log_a(a^k) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log_{4}(8) = \\frac{3}{2}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log_{4}(8)",
+  "erreur": null,
+  "ok": true
+ },
+ "log_4(sqrt(2))": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(\\sqrt{2} = 2^{\\frac{1}{2}} = \\left(4^{\\frac{1}{2}}\\right)^{\\frac{1}{2}} = 4^{\\frac{1}{4}}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log_{4}(\\sqrt{2}) = \\log_{4}\\left(4^{\\frac{1}{4}}\\right) = \\frac{1}{4} \\quad \\text{(log_a(a^k) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log_{4}(\\sqrt{2}) = \\frac{1}{4}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log_{4}(\\sqrt{2})",
+  "erreur": null,
+  "ok": true
+ },
+ "log_5(0,2)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(0{,}2 = 5^{-1}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log_{5}(0{,}2) = \\log_{5}(5^{-1}) = -1 \\quad \\text{(log_a(a^k) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log_{5}(0{,}2) = -1",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log_{5}(0{,}2)",
+  "erreur": null,
+  "ok": true
+ },
+ "log_5(0,3)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(0{,}3 \\text{ n'est pas une puissance de } 5 \\quad (5^{-1} = 0{,}2 &lt; 0{,}3 &lt; 1 = 5^{0})\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log_{5}(0{,}3) = \\frac{\\log(0{,}3)}{\\log(5)} \\quad \\text{(changement de base)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log_{5}(0{,}3) = \\frac{\\log(0{,}3)}{\\log(5)} \\approx -0{,}748",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log_{5}(0{,}3)",
+  "erreur": null,
+  "ok": true
+ },
+ "log_5(1/25)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(\\frac{1}{25} = 5^{-2}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log_{5}\\left(\\frac{1}{25}\\right) = \\log_{5}(5^{-2}) = -2 \\quad \\text{(log_a(a^k) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log_{5}\\left(\\frac{1}{25}\\right) = -2",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log_{5}\\left(\\frac{1}{25}\\right)",
+  "erreur": null,
+  "ok": true
+ },
+ "log_6(2)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(2 \\text{ n'est pas une puissance de } 6 \\quad (6^{0} = 1 &lt; 2 &lt; 6 = 6^{1})\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log_{6}(2) = \\frac{\\log(2)}{\\log(6)} \\quad \\text{(changement de base)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log_{6}(2) = \\frac{\\log(2)}{\\log(6)} \\approx 0{,}387",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log_{6}(2)",
+  "erreur": null,
+  "ok": true
+ },
+ "log_7(1)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(1 = 7^{0}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log_{7}(1) = \\log_{7}(7^{0}) = 0 \\quad \\text{(log_a(a^k) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log_{7}(1) = 0",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log_{7}(1)",
+  "erreur": null,
+  "ok": true
+ },
+ "log_8(2)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(2 = 8^{\\frac{1}{3}}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log_{8}(2) = \\log_{8}\\left(8^{\\frac{1}{3}}\\right) = \\frac{1}{3} \\quad \\text{(log_a(a^k) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log_{8}(2) = \\frac{1}{3}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log_{8}(2)",
+  "erreur": null,
+  "ok": true
+ },
+ "log_8(64)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(64 = 8^{2}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log_{8}(64) = \\log_{8}(8^{2}) = 2 \\quad \\text{(log_a(a^k) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log_{8}(64) = 2",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log_{8}(64)",
+  "erreur": null,
+  "ok": true
+ },
+ "log_9(27)": {
+  "cartes": [
+   {
+    "badge": "Calcul",
+    "blocs": [
+     {
+      "html": "\\(27 = 3^{3} = \\left(9^{\\frac{1}{2}}\\right)^{3} = 9^{\\frac{3}{2}}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\log_{9}(27) = \\log_{9}\\left(9^{\\frac{3}{2}}\\right) = \\frac{3}{2} \\quad \\text{(log_a(a^k) = k)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\log_{9}(27) = \\frac{3}{2}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Résultat"
+   }
+  ],
+  "enonce_tex": "\\log_{9}(27)",
+  "erreur": null,
+  "ok": true
+ },
+ "log_x(1/16)=4": {
+  "cartes": [
+   {
+    "badge": "Condition",
+    "blocs": [
+     {
+      "html": "\\(x &gt; 0 \\text{ et } x \\neq 1 \\quad \\text{(une base de logarithme est strictement positive et différente de 1)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log_{x}\\left(\\frac{1}{16}\\right) = 4 \\iff x^{4} = \\frac{1}{16} \\quad \\text{(définition du logarithme)} \\iff x = \\frac{1}{2} \\text{ ou } x = -\\frac{1}{2}\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x = \\frac{1}{2} \\quad \\text{(seule la solution positive convient)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{1}{2}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{x}\\left(\\frac{1}{16}\\right) = 4",
+  "erreur": null,
+  "ok": true
+ },
+ "log_x(1/8)=3": {
+  "cartes": [
+   {
+    "badge": "Condition",
+    "blocs": [
+     {
+      "html": "\\(x &gt; 0 \\text{ et } x \\neq 1 \\quad \\text{(une base de logarithme est strictement positive et différente de 1)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log_{x}\\left(\\frac{1}{8}\\right) = 3 \\iff x^{3} = \\frac{1}{8} \\quad \\text{(définition du logarithme)} \\iff x = \\frac{1}{2}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{1}{2}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{x}\\left(\\frac{1}{8}\\right) = 3",
+  "erreur": null,
+  "ok": true
+ },
+ "log_x(16)=2": {
+  "cartes": [
+   {
+    "badge": "Condition",
+    "blocs": [
+     {
+      "html": "\\(x &gt; 0 \\text{ et } x \\neq 1 \\quad \\text{(une base de logarithme est strictement positive et différente de 1)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log_{x}(16) = 2 \\iff x^{2} = 16 \\quad \\text{(définition du logarithme)} \\iff x = 4 \\text{ ou } x = -4\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x = 4 \\quad \\text{(seule la solution positive convient)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{4\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{x}(16) = 2",
+  "erreur": null,
+  "ok": true
+ },
+ "log_x(2)=3": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "log_x(256)=4": {
+  "cartes": [
+   {
+    "badge": "Condition",
+    "blocs": [
+     {
+      "html": "\\(x &gt; 0 \\text{ et } x \\neq 1 \\quad \\text{(une base de logarithme est strictement positive et différente de 1)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log_{x}(256) = 4 \\iff x^{4} = 256 \\quad \\text{(définition du logarithme)} \\iff x = 4 \\text{ ou } x = -4\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x = 4 \\quad \\text{(seule la solution positive convient)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{4\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{x}(256) = 4",
+  "erreur": null,
+  "ok": true
+ },
+ "log_x(8)=3": {
+  "cartes": [
+   {
+    "badge": "Condition",
+    "blocs": [
+     {
+      "html": "\\(x &gt; 0 \\text{ et } x \\neq 1 \\quad \\text{(une base de logarithme est strictement positive et différente de 1)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log_{x}(8) = 3 \\iff x^{3} = 8 \\quad \\text{(définition du logarithme)} \\iff x = 2\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{2\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{x}(8) = 3",
+  "erreur": null,
+  "ok": true
+ },
+ "log_x(81)=4": {
+  "cartes": [
+   {
+    "badge": "Condition",
+    "blocs": [
+     {
+      "html": "\\(x &gt; 0 \\text{ et } x \\neq 1 \\quad \\text{(une base de logarithme est strictement positive et différente de 1)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "\\(\\log_{x}(81) = 4 \\iff x^{4} = 81 \\quad \\text{(définition du logarithme)} \\iff x = 3 \\text{ ou } x = -3\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x = 3 \\quad \\text{(seule la solution positive convient)}\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{3\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{x}(81) = 4",
+  "erreur": null,
+  "ok": true
+ },
+ "sin(x)=0": {
+  "erreur": "Une seule inconnue : vous avez écrit i et n et s et x.",
+  "ok": false
+ },
+ "sqrt(2)": {
+  "erreur": "Écrivez une équation (avec =) ou un logarithme à calculer, par exemple log_2(50).",
+  "ok": false
+ },
+ "sqrt(2)^x=3": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "sqrt(2)^x=4": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "x*2^x=8": {
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
+  "ok": false
+ },
+ "x*e^x=1": {
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
+  "ok": false
+ },
+ "x+1)=3": {
+  "erreur": "Parenthèse fermante en trop.",
+  "ok": false
+ },
+ "x+y=3": {
+  "erreur": "Une seule inconnue : vous avez écrit x et y.",
+  "ok": false
+ },
+ "x/2^x=1": {
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
+  "ok": false
+ },
+ "x<3": {
+  "erreur": "Les inéquations ne sont pas traitées par cet outil : écrivez une équation avec =.",
+  "ok": false
+ },
+ "x=ln(3)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\ln(3)\\right\\} \\text{, soit } x \\approx 1{,}099",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "x = \\ln(3)",
+  "erreur": null,
+  "ok": true
+ },
+ "x^2=4": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "x^x=3^x": {
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
+  "ok": false
+ },
+ "x^x=4": {
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
+  "ok": false
+ }
+}

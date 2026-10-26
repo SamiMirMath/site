@@ -23,7 +23,9 @@ rien de 2M n'est codé ici : ni ensemble de définition, ni équations à plusie
 
 **Quand aucune méthode ne s'applique** (EL-11), deux messages distincts (décision du 26.10.2026) : « Cette équation ne se résout pas avec les méthodes du cours. » seulement pour un vrai
 hors-programme (x·2^x = 8…), « Cet outil ne traite pas encore ce type d'équation. » pour une forme du programme que l'outil ne gère pas encore. Le moteur fournit le choix
-(`message_non_resolu`) ; l'adaptateur `resoudre_el.py` (étape 7) l'affiche.
+(`message_non_resolu`) ; l'adaptateur `resoudre_el.py` l'affiche comme erreur de la sortie (étape 7).
+Pour un **calcul** sans « = » que le moteur ne traite pas (`message_calcul_non_resolu`) : « Cet outil ne traite pas encore ce type de calcul. » (2 log 5, log 2 + log 3, log₂(e)) ;
+« Le logarithme d'un nombre négatif ou nul n'est pas défini. » (log(0), log(−5)) ; « Écrivez une équation (avec =) ou un logarithme à calculer, par exemple log_2(50). » quand la saisie ne contient aucun logarithme (2 + 3, √2).
 
 Hors de cette version : interprétation des applications en années entières (l'outil résout, n ≈ 14,6, et s'arrête), mode « problème
 en mots », tâtonnement (2.14), graphiques (2.1, 2.9, 2.12), écrire un nombre comme puissance de 10 ou de e (2.17, 2.19).
@@ -47,6 +49,9 @@ en mots », tâtonnement (2.14), graphiques (2.1, 2.9, 2.12), écrire un nombre 
 
 Une carte par application de méthode, comme la Factorisation (T21) : « Étape k », méthode en badge, chaîne de « ⇔ » une étape par ligne,
 **propriété nommée entre parenthèses (1 à 5 mots)** à chaque ligne, carte finale « Solution ».
+Dans la sortie de `resoudre_el.py` : chaque ligne du moteur est un bloc `texte` (style `etape`) qui contient son TeX entre `\(` et `\)` (le « < » est écrit `&lt;`), la remarque du moteur
+(« Δ < 0 : l'équation n'a aucune solution réelle. ») est le dernier bloc de la dernière carte d'étapes, et la carte finale est « Solution » (bloc `resultat` = `tex_solution`) pour une équation,
+« Résultat » (`tex_resultat`) pour un calcul.
 
 **Une équation à même base tient en deux cartes au plus** (validé le 26.10.2026) : « Isoler l'exponentielle » (seulement si l'équation
 s'écrit k·a^f + c = d…), puis « Même base », qui contient la réécriture des membres (lignes de « = ») **et** la chaîne unique de ⇔

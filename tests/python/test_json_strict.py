@@ -9,9 +9,11 @@ import derivee_variations as dv
 import etude_complete as ec
 import factorisation as fa
 import limites_asymptotes as la
+import resoudre_el
 
 import os
 from cas import CAS_LIMITES, entrees_page, entrees_factorisation
+from cas_el import entrees_el
 
 OUTILS_ENTREES = {
     nom: entrees_page(nom) + CAS_LIMITES[nom]
@@ -87,6 +89,13 @@ class TestJsonStrict(unittest.TestCase):
         for nom in fichiers_json(DOSSIER_INSTANTANES):
             with self.subTest(fichier=nom), open(os.path.join(DOSSIER_INSTANTANES, nom), encoding="utf-8") as f:
                 strict(f.read())
+
+    def test_exponentielles_logarithmes_json(self):
+        for entree in entrees_el():
+            for appel in (resoudre_el.resoudre_json, resoudre_el.apercu_json):
+                with self.subTest(f=entree, appel=appel.__name__):
+                    strict(appel(entree))
+            self.assertEqual(list(non_finis(resoudre_el.resoudre(entree))), [], entree)
 
     def test_exercices_de_factorisation(self):
         for niveau in ("facile", "moyen", "difficile", "tresDifficile"):

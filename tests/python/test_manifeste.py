@@ -21,6 +21,9 @@ OUTILS = MANIFESTE["outils"]
 VERSIONS = MANIFESTE["versions"]
 
 
+SANS_PAGE = {"exponentielles-logarithmes"}      # T33 : outil déclaré avant sa page (étape 8) ; retirer cette ligne et son usage à l'étape 8
+
+
 def lire(chemin):
     with open(os.path.join(RACINE, chemin), encoding="utf-8") as f:
         return f.read()
@@ -61,10 +64,12 @@ class TestManifeste(unittest.TestCase):
     def test_tous_les_outils_pyodide_sont_declares(self):
         avec_pyodide = {d for d in os.listdir(RACINE)
                         if os.path.isfile(os.path.join(RACINE, d, "index.html")) and utilise_pyodide(page(d))}
-        self.assertEqual(set(OUTILS), avec_pyodide)
+        self.assertEqual(set(OUTILS) - SANS_PAGE, avec_pyodide)
 
     def test_conforme_aux_pages(self):
         for dossier, o in OUTILS.items():
+            if dossier in SANS_PAGE:
+                continue
             s = page(dossier)
             with self.subTest(outil=dossier):
                 if OUTIL in s:
@@ -124,7 +129,7 @@ class TestManifeste(unittest.TestCase):
 
     def test_versions_coherentes(self):
         """La version de Pyodide (pages à worker intégré, client commun) et celles de la CI sont celles du manifeste."""
-        for dossier in OUTILS:
+        for dossier in OUTILS.keys() - SANS_PAGE:
             with self.subTest(page=dossier):
                 if CLIENT not in page(dossier) and OUTIL not in page(dossier):
                     self.assertIn(f'const PYODIDE="https://cdn.jsdelivr.net/pyodide/v{VERSIONS["pyodide"]}/full/"', page(dossier))

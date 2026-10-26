@@ -11,6 +11,7 @@ from moteurs import RACINE
 ANNEES = {"I": "1", "II": "2", "III": "3"}
 FILIERES = ("C", "Ms", "Mr")
 SANS_REGISTRE = set()      # dossiers à index.html qui ne sont pas des outils de l'accueil (aucun aujourd'hui)
+MANIFESTE_SANS_REGISTRE = {"exponentielles-logarithmes"}      # T33 : au manifeste avant son registre (étape 9) ; retirer à l'étape 9
 
 
 def lire(chemin):
@@ -124,7 +125,7 @@ class TestRegistre(unittest.TestCase):
         dossiers = {d for d in os.listdir(RACINE) if os.path.isfile(os.path.join(RACINE, d, "index.html"))}
         self.assertEqual(dossiers - SANS_REGISTRE, {o["id"] for o in REGISTRE["outils"]})
         with open(os.path.join(RACINE, "moteur", "manifeste.json"), encoding="utf-8") as f:
-            self.assertLessEqual(set(json.load(f)["outils"]), {o["id"] for o in REGISTRE["outils"]})
+            self.assertLessEqual(set(json.load(f)["outils"]) - MANIFESTE_SANS_REGISTRE, {o["id"] for o in REGISTRE["outils"]})
 
 
 class TestAccueil(unittest.TestCase):
