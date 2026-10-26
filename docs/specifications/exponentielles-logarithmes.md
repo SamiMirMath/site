@@ -62,6 +62,8 @@ Propriétés nommées (liste fermée, testée) : (on isole le terme exponentiel)
 `P₁·P₂ = 0 ⇔ P₁ = 0 ou P₂ = 0`), puis une carte « Facteur 1 », « Facteur 2 »… qui reprend les lignes de la résolution de chaque facteur. Une équation du premier
 degré dont le second membre contient un logarithme (x = ln 3, 2x = ln(0,1)) a la carte « Équation du premier degré » (aucune carte quand x est déjà isolé).
 
+**Isoler x** : `x − a = c` donne `x = a + c` (corrigé 2.23 d : x = 1 + 1/log(3), jamais c + a) ; `x + a = c` donne `x = c − a` ; `p·x = c` donne `x = c/p` (non simplifié : Q11).
+
 **Valeur exacte d'abord, puis ≈** à 3 décimales (corrigé p. 1), jamais un « ≈ » sans la valeur exacte juste avant sur la même ligne.
 log(10^k) = k et ln(e^k) = k sont évalués ; log a − log b est regroupé en log(a/b) seulement dans les bases différentes (E3) ; sinon la valeur exacte
 est gardée **telle que la donne la chaîne** : `ln(25/37)/(−0,02)` n'est pas simplifié en `−50 · ln(25/37)` (Q11).
@@ -156,6 +158,7 @@ discriminant non carré** (le moteur sait écrire des racines irrationnelles, le
 | EL-15 | Page : rendu de la batterie égal à `tests/pages/references/exponentielles-logarithmes.json` ; clavier avec log, ln, log_, e, = ; exercice au hasard (pool C) et corrigé | [auto-page] |
 | EL-16 | Registre et accueil (cellule III/C) : description « Équations exponentielles et logarithmiques, calcul de logarithmes, étape par étape. » identique dans `commun/registre.json` et `index.html` (ACC-01) ; posés après relecture des exemples | [auto-py] + [manuel] |
 | EL-17 | Les exemples de rédaction 1 à 9 ci-dessus, relus à l'écran sur téléphone et comparés au corrigé, sont validés | [manuel] |
+| EL-18 | **Ligne finale** : toute équation résolue se termine par « S = {valeur exacte} », suivie de « , soit x ≈ … » (3 décimales, virgule, ’ dès 4 chiffres) quand une solution n'est pas un rationnel (avec plusieurs solutions : « soit x ≈ −0,903 ou x = 0 ») ; S = ∅ et S = ℝ ont aussi leur ligne. **Elle existe même quand x est déjà isolé** : x = ln(3) n'a aucune carte de méthode, mais la sortie élève contient la carte finale « S = {ln(3)}, soit x ≈ 1,099 ». La composition est testée dès l'étape 3 (`tex_solution`) ; la carte finale de la sortie de `resoudre_el` l'est à l'étape 7 | [auto-py] |
 
 ## Pour les 2M (plus tard, hors de cette version)
 
