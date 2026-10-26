@@ -674,10 +674,11 @@ def _arbre_poly(p, x="x"):
 # =====================================================================
 class Eq:
     """Une équation g = d (arbres)."""
-    __slots__ = ("g", "d")
+    __slots__ = ("g", "d", "milieu")
 
-    def __init__(self, g, d):
-        self.g, self.d = g, d
+    def __init__(self, g, d, milieu=()):
+        """`milieu` : écritures intermédiaires de d, affichées entre g et d (x = 10³ = 1000) ; d est la dernière."""
+        self.g, self.d, self.milieu = g, d, list(milieu)
 
     def __eq__(self, o):
         return isinstance(o, Eq) and (self.g, self.d) == (o.g, o.d)
@@ -696,6 +697,22 @@ class Rel:
 
     def __init__(self, g, signe, d):
         self.g, self.signe, self.d = g, signe, d
+
+
+class Positif:
+    """« u = valeur > 0 » : vérification que l'argument d'un logarithme est strictement positif."""
+    __slots__ = ("expr", "valeur")
+
+    def __init__(self, expr, valeur):
+        self.expr, self.valeur = expr, valeur
+
+
+class Texte:
+    """Une condition déjà écrite en TeX (x > 0 et x ≠ 1)."""
+    __slots__ = ("tex",)
+
+    def __init__(self, tex):
+        self.tex = tex
 
 
 class Ou:
@@ -723,7 +740,11 @@ class Chaine:
 
 def tex_element(e):
     if isinstance(e, Eq):
-        return tex(e.g) + " = " + tex(e.d)
+        return tex(e.g) + "".join(" = " + tex(m) for m in e.milieu) + " = " + tex(e.d)
+    if isinstance(e, Positif):
+        return tex(e.expr) + " = " + tex(e.valeur) + " > 0"
+    if isinstance(e, Texte):
+        return e.tex
     if isinstance(e, Ou):
         return r" \text{ ou } ".join(tex_element(q) for q in e.eqs)
     if isinstance(e, Rel):
@@ -741,7 +762,7 @@ def tex_chaine(c):
         elif prop:
             s += r" \quad \text{(" + prop + ")}"
     if c.note:
-        s += r" \quad \text{(" + c.note + ")}"
+        s += r" \quad \text{(" + c.note + ")}" + (r" \; \checkmark" if c.note == PROP_BIEN_DEFINI else "")
     return s
 
 
@@ -762,12 +783,17 @@ PROP_AUCUNE_SOLUTION = "aucune solution"
 PROP_LOG_QUOTIENT = "log a − log b = log(a/b)"
 PROP_LOG_PRODUIT = "log a + log b = log(ab)"
 PROP_LOG_REGROUPER = "propriétés des logarithmes"
+PROP_ISOLER_LOG = "on isole le logarithme"
+PROP_BIEN_DEFINI = "le logarithme est bien défini"
+PROP_BASE_LOG = "une base de logarithme est strictement positive et différente de 1"
+PROP_SEULE_POSITIVE = "seule la solution positive convient"
 PROP_LOG_SOMME = "log(ab) = log a + log b"
 PROP_LN_DEUX_MEMBRES = "ln des deux membres"
 PROP_LN_E = "ln(e^A) = A"
 PROPRIETES = frozenset({PROP_PUISSANCE, PROP_PRODUIT, PROP_UN, PROP_MEME_BASE, PROP_ISOLER, PROP_PRODUIT_NUL, PROP_DISCRIMINANT,
                         PROP_DEFINITION_LOG, PROP_LOG_DEUX_MEMBRES, PROP_LOG_PUISSANCE, PROP_LOG_10K, PROP_LN_UN, PROP_EXPO_POSITIVE,
-                        PROP_AUCUNE_SOLUTION, PROP_LOG_QUOTIENT, PROP_LOG_PRODUIT, PROP_LOG_REGROUPER, PROP_LOG_SOMME, PROP_LN_DEUX_MEMBRES, PROP_LN_E})
+                        PROP_AUCUNE_SOLUTION, PROP_LOG_QUOTIENT, PROP_LOG_PRODUIT, PROP_LOG_REGROUPER, PROP_LOG_SOMME, PROP_LN_DEUX_MEMBRES, PROP_LN_E,
+                        PROP_ISOLER_LOG, PROP_BIEN_DEFINI, PROP_BASE_LOG, PROP_SEULE_POSITIVE})
 
 
 def _carte(titre, lignes):
@@ -854,7 +880,7 @@ def _nb_exact(v):
     return Nb(v, chiffres[:-k] + "," + chiffres[-k:])
 
 
-def _isoler(g, d, x):
+def _isoler(g, d, x, prop=None):
     """Isole le terme qui contient l'inconnue quand l'autre membre est une constante : T + c, T − c, c − T, c·T, T/c, −T.
     Renvoie (g', d', chaîne ou None)."""
     if variables(g) and not variables(d):
@@ -887,7 +913,7 @@ def _isoler(g, d, x):
             break
         if o is None:
             raise _Hors
-        chaine.ajouter(equation(a, _nb_exact(o)), "⇔", PROP_ISOLER)
+        chaine.ajouter(equation(a, _nb_exact(o)), "⇔", prop or PROP_ISOLER)
     if not chaine.liens:
         return g, d, None
     return (_nb_exact(o), a, chaine) if inverse else (a, _nb_exact(o), chaine)
@@ -1371,6 +1397,150 @@ def _bases_differentes(g, d, x):
 
 
 # =====================================================================
+# 10 ter. MÉTHODE « DÉFINITION DU LOGARITHME » : log_a(u) = c ⇔ u = a^c (équations logarithmiques en une étape)
+# =====================================================================
+def _racine_entiere(n, k):
+    """Le rationnel r > 0 tel que r^k = n (n > 0 rationnel, k entier ≥ 1), ou None."""
+    def racine(m):
+        r = round(m ** (1 / k))
+        return next((v for v in (r - 1, r, r + 1) if v >= 0 and v ** k == m), None)
+    a, b = racine(n.numerator), racine(n.denominator)
+    return None if a is None or b is None else F(a, b)
+
+
+def _valeur_exacte(p):
+    """Écriture exacte d'une puissance a^c quand le cours la donne : un nombre (10³ = 1000, 10⁻¹ = 0,1, 2⁴ = 16) ou a^(n+½) = aⁿ√a (10^1,5 = 10√10) ; None sinon."""
+    if not isinstance(p, Pow):
+        return None
+    if _const(p.b) == 0:
+        return Nb(1)                                   # a⁰ = 1, même pour e
+    v = _const(p)
+    if v is not None:
+        return _nb_exact(v) if v == 0 or F(1, 10 ** 8) <= abs(v) < 10 ** 15 else None
+    c = _const(p.b)
+    if isinstance(p.a, Nb) and p.a.val.denominator == 1 and c is not None and c.denominator == 2 and c >= F(1, 2):
+        n = int(c - F(1, 2))
+        racine = Fn("sqrt", p.a)
+        return racine if n == 0 else Op("*", Nb(p.a.val ** n), racine)
+    return None
+
+
+def _base_du_logarithme(base):
+    """(nœud, valeur ou None pour e) de la base d'un logarithme sans inconnue."""
+    if base is None:
+        return Nb(10), F(10)
+    if isinstance(base, E):
+        return base, None
+    v = _const(base)
+    if variables(base) or v is None or v <= 0 or v == 1:
+        raise _Hors
+    return base, v
+
+
+def logarithmique(g, d, x):
+    """Corrigé de log_a(u) = c par la définition du logarithme (u polynôme de degré ≤ 2 en x, ou logarithmes imbriqués, ou base inconnue
+    log_x(n) = k), après avoir isolé le logarithme. None si la méthode ne s'applique pas."""
+    try:
+        return _logarithmique(g, d, x)
+    except _Hors:
+        return None
+
+
+def _logarithmique(g, d, x):
+    enonce = Eq(g, d)
+    g, d, iso = _isoler(g, d, x, PROP_ISOLER_LOG)
+    etapes = [_carte("Isoler le logarithme", [iso])] if iso is not None else []
+    if variables(g) and not variables(d):
+        s, o, inverse = g, d, False
+    elif variables(d) and not variables(g):
+        s, o, inverse = d, g, True
+    else:
+        raise _Hors
+    c = _const(o)
+    if not isinstance(s, Log) or c is None:
+        raise _Hors
+    chaine = Chaine([Eq(g, d)])
+    if inverse:
+        chaine.ajouter(Eq(s, o), "⇔")
+    if isinstance(s.base, Var):
+        return _base_inconnue(enonce, etapes, chaine, s, c, x)
+    rhs, courant, profondeur = _nb_exact(c), s, 0
+    while True:                                   # on épluche les logarithmes de l'extérieur vers l'intérieur
+        base, _ = _base_du_logarithme(courant.base)
+        puissance = base if isinstance(base, E) and rhs == Nb(1) else Pow(base, rhs)          # e^1 s'écrit e
+        profondeur += 1
+        if not isinstance(courant.a, Log):
+            break
+        exact = _valeur_exacte(puissance)
+        chaine.ajouter(Eq(courant.a, exact or puissance, [puissance] if exact is not None else ()), "⇔", PROP_DEFINITION_LOG)
+        rhs, courant = exact or puissance, courant.a
+    u = courant.a
+    if not variables(u) or not _est_polynome(u):
+        raise _Hors
+    lignes, remarque = [chaine], None
+    if isinstance(u, Var):
+        exact = _valeur_exacte(puissance)
+        chaine.ajouter(Eq(u, exact or puissance, [puissance] if exact is not None else ()), "⇔", PROP_DEFINITION_LOG)
+        solutions = [exact or puissance]
+    else:
+        f = _poly(u, x)
+        if len(f) == 2:
+            chaine.ajouter(Eq(u, puissance), "⇔", PROP_DEFINITION_LOG)
+            if f[1] == -1 and f[0] != 0:                      # q − x = c donne x = q − c (corrigé 2.15 l : x = 5 − 10⁸)
+                sol = Op("-", _nb_exact(f[0]), puissance)
+                chaine.ajouter(Eq(Var(x), sol), "⇔")
+            else:
+                sol = _suite_lineaire(chaine, f[1], f[0], puissance, x)
+            v = _const(sol)
+            dernier = chaine.elements[-1]
+            if v is not None and (v == 0 or F(1, 10 ** 8) <= abs(v) < 10 ** 15) and isinstance(dernier, Eq) and tex(dernier.d) == tex(sol):
+                chaine.elements[-1] = Eq(dernier.g, _nb_exact(v), [sol])
+                sol = _nb_exact(v)
+            solutions = [sol]
+        else:
+            v = _const(puissance)
+            if v is None:
+                raise _Hors
+            chaine.ajouter(Eq(u, _nb_exact(v), [puissance]), "⇔", PROP_DEFINITION_LOG)
+            l_poly, solutions, remarque = _resoudre_polynome(f, [v], u, _nb_exact(v), x)
+            if solutions is None:
+                raise _Hors
+            premiere = l_poly[0]
+            for e, lien, prop in zip(premiere.elements[1:], premiere.liens, premiere.props):
+                chaine.ajouter(e, lien, prop)
+            lignes += l_poly[1:]
+    etapes.append(_carte("Définition du logarithme", lignes))
+    if profondeur == 1 and not isinstance(u, Var) and solutions:
+        etapes.append(_carte("Vérification", [Chaine([Positif(u, puissance)], note=PROP_BIEN_DEFINI)]))
+    return {"genre": "logarithmique", "inconnue": x, "enonce": enonce, "base": None, "etapes": etapes, "solutions": solutions,
+            "remarque": remarque}
+
+
+def _base_inconnue(enonce, etapes, chaine, s, c, x):
+    """log_x(n) = k avec k entier ≥ 1 et n = rᵏ : x > 0 et x ≠ 1, xᵏ = n, puis la solution positive."""
+    n = _const(s.a)
+    if variables(s.a) or n is None or n <= 0 or n == 1 or c.denominator != 1 or c < 1 or c > 12:
+        raise _Hors
+    k, r = int(c), None
+    r = _racine_entiere(n, k)
+    if r is None:
+        raise _Hors
+    X = Var(s.base.nom)
+    condition = Chaine([Texte(f"{X.nom} > 0 \\text{{ et }} {X.nom} \\neq 1")], note=PROP_BASE_LOG)
+    equation = Eq(Pow(X, Nb(k)) if k > 1 else X, _nb_exact(n))
+    chaine.ajouter(equation, "⇔", PROP_DEFINITION_LOG)
+    lignes = [chaine]
+    if k % 2 == 0:
+        chaine.ajouter(Ou([Eq(X, _nb_exact(r)), Eq(X, _nb_exact(-r))]), "⇔")
+        lignes.append(Chaine([Eq(X, _nb_exact(r))], note=PROP_SEULE_POSITIVE))
+    else:
+        chaine.ajouter(Eq(X, _nb_exact(r)), "⇔")
+    etapes += [_carte("Condition", [condition]), _carte("Définition du logarithme", lignes)]
+    return {"genre": "logarithmique", "inconnue": x, "enonce": enonce, "base": None, "etapes": etapes, "solutions": [_nb_exact(r)],
+            "remarque": None}
+
+
+# =====================================================================
 # 11. PRODUIT NUL ET PREMIER DEGRÉ À CONSTANTES LOGARITHMIQUES
 # =====================================================================
 def produit_nul(g, d, x):
@@ -1467,7 +1637,7 @@ def tex_solution(r):
 def corriger_equation(g, d, x):
     """Corrigé de g = d par la première méthode du cours qui s'applique (même base, logarithme, produit nul, bases différentes, premier degré),
     ou None si l'équation ne se résout pas avec ces méthodes."""
-    for methode in (meme_base, logarithme, produit_nul, bases_differentes, lineaire_logarithmes):
+    for methode in (meme_base, logarithme, produit_nul, bases_differentes, logarithmique, lineaire_logarithmes):
         r = methode(g, d, x)
         if r is not None:
             return r
