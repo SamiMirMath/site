@@ -518,9 +518,12 @@ def _racine_primitive(q):
 
 
 def _exposant_entier(q, b):
-    """L'entier k tel que b^k = q (b > 1), ou None."""
+    """L'entier k tel que b^k = q (b > 0, b ≠ 1), ou None."""
     if q == 1:
         return 0
+    if b < 1:
+        k = _exposant_entier(q, 1 / b)
+        return None if k is None else -k
     if q < 1:
         k = _exposant_entier(1 / q, b)
         return None if k is None else -k
@@ -684,6 +687,15 @@ class Eq:
         return f"Eq({self.g!r}, {self.d!r})"
 
 
+class Rel:
+    """Une relation d'ordre g < d, g ≤ d, g > d (arbres), par exemple 5^(8x) > 0."""
+    SIGNES = {"<": " < ", ">": " > ", "≤": r" \le ", "≥": r" \ge "}
+    __slots__ = ("g", "signe", "d")
+
+    def __init__(self, g, signe, d):
+        self.g, self.signe, self.d = g, signe, d
+
+
 class Ou:
     """x = a ou x = b : plusieurs équations dont une au moins est vraie."""
     __slots__ = ("eqs",)
@@ -696,8 +708,8 @@ class Chaine:
     """Une ligne du corrigé : éléments (arbres, Eq ou Ou) reliés par « = » (expressions) ou « ⇔ » (équations), chaque lien avec
     sa propriété (texte) ou None quand le calcul est évident."""
 
-    def __init__(self, elements, liens=(), props=()):
-        self.elements, self.liens, self.props = list(elements), list(liens), list(props)
+    def __init__(self, elements, liens=(), props=(), note=None):
+        self.elements, self.liens, self.props, self.note = list(elements), list(liens), list(props), note
         assert len(self.liens) == len(self.props) == len(self.elements) - 1
 
     def ajouter(self, element, lien, prop=None):
@@ -712,6 +724,8 @@ def tex_element(e):
         return tex(e.g) + " = " + tex(e.d)
     if isinstance(e, Ou):
         return r" \text{ ou } ".join(tex_element(q) for q in e.eqs)
+    if isinstance(e, Rel):
+        return tex(e.g) + Rel.SIGNES[e.signe] + tex(e.d)
     return tex(e)
 
 
@@ -722,6 +736,8 @@ def tex_chaine(c):
         s += (r" \iff " if lien == "⇔" else " = ") + tex_element(e)
         if prop:
             s += r" \quad \text{(" + prop + ")}"
+    if c.note:
+        s += r" \quad \text{(" + c.note + ")}"
     return s
 
 
@@ -732,7 +748,16 @@ PROP_MEME_BASE = "même base : a^A = a^B ⇔ A = B"
 PROP_ISOLER = "on isole le terme exponentiel"
 PROP_PRODUIT_NUL = "un produit est nul si l'un des facteurs est nul"
 PROP_DISCRIMINANT = "formule du discriminant"
-PROPRIETES = frozenset({PROP_PUISSANCE, PROP_PRODUIT, PROP_UN, PROP_MEME_BASE, PROP_ISOLER, PROP_PRODUIT_NUL, PROP_DISCRIMINANT})
+PROP_DEFINITION_LOG = "définition du logarithme"
+PROP_LOG_DEUX_MEMBRES = "log des deux membres"
+PROP_LOG_PUISSANCE = "log(a^A) = A · log(a)"
+PROP_LOG_10K = "log(10ᵏ) = k"
+PROP_LN_UN = "ln(1) = 0"
+PROP_EXPO_POSITIVE = "une exponentielle est strictement positive"
+PROP_AUCUNE_SOLUTION = "aucune solution"
+PROPRIETES = frozenset({PROP_PUISSANCE, PROP_PRODUIT, PROP_UN, PROP_MEME_BASE, PROP_ISOLER, PROP_PRODUIT_NUL, PROP_DISCRIMINANT,
+                        PROP_DEFINITION_LOG, PROP_LOG_DEUX_MEMBRES, PROP_LOG_PUISSANCE, PROP_LOG_10K, PROP_LN_UN, PROP_EXPO_POSITIVE,
+                        PROP_AUCUNE_SOLUTION})
 
 
 def _carte(titre, lignes):
@@ -804,6 +829,21 @@ def _facteurs(n, x):
     return [_facteur(f, x) for f in _aplatir(n)]
 
 
+def _nb_exact(v):
+    """Nb(v) ; écrit en décimal (1,9025 ; −0,02) quand le développement décimal de v s'arrête, en fraction sinon (13/60)."""
+    v = F(v)
+    d, k2, k5 = v.denominator, 0, 0
+    while d % 2 == 0:
+        d, k2 = d // 2, k2 + 1
+    while d % 5 == 0:
+        d, k5 = d // 5, k5 + 1
+    k = max(k2, k5)
+    if v.denominator == 1 or d != 1 or k > 8:
+        return Nb(v)
+    chiffres = str(int(abs(v) * 10 ** k)).rjust(k + 1, "0")
+    return Nb(v, chiffres[:-k] + "," + chiffres[-k:])
+
+
 def _isoler(g, d, x):
     """Isole le terme qui contient l'inconnue quand l'autre membre est une constante : T + c, T − c, c − T, c·T, T/c, −T.
     Renvoie (g', d', chaîne ou None)."""
@@ -837,10 +877,10 @@ def _isoler(g, d, x):
             break
         if o is None:
             raise _Hors
-        chaine.ajouter(equation(a, Nb(o)), "⇔", PROP_ISOLER)
+        chaine.ajouter(equation(a, _nb_exact(o)), "⇔", PROP_ISOLER)
     if not chaine.liens:
         return g, d, None
-    return (Nb(o), a, chaine) if inverse else (a, Nb(o), chaine)
+    return (_nb_exact(o), a, chaine) if inverse else (a, _nb_exact(o), chaine)
 
 
 def _choisir_base(facs):
@@ -1027,3 +1067,190 @@ def _meme_base(g, d, x):
 
 def _a_changer(facs, base0):
     return len(facs) > 1 or any(f.genre == "cte" or f.base != base0 or f.imbrique for f in facs)
+
+
+# =====================================================================
+# 10. MÉTHODE « LOGARITHME » : a^f = b, avec b qui n'est pas une puissance de a
+# =====================================================================
+def _exponentielle(n, x):
+    """(base écrite, valeur de la base ou None pour e, exposant) pour n = a^f : a constante > 0 différente de 1, ou e, f contient l'inconnue."""
+    if not (isinstance(n, Pow) and variables(n.b) and not variables(n.a)):
+        raise _Hors
+    a = n.a
+    if isinstance(a, E):
+        return a, None, n.b
+    if _base_valide(a):
+        return a, a.val, n.b
+    v = _const(a)
+    if v is None or v <= 0 or v == 1:
+        raise _Hors
+    return a, v, n.b
+
+
+def _suite_lineaire(chaine, p, q0, c, x):
+    """Ajoute à `chaine` (qui se termine par « p·x + q0 = c ») les lignes qui isolent x ; renvoie la solution (arbre).
+    La forme est celle que donne la chaîne : on ne simplifie pas c/p (ln(25/37)/(−0,02), jamais −50·ln(25/37))."""
+    haut = c
+    if q0 != 0:
+        haut = Op("-", c, _nb_exact(q0)) if q0 > 0 else Op("+", c, _nb_exact(-q0))
+        chaine.ajouter(Eq(_arbre_poly([F(0), p], x), haut), "⇔")
+    if p == 1:
+        return haut
+    solution = Neg(haut) if p == -1 else Op("/", haut, _nb_exact(p))
+    chaine.ajouter(Eq(Var(x), solution), "⇔")
+    return solution
+
+
+def logarithme(g, d, x):
+    """Corrigé de a^f = b par les logarithmes (a constante > 0, ≠ 1, ou e ; f du 1er degré), après avoir isolé l'exponentielle ;
+    S = ∅ si le second membre est ≤ 0. None si la méthode ne s'applique pas."""
+    try:
+        return _logarithme(g, d, x)
+    except _Hors:
+        return None
+
+
+def _logarithme(g, d, x):
+    enonce = Eq(g, d)
+    g, d, iso = _isoler(g, d, x)
+    etapes = [_carte("Isoler l'exponentielle", [iso])] if iso is not None else []
+    if variables(g) and not variables(d):
+        s, o, inverse = g, d, False
+    elif variables(d) and not variables(g):
+        s, o, inverse = d, g, True
+    else:
+        raise _Hors
+    q = _const(o)
+    if q is None:
+        raise _Hors
+    base, valeur_base, f_tree = _exponentielle(s, x)
+    f = _poly(f_tree, x)
+    if len(f) != 2:
+        raise _Hors
+    if q <= 0:
+        etapes.append(_carte("Aucune solution", [
+            Chaine([Rel(s, ">", Nb(0))], note=PROP_EXPO_POSITIVE),
+            Chaine([Rel(o, "<", Nb(0)) if q < 0 else Eq(s, o)], note=PROP_AUCUNE_SOLUTION)]))
+        return {"genre": "logarithme", "inconnue": x, "enonce": enonce, "base": valeur_base, "etapes": etapes, "solutions": [],
+                "remarque": None}
+    if valeur_base is not None and _exposant_entier(q, valeur_base) is not None:
+        raise _Hors                                    # b est une puissance de a : méthode « même base »
+    chaine = Chaine([Eq(g, d)])
+    if inverse:
+        chaine.ajouter(Eq(s, o), "⇔")
+    if valeur_base == 10 or base_est_e(base):
+        if base_est_e(base) and q == 1:
+            chaine.ajouter(Eq(f_tree, Nb(0)), "⇔", PROP_LN_UN)
+            c = Nb(0)
+        else:
+            c = Log(o, E() if base_est_e(base) else None)
+            chaine.ajouter(Eq(f_tree, c), "⇔", PROP_DEFINITION_LOG)
+        titre = "Définition du logarithme"
+    else:
+        chaine.ajouter(Eq(Log(s, None), Log(o, None)), "⇔", PROP_LOG_DEUX_MEMBRES)
+        gauche = Op("*", f_tree, Log(base, None))
+        chaine.ajouter(Eq(gauche, Log(o, None)), "⇔", PROP_LOG_PUISSANCE)
+        k = _exposant_entier(q, F(10))
+        haut = Log(o, None)
+        if k is not None:
+            haut = Nb(k)
+            chaine.ajouter(Eq(gauche, haut), "⇔", PROP_LOG_10K)
+        c = Op("/", haut, Log(base, None))
+        chaine.ajouter(Eq(f_tree, c), "⇔")
+        titre = "Logarithme des deux membres"
+    solution = _suite_lineaire(chaine, f[1], f[0], c, x)
+    etapes.append(_carte(titre, [chaine]))
+    return {"genre": "logarithme", "inconnue": x, "enonce": enonce, "base": valeur_base, "etapes": etapes, "solutions": [solution],
+            "remarque": None}
+
+
+def base_est_e(base):
+    return isinstance(base, E)
+
+
+# =====================================================================
+# 11. PRODUIT NUL ET PREMIER DEGRÉ À CONSTANTES LOGARITHMIQUES
+# =====================================================================
+def produit_nul(g, d, x):
+    """Corrigé de P1 · P2 · … = 0 quand chaque facteur = 0 se résout par « même base » ou « logarithme » (10^x(10^x − 4) = 0)."""
+    try:
+        return _produit_nul(g, d, x)
+    except _Hors:
+        return None
+
+
+NOMS_FACTEURS = ("Facteur 1", "Facteur 2", "Facteur 3", "Facteur 4")
+
+
+def _produit_nul(g, d, x):
+    if isinstance(d, Nb) and d.val == 0 and isinstance(g, Op) and g.op == "*":
+        produit = g
+    elif isinstance(g, Nb) and g.val == 0 and isinstance(d, Op) and d.op == "*":
+        produit = d
+    else:
+        raise _Hors
+    facteurs = _aplatir(produit)
+    if len(facteurs) > len(NOMS_FACTEURS) or any(not variables(f) for f in facteurs):
+        raise _Hors
+    etapes = [_carte("Produit nul", [Chaine([Eq(g, d), Ou(Eq(f, Nb(0)) for f in facteurs)], ["⇔"], [PROP_PRODUIT_NUL])])]
+    solutions = []
+    for nom, f in zip(NOMS_FACTEURS, facteurs):
+        r = meme_base(f, Nb(0), x) or logarithme(f, Nb(0), x)
+        if r is None:
+            raise _Hors
+        etapes.append(_carte(nom, [l for c in r["etapes"] for l in c["lignes"]]))
+        if r["solutions"] is None:
+            raise _Hors
+        for n in r["solutions"]:
+            if all(abs(valeur(n) - valeur(m)) > 1e-12 for m in solutions):
+                solutions.append(n)
+    solutions.sort(key=valeur)
+    return {"genre": "produit_nul", "inconnue": x, "enonce": Eq(g, d), "base": None, "etapes": etapes, "solutions": solutions,
+            "remarque": None}
+
+
+def _contient_log(n):
+    if isinstance(n, Log):
+        return True
+    if isinstance(n, (Neg, Fn)):
+        return _contient_log(n.a)
+    if isinstance(n, (Op, Pow)):
+        return _contient_log(n.a) or _contient_log(n.b)
+    return False
+
+
+def lineaire_logarithmes(g, d, x):
+    """Corrigé de p·x + q = c où c est une constante qui contient un logarithme (x = ln(3) ; 2x = ln(0,1))."""
+    try:
+        return _lineaire_logarithmes(g, d, x)
+    except _Hors:
+        return None
+
+
+def _lineaire_logarithmes(g, d, x):
+    if variables(g) and not variables(d):
+        s, c, inverse = g, d, False
+    elif variables(d) and not variables(g):
+        s, c, inverse = d, g, True
+    else:
+        raise _Hors
+    f = _poly(s, x)
+    if len(f) != 2 or not _contient_log(c):
+        raise _Hors
+    chaine = Chaine([Eq(g, d)])
+    if inverse:
+        chaine.ajouter(Eq(s, c), "⇔")
+    solution = _suite_lineaire(chaine, f[1], f[0], c, x)
+    etapes = [_carte("Équation du premier degré", [chaine])] if chaine.liens else []
+    return {"genre": "lineaire", "inconnue": x, "enonce": Eq(g, d), "base": None, "etapes": etapes, "solutions": [solution],
+            "remarque": None}
+
+
+def corriger_equation(g, d, x):
+    """Corrigé de g = d par la première méthode du cours qui s'applique (même base, logarithme, produit nul, premier degré),
+    ou None si l'équation ne se résout pas avec ces méthodes."""
+    for methode in (meme_base, logarithme, produit_nul, lineaire_logarithmes):
+        r = methode(g, d, x)
+        if r is not None:
+            return r
+    return None

@@ -598,6 +598,206 @@ class TestMemeBase(unittest.TestCase):
         self.assertIn("2{,}25 = 1{,}5^{2}", texte)
 
 
+# ---------------------------------------------------------------------
+# Étape 3 : méthode « logarithme » (E2), produit nul, premier degré à constantes logarithmiques
+# ---------------------------------------------------------------------
+def corriger(saisie):
+    s = el.analyser_saisie(saisie)
+    return el.corriger_equation(s.g, s.d, s.inconnue)
+
+
+# (saisie, solutions arrondies à 10⁻³) : exercices 2.18, 2.21, 2.23 (solutions p. 38-39), p. 26, p. 28-29, 2.26, 2.27, 2.32
+BATTERIE_E2 = [
+    ("10^x=8", [0.903]), ("10^x=0,65", [-0.187]), ("10^(2x)=0,7", [-0.077]), ("10^x*(10^x-4)=0", [0.602]), ("10^(3x)=25", [0.466]),
+    ("(10^(-x)-1)*(10^(-x)-8)=0", [-0.903, 0.0]),
+    ("e^x=7", [1.946]), ("3e^x=0,65", [-1.529]), ("x=ln(3)", [1.099]), ("2x=ln(0,1)", [-1.151]), ("e^(-0,01x)=0,7", [35.667]),
+    ("2^x=100", [6.644]), ("10^x=5", [0.699]), ("3^(x-1)=10", [3.096]), ("5^(2x+3)=7", [-0.895]), ("1,04^x=100", [117.417]),
+    ("4^(x-4)=20", [6.161]), ("5^(8x)=-25", []), ("12^x=49", [1.566]),
+    ("3^x=20", [2.727]), ("4^(2x+1)=60", [0.977]), ("1,0325^n=3", [34.35]), ("0,8^n=0,5", [3.106]), ("37*e^(-0,02t)=25", [19.602]),
+    ("2000*1,045^n=3805", [14.612]), ("1,0375^n=3", [29.842]), ("e^(0,05t)=2", [13.863]),
+    # autres formes
+    ("2*3^x=-6", []), ("10^x=0", []), ("3*2^x=5", [0.737]), ("-2^x=-10", [3.322]), ("e^x=1", [0.0]), ("(1/2)^x=3", [-1.585]),
+    ("2^(-x)=3", [-1.585]), ("18=2*3^x+1", [2.0]) if False else ("20=2*3^x+2", [2.0]), ("100=2^x", [6.644]), ("5^x/2=3", [1.113]),
+    ("exp(x)=7", [1.946]), ("2^(x/2)=5", [4.644]),
+]
+SANS_E2 = ["x*2^x=8", "2^x+3^x=5", "x^x=4", "2^(x^2)=5", "2^x=3^(x+1)", "3^x=2^x", "log(x)=2", "ln(x)=3", "2^(x^3)=8", "e^x=e^3", "e^x=2^x",
+           "x^2=4", "2x+1=9", "sqrt(2)^x=3", "3^(x^2+1)=7", "10^x*(x-4)=0", "2*10^x=0*x"]
+
+
+class TestLogarithme(unittest.TestCase):
+    def test_batterie(self):
+        for saisie, attendu in BATTERIE_E2:
+            with self.subTest(saisie):
+                r = corriger(saisie)
+                self.assertIsNotNone(r)
+                self.assertEqual([round(el.valeur(n), 3) + 0.0 for n in r["solutions"]], attendu)
+
+    def test_oracle_les_solutions_verifient_l_equation_de_l_enonce(self):
+        for saisie, attendu in BATTERIE_E2:
+            with self.subTest(saisie):
+                s = el.analyser_saisie(saisie)
+                r = corriger(saisie)
+                for n in r["solutions"]:
+                    self.assertTrue(vrai(Eq(s.g, s.d), evaluer(n)), f"{saisie} : {el.tex(n)}")
+
+    def test_aucune_autre_solution(self):
+        """g − d change de signe exactement aux solutions annoncées sur [−12 ; 12] (équations à une exponentielle)."""
+        for saisie, attendu in BATTERIE_E2:
+            if len(attendu) == 0 or saisie in ("x=ln(3)", "2x=ln(0,1)"):
+                continue
+            with self.subTest(saisie):
+                s = el.analyser_saisie(saisie)
+                signes = []
+                for i in range(-1200, 1201):
+                    x = MP.mpf(i) / 100 + MP.mpf("0.000123")
+                    signes.append(1 if evaluer(s.g, x) - evaluer(s.d, x) > 0 else -1)
+                racines = sum(1 for a, b in zip(signes, signes[1:]) if a != b)
+                self.assertEqual(racines, len([v for v in attendu if -12 < v < 12]))
+
+    def test_formes_exactes(self):
+        """La forme que donne la chaîne (Q11) : ni simplification de ln(25/37)/(−0,02), ni regroupement hors E3."""
+        for saisie, exact in [
+            ("2^x=100", r"\frac{2}{\log(2)}"), ("10^x=8", r"\log(8)"), ("e^x=7", r"\ln(7)"), ("3e^x=0,65", r"\ln\left(\frac{13}{60}\right)"),
+            ("e^(-0,01x)=0,7", r"\frac{\ln(0{,}7)}{-0{,}01}"), ("37*e^(-0,02t)=25", r"\frac{\ln\left(\frac{25}{37}\right)}{-0{,}02}"),
+            ("3^(x-1)=10", r"\frac{1}{\log(3)} + 1"), ("5^(2x+3)=7", r"\frac{\frac{\log(7)}{\log(5)} - 3}{2}"),
+            ("10^(2x)=0,7", r"\frac{\log(0{,}7)}{2}"), ("10^(3x)=25", r"\frac{\log(25)}{3}"), ("12^x=49", r"\frac{\log(49)}{\log(12)}"),
+            ("1,04^x=100", r"\frac{2}{\log(1{,}04)}"), ("4^(x-4)=20", r"\frac{\log(20)}{\log(4)} + 4"),
+            ("2000*1,045^n=3805", r"\frac{\log(1{,}9025)}{\log(1{,}045)}"), ("0,8^n=0,5", r"\frac{\log(0{,}5)}{\log(0{,}8)}"),
+            ("(1/2)^x=3", r"\frac{\log(3)}{\log\left(\frac{1}{2}\right)}"), ("2x=ln(0,1)", r"\frac{\ln(0{,}1)}{2}"),
+            ("x=ln(3)", r"\ln(3)"), ("10^(-x)=8", r"-\log(8)"), ("e^x=1", "0"), ("4^(2x+1)=60", r"\frac{\frac{\log(60)}{\log(4)} - 1}{2}"),
+            ("(10^(-x)-1)*(10^(-x)-8)=0", None)]:
+            with self.subTest(saisie):
+                r = corriger(saisie)
+                if exact is None:
+                    self.assertEqual([el.tex(n) for n in r["solutions"]], [r"-\log(8)", "0"])
+                else:
+                    self.assertEqual([el.tex(n) for n in r["solutions"]], [exact])
+
+    def test_cartes(self):
+        titres = lambda s: [c["titre"] for c in corriger(s)["etapes"]]
+        self.assertEqual(titres("2^x=100"), ["Logarithme des deux membres"])
+        self.assertEqual(titres("10^x=8"), ["Définition du logarithme"])
+        self.assertEqual(titres("e^x=7"), ["Définition du logarithme"])
+        self.assertEqual(titres("37*e^(-0,02t)=25"), ["Isoler l'exponentielle", "Définition du logarithme"])
+        self.assertEqual(titres("2000*1,045^n=3805"), ["Isoler l'exponentielle", "Logarithme des deux membres"])
+        self.assertEqual(titres("5^(8x)=-25"), ["Aucune solution"])
+        self.assertEqual(titres("2*3^x=-6"), ["Isoler l'exponentielle", "Aucune solution"])
+        self.assertEqual(titres("10^x*(10^x-4)=0"), ["Produit nul", "Facteur 1", "Facteur 2"])
+        self.assertEqual(titres("2x=ln(0,1)"), ["Équation du premier degré"])
+        self.assertEqual(titres("x=ln(3)"), [])
+        self.assertEqual(corriger("x=ln(3)")["genre"], "lineaire")
+        self.assertEqual(corriger("10^x*(10^x-4)=0")["genre"], "produit_nul")
+        self.assertEqual(corriger("2^x=100")["genre"], "logarithme")
+
+    def test_la_meme_base_garde_la_priorite(self):
+        for saisie in ["3^x=27", "4^(2x)=8", "10^x=1/100", "2*3^(x-1)=18", "11^(2x+1)=1", "5^(3x+2)=(5^x)^2", "2^x=2*4^(x-1)"]:
+            with self.subTest(saisie):
+                self.assertEqual(corriger(saisie)["genre"], "meme_base")
+        self.assertEqual(corriger("4^(2x)=8")["solutions"], [Nb(F(3, 4))])      # 2.23 c : base commune 2, pas de logarithme
+
+    def test_ecriture_du_corrige(self):
+        lignes = lambda s: [el.tex_chaine(l) for c in corriger(s)["etapes"] for l in c["lignes"]]
+        self.assertEqual(lignes("2^x=100"), [
+            r"2^{x} = 100 \iff \log(2^{x}) = \log(100) \quad \text{(log des deux membres)} \iff x \cdot \log(2) = \log(100) "
+            r"\quad \text{(log(a^A) = A · log(a))} \iff x \cdot \log(2) = 2 \quad \text{(log(10ᵏ) = k)} \iff x = \frac{2}{\log(2)}"])
+        self.assertEqual(lignes("5^(8x)=-25"), [r"5^{8x} > 0 \quad \text{(une exponentielle est strictement positive)}",
+                                                r"-25 < 0 \quad \text{(aucune solution)}"])
+        self.assertEqual(lignes("10^x=0"), [r"10^{x} > 0 \quad \text{(une exponentielle est strictement positive)}",
+                                            r"10^{x} = 0 \quad \text{(aucune solution)}"])
+        self.assertEqual(lignes("10^x*(10^x-4)=0")[0], r"10^{x} \cdot (10^{x} - 4) = 0 \iff 10^{x} = 0 \text{ ou } 10^{x} - 4 = 0 "
+                                                       r"\quad \text{(un produit est nul si l'un des facteurs est nul)}")
+        self.assertEqual(lignes("e^x=1"), [r"e^{x} = 1 \iff x = 0 \quad \text{(ln(1) = 0)}"])
+        self.assertEqual(lignes("18=2*10^x+1")[0],
+                         r"18 = 2 \cdot 10^{x} + 1 \iff 17 = 2 \cdot 10^{x} \quad \text{(on isole le terme exponentiel)} "
+                         r"\iff 8{,}5 = 10^{x} \quad \text{(on isole le terme exponentiel)}")
+
+    def test_propriete_a_chaque_etape_du_logarithme(self):
+        for saisie, _ in BATTERIE_E2:
+            with self.subTest(saisie):
+                r = corriger(saisie)
+                for carte in r["etapes"]:
+                    for ligne in carte["lignes"]:
+                        for p in ligne.props + [ligne.note]:
+                            self.assertTrue(p is None or p in el.PROPRIETES, (saisie, p))
+                        if carte["titre"] in ("Définition du logarithme", "Logarithme des deux membres"):
+                            props = [p for p in ligne.props if p is not None]      # le simple échange des membres (100 = 2^x) n'a pas de propriété
+                            if carte["titre"] == "Logarithme des deux membres":
+                                self.assertEqual(props[:2], [el.PROP_LOG_DEUX_MEMBRES, el.PROP_LOG_PUISSANCE])
+                            else:
+                                self.assertIn(props[0], (el.PROP_DEFINITION_LOG, el.PROP_LN_UN))
+
+    def test_chaines_les_equivalences_gardent_les_solutions(self):
+        for saisie, attendu in BATTERIE_E2:
+            with self.subTest(saisie):
+                r = corriger(saisie)
+                sols = [evaluer(n) for n in r["solutions"]]
+                grille = [MP.mpf(i) / 4 + MP.mpf("0.0371") for i in range(-40, 41)]
+                for carte in r["etapes"]:
+                    for ligne in carte["lignes"]:
+                        if "⇔" not in ligne.liens:
+                            continue
+                        for e in ligne.elements:
+                            if not isinstance(e, (Eq, el.Ou)):
+                                continue
+                            facteur = r["genre"] == "produit_nul" and carte["titre"].startswith("Facteur")
+                            for x in sols:
+                                # une carte « Facteur k » n'est vraie qu'aux solutions de son facteur : elles se reconnaissent à la première équation
+                                if facteur and not element_vrai(ligne.elements[0], x):
+                                    self.assertFalse(element_vrai(e, x), (saisie, el.tex_element(e), x))
+                                else:
+                                    self.assertTrue(element_vrai(e, x), (saisie, el.tex_element(e), x))
+                            for x in grille:
+                                self.assertFalse(element_vrai(e, x), (saisie, el.tex_element(e), x))
+
+    def test_chaines_les_egalites_sont_justes_pour_tout_x(self):
+        for saisie, _ in BATTERIE_E2:
+            with self.subTest(saisie):
+                for carte in corriger(saisie)["etapes"]:
+                    for ligne in carte["lignes"]:
+                        if "=" in ligne.liens:
+                            for x in ["0.37", "-1.4", "2.3"]:
+                                v = [evaluer(e, MP.mpf(x)) for e in ligne.elements]
+                                for w in v[1:]:
+                                    self.assertLessEqual(abs(w - v[0]), MP.mpf("1e-20") * (1 + abs(v[0])), (saisie, el.tex_chaine(ligne)))
+
+    def test_ln_pour_e_log_pour_le_reste(self):
+        """EL-04/EL-05 : une équation en e^… n'écrit que \\ln ; les autres n'écrivent que \\log (base 10) ; log_a n'apparaît jamais ici."""
+        for saisie, _ in BATTERIE_E2:
+            with self.subTest(saisie):
+                texte = " ".join(el.tex_chaine(l) for c in corriger(saisie)["etapes"] for l in c["lignes"])
+                texte += " ".join(el.tex(n) for n in corriger(saisie)["solutions"])
+                en_e = ("e^" in saisie or "exp(" in saisie or "ln(" in saisie) and "10" not in saisie
+                if "log" in texte or "ln" in texte:
+                    if en_e:
+                        self.assertNotIn("\\log", texte)
+                    else:
+                        self.assertNotIn("\\ln", texte)
+                self.assertNotIn("\\log_", texte)
+                self.assertIsNone(re.search(r"\d\.\d", texte), texte)
+                self.assertIsNone(TUTOIEMENT.search(re.sub(r"\\[a-z]+", " ", texte)), texte)
+
+    def test_hors_programme_ou_autre_methode(self):
+        for saisie in SANS_E2:
+            with self.subTest(saisie):
+                s = el.analyser_saisie(saisie)
+                self.assertIsNone(el.corriger_equation(s.g, s.d, s.inconnue))
+
+    def test_decimaux_exacts(self):
+        for v, dec, tex in [(F(761, 400), "1,9025", "1{,}9025"), (F(-1, 50), "0,02", "-0{,}02"), (F(13, 60), None, r"\frac{13}{60}"),
+                            (F(7), None, "7"), (F(1, 3), None, r"\frac{1}{3}"), (F(5, 2), "2,5", "2{,}5"), (F(1, 8), "0,125", "0{,}125")]:
+            with self.subTest(v):
+                n = el._nb_exact(v)
+                self.assertEqual(n.dec, dec)
+                self.assertEqual(n.val, v)
+                self.assertEqual(el.tex(n), tex)
+
+    def test_base_inferieure_a_1_ne_boucle_pas(self):
+        for saisie, v in [("(1/2)^x=3", -1.585), ("0,8^n=0,5", 3.106), ("0,5^x=8", -3.0), ("(1/3)^x=9", -2.0), ("0,5^x=3", -1.585)]:
+            with self.subTest(saisie):
+                r = corriger(saisie)
+                self.assertEqual(round(el.valeur(r["solutions"][0]), 3) + 0.0, v)
+
+
 class TestNotationSuisse(unittest.TestCase):
     """Q5 (14.10.2026), Q12 (26.10.2026) : ’ dès 4 chiffres sur la partie entière seulement (1’234,567), virgule décimale ;
     saisie de ' et ’ ; « 1 000 » refusé. Fonctions de moteur/nombres.py."""
