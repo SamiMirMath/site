@@ -5,6 +5,8 @@
 
      const moteur = new MoteurPython("ensemble-definition", { surEtat: () => majEtat() });
      await moteur.demarrer();                        // fichiers + Pyodide ; SymPy se charge ensuite en arrière-plan
+                                                     // (roues précompilées du site, téléchargées pendant le chargement de Pyodide ;
+                                                     //  à défaut, roue du CDN : voir worker-pyodide.js)
      const r = await moteur.appelPy("analyser", "ln(x-1)", 30000);   // rejette Error("delai") après 30 s
      moteur.relancer();                              // après un délai dépassé : nouveau worker, mêmes fichiers
      moteur.sympyOK, moteur.sympyPret                // état de SymPy (Promise)
@@ -24,6 +26,7 @@ export class MoteurPython {
     this.config = null;
     this.fichiers = null;
     this.indexURL = null;
+    this.roues = null;
   }
 
   /** Télécharge le manifeste puis les fichiers Python de l'outil. */
@@ -34,6 +37,8 @@ export class MoteurPython {
     this.config = manifeste.outils[this.outil];
     if (!this.config) throw new Error("outil absent du manifeste : " + this.outil);
     this.indexURL = "https://cdn.jsdelivr.net/pyodide/v" + manifeste.versions.pyodide + "/full/";
+    // SymPy et mpmath précompilés (bytecode), hébergés avec le site ; absents du manifeste : le worker prend les roues du CDN
+    this.roues = manifeste.roues ? { pyc: manifeste.roues.pyc, urls: manifeste.roues.fichiers.map(c => new URL(c, RACINE).href) } : null;
     const reponses = await Promise.all(this.config.fichiers.map(c => fetch(new URL(c, RACINE), { cache: "no-cache" })));
     this.fichiers = {};
     for (let i = 0; i < reponses.length; i++) {
@@ -60,7 +65,7 @@ export class MoteurPython {
       this.attente.delete(e.data.id);
       e.data.err ? p.ko(new Error(e.data.err)) : p.ok(e.data.r);
     };
-    this.pret = this.appel("init", { indexURL: this.indexURL, fichiers: this.fichiers, module: this.config.module });
+    this.pret = this.appel("init", { indexURL: this.indexURL, fichiers: this.fichiers, module: this.config.module, roues: this.roues });
     this.sympyPret = this.pret.then(() => this.appel("sympy")).then(() => { this.sympyOK = true; this.surEtat(); })
       .catch(() => { this.surEtat(); });
     return this.pret;

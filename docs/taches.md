@@ -442,6 +442,13 @@ l'élève, un « Calcul en cours… » qui dure parce que SymPy se charge encore
   vers le serveur de test ; envoyer les corps par DevTools (base64) rendait la suite plus lente que le CDN (899 s contre 682 s).
   Durée de la suite de pages : 682 s avant, 587 s après (4 tests de plus). Version de la copie ≠ pages : le test échoue.
 
+### T32 — Chargement du moteur : SymPy précompilé — FAITE le 2026-10-26
+- Plainte de l'enseignant : « extrêmement lent sur téléphone » (≈ 20 s de compilation de SymPy sur téléphone, à chaque ouverture de page).
+- **Fait** : `moteur/construire_roues.py` et `moteur/roues/` (roues SymPy et mpmath en bytecode, D13 dans [choix-techniques.md](choix-techniques.md)),
+  téléchargement en parallèle de Pyodide, repli sur le CDN si une roue manque ou si le bytecode n'est pas celui de Pyodide. Jusqu'à « Prêt. » :
+  ≈ 11-13 s -> ≈ 5,5 s sur un Mac chargé (`import sympy` : 5-8 s -> 0,8-1,3 s). Tests : `tests/python/test_roues.py`, 3 tests de page.
+- **Reste (T31 b/c)** : mesurer sur téléphone en Suisse ; décider du préchargement dès l'accueil et de la précompilation de nos propres modules.
+
 ### T31 — Temps d'attente : libellé et mesure en Suisse — (a) FAITE le 2026-10-22 ; (b) et (c) restent à faire
 - (a) **Libellé** (faite) : pendant l'attente de SymPy (`sympyAvant`, pages Dérivée, Limites, Étude complète), l'état affiche « Calcul en cours… »
   alors que le calcul n'a pas commencé. Afficher « Chargement du moteur de calcul pour cette fonction… » (texte déjà dans `outil.js`), et

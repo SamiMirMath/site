@@ -54,6 +54,7 @@ tests/
 | D10 | **Pyodide reste sur jsDelivr** ; pas de service worker pour l'instant | Décision enseignant ; coût de l'auto-hébergement chiffré plus bas. |
 | D11 | **Simplexe reste en JS** (pas de Pyodide) | Instantané sur téléphone, déjà exact (BigInt). Priorité faible, traité en dernier. |
 | D12 | `docs/` et `tests/` **exclus de la publication** (`_config.yml`) | Fait (`88b7b0f`). Attention : Jekyll ignore aussi les dossiers commençant par « _ » ; ne jamais nommer ainsi un dossier à publier. |
+| D13 | **SymPy et mpmath précompilés, hébergés avec le site** (`moteur/roues/`) ; Pyodide, lui, reste sur jsDelivr (D10) | Mesuré le 26.10.2026 : `import sympy` compile ≈ 470 modules à chaque ouverture de page (≈ 5 s sur ordinateur, ≈ 20 s sur téléphone) parce que les roues officielles ne contiennent que du source. Avec le bytecode : < 1 s. Voir « Roues précompilées » plus bas. |
 
 ### Précautions pour `moteur/noyau.py` (D6, fait en T11, `0e019bf`)
 
@@ -247,3 +248,41 @@ Mesuré le 13.10.2026 sur la version utilisée (0.27.7), en ne gardant que le n�
 - **Transfert pour l'élève** : identique (≈ 10 Mo à la première visite).
 - **À noter** : la numérotation de Pyodide a changé (versions `314.0.x` sur npm, qui suivent
   Python 3.14). Une montée de version sera un vrai chantier, à faire avec la suite de tests.
+
+## Roues précompilées de SymPy et mpmath (D13, T32)
+
+**Pourquoi.** Plainte de l'enseignant (26.10.2026) : le chargement du moteur est « extrêmement lent » sur téléphone. Décomposition mesurée
+(Mac, Pyodide servi en local donc CPU seulement, charge machine élevée donc chiffres à ± 30 %) :
+
+| Étape (Étude complète) | Avant | Après |
+|---|---|---|
+| Pyodide (wasm, bibliothèque standard) | 5-9 s | inchangé |
+| Import du module de l'outil | 0,4-1,2 s | inchangé |
+| Téléchargement et dézippage de SymPy | 1,1-2,1 s | 0,8 s |
+| **`import sympy`** | **5-8 s** (24 s avec un processeur 4 fois plus lent) | **0,8-1,3 s** |
+| **Jusqu'à « Prêt. »** (médiane de 3 ouvertures) | **≈ 11-13 s** | **≈ 5,5 s** |
+
+La cause est la compilation : les roues officielles (et la bibliothèque standard de Pyodide) ne contiennent que du source `.py`, Python compile
+donc chaque module importé à chaque ouverture de page (le cache `__pycache__` vit en mémoire et disparaît avec l'onglet). Sur CPython 3.12 natif,
+`import sympy` prend 3,0 s sans cache et 0,7 s avec : les trois quarts du temps sont de la compilation.
+
+**Ce qui est fait.** `moteur/construire_roues.py` réécrit les roues officielles de Pyodide (SHA-256 vérifié contre `pyodide-lock.json`) en
+remplaçant par leur `.pyc` les modules que `import sympy` charge (420 modules ; les 427 autres restent en source) et tous ceux de mpmath.
+Les roues sont dans `moteur/roues/` (nom = version + 8 premiers caractères du SHA-256 : un nom ne désigne jamais deux contenus), le manifeste
+les annonce (clé `roues`, avec le numéro magique du bytecode). Le worker les télécharge **dès le début, pendant le chargement de Pyodide**
+(avant, SymPy ne commençait à se télécharger qu'une fois Python prêt), les décompresse dans `site-packages` et importe.
+
+**Sécurités.** (1) Si le numéro magique du bytecode de Pyodide n'est pas celui du manifeste (Pyodide passé à une autre version de Python), ou si
+une roue manque ou ne se télécharge pas, le worker charge SymPy depuis le CDN comme avant : plus lent, jamais cassé (deux tests de page). (2) Retirer
+la clé `roues` du manifeste suffit à revenir au comportement d'avant. (3) `tests/python/test_roues.py` vérifie, module par module, que chaque
+`.pyc` est exactement le bytecode du source du SymPy installé (une roue périmée fait échouer la suite), le numéro magique, l'absence de source en double
+et qu'un Python 3.12 importe SymPy depuis la roue seule.
+
+**Coût.** + 7,3 Mo dans le dépôt par reconstruction (6,6 Mo SymPy + 0,7 Mo mpmath ; 2,7 Mo de plus à télécharger que les roues officielles,
+puisque le bytecode se compresse moins bien que le source) ; la reconstruction n'a lieu que si SymPy, mpmath ou la version de Python de Pyodide
+changent (≈ 10 minutes avec la commande de `construire_roues.py`, puis `tests/python` et `tests/pages`). GitHub Pages sert ces fichiers avec un cache de
+10 minutes et une revalidation : un élève qui revient le jour même ne les retélécharge pas.
+
+**Pas fait (à décider selon les mesures sur téléphone, T31) :** préchargement de Pyodide dès l'accueil ; précompilation de nos propres modules
+Python (≈ 0,3 s sur ordinateur, ≈ 1,5 s sur téléphone) ; service worker (hors ligne et rechargement instantané, écarté par D10) ; instantané mémoire de
+Pyodide (trop gros). Ce qui reste incompressible : le démarrage de Pyodide lui-même (≈ 5 s sur ordinateur).

@@ -41,12 +41,32 @@ class TestPyodideLocal(unittest.TestCase):
                 pyodide_local.verifier(copie)
 
     def test_une_page_se_charge_sans_le_cdn(self):
+        """Pyodide vient de la copie locale ; SymPy et mpmath des roues précompilées du site (T32), donc pas de roue SymPy demandée au CDN."""
         with Navigateur() as nav:
             attendre_pret(nav.ouvrir("factorisation/index.html"))
             self.assertIn("pyodide.asm.wasm", nav.intercepteur.servies)
-            self.assertIn("sympy-1.13.3-py3-none-any.whl", nav.intercepteur.servies)
+            self.assertNotIn("sympy-1.13.3-py3-none-any.whl", nav.intercepteur.servies)
             self.assertEqual(nav.intercepteur.refusees, [])
 
+    def modifier_manifeste(self, modification):
+        """Script exécuté avant la page : le manifeste reçu par la page est modifié par `modification` (JavaScript sur `m`)."""
+        return f"""(() => {{ const f = window.fetch.bind(window);
+            window.fetch = async (u, o) => {{ const r = await f(u, o);
+              if (String(u).endsWith('manifeste.json')) {{ const m = await r.json(); {modification}
+                return new Response(JSON.stringify(m), {{ headers: {{ 'content-type': 'application/json' }} }}); }}
+              return r; }}; }})()"""
+
+    def test_roues_absentes_repli_sur_le_cdn(self):
+        """Une roue précompilée introuvable ne bloque rien : SymPy est pris dans le CDN de Pyodide, la page arrive à « Prêt. »."""
+        with Navigateur() as nav:
+            attendre_pret(nav.ouvrir("factorisation/index.html", self.modifier_manifeste("m.roues.fichiers.push('moteur/roues/absente.zip');")))
+            self.assertIn("sympy-1.13.3-py3-none-any.whl", nav.intercepteur.servies)
+
+    def test_bytecode_d_une_autre_version_de_python_repli_sur_le_cdn(self):
+        """Si Pyodide change de version de Python (autre numéro magique), les roues précompilées ne sont pas utilisées."""
+        with Navigateur() as nav:
+            attendre_pret(nav.ouvrir("factorisation/index.html", self.modifier_manifeste("m.roues.pyc = '00000000';")))
+            self.assertIn("sympy-1.13.3-py3-none-any.whl", nav.intercepteur.servies)
 
 if __name__ == "__main__":
     unittest.main()
