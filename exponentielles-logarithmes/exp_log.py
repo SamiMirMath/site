@@ -251,6 +251,20 @@ def _fonction(s, i):
     return None
 
 
+def _fonction_inconnue(s, i):
+    """Le nom (sin, cos, tan, lg…) si les lettres qui commencent en s[i] forment au moins deux lettres suivies d'une parenthèse sans se
+    terminer par un nom de fonction connu (xlog(x) reste x · log(x)) ; sinon None."""
+    j = i
+    while j < len(s) and s[j].isalpha() and s[j].isascii():
+        j += 1
+    k = j
+    while k < len(s) and s[k].isspace():
+        k += 1
+    if j - i < 2 or s[k:k + 1] != "(" or s[i:j].endswith(("sqrt", "exp", "log", "ln")):
+        return None
+    return s[i:j]
+
+
 def tokeniser(texte):
     s = texte.strip().lower().translate(_SYMBOLES)
     toks, i = [], 0
@@ -289,6 +303,9 @@ def tokeniser(texte):
                 toks.append(Tok("fn", nom, base))
                 i = j
             else:
+                inconnue = _fonction_inconnue(s, i)
+                if inconnue:
+                    raise ErreurSaisie(f"La fonction {inconnue} n'est pas traitée par cet outil.")
                 toks.append(Tok("var", c, None))
                 i += 1
         elif c in _OPERATEURS or c in _INEGALITES:

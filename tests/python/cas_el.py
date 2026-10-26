@@ -89,7 +89,7 @@ PAS_ENCORE = ["log(x)=log(5)", "log_x(2)=3", "log(x^2+1)=-1", "e^x=e^3", "-2^x=-
 
 # Calculs que l'outil ne traite pas (message de calcul) et saisies refusées à la lecture
 CALCULS_NON_RESOLUS = ["2log(5)", "log(2)+log(3)", "log_2(e)", "log(0)", "log(-5)", "ln(0)", "2+3", "5", "e", "sqrt(2)"]
-ERREURS_DE_LECTURE = ["", "2e=5", "x+y=3", "x<3", "2^x>=3", "log_1(x)=2", "log x = 2", "3^x=2=1", "=3", "3^x=", "e^-0,02t=1", "sin(x)=0", "2 000^x=3",
+ERREURS_DE_LECTURE = ["", "2e=5", "x+y=3", "x<3", "2^x>=3", "log_1(x)=2", "log x = 2", "3^x=2=1", "=3", "3^x=", "e^-0,02t=1", "sin(x)=0", "cos(x)=1", "tan(x)=2", "lg(x)=2", "2lg(x)=4", "sin x = 0", "2 000^x=3",
                       "(x+1=3", "x+1)=3"]
 
 

@@ -141,6 +141,15 @@ class TestErreurs(unittest.TestCase):
             with self.subTest(s):
                 self.refuse(s, "strictement positive et différente de 1")
 
+    def test_fonctions_inconnues(self):
+        for s, nom in [("sin(x)=0", "sin"), ("cos(x)=1", "cos"), ("tan(x)=2", "tan"), ("TAN(x)=2", "tan"), ("lg(x)=2", "lg"), ("2lg(x)=4", "lg"),
+                       ("sin(", "sin"), ("sin (x)=0", "sin")]:
+            with self.subTest(s):
+                self.refuse(s, f"La fonction {nom} n'est pas traitée par cet outil.")
+        for s in ["xlog(x)=2", "3ln(x)=1", "2exp(t)=5", "(x+1)(x-2)=0", "2x(x+1)=0", "Log(x)=2"]:      # produits implicites et noms connus : acceptés
+            with self.subTest(s):
+                el.lire_membres(s)
+
     def test_equation_ou_calcul(self):
         self.refuse("3^x", "Écrivez une équation", analyser=True)
         self.refuse("2x+1", "Écrivez une équation", analyser=True)

@@ -2271,6 +2271,10 @@
   "erreur": "La lettre e désigne le nombre e ≈ 2,718 : choisissez une autre lettre pour l'inconnue.",
   "ok": false
  },
+ "2lg(x)=4": {
+  "erreur": "La fonction lg n'est pas traitée par cet outil.",
+  "ok": false
+ },
  "2log(5)": {
   "erreur": "Cet outil ne traite pas encore ce type de calcul.",
   "ok": false
@@ -3769,6 +3773,10 @@
   "erreur": "Il manque un membre de l'équation (avant ou après le signe =).",
   "ok": false
  },
+ "cos(x)=1": {
+  "erreur": "La fonction cos n'est pas traitée par cet outil.",
+  "ok": false
+ },
  "e": {
   "erreur": "Écrivez une équation (avec =) ou un logarithme à calculer, par exemple log_2(50).",
   "ok": false
@@ -4020,6 +4028,10 @@
   "enonce_tex": "e^{x} = 7",
   "erreur": null,
   "ok": true
+ },
+ "lg(x)=2": {
+  "erreur": "La fonction lg n'est pas traitée par cet outil.",
+  "ok": false
  },
  "ln(0)": {
   "erreur": "Le logarithme d'un nombre négatif ou nul n'est pas défini.",
@@ -6642,8 +6654,12 @@
   "erreur": null,
   "ok": true
  },
- "sin(x)=0": {
+ "sin x = 0": {
   "erreur": "Une seule inconnue : vous avez écrit i et n et s et x.",
+  "ok": false
+ },
+ "sin(x)=0": {
+  "erreur": "La fonction sin n'est pas traitée par cet outil.",
   "ok": false
  },
  "sqrt(2)": {
@@ -6656,6 +6672,10 @@
  },
  "sqrt(2)^x=4": {
   "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "tan(x)=2": {
+  "erreur": "La fonction tan n'est pas traitée par cet outil.",
   "ok": false
  },
  "x*2^x=8": {
