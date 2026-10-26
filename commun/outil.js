@@ -1,4 +1,4 @@
-/* Page outil générique (T16) : monte le comportement commun sur le HTML statique d'une page.
+/* Page outil générique : monte le comportement commun sur le HTML statique d'une page.
 
    La page garde son HTML (titre, accroche, saisie, clavier, « Rappel de la méthode », zone #resultat)
    et ses `id` ; elle passe sa config :

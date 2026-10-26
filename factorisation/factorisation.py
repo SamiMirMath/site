@@ -360,7 +360,7 @@ class Ctx:
             self._marque += 1
 
     def marquer(self, m=None):
-        """Rattache à la méthode `m` les étapes dites depuis le dernier marquage (T21 : une carte par application)."""
+        """Rattache à la méthode `m` les étapes dites depuis le dernier marquage (une carte par application)."""
         for i in range(self._marque, len(self.etapes)):
             self.groupes[i] = m
         self._marque = len(self.etapes)
@@ -736,7 +736,7 @@ def fact(P, ctx, ecrits=None, tex_hint=None, prof=0, ident=False):
     monos = termes_monomes(ctx, P)
     if ecrits and len(ecrits) >= 2 and (len(monos) == 1 or sp.Poly(P, *_gens(P)).total_degree() == 1):
         # une somme écrite qui se réduit à un monôme ou au 1er degré, (x+1)² − (x−1)² = 4x, (x+3)² − (x−1)² = 8x + 8 :
-        # l'identité se lit sur les termes écrits (FA-05)
+        # l'identité se lit sur les termes écrits
         m = reconnaitre_identite(ctx, ecrits)
         if m:
             return appliquer_identite(m, ctx, T, prof)
@@ -1705,7 +1705,7 @@ def _message_final(ctx, P, T, produit):
 
 
 def _factoriser(entree):
-    """(résultat, ctx) : ctx.groupes donne la méthode de chaque étape (T21) ; ctx est None en cas d'erreur."""
+    """(résultat, ctx) : ctx.groupes donne la méthode de chaque étape ; ctx est None en cas d'erreur."""
     sp = charger_sympy()
     if sp is None:
         return {"ok": False, "erreur": "Le moteur de calcul est encore en cours de chargement, "

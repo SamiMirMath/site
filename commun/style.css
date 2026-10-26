@@ -1,5 +1,4 @@
-/* Feuille de style commune des pages outils (T14). Aspect inchangé : c'est le CSS qui était recopié dans
-   chaque page, plus celui des tableaux de signe et de variations (ancien tableaux.css). Une page ne garde
+/* Feuille de style commune des pages outils, tableaux de signe et de variations compris. Une page ne garde
    dans son <style> que ses règles propres. Les couleurs viennent des variables de :root ci-dessous. */
 
 /* ---- Tableaux de signe et de variations ---- */
@@ -84,7 +83,7 @@ button.primary{background:var(--accent);border-color:var(--accent);color:#fff;fo
 .err{color:var(--bad);font-weight:600}
 .muted,.hint{color:var(--muted)}
 .hint{font-size:.88rem}
-canvas.graphique{width:100%;height:380px;display:block;border-radius:8px;background:var(--eq);touch-action:pan-x pan-y}   /* graphique de commun/graphique.js ; un doigt : la page défile (EC-05), la souris n'est pas concernée */
+canvas.graphique{width:100%;height:380px;display:block;border-radius:8px;background:var(--eq);touch-action:pan-x pan-y}   /* graphique de commun/graphique.js ; un doigt : la page défile, la souris n'est pas concernée */
 canvas.graphique~.hint{margin-top:6px}
 .exemples{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .exemples button{font-size:.88rem;padding:5px 9px}

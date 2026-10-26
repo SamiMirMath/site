@@ -111,7 +111,7 @@ section.level:last-of-type{border-bottom:none}
 }
 .link-btn:hover{color:var(--accent)}
 
-/* Sans JavaScript (ACC-03) : la porte est cachée et toutes les filières sont affichées côte à côte. Le script pose data-js sur <html> ;
+/* Sans JavaScript : la porte est cachée et toutes les filières sont affichées côte à côte. Le script pose data-js sur <html> ;
    alors seulement, la porte apparaît tant qu'aucune filière n'est choisie, et le choix filtre les colonnes. */
 #gate{display:none}
 html[data-js]:not([data-track]) #gate{display:block}
@@ -510,7 +510,7 @@ footer a:hover{color:var(--accent)}
     return;
   }
 
-  // Sobre : la boucle d'animation ne tourne que si le ruban est à l'écran ET l'onglet visible (ACC-06) ; elle reprend là où elle s'était arrêtée.
+  // Sobre : la boucle d'animation ne tourne que si le ruban est à l'écran ET l'onglet visible ; elle reprend là où elle s'était arrêtée.
   var visible = true, enCours = false, derniere = 0;
   function anime(t){
     if (!(visible && !document.hidden)){ enCours = false; return; }

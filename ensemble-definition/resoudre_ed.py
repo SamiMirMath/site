@@ -7,7 +7,7 @@ en JS (nombre de conditions, « Condition non résolue », valeurs ≈) sont éc
 Le contrôle numérique (`controle`, qui compose sa phrase) reste un appel séparé, lancé après l'affichage.
 """
 from ensemble_def import analyser, apercu_json, json_strict, verifier
-from ensemble_def import analyser_json, verifier_json   # noqa: F401  anciennes pages en cache (retirés à la clôture des migrations)
+from ensemble_def import analyser_json, verifier_json   # noqa: F401  encore appelés par d'anciennes pages restées en cache
 import sortie as so
 
 __all__ = ["resoudre", "resoudre_json", "controle", "controle_json", "apercu_json", "analyser_json", "verifier_json"]

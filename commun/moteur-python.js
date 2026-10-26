@@ -1,4 +1,4 @@
-/* Client Python/Pyodide commun aux pages outils (T15).
+/* Client Python/Pyodide commun aux pages outils.
 
    Lit moteur/manifeste.json (fichiers Python, module, fonctions appelables, version de Pyodide), télécharge les
    fichiers, lance le worker (commun/worker-pyodide.js) et expose des appels qui renvoient du JSON analysé.

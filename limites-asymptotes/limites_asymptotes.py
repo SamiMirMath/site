@@ -5,7 +5,7 @@ Réutilise ensemble_def.py (parseur, arbre, ED, système de polynômes exacts, p
 SymPy). Ne dépend pas de derivee_variations.py : les asymptotes portent sur f,
 pas sur f'.
 
-Méthode (décidée avec l'enseignant) :
+Méthode :
   - Fonction rationnelle en x, en ±∞ : on factorise numérateur et dénominateur par
     leur terme de plus haut degré, explicitement — pas juste « on compare les
     degrés ». Donne directement l'asymptote horizontale ou oblique (avec la
@@ -411,7 +411,7 @@ def _affichable(v):
 
 
 def _phrase_trou(point_tex, valeur_tex):
-    """Formulation Q7 (raccourcie le 15.10.2026) : valeur interdite où la limite (éventuellement latérale) est finie."""
+    """Valeur interdite où la limite (éventuellement latérale) est finie."""
     return (rf"Limite finie : pas d'asymptote verticale, trou dans le graphique "
             rf"en \(({point_tex}\,;\,{valeur_tex})\).")
 
@@ -536,7 +536,7 @@ def _etude_rationnelle_pole(f, N, D, point, cote, items):
 
 
 # =====================================================================
-# Rédaction détaillée (Q9, étape 0) : algèbre des limites sur l'arbre.
+# Rédaction détaillée : algèbre des limites sur l'arbre.
 #
 # La valeur de chaque limite reste celle du calcul de référence (SymPy pour une
 # fonction non rationnelle). La rédaction recalcule chaque sous-expression avec les
@@ -1587,7 +1587,7 @@ METHODES = []          # méthodes du cours, dans l'ordre : chacune renvoie (Lim
 
 
 def _lever(n, ctx, fi, n0=None):
-    """Lève une forme indéterminée par la première méthode du cours qui s'applique (Q9) ; Abandon sinon. Les signes lus pour
+    """Lève une forme indéterminée par la première méthode du cours qui s'applique ; Abandon sinon. Les signes lus pour
     les opérandes de n vont sur la ligne d'annonce de sa chaîne, ceux lus ensuite sur sa dernière ligne."""
     if ctx.profondeur >= 4:
         raise Abandon("trop de réécritures successives")
@@ -2365,7 +2365,7 @@ def _conjuguee(n, ctx, fi):
 
 
 
-# --- méthode : croissance comparée (Q1) et mise en évidence d'une exponentielle ---------------------
+# --- méthode : croissance comparée et mise en évidence d'une exponentielle ---------------------
 def _classer_facteur(h, k):
     """Facteur h^k d'un produit : ('x', exposant) | ('exp', b) pour e^{bx} | ('ln', exposant) | ('poly', P, k)."""
     if isinstance(h, X):
@@ -2481,7 +2481,7 @@ def _ligne_reference(nom):
 
 
 def _comparee_pure(n, ctx, fi):
-    """Produit ou quotient de x^n, e^{ax}, ln x (Q1) : on nomme la limite de référence utilisée ; un facteur
+    """Produit ou quotient de x^n, e^{ax}, ln x : on nomme la limite de référence utilisée ; un facteur
     polynôme est d'abord mis sous la forme c·x^m(1 + …)."""
     if not isinstance(n, Op) or n.op not in "*/":
         return None

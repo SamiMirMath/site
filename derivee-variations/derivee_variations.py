@@ -5,7 +5,7 @@ Réutilise ensemble_def.py (parseur, arbre syntaxique, moteur de tableaux de sig
 système de valeurs exactes, pont SymPy) : ce fichier ne refait pas cette
 infrastructure, il la complète avec la dérivation.
 
-Convention pédagogique (décidée avec l'enseignant) :
+Convention pédagogique :
   - Somme/différence : on dérive terme à terme (règle de linéarité), sans tableau.
   - Produit u·v ou quotient u/v (facteurs non constants) : on nomme u et v dans un
     petit tableau (u, u', v, v'), puis on applique la formule — UNIQUEMENT au premier
@@ -225,7 +225,7 @@ def _ordre_naturel(n):
 
 def _simplifier(n):
     """Met f' en forme factorisée (jamais développée) : plus facile à lire, et les
-    zéros s'y lisent directement — c'est la convention demandée pour la suite. Le résultat
+    zéros s'y lisent directement. Le résultat
     est écrit en un quotient numérateur / dénominateur (_en_quotient)."""
     sp = charger_sympy()
     if sp is None:
@@ -583,7 +583,7 @@ def etudier(entree):
     res["domaine_etude_tex"] = ens_tex(D)
 
     # 1) On cherche d'abord les zéros de f' (candidats extrema) : narration explicite,
-    # avant de dresser le tableau — c'est la méthode demandée.
+    # avant de dresser le tableau.
     items_signe = []
     if ens_tex(D) != ens_tex(ED):
         res["ed_deriv_tex"] = ens_tex(D)
@@ -744,7 +744,7 @@ def etudier(entree):
     # 4) Variations : une flèche par intervalle ; en chaque point critique de l'ED de f :
     #  - extremum (i) : point intérieur de l'ED où f' change de signe (même si f' n'y est pas définie) ;
     #  - extremum (ii) : borne fermée de l'ED, nature donnée par le sens de variation de
-    #    l'intervalle adjacent (Q3, 14.10.2026) ;
+    #    l'intervalle adjacent ;
     #  - jamais sur un intervalle où f est constante ; jamais hors de l'ED.
     # Là où f est définie mais pas f' (ou f constante), la ligne f(x) porte la valeur f(a), sans barre.
     def _bornes_fermees(pt):

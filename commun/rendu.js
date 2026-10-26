@@ -1,4 +1,4 @@
-/* Rendu commun du format de sortie des outils (T16) : une carte de moteur/sortie.py devient du HTML.
+/* Rendu commun du format de sortie des outils : une carte de moteur/sortie.py devient du HTML.
 
    Aucun texte de corrigé n'est composé ici : tout vient de `resoudre()` (Python). Ce module ne fait que
    choisir les classes CSS (commun/style.css) et dessiner les tableaux de signes.

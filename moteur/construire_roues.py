@@ -1,4 +1,4 @@
-"""Construit les roues précompilées de SymPy et mpmath (T32) : mêmes fichiers que les roues officielles de Pyodide, mais avec le bytecode
+"""Construit les roues précompilées de SymPy et mpmath : mêmes fichiers que les roues officielles de Pyodide, mais avec le bytecode
 (.pyc) à la place du source (.py) pour les modules que `import sympy` charge. Python n'a alors plus à les compiler à chaque ouverture de page :
 `import sympy` passe d'environ 5 s à moins de 1 s sur un ordinateur, d'environ 20 s à 3 s sur un téléphone (voir docs/choix-techniques.md D13).
 

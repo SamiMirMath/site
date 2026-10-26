@@ -1,4 +1,4 @@
-/* Web Worker de Pyodide (T15) : la page ne se fige jamais pendant un calcul.
+/* Web Worker de Pyodide : la page ne se fige jamais pendant un calcul.
    Messages reçus {id, fn, arg} ; réponses {id, r} ou {id, err}.
      init   : arg = {indexURL, fichiers: {nom: texte}, module, roues}  -> charge Pyodide, écrit les fichiers à plat, importe le module
      sympy  : charge SymPy (et mpmath) : les roues précompilées du site (arg.roues = {pyc, urls}, téléchargées pendant le chargement de

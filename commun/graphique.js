@@ -1,4 +1,4 @@
-/* Graphique de fonction réutilisable (T19) : dessin d'une courbe, de ses asymptotes, de ses extrema et de ses trous
+/* Graphique de fonction réutilisable : dessin d'une courbe, de ses asymptotes, de ses extrema et de ses trous
    sur un <canvas>, à échelle égale en x et en y.
 
    Le dessin ne mesure aucun texte (pas de measureText) : tout ce qu'il écrit sur le canvas se déduit de la fenêtre et des
