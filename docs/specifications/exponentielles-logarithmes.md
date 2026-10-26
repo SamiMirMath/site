@@ -41,6 +41,12 @@ en mots », tâtonnement (2.14), graphiques (2.1, 2.9, 2.12), écrire un nombre 
 Une carte par application de méthode, comme la Factorisation (T21) : « Étape k », méthode en badge, chaîne de « ⇔ » une étape par ligne,
 **propriété nommée entre parenthèses (1 à 5 mots)** à chaque ligne, carte finale « Solution ».
 
+**Une équation à même base tient en deux cartes au plus** (validé le 26.10.2026) : « Isoler l'exponentielle » (seulement si l'équation
+s'écrit k·a^f + c = d…), puis « Même base », qui contient la réécriture des membres (lignes de « = ») **et** la chaîne unique de ⇔
+`a^A = a^B ⇔ A = B ⇔ … ⇔ solutions`, comme l'encadré « se ramener à la même base » du corrigé. Quand les deux membres sont déjà écrits
+avec la même base (7^(2x+1) = 7^9), il n'y a que la carte « Même base », réduite à la chaîne de ⇔. Pour un trinôme de discriminant
+non carré, les lignes « Δ = … » et « x = … ou x = … » suivent la chaîne dans la même carte.
+
 Propriétés nommées (liste fermée, testée) : (on isole le terme exponentiel), (même base : a^A = a^B ⇔ A = B), ((aᵐ)ⁿ = aᵐⁿ),
 (aᵐ · aⁿ = aᵐ⁺ⁿ), (1 = a⁰), (log des deux membres), (log(a^A) = A · log(a)), (ln(a^A) = A · ln(a)), (log a − log b = log(a/b)),
 (définition du logarithme), (une exponentielle est strictement positive : aucune solution), (un produit est nul si l'un des facteurs est nul),
@@ -69,8 +75,9 @@ on n'écrit jamais 2 log|x|, et 2 log(x) ne s'écrit que quand x > 0 est justifi
 Solution : `S = {2}`.
 
 **2. Même base, degré 2 — 2^(x²) · 4^x = 8** (2.13 o)
-Étape 1 · Même base : `4^x = (2²)^x = 2^(2x)` ((aᵐ)ⁿ = aᵐⁿ) ; `2^(x²) · 2^(2x) = 2^(x²+2x)` (aᵐ · aⁿ = aᵐ⁺ⁿ) ; `8 = 2³`.
-Étape 2 : `2^(x²+2x) = 2³ ⇔ x² + 2x = 3` (même base) `⇔ x² + 2x − 3 = 0 ⇔ (x + 3)(x − 1) = 0 ⇔ x = −3 ou x = 1`.
+Étape 1 · Même base : `4^x = (2²)^x = 2^(2x)` ((aᵐ)ⁿ = aᵐⁿ) ; `2^(x²) · 2^(2x) = 2^(x²+2x)` (aᵐ · aⁿ = aᵐ⁺ⁿ) ; `8 = 2³` ;
+puis, dans la même carte, une seule chaîne de ⇔ :
+`2^(x²+2x) = 2³ ⇔ x² + 2x = 3` (même base) `⇔ x² + 2x − 3 = 0 ⇔ (x + 3)(x − 1) = 0 ⇔ x = −3 ou x = 1`.
 Solution : `S = {−3 ; 1}`.
 
 **3. Logarithme — 2^x = 100** (2.23 a)

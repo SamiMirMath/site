@@ -519,16 +519,34 @@ class TestMemeBase(unittest.TestCase):
                         for p in ligne.props:
                             self.assertTrue(p is None or p in el.PROPRIETES, (saisie, p))
                 derniere = r["etapes"][-1]
-                self.assertEqual(derniere["titre"], "Égalité des exposants")
-                self.assertEqual(derniere["lignes"][0].props[0], el.PROP_MEME_BASE)
+                self.assertEqual(derniere["titre"], "Même base")
+                avec_equivalences = [l for l in derniere["lignes"] if "⇔" in l.liens]
+                self.assertEqual(len(avec_equivalences), 1, "une seule chaîne de ⇔ dans la carte « Même base »")
+                self.assertEqual(avec_equivalences[0].props[0], el.PROP_MEME_BASE)
 
     def test_cartes(self):
         titres = lambda s: [c["titre"] for c in corrige(s)["etapes"]]
-        self.assertEqual(titres("7^(2x+1)=7^9"), ["Égalité des exposants"])
-        self.assertEqual(titres("3^x=27"), ["Même base", "Égalité des exposants"])
-        self.assertEqual(titres("3^(x+1)-27=0"), ["Isoler l'exponentielle", "Même base", "Égalité des exposants"])
-        self.assertEqual(titres("2*3^(x-1)=18"), ["Isoler l'exponentielle", "Même base", "Égalité des exposants"])
-        self.assertEqual(titres("5^(3x+2)=(5^x)^2"), ["Même base", "Égalité des exposants"])
+        self.assertEqual(titres("7^(2x+1)=7^9"), ["Même base"])
+        self.assertEqual(titres("3^x=27"), ["Même base"])
+        self.assertEqual(titres("3^(x+1)-27=0"), ["Isoler l'exponentielle", "Même base"])
+        self.assertEqual(titres("2*3^(x-1)=18"), ["Isoler l'exponentielle", "Même base"])
+        self.assertEqual(titres("5^(3x+2)=(5^x)^2"), ["Même base"])
+        self.assertEqual(titres("2^(x^2)*4^x=8"), ["Même base"])
+
+    def test_carte_meme_base_reecriture_puis_une_chaine_d_equivalences(self):
+        """La carte « Même base » (comme l'encadré « se ramener à la même base » du corrigé) : les lignes de réécriture (liens « = »)
+        d'abord, puis la chaîne de ⇔ qui part de a^A = a^B ; « Isoler l'exponentielle » reste une carte à part."""
+        for saisie, _ in BATTERIE_E1:
+            with self.subTest(saisie):
+                r = corrige(saisie)
+                self.assertEqual(sum(1 for c in r["etapes"] if c["titre"] == "Même base"), 1)
+                self.assertLessEqual(len(r["etapes"]), 2)
+                lignes = r["etapes"][-1]["lignes"]
+                rang = [i for i, l in enumerate(lignes) if "⇔" in l.liens][0]
+                self.assertTrue(all("=" in l.liens for l in lignes[:rang]), saisie)
+                if r["etapes"][0]["titre"] != "Même base":
+                    self.assertEqual(r["etapes"][0]["titre"], "Isoler l'exponentielle")
+                    self.assertTrue(all(l == "⇔" for l in r["etapes"][0]["lignes"][0].liens))
 
     def test_base_choisie(self):
         for saisie, base in [("4^(-x)=2^6", 2), ("4^x=8", 2), ("3^x=9^(2x+3)", 3), ("8^(3x+2)=1/16", 2), ("(25^x)^2=5^0*5^(x+3)", 5),

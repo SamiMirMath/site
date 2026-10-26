@@ -1004,8 +1004,6 @@ def _meme_base(g, d, x):
     g2, chaine_g = _etapes_membre(g, x, base0, b0) if _a_changer(fg, base0) else (g, None)
     d2, chaine_d = _etapes_membre(d, x, base0, b0) if _a_changer(fd, base0) else (d, None)
     lignes = [c for c in (chaine_g, chaine_d) if c is not None]
-    if lignes:
-        etapes.append(_carte("Même base", lignes))
     A_tree, B_tree = _exposant_final(g2), _exposant_final(d2)
     A, B = _poly(A_tree, x), _poly(B_tree, x)
     l_exp, solutions, remarque = _resoudre_polynome(A, B, A_tree, B_tree, x)
@@ -1015,7 +1013,8 @@ def _meme_base(g, d, x):
     ligne.ajouter(premiere.elements[0], "⇔", PROP_MEME_BASE)
     for e, lien, prop in zip(premiere.elements[1:], premiere.liens, premiere.props):
         ligne.ajouter(e, lien, prop)
-    etapes.append(_carte("Égalité des exposants", [ligne] + l_exp[1:]))
+    # une seule carte « Même base » : la réécriture des membres, puis UNE chaîne de ⇔ (a^A = a^B ⇔ A = B ⇔ … ⇔ solutions)
+    etapes.append(_carte("Même base", lignes + [ligne] + l_exp[1:]))
     return {"genre": "meme_base", "inconnue": x, "enonce": enonce, "base": base0, "etapes": etapes,
             "solutions": solutions, "remarque": remarque}
 
