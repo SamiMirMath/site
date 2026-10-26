@@ -1,7 +1,7 @@
 # Futurs outils à implémenter
 
-Propositions établies le 17.10.2026 à partir du chapitre Mathématiques de la brochure DGEP
-(`DGEP_brochure_EM_web.pdf`, pp. 76-94 : niveau standard, niveau renforcé, cours d'appui 3C→2M,
+Propositions établies le 17.10.2026 à partir du chapitre Mathématiques de la brochure du plan d'études
+(pp. 76-94 : niveau standard, niveau renforcé, cours d'appui 3C→2M,
 applications des mathématiques).
 
 **Statut : liste de propositions, rien n'est spécifié ni décidé.** Aucun de ces outils n'a de

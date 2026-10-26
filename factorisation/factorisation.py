@@ -21,7 +21,7 @@ Principe
   une expression se factorise mais qu'aucune méthode du cours ne s'applique,
   on donne quand même la factorisation (calculée par SymPy), en le disant.
 
-Références : Javet, « Notions élémentaires d'algèbre », §2.2 ; Amaudruz,
+Références : manuel de 1re, « Notions élémentaires d'algèbre », §2.2 ; manuel de 1re,
 « Algèbre 1M », §2.4 et exercices 2.11 à 2.16.
 """
 from fractions import Fraction as F
@@ -1513,7 +1513,7 @@ def groupements_essai(P, t, ctx, ecrits, monos, T, prof):
 # ---------- 4.6 compléter le carré ----------
 def completer_carre(P, t, ctx, ecrits, monos, T, prof):
     """A² + C² (+ terme du milieu) = (A ± C)² − D² quand il manque juste un carré :
-    z⁴ − 3z² + 9 = (z² + 3)² − (3z)², x⁴ + 4 = (x² + 2)² − (2x)² (Javet §2.2.4)."""
+    z⁴ − 3z² + 9 = (z² + 3)² − (3z)², x⁴ + 4 = (x² + 2)² − (2x)² (« Notions élémentaires d'algèbre » §2.2.4)."""
     sp = ctx.sp
     if len(monos) not in (2, 3):
         return None

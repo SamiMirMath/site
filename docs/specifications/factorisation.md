@@ -1,8 +1,8 @@
 # Outil « Factorisation » (1re C, Ms, Mr)
 
 URL : `/factorisation/` · moteur : `factorisation/factorisation.py` (SymPy obligatoire ; utilise
-quelques fonctions du noyau). Références : Javet, *Notions élémentaires d'algèbre*, §2.2 ;
-Amaudruz, *Algèbre 1M*, §2.4, exercices 2.11 à 2.16.
+quelques fonctions du noyau). Références : manuel de 1re, *Notions élémentaires d'algèbre*, §2.2 ;
+manuel de 1re, *Algèbre 1M*, §2.4, exercices 2.11 à 2.16.
 
 ## Fonctionnel
 
@@ -48,7 +48,7 @@ changement de variable, mise en évidence composée.
 
 | Id | Critère | Vérif. |
 |---|---|---|
-| FA-01 | Pour toute entrée de la batterie (exercices Amaudruz 2.11–2.16, Javet §2.2, exemples de la page, 500 exercices générés), le résultat redéveloppé = l'entrée et `secours` est faux | [auto-py] |
+| FA-01 | Pour toute entrée de la batterie (exercices 2.11–2.16 de *Algèbre 1M*, §2.2 de *Notions élémentaires d'algèbre*, exemples de la page, 500 exercices générés), le résultat redéveloppé = l'entrée et `secours` est faux | [auto-py] |
 | FA-02 | Chaque facteur du résultat est irréductible sur ℚ (sur ℝ pour un trinôme seul à Δ > 0) | [auto-py] |
 | FA-03 | `exercice(niveau, graine)` est déterministe et produit l'un des gabarits validés du niveau | [auto-py] |
 | FA-04 | Une carte par application de méthode : nombre de cartes = nombre de suites consécutives de même méthode + 1 (bilan) ; deux cartes voisines n'ont jamais la même méthode ; aucune étape perdue ni déplacée ; exemple x⁴ − 13x² + 36 : Changement de variable, Somme-Produit, Changement de variable, Différence de carrés, bilan | [auto-py] (`test_resoudre_fa.py`) + [auto-page] |
