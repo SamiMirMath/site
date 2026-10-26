@@ -21,6 +21,9 @@ rien de 2M n'est codé ici : ni ensemble de définition, ni équations à plusie
 | C1 | Calculer log_a(y) (saisie sans « = ») | 2.15 a-d h i, 2.20 | 5 |
 | C2, C3, E5 | Propriétés avec log 2 ≈ 0,301 (2.25) ; encadrement (2.16) ; inconnue dans la base a¹² = 1,5 (2.5) | | si le temps le permet |
 
+**Entrées hors programme** (x·2^x = 8…) : l'outil affiche « Cette équation ne se résout pas avec les méthodes du cours. » (EL-11). À poser à l'étape 7, quand
+l'adaptateur `resoudre_el.py` décide ce qui s'affiche : tant que les méthodes E2 à E4 manquent, le moteur renvoie seulement « méthode non applicable » en interne.
+
 Hors de cette version : interprétation des applications en années entières (l'outil résout, n ≈ 14,6, et s'arrête), mode « problème
 en mots », tâtonnement (2.14), graphiques (2.1, 2.9, 2.12), écrire un nombre comme puissance de 10 ou de e (2.17, 2.19).
 
@@ -134,7 +137,7 @@ tard (clé prévue, rien de codé). Gabarits **à valider (Q10)** :
 | EL-08 | Second membre ≤ 0 (a^f = b, b ≤ 0, k·a^f = b avec b/k ≤ 0) : S = ∅ justifié par « une exponentielle est strictement positive », jamais par un logarithme d'un nombre négatif | [auto-py] |
 | EL-09 | Équations logarithmiques : aucune carte d'ensemble de définition ; une vérification de chaque solution (argument > 0) ; base inconnue : condition annoncée, solution rejetée si x ≤ 0 ou x = 1 (log_x(256) = 4 : S = {4}) | [auto-py] |
 | EL-10 | `log(x^2) = 2` donne S = {−10 ; 10} par la définition ; aucune sortie ne contient « 2 log|x| » ni « 2\log\left|x\right| » | [auto-py] |
-| EL-11 | Forme non reconnue (plusieurs logarithmes sommés, inconnue dans une base et un exposant à la fois, inéquation) : phrase de repli en français, détail technique dans `detail`, jamais d'étape fausse | [auto-py] |
+| EL-11 | **Entrée hors programme** (x·2^x = 8, 2^x + 3^x = 5, x^x = 4, 2^(x³) = 8, plusieurs logarithmes sommés, inconnue dans une base et dans un exposant à la fois) : le texte affiché à l'élève est exactement « Cette équation ne se résout pas avec les méthodes du cours. » (décision du 26.10.2026) ; jamais « non applicable », jamais une étape fausse ni une valeur numérique donnée comme solution ; détail technique dans `detail` seulement. Une inéquation garde son message de lecture (« Les inéquations ne sont pas traitées par cet outil : écrivez une équation avec =. ») | [auto-py] |
 | EL-12 | Aucune sortie ne contient le vocabulaire interdit de SOC-15 (`test_vocabulaire.py` étendu) ; JSON strict | [auto-py] |
 | EL-13 | `exercice(niveau, graine)` est déterministe, produit un gabarit du niveau, et le moteur le résout (oracle EL-02) pour 500 graines | [auto-py] |
 | EL-14 | Manifeste (`test_manifeste`, `test_resoudre_import`) et instantanés de l'outil ; **les instantanés de tous les autres moteurs sont inchangés** | [auto-py] |
