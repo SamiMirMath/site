@@ -54,8 +54,13 @@ non carré, les lignes « Δ = … » et « x = … ou x = … » suivent la cha
 
 Propriétés nommées (liste fermée, testée) : (on isole le terme exponentiel), (même base : a^A = a^B ⇔ A = B), ((aᵐ)ⁿ = aᵐⁿ),
 (aᵐ · aⁿ = aᵐ⁺ⁿ), (1 = a⁰), (log des deux membres), (log(a^A) = A · log(a)), (ln(a^A) = A · ln(a)), (log a − log b = log(a/b)),
-(définition du logarithme), (une exponentielle est strictement positive : aucune solution), (un produit est nul si l'un des facteurs est nul),
-(changement de base).
+(définition du logarithme), (log(10ᵏ) = k), (ln(1) = 0), (une exponentielle est strictement positive), (aucune solution),
+(un produit est nul si l'un des facteurs est nul), (formule du discriminant), (changement de base).
+
+**Cartes de la méthode « logarithme »** (étape 3) : « Isoler l'exponentielle » (si besoin), puis « Définition du logarithme » (base 10 ou base e : `10^f = b ⇔ f = log(b)`,
+`e^f = b ⇔ f = ln(b)`) ou « Logarithme des deux membres » (toute autre base) ou « Aucune solution » (second membre ≤ 0). Un produit nul donne « Produit nul » (la ligne
+`P₁·P₂ = 0 ⇔ P₁ = 0 ou P₂ = 0`), puis une carte « Facteur 1 », « Facteur 2 »… qui reprend les lignes de la résolution de chaque facteur. Une équation du premier
+degré dont le second membre contient un logarithme (x = ln 3, 2x = ln(0,1)) a la carte « Équation du premier degré » (aucune carte quand x est déjà isolé).
 
 **Valeur exacte d'abord, puis ≈** à 3 décimales (corrigé p. 1), jamais un « ≈ » sans la valeur exacte juste avant sur la même ligne.
 log(10^k) = k et ln(e^k) = k sont évalués ; log a − log b est regroupé en log(a/b) seulement dans les bases différentes (E3) ; sinon la valeur exacte
@@ -87,7 +92,7 @@ puis, dans la même carte, une seule chaîne de ⇔ :
 Solution : `S = {−3 ; 1}`.
 
 **3. Logarithme — 2^x = 100** (2.23 a)
-`2^x = 100 ⇔ log(2^x) = log(100)` (log des deux membres) `⇔ x · log(2) = 2` (log(a^A) = A · log(a) ; 100 = 10²)
+`2^x = 100 ⇔ log(2^x) = log(100)` (log des deux membres) `⇔ x · log(2) = log(100)` (log(a^A) = A · log(a)) `⇔ x · log(2) = 2` (log(10ᵏ) = k)
 `⇔ x = 2 / log(2) ≈ 6,644`. Solution : `S = {2 / log(2)}`, soit `x ≈ 6,644`.
 
 **4. Aucune solution — 5^(8x) = −25** (2.23 h)
