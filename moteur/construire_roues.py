@@ -10,6 +10,7 @@
 tests/python/test_roues.py vérifie que les roues viennent bien de ce SymPy-là."""
 import hashlib
 import importlib.util
+import io
 import json
 import os
 import py_compile
@@ -65,7 +66,6 @@ def nom_du_module(chemin):
 
 def precompiler(octets_roue, a_compiler):
     """Roue réécrite : les .py dont `a_compiler(module)` est vrai deviennent des .pyc sans contrôle de date (UNCHECKED_HASH) ; le reste est copié."""
-    import io
     sortie = io.BytesIO()
     with zipfile.ZipFile(io.BytesIO(octets_roue)) as zin, zipfile.ZipFile(sortie, "w", zipfile.ZIP_DEFLATED, compresslevel=9) as zout, \
             tempfile.TemporaryDirectory() as tmp:
@@ -109,6 +109,12 @@ def main():
         with open(os.path.join(DOSSIER, nom), "wb") as f:
             f.write(roue)
         fichiers.append("moteur/roues/" + nom)
+        with zipfile.ZipFile(io.BytesIO(roue)) as z:       # les licences accompagnent les roues (BSD : à redistribuer avec le code)
+            for fichier in z.namelist():
+                base = fichier.rsplit("/", 1)[-1]
+                if ".dist-info/" in fichier and base in ("LICENSE", "AUTHORS"):
+                    with open(os.path.join(DOSSIER, f"{base}-{paquet}.txt"), "wb") as f:
+                        f.write(z.read(fichier))
         print(f"{nom} : {round(len(octets) / 1e6, 2)} Mo -> {round(len(roue) / 1e6, 2)} Mo")
     for ancien in os.listdir(DOSSIER):
         if ancien.endswith(".zip") and "moteur/roues/" + ancien not in fichiers:

@@ -40,6 +40,20 @@ class TestRoues(unittest.TestCase):
         dans_le_dossier = sorted(n for n in os.listdir(os.path.join(RACINE, "moteur", "roues")) if n.endswith(".zip"))
         self.assertEqual(dans_le_dossier, sorted(os.path.basename(c) for c in ROUES["fichiers"]), "une ancienne roue traîne ou une roue manque")
 
+    def test_licences_redistribuees(self):
+        """SymPy et mpmath sont sous licence BSD : leur licence est à côté des roues, identique à celle qui est dans chaque roue."""
+        dossier = os.path.join(RACINE, "moteur", "roues")
+        for paquet, fichiers in (("sympy", ("LICENSE", "AUTHORS")), ("mpmath", ("LICENSE",))):
+            with zipfile.ZipFile(roue(paquet)) as z:
+                for base in fichiers:
+                    with self.subTest(paquet=paquet, fichier=base):
+                        interne = [n for n in z.namelist() if n.endswith(".dist-info/" + base)]
+                        self.assertEqual(len(interne), 1)
+                        with open(os.path.join(dossier, f"{base}-{paquet}.txt"), "rb") as f:
+                            self.assertEqual(f.read(), z.read(interne[0]))
+        with open(os.path.join(dossier, "LICENSE-sympy.txt"), encoding="utf-8") as f:
+            self.assertIn("Redistribution", f.read())
+
     def test_numero_magique_du_bytecode(self):
         """Le manifeste annonce le numéro magique de Python 3.12 ; chaque .pyc de chaque roue commence par lui."""
         self.assertEqual(sys.version_info[:2], (3, 12))

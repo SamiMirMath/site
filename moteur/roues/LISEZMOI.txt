@@ -1,0 +1,6 @@
+Roues précompilées de SymPy et de mpmath (voir docs/choix-techniques.md, D13).
+
+Ce sont les roues officielles de Pyodide 0.27.7 (SymPy 1.13.3, mpmath 1.3.0), dont les modules Python sont remplacés par leur bytecode.
+Licences : LICENSE-sympy.txt (SymPy, licence BSD à 3 clauses, avec la liste des auteurs AUTHORS-sympy.txt) et LICENSE-mpmath.txt
+(mpmath, licence BSD). Les mêmes fichiers sont aussi dans chaque roue (dossier *.dist-info). Reconstruction : moteur/construire_roues.py,
+qui copie ces fichiers de licence depuis les roues officielles.
