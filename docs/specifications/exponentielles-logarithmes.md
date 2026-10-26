@@ -40,6 +40,7 @@ en mots », tâtonnement (2.14), graphiques (2.1, 2.9, 2.12), écrire un nombre 
 - **Notation suisse** (Q5, Q12) : apostrophe typographique ’ dès 4 chiffres, **partie entière seulement** (−99’999’995, 1’234,567, 0,0001), `\text{’}` en TeX ; saisie de ' et ’ lue 1000 ;
   « 1 000 » refusé (« Pas d'espace dans un nombre : écrivez 1000 ou 1’000. »). Fonctions dans `moteur/nombres.py`, réutilisables par T23.
 - Affichage : `\log`, `\ln`, `\log_{2}` écrits **par notre arbre**, jamais par SymPy (SymPy écrit `log` pour `ln`). Virgule décimale.
+- **Fractions et notation scientifique** (décision du 26.10.2026, règle R13 du guide de rédaction, valable pour tous les outils) : toute valeur exacte **calculée** s'écrit en **fraction** (5/2, 761/400, 1/10, `log(3/2)`), jamais en décimal ; un décimal **écrit dans l'énoncé** (0,7 ; 1,045 ; −0,02) garde son écriture. Les très grands et très petits nombres restent en **notation scientifique** : une puissance de 10 sous 10⁻³ ou dès 10⁶ n'est pas développée (`x = 10¹⁰`, `x = 10⁻⁴`), et une valeur approchée sous 10⁻³ ou dès 10⁶ s'écrit `3,162 × 10⁻⁵`, `1 × 10¹⁰`. Un rationnel n'a pas de ligne « soit x ≈ … ».
   Valeurs approchées avec « ≈ », jamais avec « ≅ » ni « ~ ». L'expression « valeur approchée » n'est pas écrite (SOC-15).
 
 ## Rédaction
@@ -82,9 +83,9 @@ et les termes en x sont réunis sur une ligne à part avant la mise en facteur :
 **Signes** : `k · a^f` et `m · b^h` de signes contraires donnent S = ∅ (« une exponentielle est strictement positive », carte « Aucune solution ») ; deux membres négatifs (−2^x = −3^(x+1)) ne sont pas encore traités.
 Hors de la méthode (message « pas encore », jamais « hors programme ») : un exposant du 2ᵉ degré ou plus (2^(x³) = 8), une somme d'exponentielles (message hors-programme si les bases diffèrent, EL-11), e^x = e^(x+1) (même base e, pas encore traité).
 
-**Cartes de la méthode « définition du logarithme »** (étape 5, corrigé 2.15, 2.18, 2.21, 2.22) : « Isoler le logarithme » (si besoin : `2 log x − 5 = 0 ⇔ 2 log x = 5 ⇔ log x = 2,5`, propriété « on isole le logarithme »),
+**Cartes de la méthode « définition du logarithme »** (étape 5, corrigé 2.15, 2.18, 2.21, 2.22) : « Isoler le logarithme » (si besoin : `2 log x − 5 = 0 ⇔ 2 log x = 5 ⇔ log x = 5/2`, propriété « on isole le logarithme »),
 puis « Définition du logarithme » : une seule chaîne `log_a(u) = c ⇔ u = a^c` (définition du logarithme), l'écriture exacte de a^c ajoutée par « = » quand le cours la donne
-(`x = 10³ = 1’000`, `10⁻¹ = 0,1`, `10^1,5 = 10√10`, `10^0 = 1`, `2⁴ = 16` ; jamais pour e^c ni 10^(−0,27)). Les logarithmes imbriqués s'épluchent de l'extérieur vers l'intérieur, une étape par logarithme
+(`x = 10³ = 1’000`, `10⁻¹ = 1/10`, `10^(3/2) = 10√10`, `10^0 = 1`, `2⁴ = 16` ; jamais pour e^c ni 10^(−27/100), ni pour 10¹⁰ et 10⁻⁴, laissés en notation scientifique). Les logarithmes imbriqués s'épluchent de l'extérieur vers l'intérieur, une étape par logarithme
 (`log(log(log x)) = 0 ⇔ log(log x) = 10⁰ = 1 ⇔ log x = 10¹ = 10 ⇔ x = 10¹⁰`). Un argument du 1er degré se résout comme à la main : `5 − x = 10⁸ ⇔ x = 5 − 10⁸ = −99’999’995` (q − x = c donne x = q − c), `2x + 1 = 10⁸ ⇔ 2x = 10⁸ − 1 ⇔ x = (10⁸ − 1)/2` ;
 un argument du 2ᵈ degré (`log(x²) = 2`) continue dans la même chaîne comme la méthode « même base » (`x² = 10² = 100 ⇔ x² − 100 = 0 ⇔ (x + 10)(x − 10) = 0 ⇔ x = −10 ou x = 10`), S = ∅ si Δ < 0.
 **Vérification** (carte à part, seulement quand l'argument d'un seul logarithme n'est pas x seul) : `5 − x = 10⁸ > 0 (le logarithme est bien défini) ✓`.
@@ -93,7 +94,7 @@ un argument du 2ᵈ degré (`log(x²) = 2`) continue dans la même chaîne comme
 
 **Isoler x** : `x − a = c` donne `x = a + c` (corrigé 2.23 d : x = 1 + 1/log(3), jamais c + a) ; `x + a = c` donne `x = c − a` ; `p·x = c` donne `x = c/p` (non simplifié : Q11).
 
-**Valeur exacte d'abord, puis ≈** à 3 décimales (corrigé p. 1), jamais un « ≈ » sans la valeur exacte juste avant sur la même ligne.
+**Valeur exacte d'abord, puis ≈** à 3 décimales (corrigé p. 1 ; en notation scientifique sous 10⁻³ et dès 10⁶), jamais un « ≈ » sans la valeur exacte juste avant sur la même ligne.
 log(10^k) = k et ln(e^k) = k sont évalués ; log a − log b est regroupé en log(a/b) seulement dans les bases différentes (E3) ; sinon la valeur exacte
 est gardée **telle que la donne la chaîne** : `ln(25/37)/(−0,02)` n'est pas simplifié en `−50 · ln(25/37)` (Q11).
 

@@ -662,7 +662,7 @@ class TestLogarithme(unittest.TestCase):
             ("3^(x-1)=10", r"1 + \frac{1}{\log(3)}"), ("5^(2x+3)=7", r"\frac{\frac{\log(7)}{\log(5)} - 3}{2}"),
             ("10^(2x)=0,7", r"\frac{\log(0{,}7)}{2}"), ("10^(3x)=25", r"\frac{\log(25)}{3}"), ("12^x=49", r"\frac{\log(49)}{\log(12)}"),
             ("1,04^x=100", r"\frac{2}{\log(1{,}04)}"), ("4^(x-4)=20", r"4 + \frac{\log(20)}{\log(4)}"),
-            ("2000*1,045^n=3805", r"\frac{\log(1{,}9025)}{\log(1{,}045)}"), ("0,8^n=0,5", r"\frac{\log(0{,}5)}{\log(0{,}8)}"),
+            ("2000*1,045^n=3805", r"\frac{\log\left(\frac{761}{400}\right)}{\log(1{,}045)}"), ("0,8^n=0,5", r"\frac{\log(0{,}5)}{\log(0{,}8)}"),
             ("(1/2)^x=3", r"\frac{\log(3)}{\log\left(\frac{1}{2}\right)}"), ("2x=ln(0,1)", r"\frac{\ln(0{,}1)}{2}"),
             ("x=ln(3)", r"\ln(3)"), ("10^(-x)=8", r"-\log(8)"), ("e^x=1", "0"), ("4^(2x+1)=60", r"\frac{\frac{\log(60)}{\log(4)} - 1}{2}"),
             ("(10^(-x)-1)*(10^(-x)-8)=0", None)]:
@@ -709,7 +709,7 @@ class TestLogarithme(unittest.TestCase):
         self.assertEqual(lignes("e^x=1"), [r"e^{x} = 1 \iff x = 0 \quad \text{(ln(1) = 0)}"])
         self.assertEqual(lignes("18=2*10^x+1")[0],
                          r"18 = 2 \cdot 10^{x} + 1 \iff 17 = 2 \cdot 10^{x} \quad \text{(on isole le terme exponentiel)} "
-                         r"\iff 8{,}5 = 10^{x} \quad \text{(on isole le terme exponentiel)}")
+                         r"\iff \frac{17}{2} = 10^{x} \quad \text{(on isole le terme exponentiel)}")
 
     def test_propriete_a_chaque_etape_du_logarithme(self):
         for saisie, _ in BATTERIE_E2:
@@ -806,7 +806,7 @@ class TestLogarithme(unittest.TestCase):
             ("(10^(-x)-1)*(10^(-x)-8)=0", r"S = \left\{-\log(8) \,;\, 0\right\} \text{, soit } x \approx -0{,}903 \text{ ou } x = 0"),
             ("2^(x^2)=2^(2x+1)", r"S = \left\{1 - \sqrt{2} \,;\, 1 + \sqrt{2}\right\} \text{, soit } x \approx -0{,}414 \text{ ou } x \approx 2{,}414"),
             ("2^(x^2)*4^x=8", r"S = \left\{-3 \,;\, 1\right\}"),
-            ("2000*1,045^n=3805", r"S = \left\{\frac{\log(1{,}9025)}{\log(1{,}045)}\right\} \text{, soit } n \approx 14{,}612"),
+            ("2000*1,045^n=3805", r"S = \left\{\frac{\log\left(\frac{761}{400}\right)}{\log(1{,}045)}\right\} \text{, soit } n \approx 14{,}612"),
             ("1,04^x=100", r"S = \left\{\frac{2}{\log(1{,}04)}\right\} \text{, soit } x \approx 117{,}417"),
             ("10^(x+3)=117000", r"S = \left\{\log(117\text{’}000) - 3\right\} \text{, soit } x \approx 2{,}068")]:
             with self.subTest(saisie):
@@ -820,7 +820,7 @@ class TestLogarithme(unittest.TestCase):
                 r = el.corriger_equation(*(lambda s: (s.g, s.d, s.inconnue))(el.analyser_saisie(saisie)))
                 t = el.tex_solution(r)
                 self.assertTrue(t.startswith("S = "), t)
-                irrationnelle = bool(r["solutions"]) and any(not isinstance(n, Nb) for n in r["solutions"])
+                irrationnelle = bool(r["solutions"]) and any(el._const(n) is None for n in r["solutions"])
                 self.assertEqual(r"\approx" in t, irrationnelle, t)
                 self.assertEqual(r"\text{, soit }" in t, irrationnelle, t)
                 if irrationnelle:
@@ -836,14 +836,25 @@ class TestLogarithme(unittest.TestCase):
                 s = el.analyser_saisie(saisie)
                 self.assertIsNone(el.corriger_equation(s.g, s.d, s.inconnue))
 
-    def test_decimaux_exacts(self):
-        for v, dec, tex in [(F(761, 400), "1,9025", "1{,}9025"), (F(-1, 50), "0,02", "-0{,}02"), (F(13, 60), None, r"\frac{13}{60}"),
-                            (F(7), None, "7"), (F(1, 3), None, r"\frac{1}{3}"), (F(5, 2), "2,5", "2{,}5"), (F(1, 8), "0,125", "0{,}125")]:
+    def test_fractions_exactes(self):
+        """Toute valeur exacte calculée s'écrit en fraction (jamais 1,9025 ni 2,5) ; les décimaux de l'énoncé gardent leur écriture."""
+        for v, tex in [(F(761, 400), r"\frac{761}{400}"), (F(-1, 50), r"-\frac{1}{50}"), (F(13, 60), r"\frac{13}{60}"), (F(7), "7"),
+                       (F(1, 3), r"\frac{1}{3}"), (F(5, 2), r"\frac{5}{2}"), (F(1, 8), r"\frac{1}{8}")]:
             with self.subTest(v):
                 n = el._nb_exact(v)
-                self.assertEqual(n.dec, dec)
+                self.assertIsNone(n.dec)
                 self.assertEqual(n.val, v)
                 self.assertEqual(el.tex(n), tex)
+        for saisie, ligne in [("e^(-0,01x)=0,7", r"\frac{\ln(0{,}7)}{-0{,}01}"), ("37*e^(-0,02t)=25", r"\frac{\ln\left(\frac{25}{37}\right)}{-0{,}02}")]:
+            self.assertEqual(el.tex(corriger(saisie)["solutions"][0]), ligne)
+
+    def test_approximation_en_notation_scientifique(self):
+        """3 décimales ; sous 10⁻³ et dès 10⁶ : notation scientifique (3,162 × 10⁻⁵) ; un rationnel n'a pas de « soit x ≈ »."""
+        for v, attendu in [(6.644, "6{,}644"), (-0.693, "-0{,}693"), (0.0, "0{,}000"), (1e10, r"1 \times 10^{10}"), (1e-4, r"1 \times 10^{-4}"),
+                           (3.1623e-5, r"3{,}162 \times 10^{-5}"), (-2.5e7, r"-2{,}500 \times 10^{7}"), (0.00099999, r"1 \times 10^{-3}"),
+                           (123456.789, r"123\text{’}456{,}789"), (4.5e6, r"4{,}500 \times 10^{6}")]:
+            with self.subTest(v):
+                self.assertEqual(el.tex_approx(v), attendu)
 
     def test_base_inferieure_a_1_ne_boucle_pas(self):
         for saisie, v in [("(1/2)^x=3", -1.585), ("0,8^n=0,5", 3.106), ("0,5^x=8", -3.0), ("(1/3)^x=9", -2.0), ("0,5^x=3", -1.585)]:
@@ -915,17 +926,17 @@ class TestBasesDifferentes(unittest.TestCase):
             debut("2^{x + 4}", "3^{x - 1}", r"(x + 4) \cdot \log(2)", r"(x - 1) \cdot \log(3)")
             + r" \iff x \cdot \log(2) + 4\log(2) = x \cdot \log(3) - \log(3) \iff \log(3) + 4\log(2) = x(\log(3) - \log(2)) "
               r"\iff x = \frac{\log(3) + 4\log(2)}{\log(3) - \log(2)} \quad \text{(car } \log(3) - \log(2) \neq 0\text{)} "
-              r"= \frac{\log(48)}{\log(1{,}5)} \quad \text{(propriétés des logarithmes)}",
+              r"= \frac{\log(48)}{\log\left(\frac{3}{2}\right)} \quad \text{(propriétés des logarithmes)}",
             r"\log(3) + 4\log(2) = \log(3 \cdot 2^{4}) \quad \text{(propriétés des logarithmes)} = \log(48)",
-            r"\log(3) - \log(2) = \log\left(\frac{3}{2}\right) \quad \text{(propriétés des logarithmes)} = \log(1{,}5)"])
+            r"\log(3) - \log(2) = \log\left(\frac{3}{2}\right) \quad \text{(propriétés des logarithmes)}"])
 
     def test_formes_exactes_et_ligne_finale(self):
         for saisie, exact, finale in [
             ("2^(x-1)=3^x", r"\frac{\log(2)}{\log\left(\frac{2}{3}\right)}", r"x \approx -1{,}710"),
             ("4^(x+1)=6^(3x)", r"\frac{\log(4)}{\log(54)}", r"x \approx 0{,}348"),
-            ("2^(x+4)=3^(x-1)", r"\frac{\log(48)}{\log(1{,}5)}", r"x \approx 9{,}548"),
+            ("2^(x+4)=3^(x-1)", r"\frac{\log(48)}{\log\left(\frac{3}{2}\right)}", r"x \approx 9{,}548"),
             ("2^x=3^(x+1)", r"\frac{\log(3)}{\log\left(\frac{2}{3}\right)}", r"x \approx -2{,}710"),
-            ("2^(x-1)=5^(x+1)", r"\frac{1}{\log(0{,}4)}", r"x \approx -2{,}513"),
+            ("2^(x-1)=5^(x+1)", r"\frac{1}{\log\left(\frac{2}{5}\right)}", r"x \approx -2{,}513"),
             ("10^x=3^(x+1)", r"\frac{\log(3)}{1 - \log(3)}", r"x \approx 0{,}912")]:
             with self.subTest(saisie):
                 r = corriger(saisie)
@@ -1046,7 +1057,7 @@ class TestBasesDifferentes(unittest.TestCase):
                          r"\iff \log(2) + x \cdot \log(2) = x \cdot \log(3) \quad \text{(log(a^A) = A · log(a))} "
                          r"\iff x \cdot \log(2) + \log(2) = x \cdot \log(3) \iff \log(2) = x(\log(3) - \log(2)) "
                          r"\iff x = \frac{\log(2)}{\log(3) - \log(2)} \quad \text{(car } \log(3) - \log(2) \neq 0\text{)} "
-                         r"= \frac{\log(2)}{\log(1{,}5)} \quad \text{(log a − log b = log(a/b))}")
+                         r"= \frac{\log(2)}{\log\left(\frac{3}{2}\right)} \quad \text{(log a − log b = log(a/b))}")
         self.assertIn(r"\iff x \cdot \log(2) + 1 = x \cdot \log(3) \quad \text{(log(10ᵏ) = k)} \iff 1 = x(\log(3) - \log(2))", lignes("10*2^x=3^x")[0])
         self.assertIn(r"\iff x \cdot \log(2) = x \cdot \log(3)", lignes("2*2^(x-1)=3^x")[0])      # 2 · 2^(x−1) = 2^x : les constantes se compensent
         self.assertEqual(el.tex_solution(corriger("2*2^(x-1)=3^x")), r"S = \left\{0\right\}")
@@ -1101,7 +1112,7 @@ class TestBasesDifferentes(unittest.TestCase):
         for saisie, _ in BATTERIE_E3:
             with self.subTest(saisie):
                 t = el.tex_solution(corriger(saisie))
-                irrationnelle = not isinstance(corriger(saisie)["solutions"][0], Nb)
+                irrationnelle = el._const(corriger(saisie)["solutions"][0]) is None
                 self.assertTrue(t.startswith("S = "), t)
                 self.assertEqual(r"\approx" in t, irrationnelle, t)
 
@@ -1165,14 +1176,16 @@ class TestLogarithmique(unittest.TestCase):
         self.assertEqual(lignes("log(log(log(x)))=0"), [
             r"\log(\log(\log(x))) = 0 \iff \log(\log(x)) = 10^{0} = 1 \quad \text{(définition du logarithme)} "
             r"\iff \log(x) = 10^{1} = 10 \quad \text{(définition du logarithme)} "
-            r"\iff x = 10^{10} = 10\text{’}000\text{’}000\text{’}000 \quad \text{(définition du logarithme)}"])
+            r"\iff x = 10^{10} \quad \text{(définition du logarithme)}"])
         self.assertEqual(lignes("log(x)=3"), [r"\log(x) = 3 \iff x = 10^{3} = 1\text{’}000 \quad \text{(définition du logarithme)}"])
-        self.assertEqual(lignes("log(x)=-4"), [r"\log(x) = -4 \iff x = 10^{-4} = 0{,}0001 \quad \text{(définition du logarithme)}"])
-        self.assertEqual(lignes("log(x)=1,5"), [r"\log(x) = 1{,}5 \iff x = 10^{1{,}5} = 10\sqrt{10} \quad \text{(définition du logarithme)}"])
-        self.assertEqual(lignes("log(x)=-0,27"), [r"\log(x) = -0{,}27 \iff x = 10^{-0{,}27} \quad \text{(définition du logarithme)}"])
+        self.assertEqual(lignes("log(x)=-4"), [r"\log(x) = -4 \iff x = 10^{-4} \quad \text{(définition du logarithme)}"])      # notation scientifique, pas 0,0001
+        self.assertEqual(lignes("log(x)=-1"), [r"\log(x) = -1 \iff x = 10^{-1} = \frac{1}{10} \quad \text{(définition du logarithme)}"])
+        self.assertEqual(lignes("log(x)=-2"), [r"\log(x) = -2 \iff x = 10^{-2} = \frac{1}{100} \quad \text{(définition du logarithme)}"])
+        self.assertEqual(lignes("log(x)=1,5"), [r"\log(x) = 1{,}5 \iff x = 10^{\frac{3}{2}} = 10\sqrt{10} \quad \text{(définition du logarithme)}"])
+        self.assertEqual(lignes("log(x)=-0,27"), [r"\log(x) = -0{,}27 \iff x = 10^{-\frac{27}{100}} \quad \text{(définition du logarithme)}"])
         self.assertEqual(lignes("2log(x)-5=0"), [
-            r"2\log(x) - 5 = 0 \iff 2\log(x) = 5 \quad \text{(on isole le logarithme)} \iff \log(x) = 2{,}5 \quad \text{(on isole le logarithme)}",
-            r"\log(x) = 2{,}5 \iff x = 10^{2{,}5} = 100\sqrt{10} \quad \text{(définition du logarithme)}"])
+            r"2\log(x) - 5 = 0 \iff 2\log(x) = 5 \quad \text{(on isole le logarithme)} \iff \log(x) = \frac{5}{2} \quad \text{(on isole le logarithme)}",
+            r"\log(x) = \frac{5}{2} \iff x = 10^{\frac{5}{2}} = 100\sqrt{10} \quad \text{(définition du logarithme)}"])
         self.assertEqual(lignes("ln(x)=3"), [r"\ln(x) = 3 \iff x = e^{3} \quad \text{(définition du logarithme)}"])
         self.assertEqual(lignes("log2(x)=4"), [r"\log_{2}(x) = 4 \iff x = 2^{4} = 16 \quad \text{(définition du logarithme)}"])
         self.assertEqual(lignes("2log_3(x)=10")[1], r"\log_{3}(x) = 5 \iff x = 3^{5} = 243 \quad \text{(définition du logarithme)}")
@@ -1188,7 +1201,8 @@ class TestLogarithmique(unittest.TestCase):
     def test_formes_exactes_et_ligne_finale(self):
         for saisie, attendu in [
             ("log(x)=3", r"S = \left\{1\text{’}000\right\}"), ("log(x)=1,5", r"S = \left\{10\sqrt{10}\right\} \text{, soit } x \approx 31{,}623"),
-            ("log(x)=-0,27", r"S = \left\{10^{-0{,}27}\right\} \text{, soit } x \approx 0{,}537"),
+            ("log(x)=-0,27", r"S = \left\{10^{-\frac{27}{100}}\right\} \text{, soit } x \approx 0{,}537"),
+            ("log(x)=-4", r"S = \left\{10^{-4}\right\}"), ("log(log(x))=1", r"S = \left\{10^{10}\right\}"), ("log(x)=-1", r"S = \left\{\frac{1}{10}\right\}"),
             ("ln(x)=3", r"S = \left\{e^{3}\right\} \text{, soit } x \approx 20{,}086"), ("ln(x)=1", r"S = \left\{e\right\} \text{, soit } x \approx 2{,}718"),
             ("ln(x)=0", r"S = \left\{1\right\}"), ("ln(2-x)=1", r"S = \left\{2 - e\right\} \text{, soit } x \approx -0{,}718"),
             ("log(x^2)=2", r"S = \left\{-10 \,;\, 10\right\}"), ("log(x^2+x+3)=0", r"S = \varnothing"),

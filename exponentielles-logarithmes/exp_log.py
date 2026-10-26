@@ -648,17 +648,28 @@ def _poly(n, x):
     raise _Hors
 
 
-def _arbre_poly(p, x="x"):
-    """Arbre d'un polynôme, écrit comme on l'écrit à la main : x² + 2x − 3, −2x + 1, ½x."""
+def _nb_ecrit(v, arbre=None):
+    """Nb(v) écrit comme dans l'énoncé quand v y figure en décimal (−0,02 ; 1,045), en fraction sinon."""
+    def cherche(n):
+        if isinstance(n, Nb):
+            return n if n.dec is not None and abs(n.val) == abs(v) else None
+        enfants = [getattr(n, nom, None) for nom in getattr(n, "__slots__", ()) if nom != "nom"]
+        return next((r for r in (cherche(e) for e in enfants if isinstance(e, Noeud)) if r is not None), None)
+    v, trouve = F(v), (cherche(arbre) if arbre is not None else None)
+    return Nb(v, trouve.dec) if trouve is not None else Nb(v)
+
+
+def _arbre_poly(p, x="x", ecrit=None):
+    """Arbre d'un polynôme, écrit comme on l'écrit à la main : x² + 2x − 3, −2x + 1, ½x. `ecrit` : l'arbre de l'énoncé, qui garde ses décimaux."""
     termes = [(c, k) for k, c in reversed(list(enumerate(p))) if c != 0]
     if not termes:
         return Nb(0)
 
     def monome(c, k):
         if k == 0:
-            return Nb(c)
+            return _nb_ecrit(c, ecrit)
         xk = Var(x) if k == 1 else Pow(Var(x), Nb(k))
-        return xk if c == 1 else Op("*", Nb(c), xk)
+        return xk if c == 1 else Op("*", _nb_ecrit(c, ecrit), xk)
 
     c0, k0 = termes[0]
     n = monome(abs(c0), k0)
@@ -866,18 +877,9 @@ def _facteurs(n, x):
 
 
 def _nb_exact(v):
-    """Nb(v) ; écrit en décimal (1,9025 ; −0,02) quand le développement décimal de v s'arrête, en fraction sinon (13/60)."""
-    v = F(v)
-    d, k2, k5 = v.denominator, 0, 0
-    while d % 2 == 0:
-        d, k2 = d // 2, k2 + 1
-    while d % 5 == 0:
-        d, k5 = d // 5, k5 + 1
-    k = max(k2, k5)
-    if v.denominator == 1 or d != 1 or k > 8:
-        return Nb(v)
-    chiffres = str(int(abs(v) * 10 ** k)).rjust(k + 1, "0")
-    return Nb(v, chiffres[:-k] + "," + chiffres[-k:])
+    """Nb(v) : toute valeur exacte calculée s'écrit en fraction (5/2, 761/400, 1/10), jamais en décimal ; les décimaux écrits dans l'énoncé
+    gardent leur écriture (Nb.dec)."""
+    return Nb(F(v))
 
 
 def _isoler(g, d, x, prop=None):
@@ -1123,17 +1125,17 @@ def _exponentielle(n, x):
     return a, v, n.b
 
 
-def _suite_lineaire(chaine, p, q0, c, x):
+def _suite_lineaire(chaine, p, q0, c, x, ecrit=None):
     """Ajoute à `chaine` (qui se termine par « p·x + q0 = c ») les lignes qui isolent x ; renvoie la solution (arbre).
     La forme est celle que donne la chaîne : on ne simplifie pas c/p (ln(25/37)/(−0,02), jamais −50·ln(25/37))."""
     haut = c
     if q0 != 0:
         # x + a = c donne c − a ; x − a = c donne a + c (corrigé 2.23 d : x = 1 + 1/log(3), jamais 1/log(3) + 1)
-        haut = Op("-", c, _nb_exact(q0)) if q0 > 0 else Op("+", _nb_exact(-q0), c)
-        chaine.ajouter(Eq(_arbre_poly([F(0), p], x), haut), "⇔")
+        haut = Op("-", c, _nb_ecrit(q0, ecrit)) if q0 > 0 else Op("+", _nb_ecrit(-q0, ecrit), c)
+        chaine.ajouter(Eq(_arbre_poly([F(0), p], x, ecrit), haut), "⇔")
     if p == 1:
         return haut
-    solution = Neg(haut) if p == -1 else Op("/", haut, _nb_exact(p))
+    solution = Neg(haut) if p == -1 else Op("/", haut, _nb_ecrit(p, ecrit))
     chaine.ajouter(Eq(Var(x), solution), "⇔")
     return solution
 
@@ -1195,7 +1197,7 @@ def _logarithme(g, d, x):
         c = Op("/", haut, Log(base, None))
         chaine.ajouter(Eq(f_tree, c), "⇔")
         titre = "Logarithme des deux membres"
-    solution = _suite_lineaire(chaine, f[1], f[0], c, x)
+    solution = _suite_lineaire(chaine, f[1], f[0], c, x, f_tree)
     etapes.append(_carte(titre, [chaine]))
     return {"genre": "logarithme", "inconnue": x, "enonce": enonce, "base": valeur_base, "etapes": etapes, "solutions": [solution],
             "remarque": None}
@@ -1409,14 +1411,15 @@ def _racine_entiere(n, k):
 
 
 def _valeur_exacte(p):
-    """Écriture exacte d'une puissance a^c quand le cours la donne : un nombre (10³ = 1000, 10⁻¹ = 0,1, 2⁴ = 16) ou a^(n+½) = aⁿ√a (10^1,5 = 10√10) ; None sinon."""
+    """Écriture exacte d'une puissance a^c quand le cours la donne : un nombre (10³ = 1000, 10⁻¹ = 1/10, 2⁴ = 16), sauf les très grands et très petits
+    (10¹⁰, 10⁻⁴ : notation scientifique) ou a^(n+½) = aⁿ√a (10^1,5 = 10√10) ; None sinon."""
     if not isinstance(p, Pow):
         return None
     if _const(p.b) == 0:
         return Nb(1)                                   # a⁰ = 1, même pour e
     v = _const(p)
     if v is not None:
-        return _nb_exact(v) if v == 0 or F(1, 10 ** 8) <= abs(v) < 10 ** 15 else None
+        return _nb_exact(v) if v == 0 or F(1, 1000) <= abs(v) < 10 ** 6 else None     # 10⁻⁴ et 10¹⁰ restent en notation scientifique
     c = _const(p.b)
     if isinstance(p.a, Nb) and p.a.val.denominator == 1 and c is not None and c.denominator == 2 and c >= F(1, 2):
         n = int(c - F(1, 2))
@@ -1490,7 +1493,7 @@ def _logarithmique(g, d, x):
                 sol = Op("-", _nb_exact(f[0]), puissance)
                 chaine.ajouter(Eq(Var(x), sol), "⇔")
             else:
-                sol = _suite_lineaire(chaine, f[1], f[0], puissance, x)
+                sol = _suite_lineaire(chaine, f[1], f[0], puissance, x, u)
             v = _const(sol)
             dernier = chaine.elements[-1]
             if v is not None and (v == 0 or F(1, 10 ** 8) <= abs(v) < 10 ** 15) and isinstance(dernier, Eq) and tex(dernier.d) == tex(sol):
@@ -1612,10 +1615,23 @@ def _lineaire_logarithmes(g, d, x):
     chaine = Chaine([Eq(g, d)])
     if inverse:
         chaine.ajouter(Eq(s, c), "⇔")
-    solution = _suite_lineaire(chaine, f[1], f[0], c, x)
+    solution = _suite_lineaire(chaine, f[1], f[0], c, x, s)
     etapes = [_carte("Équation du premier degré", [chaine])] if chaine.liens else []
     return {"genre": "lineaire", "inconnue": x, "enonce": Eq(g, d), "base": None, "etapes": etapes, "solutions": [solution],
             "remarque": None}
+
+
+def tex_approx(v):
+    """Valeur approchée à 3 décimales, virgule décimale ; en notation scientifique (3,162 × 10⁻⁵, 1 × 10¹⁰) sous 10⁻³ et dès 10⁶."""
+    a = abs(v)
+    if a == 0 or 1e-3 <= a < 1e6:
+        return formater_decimal(f"{v:.3f}", tex=True)
+    e = math.floor(math.log10(a))
+    if abs(float(f"{v / 10 ** e:.3f}")) >= 10:
+        e += 1
+    m = f"{v / 10 ** e:.3f}"
+    m = m[:-4] if m.endswith(".000") else m
+    return formater_decimal(m, tex=True) + r" \times 10^{" + str(e) + "}"
 
 
 def tex_solution(r):
@@ -1627,10 +1643,11 @@ def tex_solution(r):
     if not sols:
         return r"S = \varnothing"
     s = r"S = \left\{" + r" \,;\, ".join(tex(n) for n in sols) + r"\right\}"
-    if all(isinstance(n, Nb) for n in sols):
+    rationnel = lambda n: _const(n) is not None
+    if all(rationnel(n) for n in sols):
         return s
     x = r["inconnue"]
-    parts = [x + (" = " + tex(n) if isinstance(n, Nb) else r" \approx " + formater_decimal(f"{valeur(n):.3f}", tex=True)) for n in sols]
+    parts = [x + (" = " + tex(n) if rationnel(n) else r" \approx " + tex_approx(valeur(n))) for n in sols]
     return s + r" \text{, soit } " + r" \text{ ou } ".join(parts)
 
 
