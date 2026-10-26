@@ -53,7 +53,7 @@ avec la même base (7^(2x+1) = 7^9), il n'y a que la carte « Même base », ré
 non carré, les lignes « Δ = … » et « x = … ou x = … » suivent la chaîne dans la même carte.
 
 Propriétés nommées (liste fermée, testée) : (on isole le terme exponentiel), (même base : a^A = a^B ⇔ A = B), ((aᵐ)ⁿ = aᵐⁿ),
-(aᵐ · aⁿ = aᵐ⁺ⁿ), (1 = a⁰), (log des deux membres), (log(a^A) = A · log(a)), (ln(a^A) = A · ln(a)), (log a − log b = log(a/b)),
+(aᵐ · aⁿ = aᵐ⁺ⁿ), (1 = a⁰), (log des deux membres), (log(a^A) = A · log(a)), (ln(a^A) = A · ln(a)), (log a − log b = log(a/b)), (log a + log b = log(ab)), (propriétés des logarithmes),
 (définition du logarithme), (log(10ᵏ) = k), (ln(1) = 0), (une exponentielle est strictement positive), (aucune solution),
 (un produit est nul si l'un des facteurs est nul), (formule du discriminant), (changement de base).
 
@@ -61,6 +61,15 @@ Propriétés nommées (liste fermée, testée) : (on isole le terme exponentiel)
 `e^f = b ⇔ f = ln(b)`) ou « Logarithme des deux membres » (toute autre base) ou « Aucune solution » (second membre ≤ 0). Un produit nul donne « Produit nul » (la ligne
 `P₁·P₂ = 0 ⇔ P₁ = 0 ou P₂ = 0`), puis une carte « Facteur 1 », « Facteur 2 »… qui reprend les lignes de la résolution de chaque facteur. Une équation du premier
 degré dont le second membre contient un logarithme (x = ln 3, 2x = ln(0,1)) a la carte « Équation du premier degré » (aucune carte quand x est déjà isolé).
+
+**Carte de la méthode « bases différentes »** (étape 4, corrigé 2.24) : une carte « Bases différentes », une seule chaîne : `a^f = b^h ⇔ log(a^f) = log(b^h)` (log des deux membres)
+`⇔ f · log(a) = h · log(b)` (log(a^A) = A · log(a)), le développement `x · log(2) − log(2) = …`, puis les termes en x mis en facteur **du côté qui laisse la constante positive**
+(`x(log 2 − log 3) = log 2` en 2.24 a ; `log 4 = x(3 log 6 − log 4)` en b ; `log 3 + 4 log 2 = x(log 3 − log 2)` en c), les termes positifs d'abord, `x = N / D`, puis
+`= log(N') / log(D')` avec N et D regroupés en un seul logarithme. La propriété de ce dernier lien est (log a − log b = log(a/b)) quand il n'y a que des différences de deux logarithmes,
+(log a + log b = log(ab)) pour des sommes de deux logarithmes, (propriétés des logarithmes) sinon, et chaque regroupement non immédiat est montré dans une ligne « car » en dessous
+(`3 log 6 − log 4 = log(6³/4) = log 54`). log(10ᵏ) = k : une base 10ᵏ n'écrit pas de logarithme (`x(1 − log 3) = log 3`), et aucun regroupement n'est alors fait. Les bases sont écrites comme
+dans l'énoncé ((1/2)^x garde log(1/2)). Quand il n'y a pas de constante (3^x = 2^x), la chaîne se termine par `x = 0 / (log 3 − log 2) = 0`. Hors de cette méthode (message « ne se résout pas
+avec les méthodes du cours ») : une base e, un exposant du 2ᵉ degré ou plus, un facteur constant devant l'exponentielle (2·2^x = 3^x), une somme d'exponentielles.
 
 **Isoler x** : `x − a = c` donne `x = a + c` (corrigé 2.23 d : x = 1 + 1/log(3), jamais c + a) ; `x + a = c` donne `x = c − a` ; `p·x = c` donne `x = c/p` (non simplifié : Q11).
 
@@ -100,10 +109,12 @@ Solution : `S = {−3 ; 1}`.
 **4. Aucune solution — 5^(8x) = −25** (2.23 h)
 `5^(8x) > 0` pour tout x (une exponentielle est strictement positive), alors que `−25 < 0` : aucune solution. `S = ∅`.
 
-**5. Bases différentes — 2^(x−1) = 3^x** (2.24 a)
-`log(2^(x−1)) = log(3^x)` (log des deux membres) `⇔ (x − 1) · log(2) = x · log(3)` (log(a^A) = A · log(a))
-`⇔ x · log(2) − log(2) = x · log(3) ⇔ x · log(2) − x · log(3) = log(2) ⇔ x · (log(2) − log(3)) = log(2)`
-`⇔ x = log(2) / (log(2) − log(3)) = log(2) / log(2/3)` (log a − log b = log(a/b)) `≈ −1,710`.
+**5. Bases différentes — 2^(x−1) = 3^x** (2.24 a), comme le moteur le produit (une carte « Bases différentes »)
+`2^(x−1) = 3^x ⇔ log(2^(x−1)) = log(3^x)` (log des deux membres) `⇔ (x − 1) · log(2) = x · log(3)` (log(a^A) = A · log(a))
+`⇔ x · log(2) − log(2) = x · log(3) ⇔ x(log(2) − log(3)) = log(2)`
+`⇔ x = log(2) / (log(2) − log(3)) = log(2) / log(2/3)` (log a − log b = log(a/b)). Solution : `S = {log(2) / log(2/3)}`, soit `x ≈ −1,710`.
+Variante 2.24 b, 4^(x+1) = 6^(3x) : `… ⇔ log(4) = x(3 log(6) − log(4)) ⇔ x = log(4) / (3 log(6) − log(4)) = log(4) / log(54)` (propriétés des logarithmes),
+suivi de la ligne `3 log(6) − log(4) = log(6³/4) = log(54)`.
 
 **6. Logarithme — log(5 − x) = 8** (2.15 l)
 `log(5 − x) = 8 ⇔ 5 − x = 10⁸` (définition du logarithme) `⇔ x = 5 − 10⁸ = −99’999’995`.

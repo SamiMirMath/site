@@ -755,9 +755,12 @@ PROP_LOG_10K = "log(10ᵏ) = k"
 PROP_LN_UN = "ln(1) = 0"
 PROP_EXPO_POSITIVE = "une exponentielle est strictement positive"
 PROP_AUCUNE_SOLUTION = "aucune solution"
+PROP_LOG_QUOTIENT = "log a − log b = log(a/b)"
+PROP_LOG_PRODUIT = "log a + log b = log(ab)"
+PROP_LOG_REGROUPER = "propriétés des logarithmes"
 PROPRIETES = frozenset({PROP_PUISSANCE, PROP_PRODUIT, PROP_UN, PROP_MEME_BASE, PROP_ISOLER, PROP_PRODUIT_NUL, PROP_DISCRIMINANT,
                         PROP_DEFINITION_LOG, PROP_LOG_DEUX_MEMBRES, PROP_LOG_PUISSANCE, PROP_LOG_10K, PROP_LN_UN, PROP_EXPO_POSITIVE,
-                        PROP_AUCUNE_SOLUTION})
+                        PROP_AUCUNE_SOLUTION, PROP_LOG_QUOTIENT, PROP_LOG_PRODUIT, PROP_LOG_REGROUPER})
 
 
 def _carte(titre, lignes):
@@ -1170,6 +1173,131 @@ def base_est_e(base):
 
 
 # =====================================================================
+# 10 bis. MÉTHODE « BASES DIFFÉRENTES » : a^f = b^h
+# =====================================================================
+def _terme(c, avec_x, a):
+    """Le terme c · [x] · log(a) sous la forme (c, avec_x, a). log(10ᵏ) = k : le logarithme d'une puissance de 10 devient un nombre (a = None)."""
+    k = _exposant_entier(a, F(10))
+    return (c, avec_x, a) if k is None else (c * k, avec_x, None)
+
+
+def _noeud_terme(c, avec_x, a, x, ecrit):
+    """|c| · [x] · log(a), le coefficient 1 étant omis ; a = None : le logarithme est déjà un nombre. `ecrit` : la base telle qu'écrite
+    dans l'énoncé ((1/2)^x garde log(1/2), pas log(0,5))."""
+    c = abs(c)
+    coef = _arbre_poly([F(0), c], x) if avec_x else (_nb_exact(c) if c != 1 or a is None else None)
+    if a is None:
+        return coef
+    lg = Log(ecrit.get(a, _nb_exact(a)))
+    return lg if coef is None else Op("*", coef, lg)
+
+
+def _trier(termes):
+    """Les termes positifs d'abord (log 3 + 4 log 2, jamais − log 2 + log 3), l'ordre d'écriture sinon."""
+    termes = [t for t in termes if t[0] != 0]
+    return [t for t in termes if t[0] > 0] + [t for t in termes if t[0] < 0]
+
+
+def _somme(termes, x, ecrit, trier=True):
+    """Somme écrite comme à la main : x log 2 − log 2, 3 log 6 − log 4 ; 0 si elle est vide."""
+    termes = _trier(termes) if trier else [t for t in termes if t[0] != 0]
+    n = None
+    for c, avec_x, a in termes:
+        t = _noeud_terme(c, avec_x, a, x, ecrit)
+        n = (Neg(t) if c < 0 else t) if n is None else Op("-" if c < 0 else "+", n, t)
+    return Nb(0) if n is None else n
+
+
+def _regrouper(termes, ecrit):
+    """La somme Σ cᵢ · log(aᵢ) (cᵢ entiers) écrite comme un seul logarithme : (nœud, genre, ligne) ou None si elle n'est pas regroupable.
+    genre : « seul » (rien à regrouper), « quotient » (log a − log b), « produit » (log a + log b) ou « general » ;
+    ligne : le calcul « car … » (chaîne de « = »), sauf pour « seul »."""
+    termes = _trier(termes)
+    if any(a is None or c.denominator != 1 for c, _, a in termes):
+        return None
+    R = F(1)
+    for c, _, a in termes:
+        R *= a ** int(c)
+    if max(R.numerator, R.denominator) > 10 ** 12:
+        return None
+    k = _exposant_entier(R, F(10))
+    final = Nb(k) if k is not None else Log(_nb_exact(R))
+    formes = [c for c, _, _ in termes]
+    if formes == [1] and k is None:
+        return final, "seul", None
+    genre = "general" if k is not None else "quotient" if formes == [1, -1] else "produit" if formes == [1, 1] else "general"
+    base = lambda a: ecrit.get(a, _nb_exact(a))
+    puissance = lambda a, c: base(a) if c == 1 else Pow(base(a), Nb(c))
+    haut = [puissance(a, c) for c, _, a in termes if c > 0]
+    bas = [puissance(a, -c) for c, _, a in termes if c < 0]
+    produit = _produit(haut) if haut else Nb(1)
+    if bas:
+        produit = Op("/", produit, _produit(bas))
+    ligne = Chaine([_somme([(c, False, a) for c, _, a in termes], None, ecrit, False)])
+    ligne.ajouter(Log(produit), "=", PROP_LOG_REGROUPER)
+    if tex(ligne.elements[-1]) != tex(final):
+        ligne.ajouter(final, "=", PROP_LOG_10K if k is not None else None)
+    return final, genre, ligne
+
+
+def bases_differentes(g, d, x):
+    """Corrigé de a^f = b^h (bases différentes, f et h du 1er degré) : log des deux membres, puis les termes en x regroupés comme dans une
+    équation du premier degré (corrigé 2.24). None si la méthode ne s'applique pas."""
+    try:
+        return _bases_differentes(g, d, x)
+    except _Hors:
+        return None
+
+
+def _bases_differentes(g, d, x):
+    base_g, va, f_tree = _exponentielle(g, x)
+    base_d, vb, h_tree = _exponentielle(d, x)
+    if va is None or vb is None:
+        raise _Hors                                        # une base e
+    f, h = _poly(f_tree, x), _poly(h_tree, x)
+    if len(f) != 2 or len(h) != 2 or _racine_primitive(va) == _racine_primitive(vb):
+        raise _Hors                                        # exposants du 1er degré ; une même base est possible : méthode « même base »
+    (q, p), (s, r) = f, h
+    X, ecrit = Var(x), {va: base_g, vb: base_d}
+    ligne = Chaine([Eq(g, d)])
+    ligne.ajouter(Eq(Log(g), Log(d)), "⇔", PROP_LOG_DEUX_MEMBRES)
+    ligne.ajouter(Eq(Op("*", f_tree, Log(base_g)), Op("*", h_tree, Log(base_d))), "⇔", PROP_LOG_PUISSANCE)
+    dix = _exposant_entier(va, F(10)) is not None or _exposant_entier(vb, F(10)) is not None
+    if q != 0 or s != 0 or dix:                            # (x − 1) log 2 = … devient x log 2 − log 2 = …
+        ligne.ajouter(Eq(_somme([_terme(p, True, va), _terme(q, False, va)], x, ecrit, False),
+                         _somme([_terme(r, True, vb), _terme(s, False, vb)], x, ecrit, False)), "⇔", PROP_LOG_10K if dix else None)
+    # les termes en x du côté qui laisse la constante positive (2.24 a : à gauche ; b et c : à droite)
+    a_gauche = (q == 0 and s == 0) or s * math.log(vb) - q * math.log(va) > 0
+    if a_gauche:
+        coeff, cte = [_terme(p, False, va), _terme(-r, False, vb)], [_terme(-q, False, va), _terme(s, False, vb)]
+    else:
+        coeff, cte = [_terme(r, False, vb), _terme(-p, False, va)], [_terme(-s, False, vb), _terme(q, False, va)]
+    D, C = _somme(coeff, x, ecrit), _somme(cte, x, ecrit)
+    if abs(valeur(D)) < 1e-12:
+        raise _Hors                                        # p·log a = r·log b : une même base
+    facteur = Op("*", X, D)
+    ligne.ajouter(Eq(facteur, C) if a_gauche else Eq(C, facteur), "⇔")
+    lignes = [ligne]
+    if not any(t[0] for t in cte):                         # x(log 3 − log 2) = 0
+        ligne.ajouter(Eq(X, Op("/", C, D)), "⇔").ajouter(Nb(0), "=")
+        solution = Nb(0)
+    else:
+        ligne.ajouter(Eq(X, Op("/", C, D)), "⇔")
+        solution = Op("/", C, D)
+        haut, bas = _regrouper(cte, ecrit), _regrouper(coeff, ecrit)
+        if haut is not None and bas is not None:
+            genres = {haut[1], bas[1]} - {"seul"}
+            prop = {"quotient": PROP_LOG_QUOTIENT, "produit": PROP_LOG_PRODUIT}.get(next(iter(genres)) if len(genres) == 1 else None,
+                                                                                    PROP_LOG_REGROUPER)
+            solution = Op("/", haut[0], bas[0])
+            ligne.ajouter(solution, "=", prop)
+            if prop == PROP_LOG_REGROUPER:
+                lignes += [p[2] for p in (haut, bas) if p[2] is not None]
+    return {"genre": "bases_differentes", "inconnue": x, "enonce": Eq(g, d), "base": None,
+            "etapes": [_carte("Bases différentes", lignes)], "solutions": [solution], "remarque": None}
+
+
+# =====================================================================
 # 11. PRODUIT NUL ET PREMIER DEGRÉ À CONSTANTES LOGARITHMIQUES
 # =====================================================================
 def produit_nul(g, d, x):
@@ -1264,9 +1392,9 @@ def tex_solution(r):
 
 
 def corriger_equation(g, d, x):
-    """Corrigé de g = d par la première méthode du cours qui s'applique (même base, logarithme, produit nul, premier degré),
+    """Corrigé de g = d par la première méthode du cours qui s'applique (même base, logarithme, produit nul, bases différentes, premier degré),
     ou None si l'équation ne se résout pas avec ces méthodes."""
-    for methode in (meme_base, logarithme, produit_nul, lineaire_logarithmes):
+    for methode in (meme_base, logarithme, produit_nul, bases_differentes, lineaire_logarithmes):
         r = methode(g, d, x)
         if r is not None:
             return r

@@ -620,7 +620,7 @@ BATTERIE_E2 = [
     ("2^(-x)=3", [-1.585]), ("18=2*3^x+1", [2.0]) if False else ("20=2*3^x+2", [2.0]), ("100=2^x", [6.644]), ("5^x/2=3", [1.113]),
     ("exp(x)=7", [1.946]), ("2^(x/2)=5", [4.644]),
 ]
-SANS_E2 = ["x*2^x=8", "2^x+3^x=5", "x^x=4", "2^(x^2)=5", "2^x=3^(x+1)", "3^x=2^x", "log(x)=2", "ln(x)=3", "2^(x^3)=8", "e^x=e^3", "e^x=2^x",
+SANS_E2 = ["x*2^x=8", "2^x+3^x=5", "x^x=4", "2^(x^2)=5", "log(x)=2", "ln(x)=3", "2^(x^3)=8", "e^x=e^3", "e^x=2^x",
            "x^2=4", "2x+1=9", "sqrt(2)^x=3", "3^(x^2+1)=7", "10^x*(x-4)=0", "2*10^x=0*x"]
 
 
@@ -850,6 +850,188 @@ class TestLogarithme(unittest.TestCase):
             with self.subTest(saisie):
                 r = corriger(saisie)
                 self.assertEqual(round(el.valeur(r["solutions"][0]), 3) + 0.0, v)
+
+
+# ---------------------------------------------------------------------
+# Étape 4 : méthode « bases différentes » (E3)
+# ---------------------------------------------------------------------
+# (saisie, solution arrondie à 10⁻³) : exercice 2.24 a-c du corrigé, p. 26 n° 3, puis d'autres formes
+BATTERIE_E3 = [
+    ("2^(x-1)=3^x", -1.710), ("4^(x+1)=6^(3x)", 0.348), ("2^(x+4)=3^(x-1)", 9.548), ("2^x=3^(x+1)", -2.710),
+    ("3^x=2^x", 0.0), ("2^(-x)=3^x", 0.0), ("3^(x+1)=2^x", -2.710), ("5^(2x+1)=3^(x+2)", 0.277), ("2^(1-x)=3^(x+1)", -0.226),
+    ("2^(x-1)=5^(x+1)", -2.513), ("2^(x/2)=3^(x-1)", 1.461), ("(1/2)^x=3^(x+1)", -0.613), ("1,5^x=2^(x+1)", -2.409),
+    ("10^x=3^(x+1)", 0.912), ("10^(x-1)=3^x", 1.912), ("0,1^x=2^(x+1)", -0.231), ("3^(2x)=2^(3x+1)", 5.885),
+    ("7^(x+2)=2^(3-x)", -0.687), ("2^(-x)=3^(1-x)", 2.710),
+]
+SANS_E3 = ["e^x=2^x", "2^(x^2)=3^x", "2*2^x=3^x", "x*2^x=8", "2^x+3^x=5", "2^(x^3)=3^x", "x^x=3^x"]
+
+
+class TestBasesDifferentes(unittest.TestCase):
+    def test_batterie(self):
+        for saisie, attendu in BATTERIE_E3:
+            with self.subTest(saisie):
+                r = corriger(saisie)
+                self.assertIsNotNone(r)
+                self.assertEqual(r["genre"], "bases_differentes")
+                self.assertEqual([round(el.valeur(n), 3) + 0.0 for n in r["solutions"]], [attendu])
+
+    def test_oracle_la_solution_verifie_l_equation_de_l_enonce(self):
+        for saisie, _ in BATTERIE_E3:
+            with self.subTest(saisie):
+                s = el.analyser_saisie(saisie)
+                for n in corriger(saisie)["solutions"]:
+                    self.assertTrue(vrai(Eq(s.g, s.d), evaluer(n)), f"{saisie} : {el.tex(n)}")
+
+    def test_une_seule_solution(self):
+        """g − d change de signe une seule fois sur [−12 ; 12] quand la solution y est, jamais sinon."""
+        for saisie, attendu in BATTERIE_E3:
+            with self.subTest(saisie):
+                s = el.analyser_saisie(saisie)
+                signes = [1 if evaluer(s.g, MP.mpf(i) / 100 + MP.mpf("0.000123")) - evaluer(s.d, MP.mpf(i) / 100 + MP.mpf("0.000123")) > 0 else -1
+                          for i in range(-1200, 1201)]
+                self.assertEqual(sum(1 for a, b in zip(signes, signes[1:]) if a != b), 1 if -12 < attendu < 12 else 0)
+
+    def test_ecriture_du_corrige(self):
+        """Le corrigé 2.24 a, b, c, ligne pour ligne."""
+        lignes = lambda s: [el.tex_chaine(l) for c in corriger(s)["etapes"] for l in c["lignes"]]
+        debut = lambda g, d, f, h: (rf"{g} = {d} \iff \log({g}) = \log({d}) \quad \text{{(log des deux membres)}} \iff {f} = {h} "
+                                    r"\quad \text{(log(a^A) = A · log(a))}")
+        self.assertEqual(lignes("2^(x-1)=3^x"), [
+            debut("2^{x - 1}", "3^{x}", r"(x - 1) \cdot \log(2)", r"x \cdot \log(3)").replace(r"\log(2^{x - 1})", r"\log(2^{x - 1})")
+            + r" \iff x \cdot \log(2) - \log(2) = x \cdot \log(3) \iff x(\log(2) - \log(3)) = \log(2) "
+              r"\iff x = \frac{\log(2)}{\log(2) - \log(3)} = \frac{\log(2)}{\log\left(\frac{2}{3}\right)} \quad \text{(log a − log b = log(a/b))}"])
+        self.assertEqual(lignes("4^(x+1)=6^(3x)"), [
+            debut("4^{x + 1}", "6^{3x}", r"(x + 1) \cdot \log(4)", r"3x \cdot \log(6)")
+            + r" \iff x \cdot \log(4) + \log(4) = 3x \cdot \log(6) \iff \log(4) = x(3\log(6) - \log(4)) "
+              r"\iff x = \frac{\log(4)}{3\log(6) - \log(4)} = \frac{\log(4)}{\log(54)} \quad \text{(propriétés des logarithmes)}",
+            r"3\log(6) - \log(4) = \log\left(\frac{6^{3}}{4}\right) \quad \text{(propriétés des logarithmes)} = \log(54)"])
+        self.assertEqual(lignes("2^(x+4)=3^(x-1)"), [
+            debut("2^{x + 4}", "3^{x - 1}", r"(x + 4) \cdot \log(2)", r"(x - 1) \cdot \log(3)")
+            + r" \iff x \cdot \log(2) + 4\log(2) = x \cdot \log(3) - \log(3) \iff \log(3) + 4\log(2) = x(\log(3) - \log(2)) "
+              r"\iff x = \frac{\log(3) + 4\log(2)}{\log(3) - \log(2)} = \frac{\log(48)}{\log(1{,}5)} \quad \text{(propriétés des logarithmes)}",
+            r"\log(3) + 4\log(2) = \log(3 \cdot 2^{4}) \quad \text{(propriétés des logarithmes)} = \log(48)",
+            r"\log(3) - \log(2) = \log\left(\frac{3}{2}\right) \quad \text{(propriétés des logarithmes)} = \log(1{,}5)"])
+
+    def test_formes_exactes_et_ligne_finale(self):
+        for saisie, exact, finale in [
+            ("2^(x-1)=3^x", r"\frac{\log(2)}{\log\left(\frac{2}{3}\right)}", r"x \approx -1{,}710"),
+            ("4^(x+1)=6^(3x)", r"\frac{\log(4)}{\log(54)}", r"x \approx 0{,}348"),
+            ("2^(x+4)=3^(x-1)", r"\frac{\log(48)}{\log(1{,}5)}", r"x \approx 9{,}548"),
+            ("2^x=3^(x+1)", r"\frac{\log(3)}{\log\left(\frac{2}{3}\right)}", r"x \approx -2{,}710"),
+            ("2^(x-1)=5^(x+1)", r"\frac{1}{\log(0{,}4)}", r"x \approx -2{,}513"),
+            ("10^x=3^(x+1)", r"\frac{\log(3)}{1 - \log(3)}", r"x \approx 0{,}912")]:
+            with self.subTest(saisie):
+                r = corriger(saisie)
+                self.assertEqual([el.tex(n) for n in r["solutions"]], [exact])
+                self.assertEqual(el.tex_solution(r), r"S = \left\{" + exact + r"\right\} \text{, soit } " + finale)
+        self.assertEqual(el.tex_solution(corriger("3^x=2^x")), r"S = \left\{0\right\}")
+
+    def test_les_x_vont_du_cote_qui_laisse_la_constante_positive(self):
+        """2.24 a : à gauche (x(log 2 − log 3) = log 2) ; b et c : à droite (log 4 = x(3 log 6 − log 4))."""
+        lignes = lambda s: el.tex_chaine(corriger(s)["etapes"][0]["lignes"][0])
+        self.assertIn(r"\iff x(\log(2) - \log(3)) = \log(2) \iff", lignes("2^(x-1)=3^x"))
+        self.assertIn(r"\iff \log(4) = x(3\log(6) - \log(4)) \iff", lignes("4^(x+1)=6^(3x)"))
+        self.assertIn(r"\iff \log(3) + 4\log(2) = x(\log(3) - \log(2)) \iff", lignes("2^(x+4)=3^(x-1)"))
+        self.assertIn(r"\iff x(\log(3) - \log(2)) = 0 \iff x = \frac{0}{\log(3) - \log(2)} = 0", lignes("3^x=2^x"))
+        self.assertIn(r"\iff x(\log(3) - \log(2)) = \log(3) \iff", lignes("2^(-x)=3^(1-x)"))      # les termes positifs d'abord : jamais −log(2) + log(3)
+
+    def test_regroupement_seulement_ici(self):
+        """log a − log b = log(a/b) : prop de la dernière égalité quand il n'y a que des différences ; sinon « propriétés des logarithmes »."""
+        derniere = lambda s: [p for p in corriger(s)["etapes"][0]["lignes"][0].props if p][-1]
+        self.assertEqual(derniere("2^(x-1)=3^x"), el.PROP_LOG_QUOTIENT)
+        self.assertEqual(derniere("2^x=3^(x+1)"), el.PROP_LOG_QUOTIENT)
+        self.assertEqual(derniere("1,5^x=2^(x+1)"), el.PROP_LOG_QUOTIENT)
+        self.assertEqual(derniere("2^(x+4)=3^(x-1)"), el.PROP_LOG_REGROUPER)
+        self.assertEqual(derniere("4^(x+1)=6^(3x)"), el.PROP_LOG_REGROUPER)
+        self.assertEqual(derniere("2^(x-1)=5^(x+1)"), el.PROP_LOG_REGROUPER)
+
+    def test_log_d_une_puissance_de_10_est_un_nombre(self):
+        """Q11 : log(10) = 1 et log(2 · 5) = log(10) = 1 ; plus aucun log(10) après la ligne (log(10ᵏ) = k)."""
+        for saisie in ["10^x=3^(x+1)", "10^(x-1)=3^x", "0,1^x=2^(x+1)", "2^(x-1)=5^(x+1)"]:
+            with self.subTest(saisie):
+                r = corriger(saisie)
+                texte = " ".join(el.tex_chaine(l) for c in r["etapes"] for l in c["lignes"]) + el.tex_solution(r)
+                self.assertIn(el.PROP_LOG_10K, texte)
+                apres = texte.split(el.PROP_LOG_10K, 1)[1]          # log(10) est écrit une fois (log(a^A) = A · log(a)), puis remplacé par 1
+                self.assertNotIn(r"\log(10)", apres)
+                self.assertNotIn(r"\log(0{,}1)", apres)
+
+    def test_base_ecrite_conservee(self):
+        texte = " ".join(el.tex_chaine(l) for c in corriger("(1/2)^x=3^(x+1)")["etapes"] for l in c["lignes"])
+        self.assertIn(r"x \cdot \log\left(\frac{1}{2}\right) = x \cdot \log(3) + \log(3)", texte)
+        self.assertNotIn("0{,}5", texte)
+
+    def test_une_carte_et_des_proprietes_de_la_liste(self):
+        for saisie, _ in BATTERIE_E3:
+            with self.subTest(saisie):
+                r = corriger(saisie)
+                self.assertEqual([c["titre"] for c in r["etapes"]], ["Bases différentes"])
+                lignes = r["etapes"][0]["lignes"]
+                for ligne in lignes:
+                    for p in ligne.props + [ligne.note]:
+                        self.assertTrue(p is None or p in el.PROPRIETES, (saisie, p))
+                props = [p for p in lignes[0].props if p is not None]
+                self.assertEqual(props[:2], [el.PROP_LOG_DEUX_MEMBRES, el.PROP_LOG_PUISSANCE])
+                for ligne in lignes[1:]:                       # lignes « car … » : des « = » seulement
+                    self.assertEqual(set(ligne.liens), {"="})
+
+    def test_equivalences_gardent_la_solution_et_rien_d_autre(self):
+        for saisie, _ in BATTERIE_E3:
+            with self.subTest(saisie):
+                r = corriger(saisie)
+                sols = [evaluer(n) for n in r["solutions"]]
+                grille = [MP.mpf(i) / 4 + MP.mpf("0.0371") for i in range(-40, 41)]
+                for ligne in r["etapes"][0]["lignes"]:
+                    for e in ligne.elements:
+                        if isinstance(e, (Eq, el.Ou)):
+                            for x in sols:
+                                self.assertTrue(element_vrai(e, x), (saisie, el.tex_element(e)))
+                            for x in grille:
+                                self.assertFalse(element_vrai(e, x), (saisie, el.tex_element(e), x))
+
+    def test_les_egalites_sont_justes(self):
+        """Chaque lien « = » : le membre de droite de l'élément précédent vaut l'élément suivant."""
+        droite = lambda e: e.d if isinstance(e, Eq) else e
+        for saisie, _ in BATTERIE_E3:
+            with self.subTest(saisie):
+                for ligne in corriger(saisie)["etapes"][0]["lignes"]:
+                    for e, lien, suivant in zip(ligne.elements, ligne.liens, ligne.elements[1:]):
+                        if lien == "=":
+                            a, b = evaluer(droite(e), MP.mpf("0.37")), evaluer(suivant, MP.mpf("0.37"))
+                            self.assertLessEqual(abs(a - b), MP.mpf("1e-20") * (1 + abs(a)), (saisie, el.tex_chaine(ligne)))
+
+    def test_log_pour_les_bases_ordinaires_jamais_ln_ni_point_decimal(self):
+        for saisie, _ in BATTERIE_E3:
+            with self.subTest(saisie):
+                r = corriger(saisie)
+                texte = " ".join(el.tex_chaine(l) for c in r["etapes"] for l in c["lignes"]) + el.tex_solution(r)
+                self.assertNotIn("\\ln", texte)
+                self.assertNotIn("\\log_", texte)
+                self.assertIsNone(re.search(r"\d\.\d", texte), texte)
+                self.assertIsNone(TUTOIEMENT.search(re.sub(r"\\[a-z]+", " ", texte)), texte)
+
+    def test_les_autres_methodes_gardent_la_priorite(self):
+        for saisie, genre in [("4^(x+1)=8^(2x)", "meme_base"), ("2^x=100", "logarithme"), ("2^x=8", "meme_base"), ("3^x=2", "logarithme"),
+                              ("10^x*(10^x-4)=0", "produit_nul"), ("x=ln(3)", "lineaire")]:
+            with self.subTest(saisie):
+                self.assertEqual(corriger(saisie)["genre"], genre)
+                s = el.analyser_saisie(saisie)
+                self.assertIsNone(el.bases_differentes(s.g, s.d, s.inconnue))
+
+    def test_hors_programme(self):
+        for saisie in SANS_E3:
+            with self.subTest(saisie):
+                s = el.analyser_saisie(saisie)
+                self.assertIsNone(el.bases_differentes(s.g, s.d, s.inconnue))
+                self.assertIsNone(el.corriger_equation(s.g, s.d, s.inconnue))
+
+    def test_ligne_finale_partout(self):
+        for saisie, _ in BATTERIE_E3:
+            with self.subTest(saisie):
+                t = el.tex_solution(corriger(saisie))
+                irrationnelle = not isinstance(corriger(saisie)["solutions"][0], Nb)
+                self.assertTrue(t.startswith("S = "), t)
+                self.assertEqual(r"\approx" in t, irrationnelle, t)
 
 
 class TestNotationSuisse(unittest.TestCase):
