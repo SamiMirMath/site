@@ -794,6 +794,9 @@ PROP_AUCUNE_SOLUTION = "aucune solution"
 PROP_LOG_QUOTIENT = "log a − log b = log(a/b)"
 PROP_LOG_PRODUIT = "log a + log b = log(ab)"
 PROP_LOG_REGROUPER = "propriétés des logarithmes"
+PROP_LOG_BASE_PUISSANCE = "log_a(a^k) = k"
+PROP_LN_E_PUISSANCE = "ln(e^k) = k"
+PROP_CHANGEMENT_DE_BASE = "changement de base"
 PROP_ISOLER_LOG = "on isole le logarithme"
 PROP_BIEN_DEFINI = "le logarithme est bien défini"
 PROP_BASE_LOG = "une base de logarithme est strictement positive et différente de 1"
@@ -804,7 +807,8 @@ PROP_LN_E = "ln(e^A) = A"
 PROPRIETES = frozenset({PROP_PUISSANCE, PROP_PRODUIT, PROP_UN, PROP_MEME_BASE, PROP_ISOLER, PROP_PRODUIT_NUL, PROP_DISCRIMINANT,
                         PROP_DEFINITION_LOG, PROP_LOG_DEUX_MEMBRES, PROP_LOG_PUISSANCE, PROP_LOG_10K, PROP_LN_UN, PROP_EXPO_POSITIVE,
                         PROP_AUCUNE_SOLUTION, PROP_LOG_QUOTIENT, PROP_LOG_PRODUIT, PROP_LOG_REGROUPER, PROP_LOG_SOMME, PROP_LN_DEUX_MEMBRES, PROP_LN_E,
-                        PROP_ISOLER_LOG, PROP_BIEN_DEFINI, PROP_BASE_LOG, PROP_SEULE_POSITIVE})
+                        PROP_ISOLER_LOG, PROP_BIEN_DEFINI, PROP_BASE_LOG, PROP_SEULE_POSITIVE, PROP_LOG_BASE_PUISSANCE, PROP_LN_E_PUISSANCE,
+                        PROP_CHANGEMENT_DE_BASE})
 
 
 def _carte(titre, lignes):
@@ -1541,6 +1545,123 @@ def _base_inconnue(enonce, etapes, chaine, s, c, x):
     etapes += [_carte("Condition", [condition]), _carte("Définition du logarithme", lignes)]
     return {"genre": "logarithmique", "inconnue": x, "enonce": enonce, "base": None, "etapes": etapes, "solutions": [_nb_exact(r)],
             "remarque": None}
+
+
+# =====================================================================
+# 10 quater. CALCUL DE log_a(y) (saisie sans « = »)
+# =====================================================================
+def _vecteur(n):
+    """Exposants des facteurs premiers de n : un rationnel > 0, la racine carrée d'un tel nombre, une puissance a^c (c rationnel) ;
+    {premier: exposant rationnel}, ou None si n n'est pas de cette forme."""
+    if isinstance(n, Fn):
+        v = _vecteur(n.a)
+        return None if v is None else {p: e / 2 for p, e in v.items()}
+    if isinstance(n, Pow) and not variables(n):
+        c, v = _const(n.b), _vecteur(n.a)
+        return None if c is None or v is None else {p: e * c for p, e in v.items()}
+    q = _const(n)
+    if q is None or q <= 0:
+        return None
+    haut, bas = _premiers(q.numerator), _premiers(q.denominator)
+    return {p: F(haut.get(p, 0) - bas.get(p, 0)) for p in set(haut) | set(bas)}
+
+
+def _exposant_de_la_base(arg, base):
+    """Le rationnel k tel que arg = base^k, ou None."""
+    va, vb = _vecteur(arg), _vecteur(base)
+    if va is None or vb is None:
+        return None
+    p0 = next((p for p, e in vb.items() if e != 0), None)
+    if p0 is None:
+        return None
+    k = va.get(p0, F(0)) / vb[p0]
+    return k if all(va.get(p, F(0)) == k * vb.get(p, F(0)) for p in set(va) | set(vb)) else None
+
+
+def _encadrement(y, a):
+    """(j, a^j, a^(j+1)) tels que a^j < y < a^(j+1), pour a > 1 et y > 0 rationnels qui ne sont pas des puissances entières de a."""
+    j = 0
+    while a ** (j + 1) <= y:
+        j += 1
+    while a ** j > y:
+        j -= 1
+    return j, a ** j, a ** (j + 1)
+
+
+def calculer_logarithme(g):
+    """Corrigé du calcul de log_a(y) (a et y sans inconnue) : y = aᵏ donne k (64 = 8², log₈(64) = 2 ; √2 = 4^(1/4), log₄(√2) = 1/4),
+    sinon changement de base et valeur approchée (log₂(50) = log(50)/log(2) ≈ 5,644). None si le calcul sort de ces formes."""
+    try:
+        return _calculer_logarithme(g)
+    except _Hors:
+        return None
+
+
+def _calculer_logarithme(g):
+    if not isinstance(g, Log) or variables(g):
+        raise _Hors
+    arg, base = g.a, g.base
+    resultat = lambda etapes, valeur: {"genre": "calcul", "inconnue": None, "enonce": g, "etapes": etapes, "valeur": valeur, "solutions": None,
+                                       "remarque": None}
+    if isinstance(base, E):                                     # ln : ln(1) = 0, ln(e) = 1, ln(e^k) = k, sinon la valeur de la calculatrice
+        q = _const(arg)
+        if q == 1:
+            return resultat([_carte("Calcul", [Chaine([g, Nb(0)], ["="], [PROP_LN_UN])])], Nb(0))
+        if isinstance(arg, E) or (isinstance(arg, Pow) and isinstance(arg.a, E) and _const(arg.b) is not None):
+            k = F(1) if isinstance(arg, E) else _const(arg.b)
+            return resultat([_carte("Calcul", [Chaine([g, _nb_exact(k)], ["="], [PROP_LN_E_PUISSANCE])])], _nb_exact(k))
+        if contient_e(arg) or _vecteur(arg) is None:
+            raise _Hors
+        return resultat([], g)
+    if contient_e(arg):
+        raise _Hors
+    base_noeud, b = (Nb(10), F(10)) if base is None else (base, _const(base))
+    if b is None or b <= 0 or b == 1:
+        raise _Hors
+    k = _exposant_de_la_base(arg, base_noeud)
+    prop = PROP_LOG_10K if b == 10 else PROP_LOG_BASE_PUISSANCE
+    if k is not None:
+        lignes = []
+        if k.denominator == 1:
+            lignes.append(Chaine([arg, Pow(base_noeud, Nb(k))], ["="], [None]))            # 64 = 8²
+        else:                                                   # √2 = 2^(1/2) = (4^(1/2))^(1/2) = 4^(1/4)
+            rho = _racine_primitive(b)
+            m = _exposant_entier(b, rho)
+            rho_noeud = _nb_exact(rho)
+            s = _exposant_de_la_base(arg, rho_noeud)
+            chaine = Chaine([arg])
+            if s != 1 or m == 1:
+                chaine.ajouter(Pow(rho_noeud, _nb_exact(s)), "=")
+            if m != 1 and s != 1:
+                chaine.ajouter(Pow(Pow(base_noeud, _nb_exact(F(1, m))), _nb_exact(s)), "=")
+            if tex(chaine.elements[-1]) != tex(Pow(base_noeud, _nb_exact(k))):
+                chaine.ajouter(Pow(base_noeud, _nb_exact(k)), "=")
+            lignes.append(chaine)
+        lignes.append(Chaine([g, Log(Pow(base_noeud, _nb_exact(k)), base), _nb_exact(k)], ["=", "="], [None, prop]))   # log₈(64) = log₈(8²) = 2
+        return resultat([_carte("Calcul", lignes)], _nb_exact(k))
+    if _vecteur(arg) is None:
+        raise _Hors                                             # argument négatif, nul ou hors de ces formes
+    lignes, valeur = [], (g if base is None else Op("/", Log(arg), Log(base_noeud)))
+    q = _const(arg)
+    texte_base = tex(base_noeud)
+    if q is not None and b > 1:
+        j, bas, haut = _encadrement(q, b)
+        lignes.append(Chaine([Texte(tex(arg) + r" \text{ n'est pas une puissance de } " + texte_base + r" \quad ("
+                              + tex(Pow(base_noeud, Nb(j))) + " = " + tex(_nb_exact(bas)) + " < " + tex(arg) + " < " + tex(_nb_exact(haut))
+                              + " = " + tex(Pow(base_noeud, Nb(j + 1))) + ")")]))
+    else:
+        lignes.append(Chaine([Texte(tex(arg) + r" \text{ n'est pas une puissance de } " + texte_base)]))
+    if base is not None:
+        lignes.append(Chaine([g, valeur], ["="], [PROP_CHANGEMENT_DE_BASE]))
+    return resultat([_carte("Calcul", lignes)], valeur)
+
+
+def tex_resultat(r):
+    """Ligne finale du calcul : `log_8(64) = 2` ; `log_2(50) = log(50)/log(2) ≈ 5,644` ; `log(50) ≈ 1,699`."""
+    v = r["valeur"]
+    if _const(v) is not None:
+        return tex(r["enonce"]) + " = " + tex(v)
+    return (tex(v) if v == r["enonce"] else tex(r["enonce"]) + " = " + tex(v)) + r" \approx " + tex_approx(valeur(v))
 
 
 # =====================================================================

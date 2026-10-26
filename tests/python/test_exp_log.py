@@ -1308,6 +1308,118 @@ class TestLogarithmique(unittest.TestCase):
                 self.assertIsNone(el.logarithmique(s.g, s.d, s.inconnue))
 
 
+# ---------------------------------------------------------------------
+# Étape 6 : calcul de log_a(y) (C1)
+# ---------------------------------------------------------------------
+def calculer(saisie):
+    return el.calculer_logarithme(el.analyser_saisie(saisie).g)
+
+
+# (saisie, valeur exacte rationnelle ou None, valeur approchée) : exercices 2.15 a-d h i, 2.20 a-h et d'autres formes
+BATTERIE_C1 = [
+    ("log(1000000)", F(6)), ("log(1)", F(0)), ("log(1/100000)", F(-5)), ("log(0,001)", F(-3)), ("log(sqrt(10))", F(1, 2)), ("log(0,01)", F(-2)),
+    ("log2(64)", F(6)), ("log_8(64)", F(2)), ("log_5(1/25)", F(-2)), ("log_5(0,2)", F(-1)), ("log_7(1)", F(0)), ("log_20(20)", F(1)),
+    ("log_2(1/8)", F(-3)), ("log_4(sqrt(2))", F(1, 4)),
+    # autres formes
+    ("log_9(27)", F(3, 2)), ("log_8(2)", F(1, 3)), ("log_4(8)", F(3, 2)), ("log_25(sqrt(5))", F(1, 4)), ("log_2(0,125)", F(-3)), ("log(10^3)", F(3)),
+    ("log(10^(1/2))", F(1, 2)), ("log_27(1/9)", F(-2, 3)), ("log_2(sqrt(8))", F(3, 2)), ("log_100(10)", F(1, 2)), ("log_1,5(2,25)", F(2)),
+    ("ln(1)", F(0)), ("ln(e)", F(1)), ("ln(e^3)", F(3)), ("log_10(1000)", F(3)),
+    ("log_2(50)", 5.644), ("log(50)", 1.699), ("ln(7)", 1.946), ("log_3(10)", 2.096), ("log_2(sqrt(3))", 0.792), ("log_5(0,3)", -0.748),
+    ("log_4(0,3)", -0.868), ("log(2)", 0.301), ("log_6(2)", 0.387), ("log_2(10)", 3.322), ("log_3(sqrt(2))", 0.315),
+]
+
+
+class TestCalculLogarithme(unittest.TestCase):
+    def test_batterie(self):
+        for saisie, attendu in BATTERIE_C1:
+            with self.subTest(saisie):
+                r = calculer(saisie)
+                self.assertIsNotNone(r)
+                self.assertEqual(r["genre"], "calcul")
+                if isinstance(attendu, F):
+                    self.assertEqual(el._const(r["valeur"]), attendu)
+                else:
+                    self.assertIsNone(el._const(r["valeur"]))
+                    self.assertEqual(round(el.valeur(r["valeur"]), 3), attendu)
+
+    def test_oracle_la_valeur_est_celle_du_logarithme_de_l_enonce(self):
+        for saisie, _ in BATTERIE_C1:
+            with self.subTest(saisie):
+                r = calculer(saisie)
+                a, b = evaluer(el.analyser_saisie(saisie).g), evaluer(r["valeur"])
+                self.assertLessEqual(abs(a - b), MP.mpf("1e-25") * (1 + abs(a)), (saisie, a, b))
+
+    def test_chaque_egalite_est_juste(self):
+        for saisie, _ in BATTERIE_C1:
+            with self.subTest(saisie):
+                for carte in calculer(saisie)["etapes"]:
+                    for ligne in carte["lignes"]:
+                        for e, lien, suivant in zip(ligne.elements, ligne.liens, ligne.elements[1:]):
+                            a, b = evaluer(e), evaluer(suivant)
+                            self.assertLessEqual(abs(a - b), MP.mpf("1e-25") * (1 + abs(a)), (saisie, el.tex_chaine(ligne)))
+
+    def test_ecriture_du_corrige(self):
+        lignes = lambda s: [el.tex_chaine(l) for c in calculer(s)["etapes"] for l in c["lignes"]]
+        self.assertEqual(lignes("log(1000000)"), [r"1\text{’}000\text{’}000 = 10^{6}",
+                                                  r"\log(1\text{’}000\text{’}000) = \log(10^{6}) = 6 \quad \text{(log(10ᵏ) = k)}"])
+        self.assertEqual(lignes("log_8(64)"), [r"64 = 8^{2}", r"\log_{8}(64) = \log_{8}(8^{2}) = 2 \quad \text{(log_a(a^k) = k)}"])
+        self.assertEqual(lignes("log_5(0,2)"), [r"0{,}2 = 5^{-1}", r"\log_{5}(0{,}2) = \log_{5}(5^{-1}) = -1 \quad \text{(log_a(a^k) = k)}"])
+        self.assertEqual(lignes("log_4(sqrt(2))"), [
+            r"\sqrt{2} = 2^{\frac{1}{2}} = \left(4^{\frac{1}{2}}\right)^{\frac{1}{2}} = 4^{\frac{1}{4}}",
+            r"\log_{4}(\sqrt{2}) = \log_{4}\left(4^{\frac{1}{4}}\right) = \frac{1}{4} \quad \text{(log_a(a^k) = k)}"])
+        self.assertEqual(lignes("log(sqrt(10))")[0], r"\sqrt{10} = 10^{\frac{1}{2}}")
+        self.assertEqual(lignes("log_8(2)")[0], r"2 = 8^{\frac{1}{3}}")                                  # exposant 1 : pas de (8^(1/3))^1
+        self.assertEqual(lignes("log_9(27)")[0], r"27 = 3^{3} = \left(9^{\frac{1}{2}}\right)^{3} = 9^{\frac{3}{2}}")
+        self.assertEqual(lignes("log_2(sqrt(8))")[0], r"\sqrt{8} = 2^{\frac{3}{2}}")                      # la base est déjà la racine primitive
+        self.assertEqual(lignes("log_2(50)"), [
+            r"50 \text{ n'est pas une puissance de } 2 \quad (2^{5} = 32 < 50 < 64 = 2^{6})",
+            r"\log_{2}(50) = \frac{\log(50)}{\log(2)} \quad \text{(changement de base)}"])
+        self.assertEqual(lignes("ln(e^3)"), [r"\ln(e^{3}) = 3 \quad \text{(ln(e^k) = k)}"])
+
+    def test_ligne_finale(self):
+        for saisie, attendu in [("log_8(64)", r"\log_{8}(64) = 2"), ("log_4(sqrt(2))", r"\log_{4}(\sqrt{2}) = \frac{1}{4}"),
+                                ("log_2(50)", r"\log_{2}(50) = \frac{\log(50)}{\log(2)} \approx 5{,}644"), ("log(50)", r"\log(50) \approx 1{,}699"),
+                                ("ln(7)", r"\ln(7) \approx 1{,}946"), ("log_5(0,3)", r"\log_{5}(0{,}3) = \frac{\log(0{,}3)}{\log(5)} \approx -0{,}748"),
+                                ("log_2(1/8)", r"\log_{2}\left(\frac{1}{8}\right) = -3")]:
+            with self.subTest(saisie):
+                self.assertEqual(el.tex_resultat(calculer(saisie)), attendu)
+
+    def test_encadrement_entre_deux_puissances_consecutives(self):
+        for y, a in [(F(50), F(2)), (F(10), F(3)), (F(3, 10), F(5)), (F(1, 3), F(2)), (F(7), F(10)), (F(1, 1000) + F(1, 7), F(10)), (F(5, 2), F(3, 2))]:
+            with self.subTest((y, a)):
+                j, bas, haut = el._encadrement(y, a)
+                self.assertTrue(bas < y < haut and haut == bas * a and bas == a ** j)
+
+    def test_changement_de_base_seulement_hors_base_10_et_e(self):
+        for saisie, avec in [("log_2(50)", True), ("log_3(10)", True), ("log(50)", False), ("ln(7)", False)]:
+            with self.subTest(saisie):
+                props = [p for c in calculer(saisie)["etapes"] for l in c["lignes"] for p in l.props]
+                self.assertEqual(el.PROP_CHANGEMENT_DE_BASE in props, avec)
+
+    def test_proprietes_de_la_liste_pas_de_point_decimal_pas_de_tutoiement(self):
+        for saisie, _ in BATTERIE_C1:
+            with self.subTest(saisie):
+                r = calculer(saisie)
+                texte = " ".join(el.tex_chaine(l) for c in r["etapes"] for l in c["lignes"]) + el.tex_resultat(r)
+                for c in r["etapes"]:
+                    for l in c["lignes"]:
+                        for p in l.props + [l.note]:
+                            self.assertTrue(p is None or p in el.PROPRIETES, (saisie, p))
+                self.assertIsNone(re.search(r"\d\.\d", texte), texte)
+                self.assertIsNone(TUTOIEMENT.search(re.sub(r"\\[a-z]+", " ", texte)), texte)
+
+    def test_pas_encore(self):
+        """Hors de la méthode : plus d'un logarithme, argument non rationnel, nul ou négatif, base e dans un argument autre que e^k."""
+        for saisie in ["2log(5)", "log(2)+log(3)", "log(e^2)", "log(0)", "log(-3)", "log_2(0)", "ln(2e)", "ln(sqrt(e))", "log(2)/log(3)", "log(5)^2",
+                       "sqrt(log(2))"]:
+            with self.subTest(saisie):
+                try:
+                    g = el.analyser_saisie(saisie).g
+                except ErreurSaisie:
+                    continue
+                self.assertIsNone(el.calculer_logarithme(g))
+
+
 class TestMessagesNonResolu(unittest.TestCase):
     """EL-11 : deux messages. « ne se résout pas avec les méthodes du cours » seulement pour un vrai hors-programme ;
     « ne traite pas encore » pour une forme du programme que l'outil ne gère pas encore."""

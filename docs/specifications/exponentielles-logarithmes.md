@@ -56,7 +56,7 @@ non carré, les lignes « Δ = … » et « x = … ou x = … » suivent la cha
 
 Propriétés nommées (liste fermée, testée) : (on isole le terme exponentiel), (même base : a^A = a^B ⇔ A = B), ((aᵐ)ⁿ = aᵐⁿ),
 (aᵐ · aⁿ = aᵐ⁺ⁿ), (1 = a⁰), (log des deux membres), (log(a^A) = A · log(a)), (ln(a^A) = A · ln(a)), (log a − log b = log(a/b)), (log a + log b = log(ab)), (propriétés des logarithmes),
-(on isole le logarithme), (le logarithme est bien défini), (une base de logarithme est strictement positive et différente de 1), (seule la solution positive convient),
+(log_a(a^k) = k), (ln(e^k) = k), (on isole le logarithme), (le logarithme est bien défini), (une base de logarithme est strictement positive et différente de 1), (seule la solution positive convient),
 (définition du logarithme), (log(10ᵏ) = k), (ln(1) = 0), (une exponentielle est strictement positive), (aucune solution),
 (un produit est nul si l'un des facteurs est nul), (formule du discriminant), (changement de base), (log(ab) = log a + log b), (ln des deux membres), (ln(e^A) = A),
 ainsi que la justification de division (car D ≠ 0), où D est le coefficient logarithmique (1 − ln 2, log 2 − log 3).
@@ -91,6 +91,13 @@ un argument du 2ᵈ degré (`log(x²) = 2`) continue dans la même chaîne comme
 **Vérification** (carte à part, seulement quand l'argument d'un seul logarithme n'est pas x seul) : `5 − x = 10⁸ > 0 (le logarithme est bien défini) ✓`.
 **Base inconnue** `log_x(n) = k` (k entier de 1 à 12, n puissance k-ième exacte) : carte « Condition » (`x > 0 et x ≠ 1`, une base de logarithme est strictement positive et différente de 1), puis `x^k = n`, `x = r ou x = −r` pour k pair, et une ligne
 « seule la solution positive convient ». Pas encore traités (message « pas encore ») : second membre avec un logarithme, plusieurs logarithmes, base inconnue d'exposant non entier, trinôme à coefficients non entiers (`log(x²) = −1`), argument de degré 3 ou plus.
+
+**Calcul de log_a(y)** (étape 6, corrigé 2.15 a-d h i, 2.20 ; saisie sans « = », `calculer_logarithme`, résultat par `tex_resultat`) : une carte « Calcul ».
+Si y = aᵏ (k entier ou rationnel : 64 = 8², 1/25 = 5⁻², 1 = 7⁰, 20 = 20¹) : une ligne `y = aᵏ`, puis `log_a(y) = log_a(aᵏ) = k` (log_a(a^k) = k, ou log(10ᵏ) = k en base 10),
+résultat `log₈(64) = 2`. Quand k n'est pas entier, la première ligne passe par la racine de la base : `√2 = 2^(1/2) = (4^(1/2))^(1/2) = 4^(1/4)` (corrigé 2.20 h), `27 = 3³ = (9^(1/2))³ = 9^(3/2)`,
+`3 = 27^(1/3)`. `ln(1) = 0` (ln(1) = 0), `ln(e) = 1` et `ln(e^k) = k` (ln(e^k) = k). Sinon : « y n'est pas une puissance de a (aʲ = … < y < … = aʲ⁺¹) » (encadrement entre deux puissances
+consécutives, pour un rationnel y et une base > 1), puis `log_a(y) = log(y)/log(a)` (changement de base), résultat `log₂(50) = log(50)/log(2) ≈ 5,644` ; en base 10 ou e, aucune ligne de changement de
+base : `log(50) ≈ 1,699`, `ln(7) ≈ 1,946`. Pas encore traités : plusieurs logarithmes (2 log 5, log 2 + log 3, calcul avec log 2 ≈ 0,301 : C2), argument contenant e (hors ln(e^k)), argument nul, négatif ou non rationnel (sauf racine carrée et puissance rationnelle).
 
 **Isoler x** : `x − a = c` donne `x = a + c` (corrigé 2.23 d : x = 1 + 1/log(3), jamais c + a) ; `x + a = c` donne `x = c − a` ; `p·x = c` donne `x = c/p` (non simplifié : Q11).
 
