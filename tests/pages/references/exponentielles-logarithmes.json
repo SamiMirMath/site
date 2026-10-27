@@ -6540,6 +6540,45 @@
   ],
   "progression_finale": "Étape 3 / 3"
  },
+ "log_x(12)=4": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Condition⟦x > 0 \\text{ et } x \\neq 1⟧(une base de logarithme est strictement positive et différente de 1)",
+    "titre": "Étape 1Condition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Définition du logarithme⟦\\log_{x}(12) = 4⟧⟦\\iff⟧⟦x^{4} = 12⟧(définition du logarithme)⟦\\iff⟧⟦x = 12^{\\frac{1}{4}} \\text{ ou } x = -12^{\\frac{1}{4}}⟧⟦x = 12^{\\frac{1}{4}}⟧(seule la solution positive convient)",
+    "titre": "Étape 2Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{12^{\\frac{1}{4}}\\right\\} \\text{, soit } x \\approx 1{,}861⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
  "log_x(16)=2": {
   "au_depart": {
    "progression": "Étape 1 / 3",
@@ -6581,22 +6620,81 @@
  },
  "log_x(2)=3": {
   "au_depart": {
-   "progression": "",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
    {
     "classes": [
      "card",
-     "err"
+     "cond"
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Cet outil ne traite pas encore ce type d'équation.",
-    "titre": null
+    "texte": "Étape 1Condition⟦x > 0 \\text{ et } x \\neq 1⟧(une base de logarithme est strictement positive et différente de 1)",
+    "titre": "Étape 1Condition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Définition du logarithme⟦\\log_{x}(2) = 3⟧⟦\\iff⟧⟦x^{3} = 2⟧(définition du logarithme)⟦\\iff⟧⟦x = 2^{\\frac{1}{3}}⟧",
+    "titre": "Étape 2Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2^{\\frac{1}{3}}\\right\\} \\text{, soit } x \\approx 1{,}260⟧",
+    "titre": "Solution"
    }
   ],
-  "progression_finale": ""
+  "progression_finale": "Étape 3 / 3"
+ },
+ "log_x(255)=2": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Condition⟦x > 0 \\text{ et } x \\neq 1⟧(une base de logarithme est strictement positive et différente de 1)",
+    "titre": "Étape 1Condition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Définition du logarithme⟦\\log_{x}(255) = 2⟧⟦\\iff⟧⟦x^{2} = 255⟧(définition du logarithme)⟦\\iff⟧⟦x = \\sqrt{255} \\text{ ou } x = -\\sqrt{255}⟧⟦x = \\sqrt{255}⟧(seule la solution positive convient)",
+    "titre": "Étape 2Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\sqrt{255}\\right\\} \\text{, soit } x \\approx 15{,}969⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
  },
  "log_x(256)=4": {
   "au_depart": {
@@ -6632,6 +6730,84 @@
     "listes": [],
     "tableaux": [],
     "texte": "Solution⟦S = \\left\\{4\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "log_x(5/2)=2": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Condition⟦x > 0 \\text{ et } x \\neq 1⟧(une base de logarithme est strictement positive et différente de 1)",
+    "titre": "Étape 1Condition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Définition du logarithme⟦\\log_{x}\\left(\\frac{5}{2}\\right) = 2⟧⟦\\iff⟧⟦x^{2} = \\frac{5}{2}⟧(définition du logarithme)⟦\\iff⟧⟦x = \\sqrt{\\frac{5}{2}} \\text{ ou } x = -\\sqrt{\\frac{5}{2}}⟧⟦x = \\sqrt{\\frac{5}{2}}⟧(seule la solution positive convient)",
+    "titre": "Étape 2Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\sqrt{\\frac{5}{2}}\\right\\} \\text{, soit } x \\approx 1{,}581⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "log_x(7)=1": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Condition⟦x > 0 \\text{ et } x \\neq 1⟧(une base de logarithme est strictement positive et différente de 1)",
+    "titre": "Étape 1Condition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Définition du logarithme⟦\\log_{x}(7) = 1⟧⟦\\iff⟧⟦x = 7⟧(définition du logarithme)",
+    "titre": "Étape 2Définition du logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{7\\right\\}⟧",
     "titre": "Solution"
    }
   ],

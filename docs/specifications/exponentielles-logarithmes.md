@@ -97,7 +97,7 @@ puis « Définition du logarithme » : une seule chaîne `log_a(u) = c ⇔ u = a
 (`log(log(log x)) = 0 ⇔ log(log x) = 10⁰ = 1 ⇔ log x = 10¹ = 10 ⇔ x = 10¹⁰`). Un argument du 1er degré se résout comme à la main : `5 − x = 10⁸ ⇔ x = 5 − 10⁸ = −99’999’995` (q − x = c donne x = q − c), `2x + 1 = 10⁸ ⇔ 2x = 10⁸ − 1 ⇔ x = (10⁸ − 1)/2` ;
 un argument du 2ᵈ degré (`log(x²) = 2`) continue dans la même chaîne comme la méthode « même base » (`x² = 10² = 100 ⇔ x² − 100 = 0 ⇔ (x + 10)(x − 10) = 0 ⇔ x = −10 ou x = 10`), S = ∅ si Δ < 0.
 **Vérification** (carte à part, seulement quand l'argument d'un seul logarithme n'est pas x seul) : `5 − x = 10⁸ > 0 (le logarithme est bien défini) ✓`.
-**Base inconnue** `log_x(n) = k` (k entier de 1 à 12, n puissance k-ième exacte) : carte « Condition » (`x > 0 et x ≠ 1`, une base de logarithme est strictement positive et différente de 1), puis `x^k = n`, `x = r ou x = −r` pour k pair, et une ligne
+**Base inconnue** `log_x(n) = k` (k entier de 1 à 12 ; si n n'est pas une puissance k-ième, la racine reste écrite : `x² = 255 ⇔ x = √255 ou x = −√255`, S = {√255}, soit x ≈ 15,969 ; `x³ = 2 ⇔ x = 2^(1/3)`) : carte « Condition » (`x > 0 et x ≠ 1`, une base de logarithme est strictement positive et différente de 1), puis `x^k = n`, `x = r ou x = −r` pour k pair, et une ligne
 « seule la solution positive convient ». Pas encore traités (message « pas encore ») : second membre avec un logarithme, plusieurs logarithmes, base inconnue d'exposant non entier, trinôme à coefficients non entiers (`log(x²) = −1`), argument de degré 3 ou plus.
 
 **Calcul de log_a(y)** (étape 6, corrigé 2.15 a-d h i, 2.20 ; saisie sans « = », `calculer_logarithme`, résultat par `tex_resultat`) : une carte « Calcul ».

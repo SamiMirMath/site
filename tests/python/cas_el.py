@@ -64,7 +64,9 @@ BATTERIE_E4 = [
     ("log(x)/2=1", [100.0]), ("-log(x)=2", [0.01]), ("log(x^2)=2", [-10.0, 10.0]), ("log(2x+1)=3", [499.5]), ("8=log(2x+1)", [49999999.5]),
     ("log(x^2-3x)=1", [-2.0, 5.0]), ("log(x^2+x+3)=0", []), ("log(x^2+x+3)+1=1", []), ("ln(2-x)=1", [-0.718]), ("log(-3-x)=1", [-13.0]), ("log(3-2x)=1", [-3.5]),
     ("log(-x)=2", [-100.0]), ("log_x(16)=2", [4.0]), ("log_x(81)=4", [3.0]), ("log_x(8)=3", [2.0]), ("log_x(1/8)=3", [0.5]),
-    ("log_x(1/16)=4", [0.5]), ("log(log(x))=1", [1e10]),
+    ("log_x(1/16)=4", [0.5]),
+    # base inconnue dont la racine n'est pas exacte : √255, 2^(1/3), 12^(1/4), √(5/2), x = 7
+    ("log_x(255)=2", [15.969]), ("log_x(2)=3", [1.260]), ("log_x(12)=4", [1.861]), ("log_x(5/2)=2", [1.581]), ("log_x(7)=1", [7.0]), ("log(log(x))=1", [1e10]),
     ("log5(x)=-2", [0.04]), ("ln(ln(x))=0", [2.718]), ("log(log(x-1))=0", [11.0]),
 ]
 
@@ -84,7 +86,7 @@ BATTERIE_C1 = [
 
 # Aucune méthode ne s'applique (EL-11) : un vrai hors-programme, ou une forme du programme que l'outil ne gère pas encore
 HORS_PROGRAMME = ["x*2^x=8", "2^x+3^x=5", "x^x=4", "2^x=x+1", "2^(sqrt(x))=4", "2^(1/x)=4", "x/2^x=1", "x*e^x=1", "2^x=3^x+x"]
-PAS_ENCORE = ["log(x)=log(5)", "log_x(2)=3", "log(x^2+1)=-1", "e^x=e^3", "-2^x=-3^(x+1)", "e^x=e^(x+1)", "10^x*(x-4)=0", "2^x+2^(x+1)=12", "e^x+e^(-x)=3",
+PAS_ENCORE = ["log(x)=log(5)", "log(x^2+1)=-1", "e^x=e^3", "-2^x=-3^(x+1)", "e^x=e^(x+1)", "10^x*(x-4)=0", "2^x+2^(x+1)=12", "e^x+e^(-x)=3",
               "2^(x^2)=5", "log(x)+log(x-1)=1", "x^2=4", "2x+1=9", "2^(x^3)=8", "2^(x^3)=3^x", "5^(x^3+1)=7"]
 
 # Calculs que l'outil ne traite pas (message de calcul) et saisies refusées à la lecture

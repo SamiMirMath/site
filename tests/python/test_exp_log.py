@@ -1217,6 +1217,21 @@ class TestLogarithmique(unittest.TestCase):
         for saisie in ["log_x(8)=3", "log_x(1/8)=3"]:                                        # exposant impair : pas de solution négative à écarter
             self.assertEqual(len(corriger(saisie)["etapes"][1]["lignes"]), 1)
 
+    def test_base_inconnue_dont_la_racine_n_est_pas_exacte(self):
+        """log_x(255) = 2 : x² = 255, x = √255 ou x = −√255, seule la solution positive convient (la racine reste écrite comme telle)."""
+        r = corriger("log_x(255)=2")
+        self.assertEqual([el.tex(n) for n in r["solutions"]], [r"\sqrt{255}"])
+        lignes = [el.tex_chaine(l) for l in r["etapes"][1]["lignes"]]
+        self.assertEqual(lignes[0], r"\log_{x}(255) = 2 \iff x^{2} = 255 \quad \text{(définition du logarithme)} \iff x = \sqrt{255} \text{ ou } x = -\sqrt{255}")
+        self.assertEqual(lignes[1], r"x = \sqrt{255} \quad \text{(seule la solution positive convient)}")
+        self.assertEqual(el.tex_solution(r), r"S = \left\{\sqrt{255}\right\} \text{, soit } x \approx 15{,}969")
+        r = corriger("log_x(2)=3")                                                            # exposant impair : une seule solution, racine cubique
+        self.assertEqual([el.tex(n) for n in r["solutions"]], [r"2^{\frac{1}{3}}"])
+        self.assertEqual(len(r["etapes"][1]["lignes"]), 1)
+        self.assertEqual(el.tex_solution(r), r"S = \left\{2^{\frac{1}{3}}\right\} \text{, soit } x \approx 1{,}260")
+        r = corriger("log_x(7)=1")                                                            # k = 1 : x = 7, une seule ligne x = 7
+        self.assertEqual(el.tex_chaine(r["etapes"][1]["lignes"][0]), r"\log_{x}(7) = 1 \iff x = 7 \quad \text{(définition du logarithme)}")
+
     def test_log_de_x_carre_se_resout_par_la_definition(self):
         """EL-10 : log(x²) = 2 donne ±10 ; jamais 2 log|x|."""
         r = corriger("log(x^2)=2")
@@ -1274,7 +1289,7 @@ class TestLogarithmique(unittest.TestCase):
 
     def test_pas_encore(self):
         """Hors de la méthode : plusieurs logarithmes, second membre avec un logarithme, base inconnue non entière, trinôme à coefficients non entiers."""
-        for saisie in ["log(x)=log(5)", "log(x)+log(x-1)=1", "log_x(2)=3", "log_x(256)=0,5", "log_x(1)=2", "log(x^2)=-1", "log(x^3)=2", "x*log(x)=1",
+        for saisie in ["log(x)=log(5)", "log(x)+log(x-1)=1", "log_x(256)=0,5", "log_x(1)=2", "log(x^2)=-1", "log(x^3)=2", "x*log(x)=1",
                        "log(x)=x", "log(2x+1)=ln(3)"]:
             with self.subTest(saisie):
                 s = el.analyser_saisie(saisie)

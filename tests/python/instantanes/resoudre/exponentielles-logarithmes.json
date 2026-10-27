@@ -6471,6 +6471,52 @@
   "erreur": null,
   "ok": true
  },
+ "log_x(12)=4": {
+  "cartes": [
+   {
+    "badge": "Condition",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x &gt; 0 \\text{ et } x \\neq 1\\)</span><span class=\"prop\">(une base de logarithme est strictement positive et différente de 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{x}(12) = 4\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{4} = 12\\)</span><span class=\"prop\">(définition du logarithme)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 12^{\\frac{1}{4}} \\text{ ou } x = -12^{\\frac{1}{4}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 12^{\\frac{1}{4}}\\)</span><span class=\"prop\">(seule la solution positive convient)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{12^{\\frac{1}{4}}\\right\\} \\text{, soit } x \\approx 1{,}861",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{x}(12) = 4",
+  "erreur": null,
+  "ok": true
+ },
  "log_x(16)=2": {
   "cartes": [
    {
@@ -6518,8 +6564,91 @@
   "ok": true
  },
  "log_x(2)=3": {
-  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
-  "ok": false
+  "cartes": [
+   {
+    "badge": "Condition",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x &gt; 0 \\text{ et } x \\neq 1\\)</span><span class=\"prop\">(une base de logarithme est strictement positive et différente de 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{x}(2) = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{3} = 2\\)</span><span class=\"prop\">(définition du logarithme)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 2^{\\frac{1}{3}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{2^{\\frac{1}{3}}\\right\\} \\text{, soit } x \\approx 1{,}260",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{x}(2) = 3",
+  "erreur": null,
+  "ok": true
+ },
+ "log_x(255)=2": {
+  "cartes": [
+   {
+    "badge": "Condition",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x &gt; 0 \\text{ et } x \\neq 1\\)</span><span class=\"prop\">(une base de logarithme est strictement positive et différente de 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{x}(255) = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = 255\\)</span><span class=\"prop\">(définition du logarithme)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\sqrt{255} \\text{ ou } x = -\\sqrt{255}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\sqrt{255}\\)</span><span class=\"prop\">(seule la solution positive convient)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\sqrt{255}\\right\\} \\text{, soit } x \\approx 15{,}969",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{x}(255) = 2",
+  "erreur": null,
+  "ok": true
  },
  "log_x(256)=4": {
   "cartes": [
@@ -6564,6 +6693,93 @@
    }
   ],
   "enonce_tex": "\\log_{x}(256) = 4",
+  "erreur": null,
+  "ok": true
+ },
+ "log_x(5/2)=2": {
+  "cartes": [
+   {
+    "badge": "Condition",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x &gt; 0 \\text{ et } x \\neq 1\\)</span><span class=\"prop\">(une base de logarithme est strictement positive et différente de 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{x}\\left(\\frac{5}{2}\\right) = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\frac{5}{2}\\)</span><span class=\"prop\">(définition du logarithme)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\sqrt{\\frac{5}{2}} \\text{ ou } x = -\\sqrt{\\frac{5}{2}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\sqrt{\\frac{5}{2}}\\)</span><span class=\"prop\">(seule la solution positive convient)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\sqrt{\\frac{5}{2}}\\right\\} \\text{, soit } x \\approx 1{,}581",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{x}\\left(\\frac{5}{2}\\right) = 2",
+  "erreur": null,
+  "ok": true
+ },
+ "log_x(7)=1": {
+  "cartes": [
+   {
+    "badge": "Condition",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x &gt; 0 \\text{ et } x \\neq 1\\)</span><span class=\"prop\">(une base de logarithme est strictement positive et différente de 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Définition du logarithme",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{x}(7) = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 7\\)</span><span class=\"prop\">(définition du logarithme)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{7\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{x}(7) = 1",
   "erreur": null,
   "ok": true
  },

@@ -1624,26 +1624,29 @@ def _logarithmique(g, d, x):
 
 
 def _base_inconnue(enonce, etapes, chaine, s, c, x):
-    """log_x(n) = k avec k entier ≥ 1 et n = rᵏ : x > 0 et x ≠ 1, xᵏ = n, puis la solution positive."""
+    """log_x(n) = k avec k entier ≥ 1 : x > 0 et x ≠ 1, xᵏ = n, puis la solution positive : r si n = rᵏ (256 = 4⁴), sinon la racine k-ième
+    de n écrite comme telle (√255, 255^(1/3))."""
     n = _const(s.a)
     if variables(s.a) or n is None or n <= 0 or n == 1 or c.denominator != 1 or c < 1 or c > 12:
         raise _Hors
-    k, r = int(c), None
+    k = int(c)
     r = _racine_entiere(n, k)
-    if r is None:
-        raise _Hors
+    if r is not None:
+        racine = _nb_exact(r)
+    else:
+        racine = Fn("sqrt", _nb_exact(n)) if k == 2 else Pow(_nb_exact(n), Nb(F(1, k)))
     X = Var(s.base.nom)
     condition = Chaine([Texte(f"{X.nom} > 0 \\text{{ et }} {X.nom} \\neq 1")], note=PROP_BASE_LOG)
     equation = Eq(Pow(X, Nb(k)) if k > 1 else X, _nb_exact(n))
     chaine.ajouter(equation, "⇔", PROP_DEFINITION_LOG)
     lignes = [chaine]
     if k % 2 == 0:
-        chaine.ajouter(Ou([Eq(X, _nb_exact(r)), Eq(X, _nb_exact(-r))]), "⇔")
-        lignes.append(Chaine([Eq(X, _nb_exact(r))], note=PROP_SEULE_POSITIVE))
-    else:
-        chaine.ajouter(Eq(X, _nb_exact(r)), "⇔")
+        chaine.ajouter(Ou([Eq(X, racine), Eq(X, Neg(racine) if r is None else _nb_exact(-r))]), "⇔")
+        lignes.append(Chaine([Eq(X, racine)], note=PROP_SEULE_POSITIVE))
+    elif k > 1:
+        chaine.ajouter(Eq(X, racine), "⇔")
     etapes += [_carte("Condition", [condition]), _carte("Définition du logarithme", lignes)]
-    return {"genre": "logarithmique", "inconnue": x, "enonce": enonce, "base": None, "etapes": etapes, "solutions": [_nb_exact(r)],
+    return {"genre": "logarithmique", "inconnue": x, "enonce": enonce, "base": None, "etapes": etapes, "solutions": [racine],
             "remarque": None}
 
 
