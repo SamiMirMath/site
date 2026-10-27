@@ -3929,7 +3929,17 @@
     "badge": "Logarithme des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(10^{x^{2}} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(10^{x^{2}}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} \\cdot \\log(10) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\log(5)\\)</span><span class=\"prop\">(car log(10) = 1)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{\\log(5)} \\text{ ou } x = \\sqrt{\\log(5)}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(10^{x^{2}} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(10^{x^{2}}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} \\cdot \\log(10) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\log(5)\\)</span><span class=\"prop\">(car log(10) = 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{\\log(5)}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{\\log(5)}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -3940,7 +3950,7 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{-\\sqrt{\\log(5)} \\,;\\, \\sqrt{\\log(5)}\\right\\} \\text{, soit } x \\approx -0{,}836 \\text{ ou } x \\approx 0{,}836",
+      "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}836 \\text{ ou } x \\approx 0{,}836",
       "type": "resultat"
      }
     ],
@@ -3959,7 +3969,17 @@
       "badge": "Définition du logarithme",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(10^{x^{2}} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\log(5)\\)</span><span class=\"prop\">(définition du logarithme)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{\\log(5)} \\text{ ou } x = \\sqrt{\\log(5)}\\)</span><span class=\"prop\"></span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(10^{x^{2}} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\log(5)\\)</span><span class=\"prop\">(définition du logarithme)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{\\log(5)}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{\\log(5)}\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -3970,7 +3990,7 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{-\\sqrt{\\log(5)} \\,;\\, \\sqrt{\\log(5)}\\right\\} \\text{, soit } x \\approx -0{,}836 \\text{ ou } x \\approx 0{,}836",
+        "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}836 \\text{ ou } x \\approx 0{,}836",
         "type": "resultat"
        }
       ],
@@ -3987,7 +4007,17 @@
       "badge": "Logarithme des deux membres",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(10^{x^{2}} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(10^{x^{2}}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} \\cdot \\log(10) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\log(5)\\)</span><span class=\"prop\">(car log(10) = 1)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{\\log(5)} \\text{ ou } x = \\sqrt{\\log(5)}\\)</span><span class=\"prop\"></span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(10^{x^{2}} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(10^{x^{2}}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} \\cdot \\log(10) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\log(5)\\)</span><span class=\"prop\">(car log(10) = 1)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{\\log(5)}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{\\log(5)}\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -3998,7 +4028,7 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{-\\sqrt{\\log(5)} \\,;\\, \\sqrt{\\log(5)}\\right\\} \\text{, soit } x \\approx -0{,}836 \\text{ ou } x \\approx 0{,}836",
+        "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}836 \\text{ ou } x \\approx 0{,}836",
         "type": "resultat"
        }
       ],
@@ -8577,7 +8607,17 @@
     "badge": "Logarithme des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x^{2}} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x^{2}}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} \\cdot \\log(2) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\frac{\\log(5)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{\\frac{\\log(5)}{\\log(2)}} \\text{ ou } x = \\sqrt{\\frac{\\log(5)}{\\log(2)}}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x^{2}} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x^{2}}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} \\cdot \\log(2) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\frac{\\log(5)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{\\frac{\\log(5)}{\\log(2)}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{\\frac{\\log(5)}{\\log(2)}}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -8588,7 +8628,7 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{-\\sqrt{\\frac{\\log(5)}{\\log(2)}} \\,;\\, \\sqrt{\\frac{\\log(5)}{\\log(2)}}\\right\\} \\text{, soit } x \\approx -1{,}524 \\text{ ou } x \\approx 1{,}524",
+      "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -1{,}524 \\text{ ou } x \\approx 1{,}524",
       "type": "resultat"
      }
     ],
@@ -8625,7 +8665,17 @@
       "badge": "Logarithme des deux membres",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x^{2}} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x^{2}}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} \\cdot \\log(2) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\frac{\\log(5)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{\\frac{\\log(5)}{\\log(2)}} \\text{ ou } x = \\sqrt{\\frac{\\log(5)}{\\log(2)}}\\)</span><span class=\"prop\"></span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x^{2}} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x^{2}}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} \\cdot \\log(2) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\frac{\\log(5)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{\\frac{\\log(5)}{\\log(2)}}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{\\frac{\\log(5)}{\\log(2)}}\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -8636,7 +8686,7 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{-\\sqrt{\\frac{\\log(5)}{\\log(2)}} \\,;\\, \\sqrt{\\frac{\\log(5)}{\\log(2)}}\\right\\} \\text{, soit } x \\approx -1{,}524 \\text{ ou } x \\approx 1{,}524",
+        "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -1{,}524 \\text{ ou } x \\approx 1{,}524",
         "type": "resultat"
        }
       ],
@@ -8876,7 +8926,17 @@
     "badge": "Logarithme des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x^{2} - 1} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x^{2} - 1}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x^{2} - 1) \\cdot \\log(2) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - 1 = \\frac{\\log(5)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = 1 + \\frac{\\log(5)}{\\log(2)}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{1 + \\frac{\\log(5)}{\\log(2)}} \\text{ ou } x = \\sqrt{1 + \\frac{\\log(5)}{\\log(2)}}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x^{2} - 1} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x^{2} - 1}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x^{2} - 1) \\cdot \\log(2) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - 1 = \\frac{\\log(5)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = 1 + \\frac{\\log(5)}{\\log(2)}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{1 + \\frac{\\log(5)}{\\log(2)}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{1 + \\frac{\\log(5)}{\\log(2)}}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -8887,7 +8947,7 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{-\\sqrt{1 + \\frac{\\log(5)}{\\log(2)}} \\,;\\, \\sqrt{1 + \\frac{\\log(5)}{\\log(2)}}\\right\\} \\text{, soit } x \\approx -1{,}823 \\text{ ou } x \\approx 1{,}823",
+      "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -1{,}823 \\text{ ou } x \\approx 1{,}823",
       "type": "resultat"
      }
     ],
@@ -8924,7 +8984,17 @@
       "badge": "Logarithme des deux membres",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x^{2} - 1} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x^{2} - 1}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x^{2} - 1) \\cdot \\log(2) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - 1 = \\frac{\\log(5)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = 1 + \\frac{\\log(5)}{\\log(2)}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{1 + \\frac{\\log(5)}{\\log(2)}} \\text{ ou } x = \\sqrt{1 + \\frac{\\log(5)}{\\log(2)}}\\)</span><span class=\"prop\"></span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x^{2} - 1} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x^{2} - 1}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x^{2} - 1) \\cdot \\log(2) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - 1 = \\frac{\\log(5)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = 1 + \\frac{\\log(5)}{\\log(2)}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{1 + \\frac{\\log(5)}{\\log(2)}}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{1 + \\frac{\\log(5)}{\\log(2)}}\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -8935,7 +9005,7 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{-\\sqrt{1 + \\frac{\\log(5)}{\\log(2)}} \\,;\\, \\sqrt{1 + \\frac{\\log(5)}{\\log(2)}}\\right\\} \\text{, soit } x \\approx -1{,}823 \\text{ ou } x \\approx 1{,}823",
+        "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -1{,}823 \\text{ ou } x \\approx 1{,}823",
         "type": "resultat"
        }
       ],
@@ -10578,7 +10648,17 @@
     "badge": "Exponentielle des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(x^{2}) = \\frac{5}{2}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(e^{\\ln(x^{2})} = e^{\\frac{5}{2}}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = e^{\\frac{5}{2}}\\)</span><span class=\"prop\">(e^(ln(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{e^{\\frac{5}{2}}} \\text{ ou } x = \\sqrt{e^{\\frac{5}{2}}}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(x^{2}) = \\frac{5}{2}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(e^{\\ln(x^{2})} = e^{\\frac{5}{2}}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = e^{\\frac{5}{2}}\\)</span><span class=\"prop\">(e^(ln(A)) = A, A &gt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{e^{\\frac{5}{2}}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{e^{\\frac{5}{2}}}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -10601,7 +10681,7 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{-\\sqrt{e^{\\frac{5}{2}}} \\,;\\, \\sqrt{e^{\\frac{5}{2}}}\\right\\} \\text{, soit } x \\approx -3{,}490 \\text{ ou } x \\approx 3{,}490",
+      "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -3{,}490 \\text{ ou } x \\approx 3{,}490",
       "type": "resultat"
      }
     ],
@@ -10889,7 +10969,17 @@
     "badge": "Logarithme des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x^{2} + 1} = 32\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x^{2} + 1}) = \\log(32)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x^{2} + 1) \\cdot \\log(2) = \\log(32)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} + 1 = \\frac{\\log(32)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\frac{\\log(32)}{\\log(2)} - 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{\\frac{\\log(32)}{\\log(2)} - 1} \\text{ ou } x = \\sqrt{\\frac{\\log(32)}{\\log(2)} - 1}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x^{2} + 1} = 32\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x^{2} + 1}) = \\log(32)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x^{2} + 1) \\cdot \\log(2) = \\log(32)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} + 1 = \\frac{\\log(32)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\frac{\\log(32)}{\\log(2)} - 1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{\\frac{\\log(32)}{\\log(2)} - 1}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{\\frac{\\log(32)}{\\log(2)} - 1}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -10900,7 +10990,7 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{-\\sqrt{\\frac{\\log(32)}{\\log(2)} - 1} \\,;\\, \\sqrt{\\frac{\\log(32)}{\\log(2)} - 1}\\right\\}",
+      "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\}",
       "type": "resultat"
      },
      {
@@ -10981,7 +11071,17 @@
       "badge": "Logarithme des deux membres",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x^{2} + 1} = 32\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x^{2} + 1}) = \\log(32)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x^{2} + 1) \\cdot \\log(2) = \\log(32)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} + 1 = \\frac{\\log(32)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\frac{\\log(32)}{\\log(2)} - 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{\\frac{\\log(32)}{\\log(2)} - 1} \\text{ ou } x = \\sqrt{\\frac{\\log(32)}{\\log(2)} - 1}\\)</span><span class=\"prop\"></span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x^{2} + 1} = 32\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x^{2} + 1}) = \\log(32)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x^{2} + 1) \\cdot \\log(2) = \\log(32)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} + 1 = \\frac{\\log(32)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\frac{\\log(32)}{\\log(2)} - 1\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{\\frac{\\log(32)}{\\log(2)} - 1}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{\\frac{\\log(32)}{\\log(2)} - 1}\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -10992,7 +11092,7 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{-\\sqrt{\\frac{\\log(32)}{\\log(2)} - 1} \\,;\\, \\sqrt{\\frac{\\log(32)}{\\log(2)} - 1}\\right\\}",
+        "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\}",
         "type": "resultat"
        },
        {
@@ -12126,7 +12226,17 @@
     "badge": "Logarithme des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x^{2} + 1} = 7\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x^{2} + 1}) = \\log(7)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x^{2} + 1) \\cdot \\log(3) = \\log(7)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} + 1 = \\frac{\\log(7)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\frac{\\log(7)}{\\log(3)} - 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{\\frac{\\log(7)}{\\log(3)} - 1} \\text{ ou } x = \\sqrt{\\frac{\\log(7)}{\\log(3)} - 1}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x^{2} + 1} = 7\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x^{2} + 1}) = \\log(7)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x^{2} + 1) \\cdot \\log(3) = \\log(7)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} + 1 = \\frac{\\log(7)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\frac{\\log(7)}{\\log(3)} - 1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{\\frac{\\log(7)}{\\log(3)} - 1}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{\\frac{\\log(7)}{\\log(3)} - 1}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -12137,7 +12247,7 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{-\\sqrt{\\frac{\\log(7)}{\\log(3)} - 1} \\,;\\, \\sqrt{\\frac{\\log(7)}{\\log(3)} - 1}\\right\\} \\text{, soit } x \\approx -0{,}878 \\text{ ou } x \\approx 0{,}878",
+      "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}878 \\text{ ou } x \\approx 0{,}878",
       "type": "resultat"
      }
     ],
@@ -12174,7 +12284,17 @@
       "badge": "Logarithme des deux membres",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x^{2} + 1} = 7\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x^{2} + 1}) = \\log(7)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x^{2} + 1) \\cdot \\log(3) = \\log(7)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} + 1 = \\frac{\\log(7)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\frac{\\log(7)}{\\log(3)} - 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{\\frac{\\log(7)}{\\log(3)} - 1} \\text{ ou } x = \\sqrt{\\frac{\\log(7)}{\\log(3)} - 1}\\)</span><span class=\"prop\"></span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x^{2} + 1} = 7\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x^{2} + 1}) = \\log(7)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x^{2} + 1) \\cdot \\log(3) = \\log(7)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} + 1 = \\frac{\\log(7)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\frac{\\log(7)}{\\log(3)} - 1\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{\\frac{\\log(7)}{\\log(3)} - 1}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{\\frac{\\log(7)}{\\log(3)} - 1}\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -12185,7 +12305,7 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{-\\sqrt{\\frac{\\log(7)}{\\log(3)} - 1} \\,;\\, \\sqrt{\\frac{\\log(7)}{\\log(3)} - 1}\\right\\} \\text{, soit } x \\approx -0{,}878 \\text{ ou } x \\approx 0{,}878",
+        "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}878 \\text{ ou } x \\approx 0{,}878",
         "type": "resultat"
        }
       ],
@@ -14168,7 +14288,17 @@
     "badge": "Logarithme des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x^{2}} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x^{2}}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{\\frac{\\log(2)}{\\log(2)}} \\text{ ou } x = \\sqrt{\\frac{\\log(2)}{\\log(2)}}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x^{2}} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x^{2}}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{\\frac{\\log(2)}{\\log(2)}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{\\frac{\\log(2)}{\\log(2)}}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -14179,7 +14309,7 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{-\\sqrt{\\frac{\\log(2)}{\\log(2)}} \\,;\\, \\sqrt{\\frac{\\log(2)}{\\log(2)}}\\right\\}",
+      "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\}",
       "type": "resultat"
      },
      {
@@ -14260,7 +14390,17 @@
       "badge": "Logarithme des deux membres",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x^{2}} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x^{2}}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{\\frac{\\log(2)}{\\log(2)}} \\text{ ou } x = \\sqrt{\\frac{\\log(2)}{\\log(2)}}\\)</span><span class=\"prop\"></span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x^{2}} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x^{2}}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{\\frac{\\log(2)}{\\log(2)}}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{\\frac{\\log(2)}{\\log(2)}}\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -14271,7 +14411,7 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{-\\sqrt{\\frac{\\log(2)}{\\log(2)}} \\,;\\, \\sqrt{\\frac{\\log(2)}{\\log(2)}}\\right\\}",
+        "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\}",
         "type": "resultat"
        },
        {
@@ -16003,7 +16143,17 @@
     "badge": "Logarithme des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{-x^{2}} = 0{,}5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(e^{-x^{2}}) = \\ln(0{,}5)\\)</span><span class=\"prop\">(ln des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((-x^{2}) \\cdot \\ln(e) = \\ln(0{,}5)\\)</span><span class=\"prop\">(ln(a^A) = A · ln(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(-x^{2} = \\ln(0{,}5)\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = -\\ln(0{,}5)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{-\\ln(0{,}5)} \\text{ ou } x = \\sqrt{-\\ln(0{,}5)}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{-x^{2}} = 0{,}5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(e^{-x^{2}}) = \\ln(0{,}5)\\)</span><span class=\"prop\">(ln des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((-x^{2}) \\cdot \\ln(e) = \\ln(0{,}5)\\)</span><span class=\"prop\">(ln(a^A) = A · ln(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(-x^{2} = \\ln(0{,}5)\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = -\\ln(0{,}5)\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{-\\ln(0{,}5)}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{-\\ln(0{,}5)}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -16014,7 +16164,7 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{-\\sqrt{-\\ln(0{,}5)} \\,;\\, \\sqrt{-\\ln(0{,}5)}\\right\\} \\text{, soit } x \\approx -0{,}833 \\text{ ou } x \\approx 0{,}833",
+      "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}833 \\text{ ou } x \\approx 0{,}833",
       "type": "resultat"
      }
     ],
@@ -16033,7 +16183,17 @@
       "badge": "Définition du logarithme",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{-x^{2}} = 0{,}5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(-x^{2} = \\ln(0{,}5)\\)</span><span class=\"prop\">(définition du logarithme)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = -\\ln(0{,}5)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{-\\ln(0{,}5)} \\text{ ou } x = \\sqrt{-\\ln(0{,}5)}\\)</span><span class=\"prop\"></span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{-x^{2}} = 0{,}5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(-x^{2} = \\ln(0{,}5)\\)</span><span class=\"prop\">(définition du logarithme)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = -\\ln(0{,}5)\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{-\\ln(0{,}5)}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{-\\ln(0{,}5)}\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -16044,7 +16204,7 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{-\\sqrt{-\\ln(0{,}5)} \\,;\\, \\sqrt{-\\ln(0{,}5)}\\right\\} \\text{, soit } x \\approx -0{,}833 \\text{ ou } x \\approx 0{,}833",
+        "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}833 \\text{ ou } x \\approx 0{,}833",
         "type": "resultat"
        }
       ],
@@ -16061,7 +16221,17 @@
       "badge": "Logarithme des deux membres",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{-x^{2}} = 0{,}5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(e^{-x^{2}}) = \\ln(0{,}5)\\)</span><span class=\"prop\">(ln des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((-x^{2}) \\cdot \\ln(e) = \\ln(0{,}5)\\)</span><span class=\"prop\">(ln(a^A) = A · ln(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(-x^{2} = \\ln(0{,}5)\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = -\\ln(0{,}5)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{-\\ln(0{,}5)} \\text{ ou } x = \\sqrt{-\\ln(0{,}5)}\\)</span><span class=\"prop\"></span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{-x^{2}} = 0{,}5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(e^{-x^{2}}) = \\ln(0{,}5)\\)</span><span class=\"prop\">(ln des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((-x^{2}) \\cdot \\ln(e) = \\ln(0{,}5)\\)</span><span class=\"prop\">(ln(a^A) = A · ln(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(-x^{2} = \\ln(0{,}5)\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = -\\ln(0{,}5)\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{-\\ln(0{,}5)}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{-\\ln(0{,}5)}\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -16072,7 +16242,7 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{-\\sqrt{-\\ln(0{,}5)} \\,;\\, \\sqrt{-\\ln(0{,}5)}\\right\\} \\text{, soit } x \\approx -0{,}833 \\text{ ou } x \\approx 0{,}833",
+        "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}833 \\text{ ou } x \\approx 0{,}833",
         "type": "resultat"
        }
       ],
@@ -16349,7 +16519,17 @@
     "badge": "Logarithme des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x^{2}} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(e^{x^{2}}) = \\ln(2)\\)</span><span class=\"prop\">(ln des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} \\cdot \\ln(e) = \\ln(2)\\)</span><span class=\"prop\">(ln(a^A) = A · ln(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\ln(2)\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{\\ln(2)} \\text{ ou } x = \\sqrt{\\ln(2)}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x^{2}} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(e^{x^{2}}) = \\ln(2)\\)</span><span class=\"prop\">(ln des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} \\cdot \\ln(e) = \\ln(2)\\)</span><span class=\"prop\">(ln(a^A) = A · ln(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\ln(2)\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{\\ln(2)}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{\\ln(2)}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -16360,7 +16540,7 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{-\\sqrt{\\ln(2)} \\,;\\, \\sqrt{\\ln(2)}\\right\\} \\text{, soit } x \\approx -0{,}833 \\text{ ou } x \\approx 0{,}833",
+      "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}833 \\text{ ou } x \\approx 0{,}833",
       "type": "resultat"
      }
     ],
@@ -16379,7 +16559,17 @@
       "badge": "Définition du logarithme",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x^{2}} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\ln(2)\\)</span><span class=\"prop\">(définition du logarithme)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{\\ln(2)} \\text{ ou } x = \\sqrt{\\ln(2)}\\)</span><span class=\"prop\"></span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x^{2}} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\ln(2)\\)</span><span class=\"prop\">(définition du logarithme)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{\\ln(2)}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{\\ln(2)}\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -16390,7 +16580,7 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{-\\sqrt{\\ln(2)} \\,;\\, \\sqrt{\\ln(2)}\\right\\} \\text{, soit } x \\approx -0{,}833 \\text{ ou } x \\approx 0{,}833",
+        "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}833 \\text{ ou } x \\approx 0{,}833",
         "type": "resultat"
        }
       ],
@@ -16407,7 +16597,17 @@
       "badge": "Logarithme des deux membres",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x^{2}} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(e^{x^{2}}) = \\ln(2)\\)</span><span class=\"prop\">(ln des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} \\cdot \\ln(e) = \\ln(2)\\)</span><span class=\"prop\">(ln(a^A) = A · ln(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\ln(2)\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{\\ln(2)} \\text{ ou } x = \\sqrt{\\ln(2)}\\)</span><span class=\"prop\"></span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x^{2}} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(e^{x^{2}}) = \\ln(2)\\)</span><span class=\"prop\">(ln des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} \\cdot \\ln(e) = \\ln(2)\\)</span><span class=\"prop\">(ln(a^A) = A · ln(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\ln(2)\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{\\ln(2)}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{\\ln(2)}\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -16418,7 +16618,7 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{-\\sqrt{\\ln(2)} \\,;\\, \\sqrt{\\ln(2)}\\right\\} \\text{, soit } x \\approx -0{,}833 \\text{ ou } x \\approx 0{,}833",
+        "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}833 \\text{ ou } x \\approx 0{,}833",
         "type": "resultat"
        }
       ],
@@ -17557,7 +17757,17 @@
     "badge": "Exponentielle des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(\\ln(x^{2})) = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(e^{\\ln(\\ln(x^{2}))} = e\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(x^{2}) = e\\)</span><span class=\"prop\">(e^(ln(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(e^{\\ln(x^{2})} = e^{e}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = e^{e}\\)</span><span class=\"prop\">(e^(ln(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{e^{e}} \\text{ ou } x = \\sqrt{e^{e}}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(\\ln(x^{2})) = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(e^{\\ln(\\ln(x^{2}))} = e\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(x^{2}) = e\\)</span><span class=\"prop\">(e^(ln(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(e^{\\ln(x^{2})} = e^{e}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = e^{e}\\)</span><span class=\"prop\">(e^(ln(A)) = A, A &gt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{e^{e}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{e^{e}}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -17568,7 +17778,7 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{-\\sqrt{e^{e}} \\,;\\, \\sqrt{e^{e}}\\right\\} \\text{, soit } x \\approx -3{,}893 \\text{ ou } x \\approx 3{,}893",
+      "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -3{,}893 \\text{ ou } x \\approx 3{,}893",
       "type": "resultat"
      }
     ],
@@ -17681,7 +17891,17 @@
     "badge": "Exponentielle des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(x^{2}) = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(e^{\\ln(x^{2})} = e\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = e\\)</span><span class=\"prop\">(e^(ln(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{e} \\text{ ou } x = \\sqrt{e}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(x^{2}) = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(e^{\\ln(x^{2})} = e\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = e\\)</span><span class=\"prop\">(e^(ln(A)) = A, A &gt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{e}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{e}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -17704,7 +17924,7 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{-\\sqrt{e} \\,;\\, \\sqrt{e}\\right\\} \\text{, soit } x \\approx -1{,}649 \\text{ ou } x \\approx 1{,}649",
+      "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -1{,}649 \\text{ ou } x \\approx 1{,}649",
       "type": "resultat"
      }
     ],
@@ -18673,7 +18893,17 @@
     "badge": "Exponentielle des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x^{2}) = -1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{\\log(x^{2})} = 10^{-1}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = 10^{-1} = \\frac{1}{10}\\)</span><span class=\"prop\">(10^(log(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{\\frac{1}{10}} \\text{ ou } x = \\sqrt{\\frac{1}{10}}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x^{2}) = -1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{\\log(x^{2})} = 10^{-1}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = 10^{-1} = \\frac{1}{10}\\)</span><span class=\"prop\">(10^(log(A)) = A, A &gt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{\\frac{1}{10}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{\\frac{1}{10}}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -18696,7 +18926,7 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{-\\sqrt{\\frac{1}{10}} \\,;\\, \\sqrt{\\frac{1}{10}}\\right\\} \\text{, soit } x \\approx -0{,}316 \\text{ ou } x \\approx 0{,}316",
+      "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}316 \\text{ ou } x \\approx 0{,}316",
       "type": "resultat"
      }
     ],
@@ -18714,7 +18944,17 @@
     "badge": "Exponentielle des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x^{2}) = 1{,}5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{\\log(x^{2})} = 10^{1{,}5}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = 10^{1{,}5} = 10\\sqrt{10}\\)</span><span class=\"prop\">(10^(log(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{10\\sqrt{10}} \\text{ ou } x = \\sqrt{10\\sqrt{10}}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x^{2}) = 1{,}5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{\\log(x^{2})} = 10^{1{,}5}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = 10^{1{,}5} = 10\\sqrt{10}\\)</span><span class=\"prop\">(10^(log(A)) = A, A &gt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{10\\sqrt{10}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{10\\sqrt{10}}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -18737,7 +18977,7 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{-\\sqrt{10\\sqrt{10}} \\,;\\, \\sqrt{10\\sqrt{10}}\\right\\} \\text{, soit } x \\approx -5{,}623 \\text{ ou } x \\approx 5{,}623",
+      "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -5{,}623 \\text{ ou } x \\approx 5{,}623",
       "type": "resultat"
      }
     ],
@@ -18755,7 +18995,17 @@
     "badge": "Exponentielle des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x^{2}) = \\frac{1}{2}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{\\log(x^{2})} = 10^{\\frac{1}{2}}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = 10^{\\frac{1}{2}} = \\sqrt{10}\\)</span><span class=\"prop\">(10^(log(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{\\sqrt{10}} \\text{ ou } x = \\sqrt{\\sqrt{10}}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x^{2}) = \\frac{1}{2}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{\\log(x^{2})} = 10^{\\frac{1}{2}}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = 10^{\\frac{1}{2}} = \\sqrt{10}\\)</span><span class=\"prop\">(10^(log(A)) = A, A &gt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{\\sqrt{10}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{\\sqrt{10}}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -18778,7 +19028,7 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{-\\sqrt{\\sqrt{10}} \\,;\\, \\sqrt{\\sqrt{10}}\\right\\} \\text{, soit } x \\approx -1{,}778 \\text{ ou } x \\approx 1{,}778",
+      "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -1{,}778 \\text{ ou } x \\approx 1{,}778",
       "type": "resultat"
      }
     ],
@@ -19448,7 +19698,17 @@
     "badge": "Exponentielle des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{2}(x^{2}) = -1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{\\log_{2}(x^{2})} = 2^{-1}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = 2^{-1} = \\frac{1}{2}\\)</span><span class=\"prop\">(a^(log_a(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{\\frac{1}{2}} \\text{ ou } x = \\sqrt{\\frac{1}{2}}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{2}(x^{2}) = -1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{\\log_{2}(x^{2})} = 2^{-1}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = 2^{-1} = \\frac{1}{2}\\)</span><span class=\"prop\">(a^(log_a(A)) = A, A &gt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{\\frac{1}{2}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{\\frac{1}{2}}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -19471,7 +19731,7 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{-\\sqrt{\\frac{1}{2}} \\,;\\, \\sqrt{\\frac{1}{2}}\\right\\} \\text{, soit } x \\approx -0{,}707 \\text{ ou } x \\approx 0{,}707",
+      "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}707 \\text{ ou } x \\approx 0{,}707",
       "type": "resultat"
      }
     ],

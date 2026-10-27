@@ -289,6 +289,7 @@ un commit par groupe ; les entrées sont dans `BATTERIE_AUDIT` (`tests/python/ca
    Quand la méthode B diviserait par un coefficient nul (`4^x = 2^(2x)`, `2^(2x)/4^(x−1) = 8`), la méthode A est donnée seule, sans sélecteur (avant : « pas encore »).
 5. **Exposant du 2e degré, second membre quelconque** (méthode B, et méthode A par la définition pour la base 10 ou e) : `a^(P(x)) = c ⇔ P(x) · log(a) = log(c) ⇔ P(x) = log(c)/log(a)` (car log(a) ≠ 0).
    Forme `x² = k` (pas de terme en x) : `x = −√k ou x = √k` (`2^(x²) = 5 ⇔ x² = log(5)/log(2)`, `2^(x²−1) = 5 ⇔ x² = 1 + log(5)/log(2)`, `e^(x²) = 2 ⇔ x² = ln(2)`) ;
+   quand √k n'est pas un nombre exact, `x₁ = −√k` et `x₂ = √k` portent un nom et la ligne finale est `S = {x₁ ; x₂}, soit x ≈ …` (elle tient à 360 px, test de page) ; `x² = 4 ⇔ x = −2 ou x = 2` reste en ligne ;
    k < 0 : lignes `x² ≥ 0` (un carré est positif ou nul) et `k < 0` (aucune solution) ; k = 0 : `x = 0`. Forme générale : `P(x) − c = 0`, puis
    `Δ = b² − 4 · a · (q − c) = …` (formule du discriminant), `x₁`, `x₂` nommés, Δ < 0 : la remarque habituelle (`2^(x²+x) = 5`). Un second membre rationnel garde la résolution
    de la méthode « même base » (`10^(x²+x) = 100 ⇔ x² + x = 2 ⇔ (x + 2)(x − 1) = 0`). Plusieurs facteurs (`2^(x²) = 3^x`, `2^(x²) · 3^x = 6`) : le trinôme à coefficients
@@ -301,7 +302,7 @@ un commit par groupe ; les entrées sont dans `BATTERIE_AUDIT` (`tests/python/ca
    (1er ou 2e degré) se résout comme dans la méthode « même base » (`x − 4 = 0 ⇔ x = 4`, `x² − 1 = 0 ⇔ (x + 1)(x − 1) = 0`, Δ < 0 avec sa remarque), le facteur exponentiel
    par la carte « Aucune solution » (`2^x > 0`, `2^x = 0` : aucune solution). Un facteur constant non nul est omis (`3x · 2^x = 0`). Même rédaction dans les deux méthodes.
 8. **log(x²) = c, ln(x²) = c, log_a(x²) = c** (second membre quelconque) : l'exponentielle des deux membres, `x² = 10^c` (avec l'écriture exacte quand le cours la donne : `10^(−1) = 1/10`,
-   `10^1,5 = 10√10`), puis `x = −√(10^c) ou x = √(10^c)` (`log(x²) = −1 ⇔ x = −√(1/10) ou x = √(1/10)`, `ln(x²) = 1 ⇔ x² = e ⇔ x = ±√e`), puis la Vérification ; jamais `2 log(x)`.
+   `10^1,5 = 10√10`), puis `x = −√(10^c) ou x = √(10^c)`, écrits `x₁ = −√(1/10)`, `x₂ = √(1/10)` comme au point 5 (`log(x²) = −1`, `ln(x²) = 1 ⇔ x² = e`), puis la Vérification ; jamais `2 log(x)`.
    Un second membre entier garde la factorisation (`x² − 100 = 0 ⇔ (x + 10)(x − 10) = 0`). Les trinômes généraux à coefficients non entiers (`log(x² − 1) = 1/2`) restent « pas encore ».
 9. **Saisie de ² et ³** (clavier d'un téléphone) : lus `^2` et `^3` (`2^(x²)·4^x = 8` est `2^(x^2)·4^x = 8`) ; `2^x²` demande toujours des parenthèses.
 10. **Mise en facteur et 2e degré en aˣ : hors programme pour les 3C** (décision du 27.10.2026) : deux exponentielles avec un troisième terme (`2^x + 2^(x+1) = 12`, `2^x + 2^x = 8`,

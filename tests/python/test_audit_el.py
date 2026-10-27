@@ -218,13 +218,15 @@ class TestExposantDuSecondDegre(unittest.TestCase):
     def test_x_carre_egal_k(self):
         self.assertEqual(lignes("2^(x^2)=5"), [
             r"2^{x^{2}} = 5 \iff \log(2^{x^{2}}) = \log(5) \quad \text{(log des deux membres)} \iff x^{2} \cdot \log(2) = \log(5) "
-            r"\quad \text{(log(a^A) = A · log(a))} \iff x^{2} = \frac{\log(5)}{\log(2)} \quad \text{(car } \log(2) \neq 0\text{)} "
-            r"\iff x = -\sqrt{\frac{\log(5)}{\log(2)}} \text{ ou } x = \sqrt{\frac{\log(5)}{\log(2)}}"])
-        self.assertTrue(lignes("2^(x^2-1)=5")[0].endswith(r"\iff x^{2} = 1 + \frac{\log(5)}{\log(2)} "
-                                                           r"\iff x = -\sqrt{1 + \frac{\log(5)}{\log(2)}} \text{ ou } x = \sqrt{1 + \frac{\log(5)}{\log(2)}}"))
-        self.assertTrue(lignes("e^(x^2)=2")[0].endswith(r"\iff x^{2} = \ln(2) \quad \text{(car ln(e) = 1)} \iff x = -\sqrt{\ln(2)} \text{ ou } x = \sqrt{\ln(2)}"))
+            r"\quad \text{(log(a^A) = A · log(a))} \iff x^{2} = \frac{\log(5)}{\log(2)} \quad \text{(car } \log(2) \neq 0\text{)}",
+            r"x_{1} = -\sqrt{\frac{\log(5)}{\log(2)}}", r"x_{2} = \sqrt{\frac{\log(5)}{\log(2)}}"])          # nommés : la ligne finale tient à 360 px
+        self.assertEqual(el.tex_solution(corriger("2^(x^2)=5")), r"S = \left\{x_{1} \,;\, x_{2}\right\} \text{, soit } x \approx -1{,}524 \text{ ou } x \approx 1{,}524")
+        self.assertTrue(lignes("2^(x^2-1)=5")[0].endswith(r"\iff x^{2} = 1 + \frac{\log(5)}{\log(2)}"))
+        self.assertEqual(lignes("2^(x^2-1)=5")[-1], r"x_{2} = \sqrt{1 + \frac{\log(5)}{\log(2)}}")
+        self.assertTrue(lignes("e^(x^2)=2")[0].endswith(r"\iff x^{2} = \ln(2) \quad \text{(car ln(e) = 1)}"))
         self.assertEqual(lignes("e^(x^2)=2", el.METHODE_MEME_BASE), [
-            r"e^{x^{2}} = 2 \iff x^{2} = \ln(2) \quad \text{(définition du logarithme)} \iff x = -\sqrt{\ln(2)} \text{ ou } x = \sqrt{\ln(2)}"])
+            r"e^{x^{2}} = 2 \iff x^{2} = \ln(2) \quad \text{(définition du logarithme)}", r"x_{1} = -\sqrt{\ln(2)}", r"x_{2} = \sqrt{\ln(2)}"])
+        self.assertTrue(lignes("10^(x^2)=10000")[-1].endswith(r"\iff x^{2} = 4 \quad \text{(car log(10) = 1)} \iff x = -2 \text{ ou } x = 2"))   # racine exacte : en ligne
 
     def test_k_negatif_aucune_solution(self):
         self.assertEqual(lignes("2^(x^2)=1/2")[1:], [r"x^{2} \ge 0 \quad \text{(un carré est positif ou nul)}",
@@ -294,10 +296,11 @@ class TestLogarithmeDeXCarre(unittest.TestCase):
     """Groupe 8 (T4 limité) : log(x²) = c, ln(x²) = c, log_a(x²) = c par l'exponentielle des deux membres, x² = 10^c ⇔ x = ±√(10^c), jamais 2 log(x)."""
 
     def test_redaction(self):
-        self.assertEqual(lignes("log(x^2)=-1")[0],
-                         r"\log(x^{2}) = -1 \iff 10^{\log(x^{2})} = 10^{-1} \quad \text{(exponentielle des deux membres)} "
-                         r"\iff x^{2} = 10^{-1} = \frac{1}{10} \quad \text{(10^(log(A)) = A, A > 0)} \iff x = -\sqrt{\frac{1}{10}} \text{ ou } x = \sqrt{\frac{1}{10}}")
-        self.assertTrue(lignes("ln(x^2)=1")[0].endswith(r"\iff x^{2} = e \quad \text{(e^(ln(A)) = A, A > 0)} \iff x = -\sqrt{e} \text{ ou } x = \sqrt{e}"))
+        self.assertEqual(lignes("log(x^2)=-1")[:3], [
+            r"\log(x^{2}) = -1 \iff 10^{\log(x^{2})} = 10^{-1} \quad \text{(exponentielle des deux membres)} "
+            r"\iff x^{2} = 10^{-1} = \frac{1}{10} \quad \text{(10^(log(A)) = A, A > 0)}", r"x_{1} = -\sqrt{\frac{1}{10}}", r"x_{2} = \sqrt{\frac{1}{10}}"])
+        self.assertTrue(lignes("ln(x^2)=1")[0].endswith(r"\iff x^{2} = e \quad \text{(e^(ln(A)) = A, A > 0)}"))
+        self.assertEqual(lignes("ln(x^2)=1")[1:3], [r"x_{1} = -\sqrt{e}", r"x_{2} = \sqrt{e}"])
         self.assertEqual([c["titre"] for c in corriger("log_2(x^2)=-1")["etapes"]], ["Exponentielle des deux membres", "Vérification"])
 
     def test_jamais_deux_log_de_x_et_trinome_general_plus_tard(self):

@@ -1028,9 +1028,11 @@ class TestBasesDifferentes(unittest.TestCase):
             r"Δ = (\log(4))^{2} - 4\log(2) \cdot (-\log(8)) \quad \text{(formule du discriminant)}",
             r"x_{1} = \frac{-\log(4) - \sqrt{Δ}}{2\log(2)}", r"x_{2} = \frac{-\log(4) + \sqrt{Δ}}{2\log(2)}"])
         self.assertEqual(lignes("2^(x^2)*4^x=8")[0].split(r"\iff")[-1].strip(), r"x^{2} \cdot \log(2) + x \cdot \log(4) - \log(8) = 0")
-        self.assertTrue(lignes("3*2^(x^2+1)=96")[-1].endswith(                 # a^P = c : P = log(c)/log(a), puis x² = k (corrections de l'audit, groupe 5)
-            r"\iff x^{2} + 1 = \frac{\log(32)}{\log(2)} \quad \text{(car } \log(2) \neq 0\text{)} \iff x^{2} = \frac{\log(32)}{\log(2)} - 1 "
-            r"\iff x = -\sqrt{\frac{\log(32)}{\log(2)} - 1} \text{ ou } x = \sqrt{\frac{\log(32)}{\log(2)} - 1}"))
+        self.assertEqual(lignes("3*2^(x^2+1)=96")[-3:], [                       # a^P = c : P = log(c)/log(a), puis x² = k (corrections de l'audit, groupe 5)
+            r"2^{x^{2} + 1} = 32 \iff \log(2^{x^{2} + 1}) = \log(32) \quad \text{(log des deux membres)} \iff (x^{2} + 1) \cdot \log(2) = \log(32) "
+            r"\quad \text{(log(a^A) = A · log(a))} \iff x^{2} + 1 = \frac{\log(32)}{\log(2)} \quad \text{(car } \log(2) \neq 0\text{)} "
+            r"\iff x^{2} = \frac{\log(32)}{\log(2)} - 1",
+            r"x_{1} = -\sqrt{\frac{\log(32)}{\log(2)} - 1}", r"x_{2} = \sqrt{\frac{\log(32)}{\log(2)} - 1}"])
         r = corriger("2^(x^2)*4^x=8")
         self.assertEqual([round(el.valeur(n), 9) for n in r["solutions"]], [-3.0, 1.0])
         self.assertEqual(el.tex_solution(r), r"S = \left\{x_{1} \,;\, x_{2}\right\}")

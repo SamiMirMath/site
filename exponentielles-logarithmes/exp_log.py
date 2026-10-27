@@ -1663,10 +1663,12 @@ def _suite_polynome(chaine, f, f_tree, c, x):
             return [], [Nb(0)], None
         kv = _const(k)
         r = _racine_carree(kv) if kv is not None else None
-        racine = _nb_exact(r) if r is not None else Fn("sqrt", k)
-        oppose = _nb_exact(-r) if r is not None else Neg(racine)
-        chaine.ajouter(Ou([Eq(X, oppose), Eq(X, racine)]), "⇔")
-        return [], [oppose, racine], None
+        if r is not None:                                  # x² = 4 ⇔ x = −2 ou x = 2
+            chaine.ajouter(Ou([Eq(X, _nb_exact(-r)), Eq(X, _nb_exact(r))]), "⇔")
+            return [], [_nb_exact(-r), _nb_exact(r)], None
+        # x₁ = −√k et x₂ = √k portent un nom, comme pour le discriminant : S = {x₁ ; x₂}, soit x ≈ … tient à 360 px
+        racines = [Defini("x_{1}", Neg(Fn("sqrt", k))), Defini("x_{2}", Fn("sqrt", k))]
+        return [Chaine([Eq(n, n.arbre)]) for n in racines], racines, None
     if isinstance(c, Nb):                                  # coefficients rationnels : la résolution de la méthode « même base »
         try:
             l_poly, solutions, remarque = _resoudre_polynome(f, [c.val], f_tree, c, x)
