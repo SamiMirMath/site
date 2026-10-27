@@ -124,15 +124,20 @@ class TestComportement(unittest.TestCase):
         for e in entrees + ["log(x^2+x+3)=0"]:
             with self.subTest(entree=e):
                 self.calculer(page, e)
-                page.evaluer("document.querySelector('#tout') && !document.querySelector('#tout').disabled && document.querySelector('#tout').click()")
-                debordements = page.evaluer("""(() => {
-                    const trop = [...document.querySelectorAll('#cartes *')].filter(n => n.scrollWidth > n.clientWidth + 1 && n.clientWidth > 0
-                        && !n.closest('.katex') && getComputedStyle(n).display !== 'inline')
-                        .map(n => n.className + ' ' + n.scrollWidth + '>' + n.clientWidth);
-                    return [document.documentElement.scrollWidth, window.innerWidth, trop.slice(0, 5)];
-                })()""")
-                self.assertLessEqual(debordements[0], debordements[1], debordements)
-                self.assertEqual(debordements[2], [], debordements)
+                for cle in page.evaluer("[...document.querySelectorAll('#variantes:not([hidden]) button')].map(b => b.dataset.variante)") or [None]:
+                    if cle:                                                  # sélecteur de méthode : les deux variantes tiennent à 360 px
+                        page.evaluer(f"document.querySelector('#variantes button[data-variante=\"{cle}\"]').click()")
+                    page.evaluer("document.querySelector('#tout') && !document.querySelector('#tout').disabled && document.querySelector('#tout').click()")
+                    debordements = page.evaluer("""(() => {
+                        const trop = [...document.querySelectorAll('#cartes *')].filter(n => n.scrollWidth > n.clientWidth + 1 && n.clientWidth > 0
+                            && !n.closest('.katex') && getComputedStyle(n).display !== 'inline')
+                            .map(n => n.className + ' ' + n.scrollWidth + '>' + n.clientWidth);
+                        return [document.documentElement.scrollWidth, window.innerWidth, trop.slice(0, 5)];
+                    })()""")
+                    self.assertLessEqual(debordements[0], debordements[1], (e, cle, debordements))
+                    self.assertEqual(debordements[2], [], (e, cle, debordements))
+                if page.evaluer("!!document.querySelector('#variantes:not([hidden])')"):
+                    page.evaluer("document.querySelector('#variantes button[data-variante=\"logarithmes\"]').click()")
         page.taille(1100)
         self.calculer(page, "log(5-x)=8")
         self.assertEqual(page.evaluer("document.querySelectorAll('#cartes .chaine').length"), 2)
@@ -148,6 +153,169 @@ class TestComportement(unittest.TestCase):
         self.assertGreater(haut(".ligne:nth-child(2) .prop")[0], haut(".ligne:nth-child(2) .expr")[0])
         self.assertEqual(haut(".ligne:nth-child(2) .prop")[1], haut(".ligne:nth-child(2) .expr")[1])
         page.taille(1100)
+
+    def titres_et_badges(self, page):
+        """Le badge (ou le titre) de chaque carte affichée."""
+        return page.evaluer("[...document.querySelectorAll('#cartes .card:not(.cache)')].map(c => (c.querySelector('.badge') || c.querySelector('h3')).textContent)")
+
+    def test_t33_el_selecteur_de_methode(self):
+        """EL-19 : deux boutons côte à côte au-dessus de la résolution d'une équation exponentielle, « Logarithmes » choisi par défaut ; un clic change
+        les cartes sans appeler le moteur ; le choix est gardé d'une équation à l'autre et après rechargement ; ni les équations logarithmiques ni
+        les calculs n'ont de sélecteur."""
+        if "exponentielles-logarithmes" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.ouvrir("exponentielles-logarithmes")
+        page.evaluer("try { localStorage.clear(); } catch (e) {}")
+        self.assertFalse(page.evaluer("!!document.querySelector('#variantes')"))                  # pas de sélecteur avant un calcul
+        self.calculer(page, "2^(x-1)=32")
+        boutons = page.evaluer("[...document.querySelectorAll('#variantes button')].map(b => [b.textContent, b.getAttribute('aria-pressed'), b.type])")
+        self.assertEqual(boutons, [["Même base / définition", "false", "button"], ["Logarithmes", "true", "button"]])
+        self.assertEqual(page.evaluer("document.querySelector('#variantes').getAttribute('role')"), "group")
+        self.assertEqual(page.evaluer("document.querySelector('#variantes').getAttribute('aria-label')"), "Méthode de résolution")
+        # au-dessus de la résolution, côte à côte
+        haut = page.evaluer("""(() => { const r = [...document.querySelectorAll('#variantes button')].map(b => b.getBoundingClientRect());
+            return [r[0].top, r[1].top, r[0].right <= r[1].left, document.querySelector('#cartes').getBoundingClientRect().top - r[0].bottom]; })()""")
+        self.assertEqual(haut[0], haut[1])
+        self.assertTrue(haut[2])
+        self.assertGreater(haut[3], 0)
+        self.assertEqual(self.titres_et_badges(page), ["Logarithme des deux membres"])
+        page.evaluer("document.querySelector('#tout').click()")
+        self.assertEqual(self.titres_et_badges(page), ["Logarithme des deux membres", "Solution"])
+        # un clic : instantané et sans appel au moteur
+        page.evaluer("""window.__envois = 0; const o = Worker.prototype.postMessage;
+            Worker.prototype.postMessage = function (...a) { window.__envois++; return o.apply(this, a); };""")
+        page.evaluer("document.querySelector('#variantes button[data-variante=\"meme_base\"]').click()")
+        self.assertEqual(self.titres_et_badges(page), ["Même base", "Solution"])                   # « Tout afficher » : tout reste affiché
+        self.assertEqual(page.evaluer("document.querySelector('#variantes button[aria-pressed=true]').textContent"), "Même base / définition")
+        self.assertEqual(page.evaluer("window.__envois"), 0)
+        self.assertEqual(page.evaluer("document.querySelector('#progression').textContent"), "Étape 2 / 2")
+        self.assertEqual(page.evaluer("document.querySelectorAll('#cartes .cache').length"), 0)
+        # le choix est gardé d'une équation à l'autre
+        self.calculer(page, "3^(x+1)=27")
+        self.assertEqual(page.evaluer("document.querySelector('#variantes button[aria-pressed=true]').textContent"), "Même base / définition")
+        self.assertEqual(self.titres_et_badges(page)[0], "Même base")
+        # méthode A qui ne s'applique pas : le bouton reste cliquable et la carte le dit
+        self.calculer(page, "3^x=20")
+        page.evaluer("document.querySelector('#tout').click()")
+        self.assertIn("n'est pas une puissance de", page.evaluer("document.querySelector('#cartes').textContent"))
+        self.assertIn("il faut les logarithmes.", page.evaluer("document.querySelector('#cartes').textContent"))
+        self.assertFalse(page.evaluer("!!document.querySelector('#cartes .card.final')"))
+        # ni équation logarithmique, ni calcul, ni erreur : pas de sélecteur
+        for entree in ("log(x+1)=7", "log_2(50)", "x<3"):
+            self.calculer(page, entree)
+            self.assertTrue(page.evaluer("document.querySelector('#variantes').hidden"), entree)
+        self.calculer(page, "2^(x-1)=32")
+        self.assertFalse(page.evaluer("document.querySelector('#variantes').hidden"))
+        # le choix est gardé après un rechargement (localStorage)
+        self.assertEqual(page.evaluer("localStorage.getItem('variante:exponentielles-logarithmes')"), "meme_base")
+        page = self.ouvrir("exponentielles-logarithmes")
+        self.calculer(page, "2^(x-1)=32")
+        self.assertEqual(page.evaluer("document.querySelector('#variantes button[aria-pressed=true]').textContent"), "Même base / définition")
+        page.evaluer("document.querySelector('#variantes button[data-variante=\"logarithmes\"]').click()")
+        self.assertEqual(page.evaluer("localStorage.getItem('variante:exponentielles-logarithmes')"), "logarithmes")
+
+    def test_t33_el_selecteur_au_clavier_et_a_360_px(self):
+        """Les boutons se prennent au clavier (focus visible, Entrée et Espace), restent côte à côte à 360 px et ne font pas défiler la page."""
+        if "exponentielles-logarithmes" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.ouvrir("exponentielles-logarithmes")
+        page.evaluer("try { localStorage.clear(); } catch (e) {}")
+        page.taille(360)
+        self.calculer(page, "2^(x-1)=3^x")
+        page.evaluer("document.querySelector('#tout').click()")
+        mesures = page.evaluer("""(() => { const r = [...document.querySelectorAll('#variantes button')].map(b => b.getBoundingClientRect());
+            return [r[0].top, r[1].top, r[0].width, r[1].width, r[1].right, document.documentElement.scrollWidth, window.innerWidth,
+                    r[0].height >= 36]; })()""")
+        self.assertEqual(mesures[0], mesures[1])                                  # côte à côte
+        self.assertAlmostEqual(mesures[2], mesures[3], delta=1)
+        self.assertLessEqual(mesures[4], mesures[6])
+        self.assertLessEqual(mesures[5], mesures[6])
+        self.assertTrue(mesures[7])
+        # clavier : focus, puis Entrée et Espace déclenchent le bouton
+        def touche(key, code, vk):
+            for type_ in ("keyDown", "keyUp"):
+                params = dict(type=type_, key=key, code=code, windowsVirtualKeyCode=vk)
+                if type_ == "keyDown" and key == "Enter":
+                    params["text"] = "\r"
+                if type_ == "keyDown" and key == " ":
+                    params["text"] = " "
+                page.appel("Input.dispatchKeyEvent", **params)
+        page.evaluer("document.querySelector('#variantes button[data-variante=\"meme_base\"]').focus()")
+        self.assertEqual(page.evaluer("document.activeElement.dataset.variante"), "meme_base")
+        outline = page.evaluer("getComputedStyle(document.activeElement).outlineStyle")
+        self.assertNotEqual(outline, "none")                                      # focus visible (:focus-visible)
+        touche("Enter", "Enter", 13)
+        page.attendre("document.querySelector('#variantes button[aria-pressed=true]').dataset.variante === 'meme_base'", 5)
+        page.evaluer("document.querySelector('#variantes button[data-variante=\"logarithmes\"]').focus()")
+        touche(" ", "Space", 32)
+        page.attendre("document.querySelector('#variantes button[aria-pressed=true]').dataset.variante === 'logarithmes'", 5)
+        page.taille(1100)
+
+    def test_t33_el_selecteur_sans_localstorage(self):
+        """localStorage refusé (fenêtre privée, données bloquées) : la page marche, le défaut est « Logarithmes » et le choix reste pour la page."""
+        if "exponentielles-logarithmes" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.nav.ouvrir("exponentielles-logarithmes/index.html", script_initial="""
+            for (const m of ['getItem', 'setItem', 'removeItem', 'clear']) Storage.prototype[m] = function () { throw new Error('refusé'); };""")
+        attendre_pret(page)
+        self.calculer(page, "2^(x-1)=32")
+        self.assertEqual(page.evaluer("document.querySelector('#variantes button[aria-pressed=true]').textContent"), "Logarithmes")
+        page.evaluer("document.querySelector('#variantes button[data-variante=\"meme_base\"]').click()")
+        self.assertEqual(page.evaluer("document.querySelector('#variantes button[aria-pressed=true]').textContent"), "Même base / définition")
+        self.calculer(page, "3^x=27")
+        self.assertEqual(page.evaluer("document.querySelector('#variantes button[aria-pressed=true]').textContent"), "Même base / définition")
+        self.assertFalse(page.evaluer("document.querySelector('#cartes .err')"))
+
+    def test_t33_el_selecteur_a_l_impression(self):
+        """L'impression montre la méthode affichée : le sélecteur disparaît, la ligne « Méthode : … » apparaît, seules les cartes de la méthode sont là."""
+        if "exponentielles-logarithmes" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.ouvrir("exponentielles-logarithmes")
+        page.evaluer("try { localStorage.clear(); } catch (e) {}")
+        self.calculer(page, "2^(x-1)=32")
+        affichage = lambda: page.evaluer("""[getComputedStyle(document.querySelector('#variantes')).display,
+            getComputedStyle(document.querySelector('#methodeImprimee')).display, document.querySelector('#methodeImprimee').textContent]""")
+        self.assertEqual(affichage()[:2], ["flex", "none"])                         # à l'écran : le sélecteur, pas la ligne d'impression
+        page.taille(1100, imprimante=True)
+        self.assertEqual(affichage(), ["none", "block", "Méthode : Logarithmes"])
+        page.taille(1100)
+        page.evaluer("document.querySelector('#variantes button[data-variante=\"meme_base\"]').click()")
+        page.taille(1100, imprimante=True)
+        self.assertEqual(affichage(), ["none", "block", "Méthode : Même base / définition"])
+        page.evaluer("document.querySelector('#tout').click()")
+        self.assertEqual(page.evaluer("document.querySelectorAll('#cartes .card:not(.cache)').length"), 2)
+        page.taille(1100)
+
+    def test_t33_el_selecteur_dans_l_exercice_au_hasard(self):
+        """Les exercices au hasard passent par la même page de corrigé : le sélecteur est là pour une équation exponentielle, absent pour une
+        équation logarithmique."""
+        if "exponentielles-logarithmes" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.ouvrir("exponentielles-logarithmes")
+        page.evaluer("try { localStorage.clear(); } catch (e) {}")
+        vus = set()
+        for _ in range(14):
+            page.evaluer("document.querySelector('#exoHasard').click()")
+            page.attendre("document.querySelector('#exoEnonce annotation')", 30)
+            enonce = page.evaluer("document.querySelector('#exoEnonce annotation').textContent")
+            page.evaluer("document.querySelector('#exoCorrige').click()")
+            page.attendre("document.querySelector('#cartes .card.final, #cartes .card:last-child')", 60)
+            exponentielle = not re.search(r"\\log|\\ln", enonce)
+            self.assertEqual(page.evaluer("!!document.querySelector('#variantes') && !document.querySelector('#variantes').hidden"), exponentielle, enonce)
+            vus.add(exponentielle)
+            if len(vus) == 2:
+                break
+        self.assertEqual(vus, {True, False})
+
+    def test_t33_selecteur_absent_des_autres_outils(self):
+        """Le sélecteur ne change pas les autres outils : aucun #variantes ni #methodeImprimee dans leur page après un calcul."""
+        for outil in OUTILS:
+            if outil == "exponentielles-logarithmes" or outil not in CHOISIS:
+                continue
+            with self.subTest(outil=outil):
+                page = self.ouvrir(outil)
+                self.calculer(page, CALCUL[outil])
+                self.assertFalse(page.evaluer("!!document.querySelector('#variantes') || !!document.querySelector('#methodeImprimee')"))
 
     def test_t31_libelle_pendant_le_chargement_de_sympy(self):
         """Pages à `sympyAvant` : un calcul lancé avant « Prêt. » affiche « Chargement du moteur de calcul pour cette fonction… »

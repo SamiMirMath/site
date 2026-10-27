@@ -77,6 +77,16 @@ JS_CAPTURE = r"""
 """
 
 
+# Boutons du sélecteur de méthode : [{cle, texte, choisi}], ou None quand la sortie n'a pas de variantes.
+JS_BOUTONS = r"""
+(() => {
+  const barre = document.querySelector('#variantes');
+  if (!barre || barre.hidden) return null;
+  return [...barre.querySelectorAll('button')].map(b => ({ cle: b.dataset.variante, texte: b.textContent, choisi: b.getAttribute('aria-pressed') === 'true' }));
+})()
+"""
+
+
 def attendre_pret(page, delai=240):
     """Attend « Prêt. ». À l'expiration, le message dit où en est le chargement : texte de #etat (« Chargement de Python… »,
     « Chargement du moteur de calcul… », ou rien) et dernières lignes de la console. Une page lente laisse #etat avancer,
@@ -106,10 +116,24 @@ def capturer(page, entree):
         except TimeoutError:
             pass
     debut = page.evaluer(JS_CAPTURE)
+    boutons = page.evaluer(JS_BOUTONS)
     page.evaluer("document.querySelector('#tout') && !document.querySelector('#tout').disabled && document.querySelector('#tout').click()")
     fin = page.evaluer(JS_CAPTURE)
-    return {"au_depart": {"visibles": debut["visibles"], "progression": debut["progression"]},
-            "cartes": fin["cartes"], "progression_finale": fin["progression"]}
+    res = {"au_depart": {"visibles": debut["visibles"], "progression": debut["progression"]},
+           "cartes": fin["cartes"], "progression_finale": fin["progression"]}
+    if boutons:                       # sélecteur de méthode (outil.js) : les boutons, puis le corrigé complet de chaque variante
+        res["boutons"] = boutons
+        res["variantes"] = {}
+        for b in boutons:
+            page.evaluer(f"document.querySelector('#variantes button[data-variante=\"{b['cle']}\"]').click()")
+            page.evaluer("document.querySelector('#tout').click()")
+            vue = page.evaluer(JS_CAPTURE)
+            res["variantes"][b["cle"]] = {"cartes": vue["cartes"], "progression_finale": vue["progression"],
+                                          "imprimee": page.evaluer("document.querySelector('#methodeImprimee').textContent")}
+        defaut = next(b["cle"] for b in boutons if b["choisi"])
+        page.evaluer(f"document.querySelector('#variantes button[data-variante=\"{defaut}\"]').click()")          # le choix est gardé d'une saisie à l'autre
+        assert res["variantes"][defaut]["cartes"] == res["cartes"]
+    return res
 
 
 def capturer_outil(nav, outil, filtre=None):

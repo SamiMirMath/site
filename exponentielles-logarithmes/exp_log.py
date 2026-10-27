@@ -119,8 +119,19 @@ class Log(Noeud):
         self.a, self.base = a, base
 
 
+class Defini(Noeud):
+    """Un nombre qui porte un nom dans le corrigé (Δ, x₁ = (−b − √Δ)/(2a)) : écrit par son nom, évalué par sa définition. Il raccourcit les
+    lignes d'un trinôme à coefficients logarithmiques, qui ne tiendraient pas à 360 px."""
+    __slots__ = ("nom", "arbre")
+
+    def __init__(self, nom, arbre):
+        self.nom, self.arbre = nom, arbre
+
+
 def variables(n):
     """Ensemble des lettres inconnues (jamais e) qui apparaissent dans l'arbre, base des logarithmes comprise."""
+    if isinstance(n, Defini):
+        return variables(n.arbre)
     if isinstance(n, Var):
         return {n.nom}
     if isinstance(n, (Nb, E)):
@@ -135,6 +146,8 @@ def variables(n):
 
 
 def contient_e(n):
+    if isinstance(n, Defini):
+        return contient_e(n.arbre)
     if isinstance(n, E):
         return True
     if isinstance(n, (Var, Nb)):
@@ -176,6 +189,8 @@ _DEBUT_COLLABLE = re.compile(r"^([A-Za-z(]|\\left\(|\\ln|\\log|\\sqrt)")
 
 
 def tex(n):
+    if isinstance(n, Defini):
+        return n.nom
     if isinstance(n, Nb):
         return _nb_tex(n)
     if isinstance(n, Var):
@@ -596,6 +611,8 @@ def _const(n):
 
 def valeur(n, x=None):
     """Valeur numérique (float) d'un arbre ; x : valeur de l'inconnue. Sert aux valeurs « ≈ » et aux contrôles."""
+    if isinstance(n, Defini):
+        return valeur(n.arbre, x)
     if isinstance(n, Nb):
         return float(n.val)
     if isinstance(n, Var):
@@ -1766,19 +1783,21 @@ def _second_degre(chaine, P, x, ecrit, ln):
     produit = Op("*", Op("*", Nb(4), Anode), Cnode)
     delta = Op("-", Pow(Bnode, Nb(2)), produit) if B else Neg(produit)
     dv = valeur(delta)
-    lignes = [chaine, Chaine([Var("Δ"), delta], ["="], [PROP_DISCRIMINANT])]
+    D = Defini("Δ", delta)                                 # les lignes suivantes écrivent Δ, pas son expression : elles tiennent à 360 px
+    lignes = [chaine, Chaine([D, delta], ["="], [PROP_DISCRIMINANT])]
     echelle = max(1.0, valeur(Bnode) ** 2 if B else 1.0, abs(valeur(produit)))
     if dv < -1e-12 * echelle:
         return lignes, [], "Δ < 0 : l'équation n'a aucune solution réelle."
     moins_b = _somme([_oppose(t) for t in B], x, ecrit, ln) if B else None
     deux_a = Op("*", Nb(2), Anode)
     if abs(dv) <= 1e-12 * echelle:
-        racines = [Op("/", moins_b, deux_a) if B else Nb(0)]
-    else:
-        racine = Fn("sqrt", delta)
-        haut = (lambda signe: Op("-" if signe < 0 else "+", moins_b, racine)) if B else (lambda signe: Neg(racine) if signe < 0 else racine)
-        racines = [Op("/", haut(-1), deux_a), Op("/", haut(1), deux_a)]
-    lignes.append(Chaine([Ou(Eq(X, r) for r in racines)]))
+        racine = Op("/", moins_b, deux_a) if B else Nb(0)
+        lignes.append(Chaine([Eq(X, racine)]))
+        return lignes, [racine], None
+    racine = Fn("sqrt", D)
+    haut = (lambda signe: Op("-" if signe < 0 else "+", moins_b, racine)) if B else (lambda signe: Neg(racine) if signe < 0 else racine)
+    racines = [Defini("x_{1}", Op("/", haut(-1), deux_a)), Defini("x_{2}", Op("/", haut(1), deux_a))]
+    lignes += [Chaine([Eq(r, r.arbre)]) for r in racines]          # x₁ = (−b − √Δ)/(2a) et x₂ = (−b + √Δ)/(2a), puis S = {x₁ ; x₂}
     return lignes, racines, None
 
 
@@ -2124,6 +2143,8 @@ def _produit_nul(g, d, x, methode):
 
 
 def _contient_log(n):
+    if isinstance(n, Defini):
+        return _contient_log(n.arbre)
     if isinstance(n, Log):
         return True
     if isinstance(n, (Neg, Fn)):
@@ -2177,6 +2198,8 @@ def tex_approx(v):
 def _precis(n):
     """Valeur d'un arbre sans inconnue avec 60 chiffres (module decimal) ; le contexte est celui de l'appelant."""
     D = decimal.Decimal
+    if isinstance(n, Defini):
+        return _precis(n.arbre)
     if isinstance(n, Nb):
         return D(n.val.numerator) / D(n.val.denominator)
     if isinstance(n, E):

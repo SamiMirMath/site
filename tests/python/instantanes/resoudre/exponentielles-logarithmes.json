@@ -5276,7 +5276,12 @@
       "type": "texte"
      },
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{-\\log(4) - \\sqrt{(\\log(4))^{2} - 4\\log(2) \\cdot (-\\log(8))}}{2\\log(2)} \\text{ ou } x = \\frac{-\\log(4) + \\sqrt{(\\log(4))^{2} - 4\\log(2) \\cdot (-\\log(8))}}{2\\log(2)}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = \\frac{-\\log(4) - \\sqrt{Δ}}{2\\log(2)}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\frac{-\\log(4) + \\sqrt{Δ}}{2\\log(2)}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -5287,7 +5292,7 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{\\frac{-\\log(4) - \\sqrt{(\\log(4))^{2} - 4\\log(2) \\cdot (-\\log(8))}}{2\\log(2)} \\,;\\, \\frac{-\\log(4) + \\sqrt{(\\log(4))^{2} - 4\\log(2) \\cdot (-\\log(8))}}{2\\log(2)}\\right\\}",
+      "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\}",
       "type": "resultat"
      },
      {
@@ -5359,7 +5364,12 @@
         "type": "texte"
        },
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{-\\log(4) - \\sqrt{(\\log(4))^{2} - 4\\log(2) \\cdot (-\\log(8))}}{2\\log(2)} \\text{ ou } x = \\frac{-\\log(4) + \\sqrt{(\\log(4))^{2} - 4\\log(2) \\cdot (-\\log(8))}}{2\\log(2)}\\)</span><span class=\"prop\"></span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = \\frac{-\\log(4) - \\sqrt{Δ}}{2\\log(2)}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\frac{-\\log(4) + \\sqrt{Δ}}{2\\log(2)}\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -5370,7 +5380,7 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{\\frac{-\\log(4) - \\sqrt{(\\log(4))^{2} - 4\\log(2) \\cdot (-\\log(8))}}{2\\log(2)} \\,;\\, \\frac{-\\log(4) + \\sqrt{(\\log(4))^{2} - 4\\log(2) \\cdot (-\\log(8))}}{2\\log(2)}\\right\\}",
+        "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\}",
         "type": "resultat"
        },
        {
@@ -6547,7 +6557,12 @@
       "type": "texte"
      },
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{-\\sqrt{-4\\log(2) \\cdot (\\log(2) - \\log(32))}}{2\\log(2)} \\text{ ou } x = \\frac{\\sqrt{-4\\log(2) \\cdot (\\log(2) - \\log(32))}}{2\\log(2)}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = \\frac{-\\sqrt{Δ}}{2\\log(2)}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\frac{\\sqrt{Δ}}{2\\log(2)}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -6558,7 +6573,7 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{\\frac{-\\sqrt{-4\\log(2) \\cdot (\\log(2) - \\log(32))}}{2\\log(2)} \\,;\\, \\frac{\\sqrt{-4\\log(2) \\cdot (\\log(2) - \\log(32))}}{2\\log(2)}\\right\\}",
+      "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\}",
       "type": "resultat"
      },
      {
@@ -6649,7 +6664,12 @@
         "type": "texte"
        },
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{-\\sqrt{-4\\log(2) \\cdot (\\log(2) - \\log(32))}}{2\\log(2)} \\text{ ou } x = \\frac{\\sqrt{-4\\log(2) \\cdot (\\log(2) - \\log(32))}}{2\\log(2)}\\)</span><span class=\"prop\"></span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = \\frac{-\\sqrt{Δ}}{2\\log(2)}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\frac{\\sqrt{Δ}}{2\\log(2)}\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -6660,7 +6680,7 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{\\frac{-\\sqrt{-4\\log(2) \\cdot (\\log(2) - \\log(32))}}{2\\log(2)} \\,;\\, \\frac{\\sqrt{-4\\log(2) \\cdot (\\log(2) - \\log(32))}}{2\\log(2)}\\right\\}",
+        "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\}",
         "type": "resultat"
        },
        {
@@ -9946,7 +9966,12 @@
       "type": "texte"
      },
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{\\log(3) - \\sqrt{(-\\log(3))^{2} - 4\\log(9) \\cdot (-\\log(3))}}{2\\log(9)} \\text{ ou } x = \\frac{\\log(3) + \\sqrt{(-\\log(3))^{2} - 4\\log(9) \\cdot (-\\log(3))}}{2\\log(9)}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = \\frac{\\log(3) - \\sqrt{Δ}}{2\\log(9)}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\frac{\\log(3) + \\sqrt{Δ}}{2\\log(9)}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -9957,7 +9982,7 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{\\frac{\\log(3) - \\sqrt{(-\\log(3))^{2} - 4\\log(9) \\cdot (-\\log(3))}}{2\\log(9)} \\,;\\, \\frac{\\log(3) + \\sqrt{(-\\log(3))^{2} - 4\\log(9) \\cdot (-\\log(3))}}{2\\log(9)}\\right\\}",
+      "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\}",
       "type": "resultat"
      },
      {
@@ -10034,7 +10059,12 @@
         "type": "texte"
        },
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{\\log(3) - \\sqrt{(-\\log(3))^{2} - 4\\log(9) \\cdot (-\\log(3))}}{2\\log(9)} \\text{ ou } x = \\frac{\\log(3) + \\sqrt{(-\\log(3))^{2} - 4\\log(9) \\cdot (-\\log(3))}}{2\\log(9)}\\)</span><span class=\"prop\"></span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = \\frac{\\log(3) - \\sqrt{Δ}}{2\\log(9)}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\frac{\\log(3) + \\sqrt{Δ}}{2\\log(9)}\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -10045,7 +10075,7 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{\\frac{\\log(3) - \\sqrt{(-\\log(3))^{2} - 4\\log(9) \\cdot (-\\log(3))}}{2\\log(9)} \\,;\\, \\frac{\\log(3) + \\sqrt{(-\\log(3))^{2} - 4\\log(9) \\cdot (-\\log(3))}}{2\\log(9)}\\right\\}",
+        "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\}",
         "type": "resultat"
        },
        {

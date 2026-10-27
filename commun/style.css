@@ -71,6 +71,14 @@ button:hover{border-color:var(--accent)}
 button:disabled{opacity:.45;cursor:default}
 button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600;padding:9px 22px}
 @media (prefers-color-scheme: dark){button.primary{color:#0b1220}}
+/* Sélecteur de méthode (variantes de résolution, commun/outil.js) : deux boutons côte à côte ; celui qui est choisi est plein */
+.variantes{display:flex;gap:8px;margin:0 0 12px}
+.variantes[hidden]{display:none}
+.variantes button{flex:1 1 0;min-width:0;padding:9px 12px;font-weight:600;line-height:1.3}
+.variantes button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+@media (prefers-color-scheme: dark){.variantes button[aria-pressed="true"]{color:#0b1220}}
+.variantes button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.imprime-seulement{display:none}
 .saisie{display:flex;gap:8px;align-items:center}
 .saisie label{font-weight:700;white-space:nowrap}
 #entree{flex:1;min-width:0;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:var(--card);font-size:1.05rem;font-family:ui-monospace,Menlo,Consolas,monospace}
@@ -110,6 +118,7 @@ details ul{margin:.4em 0 0;padding-left:1.2em}
   :root{ --bg:#fff; --fg:#000; --muted:#444; --card:#fff; --border:#bbb; --eq:#f3f6fb; --good:#0d5c36; --bad:#9c2a1c; }
   body{background:#fff}
   .no-print{display:none !important}
+  .imprime-seulement{display:block;margin:0 0 10px;font-weight:600}
   .cache{display:block !important}
   .card{box-shadow:none; break-inside:avoid}
   .wrap{max-width:none; padding:0}

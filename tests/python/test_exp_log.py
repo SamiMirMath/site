@@ -371,6 +371,8 @@ MP.dps = 30
 
 def evaluer(n, x=None):
     """Oracle indépendant du moteur : valeur d'un arbre avec mpmath."""
+    if isinstance(n, el.Defini):
+        return evaluer(n.arbre, x)
     if isinstance(n, Nb):
         return MP.mpf(n.val.numerator) / n.val.denominator
     if isinstance(n, Var):
@@ -833,10 +835,10 @@ class TestLogarithme(unittest.TestCase):
         self.assertEqual(el.tex_solution(corriger("2^(x^2)*4^x=8", el.METHODE_MEME_BASE)), r"S = \left\{-3 \,;\, 1\right\}")
         # un rationnel écrit avec des logarithmes n'a pas de « soit x ≈ » : c'est le contrôle à la calculatrice qui donne la valeur
         t = el.tex_solution(corriger("2^(x^2)*4^x=8"))
-        self.assertTrue(t.startswith(r"S = \left\{\frac{-\log(4) - \sqrt{"), t)
+        self.assertEqual(t, r"S = \left\{x_{1} \,;\, x_{2}\right\}")
         self.assertNotIn(r"\approx", t)
         t = el.tex_solution(corriger("2^(x^2)=2^(2x+1)"))                       # irrationnelles : 1 ± √2
-        self.assertTrue(t.endswith(r"\text{, soit } x \approx -0{,}414 \text{ ou } x \approx 2{,}414"), t)
+        self.assertEqual(t, r"S = \left\{x_{1} \,;\, x_{2}\right\} \text{, soit } x \approx -0{,}414 \text{ ou } x \approx 2{,}414")
 
     def test_ligne_finale_partout_et_conforme(self):
         """Toute équation de la batterie a sa ligne finale : « S = … » ; un « ≈ » vient toujours après la valeur exacte, 3 décimales, virgule ;
@@ -1016,6 +1018,30 @@ class TestBasesDifferentes(unittest.TestCase):
                 texte = " ".join(el.tex_chaine(l) for c in corriger(saisie)["etapes"] for l in c["lignes"])
                 for interdit in (el.PROP_LOG_10K, el.PROP_DEFINITION_LOG, el.PROP_LN_E_PUISSANCE):
                     self.assertNotIn(interdit, texte)
+
+    def test_trinome_a_coefficients_logarithmiques(self):
+        """x² en exposant, méthode B : Δ, x₁ et x₂ portent un nom (les lignes tiennent à 360 px), la ligne finale est S = {x₁ ; x₂} ;
+        sans terme constant, x est mis en facteur ; Δ < 0 donne S = ∅."""
+        lignes = lambda s: [el.tex_chaine(l) for c in corriger(s)["etapes"] for l in c["lignes"]]
+        self.assertEqual(lignes("2^(x^2)*4^x=8")[1:], [
+            r"Δ = (\log(4))^{2} - 4\log(2) \cdot (-\log(8)) \quad \text{(formule du discriminant)}",
+            r"x_{1} = \frac{-\log(4) - \sqrt{Δ}}{2\log(2)}", r"x_{2} = \frac{-\log(4) + \sqrt{Δ}}{2\log(2)}"])
+        self.assertEqual(lignes("2^(x^2)*4^x=8")[0].split(r"\iff")[-1].strip(), r"x^{2} \cdot \log(2) + x \cdot \log(4) - \log(8) = 0")
+        self.assertEqual(lignes("3*2^(x^2+1)=96")[-2:], [r"x_{1} = \frac{-\sqrt{Δ}}{2\log(2)}", r"x_{2} = \frac{\sqrt{Δ}}{2\log(2)}"])
+        r = corriger("2^(x^2)*4^x=8")
+        self.assertEqual([round(el.valeur(n), 9) for n in r["solutions"]], [-3.0, 1.0])
+        self.assertEqual(el.tex_solution(r), r"S = \left\{x_{1} \,;\, x_{2}\right\}")
+        self.assertEqual(lignes("2^(x^2)=8^x"), [
+            r"2^{x^{2}} = 8^{x} \iff \log(2^{x^{2}}) = \log(8^{x}) \quad \text{(log des deux membres)} \iff x^{2} \cdot \log(2) = x \cdot \log(8) "
+            r"\quad \text{(log(a^A) = A · log(a))} \iff x^{2} \cdot \log(2) - x \cdot \log(8) = 0 \iff x(x \cdot \log(2) - \log(8)) = 0 "
+            r"\iff x = 0 \text{ ou } x \cdot \log(2) - \log(8) = 0 \quad \text{(un produit est nul si l'un des facteurs est nul)}",
+            r"x \cdot \log(2) - \log(8) = 0 \iff x = \frac{\log(8)}{\log(2)} \quad \text{(car } \log(2) \neq 0\text{)}"])
+        vide = corriger("2^(x^2)=1/4")
+        self.assertEqual(vide["solutions"], [])
+        self.assertEqual(vide["remarque"], "Δ < 0 : l'équation n'a aucune solution réelle.")
+        pur = corriger("10^(x^2)=10^(x+2)")                                 # log(10) = 1 : un trinôme ordinaire, sans Δ à logarithmes
+        self.assertEqual([round(el.valeur(n), 9) for n in pur["solutions"]], [-1.0, 2.0])
+        self.assertNotIn("Δ", " ".join(el.tex_chaine(l) for c in pur["etapes"] for l in c["lignes"]))
 
     def test_base_ecrite_conservee(self):
         texte = " ".join(el.tex_chaine(l) for c in corriger("(1/2)^x=3^(x+1)")["etapes"] for l in c["lignes"])

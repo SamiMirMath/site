@@ -17,6 +17,11 @@
    apres({entree, appelPy, derniereCarte, actuel}) appelé après l'affichage d'un corrigé réussi
    (`actuel()` devient faux si un autre calcul a commencé).
 
+   Variantes de résolution : quand la sortie de `resoudre()` porte `variantes` ([{cle, libelle, cartes}]) et `variante_defaut`, le socle affiche
+   au-dessus des cartes un bouton par variante (`#variantes`, créé ici, `aria-pressed`) ; un clic remplace les cartes sans appeler le moteur, en
+   gardant le nombre de cartes visibles. Le choix est gardé d'une saisie à l'autre (mémoire de la page, et localStorage « variante:<outil> » dans un
+   try/catch). Une ligne « Méthode : … » (`#methodeImprimee`) n'apparaît qu'à l'impression.
+
    Les textes d'interface (états, compteur d'étapes, messages de délai) sont écrits ici une seule fois.
    Les textes du corrigé viennent de `resoudre()` (Python) et sont rendus par commun/rendu.js.
    Test : `window.__delaiCalcul` (ms) remplace le délai de 30 s. */
@@ -38,6 +43,7 @@ function demarrerOutil(config) {
   const moteur = new MoteurPython(outil, { surEtat: () => majEtat() });
   const appelPy = (fn, arg, delai) => moteur.appelPy(fn, arg, delai);
   let cartes = [], visibles = 0, numCalcul = 0;
+  let sortie = null, entreeCourante = "", varianteChoisie = null;          // sortie affichée, saisie dont elle est le corrigé, choix de l'élève (mémoire de la page)
 
   function majEtat() { $("etat").textContent = moteur.sympyOK ? "Prêt." : "Chargement du moteur de calcul…"; }
 
@@ -141,30 +147,93 @@ function demarrerOutil(config) {
 
   function afficher(r, entree) {
     $("resultat").hidden = false;
-    const box = $("cartes");
-    box.innerHTML = "";
-    cartes = [];
+    sortie = r;
+    entreeCourante = entree;
+    const barre = $("variantes");
+    if (barre) barre.hidden = true;
     if (!r.ok) {
+      const box = $("cartes");
+      box.innerHTML = "";
+      cartes = [];
       box.appendChild(rendreErreur(r));
       $("suivant").disabled = $("tout").disabled = true;
       $("progression").textContent = "";
       return;
     }
-    const contexte = { appelPy, entree };
-    if (r.entete) box.appendChild(rendreCarte(r.entete, contexte));       // toujours visible, hors du compteur d'étapes
-    cartes = r.cartes.map(c => rendreCarte(c, contexte));
-    cartes.forEach(c => { c.classList.add("cache"); box.appendChild(c); });
-    visibles = 0;
-    montrer(1);
+    if (r.variantes) barreVariantes(r);
+    poserCartes(r.variantes ? varianteAffichee(r).cartes : r.cartes, 1, true);
   }
 
-  function montrer(n) {
+  /* Les cartes de la sortie (ou de la variante choisie), `n` visibles. */
+  function poserCartes(liste, n, defiler) {
+    const box = $("cartes");
+    box.innerHTML = "";
+    const contexte = { appelPy, entree: entreeCourante };
+    if (sortie.entete) box.appendChild(rendreCarte(sortie.entete, contexte));       // toujours visible, hors du compteur d'étapes
+    cartes = liste.map(c => rendreCarte(c, contexte));
+    cartes.forEach(c => { c.classList.add("cache"); box.appendChild(c); });
+    visibles = 0;
+    montrer(n, defiler);
+  }
+
+  /* ---------- variantes de résolution (sélecteur de méthode) ---------- */
+  const cleStockage = "variante:" + outil;
+  function varianteMemorisee() {
+    if (varianteChoisie) return varianteChoisie;
+    try { return localStorage.getItem(cleStockage); } catch (e) { return null; }       // stockage absent ou refusé : le défaut
+  }
+  function varianteAffichee(r) {
+    const cle = varianteMemorisee();
+    return r.variantes.find(v => v.cle === cle) || r.variantes.find(v => v.cle === r.variante_defaut) || r.variantes[0];
+  }
+  function barreVariantes(r) {
+    let barre = $("variantes");
+    if (!barre) {
+      barre = document.createElement("div");
+      barre.id = "variantes";
+      $("resultat").insertBefore(barre, $("resultat").firstChild);
+      const imprimee = document.createElement("div");
+      imprimee.id = "methodeImprimee";
+      imprimee.className = "imprime-seulement";
+      $("resultat").insertBefore(imprimee, $("cartes"));
+    }
+    barre.className = "variantes no-print";
+    barre.setAttribute("role", "group");
+    barre.setAttribute("aria-label", "Méthode de résolution");
+    barre.hidden = false;
+    barre.innerHTML = "";
+    for (const v of r.variantes) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.dataset.variante = v.cle;
+      b.textContent = v.libelle;
+      b.onclick = () => choisirVariante(v.cle);
+      barre.appendChild(b);
+    }
+    marquerVariante(varianteAffichee(r));
+  }
+  function marquerVariante(v) {
+    document.querySelectorAll("#variantes button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.variante === v.cle)));
+    $("methodeImprimee").textContent = "Méthode : " + v.libelle;
+  }
+  function choisirVariante(cle) {
+    if (!sortie || !sortie.variantes) return;
+    const v = sortie.variantes.find(x => x.cle === cle);
+    if (!v || v === varianteAffichee(sortie)) return;
+    varianteChoisie = cle;
+    try { localStorage.setItem(cleStockage, cle); } catch (e) { /* le choix reste en mémoire pour cette page */ }
+    marquerVariante(v);
+    const toutAffiche = visibles >= cartes.length;
+    poserCartes(v.cartes, toutAffiche ? v.cartes.length : Math.min(Math.max(visibles, 1), v.cartes.length), false);       // pas de défilement : l'élève reste où il est
+  }
+
+  function montrer(n, defiler = n === 1) {
     visibles = Math.min(cartes.length, visibles + n);
     cartes.forEach((c, i) => c.classList.toggle("cache", i >= visibles));
     $("suivant").disabled = $("tout").disabled = visibles >= cartes.length;
     $("progression").textContent = `Étape ${visibles} / ${cartes.length}`;
     const der = cartes[visibles - 1];
-    if (der && n === 1) der.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    if (der && defiler) der.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
   $("suivant").onclick = () => montrer(1);
   $("tout").onclick = () => montrer(cartes.length);

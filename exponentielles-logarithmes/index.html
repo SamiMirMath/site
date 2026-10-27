@@ -60,13 +60,16 @@ details ol,details ul{margin:.4em 0 0;padding-left:1.2em}
       <summary>Rappel de la méthode</summary>
       <p class="hint" style="margin:.4em 0 0">Selon la forme de l'équation :</p>
       <ol>
-        <li><b>Même base</b> : on écrit les deux membres avec la même base, puis \(a^A=a^B\iff A=B\). Exemple : \(4^x=8\iff 2^{2x}=2^3\iff 2x=3\).</li>
-        <li><b>Logarithme</b> : on isole l'exponentielle, puis \(10^x=b\iff x=\log(b)\) et \(e^x=b\iff x=\ln(b)\) ; pour une autre base, on prend le logarithme des deux membres : \(a^x=b\iff x\log(a)=\log(b)\). Si \(b\le0\), il n'y a aucune solution : une exponentielle est strictement positive.</li>
-        <li><b>Bases différentes</b> : \(a^f=b^h\) : logarithme des deux membres, on développe, on met \(x\) en facteur, puis on divise.</li>
+        <li><b>Équation exponentielle</b> : deux méthodes, au choix avec les boutons placés au-dessus du corrigé.
+          <ul>
+            <li><b>Même base / définition</b> : on écrit les deux membres avec la même base, puis \(a^A=a^B\iff A=B\). Exemple : \(4^x=8\iff 2^{2x}=2^3\iff 2x=3\). Pour une base 10 ou e : \(10^x=b\iff x=\log(b)\) et \(e^x=b\iff x=\ln(b)\). Sinon, le corrigé dit qu'il faut les logarithmes.</li>
+            <li><b>Logarithmes</b> (toujours possible) : on isole l'exponentielle, on prend le logarithme des deux membres (\(\ln\) dès qu'une base est \(e\)), puis \(\log(a^A)=A\log(a)\) ; on remplace \(\log(10)\) et \(\ln(e)\) par 1 ; on divise par \(\log(a)\). Exemple : \(10^x=8\iff x\log(10)=\log(8)\iff x=\log(8)\). Si le second membre est négatif ou nul, il n'y a aucune solution : une exponentielle est strictement positive.</li>
+            <li><b>Bases différentes</b> : \(a^f=b^h\) : logarithme des deux membres, on développe, on met \(x\) en facteur, puis on divise.</li>
+          </ul></li>
         <li><b>Équation logarithmique</b> : \(\log_a(u)=c\iff u=a^c\) (définition du logarithme), puis on vérifie que l'argument est strictement positif. Si la base est l'inconnue : \(x>0\) et \(x\neq1\).</li>
         <li><b>Calculer \(\log_a(y)\)</b> : si \(y=a^k\), alors \(\log_a(y)=k\) ; sinon \(\log_a(y)=\dfrac{\log(y)}{\log(a)}\) (changement de base).</li>
       </ol>
-      <p class="hint" style="margin:.6em 0 0">Propriétés utiles : \(\log(10^k)=k\), \(\ln(e^k)=k\), \(\log(a^A)=A\log(a)\), \(\log(a)-\log(b)=\log\left(\dfrac ab\right)\), \(\log(a)+\log(b)=\log(ab)\).</p>
+      <p class="hint" style="margin:.6em 0 0">Propriétés utiles : \(\log(a^A)=A\log(a)\), \(\log(10)=1\), \(\ln(e)=1\), \(\log(a)-\log(b)=\log\left(\dfrac ab\right)\), \(\log(a)+\log(b)=\log(ab)\). Quand une solution est un nombre simple écrit avec des logarithmes, vérifiez-la à la calculatrice.</p>
     </details>
   </div>
 
