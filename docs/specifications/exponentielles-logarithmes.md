@@ -84,6 +84,8 @@ puis une grille CSS `.chaine` (page) ; ce n'est pas l'environnement `aligned` de
 Dans la sortie de `resoudre_el.py` : chaque chaîne est un bloc `texte` (style `etape`) `<div class="chaine">` de lignes `<div class="ligne">` (lien, expression et propriété en trois `span`), chaque TeX entre `\(` et `\)` (le « < » est écrit `&lt;`), la remarque du moteur
 (« Δ < 0 : l'équation n'a aucune solution réelle. ») est le dernier bloc de la dernière carte d'étapes, et la carte finale est « Solution » (bloc `resultat` = `tex_solution`) pour une équation,
 « Résultat » (`tex_resultat`) pour un calcul.
+Pour une équation exponentielle, la sortie porte en plus `variantes` (« Même base / définition », « Logarithmes ») et `variante_defaut` = « logarithmes » ; `cartes` est celle de la variante par défaut. Dans la carte « Solution » d'une solution rationnelle écrite avec des logarithmes,
+le bloc `texte` qui suit `S = {…}` est la phrase « Contrôlez à la calculatrice : … » (`controle_calculatrice`). Quand la méthode « Même base / définition » ne s'applique pas, sa dernière carte (« Étape k », badge « Même base / définition ») contient la phrase « b n'est pas une puissance de a : il faut les logarithmes. » et il n'y a pas de carte « Solution ».
 
 **Une équation à même base tient en deux cartes au plus** (validé le 26.10.2026) : « Isoler l'exponentielle » (seulement si l'équation
 s'écrit k·a^f + c = d…), puis « Même base », qui contient la réécriture des membres (lignes de « = ») **et** la chaîne unique de ⇔

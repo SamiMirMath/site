@@ -133,7 +133,11 @@ class TestCartes(unittest.TestCase):
                     self.assertTrue(all(b["type"] == "texte" for b in c["blocs"]))
                 final = cartes[-1]
                 self.assertEqual((final["titre"], final["style"]), ("Solution", "final"))
-                self.assertEqual([b["type"] for b in final["blocs"]], ["resultat"])
+                sa = el.analyser_saisie(entree)
+                controle = el.controle_calculatrice(el.corriger_equation(sa.g, sa.d, sa.inconnue))
+                self.assertEqual([b["type"] for b in final["blocs"]], ["resultat"] + (["texte"] if controle else []))
+                if controle:
+                    self.assertEqual(final["blocs"][1], {"type": "texte", "html": controle, "style": "etape"})
 
     def test_la_carte_finale_est_celle_du_moteur(self):
         """EL-18 sur la sortie élève : S = {valeur exacte}, puis « soit x ≈ … » quand une solution n'est pas un rationnel."""
@@ -204,6 +208,97 @@ class TestCartes(unittest.TestCase):
             self.assertEqual(rel.resoudre(e), rel.resoudre(e))
             if e in seul:
                 self.assertEqual(rel.resoudre(e), seul[e], e)
+
+
+def est_exponentielle(entree):
+    try:
+        s = el.analyser_saisie(entree)
+    except el.ErreurSaisie:
+        return False
+    return s.genre == "equation" and el.variantes_equation(s.g, s.d, s.inconnue) is not None
+
+
+def exponentielles():
+    return [e for e in entrees_el() if est_exponentielle(e)]
+
+
+class TestVariantes(unittest.TestCase):
+    """Sélecteur de méthode (27.10.2026, SOC-17 / EL-19) : deux résolutions par équation exponentielle, « Logarithmes » par défaut."""
+
+    def test_une_equation_exponentielle_a_deux_variantes(self):
+        vues = 0
+        for entree in exponentielles():
+            with self.subTest(entree=entree):
+                s = rel.resoudre(entree)
+                self.assertEqual(so.valider(s), [])
+                self.assertEqual([(v["cle"], v["libelle"]) for v in s["variantes"]],
+                                 [("meme_base", "Même base / définition"), ("logarithmes", "Logarithmes")])
+                self.assertEqual(s["variante_defaut"], "logarithmes")
+                self.assertEqual(s["cartes"], s["variantes"][1]["cartes"])
+                vues += 1
+        self.assertGreater(vues, 100)
+
+    def test_ni_les_equations_logarithmiques_ni_les_calculs_ni_les_erreurs_n_ont_de_variantes(self):
+        for entree in entrees_el():
+            if est_exponentielle(entree):
+                continue
+            with self.subTest(entree=entree):
+                s = rel.resoudre(entree)
+                self.assertNotIn("variantes", s)
+                self.assertNotIn("variante_defaut", s)
+
+    def test_methode_a_qui_s_applique(self):
+        a = {v["cle"]: v for v in rel.resoudre("10^(x+1)=10^8")["variantes"]}
+        self.assertEqual([c["titre"] for c in a["meme_base"]["cartes"]], ["Étape 1", "Solution"])
+        self.assertEqual(a["meme_base"]["cartes"][0]["badge"], "Même base")
+        self.assertEqual(a["meme_base"]["cartes"][-1]["blocs"][0]["tex"], r"S = \left\{7\right\}")
+        self.assertEqual(a["logarithmes"]["cartes"][0]["badge"], "Logarithme des deux membres")
+        self.assertEqual(a["logarithmes"]["cartes"][-1]["blocs"][0]["tex"], r"S = \left\{7\right\}")
+        d = {v["cle"]: v for v in rel.resoudre("10^x=8")["variantes"]}
+        self.assertEqual(d["meme_base"]["cartes"][0]["badge"], "Définition du logarithme")
+        self.assertEqual(d["meme_base"]["cartes"][-1]["blocs"][0]["tex"], r"S = \left\{\log(8)\right\} \text{, soit } x \approx 0{,}903")
+
+    def test_methode_a_qui_ne_s_applique_pas_le_dit_sans_solution(self):
+        for entree, phrase in [("3^x=20", r"\(20\) n'est pas une puissance de \(3\) : il faut les logarithmes."),
+                               ("2^(x-1)=3^x", r"\(3\) n'est pas une puissance de \(2\) : il faut les logarithmes."),
+                               ("e^x=2^x", r"\(2\) n'est pas une puissance de \(e\) : il faut les logarithmes.")]:
+            with self.subTest(entree=entree):
+                s = rel.resoudre(entree)
+                a = s["variantes"][0]
+                self.assertEqual(a["cle"], "meme_base")
+                derniere = a["cartes"][-1]
+                self.assertEqual(derniere["badge"], "Même base / définition")
+                self.assertEqual(derniere["blocs"], [{"type": "texte", "html": phrase, "style": "etape"}])
+                self.assertNotIn("Solution", [c["titre"] for c in a["cartes"]])               # pas de carte finale
+                self.assertEqual(s["variantes"][1]["cartes"][-1]["titre"], "Solution")         # la méthode « logarithmes » est toujours disponible
+        a = rel.resoudre("3*2^x=5")["variantes"][0]["cartes"]
+        self.assertEqual([(c["titre"], c["badge"]) for c in a], [("Étape 1", "Isoler l'exponentielle"), ("Étape 2", "Même base / définition")])
+
+    def test_le_controle_a_la_calculatrice_est_dans_la_carte_solution_de_la_methode_b(self):
+        s = rel.resoudre("2^(x-1)=32")
+        b = s["variantes"][1]["cartes"][-1]
+        self.assertEqual(b["blocs"][0], {"type": "resultat", "tex": r"S = \left\{1 + \frac{\log(32)}{\log(2)}\right\}"})
+        self.assertEqual(b["blocs"][1], {"type": "texte", "style": "etape",
+                                         "html": r"Contrôlez à la calculatrice : \(\frac{\log(32)}{\log(2)} = 5\), on retrouve \(x = 6\)."})
+        a = s["variantes"][0]["cartes"][-1]
+        self.assertEqual([x["type"] for x in a["blocs"]], ["resultat"])                         # la méthode « même base » écrit S = {6}
+        self.assertEqual(a["blocs"][0]["tex"], r"S = \left\{6\right\}")
+        self.assertEqual([x["type"] for x in rel.resoudre("10^(2x)=0,01")["cartes"][-1]["blocs"]], ["resultat"])        # S = {−1} : aucun contrôle
+
+    def test_aucune_solution_est_la_meme_dans_les_deux_variantes(self):
+        s = rel.resoudre("5^(8x)=-25")
+        self.assertEqual(s["variantes"][0]["cartes"], s["variantes"][1]["cartes"])
+        self.assertEqual(s["cartes"][-1]["blocs"][0]["tex"], r"S = \varnothing")
+
+    def test_html_echappe_et_json_strict(self):
+        for entree in exponentielles():
+            with self.subTest(entree=entree):
+                json.loads(rel.resoudre_json(entree))
+                for v in rel.resoudre(entree)["variantes"]:
+                    for c in v["cartes"]:
+                        for b in c["blocs"]:
+                            if b["type"] == "texte":
+                                self.assertNotIn("<", re.sub(r"</?(div|span)[^>]*>", "", b["html"]))
 
 
 class TestMessages(unittest.TestCase):
