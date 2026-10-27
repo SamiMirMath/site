@@ -757,6 +757,576 @@
   "erreur": "Il manque une parenthèse fermante.",
   "ok": false
  },
+ "(x-1)(2^x-8)=0": {
+  "cartes": [
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\((x - 1)(2^{x} - 8) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x - 1 = 0 \\text{ ou } 2^{x} - 8 = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Facteur 1",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x - 1 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Facteur 2",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} - 8 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} = 8\\)</span><span class=\"prop\">(on isole le terme exponentiel)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 8\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(8)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(8)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(8)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{1 \\,;\\, \\frac{\\log(8)}{\\log(2)}\\right\\}",
+      "type": "resultat"
+     },
+     {
+      "html": "Contrôlez à la calculatrice : on retrouve \\(x = 1\\) ou \\(x = 3\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "(x - 1)(2^{x} - 8) = 0",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\((x - 1)(2^{x} - 8) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x - 1 = 0 \\text{ ou } 2^{x} - 8 = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Facteur 1",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x - 1 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 1\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Facteur 2",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} - 8 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} = 8\\)</span><span class=\"prop\">(on isole le terme exponentiel)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(8 = 2^{3}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2^{3}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 3\\)</span><span class=\"prop\">(même base : a^A = a^B ⇔ A = B)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{1 \\,;\\, 3\\right\\}",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\((x - 1)(2^{x} - 8) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x - 1 = 0 \\text{ ou } 2^{x} - 8 = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Facteur 1",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x - 1 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 1\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Facteur 2",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} - 8 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} = 8\\)</span><span class=\"prop\">(on isole le terme exponentiel)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 8\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(8)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(8)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(8)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{1 \\,;\\, \\frac{\\log(8)}{\\log(2)}\\right\\}",
+        "type": "resultat"
+       },
+       {
+        "html": "Contrôlez à la calculatrice : on retrouve \\(x = 1\\) ou \\(x = 3\\).",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
+ "(x^2+1)*2^x=0": {
+  "cartes": [
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\((x^{2} + 1) \\cdot 2^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} + 1 = 0 \\text{ ou } 2^{x} = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Facteur 1",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x^{2} + 1 = 0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(Δ = 0^{2} - 4 \\cdot 1 \\cdot 1 = -4\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Δ &lt; 0 : l'équation n'a aucune solution réelle.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Facteur 2",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\varnothing",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "(x^{2} + 1) \\cdot 2^{x} = 0",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\((x^{2} + 1) \\cdot 2^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} + 1 = 0 \\text{ ou } 2^{x} = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Facteur 1",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x^{2} + 1 = 0\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(Δ = 0^{2} - 4 \\cdot 1 \\cdot 1 = -4\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "Δ &lt; 0 : l'équation n'a aucune solution réelle.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Facteur 2",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\varnothing",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\((x^{2} + 1) \\cdot 2^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} + 1 = 0 \\text{ ou } 2^{x} = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Facteur 1",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x^{2} + 1 = 0\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(Δ = 0^{2} - 4 \\cdot 1 \\cdot 1 = -4\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "Δ &lt; 0 : l'équation n'a aucune solution réelle.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Facteur 2",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\varnothing",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
+ "(x^2-1)*e^x=0": {
+  "cartes": [
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\((x^{2} - 1) \\cdot e^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - 1 = 0 \\text{ ou } e^{x} = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Facteur 1",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x^{2} - 1 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 1)(x - 1) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -1 \\text{ ou } x = 1\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Facteur 2",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x} = 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-1 \\,;\\, 1\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "(x^{2} - 1) \\cdot e^{x} = 0",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\((x^{2} - 1) \\cdot e^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - 1 = 0 \\text{ ou } e^{x} = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Facteur 1",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x^{2} - 1 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 1)(x - 1) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -1 \\text{ ou } x = 1\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Facteur 2",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x} = 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{-1 \\,;\\, 1\\right\\}",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\((x^{2} - 1) \\cdot e^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - 1 = 0 \\text{ ou } e^{x} = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Facteur 1",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x^{2} - 1 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 1)(x - 1) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -1 \\text{ ou } x = 1\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Facteur 2",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x} = 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{-1 \\,;\\, 1\\right\\}",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
  "-2^x-5^x=0": {
   "cartes": [
    {
@@ -3632,8 +4202,179 @@
   ]
  },
  "10^x*(x-4)=0": {
-  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
-  "ok": false
+  "cartes": [
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(10^{x} \\cdot (x - 4) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{x} = 0 \\text{ ou } x - 4 = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Facteur 1",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(10^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(10^{x} = 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Facteur 2",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x - 4 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 4\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{4\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "10^{x} \\cdot (x - 4) = 0",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(10^{x} \\cdot (x - 4) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{x} = 0 \\text{ ou } x - 4 = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Facteur 1",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(10^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(10^{x} = 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Facteur 2",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x - 4 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 4\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{4\\right\\}",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(10^{x} \\cdot (x - 4) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{x} = 0 \\text{ ou } x - 4 = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Facteur 1",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(10^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(10^{x} = 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Facteur 2",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x - 4 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 4\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{4\\right\\}",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
  },
  "10^x=0": {
   "cartes": [
@@ -8315,6 +9056,247 @@
   "erreur": "Cet outil ne traite pas encore ce type d'équation.",
   "ok": false
  },
+ "2^x*(x+2)*(3^x-9)=0": {
+  "cartes": [
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} \\cdot (x + 2) \\cdot (3^{x} - 9) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} = 0 \\text{ ou } x + 2 = 0 \\text{ ou } 3^{x} - 9 = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Facteur 1",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Facteur 2",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x + 2 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -2\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Facteur 3",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} - 9 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3^{x} = 9\\)</span><span class=\"prop\">(on isole le terme exponentiel)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 9\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x}) = \\log(9)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = \\log(9)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(9)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-2 \\,;\\, \\frac{\\log(9)}{\\log(3)}\\right\\}",
+      "type": "resultat"
+     },
+     {
+      "html": "Contrôlez à la calculatrice : on retrouve \\(x = -2\\) ou \\(x = 2\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{x} \\cdot (x + 2) \\cdot (3^{x} - 9) = 0",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} \\cdot (x + 2) \\cdot (3^{x} - 9) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} = 0 \\text{ ou } x + 2 = 0 \\text{ ou } 3^{x} - 9 = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Facteur 1",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Facteur 2",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x + 2 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -2\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Facteur 3",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} - 9 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3^{x} = 9\\)</span><span class=\"prop\">(on isole le terme exponentiel)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(9 = 3^{2}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 3^{2}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 2\\)</span><span class=\"prop\">(même base : a^A = a^B ⇔ A = B)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{-2 \\,;\\, 2\\right\\}",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} \\cdot (x + 2) \\cdot (3^{x} - 9) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} = 0 \\text{ ou } x + 2 = 0 \\text{ ou } 3^{x} - 9 = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Facteur 1",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Facteur 2",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x + 2 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -2\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Facteur 3",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} - 9 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3^{x} = 9\\)</span><span class=\"prop\">(on isole le terme exponentiel)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 9\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x}) = \\log(9)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = \\log(9)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(9)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{-2 \\,;\\, \\frac{\\log(9)}{\\log(3)}\\right\\}",
+        "type": "resultat"
+       },
+       {
+        "html": "Contrôlez à la calculatrice : on retrouve \\(x = -2\\) ou \\(x = 2\\).",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
  "2^x+1=3^x": {
   "erreur": "Cet outil ne traite pas encore ce type d'équation.",
   "ok": false
@@ -11667,6 +12649,181 @@
       "blocs": [
        {
         "tex": "S = \\left\\{\\ln\\left(\\frac{13}{60}\\right)\\right\\} \\text{, soit } x \\approx -1{,}529",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
+ "3x*2^x=0": {
+  "cartes": [
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3x \\cdot 2^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } 2^{x} = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Facteur 1",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Facteur 2",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{0\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3x \\cdot 2^{x} = 0",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3x \\cdot 2^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } 2^{x} = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Facteur 1",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Facteur 2",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{0\\right\\}",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3x \\cdot 2^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } 2^{x} = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Facteur 1",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Facteur 2",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{0\\right\\}",
         "type": "resultat"
        }
       ],
@@ -19058,6 +20215,181 @@
  "tan(x)=2": {
   "erreur": "La fonction tan n'est pas traitée par cet outil.",
   "ok": false
+ },
+ "x*2^x=0": {
+  "cartes": [
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x \\cdot 2^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } 2^{x} = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Facteur 1",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Facteur 2",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{0\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "x \\cdot 2^{x} = 0",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x \\cdot 2^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } 2^{x} = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Facteur 1",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Facteur 2",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{0\\right\\}",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x \\cdot 2^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } 2^{x} = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Facteur 1",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Facteur 2",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{0\\right\\}",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
  },
  "x*2^x=8": {
   "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",

@@ -39,7 +39,7 @@ BATTERIE_E2 = [
 ]
 
 SANS_E2 = ["x*2^x=8", "2^x+3^x=5", "x^x=4", "2^(x^3)=8",
-           "x^2=4", "2x+1=9", "sqrt(2)^x=3", "10^x*(x-4)=0", "2*10^x=0*x"]
+           "x^2=4", "2x+1=9", "sqrt(2)^x=3", "2*10^x=0*x"]
 
 # (saisie, solution arrondie à 10⁻³) : exercice 2.24 a-c du corrigé, p. 26 n° 3, puis d'autres formes
 BATTERIE_E3 = [
@@ -106,12 +106,15 @@ BATTERIE_AUDIT = [
     # base inconnue, exposant négatif ou nul, argument 1 (T7)
     ("log_x(8)=-1", [0.125]), ("log_x(4)=-2", [0.5]), ("log_x(1/9)=-2", [3.0]), ("log_x(2)=-3", [0.794]), ("log_x(5)=0", []), ("log_x(1)=0", None),
     ("log_x(1)=2", []), ("log_x(1)=3", []), ("log_x(1)=-1", []),
+    # produit nul polynôme × exponentielle (T8)
+    ("x*2^x=0", [0.0]), ("10^x*(x-4)=0", [4.0]), ("(x^2-1)*e^x=0", [-1.0, 1.0]), ("3x*2^x=0", [0.0]), ("(x^2+1)*2^x=0", []),
+    ("(x-1)(2^x-8)=0", [1.0, 3.0]), ("2^x*(x+2)*(3^x-9)=0", [-2.0, 2.0]),
 ]
 
 # Aucune méthode ne s'applique (EL-11) : un vrai hors-programme, ou une forme du programme que l'outil ne gère pas encore
 HORS_PROGRAMME = ["x*2^x=8", "2^x+3^x=5", "x^x=4", "2^x=x+1", "2^(sqrt(x))=4", "2^(1/x)=4", "x/2^x=1", "x*e^x=1", "2^x=3^x+x",
                   "log(x)=x-1", "ln(x)=x", "x*log(x)=1", "e^x=ln(x)", "log(x)=2^x", "log(x)/x=1", "ln(x)+x=2"]
-PAS_ENCORE = ["log(x)=log(5)", "log(x^2+1)=-1", "10^x*(x-4)=0", "2^x+2^(x+1)=12", "e^x+e^(-x)=3",
+PAS_ENCORE = ["log(x)=log(5)", "log(x^2+1)=-1", "2^x+2^(x+1)=12", "e^x+e^(-x)=3",
               "log(x)+log(x-1)=1", "x^2=4", "2x+1=9", "2^(x^3)=8", "2^(x^3)=3^x", "5^(x^3+1)=7", "log(x)+log(2)=1", "log(x)-log(2)=1"]
 
 # Calculs que l'outil ne traite pas (message de calcul) et saisies refusées à la lecture

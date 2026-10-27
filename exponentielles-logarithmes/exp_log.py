@@ -2361,12 +2361,21 @@ def _produit_nul(g, d, x, methode):
         produit = d
     else:
         raise _Hors
-    facteurs = _aplatir(produit)
-    if len(facteurs) > len(NOMS_FACTEURS) or any(not variables(f) for f in facteurs):
+    facteurs = [f for f in _aplatir(produit) if variables(f)]
+    if any(_signe(f) == 0 for f in _aplatir(produit) if not variables(f)):
+        raise _Hors                                        # un facteur constant nul : l'égalité est vraie pour tout x
+    if not 2 <= len(facteurs) <= len(NOMS_FACTEURS) or not any(_classe(f) == "exp" for f in facteurs):
         raise _Hors
     etapes = [_carte("Produit nul", [Chaine([Eq(g, d), Ou(Eq(f, Nb(0)) for f in facteurs)], ["⇔"], [PROP_PRODUIT_NUL])])]
     solutions = []
     for nom, f in zip(NOMS_FACTEURS, facteurs):
+        if _classe(f) == "poly":                           # x · 2^x = 0 : le facteur x = 0 se résout comme une équation du 1er ou du 2e degré
+            lignes, sols, remarque = _resoudre_polynome(_poly(f, x), [F(0)], f, Nb(0), x)
+            if sols is None:
+                raise _Hors
+            etapes.append(_carte(nom, lignes + ([Message(remarque)] if remarque else [])))
+            solutions += [n for n in sols if all(abs(valeur(n) - valeur(m)) > 1e-12 for m in solutions)]
+            continue
         r = _essayer(lambda: _un_facteur(f, Nb(0), x, methode), lambda: _apres_isolement(f, Nb(0), x, methode))
         etapes.append(_carte(nom, [l for c in r["etapes"] for l in c["lignes"]]))
         if r.get("message"):

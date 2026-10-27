@@ -270,6 +270,26 @@ class TestBaseInconnue(unittest.TestCase):
             self.assertEqual(el.tex_solution(corriger(saisie)), r"S = \varnothing", saisie)
 
 
+class TestProduitNulPolynomeExponentielle(unittest.TestCase):
+    """Groupe 7 (T8) : x · 2^x = 0 ⇔ x = 0 ou 2^x = 0, et 2^x = 0 n'a aucune solution."""
+
+    def test_redaction(self):
+        r = corriger("x*2^x=0")
+        self.assertEqual([c["titre"] for c in r["etapes"]], ["Produit nul", "Facteur 1", "Facteur 2"])
+        self.assertEqual(lignes("x*2^x=0"), [
+            r"x \cdot 2^{x} = 0 \iff x = 0 \text{ ou } 2^{x} = 0 \quad \text{(un produit est nul si l'un des facteurs est nul)}", "x = 0",
+            r"2^{x} > 0 \quad \text{(une exponentielle est strictement positive)}", r"2^{x} = 0 \quad \text{(aucune solution)}"])
+        self.assertEqual(lignes("10^x*(x-4)=0")[-1], r"x - 4 = 0 \iff x = 4")
+        v = resultats("x*2^x=0")
+        self.assertEqual(rendu(v[el.METHODE_MEME_BASE]), rendu(v[el.METHODE_LOGARITHMES]))
+
+    def test_facteur_constant_et_trinome_sans_solution(self):
+        self.assertEqual(lignes("3x*2^x=0")[0],
+                         r"3x \cdot 2^{x} = 0 \iff x = 0 \text{ ou } 2^{x} = 0 \quad \text{(un produit est nul si l'un des facteurs est nul)}")
+        self.assertEqual(el.tex_solution(corriger("(x^2+1)*2^x=0")), r"S = \varnothing")
+        self.assertIsNone(el.corriger_equation(*el.lire_membres("(x-1)(x+2)=0"), "x"))        # sans exponentielle : pas une équation du chapitre
+
+
 class TestMessages(unittest.TestCase):
     def test_logarithme_et_terme_en_x_ou_exponentielle_hors_programme(self):
         """Groupe 2 : un logarithme avec un terme en x ou une exponentielle (de part et d'autre, ou en facteur) n'est pas une équation du cours."""
