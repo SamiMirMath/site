@@ -65,7 +65,31 @@ class TestExercices(unittest.TestCase):
                     for n in r["solutions"]:
                         self.assertTrue(vrai(Eq(s.g, s.d), evaluer(n)), (expr, el.tex(n)))
                     if "x^2" in expr:                                           # racines entières (jamais de discriminant non carré)
-                        self.assertTrue(all(el._const(n) is not None and el._const(n).denominator == 1 for n in r["solutions"]), expr)
+                        self.assertTrue(all(el._valeur_rationnelle(n) is not None and el._valeur_rationnelle(n).denominator == 1 for n in r["solutions"]), expr)
+
+    def test_les_deux_methodes_donnent_le_meme_S(self):
+        """Sélecteur (27.10.2026) : « Même base / définition » et « Logarithmes » ont le même ensemble solution ; quand la méthode A ne s'applique pas,
+        elle le dit (message) au lieu de donner des solutions ; les équations logarithmiques n'ont pas de variantes."""
+        for niveau in el.NIVEAUX:
+            for graine in GRAINES:
+                expr = el.exercice(niveau, graine)["expr"]
+                with self.subTest(niveau=niveau, expr=expr):
+                    s = el.analyser_saisie(expr)
+                    v = el.variantes_equation(s.g, s.d, s.inconnue)
+                    if expr.startswith(("log", "ln")):
+                        self.assertIsNone(v, expr)
+                        continue
+                    a, b = v[el.METHODE_MEME_BASE], v[el.METHODE_LOGARITHMES]
+                    self.assertIsNone(b.get("message"), expr)
+                    if a.get("message"):
+                        self.assertEqual(a["solutions"], [])
+                        self.assertRegex(a["message"].texte(), r" n'est pas une puissance de .* : il faut les logarithmes\.$")
+                        continue
+                    valeurs = lambda r: None if r["solutions"] is None else sorted(el.valeur(n) for n in r["solutions"])
+                    va, vb = valeurs(a), valeurs(b)
+                    self.assertEqual(len(va), len(vb), expr)
+                    for x, y in zip(va, vb):
+                        self.assertAlmostEqual(x, y, places=9, msg=expr)
 
     def test_le_niveau_logarithme_n_est_jamais_une_meme_base(self):
         for graine in GRAINES:
