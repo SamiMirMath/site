@@ -334,6 +334,13 @@ class TestMessages(unittest.TestCase):
             with self.subTest(saisie):
                 self.assertEqual(rel.resoudre(saisie), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
 
+    def test_mise_en_facteur_et_second_degre_en_a_puissance_x_hors_programme_quelle_que_soit_la_base(self):
+        """Groupe 10 (D1, D2) : le même message pour 4^x − 2^x − 6 = 0 et e^(2x) − 3e^x + 2 = 0 (avant : « hors programme » ou « pas encore » selon la base)."""
+        for saisie in ["2^x+2^(x+1)=12", "2^x+2^x=8", "3^(x+1)+3^x=36", "2^(x+2)-2^x=12", "5^x+5^(x+1)+5^(x+2)=155", "4^x-2^x-6=0", "9^x-3^x=6",
+                       "4^x+2^x=6", "e^(2x)-3e^x+2=0", "e^x+e^(-x)=3", "2^(2x)-5*2^x+4=0", "3^(2x)-4*3^x+3=0", "2^x+2^(-x)=2", "2*4^x-3*2^x+1=0"]:
+            with self.subTest(saisie):
+                self.assertEqual(rel.resoudre(saisie), {"ok": False, "erreur": el.MESSAGE_HORS_PROGRAMME})
+
     def test_aucune_forme_resolue_n_est_classee_hors_programme(self):
         for saisie, _ in BATTERIE_AUDIT:
             with self.subTest(saisie):

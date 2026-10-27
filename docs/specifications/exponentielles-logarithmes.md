@@ -304,6 +304,9 @@ un commit par groupe ; les entrées sont dans `BATTERIE_AUDIT` (`tests/python/ca
    `10^1,5 = 10√10`), puis `x = −√(10^c) ou x = √(10^c)` (`log(x²) = −1 ⇔ x = −√(1/10) ou x = √(1/10)`, `ln(x²) = 1 ⇔ x² = e ⇔ x = ±√e`), puis la Vérification ; jamais `2 log(x)`.
    Un second membre entier garde la factorisation (`x² − 100 = 0 ⇔ (x + 10)(x − 10) = 0`). Les trinômes généraux à coefficients non entiers (`log(x² − 1) = 1/2`) restent « pas encore ».
 9. **Saisie de ² et ³** (clavier d'un téléphone) : lus `^2` et `^3` (`2^(x²)·4^x = 8` est `2^(x^2)·4^x = 8`) ; `2^x²` demande toujours des parenthèses.
+10. **Mise en facteur et 2e degré en aˣ : hors programme pour les 3C** (décision du 27.10.2026) : deux exponentielles avec un troisième terme (`2^x + 2^(x+1) = 12`, `2^x + 2^x = 8`,
+   `4^x − 2^x − 6 = 0`, `e^(2x) − 3e^x + 2 = 0`, `e^x + e^(−x) = 3`, `2^x + 1 = 3^x`) donnent « Cette équation ne se résout pas avec les méthodes du cours. », quelle que soit la base
+   (avant : « hors programme » pour 4 et 2, « pas encore » pour e). Deux exponentielles seules (`a^P ± b^Q = 0`) se résolvent (point 3).
 
 ## Pour les 2M (plus tard, hors de cette version)
 

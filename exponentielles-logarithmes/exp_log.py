@@ -2645,7 +2645,8 @@ def _hors_arbre(n, nul=False):
 
 def hors_programme(g, d, x):
     """Vrai pour une équation dont le type n'est pas dans le cours : x · 2^x = 8, 2^x + 3^x = 5, x^x = 4, 2^x = x + 1, log(x) = x − 1, x · log(x) = 1,
-    e^x = ln(x)."""
+    e^x = ln(x), et pour les 3C deux exponentielles avec un troisième terme, quelle que soit la base (mise en facteur 2^x + 2^(x+1) = 12,
+    2e degré en 2^x : 4^x − 2^x − 6 = 0, e^(2x) − 3e^x + 2 = 0)."""
     try:                                                   # 2^x − 3^(x+1) = 0 se ramène à 2^x = 3^(x+1)
         g2, d2, _ = _isoler_exponentielles(g, d, x)
         return hors_programme(g2, d2, x)
@@ -2659,7 +2660,10 @@ def hors_programme(g, d, x):
     egal_zero = lambda a, b: isinstance(b, Nb) and b.val == 0 and isinstance(a, Op) and a.op == "*"
     if _hors_arbre(g, egal_zero(g, d)) or _hors_arbre(d, egal_zero(d, g)):
         return True
-    classes = {_classe(t) for t in _termes_additifs(g) + _termes_additifs(d)}
+    termes = [t for t in _termes_additifs(g) + _termes_additifs(d) if _const(t) != 0]
+    if len(termes) >= 3 and sum(1 for t in termes if _classe(t) == "exp") >= 2:
+        return True                                        # 2^x + 2^(x+1) = 12 (mise en facteur), 4^x − 2^x − 6 = 0 (2e degré en 2^x) : pas en 3C
+    classes = {_classe(t) for t in termes}
     # une exponentielle et un terme en x, ou un logarithme et un terme en x ou une exponentielle, de part et d'autre (2^x = x + 1, log(x) = x − 1, e^x = ln(x))
     return ("exp" in classes and "poly" in classes) or ("log" in classes and ("poly" in classes or "exp" in classes))
 
