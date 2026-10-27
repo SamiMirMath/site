@@ -312,6 +312,8 @@ un commit par groupe ; les entrées sont dans `BATTERIE_AUDIT` (`tests/python/ca
    Plus de message « il faut les logarithmes » quand la définition peut conclure ; les autres bases (`2^(2x)/2^x = 5`) gardent le message.
 12. **Base inconnue, argument négatif ou nul** (`log_x(−8) = 3`, `log_x(0) = 2`) : carte « Condition », `log_x(−8) = 3 ⇔ x³ = −8` (définition du logarithme), puis carte « Aucune solution » :
    `x³ > 0` (une base admissible est strictement positive, donc xᵏ > 0) et `−8 < 0` (aucune solution) ; S = ∅. Vaut pour tout exposant rationnel.
+13. **Équation sans exponentielle ni logarithme** (`x² = 4`, `2x + 1 = 9`, `√x = 3`) : le message « Cet outil traite les équations exponentielles et logarithmiques. » (`MESSAGE_SANS_EXP_LOG`) remplace
+   « pas encore » ; dès qu'un logarithme ou une puissance d'exposant variable apparaît, les messages d'avant (hors programme / pas encore) restent.
 
 ## Pour les 2M (plus tard, hors de cette version)
 

@@ -127,7 +127,10 @@ HORS_PROGRAMME = ["x*2^x=8", "2^x+3^x=5", "x^x=4", "2^x=x+1", "2^(sqrt(x))=4", "
                   "2^x+2^(x+1)=12", "2^x+2^x=8", "3^(x+1)+3^x=36", "2^(x+2)-2^x=12", "4^x-2^x-6=0", "9^x-3^x=6", "e^(2x)-3e^x+2=0",
                   "e^x+e^(-x)=3", "2^(2x)-5*2^x+4=0", "2^x+1=3^x"]
 PAS_ENCORE = ["log(x)=log(5)", "log(x^2+1)=-1",
-              "log(x)+log(x-1)=1", "x^2=4", "2x+1=9", "2^(x^3)=8", "2^(x^3)=3^x", "5^(x^3+1)=7", "log(x)+log(2)=1", "log(x)-log(2)=1"]
+              "log(x)+log(x-1)=1", "2^(x^3)=8", "2^(x^3)=3^x", "5^(x^3+1)=7", "log(x)+log(2)=1", "log(x)-log(2)=1"]
+
+# Équations sans exponentielle ni logarithme : le message dit ce que l'outil traite
+SANS_EXP_LOG = ["x^2=4", "2x+1=9", "sqrt(x)=3", "(x+1)^3=8", "x^3-x=0", "3x=6", "x/2=1"]
 
 # Calculs que l'outil ne traite pas (message de calcul) et saisies refusées à la lecture
 CALCULS_NON_RESOLUS = ["2log(5)", "log(2)+log(3)", "log_2(e)", "log(0)", "log(-5)", "ln(0)", "2+3", "5", "e", "sqrt(2)"]
@@ -138,5 +141,5 @@ ERREURS_DE_LECTURE = ["", "2e=5", "x+y=3", "x<3", "2^x>=3", "log_1(x)=2", "log x
 def entrees_el():
     """Toutes les entrées de l'outil, sans doublon, dans l'ordre : équations résolues, calculs, messages, erreurs de lecture."""
     saisies = [s for batterie in (BATTERIE_E1, BATTERIE_E2, BATTERIE_E3, BATTERIE_E4, BATTERIE_C1, BATTERIE_AUDIT) for s, _ in batterie]
-    saisies += SANS_E1 + SANS_E2 + SANS_E3 + HORS_PROGRAMME + PAS_ENCORE + CALCULS_NON_RESOLUS + ERREURS_DE_LECTURE
+    saisies += SANS_E1 + SANS_E2 + SANS_E3 + HORS_PROGRAMME + PAS_ENCORE + SANS_EXP_LOG + CALCULS_NON_RESOLUS + ERREURS_DE_LECTURE
     return list(dict.fromkeys(saisies))

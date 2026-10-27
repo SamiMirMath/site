@@ -9,7 +9,7 @@ import exp_log as el
 import resoudre_el as rel
 import sortie as so
 from cas_el import (BATTERIE_C1, BATTERIE_E1, BATTERIE_E2, BATTERIE_E3, BATTERIE_E4, CALCULS_NON_RESOLUS, ERREURS_DE_LECTURE, HORS_PROGRAMME,
-                    PAS_ENCORE, entrees_el)
+                    PAS_ENCORE, SANS_EXP_LOG, entrees_el)
 
 EQUATIONS = [s for batterie in (BATTERIE_E1, BATTERIE_E2, BATTERIE_E3, BATTERIE_E4) for s, _ in batterie]
 CALCULS = [s for s, _ in BATTERIE_C1]
@@ -319,8 +319,13 @@ class TestMessages(unittest.TestCase):
             with self.subTest(entree=entree):
                 self.assertEqual(self.erreur(entree), "Cet outil ne traite pas encore ce type d'équation.")
 
+    def test_sans_exponentielle_ni_logarithme(self):
+        for entree in SANS_EXP_LOG:
+            with self.subTest(entree=entree):
+                self.assertEqual(self.erreur(entree), "Cet outil traite les équations exponentielles et logarithmiques.")
+
     def test_jamais_non_applicable(self):
-        for entree in HORS_PROGRAMME + PAS_ENCORE + CALCULS_NON_RESOLUS + ERREURS_DE_LECTURE:
+        for entree in HORS_PROGRAMME + PAS_ENCORE + SANS_EXP_LOG + CALCULS_NON_RESOLUS + ERREURS_DE_LECTURE:
             with self.subTest(entree=entree):
                 self.assertNotIn("applicable", self.erreur(entree))
 

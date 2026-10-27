@@ -35,6 +35,7 @@ MESSAGE_E = "La lettre e désigne le nombre e ≈ 2,718 : choisissez une autre l
 MESSAGE_EXPOSANT = "Mettez l'exposant entre parenthèses : e^(-0,02t)."
 MESSAGE_HORS_PROGRAMME = "Cette équation ne se résout pas avec les méthodes du cours."
 MESSAGE_PAS_ENCORE = "Cet outil ne traite pas encore ce type d'équation."
+MESSAGE_SANS_EXP_LOG = "Cet outil traite les équations exponentielles et logarithmiques."
 MESSAGE_PAS_UN_LOGARITHME = "Écrivez une équation (avec =) ou un logarithme à calculer, par exemple log_2(50)."
 MESSAGE_CALCUL_PAS_ENCORE = "Cet outil ne traite pas encore ce type de calcul."
 MESSAGE_ARGUMENT_NON_POSITIF = "Le logarithme d'un nombre négatif ou nul n'est pas défini."
@@ -2703,9 +2704,25 @@ def hors_programme(g, d, x):
     return ("exp" in classes and "poly" in classes) or ("log" in classes and ("poly" in classes or "exp" in classes))
 
 
+def _contient_exponentielle(n):
+    """Vrai si l'arbre contient une puissance dont l'exposant contient l'inconnue (2^x, e^(x+1), x^x)."""
+    if isinstance(n, Defini):
+        return _contient_exponentielle(n.arbre)
+    if isinstance(n, (Neg, Fn, Log)):
+        return _contient_exponentielle(n.a)
+    if isinstance(n, Pow):
+        return bool(variables(n.b)) or _contient_exponentielle(n.a) or _contient_exponentielle(n.b)
+    if isinstance(n, Op):
+        return _contient_exponentielle(n.a) or _contient_exponentielle(n.b)
+    return False
+
+
 def message_non_resolu(g, d, x):
-    """Le message à afficher quand `corriger_equation` ne trouve aucune méthode : « ne se résout pas avec les méthodes du cours » pour un
-    vrai hors-programme, « ne traite pas encore » pour une forme du programme que l'outil ne gère pas encore."""
+    """Le message à afficher quand `corriger_equation` ne trouve aucune méthode : « traite les équations exponentielles et logarithmiques »
+    quand il n'y a ni exponentielle ni logarithme (x² = 4), « ne se résout pas avec les méthodes du cours » pour un vrai hors-programme,
+    « ne traite pas encore » pour une forme du programme que l'outil ne gère pas encore."""
+    if not any(_contient_exponentielle(n) or _contient_log(n) for n in (g, d)):
+        return MESSAGE_SANS_EXP_LOG                        # x² = 4, 2x + 1 = 9 : ni exponentielle ni logarithme
     return MESSAGE_HORS_PROGRAMME if hors_programme(g, d, x) else MESSAGE_PAS_ENCORE
 
 

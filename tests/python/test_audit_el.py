@@ -367,12 +367,22 @@ class TestBaseInconnueArgumentNegatif(unittest.TestCase):
 
 
 class TestMessages(unittest.TestCase):
+    def test_sans_exponentielle_ni_logarithme(self):
+        """Correction 3 : x² = 4, 2x + 1 = 9 ne sont pas « pas encore » : l'outil dit ce qu'il traite."""
+        for saisie in ["x^2=4", "x²=4", "2x+1=9", "sqrt(x)=3", "(x+1)^3=8", "3x=6"]:
+            with self.subTest(saisie):
+                self.assertEqual(rel.resoudre(saisie), {"ok": False, "erreur": el.MESSAGE_SANS_EXP_LOG})
+        self.assertEqual(el.MESSAGE_SANS_EXP_LOG, "Cet outil traite les équations exponentielles et logarithmiques.")
+        for saisie in ["x^x=4", "2^(x^3)=8", "log(x)+log(2)=1", "log(2)*x=3"]:      # une exponentielle ou un logarithme : un autre message
+            with self.subTest(saisie):
+                self.assertNotEqual(rel.resoudre(saisie)["erreur"], el.MESSAGE_SANS_EXP_LOG)
+
     def test_logarithme_et_terme_en_x_ou_exponentielle_hors_programme(self):
         """Groupe 2 : un logarithme avec un terme en x ou une exponentielle (de part et d'autre, ou en facteur) n'est pas une équation du cours."""
         for saisie in ["log(x)=x-1", "ln(x)=x", "x*log(x)=1", "e^x=ln(x)", "log(x)=2^x", "log(x)/x=1", "ln(x)+x=2", "2^x*log(x)=1"]:
             with self.subTest(saisie):
                 self.assertEqual(rel.resoudre(saisie), {"ok": False, "erreur": el.MESSAGE_HORS_PROGRAMME})
-        for saisie in ["log(x)=log(5)", "log(x)+log(x-1)=1", "x^2=4", "2^(x^3)=8"]:            # formes du programme pas encore gérées
+        for saisie in ["log(x)=log(5)", "log(x)+log(x-1)=1", "2^(x^3)=8"]:            # formes du programme pas encore gérées
             with self.subTest(saisie):
                 self.assertEqual(rel.resoudre(saisie), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
 
