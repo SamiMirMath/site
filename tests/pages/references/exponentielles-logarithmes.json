@@ -3506,6 +3506,101 @@
    }
   }
  },
+ "10^(-x)/10^(x^2)=1/4": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦\\frac{10^{-x}}{10^{x^{2}}} = \\frac{1}{4}⟧⟦\\iff⟧⟦\\log\\left(\\frac{10^{-x}}{10^{x^{2}}}\\right) = \\log\\left(\\frac{1}{4}\\right)⟧(log des deux membres)⟦\\iff⟧⟦\\log(10^{-x}) - \\log(10^{x^{2}}) = \\log\\left(\\frac{1}{4}\\right)⟧(log(a/b) = log a − log b)⟦\\iff⟧⟦(-x) \\cdot \\log(10) - x^{2} \\cdot \\log(10) = \\log\\left(\\frac{1}{4}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦-x - x^{2} = \\log\\left(\\frac{1}{4}\\right)⟧(car log(10) = 1)⟦\\iff⟧⟦-x^{2} - x = \\log\\left(\\frac{1}{4}\\right)⟧⟦\\iff⟧⟦x^{2} + x + \\log\\left(\\frac{1}{4}\\right) = 0⟧⟦Δ = 1^{2} - 4 \\cdot 1 \\cdot \\log\\left(\\frac{1}{4}\\right)⟧(formule du discriminant)⟦x_{1} = \\frac{-1 - \\sqrt{Δ}}{2 \\cdot 1}⟧⟦x_{2} = \\frac{-1 + \\sqrt{Δ}}{2 \\cdot 1}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -1{,}423 \\text{ ou } x \\approx 0{,}423⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦\\frac{10^{-x}}{10^{x^{2}}} = \\frac{1}{4}⟧⟦\\iff⟧⟦\\log\\left(\\frac{10^{-x}}{10^{x^{2}}}\\right) = \\log\\left(\\frac{1}{4}\\right)⟧(log des deux membres)⟦\\iff⟧⟦\\log(10^{-x}) - \\log(10^{x^{2}}) = \\log\\left(\\frac{1}{4}\\right)⟧(log(a/b) = log a − log b)⟦\\iff⟧⟦(-x) \\cdot \\log(10) - x^{2} \\cdot \\log(10) = \\log\\left(\\frac{1}{4}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦-x - x^{2} = \\log\\left(\\frac{1}{4}\\right)⟧(car log(10) = 1)⟦\\iff⟧⟦-x^{2} - x = \\log\\left(\\frac{1}{4}\\right)⟧⟦\\iff⟧⟦x^{2} + x + \\log\\left(\\frac{1}{4}\\right) = 0⟧⟦Δ = 1^{2} - 4 \\cdot 1 \\cdot \\log\\left(\\frac{1}{4}\\right)⟧(formule du discriminant)⟦x_{1} = \\frac{-1 - \\sqrt{Δ}}{2 \\cdot 1}⟧⟦x_{2} = \\frac{-1 + \\sqrt{Δ}}{2 \\cdot 1}⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -1{,}423 \\text{ ou } x \\approx 0{,}423⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Définition du logarithme⟦\\frac{10^{-x}}{10^{x^{2}}} = \\frac{1}{4}⟧⟦\\iff⟧⟦10^{-x^{2} - x} = \\frac{1}{4}⟧(aᵐ / aⁿ = aᵐ⁻ⁿ)⟦\\iff⟧⟦-x^{2} - x = \\log\\left(\\frac{1}{4}\\right)⟧(définition du logarithme)⟦\\iff⟧⟦-x^{2} - x - \\log\\left(\\frac{1}{4}\\right) = 0⟧⟦Δ = (-1)^{2} - 4(-1) \\cdot \\left(-\\log\\left(\\frac{1}{4}\\right)\\right) = 1 + (-4) \\cdot \\log\\left(\\frac{1}{4}\\right)⟧(formule du discriminant)⟦x_{1} = \\frac{1 + \\sqrt{Δ}}{-2}⟧⟦x_{2} = \\frac{1 - \\sqrt{Δ}}{-2}⟧",
+      "titre": "Étape 1Définition du logarithme"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -1{,}423 \\text{ ou } x \\approx 0{,}423⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
  "10^(2x)/10^x=3": {
   "au_depart": {
    "progression": "Étape 1 / 2",
@@ -6948,6 +7043,186 @@
    }
   }
  },
+ "2^(-x^2)=1/2": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{-x^{2}} = \\frac{1}{2}⟧⟦\\iff⟧⟦\\log(2^{-x^{2}}) = \\log\\left(\\frac{1}{2}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(-x^{2}) \\cdot \\log(2) = \\log\\left(\\frac{1}{2}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦-x^{2} = \\frac{\\log\\left(\\frac{1}{2}\\right)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} = -\\frac{\\log\\left(\\frac{1}{2}\\right)}{\\log(2)}⟧⟦x_{1} = -\\sqrt{-\\frac{\\log\\left(\\frac{1}{2}\\right)}{\\log(2)}}⟧⟦x_{2} = \\sqrt{-\\frac{\\log\\left(\\frac{1}{2}\\right)}{\\log(2)}}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = -1⟧ ou ⟦x = 1⟧.",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{-x^{2}} = \\frac{1}{2}⟧⟦\\iff⟧⟦\\log(2^{-x^{2}}) = \\log\\left(\\frac{1}{2}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(-x^{2}) \\cdot \\log(2) = \\log\\left(\\frac{1}{2}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦-x^{2} = \\frac{\\log\\left(\\frac{1}{2}\\right)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} = -\\frac{\\log\\left(\\frac{1}{2}\\right)}{\\log(2)}⟧⟦x_{1} = -\\sqrt{-\\frac{\\log\\left(\\frac{1}{2}\\right)}{\\log(2)}}⟧⟦x_{2} = \\sqrt{-\\frac{\\log\\left(\\frac{1}{2}\\right)}{\\log(2)}}⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = -1⟧ ou ⟦x = 1⟧.",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦\\frac{1}{2} = 2^{-1}⟧⟦2^{-x^{2}} = 2^{-1}⟧⟦\\iff⟧⟦-x^{2} = -1⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦-x^{2} + 1 = 0⟧⟦Δ = 0^{2} - 4(-1) \\cdot 1 = 4⟧⟦x = -1 \\text{ ou } x = 1⟧",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-1 \\,;\\, 1\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "2^(-x^2+x)=3^x": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{-x^{2} + x} = 3^{x}⟧⟦\\iff⟧⟦\\log(2^{-x^{2} + x}) = \\log(3^{x})⟧(log des deux membres)⟦\\iff⟧⟦(-x^{2} + x) \\cdot \\log(2) = x \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦-x^{2} \\cdot \\log(2) + x \\cdot \\log(2) = x \\cdot \\log(3)⟧⟦\\iff⟧⟦x^{2} \\cdot \\log(2) - x \\cdot \\log(2) + x \\cdot \\log(3) = 0⟧⟦\\iff⟧⟦x(x \\cdot \\log(2) - \\log(2) + \\log(3)) = 0⟧⟦\\iff⟧⟦x = 0 \\text{ ou } x \\cdot \\log(2) - \\log(2) + \\log(3) = 0⟧(un produit est nul si l'un des facteurs est nul)⟦x \\cdot \\log(2) - \\log(2) + \\log(3) = 0⟧⟦\\iff⟧⟦x = \\frac{\\log(2) - \\log(3)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)⟦x_{1} = \\frac{\\log(2) - \\log(3)}{\\log(2)}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, 0\\right\\} \\text{, soit } x \\approx -0{,}585 \\text{ ou } x = 0⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{-x^{2} + x} = 3^{x}⟧⟦\\iff⟧⟦\\log(2^{-x^{2} + x}) = \\log(3^{x})⟧(log des deux membres)⟦\\iff⟧⟦(-x^{2} + x) \\cdot \\log(2) = x \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦-x^{2} \\cdot \\log(2) + x \\cdot \\log(2) = x \\cdot \\log(3)⟧⟦\\iff⟧⟦x^{2} \\cdot \\log(2) - x \\cdot \\log(2) + x \\cdot \\log(3) = 0⟧⟦\\iff⟧⟦x(x \\cdot \\log(2) - \\log(2) + \\log(3)) = 0⟧⟦\\iff⟧⟦x = 0 \\text{ ou } x \\cdot \\log(2) - \\log(2) + \\log(3) = 0⟧(un produit est nul si l'un des facteurs est nul)⟦x \\cdot \\log(2) - \\log(2) + \\log(3) = 0⟧⟦\\iff⟧⟦x = \\frac{\\log(2) - \\log(3)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)⟦x_{1} = \\frac{\\log(2) - \\log(3)}{\\log(2)}⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, 0\\right\\} \\text{, soit } x \\approx -0{,}585 \\text{ ou } x = 0⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base / définition⟦3⟧ n'est pas une puissance de ⟦2⟧ : il faut les logarithmes.",
+      "titre": "Étape 1Même base / définition"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 1 / 1"
+   }
+  }
+ },
  "2^(1-x)=3^(x+1)": {
   "au_depart": {
    "progression": "Étape 1 / 2",
@@ -9504,7 +9779,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2}} = 3^{x}⟧⟦\\iff⟧⟦\\log(2^{x^{2}}) = \\log(3^{x})⟧(log des deux membres)⟦\\iff⟧⟦x^{2} \\cdot \\log(2) = x \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} \\cdot \\log(2) - x \\cdot \\log(3) = 0⟧⟦\\iff⟧⟦x(x \\cdot \\log(2) - \\log(3)) = 0⟧⟦\\iff⟧⟦x = 0 \\text{ ou } x \\cdot \\log(2) - \\log(3) = 0⟧(un produit est nul si l'un des facteurs est nul)⟦x \\cdot \\log(2) - \\log(3) = 0⟧⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)",
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2}} = 3^{x}⟧⟦\\iff⟧⟦\\log(2^{x^{2}}) = \\log(3^{x})⟧(log des deux membres)⟦\\iff⟧⟦x^{2} \\cdot \\log(2) = x \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} \\cdot \\log(2) - x \\cdot \\log(3) = 0⟧⟦\\iff⟧⟦x(x \\cdot \\log(2) - \\log(3)) = 0⟧⟦\\iff⟧⟦x = 0 \\text{ ou } x \\cdot \\log(2) - \\log(3) = 0⟧(un produit est nul si l'un des facteurs est nul)⟦x \\cdot \\log(2) - \\log(3) = 0⟧⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)⟦x_{2} = \\frac{\\log(3)}{\\log(2)}⟧",
     "titre": "Étape 1Logarithme des deux membres"
    },
    {
@@ -9514,7 +9789,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Solution⟦S = \\left\\{0 \\,;\\, \\frac{\\log(3)}{\\log(2)}\\right\\} \\text{, soit } x = 0 \\text{ ou } x \\approx 1{,}585⟧",
+    "texte": "Solution⟦S = \\left\\{0 \\,;\\, x_{2}\\right\\} \\text{, soit } x = 0 \\text{ ou } x \\approx 1{,}585⟧",
     "titre": "Solution"
    }
   ],
@@ -9529,7 +9804,7 @@
       ],
       "listes": [],
       "tableaux": [],
-      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2}} = 3^{x}⟧⟦\\iff⟧⟦\\log(2^{x^{2}}) = \\log(3^{x})⟧(log des deux membres)⟦\\iff⟧⟦x^{2} \\cdot \\log(2) = x \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} \\cdot \\log(2) - x \\cdot \\log(3) = 0⟧⟦\\iff⟧⟦x(x \\cdot \\log(2) - \\log(3)) = 0⟧⟦\\iff⟧⟦x = 0 \\text{ ou } x \\cdot \\log(2) - \\log(3) = 0⟧(un produit est nul si l'un des facteurs est nul)⟦x \\cdot \\log(2) - \\log(3) = 0⟧⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)",
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2}} = 3^{x}⟧⟦\\iff⟧⟦\\log(2^{x^{2}}) = \\log(3^{x})⟧(log des deux membres)⟦\\iff⟧⟦x^{2} \\cdot \\log(2) = x \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} \\cdot \\log(2) - x \\cdot \\log(3) = 0⟧⟦\\iff⟧⟦x(x \\cdot \\log(2) - \\log(3)) = 0⟧⟦\\iff⟧⟦x = 0 \\text{ ou } x \\cdot \\log(2) - \\log(3) = 0⟧(un produit est nul si l'un des facteurs est nul)⟦x \\cdot \\log(2) - \\log(3) = 0⟧⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)⟦x_{2} = \\frac{\\log(3)}{\\log(2)}⟧",
       "titre": "Étape 1Logarithme des deux membres"
      },
      {
@@ -9539,7 +9814,7 @@
       ],
       "listes": [],
       "tableaux": [],
-      "texte": "Solution⟦S = \\left\\{0 \\,;\\, \\frac{\\log(3)}{\\log(2)}\\right\\} \\text{, soit } x = 0 \\text{ ou } x \\approx 1{,}585⟧",
+      "texte": "Solution⟦S = \\left\\{0 \\,;\\, x_{2}\\right\\} \\text{, soit } x = 0 \\text{ ou } x \\approx 1{,}585⟧",
       "titre": "Solution"
      }
     ],
@@ -10693,6 +10968,131 @@
       "listes": [],
       "tableaux": [],
       "texte": "Étape 2Même base⟦4 = 2^{2}⟧⟦2^{x} = 2^{2}⟧⟦\\iff⟧⟦x = 2⟧(même base : a^A = a^B ⇔ A = B)",
+      "titre": "Étape 2Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "2^x+2^(x-1)=6": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidence⟦2^{x} = 2^{x - 1} \\cdot 2⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦2^{x} + 2^{x - 1} = 6⟧⟦\\iff⟧⟦2^{x - 1} \\cdot (2 + 1) = 6⟧(mise en évidence)⟦\\iff⟧⟦3 \\cdot 2^{x - 1} = 6⟧⟦\\iff⟧⟦2^{x - 1} = 2⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦2^{x - 1} = 2⟧⟦\\iff⟧⟦\\log(2^{x - 1}) = \\log(2)⟧(log des deux membres)⟦\\iff⟧⟦(x - 1) \\cdot \\log(2) = \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x - 1 = \\frac{\\log(2)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x = 1 + \\frac{\\log(2)}{\\log(2)}⟧",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{1 + \\frac{\\log(2)}{\\log(2)}\\right\\}⟧Contrôlez à la calculatrice : ⟦\\frac{\\log(2)}{\\log(2)} = 1⟧, on retrouve ⟦x = 2⟧.",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦2^{x} = 2^{x - 1} \\cdot 2⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦2^{x} + 2^{x - 1} = 6⟧⟦\\iff⟧⟦2^{x - 1} \\cdot (2 + 1) = 6⟧(mise en évidence)⟦\\iff⟧⟦3 \\cdot 2^{x - 1} = 6⟧⟦\\iff⟧⟦2^{x - 1} = 2⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦2^{x - 1} = 2⟧⟦\\iff⟧⟦\\log(2^{x - 1}) = \\log(2)⟧(log des deux membres)⟦\\iff⟧⟦(x - 1) \\cdot \\log(2) = \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x - 1 = \\frac{\\log(2)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x = 1 + \\frac{\\log(2)}{\\log(2)}⟧",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{1 + \\frac{\\log(2)}{\\log(2)}\\right\\}⟧Contrôlez à la calculatrice : ⟦\\frac{\\log(2)}{\\log(2)} = 1⟧, on retrouve ⟦x = 2⟧.",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦2^{x} = 2^{x - 1} \\cdot 2⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦2^{x} + 2^{x - 1} = 6⟧⟦\\iff⟧⟦2^{x - 1} \\cdot (2 + 1) = 6⟧(mise en évidence)⟦\\iff⟧⟦3 \\cdot 2^{x - 1} = 6⟧⟦\\iff⟧⟦2^{x - 1} = 2⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base⟦2 = 2^{1}⟧⟦2^{x - 1} = 2^{1}⟧⟦\\iff⟧⟦x - 1 = 1⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x = 2⟧",
       "titre": "Étape 2Même base"
      },
      {
@@ -11910,6 +12310,131 @@
    }
   }
  },
+ "2^x/3+2^(x+1)/3=2": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidence⟦2^{x + 1} = 2^{x} \\cdot 2⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦\\frac{2^{x}}{3} + \\frac{2^{x + 1}}{3} = 2⟧⟦\\iff⟧⟦2^{x} \\cdot \\left(\\frac{1}{3} + \\frac{1}{3} \\cdot 2\\right) = 2⟧(mise en évidence)⟦\\iff⟧⟦2^{x} = 2⟧",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦2^{x} = 2⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(2)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(2)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(2)}{\\log(2)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(2)}{\\log(2)} = 1⟧.",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦2^{x + 1} = 2^{x} \\cdot 2⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦\\frac{2^{x}}{3} + \\frac{2^{x + 1}}{3} = 2⟧⟦\\iff⟧⟦2^{x} \\cdot \\left(\\frac{1}{3} + \\frac{1}{3} \\cdot 2\\right) = 2⟧(mise en évidence)⟦\\iff⟧⟦2^{x} = 2⟧",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦2^{x} = 2⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(2)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(2)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{\\log(2)}{\\log(2)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(2)}{\\log(2)} = 1⟧.",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦2^{x + 1} = 2^{x} \\cdot 2⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦\\frac{2^{x}}{3} + \\frac{2^{x + 1}}{3} = 2⟧⟦\\iff⟧⟦2^{x} \\cdot \\left(\\frac{1}{3} + \\frac{1}{3} \\cdot 2\\right) = 2⟧(mise en évidence)⟦\\iff⟧⟦2^{x} = 2⟧",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base⟦2 = 2^{1}⟧⟦2^{x} = 2^{1}⟧⟦\\iff⟧⟦x = 1⟧(même base : a^A = a^B ⇔ A = B)",
+      "titre": "Étape 2Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{1\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
  "2^x/3^x=1": {
   "au_depart": {
    "progression": "Étape 1 / 2",
@@ -12660,6 +13185,131 @@
    }
   ],
   "progression_finale": ""
+ },
+ "2e^x+e^(x+1)=8": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidence⟦e^{x + 1} = e^{x} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦2e^{x} + e^{x + 1} = 8⟧⟦\\iff⟧⟦e^{x} \\cdot (2 + e) = 8⟧(mise en évidence)⟦\\iff⟧⟦e^{x} = \\frac{8}{2 + e}⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦e^{x} = \\frac{8}{2 + e}⟧⟦\\iff⟧⟦\\ln(e^{x}) = \\ln\\left(\\frac{8}{2 + e}\\right)⟧(ln des deux membres)⟦\\iff⟧⟦x \\cdot \\ln(e) = \\ln\\left(\\frac{8}{2 + e}\\right)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦x = \\ln\\left(\\frac{8}{2 + e}\\right)⟧(car ln(e) = 1)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\ln\\left(\\frac{8}{2 + e}\\right)\\right\\} \\text{, soit } x \\approx 0{,}528⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦e^{x + 1} = e^{x} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦2e^{x} + e^{x + 1} = 8⟧⟦\\iff⟧⟦e^{x} \\cdot (2 + e) = 8⟧(mise en évidence)⟦\\iff⟧⟦e^{x} = \\frac{8}{2 + e}⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦e^{x} = \\frac{8}{2 + e}⟧⟦\\iff⟧⟦\\ln(e^{x}) = \\ln\\left(\\frac{8}{2 + e}\\right)⟧(ln des deux membres)⟦\\iff⟧⟦x \\cdot \\ln(e) = \\ln\\left(\\frac{8}{2 + e}\\right)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦x = \\ln\\left(\\frac{8}{2 + e}\\right)⟧(car ln(e) = 1)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\ln\\left(\\frac{8}{2 + e}\\right)\\right\\} \\text{, soit } x \\approx 0{,}528⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦e^{x + 1} = e^{x} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦2e^{x} + e^{x + 1} = 8⟧⟦\\iff⟧⟦e^{x} \\cdot (2 + e) = 8⟧(mise en évidence)⟦\\iff⟧⟦e^{x} = \\frac{8}{2 + e}⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Définition du logarithme⟦e^{x} = \\frac{8}{2 + e}⟧⟦\\iff⟧⟦x = \\ln\\left(\\frac{8}{2 + e}\\right)⟧(définition du logarithme)",
+      "titre": "Étape 2Définition du logarithme"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\ln\\left(\\frac{8}{2 + e}\\right)\\right\\} \\text{, soit } x \\approx 0{,}528⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
  },
  "2lg(x)=4": {
   "au_depart": {
@@ -13544,6 +14194,131 @@
    }
   }
  },
+ "3+e^x+e^(x+2)=10": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidence⟦e^{x + 2} = e^{x} \\cdot e^{2}⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦3 + e^{x} + e^{x + 2} = 10⟧⟦\\iff⟧⟦e^{x} + e^{x + 2} = 7⟧(on isole le terme exponentiel)⟦\\iff⟧⟦e^{x} \\cdot (1 + e^{2}) = 7⟧(mise en évidence)⟦\\iff⟧⟦e^{x} = \\frac{7}{1 + e^{2}}⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦e^{x} = \\frac{7}{1 + e^{2}}⟧⟦\\iff⟧⟦\\ln(e^{x}) = \\ln\\left(\\frac{7}{1 + e^{2}}\\right)⟧(ln des deux membres)⟦\\iff⟧⟦x \\cdot \\ln(e) = \\ln\\left(\\frac{7}{1 + e^{2}}\\right)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦x = \\ln\\left(\\frac{7}{1 + e^{2}}\\right)⟧(car ln(e) = 1)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\ln\\left(\\frac{7}{1 + e^{2}}\\right)\\right\\} \\text{, soit } x \\approx -0{,}181⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦e^{x + 2} = e^{x} \\cdot e^{2}⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦3 + e^{x} + e^{x + 2} = 10⟧⟦\\iff⟧⟦e^{x} + e^{x + 2} = 7⟧(on isole le terme exponentiel)⟦\\iff⟧⟦e^{x} \\cdot (1 + e^{2}) = 7⟧(mise en évidence)⟦\\iff⟧⟦e^{x} = \\frac{7}{1 + e^{2}}⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦e^{x} = \\frac{7}{1 + e^{2}}⟧⟦\\iff⟧⟦\\ln(e^{x}) = \\ln\\left(\\frac{7}{1 + e^{2}}\\right)⟧(ln des deux membres)⟦\\iff⟧⟦x \\cdot \\ln(e) = \\ln\\left(\\frac{7}{1 + e^{2}}\\right)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦x = \\ln\\left(\\frac{7}{1 + e^{2}}\\right)⟧(car ln(e) = 1)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\ln\\left(\\frac{7}{1 + e^{2}}\\right)\\right\\} \\text{, soit } x \\approx -0{,}181⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦e^{x + 2} = e^{x} \\cdot e^{2}⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦3 + e^{x} + e^{x + 2} = 10⟧⟦\\iff⟧⟦e^{x} + e^{x + 2} = 7⟧(on isole le terme exponentiel)⟦\\iff⟧⟦e^{x} \\cdot (1 + e^{2}) = 7⟧(mise en évidence)⟦\\iff⟧⟦e^{x} = \\frac{7}{1 + e^{2}}⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Définition du logarithme⟦e^{x} = \\frac{7}{1 + e^{2}}⟧⟦\\iff⟧⟦x = \\ln\\left(\\frac{7}{1 + e^{2}}\\right)⟧(définition du logarithme)",
+      "titre": "Étape 2Définition du logarithme"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\ln\\left(\\frac{7}{1 + e^{2}}\\right)\\right\\} \\text{, soit } x \\approx -0{,}181⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
  "3/e^x=6": {
   "au_depart": {
    "progression": "Étape 1 / 2",
@@ -13802,6 +14577,91 @@
    }
   ],
   "progression_finale": "Étape 2 / 2"
+ },
+ "3^(-x^2)*2^x=1": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦3^{-x^{2}} \\cdot 2^{x} = 1⟧⟦\\iff⟧⟦\\log(3^{-x^{2}} \\cdot 2^{x}) = \\log(1)⟧(log des deux membres)⟦\\iff⟧⟦\\log(3^{-x^{2}}) + \\log(2^{x}) = \\log(1)⟧(log(ab) = log a + log b)⟦\\iff⟧⟦(-x^{2}) \\cdot \\log(3) + x \\cdot \\log(2) = 0⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦-x^{2} \\cdot \\log(3) + x \\cdot \\log(2) = 0⟧⟦\\iff⟧⟦x^{2} \\cdot \\log(3) - x \\cdot \\log(2) = 0⟧⟦\\iff⟧⟦x(x \\cdot \\log(3) - \\log(2)) = 0⟧⟦\\iff⟧⟦x = 0 \\text{ ou } x \\cdot \\log(3) - \\log(2) = 0⟧(un produit est nul si l'un des facteurs est nul)⟦x \\cdot \\log(3) - \\log(2) = 0⟧⟦\\iff⟧⟦x = \\frac{\\log(2)}{\\log(3)}⟧(car ⟦\\log(3) \\neq 0⟧)⟦x_{2} = \\frac{\\log(2)}{\\log(3)}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{0 \\,;\\, x_{2}\\right\\} \\text{, soit } x = 0 \\text{ ou } x \\approx 0{,}631⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦3^{-x^{2}} \\cdot 2^{x} = 1⟧⟦\\iff⟧⟦\\log(3^{-x^{2}} \\cdot 2^{x}) = \\log(1)⟧(log des deux membres)⟦\\iff⟧⟦\\log(3^{-x^{2}}) + \\log(2^{x}) = \\log(1)⟧(log(ab) = log a + log b)⟦\\iff⟧⟦(-x^{2}) \\cdot \\log(3) + x \\cdot \\log(2) = 0⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦-x^{2} \\cdot \\log(3) + x \\cdot \\log(2) = 0⟧⟦\\iff⟧⟦x^{2} \\cdot \\log(3) - x \\cdot \\log(2) = 0⟧⟦\\iff⟧⟦x(x \\cdot \\log(3) - \\log(2)) = 0⟧⟦\\iff⟧⟦x = 0 \\text{ ou } x \\cdot \\log(3) - \\log(2) = 0⟧(un produit est nul si l'un des facteurs est nul)⟦x \\cdot \\log(3) - \\log(2) = 0⟧⟦\\iff⟧⟦x = \\frac{\\log(2)}{\\log(3)}⟧(car ⟦\\log(3) \\neq 0⟧)⟦x_{2} = \\frac{\\log(2)}{\\log(3)}⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{0 \\,;\\, x_{2}\\right\\} \\text{, soit } x = 0 \\text{ ou } x \\approx 0{,}631⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base / définition⟦2⟧ n'est pas une puissance de ⟦3⟧ : il faut les logarithmes.",
+      "titre": "Étape 1Même base / définition"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 1 / 1"
+   }
+  }
  },
  "3^(2x)=2^(3x+1)": {
   "au_depart": {
@@ -14780,6 +15640,131 @@
     ],
     "imprimee": "Méthode : Même base / définition",
     "progression_finale": "Étape 1 / 1"
+   }
+  }
+ },
+ "3^x+3^(x+2)=30": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidence⟦3^{x + 2} = 3^{x} \\cdot 3^{2}⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦3^{x} + 3^{x + 2} = 30⟧⟦\\iff⟧⟦3^{x} \\cdot (1 + 3^{2}) = 30⟧(mise en évidence)⟦\\iff⟧⟦10 \\cdot 3^{x} = 30⟧⟦\\iff⟧⟦3^{x} = 3⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦3^{x} = 3⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log(3)}⟧(car ⟦\\log(3) \\neq 0⟧)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(3)}{\\log(3)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(3)}{\\log(3)} = 1⟧.",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦3^{x + 2} = 3^{x} \\cdot 3^{2}⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦3^{x} + 3^{x + 2} = 30⟧⟦\\iff⟧⟦3^{x} \\cdot (1 + 3^{2}) = 30⟧(mise en évidence)⟦\\iff⟧⟦10 \\cdot 3^{x} = 30⟧⟦\\iff⟧⟦3^{x} = 3⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦3^{x} = 3⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log(3)}⟧(car ⟦\\log(3) \\neq 0⟧)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{\\log(3)}{\\log(3)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(3)}{\\log(3)} = 1⟧.",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦3^{x + 2} = 3^{x} \\cdot 3^{2}⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦3^{x} + 3^{x + 2} = 30⟧⟦\\iff⟧⟦3^{x} \\cdot (1 + 3^{2}) = 30⟧(mise en évidence)⟦\\iff⟧⟦10 \\cdot 3^{x} = 30⟧⟦\\iff⟧⟦3^{x} = 3⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base⟦3 = 3^{1}⟧⟦3^{x} = 3^{1}⟧⟦\\iff⟧⟦x = 1⟧(même base : a^A = a^B ⇔ A = B)",
+      "titre": "Étape 2Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{1\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 3 / 3"
    }
   }
  },
@@ -16976,6 +17961,131 @@
    }
   }
  },
+ "5=e^x+e^(x+1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidence⟦e^{x + 1} = e^{x} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦5 = e^{x} + e^{x + 1}⟧⟦\\iff⟧⟦5 = e^{x} \\cdot (1 + e)⟧(mise en évidence)⟦\\iff⟧⟦\\frac{5}{1 + e} = e^{x}⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦e^{x} = \\frac{5}{1 + e}⟧⟦\\iff⟧⟦\\ln(e^{x}) = \\ln\\left(\\frac{5}{1 + e}\\right)⟧(ln des deux membres)⟦\\iff⟧⟦x \\cdot \\ln(e) = \\ln\\left(\\frac{5}{1 + e}\\right)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦x = \\ln\\left(\\frac{5}{1 + e}\\right)⟧(car ln(e) = 1)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\ln\\left(\\frac{5}{1 + e}\\right)\\right\\} \\text{, soit } x \\approx 0{,}296⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦e^{x + 1} = e^{x} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦5 = e^{x} + e^{x + 1}⟧⟦\\iff⟧⟦5 = e^{x} \\cdot (1 + e)⟧(mise en évidence)⟦\\iff⟧⟦\\frac{5}{1 + e} = e^{x}⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦e^{x} = \\frac{5}{1 + e}⟧⟦\\iff⟧⟦\\ln(e^{x}) = \\ln\\left(\\frac{5}{1 + e}\\right)⟧(ln des deux membres)⟦\\iff⟧⟦x \\cdot \\ln(e) = \\ln\\left(\\frac{5}{1 + e}\\right)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦x = \\ln\\left(\\frac{5}{1 + e}\\right)⟧(car ln(e) = 1)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\ln\\left(\\frac{5}{1 + e}\\right)\\right\\} \\text{, soit } x \\approx 0{,}296⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦e^{x + 1} = e^{x} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦5 = e^{x} + e^{x + 1}⟧⟦\\iff⟧⟦5 = e^{x} \\cdot (1 + e)⟧(mise en évidence)⟦\\iff⟧⟦\\frac{5}{1 + e} = e^{x}⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Définition du logarithme⟦e^{x} = \\frac{5}{1 + e}⟧⟦\\iff⟧⟦x = \\ln\\left(\\frac{5}{1 + e}\\right)⟧(définition du logarithme)",
+      "titre": "Étape 2Définition du logarithme"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\ln\\left(\\frac{5}{1 + e}\\right)\\right\\} \\text{, soit } x \\approx 0{,}296⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
  "5^(2x+1)=3^(x+2)": {
   "au_depart": {
    "progression": "Étape 1 / 2",
@@ -17687,6 +18797,131 @@
     ],
     "imprimee": "Méthode : Même base / définition",
     "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "7*2^x+2^(x+3)=60": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidence⟦2^{x + 3} = 2^{x} \\cdot 2^{3}⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦7 \\cdot 2^{x} + 2^{x + 3} = 60⟧⟦\\iff⟧⟦2^{x} \\cdot (7 + 2^{3}) = 60⟧(mise en évidence)⟦\\iff⟧⟦15 \\cdot 2^{x} = 60⟧⟦\\iff⟧⟦2^{x} = 4⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦2^{x} = 4⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(4)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(4)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(4)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(4)}{\\log(2)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(4)}{\\log(2)} = 2⟧.",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦2^{x + 3} = 2^{x} \\cdot 2^{3}⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦7 \\cdot 2^{x} + 2^{x + 3} = 60⟧⟦\\iff⟧⟦2^{x} \\cdot (7 + 2^{3}) = 60⟧(mise en évidence)⟦\\iff⟧⟦15 \\cdot 2^{x} = 60⟧⟦\\iff⟧⟦2^{x} = 4⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦2^{x} = 4⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(4)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(4)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(4)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{\\log(4)}{\\log(2)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(4)}{\\log(2)} = 2⟧.",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦2^{x + 3} = 2^{x} \\cdot 2^{3}⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦7 \\cdot 2^{x} + 2^{x + 3} = 60⟧⟦\\iff⟧⟦2^{x} \\cdot (7 + 2^{3}) = 60⟧(mise en évidence)⟦\\iff⟧⟦15 \\cdot 2^{x} = 60⟧⟦\\iff⟧⟦2^{x} = 4⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base⟦4 = 2^{2}⟧⟦2^{x} = 2^{2}⟧⟦\\iff⟧⟦x = 2⟧(même base : a^A = a^B ⇔ A = B)",
+      "titre": "Étape 2Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 3 / 3"
    }
   }
  },
@@ -18650,6 +19885,101 @@
    }
   }
  },
+ "e^(-x^2+3x)=2": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦e^{-x^{2} + 3x} = 2⟧⟦\\iff⟧⟦\\ln(e^{-x^{2} + 3x}) = \\ln(2)⟧(ln des deux membres)⟦\\iff⟧⟦(-x^{2} + 3x) \\cdot \\ln(e) = \\ln(2)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦-x^{2} + 3x = \\ln(2)⟧(car ln(e) = 1)⟦\\iff⟧⟦-x^{2} + 3x - \\ln(2) = 0⟧⟦Δ = 3^{2} - 4(-1) \\cdot (-\\ln(2)) = 9 + (-4) \\cdot \\ln(2)⟧(formule du discriminant)⟦x_{1} = \\frac{-3 + \\sqrt{Δ}}{-2}⟧⟦x_{2} = \\frac{-3 - \\sqrt{Δ}}{-2}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx 0{,}252 \\text{ ou } x \\approx 2{,}748⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦e^{-x^{2} + 3x} = 2⟧⟦\\iff⟧⟦\\ln(e^{-x^{2} + 3x}) = \\ln(2)⟧(ln des deux membres)⟦\\iff⟧⟦(-x^{2} + 3x) \\cdot \\ln(e) = \\ln(2)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦-x^{2} + 3x = \\ln(2)⟧(car ln(e) = 1)⟦\\iff⟧⟦-x^{2} + 3x - \\ln(2) = 0⟧⟦Δ = 3^{2} - 4(-1) \\cdot (-\\ln(2)) = 9 + (-4) \\cdot \\ln(2)⟧(formule du discriminant)⟦x_{1} = \\frac{-3 + \\sqrt{Δ}}{-2}⟧⟦x_{2} = \\frac{-3 - \\sqrt{Δ}}{-2}⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx 0{,}252 \\text{ ou } x \\approx 2{,}748⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Définition du logarithme⟦e^{-x^{2} + 3x} = 2⟧⟦\\iff⟧⟦-x^{2} + 3x = \\ln(2)⟧(définition du logarithme)⟦\\iff⟧⟦-x^{2} + 3x - \\ln(2) = 0⟧⟦Δ = 3^{2} - 4(-1) \\cdot (-\\ln(2)) = 9 + (-4) \\cdot \\ln(2)⟧(formule du discriminant)⟦x_{1} = \\frac{-3 + \\sqrt{Δ}}{-2}⟧⟦x_{2} = \\frac{-3 - \\sqrt{Δ}}{-2}⟧",
+      "titre": "Étape 1Définition du logarithme"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx 0{,}252 \\text{ ou } x \\approx 2{,}748⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
  "e^(0,05t)=2": {
   "au_depart": {
    "progression": "Étape 1 / 2",
@@ -19131,6 +20461,601 @@
     ],
     "imprimee": "Méthode : Même base / définition",
     "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "e^(x+1)-2e^(x+1)=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidence⟦e^{x + 1} - 2e^{x + 1} = 3⟧⟦\\iff⟧⟦e^{x + 1} \\cdot (1 - 2) = 3⟧(mise en évidence)⟦\\iff⟧⟦-e^{x + 1} = 3⟧⟦\\iff⟧⟦e^{x + 1} = -3⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Aucune solution⟦e^{x + 1} > 0⟧(une exponentielle est strictement positive)⟦-3 < 0⟧(aucune solution)",
+    "titre": "Étape 2Aucune solution"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦e^{x + 1} - 2e^{x + 1} = 3⟧⟦\\iff⟧⟦e^{x + 1} \\cdot (1 - 2) = 3⟧(mise en évidence)⟦\\iff⟧⟦-e^{x + 1} = 3⟧⟦\\iff⟧⟦e^{x + 1} = -3⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Aucune solution⟦e^{x + 1} > 0⟧(une exponentielle est strictement positive)⟦-3 < 0⟧(aucune solution)",
+      "titre": "Étape 2Aucune solution"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\varnothing⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦e^{x + 1} - 2e^{x + 1} = 3⟧⟦\\iff⟧⟦e^{x + 1} \\cdot (1 - 2) = 3⟧(mise en évidence)⟦\\iff⟧⟦-e^{x + 1} = 3⟧⟦\\iff⟧⟦e^{x + 1} = -3⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Aucune solution⟦e^{x + 1} > 0⟧(une exponentielle est strictement positive)⟦-3 < 0⟧(aucune solution)",
+      "titre": "Étape 2Aucune solution"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\varnothing⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "e^(x+1)-e^x=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidence⟦e^{x + 1} = e^{x} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦e^{x + 1} - e^{x} = 0⟧⟦\\iff⟧⟦e^{x} \\cdot (e - 1) = 0⟧(mise en évidence)⟦\\iff⟧⟦e^{x} = 0⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Aucune solution⟦e^{x} > 0⟧(une exponentielle est strictement positive)⟦e^{x} = 0⟧(aucune solution)",
+    "titre": "Étape 2Aucune solution"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦e^{x + 1} = e^{x} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦e^{x + 1} - e^{x} = 0⟧⟦\\iff⟧⟦e^{x} \\cdot (e - 1) = 0⟧(mise en évidence)⟦\\iff⟧⟦e^{x} = 0⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Aucune solution⟦e^{x} > 0⟧(une exponentielle est strictement positive)⟦e^{x} = 0⟧(aucune solution)",
+      "titre": "Étape 2Aucune solution"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\varnothing⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦e^{x + 1} = e^{x} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦e^{x + 1} - e^{x} = 0⟧⟦\\iff⟧⟦e^{x} \\cdot (e - 1) = 0⟧(mise en évidence)⟦\\iff⟧⟦e^{x} = 0⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Aucune solution⟦e^{x} > 0⟧(une exponentielle est strictement positive)⟦e^{x} = 0⟧(aucune solution)",
+      "titre": "Étape 2Aucune solution"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\varnothing⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "e^(x+1)-e^x=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidence⟦e^{x + 1} = e^{x} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦e^{x + 1} - e^{x} = 3⟧⟦\\iff⟧⟦e^{x} \\cdot (e - 1) = 3⟧(mise en évidence)⟦\\iff⟧⟦e^{x} = \\frac{3}{-1 + e}⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦e^{x} = \\frac{3}{-1 + e}⟧⟦\\iff⟧⟦\\ln(e^{x}) = \\ln\\left(\\frac{3}{-1 + e}\\right)⟧(ln des deux membres)⟦\\iff⟧⟦x \\cdot \\ln(e) = \\ln\\left(\\frac{3}{-1 + e}\\right)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦x = \\ln\\left(\\frac{3}{-1 + e}\\right)⟧(car ln(e) = 1)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\ln\\left(\\frac{3}{-1 + e}\\right)\\right\\} \\text{, soit } x \\approx 0{,}557⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦e^{x + 1} = e^{x} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦e^{x + 1} - e^{x} = 3⟧⟦\\iff⟧⟦e^{x} \\cdot (e - 1) = 3⟧(mise en évidence)⟦\\iff⟧⟦e^{x} = \\frac{3}{-1 + e}⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦e^{x} = \\frac{3}{-1 + e}⟧⟦\\iff⟧⟦\\ln(e^{x}) = \\ln\\left(\\frac{3}{-1 + e}\\right)⟧(ln des deux membres)⟦\\iff⟧⟦x \\cdot \\ln(e) = \\ln\\left(\\frac{3}{-1 + e}\\right)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦x = \\ln\\left(\\frac{3}{-1 + e}\\right)⟧(car ln(e) = 1)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\ln\\left(\\frac{3}{-1 + e}\\right)\\right\\} \\text{, soit } x \\approx 0{,}557⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦e^{x + 1} = e^{x} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦e^{x + 1} - e^{x} = 3⟧⟦\\iff⟧⟦e^{x} \\cdot (e - 1) = 3⟧(mise en évidence)⟦\\iff⟧⟦e^{x} = \\frac{3}{-1 + e}⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Définition du logarithme⟦e^{x} = \\frac{3}{-1 + e}⟧⟦\\iff⟧⟦x = \\ln\\left(\\frac{3}{-1 + e}\\right)⟧(définition du logarithme)",
+      "titre": "Étape 2Définition du logarithme"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\ln\\left(\\frac{3}{-1 + e}\\right)\\right\\} \\text{, soit } x \\approx 0{,}557⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "e^(x/2)/e^(x^2+x)=1/4": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦\\frac{e^{\\frac{x}{2}}}{e^{x^{2} + x}} = \\frac{1}{4}⟧⟦\\iff⟧⟦\\ln\\left(\\frac{e^{\\frac{x}{2}}}{e^{x^{2} + x}}\\right) = \\ln\\left(\\frac{1}{4}\\right)⟧(ln des deux membres)⟦\\iff⟧⟦\\ln\\left(e^{\\frac{x}{2}}\\right) - \\ln(e^{x^{2} + x}) = \\ln\\left(\\frac{1}{4}\\right)⟧(ln(a/b) = ln a − ln b)⟦\\iff⟧⟦\\frac{x}{2} \\cdot \\ln(e) - (x^{2} + x) \\cdot \\ln(e) = \\ln\\left(\\frac{1}{4}\\right)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦\\frac{x}{2} - (x^{2} + x) = \\ln\\left(\\frac{1}{4}\\right)⟧(car ln(e) = 1)⟦\\iff⟧⟦-x^{2} - \\frac{1}{2}x = \\ln\\left(\\frac{1}{4}\\right)⟧⟦\\iff⟧⟦x^{2} + \\frac{1}{2}x + \\ln\\left(\\frac{1}{4}\\right) = 0⟧⟦Δ = \\left(\\frac{1}{2}\\right)^{2} - 4 \\cdot 1 \\cdot \\ln\\left(\\frac{1}{4}\\right)⟧(formule du discriminant)⟦x_{1} = \\frac{-\\frac{1}{2} - \\sqrt{Δ}}{2 \\cdot 1}⟧⟦x_{2} = \\frac{-\\frac{1}{2} + \\sqrt{Δ}}{2 \\cdot 1}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -1{,}454 \\text{ ou } x \\approx 0{,}954⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦\\frac{e^{\\frac{x}{2}}}{e^{x^{2} + x}} = \\frac{1}{4}⟧⟦\\iff⟧⟦\\ln\\left(\\frac{e^{\\frac{x}{2}}}{e^{x^{2} + x}}\\right) = \\ln\\left(\\frac{1}{4}\\right)⟧(ln des deux membres)⟦\\iff⟧⟦\\ln\\left(e^{\\frac{x}{2}}\\right) - \\ln(e^{x^{2} + x}) = \\ln\\left(\\frac{1}{4}\\right)⟧(ln(a/b) = ln a − ln b)⟦\\iff⟧⟦\\frac{x}{2} \\cdot \\ln(e) - (x^{2} + x) \\cdot \\ln(e) = \\ln\\left(\\frac{1}{4}\\right)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦\\frac{x}{2} - (x^{2} + x) = \\ln\\left(\\frac{1}{4}\\right)⟧(car ln(e) = 1)⟦\\iff⟧⟦-x^{2} - \\frac{1}{2}x = \\ln\\left(\\frac{1}{4}\\right)⟧⟦\\iff⟧⟦x^{2} + \\frac{1}{2}x + \\ln\\left(\\frac{1}{4}\\right) = 0⟧⟦Δ = \\left(\\frac{1}{2}\\right)^{2} - 4 \\cdot 1 \\cdot \\ln\\left(\\frac{1}{4}\\right)⟧(formule du discriminant)⟦x_{1} = \\frac{-\\frac{1}{2} - \\sqrt{Δ}}{2 \\cdot 1}⟧⟦x_{2} = \\frac{-\\frac{1}{2} + \\sqrt{Δ}}{2 \\cdot 1}⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -1{,}454 \\text{ ou } x \\approx 0{,}954⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Définition du logarithme⟦\\frac{e^{\\frac{x}{2}}}{e^{x^{2} + x}} = \\frac{1}{4}⟧⟦\\iff⟧⟦e^{-x^{2} - \\frac{1}{2}x} = \\frac{1}{4}⟧(aᵐ / aⁿ = aᵐ⁻ⁿ)⟦\\iff⟧⟦-x^{2} - \\frac{1}{2}x = \\ln\\left(\\frac{1}{4}\\right)⟧(définition du logarithme)⟦\\iff⟧⟦-x^{2} - \\frac{1}{2}x - \\ln\\left(\\frac{1}{4}\\right) = 0⟧⟦Δ = \\left(-\\frac{1}{2}\\right)^{2} - 4(-1) \\cdot \\left(-\\ln\\left(\\frac{1}{4}\\right)\\right) = \\frac{1}{4} + (-4) \\cdot \\ln\\left(\\frac{1}{4}\\right)⟧(formule du discriminant)⟦x_{1} = \\frac{\\frac{1}{2} + \\sqrt{Δ}}{-2}⟧⟦x_{2} = \\frac{\\frac{1}{2} - \\sqrt{Δ}}{-2}⟧",
+      "titre": "Étape 1Définition du logarithme"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -1{,}454 \\text{ ou } x \\approx 0{,}954⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "e^(x^2)+e^(x^2+1)=5": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidence⟦e^{x^{2} + 1} = e^{x^{2}} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦e^{x^{2}} + e^{x^{2} + 1} = 5⟧⟦\\iff⟧⟦e^{x^{2}} \\cdot (1 + e) = 5⟧(mise en évidence)⟦\\iff⟧⟦e^{x^{2}} = \\frac{5}{1 + e}⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦e^{x^{2}} = \\frac{5}{1 + e}⟧⟦\\iff⟧⟦\\ln(e^{x^{2}}) = \\ln\\left(\\frac{5}{1 + e}\\right)⟧(ln des deux membres)⟦\\iff⟧⟦x^{2} \\cdot \\ln(e) = \\ln\\left(\\frac{5}{1 + e}\\right)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦x^{2} = \\ln\\left(\\frac{5}{1 + e}\\right)⟧(car ln(e) = 1)⟦x_{1} = -\\sqrt{\\ln\\left(\\frac{5}{1 + e}\\right)}⟧⟦x_{2} = \\sqrt{\\ln\\left(\\frac{5}{1 + e}\\right)}⟧",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}544 \\text{ ou } x \\approx 0{,}544⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦e^{x^{2} + 1} = e^{x^{2}} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦e^{x^{2}} + e^{x^{2} + 1} = 5⟧⟦\\iff⟧⟦e^{x^{2}} \\cdot (1 + e) = 5⟧(mise en évidence)⟦\\iff⟧⟦e^{x^{2}} = \\frac{5}{1 + e}⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦e^{x^{2}} = \\frac{5}{1 + e}⟧⟦\\iff⟧⟦\\ln(e^{x^{2}}) = \\ln\\left(\\frac{5}{1 + e}\\right)⟧(ln des deux membres)⟦\\iff⟧⟦x^{2} \\cdot \\ln(e) = \\ln\\left(\\frac{5}{1 + e}\\right)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦x^{2} = \\ln\\left(\\frac{5}{1 + e}\\right)⟧(car ln(e) = 1)⟦x_{1} = -\\sqrt{\\ln\\left(\\frac{5}{1 + e}\\right)}⟧⟦x_{2} = \\sqrt{\\ln\\left(\\frac{5}{1 + e}\\right)}⟧",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}544 \\text{ ou } x \\approx 0{,}544⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦e^{x^{2} + 1} = e^{x^{2}} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦e^{x^{2}} + e^{x^{2} + 1} = 5⟧⟦\\iff⟧⟦e^{x^{2}} \\cdot (1 + e) = 5⟧(mise en évidence)⟦\\iff⟧⟦e^{x^{2}} = \\frac{5}{1 + e}⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Définition du logarithme⟦e^{x^{2}} = \\frac{5}{1 + e}⟧⟦\\iff⟧⟦x^{2} = \\ln\\left(\\frac{5}{1 + e}\\right)⟧(définition du logarithme)⟦x_{1} = -\\sqrt{\\ln\\left(\\frac{5}{1 + e}\\right)}⟧⟦x_{2} = \\sqrt{\\ln\\left(\\frac{5}{1 + e}\\right)}⟧",
+      "titre": "Étape 2Définition du logarithme"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}544 \\text{ ou } x \\approx 0{,}544⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 3 / 3"
    }
   }
  },
@@ -19802,24 +21727,380 @@
   ],
   "progression_finale": ""
  },
- "e^x+e^(x+1)=5": {
+ "e^x+e^(x+1)+e^(x+1)=4": {
   "au_depart": {
-   "progression": "",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
   "cartes": [
    {
     "classes": [
      "card",
-     "err"
+     "cond"
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Cet outil ne traite pas encore ce type d'équation.",
-    "titre": null
+    "texte": "Étape 1Mise en évidence⟦e^{x + 1} = e^{x} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦e^{x} + e^{x + 1} + e^{x + 1} = 4⟧⟦\\iff⟧⟦e^{x} \\cdot (1 + e + e) = 4⟧(mise en évidence)⟦\\iff⟧⟦e^{x} \\cdot (1 + 2e) = 4⟧⟦\\iff⟧⟦e^{x} = \\frac{4}{1 + 2e}⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦e^{x} = \\frac{4}{1 + 2e}⟧⟦\\iff⟧⟦\\ln(e^{x}) = \\ln\\left(\\frac{4}{1 + 2e}\\right)⟧(ln des deux membres)⟦\\iff⟧⟦x \\cdot \\ln(e) = \\ln\\left(\\frac{4}{1 + 2e}\\right)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦x = \\ln\\left(\\frac{4}{1 + 2e}\\right)⟧(car ln(e) = 1)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\ln\\left(\\frac{4}{1 + 2e}\\right)\\right\\} \\text{, soit } x \\approx -0{,}476⟧",
+    "titre": "Solution"
    }
   ],
-  "progression_finale": ""
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦e^{x + 1} = e^{x} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦e^{x} + e^{x + 1} + e^{x + 1} = 4⟧⟦\\iff⟧⟦e^{x} \\cdot (1 + e + e) = 4⟧(mise en évidence)⟦\\iff⟧⟦e^{x} \\cdot (1 + 2e) = 4⟧⟦\\iff⟧⟦e^{x} = \\frac{4}{1 + 2e}⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦e^{x} = \\frac{4}{1 + 2e}⟧⟦\\iff⟧⟦\\ln(e^{x}) = \\ln\\left(\\frac{4}{1 + 2e}\\right)⟧(ln des deux membres)⟦\\iff⟧⟦x \\cdot \\ln(e) = \\ln\\left(\\frac{4}{1 + 2e}\\right)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦x = \\ln\\left(\\frac{4}{1 + 2e}\\right)⟧(car ln(e) = 1)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\ln\\left(\\frac{4}{1 + 2e}\\right)\\right\\} \\text{, soit } x \\approx -0{,}476⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦e^{x + 1} = e^{x} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦e^{x} + e^{x + 1} + e^{x + 1} = 4⟧⟦\\iff⟧⟦e^{x} \\cdot (1 + e + e) = 4⟧(mise en évidence)⟦\\iff⟧⟦e^{x} \\cdot (1 + 2e) = 4⟧⟦\\iff⟧⟦e^{x} = \\frac{4}{1 + 2e}⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Définition du logarithme⟦e^{x} = \\frac{4}{1 + 2e}⟧⟦\\iff⟧⟦x = \\ln\\left(\\frac{4}{1 + 2e}\\right)⟧(définition du logarithme)",
+      "titre": "Étape 2Définition du logarithme"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\ln\\left(\\frac{4}{1 + 2e}\\right)\\right\\} \\text{, soit } x \\approx -0{,}476⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "e^x+e^(x+1)-e^x=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidence⟦e^{x + 1} = e^{x} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦e^{x} + e^{x + 1} - e^{x} = 3⟧⟦\\iff⟧⟦e^{x} \\cdot (1 + e - 1) = 3⟧(mise en évidence)⟦\\iff⟧⟦e^{x} \\cdot e = 3⟧⟦\\iff⟧⟦e^{x} = \\frac{3}{e}⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦e^{x} = \\frac{3}{e}⟧⟦\\iff⟧⟦\\ln(e^{x}) = \\ln\\left(\\frac{3}{e}\\right)⟧(ln des deux membres)⟦\\iff⟧⟦x \\cdot \\ln(e) = \\ln\\left(\\frac{3}{e}\\right)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦x = \\ln\\left(\\frac{3}{e}\\right)⟧(car ln(e) = 1)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\ln\\left(\\frac{3}{e}\\right)\\right\\} \\text{, soit } x \\approx 0{,}099⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦e^{x + 1} = e^{x} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦e^{x} + e^{x + 1} - e^{x} = 3⟧⟦\\iff⟧⟦e^{x} \\cdot (1 + e - 1) = 3⟧(mise en évidence)⟦\\iff⟧⟦e^{x} \\cdot e = 3⟧⟦\\iff⟧⟦e^{x} = \\frac{3}{e}⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦e^{x} = \\frac{3}{e}⟧⟦\\iff⟧⟦\\ln(e^{x}) = \\ln\\left(\\frac{3}{e}\\right)⟧(ln des deux membres)⟦\\iff⟧⟦x \\cdot \\ln(e) = \\ln\\left(\\frac{3}{e}\\right)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦x = \\ln\\left(\\frac{3}{e}\\right)⟧(car ln(e) = 1)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\ln\\left(\\frac{3}{e}\\right)\\right\\} \\text{, soit } x \\approx 0{,}099⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦e^{x + 1} = e^{x} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦e^{x} + e^{x + 1} - e^{x} = 3⟧⟦\\iff⟧⟦e^{x} \\cdot (1 + e - 1) = 3⟧(mise en évidence)⟦\\iff⟧⟦e^{x} \\cdot e = 3⟧⟦\\iff⟧⟦e^{x} = \\frac{3}{e}⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Définition du logarithme⟦e^{x} = \\frac{3}{e}⟧⟦\\iff⟧⟦x = \\ln\\left(\\frac{3}{e}\\right)⟧(définition du logarithme)",
+      "titre": "Étape 2Définition du logarithme"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\ln\\left(\\frac{3}{e}\\right)\\right\\} \\text{, soit } x \\approx 0{,}099⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "e^x+e^(x+1)=5": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidence⟦e^{x + 1} = e^{x} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦e^{x} + e^{x + 1} = 5⟧⟦\\iff⟧⟦e^{x} \\cdot (1 + e) = 5⟧(mise en évidence)⟦\\iff⟧⟦e^{x} = \\frac{5}{1 + e}⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦e^{x} = \\frac{5}{1 + e}⟧⟦\\iff⟧⟦\\ln(e^{x}) = \\ln\\left(\\frac{5}{1 + e}\\right)⟧(ln des deux membres)⟦\\iff⟧⟦x \\cdot \\ln(e) = \\ln\\left(\\frac{5}{1 + e}\\right)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦x = \\ln\\left(\\frac{5}{1 + e}\\right)⟧(car ln(e) = 1)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\ln\\left(\\frac{5}{1 + e}\\right)\\right\\} \\text{, soit } x \\approx 0{,}296⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦e^{x + 1} = e^{x} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦e^{x} + e^{x + 1} = 5⟧⟦\\iff⟧⟦e^{x} \\cdot (1 + e) = 5⟧(mise en évidence)⟦\\iff⟧⟦e^{x} = \\frac{5}{1 + e}⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦e^{x} = \\frac{5}{1 + e}⟧⟦\\iff⟧⟦\\ln(e^{x}) = \\ln\\left(\\frac{5}{1 + e}\\right)⟧(ln des deux membres)⟦\\iff⟧⟦x \\cdot \\ln(e) = \\ln\\left(\\frac{5}{1 + e}\\right)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦x = \\ln\\left(\\frac{5}{1 + e}\\right)⟧(car ln(e) = 1)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\ln\\left(\\frac{5}{1 + e}\\right)\\right\\} \\text{, soit } x \\approx 0{,}296⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦e^{x + 1} = e^{x} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦e^{x} + e^{x + 1} = 5⟧⟦\\iff⟧⟦e^{x} \\cdot (1 + e) = 5⟧(mise en évidence)⟦\\iff⟧⟦e^{x} = \\frac{5}{1 + e}⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Définition du logarithme⟦e^{x} = \\frac{5}{1 + e}⟧⟦\\iff⟧⟦x = \\ln\\left(\\frac{5}{1 + e}\\right)⟧(définition du logarithme)",
+      "titre": "Étape 2Définition du logarithme"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\ln\\left(\\frac{5}{1 + e}\\right)\\right\\} \\text{, soit } x \\approx 0{,}296⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
  },
  "e^x+e^x=8": {
   "au_depart": {
@@ -19938,6 +22219,131 @@
       "listes": [],
       "tableaux": [],
       "texte": "Solution⟦S = \\left\\{\\ln(4)\\right\\} \\text{, soit } x \\approx 1{,}386⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "e^x-e^(x+1)=5": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidence⟦e^{x + 1} = e^{x} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦e^{x} - e^{x + 1} = 5⟧⟦\\iff⟧⟦e^{x} \\cdot (1 - e) = 5⟧(mise en évidence)⟦\\iff⟧⟦e^{x} = \\frac{5}{1 - e}⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Aucune solution⟦e^{x} > 0⟧(une exponentielle est strictement positive)⟦\\frac{5}{1 - e} < 0⟧(aucune solution)",
+    "titre": "Étape 2Aucune solution"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦e^{x + 1} = e^{x} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦e^{x} - e^{x + 1} = 5⟧⟦\\iff⟧⟦e^{x} \\cdot (1 - e) = 5⟧(mise en évidence)⟦\\iff⟧⟦e^{x} = \\frac{5}{1 - e}⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Aucune solution⟦e^{x} > 0⟧(une exponentielle est strictement positive)⟦\\frac{5}{1 - e} < 0⟧(aucune solution)",
+      "titre": "Étape 2Aucune solution"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\varnothing⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦e^{x + 1} = e^{x} \\cdot e⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦e^{x} - e^{x + 1} = 5⟧⟦\\iff⟧⟦e^{x} \\cdot (1 - e) = 5⟧(mise en évidence)⟦\\iff⟧⟦e^{x} = \\frac{5}{1 - e}⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Aucune solution⟦e^{x} > 0⟧(une exponentielle est strictement positive)⟦\\frac{5}{1 - e} < 0⟧(aucune solution)",
+      "titre": "Étape 2Aucune solution"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\varnothing⟧",
       "titre": "Solution"
      }
     ],
@@ -23711,7 +26117,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}(1) = 2⟧⟦\\iff⟧⟦x^{\\log_{x}(1)} = x^{2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦1 = x^{2}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = 1 \\text{ ou } x = -1⟧⟦x = 1 \\text{ et } x = -1 \\text{ ne conviennent pas}⟧(une base de logarithme est strictement positive et différente de 1)",
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}(1) = 2⟧⟦\\iff⟧⟦x^{\\log_{x}(1)} = x^{2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦1 = x^{2}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = -1 \\text{ ou } x = 1⟧⟦x = 1 \\text{ et } x = -1 \\text{ ne conviennent pas}⟧(une base de logarithme est strictement positive et différente de 1)",
     "titre": "Étape 2Exponentielle des deux membres"
    },
    {
@@ -23789,7 +26195,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}\\left(\\frac{1}{16}\\right) = 4⟧⟦\\iff⟧⟦x^{\\log_{x}\\left(\\frac{1}{16}\\right)} = x^{4}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\frac{1}{16} = x^{4}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = \\frac{1}{2} \\text{ ou } x = -\\frac{1}{2}⟧⟦x = \\frac{1}{2}⟧(seule la solution positive convient)",
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}\\left(\\frac{1}{16}\\right) = 4⟧⟦\\iff⟧⟦x^{\\log_{x}\\left(\\frac{1}{16}\\right)} = x^{4}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\frac{1}{16} = x^{4}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = -\\frac{1}{2} \\text{ ou } x = \\frac{1}{2}⟧⟦x = \\frac{1}{2}⟧(seule la solution positive convient)",
     "titre": "Étape 2Exponentielle des deux membres"
    },
    {
@@ -23867,7 +26273,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}\\left(\\frac{1}{9}\\right) = -2⟧⟦\\iff⟧⟦x^{\\log_{x}\\left(\\frac{1}{9}\\right)} = x^{-2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\frac{1}{9} = x^{-2}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦\\frac{1}{9} = \\frac{1}{x^{2}}⟧(a⁻ᵐ = 1/aᵐ)⟦\\iff⟧⟦x^{2} = 9⟧⟦\\iff⟧⟦x = 3 \\text{ ou } x = -3⟧⟦x = 3⟧(seule la solution positive convient)",
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}\\left(\\frac{1}{9}\\right) = -2⟧⟦\\iff⟧⟦x^{\\log_{x}\\left(\\frac{1}{9}\\right)} = x^{-2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\frac{1}{9} = x^{-2}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦\\frac{1}{9} = \\frac{1}{x^{2}}⟧(a⁻ᵐ = 1/aᵐ)⟦\\iff⟧⟦x^{2} = 9⟧⟦\\iff⟧⟦x = -3 \\text{ ou } x = 3⟧⟦x = 3⟧(seule la solution positive convient)",
     "titre": "Étape 2Exponentielle des deux membres"
    },
    {
@@ -23906,7 +26312,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}(12) = 4⟧⟦\\iff⟧⟦x^{\\log_{x}(12)} = x^{4}⟧(exponentielle des deux membres)⟦\\iff⟧⟦12 = x^{4}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = 12^{\\frac{1}{4}} \\text{ ou } x = -12^{\\frac{1}{4}}⟧⟦x = 12^{\\frac{1}{4}}⟧(seule la solution positive convient)",
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}(12) = 4⟧⟦\\iff⟧⟦x^{\\log_{x}(12)} = x^{4}⟧(exponentielle des deux membres)⟦\\iff⟧⟦12 = x^{4}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = -12^{\\frac{1}{4}} \\text{ ou } x = 12^{\\frac{1}{4}}⟧⟦x = 12^{\\frac{1}{4}}⟧(seule la solution positive convient)",
     "titre": "Étape 2Exponentielle des deux membres"
    },
    {
@@ -23945,7 +26351,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}(16) = 2⟧⟦\\iff⟧⟦x^{\\log_{x}(16)} = x^{2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦16 = x^{2}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = 4 \\text{ ou } x = -4⟧⟦x = 4⟧(seule la solution positive convient)",
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}(16) = 2⟧⟦\\iff⟧⟦x^{\\log_{x}(16)} = x^{2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦16 = x^{2}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = -4 \\text{ ou } x = 4⟧⟦x = 4⟧(seule la solution positive convient)",
     "titre": "Étape 2Exponentielle des deux membres"
    },
    {
@@ -24062,7 +26468,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}(255) = 2⟧⟦\\iff⟧⟦x^{\\log_{x}(255)} = x^{2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦255 = x^{2}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = \\sqrt{255} \\text{ ou } x = -\\sqrt{255}⟧⟦x = \\sqrt{255}⟧(seule la solution positive convient)",
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}(255) = 2⟧⟦\\iff⟧⟦x^{\\log_{x}(255)} = x^{2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦255 = x^{2}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = -\\sqrt{255} \\text{ ou } x = \\sqrt{255}⟧⟦x = \\sqrt{255}⟧(seule la solution positive convient)",
     "titre": "Étape 2Exponentielle des deux membres"
    },
    {
@@ -24101,7 +26507,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}(256) = 4⟧⟦\\iff⟧⟦x^{\\log_{x}(256)} = x^{4}⟧(exponentielle des deux membres)⟦\\iff⟧⟦256 = x^{4}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = 4 \\text{ ou } x = -4⟧⟦x = 4⟧(seule la solution positive convient)",
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}(256) = 4⟧⟦\\iff⟧⟦x^{\\log_{x}(256)} = x^{4}⟧(exponentielle des deux membres)⟦\\iff⟧⟦256 = x^{4}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = -4 \\text{ ou } x = 4⟧⟦x = 4⟧(seule la solution positive convient)",
     "titre": "Étape 2Exponentielle des deux membres"
    },
    {
@@ -24140,7 +26546,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}(4) = -2⟧⟦\\iff⟧⟦x^{\\log_{x}(4)} = x^{-2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦4 = x^{-2}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦4 = \\frac{1}{x^{2}}⟧(a⁻ᵐ = 1/aᵐ)⟦\\iff⟧⟦x^{2} = \\frac{1}{4}⟧⟦\\iff⟧⟦x = \\frac{1}{2} \\text{ ou } x = -\\frac{1}{2}⟧⟦x = \\frac{1}{2}⟧(seule la solution positive convient)",
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}(4) = -2⟧⟦\\iff⟧⟦x^{\\log_{x}(4)} = x^{-2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦4 = x^{-2}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦4 = \\frac{1}{x^{2}}⟧(a⁻ᵐ = 1/aᵐ)⟦\\iff⟧⟦x^{2} = \\frac{1}{4}⟧⟦\\iff⟧⟦x = -\\frac{1}{2} \\text{ ou } x = \\frac{1}{2}⟧⟦x = \\frac{1}{2}⟧(seule la solution positive convient)",
     "titre": "Étape 2Exponentielle des deux membres"
    },
    {
@@ -24218,7 +26624,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}\\left(\\frac{5}{2}\\right) = 2⟧⟦\\iff⟧⟦x^{\\log_{x}\\left(\\frac{5}{2}\\right)} = x^{2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\frac{5}{2} = x^{2}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = \\sqrt{\\frac{5}{2}} \\text{ ou } x = -\\sqrt{\\frac{5}{2}}⟧⟦x = \\sqrt{\\frac{5}{2}}⟧(seule la solution positive convient)",
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}\\left(\\frac{5}{2}\\right) = 2⟧⟦\\iff⟧⟦x^{\\log_{x}\\left(\\frac{5}{2}\\right)} = x^{2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\frac{5}{2} = x^{2}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = -\\sqrt{\\frac{5}{2}} \\text{ ou } x = \\sqrt{\\frac{5}{2}}⟧⟦x = \\sqrt{\\frac{5}{2}}⟧(seule la solution positive convient)",
     "titre": "Étape 2Exponentielle des deux membres"
    },
    {
@@ -24374,7 +26780,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}(81) = 4⟧⟦\\iff⟧⟦x^{\\log_{x}(81)} = x^{4}⟧(exponentielle des deux membres)⟦\\iff⟧⟦81 = x^{4}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = 3 \\text{ ou } x = -3⟧⟦x = 3⟧(seule la solution positive convient)",
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}(81) = 4⟧⟦\\iff⟧⟦x^{\\log_{x}(81)} = x^{4}⟧(exponentielle des deux membres)⟦\\iff⟧⟦81 = x^{4}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = -3 \\text{ ou } x = 3⟧⟦x = 3⟧(seule la solution positive convient)",
     "titre": "Étape 2Exponentielle des deux membres"
    },
    {
