@@ -282,6 +282,11 @@ un commit par groupe ; les entrées sont dans `BATTERIE_AUDIT` (`tests/python/ca
    `u/v = c ⇔ u = c · v` (on multiplie les deux membres par le dénominateur : `3^(x+1)/2^x = 1 ⇔ 3^(x+1) = 2^x`). Quand la suite commence par isoler l'exponentielle (`8 = 2 · 2^x ⇔ 4 = 2^x`),
    la chaîne continue dans la même carte. Un facteur d'un produit nul s'isole de la même façon (`(2^x − 3^x)(5^x − 25) = 0`). Trois propriétés de plus dans la liste fermée :
    (on passe un terme de l'autre côté), (on multiplie les deux membres par −1), (on multiplie les deux membres par le dénominateur).
+4. **Exponentielle au dénominateur** : méthode A, `aᵐ / aⁿ = aᵐ⁻ⁿ` quand les bases sont des puissances d'une même base (`8/2^x = 2^3/2^x = 2^(−x+3)`, propriété (aᵐ / aⁿ = aᵐ⁻ⁿ)),
+   sinon on multiplie les deux membres par le dénominateur (`3/e^x = 6 ⇔ 3 = 6e^x ⇔ e^x = 1/2`), puis la définition ou le message ; méthode B, `log(u/v) = log u − log v`
+   (`log(8/2^x) = log(2) ⇔ log(8) − log(2^x) = log(2)`, propriétés (log(a/b) = log a − log b), (ln(a/b) = ln a − ln b), (propriétés des logarithmes) avec un produit en plus).
+   Un coefficient de x purement numérique et négatif fait passer les termes en x de l'autre côté (`ln(3) − x = ln(6)` donne `x = ln(3) − ln(6)`, jamais `x(−1)`).
+   Quand la méthode B diviserait par un coefficient nul (`4^x = 2^(2x)`, `2^(2x)/4^(x−1) = 8`), la méthode A est donnée seule, sans sélecteur (avant : « pas encore »).
 
 ## Pour les 2M (plus tard, hors de cette version)
 

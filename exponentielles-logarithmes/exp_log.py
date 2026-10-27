@@ -894,10 +894,13 @@ PROP_EXPONENTIELLE = "exponentielle des deux membres"
 PROP_EXP_LOG = "10^(log(A)) = A, A > 0"
 PROP_EXP_LN = "e^(ln(A)) = A, A > 0"
 PROP_EXP_LOG_BASE = "a^(log_a(A)) = A, A > 0"
+PROP_QUOTIENT = "aᵐ / aⁿ = aᵐ⁻ⁿ"
+PROP_LOG_DIFFERENCE = "log(a/b) = log a − log b"
+PROP_LN_DIFFERENCE = "ln(a/b) = ln a − ln b"
 PROP_AUTRE_COTE = "on passe un terme de l'autre côté"
 PROP_FOIS_MOINS_UN = "on multiplie les deux membres par −1"
 PROP_FOIS_DENOMINATEUR = "on multiplie les deux membres par le dénominateur"
-PROPRIETES = frozenset({PROP_AUTRE_COTE, PROP_FOIS_MOINS_UN, PROP_FOIS_DENOMINATEUR,
+PROPRIETES = frozenset({PROP_AUTRE_COTE, PROP_FOIS_MOINS_UN, PROP_FOIS_DENOMINATEUR, PROP_QUOTIENT, PROP_LOG_DIFFERENCE, PROP_LN_DIFFERENCE,
                         PROP_PUISSANCE, PROP_PRODUIT, PROP_UN, PROP_MEME_BASE, PROP_ISOLER, PROP_PRODUIT_NUL, PROP_DISCRIMINANT,
                         PROP_DEFINITION_LOG, PROP_LOG_DEUX_MEMBRES, PROP_LOG_PUISSANCE, PROP_LOG_10K, PROP_LN_UN, PROP_EXPO_POSITIVE,
                         PROP_AUCUNE_SOLUTION, PROP_LOG_QUOTIENT, PROP_LOG_PRODUIT, PROP_LOG_REGROUPER, PROP_LOG_SOMME, PROP_LN_DEUX_MEMBRES, PROP_LN_PUISSANCE, PROP_CAR_LOG_10, PROP_CAR_LN_E, PROP_LOG_UN, PROP_EXPONENTIELLE, PROP_EXP_LOG, PROP_EXP_LN, PROP_EXP_LOG_BASE,
@@ -922,16 +925,41 @@ def _produit(arbres):
 class _Fac:
     """Un facteur d'un membre : « pow » = base^exposant (base rationnelle > 0, différente de 1, exposant polynôme),
     « cte » = constante rationnelle > 0. `arbre` : le facteur tel qu'écrit ; `imbrique` : (aᵐ)ⁿ écrit comme tel ;
-    `base_ecrite` : la base telle qu'écrite (nœud) ; `expo_ecrit` : l'exposant tel qu'écrit (nœud) quand il n'est pas recomposé."""
-    __slots__ = ("genre", "base", "exp", "arbre", "imbrique", "base_ecrite", "expo_ecrit")
+    `base_ecrite` : la base telle qu'écrite (nœud) ; `expo_ecrit` : l'exposant tel qu'écrit (nœud) quand il n'est pas recomposé ;
+    `inverse` : le facteur est au dénominateur (8/2^x)."""
+    __slots__ = ("genre", "base", "exp", "arbre", "imbrique", "base_ecrite", "expo_ecrit", "inverse")
 
     def __init__(self, genre, base, exp, arbre, imbrique=False, base_ecrite=None, expo_ecrit=None):
         self.genre, self.base, self.exp, self.arbre = genre, base, exp, arbre
         self.imbrique, self.base_ecrite, self.expo_ecrit = imbrique, base_ecrite, expo_ecrit
+        self.inverse = False
 
 
 def _aplatir(n):
     return _aplatir(n.a) + _aplatir(n.b) if isinstance(n, Op) and n.op == "*" else [n]
+
+
+def _aplatir_quotient(n):
+    """[(facteur, au dénominateur)] d'un produit ou d'un quotient qui contient l'inconnue : 8/2^x donne [(8, False), (2^x, True)] ;
+    une constante (1/2) reste un seul facteur."""
+    if isinstance(n, Op) and n.op == "*":
+        return _aplatir_quotient(n.a) + _aplatir_quotient(n.b)
+    if isinstance(n, Op) and n.op == "/" and variables(n):
+        return _aplatir_quotient(n.a) + [(f, not inverse) for f, inverse in _aplatir_quotient(n.b)]
+    return [(n, False)]
+
+
+def _inverser(fac, inverse):
+    fac.inverse = inverse
+    return fac
+
+
+def _assembler(arbres, facs):
+    """Le membre écrit à partir des arbres de ses facteurs : les facteurs du dénominateur sous la barre de fraction."""
+    haut = [a for a, f in zip(arbres, facs) if not f.inverse]
+    bas = [a for a, f in zip(arbres, facs) if f.inverse]
+    n = _produit(haut) if haut else Nb(1)
+    return Op("/", n, _produit(bas)) if bas else n
 
 
 def _base_valide(a):
@@ -971,7 +999,7 @@ def _facteur(f, x):
 
 
 def _facteurs(n, x):
-    return [_facteur(f, x) for f in _aplatir(n)]
+    return [_inverser(_facteur(f, x), inverse) for f, inverse in _aplatir_quotient(n)]
 
 
 _DECIMAUX = False        # vrai pendant la résolution d'un énoncé qui contient un décimal (voir _avec_decimaux)
@@ -1106,14 +1134,15 @@ def _etapes_membre(n, x, base0, b0):
     t4 = []
     for f, ch, k, t in zip(facs, changes, k_de, t3):
         t4.append(Pow(b0, _arbre_poly([k * c for c in f.exp])) if f.genre == "pow" and ch else t)
-    # T5 : aᵐ · aⁿ = aᵐ⁺ⁿ
+    # T5 : aᵐ · aⁿ = aᵐ⁺ⁿ, aᵐ / aⁿ = aᵐ⁻ⁿ
     total = [F(0)]
     for f, k in zip(facs, k_de):
-        total = _padd(total, [F(k)] if f.genre == "cte" else [k * c for c in f.exp])
-    t5 = [Pow(b0, _arbre_poly(total))] if len(facs) > 1 else t4
+        total = _padd(total, [F(k)] if f.genre == "cte" else [k * c for c in f.exp], -1 if f.inverse else 1)
+    t5 = Pow(b0, _arbre_poly(total)) if len(facs) > 1 else _assembler(t4, facs)
     un = any(f.genre == "cte" and f.base == 1 for f in facs)
-    etapes = [(n, None), (_produit(t1), PROP_PUISSANCE), (_produit(t2), PROP_UN if un else None),
-              (_produit(t3), PROP_PUISSANCE), (_produit(t4), None), (_produit(t5), PROP_PRODUIT)]
+    etapes = [(n, None), (_assembler(t1, facs), PROP_PUISSANCE), (_assembler(t2, facs), PROP_UN if un else None),
+              (_assembler(t3, facs), PROP_PUISSANCE), (_assembler(t4, facs), None),
+              (t5, PROP_QUOTIENT if any(f.inverse for f in facs) else PROP_PRODUIT)]
     chaine = Chaine([n])
     for arbre, prop in etapes[1:]:
         if tex(arbre) != tex(chaine.elements[-1]):
@@ -1139,7 +1168,9 @@ def _resoudre_polynome(A, B, At, Bt, x):
     if not any(P):
         return lignes, None, "Cette égalité est vraie pour tout nombre réel."
     if len(P) == 1:
-        c.ajouter(Eq(Nb(A[0]), Nb(B[0])), "⇔")
+        fausse = Eq(Nb(A[0]), Nb(B[0]))
+        if tex_element(fausse) != tex_element(c.elements[-1]):
+            c.ajouter(fausse, "⇔")
         return lignes, [], "Cette égalité est fausse : l'équation n'a aucune solution."
     if len(P) == 2:
         p, q = (A[1] if len(A) > 1 else F(0)), A[0]
@@ -1315,7 +1346,7 @@ def _cote_log(n, x):
                 return (0 if total == 0 else -1), None
             if signe < 0:
                 raise _Hors
-    return signe, [_facteur_log(f, x) for f in _aplatir(n)]
+    return signe, [_inverser(_facteur_log(f, x), inverse) for f, inverse in _aplatir_quotient(n)]
 
 
 def _preparer(g, d, x):
@@ -1685,15 +1716,21 @@ def _beta(g, d, x, fg, fd, ln):
             ecrit.setdefault(f.base, f.arbre)
     chaine = Chaine([Eq(g, d)])
     chaine.ajouter(Eq(Log(g, bl), Log(d, bl)), "⇔", PROP_LN_DEUX_MEMBRES if ln else PROP_LOG_DEUX_MEMBRES)
-    utiles = lambda facs: [f for f in facs if not (f.genre == "cte" and f.base == 1)] or facs[:1]           # un facteur 1 n'écrit pas log(1)
-    if len(utiles(fg)) > 1 or len(utiles(fd)) > 1:                   # log(ab) = log a + log b
-        separe = lambda facs: _somme_arbres([Log(f.arbre, bl) for f in utiles(facs)])
-        chaine.ajouter(Eq(separe(fg), separe(fd)), "⇔", PROP_LOG_SOMME)
-    tg, td = [_terme_ecrit(f, bl, ln) for f in fg], [_terme_ecrit(f, bl, ln) for f in fd]
+    utiles = lambda facs: [f for f in facs if not (f.genre == "cte" and f.base == 1 and not f.inverse)] or facs[:1]   # un facteur 1 n'écrit pas log(1)
+    signe = lambda f, a: Neg(a) if f.inverse and a is not None else a                                  # un facteur du dénominateur : − log(v)
+    if len(utiles(fg)) > 1 or len(utiles(fd)) > 1:                   # log(ab) = log a + log b, log(a/b) = log a − log b
+        separe = lambda facs: _somme_arbres([signe(f, Log(f.arbre, bl)) for f in utiles(facs)])
+        inverses = [f.inverse for f in utiles(fg) + utiles(fd)]
+        produits = sum(1 for f in utiles(fg) if not f.inverse) > 1 or sum(1 for f in utiles(fd) if not f.inverse) > 1
+        prop = PROP_LOG_SOMME if not any(inverses) else PROP_LOG_REGROUPER if produits else PROP_LN_DIFFERENCE if ln else PROP_LOG_DIFFERENCE
+        chaine.ajouter(Eq(separe(fg), separe(fd)), "⇔", prop)
+    ecrits = lambda facs: [(signe(f, t[0]), [(-c, k, a) if f.inverse else (c, k, a) for c, k, a in t[1]], t[2])
+                           for f, t in zip(facs, (_terme_ecrit(f, bl, ln) for f in facs))]
+    tg, td = ecrits(fg), ecrits(fd)
     chaine.ajouter(Eq(_somme_arbres([t[0] for t in tg if t[0] is not None]), _somme_arbres([t[0] for t in td if t[0] is not None])),
                    "⇔", PROP_LN_PUISSANCE if ln else PROP_LOG_PUISSANCE)
     monos_g, monos_d = [m for t in tg for m in t[1]], [m for t in td for m in t[1]]
-    conv = [_terme_converti(f, ln) for f in fg + fd]
+    conv = [signe(f, _terme_converti(f, ln)) for f in fg + fd]
     if any(c is not None for c in conv):                             # log(10) = 1, ln(e) = 1
         cg, cd = conv[:len(fg)], conv[len(fg):]
         arbre_g = _somme_arbres([c if c is not None else t[0] for c, t in zip(cg, tg) if c is not None or t[0] is not None])
@@ -1747,10 +1784,12 @@ def _premier_degre(chaine, mg, md, x, ecrit, ln):
     cg, cd = [t for t in mg if t[1] == 0], [t for t in md if t[1] == 0]
     # les termes en x du côté qui laisse la constante positive (2.24 a : à gauche ; b et c : à droite)
     a_gauche = sum(_valeur_terme(t) for t in cd) - sum(_valeur_terme(t) for t in cg) > -1e-12
-    if a_gauche:
-        coeff, cte = xg + [_oppose(t) for t in xd], [_oppose(t) for t in cg] + cd
-    else:
-        coeff, cte = xd + [_oppose(t) for t in xg], [_oppose(t) for t in cd] + cg
+    cotes = lambda gauche: (xg + [_oppose(t) for t in xd], [_oppose(t) for t in cg] + cd) if gauche else \
+        (xd + [_oppose(t) for t in xg], [_oppose(t) for t in cd] + cg)
+    coeff, cte = cotes(a_gauche)
+    if all(a is None for _, _, a in _fusionner(coeff)) and sum(c for c, _, _ in _fusionner(coeff)) < 0:
+        a_gauche = not a_gauche                            # ln(3) − x = ln(6) : x à droite, jamais x · (−1)
+        coeff, cte = cotes(a_gauche)
     coeff = [(c, 0, a) for c, _, a in _fusionner(coeff)]
     D, C = _somme(coeff, x, ecrit, ln), _somme(cte, x, ecrit, ln)
     if abs(valeur(D)) < 1e-12:
@@ -1860,7 +1899,15 @@ def _un_facteur(g, d, x, methode):
     if methode == METHODE_LOGARITHMES:
         return _logarithmes(g, d, x)
     return _essayer(lambda: _aucune_solution(g, d, x), lambda: _essayer(lambda: _meme_base_e(g, d, x), lambda: _meme_base(g, d, x)),
-                    lambda: _definition(g, d, x), lambda: _message_meme_base(g, d, x))
+                    lambda: _definition(g, d, x), lambda: _multiplier_le_denominateur(g, d, x, methode), lambda: _message_meme_base(g, d, x))
+
+
+def _multiplier_le_denominateur(g, d, x, methode):
+    """Méthode A, une exponentielle au dénominateur qui n'est pas de la même base : on multiplie les deux membres par le dénominateur
+    (3/e^x = 6 ⇔ 3 = 6 · e^x), puis la méthode continue."""
+    if not any(isinstance(n, Op) and n.op == "/" and variables(n.b) for n in (g, d)):
+        raise _Hors
+    return _apres_isolement(g, d, x, methode)
 
 
 def _termes_signes(n):
@@ -2401,6 +2448,9 @@ def corriger_equation(g, d, x, methode=METHODE_LOGARITHMES):
     variantes = variantes_equation(g, d, x)
     if variantes is not None:
         return variantes[methode]
+    seule = resolution_exponentielle(g, d, x, METHODE_MEME_BASE)
+    if seule is not None and not seule.get("message"):
+        return seule                                   # 4^x = 2^(2x) : la méthode B diviserait par log(4) − 2 log(2) = 0, la méthode A seule
     for essai in (logarithmique, lineaire_logarithmes):
         r = essai(g, d, x)
         if r is not None:

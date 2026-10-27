@@ -65,6 +65,9 @@ class TestBatterieAudit(unittest.TestCase):
                     if r.get("message"):                   # la méthode A ne s'applique pas : elle le dit, sans solution
                         self.assertEqual(r["solutions"], [])
                         continue
+                    if attendu is None:                    # tout réel
+                        self.assertIsNone(r["solutions"])
+                        continue
                     self.assertEqual([round(el.valeur(n), 3) + 0.0 for n in r["solutions"]], [round(v, 3) for v in attendu])
 
     def test_oracle_les_solutions_verifient_l_equation_de_l_enonce(self):
@@ -167,11 +170,43 @@ class TestIsolerLesExponentielles(unittest.TestCase):
 
     def test_deux_membres_negatifs_et_denominateur(self):
         self.assertEqual(lignes("-2^x=-3^(x+1)")[0], r"-2^{x} = -3^{x + 1} \iff 2^{x} = 3^{x + 1} \quad \text{(on multiplie les deux membres par −1)}")
-        self.assertEqual(lignes("3^(x+1)/2^x=1")[0],
+        self.assertEqual(lignes("3^(x+1)/2^x=1", el.METHODE_MEME_BASE)[0],          # méthode B : log(u/v) = log u − log v (groupe 4)
                          r"\frac{3^{x + 1}}{2^{x}} = 1 \iff 3^{x + 1} = 2^{x} \quad \text{(on multiplie les deux membres par le dénominateur)}")
 
     def test_produit_nul_d_une_difference(self):
         self.assertEqual(self.cartes("(2^x-3^x)(5^x-25)=0"), ["Produit nul", "Facteur 1", "Facteur 2"])
+
+
+class TestQuotients(unittest.TestCase):
+    """Groupe 4 (T2) : méthode A, aᵐ/aⁿ = aᵐ⁻ⁿ (même base) ou multiplier les deux membres ; méthode B, log(u/v) = log u − log v."""
+
+    def test_meme_base_puissance_d_un_quotient(self):
+        self.assertEqual(lignes("8/2^x=2", el.METHODE_MEME_BASE)[0], r"\frac{8}{2^{x}} = \frac{2^{3}}{2^{x}} = 2^{-x + 3} \quad \text{(aᵐ / aⁿ = aᵐ⁻ⁿ)}")
+        self.assertEqual(el.tex_solution(corriger("8/2^x=2", el.METHODE_MEME_BASE)), r"S = \left\{2\right\}")
+        self.assertEqual(el.tex_solution(corriger("2^(x+1)/2^x=2", el.METHODE_MEME_BASE)), r"S = \mathbb{R}")
+
+    def test_methode_a_multiplie_les_deux_membres(self):
+        self.assertEqual(lignes("3/e^x=6", el.METHODE_MEME_BASE), [
+            r"\frac{3}{e^{x}} = 6 \iff 3 = 6e^{x} \quad \text{(on multiplie les deux membres par le dénominateur)} "
+            r"\iff \frac{1}{2} = e^{x} \quad \text{(on isole le terme exponentiel)}",
+            r"\frac{1}{2} = e^{x} \iff e^{x} = \frac{1}{2} \iff x = \ln\left(\frac{1}{2}\right) \quad \text{(définition du logarithme)}"])
+
+    def test_methode_b_logarithme_d_un_quotient(self):
+        self.assertIn(r"\iff \log(8) - \log(2^{x}) = \log(2) \quad \text{(log(a/b) = log a − log b)}", lignes("8/2^x=2")[0])
+        self.assertIn(r"\iff \ln(3) - \ln(e^{x}) = \ln(6) \quad \text{(ln(a/b) = ln a − ln b)}", lignes("3/e^x=6")[0])
+        self.assertTrue(lignes("3/e^x=6")[0].endswith(r"\iff x = \ln(3) - \ln(6)"))                  # jamais x · (−1)
+        self.assertIn(r"\iff \log(3) + \log(2^{x}) - \log(4^{x}) = \log(5) \quad \text{(propriétés des logarithmes)}", lignes("3*2^x/4^x=5")[0])
+        for saisie in ["8/2^x=2", "3/e^x=6", "2^x/3^x=1"]:
+            self.assertEqual([c["titre"] for c in corriger(saisie)["etapes"]], ["Logarithme des deux membres"])
+
+    def test_methode_a_seule_quand_b_diviserait_par_zero(self):
+        for saisie, fin in [("4^x=2^(2x)", r"S = \mathbb{R}"), ("2^(2x)/4^(x-1)=8", r"S = \varnothing")]:
+            with self.subTest(saisie):
+                s = rel.resoudre(saisie)
+                self.assertTrue(s["ok"])
+                self.assertNotIn("variantes", s)
+                self.assertEqual(s["cartes"][-1]["blocs"][0]["tex"], fin)
+                self.assertEqual(corriger(saisie)["genre"], "meme_base")
 
 
 class TestMessages(unittest.TestCase):
