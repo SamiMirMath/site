@@ -3,7 +3,8 @@ exp_log.py — Outil « Exponentielles et logarithmes » (3C) : lecture de la sa
 
 Lecture propre à l'outil, parce que le tokeniseur de l'Ensemble de définition lit `log` comme `ln` et ne connaît ni log_a ni aˣ :
     log(x)  logarithme en base 10        ln(x)  logarithme en base e        log2(x), log_2(x), log_x(x)  base 2, base 2, base x
-    exp(x), e^x, sqrt(x), + - * / ^ ( ), multiplication implicite (2x, 3ln(x), (x+1)(x-2)), virgule ou point décimal, un seul « = ».
+    exp(x), e^x, sqrt(x), + - * / ^ ( ), multiplication implicite (2x, 3ln(x), (x+1)(x-2)), virgule ou point décimal, un seul « = » ;
+    les exposants ² et ³ se lisent ^2 et ^3 (x² = x^2).
 
 Le tokeniseur reconnaît les noms de fonction (sqrt, exp, log…, ln) AVANT les lettres isolées : « exp » n'est jamais e·x·p.
 La lettre e est toujours le nombre e ; elle ne peut pas être l'inconnue.
@@ -250,7 +251,7 @@ Tok = namedtuple("Tok", "type val base")      # type : num, var, fn, op ; base :
 
 _BASE_SOULIGNEE = re.compile(r"_(\d+(?:[.,]\d+)?|[a-z])")
 _BASE_COLLEE = re.compile(r"\d+")
-_SYMBOLES = str.maketrans({"−": "-", "–": "-", "×": "*", "·": "*", "⋅": "*", "÷": "/"})
+_SYMBOLES = str.maketrans({"−": "-", "–": "-", "×": "*", "·": "*", "⋅": "*", "÷": "/", "²": "^2", "³": "^3"})   # x² se lit x^2 (clavier de téléphone)
 _OPERATEURS = "+-*/^()="
 _INEGALITES = "<>≤≥≠"
 

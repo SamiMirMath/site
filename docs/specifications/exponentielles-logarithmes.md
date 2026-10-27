@@ -34,7 +34,7 @@ en mots », tâtonnement (2.14), graphiques (2.1, 2.9, 2.12), écrire un nombre 
 
 - **log = logarithme en base 10** (10ˣ = y ⇔ x = log(y), p. 24) ; **ln = logarithme en base e** (p. 25) ; **log_a** pour la base a (p. 25).
   Le moteur de l'Ensemble de définition lit `log` comme `ln` : le nouvel outil a sa propre lecture et n'y touche pas.
-- Saisie : `log(x)`, `ln(x)`, `log2(x)` ou `log_2(x)`, `log10(x)`, `exp(x)`, `e^x`, `sqrt(x)`, `^`, `*`, `/`, multiplication implicite
+- Saisie : `log(x)`, `ln(x)`, `log2(x)` ou `log_2(x)`, `log10(x)`, `exp(x)`, `e^x`, `sqrt(x)`, `^` (ou ² et ³), `*`, `/`, multiplication implicite
   (`2x`, `3ln(x)`), virgule ou point décimal, un seul « = », une seule lettre pour l'inconnue.
 - **`e` est toujours le nombre e** et ne peut pas être l'inconnue : message « La lettre e désigne le nombre e ≈ 2,718 : choisis une
   autre lettre pour l'inconnue. » Les noms de fonction (`sqrt`, `exp`, `ln`, `log_a`, `log2`, `log`) sont reconnus **avant** les lettres
@@ -303,6 +303,7 @@ un commit par groupe ; les entrées sont dans `BATTERIE_AUDIT` (`tests/python/ca
 8. **log(x²) = c, ln(x²) = c, log_a(x²) = c** (second membre quelconque) : l'exponentielle des deux membres, `x² = 10^c` (avec l'écriture exacte quand le cours la donne : `10^(−1) = 1/10`,
    `10^1,5 = 10√10`), puis `x = −√(10^c) ou x = √(10^c)` (`log(x²) = −1 ⇔ x = −√(1/10) ou x = √(1/10)`, `ln(x²) = 1 ⇔ x² = e ⇔ x = ±√e`), puis la Vérification ; jamais `2 log(x)`.
    Un second membre entier garde la factorisation (`x² − 100 = 0 ⇔ (x + 10)(x − 10) = 0`). Les trinômes généraux à coefficients non entiers (`log(x² − 1) = 1/2`) restent « pas encore ».
+9. **Saisie de ² et ³** (clavier d'un téléphone) : lus `^2` et `^3` (`2^(x²)·4^x = 8` est `2^(x^2)·4^x = 8`) ; `2^x²` demande toujours des parenthèses.
 
 ## Pour les 2M (plus tard, hors de cette version)
 

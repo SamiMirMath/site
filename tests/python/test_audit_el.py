@@ -309,6 +309,21 @@ class TestLogarithmeDeXCarre(unittest.TestCase):
         self.assertEqual(rel.resoudre("log(x^2-1)=1/2"), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
 
 
+class TestExposantsEnChiffresSuperieurs(unittest.TestCase):
+    """Groupe 9 (D3) : ² et ³ se lisent ^2 et ^3."""
+
+    def test_meme_arbre_et_meme_corrige(self):
+        for saisie, ecrite in [("x²=4", "x^2=4"), ("2^(x²)*4^x=8", "2^(x^2)*4^x=8"), ("log(x²)=2", "log(x^2)=2"), ("(x+1)³=8", "(x+1)^3=8"),
+                               ("2^(x³)=8", "2^(x^3)=8"), ("10²", "10^2")]:
+            with self.subTest(saisie):
+                self.assertEqual(el.lire_membres(saisie), el.lire_membres(ecrite))
+                self.assertEqual(rel.resoudre(saisie), rel.resoudre(ecrite))
+        self.assertEqual(el.apercu("2^(x²)=5"), el.apercu("2^(x^2)=5"))
+
+    def test_l_exposant_compose_demande_toujours_des_parentheses(self):
+        self.assertEqual(rel.resoudre("2^x²=5")["erreur"], "Mettez les exposants entre parenthèses : 2^(3^2) ou (2^3)^2.")
+
+
 class TestMessages(unittest.TestCase):
     def test_logarithme_et_terme_en_x_ou_exponentielle_hors_programme(self):
         """Groupe 2 : un logarithme avec un terme en x ou une exponentielle (de part et d'autre, ou en facteur) n'est pas une équation du cours."""

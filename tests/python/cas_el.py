@@ -112,6 +112,8 @@ BATTERIE_AUDIT = [
     # log(x²) = c par l'exponentielle des deux membres, x² = 10^c ⇔ x = ±√(10^c) (T4 limité)
     ("log(x^2)=-1", [-0.316, 0.316]), ("ln(x^2)=1", [-1.649, 1.649]), ("log_2(x^2)=-1", [-0.707, 0.707]), ("log(x^2)=1,5", [-5.623, 5.623]),
     ("log(x^2)=1/2", [-1.778, 1.778]), ("2ln(x^2)-5=0", [-3.490, 3.490]), ("ln(ln(x^2))=1", [-3.893, 3.893]),
+    # exposants ² et ³ saisis au clavier d'un téléphone (D3)
+    ("2^(x²)*4^x=8", [-3.0, 1.0]), ("log(x²)=2", [-10.0, 10.0]), ("9^(x²)=3^(x+1)", [-0.5, 1.0]), ("e^(x²)=e^(2x+3)", [-1.0, 3.0]),
 ]
 
 # Aucune méthode ne s'applique (EL-11) : un vrai hors-programme, ou une forme du programme que l'outil ne gère pas encore
