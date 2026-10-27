@@ -102,6 +102,12 @@ l'enseignant : le ⇔ en début de ligne, les ⇔ alignés les uns sous les autr
 ligne (`√2 = 2^(1/2) = 4^(1/4)`, `Δ = 1² − 4·1·2 = −7`) ; une suite d'égalités qui a une propriété repart sur une nouvelle ligne dont le « = » est
 aligné sous celui de la ligne d'au-dessus (`x = log(2)/(log(2) − log(3))` puis `= log(2)/log(2/3)`). Les autres outils ne sont pas encore concernés.
 
+**R15. Contrôle à la calculatrice** (décision du 27.10.2026, outil « Exponentielles et logarithmes », méthode « Logarithmes »). On applique les propriétés des logarithmes **à ce qui est écrit** :
+`log(10^8) = 8·log(10)`, `log(100) = log(10²) = 2·log(10)`, mais `log(32)` reste `log(32)`. Quand la solution est un **rationnel** (décidé exactement, jamais par un arrondi) alors qu'elle est écrite avec des
+logarithmes (`x = 1 + log(32)/log(2)`), la carte « Solution » garde la valeur exacte et le texte **à la place de « soit x ≈ … »** est : « Contrôlez à la calculatrice : log(32)/log(2) = 5, on retrouve x = 6. »
+(le plus petit morceau à logarithmes dont la valeur est rationnelle ; « on retrouve x = −3 ou x = 1. » avec deux solutions). Une solution non rationnelle garde « soit x ≈ … » ; une solution écrite sans
+logarithme (`x = −1`) n'a pas de contrôle.
+
 
 ---
 

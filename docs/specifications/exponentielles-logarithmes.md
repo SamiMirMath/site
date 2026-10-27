@@ -45,6 +45,35 @@ en mots », tâtonnement (2.14), graphiques (2.1, 2.9, 2.12), écrire un nombre 
 - **Fractions et notation scientifique** (décision du 26.10.2026 corrigée le même jour, règle R13 du guide de rédaction, valable pour tous les outils) : toute valeur exacte que l'outil **calcule à partir d'entiers ou de puissances** s'écrit en **fraction** (5/2, 1/10, `log(3/2)`, log₉(27) = 3/2), jamais en décimal ; un décimal **écrit dans l'énoncé** (0,7 ; 1,045 ; −0,02) garde son écriture, **exposant compris** (`log(x) = −0,27` donne `x = 10^(−0,27) ≈ 0,537`) ; quand le calcul part de décimaux de l'énoncé et donne un **décimal fini**, on garde le décimal comme le corrigé (`2000 · 1,045ⁿ = 3805` donne `1,045ⁿ = 1,9025`, pas 761/400 ; `log₄(0,5) = −0,5`) ; un résultat qui n'est pas un décimal fini reste une fraction (13/60). Dans le code : `_nb_exact` (fraction ou décimal selon `_avec_decimaux`), `_nb_ecrit`. Les très grands et très petits nombres restent en **notation scientifique** : une puissance de 10 sous 10⁻³ ou dès 10⁶ n'est pas développée (`x = 10¹⁰`, `x = 10⁻⁴`), et une valeur approchée sous 10⁻³ ou dès 10⁶ s'écrit `3,162 × 10⁻⁵`, `1 × 10¹⁰`. Un rationnel n'a pas de ligne « soit x ≈ … ».
   Valeurs approchées avec « ≈ », jamais avec « ≅ » ni « ~ ». L'expression « valeur approchée » n'est pas écrite (SOC-15).
 
+## Sélecteur de méthode (décision du 27.10.2026)
+
+**Chaque équation exponentielle** (a^f = b, k·a^f = m·b^h, produit nul d'exponentielles, tout ce que résolvent aujourd'hui E1, E2 et E3) se résout de **deux façons**, calculées en une fois ;
+la page affiche deux boutons côte à côte au-dessus de la résolution, dans le style des boutons « Méthode géométrique / Méthode algébrique » du simplexe : **« Même base / définition »** (A) et **« Logarithmes »** (B, **défaut**).
+Cliquer un bouton affiche l'autre résolution instantanément, sans relancer le calcul ; le choix est gardé d'une équation à l'autre (`localStorage`, dans un `try/catch`, défaut « Logarithmes »). Les équations logarithmiques et les calculs de log_a(y) n'ont pas de sélecteur. Les exercices au hasard ont le même sélecteur.
+Boutons accessibles au clavier (`aria-pressed`), lisibles à 360 px ; l'impression montre la méthode affichée (ligne « Méthode : … »). Le format de sortie (`variantes`, `variante_defaut`) est décrit dans le [socle commun](socle-commun.md) ; les autres outils n'en sont pas changés.
+
+**Méthode A « Même base / définition »**, dans l'ordre : (1) la méthode « même base » (E1) : `10^(x+1) = 10^8 ⇔ x + 1 = 8` (même base : a^A = a^B ⇔ A = B) `⇔ x = 7`, e comprise (`e^x = e^3 ⇔ x = 3`, `e^x = e^(x+1) ⇔ 0 = 1`, S = ∅) ;
+(2) base 10 ou e **seule** avec un second membre > 0 : la définition du logarithme (`10^x = 8 ⇔ x = log(8)`, `e^x = 7 ⇔ x = ln(7)`) ; (3) second membre ≤ 0 ou membres de signes contraires : la carte « Aucune solution », la même qu'en B ;
+(4) un produit nul : chaque facteur se résout par A ; (5) sinon la méthode ne s'applique pas : le bouton reste cliquable et la carte « Même base / définition » (sans badge d'étape) affiche
+« **b n'est pas une puissance de a : il faut les logarithmes.** » (`3^x = 20` : « 20 n'est pas une puissance de 3 » ; `2^(x−1) = 3^x` : « 3 n'est pas une puissance de 2 » ; `e^x = 2^x` : « 2 n'est pas une puissance de e » ;
+`2^x = 100` : « 100 n'est pas une puissance de 2 ») ; si l'exponentielle doit d'abord être isolée (`3·2^x = 5`), la carte « Isoler l'exponentielle » vient avant le message (« 5/3 n'est pas une puissance de 2 »). Il n'y a alors pas de carte « Solution ».
+
+**Méthode B « Logarithmes »** (toujours disponible) : le logarithme des deux membres (**ln dès qu'une base e apparaît**, log sinon), puis `log(a^A) = A·log(a)` **sur toute puissance écrite**, puis `log(10) = 1` ou `ln(e) = 1` (propriété « car log(10) = 1 », « car ln(e) = 1 », écrite comme la justification « car D ≠ 0 »).
+On applique les propriétés **à ce qui est écrit** : `log(10^8) = 8·log(10)`, mais `log(32)` reste `log(32)`.
+- `10^(x+1) = 10^8 ⇔ log(10^(x+1)) = log(10^8)` (log des deux membres) `⇔ (x + 1)·log(10) = 8·log(10)` (log(a^A) = A · log(a)) `⇔ x + 1 = 8` (car log(10) = 1) `⇔ x = 7`.
+- `10^x = 8 ⇔ log(10^x) = log(8) ⇔ x·log(10) = log(8) ⇔ x = log(8)` (car log(10) = 1).
+- `e^x = 7 ⇔ ln(e^x) = ln(7) ⇔ x·ln(e) = ln(7) ⇔ x = ln(7)` (car ln(e) = 1) ; `e^x = e^3 ⇔ x·ln(e) = 3·ln(e) ⇔ x = 3` (car ln(e) = 1).
+- **Une puissance de 10 dans un log** (une puissance de e dans un ln) **est réécrite** pour que la propriété s'applique : `log(100) = log(10²) = 2·log(10)`, `log(0,01) = log(10⁻²) = −2·log(10)`, puis `log(10) = 1`. Ainsi `2^x = 100 ⇔ log(2^x) = log(100)` (log des deux membres) `⇔ x·log(2) = log(10²) = 2·log(10)` (log(a^A) = A · log(a)) `⇔ x·log(2) = 2` (car log(10) = 1) `⇔ x = 2/log(2)` (corrigé 2.23 a), et `10^(2x) = 0,01` donne `x = −1`, sans contrôle à la calculatrice.
+- **Jamais** `log(10ᵏ) = k`, `ln(e^A) = A` ni la définition du logarithme en B : ces propriétés ne servent qu'en A et pour les calculs de log_a(y).
+- Ensuite comme avant : développement, termes en x du côté qui laisse la constante positive, `x(D) = C`, `x = C/D (car D ≠ 0)`, regroupement en un seul logarithme pour des bases différentes (2.24, inchangé). Les autres nombres restent des logarithmes : `2^(x−1) = 32 ⇔ … ⇔ x = 1 + log(32)/log(2)`.
+- **x² en exposant** : `2^(x²)·4^x = 8 ⇔ x²·log(2) + x·log(4) = log(8)` (les logarithmes de 4 et de 8 restent écrits), puis `x²·log(2) + x·log(4) − log(8) = 0`, `Δ = log(4)² + 4·log(2)·log(8)` (formule du discriminant), `x = (−log(4) ± √Δ)/(2·log(2))`, puis le contrôle à la calculatrice (x = −3 ou x = 1). Sans terme constant (`2^(x²) = 8^x`) : `x²·log(2) − x·log(8) = 0 ⇔ x(x·log(2) − log(8)) = 0` (un produit est nul si l'un des facteurs est nul).
+  Le signe de Δ est décidé exactement quand tous les logarithmes sont des multiples rationnels d'un même log(r), sinon en virgule flottante avec une marge de 10⁻¹² ; Δ < 0 donne la remarque « Δ < 0 : l'équation n'a aucune solution réelle. ».
+- Un cas où B diviserait par un coefficient nul alors que les bases sont écrites différemment (4^x = 2^(2x)) reste « pas encore » en B (aucune entrée de la batterie ni du pool).
+
+**Contrôle à la calculatrice** (règle R15 du guide) : quand une solution est un **rationnel** (valeur exacte décidée exactement, jamais par un arrondi) mais que la carte « Solution » l'écrit avec des logarithmes (S = {1 + log(32)/log(2)}), la ligne « soit x ≈ … » est remplacée par
+« **Contrôlez à la calculatrice : log(32)/log(2) = 5, on retrouve x = 6.** » (le plus petit sous-arbre à logarithmes dont la valeur est rationnelle ; avec le discriminant : « Contrôlez à la calculatrice : on retrouve x = −3 ou x = 1. »). La carte « Solution » garde `S = {valeur exacte}`.
+Une solution non rationnelle garde « soit x ≈ … ». Aucun contrôle quand la solution s'écrit sans logarithme (`10^(2x) = 0,01` : `S = {−1}`).
+
 ## Rédaction
 
 Une carte par application de méthode, comme la Factorisation (T21) : « Étape k », méthode en badge, chaîne de « ⇔ » une étape par ligne,
@@ -67,14 +96,15 @@ Propriétés nommées (liste fermée, testée) : (on isole le terme exponentiel)
 (log_a(a^k) = k), (ln(e^k) = k), (on isole le logarithme), (le logarithme est bien défini), (une base de logarithme est strictement positive et différente de 1), (seule la solution positive convient),
 (définition du logarithme), (log(10ᵏ) = k), (ln(1) = 0), (une exponentielle est strictement positive), (aucune solution),
 (un produit est nul si l'un des facteurs est nul), (formule du discriminant), (changement de base), (log(ab) = log a + log b), (ln des deux membres), (ln(e^A) = A),
-ainsi que la justification de division (car D ≠ 0), où D est le coefficient logarithmique (1 − ln 2, log 2 − log 3).
+(ln(a^A) = A · ln(a)), (exponentielle des deux membres), (10^(log(A)) = A, A > 0), (e^(ln(A)) = A, A > 0), (a^(log_a(A)) = A, A > 0),
+ainsi que les justifications (car log(10) = 1), (car ln(e) = 1) et de division (car D ≠ 0), où D est le coefficient logarithmique (1 − ln 2, log 2 − log 3). « définition du logarithme », « log(10ᵏ) = k » et « ln(e^k) = k » ne servent plus qu'en méthode A et pour les calculs de log_a(y), jamais en méthode B.
 
-**Cartes de la méthode « logarithme »** (étape 3) : « Isoler l'exponentielle » (si besoin), puis « Définition du logarithme » (base 10 ou base e : `10^f = b ⇔ f = log(b)`,
+**Cartes de la méthode « logarithme »** (étape 3 ; depuis le 27.10.2026 la méthode « Logarithmes » (B) ci-dessus remplace le log des deux membres de cette rédaction, la définition du logarithme ne reste qu'en méthode A) : « Isoler l'exponentielle » (si besoin), puis « Définition du logarithme » (base 10 ou base e : `10^f = b ⇔ f = log(b)`,
 `e^f = b ⇔ f = ln(b)`) ou « Logarithme des deux membres » (toute autre base) ou « Aucune solution » (second membre ≤ 0). Un produit nul donne « Produit nul » (la ligne
 `P₁·P₂ = 0 ⇔ P₁ = 0 ou P₂ = 0`), puis une carte « Facteur 1 », « Facteur 2 »… qui reprend les lignes de la résolution de chaque facteur. Une équation du premier
 degré dont le second membre contient un logarithme (x = ln 3, 2x = ln(0,1)) a la carte « Équation du premier degré » (aucune carte quand x est déjà isolé).
 
-**Carte de la méthode « bases différentes »** (étape 4, corrigé 2.24) : `k · a^f = m · b^h` (k et m constantes facultatives, f et h du 1er degré). Une carte « Bases différentes », une seule chaîne :
+**Carte de la méthode « bases différentes »** (étape 4, corrigé 2.24 ; reprise par la méthode B, avec `log(10)` et `ln(e)` remplacés par 1 par la propriété « car … » et non plus par `log(10ᵏ) = k`) : `k · a^f = m · b^h` (k et m constantes facultatives, f et h du 1er degré). Une carte « Bases différentes », une seule chaîne :
 `k·a^f = m·b^h ⇔ log(k·a^f) = log(m·b^h)` (log des deux membres), puis, s'il y a des facteurs constants, `⇔ log(k) + log(a^f) = log(m) + log(b^h)` (log(ab) = log a + log b),
 `⇔ log(k) + f · log(a) = log(m) + h · log(b)` (log(a^A) = A · log(a)), le développement `x · log(2) − log(2) = …`, puis les termes en x mis en facteur **du côté qui laisse la constante positive**
 (`x(log 2 − log 3) = log 2` en 2.24 a ; `log 4 = x(3 log 6 − log 4)` en b ; `log 3 + 4 log 2 = x(log 3 − log 2)` en c), les termes positifs d'abord, les constantes de même logarithme réunies
@@ -91,7 +121,7 @@ et les termes en x sont réunis sur une ligne à part avant la mise en facteur :
 **Signes** : `k · a^f` et `m · b^h` de signes contraires donnent S = ∅ (« une exponentielle est strictement positive », carte « Aucune solution ») ; deux membres négatifs (−2^x = −3^(x+1)) ne sont pas encore traités.
 Hors de la méthode (message « pas encore », jamais « hors programme ») : un exposant du 2ᵉ degré ou plus (2^(x³) = 8), une somme d'exponentielles (message hors-programme si les bases diffèrent, EL-11), e^x = e^(x+1) (même base e, pas encore traité).
 
-**Cartes de la méthode « définition du logarithme »** (étape 5, corrigé 2.15, 2.18, 2.21, 2.22) : « Isoler le logarithme » (si besoin : `2 log x − 5 = 0 ⇔ 2 log x = 5 ⇔ log x = 5/2`, propriété « on isole le logarithme »),
+**Cartes de la méthode « définition du logarithme »** (étape 5, corrigé 2.15, 2.18, 2.21, 2.22 ; **remplacée le 27.10.2026 par l'exponentielle des deux membres**, voir la section suivante ; ce qui suit décrit les cartes avant ce changement, les écritures exactes et la Vérification restent) : « Isoler le logarithme » (si besoin : `2 log x − 5 = 0 ⇔ 2 log x = 5 ⇔ log x = 5/2`, propriété « on isole le logarithme »),
 puis « Définition du logarithme » : une seule chaîne `log_a(u) = c ⇔ u = a^c` (définition du logarithme), l'écriture exacte de a^c ajoutée par « = » quand le cours la donne
 (`x = 10³ = 1’000`, `10⁻¹ = 1/10`, `10^(5/2) = 100√10`, `10^1,5 = 10√10` quand l'énoncé écrit 1,5, `10^0 = 1`, `2⁴ = 16` ; jamais pour e^c, ni pour 10¹⁰ et 10⁻⁴, laissés en notation scientifique). Les logarithmes imbriqués s'épluchent de l'extérieur vers l'intérieur, une étape par logarithme
 (`log(log(log x)) = 0 ⇔ log(log x) = 10⁰ = 1 ⇔ log x = 10¹ = 10 ⇔ x = 10¹⁰`). Un argument du 1er degré se résout comme à la main : `5 − x = 10⁸ ⇔ x = 5 − 10⁸ = −99’999’995` (q − x = c donne x = q − c), `2x + 1 = 10⁸ ⇔ 2x = 10⁸ − 1 ⇔ x = (10⁸ − 1)/2` ;
@@ -99,6 +129,11 @@ un argument du 2ᵈ degré (`log(x²) = 2`) continue dans la même chaîne comme
 **Vérification** (carte à part, seulement quand l'argument d'un seul logarithme n'est pas x seul) : `5 − x = 10⁸ > 0 (le logarithme est bien défini) ✓`.
 **Base inconnue** `log_x(n) = k` (k entier de 1 à 12 ; si n n'est pas une puissance k-ième, la racine reste écrite : `x² = 255 ⇔ x = √255 ou x = −√255`, S = {√255}, soit x ≈ 15,969 ; `x³ = 2 ⇔ x = 2^(1/3)`) : carte « Condition » (`x > 0 et x ≠ 1`, une base de logarithme est strictement positive et différente de 1), puis `x^k = n`, `x = r ou x = −r` pour k pair, et une ligne
 « seule la solution positive convient ». Pas encore traités (message « pas encore ») : second membre avec un logarithme, plusieurs logarithmes, base inconnue d'exposant non entier, trinôme à coefficients non entiers (`log(x²) = −1`), argument de degré 3 ou plus.
+
+**Équations logarithmiques : l'exponentielle des deux membres** (décision du 27.10.2026, pas de sélecteur) : la définition du logarithme est remplacée par l'application de l'exponentielle aux deux membres, puis `10^(log(A)) = A`. Badge de la carte : « Exponentielle des deux membres ».
+`log(x+1) = 7 ⇔ 10^(log(x+1)) = 10^7` (exponentielle des deux membres) `⇔ x + 1 = 10^7` (10^(log(A)) = A, A > 0) `⇔ x = 10^7 − 1`, puis la Vérification (`x + 1 = 10^7 > 0` ✓). Avec ln : `e^(ln(A)) = A` ; avec une base a : `a^(log_a(A)) = A`.
+Base inconnue : `log_x(256) = 4 ⇔ x^(log_x(256)) = x^4 ⇔ 256 = x^4`, puis la condition sur la base et la solution positive comme avant. Logarithmes imbriqués : **une paire de lignes par couche** (`log(log(x)) = 1 ⇔ 10^(log(log(x))) = 10^1 ⇔ log(x) = 10 ⇔ 10^(log(x)) = 10^10 ⇔ x = 10^10`).
+Les écritures exactes (`= 10³ = 1’000`, `10^1,5 = 10√10`) et les cas « pas encore » restent.
 
 **Calcul de log_a(y)** (étape 6, corrigé 2.15 a-d h i, 2.20 ; saisie sans « = », `calculer_logarithme`, résultat par `tex_resultat`) : une carte « Calcul ».
 Si y = aᵏ (k entier ou rationnel : 64 = 8², 1/25 = 5⁻², 1 = 7⁰, 20 = 20¹) : une ligne `y = aᵏ`, puis `log_a(y) = log_a(aᵏ) = k` (log_a(a^k) = k, ou log(10ᵏ) = k en base 10),
@@ -125,22 +160,24 @@ on n'écrit jamais 2 log|x|, et 2 log(x) ne s'écrit que quand x > 0 est justifi
 **Sens d'une inégalité** : aucune inégalité à résoudre en 3C (pas d'inéquation). Les seules inégalités sont les vérifications d'argument
 (« > 0 ») et l'encadrement C3, justifié par « log est croissante » (corrigé 2.16).
 
-## Exemples de rédaction (valeurs vérifiées avec mpmath le 26.10.2026)
+## Exemples de rédaction (valeurs vérifiées avec mpmath le 26.10.2026 ; mis à jour le 27.10.2026 pour le sélecteur)
 
-**1. Même base — 3^(x+1) − 27 = 0** (p. 22)
+Les exemples 1 et 2 sont la méthode A (« Même base / définition »), les exemples 3, 5, 9 à 12 la méthode B (« Logarithmes »), les exemples 6, 7 et 13 des équations logarithmiques (exponentielle des deux membres).
+
+**1. Méthode A, même base — 3^(x+1) − 27 = 0** (p. 22)
 Étape 1 · Isoler l'exponentielle : `3^(x+1) − 27 = 0 ⇔ 3^(x+1) = 27` (on isole le terme exponentiel).
 Étape 2 · Même base : `27 = 3³`, donc `3^(x+1) = 3³ ⇔ x + 1 = 3` (même base : a^A = a^B ⇔ A = B) `⇔ x = 2`.
 Solution : `S = {2}`.
 
-**2. Même base, degré 2 — 2^(x²) · 4^x = 8** (2.13 o)
+**2. Méthode A, même base, degré 2 — 2^(x²) · 4^x = 8** (2.13 o)
 Étape 1 · Même base : `4^x = (2²)^x = 2^(2x)` ((aᵐ)ⁿ = aᵐⁿ) ; `2^(x²) · 2^(2x) = 2^(x²+2x)` (aᵐ · aⁿ = aᵐ⁺ⁿ) ; `8 = 2³` ;
 puis, dans la même carte, une seule chaîne de ⇔ :
 `2^(x²+2x) = 2³ ⇔ x² + 2x = 3` (même base) `⇔ x² + 2x − 3 = 0 ⇔ (x + 3)(x − 1) = 0 ⇔ x = −3 ou x = 1`.
 Solution : `S = {−3 ; 1}`.
 
-**3. Logarithme — 2^x = 100** (2.23 a)
-`2^x = 100 ⇔ log(2^x) = log(100)` (log des deux membres) `⇔ x · log(2) = log(100)` (log(a^A) = A · log(a)) `⇔ x · log(2) = 2` (log(10ᵏ) = k)
-`⇔ x = 2 / log(2) ≈ 6,644`. Solution : `S = {2 / log(2)}`, soit `x ≈ 6,644`.
+**3. Méthode B — 2^x = 100** (2.23 a)
+`2^x = 100 ⇔ log(2^x) = log(100)` (log des deux membres) `⇔ x · log(2) = log(10²) = 2 · log(10)` (log(a^A) = A · log(a)) `⇔ x · log(2) = 2` (car log(10) = 1)
+`⇔ x = 2 / log(2)`. Solution : `S = {2 / log(2)}`, soit `x ≈ 6,644`. Méthode A : « 100 n'est pas une puissance de 2 : il faut les logarithmes. »
 
 **4. Aucune solution — 5^(8x) = −25** (2.23 h)
 `5^(8x) > 0` pour tout x (une exponentielle est strictement positive), alors que `−25 < 0` : aucune solution. `S = ∅`.
@@ -152,21 +189,35 @@ Solution : `S = {−3 ; 1}`.
 Variante 2.24 b, 4^(x+1) = 6^(3x) : `… ⇔ log(4) = x(3 log(6) − log(4)) ⇔ x = log(4) / (3 log(6) − log(4)) = log(4) / log(54)` (propriétés des logarithmes),
 suivi de la ligne `3 log(6) − log(4) = log(6³/4) = log(54)`.
 
-**6. Logarithme — log(5 − x) = 8** (2.15 l)
-`log(5 − x) = 8 ⇔ 5 − x = 10⁸` (définition du logarithme) `⇔ x = 5 − 10⁸ = −99’999’995`.
+**6. Équation logarithmique — log(5 − x) = 8** (2.15 l)
+`log(5 − x) = 8 ⇔ 10^(log(5 − x)) = 10⁸` (exponentielle des deux membres) `⇔ 5 − x = 10⁸` (10^(log(A)) = A, A > 0) `⇔ x = 5 − 10⁸ = −99’999’995`.
 Vérification : `5 − x = 10⁸ > 0`, le logarithme est bien défini ✓. `S = {−99’999’995}`.
 
 **7. Base inconnue — log_x(256) = 4** (2.22 b)
 Condition : `x > 0` et `x ≠ 1` (une base de logarithme est strictement positive et différente de 1).
-`log_x(256) = 4 ⇔ x⁴ = 256` (définition du logarithme) `⇔ x = 4 ou x = −4` ; seule la solution positive convient. `S = {4}`.
+`log_x(256) = 4 ⇔ x^(log_x(256)) = x⁴` (exponentielle des deux membres) `⇔ 256 = x⁴` (a^(log_a(A)) = A, A > 0) `⇔ x = 4 ou x = −4` ; seule la solution positive convient. `S = {4}`.
 
 **8. Calcul — log_4(√2)** (2.20 h) et **log_2(50)**
 `√2 = 2^(1/2) = (4^(1/2))^(1/2) = 4^(1/4)`, donc `log_4(√2) = 1/4`.
 `50` n'est pas une puissance de 2 (`2⁵ = 32 < 50 < 64 = 2⁶`) : `log_2(50) = log(50) / log(2)` (changement de base) `≈ 5,644`.
 
-**9. Application — 37 · e^(−0,02t) = 25** (p. 29)
-`37 · e^(−0,02t) = 25 ⇔ e^(−0,02t) = 25/37` (on isole le terme exponentiel) `⇔ −0,02t = ln(25/37)` (définition du logarithme)
-`⇔ t = ln(25/37) / (−0,02) ≈ 19,602` (la forme que donne la chaîne, non simplifiée en −50 · ln(25/37) : Q11).
+**9. Application, méthode B — 37 · e^(−0,02t) = 25** (p. 29)
+`37 · e^(−0,02t) = 25 ⇔ e^(−0,02t) = 25/37` (on isole le terme exponentiel) `⇔ ln(e^(−0,02t)) = ln(25/37)` (ln des deux membres) `⇔ −0,02t · ln(e) = ln(25/37)` (ln(a^A) = A · ln(a))
+`⇔ −0,02t = ln(25/37)` (car ln(e) = 1) `⇔ t = ln(25/37) / (−0,02) ≈ 19,602` (la forme que donne la chaîne, non simplifiée en −50 · ln(25/37) : Q11). Méthode A : `e^(−0,02t) = 25/37 ⇔ −0,02t = ln(25/37)` (définition du logarithme).
+
+**10. Méthode B, solution rationnelle — 2^(x−1) = 32**
+`2^(x−1) = 32 ⇔ log(2^(x−1)) = log(32)` (log des deux membres) `⇔ (x − 1) · log(2) = log(32)` (log(a^A) = A · log(a)) `⇔ x − 1 = log(32)/log(2)` (car log(2) ≠ 0) `⇔ x = 1 + log(32)/log(2)`.
+Solution : `S = {1 + log(32)/log(2)}`. Contrôlez à la calculatrice : `log(32)/log(2) = 5`, on retrouve `x = 6`. Méthode A : `32 = 2⁵`, `2^(x−1) = 2⁵ ⇔ x − 1 = 5 ⇔ x = 6`, `S = {6}`.
+
+**11. Méthode B, x² en exposant — 2^(x²) · 4^x = 8**
+`log(2^(x²) · 4^x) = log(8)` (log des deux membres) `⇔ log(2^(x²)) + log(4^x) = log(8)` (log(ab) = log a + log b) `⇔ x² · log(2) + x · log(4) = log(8)` (log(a^A) = A · log(a)) `⇔ x² · log(2) + x · log(4) − log(8) = 0`,
+`Δ = log(4)² + 4 · log(2) · log(8)` (formule du discriminant), `x = (−log(4) ± √Δ) / (2 · log(2))`. Contrôlez à la calculatrice : on retrouve `x = −3` ou `x = 1`. `S = {(−log(4) − √Δ)/(2 log(2)) ; (−log(4) + √Δ)/(2 log(2))}`.
+
+**12. Méthode A qui ne s'applique pas — 3 · 2^x = 5**
+Étape 1 · Isoler l'exponentielle : `3 · 2^x = 5 ⇔ 2^x = 5/3`. Étape 2 · Même base / définition : « 5/3 n'est pas une puissance de 2 : il faut les logarithmes. » Méthode B : `2^x = 5/3 ⇔ log(2^x) = log(5/3) ⇔ x · log(2) = log(5/3) ⇔ x = log(5/3)/log(2)`, soit `x ≈ 0,737`.
+
+**13. Imbriqués — log(log(x)) = 1**
+`log(log(x)) = 1 ⇔ 10^(log(log(x))) = 10^1` (exponentielle des deux membres) `⇔ log(x) = 10` (10^(log(A)) = A, A > 0) `⇔ 10^(log(x)) = 10^10` `⇔ x = 10^10` (10^(log(A)) = A, A > 0). `S = {10^10}`.
 
 ## Exercices au hasard (pool C)
 
@@ -196,19 +247,22 @@ les bases différentes viennent de a^(x+p) = b^(qx) avec a et b deux nombres de 
 | EL-03 | Tokeniseur : `ln`, `exp`, `log2`, `log_3`, `log10`, `sqrt` lus comme fonctions avant les lettres ; `2x`, `3ln(x)`, `xlog(x)` multiplication implicite ; `e^x = 7` : e est la constante ; `e` comme seule lettre, `2e = 5`, `e^2 = e` : refusés avec le message prévu ; `x + e = 3` accepté | [auto-py] |
 | EL-04 | Tout le TeX vient de l'arbre : une équation en e^x ne produit que `\ln`, une équation en base 10 que `\log` ; `exp_log.py` et `resoudre_el.py` ne contiennent ni `latex(` ni `arbre_depuis_sympy` | [auto-py] (analyse du texte source) |
 | EL-05 | `log` = base 10, `ln` = base e, `log_a` = base a, sur toute la batterie (valeur numérique de chaque membre) | [auto-py] |
-| EL-06 | Chaque ligne « ⇔ » porte une propriété tirée de la liste fermée ci-dessus (la division par un coefficient logarithmique porte « car D ≠ 0 », D ≠ 0 vérifié) ; aucune ligne sans justification, sauf l'arithmétique évidente (x + 1 = 3 ⇔ x = 2) | [auto-py] |
+| EL-06 | Chaque ligne « ⇔ » porte une propriété tirée de la liste fermée ci-dessus (y compris « car log(10) = 1 » et « car ln(e) = 1 ») (la division par un coefficient logarithmique porte « car D ≠ 0 », D ≠ 0 vérifié) ; aucune ligne sans justification, sauf l'arithmétique évidente (x + 1 = 3 ⇔ x = 2) | [auto-py] |
 | EL-07 | Exact puis ≈ : chaque « ≈ » suit une valeur exacte sur la même ligne ; 3 décimales ; virgule décimale ; aucun point décimal (SOC-12) ; **notation suisse (Q5, Q12) : ’ dès 4 chiffres sur la partie entière seulement** (−99’999’995, 1’234,567, 0,0001), `\text{’}` en TeX ; saisie de ' et ’ lue 1000, « 1 000 » refusé avec un message (`moteur/nombres.py`) | [auto-py] |
 | EL-08 | Second membre ≤ 0 (a^f = b, b ≤ 0, k·a^f = b avec b/k ≤ 0) : S = ∅ justifié par « une exponentielle est strictement positive », jamais par un logarithme d'un nombre négatif | [auto-py] |
-| EL-09 | Équations logarithmiques : aucune carte d'ensemble de définition ; une vérification de chaque solution (argument > 0) ; base inconnue : condition annoncée, solution rejetée si x ≤ 0 ou x = 1 (log_x(256) = 4 : S = {4}) | [auto-py] |
+| EL-09 | Équations logarithmiques (par l'exponentielle des deux membres, jamais la définition) : aucune carte d'ensemble de définition ; une vérification de chaque solution (argument > 0) ; base inconnue : condition annoncée, solution rejetée si x ≤ 0 ou x = 1 (log_x(256) = 4 : S = {4}) | [auto-py] |
 | EL-10 | `log(x^2) = 2` donne S = {−10 ; 10} par la définition ; aucune sortie ne contient « 2 log|x| » ni « 2\log\left|x\right| » | [auto-py] |
 | EL-11 | **Deux messages quand aucune méthode ne s'applique** (décision du 26.10.2026). (a) **Vrai hors-programme** (x·2^x = 8, 2^x + 3^x = 5, x^x = 4, 2^√x = 4, 2^x = x + 1, inconnue dans une base et dans un exposant à la fois) : le texte est exactement « Cette équation ne se résout pas avec les méthodes du cours. ». (b) **Forme du programme pas encore gérée** (2^(x³) = 8 : le logarithme donne une équation du 3ᵉ degré, résoluble, mais l'outil ne la traite pas encore ; log(x) = log(5), log(x) + log(x − 1) = 1, e^x = e^3, −2^x = −3^(x+1), 10^x·(x − 4) = 0, plusieurs logarithmes sommés, 2M) : « Cet outil ne traite pas encore ce type d'équation. ». Le moteur choisit (`message_non_resolu`) : hors-programme = l'inconnue dans une base et un exposant, un exposant qui n'est pas un polynôme (2^√x), une exponentielle multipliée ou divisée par un facteur en x (sauf produit égal à 0), une somme d'exponentielles de bases différentes, une exponentielle et un terme en x sans exponentielle de part et d'autre du signe =. Jamais « non applicable », jamais une étape fausse ni une valeur numérique donnée comme solution ; détail technique dans `detail` seulement. Une inéquation garde son message de lecture (« Les inéquations ne sont pas traitées par cet outil : écrivez une équation avec =. ») | [auto-py] |
 | EL-12 | Aucune sortie ne contient le vocabulaire interdit de SOC-15 (`test_vocabulaire.py` étendu) ; JSON strict | [auto-py] |
 | EL-13 | `exercice(niveau, graine)` est déterministe, produit un gabarit du niveau, aucun exposant de degré supérieur à 2, et le moteur le résout (oracle EL-02) pour 500 graines | [auto-py] |
 | EL-14 | Manifeste (`test_manifeste`, `test_resoudre_import`) et instantanés de l'outil ; **les instantanés de tous les autres moteurs sont inchangés** | [auto-py] |
-| EL-15 | Page : rendu de la batterie égal à `tests/pages/references/exponentielles-logarithmes.json` ; clavier avec log, ln, log_, e, = ; exercice au hasard (pool C) et corrigé ; une étape par ligne et aucun défilement horizontal à 360 px pour toute la batterie ; propriété à droite sur grand écran, sous l'expression sur écran étroit | [auto-page] |
+| EL-15 | Page : rendu de la batterie, **dans chaque méthode du sélecteur**, égal à `tests/pages/references/exponentielles-logarithmes.json` ; clavier avec log, ln, log_, e, = ; exercice au hasard (pool C) et corrigé ; une étape par ligne et aucun défilement horizontal à 360 px pour toute la batterie ; propriété à droite sur grand écran, sous l'expression sur écran étroit | [auto-page] |
 | EL-16 | Registre et accueil (cellule III/C) : description « Équations exponentielles et logarithmiques, calcul de logarithmes, étape par étape. » identique dans `commun/registre.json` et `index.html` (ACC-01) ; posés après relecture des exemples | [auto-py] + [manuel] |
-| EL-17 | Les exemples de rédaction 1 à 9 ci-dessus, relus à l'écran sur téléphone et comparés au corrigé, sont validés | [manuel] |
+| EL-17 | Les exemples de rédaction 1 à 13 ci-dessus, relus à l'écran sur téléphone et comparés au corrigé, sont validés | [manuel] |
 | EL-18 | **Ligne finale** : toute équation résolue se termine par « S = {valeur exacte} », suivie de « , soit x ≈ … » (3 décimales, virgule, ’ dès 4 chiffres) quand une solution n'est pas un rationnel (avec plusieurs solutions : « soit x ≈ −0,903 ou x = 0 ») ; S = ∅ et S = ℝ ont aussi leur ligne. **Elle existe même quand x est déjà isolé** : x = ln(3) n'a aucune carte de méthode, mais la sortie élève contient la carte finale « S = {ln(3)}, soit x ≈ 1,099 ». La composition est testée dès l'étape 3 (`tex_solution`) ; la carte finale de la sortie de `resoudre_el` l'est à l'étape 7 | [auto-py] |
+| EL-19 | **Sélecteur** : toute équation exponentielle a deux variantes calculées en une fois (`variantes`, défaut « logarithmes ») ; une équation logarithmique, un calcul, un message d'erreur n'en ont pas et leur sortie, hors changement de rédaction des équations logarithmiques, est inchangée ; sur la page, un clic change les cartes sans appel au moteur, le choix est gardé (`localStorage` dans un `try/catch`), les boutons sont accessibles au clavier (`aria-pressed`), côte à côte et sans débordement à 360 px, l'impression montre la méthode affichée | [auto-py] + [auto-page] |
+| EL-20 | **Méthode B n'utilise jamais** « définition du logarithme », « log(10ᵏ) = k », « ln(e^A) = A » ni « ln(e^k) = k » ; une puissance de 10 (de e) dans un log (ln) passe par log(a^A) = A · log(a) puis « car log(10) = 1 » ; les deux méthodes donnent le **même S** (oracle mpmath, batterie et 500 graines par niveau) ; le message de la méthode A est exactement « b n'est pas une puissance de a : il faut les logarithmes. » | [auto-py] |
+| EL-21 | **Exponentielle des deux membres** : une équation logarithmique s'écrit par `a^(log_a(A)) = A` (A > 0), une paire de lignes par logarithme imbriqué, Vérification et Condition inchangées ; **contrôle à la calculatrice** (R15) si et seulement si une solution rationnelle est écrite avec des logarithmes, décidé exactement | [auto-py] |
 
 ## Pour les 2M (plus tard, hors de cette version)
 

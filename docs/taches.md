@@ -485,6 +485,11 @@ l'élève, un « Calcul en cours… » qui dure parce que SymPy se charge encore
   `commun/registre.json`, `index.html`.
 - **Vérification** : EL-01 à EL-18 ; suite complète verte ; instantanés des autres moteurs inchangés.
 
+- **Suite du 27.10.2026 (sélecteur de méthode, avant l'étape 9)** : chaque équation exponentielle a deux résolutions, « Même base / définition » (A) et « Logarithmes » (B, défaut), choisies par deux boutons
+  sans nouveau calcul ; les équations logarithmiques se résolvent par l'exponentielle des deux membres (10^(log(A)) = A) ; contrôle à la calculatrice (R15) ; e^x = e^3 et e^x = e^(x+1) traitées.
+  Spécification : « Sélecteur de méthode », EL-19 à EL-21 ; socle commun : `variantes` (SOC-17). **Commits** : 1 docs · 2 `sortie.py` · 3 moteur · 4 adaptateur · 5 page et socle JS · 6 équations logarithmiques.
+  **Arrêt : relecture à l'écran** (les deux méthodes), puis étape 9.
+
 ### T34 — Relire les autres outils avec la règle R13 (fractions et notation scientifique) — **après le test des 3C**
 - Demande de l'enseignant (26.10.2026) : la règle R13 du [guide de rédaction](guide-redaction.md) vaut pour **tous** les outils, pas seulement « Exponentielles et logarithmes » :
   valeurs exactes calculées à partir d'entiers ou de puissances en **fractions** ; **décimaux de l'énoncé gardés** (exposant compris) et décimal fini conservé quand le calcul part de décimaux ;
