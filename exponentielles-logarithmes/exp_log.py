@@ -885,6 +885,7 @@ PROP_ISOLER_LOG = "on isole le logarithme"
 PROP_BIEN_DEFINI = "le logarithme est bien défini"
 PROP_BASE_LOG = "une base de logarithme est strictement positive et différente de 1"
 PROP_SEULE_POSITIVE = "seule la solution positive convient"
+PROP_BASE_PUISSANCE_POSITIVE = "une base admissible est strictement positive, donc xᵏ > 0"
 PROP_LOG_SOMME = "log(ab) = log a + log b"
 PROP_LN_DEUX_MEMBRES = "ln des deux membres"
 PROP_LN_PUISSANCE = "ln(a^A) = A · ln(a)"
@@ -908,7 +909,7 @@ PROPRIETES = frozenset({PROP_CARRE, PROP_PUISSANCE_ZERO, PROP_PUISSANCE_NEGATIVE
                         PROP_PUISSANCE, PROP_PRODUIT, PROP_UN, PROP_MEME_BASE, PROP_ISOLER, PROP_PRODUIT_NUL, PROP_DISCRIMINANT,
                         PROP_DEFINITION_LOG, PROP_LOG_DEUX_MEMBRES, PROP_LOG_PUISSANCE, PROP_LOG_10K, PROP_LN_UN, PROP_EXPO_POSITIVE,
                         PROP_AUCUNE_SOLUTION, PROP_LOG_QUOTIENT, PROP_LOG_PRODUIT, PROP_LOG_REGROUPER, PROP_LOG_SOMME, PROP_LN_DEUX_MEMBRES, PROP_LN_PUISSANCE, PROP_CAR_LOG_10, PROP_CAR_LN_E, PROP_LOG_UN, PROP_EXPONENTIELLE, PROP_EXP_LOG, PROP_EXP_LN, PROP_EXP_LOG_BASE,
-                        PROP_ISOLER_LOG, PROP_BIEN_DEFINI, PROP_BASE_LOG, PROP_SEULE_POSITIVE, PROP_LOG_BASE_PUISSANCE, PROP_LN_E_PUISSANCE,
+                        PROP_ISOLER_LOG, PROP_BIEN_DEFINI, PROP_BASE_LOG, PROP_SEULE_POSITIVE, PROP_BASE_PUISSANCE_POSITIVE, PROP_LOG_BASE_PUISSANCE, PROP_LN_E_PUISSANCE,
                         PROP_CHANGEMENT_DE_BASE})
 
 
@@ -2219,11 +2220,21 @@ def _base_inconnue(enonce, etapes, chaine, s, c, x):
     k-ième de n écrite comme telle (√255, 255^(1/3)). k < 0 : n = x⁻ᵐ = 1/xᵐ, donc xᵐ = 1/n (log_x(8) = −1 donne x = 1/8) ; k = 0 : n = x⁰ = 1,
     vraie pour toute base si n = 1, aucune solution sinon ; n = 1 et k ≠ 0 : xᵏ = 1 ne donne que x = 1 ou x = −1, qui ne conviennent pas."""
     n = _const(s.a)
-    if variables(s.a) or n is None or n <= 0 or c.denominator != 1 or abs(c) > 12:
+    if variables(s.a) or n is None:
         raise _Hors
-    k = int(c)
     X = Var(s.base.nom)
     condition = Chaine([Texte(f"{X.nom} > 0 \\text{{ et }} {X.nom} \\neq 1")], note=PROP_BASE_LOG)
+    if n <= 0:                                                         # une puissance d'une base admissible est > 0 : n = xᵏ est impossible
+        puissance = Pow(X, Nb(c)) if c != 1 else X
+        chaine.ajouter(Eq(puissance, _nb_exact(n)), "⇔", PROP_DEFINITION_LOG)
+        impossible = Eq(puissance, Nb(0)) if n == 0 else Rel(_nb_exact(n), "<", Nb(0))
+        return {"genre": "logarithmique", "inconnue": x, "enonce": enonce, "base": None, "solutions": [], "remarque": None,
+                "etapes": etapes + [_carte("Condition", [condition]), _carte("Définition du logarithme", [chaine]),
+                                    _carte("Aucune solution", [Chaine([Rel(puissance, ">", Nb(0))], note=PROP_BASE_PUISSANCE_POSITIVE),
+                                                               Chaine([impossible], note=PROP_AUCUNE_SOLUTION)])]}
+    if c.denominator != 1 or abs(c) > 12:
+        raise _Hors
+    k = int(c)
     chaine.ajouter(Eq(Pow(X, s), Pow(X, Nb(k))), "⇔", PROP_EXPONENTIELLE)            # x^(log_x(n)) = x^k
     chaine.ajouter(Eq(_nb_exact(n), Pow(X, Nb(k)) if k != 1 else X), "⇔", PROP_EXP_LOG_BASE)
     lignes, autres = [chaine], {}

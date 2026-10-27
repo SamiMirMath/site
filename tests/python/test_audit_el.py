@@ -346,6 +346,26 @@ class TestFusionDesPuissances(unittest.TestCase):
         self.assertIsNotNone(corriger("2^(2x)/2^x=5", el.METHODE_MEME_BASE).get("message"))
 
 
+class TestBaseInconnueArgumentNegatif(unittest.TestCase):
+    """log_x(n) = k avec n ≤ 0 : S = ∅, une base admissible est strictement positive donc xᵏ > 0."""
+
+    def test_redaction(self):
+        r = corriger("log_x(-8)=3")
+        self.assertEqual([c["titre"] for c in r["etapes"]], ["Condition", "Définition du logarithme", "Aucune solution"])
+        self.assertEqual(lignes("log_x(-8)=3")[1:],
+                         [r"\log_{x}(-8) = 3 \iff x^{3} = -8 \quad \text{(définition du logarithme)}",
+                          r"x^{3} > 0 \quad \text{(une base admissible est strictement positive, donc xᵏ > 0)}",
+                          r"-8 < 0 \quad \text{(aucune solution)}"])
+        self.assertEqual(r["solutions"], [])
+        self.assertEqual(el.tex_solution(r), r"S = \varnothing")
+
+    def test_argument_nul(self):
+        self.assertEqual(lignes("log_x(0)=2")[-1], r"x^{2} = 0 \quad \text{(aucune solution)}")
+
+    def test_argument_positif_inchange(self):
+        self.assertEqual([round(el.valeur(n), 3) for n in corriger("log_x(8)=3")["solutions"]], [2.0])
+
+
 class TestMessages(unittest.TestCase):
     def test_logarithme_et_terme_en_x_ou_exponentielle_hors_programme(self):
         """Groupe 2 : un logarithme avec un terme en x ou une exponentielle (de part et d'autre, ou en facteur) n'est pas une équation du cours."""

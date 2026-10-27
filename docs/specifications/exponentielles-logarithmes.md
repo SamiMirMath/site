@@ -308,6 +308,10 @@ un commit par groupe ; les entrées sont dans `BATTERIE_AUDIT` (`tests/python/ca
 10. **Mise en facteur et 2e degré en aˣ : hors programme pour les 3C** (décision du 27.10.2026) : deux exponentielles avec un troisième terme (`2^x + 2^(x+1) = 12`, `2^x + 2^x = 8`,
    `4^x − 2^x − 6 = 0`, `e^(2x) − 3e^x + 2 = 0`, `e^x + e^(−x) = 3`, `2^x + 1 = 3^x`) donnent « Cette équation ne se résout pas avec les méthodes du cours. », quelle que soit la base
    (avant : « hors programme » pour 4 et 2, « pas encore » pour e). Deux exponentielles seules (`a^P ± b^Q = 0`) se résolvent (point 3).
+11. **Méthode A, produit ou quotient de puissances de 10 ou de e** : `e^(2x)/e^x = 5 ⇔ e^x = 5` (aᵐ / aⁿ = aᵐ⁻ⁿ) `⇔ x = ln(5)` (définition du logarithme) ; `e^x · e^(x+1) = 5 ⇔ e^(2x+1) = 5` (aᵐ · aⁿ = aᵐ⁺ⁿ).
+   Plus de message « il faut les logarithmes » quand la définition peut conclure ; les autres bases (`2^(2x)/2^x = 5`) gardent le message.
+12. **Base inconnue, argument négatif ou nul** (`log_x(−8) = 3`, `log_x(0) = 2`) : carte « Condition », `log_x(−8) = 3 ⇔ x³ = −8` (définition du logarithme), puis carte « Aucune solution » :
+   `x³ > 0` (une base admissible est strictement positive, donc xᵏ > 0) et `−8 < 0` (aucune solution) ; S = ∅. Vaut pour tout exposant rationnel.
 
 ## Pour les 2M (plus tard, hors de cette version)
 

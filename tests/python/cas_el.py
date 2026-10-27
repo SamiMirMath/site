@@ -106,6 +106,8 @@ BATTERIE_AUDIT = [
     # base inconnue, exposant négatif ou nul, argument 1 (T7)
     ("log_x(8)=-1", [0.125]), ("log_x(4)=-2", [0.5]), ("log_x(1/9)=-2", [3.0]), ("log_x(2)=-3", [0.794]), ("log_x(5)=0", []), ("log_x(1)=0", None),
     ("log_x(1)=2", []), ("log_x(1)=3", []), ("log_x(1)=-1", []),
+    # argument négatif ou nul : une base admissible est > 0, donc xᵏ > 0 et n = xᵏ est impossible
+    ("log_x(-8)=3", []), ("log_x(0)=2", []), ("log_x(-4)=-1", []), ("log_x(-4)=1", []), ("log_x(-2)=1/2", []), ("log_x(-1)=0", []),
     # produit nul polynôme × exponentielle (T8)
     ("x*2^x=0", [0.0]), ("10^x*(x-4)=0", [4.0]), ("(x^2-1)*e^x=0", [-1.0, 1.0]), ("3x*2^x=0", [0.0]), ("(x^2+1)*2^x=0", []),
     ("(x-1)(2^x-8)=0", [1.0, 3.0]), ("2^x*(x+2)*(3^x-9)=0", [-2.0, 2.0]),
