@@ -140,6 +140,23 @@ class TestSignes(unittest.TestCase):
         self.assertEqual(el.tex_solution(corriger("3x-1=-ln(7)")), r"S = \left\{\frac{1 - \ln(7)}{3}\right\} \text{, soit } x \approx -0{,}315")
 
 
+class TestMessages(unittest.TestCase):
+    def test_logarithme_et_terme_en_x_ou_exponentielle_hors_programme(self):
+        """Groupe 2 : un logarithme avec un terme en x ou une exponentielle (de part et d'autre, ou en facteur) n'est pas une équation du cours."""
+        for saisie in ["log(x)=x-1", "ln(x)=x", "x*log(x)=1", "e^x=ln(x)", "log(x)=2^x", "log(x)/x=1", "ln(x)+x=2", "2^x*log(x)=1"]:
+            with self.subTest(saisie):
+                self.assertEqual(rel.resoudre(saisie), {"ok": False, "erreur": el.MESSAGE_HORS_PROGRAMME})
+        for saisie in ["log(x)=log(5)", "log(x)+log(x-1)=1", "x^2=4", "2^(x^3)=8"]:            # formes du programme pas encore gérées
+            with self.subTest(saisie):
+                self.assertEqual(rel.resoudre(saisie), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
+
+    def test_aucune_forme_resolue_n_est_classee_hors_programme(self):
+        for saisie, _ in BATTERIE_AUDIT:
+            with self.subTest(saisie):
+                s = el.analyser_saisie(saisie)
+                self.assertFalse(el.hors_programme(s.g, s.d, s.inconnue))
+
+
 class TestRobustesse(unittest.TestCase):
     def test_aucune_exception_et_format_commun(self):
         """F5 : aucune saisie de la grille ne lève d'exception ; log(x) + log(2) = 1 a le message « pas encore »."""

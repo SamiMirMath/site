@@ -11941,6 +11941,10 @@
    }
   ]
  },
+ "e^x=ln(x)": {
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
+  "ok": false
+ },
  "exp(x)=7": {
   "cartes": [
    {
@@ -12211,6 +12215,10 @@
   "erreur": null,
   "ok": true
  },
+ "ln(x)+x=2": {
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
+  "ok": false
+ },
  "ln(x)=0": {
   "cartes": [
    {
@@ -12297,6 +12305,10 @@
   "enonce_tex": "\\ln(x) = 3",
   "erreur": null,
   "ok": true
+ },
+ "ln(x)=x": {
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
+  "ok": false
  },
  "log x = 2": {
   "erreur": "Après log, ouvrez une parenthèse : log(x).",
@@ -13030,6 +13042,10 @@
   "erreur": null,
   "ok": true
  },
+ "log(x)/x=1": {
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
+  "ok": false
+ },
  "log(x)=-0,27": {
   "cartes": [
    {
@@ -13204,6 +13220,10 @@
   "erreur": null,
   "ok": true
  },
+ "log(x)=2^x": {
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
+  "ok": false
+ },
  "log(x)=3": {
   "cartes": [
    {
@@ -13235,6 +13255,10 @@
  },
  "log(x)=log(5)": {
   "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "log(x)=x-1": {
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
   "ok": false
  },
  "log(x^2)=2": {
@@ -14907,6 +14931,10 @@
   "ok": false
  },
  "x*e^x=1": {
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
+  "ok": false
+ },
+ "x*log(x)=1": {
   "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
   "ok": false
  },

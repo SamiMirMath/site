@@ -275,6 +275,8 @@ un commit par groupe ; les entrées sont dans `BATTERIE_AUDIT` (`tests/python/ca
    `a·x² = 0` donne `x² = 0 ⇔ x = 0` (méthode A) et `x²·log(a) = 0 ⇔ x² = 0 (car log(a) ≠ 0) ⇔ x = 0` (méthode B), jamais `±√0` ni `S = {0 ; 0/log(2)}`.
    `a + (−b)` s'écrit `a − b` (jamais « + − »). Aucune saisie ne lève d'exception (`log(x) + log(2) = 1` : « pas encore »). Le signe de Δ est décidé exactement quand Δ est un rationnel (même écrit avec des logarithmes), sinon à 60 chiffres ;
    un coefficient de x² ou de x écrit avec des logarithmes différents mais nul ((log 0,5 + log 2)·x²) reste « pas encore » en méthode B, comme au premier degré.
+2. **Messages** : un logarithme avec un terme en x ou une exponentielle, de part et d'autre du signe = ou en facteur (`log(x) = x − 1`, `ln(x) = x`, `x · log(x) = 1`, `e^x = ln(x)`,
+   `log(x) = 2^x`), est un vrai hors-programme (« Cette équation ne se résout pas avec les méthodes du cours. ») ; aucune forme que l'outil résout n'est classée hors programme.
 
 ## Pour les 2M (plus tard, hors de cette version)
 
