@@ -1413,7 +1413,7 @@ class TestLogarithmique(unittest.TestCase):
 
     def test_pas_encore(self):
         """Hors de la méthode : plusieurs logarithmes, second membre avec un logarithme, base inconnue non entière, trinôme à coefficients non entiers."""
-        for saisie in ["log(x)=log(5)", "log(x)+log(x-1)=1", "log_x(256)=0,5", "log(x^2)=-1", "log(x^3)=2", "x*log(x)=1",
+        for saisie in ["log(x)=log(5)", "log(x)+log(x-1)=1", "log_x(256)=0,5", "log(x^2+1)=-1", "log(x^3)=2", "x*log(x)=1",
                        "log(x)=x", "log(2x+1)=ln(3)"]:
             with self.subTest(saisie):
                 s = el.analyser_saisie(saisie)

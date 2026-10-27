@@ -2161,16 +2161,27 @@ def _logarithmique(g, d, x):
             solutions = [sol]
         else:
             v = _const(puissance)
-            if v is None:
-                raise _Hors
-            _par_exponentielle(chaine, courant, base, puissance, _nb_exact(v), [puissance])
-            l_poly, solutions, remarque = _resoudre_polynome(f, [v], u, _nb_exact(v), x)
-            if solutions is None:
-                raise _Hors
-            premiere = l_poly[0]
-            for e, lien, prop in zip(premiere.elements[1:], premiere.liens, premiere.props):
-                chaine.ajouter(e, lien, prop)
-            lignes += l_poly[1:]
+            try:
+                if v is None:
+                    raise _Hors
+                l_poly, solutions, remarque = _resoudre_polynome(f, [v], u, _nb_exact(v), x)
+            except _Hors:
+                l_poly = None
+            if l_poly is not None:                            # coefficients entiers : la résolution de la méthode « même base »
+                _par_exponentielle(chaine, courant, base, puissance, _nb_exact(v), [puissance])
+                if solutions is None:
+                    raise _Hors
+                premiere = l_poly[0]
+                for e, lien, prop in zip(premiere.elements[1:], premiere.liens, premiere.props):
+                    chaine.ajouter(e, lien, prop)
+                lignes += l_poly[1:]
+            elif f == [0, 0, 1]:                              # log(x²) = c : x² = 10^c ⇔ x = ±√(10^c), jamais 2 log(x)
+                exact = _valeur_exacte(puissance)
+                _par_exponentielle(chaine, courant, base, puissance, exact or puissance, [puissance] if exact is not None else ())
+                suite, solutions, remarque = _suite_polynome(chaine, f, u, exact or puissance, x)
+                lignes += suite
+            else:
+                raise _Hors                                   # trinôme général à coefficients non entiers : plus tard
     etapes.append(_carte("Exponentielle des deux membres", lignes))
     if profondeur == 1 and not isinstance(u, Var) and solutions:
         etapes.append(_carte("Vérification", [Chaine([Positif(u, puissance)], note=PROP_BIEN_DEFINI)]))

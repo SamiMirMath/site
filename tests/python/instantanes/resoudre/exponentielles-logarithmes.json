@@ -10410,6 +10410,59 @@
   "erreur": "La fonction lg n'est pas traitée par cet outil.",
   "ok": false
  },
+ "2ln(x^2)-5=0": {
+  "cartes": [
+   {
+    "badge": "Isoler le logarithme",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\ln(x^{2}) - 5 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2\\ln(x^{2}) = 5\\)</span><span class=\"prop\">(on isole le logarithme)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(x^{2}) = \\frac{5}{2}\\)</span><span class=\"prop\">(on isole le logarithme)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(x^{2}) = \\frac{5}{2}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(e^{\\ln(x^{2})} = e^{\\frac{5}{2}}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = e^{\\frac{5}{2}}\\)</span><span class=\"prop\">(e^(ln(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{e^{\\frac{5}{2}}} \\text{ ou } x = \\sqrt{e^{\\frac{5}{2}}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x^{2} = e^{\\frac{5}{2}} &gt; 0\\)</span><span class=\"prop\">(le logarithme est bien défini) \\(\\checkmark\\)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-\\sqrt{e^{\\frac{5}{2}}} \\,;\\, \\sqrt{e^{\\frac{5}{2}}}\\right\\} \\text{, soit } x \\approx -3{,}490 \\text{ ou } x \\approx 3{,}490",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2\\ln(x^{2}) - 5 = 0",
+  "erreur": null,
+  "ok": true
+ },
  "2log(5)": {
   "erreur": "Cet outil ne traite pas encore ce type de calcul.",
   "ok": false
@@ -17101,6 +17154,35 @@
   "erreur": null,
   "ok": true
  },
+ "ln(ln(x^2))=1": {
+  "cartes": [
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(\\ln(x^{2})) = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(e^{\\ln(\\ln(x^{2}))} = e\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(x^{2}) = e\\)</span><span class=\"prop\">(e^(ln(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(e^{\\ln(x^{2})} = e^{e}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = e^{e}\\)</span><span class=\"prop\">(e^(ln(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{e^{e}} \\text{ ou } x = \\sqrt{e^{e}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-\\sqrt{e^{e}} \\,;\\, \\sqrt{e^{e}}\\right\\} \\text{, soit } x \\approx -3{,}893 \\text{ ou } x \\approx 3{,}893",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\ln(\\ln(x^{2})) = 1",
+  "erreur": null,
+  "ok": true
+ },
  "ln(x)+x=2": {
   "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
   "ok": false
@@ -17195,6 +17277,47 @@
  "ln(x)=x": {
   "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
   "ok": false
+ },
+ "ln(x^2)=1": {
+  "cartes": [
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(x^{2}) = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(e^{\\ln(x^{2})} = e\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = e\\)</span><span class=\"prop\">(e^(ln(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{e} \\text{ ou } x = \\sqrt{e}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x^{2} = e &gt; 0\\)</span><span class=\"prop\">(le logarithme est bien défini) \\(\\checkmark\\)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-\\sqrt{e} \\,;\\, \\sqrt{e}\\right\\} \\text{, soit } x \\approx -1{,}649 \\text{ ou } x \\approx 1{,}649",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\ln(x^{2}) = 1",
+  "erreur": null,
+  "ok": true
  },
  "log x = 2": {
   "erreur": "Après log, ouvrez une parenthèse : log(x).",
@@ -18147,6 +18270,129 @@
   "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
   "ok": false
  },
+ "log(x^2)=-1": {
+  "cartes": [
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x^{2}) = -1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{\\log(x^{2})} = 10^{-1}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = 10^{-1} = \\frac{1}{10}\\)</span><span class=\"prop\">(10^(log(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{\\frac{1}{10}} \\text{ ou } x = \\sqrt{\\frac{1}{10}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x^{2} = 10^{-1} &gt; 0\\)</span><span class=\"prop\">(le logarithme est bien défini) \\(\\checkmark\\)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-\\sqrt{\\frac{1}{10}} \\,;\\, \\sqrt{\\frac{1}{10}}\\right\\} \\text{, soit } x \\approx -0{,}316 \\text{ ou } x \\approx 0{,}316",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x^{2}) = -1",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x^2)=1,5": {
+  "cartes": [
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x^{2}) = 1{,}5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{\\log(x^{2})} = 10^{1{,}5}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = 10^{1{,}5} = 10\\sqrt{10}\\)</span><span class=\"prop\">(10^(log(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{10\\sqrt{10}} \\text{ ou } x = \\sqrt{10\\sqrt{10}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x^{2} = 10^{1{,}5} &gt; 0\\)</span><span class=\"prop\">(le logarithme est bien défini) \\(\\checkmark\\)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-\\sqrt{10\\sqrt{10}} \\,;\\, \\sqrt{10\\sqrt{10}}\\right\\} \\text{, soit } x \\approx -5{,}623 \\text{ ou } x \\approx 5{,}623",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x^{2}) = 1{,}5",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x^2)=1/2": {
+  "cartes": [
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x^{2}) = \\frac{1}{2}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{\\log(x^{2})} = 10^{\\frac{1}{2}}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = 10^{\\frac{1}{2}} = \\sqrt{10}\\)</span><span class=\"prop\">(10^(log(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{\\sqrt{10}} \\text{ ou } x = \\sqrt{\\sqrt{10}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x^{2} = 10^{\\frac{1}{2}} &gt; 0\\)</span><span class=\"prop\">(le logarithme est bien défini) \\(\\checkmark\\)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-\\sqrt{\\sqrt{10}} \\,;\\, \\sqrt{\\sqrt{10}}\\right\\} \\text{, soit } x \\approx -1{,}778 \\text{ ou } x \\approx 1{,}778",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x^{2}) = \\frac{1}{2}",
+  "erreur": null,
+  "ok": true
+ },
  "log(x^2)=2": {
   "cartes": [
    {
@@ -18755,6 +19001,47 @@
    }
   ],
   "enonce_tex": "\\log_{2}(x) = 4",
+  "erreur": null,
+  "ok": true
+ },
+ "log_2(x^2)=-1": {
+  "cartes": [
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{2}(x^{2}) = -1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{\\log_{2}(x^{2})} = 2^{-1}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = 2^{-1} = \\frac{1}{2}\\)</span><span class=\"prop\">(a^(log_a(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\sqrt{\\frac{1}{2}} \\text{ ou } x = \\sqrt{\\frac{1}{2}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x^{2} = 2^{-1} &gt; 0\\)</span><span class=\"prop\">(le logarithme est bien défini) \\(\\checkmark\\)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-\\sqrt{\\frac{1}{2}} \\,;\\, \\sqrt{\\frac{1}{2}}\\right\\} \\text{, soit } x \\approx -0{,}707 \\text{ ou } x \\approx 0{,}707",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{2}(x^{2}) = -1",
   "erreur": null,
   "ok": true
  },

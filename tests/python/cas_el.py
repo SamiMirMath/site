@@ -109,6 +109,9 @@ BATTERIE_AUDIT = [
     # produit nul polynôme × exponentielle (T8)
     ("x*2^x=0", [0.0]), ("10^x*(x-4)=0", [4.0]), ("(x^2-1)*e^x=0", [-1.0, 1.0]), ("3x*2^x=0", [0.0]), ("(x^2+1)*2^x=0", []),
     ("(x-1)(2^x-8)=0", [1.0, 3.0]), ("2^x*(x+2)*(3^x-9)=0", [-2.0, 2.0]),
+    # log(x²) = c par l'exponentielle des deux membres, x² = 10^c ⇔ x = ±√(10^c) (T4 limité)
+    ("log(x^2)=-1", [-0.316, 0.316]), ("ln(x^2)=1", [-1.649, 1.649]), ("log_2(x^2)=-1", [-0.707, 0.707]), ("log(x^2)=1,5", [-5.623, 5.623]),
+    ("log(x^2)=1/2", [-1.778, 1.778]), ("2ln(x^2)-5=0", [-3.490, 3.490]), ("ln(ln(x^2))=1", [-3.893, 3.893]),
 ]
 
 # Aucune méthode ne s'applique (EL-11) : un vrai hors-programme, ou une forme du programme que l'outil ne gère pas encore

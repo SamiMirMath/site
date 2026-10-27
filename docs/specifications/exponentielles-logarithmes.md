@@ -300,6 +300,9 @@ un commit par groupe ; les entrées sont dans `BATTERIE_AUDIT` (`tests/python/ca
 7. **Produit nul polynôme × exponentielle** : `x · 2^x = 0 ⇔ x = 0 ou 2^x = 0` (un produit est nul si l'un des facteurs est nul), puis une carte par facteur : le facteur polynôme
    (1er ou 2e degré) se résout comme dans la méthode « même base » (`x − 4 = 0 ⇔ x = 4`, `x² − 1 = 0 ⇔ (x + 1)(x − 1) = 0`, Δ < 0 avec sa remarque), le facteur exponentiel
    par la carte « Aucune solution » (`2^x > 0`, `2^x = 0` : aucune solution). Un facteur constant non nul est omis (`3x · 2^x = 0`). Même rédaction dans les deux méthodes.
+8. **log(x²) = c, ln(x²) = c, log_a(x²) = c** (second membre quelconque) : l'exponentielle des deux membres, `x² = 10^c` (avec l'écriture exacte quand le cours la donne : `10^(−1) = 1/10`,
+   `10^1,5 = 10√10`), puis `x = −√(10^c) ou x = √(10^c)` (`log(x²) = −1 ⇔ x = −√(1/10) ou x = √(1/10)`, `ln(x²) = 1 ⇔ x² = e ⇔ x = ±√e`), puis la Vérification ; jamais `2 log(x)`.
+   Un second membre entier garde la factorisation (`x² − 100 = 0 ⇔ (x + 10)(x − 10) = 0`). Les trinômes généraux à coefficients non entiers (`log(x² − 1) = 1/2`) restent « pas encore ».
 
 ## Pour les 2M (plus tard, hors de cette version)
 

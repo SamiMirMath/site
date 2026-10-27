@@ -290,6 +290,25 @@ class TestProduitNulPolynomeExponentielle(unittest.TestCase):
         self.assertIsNone(el.corriger_equation(*el.lire_membres("(x-1)(x+2)=0"), "x"))        # sans exponentielle : pas une équation du chapitre
 
 
+class TestLogarithmeDeXCarre(unittest.TestCase):
+    """Groupe 8 (T4 limité) : log(x²) = c, ln(x²) = c, log_a(x²) = c par l'exponentielle des deux membres, x² = 10^c ⇔ x = ±√(10^c), jamais 2 log(x)."""
+
+    def test_redaction(self):
+        self.assertEqual(lignes("log(x^2)=-1")[0],
+                         r"\log(x^{2}) = -1 \iff 10^{\log(x^{2})} = 10^{-1} \quad \text{(exponentielle des deux membres)} "
+                         r"\iff x^{2} = 10^{-1} = \frac{1}{10} \quad \text{(10^(log(A)) = A, A > 0)} \iff x = -\sqrt{\frac{1}{10}} \text{ ou } x = \sqrt{\frac{1}{10}}")
+        self.assertTrue(lignes("ln(x^2)=1")[0].endswith(r"\iff x^{2} = e \quad \text{(e^(ln(A)) = A, A > 0)} \iff x = -\sqrt{e} \text{ ou } x = \sqrt{e}"))
+        self.assertEqual([c["titre"] for c in corriger("log_2(x^2)=-1")["etapes"]], ["Exponentielle des deux membres", "Vérification"])
+
+    def test_jamais_deux_log_de_x_et_trinome_general_plus_tard(self):
+        for saisie in ["log(x^2)=-1", "ln(x^2)=1", "log(x^2)=1,5", "2ln(x^2)-5=0"]:
+            texte = " ".join(lignes(saisie))
+            self.assertNotIn(r"2\log(x)", texte)
+            self.assertNotIn(r"2\ln(x)", texte)
+            self.assertNotIn(r"\left|", texte)
+        self.assertEqual(rel.resoudre("log(x^2-1)=1/2"), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
+
+
 class TestMessages(unittest.TestCase):
     def test_logarithme_et_terme_en_x_ou_exponentielle_hors_programme(self):
         """Groupe 2 : un logarithme avec un terme en x ou une exponentielle (de part et d'autre, ou en facteur) n'est pas une équation du cours."""
