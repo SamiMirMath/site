@@ -42,6 +42,13 @@
       "titre": "Étude complète de fonction",
       "description": "ED, dérivée, variations, limites, asymptotes et graphique — tout enchaîné.",
       "filieres": {"3": ["Ms", "Mr"]}
+    },
+    {
+      "id": "exponentielles-logarithmes",
+      "chemin": "exponentielles-logarithmes/",
+      "titre": "Exponentielles et logarithmes",
+      "description": "Équations exponentielles et logarithmiques, calcul de logarithmes, étape par étape.",
+      "filieres": {"3": ["C"]}
     }
   ]
 }

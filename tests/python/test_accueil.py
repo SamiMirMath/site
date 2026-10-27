@@ -10,7 +10,6 @@ from moteurs import RACINE
 
 ANNEES = {"I": "1", "II": "2", "III": "3"}
 FILIERES = ("C", "Ms", "Mr")
-SANS_REGISTRE = {"exponentielles-logarithmes"}      # T33 : page et manifeste avant le registre (étape 9, relecture des exemples) ; retirer à l'étape 9
 
 
 def lire(chemin):
@@ -122,9 +121,9 @@ class TestRegistre(unittest.TestCase):
     def test_aucun_outil_oublie(self):
         """Chaque dossier à index.html (hors la racine) est au registre ; chaque outil Pyodide du manifeste aussi."""
         dossiers = {d for d in os.listdir(RACINE) if os.path.isfile(os.path.join(RACINE, d, "index.html"))}
-        self.assertEqual(dossiers - SANS_REGISTRE, {o["id"] for o in REGISTRE["outils"]})
+        self.assertEqual(dossiers, {o["id"] for o in REGISTRE["outils"]})
         with open(os.path.join(RACINE, "moteur", "manifeste.json"), encoding="utf-8") as f:
-            self.assertLessEqual(set(json.load(f)["outils"]) - SANS_REGISTRE, {o["id"] for o in REGISTRE["outils"]})
+            self.assertLessEqual(set(json.load(f)["outils"]), {o["id"] for o in REGISTRE["outils"]})
 
 
 class TestAccueil(unittest.TestCase):
