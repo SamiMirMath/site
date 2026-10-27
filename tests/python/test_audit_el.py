@@ -110,7 +110,9 @@ class TestRacineDouble(unittest.TestCase):
 
     def test_x_carre_fois_log_nul(self):
         self.assertTrue(lignes("2^(x^2)=1")[0].endswith(
-            r"\iff x^{2} \cdot \log(2) = 0 \quad \text{(log(a^A) = A · log(a))} \iff x^{2} = 0 \quad \text{(car } \log(2) \neq 0\text{)} \iff x = 0"))
+            r"\iff x^{2} \cdot \log(2) = 0 \quad \text{(log(1) = 0)} \iff x^{2} = 0 \quad \text{(car } \log(2) \neq 0\text{)} \iff x = 0"))
+        self.assertTrue(lignes("2^(x^2)*3^(x^2)=1")[0].endswith(                    # plusieurs facteurs : le développement, puis x² = 0
+            r"\iff x^{2} = 0 \quad \text{(car } \log(2) + \log(3) \neq 0\text{)} \iff x = 0"))
         for saisie in ["2^(x^2)=1", "1=5^(x^2)", "(1/2)^(x^2)=1"]:
             for methode in el.METHODES:
                 with self.subTest(saisie=saisie, methode=methode):
@@ -207,6 +209,38 @@ class TestQuotients(unittest.TestCase):
                 self.assertNotIn("variantes", s)
                 self.assertEqual(s["cartes"][-1]["blocs"][0]["tex"], fin)
                 self.assertEqual(corriger(saisie)["genre"], "meme_base")
+
+
+class TestExposantDuSecondDegre(unittest.TestCase):
+    """Groupe 5 (T3) : a^(P(x)) = c ⇔ P(x) · log(a) = log(c) ⇔ P(x) = log(c)/log(a) ; x² = k donne x = ±√k, k < 0 aucune solution (un carré est
+    positif ou nul) ; la forme générale par le discriminant, Δ, x₁ et x₂ nommés."""
+
+    def test_x_carre_egal_k(self):
+        self.assertEqual(lignes("2^(x^2)=5"), [
+            r"2^{x^{2}} = 5 \iff \log(2^{x^{2}}) = \log(5) \quad \text{(log des deux membres)} \iff x^{2} \cdot \log(2) = \log(5) "
+            r"\quad \text{(log(a^A) = A · log(a))} \iff x^{2} = \frac{\log(5)}{\log(2)} \quad \text{(car } \log(2) \neq 0\text{)} "
+            r"\iff x = -\sqrt{\frac{\log(5)}{\log(2)}} \text{ ou } x = \sqrt{\frac{\log(5)}{\log(2)}}"])
+        self.assertTrue(lignes("2^(x^2-1)=5")[0].endswith(r"\iff x^{2} = 1 + \frac{\log(5)}{\log(2)} "
+                                                           r"\iff x = -\sqrt{1 + \frac{\log(5)}{\log(2)}} \text{ ou } x = \sqrt{1 + \frac{\log(5)}{\log(2)}}"))
+        self.assertTrue(lignes("e^(x^2)=2")[0].endswith(r"\iff x^{2} = \ln(2) \quad \text{(car ln(e) = 1)} \iff x = -\sqrt{\ln(2)} \text{ ou } x = \sqrt{\ln(2)}"))
+        self.assertEqual(lignes("e^(x^2)=2", el.METHODE_MEME_BASE), [
+            r"e^{x^{2}} = 2 \iff x^{2} = \ln(2) \quad \text{(définition du logarithme)} \iff x = -\sqrt{\ln(2)} \text{ ou } x = \sqrt{\ln(2)}"])
+
+    def test_k_negatif_aucune_solution(self):
+        self.assertEqual(lignes("2^(x^2)=1/2")[1:], [r"x^{2} \ge 0 \quad \text{(un carré est positif ou nul)}",
+                                                     r"\frac{\log\left(\frac{1}{2}\right)}{\log(2)} < 0 \quad \text{(aucune solution)}"])
+        self.assertEqual(el.tex_solution(corriger("2^(x^2)=1/2")), r"S = \varnothing")
+
+    def test_forme_generale_par_le_discriminant(self):
+        self.assertEqual(lignes("2^(x^2+x)=5")[1:], [
+            r"Δ = 1^{2} - 4 \cdot 1 \cdot \left(-\frac{\log(5)}{\log(2)}\right) = 1 + 4 \cdot \frac{\log(5)}{\log(2)} \quad \text{(formule du discriminant)}",
+            r"x_{1} = \frac{-1 - \sqrt{Δ}}{2}", r"x_{2} = \frac{-1 + \sqrt{Δ}}{2}"])
+        self.assertTrue(lignes("2^(x^2+x)=5")[0].endswith(r"\iff x^{2} + x - \frac{\log(5)}{\log(2)} = 0"))
+        self.assertEqual(el.tex_solution(corriger("2^(x^2+x)=5")), r"S = \left\{x_{1} \,;\, x_{2}\right\} \text{, soit } x \approx -2{,}104 \text{ ou } x \approx 1{,}104")
+
+    def test_bases_differentes(self):
+        self.assertIn(r"\iff x(x \cdot \log(2) - \log(3)) = 0", lignes("2^(x^2)=3^x")[0])
+        self.assertEqual(corriger("2^(x^2)*3^x=6")["genre"], "logarithmes")
 
 
 class TestMessages(unittest.TestCase):

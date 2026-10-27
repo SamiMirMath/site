@@ -897,10 +897,11 @@ PROP_EXP_LOG_BASE = "a^(log_a(A)) = A, A > 0"
 PROP_QUOTIENT = "aᵐ / aⁿ = aᵐ⁻ⁿ"
 PROP_LOG_DIFFERENCE = "log(a/b) = log a − log b"
 PROP_LN_DIFFERENCE = "ln(a/b) = ln a − ln b"
+PROP_CARRE = "un carré est positif ou nul"
 PROP_AUTRE_COTE = "on passe un terme de l'autre côté"
 PROP_FOIS_MOINS_UN = "on multiplie les deux membres par −1"
 PROP_FOIS_DENOMINATEUR = "on multiplie les deux membres par le dénominateur"
-PROPRIETES = frozenset({PROP_AUTRE_COTE, PROP_FOIS_MOINS_UN, PROP_FOIS_DENOMINATEUR, PROP_QUOTIENT, PROP_LOG_DIFFERENCE, PROP_LN_DIFFERENCE,
+PROPRIETES = frozenset({PROP_CARRE, PROP_AUTRE_COTE, PROP_FOIS_MOINS_UN, PROP_FOIS_DENOMINATEUR, PROP_QUOTIENT, PROP_LOG_DIFFERENCE, PROP_LN_DIFFERENCE,
                         PROP_PUISSANCE, PROP_PRODUIT, PROP_UN, PROP_MEME_BASE, PROP_ISOLER, PROP_PRODUIT_NUL, PROP_DISCRIMINANT,
                         PROP_DEFINITION_LOG, PROP_LOG_DEUX_MEMBRES, PROP_LOG_PUISSANCE, PROP_LOG_10K, PROP_LN_UN, PROP_EXPO_POSITIVE,
                         PROP_AUCUNE_SOLUTION, PROP_LOG_QUOTIENT, PROP_LOG_PRODUIT, PROP_LOG_REGROUPER, PROP_LOG_SOMME, PROP_LN_DEUX_MEMBRES, PROP_LN_PUISSANCE, PROP_CAR_LOG_10, PROP_CAR_LN_E, PROP_LOG_UN, PROP_EXPONENTIELLE, PROP_EXP_LOG, PROP_EXP_LN, PROP_EXP_LOG_BASE,
@@ -1431,7 +1432,7 @@ def _definition(g, d, x):
         raise _Hors
     base, valeur_base, f_tree = _exponentielle(s, x)
     f = _poly(f_tree, x)
-    if len(f) != 2 or not (base_est_e(base) or valeur_base == 10):
+    if len(f) not in (2, 3) or not (base_est_e(base) or valeur_base == 10):
         raise _Hors
     if valeur_base is not None and _exposant_entier(q, valeur_base) is not None:
         raise _Hors                                    # b est une puissance de a : méthode « même base »
@@ -1444,9 +1445,9 @@ def _definition(g, d, x):
     else:
         c = Log(o, E() if base_est_e(base) else None)
         chaine.ajouter(Eq(f_tree, c), "⇔", PROP_DEFINITION_LOG)
-    solution = _suite_lineaire(chaine, f[1], f[0], c, x, f_tree)
-    etapes.append(_carte("Définition du logarithme", [chaine]))
-    return _resultat("definition", x, enonce, etapes, [solution], base=valeur_base)
+    suite, solutions, remarque = _suite_polynome(chaine, f, f_tree, c, x)
+    etapes.append(_carte("Définition du logarithme", [chaine] + suite))
+    return _resultat("definition", x, enonce, etapes, solutions, remarque, base=valeur_base)
 
 
 def _message_meme_base(g, d, x):
@@ -1631,6 +1632,71 @@ def _suite_lineaire(chaine, p, q0, c, x, ecrit=None):
     return solution
 
 
+def _suite_polynome(chaine, f, f_tree, c, x):
+    """Ajoute à `chaine` (qui se termine par « P(x) = c », P de degré 1 ou 2, c une constante écrite, avec ou sans logarithme) les lignes qui
+    résolvent l'équation ; renvoie (lignes suivantes, solutions, remarque). Degré 2 : x² = k donne x = ±√k (k < 0 : aucune solution, un carré
+    est positif ou nul) ; sinon le discriminant, Δ, x₁ et x₂ nommés quand c contient un logarithme."""
+    if len(f) == 2:
+        return [], [_suite_lineaire(chaine, f[1], f[0], c, x, f_tree)], None
+    if len(f) != 3:
+        raise _Hors
+    X, X2 = Var(x), Pow(Var(x), Nb(2))
+    q, b, a = f
+    if b == 0:                                            # a·x² + q = c : x² = k
+        haut = c
+        if q != 0:
+            haut = _nb_exact(c.val - q) if isinstance(c, Nb) else Op("-", c, _nb_ecrit(q, f_tree)) if q > 0 else Op("+", _nb_ecrit(-q, f_tree), c)
+            chaine.ajouter(Eq(_arbre_poly([F(0), F(0), a], x, f_tree), haut), "⇔")
+        k = haut if a == 1 else _nb_exact(haut.val / a) if isinstance(haut, Nb) else Neg(haut) if a == -1 else Op("/", haut, _nb_ecrit(a, f_tree))
+        if a != 1:
+            chaine.ajouter(Eq(X2, k), "⇔")
+        signe = _signe(k)
+        if signe < 0:
+            return [Chaine([Rel(X2, "≥", Nb(0))], note=PROP_CARRE), Chaine([Rel(k, "<", Nb(0))], note=PROP_AUCUNE_SOLUTION)], [], None
+        if signe == 0:
+            if not isinstance(k, Nb):
+                chaine.elements[-1] = Eq(X2, Nb(0), [k])
+            chaine.ajouter(Eq(X, Nb(0)), "⇔")
+            return [], [Nb(0)], None
+        kv = _const(k)
+        r = _racine_carree(kv) if kv is not None else None
+        racine = _nb_exact(r) if r is not None else Fn("sqrt", k)
+        oppose = _nb_exact(-r) if r is not None else Neg(racine)
+        chaine.ajouter(Ou([Eq(X, oppose), Eq(X, racine)]), "⇔")
+        return [], [oppose, racine], None
+    if isinstance(c, Nb):                                  # coefficients rationnels : la résolution de la méthode « même base »
+        try:
+            l_poly, solutions, remarque = _resoudre_polynome(f, [c.val], f_tree, c, x)
+        except _Hors:
+            l_poly = None
+        if l_poly is not None:
+            for e, lien, prop in zip(l_poly[0].elements[1:], l_poly[0].liens, l_poly[0].props):
+                chaine.ajouter(e, lien, prop)
+            return l_poly[1:], solutions, remarque
+    # a·x² + b·x + q − c = 0, puis Δ = b² − 4a(q − c)
+    constante = Neg(c) if q == 0 else Op("-", _nb_ecrit(q, f_tree), c)
+    chaine.ajouter(Eq(Op("-", _arbre_poly(f, x, f_tree), c), Nb(0)), "⇔")
+    r0 = b * b - 4 * a * q
+    terme = c if 4 * a == 1 else Op("*", _nb_exact(4 * a), c)
+    delta = terme if r0 == 0 else Op("+", _nb_exact(r0), terme)
+    formule = Op("-", Pow(_nb_exact(b), Nb(2)), Op("*", Op("*", Nb(4), _nb_exact(a)), constante))
+    D = Defini("Δ", delta)
+    signe = _signe(delta)
+    lignes = [Chaine([D, formule, delta] + ([Nb(0)] if signe == 0 else []), ["="] * (3 if signe == 0 else 2),
+                     [None] * (2 if signe == 0 else 1) + [PROP_DISCRIMINANT])]
+    if signe < 0:
+        return lignes, [], "Δ < 0 : l'équation n'a aucune solution réelle."
+    if signe == 0:
+        lignes += _une_seule_solution(X, Op("/", _nb_exact(-b), Op("*", Nb(2), _nb_exact(a))), _nb_exact(-b / (2 * a)))
+        return lignes, [_nb_exact(-b / (2 * a))], None
+    moins_b = _nb_exact(-b)
+    haut = lambda s: (Op("-" if s < 0 else "+", moins_b, Fn("sqrt", D)) if b != 0 else (Neg(Fn("sqrt", D)) if s < 0 else Fn("sqrt", D)))
+    division = lambda h: h if 2 * a == 1 else Op("/", h, _nb_exact(2 * a))
+    racines = [Defini("x_{1}", division(haut(-1))), Defini("x_{2}", division(haut(1)))]
+    lignes += [Chaine([Eq(r, r.arbre)]) for r in racines]
+    return lignes, racines, None
+
+
 @_avec_decimaux
 def logarithmes(g, d, x):
     """Corrigé de g = d par la méthode B « logarithmes » : le logarithme des deux membres (ln dès qu'une base e apparaît), log(a^A) = A · log(a)
@@ -1653,7 +1719,7 @@ def _logarithmes(g, d, x):
     seul = len(fg) == 1 and len(fd) == 1 and variables(g) != variables(d)
     if seul:
         s, o = (fg[0], fd[0]) if variables(g) else (fd[0], fg[0])
-        seul = s.genre == "pow" and len(s.exp) == 2 and (o.genre == "cte" or any(o.exp))
+        seul = s.genre == "pow" and len(s.exp) in (2, 3) and (o.genre == "cte" or any(o.exp))
     if seul:
         lignes, solutions, remarque = _alpha(g, d, x, fg, fd, ln)
     else:
@@ -1662,7 +1728,8 @@ def _logarithmes(g, d, x):
 
 
 def _alpha(g, d, x, fg, fd, ln):
-    """a^f = b (f du 1er degré, b une constante) : f · log(a) = log(b), on divise par log(a), puis on isole x (corrigé 2.23)."""
+    """a^f = b (f du 1er ou du 2e degré, b une constante) : f · log(a) = log(b), on divise par log(a), puis on isole x (corrigé 2.23) ;
+    au 2e degré, x² = k ou le discriminant (`_suite_polynome`)."""
     inverse = not variables(g)
     s, o, fs, fo = (d, g, fd[0], fg[0]) if inverse else (g, d, fg[0], fd[0])
     bl = E() if ln else None
@@ -1699,8 +1766,8 @@ def _alpha(g, d, x, fg, fd, ln):
         else:
             c = Op("/", reste if reste is not None else droite, a_node)
         chaine.ajouter(Eq(f_tree, c), "⇔", Car(a_node))
-    solution = _suite_lineaire(chaine, fs.exp[1], fs.exp[0], c, x, f_tree)
-    return [chaine], [solution], None
+    suite, solutions, remarque = _suite_polynome(chaine, fs.exp, f_tree, c, x)
+    return [chaine] + suite, solutions, remarque
 
 
 def _beta(g, d, x, fg, fd, ln):
@@ -1749,7 +1816,7 @@ def _beta(g, d, x, fg, fd, ln):
         return _degre_zero(chaine, P, mg, md, x, ecrit, ln)
     if degre == 1:
         return _premier_degre(chaine, mg, md, x, ecrit, ln)
-    if degre == 2 and meme_base(g, d, x) is not None:
+    if degre == 2:
         if all(a is None for _, _, a in P):                           # log(10) = 1 a tout rendu numérique : le trinôme ordinaire
             poly = lambda ms: [sum((c for c, k, _ in ms if k == i), F(0)) for i in range(3)]
             l_poly, solutions, remarque = _resoudre_polynome(_pnet(poly(mg)), _pnet(poly(md)), _somme(mg, x, ecrit, ln, False),

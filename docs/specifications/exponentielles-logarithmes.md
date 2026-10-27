@@ -287,6 +287,12 @@ un commit par groupe ; les entrées sont dans `BATTERIE_AUDIT` (`tests/python/ca
    (`log(8/2^x) = log(2) ⇔ log(8) − log(2^x) = log(2)`, propriétés (log(a/b) = log a − log b), (ln(a/b) = ln a − ln b), (propriétés des logarithmes) avec un produit en plus).
    Un coefficient de x purement numérique et négatif fait passer les termes en x de l'autre côté (`ln(3) − x = ln(6)` donne `x = ln(3) − ln(6)`, jamais `x(−1)`).
    Quand la méthode B diviserait par un coefficient nul (`4^x = 2^(2x)`, `2^(2x)/4^(x−1) = 8`), la méthode A est donnée seule, sans sélecteur (avant : « pas encore »).
+5. **Exposant du 2e degré, second membre quelconque** (méthode B, et méthode A par la définition pour la base 10 ou e) : `a^(P(x)) = c ⇔ P(x) · log(a) = log(c) ⇔ P(x) = log(c)/log(a)` (car log(a) ≠ 0).
+   Forme `x² = k` (pas de terme en x) : `x = −√k ou x = √k` (`2^(x²) = 5 ⇔ x² = log(5)/log(2)`, `2^(x²−1) = 5 ⇔ x² = 1 + log(5)/log(2)`, `e^(x²) = 2 ⇔ x² = ln(2)`) ;
+   k < 0 : lignes `x² ≥ 0` (un carré est positif ou nul) et `k < 0` (aucune solution) ; k = 0 : `x = 0`. Forme générale : `P(x) − c = 0`, puis
+   `Δ = b² − 4 · a · (q − c) = …` (formule du discriminant), `x₁`, `x₂` nommés, Δ < 0 : la remarque habituelle (`2^(x²+x) = 5`). Un second membre rationnel garde la résolution
+   de la méthode « même base » (`10^(x²+x) = 100 ⇔ x² + x = 2 ⇔ (x + 2)(x − 1) = 0`). Plusieurs facteurs (`2^(x²) = 3^x`, `2^(x²) · 3^x = 6`) : le trinôme à coefficients
+   logarithmiques (section « Sélecteur »), sans la condition « même base » d'avant. La méthode A garde sa rédaction validée (`x² + 1 = 0`, Δ = −4) ; nouvelle propriété (un carré est positif ou nul).
 
 ## Pour les 2M (plus tard, hors de cette version)
 

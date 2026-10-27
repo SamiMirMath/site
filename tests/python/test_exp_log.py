@@ -1028,7 +1028,9 @@ class TestBasesDifferentes(unittest.TestCase):
             r"Δ = (\log(4))^{2} - 4\log(2) \cdot (-\log(8)) \quad \text{(formule du discriminant)}",
             r"x_{1} = \frac{-\log(4) - \sqrt{Δ}}{2\log(2)}", r"x_{2} = \frac{-\log(4) + \sqrt{Δ}}{2\log(2)}"])
         self.assertEqual(lignes("2^(x^2)*4^x=8")[0].split(r"\iff")[-1].strip(), r"x^{2} \cdot \log(2) + x \cdot \log(4) - \log(8) = 0")
-        self.assertEqual(lignes("3*2^(x^2+1)=96")[-2:], [r"x_{1} = \frac{-\sqrt{Δ}}{2\log(2)}", r"x_{2} = \frac{\sqrt{Δ}}{2\log(2)}"])
+        self.assertTrue(lignes("3*2^(x^2+1)=96")[-1].endswith(                 # a^P = c : P = log(c)/log(a), puis x² = k (corrections de l'audit, groupe 5)
+            r"\iff x^{2} + 1 = \frac{\log(32)}{\log(2)} \quad \text{(car } \log(2) \neq 0\text{)} \iff x^{2} = \frac{\log(32)}{\log(2)} - 1 "
+            r"\iff x = -\sqrt{\frac{\log(32)}{\log(2)} - 1} \text{ ou } x = \sqrt{\frac{\log(32)}{\log(2)} - 1}"))
         r = corriger("2^(x^2)*4^x=8")
         self.assertEqual([round(el.valeur(n), 9) for n in r["solutions"]], [-3.0, 1.0])
         self.assertEqual(el.tex_solution(r), r"S = \left\{x_{1} \,;\, x_{2}\right\}")
@@ -1037,7 +1039,7 @@ class TestBasesDifferentes(unittest.TestCase):
             r"\quad \text{(log(a^A) = A · log(a))} \iff x^{2} \cdot \log(2) - x \cdot \log(8) = 0 \iff x(x \cdot \log(2) - \log(8)) = 0 "
             r"\iff x = 0 \text{ ou } x \cdot \log(2) - \log(8) = 0 \quad \text{(un produit est nul si l'un des facteurs est nul)}",
             r"x \cdot \log(2) - \log(8) = 0 \iff x = \frac{\log(8)}{\log(2)} \quad \text{(car } \log(2) \neq 0\text{)}"])
-        vide = corriger("2^(x^2)=1/4")
+        vide = corriger("2^(x^2)*2^x=1/4")
         self.assertEqual(vide["solutions"], [])
         self.assertEqual(vide["remarque"], "Δ < 0 : l'équation n'a aucune solution réelle.")
         pur = corriger("10^(x^2)=10^(x+2)")                                 # log(10) = 1 : un trinôme ordinaire, sans Δ à logarithmes
