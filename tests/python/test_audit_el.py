@@ -327,6 +327,25 @@ class TestExposantsEnChiffresSuperieurs(unittest.TestCase):
         self.assertEqual(rel.resoudre("2^x²=5")["erreur"], "Mettez les exposants entre parenthèses : 2^(3^2) ou (2^3)^2.")
 
 
+class TestFusionDesPuissances(unittest.TestCase):
+    """Méthode A : un produit ou un quotient de puissances de 10 ou de e se fusionne, puis la définition du logarithme conclut (plus de « il faut les logarithmes »)."""
+
+    def test_quotient_de_puissances_de_e(self):
+        r = corriger("e^(2x)/e^x=5", el.METHODE_MEME_BASE)
+        self.assertNotIn("message", r)
+        self.assertEqual([c["titre"] for c in r["etapes"]], ["Définition du logarithme"])
+        self.assertEqual(lignes("e^(2x)/e^x=5", el.METHODE_MEME_BASE),
+                         [r"\frac{e^{2x}}{e^{x}} = 5 \iff e^{x} = 5 \quad \text{(aᵐ / aⁿ = aᵐ⁻ⁿ)} \iff x = \ln(5) \quad \text{(définition du logarithme)}"])
+        self.assertEqual([el.tex(n) for n in r["solutions"]], [r"\ln(5)"])
+
+    def test_produit_et_base_10(self):
+        self.assertIn(r"e^{2x + 1} = 5 \quad \text{(aᵐ · aⁿ = aᵐ⁺ⁿ)}", lignes("e^x*e^(x+1)=5", el.METHODE_MEME_BASE)[0])
+        self.assertIn(r"10^{x} = 3 \quad \text{(aᵐ / aⁿ = aᵐ⁻ⁿ)}", lignes("10^(2x)/10^x=3", el.METHODE_MEME_BASE)[0])
+
+    def test_autre_base_garde_le_message(self):
+        self.assertIsNotNone(corriger("2^(2x)/2^x=5", el.METHODE_MEME_BASE).get("message"))
+
+
 class TestMessages(unittest.TestCase):
     def test_logarithme_et_terme_en_x_ou_exponentielle_hors_programme(self):
         """Groupe 2 : un logarithme avec un terme en x ou une exponentielle (de part et d'autre, ou en facteur) n'est pas une équation du cours."""

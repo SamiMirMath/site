@@ -1419,6 +1419,24 @@ def _meme_base_e(g, d, x):
     return _resultat("meme_base", x, Eq(g, d), [_carte("Même base", [ligne] + l_exp[1:])], solutions, remarque, base=None)
 
 
+def _fusionner_puissances(n, x):
+    """Un produit ou un quotient de puissances de 10 (ou de e) devient une seule puissance : e^(2x) / e^x donne e^x (aᵐ / aⁿ = aᵐ⁻ⁿ) ;
+    n lui-même quand ce n'est pas un produit ni un quotient."""
+    morceaux = _aplatir_quotient(n)
+    if len(morceaux) < 2:
+        return n
+    facs = [_inverser(_facteur_log(f, x), inverse) for f, inverse in morceaux]
+    base = facs[0].base
+    if not all(f.genre == "pow" and f.base == base for f in facs) or base not in ("e", 10):
+        raise _Hors
+    total = [F(0)]
+    for f in facs:
+        total = _padd(total, f.exp, -1 if f.inverse else 1)
+    if len(total) < 2 or not any(total[1:]):
+        raise _Hors
+    return Pow(facs[0].base_ecrite, _arbre_poly(total, x))
+
+
 def _definition(g, d, x):
     """a^f = b avec a = 10 ou e et b > 0 qui n'est pas une puissance de a : 10^f = b ⇔ f = log(b), e^f = b ⇔ f = ln(b) (définition du logarithme)."""
     enonce = Eq(g, d)
@@ -1433,6 +1451,8 @@ def _definition(g, d, x):
     q = _const(o)
     if q is None or q <= 0:
         raise _Hors
+    avant = s
+    s = _fusionner_puissances(s, x)
     base, valeur_base, f_tree = _exponentielle(s, x)
     f = _poly(f_tree, x)
     if len(f) not in (2, 3) or not (base_est_e(base) or valeur_base == 10):
@@ -1441,7 +1461,9 @@ def _definition(g, d, x):
         raise _Hors                                    # b est une puissance de a : méthode « même base »
     chaine = Chaine([Eq(g, d)])
     if inverse:
-        chaine.ajouter(Eq(s, o), "⇔")
+        chaine.ajouter(Eq(avant, o), "⇔")
+    if avant is not s:
+        chaine.ajouter(Eq(s, o), "⇔", PROP_QUOTIENT if any(i for _, i in _aplatir_quotient(avant)) else PROP_PRODUIT)
     if base_est_e(base) and q == 1:
         chaine.ajouter(Eq(f_tree, Nb(0)), "⇔", PROP_LN_UN)
         c = Nb(0)
