@@ -130,7 +130,7 @@ puis « Définition du logarithme » : une seule chaîne `log_a(u) = c ⇔ u = a
 un argument du 2ᵈ degré (`log(x²) = 2`) continue dans la même chaîne comme la méthode « même base » (`x² = 10² = 100 ⇔ x² − 100 = 0 ⇔ (x + 10)(x − 10) = 0 ⇔ x = −10 ou x = 10`), S = ∅ si Δ < 0.
 **Vérification** (carte à part, seulement quand l'argument d'un seul logarithme n'est pas x seul) : `5 − x = 10⁸ > 0 (le logarithme est bien défini) ✓`.
 **Base inconnue** `log_x(n) = k` (k entier de 1 à 12 ; si n n'est pas une puissance k-ième, la racine reste écrite : `x² = 255 ⇔ x = √255 ou x = −√255`, S = {√255}, soit x ≈ 15,969 ; `x³ = 2 ⇔ x = 2^(1/3)`) : carte « Condition » (`x > 0 et x ≠ 1`, une base de logarithme est strictement positive et différente de 1), puis `x^k = n`, `x = r ou x = −r` pour k pair, et une ligne
-« seule la solution positive convient ». Pas encore traités (message « pas encore ») : second membre avec un logarithme, plusieurs logarithmes, base inconnue d'exposant non entier, trinôme à coefficients non entiers (`log(x²) = −1`), argument de degré 3 ou plus.
+« seule la solution positive convient ». Pas encore traités (message « pas encore ») : second membre avec un logarithme, plusieurs logarithmes, base inconnue d'exposant non entier, trinôme à coefficients non entiers (`log(x²) = −1`), argument de degré 3 ou plus (exposants négatifs ou nuls et argument 1 : corrections de l'audit, groupe 6).
 
 **Équations logarithmiques : l'exponentielle des deux membres** (décision du 27.10.2026, pas de sélecteur) : la définition du logarithme est remplacée par l'application de l'exponentielle aux deux membres, puis `10^(log(A)) = A`. Badge de la carte : « Exponentielle des deux membres ».
 `log(x+1) = 7 ⇔ 10^(log(x+1)) = 10^7` (exponentielle des deux membres) `⇔ x + 1 = 10^7` (10^(log(A)) = A, A > 0) `⇔ x = 10^7 − 1`, puis la Vérification (`x + 1 = 10^7 > 0` ✓). Avec ln : `e^(ln(A)) = A` ; avec une base a : `a^(log_a(A)) = A`.
@@ -293,6 +293,10 @@ un commit par groupe ; les entrées sont dans `BATTERIE_AUDIT` (`tests/python/ca
    `Δ = b² − 4 · a · (q − c) = …` (formule du discriminant), `x₁`, `x₂` nommés, Δ < 0 : la remarque habituelle (`2^(x²+x) = 5`). Un second membre rationnel garde la résolution
    de la méthode « même base » (`10^(x²+x) = 100 ⇔ x² + x = 2 ⇔ (x + 2)(x − 1) = 0`). Plusieurs facteurs (`2^(x²) = 3^x`, `2^(x²) · 3^x = 6`) : le trinôme à coefficients
    logarithmiques (section « Sélecteur »), sans la condition « même base » d'avant. La méthode A garde sa rédaction validée (`x² + 1 = 0`, Δ = −4) ; nouvelle propriété (un carré est positif ou nul).
+6. **Base inconnue, exposant négatif ou nul, argument 1** (`log_x(n) = k`, k entier de −12 à 12) : k < 0, `8 = x⁻¹ ⇔ 8 = 1/x` (a⁻ᵐ = 1/aᵐ) `⇔ x = 1/8` ; `4 = x⁻² ⇔ 4 = 1/x² ⇔ x² = 1/4 ⇔ x = 1/2 ou x = −1/2`,
+   seule la solution positive convient ; k = 0, `5 = x⁰ ⇔ 5 = 1` (a⁰ = 1) : aucune solution, et `log_x(1) = 0` est vraie pour toute base, `S = ]0 ; 1[ ∪ ]1 ; +∞[` ;
+   n = 1 et k ≠ 0 : `1 = x² ⇔ x = 1 ou x = −1`, puis « x = 1 et x = −1 ne conviennent pas » (une base de logarithme est strictement positive et différente de 1), S = ∅.
+   La carte « Condition » vient toujours d'abord. Propriétés (a⁰ = 1) et (a⁻ᵐ = 1/aᵐ) ajoutées à la liste fermée.
 
 ## Pour les 2M (plus tard, hors de cette version)
 

@@ -243,6 +243,33 @@ class TestExposantDuSecondDegre(unittest.TestCase):
         self.assertEqual(corriger("2^(x^2)*3^x=6")["genre"], "logarithmes")
 
 
+class TestBaseInconnue(unittest.TestCase):
+    """Groupe 6 (T7) : log_x(n) = k avec k ≤ 0 ou n = 1."""
+
+    def test_exposant_negatif(self):
+        self.assertEqual(lignes("log_x(8)=-1")[1], r"\log_{x}(8) = -1 \iff x^{\log_{x}(8)} = x^{-1} \quad \text{(exponentielle des deux membres)} "
+                                                   r"\iff 8 = x^{-1} \quad \text{(a^(log_a(A)) = A, A > 0)} \iff 8 = \frac{1}{x} \quad \text{(a⁻ᵐ = 1/aᵐ)} "
+                                                   r"\iff x = \frac{1}{8}")
+        self.assertEqual(el.tex_solution(corriger("log_x(4)=-2")), r"S = \left\{\frac{1}{2}\right\}")
+        self.assertIn(r"x = \frac{1}{2} \quad \text{(seule la solution positive convient)}", lignes("log_x(4)=-2"))
+
+    def test_exposant_nul(self):
+        r = corriger("log_x(5)=0")
+        self.assertTrue(lignes("log_x(5)=0")[1].endswith(r"\iff 5 = 1 \quad \text{(a⁰ = 1)}"))
+        self.assertEqual(r["remarque"], "Cette égalité est fausse : l'équation n'a aucune solution.")
+        self.assertEqual(el.tex_solution(r), r"S = \varnothing")
+        r = corriger("log_x(1)=0")
+        self.assertEqual(r["remarque"], "Cette égalité est vraie pour toute base x > 0 et différente de 1.")
+        self.assertEqual(el.tex_solution(r), r"S = \left]0 \,;\, 1\right[ \cup \left]1 \,;\, +\infty\right[")
+
+    def test_argument_un(self):
+        self.assertEqual(lignes("log_x(1)=2")[-1], r"x = 1 \text{ et } x = -1 \text{ ne conviennent pas} "
+                                                   r"\quad \text{(une base de logarithme est strictement positive et différente de 1)}")
+        self.assertEqual(lignes("log_x(1)=3")[-1], r"x = 1 \text{ ne convient pas} \quad \text{(une base de logarithme est strictement positive et différente de 1)}")
+        for saisie in ["log_x(1)=2", "log_x(1)=3", "log_x(1)=-1"]:
+            self.assertEqual(el.tex_solution(corriger(saisie)), r"S = \varnothing", saisie)
+
+
 class TestMessages(unittest.TestCase):
     def test_logarithme_et_terme_en_x_ou_exponentielle_hors_programme(self):
         """Groupe 2 : un logarithme avec un terme en x ou une exponentielle (de part et d'autre, ou en facteur) n'est pas une équation du cours."""

@@ -898,10 +898,12 @@ PROP_QUOTIENT = "aᵐ / aⁿ = aᵐ⁻ⁿ"
 PROP_LOG_DIFFERENCE = "log(a/b) = log a − log b"
 PROP_LN_DIFFERENCE = "ln(a/b) = ln a − ln b"
 PROP_CARRE = "un carré est positif ou nul"
+PROP_PUISSANCE_ZERO = "a⁰ = 1"
+PROP_PUISSANCE_NEGATIVE = "a⁻ᵐ = 1/aᵐ"
 PROP_AUTRE_COTE = "on passe un terme de l'autre côté"
 PROP_FOIS_MOINS_UN = "on multiplie les deux membres par −1"
 PROP_FOIS_DENOMINATEUR = "on multiplie les deux membres par le dénominateur"
-PROPRIETES = frozenset({PROP_CARRE, PROP_AUTRE_COTE, PROP_FOIS_MOINS_UN, PROP_FOIS_DENOMINATEUR, PROP_QUOTIENT, PROP_LOG_DIFFERENCE, PROP_LN_DIFFERENCE,
+PROPRIETES = frozenset({PROP_CARRE, PROP_PUISSANCE_ZERO, PROP_PUISSANCE_NEGATIVE, PROP_AUTRE_COTE, PROP_FOIS_MOINS_UN, PROP_FOIS_DENOMINATEUR, PROP_QUOTIENT, PROP_LOG_DIFFERENCE, PROP_LN_DIFFERENCE,
                         PROP_PUISSANCE, PROP_PRODUIT, PROP_UN, PROP_MEME_BASE, PROP_ISOLER, PROP_PRODUIT_NUL, PROP_DISCRIMINANT,
                         PROP_DEFINITION_LOG, PROP_LOG_DEUX_MEMBRES, PROP_LOG_PUISSANCE, PROP_LOG_10K, PROP_LN_UN, PROP_EXPO_POSITIVE,
                         PROP_AUCUNE_SOLUTION, PROP_LOG_QUOTIENT, PROP_LOG_PRODUIT, PROP_LOG_REGROUPER, PROP_LOG_SOMME, PROP_LN_DEUX_MEMBRES, PROP_LN_PUISSANCE, PROP_CAR_LOG_10, PROP_CAR_LN_E, PROP_LOG_UN, PROP_EXPONENTIELLE, PROP_EXP_LOG, PROP_EXP_LN, PROP_EXP_LOG_BASE,
@@ -2177,30 +2179,53 @@ def _logarithmique(g, d, x):
 
 
 def _base_inconnue(enonce, etapes, chaine, s, c, x):
-    """log_x(n) = k avec k entier ≥ 1 : x > 0 et x ≠ 1, xᵏ = n, puis la solution positive : r si n = rᵏ (256 = 4⁴), sinon la racine k-ième
-    de n écrite comme telle (√255, 255^(1/3))."""
+    """log_x(n) = k avec k entier de −12 à 12 : x > 0 et x ≠ 1, n = xᵏ, puis la solution positive : r si n = rᵏ (256 = 4⁴), sinon la racine
+    k-ième de n écrite comme telle (√255, 255^(1/3)). k < 0 : n = x⁻ᵐ = 1/xᵐ, donc xᵐ = 1/n (log_x(8) = −1 donne x = 1/8) ; k = 0 : n = x⁰ = 1,
+    vraie pour toute base si n = 1, aucune solution sinon ; n = 1 et k ≠ 0 : xᵏ = 1 ne donne que x = 1 ou x = −1, qui ne conviennent pas."""
     n = _const(s.a)
-    if variables(s.a) or n is None or n <= 0 or n == 1 or c.denominator != 1 or c < 1 or c > 12:
+    if variables(s.a) or n is None or n <= 0 or c.denominator != 1 or abs(c) > 12:
         raise _Hors
     k = int(c)
-    r = _racine_entiere(n, k)
-    if r is not None:
-        racine = _nb_exact(r)
-    else:
-        racine = Fn("sqrt", _nb_exact(n)) if k == 2 else Pow(_nb_exact(n), Nb(F(1, k)))
     X = Var(s.base.nom)
     condition = Chaine([Texte(f"{X.nom} > 0 \\text{{ et }} {X.nom} \\neq 1")], note=PROP_BASE_LOG)
     chaine.ajouter(Eq(Pow(X, s), Pow(X, Nb(k))), "⇔", PROP_EXPONENTIELLE)            # x^(log_x(n)) = x^k
-    chaine.ajouter(Eq(_nb_exact(n), Pow(X, Nb(k)) if k > 1 else X), "⇔", PROP_EXP_LOG_BASE)
-    lignes = [chaine]
-    if k % 2 == 0:
+    chaine.ajouter(Eq(_nb_exact(n), Pow(X, Nb(k)) if k != 1 else X), "⇔", PROP_EXP_LOG_BASE)
+    lignes, autres = [chaine], {}
+    resultat = lambda solutions, remarque=None: {"genre": "logarithmique", "inconnue": x, "enonce": enonce, "base": None,
+                                                 "etapes": etapes + [_carte("Condition", [condition]), _carte("Exponentielle des deux membres", lignes)],
+                                                 "solutions": solutions, "remarque": remarque, **autres}
+    if k == 0:                                                         # n = x⁰ = 1
+        chaine.ajouter(Eq(_nb_exact(n), Nb(1)), "⇔", PROP_PUISSANCE_ZERO)
+        if n != 1:
+            return resultat([], "Cette égalité est fausse : l'équation n'a aucune solution.")
+        autres["ensemble"] = r"\left]0 \,;\, 1\right[ \cup \left]1 \,;\, +\infty\right["
+        return resultat(None, f"Cette égalité est vraie pour toute base {X.nom} > 0 et différente de 1.")
+    m = abs(k)
+    if k < 0:                                                          # n = x⁻ᵐ = 1/xᵐ ⇔ xᵐ = 1/n
+        chaine.ajouter(Eq(_nb_exact(n), Op("/", Nb(1), Pow(X, Nb(m)) if m > 1 else X)), "⇔", PROP_PUISSANCE_NEGATIVE)
+        chaine.ajouter(Eq(Pow(X, Nb(m)) if m > 1 else X, _nb_exact(1 / n)), "⇔")
+        n = 1 / n
+    if n == 1:                                                         # xᵐ = 1 : x = 1 (ou x = −1), exclus par la condition
+        if m % 2 == 0:
+            chaine.ajouter(Ou([Eq(X, Nb(1)), Eq(X, Nb(-1))]), "⇔")
+            lignes.append(Chaine([Texte(f"{X.nom} = 1 \\text{{ et }} {X.nom} = -1 \\text{{ ne conviennent pas}}")], note=PROP_BASE_LOG))
+        else:
+            if m > 1:
+                chaine.ajouter(Eq(X, Nb(1)), "⇔")
+            lignes.append(Chaine([Texte(f"{X.nom} = 1 \\text{{ ne convient pas}}")], note=PROP_BASE_LOG))
+        return resultat([])
+    r = _racine_entiere(n, m)
+    if r is not None:
+        racine = _nb_exact(r)
+    else:
+        racine = Fn("sqrt", _nb_exact(n)) if m == 2 else Pow(_nb_exact(n), Nb(F(1, m)))
+    if m % 2 == 0:
         chaine.ajouter(Ou([Eq(X, racine), Eq(X, Neg(racine) if r is None else _nb_exact(-r))]), "⇔")
         lignes.append(Chaine([Eq(X, racine)], note=PROP_SEULE_POSITIVE))
-    elif k > 1:
-        chaine.ajouter(Eq(X, racine), "⇔")
-    etapes += [_carte("Condition", [condition]), _carte("Exponentielle des deux membres", lignes)]
-    return {"genre": "logarithmique", "inconnue": x, "enonce": enonce, "base": None, "etapes": etapes, "solutions": [racine],
-            "remarque": None}
+    elif m > 1 or k < 0:
+        if tex_element(Eq(X, racine)) != tex_element(chaine.elements[-1]):
+            chaine.ajouter(Eq(X, racine), "⇔")
+    return resultat([racine])
 
 
 # =====================================================================
@@ -2496,7 +2521,7 @@ def tex_solution(r):
     rationnel. Elle existe même quand aucune carte de méthode ne précède (x = ln 3 : S = {ln(3)}, soit x ≈ 1,099)."""
     sols = r["solutions"]
     if sols is None:
-        return r"S = \mathbb{R}"
+        return "S = " + r.get("ensemble", r"\mathbb{R}")
     if not sols:
         return r"S = \varnothing"
     s = r"S = \left\{" + r" \,;\, ".join(tex(n) for n in sols) + r"\right\}"
