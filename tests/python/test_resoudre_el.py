@@ -170,7 +170,7 @@ class TestCartes(unittest.TestCase):
     def test_les_methodes_en_badge_dans_l_ordre(self):
         titres = lambda e: [(c["titre"], c.get("badge")) for c in rel.resoudre(e)["cartes"]]
         self.assertEqual(titres("3^(x+1)-27=0"), [("Étape 1", "Isoler l'exponentielle"), ("Étape 2", "Logarithme des deux membres"), ("Solution", None)])
-        self.assertEqual(titres("log_x(256)=4"), [("Étape 1", "Condition"), ("Étape 2", "Définition du logarithme"), ("Solution", None)])
+        self.assertEqual(titres("log_x(256)=4"), [("Étape 1", "Condition"), ("Étape 2", "Exponentielle des deux membres"), ("Solution", None)])
         self.assertEqual([t for t, _ in titres("10^x*(10^x-4)=0")], ["Étape 1", "Étape 2", "Étape 3", "Solution"])
         self.assertEqual([b for _, b in titres("10^x*(10^x-4)=0")][:3], ["Produit nul", "Facteur 1", "Facteur 2"])
 

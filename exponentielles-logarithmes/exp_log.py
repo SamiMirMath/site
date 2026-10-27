@@ -886,9 +886,13 @@ PROP_LN_PUISSANCE = "ln(a^A) = A · ln(a)"
 PROP_CAR_LOG_10 = "car log(10) = 1"
 PROP_CAR_LN_E = "car ln(e) = 1"
 PROP_LOG_UN = "log(1) = 0"
+PROP_EXPONENTIELLE = "exponentielle des deux membres"
+PROP_EXP_LOG = "10^(log(A)) = A, A > 0"
+PROP_EXP_LN = "e^(ln(A)) = A, A > 0"
+PROP_EXP_LOG_BASE = "a^(log_a(A)) = A, A > 0"
 PROPRIETES = frozenset({PROP_PUISSANCE, PROP_PRODUIT, PROP_UN, PROP_MEME_BASE, PROP_ISOLER, PROP_PRODUIT_NUL, PROP_DISCRIMINANT,
                         PROP_DEFINITION_LOG, PROP_LOG_DEUX_MEMBRES, PROP_LOG_PUISSANCE, PROP_LOG_10K, PROP_LN_UN, PROP_EXPO_POSITIVE,
-                        PROP_AUCUNE_SOLUTION, PROP_LOG_QUOTIENT, PROP_LOG_PRODUIT, PROP_LOG_REGROUPER, PROP_LOG_SOMME, PROP_LN_DEUX_MEMBRES, PROP_LN_PUISSANCE, PROP_CAR_LOG_10, PROP_CAR_LN_E, PROP_LOG_UN,
+                        PROP_AUCUNE_SOLUTION, PROP_LOG_QUOTIENT, PROP_LOG_PRODUIT, PROP_LOG_REGROUPER, PROP_LOG_SOMME, PROP_LN_DEUX_MEMBRES, PROP_LN_PUISSANCE, PROP_CAR_LOG_10, PROP_CAR_LN_E, PROP_LOG_UN, PROP_EXPONENTIELLE, PROP_EXP_LOG, PROP_EXP_LN, PROP_EXP_LOG_BASE,
                         PROP_ISOLER_LOG, PROP_BIEN_DEFINI, PROP_BASE_LOG, PROP_SEULE_POSITIVE, PROP_LOG_BASE_PUISSANCE, PROP_LN_E_PUISSANCE,
                         PROP_CHANGEMENT_DE_BASE})
 
@@ -1883,6 +1887,14 @@ def _base_du_logarithme(base):
     return base, v
 
 
+def _par_exponentielle(chaine, courant, base, puissance, resultat, milieu=()):
+    """log_a(u) = c ⇔ a^(log_a(u)) = a^c (exponentielle des deux membres) ⇔ u = a^c (a^(log_a(A)) = A, A > 0) : deux lignes par logarithme.
+    `courant` : le logarithme, `base` : sa base (nœud), `puissance` : a^c, `resultat` : la valeur de u, `milieu` : les écritures intermédiaires."""
+    prop = PROP_EXP_LN if isinstance(base, E) else PROP_EXP_LOG if base == Nb(10) else PROP_EXP_LOG_BASE
+    chaine.ajouter(Eq(Pow(base, courant), puissance), "⇔", PROP_EXPONENTIELLE)
+    chaine.ajouter(Eq(courant.a, resultat, milieu), "⇔", prop)
+
+
 @_avec_decimaux
 def logarithmique(g, d, x):
     """Corrigé de log_a(u) = c par la définition du logarithme (u polynôme de degré ≤ 2 en x, ou logarithmes imbriqués, ou base inconnue
@@ -1919,7 +1931,7 @@ def _logarithmique(g, d, x):
         if not isinstance(courant.a, Log):
             break
         exact = _valeur_exacte(puissance)
-        chaine.ajouter(Eq(courant.a, exact or puissance, [puissance] if exact is not None else ()), "⇔", PROP_DEFINITION_LOG)
+        _par_exponentielle(chaine, courant, base, puissance, exact or puissance, [puissance] if exact is not None else ())
         rhs, courant = exact or puissance, courant.a
     u = courant.a
     if not variables(u) or not _est_polynome(u):
@@ -1927,12 +1939,12 @@ def _logarithmique(g, d, x):
     lignes, remarque = [chaine], None
     if isinstance(u, Var):
         exact = _valeur_exacte(puissance)
-        chaine.ajouter(Eq(u, exact or puissance, [puissance] if exact is not None else ()), "⇔", PROP_DEFINITION_LOG)
+        _par_exponentielle(chaine, courant, base, puissance, exact or puissance, [puissance] if exact is not None else ())
         solutions = [exact or puissance]
     else:
         f = _poly(u, x)
         if len(f) == 2:
-            chaine.ajouter(Eq(u, puissance), "⇔", PROP_DEFINITION_LOG)
+            _par_exponentielle(chaine, courant, base, puissance, puissance)
             if f[1] == -1 and f[0] != 0:                      # q − x = c donne x = q − c (corrigé 2.15 l : x = 5 − 10⁸)
                 sol = Op("-", _nb_exact(f[0]), puissance)
                 chaine.ajouter(Eq(Var(x), sol), "⇔")
@@ -1948,7 +1960,7 @@ def _logarithmique(g, d, x):
             v = _const(puissance)
             if v is None:
                 raise _Hors
-            chaine.ajouter(Eq(u, _nb_exact(v), [puissance]), "⇔", PROP_DEFINITION_LOG)
+            _par_exponentielle(chaine, courant, base, puissance, _nb_exact(v), [puissance])
             l_poly, solutions, remarque = _resoudre_polynome(f, [v], u, _nb_exact(v), x)
             if solutions is None:
                 raise _Hors
@@ -1956,7 +1968,7 @@ def _logarithmique(g, d, x):
             for e, lien, prop in zip(premiere.elements[1:], premiere.liens, premiere.props):
                 chaine.ajouter(e, lien, prop)
             lignes += l_poly[1:]
-    etapes.append(_carte("Définition du logarithme", lignes))
+    etapes.append(_carte("Exponentielle des deux membres", lignes))
     if profondeur == 1 and not isinstance(u, Var) and solutions:
         etapes.append(_carte("Vérification", [Chaine([Positif(u, puissance)], note=PROP_BIEN_DEFINI)]))
     return {"genre": "logarithmique", "inconnue": x, "enonce": enonce, "base": None, "etapes": etapes, "solutions": solutions,
@@ -1977,15 +1989,15 @@ def _base_inconnue(enonce, etapes, chaine, s, c, x):
         racine = Fn("sqrt", _nb_exact(n)) if k == 2 else Pow(_nb_exact(n), Nb(F(1, k)))
     X = Var(s.base.nom)
     condition = Chaine([Texte(f"{X.nom} > 0 \\text{{ et }} {X.nom} \\neq 1")], note=PROP_BASE_LOG)
-    equation = Eq(Pow(X, Nb(k)) if k > 1 else X, _nb_exact(n))
-    chaine.ajouter(equation, "⇔", PROP_DEFINITION_LOG)
+    chaine.ajouter(Eq(Pow(X, s), Pow(X, Nb(k))), "⇔", PROP_EXPONENTIELLE)            # x^(log_x(n)) = x^k
+    chaine.ajouter(Eq(_nb_exact(n), Pow(X, Nb(k)) if k > 1 else X), "⇔", PROP_EXP_LOG_BASE)
     lignes = [chaine]
     if k % 2 == 0:
         chaine.ajouter(Ou([Eq(X, racine), Eq(X, Neg(racine) if r is None else _nb_exact(-r))]), "⇔")
         lignes.append(Chaine([Eq(X, racine)], note=PROP_SEULE_POSITIVE))
     elif k > 1:
         chaine.ajouter(Eq(X, racine), "⇔")
-    etapes += [_carte("Condition", [condition]), _carte("Définition du logarithme", lignes)]
+    etapes += [_carte("Condition", [condition]), _carte("Exponentielle des deux membres", lignes)]
     return {"genre": "logarithmique", "inconnue": x, "enonce": enonce, "base": None, "etapes": etapes, "solutions": [racine],
             "remarque": None}
 

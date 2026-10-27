@@ -815,8 +815,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Définition du logarithme⟦\\log(x) = -2⟧⟦\\iff⟧⟦x = 10^{-2} = \\frac{1}{100}⟧(définition du logarithme)",
-    "titre": "Étape 2Définition du logarithme"
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log(x) = -2⟧⟦\\iff⟧⟦10^{\\log(x)} = 10^{-2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 10^{-2} = \\frac{1}{100}⟧(10^(log(A)) = A, A > 0)",
+    "titre": "Étape 2Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -6429,8 +6429,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Définition du logarithme⟦\\log(x) = \\frac{5}{2}⟧⟦\\iff⟧⟦x = 10^{\\frac{5}{2}} = 100\\sqrt{10}⟧(définition du logarithme)",
-    "titre": "Étape 2Définition du logarithme"
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log(x) = \\frac{5}{2}⟧⟦\\iff⟧⟦10^{\\log(x)} = 10^{\\frac{5}{2}}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 10^{\\frac{5}{2}} = 100\\sqrt{10}⟧(10^(log(A)) = A, A > 0)",
+    "titre": "Étape 2Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -6468,8 +6468,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Définition du logarithme⟦\\log_{3}(x) = 5⟧⟦\\iff⟧⟦x = 3^{5} = 243⟧(définition du logarithme)",
-    "titre": "Étape 2Définition du logarithme"
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{3}(x) = 5⟧⟦\\iff⟧⟦3^{\\log_{3}(x)} = 3^{5}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 3^{5} = 243⟧(a^(log_a(A)) = A, A > 0)",
+    "titre": "Étape 2Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -7120,8 +7120,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦3 = \\log(x)⟧⟦\\iff⟧⟦\\log(x) = 3⟧⟦\\iff⟧⟦x = 10^{3} = 1\\text{’}000⟧(définition du logarithme)",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦3 = \\log(x)⟧⟦\\iff⟧⟦\\log(x) = 3⟧⟦\\iff⟧⟦10^{\\log(x)} = 10^{3}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 10^{3} = 1\\text{’}000⟧(10^(log(A)) = A, A > 0)",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -9864,8 +9864,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦8 = \\log(2x + 1)⟧⟦\\iff⟧⟦\\log(2x + 1) = 8⟧⟦\\iff⟧⟦2x + 1 = 10^{8}⟧(définition du logarithme)⟦\\iff⟧⟦2x = 10^{8} - 1⟧⟦\\iff⟧⟦x = \\frac{10^{8} - 1}{2} = \\frac{99\\text{’}999\\text{’}999}{2}⟧",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦8 = \\log(2x + 1)⟧⟦\\iff⟧⟦\\log(2x + 1) = 8⟧⟦\\iff⟧⟦10^{\\log(2x + 1)} = 10^{8}⟧(exponentielle des deux membres)⟦\\iff⟧⟦2x + 1 = 10^{8}⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦2x = 10^{8} - 1⟧⟦\\iff⟧⟦x = \\frac{10^{8} - 1}{2} = \\frac{99\\text{’}999\\text{’}999}{2}⟧",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -11460,8 +11460,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\ln(2 - x) = 1⟧⟦\\iff⟧⟦2 - x = e⟧(définition du logarithme)⟦\\iff⟧⟦x = 2 - e⟧",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\ln(2 - x) = 1⟧⟦\\iff⟧⟦e^{\\ln(2 - x)} = e⟧(exponentielle des deux membres)⟦\\iff⟧⟦2 - x = e⟧(e^(ln(A)) = A, A > 0)⟦\\iff⟧⟦x = 2 - e⟧",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -11576,8 +11576,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\ln(\\ln(x)) = 0⟧⟦\\iff⟧⟦\\ln(x) = e^{0} = 1⟧(définition du logarithme)⟦\\iff⟧⟦x = e⟧(définition du logarithme)",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\ln(\\ln(x)) = 0⟧⟦\\iff⟧⟦e^{\\ln(\\ln(x))} = e^{0}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\ln(x) = e^{0} = 1⟧(e^(ln(A)) = A, A > 0)⟦\\iff⟧⟦e^{\\ln(x)} = e⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = e⟧(e^(ln(A)) = A, A > 0)",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -11605,8 +11605,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\ln(x) = 0⟧⟦\\iff⟧⟦x = e^{0} = 1⟧(définition du logarithme)",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\ln(x) = 0⟧⟦\\iff⟧⟦e^{\\ln(x)} = e^{0}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = e^{0} = 1⟧(e^(ln(A)) = A, A > 0)",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -11634,8 +11634,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\ln(x) = 1⟧⟦\\iff⟧⟦x = e⟧(définition du logarithme)",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\ln(x) = 1⟧⟦\\iff⟧⟦e^{\\ln(x)} = e⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = e⟧(e^(ln(A)) = A, A > 0)",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -11663,8 +11663,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\ln(x) = 3⟧⟦\\iff⟧⟦x = e^{3}⟧(définition du logarithme)",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\ln(x) = 3⟧⟦\\iff⟧⟦e^{\\ln(x)} = e^{3}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = e^{3}⟧(e^(ln(A)) = A, A > 0)",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -11711,8 +11711,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\log(-3 - x) = 1⟧⟦\\iff⟧⟦-3 - x = 10^{1}⟧(définition du logarithme)⟦\\iff⟧⟦x = -3 - 10^{1} = -13⟧",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log(-3 - x) = 1⟧⟦\\iff⟧⟦10^{\\log(-3 - x)} = 10^{1}⟧(exponentielle des deux membres)⟦\\iff⟧⟦-3 - x = 10^{1}⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦x = -3 - 10^{1} = -13⟧",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -11769,8 +11769,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\log(-x) = 2⟧⟦\\iff⟧⟦-x = 10^{2}⟧(définition du logarithme)⟦\\iff⟧⟦x = -10^{2} = -100⟧",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log(-x) = 2⟧⟦\\iff⟧⟦10^{\\log(-x)} = 10^{2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦-x = 10^{2}⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦x = -10^{2} = -100⟧",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -12078,8 +12078,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\log(2x + 1) = 3⟧⟦\\iff⟧⟦2x + 1 = 10^{3}⟧(définition du logarithme)⟦\\iff⟧⟦2x = 10^{3} - 1⟧⟦\\iff⟧⟦x = \\frac{10^{3} - 1}{2} = \\frac{999}{2}⟧",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log(2x + 1) = 3⟧⟦\\iff⟧⟦10^{\\log(2x + 1)} = 10^{3}⟧(exponentielle des deux membres)⟦\\iff⟧⟦2x + 1 = 10^{3}⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦2x = 10^{3} - 1⟧⟦\\iff⟧⟦x = \\frac{10^{3} - 1}{2} = \\frac{999}{2}⟧",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -12117,8 +12117,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\log(3 - 2x) = 1⟧⟦\\iff⟧⟦3 - 2x = 10^{1}⟧(définition du logarithme)⟦\\iff⟧⟦-2x = 10^{1} - 3⟧⟦\\iff⟧⟦x = \\frac{10^{1} - 3}{-2} = -\\frac{7}{2}⟧",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log(3 - 2x) = 1⟧⟦\\iff⟧⟦10^{\\log(3 - 2x)} = 10^{1}⟧(exponentielle des deux membres)⟦\\iff⟧⟦3 - 2x = 10^{1}⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦-2x = 10^{1} - 3⟧⟦\\iff⟧⟦x = \\frac{10^{1} - 3}{-2} = -\\frac{7}{2}⟧",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -12156,8 +12156,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\log(5 - x) = 8⟧⟦\\iff⟧⟦5 - x = 10^{8}⟧(définition du logarithme)⟦\\iff⟧⟦x = 5 - 10^{8} = -99\\text{’}999\\text{’}995⟧",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log(5 - x) = 8⟧⟦\\iff⟧⟦10^{\\log(5 - x)} = 10^{8}⟧(exponentielle des deux membres)⟦\\iff⟧⟦5 - x = 10^{8}⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦x = 5 - 10^{8} = -99\\text{’}999\\text{’}995⟧",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -12224,8 +12224,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\log(\\log(\\log(x))) = 0⟧⟦\\iff⟧⟦\\log(\\log(x)) = 10^{0} = 1⟧(définition du logarithme)⟦\\iff⟧⟦\\log(x) = 10^{1} = 10⟧(définition du logarithme)⟦\\iff⟧⟦x = 10^{10}⟧(définition du logarithme)",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log(\\log(\\log(x))) = 0⟧⟦\\iff⟧⟦10^{\\log(\\log(\\log(x)))} = 10^{0}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\log(\\log(x)) = 10^{0} = 1⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦10^{\\log(\\log(x))} = 10^{1}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\log(x) = 10^{1} = 10⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦10^{\\log(x)} = 10^{10}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 10^{10}⟧(10^(log(A)) = A, A > 0)",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -12253,8 +12253,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\log(\\log(x)) = 1⟧⟦\\iff⟧⟦\\log(x) = 10^{1} = 10⟧(définition du logarithme)⟦\\iff⟧⟦x = 10^{10}⟧(définition du logarithme)",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log(\\log(x)) = 1⟧⟦\\iff⟧⟦10^{\\log(\\log(x))} = 10^{1}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\log(x) = 10^{1} = 10⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦10^{\\log(x)} = 10^{10}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 10^{10}⟧(10^(log(A)) = A, A > 0)",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -12282,8 +12282,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\log(\\log(x - 1)) = 0⟧⟦\\iff⟧⟦\\log(x - 1) = 10^{0} = 1⟧(définition du logarithme)⟦\\iff⟧⟦x - 1 = 10^{1}⟧(définition du logarithme)⟦\\iff⟧⟦x = 1 + 10^{1} = 11⟧",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log(\\log(x - 1)) = 0⟧⟦\\iff⟧⟦10^{\\log(\\log(x - 1))} = 10^{0}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\log(x - 1) = 10^{0} = 1⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦10^{\\log(x - 1)} = 10^{1}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x - 1 = 10^{1}⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦x = 1 + 10^{1} = 11⟧",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -12350,8 +12350,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Définition du logarithme⟦\\log(x) = 2⟧⟦\\iff⟧⟦x = 10^{2} = 100⟧(définition du logarithme)",
-    "titre": "Étape 2Définition du logarithme"
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log(x) = 2⟧⟦\\iff⟧⟦10^{\\log(x)} = 10^{2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 10^{2} = 100⟧(10^(log(A)) = A, A > 0)",
+    "titre": "Étape 2Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -12408,8 +12408,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Définition du logarithme⟦\\log(x) = 2⟧⟦\\iff⟧⟦x = 10^{2} = 100⟧(définition du logarithme)",
-    "titre": "Étape 2Définition du logarithme"
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log(x) = 2⟧⟦\\iff⟧⟦10^{\\log(x)} = 10^{2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 10^{2} = 100⟧(10^(log(A)) = A, A > 0)",
+    "titre": "Étape 2Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -12437,8 +12437,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\log(x) = -0{,}27⟧⟦\\iff⟧⟦x = 10^{-0{,}27}⟧(définition du logarithme)",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log(x) = -0{,}27⟧⟦\\iff⟧⟦10^{\\log(x)} = 10^{-0{,}27}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 10^{-0{,}27}⟧(10^(log(A)) = A, A > 0)",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -12466,8 +12466,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\log(x) = -1⟧⟦\\iff⟧⟦x = 10^{-1} = \\frac{1}{10}⟧(définition du logarithme)",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log(x) = -1⟧⟦\\iff⟧⟦10^{\\log(x)} = 10^{-1}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 10^{-1} = \\frac{1}{10}⟧(10^(log(A)) = A, A > 0)",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -12495,8 +12495,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\log(x) = -4⟧⟦\\iff⟧⟦x = 10^{-4}⟧(définition du logarithme)",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log(x) = -4⟧⟦\\iff⟧⟦10^{\\log(x)} = 10^{-4}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 10^{-4}⟧(10^(log(A)) = A, A > 0)",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -12524,8 +12524,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\log(x) = 0⟧⟦\\iff⟧⟦x = 10^{0} = 1⟧(définition du logarithme)",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log(x) = 0⟧⟦\\iff⟧⟦10^{\\log(x)} = 10^{0}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 10^{0} = 1⟧(10^(log(A)) = A, A > 0)",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -12553,8 +12553,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\log(x) = 1{,}5⟧⟦\\iff⟧⟦x = 10^{1{,}5} = 10\\sqrt{10}⟧(définition du logarithme)",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log(x) = 1{,}5⟧⟦\\iff⟧⟦10^{\\log(x)} = 10^{1{,}5}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 10^{1{,}5} = 10\\sqrt{10}⟧(10^(log(A)) = A, A > 0)",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -12582,8 +12582,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\log(x) = 2⟧⟦\\iff⟧⟦x = 10^{2} = 100⟧(définition du logarithme)",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log(x) = 2⟧⟦\\iff⟧⟦10^{\\log(x)} = 10^{2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 10^{2} = 100⟧(10^(log(A)) = A, A > 0)",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -12611,8 +12611,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\log(x) = 3⟧⟦\\iff⟧⟦x = 10^{3} = 1\\text{’}000⟧(définition du logarithme)",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log(x) = 3⟧⟦\\iff⟧⟦10^{\\log(x)} = 10^{3}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 10^{3} = 1\\text{’}000⟧(10^(log(A)) = A, A > 0)",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -12659,8 +12659,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\log(x^{2}) = 2⟧⟦\\iff⟧⟦x^{2} = 10^{2} = 100⟧(définition du logarithme)⟦\\iff⟧⟦x^{2} - 100 = 0⟧⟦\\iff⟧⟦(x + 10)(x - 10) = 0⟧⟦\\iff⟧⟦x = -10 \\text{ ou } x = 10⟧(un produit est nul si l'un des facteurs est nul)",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log(x^{2}) = 2⟧⟦\\iff⟧⟦10^{\\log(x^{2})} = 10^{2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x^{2} = 10^{2} = 100⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦x^{2} - 100 = 0⟧⟦\\iff⟧⟦(x + 10)(x - 10) = 0⟧⟦\\iff⟧⟦x = -10 \\text{ ou } x = 10⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -12727,8 +12727,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Définition du logarithme⟦\\log(x^{2} + x + 3) = 0⟧⟦\\iff⟧⟦x^{2} + x + 3 = 10^{0} = 1⟧(définition du logarithme)⟦\\iff⟧⟦x^{2} + x + 2 = 0⟧⟦Δ = 1^{2} - 4 \\cdot 1 \\cdot 2 = -7⟧Δ < 0 : l'équation n'a aucune solution réelle.",
-    "titre": "Étape 2Définition du logarithme"
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log(x^{2} + x + 3) = 0⟧⟦\\iff⟧⟦10^{\\log(x^{2} + x + 3)} = 10^{0}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x^{2} + x + 3 = 10^{0} = 1⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦x^{2} + x + 2 = 0⟧⟦Δ = 1^{2} - 4 \\cdot 1 \\cdot 2 = -7⟧Δ < 0 : l'équation n'a aucune solution réelle.",
+    "titre": "Étape 2Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -12756,8 +12756,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\log(x^{2} + x + 3) = 0⟧⟦\\iff⟧⟦x^{2} + x + 3 = 10^{0} = 1⟧(définition du logarithme)⟦\\iff⟧⟦x^{2} + x + 2 = 0⟧⟦Δ = 1^{2} - 4 \\cdot 1 \\cdot 2 = -7⟧Δ < 0 : l'équation n'a aucune solution réelle.",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log(x^{2} + x + 3) = 0⟧⟦\\iff⟧⟦10^{\\log(x^{2} + x + 3)} = 10^{0}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x^{2} + x + 3 = 10^{0} = 1⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦x^{2} + x + 2 = 0⟧⟦Δ = 1^{2} - 4 \\cdot 1 \\cdot 2 = -7⟧Δ < 0 : l'équation n'a aucune solution réelle.",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -12785,8 +12785,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\log(x^{2} - 3x) = 1⟧⟦\\iff⟧⟦x^{2} - 3x = 10^{1} = 10⟧(définition du logarithme)⟦\\iff⟧⟦x^{2} - 3x - 10 = 0⟧⟦\\iff⟧⟦(x + 2)(x - 5) = 0⟧⟦\\iff⟧⟦x = -2 \\text{ ou } x = 5⟧(un produit est nul si l'un des facteurs est nul)",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log(x^{2} - 3x) = 1⟧⟦\\iff⟧⟦10^{\\log(x^{2} - 3x)} = 10^{1}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x^{2} - 3x = 10^{1} = 10⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦x^{2} - 3x - 10 = 0⟧⟦\\iff⟧⟦(x + 2)(x - 5) = 0⟧⟦\\iff⟧⟦x = -2 \\text{ ou } x = 5⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -12853,8 +12853,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\log_{2}(x) = 4⟧⟦\\iff⟧⟦x = 2^{4} = 16⟧(définition du logarithme)",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log_{2}(x) = 4⟧⟦\\iff⟧⟦2^{\\log_{2}(x)} = 2^{4}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 2^{4} = 16⟧(a^(log_a(A)) = A, A > 0)",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -12882,8 +12882,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\log_{5}(x) = -2⟧⟦\\iff⟧⟦x = 5^{-2} = \\frac{1}{25}⟧(définition du logarithme)",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log_{5}(x) = -2⟧⟦\\iff⟧⟦5^{\\log_{5}(x)} = 5^{-2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 5^{-2} = \\frac{1}{25}⟧(a^(log_a(A)) = A, A > 0)",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -13210,8 +13210,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Définition du logarithme⟦\\log_{2}(x) = 4⟧⟦\\iff⟧⟦x = 2^{4} = 16⟧(définition du logarithme)",
-    "titre": "Étape 1Définition du logarithme"
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log_{2}(x) = 4⟧⟦\\iff⟧⟦2^{\\log_{2}(x)} = 2^{4}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 2^{4} = 16⟧(a^(log_a(A)) = A, A > 0)",
+    "titre": "Étape 1Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -13713,8 +13713,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Définition du logarithme⟦\\log_{x}\\left(\\frac{1}{16}\\right) = 4⟧⟦\\iff⟧⟦x^{4} = \\frac{1}{16}⟧(définition du logarithme)⟦\\iff⟧⟦x = \\frac{1}{2} \\text{ ou } x = -\\frac{1}{2}⟧⟦x = \\frac{1}{2}⟧(seule la solution positive convient)",
-    "titre": "Étape 2Définition du logarithme"
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}\\left(\\frac{1}{16}\\right) = 4⟧⟦\\iff⟧⟦x^{\\log_{x}\\left(\\frac{1}{16}\\right)} = x^{4}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\frac{1}{16} = x^{4}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = \\frac{1}{2} \\text{ ou } x = -\\frac{1}{2}⟧⟦x = \\frac{1}{2}⟧(seule la solution positive convient)",
+    "titre": "Étape 2Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -13752,8 +13752,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Définition du logarithme⟦\\log_{x}\\left(\\frac{1}{8}\\right) = 3⟧⟦\\iff⟧⟦x^{3} = \\frac{1}{8}⟧(définition du logarithme)⟦\\iff⟧⟦x = \\frac{1}{2}⟧",
-    "titre": "Étape 2Définition du logarithme"
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}\\left(\\frac{1}{8}\\right) = 3⟧⟦\\iff⟧⟦x^{\\log_{x}\\left(\\frac{1}{8}\\right)} = x^{3}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\frac{1}{8} = x^{3}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = \\frac{1}{2}⟧",
+    "titre": "Étape 2Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -13791,8 +13791,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Définition du logarithme⟦\\log_{x}(12) = 4⟧⟦\\iff⟧⟦x^{4} = 12⟧(définition du logarithme)⟦\\iff⟧⟦x = 12^{\\frac{1}{4}} \\text{ ou } x = -12^{\\frac{1}{4}}⟧⟦x = 12^{\\frac{1}{4}}⟧(seule la solution positive convient)",
-    "titre": "Étape 2Définition du logarithme"
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}(12) = 4⟧⟦\\iff⟧⟦x^{\\log_{x}(12)} = x^{4}⟧(exponentielle des deux membres)⟦\\iff⟧⟦12 = x^{4}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = 12^{\\frac{1}{4}} \\text{ ou } x = -12^{\\frac{1}{4}}⟧⟦x = 12^{\\frac{1}{4}}⟧(seule la solution positive convient)",
+    "titre": "Étape 2Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -13830,8 +13830,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Définition du logarithme⟦\\log_{x}(16) = 2⟧⟦\\iff⟧⟦x^{2} = 16⟧(définition du logarithme)⟦\\iff⟧⟦x = 4 \\text{ ou } x = -4⟧⟦x = 4⟧(seule la solution positive convient)",
-    "titre": "Étape 2Définition du logarithme"
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}(16) = 2⟧⟦\\iff⟧⟦x^{\\log_{x}(16)} = x^{2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦16 = x^{2}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = 4 \\text{ ou } x = -4⟧⟦x = 4⟧(seule la solution positive convient)",
+    "titre": "Étape 2Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -13869,8 +13869,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Définition du logarithme⟦\\log_{x}(2) = 3⟧⟦\\iff⟧⟦x^{3} = 2⟧(définition du logarithme)⟦\\iff⟧⟦x = 2^{\\frac{1}{3}}⟧",
-    "titre": "Étape 2Définition du logarithme"
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}(2) = 3⟧⟦\\iff⟧⟦x^{\\log_{x}(2)} = x^{3}⟧(exponentielle des deux membres)⟦\\iff⟧⟦2 = x^{3}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = 2^{\\frac{1}{3}}⟧",
+    "titre": "Étape 2Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -13908,8 +13908,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Définition du logarithme⟦\\log_{x}(255) = 2⟧⟦\\iff⟧⟦x^{2} = 255⟧(définition du logarithme)⟦\\iff⟧⟦x = \\sqrt{255} \\text{ ou } x = -\\sqrt{255}⟧⟦x = \\sqrt{255}⟧(seule la solution positive convient)",
-    "titre": "Étape 2Définition du logarithme"
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}(255) = 2⟧⟦\\iff⟧⟦x^{\\log_{x}(255)} = x^{2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦255 = x^{2}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = \\sqrt{255} \\text{ ou } x = -\\sqrt{255}⟧⟦x = \\sqrt{255}⟧(seule la solution positive convient)",
+    "titre": "Étape 2Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -13947,8 +13947,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Définition du logarithme⟦\\log_{x}(256) = 4⟧⟦\\iff⟧⟦x^{4} = 256⟧(définition du logarithme)⟦\\iff⟧⟦x = 4 \\text{ ou } x = -4⟧⟦x = 4⟧(seule la solution positive convient)",
-    "titre": "Étape 2Définition du logarithme"
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}(256) = 4⟧⟦\\iff⟧⟦x^{\\log_{x}(256)} = x^{4}⟧(exponentielle des deux membres)⟦\\iff⟧⟦256 = x^{4}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = 4 \\text{ ou } x = -4⟧⟦x = 4⟧(seule la solution positive convient)",
+    "titre": "Étape 2Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -13986,8 +13986,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Définition du logarithme⟦\\log_{x}\\left(\\frac{5}{2}\\right) = 2⟧⟦\\iff⟧⟦x^{2} = \\frac{5}{2}⟧(définition du logarithme)⟦\\iff⟧⟦x = \\sqrt{\\frac{5}{2}} \\text{ ou } x = -\\sqrt{\\frac{5}{2}}⟧⟦x = \\sqrt{\\frac{5}{2}}⟧(seule la solution positive convient)",
-    "titre": "Étape 2Définition du logarithme"
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}\\left(\\frac{5}{2}\\right) = 2⟧⟦\\iff⟧⟦x^{\\log_{x}\\left(\\frac{5}{2}\\right)} = x^{2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\frac{5}{2} = x^{2}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = \\sqrt{\\frac{5}{2}} \\text{ ou } x = -\\sqrt{\\frac{5}{2}}⟧⟦x = \\sqrt{\\frac{5}{2}}⟧(seule la solution positive convient)",
+    "titre": "Étape 2Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -14025,8 +14025,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Définition du logarithme⟦\\log_{x}(7) = 1⟧⟦\\iff⟧⟦x = 7⟧(définition du logarithme)",
-    "titre": "Étape 2Définition du logarithme"
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}(7) = 1⟧⟦\\iff⟧⟦x^{\\log_{x}(7)} = x^{1}⟧(exponentielle des deux membres)⟦\\iff⟧⟦7 = x⟧(a^(log_a(A)) = A, A > 0)",
+    "titre": "Étape 2Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -14064,8 +14064,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Définition du logarithme⟦\\log_{x}(8) = 3⟧⟦\\iff⟧⟦x^{3} = 8⟧(définition du logarithme)⟦\\iff⟧⟦x = 2⟧",
-    "titre": "Étape 2Définition du logarithme"
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}(8) = 3⟧⟦\\iff⟧⟦x^{\\log_{x}(8)} = x^{3}⟧(exponentielle des deux membres)⟦\\iff⟧⟦8 = x^{3}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = 2⟧",
+    "titre": "Étape 2Exponentielle des deux membres"
    },
    {
     "classes": [
@@ -14103,8 +14103,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Définition du logarithme⟦\\log_{x}(81) = 4⟧⟦\\iff⟧⟦x^{4} = 81⟧(définition du logarithme)⟦\\iff⟧⟦x = 3 \\text{ ou } x = -3⟧⟦x = 3⟧(seule la solution positive convient)",
-    "titre": "Étape 2Définition du logarithme"
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{x}(81) = 4⟧⟦\\iff⟧⟦x^{\\log_{x}(81)} = x^{4}⟧(exponentielle des deux membres)⟦\\iff⟧⟦81 = x^{4}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = 3 \\text{ ou } x = -3⟧⟦x = 3⟧(seule la solution positive convient)",
+    "titre": "Étape 2Exponentielle des deux membres"
    },
    {
     "classes": [

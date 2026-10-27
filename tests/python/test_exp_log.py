@@ -883,12 +883,13 @@ class TestLogarithme(unittest.TestCase):
         self.assertEqual(exact("log(x)=-0,27"), r"10^{-0{,}27}")                    # pas 10^(−27/100)
         self.assertEqual(exact("log(x)=1,5"), r"10\sqrt{10}")
         self.assertEqual(el.tex_chaine(corriger("log(x)=2,5")["etapes"][0]["lignes"][0]),
-                         r"\log(x) = 2{,}5 \iff x = 10^{2{,}5} = 100\sqrt{10} \quad \text{(définition du logarithme)}")
+                         r"\log(x) = 2{,}5 \iff 10^{\log(x)} = 10^{2{,}5} \quad \text{(exponentielle des deux membres)} "
+                         r"\iff x = 10^{2{,}5} = 100\sqrt{10} \quad \text{(10^(log(A)) = A, A > 0)}")
         self.assertEqual(exact("2000*1,045^n=3805"), r"\frac{\log(1{,}9025)}{\log(1{,}045)}")           # pas 761/400
         self.assertEqual(exact("1,5^x=2^(x+1)"), r"\frac{\log(2)}{\log(0{,}75)}")
         self.assertEqual(exact("3e^x=0,65"), r"\ln\left(\frac{13}{60}\right)")                          # pas un décimal fini : fraction
         lignes = lambda s: " ".join(el.tex_chaine(l) for c in corriger(s)["etapes"] for l in c["lignes"])
-        self.assertIn(r"\log(x) = \frac{5}{2} \iff x = 10^{\frac{5}{2}} = 100\sqrt{10}", lignes("2log(x)-5=0"))     # entiers : fraction
+        self.assertIn(r"\iff x = 10^{\frac{5}{2}} = 100\sqrt{10}", lignes("2log(x)-5=0"))     # entiers : fraction
         self.assertIn(r"x = 10^{-1} = \frac{1}{10}", lignes("log(x)=-1"))
         self.assertIn(r"\frac{17}{2} = 10^{x}", lignes("18=2*10^x+1"))
         self.assertEqual(el.tex(calculer("log_4(0,5)")["valeur"]), "-0{,}5")
@@ -1231,34 +1232,64 @@ class TestLogarithmique(unittest.TestCase):
                 self.assertEqual(racines, len([v for v in attendu if -20 < v < 20]), saisie)
 
     def test_ecriture_du_corrige(self):
+        """27.10.2026 : l'exponentielle aux deux membres, puis a^(log_a(A)) = A (A > 0) : deux lignes par logarithme, jamais la définition."""
         lignes = lambda s: [el.tex_chaine(l) for c in corriger(s)["etapes"] for l in c["lignes"]]
+        EXP = r"\quad \text{(exponentielle des deux membres)}"
+        pas = lambda base, log, c, res, prop: rf"\iff {base}^{{{log}}} = {base}^{{{c}}} {EXP} \iff {res} \quad \text{{({prop})}}"
+        P10, PE, PA = "10^(log(A)) = A, A > 0", "e^(ln(A)) = A, A > 0", "a^(log_a(A)) = A, A > 0"
         self.assertEqual(lignes("log(5-x)=8"), [
-            r"\log(5 - x) = 8 \iff 5 - x = 10^{8} \quad \text{(définition du logarithme)} \iff x = 5 - 10^{8} = -99\text{’}999\text{’}995",
+            r"\log(5 - x) = 8 " + pas(10, r"\log(5 - x)", 8, r"5 - x = 10^{8}", P10) + r" \iff x = 5 - 10^{8} = -99\text{’}999\text{’}995",
             r"5 - x = 10^{8} > 0 \quad \text{(le logarithme est bien défini)} \; \checkmark"])
         self.assertEqual(lignes("log(log(log(x)))=0"), [
-            r"\log(\log(\log(x))) = 0 \iff \log(\log(x)) = 10^{0} = 1 \quad \text{(définition du logarithme)} "
-            r"\iff \log(x) = 10^{1} = 10 \quad \text{(définition du logarithme)} "
-            r"\iff x = 10^{10} \quad \text{(définition du logarithme)}"])
-        self.assertEqual(lignes("log(x)=3"), [r"\log(x) = 3 \iff x = 10^{3} = 1\text{’}000 \quad \text{(définition du logarithme)}"])
-        self.assertEqual(lignes("log(x)=-4"), [r"\log(x) = -4 \iff x = 10^{-4} \quad \text{(définition du logarithme)}"])      # notation scientifique, pas 0,0001
-        self.assertEqual(lignes("log(x)=-1"), [r"\log(x) = -1 \iff x = 10^{-1} = \frac{1}{10} \quad \text{(définition du logarithme)}"])
-        self.assertEqual(lignes("log(x)=-2"), [r"\log(x) = -2 \iff x = 10^{-2} = \frac{1}{100} \quad \text{(définition du logarithme)}"])
-        self.assertEqual(lignes("log(x)=1,5"), [r"\log(x) = 1{,}5 \iff x = 10^{1{,}5} = 10\sqrt{10} \quad \text{(définition du logarithme)}"])
-        self.assertEqual(lignes("log(x)=-0,27"), [r"\log(x) = -0{,}27 \iff x = 10^{-0{,}27} \quad \text{(définition du logarithme)}"])
+            r"\log(\log(\log(x))) = 0 " + pas(10, r"\log(\log(\log(x)))", 0, r"\log(\log(x)) = 10^{0} = 1", P10)
+            + " " + pas(10, r"\log(\log(x))", 1, r"\log(x) = 10^{1} = 10", P10)
+            + " " + pas(10, r"\log(x)", 10, r"x = 10^{10}", P10)])
+        self.assertEqual(lignes("log(log(x))=1"), [
+            r"\log(\log(x)) = 1 " + pas(10, r"\log(\log(x))", 1, r"\log(x) = 10^{1} = 10", P10) + " " + pas(10, r"\log(x)", 10, r"x = 10^{10}", P10)])
+        self.assertEqual(lignes("log(x+1)=7"), [
+            r"\log(x + 1) = 7 " + pas(10, r"\log(x + 1)", 7, r"x + 1 = 10^{7}", P10) + r" \iff x = 10^{7} - 1 = 9\text{’}999\text{’}999",
+            r"x + 1 = 10^{7} > 0 \quad \text{(le logarithme est bien défini)} \; \checkmark"])
+        self.assertEqual(lignes("log(x)=3"), [r"\log(x) = 3 " + pas(10, r"\log(x)", 3, r"x = 10^{3} = 1\text{’}000", P10)])
+        self.assertEqual(lignes("log(x)=-4"), [r"\log(x) = -4 " + pas(10, r"\log(x)", "-4", r"x = 10^{-4}", P10)])            # notation scientifique, pas 0,0001
+        self.assertEqual(lignes("log(x)=-1"), [r"\log(x) = -1 " + pas(10, r"\log(x)", "-1", r"x = 10^{-1} = \frac{1}{10}", P10)])
+        self.assertEqual(lignes("log(x)=-2"), [r"\log(x) = -2 " + pas(10, r"\log(x)", "-2", r"x = 10^{-2} = \frac{1}{100}", P10)])
+        self.assertEqual(lignes("log(x)=1,5"), [r"\log(x) = 1{,}5 " + pas(10, r"\log(x)", r"1{,}5", r"x = 10^{1{,}5} = 10\sqrt{10}", P10)])
+        self.assertEqual(lignes("log(x)=-0,27"), [r"\log(x) = -0{,}27 " + pas(10, r"\log(x)", r"-0{,}27", r"x = 10^{-0{,}27}", P10)])
         self.assertEqual(lignes("2log(x)-5=0"), [
             r"2\log(x) - 5 = 0 \iff 2\log(x) = 5 \quad \text{(on isole le logarithme)} \iff \log(x) = \frac{5}{2} \quad \text{(on isole le logarithme)}",
-            r"\log(x) = \frac{5}{2} \iff x = 10^{\frac{5}{2}} = 100\sqrt{10} \quad \text{(définition du logarithme)}"])
-        self.assertEqual(lignes("ln(x)=3"), [r"\ln(x) = 3 \iff x = e^{3} \quad \text{(définition du logarithme)}"])
-        self.assertEqual(lignes("log2(x)=4"), [r"\log_{2}(x) = 4 \iff x = 2^{4} = 16 \quad \text{(définition du logarithme)}"])
-        self.assertEqual(lignes("2log_3(x)=10")[1], r"\log_{3}(x) = 5 \iff x = 3^{5} = 243 \quad \text{(définition du logarithme)}")
+            r"\log(x) = \frac{5}{2} " + pas(10, r"\log(x)", r"\frac{5}{2}", r"x = 10^{\frac{5}{2}} = 100\sqrt{10}", P10)])
+        self.assertEqual(lignes("ln(x)=3"), [r"\ln(x) = 3 " + pas("e", r"\ln(x)", 3, r"x = e^{3}", PE)])
+        self.assertEqual(lignes("ln(2-x)=1"), [
+            r"\ln(2 - x) = 1 \iff e^{\ln(2 - x)} = e " + EXP + r" \iff 2 - x = e \quad \text{(e^(ln(A)) = A, A > 0)} \iff x = 2 - e",
+            r"2 - x = e > 0 \quad \text{(le logarithme est bien défini)} \; \checkmark"])
+        self.assertEqual(lignes("log2(x)=4"), [r"\log_{2}(x) = 4 " + pas(2, r"\log_{2}(x)", 4, r"x = 2^{4} = 16", PA)])
+        self.assertEqual(lignes("2log_3(x)=10")[1], r"\log_{3}(x) = 5 " + pas(3, r"\log_{3}(x)", 5, r"x = 3^{5} = 243", PA))
         self.assertEqual(lignes("log_x(256)=4"), [
             r"x > 0 \text{ et } x \neq 1 \quad \text{(une base de logarithme est strictement positive et différente de 1)}",
-            r"\log_{x}(256) = 4 \iff x^{4} = 256 \quad \text{(définition du logarithme)} \iff x = 4 \text{ ou } x = -4",
+            r"\log_{x}(256) = 4 \iff x^{\log_{x}(256)} = x^{4} " + EXP + r" \iff 256 = x^{4} \quad \text{(a^(log_a(A)) = A, A > 0)} \iff x = 4 \text{ ou } x = -4",
             r"x = 4 \quad \text{(seule la solution positive convient)}"])
         self.assertEqual(lignes("log(x^2)=2"), [
-            r"\log(x^{2}) = 2 \iff x^{2} = 10^{2} = 100 \quad \text{(définition du logarithme)} \iff x^{2} - 100 = 0 \iff (x + 10)(x - 10) = 0 "
-            r"\iff x = -10 \text{ ou } x = 10 \quad \text{(un produit est nul si l'un des facteurs est nul)}",
+            r"\log(x^{2}) = 2 " + pas(10, r"\log(x^{2})", 2, r"x^{2} = 10^{2} = 100", P10)
+            + r" \iff x^{2} - 100 = 0 \iff (x + 10)(x - 10) = 0 \iff x = -10 \text{ ou } x = 10 \quad \text{(un produit est nul si l'un des facteurs est nul)}",
             r"x^{2} = 10^{2} > 0 \quad \text{(le logarithme est bien défini)} \; \checkmark"])
+
+    def test_jamais_la_definition_du_logarithme(self):
+        """EL-21 : les équations logarithmiques n'utilisent plus « définition du logarithme » ; chaque logarithme a ses deux lignes ; pas de sélecteur."""
+        for saisie, _ in BATTERIE_E4:
+            with self.subTest(saisie):
+                r = corriger(saisie)
+                self.assertNotIn("Définition du logarithme", [c["titre"] for c in r["etapes"]])
+                props = [p for c in r["etapes"] for l in c["lignes"] for p in l.props]
+                self.assertNotIn(el.PROP_DEFINITION_LOG, props)
+                self.assertEqual(props.count(el.PROP_EXPONENTIELLE), sum(1 for p in props if p in (el.PROP_EXP_LOG, el.PROP_EXP_LN, el.PROP_EXP_LOG_BASE)))
+                self.assertGreaterEqual(props.count(el.PROP_EXPONENTIELLE), 1)
+                self.assertIsNone(self.variantes(saisie))
+        profondeur = lambda s: [p for c in corriger(s)["etapes"] for l in c["lignes"] for p in l.props].count(el.PROP_EXPONENTIELLE)
+        self.assertEqual((profondeur("log(x)=3"), profondeur("log(log(x))=1"), profondeur("log(log(log(x)))=0")), (1, 2, 3))      # une paire par couche
+
+    def variantes(self, saisie):
+        s = el.analyser_saisie(saisie)
+        return el.variantes_equation(s.g, s.d, s.inconnue)
 
     def test_formes_exactes_et_ligne_finale(self):
         for saisie, attendu in [
@@ -1275,13 +1306,13 @@ class TestLogarithmique(unittest.TestCase):
 
     def test_cartes(self):
         titres = lambda s: [c["titre"] for c in corriger(s)["etapes"]]
-        self.assertEqual(titres("log(x)=3"), ["Définition du logarithme"])
-        self.assertEqual(titres("2log(x)-5=0"), ["Isoler le logarithme", "Définition du logarithme"])
-        self.assertEqual(titres("log(5-x)=8"), ["Définition du logarithme", "Vérification"])
-        self.assertEqual(titres("log(log(log(x)))=0"), ["Définition du logarithme"])               # pas de vérification pour les logarithmes imbriqués
-        self.assertEqual(titres("log(log(x-1))=0"), ["Définition du logarithme"])
-        self.assertEqual(titres("log_x(256)=4"), ["Condition", "Définition du logarithme"])
-        self.assertEqual(titres("log(x^2+x+3)=0"), ["Définition du logarithme"])                    # S = ∅ : rien à vérifier
+        self.assertEqual(titres("log(x)=3"), ["Exponentielle des deux membres"])
+        self.assertEqual(titres("2log(x)-5=0"), ["Isoler le logarithme", "Exponentielle des deux membres"])
+        self.assertEqual(titres("log(5-x)=8"), ["Exponentielle des deux membres", "Vérification"])
+        self.assertEqual(titres("log(log(log(x)))=0"), ["Exponentielle des deux membres"])        # pas de vérification pour les logarithmes imbriqués
+        self.assertEqual(titres("log(log(x-1))=0"), ["Exponentielle des deux membres"])
+        self.assertEqual(titres("log_x(256)=4"), ["Condition", "Exponentielle des deux membres"])
+        self.assertEqual(titres("log(x^2+x+3)=0"), ["Exponentielle des deux membres"])             # S = ∅ : rien à vérifier
         self.assertEqual(corriger("log(x^2+x+3)=0")["remarque"], "Δ < 0 : l'équation n'a aucune solution réelle.")
 
     def test_verification_pour_chaque_argument_avec_inconnue(self):
@@ -1311,7 +1342,8 @@ class TestLogarithmique(unittest.TestCase):
         r = corriger("log_x(255)=2")
         self.assertEqual([el.tex(n) for n in r["solutions"]], [r"\sqrt{255}"])
         lignes = [el.tex_chaine(l) for l in r["etapes"][1]["lignes"]]
-        self.assertEqual(lignes[0], r"\log_{x}(255) = 2 \iff x^{2} = 255 \quad \text{(définition du logarithme)} \iff x = \sqrt{255} \text{ ou } x = -\sqrt{255}")
+        self.assertEqual(lignes[0], r"\log_{x}(255) = 2 \iff x^{\log_{x}(255)} = x^{2} \quad \text{(exponentielle des deux membres)} "
+                                    r"\iff 255 = x^{2} \quad \text{(a^(log_a(A)) = A, A > 0)} \iff x = \sqrt{255} \text{ ou } x = -\sqrt{255}")
         self.assertEqual(lignes[1], r"x = \sqrt{255} \quad \text{(seule la solution positive convient)}")
         self.assertEqual(el.tex_solution(r), r"S = \left\{\sqrt{255}\right\} \text{, soit } x \approx 15{,}969")
         r = corriger("log_x(2)=3")                                                            # exposant impair : une seule solution, racine cubique
@@ -1319,7 +1351,8 @@ class TestLogarithmique(unittest.TestCase):
         self.assertEqual(len(r["etapes"][1]["lignes"]), 1)
         self.assertEqual(el.tex_solution(r), r"S = \left\{2^{\frac{1}{3}}\right\} \text{, soit } x \approx 1{,}260")
         r = corriger("log_x(7)=1")                                                            # k = 1 : x = 7, une seule ligne x = 7
-        self.assertEqual(el.tex_chaine(r["etapes"][1]["lignes"][0]), r"\log_{x}(7) = 1 \iff x = 7 \quad \text{(définition du logarithme)}")
+        self.assertEqual(el.tex_chaine(r["etapes"][1]["lignes"][0]), r"\log_{x}(7) = 1 \iff x^{\log_{x}(7)} = x^{1} \quad \text{(exponentielle des deux membres)} "
+                                                                    r"\iff 7 = x \quad \text{(a^(log_a(A)) = A, A > 0)}")
 
     def test_log_de_x_carre_se_resout_par_la_definition(self):
         """EL-10 : log(x²) = 2 donne ±10 ; jamais 2 log|x|."""
@@ -1352,7 +1385,7 @@ class TestLogarithmique(unittest.TestCase):
                     for ligne in carte["lignes"]:
                         for e in ligne.elements:
                             if isinstance(e, (Eq, el.Ou)):
-                                if carte["titre"] == "Définition du logarithme" and isinstance(e, Eq) and e.g == X and ligne.note == el.PROP_SEULE_POSITIVE:
+                                if carte["titre"] == "Exponentielle des deux membres" and isinstance(e, Eq) and e.g == X and ligne.note == el.PROP_SEULE_POSITIVE:
                                     continue
                                 for x in sols:
                                     self.assertTrue(element_vrai(e, x), (saisie, el.tex_element(e), x))
