@@ -1959,8 +1959,11 @@ def _second_degre(chaine, P, x, ecrit, ln):
         chaine.ajouter(Ou([Eq(X, Nb(0)), Eq(interieur, Nb(0))]), "⇔", PROP_PRODUIT_NUL)
         racine = Op("/", _somme([_oppose(t) for t in B], x, ecrit, ln), Anode)
         suite = Chaine([Eq(interieur, Nb(0)), Eq(X, racine)], ["⇔"], [Car(Anode)])
-        solutions = sorted([Nb(0), racine], key=valeur)
-        return [chaine, suite], solutions, None
+        if _valeur_rationnelle(racine) is not None:          # log(8)/log(2) = 3 : le contrôle à la calculatrice l'écrit
+            return [chaine, suite], sorted([Nb(0), racine], key=valeur), None
+        nom = Defini("x_{1}" if valeur(racine) < 0 else "x_{2}", racine)   # S = {x₁ ; 0} tient à 360 px, pas S = {(log 2 − log 3)/log 2 ; 0}
+        solutions = sorted([Nb(0), nom], key=valeur)
+        return [chaine, suite, Chaine([Eq(nom, racine)])], solutions, None
     Bnode, Cnode = _somme(B, x, ecrit, ln), _somme(C, x, ecrit, ln)
     produit = Op("*", Op("*", Nb(4), Anode), Cnode)
     delta = Op("-", Pow(Bnode, Nb(2)), produit) if B else Neg(produit)

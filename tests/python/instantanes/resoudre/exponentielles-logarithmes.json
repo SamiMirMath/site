@@ -7563,6 +7563,11 @@
       "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x \\cdot \\log(2) - \\log(2) + \\log(3) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2) - \\log(3)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
       "style": "etape",
       "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = \\frac{\\log(2) - \\log(3)}{\\log(2)}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
      }
     ],
     "style": "normal",
@@ -7571,7 +7576,7 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{\\frac{\\log(2) - \\log(3)}{\\log(2)} \\,;\\, 0\\right\\} \\text{, soit } x \\approx -0{,}585 \\text{ ou } x = 0",
+      "tex": "S = \\left\\{x_{1} \\,;\\, 0\\right\\} \\text{, soit } x \\approx -0{,}585 \\text{ ou } x = 0",
       "type": "resultat"
      }
     ],
@@ -7616,6 +7621,11 @@
         "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x \\cdot \\log(2) - \\log(2) + \\log(3) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2) - \\log(3)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
         "style": "etape",
         "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = \\frac{\\log(2) - \\log(3)}{\\log(2)}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
        }
       ],
       "style": "normal",
@@ -7624,7 +7634,7 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{\\frac{\\log(2) - \\log(3)}{\\log(2)} \\,;\\, 0\\right\\} \\text{, soit } x \\approx -0{,}585 \\text{ ou } x = 0",
+        "tex": "S = \\left\\{x_{1} \\,;\\, 0\\right\\} \\text{, soit } x \\approx -0{,}585 \\text{ ou } x = 0",
         "type": "resultat"
        }
       ],
@@ -10592,6 +10602,11 @@
       "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x \\cdot \\log(2) - \\log(3) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
       "style": "etape",
       "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\frac{\\log(3)}{\\log(2)}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
      }
     ],
     "style": "normal",
@@ -10600,7 +10615,7 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{0 \\,;\\, \\frac{\\log(3)}{\\log(2)}\\right\\} \\text{, soit } x = 0 \\text{ ou } x \\approx 1{,}585",
+      "tex": "S = \\left\\{0 \\,;\\, x_{2}\\right\\} \\text{, soit } x = 0 \\text{ ou } x \\approx 1{,}585",
       "type": "resultat"
      }
     ],
@@ -10645,6 +10660,11 @@
         "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x \\cdot \\log(2) - \\log(3) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
         "style": "etape",
         "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\frac{\\log(3)}{\\log(2)}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
        }
       ],
       "style": "normal",
@@ -10653,7 +10673,7 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{0 \\,;\\, \\frac{\\log(3)}{\\log(2)}\\right\\} \\text{, soit } x = 0 \\text{ ou } x \\approx 1{,}585",
+        "tex": "S = \\left\\{0 \\,;\\, x_{2}\\right\\} \\text{, soit } x = 0 \\text{ ou } x \\approx 1{,}585",
         "type": "resultat"
        }
       ],
@@ -15884,6 +15904,11 @@
       "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x \\cdot \\log(3) - \\log(2) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div></div>",
       "style": "etape",
       "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\frac{\\log(2)}{\\log(3)}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
      }
     ],
     "style": "normal",
@@ -15892,7 +15917,7 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{0 \\,;\\, \\frac{\\log(2)}{\\log(3)}\\right\\} \\text{, soit } x = 0 \\text{ ou } x \\approx 0{,}631",
+      "tex": "S = \\left\\{0 \\,;\\, x_{2}\\right\\} \\text{, soit } x = 0 \\text{ ou } x \\approx 0{,}631",
       "type": "resultat"
      }
     ],
@@ -15937,6 +15962,11 @@
         "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x \\cdot \\log(3) - \\log(2) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div></div>",
         "style": "etape",
         "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\frac{\\log(2)}{\\log(3)}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
        }
       ],
       "style": "normal",
@@ -15945,7 +15975,7 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{0 \\,;\\, \\frac{\\log(2)}{\\log(3)}\\right\\} \\text{, soit } x = 0 \\text{ ou } x \\approx 0{,}631",
+        "tex": "S = \\left\\{0 \\,;\\, x_{2}\\right\\} \\text{, soit } x = 0 \\text{ ou } x \\approx 0{,}631",
         "type": "resultat"
        }
       ],
