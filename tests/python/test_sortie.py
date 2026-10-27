@@ -101,5 +101,55 @@ class TestValidateur(unittest.TestCase):
         self.assertTrue(so.valider(s))
 
 
+def avec_variantes():
+    a = [so.carte("Étape 1", [so.texte("a")], badge="Méthode A"), so.carte("Solution", [so.resultat("S = \\{1\\}")], style="final")]
+    b = [so.carte("Étape 1", [so.texte("b")], badge="Méthode B"), so.carte("Solution", [so.resultat("S = \\{1\\}")], style="final")]
+    return so.sortie_ok_variantes("x = 1", [so.variante("a", "Méthode A", a), so.variante("b", "Méthode B", b)], "b")
+
+
+class TestVariantes(unittest.TestCase):
+    """SOC-17 : plusieurs résolutions d'une même entrée (facultatif, premier usage : Exponentielles et logarithmes)."""
+
+    def test_sortie_conforme(self):
+        s = avec_variantes()
+        self.assertEqual(so.valider(s), [])
+        self.assertEqual(s["variante_defaut"], "b")
+        self.assertEqual(s["cartes"], s["variantes"][1]["cartes"])
+        self.assertEqual([v["cle"] for v in s["variantes"]], ["a", "b"])
+
+    def _refuse(self, modifier, fragment):
+        s = copy.deepcopy(avec_variantes())
+        modifier(s)
+        ecarts = so.valider(s)
+        self.assertTrue(any(fragment in e for e in ecarts), ecarts)
+
+    def test_cle_manquante(self):
+        self._refuse(lambda s: s["variantes"][0].pop("libelle"), "clé « libelle » manquante")
+        self._refuse(lambda s: s["variantes"][0].pop("cartes"), "clé « cartes » manquante")
+        self._refuse(lambda s: s["variantes"][0].update(autre=1), "clé « autre » inconnue")
+
+    def test_cles_identiques(self):
+        self._refuse(lambda s: s["variantes"][0].update(cle="b"), "même clé")
+
+    def test_defaut_inconnu_ou_absent(self):
+        self._refuse(lambda s: s.update(variante_defaut="z"), "variante_defaut « z » inconnue")
+        self._refuse(lambda s: s.pop("variante_defaut"), "vont ensemble")
+        self._refuse(lambda s: s.pop("variantes"), "vont ensemble")
+
+    def test_cartes_differentes_de_celles_du_defaut(self):
+        self._refuse(lambda s: s.update(cartes=s["variantes"][0]["cartes"]), "variante par défaut")
+
+    def test_carte_invalide_dans_une_variante(self):
+        self._refuse(lambda s: s["variantes"][0]["cartes"][0].update(style="rose"), "style « rose » inconnu")
+
+    def test_liste_vide(self):
+        self._refuse(lambda s: s.update(variantes=[]), "liste non vide")
+
+    def test_sortie_sans_variantes_inchangee(self):
+        s = exemple()
+        self.assertNotIn("variantes", s)
+        self.assertNotIn("variante_defaut", s)
+
+
 if __name__ == "__main__":
     unittest.main()

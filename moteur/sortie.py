@@ -3,9 +3,11 @@ sortie.py — Format de sortie commun des outils (D2) : constructeurs et validat
 
 Python pur, bibliothèque standard seulement. Une sortie de `resoudre()` est un dict :
 
-    {ok, erreur, detail?, enonce_tex, entete?, cartes: [carte], besoin_sympy?}
+    {ok, erreur, detail?, enonce_tex, entete?, cartes: [carte], besoin_sympy?, variantes?, variante_defaut?}
     carte = {titre, titre_tex?, titre_masque?, badge?, style, blocs: [bloc]}
     bloc  = texte | formule | resultat | erreur | liste | tableau | graphique
+    variante = {cle, libelle, cartes: [carte]}   (facultatif : plusieurs résolutions de la même entrée, au choix de l'élève ;
+               `cartes` de la sortie est alors celles de la variante par défaut)
 
 `valider(sortie)` renvoie la liste des écarts au schéma (vide si la sortie est conforme).
 """
@@ -28,7 +30,8 @@ BLOCS = {
 }
 CARTE = ({"titre", "style", "blocs"}, {"titre_tex", "badge", "detail", "titre_masque"})
 LIGNE = ({"label", "cells"}, {"final", "variation"})
-SORTIE_OK = ({"ok", "erreur", "enonce_tex", "cartes"}, {"entete", "besoin_sympy", "detail"})
+SORTIE_OK = ({"ok", "erreur", "enonce_tex", "cartes"}, {"entete", "besoin_sympy", "detail", "variantes", "variante_defaut"})
+VARIANTE = ({"cle", "libelle", "cartes"}, set())
 SORTIE_KO = ({"ok", "erreur"}, {"detail"})
 
 
@@ -74,12 +77,26 @@ def carte(titre, blocs, style="normal", badge=None, titre_tex=None, detail=None,
     return c
 
 
+def variante(cle, libelle, cartes):
+    return {"cle": cle, "libelle": libelle, "cartes": list(cartes)}
+
+
 def sortie_ok(enonce_tex, cartes, entete=None, besoin_sympy=None):
     s = {"ok": True, "erreur": None, "enonce_tex": enonce_tex, "cartes": list(cartes)}
     if entete is not None:
         s["entete"] = entete
     if besoin_sympy is not None:
         s["besoin_sympy"] = besoin_sympy
+    return s
+
+
+def sortie_ok_variantes(enonce_tex, variantes, defaut):
+    """Sortie à plusieurs résolutions : `variantes` (liste de `variante(...)`), `defaut` = la clé de celle qui s'affiche d'abord ;
+    `cartes` de la sortie est celle de la variante par défaut (un lecteur qui ignore les variantes affiche donc la bonne)."""
+    par_cle = {v["cle"]: v for v in variantes}
+    s = sortie_ok(enonce_tex, par_cle[defaut]["cartes"])
+    s["variantes"] = list(variantes)
+    s["variante_defaut"] = defaut
     return s
 
 
@@ -183,7 +200,39 @@ def valider(s):
         return ecarts
     for i, c in enumerate(s["cartes"]):
         _valider_carte(c, f"cartes[{i}]", ecarts)
+    _valider_variantes(s, ecarts)
     return ecarts
+
+
+def _valider_variantes(s, ecarts):
+    if ("variantes" in s) != ("variante_defaut" in s):
+        ecarts.append("sortie : variantes et variante_defaut vont ensemble")
+        return
+    if "variantes" not in s:
+        return
+    if not isinstance(s["variantes"], list) or not s["variantes"]:
+        ecarts.append("sortie : variantes doit être une liste non vide")
+        return
+    cles = []
+    for i, v in enumerate(s["variantes"]):
+        chemin = f"variantes[{i}]"
+        if not _cles(v, *VARIANTE, chemin, ecarts):
+            continue
+        if not _texte_non_vide(v.get("cle")) or not _texte_non_vide(v.get("libelle")):
+            ecarts.append(f"{chemin} : cle et libelle sont des textes non vides")
+        cles.append(v.get("cle"))
+        if not isinstance(v.get("cartes"), list):
+            ecarts.append(f"{chemin} : cartes doit être une liste")
+            continue
+        for j, c in enumerate(v["cartes"]):
+            _valider_carte(c, f"{chemin}.cartes[{j}]", ecarts)
+    if len(set(cles)) != len(cles):
+        ecarts.append("sortie : deux variantes ont la même clé")
+    defaut = s["variante_defaut"]
+    if defaut not in cles:
+        ecarts.append(f"sortie : variante_defaut « {defaut} » inconnue")
+    elif s["cartes"] != next(v["cartes"] for v in s["variantes"] if v.get("cle") == defaut):
+        ecarts.append("sortie : cartes doit être celle de la variante par défaut")
 
 
 def _valider_carte(c, chemin, ecarts):
