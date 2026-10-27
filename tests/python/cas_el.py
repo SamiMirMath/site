@@ -132,11 +132,16 @@ BATTERIE_AUDIT = [
     ("e^(x+1)-e^x=3", [0.557]), ("2e^x+e^(x+1)=8", [0.528]), ("e^x+e^(x+1)-e^x=3", [0.099]), ("e^x-e^(x+1)=5", []), ("e^(x+1)-e^x=0", []),
     ("e^(x+1)-2e^(x+1)=3", []), ("e^x+e^(x+1)+e^(x+1)=4", [-0.476]),
     ("3^x+3^(x+2)=30", [1.0]), ("2^x+2^(x-1)=6", [2.0]), ("7*2^x+2^(x+3)=60", [2.0]), ("2^x/3+2^(x+1)/3=2", [1.0]),
+    # regroupement : équation dont chaque terme est k·a^P, au plus deux bases, des deux côtés (D4)
+    ("2^x-3^(x+1)=3^x", [-3.419]), ("2^x+2^(x+1)=2^(x+2)", []), ("2^(x+1)=2^x+3^x+3^(x+1)", [-3.419]), ("3^x+2^x=2*3^x", [0.0]),
+    ("5*2^x=3^x+2^(x+1)", [2.710]), ("2^x+3^x=2^(x+1)+3^(x-1)", [1.0]), ("4*3^x-3^(x+1)=2^x", [0.0]), ("2^(2x)-3^x=3^(x+1)", [4.819]),
+    ("2^x-2^x=3^x-3^x", None), ("2^x-3^x=2^x-3^(x+1)", []), ("3*2^x-2^(x+1)=2*3^x-3^x", [0.0]), ("2^x+2^(x+1)=3^x+3^(x+1)", [-0.71]),
+    ("e^x+2e^x=2^x", [-3.58]), ("2^x=3*2^x-2^(x+1)+3^x", []), ("0=2^x+3^(x+1)-2^(x+2)+3^x", [-0.71]),
     ("e^(2x)/e^x=5", [1.609]), ("10^(2x)/10^x=3", [0.477]), ("e^x*e^(x+1)=5", [0.305]), ("e^(3x)/e^(x-1)=7", [0.473]),
 ]
 
 # Aucune méthode ne s'applique (EL-11) : un vrai hors-programme, ou une forme du programme que l'outil ne gère pas encore
-HORS_PROGRAMME = ["x*2^x=8", "2^x+3^x=5", "x^x=4", "2^x=x+1", "2^(sqrt(x))=4", "2^(1/x)=4", "x/2^x=1", "x*e^x=1", "2^x=3^x+x",
+HORS_PROGRAMME = ["x*2^x=8", "2^x+3^x=5", "2^x+3^x+1=5", "2^x-3^(x+1)=3^x+1", "e^x+e^(x+1)=2^x", "x^x=4", "2^x=x+1", "2^(sqrt(x))=4", "2^(1/x)=4", "x/2^x=1", "x*e^x=1", "2^x=3^x+x",
                   "log(x)=x-1", "ln(x)=x", "x*log(x)=1", "e^x=ln(x)", "log(x)=2^x", "log(x)/x=1", "ln(x)+x=2",
                   # pour les 3C, le 2e degré en a^x et les exposants qui ne diffèrent pas d'un entier (la mise en évidence est au programme)
                   "4^x-2^x-6=0", "9^x-3^x=6", "e^(2x)-3e^x+2=0",

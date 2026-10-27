@@ -324,6 +324,12 @@ un commit par groupe ; les entrées sont dans `BATTERIE_AUDIT` (`tests/python/ca
    les termes semblables se réduisent (`1 + e + e` ⇒ `1 + 2e`) ; coefficient négatif ou quotient négatif ou nul : carte « Aucune solution » (`e^x = 5/(1 − e)` : `5/(1 − e) < 0`) ; exposant du 1er ou du 2e degré. Tout coefficient positif suffit, quel qu'il soit (rationnel ou irrationnel). Exposants qui ne diffèrent pas d'un entier constant (`e^x + e^(−x) = 3`), bases différentes et 2e degré en aˣ : hors programme (point 10).
 15. **Ordre des solutions : toujours croissant**, dans les deux méthodes : S, les lignes `x = a ou x = b` (`log_x(256) = 4 ⇔ x = −4 ou x = 4`) et x₁ < x₂ (avec un coefficient de x² négatif, x₁ s'écrit avec « + √Δ »).
    Test : pour toute équation du corpus, A et B donnent S dans le même ordre.
+16. **Regrouper les termes de même base** (D4, au programme 3C) : équation dont chaque terme est `k · a^P`, au plus deux bases distinctes (valeurs égales ; une base n'est pas réécrite comme puissance d'une autre), des deux côtés,
+   un membre pouvant être 0, exposants de même partie variable et décalés d'un entier dans un même groupe de base. Carte « Regrouper les termes de même base » (les termes de la base du 1ᵉʳ terme à gauche, ceux de l'autre base à droite,
+   chaque terme déplacé change de signe) : `2^x − 3^(x+1) = 3^x ⇔ 2^x = 3^x + 3^(x+1)` (on regroupe les termes de même base) ; puis la carte « Mise en évidence » de chaque côté (`3^(x+1) = 3^x · 3`, `2^x = 3^x · (1 + 3) ⇔ 2^x = 4 · 3^x`) ;
+   puis `k · a^P = m · b^Q` comme d'habitude (méthode B ; méthode A : le message « il faut les logarithmes »), ou la carte « Aucune solution » si un membre est ≤ 0 (`2^x − 3^x = 2^x − 3^(x+1)`), ou S = ℝ (`2^x − 2^x = 3^x − 3^x`).
+   Une seule base des deux côtés (`2^x + 2^(x+1) = 2^(x+2)`) : tout à gauche, égal à 0, puis la mise en évidence du point 14. Pas de carte de regroupement quand les termes sont déjà regroupés.
+   Deux bases **et** une constante additive (`2^x + 3^x = 5`, `2^x − 3^(x+1) = 3^x + 1`) : hors programme. La base e avec des exposants décalés dans un même groupe (`e^x + e^(x+1) = 2^x`) : hors programme.
 
 ## Pour les 2M (plus tard, hors de cette version)
 

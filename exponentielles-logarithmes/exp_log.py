@@ -888,6 +888,7 @@ PROP_BASE_LOG = "une base de logarithme est strictement positive et différente 
 PROP_SEULE_POSITIVE = "seule la solution positive convient"
 PROP_SOMME_EXPOSANTS = "aᵐ⁺ⁿ = aᵐ · aⁿ"
 PROP_MISE_EN_EVIDENCE = "mise en évidence"
+PROP_REGROUPER = "on regroupe les termes de même base"
 PROP_BASE_PUISSANCE_POSITIVE = "une base admissible est strictement positive, donc xᵏ > 0"
 PROP_LOG_SOMME = "log(ab) = log a + log b"
 PROP_LN_DEUX_MEMBRES = "ln des deux membres"
@@ -912,7 +913,7 @@ PROPRIETES = frozenset({PROP_CARRE, PROP_PUISSANCE_ZERO, PROP_PUISSANCE_NEGATIVE
                         PROP_PUISSANCE, PROP_PRODUIT, PROP_UN, PROP_MEME_BASE, PROP_ISOLER, PROP_PRODUIT_NUL, PROP_DISCRIMINANT,
                         PROP_DEFINITION_LOG, PROP_LOG_DEUX_MEMBRES, PROP_LOG_PUISSANCE, PROP_LOG_10K, PROP_LN_UN, PROP_EXPO_POSITIVE,
                         PROP_AUCUNE_SOLUTION, PROP_LOG_QUOTIENT, PROP_LOG_PRODUIT, PROP_LOG_REGROUPER, PROP_LOG_SOMME, PROP_LN_DEUX_MEMBRES, PROP_LN_PUISSANCE, PROP_CAR_LOG_10, PROP_CAR_LN_E, PROP_LOG_UN, PROP_EXPONENTIELLE, PROP_EXP_LOG, PROP_EXP_LN, PROP_EXP_LOG_BASE,
-                        PROP_ISOLER_LOG, PROP_BIEN_DEFINI, PROP_BASE_LOG, PROP_SEULE_POSITIVE, PROP_BASE_PUISSANCE_POSITIVE, PROP_SOMME_EXPOSANTS, PROP_MISE_EN_EVIDENCE, PROP_LOG_BASE_PUISSANCE, PROP_LN_E_PUISSANCE,
+                        PROP_ISOLER_LOG, PROP_BIEN_DEFINI, PROP_BASE_LOG, PROP_SEULE_POSITIVE, PROP_BASE_PUISSANCE_POSITIVE, PROP_SOMME_EXPOSANTS, PROP_MISE_EN_EVIDENCE, PROP_REGROUPER, PROP_LOG_BASE_PUISSANCE, PROP_LN_E_PUISSANCE,
                         PROP_CHANGEMENT_DE_BASE})
 
 
@@ -2225,9 +2226,114 @@ def _mise_en_evidence(g, d, x, methode):
     return r
 
 
+def _analyser_regroupement(g, d, x):
+    """([(signe, _Terme)] du membre de gauche, idem du membre de droite) d'une équation dont chaque terme est k · a^P, avec au plus deux bases
+    distinctes et au moins trois termes (2^x − 3^(x+1) = 3^x, 2^x + 2^(x+1) = 2^(x+2)), un membre pouvant être 0 ; _Hors sinon (une constante
+    additive, 2^x + 3^x = 5, reste hors programme). Dans un même groupe de base, les exposants ont la même partie variable et diffèrent d'un entier."""
+    membres = []
+    for n in (g, d):
+        if not variables(n):
+            if _const(n) != 0:
+                raise _Hors
+            membres.append([])
+        else:
+            membres.append([(signe, _terme_exponentiel(signe, t, x)) for signe, t in _termes_signes(n)])
+    tous = [t for m in membres for _, t in m]
+    bases = []
+    for t in tous:
+        if t.fac.base not in bases:
+            bases.append(t.fac.base)
+    if len(tous) < 3 or len(bases) > 2:
+        raise _Hors
+    for base in bases:
+        groupe = [t for t in tous if t.fac.base == base]
+        if any(t.fac.exp[1:] != groupe[0].fac.exp[1:] for t in groupe):
+            raise _Hors
+        if any((t.fac.exp[0] - groupe[0].fac.exp[0]).denominator != 1 for t in groupe):
+            raise _Hors
+        if base == "e" and any(t.fac.exp[0] != groupe[0].fac.exp[0] for t in groupe):
+            raise _Hors                                    # le coefficient 1 + e n'est pas rationnel : e^x + e^(x+1) = 2^x
+    return membres, bases
+
+
+def _somme_signee(couples):
+    """La somme des termes (signe, _Terme) écrite : 2^x − 3^(x+1) + 3^x."""
+    return _somme_arbres([Neg(t.terme) if signe < 0 else t.terme for signe, t in couples])
+
+
+def _cote_en_evidence(couples):
+    """(lignes des exposants décalés, forme mise en évidence, forme réduite k · a^P, coefficient k) d'un membre fait de termes de même base :
+    2^(x+1) = 2^x · 2 ; 3^x + 3^(x+1) devient 3^x (1 + 3), puis 4 · 3^x. Un seul terme : rien à faire (forme mise en évidence = forme réduite = lui-même)."""
+    termes = []
+    for signe, t in couples:
+        copie = _Terme(signe * abs(t.coef), t.fac, t.terme)     # signe et coefficient du terme : −3 · 2^x
+        termes.append(copie)
+    if len(termes) == 1:
+        t = termes[0]
+        return [], None, None, t.coef
+    plus_petit = min(termes, key=lambda t: t.fac.exp[0])
+    for t in termes:
+        t.n = int(t.fac.exp[0] - plus_petit.fac.exp[0])
+    base = plus_petit.fac.base
+    base_ecrite = plus_petit.fac.base_ecrite
+    P = plus_petit.fac.arbre
+    lignes = []
+    for t in termes:
+        if t.n and not any(tex(t.fac.arbre) == tex(l.elements[0]) for l in lignes):
+            lignes.append(Chaine([t.fac.arbre, Op("*", P, base_ecrite if t.n == 1 else Pow(base_ecrite, Nb(t.n)))], ["="], [PROP_SOMME_EXPOSANTS]))
+    parenthese = _somme_arbres([_terme_de_la_somme(t, base_ecrite) for t in termes])
+    C = sum((t.coef * (base ** t.n if base != "e" else 1) for t in termes), F(0))
+    reduit = Nb(0) if C == 0 else P if C == 1 else Neg(P) if C == -1 else Op("*", _nb_exact(C), P) if C > 0 else Neg(Op("*", _nb_exact(-C), P))
+    return lignes, Op("*", P, parenthese), reduit, C
+
+
+def _regrouper_les_bases(g, d, x, methode):
+    """Équation dont chaque terme est k · a^P, avec au plus deux bases (2^x − 3^(x+1) = 3^x) : carte « Regrouper les termes de même base »
+    (les termes d'une base d'un côté, ceux de l'autre base de l'autre côté), puis la mise en évidence de chaque côté, puis k · a^P = m · b^Q
+    comme d'habitude (ou « Aucune solution » si un membre est ≤ 0). _Hors sinon."""
+    (gauche, droite), bases = _analyser_regroupement(g, d, x)
+    enonce = Eq(g, d)
+    premier = (gauche or droite)[0][1].fac.base
+    a = premier
+    un_seul = len(bases) == 1
+    L, R = [], []
+    for membre, a_droite in ((gauche, False), (droite, True)):       # à gauche : les termes de gauche, puis ceux qui viennent de la droite
+        for signe, t in membre:
+            if un_seul or t.fac.base == a:
+                L.append((-signe if a_droite else signe, t))
+    for membre, a_droite in ((droite, True), (gauche, False)):       # à droite : les termes de droite, puis ceux qui viennent de la gauche
+        for signe, t in membre:
+            if not un_seul and t.fac.base != a:
+                R.append((signe if a_droite else -signe, t))
+    g1, d1 = _somme_signee(L), (_somme_signee(R) if R else Nb(0))
+    etapes = []
+    if tex_element(Eq(g1, d1)) != tex_element(enonce):
+        etapes.append(_carte("Regrouper les termes de même base", [Chaine([enonce, Eq(g1, d1)], ["⇔"], [PROP_REGROUPER])]))
+    if un_seul:
+        r = dict(_resolution(g1, d1, x, methode))
+        r["etapes"] = etapes + list(r["etapes"])
+        r["enonce"] = enonce
+        return r
+    lignes_g, fact_g, red_g, Cg = _cote_en_evidence(L)
+    lignes_d, fact_d, red_d, Cd = _cote_en_evidence(R)
+    g2, d2 = red_g or g1, red_d or d1
+    if fact_g is not None or fact_d is not None:
+        chaine = Chaine([Eq(g1, d1), Eq(fact_g or g1, fact_d or d1)], ["⇔"], [PROP_MISE_EN_EVIDENCE])
+        if tex_element(Eq(g2, d2)) != tex_element(chaine.elements[-1]):
+            chaine.ajouter(Eq(g2, d2), "⇔")
+        lignes = lignes_g + [l for l in lignes_d if not any(tex(l.elements[0]) == tex(m.elements[0]) for m in lignes_g)]
+        etapes.append(_carte("Mise en évidence", lignes + [chaine]))
+    if Cg == 0 and Cd == 0:                                          # 0 = 0
+        return _resultat("regroupement", x, enonce, etapes, None, "Cette égalité est vraie pour tout nombre réel.")
+    r = dict(_resolution(g2, d2, x, methode))
+    r["etapes"] = etapes + list(r["etapes"])
+    r["enonce"] = enonce
+    return r
+
+
 def _resolution(g, d, x, methode):
     return _essayer(lambda: _un_facteur(g, d, x, methode), lambda: _mise_en_evidence(g, d, x, methode), lambda: _produit_nul(g, d, x, methode),
-                    lambda: _apres_isolement(g, d, x, methode))
+                    lambda: _apres_isolement(g, d, x, methode), lambda: _regrouper_les_bases(g, d, x, methode))
 
 
 @_avec_decimaux
@@ -2856,6 +2962,16 @@ def hors_programme(g, d, x):
     """Vrai pour une équation dont le type n'est pas dans le cours : x · 2^x = 8, 2^x + 3^x = 5, x^x = 4, 2^x = x + 1, log(x) = x − 1, x · log(x) = 1,
     e^x = ln(x), et pour les 3C deux exponentielles avec un troisième terme, quelle que soit la base (mise en facteur 2^x + 2^(x+1) = 12,
     2e degré en 2^x : 4^x − 2^x − 6 = 0, e^(2x) − 3e^x + 2 = 0)."""
+    try:
+        _somme_decalee(g, d, x)                            # 2^x + 2^(x+1) = 12 : dans le programme (mise en évidence)
+        return False
+    except _Hors:
+        pass
+    try:
+        _analyser_regroupement(g, d, x)                    # 2^x − 3^(x+1) = 3^x : dans le programme (on regroupe les termes de même base)
+        return False
+    except _Hors:
+        pass
     try:                                                   # 2^x − 3^(x+1) = 0 se ramène à 2^x = 3^(x+1)
         g2, d2, _ = _isoler_exponentielles(g, d, x)
         return hors_programme(g2, d2, x)
@@ -2869,11 +2985,6 @@ def hors_programme(g, d, x):
     egal_zero = lambda a, b: isinstance(b, Nb) and b.val == 0 and isinstance(a, Op) and a.op == "*"
     if _hors_arbre(g, egal_zero(g, d)) or _hors_arbre(d, egal_zero(d, g)):
         return True
-    try:
-        _somme_decalee(g, d, x)                            # 2^x + 2^(x+1) = 12 : dans le programme (mise en évidence)
-        return False
-    except _Hors:
-        pass
     termes = [t for t in _termes_additifs(g) + _termes_additifs(d) if _const(t) != 0]
     if len(termes) >= 3 and sum(1 for t in termes if _classe(t) == "exp") >= 2:
         return True                                        # 2^x + 2^(x+1) = 12 (mise en facteur), 4^x − 2^x − 6 = 0 (2e degré en 2^x) : pas en 3C

@@ -366,6 +366,49 @@ class TestBaseInconnueArgumentNegatif(unittest.TestCase):
         self.assertEqual([round(el.valeur(n), 3) for n in corriger("log_x(8)=3")["solutions"]], [2.0])
 
 
+class TestRegroupement(unittest.TestCase):
+    """Correction 5 (D4) : équation dont chaque terme est k·a^P, au plus deux bases : on regroupe, on met en évidence de chaque côté, puis k·a^P = m·b^Q."""
+    A, B = el.METHODE_MEME_BASE, el.METHODE_LOGARITHMES
+
+    def titres(self, saisie, methode):
+        return [c["titre"] for c in corriger(saisie, methode)["etapes"]]
+
+    def test_exemple_du_corrige(self):
+        """2^x − 3^(x+1) = 3^x ⇔ 2^x = 3^x + 3^(x+1) ⇔ 2^x = 3^x(1 + 3) ⇔ 2^x = 4·3^x ⇔ … ⇔ x = log(4)/log(2/3) ≈ −3,419."""
+        self.assertEqual(self.titres("2^x-3^(x+1)=3^x", self.B)[:3], ["Regrouper les termes de même base", "Mise en évidence", "Logarithme des deux membres"])
+        l = lignes("2^x-3^(x+1)=3^x", self.B)
+        self.assertEqual(l[0], r"2^{x} - 3^{x + 1} = 3^{x} \iff 2^{x} = 3^{x} + 3^{x + 1} \quad \text{(on regroupe les termes de même base)}")
+        self.assertEqual(l[1], r"3^{x + 1} = 3^{x} \cdot 3 \quad \text{(aᵐ⁺ⁿ = aᵐ · aⁿ)}")
+        self.assertEqual(l[2], r"2^{x} = 3^{x} + 3^{x + 1} \iff 2^{x} = 3^{x} \cdot (1 + 3) \quad \text{(mise en évidence)} \iff 2^{x} = 4 \cdot 3^{x}")
+        r = corriger("2^x-3^(x+1)=3^x", self.B)
+        self.assertEqual(el.tex_solution(r), r"S = \left\{\frac{\log(4)}{\log\left(\frac{2}{3}\right)}\right\} \text{, soit } x \approx -3{,}419")
+        self.assertIsNotNone(corriger("2^x-3^(x+1)=3^x", self.A).get("message"))          # méthode A : « 3 n'est pas une puissance de 2 »
+
+    def test_les_deux_methodes_ont_les_memes_cartes_de_depart(self):
+        for saisie in ["2^x-3^(x+1)=3^x", "2^x+2^(x+1)=2^(x+2)", "2^(x+1)=2^x+3^x+3^(x+1)"]:
+            with self.subTest(saisie):
+                a, b = corriger(saisie, self.A)["etapes"][:2], corriger(saisie, self.B)["etapes"][:2]
+                self.assertEqual([[el.tex_chaine(l) for l in c["lignes"]] for c in a], [[el.tex_chaine(l) for l in c["lignes"]] for c in b])
+
+    def test_deja_regroupe_pas_de_carte_de_regroupement(self):
+        self.assertEqual(self.titres("2^x+2^(x+1)=3^x+3^(x+1)", self.B)[0], "Mise en évidence")
+        self.assertEqual(self.titres("2^x=3^x+3^(x+1)", self.B)[0], "Mise en évidence")
+
+    def test_une_seule_base_des_deux_cotes(self):
+        self.assertEqual(self.titres("2^x+2^(x+1)=2^(x+2)", self.B), ["Regrouper les termes de même base", "Mise en évidence", "Aucune solution"])
+        self.assertEqual(corriger("2^x+2^(x+1)=2^(x+2)", self.A)["solutions"], [])
+
+    def test_membre_negatif_ou_nul_aucune_solution_et_zero_egal_zero(self):
+        self.assertEqual(corriger("2^x-3^x=2^x-3^(x+1)", self.B)["solutions"], [])
+        self.assertIsNone(corriger("2^x-2^x=3^x-3^x", self.B)["solutions"])
+        self.assertEqual(el.tex_solution(corriger("2^x-2^x=3^x-3^x", self.A)), r"S = \mathbb{R}")
+
+    def test_deux_bases_et_une_constante_restent_hors_programme(self):
+        for saisie in ["2^x+3^x=5", "2^x+3^x+1=5", "2^x-3^(x+1)=3^x+1", "2^x+3^x=5^x+1", "2^x+3^x+5^x=10"]:
+            with self.subTest(saisie):
+                self.assertEqual(rel.resoudre(saisie), {"ok": False, "erreur": el.MESSAGE_HORS_PROGRAMME})
+
+
 class TestOrdreDesSolutions(unittest.TestCase):
     """Les solutions sont toujours en ordre croissant (S, lignes « x = … ou x = … », x₁ < x₂), et les deux méthodes donnent S dans le même ordre."""
 
@@ -466,7 +509,7 @@ class TestMiseEnEvidence(unittest.TestCase):
                     self.assertEqual([round(el.valeur(n), 3) for n in corriger(saisie, methode)["solutions"]], [attendu])
 
     def test_formes_qui_restent_hors_de_la_methode(self):
-        for saisie in ["4^x-2^x-6=0", "e^x+e^(-x)=3", "2^x+1=3^x", "2^x+2^(x+1)=3^x"]:
+        for saisie in ["4^x-2^x-6=0", "e^x+e^(-x)=3", "2^x+1=3^x", "e^x+e^(x+1)=2^x"]:
             self.assertEqual(rel.resoudre(saisie), {"ok": False, "erreur": el.MESSAGE_HORS_PROGRAMME})
 
 
