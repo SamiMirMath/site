@@ -1270,7 +1270,7 @@ class TestLogarithmique(unittest.TestCase):
         self.assertEqual(lignes("2log_3(x)=10")[1], r"\log_{3}(x) = 5 " + pas(3, r"\log_{3}(x)", 5, r"x = 3^{5} = 243", PA))
         self.assertEqual(lignes("log_x(256)=4"), [
             r"x > 0 \text{ et } x \neq 1 \quad \text{(une base de logarithme est strictement positive et différente de 1)}",
-            r"\log_{x}(256) = 4 \iff x^{\log_{x}(256)} = x^{4} " + EXP + r" \iff 256 = x^{4} \quad \text{(a^(log_a(A)) = A, A > 0)} \iff x = 4 \text{ ou } x = -4",
+            r"\log_{x}(256) = 4 \iff x^{\log_{x}(256)} = x^{4} " + EXP + r" \iff 256 = x^{4} \quad \text{(a^(log_a(A)) = A, A > 0)} \iff x = -4 \text{ ou } x = 4",
             r"x = 4 \quad \text{(seule la solution positive convient)}"])
         self.assertEqual(lignes("log(x^2)=2"), [
             r"\log(x^{2}) = 2 " + pas(10, r"\log(x^{2})", 2, r"x^{2} = 10^{2} = 100", P10)
@@ -1347,7 +1347,7 @@ class TestLogarithmique(unittest.TestCase):
         self.assertEqual([el.tex(n) for n in r["solutions"]], [r"\sqrt{255}"])
         lignes = [el.tex_chaine(l) for l in r["etapes"][1]["lignes"]]
         self.assertEqual(lignes[0], r"\log_{x}(255) = 2 \iff x^{\log_{x}(255)} = x^{2} \quad \text{(exponentielle des deux membres)} "
-                                    r"\iff 255 = x^{2} \quad \text{(a^(log_a(A)) = A, A > 0)} \iff x = \sqrt{255} \text{ ou } x = -\sqrt{255}")
+                                    r"\iff 255 = x^{2} \quad \text{(a^(log_a(A)) = A, A > 0)} \iff x = -\sqrt{255} \text{ ou } x = \sqrt{255}")
         self.assertEqual(lignes[1], r"x = \sqrt{255} \quad \text{(seule la solution positive convient)}")
         self.assertEqual(el.tex_solution(r), r"S = \left\{\sqrt{255}\right\} \text{, soit } x \approx 15{,}969")
         r = corriger("log_x(2)=3")                                                            # exposant impair : une seule solution, racine cubique

@@ -1723,7 +1723,8 @@ def _suite_polynome(chaine, f, f_tree, c, x):
     moins_b = _nb_exact(-b)
     haut = lambda s: (Op("-" if s < 0 else "+", moins_b, Fn("sqrt", D)) if b != 0 else (Neg(Fn("sqrt", D)) if s < 0 else Fn("sqrt", D)))
     division = lambda h: h if 2 * a == 1 else Op("/", h, _nb_exact(2 * a))
-    racines = [Defini("x_{1}", division(haut(-1))), Defini("x_{2}", division(haut(1)))]
+    premier = -1 if a > 0 else 1                           # x₁ < x₂ : avec a < 0, c'est « + √Δ » qui donne la plus petite racine
+    racines = [Defini("x_{1}", division(haut(premier))), Defini("x_{2}", division(haut(-premier)))]
     lignes += [Chaine([Eq(r, r.arbre)]) for r in racines]
     return lignes, racines, None
 
@@ -1977,7 +1978,8 @@ def _second_degre(chaine, P, x, ecrit, ln):
         return lignes, [racine], None
     racine = Fn("sqrt", D)
     haut = (lambda signe: Op("-" if signe < 0 else "+", moins_b, racine)) if B else (lambda signe: Neg(racine) if signe < 0 else racine)
-    racines = [Defini("x_{1}", Op("/", haut(-1), deux_a)), Defini("x_{2}", Op("/", haut(1), deux_a))]
+    premier = -1 if _signe(Anode) > 0 else 1                        # x₁ < x₂ : avec a < 0, c'est « + √Δ » qui donne la plus petite racine
+    racines = [Defini("x_{1}", Op("/", haut(premier), deux_a)), Defini("x_{2}", Op("/", haut(-premier), deux_a))]
     lignes += [Chaine([Eq(r, r.arbre)]) for r in racines]          # x₁ = (−b − √Δ)/(2a) et x₂ = (−b + √Δ)/(2a), puis S = {x₁ ; x₂}
     return lignes, racines, None
 
@@ -2382,7 +2384,7 @@ def _base_inconnue(enonce, etapes, chaine, s, c, x):
         n = 1 / n
     if n == 1:                                                         # xᵐ = 1 : x = 1 (ou x = −1), exclus par la condition
         if m % 2 == 0:
-            chaine.ajouter(Ou([Eq(X, Nb(1)), Eq(X, Nb(-1))]), "⇔")
+            chaine.ajouter(Ou([Eq(X, Nb(-1)), Eq(X, Nb(1))]), "⇔")
             lignes.append(Chaine([Texte(f"{X.nom} = 1 \\text{{ et }} {X.nom} = -1 \\text{{ ne conviennent pas}}")], note=PROP_BASE_LOG))
         else:
             if m > 1:
@@ -2395,7 +2397,7 @@ def _base_inconnue(enonce, etapes, chaine, s, c, x):
     else:
         racine = Fn("sqrt", _nb_exact(n)) if m == 2 else Pow(_nb_exact(n), Nb(F(1, m)))
     if m % 2 == 0:
-        chaine.ajouter(Ou([Eq(X, racine), Eq(X, Neg(racine) if r is None else _nb_exact(-r))]), "⇔")
+        chaine.ajouter(Ou([Eq(X, Neg(racine) if r is None else _nb_exact(-r)), Eq(X, racine)]), "⇔")
         lignes.append(Chaine([Eq(X, racine)], note=PROP_SEULE_POSITIVE))
     elif m > 1 or k < 0:
         if tex_element(Eq(X, racine)) != tex_element(chaine.elements[-1]):

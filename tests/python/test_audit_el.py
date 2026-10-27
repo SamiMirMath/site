@@ -8,7 +8,7 @@ import moteurs  # noqa: F401  (chemins des moteurs)
 import exp_log as el
 import resoudre_el as rel
 import sortie as so
-from cas_el import BATTERIE_AUDIT, HORS_PROGRAMME, PAS_ENCORE
+from cas_el import BATTERIE_AUDIT, HORS_PROGRAMME, PAS_ENCORE, entrees_el
 from exp_log import Eq, Log, Nb, Neg, Op, E
 from test_exp_log import MP, corriger, evaluer, rendu, vrai
 
@@ -364,6 +364,41 @@ class TestBaseInconnueArgumentNegatif(unittest.TestCase):
 
     def test_argument_positif_inchange(self):
         self.assertEqual([round(el.valeur(n), 3) for n in corriger("log_x(8)=3")["solutions"]], [2.0])
+
+
+class TestOrdreDesSolutions(unittest.TestCase):
+    """Les solutions sont toujours en ordre croissant (S, lignes « x = … ou x = … », x₁ < x₂), et les deux méthodes donnent S dans le même ordre."""
+
+    @staticmethod
+    def ou(r):
+        return [e for c in r["etapes"] for l in c["lignes"] if isinstance(l, el.Chaine) for e in l.elements if isinstance(e, el.Ou)]
+
+    def test_croissant_et_meme_ordre_dans_les_deux_methodes(self):
+        n = 0
+        for saisie in list(dict.fromkeys(entrees_el() + grille())):
+            try:
+                s = el.analyser_saisie(saisie)
+            except Exception:
+                continue
+            if s.genre != "equation":
+                continue
+            res = resultats(saisie)
+            valeurs = {}
+            for methode, r in res.items():
+                if r is None or r.get("message"):
+                    continue
+                with self.subTest(saisie=saisie, methode=methode):
+                    v = [el.valeur(x) for x in r["solutions"] or []]
+                    self.assertEqual(v, sorted(v))
+                    for o in self.ou(r):
+                        w = [el.valeur(e.d) for e in o.eqs]
+                        self.assertEqual(w, sorted(w), el.tex_chaine(el.Chaine([o])))
+                valeurs[methode] = [round(el.valeur(x), 6) for x in r["solutions"] or []]
+                n += 1
+            if len(valeurs) == 2:
+                with self.subTest(saisie=saisie):
+                    self.assertEqual(valeurs[el.METHODE_MEME_BASE], valeurs[el.METHODE_LOGARITHMES])
+        self.assertGreater(n, 1000)
 
 
 class TestMiseEnEvidence(unittest.TestCase):

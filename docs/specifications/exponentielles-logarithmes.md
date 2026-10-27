@@ -322,6 +322,8 @@ un commit par groupe ; les entrées sont dans `BATTERIE_AUDIT` (`tests/python/ca
    coefficient 1 : `2^(x+1) − 2^x = 4 ⇔ 2^x · (2 − 1) = 4 ⇔ 2^x = 4` ; coefficient nul : `2^x − 2^x = 3 ⇔ 2^x · 0 = 3 ⇔ 0 = 3`, S = ∅ (ou `0 = 0`, S = ℝ) ; coefficient négatif :
    `2^x − 2^(x+1) = 4 ⇔ 2^x · (1 − 2) = 4 ⇔ −2^x = 4 ⇔ 2^x = −4`, puis la carte « Aucune solution ». Base e : seulement sans décalage (`e^x + e^x = 8`) ; `e^x + e^(x+1) = 5`
    (coefficient 1 + e) reste « pas encore ». Exposants qui ne diffèrent pas d'un entier constant (`e^x + e^(−x) = 3`), bases différentes et 2e degré en aˣ : hors programme (point 10).
+15. **Ordre des solutions : toujours croissant**, dans les deux méthodes : S, les lignes `x = a ou x = b` (`log_x(256) = 4 ⇔ x = −4 ou x = 4`) et x₁ < x₂ (avec un coefficient de x² négatif, x₁ s'écrit avec « + √Δ »).
+   Test : pour toute équation du corpus, A et B donnent S dans le même ordre.
 
 ## Pour les 2M (plus tard, hors de cette version)
 
