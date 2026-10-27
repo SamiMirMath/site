@@ -127,6 +127,11 @@ BATTERIE_AUDIT = [
     # solutions en ordre croissant, x₁ < x₂ même quand le coefficient de x² est négatif
     ("e^(x/2)/e^(x^2+x)=1/4", [-1.454, 0.954]), ("10^(-x)/10^(x^2)=1/4", [-1.423, 0.423]), ("e^(-x^2+3x)=2", [0.252, 2.748]),
     ("2^(-x^2)=1/2", [-1.0, 1.0]), ("2^(-x^2+x)=3^x", [-0.585, 0.0]), ("3^(-x^2)*2^x=1", [-0.0, 0.631]),
+    # mise en évidence en base e : le coefficient (1 + e) est irrationnel, x = ln(5/(1 + e))
+    ("e^x+e^(x+1)=5", [0.296]), ("5=e^x+e^(x+1)", [0.296]), ("3+e^x+e^(x+2)=10", [-0.181]), ("e^(x^2)+e^(x^2+1)=5", [-0.544, 0.544]),
+    ("e^(x+1)-e^x=3", [0.557]), ("2e^x+e^(x+1)=8", [0.528]), ("e^x+e^(x+1)-e^x=3", [0.099]), ("e^x-e^(x+1)=5", []), ("e^(x+1)-e^x=0", []),
+    ("e^(x+1)-2e^(x+1)=3", []), ("e^x+e^(x+1)+e^(x+1)=4", [-0.476]),
+    ("3^x+3^(x+2)=30", [1.0]), ("2^x+2^(x-1)=6", [2.0]), ("7*2^x+2^(x+3)=60", [2.0]), ("2^x/3+2^(x+1)/3=2", [1.0]),
     ("e^(2x)/e^x=5", [1.609]), ("10^(2x)/10^x=3", [0.477]), ("e^x*e^(x+1)=5", [0.305]), ("e^(3x)/e^(x-1)=7", [0.473]),
 ]
 
@@ -136,7 +141,7 @@ HORS_PROGRAMME = ["x*2^x=8", "2^x+3^x=5", "x^x=4", "2^x=x+1", "2^(sqrt(x))=4", "
                   # pour les 3C, le 2e degré en a^x et les exposants qui ne diffèrent pas d'un entier (la mise en évidence est au programme)
                   "4^x-2^x-6=0", "9^x-3^x=6", "e^(2x)-3e^x+2=0",
                   "e^x+e^(-x)=3", "2^(2x)-5*2^x+4=0", "2^x+1=3^x"]
-PAS_ENCORE = ["log(x)=log(5)", "log(x^2+1)=-1", "e^x+e^(x+1)=5",
+PAS_ENCORE = ["log(x)=log(5)", "log(x^2+1)=-1",
               "log(x)+log(x-1)=1", "2^(x^3)=8", "2^(x^3)=3^x", "5^(x^3+1)=7", "log(x)+log(2)=1", "log(x)-log(2)=1"]
 
 # Équations sans exponentielle ni logarithme : le message dit ce que l'outil traite

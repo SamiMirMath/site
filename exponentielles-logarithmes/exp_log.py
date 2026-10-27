@@ -2123,6 +2123,40 @@ def _somme_decalee(g, d, x):
     return s, o, inverse, R, termes, constantes, a_des_constantes, plus_petit
 
 
+def _mise_en_evidence_e(enonce, x, methode, equation, inverse, poly, termes_de_la_somme, parenthese, P, plus_petit, reste, chaine, carte):
+    """Mise en évidence en base e avec un coefficient irrationnel : e^x + e^(x+1) = 5 ⇔ e^x (1 + e) = 5 ⇔ e^x = 5/(1 + e) ⇔ x = ln(5/(1 + e)).
+    Le quotient est positif : la méthode A conclut par la définition du logarithme, la méthode B par le logarithme des deux membres. Sinon
+    (quotient négatif ou nul) la carte « Aucune solution ». Exposant du 1er ou du 2e degré."""
+    termes = [_Terme(c, None, None) for c in poly.values()]
+    for t, n in zip(termes, poly):
+        t.n = n
+    C_tree = _somme_arbres([_terme_de_la_somme(t, E()) for t in termes])
+    if len(poly) != len(termes_de_la_somme):               # 1 + e + e se réduit en 1 + 2e
+        chaine.ajouter(equation(Op("*", P, C_tree), reste), "⇔")
+    positif = sum(float(c) * math.e ** n for n, c in poly.items()) > 0
+    quotient = Op("/", reste, C_tree) if reste.val != 0 else Nb(0)
+    chaine.ajouter(equation(P, quotient), "⇔", PROP_ISOLER)
+    signe_quotient = (1 if positif else -1) * (1 if reste.val > 0 else -1 if reste.val < 0 else 0)
+    if signe_quotient <= 0:
+        lignes = [Chaine([Rel(P, ">", Nb(0))], note=PROP_EXPO_POSITIVE),
+                  Chaine([Eq(P, Nb(0)) if signe_quotient == 0 else Rel(quotient, "<", Nb(0))], note=PROP_AUCUNE_SOLUTION)]
+        return _resultat("mise_en_evidence", x, enonce, [carte(), _carte("Aucune solution", lignes)], [])
+    f, f_tree = plus_petit.fac.exp, _expo_arbre(plus_petit.fac)
+    logarithme = Log(quotient, E())
+    suite = Chaine([Eq(P, quotient)])
+    if methode == METHODE_MEME_BASE:
+        suite.ajouter(Eq(f_tree, logarithme), "⇔", PROP_DEFINITION_LOG)
+        titre = "Définition du logarithme"
+    else:
+        suite.ajouter(Eq(Log(P, E()), logarithme), "⇔", PROP_LN_DEUX_MEMBRES)
+        suite.ajouter(Eq(Op("*", f_tree, Log(E(), E())), logarithme), "⇔", PROP_LN_PUISSANCE)
+        suite.ajouter(Eq(f_tree, logarithme), "⇔", PROP_CAR_LN_E)
+        titre = "Logarithme des deux membres"
+    fin, solutions, remarque = _suite_polynome(suite, f, f_tree, logarithme, x)
+    r = _resultat("mise_en_evidence", x, enonce, [carte(), _carte(titre, [suite] + fin)], solutions, remarque)
+    return r
+
+
 def _mise_en_evidence(g, d, x, methode):
     """Somme de termes de même base dont les exposants diffèrent d'un entier (2^x + 2^(x+1) = 12, 2^(x+2) − 2^x = 12, 2^x + 2^x = 8), avec
     coefficients et constante éventuels : on met en évidence la plus petite puissance (2^(x+1) = 2^x · 2, puis 2^x (1 + 2)). Si le coefficient
@@ -2133,8 +2167,6 @@ def _mise_en_evidence(g, d, x, methode):
     equation = lambda gauche, droite: Eq(droite, gauche) if inverse else Eq(gauche, droite)
     base = termes[0].fac.base
     base_ecrite = plus_petit.fac.base_ecrite
-    if base == "e" and any(t.n for t in termes):
-        raise _Hors                                        # e^x + e^(x+1) : le coefficient 1 + e n'est pas rationnel
     pas_isole = lambda t: Neg(t.terme) if t.coef < 0 and not isinstance(t.terme, Neg) else t.terme
     somme_seule = _somme_arbres([pas_isole(t) for t in termes])
     reste = _nb_exact(R - constantes)
@@ -2148,8 +2180,17 @@ def _mise_en_evidence(g, d, x, methode):
         chaine.ajouter(equation(somme_seule, reste), "⇔", PROP_ISOLER)
     parenthese = _somme_arbres([_terme_de_la_somme(t, base_ecrite) for t in termes])
     chaine.ajouter(equation(Op("*", P, parenthese), reste), "⇔", PROP_MISE_EN_EVIDENCE)
-    C = sum((t.coef * (base ** t.n if base != "e" else 1) for t in termes), F(0))
     carte = lambda: _carte("Mise en évidence", lignes + [chaine])
+    if base == "e":                                        # le coefficient est un polynôme en e : 1 + e, 2 + e², e
+        poly = {}
+        for t in termes:
+            poly[t.n] = poly.get(t.n, F(0)) + t.coef
+        poly = {n: c for n, c in sorted(poly.items()) if c != 0}
+        C = F(0) if not poly else poly[0] if set(poly) == {0} else None
+        if C is None:
+            return _mise_en_evidence_e(enonce, x, methode, equation, inverse, poly, termes, parenthese, P, plus_petit, reste, chaine, carte)
+    else:
+        C = sum((t.coef * base ** t.n for t in termes), F(0))
     if C == 0:                                             # 2^x (1 - 1) = 8 : 0 = 8
         chaine.ajouter(equation(Op("*", P, Nb(0)), reste), "⇔")
         chaine.ajouter(equation(Nb(0), reste), "⇔")

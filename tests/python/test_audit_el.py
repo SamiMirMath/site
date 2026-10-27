@@ -445,8 +445,27 @@ class TestMiseEnEvidence(unittest.TestCase):
                     self.assertEqual([c["titre"] for c in r["etapes"]], ["Mise en évidence", "Aucune solution"])
                     self.assertEqual(r["solutions"], [])
 
+    def test_coefficient_irrationnel_en_base_e(self):
+        """e^x + e^(x+1) = 5 ⇔ e^x (1 + e) = 5 ⇔ e^x = 5/(1 + e) ⇔ x = ln(5/(1 + e)) ≈ 0,296 ; coefficient négatif ou quotient négatif : « Aucune solution »."""
+        for methode in (self.A, self.B):
+            with self.subTest(methode=methode):
+                self.assertEqual(lignes("e^x+e^(x+1)=5", methode)[1], r"e^{x} + e^{x + 1} = 5 \iff e^{x} \cdot (1 + e) = 5 \quad \text{(mise en évidence)} "
+                                 r"\iff e^{x} = \frac{5}{1 + e} \quad \text{(on isole le terme exponentiel)}")
+                self.assertEqual(el.tex_solution(corriger("e^x+e^(x+1)=5", methode)), r"S = \left\{\ln\left(\frac{5}{1 + e}\right)\right\} \text{, soit } x \approx 0{,}296")
+                r = corriger("e^x-e^(x+1)=5", methode)
+                self.assertEqual([c["titre"] for c in r["etapes"]], ["Mise en évidence", "Aucune solution"])
+                self.assertEqual(r["solutions"], [])
+        self.assertEqual(lignes("e^x+e^(x+1)=5", self.A)[2], r"e^{x} = \frac{5}{1 + e} \iff x = \ln\left(\frac{5}{1 + e}\right) \quad \text{(définition du logarithme)}")
+        self.assertTrue(lignes("e^x+e^(x+1)=5", self.B)[2].endswith(r"\iff x = \ln\left(\frac{5}{1 + e}\right) \quad \text{(car ln(e) = 1)}"))
+
+    def test_tout_coefficient_positif_suffit(self):
+        """Coefficient rationnel quelconque (7 + 8, 1/3 + 2/3, 1 + 10) ou irrationnel : la mise en évidence aboutit dans les deux méthodes."""
+        for saisie, attendu in [("7*2^x+2^(x+3)=60", 2.0), ("2^x/3+2^(x+1)/3=2", 1.0), ("3^x+3^(x+2)=30", 1.0), ("e^(x+1)-e^x=3", 0.557)]:
+            for methode in (self.A, self.B):
+                with self.subTest(saisie=saisie, methode=methode):
+                    self.assertEqual([round(el.valeur(n), 3) for n in corriger(saisie, methode)["solutions"]], [attendu])
+
     def test_formes_qui_restent_hors_de_la_methode(self):
-        self.assertEqual(rel.resoudre("e^x+e^(x+1)=5"), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})     # le coefficient 1 + e n'est pas rationnel
         for saisie in ["4^x-2^x-6=0", "e^x+e^(-x)=3", "2^x+1=3^x", "2^x+2^(x+1)=3^x"]:
             self.assertEqual(rel.resoudre(saisie), {"ok": False, "erreur": el.MESSAGE_HORS_PROGRAMME})
 

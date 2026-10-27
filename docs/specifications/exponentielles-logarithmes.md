@@ -320,8 +320,8 @@ un commit par groupe ; les entrées sont dans `BATTERIE_AUDIT` (`tests/python/ca
    `⇔ 3 · 2^x = 12 ⇔ 2^x = 4` (la dernière étape est celle d'« Isoler l'exponentielle », fusionnée dans la chaîne). Une constante s'isole d'abord (`2^x + 2^(x+1) + 3 = 15 ⇔ 2^x + 2^(x+1) = 12`).
    Si le coefficient obtenu est une puissance de la base (≥ 1), on le fond : `2^x + 2^x = 8 ⇔ 2^x · (1 + 1) = 8 ⇔ 2^x · 2 = 8 ⇔ 2^(x+1) = 8` (aᵐ · aⁿ = aᵐ⁺ⁿ ; `2^x · 4 ⇔ 2^x · 2^2 ⇔ 2^(x+2)`) ;
    coefficient 1 : `2^(x+1) − 2^x = 4 ⇔ 2^x · (2 − 1) = 4 ⇔ 2^x = 4` ; coefficient nul : `2^x − 2^x = 3 ⇔ 2^x · 0 = 3 ⇔ 0 = 3`, S = ∅ (ou `0 = 0`, S = ℝ) ; coefficient négatif :
-   `2^x − 2^(x+1) = 4 ⇔ 2^x · (1 − 2) = 4 ⇔ −2^x = 4 ⇔ 2^x = −4`, puis la carte « Aucune solution ». Base e : seulement sans décalage (`e^x + e^x = 8`) ; `e^x + e^(x+1) = 5`
-   (coefficient 1 + e) reste « pas encore ». Exposants qui ne diffèrent pas d'un entier constant (`e^x + e^(−x) = 3`), bases différentes et 2e degré en aˣ : hors programme (point 10).
+   `2^x − 2^(x+1) = 4 ⇔ 2^x · (1 − 2) = 4 ⇔ −2^x = 4 ⇔ 2^x = −4`, puis la carte « Aucune solution ». Base e avec décalage : le coefficient est irrationnel (`e^x + e^(x+1) = 5 ⇔ e^x · (1 + e) = 5 ⇔ e^x = 5/(1 + e)`, puis A : `⇔ x = ln(5/(1 + e))` par la définition du logarithme, B : `ln(e^x) = ln(5/(1 + e)) ⇔ x · ln(e) = … ⇔ x = ln(5/(1 + e))`, soit x ≈ 0,296) ;
+   les termes semblables se réduisent (`1 + e + e` ⇒ `1 + 2e`) ; coefficient négatif ou quotient négatif ou nul : carte « Aucune solution » (`e^x = 5/(1 − e)` : `5/(1 − e) < 0`) ; exposant du 1er ou du 2e degré. Tout coefficient positif suffit, quel qu'il soit (rationnel ou irrationnel). Exposants qui ne diffèrent pas d'un entier constant (`e^x + e^(−x) = 3`), bases différentes et 2e degré en aˣ : hors programme (point 10).
 15. **Ordre des solutions : toujours croissant**, dans les deux méthodes : S, les lignes `x = a ou x = b` (`log_x(256) = 4 ⇔ x = −4 ou x = 4`) et x₁ < x₂ (avec un coefficient de x² négatif, x₁ s'écrit avec « + √Δ »).
    Test : pour toute équation du corpus, A et B donnent S dans le même ordre.
 
