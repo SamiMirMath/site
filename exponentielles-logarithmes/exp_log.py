@@ -204,7 +204,11 @@ def tex(n):
         if n.op == "/":
             return r"\frac{" + tex(n.a) + "}{" + tex(n.b) + "}"
         g, d = tex(n.a), tex(n.b)
-        if n.op == "+":
+        if n.op == "+":                                   # a + (−b) s'écrit a − b : jamais « + − »
+            if isinstance(n.b, Neg):
+                return tex(Op("-", n.a, n.b.a))
+            if isinstance(n.b, Nb) and n.b.val < 0:
+                return tex(Op("-", n.a, Nb(-n.b.val, n.b.dec)))
             return g + " + " + d
         if n.op == "-":
             return g + " - " + (_entre_parentheses(d) if _comme_somme(n.b) else d)
@@ -1025,9 +1029,13 @@ def _isoler(g, d, x, prop=None):
     while True:
         if isinstance(a, Op) and a.op in "+-" and not variables(a.b):
             c = _const(a.b)
+            if c is None:                                  # log(x) + log(2) = 1 : la constante n'est pas un rationnel
+                raise _Hors
             a, o = a.a, (o - c if a.op == "+" else o + c)
         elif isinstance(a, Op) and a.op in "+-" and not variables(a.a):
             c = _const(a.a)
+            if c is None:
+                raise _Hors
             a, o = (a.b, o - c) if a.op == "+" else (a.b, c - o)
         elif isinstance(a, Op) and a.op == "*" and not variables(a.a) and _const(a.a):
             a, o = a.b, o / _const(a.a)
@@ -1145,6 +1153,11 @@ def _resoudre_polynome(A, B, At, Bt, x):
     standard = Eq(_arbre_poly(P), Nb(0))
     if tex_element(standard) != tex_element(c.elements[-1]):
         c.ajouter(standard, "⇔")
+    if b == 0 and c0 == 0:                                # a·x² = 0 ⇔ x² = 0 ⇔ x = 0 (jamais Δ = 0 ni ±√0)
+        if a != 1:
+            c.ajouter(Eq(Pow(X, Nb(2)), Nb(0)), "⇔")
+        c.ajouter(Eq(X, Nb(0)), "⇔")
+        return lignes, [Nb(0)], None
     delta = b * b - 4 * a * c0
     if delta >= 0:
         k = isqrt(delta)
@@ -1160,10 +1173,27 @@ def _resoudre_polynome(A, B, At, Bt, x):
     lignes.append(d_ligne)
     if delta < 0:
         return lignes, [], "Δ < 0 : l'équation n'a aucune solution réelle."
+    if delta == 0:
+        racine = _nb_exact(F(-b, 2 * a))
+        lignes += _une_seule_solution(X, Op("/", Nb(-b), Op("*", Nb(2), Nb(a))), racine)
+        return lignes, [racine], None
     racines = _racines_du_second_degre(a, b, delta)
     fin = Chaine([Ou(Eq(X, r) for r in racines)])
     lignes.append(fin)
     return lignes, racines, None
+
+
+FORMULE_RACINE_DOUBLE = r"\frac{-b}{2a}"
+
+
+def _une_seule_solution(X, calcul, racine=None):
+    """Les lignes qui suivent Δ = 0 : « Δ = 0 : une seule solution », puis x = −b/(2a) = calcul (= racine quand elle s'écrit plus simplement)."""
+    formule = Defini(FORMULE_RACINE_DOUBLE, calcul)                    # écrit −b/(2a), vaut le calcul
+    if racine is None or tex(racine) == tex(calcul):
+        egalite = Eq(X, calcul, [formule])
+    else:
+        egalite = Eq(X, racine, [formule, calcul])
+    return [Chaine([Texte(r"Δ = 0 \text{ : une seule solution}")]), Chaine([egalite])]
 
 
 def _racines_du_second_degre(a, b, delta):
@@ -1775,6 +1805,12 @@ def _second_degre(chaine, P, x, ecrit, ln):
     B = [(c, 0, a) for c, k, a in P if k == 1]
     C = [(c, 0, a) for c, k, a in P if k == 0]
     Anode = _somme(A, x, ecrit, ln)
+    if _signe(Anode) == 0 or (B and _signe(_somme(B, x, ecrit, ln)) == 0):
+        raise _Hors                                       # (log 0,5 + log 2) · x² : une même base écrite autrement, comme au premier degré
+    if not C and not B:                                   # a·x² = 0 ⇔ x² = 0 ⇔ x = 0
+        chaine.ajouter(Eq(Pow(X, Nb(2)), Nb(0)), "⇔", None if isinstance(Anode, Nb) else Car(Anode))
+        chaine.ajouter(Eq(X, Nb(0)), "⇔")
+        return [chaine], [Nb(0)], None
     if not C:                                             # x(a·x + b) = 0
         interieur = _somme([(c, k - 1, a) for c, k, a in P], x, ecrit, ln, False)
         chaine.ajouter(Eq(Op("*", X, interieur), Nb(0)), "⇔")
@@ -1786,17 +1822,17 @@ def _second_degre(chaine, P, x, ecrit, ln):
     Bnode, Cnode = _somme(B, x, ecrit, ln), _somme(C, x, ecrit, ln)
     produit = Op("*", Op("*", Nb(4), Anode), Cnode)
     delta = Op("-", Pow(Bnode, Nb(2)), produit) if B else Neg(produit)
-    dv = valeur(delta)
+    signe = _signe(delta)
     D = Defini("Δ", delta)                                 # les lignes suivantes écrivent Δ, pas son expression : elles tiennent à 360 px
-    lignes = [chaine, Chaine([D, delta], ["="], [PROP_DISCRIMINANT])]
-    echelle = max(1.0, valeur(Bnode) ** 2 if B else 1.0, abs(valeur(produit)))
-    if dv < -1e-12 * echelle:
+    lignes = [chaine, Chaine([D, delta, Nb(0)], ["=", "="], [None, PROP_DISCRIMINANT]) if signe == 0 else
+              Chaine([D, delta], ["="], [PROP_DISCRIMINANT])]
+    if signe < 0:
         return lignes, [], "Δ < 0 : l'équation n'a aucune solution réelle."
     moins_b = _somme([_oppose(t) for t in B], x, ecrit, ln) if B else None
     deux_a = Op("*", Nb(2), Anode)
-    if abs(dv) <= 1e-12 * echelle:
+    if signe == 0:
         racine = Op("/", moins_b, deux_a) if B else Nb(0)
-        lignes.append(Chaine([Eq(X, racine)]))
+        lignes += _une_seule_solution(X, racine)
         return lignes, [racine], None
     racine = Fn("sqrt", D)
     haut = (lambda signe: Op("-" if signe < 0 else "+", moins_b, racine)) if B else (lambda signe: Neg(racine) if signe < 0 else racine)
@@ -2246,6 +2282,18 @@ def _valeur_rationnelle(n):
             return f if ecart < decimal.Decimal("1e-40") else None
     except (ArithmeticError, ValueError, decimal.DecimalException):
         return None
+
+
+def _signe(n):
+    """Signe (−1, 0 ou 1) d'un arbre sans inconnue : exact pour un rationnel, même écrit avec des logarithmes (Δ = (2 log 2)² − 4 log 2 · log 2 = 0),
+    sinon celui de sa valeur à 60 chiffres."""
+    q = _valeur_rationnelle(n)
+    if q is not None:
+        return (q > 0) - (q < 0)
+    with decimal.localcontext() as c:
+        c.prec = 60
+        v = _precis(n)
+    return (v > 0) - (v < 0)
 
 
 def _morceaux_rationnels(n):

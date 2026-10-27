@@ -266,6 +266,16 @@ les bases différentes viennent de a^(x+p) = b^(qx) avec a et b deux nombres de 
 | EL-20 | **Méthode B n'utilise jamais** « définition du logarithme », « log(10ᵏ) = k », « ln(e^A) = A » ni « ln(e^k) = k » ; une puissance de 10 (de e) dans un log (ln) passe par log(a^A) = A · log(a) puis « car log(10) = 1 » ; les deux méthodes donnent le **même S** (oracle mpmath, batterie et 500 graines par niveau) ; le message de la méthode A est exactement « b n'est pas une puissance de a : il faut les logarithmes. » | [auto-py] |
 | EL-21 | **Exponentielle des deux membres** : une équation logarithmique s'écrit par `a^(log_a(A)) = A` (A > 0), une paire de lignes par logarithme imbriqué, Vérification et Condition inchangées ; **contrôle à la calculatrice** (R15) si et seulement si une solution rationnelle est écrite avec des logarithmes, décidé exactement | [auto-py] |
 
+## Corrections après la chasse aux trous (27.10.2026)
+
+Audit sur 8 260 saisies générées (formes du chapitre, variantes de saisie des exercices 2.13 à 2.27), oracle mpmath. Corrections décidées par l'enseignant le 27.10.2026,
+un commit par groupe ; les entrées sont dans `BATTERIE_AUDIT` (`tests/python/cas_el.py`), les tests dans `test_audit_el.py`.
+
+1. **Racine double et écritures** : Δ = 0 donne la ligne « Δ = 0 : une seule solution », puis `x = −b/(2a) = …` (S à un élément), dans les deux méthodes ; en méthode B la ligne du discriminant se termine par `= 0`.
+   `a·x² = 0` donne `x² = 0 ⇔ x = 0` (méthode A) et `x²·log(a) = 0 ⇔ x² = 0 (car log(a) ≠ 0) ⇔ x = 0` (méthode B), jamais `±√0` ni `S = {0 ; 0/log(2)}`.
+   `a + (−b)` s'écrit `a − b` (jamais « + − »). Aucune saisie ne lève d'exception (`log(x) + log(2) = 1` : « pas encore »). Le signe de Δ est décidé exactement quand Δ est un rationnel (même écrit avec des logarithmes), sinon à 60 chiffres ;
+   un coefficient de x² ou de x écrit avec des logarithmes différents mais nul ((log 0,5 + log 2)·x²) reste « pas encore » en méthode B, comme au premier degré.
+
 ## Pour les 2M (plus tard, hors de cette version)
 
 Même moteur, paramètre interne `filiere="M"` : carte « Ensemble de définition » **avant** de résoudre (cartes de condition de l'outil ED,
