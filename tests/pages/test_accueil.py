@@ -37,9 +37,9 @@ class TestAccueil(unittest.TestCase):
         page.taille(largeur, hauteur, sombre=sombre)
         return page
 
-    def test_le_registre_donne_13_liens(self):
-        """Année I : 3 (C, Ms, Mr) ; année II : 2 (C, Mr) ; année III : 8 (4 outils × Ms, Mr) = 13 cartes pour 6 outils distincts."""
-        self.assertEqual((LIENS, len(REGISTRE["outils"])), (13, 6))
+    def test_le_registre_donne_14_liens(self):
+        """Année I : 3 (C, Ms, Mr) ; année II : 2 (C, Mr) ; année III : 9 (4 outils × Ms, Mr + 1 en C) = 14 cartes pour 7 outils distincts."""
+        self.assertEqual((LIENS, len(REGISTRE["outils"])), (14, 7))
 
     def test_acc03_sans_javascript_tous_les_liens_sont_visibles(self):
         page = self.ouvrir()
@@ -68,12 +68,12 @@ class TestAccueil(unittest.TestCase):
         self.assertEqual(page.evaluer(ANNEES_VISIBLES), [True, False, True])
         self.assertEqual(page.evaluer("document.querySelector('#currentTrack').textContent"), "Ms")
         self.assertEqual(page.evaluer(LIENS_VISIBLES), 1 + 4)
-        # C : l'année III est masquée
+        # C : trois années (l'année III porte Exponentielles et logarithmes)
         page.evaluer("document.querySelector('#switchBtn').click()")
         self.assertEqual(page.evaluer("document.querySelector('#gate').offsetParent !== null"), True)
         page.evaluer("document.querySelector('[data-choose=\"C\"]').click()")
-        self.assertEqual(page.evaluer(ANNEES_VISIBLES), [True, True, False])
-        self.assertEqual(page.evaluer(LIENS_VISIBLES), 1 + 1)
+        self.assertEqual(page.evaluer(ANNEES_VISIBLES), [True, True, True])
+        self.assertEqual(page.evaluer(LIENS_VISIBLES), 1 + 1 + 1)
         # Mr : trois années
         page.evaluer("document.querySelector('#switchBtn').click()")
         page.evaluer("document.querySelector('[data-choose=\"Mr\"]').click()")
