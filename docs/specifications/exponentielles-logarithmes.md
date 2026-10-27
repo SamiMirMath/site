@@ -305,15 +305,23 @@ un commit par groupe ; les entrées sont dans `BATTERIE_AUDIT` (`tests/python/ca
    `10^1,5 = 10√10`), puis `x = −√(10^c) ou x = √(10^c)`, écrits `x₁ = −√(1/10)`, `x₂ = √(1/10)` comme au point 5 (`log(x²) = −1`, `ln(x²) = 1 ⇔ x² = e`), puis la Vérification ; jamais `2 log(x)`.
    Un second membre entier garde la factorisation (`x² − 100 = 0 ⇔ (x + 10)(x − 10) = 0`). Les trinômes généraux à coefficients non entiers (`log(x² − 1) = 1/2`) restent « pas encore ».
 9. **Saisie de ² et ³** (clavier d'un téléphone) : lus `^2` et `^3` (`2^(x²)·4^x = 8` est `2^(x^2)·4^x = 8`) ; `2^x²` demande toujours des parenthèses.
-10. **Mise en facteur et 2e degré en aˣ : hors programme pour les 3C** (décision du 27.10.2026) : deux exponentielles avec un troisième terme (`2^x + 2^(x+1) = 12`, `2^x + 2^x = 8`,
-   `4^x − 2^x − 6 = 0`, `e^(2x) − 3e^x + 2 = 0`, `e^x + e^(−x) = 3`, `2^x + 1 = 3^x`) donnent « Cette équation ne se résout pas avec les méthodes du cours. », quelle que soit la base
-   (avant : « hors programme » pour 4 et 2, « pas encore » pour e). Deux exponentielles seules (`a^P ± b^Q = 0`) se résolvent (point 3).
+10. **2e degré en aˣ : hors programme pour les 3C** (décision du 27.10.2026) : `4^x − 2^x − 6 = 0`, `e^(2x) − 3e^x + 2 = 0`, `e^x + e^(−x) = 3`, `2^x + 1 = 3^x` donnent « Cette équation ne se résout pas
+   avec les méthodes du cours. », quelle que soit la base (avant : « hors programme » pour 4 et 2, « pas encore » pour e). Deux exponentielles seules (`a^P ± b^Q = 0`) se résolvent (point 3).
+   La mise en facteur d'une somme de termes de même base dont les exposants diffèrent d'un entier est, elle, au programme (point 14).
 11. **Méthode A, produit ou quotient de puissances de 10 ou de e** : `e^(2x)/e^x = 5 ⇔ e^x = 5` (aᵐ / aⁿ = aᵐ⁻ⁿ) `⇔ x = ln(5)` (définition du logarithme) ; `e^x · e^(x+1) = 5 ⇔ e^(2x+1) = 5` (aᵐ · aⁿ = aᵐ⁺ⁿ).
    Plus de message « il faut les logarithmes » quand la définition peut conclure ; les autres bases (`2^(2x)/2^x = 5`) gardent le message.
 12. **Base inconnue, argument négatif ou nul** (`log_x(−8) = 3`, `log_x(0) = 2`) : carte « Condition », `log_x(−8) = 3 ⇔ x³ = −8` (définition du logarithme), puis carte « Aucune solution » :
    `x³ > 0` (une base admissible est strictement positive, donc xᵏ > 0) et `−8 < 0` (aucune solution) ; S = ∅. Vaut pour tout exposant rationnel.
 13. **Équation sans exponentielle ni logarithme** (`x² = 4`, `2x + 1 = 9`, `√x = 3`) : le message « Cet outil traite les équations exponentielles et logarithmiques. » (`MESSAGE_SANS_EXP_LOG`) remplace
    « pas encore » ; dès qu'un logarithme ou une puissance d'exposant variable apparaît, les messages d'avant (hors programme / pas encore) restent.
+14. **Mise en évidence** (D1, au programme 3C) : somme de termes de même base dont les exposants diffèrent d'un entier (`2^x + 2^x`, `2^x + 2^(x+1)`, `2^(x+2) − 2^x`, `5^x + 5^(x+1) + 5^(x+2)`),
+   avec coefficients (`3 · 2^x + 2^(x+2)`) et constante éventuels, égale à une constante. **Carte « Mise en évidence » commune aux deux méthodes**, au début des deux variantes : une ligne par exposant décalé
+   (`2^(x+1) = 2^x · 2`, aᵐ⁺ⁿ = aᵐ · aⁿ ; `2^(x+2) = 2^x · 2^2`), puis une chaîne : `2^x + 2^(x+1) = 12 ⇔ 2^x · (1 + 2) = 12` (mise en évidence de la plus petite puissance)
+   `⇔ 3 · 2^x = 12 ⇔ 2^x = 4` (la dernière étape est celle d'« Isoler l'exponentielle », fusionnée dans la chaîne). Une constante s'isole d'abord (`2^x + 2^(x+1) + 3 = 15 ⇔ 2^x + 2^(x+1) = 12`).
+   Si le coefficient obtenu est une puissance de la base (≥ 1), on le fond : `2^x + 2^x = 8 ⇔ 2^x · (1 + 1) = 8 ⇔ 2^x · 2 = 8 ⇔ 2^(x+1) = 8` (aᵐ · aⁿ = aᵐ⁺ⁿ ; `2^x · 4 ⇔ 2^x · 2^2 ⇔ 2^(x+2)`) ;
+   coefficient 1 : `2^(x+1) − 2^x = 4 ⇔ 2^x · (2 − 1) = 4 ⇔ 2^x = 4` ; coefficient nul : `2^x − 2^x = 3 ⇔ 2^x · 0 = 3 ⇔ 0 = 3`, S = ∅ (ou `0 = 0`, S = ℝ) ; coefficient négatif :
+   `2^x − 2^(x+1) = 4 ⇔ 2^x · (1 − 2) = 4 ⇔ −2^x = 4 ⇔ 2^x = −4`, puis la carte « Aucune solution ». Base e : seulement sans décalage (`e^x + e^x = 8`) ; `e^x + e^(x+1) = 5`
+   (coefficient 1 + e) reste « pas encore ». Exposants qui ne diffèrent pas d'un entier constant (`e^x + e^(−x) = 3`), bases différentes et 2e degré en aˣ : hors programme (point 10).
 
 ## Pour les 2M (plus tard, hors de cette version)
 

@@ -886,6 +886,8 @@ PROP_ISOLER_LOG = "on isole le logarithme"
 PROP_BIEN_DEFINI = "le logarithme est bien défini"
 PROP_BASE_LOG = "une base de logarithme est strictement positive et différente de 1"
 PROP_SEULE_POSITIVE = "seule la solution positive convient"
+PROP_SOMME_EXPOSANTS = "aᵐ⁺ⁿ = aᵐ · aⁿ"
+PROP_MISE_EN_EVIDENCE = "mise en évidence"
 PROP_BASE_PUISSANCE_POSITIVE = "une base admissible est strictement positive, donc xᵏ > 0"
 PROP_LOG_SOMME = "log(ab) = log a + log b"
 PROP_LN_DEUX_MEMBRES = "ln des deux membres"
@@ -910,7 +912,7 @@ PROPRIETES = frozenset({PROP_CARRE, PROP_PUISSANCE_ZERO, PROP_PUISSANCE_NEGATIVE
                         PROP_PUISSANCE, PROP_PRODUIT, PROP_UN, PROP_MEME_BASE, PROP_ISOLER, PROP_PRODUIT_NUL, PROP_DISCRIMINANT,
                         PROP_DEFINITION_LOG, PROP_LOG_DEUX_MEMBRES, PROP_LOG_PUISSANCE, PROP_LOG_10K, PROP_LN_UN, PROP_EXPO_POSITIVE,
                         PROP_AUCUNE_SOLUTION, PROP_LOG_QUOTIENT, PROP_LOG_PRODUIT, PROP_LOG_REGROUPER, PROP_LOG_SOMME, PROP_LN_DEUX_MEMBRES, PROP_LN_PUISSANCE, PROP_CAR_LOG_10, PROP_CAR_LN_E, PROP_LOG_UN, PROP_EXPONENTIELLE, PROP_EXP_LOG, PROP_EXP_LN, PROP_EXP_LOG_BASE,
-                        PROP_ISOLER_LOG, PROP_BIEN_DEFINI, PROP_BASE_LOG, PROP_SEULE_POSITIVE, PROP_BASE_PUISSANCE_POSITIVE, PROP_LOG_BASE_PUISSANCE, PROP_LN_E_PUISSANCE,
+                        PROP_ISOLER_LOG, PROP_BIEN_DEFINI, PROP_BASE_LOG, PROP_SEULE_POSITIVE, PROP_BASE_PUISSANCE_POSITIVE, PROP_SOMME_EXPOSANTS, PROP_MISE_EN_EVIDENCE, PROP_LOG_BASE_PUISSANCE, PROP_LN_E_PUISSANCE,
                         PROP_CHANGEMENT_DE_BASE})
 
 
@@ -2052,8 +2054,133 @@ def _apres_isolement(g, d, x, methode):
     return r
 
 
+class _Terme:
+    """Un terme exponentiel c · a^f d'une somme : `coef` (rationnel, signe compris), `fac` (le facteur puissance), `n` (l'entier dont l'exposant dépasse le plus petit)."""
+    __slots__ = ("coef", "fac", "terme", "n")
+
+    def __init__(self, coef, fac, terme):
+        self.coef, self.fac, self.terme, self.n = coef, fac, terme, 0
+
+
+def _terme_exponentiel(signe, t, x):
+    """c · a^f (ou a^f · c, a^f / c) : un facteur puissance et des constantes rationnelles positives ; _Hors sinon."""
+    facs = [_inverser(_facteur_log(f, x), inverse) for f, inverse in _aplatir_quotient(t)]
+    puissances = [f for f in facs if f.genre == "pow" and variables(f.arbre)]
+    if len(puissances) != 1 or any(f.genre != "cte" and f is not puissances[0] for f in facs) or puissances[0].imbrique:
+        raise _Hors
+    coef = F(signe)
+    for f in facs:
+        if f.genre == "cte":
+            coef = coef / f.base if f.inverse else coef * f.base
+    return _Terme(coef, puissances[0], t)
+
+
+def _terme_de_la_somme(t, base):
+    """Le terme |c| · aⁿ de la parenthèse de la mise en évidence : 2^x (1 + 2), 2^x (3 + 2^2), 2^x (1 - 2) ; le signe est écrit par la somme."""
+    coef = abs(t.coef)
+    puissance = None if t.n == 0 else base if t.n == 1 else Pow(base, Nb(t.n))
+    morceaux = ([_nb_exact(coef)] if coef != 1 or puissance is None else []) + ([puissance] if puissance is not None else [])
+    arbre = _produit(morceaux)
+    return Neg(arbre) if t.coef < 0 else arbre
+
+
+def _somme_decalee(g, d, x):
+    """(s, o, inverse, R, termes, constantes, a_des_constantes, plus_petit) d'une équation « somme de termes de même base dont les exposants diffèrent
+    d'un entier = constante » : `termes` (des _Terme dont `n` est rempli), `constantes` la somme des termes sans inconnue ; _Hors sinon."""
+    if variables(g) and not variables(d):
+        s, o, inverse = g, d, False
+    elif variables(d) and not variables(g):
+        s, o, inverse = d, g, True
+    else:
+        raise _Hors
+    R = _const(o)
+    if R is None:
+        raise _Hors
+    termes, constantes = [], F(0)
+    a_des_constantes = False
+    for signe, t in _termes_signes(s):
+        if variables(t):
+            termes.append(_terme_exponentiel(signe, t, x))
+        else:
+            c = _const(t)
+            if c is None:
+                raise _Hors
+            constantes, a_des_constantes = constantes + signe * c, True
+    if len(termes) < 2:
+        raise _Hors
+    base = termes[0].fac.base
+    pentes = [t.fac.exp[1:] for t in termes]
+    if any(t.fac.base != base for t in termes) or any(p != pentes[0] for p in pentes):
+        raise _Hors
+    plus_petit = min(termes, key=lambda t: t.fac.exp[0])
+    for t in termes:
+        decalage = t.fac.exp[0] - plus_petit.fac.exp[0]
+        if decalage.denominator != 1:
+            raise _Hors
+        t.n = int(decalage)
+    return s, o, inverse, R, termes, constantes, a_des_constantes, plus_petit
+
+
+def _mise_en_evidence(g, d, x, methode):
+    """Somme de termes de même base dont les exposants diffèrent d'un entier (2^x + 2^(x+1) = 12, 2^(x+2) − 2^x = 12, 2^x + 2^x = 8), avec
+    coefficients et constante éventuels : on met en évidence la plus petite puissance (2^(x+1) = 2^x · 2, puis 2^x (1 + 2)). Si le coefficient
+    obtenu est une puissance de la base, on le fond (2^x · 2 = 2^(x+1)) ; sinon on isole l'exponentielle comme d'habitude ; un coefficient nul
+    donne ℝ ou ∅. La carte « Mise en évidence » est la même dans les deux méthodes. _Hors sinon."""
+    s, o, inverse, R, termes, constantes, a_des_constantes, plus_petit = _somme_decalee(g, d, x)
+    enonce = Eq(g, d)
+    equation = lambda gauche, droite: Eq(droite, gauche) if inverse else Eq(gauche, droite)
+    base = termes[0].fac.base
+    base_ecrite = plus_petit.fac.base_ecrite
+    if base == "e" and any(t.n for t in termes):
+        raise _Hors                                        # e^x + e^(x+1) : le coefficient 1 + e n'est pas rationnel
+    pas_isole = lambda t: Neg(t.terme) if t.coef < 0 and not isinstance(t.terme, Neg) else t.terme
+    somme_seule = _somme_arbres([pas_isole(t) for t in termes])
+    reste = _nb_exact(R - constantes)
+    P = plus_petit.fac.arbre
+    lignes = []
+    for t in termes:                                       # 2^(x+1) = 2^x · 2
+        if t.n and not any(tex(t.fac.arbre) == tex(l.elements[0]) for l in lignes):
+            lignes.append(Chaine([t.fac.arbre, Op("*", P, base_ecrite if t.n == 1 else Pow(base_ecrite, Nb(t.n)))], ["="], [PROP_SOMME_EXPOSANTS]))
+    chaine = Chaine([enonce])
+    if a_des_constantes:
+        chaine.ajouter(equation(somme_seule, reste), "⇔", PROP_ISOLER)
+    parenthese = _somme_arbres([_terme_de_la_somme(t, base_ecrite) for t in termes])
+    chaine.ajouter(equation(Op("*", P, parenthese), reste), "⇔", PROP_MISE_EN_EVIDENCE)
+    C = sum((t.coef * (base ** t.n if base != "e" else 1) for t in termes), F(0))
+    carte = lambda: _carte("Mise en évidence", lignes + [chaine])
+    if C == 0:                                             # 2^x (1 - 1) = 8 : 0 = 8
+        chaine.ajouter(equation(Op("*", P, Nb(0)), reste), "⇔")
+        chaine.ajouter(equation(Nb(0), reste), "⇔")
+        vrai = R - constantes == 0
+        return _resultat("mise_en_evidence", x, enonce, [carte()], None if vrai else [],
+                         "Cette égalité est vraie pour tout nombre réel." if vrai else "Cette égalité est fausse : l'équation n'a aucune solution.")
+    k = None if base == "e" or C <= 1 else _exposant_entier(C, F(base))
+    if k is not None and k >= 1:                           # 2^x · 2 = 2^(x+1)
+        chaine.ajouter(equation(Op("*", P, _nb_exact(C)), reste), "⇔")
+        if k >= 2:                                         # 2^x · 4 = 2^x · 2^2
+            chaine.ajouter(equation(Op("*", P, Pow(base_ecrite, Nb(k))), reste), "⇔")
+        expo = list(plus_petit.fac.exp)
+        expo[0] += k
+        nouveau = Pow(base_ecrite, _arbre_poly(expo, x))
+        chaine.ajouter(equation(nouveau, reste), "⇔", PROP_PRODUIT)
+        g2, d2 = (reste, nouveau) if inverse else (nouveau, reste)
+    else:
+        nouveau = P if C == 1 else Neg(P) if C == -1 else Op("*", _nb_exact(C), P)
+        chaine.ajouter(equation(nouveau, reste), "⇔")
+        g2, d2 = (reste, nouveau) if inverse else (nouveau, reste)
+    r = dict(_resolution(g2, d2, x, methode))
+    etapes = list(r["etapes"])
+    if etapes and etapes[0]["titre"] in ("Isoler l'exponentielle", "Isoler les exponentielles") and len(etapes[0]["lignes"]) == 1:
+        suite = etapes.pop(0)["lignes"][0]
+        for e, lien, prop in zip(suite.elements[1:], suite.liens, suite.props):
+            chaine.ajouter(e, lien, prop)
+    r["etapes"] = [carte()] + etapes
+    r["enonce"] = enonce
+    return r
+
+
 def _resolution(g, d, x, methode):
-    return _essayer(lambda: _un_facteur(g, d, x, methode), lambda: _produit_nul(g, d, x, methode),
+    return _essayer(lambda: _un_facteur(g, d, x, methode), lambda: _mise_en_evidence(g, d, x, methode), lambda: _produit_nul(g, d, x, methode),
                     lambda: _apres_isolement(g, d, x, methode))
 
 
@@ -2696,6 +2823,11 @@ def hors_programme(g, d, x):
     egal_zero = lambda a, b: isinstance(b, Nb) and b.val == 0 and isinstance(a, Op) and a.op == "*"
     if _hors_arbre(g, egal_zero(g, d)) or _hors_arbre(d, egal_zero(d, g)):
         return True
+    try:
+        _somme_decalee(g, d, x)                            # 2^x + 2^(x+1) = 12 : dans le programme (mise en évidence)
+        return False
+    except _Hors:
+        pass
     termes = [t for t in _termes_additifs(g) + _termes_additifs(d) if _const(t) != 0]
     if len(termes) >= 3 and sum(1 for t in termes if _classe(t) == "exp") >= 2:
         return True                                        # 2^x + 2^(x+1) = 12 (mise en facteur), 4^x − 2^x − 6 = 0 (2e degré en 2^x) : pas en 3C

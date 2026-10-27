@@ -117,16 +117,23 @@ BATTERIE_AUDIT = [
     # exposants ² et ³ saisis au clavier d'un téléphone (D3)
     ("2^(x²)*4^x=8", [-3.0, 1.0]), ("log(x²)=2", [-10.0, 10.0]), ("9^(x²)=3^(x+1)", [-0.5, 1.0]), ("e^(x²)=e^(2x+3)", [-1.0, 3.0]),
     # produit ou quotient de puissances de 10 ou de e : la méthode A fusionne (aᵐ / aⁿ = aᵐ⁻ⁿ) puis conclut par la définition
+    # mise en évidence : somme de termes de même base dont les exposants diffèrent d'un entier (D1)
+    ("2^x+2^(x+1)=12", [2.0]), ("2^x+2^x=8", [2.0]), ("3^(x+1)+3^x=36", [2.0]), ("2^(x+2)-2^x=12", [2.0]), ("5^x+5^(x+1)+5^(x+2)=155", [1.0]),
+    ("2^x+2^(x+1)+3=15", [2.0]), ("12=2^x+2^(x+1)+3", [1.585]), ("2*2^x+2^(x+1)=16", [2.0]), ("2^x+3*2^x=16", [2.0]), ("2^(x+1)-2^x=4", [2.0]),
+    ("3^(x+1)-3^x=18", [2.0]), ("e^x+e^x=8", [1.386]), ("e^x+2e^x=9", [1.099]), ("10^x+10^(x+1)=110", [1.0]), ("2^(2x)+2^(2x+1)=48", [2.0]),
+    ("2^(x^2)+2^(x^2+1)=12", [-1.414, 1.414]), ("0,5^x+0,5^(x+1)=1,5", [0.0]), ("2^(x+1)+2^(x-1)=10", [2.0]), ("3*2^x+2^(x+2)=28", [2.0]),
+    ("2^x+2^(x+1)+2^(x+2)=28", [2.0]), ("4^x+4^(x+1)=20", [1.0]), ("2^x/2+2^x=12", [3.0]),
+    ("2^x-2^x=0", None), ("2^x-2^x=3", []), ("2^x-2^(x+1)=4", []), ("2^x-2^(x+1)=0", []), ("-2^x-2^(x+1)=12", []), ("2^(x+1)-2^(x+1)=0", None),
     ("e^(2x)/e^x=5", [1.609]), ("10^(2x)/10^x=3", [0.477]), ("e^x*e^(x+1)=5", [0.305]), ("e^(3x)/e^(x-1)=7", [0.473]),
 ]
 
 # Aucune méthode ne s'applique (EL-11) : un vrai hors-programme, ou une forme du programme que l'outil ne gère pas encore
 HORS_PROGRAMME = ["x*2^x=8", "2^x+3^x=5", "x^x=4", "2^x=x+1", "2^(sqrt(x))=4", "2^(1/x)=4", "x/2^x=1", "x*e^x=1", "2^x=3^x+x",
                   "log(x)=x-1", "ln(x)=x", "x*log(x)=1", "e^x=ln(x)", "log(x)=2^x", "log(x)/x=1", "ln(x)+x=2",
-                  # pour les 3C, deux exponentielles et un troisième terme : mise en facteur, 2e degré en a^x (décision du 27.10.2026)
-                  "2^x+2^(x+1)=12", "2^x+2^x=8", "3^(x+1)+3^x=36", "2^(x+2)-2^x=12", "4^x-2^x-6=0", "9^x-3^x=6", "e^(2x)-3e^x+2=0",
+                  # pour les 3C, le 2e degré en a^x et les exposants qui ne diffèrent pas d'un entier (la mise en évidence est au programme)
+                  "4^x-2^x-6=0", "9^x-3^x=6", "e^(2x)-3e^x+2=0",
                   "e^x+e^(-x)=3", "2^(2x)-5*2^x+4=0", "2^x+1=3^x"]
-PAS_ENCORE = ["log(x)=log(5)", "log(x^2+1)=-1",
+PAS_ENCORE = ["log(x)=log(5)", "log(x^2+1)=-1", "e^x+e^(x+1)=5",
               "log(x)+log(x-1)=1", "2^(x^3)=8", "2^(x^3)=3^x", "5^(x^3+1)=7", "log(x)+log(2)=1", "log(x)-log(2)=1"]
 
 # Équations sans exponentielle ni logarithme : le message dit ce que l'outil traite

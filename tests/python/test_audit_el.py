@@ -366,6 +366,56 @@ class TestBaseInconnueArgumentNegatif(unittest.TestCase):
         self.assertEqual([round(el.valeur(n), 3) for n in corriger("log_x(8)=3")["solutions"]], [2.0])
 
 
+class TestMiseEnEvidence(unittest.TestCase):
+    """Correction 4 (D1) : somme de termes de même base dont les exposants diffèrent d'un entier ; carte « Mise en évidence » commune aux deux méthodes."""
+    A, B = el.METHODE_MEME_BASE, el.METHODE_LOGARITHMES
+
+    def carte(self, saisie, methode):
+        return corriger(saisie, methode)["etapes"][0]
+
+    def test_la_carte_est_la_meme_dans_les_deux_methodes(self):
+        for saisie in ["2^x+2^(x+1)=12", "2^x+2^x=8", "2^(x+2)-2^x=12", "2^x+2^(x+1)+3=15", "2^x-2^x=3", "2^x-2^(x+1)=4", "12=2^x+2^(x+1)+3"]:
+            with self.subTest(saisie):
+                a, b = self.carte(saisie, self.A), self.carte(saisie, self.B)
+                self.assertEqual(a["titre"], "Mise en évidence")
+                self.assertEqual([el.tex_chaine(l) for l in a["lignes"]], [el.tex_chaine(l) for l in b["lignes"]])
+
+    def test_exposant_decale_puis_mise_en_evidence_puis_isolement(self):
+        self.assertEqual(lignes("2^x+2^(x+1)=12", self.A)[:2], [
+            r"2^{x + 1} = 2^{x} \cdot 2 \quad \text{(aᵐ⁺ⁿ = aᵐ · aⁿ)}",
+            r"2^{x} + 2^{x + 1} = 12 \iff 2^{x} \cdot (1 + 2) = 12 \quad \text{(mise en évidence)} \iff 3 \cdot 2^{x} = 12 "
+            r"\iff 2^{x} = 4 \quad \text{(on isole le terme exponentiel)}"])
+        self.assertEqual(lignes("2^(x+2)-2^x=12", self.B)[0], r"2^{x + 2} = 2^{x} \cdot 2^{2} \quad \text{(aᵐ⁺ⁿ = aᵐ · aⁿ)}")
+        self.assertIn(r"2^{x} \cdot (2^{2} - 1) = 12", lignes("2^(x+2)-2^x=12", self.B)[1])
+
+    def test_coefficient_puissance_de_la_base_fondu(self):
+        for methode in (self.A, self.B):
+            self.assertEqual(lignes("2^x+2^x=8", methode)[0], r"2^{x} + 2^{x} = 8 \iff 2^{x} \cdot (1 + 1) = 8 \quad \text{(mise en évidence)} "
+                             r"\iff 2^{x} \cdot 2 = 8 \iff 2^{x + 1} = 8 \quad \text{(aᵐ · aⁿ = aᵐ⁺ⁿ)}")
+        self.assertIn(r"\iff 2^{x} \cdot 4 = 16 \iff 2^{x} \cdot 2^{2} = 16 \iff 2^{x + 2} = 16", lignes("2*2^x+2^(x+1)=16", self.A)[1])
+
+    def test_constante_isolee_d_abord(self):
+        self.assertIn(r"2^{x} + 2^{x + 1} + 3 = 15 \iff 2^{x} + 2^{x + 1} = 12 \quad \text{(on isole le terme exponentiel)} \iff 2^{x} \cdot (1 + 2) = 12",
+                      lignes("2^x+2^(x+1)+3=15", self.A)[1])
+
+    def test_coefficient_nul_ou_negatif(self):
+        self.assertIsNone(corriger("2^x-2^x=0", self.A)["solutions"])
+        self.assertEqual(el.tex_solution(corriger("2^x-2^x=0", self.B)), r"S = \mathbb{R}")
+        self.assertEqual(corriger("2^x-2^x=3", self.A)["solutions"], [])
+        self.assertEqual(lignes("2^x-2^x=3", self.B)[0], r"2^{x} - 2^{x} = 3 \iff 2^{x} \cdot (1 - 1) = 3 \quad \text{(mise en évidence)} \iff 2^{x} \cdot 0 = 3 \iff 0 = 3")
+        for saisie in ["2^x-2^(x+1)=4", "-2^x-2^(x+1)=12"]:
+            for methode in (self.A, self.B):
+                with self.subTest(saisie=saisie, methode=methode):
+                    r = corriger(saisie, methode)
+                    self.assertEqual([c["titre"] for c in r["etapes"]], ["Mise en évidence", "Aucune solution"])
+                    self.assertEqual(r["solutions"], [])
+
+    def test_formes_qui_restent_hors_de_la_methode(self):
+        self.assertEqual(rel.resoudre("e^x+e^(x+1)=5"), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})     # le coefficient 1 + e n'est pas rationnel
+        for saisie in ["4^x-2^x-6=0", "e^x+e^(-x)=3", "2^x+1=3^x", "2^x+2^(x+1)=3^x"]:
+            self.assertEqual(rel.resoudre(saisie), {"ok": False, "erreur": el.MESSAGE_HORS_PROGRAMME})
+
+
 class TestMessages(unittest.TestCase):
     def test_sans_exponentielle_ni_logarithme(self):
         """Correction 3 : x² = 4, 2x + 1 = 9 ne sont pas « pas encore » : l'outil dit ce qu'il traite."""
@@ -386,9 +436,10 @@ class TestMessages(unittest.TestCase):
             with self.subTest(saisie):
                 self.assertEqual(rel.resoudre(saisie), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
 
-    def test_mise_en_facteur_et_second_degre_en_a_puissance_x_hors_programme_quelle_que_soit_la_base(self):
-        """Groupe 10 (D1, D2) : le même message pour 4^x − 2^x − 6 = 0 et e^(2x) − 3e^x + 2 = 0 (avant : « hors programme » ou « pas encore » selon la base)."""
-        for saisie in ["2^x+2^(x+1)=12", "2^x+2^x=8", "3^(x+1)+3^x=36", "2^(x+2)-2^x=12", "5^x+5^(x+1)+5^(x+2)=155", "4^x-2^x-6=0", "9^x-3^x=6",
+    def test_second_degre_en_a_puissance_x_hors_programme_quelle_que_soit_la_base(self):
+        """Groupe 10 (D2) : le même message pour 4^x − 2^x − 6 = 0 et e^(2x) − 3e^x + 2 = 0 (avant : « hors programme » ou « pas encore » selon la base) ;
+        la mise en évidence (D1) est au programme : voir TestMiseEnEvidence."""
+        for saisie in ["4^x-2^x-6=0", "9^x-3^x=6",
                        "4^x+2^x=6", "e^(2x)-3e^x+2=0", "e^x+e^(-x)=3", "2^(2x)-5*2^x+4=0", "3^(2x)-4*3^x+3=0", "2^x+2^(-x)=2", "2*4^x-3*2^x+1=0"]:
             with self.subTest(saisie):
                 self.assertEqual(rel.resoudre(saisie), {"ok": False, "erreur": el.MESSAGE_HORS_PROGRAMME})
