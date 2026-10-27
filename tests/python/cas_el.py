@@ -54,7 +54,7 @@ BATTERIE_E3 = [
     ("e^x=2^x", 0.0), ("e^x=2^(x+1)", 2.259), ("2*e^x=3^x", 7.029), ("e^(2x)=3^(x-1)", -1.219), ("3^(x+1)=e^x", -11.141),
 ]
 
-SANS_E3 = ["2^(x^2)=3^x", "x*2^x=8", "2^x+3^x=5", "2^(x^3)=3^x", "x^x=3^x", "-2^x=-3^(x+1)", "2^x+1=3^x", "2^x=3^x+x"]
+SANS_E3 = ["2^(x^2)=3^x", "x*2^x=8", "2^x+3^x=5", "2^(x^3)=3^x", "x^x=3^x", "2^x+1=3^x", "2^x=3^x+x"]
 
 # (saisie, solutions) : exercices 2.15 e-g j-l, 2.18 c d f, 2.21 d, 2.22 a-c du corrigé, puis d'autres formes
 BATTERIE_E4 = [
@@ -90,13 +90,17 @@ BATTERIE_C1 = [
 BATTERIE_AUDIT = [
     # Δ = 0, x² · log(a) = 0, jamais « + − » (F1 à F4)
     ("2^(x^2)=1", [0.0]), ("1=5^(x^2)", [0.0]), ("1/2=2^(x^2-1)", [0.0]), ("2^(x^2)=2^(2x-1)", [1.0]), ("0,5^(x^2)*0,5^(2x-3)=16", [-1.0]),
-    ("4^(x^2)=2^(4x-2)", [1.0]),("3x-1=-ln(7)", [-0.315]),
+    ("4^(x^2)=2^(4x-2)", [1.0]), ("3x-1=-ln(7)", [-0.315]),
+    # isoler les exponentielles : un terme de l'autre côté, les deux membres par −1, le dénominateur (T1, T5)
+    ("2^x-3^(x+1)=0", [-2.710]), ("4^x-2^(x+1)=0", [1.0]), ("2^x-2^(2x-3)=0", [3.0]), ("0=2*3^x-5*2^x", [2.260]), ("-3^x+e^x=0", [0.0]),
+    ("2^x+3^(x+1)=0", []), ("e^x+2^x=0", []), ("-2^x-5^x=0", []), ("3^(x+1)/2^x=1", [-2.710]), ("-2^x=-3^(x+1)", [-2.710]),
+    ("-3*2^x=-5*3^x", [-1.260]), ("(2^x-3^x)(5^x-25)=0", [0.0, 2.0]),
 ]
 
 # Aucune méthode ne s'applique (EL-11) : un vrai hors-programme, ou une forme du programme que l'outil ne gère pas encore
 HORS_PROGRAMME = ["x*2^x=8", "2^x+3^x=5", "x^x=4", "2^x=x+1", "2^(sqrt(x))=4", "2^(1/x)=4", "x/2^x=1", "x*e^x=1", "2^x=3^x+x",
                   "log(x)=x-1", "ln(x)=x", "x*log(x)=1", "e^x=ln(x)", "log(x)=2^x", "log(x)/x=1", "ln(x)+x=2"]
-PAS_ENCORE = ["log(x)=log(5)", "log(x^2+1)=-1", "-2^x=-3^(x+1)", "10^x*(x-4)=0", "2^x+2^(x+1)=12", "e^x+e^(-x)=3",
+PAS_ENCORE = ["log(x)=log(5)", "log(x^2+1)=-1", "10^x*(x-4)=0", "2^x+2^(x+1)=12", "e^x+e^(-x)=3",
               "2^(x^2)=5", "log(x)+log(x-1)=1", "x^2=4", "2x+1=9", "2^(x^3)=8", "2^(x^3)=3^x", "5^(x^3+1)=7", "log(x)+log(2)=1", "log(x)-log(2)=1"]
 
 # Calculs que l'outil ne traite pas (message de calcul) et saisies refusées à la lecture

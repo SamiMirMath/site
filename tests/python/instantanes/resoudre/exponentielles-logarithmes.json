@@ -580,9 +580,321 @@
    }
   ]
  },
+ "(2^x-3^x)(5^x-25)=0": {
+  "cartes": [
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\((2^{x} - 3^{x})(5^{x} - 25) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} - 3^{x} = 0 \\text{ ou } 5^{x} - 25 = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Facteur 1",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} - 3^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} = 3^{x}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 3^{x}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(3^{x})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = x \\cdot \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(\\log(2) - \\log(3)) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\">(car \\(\\log(2) - \\log(3) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Facteur 2",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{x} - 25 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(5^{x} = 25\\)</span><span class=\"prop\">(on isole le terme exponentiel)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{x} = 25\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5^{x}) = \\log(25)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(5) = \\log(25)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(25)}{\\log(5)}\\)</span><span class=\"prop\">(car \\(\\log(5) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{0 \\,;\\, \\frac{\\log(25)}{\\log(5)}\\right\\}",
+      "type": "resultat"
+     },
+     {
+      "html": "Contrôlez à la calculatrice : on retrouve \\(x = 0\\) ou \\(x = 2\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "(2^{x} - 3^{x})(5^{x} - 25) = 0",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\((2^{x} - 3^{x})(5^{x} - 25) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} - 3^{x} = 0 \\text{ ou } 5^{x} - 25 = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Facteur 1",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} - 3^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} = 3^{x}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "\\(3\\) n'est pas une puissance de \\(2\\) : il faut les logarithmes.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\((2^{x} - 3^{x})(5^{x} - 25) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} - 3^{x} = 0 \\text{ ou } 5^{x} - 25 = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Facteur 1",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} - 3^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} = 3^{x}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 3^{x}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(3^{x})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = x \\cdot \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(\\log(2) - \\log(3)) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\">(car \\(\\log(2) - \\log(3) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Facteur 2",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{x} - 25 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(5^{x} = 25\\)</span><span class=\"prop\">(on isole le terme exponentiel)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{x} = 25\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5^{x}) = \\log(25)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(5) = \\log(25)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(25)}{\\log(5)}\\)</span><span class=\"prop\">(car \\(\\log(5) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{0 \\,;\\, \\frac{\\log(25)}{\\log(5)}\\right\\}",
+        "type": "resultat"
+       },
+       {
+        "html": "Contrôlez à la calculatrice : on retrouve \\(x = 0\\) ou \\(x = 2\\).",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
  "(x+1=3": {
   "erreur": "Il manque une parenthèse fermante.",
   "ok": false
+ },
+ "-2^x-5^x=0": {
+  "cartes": [
+   {
+    "badge": "Isoler les exponentielles",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-2^{x} - 5^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} = -5^{x}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Aucune solution",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-5^{x} &lt; 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\varnothing",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "-2^{x} - 5^{x} = 0",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Isoler les exponentielles",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-2^{x} - 5^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} = -5^{x}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Aucune solution",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-5^{x} &lt; 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\varnothing",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Isoler les exponentielles",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-2^{x} - 5^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} = -5^{x}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Aucune solution",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-5^{x} &lt; 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\varnothing",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
  },
  "-2^x=-10": {
   "cartes": [
@@ -699,8 +1011,118 @@
   ]
  },
  "-2^x=-3^(x+1)": {
-  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
-  "ok": false
+  "cartes": [
+   {
+    "badge": "Isoler les exponentielles",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-2^{x} = -3^{x + 1}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} = 3^{x + 1}\\)</span><span class=\"prop\">(on multiplie les deux membres par −1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 3^{x + 1}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(3^{x + 1})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = (x + 1) \\cdot \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = x \\cdot \\log(3) + \\log(3)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(\\log(2) - \\log(3)) = \\log(3)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(2) - \\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(2) - \\log(3) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = \\frac{\\log(3)}{\\log\\left(\\frac{2}{3}\\right)}\\)</span><span class=\"prop\">(log a − log b = log(a/b))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(3)}{\\log\\left(\\frac{2}{3}\\right)}\\right\\} \\text{, soit } x \\approx -2{,}710",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "-2^{x} = -3^{x + 1}",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Isoler les exponentielles",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-2^{x} = -3^{x + 1}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} = 3^{x + 1}\\)</span><span class=\"prop\">(on multiplie les deux membres par −1)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Même base / définition",
+      "blocs": [
+       {
+        "html": "\\(3\\) n'est pas une puissance de \\(2\\) : il faut les logarithmes.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Isoler les exponentielles",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-2^{x} = -3^{x + 1}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} = 3^{x + 1}\\)</span><span class=\"prop\">(on multiplie les deux membres par −1)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 3^{x + 1}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(3^{x + 1})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = (x + 1) \\cdot \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = x \\cdot \\log(3) + \\log(3)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(\\log(2) - \\log(3)) = \\log(3)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(2) - \\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(2) - \\log(3) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = \\frac{\\log(3)}{\\log\\left(\\frac{2}{3}\\right)}\\)</span><span class=\"prop\">(log a − log b = log(a/b))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\frac{\\log(3)}{\\log\\left(\\frac{2}{3}\\right)}\\right\\} \\text{, soit } x \\approx -2{,}710",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
  },
  "-2^x=-8": {
   "cartes": [
@@ -830,6 +1252,234 @@
         "html": "Contrôlez à la calculatrice : \\(x = \\frac{\\log(8)}{\\log(2)} = 3\\).",
         "style": "etape",
         "type": "texte"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
+ "-3*2^x=-5*3^x": {
+  "cartes": [
+   {
+    "badge": "Isoler les exponentielles",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-3 \\cdot 2^{x} = -5 \\cdot 3^{x}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3 \\cdot 2^{x} = 5 \\cdot 3^{x}\\)</span><span class=\"prop\">(on multiplie les deux membres par −1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3 \\cdot 2^{x} = 5 \\cdot 3^{x}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3 \\cdot 2^{x}) = \\log(5 \\cdot 3^{x})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3) + \\log(2^{x}) = \\log(5) + \\log(3^{x})\\)</span><span class=\"prop\">(log(ab) = log a + log b)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3) + x \\cdot \\log(2) = \\log(5) + x \\cdot \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) + \\log(3) = x \\cdot \\log(3) + \\log(5)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(\\log(2) - \\log(3)) = \\log(5) - \\log(3)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(5) - \\log(3)}{\\log(2) - \\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(2) - \\log(3) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = \\frac{\\log\\left(\\frac{5}{3}\\right)}{\\log\\left(\\frac{2}{3}\\right)}\\)</span><span class=\"prop\">(log a − log b = log(a/b))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log\\left(\\frac{5}{3}\\right)}{\\log\\left(\\frac{2}{3}\\right)}\\right\\} \\text{, soit } x \\approx -1{,}260",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "-3 \\cdot 2^{x} = -5 \\cdot 3^{x}",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Isoler les exponentielles",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-3 \\cdot 2^{x} = -5 \\cdot 3^{x}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3 \\cdot 2^{x} = 5 \\cdot 3^{x}\\)</span><span class=\"prop\">(on multiplie les deux membres par −1)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Même base / définition",
+      "blocs": [
+       {
+        "html": "\\(3\\) n'est pas une puissance de \\(2\\) : il faut les logarithmes.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Isoler les exponentielles",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-3 \\cdot 2^{x} = -5 \\cdot 3^{x}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3 \\cdot 2^{x} = 5 \\cdot 3^{x}\\)</span><span class=\"prop\">(on multiplie les deux membres par −1)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3 \\cdot 2^{x} = 5 \\cdot 3^{x}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3 \\cdot 2^{x}) = \\log(5 \\cdot 3^{x})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3) + \\log(2^{x}) = \\log(5) + \\log(3^{x})\\)</span><span class=\"prop\">(log(ab) = log a + log b)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3) + x \\cdot \\log(2) = \\log(5) + x \\cdot \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) + \\log(3) = x \\cdot \\log(3) + \\log(5)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(\\log(2) - \\log(3)) = \\log(5) - \\log(3)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(5) - \\log(3)}{\\log(2) - \\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(2) - \\log(3) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = \\frac{\\log\\left(\\frac{5}{3}\\right)}{\\log\\left(\\frac{2}{3}\\right)}\\)</span><span class=\"prop\">(log a − log b = log(a/b))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\frac{\\log\\left(\\frac{5}{3}\\right)}{\\log\\left(\\frac{2}{3}\\right)}\\right\\} \\text{, soit } x \\approx -1{,}260",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
+ "-3^x+e^x=0": {
+  "cartes": [
+   {
+    "badge": "Isoler les exponentielles",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-3^{x} + e^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(e^{x} = 3^{x}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x} = 3^{x}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(e^{x}) = \\ln(3^{x})\\)</span><span class=\"prop\">(ln des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\ln(e) = x \\cdot \\ln(3)\\)</span><span class=\"prop\">(ln(a^A) = A · ln(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = x \\cdot \\ln(3)\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x - x \\cdot \\ln(3) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(1 - \\ln(3)) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\">(car \\(1 - \\ln(3) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{0\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "-3^{x} + e^{x} = 0",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Isoler les exponentielles",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-3^{x} + e^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(e^{x} = 3^{x}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Même base / définition",
+      "blocs": [
+       {
+        "html": "\\(3\\) n'est pas une puissance de \\(e\\) : il faut les logarithmes.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Isoler les exponentielles",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-3^{x} + e^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(e^{x} = 3^{x}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x} = 3^{x}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(e^{x}) = \\ln(3^{x})\\)</span><span class=\"prop\">(ln des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\ln(e) = x \\cdot \\ln(3)\\)</span><span class=\"prop\">(ln(a^A) = A · ln(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = x \\cdot \\ln(3)\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x - x \\cdot \\ln(3) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(1 - \\ln(3)) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\">(car \\(1 - \\ln(3) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{0\\right\\}",
+        "type": "resultat"
        }
       ],
       "style": "final",
@@ -1257,6 +1907,120 @@
       "blocs": [
        {
         "tex": "S = \\left\\{\\frac{\\log(0{,}5)}{\\log(0{,}8)}\\right\\} \\text{, soit } n \\approx 3{,}106",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
+ "0=2*3^x-5*2^x": {
+  "cartes": [
+   {
+    "badge": "Isoler les exponentielles",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(0 = 2 \\cdot 3^{x} - 5 \\cdot 2^{x}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2 \\cdot 3^{x} = 5 \\cdot 2^{x}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2 \\cdot 3^{x} = 5 \\cdot 2^{x}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2 \\cdot 3^{x}) = \\log(5 \\cdot 2^{x})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2) + \\log(3^{x}) = \\log(5) + \\log(2^{x})\\)</span><span class=\"prop\">(log(ab) = log a + log b)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2) + x \\cdot \\log(3) = \\log(5) + x \\cdot \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) + \\log(2) = x \\cdot \\log(2) + \\log(5)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(\\log(3) - \\log(2)) = \\log(5) - \\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(5) - \\log(2)}{\\log(3) - \\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(3) - \\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = \\frac{\\log\\left(\\frac{5}{2}\\right)}{\\log\\left(\\frac{3}{2}\\right)}\\)</span><span class=\"prop\">(log a − log b = log(a/b))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log\\left(\\frac{5}{2}\\right)}{\\log\\left(\\frac{3}{2}\\right)}\\right\\} \\text{, soit } x \\approx 2{,}260",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "0 = 2 \\cdot 3^{x} - 5 \\cdot 2^{x}",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Isoler les exponentielles",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(0 = 2 \\cdot 3^{x} - 5 \\cdot 2^{x}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2 \\cdot 3^{x} = 5 \\cdot 2^{x}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Même base / définition",
+      "blocs": [
+       {
+        "html": "\\(2\\) n'est pas une puissance de \\(3\\) : il faut les logarithmes.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Isoler les exponentielles",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(0 = 2 \\cdot 3^{x} - 5 \\cdot 2^{x}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2 \\cdot 3^{x} = 5 \\cdot 2^{x}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2 \\cdot 3^{x} = 5 \\cdot 2^{x}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2 \\cdot 3^{x}) = \\log(5 \\cdot 2^{x})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2) + \\log(3^{x}) = \\log(5) + \\log(2^{x})\\)</span><span class=\"prop\">(log(ab) = log a + log b)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2) + x \\cdot \\log(3) = \\log(5) + x \\cdot \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) + \\log(2) = x \\cdot \\log(2) + \\log(5)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(\\log(3) - \\log(2)) = \\log(5) - \\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(5) - \\log(2)}{\\log(3) - \\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(3) - \\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = \\frac{\\log\\left(\\frac{5}{2}\\right)}{\\log\\left(\\frac{3}{2}\\right)}\\)</span><span class=\"prop\">(log a − log b = log(a/b))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\frac{\\log\\left(\\frac{5}{2}\\right)}{\\log\\left(\\frac{3}{2}\\right)}\\right\\} \\text{, soit } x \\approx 2{,}260",
         "type": "resultat"
        }
       ],
@@ -6243,9 +7007,406 @@
   "erreur": "Cet outil ne traite pas encore ce type d'équation.",
   "ok": false
  },
+ "2^x+3^(x+1)=0": {
+  "cartes": [
+   {
+    "badge": "Isoler les exponentielles",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} + 3^{x + 1} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} = -3^{x + 1}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Aucune solution",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-3^{x + 1} &lt; 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\varnothing",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{x} + 3^{x + 1} = 0",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Isoler les exponentielles",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} + 3^{x + 1} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} = -3^{x + 1}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Aucune solution",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-3^{x + 1} &lt; 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\varnothing",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Isoler les exponentielles",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} + 3^{x + 1} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} = -3^{x + 1}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Aucune solution",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-3^{x + 1} &lt; 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\varnothing",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
  "2^x+3^x=5": {
   "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
   "ok": false
+ },
+ "2^x-2^(2x-3)=0": {
+  "cartes": [
+   {
+    "badge": "Isoler les exponentielles",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} - 2^{2x - 3} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} = 2^{2x - 3}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2^{2x - 3}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2^{2x - 3})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = (2x - 3) \\cdot \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = 2x \\cdot \\log(2) - 3\\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3\\log(2) = x \\cdot \\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{3\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = \\frac{\\log(8)}{\\log(2)}\\)</span><span class=\"prop\">(propriétés des logarithmes)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3\\log(2) = \\log(2^{3})\\)</span><span class=\"prop\">(propriétés des logarithmes)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{3\\log(2)} = \\log(8)\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(8)}{\\log(2)}\\right\\}",
+      "type": "resultat"
+     },
+     {
+      "html": "Contrôlez à la calculatrice : \\(x = \\frac{\\log(8)}{\\log(2)} = 3\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{x} - 2^{2x - 3} = 0",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Isoler les exponentielles",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} - 2^{2x - 3} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} = 2^{2x - 3}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Même base",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2^{2x - 3}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 2x - 3\\)</span><span class=\"prop\">(même base : a^A = a^B ⇔ A = B)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(-x = -3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 3\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{3\\right\\}",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Isoler les exponentielles",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} - 2^{2x - 3} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} = 2^{2x - 3}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2^{2x - 3}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2^{2x - 3})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = (2x - 3) \\cdot \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = 2x \\cdot \\log(2) - 3\\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3\\log(2) = x \\cdot \\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{3\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = \\frac{\\log(8)}{\\log(2)}\\)</span><span class=\"prop\">(propriétés des logarithmes)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3\\log(2) = \\log(2^{3})\\)</span><span class=\"prop\">(propriétés des logarithmes)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{3\\log(2)} = \\log(8)\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\frac{\\log(8)}{\\log(2)}\\right\\}",
+        "type": "resultat"
+       },
+       {
+        "html": "Contrôlez à la calculatrice : \\(x = \\frac{\\log(8)}{\\log(2)} = 3\\).",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
+ "2^x-3^(x+1)=0": {
+  "cartes": [
+   {
+    "badge": "Isoler les exponentielles",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} - 3^{x + 1} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} = 3^{x + 1}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 3^{x + 1}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(3^{x + 1})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = (x + 1) \\cdot \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = x \\cdot \\log(3) + \\log(3)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(\\log(2) - \\log(3)) = \\log(3)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(2) - \\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(2) - \\log(3) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = \\frac{\\log(3)}{\\log\\left(\\frac{2}{3}\\right)}\\)</span><span class=\"prop\">(log a − log b = log(a/b))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(3)}{\\log\\left(\\frac{2}{3}\\right)}\\right\\} \\text{, soit } x \\approx -2{,}710",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{x} - 3^{x + 1} = 0",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Isoler les exponentielles",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} - 3^{x + 1} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} = 3^{x + 1}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Même base / définition",
+      "blocs": [
+       {
+        "html": "\\(3\\) n'est pas une puissance de \\(2\\) : il faut les logarithmes.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Isoler les exponentielles",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} - 3^{x + 1} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{x} = 3^{x + 1}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 3^{x + 1}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(3^{x + 1})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = (x + 1) \\cdot \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = x \\cdot \\log(3) + \\log(3)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(\\log(2) - \\log(3)) = \\log(3)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(2) - \\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(2) - \\log(3) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = \\frac{\\log(3)}{\\log\\left(\\frac{2}{3}\\right)}\\)</span><span class=\"prop\">(log a − log b = log(a/b))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\frac{\\log(3)}{\\log\\left(\\frac{2}{3}\\right)}\\right\\} \\text{, soit } x \\approx -2{,}710",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
  },
  "2^x/4=2": {
   "cartes": [
@@ -7880,6 +9041,120 @@
    }
   ]
  },
+ "3^(x+1)/2^x=1": {
+  "cartes": [
+   {
+    "badge": "Isoler les exponentielles",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{3^{x + 1}}{2^{x}} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3^{x + 1} = 2^{x}\\)</span><span class=\"prop\">(on multiplie les deux membres par le dénominateur)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x + 1} = 2^{x}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x + 1}) = \\log(2^{x})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 1) \\cdot \\log(3) = x \\cdot \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) + \\log(3) = x \\cdot \\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3) = x(\\log(2) - \\log(3))\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(2) - \\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(2) - \\log(3) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = \\frac{\\log(3)}{\\log\\left(\\frac{2}{3}\\right)}\\)</span><span class=\"prop\">(log a − log b = log(a/b))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(3)}{\\log\\left(\\frac{2}{3}\\right)}\\right\\} \\text{, soit } x \\approx -2{,}710",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\frac{3^{x + 1}}{2^{x}} = 1",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Isoler les exponentielles",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{3^{x + 1}}{2^{x}} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3^{x + 1} = 2^{x}\\)</span><span class=\"prop\">(on multiplie les deux membres par le dénominateur)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Même base / définition",
+      "blocs": [
+       {
+        "html": "\\(2\\) n'est pas une puissance de \\(3\\) : il faut les logarithmes.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Isoler les exponentielles",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{3^{x + 1}}{2^{x}} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3^{x + 1} = 2^{x}\\)</span><span class=\"prop\">(on multiplie les deux membres par le dénominateur)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x + 1} = 2^{x}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x + 1}) = \\log(2^{x})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 1) \\cdot \\log(3) = x \\cdot \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) + \\log(3) = x \\cdot \\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3) = x(\\log(2) - \\log(3))\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(2) - \\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(2) - \\log(3) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = \\frac{\\log(3)}{\\log\\left(\\frac{2}{3}\\right)}\\)</span><span class=\"prop\">(log a − log b = log(a/b))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\frac{\\log(3)}{\\log\\left(\\frac{2}{3}\\right)}\\right\\} \\text{, soit } x \\approx -2{,}710",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
  "3^(x+1)=2^x": {
   "cartes": [
    {
@@ -9409,6 +10684,135 @@
         "html": "Contrôlez à la calculatrice : \\(x = \\frac{4\\log(2)}{2\\log(4)} = 1\\).",
         "style": "etape",
         "type": "texte"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
+ "4^x-2^(x+1)=0": {
+  "cartes": [
+   {
+    "badge": "Isoler les exponentielles",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4^{x} - 2^{x + 1} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(4^{x} = 2^{x + 1}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4^{x} = 2^{x + 1}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(4^{x}) = \\log(2^{x + 1})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(4) = (x + 1) \\cdot \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(4) = x \\cdot \\log(2) + \\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(\\log(4) - \\log(2)) = \\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2)}{\\log(4) - \\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(4) - \\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(log a − log b = log(a/b))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{1\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "4^{x} - 2^{x + 1} = 0",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Isoler les exponentielles",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4^{x} - 2^{x + 1} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(4^{x} = 2^{x + 1}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Même base",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4^{x} = (2^{2})^{x} = 2^{2x}\\)</span><span class=\"prop\">((aᵐ)ⁿ = aᵐⁿ)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{2x} = 2^{x + 1}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2x = x + 1\\)</span><span class=\"prop\">(même base : a^A = a^B ⇔ A = B)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 1\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{1\\right\\}",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Isoler les exponentielles",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4^{x} - 2^{x + 1} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(4^{x} = 2^{x + 1}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4^{x} = 2^{x + 1}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(4^{x}) = \\log(2^{x + 1})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(4) = (x + 1) \\cdot \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(4) = x \\cdot \\log(2) + \\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(\\log(4) - \\log(2)) = \\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2)}{\\log(4) - \\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(4) - \\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(log a − log b = log(a/b))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{1\\right\\}",
+        "type": "resultat"
        }
       ],
       "style": "final",
@@ -11413,6 +12817,145 @@
  "e^-0,02t=1": {
   "erreur": "Mettez l'exposant entre parenthèses : e^(-0,02t).",
   "ok": false
+ },
+ "e^x+2^x=0": {
+  "cartes": [
+   {
+    "badge": "Isoler les exponentielles",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x} + 2^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(e^{x} = -2^{x}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Aucune solution",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-2^{x} &lt; 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\varnothing",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "e^{x} + 2^{x} = 0",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Isoler les exponentielles",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x} + 2^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(e^{x} = -2^{x}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Aucune solution",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-2^{x} &lt; 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\varnothing",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Isoler les exponentielles",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x} + 2^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(e^{x} = -2^{x}\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Aucune solution",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-2^{x} &lt; 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\varnothing",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
  },
  "e^x+e^(-x)=3": {
   "erreur": "Cet outil ne traite pas encore ce type d'équation.",

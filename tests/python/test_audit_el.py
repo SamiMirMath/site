@@ -140,6 +140,40 @@ class TestSignes(unittest.TestCase):
         self.assertEqual(el.tex_solution(corriger("3x-1=-ln(7)")), r"S = \left\{\frac{1 - \ln(7)}{3}\right\} \text{, soit } x \approx -0{,}315")
 
 
+class TestIsolerLesExponentielles(unittest.TestCase):
+    """Groupe 3 (T1, T5) : la carte « Isoler les exponentielles » vient d'abord, dans les deux méthodes ; une somme d'exponentielles nulle n'a aucune solution."""
+
+    def cartes(self, saisie, methode=el.METHODE_LOGARITHMES):
+        return [c["titre"] for c in corriger(saisie, methode)["etapes"]]
+
+    def test_un_terme_de_l_autre_cote(self):
+        self.assertEqual(lignes("2^x-3^(x+1)=0")[0], r"2^{x} - 3^{x + 1} = 0 \iff 2^{x} = 3^{x + 1} \quad \text{(on passe un terme de l'autre côté)}")
+        self.assertEqual(lignes("0=2*3^x-5*2^x")[0],
+                         r"0 = 2 \cdot 3^{x} - 5 \cdot 2^{x} \iff 2 \cdot 3^{x} = 5 \cdot 2^{x} \quad \text{(on passe un terme de l'autre côté)}")
+        for methode in el.METHODES:
+            self.assertEqual(self.cartes("2^x-3^(x+1)=0", methode)[0], "Isoler les exponentielles")
+        self.assertEqual(self.cartes("4^x-2^(x+1)=0", el.METHODE_MEME_BASE), ["Isoler les exponentielles", "Même base"])
+
+    def test_somme_nulle_aucune_solution(self):
+        for saisie in ["2^x+3^(x+1)=0", "e^x+2^x=0", "-2^x-5^x=0"]:
+            with self.subTest(saisie):
+                v = resultats(saisie)
+                self.assertEqual(rendu(v[el.METHODE_MEME_BASE]), rendu(v[el.METHODE_LOGARITHMES]))
+                self.assertEqual(self.cartes(saisie), ["Isoler les exponentielles", "Aucune solution"])
+                self.assertEqual(el.tex_solution(corriger(saisie)), r"S = \varnothing")
+        self.assertEqual(lignes("2^x+3^(x+1)=0"), [
+            r"2^{x} + 3^{x + 1} = 0 \iff 2^{x} = -3^{x + 1} \quad \text{(on passe un terme de l'autre côté)}",
+            r"2^{x} > 0 \quad \text{(une exponentielle est strictement positive)}", r"-3^{x + 1} < 0 \quad \text{(aucune solution)}"])
+
+    def test_deux_membres_negatifs_et_denominateur(self):
+        self.assertEqual(lignes("-2^x=-3^(x+1)")[0], r"-2^{x} = -3^{x + 1} \iff 2^{x} = 3^{x + 1} \quad \text{(on multiplie les deux membres par −1)}")
+        self.assertEqual(lignes("3^(x+1)/2^x=1")[0],
+                         r"\frac{3^{x + 1}}{2^{x}} = 1 \iff 3^{x + 1} = 2^{x} \quad \text{(on multiplie les deux membres par le dénominateur)}")
+
+    def test_produit_nul_d_une_difference(self):
+        self.assertEqual(self.cartes("(2^x-3^x)(5^x-25)=0"), ["Produit nul", "Facteur 1", "Facteur 2"])
+
+
 class TestMessages(unittest.TestCase):
     def test_logarithme_et_terme_en_x_ou_exponentielle_hors_programme(self):
         """Groupe 2 : un logarithme avec un terme en x ou une exponentielle (de part et d'autre, ou en facteur) n'est pas une équation du cours."""

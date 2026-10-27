@@ -894,7 +894,11 @@ PROP_EXPONENTIELLE = "exponentielle des deux membres"
 PROP_EXP_LOG = "10^(log(A)) = A, A > 0"
 PROP_EXP_LN = "e^(ln(A)) = A, A > 0"
 PROP_EXP_LOG_BASE = "a^(log_a(A)) = A, A > 0"
-PROPRIETES = frozenset({PROP_PUISSANCE, PROP_PRODUIT, PROP_UN, PROP_MEME_BASE, PROP_ISOLER, PROP_PRODUIT_NUL, PROP_DISCRIMINANT,
+PROP_AUTRE_COTE = "on passe un terme de l'autre côté"
+PROP_FOIS_MOINS_UN = "on multiplie les deux membres par −1"
+PROP_FOIS_DENOMINATEUR = "on multiplie les deux membres par le dénominateur"
+PROPRIETES = frozenset({PROP_AUTRE_COTE, PROP_FOIS_MOINS_UN, PROP_FOIS_DENOMINATEUR,
+                        PROP_PUISSANCE, PROP_PRODUIT, PROP_UN, PROP_MEME_BASE, PROP_ISOLER, PROP_PRODUIT_NUL, PROP_DISCRIMINANT,
                         PROP_DEFINITION_LOG, PROP_LOG_DEUX_MEMBRES, PROP_LOG_PUISSANCE, PROP_LOG_10K, PROP_LN_UN, PROP_EXPO_POSITIVE,
                         PROP_AUCUNE_SOLUTION, PROP_LOG_QUOTIENT, PROP_LOG_PRODUIT, PROP_LOG_REGROUPER, PROP_LOG_SOMME, PROP_LN_DEUX_MEMBRES, PROP_LN_PUISSANCE, PROP_CAR_LOG_10, PROP_CAR_LN_E, PROP_LOG_UN, PROP_EXPONENTIELLE, PROP_EXP_LOG, PROP_EXP_LN, PROP_EXP_LOG_BASE,
                         PROP_ISOLER_LOG, PROP_BIEN_DEFINI, PROP_BASE_LOG, PROP_SEULE_POSITIVE, PROP_LOG_BASE_PUISSANCE, PROP_LN_E_PUISSANCE,
@@ -1342,7 +1346,7 @@ def _vide(g, d, parse):
     if sg > 0 and sd > 0:
         return None
     if sg < 0 and sd < 0:
-        raise _Hors                                            # deux membres négatifs : pas encore traité
+        raise _Hors                                            # deux membres négatifs : « Isoler les exponentielles » les multiplie par −1
     if sg > 0 and fd is None and variables(g):                 # exponentielle = nombre négatif ou nul
         positif, autre, nul = g, d, sd == 0
     elif sd > 0 and fg is None and variables(d):
@@ -1859,8 +1863,55 @@ def _un_facteur(g, d, x, methode):
                     lambda: _definition(g, d, x), lambda: _message_meme_base(g, d, x))
 
 
+def _termes_signes(n):
+    """Les termes d'une somme avec leur signe : 2^x − 3^(x+1) donne [(1, 2^x), (−1, 3^(x+1))]."""
+    if isinstance(n, Op) and n.op in "+-":
+        droite = _termes_signes(n.b)
+        return _termes_signes(n.a) + (droite if n.op == "+" else [(-s, t) for s, t in droite])
+    if isinstance(n, Neg):
+        return [(-s, t) for s, t in _termes_signes(n.a)]
+    return [(1, n)]
+
+
+def _isoler_exponentielles(g, d, x):
+    """(g', d', chaîne) : l'équation récrite avec une exponentielle (ou un produit d'exponentielles) dans chaque membre, comme à la main :
+    a^P − b^Q = 0 ⇔ a^P = b^Q et a^P + b^Q = 0 ⇔ a^P = −b^Q (on passe un terme de l'autre côté) ; −a^P = −b^Q ⇔ a^P = b^Q (on multiplie
+    les deux membres par −1) ; u/v = c ⇔ u = c · v (on multiplie les deux membres par le dénominateur). _Hors sinon."""
+    for s, o, inverse in ((g, d, False), (d, g, True)):
+        termes = _termes_signes(s)
+        if _const(o) == 0 and len(termes) == 2 and all(_classe(t) == "exp" for _, t in termes):
+            (s1, t1), (s2, t2) = termes
+            if s1 < 0 < s2:
+                (s1, t1), (s2, t2) = (s2, t2), (s1, t1)
+            a, b = (t1, t2) if s1 * s2 < 0 else (t1, Neg(t2))
+            return a, b, Chaine([Eq(g, d), Eq(a, b)], ["⇔"], [PROP_AUTRE_COTE])
+        if isinstance(s, Op) and s.op == "/" and variables(s.b) and _classe(s.b) == "exp" and _classe(o) in ("cte", "exp"):
+            produit = s.b if _const(o) == 1 else Nb(0) if _const(o) == 0 else Op("*", o, s.b)
+            a, b = (produit, s.a) if inverse else (s.a, produit)
+            return a, b, Chaine([Eq(g, d), Eq(a, b)], ["⇔"], [PROP_FOIS_DENOMINATEUR])
+    if isinstance(g, Neg) and isinstance(d, Neg) and variables(g) and variables(d):
+        return g.a, d.a, Chaine([Eq(g, d), Eq(g.a, d.a)], ["⇔"], [PROP_FOIS_MOINS_UN])
+    raise _Hors
+
+
+def _apres_isolement(g, d, x, methode):
+    """La résolution de l'équation récrite par `_isoler_exponentielles`, précédée de la carte « Isoler les exponentielles » ; quand la résolution
+    commence elle-même par isoler l'exponentielle (8 = 2 · 2^x ⇔ 2^x = 4), les deux chaînes n'en font qu'une."""
+    g2, d2, chaine = _isoler_exponentielles(g, d, x)
+    r = dict(_resolution(g2, d2, x, methode))
+    etapes = list(r["etapes"])
+    if etapes and etapes[0]["titre"] in ("Isoler l'exponentielle", "Isoler les exponentielles") and len(etapes[0]["lignes"]) == 1:
+        suite = etapes.pop(0)["lignes"][0]
+        for e, lien, prop in zip(suite.elements[1:], suite.liens, suite.props):
+            chaine.ajouter(e, lien, prop)
+    r["etapes"] = [_carte("Isoler les exponentielles", [chaine])] + etapes
+    r["enonce"] = Eq(g, d)
+    return r
+
+
 def _resolution(g, d, x, methode):
-    return _essayer(lambda: _un_facteur(g, d, x, methode), lambda: _produit_nul(g, d, x, methode))
+    return _essayer(lambda: _un_facteur(g, d, x, methode), lambda: _produit_nul(g, d, x, methode),
+                    lambda: _apres_isolement(g, d, x, methode))
 
 
 @_avec_decimaux
@@ -2177,7 +2228,7 @@ def _produit_nul(g, d, x, methode):
     etapes = [_carte("Produit nul", [Chaine([Eq(g, d), Ou(Eq(f, Nb(0)) for f in facteurs)], ["⇔"], [PROP_PRODUIT_NUL])])]
     solutions = []
     for nom, f in zip(NOMS_FACTEURS, facteurs):
-        r = _un_facteur(f, Nb(0), x, methode)
+        r = _essayer(lambda: _un_facteur(f, Nb(0), x, methode), lambda: _apres_isolement(f, Nb(0), x, methode))
         etapes.append(_carte(nom, [l for c in r["etapes"] for l in c["lignes"]]))
         if r.get("message"):
             return _resultat("produit_nul", x, Eq(g, d), etapes, [], None, message=r["message"])
@@ -2432,6 +2483,16 @@ def _hors_arbre(n, nul=False):
 def hors_programme(g, d, x):
     """Vrai pour une équation dont le type n'est pas dans le cours : x · 2^x = 8, 2^x + 3^x = 5, x^x = 4, 2^x = x + 1, log(x) = x − 1, x · log(x) = 1,
     e^x = ln(x)."""
+    try:                                                   # 2^x − 3^(x+1) = 0 se ramène à 2^x = 3^(x+1)
+        g2, d2, _ = _isoler_exponentielles(g, d, x)
+        return hors_programme(g2, d2, x)
+    except _Hors:
+        pass
+    for p, z in ((g, d), (d, g)):                          # produit nul : chaque facteur
+        if _const(z) == 0 and isinstance(p, Op) and p.op == "*" and not variables(z):
+            facteurs = [f for f in _aplatir(p) if variables(f)]
+            if len(facteurs) > 1:
+                return any(hors_programme(f, Nb(0), x) for f in facteurs)
     egal_zero = lambda a, b: isinstance(b, Nb) and b.val == 0 and isinstance(a, Op) and a.op == "*"
     if _hors_arbre(g, egal_zero(g, d)) or _hors_arbre(d, egal_zero(d, g)):
         return True

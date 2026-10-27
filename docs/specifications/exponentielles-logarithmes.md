@@ -120,7 +120,7 @@ termine par `x(log 3 − log 2) = 0 ⇔ x = 0 (car log 3 − log 2 ≠ 0)`.
 et les termes en x sont réunis sur une ligne à part avant la mise en facteur : `e^x = 2^x ⇔ ln(e^x) = ln(2^x) ⇔ x = x·ln(2) ⇔ x − x·ln(2) = 0 ⇔ x(1 − ln(2)) = 0 ⇔ x = 0` (car 1 − ln(2) ≠ 0), S = {0} ;
 `e^x = 2^(x+1)` donne `x = ln(2) / (1 − ln(2))`, soit x ≈ 2,259. Avec une base e, aucun regroupement en un seul logarithme (le dénominateur contient le nombre 1 = ln e).
 
-**Signes** : `k · a^f` et `m · b^h` de signes contraires donnent S = ∅ (« une exponentielle est strictement positive », carte « Aucune solution ») ; deux membres négatifs (−2^x = −3^(x+1)) ne sont pas encore traités.
+**Signes** : `k · a^f` et `m · b^h` de signes contraires donnent S = ∅ (« une exponentielle est strictement positive », carte « Aucune solution ») ; deux membres négatifs (−2^x = −3^(x+1)) sont multipliés par −1 (carte « Isoler les exponentielles », corrections de l'audit, groupe 3).
 Hors de la méthode (message « pas encore », jamais « hors programme ») : un exposant du 2ᵉ degré ou plus (2^(x³) = 8), une somme d'exponentielles (message hors-programme si les bases diffèrent, EL-11). La base e est traitée depuis le 27.10.2026 (e^x = e^3, e^x = e^(x+1)).
 
 **Cartes de la méthode « définition du logarithme »** (étape 5, corrigé 2.15, 2.18, 2.21, 2.22 ; **remplacée le 27.10.2026 par l'exponentielle des deux membres**, voir la section suivante ; ce qui suit décrit les cartes avant ce changement, les écritures exactes et la Vérification restent) : « Isoler le logarithme » (si besoin : `2 log x − 5 = 0 ⇔ 2 log x = 5 ⇔ log x = 5/2`, propriété « on isole le logarithme »),
@@ -277,6 +277,11 @@ un commit par groupe ; les entrées sont dans `BATTERIE_AUDIT` (`tests/python/ca
    un coefficient de x² ou de x écrit avec des logarithmes différents mais nul ((log 0,5 + log 2)·x²) reste « pas encore » en méthode B, comme au premier degré.
 2. **Messages** : un logarithme avec un terme en x ou une exponentielle, de part et d'autre du signe = ou en facteur (`log(x) = x − 1`, `ln(x) = x`, `x · log(x) = 1`, `e^x = ln(x)`,
    `log(x) = 2^x`), est un vrai hors-programme (« Cette équation ne se résout pas avec les méthodes du cours. ») ; aucune forme que l'outil résout n'est classée hors programme.
+3. **Isoler les exponentielles** (carte « Isoler les exponentielles », avant toute méthode, dans les deux méthodes) : `a^P − b^Q = 0 ⇔ a^P = b^Q` et `a^P + b^Q = 0 ⇔ a^P = −b^Q`
+   (on passe un terme de l'autre côté), puis la carte « Aucune solution » (`a^P > 0`, `−b^Q < 0`) ; `−a^P = −b^Q ⇔ a^P = b^Q` (on multiplie les deux membres par −1) ;
+   `u/v = c ⇔ u = c · v` (on multiplie les deux membres par le dénominateur : `3^(x+1)/2^x = 1 ⇔ 3^(x+1) = 2^x`). Quand la suite commence par isoler l'exponentielle (`8 = 2 · 2^x ⇔ 4 = 2^x`),
+   la chaîne continue dans la même carte. Un facteur d'un produit nul s'isole de la même façon (`(2^x − 3^x)(5^x − 25) = 0`). Trois propriétés de plus dans la liste fermée :
+   (on passe un terme de l'autre côté), (on multiplie les deux membres par −1), (on multiplie les deux membres par le dénominateur).
 
 ## Pour les 2M (plus tard, hors de cette version)
 
