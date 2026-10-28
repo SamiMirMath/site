@@ -19,7 +19,7 @@ from math import gcd
 from noyau import analyser_complet
 from exp_log import (Chaine, Defini, E, Eq, Fn, Log, Message, Neg, Nb, Op, Ou, Pow, Texte, Var, _Hors, _arbre_poly, _avec_decimaux,
                      _base_du_logarithme, _carte, _const, _contient_log, _nb_exact, _nom_tex, _padd, _par_exponentielle, _pnet, _precis, _produit,
-                     _racine_entiere, _resoudre_polynome, _somme_arbres, _suite_polynome, _valeur_exacte, _valeur_rationnelle, _exposant_entier, _racine_primitive, logarithmique_m,
+                     _racine_entiere, _resoudre_polynome, _somme_arbres, _suite_polynome, _milieu_exact, _valeur_exacte, _valeur_rationnelle, _exposant_entier, _racine_primitive, logarithmique_m,
                      resolution_exponentielle, tex, tex_approx, valeur, variables, METHODE_LOGARITHMES, METHODE_MEME_BASE, METHODES, PROP_EXPONENTIELLE, PROP_ISOLER_LOG)
 
 __all__ = ["EnsembleDef", "ensemble_de_definition", "verification", "regrouper", "variantes_changement", "reconnu_changement", "corriger_equation",
@@ -604,7 +604,7 @@ def _regrouper(g, d, x):
         if v is None or v <= 0:
             raise _Hors
         exact = _valeur_exacte(puissance)
-        _par_exponentielle(carte2, logarithme, base, puissance, exact or puissance, [puissance] if exact is not None else ())
+        _par_exponentielle(carte2, logarithme, base, puissance, exact or puissance, _milieu_exact(puissance, exact))
         egal = (r, _Rap([_nb_exact(v)], []))
         titre = "Exponentielle des deux membres"
     else:

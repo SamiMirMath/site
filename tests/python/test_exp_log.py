@@ -14,6 +14,7 @@ import cas_el
 from cas_el import (BATTERIE_C1, BATTERIE_E1, BATTERIE_E2, BATTERIE_E3, BATTERIE_E4, SANS_E1, SANS_E2, SANS_E3)
 from aides_sortie import TUTOIEMENT, chaines_litterales
 import exp_log as el
+import resoudre_el as rel
 from exp_log import Nb, Var, E, Neg, Op, Pow, Fn, Log, Eq
 from noyau import ErreurSaisie
 
@@ -1714,6 +1715,44 @@ class TestControleCalculatrice(unittest.TestCase):
         self.assertIsNone(el._valeur_rationnelle(el.Op("/", L(1000001), L(1000000))))        # presque 1 : pas un rationnel
         self.assertIsNone(el._valeur_rationnelle(el.Fn("sqrt", el.Nb(2))))
         self.assertEqual(el._valeur_rationnelle(el.Fn("sqrt", el.Nb(4))), F(2))
+
+
+class TestPuissanceRationnelle(unittest.TestCase):
+    """Une puissance rationnelle d'un entier qui est un rationnel est simplifiée, avec sa justification (log_8(x) = 2/3 : x = 8^(2/3) = (2³)^(2/3) = 2² = 4) ;
+    la ligne « Contrôlez à la calculatrice » n'est jamais affichée sans son contenu."""
+
+    def test_valeurs_exactes(self):
+        P = lambda a, b: el.Pow(el.Nb(a), el.Nb(b))
+        self.assertEqual(el._const(P(8, F(2, 3))), F(4))
+        self.assertEqual(el._const(P(9, F(3, 2))), F(27))
+        self.assertEqual(el._const(P(F(1, 4), F(1, 2))), F(1, 2))
+        self.assertEqual(el._const(P(4, F(-3, 2))), F(1, 8))
+        self.assertIsNone(el._const(P(2, F(1, 2))))
+        self.assertIsNone(el._const(P(8, F(1, 2))))
+        self.assertIsNone(el._const(P(10, F(3, 2))))
+
+    def test_corrige_et_justification(self):
+        for saisie, solution, ligne in [("log8(x)=2/3", "4", r"8^{\frac{2}{3}} = (2^{3})^{\frac{2}{3}} = 2^{2} = 4"),
+                                        ("log_9(x)=3/2", "27", r"9^{\frac{3}{2}} = (3^{2})^{\frac{3}{2}} = 3^{3} = 27"),
+                                        ("log_4(x)=-3/2", r"\frac{1}{8}", r"(2^{2})^{-\frac{3}{2}} = 2^{-3} = \frac{1}{8}"),
+                                        ("log8(x)=1/3", "2", r"8^{\frac{1}{3}} = (2^{3})^{\frac{1}{3}} = 2\)")]:
+            with self.subTest(saisie):
+                for filiere in "CM":
+                    s = json.dumps(rel.resoudre(saisie, filiere), ensure_ascii=False).replace("\\\\", "\\")
+                    self.assertIn("S = \\left\\{" + solution + "\\right\\}", s)
+                    self.assertIn(ligne, s)
+                    self.assertNotIn("calculatrice : ,", s)
+
+    def test_jamais_de_controle_vide_ni_de_puissance_non_simplifiee(self):
+        for a in (2, 3, 4, 8, 9, 16, 25, 27, 32, 36, 64, 100, 125, "0,25", "0,01"):
+            for c in ("1/2", "3/2", "1/3", "2/3", "5/3", "3/4", "-1/2", "-3/2", "-2/3", "0,5", "1,5"):
+                for saisie in (f"log_{a}(x)={c}", f"log_{a}(2x+1)={c}", f"3log_{a}(x)={c}"):
+                    for filiere in "CM":
+                        s = json.dumps(rel.resoudre(saisie, filiere), ensure_ascii=False)
+                        with self.subTest(saisie, filiere=filiere):
+                            self.assertIsNone(re.search(r"calculatrice : ?[,.]", s))
+                            if isinstance(a, int) and saisie.endswith(f"(x)={c}") and not saisie.startswith("3") and el._puissance_rationnelle_exacte(F(a), F(c.replace(",", "."))) is not None:
+                                self.assertNotIn(r"^{\frac", json.dumps(rel.resoudre(saisie, filiere)["cartes"][-1], ensure_ascii=False))
 
 
 class TestNotationSuisse(unittest.TestCase):

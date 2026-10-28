@@ -69,6 +69,8 @@ BATTERIE_E4 = [
     ("log_x(1/16)=4", [0.5]),
     # base inconnue dont la racine n'est pas exacte : √255, 2^(1/3), 12^(1/4), √(5/2), x = 7
     ("log_x(255)=2", [15.969]), ("log_x(2)=3", [1.260]), ("log_x(12)=4", [1.861]), ("log_x(5/2)=2", [1.581]), ("log_x(7)=1", [7.0]), ("log(log(x))=1", [1e10]),
+    # puissance rationnelle d'un entier qui est un rationnel : 8^(2/3) = 4, 9^(3/2) = 27 (Javet 3.5 b c)
+    ("log8(x)=2/3", [4.0]), ("log_9(x)=3/2", [27.0]), ("log_0,01(x)=1/2", [0.1]), ("log_4(x)=-3/2", [0.125]), ("log_8(x)=1/3", [2.0]),
     ("log5(x)=-2", [0.04]), ("ln(ln(x))=0", [2.718]), ("log(log(x-1))=0", [11.0]),
 ]
 

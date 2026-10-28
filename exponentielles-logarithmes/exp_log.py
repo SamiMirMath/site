@@ -684,6 +684,22 @@ def _racine_carree(q):
     return F(a, b) if a * a == q.numerator and b * b == q.denominator else None
 
 
+def _racine_entiere_exacte(n, q):
+    """La racine q-ième entière exacte de l'entier n ≥ 0, ou None."""
+    r = round(n ** (1 / q))
+    return next((c for c in (r - 1, r, r + 1) if c >= 0 and c ** q == n), None)
+
+
+def _puissance_rationnelle_exacte(a, b):
+    """a^b (a > 0 rationnel, b rationnel non entier) quand c'est un rationnel (8^(2/3) = 4, 9^(3/2) = 27, (1/4)^(1/2) = 1/2) ; None sinon."""
+    if a <= 0 or b.denominator > 12:
+        return None
+    num, den = (_racine_entiere_exacte(a.numerator, b.denominator), _racine_entiere_exacte(a.denominator, b.denominator))
+    if num is None or den is None or num == 0:
+        return None
+    return (F(num, den)) ** b.numerator
+
+
 def _const(n):
     """Valeur exacte (Fraction) d'un arbre sans inconnue, ou None si elle n'est pas rationnelle."""
     if isinstance(n, Nb):
@@ -704,8 +720,10 @@ def _const(n):
         return None if b == 0 else a / b
     if isinstance(n, Pow):
         a, b = _const(n.a), _const(n.b)
-        if a is None or b is None or b.denominator != 1 or abs(b) > 64 or (a == 0 and b < 0):
+        if a is None or b is None or abs(b) > 64 or (a == 0 and b < 0):
             return None
+        if b.denominator != 1:
+            return _puissance_rationnelle_exacte(a, b)
         return a ** int(b)
     if isinstance(n, Fn):
         a = _const(n.a)
@@ -2601,6 +2619,23 @@ def _base_du_logarithme(base):
     return base, v
 
 
+def _milieu_exact(puissance, exact):
+    """Les écritures entre a^c et sa valeur : a^c seul, ou pour une puissance rationnelle d'un entier la justification
+    8^(2/3) = (2³)^(2/3) = 2² = 4 (a = r^k avec r le plus petit entier possible)."""
+    if exact is None:
+        return ()
+    milieu = [puissance]
+    a, c = (_const(puissance.a), _const(puissance.b)) if isinstance(puissance, Pow) else (None, None)
+    if a is not None and c is not None and c.denominator != 1 and a.denominator == 1 and a > 1:
+        r = _racine_primitive(a)
+        k = _exposant_entier(a, r)
+        if r != a and k is not None:
+            milieu.append(Pow(Pow(Nb(r), Nb(k)), puissance.b))
+            if k * c != 1:
+                milieu.append(Pow(Nb(r), Nb(k * c)))
+    return milieu
+
+
 def _par_exponentielle(chaine, courant, base, puissance, resultat, milieu=()):
     """log_a(u) = c ⇔ a^(log_a(u)) = a^c (exponentielle des deux membres) ⇔ u = a^c (a^(log_a(A)) = A, A > 0) : deux lignes par logarithme.
     `courant` : le logarithme, `base` : sa base (nœud), `puissance` : a^c, `resultat` : la valeur de u, `milieu` : les écritures intermédiaires."""
@@ -2655,7 +2690,7 @@ def _logarithmique(g, d, x, filiere_m=False):
         if not isinstance(courant.a, Log):
             break
         exact = _valeur_exacte(puissance)
-        _par_exponentielle(chaine, courant, base, puissance, exact or puissance, [puissance] if exact is not None else ())
+        _par_exponentielle(chaine, courant, base, puissance, exact or puissance, _milieu_exact(puissance, exact))
         rhs, courant = exact or puissance, courant.a
     u = courant.a
     if not variables(u) or not _est_polynome(u):
@@ -2663,7 +2698,7 @@ def _logarithmique(g, d, x, filiere_m=False):
     lignes, remarque = [chaine], None
     if isinstance(u, Var):
         exact = _valeur_exacte(puissance)
-        _par_exponentielle(chaine, courant, base, puissance, exact or puissance, [puissance] if exact is not None else ())
+        _par_exponentielle(chaine, courant, base, puissance, exact or puissance, _milieu_exact(puissance, exact))
         solutions = [exact or puissance]
     else:
         f = _poly(u, x)
@@ -2698,7 +2733,7 @@ def _logarithmique(g, d, x, filiere_m=False):
                 lignes += l_poly[1:]
             elif f == [0, 0, 1]:                              # log(x²) = c : x² = 10^c ⇔ x = ±√(10^c), jamais 2 log(x)
                 exact = _valeur_exacte(puissance)
-                _par_exponentielle(chaine, courant, base, puissance, exact or puissance, [puissance] if exact is not None else ())
+                _par_exponentielle(chaine, courant, base, puissance, exact or puissance, _milieu_exact(puissance, exact))
                 suite, solutions, remarque = _suite_polynome(chaine, f, u, exact or puissance, x)
                 lignes += suite
             else:
@@ -3067,6 +3102,8 @@ def controle_calculatrice(r):
         morceaux = _morceaux_rationnels(n)
         if morceaux == [n]:
             return "Contrôlez à la calculatrice : " + ecrire(f"{x} = {tex(n)} = {val(n)}") + "."
+        if not morceaux:
+            return None                                    # jamais « Contrôlez à la calculatrice : , on retrouve… » sans rien à contrôler
         citations = " ; ".join(ecrire(f"{tex(m)} = {val(m)}") for m in morceaux)
         return f"Contrôlez à la calculatrice : {citations}, on retrouve " + ecrire(f"{x} = {val(n)}") + "."
     return "Contrôlez à la calculatrice : on retrouve " + " ou ".join(ecrire(f"{x} = {val(n)}") for n in sols) + "."
