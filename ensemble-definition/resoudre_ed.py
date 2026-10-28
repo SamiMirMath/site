@@ -26,7 +26,9 @@ def _entete(r):
     return so.carte("Fonction", [so.formule(_enonce(r)), so.texte(phrase, style="discret")], titre_masque=True)
 
 
-def _carte_condition(c):
+def blocs_condition(c):
+    """Les blocs d'une condition d'existence (`c` : un élément de `analyser(...)["conditions"]`) : l'inégalité (sauf si la première ligne l'écrit
+    déjà), les lignes de la résolution et le tableau de signes. Réutilisé par l'outil Exponentielles et logarithmes (filière M)."""
     # le titre ne porte pas l'inégalité quand la première ligne l'écrit déjà (« condition ⇔ solution »)
     ecrite = any(it["type"] == "texte" and it["html"].startswith("\\(" + c["cond_tex"]) for it in c["etapes"])
     blocs = [] if ecrite else [so.formule(c["cond_tex"])]
@@ -37,18 +39,27 @@ def _carte_condition(c):
             blocs.append(so.texte(it["html"], style="etape"))
     if not c["resolu"]:
         blocs.append(so.erreur("Condition non résolue."))
-    return so.carte(f"Condition {c['num']}", blocs, badge=c["titre"], detail=c.get("detail"))
+    return blocs
 
 
-def _carte_finale(r):
+def _carte_condition(c):
+    return so.carte(f"Condition {c['num']}", blocs_condition(c), badge=c["titre"], detail=c.get("detail"))
+
+
+def blocs_ensemble(r):
+    """Les blocs de la conclusion « ED = … » (`r` : le résultat de `analyser`), ou l'erreur quand une condition n'a pas pu être résolue."""
     if not r["complet"]:
-        return so.carte("Ensemble de définition", [so.erreur("Une condition n'a pas pu être résolue : l'ED n'est pas calculé.")], style="final", titre_masque=True)
+        return [so.erreur("Une condition n'a pas pu être résolue : l'ED n'est pas calculé.")]
     if not r["conditions"]:
-        return so.carte("Ensemble de définition", [so.resultat("ED = \\mathbb{R}")], style="final", titre_masque=True)
+        return [so.resultat("ED = \\mathbb{R}")]
     blocs = [so.resultat("ED = " + (r["inter_tex"] + " = " if r.get("inter_tex") else "") + r["ED_tex"])]
     if "approx" in r["ED_tex"]:
         blocs.append(so.texte("Les valeurs précédées de ≈ ont été obtenues numériquement.", style="indice"))
-    return so.carte("Ensemble de définition", blocs, style="final", titre_masque=True)
+    return blocs
+
+
+def _carte_finale(r):
+    return so.carte("Ensemble de définition", blocs_ensemble(r), style="final", titre_masque=True)
 
 
 def resoudre(entree):

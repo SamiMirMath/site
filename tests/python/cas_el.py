@@ -169,6 +169,15 @@ ERREURS_DE_LECTURE = ["", "2e=5", "x+y=3", "x<3", "2^x>=3", "log_1(x)=2", "log x
                       "(x+1=3", "x+1)=3"]
 
 
+# Filière M (T35) : équations propres aux 2M (ensemble de définition, regroupement, vérification, changement de variable) ; complétée aux étapes 2 à 4.
+BATTERIE_M = []
+
+
+def entrees_el_m():
+    """Entrées de l'instantané de la filière M : les équations logarithmiques de la 3C (avec ensemble de définition en M) et BATTERIE_M."""
+    return list(dict.fromkeys([s for s, _ in BATTERIE_E4] + [s for s, _ in BATTERIE_M]))
+
+
 def entrees_el():
     """Toutes les entrées de l'outil, sans doublon, dans l'ordre : équations résolues, calculs, messages, erreurs de lecture."""
     saisies = [s for batterie in (BATTERIE_E1, BATTERIE_E2, BATTERIE_E3, BATTERIE_E4, BATTERIE_C1, BATTERIE_AUDIT, BATTERIE_APPLICATIONS) for s, _ in batterie]

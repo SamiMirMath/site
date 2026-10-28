@@ -75,7 +75,10 @@ def _option(s, r):
     return so.option("interpretation", el.LIBELLE_INTERPRETATION, [_carte_interpretation(inter)], el.suggere_interpretation(s))
 
 
-def resoudre(entree):
+def resoudre(entree, filiere="C"):
+    """`filiere` : "C" (3C, sans ensemble de définition) ou "M" (2Ms et 2Mr ; identique à "C" tant que exp_log_m.py n'est pas branché)."""
+    if filiere not in el.FILIERES:
+        return so.sortie_erreur(el.MESSAGE_FILIERE)
     try:
         s = el.analyser_saisie(entree)
     except ErreurSaisie as e:
@@ -101,5 +104,5 @@ def resoudre(entree):
     return so.sortie_ok(el.tex_saisie(s.g, s.d), _cartes_equation(r), option=_option(s, r))
 
 
-def resoudre_json(entree):
-    return json_strict(resoudre(entree))
+def resoudre_json(entree, filiere="C"):
+    return json_strict(resoudre(entree, filiere))
