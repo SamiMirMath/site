@@ -1954,6 +1954,94 @@
   "erreur": "Cet outil ne traite pas encore ce type d'équation.",
   "ok": false
  },
+ "2log(x)+log(3)=log(1/4)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\log(x) + \\log(3) = \\log\\left(\\frac{1}{4}\\right)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(x^{2}) + \\log(3) = \\log\\left(\\frac{1}{4}\\right)\\)</span><span class=\"prop\">(k · log u = log(u^k), sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3x^{2}) = \\log\\left(\\frac{1}{4}\\right)\\)</span><span class=\"prop\">(log u + log v = log(uv), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(3x^{2}) = \\log\\left(\\frac{1}{4}\\right)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3x^{2} = \\frac{1}{4}\\)</span><span class=\"prop\">(log u = log v ⇔ u = v, sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\frac{1}{12}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{\\frac{1}{12}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{\\frac{1}{12}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} \\approx -0{,}289 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x) n'est pas défini : x &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} \\approx 0{,}289\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\sqrt{\\frac{1}{12}}\\right\\} \\text{, soit } x \\approx 0{,}289",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2\\log(x) + \\log(3) = \\log\\left(\\frac{1}{4}\\right)",
+  "erreur": null,
+  "ok": true
+ },
  "2log(x)-5=0": {
   "cartes": [
    {
@@ -9382,6 +9470,118 @@
    }
   ],
   "enonce_tex": "\\log(x^{2}) + \\log(3) = 10",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x^2)+log(5)=-1": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "On met \\(x^{2}\\) en évidence : \\(x^{2} = x^{2}\\left(1\\right)\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2}"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "\\(x^{2} > 0 \\iff x \\in \\mathbb{R} \\setminus \\left\\{0\\right\\}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x^{2}) + \\log(5) = -1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5x^{2}) = -1\\)</span><span class=\"prop\">(log u + log v = log(uv), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(5x^{2}) = -1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{\\log(5x^{2})} = 10^{-1}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(5x^{2} = 10^{-1} = \\frac{1}{10}\\)</span><span class=\"prop\">(10^(log(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\frac{1}{50}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{\\frac{1}{50}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{\\frac{1}{50}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} \\approx -0{,}141\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} \\approx 0{,}141\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}141 \\text{ ou } x \\approx 0{,}141",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x^{2}) + \\log(5) = -1",
   "erreur": null,
   "ok": true
  },

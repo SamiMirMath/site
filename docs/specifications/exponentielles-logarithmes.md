@@ -416,6 +416,8 @@ Reste « pas encore » en M (au programme mais hors de l'outil) : exposant √x 
 **M7. `log(x − 3) + log(1 − x) = 0`** : ED = ∅, S = ∅.
 **M8. `3ˣ + 9ˣ = 90`** : `t = 3ˣ > 0`, `t² + t − 90 = 0`, t = −10 rejetée (une exponentielle est strictement positive), t = 9 ⇔ 3ˣ = 9 ⇔ x = 2. **`e^(4x) − 29e^(2x) = −100`** : `t = e^(2x)`, `t² − 29t + 100 = 0`, t = 4 ou t = 25, x = ln(4)/2 ≈ 0,693 ou x = ln(25)/2 ≈ 1,609.
 
+**Audit du 28.10.2026 (étape 8)** : corpus généré de 3 251 saisies M (sommes, différences, k·log, log = log avec constantes, log(x²), trois logarithmes, ED vides, constantes seules, base inconnue, changement de variable), oracle numpy + bissection indépendant du moteur : OK 2 733, refus par un message prévu 464 (degré ≥ 3 après k·log avec k ≥ 3 et argument linéaire, coefficients non entiers, racines irrationnelles de t), exception 0 ; les 42 écarts de l'oracle sont des racines doubles ou des ED très étroits que le balayage ne voit pas, vérifiés à 50 chiffres (mpmath) : le moteur a raison dans les 42 cas ; 12 saisies dégénérées (`k·4^x − k = 0`, exponentielle simple) sont résolues par la méthode de la 3C. Correction trouvée par l'audit : `a·x² = c` avec c non entier (`log(x²) + log(5) = −1`) donne x₁ = −√(1/50), x₂ = √(1/50). Les sorties C sont inchangées (instantané C, 3 100 entrées, et suite de pages).
+
 ## Critères d'acceptation de la filière M
 
 | Id | Critère | Vérif. |

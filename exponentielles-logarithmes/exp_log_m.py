@@ -460,9 +460,14 @@ def _resoudre_egalite(chaine, At, Bt, x):
     A, B = _pq(At), _pq(Bt)
     P = _padd(A, B, -1)
     if len(P) <= 3:
-        l_poly, solutions, remarque = _resoudre_polynome(A, B, At, Bt, x)
-        if (solutions and any(_const(s) is None for s in solutions) and len(P) == 3 and P[1] == 0
-                and len(A) == 3 and A[1] == 0 and len(B) == 1 and not variables(Bt)):       # a·x² + q = c : x² = k, x = ±√k (x₁ et x₂ nommés)
+        carre_pur = len(P) == 3 and P[1] == 0 and len(A) == 3 and A[1] == 0 and len(B) == 1 and not variables(Bt)         # a·x² + q = c
+        try:
+            l_poly, solutions, remarque = _resoudre_polynome(A, B, At, Bt, x)
+        except _Hors:
+            if not carre_pur:
+                raise
+            return _suite_polynome(chaine, A, At, Bt, x)                                    # coefficients non entiers (5x² = 1/10) : x² = k
+        if solutions and any(_const(s) is None for s in solutions) and carre_pur:         # x² = k, x = ±√k (x₁ et x₂ nommés)
             return _suite_polynome(chaine, A, At, Bt, x)
         premiere = l_poly[0]
         for e, lien, prop in zip(premiere.elements[1:], premiere.liens, premiere.props):

@@ -192,6 +192,7 @@ BATTERIE_M = [
     ("log(x)+log(x+3)=2", [8.612]), ("log(x)+log(x-1)+3=5", [10.512]), ("1=log(x)+log(x-1)", [3.702]),
     ("log(x)-log(x-1)=log(2)", [2.0]), ("2log(x)=log(x+6)", [3.0]), ("-log(x)+log(x+1)=log(2)", [1.0]), ("log3(x)+log3(x-2)=1", [3.0]),
     ("ln(x)+ln(x+1)=ln(6)", [2.0]), ("log(x^2)-log(x)=1", [10.0]), ("log(x-1)=log(3)+log(x)-log(2)", []),
+    ("log(x^2)+log(5)=-1", [-0.141, 0.141]), ("2log(x)+log(3)=log(1/4)", [0.289]),
 ]
 
 # 2ᵉ degré en aˣ (filière M seulement) : (saisie, solutions arrondies à 10⁻³), les deux méthodes donnent le même S ; Amaudruz 6.1 c i j k l, 7.8 i

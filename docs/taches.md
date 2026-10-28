@@ -513,6 +513,7 @@ l'élève, un « Calcul en cours… » qui dure parce que SymPy se charge encore
   5 pool M · 6 page (worker à plusieurs arguments, interrupteur) · 7 registre et accueil · 8 audit avant/après (**arrêt : relecture à l'écran**).
 - **Fichiers** : `exponentielles-logarithmes/exp_log_m.py` (nouveau), `resoudre_el.py`, `index.html`, `ensemble-definition/resoudre_ed.py`, `moteur/manifeste.json`, `commun/worker-pyodide.js`, `commun/outil.js`, `commun/registre.json`, `index.html`, tests.
 - **Vérification** : EL-26 à EL-34 ; suite Python et suite de pages vertes ; instantanés C et ED inchangés.
+- **État (28.10.2026)** : étapes 0 à 8 commitées, rien poussé (eb4084c … dernier commit « étape 8 »). **Arrêt : relecture à l'écran par l'enseignant** (`?filiere=M`, exemples M1 à M8, pool M, accueil 2Ms et 2Mr), puis éventuelles retouches.
 
 ## Plus tard (hors plan, si les tests tiennent)
 

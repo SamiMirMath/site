@@ -1340,6 +1340,65 @@
   ],
   "progression_finale": ""
  },
+ "2log(x)+log(3)=log(1/4)": {
+  "au_depart": {
+   "progression": "Étape 1 / 5",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Regroupement des logarithmes⟦2\\log(x) + \\log(3) = \\log\\left(\\frac{1}{4}\\right)⟧⟦\\iff⟧⟦\\log(x^{2}) + \\log(3) = \\log\\left(\\frac{1}{4}\\right)⟧(k · log u = log(u^k), sur l'ED)⟦\\iff⟧⟦\\log(3x^{2}) = \\log\\left(\\frac{1}{4}\\right)⟧(log u + log v = log(uv), sur l'ED)",
+    "titre": "Étape 2Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Égalité des logarithmes⟦\\log(3x^{2}) = \\log\\left(\\frac{1}{4}\\right)⟧⟦\\iff⟧⟦3x^{2} = \\frac{1}{4}⟧(log u = log v ⇔ u = v, sur l'ED)⟦\\iff⟧⟦x^{2} = \\frac{1}{12}⟧⟦x_{1} = -\\sqrt{\\frac{1}{12}}⟧⟦x_{2} = \\sqrt{\\frac{1}{12}}⟧",
+    "titre": "Étape 3Égalité des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Vérification⟦x_{1} \\approx -0{,}289 \\notin ED⟧(rejetée : log(x) n'est pas défini : x < 0)⟦x_{2} \\approx 0{,}289⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 4Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\sqrt{\\frac{1}{12}}\\right\\} \\text{, soit } x \\approx 0{,}289⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 5 / 5"
+ },
  "2log(x)-5=0": {
   "au_depart": {
    "progression": "Étape 1 / 5",
@@ -7115,6 +7174,126 @@
     "listes": [],
     "tableaux": [],
     "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -57\\text{’}735{,}027 \\text{ ou } x \\approx 57\\text{’}735{,}027⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 5 / 5"
+ },
+ "log(x^2)+log(5)=-1": {
+  "au_depart": {
+   "progression": "Étape 1 / 5",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x^{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithmeOn met ⟦x^{2}⟧ en évidence : ⟦x^{2} = x^{2}\\left(1\\right)⟧⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦x^{2}⟧+0+⟦x^{2} > 0 \\iff x \\in \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Regroupement des logarithmes⟦\\log(x^{2}) + \\log(5) = -1⟧⟦\\iff⟧⟦\\log(5x^{2}) = -1⟧(log u + log v = log(uv), sur l'ED)",
+    "titre": "Étape 2Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Exponentielle des deux membres⟦\\log(5x^{2}) = -1⟧⟦\\iff⟧⟦10^{\\log(5x^{2})} = 10^{-1}⟧(exponentielle des deux membres)⟦\\iff⟧⟦5x^{2} = 10^{-1} = \\frac{1}{10}⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦x^{2} = \\frac{1}{50}⟧⟦x_{1} = -\\sqrt{\\frac{1}{50}}⟧⟦x_{2} = \\sqrt{\\frac{1}{50}}⟧",
+    "titre": "Étape 3Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Vérification⟦x_{1} \\approx -0{,}141⟧(dans l'ensemble de définition ✓)⟦x_{2} \\approx 0{,}141⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 4Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}141 \\text{ ou } x \\approx 0{,}141⟧",
     "titre": "Solution"
    }
   ],
