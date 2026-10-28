@@ -15,7 +15,9 @@
 ## Registre `commun/registre.json`
 
 Source unique de la liste des outils, lue par les tests (l'accueil reste du HTML écrit à la main). Fait en T22 : 6 outils, 13 cartes
-(année I : 3, année II : 2, année III : 8). `parametres` et `descriptions` (par filière) n'existent pas encore : ils arrivent avec T27.
+(année I : 3, année II : 2, année III : 8). `parametres` (requête ajoutée au lien) et `descriptions` (texte propre à une filière) sont facultatifs, par filière : T35 les utilise pour
+Exponentielles et logarithmes en 2Ms et 2Mr (`?filiere=M`, description « Équations exponentielles et logarithmiques avec ensemble de définition, étape par étape. ») ; le simplexe les aura avec T27.
+Avec T35 : 7 outils, 16 cartes (année I : 3, année II : 4, année III : 9). Les tests lisent `parametres` et `descriptions` (ACC-01).
 
 ```json
 {
@@ -57,7 +59,7 @@ diffère selon la filière.
 |---|---|---|
 | ACC-01 | L'ensemble des couples (année, filière, chemin, titre, description) présents dans `index.html` est exactement celui du registre | [auto-py] |
 | ACC-02 | Chaque `chemin` du registre existe et contient un `index.html` | [auto-py] |
-| ACC-03 | Sans JavaScript, tous les liens d'outils sont visibles (aucune règle CSS ne masque `#content` hors de `html[data-js]`) ; les 13 cartes du registre | [auto-py] (analyse CSS) + [auto-page] JS désactivé |
+| ACC-03 | Sans JavaScript, tous les liens d'outils sont visibles (aucune règle CSS ne masque `#content` hors de `html[data-js]`) ; les 16 cartes du registre | [auto-py] (analyse CSS) + [auto-page] JS désactivé |
 | ACC-04 | Avec JS, choisir « Ms » masque les années sans outil Ms et affiche le choix courant | [auto-page] |
 | ACC-05 | Le texte doré (`--gold`) a un contraste ≥ 4,5:1 sur `--paper` et `--paper-raised` (ex. `#84672c` : 4,9:1) ; le mode sombre reste ≥ 4,5:1 | [auto-py] |
 | ACC-06 | L'animation ne consomme aucune image (`requestAnimationFrame`) quand le canvas est hors écran | [auto-page] |

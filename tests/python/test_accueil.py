@@ -77,7 +77,7 @@ def attendu():
     for o in REGISTRE["outils"]:
         for annee, filieres in o["filieres"].items():
             for f in filieres:
-                cellules[(annee, f)].append((o["chemin"], o["titre"], o["description"]))
+                cellules[(annee, f)].append((o["chemin"] + o.get("parametres", {}).get(f, ""), o["titre"], o.get("descriptions", {}).get(f, o["description"])))
     return cellules
 
 

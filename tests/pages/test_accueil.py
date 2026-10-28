@@ -37,9 +37,10 @@ class TestAccueil(unittest.TestCase):
         page.taille(largeur, hauteur, sombre=sombre)
         return page
 
-    def test_le_registre_donne_14_liens(self):
-        """Année I : 3 (C, Ms, Mr) ; année II : 2 (C, Mr) ; année III : 9 (4 outils × Ms, Mr + 1 en C) = 14 cartes pour 7 outils distincts."""
-        self.assertEqual((LIENS, len(REGISTRE["outils"])), (14, 7))
+    def test_le_registre_donne_16_liens(self):
+        """Année I : 3 (C, Ms, Mr) ; année II : 4 (simplexe en C et Mr, Exponentielles et logarithmes en Ms et Mr) ; année III : 9 (4 outils × Ms, Mr + 1 en C)
+        = 16 cartes pour 7 outils distincts."""
+        self.assertEqual((LIENS, len(REGISTRE["outils"])), (16, 7))
 
     def test_acc03_sans_javascript_tous_les_liens_sont_visibles(self):
         page = self.ouvrir()
@@ -52,7 +53,9 @@ class TestAccueil(unittest.TestCase):
         self.assertEqual(page.evaluer("document.querySelector('#gate').offsetParent"), None)           # la porte (boutons sans effet) est cachée
         self.assertEqual(page.evaluer(ANNEES_VISIBLES), [True, True, True])
         hrefs = page.evaluer("[...document.querySelectorAll('.tool a')].map(a => a.getAttribute('href'))")
-        self.assertEqual(set(hrefs), {o["chemin"] for o in REGISTRE["outils"]})
+        attendus = {o["chemin"] + q for o in REGISTRE["outils"] for q in [""] + list(o.get("parametres", {}).values())}
+        self.assertEqual({h.split("?")[0] for h in hrefs}, {o["chemin"] for o in REGISTRE["outils"]})
+        self.assertLessEqual(set(hrefs), attendus)                                    # chaque lien est un chemin du registre, avec la requête de sa filière s'il y en a une
         page.appel("Emulation.setScriptExecutionDisabled", value=False)
 
     def test_acc04_choix_de_la_filiere(self):
@@ -63,11 +66,13 @@ class TestAccueil(unittest.TestCase):
         # sans choix : la porte, pas les outils
         self.assertEqual(page.evaluer("document.querySelector('#gate').offsetParent !== null"), True)
         self.assertEqual(page.evaluer(LIENS_VISIBLES), 0)
-        # Ms : année II (rien en Ms) masquée, filière affichée
+        # Ms : les trois années (l'année II porte Exponentielles et logarithmes, lien ?filiere=M), filière affichée
         page.evaluer("document.querySelector('[data-choose=\"Ms\"]').click()")
-        self.assertEqual(page.evaluer(ANNEES_VISIBLES), [True, False, True])
+        self.assertEqual(page.evaluer(ANNEES_VISIBLES), [True, True, True])
         self.assertEqual(page.evaluer("document.querySelector('#currentTrack').textContent"), "Ms")
-        self.assertEqual(page.evaluer(LIENS_VISIBLES), 1 + 4)
+        self.assertEqual(page.evaluer(LIENS_VISIBLES), 1 + 1 + 4)
+        self.assertEqual(page.evaluer("[...document.querySelectorAll('.track[data-track=Ms] .tool a')].map(a => a.getAttribute('href')).filter(h => h.includes('exponentielles'))"),
+                         ["exponentielles-logarithmes/?filiere=M"])
         # C : trois années (l'année III porte Exponentielles et logarithmes)
         page.evaluer("document.querySelector('#switchBtn').click()")
         self.assertEqual(page.evaluer("document.querySelector('#gate').offsetParent !== null"), True)

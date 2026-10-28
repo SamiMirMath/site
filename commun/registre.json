@@ -1,5 +1,5 @@
 {
-  "_note": "Source unique de la liste des outils (T22). L'accueil (index.html) reste du HTML écrit à la main : tests/python/test_accueil.py vérifie qu'il contient exactement ces outils, dans cet ordre, pour chaque année et chaque filière (ACC-01). « filieres » : année (1, 2, 3) -> filières. Un outil de plus = une entrée ici + sa carte dans index.html. Pas encore de « parametres » ni de « descriptions » par filière : le simplexe les aura avec T27 (liens ?methode=…, ACC-08).",
+  "_note": "Source unique de la liste des outils (T22). L'accueil (index.html) reste du HTML écrit à la main : tests/python/test_accueil.py vérifie qu'il contient exactement ces outils, dans cet ordre, pour chaque année et chaque filière (ACC-01). « filieres » : année (1, 2, 3) -> filières. Un outil de plus = une entrée ici + sa carte dans index.html. « parametres » (requête ajoutée au lien) et « descriptions » (texte propre à une filière) sont facultatifs, par filière : l'outil Exponentielles et logarithmes les utilise pour 2Ms et 2Mr (?filiere=M, T35) ; le simplexe les aura avec T27 (liens ?methode=…, ACC-08).",
   "outils": [
     {
       "id": "factorisation",
@@ -48,7 +48,10 @@
       "chemin": "exponentielles-logarithmes/",
       "titre": "Exponentielles et logarithmes",
       "description": "Équations exponentielles et logarithmiques, calcul de logarithmes, étape par étape.",
-      "filieres": {"3": ["C"]}
+      "filieres": {"2": ["Ms", "Mr"], "3": ["C"]},
+      "parametres": {"Ms": "?filiere=M", "Mr": "?filiere=M"},
+      "descriptions": {"Ms": "Équations exponentielles et logarithmiques avec ensemble de définition, étape par étape.",
+                       "Mr": "Équations exponentielles et logarithmiques avec ensemble de définition, étape par étape."}
     }
   ]
 }
