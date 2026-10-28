@@ -1,7 +1,10 @@
 """T33 (applications, étape 1) — Outil « Exponentielles et logarithmes » : lecture d'un problème d'application (EL-22) :
 casse des lettres, noms indexés (C0, V_0), signe %, paramètre à simplifier et message à deux inconnues."""
+import re
 import unittest
 from fractions import Fraction as F
+
+import mpmath as mp
 
 import moteurs  # noqa : met les moteurs dans sys.path
 import exp_log as el
@@ -312,6 +315,194 @@ class TestBaseCalculee(unittest.TestCase):
         sortie = rel.resoudre("x*(1+0,04)^x=8")
         self.assertFalse(sortie["ok"])
         self.assertEqual(sortie["erreur"], el.MESSAGE_HORS_PROGRAMME)
+
+
+# ---------------------------------------------------------------------
+# Étape 4 : interpretation en années, mois et jours (EL-23, règle R16)
+# ---------------------------------------------------------------------
+OR = mp.MPContext()          # contexte isolé : 50 chiffres, sans toucher à la précision globale de mpmath
+OR.dps = 50
+
+
+def duree_de_reference(x):
+    """Oracle indépendant du moteur : la durée est arrondie au jour supérieur (T jours, 1 an = 360 jours, 1 mois = 30 jours), puis décomposée.
+    x : Fraction (exact) ou mpf à 50 chiffres."""
+    if isinstance(x, F):
+        T = -((-x * 360).__floor__())
+    else:
+        T = int(OR.ceil(360 * x))
+    return (T // 360, (T % 360) // 30, T % 30)
+
+
+def duree_naive(x):
+    """Ce que le moteur ne doit PAS faire : calculer les restes à partir des valeurs arrondies à 3 décimales."""
+    r3 = lambda v: round(float(v) + 1e-12, 3)
+    a = int(x)
+    r = r3(x - a)
+    m_ex = r * 12
+    m = int(m_ex)
+    r2 = r3(m_ex - m)
+    j = -int(-(r2 * 30) // 1)
+    if j >= 30:
+        j, m = 0, m + 1
+    if m >= 12:
+        m, a = 0, a + 1
+    return (a, m, j)
+
+
+def duree_du_texte(conclusion):
+    """(années, mois, jours) lus dans « Au bout de 29 ans, 10 mois et 4 jours. »."""
+    m = re.fullmatch(r"Au bout de (\d+) ans?, (\d+) mois et (\d+) jours?\.", conclusion)
+    assert m, conclusion
+    return tuple(int(v) for v in m.groups())
+
+
+def interpretation_de(saisie):
+    s = el.analyser_saisie(saisie)
+    return el.interpretation(el.corriger_equation(s.g, s.d, s.inconnue, parametres=s.parametres))
+
+
+def resultat_fictif(*valeurs):
+    return {"solutions": [Nb(v) for v in valeurs], "inconnue": "x", "ensemble": None}
+
+
+class TestInterpretation(unittest.TestCase):
+    def test_l_exemple_du_test(self):
+        i = interpretation_de("3Q=Q(1+3,75/100)^x")
+        self.assertEqual(i["duree"], (29, 10, 4))
+        self.assertEqual(i["conclusion"], "Au bout de 29 ans, 10 mois et 4 jours.")
+        self.assertEqual([l.texte() for l in i["carte"]["lignes"]], [
+            "Conventions : 1 an = 12 mois et 1 mois = 30 jours.",
+            r"x \approx 29{,}842 : 29 ans ; reste 0{,}842 an.",
+            r"0{,}842 \cdot 12 \approx 10{,}107 mois → 10 mois ; reste 0{,}107 mois.",
+            r"0{,}107 \cdot 30 \approx 3{,}215 jours → 4 jours.",
+            "Au bout de 3 jours, la durée cherchée n'est pas encore écoulée : on arrondit au jour supérieur.",
+        ])
+
+    def test_les_exemples_de_la_demande(self):
+        for saisie, duree in [("2C=C(1+0,04)^n", (17, 8, 3)), ("C0*1,05^n=2*C0", (14, 2, 15)), ("V0/2=V0(1-20/100)^n", (3, 1, 9)),
+                              ("2000*1,045^n=3805", (14, 7, 11)), ("37e^(-0,02t)=25", (19, 7, 7))]:
+            with self.subTest(saisie):
+                i = interpretation_de(saisie)
+                self.assertEqual(i["duree"], duree)
+                self.assertEqual(duree_du_texte(i["conclusion"]), duree)
+
+    def test_oracle_sur_les_taux_realistes(self):
+        """Doubler, tripler (taux de 0,5 % à 8 %), diviser par 2 ou par 4 (dépréciation de 5 % à 25 %) : la durée du moteur est celle de l'oracle."""
+        essais = 0
+        for facteur, ecriture in [(2, "2C"), (3, "3C")]:
+            for centiemes in range(50, 801, 25):
+                taux = F(centiemes, 100)
+                texte = f"{taux.numerator / taux.denominator:g}".replace(".", ",")
+                saisie = f"{ecriture}=C*(1+{texte}/100)^n"
+                x = OR.log(facteur) / OR.log(1 + OR.mpf(taux.numerator) / taux.denominator / 100)
+                with self.subTest(saisie):
+                    i = interpretation_de(saisie)
+                    self.assertEqual(i["duree"], duree_de_reference(x))
+                    self.assertEqual(duree_du_texte(i["conclusion"]), duree_de_reference(x))
+                essais += 1
+        for diviseur, ecriture in [(2, "C/2"), (4, "C/4")]:
+            for centiemes in range(500, 2501, 25):
+                taux = F(centiemes, 100)
+                texte = f"{taux.numerator / taux.denominator:g}".replace(".", ",")
+                saisie = f"{ecriture}=C*(1-{texte}/100)^n"
+                x = OR.log(OR.mpf(1) / diviseur) / OR.log(1 - OR.mpf(taux.numerator) / taux.denominator / 100)
+                with self.subTest(saisie):
+                    i = interpretation_de(saisie)
+                    self.assertEqual(i["duree"], duree_de_reference(x))
+                essais += 1
+        self.assertEqual(essais, 2 * 31 + 2 * 81)
+
+    def test_les_restes_ne_viennent_pas_des_valeurs_arrondies(self):
+        """Il existe des taux où calculer avec les valeurs affichées (3 décimales) donnerait une autre durée : le moteur suit l'oracle, pas la méthode naïve."""
+        differents = []
+        for centiemes in range(50, 801, 5):
+            x = OR.log(2) / OR.log(1 + OR.mpf(centiemes) / 10000)
+            if duree_naive(x) != duree_de_reference(x):
+                differents.append(centiemes)
+                taux = f"{centiemes / 100:g}".replace(".", ",")
+                self.assertEqual(interpretation_de(f"2C=C*(1+{taux}/100)^n")["duree"], duree_de_reference(x), taux)
+        self.assertGreater(len(differents), 3)
+
+    def test_rationnels_exacts(self):
+        for x, duree in [(F(5, 2), (2, 6, 0)), (F(3), (3, 0, 0)), (F(1, 360), (0, 0, 1)), (F(1, 720), (0, 0, 1)), (F(1, 12), (0, 1, 0)),
+                         (F(1, 12) + F(1, 360), (0, 1, 1)), (F(7, 4), (1, 9, 0)), (F(1, 3), (0, 4, 0))]:
+            with self.subTest(x=x):
+                i = el.interpretation(resultat_fictif(x))
+                self.assertEqual(i["duree"], duree)
+                self.assertEqual(duree_de_reference(x), duree)
+
+    def test_zero_mois_et_zero_jour_sont_ecrits(self):
+        self.assertEqual(el.interpretation(resultat_fictif(F(3)))["conclusion"], "Au bout de 3 ans, 0 mois et 0 jour.")
+        self.assertEqual(el.interpretation(resultat_fictif(F(1, 12)))["conclusion"], "Au bout de 0 an, 1 mois et 0 jour.")
+        self.assertEqual(el.interpretation(resultat_fictif(F(1, 360)))["conclusion"], "Au bout de 0 an, 0 mois et 1 jour.")
+        self.assertEqual(el.interpretation(resultat_fictif(F(2) + F(1, 12) + F(2, 360)))["conclusion"], "Au bout de 2 ans, 1 mois et 2 jours.")
+
+    def test_une_valeur_exacte_s_ecrit_avec_egal(self):
+        lignes = [l.texte() for l in el.interpretation(resultat_fictif(F(5, 2)))["carte"]["lignes"]]
+        self.assertEqual(lignes[1], r"x = 2{,}5 : 2 ans ; reste 0{,}5 an.")
+        self.assertEqual(lignes[2], r"0{,}5 \cdot 12 = 6 mois → 6 mois ; reste 0 mois.")
+        self.assertEqual(lignes[3], r"0 \cdot 30 = 0 jour → 0 jour.")
+        self.assertFalse(any("arrondit" in l for l in lignes))            # aucun arrondi : aucune phrase de justification
+
+    def test_30_jours_se_reportent_sur_le_mois(self):
+        i = interpretation_de("2C=C*(1+4,5%)^n")                  # n ≈ 15,747 : 29,029 jours, soit 30
+        self.assertEqual(i["duree"], (15, 9, 0))
+        self.assertEqual(i["conclusion"], "Au bout de 15 ans, 9 mois et 0 jour.")
+        self.assertIn("30 jours font 1 mois : on ajoute 1 mois.", [l.texte() for l in i["carte"]["lignes"]])
+
+    def test_12_mois_se_reportent_sur_l_annee(self):
+        x = F(11) + F(11, 12) + F(59, 720)                        # 11 ans, 11 mois, 29,5 jours
+        i = el.interpretation(resultat_fictif(x))
+        self.assertEqual(i["duree"], (12, 0, 0))
+        textes = [l.texte() for l in i["carte"]["lignes"]]
+        self.assertIn("30 jours font 1 mois : on ajoute 1 mois.", textes)
+        self.assertIn("12 mois font 1 an : on ajoute 1 an.", textes)
+        self.assertEqual(i["conclusion"], "Au bout de 12 ans, 0 mois et 0 jour.")
+
+    def test_pas_de_report_quand_rien_ne_depasse(self):
+        textes = [l.texte() for l in interpretation_de("3Q=Q(1+3,75/100)^x")["carte"]["lignes"]]
+        self.assertFalse(any("on ajoute" in t for t in textes))
+
+    def test_phrases_sans_duree(self):
+        for saisie, cas, phrase in [("Q/2=Q*1,04^n", "negative", "La solution est négative : la situation décrite n'arrive jamais."),
+                                    ("-2Q=Q*1,04^n", "vide", "Aucune solution : la situation décrite n'arrive jamais."),
+                                    ("Q*1,04^n=Q", "nulle", "La situation est atteinte dès le départ.")]:
+            with self.subTest(saisie):
+                i = interpretation_de(saisie)
+                self.assertEqual((i["cas"], i["duree"], i["conclusion"], i["carte"]["lignes"]), (cas, None, phrase, []))
+
+    def test_pas_d_interpretation_quand_elle_n_a_pas_de_sens(self):
+        for saisie in ["2^(x^2)=8", "2^x-2^x=0", "x*2^x=8", "log(x)=2", "x=ln(3)", "log(5-x)=8", "2x=ln(0,1)", "log_x(256)=4", "(x-1)(2^x-8)=0"]:
+            with self.subTest(saisie):
+                s = el.analyser_saisie(saisie)
+                r = el.corriger_equation(s.g, s.d, s.inconnue)
+                self.assertIsNone(el.interpretation(r) if r else None)
+        # la méthode A qui ne s'applique pas n'a pas de solution : pas d'interprétation
+        s = el.analyser_saisie("3=(1+3,75/100)^x")
+        a = el.variantes_equation(s.g, s.d, s.inconnue)[el.METHODE_MEME_BASE]
+        self.assertIsNone(el.interpretation(a))
+
+    def test_suggestion_de_la_case(self):
+        for saisie, attendu in [("3Q=Q(1+3,75/100)^x", True), ("2000*1,045^n=3805", True), ("2C=C(1+0,04)^n", True), ("37e^(-0,02t)=25", False),
+                                ("2^x=100", False), ("3^(x+1)=27", False), ("log(5-x)=8", False), ("2^n=100", True)]:
+            with self.subTest(saisie):
+                self.assertIs(el.suggere_interpretation(el.analyser_saisie(saisie)), attendu)
+        self.assertFalse(el.suggere_interpretation(el.analyser_saisie("log_2(50)")))
+
+    def test_croissance_et_depreciation_ont_la_meme_carte(self):
+        a, b = interpretation_de("2C=C*(1+4%)^n"), interpretation_de("C/2=C*(1-4%)^n")
+        self.assertEqual(a["cas"], "positive")
+        self.assertEqual(b["cas"], "positive")
+        self.assertEqual([l.texte().split(" ")[0] for l in a["carte"]["lignes"][:1]], [l.texte().split(" ")[0] for l in b["carte"]["lignes"][:1]])
+
+    def test_vouvoiement_et_vocabulaire(self):
+        from aides_sortie import TUTOIEMENT
+        for saisie in ["3Q=Q(1+3,75/100)^x", "2C=C*(1+4,5%)^n", "Q/2=Q*1,04^n", "-2Q=Q*1,04^n"]:
+            i = interpretation_de(saisie)
+            for t in [l.texte() for l in i["carte"]["lignes"]] + [i["conclusion"]]:
+                self.assertIsNone(TUTOIEMENT.search(t), t)
+                self.assertNotIn("valeur approchée", t)
 
 
 if __name__ == "__main__":

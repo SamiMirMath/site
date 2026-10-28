@@ -1427,11 +1427,11 @@ class Message:
         self.morceaux = morceaux
 
     def texte(self):
-        return "".join(m if isinstance(m, str) else tex(m) for m in self.morceaux)
+        return "".join(m if isinstance(m, str) else m.tex if isinstance(m, Texte) else tex(m) for m in self.morceaux)
 
     def html(self):
-        return "".join(_echapper(m, quote=False) if isinstance(m, str) else r"\(" + _echapper(tex(m), quote=False) + r"\)"
-                       for m in self.morceaux)
+        return "".join(_echapper(m, quote=False) if isinstance(m, str)
+                       else r"\(" + _echapper(m.tex if isinstance(m, Texte) else tex(m), quote=False) + r"\)" for m in self.morceaux)
 
 
 def _facteur_log(f, x):
@@ -3071,6 +3071,99 @@ def tex_solution(r):
     x = r["inconnue"]
     parts = [x + (" = " + tex(n) if rationnel(n) else r" \approx " + tex_approx(valeur(n))) for n in sols]
     return s + r" \text{, soit } " + r" \text{ ou } ".join(parts)
+
+
+# =====================================================================
+# 11 bis. INTERPRÉTATION D'UNE DURÉE : années, mois et jours (R16)
+# =====================================================================
+MOIS_PAR_AN, JOURS_PAR_MOIS = 12, 30
+CONVENTIONS_DUREE = "Conventions : 1 an = 12 mois et 1 mois = 30 jours."
+LIBELLE_INTERPRETATION = "Problème d'application (temps en années)"
+
+
+def suggere_interpretation(saisie):
+    """Vrai quand la case « Problème d'application » est cochée au départ : un paramètre (3Q = Q(1 + 3,75/100)^x) ou l'inconnue n (le temps de
+    2000 · 1,045^n = 3805). Pas pour t : le temps peut être en minutes."""
+    return saisie.genre == "equation" and (bool(saisie.parametres) or saisie.inconnue == "n")
+
+
+def interpretation_possible(r):
+    """Vrai si l'interprétation a un sens : une équation exponentielle résolue (pas une équation logarithmique, un premier degré ni un calcul),
+    avec au plus une solution (S = ∅ compris)."""
+    return (r is not None and r.get("genre") not in ("logarithmique", "lineaire", "calcul") and not r.get("message")
+            and r["solutions"] is not None and len(r["solutions"]) <= 1 and r.get("ensemble") is None)
+
+
+def _trois_decimales(q):
+    """(texte TeX, exact) de q ≥ 0 à 3 décimales (arrondi au plus proche) ; exact quand la valeur s'écrit ainsi sans reste (sans zéros inutiles)."""
+    n = (F(q) * 1000 + F(1, 2)).__floor__()
+    exact = F(q) * 1000 == n
+    if exact and F(q).denominator == 1:
+        return formater_entier(int(q), tex=True), True
+    chiffres = f"{n // 1000}.{n % 1000:03d}"
+    return formater_decimal(chiffres.rstrip("0").rstrip(".") if exact else chiffres, tex=True), exact
+
+
+def _unite(n, singulier, pluriel):
+    """« 0 an », « 1 an », « 2 ans » : le pluriel dès 2."""
+    return f"{n} {singulier if n < 2 else pluriel}"
+
+
+def _egal(exact):
+    return "=" if exact else r"\approx"
+
+
+def interpretation(r):
+    """L'interprétation de la solution en années, mois et jours (règle R16) : {cas, carte, conclusion, duree}, ou None si elle n'a pas de sens
+    (interpretation_possible). 1 an = 12 mois, 1 mois = 30 jours ; les jours sont arrondis à l'entier supérieur (« au bout de ») ; les restes sont
+    calculés à pleine précision (60 chiffres, ou exactement pour un rationnel), jamais à partir des valeurs arrondies affichées, et affichés à
+    3 décimales ; 30 jours se reportent sur le mois, 12 mois sur l'année. `duree` : (années, mois, jours) ou None. `carte` : « Interprétation »,
+    des Message ; `conclusion` : la phrase de la fin, écrite à part."""
+    if not interpretation_possible(r):
+        return None
+    sols = r["solutions"]
+    if not sols:
+        return {"cas": "vide", "carte": _carte("Interprétation", []), "duree": None,
+                "conclusion": "Aucune solution : la situation décrite n'arrive jamais."}
+    n = sols[0]
+    rationnel = _valeur_rationnelle(n)
+    if rationnel is not None:
+        x = rationnel
+    else:
+        with decimal.localcontext() as c:
+            c.prec = 60
+            x = F(_precis(n))
+    if x < 0:
+        return {"cas": "negative", "carte": _carte("Interprétation", []), "duree": None,
+                "conclusion": "La solution est négative : la situation décrite n'arrive jamais."}
+    if x == 0:
+        return {"cas": "nulle", "carte": _carte("Interprétation", []), "duree": None,
+                "conclusion": "La situation est atteinte dès le départ."}
+    annees = x.__floor__()
+    reste_an = x - annees
+    mois_exacts = reste_an * MOIS_PAR_AN
+    mois = mois_exacts.__floor__()
+    reste_mois = mois_exacts - mois
+    jours_exacts = reste_mois * JOURS_PAR_MOIS
+    jours = -((-jours_exacts).__floor__())                                  # arrondi au jour supérieur
+    nom = r["inconnue"]
+    t = lambda q: _trois_decimales(q)
+    (tx, ex), (tr1, e1), (tm, em), (tr2, e2), (tj, ej) = t(x), t(reste_an), t(mois_exacts), t(reste_mois), t(jours_exacts)
+    lignes = [Message(CONVENTIONS_DUREE),
+              Message(Texte(f"{_nom_tex(nom)} {_egal(ex)} {tx}"), f" : {_unite(annees, 'an', 'ans')} ; reste ", Texte(tr1), " an."),
+              Message(Texte(rf"{tr1} \cdot {MOIS_PAR_AN} {_egal(em)} {tm}"), f" mois → {mois} mois ; reste ", Texte(tr2), " mois."),
+              Message(Texte(rf"{tr2} \cdot {JOURS_PAR_MOIS} {_egal(ej)} {tj}"), f" {'jour' if jours_exacts < 2 else 'jours'} → {_unite(jours, 'jour', 'jours')}.")]
+    if jours_exacts != jours_exacts.__floor__():
+        lignes.append(Message(f"Au bout de {_unite(jours_exacts.__floor__(), 'jour', 'jours')}, la durée cherchée n'est pas encore écoulée : "
+                              "on arrondit au jour supérieur."))
+    if jours == JOURS_PAR_MOIS:
+        jours, mois = 0, mois + 1
+        lignes.append(Message(f"{JOURS_PAR_MOIS} jours font 1 mois : on ajoute 1 mois."))
+    if mois == MOIS_PAR_AN:
+        mois, annees = 0, annees + 1
+        lignes.append(Message(f"{MOIS_PAR_AN} mois font 1 an : on ajoute 1 an."))
+    conclusion = f"Au bout de {_unite(annees, 'an', 'ans')}, {_unite(mois, 'mois', 'mois')} et {_unite(jours, 'jour', 'jours')}."
+    return {"cas": "positive", "carte": _carte("Interprétation", lignes), "duree": (annees, mois, jours), "conclusion": conclusion}
 
 
 def corriger_equation(g, d, x, methode=METHODE_LOGARITHMES, parametres=()):
