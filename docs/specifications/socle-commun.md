@@ -19,8 +19,8 @@ S'applique à toutes les pages outils, sauf mention contraire pour le simplexe
    le choix est gardé dans `localStorage` (`variante:<outil>`, `try/catch`), valeur inconnue ou stockage indisponible : la variante par défaut. Le sélecteur est `no-print`, l'impression indique la
    méthode affichée. Une sortie sans `variantes` (tous les autres outils) s'affiche comme avant.
 4c. **Option** (facultatif, décidé le 28.10.2026, premier usage : Exponentielles et logarithmes, carte « Interprétation ») : une sortie peut porter `option` = `{cle, libelle, cochee, cartes}` : une case à cocher (`#option`, sous le sélecteur de méthode, `no-print`,
-   au clavier) dont `cartes` sont ajoutées **à la fin** des cartes affichées quand elle est cochée, sans appel au moteur, en gardant le nombre de cartes visibles ; `cochee` est l'état initial. Le choix de l'élève vaut pour la visite en cours (mémoire de la page, pas de `localStorage`)
-   et se garde au changement de variante. Une variante peut déclarer `option: false` (pas de case pour cette variante). Une sortie sans `option` (tous les autres outils) s'affiche comme avant.
+   au clavier) dont `cartes` sont ajoutées **à la fin** des cartes affichées quand elle est cochée, sans appel au moteur, en gardant le nombre de cartes visibles ; `cochee` est l'état initial. Le choix de l'élève vaut pour la saisie affichée (mémoire de la page, pas de `localStorage` : le défaut dépend de l'équation)
+   et se garde au changement de variante ; une nouvelle saisie reprend `cochee`. Une variante peut déclarer `option: false` (pas de case pour cette variante). Une sortie sans `option` (tous les autres outils) s'affiche comme avant.
 5. **Impression / PDF** : bouton « Télécharger le corrigé (PDF) » ; toutes les cartes imprimées,
    sans boutons ni clavier ; titre de fichier explicite.
 6. **Chargement** : état lisible (« Chargement du moteur de calcul… », « Prêt ») ; le bouton de

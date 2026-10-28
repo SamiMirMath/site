@@ -59,9 +59,10 @@ def _cartes_equation(r):
 
 
 def _carte_interpretation(inter):
-    """La carte « Interprétation » : les lignes du calcul, puis la phrase de la fin dans un encadré."""
+    """La carte « Interprétation » : les lignes du calcul, puis la phrase de la fin en gras (un texte, pas une formule : elle passe à la ligne sur
+    un écran étroit)."""
     blocs = [_ligne(ligne) for ligne in inter["carte"]["lignes"]]
-    blocs.append(so.resultat(r"\text{" + inter["conclusion"] + "}"))
+    blocs.append(so.texte("<strong>" + escape(inter["conclusion"], quote=False) + "</strong>", style="etape"))
     return so.carte("Interprétation", blocs, style="final")
 
 

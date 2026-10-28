@@ -49,10 +49,12 @@ details ol,details ul{margin:.4em 0 0;padding-left:1.2em}
         <button data-t="x">x</button><button aria-label="puissance" data-t="^">^</button><button aria-label="divisé par" data-t="/">÷</button><button aria-label="parenthèse ouvrante" data-t="(">(</button><button aria-label="parenthèse fermante" data-t=")">)</button><button aria-label="effacer le dernier caractère" data-k="back">⌫</button>
         <button aria-label="plus" data-t="+">+</button><button aria-label="moins" data-t="-">−</button><button aria-label="fois" data-t="*">×</button><button aria-label="égal" data-t="=">=</button><button aria-label="nombre e" data-t="e">e</button><button aria-label="tout effacer" data-k="clear">C</button>
         <button aria-label="logarithme de base 10" data-t="log(">log</button><button aria-label="logarithme népérien" data-t="ln(">ln</button><button aria-label="logarithme de base a" data-t="log_">log<sub>a</sub></button><button aria-label="racine carrée" data-t="sqrt(">√</button><button aria-label="virgule" data-t=",">,</button><button data-t="10">10</button>
+        <button aria-label="pourcent" data-t="%">%</button><button data-t="n">n</button><button data-t="t">t</button><button data-t="Q">Q</button><button data-t="C">C</button><button data-t="V">V</button>
       </div>
       <button class="primary" id="calculer" disabled>Résoudre ▶</button>
       <div class="etat" id="etat" aria-live="polite">Chargement de Python…</div>
       <div class="hint" style="margin-top:8px">Saisie : <code>3^(x+1)=27</code>, <code>2^x=100</code>, <code>37*e^(-0,02t)=25</code>. <code>log</code> est le logarithme de base 10, <code>ln</code> celui de base e, <code>log_2(x)</code> celui de base 2 ; <code>e</code> est toujours le nombre e. Pour calculer un logarithme, écrivez-le sans « = » : <code>log_2(50)</code>, <code>log_8(64)</code>.</div>
+      <div class="hint" style="margin-top:6px">Problème d'application (capital, valeur initiale) : <code>3Q=Q(1+3,75/100)^x</code>, <code>V0/2=V0(1-20/100)^n</code>, <code>2000*(1+4,5%)^n=3805</code>. L'inconnue est la lettre de l'exposant ; une autre lettre (<code>Q</code>, <code>C0</code>, <code>V_0</code>…) qui multiplie chaque membre se simplifie. Cochez « Problème d'application » pour obtenir la durée en années, mois et jours.</div>
       <div class="exemples" id="exemples"></div>
     </section>
 
@@ -68,6 +70,7 @@ details ol,details ul{margin:.4em 0 0;padding-left:1.2em}
           </ul></li>
         <li><b>Équation logarithmique</b> : on applique l'exponentielle aux deux membres, \(\log_a(u)=c\iff a^{\log_a(u)}=a^c\), puis \(a^{\log_a(A)}=A\) (pour \(A>0\)) : \(u=a^c\). On vérifie ensuite que l'argument est strictement positif. Si la base est l'inconnue : \(x>0\) et \(x\neq1\). Plusieurs logarithmes imbriqués : on recommence pour chacun.</li>
         <li><b>Calculer \(\log_a(y)\)</b> : si \(y=a^k\), alors \(\log_a(y)=k\) ; sinon \(\log_a(y)=\dfrac{\log(y)}{\log(a)}\) (changement de base).</li>
+        <li><b>Problème d'application</b> (capitalisation, dépréciation) : on calcule la base (\(1+\dfrac{3{,}75}{100}=1{,}0375\)), on simplifie par le capital ou la valeur initiale (\(Q>0\)), puis on résout l'équation exponentielle. La durée \(x\), en années, se lit en années, mois et jours : 1 an = 12 mois, 1 mois = 30 jours, et les jours sont arrondis au jour supérieur (« au bout de »).</li>
       </ol>
       <p class="hint" style="margin:.6em 0 0">Propriétés utiles : \(\log(a^A)=A\log(a)\), \(\log(10)=1\), \(\ln(e)=1\), \(\log(a)-\log(b)=\log\left(\dfrac ab\right)\), \(\log(a)+\log(b)=\log(ab)\). Quand une solution est un nombre simple écrit avec des logarithmes, vérifiez-la à la calculatrice.</p>
     </details>
@@ -84,7 +87,7 @@ details ol,details ul{margin:.4em 0 0;padding-left:1.2em}
 
 <script type="module">
 import { monterOutil } from "../commun/outil.js";
-const EXEMPLES=["3^(x+1)-27=0","2^x=100","2^(x-1)=3^x","log(5-x)=8","log_x(256)=4","37*e^(-0,02t)=25","5^(8x)=-25","log_2(50)"];
+const EXEMPLES=["3^(x+1)-27=0","2^x=100","2^(x-1)=3^x","log(5-x)=8","log_x(256)=4","37*e^(-0,02t)=25","5^(8x)=-25","log_2(50)","3Q=Q(1+3,75/100)^x","2000*1,045^n=3805"];
 monterOutil({
   outil:"exponentielles-logarithmes",
   titrePdf:"Corrige-exponentielles-logarithmes",

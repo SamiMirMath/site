@@ -87,6 +87,16 @@ JS_BOUTONS = r"""
 """
 
 
+# Case à cocher d'une option de la sortie (outil.js) : {libelle, cochee}, ou None quand elle est absente ou masquée.
+JS_OPTION = r"""
+(() => {
+  const lab = document.querySelector('#option');
+  if (!lab || lab.hidden) return null;
+  return { libelle: lab.textContent.trim(), cochee: lab.querySelector('input').checked };
+})()
+"""
+
+
 def attendre_pret(page, delai=240):
     """Attend « Prêt. ». À l'expiration, le message dit où en est le chargement : texte de #etat (« Chargement de Python… »,
     « Chargement du moteur de calcul… », ou rien) et dernières lignes de la console. Une page lente laisse #etat avancer,
@@ -121,6 +131,16 @@ def capturer(page, entree):
     fin = page.evaluer(JS_CAPTURE)
     res = {"au_depart": {"visibles": debut["visibles"], "progression": debut["progression"]},
            "cartes": fin["cartes"], "progression_finale": fin["progression"]}
+    option = page.evaluer(JS_OPTION)
+    if option:                        # case à cocher (outil.js) : son état de départ, puis le corrigé complet avec la case dans l'autre état
+        res["option"] = option
+        page.evaluer("document.querySelector('#option input').click()")
+        page.evaluer("document.querySelector('#tout').click()")
+        inverse = page.evaluer(JS_CAPTURE)
+        res["option_inversee"] = {"cochee": page.evaluer(JS_OPTION)["cochee"], "cartes": inverse["cartes"], "progression_finale": inverse["progression"]}
+        page.evaluer("document.querySelector('#option input').click()")
+        page.evaluer("document.querySelector('#tout').click()")
+        assert page.evaluer(JS_CAPTURE)["cartes"] == res["cartes"]
     if boutons:                       # sélecteur de méthode (outil.js) : les boutons, puis le corrigé complet de chaque variante
         res["boutons"] = boutons
         res["variantes"] = {}

@@ -56,7 +56,7 @@ class TestOption(unittest.TestCase):
         self.assertEqual([c["titre"] for c in o["cartes"]], ["Interprétation"])
         self.assertEqual(o["cartes"][0]["style"], "final")
         dernier = o["cartes"][0]["blocs"][-1]
-        self.assertEqual((dernier["type"], dernier["tex"]), ("resultat", r"\text{Au bout de 29 ans, 10 mois et 4 jours.}"))
+        self.assertEqual((dernier["type"], dernier["html"]), ("texte", "<strong>Au bout de 29 ans, 10 mois et 4 jours.</strong>"))
 
     def test_pre_coche_seulement_avec_un_parametre_ou_l_inconnue_n(self):
         for entree, coche in [("3Q=Q(1+3,75/100)^x", True), ("2000*1,045^n=3805", True), ("2=1,04^n", True), ("37e^(-0,02t)=25", False),
@@ -75,8 +75,8 @@ class TestOption(unittest.TestCase):
                                ("Q*1,04^n=Q", "La situation est atteinte dès le départ.")]:
             with self.subTest(entree):
                 o = rel.resoudre(entree)["option"]
-                self.assertEqual([b["type"] for b in o["cartes"][0]["blocs"]], ["resultat"])
-                self.assertEqual(o["cartes"][0]["blocs"][0]["tex"], r"\text{" + phrase + "}")
+                self.assertEqual([b["type"] for b in o["cartes"][0]["blocs"]], ["texte"])
+                self.assertEqual(o["cartes"][0]["blocs"][0]["html"], "<strong>" + phrase + "</strong>")
 
     def test_la_methode_a_qui_ne_conclut_pas_n_a_pas_de_case(self):
         s = rel.resoudre("3=(1+3,75/100)^x")
@@ -101,7 +101,7 @@ class TestOption(unittest.TestCase):
                 if inter is not None:
                     vus += 1
                     self.assertEqual(sortie["option"]["cochee"], el.suggere_interpretation(s))
-                    self.assertEqual(sortie["option"]["cartes"][0]["blocs"][-1]["tex"], r"\text{" + inter["conclusion"] + "}")
+                    self.assertEqual(sortie["option"]["cartes"][0]["blocs"][-1]["html"], "<strong>" + inter["conclusion"] + "</strong>")
         self.assertGreater(vus, 150)
 
 

@@ -73,8 +73,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 20 ans, 1 mois et 24 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 20 ans, 1 mois et 24 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -193,8 +194,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -289,8 +291,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -390,8 +393,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -735,8 +739,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 1 an, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 1 an, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -1270,8 +1275,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -1645,8 +1651,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -1801,8 +1808,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -1962,8 +1970,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -2128,8 +2137,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -2304,8 +2314,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 3 ans, 3 mois et 26 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 3 ans, 3 mois et 26 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -2436,8 +2447,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -2593,8 +2605,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 3 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 3 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -2744,8 +2757,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -2876,8 +2890,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La situation est atteinte dès le départ.}",
-       "type": "resultat"
+       "html": "<strong>La situation est atteinte dès le départ.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -3037,8 +3052,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -3170,8 +3186,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 27 ans, 0 mois et 10 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 27 ans, 0 mois et 10 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -3315,8 +3332,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 3 ans, 5 mois et 1 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 3 ans, 5 mois et 1 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -3448,8 +3466,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 3 ans, 1 mois et 9 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 3 ans, 1 mois et 9 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -3588,8 +3607,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -3755,8 +3775,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La situation est atteinte dès le départ.}",
-       "type": "resultat"
+       "html": "<strong>La situation est atteinte dès le départ.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -3929,8 +3950,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 3 ans, 1 mois et 9 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 3 ans, 1 mois et 9 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -4062,8 +4084,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 3 mois et 4 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 3 mois et 4 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -4216,8 +4239,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -4405,8 +4429,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 34 ans, 4 mois et 6 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 34 ans, 4 mois et 6 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -4526,8 +4551,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 29 ans, 10 mois et 4 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 29 ans, 10 mois et 4 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -4647,8 +4673,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 117 ans, 5 mois et 1 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 117 ans, 5 mois et 1 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -4768,8 +4795,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -4883,8 +4911,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -4979,8 +5008,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La situation est atteinte dès le départ.}",
-       "type": "resultat"
+       "html": "<strong>La situation est atteinte dès le départ.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -5099,8 +5129,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -5249,8 +5280,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 5 ans, 8 mois et 5 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 5 ans, 8 mois et 5 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -5365,8 +5397,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 3 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 3 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -5505,8 +5538,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 6 ans, 7 mois et 22 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 6 ans, 7 mois et 22 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -5759,8 +5793,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 0 an, 5 mois et 22 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 0 an, 5 mois et 22 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -5864,8 +5899,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -5974,8 +6010,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -6104,8 +6141,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 0 an, 5 mois et 18 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 0 an, 5 mois et 18 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -6229,8 +6267,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -6364,8 +6403,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 1 an, 10 mois et 29 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 1 an, 10 mois et 29 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -6637,8 +6677,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 0 an, 7 mois et 7 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 0 an, 7 mois et 7 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -6859,8 +6900,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 4 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 4 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -7059,8 +7101,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 1 an, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 1 an, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -7208,8 +7251,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -7323,8 +7367,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -7428,8 +7473,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -7563,8 +7609,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 0 an, 10 mois et 29 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 0 an, 10 mois et 29 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -7684,8 +7731,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 0 an, 8 mois et 12 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 0 an, 8 mois et 12 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -7814,8 +7862,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 0 an, 10 mois et 26 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 0 an, 10 mois et 26 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -7919,8 +7968,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -8071,8 +8121,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 1 an, 7 mois et 1 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 1 an, 7 mois et 1 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -8226,8 +8277,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 1 an, 6 mois et 24 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 1 an, 6 mois et 24 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -8376,8 +8428,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 15 ans, 9 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 15 ans, 9 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -8557,8 +8610,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 3 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 3 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -8696,8 +8750,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La situation est atteinte dès le départ.}",
-       "type": "resultat"
+       "html": "<strong>La situation est atteinte dès le départ.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -8814,8 +8869,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La situation est atteinte dès le départ.}",
-       "type": "resultat"
+       "html": "<strong>La situation est atteinte dès le départ.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -8952,8 +9008,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -9126,8 +9183,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 1 an, 8 mois et 16 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 1 an, 8 mois et 16 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -9259,8 +9317,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 3 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 3 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -9415,8 +9474,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -9579,8 +9639,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 7 ans, 0 mois et 11 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 7 ans, 0 mois et 11 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -9728,8 +9789,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 14 ans, 7 mois et 11 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 14 ans, 7 mois et 11 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -9909,8 +9971,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 14 ans, 7 mois et 11 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 14 ans, 7 mois et 11 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -10066,8 +10129,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -10242,8 +10306,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 17 ans, 8 mois et 3 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 17 ans, 8 mois et 3 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -10387,8 +10452,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 18 ans, 9 mois et 29 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 18 ans, 9 mois et 29 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -10532,8 +10598,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 17 ans, 8 mois et 3 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 17 ans, 8 mois et 3 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -10730,8 +10797,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 15 ans, 9 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 15 ans, 9 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -10874,8 +10942,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -10995,8 +11064,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 8 mois et 16 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 8 mois et 16 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -11091,8 +11161,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La situation est atteinte dès le départ.}",
-       "type": "resultat"
+       "html": "<strong>La situation est atteinte dès le départ.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -11192,8 +11263,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -11548,8 +11620,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -11700,8 +11773,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -11908,8 +11982,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 4 ans, 9 mois et 25 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 4 ans, 9 mois et 25 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -12086,8 +12161,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -12178,8 +12254,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -12472,8 +12549,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -12847,8 +12925,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -12996,8 +13075,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -13202,8 +13282,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -13386,8 +13467,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 9 ans, 6 mois et 18 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 9 ans, 6 mois et 18 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -13527,8 +13609,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 0 an, 4 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 0 an, 4 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -13652,8 +13735,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -13758,8 +13842,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -13889,8 +13974,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 1 an, 5 mois et 16 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 1 an, 5 mois et 16 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -14010,8 +14096,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 4 ans, 7 mois et 22 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 4 ans, 7 mois et 22 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -14131,8 +14218,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 6 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 6 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -14256,8 +14344,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -14391,8 +14480,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La situation est atteinte dès le départ.}",
-       "type": "resultat"
+       "html": "<strong>La situation est atteinte dès le départ.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -14907,8 +14997,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La situation est atteinte dès le départ.}",
-       "type": "resultat"
+       "html": "<strong>La situation est atteinte dès le départ.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -15027,8 +15118,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -15197,8 +15289,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 1 an, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 1 an, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -15332,8 +15425,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -16518,8 +16612,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -16719,8 +16814,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -16910,8 +17006,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -17098,8 +17195,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -17303,8 +17401,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -17485,8 +17584,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -17671,8 +17771,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -17847,8 +17948,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -18003,8 +18105,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -18212,8 +18315,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 1 an, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 1 an, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -18446,8 +18550,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 3 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 3 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -18607,8 +18712,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -18778,8 +18884,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -19035,8 +19142,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -19265,8 +19373,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -19414,8 +19523,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -19618,8 +19728,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -19852,8 +19963,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 3 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 3 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -20033,8 +20145,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 1 an, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 1 an, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -20182,8 +20295,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La situation est atteinte dès le départ.}",
-       "type": "resultat"
+       "html": "<strong>La situation est atteinte dès le départ.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -20327,8 +20441,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 3 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 3 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -20471,8 +20586,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -20591,8 +20707,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -20731,8 +20848,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 6 ans, 7 mois et 22 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 6 ans, 7 mois et 22 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -20847,8 +20965,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 1 an, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 1 an, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -20991,8 +21110,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -21164,8 +21284,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -21318,8 +21439,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 0 an, 6 mois et 11 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 0 an, 6 mois et 11 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -21680,8 +21802,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 29 ans, 10 mois et 4 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 29 ans, 10 mois et 4 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -21837,8 +21960,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 1 an, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 1 an, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -22177,8 +22301,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -22343,8 +22468,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La situation est atteinte dès le départ.}",
-       "type": "resultat"
+       "html": "<strong>La situation est atteinte dès le départ.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -22473,8 +22599,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -22618,8 +22745,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 0 an, 8 mois et 26 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 0 an, 8 mois et 26 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -22773,8 +22901,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 1 an, 5 mois et 12 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 1 an, 5 mois et 12 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -22896,8 +23025,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -23035,8 +23165,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -23189,8 +23320,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 19 ans, 7 mois et 7 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 19 ans, 7 mois et 7 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -23355,8 +23487,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 29 ans, 10 mois et 4 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 29 ans, 10 mois et 4 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -23512,8 +23645,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 29 ans, 10 mois et 4 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 29 ans, 10 mois et 4 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -23710,8 +23844,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 29 ans, 10 mois et 4 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 29 ans, 10 mois et 4 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -23903,8 +24038,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 29 ans, 10 mois et 4 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 29 ans, 10 mois et 4 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -24175,8 +24311,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 5 ans, 10 mois et 19 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 5 ans, 10 mois et 19 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -24318,8 +24455,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -24504,8 +24642,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -24685,8 +24824,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -24834,8 +24974,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -24942,8 +25083,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -25038,8 +25180,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -25159,8 +25302,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 3 ans, 1 mois et 5 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 3 ans, 1 mois et 5 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -25378,8 +25522,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 3 mois et 4 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 3 mois et 4 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -25510,8 +25655,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La situation est atteinte dès le départ.}",
-       "type": "resultat"
+       "html": "<strong>La situation est atteinte dès le départ.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -25720,8 +25866,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 1 an, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 1 an, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -25898,8 +26045,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 0 an, 7 mois et 18 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 0 an, 7 mois et 18 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -26019,8 +26167,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 8 mois et 22 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 8 mois et 22 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -26140,8 +26289,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 3 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 3 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -26259,8 +26409,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La situation est atteinte dès le départ.}",
-       "type": "resultat"
+       "html": "<strong>La situation est atteinte dès le départ.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -26370,8 +26521,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -26507,8 +26659,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -26665,8 +26818,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La situation est atteinte dès le départ.}",
-       "type": "resultat"
+       "html": "<strong>La situation est atteinte dès le départ.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -26878,8 +27032,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La situation est atteinte dès le départ.}",
-       "type": "resultat"
+       "html": "<strong>La situation est atteinte dès le départ.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -27045,8 +27200,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 277 ans, 11 mois et 13 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 277 ans, 11 mois et 13 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -27170,8 +27326,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -27310,8 +27467,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 0 an, 11 mois et 22 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 0 an, 11 mois et 22 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -27431,8 +27589,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 0 an, 2 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 0 an, 2 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -27581,8 +27740,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 0 an, 4 mois et 6 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 0 an, 4 mois et 6 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -27707,8 +27867,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 6 ans, 1 mois et 28 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 6 ans, 1 mois et 28 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -27843,8 +28004,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 1 an, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 1 an, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -28030,8 +28192,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 1 an, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 1 an, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -28211,8 +28374,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 1 an, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 1 an, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -28374,8 +28538,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -28553,8 +28718,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 1 an, 6 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 1 an, 6 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -28682,8 +28848,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -28996,8 +29163,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 8 mois et 16 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 8 mois et 16 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -29187,8 +29355,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -29368,8 +29537,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 0 an, 3 mois et 17 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 0 an, 3 mois et 17 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -29556,8 +29726,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 26 ans, 7 mois et 19 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 26 ans, 7 mois et 19 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -29735,8 +29906,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 0 an, 3 mois et 10 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 0 an, 3 mois et 10 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -29841,8 +30013,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -29952,8 +30125,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -30082,8 +30256,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -30248,8 +30423,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 1 an, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 1 an, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -30444,8 +30620,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 1 an, 1 mois et 11 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 1 an, 1 mois et 11 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -30589,8 +30766,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 3 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 3 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -30751,8 +30929,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -30920,8 +31099,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 4 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 4 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -31035,8 +31215,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -31166,8 +31347,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -31332,8 +31514,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -31747,8 +31930,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -31908,8 +32092,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 14 ans, 2 mois et 15 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 14 ans, 2 mois et 15 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -32065,8 +32250,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 14 ans, 2 mois et 15 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 14 ans, 2 mois et 15 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -32197,8 +32383,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La situation est atteinte dès le départ.}",
-       "type": "resultat"
+       "html": "<strong>La situation est atteinte dès le départ.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -32343,8 +32530,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -32512,8 +32700,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 3 ans, 1 mois et 9 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 3 ans, 1 mois et 9 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -32705,8 +32894,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 27 ans, 0 mois et 10 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 27 ans, 0 mois et 10 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -32882,8 +33072,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 35 ans, 8 mois et 1 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 35 ans, 8 mois et 1 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -33263,8 +33454,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 13 ans, 10 mois et 11 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 13 ans, 10 mois et 11 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -33397,8 +33589,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 1 an, 7 mois et 10 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 1 an, 7 mois et 10 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -33502,8 +33695,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -33618,8 +33812,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 6 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 6 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -33748,8 +33943,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 0 an, 5 mois et 21 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 0 an, 5 mois et 21 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -33870,8 +34066,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -34031,8 +34228,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -34222,8 +34420,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 0 an, 6 mois et 21 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 0 an, 6 mois et 21 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -34986,8 +35185,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 0 an, 3 mois et 20 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 0 an, 3 mois et 20 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -35108,8 +35308,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -35259,8 +35460,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -35416,8 +35618,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 1 an, 1 mois et 6 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 1 an, 1 mois et 6 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -35566,8 +35769,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La solution est négative : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>La solution est négative : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -35747,8 +35951,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 0 an, 1 mois et 6 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 0 an, 1 mois et 6 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -35932,8 +36137,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 0 an, 3 mois et 17 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 0 an, 3 mois et 17 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -36108,8 +36314,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 1 an, 4 mois et 20 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 1 an, 4 mois et 20 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -36259,8 +36466,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -36408,8 +36616,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La situation est atteinte dès le départ.}",
-       "type": "resultat"
+       "html": "<strong>La situation est atteinte dès le départ.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -36538,8 +36747,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 2 ans, 3 mois et 4 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 2 ans, 3 mois et 4 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -36634,8 +36844,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La situation est atteinte dès le départ.}",
-       "type": "resultat"
+       "html": "<strong>La situation est atteinte dès le départ.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -36755,8 +36966,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 1 an, 11 mois et 11 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 1 an, 11 mois et 11 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -36865,8 +37077,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{Aucune solution : la situation décrite n'arrive jamais.}",
-       "type": "resultat"
+       "html": "<strong>Aucune solution : la situation décrite n'arrive jamais.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -37000,8 +37213,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 3 ans, 0 mois et 0 jour.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 3 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -37134,8 +37348,9 @@
        "type": "texte"
       },
       {
-       "tex": "\\text{Au bout de 1 an, 11 mois et 11 jours.}",
-       "type": "resultat"
+       "html": "<strong>Au bout de 1 an, 11 mois et 11 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",
@@ -41252,8 +41467,9 @@
     {
      "blocs": [
       {
-       "tex": "\\text{La situation est atteinte dès le départ.}",
-       "type": "resultat"
+       "html": "<strong>La situation est atteinte dès le départ.</strong>",
+       "style": "etape",
+       "type": "texte"
       }
      ],
      "style": "final",

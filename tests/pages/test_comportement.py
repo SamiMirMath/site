@@ -121,21 +121,29 @@ class TestComportement(unittest.TestCase):
         page = self.ouvrir("exponentielles-logarithmes")
         page.taille(360)
         entrees = [e for e in entrees_el() if e.strip()]
+
+        def sans_debordement(e, cle, etat):
+            page.evaluer("document.querySelector('#tout') && !document.querySelector('#tout').disabled && document.querySelector('#tout').click()")
+            debordements = page.evaluer("""(() => {
+                const trop = [...document.querySelectorAll('#cartes *')].filter(n => n.scrollWidth > n.clientWidth + 1 && n.clientWidth > 0
+                    && !n.closest('.katex') && getComputedStyle(n).display !== 'inline')
+                    .map(n => n.className + ' ' + n.scrollWidth + '>' + n.clientWidth);
+                return [document.documentElement.scrollWidth, window.innerWidth, trop.slice(0, 5)];
+            })()""")
+            self.assertLessEqual(debordements[0], debordements[1], (e, cle, etat, debordements))
+            self.assertEqual(debordements[2], [], (e, cle, etat, debordements))
+
         for e in entrees + ["log(x^2+x+3)=0"]:
             with self.subTest(entree=e):
                 self.calculer(page, e)
                 for cle in page.evaluer("[...document.querySelectorAll('#variantes:not([hidden]) button')].map(b => b.dataset.variante)") or [None]:
                     if cle:                                                  # sélecteur de méthode : les deux variantes tiennent à 360 px
                         page.evaluer(f"document.querySelector('#variantes button[data-variante=\"{cle}\"]').click()")
-                    page.evaluer("document.querySelector('#tout') && !document.querySelector('#tout').disabled && document.querySelector('#tout').click()")
-                    debordements = page.evaluer("""(() => {
-                        const trop = [...document.querySelectorAll('#cartes *')].filter(n => n.scrollWidth > n.clientWidth + 1 && n.clientWidth > 0
-                            && !n.closest('.katex') && getComputedStyle(n).display !== 'inline')
-                            .map(n => n.className + ' ' + n.scrollWidth + '>' + n.clientWidth);
-                        return [document.documentElement.scrollWidth, window.innerWidth, trop.slice(0, 5)];
-                    })()""")
-                    self.assertLessEqual(debordements[0], debordements[1], (e, cle, debordements))
-                    self.assertEqual(debordements[2], [], (e, cle, debordements))
+                    sans_debordement(e, cle, "départ")
+                    if page.evaluer("!!document.querySelector('#option:not([hidden])')"):          # la carte « Interprétation » aussi, case cochée ou non
+                        page.evaluer("document.querySelector('#option input').click()")
+                        sans_debordement(e, cle, "case inversée")
+                        page.evaluer("document.querySelector('#option input').click()")
                 if page.evaluer("!!document.querySelector('#variantes:not([hidden])')"):
                     page.evaluer("document.querySelector('#variantes button[data-variante=\"logarithmes\"]').click()")
         page.taille(1100)
@@ -307,6 +315,105 @@ class TestComportement(unittest.TestCase):
                 break
         self.assertEqual(vus, {True, False})
 
+    def titres(self, page):
+        return page.evaluer("[...document.querySelectorAll('#cartes .card:not(.cache)')].map(c => c.querySelector('h3').childNodes[0].textContent.trim())")
+
+    def test_t33_el_case_probleme_d_application(self):
+        """EL-24 : la case « Problème d'application (temps en années) » est pré-cochée avec un paramètre ou l'inconnue n, décochable, ajoute et retire la
+        carte « Interprétation » sans appel au moteur, garde son état au changement de méthode, et n'existe pas pour une équation logarithmique."""
+        if "exponentielles-logarithmes" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.ouvrir("exponentielles-logarithmes")
+        page.evaluer("try { localStorage.clear(); } catch (e) {}")
+        self.assertFalse(page.evaluer("!!document.querySelector('#option')"))                      # pas de case avant un calcul
+        self.calculer(page, "3Q=Q(1+3,75/100)^x")
+        self.assertEqual(page.evaluer("[document.querySelector('#option').hidden, document.querySelector('#option').textContent.trim(), "
+                                      "document.querySelector('#option input').checked, document.querySelector('#option input').type]"),
+                         [False, "Problème d'application (temps en années)", True, "checkbox"])
+        page.evaluer("document.querySelector('#tout').click()")
+        self.assertEqual(self.titres(page), ["Étape 1", "Étape 2", "Étape 3", "Solution", "Interprétation"])
+        self.assertIn("Au bout de 29 ans, 10 mois et 4 jours.", page.evaluer("document.querySelector('#cartes .card:last-child').textContent"))
+        self.assertEqual(page.evaluer("document.querySelector('#progression').textContent"), "Étape 5 / 5")
+        # décocher : la carte disparaît, sans appel au moteur
+        page.evaluer("""window.__envois = 0; const o = Worker.prototype.postMessage;
+            Worker.prototype.postMessage = function (...a) { window.__envois++; return o.apply(this, a); };""")
+        page.evaluer("document.querySelector('#option input').click()")
+        self.assertEqual(self.titres(page), ["Étape 1", "Étape 2", "Étape 3", "Solution"])
+        self.assertEqual(page.evaluer("document.querySelector('#progression').textContent"), "Étape 4 / 4")
+        page.evaluer("document.querySelector('#option input').click()")
+        self.assertEqual(self.titres(page)[-1], "Interprétation")
+        self.assertEqual(page.evaluer("window.__envois"), 0)
+        # le choix est gardé au changement de méthode ; la méthode A, qui ne conclut pas, n'a pas de case
+        page.evaluer("document.querySelector('#option input').click()")
+        page.evaluer("document.querySelector('#variantes button[data-variante=\"meme_base\"]').click()")
+        self.assertTrue(page.evaluer("document.querySelector('#option').hidden"))
+        self.assertNotIn("Interprétation", self.titres(page))
+        page.evaluer("document.querySelector('#variantes button[data-variante=\"logarithmes\"]').click()")
+        self.assertFalse(page.evaluer("document.querySelector('#option').hidden"))
+        self.assertFalse(page.evaluer("document.querySelector('#option input').checked"))          # décochée avant : elle le reste
+        self.assertNotIn("Interprétation", self.titres(page))
+        # recalculer la même équation garde le choix ; une autre équation reprend l'état de départ
+        self.calculer(page, "3Q=Q(1+3,75/100)^x")
+        self.assertFalse(page.evaluer("document.querySelector('#option input').checked"))
+        for entree, coche in [("2000*1,045^n=3805", True), ("2^x=100", False), ("37*e^(-0,02t)=25", False), ("2C=C(1+0,04)^n", True)]:
+            self.calculer(page, entree)
+            self.assertEqual(page.evaluer("[document.querySelector('#option').hidden, document.querySelector('#option input').checked]"), [False, coche], entree)
+            page.evaluer("document.querySelector('#tout').click()")
+            self.assertEqual("Interprétation" in self.titres(page), coche, entree)
+        # solution négative, S = ∅ : la case est là, la carte ne donne qu'une phrase
+        self.calculer(page, "Q/2=Q*1,04^n")
+        page.evaluer("document.querySelector('#tout').click()")
+        self.assertIn("n'arrive jamais", page.evaluer("document.querySelector('#cartes .card:last-child').textContent"))
+        # ni équation logarithmique, ni calcul, ni erreur, ni deux solutions : pas de case
+        for entree in ("log(x+1)=7", "log_2(50)", "x<3", "2^(x^2)=8", "4^x=2^(2x)", "(x-1)(2^x-8)=0"):
+            self.calculer(page, entree)
+            self.assertTrue(page.evaluer("document.querySelector('#option').hidden"), entree)
+
+    def test_t33_el_case_au_clavier_et_a_360_px(self):
+        """La case se prend au clavier (focus visible, Espace) et reste lisible à 360 px, sans faire défiler la page."""
+        if "exponentielles-logarithmes" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.ouvrir("exponentielles-logarithmes")
+        page.evaluer("try { localStorage.clear(); } catch (e) {}")
+        page.taille(360)
+        self.calculer(page, "2C=C(1+4,5%)^n")
+        page.evaluer("document.querySelector('#tout').click()")
+        mesures = page.evaluer("""(() => { const r = document.querySelector('#option').getBoundingClientRect(), c = document.querySelector('#option input').getBoundingClientRect();
+            return [r.right <= window.innerWidth, r.left >= 0, c.width >= 20, document.documentElement.scrollWidth <= window.innerWidth,
+                    r.bottom <= document.querySelector('#cartes').getBoundingClientRect().top]; })()""")
+        self.assertEqual(mesures, [True] * 5)
+        self.assertIn("Au bout de 15 ans, 9 mois et 0 jour.", page.evaluer("document.querySelector('#cartes').textContent"))      # report des 30 jours
+        page.evaluer("document.querySelector('#option input').focus()")
+        self.assertEqual(page.evaluer("document.activeElement.type"), "checkbox")
+        self.assertNotEqual(page.evaluer("getComputedStyle(document.querySelector('#option')).outlineStyle"), "none")        # focus visible
+        for type_ in ("keyDown", "keyUp"):
+            params = dict(type=type_, key=" ", code="Space", windowsVirtualKeyCode=32)
+            if type_ == "keyDown":
+                params["text"] = " "
+            page.appel("Input.dispatchKeyEvent", **params)
+        page.attendre("!document.querySelector('#option input').checked", 5)
+        self.assertNotIn("Interprétation", self.titres(page))
+        page.taille(1100)
+
+    def test_t33_el_case_a_l_impression(self):
+        """À l'impression, la case disparaît ; la carte « Interprétation » est imprimée si elle est cochée, absente sinon."""
+        if "exponentielles-logarithmes" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.ouvrir("exponentielles-logarithmes")
+        page.evaluer("try { localStorage.clear(); } catch (e) {}")
+        self.calculer(page, "3Q=Q(1+3,75/100)^x")
+        page.evaluer("document.querySelector('#tout').click()")
+        affichage = lambda: page.evaluer("""[getComputedStyle(document.querySelector('#option')).display,
+            [...document.querySelectorAll('#cartes .card')].filter(c => getComputedStyle(c).display !== 'none').map(c => c.querySelector('h3').childNodes[0].textContent.trim())]""")
+        self.assertEqual(affichage()[0], "flex")
+        page.taille(1100, imprimante=True)
+        self.assertEqual(affichage(), ["none", ["Étape 1", "Étape 2", "Étape 3", "Solution", "Interprétation"]])
+        page.taille(1100)
+        page.evaluer("document.querySelector('#option input').click()")
+        page.taille(1100, imprimante=True)
+        self.assertEqual(affichage(), ["none", ["Étape 1", "Étape 2", "Étape 3", "Solution"]])
+        page.taille(1100)
+
     def test_t33_selecteur_absent_des_autres_outils(self):
         """Le sélecteur ne change pas les autres outils : aucun #variantes ni #methodeImprimee dans leur page après un calcul."""
         for outil in OUTILS:
@@ -315,7 +422,7 @@ class TestComportement(unittest.TestCase):
             with self.subTest(outil=outil):
                 page = self.ouvrir(outil)
                 self.calculer(page, CALCUL[outil])
-                self.assertFalse(page.evaluer("!!document.querySelector('#variantes') || !!document.querySelector('#methodeImprimee')"))
+                self.assertFalse(page.evaluer("!!document.querySelector('#variantes') || !!document.querySelector('#methodeImprimee') || !!document.querySelector('#option')"))
 
     def test_t31_libelle_pendant_le_chargement_de_sympy(self):
         """Pages à `sympyAvant` : un calcul lancé avant « Prêt. » affiche « Chargement du moteur de calcul pour cette fonction… »

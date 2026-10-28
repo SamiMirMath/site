@@ -22,6 +22,11 @@
    gardant le nombre de cartes visibles. Le choix est gardé d'une saisie à l'autre (mémoire de la page, et localStorage « variante:<outil> » dans un
    try/catch). Une ligne « Méthode : … » (`#methodeImprimee`) n'apparaît qu'à l'impression.
 
+   Option (case à cocher) : quand la sortie porte `option` ({cle, libelle, cochee, cartes}), le socle affiche sous le sélecteur une case (`#option`, créée
+   ici, `no-print`) ; cochée, les cartes de l'option s'ajoutent à la fin des cartes affichées, sans appel au moteur, en gardant le nombre de cartes
+   visibles (toutes si toutes l'étaient). `cochee` est l'état de départ ; le choix de l'élève vaut pour l'équation affichée (mémoire de la page,
+   gardé au changement de variante, oublié à la saisie suivante : le défaut dépend de l'équation). Une variante qui porte `option: false` n'a pas de case.
+
    Les textes d'interface (états, compteur d'étapes, messages de délai) sont écrits ici une seule fois.
    Les textes du corrigé viennent de `resoudre()` (Python) et sont rendus par commun/rendu.js.
    Test : `window.__delaiCalcul` (ms) remplace le délai de 30 s. */
@@ -44,6 +49,7 @@ function demarrerOutil(config) {
   const appelPy = (fn, arg, delai) => moteur.appelPy(fn, arg, delai);
   let cartes = [], visibles = 0, numCalcul = 0;
   let sortie = null, entreeCourante = "", varianteChoisie = null;          // sortie affichée, saisie dont elle est le corrigé, choix de l'élève (mémoire de la page)
+  let optionChoix = null, entreeOption = "";                              // état de la case choisi par l'élève (null : celui de la sortie), pour la saisie entreeOption
 
   function majEtat() { $("etat").textContent = moteur.sympyOK ? "Prêt." : "Chargement du moteur de calcul…"; }
 
@@ -151,6 +157,8 @@ function demarrerOutil(config) {
     entreeCourante = entree;
     const barre = $("variantes");
     if (barre) barre.hidden = true;
+    if (entree !== entreeOption) { optionChoix = null; entreeOption = entree; }          // une nouvelle équation reprend l'état de départ de la case
+    if ($("option")) $("option").hidden = true;
     if (!r.ok) {
       const box = $("cartes");
       box.innerHTML = "";
@@ -161,16 +169,21 @@ function demarrerOutil(config) {
       return;
     }
     if (r.variantes) barreVariantes(r);
-    poserCartes(r.variantes ? varianteAffichee(r).cartes : r.cartes, 1, true);
+    if (r.option) caseOption();
+    poserCartes(1, true);
   }
 
-  /* Les cartes de la sortie (ou de la variante choisie), `n` visibles. */
-  function poserCartes(liste, n, defiler) {
+  /* Les cartes de la sortie (ou de la variante choisie, avec les cartes de l'option si la case est cochée), `n` visibles. */
+  function cartesDeLaSortie() {
+    const base = sortie.variantes ? varianteAffichee(sortie).cartes : sortie.cartes;
+    return optionCochee() ? base.concat(sortie.option.cartes) : base;
+  }
+  function poserCartes(n, defiler) {
     const box = $("cartes");
     box.innerHTML = "";
     const contexte = { appelPy, entree: entreeCourante };
     if (sortie.entete) box.appendChild(rendreCarte(sortie.entete, contexte));       // toujours visible, hors du compteur d'étapes
-    cartes = liste.map(c => rendreCarte(c, contexte));
+    cartes = cartesDeLaSortie().map(c => rendreCarte(c, contexte));
     cartes.forEach(c => { c.classList.add("cache"); box.appendChild(c); });
     visibles = 0;
     montrer(n, defiler);
@@ -223,8 +236,44 @@ function demarrerOutil(config) {
     varianteChoisie = cle;
     try { localStorage.setItem(cleStockage, cle); } catch (e) { /* le choix reste en mémoire pour cette page */ }
     marquerVariante(v);
-    const toutAffiche = visibles >= cartes.length;
-    poserCartes(v.cartes, toutAffiche ? v.cartes.length : Math.min(Math.max(visibles, 1), v.cartes.length), false);       // pas de défilement : l'élève reste où il est
+    majOption();                                      // la case suit la variante (une méthode qui ne conclut pas n'a pas d'interprétation)
+    const toutAffiche = visibles >= cartes.length, total = cartesDeLaSortie().length;
+    poserCartes(toutAffiche ? total : Math.min(Math.max(visibles, 1), total), false);       // pas de défilement : l'élève reste où il est
+  }
+
+  /* ---------- option (case à cocher) ---------- */
+  function optionDisponible() {
+    return !!sortie && !!sortie.option && !(sortie.variantes && varianteAffichee(sortie).option === false);
+  }
+  function optionCochee() {
+    return optionDisponible() && (optionChoix === null ? sortie.option.cochee : optionChoix);
+  }
+  function majOption() {
+    const lab = $("option");
+    if (!lab) return;
+    lab.hidden = !optionDisponible();
+    if (!lab.hidden) {
+      lab.querySelector("input").checked = optionCochee();
+      lab.querySelector("span").textContent = sortie.option.libelle;
+    }
+  }
+  function caseOption() {
+    if (!$("option")) {
+      const lab = document.createElement("label"), coche = document.createElement("input"), texte = document.createElement("span");
+      lab.id = "option";
+      lab.className = "option no-print";
+      coche.type = "checkbox";
+      lab.append(coche, texte);
+      if ($("variantes")) $("variantes").after(lab); else $("resultat").prepend(lab);
+      coche.addEventListener("change", () => basculerOption(coche.checked));
+    }
+    majOption();
+  }
+  function basculerOption(coche) {
+    if (!sortie || !optionDisponible()) return;
+    optionChoix = coche;
+    const toutAffiche = visibles >= cartes.length, total = cartesDeLaSortie().length;
+    poserCartes(toutAffiche ? total : Math.min(Math.max(visibles, 1), total), toutAffiche && coche);       // cochée avec tout affiché : la carte ajoutée est montrée
   }
 
   function montrer(n, defiler = n === 1) {
