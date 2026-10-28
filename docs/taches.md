@@ -492,6 +492,7 @@ l'élève, un « Calcul en cours… » qui dure parce que SymPy se charge encore
 
 - **Suite du 28.10.2026 (problèmes d'application)** : paramètre (Q, C0, V0…) simplifié par une carte, base calculée (`1 + 3,75/100 = 1,0375`, signe %), carte « Interprétation » en années, mois et jours (case à cocher, R16), formes d'application dans le pool.
   Spécification : « Problèmes d'application », EL-22 à EL-25 ; socle commun : `option` (SOC-18). **Commits** : 0 docs · 1 lecture (casse, noms indexés, %, paramètre) · 2 base calculée · 3 simplifier par le paramètre + batterie · 4 interprétation (moteur) · 5 format de sortie `option` · 6 page · 7 pool · 8 audit avant/après.
+  **Audit du 28.10.2026 (commit 8)** : corpus de 13 126 saisies (9 660 d'avant + 3 466 d'applications : capitalisation et dépréciation × paramètres × écritures de la base × taux, sans paramètre, %, négatif, ∅, refus), oracle mpmath et durée recalculée en jours ; applications : OK 602 → 3 443, erreurs de lecture 2 864 → 20 (tous des refus voulus : deux inconnues, % mal placé, c0 en minuscule), pas encore 0 → 3 (base 1, 0 ou négative) ; corpus d'avant : inchangé (4 « faux » de l'oracle sur des racines doubles ou très petites, solutions du moteur vérifiées), 0 exception. Suite de pages : 47 tests verts (un délai dépassé dans le pincement des graphiques, relancé seul : vert).
   **Arrêt : relecture à l'écran**.
 
 ### T34 — Relire les autres outils avec la règle R13 (fractions et notation scientifique) — **après le test des 3C**
