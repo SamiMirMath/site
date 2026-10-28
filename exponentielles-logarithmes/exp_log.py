@@ -7,7 +7,9 @@ Lecture propre à l'outil, parce que le tokeniseur de l'Ensemble de définition 
     les exposants ² et ³ se lisent ^2 et ^3 (x² = x^2).
 
 Le tokeniseur reconnaît les noms de fonction (sqrt, exp, log…, ln) AVANT les lettres isolées : « exp » n'est jamais e·x·p.
-La lettre e est toujours le nombre e ; elle ne peut pas être l'inconnue.
+La lettre e est toujours le nombre e ; elle ne peut pas être l'inconnue. Les noms de fonction sont insensibles à la casse, les lettres non
+(Q n'est pas q) ; C0, V0, C_0 sont un seul nom (écrit C_{0}) ; « 3,75 % » vaut 3,75/100. Dans un problème d'application (3Q = Q(1+3,75/100)^x),
+l'inconnue est la lettre de l'exposant et toute autre lettre, facteur de chaque membre, est un paramètre qui se simplifie.
 
 Tout le TeX est écrit par notre arbre (`tex`) : ln → \\ln, log → \\log, log_a → \\log_{a}. Aucune conversion depuis SymPy,
 qui écrirait « log » pour ln. Ce fichier n'importe pas SymPy.
@@ -29,7 +31,7 @@ from noyau import ErreurSaisie, json_strict
 from nombres import (MOTIF_ESPACE_DANS_UN_NOMBRE, MOTIF_SAISIE, formater_decimal, formater_entier, nettoyer_saisie)
 
 __all__ = ["Nb", "Var", "E", "Neg", "Op", "Pow", "Fn", "Log", "tex", "variables", "lire_membres", "analyser_saisie", "tex_saisie",
-           "apercu", "apercu_json", "Saisie"]
+           "apercu", "apercu_json", "Saisie", "sans_facteur"]
 
 MESSAGE_E = "La lettre e désigne le nombre e ≈ 2,718 : choisissez une autre lettre pour l'inconnue."
 MESSAGE_EXPOSANT = "Mettez l'exposant entre parenthèses : e^(-0,02t)."
@@ -39,6 +41,7 @@ MESSAGE_SANS_EXP_LOG = "Cet outil traite les équations exponentielles et logari
 MESSAGE_PAS_UN_LOGARITHME = "Écrivez une équation (avec =) ou un logarithme à calculer, par exemple log_2(50)."
 MESSAGE_CALCUL_PAS_ENCORE = "Cet outil ne traite pas encore ce type de calcul."
 MESSAGE_ARGUMENT_NON_POSITIF = "Le logarithme d'un nombre négatif ou nul n'est pas défini."
+MESSAGE_POURCENT = "Le signe % se place juste après un nombre : 3,75 %."
 
 
 # =====================================================================
@@ -61,11 +64,12 @@ class Noeud:
 
 
 class Nb(Noeud):
-    """Nombre rationnel exact. `dec` : écriture décimale de la saisie (« 0,02 »), gardée pour l'affichage ; hors égalité."""
-    __slots__ = ("val", "dec")
+    """Nombre rationnel exact. `dec` : écriture décimale de la saisie (« 0,02 »), gardée pour l'affichage ; hors égalité.
+    `pct` : le nombre écrit avec le signe % dans la saisie (« 3,75 » pour 3,75 % ; `val` vaut alors 3,75/100), affichage seulement."""
+    __slots__ = ("val", "dec", "pct")
 
-    def __init__(self, val, dec=None):
-        self.val, self.dec = F(val), dec
+    def __init__(self, val, dec=None, pct=None):
+        self.val, self.dec, self.pct = F(val), dec, pct
 
     def _cle(self):
         return ("Nb", self.val)
@@ -169,6 +173,8 @@ def contient_e(n):
 def _nb_tex(n):
     """Notation suisse (Q5) : ’ dès 4 chiffres sur la partie entière, virgule décimale (moteur/nombres.py)."""
     v = n.val
+    if n.pct is not None:
+        return formater_decimal(n.pct, tex=True) + r"\,\%"
     if n.dec is not None:
         s = formater_decimal(n.dec, tex=True)
     elif v.denominator == 1:
@@ -190,13 +196,18 @@ def _entre_parentheses(s):
 _DEBUT_COLLABLE = re.compile(r"^([A-Za-z(]|\\left\(|\\ln|\\log|\\sqrt)")
 
 
+def _nom_tex(nom):
+    """C0 s'écrit C_{0} (nom indexé : une lettre suivie de chiffres), une lettre seule telle quelle."""
+    return nom[0] + "_{" + nom[1:] + "}" if len(nom) > 1 else nom
+
+
 def tex(n):
     if isinstance(n, Defini):
         return n.nom
     if isinstance(n, Nb):
         return _nb_tex(n)
     if isinstance(n, Var):
-        return n.nom
+        return _nom_tex(n.nom)
     if isinstance(n, E):
         return "e"
     if isinstance(n, Neg):
@@ -225,7 +236,7 @@ def tex(n):
         return g + r" \cdot " + d
     if isinstance(n, Pow):
         base = tex(n.a)
-        if isinstance(n.a, (Op, Neg, Log, Pow)) or (isinstance(n.a, Nb) and (n.a.val < 0 or (n.a.val.denominator != 1 and n.a.dec is None))):
+        if isinstance(n.a, (Op, Neg, Log, Pow)) or (isinstance(n.a, Nb) and (n.a.val < 0 or n.a.pct is not None or (n.a.val.denominator != 1 and n.a.dec is None))):
             base = _entre_parentheses(base)
         return base + "^{" + tex(n.b) + "}"
     if isinstance(n, Fn):
@@ -252,6 +263,8 @@ Tok = namedtuple("Tok", "type val base")      # type : num, var, fn, op ; base :
 
 _BASE_SOULIGNEE = re.compile(r"_(\d+(?:[.,]\d+)?|[a-z])")
 _BASE_COLLEE = re.compile(r"\d+")
+_MINUSCULES = str.maketrans("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz")      # str.lower() peut changer la longueur : seulement l'ASCII
+_NOM_INDEXE = re.compile(r"[A-Za-z](?:_([0-9]+)|(?<=[A-Z])([0-9]+))")      # C0, V0, C_0, c_0 (x2 reste x · 2 : message de lecture)
 _SYMBOLES = str.maketrans({"−": "-", "–": "-", "×": "*", "·": "*", "⋅": "*", "÷": "/", "²": "^2", "³": "^3"})   # x² se lit x^2 (clavier de téléphone)
 _OPERATEURS = "+-*/^()="
 _INEGALITES = "<>≤≥≠"
@@ -289,8 +302,17 @@ def _fonction_inconnue(s, i):
     return s[i:j]
 
 
+def _lire_nom(texte, i):
+    """(nom, fin) de la lettre en texte[i] : un nom indexé (C0, V_0, c_0) est une seule inconnue, écrite sans tiret bas (C0) ; e est le nombre e."""
+    if texte[i] in "eE":
+        return "e", i + 1
+    m = _NOM_INDEXE.match(texte, i)
+    return (texte[i] + (m.group(1) or m.group(2)), m.end()) if m else (texte[i], i + 1)
+
+
 def tokeniser(texte):
-    s = texte.strip().lower().translate(_SYMBOLES)
+    brut = texte.strip().translate(_SYMBOLES)
+    s = brut.translate(_MINUSCULES)                     # les noms de fonction ne tiennent pas compte de la casse, les lettres oui
     toks, i = [], 0
     while i < len(s):
         c = s[i]
@@ -312,10 +334,17 @@ def tokeniser(texte):
                 raise ErreurSaisie("Pas d'espace dans un nombre : écrivez 1000 ou 1’000.")
             toks.append(Tok("num", m.group(0), None))
             i = m.end()
+        elif c == "%":
+            if not toks or toks[-1].type != "num":
+                raise ErreurSaisie(MESSAGE_POURCENT)
+            toks.append(Tok("pct", "%", None))
+            i += 1
         elif c.isalpha() and c.isascii():
             f = _fonction(s, i)
             if f:
                 nom, base, j = f
+                if base is not None and base.isalpha() and base != "e":
+                    base = brut[j - 1]                  # log_Q(x) : la base garde sa casse
                 k = j
                 while k < len(s) and s[k].isspace():
                     k += 1
@@ -330,8 +359,8 @@ def tokeniser(texte):
                 inconnue = _fonction_inconnue(s, i)
                 if inconnue:
                     raise ErreurSaisie(f"La fonction {inconnue} n'est pas traitée par cet outil.")
-                toks.append(Tok("var", c, None))
-                i += 1
+                nom, i = _lire_nom(brut, i)
+                toks.append(Tok("var", nom, None))
         elif c in _OPERATEURS or c in _INEGALITES:
             toks.append(Tok("op", c, None))
             i += 1
@@ -346,6 +375,15 @@ def tokeniser(texte):
 def _nombre(brut):
     t = nettoyer_saisie(brut)
     return Nb(F(t), t.replace(".", ",") if "." in t else None)
+
+
+def _pourcentage(brut):
+    """« 3,75 » suivi de % : le nombre 3,75/100 (décimal 0,0375), écrit 3,75 % pour l'aperçu."""
+    t = nettoyer_saisie(brut)
+    dec = format(decimal.Decimal(t).scaleb(-2), "f")
+    if "." in dec:
+        dec = dec.rstrip("0").rstrip(".")
+    return Nb(F(t) / 100, dec.replace(".", ","), t.replace(".", ","))
 
 
 def _base(nom_base):
@@ -449,6 +487,10 @@ class _Parseur:
         if p is None:
             raise ErreurSaisie("Il manque quelque chose à la fin de l'expression.")
         if p.type == "num":
+            suivant = self.pic()
+            if suivant is not None and suivant.type == "pct":
+                self.i += 1
+                return _pourcentage(p.val)
             return _nombre(p.val)
         if p.type == "var":
             return E() if p.val == "e" else Var(p.val)
@@ -496,7 +538,46 @@ def lire_membres(texte):
 # =====================================================================
 # 5. SAISIE VALIDE : ÉQUATION À UNE INCONNUE, OU LOGARITHME À CALCULER
 # =====================================================================
-Saisie = namedtuple("Saisie", "genre g d inconnue")      # genre : « equation » ou « calcul » (d et inconnue : None)
+Saisie = namedtuple("Saisie", "genre g d inconnue parametres", defaults=((),))      # genre : « equation » ou « calcul » (d et inconnue : None) ; parametres : lettres à simplifier
+
+
+def _lettres_en_exposant(n):
+    """Les lettres qui figurent dans un exposant (la base d'un logarithme n'est pas un exposant)."""
+    if isinstance(n, Defini):
+        return _lettres_en_exposant(n.arbre)
+    if isinstance(n, (Var, Nb, E)):
+        return set()
+    if isinstance(n, (Neg, Fn, Log)):
+        return _lettres_en_exposant(n.a)
+    if isinstance(n, Op):
+        return _lettres_en_exposant(n.a) | _lettres_en_exposant(n.b)
+    if isinstance(n, Pow):
+        return variables(n.b) | _lettres_en_exposant(n.a) | _lettres_en_exposant(n.b)
+    raise TypeError(n)
+
+
+def sans_facteur(n, p):
+    """n divisé par la lettre p quand p en est un facteur simple (produit, quotient, opposé) et n'apparaît pas ailleurs ; sinon None.
+    3Q donne 3, Q(1+t)^x donne (1+t)^x, V0/2 donne 1/2, Q donne 1."""
+    if isinstance(n, Var):
+        return Nb(1) if n.nom == p else None
+    if isinstance(n, Neg):
+        r = sans_facteur(n.a, p)
+        return None if r is None else Neg(r)
+    if isinstance(n, Op) and n.op == "*":
+        if p not in variables(n.b) and (r := sans_facteur(n.a, p)) is not None:
+            return Op("*", r, n.b)
+        if p not in variables(n.a) and (r := sans_facteur(n.b, p)) is not None:
+            return Op("*", n.a, r)
+        return None
+    if isinstance(n, Op) and n.op == "/" and p not in variables(n.b):
+        r = sans_facteur(n.a, p)
+        return None if r is None else Op("/", r, n.b)
+    return None
+
+
+def _liste_de_lettres(noms):
+    return noms[0] if len(noms) == 1 else ", ".join(noms[:-1]) + " et " + noms[-1]
 
 
 def analyser_saisie(texte):
@@ -509,7 +590,17 @@ def analyser_saisie(texte):
     if not inconnues:
         raise ErreurSaisie(MESSAGE_E if contient_e(g) or contient_e(d) else "Il faut une inconnue : une lettre, par exemple x.")
     if len(inconnues) > 1:
-        raise ErreurSaisie("Une seule inconnue : vous avez écrit " + " et ".join(inconnues) + ".")
+        en_exposant = _lettres_en_exposant(g) | _lettres_en_exposant(d)
+        if len(en_exposant) != 1:
+            raise ErreurSaisie("Une seule inconnue : vous avez écrit " + " et ".join(inconnues) + ".")
+        x = next(iter(en_exposant))
+        autres = [v for v in inconnues if v != x]
+        refuses = [p for p in autres if sans_facteur(g, p) is None or sans_facteur(d, p) is None]
+        if refuses:                                 # un paramètre se simplifie : il est facteur de chaque membre (3Q = Q(1+t)^x)
+            noms = refuses + [x]
+            nombre = {2: "deux", 3: "trois"}.get(len(noms), "plusieurs")
+            raise ErreurSaisie(f"Cette équation contient {nombre} inconnues : " + _liste_de_lettres(noms) + ".")
+        return Saisie("equation", g, d, x, tuple(autres))
     return Saisie("equation", g, d, inconnues[0])
 
 

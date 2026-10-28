@@ -44,7 +44,7 @@ class TestTokeniseur(unittest.TestCase):
     def test_les_lettres_d_un_nom_de_fonction_ne_sont_jamais_des_inconnues(self):
         for s, attendu in [("ln(x)=3", {"x"}), ("exp(x)=7", {"x"}), ("log2(x)=4", {"x"}), ("log_3(x)=2", {"x"}),
                            ("log10(x)=1", {"x"}), ("sqrt(x)=3", {"x"}), ("log_x(256)=4", {"x"}), ("2*exp(t)=5", {"t"}),
-                           ("ln(p)+log(p)=1", {"p"}), ("EXP(x)=7", {"x"}), ("LN(X)=3", {"x"})]:
+                           ("ln(p)+log(p)=1", {"p"}), ("EXP(x)=7", {"x"}), ("LN(X)=3", {"X"})]:       # les noms de fonction ignorent la casse, les lettres non
             with self.subTest(s):
                 g, d = el.lire_membres(s)
                 self.assertEqual(el.variables(g) | el.variables(d), attendu)

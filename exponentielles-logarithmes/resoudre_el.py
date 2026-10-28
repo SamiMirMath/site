@@ -63,6 +63,8 @@ def resoudre(entree):
         s = el.analyser_saisie(entree)
     except ErreurSaisie as e:
         return so.sortie_erreur(str(e))
+    if s.parametres:                                    # lu, pas encore simplifié (étape 3 de T33, applications)
+        return so.sortie_erreur(el.MESSAGE_PAS_ENCORE)
     if s.genre == "calcul":
         r = el.calculer_logarithme(s.g)
         if r is None:
