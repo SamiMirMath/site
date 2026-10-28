@@ -215,7 +215,7 @@ def est_exponentielle(entree):
         s = el.analyser_saisie(entree)
     except el.ErreurSaisie:
         return False
-    return s.genre == "equation" and el.variantes_equation(s.g, s.d, s.inconnue) is not None
+    return s.genre == "equation" and el.variantes_equation(s.g, s.d, s.inconnue, s.parametres) is not None
 
 
 def exponentielles():

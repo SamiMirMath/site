@@ -142,7 +142,9 @@ class TestParametre(unittest.TestCase):
     def test_sans_facteur(self):
         Q = Var("Q")
         self.assertEqual(el.sans_facteur(Q, "Q"), Nb(1))
-        self.assertEqual(el.sans_facteur(Op("*", Nb(3), Q), "Q"), Op("*", Nb(3), Nb(1)))
+        self.assertEqual(el.sans_facteur(Op("*", Nb(3), Q), "Q"), Nb(3))
+        self.assertEqual(el.sans_facteur(Op("*", Q, Pow(Nb(2), Var("x"))), "Q"), Pow(Nb(2), Var("x")))
+        self.assertEqual(el.sans_facteur(Op("*", Op("+", Nb(1), Nb(2)), Q), "Q"), Op("+", Nb(1), Nb(2)))
         self.assertEqual(el.sans_facteur(Op("/", Q, Nb(2)), "Q"), Op("/", Nb(1), Nb(2)))
         self.assertEqual(el.sans_facteur(Neg(Q), "Q"), Neg(Nb(1)))
         self.assertIsNone(el.sans_facteur(Op("+", Q, Nb(1)), "Q"))
@@ -150,17 +152,24 @@ class TestParametre(unittest.TestCase):
         self.assertIsNone(el.sans_facteur(Op("*", Q, Q), "Q"))
         self.assertIsNone(el.sans_facteur(Nb(3), "Q"))
 
-    def test_pas_de_faux_corrige_tant_que_le_parametre_n_est_pas_simplifie(self):
-        # étape 1 : la saisie est lue, la résolution vient à l'étape 3 ; jamais un corrigé qui traite Q comme une constante
-        r = rel.resoudre("3Q = Q(1+3,75/100)^x")
-        self.assertFalse(r["ok"])
-        self.assertEqual(r["erreur"], el.MESSAGE_PAS_ENCORE)
-
     def test_l_apercu_d_un_probleme_d_application(self):
         r = el.apercu("3Q = Q(1+3,75/100)^x")
         self.assertTrue(r["ok"])
         self.assertEqual(r["tex"], r"3Q = Q \cdot \left(1 + \frac{3{,}75}{100}\right)^{x}")
         self.assertEqual(el.apercu("V0/2 = V0(1-20/100)^n")["tex"].count("V_{0}"), 2)
+
+
+def substituer(n, nom, valeur):
+    """L'arbre n où la lettre `nom` vaut le nombre `valeur` (oracle : l'énoncé tel qu'il est écrit, paramètre compris)."""
+    if isinstance(n, Var):
+        return Nb(valeur) if n.nom == nom else n
+    if isinstance(n, Neg):
+        return Neg(substituer(n.a, nom, valeur))
+    if isinstance(n, Op):
+        return Op(n.op, substituer(n.a, nom, valeur), substituer(n.b, nom, valeur))
+    if isinstance(n, Pow):
+        return Pow(substituer(n.a, nom, valeur), substituer(n.b, nom, valeur))
+    return n
 
 
 def titres(r):
@@ -228,18 +237,23 @@ class TestBaseCalculee(unittest.TestCase):
                     self.assertEqual(r["enonce"], Eq(s.g, s.d))
 
     def test_batterie_oracle_mpmath(self):
-        """La solution, substituée dans l'équation de l'énoncé (écrite avec le taux), la vérifie ; le nombre de solutions est celui attendu."""
+        """La solution, substituée dans l'équation de l'énoncé (écrite avec le taux et les paramètres, valant 1, 7 ou 1234,5), la vérifie ;
+        le nombre de solutions est celui attendu (EL-22)."""
         for saisie, attendu in BATTERIE_APPLICATIONS:
             with self.subTest(saisie):
                 s = el.analyser_saisie(saisie)
                 for m in el.METHODES:
-                    r = el.variantes_equation(s.g, s.d, s.inconnue)[m]
+                    r = el.variantes_equation(s.g, s.d, s.inconnue, s.parametres)[m]
                     if r.get("message"):
                         continue
                     self.assertEqual(len(r["solutions"]), len(attendu), m)
                     for n, v in zip(r["solutions"], attendu):
                         self.assertAlmostEqual(float(evaluer(n)), v, places=3)
-                        self.assertTrue(vrai(Eq(s.g, s.d), evaluer(n)), f"{saisie} : {m}")
+                        for valeur_du_parametre in (1, 7, F(24691, 20)):
+                            g, d = s.g, s.d
+                            for p in s.parametres:
+                                g, d = substituer(g, p, valeur_du_parametre), substituer(d, p, valeur_du_parametre)
+                            self.assertTrue(vrai(Eq(g, d), evaluer(n)), f"{saisie} : {m}, paramètre {valeur_du_parametre}")
 
     def test_sorties_valides_et_carte_numerotee(self):
         for saisie, _ in BATTERIE_APPLICATIONS:
@@ -249,9 +263,50 @@ class TestBaseCalculee(unittest.TestCase):
                 if saisie == "2=1,0375^x":                  # la base est déjà un nombre : pas de carte (entrée témoin)
                     self.assertNotIn("Calculer la base", [c.get("badge") for v in sortie["variantes"] for c in v["cartes"]])
                     continue
+                s = el.analyser_saisie(saisie)
+                attendu = "Calculer la base" if el.preparer_application(s.g, s.d, s.inconnue)[2] else "Simplifier par " + s.parametres[0]
                 for v in sortie["variantes"]:
                     premiere = v["cartes"][0]
-                    self.assertEqual((premiere["titre"], premiere["badge"]), ("Étape 1", "Calculer la base"))
+                    self.assertEqual((premiere["titre"], premiere["badge"]), ("Étape 1", attendu))
+
+    def test_les_cartes_d_un_probleme_avec_parametre(self):
+        s = el.analyser_saisie("3Q=Q(1+3,75/100)^x")
+        for m, r in el.variantes_equation(s.g, s.d, s.inconnue, s.parametres).items():
+            self.assertEqual(titres(r)[:2], ["Calculer la base", "Simplifier par Q"], m)
+        s = el.analyser_saisie("C0*1,05^n=2*C0")                    # pas de base à calculer : la carte du paramètre seule
+        r = el.corriger_equation(s.g, s.d, s.inconnue, parametres=s.parametres)
+        self.assertEqual(titres(r)[0], "Simplifier par C0")
+        chaine = r["etapes"][0]["lignes"][0]
+        self.assertEqual(el.tex_chaine(chaine), r"C_{0} \cdot 1{,}05^{n} = 2C_{0} \iff 1{,}05^{n} = 2 \quad \text{(on divise les deux membres par } C_{0} \text{ ; } C_{0} > 0 \text{ : une quantité de départ est positive)}")
+
+    def test_la_propriete_s_ecrit_avec_le_nom_du_parametre(self):
+        for saisie, nom_tex in [("3Q=Q(1+3,75/100)^x", "Q"), ("C_0*1,05^n=2C_0", "C_{0}"), ("V0/2=V0(1-20/100)^n", "V_{0}")]:
+            with self.subTest(saisie):
+                sortie = rel.resoudre(saisie)
+                texte = "".join(b.get("html", "") for v in sortie["variantes"] for c in v["cartes"] for b in c["blocs"])
+                self.assertIn(rf"on divise les deux membres par \({nom_tex}\) (\({nom_tex} &gt; 0\) : une quantité de départ est positive)", texte)
+
+    def test_dans_les_deux_methodes_la_carte_est_la_meme_et_les_solutions_aussi(self):
+        for saisie, _ in BATTERIE_APPLICATIONS:
+            s = el.analyser_saisie(saisie)
+            a, b = (el.variantes_equation(s.g, s.d, s.inconnue, s.parametres)[m] for m in el.METHODES)
+            self.assertEqual([c["titre"] for c in a["etapes"] if c["titre"].startswith(("Calculer", "Simplifier"))],
+                             [c["titre"] for c in b["etapes"] if c["titre"].startswith(("Calculer", "Simplifier"))], saisie)
+            if not a.get("message"):
+                self.assertEqual(a["solutions"], b["solutions"], saisie)
+
+    def test_chaque_justification_vient_de_la_liste_fermee(self):
+        """EL-06 : propriétés nommées de la liste, justification « car D ≠ 0 » ou division par le paramètre ; aucune ligne ⇔ sans justification."""
+        for saisie, _ in BATTERIE_APPLICATIONS:
+            s = el.analyser_saisie(saisie)
+            for m, r in el.variantes_equation(s.g, s.d, s.inconnue, s.parametres).items():
+                for c in r["etapes"]:
+                    for ligne in c["lignes"]:
+                        if isinstance(ligne, el.Chaine):
+                            for lien, p in zip(ligne.liens, ligne.props):
+                                self.assertTrue(p is None or p in el.PROPRIETES or isinstance(p, (el.Car, el.Divise)), (saisie, m, p))
+                                if c["titre"] == "Simplifier par " + (s.parametres[0] if s.parametres else ""):
+                                    self.assertIsInstance(p, el.Divise)
 
     def test_message_d_erreur_sur_l_equation_preparee(self):
         sortie = rel.resoudre("x*(1+0,04)^x=8")

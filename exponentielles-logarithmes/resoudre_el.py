@@ -63,21 +63,19 @@ def resoudre(entree):
         s = el.analyser_saisie(entree)
     except ErreurSaisie as e:
         return so.sortie_erreur(str(e))
-    if s.parametres:                                    # lu, pas encore simplifié (étape 3 de T33, applications)
-        return so.sortie_erreur(el.MESSAGE_PAS_ENCORE)
     if s.genre == "calcul":
         r = el.calculer_logarithme(s.g)
         if r is None:
             return so.sortie_erreur(el.message_calcul_non_resolu(s.g))
         final = so.carte("Résultat", [so.resultat(el.tex_resultat(r))], style="final")
         return so.sortie_ok(el.tex_saisie(s.g, s.d), _cartes(r) + [final])
-    variantes = el.variantes_equation(s.g, s.d, s.inconnue)
+    variantes = el.variantes_equation(s.g, s.d, s.inconnue, s.parametres)
     if variantes is not None:
         return so.sortie_ok_variantes(el.tex_saisie(s.g, s.d), [so.variante(m, LIBELLES[m], _cartes_equation(variantes[m])) for m in el.METHODES],
                                       el.METHODE_LOGARITHMES)
-    r = el.corriger_equation(s.g, s.d, s.inconnue)
+    r = el.corriger_equation(s.g, s.d, s.inconnue, parametres=s.parametres)
     if r is None:
-        g, d, _ = el.preparer_application(s.g, s.d, s.inconnue)
+        g, d, _ = el.preparer_application(s.g, s.d, s.inconnue, s.parametres)
         return so.sortie_erreur(el.message_non_resolu(g, d, s.inconnue))
     return so.sortie_ok(el.tex_saisie(s.g, s.d), _cartes_equation(r))
 

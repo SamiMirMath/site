@@ -556,6 +556,11 @@ def _lettres_en_exposant(n):
     raise TypeError(n)
 
 
+def _fois(a, b):
+    """a · b sans le facteur 1 : 1 · b s'écrit b."""
+    return b if a == Nb(1) else a if b == Nb(1) else Op("*", a, b)
+
+
 def sans_facteur(n, p):
     """n divisé par la lettre p quand p en est un facteur simple (produit, quotient, opposé) et n'apparaît pas ailleurs ; sinon None.
     3Q donne 3, Q(1+t)^x donne (1+t)^x, V0/2 donne 1/2, Q donne 1."""
@@ -566,9 +571,9 @@ def sans_facteur(n, p):
         return None if r is None else Neg(r)
     if isinstance(n, Op) and n.op == "*":
         if p not in variables(n.b) and (r := sans_facteur(n.a, p)) is not None:
-            return Op("*", r, n.b)
+            return _fois(r, n.b)
         if p not in variables(n.a) and (r := sans_facteur(n.b, p)) is not None:
-            return Op("*", n.a, r)
+            return _fois(n.a, r)
         return None
     if isinstance(n, Op) and n.op == "/" and p not in variables(n.b):
         r = sans_facteur(n.a, p)
@@ -906,7 +911,10 @@ def tex_chaine(c):
     s = tex_element(c.elements[0])
     for e, lien, prop in zip(c.elements[1:], c.liens, c.props):
         s += (r" \iff " if lien == "⇔" else " = ") + tex_element(e)
-        if isinstance(prop, Car):
+        if isinstance(prop, Divise):
+            q = _nom_tex(prop.nom)
+            s += r" \quad \text{(on divise les deux membres par } " + q + r" \text{ ; } " + q + r" > 0 \text{ : une quantité de départ est positive)}"
+        elif isinstance(prop, Car):
             s += r" \quad \text{(car } " + tex(prop.expr) + r" \neq 0\text{)}"
         elif prop:
             s += r" \quad \text{(" + prop + ")}"
@@ -943,7 +951,9 @@ def rangees_chaine(c):
         else:                                                         # nouvelle ligne, son « = » sous celui de la ligne d'au-dessus
             cale = r"\phantom{" + ancre + "}" if ancre and len(ancre) <= 30 else ""
             rangees.append(["", cale + " = " + tex_element(e), None])
-        if isinstance(prop, Car):
+        if isinstance(prop, Divise):
+            rangees[-1][2] = "(" + prop.texte() + ")"
+        elif isinstance(prop, Car):
             rangees[-1][2] = r"(car \(" + tex(prop.expr) + r" \neq 0\))"
         elif prop:
             rangees[-1][2] = "(" + prop + ")"
@@ -1641,6 +1651,18 @@ class Car:
 
     def __init__(self, expr):
         self.expr = expr
+
+
+class Divise:
+    """Justification de la carte « Simplifier par Q » : on divise les deux membres par le paramètre Q, positif parce que c'est une quantité de départ."""
+    __slots__ = ("nom",)
+
+    def __init__(self, nom):
+        self.nom = nom
+
+    def texte(self):
+        q = _nom_tex(self.nom)
+        return rf"on divise les deux membres par \({q}\) (\({q} > 0\) : une quantité de départ est positive)"
 
 
 def _oppose(t):
@@ -2444,10 +2466,10 @@ def _variantes_sans_preparation(g, d, x):
     return None if rb is None or ra is None else {METHODE_MEME_BASE: ra, METHODE_LOGARITHMES: rb}
 
 
-def variantes_equation(g, d, x):
+def variantes_equation(g, d, x, parametres=()):
     """{méthode: résultat} pour une équation exponentielle (les deux résolutions, calculées en une fois), None pour tout le reste.
-    Les cartes de préparation d'un problème d'application (base calculée) viennent en tête des deux résolutions."""
-    g2, d2, cartes = preparer_application(g, d, x)
+    Les cartes de préparation d'un problème d'application (base calculée, paramètre simplifié) viennent en tête des deux résolutions."""
+    g2, d2, cartes = preparer_application(g, d, x, parametres)
     variantes = _variantes_sans_preparation(g2, d2, x)
     return None if variantes is None else {m: _avec_preparation(r, g, d, cartes) for m, r in variantes.items()}
 
@@ -2506,15 +2528,22 @@ def _remplacer_les_bases(n, trouvees):
     return n
 
 
-def preparer_application(g, d, x):
+def preparer_application(g, d, x, parametres=()):
     """(g', d', cartes) : l'équation d'un problème d'application ramenée à une équation exponentielle ordinaire, avec les cartes qui le disent.
     Une base écrite avec un taux (1 + 3,75/100, 1 − 20/100, 1 + 0,035, 1 + 3,75 %) devient un nombre, sur une ligne à part (carte « Calculer la
-    base », commune aux deux méthodes). Sans rien à préparer : (g, d, [])."""
+    base », commune aux deux méthodes). Un paramètre (3Q = Q(1 + 3,75/100)^x : Q est facteur de chaque membre) se simplifie ensuite, une carte
+    « Simplifier par Q » par paramètre. Sans rien à préparer : (g, d, [])."""
     trouvees = []
     g2, d2 = _remplacer_les_bases(g, trouvees), _remplacer_les_bases(d, trouvees)
     cartes = []
     if trouvees:
         cartes.append(_carte("Calculer la base", [Chaine([ancienne, nouvelle], ["="], [None]) for ancienne, nouvelle in trouvees]))
+    for p in parametres:
+        g3, d3 = sans_facteur(g2, p), sans_facteur(d2, p)
+        if g3 is None or d3 is None:
+            raise ValueError(f"{p} n'est pas un facteur de chaque membre")      # analyser_saisie l'a déjà refusé
+        cartes.append(_carte(f"Simplifier par {p}", [Chaine([Eq(g2, d2), Eq(g3, d3)], ["⇔"], [Divise(p)])]))
+        g2, d2 = g3, d3
     return g2, d2, cartes
 
 
@@ -3044,10 +3073,10 @@ def tex_solution(r):
     return s + r" \text{, soit } " + r" \text{ ou } ".join(parts)
 
 
-def corriger_equation(g, d, x, methode=METHODE_LOGARITHMES):
+def corriger_equation(g, d, x, methode=METHODE_LOGARITHMES, parametres=()):
     """Corrigé de g = d : pour une équation exponentielle, la résolution de la méthode demandée (METHODES, B « logarithmes » par défaut) ;
     sinon la première méthode du cours qui s'applique (équation logarithmique, premier degré). None si l'équation ne se résout pas avec ces méthodes."""
-    g2, d2, cartes = preparer_application(g, d, x)
+    g2, d2, cartes = preparer_application(g, d, x, parametres)
     variantes = _variantes_sans_preparation(g2, d2, x)
     if variantes is not None:
         return _avec_preparation(variantes[methode], g, d, cartes)
