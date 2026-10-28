@@ -151,5 +151,62 @@ class TestVariantes(unittest.TestCase):
         self.assertNotIn("variante_defaut", s)
 
 
+def avec_option(cochee=False):
+    a = [so.carte("Étape 1", [so.texte("a")], badge="Méthode A"), so.carte("Solution", [so.resultat("S = \\{1\\}")], style="final")]
+    b = [so.carte("Étape 1", [so.texte("b")], badge="Méthode B"), so.carte("Solution", [so.resultat("S = \\{1\\}")], style="final")]
+    plus = so.carte("Interprétation", [so.resultat("\\text{Au bout de 1 an.}")], style="final")
+    return so.sortie_ok_variantes("x = 1", [so.variante("a", "Méthode A", a, option=False), so.variante("b", "Méthode B", b)], "b",
+                                  option=so.option("interpretation", "Problème d'application", [plus], cochee))
+
+
+class TestOption(unittest.TestCase):
+    """SOC-18 : une case à cocher dont les cartes s'ajoutent aux cartes affichées (facultatif, premier usage : Exponentielles et logarithmes)."""
+
+    def _refuse(self, modifier, fragment):
+        s = copy.deepcopy(avec_option())
+        modifier(s)
+        ecarts = so.valider(s)
+        self.assertTrue(any(fragment in e for e in ecarts), ecarts)
+
+    def test_sortie_conforme(self):
+        for cochee in (False, True):
+            s = avec_option(cochee)
+            self.assertEqual(so.valider(s), [])
+            self.assertIs(s["option"]["cochee"], cochee)
+            self.assertEqual(s["variantes"][0]["option"], False)
+            self.assertNotIn("option", s["variantes"][1])
+
+    def test_sans_variantes(self):
+        c = [so.carte("Solution", [so.resultat("S = \\{1\\}")], style="final")]
+        s = so.sortie_ok("x = 1", c, option=so.option("interpretation", "Problème d'application", c, True))
+        self.assertEqual(so.valider(s), [])
+
+    def test_cle_manquante_ou_inconnue(self):
+        for cle in ("cle", "libelle", "cochee", "cartes"):
+            self._refuse(lambda s, cle=cle: s["option"].pop(cle), f"clé « {cle} » manquante")
+        self._refuse(lambda s: s["option"].update(autre=1), "clé « autre » inconnue")
+
+    def test_cochee_est_un_booleen(self):
+        self._refuse(lambda s: s["option"].update(cochee="oui"), "cochee doit être un booléen")
+        self._refuse(lambda s: s["option"].update(cochee=1), "cochee doit être un booléen")
+
+    def test_textes_non_vides(self):
+        self._refuse(lambda s: s["option"].update(cle=""), "cle et libelle")
+        self._refuse(lambda s: s["option"].update(libelle=""), "cle et libelle")
+
+    def test_cartes_valides_et_non_vides(self):
+        self._refuse(lambda s: s["option"].update(cartes=[]), "liste non vide")
+        self._refuse(lambda s: s["option"]["cartes"][0].update(style="rose"), "style « rose » inconnu")
+
+    def test_option_d_une_variante(self):
+        self._refuse(lambda s: s["variantes"][0].update(option=True), "option doit être false")
+        self._refuse(lambda s: s.pop("option"), "sans que la sortie en ait une")
+
+    def test_sortie_sans_option_inchangee(self):
+        for s in (exemple(), avec_variantes()):
+            self.assertNotIn("option", s)
+            self.assertTrue(all("option" not in v for v in s.get("variantes", [])))
+
+
 if __name__ == "__main__":
     unittest.main()

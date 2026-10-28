@@ -47,6 +47,64 @@ class TestFormat(unittest.TestCase):
         self.assertEqual(rel.apercu_json("3^(x+1)=27"), el.apercu_json("3^(x+1)=27"))
 
 
+class TestOption(unittest.TestCase):
+    """EL-24 (côté moteur) : la case « Problème d'application (temps en années) » et sa carte « Interprétation » dans la sortie."""
+
+    def test_probleme_avec_parametre_pre_coche(self):
+        o = rel.resoudre("3Q=Q(1+3,75/100)^x")["option"]
+        self.assertEqual((o["cle"], o["libelle"], o["cochee"]), ("interpretation", "Problème d'application (temps en années)", True))
+        self.assertEqual([c["titre"] for c in o["cartes"]], ["Interprétation"])
+        self.assertEqual(o["cartes"][0]["style"], "final")
+        dernier = o["cartes"][0]["blocs"][-1]
+        self.assertEqual((dernier["type"], dernier["tex"]), ("resultat", r"\text{Au bout de 29 ans, 10 mois et 4 jours.}"))
+
+    def test_pre_coche_seulement_avec_un_parametre_ou_l_inconnue_n(self):
+        for entree, coche in [("3Q=Q(1+3,75/100)^x", True), ("2000*1,045^n=3805", True), ("2=1,04^n", True), ("37e^(-0,02t)=25", False),
+                              ("2^x=100", False), ("3^(x+1)=27", False), ("3=(1+3,75%)^x", False)]:
+            with self.subTest(entree):
+                self.assertIs(rel.resoudre(entree)["option"]["cochee"], coche)
+
+    def test_pas_de_case_quand_l_interpretation_n_a_pas_de_sens(self):
+        for entree in ["log(5-x)=8", "log_x(256)=4", "x=ln(3)", "log_2(50)", "2^(x^2)=8", "4^x=2^(2x)", "2^x-2^x=0", "x*2^x=8", "2e=5", "(x-1)(2^x-8)=0"]:
+            with self.subTest(entree):
+                self.assertNotIn("option", rel.resoudre(entree))
+
+    def test_case_et_phrases_sans_duree(self):
+        for entree, phrase in [("Q/2=Q*1,04^n", "La solution est négative : la situation décrite n'arrive jamais."),
+                               ("-2Q=Q*1,04^n", "Aucune solution : la situation décrite n'arrive jamais."),
+                               ("Q*1,04^n=Q", "La situation est atteinte dès le départ.")]:
+            with self.subTest(entree):
+                o = rel.resoudre(entree)["option"]
+                self.assertEqual([b["type"] for b in o["cartes"][0]["blocs"]], ["resultat"])
+                self.assertEqual(o["cartes"][0]["blocs"][0]["tex"], r"\text{" + phrase + "}")
+
+    def test_la_methode_a_qui_ne_conclut_pas_n_a_pas_de_case(self):
+        s = rel.resoudre("3=(1+3,75/100)^x")
+        par_cle = {v["cle"]: v for v in s["variantes"]}
+        self.assertIs(par_cle["meme_base"]["option"], False)
+        self.assertNotIn("option", par_cle["logarithmes"])
+        sans_probleme = rel.resoudre("10^(x+1)=10^8")                 # la méthode A conclut : une case pour les deux
+        self.assertTrue(all("option" not in v for v in sans_probleme["variantes"]))
+
+    def test_la_carte_est_celle_du_moteur_pour_toutes_les_entrees(self):
+        vus = 0
+        for entree in entrees_el():
+            s = el.analyser_saisie(entree) if rel.resoudre(entree)["ok"] else None
+            if s is None or s.genre != "equation":
+                continue
+            variantes = el.variantes_equation(s.g, s.d, s.inconnue, s.parametres)
+            r = variantes[el.METHODE_LOGARITHMES] if variantes else el.corriger_equation(s.g, s.d, s.inconnue, parametres=s.parametres)
+            inter = el.interpretation(r)
+            sortie = rel.resoudre(entree)
+            with self.subTest(entree):
+                self.assertEqual("option" in sortie, inter is not None)
+                if inter is not None:
+                    vus += 1
+                    self.assertEqual(sortie["option"]["cochee"], el.suggere_interpretation(s))
+                    self.assertEqual(sortie["option"]["cartes"][0]["blocs"][-1]["tex"], r"\text{" + inter["conclusion"] + "}")
+        self.assertGreater(vus, 150)
+
+
 def chaines_du_moteur(entree):
     s = el.analyser_saisie(entree)
     r = el.calculer_logarithme(s.g) if s.genre == "calcul" else el.corriger_equation(s.g, s.d, s.inconnue)

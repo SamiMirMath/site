@@ -58,6 +58,22 @@ def _cartes_equation(r):
     return _cartes(r) + ([] if r.get("message") else [_carte_solution(r)])
 
 
+def _carte_interpretation(inter):
+    """La carte « Interprétation » : les lignes du calcul, puis la phrase de la fin dans un encadré."""
+    blocs = [_ligne(ligne) for ligne in inter["carte"]["lignes"]]
+    blocs.append(so.resultat(r"\text{" + inter["conclusion"] + "}"))
+    return so.carte("Interprétation", blocs, style="final")
+
+
+def _option(s, r):
+    """La case « Problème d'application (temps en années) » de la sortie, ou None quand l'interprétation n'a pas de sens ; pré-cochée avec un
+    paramètre ou l'inconnue n (`suggere_interpretation`)."""
+    inter = el.interpretation(r)
+    if inter is None:
+        return None
+    return so.option("interpretation", el.LIBELLE_INTERPRETATION, [_carte_interpretation(inter)], el.suggere_interpretation(s))
+
+
 def resoudre(entree):
     try:
         s = el.analyser_saisie(entree)
@@ -71,13 +87,17 @@ def resoudre(entree):
         return so.sortie_ok(el.tex_saisie(s.g, s.d), _cartes(r) + [final])
     variantes = el.variantes_equation(s.g, s.d, s.inconnue, s.parametres)
     if variantes is not None:
-        return so.sortie_ok_variantes(el.tex_saisie(s.g, s.d), [so.variante(m, LIBELLES[m], _cartes_equation(variantes[m])) for m in el.METHODES],
-                                      el.METHODE_LOGARITHMES)
+        option = _option(s, variantes[el.METHODE_LOGARITHMES])
+        return so.sortie_ok_variantes(
+            el.tex_saisie(s.g, s.d),
+            [so.variante(m, LIBELLES[m], _cartes_equation(variantes[m]), option=option is None or el.interpretation(variantes[m]) is not None)
+             for m in el.METHODES],
+            el.METHODE_LOGARITHMES, option=option)
     r = el.corriger_equation(s.g, s.d, s.inconnue, parametres=s.parametres)
     if r is None:
         g, d, _ = el.preparer_application(s.g, s.d, s.inconnue, s.parametres)
         return so.sortie_erreur(el.message_non_resolu(g, d, s.inconnue))
-    return so.sortie_ok(el.tex_saisie(s.g, s.d), _cartes_equation(r))
+    return so.sortie_ok(el.tex_saisie(s.g, s.d), _cartes_equation(r), option=_option(s, r))
 
 
 def resoudre_json(entree):
