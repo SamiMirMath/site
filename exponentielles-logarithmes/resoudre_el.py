@@ -77,7 +77,8 @@ def resoudre(entree):
                                       el.METHODE_LOGARITHMES)
     r = el.corriger_equation(s.g, s.d, s.inconnue)
     if r is None:
-        return so.sortie_erreur(el.message_non_resolu(s.g, s.d, s.inconnue))
+        g, d, _ = el.preparer_application(s.g, s.d, s.inconnue)
+        return so.sortie_erreur(el.message_non_resolu(g, d, s.inconnue))
     return so.sortie_ok(el.tex_saisie(s.g, s.d), _cartes_equation(r))
 
 

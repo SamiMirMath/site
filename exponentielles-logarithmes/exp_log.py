@@ -2438,11 +2438,94 @@ def resolution_exponentielle(g, d, x, methode=METHODE_LOGARITHMES):
         return None
 
 
-def variantes_equation(g, d, x):
-    """{méthode: résultat} pour une équation exponentielle (les deux résolutions, calculées en une fois), None pour tout le reste."""
+def _variantes_sans_preparation(g, d, x):
     rb = resolution_exponentielle(g, d, x, METHODE_LOGARITHMES)
     ra = resolution_exponentielle(g, d, x, METHODE_MEME_BASE) if rb is not None else None
     return None if rb is None or ra is None else {METHODE_MEME_BASE: ra, METHODE_LOGARITHMES: rb}
+
+
+def variantes_equation(g, d, x):
+    """{méthode: résultat} pour une équation exponentielle (les deux résolutions, calculées en une fois), None pour tout le reste.
+    Les cartes de préparation d'un problème d'application (base calculée) viennent en tête des deux résolutions."""
+    g2, d2, cartes = preparer_application(g, d, x)
+    variantes = _variantes_sans_preparation(g2, d2, x)
+    return None if variantes is None else {m: _avec_preparation(r, g, d, cartes) for m, r in variantes.items()}
+
+
+# =====================================================================
+# 10 bis. PROBLÈMES D'APPLICATION : base calculée (1 + 3,75/100 = 1,0375)
+# =====================================================================
+def _a_un_taux(n):
+    """Vrai si l'arbre écrit un taux : un décimal (0,035), un pourcentage (3,75 %) ou une division par 100, 1000… (20/100)."""
+    if isinstance(n, Nb):
+        return n.dec is not None or n.pct is not None
+    if isinstance(n, Op) and n.op == "/" and isinstance(n.b, Nb) and n.b.val in (100, 1000, 10000):
+        return True
+    if isinstance(n, (Neg, Fn)):
+        return _a_un_taux(n.a)
+    if isinstance(n, (Op, Pow)):
+        return _a_un_taux(n.a) or _a_un_taux(n.b)
+    return False
+
+
+def _base_a_calculer(b):
+    """Vrai pour une base constante écrite avec un taux, qui n'est pas déjà un nombre : 1 + 3,75/100, 1 − 20/100, 1 + 0,035, 1 + 3,75 %."""
+    if isinstance(b, (Nb, E)) or variables(b) or not _a_un_taux(b):
+        return False
+    v = _const(b)
+    return v is not None and v > 0 and v != 1
+
+
+def _valeur_de_la_base(v):
+    """La valeur exacte d'une base calculée : un décimal quand elle s'arrête (1,0375 ; 0,8), une fraction sinon."""
+    global _DECIMAUX
+    avant, _DECIMAUX = _DECIMAUX, True
+    try:
+        return _nb_exact(v)
+    finally:
+        _DECIMAUX = avant
+
+
+def _remplacer_les_bases(n, trouvees):
+    """n dont chaque base à calculer (puissance d'exposant variable) est remplacée par sa valeur ; `trouvees` : [(base écrite, valeur)]."""
+    if isinstance(n, Pow) and variables(n.b) and _base_a_calculer(n.a):
+        nouvelle = _valeur_de_la_base(_const(n.a))
+        if not any(tex(a) == tex(n.a) for a, _ in trouvees):
+            trouvees.append((n.a, nouvelle))
+        return Pow(nouvelle, _remplacer_les_bases(n.b, trouvees))
+    if isinstance(n, Pow):
+        return Pow(_remplacer_les_bases(n.a, trouvees), _remplacer_les_bases(n.b, trouvees))
+    if isinstance(n, Op):
+        return Op(n.op, _remplacer_les_bases(n.a, trouvees), _remplacer_les_bases(n.b, trouvees))
+    if isinstance(n, Neg):
+        return Neg(_remplacer_les_bases(n.a, trouvees))
+    if isinstance(n, Fn):
+        return Fn(n.nom, _remplacer_les_bases(n.a, trouvees))
+    if isinstance(n, Log):
+        return Log(_remplacer_les_bases(n.a, trouvees), n.base)
+    return n
+
+
+def preparer_application(g, d, x):
+    """(g', d', cartes) : l'équation d'un problème d'application ramenée à une équation exponentielle ordinaire, avec les cartes qui le disent.
+    Une base écrite avec un taux (1 + 3,75/100, 1 − 20/100, 1 + 0,035, 1 + 3,75 %) devient un nombre, sur une ligne à part (carte « Calculer la
+    base », commune aux deux méthodes). Sans rien à préparer : (g, d, [])."""
+    trouvees = []
+    g2, d2 = _remplacer_les_bases(g, trouvees), _remplacer_les_bases(d, trouvees)
+    cartes = []
+    if trouvees:
+        cartes.append(_carte("Calculer la base", [Chaine([ancienne, nouvelle], ["="], [None]) for ancienne, nouvelle in trouvees]))
+    return g2, d2, cartes
+
+
+def _avec_preparation(r, g, d, cartes):
+    """Le résultat `r` (de l'équation préparée) précédé des cartes de préparation ; l'énoncé est celui de la saisie."""
+    if r is None or not cartes:
+        return r
+    r = dict(r)
+    r["etapes"] = list(cartes) + list(r["etapes"])
+    r["enonce"] = Eq(g, d)
+    return r
 
 
 # =====================================================================
@@ -2964,16 +3047,17 @@ def tex_solution(r):
 def corriger_equation(g, d, x, methode=METHODE_LOGARITHMES):
     """Corrigé de g = d : pour une équation exponentielle, la résolution de la méthode demandée (METHODES, B « logarithmes » par défaut) ;
     sinon la première méthode du cours qui s'applique (équation logarithmique, premier degré). None si l'équation ne se résout pas avec ces méthodes."""
-    variantes = variantes_equation(g, d, x)
+    g2, d2, cartes = preparer_application(g, d, x)
+    variantes = _variantes_sans_preparation(g2, d2, x)
     if variantes is not None:
-        return variantes[methode]
-    seule = resolution_exponentielle(g, d, x, METHODE_MEME_BASE)
+        return _avec_preparation(variantes[methode], g, d, cartes)
+    seule = resolution_exponentielle(g2, d2, x, METHODE_MEME_BASE)
     if seule is not None and not seule.get("message"):
-        return seule                                   # 4^x = 2^(2x) : la méthode B diviserait par log(4) − 2 log(2) = 0, la méthode A seule
+        return _avec_preparation(seule, g, d, cartes)  # 4^x = 2^(2x) : la méthode B diviserait par log(4) − 2 log(2) = 0, la méthode A seule
     for essai in (logarithmique, lineaire_logarithmes):
-        r = essai(g, d, x)
+        r = essai(g2, d2, x)
         if r is not None:
-            return r
+            return _avec_preparation(r, g, d, cartes)
     return None
 
 

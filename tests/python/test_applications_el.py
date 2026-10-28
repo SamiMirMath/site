@@ -5,10 +5,13 @@ from fractions import Fraction as F
 
 import moteurs  # noqa : met les moteurs dans sys.path
 import exp_log as el
-from exp_log import Nb, Var, Op, Pow, Neg
+from exp_log import Nb, Var, Op, Pow, Neg, Eq
 from noyau import ErreurSaisie
 
 import resoudre_el as rel
+import sortie as so
+from cas_el import BATTERIE_APPLICATIONS
+from test_exp_log import evaluer, vrai
 
 
 def lire(s):
@@ -158,6 +161,102 @@ class TestParametre(unittest.TestCase):
         self.assertTrue(r["ok"])
         self.assertEqual(r["tex"], r"3Q = Q \cdot \left(1 + \frac{3{,}75}{100}\right)^{x}")
         self.assertEqual(el.apercu("V0/2 = V0(1-20/100)^n")["tex"].count("V_{0}"), 2)
+
+
+def titres(r):
+    return [c["titre"] for c in r["etapes"]]
+
+
+class TestBaseCalculee(unittest.TestCase):
+    """EL-22 : une base écrite avec un taux devient un nombre, sur une ligne à part, dans les deux méthodes."""
+
+    def prepare(self, saisie):
+        s = el.analyser_saisie(saisie)
+        return s, el.preparer_application(s.g, s.d, s.inconnue)
+
+    def test_la_ligne_de_la_base(self):
+        for saisie, ligne in [
+            ("3=(1+3,75/100)^x", r"1 + \frac{3{,}75}{100} = 1{,}0375"),
+            ("3=(1+3,75%)^x", r"1 + 3{,}75\,\% = 1{,}0375"),
+            ("2=(1+0,04)^n", r"1 + 0{,}04 = 1{,}04"),
+            ("0,5=(1-20/100)^n", r"1 - \frac{20}{100} = 0{,}8"),
+            ("(1+0,035)^n=2", r"1 + 0{,}035 = 1{,}035"),
+            ("2000*(1+4,5%)^n=3805", r"1 + 4{,}5\,\% = 1{,}045"),
+        ]:
+            with self.subTest(saisie):
+                _, (g, d, cartes) = self.prepare(saisie)
+                self.assertEqual([c["titre"] for c in cartes], ["Calculer la base"])
+                self.assertEqual([el.tex_chaine(l) for l in cartes[0]["lignes"]], [ligne])
+
+    def test_la_base_devient_un_decimal_ou_une_fraction(self):
+        _, (g, d, _) = self.prepare("3=(1+3,75/100)^x")
+        self.assertEqual((d.a.val, d.a.dec), (F(10375, 10000), "1,0375"))
+        _, (g, d, _) = self.prepare("3=(1+0,1/3)^x")        # 31/30 ne s'arrête pas : une fraction
+        self.assertEqual((d.a.val, d.a.dec), (F(31, 30), None))
+        _, (g, d, _) = self.prepare("3=(1-20/100)^x")
+        self.assertEqual((d.a.val, d.a.dec), (F(4, 5), "0,8"))
+
+    def test_rien_a_calculer(self):
+        for saisie in ["3^(x+1)=27", "(1/2)^x=8", "1,5^x=2,25", "2000*1,045^n=3805", "(1+1/3)^x=2", "(2+1)^x=9", "e^x=7", "log(5-x)=8",
+                       "3=1^x", "(0,5+0,5)^x=2", "(1+0,04)=x+1", "2^(1+0,5)=x"]:
+            with self.subTest(saisie):
+                try:
+                    s = el.analyser_saisie(saisie)
+                except ErreurSaisie:
+                    continue
+                g, d, cartes = el.preparer_application(s.g, s.d, s.inconnue)
+                self.assertEqual(cartes, [])
+                self.assertEqual((g, d), (s.g, s.d))
+
+    def test_une_seule_ligne_par_base(self):
+        s = el.analyser_saisie("(1+0,04)^x=2*(1+0,04)^(2x)")
+        _, _, cartes = el.preparer_application(s.g, s.d, s.inconnue)
+        self.assertEqual(len(cartes[0]["lignes"]), 1)
+        s = el.analyser_saisie("(1+0,04)^x=(1+5%)^x")
+        _, _, cartes = el.preparer_application(s.g, s.d, s.inconnue)
+        self.assertEqual(len(cartes[0]["lignes"]), 2)
+
+    def test_les_deux_methodes_commencent_par_la_carte(self):
+        for saisie in ["3=(1+3,75/100)^x", "2000*(1+0,045)^n=3805", "0,5=(1-20/100)^n", "3=(1+3,75%)^x"]:
+            with self.subTest(saisie):
+                s = el.analyser_saisie(saisie)
+                variantes = el.variantes_equation(s.g, s.d, s.inconnue)
+                self.assertEqual(set(variantes), set(el.METHODES))
+                for m, r in variantes.items():
+                    self.assertEqual(titres(r)[0], "Calculer la base", m)
+                    self.assertEqual(titres(r).count("Calculer la base"), 1)
+                    self.assertEqual(r["enonce"], Eq(s.g, s.d))
+
+    def test_batterie_oracle_mpmath(self):
+        """La solution, substituée dans l'équation de l'énoncé (écrite avec le taux), la vérifie ; le nombre de solutions est celui attendu."""
+        for saisie, attendu in BATTERIE_APPLICATIONS:
+            with self.subTest(saisie):
+                s = el.analyser_saisie(saisie)
+                for m in el.METHODES:
+                    r = el.variantes_equation(s.g, s.d, s.inconnue)[m]
+                    if r.get("message"):
+                        continue
+                    self.assertEqual(len(r["solutions"]), len(attendu), m)
+                    for n, v in zip(r["solutions"], attendu):
+                        self.assertAlmostEqual(float(evaluer(n)), v, places=3)
+                        self.assertTrue(vrai(Eq(s.g, s.d), evaluer(n)), f"{saisie} : {m}")
+
+    def test_sorties_valides_et_carte_numerotee(self):
+        for saisie, _ in BATTERIE_APPLICATIONS:
+            with self.subTest(saisie):
+                sortie = rel.resoudre(saisie)
+                self.assertEqual(so.valider(sortie), [])
+                if saisie == "2=1,0375^x":                  # la base est déjà un nombre : pas de carte (entrée témoin)
+                    self.assertNotIn("Calculer la base", [c.get("badge") for v in sortie["variantes"] for c in v["cartes"]])
+                    continue
+                for v in sortie["variantes"]:
+                    premiere = v["cartes"][0]
+                    self.assertEqual((premiere["titre"], premiere["badge"]), ("Étape 1", "Calculer la base"))
+
+    def test_message_d_erreur_sur_l_equation_preparee(self):
+        sortie = rel.resoudre("x*(1+0,04)^x=8")
+        self.assertFalse(sortie["ok"])
+        self.assertEqual(sortie["erreur"], el.MESSAGE_HORS_PROGRAMME)
 
 
 if __name__ == "__main__":

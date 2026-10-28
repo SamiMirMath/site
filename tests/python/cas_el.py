@@ -140,6 +140,13 @@ BATTERIE_AUDIT = [
     ("e^(2x)/e^x=5", [1.609]), ("10^(2x)/10^x=3", [0.477]), ("e^x*e^(x+1)=5", [0.305]), ("e^(3x)/e^(x-1)=7", [0.473]),
 ]
 
+# Problèmes d'application (T33, 28.10.2026) : base écrite avec un taux (carte « Calculer la base »), valeurs vérifiées avec mpmath
+BATTERIE_APPLICATIONS = [
+    ("3=(1+3,75/100)^x", [29.842]), ("3=(1+3,75%)^x", [29.842]), ("3 = (1 + 3,75 %)^x", [29.842]), ("2=(1+0,04)^n", [17.673]),
+    ("(1+0,035)^n=2", [20.149]), ("0,5=(1-20/100)^n", [3.106]), ("2000*(1+0,045)^n=3805", [14.612]), ("1500*(1+4,5%)^t=3000", [15.747]),
+    ("4=(1+0,5/100)^n", [277.951]), ("0,25=(1-5/100)^n", [27.027]), ("-2=(1+0,04)^n", []), ("2=1,0375^x", [18.828]),
+]
+
 # Aucune méthode ne s'applique (EL-11) : un vrai hors-programme, ou une forme du programme que l'outil ne gère pas encore
 HORS_PROGRAMME = ["x*2^x=8", "2^x+3^x=5", "2^x+3^x+1=5", "2^x-3^(x+1)=3^x+1", "e^x+e^(x+1)=2^x", "x^x=4", "2^x=x+1", "2^(sqrt(x))=4", "2^(1/x)=4", "x/2^x=1", "x*e^x=1", "2^x=3^x+x",
                   "log(x)=x-1", "ln(x)=x", "x*log(x)=1", "e^x=ln(x)", "log(x)=2^x", "log(x)/x=1", "ln(x)+x=2",
@@ -160,6 +167,6 @@ ERREURS_DE_LECTURE = ["", "2e=5", "x+y=3", "x<3", "2^x>=3", "log_1(x)=2", "log x
 
 def entrees_el():
     """Toutes les entrées de l'outil, sans doublon, dans l'ordre : équations résolues, calculs, messages, erreurs de lecture."""
-    saisies = [s for batterie in (BATTERIE_E1, BATTERIE_E2, BATTERIE_E3, BATTERIE_E4, BATTERIE_C1, BATTERIE_AUDIT) for s, _ in batterie]
+    saisies = [s for batterie in (BATTERIE_E1, BATTERIE_E2, BATTERIE_E3, BATTERIE_E4, BATTERIE_C1, BATTERIE_AUDIT, BATTERIE_APPLICATIONS) for s, _ in batterie]
     saisies += SANS_E1 + SANS_E2 + SANS_E3 + HORS_PROGRAMME + PAS_ENCORE + SANS_EXP_LOG + CALCULS_NON_RESOLUS + ERREURS_DE_LECTURE
     return list(dict.fromkeys(saisies))

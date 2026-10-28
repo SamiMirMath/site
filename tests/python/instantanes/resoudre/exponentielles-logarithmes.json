@@ -3,6 +3,120 @@
   "erreur": "Écrivez une équation, par exemple 3^(x+1) = 27.",
   "ok": false
  },
+ "(1+0,035)^n=2": {
+  "cartes": [
+   {
+    "badge": "Calculer la base",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + 0{,}035 = 1{,}035\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1{,}035^{n} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(1{,}035^{n}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(n \\cdot \\log(1{,}035) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(n = \\frac{\\log(2)}{\\log(1{,}035)}\\)</span><span class=\"prop\">(car \\(\\log(1{,}035) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(2)}{\\log(1{,}035)}\\right\\} \\text{, soit } n \\approx 20{,}149",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "(1 + 0{,}035)^{n} = 2",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Calculer la base",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + 0{,}035 = 1{,}035\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Même base / définition",
+      "blocs": [
+       {
+        "html": "\\(2\\) n'est pas une puissance de \\(1{,}035\\) : il faut les logarithmes.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Calculer la base",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + 0{,}035 = 1{,}035\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1{,}035^{n} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(1{,}035^{n}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(n \\cdot \\log(1{,}035) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(n = \\frac{\\log(2)}{\\log(1{,}035)}\\)</span><span class=\"prop\">(car \\(\\log(1{,}035) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\frac{\\log(2)}{\\log(1{,}035)}\\right\\} \\text{, soit } n \\approx 20{,}149",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
  "(1/2)^x=3": {
   "cartes": [
    {
@@ -1331,6 +1445,145 @@
    }
   ]
  },
+ "-2=(1+0,04)^n": {
+  "cartes": [
+   {
+    "badge": "Calculer la base",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + 0{,}04 = 1{,}04\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Aucune solution",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1{,}04^{n} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-2 &lt; 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\varnothing",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "-2 = (1 + 0{,}04)^{n}",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Calculer la base",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + 0{,}04 = 1{,}04\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Aucune solution",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1{,}04^{n} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-2 &lt; 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\varnothing",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Calculer la base",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + 0{,}04 = 1{,}04\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Aucune solution",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1{,}04^{n} &gt; 0\\)</span><span class=\"prop\">(une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-2 &lt; 0\\)</span><span class=\"prop\">(aucune solution)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\varnothing",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
  "-2^x-2^(x+1)=12": {
   "cartes": [
    {
@@ -2338,6 +2591,120 @@
    }
   ]
  },
+ "0,25=(1-5/100)^n": {
+  "cartes": [
+   {
+    "badge": "Calculer la base",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 - \\frac{5}{100} = 0{,}95\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(0{,}25 = 0{,}95^{n}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(0{,}95^{n} = 0{,}25\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(0{,}95^{n}) = \\log(0{,}25)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(n \\cdot \\log(0{,}95) = \\log(0{,}25)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(n = \\frac{\\log(0{,}25)}{\\log(0{,}95)}\\)</span><span class=\"prop\">(car \\(\\log(0{,}95) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(0{,}25)}{\\log(0{,}95)}\\right\\} \\text{, soit } n \\approx 27{,}027",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "0{,}25 = \\left(1 - \\frac{5}{100}\\right)^{n}",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Calculer la base",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 - \\frac{5}{100} = 0{,}95\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Même base / définition",
+      "blocs": [
+       {
+        "html": "\\(0{,}25\\) n'est pas une puissance de \\(0{,}95\\) : il faut les logarithmes.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Calculer la base",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 - \\frac{5}{100} = 0{,}95\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(0{,}25 = 0{,}95^{n}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(0{,}95^{n} = 0{,}25\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(0{,}95^{n}) = \\log(0{,}25)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(n \\cdot \\log(0{,}95) = \\log(0{,}25)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(n = \\frac{\\log(0{,}25)}{\\log(0{,}95)}\\)</span><span class=\"prop\">(car \\(\\log(0{,}95) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\frac{\\log(0{,}25)}{\\log(0{,}95)}\\right\\} \\text{, soit } n \\approx 27{,}027",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
  "0,5*3^x=2^(x+1)": {
   "cartes": [
    {
@@ -2404,6 +2771,120 @@
       "blocs": [
        {
         "tex": "S = \\left\\{\\frac{\\log(4)}{\\log(1{,}5)}\\right\\} \\text{, soit } x \\approx 3{,}419",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
+ "0,5=(1-20/100)^n": {
+  "cartes": [
+   {
+    "badge": "Calculer la base",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 - \\frac{20}{100} = 0{,}8\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(0{,}5 = 0{,}8^{n}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(0{,}8^{n} = 0{,}5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(0{,}8^{n}) = \\log(0{,}5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(n \\cdot \\log(0{,}8) = \\log(0{,}5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(n = \\frac{\\log(0{,}5)}{\\log(0{,}8)}\\)</span><span class=\"prop\">(car \\(\\log(0{,}8) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(0{,}5)}{\\log(0{,}8)}\\right\\} \\text{, soit } n \\approx 3{,}106",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "0{,}5 = \\left(1 - \\frac{20}{100}\\right)^{n}",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Calculer la base",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 - \\frac{20}{100} = 0{,}8\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Même base / définition",
+      "blocs": [
+       {
+        "html": "\\(0{,}5\\) n'est pas une puissance de \\(0{,}8\\) : il faut les logarithmes.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Calculer la base",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 - \\frac{20}{100} = 0{,}8\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(0{,}5 = 0{,}8^{n}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(0{,}8^{n} = 0{,}5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(0{,}8^{n}) = \\log(0{,}5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(n \\cdot \\log(0{,}8) = \\log(0{,}5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(n = \\frac{\\log(0{,}5)}{\\log(0{,}8)}\\)</span><span class=\"prop\">(car \\(\\log(0{,}8) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\frac{\\log(0{,}5)}{\\log(0{,}8)}\\right\\} \\text{, soit } n \\approx 3{,}106",
         "type": "resultat"
        }
       ],
@@ -6096,6 +6577,156 @@
    }
   ]
  },
+ "1500*(1+4,5%)^t=3000": {
+  "cartes": [
+   {
+    "badge": "Calculer la base",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + 4{,}5\\,\\% = 1{,}045\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Isoler l'exponentielle",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1\\text{’}500 \\cdot 1{,}045^{t} = 3\\text{’}000\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(1{,}045^{t} = 2\\)</span><span class=\"prop\">(on isole le terme exponentiel)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1{,}045^{t} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(1{,}045^{t}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t \\cdot \\log(1{,}045) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = \\frac{\\log(2)}{\\log(1{,}045)}\\)</span><span class=\"prop\">(car \\(\\log(1{,}045) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(2)}{\\log(1{,}045)}\\right\\} \\text{, soit } t \\approx 15{,}747",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "1\\text{’}500(1 + 4{,}5\\,\\%)^{t} = 3\\text{’}000",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Calculer la base",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + 4{,}5\\,\\% = 1{,}045\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Isoler l'exponentielle",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1\\text{’}500 \\cdot 1{,}045^{t} = 3\\text{’}000\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(1{,}045^{t} = 2\\)</span><span class=\"prop\">(on isole le terme exponentiel)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Même base / définition",
+      "blocs": [
+       {
+        "html": "\\(2\\) n'est pas une puissance de \\(1{,}045\\) : il faut les logarithmes.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Calculer la base",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + 4{,}5\\,\\% = 1{,}045\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Isoler l'exponentielle",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1\\text{’}500 \\cdot 1{,}045^{t} = 3\\text{’}000\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(1{,}045^{t} = 2\\)</span><span class=\"prop\">(on isole le terme exponentiel)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1{,}045^{t} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(1{,}045^{t}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t \\cdot \\log(1{,}045) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = \\frac{\\log(2)}{\\log(1{,}045)}\\)</span><span class=\"prop\">(car \\(\\log(1{,}045) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\frac{\\log(2)}{\\log(1{,}045)}\\right\\} \\text{, soit } t \\approx 15{,}747",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
  "18=2*3^(x-1)": {
   "cartes": [
    {
@@ -7006,6 +7637,156 @@
   "erreur": "Écrivez une équation (avec =) ou un logarithme à calculer, par exemple log_2(50).",
   "ok": false
  },
+ "2000*(1+0,045)^n=3805": {
+  "cartes": [
+   {
+    "badge": "Calculer la base",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + 0{,}045 = 1{,}045\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Isoler l'exponentielle",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\text{’}000 \\cdot 1{,}045^{n} = 3\\text{’}805\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(1{,}045^{n} = 1{,}9025\\)</span><span class=\"prop\">(on isole le terme exponentiel)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1{,}045^{n} = 1{,}9025\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(1{,}045^{n}) = \\log(1{,}9025)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(n \\cdot \\log(1{,}045) = \\log(1{,}9025)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(n = \\frac{\\log(1{,}9025)}{\\log(1{,}045)}\\)</span><span class=\"prop\">(car \\(\\log(1{,}045) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(1{,}9025)}{\\log(1{,}045)}\\right\\} \\text{, soit } n \\approx 14{,}612",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2\\text{’}000(1 + 0{,}045)^{n} = 3\\text{’}805",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Calculer la base",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + 0{,}045 = 1{,}045\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Isoler l'exponentielle",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\text{’}000 \\cdot 1{,}045^{n} = 3\\text{’}805\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(1{,}045^{n} = 1{,}9025\\)</span><span class=\"prop\">(on isole le terme exponentiel)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Même base / définition",
+      "blocs": [
+       {
+        "html": "\\(1{,}9025\\) n'est pas une puissance de \\(1{,}045\\) : il faut les logarithmes.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Calculer la base",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + 0{,}045 = 1{,}045\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Isoler l'exponentielle",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\text{’}000 \\cdot 1{,}045^{n} = 3\\text{’}805\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(1{,}045^{n} = 1{,}9025\\)</span><span class=\"prop\">(on isole le terme exponentiel)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1{,}045^{n} = 1{,}9025\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(1{,}045^{n}) = \\log(1{,}9025)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(n \\cdot \\log(1{,}045) = \\log(1{,}9025)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(n = \\frac{\\log(1{,}9025)}{\\log(1{,}045)}\\)</span><span class=\"prop\">(car \\(\\log(1{,}045) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\frac{\\log(1{,}9025)}{\\log(1{,}045)}\\right\\} \\text{, soit } n \\approx 14{,}612",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
  "2000*1,045^n=3805": {
   "cartes": [
    {
@@ -7248,6 +8029,198 @@
         "html": "Contrôlez à la calculatrice : \\(x = \\frac{\\log(9)}{\\log(3)} = 2\\).",
         "style": "etape",
         "type": "texte"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
+ "2=(1+0,04)^n": {
+  "cartes": [
+   {
+    "badge": "Calculer la base",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + 0{,}04 = 1{,}04\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2 = 1{,}04^{n}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(1{,}04^{n} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(1{,}04^{n}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(n \\cdot \\log(1{,}04) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(n = \\frac{\\log(2)}{\\log(1{,}04)}\\)</span><span class=\"prop\">(car \\(\\log(1{,}04) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(2)}{\\log(1{,}04)}\\right\\} \\text{, soit } n \\approx 17{,}673",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2 = (1 + 0{,}04)^{n}",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Calculer la base",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + 0{,}04 = 1{,}04\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Même base / définition",
+      "blocs": [
+       {
+        "html": "\\(2\\) n'est pas une puissance de \\(1{,}04\\) : il faut les logarithmes.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Calculer la base",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + 0{,}04 = 1{,}04\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2 = 1{,}04^{n}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(1{,}04^{n} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(1{,}04^{n}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(n \\cdot \\log(1{,}04) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(n = \\frac{\\log(2)}{\\log(1{,}04)}\\)</span><span class=\"prop\">(car \\(\\log(1{,}04) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\frac{\\log(2)}{\\log(1{,}04)}\\right\\} \\text{, soit } n \\approx 17{,}673",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
+ "2=1,0375^x": {
+  "cartes": [
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2 = 1{,}0375^{x}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(1{,}0375^{x} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(1{,}0375^{x}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(1{,}0375) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2)}{\\log(1{,}0375)}\\)</span><span class=\"prop\">(car \\(\\log(1{,}0375) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(2)}{\\log(1{,}0375)}\\right\\} \\text{, soit } x \\approx 18{,}828",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2 = 1{,}0375^{x}",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Même base / définition",
+      "blocs": [
+       {
+        "html": "\\(2\\) n'est pas une puissance de \\(1{,}0375\\) : il faut les logarithmes.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2 = 1{,}0375^{x}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(1{,}0375^{x} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(1{,}0375^{x}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(1{,}0375) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2)}{\\log(1{,}0375)}\\)</span><span class=\"prop\">(car \\(\\log(1{,}0375) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\frac{\\log(2)}{\\log(1{,}0375)}\\right\\} \\text{, soit } x \\approx 18{,}828",
+        "type": "resultat"
        }
       ],
       "style": "final",
@@ -16536,6 +17509,120 @@
   "erreur": null,
   "ok": true
  },
+ "3 = (1 + 3,75 %)^x": {
+  "cartes": [
+   {
+    "badge": "Calculer la base",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + 3{,}75\\,\\% = 1{,}0375\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3 = 1{,}0375^{x}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(1{,}0375^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(1{,}0375^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(1{,}0375) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(1{,}0375)}\\)</span><span class=\"prop\">(car \\(\\log(1{,}0375) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(3)}{\\log(1{,}0375)}\\right\\} \\text{, soit } x \\approx 29{,}842",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3 = (1 + 3{,}75\\,\\%)^{x}",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Calculer la base",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + 3{,}75\\,\\% = 1{,}0375\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Même base / définition",
+      "blocs": [
+       {
+        "html": "\\(3\\) n'est pas une puissance de \\(1{,}0375\\) : il faut les logarithmes.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Calculer la base",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + 3{,}75\\,\\% = 1{,}0375\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3 = 1{,}0375^{x}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(1{,}0375^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(1{,}0375^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(1{,}0375) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(1{,}0375)}\\)</span><span class=\"prop\">(car \\(\\log(1{,}0375) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\frac{\\log(3)}{\\log(1{,}0375)}\\right\\} \\text{, soit } x \\approx 29{,}842",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
  "3(2^x+1)=9": {
   "cartes": [
    {
@@ -17770,6 +18857,234 @@
       "blocs": [
        {
         "tex": "S = \\left\\{\\frac{\\ln\\left(\\frac{25}{37}\\right)}{-0{,}02}\\right\\} \\text{, soit } t \\approx 19{,}602",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
+ "3=(1+3,75%)^x": {
+  "cartes": [
+   {
+    "badge": "Calculer la base",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + 3{,}75\\,\\% = 1{,}0375\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3 = 1{,}0375^{x}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(1{,}0375^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(1{,}0375^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(1{,}0375) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(1{,}0375)}\\)</span><span class=\"prop\">(car \\(\\log(1{,}0375) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(3)}{\\log(1{,}0375)}\\right\\} \\text{, soit } x \\approx 29{,}842",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3 = (1 + 3{,}75\\,\\%)^{x}",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Calculer la base",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + 3{,}75\\,\\% = 1{,}0375\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Même base / définition",
+      "blocs": [
+       {
+        "html": "\\(3\\) n'est pas une puissance de \\(1{,}0375\\) : il faut les logarithmes.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Calculer la base",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + 3{,}75\\,\\% = 1{,}0375\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3 = 1{,}0375^{x}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(1{,}0375^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(1{,}0375^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(1{,}0375) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(1{,}0375)}\\)</span><span class=\"prop\">(car \\(\\log(1{,}0375) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\frac{\\log(3)}{\\log(1{,}0375)}\\right\\} \\text{, soit } x \\approx 29{,}842",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
+ "3=(1+3,75/100)^x": {
+  "cartes": [
+   {
+    "badge": "Calculer la base",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + \\frac{3{,}75}{100} = 1{,}0375\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3 = 1{,}0375^{x}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(1{,}0375^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(1{,}0375^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(1{,}0375) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(1{,}0375)}\\)</span><span class=\"prop\">(car \\(\\log(1{,}0375) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(3)}{\\log(1{,}0375)}\\right\\} \\text{, soit } x \\approx 29{,}842",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3 = \\left(1 + \\frac{3{,}75}{100}\\right)^{x}",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Calculer la base",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + \\frac{3{,}75}{100} = 1{,}0375\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Même base / définition",
+      "blocs": [
+       {
+        "html": "\\(3\\) n'est pas une puissance de \\(1{,}0375\\) : il faut les logarithmes.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Calculer la base",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + \\frac{3{,}75}{100} = 1{,}0375\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3 = 1{,}0375^{x}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(1{,}0375^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(1{,}0375^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(1{,}0375) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(1{,}0375)}\\)</span><span class=\"prop\">(car \\(\\log(1{,}0375) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\frac{\\log(3)}{\\log(1{,}0375)}\\right\\} \\text{, soit } x \\approx 29{,}842",
         "type": "resultat"
        }
       ],
@@ -20201,6 +21516,120 @@
       "blocs": [
        {
         "tex": "S = \\left\\{0\\right\\}",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
+ "4=(1+0,5/100)^n": {
+  "cartes": [
+   {
+    "badge": "Calculer la base",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + \\frac{0{,}5}{100} = 1{,}005\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4 = 1{,}005^{n}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(1{,}005^{n} = 4\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(1{,}005^{n}) = \\log(4)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(n \\cdot \\log(1{,}005) = \\log(4)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(n = \\frac{\\log(4)}{\\log(1{,}005)}\\)</span><span class=\"prop\">(car \\(\\log(1{,}005) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(4)}{\\log(1{,}005)}\\right\\} \\text{, soit } n \\approx 277{,}951",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "4 = \\left(1 + \\frac{0{,}5}{100}\\right)^{n}",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Calculer la base",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + \\frac{0{,}5}{100} = 1{,}005\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Même base / définition",
+      "blocs": [
+       {
+        "html": "\\(4\\) n'est pas une puissance de \\(1{,}005\\) : il faut les logarithmes.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Calculer la base",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 + \\frac{0{,}5}{100} = 1{,}005\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4 = 1{,}005^{n}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(1{,}005^{n} = 4\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(1{,}005^{n}) = \\log(4)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(n \\cdot \\log(1{,}005) = \\log(4)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(n = \\frac{\\log(4)}{\\log(1{,}005)}\\)</span><span class=\"prop\">(car \\(\\log(1{,}005) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\frac{\\log(4)}{\\log(1{,}005)}\\right\\} \\text{, soit } n \\approx 277{,}951",
         "type": "resultat"
        }
       ],
