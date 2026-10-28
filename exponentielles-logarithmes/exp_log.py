@@ -3495,9 +3495,12 @@ _GABARITS = {"facile": _gabarit_facile, "moyen": _gabarit_moyen, "logarithme": _
 def exercice(niveau, graine, filiere="C"):
     """Exercice du niveau (facile, moyen, logarithme, difficile), déterministe : la même graine donne le même énoncé. Aucun exposant de
     degré 3 ou plus ; quand x² est en exposant, les racines sont entières. Renvoie {ok, expr, niveau}. `filiere` : "C" (ce pool) ou "M"
-    (même pool tant que le pool M n'est pas écrit)."""
+    (le pool M, niveaux NIVEAUX_M de exp_log_m.py)."""
     if filiere not in FILIERES:
         return {"ok": False, "erreur": MESSAGE_FILIERE}
+    if filiere == "M":
+        import exp_log_m                                  # chargé seulement pour la filière M (exp_log_m importe ce fichier)
+        return exp_log_m.exercice_m(niveau, graine)
     if niveau not in _GABARITS:
         return {"ok": False, "erreur": "Niveau d'exercice inconnu."}
     return {"ok": True, "expr": _GABARITS[niveau](random.Random(f"{niveau}:{graine}")), "niveau": niveau}

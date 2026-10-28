@@ -12,6 +12,7 @@ Ce fichier ajoute à exp_log.py (la 3C, inchangée) :
 Tout le TeX est écrit par l'arbre de exp_log.py ou par le moteur de l'outil ED ; ce fichier n'importe ni `sortie` ni SymPy.
 """
 import decimal
+import random
 from fractions import Fraction as F
 from math import gcd
 
@@ -22,7 +23,7 @@ from exp_log import (Chaine, Defini, E, Eq, Fn, Log, Message, Neg, Nb, Op, Ou, P
                      resolution_exponentielle, tex, tex_approx, valeur, variables, METHODE_LOGARITHMES, METHODE_MEME_BASE, METHODES, PROP_EXPONENTIELLE, PROP_ISOLER_LOG)
 
 __all__ = ["EnsembleDef", "ensemble_de_definition", "verification", "regrouper", "variantes_changement", "reconnu_changement", "corriger_equation",
-           "PROPRIETES_M"]
+           "exercice_m", "NIVEAUX_M", "POIDS_M", "PROPRIETES_M"]
 
 
 class EnsembleDef:
@@ -879,3 +880,165 @@ def corriger_equation(g, d, x):
         retenues, lignes = verification(ed, r["solutions"], x)
         etapes.append(_carte("Vérification", lignes))
     return {**r, **autres, "etapes": etapes, "solutions": retenues, "remarque": None, "ed": ed, "besoin_sympy": ed.besoin_sympy}
+
+
+# =====================================================================
+# 7. EXERCICES AU HASARD (pool M) : construits à l'envers, solutions entières ou rationnelles simples, souvent une solution rejetée
+# =====================================================================
+NIVEAUX_M = ("exponentielle", "definition", "sommes", "egalite", "variable", "difficile")
+POIDS_M = (("exponentielle", .25), ("definition", .15), ("sommes", .20), ("egalite", .15), ("variable", .15), ("difficile", .10))
+
+
+def _lin(p, q, x="x"):
+    """px + q comme on l'écrit : x, -x, 2x+1, x-3, -x+11, 5 (p = 0)."""
+    t = "" if p == 0 else x if p == 1 else "-" + x if p == -1 else f"{p}{x}"
+    if q == 0 and t:
+        return t
+    return f"{t}{q:+d}" if t else str(q)
+
+
+def _poly2(c0, c1, c2=1):
+    """c2·x² + c1·x + c0 : x^2-x+4, x^2+5x-6, 2x^2-3."""
+    t = "x^2" if c2 == 1 else "-x^2" if c2 == -1 else f"{c2}x^2"
+    if c1:
+        t += "+x" if c1 == 1 else "-x" if c1 == -1 else f"{c1:+d}x"
+    return t + (f"{c0:+d}" if c0 else "")
+
+
+def _log(base, arg):
+    return f"log({arg})" if base == 10 else f"ln({arg})" if base == "e" else f"log_{base}({arg})"
+
+
+def _g_exponentielle(rng):
+    """Les tirages exponentiels du pool C (facile, moyen, logarithme : sans logarithme de l'inconnue)."""
+    from exp_log import _GABARITS
+    for _ in range(100):
+        e = _GABARITS[rng.choice(["facile", "moyen", "logarithme", "logarithme"])](rng)
+        if "log" not in e and "ln" not in e:
+            return e
+    return "2^x=8"
+
+
+def _g_definition(rng):
+    forme = rng.choice(["lineaire", "lineaire", "ln", "trinome", "base"])
+    if forme == "lineaire":                              # log_a(px + q) = c, solution entière
+        a, c = rng.choice([(2, 3), (2, 4), (2, 5), (3, 2), (3, 3), (5, 2), (10, 1), (10, 2)])
+        p, x0 = rng.randint(1, 4), rng.randint(-3, 8)
+        return f"{_log(a, _lin(p, a ** c - p * x0))}={c}"
+    if forme == "ln":                                    # ln(px + q) = c : x = (e^c − q)/p
+        return f"ln({_lin(rng.randint(1, 3), rng.randint(-5, 5))})={rng.randint(1, 3)}"
+    if forme == "trinome":                               # log(x² + bx + c0) = k, deux racines entières, toutes deux dans l'ED
+        r1, r2 = sorted(rng.sample(range(-6, 7), 2))
+        k = rng.choice([1, 2])
+        return f"log({_poly2(r1 * r2 + 10 ** k, -(r1 + r2))})={k}"
+    k = rng.choice([2, 3, 4])                            # base inconnue : log_x(m^k) = k
+    m = rng.choice([2, 3, 4, 5] if k < 4 else [2, 3, 4])
+    return f"log_x({m ** k})={k}"
+
+
+def _g_sommes(rng):
+    forme = rng.choice(["produit", "produit", "produit_ln", "difference", "log_a"])
+    if forme == "difference":                            # log(x + m) − log(x − n) = 1, x = (10n + m)/9 entier
+        n, x0 = rng.randint(1, 5), 0
+        x0 = rng.randint(n + 1, n + 6)
+        return f"log({_lin(1, 9 * x0 - 10 * n)})-log({_lin(1, -n)})=1"
+    if forme == "produit_ln":                            # ln(x + a) + ln(x + b) = ln(k), k = (r + a)(r + b)
+        a, b, r = rng.randint(-3, 3), rng.randint(-3, 3), rng.randint(1, 6)
+        while r + a <= 0 or r + b <= 0 or a == b:
+            a, b, r = rng.randint(-3, 3), rng.randint(-3, 3), rng.randint(1, 6)
+        return f"ln({_lin(1, a)})+ln({_lin(1, b)})=ln({(r + a) * (r + b)})"
+    base, c = (10, rng.choice([1, 2])) if forme == "produit" else rng.choice([(2, 3), (2, 4), (3, 2), (3, 3)])
+    produit = base ** c
+    m, n = rng.choice([(m, produit // m) for m in range(1, int(produit ** 0.5) + 1) if produit % m == 0])
+    a = rng.randint(-3, 3)                               # (r + a)(r + b) = base^c avec r + a = m, r + b = n : l'autre racine est rejetée
+    while m == n:                                        # deux arguments identiques : log(x + a) + log(x + a)
+        m, n = rng.choice([(m, produit // m) for m in range(1, int(produit ** 0.5) + 1) if produit % m == 0])
+    r = m - a
+    return f"{_log(base, _lin(1, a))}+{_log(base, _lin(1, n - r))}={c}"
+
+
+def _g_egalite(rng):
+    forme = rng.choice(["carre", "carre", "constantes", "difference", "plus_un"])
+    if forme == "carre":                                 # 2 log(x + a) = log(px + q), racines r1 et r2, la seconde souvent rejetée
+        while True:
+            a, r1, r2 = rng.randint(-4, 3), rng.randint(-3, 6), rng.randint(-6, 6)
+            p, q = 2 * a + r1 + r2, a * a - r1 * r2
+            if r1 + a > 0 and r1 != r2 and p != 0:
+                return f"2log({_lin(1, a)})=log({_lin(p, q)})"
+    if forme == "constantes":                            # log(x) = 2 log(m) + log(n) − log(r)
+        m, n, r = rng.randint(2, 5), rng.randint(2, 7), rng.randint(2, 6)
+        return f"log(x)=2log({m})+log({n})-log({r})"
+    if forme == "difference":                            # log(x + a) − log(m) = log(px + q), x0 entier
+        while True:
+            m, p, x0, s = rng.randint(2, 5), rng.randint(-2, 3), rng.randint(-2, 6), rng.randint(1, 6)
+            a, q = m * s - x0, s - p * x0
+            if 1 - m * p != 0 and p != 0 and x0 + a > 0:
+                return f"log({_lin(1, a)})-log({m})=log({_lin(p, q)})"
+    while True:                                          # log(x + a) = log(px + q) + 1 : x + a = 10 (px + q)
+        p, x0, s = rng.randint(2, 4), rng.randint(-3, 6), rng.randint(1, 5)
+        a, q = 10 * s - x0, s - p * x0
+        if 1 - 10 * p != 0:
+            return f"log({_lin(1, a)})=log({_lin(p, q)})+1"
+
+
+def _terme_puissance(coef, base_texte):
+    """+3*2^x, -2^x, +5*4^x pour le terme coef·base^x (coef ≠ 0)."""
+    signe = "+" if coef > 0 else "-"
+    return signe + (base_texte if abs(coef) == 1 else f"{abs(coef)}*{base_texte}")
+
+
+def _g_variable(rng):
+    forme = rng.choice(["deux", "deux", "rejetee", "e", "decalage"])
+    if forme == "decalage":                              # a^(x+k) + a^(−x) = a^k + 1 : t = 1 ou t = a^(−k), x = 0 ou x = −k
+        a, k = rng.choice([(2, 1), (2, 2), (2, 3), (3, 1), (3, 2), (5, 1)])
+        return f"{a}^(x+{k})+{a}^(-x)={a ** k + 1}"
+    if forme == "e":                                     # e^(2x) − s·e^x + p = 0, t1 et t2 entiers positifs
+        t1, t2 = sorted(rng.sample(range(1, 7), 2))
+        return f"e^(2x){_terme_puissance(-(t1 + t2), 'e^x')}{t1 * t2:+d}=0"
+    a = rng.choice([2, 3, 5])
+    if forme == "deux":                                  # (a^x)² − (a^i + a^j)·a^x + a^(i+j) = 0
+        i, j = sorted(rng.sample(range(0, 4 if a == 2 else 3), 2))
+        t1, t2 = a ** i, a ** j
+    else:                                                # une racine t = −m négative, rejetée : (a^x)² − (a^j − m)·a^x − m·a^j = 0
+        j, m = rng.randint(1, 3 if a == 2 else 2), rng.randint(1, 4)
+        while m == a ** j:                               # t² − p = 0 se réduirait à une exponentielle simple
+            m = rng.randint(1, 4)
+        t1, t2 = -m, a ** j
+    s, p = t1 + t2, t1 * t2
+    k = rng.choice([1, 1, 2, 3])                          # k·(t² − s·t + p) = 0
+    carre = rng.choice([f"{a * a}^x", f"{a}^(2x)"])
+    haut = (carre if k == 1 else f"{k}*{carre}") + (_terme_puissance(-k * s, f"{a}^x") if s else "") + f"{k * p:+d}"
+    return haut + "=0"
+
+
+def _g_difficile(rng):
+    forme = rng.choice(["vide", "trois", "trois", "carre_m", "carre_m"])
+    if forme == "vide":                                  # ED vide : x > −a et x < b avec b ≤ −a
+        a = rng.randint(-6, -1)
+        b = rng.randint(-5, -a)
+        return f"log({_lin(1, a)})+log({b}-x)={rng.choice([0, 1])}"
+    if forme == "trois":                                 # log(x + a) + log(x + b) = log(x + c) + log(k), (x + a)(x + b) = k (x + c)
+        for _ in range(500):
+            a, b, k, r1 = rng.randint(-3, 3), rng.randint(-3, 3), rng.randint(2, 5), rng.randint(1, 8)
+            produit = (r1 + a) * (r1 + b)
+            if produit % k == 0 and produit > 0 and r1 + a > 0 and r1 + b > 0:
+                c = produit // k - r1
+                if r1 + c > 0 and a + b - k != 0 and len({a, b, c}) == 3:
+                    return f"log({_lin(1, a)})+log({_lin(1, b)})=log({_lin(1, c)})+log({k})"
+    for _ in range(1000):                                # log(x² − m) = 2 log(x + n), x = −(m + n²)/(2n)
+        n, m = rng.randint(1, 4), rng.randint(-3, 9)
+        x0 = F(-(m + n * n), 2 * n)
+        if x0 + n > 0 and x0 * x0 > m and m > -10:
+            return f"log({_poly2(-m, 0)})=2log({_lin(1, n)})"
+    return "log(x^2-7)=2log(x+3)"
+
+
+_GABARITS_M = {"exponentielle": _g_exponentielle, "definition": _g_definition, "sommes": _g_sommes, "egalite": _g_egalite,
+               "variable": _g_variable, "difficile": _g_difficile}
+
+
+def exercice_m(niveau, graine):
+    """Exercice de la filière M (NIVEAUX_M), déterministe : la même graine donne le même énoncé. Renvoie {ok, expr, niveau}."""
+    if niveau not in _GABARITS_M:
+        return {"ok": False, "erreur": "Niveau d'exercice inconnu."}
+    return {"ok": True, "expr": _GABARITS_M[niveau](random.Random(f"M:{niveau}:{graine}")), "niveau": niveau}
