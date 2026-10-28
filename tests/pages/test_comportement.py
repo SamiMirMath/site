@@ -497,7 +497,9 @@ class TestComportement(unittest.TestCase):
         page.evaluer("document.querySelector('#exemples button[data-ex=\"log(x)+log(x-1)=1\"]').click()")
         page.attendre("document.querySelector('#cartes .card.final')", 60)
         self.assertIn("Vérification", self.badges(page))
+        page.attendre("!document.querySelector('#calculer').disabled", 60)                         # un clic sur le bouton pendant le calcul de l'exemple serait perdu
         self.calculer(page, "log(5-x)=8")
+        page.attendre("/5 - x/.test(document.querySelector('#cartes').textContent)", 60)         # `calculer` rend la main sur les cartes de l'exemple : attendre les nouvelles
         page.evaluer("document.querySelector('#filiere button[data-filiere=C]').click()")        # retour en 3C : la même saisie, sans ensemble de définition
         page.attendre("document.querySelector('#cartes .card.final') && !/Ensemble/.test(document.querySelector('#cartes').textContent)", 60)
         self.assertEqual(self.filiere(page), "C")

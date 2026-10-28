@@ -1,4 +1,139 @@
 {
+ "(3^(x-1))^3=9*3^(x-2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦(3^{x - 1})^{3} = 9 \\cdot 3^{x - 2}⟧⟦\\iff⟧⟦\\log((3^{x - 1})^{3}) = \\log(9 \\cdot 3^{x - 2})⟧(log des deux membres)⟦\\iff⟧⟦\\log((3^{x - 1})^{3}) = \\log(9) + \\log(3^{x - 2})⟧(log(ab) = log a + log b)⟦\\iff⟧⟦(3x - 3) \\cdot \\log(3) = \\log(9) + (x - 2) \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦3x \\cdot \\log(3) - 3\\log(3) = x \\cdot \\log(3) + \\log(9) - 2\\log(3)⟧⟦\\iff⟧⟦x \\cdot 2\\log(3) = \\log(3) + \\log(9)⟧⟦\\iff⟧⟦x = \\frac{\\log(3) + \\log(9)}{2\\log(3)}⟧(car ⟦2\\log(3) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(27)}{\\log(9)}⟧(propriétés des logarithmes)⟦\\log(3) + \\log(9) = \\log(3 \\cdot 9)⟧(propriétés des logarithmes)⟦\\phantom{\\log(3) + \\log(9)} = \\log(27)⟧⟦2\\log(3) = \\log(3^{2})⟧(propriétés des logarithmes)⟦\\phantom{2\\log(3)} = \\log(9)⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(27)}{\\log(9)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(27)}{\\log(9)} = \\frac{3}{2}⟧.",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Logarithme des deux membres⟦(3^{x - 1})^{3} = 9 \\cdot 3^{x - 2}⟧⟦\\iff⟧⟦\\log((3^{x - 1})^{3}) = \\log(9 \\cdot 3^{x - 2})⟧(log des deux membres)⟦\\iff⟧⟦\\log((3^{x - 1})^{3}) = \\log(9) + \\log(3^{x - 2})⟧(log(ab) = log a + log b)⟦\\iff⟧⟦(3x - 3) \\cdot \\log(3) = \\log(9) + (x - 2) \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦3x \\cdot \\log(3) - 3\\log(3) = x \\cdot \\log(3) + \\log(9) - 2\\log(3)⟧⟦\\iff⟧⟦x \\cdot 2\\log(3) = \\log(3) + \\log(9)⟧⟦\\iff⟧⟦x = \\frac{\\log(3) + \\log(9)}{2\\log(3)}⟧(car ⟦2\\log(3) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(27)}{\\log(9)}⟧(propriétés des logarithmes)⟦\\log(3) + \\log(9) = \\log(3 \\cdot 9)⟧(propriétés des logarithmes)⟦\\phantom{\\log(3) + \\log(9)} = \\log(27)⟧⟦2\\log(3) = \\log(3^{2})⟧(propriétés des logarithmes)⟦\\phantom{2\\log(3)} = \\log(9)⟧",
+     "titre": "Étape 1Logarithme des deux membres"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\left\\{\\frac{\\log(27)}{\\log(9)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(27)}{\\log(9)} = \\frac{3}{2}⟧.",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationConventions : 1 an = 12 mois et 1 mois = 30 jours.⟦x = 1{,}5⟧ : 1 an ; reste ⟦0{,}5⟧ an.⟦0{,}5 \\cdot 12 = 6⟧ mois → 6 mois ; reste ⟦0⟧ mois.⟦0 \\cdot 30 = 0⟧ jour → 0 jour.Au bout de 1 an, 6 mois et 0 jour.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 3 / 3"
+  },
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦(3^{x - 1})^{3} = 9 \\cdot 3^{x - 2}⟧⟦\\iff⟧⟦\\log((3^{x - 1})^{3}) = \\log(9 \\cdot 3^{x - 2})⟧(log des deux membres)⟦\\iff⟧⟦\\log((3^{x - 1})^{3}) = \\log(9) + \\log(3^{x - 2})⟧(log(ab) = log a + log b)⟦\\iff⟧⟦(3x - 3) \\cdot \\log(3) = \\log(9) + (x - 2) \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦3x \\cdot \\log(3) - 3\\log(3) = x \\cdot \\log(3) + \\log(9) - 2\\log(3)⟧⟦\\iff⟧⟦x \\cdot 2\\log(3) = \\log(3) + \\log(9)⟧⟦\\iff⟧⟦x = \\frac{\\log(3) + \\log(9)}{2\\log(3)}⟧(car ⟦2\\log(3) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(27)}{\\log(9)}⟧(propriétés des logarithmes)⟦\\log(3) + \\log(9) = \\log(3 \\cdot 9)⟧(propriétés des logarithmes)⟦\\phantom{\\log(3) + \\log(9)} = \\log(27)⟧⟦2\\log(3) = \\log(3^{2})⟧(propriétés des logarithmes)⟦\\phantom{2\\log(3)} = \\log(9)⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{\\log(27)}{\\log(9)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(27)}{\\log(9)} = \\frac{3}{2}⟧.",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦(3^{x - 1})^{3} = 3^{3x - 3}⟧((aᵐ)ⁿ = aᵐⁿ)⟦9 \\cdot 3^{x - 2} = 3^{2} \\cdot 3^{x - 2} = 3^{x}⟧(aᵐ · aⁿ = aᵐ⁺ⁿ)⟦3^{3x - 3} = 3^{x}⟧⟦\\iff⟧⟦3x - 3 = x⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦2x = 3⟧⟦\\iff⟧⟦x = \\frac{3}{2}⟧",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{3}{2}\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
  "-log(x)+log(x+1)=log(2)": {
   "au_depart": {
    "progression": "Étape 1 / 5",
@@ -641,6 +776,141 @@
    }
   }
  },
+ "27^(x+2)=3^(5x+8)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦27^{x + 2} = 3^{5x + 8}⟧⟦\\iff⟧⟦\\log(27^{x + 2}) = \\log(3^{5x + 8})⟧(log des deux membres)⟦\\iff⟧⟦(x + 2) \\cdot \\log(27) = (5x + 8) \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(27) + 2\\log(27) = 5x \\cdot \\log(3) + 8\\log(3)⟧⟦\\iff⟧⟦x(\\log(27) - 5\\log(3)) = 8\\log(3) - 2\\log(27)⟧⟦\\iff⟧⟦x = \\frac{8\\log(3) - 2\\log(27)}{\\log(27) - 5\\log(3)}⟧(car ⟦\\log(27) - 5\\log(3) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(9)}{\\log\\left(\\frac{1}{9}\\right)}⟧(propriétés des logarithmes)⟦8\\log(3) - 2\\log(27) = \\log\\left(\\frac{3^{8}}{27^{2}}\\right)⟧(propriétés des logarithmes)⟦\\phantom{8\\log(3) - 2\\log(27)} = \\log(9)⟧⟦\\log(27) - 5\\log(3) = \\log\\left(\\frac{27}{3^{5}}\\right)⟧(propriétés des logarithmes)⟦\\phantom{\\log(27) - 5\\log(3)} = \\log\\left(\\frac{1}{9}\\right)⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(9)}{\\log\\left(\\frac{1}{9}\\right)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(9)}{\\log\\left(\\frac{1}{9}\\right)} = -1⟧.",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Logarithme des deux membres⟦27^{x + 2} = 3^{5x + 8}⟧⟦\\iff⟧⟦\\log(27^{x + 2}) = \\log(3^{5x + 8})⟧(log des deux membres)⟦\\iff⟧⟦(x + 2) \\cdot \\log(27) = (5x + 8) \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(27) + 2\\log(27) = 5x \\cdot \\log(3) + 8\\log(3)⟧⟦\\iff⟧⟦x(\\log(27) - 5\\log(3)) = 8\\log(3) - 2\\log(27)⟧⟦\\iff⟧⟦x = \\frac{8\\log(3) - 2\\log(27)}{\\log(27) - 5\\log(3)}⟧(car ⟦\\log(27) - 5\\log(3) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(9)}{\\log\\left(\\frac{1}{9}\\right)}⟧(propriétés des logarithmes)⟦8\\log(3) - 2\\log(27) = \\log\\left(\\frac{3^{8}}{27^{2}}\\right)⟧(propriétés des logarithmes)⟦\\phantom{8\\log(3) - 2\\log(27)} = \\log(9)⟧⟦\\log(27) - 5\\log(3) = \\log\\left(\\frac{27}{3^{5}}\\right)⟧(propriétés des logarithmes)⟦\\phantom{\\log(27) - 5\\log(3)} = \\log\\left(\\frac{1}{9}\\right)⟧",
+     "titre": "Étape 1Logarithme des deux membres"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\left\\{\\frac{\\log(9)}{\\log\\left(\\frac{1}{9}\\right)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(9)}{\\log\\left(\\frac{1}{9}\\right)} = -1⟧.",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationLa solution est négative : la situation décrite n'arrive jamais.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 3 / 3"
+  },
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦27^{x + 2} = 3^{5x + 8}⟧⟦\\iff⟧⟦\\log(27^{x + 2}) = \\log(3^{5x + 8})⟧(log des deux membres)⟦\\iff⟧⟦(x + 2) \\cdot \\log(27) = (5x + 8) \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(27) + 2\\log(27) = 5x \\cdot \\log(3) + 8\\log(3)⟧⟦\\iff⟧⟦x(\\log(27) - 5\\log(3)) = 8\\log(3) - 2\\log(27)⟧⟦\\iff⟧⟦x = \\frac{8\\log(3) - 2\\log(27)}{\\log(27) - 5\\log(3)}⟧(car ⟦\\log(27) - 5\\log(3) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(9)}{\\log\\left(\\frac{1}{9}\\right)}⟧(propriétés des logarithmes)⟦8\\log(3) - 2\\log(27) = \\log\\left(\\frac{3^{8}}{27^{2}}\\right)⟧(propriétés des logarithmes)⟦\\phantom{8\\log(3) - 2\\log(27)} = \\log(9)⟧⟦\\log(27) - 5\\log(3) = \\log\\left(\\frac{27}{3^{5}}\\right)⟧(propriétés des logarithmes)⟦\\phantom{\\log(27) - 5\\log(3)} = \\log\\left(\\frac{1}{9}\\right)⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{\\log(9)}{\\log\\left(\\frac{1}{9}\\right)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(9)}{\\log\\left(\\frac{1}{9}\\right)} = -1⟧.",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦27^{x + 2} = (3^{3})^{x + 2} = 3^{3(x + 2)}⟧((aᵐ)ⁿ = aᵐⁿ)⟦\\phantom{27^{x + 2}} = 3^{3x + 6}⟧⟦3^{3x + 6} = 3^{5x + 8}⟧⟦\\iff⟧⟦3x + 6 = 5x + 8⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦-2x = 2⟧⟦\\iff⟧⟦x = -1⟧",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-1\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
  "2^(2t)-3*2^t=-2": {
   "au_depart": {
    "progression": "Étape 1 / 5",
@@ -1166,6 +1436,141 @@
    }
   }
  },
+ "2^(x+6)=2^(3x+4)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x + 6} = 2^{3x + 4}⟧⟦\\iff⟧⟦\\log(2^{x + 6}) = \\log(2^{3x + 4})⟧(log des deux membres)⟦\\iff⟧⟦(x + 6) \\cdot \\log(2) = (3x + 4) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) + 6\\log(2) = 3x \\cdot \\log(2) + 4\\log(2)⟧⟦\\iff⟧⟦2\\log(2) = x \\cdot 2\\log(2)⟧⟦\\iff⟧⟦x = \\frac{2\\log(2)}{2\\log(2)}⟧(car ⟦2\\log(2) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(4)}{\\log(4)}⟧(propriétés des logarithmes)⟦\\phantom{x} = 1⟧⟦2\\log(2) = \\log(2^{2})⟧(propriétés des logarithmes)⟦\\phantom{2\\log(2)} = \\log(4)⟧⟦2\\log(2) = \\log(2^{2})⟧(propriétés des logarithmes)⟦\\phantom{2\\log(2)} = \\log(4)⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{1\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Logarithme des deux membres⟦2^{x + 6} = 2^{3x + 4}⟧⟦\\iff⟧⟦\\log(2^{x + 6}) = \\log(2^{3x + 4})⟧(log des deux membres)⟦\\iff⟧⟦(x + 6) \\cdot \\log(2) = (3x + 4) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) + 6\\log(2) = 3x \\cdot \\log(2) + 4\\log(2)⟧⟦\\iff⟧⟦2\\log(2) = x \\cdot 2\\log(2)⟧⟦\\iff⟧⟦x = \\frac{2\\log(2)}{2\\log(2)}⟧(car ⟦2\\log(2) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(4)}{\\log(4)}⟧(propriétés des logarithmes)⟦\\phantom{x} = 1⟧⟦2\\log(2) = \\log(2^{2})⟧(propriétés des logarithmes)⟦\\phantom{2\\log(2)} = \\log(4)⟧⟦2\\log(2) = \\log(2^{2})⟧(propriétés des logarithmes)⟦\\phantom{2\\log(2)} = \\log(4)⟧",
+     "titre": "Étape 1Logarithme des deux membres"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\left\\{1\\right\\}⟧",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationConventions : 1 an = 12 mois et 1 mois = 30 jours.⟦x = 1⟧ : 1 an ; reste ⟦0⟧ an.⟦0 \\cdot 12 = 0⟧ mois → 0 mois ; reste ⟦0⟧ mois.⟦0 \\cdot 30 = 0⟧ jour → 0 jour.Au bout de 1 an, 0 mois et 0 jour.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 3 / 3"
+  },
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x + 6} = 2^{3x + 4}⟧⟦\\iff⟧⟦\\log(2^{x + 6}) = \\log(2^{3x + 4})⟧(log des deux membres)⟦\\iff⟧⟦(x + 6) \\cdot \\log(2) = (3x + 4) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) + 6\\log(2) = 3x \\cdot \\log(2) + 4\\log(2)⟧⟦\\iff⟧⟦2\\log(2) = x \\cdot 2\\log(2)⟧⟦\\iff⟧⟦x = \\frac{2\\log(2)}{2\\log(2)}⟧(car ⟦2\\log(2) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(4)}{\\log(4)}⟧(propriétés des logarithmes)⟦\\phantom{x} = 1⟧⟦2\\log(2) = \\log(2^{2})⟧(propriétés des logarithmes)⟦\\phantom{2\\log(2)} = \\log(4)⟧⟦2\\log(2) = \\log(2^{2})⟧(propriétés des logarithmes)⟦\\phantom{2\\log(2)} = \\log(4)⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{1\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦2^{x + 6} = 2^{3x + 4}⟧⟦\\iff⟧⟦x + 6 = 3x + 4⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦-2x = -2⟧⟦\\iff⟧⟦x = 1⟧",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{1\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
  "2^x+2^(-x)=2": {
   "au_depart": {
    "progression": "Étape 1 / 4",
@@ -1339,6 +1744,356 @@
    }
   ],
   "progression_finale": ""
+ },
+ "2^x+2^(x+1)=12": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidence⟦2^{x + 1} = 2^{x} \\cdot 2⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦2^{x} + 2^{x + 1} = 12⟧⟦\\iff⟧⟦2^{x} \\cdot (1 + 2) = 12⟧(mise en évidence)⟦\\iff⟧⟦3 \\cdot 2^{x} = 12⟧⟦\\iff⟧⟦2^{x} = 4⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦2^{x} = 4⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(4)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(4)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(4)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(4)}{\\log(2)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(4)}{\\log(2)} = 2⟧.",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Mise en évidence⟦2^{x + 1} = 2^{x} \\cdot 2⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦2^{x} + 2^{x + 1} = 12⟧⟦\\iff⟧⟦2^{x} \\cdot (1 + 2) = 12⟧(mise en évidence)⟦\\iff⟧⟦3 \\cdot 2^{x} = 12⟧⟦\\iff⟧⟦2^{x} = 4⟧(on isole le terme exponentiel)",
+     "titre": "Étape 1Mise en évidence"
+    },
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 2Logarithme des deux membres⟦2^{x} = 4⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(4)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(4)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(4)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)",
+     "titre": "Étape 2Logarithme des deux membres"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\left\\{\\frac{\\log(4)}{\\log(2)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(4)}{\\log(2)} = 2⟧.",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationConventions : 1 an = 12 mois et 1 mois = 30 jours.⟦x = 2⟧ : 2 ans ; reste ⟦0⟧ an.⟦0 \\cdot 12 = 0⟧ mois → 0 mois ; reste ⟦0⟧ mois.⟦0 \\cdot 30 = 0⟧ jour → 0 jour.Au bout de 2 ans, 0 mois et 0 jour.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 4 / 4"
+  },
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦2^{x + 1} = 2^{x} \\cdot 2⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦2^{x} + 2^{x + 1} = 12⟧⟦\\iff⟧⟦2^{x} \\cdot (1 + 2) = 12⟧(mise en évidence)⟦\\iff⟧⟦3 \\cdot 2^{x} = 12⟧⟦\\iff⟧⟦2^{x} = 4⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦2^{x} = 4⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(4)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(4)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(4)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{\\log(4)}{\\log(2)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(4)}{\\log(2)} = 2⟧.",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦2^{x + 1} = 2^{x} \\cdot 2⟧(aᵐ⁺ⁿ = aᵐ · aⁿ)⟦2^{x} + 2^{x + 1} = 12⟧⟦\\iff⟧⟦2^{x} \\cdot (1 + 2) = 12⟧(mise en évidence)⟦\\iff⟧⟦3 \\cdot 2^{x} = 12⟧⟦\\iff⟧⟦2^{x} = 4⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base⟦4 = 2^{2}⟧⟦2^{x} = 2^{2}⟧⟦\\iff⟧⟦x = 2⟧(même base : a^A = a^B ⇔ A = B)",
+      "titre": "Étape 2Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "2^x-16*2^(3x+2)=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Isoler les exponentielles⟦2^{x} - 16 \\cdot 2^{3x + 2} = 0⟧⟦\\iff⟧⟦2^{x} = 16 \\cdot 2^{3x + 2}⟧(on passe un terme de l'autre côté)",
+    "titre": "Étape 1Isoler les exponentielles"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦2^{x} = 16 \\cdot 2^{3x + 2}⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(16 \\cdot 2^{3x + 2})⟧(log des deux membres)⟦\\iff⟧⟦\\log(2^{x}) = \\log(16) + \\log(2^{3x + 2})⟧(log(ab) = log a + log b)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(16) + (3x + 2) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) = 3x \\cdot \\log(2) + \\log(16) + 2\\log(2)⟧⟦\\iff⟧⟦x(-2\\log(2)) = \\log(16) + 2\\log(2)⟧⟦\\iff⟧⟦x = \\frac{\\log(16) + 2\\log(2)}{-2\\log(2)}⟧(car ⟦-2\\log(2) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(64)}{\\log\\left(\\frac{1}{4}\\right)}⟧(propriétés des logarithmes)⟦\\log(16) + 2\\log(2) = \\log(16 \\cdot 2^{2})⟧(propriétés des logarithmes)⟦\\phantom{\\log(16) + 2\\log(2)} = \\log(64)⟧⟦-2\\log(2) = \\log\\left(\\frac{1}{2^{2}}\\right)⟧(propriétés des logarithmes)⟦\\phantom{-2\\log(2)} = \\log\\left(\\frac{1}{4}\\right)⟧",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(64)}{\\log\\left(\\frac{1}{4}\\right)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(64)}{\\log\\left(\\frac{1}{4}\\right)} = -3⟧.",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Isoler les exponentielles⟦2^{x} - 16 \\cdot 2^{3x + 2} = 0⟧⟦\\iff⟧⟦2^{x} = 16 \\cdot 2^{3x + 2}⟧(on passe un terme de l'autre côté)",
+     "titre": "Étape 1Isoler les exponentielles"
+    },
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 2Logarithme des deux membres⟦2^{x} = 16 \\cdot 2^{3x + 2}⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(16 \\cdot 2^{3x + 2})⟧(log des deux membres)⟦\\iff⟧⟦\\log(2^{x}) = \\log(16) + \\log(2^{3x + 2})⟧(log(ab) = log a + log b)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(16) + (3x + 2) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) = 3x \\cdot \\log(2) + \\log(16) + 2\\log(2)⟧⟦\\iff⟧⟦x(-2\\log(2)) = \\log(16) + 2\\log(2)⟧⟦\\iff⟧⟦x = \\frac{\\log(16) + 2\\log(2)}{-2\\log(2)}⟧(car ⟦-2\\log(2) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(64)}{\\log\\left(\\frac{1}{4}\\right)}⟧(propriétés des logarithmes)⟦\\log(16) + 2\\log(2) = \\log(16 \\cdot 2^{2})⟧(propriétés des logarithmes)⟦\\phantom{\\log(16) + 2\\log(2)} = \\log(64)⟧⟦-2\\log(2) = \\log\\left(\\frac{1}{2^{2}}\\right)⟧(propriétés des logarithmes)⟦\\phantom{-2\\log(2)} = \\log\\left(\\frac{1}{4}\\right)⟧",
+     "titre": "Étape 2Logarithme des deux membres"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\left\\{\\frac{\\log(64)}{\\log\\left(\\frac{1}{4}\\right)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(64)}{\\log\\left(\\frac{1}{4}\\right)} = -3⟧.",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationLa solution est négative : la situation décrite n'arrive jamais.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 4 / 4"
+  },
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Isoler les exponentielles⟦2^{x} - 16 \\cdot 2^{3x + 2} = 0⟧⟦\\iff⟧⟦2^{x} = 16 \\cdot 2^{3x + 2}⟧(on passe un terme de l'autre côté)",
+      "titre": "Étape 1Isoler les exponentielles"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦2^{x} = 16 \\cdot 2^{3x + 2}⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(16 \\cdot 2^{3x + 2})⟧(log des deux membres)⟦\\iff⟧⟦\\log(2^{x}) = \\log(16) + \\log(2^{3x + 2})⟧(log(ab) = log a + log b)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(16) + (3x + 2) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) = 3x \\cdot \\log(2) + \\log(16) + 2\\log(2)⟧⟦\\iff⟧⟦x(-2\\log(2)) = \\log(16) + 2\\log(2)⟧⟦\\iff⟧⟦x = \\frac{\\log(16) + 2\\log(2)}{-2\\log(2)}⟧(car ⟦-2\\log(2) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(64)}{\\log\\left(\\frac{1}{4}\\right)}⟧(propriétés des logarithmes)⟦\\log(16) + 2\\log(2) = \\log(16 \\cdot 2^{2})⟧(propriétés des logarithmes)⟦\\phantom{\\log(16) + 2\\log(2)} = \\log(64)⟧⟦-2\\log(2) = \\log\\left(\\frac{1}{2^{2}}\\right)⟧(propriétés des logarithmes)⟦\\phantom{-2\\log(2)} = \\log\\left(\\frac{1}{4}\\right)⟧",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{\\log(64)}{\\log\\left(\\frac{1}{4}\\right)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(64)}{\\log\\left(\\frac{1}{4}\\right)} = -3⟧.",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Isoler les exponentielles⟦2^{x} - 16 \\cdot 2^{3x + 2} = 0⟧⟦\\iff⟧⟦2^{x} = 16 \\cdot 2^{3x + 2}⟧(on passe un terme de l'autre côté)",
+      "titre": "Étape 1Isoler les exponentielles"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base⟦16 \\cdot 2^{3x + 2} = 2^{4} \\cdot 2^{3x + 2} = 2^{3x + 6}⟧(aᵐ · aⁿ = aᵐ⁺ⁿ)⟦2^{x} = 2^{3x + 6}⟧⟦\\iff⟧⟦x = 3x + 6⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦-2x = 6⟧⟦\\iff⟧⟦x = -3⟧",
+      "titre": "Étape 2Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
  },
  "2log(x)+log(3)=log(1/4)": {
   "au_depart": {
@@ -2348,6 +3103,141 @@
    }
   }
  },
+ "3^x=3*9^(x-1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦3^{x} = 3 \\cdot 9^{x - 1}⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(3 \\cdot 9^{x - 1})⟧(log des deux membres)⟦\\iff⟧⟦\\log(3^{x}) = \\log(3) + \\log(9^{x - 1})⟧(log(ab) = log a + log b)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(3) + (x - 1) \\cdot \\log(9)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(3) = x \\cdot \\log(9) + \\log(3) - \\log(9)⟧⟦\\iff⟧⟦\\log(9) - \\log(3) = x(\\log(9) - \\log(3))⟧⟦\\iff⟧⟦x = \\frac{\\log(9) - \\log(3)}{\\log(9) - \\log(3)}⟧(car ⟦\\log(9) - \\log(3) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(3)}{\\log(3)}⟧(log a − log b = log(a/b))⟦\\phantom{x} = 1⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{1\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Logarithme des deux membres⟦3^{x} = 3 \\cdot 9^{x - 1}⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(3 \\cdot 9^{x - 1})⟧(log des deux membres)⟦\\iff⟧⟦\\log(3^{x}) = \\log(3) + \\log(9^{x - 1})⟧(log(ab) = log a + log b)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(3) + (x - 1) \\cdot \\log(9)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(3) = x \\cdot \\log(9) + \\log(3) - \\log(9)⟧⟦\\iff⟧⟦\\log(9) - \\log(3) = x(\\log(9) - \\log(3))⟧⟦\\iff⟧⟦x = \\frac{\\log(9) - \\log(3)}{\\log(9) - \\log(3)}⟧(car ⟦\\log(9) - \\log(3) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(3)}{\\log(3)}⟧(log a − log b = log(a/b))⟦\\phantom{x} = 1⟧",
+     "titre": "Étape 1Logarithme des deux membres"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\left\\{1\\right\\}⟧",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationConventions : 1 an = 12 mois et 1 mois = 30 jours.⟦x = 1⟧ : 1 an ; reste ⟦0⟧ an.⟦0 \\cdot 12 = 0⟧ mois → 0 mois ; reste ⟦0⟧ mois.⟦0 \\cdot 30 = 0⟧ jour → 0 jour.Au bout de 1 an, 0 mois et 0 jour.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 3 / 3"
+  },
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦3^{x} = 3 \\cdot 9^{x - 1}⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(3 \\cdot 9^{x - 1})⟧(log des deux membres)⟦\\iff⟧⟦\\log(3^{x}) = \\log(3) + \\log(9^{x - 1})⟧(log(ab) = log a + log b)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(3) + (x - 1) \\cdot \\log(9)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(3) = x \\cdot \\log(9) + \\log(3) - \\log(9)⟧⟦\\iff⟧⟦\\log(9) - \\log(3) = x(\\log(9) - \\log(3))⟧⟦\\iff⟧⟦x = \\frac{\\log(9) - \\log(3)}{\\log(9) - \\log(3)}⟧(car ⟦\\log(9) - \\log(3) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(3)}{\\log(3)}⟧(log a − log b = log(a/b))⟦\\phantom{x} = 1⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{1\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦3 \\cdot 9^{x - 1} = 3^{1} \\cdot (3^{2})^{x - 1} = 3^{1} \\cdot 3^{2(x - 1)}⟧((aᵐ)ⁿ = aᵐⁿ)⟦\\phantom{3 \\cdot 9^{x - 1}} = 3^{1} \\cdot 3^{2x - 2} = 3^{2x - 1}⟧(aᵐ · aⁿ = aᵐ⁺ⁿ)⟦3^{x} = 3^{2x - 1}⟧⟦\\iff⟧⟦x = 2x - 1⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦-x = -1⟧⟦\\iff⟧⟦x = 1⟧",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{1\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
  "3ln(x)=ln(125)": {
   "au_depart": {
    "progression": "Étape 1 / 5",
@@ -2465,6 +3355,181 @@
    }
   ],
   "progression_finale": "Étape 5 / 5"
+ },
+ "4^(x+2)-8^x=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Isoler les exponentielles⟦4^{x + 2} - 8^{x} = 0⟧⟦\\iff⟧⟦4^{x + 2} = 8^{x}⟧(on passe un terme de l'autre côté)",
+    "titre": "Étape 1Isoler les exponentielles"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦4^{x + 2} = 8^{x}⟧⟦\\iff⟧⟦\\log(4^{x + 2}) = \\log(8^{x})⟧(log des deux membres)⟦\\iff⟧⟦(x + 2) \\cdot \\log(4) = x \\cdot \\log(8)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(4) + 2\\log(4) = x \\cdot \\log(8)⟧⟦\\iff⟧⟦2\\log(4) = x(\\log(8) - \\log(4))⟧⟦\\iff⟧⟦x = \\frac{2\\log(4)}{\\log(8) - \\log(4)}⟧(car ⟦\\log(8) - \\log(4) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(16)}{\\log(2)}⟧(propriétés des logarithmes)⟦2\\log(4) = \\log(4^{2})⟧(propriétés des logarithmes)⟦\\phantom{2\\log(4)} = \\log(16)⟧⟦\\log(8) - \\log(4) = \\log\\left(\\frac{8}{4}\\right)⟧(propriétés des logarithmes)⟦\\phantom{\\log(8) - \\log(4)} = \\log(2)⟧",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(16)}{\\log(2)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(16)}{\\log(2)} = 4⟧.",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Isoler les exponentielles⟦4^{x + 2} - 8^{x} = 0⟧⟦\\iff⟧⟦4^{x + 2} = 8^{x}⟧(on passe un terme de l'autre côté)",
+     "titre": "Étape 1Isoler les exponentielles"
+    },
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 2Logarithme des deux membres⟦4^{x + 2} = 8^{x}⟧⟦\\iff⟧⟦\\log(4^{x + 2}) = \\log(8^{x})⟧(log des deux membres)⟦\\iff⟧⟦(x + 2) \\cdot \\log(4) = x \\cdot \\log(8)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(4) + 2\\log(4) = x \\cdot \\log(8)⟧⟦\\iff⟧⟦2\\log(4) = x(\\log(8) - \\log(4))⟧⟦\\iff⟧⟦x = \\frac{2\\log(4)}{\\log(8) - \\log(4)}⟧(car ⟦\\log(8) - \\log(4) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(16)}{\\log(2)}⟧(propriétés des logarithmes)⟦2\\log(4) = \\log(4^{2})⟧(propriétés des logarithmes)⟦\\phantom{2\\log(4)} = \\log(16)⟧⟦\\log(8) - \\log(4) = \\log\\left(\\frac{8}{4}\\right)⟧(propriétés des logarithmes)⟦\\phantom{\\log(8) - \\log(4)} = \\log(2)⟧",
+     "titre": "Étape 2Logarithme des deux membres"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\left\\{\\frac{\\log(16)}{\\log(2)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(16)}{\\log(2)} = 4⟧.",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationConventions : 1 an = 12 mois et 1 mois = 30 jours.⟦x = 4⟧ : 4 ans ; reste ⟦0⟧ an.⟦0 \\cdot 12 = 0⟧ mois → 0 mois ; reste ⟦0⟧ mois.⟦0 \\cdot 30 = 0⟧ jour → 0 jour.Au bout de 4 ans, 0 mois et 0 jour.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 4 / 4"
+  },
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Isoler les exponentielles⟦4^{x + 2} - 8^{x} = 0⟧⟦\\iff⟧⟦4^{x + 2} = 8^{x}⟧(on passe un terme de l'autre côté)",
+      "titre": "Étape 1Isoler les exponentielles"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦4^{x + 2} = 8^{x}⟧⟦\\iff⟧⟦\\log(4^{x + 2}) = \\log(8^{x})⟧(log des deux membres)⟦\\iff⟧⟦(x + 2) \\cdot \\log(4) = x \\cdot \\log(8)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(4) + 2\\log(4) = x \\cdot \\log(8)⟧⟦\\iff⟧⟦2\\log(4) = x(\\log(8) - \\log(4))⟧⟦\\iff⟧⟦x = \\frac{2\\log(4)}{\\log(8) - \\log(4)}⟧(car ⟦\\log(8) - \\log(4) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(16)}{\\log(2)}⟧(propriétés des logarithmes)⟦2\\log(4) = \\log(4^{2})⟧(propriétés des logarithmes)⟦\\phantom{2\\log(4)} = \\log(16)⟧⟦\\log(8) - \\log(4) = \\log\\left(\\frac{8}{4}\\right)⟧(propriétés des logarithmes)⟦\\phantom{\\log(8) - \\log(4)} = \\log(2)⟧",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{\\log(16)}{\\log(2)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(16)}{\\log(2)} = 4⟧.",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Isoler les exponentielles⟦4^{x + 2} - 8^{x} = 0⟧⟦\\iff⟧⟦4^{x + 2} = 8^{x}⟧(on passe un terme de l'autre côté)",
+      "titre": "Étape 1Isoler les exponentielles"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base⟦4^{x + 2} = (2^{2})^{x + 2} = 2^{2(x + 2)}⟧((aᵐ)ⁿ = aᵐⁿ)⟦\\phantom{4^{x + 2}} = 2^{2x + 4}⟧⟦8^{x} = (2^{3})^{x} = 2^{3x}⟧((aᵐ)ⁿ = aᵐⁿ)⟦2^{2x + 4} = 2^{3x}⟧⟦\\iff⟧⟦2x + 4 = 3x⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦-x = -4⟧⟦\\iff⟧⟦x = 4⟧",
+      "titre": "Étape 2Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{4\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
  },
  "4^x+2^x=2": {
   "au_depart": {
@@ -2877,6 +3942,141 @@
     ],
     "imprimee": "Méthode : Même base / définition",
     "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "4^x=16^(2x+5)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦4^{x} = 16^{2x + 5}⟧⟦\\iff⟧⟦\\log(4^{x}) = \\log(16^{2x + 5})⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(4) = (2x + 5) \\cdot \\log(16)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(4) = 2x \\cdot \\log(16) + 5\\log(16)⟧⟦\\iff⟧⟦x(\\log(4) - 2\\log(16)) = 5\\log(16)⟧⟦\\iff⟧⟦x = \\frac{5\\log(16)}{\\log(4) - 2\\log(16)}⟧(car ⟦\\log(4) - 2\\log(16) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(1\\text{’}048\\text{’}576)}{\\log\\left(\\frac{1}{64}\\right)}⟧(propriétés des logarithmes)⟦5\\log(16) = \\log(16^{5})⟧(propriétés des logarithmes)⟦\\phantom{5\\log(16)} = \\log(1\\text{’}048\\text{’}576)⟧⟦\\log(4) - 2\\log(16) = \\log\\left(\\frac{4}{16^{2}}\\right)⟧(propriétés des logarithmes)⟦\\phantom{\\log(4) - 2\\log(16)} = \\log\\left(\\frac{1}{64}\\right)⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(1\\text{’}048\\text{’}576)}{\\log\\left(\\frac{1}{64}\\right)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(1\\text{’}048\\text{’}576)}{\\log\\left(\\frac{1}{64}\\right)} = -\\frac{10}{3}⟧.",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Logarithme des deux membres⟦4^{x} = 16^{2x + 5}⟧⟦\\iff⟧⟦\\log(4^{x}) = \\log(16^{2x + 5})⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(4) = (2x + 5) \\cdot \\log(16)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(4) = 2x \\cdot \\log(16) + 5\\log(16)⟧⟦\\iff⟧⟦x(\\log(4) - 2\\log(16)) = 5\\log(16)⟧⟦\\iff⟧⟦x = \\frac{5\\log(16)}{\\log(4) - 2\\log(16)}⟧(car ⟦\\log(4) - 2\\log(16) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(1\\text{’}048\\text{’}576)}{\\log\\left(\\frac{1}{64}\\right)}⟧(propriétés des logarithmes)⟦5\\log(16) = \\log(16^{5})⟧(propriétés des logarithmes)⟦\\phantom{5\\log(16)} = \\log(1\\text{’}048\\text{’}576)⟧⟦\\log(4) - 2\\log(16) = \\log\\left(\\frac{4}{16^{2}}\\right)⟧(propriétés des logarithmes)⟦\\phantom{\\log(4) - 2\\log(16)} = \\log\\left(\\frac{1}{64}\\right)⟧",
+     "titre": "Étape 1Logarithme des deux membres"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\left\\{\\frac{\\log(1\\text{’}048\\text{’}576)}{\\log\\left(\\frac{1}{64}\\right)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(1\\text{’}048\\text{’}576)}{\\log\\left(\\frac{1}{64}\\right)} = -\\frac{10}{3}⟧.",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationLa solution est négative : la situation décrite n'arrive jamais.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 3 / 3"
+  },
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦4^{x} = 16^{2x + 5}⟧⟦\\iff⟧⟦\\log(4^{x}) = \\log(16^{2x + 5})⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(4) = (2x + 5) \\cdot \\log(16)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(4) = 2x \\cdot \\log(16) + 5\\log(16)⟧⟦\\iff⟧⟦x(\\log(4) - 2\\log(16)) = 5\\log(16)⟧⟦\\iff⟧⟦x = \\frac{5\\log(16)}{\\log(4) - 2\\log(16)}⟧(car ⟦\\log(4) - 2\\log(16) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(1\\text{’}048\\text{’}576)}{\\log\\left(\\frac{1}{64}\\right)}⟧(propriétés des logarithmes)⟦5\\log(16) = \\log(16^{5})⟧(propriétés des logarithmes)⟦\\phantom{5\\log(16)} = \\log(1\\text{’}048\\text{’}576)⟧⟦\\log(4) - 2\\log(16) = \\log\\left(\\frac{4}{16^{2}}\\right)⟧(propriétés des logarithmes)⟦\\phantom{\\log(4) - 2\\log(16)} = \\log\\left(\\frac{1}{64}\\right)⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{\\log(1\\text{’}048\\text{’}576)}{\\log\\left(\\frac{1}{64}\\right)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(1\\text{’}048\\text{’}576)}{\\log\\left(\\frac{1}{64}\\right)} = -\\frac{10}{3}⟧.",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦16^{2x + 5} = (4^{2})^{2x + 5} = 4^{2(2x + 5)}⟧((aᵐ)ⁿ = aᵐⁿ)⟦\\phantom{16^{2x + 5}} = 4^{4x + 10}⟧⟦4^{x} = 4^{4x + 10}⟧⟦\\iff⟧⟦x = 4x + 10⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦-3x = 10⟧⟦\\iff⟧⟦x = -\\frac{10}{3}⟧",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-\\frac{10}{3}\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
    }
   }
  },
@@ -9246,6 +10446,104 @@
   ],
   "progression_finale": "Étape 5 / 5"
  },
+ "log8(x)=2/3": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{8}(x) = \\frac{2}{3}⟧⟦\\iff⟧⟦8^{\\log_{8}(x)} = 8^{\\frac{2}{3}}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 8^{\\frac{2}{3}} = (2^{3})^{\\frac{2}{3}} = 2^{2} = 4⟧(a^(log_a(A)) = A, A > 0)",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 4⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{4\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "log_0,01(x)=1/2": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{0{,}01}(x) = \\frac{1}{2}⟧⟦\\iff⟧⟦0{,}01^{\\log_{0{,}01}(x)} = 0{,}01^{0{,}5}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 0{,}01^{0{,}5} = 0{,}1⟧(a^(log_a(A)) = A, A > 0)",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 0{,}1⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{0{,}1\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
  "log_2(x)=4": {
   "au_depart": {
    "progression": "Étape 1 / 4",
@@ -9290,6 +10588,153 @@
     "listes": [],
     "tableaux": [],
     "texte": "Solution⟦S = \\left\\{16\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "log_4(x)=-3/2": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{4}(x) = -\\frac{3}{2}⟧⟦\\iff⟧⟦4^{\\log_{4}(x)} = 4^{-\\frac{3}{2}}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 4^{-\\frac{3}{2}} = (2^{2})^{-\\frac{3}{2}} = 2^{-3} = \\frac{1}{8}⟧(a^(log_a(A)) = A, A > 0)",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = \\frac{1}{8}⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{1}{8}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "log_8(x)=1/3": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{8}(x) = \\frac{1}{3}⟧⟦\\iff⟧⟦8^{\\log_{8}(x)} = 8^{\\frac{1}{3}}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 8^{\\frac{1}{3}} = (2^{3})^{\\frac{1}{3}} = 2⟧(a^(log_a(A)) = A, A > 0)",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 2⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "log_9(x)=3/2": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{9}(x) = \\frac{3}{2}⟧⟦\\iff⟧⟦9^{\\log_{9}(x)} = 9^{\\frac{3}{2}}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 9^{\\frac{3}{2}} = (3^{2})^{\\frac{3}{2}} = 3^{3} = 27⟧(a^(log_a(A)) = A, A > 0)",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 27⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{27\\right\\}⟧",
     "titre": "Solution"
    }
   ],

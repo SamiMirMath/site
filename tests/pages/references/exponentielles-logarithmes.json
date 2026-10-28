@@ -40263,6 +40263,64 @@
   ],
   "progression_finale": "Étape 2 / 2"
  },
+ "log8(x)=2/3": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log_{8}(x) = \\frac{2}{3}⟧⟦\\iff⟧⟦8^{\\log_{8}(x)} = 8^{\\frac{2}{3}}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 8^{\\frac{2}{3}} = (2^{3})^{\\frac{2}{3}} = 2^{2} = 4⟧(a^(log_a(A)) = A, A > 0)",
+    "titre": "Étape 1Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{4\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_0,01(x)=1/2": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log_{0{,}01}(x) = \\frac{1}{2}⟧⟦\\iff⟧⟦0{,}01^{\\log_{0{,}01}(x)} = 0{,}01^{0{,}5}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 0{,}01^{0{,}5} = 0{,}1⟧(a^(log_a(A)) = A, A > 0)",
+    "titre": "Étape 1Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{0{,}1\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
  "log_1(x)=2": {
   "au_depart": {
    "progression": "",
@@ -40862,6 +40920,35 @@
   ],
   "progression_finale": "Étape 2 / 2"
  },
+ "log_4(x)=-3/2": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log_{4}(x) = -\\frac{3}{2}⟧⟦\\iff⟧⟦4^{\\log_{4}(x)} = 4^{-\\frac{3}{2}}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 4^{-\\frac{3}{2}} = (2^{2})^{-\\frac{3}{2}} = 2^{-3} = \\frac{1}{8}⟧(a^(log_a(A)) = A, A > 0)",
+    "titre": "Étape 1Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{1}{8}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
  "log_5(0,2)": {
   "au_depart": {
    "progression": "Étape 1 / 2",
@@ -41065,6 +41152,35 @@
   ],
   "progression_finale": "Étape 2 / 2"
  },
+ "log_8(x)=1/3": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log_{8}(x) = \\frac{1}{3}⟧⟦\\iff⟧⟦8^{\\log_{8}(x)} = 8^{\\frac{1}{3}}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 8^{\\frac{1}{3}} = (2^{3})^{\\frac{1}{3}} = 2⟧(a^(log_a(A)) = A, A > 0)",
+    "titre": "Étape 1Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
  "log_9(27)": {
   "au_depart": {
    "progression": "Étape 1 / 2",
@@ -41090,6 +41206,35 @@
     "tableaux": [],
     "texte": "Résultat⟦\\log_{9}(27) = \\frac{3}{2}⟧",
     "titre": "Résultat"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "log_9(x)=3/2": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log_{9}(x) = \\frac{3}{2}⟧⟦\\iff⟧⟦9^{\\log_{9}(x)} = 9^{\\frac{3}{2}}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 9^{\\frac{3}{2}} = (3^{2})^{\\frac{3}{2}} = 3^{3} = 27⟧(a^(log_a(A)) = A, A > 0)",
+    "titre": "Étape 1Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{27\\right\\}⟧",
+    "titre": "Solution"
    }
   ],
   "progression_finale": "Étape 2 / 2"
