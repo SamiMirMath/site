@@ -136,6 +136,12 @@ def resoudre(entree, filiere="C"):
         final = so.carte("Résultat", [so.resultat(el.tex_resultat(r))], style="final")
         return so.sortie_ok(el.tex_saisie(s.g, s.d), _cartes(r) + [final])
     if filiere == "M":
+        variantes = elm.variantes_changement(s.g, s.d, s.inconnue)
+        if variantes is not None:
+            return so.sortie_ok_variantes(el.tex_saisie(s.g, s.d), [so.variante(m, LIBELLES[m], _cartes_equation(variantes[m])) for m in el.METHODES],
+                                          el.METHODE_LOGARITHMES)
+        if elm.reconnu_changement(s.g, s.d, s.inconnue):          # au programme M (e^x + e^(−x) = 3 : racines irrationnelles) mais pas encore traité
+            return so.sortie_erreur(el.MESSAGE_PAS_ENCORE)
         r = elm.corriger_equation(s.g, s.d, s.inconnue)
         if r is not None:
             return _sortie_equation(s, r)

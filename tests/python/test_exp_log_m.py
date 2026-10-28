@@ -11,7 +11,8 @@ import exp_log_m as elm
 import resoudre_el as rel
 import resoudre_ed
 import sortie as so
-from cas_el import BATTERIE_E4, BATTERIE_M, IMBRIQUES_BASE_10, M_HORS_PROGRAMME, M_PAS_ENCORE, M_TOUT_L_ED, entrees_el, entrees_el_m
+from cas_el import (BATTERIE_E4, BATTERIE_M, BATTERIE_M_VAR, IMBRIQUES_BASE_10, M_HORS_PROGRAMME, M_PAS_ENCORE, M_TOUT_L_ED, M_VAR_PAS_ENCORE,
+                    entrees_el, entrees_el_m)
 
 
 class TestFiliereParDefaut(unittest.TestCase):
@@ -72,38 +73,38 @@ MP = mp.MPContext()          # contexte isolé : ne change pas la précision glo
 MP.dps = 30
 
 
-def evaluer(n, x):
+def evaluer(n, x, libres=None):
     """Oracle indépendant du moteur : valeur d'un arbre avec mpmath, None quand l'expression n'est pas définie (logarithme d'un nombre ≤ 0,
     base d'un logarithme ≤ 0 ou égale à 1, division par 0)."""
     if isinstance(n, el.Nb):
         return MP.mpf(n.val.numerator) / n.val.denominator
     if isinstance(n, el.Var):
-        return MP.mpf(x)
+        return libres[n.nom] if libres and n.nom in libres else MP.mpf(x)
     if isinstance(n, el.E):
         return MP.e
     if isinstance(n, el.Defini):
-        return evaluer(n.arbre, x)
+        return evaluer(n.arbre, x, libres)
     if isinstance(n, el.Neg):
-        v = evaluer(n.a, x)
+        v = evaluer(n.a, x, libres)
         return None if v is None else -v
     if isinstance(n, el.Fn):
-        v = evaluer(n.a, x)
+        v = evaluer(n.a, x, libres)
         return None if v is None or v < 0 else MP.sqrt(v)
     if isinstance(n, el.Pow):
-        a, b = evaluer(n.a, x), evaluer(n.b, x)
+        a, b = evaluer(n.a, x, libres), evaluer(n.b, x, libres)
         if a is None or b is None or (a == 0 and b < 0) or (a < 0 and b != int(b)):
             return None
         return MP.power(a, b)
     if isinstance(n, el.Op):
-        a, b = evaluer(n.a, x), evaluer(n.b, x)
+        a, b = evaluer(n.a, x, libres), evaluer(n.b, x, libres)
         if a is None or b is None:
             return None
         if n.op == "/":
             return None if b == 0 else a / b
         return a + b if n.op == "+" else a - b if n.op == "-" else a * b
     if isinstance(n, el.Log):
-        a = evaluer(n.a, x)
-        b = MP.mpf(10) if n.base is None else evaluer(n.base, x)
+        a = evaluer(n.a, x, libres)
+        b = MP.mpf(10) if n.base is None else evaluer(n.base, x, libres)
         if a is None or b is None or a <= 0 or b <= 0 or b == 1:
             return None
         return MP.log(a) / MP.log(b)
@@ -255,6 +256,119 @@ class TestLignesM(unittest.TestCase):
                     self.assertEqual(id(n) in retenues, dedans, (entree, el.tex(n)))
                     rejets += not dedans
         self.assertGreaterEqual(rejets, 10)
+
+
+def variantes_var(entree):
+    s = el.analyser_saisie(entree)
+    return s, elm.variantes_changement(s.g, s.d, s.inconnue)
+
+
+class TestChangementDeVariable(unittest.TestCase):
+    def test_les_deux_methodes_donnent_les_solutions_de_la_batterie(self):
+        for entree, attendu in BATTERIE_M_VAR:
+            with self.subTest(entree=entree):
+                _, v = variantes_var(entree)
+                self.assertIsNotNone(v)
+                for methode, r in v.items():
+                    if r.get("message"):
+                        self.assertEqual(methode, el.METHODE_MEME_BASE, entree)       # « 3 n'est pas une puissance de 2 : il faut les logarithmes. »
+                        continue
+                    sol = sorted(el.valeur(n) for n in r["solutions"])
+                    self.assertEqual(len(sol), len(attendu), (entree, methode, sol))
+                    for a, b in zip(sol, sorted(attendu)):
+                        self.assertAlmostEqual(a, b, delta=1e-3 * (1 + abs(b)))
+
+    def test_oracle_les_solutions_sont_exactement_les_racines(self):
+        """Chaque solution annule g − d et aucune racine n'est perdue (balayage numérique indépendant du moteur), pour la méthode « logarithmes »."""
+        for entree, _ in BATTERIE_M_VAR:
+            with self.subTest(entree=entree):
+                s, v = variantes_var(entree)
+                retenues = [MP.mpf(el.valeur(n)) for n in v[el.METHODE_LOGARITHMES]["solutions"]]
+                for x in retenues:
+                    self.assertLess(abs(ecart(s, x)), MP.mpf("1e-9") * (1 + abs(x)))
+                for rac in racines(s):
+                    self.assertTrue(any(abs(rac - x) < MP.mpf("1e-9") * (1 + abs(rac)) for x in retenues), ("racine perdue", rac))
+
+    def test_les_lignes_de_la_carte_du_changement_de_variable_sont_justes(self):
+        """Chaque terme réécrit vaut le même nombre que le terme écrit (c · (aˣ)ᵘ = c · tᵘ avec t = aˣ) et chaque ⇔ de la carte garde l'écart g − d,
+        à un facteur t, t² près quand on multiplie par t (oracle mpmath, valeur de t lue dans le résultat)."""
+        egalites, equivalences = 0, 0
+        for entree, _ in BATTERIE_M_VAR:
+            s, v = variantes_var(entree)
+            r = v[el.METHODE_LOGARITHMES]
+            nom, t_arbre = r["variable"]
+            carte = r["etapes"][0]
+            self.assertEqual(carte["titre"], "Changement de variable")
+            pose = next(m for m in carte["lignes"] if isinstance(m, el.Message))
+            self.assertRegex(pose.texte(), r"^On pose (t|u) = .+\. Une exponentielle est strictement positive : (t|u) > 0\.$")
+            for x in (MP.mpf("0.37"), MP.mpf("-0.61"), MP.mpf("1.3"), MP.mpf("-1.9")):
+                libres = {nom: evaluer(t_arbre, x)}
+                for ligne in carte["lignes"]:
+                    if not isinstance(ligne, el.Chaine) or isinstance(ligne.elements[0], (el.Var, el.Texte)):          # Δ = … : le discriminant n'est pas une égalité de valeurs
+                        continue
+                    if all(not isinstance(e, (el.Eq, el.Ou)) for e in ligne.elements):          # terme = c · (aˣ)ᵘ = c · tᵘ
+                        valeurs = [evaluer(e, x, libres) for e in ligne.elements]
+                        for w in valeurs[1:]:
+                            self.assertLessEqual(abs(w - valeurs[0]), MP.mpf("1e-20") * (1 + abs(valeurs[0])), (entree, el.tex_chaine(ligne)))
+                        egalites += 1
+                    elif all(isinstance(e, el.Eq) for e in ligne.elements[:2]):                # g = d ⇔ g_t = d_t ⇔ … : même écart
+                        ecarts = []
+                        for e in ligne.elements:
+                            if not isinstance(e, el.Eq):
+                                break
+                            ecarts.append(evaluer(e.g, x, libres) - evaluer(e.d, x, libres))
+                        base = ecarts[0]
+                        for w in ecarts[1:]:
+                            rapport = w / base
+                            self.assertTrue(any(abs(rapport - libres[nom] ** k) <= MP.mpf("1e-18") * (1 + abs(rapport)) for k in (-2, -1, 0, 1, 2)),
+                                            (entree, x, rapport))
+                            base = w
+                            equivalences += 1
+        self.assertGreater(egalites, 100)
+        self.assertGreater(equivalences, 100)
+
+    def test_les_valeurs_de_t_negatives_ou_nulles_sont_rejetees_avec_la_raison(self):
+        _, v = variantes_var("3^x+9^x=90")
+        carte = next(c for c in v[el.METHODE_LOGARITHMES]["etapes"] if c["titre"] == "Valeurs de t")
+        notes = [ligne.note for ligne in carte["lignes"]]
+        self.assertEqual(notes, ["rejetée : une exponentielle est strictement positive", "retenue ✓"])
+        _, v = variantes_var("4^x+3*2^x=-4")
+        self.assertEqual(v[el.METHODE_LOGARITHMES]["solutions"], [])
+
+    def test_proprietes_de_la_liste_fermee_et_vouvoiement(self):
+        for entree, _ in BATTERIE_M_VAR:
+            _, v = variantes_var(entree)
+            for r in v.values():
+                for carte in r["etapes"]:
+                    for ligne in carte["lignes"]:
+                        if isinstance(ligne, el.Chaine):
+                            for p in ligne.props:
+                                self.assertTrue(p is None or p in el.PROPRIETES or p in elm.PROPRIETES_M or isinstance(p, el.Car), (entree, p))
+                            if ligne.note:
+                                self.assertTrue(ligne.note in el.PROPRIETES or ligne.note.startswith(("retenue", "rejetée")), (entree, ligne.note))
+
+    def test_au_programme_m_mais_pas_encore_traite_en_m_et_hors_programme_en_3c(self):
+        for entree in M_VAR_PAS_ENCORE:
+            with self.subTest(entree=entree):
+                self.assertEqual(rel.resoudre(entree, "M"), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
+                self.assertEqual(rel.resoudre(entree, "C"), {"ok": False, "erreur": el.MESSAGE_HORS_PROGRAMME})
+
+    def test_en_3c_ces_equations_gardent_leur_message(self):
+        for entree, _ in BATTERIE_M_VAR:
+            if entree in ("3*2^(2(x+1))-10*2^(x+2)=32", "2*2^(6x-1)+3*2^(3x+1)+9=0", "2^(2x+2)-7*2^(x+1)=8", "4^x=2^(x+1)+3", "2^(2t)-3*2^t=-2"):
+                continue
+            with self.subTest(entree=entree):
+                self.assertEqual(rel.resoudre(entree, "C"), {"ok": False, "erreur": el.MESSAGE_HORS_PROGRAMME})
+
+    def test_une_equation_de_la_filiere_m_a_deux_variantes_et_pas_d_option(self):
+        for entree, _ in BATTERIE_M_VAR:
+            with self.subTest(entree=entree):
+                s = rel.resoudre(entree, "M")
+                self.assertEqual(so.valider(s), [])
+                self.assertEqual([x["cle"] for x in s["variantes"]], [el.METHODE_MEME_BASE, el.METHODE_LOGARITHMES])
+                self.assertEqual(s["variante_defaut"], el.METHODE_LOGARITHMES)
+                self.assertNotIn("option", s)
+                self.assertEqual(json.loads(rel.resoudre_json(entree, "M")), s)
 
 
 class TestIdentitesEtMessagesM(unittest.TestCase):

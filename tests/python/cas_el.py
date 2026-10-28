@@ -194,6 +194,17 @@ BATTERIE_M = [
     ("ln(x)+ln(x+1)=ln(6)", [2.0]), ("log(x^2)-log(x)=1", [10.0]), ("log(x-1)=log(3)+log(x)-log(2)", []),
 ]
 
+# 2ᵉ degré en aˣ (filière M seulement) : (saisie, solutions arrondies à 10⁻³), les deux méthodes donnent le même S ; Amaudruz 6.1 c i j k l, 7.8 i
+BATTERIE_M_VAR = [
+    ("3^x+9^x=90", [2.0]), ("4^x-2^x-6=0", [1.585]), ("e^(2x)-3e^x+2=0", [0.0, 0.693]), ("e^(4x)-29e^(2x)=-100", [0.693, 1.609]),
+    ("3*2^(2(x+1))-10*2^(x+2)=32", [2.0]), ("2*2^(6x-1)+3*2^(3x+1)+9=0", []), ("3^(x+1)+3^(-x)=4", [-1.0, 0.0]), ("2^(2x+2)-7*2^(x+1)=8", [2.0]),
+    ("4^x+2^x=2", [0.0]), ("2^x+2^(-x)=2", [0.0]), ("9^x-4*3^(x+1)+27=0", [1.0, 2.0]), ("25^x-6*5^x+5=0", [0.0, 1.0]), ("2^(2x)-5*2^x+4=0", [0.0, 2.0]),
+    ("2^(2t)-3*2^t=-2", [0.0, 1.0]), ("0,25^x-0,5^x-2=0", [-1.0]), ("e^x-6+8e^(-x)=0", [0.693, 1.386]), ("4^x=2^(x+1)+3", [1.585]),
+    ("8^x-2*4^x-8*2^x=0", [2.0]), ("4^x+3*2^x=-4", []),
+]
+# au programme M, reconnues, mais avec des racines irrationnelles : pas encore ; en 3C : hors programme
+M_VAR_PAS_ENCORE = ["e^x+e^(-x)=3", "4^x-2^x-1=0", "2^x+2^(-x)=3"]
+
 # identités sur l'ensemble de définition : S = ED (solutions None)
 M_TOUT_L_ED = ["log(x)=log(x)", "log(x)+log(x-1)=log(x^2-x)", "2log(x)=log(x^2)+log(1)"]
 # formes du programme M que l'outil ne traite pas encore, et vrais hors-programme
@@ -207,7 +218,8 @@ IMBRIQUES_BASE_10 = ["log(log(x))=1", "log(log(log(x)))=0", "log(log(x-1))=0"]
 
 def entrees_el_m():
     """Entrées de l'instantané de la filière M : les équations logarithmiques de la 3C (avec ensemble de définition en M) et BATTERIE_M."""
-    return list(dict.fromkeys([s for s, _ in BATTERIE_E4] + [s for s, _ in BATTERIE_M] + M_TOUT_L_ED + M_PAS_ENCORE + M_HORS_PROGRAMME))
+    return list(dict.fromkeys([s for s, _ in BATTERIE_E4] + [s for s, _ in BATTERIE_M] + M_TOUT_L_ED + M_PAS_ENCORE + M_HORS_PROGRAMME
+                                  + [s for s, _ in BATTERIE_M_VAR] + M_VAR_PAS_ENCORE))
 
 
 def entrees_el():

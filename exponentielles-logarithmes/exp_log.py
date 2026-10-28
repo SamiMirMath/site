@@ -1297,7 +1297,7 @@ def _resoudre_polynome(A, B, At, Bt, x):
     if any(v.denominator != 1 for v in P):
         raise _Hors
     c0, b, a = (int(v) for v in P)
-    standard = Eq(_arbre_poly(P), Nb(0))
+    standard = Eq(_arbre_poly(P, x), Nb(0))
     if tex_element(standard) != tex_element(c.elements[-1]):
         c.ajouter(standard, "⇔")
     if b == 0 and c0 == 0:                                # a·x² = 0 ⇔ x² = 0 ⇔ x = 0 (jamais Δ = 0 ni ±√0)
@@ -3107,7 +3107,7 @@ def suggere_interpretation(saisie):
 def interpretation_possible(r):
     """Vrai si l'interprétation a un sens : une équation exponentielle résolue (pas une équation logarithmique, un premier degré ni un calcul),
     avec au plus une solution (S = ∅ compris)."""
-    return (r is not None and r.get("genre") not in ("logarithmique", "lineaire", "calcul") and not r.get("message")
+    return (r is not None and r.get("genre") not in ("logarithmique", "lineaire", "calcul", "changement") and not r.get("message")
             and r["solutions"] is not None and len(r["solutions"]) <= 1 and r.get("ensemble") is None)
 
 

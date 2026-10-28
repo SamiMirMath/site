@@ -13,14 +13,16 @@ Tout le TeX est écrit par l'arbre de exp_log.py ou par le moteur de l'outil ED 
 """
 import decimal
 from fractions import Fraction as F
+from math import gcd
 
 from noyau import analyser_complet
 from exp_log import (Chaine, Defini, E, Eq, Fn, Log, Message, Neg, Nb, Op, Ou, Pow, Texte, Var, _Hors, _arbre_poly, _avec_decimaux,
-                     _base_du_logarithme, _carte, _const, _contient_log, _nb_exact, _nom_tex, _padd, _par_exponentielle, _precis, _produit,
-                     _racine_entiere, _resoudre_polynome, _somme_arbres, _suite_polynome, _valeur_exacte, _valeur_rationnelle, logarithmique_m, tex, tex_approx, valeur,
-                     variables, PROP_EXPONENTIELLE, PROP_ISOLER_LOG)
+                     _base_du_logarithme, _carte, _const, _contient_log, _nb_exact, _nom_tex, _padd, _par_exponentielle, _pnet, _precis, _produit,
+                     _racine_entiere, _resoudre_polynome, _somme_arbres, _suite_polynome, _valeur_exacte, _valeur_rationnelle, _exposant_entier, _racine_primitive, logarithmique_m,
+                     resolution_exponentielle, tex, tex_approx, valeur, variables, METHODE_LOGARITHMES, METHODE_MEME_BASE, METHODES, PROP_EXPONENTIELLE, PROP_ISOLER_LOG)
 
-__all__ = ["EnsembleDef", "ensemble_de_definition", "verification", "regrouper", "corriger_equation", "PROPRIETES_M"]
+__all__ = ["EnsembleDef", "ensemble_de_definition", "verification", "regrouper", "variantes_changement", "reconnu_changement", "corriger_equation",
+           "PROPRIETES_M"]
 
 
 class EnsembleDef:
@@ -307,8 +309,17 @@ PROP_FOIS_DENOMINATEURS = "on multiplie les deux membres par les dénominateurs,
 PROP_RACINE_IMPAIRE = "xⁿ = c ⇔ x = c^(1/n) (n impair)"
 PROP_RACINE_PAIRE = "xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0)"
 PROP_PUISSANCE_PAIRE = "une puissance paire est positive ou nulle"
+PROP_PUISSANCES = "propriétés des puissances"
+
+
+def _prop_fois(nom, decalage):
+    """« on multiplie les deux membres par t, t > 0 » (t² pour un décalage de 2 ; « divise » quand le décalage est négatif : 8ˣ − 2·4ˣ − 8·2ˣ = 0)."""
+    return f"on {'multiplie' if decalage > 0 else 'divise'} les deux membres par {nom}{'²' if abs(decalage) == 2 else ''}, {nom} > 0"
+
+
 PROPRIETES_M = frozenset({_propriete(f, g) for f in _FAMILLES for g in ("puissance", "produit", "quotient", "mixte", "constante", "egaux")} |
-                         {PROP_FOIS_DENOMINATEURS, PROP_RACINE_IMPAIRE, PROP_RACINE_PAIRE, PROP_PUISSANCE_PAIRE})
+                         {PROP_FOIS_DENOMINATEURS, PROP_RACINE_IMPAIRE, PROP_RACINE_PAIRE, PROP_PUISSANCE_PAIRE, PROP_PUISSANCES} |
+                         {_prop_fois(nom, k) for nom in ("t", "u") for k in (-2, -1, 1, 2)})
 DEGRE_MAX = 8
 
 
@@ -608,6 +619,229 @@ def _regrouper(g, d, x):
         remarque = "Cette égalité est vraie pour tout x de l'ensemble de définition."
     cartes.append(_carte(titre, [carte2] + suite))
     return {"genre": "logarithmique", "inconnue": x, "enonce": enonce, "base": None, "etapes": cartes, "solutions": solutions, "remarque": remarque}
+
+
+# =====================================================================
+# 4 ter. CHANGEMENT DE VARIABLE : 2ᵉ degré en aˣ (4ˣ − 2ˣ − 6 = 0, e^(2x) − 3eˣ + 2 = 0, 3^(x+1) + 3^(−x) = 4)
+# =====================================================================
+def _additifs(n, signe=F(1)):
+    if isinstance(n, Neg):
+        return _additifs(n.a, -signe)
+    if isinstance(n, Op) and n.op in "+-":
+        return _additifs(n.a, signe) + _additifs(n.b, signe if n.op == "+" else -signe)
+    return [(signe, n)]
+
+
+def _terme_exp(n, x):
+    """(k, base, (q, p)) pour n = k · base^(q + p·x) : base est un rationnel > 0 (≠ 1), "e", ou None quand n est une constante (k)."""
+    if not variables(n):
+        v = _const(n)
+        if v is None:
+            raise _Hors
+        return v, None, None
+    if isinstance(n, Neg):
+        k, b, e = _terme_exp(n.a, x)
+        return -k, b, e
+    if isinstance(n, Op) and n.op in "*/":
+        k1, b1, e1 = _terme_exp(n.a, x)
+        k2, b2, e2 = _terme_exp(n.b, x)
+        if n.op == "/":
+            if k2 == 0:
+                raise _Hors
+            k2, e2 = 1 / k2, (None if e2 is None else (-e2[0], -e2[1]))
+        if b1 is not None and b2 is not None and b1 != b2:
+            raise _Hors
+        base = b1 if b1 is not None else b2
+        if b1 is not None and b2 is not None:
+            e = (e1[0] + e2[0], e1[1] + e2[1])
+        else:
+            e = e1 if b1 is not None else e2
+        return k1 * k2, base, e
+    if isinstance(n, Pow):
+        if variables(n.b):
+            if variables(n.a):
+                raise _Hors
+            p = _pq(n.b)
+            if len(p) > 2:
+                raise _Hors
+            base = "e" if isinstance(n.a, E) else _const(n.a)
+            if base is None or (base != "e" and (base <= 0 or base == 1)):
+                raise _Hors
+            return F(1), base, (p[0], p[1] if len(p) > 1 else F(0))
+        k = _const(n.b)
+        k0, b0, e0 = _terme_exp(n.a, x)
+        if k is None or k.denominator != 1 or b0 is None or not 0 < k <= 4:
+            raise _Hors
+        return k0 ** int(k), b0, (e0[0] * k, e0[1] * k)
+    raise _Hors
+
+
+def _pgcd_rationnels(valeurs):
+    den = 1
+    for v in valeurs:
+        den = den * v.denominator // gcd(den, v.denominator)
+    g = 0
+    for v in valeurs:
+        g = gcd(g, int(abs(v) * den))
+    return F(g, den)
+
+
+def _arbre_t(c, mu, T):
+    """c · tᵘ comme on l'écrit : 3t, t², −t, 1/t, 2/t²."""
+    if mu == 0:
+        return _nb_exact(c)
+    puissance = T if abs(mu) == 1 else Pow(T, Nb(abs(mu)))
+    if mu > 0:
+        corps = puissance if abs(c) == 1 else Op("*", _nb_exact(abs(c)), puissance)
+    else:
+        corps = Op("/", _nb_exact(abs(c)), puissance)
+    return Neg(corps) if c < 0 else corps
+
+
+class _Plan:
+    """Tout ce que les deux méthodes ont en commun dans un changement de variable : la variable t, les cartes d'avant le retour à x, les valeurs de t."""
+    __slots__ = ("t", "cartes", "retenues", "base_noeud", "pas", "lignes_t", "x", "enonce", "remarque", "variable")
+
+
+def _plan(g, d, x):
+    return _plan_apres(g, d, x, *_analyse(g, d, x))
+
+
+def _analyse(g, d, x):
+    """Reconnaît une équation du 2ᵉ degré en aˣ : (termes, b0, base_noeud, lignes, constantes, pas, mus, decalage). _Hors sinon."""
+    termes = {"g": [(s, n, _terme_exp(n, x)) for s, n in _additifs(g)], "d": [(s, n, _terme_exp(n, x)) for s, n in _additifs(d)]}
+    bases = {b for lt in termes.values() for _, _, (_, b, _) in lt if b is not None}
+    if not bases:
+        raise _Hors
+    if "e" in bases:
+        if bases != {"e"}:
+            raise _Hors
+        b0 = "e"
+    else:
+        racines = {_racine_primitive(b) for b in bases}
+        if len(racines) != 1:
+            raise _Hors
+        candidats = sorted(b for b in bases if b > 1)
+        b0 = next((c for c in candidats if all(_exposant_entier(b, c) is not None for b in bases)), racines.pop())
+    base_noeud = E() if b0 == "e" else _nb_exact(b0)
+    lignes = {"g": [], "d": []}                          # (signe, terme écrit, coefficient sans le signe, pente de l'exposant en base b0)
+    constantes = {"g": F(0), "d": F(0)}
+    for cote, lt in termes.items():
+        for s, n, (k, b, e) in lt:
+            if b is None:
+                constantes[cote] += s * k
+                continue
+            m = 1 if b0 == "e" else _exposant_entier(b, b0)
+            q, p = e
+            if b0 == "e" and q != 0:
+                raise _Hors                              # e^(x+1) : coefficient irrationnel
+            sigma = m * p
+            cn = k * (F(1) if b0 == "e" else _puissance_constante(b0, m * q))
+            if sigma == 0:
+                constantes[cote] += s * cn
+            else:
+                lignes[cote].append((s, n, cn, sigma))
+    pentes = [sg for lt in lignes.values() for _, _, _, sg in lt]
+    if not pentes:
+        raise _Hors
+    pas = _pgcd_rationnels(pentes)
+    if any((sg / pas).denominator != 1 for sg in pentes):
+        raise _Hors
+    mus = {int(sg / pas) for sg in pentes} | ({0} if constantes["g"] != 0 or constantes["d"] != 0 else set())
+    decalage = -min(mus)
+    if max(mus) - min(mus) != 2 or max(mus) > 4 or abs(decalage) > 2:
+        raise _Hors
+    return termes, b0, base_noeud, lignes, constantes, pas, mus, decalage
+
+
+def reconnu_changement(g, d, x):
+    """Vrai pour une équation du 2ᵉ degré en aˣ (au programme M), que l'outil la résolve ou non."""
+    try:
+        _analyse(g, d, x)
+        return True
+    except _Hors:
+        return False
+
+
+def _plan_apres(g, d, x, termes, b0, base_noeud, lignes, constantes, pas, mus, decalage):
+    t = "u" if x == "t" else "t"
+    T = Var(t)
+    t_tex = Pow(base_noeud, _arbre_poly([F(0), pas], x))
+    carte = [Message("On pose ", Texte(f"{t} = " + tex(t_tex)), ". Une exponentielle est strictement positive : ", Texte(f"{t} > 0"), ".")]
+    arbres_t, polys = {}, {}
+    for cote in ("g", "d"):
+        morceaux, poly = [], [F(0)] * (max(mus) + decalage + 1)
+        for s, n, cn, sigma in lignes[cote]:
+            mu = int(sigma / pas)
+            milieu, forme = _arbre_t(cn, mu, t_tex), _arbre_t(cn, mu, T)
+            if tex(n) != tex(milieu):                    # le terme n'est pas déjà c · aˣ : une ligne qui le réécrit avec t
+                carte.append(Chaine([n, milieu, forme], ["=", "="], [PROP_PUISSANCES, None]))
+            morceaux.append(_arbre_t(s * cn, mu, T))
+            poly[mu + decalage] += s * cn
+        if constantes[cote] != 0:
+            morceaux.append(_nb_exact(constantes[cote]))
+            poly[decalage] += constantes[cote]
+        arbres_t[cote] = _somme_arbres(morceaux) if morceaux else Nb(0)
+        polys[cote] = _pnet(poly)
+    plan = _Plan()
+    plan.t, plan.x, plan.base_noeud, plan.pas, plan.enonce, plan.variable = t, x, base_noeud, pas, Eq(g, d), (t, t_tex)
+    chaine = Chaine([Eq(g, d), Eq(arbres_t["g"], arbres_t["d"])], ["⇔"], [None])
+    At, Bt = _arbre_poly(polys["g"], t), _arbre_poly(polys["d"], t)
+    if decalage:
+        chaine.ajouter(Eq(At, Bt), "⇔", _prop_fois(t, decalage))
+    suite, solutions, remarque = _resoudre_egalite(chaine, At, Bt, t)
+    if solutions is None or any(_const(s) is None for s in solutions):
+        raise _Hors                                      # identité en t ou racines irrationnelles : pas encore
+    plan.remarque = remarque
+    cartes = [_carte("Changement de variable", carte + [chaine] + suite)]
+    solutions = sorted(solutions, key=_const)
+    lignes_t, retenues = [], []
+    for s in solutions:
+        v = _const(s)
+        if v > 0:
+            retenues.append(v)
+            lignes_t.append(Chaine([Texte(f"{t} = {tex(s)} > 0")], note="retenue ✓"))
+        else:
+            lignes_t.append(Chaine([Texte(f"{t} = {tex(s)} \\le 0")], note="rejetée : " + PROP_EXPO_POSITIVE))
+    if solutions:
+        if not retenues:
+            lignes_t.append(Message("Aucune valeur de ", Texte(t), " ne convient : l'équation n'a aucune solution."))
+        cartes.append(_carte(f"Valeurs de {t}", lignes_t))
+    plan.cartes, plan.retenues = cartes, retenues
+    return plan
+
+
+PROP_EXPO_POSITIVE = "une exponentielle est strictement positive"
+
+
+def _resultat_methode(plan, methode):
+    cartes = list(plan.cartes)
+    solutions, message = [], None
+    for v in plan.retenues:
+        r = resolution_exponentielle(Pow(plan.base_noeud, _arbre_poly([F(0), plan.pas], plan.x)), _nb_exact(v), plan.x, methode)
+        if r is None:
+            raise _Hors
+        suffixe = f" ({plan.t} = {_txt(Nb(v))})" if len(plan.retenues) > 1 else ""
+        cartes += [{**c, "titre": c["titre"] + suffixe} for c in r["etapes"]]
+        if r.get("message"):
+            message = message or r["message"]
+        solutions += r["solutions"] or []
+    solutions.sort(key=valeur)
+    resultat = {"genre": "changement", "inconnue": plan.x, "enonce": plan.enonce, "base": None, "etapes": cartes, "solutions": [] if message else solutions,
+                "remarque": plan.remarque, "variable": plan.variable}
+    if message:
+        resultat["message"] = message
+    return resultat
+
+
+@_avec_decimaux
+def variantes_changement(g, d, x):
+    """{méthode: résultat} d'une équation du 2ᵉ degré en aˣ (t = aˣ, t > 0), les deux méthodes du retour à x ; None si ce n'est pas une telle équation."""
+    try:
+        plan = _plan(g, d, x)
+        return {m: _resultat_methode(plan, m) for m in METHODES}
+    except _Hors:
+        return None
 
 
 # =====================================================================
