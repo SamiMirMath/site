@@ -20,9 +20,11 @@ OUTILS = {
     "etude-complete": (BASE + [DV, LA, "derivee-variations/resoudre_dv.py", "limites-asymptotes/resoudre_la.py",
                                "etude-complete/etude_complete.py", "etude-complete/resoudre_ec.py"], "resoudre_ec", "1/x"),
     "factorisation": (BASE + ["factorisation/factorisation.py", "factorisation/resoudre_fa.py"], "resoudre_fa", "x^2-1"),
-    "exponentielles-logarithmes": (BASE + ["moteur/nombres.py", "exponentielles-logarithmes/exp_log.py",
-                                           "exponentielles-logarithmes/resoudre_el.py"], "resoudre_el", "3^(x+1)=27"),
+    "exponentielles-logarithmes": (BASE + ["moteur/nombres.py", "ensemble-definition/resoudre_ed.py", "exponentielles-logarithmes/exp_log.py",
+                                           "exponentielles-logarithmes/exp_log_m.py", "exponentielles-logarithmes/resoudre_el.py"],
+                                   "resoudre_el", "3^(x+1)=27"),
 }
+FILIERE_M = {"exponentielles-logarithmes": "log_x(256)=4"}      # outils qui ont une filière M : même import à plat, `resoudre(exemple, "M")`
 
 
 class TestResoudreImport(unittest.TestCase):
@@ -37,6 +39,8 @@ class TestResoudreImport(unittest.TestCase):
                     f"s = m.resoudre({exemple!r})\n"
                     "assert s['ok'] and sortie.valider(s) == [], sortie.valider(s)\n"
                     "import json; assert json.loads(m.resoudre_json(" + repr(exemple) + "))['ok']\n"
+                    + (f"s = m.resoudre({FILIERE_M[outil]!r}, 'M'); assert s['ok'] and sortie.valider(s) == [], sortie.valider(s)\n"
+                       f"assert s['cartes'][0]['badge'] == 'Ensemble de définition'\n" if outil in FILIERE_M else "") +
                     "assert json.loads(m.apercu_json(" + repr(exemple) + "))['ok']\n"
                 )
                 p = subprocess.run([sys.executable, "-I", "-c", code, fs], capture_output=True, text=True, timeout=120)

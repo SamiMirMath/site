@@ -8,11 +8,14 @@ Une carte par application de méthode (« Étape k », badge = la méthode), dan
 ne s'applique, une erreur au message prévu (EL-11) : jamais une étape fausse ni une valeur donnée comme solution. Tout le TeX vient de l'arbre
 de exp_log.py.
 """
+import re
 from html import escape
 
 from noyau import ErreurSaisie, json_strict
 import sortie as so
 import exp_log as el
+import exp_log_m as elm
+import resoudre_ed
 from exp_log import apercu_json, exercice_json
 
 __all__ = ["resoudre", "resoudre_json", "apercu_json", "exercice_json"]
@@ -34,10 +37,48 @@ def _ligne(chaine):
     return so.texte('<div class="chaine">' + rangees + "</div>", style="etape")
 
 
+_TEXTE = re.compile(r"(\\text\{[^{}]*\})")
+_X = re.compile(r"(?<![\\A-Za-z])x(?![A-Za-z])")
+
+
+def _tex_renomme(tex, nom):
+    """Le TeX de l'outil ED (qui écrit toujours x) avec l'inconnue `nom` ; les mots d'un \\text{…} et les commandes ne changent pas."""
+    return "".join(p if p.startswith(r"\text{") else _X.sub(nom, p) for p in _TEXTE.split(tex))
+
+
+def _renomme(b, nom):
+    """Le bloc de l'outil ED avec l'inconnue `nom` à la place de x (formules, texte entre \\( et \\), tableaux)."""
+    if nom == "x":
+        return b
+    b = dict(b)
+    for cle in ("tex", "cond_tex"):
+        if cle in b:
+            b[cle] = _tex_renomme(b[cle], nom)
+    if "html" in b:
+        b["html"] = re.sub(r"\\\((.*?)\\\)", lambda m: "\\(" + _tex_renomme(m.group(1), nom) + "\\)", b["html"])
+    if b.get("type") == "tableau":
+        b["var"] = nom
+        b["crit"] = [_tex_renomme(c, nom) for c in b["crit"]]
+        b["rows"] = [{**r, "label": _tex_renomme(r["label"], nom)} for r in b["rows"]]
+    return b
+
+
+def _blocs_ed(ed):
+    """Les blocs de la carte « Ensemble de définition » : une rubrique par condition (cartes de l'outil ED), puis « ED = … »."""
+    if ed.res is None:                                   # base inconnue : la condition est celle du corrigé de la 3C
+        return [_ligne(ed.base), so.resultat("ED = " + ed.ed_tex)]
+    blocs = []
+    for c in ed.res["conditions"]:
+        blocs.append(so.texte(f"<strong>Condition {c['num']}</strong> · {escape(c['titre'], quote=False)}", style="etape"))
+        blocs += resoudre_ed.blocs_condition(c)
+    blocs += resoudre_ed.blocs_ensemble(ed.res)
+    return [_renomme(b, ed.inconnue) for b in blocs]
+
+
 def _cartes(r):
     cartes = []
     for k, c in enumerate(r["etapes"], 1):
-        blocs = [_ligne(ligne) for ligne in c["lignes"]]
+        blocs = _blocs_ed(c["ed"]) + [_ligne(ligne) for ligne in c["apres"]] if "ed" in c else [_ligne(ligne) for ligne in c["lignes"]]
         if r["remarque"] and k == len(r["etapes"]):
             blocs.append(so.texte(escape(r["remarque"], quote=False), style="etape"))
         cartes.append(so.carte(f"Étape {k}", blocs, badge=c["titre"]))
@@ -75,8 +116,13 @@ def _option(s, r):
     return so.option("interpretation", el.LIBELLE_INTERPRETATION, [_carte_interpretation(inter)], el.suggere_interpretation(s))
 
 
+def _sortie_equation(s, r):
+    """La sortie d'une équation sans variantes : ses cartes, la case d'interprétation, et `besoin_sympy` quand l'ensemble de définition en demande."""
+    return so.sortie_ok(el.tex_saisie(s.g, s.d), _cartes_equation(r), option=_option(s, r), besoin_sympy=r.get("besoin_sympy") or None)
+
+
 def resoudre(entree, filiere="C"):
-    """`filiere` : "C" (3C, sans ensemble de définition) ou "M" (2Ms et 2Mr ; identique à "C" tant que exp_log_m.py n'est pas branché)."""
+    """`filiere` : "C" (3C, sans ensemble de définition) ou "M" (2Ms et 2Mr : ensemble de définition, vérification des solutions)."""
     if filiere not in el.FILIERES:
         return so.sortie_erreur(el.MESSAGE_FILIERE)
     try:
@@ -89,6 +135,12 @@ def resoudre(entree, filiere="C"):
             return so.sortie_erreur(el.message_calcul_non_resolu(s.g))
         final = so.carte("Résultat", [so.resultat(el.tex_resultat(r))], style="final")
         return so.sortie_ok(el.tex_saisie(s.g, s.d), _cartes(r) + [final])
+    if filiere == "M":
+        r = elm.corriger_equation(s.g, s.d, s.inconnue)
+        if r is not None:
+            return _sortie_equation(s, r)
+        if elm.contient_log_en_x(s.g, s.d):              # jamais le corrigé de la 3C (sans ensemble de définition) pour un 2M
+            return so.sortie_erreur(el.message_non_resolu(s.g, s.d, s.inconnue))
     variantes = el.variantes_equation(s.g, s.d, s.inconnue, s.parametres)
     if variantes is not None:
         option = _option(s, variantes[el.METHODE_LOGARITHMES])

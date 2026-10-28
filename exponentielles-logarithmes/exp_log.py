@@ -2619,7 +2619,17 @@ def logarithmique(g, d, x):
         return None
 
 
-def _logarithmique(g, d, x):
+@_avec_decimaux
+def logarithmique_m(g, d, x):
+    """`logarithmique` pour la filière M : l'ensemble de définition est une carte à part (exp_log_m.py), donc ni carte « Condition » ni carte
+    « Vérification » ici, et la base inconnue garde ses deux candidats (x = −4 ou x = 4) que la vérification départage."""
+    try:
+        return _logarithmique(g, d, x, filiere_m=True)
+    except _Hors:
+        return None
+
+
+def _logarithmique(g, d, x, filiere_m=False):
     enonce = Eq(g, d)
     g, d, iso = _isoler(g, d, x, PROP_ISOLER_LOG)
     etapes = [_carte("Isoler le logarithme", [iso])] if iso is not None else []
@@ -2636,7 +2646,7 @@ def _logarithmique(g, d, x):
     if inverse:
         chaine.ajouter(Eq(s, o), "⇔")
     if isinstance(s.base, Var):
-        return _base_inconnue(enonce, etapes, chaine, s, c, x)
+        return _base_inconnue(enonce, etapes, chaine, s, c, x, filiere_m)
     rhs, courant, profondeur = _nb_exact(c), s, 0
     while True:                                   # on épluche les logarithmes de l'extérieur vers l'intérieur
         base, _ = _base_du_logarithme(courant.base)
@@ -2694,13 +2704,13 @@ def _logarithmique(g, d, x):
             else:
                 raise _Hors                                   # trinôme général à coefficients non entiers : plus tard
     etapes.append(_carte("Exponentielle des deux membres", lignes))
-    if profondeur == 1 and not isinstance(u, Var) and solutions:
+    if profondeur == 1 and not isinstance(u, Var) and solutions and not filiere_m:
         etapes.append(_carte("Vérification", [Chaine([Positif(u, puissance)], note=PROP_BIEN_DEFINI)]))
     return {"genre": "logarithmique", "inconnue": x, "enonce": enonce, "base": None, "etapes": etapes, "solutions": solutions,
             "remarque": remarque}
 
 
-def _base_inconnue(enonce, etapes, chaine, s, c, x):
+def _base_inconnue(enonce, etapes, chaine, s, c, x, filiere_m=False):
     """log_x(n) = k avec k entier de −12 à 12 : x > 0 et x ≠ 1, n = xᵏ, puis la solution positive : r si n = rᵏ (256 = 4⁴), sinon la racine
     k-ième de n écrite comme telle (√255, 255^(1/3)). k < 0 : n = x⁻ᵐ = 1/xᵐ, donc xᵐ = 1/n (log_x(8) = −1 donne x = 1/8) ; k = 0 : n = x⁰ = 1,
     vraie pour toute base si n = 1, aucune solution sinon ; n = 1 et k ≠ 0 : xᵏ = 1 ne donne que x = 1 ou x = −1, qui ne conviennent pas."""
@@ -2714,7 +2724,7 @@ def _base_inconnue(enonce, etapes, chaine, s, c, x):
         chaine.ajouter(Eq(puissance, _nb_exact(n)), "⇔", PROP_DEFINITION_LOG)
         impossible = Eq(puissance, Nb(0)) if n == 0 else Rel(_nb_exact(n), "<", Nb(0))
         return {"genre": "logarithmique", "inconnue": x, "enonce": enonce, "base": None, "solutions": [], "remarque": None,
-                "etapes": etapes + [_carte("Condition", [condition]), _carte("Définition du logarithme", [chaine]),
+                "etapes": etapes + ([] if filiere_m else [_carte("Condition", [condition])]) + [_carte("Définition du logarithme", [chaine]),
                                     _carte("Aucune solution", [Chaine([Rel(puissance, ">", Nb(0))], note=PROP_BASE_PUISSANCE_POSITIVE),
                                                                Chaine([impossible], note=PROP_AUCUNE_SOLUTION)])]}
     if c.denominator != 1 or abs(c) > 12:
@@ -2724,7 +2734,7 @@ def _base_inconnue(enonce, etapes, chaine, s, c, x):
     chaine.ajouter(Eq(_nb_exact(n), Pow(X, Nb(k)) if k != 1 else X), "⇔", PROP_EXP_LOG_BASE)
     lignes, autres = [chaine], {}
     resultat = lambda solutions, remarque=None: {"genre": "logarithmique", "inconnue": x, "enonce": enonce, "base": None,
-                                                 "etapes": etapes + [_carte("Condition", [condition]), _carte("Exponentielle des deux membres", lignes)],
+                                                 "etapes": etapes + ([] if filiere_m else [_carte("Condition", [condition])]) + [_carte("Exponentielle des deux membres", lignes)],
                                                  "solutions": solutions, "remarque": remarque, **autres}
     if k == 0:                                                         # n = x⁰ = 1
         chaine.ajouter(Eq(_nb_exact(n), Nb(1)), "⇔", PROP_PUISSANCE_ZERO)
@@ -2740,20 +2750,25 @@ def _base_inconnue(enonce, etapes, chaine, s, c, x):
     if n == 1:                                                         # xᵐ = 1 : x = 1 (ou x = −1), exclus par la condition
         if m % 2 == 0:
             chaine.ajouter(Ou([Eq(X, Nb(-1)), Eq(X, Nb(1))]), "⇔")
-            lignes.append(Chaine([Texte(f"{X.nom} = 1 \\text{{ et }} {X.nom} = -1 \\text{{ ne conviennent pas}}")], note=PROP_BASE_LOG))
+            if not filiere_m:
+                lignes.append(Chaine([Texte(f"{X.nom} = 1 \\text{{ et }} {X.nom} = -1 \\text{{ ne conviennent pas}}")], note=PROP_BASE_LOG))
         else:
             if m > 1:
                 chaine.ajouter(Eq(X, Nb(1)), "⇔")
-            lignes.append(Chaine([Texte(f"{X.nom} = 1 \\text{{ ne convient pas}}")], note=PROP_BASE_LOG))
-        return resultat([])
+            if not filiere_m:
+                lignes.append(Chaine([Texte(f"{X.nom} = 1 \\text{{ ne convient pas}}")], note=PROP_BASE_LOG))
+        return resultat(([Nb(-1), Nb(1)] if m % 2 == 0 else [Nb(1)]) if filiere_m else [])
     r = _racine_entiere(n, m)
     if r is not None:
         racine = _nb_exact(r)
     else:
         racine = Fn("sqrt", _nb_exact(n)) if m == 2 else Pow(_nb_exact(n), Nb(F(1, m)))
     if m % 2 == 0:
-        chaine.ajouter(Ou([Eq(X, Neg(racine) if r is None else _nb_exact(-r)), Eq(X, racine)]), "⇔")
-        lignes.append(Chaine([Eq(X, racine)], note=PROP_SEULE_POSITIVE))
+        negatif = Neg(racine) if r is None else _nb_exact(-r)
+        chaine.ajouter(Ou([Eq(X, negatif), Eq(X, racine)]), "⇔")
+        if not filiere_m:
+            lignes.append(Chaine([Eq(X, racine)], note=PROP_SEULE_POSITIVE))
+        return resultat([negatif, racine] if filiere_m else [racine])
     elif m > 1 or k < 0:
         if tex_element(Eq(X, racine)) != tex_element(chaine.elements[-1]):
             chaine.ajouter(Eq(X, racine), "⇔")

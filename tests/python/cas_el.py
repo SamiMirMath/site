@@ -170,7 +170,19 @@ ERREURS_DE_LECTURE = ["", "2e=5", "x+y=3", "x<3", "2^x>=3", "log_1(x)=2", "log x
 
 
 # Filière M (T35) : équations propres aux 2M (ensemble de définition, regroupement, vérification, changement de variable) ; complétée aux étapes 2 à 4.
-BATTERIE_M = []
+# (saisie, solutions arrondies à 10⁻³ après la vérification contre l'ED) ; étape 2 : un seul logarithme, l'ED d'abord puis la vérification
+BATTERIE_M = [
+    ("log(x-3)=1", [13.0]), ("log(x^2-x)=1", [-2.702, 3.702]), ("ln(x-1)=2", [8.389]), ("log(5+x)=1", [5.0]), ("log(2-x)=0", [1.0]),
+    ("log(x+0,5)=1", [9.5]), ("log(t-3)=1", [13.0]), ("log(x^2)=-1", [-0.316, 0.316]),
+    # ED vide : S = ∅ tout de suite
+    ("log(-x^2-1)=0", []), ("ln(-x^2-x-1)=2", []),
+    # base inconnue : x > 0 et x ≠ 1, la solution négative est rejetée par la vérification
+    ("log_x(9)=-2", [0.333]), ("log_x(4)=2", [2.0]), ("log_x(1)=2", []), ("log_x(27)=3", [3.0]), ("log_x(1/8)=3", [0.5]),
+]
+
+
+# logarithmes imbriqués en base 10 : la filière M ne les traite pas encore (l'outil ED écrit ln(x) > 0 ⇔ x > 1 pour tout logarithme imbriqué)
+IMBRIQUES_BASE_10 = ["log(log(x))=1", "log(log(log(x)))=0", "log(log(x-1))=0"]
 
 
 def entrees_el_m():
