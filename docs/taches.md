@@ -490,6 +490,10 @@ l'élève, un « Calcul en cours… » qui dure parce que SymPy se charge encore
   Spécification : « Sélecteur de méthode », EL-19 à EL-21 ; socle commun : `variantes` (SOC-17). **Commits** : 1 docs · 2 `sortie.py` · 3 moteur · 4 adaptateur · 5 page et socle JS · 6 équations logarithmiques.
   **Arrêt : relecture à l'écran** (les deux méthodes), puis étape 9.
 
+- **Suite du 28.10.2026 (problèmes d'application)** : paramètre (Q, C0, V0…) simplifié par une carte, base calculée (`1 + 3,75/100 = 1,0375`, signe %), carte « Interprétation » en années, mois et jours (case à cocher, R16), formes d'application dans le pool.
+  Spécification : « Problèmes d'application », EL-22 à EL-25 ; socle commun : `option` (SOC-18). **Commits** : 0 docs · 1 lecture (casse, noms indexés, %, paramètre) · 2 base calculée · 3 simplifier par le paramètre + batterie · 4 interprétation (moteur) · 5 format de sortie `option` · 6 page · 7 pool · 8 audit avant/après.
+  **Arrêt : relecture à l'écran**.
+
 ### T34 — Relire les autres outils avec la règle R13 (fractions et notation scientifique) — **après le test des 3C**
 - Demande de l'enseignant (26.10.2026) : la règle R13 du [guide de rédaction](guide-redaction.md) vaut pour **tous** les outils, pas seulement « Exponentielles et logarithmes » :
   valeurs exactes calculées à partir d'entiers ou de puissances en **fractions** ; **décimaux de l'énoncé gardés** (exposant compris) et décimal fini conservé quand le calcul part de décimaux ;

@@ -91,7 +91,7 @@ jamais en décimal. Les **décimaux de l'énoncé gardent leur écriture partout
 Quand le calcul part de décimaux de l'énoncé et donne un **décimal fini**, on garde le décimal comme le corrigé : 2000 · 1,045ⁿ = 3805 donne 1,045ⁿ = 1,9025 (pas 761/400) ;
 un résultat qui n'est pas un décimal fini reste une fraction (3e^x = 0,65 donne e^x = 13/60). Les très grands et très petits nombres s'écrivent en **notation scientifique** :
 puissances de 10 laissées telles quelles (10¹⁰, 10⁻⁴) et valeurs approchées en `3,162 × 10⁻⁵` ou `1 × 10¹⁰` sous 10⁻³ et dès 10⁶. Les valeurs
-approchées « ≈ » restent à virgule décimale. Appliquée à l'outil Exponentielles et logarithmes (`tex_approx`, `_nb_exact`) ; **les autres outils
+approchées « ≈ » restent à virgule décimale. **Exception (28.10.2026)** : une base écrite avec un taux (`1 + 3,75/100`, `1 − 20/100`, `1 + 3,75 %`) devient un **décimal** (1,0375), comme les décimaux de l'énoncé ; `1 + 1/3` reste 4/3. Appliquée à l'outil Exponentielles et logarithmes (`tex_approx`, `_nb_exact`) ; **les autres outils
 n'ont pas encore été relus avec cette règle.**
 
 Inchangé : interdiction des équivalents, phrase de repli, virgule décimale, garde-fou des valeurs.
@@ -107,6 +107,8 @@ aligné sous celui de la ligne d'au-dessus (`x = log(2)/(log(2) − log(3))` pui
 logarithmes (`x = 1 + log(32)/log(2)`), la carte « Solution » garde la valeur exacte et le texte **à la place de « soit x ≈ … »** est : « Contrôlez à la calculatrice : log(32)/log(2) = 5, on retrouve x = 6. »
 (le plus petit morceau à logarithmes dont la valeur est rationnelle ; « on retrouve x = −3 ou x = 1. » avec deux solutions). Une solution non rationnelle garde « soit x ≈ … » ; une solution écrite sans
 logarithme (`x = −1`) n'a pas de contrôle.
+
+**R16. Interprétation d'un temps en années, mois et jours** (décision du 28.10.2026, outil « Exponentielles et logarithmes », carte « Interprétation »). Conventions : 1 an = 12 mois, 1 mois = 30 jours (usance commerciale) ; les jours sont arrondis à l'entier supérieur (« au bout de »), avec une phrase qui le justifie ; les restes sont calculés à pleine précision, jamais à partir des valeurs arrondies affichées, et les lignes affichent 3 décimales (0,842 · 12 ≈ 10,107 mois : un calcul refait à la main avec 0,842 donne 10,104) ; 0 mois et 0 jour sont écrits ; un arrondi à 30 jours ou 12 mois se reporte sur l'unité supérieure ; conclusion « Au bout de 29 ans, 10 mois et 4 jours. » ; une solution négative ou S = ∅ n'a pas d'interprétation chiffrée, seulement une phrase.
 
 
 ---

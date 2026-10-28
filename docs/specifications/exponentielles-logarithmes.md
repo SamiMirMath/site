@@ -27,8 +27,8 @@ hors-programme (x·2^x = 8…), « Cet outil ne traite pas encore ce type d'équ
 Pour un **calcul** sans « = » que le moteur ne traite pas (`message_calcul_non_resolu`) : « Cet outil ne traite pas encore ce type de calcul. » (2 log 5, log 2 + log 3, log₂(e)) ;
 « Le logarithme d'un nombre négatif ou nul n'est pas défini. » (log(0), log(−5)) ; « Écrivez une équation (avec =) ou un logarithme à calculer, par exemple log_2(50). » quand la saisie ne contient aucun logarithme (2 + 3, √2).
 
-Hors de cette version : interprétation des applications en années entières (l'outil résout, n ≈ 14,6, et s'arrête), mode « problème
-en mots », tâtonnement (2.14), graphiques (2.1, 2.9, 2.12), écrire un nombre comme puissance de 10 ou de e (2.17, 2.19).
+Hors de cette version : mode « problème
+en mots » (l'élève met le problème en équation lui-même ; l'interprétation en années, mois et jours est faite depuis le 28.10.2026, section « Problèmes d'application »), tâtonnement (2.14), graphiques (2.1, 2.9, 2.12), écrire un nombre comme puissance de 10 ou de e (2.17, 2.19).
 
 ## Notations
 
@@ -221,6 +221,33 @@ Solution : `S = {1 + log(32)/log(2)}`. Contrôlez à la calculatrice : `log(32)/
 **13. Imbriqués — log(log(x)) = 1**
 `log(log(x)) = 1 ⇔ 10^(log(log(x))) = 10^1` (exponentielle des deux membres) `⇔ log(x) = 10` (10^(log(A)) = A, A > 0) `⇔ 10^(log(x)) = 10^10` `⇔ x = 10^10` (10^(log(A)) = A, A > 0). `S = {10^10}`.
 
+## Problèmes d'application (décision du 28.10.2026)
+
+Les problèmes de capitalisation et de dépréciation reviennent souvent au test (`3Q = Q(1+3,75/100)^x` : « à partir de combien de temps un capital triple-t-il à 3,75 % ? »). Trois ajouts, validés par l'enseignant le 28.10.2026.
+
+**1. Paramètre** (Q, C, C0, C_0, V0, V_0…). La **casse des lettres est gardée** (Q ≠ q ; les noms de fonction restent insensibles à la casse ; `E` reste le nombre e). Une **majuscule suivie de chiffres** (`C0`, `V0`) ou une lettre suivie de `_` et de chiffres
+(`C_0`) est **un seul nom** (écrit `C_{0}` en TeX) ; `x2` garde son message actuel. **L'inconnue est la lettre de l'exposant** ; toute autre lettre est un **paramètre** s'il est un facteur (puissance 1) de chaque membre
+(`3Q`, `Q·(…)^x`, `V0/2`, `Q` seul) : il se simplifie. Sinon, message clair : « Cette équation contient deux inconnues : Q et x. » (plusieurs : « … : Q, r et n. »). Sans lettre en exposant, le message « Une seule inconnue… » reste.
+Carte **« Simplifier par Q »** : `3Q = Q · 1,0375^x ⇔ 3 = 1,0375^x` (on divise les deux membres par Q, Q > 0 : une quantité de départ est positive). Valable aussi pour un paramètre au dénominateur (`V0/2 = V0 · 0,8^n ⇔ 1/2 = 0,8^n`).
+
+**2. Base calculée.** Une base constante écrite avec un taux (`1 + 3,75/100`, `1 − 20/100`, `1 + 0,035`, `1 + 3,75 %`) devient **un décimal** (ou une fraction si le décimal ne s'arrête pas) sur une ligne à part :
+`1 + 3,75/100 = 1,0375` (carte **« Calculer la base »**, commune aux deux méthodes, avant « Simplifier par Q »). Le signe **%** est accepté après un nombre (`3,75 %` vaut 3,75/100, écrit `3{,}75\,\%`) ; ailleurs il est refusé par un message de lecture. Ensuite, les deux méthodes (« Même base / définition », « Logarithmes ») s'appliquent comme d'habitude.
+Exception assumée à R13 : un taux `t/100` ou `t %` donne un décimal (1,0375), pas une fraction (1 + 3,75/100 = 163/160) ; une base écrite avec des entiers seulement (`1 + 1/3`) reste une fraction (4/3).
+
+**3. Interprétation en années, mois et jours** (carte « Interprétation », **après** la carte « Solution »). Conventions : **1 an = 12 mois, 1 mois = 30 jours** (usance commerciale) ; les jours sont **arrondis à l'entier supérieur** (« au bout de »), avec une phrase qui le justifie ;
+**les restes sont calculés à pleine précision, jamais à partir des valeurs arrondies affichées** ; les lignes affichent **3 décimales**. Exemple `3Q = Q(1+3,75/100)^x`, x = log(3)/log(1,0375) ≈ 29,842 (valeur vérifiée avec mpmath : 29,842263…) :
+`29 ans ; reste 0,842 an` · `0,842 · 12 ≈ 10,107 mois → 10 mois ; reste 0,107 mois` · `0,107 · 30 ≈ 3,215 jours → 4 jours` · phrase d'arrondi · **« Au bout de 29 ans, 10 mois et 4 jours. »**
+Cas limites : 0 mois et 0 jour sont écrits ; un arrondi qui donne 30 jours se reporte sur le mois, 12 mois sur l'année (`2C = C·1,045ⁿ` : n ≈ 15,747 → 29,029 jours → 30 jours = 1 mois → « 15 ans, 9 mois et 0 jour ») ;
+solution exacte (`2^x = 8`) : « = » au lieu de « ≈ » ; solution négative : « La solution est négative : la situation décrite n'arrive jamais. » ; S = ∅ : « Aucune solution : la situation décrite n'arrive jamais. » ; x = 0 : « La situation est atteinte dès le départ. »
+Valable en croissance (base > 1) et en dépréciation (base < 1).
+
+**Case à cocher** (question 4, option (a) retenue) : la page affiche, sous les boutons de méthode, la case « Problème d'application (temps en années) » **seulement quand l'interprétation a un sens** (équation exponentielle à une solution ou sans solution ; pas d'équation logarithmique, pas de calcul, pas de x² à deux solutions, pas de méthode A sans carte « Solution »).
+Elle est **pré-cochée** quand l'équation contient un paramètre ou que l'inconnue est n (pas t : le temps peut être en minutes), décochable. Cocher ou décocher ajoute ou retire la carte « Interprétation » sans appel au moteur, en gardant le nombre de cartes visibles ;
+le choix vaut pour la visite en cours (mémoire de la page, pas de `localStorage` : le défaut dépend de l'équation) et se garde au changement de méthode. La case est `no-print` ; la carte s'imprime si elle est cochée. Format de sortie : `option` (socle commun, SOC-18).
+
+**Exemples** (valeurs vérifiées avec mpmath) : `3Q = Q(1+3,75/100)^x` → 29,842 → 29 ans, 10 mois, 4 jours · `2C = C(1+0,04)^n` → 17,673 → 17 ans, 8 mois, 3 jours · `C0·1,05^n = 2·C0` → 14,207 → 14 ans, 2 mois, 15 jours ·
+`V0/2 = V0(1−20/100)^n` → 3,106 → 3 ans, 1 mois, 9 jours · `2000·1,045^n = 3805` (sans paramètre, inconnue n) → 14,612 → 14 ans, 7 mois, 11 jours · `37e^(−0,02t) = 25` → 19,602 (t non pré-cochée) → 19 ans, 7 mois, 7 jours.
+
 ## Exercices au hasard (pool C)
 
 Générés en Python (`exercice(niveau, graine)`, déterministe), inconnue **x**, énoncés **variantes** de ceux du polycopié. Pool M séparé, plus
@@ -238,6 +265,7 @@ discriminant non carré** (le moteur sait écrire des racines irrationnelles, le
 « logarithme »** a un second membre ≤ 0 (S = ∅, par exemple 5^(8x) = −25).
 **Réalisation** (`exercice(niveau, graine)` dans `exp_log.py`, `exercice_json(niveau)` pour la page ; niveaux `facile`, `moyen`, `logarithme`, `difficile`, énoncé « Résoudre : … ») : a^(x²)·b^x = c n'est tiré qu'avec b et c puissances de a (2^(x²)·4^x = 8, 3^(x²)·27^x = 81 : même base, racines entières −3 et 1 ou −4 et 1), jamais avec des bases différentes ;
 les bases différentes viennent de a^(x+p) = b^(qx) avec a et b deux nombres de {2, 3, 5, 6, 7, 10} (jamais une puissance de l'autre) ; le niveau « logarithme » n'a jamais un second membre qui soit une puissance de la base (ni b/k pour k·a^f = b).
+**Applications** (niveau « logarithme », environ 30 % de ses tirages, inconnue n) : `f·C = C·(1 + t/100)^n` (f = 2 ou 3, t de 0,5 % à 8 %), `C/2 = C·(1 − t/100)^n` et `C/4` (t de 5 % à 25 %), paramètres C, Q, C0, V0, écritures `(1+t/100)`, `(1+t %)`, `1,0t` ; `A·1,0t^n = B` sans paramètre. Les 10 % de second membre ≤ 0 restent.
 **Le pool n'a jamais d'exposant de degré 3 ou plus** (2^(x³) = 8, décision du 26.10.2026) : le logarithme le résoudrait, mais ce n'est pas un exercice du cours. Le degré 2 ne vient que de a^(x²)·b^x = c et de a^(x²) = a^(rx+s) avec des racines simples (Q10).
 
 ## Critères d'acceptation
@@ -265,6 +293,10 @@ les bases différentes viennent de a^(x+p) = b^(qx) avec a et b deux nombres de 
 | EL-19 | **Sélecteur** : toute équation exponentielle a deux variantes calculées en une fois (`variantes`, défaut « logarithmes ») ; une équation logarithmique, un calcul, un message d'erreur n'en ont pas et leur sortie, hors changement de rédaction des équations logarithmiques, est inchangée ; sur la page, un clic change les cartes sans appel au moteur, le choix est gardé (`localStorage` dans un `try/catch`), les boutons sont accessibles au clavier (`aria-pressed`), côte à côte et sans débordement à 360 px, l'impression montre la méthode affichée | [auto-py] + [auto-page] |
 | EL-20 | **Méthode B n'utilise jamais** « définition du logarithme », « log(10ᵏ) = k », « ln(e^A) = A » ni « ln(e^k) = k » ; une puissance de 10 (de e) dans un log (ln) passe par log(a^A) = A · log(a) puis « car log(10) = 1 » ; les deux méthodes donnent le **même S** (oracle mpmath, batterie et 500 graines par niveau) ; le message de la méthode A est exactement « b n'est pas une puissance de a : il faut les logarithmes. » | [auto-py] |
 | EL-21 | **Exponentielle des deux membres** : une équation logarithmique s'écrit par `a^(log_a(A)) = A` (A > 0), une paire de lignes par logarithme imbriqué, Vérification et Condition inchangées ; **contrôle à la calculatrice** (R15) si et seulement si une solution rationnelle est écrite avec des logarithmes, décidé exactement | [auto-py] |
+| EL-22 | **Paramètre et base calculée** : la casse est gardée, `C0`, `V0`, `C_0` sont un seul nom ; une autre lettre que celle de l'exposant, facteur de chaque membre, est simplifiée par la carte « Simplifier par Q » ; sinon « Cette équation contient deux inconnues : Q et x. » ; `1 + 3,75/100`, `1 − 20/100`, `1 + 0,035`, `1 + 3,75 %` deviennent un décimal par la carte « Calculer la base », dans les deux méthodes ; la solution, substituée dans l'énoncé avec Q = 1, 7 et 1234,5, donne un écart < 10⁻⁹ (oracle mpmath) | [auto-py] |
+| EL-23 | **Interprétation** : ans, mois et jours recalculés indépendamment à pleine précision (mpmath, 50 chiffres) sur une grille de facteurs (2, 3, 1/2, 1/4) et de taux (0,5 % à 8 %, 5 % à 25 %) et sur des cas fabriqués ; report des 30 jours sur le mois et des 12 mois sur l'année ; 0 mois et 0 jour écrits ; solution négative, S = ∅ et x = 0 sans interprétation chiffrée ; restes jamais calculés à partir des valeurs arrondies ; 3 décimales ; vouvoiement | [auto-py] |
+| EL-24 | **Case à cocher** : présente seulement quand `option` est dans la sortie, pré-cochée avec un paramètre ou l'inconnue n, décochable ; ajoute et retire la carte « Interprétation » sans appel au moteur ; état gardé au changement de méthode ; absente de la méthode A sans carte « Solution » et des autres outils ; sans débordement à 360 px ; à l'impression, la case est masquée et la carte présente si cochée | [auto-page] |
+| EL-25 | **Pool** : les formes d'application sont dans le niveau « logarithme », avec des taux dans les bornes, le moteur les résout (oracle) et l'interprétation est exacte pour 500 graines | [auto-py] |
 
 ## Corrections après la chasse aux trous (27.10.2026)
 

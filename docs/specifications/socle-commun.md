@@ -18,6 +18,9 @@ S'applique à toutes les pages outils, sauf mention contraire pour le simplexe
    boutons côte à côte (`aria-pressed`, au clavier) au-dessus des cartes ; un clic remplace les cartes par celles de la variante, **sans appel au moteur**, en gardant le nombre de cartes visibles ;
    le choix est gardé dans `localStorage` (`variante:<outil>`, `try/catch`), valeur inconnue ou stockage indisponible : la variante par défaut. Le sélecteur est `no-print`, l'impression indique la
    méthode affichée. Une sortie sans `variantes` (tous les autres outils) s'affiche comme avant.
+4c. **Option** (facultatif, décidé le 28.10.2026, premier usage : Exponentielles et logarithmes, carte « Interprétation ») : une sortie peut porter `option` = `{cle, libelle, cochee, cartes}` : une case à cocher (`#option`, sous le sélecteur de méthode, `no-print`,
+   au clavier) dont `cartes` sont ajoutées **à la fin** des cartes affichées quand elle est cochée, sans appel au moteur, en gardant le nombre de cartes visibles ; `cochee` est l'état initial. Le choix de l'élève vaut pour la visite en cours (mémoire de la page, pas de `localStorage`)
+   et se garde au changement de variante. Une variante peut déclarer `option: false` (pas de case pour cette variante). Une sortie sans `option` (tous les autres outils) s'affiche comme avant.
 5. **Impression / PDF** : bouton « Télécharger le corrigé (PDF) » ; toutes les cartes imprimées,
    sans boutons ni clavier ; titre de fichier explicite.
 6. **Chargement** : état lisible (« Chargement du moteur de calcul… », « Prêt ») ; le bouton de
@@ -91,4 +94,5 @@ S'applique à toutes les pages outils, sauf mention contraire pour le simplexe
 | SOC-15 | Aucune sortie de moteur ni aucune page ne contient « calcul formel », SymPy, « dichotomie », « transcend… », « exacte simple », « Erreur du moteur », ni équivalent (« ∼ », « équivalent », « se comporte comme ») ; le détail technique est dans des champs `detail` / `*_detail` à part | [auto-py] (`test_vocabulaire.py`) |
 | SOC-16 | En tapant `ln(x)/x` (clavier ou bouton ln), aucun message rouge n'apparaît pendant la frappe ni à la fin ; une saisie incomplète (`ln(`) n'affiche son erreur qu'après ≈ 0,5 s | [auto-page] (Chrome, CI, T15) |
 | SOC-17 | Variantes de résolution : `valider()` refuse une variante sans clé, deux clés identiques, un défaut inconnu ou des `cartes` différentes de celles du défaut ; la page affiche le sélecteur seulement quand la sortie a des `variantes`, change de variante sans message au moteur, garde le choix | [auto-py] + [auto-page] |
+| SOC-18 | Option : `valider()` refuse une option sans clé, sans libellé, avec `cochee` non booléen ou des `cartes` invalides ; la page affiche la case seulement quand la sortie a une `option`, ajoute et retire ses cartes sans message au moteur, garde l'état au changement de variante ; aucune autre sortie n'en porte | [auto-py] + [auto-page] |
 | SOC-14 | Chargement sur un vrai téléphone : délai jusqu'à « Prêt » relevé et noté dans `docs/` | [manuel] (enseignant) |
