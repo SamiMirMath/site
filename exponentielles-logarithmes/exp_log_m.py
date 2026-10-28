@@ -15,10 +15,12 @@ import decimal
 from fractions import Fraction as F
 
 from noyau import analyser_complet
-from exp_log import (Chaine, Defini, E, Fn, Log, Message, Neg, Nb, Op, Pow, Texte, Var, _Hors, _const, _nom_tex, _precis, _valeur_rationnelle,
-                     _carte, tex, tex_approx, valeur, variables, logarithmique_m)
+from exp_log import (Chaine, Defini, E, Eq, Fn, Log, Message, Neg, Nb, Op, Ou, Pow, Texte, Var, _Hors, _arbre_poly, _avec_decimaux,
+                     _base_du_logarithme, _carte, _const, _contient_log, _nb_exact, _nom_tex, _padd, _par_exponentielle, _precis, _produit,
+                     _racine_entiere, _resoudre_polynome, _somme_arbres, _suite_polynome, _valeur_exacte, _valeur_rationnelle, logarithmique_m, tex, tex_approx, valeur,
+                     variables, PROP_EXPONENTIELLE, PROP_ISOLER_LOG)
 
-__all__ = ["EnsembleDef", "ensemble_de_definition", "verification", "corriger_equation"]
+__all__ = ["EnsembleDef", "ensemble_de_definition", "verification", "regrouper", "corriger_equation", "PROPRIETES_M"]
 
 
 class EnsembleDef:
@@ -205,7 +207,7 @@ def _vers_ed(n, x):
     if isinstance(n, Fn):
         return "sqrt(" + _vers_ed(n.a, x) + ")"
     if isinstance(n, Log):
-        return "ln(" + _vers_ed(n.a, x) + ")"
+        return "ln(" + _vers_ed(n.a, x) + ")" if variables(n.a) else "1"       # log(3) : aucune condition sur x
     raise TypeError(n)
 
 
@@ -283,6 +285,332 @@ def verification(ed, solutions, x):
 
 
 # =====================================================================
+# 4 bis. REGROUPEMENT DES LOGARITHMES : plusieurs logarithmes, des constantes, deux membres (méthode du cours : on regroupe, on ne développe jamais)
+# =====================================================================
+_FAMILLES = {"10": "log", "e": "ln", "a": "log_a"}
+
+
+def _propriete(famille, genre):
+    """La propriété (texte) d'une ligne de regroupement, pour la famille de logarithmes « 10 » (log), « e » (ln) ou « a » (log_a)."""
+    n = _FAMILLES[famille]
+    return {
+        "puissance": f"k · {n} u = {n}(u^k), sur l'ED",
+        "produit": f"{n} u + {n} v = {n}(uv), sur l'ED",
+        "quotient": f"{n} u − {n} v = {n}(u/v), sur l'ED",
+        "mixte": "propriétés des logarithmes, sur l'ED",
+        "constante": {"10": "c = log(10^c)", "e": "c = ln(e^c)", "a": "c = log_a(a^c)"}[famille],
+        "egaux": f"{n} u = {n} v ⇔ u = v, sur l'ED",
+    }[genre]
+
+
+PROP_FOIS_DENOMINATEURS = "on multiplie les deux membres par les dénominateurs, non nuls sur l'ED"
+PROP_RACINE_IMPAIRE = "xⁿ = c ⇔ x = c^(1/n) (n impair)"
+PROP_RACINE_PAIRE = "xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0)"
+PROP_PUISSANCE_PAIRE = "une puissance paire est positive ou nulle"
+PROPRIETES_M = frozenset({_propriete(f, g) for f in _FAMILLES for g in ("puissance", "produit", "quotient", "mixte", "constante", "egaux")} |
+                         {PROP_FOIS_DENOMINATEURS, PROP_RACINE_IMPAIRE, PROP_RACINE_PAIRE, PROP_PUISSANCE_PAIRE})
+DEGRE_MAX = 8
+
+
+def _pmul_n(a, b):
+    r = [F(0)] * (len(a) + len(b) - 1)
+    for i, u in enumerate(a):
+        for j, v in enumerate(b):
+            r[i + j] += u * v
+    while len(r) > 1 and r[-1] == 0:
+        r.pop()
+    if len(r) > DEGRE_MAX + 1:
+        raise _Hors
+    return r
+
+
+def _pq(n):
+    """Coefficients de n, un polynôme en l'inconnue de degré quelconque (jusqu'à DEGRE_MAX) à coefficients rationnels ; sinon _Hors."""
+    if not variables(n):
+        v = _const(n)
+        if v is None:
+            raise _Hors
+        return [v]
+    if isinstance(n, Var):
+        return [F(0), F(1)]
+    if isinstance(n, Neg):
+        return [-c for c in _pq(n.a)]
+    if isinstance(n, Op):
+        if n.op in "+-":
+            return _padd(_pq(n.a), _pq(n.b), 1 if n.op == "+" else -1)
+        if n.op == "*":
+            return _pmul_n(_pq(n.a), _pq(n.b))
+        d = _const(n.b)
+        if d is None or d == 0 or variables(n.b):
+            raise _Hors
+        return [c / d for c in _pq(n.a)]
+    if isinstance(n, Pow):
+        k = _const(n.b)
+        if k is None or k.denominator != 1 or not 0 <= k <= DEGRE_MAX:
+            raise _Hors
+        r = [F(1)]
+        for _ in range(int(k)):
+            r = _pmul_n(r, _pq(n.a))
+        return r
+    raise _Hors
+
+
+def _decouper(n, signe=F(1)):
+    """Les termes d'un membre : [(coefficient, Log)] pour c·log(u), [(coefficient, None)] pour une constante ; _Hors pour tout autre terme."""
+    if isinstance(n, Neg):
+        return _decouper(n.a, -signe)
+    if isinstance(n, Op) and n.op in "+-":
+        return _decouper(n.a, signe) + _decouper(n.b, signe if n.op == "+" else -signe)
+    if isinstance(n, Log):
+        return [(signe, n)]
+    if isinstance(n, Op) and n.op == "*":
+        for k, l in ((n.a, n.b), (n.b, n.a)):
+            c = None if variables(k) or _contient_log(k) else _const(k)
+            if c is not None and isinstance(l, Log):
+                return [(signe * c, l)]
+    if isinstance(n, Op) and n.op == "/" and isinstance(n.a, Log):
+        c = None if variables(n.b) or _contient_log(n.b) else _const(n.b)
+        if c:
+            return [(signe / c, n.a)]
+    if not variables(n) and not _contient_log(n):
+        c = _const(n)
+        if c is not None:
+            return [(signe * c, None)]
+    raise _Hors
+
+
+def _cle_base(log):
+    noeud, valeur_ = _base_du_logarithme(log.base)
+    return "e" if valeur_ is None else valeur_
+
+
+def _puissance_constante(u, c):
+    """u^c (u > 0 rationnel, c rationnel) quand c'est un rationnel exact, sinon _Hors."""
+    if c.denominator == 1:
+        return u ** int(c)
+    r = _racine_entiere(u, c.denominator)
+    if r is None:
+        raise _Hors
+    return r ** c.numerator
+
+
+def _log_puissance(u, c, base):
+    """k · log(u) = log(u^k) avec k = |c| : Log de l'arbre u^k (un nombre si u est constant)."""
+    if c == 1:
+        return Log(u, base)
+    if not variables(u):
+        return Log(_nb_exact(_puissance_constante(_const(u), c)), base)
+    if c.denominator != 1:
+        raise _Hors
+    return Log(Pow(u, Nb(c)), base)
+
+
+def _fusion_constantes(args):
+    """Les facteurs d'un produit, la constante en tête et réduite à un seul nombre : [3, x, x + 1]."""
+    cte, autres = F(1), []
+    for a in args:
+        if variables(a):
+            autres.append(a)
+        else:
+            cte *= _const(a)
+    return ([_nb_exact(cte)] if cte != 1 or not autres else []) + autres
+
+
+class _Rap:
+    """Le rapport N/D de deux listes de facteurs (D vide : pas de dénominateur) ; `arbre` : N/D écrit."""
+    def __init__(self, num, den):
+        self.num, self.den = _fusion_constantes(num), (_fusion_constantes(den) if den else [])
+        if self.den and not any(variables(a) for a in self.num + self.den):         # deux constantes : un seul nombre
+            self.num, self.den = [_nb_exact(_const(_produit(self.num)) / _const(_produit(self.den)))], []
+        n = _produit(self.num)
+        self.arbre = n if not self.den else Op("/", n, _produit(self.den))
+
+
+def _arbre_terme(c, log):
+    """c·log(u) comme on l'écrit : log(u), −log(u), 2 log(u), −½ log(u)."""
+    t = log if abs(c) == 1 else Op("*", _nb_exact(abs(c)), log)
+    return Neg(t) if c < 0 else t
+
+
+def _arbre_unitaire(termes, base):
+    """La somme de ±log(u) : termes = [(signe, u)]."""
+    return _somme_arbres([Neg(Log(u, base)) if s < 0 else Log(u, base) for s, u in termes])
+
+
+def _quotient(termes):
+    """Le _Rap des termes ±log(u) regroupés en un seul logarithme : produit des arguments positifs sur produit des arguments négatifs."""
+    return _Rap([u for s, u in termes if s > 0], [u for s, u in termes if s < 0])
+
+
+def _resoudre_egalite(chaine, At, Bt, x):
+    """Ajoute à `chaine` (qui se termine par At = Bt, deux polynômes) la résolution : (lignes qui suivent, solutions, remarque). `solutions` est None
+    quand l'égalité est vraie pour tout x."""
+    A, B = _pq(At), _pq(Bt)
+    P = _padd(A, B, -1)
+    if len(P) <= 3:
+        l_poly, solutions, remarque = _resoudre_polynome(A, B, At, Bt, x)
+        if (solutions and any(_const(s) is None for s in solutions) and len(P) == 3 and P[1] == 0
+                and len(A) == 3 and A[1] == 0 and len(B) == 1 and not variables(Bt)):       # a·x² + q = c : x² = k, x = ±√k (x₁ et x₂ nommés)
+            return _suite_polynome(chaine, A, At, Bt, x)
+        premiere = l_poly[0]
+        for e, lien, prop in zip(premiere.elements[1:], premiere.liens, premiere.props):
+            chaine.ajouter(e, lien, prop)
+        return l_poly[1:], solutions, remarque
+    n = len(P) - 1                                     # degré ≥ 3 : seule la forme a·xⁿ = c se résout
+    if any(P[1:n]):
+        raise _Hors
+    k = -P[0] / P[n]
+    X = Var(x)
+    puissance = Pow(X, Nb(n))
+    if tex(Eq(At, Bt).g) != tex(puissance) or _const(Bt) != k:
+        chaine.ajouter(Eq(puissance, _nb_exact(k)), "⇔")
+    if n % 2 == 1:
+        racine = _racine_entiere(abs(k), n)
+        sol = Nb(-racine if k < 0 else racine) if racine is not None else (Pow(_nb_exact(k), Nb(F(1, n))) if k > 0 else Neg(Pow(_nb_exact(-k), Nb(F(1, n)))))
+        chaine.ajouter(Eq(X, sol), "⇔", PROP_RACINE_IMPAIRE)
+        return [], [sol], None
+    if k < 0:
+        chaine.ajouter(Eq(puissance, _nb_exact(k)), "⇔") if False else None
+        return [], [], "Une puissance paire est positive ou nulle : l'équation n'a aucune solution."
+    if k == 0:
+        chaine.ajouter(Eq(X, Nb(0)), "⇔", PROP_RACINE_PAIRE)
+        return [], [Nb(0)], None
+    racine = _racine_entiere(k, n)
+    pos = Nb(racine) if racine is not None else Pow(_nb_exact(k), Nb(F(1, n)))
+    neg = Nb(-racine) if racine is not None else Neg(pos)
+    chaine.ajouter(Ou([Eq(X, neg), Eq(X, pos)]), "⇔", PROP_RACINE_PAIRE)
+    return [], [neg, pos], None
+
+
+@_avec_decimaux
+def regrouper(g, d, x):
+    """Le corrigé de l'équation logarithmique g = d par regroupement des logarithmes (log u + log v = log(uv), log u − log v = log(u/v), k log u = log(u^k),
+    c = log(10^c)), puis log A = log B ⇔ A = B ou l'exponentielle des deux membres, puis une équation polynomiale de degré ≤ 2 (ou a·xⁿ = c).
+    Les logarithmes sont tous de la même base constante et leurs arguments des polynômes. None quand la forme n'est pas traitée."""
+    try:
+        return _regrouper(g, d, x)
+    except _Hors:
+        return None
+
+
+def _regrouper(g, d, x):
+    enonce = Eq(g, d)
+    tg, td = _decouper(g), _decouper(d)
+    lg, ld = [(c, l) for c, l in tg if l is not None], [(c, l) for c, l in td if l is not None]
+    kg, kd = sum((c for c, l in tg if l is None), F(0)), sum((c for c, l in td if l is None), F(0))
+    tous = [l for _, l in lg + ld]
+    if not tous or len({_cle_base(l) for l in tous}) != 1:
+        raise _Hors
+    base, valeur_base = _base_du_logarithme(tous[0].base)
+    ecrite = tous[0].base                              # la base telle qu'elle est écrite (None pour log)
+    for l in tous:
+        _pq(l.a)
+        if not variables(l.a) and _const(l.a) <= 0:
+            raise _Hors                                # log(−3) : le calcul de la 3C répond
+    if not any(variables(l.a) for l in tous):
+        raise _Hors
+    famille = "e" if valeur_base is None else "10" if valeur_base == 10 else "a"
+    un_cote = not (lg and ld)                           # un membre sans logarithme : l'exponentielle des deux membres
+    logs, k_logs, k_autre, a_gauche = (lg, kg, kd, True) if lg or not ld else (ld, kd, kg, False)
+    # ---- carte 1 : regrouper ----
+    lignes_regroupement = []
+    chaine = Chaine([enonce])
+    courant = {"g": g, "d": d}
+    termes_g = [(c, l) for c, l in lg]
+    termes_d = [(c, l) for c, l in ld]
+    c0 = None
+    if un_cote:
+        c0 = k_autre - k_logs
+        termes = [(c, l) for c, l in logs]
+        if k_logs != 0:                                 # Σ logs + K = c ⇔ Σ logs = c − K
+            somme, cte = _somme_arbres([_arbre_terme(c, l) for c, l in termes]), Nb(c0)
+            chaine.ajouter(Eq(somme, cte) if a_gauche else Eq(cte, somme), "⇔", PROP_ISOLER_LOG)
+        membres = {"logs": termes}
+    else:
+        membres = {"g": termes_g, "d": termes_d}
+
+    def arbres(unitaires):
+        """Les deux membres (ou le seul membre de logarithmes) écrits à partir de termes [(signe, u)] ; la constante c0 reste à sa place."""
+        if un_cote:
+            somme = _arbre_unitaire(unitaires["logs"], ecrite)
+            return (somme, Nb(c0)) if a_gauche else (Nb(c0), somme)
+        return _arbre_unitaire(unitaires["g"], ecrite), _arbre_unitaire(unitaires["d"], ecrite)
+
+    # étape 1 : k · log(u) = log(u^k)
+    unitaires = {}
+    changement = False
+    for cle, termes in membres.items():
+        unitaires[cle] = []
+        for c, l in termes:
+            if abs(c) != 1:
+                changement = True
+            unitaires[cle].append((1 if c > 0 else -1, _log_puissance(l.a, abs(c), ecrite).a))
+    if changement:
+        a, b = arbres(unitaires)
+        chaine.ajouter(Eq(a, b), "⇔", _propriete(famille, "puissance"))
+    # étape 2 : c = log(10^c), seulement quand les deux membres ont des logarithmes
+    if not un_cote:
+        for cle, k in (("g", kg), ("d", kd)):
+            if k != 0:
+                if k.denominator != 1 or valeur_base is None:
+                    raise _Hors
+                unitaires[cle].append((1 if k > 0 else -1, _nb_exact(valeur_base ** int(abs(k)))))
+        if kg != 0 or kd != 0:
+            a, b = arbres(unitaires)
+            chaine.ajouter(Eq(a, b), "⇔", _propriete(famille, "constante"))
+    # étape 3 : un seul logarithme par membre
+    a_regrouper = any(len(t) > 1 or t[0][0] < 0 for t in unitaires.values())
+    rapports = {cle: _quotient(t) for cle, t in unitaires.items()}
+    if a_regrouper:
+        positifs_multiples = any(sum(1 for s, _ in t if s > 0) > 1 for t in unitaires.values())
+        negatifs = any(any(s < 0 for s, _ in t) for t in unitaires.values())
+        genre = "mixte" if positifs_multiples and negatifs else "produit" if positifs_multiples else "quotient"
+        logs_regroupes = {cle: Log(r.arbre, ecrite) for cle, r in rapports.items()}
+        if un_cote:
+            a, b = (logs_regroupes["logs"], Nb(c0)) if a_gauche else (Nb(c0), logs_regroupes["logs"])
+        else:
+            a, b = logs_regroupes["g"], logs_regroupes["d"]
+        chaine.ajouter(Eq(a, b), "⇔", _propriete(famille, genre))
+    cartes = []
+    if len(chaine.elements) > 1:
+        cartes.append(_carte("Regroupement des logarithmes", [chaine]))
+    # ---- carte 2 : exponentielle des deux membres, ou log A = log B ⇔ A = B ----
+    if un_cote:
+        r = rapports["logs"]
+        logarithme = Log(r.arbre, ecrite)
+        carte2 = Chaine([Eq(logarithme, Nb(c0)) if a_gauche else Eq(Nb(c0), logarithme)])
+        if not a_gauche:
+            carte2.ajouter(Eq(logarithme, Nb(c0)), "⇔")
+        rhs = _nb_exact(c0)
+        puissance = base if isinstance(base, E) and rhs == Nb(1) else Pow(base, rhs)
+        v = F(1) if c0 == 0 else _const(puissance)          # e⁰ = 1
+        if v is None or v <= 0:
+            raise _Hors
+        exact = _valeur_exacte(puissance)
+        _par_exponentielle(carte2, logarithme, base, puissance, exact or puissance, [puissance] if exact is not None else ())
+        egal = (r, _Rap([_nb_exact(v)], []))
+        titre = "Exponentielle des deux membres"
+    else:
+        ra, rb = rapports["g"], rapports["d"]
+        carte2 = Chaine([Eq(Log(ra.arbre, ecrite), Log(rb.arbre, ecrite))])
+        carte2.ajouter(Eq(ra.arbre, rb.arbre), "⇔", _propriete(famille, "egaux"))
+        egal = (ra, rb)
+        titre = "Égalité des logarithmes"
+    ra, rb = egal
+    if ra.den or rb.den:                                # N_A / D_A = N_B / D_B ⇔ N_A · D_B = N_B · D_A (les dénominateurs ne s'annulent pas sur l'ED)
+        gauche = _produit(_fusion_constantes(ra.num + rb.den))
+        droite = _produit(_fusion_constantes(rb.num + ra.den))
+        carte2.ajouter(Eq(gauche, droite), "⇔", PROP_FOIS_DENOMINATEURS)
+    else:
+        gauche, droite = ra.arbre, rb.arbre
+    suite, solutions, remarque = _resoudre_egalite(carte2, gauche, droite, x)
+    if solutions is None:
+        remarque = "Cette égalité est vraie pour tout x de l'ensemble de définition."
+    cartes.append(_carte(titre, [carte2] + suite))
+    return {"genre": "logarithmique", "inconnue": x, "enonce": enonce, "base": None, "etapes": cartes, "solutions": solutions, "remarque": remarque}
+
+
+# =====================================================================
 # 5. CORRIGÉ D'UNE ÉQUATION LOGARITHMIQUE EN FILIÈRE M
 # =====================================================================
 def _carte_ed(ed, apres=()):
@@ -304,14 +632,16 @@ def corriger_equation(g, d, x):
         etapes = [_carte_ed(ed, [Message("L'ensemble de définition est vide : l'équation n'a aucune solution.")])]
         return {"genre": "logarithmique", "inconnue": x, "enonce": None, "base": None, "etapes": etapes, "solutions": [], "remarque": None,
                 "ed": ed, "besoin_sympy": ed.besoin_sympy}
-    r = logarithmique_m(g, d, x)
-    if r is None or r["solutions"] is None:
+    r = logarithmique_m(g, d, x) or regrouper(g, d, x)
+    if r is None:
         return None
     etapes = [_carte_ed(ed)] + [dict(c) for c in r["etapes"]]
     if r["remarque"] and etapes[-1].get("lignes") is not None:
         etapes[-1]["lignes"] = list(etapes[-1]["lignes"]) + [Message(r["remarque"])]
-    retenues = r["solutions"]
-    if r["solutions"]:
+    retenues, autres = r["solutions"], {"candidats": r["solutions"]}
+    if r["solutions"] is None:                         # l'égalité est vraie sur tout l'ensemble de définition : S = ED
+        autres["ensemble"] = r.get("ensemble", ed.ed_tex)
+    elif r["solutions"]:
         retenues, lignes = verification(ed, r["solutions"], x)
         etapes.append(_carte("Vérification", lignes))
-    return {**r, "etapes": etapes, "solutions": retenues, "remarque": None, "ed": ed, "besoin_sympy": ed.besoin_sympy}
+    return {**r, **autres, "etapes": etapes, "solutions": retenues, "remarque": None, "ed": ed, "besoin_sympy": ed.besoin_sympy}

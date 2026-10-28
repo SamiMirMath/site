@@ -178,7 +178,27 @@ BATTERIE_M = [
     ("log(-x^2-1)=0", []), ("ln(-x^2-x-1)=2", []),
     # base inconnue : x > 0 et x ≠ 1, la solution négative est rejetée par la vérification
     ("log_x(9)=-2", [0.333]), ("log_x(4)=2", [2.0]), ("log_x(1)=2", []), ("log_x(27)=3", [3.0]), ("log_x(1/8)=3", [0.5]),
+    # étape 3, exemples du plan : sommes, différences, constante d'un côté, log(x²) intact
+    ("log(x)+log(x-1)=1", [3.702]), ("log(x+1)+log(2x)=log(3)", [0.823]), ("log(5+x)=log(4-x)+1", [3.182]), ("log(x^2)+log(3)=10", [-57735.027, 57735.027]),
+    ("3log(x)=2log(8)", [4.0]), ("log2(3x-4)+log2(10x-4)=2log2(5x-2)", [6.0]), ("log(x-3)+log(1-x)=0", []), ("ln(x)+ln(x-1)=0", [1.618]),
+    # polycopié Javet 2M, exercices 3.11 et 3.12 (solutions p. VIII) ; brochure Amaudruz 2M, 7.9
+    ("log(9x+5)-log(x)=1", [5.0]), ("log(x)=log(16)+2log(3)-2log(2)-1/2*log(9)", [12.0]), ("log(x)=4log(5)+log(1/5)-3log(3)+1/3*log(27)", [13.889]),
+    ("log(x+2)-log(3)=log(2x-1)+log(7)", [0.561]), ("log(x+2)+log(x-1)=log(18)", [4.0]), ("log(2x-3)+log(3x+10)=4log(2)", [2.0]),
+    ("log2(x^2-4)=2log2(x+3)", [-2.167]), ("log3(35-x^3)=3log3(5-x)", [2.0, 3.0]), ("log(x^2-7)=2log(x+3)", [-2.667]),
+    ("log(20)+log(x^2-9)-log(x+3)=1+log(2x+6)", []), ("3ln(x)=ln(125)", [5.0]), ("2log(x-2)=log(3x-8)", [3.0, 4.0]),
+    ("log2(x+1)-log2(3)=log2(2x-3)+log2(7)", [1.561]), ("ln(2x-5)+ln(3x+7)=4ln(2)", [3.0]), ("log7(20)+log7(x^2-4)-log7(x-2)=1+log7(2x+4)", []),
+    # autres formes : coefficients, différences, deux membres, solution rejetée, constantes absorbées
+    ("2log(x)-log(x+1)=0", [1.618]), ("log(x)+log(x)=2", [10.0]), ("log(x)=log(5)", [5.0]), ("log(x^2)=log(x)", [1.0]), ("log(x)+log(x-2)=log(3)", [3.0]),
+    ("log(x)+log(x+3)=2", [8.612]), ("log(x)+log(x-1)+3=5", [10.512]), ("1=log(x)+log(x-1)", [3.702]),
+    ("log(x)-log(x-1)=log(2)", [2.0]), ("2log(x)=log(x+6)", [3.0]), ("-log(x)+log(x+1)=log(2)", [1.0]), ("log3(x)+log3(x-2)=1", [3.0]),
+    ("ln(x)+ln(x+1)=ln(6)", [2.0]), ("log(x^2)-log(x)=1", [10.0]), ("log(x-1)=log(3)+log(x)-log(2)", []),
 ]
+
+# identités sur l'ensemble de définition : S = ED (solutions None)
+M_TOUT_L_ED = ["log(x)=log(x)", "log(x)+log(x-1)=log(x^2-x)", "2log(x)=log(x^2)+log(1)"]
+# formes du programme M que l'outil ne traite pas encore, et vrais hors-programme
+M_PAS_ENCORE = ["ln(x)+ln(x-1)=1", "log(x)=ln(2)", "log(1/x)=2", "log(x)*log(x-1)=1", "ln(x)=2ln(x+1)+1", "log(sqrt(x))=1"]
+M_HORS_PROGRAMME = ["log(x)=x-1", "x*log(x)=1", "e^x=ln(x)", "log(x)+2^x=3"]
 
 
 # logarithmes imbriqués en base 10 : la filière M ne les traite pas encore (l'outil ED écrit ln(x) > 0 ⇔ x > 1 pour tout logarithme imbriqué)
@@ -187,7 +207,7 @@ IMBRIQUES_BASE_10 = ["log(log(x))=1", "log(log(log(x)))=0", "log(log(x-1))=0"]
 
 def entrees_el_m():
     """Entrées de l'instantané de la filière M : les équations logarithmiques de la 3C (avec ensemble de définition en M) et BATTERIE_M."""
-    return list(dict.fromkeys([s for s, _ in BATTERIE_E4] + [s for s, _ in BATTERIE_M]))
+    return list(dict.fromkeys([s for s, _ in BATTERIE_E4] + [s for s, _ in BATTERIE_M] + M_TOUT_L_ED + M_PAS_ENCORE + M_HORS_PROGRAMME))
 
 
 def entrees_el():

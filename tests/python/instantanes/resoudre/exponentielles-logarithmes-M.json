@@ -1,4 +1,87 @@
 {
+ "-log(x)+log(x+1)=log(2)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 1 > 0 \\iff x > -1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]-1 \\,;\\, +\\infty\\right[ = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-\\log(x) + \\log(x + 1) = \\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log\\left(\\frac{x + 1}{x}\\right) = \\log(2)\\)</span><span class=\"prop\">(log u − log v = log(u/v), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log\\left(\\frac{x + 1}{x}\\right) = \\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\frac{x + 1}{x} = 2\\)</span><span class=\"prop\">(log u = log v ⇔ u = v, sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x + 1 = 2x\\)</span><span class=\"prop\">(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(-x = -1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 1\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{1\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "-\\log(x) + \\log(x + 1) = \\log(2)",
+  "erreur": null,
+  "ok": true
+ },
  "-log(x)=2": {
   "cartes": [
    {
@@ -72,6 +155,104 @@
   "erreur": null,
   "ok": true
  },
+ "1=log(x)+log(x-1)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 1 > 0 \\iff x > 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]1 \\,;\\, +\\infty\\right[ = \\left]1 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 = \\log(x) + \\log(x - 1)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(1 = \\log(x(x - 1))\\)</span><span class=\"prop\">(log u + log v = log(uv), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 = \\log(x(x - 1))\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(x(x - 1)) = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{\\log(x(x - 1))} = 10^{1}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(x - 1) = 10^{1} = 10\\)</span><span class=\"prop\">(10^(log(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - x - 10 = 0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(Δ = (-1)^{2} - 4 \\cdot 1 \\cdot (-10) = 41\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{1 - \\sqrt{41}}{2} \\text{ ou } x = \\frac{1 + \\sqrt{41}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1 - \\sqrt{41}}{2} \\approx -2{,}702 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x) n'est pas défini : x &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1 + \\sqrt{41}}{2} \\approx 3{,}702\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{1 + \\sqrt{41}}{2}\\right\\} \\text{, soit } x \\approx 3{,}702",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "1 = \\log(x) + \\log(x - 1)",
+  "erreur": null,
+  "ok": true
+ },
  "2log(x)-5=0": {
   "cartes": [
    {
@@ -142,6 +323,380 @@
    }
   ],
   "enonce_tex": "2\\log(x) - 5 = 0",
+  "erreur": null,
+  "ok": true
+ },
+ "2log(x)-log(x+1)=0": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 1 > 0 \\iff x > -1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]-1 \\,;\\, +\\infty\\right[ = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\log(x) - \\log(x + 1) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(x^{2}) - \\log(x + 1) = 0\\)</span><span class=\"prop\">(k · log u = log(u^k), sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log\\left(\\frac{x^{2}}{x + 1}\\right) = 0\\)</span><span class=\"prop\">(log u − log v = log(u/v), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log\\left(\\frac{x^{2}}{x + 1}\\right) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{\\log\\left(\\frac{x^{2}}{x + 1}\\right)} = 10^{0}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\frac{x^{2}}{x + 1} = 10^{0} = 1\\)</span><span class=\"prop\">(10^(log(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = x + 1\\)</span><span class=\"prop\">(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - x - 1 = 0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(Δ = (-1)^{2} - 4 \\cdot 1 \\cdot (-1) = 5\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{1 - \\sqrt{5}}{2} \\text{ ou } x = \\frac{1 + \\sqrt{5}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1 - \\sqrt{5}}{2} \\approx -0{,}618 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x) n'est pas défini : x &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1 + \\sqrt{5}}{2} \\approx 1{,}618\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{1 + \\sqrt{5}}{2}\\right\\} \\text{, soit } x \\approx 1{,}618",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2\\log(x) - \\log(x + 1) = 0",
+  "erreur": null,
+  "ok": true
+ },
+ "2log(x)=log(x+6)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 6 > 0 \\iff x > -6\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]-6 \\,;\\, +\\infty\\right[ = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\log(x) = \\log(x + 6)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(x^{2}) = \\log(x + 6)\\)</span><span class=\"prop\">(k · log u = log(u^k), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x^{2}) = \\log(x + 6)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = x + 6\\)</span><span class=\"prop\">(log u = log v ⇔ u = v, sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - x - 6 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 2)(x - 3) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -2 \\text{ ou } x = 3\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -2 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x) n'est pas défini : x &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 3\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{3\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2\\log(x) = \\log(x + 6)",
+  "erreur": null,
+  "ok": true
+ },
+ "2log(x)=log(x^2)+log(1)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "On met \\(x^{2}\\) en évidence : \\(x^{2} = x^{2}\\left(1\\right)\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2}"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "\\(x^{2} > 0 \\iff x \\in \\mathbb{R} \\setminus \\left\\{0\\right\\}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\log(x) = \\log(x^{2}) + \\log(1)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(x^{2}) = \\log(x^{2}) + \\log(1)\\)</span><span class=\"prop\">(k · log u = log(u^k), sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(x^{2}) = \\log(x^{2})\\)</span><span class=\"prop\">(log u + log v = log(uv), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x^{2}) = \\log(x^{2})\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = x^{2}\\)</span><span class=\"prop\">(log u = log v ⇔ u = v, sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Cette égalité est vraie pour tout x de l'ensemble de définition.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2\\log(x) = \\log(x^{2}) + \\log(1)",
+  "erreur": null,
+  "ok": true
+ },
+ "2log(x-2)=log(3x-8)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 2 > 0 \\iff x > 2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(3x - 8 > 0 \\iff x > \\frac{8}{3}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]2 \\,;\\, +\\infty\\right[ \\cap \\left]\\frac{8}{3} \\,;\\, +\\infty\\right[ = \\left]\\frac{8}{3} \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\log(x - 2) = \\log(3x - 8)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log((x - 2)^{2}) = \\log(3x - 8)\\)</span><span class=\"prop\">(k · log u = log(u^k), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log((x - 2)^{2}) = \\log(3x - 8)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x - 2)^{2} = 3x - 8\\)</span><span class=\"prop\">(log u = log v ⇔ u = v, sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - 7x + 12 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x - 3)(x - 4) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 3 \\text{ ou } x = 4\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 3\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 4\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{3 \\,;\\, 4\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2\\log(x - 2) = \\log(3x - 8)",
   "erreur": null,
   "ok": true
  },
@@ -279,6 +834,152 @@
   "erreur": null,
   "ok": true
  },
+ "3ln(x)=ln(125)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3\\ln(x) = \\ln(125)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(x^{3}) = \\ln(125)\\)</span><span class=\"prop\">(k · ln u = ln(u^k), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(x^{3}) = \\ln(125)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{3} = 125\\)</span><span class=\"prop\">(ln u = ln v ⇔ u = v, sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 5\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = c^(1/n) (n impair))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 5\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{5\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3\\ln(x) = \\ln(125)",
+  "erreur": null,
+  "ok": true
+ },
+ "3log(x)=2log(8)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3\\log(x) = 2\\log(8)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(x^{3}) = \\log(64)\\)</span><span class=\"prop\">(k · log u = log(u^k), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x^{3}) = \\log(64)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{3} = 64\\)</span><span class=\"prop\">(log u = log v ⇔ u = v, sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 4\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = c^(1/n) (n impair))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 4\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{4\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3\\log(x) = 2\\log(8)",
+  "erreur": null,
+  "ok": true
+ },
  "8=log(2x+1)": {
   "cartes": [
    {
@@ -340,6 +1041,10 @@
   "enonce_tex": "8 = \\log(2x + 1)",
   "erreur": null,
   "ok": true
+ },
+ "e^x=ln(x)": {
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
+  "ok": false
  },
  "ln(-x^2-x-1)=2": {
   "cartes": [
@@ -451,6 +1156,105 @@
   "erreur": null,
   "ok": true
  },
+ "ln(2x-5)+ln(3x+7)=4ln(2)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x - 5 > 0 \\iff x > \\frac{5}{2}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(3x + 7 > 0 \\iff x > -\\frac{7}{3}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]\\frac{5}{2} \\,;\\, +\\infty\\right[ \\cap \\left]-\\frac{7}{3} \\,;\\, +\\infty\\right[ = \\left]\\frac{5}{2} \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(2x - 5) + \\ln(3x + 7) = 4\\ln(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(2x - 5) + \\ln(3x + 7) = \\ln(16)\\)</span><span class=\"prop\">(k · ln u = ln(u^k), sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln((2x - 5)(3x + 7)) = \\ln(16)\\)</span><span class=\"prop\">(ln u + ln v = ln(uv), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln((2x - 5)(3x + 7)) = \\ln(16)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((2x - 5)(3x + 7) = 16\\)</span><span class=\"prop\">(ln u = ln v ⇔ u = v, sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(6x^{2} - x - 51 = 0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(Δ = (-1)^{2} - 4 \\cdot 6 \\cdot (-51) = 1\\text{’}225\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -\\frac{17}{6} \\text{ ou } x = 3\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -\\frac{17}{6} \\notin ED\\)</span><span class=\"prop\">(rejetée : ln(2·x − 5) n'est pas défini : 2·x − 5 &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 3\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{3\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\ln(2x - 5) + \\ln(3x + 7) = 4\\ln(2)",
+  "erreur": null,
+  "ok": true
+ },
  "ln(ln(x))=0": {
   "cartes": [
    {
@@ -521,6 +1325,196 @@
   "enonce_tex": "\\ln(\\ln(x)) = 0",
   "erreur": null,
   "ok": true
+ },
+ "ln(x)+ln(x+1)=ln(6)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 1 > 0 \\iff x > -1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]-1 \\,;\\, +\\infty\\right[ = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(x) + \\ln(x + 1) = \\ln(6)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(x(x + 1)) = \\ln(6)\\)</span><span class=\"prop\">(ln u + ln v = ln(uv), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(x(x + 1)) = \\ln(6)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(x + 1) = 6\\)</span><span class=\"prop\">(ln u = ln v ⇔ u = v, sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} + x - 6 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 3)(x - 2) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -3 \\text{ ou } x = 2\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -3 \\notin ED\\)</span><span class=\"prop\">(rejetée : ln(x) n'est pas défini : x &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 2\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{2\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\ln(x) + \\ln(x + 1) = \\ln(6)",
+  "erreur": null,
+  "ok": true
+ },
+ "ln(x)+ln(x-1)=0": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 1 > 0 \\iff x > 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]1 \\,;\\, +\\infty\\right[ = \\left]1 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(x) + \\ln(x - 1) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(x(x - 1)) = 0\\)</span><span class=\"prop\">(ln u + ln v = ln(uv), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(x(x - 1)) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(e^{\\ln(x(x - 1))} = e^{0}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(x - 1) = e^{0} = 1\\)</span><span class=\"prop\">(e^(ln(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - x - 1 = 0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(Δ = (-1)^{2} - 4 \\cdot 1 \\cdot (-1) = 5\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{1 - \\sqrt{5}}{2} \\text{ ou } x = \\frac{1 + \\sqrt{5}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1 - \\sqrt{5}}{2} \\approx -0{,}618 \\notin ED\\)</span><span class=\"prop\">(rejetée : ln(x) n'est pas défini : x &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1 + \\sqrt{5}}{2} \\approx 1{,}618\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{1 + \\sqrt{5}}{2}\\right\\} \\text{, soit } x \\approx 1{,}618",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\ln(x) + \\ln(x - 1) = 0",
+  "erreur": null,
+  "ok": true
+ },
+ "ln(x)+ln(x-1)=1": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
  },
  "ln(x)=0": {
   "cartes": [
@@ -643,6 +1637,10 @@
   "enonce_tex": "\\ln(x) = 1",
   "erreur": null,
   "ok": true
+ },
+ "ln(x)=2ln(x+1)+1": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
  },
  "ln(x)=3": {
   "cartes": [
@@ -939,6 +1937,10 @@
   "erreur": null,
   "ok": true
  },
+ "log(1/x)=2": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
  "log(2-x)=0": {
   "cartes": [
    {
@@ -1001,6 +2003,151 @@
   "erreur": null,
   "ok": true
  },
+ "log(20)+log(x^2-9)-log(x+3)=1+log(2x+6)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} - 9 = (x - 3)(x + 3)\\) : zéros \\(-3\\) et \\(3\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-3",
+       "3"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "|",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x - 3"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "|",
+         "+"
+        ],
+        "label": "x + 3"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2} - 9"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "\\(x^{2} - 9 > 0 \\iff x \\in \\left]-\\infty \\,;\\, -3\\right[ \\cup \\left]3 \\,;\\, +\\infty\\right[\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 3 > 0 \\iff x > -3\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 3</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x + 6 > 0 \\iff x > -3\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]-\\infty \\,;\\, -3\\right[ \\cup \\left]3 \\,;\\, +\\infty\\right[ \\cap \\left]-3 \\,;\\, +\\infty\\right[ \\cap \\left]-3 \\,;\\, +\\infty\\right[ = \\left]3 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(20) + \\log(x^{2} - 9) - \\log(x + 3) = 1 + \\log(2x + 6)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(20) + \\log(x^{2} - 9) - \\log(x + 3) = \\log(2x + 6) + \\log(10)\\)</span><span class=\"prop\">(c = log(10^c))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log\\left(\\frac{20(x^{2} - 9)}{x + 3}\\right) = \\log(10(2x + 6))\\)</span><span class=\"prop\">(propriétés des logarithmes, sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log\\left(\\frac{20(x^{2} - 9)}{x + 3}\\right) = \\log(10(2x + 6))\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\frac{20(x^{2} - 9)}{x + 3} = 10(2x + 6)\\)</span><span class=\"prop\">(log u = log v ⇔ u = v, sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(20(x^{2} - 9) = 10(2x + 6) \\cdot (x + 3)\\)</span><span class=\"prop\">(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(120x = -360\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -3\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -3 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x^2 − 9) n'est pas défini : x^2 − 9 = 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Aucune solution de l'équation n'est dans l'ensemble de définition.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\varnothing",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(20) + \\log(x^{2} - 9) - \\log(x + 3) = 1 + \\log(2x + 6)",
+  "erreur": null,
+  "ok": true
+ },
  "log(2x+1)=3": {
   "cartes": [
    {
@@ -1060,6 +2207,105 @@
    }
   ],
   "enonce_tex": "\\log(2x + 1) = 3",
+  "erreur": null,
+  "ok": true
+ },
+ "log(2x-3)+log(3x+10)=4log(2)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x - 3 > 0 \\iff x > \\frac{3}{2}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(3x + 10 > 0 \\iff x > -\\frac{10}{3}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]\\frac{3}{2} \\,;\\, +\\infty\\right[ \\cap \\left]-\\frac{10}{3} \\,;\\, +\\infty\\right[ = \\left]\\frac{3}{2} \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(2x - 3) + \\log(3x + 10) = 4\\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2x - 3) + \\log(3x + 10) = \\log(16)\\)</span><span class=\"prop\">(k · log u = log(u^k), sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log((2x - 3)(3x + 10)) = \\log(16)\\)</span><span class=\"prop\">(log u + log v = log(uv), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log((2x - 3)(3x + 10)) = \\log(16)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((2x - 3)(3x + 10) = 16\\)</span><span class=\"prop\">(log u = log v ⇔ u = v, sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(6x^{2} + 11x - 46 = 0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(Δ = 11^{2} - 4 \\cdot 6 \\cdot (-46) = 1\\text{’}225\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -\\frac{23}{6} \\text{ ou } x = 2\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -\\frac{23}{6} \\notin ED\\)</span><span class=\"prop\">(rejetée : log(2·x − 3) n'est pas défini : 2·x − 3 &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 2\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{2\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(2x - 3) + \\log(3x + 10) = 4\\log(2)",
   "erreur": null,
   "ok": true
  },
@@ -1187,6 +2433,90 @@
   "erreur": null,
   "ok": true
  },
+ "log(5+x)=log(4-x)+1": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(5 + x > 0 \\iff x > -5\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(4 - x > 0 \\iff x < 4\\) (on divise par un nombre négatif : le sens s'inverse).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]-5 \\,;\\, +\\infty\\right[ \\cap \\left]-\\infty \\,;\\, 4\\right[ = \\left]-5 \\,;\\, 4\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(5 + x) = \\log(4 - x) + 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5 + x) = \\log(4 - x) + \\log(10)\\)</span><span class=\"prop\">(c = log(10^c))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5 + x) = \\log(10(4 - x))\\)</span><span class=\"prop\">(log u + log v = log(uv), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(5 + x) = \\log(10(4 - x))\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(5 + x = 10(4 - x)\\)</span><span class=\"prop\">(log u = log v ⇔ u = v, sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(11x = 35\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{35}{11}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{35}{11}\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{35}{11}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(5 + x) = \\log(4 - x) + 1",
+  "erreur": null,
+  "ok": true
+ },
  "log(5-x)=8": {
   "cartes": [
    {
@@ -1249,6 +2579,89 @@
   "erreur": null,
   "ok": true
  },
+ "log(9x+5)-log(x)=1": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(9x + 5 > 0 \\iff x > -\\frac{5}{9}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "tex": "ED = \\left]-\\frac{5}{9} \\,;\\, +\\infty\\right[ \\cap \\left]0 \\,;\\, +\\infty\\right[ = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(9x + 5) - \\log(x) = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log\\left(\\frac{9x + 5}{x}\\right) = 1\\)</span><span class=\"prop\">(log u − log v = log(u/v), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log\\left(\\frac{9x + 5}{x}\\right) = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{\\log\\left(\\frac{9x + 5}{x}\\right)} = 10^{1}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\frac{9x + 5}{x} = 10^{1} = 10\\)</span><span class=\"prop\">(10^(log(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(9x + 5 = 10x\\)</span><span class=\"prop\">(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(-x = -5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 5\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 5\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{5\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(9x + 5) - \\log(x) = 1",
+  "erreur": null,
+  "ok": true
+ },
  "log(log(log(x)))=0": {
   "erreur": "Cet outil ne traite pas encore ce type d'équation.",
   "ok": false
@@ -1258,6 +2671,10 @@
   "ok": false
  },
  "log(log(x-1))=0": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "log(sqrt(x))=1": {
   "erreur": "Cet outil ne traite pas encore ce type d'équation.",
   "ok": false
  },
@@ -1322,6 +2739,10 @@
   "enonce_tex": "\\log(t - 3) = 1",
   "erreur": null,
   "ok": true
+ },
+ "log(x)*log(x-1)=1": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
  },
  "log(x)+1=3": {
   "cartes": [
@@ -1393,6 +2814,690 @@
    }
   ],
   "enonce_tex": "\\log(x) + 1 = 3",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x)+2^x=3": {
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
+  "ok": false
+ },
+ "log(x)+log(x)=2": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x) + \\log(x) = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(x \\cdot x) = 2\\)</span><span class=\"prop\">(log u + log v = log(uv), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x \\cdot x) = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{\\log(x \\cdot x)} = 10^{2}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot x = 10^{2} = 100\\)</span><span class=\"prop\">(10^(log(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - 100 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 10)(x - 10) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -10 \\text{ ou } x = 10\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -10 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x) n'est pas défini : x &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 10\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{10\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x) + \\log(x) = 2",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x)+log(x+3)=2": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 3 > 0 \\iff x > -3\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]-3 \\,;\\, +\\infty\\right[ = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x) + \\log(x + 3) = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(x(x + 3)) = 2\\)</span><span class=\"prop\">(log u + log v = log(uv), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x(x + 3)) = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{\\log(x(x + 3))} = 10^{2}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(x + 3) = 10^{2} = 100\\)</span><span class=\"prop\">(10^(log(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} + 3x - 100 = 0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(Δ = 3^{2} - 4 \\cdot 1 \\cdot (-100) = 409\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{-3 - \\sqrt{409}}{2} \\text{ ou } x = \\frac{-3 + \\sqrt{409}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{-3 - \\sqrt{409}}{2} \\approx -11{,}612 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x) n'est pas défini : x &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{-3 + \\sqrt{409}}{2} \\approx 8{,}612\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{-3 + \\sqrt{409}}{2}\\right\\} \\text{, soit } x \\approx 8{,}612",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x) + \\log(x + 3) = 2",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x)+log(x-1)+3=5": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 1 > 0 \\iff x > 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]1 \\,;\\, +\\infty\\right[ = \\left]1 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x) + \\log(x - 1) + 3 = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(x) + \\log(x - 1) = 2\\)</span><span class=\"prop\">(on isole le logarithme)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(x(x - 1)) = 2\\)</span><span class=\"prop\">(log u + log v = log(uv), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x(x - 1)) = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{\\log(x(x - 1))} = 10^{2}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(x - 1) = 10^{2} = 100\\)</span><span class=\"prop\">(10^(log(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - x - 100 = 0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(Δ = (-1)^{2} - 4 \\cdot 1 \\cdot (-100) = 401\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{1 - \\sqrt{401}}{2} \\text{ ou } x = \\frac{1 + \\sqrt{401}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1 - \\sqrt{401}}{2} \\approx -9{,}512 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x) n'est pas défini : x &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1 + \\sqrt{401}}{2} \\approx 10{,}512\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{1 + \\sqrt{401}}{2}\\right\\} \\text{, soit } x \\approx 10{,}512",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x) + \\log(x - 1) + 3 = 5",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x)+log(x-1)=1": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 1 > 0 \\iff x > 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]1 \\,;\\, +\\infty\\right[ = \\left]1 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x) + \\log(x - 1) = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(x(x - 1)) = 1\\)</span><span class=\"prop\">(log u + log v = log(uv), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x(x - 1)) = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{\\log(x(x - 1))} = 10^{1}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(x - 1) = 10^{1} = 10\\)</span><span class=\"prop\">(10^(log(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - x - 10 = 0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(Δ = (-1)^{2} - 4 \\cdot 1 \\cdot (-10) = 41\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{1 - \\sqrt{41}}{2} \\text{ ou } x = \\frac{1 + \\sqrt{41}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1 - \\sqrt{41}}{2} \\approx -2{,}702 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x) n'est pas défini : x &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1 + \\sqrt{41}}{2} \\approx 3{,}702\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{1 + \\sqrt{41}}{2}\\right\\} \\text{, soit } x \\approx 3{,}702",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x) + \\log(x - 1) = 1",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x)+log(x-1)=log(x^2-x)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 1 > 0 \\iff x > 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 3</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "On met \\(x\\) en évidence : \\(x^{2} - x = x\\left(x - 1\\right)\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 1 = 0 \\iff x = 1\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0",
+       "1"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "|",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "-",
+         "|",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x - 1"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2} - x"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "\\(x^{2} - x > 0 \\iff x \\in \\left]-\\infty \\,;\\, 0\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]1 \\,;\\, +\\infty\\right[ \\cap \\left]-\\infty \\,;\\, 0\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[ = \\left]1 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x) + \\log(x - 1) = \\log(x^{2} - x)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(x(x - 1)) = \\log(x^{2} - x)\\)</span><span class=\"prop\">(log u + log v = log(uv), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x(x - 1)) = \\log(x^{2} - x)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(x - 1) = x^{2} - x\\)</span><span class=\"prop\">(log u = log v ⇔ u = v, sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Cette égalité est vraie pour tout x de l'ensemble de définition.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left]1 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x) + \\log(x - 1) = \\log(x^{2} - x)",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x)+log(x-2)=log(3)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 2 > 0 \\iff x > 2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]2 \\,;\\, +\\infty\\right[ = \\left]2 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x) + \\log(x - 2) = \\log(3)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(x(x - 2)) = \\log(3)\\)</span><span class=\"prop\">(log u + log v = log(uv), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x(x - 2)) = \\log(3)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(x - 2) = 3\\)</span><span class=\"prop\">(log u = log v ⇔ u = v, sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - 2x - 3 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 1)(x - 3) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -1 \\text{ ou } x = 3\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -1 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x) n'est pas défini : x &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 3\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{3\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x) + \\log(x - 2) = \\log(3)",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x)-log(x-1)=log(2)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 1 > 0 \\iff x > 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]1 \\,;\\, +\\infty\\right[ = \\left]1 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x) - \\log(x - 1) = \\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log\\left(\\frac{x}{x - 1}\\right) = \\log(2)\\)</span><span class=\"prop\">(log u − log v = log(u/v), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log\\left(\\frac{x}{x - 1}\\right) = \\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\frac{x}{x - 1} = 2\\)</span><span class=\"prop\">(log u = log v ⇔ u = v, sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 2(x - 1)\\)</span><span class=\"prop\">(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(-x = -2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 2\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 2\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{2\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x) - \\log(x - 1) = \\log(2)",
   "erreur": null,
   "ok": true
  },
@@ -1835,6 +3940,275 @@
   "erreur": null,
   "ok": true
  },
+ "log(x)=4log(5)+log(1/5)-3log(3)+1/3*log(27)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x) = 4\\log(5) + \\log\\left(\\frac{1}{5}\\right) - 3\\log(3) + \\frac{1}{3} \\cdot \\log(27)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(x) = \\log(625) + \\log\\left(\\frac{1}{5}\\right) - \\log(27) + \\log(3)\\)</span><span class=\"prop\">(k · log u = log(u^k), sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(x) = \\log\\left(\\frac{125}{9}\\right)\\)</span><span class=\"prop\">(propriétés des logarithmes, sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x) = \\log\\left(\\frac{125}{9}\\right)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{125}{9}\\)</span><span class=\"prop\">(log u = log v ⇔ u = v, sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{125}{9}\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{125}{9}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x) = 4\\log(5) + \\log\\left(\\frac{1}{5}\\right) - 3\\log(3) + \\frac{1}{3} \\cdot \\log(27)",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x)=ln(2)": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
+ "log(x)=log(16)+2log(3)-2log(2)-1/2*log(9)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x) = \\log(16) + 2\\log(3) - 2\\log(2) - \\frac{1}{2} \\cdot \\log(9)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(x) = \\log(16) + \\log(9) - \\log(4) - \\log(3)\\)</span><span class=\"prop\">(k · log u = log(u^k), sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(x) = \\log(12)\\)</span><span class=\"prop\">(propriétés des logarithmes, sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x) = \\log(12)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 12\\)</span><span class=\"prop\">(log u = log v ⇔ u = v, sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 12\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{12\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x) = \\log(16) + 2\\log(3) - 2\\log(2) - \\frac{1}{2} \\cdot \\log(9)",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x)=log(5)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x) = \\log(5)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 5\\)</span><span class=\"prop\">(log u = log v ⇔ u = v, sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 5\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{5\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x) = \\log(5)",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x)=log(x)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x) = \\log(x)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = x\\)</span><span class=\"prop\">(log u = log v ⇔ u = v, sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Cette égalité est vraie pour tout x de l'ensemble de définition.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x) = \\log(x)",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x)=x-1": {
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
+  "ok": false
+ },
  "log(x+0,5)=1": {
   "cartes": [
    {
@@ -1897,6 +4271,419 @@
   "erreur": null,
   "ok": true
  },
+ "log(x+1)+log(2x)=log(3)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 1 > 0 \\iff x > -1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x > 0 \\iff x > 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]-1 \\,;\\, +\\infty\\right[ \\cap \\left]0 \\,;\\, +\\infty\\right[ = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x + 1) + \\log(2x) = \\log(3)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log((x + 1) \\cdot 2x) = \\log(3)\\)</span><span class=\"prop\">(log u + log v = log(uv), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log((x + 1) \\cdot 2x) = \\log(3)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 1) \\cdot 2x = 3\\)</span><span class=\"prop\">(log u = log v ⇔ u = v, sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2x^{2} + 2x - 3 = 0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(Δ = 2^{2} - 4 \\cdot 2 \\cdot (-3) = 28\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{-1 - \\sqrt{7}}{2} \\text{ ou } x = \\frac{-1 + \\sqrt{7}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{-1 - \\sqrt{7}}{2} \\approx -1{,}823 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x + 1) n'est pas défini : x + 1 &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{-1 + \\sqrt{7}}{2} \\approx 0{,}823\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{-1 + \\sqrt{7}}{2}\\right\\} \\text{, soit } x \\approx 0{,}823",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x + 1) + \\log(2x) = \\log(3)",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x+2)+log(x-1)=log(18)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 2 > 0 \\iff x > -2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 1 > 0 \\iff x > 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]-2 \\,;\\, +\\infty\\right[ \\cap \\left]1 \\,;\\, +\\infty\\right[ = \\left]1 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x + 2) + \\log(x - 1) = \\log(18)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log((x + 2)(x - 1)) = \\log(18)\\)</span><span class=\"prop\">(log u + log v = log(uv), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log((x + 2)(x - 1)) = \\log(18)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 2)(x - 1) = 18\\)</span><span class=\"prop\">(log u = log v ⇔ u = v, sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} + x - 20 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 5)(x - 4) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -5 \\text{ ou } x = 4\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -5 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x + 2) n'est pas défini : x + 2 &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 4\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{4\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x + 2) + \\log(x - 1) = \\log(18)",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x+2)-log(3)=log(2x-1)+log(7)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 2 > 0 \\iff x > -2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x - 1 > 0 \\iff x > \\frac{1}{2}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]-2 \\,;\\, +\\infty\\right[ \\cap \\left]\\frac{1}{2} \\,;\\, +\\infty\\right[ = \\left]\\frac{1}{2} \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x + 2) - \\log(3) = \\log(2x - 1) + \\log(7)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log\\left(\\frac{x + 2}{3}\\right) = \\log(7(2x - 1))\\)</span><span class=\"prop\">(propriétés des logarithmes, sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log\\left(\\frac{x + 2}{3}\\right) = \\log(7(2x - 1))\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\frac{x + 2}{3} = 7(2x - 1)\\)</span><span class=\"prop\">(log u = log v ⇔ u = v, sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x + 2 = 21(2x - 1)\\)</span><span class=\"prop\">(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(-41x = -23\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{23}{41}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{23}{41}\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{23}{41}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x + 2) - \\log(3) = \\log(2x - 1) + \\log(7)",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x-1)=log(3)+log(x)-log(2)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 1 > 0 \\iff x > 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "tex": "ED = \\left]1 \\,;\\, +\\infty\\right[ \\cap \\left]0 \\,;\\, +\\infty\\right[ = \\left]1 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x - 1) = \\log(3) + \\log(x) - \\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(x - 1) = \\log\\left(\\frac{3x}{2}\\right)\\)</span><span class=\"prop\">(propriétés des logarithmes, sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x - 1) = \\log\\left(\\frac{3x}{2}\\right)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x - 1 = \\frac{3x}{2}\\)</span><span class=\"prop\">(log u = log v ⇔ u = v, sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2(x - 1) = 3x\\)</span><span class=\"prop\">(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(-x = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -2\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -2 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x − 1) n'est pas défini : x − 1 &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Aucune solution de l'équation n'est dans l'ensemble de définition.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\varnothing",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x - 1) = \\log(3) + \\log(x) - \\log(2)",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x-3)+log(1-x)=0": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 3 > 0 \\iff x > 3\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(1 - x > 0 \\iff x < 1\\) (on divise par un nombre négatif : le sens s'inverse).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]3 \\,;\\, +\\infty\\right[ \\cap \\left]-\\infty \\,;\\, 1\\right[ = \\varnothing",
+      "type": "resultat"
+     },
+     {
+      "html": "L'ensemble de définition est vide : l'équation n'a aucune solution.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\varnothing",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x - 3) + \\log(1 - x) = 0",
+  "erreur": null,
+  "ok": true
+ },
  "log(x-3)=1": {
   "cartes": [
    {
@@ -1956,6 +4743,229 @@
    }
   ],
   "enonce_tex": "\\log(x - 3) = 1",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x^2)+log(3)=10": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "On met \\(x^{2}\\) en évidence : \\(x^{2} = x^{2}\\left(1\\right)\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2}"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "\\(x^{2} > 0 \\iff x \\in \\mathbb{R} \\setminus \\left\\{0\\right\\}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x^{2}) + \\log(3) = 10\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3x^{2}) = 10\\)</span><span class=\"prop\">(log u + log v = log(uv), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(3x^{2}) = 10\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{\\log(3x^{2})} = 10^{10}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3x^{2} = 10^{10}\\)</span><span class=\"prop\">(10^(log(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\frac{10\\text{’}000\\text{’}000\\text{’}000}{3}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{\\frac{10\\text{’}000\\text{’}000\\text{’}000}{3}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{\\frac{10\\text{’}000\\text{’}000\\text{’}000}{3}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} \\approx -57\\text{’}735{,}027\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} \\approx 57\\text{’}735{,}027\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -57\\text{’}735{,}027 \\text{ ou } x \\approx 57\\text{’}735{,}027",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x^{2}) + \\log(3) = 10",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x^2)-log(x)=1": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "On met \\(x^{2}\\) en évidence : \\(x^{2} = x^{2}\\left(1\\right)\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2}"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "\\(x^{2} > 0 \\iff x \\in \\mathbb{R} \\setminus \\left\\{0\\right\\}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x^{2}) - \\log(x) = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log\\left(\\frac{x^{2}}{x}\\right) = 1\\)</span><span class=\"prop\">(log u − log v = log(u/v), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log\\left(\\frac{x^{2}}{x}\\right) = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{\\log\\left(\\frac{x^{2}}{x}\\right)} = 10^{1}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\frac{x^{2}}{x} = 10^{1} = 10\\)</span><span class=\"prop\">(10^(log(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = 10x\\)</span><span class=\"prop\">(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - 10x = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(x - 10) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } x = 10\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 0 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x^2) n'est pas défini : x^2 = 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 10\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{10\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x^{2}) - \\log(x) = 1",
   "erreur": null,
   "ok": true
  },
@@ -2146,6 +5156,105 @@
    }
   ],
   "enonce_tex": "\\log(x^{2}) = 2",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x^2)=log(x)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "On met \\(x^{2}\\) en évidence : \\(x^{2} = x^{2}\\left(1\\right)\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2}"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "\\(x^{2} > 0 \\iff x \\in \\mathbb{R} \\setminus \\left\\{0\\right\\}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x^{2}) = \\log(x)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = x\\)</span><span class=\"prop\">(log u = log v ⇔ u = v, sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - x = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(x - 1) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } x = 1\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 0 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x^2) n'est pas défini : x^2 = 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 1\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{1\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x^{2}) = \\log(x)",
   "erreur": null,
   "ok": true
  },
@@ -2409,6 +5518,116 @@
   "erreur": null,
   "ok": true
  },
+ "log(x^2-7)=2log(x+3)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Trinôme \\(x^{2} - 7\\) : \\(\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot (-7) = 28\\) : zéros \\(x_1 = -\\sqrt{7}\\) et \\(x_2 = \\sqrt{7}\\) \\((\\approx -2{,}6458\\) et \\(\\approx 2{,}6458)\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-\\sqrt{7}",
+       "\\sqrt{7}"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2} - 7"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "\\(x^{2} - 7 > 0 \\iff x \\in \\left]-\\infty \\,;\\, -\\sqrt{7}\\right[ \\cup \\left]\\sqrt{7} \\,;\\, +\\infty\\right[\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 3 > 0 \\iff x > -3\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]-\\infty \\,;\\, -\\sqrt{7}\\right[ \\cup \\left]\\sqrt{7} \\,;\\, +\\infty\\right[ \\cap \\left]-3 \\,;\\, +\\infty\\right[ = \\left]-3 \\,;\\, -\\sqrt{7}\\right[ \\cup \\left]\\sqrt{7} \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x^{2} - 7) = 2\\log(x + 3)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(x^{2} - 7) = \\log((x + 3)^{2})\\)</span><span class=\"prop\">(k · log u = log(u^k), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x^{2} - 7) = \\log((x + 3)^{2})\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - 7 = (x + 3)^{2}\\)</span><span class=\"prop\">(log u = log v ⇔ u = v, sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(6x = -16\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\frac{8}{3}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -\\frac{8}{3}\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-\\frac{8}{3}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x^{2} - 7) = 2\\log(x + 3)",
+  "erreur": null,
+  "ok": true
+ },
  "log(x^2-x)=1": {
   "cartes": [
    {
@@ -2537,6 +5756,115 @@
   "erreur": null,
   "ok": true
  },
+ "log2(3x-4)+log2(10x-4)=2log2(5x-2)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(3x - 4 > 0 \\iff x > \\frac{4}{3}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(10x - 4 > 0 \\iff x > \\frac{2}{5}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 3</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(5x - 2 > 0 \\iff x > \\frac{2}{5}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]\\frac{4}{3} \\,;\\, +\\infty\\right[ \\cap \\left]\\frac{2}{5} \\,;\\, +\\infty\\right[ \\cap \\left]\\frac{2}{5} \\,;\\, +\\infty\\right[ = \\left]\\frac{4}{3} \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{2}(3x - 4) + \\log_{2}(10x - 4) = 2\\log_{2}(5x - 2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log_{2}(3x - 4) + \\log_{2}(10x - 4) = \\log_{2}((5x - 2)^{2})\\)</span><span class=\"prop\">(k · log_a u = log_a(u^k), sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log_{2}((3x - 4)(10x - 4)) = \\log_{2}((5x - 2)^{2})\\)</span><span class=\"prop\">(log_a u + log_a v = log_a(uv), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{2}((3x - 4)(10x - 4)) = \\log_{2}((5x - 2)^{2})\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((3x - 4)(10x - 4) = (5x - 2)^{2}\\)</span><span class=\"prop\">(log_a u = log_a v ⇔ u = v, sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(5x^{2} - 32x + 12 = 0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(Δ = (-32)^{2} - 4 \\cdot 5 \\cdot 12 = 784\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{2}{5} \\text{ ou } x = 6\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{2}{5} \\notin ED\\)</span><span class=\"prop\">(rejetée : log_2(3·x − 4) n'est pas défini : 3·x − 4 &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 6\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{6\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{2}(3x - 4) + \\log_{2}(10x - 4) = 2\\log_{2}(5x - 2)",
+  "erreur": null,
+  "ok": true
+ },
  "log2(x)=4": {
   "cartes": [
    {
@@ -2598,6 +5926,451 @@
   "erreur": null,
   "ok": true
  },
+ "log2(x+1)-log2(3)=log2(2x-3)+log2(7)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 1 > 0 \\iff x > -1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x - 3 > 0 \\iff x > \\frac{3}{2}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]-1 \\,;\\, +\\infty\\right[ \\cap \\left]\\frac{3}{2} \\,;\\, +\\infty\\right[ = \\left]\\frac{3}{2} \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{2}(x + 1) - \\log_{2}(3) = \\log_{2}(2x - 3) + \\log_{2}(7)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log_{2}\\left(\\frac{x + 1}{3}\\right) = \\log_{2}(7(2x - 3))\\)</span><span class=\"prop\">(propriétés des logarithmes, sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{2}\\left(\\frac{x + 1}{3}\\right) = \\log_{2}(7(2x - 3))\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\frac{x + 1}{3} = 7(2x - 3)\\)</span><span class=\"prop\">(log_a u = log_a v ⇔ u = v, sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x + 1 = 21(2x - 3)\\)</span><span class=\"prop\">(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(-41x = -64\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{64}{41}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{64}{41}\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{64}{41}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{2}(x + 1) - \\log_{2}(3) = \\log_{2}(2x - 3) + \\log_{2}(7)",
+  "erreur": null,
+  "ok": true
+ },
+ "log2(x^2-4)=2log2(x+3)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} - 4 = (x - 2)(x + 2)\\) : zéros \\(-2\\) et \\(2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-2",
+       "2"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "|",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x - 2"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "|",
+         "+"
+        ],
+        "label": "x + 2"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2} - 4"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "\\(x^{2} - 4 > 0 \\iff x \\in \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 3 > 0 \\iff x > -3\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[ \\cap \\left]-3 \\,;\\, +\\infty\\right[ = \\left]-3 \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{2}(x^{2} - 4) = 2\\log_{2}(x + 3)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log_{2}(x^{2} - 4) = \\log_{2}((x + 3)^{2})\\)</span><span class=\"prop\">(k · log_a u = log_a(u^k), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{2}(x^{2} - 4) = \\log_{2}((x + 3)^{2})\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - 4 = (x + 3)^{2}\\)</span><span class=\"prop\">(log_a u = log_a v ⇔ u = v, sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(6x = -13\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\frac{13}{6}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -\\frac{13}{6}\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-\\frac{13}{6}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{2}(x^{2} - 4) = 2\\log_{2}(x + 3)",
+  "erreur": null,
+  "ok": true
+ },
+ "log3(35-x^3)=3log3(5-x)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{3} - 35\\) n'a pas de racine rationnelle : solution obtenue numériquement : \\(x {\\approx}\\,3{,}2711\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "{\\approx}\\,3{,}2711"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "-",
+         "-"
+        ],
+        "label": "-1"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x^{3} - 35"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-"
+        ],
+        "final": true,
+        "label": "35 - x^{3}"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "\\(35 - x^{3} > 0 \\iff x \\in \\left]-\\infty \\,;\\, {\\approx}\\,3{,}2711\\right[\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(5 - x > 0 \\iff x < 5\\) (on divise par un nombre négatif : le sens s'inverse).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]-\\infty \\,;\\, {\\approx}\\,3{,}2711\\right[ \\cap \\left]-\\infty \\,;\\, 5\\right[ = \\left]-\\infty \\,;\\, {\\approx}\\,3{,}2711\\right[",
+      "type": "resultat"
+     },
+     {
+      "html": "Les valeurs précédées de ≈ ont été obtenues numériquement.",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{3}(35 - x^{3}) = 3\\log_{3}(5 - x)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log_{3}(35 - x^{3}) = \\log_{3}((5 - x)^{3})\\)</span><span class=\"prop\">(k · log_a u = log_a(u^k), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{3}(35 - x^{3}) = \\log_{3}((5 - x)^{3})\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(35 - x^{3} = (5 - x)^{3}\\)</span><span class=\"prop\">(log_a u = log_a v ⇔ u = v, sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(-15x^{2} + 75x - 90 = 0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(Δ = 75^{2} - 4(-15) \\cdot (-90) = 225\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 2 \\text{ ou } x = 3\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 2\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 3\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{2 \\,;\\, 3\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{3}(35 - x^{3}) = 3\\log_{3}(5 - x)",
+  "erreur": null,
+  "ok": true
+ },
+ "log3(x)+log3(x-2)=1": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 2 > 0 \\iff x > 2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]2 \\,;\\, +\\infty\\right[ = \\left]2 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{3}(x) + \\log_{3}(x - 2) = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log_{3}(x(x - 2)) = 1\\)</span><span class=\"prop\">(log_a u + log_a v = log_a(uv), sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{3}(x(x - 2)) = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3^{\\log_{3}(x(x - 2))} = 3^{1}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(x - 2) = 3^{1} = 3\\)</span><span class=\"prop\">(a^(log_a(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - 2x - 3 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 1)(x - 3) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -1 \\text{ ou } x = 3\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -1 \\notin ED\\)</span><span class=\"prop\">(rejetée : log_3(x) n'est pas défini : x &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 3\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{3\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{3}(x) + \\log_{3}(x - 2) = 1",
+  "erreur": null,
+  "ok": true
+ },
  "log5(x)=-2": {
   "cartes": [
    {
@@ -2656,6 +6429,166 @@
    }
   ],
   "enonce_tex": "\\log_{5}(x) = -2",
+  "erreur": null,
+  "ok": true
+ },
+ "log7(20)+log7(x^2-4)-log7(x-2)=1+log7(2x+4)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} - 4 = (x - 2)(x + 2)\\) : zéros \\(-2\\) et \\(2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-2",
+       "2"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "|",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x - 2"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "|",
+         "+"
+        ],
+        "label": "x + 2"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2} - 4"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "\\(x^{2} - 4 > 0 \\iff x \\in \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 2 > 0 \\iff x > 2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 3</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x + 4 > 0 \\iff x > -2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[ \\cap \\left]2 \\,;\\, +\\infty\\right[ \\cap \\left]-2 \\,;\\, +\\infty\\right[ = \\left]2 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{7}(20) + \\log_{7}(x^{2} - 4) - \\log_{7}(x - 2) = 1 + \\log_{7}(2x + 4)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log_{7}(20) + \\log_{7}(x^{2} - 4) - \\log_{7}(x - 2) = \\log_{7}(2x + 4) + \\log_{7}(7)\\)</span><span class=\"prop\">(c = log_a(a^c))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log_{7}\\left(\\frac{20(x^{2} - 4)}{x - 2}\\right) = \\log_{7}(7(2x + 4))\\)</span><span class=\"prop\">(propriétés des logarithmes, sur l'ED)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{7}\\left(\\frac{20(x^{2} - 4)}{x - 2}\\right) = \\log_{7}(7(2x + 4))\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\frac{20(x^{2} - 4)}{x - 2} = 7(2x + 4)\\)</span><span class=\"prop\">(log_a u = log_a v ⇔ u = v, sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(20(x^{2} - 4) = 7(2x + 4) \\cdot (x - 2)\\)</span><span class=\"prop\">(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(6x^{2} - 24 = 0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(Δ = 0^{2} - 4 \\cdot 6 \\cdot (-24) = 576\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -2 \\text{ ou } x = 2\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -2 \\notin ED\\)</span><span class=\"prop\">(rejetée : log_7(x^2 − 4) n'est pas défini : x^2 − 4 = 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 2 \\notin ED\\)</span><span class=\"prop\">(rejetée : log_7(x^2 − 4) n'est pas défini : x^2 − 4 = 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Aucune solution de l'équation n'est dans l'ensemble de définition.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\varnothing",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{7}(20) + \\log_{7}(x^{2} - 4) - \\log_{7}(x - 2) = 1 + \\log_{7}(2x + 4)",
   "erreur": null,
   "ok": true
  },
@@ -3629,5 +7562,9 @@
   "enonce_tex": "\\log_{x}(9) = -2",
   "erreur": null,
   "ok": true
+ },
+ "x*log(x)=1": {
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
+  "ok": false
  }
 }

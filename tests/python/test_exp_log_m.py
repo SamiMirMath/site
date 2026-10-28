@@ -11,7 +11,7 @@ import exp_log_m as elm
 import resoudre_el as rel
 import resoudre_ed
 import sortie as so
-from cas_el import BATTERIE_E4, BATTERIE_M, IMBRIQUES_BASE_10, entrees_el, entrees_el_m
+from cas_el import BATTERIE_E4, BATTERIE_M, IMBRIQUES_BASE_10, M_HORS_PROGRAMME, M_PAS_ENCORE, M_TOUT_L_ED, entrees_el, entrees_el_m
 
 
 class TestFiliereParDefaut(unittest.TestCase):
@@ -195,6 +195,86 @@ class TestBatterieM(unittest.TestCase):
                 self.assertEqual(len(v), len(attendu))
                 for a, b in zip(v, sorted(attendu)):
                     self.assertAlmostEqual(a, b, delta=1e-3 * (1 + abs(b)))
+
+
+def grille(n=121):
+    """Des points d'essai pour les équivalences : fins autour de 0 et espacés au loin (le point 0 lui-même est évité)."""
+    return [MP.mpf(i) / 8 + MP.mpf("0.0173") for i in range(-n, n + 1)] + [MP.mpf(10) ** k + MP.mpf("0.37") for k in range(1, 5)]
+
+
+class TestLignesM(unittest.TestCase):
+    def test_chaque_ligne_du_regroupement_a_le_meme_ecart_g_moins_d_sur_l_ensemble_de_definition(self):
+        """k · log u = log(u^k), c = log(10^c), log u + log v = log(uv) : chaque ligne de la carte « Regroupement des logarithmes » écrit la même
+        fonction g − d, au moins sur l'ensemble de définition (oracle mpmath indépendant, jamais le moteur)."""
+        vues = 0
+        for entree, _ in BATTERIE_M:
+            r = solutions_m(entree)
+            if r is None:
+                continue
+            for carte in r["etapes"]:
+                if carte["titre"] != "Regroupement des logarithmes":
+                    continue
+                chaine = carte["lignes"][0]
+                for avant, apres in zip(chaine.elements, chaine.elements[1:]):
+                    with self.subTest(entree=entree, ligne=el.tex_element(apres)):
+                        n = 0
+                        for x in grille():
+                            a = evaluer(avant.g, x), evaluer(avant.d, x)
+                            b = evaluer(apres.g, x), evaluer(apres.d, x)
+                            if None in a or None in b:
+                                continue
+                            n += 1
+                            self.assertLessEqual(abs((a[0] - a[1]) - (b[0] - b[1])), MP.mpf("1e-20") * (1 + abs(a[0]) + abs(a[1])), (entree, x))
+                        vues += n
+        self.assertGreater(vues, 5000)
+
+    def test_toutes_les_proprietes_sont_dans_la_liste_fermee(self):
+        for entree, _ in BATTERIE_M + E4_M:
+            r = solutions_m(entree)
+            if r is None:
+                continue
+            for carte in r["etapes"]:
+                for ligne in carte.get("lignes", []):
+                    if isinstance(ligne, el.Chaine):
+                        for p in ligne.props:
+                            self.assertTrue(p is None or p in el.PROPRIETES or p in elm.PROPRIETES_M or isinstance(p, el.Car), (entree, p))
+                        if ligne.note:
+                            self.assertTrue(ligne.note in el.PROPRIETES or ligne.note.startswith(("dans l'ensemble", "rejetée")), (entree, ligne.note))
+
+    def test_chaque_candidat_est_retenu_dans_l_ed_ou_rejete_hors_de_l_ed(self):
+        rejets = 0
+        for entree, _ in BATTERIE_M:
+            r = solutions_m(entree)
+            if r is None or r.get("candidats") is None:
+                continue
+            with self.subTest(entree=entree):
+                s = el.analyser_saisie(entree)
+                retenues = [id(n) for n in r["solutions"]]
+                for n in r["candidats"]:
+                    dedans = ecart(s, MP.mpf(el.valeur(n))) is not None
+                    self.assertEqual(id(n) in retenues, dedans, (entree, el.tex(n)))
+                    rejets += not dedans
+        self.assertGreaterEqual(rejets, 10)
+
+
+class TestIdentitesEtMessagesM(unittest.TestCase):
+    def test_une_identite_a_pour_solution_tout_l_ensemble_de_definition(self):
+        for entree in M_TOUT_L_ED:
+            with self.subTest(entree=entree):
+                s = rel.resoudre(entree, "M")
+                self.assertTrue(s["ok"], s)
+                ed = s["cartes"][0]["blocs"][-1]["tex"]
+                self.assertTrue(ed.startswith("ED = "))
+                self.assertEqual(s["cartes"][-1]["blocs"][0]["tex"], "S = " + ed[len("ED = "):].split(" = ")[-1])
+                self.assertNotIn("Vérification", [k.get("badge") for k in s["cartes"]])
+
+    def test_pas_encore_et_hors_programme(self):
+        for entree in M_PAS_ENCORE:
+            with self.subTest(entree=entree):
+                self.assertEqual(rel.resoudre(entree, "M"), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
+        for entree in M_HORS_PROGRAMME:
+            with self.subTest(entree=entree):
+                self.assertEqual(rel.resoudre(entree, "M"), {"ok": False, "erreur": el.MESSAGE_HORS_PROGRAMME})
 
 
 def cartes(entree):
