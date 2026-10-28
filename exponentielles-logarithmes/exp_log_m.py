@@ -750,6 +750,8 @@ def _analyse(g, d, x):
     pentes = [sg for lt in lignes.values() for _, _, _, sg in lt]
     if not pentes:
         raise _Hors
+    if len(pentes) + (1 if constantes["g"] != 0 or constantes["d"] != 0 else 0) < 3:
+        raise _Hors                                      # moins de trois termes : pas un trinôme en t, la méthode de la 3C (même base, logarithmes)
     pas = _pgcd_rationnels(pentes)
     if any((sg / pas).denominator != 1 for sg in pentes):
         raise _Hors

@@ -11,7 +11,7 @@ import exp_log_m as elm
 import resoudre_el as rel
 import resoudre_ed
 import sortie as so
-from cas_el import (BATTERIE_E4, BATTERIE_M, BATTERIE_M_VAR, IMBRIQUES_BASE_10, M_HORS_PROGRAMME, M_PAS_ENCORE, M_TOUT_L_ED, M_VAR_PAS_ENCORE,
+from cas_el import (BATTERIE_E4, BATTERIE_M, BATTERIE_M_DEUX_TERMES, BATTERIE_M_VAR, IMBRIQUES_BASE_10, M_HORS_PROGRAMME, M_PAS_ENCORE, M_TOUT_L_ED, M_VAR_PAS_ENCORE,
                     entrees_el, entrees_el_m)
 
 
@@ -157,6 +157,34 @@ def solutions_m(entree):
 
 def valeurs(r):
     return sorted(el.valeur(n) for n in r["solutions"])
+
+
+class TestMSuitLa3C(unittest.TestCase):
+    """La filière M résout tout ce que la 3C résout (seuls l'ensemble de définition et la vérification s'ajoutent) : un trinôme en t = aˣ demande au
+    moins trois termes, les équations à deux termes suivent la méthode de la 3C (Javet 2.2 b = Amaudruz 6.1 f, Amaudruz 6.1 a et e)."""
+
+    def test_deux_termes_sortie_identique_a_la_3c(self):
+        for entree, attendu in BATTERIE_M_DEUX_TERMES:
+            with self.subTest(entree=entree):
+                c = rel.resoudre(entree, "C")
+                self.assertTrue(c["ok"])
+                self.assertEqual(rel.resoudre(entree, "M"), c)
+                self.assertIsNone(elm.variantes_changement(*(lambda s: (s.g, s.d, s.inconnue))(el.analyser_saisie(entree))))
+                s = el.analyser_saisie(entree)
+                v = valeurs(el.corriger_equation(s.g, s.d, s.inconnue))
+                self.assertEqual(len(v), len(attendu))
+                for a, b in zip(v, sorted(attendu)):
+                    self.assertAlmostEqual(a, b, delta=1e-3 * (1 + abs(b)))
+
+    def test_tout_ce_que_la_3c_resout_la_m_le_resout(self):
+        """Les logarithmes imbriqués en base 10 sont la seule exception voulue (la 3C les résout sans ensemble de définition, M répond « pas encore »)."""
+        for entree in dict.fromkeys(entrees_el() + entrees_el_m()):
+            if entree in IMBRIQUES_BASE_10:
+                continue
+            c = rel.resoudre(entree, "C")
+            if c["ok"]:
+                with self.subTest(entree=entree):
+                    self.assertTrue(rel.resoudre(entree, "M")["ok"], rel.resoudre(entree, "M"))
 
 
 class TestBatterieM(unittest.TestCase):

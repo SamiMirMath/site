@@ -197,6 +197,13 @@ BATTERIE_M = [
     ("log(x^2)+log(5)=-1", [-0.141, 0.141]), ("2log(x)+log(3)=log(1/4)", [0.289]),
 ]
 
+# deux termes seulement : pas un trinôme en t = aˣ, la filière M suit la méthode de la 3C (même base ou logarithmes), sortie identique ;
+# Javet 2.2 b c, Amaudruz 6.1 a e g
+BATTERIE_M_DEUX_TERMES = [
+    ("(3^(x-1))^3=9*3^(x-2)", [1.5]), ("2^(x+6)=2^(3x+4)", [1.0]), ("2^x-16*2^(3x+2)=0", [-3.0]), ("4^(x+2)-8^x=0", [4.0]), ("27^(x+2)=3^(5x+8)", [-1.0]),
+    ("3^x=3*9^(x-1)", [1.0]), ("4^x=16^(2x+5)", [-10 / 3]), ("2^x+2^(x+1)=12", [2.0]),
+]
+
 # 2ᵉ degré en aˣ (filière M seulement) : (saisie, solutions arrondies à 10⁻³), les deux méthodes donnent le même S ; Amaudruz 6.1 c i j k l, 7.8 i
 BATTERIE_M_VAR = [
     ("3^x+9^x=90", [2.0]), ("4^x-2^x-6=0", [1.585]), ("e^(2x)-3e^x+2=0", [0.0, 0.693]), ("e^(4x)-29e^(2x)=-100", [0.693, 1.609]),
@@ -222,7 +229,7 @@ IMBRIQUES_BASE_10 = ["log(log(x))=1", "log(log(log(x)))=0", "log(log(x-1))=0"]
 def entrees_el_m():
     """Entrées de l'instantané de la filière M : les équations logarithmiques de la 3C (avec ensemble de définition en M) et BATTERIE_M."""
     return list(dict.fromkeys([s for s, _ in BATTERIE_E4] + [s for s, _ in BATTERIE_M] + M_TOUT_L_ED + M_PAS_ENCORE + M_HORS_PROGRAMME
-                                  + [s for s, _ in BATTERIE_M_VAR] + M_VAR_PAS_ENCORE))
+                                  + [s for s, _ in BATTERIE_M_VAR] + M_VAR_PAS_ENCORE + [s for s, _ in BATTERIE_M_DEUX_TERMES]))
 
 
 def entrees_el():
