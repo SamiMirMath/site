@@ -3,7 +3,7 @@
      init   : arg = {indexURL, fichiers: {nom: texte}, module, roues}  -> charge Pyodide, écrit les fichiers à plat, importe le module
      sympy  : charge SymPy (et mpmath) : les roues précompilées du site (arg.roues = {pyc, urls}, téléchargées pendant le chargement de
               Pyodide) si leur bytecode est celui de ce Python, sinon le paquet SymPy du CDN de Pyodide (plus lent : tout est compilé à l'import)
-     autre  : appelle <module>.<fn>_json(arg) et renvoie la chaîne JSON
+     autre  : appelle <module>.<fn>_json(arg) (ou <fn>_json(*arg) quand arg est un tableau) et renvoie la chaîne JSON
    La version de Pyodide n'est écrite nulle part ici : elle vient de moteur/manifeste.json (indexURL). */
 let py = null, module = null, roues = null, magique = null;
 
@@ -35,7 +35,8 @@ onmessage = async e => {
       return;
     }
     py.globals.set("arg_js", arg);
-    postMessage({ id, r: py.runPython(module + "." + fn + "_json(arg_js)") });
+    // un tableau est une liste d'arguments (resoudre(entree, filiere)) ; tout autre argument est passé tel quel
+    postMessage({ id, r: py.runPython(module + "." + fn + (Array.isArray(arg) ? "_json(*arg_js.to_py())" : "_json(arg_js)")) });
   } catch (err) {
     postMessage({ id, err: String(err) });
   }

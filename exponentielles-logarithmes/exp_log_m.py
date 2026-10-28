@@ -848,6 +848,29 @@ def variantes_changement(g, d, x):
 # =====================================================================
 # 5. CORRIGÉ D'UNE ÉQUATION LOGARITHMIQUE EN FILIÈRE M
 # =====================================================================
+def _nommer_racines(r):
+    """Deux racines irrationnelles (x = (1 − √41)/2 ou x = (1 + √41)/2) : x₁ et x₂ portent un nom, comme pour le discriminant en 3C, pour que la ligne
+    « S = {x₁ ; x₂}, soit x ≈ … » tienne à 360 px. Sans effet si la ligne « x = … ou x = … » n'est pas dans les cartes."""
+    sols = r["solutions"]
+    if not sols or len(sols) != 2 or any(_const(s) is not None or isinstance(s, Defini) for s in sols):
+        return r
+    noms = [Defini("x_{1}", sols[0]), Defini("x_{2}", sols[1])]
+    etapes, trouve = [], False
+    for c in r["etapes"]:
+        if c.get("lignes"):
+            nouvelles = []
+            for ligne in c["lignes"]:
+                if (isinstance(ligne, Chaine) and len(ligne.elements) == 1 and isinstance(ligne.elements[0], Ou)
+                        and [tex(e.d) for e in ligne.elements[0].eqs] == [tex(s) for s in sols]):
+                    nouvelles += [Chaine([Eq(n, n.arbre)]) for n in noms]
+                    trouve = True
+                else:
+                    nouvelles.append(ligne)
+            c = {**c, "lignes": nouvelles}
+        etapes.append(c)
+    return {**r, "etapes": etapes, "solutions": noms} if trouve else r
+
+
 def _carte_ed(ed, apres=()):
     """La carte « Ensemble de définition » ; `apres` : des phrases (Message) qui suivent l'ensemble."""
     return {"titre": "Ensemble de définition", "ed": ed, "apres": list(apres)}
@@ -870,6 +893,7 @@ def corriger_equation(g, d, x):
     r = logarithmique_m(g, d, x) or regrouper(g, d, x)
     if r is None:
         return None
+    r = _nommer_racines(r)
     etapes = [_carte_ed(ed)] + [dict(c) for c in r["etapes"]]
     if r["remarque"] and etapes[-1].get("lignes") is not None:
         etapes[-1]["lignes"] = list(etapes[-1]["lignes"]) + [Message(r["remarque"])]
@@ -879,6 +903,8 @@ def corriger_equation(g, d, x):
     elif r["solutions"]:
         retenues, lignes = verification(ed, r["solutions"], x)
         etapes.append(_carte("Vérification", lignes))
+        if len(retenues) == 1 and isinstance(retenues[0], Defini):         # une seule solution gardée : sa valeur exacte, pas son nom (S = {(1 + √41)/2})
+            retenues = [retenues[0].arbre]
     return {**r, **autres, "etapes": etapes, "solutions": retenues, "remarque": None, "ed": ed, "besoin_sympy": ed.besoin_sympy}
 
 

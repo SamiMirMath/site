@@ -10,11 +10,17 @@ import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "python"))
 from cas import CAS_LIMITES, entrees_page, entrees_factorisation  # noqa: E402
-from cas_el import entrees_el  # noqa: E402
+from cas_el import entrees_el, entrees_el_m  # noqa: E402
 
 DOSSIER_REFERENCES = os.path.join(os.path.dirname(__file__), "references")
 OUTILS = ["ensemble-definition", "derivee-variations", "limites-asymptotes", "etude-complete", "factorisation",
           "exponentielles-logarithmes"]
+OUTIL_M = "exponentielles-logarithmes-M"       # la même page, ouverte avec ?filiere=M (filière 2M, T35) : ses références sont à part
+
+
+def page_de(outil):
+    """(dossier de la page, requête) d'une entrée de références."""
+    return ("exponentielles-logarithmes", "?filiere=M") if outil == OUTIL_M else (outil, "")
 
 
 # Entrées de page ajoutées au corpus des moteurs : une saisie invalide par outil (la carte d'erreur est un rendu à part entière).
@@ -28,6 +34,7 @@ REDUIT = {
     "etude-complete": ["e^(1/x)", "x^2*e^(-x)", "ln("],
     "factorisation": ["x^2+5x-14", "(a + b)^2 - 7(a + b)", "sqrt(x)"],
     "exponentielles-logarithmes": ["2^(x-1)=3^x", "log(5-x)=8", "x*2^x=8"],
+    OUTIL_M: ["log(x)+log(x-1)=1", "4^x-2^x-6=0", "log(x-3)+log(1-x)=0"],
 }
 
 
@@ -36,6 +43,8 @@ def entrees(outil):
         liste = entrees_factorisation()
     elif outil == "exponentielles-logarithmes":
         liste = entrees_el()
+    elif outil == OUTIL_M:
+        liste = entrees_el_m()
     else:
         liste = entrees_page(outil) + CAS_LIMITES[outil]
     liste = liste + ERREURS.get(outil, [])
@@ -157,7 +166,8 @@ def capturer(page, entree):
 
 
 def capturer_outil(nav, outil, filtre=None):
-    page = nav.ouvrir(f"{outil}/index.html")
+    dossier, requete = page_de(outil)
+    page = nav.ouvrir(f"{dossier}/index.html{requete}")
     attendre_pret(page)
     res = {}
     for e in entrees(outil):

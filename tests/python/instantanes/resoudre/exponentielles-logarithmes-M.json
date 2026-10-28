@@ -478,7 +478,12 @@
       "type": "texte"
      },
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{1 - \\sqrt{41}}{2} \\text{ ou } x = \\frac{1 + \\sqrt{41}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = \\frac{1 - \\sqrt{41}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\frac{1 + \\sqrt{41}}{2}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -490,12 +495,12 @@
     "badge": "Vérification",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1 - \\sqrt{41}}{2} \\approx -2{,}702 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x) n'est pas défini : x &lt; 0)</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} \\approx -2{,}702 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x) n'est pas défini : x &lt; 0)</span></div></div>",
       "style": "etape",
       "type": "texte"
      },
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1 + \\sqrt{41}}{2} \\approx 3{,}702\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} \\approx 3{,}702\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -2080,7 +2085,12 @@
       "type": "texte"
      },
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{1 - \\sqrt{5}}{2} \\text{ ou } x = \\frac{1 + \\sqrt{5}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = \\frac{1 - \\sqrt{5}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\frac{1 + \\sqrt{5}}{2}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -2092,12 +2102,12 @@
     "badge": "Vérification",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1 - \\sqrt{5}}{2} \\approx -0{,}618 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x) n'est pas défini : x &lt; 0)</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} \\approx -0{,}618 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x) n'est pas défini : x &lt; 0)</span></div></div>",
       "style": "etape",
       "type": "texte"
      },
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1 + \\sqrt{5}}{2} \\approx 1{,}618\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} \\approx 1{,}618\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -5964,7 +5974,12 @@
       "type": "texte"
      },
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{1 - \\sqrt{5}}{2} \\text{ ou } x = \\frac{1 + \\sqrt{5}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = \\frac{1 - \\sqrt{5}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\frac{1 + \\sqrt{5}}{2}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -5976,12 +5991,12 @@
     "badge": "Vérification",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1 - \\sqrt{5}}{2} \\approx -0{,}618 \\notin ED\\)</span><span class=\"prop\">(rejetée : ln(x) n'est pas défini : x &lt; 0)</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} \\approx -0{,}618 \\notin ED\\)</span><span class=\"prop\">(rejetée : ln(x) n'est pas défini : x &lt; 0)</span></div></div>",
       "style": "etape",
       "type": "texte"
      },
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1 + \\sqrt{5}}{2} \\approx 1{,}618\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} \\approx 1{,}618\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -7449,7 +7464,12 @@
       "type": "texte"
      },
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{-3 - \\sqrt{409}}{2} \\text{ ou } x = \\frac{-3 + \\sqrt{409}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = \\frac{-3 - \\sqrt{409}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\frac{-3 + \\sqrt{409}}{2}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -7461,12 +7481,12 @@
     "badge": "Vérification",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{-3 - \\sqrt{409}}{2} \\approx -11{,}612 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x) n'est pas défini : x &lt; 0)</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} \\approx -11{,}612 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x) n'est pas défini : x &lt; 0)</span></div></div>",
       "style": "etape",
       "type": "texte"
      },
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{-3 + \\sqrt{409}}{2} \\approx 8{,}612\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} \\approx 8{,}612\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -7547,7 +7567,12 @@
       "type": "texte"
      },
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{1 - \\sqrt{401}}{2} \\text{ ou } x = \\frac{1 + \\sqrt{401}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = \\frac{1 - \\sqrt{401}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\frac{1 + \\sqrt{401}}{2}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -7559,12 +7584,12 @@
     "badge": "Vérification",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1 - \\sqrt{401}}{2} \\approx -9{,}512 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x) n'est pas défini : x &lt; 0)</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} \\approx -9{,}512 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x) n'est pas défini : x &lt; 0)</span></div></div>",
       "style": "etape",
       "type": "texte"
      },
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1 + \\sqrt{401}}{2} \\approx 10{,}512\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} \\approx 10{,}512\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -7645,7 +7670,12 @@
       "type": "texte"
      },
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{1 - \\sqrt{41}}{2} \\text{ ou } x = \\frac{1 + \\sqrt{41}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = \\frac{1 - \\sqrt{41}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\frac{1 + \\sqrt{41}}{2}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -7657,12 +7687,12 @@
     "badge": "Vérification",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1 - \\sqrt{41}}{2} \\approx -2{,}702 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x) n'est pas défini : x &lt; 0)</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} \\approx -2{,}702 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x) n'est pas défini : x &lt; 0)</span></div></div>",
       "style": "etape",
       "type": "texte"
      },
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1 + \\sqrt{41}}{2} \\approx 3{,}702\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} \\approx 3{,}702\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -8822,7 +8852,12 @@
       "type": "texte"
      },
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{-1 - \\sqrt{7}}{2} \\text{ ou } x = \\frac{-1 + \\sqrt{7}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = \\frac{-1 - \\sqrt{7}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\frac{-1 + \\sqrt{7}}{2}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -8834,12 +8869,12 @@
     "badge": "Vérification",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{-1 - \\sqrt{7}}{2} \\approx -1{,}823 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x + 1) n'est pas défini : x + 1 &lt; 0)</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} \\approx -1{,}823 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x + 1) n'est pas défini : x + 1 &lt; 0)</span></div></div>",
       "style": "etape",
       "type": "texte"
      },
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{-1 + \\sqrt{7}}{2} \\approx 0{,}823\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} \\approx 0{,}823\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -10208,7 +10243,12 @@
       "type": "texte"
      },
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{1 - \\sqrt{41}}{2} \\text{ ou } x = \\frac{1 + \\sqrt{41}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = \\frac{1 - \\sqrt{41}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\frac{1 + \\sqrt{41}}{2}\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -10220,12 +10260,12 @@
     "badge": "Vérification",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1 - \\sqrt{41}}{2} \\approx -2{,}702\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} \\approx -2{,}702\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
       "style": "etape",
       "type": "texte"
      },
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1 + \\sqrt{41}}{2} \\approx 3{,}702\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} \\approx 3{,}702\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -10236,7 +10276,7 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{\\frac{1 - \\sqrt{41}}{2} \\,;\\, \\frac{1 + \\sqrt{41}}{2}\\right\\} \\text{, soit } x \\approx -2{,}702 \\text{ ou } x \\approx 3{,}702",
+      "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -2{,}702 \\text{ ou } x \\approx 3{,}702",
       "type": "resultat"
      }
     ],

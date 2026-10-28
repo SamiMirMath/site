@@ -16,9 +16,9 @@ import unittest
 
 sys.path.insert(0, os.path.dirname(__file__))
 from navigateur import Navigateur
-from rendu import DOSSIER_REFERENCES, OUTILS, attendre_pret, capturer, entrees
+from rendu import DOSSIER_REFERENCES, OUTIL_M, OUTILS, attendre_pret, capturer, entrees, page_de
 
-CHOISIS = [o for o in os.environ.get("OUTILS", "").split(",") if o] or OUTILS
+CHOISIS = [o for o in os.environ.get("OUTILS", "").split(",") if o] or OUTILS + [OUTIL_M]
 
 
 class TestRendu(unittest.TestCase):
@@ -35,7 +35,8 @@ class TestRendu(unittest.TestCase):
             self.skipTest("hors de OUTILS")
         with open(os.path.join(DOSSIER_REFERENCES, outil + ".json"), encoding="utf-8") as f:
             reference = json.load(f)
-        page = self.nav.ouvrir(f"{outil}/index.html")
+        dossier, requete = page_de(outil)
+        page = self.nav.ouvrir(f"{dossier}/index.html{requete}")
         attendre_pret(page)
         if os.environ.get("CORPUS") != "reduit":
             self.assertEqual(sorted(reference), sorted(entrees(outil)),
@@ -61,6 +62,9 @@ class TestRendu(unittest.TestCase):
 
     def test_exponentielles_logarithmes(self):
         self.verifier_outil("exponentielles-logarithmes")
+
+    def test_exponentielles_logarithmes_filiere_m(self):
+        self.verifier_outil(OUTIL_M)
 
 
 if __name__ == "__main__":

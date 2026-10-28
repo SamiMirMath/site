@@ -250,10 +250,10 @@ class TestLignesM(unittest.TestCase):
                 continue
             with self.subTest(entree=entree):
                 s = el.analyser_saisie(entree)
-                retenues = [id(n) for n in r["solutions"]]
+                retenues = [el.valeur(n) for n in r["solutions"]]
                 for n in r["candidats"]:
                     dedans = ecart(s, MP.mpf(el.valeur(n))) is not None
-                    self.assertEqual(id(n) in retenues, dedans, (entree, el.tex(n)))
+                    self.assertEqual(any(abs(el.valeur(n) - v) < 1e-9 for v in retenues), dedans, (entree, el.tex(n)))
                     rejets += not dedans
         self.assertGreaterEqual(rejets, 10)
 

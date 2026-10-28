@@ -27,6 +27,13 @@
    visibles (toutes si toutes l'étaient). `cochee` est l'état de départ ; le choix de l'élève vaut pour l'équation affichée (mémoire de la page,
    gardé au changement de variante, oublié à la saisie suivante : le défaut dépend de l'équation). Une variante qui porte `option: false` n'a pas de case.
 
+   Filières : l'option `filieres` ({ liste: [{ cle, libelle, poids }], param, parAccueil, surFiliere }) ajoute au-dessus de la page deux boutons côte à côte
+   (3C / 2M, `#filiere`, `aria-pressed`, au clavier). La filière de départ est celle du paramètre d'URL `param` (« ?filiere=M »), sinon celle que l'accueil a
+   mémorisée (`samimir-track` : `parAccueil` = { Ms: "M", Mr: "M" }), sinon la première de la liste. Changer de filière met l'URL à jour (history.replaceState),
+   passe `[entrée, filière]` à `resoudre` et `[niveau, filière]` à `exercice`, tire les exercices avec les `poids` de la filière, recalcule l'équation affichée
+   et appelle `surFiliere(cle)` (la page montre ou cache ce qui est propre à une filière). Les `exemples` peuvent être un tableau ou { cle: tableau }.
+   Une ligne « Filière : … » n'apparaît qu'à l'impression. Sans l'option, rien ne change.
+
    Les textes d'interface (états, compteur d'étapes, messages de délai) sont écrits ici une seule fois.
    Les textes du corrigé viennent de `resoudre()` (Python) et sont rendus par commun/rendu.js.
    Test : `window.__delaiCalcul` (ms) remplace le délai de 30 s. */
@@ -43,7 +50,8 @@ export function monterOutil(config) {
 }
 
 function demarrerOutil(config) {
-  const { outil, prefixe = "f(x) = ", prefixeExo = prefixe, exercicePython = null, titrePdf, exemples = [], exos = {}, poids = [], sympyAvant = false, delaiCalcul = DELAI_CALCUL, greffons = [], apres } = config;
+  const { outil, prefixe = "f(x) = ", prefixeExo = prefixe, exercicePython = null, titrePdf, exemples = [], exos = {}, poids: poidsDeLaPage = [], sympyAvant = false, delaiCalcul = DELAI_CALCUL, greffons = [], apres, filieres = null } = config;
+  let filiere = null, poids = poidsDeLaPage;                               // filière affichée (null : l'outil n'en a pas) et poids de tirage des niveaux
   greffons.forEach(ajouterGreffon);
   const moteur = new MoteurPython(outil, { surEtat: () => majEtat() });
   const appelPy = (fn, arg, delai) => moteur.appelPy(fn, arg, delai);
@@ -109,7 +117,10 @@ function demarrerOutil(config) {
     } else { const t = b.dataset.t; inp.value = inp.value.slice(0, a) + t + inp.value.slice(z); inp.setSelectionRange(a + t.length, a + t.length); }
     apercu();
   });
-  $("exemples").innerHTML = '<span class="hint" style="align-self:center">Exemples :</span>' + exemples.map(s => `<button data-ex="${s}">${s}</button>`).join("");
+  function afficherExemples() {
+    const liste = Array.isArray(exemples) ? exemples : (exemples[filiere] || []);
+    $("exemples").innerHTML = '<span class="hint" style="align-self:center">Exemples :</span>' + liste.map(s => `<button data-ex="${s}">${s}</button>`).join("");
+  }
   $("exemples").addEventListener("click", e => {
     const b = e.target.closest("button");
     if (!b) return;
@@ -132,11 +143,12 @@ function demarrerOutil(config) {
     let r;
     try {
       if (attendSympy) { await moteur.sympyPret; $("etat").textContent = "Calcul en cours…"; }
-      r = await appelPy("resoudre", s, delai);
+      const arg = filiere ? [s, filiere] : s;
+      r = await appelPy("resoudre", arg, delai);
       if (r.besoin_sympy) {
         $("etat").textContent = "Chargement du moteur de calcul pour cette fonction…";
         await moteur.sympyPret;
-        if (moteur.sympyOK) r = await appelPy("resoudre", s, delai);
+        if (moteur.sympyOK) r = await appelPy("resoudre", arg, delai);
       }
     } catch (e) {
       if (e.message === "delai") { $("etat").textContent = "Calcul trop long : le calcul a été relancé."; moteur.relancer(); }
@@ -301,6 +313,7 @@ function demarrerOutil(config) {
     return poids.length ? poids[0][0] : null;
   }
   let exoCourant = null;
+  const exoVide = $("exoEnonce") ? $("exoEnonce").innerHTML : "";                // le texte d'attente de la carte « Exercice au hasard »
   async function nouvelExercice() {
     if (!moteur.worker) return;
     $("resultat").hidden = true;
@@ -313,7 +326,7 @@ function demarrerOutil(config) {
     try {
       let s;
       do {
-        if (exercicePython) s = (await appelPy(exercicePython, tirerNiveau(), 5000)).expr;
+        if (exercicePython) s = (await appelPy(exercicePython, filiere ? [tirerNiveau(), filiere] : tirerNiveau(), 5000)).expr;
         else { const pool = exos[tirerNiveau()]; s = pool[Math.floor(Math.random() * pool.length)]; }
       } while (s === exoCourant);
       exoCourant = s;
@@ -331,6 +344,66 @@ function demarrerOutil(config) {
     };
   }
 
+  /* ---------- filières (3C / 2M) ---------- */
+  function filiereDeDepart() {
+    const cles = filieres.liste.map(f => f.cle);
+    const demandee = new URLSearchParams(location.search).get(filieres.param || "filiere");
+    if (demandee && cles.includes(demandee)) return demandee;
+    try {
+      const accueil = localStorage.getItem("samimir-track");                       // C, Ms, Mr ou tous : choisie sur l'accueil
+      const cle = filieres.parAccueil && filieres.parAccueil[accueil];
+      if (cle && cles.includes(cle)) return cle;
+    } catch (e) { /* stockage absent ou refusé */ }
+    return filieres.liste[0].cle;
+  }
+  function reglerFiliere(cle, majUrl) {
+    const f = filieres.liste.find(x => x.cle === cle);
+    filiere = f.cle;
+    poids = f.poids || poidsDeLaPage;
+    document.querySelectorAll("#filiere button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.filiere === filiere)));
+    $("filiereImprimee").textContent = "Filière : " + f.libelle;
+    if (majUrl) {
+      try {
+        const u = new URL(location.href);
+        u.searchParams.set(filieres.param || "filiere", filiere);
+        history.replaceState(null, "", u);
+      } catch (e) { /* l'URL reste telle quelle */ }
+    }
+    afficherExemples();
+    if (filieres.surFiliere) filieres.surFiliere(filiere);
+  }
+  function monterFiliere() {
+    const barre = document.createElement("div");
+    barre.id = "filiere";
+    barre.className = "variantes no-print";
+    barre.setAttribute("role", "group");
+    barre.setAttribute("aria-label", "Filière");
+    for (const f of filieres.liste) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.dataset.filiere = f.cle;
+      b.textContent = f.libelle;
+      b.onclick = () => changerFiliere(f.cle);
+      barre.appendChild(b);
+    }
+    const colonne = document.querySelector(".narrow") || $("entree").closest(".card").parentNode;
+    colonne.insertBefore(barre, colonne.firstChild);
+    const imprimee = document.createElement("div");
+    imprimee.id = "filiereImprimee";
+    imprimee.className = "imprime-seulement";
+    $("resultat").insertBefore(imprimee, $("resultat").firstChild);
+    reglerFiliere(filiereDeDepart(), false);
+  }
+  function changerFiliere(cle) {
+    if (cle === filiere) return;
+    reglerFiliere(cle, true);
+    exoCourant = null;                                                           // l'exercice affiché vient du pool de l'autre filière
+    if ($("exoEnonce")) $("exoEnonce").innerHTML = exoVide;
+    if ($("exoCorrige")) $("exoCorrige").hidden = true;
+    if (sortie && entreeCourante && !$("calculer").disabled) calculer(entreeCourante);            // l'équation affichée est corrigée pour la nouvelle filière
+  }
+
+  if (filieres) monterFiliere(); else afficherExemples();
   document.querySelectorAll("details").forEach(math);
   demarrer();
 }

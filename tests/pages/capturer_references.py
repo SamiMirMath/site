@@ -10,7 +10,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 from navigateur import Navigateur
-from rendu import DOSSIER_REFERENCES, OUTILS, capturer_outil
+from rendu import DOSSIER_REFERENCES, OUTIL_M, OUTILS, capturer_outil
 
 
 def main(outils):
@@ -26,4 +26,4 @@ def main(outils):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:] or OUTILS)
+    main(sys.argv[1:] or OUTILS + [OUTIL_M])

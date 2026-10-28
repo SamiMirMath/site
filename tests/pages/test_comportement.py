@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from navigateur import Navigateur
 from rendu import DOSSIER_REFERENCES, JS_CAPTURE, OUTILS, attendre_pret
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "python"))
-from cas_el import entrees_el  # noqa: E402
+from cas_el import BATTERIE_M_VAR, entrees_el, entrees_el_m  # noqa: E402
 
 RACINE = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 CALCUL = {"ensemble-definition": "ln(x^2-4x)/(x-5)", "derivee-variations": "ln(x)/x", "limites-asymptotes": "(x^2-1)/(x-3)",
@@ -445,6 +445,180 @@ class TestComportement(unittest.TestCase):
                 page = self.ouvrir(outil)
                 self.calculer(page, CALCUL[outil])
                 self.assertFalse(page.evaluer("!!document.querySelector('#variantes') || !!document.querySelector('#methodeImprimee') || !!document.querySelector('#option')"))
+                self.assertFalse(page.evaluer("!!document.querySelector('#filiere') || !!document.querySelector('#filiereImprimee')"))          # T35 : pas de filière
+
+    # ---------- T35 : filière M (2Ms, 2Mr) de l'outil « Exponentielles et logarithmes » ----------
+    def filiere(self, page):
+        """La filière affichée par l'interrupteur (« C » ou « M »)."""
+        return page.evaluer("(document.querySelector('#filiere button[aria-pressed=true]') || {dataset: {}}).dataset.filiere")
+
+    def badges(self, page):
+        return page.evaluer("[...document.querySelectorAll('#cartes .card')].map(c => (c.querySelector('.badge') || c.querySelector('h3')).textContent)")
+
+    def test_t35_el_filiere_de_depart_url_accueil_puis_defaut(self):
+        """EL-33 : ?filiere=M gagne, sinon la filière mémorisée par l'accueil (Ms et Mr → M ; C, « tous » → C), sinon C ; une valeur inconnue est ignorée."""
+        if "exponentielles-logarithmes" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.ouvrir("exponentielles-logarithmes")
+        page.evaluer("try { localStorage.clear(); } catch (e) {}")
+        for stockage, requete, attendu in [(None, "", "C"), (None, "?filiere=M", "M"), (None, "?filiere=C", "C"), (None, "?filiere=Z", "C"),
+                                           ("Ms", "", "M"), ("Mr", "", "M"), ("C", "", "C"), ("tous", "", "C"), ("Ms", "?filiere=C", "C"), ("C", "?filiere=M", "M")]:
+            with self.subTest(stockage=stockage, requete=requete):
+                script = "try { localStorage.clear(); " + (f"localStorage.setItem('samimir-track', '{stockage}');" if stockage else "") + " } catch (e) {}"
+                page = self.nav.ouvrir(f"exponentielles-logarithmes/index.html{requete}", script_initial=script)
+                attendre_pret(page)
+                self.assertEqual(self.filiere(page), attendu)
+                self.assertEqual(page.evaluer("[...document.querySelectorAll('#filiere button')].map(b => b.textContent + ':' + b.getAttribute('aria-pressed'))"),
+                                 ["3C:" + str(attendu == "C").lower(), "2M:" + str(attendu == "M").lower()])
+                self.assertEqual(page.evaluer("document.querySelector('#rappelM').hidden"), attendu != "M")
+                self.assertEqual(page.evaluer("document.querySelector('#rappelC').hidden"), attendu == "M")
+
+    def test_t35_el_interrupteur_recalcule_met_l_url_a_jour_et_change_les_exemples(self):
+        if "exponentielles-logarithmes" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.nav.ouvrir("exponentielles-logarithmes/index.html?f=log(5-x)=8", script_initial="try { localStorage.clear(); } catch (e) {}")
+        attendre_pret(page)
+        page.attendre("document.querySelector('#cartes').children.length > 0 && !document.querySelector('#calculer').disabled", 120)
+        self.assertEqual(self.filiere(page), "C")
+        self.assertNotIn("Ensemble de définition", self.badges(page))                       # 3C : pas d'ensemble de définition
+        exemples_c = page.evaluer("[...document.querySelectorAll('#exemples button')].map(b => b.dataset.ex)")
+        page.evaluer("document.querySelector('#filiere button[data-filiere=M]').click()")
+        page.attendre("document.querySelector('#cartes .badge') && /Ensemble/.test(document.querySelector('#cartes .badge').textContent)", 60)
+        self.assertEqual(self.filiere(page), "M")
+        self.assertEqual(page.evaluer("document.querySelector('#entree').value"), "log(5-x)=8")          # le recalcul ne touche pas à la saisie
+        self.assertIn("filiere=M", page.evaluer("location.search"))
+        self.assertIn("f=log", page.evaluer("decodeURIComponent(location.search)"))             # les autres paramètres restent
+        self.assertEqual(self.badges(page)[0], "Ensemble de définition")
+        self.assertEqual(self.badges(page)[-1], "Solution")
+        exemples_m = page.evaluer("[...document.querySelectorAll('#exemples button')].map(b => b.dataset.ex)")
+        self.assertNotEqual(exemples_c, exemples_m)
+        self.assertIn("log(x)+log(x-1)=1", exemples_m)
+        self.assertEqual(page.evaluer("document.querySelector('#rappelM').hidden"), False)
+        page.evaluer("document.querySelector('#exemples button[data-ex=\"log(x)+log(x-1)=1\"]').click()")
+        page.attendre("document.querySelector('#cartes .card.final')", 60)
+        self.assertIn("Vérification", self.badges(page))
+        self.calculer(page, "log(5-x)=8")
+        page.evaluer("document.querySelector('#filiere button[data-filiere=C]').click()")        # retour en 3C : la même saisie, sans ensemble de définition
+        page.attendre("document.querySelector('#cartes .card.final') && !/Ensemble/.test(document.querySelector('#cartes').textContent)", 60)
+        self.assertEqual(self.filiere(page), "C")
+        self.assertIn("filiere=C", page.evaluer("location.search"))
+        # le calcul d'une nouvelle équation suit la filière choisie
+        self.calculer(page, "4^x-2^x-6=0")
+        self.assertTrue(page.evaluer("!!document.querySelector('#cartes .err')"))                # 3C : « ne se résout pas avec les méthodes du cours »
+        page.evaluer("document.querySelector('#filiere button[data-filiere=M]').click()")
+        page.attendre("document.querySelector('#cartes .card') && /Changement de variable/.test(document.querySelector('#cartes').textContent)", 60)
+        self.assertTrue(page.evaluer("!!document.querySelector('#variantes') && !document.querySelector('#variantes').hidden"))     # le sélecteur de méthode aussi
+        self.assertFalse(page.evaluer("!!document.querySelector('#option:not([hidden])')"))                                           # pas de case d'application
+
+    def test_t35_el_exercice_au_hasard_de_la_filiere_m(self):
+        """Le pool M : les six niveaux, chaque exercice se corrige en filière M (carte « Ensemble de définition » pour un logarithme) ; en changeant de
+        filière, l'exercice affiché (celui de l'autre pool) disparaît."""
+        if "exponentielles-logarithmes" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.ouvrir("exponentielles-logarithmes", "?filiere=M")
+        vus = set()
+        for _ in range(14):
+            page.evaluer("document.querySelector('#exoHasard').click()")
+            page.attendre("document.querySelector('#exoEnonce annotation')", 30)
+            enonce = page.evaluer("document.querySelector('#exoEnonce annotation').textContent")
+            self.assertTrue(enonce.startswith("Résoudre : "), enonce)
+            vus.add(enonce)
+            page.evaluer("document.querySelector('#exoCorrige').click()")
+            page.attendre("document.querySelector('#cartes .card.final')", 60)
+            self.assertFalse(page.evaluer("document.querySelector('#cartes .err')"), enonce)
+            self.assertEqual(page.evaluer("document.querySelector('#cartes .card.final h3').textContent"), "Solution")
+            texte = page.evaluer("document.querySelector('#cartes').textContent")
+            if "ln" in enonce or "log" in enonce:
+                self.assertIn("Ensemble de définition", texte, enonce)
+        self.assertGreater(len(vus), 6)
+        page.evaluer("document.querySelector('#filiere button[data-filiere=C]').click()")
+        self.assertEqual(page.evaluer("document.querySelector('#exoCorrige').hidden"), True)
+        self.assertIn("Cliquez sur", page.evaluer("document.querySelector('#exoEnonce').textContent"))
+
+    def test_t35_el_interrupteur_au_clavier_et_a_360_px(self):
+        """Les deux boutons se prennent au clavier (Entrée, Espace), restent côte à côte à 360 px et ne font pas défiler la page."""
+        if "exponentielles-logarithmes" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.ouvrir("exponentielles-logarithmes")
+        page.taille(360)
+        mesures = page.evaluer("""(() => { const r = [...document.querySelectorAll('#filiere button')].map(b => b.getBoundingClientRect());
+            return [r[0].top, r[1].top, r[0].width, r[1].width, r[1].right, document.documentElement.scrollWidth, window.innerWidth, r[0].height >= 36]; })()""")
+        self.assertEqual(mesures[0], mesures[1])
+        self.assertAlmostEqual(mesures[2], mesures[3], delta=1)
+        self.assertLessEqual(mesures[4], mesures[6])
+        self.assertLessEqual(mesures[5], mesures[6])
+        self.assertTrue(mesures[7])
+
+        def touche(key, code, vk):
+            for type_ in ("keyDown", "keyUp"):
+                params = dict(type=type_, key=key, code=code, windowsVirtualKeyCode=vk)
+                if type_ == "keyDown" and key == "Enter":
+                    params["text"] = "\r"
+                if type_ == "keyDown" and key == " ":
+                    params["text"] = " "
+                page.appel("Input.dispatchKeyEvent", **params)
+        page.evaluer("document.querySelector('#filiere button[data-filiere=M]').focus()")
+        self.assertNotEqual(page.evaluer("getComputedStyle(document.activeElement).outlineStyle"), "none")
+        touche("Enter", "Enter", 13)
+        page.attendre("document.querySelector('#filiere button[aria-pressed=true]').dataset.filiere === 'M'", 5)
+        page.evaluer("document.querySelector('#filiere button[data-filiere=C]').focus()")
+        touche(" ", "Space", 32)
+        page.attendre("document.querySelector('#filiere button[aria-pressed=true]').dataset.filiere === 'C'", 5)
+        page.taille(1100)
+
+    def test_t35_el_filiere_sans_localstorage(self):
+        if "exponentielles-logarithmes" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.nav.ouvrir("exponentielles-logarithmes/index.html", script_initial="""
+            for (const m of ['getItem', 'setItem', 'removeItem', 'clear']) Storage.prototype[m] = function () { throw new Error('refusé'); };""")
+        attendre_pret(page)
+        self.assertEqual(self.filiere(page), "C")
+        page.evaluer("document.querySelector('#filiere button[data-filiere=M]').click()")
+        self.calculer(page, "log(x)+log(x-1)=1")
+        self.assertEqual(self.badges(page)[0], "Ensemble de définition")
+
+    def test_t35_el_filiere_a_l_impression(self):
+        """L'impression montre la filière : l'interrupteur disparaît, la ligne « Filière : 2M » apparaît."""
+        if "exponentielles-logarithmes" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.ouvrir("exponentielles-logarithmes", "?filiere=M")
+        self.calculer(page, "log(x)+log(x-1)=1")
+        affichage = lambda: page.evaluer("""[getComputedStyle(document.querySelector('#filiere')).display,
+            getComputedStyle(document.querySelector('#filiereImprimee')).display, document.querySelector('#filiereImprimee').textContent]""")
+        self.assertEqual(affichage()[:2], ["flex", "none"])
+        page.taille(1100, imprimante=True)
+        self.assertEqual(affichage(), ["none", "block", "Filière : 2M"])
+        page.taille(1100)
+        page.evaluer("document.querySelector('#filiere button[data-filiere=C]').click()")
+        page.taille(1100, imprimante=True)
+        self.assertEqual(affichage()[2], "Filière : 3C")
+        page.taille(1100)
+
+    def test_t35_el_filiere_m_une_etape_par_ligne_sans_defilement_a_360_px(self):
+        """Toutes les entrées M (ensemble de définition avec tableaux de signes, vérification, changement de variable) tiennent à 360 px, dans chaque méthode."""
+        if "exponentielles-logarithmes" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.ouvrir("exponentielles-logarithmes", "?filiere=M")
+        page.taille(360)
+        entrees = [e for e in entrees_el_m() if e.strip()] + [e for e, _ in BATTERIE_M_VAR]
+        for e in dict.fromkeys(entrees):
+            with self.subTest(entree=e):
+                self.calculer(page, e)
+                for cle in page.evaluer("[...document.querySelectorAll('#variantes:not([hidden]) button')].map(b => b.dataset.variante)") or [None]:
+                    if cle:
+                        page.evaluer(f"document.querySelector('#variantes button[data-variante=\"{cle}\"]').click()")
+                    page.evaluer("document.querySelector('#tout') && !document.querySelector('#tout').disabled && document.querySelector('#tout').click()")
+                    debordements = page.evaluer("""(() => {
+                        const trop = [...document.querySelectorAll('#cartes *')].filter(n => n.scrollWidth > n.clientWidth + 1 && n.clientWidth > 0
+                            && !n.closest('.katex') && !n.closest('.tsigne') && getComputedStyle(n).display !== 'inline')
+                            .map(n => n.className + ' ' + n.scrollWidth + '>' + n.clientWidth);
+                        return [document.documentElement.scrollWidth, window.innerWidth, trop.slice(0, 5)];
+                    })()""")                                                  # un tableau de signes défile dans son cadre (.tsigne), comme sur la page de l'ED
+                    self.assertLessEqual(debordements[0], debordements[1], (e, cle, debordements))
+                    self.assertEqual(debordements[2], [], (e, cle, debordements))
+                if page.evaluer("!!document.querySelector('#variantes:not([hidden])')"):
+                    page.evaluer("document.querySelector('#variantes button[data-variante=\"logarithmes\"]').click()")
+        page.taille(1100)
 
     def test_t31_libelle_pendant_le_chargement_de_sympy(self):
         """Pages à `sympyAvant` : un calcul lancé avant « Prêt. » affiche « Chargement du moteur de calcul pour cette fonction… »
