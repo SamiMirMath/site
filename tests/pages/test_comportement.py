@@ -414,6 +414,28 @@ class TestComportement(unittest.TestCase):
         self.assertEqual(affichage(), ["none", ["Étape 1", "Étape 2", "Étape 3", "Solution"]])
         page.taille(1100)
 
+    def test_t33_el_case_dans_l_exercice_au_hasard(self):
+        """Un exercice au hasard avec paramètre ou inconnue n a la case pré-cochée : le corrigé se termine par « Interprétation »."""
+        if "exponentielles-logarithmes" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.ouvrir("exponentielles-logarithmes")
+        vus = 0
+        for _ in range(40):
+            page.evaluer("document.querySelector('#exoHasard').click()")
+            page.attendre("document.querySelector('#exoEnonce annotation')", 30)
+            enonce = page.evaluer("document.querySelector('#exoEnonce annotation').textContent")
+            if "^{n}" not in enonce:
+                continue
+            page.evaluer("document.querySelector('#exoCorrige').click()")
+            page.attendre("document.querySelector('#cartes .card.final')", 60)
+            page.evaluer("document.querySelector('#tout').click()")
+            self.assertTrue(page.evaluer("document.querySelector('#option input').checked"), enonce)
+            self.assertEqual(self.titres(page)[-1], "Interprétation", enonce)
+            vus += 1
+            if vus == 3:
+                break
+        self.assertGreaterEqual(vus, 1)
+
     def test_t33_selecteur_absent_des_autres_outils(self):
         """Le sélecteur ne change pas les autres outils : aucun #variantes ni #methodeImprimee dans leur page après un calcul."""
         for outil in OUTILS:

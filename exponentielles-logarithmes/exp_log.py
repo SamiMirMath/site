@@ -3389,11 +3389,56 @@ def _gabarit_moyen(rng):
     return f"log({rng.randint(2, 4)}x+{rng.randint(1, 5)})={c}"
 
 
+TAUX_CAPITAL = [0.5, 1, 1.5, 2, 2.25, 2.5, 3, 3.5, 3.75, 4, 4.5, 5, 6, 7, 8]          # capitalisation : de 0,5 % à 8 %
+TAUX_DEPRECIATION = [5, 6, 8, 10, 12, 12.5, 15, 18, 20, 25]                          # dépréciation : de 5 % à 25 %
+PARAMETRES = ["C", "Q", "C0", "V0", "C_0", "V_0"]
+
+
+def _virgule(v):
+    """5 → « 5 », 3.75 → « 3,75 »."""
+    return f"{v:g}".replace(".", ",")
+
+
+def _base_application(rng, t, signe):
+    """La base 1 ± t/100 écrite d'une des quatre façons de l'énoncé : (1+3,75/100), (1+3,75%), (1+0,0375), ou le décimal 1,0375 déjà calculé."""
+    d = decimal.Decimal(str(t)) / 100
+    produit = decimal.Decimal(1) + signe * d
+    ecriture = rng.choice(["fraction", "pourcent", "decimal", "calculee"])
+    if ecriture == "fraction":
+        return f"(1{'+' if signe > 0 else '-'}{_virgule(t)}/100)"
+    if ecriture == "pourcent":
+        return f"(1{'+' if signe > 0 else '-'}{_virgule(t)}%)"
+    if ecriture == "decimal":
+        return f"(1{'+' if signe > 0 else '-'}{format(d.normalize(), 'f').replace('.', ',')})"
+    return format(produit.normalize(), "f").replace(".", ",")
+
+
+def _gabarit_application(rng):
+    """Capitalisation et dépréciation, inconnue n : f·C = C·(1 + t/100)^n (f = 2 ou 3), C/2 ou C/4 = C·(1 − t/100)^n, ou sans paramètre
+    A·(1 + t/100)^n = B (A = 1000 à 5000, B = 1,2 à 3 fois A)."""
+    forme = rng.choice(["croissance", "croissance", "depreciation", "depreciation", "sans_parametre"])
+    p = rng.choice(PARAMETRES)
+    if forme == "sans_parametre":
+        a = rng.choice([1000, 1500, 2000, 5000])
+        b = round(a * rng.choice([1.2, 1.4, 1.5, 1.6, 1.8, 2, 2.5, 3]))
+        return f"{a}*{_base_application(rng, rng.choice(TAUX_CAPITAL), 1)}^n={b}"
+    if forme == "croissance":
+        facteur = rng.choice([2, 3])
+        membre = f"{p}*{_base_application(rng, rng.choice(TAUX_CAPITAL), 1)}^n"
+        autre = f"{facteur}{p}"
+    else:
+        membre = f"{p}*{_base_application(rng, rng.choice(TAUX_DEPRECIATION), -1)}^n"
+        autre = f"{p}/{rng.choice([2, 4])}"
+    return f"{autre}={membre}" if rng.random() < 0.7 else f"{membre}={autre}"
+
+
 def _gabarit_logarithme(rng):
     tirage = rng.random()
     if tirage < 0.10:                                             # second membre négatif : S = ∅
         return f"{rng.choice([2, 3, 5, 7])}^({_lineaire_texte(rng.randint(1, 8), 0)})=-{rng.randint(3, 60)}"
-    if tirage < 0.40:                                             # k * e^(cx) = b
+    if tirage < 0.40:                                             # problème d'application (30 %)
+        return _gabarit_application(rng)
+    if tirage < 0.55:                                             # k * e^(cx) = b
         k = rng.choice([2, 3, 5, 10, 20, 37, 50])
         c = rng.choice(["0,02", "0,05", "0,1", "0,5", "-0,02", "-0,05", "-0,1", "-0,5"])
         b = rng.choice([v for v in range(3, 100) if v != k])
@@ -3401,7 +3446,7 @@ def _gabarit_logarithme(rng):
     a = rng.choice([2, 3, 4, 5, 6, 7])
     b = rng.choice([v for v in range(5, 100) if not _puissance_de_la_racine(v, a)])
     p, q = rng.randint(1, 3), rng.randint(-3, 3)
-    if tirage < 0.70:                                             # a^(px+q) = b
+    if tirage < 0.75:                                             # a^(px+q) = b
         return f"{_expo_texte(a, p, q)}={b}"
     if tirage < 0.90:                                             # k * a^(px+q) = b, avec b/k qui n'est pas une puissance de a
         k = rng.choice([2, 3, 4, 5])
