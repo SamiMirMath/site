@@ -23,7 +23,7 @@ import queue
 import urllib.parse
 import urllib.request
 
-from websockets.sync.client import connect
+from websockets.sync.client import connect as _connect
 
 import pyodide_local
 
@@ -41,6 +41,15 @@ def trouver_chrome():
         if not os.path.isabs(c) and shutil.which(c):
             return shutil.which(c)
     raise RuntimeError("Chrome introuvable (Google Chrome ou chromium requis)")
+
+
+def connect(url, **options):
+    """Connexion WebSocket synchrone. Les versions récentes de `websockets` renvoient un objet à utiliser comme gestionnaire de contexte
+    (DeprecationWarning si on l'utilise directement) : on l'ouvre ici, et `close()` du résultat ferme la connexion."""
+    contexte = _connect(url, **options)
+    connexion = contexte.__enter__()
+    connexion._contexte = contexte                 # garder le gestionnaire en vie : le ramasse-miettes fermerait la connexion
+    return connexion
 
 
 class _Silencieux(http.server.SimpleHTTPRequestHandler):
@@ -237,7 +246,8 @@ class Navigateur:
         url = None
         for _ in range(100):
             try:
-                url = json.load(urllib.request.urlopen(f"http://127.0.0.1:{self.port_cdp}/json/version", timeout=2))["webSocketDebuggerUrl"]
+                with urllib.request.urlopen(f"http://127.0.0.1:{self.port_cdp}/json/version", timeout=2) as reponse:
+                    url = json.load(reponse)["webSocketDebuggerUrl"]
                 break
             except Exception:
                 time.sleep(0.2)
@@ -261,9 +271,10 @@ class Navigateur:
                     raise ErreurPage(m["error"])
                 return m["result"]
 
-    def ouvrir(self, chemin, script_initial=None):
+    def ouvrir(self, chemin, script_initial=None, conserver_stockage=False):
         """Ouvre `chemin` (relatif à la racine du site) dans un nouvel onglet ; renvoie la Page.
-        `script_initial` : JavaScript exécuté dans la page avant tout autre script (banc du graphique)."""
+        `script_initial` : JavaScript exécuté dans la page avant tout autre script (banc du graphique).
+        `conserver_stockage` : ne pas vider le localStorage (test qui rouvre une page pour vérifier qu'un choix est gardé)."""
         # un seul onglet à la fois : chaque page lance un worker Pyodide (plusieurs dizaines de Mo), les laisser
         # s'accumuler fait dépasser les délais de chargement
         for ancien in getattr(self, "_cibles", []):
@@ -278,6 +289,10 @@ class Navigateur:
         page = Page(self.ws, session)
         page.appel("Page.enable")
         page.appel("Runtime.enable")
+        # chaque page part d'un état propre : le navigateur et le serveur sont les mêmes pour tous les tests, donc le localStorage aussi
+        # (test_acc04 mémorise une filière sur l'accueil, que la page « Exponentielles et logarithmes » reprend ensuite)
+        if not conserver_stockage:
+            page.appel("Storage.clearDataForOrigin", origin=f"http://127.0.0.1:{self.port_http}", storageTypes="local_storage,session_storage")
         if script_initial:
             page.appel("Page.addScriptToEvaluateOnNewDocument", source=script_initial)
         page.appel("Page.navigate", url=f"http://127.0.0.1:{self.port_http}/{chemin}")
@@ -294,4 +309,5 @@ class Navigateur:
             except subprocess.TimeoutExpired:
                 self.proc.kill()
             self.serveur.shutdown()
+            self.serveur.server_close()
             shutil.rmtree(self.profil, ignore_errors=True)

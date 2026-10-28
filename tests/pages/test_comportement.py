@@ -44,10 +44,10 @@ class TestComportement(unittest.TestCase):
     def tearDownClass(cls):
         cls.nav.__exit__(None, None, None)
 
-    def ouvrir(self, outil, requete=""):
+    def ouvrir(self, outil, requete="", conserver_stockage=False):
         if outil not in CHOISIS:
             self.skipTest("hors de OUTILS")
-        page = self.nav.ouvrir(f"{outil}/index.html{requete}")
+        page = self.nav.ouvrir(f"{outil}/index.html{requete}", conserver_stockage=conserver_stockage)
         attendre_pret(page)
         return page
 
@@ -216,7 +216,7 @@ class TestComportement(unittest.TestCase):
         self.assertFalse(page.evaluer("document.querySelector('#variantes').hidden"))
         # le choix est gardé après un rechargement (localStorage)
         self.assertEqual(page.evaluer("localStorage.getItem('variante:exponentielles-logarithmes')"), "meme_base")
-        page = self.ouvrir("exponentielles-logarithmes")
+        page = self.ouvrir("exponentielles-logarithmes", conserver_stockage=True)
         self.calculer(page, "2^(x-1)=32")
         self.assertEqual(page.evaluer("document.querySelector('#variantes button[aria-pressed=true]').textContent"), "Même base / définition")
         page.evaluer("document.querySelector('#variantes button[data-variante=\"logarithmes\"]').click()")
