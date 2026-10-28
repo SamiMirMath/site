@@ -9,8 +9,8 @@ exercices 2.1 à 2.27), qui fait foi pour la rédaction.
 
 ## Périmètre
 
-**Cette version : 3C seulement**, pour le test sur le chapitre 2. Le moteur est écrit pour servir aussi les 2M (voir la fin), mais
-rien de 2M n'est codé ici : ni ensemble de définition, ni équations à plusieurs logarithmes, ni inéquations, ni pool M.
+**Les sections ci-dessous décrivent la 3C** (test sur le chapitre 2). La **filière M (2Ms, 2Mr)** est décrite à la fin (section « Filière M », T35, 28.10.2026) :
+ensemble de définition, plusieurs logarithmes, changement de variable, pool M. Les inéquations restent hors de l'outil.
 
 | Id | Type | Exercices du polycopié | Priorité |
 |---|---|---|---|
@@ -157,7 +157,7 @@ est gardée **telle que la donne la chaîne** : `ln(25/37)/(−0,02)` n'est pas 
   « seule la solution positive convient ».
 
 **log(x²)** : s'il apparaît (log(x²) = 2), l'équation se résout par la **définition** (x² = 10², x = 10 ou x = −10, vérification x² > 0) ;
-on n'écrit jamais 2 log|x|, et 2 log(x) ne s'écrit que quand x > 0 est justifié (2M, plus tard).
+on n'écrit jamais 2 log|x|, et 2 log(x) ne s'écrit jamais non plus, même en filière M (on regroupe, on ne développe pas : section « Filière M »).
 
 **Sens d'une inégalité** : aucune inégalité à résoudre en 3C (pas d'inéquation). Les seules inégalités sont les vérifications d'argument
 (« > 0 ») et l'encadrement C3, justifié par « log est croissante » (corrigé 2.16).
@@ -363,8 +363,54 @@ un commit par groupe ; les entrées sont dans `BATTERIE_AUDIT` (`tests/python/ca
    Une seule base des deux côtés (`2^x + 2^(x+1) = 2^(x+2)`) : tout à gauche, égal à 0, puis la mise en évidence du point 14. Pas de carte de regroupement quand les termes sont déjà regroupés.
    Deux bases **et** une constante additive (`2^x + 3^x = 5`, `2^x − 3^(x+1) = 3^x + 1`) : hors programme. La base e avec des exposants décalés dans un même groupe (`e^x + e^(x+1) = 2^x`) : hors programme.
 
-## Pour les 2M (plus tard, hors de cette version)
+## Filière M (2Ms, 2Mr) — décision du 28.10.2026 (T35)
 
-Même moteur, paramètre interne `filiere="M"` : carte « Ensemble de définition » **avant** de résoudre (cartes de condition de l'outil ED,
-`analyser_complet` de `moteur/noyau.py`), puis vérification contre l'ED ; équations à plusieurs logarithmes (ln(u) + ln(v) = c) ; log(x²) = 2 log(x)
-écrit avec « x > 0 » ; inéquations avec le sens justifié (croissance de ln et de exp ; base entre 0 et 1) ; pool d'exercices M séparé.
+Même moteur, paramètre **`filiere`** (`"C"` par défaut, `"M"`) de `resoudre(entree, filiere)` et `exercice(niveau, graine, filiere)` ; module `exponentielles-logarithmes/exp_log_m.py` (importe les briques de `exp_log.py`, qui n'est modifié que par des ajouts neutres).
+**Les sorties C sont strictement identiques** (instantané `exponentielles-logarithmes.json` inchangé, `resoudre(e) == resoudre(e, "C")` sur tout le corpus). Références : polycopié Javet 2M (chap. 3 : ex. 3.3, 3.5, 3.11, 3.12, 3.15 ; solutions p. VIII-IX), brochure Amaudruz 2M (ex. 6.1, 7.4, 7.7 à 7.9).
+
+**Choix de la filière sur la page** : `?filiere=M` (cartes 2Ms et 2Mr de l'accueil, champ `parametres` du registre) d'abord, sinon la filière mémorisée par l'accueil (`samimir-track` : Ms et Mr → M, C ou « tous » → C), sinon C ; un **interrupteur visible « 3C / 2M »** (style du sélecteur de méthode, `aria-pressed`, au clavier) change la filière, met `?filiere=` à jour (`history.replaceState`) et recalcule la saisie affichée ; pas de `localStorage` propre ; à l'impression, la ligne « Filière : 2M ».
+Le worker accepte un tableau d'arguments (`fn_json(*arg)`) : `[entree, filiere]`, `[niveau, filiere]`.
+
+**1. Équation logarithmique : l'ensemble de définition d'abord.** Une seule carte « Étape 1 · Ensemble de définition » : une sous-section par condition (cartes de l'outil Ensemble de définition, `blocs_condition` de `resoudre_ed.py` : « Condition k (logarithme) », lignes, tableau de signes), puis `ED = E₁ ∩ E₂ = …` (`blocs_ensemble`). L'ED se calcule sur **l'équation de départ** : l'arbre EL est traduit en saisie ED (`log`, `log_a` → `ln(…)` : la condition u > 0 ne dépend pas de la base ; logarithme d'une constante omis).
+Base inconnue : la condition « x > 0 et x ≠ 1 » (une base de logarithme est strictement positive et différente de 1) entre dans la même carte. Logarithme imbriqué de base 10 ou a : la condition log_b(v) > 0 ⇔ v > 1 est écrite par l'outil. ED vide : « L'ensemble de définition est vide : l'équation n'a aucune solution. », S = ∅, rien d'autre.
+
+**2. On regroupe toujours, on ne développe jamais** (méthode du cours). Membres = Σ cᵢ·log_b(uᵢ) + une constante, **même base b** (bases mélangées : « pas encore ») :
+`k·log(u) = log(u^k)`, `log(u) + log(v) = log(uv)`, `log(u) − log(v) = log(u/v)`, `c = log(10^c)` (ln : `c = ln(e^c)`, log_a : `c = log_a(a^c)`), chacune notée **« sur l'ED »** dans sa propriété ; puis
+`log(A) = log(B) ⇔ A = B` (sur l'ED), ou, quand un membre n'a aucun logarithme, l'exponentielle des deux membres de la 3C (`log(A) = c ⇔ A = 10^c`). Une constante et des logarithmes des deux côtés : `log(5+x) = log(4−x) + 1 ⇔ log(5+x) = log(4−x) + log(10) ⇔ log(5+x) = log(10(4−x)) ⇔ 5 + x = 10(4 − x)`.
+**`log(x²)` n'est jamais réécrit** (ni 2 log x, ni 2 log|x| : notion non vue en cours) : `log(x²) + log(3) = 10 ⇔ log(3x²) = 10 ⇔ 3x² = 10¹⁰ ⇔ x = −√(10¹⁰/3) ou x = √(10¹⁰/3)`. Le regroupement élargit l'ensemble de définition, d'où la carte suivante.
+Résolution de A = B : multiplier par un dénominateur (« ≠ 0 sur l'ED »), développer, réduire ; degré ≤ 2 (Δ, x₁ et x₂ nommés comme en 3C), `xⁿ = c` (racine, ±√), identité → S = ED, contradiction → ∅ ; le reste « pas encore ».
+
+**3. Carte « Vérification »** (après la résolution) : chaque solution est confrontée à l'ED, **une ligne par solution** : `x₂ = (1 + √41)/2 ≈ 3,702 ∈ ED ✓` ou `x₁ = (1 − √41)/2 ≈ −2,702 ∉ ED : rejetée` suivie de la raison (la première condition violée : `x − 1 < 0 : log(x − 1) n'est pas défini`). L'appartenance est décidée **exactement** (rationnel exact ; sinon signe à 60 chiffres avec marge, puis SymPy près de 0), jamais par un arrondi. La carte « Solution » ne garde que les solutions retenues ; toutes rejetées → S = ∅ avec la phrase « Aucune solution de l'équation n'est dans l'ensemble de définition. ».
+Remplace, en M, la carte « Condition » de la base inconnue et l'ancienne « Vérification » de la 3C.
+
+**4. Changement de variable (2ᵉ degré en aˣ), M seulement** : `a^(2f) + p·a^f + q = 0` et ses écritures (4ˣ = (2ˣ)², 9ˣ = (3ˣ)², e^(2x) = (eˣ)², a^(x+1) = a·aˣ, a^(−x) = 1/aˣ en multipliant par aˣ, constantes des deux côtés, t = e^(2x) quand e^(4x) apparaît). Carte « Changement de variable » **commune aux deux méthodes** : `t = aˣ`, `t > 0` (une exponentielle est strictement positive), le trinôme en t (Δ, t₁, t₂), les racines t ≤ 0 rejetées avec leur raison ; puis une carte par retour `aˣ = tₖ` dans la méthode choisie (A ou B), enfin « Solution ». En C, ces équations gardent le message « Cette équation ne se résout pas avec les méthodes du cours. ».
+Reste « pas encore » en M (au programme mais hors de l'outil) : exposant √x ou 1/x, `x·ln(x) = 0`, `(ln x)²`, inéquations, systèmes (Javet 3.13), base polynomiale (`log_(x+1)`), `e^(−ln x)`.
+
+**5. Pool M** (`exercice(niveau, graine, "M")`, racines construites à l'envers, entières ou rationnelles simples, Δ carré) : niveaux **exponentielle** 25 % (tirages du pool C), **définition** 15 % (`log_a(u) = c` avec ED), **sommes** 20 % (`log(u) ± log(v) = c`, souvent une solution rejetée), **log = log** 15 % (`k·log(u) = log(v)`, `log(u) = log(v) + c`, logarithmes numériques façon Javet 3.11), **changement de variable** 15 % (une racine en t négative ou deux positives), **difficile** 10 % (ED vide, toutes rejetées, ln et log_a, trois logarithmes façon 3.12 g). Énoncé « Résoudre : … ».
+
+**Registre** : `filieres {"2": ["Ms", "Mr"], "3": ["C"]}`, `parametres {"Ms": "?filiere=M", "Mr": "?filiere=M"}`, `descriptions` : « Équations exponentielles et logarithmiques avec ensemble de définition, étape par étape. » pour Ms et Mr (ACC-01).
+
+**Exemples de rédaction M** (valeurs vérifiées avec mpmath le 28.10.2026)
+
+**M1. `log(x) + log(x − 1) = 1`** : ED x > 1 (x > 0 et x − 1 > 0). `log(x) + log(x − 1) = 1 ⇔ log(x(x − 1)) = 1` (log a + log b = log(ab), sur l'ED) `⇔ 10^(log(x(x−1))) = 10¹` (exponentielle des deux membres) `⇔ x(x − 1) = 10` (10^(log(A)) = A, A > 0) `⇔ x² − x − 10 = 0` ; Δ = 41, x₁ = (1 − √41)/2 ≈ −2,702 ∉ ED : rejetée ; x₂ = (1 + √41)/2 ≈ 3,702 ∈ ED ✓. S = {(1 + √41)/2}.
+**M2. `log(x + 1) + log(2x) = log(3)`** : ED x > 0. `⇔ log((x + 1)·2x) = log(3) ⇔ (x + 1)·2x = 3` (log A = log B ⇔ A = B, sur l'ED) `⇔ 2x² + 2x − 3 = 0` ; x₁ ≈ −1,823 ∉ ED : rejetée ; x₂ ≈ 0,823 ∈ ED ✓.
+**M3. `log(5 + x) = log(4 − x) + 1`** : ED ]−5 ; 4[. `1 = log(10)`, `log(4 − x) + log(10) = log(10(4 − x))` (log a + log b = log(ab)), `5 + x = 10(4 − x) ⇔ x = 35/11 ≈ 3,182` ∈ ED ✓.
+**M4. `log(x²) + log(3) = 10`** : ED x ≠ 0. `log(3x²) = 10 ⇔ 3x² = 10¹⁰ ⇔ x = −√(10¹⁰/3) ou x = √(10¹⁰/3)`, les deux ∈ ED ✓.
+**M5. `3 log(x) = 2 log(8)`** (Javet 3.11 a) : ED x > 0. `log(x³) = log(8²) = log(64) ⇔ x³ = 64 ⇔ x = 4` ✓.
+**M6. `log₂(3x − 4) + log₂(10x − 4) = 2 log₂(5x − 2)`** : ED x > 4/3. `5x² − 32x + 12 = 0` ; x = 2/5 ∉ ED : rejetée ; x = 6 ✓.
+**M7. `log(x − 3) + log(1 − x) = 0`** : ED = ∅, S = ∅.
+**M8. `3ˣ + 9ˣ = 90`** : `t = 3ˣ > 0`, `t² + t − 90 = 0`, t = −10 rejetée (une exponentielle est strictement positive), t = 9 ⇔ 3ˣ = 9 ⇔ x = 2. **`e^(4x) − 29e^(2x) = −100`** : `t = e^(2x)`, `t² − 29t + 100 = 0`, t = 4 ou t = 25, x = ln(4)/2 ≈ 0,693 ou x = ln(25)/2 ≈ 1,609.
+
+## Critères d'acceptation de la filière M
+
+| Id | Critère | Vérif. |
+|---|---|---|
+| EL-26 | **C inchangé** : `resoudre(e) == resoudre(e, "C")` pour tout le corpus, instantanés C (`exponentielles-logarithmes.json`) et ED inchangés ; filière inconnue → message en français | [auto-py] |
+| EL-27 | **ED d'abord** : toute équation logarithmique en M commence par la carte « Ensemble de définition » (cartes de l'outil ED), avant toute transformation ; ED = celui de l'outil ED pour l'équation de départ (comparaison avec `analyser_complet` sur le corpus) ; ED vide → S = ∅ immédiat | [auto-py] |
+| EL-28 | **Vérification** : une ligne par solution, appartenance décidée exactement ; toute solution rejetée est hors de l'ED (oracle mpmath), toute retenue est dans l'ED et vérifie l'équation de départ (écart < 10⁻⁹) ; la raison de chaque rejet est une condition de l'ED réellement violée | [auto-py] |
+| EL-29 | **Regroupement** : jamais de log(u) développé (pas de « 2 log », pas de « log|x| » dans une sortie M) ; chaque ligne porte une propriété de la liste fermée avec « sur l'ED » ; log(x²) reste log(x²) ; log(A) = log(B) ⇔ A = B seulement après regroupement en un seul logarithme par membre | [auto-py] |
+| EL-30 | **Aucune racine perdue** : pour tout le corpus M, les racines de l'équation de départ trouvées numériquement et indépendamment (balayage de chaque intervalle de l'ED, mpmath) sont exactement S | [auto-py] |
+| EL-31 | **Changement de variable** : t = aˣ, t > 0, t ≤ 0 rejetée avec sa raison, retour dans la méthode choisie ; mêmes S dans les deux méthodes (oracle mpmath) ; en C, les mêmes équations donnent le message hors programme | [auto-py] |
+| EL-32 | **Pool M** : déterministe, niveaux et poids du plan, le moteur résout (oracle) pour 500 graines par niveau, aucun discriminant non carré, au moins une solution rejetée dans le niveau « sommes » pour une part des tirages | [auto-py] |
+| EL-33 | **Page** : `?filiere=M`, filière de l'accueil, interrupteur au clavier (`aria-pressed`), recalcul, exercice M, rendu de `BATTERIE_M` égal aux références, aucun débordement à 360 px, impression avec « Filière : 2M », les autres outils sans interrupteur | [auto-page] |
+| EL-34 | **Registre et accueil** : cartes 2Ms et 2Mr avec le lien `?filiere=M` et la description M identique dans `commun/registre.json` et `index.html` (ACC-01) | [auto-py] |

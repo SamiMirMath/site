@@ -160,3 +160,11 @@ le corrigé (2.24). Ailleurs la valeur exacte reste **celle que donne la chaîne
 **Décision.** La règle Q5 est appliquée dès maintenant dans cet outil : apostrophe typographique ’ **dès 4 chiffres, sur la partie entière seulement**
 (−99’999’995, 1’234,567, 0,0001), jamais de séparateur dans les décimales ; saisie de ' et ’ lue 1000 ; « 1 000 » refusé avec un message. Fait en `657806d` ;
 les fonctions de formatage sont dans `moteur/nombres.py` (`grouper`, `formater_entier`, `formater_decimal`, `nettoyer_saisie`), à réutiliser par **T23**.
+
+## ~~Q13 — Filière M de « Exponentielles et logarithmes » (2Ms, 2Mr)~~ (tranchée le 28.10.2026)
+
+**Décisions.** (1) **Choix de la filière** : `?filiere=M` d'abord, sinon la filière mémorisée par l'accueil (Ms et Mr → M, C ou « tous » → C), sinon C ; interrupteur visible « 3C / 2M ». (2) **On regroupe toujours, on ne développe jamais** (méthode du cours) :
+log u + log v = log(uv), log u − log v = log(u/v), k log u = log(u^k), puis log A = log B ⇔ A = B ou l'exponentielle des deux membres ; **log(x²) n'est jamais réécrit** en 2 log x ni 2 log|x| (notion non vue en cours) ; l'ED est calculé avant sur l'équation de départ et la carte
+« Vérification » rejette après chaque solution hors de l'ED, avec la raison (exemple : log(x+1) + log(2x) = log(3), x ≈ −1,823 rejetée, x ≈ 0,823). (3) **Constante et logarithmes des deux côtés** : 1 = log(10), puis log = log (façon Javet 3.11-3.12).
+(4) **Le 2ᵉ degré en aˣ** (4^x − 2^x − 6 = 0, e^(2x) − 3e^x + 2 = 0) est traité en M dans ce chantier (t = aˣ, t > 0) ; en C, le message hors programme reste. (5) Support de cours : polycopié Javet 2M et brochure Amaudruz 2M.
+Voir [specifications/exponentielles-logarithmes.md](specifications/exponentielles-logarithmes.md), section « Filière M », et la tâche **T35**. **Pool M** : niveaux et poids proposés (exponentielle 25 %, définition 15 %, sommes 20 %, log = log 15 %, changement de variable 15 %, difficile 10 %), à relire à l'écran.

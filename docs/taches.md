@@ -504,6 +504,16 @@ l'élève, un « Calcul en cours… » qui dure parce que SymPy se charge encore
   instantanés mis à jour un outil à la fois ; 4 `moteur/nombres.py` (T23) : y reprendre `tex_approx` (notation scientifique) si l'enseignant le valide.
 - **Vérification** : suite complète verte ; instantanés des outils non touchés inchangés ; relecture par l'enseignant.
 
+### T35 — Outil « Exponentielles et logarithmes » : filière M (2Ms, 2Mr) — demande du 28.10.2026 (suite de N03)
+- Demande de l'enseignant : étendre l'outil de T33 aux 2M. Paramètre `filiere` (`"C"` par défaut) ; en M : carte « Ensemble de définition » (cartes de l'outil ED) avant toute équation logarithmique,
+  regroupement des logarithmes (jamais de développement, log(x²) intact), carte « Vérification » qui rejette les solutions hors de l'ED avec la raison, changement de variable t = aˣ, pool M, page
+  (`?filiere=M`, filière de l'accueil, interrupteur 3C / 2M), registre et accueil pour 2Ms et 2Mr. **Les sorties C restent identiques** (instantanés).
+- **Spécification** : [specifications/exponentielles-logarithmes.md](specifications/exponentielles-logarithmes.md), section « Filière M » (EL-26 à EL-34) ; règle R17 du guide de rédaction ; supports de cours : polycopié Javet 2M et brochure Amaudruz 2M.
+- **Étapes (un commit chacune, aucun push)** : 0 docs · 1 paramètre `filiere` + refactor `resoudre_ed.py` · 2 carte ED + Vérification (un seul logarithme) · 3 regroupement (plusieurs logarithmes) · 4 changement de variable ·
+  5 pool M · 6 page (worker à plusieurs arguments, interrupteur) · 7 registre et accueil · 8 audit avant/après (**arrêt : relecture à l'écran**).
+- **Fichiers** : `exponentielles-logarithmes/exp_log_m.py` (nouveau), `resoudre_el.py`, `index.html`, `ensemble-definition/resoudre_ed.py`, `moteur/manifeste.json`, `commun/worker-pyodide.js`, `commun/outil.js`, `commun/registre.json`, `index.html`, tests.
+- **Vérification** : EL-26 à EL-34 ; suite Python et suite de pages vertes ; instantanés C et ED inchangés.
+
 ## Plus tard (hors plan, si les tests tiennent)
 
 - Découpage de `ensemble_def.py` en modules (`moteur/expr.py`, `poly.py`, `ensembles.py`…),
@@ -518,7 +528,7 @@ l'élève, un « Calcul en cours… » qui dure parce que SymPy se charge encore
 T01 → T02 → T03 → T04 (faites) → T05, T07, T08 (indépendantes) → T08b → T06 → T07b (priorité haute)
 → T09 → T11 → T12 → T13 → T14 → T15 → T16 → T17…T20 → T21, T22, T23 → T10
 → **phase F (N01 → N26, vagues 1 à 7)** → T24…T27 → T28 ; T29, T30, T31 (chargement) : après T19, indépendantes.
-**T33** (outil des 3C) passe avant T23 ; **T34** (règle R13 dans les autres outils) vient juste après le test des 3C, avant T23.
+**T35** (filière M de l'outil exponentielles-logarithmes) : après le test des 3C et T34 si l'enseignant ne dit pas autrement. **T33** (outil des 3C) passe avant T23 ; **T34** (règle R13 dans les autres outils) vient juste après le test des 3C, avant T23.
 Les spécifications des outils de la phase F (étape 1 du gabarit) peuvent être rédigées dès maintenant :
 ce sont des documents, ils ne touchent pas au code.
 
