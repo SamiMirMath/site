@@ -17,12 +17,14 @@ from fractions import Fraction as F
 from math import gcd
 
 from noyau import analyser_complet
-from exp_log import (Chaine, Defini, E, Eq, Fn, Log, Message, Neg, Nb, Op, Ou, Pow, Texte, Var, _Hors, _arbre_poly, _avec_decimaux,
+from exp_log import (Car, Chaine, Defini, E, Eq, Fn, Log, Message, Neg, Nb, Op, Ou, Pow, Rel, Texte, Var, _Hors, _arbre_poly, _avec_decimaux,
                      _base_du_logarithme, _carte, _const, _contient_log, _nb_exact, _nom_tex, _padd, _par_exponentielle, _pnet, _precis, _produit,
-                     _racine_entiere, _resoudre_polynome, _somme_arbres, _suite_polynome, _milieu_exact, _valeur_exacte, _valeur_rationnelle, _exposant_entier, _racine_primitive, logarithmique_m,
-                     resolution_exponentielle, tex, tex_approx, valeur, variables, METHODE_LOGARITHMES, METHODE_MEME_BASE, METHODES, PROP_EXPONENTIELLE, PROP_ISOLER_LOG)
+                     _racine_entiere, _resoudre_polynome, _somme_arbres, _suite_polynome, _milieu_exact, _valeur_exacte, _valeur_rationnelle, _exposant_entier, _racine_primitive, logarithmique_m, _fin_beta,
+                     resolution_exponentielle, tex, tex_approx, valeur, variables, METHODE_LOGARITHMES, METHODE_MEME_BASE, METHODES, PROP_EXPONENTIELLE, PROP_ISOLER_LOG,
+                     PROP_AUCUNE_SOLUTION, PROP_CAR_LN_E, PROP_CAR_LOG_10, PROP_DEFINITION_LOG, PROP_FOIS_MOINS_UN, PROP_LN_DEUX_MEMBRES,
+                     PROP_LN_E_PUISSANCE, PROP_LN_PUISSANCE, PROP_LOG_BASE_PUISSANCE, PROP_LOG_DEUX_MEMBRES, PROP_LOG_PUISSANCE, PROP_MEME_BASE)
 
-__all__ = ["EnsembleDef", "ensemble_de_definition", "verification", "regrouper", "variantes_changement", "reconnu_changement", "corriger_equation",
+__all__ = ["EnsembleDef", "ensemble_de_definition", "verification", "regrouper", "variantes_changement", "variantes_exposant", "reconnu_exposant", "reconnu_changement", "corriger_equation",
            "exercice_m", "NIVEAUX_M", "POIDS_M", "PROPRIETES_M"]
 
 
@@ -92,19 +94,23 @@ def contient_log_en_x(g, d):
     return bool(_logs_en_x(g) or _logs_en_x(d))
 
 
-def _liste_conditions(n, x, sortie):
+def _liste_conditions(n, x, sortie, general=False):
     """Les conditions d'existence de l'arbre, dans l'ordre où l'outil ED les trouve : ("arg", A, log) pour log(A) (A > 0), ("den", B, None) pour un
-    dénominateur (B ≠ 0), ("base", None, log) pour une base inconnue (x > 0 et x ≠ 1). Une forme que ce parcours ne connaît pas lève _Hors."""
+    dénominateur (B ≠ 0), ("base", None, log) pour une base inconnue (x > 0 et x ≠ 1) et, si `general`, ("rac", A, None) pour √A (A ≥ 0) ; avec `general`
+    aussi, l'exposant d'une puissance de base constante peut contenir l'inconnue (e^(6/x)). Une forme que ce parcours ne connaît pas lève _Hors."""
     if isinstance(n, Defini) or not variables(n):
         if isinstance(n, Log) and variables(n.a):
             raise _Hors
         return
     if isinstance(n, Neg):
-        _liste_conditions(n.a, x, sortie)
+        _liste_conditions(n.a, x, sortie, general)
     elif isinstance(n, Fn):
-        raise _Hors                                    # racine carrée dans une équation logarithmique : l'ED la traite, la vérification pas encore
+        if not general:
+            raise _Hors                                # racine carrée dans une équation logarithmique : l'ED la traite, la vérification pas encore
+        _liste_conditions(n.a, x, sortie, general)
+        sortie.append(("rac", n.a, None))
     elif isinstance(n, Log):
-        _liste_conditions(n.a, x, sortie)
+        _liste_conditions(n.a, x, sortie, general)
         if n.base is not None and not isinstance(n.base, E) and variables(n.base):
             if n.base != Var(x):
                 raise _Hors                            # base polynomiale (log_(x+1)) : hors du chantier
@@ -112,15 +118,18 @@ def _liste_conditions(n, x, sortie):
         if variables(n.a):
             sortie.append(("arg", n.a, n))
     elif isinstance(n, Op):
-        _liste_conditions(n.a, x, sortie)
-        _liste_conditions(n.b, x, sortie)
+        _liste_conditions(n.a, x, sortie, general)
+        _liste_conditions(n.b, x, sortie, general)
         if n.op == "/" and variables(n.b):
             sortie.append(("den", n.b, None))
     elif isinstance(n, Pow):
+        if general and variables(n.b) and not variables(n.a):
+            _liste_conditions(n.b, x, sortie, general)       # b^A, b constante : seule A peut manquer de sens
+            return
         k = _const(n.b)
         if variables(n.b) or k is None or k.denominator != 1:
             raise _Hors
-        _liste_conditions(n.a, x, sortie)
+        _liste_conditions(n.a, x, sortie, general)
         if k < 0 and variables(n.a):
             sortie.append(("den", n.a, None))
 
@@ -169,6 +178,8 @@ def _violation(condition, x, s):
         return -1                                      # un logarithme intérieur n'est pas défini : la condition extérieure ne l'est pas non plus
     if genre == "arg":
         return None if signe > 0 else signe
+    if genre == "rac":
+        return None if signe >= 0 else signe
     return None if signe != 0 else 0
 
 
@@ -179,6 +190,8 @@ def _raison(condition, x, signe):
         return f"{x} est la base d'un logarithme : {x} doit être strictement positif et différent de 1"
     if genre == "den":
         return f"{_txt(expr)} = 0 : division par 0"
+    if genre == "rac":
+        return f"√({_txt(expr)}) n'est pas défini : {_txt(expr)} < 0"
     nom = "log" if log.base is None else "ln" if isinstance(log.base, E) else "log_" + _txt(log.base, 4)
     return f"{nom}({_txt(expr)}) n'est pas défini : {_txt(expr)} {'<' if signe < 0 else '='} 0"
 
@@ -356,14 +369,24 @@ def _ed_imbrique(g, d, x, conditions):
     return EnsembleDef(x, res, None, ed_tex, vide, conditions, besoin)
 
 
-def ensemble_de_definition(g, d, x):
+def ensemble_de_definition(g, d, x, general=False):
     """L'EnsembleDef de l'équation g = d (arbres) : par l'outil ED, ou pour une base inconnue (log_x(256) = 4) la condition x > 0 et x ≠ 1.
-    Lève _Hors quand l'équation sort de ce que la filière M traite (base polynomiale, logarithme imbriqué en base 10, condition non résolue)."""
+    Lève _Hors quand l'équation sort de ce que la filière M traite (base polynomiale, condition non résolue). `general` : équation exponentielle dont
+    l'exposant contient 1/x, √x ou un logarithme (variantes_exposant) ; les conditions « 7 > 0 » des bases constantes n'y sont pas écrites."""
     conditions = []
-    _liste_conditions(g, x, conditions)
-    _liste_conditions(d, x, conditions)
+    _liste_conditions(g, x, conditions, general)
+    _liste_conditions(d, x, conditions, general)
     if not conditions:
         raise _Hors
+    if general:
+        res, _, _ = analyser_complet("(" + _vers_ed(g, x) + ")+(" + _vers_ed(d, x) + ")")
+        if not res["ok"] or not res["complet"]:
+            raise _Hors
+        utiles = [c for c in res["conditions"] if not (c["genre"] == "pos" and c["E_tex"] == r"\mathbb{R}")]
+        for k, c in enumerate(utiles, 1):
+            c["num"] = k
+        res = {**res, "conditions": utiles, "inter_tex": r" \cap ".join(c["E_tex"] for c in utiles) if len(utiles) > 1 else ""}
+        return EnsembleDef(x, res, None, res["ED_tex"], res["ED_tex"] == r"\varnothing", conditions, res["besoin_sympy"])
     if not (_logs_imbriques_ok(g) and _logs_imbriques_ok(d)):
         return _ed_imbrique(g, d, x, conditions)
     if any(genre == "base" for genre, _, _ in conditions):
@@ -431,6 +454,7 @@ def _propriete(famille, genre):
         "mixte": "propriétés des logarithmes, sur l'ED",
         "constante": {"10": "c = log(10^c)", "e": "c = ln(e^c)", "a": "c = log_a(a^c)"}[famille],
         "egaux": f"{n} u = {n} v ⇔ u = v, sur l'ED",
+        "oppose": f"−{n} a = {n}(1/a)",
     }[genre]
 
 
@@ -439,6 +463,8 @@ PROP_RACINE_IMPAIRE = "xⁿ = c ⇔ x = c^(1/n) (n impair)"
 PROP_RACINE_PAIRE = "xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0)"
 PROP_PUISSANCE_PAIRE = "une puissance paire est positive ou nulle"
 PROP_PUISSANCES = "propriétés des puissances"
+PROP_CARRE_DES_DEUX_MEMBRES = "les deux membres sont positifs : on élève au carré"
+PROP_ISOLER_RACINE = "on isole la racine"
 
 
 def _prop_fois(nom, decalage):
@@ -446,8 +472,8 @@ def _prop_fois(nom, decalage):
     return f"on {'multiplie' if decalage > 0 else 'divise'} les deux membres par {nom}{'²' if abs(decalage) == 2 else ''}, {nom} > 0"
 
 
-PROPRIETES_M = frozenset({_propriete(f, g) for f in _FAMILLES for g in ("puissance", "produit", "quotient", "mixte", "constante", "egaux")} |
-                         {PROP_FOIS_DENOMINATEURS, PROP_RACINE_IMPAIRE, PROP_RACINE_PAIRE, PROP_PUISSANCE_PAIRE, PROP_PUISSANCES} |
+PROPRIETES_M = frozenset({_propriete(f, g) for f in _FAMILLES for g in ("puissance", "produit", "quotient", "mixte", "constante", "egaux", "oppose")} |
+                         {PROP_CARRE_DES_DEUX_MEMBRES, PROP_ISOLER_RACINE, PROP_FOIS_DENOMINATEURS, PROP_RACINE_IMPAIRE, PROP_RACINE_PAIRE, PROP_PUISSANCE_PAIRE, PROP_PUISSANCES} |
                          {_prop_fois(nom, k) for nom in ("t", "u") for k in (-2, -1, 1, 2)})
 DEGRE_MAX = 8
 
@@ -981,6 +1007,456 @@ def variantes_changement(g, d, x):
 
 
 # =====================================================================
+# 4 quater. EXPONENTIELLE À EXPOSANT NON POLYNOMIAL : e^(6/x) = e^(x − 1), 3^(−1/x) = 20, 7^√x = 3, e^(−ln x) = 3 (T36, partie B)
+# =====================================================================
+REMARQUE_RACINE_NEGATIVE = "Une racine carrée est positive ou nulle : l'équation n'a aucune solution."
+
+
+def _contient_fn(n):
+    if isinstance(n, Fn):
+        return True
+    if isinstance(n, (Neg, Log)):
+        return _contient_fn(n.a)
+    if isinstance(n, (Op, Pow)):
+        return _contient_fn(n.a) or _contient_fn(n.b)
+    return False
+
+
+def _frac(n):
+    """(N, D) : n = N/D, deux polynômes en l'inconnue à coefficients rationnels (listes [c0, c1, …]) ; sinon _Hors."""
+    if not variables(n):
+        v = _const(n)
+        if v is None:
+            raise _Hors
+        return [v], [F(1)]
+    if isinstance(n, Var):
+        return [F(0), F(1)], [F(1)]
+    if isinstance(n, Neg):
+        N, D = _frac(n.a)
+        return [-c for c in N], D
+    if isinstance(n, Op):
+        N1, D1 = _frac(n.a)
+        N2, D2 = _frac(n.b)
+        if n.op in "+-":
+            return _padd(_pmul_n(N1, D2), _pmul_n(N2, D1), 1 if n.op == "+" else -1), _pmul_n(D1, D2)
+        if n.op == "*":
+            return _pmul_n(N1, N2), _pmul_n(D1, D2)
+        if not any(N2):
+            raise _Hors
+        return _pmul_n(N1, D2), _pmul_n(D1, N2)
+    if isinstance(n, Pow):
+        k = _const(n.b)
+        if variables(n.b) or k is None or k.denominator != 1 or not -4 <= k <= 4:
+            raise _Hors
+        N, D = _frac(n.a)
+        if k < 0:
+            if not any(N):
+                raise _Hors
+            N, D, k = D, N, -k
+        rn, rd = [F(1)], [F(1)]
+        for _ in range(int(k)):
+            rn, rd = _pmul_n(rn, N), _pmul_n(rd, D)
+        return rn, rd
+    raise _Hors
+
+
+def _cote_exponentiel(n):
+    """(nœud de la base, valeur de la base — 'e' ou un rationnel > 0 différent de 1 —, exposant) pour b^A avec l'inconnue dans A ; sinon None."""
+    if isinstance(n, Pow) and not variables(n.a) and variables(n.b):
+        if isinstance(n.a, E):
+            return n.a, "e", n.b
+        v = _const(n.a)
+        if v is not None and v > 0 and v != 1:
+            return n.a, v, n.b
+    return None
+
+
+def _genre_exposant(a):
+    """« racine » (l'exposant contient √), « log » (il contient un logarithme), « frac » (fraction rationnelle dont le dénominateur est du 1er degré)
+    ou « poly » (aucun dénominateur : la 3C et le changement de variable le traitent) ; _Hors si l'exposant sort de ces formes."""
+    if _contient_fn(a):
+        return "racine"
+    if _logs_en_x(a):
+        return "log"
+    N, D = _frac(a)
+    if len(D) == 1:
+        return "poly"
+    if len(D) > 2 or len(N) > 3:
+        raise _Hors
+    return "frac"
+
+
+def _sans_racine(n, x):
+    """n où √x est remplacé par la lettre « r » (qui devient la seule variable) ; _Hors si une racine porte sur autre chose que x, ou si x reste."""
+    if isinstance(n, Fn):
+        if n.a != Var(x):
+            raise _Hors
+        return Var("r")
+    if isinstance(n, Neg):
+        return Neg(_sans_racine(n.a, x))
+    if isinstance(n, Op):
+        return Op(n.op, _sans_racine(n.a, x), _sans_racine(n.b, x))
+    if isinstance(n, Pow):
+        return Pow(_sans_racine(n.a, x), _sans_racine(n.b, x))
+    if isinstance(n, Var):
+        raise _Hors                                    # x et √x ensemble : pas encore
+    return n
+
+
+def _affine_en_racine(a, x):
+    """(p, q) tels que a = p + q·√x (p rationnel, q rationnel non nul) ; sinon _Hors."""
+    c = _pq(_sans_racine(a, x))
+    if len(c) != 2 or c[1] == 0:
+        raise _Hors
+    return c[0], c[1]
+
+
+def _exposant_logarithme(a, valeur_base):
+    """(signe, logarithme) pour a = ±log_b(u), u du 1er degré et b la base de l'exponentielle ; sinon _Hors."""
+    signe = 1
+    if isinstance(a, Neg):
+        signe, a = -1, a.a
+    if not isinstance(a, Log) or (a.base is not None and variables(a.base)):
+        raise _Hors
+    cle = F(10) if a.base is None else "e" if isinstance(a.base, E) else _const(a.base)
+    c = _pq(a.a)
+    if cle != valeur_base or len(c) != 2 or c[1] == 0:
+        raise _Hors
+    return signe, a
+
+
+class _Situation:
+    """L'équation b^A = c ou b^A = b^B décrite pour les deux méthodes."""
+    __slots__ = ("x", "g", "d", "echange", "noeud", "base", "exposant", "genre", "second", "autre", "constante", "m")
+
+
+def _situation(g, d, x):
+    """Reconnaît b^A = c (c rationnel) et b^A = b^B (même base) où A contient 1/x, √x ou log(x) ; _Hors sinon (la 3C et le changement de variable
+    traitent les exposants polynomiaux)."""
+    gauche, droite = _cote_exponentiel(g), _cote_exponentiel(d)
+    s = _Situation()
+    s.x, s.g, s.d, s.echange, s.second, s.autre, s.constante, s.m = x, g, d, False, None, None, None, None
+    if gauche is None and droite is None:
+        raise _Hors
+    if gauche is not None and droite is not None:
+        if gauche[1] != droite[1]:
+            raise _Hors
+        s.noeud, s.base, s.exposant = gauche
+        s.autre = droite[2]
+        genres = {_genre_exposant(s.exposant), _genre_exposant(s.autre)}
+        if genres != {"frac"} and genres != {"frac", "poly"}:
+            raise _Hors
+        s.genre = "meme_base"
+        return s
+    s.echange = gauche is None
+    s.noeud, s.base, s.exposant = droite if s.echange else gauche
+    s.second = g if s.echange else d
+    if variables(s.second):
+        raise _Hors
+    s.constante = _const(s.second)
+    if isinstance(s.second, Pow) and not variables(s.second.b) and _const(s.second.b) is not None and (
+            (s.base == "e" and isinstance(s.second.a, E)) or (s.base != "e" and _const(s.second.a) == s.base)):
+        s.m = _const(s.second.b)                       # le second membre est écrit b^m (e^2, 2^3) : même base tout de suite
+    elif s.constante is None:
+        raise _Hors
+    s.genre = _genre_exposant(s.exposant)
+    if s.genre == "poly":
+        raise _Hors
+    if s.genre == "racine":
+        _affine_en_racine(s.exposant, x)
+    if s.genre == "log" and s.m is not None:
+        raise _Hors
+    if s.genre == "log" and s.constante > 0:
+        _exposant_logarithme(s.exposant, s.base)
+        if s.constante == 1:
+            raise _Hors
+    return s
+
+
+def _puissance_de_la_base(s, c):
+    """L'entier m tel que c = b^m, ou None."""
+    if c == 1:
+        return F(0)
+    return None if s.base == "e" else _exposant_entier(c, s.base)
+
+
+def _arbre_produit_poly(facteur, poly, x):
+    """facteur · poly(x) écrit proprement : m·D, avec m = 1 (D seul) et m = 0 (0) traités à part."""
+    return _arbre_poly([facteur * c for c in poly], x)
+
+
+def _fin_egalite_des_exposants(chaine, s, resultat, titre):
+    """b^A = b^B ⇒ A = B (chaîne déjà écrite jusque-là) ; fractions : on multiplie par le dénominateur, puis l'équation polynomiale."""
+    x = s.x
+    A, B = s.exposant, s.autre
+    (NA, DA), (NB, DB) = _frac(A), _frac(B)
+    if len(DA) > 1 and len(DB) > 1 and DA != DB:
+        raise _Hors
+    Dm = DA if len(DA) > 1 else DB
+    Dtree = _arbre_poly(Dm, x)
+    gauche = _arbre_poly(NA, x) if DA == Dm else Op("*", Dtree, A)
+    droite = _arbre_poly(NB, x) if DB == Dm else Op("*", Dtree, B)
+    if len(_pq(gauche)) < len(_pq(droite)):             # x(x − 1) = 6 plutôt que 6 = x(x − 1) : le côté de plus haut degré à gauche
+        gauche, droite = droite, gauche
+    chaine.ajouter(Eq(gauche, droite), "⇔", PROP_FOIS_DENOMINATEURS)
+    suite, solutions, remarque = _resoudre_egalite(chaine, gauche, droite, x)
+    return resultat([_carte(titre, [chaine] + suite)], solutions, remarque)
+
+
+def _fin_fraction(chaine, s, A, K_rat, K_log, resultat, titre):
+    """A = K avec A = N/D : N = K·D, puis la résolution. K_rat : K rationnel, K_log : K un logarithme L(c) (ou L(c)/L(b), traité par l'appelant)."""
+    x = s.x
+    N, D = _frac(A)
+    if K_rat is not None:
+        gauche = _arbre_poly(N, x)
+        droite = _arbre_poly([K_rat * c for c in D], x)
+        if len(N) < len(D):
+            gauche, droite = droite, gauche
+        chaine.ajouter(Eq(gauche, droite), "⇔", PROP_FOIS_DENOMINATEURS)
+        suite, solutions, remarque = _resoudre_egalite(chaine, gauche, droite, x)
+        return resultat([_carte(titre, [chaine] + suite)], solutions, remarque)
+    raise _Hors
+
+
+def _quotient_de_logarithmes(n, haut, bas):
+    """n · haut / bas écrit comme à la main : −log(3)/log(20), 2 log(3)/log(5). `haut` None : n seul au numérateur."""
+    num = _nb_exact(abs(n)) if haut is None else haut if abs(n) == 1 else Op("*", _nb_exact(abs(n)), haut)
+    q = Op("/", num, bas)
+    return Neg(q) if n < 0 else q
+
+
+def _x_egal_quotient(chaine, s, N, lb, lc, resultat, titre):
+    """n·L(b) = x·L(c) (D = x, N = n constant) : x = n·L(b)/L(c), car L(c) ≠ 0. `lb` None : L(b) = 1 (log(10), ln(e))."""
+    x = s.x
+    haut_gauche = _nb_exact(N[0]) if lb is None else (Neg(lb) if N[0] == -1 else lb if N[0] == 1 else Op("*", _nb_exact(N[0]), lb))
+    chaine.ajouter(Eq(haut_gauche, Op("*", Var(x), lc)), "⇔", PROP_FOIS_DENOMINATEURS)
+    solution = _quotient_de_logarithmes(N[0], lb, lc)
+    chaine.ajouter(Eq(Var(x), solution), "⇔", Car(lc))
+    return resultat([_carte(titre, [chaine])], [solution])
+
+
+def _fin_fraction_logarithmes(chaine, s, resultat, titre, c):
+    """b^(N/D) = c, c non puissance de b : N·log(b) = D·log(c) ; monômes c·xᵏ·log(a), puis la fin de la méthode B de la 3C (degré 1 ou 2)."""
+    x = s.x
+    N, D = _frac(s.exposant)
+    ln = s.base == "e"
+    cle = "e" if ln else F(10)
+    lb, lc = Log(s.noeud, E() if ln else None), Log(s.second, E() if ln else None)
+    if len(N) == 1 and D == [0, 1]:
+        return _x_egal_quotient(chaine, s, N, lb, lc, resultat, titre)
+    chaine.ajouter(Eq(Op("*", _arbre_poly(N, x), lb), Op("*", _arbre_poly(D, x), lc)), "⇔", PROP_FOIS_DENOMINATEURS)
+    a_b = None if s.base == cle else s.base
+    a_c = None if c == cle else c
+    monos_g = [(n, k, a_b) for k, n in enumerate(N) if n != 0]
+    monos_d = [(dk, k, a_c) for k, dk in enumerate(D) if dk != 0]
+    ecrit = {}
+    if a_b is not None:
+        ecrit[a_b] = s.noeud
+    if a_c is not None:
+        ecrit[a_c] = s.second
+    suite, solutions, remarque = _fin_beta(chaine, monos_g, monos_d, x, ecrit, ln)
+    return resultat([_carte(titre, suite)], solutions, remarque)
+
+
+def _fin_racine(chaine, s, K_rat, K_tree, resultat, titre):
+    """p + q√x = K : √x = (K − p)/q, puis x = (…)² quand (K − p)/q est positif ; négatif : aucune solution. K_rat : K rationnel (sinon K_tree, une
+    constante écrite avec des logarithmes, dont la valeur peut être rationnelle : log(8)/log(2) = 3)."""
+    x, X = s.x, Var(s.x)
+    p, q = _affine_en_racine(s.exposant, x)
+    if K_rat is not None:
+        S = Nb((K_rat - p) / q)
+    else:
+        S = K_tree if p == 0 else Op("-", K_tree, _nb_exact(p)) if p > 0 else Op("+", K_tree, _nb_exact(-p))
+        if q != 1:
+            S = Op("/", S, _nb_exact(q))
+    valeur_s = _valeur_rationnelle(S)
+    signe = _signe_exact(S)
+    racine = Fn("sqrt", X)
+    if not (p == 0 and q == 1):
+        chaine.ajouter(Eq(racine, S), "⇔", PROP_ISOLER_RACINE)
+    if signe < 0:
+        return resultat([_carte(titre, [chaine])], [], REMARQUE_RACINE_NEGATIVE)
+    if signe == 0:
+        chaine.ajouter(Eq(X, Nb(0)), "⇔")
+        return resultat([_carte(titre, [chaine])], [Nb(0)])
+    if valeur_s is None and p != 0:
+        raise _Hors                                    # x = ((log 3/log 2 + 1))² : pas encore (la ligne « S = … » ne tient pas à 360 px)
+    carre = Pow(S, Nb(2))
+    if valeur_s is not None:
+        solution = Nb(valeur_s ** 2)
+        chaine.ajouter(Eq(X, solution, [carre]), "⇔", PROP_CARRE_DES_DEUX_MEMBRES)
+    else:
+        solution = carre
+        chaine.ajouter(Eq(X, carre), "⇔", PROP_CARRE_DES_DEUX_MEMBRES)
+    return resultat([_carte(titre, [chaine])], [solution])
+
+
+def _exposant_log(chaine, s, methode, resultat):
+    """b^(±log_b(u)) = c : même chaîne pour les deux méthodes après la première ligne (définition du logarithme, ou logarithme des deux membres)."""
+    x = s.x
+    signe, lg = _exposant_logarithme(s.exposant, s.base)
+    u, c = lg.a, s.constante
+    famille = "e" if s.base == "e" else "10" if lg.base is None else "a"
+    ln = s.base == "e"
+    lc = Log(s.second, lg.base)
+    gauche = Neg(lg) if signe < 0 else lg
+    if methode == METHODE_MEME_BASE:
+        titre = "Même base / définition"
+        chaine.ajouter(Eq(gauche, lc), "⇔", PROP_DEFINITION_LOG)
+    else:
+        titre = "Logarithme des deux membres"
+        chaine.ajouter(Eq(Log(_exponentielle(s), lg.base), lc), "⇔", PROP_LN_DEUX_MEMBRES if ln else PROP_LOG_DEUX_MEMBRES)
+        chaine.ajouter(Eq(gauche, lc), "⇔", PROP_LN_E_PUISSANCE if ln else PROP_LOG_BASE_PUISSANCE)
+    if signe < 0:
+        chaine.ajouter(Eq(lg, Neg(lc)), "⇔", PROP_FOIS_MOINS_UN)
+        inverse = _nb_exact(1 / c)
+        chaine.ajouter(Eq(lg, Log(inverse, lg.base)), "⇔", _propriete(famille, "oppose"))
+        cible = inverse
+    else:
+        cible = s.second
+    chaine.ajouter(Eq(u, cible), "⇔", _propriete(famille, "egaux"))
+    suite, solutions, remarque = _resoudre_egalite(chaine, u, cible, x)
+    return resultat([_carte(titre, [chaine] + suite)], solutions, remarque)
+
+
+def _exponentielle(s):
+    return Pow(s.noeud, s.exposant)
+
+
+def _methode_exposant(s, methode):
+    """Le résultat (sans ensemble de définition) de la méthode A (même base / définition) ou B (logarithmes) d'une équation de _situation."""
+    x = s.x
+    enonce = Eq(s.g, s.d)
+    chaine = Chaine([enonce])
+    if s.echange:
+        chaine.ajouter(Eq(s.d, s.g), "⇔")
+    ln = s.base == "e"
+
+    def resultat(cartes, solutions, remarque=None, **autres):
+        return {"genre": "exposant", "inconnue": x, "enonce": enonce, "base": None, "etapes": cartes, "solutions": solutions, "remarque": remarque, **autres}
+
+    if s.genre == "meme_base":
+        if methode == METHODE_MEME_BASE:
+            titre = "Même base"
+            chaine.ajouter(Eq(s.exposant, s.autre), "⇔", PROP_MEME_BASE)
+        else:
+            titre = "Logarithme des deux membres"
+            chaine.ajouter(Eq(Log(_exponentielle(s), E() if ln else None), Log(Pow(s.noeud, s.autre), E() if ln else None)), "⇔",
+                           PROP_LN_DEUX_MEMBRES if ln else PROP_LOG_DEUX_MEMBRES)
+            if s.base in ("e", F(10)):
+                chaine.ajouter(Eq(s.exposant, s.autre), "⇔", PROP_LN_E_PUISSANCE if ln else PROP_LOG_BASE_PUISSANCE)
+            else:
+                lb = Log(s.noeud)
+                chaine.ajouter(Eq(Op("*", s.exposant, lb), Op("*", s.autre, lb)), "⇔", PROP_LOG_PUISSANCE)
+                chaine.ajouter(Eq(s.exposant, s.autre), "⇔", Car(lb))
+        return _fin_egalite_des_exposants(chaine, s, resultat, titre)
+
+    if s.m is not None:                                  # b^A = b^m
+        A = s.exposant
+        if methode == METHODE_MEME_BASE:
+            titre = "Même base"
+            chaine.ajouter(Eq(A, _nb_exact(s.m)), "⇔", PROP_MEME_BASE)
+        else:
+            titre = "Logarithme des deux membres"
+            bl = E() if ln else None
+            chaine.ajouter(Eq(Log(_exponentielle(s), bl), Log(s.second, bl)), "⇔", PROP_LN_DEUX_MEMBRES if ln else PROP_LOG_DEUX_MEMBRES)
+            if s.base in ("e", F(10)):
+                chaine.ajouter(Eq(A, _nb_exact(s.m)), "⇔", PROP_LN_E_PUISSANCE if ln else PROP_LOG_BASE_PUISSANCE)
+            else:
+                lb = Log(s.noeud)
+                chaine.ajouter(Eq(Op("*", A, lb), Op("*", _nb_exact(s.m), lb)), "⇔", PROP_LOG_PUISSANCE)
+                chaine.ajouter(Eq(A, _nb_exact(s.m)), "⇔", Car(lb))
+        if s.genre == "racine":
+            return _fin_racine(chaine, s, s.m, _nb_exact(s.m), resultat, titre)
+        return _fin_fraction(chaine, s, A, s.m, None, resultat, titre)
+
+    c = s.constante
+    if c <= 0:                                           # une exponentielle est strictement positive
+        positif, autre = _exponentielle(s), s.second
+        lignes = [Chaine([Rel(positif, ">", Nb(0))], note=PROP_EXPO_POSITIVE),
+                  Chaine([Eq(positif, autre) if c == 0 else Rel(autre, "<", Nb(0))], note=PROP_AUCUNE_SOLUTION)]
+        return resultat([_carte("Aucune solution", lignes)], [])
+    if s.genre == "log":
+        return _exposant_log(chaine, s, methode, resultat)
+
+    A = s.exposant
+    m = _puissance_de_la_base(s, c)
+    if methode == METHODE_MEME_BASE:
+        titre = "Même base / définition"
+        if m is not None:                                # c = b^m
+            chaine.ajouter(Eq(_exponentielle(s), Pow(s.noeud, _nb_exact(m))), "⇔")
+            chaine.ajouter(Eq(A, _nb_exact(m)), "⇔", PROP_MEME_BASE)
+            K_rat, K_tree = m, _nb_exact(m)
+        elif s.base in ("e", F(10)):                     # définition du logarithme
+            K_rat, K_tree = None, Log(s.second, E() if ln else None)
+            chaine.ajouter(Eq(A, K_tree), "⇔", PROP_DEFINITION_LOG)
+        else:
+            message = Message(s.second, " n'est pas une puissance de ", s.noeud, " : il faut les logarithmes.")
+            return resultat([_carte(titre, [message])], [], None, message=message)
+        if s.genre == "racine":
+            return _fin_racine(chaine, s, K_rat, K_tree, resultat, titre)
+        if K_rat is not None:
+            return _fin_fraction(chaine, s, A, K_rat, None, resultat, titre)
+        return _fin_fraction_logarithmes_definition(chaine, s, c, resultat, titre)
+
+    titre = "Logarithme des deux membres"
+    lb, lc = Log(s.noeud, E() if ln else None), Log(s.second, E() if ln else None)
+    chaine.ajouter(Eq(Log(_exponentielle(s), E() if ln else None), lc), "⇔", PROP_LN_DEUX_MEMBRES if ln else PROP_LOG_DEUX_MEMBRES)
+    chaine.ajouter(Eq(Op("*", A, lb), lc), "⇔", PROP_LN_PUISSANCE if ln else PROP_LOG_PUISSANCE)
+    if s.genre == "racine":
+        if s.base in ("e", F(10)):
+            K_tree = lc
+            chaine.ajouter(Eq(A, lc), "⇔", PROP_CAR_LN_E if ln else PROP_CAR_LOG_10)
+        else:
+            K_tree = Op("/", lc, lb)
+            chaine.ajouter(Eq(A, K_tree), "⇔", Car(lb))
+        return _fin_racine(chaine, s, None, K_tree, resultat, titre)
+    if s.base in ("e", F(10)):
+        chaine.ajouter(Eq(A, lc), "⇔", PROP_CAR_LN_E if ln else PROP_CAR_LOG_10)
+        return _fin_fraction_logarithmes_definition(chaine, s, c, resultat, titre)
+    return _fin_fraction_logarithmes(chaine, s, resultat, titre, c)
+
+
+def _fin_fraction_logarithmes_definition(chaine, s, c, resultat, titre):
+    """b^(N/D) = c avec b = 10 ou e (définition du logarithme) : N/D = log(c) ⇒ N = D·log(c), puis la fin de la méthode B de la 3C."""
+    x = s.x
+    N, D = _frac(s.exposant)
+    ln = s.base == "e"
+    cle = "e" if ln else F(10)
+    lc = Log(s.second, E() if ln else None)
+    if len(N) == 1 and D == [0, 1]:
+        return _x_egal_quotient(chaine, s, N, None, lc, resultat, titre)
+    chaine.ajouter(Eq(_arbre_poly(N, x), Op("*", _arbre_poly(D, x), lc)), "⇔", PROP_FOIS_DENOMINATEURS)
+    a_c = None if c == cle else c
+    monos_g = [(n, k, None) for k, n in enumerate(N) if n != 0]
+    monos_d = [(dk, k, a_c) for k, dk in enumerate(D) if dk != 0]
+    ecrit = {} if a_c is None else {a_c: s.second}
+    suite, solutions, remarque = _fin_beta(chaine, monos_g, monos_d, x, ecrit, ln)
+    return resultat([_carte(titre, suite)], solutions, remarque)
+
+
+def reconnu_exposant(g, d, x):
+    """Vrai pour une équation exponentielle à exposant 1/x, √x ou ± ln x que l'outil sait lire, qu'il la résolve ou non."""
+    try:
+        _situation(g, d, x)
+        return True
+    except _Hors:
+        return False
+
+
+@_avec_decimaux
+def variantes_exposant(g, d, x):
+    """{méthode: résultat} d'une équation exponentielle dont l'exposant n'est pas un polynôme (6/x, √x, ln x), avec la carte « Ensemble de définition »
+    en tête et la « Vérification » ; None si l'équation n'est pas de cette forme."""
+    try:
+        s = _situation(g, d, x)
+        ed = ensemble_de_definition(g, d, x, general=True)
+        return {m: _avec_ed_et_verification(ed, _methode_exposant(s, m), x) for m in METHODES}
+    except _Hors:
+        return None
+
+
+# =====================================================================
 # 5. CORRIGÉ D'UNE ÉQUATION LOGARITHMIQUE EN FILIÈRE M
 # =====================================================================
 def _nommer_racines(r):
@@ -1028,6 +1504,16 @@ def corriger_equation(g, d, x):
     r = logarithmique_m(g, d, x) or regrouper(g, d, x)
     if r is None:
         return None
+    return _avec_ed_et_verification(ed, r, x)
+
+
+def _avec_ed_et_verification(ed, r, x):
+    """Le corrigé complet : la carte « Ensemble de définition », les cartes de la résolution `r`, puis la carte « Vérification » des solutions
+    contre l'ensemble de définition (rien à vérifier quand la méthode ne s'applique pas ou qu'il n'y a aucune solution)."""
+    if ed.vide:
+        etapes = [_carte_ed(ed, [Message("L'ensemble de définition est vide : l'équation n'a aucune solution.")])]
+        return {"genre": "logarithmique", "inconnue": x, "enonce": None, "base": None, "etapes": etapes, "solutions": [], "remarque": None,
+                "ed": ed, "besoin_sympy": ed.besoin_sympy}
     r = _nommer_racines(r)
     etapes = [_carte_ed(ed)] + [dict(c) for c in r["etapes"]]
     if r["remarque"] and etapes[-1].get("lignes") is not None:

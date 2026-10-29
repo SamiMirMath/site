@@ -1972,6 +1972,12 @@ def _beta(g, d, x, fg, fd, ln):
         chaine.ajouter(Eq(arbre_g, arbre_d), "⇔", PROP_CAR_LN_E if ln else PROP_CAR_LOG_10)
         monos_g = [(c, k, None if a == cle else a) for c, k, a in monos_g]
         monos_d = [(c, k, None if a == cle else a) for c, k, a in monos_d]
+    return _fin_beta(chaine, monos_g, monos_d, x, ecrit, ln)
+
+
+def _fin_beta(chaine, monos_g, monos_d, x, ecrit, ln):
+    """La fin de la méthode B (aussi utilisée par la filière M) : les monômes c·xᵏ·log(a) (a None : un nombre) des deux membres, les termes en x d'un côté,
+    puis le degré 0, 1 ou 2 ; `ecrit` : base → nœud tel qu'il est écrit."""
     mg = sorted(_fusionner(monos_g), key=lambda t: -t[1])           # les termes en x d'abord : x log 2 + log 2
     md = sorted(_fusionner(monos_d), key=lambda t: -t[1])
     developpe = Eq(_somme(mg, x, ecrit, ln, False), _somme(md, x, ecrit, ln, False))

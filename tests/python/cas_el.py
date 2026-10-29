@@ -219,10 +219,22 @@ BATTERIE_M_VAR = [
 # au programme M, reconnues, mais avec des racines irrationnelles : pas encore ; en 3C : hors programme
 M_VAR_PAS_ENCORE = ["e^x+e^(-x)=3", "4^x-2^x-1=0", "2^x+2^(-x)=3"]
 
+# T36 (29.10.2026), partie B : exposants 1/x, √x, ±ln x (Javet 2.2 i, 3.15 d e f ; Amaudruz 7.8 d). (saisie, solutions arrondies à 10⁻³) ; les deux méthodes
+# donnent le même S, sauf la méthode « même base / définition » quand le second membre n'est pas une puissance de la base (message)
+BATTERIE_M_EXPOSANTS = [
+    ("e^(6/x)=e^(x-1)", [-2.0, 3.0]), ("e^(2/x)=e^(x+1)", [-2.0, 1.0]), ("e^(2/x)=e^(1/x+1)", [1.0]), ("3^(1/x)=3^2", [0.5]), ("3^(1/x)=3^(-1)", [-1.0]),
+    ("3^(-1/x)=20", [-0.367]), ("10^(1/x)=3", [2.096]), ("e^(1/x)=2", [1.443]), ("2^(1/x)=8", [0.333]), ("2^(3/(x+1))=5", [0.292]), ("3^(2/x)=81", [0.5]),
+    ("5^(x/(x-1))=25", [2.0]), ("2^(x/(x-1))=3", [2.710]), ("e^((x+1)/x)=e^3", [0.5]),
+    ("7^(sqrt(x))=3", [0.319]), ("2^(sqrt(x)+1)=8", [4.0]), ("e^(sqrt(x))=e^2", [4.0]), ("10^(sqrt(x))=1000", [9.0]),
+    ("7^(sqrt(x))=-3", []), ("7^(sqrt(x)+1)=3", []), ("7^(sqrt(x))=7^(-1)", []),
+    ("e^(-ln(x))=3", [0.333]), ("e^(-ln(x))=0,2", [5.0]), ("2^(-log_2(x))=3", [0.333]), ("10^(-log(x))=4", [0.25]), ("e^(ln(x-1))=3", [4.0]),
+    ("e^(-ln(x-1))=3", [1.333]), ("e^(-ln(x))=-2", []),
+]
+
 # identités sur l'ensemble de définition : S = ED (solutions None)
 M_TOUT_L_ED = ["log(x)=log(x)", "log(x)+log(x-1)=log(x^2-x)", "2log(x)=log(x^2)+log(1)"]
 # formes du programme M que l'outil ne traite pas encore, et vrais hors-programme
-M_PAS_ENCORE = ["ln(x)+ln(x-1)=1", "log(x)=ln(2)", "log(1/x)=2", "log(x)*log(x-1)=1", "ln(x)=2ln(x+1)+1", "log(sqrt(x))=1"]
+M_PAS_ENCORE = ["3^(2sqrt(x)-1)=5", "2^(sqrt(x)-1)=3", "ln(x)+ln(x-1)=1", "log(x)=ln(2)", "log(1/x)=2", "log(x)*log(x-1)=1", "ln(x)=2ln(x+1)+1", "log(sqrt(x))=1"]
 M_HORS_PROGRAMME = ["log(x)=x-1", "x*log(x)=1", "e^x=ln(x)", "log(x)+2^x=3"]
 
 
@@ -230,7 +242,8 @@ M_HORS_PROGRAMME = ["log(x)=x-1", "x*log(x)=1", "e^x=ln(x)", "log(x)+2^x=3"]
 def entrees_el_m():
     """Entrées de l'instantané de la filière M : les équations logarithmiques de la 3C (avec ensemble de définition en M) et BATTERIE_M."""
     return list(dict.fromkeys([s for s, _ in BATTERIE_E4] + [s for s, _ in BATTERIE_M] + M_TOUT_L_ED + M_PAS_ENCORE + M_HORS_PROGRAMME
-                                  + [s for s, _ in BATTERIE_M_VAR] + M_VAR_PAS_ENCORE + [s for s, _ in BATTERIE_M_DEUX_TERMES]))
+                                  + [s for s, _ in BATTERIE_M_VAR] + M_VAR_PAS_ENCORE + [s for s, _ in BATTERIE_M_DEUX_TERMES]
+                                  + [s for s, _ in BATTERIE_M_EXPOSANTS]))
 
 
 def entrees_el():

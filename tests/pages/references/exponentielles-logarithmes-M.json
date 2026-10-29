@@ -407,6 +407,471 @@
    }
   }
  },
+ "10^(-log(x))=4": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦10^{-\\log(x)} = 4⟧⟦\\iff⟧⟦\\log(10^{-\\log(x)}) = \\log(4)⟧(log des deux membres)⟦\\iff⟧⟦-\\log(x) = \\log(4)⟧(log_a(a^k) = k)⟦\\iff⟧⟦\\log(x) = -\\log(4)⟧(on multiplie les deux membres par −1)⟦\\iff⟧⟦\\log(x) = \\log\\left(\\frac{1}{4}\\right)⟧(−log a = log(1/a))⟦\\iff⟧⟦x = \\frac{1}{4}⟧(log u = log v ⇔ u = v, sur l'ED)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = \\frac{1}{4}⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{1}{4}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦10^{-\\log(x)} = 4⟧⟦\\iff⟧⟦\\log(10^{-\\log(x)}) = \\log(4)⟧(log des deux membres)⟦\\iff⟧⟦-\\log(x) = \\log(4)⟧(log_a(a^k) = k)⟦\\iff⟧⟦\\log(x) = -\\log(4)⟧(on multiplie les deux membres par −1)⟦\\iff⟧⟦\\log(x) = \\log\\left(\\frac{1}{4}\\right)⟧(−log a = log(1/a))⟦\\iff⟧⟦x = \\frac{1}{4}⟧(log u = log v ⇔ u = v, sur l'ED)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = \\frac{1}{4}⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{1}{4}\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base / définition⟦10^{-\\log(x)} = 4⟧⟦\\iff⟧⟦-\\log(x) = \\log(4)⟧(définition du logarithme)⟦\\iff⟧⟦\\log(x) = -\\log(4)⟧(on multiplie les deux membres par −1)⟦\\iff⟧⟦\\log(x) = \\log\\left(\\frac{1}{4}\\right)⟧(−log a = log(1/a))⟦\\iff⟧⟦x = \\frac{1}{4}⟧(log u = log v ⇔ u = v, sur l'ED)",
+      "titre": "Étape 2Même base / définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = \\frac{1}{4}⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{1}{4}\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "10^(1/x)=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦10^{\\frac{1}{x}} = 3⟧⟦\\iff⟧⟦\\log\\left(10^{\\frac{1}{x}}\\right) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦\\frac{1}{x} \\cdot \\log(10) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦\\frac{1}{x} = \\log(3)⟧(car log(10) = 1)⟦\\iff⟧⟦1 = x \\cdot \\log(3)⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x = \\frac{1}{\\log(3)}⟧(car ⟦\\log(3) \\neq 0⟧)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦\\frac{1}{\\log(3)} \\approx 2{,}096⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{1}{\\log(3)}\\right\\} \\text{, soit } x \\approx 2{,}096⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦10^{\\frac{1}{x}} = 3⟧⟦\\iff⟧⟦\\log\\left(10^{\\frac{1}{x}}\\right) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦\\frac{1}{x} \\cdot \\log(10) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦\\frac{1}{x} = \\log(3)⟧(car log(10) = 1)⟦\\iff⟧⟦1 = x \\cdot \\log(3)⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x = \\frac{1}{\\log(3)}⟧(car ⟦\\log(3) \\neq 0⟧)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦\\frac{1}{\\log(3)} \\approx 2{,}096⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{1}{\\log(3)}\\right\\} \\text{, soit } x \\approx 2{,}096⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base / définition⟦10^{\\frac{1}{x}} = 3⟧⟦\\iff⟧⟦\\frac{1}{x} = \\log(3)⟧(définition du logarithme)⟦\\iff⟧⟦1 = x \\cdot \\log(3)⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x = \\frac{1}{\\log(3)}⟧(car ⟦\\log(3) \\neq 0⟧)",
+      "titre": "Étape 2Même base / définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦\\frac{1}{\\log(3)} \\approx 2{,}096⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{1}{\\log(3)}\\right\\} \\text{, soit } x \\approx 2{,}096⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "10^(sqrt(x))=1000": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · racine carrée⟦x \\geq 0⟧⟦ED = \\left[0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦10^{\\sqrt{x}} = 1\\text{’}000⟧⟦\\iff⟧⟦\\log(10^{\\sqrt{x}}) = \\log(1\\text{’}000)⟧(log des deux membres)⟦\\iff⟧⟦\\sqrt{x} \\cdot \\log(10) = \\log(1\\text{’}000)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦\\sqrt{x} = \\log(1\\text{’}000)⟧(car log(10) = 1)⟦\\iff⟧⟦x = (\\log(1\\text{’}000))^{2} = 9⟧(les deux membres sont positifs : on élève au carré)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 9⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{9\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · racine carrée⟦x \\geq 0⟧⟦ED = \\left[0 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦10^{\\sqrt{x}} = 1\\text{’}000⟧⟦\\iff⟧⟦\\log(10^{\\sqrt{x}}) = \\log(1\\text{’}000)⟧(log des deux membres)⟦\\iff⟧⟦\\sqrt{x} \\cdot \\log(10) = \\log(1\\text{’}000)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦\\sqrt{x} = \\log(1\\text{’}000)⟧(car log(10) = 1)⟦\\iff⟧⟦x = (\\log(1\\text{’}000))^{2} = 9⟧(les deux membres sont positifs : on élève au carré)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = 9⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{9\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · racine carrée⟦x \\geq 0⟧⟦ED = \\left[0 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base / définition⟦10^{\\sqrt{x}} = 1\\text{’}000⟧⟦\\iff⟧⟦10^{\\sqrt{x}} = 10^{3}⟧⟦\\iff⟧⟦\\sqrt{x} = 3⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x = 3^{2} = 9⟧(les deux membres sont positifs : on élève au carré)",
+      "titre": "Étape 2Même base / définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = 9⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{9\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
  "1=log(x)+log(x-1)": {
   "au_depart": {
    "progression": "Étape 1 / 5",
@@ -908,6 +1373,316 @@
     ],
     "imprimee": "Méthode : Même base / définition",
     "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "2^(-log_2(x))=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦2^{-\\log_{2}(x)} = 3⟧⟦\\iff⟧⟦\\log_{2}(2^{-\\log_{2}(x)}) = \\log_{2}(3)⟧(log des deux membres)⟦\\iff⟧⟦-\\log_{2}(x) = \\log_{2}(3)⟧(log_a(a^k) = k)⟦\\iff⟧⟦\\log_{2}(x) = -\\log_{2}(3)⟧(on multiplie les deux membres par −1)⟦\\iff⟧⟦\\log_{2}(x) = \\log_{2}\\left(\\frac{1}{3}\\right)⟧(−log_a a = log_a(1/a))⟦\\iff⟧⟦x = \\frac{1}{3}⟧(log_a u = log_a v ⇔ u = v, sur l'ED)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = \\frac{1}{3}⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{1}{3}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦2^{-\\log_{2}(x)} = 3⟧⟦\\iff⟧⟦\\log_{2}(2^{-\\log_{2}(x)}) = \\log_{2}(3)⟧(log des deux membres)⟦\\iff⟧⟦-\\log_{2}(x) = \\log_{2}(3)⟧(log_a(a^k) = k)⟦\\iff⟧⟦\\log_{2}(x) = -\\log_{2}(3)⟧(on multiplie les deux membres par −1)⟦\\iff⟧⟦\\log_{2}(x) = \\log_{2}\\left(\\frac{1}{3}\\right)⟧(−log_a a = log_a(1/a))⟦\\iff⟧⟦x = \\frac{1}{3}⟧(log_a u = log_a v ⇔ u = v, sur l'ED)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = \\frac{1}{3}⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{1}{3}\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base / définition⟦2^{-\\log_{2}(x)} = 3⟧⟦\\iff⟧⟦-\\log_{2}(x) = \\log_{2}(3)⟧(définition du logarithme)⟦\\iff⟧⟦\\log_{2}(x) = -\\log_{2}(3)⟧(on multiplie les deux membres par −1)⟦\\iff⟧⟦\\log_{2}(x) = \\log_{2}\\left(\\frac{1}{3}\\right)⟧(−log_a a = log_a(1/a))⟦\\iff⟧⟦x = \\frac{1}{3}⟧(log_a u = log_a v ⇔ u = v, sur l'ED)",
+      "titre": "Étape 2Même base / définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = \\frac{1}{3}⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{1}{3}\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "2^(1/x)=8": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦2^{\\frac{1}{x}} = 8⟧⟦\\iff⟧⟦\\log\\left(2^{\\frac{1}{x}}\\right) = \\log(8)⟧(log des deux membres)⟦\\iff⟧⟦\\frac{1}{x} \\cdot \\log(2) = \\log(8)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦\\log(2) = x \\cdot \\log(8)⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x = \\frac{\\log(2)}{\\log(8)}⟧(car ⟦\\log(8) \\neq 0⟧)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦\\frac{\\log(2)}{\\log(8)} \\approx 0{,}333⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(2)}{\\log(8)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(2)}{\\log(8)} = \\frac{1}{3}⟧.",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦2^{\\frac{1}{x}} = 8⟧⟦\\iff⟧⟦\\log\\left(2^{\\frac{1}{x}}\\right) = \\log(8)⟧(log des deux membres)⟦\\iff⟧⟦\\frac{1}{x} \\cdot \\log(2) = \\log(8)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦\\log(2) = x \\cdot \\log(8)⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x = \\frac{\\log(2)}{\\log(8)}⟧(car ⟦\\log(8) \\neq 0⟧)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦\\frac{\\log(2)}{\\log(8)} \\approx 0{,}333⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{\\log(2)}{\\log(8)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(2)}{\\log(8)} = \\frac{1}{3}⟧.",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base / définition⟦2^{\\frac{1}{x}} = 8⟧⟦\\iff⟧⟦2^{\\frac{1}{x}} = 2^{3}⟧⟦\\iff⟧⟦\\frac{1}{x} = 3⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦3x = 1⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x = \\frac{1}{3}⟧",
+      "titre": "Étape 2Même base / définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = \\frac{1}{3}⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{1}{3}\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 4 / 4"
    }
   }
  },
@@ -1436,6 +2211,315 @@
    }
   }
  },
+ "2^(3/(x+1))=5": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x + 1 \\neq 0 \\iff x \\neq -1⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{-1\\right\\}⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦2^{\\frac{3}{x + 1}} = 5⟧⟦\\iff⟧⟦\\log\\left(2^{\\frac{3}{x + 1}}\\right) = \\log(5)⟧(log des deux membres)⟦\\iff⟧⟦\\frac{3}{x + 1} \\cdot \\log(2) = \\log(5)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦3\\log(2) = (x + 1) \\cdot \\log(5)⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦3\\log(2) = x \\cdot \\log(5) + \\log(5)⟧⟦\\iff⟧⟦3\\log(2) - \\log(5) = x \\cdot \\log(5)⟧⟦\\iff⟧⟦x = \\frac{3\\log(2) - \\log(5)}{\\log(5)}⟧(car ⟦\\log(5) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log\\left(\\frac{8}{5}\\right)}{\\log(5)}⟧(propriétés des logarithmes)⟦3\\log(2) - \\log(5) = \\log\\left(\\frac{2^{3}}{5}\\right)⟧(propriétés des logarithmes)⟦\\phantom{3\\log(2) - \\log(5)} = \\log\\left(\\frac{8}{5}\\right)⟧",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦\\frac{\\log\\left(\\frac{8}{5}\\right)}{\\log(5)} \\approx 0{,}292⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log\\left(\\frac{8}{5}\\right)}{\\log(5)}\\right\\} \\text{, soit } x \\approx 0{,}292⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x + 1 \\neq 0 \\iff x \\neq -1⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{-1\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦2^{\\frac{3}{x + 1}} = 5⟧⟦\\iff⟧⟦\\log\\left(2^{\\frac{3}{x + 1}}\\right) = \\log(5)⟧(log des deux membres)⟦\\iff⟧⟦\\frac{3}{x + 1} \\cdot \\log(2) = \\log(5)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦3\\log(2) = (x + 1) \\cdot \\log(5)⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦3\\log(2) = x \\cdot \\log(5) + \\log(5)⟧⟦\\iff⟧⟦3\\log(2) - \\log(5) = x \\cdot \\log(5)⟧⟦\\iff⟧⟦x = \\frac{3\\log(2) - \\log(5)}{\\log(5)}⟧(car ⟦\\log(5) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log\\left(\\frac{8}{5}\\right)}{\\log(5)}⟧(propriétés des logarithmes)⟦3\\log(2) - \\log(5) = \\log\\left(\\frac{2^{3}}{5}\\right)⟧(propriétés des logarithmes)⟦\\phantom{3\\log(2) - \\log(5)} = \\log\\left(\\frac{8}{5}\\right)⟧",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦\\frac{\\log\\left(\\frac{8}{5}\\right)}{\\log(5)} \\approx 0{,}292⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{\\log\\left(\\frac{8}{5}\\right)}{\\log(5)}\\right\\} \\text{, soit } x \\approx 0{,}292⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x + 1 \\neq 0 \\iff x \\neq -1⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{-1\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base / définition⟦5⟧ n'est pas une puissance de ⟦2⟧ : il faut les logarithmes.",
+      "titre": "Étape 2Même base / définition"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "2^(sqrt(x)+1)=8": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · racine carrée⟦x \\geq 0⟧⟦ED = \\left[0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦2^{\\sqrt{x} + 1} = 8⟧⟦\\iff⟧⟦\\log(2^{\\sqrt{x} + 1}) = \\log(8)⟧(log des deux membres)⟦\\iff⟧⟦(\\sqrt{x} + 1) \\cdot \\log(2) = \\log(8)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦\\sqrt{x} + 1 = \\frac{\\log(8)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦\\sqrt{x} = \\frac{\\log(8)}{\\log(2)} - 1⟧(on isole la racine)⟦\\iff⟧⟦x = \\left(\\frac{\\log(8)}{\\log(2)} - 1\\right)^{2} = 4⟧(les deux membres sont positifs : on élève au carré)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 4⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{4\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · racine carrée⟦x \\geq 0⟧⟦ED = \\left[0 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦2^{\\sqrt{x} + 1} = 8⟧⟦\\iff⟧⟦\\log(2^{\\sqrt{x} + 1}) = \\log(8)⟧(log des deux membres)⟦\\iff⟧⟦(\\sqrt{x} + 1) \\cdot \\log(2) = \\log(8)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦\\sqrt{x} + 1 = \\frac{\\log(8)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦\\sqrt{x} = \\frac{\\log(8)}{\\log(2)} - 1⟧(on isole la racine)⟦\\iff⟧⟦x = \\left(\\frac{\\log(8)}{\\log(2)} - 1\\right)^{2} = 4⟧(les deux membres sont positifs : on élève au carré)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = 4⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{4\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · racine carrée⟦x \\geq 0⟧⟦ED = \\left[0 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base / définition⟦2^{\\sqrt{x} + 1} = 8⟧⟦\\iff⟧⟦2^{\\sqrt{x} + 1} = 2^{3}⟧⟦\\iff⟧⟦\\sqrt{x} + 1 = 3⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦\\sqrt{x} = 2⟧(on isole la racine)⟦\\iff⟧⟦x = 2^{2} = 4⟧(les deux membres sont positifs : on élève au carré)",
+      "titre": "Étape 2Même base / définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = 4⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{4\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "2^(sqrt(x)-1)=3": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
  "2^(x+6)=2^(3x+4)": {
   "au_depart": {
    "progression": "Étape 1 / 2",
@@ -1564,6 +2648,141 @@
       "tableaux": [],
       "texte": "Solution⟦S = \\left\\{1\\right\\}⟧",
       "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "2^(x/(x-1))=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x - 1 \\neq 0 \\iff x \\neq 1⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{1\\right\\}⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦2^{\\frac{x}{x - 1}} = 3⟧⟦\\iff⟧⟦\\log\\left(2^{\\frac{x}{x - 1}}\\right) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦\\frac{x}{x - 1} \\cdot \\log(2) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) = (x - 1) \\cdot \\log(3)⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x \\cdot \\log(2) = x \\cdot \\log(3) - \\log(3)⟧⟦\\iff⟧⟦\\log(3) = x(\\log(3) - \\log(2))⟧⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log(3) - \\log(2)}⟧(car ⟦\\log(3) - \\log(2) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(3)}{\\log\\left(\\frac{3}{2}\\right)}⟧(log a − log b = log(a/b))",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦\\frac{\\log(3)}{\\log\\left(\\frac{3}{2}\\right)} \\approx 2{,}710⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(3)}{\\log\\left(\\frac{3}{2}\\right)}\\right\\} \\text{, soit } x \\approx 2{,}710⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x - 1 \\neq 0 \\iff x \\neq 1⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{1\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦2^{\\frac{x}{x - 1}} = 3⟧⟦\\iff⟧⟦\\log\\left(2^{\\frac{x}{x - 1}}\\right) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦\\frac{x}{x - 1} \\cdot \\log(2) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) = (x - 1) \\cdot \\log(3)⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x \\cdot \\log(2) = x \\cdot \\log(3) - \\log(3)⟧⟦\\iff⟧⟦\\log(3) = x(\\log(3) - \\log(2))⟧⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log(3) - \\log(2)}⟧(car ⟦\\log(3) - \\log(2) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(3)}{\\log\\left(\\frac{3}{2}\\right)}⟧(log a − log b = log(a/b))",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦\\frac{\\log(3)}{\\log\\left(\\frac{3}{2}\\right)} \\approx 2{,}710⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{\\log(3)}{\\log\\left(\\frac{3}{2}\\right)}\\right\\} \\text{, soit } x \\approx 2{,}710⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x - 1 \\neq 0 \\iff x \\neq 1⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{1\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base / définition⟦3⟧ n'est pas une puissance de ⟦2⟧ : il faut les logarithmes.",
+      "titre": "Étape 2Même base / définition"
      }
     ],
     "imprimee": "Méthode : Même base / définition",
@@ -2821,6 +4040,625 @@
    }
   ],
   "progression_finale": "Étape 4 / 4"
+ },
+ "3^(-1/x)=20": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦3^{-\\frac{1}{x}} = 20⟧⟦\\iff⟧⟦\\log\\left(3^{-\\frac{1}{x}}\\right) = \\log(20)⟧(log des deux membres)⟦\\iff⟧⟦\\left(-\\frac{1}{x}\\right) \\cdot \\log(3) = \\log(20)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦-\\log(3) = x \\cdot \\log(20)⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x = -\\frac{\\log(3)}{\\log(20)}⟧(car ⟦\\log(20) \\neq 0⟧)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦-\\frac{\\log(3)}{\\log(20)} \\approx -0{,}367⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-\\frac{\\log(3)}{\\log(20)}\\right\\} \\text{, soit } x \\approx -0{,}367⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦3^{-\\frac{1}{x}} = 20⟧⟦\\iff⟧⟦\\log\\left(3^{-\\frac{1}{x}}\\right) = \\log(20)⟧(log des deux membres)⟦\\iff⟧⟦\\left(-\\frac{1}{x}\\right) \\cdot \\log(3) = \\log(20)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦-\\log(3) = x \\cdot \\log(20)⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x = -\\frac{\\log(3)}{\\log(20)}⟧(car ⟦\\log(20) \\neq 0⟧)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦-\\frac{\\log(3)}{\\log(20)} \\approx -0{,}367⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-\\frac{\\log(3)}{\\log(20)}\\right\\} \\text{, soit } x \\approx -0{,}367⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base / définition⟦20⟧ n'est pas une puissance de ⟦3⟧ : il faut les logarithmes.",
+      "titre": "Étape 2Même base / définition"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "3^(1/x)=3^(-1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦3^{\\frac{1}{x}} = 3^{-1}⟧⟦\\iff⟧⟦\\log\\left(3^{\\frac{1}{x}}\\right) = \\log(3^{-1})⟧(log des deux membres)⟦\\iff⟧⟦\\frac{1}{x} \\cdot \\log(3) = (-1) \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦\\frac{1}{x} = -1⟧(car ⟦\\log(3) \\neq 0⟧)⟦\\iff⟧⟦-x = 1⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x = -1⟧",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = -1⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-1\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦3^{\\frac{1}{x}} = 3^{-1}⟧⟦\\iff⟧⟦\\log\\left(3^{\\frac{1}{x}}\\right) = \\log(3^{-1})⟧(log des deux membres)⟦\\iff⟧⟦\\frac{1}{x} \\cdot \\log(3) = (-1) \\cdot \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦\\frac{1}{x} = -1⟧(car ⟦\\log(3) \\neq 0⟧)⟦\\iff⟧⟦-x = 1⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x = -1⟧",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = -1⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-1\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base⟦3^{\\frac{1}{x}} = 3^{-1}⟧⟦\\iff⟧⟦\\frac{1}{x} = -1⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦-x = 1⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x = -1⟧",
+      "titre": "Étape 2Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = -1⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-1\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "3^(1/x)=3^2": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦3^{\\frac{1}{x}} = 3^{2}⟧⟦\\iff⟧⟦\\log\\left(3^{\\frac{1}{x}}\\right) = \\log(3^{2})⟧(log des deux membres)⟦\\iff⟧⟦\\frac{1}{x} \\cdot \\log(3) = 2\\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦\\frac{1}{x} = 2⟧(car ⟦\\log(3) \\neq 0⟧)⟦\\iff⟧⟦2x = 1⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x = \\frac{1}{2}⟧",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = \\frac{1}{2}⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{1}{2}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦3^{\\frac{1}{x}} = 3^{2}⟧⟦\\iff⟧⟦\\log\\left(3^{\\frac{1}{x}}\\right) = \\log(3^{2})⟧(log des deux membres)⟦\\iff⟧⟦\\frac{1}{x} \\cdot \\log(3) = 2\\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦\\frac{1}{x} = 2⟧(car ⟦\\log(3) \\neq 0⟧)⟦\\iff⟧⟦2x = 1⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x = \\frac{1}{2}⟧",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = \\frac{1}{2}⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{1}{2}\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base⟦3^{\\frac{1}{x}} = 3^{2}⟧⟦\\iff⟧⟦\\frac{1}{x} = 2⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦2x = 1⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x = \\frac{1}{2}⟧",
+      "titre": "Étape 2Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = \\frac{1}{2}⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{1}{2}\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "3^(2/x)=81": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦3^{\\frac{2}{x}} = 81⟧⟦\\iff⟧⟦\\log\\left(3^{\\frac{2}{x}}\\right) = \\log(81)⟧(log des deux membres)⟦\\iff⟧⟦\\frac{2}{x} \\cdot \\log(3) = \\log(81)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦2\\log(3) = x \\cdot \\log(81)⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x = \\frac{2\\log(3)}{\\log(81)}⟧(car ⟦\\log(81) \\neq 0⟧)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦\\frac{2\\log(3)}{\\log(81)} \\approx 0{,}500⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{2\\log(3)}{\\log(81)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{2\\log(3)}{\\log(81)} = \\frac{1}{2}⟧.",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦3^{\\frac{2}{x}} = 81⟧⟦\\iff⟧⟦\\log\\left(3^{\\frac{2}{x}}\\right) = \\log(81)⟧(log des deux membres)⟦\\iff⟧⟦\\frac{2}{x} \\cdot \\log(3) = \\log(81)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦2\\log(3) = x \\cdot \\log(81)⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x = \\frac{2\\log(3)}{\\log(81)}⟧(car ⟦\\log(81) \\neq 0⟧)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦\\frac{2\\log(3)}{\\log(81)} \\approx 0{,}500⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{2\\log(3)}{\\log(81)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{2\\log(3)}{\\log(81)} = \\frac{1}{2}⟧.",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base / définition⟦3^{\\frac{2}{x}} = 81⟧⟦\\iff⟧⟦3^{\\frac{2}{x}} = 3^{4}⟧⟦\\iff⟧⟦\\frac{2}{x} = 4⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦4x = 2⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x = \\frac{1}{2}⟧",
+      "titre": "Étape 2Même base / définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = \\frac{1}{2}⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{1}{2}\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "3^(2sqrt(x)-1)=5": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
  },
  "3^(x+1)+3^(-x)=4": {
   "au_depart": {
@@ -4284,6 +6122,661 @@
    }
   }
  },
+ "5^(x/(x-1))=25": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x - 1 \\neq 0 \\iff x \\neq 1⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{1\\right\\}⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦5^{\\frac{x}{x - 1}} = 25⟧⟦\\iff⟧⟦\\log\\left(5^{\\frac{x}{x - 1}}\\right) = \\log(25)⟧(log des deux membres)⟦\\iff⟧⟦\\frac{x}{x - 1} \\cdot \\log(5) = \\log(25)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(5) = (x - 1) \\cdot \\log(25)⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x \\cdot \\log(5) = x \\cdot \\log(25) - \\log(25)⟧⟦\\iff⟧⟦\\log(25) = x(\\log(25) - \\log(5))⟧⟦\\iff⟧⟦x = \\frac{\\log(25)}{\\log(25) - \\log(5)}⟧(car ⟦\\log(25) - \\log(5) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(25)}{\\log(5)}⟧(log a − log b = log(a/b))",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦\\frac{\\log(25)}{\\log(5)} \\approx 2{,}000⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(25)}{\\log(5)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(25)}{\\log(5)} = 2⟧.",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x - 1 \\neq 0 \\iff x \\neq 1⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{1\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦5^{\\frac{x}{x - 1}} = 25⟧⟦\\iff⟧⟦\\log\\left(5^{\\frac{x}{x - 1}}\\right) = \\log(25)⟧(log des deux membres)⟦\\iff⟧⟦\\frac{x}{x - 1} \\cdot \\log(5) = \\log(25)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(5) = (x - 1) \\cdot \\log(25)⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x \\cdot \\log(5) = x \\cdot \\log(25) - \\log(25)⟧⟦\\iff⟧⟦\\log(25) = x(\\log(25) - \\log(5))⟧⟦\\iff⟧⟦x = \\frac{\\log(25)}{\\log(25) - \\log(5)}⟧(car ⟦\\log(25) - \\log(5) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(25)}{\\log(5)}⟧(log a − log b = log(a/b))",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦\\frac{\\log(25)}{\\log(5)} \\approx 2{,}000⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{\\log(25)}{\\log(5)}\\right\\}⟧Contrôlez à la calculatrice : ⟦x = \\frac{\\log(25)}{\\log(5)} = 2⟧.",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x - 1 \\neq 0 \\iff x \\neq 1⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{1\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base / définition⟦5^{\\frac{x}{x - 1}} = 25⟧⟦\\iff⟧⟦5^{\\frac{x}{x - 1}} = 5^{2}⟧⟦\\iff⟧⟦\\frac{x}{x - 1} = 2⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x = 2x - 2⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦-x = -2⟧⟦\\iff⟧⟦x = 2⟧",
+      "titre": "Étape 2Même base / définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = 2⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "7^(sqrt(x))=-3": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · racine carrée⟦x \\geq 0⟧⟦ED = \\left[0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Aucune solution⟦7^{\\sqrt{x}} > 0⟧(une exponentielle est strictement positive)⟦-3 < 0⟧(aucune solution)",
+    "titre": "Étape 2Aucune solution"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · racine carrée⟦x \\geq 0⟧⟦ED = \\left[0 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Aucune solution⟦7^{\\sqrt{x}} > 0⟧(une exponentielle est strictement positive)⟦-3 < 0⟧(aucune solution)",
+      "titre": "Étape 2Aucune solution"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\varnothing⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · racine carrée⟦x \\geq 0⟧⟦ED = \\left[0 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Aucune solution⟦7^{\\sqrt{x}} > 0⟧(une exponentielle est strictement positive)⟦-3 < 0⟧(aucune solution)",
+      "titre": "Étape 2Aucune solution"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\varnothing⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "7^(sqrt(x))=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · racine carrée⟦x \\geq 0⟧⟦ED = \\left[0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦7^{\\sqrt{x}} = 3⟧⟦\\iff⟧⟦\\log(7^{\\sqrt{x}}) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦\\sqrt{x} \\cdot \\log(7) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦\\sqrt{x} = \\frac{\\log(3)}{\\log(7)}⟧(car ⟦\\log(7) \\neq 0⟧)⟦\\iff⟧⟦x = \\left(\\frac{\\log(3)}{\\log(7)}\\right)^{2}⟧(les deux membres sont positifs : on élève au carré)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦\\left(\\frac{\\log(3)}{\\log(7)}\\right)^{2} \\approx 0{,}319⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\left(\\frac{\\log(3)}{\\log(7)}\\right)^{2}\\right\\} \\text{, soit } x \\approx 0{,}319⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · racine carrée⟦x \\geq 0⟧⟦ED = \\left[0 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦7^{\\sqrt{x}} = 3⟧⟦\\iff⟧⟦\\log(7^{\\sqrt{x}}) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦\\sqrt{x} \\cdot \\log(7) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦\\sqrt{x} = \\frac{\\log(3)}{\\log(7)}⟧(car ⟦\\log(7) \\neq 0⟧)⟦\\iff⟧⟦x = \\left(\\frac{\\log(3)}{\\log(7)}\\right)^{2}⟧(les deux membres sont positifs : on élève au carré)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦\\left(\\frac{\\log(3)}{\\log(7)}\\right)^{2} \\approx 0{,}319⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\left(\\frac{\\log(3)}{\\log(7)}\\right)^{2}\\right\\} \\text{, soit } x \\approx 0{,}319⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · racine carrée⟦x \\geq 0⟧⟦ED = \\left[0 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base / définition⟦3⟧ n'est pas une puissance de ⟦7⟧ : il faut les logarithmes.",
+      "titre": "Étape 2Même base / définition"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "7^(sqrt(x))=7^(-1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · racine carrée⟦x \\geq 0⟧⟦ED = \\left[0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦7^{\\sqrt{x}} = 7^{-1}⟧⟦\\iff⟧⟦\\log(7^{\\sqrt{x}}) = \\log(7^{-1})⟧(log des deux membres)⟦\\iff⟧⟦\\sqrt{x} \\cdot \\log(7) = (-1) \\cdot \\log(7)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦\\sqrt{x} = -1⟧(car ⟦\\log(7) \\neq 0⟧)Une racine carrée est positive ou nulle : l'équation n'a aucune solution.",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · racine carrée⟦x \\geq 0⟧⟦ED = \\left[0 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦7^{\\sqrt{x}} = 7^{-1}⟧⟦\\iff⟧⟦\\log(7^{\\sqrt{x}}) = \\log(7^{-1})⟧(log des deux membres)⟦\\iff⟧⟦\\sqrt{x} \\cdot \\log(7) = (-1) \\cdot \\log(7)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦\\sqrt{x} = -1⟧(car ⟦\\log(7) \\neq 0⟧)Une racine carrée est positive ou nulle : l'équation n'a aucune solution.",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\varnothing⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · racine carrée⟦x \\geq 0⟧⟦ED = \\left[0 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base⟦7^{\\sqrt{x}} = 7^{-1}⟧⟦\\iff⟧⟦\\sqrt{x} = -1⟧(même base : a^A = a^B ⇔ A = B)Une racine carrée est positive ou nulle : l'équation n'a aucune solution.",
+      "titre": "Étape 2Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\varnothing⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "7^(sqrt(x)+1)=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · racine carrée⟦x \\geq 0⟧⟦ED = \\left[0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦7^{\\sqrt{x} + 1} = 3⟧⟦\\iff⟧⟦\\log(7^{\\sqrt{x} + 1}) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦(\\sqrt{x} + 1) \\cdot \\log(7) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦\\sqrt{x} + 1 = \\frac{\\log(3)}{\\log(7)}⟧(car ⟦\\log(7) \\neq 0⟧)⟦\\iff⟧⟦\\sqrt{x} = \\frac{\\log(3)}{\\log(7)} - 1⟧(on isole la racine)Une racine carrée est positive ou nulle : l'équation n'a aucune solution.",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · racine carrée⟦x \\geq 0⟧⟦ED = \\left[0 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦7^{\\sqrt{x} + 1} = 3⟧⟦\\iff⟧⟦\\log(7^{\\sqrt{x} + 1}) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦(\\sqrt{x} + 1) \\cdot \\log(7) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦\\sqrt{x} + 1 = \\frac{\\log(3)}{\\log(7)}⟧(car ⟦\\log(7) \\neq 0⟧)⟦\\iff⟧⟦\\sqrt{x} = \\frac{\\log(3)}{\\log(7)} - 1⟧(on isole la racine)Une racine carrée est positive ou nulle : l'équation n'a aucune solution.",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\varnothing⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · racine carrée⟦x \\geq 0⟧⟦ED = \\left[0 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base / définition⟦3⟧ n'est pas une puissance de ⟦7⟧ : il faut les logarithmes.",
+      "titre": "Étape 2Même base / définition"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
  "8=log(2x+1)": {
   "au_depart": {
    "progression": "Étape 1 / 4",
@@ -4673,6 +7166,1216 @@
    }
   }
  },
+ "e^((x+1)/x)=e^3": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦e^{\\frac{x + 1}{x}} = e^{3}⟧⟦\\iff⟧⟦\\ln\\left(e^{\\frac{x + 1}{x}}\\right) = \\ln(e^{3})⟧(ln des deux membres)⟦\\iff⟧⟦\\frac{x + 1}{x} = 3⟧(ln(e^k) = k)⟦\\iff⟧⟦x + 1 = 3x⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦-2x = -1⟧⟦\\iff⟧⟦x = \\frac{1}{2}⟧",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = \\frac{1}{2}⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{1}{2}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦e^{\\frac{x + 1}{x}} = e^{3}⟧⟦\\iff⟧⟦\\ln\\left(e^{\\frac{x + 1}{x}}\\right) = \\ln(e^{3})⟧(ln des deux membres)⟦\\iff⟧⟦\\frac{x + 1}{x} = 3⟧(ln(e^k) = k)⟦\\iff⟧⟦x + 1 = 3x⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦-2x = -1⟧⟦\\iff⟧⟦x = \\frac{1}{2}⟧",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = \\frac{1}{2}⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{1}{2}\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base⟦e^{\\frac{x + 1}{x}} = e^{3}⟧⟦\\iff⟧⟦\\frac{x + 1}{x} = 3⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x + 1 = 3x⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦-2x = -1⟧⟦\\iff⟧⟦x = \\frac{1}{2}⟧",
+      "titre": "Étape 2Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = \\frac{1}{2}⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{1}{2}\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "e^(-ln(x))=-2": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Aucune solution⟦e^{-\\ln(x)} > 0⟧(une exponentielle est strictement positive)⟦-2 < 0⟧(aucune solution)",
+    "titre": "Étape 2Aucune solution"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Aucune solution⟦e^{-\\ln(x)} > 0⟧(une exponentielle est strictement positive)⟦-2 < 0⟧(aucune solution)",
+      "titre": "Étape 2Aucune solution"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\varnothing⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Aucune solution⟦e^{-\\ln(x)} > 0⟧(une exponentielle est strictement positive)⟦-2 < 0⟧(aucune solution)",
+      "titre": "Étape 2Aucune solution"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\varnothing⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "e^(-ln(x))=0,2": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦e^{-\\ln(x)} = 0{,}2⟧⟦\\iff⟧⟦\\ln(e^{-\\ln(x)}) = \\ln(0{,}2)⟧(ln des deux membres)⟦\\iff⟧⟦-\\ln(x) = \\ln(0{,}2)⟧(ln(e^k) = k)⟦\\iff⟧⟦\\ln(x) = -\\ln(0{,}2)⟧(on multiplie les deux membres par −1)⟦\\iff⟧⟦\\ln(x) = \\ln(5)⟧(−ln a = ln(1/a))⟦\\iff⟧⟦x = 5⟧(ln u = ln v ⇔ u = v, sur l'ED)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 5⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{5\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦e^{-\\ln(x)} = 0{,}2⟧⟦\\iff⟧⟦\\ln(e^{-\\ln(x)}) = \\ln(0{,}2)⟧(ln des deux membres)⟦\\iff⟧⟦-\\ln(x) = \\ln(0{,}2)⟧(ln(e^k) = k)⟦\\iff⟧⟦\\ln(x) = -\\ln(0{,}2)⟧(on multiplie les deux membres par −1)⟦\\iff⟧⟦\\ln(x) = \\ln(5)⟧(−ln a = ln(1/a))⟦\\iff⟧⟦x = 5⟧(ln u = ln v ⇔ u = v, sur l'ED)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = 5⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{5\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base / définition⟦e^{-\\ln(x)} = 0{,}2⟧⟦\\iff⟧⟦-\\ln(x) = \\ln(0{,}2)⟧(définition du logarithme)⟦\\iff⟧⟦\\ln(x) = -\\ln(0{,}2)⟧(on multiplie les deux membres par −1)⟦\\iff⟧⟦\\ln(x) = \\ln(5)⟧(−ln a = ln(1/a))⟦\\iff⟧⟦x = 5⟧(ln u = ln v ⇔ u = v, sur l'ED)",
+      "titre": "Étape 2Même base / définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = 5⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{5\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "e^(-ln(x))=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦e^{-\\ln(x)} = 3⟧⟦\\iff⟧⟦\\ln(e^{-\\ln(x)}) = \\ln(3)⟧(ln des deux membres)⟦\\iff⟧⟦-\\ln(x) = \\ln(3)⟧(ln(e^k) = k)⟦\\iff⟧⟦\\ln(x) = -\\ln(3)⟧(on multiplie les deux membres par −1)⟦\\iff⟧⟦\\ln(x) = \\ln\\left(\\frac{1}{3}\\right)⟧(−ln a = ln(1/a))⟦\\iff⟧⟦x = \\frac{1}{3}⟧(ln u = ln v ⇔ u = v, sur l'ED)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = \\frac{1}{3}⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{1}{3}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦e^{-\\ln(x)} = 3⟧⟦\\iff⟧⟦\\ln(e^{-\\ln(x)}) = \\ln(3)⟧(ln des deux membres)⟦\\iff⟧⟦-\\ln(x) = \\ln(3)⟧(ln(e^k) = k)⟦\\iff⟧⟦\\ln(x) = -\\ln(3)⟧(on multiplie les deux membres par −1)⟦\\iff⟧⟦\\ln(x) = \\ln\\left(\\frac{1}{3}\\right)⟧(−ln a = ln(1/a))⟦\\iff⟧⟦x = \\frac{1}{3}⟧(ln u = ln v ⇔ u = v, sur l'ED)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = \\frac{1}{3}⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{1}{3}\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base / définition⟦e^{-\\ln(x)} = 3⟧⟦\\iff⟧⟦-\\ln(x) = \\ln(3)⟧(définition du logarithme)⟦\\iff⟧⟦\\ln(x) = -\\ln(3)⟧(on multiplie les deux membres par −1)⟦\\iff⟧⟦\\ln(x) = \\ln\\left(\\frac{1}{3}\\right)⟧(−ln a = ln(1/a))⟦\\iff⟧⟦x = \\frac{1}{3}⟧(ln u = ln v ⇔ u = v, sur l'ED)",
+      "titre": "Étape 2Même base / définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = \\frac{1}{3}⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{1}{3}\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "e^(-ln(x-1))=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x - 1 > 0 \\iff x > 1⟧.⟦ED = \\left]1 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦e^{-\\ln(x - 1)} = 3⟧⟦\\iff⟧⟦\\ln(e^{-\\ln(x - 1)}) = \\ln(3)⟧(ln des deux membres)⟦\\iff⟧⟦-\\ln(x - 1) = \\ln(3)⟧(ln(e^k) = k)⟦\\iff⟧⟦\\ln(x - 1) = -\\ln(3)⟧(on multiplie les deux membres par −1)⟦\\iff⟧⟦\\ln(x - 1) = \\ln\\left(\\frac{1}{3}\\right)⟧(−ln a = ln(1/a))⟦\\iff⟧⟦x - 1 = \\frac{1}{3}⟧(ln u = ln v ⇔ u = v, sur l'ED)⟦\\iff⟧⟦x = \\frac{4}{3}⟧",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = \\frac{4}{3}⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{4}{3}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x - 1 > 0 \\iff x > 1⟧.⟦ED = \\left]1 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦e^{-\\ln(x - 1)} = 3⟧⟦\\iff⟧⟦\\ln(e^{-\\ln(x - 1)}) = \\ln(3)⟧(ln des deux membres)⟦\\iff⟧⟦-\\ln(x - 1) = \\ln(3)⟧(ln(e^k) = k)⟦\\iff⟧⟦\\ln(x - 1) = -\\ln(3)⟧(on multiplie les deux membres par −1)⟦\\iff⟧⟦\\ln(x - 1) = \\ln\\left(\\frac{1}{3}\\right)⟧(−ln a = ln(1/a))⟦\\iff⟧⟦x - 1 = \\frac{1}{3}⟧(ln u = ln v ⇔ u = v, sur l'ED)⟦\\iff⟧⟦x = \\frac{4}{3}⟧",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = \\frac{4}{3}⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{4}{3}\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x - 1 > 0 \\iff x > 1⟧.⟦ED = \\left]1 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base / définition⟦e^{-\\ln(x - 1)} = 3⟧⟦\\iff⟧⟦-\\ln(x - 1) = \\ln(3)⟧(définition du logarithme)⟦\\iff⟧⟦\\ln(x - 1) = -\\ln(3)⟧(on multiplie les deux membres par −1)⟦\\iff⟧⟦\\ln(x - 1) = \\ln\\left(\\frac{1}{3}\\right)⟧(−ln a = ln(1/a))⟦\\iff⟧⟦x - 1 = \\frac{1}{3}⟧(ln u = ln v ⇔ u = v, sur l'ED)⟦\\iff⟧⟦x = \\frac{4}{3}⟧",
+      "titre": "Étape 2Même base / définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = \\frac{4}{3}⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{4}{3}\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "e^(1/x)=2": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦e^{\\frac{1}{x}} = 2⟧⟦\\iff⟧⟦\\ln\\left(e^{\\frac{1}{x}}\\right) = \\ln(2)⟧(ln des deux membres)⟦\\iff⟧⟦\\frac{1}{x} \\cdot \\ln(e) = \\ln(2)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦\\frac{1}{x} = \\ln(2)⟧(car ln(e) = 1)⟦\\iff⟧⟦1 = x \\cdot \\ln(2)⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x = \\frac{1}{\\ln(2)}⟧(car ⟦\\ln(2) \\neq 0⟧)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦\\frac{1}{\\ln(2)} \\approx 1{,}443⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{1}{\\ln(2)}\\right\\} \\text{, soit } x \\approx 1{,}443⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦e^{\\frac{1}{x}} = 2⟧⟦\\iff⟧⟦\\ln\\left(e^{\\frac{1}{x}}\\right) = \\ln(2)⟧(ln des deux membres)⟦\\iff⟧⟦\\frac{1}{x} \\cdot \\ln(e) = \\ln(2)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦\\frac{1}{x} = \\ln(2)⟧(car ln(e) = 1)⟦\\iff⟧⟦1 = x \\cdot \\ln(2)⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x = \\frac{1}{\\ln(2)}⟧(car ⟦\\ln(2) \\neq 0⟧)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦\\frac{1}{\\ln(2)} \\approx 1{,}443⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{1}{\\ln(2)}\\right\\} \\text{, soit } x \\approx 1{,}443⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base / définition⟦e^{\\frac{1}{x}} = 2⟧⟦\\iff⟧⟦\\frac{1}{x} = \\ln(2)⟧(définition du logarithme)⟦\\iff⟧⟦1 = x \\cdot \\ln(2)⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x = \\frac{1}{\\ln(2)}⟧(car ⟦\\ln(2) \\neq 0⟧)",
+      "titre": "Étape 2Même base / définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦\\frac{1}{\\ln(2)} \\approx 1{,}443⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{1}{\\ln(2)}\\right\\} \\text{, soit } x \\approx 1{,}443⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "e^(2/x)=e^(1/x+1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦e^{\\frac{2}{x}} = e^{\\frac{1}{x} + 1}⟧⟦\\iff⟧⟦\\ln\\left(e^{\\frac{2}{x}}\\right) = \\ln\\left(e^{\\frac{1}{x} + 1}\\right)⟧(ln des deux membres)⟦\\iff⟧⟦\\frac{2}{x} = \\frac{1}{x} + 1⟧(ln(e^k) = k)⟦\\iff⟧⟦x + 1 = 2⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x = 1⟧",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 1⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{1\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦e^{\\frac{2}{x}} = e^{\\frac{1}{x} + 1}⟧⟦\\iff⟧⟦\\ln\\left(e^{\\frac{2}{x}}\\right) = \\ln\\left(e^{\\frac{1}{x} + 1}\\right)⟧(ln des deux membres)⟦\\iff⟧⟦\\frac{2}{x} = \\frac{1}{x} + 1⟧(ln(e^k) = k)⟦\\iff⟧⟦x + 1 = 2⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x = 1⟧",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = 1⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{1\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base⟦e^{\\frac{2}{x}} = e^{\\frac{1}{x} + 1}⟧⟦\\iff⟧⟦\\frac{2}{x} = \\frac{1}{x} + 1⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x + 1 = 2⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x = 1⟧",
+      "titre": "Étape 2Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = 1⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{1\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "e^(2/x)=e^(x+1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦e^{\\frac{2}{x}} = e^{x + 1}⟧⟦\\iff⟧⟦\\ln\\left(e^{\\frac{2}{x}}\\right) = \\ln(e^{x + 1})⟧(ln des deux membres)⟦\\iff⟧⟦\\frac{2}{x} = x + 1⟧(ln(e^k) = k)⟦\\iff⟧⟦x(x + 1) = 2⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x^{2} + x - 2 = 0⟧⟦\\iff⟧⟦(x + 2)(x - 1) = 0⟧⟦\\iff⟧⟦x = -2 \\text{ ou } x = 1⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = -2⟧(dans l'ensemble de définition ✓)⟦x = 1⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-2 \\,;\\, 1\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦e^{\\frac{2}{x}} = e^{x + 1}⟧⟦\\iff⟧⟦\\ln\\left(e^{\\frac{2}{x}}\\right) = \\ln(e^{x + 1})⟧(ln des deux membres)⟦\\iff⟧⟦\\frac{2}{x} = x + 1⟧(ln(e^k) = k)⟦\\iff⟧⟦x(x + 1) = 2⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x^{2} + x - 2 = 0⟧⟦\\iff⟧⟦(x + 2)(x - 1) = 0⟧⟦\\iff⟧⟦x = -2 \\text{ ou } x = 1⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = -2⟧(dans l'ensemble de définition ✓)⟦x = 1⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-2 \\,;\\, 1\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base⟦e^{\\frac{2}{x}} = e^{x + 1}⟧⟦\\iff⟧⟦\\frac{2}{x} = x + 1⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x(x + 1) = 2⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x^{2} + x - 2 = 0⟧⟦\\iff⟧⟦(x + 2)(x - 1) = 0⟧⟦\\iff⟧⟦x = -2 \\text{ ou } x = 1⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 2Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = -2⟧(dans l'ensemble de définition ✓)⟦x = 1⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-2 \\,;\\, 1\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
  "e^(2x)-3e^x+2=0": {
   "au_depart": {
    "progression": "Étape 1 / 5",
@@ -5040,6 +8743,471 @@
     ],
     "imprimee": "Méthode : Même base / définition",
     "progression_finale": "Étape 5 / 5"
+   }
+  }
+ },
+ "e^(6/x)=e^(x-1)": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦e^{\\frac{6}{x}} = e^{x - 1}⟧⟦\\iff⟧⟦\\ln\\left(e^{\\frac{6}{x}}\\right) = \\ln(e^{x - 1})⟧(ln des deux membres)⟦\\iff⟧⟦\\frac{6}{x} = x - 1⟧(ln(e^k) = k)⟦\\iff⟧⟦x(x - 1) = 6⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x^{2} - x - 6 = 0⟧⟦\\iff⟧⟦(x + 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = -2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = -2⟧(dans l'ensemble de définition ✓)⟦x = 3⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-2 \\,;\\, 3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦e^{\\frac{6}{x}} = e^{x - 1}⟧⟦\\iff⟧⟦\\ln\\left(e^{\\frac{6}{x}}\\right) = \\ln(e^{x - 1})⟧(ln des deux membres)⟦\\iff⟧⟦\\frac{6}{x} = x - 1⟧(ln(e^k) = k)⟦\\iff⟧⟦x(x - 1) = 6⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x^{2} - x - 6 = 0⟧⟦\\iff⟧⟦(x + 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = -2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = -2⟧(dans l'ensemble de définition ✓)⟦x = 3⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · dénominateur⟦x \\neq 0 \\iff x \\neq 0⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base⟦e^{\\frac{6}{x}} = e^{x - 1}⟧⟦\\iff⟧⟦\\frac{6}{x} = x - 1⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x(x - 1) = 6⟧(on multiplie les deux membres par les dénominateurs, non nuls sur l'ED)⟦\\iff⟧⟦x^{2} - x - 6 = 0⟧⟦\\iff⟧⟦(x + 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = -2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 2Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = -2⟧(dans l'ensemble de définition ✓)⟦x = 3⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "e^(ln(x-1))=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x - 1 > 0 \\iff x > 1⟧.⟦ED = \\left]1 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦e^{\\ln(x - 1)} = 3⟧⟦\\iff⟧⟦\\ln(e^{\\ln(x - 1)}) = \\ln(3)⟧(ln des deux membres)⟦\\iff⟧⟦\\ln(x - 1) = \\ln(3)⟧(ln(e^k) = k)⟦\\iff⟧⟦x - 1 = 3⟧(ln u = ln v ⇔ u = v, sur l'ED)⟦\\iff⟧⟦x = 4⟧",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 4⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{4\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x - 1 > 0 \\iff x > 1⟧.⟦ED = \\left]1 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦e^{\\ln(x - 1)} = 3⟧⟦\\iff⟧⟦\\ln(e^{\\ln(x - 1)}) = \\ln(3)⟧(ln des deux membres)⟦\\iff⟧⟦\\ln(x - 1) = \\ln(3)⟧(ln(e^k) = k)⟦\\iff⟧⟦x - 1 = 3⟧(ln u = ln v ⇔ u = v, sur l'ED)⟦\\iff⟧⟦x = 4⟧",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = 4⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{4\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x - 1 > 0 \\iff x > 1⟧.⟦ED = \\left]1 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base / définition⟦e^{\\ln(x - 1)} = 3⟧⟦\\iff⟧⟦\\ln(x - 1) = \\ln(3)⟧(définition du logarithme)⟦\\iff⟧⟦x - 1 = 3⟧(ln u = ln v ⇔ u = v, sur l'ED)⟦\\iff⟧⟦x = 4⟧",
+      "titre": "Étape 2Même base / définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = 4⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{4\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "e^(sqrt(x))=e^2": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · racine carrée⟦x \\geq 0⟧⟦ED = \\left[0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦e^{\\sqrt{x}} = e^{2}⟧⟦\\iff⟧⟦\\ln(e^{\\sqrt{x}}) = \\ln(e^{2})⟧(ln des deux membres)⟦\\iff⟧⟦\\sqrt{x} = 2⟧(ln(e^k) = k)⟦\\iff⟧⟦x = 2^{2} = 4⟧(les deux membres sont positifs : on élève au carré)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 4⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{4\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · racine carrée⟦x \\geq 0⟧⟦ED = \\left[0 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦e^{\\sqrt{x}} = e^{2}⟧⟦\\iff⟧⟦\\ln(e^{\\sqrt{x}}) = \\ln(e^{2})⟧(ln des deux membres)⟦\\iff⟧⟦\\sqrt{x} = 2⟧(ln(e^k) = k)⟦\\iff⟧⟦x = 2^{2} = 4⟧(les deux membres sont positifs : on élève au carré)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = 4⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{4\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ensemble de définitionCondition 1 · racine carrée⟦x \\geq 0⟧⟦ED = \\left[0 \\,;\\, +\\infty\\right[⟧",
+      "titre": "Étape 1Ensemble de définition"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base⟦e^{\\sqrt{x}} = e^{2}⟧⟦\\iff⟧⟦\\sqrt{x} = 2⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x = 2^{2} = 4⟧(les deux membres sont positifs : on élève au carré)",
+      "titre": "Étape 2Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Vérification⟦x = 4⟧(dans l'ensemble de définition ✓)",
+      "titre": "Étape 3Vérification"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{4\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 4 / 4"
    }
   }
  },

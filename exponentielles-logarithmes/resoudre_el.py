@@ -149,6 +149,12 @@ def _resoudre(entree, filiere):
                                           el.METHODE_LOGARITHMES)
         if elm.reconnu_changement(s.g, s.d, s.inconnue):          # au programme M (e^x + e^(−x) = 3 : racines irrationnelles) mais pas encore traité
             return so.sortie_erreur(el.MESSAGE_PAS_ENCORE)
+        variantes = elm.variantes_exposant(s.g, s.d, s.inconnue)  # e^(6/x) = e^(x − 1), 7^√x = 3, e^(−ln x) = 3 : l'ensemble de définition d'abord
+        if variantes is not None:
+            return so.sortie_ok_variantes(el.tex_saisie(s.g, s.d), [so.variante(m, LIBELLES[m], _cartes_equation(variantes[m])) for m in el.METHODES],
+                                          el.METHODE_LOGARITHMES)
+        if elm.reconnu_exposant(s.g, s.d, s.inconnue):
+            return so.sortie_erreur(el.MESSAGE_PAS_ENCORE)
         r = elm.corriger_equation(s.g, s.d, s.inconnue)
         if r is not None:
             return _sortie_equation(s, r)
