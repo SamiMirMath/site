@@ -93,6 +93,7 @@ class _Intercepteur(threading.Thread):
         self.a_suivre = queue.Queue()
         self.arret = threading.Event()
         self.servies, self.refusees = [], []
+        self.comptage, self.fuites = [], []   # GoatCounter : requêtes de la balise (gc.zgo.at) servies par un script vide ; requêtes vers goatcounter.com (jamais attendues)
         self._recus = queue.Queue()  # événements arrivés pendant l'attente d'une réponse : traités par run(), jamais en cascade
         self._n = 0
         self.start()
@@ -125,12 +126,24 @@ class _Intercepteur(threading.Thread):
             self._recus.put(m)
 
     def _intercepter(self, session):
-        self._appel("Fetch.enable", session, patterns=[{"urlPattern": pyodide_local.PREFIXE_CDN + "*"}])
+        self._appel("Fetch.enable", session, patterns=[{"urlPattern": pyodide_local.PREFIXE_CDN + "*"}, {"urlPattern": "*gc.zgo.at*"},
+                                                       {"urlPattern": "*goatcounter.com*"}])
 
     def _evenement(self, m):
         methode, p = m.get("method"), m.get("params", {})
         if methode == "Fetch.requestPaused":
             self._repondre(m["sessionId"], p["requestId"], p["request"]["url"])
+
+    def _compteur(self, session, requete, url):
+        """La balise GoatCounter (gc.zgo.at/count.js) reçoit un script vide : aucune requête sortante pendant les tests, et la visite n'est jamais comptée.
+        Une requête vers goatcounter.com (le script vide n'en envoie pas) est enregistrée, puis refusée."""
+        if "gc.zgo.at" in url:
+            self.comptage.append(url)
+            self._appel("Fetch.fulfillRequest", session, requestId=requete, responseCode=200, responsePhrase="Script vide",
+                        responseHeaders=[{"name": "Content-Type", "value": "application/javascript"}])
+        else:
+            self.fuites.append(url)
+            self._appel("Fetch.failRequest", session, requestId=requete, errorReason="BlockedByClient")
 
     def _repondre(self, session, requete, url):
         try:
@@ -139,6 +152,8 @@ class _Intercepteur(threading.Thread):
             pass  # l'onglet a été fermé ou a navigué pendant l'attente : la requête n'existe plus
 
     def _servir(self, session, requete, url):
+        if "gc.zgo.at" in url or "goatcounter.com" in url:
+            return self._compteur(session, requete, url)
         chemin = urllib.parse.urlparse(url).path
         prefixe = f"/pyodide/v{self.version}/full/"
         nom = chemin[len(prefixe):] if chemin.startswith(prefixe) else None

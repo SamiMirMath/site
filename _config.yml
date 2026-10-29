@@ -1,5 +1,9 @@
-# GitHub Pages (Jekyll) : ces dossiers restent dans le dépôt mais ne sont pas
-# publiés sur samimir.ch (documentation interne, tests automatiques).
+# GitHub Pages (Jekyll) : ces dossiers et fichiers restent dans le dépôt mais ne sont pas
+# publiés sur samimir.ch (documentation interne, consignes de travail, tests automatiques).
 exclude:
   - docs
   - tests
+  - CLAUDE.md
+  - CLAUDE.html
+  - README.md
+  - ensemble-definition/README.md

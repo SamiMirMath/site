@@ -37,6 +37,23 @@ class TestAccueil(unittest.TestCase):
         page.taille(largeur, hauteur, sombre=sombre)
         return page
 
+    def test_goatcounter_la_balise_est_demandee_a_gc_zgo_at_sans_rien_envoyer_a_goatcounter(self):
+        """La balise de comptage (29.10.2026) demande gc.zgo.at/count.js, que le navigateur de test sert vide (aucune requête sortante, aucune visite comptée) ;
+        rien ne part vers goatcounter.com. Elle est asynchrone : la page se charge sans l'attendre."""
+        intercepteur = self.nav.intercepteur
+        for chemin in ("index.html", "factorisation/", "exponentielles-logarithmes/"):
+            with self.subTest(page=chemin):
+                avant = len(intercepteur.comptage)
+                page = self.nav.ouvrir(chemin)
+                page.attendre("document.readyState === 'complete'", 60)
+                fin = time.time() + 15
+                while len(intercepteur.comptage) == avant and time.time() < fin:
+                    time.sleep(0.05)
+                self.assertEqual([u.split("//", 1)[1] for u in intercepteur.comptage[avant:]], ["gc.zgo.at/count.js"])
+                self.assertTrue(page.evaluer("[...document.scripts].some(s => s.hasAttribute('data-goatcounter') && s.async)"))
+                self.assertEqual(page.evaluer("performance.getEntriesByType('resource').filter(r => r.name.includes('goatcounter.com')).length"), 0)
+        self.assertEqual(intercepteur.fuites, [])
+
     def test_le_registre_donne_16_liens(self):
         """Année I : 3 (C, Ms, Mr) ; année II : 4 (simplexe en C et Mr, Exponentielles et logarithmes en Ms et Mr) ; année III : 9 (4 outils × Ms, Mr + 1 en C)
         = 16 cartes pour 7 outils distincts."""

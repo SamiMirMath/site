@@ -126,6 +126,49 @@ class TestRegistre(unittest.TestCase):
             self.assertLessEqual(set(json.load(f)["outils"]), {o["id"] for o in REGISTRE["outils"]})
 
 
+BALISE_GOATCOUNTER = '<script data-goatcounter="https://samimir.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>'
+
+
+class TestComptage(unittest.TestCase):
+    """GoatCounter (29.10.2026) : la balise exacte de l'enseignant, une seule fois, dans le <head> de chaque page publiée (l'accueil et chaque outil du registre) ;
+    les fichiers internes (CLAUDE.md, README) ne sont pas publiés (`exclude` de _config.yml)."""
+
+    def pages(self):
+        return ["index.html"] + [o["chemin"] + "index.html" for o in REGISTRE["outils"]]
+
+    def test_la_balise_est_une_fois_dans_le_head_de_chaque_page(self):
+        for page in self.pages():
+            with self.subTest(page=page):
+                texte = lire(page)
+                self.assertEqual(texte.count(BALISE_GOATCOUNTER), 1)
+                self.assertEqual(texte.count("goatcounter.com"), 1, "aucune autre mention de GoatCounter dans la page")
+                self.assertLess(texte.index(BALISE_GOATCOUNTER), texte.index("</head>"))
+
+    def test_toute_page_index_html_du_depot_a_la_balise(self):
+        """Une page ajoutée sans la balise (hors docs/ et tests/, non publiés) est refusée."""
+        trouvees = []
+        for dossier, sous_dossiers, fichiers in os.walk(RACINE):
+            sous_dossiers[:] = [d for d in sous_dossiers if not d.startswith(".") and d not in ("docs", "tests", "node_modules")]
+            if "index.html" in fichiers:
+                trouvees.append(os.path.relpath(os.path.join(dossier, "index.html"), RACINE))
+        self.assertEqual(sorted(trouvees), sorted(self.pages()))
+        for page in trouvees:
+            with self.subTest(page=page):
+                self.assertEqual(lire(page).count(BALISE_GOATCOUNTER), 1)
+
+    def test_les_fichiers_internes_ne_sont_pas_publies(self):
+        with open(os.path.join(RACINE, "_config.yml"), encoding="utf-8") as f:
+            exclus = {ligne.strip()[2:].strip() for ligne in f if ligne.startswith("  - ")}
+        self.assertLessEqual({"docs", "tests", "CLAUDE.md", "CLAUDE.html", "README.md", "ensemble-definition/README.md"}, exclus)
+        for dossier, sous_dossiers, fichiers in os.walk(RACINE):
+            sous_dossiers[:] = [d for d in sous_dossiers if not d.startswith(".") and d not in ("docs", "tests")]
+            for nom in fichiers:
+                if nom.lower().endswith(".md"):
+                    chemin = os.path.relpath(os.path.join(dossier, nom), RACINE)
+                    with self.subTest(fichier=chemin):
+                        self.assertIn(chemin, exclus)
+
+
 class TestAccueil(unittest.TestCase):
     def test_acc01_l_accueil_est_le_registre(self):
         p = accueil()
