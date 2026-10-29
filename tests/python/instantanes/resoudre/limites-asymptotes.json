@@ -1,131 +1,4 @@
 {
- "(2x+1)/(x-1)": {
-  "cartes": [
-   {
-    "blocs": [
-     {
-      "tex": "f(x) = \\frac{2x + 1}{x - 1}",
-      "type": "formule"
-     },
-     {
-      "html": "\\(ED = \\mathbb{R} \\setminus \\left\\{1\\right\\}\\) — détail dans l'outil « Ensemble de définition ».",
-      "style": "discret",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Fonction",
-    "titre_masque": true
-   },
-   {
-    "badge": "tableau",
-    "blocs": [
-     {
-      "html": "Signe de \\(x - 1\\) :",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "crit": [
-       "1"
-      ],
-      "rows": [
-       {
-        "cells": [
-         "-",
-         "||",
-         "+"
-        ],
-        "final": true,
-        "label": "x - 1"
-       }
-      ],
-      "type": "tableau",
-      "var": "x"
-     }
-    ],
-    "style": "normal",
-    "titre": "Tableaux de signes"
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{2x + 1}{x - 1} &= \\text{« }\\dfrac{-\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x\\,\\left(2 + \\frac{1}{x}\\right)}{x\\,\\left(1 - \\frac{1}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{2 + \\frac{1}{x}}{1 - \\frac{1}{x}} = 2\\end{aligned}\\]",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale : \\(y = 2\\).",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to -\\infty"
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{2x + 1}{x - 1} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x\\,\\left(2 + \\frac{1}{x}\\right)}{x\\,\\left(1 - \\frac{1}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{2 + \\frac{1}{x}}{1 - \\frac{1}{x}} = 2\\end{aligned}\\]",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale : \\(y = 2\\).",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to +\\infty"
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to 1^{-}} \\frac{2x + 1}{x - 1} = \\text{« }\\dfrac{3}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x - 1 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to 1^{+}} \\frac{2x + 1}{x - 1} = \\text{« }\\dfrac{3}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x - 1 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote verticale : \\(x = 1\\).",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to 1"
-   },
-   {
-    "blocs": [
-     {
-      "items": [
-       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 2\\)",
-       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 2\\)",
-       "Asymptote verticale : \\(x = 1\\) (\\(\\lim_{x\\to 1^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 1^+} f(x) = +\\infty\\))"
-      ],
-      "style": "bilan",
-      "type": "liste"
-     }
-    ],
-    "style": "final",
-    "titre": "Bilan des asymptotes"
-   }
-  ],
-  "enonce_tex": "f(x) = \\frac{2x + 1}{x - 1}",
-  "erreur": null,
-  "ok": true
- },
  "(2x^2+1)/(x^2-1)": {
   "cartes": [
    {
@@ -388,6 +261,319 @@
    }
   ],
   "enonce_tex": "f(x) = \\frac{e^{x} - 1}{x}",
+  "erreur": null,
+  "ok": true
+ },
+ "(e^x-e^2)/(x-2)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{e^{x} - e^{2}}{x - 2}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R} \\setminus \\left\\{2\\right\\}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction",
+    "titre_masque": true
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{e^{x} - e^{2}}{x - 2} = \\text{« }\\dfrac{e^{-\\infty} - e^{2}}{-\\infty}\\text{ »} = \\text{« }\\dfrac{0^{+} - e^{2}}{-\\infty}\\text{ »} = \\text{« }\\dfrac{- e^{2}}{-\\infty}\\text{ »} = 0\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x} - e^{2}}{x - 2} &= \\text{« }\\dfrac{e^{+\\infty} - e^{2}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty - e^{2}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{e^{x}}{1} = +\\infty \\qquad \\left(\\text{Bernoulli-L'Hôpital : } e^{x} - e^{2} \\text{ et } x - 2 \\text{ dérivables sur } \\mathbb{R} ,\\; \\left(x - 2\\right)' = 1 \\neq 0\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 2} \\frac{e^{x} - e^{2}}{x - 2} &= \\text{« }\\dfrac{e^{2} - e^{2}}{0}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 2} \\frac{e^{x}}{1} = e^{2} \\qquad \\left(\\text{Bernoulli-L'Hôpital : } e^{x} - e^{2} \\text{ et } x - 2 \\text{ dérivables sur } \\mathbb{R} ,\\; \\left(x - 2\\right)' = 1 \\neq 0\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Limite finie : pas d'asymptote verticale, trou dans le graphique en \\((2\\,;\\,e^{2})\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 2"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)",
+       "Trou en \\((2\\,;\\,e^{2})\\) : f n'est pas définie en \\(x = 2\\), mais \\(f(x) \\to e^{2}\\) (pas une asymptote verticale)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{e^{x} - e^{2}}{x - 2}",
+  "erreur": null,
+  "ok": true
+ },
+ "(ln(x)-1)/(x-e)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{\\ln(x) - 1}{x - e}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left]0 \\,;\\, e\\right[ \\cup \\left]e \\,;\\, +\\infty\\right[\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction",
+    "titre_masque": true
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} \\frac{\\ln(x) - 1}{x - e} = \\text{« }\\dfrac{\\ln\\left(0^{+}\\right) - 1}{0^{+} - e}\\text{ »} = \\text{« }\\dfrac{-\\infty - 1}{- e}\\text{ »} = \\text{« }\\dfrac{-\\infty}{- e}\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 0^+"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln(x) - 1}{x - e} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right) - 1}{+\\infty - e}\\text{ »} = \\text{« }\\dfrac{+\\infty - 1}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{\\frac{1}{x}}{1} = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln(x) - 1 \\text{ et } x - e \\text{ dérivables sur } \\left]0 \\,;\\, +\\infty\\right[ ,\\; \\left(x - e\\right)' = 1 \\neq 0\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to e} \\frac{\\ln(x) - 1}{x - e} &= \\text{« }\\dfrac{\\ln e - 1}{e - e}\\text{ »} = \\text{« }\\dfrac{1 - 1}{0}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to e} \\frac{\\frac{1}{x}}{1} = e^{-1} \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln(x) - 1 \\text{ et } x - e \\text{ dérivables sur } \\left]0 \\,;\\, +\\infty\\right[ ,\\; \\left(x - e\\right)' = 1 \\neq 0\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Limite finie : pas d'asymptote verticale, trou dans le graphique en \\((e\\,;\\,e^{-1})\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to e"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote verticale : \\(x = 0\\) (\\(\\lim_{x\\to 0^+} f(x) = +\\infty\\))",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)",
+       "Trou en \\((e\\,;\\,e^{-1})\\) : f n'est pas définie en \\(x = e\\), mais \\(f(x) \\to e^{-1}\\) (pas une asymptote verticale)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{\\ln(x) - 1}{x - e}",
+  "erreur": null,
+  "ok": true
+ },
+ "(ln(x)-2)/(ln(x)-1)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{\\ln(x) - 2}{\\ln(x) - 1}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left]0 \\,;\\, e\\right[ \\cup \\left]e \\,;\\, +\\infty\\right[\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction",
+    "titre_masque": true
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "Signe de \\(\\ln(x) - 1\\) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0",
+       "e"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "\\ln(x) - 1"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "Les zones hachurées sont hors du domaine de définition de l'expression.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Tableaux de signes"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} \\frac{\\ln(x) - 2}{\\ln(x) - 1} &= \\text{« }\\dfrac{\\ln\\left(0^{+}\\right) - 2}{\\ln\\left(0^{+}\\right) - 1}\\text{ »} = \\text{« }\\dfrac{-\\infty - 2}{-\\infty - 1}\\text{ »} = \\text{« }\\dfrac{-\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 0^{+}} 1 = 1 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln(x) - 2 \\text{ et } \\ln(x) - 1 \\text{ dérivables sur } \\left]0 \\,;\\, +\\infty\\right[ ,\\; \\left(\\ln(x) - 1\\right)' = \\frac{1}{x} \\text{ ne s'annule pas sur } \\left]0 \\,;\\, +\\infty\\right[\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Limite finie : pas d'asymptote verticale, trou dans le graphique en \\((0\\,;\\,1)\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 0^+"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln(x) - 2}{\\ln(x) - 1} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right) - 2}{\\ln\\left(+\\infty\\right) - 1}\\text{ »} = \\text{« }\\dfrac{+\\infty - 2}{+\\infty - 1}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} 1 = 1 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln(x) - 2 \\text{ et } \\ln(x) - 1 \\text{ dérivables sur } \\left]0 \\,;\\, +\\infty\\right[ ,\\; \\left(\\ln(x) - 1\\right)' = \\frac{1}{x} \\text{ ne s'annule pas sur } \\left]0 \\,;\\, +\\infty\\right[\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to {e}^{-}} \\frac{\\ln(x) - 2}{\\ln(x) - 1} = \\text{« }\\dfrac{\\ln e - 2}{\\ln e - 1}\\text{ »} = \\text{« }\\dfrac{1 - 2}{1 - 1}\\text{ »} = \\text{« }\\dfrac{-1}{0^{-}}\\text{ »} = +\\infty \\qquad \\left(\\ln(x) - 1 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to {e}^{+}} \\frac{\\ln(x) - 2}{\\ln(x) - 1} = \\text{« }\\dfrac{\\ln e - 2}{\\ln e - 1}\\text{ »} = \\text{« }\\dfrac{1 - 2}{1 - 1}\\text{ »} = \\text{« }\\dfrac{-1}{0^{+}}\\text{ »} = -\\infty \\qquad \\left(\\ln(x) - 1 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = e\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to e"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Trou en \\((0\\,;\\,1)\\) : f n'est pas définie en \\(x = 0\\), mais \\(f(x) \\to 1\\) (pas une asymptote verticale)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 1\\)",
+       "Asymptote verticale : \\(x = e\\) (\\(\\lim_{x\\to e^-} f(x) = +\\infty\\) ; \\(\\lim_{x\\to e^+} f(x) = -\\infty\\))"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{\\ln(x) - 2}{\\ln(x) - 1}",
   "erreur": null,
   "ok": true
  },
@@ -1354,6 +1540,135 @@
   "erreur": null,
   "ok": true
  },
+ "e^x/ln(x)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{e^{x}}{\\ln(x)}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left]0 \\,;\\, 1\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction",
+    "titre_masque": true
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "Signe de \\(\\ln(x)\\) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0",
+       "1"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "\\ln(x)"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "Les zones hachurées sont hors du domaine de définition de l'expression.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Tableaux de signes"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} \\frac{e^{x}}{\\ln(x)} = \\text{« }\\dfrac{e^{0^{+}}}{\\ln\\left(0^{+}\\right)}\\text{ »} = \\text{« }\\dfrac{1}{-\\infty}\\text{ »} = 0\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Limite finie : pas d'asymptote verticale, trou dans le graphique en \\((0\\,;\\,0)\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 0^+"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x}}{\\ln(x)} &= \\text{« }\\dfrac{e^{+\\infty}}{\\ln\\left(+\\infty\\right)}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} x\\,e^{x} = \\text{« }+\\infty \\cdot +\\infty\\text{ »} = +\\infty \\qquad \\left(\\text{Bernoulli-L'Hôpital : } e^{x} \\text{ et } \\ln(x) \\text{ dérivables sur } \\left]0 \\,;\\, +\\infty\\right[ ,\\; \\left(\\ln(x)\\right)' = \\frac{1}{x} \\text{ ne s'annule pas sur } \\left]0 \\,;\\, +\\infty\\right[\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 1^{-}} \\frac{e^{x}}{\\ln(x)} = \\text{« }\\dfrac{e^{1}}{\\ln 1}\\text{ »} = \\text{« }\\dfrac{e}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(\\ln(x) < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 1^{+}} \\frac{e^{x}}{\\ln(x)} = \\text{« }\\dfrac{e^{1}}{\\ln 1}\\text{ »} = \\text{« }\\dfrac{e}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(\\ln(x) > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 1"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Trou en \\((0\\,;\\,0)\\) : f n'est pas définie en \\(x = 0\\), mais \\(f(x) \\to 0\\) (pas une asymptote verticale)",
+       "Asymptote verticale : \\(x = 1\\) (\\(\\lim_{x\\to 1^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 1^+} f(x) = +\\infty\\))"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{e^{x}}{\\ln(x)}",
+  "erreur": null,
+  "ok": true
+ },
  "e^x/x": {
   "cartes": [
    {
@@ -1475,6 +1790,79 @@
   "erreur": null,
   "ok": true
  },
+ "ln(1+e^x)/e^x": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{\\ln\\left(1 + e^{x}\\right)}{e^{x}}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction",
+    "titre_masque": true
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{\\ln\\left(1 + e^{x}\\right)}{e^{x}} &= \\text{« }\\dfrac{\\ln\\left(1 + e^{-\\infty}\\right)}{e^{-\\infty}}\\text{ »} = \\text{« }\\dfrac{\\ln\\left(1 + 0\\right)}{0}\\text{ »} = \\text{« }\\dfrac{\\ln 1}{0}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\frac{1}{e^{x} + 1} = 1 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln\\left(1 + e^{x}\\right) \\text{ et } e^{x} \\text{ dérivables sur } \\mathbb{R} ,\\; \\left(e^{x}\\right)' = e^{x} \\text{ ne s'annule pas sur } \\mathbb{R}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln\\left(1 + e^{x}\\right)}{e^{x}} &= \\text{« }\\dfrac{\\ln\\left(1 + e^{+\\infty}\\right)}{e^{+\\infty}}\\text{ »} = \\text{« }\\dfrac{\\ln\\left(1 + \\infty\\right)}{+\\infty}\\text{ »} = \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{1}{e^{x} + 1} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln\\left(1 + e^{x}\\right) \\text{ et } e^{x} \\text{ dérivables sur } \\mathbb{R} ,\\; \\left(e^{x}\\right)' = e^{x} \\text{ ne s'annule pas sur } \\mathbb{R}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 1\\)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{\\ln\\left(1 + e^{x}\\right)}{e^{x}}",
+  "erreur": null,
+  "ok": true
+ },
  "ln(x)": {
   "cartes": [
    {
@@ -1539,6 +1927,201 @@
    }
   ],
   "enonce_tex": "f(x) = \\ln(x)",
+  "erreur": null,
+  "ok": true
+ },
+ "ln(x)/e^(2x)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{\\ln(x)}{e^{2x}}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left]0 \\,;\\, +\\infty\\right[\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction",
+    "titre_masque": true
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} \\frac{\\ln(x)}{e^{2x}} = \\text{« }\\dfrac{\\ln\\left(0^{+}\\right)}{e^{0^{+}}}\\text{ »} = \\text{« }\\dfrac{-\\infty}{1}\\text{ »} = -\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 0^+"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln(x)}{e^{2x}} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{e^{+\\infty}}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{\\frac{1}{2}e^{-2x}}{x} = \\text{« }\\dfrac{\\frac{1}{2} \\cdot 0^{+}}{+\\infty}\\text{ »} = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln(x) \\text{ et } e^{2x} \\text{ dérivables sur } \\left]0 \\,;\\, +\\infty\\right[ ,\\; \\left(e^{2x}\\right)' = 2e^{2x} \\text{ ne s'annule pas sur } \\left]0 \\,;\\, +\\infty\\right[\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote verticale : \\(x = 0\\) (\\(\\lim_{x\\to 0^+} f(x) = -\\infty\\))",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{\\ln(x)}{e^{2x}}",
+  "erreur": null,
+  "ok": true
+ },
+ "ln(x+1)/x": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{\\ln\\left(x + 1\\right)}{x}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left]-1 \\,;\\, 0\\right[ \\cup \\left]0 \\,;\\, +\\infty\\right[\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction",
+    "titre_masque": true
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "Signe de \\(x + 1\\) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-1"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x + 1"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Tableaux de signes"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -1^{+}} \\frac{\\ln\\left(x + 1\\right)}{x} = \\text{« }\\dfrac{\\ln\\left(0^{+}\\right)}{-1}\\text{ »} = \\text{« }\\dfrac{-\\infty}{-1}\\text{ »} = +\\infty \\qquad \\left(x + 1 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = -1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -1^+"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln\\left(x + 1\\right)}{x} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{\\frac{1}{x + 1}}{1} = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln\\left(x + 1\\right) \\text{ et } x \\text{ dérivables sur } \\left]-1 \\,;\\, +\\infty\\right[ ,\\; x' = 1 \\neq 0\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0} \\frac{\\ln\\left(x + 1\\right)}{x} &= \\text{« }\\dfrac{\\ln 1}{0}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 0} \\frac{\\frac{1}{x + 1}}{1} = 1 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln\\left(x + 1\\right) \\text{ et } x \\text{ dérivables sur } \\left]-1 \\,;\\, +\\infty\\right[ ,\\; x' = 1 \\neq 0\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Limite finie : pas d'asymptote verticale, trou dans le graphique en \\((0\\,;\\,1)\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 0"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote verticale : \\(x = -1\\) (\\(\\lim_{x\\to -1^+} f(x) = +\\infty\\))",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)",
+       "Trou en \\((0\\,;\\,1)\\) : f n'est pas définie en \\(x = 0\\), mais \\(f(x) \\to 1\\) (pas une asymptote verticale)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{\\ln\\left(x + 1\\right)}{x}",
   "erreur": null,
   "ok": true
  },
@@ -1636,6 +2219,169 @@
    }
   ],
   "enonce_tex": "f(x) = \\ln\\left(x - 1\\right)",
+  "erreur": null,
+  "ok": true
+ },
+ "ln(x^2-3)/(2-x)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\frac{\\ln\\left(x^{2} - 3\\right)}{2 - x}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\left]-\\infty \\,;\\, -\\sqrt{3}\\right[ \\cup \\left]\\sqrt{3} \\,;\\, 2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction",
+    "titre_masque": true
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "Signe de \\(x^{2} - 3\\) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-\\sqrt{3}",
+       "\\sqrt{3}"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "x^{2} - 3"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Tableaux de signes"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{\\ln\\left(x^{2} - 3\\right)}{2 - x} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\frac{-2x}{x^{2} - 3} \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln\\left(x^{2} - 3\\right) \\text{ et } 2 - x \\text{ dérivables sur } \\left]-\\infty \\,;\\, -\\sqrt{3}\\right[ ,\\; \\left(2 - x\\right)' = -1 \\neq 0\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{-2x}{x^{2}\\,\\left(1 - \\frac{3}{x^{2}}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} -\\frac{2}{x\\,\\left(1 - \\frac{3}{x^{2}}\\right)} = \\text{« }-\\left(\\dfrac{2}{-\\infty \\cdot 1}\\right)\\text{ »} = 0\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln\\left(x^{2} - 3\\right)}{2 - x} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{-\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{-2x}{x^{2} - 3} \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln\\left(x^{2} - 3\\right) \\text{ et } 2 - x \\text{ dérivables sur } \\left]\\sqrt{3} \\,;\\, +\\infty\\right[ ,\\; \\left(2 - x\\right)' = -1 \\neq 0\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{-2x}{x^{2}\\,\\left(1 - \\frac{3}{x^{2}}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} -\\frac{2}{x\\,\\left(1 - \\frac{3}{x^{2}}\\right)} = \\text{« }-\\left(\\dfrac{2}{+\\infty \\cdot 1}\\right)\\text{ »} = 0\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to {-\\sqrt{3}}^{-}} \\frac{\\ln\\left(x^{2} - 3\\right)}{2 - x} = \\text{« }\\dfrac{\\ln\\left(0^{+}\\right)}{\\sqrt{3} + 2}\\text{ »} = \\text{« }\\dfrac{-\\infty}{\\sqrt{3} + 2}\\text{ »} = -\\infty \\qquad \\left(x^{2} - 3 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = -\\sqrt{3}\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\sqrt{3}^-"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to {\\sqrt{3}}^{+}} \\frac{\\ln\\left(x^{2} - 3\\right)}{2 - x} = \\text{« }\\dfrac{\\ln\\left(0^{+}\\right)}{2 - \\sqrt{3}}\\text{ »} = \\text{« }\\dfrac{-\\infty}{2 - \\sqrt{3}}\\text{ »} = -\\infty \\qquad \\left(x^{2} - 3 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = \\sqrt{3}\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to \\sqrt{3}^+"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 2} \\frac{\\ln\\left(x^{2} - 3\\right)}{2 - x} &= \\text{« }\\dfrac{\\ln 1}{0}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 2} \\frac{\\frac{2x}{x^{2} - 3}}{-1} = -4 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln\\left(x^{2} - 3\\right) \\text{ et } 2 - x \\text{ dérivables sur } \\left]\\sqrt{3} \\,;\\, +\\infty\\right[ ,\\; \\left(2 - x\\right)' = -1 \\neq 0\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Limite finie : pas d'asymptote verticale, trou dans le graphique en \\((2\\,;\\,-4)\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 2"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)",
+       "Asymptote verticale : \\(x = -\\sqrt{3}\\) (\\(\\lim_{x\\to -\\sqrt{3}^-} f(x) = -\\infty\\))",
+       "Asymptote verticale : \\(x = \\sqrt{3}\\) (\\(\\lim_{x\\to \\sqrt{3}^+} f(x) = -\\infty\\))",
+       "Trou en \\((2\\,;\\,-4)\\) : f n'est pas définie en \\(x = 2\\), mais \\(f(x) \\to -4\\) (pas une asymptote verticale)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = \\frac{\\ln\\left(x^{2} - 3\\right)}{2 - x}",
   "erreur": null,
   "ok": true
  },
@@ -2675,6 +3421,83 @@
    }
   ],
   "enonce_tex": "f(x) = \\frac{x^{2}}{x - 1}",
+  "erreur": null,
+  "ok": true
+ },
+ "x^3*e^(3x-5)": {
+  "cartes": [
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = x^{3}\\,e^{3x - 5}",
+      "type": "formule"
+     },
+     {
+      "html": "\\(ED = \\mathbb{R}\\) — détail dans l'outil « Ensemble de définition ».",
+      "style": "discret",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction",
+    "titre_masque": true
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} x\\,e^{3x} &= \\text{« }-\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }-\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x}{e^{-3x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &= \\lim_{x\\to -\\infty} -\\frac{1}{3}e^{3x} = \\text{« }\\left(- \\frac{1}{3}\\right) \\cdot 0^{+}\\text{ »} = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } x \\text{ et } e^{-3x} \\text{ dérivables sur } \\mathbb{R} ,\\; \\left(e^{-3x}\\right)' = -3e^{-3x} \\text{ ne s'annule pas sur } \\mathbb{R}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} x^{3}\\,e^{3x} &= \\text{« }-\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }-\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x^{3}}{e^{-3x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &= \\lim_{x\\to -\\infty} -x^{2}\\,e^{3x} \\qquad \\left(\\text{Bernoulli-L'Hôpital : } x^{3} \\text{ et } e^{-3x} \\text{ dérivables sur } \\mathbb{R} ,\\; \\left(e^{-3x}\\right)' = -3e^{-3x} \\text{ ne s'annule pas sur } \\mathbb{R}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{-x^{2}}{e^{-3x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{2}{3}x\\,e^{3x} = \\text{« }\\frac{2}{3} \\cdot \\left(-\\infty\\right) \\cdot 0^{+}\\text{ »} = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } -x^{2} \\text{ et } e^{-3x} \\text{ dérivables sur } \\mathbb{R} ,\\; \\left(e^{-3x}\\right)' = -3e^{-3x} \\text{ ne s'annule pas sur } \\mathbb{R}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} x^{3}\\,e^{3x - 5} &= \\text{« }-\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }-\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} e^{-5}\\,x^{3}\\,e^{3x} = \\text{« }e^{-5} \\cdot \\left(-\\infty\\right) \\cdot 0^{+}\\text{ »} = 0 \\qquad \\left(\\text{on sort la constante}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} x^{3}\\,e^{3x - 5} = \\text{« }+\\infty \\cdot e^{+\\infty}\\text{ »} = \\text{« }+\\infty \\cdot +\\infty\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan des asymptotes"
+   }
+  ],
+  "enonce_tex": "f(x) = x^{3}\\,e^{3x - 5}",
   "erreur": null,
   "ok": true
  }

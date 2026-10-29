@@ -739,6 +739,46 @@ class TestComportement(unittest.TestCase):
                 self.assertLessEqual(largeur[0], largeur[1], largeur)
                 page.taille(1100)
 
+    def test_limites_exemples_et_rappel_a_360_px(self):
+        """Chantier 3M, étape 1 (29.10.2026) : chaque exemple de la page Limites (cas du corpus de l'enseignant, rédigés par Bernoulli-L'Hôpital)
+        tient à 360 px — ni la page ni un élément des cartes ne défile horizontalement — sans phrase de repli ni mot « croissance comparée » ;
+        le nouveau « Rappel de la méthode » (mode d'emploi en 7 points) aussi. Le temps de chaque exemple dans Pyodide reste raisonnable."""
+        if "limites-asymptotes" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        with open(os.path.join(RACINE, "limites-asymptotes", "index.html"), encoding="utf-8") as f:
+            exemples = re.findall(r'"([^"]+)"', re.search(r"const EXEMPLES=(.*?);\n", f.read(), re.S).group(1))
+        self.assertGreaterEqual(len(exemples), 8)
+        page = self.ouvrir("limites-asymptotes")
+        page.taille(360)
+        debordement = """(() => {
+            // une formule large défile DANS son bloc (.etape, .res, .tsigne : overflow-x:auto), jamais la page ni un autre élément
+            const defile = n => { for (let m = n; m; m = m.parentElement) { const o = getComputedStyle(m).overflowX; if (o === 'auto' || o === 'scroll') return true; } return false; };
+            const trop = [...document.querySelectorAll('.rappel *, #cartes *')].filter(n => n.scrollWidth > n.clientWidth + 1 && n.clientWidth > 0
+                && !n.closest('.katex') && getComputedStyle(n).display !== 'inline' && !defile(n)).map(n => n.className + ' ' + n.scrollWidth + '>' + n.clientWidth);
+            return [document.documentElement.scrollWidth, window.innerWidth, trop.slice(0, 5)];
+        })()"""
+        self.assertEqual(page.evaluer("document.querySelectorAll('.rappel ol.mode li').length"), 7)
+        d = page.evaluer(debordement)
+        self.assertLessEqual(d[0], d[1], d)
+        self.assertEqual(d[2], [], d)
+        temps = {}
+        for e in exemples:
+            with self.subTest(exemple=e):
+                debut = time.time()
+                self.calculer(page, e)
+                temps[e] = time.time() - debut
+                page.evaluer("document.querySelector('#tout') && !document.querySelector('#tout').disabled && document.querySelector('#tout').click()")
+                texte = page.evaluer("document.querySelector('#cartes').textContent")
+                self.assertNotIn("n'est pas rédigé ici", texte)
+                self.assertNotIn("croissance comparée", texte)
+                self.assertIn("Bernoulli", texte)
+                d = page.evaluer(debordement)
+                self.assertLessEqual(d[0], d[1], (e, d))
+                self.assertEqual(d[2], [], (e, d))
+        print("\nTemps des exemples de la page Limites (Pyodide) :", {k: round(v, 1) for k, v in temps.items()})
+        self.assertLess(max(temps.values()), 45, temps)
+        page.taille(1100)
+
     def test_soc13_page_delai_depasse_puis_relance(self):
         """Page migrée (commun/outil.js) : délai dépassé → message, moteur relancé, le calcul suivant réussit."""
         page = self.ouvrir("ensemble-definition")
