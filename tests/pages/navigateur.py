@@ -43,6 +43,17 @@ def trouver_chrome():
     raise RuntimeError("Chrome introuvable (Google Chrome ou chromium requis)")
 
 
+_copie_verifiee = False
+
+
+def _verifier_la_copie_locale():
+    """La copie locale de Pyodide ne change pas pendant un processus : la vérifier une fois (elle relit tout le dépôt de fichiers) suffit."""
+    global _copie_verifiee
+    if not _copie_verifiee:
+        pyodide_local.verifier()
+        _copie_verifiee = True
+
+
 def connect(url, **options):
     """Connexion WebSocket synchrone. Les versions récentes de `websockets` renvoient un objet à utiliser comme gestionnaire de contexte
     (DeprecationWarning si on l'utilise directement) : on l'ouvre ici, et `close()` du résultat ferme la connexion."""
@@ -200,7 +211,7 @@ class Page:
             raise ErreurPage(r["exceptionDetails"].get("exception", {}).get("description", str(r["exceptionDetails"])))
         return r["result"].get("value")
 
-    def attendre(self, condition_js, delai=60, pas=0.2):
+    def attendre(self, condition_js, delai=60, pas=0.05):
         fin = time.time() + delai
         while time.time() < fin:
             if self.evaluer(f"Boolean({condition_js})"):
@@ -228,29 +239,31 @@ class Page:
 
 
 class Navigateur:
-    def __init__(self, port_http=0, port_cdp=9333):
-        self.port_cdp = port_cdp
+    def __init__(self, port_http=0):
         self.port_http = port_http
 
     def __enter__(self):
-        pyodide_local.verifier()  # copie présente, complète, de la version des pages : sinon le test échoue ici, avec la marche à suivre
+        _verifier_la_copie_locale()  # copie présente, complète, de la version des pages : sinon le test échoue ici, avec la marche à suivre
         gestionnaire = functools.partial(_Silencieux, directory=RACINE)
         self.serveur = _Serveur(("127.0.0.1", self.port_http), gestionnaire)
         self.port_http = self.serveur.server_address[1]
         threading.Thread(target=self.serveur.serve_forever, daemon=True).start()
         self.profil = tempfile.mkdtemp(prefix="chrome-tests-")
         self.proc = subprocess.Popen(
-            [trouver_chrome(), "--headless=new", f"--remote-debugging-port={self.port_cdp}", f"--user-data-dir={self.profil}",
+            [trouver_chrome(), "--headless=new", "--remote-debugging-port=0", f"--user-data-dir={self.profil}",
              "--no-first-run", "--no-default-browser-check", "--disable-gpu", "--no-sandbox", "--hide-scrollbars", "about:blank"],
             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        # port DevTools choisi par Chrome (port 0) et écrit dans le profil : plusieurs Chrome peuvent tourner en même temps (pytest-xdist)
         url = None
-        for _ in range(100):
+        for _ in range(200):
             try:
-                with urllib.request.urlopen(f"http://127.0.0.1:{self.port_cdp}/json/version", timeout=2) as reponse:
+                with open(os.path.join(self.profil, "DevToolsActivePort")) as f:
+                    port_cdp = int(f.readline())
+                with urllib.request.urlopen(f"http://127.0.0.1:{port_cdp}/json/version", timeout=2) as reponse:
                     url = json.load(reponse)["webSocketDebuggerUrl"]
                 break
             except Exception:
-                time.sleep(0.2)
+                time.sleep(0.1)
         if not url:
             raise RuntimeError("Chrome ne répond pas")
         self.ws = connect(url, max_size=None)
