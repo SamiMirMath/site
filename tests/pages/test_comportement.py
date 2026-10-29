@@ -420,7 +420,7 @@ class TestComportement(unittest.TestCase):
             self.skipTest("hors de OUTILS")
         page = self.ouvrir("exponentielles-logarithmes")
         vus = 0
-        for _ in range(40):
+        for _ in range(400):                         # les problèmes d'application sont ~9 % des tirages : 40 tirages n'en donnaient aucun une fois sur vingt
             page.evaluer("document.querySelector('#exoHasard').click()")
             page.attendre("document.querySelector('#exoEnonce annotation')", 30)
             enonce = page.evaluer("document.querySelector('#exoEnonce annotation').textContent")
