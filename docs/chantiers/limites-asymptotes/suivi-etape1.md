@@ -8,7 +8,7 @@ Demande : l'outil est utilisé le 30.10.2026 au matin par des élèves de 3M. Ob
 |---|---|
 | `f6b130a` (points 1, 2, 3) | Bug 8.13e corrigé (+∞ aux deux pôles, asymptote verticale). Garde-fou générique sur tous les résultats SymPy (`_rejete`) + sonde mpmath dans le moteur = détecteur de contradiction (`_contradit_par_sonde`). Message « La fonction cos n'est pas encore prise en charge par cet outil. » (sin, cos, tan, cot, arc…, sinh…, log_a). |
 | `879abd4` (point 5) | `_comparee_pure` et `_evidence_ln` retirées de `METHODES` ; BH jusqu'à 3 de suite, profondeur 8 ; 0·∞ en quotient (ln en haut, eᵘ → 1/e^(−u), xᵏ → 1/x^(−k), constante sortie) ; LA-07, LA-15, LA-31, LA-32, LA-34 réécrites, R19 du guide ; test « aucune rédaction ne contient croissance comparée, podium, limite de référence ». |
-| (point 6 + 4, voir `git log`) | Page : 9 exemples du corpus rédigés par BH sans repli ; encadré « Rappel de la méthode » = mode d'emploi en 7 points + phrase sur le podium ; second encadré « Rappel : les asymptotes » ; corpus + oracle mpmath (`tests/python/donnees/corpus_limites_3m.py`, `test_corpus_limites_3m.py`) ; test de page à 360 px. |
+| `d675b96` (points 6 et 4) | Page : 9 exemples du corpus rédigés par BH sans repli ; encadré « Rappel de la méthode » = mode d'emploi en 7 points + phrase sur le podium ; second encadré « Rappel : les asymptotes » ; corpus + oracle mpmath (`tests/python/donnees/corpus_limites_3m.py`, `test_corpus_limites_3m.py`) ; test de page à 360 px. |
 
 ## Bornes en phrase de repli sur le corpus (mesure du 29.10.2026)
 
