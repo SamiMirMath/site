@@ -219,7 +219,7 @@ BATTERIE_M_VAR = [
 # au programme M, reconnues, mais avec des racines irrationnelles : pas encore ; en 3C : hors programme
 M_VAR_PAS_ENCORE = ["e^x+e^(-x)=3", "4^x-2^x-1=0", "2^x+2^(-x)=3", "3^x+3^(-x)-6*3^(-3x)=0"]
 
-# T36 (29.10.2026), partie B : exposants 1/x, √x, ±ln x (Javet 2.2 i, 3.15 d e f ; Amaudruz 7.8 d). (saisie, solutions arrondies à 10⁻³) ; les deux méthodes
+# T36 (29.10.2026), partie B : exposants 1/x, √x, ±ln x (polycopié 2.2 i, 3.15 d e f ; brochure 7.8 d). (saisie, solutions arrondies à 10⁻³) ; les deux méthodes
 # donnent le même S, sauf la méthode « même base / définition » quand le second membre n'est pas une puissance de la base (message)
 BATTERIE_M_EXPOSANTS = [
     ("e^(6/x)=e^(x-1)", [-2.0, 3.0]), ("e^(2/x)=e^(x+1)", [-2.0, 1.0]), ("e^(2/x)=e^(1/x+1)", [1.0]), ("3^(1/x)=3^2", [0.5]), ("3^(1/x)=3^(-1)", [-1.0]),
@@ -231,21 +231,21 @@ BATTERIE_M_EXPOSANTS = [
     ("e^(-ln(x-1))=3", [1.333]), ("e^(-ln(x))=-2", []),
 ]
 
-# T36, partie C : base polynomiale du 1er degré, argument constant (Amaudruz 7.3 b, 7.7 e, 7.7 i) ; k entier non nul
+# T36, partie C : base polynomiale du 1er degré, argument constant (brochure 7.3 b, 7.7 e, 7.7 i) ; k entier non nul
 BATTERIE_M_BASE_POLYNOMIALE = [
     ("log_(2x)(1296)=4", [3.0]), ("log_(5x)(1000)=3", [2.0]), ("log_(x+1)(5)=16", [0.106]), ("log_(3x)(1/8)=-3", [0.667]), ("log_(x-1)(27)=3", [4.0]),
     ("log_(-x)(4)=2", [-2.0]), ("log_(2x)(9)=2", [1.5]), ("log_(x+2)(16)=2", [2.0]), ("log_(2x-1)(25)=2", [3.0]), ("log_(x+1)(8)=3", [1.0]),
     ("2=log_(x+1)(9)", [2.0]), ("log_(x+3)(1)=2", []), ("log_(2x)(5)=2", [1.118]), ("log_(x+4)(1/16)=-2", [0.0]), ("log_(3-x)(125)=3", [-2.0]),
 ]
 
-# T36, partie D : bicarré en t = aˣ (exposants de t : −3, −1, 1 ou 1, 3, 5 …), Javet ex. 4 et 2.4 b : t⁴ − 10t² + 9 = 0 ; u = t² > 0
+# T36, partie D : bicarré en t = aˣ (exposants de t : −3, −1, 1 ou 1, 3, 5 …), polycopié ex. 4 et 2.4 b : t⁴ − 10t² + 9 = 0 ; u = t² > 0
 BATTERIE_M_BICARRE = [
     ("9*3^(-3x)-10*3^(-x)+3^x=0", [0.0, 1.0]), ("4*2^(-3x)-5*2^(-x)+2^x=0", [0.0, 1.0]), ("5^(3x)-26*5^x+25*5^(-x)=0", [0.0, 1.0]),
     ("e^(3x)-5*e^x+4*e^(-x)=0", [0.0, 0.693]), ("2^(3x)-10*2^x+9*2^(-x)=0", [0.0, 1.585]), ("3^x-3*3^(-x)-4*3^(-3x)=0", [0.631]),
     ("3^x+3*3^(-x)+2*3^(-3x)=0", []), ("3^x+3^(-x)+3^(-3x)=0", []), ("0,5^x-5*0,5^(-x)+4*0,5^(-3x)=0", [0.0, -1.0]),
 ]
 
-# T36, partie E : base inconnue et exposant rationnel log_x(n) = p/q (Javet 3.5 e) ; x = n^(q/p), x > 0 et x ≠ 1
+# T36, partie E : base inconnue et exposant rationnel log_x(n) = p/q (polycopié 3.5 e) ; x = n^(q/p), x > 0 et x ≠ 1
 BATTERIE_M_BASE_RATIONNELLE = [
     ("log_x(32)=5/3", [8.0]), ("log_x(5)=2/3", [11.180]), ("log_x(1/8)=-3/2", [4.0]), ("5/3=log_x(32)", [8.0]), ("log_x(1)=1/2", []), ("log_x(8)=-2/3", [0.044]),
     ("log_x(9)=3/2", [4.327]), ("log_x(27)=3/2", [9.0]), ("log_x(16)=4/3", [8.0]), ("log_x(4)=1/2", [16.0]), ("log_x(0,25)=-1/2", [16.0]), ("log_x(2)=3/4", [2.520]),
@@ -259,26 +259,26 @@ BATTERIE_M_IRRATIONNEL = [
     ("ln(x)+ln(x+1)=-1", [0.286]), ("ln(2x)+ln(x)=1", [1.166]), ("ln(x^5)=3", [1.822]), ("ln(x^6)=1", [-1.181, 1.181]), ("log(x^3)=1/2", [1.468]),
 ]
 
-# T36, partie G1 : exposant avec le carré d'une somme (Amaudruz 6.1 b) : la 3C ne le développe pas, la filière M oui
+# T36, partie G1 : exposant avec le carré d'une somme (brochure 6.1 b) : la 3C ne le développe pas, la filière M oui
 BATTERIE_M_CARRE_DANS_L_EXPOSANT = [
     ("7^(8x^2+4)=7^((2-3x)^2)", [0.0, 12.0]), ("2^(x^2+1)=2^((x+1)^2)", [0.0]), ("3^(x^2)=3^((x-2)^2)", [1.0]), ("5^(x^2-1)=5^((x-3)^2)", [1.667]),
     ("e^(x^2+x)=e^((x+2)^2)", [-1.333]), ("2^((x-1)^2)=2^(x^2+4)", [-1.5]),
 ]
 
-# T36, partie G2 : second membre à calculer (quotient de sommes de logarithmes en base 10, Amaudruz 7.4 b)
+# T36, partie G2 : second membre à calculer (quotient de sommes de logarithmes en base 10, brochure 7.4 b)
 BATTERIE_M_SECOND_MEMBRE_CALCULE = [
     ("log(x)=(log(20)+log(100)-log(2))/(log(5000)-log(5)+log(0,1))", [31.623]), ("log(x)=(log(20)+log(5))/(log(50)-log(5))", [100.0]),
     ("log(x+1)=(log(2)+log(500))/(log(50)-log(5))", [999.0]), ("(log(4)+log(25))/(log(2)+log(5))=log(x)", [100.0]), ("log(x)=(log(2)+log(5))/(log(20)+log(500))", [1.778]),
     ("log(x)=(log(8)+log(125))/(log(10)+log(100)-log(10))", [31.623]),
 ]
 
-# T36, partie G3 : xᵏ·(a + b·log x) = 0, la solution x = 0 est rejetée par l'ensemble de définition (Amaudruz 7.8 b)
+# T36, partie G3 : xᵏ·(a + b·log x) = 0, la solution x = 0 est rejetée par l'ensemble de définition (brochure 7.8 b)
 BATTERIE_M_PRODUIT_X_LOG = [
     ("x-x*ln(x)=0", [2.718]), ("2x+3x*log(x)=0", [0.215]), ("x^2*ln(x)=x^2", [2.718]), ("x*log_2(x)=3x", [8.0]), ("x*ln(x)=0", [1.0]), ("-x*ln(x)-x=0", [0.368]),
     ("3x-x*log(x)=0", [1000.0]), ("x*ln(x)=2x", [7.389]), ("5x^3=x^3*log(x)", [100000.0]), ("x*log(x)+x=0", [0.1]),
 ]
 
-# T36, partie G4 : le nombre π (lu en filière M seulement), Javet 3.15 c  e^x = π ; exposant du 1er degré, second membre irrationnel
+# T36, partie G4 : le nombre π (lu en filière M seulement), polycopié 3.15 c  e^x = π ; exposant du 1er degré, second membre irrationnel
 BATTERIE_M_PI = [
     ("e^x=pi", [1.145]), ("10^x=π", [0.497]), ("3^(2x-1)=3pi", [1.521]), ("e^(2x+1)=pi/2", [-0.274]), ("2^x=2pi", [2.651]), ("e^(-x)=pi", [-1.145]),
     ("5^(x+1)=pi", [-0.289]),

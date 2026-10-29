@@ -1,4 +1,4 @@
-"""T36 (29.10.2026) — Trous de la filière M relevés dans le polycopié Javet et la brochure Amaudruz : exposants non polynomiaux (1/x, √x, ± ln x), bases
+"""T36 (29.10.2026) — Trous de la filière M relevés dans le polycopié 2M et la brochure 2M : exposants non polynomiaux (1/x, √x, ± ln x), bases
 polynomiales, bicarrés, log_x(c) = p/q, constantes irrationnelles dans un regroupement, cas isolés. Pour chaque batterie : les solutions attendues (les deux
 méthodes quand l'équation en a deux), l'oracle mpmath indépendant du moteur (chaque solution est une racine dans l'ensemble de définition, aucune racine n'est
 perdue), les propriétés de la liste fermée, une sortie valide, et la 3C qui ne change pas (aucune carte d'ensemble de définition)."""
