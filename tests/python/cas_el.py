@@ -245,6 +245,12 @@ BATTERIE_M_BICARRE = [
     ("3^x+3*3^(-x)+2*3^(-3x)=0", []), ("3^x+3^(-x)+3^(-3x)=0", []), ("0,5^x-5*0,5^(-x)+4*0,5^(-3x)=0", [0.0, -1.0]),
 ]
 
+# T36, partie E : base inconnue et exposant rationnel log_x(n) = p/q (Javet 3.5 e) ; x = n^(q/p), x > 0 et x ≠ 1
+BATTERIE_M_BASE_RATIONNELLE = [
+    ("log_x(32)=5/3", [8.0]), ("log_x(5)=2/3", [11.180]), ("log_x(1/8)=-3/2", [4.0]), ("5/3=log_x(32)", [8.0]), ("log_x(1)=1/2", []), ("log_x(8)=-2/3", [0.044]),
+    ("log_x(9)=3/2", [4.327]), ("log_x(27)=3/2", [9.0]), ("log_x(16)=4/3", [8.0]), ("log_x(4)=1/2", [16.0]), ("log_x(0,25)=-1/2", [16.0]), ("log_x(2)=3/4", [2.520]),
+]
+
 # identités sur l'ensemble de définition : S = ED (solutions None)
 M_TOUT_L_ED = ["log(x)=log(x)", "log(x)+log(x-1)=log(x^2-x)", "2log(x)=log(x^2)+log(1)"]
 # formes du programme M que l'outil ne traite pas encore, et vrais hors-programme
@@ -258,7 +264,7 @@ def entrees_el_m():
     return list(dict.fromkeys([s for s, _ in BATTERIE_E4] + [s for s, _ in BATTERIE_M] + M_TOUT_L_ED + M_PAS_ENCORE + M_HORS_PROGRAMME
                                   + [s for s, _ in BATTERIE_M_VAR] + M_VAR_PAS_ENCORE + [s for s, _ in BATTERIE_M_DEUX_TERMES]
                                   + [s for s, _ in BATTERIE_M_EXPOSANTS] + [s for s, _ in BATTERIE_M_BASE_POLYNOMIALE]
-                                  + [s for s, _ in BATTERIE_M_BICARRE]))
+                                  + [s for s, _ in BATTERIE_M_BICARRE] + [s for s, _ in BATTERIE_M_BASE_RATIONNELLE]))
 
 
 def entrees_el():

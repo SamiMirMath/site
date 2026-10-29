@@ -19,7 +19,7 @@ from math import gcd
 from noyau import analyser_complet
 from exp_log import (Car, Chaine, Defini, E, Eq, Fn, Log, Message, Neg, Nb, Op, Ou, Pow, Rel, Texte, Var, _Hors, _arbre_poly, _avec_decimaux,
                      _base_du_logarithme, _carte, _const, _contient_log, _nb_exact, _nom_tex, _padd, _par_exponentielle, _pnet, _precis, _produit,
-                     _racine_entiere, _resoudre_polynome, _somme_arbres, _suite_polynome, _milieu_exact, _valeur_exacte, _valeur_rationnelle, _exposant_entier, _racine_carree, _racine_primitive, tex_element, logarithmique_m, _fin_beta,
+                     _racine_entiere, _resoudre_polynome, _somme_arbres, _suite_polynome, _milieu_exact, _valeur_exacte, _valeur_rationnelle, _exposant_entier, _puissance_rationnelle_exacte, _racine_carree, _racine_primitive, tex_element, logarithmique_m, _fin_beta,
                      resolution_exponentielle, tex, tex_approx, valeur, variables, METHODE_LOGARITHMES, METHODE_MEME_BASE, METHODES, PROP_EXPONENTIELLE, PROP_ISOLER_LOG, PROP_PUISSANCE_NEGATIVE, PROP_EXP_LOG_BASE,
                      PROP_AUCUNE_SOLUTION, PROP_CAR_LN_E, PROP_CAR_LOG_10, PROP_DEFINITION_LOG, PROP_FOIS_MOINS_UN, PROP_LN_DEUX_MEMBRES,
                      PROP_LN_E_PUISSANCE, PROP_LN_PUISSANCE, PROP_LOG_BASE_PUISSANCE, PROP_LOG_DEUX_MEMBRES, PROP_LOG_PUISSANCE, PROP_MEME_BASE)
@@ -506,6 +506,7 @@ PROP_PUISSANCE_PAIRE = "une puissance paire est positive ou nulle"
 PROP_PUISSANCES = "propriétés des puissances"
 PROP_CARRE_DES_DEUX_MEMBRES = "les deux membres sont positifs : on élève au carré"
 PROP_ISOLER_RACINE = "on isole la racine"
+PROP_PUISSANCE_INVERSE = "x > 0 : on élève les deux membres à la puissance inverse de l'exposant, (aᵐ)ⁿ = aᵐⁿ"
 
 
 def _prop_fois(nom, decalage):
@@ -519,7 +520,7 @@ def _prop_pose(t, u):
 
 
 PROPRIETES_M = frozenset({_propriete(f, g) for f in _FAMILLES for g in ("puissance", "produit", "quotient", "mixte", "constante", "egaux", "oppose")} |
-                         {PROP_CARRE_DES_DEUX_MEMBRES, PROP_ISOLER_RACINE, PROP_FOIS_DENOMINATEURS, PROP_RACINE_IMPAIRE, PROP_RACINE_PAIRE, PROP_PUISSANCE_PAIRE, PROP_PUISSANCES} |
+                         {PROP_CARRE_DES_DEUX_MEMBRES, PROP_ISOLER_RACINE, PROP_PUISSANCE_INVERSE, PROP_FOIS_DENOMINATEURS, PROP_RACINE_IMPAIRE, PROP_RACINE_PAIRE, PROP_PUISSANCE_PAIRE, PROP_PUISSANCES} |
                          {_prop_fois(nom, k) for nom in ("t", "u") for k in (-4, -3, -2, -1, 1, 2, 3, 4)} | {_prop_pose("t", "u"), _prop_pose("u", "v")})
 DEGRE_MAX = 8
 
@@ -1631,6 +1632,53 @@ def _base_polynomiale(g, d, x):
 
 
 # =====================================================================
+# 4 sexies. BASE INCONNUE ET EXPOSANT RATIONNEL : log_x(32) = 5/3, log_x(5) = 2/3 (T36, partie E)
+# =====================================================================
+@_avec_decimaux
+def base_inconnue_rationnelle(g, d, x):
+    """Le corrigé de log_x(n) = p/q (p/q non entier, |p| et q au plus 12, n rationnel > 0) : x^(log_x(n)) = x^(p/q), n = x^(p/q), x = n^(q/p) (x > 0 : l'ED
+    exige x > 0 et x ≠ 1). Le carré parfait n = rᵖ donne x = r^q ; sinon x reste n^(q/p) (log_x(5) = 2/3 donne 5^(3/2)). None sinon (pas encore)."""
+    try:
+        return _base_inconnue_rationnelle(g, d, x)
+    except _Hors:
+        return None
+
+
+def _base_inconnue_rationnelle(g, d, x):
+    enonce = Eq(g, d)
+    if variables(g) and not variables(d):
+        s, o, inverse = g, d, False
+    elif variables(d) and not variables(g):
+        s, o, inverse = d, g, True
+    else:
+        raise _Hors
+    k = _const(o)
+    if not isinstance(s, Log) or k is None or s.base != Var(x) or k.denominator == 1 or max(abs(k.numerator), k.denominator) > 12:
+        raise _Hors
+    n = _const(s.a)
+    if variables(s.a) or n is None or n <= 0:
+        raise _Hors
+    X = Var(x)
+    chaine = Chaine([enonce])
+    if inverse:
+        chaine.ajouter(Eq(s, o), "⇔")
+    chaine.ajouter(Eq(Pow(X, s), Pow(X, _nb_exact(k))), "⇔", PROP_EXPONENTIELLE)                  # x^(log_x(n)) = x^(p/q)
+    chaine.ajouter(Eq(_nb_exact(n), Pow(X, _nb_exact(k))), "⇔", PROP_EXP_LOG_BASE)
+    inverse_k = 1 / k
+    puissance = Pow(_nb_exact(n), _nb_exact(inverse_k))
+    exact = _puissance_rationnelle_exacte(n, inverse_k)
+    if exact is None:
+        chaine.ajouter(Eq(X, puissance), "⇔", PROP_PUISSANCE_INVERSE)
+        solution = puissance
+    else:
+        valeur_exacte = _nb_exact(exact)
+        chaine.ajouter(Eq(X, valeur_exacte, _milieu_exact(puissance, valeur_exacte)), "⇔", PROP_PUISSANCE_INVERSE)
+        solution = valeur_exacte
+    return {"genre": "logarithmique", "inconnue": x, "enonce": enonce, "base": None, "etapes": [_carte("Exponentielle des deux membres", [chaine])],
+            "solutions": [solution], "remarque": None}
+
+
+# =====================================================================
 # 5. CORRIGÉ D'UNE ÉQUATION LOGARITHMIQUE EN FILIÈRE M
 # =====================================================================
 def _nommer_racines(r):
@@ -1675,7 +1723,7 @@ def corriger_equation(g, d, x):
         etapes = [_carte_ed(ed, [Message("L'ensemble de définition est vide : l'équation n'a aucune solution.")])]
         return {"genre": "logarithmique", "inconnue": x, "enonce": None, "base": None, "etapes": etapes, "solutions": [], "remarque": None,
                 "ed": ed, "besoin_sympy": ed.besoin_sympy}
-    r = logarithmique_m(g, d, x) or regrouper(g, d, x) or base_polynomiale(g, d, x)
+    r = logarithmique_m(g, d, x) or regrouper(g, d, x) or base_polynomiale(g, d, x) or base_inconnue_rationnelle(g, d, x)
     if r is None:
         return None
     return _avec_ed_et_verification(ed, r, x)

@@ -10,7 +10,7 @@ import exp_log as el
 import exp_log_m as elm
 import resoudre_el as rel
 import sortie as so
-from cas_el import BATTERIE_M_BASE_POLYNOMIALE, BATTERIE_M_BICARRE, BATTERIE_M_EXPOSANTS
+from cas_el import BATTERIE_M_BASE_POLYNOMIALE, BATTERIE_M_BASE_RATIONNELLE, BATTERIE_M_BICARRE, BATTERIE_M_EXPOSANTS
 from test_exp_log_m import MP, ecart, racines
 
 
@@ -133,6 +133,23 @@ class TestBicarre(_Batterie, unittest.TestCase):
     def test_une_racine_irrationnelle_de_t_reste_pas_encore(self):
         self.assertEqual(rel.resoudre("3^x+3^(-x)-6*3^(-3x)=0", "M"), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
         self.assertFalse(rel.resoudre("3^x+3^(-x)-6*3^(-3x)=0", "C")["ok"])
+
+
+class TestBaseRationnelle(_Batterie, unittest.TestCase):
+    BATTERIE = BATTERIE_M_BASE_RATIONNELLE
+    DEUX_METHODES = False
+
+    def test_les_cas_entiers_de_la_3c_ne_changent_pas(self):
+        for entree in ["log_x(9)=-2", "log_x(4)=2", "log_x(27)=3", "log_x(1/8)=3"]:
+            with self.subTest(entree=entree):
+                self.assertTrue(rel.resoudre(entree, "M")["ok"])
+                self.assertIsNone(elm.base_inconnue_rationnelle(*(lambda s: (s.g, s.d, s.inconnue))(el.analyser_saisie(entree, "M"))))
+
+    def test_les_formes_refusees_restent_en_pas_encore(self):
+        for entree in ["log_x(5)=13/2", "log_x(5)=1/13", "log_x(x+1)=3/2"]:
+            with self.subTest(entree=entree):
+                r = rel.resoudre(entree, "M")
+                self.assertFalse(r["ok"])
 
 
 if __name__ == "__main__":
