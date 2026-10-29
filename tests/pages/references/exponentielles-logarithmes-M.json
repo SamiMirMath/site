@@ -1255,6 +1255,101 @@
    }
   }
  },
+ "10^x=π": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦10^{x} = \\pi⟧⟦\\iff⟧⟦\\log(10^{x}) = \\log(\\pi)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(10) = \\log(\\pi)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\log(\\pi)⟧(car log(10) = 1)",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\log(\\pi)\\right\\} \\text{, soit } x \\approx 0{,}497⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦10^{x} = \\pi⟧⟦\\iff⟧⟦\\log(10^{x}) = \\log(\\pi)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(10) = \\log(\\pi)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\log(\\pi)⟧(car log(10) = 1)",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\log(\\pi)\\right\\} \\text{, soit } x \\approx 0{,}497⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base / définition⟦10^{x} = \\pi⟧⟦\\iff⟧⟦x = \\log(\\pi)⟧(définition du logarithme)",
+      "titre": "Étape 1Même base / définition"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\log(\\pi)\\right\\} \\text{, soit } x \\approx 0{,}497⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
  "1=log(x)+log(x-1)": {
   "au_depart": {
    "progression": "Étape 1 / 5",
@@ -4141,6 +4236,91 @@
    }
   }
  },
+ "2^x=2pi": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x} = 2\\pi⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(2\\pi)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(2\\pi)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(2\\pi)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(2\\pi)}{\\log(2)}\\right\\} \\text{, soit } x \\approx 2{,}651⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x} = 2\\pi⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(2\\pi)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(2\\pi)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(2\\pi)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{\\log(2\\pi)}{\\log(2)}\\right\\} \\text{, soit } x \\approx 2{,}651⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base / définition⟦2\\pi⟧ n'est pas une puissance de ⟦2⟧ : il faut les logarithmes.",
+      "titre": "Étape 1Même base / définition"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 1 / 1"
+   }
+  }
+ },
  "2ln(x)+ln(3)=5": {
   "au_depart": {
    "progression": "Étape 1 / 5",
@@ -5654,6 +5834,91 @@
    }
   ],
   "progression_finale": ""
+ },
+ "3^(2x-1)=3pi": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦3^{2x - 1} = 3\\pi⟧⟦\\iff⟧⟦\\log(3^{2x - 1}) = \\log(3\\pi)⟧(log des deux membres)⟦\\iff⟧⟦(2x - 1) \\cdot \\log(3) = \\log(3\\pi)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦2x - 1 = \\frac{\\log(3\\pi)}{\\log(3)}⟧(car ⟦\\log(3) \\neq 0⟧)⟦\\iff⟧⟦2x = 1 + \\frac{\\log(3\\pi)}{\\log(3)}⟧⟦\\iff⟧⟦x = \\frac{1 + \\frac{\\log(3\\pi)}{\\log(3)}}{2}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{1 + \\frac{\\log(3\\pi)}{\\log(3)}}{2}\\right\\} \\text{, soit } x \\approx 1{,}521⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦3^{2x - 1} = 3\\pi⟧⟦\\iff⟧⟦\\log(3^{2x - 1}) = \\log(3\\pi)⟧(log des deux membres)⟦\\iff⟧⟦(2x - 1) \\cdot \\log(3) = \\log(3\\pi)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦2x - 1 = \\frac{\\log(3\\pi)}{\\log(3)}⟧(car ⟦\\log(3) \\neq 0⟧)⟦\\iff⟧⟦2x = 1 + \\frac{\\log(3\\pi)}{\\log(3)}⟧⟦\\iff⟧⟦x = \\frac{1 + \\frac{\\log(3\\pi)}{\\log(3)}}{2}⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{1 + \\frac{\\log(3\\pi)}{\\log(3)}}{2}\\right\\} \\text{, soit } x \\approx 1{,}521⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base / définition⟦3\\pi⟧ n'est pas une puissance de ⟦3⟧ : il faut les logarithmes.",
+      "titre": "Étape 1Même base / définition"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 1 / 1"
+   }
+  }
  },
  "3^(x+1)+3^(-x)=4": {
   "au_depart": {
@@ -8244,6 +8509,91 @@
    }
   }
  },
+ "5^(x+1)=pi": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦5^{x + 1} = \\pi⟧⟦\\iff⟧⟦\\log(5^{x + 1}) = \\log(\\pi)⟧(log des deux membres)⟦\\iff⟧⟦(x + 1) \\cdot \\log(5) = \\log(\\pi)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x + 1 = \\frac{\\log(\\pi)}{\\log(5)}⟧(car ⟦\\log(5) \\neq 0⟧)⟦\\iff⟧⟦x = \\frac{\\log(\\pi)}{\\log(5)} - 1⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(\\pi)}{\\log(5)} - 1\\right\\} \\text{, soit } x \\approx -0{,}289⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦5^{x + 1} = \\pi⟧⟦\\iff⟧⟦\\log(5^{x + 1}) = \\log(\\pi)⟧(log des deux membres)⟦\\iff⟧⟦(x + 1) \\cdot \\log(5) = \\log(\\pi)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x + 1 = \\frac{\\log(\\pi)}{\\log(5)}⟧(car ⟦\\log(5) \\neq 0⟧)⟦\\iff⟧⟦x = \\frac{\\log(\\pi)}{\\log(5)} - 1⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{\\log(\\pi)}{\\log(5)} - 1\\right\\} \\text{, soit } x \\approx -0{,}289⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base / définition⟦\\pi⟧ n'est pas une puissance de ⟦5⟧ : il faut les logarithmes.",
+      "titre": "Étape 1Même base / définition"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 1 / 1"
+   }
+  }
+ },
  "5^(x/(x-1))=25": {
   "au_depart": {
    "progression": "Étape 1 / 4",
@@ -10547,6 +10897,101 @@
    }
   }
  },
+ "e^(-x)=pi": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦e^{-x} = \\pi⟧⟦\\iff⟧⟦\\ln(e^{-x}) = \\ln(\\pi)⟧(ln des deux membres)⟦\\iff⟧⟦(-x) \\cdot \\ln(e) = \\ln(\\pi)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦-x = \\ln(\\pi)⟧(car ln(e) = 1)⟦\\iff⟧⟦x = -\\ln(\\pi)⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-\\ln(\\pi)\\right\\} \\text{, soit } x \\approx -1{,}145⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦e^{-x} = \\pi⟧⟦\\iff⟧⟦\\ln(e^{-x}) = \\ln(\\pi)⟧(ln des deux membres)⟦\\iff⟧⟦(-x) \\cdot \\ln(e) = \\ln(\\pi)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦-x = \\ln(\\pi)⟧(car ln(e) = 1)⟦\\iff⟧⟦x = -\\ln(\\pi)⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-\\ln(\\pi)\\right\\} \\text{, soit } x \\approx -1{,}145⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base / définition⟦e^{-x} = \\pi⟧⟦\\iff⟧⟦-x = \\ln(\\pi)⟧(définition du logarithme)⟦\\iff⟧⟦x = -\\ln(\\pi)⟧",
+      "titre": "Étape 1Même base / définition"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-\\ln(\\pi)\\right\\} \\text{, soit } x \\approx -1{,}145⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
  "e^(1/x)=2": {
   "au_depart": {
    "progression": "Étape 1 / 4",
@@ -11194,6 +11639,101 @@
     ],
     "imprimee": "Méthode : Même base / définition",
     "progression_finale": "Étape 5 / 5"
+   }
+  }
+ },
+ "e^(2x+1)=pi/2": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦e^{2x + 1} = \\frac{\\pi}{2}⟧⟦\\iff⟧⟦\\ln(e^{2x + 1}) = \\ln\\left(\\frac{\\pi}{2}\\right)⟧(ln des deux membres)⟦\\iff⟧⟦(2x + 1) \\cdot \\ln(e) = \\ln\\left(\\frac{\\pi}{2}\\right)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦2x + 1 = \\ln\\left(\\frac{\\pi}{2}\\right)⟧(car ln(e) = 1)⟦\\iff⟧⟦2x = \\ln\\left(\\frac{\\pi}{2}\\right) - 1⟧⟦\\iff⟧⟦x = \\frac{\\ln\\left(\\frac{\\pi}{2}\\right) - 1}{2}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\ln\\left(\\frac{\\pi}{2}\\right) - 1}{2}\\right\\} \\text{, soit } x \\approx -0{,}274⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦e^{2x + 1} = \\frac{\\pi}{2}⟧⟦\\iff⟧⟦\\ln(e^{2x + 1}) = \\ln\\left(\\frac{\\pi}{2}\\right)⟧(ln des deux membres)⟦\\iff⟧⟦(2x + 1) \\cdot \\ln(e) = \\ln\\left(\\frac{\\pi}{2}\\right)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦2x + 1 = \\ln\\left(\\frac{\\pi}{2}\\right)⟧(car ln(e) = 1)⟦\\iff⟧⟦2x = \\ln\\left(\\frac{\\pi}{2}\\right) - 1⟧⟦\\iff⟧⟦x = \\frac{\\ln\\left(\\frac{\\pi}{2}\\right) - 1}{2}⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{\\ln\\left(\\frac{\\pi}{2}\\right) - 1}{2}\\right\\} \\text{, soit } x \\approx -0{,}274⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base / définition⟦e^{2x + 1} = \\frac{\\pi}{2}⟧⟦\\iff⟧⟦2x + 1 = \\ln\\left(\\frac{\\pi}{2}\\right)⟧(définition du logarithme)⟦\\iff⟧⟦2x = \\ln\\left(\\frac{\\pi}{2}\\right) - 1⟧⟦\\iff⟧⟦x = \\frac{\\ln\\left(\\frac{\\pi}{2}\\right) - 1}{2}⟧",
+      "titre": "Étape 1Même base / définition"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{\\ln\\left(\\frac{\\pi}{2}\\right) - 1}{2}\\right\\} \\text{, soit } x \\approx -0{,}274⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
    }
   }
  },
@@ -12379,6 +12919,101 @@
    }
   ],
   "progression_finale": ""
+ },
+ "e^x=pi": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦e^{x} = \\pi⟧⟦\\iff⟧⟦\\ln(e^{x}) = \\ln(\\pi)⟧(ln des deux membres)⟦\\iff⟧⟦x \\cdot \\ln(e) = \\ln(\\pi)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦x = \\ln(\\pi)⟧(car ln(e) = 1)",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\ln(\\pi)\\right\\} \\text{, soit } x \\approx 1{,}145⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦e^{x} = \\pi⟧⟦\\iff⟧⟦\\ln(e^{x}) = \\ln(\\pi)⟧(ln des deux membres)⟦\\iff⟧⟦x \\cdot \\ln(e) = \\ln(\\pi)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦x = \\ln(\\pi)⟧(car ln(e) = 1)",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\ln(\\pi)\\right\\} \\text{, soit } x \\approx 1{,}145⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base / définition⟦e^{x} = \\pi⟧⟦\\iff⟧⟦x = \\ln(\\pi)⟧(définition du logarithme)",
+      "titre": "Étape 1Même base / définition"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\ln(\\pi)\\right\\} \\text{, soit } x \\approx 1{,}145⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
  },
  "ln(-x^2-x-1)=2": {
   "au_depart": {

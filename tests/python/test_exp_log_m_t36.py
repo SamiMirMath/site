@@ -11,7 +11,7 @@ import exp_log as el
 import exp_log_m as elm
 import resoudre_el as rel
 import sortie as so
-from cas_el import BATTERIE_M_BASE_POLYNOMIALE, BATTERIE_M_CARRE_DANS_L_EXPOSANT, BATTERIE_M_PRODUIT_X_LOG, BATTERIE_M_SECOND_MEMBRE_CALCULE, BATTERIE_M_BASE_RATIONNELLE, BATTERIE_M_BICARRE, BATTERIE_M_EXPOSANTS, BATTERIE_M_IRRATIONNEL
+from cas_el import BATTERIE_M_BASE_POLYNOMIALE, BATTERIE_M_CARRE_DANS_L_EXPOSANT, BATTERIE_M_PI, BATTERIE_M_PRODUIT_X_LOG, BATTERIE_M_SECOND_MEMBRE_CALCULE, BATTERIE_M_BASE_RATIONNELLE, BATTERIE_M_BICARRE, BATTERIE_M_EXPOSANTS, BATTERIE_M_IRRATIONNEL
 from test_exp_log_m import MP, ecart, racines
 
 
@@ -217,6 +217,29 @@ class TestProduitXLog(_Batterie, unittest.TestCase):
         for entree in ["x*log(x)=1", "x*ln(x)=x^2", "x*ln(x)+1=0", "ln(x)=x"]:
             with self.subTest(entree=entree):
                 self.assertEqual(rel.resoudre(entree, "M"), {"ok": False, "erreur": el.MESSAGE_HORS_PROGRAMME})
+
+
+class TestPi(_Batterie, unittest.TestCase):
+    BATTERIE = BATTERIE_M_PI
+    ED_EN_PREMIER = False
+
+    def test_la_3c_ne_lit_pas_pi_et_son_message_remplace_celui_des_trois_inconnues(self):
+        for entree, _ in self.BATTERIE:
+            with self.subTest(entree=entree):
+                self.assertEqual(rel.resoudre(entree, "C"), {"ok": False, "erreur": el.MESSAGE_PI_EN_3C})
+
+    def test_lecture_de_pi(self):
+        self.assertEqual(el.tex_saisie(*el.lire_membres("2pi")), r"2\pi")
+        self.assertEqual(el.tex_saisie(*el.lire_membres("PI x")), r"\pi \cdot x")
+        self.assertEqual(el.tex_saisie(*el.lire_membres("2π=x")), r"2\pi = x")
+        with self.assertRaises(el.ErreurSaisie) as e:                         # « pix » reste trois lettres : p, i et x
+            el.analyser_saisie("e^x=pix", "M")
+        self.assertIn("trois inconnues", str(e.exception))
+
+    def test_pi_ailleurs_reste_pas_encore(self):
+        for entree in ["e^(1/x)=pi", "pi^x=3", "e^x+pi=3", "log(x)=pi"]:
+            with self.subTest(entree=entree):
+                self.assertFalse(rel.resoudre(entree, "M")["ok"])
 
 
 if __name__ == "__main__":

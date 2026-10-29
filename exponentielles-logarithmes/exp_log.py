@@ -90,6 +90,11 @@ class E(Noeud):
     __slots__ = ()
 
 
+class Pi(Noeud):
+    """Le nombre π (lu seulement en filière M : e^x = π)."""
+    __slots__ = ()
+
+
 class Neg(Noeud):
     __slots__ = ("a",)
 
@@ -143,7 +148,7 @@ def variables(n):
         return variables(n.arbre)
     if isinstance(n, Var):
         return {n.nom}
-    if isinstance(n, (Nb, E)):
+    if isinstance(n, (Nb, E, Pi)):
         return set()
     if isinstance(n, Neg) or isinstance(n, Fn):
         return variables(n.a)
@@ -159,7 +164,7 @@ def contient_e(n):
         return contient_e(n.arbre)
     if isinstance(n, E):
         return True
-    if isinstance(n, (Var, Nb)):
+    if isinstance(n, (Var, Nb, Pi)):
         return False
     if isinstance(n, (Neg, Fn)):
         return contient_e(n.a)
@@ -196,7 +201,7 @@ def _entre_parentheses(s):
     return r"\left(" + s + r"\right)" if r"\frac" in s else "(" + s + ")"
 
 
-_DEBUT_COLLABLE = re.compile(r"^([A-Za-z(]|\\left\(|\\ln|\\log|\\sqrt)")
+_DEBUT_COLLABLE = re.compile(r"^([A-Za-z(]|\\left\(|\\ln|\\log|\\sqrt|\\pi)")
 
 
 def _nom_tex(nom):
@@ -213,6 +218,8 @@ def tex(n):
         return _nom_tex(n.nom)
     if isinstance(n, E):
         return "e"
+    if isinstance(n, Pi):
+        return r"\pi"
     if isinstance(n, Neg):
         s = tex(n.a)
         return "-" + (_entre_parentheses(s) if isinstance(n.a, Op) and n.a.op in "+-" else s)
@@ -337,6 +344,9 @@ def tokeniser(texte):
         c = s[i]
         if c.isspace():
             i += 1
+        elif c == "π" or (s.startswith("pi", i) and not s[i + 2:i + 3].isalpha() and (i == 0 or not s[i - 1].isalpha())):
+            toks.append(Tok("const", "pi", None))                  # le nombre π (« pi » seul, ou le signe π) ; lu seulement en filière M (analyser_saisie)
+            i += 1 if c == "π" else 2
         elif c == "√":
             if s[i + 1:i + 2] != "(":
                 raise ErreurSaisie("Après √, écrivez une parenthèse : √(x).")
@@ -484,7 +494,7 @@ class _Parseur:
             if self.est_op("*", "/"):
                 dernier = self.prendre().val
                 n = Op(dernier, n, self.puissance())
-            elif p is not None and (p.type in ("num", "var", "fn") or (p.type == "op" and p.val == "(")):
+            elif p is not None and (p.type in ("num", "var", "fn", "const") or (p.type == "op" and p.val == "(")):
                 if p.type == "num":
                     raise ErreurSaisie("Un nombre ne peut pas suivre directement une lettre, une parenthèse ou un autre nombre : "
                                        "écrivez 2x (nombre devant), ou 2*3 avec le signe *.")
@@ -530,6 +540,8 @@ class _Parseur:
                 self.i += 1
                 return _pourcentage(p.val)
             return _nombre(p.val)
+        if p.type == "const":
+            return Pi()
         if p.type == "var":
             return E() if p.val == "e" else Var(p.val)
         if p.type == "fn":
@@ -583,7 +595,7 @@ def _lettres_en_exposant(n):
     """Les lettres qui figurent dans un exposant (la base d'un logarithme n'est pas un exposant)."""
     if isinstance(n, Defini):
         return _lettres_en_exposant(n.arbre)
-    if isinstance(n, (Var, Nb, E)):
+    if isinstance(n, (Var, Nb, E, Pi)):
         return set()
     if isinstance(n, (Neg, Fn, Log)):
         return _lettres_en_exposant(n.a)
@@ -626,6 +638,21 @@ def _liste_de_lettres(noms):
 MESSAGE_AUTRE_BASE = "Pour une autre base, écrivez log_2(x) ou log_a(x) : un nombre ou une lettre après le tiret bas."
 
 
+MESSAGE_PI_EN_3C = "Le nombre π n'est pas traité en 3C."
+
+
+def _contient_pi(n):
+    if isinstance(n, Pi):
+        return True
+    if isinstance(n, (Neg, Fn)):
+        return _contient_pi(n.a)
+    if isinstance(n, (Op, Pow)):
+        return _contient_pi(n.a) or _contient_pi(n.b)
+    if isinstance(n, Log):
+        return _contient_pi(n.a) or (n.base is not None and _contient_pi(n.base))
+    return False
+
+
 def _base_composee(n):
     """Vrai quand un logarithme de l'arbre a une base qui n'est ni un nombre, ni e, ni une seule lettre : log_(2x)(1296), log_(x+1)(5)."""
     if isinstance(n, Log):
@@ -643,6 +670,8 @@ def analyser_saisie(texte, filiere="C"):
     g, d = lire_membres(texte)
     if filiere != "M" and (_base_composee(g) or (d is not None and _base_composee(d))):
         raise ErreurSaisie(MESSAGE_AUTRE_BASE)
+    if filiere != "M" and (_contient_pi(g) or (d is not None and _contient_pi(d))):
+        raise ErreurSaisie(MESSAGE_PI_EN_3C)
     if d is None:
         if variables(g):
             raise ErreurSaisie("Écrivez une équation (avec =), ou une expression sans lettre pour calculer un logarithme.")
@@ -795,6 +824,8 @@ def valeur(n, x=None):
         return float(x)
     if isinstance(n, E):
         return math.e
+    if isinstance(n, Pi):
+        return math.pi
     if isinstance(n, Neg):
         return -valeur(n.a, x)
     if isinstance(n, Op):
@@ -3084,6 +3115,9 @@ def tex_approx(v):
     return formater_decimal(m, tex=True) + r" \times 10^{" + str(e) + "}"
 
 
+PI_80 = decimal.Decimal("3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798")
+
+
 def _precis(n):
     """Valeur d'un arbre sans inconnue avec 60 chiffres (module decimal) ; le contexte est celui de l'appelant."""
     D = decimal.Decimal
@@ -3093,6 +3127,8 @@ def _precis(n):
         return D(n.val.numerator) / D(n.val.denominator)
     if isinstance(n, E):
         return D(1).exp()
+    if isinstance(n, Pi):
+        return PI_80
     if isinstance(n, Neg):
         return -_precis(n.a)
     if isinstance(n, Op):

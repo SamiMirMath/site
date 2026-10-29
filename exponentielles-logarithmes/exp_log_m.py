@@ -17,9 +17,9 @@ from fractions import Fraction as F
 from math import gcd
 
 from noyau import analyser_complet
-from exp_log import (Car, Chaine, Defini, E, Eq, Fn, Log, Message, Neg, Nb, Op, Ou, Pow, Rel, Texte, Var, _Hors, _arbre_poly, _avec_decimaux,
+from exp_log import (Car, Chaine, Defini, E, Eq, Fn, Log, Message, Neg, Nb, Op, Ou, Pi, Pow, Rel, Texte, Var, _Hors, _contient_pi, _arbre_poly, _avec_decimaux,
                      _base_du_logarithme, _carte, _const, _contient_log, _nb_exact, _nom_tex, _padd, _par_exponentielle, _pnet, _precis, _produit,
-                     _racine_entiere, _resoudre_polynome, _somme_arbres, _suite_polynome, _milieu_exact, _valeur_exacte, _valeur_rationnelle, _exposant_entier, _poly, _regrouper as _regrouper_3c, _puissance_rationnelle_exacte, _racine_carree, _racine_primitive, tex_element, logarithmique_m, _fin_beta,
+                     _racine_entiere, _resoudre_polynome, _somme_arbres, _suite_polynome, _milieu_exact, _valeur_exacte, _valeur_rationnelle, _exposant_entier, _poly, _regrouper as _regrouper_3c, _suite_lineaire, _puissance_rationnelle_exacte, _racine_carree, _racine_primitive, tex_element, logarithmique_m, _fin_beta,
                      resolution_exponentielle, tex, tex_approx, valeur, variables, METHODE_LOGARITHMES, METHODE_MEME_BASE, METHODES, PROP_EXPONENTIELLE, PROP_ISOLER_LOG, PROP_PUISSANCE_NEGATIVE, PROP_EXP_LOG_BASE, PROP_AUTRE_COTE, PROP_MISE_EN_EVIDENCE, PROP_PRODUIT_NUL,
                      PROP_AUCUNE_SOLUTION, PROP_CAR_LN_E, PROP_CAR_LOG_10, PROP_DEFINITION_LOG, PROP_FOIS_MOINS_UN, PROP_LN_DEUX_MEMBRES,
                      PROP_LN_E_PUISSANCE, PROP_LN_PUISSANCE, PROP_LOG_BASE_PUISSANCE, PROP_LOG_DEUX_MEMBRES, PROP_LOG_PUISSANCE, PROP_MEME_BASE)
@@ -57,6 +57,8 @@ def _txt(n, mini=0):
         return n.nom
     if isinstance(n, E):
         return "e"
+    if isinstance(n, Pi):
+        return "π"
     if isinstance(n, Neg):
         return "−" + _txt(n.a, 3)
     if isinstance(n, Op):
@@ -236,6 +238,8 @@ def _vers_ed(n, x):
         return "x"
     if isinstance(n, E):
         return "e"
+    if isinstance(n, Pi):
+        return "3"                                     # une constante positive : aucune condition sur x
     if isinstance(n, Neg):
         return "(-" + _vers_ed(n.a, x) + ")"
     if isinstance(n, Op):
@@ -1296,7 +1300,10 @@ def _situation(g, d, x):
             (s.base == "e" and isinstance(s.second.a, E)) or (s.base != "e" and _const(s.second.a) == s.base)):
         s.m = _const(s.second.b)                       # le second membre est écrit b^m (e^2, 2^3) : même base tout de suite
     elif s.constante is None:
-        raise _Hors
+        if not _contient_pi(s.second) or _signe_exact(s.second) <= 0 or _genre_exposant(s.exposant) != "poly" or len(_pq(s.exposant)) != 2:
+            raise _Hors
+        s.genre = "poly_pi"                              # e^x = π, 3^(2x − 1) = π : exposant du 1er degré, second membre irrationnel
+        return s
     s.genre = _genre_exposant(s.exposant)
     if s.genre == "poly":
         raise _Hors
@@ -1339,6 +1346,35 @@ def _fin_egalite_des_exposants(chaine, s, resultat, titre):
     chaine.ajouter(Eq(gauche, droite), "⇔", PROP_FOIS_DENOMINATEURS)
     suite, solutions, remarque = _resoudre_egalite(chaine, gauche, droite, x)
     return resultat([_carte(titre, [chaine] + suite)], solutions, remarque)
+
+
+def _poly_pi(chaine, s, methode, resultat):
+    """b^(px + q) = π : la définition du logarithme (b = 10 ou e) ou le logarithme des deux membres, puis l'équation du 1er degré en x."""
+    x, A = s.x, s.exposant
+    q0, p1 = _pq(A)
+    ln = s.base == "e"
+    bl = E() if ln else None
+    lc = Log(s.second, bl)
+    if methode == METHODE_MEME_BASE:
+        titre = "Même base / définition"
+        if s.base not in ("e", F(10)):
+            message = Message(s.second, " n'est pas une puissance de ", s.noeud, " : il faut les logarithmes.")
+            return resultat([_carte(titre, [message])], [], None, message=message)
+        K = lc
+        chaine.ajouter(Eq(A, K), "⇔", PROP_DEFINITION_LOG)
+    else:
+        titre = "Logarithme des deux membres"
+        lb = Log(s.noeud, bl)
+        chaine.ajouter(Eq(Log(_exponentielle(s), bl), lc), "⇔", PROP_LN_DEUX_MEMBRES if ln else PROP_LOG_DEUX_MEMBRES)
+        chaine.ajouter(Eq(Op("*", A, lb), lc), "⇔", PROP_LN_PUISSANCE if ln else PROP_LOG_PUISSANCE)
+        if s.base in ("e", F(10)):
+            K = lc
+            chaine.ajouter(Eq(A, K), "⇔", PROP_CAR_LN_E if ln else PROP_CAR_LOG_10)
+        else:
+            K = Op("/", lc, lb)
+            chaine.ajouter(Eq(A, K), "⇔", Car(lb))
+    solution = _suite_lineaire(chaine, p1, q0, K, x, A)
+    return resultat([_carte(titre, [chaine])], [solution])
 
 
 def _fin_developpee(chaine, s, resultat, titre):
@@ -1488,6 +1524,8 @@ def _methode_exposant(s, methode):
     def resultat(cartes, solutions, remarque=None, **autres):
         return {"genre": "exposant", "inconnue": x, "enonce": enonce, "base": None, "etapes": cartes, "solutions": solutions, "remarque": remarque, **autres}
 
+    if s.genre == "poly_pi":
+        return _poly_pi(chaine, s, methode, resultat)
     if s.genre in ("meme_base", "meme_base_developper"):
         if methode == METHODE_MEME_BASE:
             titre = "Même base"
@@ -1605,7 +1643,7 @@ def variantes_exposant(g, d, x):
     en tête et la « Vérification » ; None si l'équation n'est pas de cette forme."""
     try:
         s = _situation(g, d, x)
-        if s.genre == "meme_base_developper":            # exposants polynomiaux : aucune condition d'existence, donc ni carte ED ni vérification
+        if s.genre in ("meme_base_developper", "poly_pi"):            # exposants polynomiaux : aucune condition d'existence, donc ni carte ED ni vérification
             return {m: _methode_exposant(s, m) for m in METHODES}
         ed = ensemble_de_definition(g, d, x, general=True)
         return {m: _avec_ed_et_verification(ed, _methode_exposant(s, m), x) for m in METHODES}

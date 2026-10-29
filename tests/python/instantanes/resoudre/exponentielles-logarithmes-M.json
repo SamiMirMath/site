@@ -1795,6 +1795,94 @@
    }
   ]
  },
+ "10^x=π": {
+  "cartes": [
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(10^{x} = \\pi\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(10^{x}) = \\log(\\pi)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(10) = \\log(\\pi)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\log(\\pi)\\)</span><span class=\"prop\">(car log(10) = 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\log(\\pi)\\right\\} \\text{, soit } x \\approx 0{,}497",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "10^{x} = \\pi",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Même base / définition",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(10^{x} = \\pi\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\log(\\pi)\\)</span><span class=\"prop\">(définition du logarithme)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\log(\\pi)\\right\\} \\text{, soit } x \\approx 0{,}497",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(10^{x} = \\pi\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(10^{x}) = \\log(\\pi)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(10) = \\log(\\pi)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\log(\\pi)\\)</span><span class=\"prop\">(car log(10) = 1)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\log(\\pi)\\right\\} \\text{, soit } x \\approx 0{,}497",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
  "1=log(x)+log(x-1)": {
   "cartes": [
    {
@@ -5544,6 +5632,84 @@
    }
   ]
  },
+ "2^x=2pi": {
+  "cartes": [
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2\\pi\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2\\pi)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(2\\pi)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2\\pi)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(2\\pi)}{\\log(2)}\\right\\} \\text{, soit } x \\approx 2{,}651",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{x} = 2\\pi",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Même base / définition",
+      "blocs": [
+       {
+        "html": "\\(2\\pi\\) n'est pas une puissance de \\(2\\) : il faut les logarithmes.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2\\pi\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2\\pi)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(2\\pi)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2\\pi)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\frac{\\log(2\\pi)}{\\log(2)}\\right\\} \\text{, soit } x \\approx 2{,}651",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
  "2ln(x)+ln(3)=5": {
   "cartes": [
    {
@@ -7502,6 +7668,84 @@
  "3^(2sqrt(x)-1)=5": {
   "erreur": "Cet outil ne traite pas encore ce type d'équation.",
   "ok": false
+ },
+ "3^(2x-1)=3pi": {
+  "cartes": [
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{2x - 1} = 3\\pi\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{2x - 1}) = \\log(3\\pi)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((2x - 1) \\cdot \\log(3) = \\log(3\\pi)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2x - 1 = \\frac{\\log(3\\pi)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2x = 1 + \\frac{\\log(3\\pi)}{\\log(3)}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{1 + \\frac{\\log(3\\pi)}{\\log(3)}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{1 + \\frac{\\log(3\\pi)}{\\log(3)}}{2}\\right\\} \\text{, soit } x \\approx 1{,}521",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3^{2x - 1} = 3\\pi",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Même base / définition",
+      "blocs": [
+       {
+        "html": "\\(3\\pi\\) n'est pas une puissance de \\(3\\) : il faut les logarithmes.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{2x - 1} = 3\\pi\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{2x - 1}) = \\log(3\\pi)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((2x - 1) \\cdot \\log(3) = \\log(3\\pi)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2x - 1 = \\frac{\\log(3\\pi)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2x = 1 + \\frac{\\log(3\\pi)}{\\log(3)}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{1 + \\frac{\\log(3\\pi)}{\\log(3)}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\frac{1 + \\frac{\\log(3\\pi)}{\\log(3)}}{2}\\right\\} \\text{, soit } x \\approx 1{,}521",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
  },
  "3^(x+1)+3^(-x)=4": {
   "cartes": [
@@ -11252,6 +11496,84 @@
    }
   ]
  },
+ "5^(x+1)=pi": {
+  "cartes": [
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{x + 1} = \\pi\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5^{x + 1}) = \\log(\\pi)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 1) \\cdot \\log(5) = \\log(\\pi)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x + 1 = \\frac{\\log(\\pi)}{\\log(5)}\\)</span><span class=\"prop\">(car \\(\\log(5) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(\\pi)}{\\log(5)} - 1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(\\pi)}{\\log(5)} - 1\\right\\} \\text{, soit } x \\approx -0{,}289",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "5^{x + 1} = \\pi",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Même base / définition",
+      "blocs": [
+       {
+        "html": "\\(\\pi\\) n'est pas une puissance de \\(5\\) : il faut les logarithmes.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{x + 1} = \\pi\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5^{x + 1}) = \\log(\\pi)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 1) \\cdot \\log(5) = \\log(\\pi)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x + 1 = \\frac{\\log(\\pi)}{\\log(5)}\\)</span><span class=\"prop\">(car \\(\\log(5) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(\\pi)}{\\log(5)} - 1\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\frac{\\log(\\pi)}{\\log(5)} - 1\\right\\} \\text{, soit } x \\approx -0{,}289",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
  "5^(x/(x-1))=25": {
   "cartes": [
    {
@@ -14260,6 +14582,94 @@
    }
   ]
  },
+ "e^(-x)=pi": {
+  "cartes": [
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{-x} = \\pi\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(e^{-x}) = \\ln(\\pi)\\)</span><span class=\"prop\">(ln des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((-x) \\cdot \\ln(e) = \\ln(\\pi)\\)</span><span class=\"prop\">(ln(a^A) = A · ln(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(-x = \\ln(\\pi)\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\ln(\\pi)\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-\\ln(\\pi)\\right\\} \\text{, soit } x \\approx -1{,}145",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "e^{-x} = \\pi",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Même base / définition",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{-x} = \\pi\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(-x = \\ln(\\pi)\\)</span><span class=\"prop\">(définition du logarithme)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\ln(\\pi)\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{-\\ln(\\pi)\\right\\} \\text{, soit } x \\approx -1{,}145",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{-x} = \\pi\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(e^{-x}) = \\ln(\\pi)\\)</span><span class=\"prop\">(ln des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((-x) \\cdot \\ln(e) = \\ln(\\pi)\\)</span><span class=\"prop\">(ln(a^A) = A · ln(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(-x = \\ln(\\pi)\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\ln(\\pi)\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{-\\ln(\\pi)\\right\\} \\text{, soit } x \\approx -1{,}145",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
  "e^(1/x)=2": {
   "cartes": [
    {
@@ -15065,6 +15475,94 @@
       "blocs": [
        {
         "tex": "S = \\left\\{0 \\,;\\, \\ln(2)\\right\\} \\text{, soit } x = 0 \\text{ ou } x \\approx 0{,}693",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
+ "e^(2x+1)=pi/2": {
+  "cartes": [
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{2x + 1} = \\frac{\\pi}{2}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(e^{2x + 1}) = \\ln\\left(\\frac{\\pi}{2}\\right)\\)</span><span class=\"prop\">(ln des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((2x + 1) \\cdot \\ln(e) = \\ln\\left(\\frac{\\pi}{2}\\right)\\)</span><span class=\"prop\">(ln(a^A) = A · ln(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2x + 1 = \\ln\\left(\\frac{\\pi}{2}\\right)\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2x = \\ln\\left(\\frac{\\pi}{2}\\right) - 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\ln\\left(\\frac{\\pi}{2}\\right) - 1}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\ln\\left(\\frac{\\pi}{2}\\right) - 1}{2}\\right\\} \\text{, soit } x \\approx -0{,}274",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "e^{2x + 1} = \\frac{\\pi}{2}",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Même base / définition",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{2x + 1} = \\frac{\\pi}{2}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2x + 1 = \\ln\\left(\\frac{\\pi}{2}\\right)\\)</span><span class=\"prop\">(définition du logarithme)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2x = \\ln\\left(\\frac{\\pi}{2}\\right) - 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\ln\\left(\\frac{\\pi}{2}\\right) - 1}{2}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\frac{\\ln\\left(\\frac{\\pi}{2}\\right) - 1}{2}\\right\\} \\text{, soit } x \\approx -0{,}274",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{2x + 1} = \\frac{\\pi}{2}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(e^{2x + 1}) = \\ln\\left(\\frac{\\pi}{2}\\right)\\)</span><span class=\"prop\">(ln des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((2x + 1) \\cdot \\ln(e) = \\ln\\left(\\frac{\\pi}{2}\\right)\\)</span><span class=\"prop\">(ln(a^A) = A · ln(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2x + 1 = \\ln\\left(\\frac{\\pi}{2}\\right)\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2x = \\ln\\left(\\frac{\\pi}{2}\\right) - 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\ln\\left(\\frac{\\pi}{2}\\right) - 1}{2}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\frac{\\ln\\left(\\frac{\\pi}{2}\\right) - 1}{2}\\right\\} \\text{, soit } x \\approx -0{,}274",
         "type": "resultat"
        }
       ],
@@ -16624,6 +17122,94 @@
  "e^x=ln(x)": {
   "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
   "ok": false
+ },
+ "e^x=pi": {
+  "cartes": [
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x} = \\pi\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(e^{x}) = \\ln(\\pi)\\)</span><span class=\"prop\">(ln des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\ln(e) = \\ln(\\pi)\\)</span><span class=\"prop\">(ln(a^A) = A · ln(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\ln(\\pi)\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\ln(\\pi)\\right\\} \\text{, soit } x \\approx 1{,}145",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "e^{x} = \\pi",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Même base / définition",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x} = \\pi\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\ln(\\pi)\\)</span><span class=\"prop\">(définition du logarithme)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\ln(\\pi)\\right\\} \\text{, soit } x \\approx 1{,}145",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x} = \\pi\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(e^{x}) = \\ln(\\pi)\\)</span><span class=\"prop\">(ln des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\ln(e) = \\ln(\\pi)\\)</span><span class=\"prop\">(ln(a^A) = A · ln(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\ln(\\pi)\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\ln(\\pi)\\right\\} \\text{, soit } x \\approx 1{,}145",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
  },
  "ln(-x^2-x-1)=2": {
   "cartes": [

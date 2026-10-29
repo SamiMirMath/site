@@ -278,6 +278,12 @@ BATTERIE_M_PRODUIT_X_LOG = [
     ("3x-x*log(x)=0", [1000.0]), ("x*ln(x)=2x", [7.389]), ("5x^3=x^3*log(x)", [100000.0]), ("x*log(x)+x=0", [0.1]),
 ]
 
+# T36, partie G4 : le nombre π (lu en filière M seulement), Javet 3.15 c  e^x = π ; exposant du 1er degré, second membre irrationnel
+BATTERIE_M_PI = [
+    ("e^x=pi", [1.145]), ("10^x=π", [0.497]), ("3^(2x-1)=3pi", [1.521]), ("e^(2x+1)=pi/2", [-0.274]), ("2^x=2pi", [2.651]), ("e^(-x)=pi", [-1.145]),
+    ("5^(x+1)=pi", [-0.289]),
+]
+
 # identités sur l'ensemble de définition : S = ED (solutions None)
 M_TOUT_L_ED = ["log(x)=log(x)", "log(x)+log(x-1)=log(x^2-x)", "2log(x)=log(x^2)+log(1)"]
 # formes du programme M que l'outil ne traite pas encore, et vrais hors-programme
@@ -294,7 +300,8 @@ def entrees_el_m():
                                   + [s for s, _ in BATTERIE_M_BICARRE] + [s for s, _ in BATTERIE_M_BASE_RATIONNELLE]
                                   + [s for s, _ in BATTERIE_M_IRRATIONNEL] + [s for s, _ in BATTERIE_M_CARRE_DANS_L_EXPOSANT]
                                   + [s for s, _ in BATTERIE_M_SECOND_MEMBRE_CALCULE]
-                                  + [s for s, _ in BATTERIE_M_PRODUIT_X_LOG]))
+                                  + [s for s, _ in BATTERIE_M_PRODUIT_X_LOG]
+                                  + [s for s, _ in BATTERIE_M_PI]))
 
 
 def entrees_el():

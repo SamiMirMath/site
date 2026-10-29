@@ -82,6 +82,8 @@ def evaluer(n, x, libres=None):
         return libres[n.nom] if libres and n.nom in libres else MP.mpf(x)
     if isinstance(n, el.E):
         return MP.e
+    if isinstance(n, el.Pi):
+        return MP.pi
     if isinstance(n, el.Defini):
         return evaluer(n.arbre, x, libres)
     if isinstance(n, el.Neg):

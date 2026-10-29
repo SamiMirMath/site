@@ -117,6 +117,7 @@ def ev(n, x):
         if isinstance(n, el.Nb): return np.full_like(x, float(n.val))
         if isinstance(n, el.Var): return x
         if isinstance(n, el.E): return np.full_like(x, math.e)
+        if isinstance(n, el.Pi): return np.full_like(x, math.pi)
         if isinstance(n, el.Neg): return -ev(n.a, x)
         if isinstance(n, el.Fn): return np.sqrt(ev(n.a, x))
         if isinstance(n, el.Pow):
