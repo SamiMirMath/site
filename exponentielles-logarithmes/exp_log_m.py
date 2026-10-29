@@ -215,7 +215,8 @@ def _vers_ed(n, x):
 
 
 def _logs_imbriques_ok(n):
-    """Un logarithme dans un logarithme n'est traité qu'en base e : l'outil ED écrit « ln(x) > 0 ⇔ x > 1 (exp est croissante) », juste seulement pour ln."""
+    """Vrai quand les logarithmes imbriqués sont tous en base e : l'outil ED sait les traiter (« ln(x) > 0 ⇔ x > 1 (exp est croissante) », juste seulement
+    pour ln). Sinon l'ensemble de définition est calculé ici (_ed_imbrique)."""
     if isinstance(n, Log):
         interieurs = _logs_en_x(n.a)
         if interieurs and (n.base is not None and not isinstance(n.base, E) or any(l.base is None or not isinstance(l.base, E) for l in interieurs)):
@@ -228,6 +229,133 @@ def _logs_imbriques_ok(n):
     return True
 
 
+_PUISSANCE_MAX = 400                                   # |exposant| maximal d'une borne b^c (10^10 passe, 10^(10^10) non)
+
+
+def _borne(b, c):
+    """b^c, une borne exacte : b rationnel > 0 (None pour la base e : seul e^0 = 1 est rationnel) et c entier ; sinon _Hors."""
+    if b is None:
+        if c != 0:
+            raise _Hors
+        return F(1)
+    if c.denominator != 1 or abs(c) > _PUISSANCE_MAX:
+        raise _Hors
+    return b ** int(c)
+
+
+def _image_reciproque(b, lo, hi):
+    """{w : log_b(w) ∈ ]lo ; hi[}, b > 0 et ≠ 1 (lo à None : −∞, hi à None : +∞) : ]b^lo ; b^hi[ si b > 1 (log_b croissante), ]b^hi ; b^lo[ si b < 1."""
+    croissante = b is None or b > 1
+    if croissante:
+        return (F(0) if lo is None else _borne(b, lo)), (None if hi is None else _borne(b, hi))
+    return (F(0) if hi is None else _borne(b, hi)), (None if lo is None else _borne(b, lo))
+
+
+def _tex_ens(lo, hi):
+    """L'intervalle ouvert ]lo ; hi[ en TeX (lo à None : −∞, hi à None : +∞)."""
+    bas = r"-\infty" if lo is None else tex(Nb(lo))
+    haut = r"+\infty" if hi is None else tex(Nb(hi))
+    return r"\left]" + bas + r" \,;\, " + haut + r"\right["
+
+
+def _tex_ineg(t, lo, hi):
+    """L'inégalité qui écrit t ∈ ]lo ; hi[ (« < » est écrit &lt; : la ligne est du HTML)."""
+    if hi is None:
+        return f"{t} > {tex(Nb(lo))}"
+    if lo is None:
+        return f"{t} &lt; {tex(Nb(hi))}"
+    return f"{tex(Nb(lo))} &lt; {t} &lt; {tex(Nb(hi))}"
+
+
+def _base_log(l):
+    """La base rationnelle du logarithme l (10 pour log, None pour ln)."""
+    return None if isinstance(l.base, E) else F(10) if l.base is None else _const(l.base)
+
+
+def _contient(n, cible):
+    if n is cible:
+        return True
+    if isinstance(n, (Neg, Fn, Log)):
+        return _contient(n.a, cible)
+    if isinstance(n, (Op, Pow)):
+        return _contient(n.a, cible) or _contient(n.b, cible)
+    return False
+
+
+def _chaine_de_logarithmes(g, d, conditions):
+    """La chaîne log_b1(log_b2(… log_bn(u))) de l'équation, du plus extérieur au plus intérieur, avec u du 1er degré : tous les logarithmes en x de
+    l'équation la forment, d'un seul côté du signe =, et leurs bases sont des constantes ; sinon _Hors."""
+    logs = _logs_en_x(g) + _logs_en_x(d)
+    if not logs or (_logs_en_x(g) and _logs_en_x(d)) or any(genre != "arg" for genre, _, _ in conditions) or len(logs) != len(conditions):
+        raise _Hors
+    for l in logs:
+        if l.base is not None and not isinstance(l.base, E) and (variables(l.base) or _const(l.base) is None or _const(l.base) <= 0 or _const(l.base) == 1):
+            raise _Hors
+    hauts = [l for l in logs if not any(_contient(m.a, l) for m in logs if m is not l)]
+    if len(hauts) != 1:
+        raise _Hors
+    chaine = [hauts[0]]
+    while isinstance(chaine[-1].a, Log) and variables(chaine[-1].a):
+        chaine.append(chaine[-1].a)
+    if len(chaine) != len(logs):
+        raise _Hors
+    u = chaine[-1].a
+    c = _pq(u)
+    if len(c) != 2 or c[1] == 0:
+        raise _Hors                                    # l'argument le plus intérieur doit être du 1er degré
+    return chaine, u, c[0], c[1]
+
+
+def _ed_imbrique(g, d, x, conditions):
+    """L'ensemble de définition d'une équation dont les logarithmes forment une chaîne imbriquée dont une base n'est pas e (log(log(x)) = 1,
+    log_2(log_2(x)) = 1, log(log(log(x - 1))) = 0) : l'outil ED ne connaît que ln, ses bornes seraient fausses (e au lieu de 10). Une condition par
+    logarithme, dans l'ordre de l'outil ED (du plus intérieur au plus extérieur) : log_b(A) > 0 se ramène, couche par couche, à une inégalité sur
+    l'argument de A (log_b est croissante si b > 1, décroissante si 0 < b < 1), puis au 1er degré. Les bornes sont exactes (b^c, c entier) ; sinon _Hors."""
+    chaine, u, q0, p1 = _chaine_de_logarithmes(g, d, conditions)
+    if any(_base_log(l) is None and l.base is not None and not isinstance(l.base, E) for l in chaine):
+        raise _Hors
+    n = len(chaine)
+    cartes, ensembles, besoin = [], [], False
+    for rang in range(1, n + 1):                       # la condition de rang `rang` : l'argument du logarithme chaine[n - rang] est > 0
+        l = chaine[n - rang]
+        couches = chaine[n - rang + 1:]               # les logarithmes que contient cet argument, du plus extérieur au plus intérieur
+        lo, hi = F(0), None
+        if not couches:                                # l'argument est u : la condition de l'outil ED (u > 0)
+            r, _, _ = analyser_complet("ln(" + _vers_ed(u, x) + ")")
+            if not r["ok"] or not r["complet"]:
+                raise _Hors
+            c = dict(r["conditions"][0])
+            besoin = besoin or bool(r.get("besoin_sympy"))
+        else:
+            lignes, phrases, courant = [], [], l.a                  # `courant` : l'expression dont on écrit le signe (le 1er logarithme de `couches`)
+            for m in couches:
+                lo2, hi2 = _image_reciproque(_base_log(m), lo, hi)
+                phrase = f"({'ln' if isinstance(m.base, E) else 'log' if m.base is None else 'log_' + _txt(m.base, 4)} est {'croissante' if _base_log(m) is None or _base_log(m) > 1 else 'décroissante'})."
+                lignes.append(f"{_tex_ineg(tex(courant), lo, hi)} \\iff {_tex_ineg(tex(m.a), lo2, hi2)}")
+                phrases.append(phrase)
+                lo, hi, courant = lo2, hi2, m.a
+            c = {"genre": "ln", "titre": "logarithme", "source_tex": tex(l.a), "cond_tex": tex(l.a) + " > 0", "resolu": True}
+        # u ∈ ]lo ; hi[ ⇔ x ∈ ]bas ; haut[ (p1·x + q0 = u)
+        bas = None if lo is None else (lo - q0) / p1
+        haut = None if hi is None else (hi - q0) / p1
+        if p1 < 0:
+            bas, haut = haut, bas
+        if couches:
+            if not (p1 == 1 and q0 == 0):
+                lignes[-1] += " \\iff " + _tex_ineg("x", bas, haut)
+            c["etapes"] = [{"type": "texte", "html": "\\(" + ligne + "\\) " + phrase} for ligne, phrase in zip(lignes, phrases)]
+        c["num"], c["E_tex"] = rang, _tex_ens(bas, haut)
+        cartes.append(c)
+        ensembles.append((bas, haut))
+    bas = max((b for b, _ in ensembles if b is not None), default=None)
+    haut = min((h for _, h in ensembles if h is not None), default=None)
+    vide = bas is not None and haut is not None and bas >= haut
+    ed_tex = r"\varnothing" if vide else _tex_ens(bas, haut)
+    res = {"ok": True, "conditions": cartes, "complet": True, "besoin_sympy": besoin, "ED_tex": ed_tex,
+           "inter_tex": r" \cap ".join(c["E_tex"] for c in cartes) if len(cartes) > 1 else ""}
+    return EnsembleDef(x, res, None, ed_tex, vide, conditions, besoin)
+
+
 def ensemble_de_definition(g, d, x):
     """L'EnsembleDef de l'équation g = d (arbres) : par l'outil ED, ou pour une base inconnue (log_x(256) = 4) la condition x > 0 et x ≠ 1.
     Lève _Hors quand l'équation sort de ce que la filière M traite (base polynomiale, logarithme imbriqué en base 10, condition non résolue)."""
@@ -237,7 +365,7 @@ def ensemble_de_definition(g, d, x):
     if not conditions:
         raise _Hors
     if not (_logs_imbriques_ok(g) and _logs_imbriques_ok(d)):
-        raise _Hors
+        return _ed_imbrique(g, d, x, conditions)
     if any(genre == "base" for genre, _, _ in conditions):
         if len(conditions) > 1:
             raise _Hors                                # base inconnue et autre condition : plus tard

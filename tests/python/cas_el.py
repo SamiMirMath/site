@@ -195,6 +195,10 @@ BATTERIE_M = [
     ("log(x)-log(x-1)=log(2)", [2.0]), ("2log(x)=log(x+6)", [3.0]), ("-log(x)+log(x+1)=log(2)", [1.0]), ("log3(x)+log3(x-2)=1", [3.0]),
     ("ln(x)+ln(x+1)=ln(6)", [2.0]), ("log(x^2)-log(x)=1", [10.0]), ("log(x-1)=log(3)+log(x)-log(2)", []),
     ("log(x^2)+log(5)=-1", [-0.141, 0.141]), ("2log(x)+log(3)=log(1/4)", [0.289]),
+    # logarithmes imbriqués (1c, 29.10.2026) : l'ED est calculé couche par couche, toutes bases (log, log_a avec a > 1 ou a < 1, ln mêlé à log)
+    ("log(log(x))=1", [1e10]), ("log(log(log(x)))=0", [1e10]), ("log(log(x-1))=0", [11.0]), ("log_2(log_2(x))=1", [4.0]), ("log_3(log_3(x))=0", [3.0]),
+    ("log_0,5(log_0,5(x))=1", [0.707]), ("log_0,5(log_0,5(x))=0", [0.5]), ("log(ln(x))=0", [2.718]), ("ln(log(x))=0", [10.0]), ("log(log(2x))=0", [5.0]),
+    ("log_2(log_2(x-1))=1", [5.0]), ("ln(ln(ln(x)))=0", [15.154]), ("log(log(3-x))=-1", [1.741]), ("2log(log(x))=1", [1453.04]), ("log(ln(ln(x)))=0", [15.154]),
 ]
 
 # deux termes seulement : pas un trinôme en t = aˣ, la filière M suit la méthode de la 3C (même base ou logarithmes), sortie identique ;
@@ -221,9 +225,6 @@ M_TOUT_L_ED = ["log(x)=log(x)", "log(x)+log(x-1)=log(x^2-x)", "2log(x)=log(x^2)+
 M_PAS_ENCORE = ["ln(x)+ln(x-1)=1", "log(x)=ln(2)", "log(1/x)=2", "log(x)*log(x-1)=1", "ln(x)=2ln(x+1)+1", "log(sqrt(x))=1"]
 M_HORS_PROGRAMME = ["log(x)=x-1", "x*log(x)=1", "e^x=ln(x)", "log(x)+2^x=3"]
 
-
-# logarithmes imbriqués en base 10 : la filière M ne les traite pas encore (l'outil ED écrit ln(x) > 0 ⇔ x > 1 pour tout logarithme imbriqué)
-IMBRIQUES_BASE_10 = ["log(log(x))=1", "log(log(log(x)))=0", "log(log(x-1))=0"]
 
 
 def entrees_el_m():

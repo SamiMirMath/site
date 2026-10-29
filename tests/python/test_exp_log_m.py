@@ -11,7 +11,7 @@ import exp_log_m as elm
 import resoudre_el as rel
 import resoudre_ed
 import sortie as so
-from cas_el import (BATTERIE_E4, BATTERIE_M, BATTERIE_M_DEUX_TERMES, BATTERIE_M_VAR, IMBRIQUES_BASE_10, M_HORS_PROGRAMME, M_PAS_ENCORE, M_TOUT_L_ED, M_VAR_PAS_ENCORE,
+from cas_el import (BATTERIE_E4, BATTERIE_M, BATTERIE_M_DEUX_TERMES, BATTERIE_M_VAR, M_HORS_PROGRAMME, M_PAS_ENCORE, M_TOUT_L_ED, M_VAR_PAS_ENCORE,
                     entrees_el, entrees_el_m)
 
 
@@ -145,7 +145,7 @@ def racines(s):
     return trouvees
 
 
-E4_M = [(s, v) for s, v in BATTERIE_E4 if s not in IMBRIQUES_BASE_10]
+E4_M = list(BATTERIE_E4)
 
 
 def solutions_m(entree):
@@ -177,10 +177,9 @@ class TestMSuitLa3C(unittest.TestCase):
                     self.assertAlmostEqual(a, b, delta=1e-3 * (1 + abs(b)))
 
     def test_tout_ce_que_la_3c_resout_la_m_le_resout(self):
-        """Les logarithmes imbriqués en base 10 sont la seule exception voulue (la 3C les résout sans ensemble de définition, M répond « pas encore »)."""
+        """Aucune exception (depuis le 29.10.2026 les logarithmes imbriqués de toute base ont leur ensemble de définition) : toute équation des corpus C et M
+        que la 3C résout, la filière M la résout."""
         for entree in dict.fromkeys(entrees_el() + entrees_el_m()):
-            if entree in IMBRIQUES_BASE_10:
-                continue
             c = rel.resoudre(entree, "C")
             if c["ok"]:
                 with self.subTest(entree=entree):
@@ -470,11 +469,34 @@ class TestCartesM(unittest.TestCase):
                     self.assertNotRegex(v, r"(?<![\\A-Za-z])x(?![A-Za-z])", v)
         self.assertIn("t", c[0]["blocs"][-1]["tex"])
 
-    def test_un_logarithme_imbrique_en_base_10_n_a_pas_le_corrige_de_la_3c(self):
-        for entree in IMBRIQUES_BASE_10:
+    def test_un_logarithme_imbrique_a_son_ensemble_de_definition_couche_par_couche(self):
+        """log(log(x)) = 1 : conditions x > 0 puis log(x) > 0 ⇔ x > 1 (log est croissante) ; trois couches : log(x) > 1 ⇔ x > 10 ; base < 1 : 0 < x < 1 ;
+        argument du 1er degré : x − 1 > 1 ⇔ x > 2 ; jamais « ln » ni « exp est croissante » pour un autre logarithme que ln."""
+        attendu = {
+            "log(log(x))=1": (r"\left]1 \,;\, +\infty\right[", [r"\(\log(x) > 0 \iff x > 1\) (log est croissante)."]),
+            "log(log(log(x)))=0": (r"\left]10 \,;\, +\infty\right[", [r"\(\log(x) > 1 \iff x > 10\) (log est croissante)."]),
+            "log_0,5(log_0,5(x))=1": (r"\left]0 \,;\, 1\right[", [r"\(\log_{0{,}5}(x) > 0 \iff 0 &lt; x &lt; 1\) (log_0,5 est décroissante)."]),
+            "log(log(x-1))=0": (r"\left]2 \,;\, +\infty\right[", [r"\(\log(x - 1) > 0 \iff x - 1 > 1 \iff x > 2\) (log est croissante)."]),
+            "log(log(3-x))=1": (r"\left]-\infty \,;\, 2\right[", [r"\(\log(3 - x) > 0 \iff 3 - x > 1 \iff x &lt; 2\) (log est croissante)."]),
+        }
+        for entree, (ed, lignes) in attendu.items():
+            with self.subTest(entree=entree):
+                s = rel.resoudre(entree, "M")
+                self.assertTrue(s["ok"], s)
+                carte = s["cartes"][0]
+                self.assertEqual(carte["titre"], "Étape 1")
+                self.assertEqual(carte["badge"], "Ensemble de définition")
+                textes = [b.get("html", "") for b in carte["blocs"]]
+                for ligne in lignes:
+                    self.assertIn(ligne, textes)
+                self.assertTrue(carte["blocs"][-1]["tex"].endswith(ed), carte["blocs"][-1]["tex"])
+                self.assertNotIn("exp est croissante", " ".join(textes))
+                self.assertNotIn("\\ln", " ".join(textes))
+
+    def test_les_logarithmes_imbriques_hors_de_la_chaine_restent_pas_encore(self):
+        for entree in ("log(log(x))+log(x-2)=1", "log(log(x))=log(log(2))+1", "log(log(x^2))=1", "log(log(1/x))=0"):
             with self.subTest(entree=entree):
                 self.assertEqual(rel.resoudre(entree, "M"), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
-                self.assertTrue(rel.resoudre(entree, "C")["ok"])
 
     def test_les_sorties_m_respectent_le_schema_et_le_json_strict(self):
         for entree, _ in BATTERIE_M + E4_M:

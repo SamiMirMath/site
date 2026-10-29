@@ -2095,6 +2095,65 @@
    }
   }
  },
+ "2log(log(x))=1": {
+  "au_depart": {
+   "progression": "Étape 1 / 5",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧Condition 2 · logarithme⟦\\log(x) > 0 \\iff x > 1⟧ (log est croissante).⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]1 \\,;\\, +\\infty\\right[ = \\left]1 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Isoler le logarithme⟦2\\log(\\log(x)) = 1⟧⟦\\iff⟧⟦\\log(\\log(x)) = \\frac{1}{2}⟧(on isole le logarithme)",
+    "titre": "Étape 2Isoler le logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Exponentielle des deux membres⟦\\log(\\log(x)) = \\frac{1}{2}⟧⟦\\iff⟧⟦10^{\\log(\\log(x))} = 10^{\\frac{1}{2}}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\log(x) = 10^{\\frac{1}{2}} = \\sqrt{10}⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦10^{\\log(x)} = 10^{\\sqrt{10}}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 10^{\\sqrt{10}}⟧(10^(log(A)) = A, A > 0)",
+    "titre": "Étape 3Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Vérification⟦10^{\\sqrt{10}} \\approx 1\\text{’}453{,}040⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 4Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{10^{\\sqrt{10}}\\right\\} \\text{, soit } x \\approx 1\\text{’}453{,}040⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 5 / 5"
+ },
  "2log(x)+log(3)=log(1/4)": {
   "au_depart": {
    "progression": "Étape 1 / 5",
@@ -5344,6 +5403,55 @@
   ],
   "progression_finale": "Étape 5 / 5"
  },
+ "ln(ln(ln(x)))=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧Condition 2 · logarithme⟦\\ln(x) > 0 \\iff x > 1⟧ (exp est croissante).Condition 3 · logarithme⟦\\ln\\left(\\ln(x)\\right) > 0 \\iff \\ln(x) > 1⟧ (exp est croissante).⟦\\ln(x) > 1 \\iff x > e⟧ (exp est croissante).⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]1 \\,;\\, +\\infty\\right[ \\cap \\left]e \\,;\\, +\\infty\\right[ = \\left]e \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\ln(\\ln(\\ln(x))) = 0⟧⟦\\iff⟧⟦e^{\\ln(\\ln(\\ln(x)))} = e^{0}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\ln(\\ln(x)) = e^{0} = 1⟧(e^(ln(A)) = A, A > 0)⟦\\iff⟧⟦e^{\\ln(\\ln(x))} = e⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\ln(x) = e⟧(e^(ln(A)) = A, A > 0)⟦\\iff⟧⟦e^{\\ln(x)} = e^{e}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = e^{e}⟧(e^(ln(A)) = A, A > 0)",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦e^{e} \\approx 15{,}154⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{e^{e}\\right\\} \\text{, soit } x \\approx 15{,}154⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
  "ln(ln(x))=0": {
   "au_depart": {
    "progression": "Étape 1 / 4",
@@ -5388,6 +5496,55 @@
     "listes": [],
     "tableaux": [],
     "texte": "Solution⟦S = \\left\\{e\\right\\} \\text{, soit } x \\approx 2{,}718⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "ln(log(x))=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧Condition 2 · logarithme⟦\\log(x) > 0 \\iff x > 1⟧ (log est croissante).⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]1 \\,;\\, +\\infty\\right[ = \\left]1 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\ln(\\log(x)) = 0⟧⟦\\iff⟧⟦e^{\\ln(\\log(x))} = e^{0}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\log(x) = e^{0} = 1⟧(e^(ln(A)) = A, A > 0)⟦\\iff⟧⟦10^{\\log(x)} = 10^{1}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 10^{1} = 10⟧(10^(log(A)) = A, A > 0)",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 10⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{10\\right\\}⟧",
     "titre": "Solution"
    }
   ],
@@ -6523,62 +6680,348 @@
   ],
   "progression_finale": "Étape 5 / 5"
  },
- "log(log(log(x)))=0": {
+ "log(ln(ln(x)))=0": {
   "au_depart": {
-   "progression": "",
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
    {
     "classes": [
      "card",
-     "err"
+     "cond"
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Cet outil ne traite pas encore ce type d'équation.",
-    "titre": null
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧Condition 2 · logarithme⟦\\ln(x) > 0 \\iff x > 1⟧ (exp est croissante).Condition 3 · logarithme⟦\\ln\\left(\\ln(x)\\right) > 0 \\iff \\ln(x) > 1⟧ (exp est croissante).⟦\\ln(x) > 1 \\iff x > e⟧ (exp est croissante).⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]1 \\,;\\, +\\infty\\right[ \\cap \\left]e \\,;\\, +\\infty\\right[ = \\left]e \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log(\\ln(\\ln(x))) = 0⟧⟦\\iff⟧⟦10^{\\log(\\ln(\\ln(x)))} = 10^{0}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\ln(\\ln(x)) = 10^{0} = 1⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦e^{\\ln(\\ln(x))} = e⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\ln(x) = e⟧(e^(ln(A)) = A, A > 0)⟦\\iff⟧⟦e^{\\ln(x)} = e^{e}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = e^{e}⟧(e^(ln(A)) = A, A > 0)",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦e^{e} \\approx 15{,}154⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{e^{e}\\right\\} \\text{, soit } x \\approx 15{,}154⟧",
+    "titre": "Solution"
    }
   ],
-  "progression_finale": ""
+  "progression_finale": "Étape 4 / 4"
+ },
+ "log(ln(x))=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧Condition 2 · logarithme⟦\\ln(x) > 0 \\iff x > 1⟧ (exp est croissante).⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]1 \\,;\\, +\\infty\\right[ = \\left]1 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log(\\ln(x)) = 0⟧⟦\\iff⟧⟦10^{\\log(\\ln(x))} = 10^{0}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\ln(x) = 10^{0} = 1⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦e^{\\ln(x)} = e⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = e⟧(e^(ln(A)) = A, A > 0)",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦e \\approx 2{,}718⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{e\\right\\} \\text{, soit } x \\approx 2{,}718⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "log(log(2x))=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦2x > 0 \\iff x > 0⟧.Condition 2 · logarithme⟦\\log(2x) > 0 \\iff 2x > 1 \\iff x > \\frac{1}{2}⟧ (log est croissante).⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]\\frac{1}{2} \\,;\\, +\\infty\\right[ = \\left]\\frac{1}{2} \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log(\\log(2x)) = 0⟧⟦\\iff⟧⟦10^{\\log(\\log(2x))} = 10^{0}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\log(2x) = 10^{0} = 1⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦10^{\\log(2x)} = 10^{1}⟧(exponentielle des deux membres)⟦\\iff⟧⟦2x = 10^{1}⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦x = \\frac{10^{1}}{2} = 5⟧",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 5⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{5\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "log(log(3-x))=-1": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦3 - x > 0 \\iff x < 3⟧ (on divise par un nombre négatif : le sens s'inverse).Condition 2 · logarithme⟦\\log(3 - x) > 0 \\iff 3 - x > 1 \\iff x < 2⟧ (log est croissante).⟦ED = \\left]-\\infty \\,;\\, 3\\right[ \\cap \\left]-\\infty \\,;\\, 2\\right[ = \\left]-\\infty \\,;\\, 2\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log(\\log(3 - x)) = -1⟧⟦\\iff⟧⟦10^{\\log(\\log(3 - x))} = 10^{-1}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\log(3 - x) = 10^{-1} = \\frac{1}{10}⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦10^{\\log(3 - x)} = 10^{\\frac{1}{10}}⟧(exponentielle des deux membres)⟦\\iff⟧⟦3 - x = 10^{\\frac{1}{10}}⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦x = 3 - 10^{\\frac{1}{10}}⟧",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦3 - 10^{\\frac{1}{10}} \\approx 1{,}741⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{3 - 10^{\\frac{1}{10}}\\right\\} \\text{, soit } x \\approx 1{,}741⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "log(log(log(x)))=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧Condition 2 · logarithme⟦\\log(x) > 0 \\iff x > 1⟧ (log est croissante).Condition 3 · logarithme⟦\\log(\\log(x)) > 0 \\iff \\log(x) > 1⟧ (log est croissante).⟦\\log(x) > 1 \\iff x > 10⟧ (log est croissante).⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]1 \\,;\\, +\\infty\\right[ \\cap \\left]10 \\,;\\, +\\infty\\right[ = \\left]10 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log(\\log(\\log(x))) = 0⟧⟦\\iff⟧⟦10^{\\log(\\log(\\log(x)))} = 10^{0}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\log(\\log(x)) = 10^{0} = 1⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦10^{\\log(\\log(x))} = 10^{1}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\log(x) = 10^{1} = 10⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦10^{\\log(x)} = 10^{10}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 10^{10}⟧(10^(log(A)) = A, A > 0)",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 10^{10}⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{10^{10}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
  },
  "log(log(x))=1": {
   "au_depart": {
-   "progression": "",
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
    {
     "classes": [
      "card",
-     "err"
+     "cond"
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Cet outil ne traite pas encore ce type d'équation.",
-    "titre": null
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧Condition 2 · logarithme⟦\\log(x) > 0 \\iff x > 1⟧ (log est croissante).⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]1 \\,;\\, +\\infty\\right[ = \\left]1 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log(\\log(x)) = 1⟧⟦\\iff⟧⟦10^{\\log(\\log(x))} = 10^{1}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\log(x) = 10^{1} = 10⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦10^{\\log(x)} = 10^{10}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 10^{10}⟧(10^(log(A)) = A, A > 0)",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 10^{10}⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{10^{10}\\right\\}⟧",
+    "titre": "Solution"
    }
   ],
-  "progression_finale": ""
+  "progression_finale": "Étape 4 / 4"
  },
  "log(log(x-1))=0": {
   "au_depart": {
-   "progression": "",
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
    {
     "classes": [
      "card",
-     "err"
+     "cond"
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Cet outil ne traite pas encore ce type d'équation.",
-    "titre": null
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x - 1 > 0 \\iff x > 1⟧.Condition 2 · logarithme⟦\\log(x - 1) > 0 \\iff x - 1 > 1 \\iff x > 2⟧ (log est croissante).⟦ED = \\left]1 \\,;\\, +\\infty\\right[ \\cap \\left]2 \\,;\\, +\\infty\\right[ = \\left]2 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log(\\log(x - 1)) = 0⟧⟦\\iff⟧⟦10^{\\log(\\log(x - 1))} = 10^{0}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\log(x - 1) = 10^{0} = 1⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦10^{\\log(x - 1)} = 10^{1}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x - 1 = 10^{1}⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦x = 1 + 10^{1} = 11⟧",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 11⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{11\\right\\}⟧",
+    "titre": "Solution"
    }
   ],
-  "progression_finale": ""
+  "progression_finale": "Étape 4 / 4"
  },
  "log(sqrt(x))=1": {
   "au_depart": {
@@ -10544,6 +10987,202 @@
   ],
   "progression_finale": "Étape 4 / 4"
  },
+ "log_0,5(log_0,5(x))=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧Condition 2 · logarithme⟦\\log_{0{,}5}(x) > 0 \\iff 0 < x < 1⟧ (log_0,5 est décroissante).⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]0 \\,;\\, 1\\right[ = \\left]0 \\,;\\, 1\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{0{,}5}(\\log_{0{,}5}(x)) = 0⟧⟦\\iff⟧⟦0{,}5^{\\log_{0{,}5}(\\log_{0{,}5}(x))} = 0{,}5^{0}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\log_{0{,}5}(x) = 0{,}5^{0} = 1⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦0{,}5^{\\log_{0{,}5}(x)} = 0{,}5^{1}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 0{,}5^{1} = 0{,}5⟧(a^(log_a(A)) = A, A > 0)",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 0{,}5⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{0{,}5\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "log_0,5(log_0,5(x))=1": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧Condition 2 · logarithme⟦\\log_{0{,}5}(x) > 0 \\iff 0 < x < 1⟧ (log_0,5 est décroissante).⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]0 \\,;\\, 1\\right[ = \\left]0 \\,;\\, 1\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{0{,}5}(\\log_{0{,}5}(x)) = 1⟧⟦\\iff⟧⟦0{,}5^{\\log_{0{,}5}(\\log_{0{,}5}(x))} = 0{,}5^{1}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\log_{0{,}5}(x) = 0{,}5^{1} = 0{,}5⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦0{,}5^{\\log_{0{,}5}(x)} = 0{,}5^{0{,}5}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 0{,}5^{0{,}5}⟧(a^(log_a(A)) = A, A > 0)",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦0{,}5^{0{,}5} \\approx 0{,}707⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{0{,}5^{0{,}5}\\right\\} \\text{, soit } x \\approx 0{,}707⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "log_2(log_2(x))=1": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧Condition 2 · logarithme⟦\\log_{2}(x) > 0 \\iff x > 1⟧ (log_2 est croissante).⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]1 \\,;\\, +\\infty\\right[ = \\left]1 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{2}(\\log_{2}(x)) = 1⟧⟦\\iff⟧⟦2^{\\log_{2}(\\log_{2}(x))} = 2^{1}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\log_{2}(x) = 2^{1} = 2⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦2^{\\log_{2}(x)} = 2^{2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 2^{2} = 4⟧(a^(log_a(A)) = A, A > 0)",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 4⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{4\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "log_2(log_2(x-1))=1": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x - 1 > 0 \\iff x > 1⟧.Condition 2 · logarithme⟦\\log_{2}(x - 1) > 0 \\iff x - 1 > 1 \\iff x > 2⟧ (log_2 est croissante).⟦ED = \\left]1 \\,;\\, +\\infty\\right[ \\cap \\left]2 \\,;\\, +\\infty\\right[ = \\left]2 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{2}(\\log_{2}(x - 1)) = 1⟧⟦\\iff⟧⟦2^{\\log_{2}(\\log_{2}(x - 1))} = 2^{1}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\log_{2}(x - 1) = 2^{1} = 2⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦2^{\\log_{2}(x - 1)} = 2^{2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x - 1 = 2^{2}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x = 1 + 2^{2} = 5⟧",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 5⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{5\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
  "log_2(x)=4": {
   "au_depart": {
    "progression": "Étape 1 / 4",
@@ -10588,6 +11227,55 @@
     "listes": [],
     "tableaux": [],
     "texte": "Solution⟦S = \\left\\{16\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "log_3(log_3(x))=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧Condition 2 · logarithme⟦\\log_{3}(x) > 0 \\iff x > 1⟧ (log_3 est croissante).⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]1 \\,;\\, +\\infty\\right[ = \\left]1 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log_{3}(\\log_{3}(x)) = 0⟧⟦\\iff⟧⟦3^{\\log_{3}(\\log_{3}(x))} = 3^{0}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\log_{3}(x) = 3^{0} = 1⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦3^{\\log_{3}(x)} = 3^{1}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x = 3^{1} = 3⟧(a^(log_a(A)) = A, A > 0)",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 3⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{3\\right\\}⟧",
     "titre": "Solution"
    }
   ],
