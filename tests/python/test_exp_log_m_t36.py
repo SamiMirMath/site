@@ -11,7 +11,7 @@ import exp_log as el
 import exp_log_m as elm
 import resoudre_el as rel
 import sortie as so
-from cas_el import BATTERIE_M_BASE_POLYNOMIALE, BATTERIE_M_CARRE_DANS_L_EXPOSANT, BATTERIE_M_SECOND_MEMBRE_CALCULE, BATTERIE_M_BASE_RATIONNELLE, BATTERIE_M_BICARRE, BATTERIE_M_EXPOSANTS, BATTERIE_M_IRRATIONNEL
+from cas_el import BATTERIE_M_BASE_POLYNOMIALE, BATTERIE_M_CARRE_DANS_L_EXPOSANT, BATTERIE_M_PRODUIT_X_LOG, BATTERIE_M_SECOND_MEMBRE_CALCULE, BATTERIE_M_BASE_RATIONNELLE, BATTERIE_M_BICARRE, BATTERIE_M_EXPOSANTS, BATTERIE_M_IRRATIONNEL
 from test_exp_log_m import MP, ecart, racines
 
 
@@ -199,6 +199,24 @@ class TestSecondMembreCalcule(_Batterie, unittest.TestCase):
         for entree in ["log(x)=(log(3)+log(5))/(log(2)+log(7))", "log(x)=(ln(3)+ln(5))/(ln(2)+ln(7))", "log(x)=(log(2)+log(5))/(log(5)-log(5))"]:
             with self.subTest(entree=entree):
                 self.assertFalse(rel.resoudre(entree, "M")["ok"])
+
+
+class TestProduitXLog(_Batterie, unittest.TestCase):
+    BATTERIE = BATTERIE_M_PRODUIT_X_LOG
+    DEUX_METHODES = False
+
+    def test_x_egal_zero_est_toujours_rejete_par_l_ensemble_de_definition(self):
+        for entree, attendu in self.BATTERIE:
+            with self.subTest(entree=entree):
+                r = corrige_m(entree)[el.METHODE_LOGARITHMES]
+                self.assertEqual(len(r["candidats"]), 2)
+                self.assertEqual(sorted(el.valeur(n) for n in r["candidats"])[0], 0)
+                self.assertNotIn(0, [el.valeur(n) for n in r["solutions"]])
+
+    def test_les_vrais_hors_programme_le_restent(self):
+        for entree in ["x*log(x)=1", "x*ln(x)=x^2", "x*ln(x)+1=0", "ln(x)=x"]:
+            with self.subTest(entree=entree):
+                self.assertEqual(rel.resoudre(entree, "M"), {"ok": False, "erreur": el.MESSAGE_HORS_PROGRAMME})
 
 
 if __name__ == "__main__":

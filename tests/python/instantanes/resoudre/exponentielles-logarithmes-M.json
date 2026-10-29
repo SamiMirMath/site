@@ -404,6 +404,115 @@
   "erreur": null,
   "ok": true
  },
+ "-x*ln(x)-x=0": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Mise en évidence et produit nul",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-x \\cdot \\ln(x) - x = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(-\\ln(x) - 1) = 0\\)</span><span class=\"prop\">(mise en évidence)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } -\\ln(x) - 1 = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } \\ln(x) = -1\\)</span><span class=\"prop\">(on isole le logarithme)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } x = e^{-1}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 0 \\notin ED\\)</span><span class=\"prop\">(rejetée : ln(x) n'est pas défini : x = 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{-1} \\approx 0{,}368\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{e^{-1}\\right\\} \\text{, soit } x \\approx 0{,}368",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "-x \\cdot \\ln(x) - x = 0",
+  "erreur": null,
+  "ok": true,
+  "option": {
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "html": "Conventions : 1 an = 12 mois et 1 mois = 30 jours.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(x \\approx 0{,}368\\) : 0 an ; reste \\(0{,}368\\) an.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(0{,}368 \\cdot 12 \\approx 4{,}415\\) mois → 4 mois ; reste \\(0{,}415\\) mois.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(0{,}415 \\cdot 30 \\approx 12{,}437\\) jours → 13 jours.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "Au bout de 12 jours, la durée cherchée n'est pas encore écoulée : on arrondit au jour supérieur.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "<strong>Au bout de 0 an, 4 mois et 13 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
+      }
+     ],
+     "style": "final",
+     "titre": "Interprétation"
+    }
+   ],
+   "cle": "interpretation",
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  }
+ },
  "0,25^x-0,5^x-2=0": {
   "cartes": [
    {
@@ -6219,6 +6328,115 @@
   "erreur": null,
   "ok": true
  },
+ "2x+3x*log(x)=0": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Mise en évidence et produit nul",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2x + 3x \\cdot \\log(x) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(2 + 3\\log(x)) = 0\\)</span><span class=\"prop\">(mise en évidence)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } 2 + 3\\log(x) = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } \\log(x) = -\\frac{2}{3}\\)</span><span class=\"prop\">(on isole le logarithme)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } x = 10^{-\\frac{2}{3}}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 0 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x) n'est pas défini : x = 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(10^{-\\frac{2}{3}} \\approx 0{,}215\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{10^{-\\frac{2}{3}}\\right\\} \\text{, soit } x \\approx 0{,}215",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2x + 3x \\cdot \\log(x) = 0",
+  "erreur": null,
+  "ok": true,
+  "option": {
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "html": "Conventions : 1 an = 12 mois et 1 mois = 30 jours.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(x \\approx 0{,}215\\) : 0 an ; reste \\(0{,}215\\) an.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(0{,}215 \\cdot 12 \\approx 2{,}585\\) mois → 2 mois ; reste \\(0{,}585\\) mois.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(0{,}585 \\cdot 30 \\approx 17{,}560\\) jours → 18 jours.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "Au bout de 17 jours, la durée cherchée n'est pas encore écoulée : on arrondit au jour supérieur.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "<strong>Au bout de 0 an, 2 mois et 18 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
+      }
+     ],
+     "style": "final",
+     "titre": "Interprétation"
+    }
+   ],
+   "cle": "interpretation",
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  }
+ },
  "3*2^(2(x+1))-10*2^(x+2)=32": {
   "cartes": [
    {
@@ -8929,6 +9147,110 @@
   "erreur": null,
   "ok": true
  },
+ "3x-x*log(x)=0": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Mise en évidence et produit nul",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3x - x \\cdot \\log(x) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(3 - \\log(x)) = 0\\)</span><span class=\"prop\">(mise en évidence)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } 3 - \\log(x) = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } \\log(x) = 3\\)</span><span class=\"prop\">(on isole le logarithme)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } x = 10^{3} = 1\\text{’}000\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 0 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x) n'est pas défini : x = 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 1\\text{’}000\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{1\\text{’}000\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3x - x \\cdot \\log(x) = 0",
+  "erreur": null,
+  "ok": true,
+  "option": {
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "html": "Conventions : 1 an = 12 mois et 1 mois = 30 jours.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(x = 1\\text{’}000\\) : 1000 ans ; reste \\(0\\) an.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(0 \\cdot 12 = 0\\) mois → 0 mois ; reste \\(0\\) mois.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(0 \\cdot 30 = 0\\) jour → 0 jour.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "<strong>Au bout de 1000 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
+      }
+     ],
+     "style": "final",
+     "titre": "Interprétation"
+    }
+   ],
+   "cle": "interpretation",
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  }
+ },
  "4*2^(-3x)-5*2^(-x)+2^x=0": {
   "cartes": [
    {
@@ -11214,6 +11536,110 @@
     "libelle": "Logarithmes"
    }
   ]
+ },
+ "5x^3=x^3*log(x)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Mise en évidence et produit nul",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5x^{3} = x^{3} \\cdot \\log(x)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(5x^{3} - x^{3} \\cdot \\log(x) = 0\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{3} \\cdot (5 - \\log(x)) = 0\\)</span><span class=\"prop\">(mise en évidence)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{3} = 0 \\text{ ou } 5 - \\log(x) = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } 5 - \\log(x) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } \\log(x) = 5\\)</span><span class=\"prop\">(on isole le logarithme)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } x = 10^{5} = 100\\text{’}000\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 0 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x) n'est pas défini : x = 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 100\\text{’}000\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{100\\text{’}000\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "5x^{3} = x^{3} \\cdot \\log(x)",
+  "erreur": null,
+  "ok": true,
+  "option": {
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "html": "Conventions : 1 an = 12 mois et 1 mois = 30 jours.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(x = 100\\text{’}000\\) : 100000 ans ; reste \\(0\\) an.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(0 \\cdot 12 = 0\\) mois → 0 mois ; reste \\(0\\) mois.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(0 \\cdot 30 = 0\\) jour → 0 jour.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "<strong>Au bout de 100000 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
+      }
+     ],
+     "style": "final",
+     "titre": "Interprétation"
+    }
+   ],
+   "cle": "interpretation",
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  }
  },
  "7^(8x^2+4)=7^((2-3x)^2)": {
   "cartes": [
@@ -28199,8 +28625,655 @@
   "erreur": null,
   "ok": true
  },
+ "x*ln(x)+1=0": {
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
+  "ok": false
+ },
+ "x*ln(x)=0": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Mise en évidence et produit nul",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x \\cdot \\ln(x) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } \\ln(x) = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } x = 1\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 0 \\notin ED\\)</span><span class=\"prop\">(rejetée : ln(x) n'est pas défini : x = 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 1\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{1\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "x \\cdot \\ln(x) = 0",
+  "erreur": null,
+  "ok": true,
+  "option": {
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "html": "Conventions : 1 an = 12 mois et 1 mois = 30 jours.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(x = 1\\) : 1 an ; reste \\(0\\) an.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(0 \\cdot 12 = 0\\) mois → 0 mois ; reste \\(0\\) mois.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(0 \\cdot 30 = 0\\) jour → 0 jour.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "<strong>Au bout de 1 an, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
+      }
+     ],
+     "style": "final",
+     "titre": "Interprétation"
+    }
+   ],
+   "cle": "interpretation",
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  }
+ },
+ "x*ln(x)=2x": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Mise en évidence et produit nul",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x \\cdot \\ln(x) = 2x\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\ln(x) - 2x = 0\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(\\ln(x) - 2) = 0\\)</span><span class=\"prop\">(mise en évidence)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } \\ln(x) - 2 = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } \\ln(x) = 2\\)</span><span class=\"prop\">(on isole le logarithme)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } x = e^{2}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 0 \\notin ED\\)</span><span class=\"prop\">(rejetée : ln(x) n'est pas défini : x = 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{2} \\approx 7{,}389\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{e^{2}\\right\\} \\text{, soit } x \\approx 7{,}389",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "x \\cdot \\ln(x) = 2x",
+  "erreur": null,
+  "ok": true,
+  "option": {
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "html": "Conventions : 1 an = 12 mois et 1 mois = 30 jours.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(x \\approx 7{,}389\\) : 7 ans ; reste \\(0{,}389\\) an.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(0{,}389 \\cdot 12 \\approx 4{,}669\\) mois → 4 mois ; reste \\(0{,}669\\) mois.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(0{,}669 \\cdot 30 \\approx 20{,}060\\) jours → 21 jours.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "Au bout de 20 jours, la durée cherchée n'est pas encore écoulée : on arrondit au jour supérieur.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "<strong>Au bout de 7 ans, 4 mois et 21 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
+      }
+     ],
+     "style": "final",
+     "titre": "Interprétation"
+    }
+   ],
+   "cle": "interpretation",
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  }
+ },
+ "x*ln(x)=x^2": {
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
+  "ok": false
+ },
+ "x*log(x)+x=0": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Mise en évidence et produit nul",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x \\cdot \\log(x) + x = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(1 + \\log(x)) = 0\\)</span><span class=\"prop\">(mise en évidence)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } 1 + \\log(x) = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } \\log(x) = -1\\)</span><span class=\"prop\">(on isole le logarithme)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } x = 10^{-1} = \\frac{1}{10}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 0 \\notin ED\\)</span><span class=\"prop\">(rejetée : log(x) n'est pas défini : x = 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{1}{10}\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{1}{10}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "x \\cdot \\log(x) + x = 0",
+  "erreur": null,
+  "ok": true,
+  "option": {
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "html": "Conventions : 1 an = 12 mois et 1 mois = 30 jours.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(x = 0{,}1\\) : 0 an ; reste \\(0{,}1\\) an.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(0{,}1 \\cdot 12 = 1{,}2\\) mois → 1 mois ; reste \\(0{,}2\\) mois.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(0{,}2 \\cdot 30 = 6\\) jours → 6 jours.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "<strong>Au bout de 0 an, 1 mois et 6 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
+      }
+     ],
+     "style": "final",
+     "titre": "Interprétation"
+    }
+   ],
+   "cle": "interpretation",
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  }
+ },
  "x*log(x)=1": {
   "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
   "ok": false
+ },
+ "x*log_2(x)=3x": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Mise en évidence et produit nul",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x \\cdot \\log_{2}(x) = 3x\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log_{2}(x) - 3x = 0\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(\\log_{2}(x) - 3) = 0\\)</span><span class=\"prop\">(mise en évidence)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } \\log_{2}(x) - 3 = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } \\log_{2}(x) = 3\\)</span><span class=\"prop\">(on isole le logarithme)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } x = 2^{3} = 8\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 0 \\notin ED\\)</span><span class=\"prop\">(rejetée : log_2(x) n'est pas défini : x = 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 8\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{8\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "x \\cdot \\log_{2}(x) = 3x",
+  "erreur": null,
+  "ok": true,
+  "option": {
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "html": "Conventions : 1 an = 12 mois et 1 mois = 30 jours.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(x = 8\\) : 8 ans ; reste \\(0\\) an.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(0 \\cdot 12 = 0\\) mois → 0 mois ; reste \\(0\\) mois.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(0 \\cdot 30 = 0\\) jour → 0 jour.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "<strong>Au bout de 8 ans, 0 mois et 0 jour.</strong>",
+       "style": "etape",
+       "type": "texte"
+      }
+     ],
+     "style": "final",
+     "titre": "Interprétation"
+    }
+   ],
+   "cle": "interpretation",
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  }
+ },
+ "x-x*ln(x)=0": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Mise en évidence et produit nul",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x - x \\cdot \\ln(x) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(1 - \\ln(x)) = 0\\)</span><span class=\"prop\">(mise en évidence)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } 1 - \\ln(x) = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } \\ln(x) = 1\\)</span><span class=\"prop\">(on isole le logarithme)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } x = e\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 0 \\notin ED\\)</span><span class=\"prop\">(rejetée : ln(x) n'est pas défini : x = 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e \\approx 2{,}718\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{e\\right\\} \\text{, soit } x \\approx 2{,}718",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "x - x \\cdot \\ln(x) = 0",
+  "erreur": null,
+  "ok": true,
+  "option": {
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "html": "Conventions : 1 an = 12 mois et 1 mois = 30 jours.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(x \\approx 2{,}718\\) : 2 ans ; reste \\(0{,}718\\) an.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(0{,}718 \\cdot 12 \\approx 8{,}619\\) mois → 8 mois ; reste \\(0{,}619\\) mois.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(0{,}619 \\cdot 30 \\approx 18{,}581\\) jours → 19 jours.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "Au bout de 18 jours, la durée cherchée n'est pas encore écoulée : on arrondit au jour supérieur.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "<strong>Au bout de 2 ans, 8 mois et 19 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
+      }
+     ],
+     "style": "final",
+     "titre": "Interprétation"
+    }
+   ],
+   "cle": "interpretation",
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  }
+ },
+ "x^2*ln(x)=x^2": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · logarithme",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "x > 0",
+      "type": "formule"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Mise en évidence et produit nul",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x^{2} \\cdot \\ln(x) = x^{2}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} \\cdot \\ln(x) - x^{2} = 0\\)</span><span class=\"prop\">(on passe un terme de l'autre côté)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} \\cdot (\\ln(x) - 1) = 0\\)</span><span class=\"prop\">(mise en évidence)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = 0 \\text{ ou } \\ln(x) - 1 = 0\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } \\ln(x) - 1 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } \\ln(x) = 1\\)</span><span class=\"prop\">(on isole le logarithme)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } x = e\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 0 \\notin ED\\)</span><span class=\"prop\">(rejetée : ln(x) n'est pas défini : x = 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e \\approx 2{,}718\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{e\\right\\} \\text{, soit } x \\approx 2{,}718",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "x^{2} \\cdot \\ln(x) = x^{2}",
+  "erreur": null,
+  "ok": true,
+  "option": {
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "html": "Conventions : 1 an = 12 mois et 1 mois = 30 jours.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(x \\approx 2{,}718\\) : 2 ans ; reste \\(0{,}718\\) an.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(0{,}718 \\cdot 12 \\approx 8{,}619\\) mois → 8 mois ; reste \\(0{,}619\\) mois.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "\\(0{,}619 \\cdot 30 \\approx 18{,}581\\) jours → 19 jours.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "Au bout de 18 jours, la durée cherchée n'est pas encore écoulée : on arrondit au jour supérieur.",
+       "style": "etape",
+       "type": "texte"
+      },
+      {
+       "html": "<strong>Au bout de 2 ans, 8 mois et 19 jours.</strong>",
+       "style": "etape",
+       "type": "texte"
+      }
+     ],
+     "style": "final",
+     "titre": "Interprétation"
+    }
+   ],
+   "cle": "interpretation",
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  }
  }
 }

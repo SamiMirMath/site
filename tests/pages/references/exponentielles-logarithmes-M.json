@@ -311,6 +311,115 @@
   ],
   "progression_finale": "Étape 5 / 5"
  },
+ "-x*ln(x)-x=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Mise en évidence et produit nul⟦-x \\cdot \\ln(x) - x = 0⟧⟦\\iff⟧⟦x(-\\ln(x) - 1) = 0⟧(mise en évidence)⟦\\iff⟧⟦x = 0 \\text{ ou } -\\ln(x) - 1 = 0⟧(un produit est nul si l'un des facteurs est nul)⟦\\iff⟧⟦x = 0 \\text{ ou } \\ln(x) = -1⟧(on isole le logarithme)⟦\\iff⟧⟦x = 0 \\text{ ou } x = e^{-1}⟧(exponentielle des deux membres)",
+    "titre": "Étape 2Mise en évidence et produit nul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 0 \\notin ED⟧(rejetée : ln(x) n'est pas défini : x = 0)⟦e^{-1} \\approx 0{,}368⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{e^{-1}\\right\\} \\text{, soit } x \\approx 0{,}368⟧",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+     "titre": "Étape 1Ensemble de définition"
+    },
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 2Mise en évidence et produit nul⟦-x \\cdot \\ln(x) - x = 0⟧⟦\\iff⟧⟦x(-\\ln(x) - 1) = 0⟧(mise en évidence)⟦\\iff⟧⟦x = 0 \\text{ ou } -\\ln(x) - 1 = 0⟧(un produit est nul si l'un des facteurs est nul)⟦\\iff⟧⟦x = 0 \\text{ ou } \\ln(x) = -1⟧(on isole le logarithme)⟦\\iff⟧⟦x = 0 \\text{ ou } x = e^{-1}⟧(exponentielle des deux membres)",
+     "titre": "Étape 2Mise en évidence et produit nul"
+    },
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 3Vérification⟦x = 0 \\notin ED⟧(rejetée : ln(x) n'est pas défini : x = 0)⟦e^{-1} \\approx 0{,}368⟧(dans l'ensemble de définition ✓)",
+     "titre": "Étape 3Vérification"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\left\\{e^{-1}\\right\\} \\text{, soit } x \\approx 0{,}368⟧",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationConventions : 1 an = 12 mois et 1 mois = 30 jours.⟦x \\approx 0{,}368⟧ : 0 an ; reste ⟦0{,}368⟧ an.⟦0{,}368 \\cdot 12 \\approx 4{,}415⟧ mois → 4 mois ; reste ⟦0{,}415⟧ mois.⟦0{,}415 \\cdot 30 \\approx 12{,}437⟧ jours → 13 jours.Au bout de 12 jours, la durée cherchée n'est pas encore écoulée : on arrondit au jour supérieur.Au bout de 0 an, 4 mois et 13 jours.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 5 / 5"
+  },
+  "progression_finale": "Étape 4 / 4"
+ },
  "0,25^x-0,5^x-2=0": {
   "au_depart": {
    "progression": "Étape 1 / 4",
@@ -4614,6 +4723,115 @@
   ],
   "progression_finale": "Étape 5 / 5"
  },
+ "2x+3x*log(x)=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Mise en évidence et produit nul⟦2x + 3x \\cdot \\log(x) = 0⟧⟦\\iff⟧⟦x(2 + 3\\log(x)) = 0⟧(mise en évidence)⟦\\iff⟧⟦x = 0 \\text{ ou } 2 + 3\\log(x) = 0⟧(un produit est nul si l'un des facteurs est nul)⟦\\iff⟧⟦x = 0 \\text{ ou } \\log(x) = -\\frac{2}{3}⟧(on isole le logarithme)⟦\\iff⟧⟦x = 0 \\text{ ou } x = 10^{-\\frac{2}{3}}⟧(exponentielle des deux membres)",
+    "titre": "Étape 2Mise en évidence et produit nul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 0 \\notin ED⟧(rejetée : log(x) n'est pas défini : x = 0)⟦10^{-\\frac{2}{3}} \\approx 0{,}215⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{10^{-\\frac{2}{3}}\\right\\} \\text{, soit } x \\approx 0{,}215⟧",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+     "titre": "Étape 1Ensemble de définition"
+    },
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 2Mise en évidence et produit nul⟦2x + 3x \\cdot \\log(x) = 0⟧⟦\\iff⟧⟦x(2 + 3\\log(x)) = 0⟧(mise en évidence)⟦\\iff⟧⟦x = 0 \\text{ ou } 2 + 3\\log(x) = 0⟧(un produit est nul si l'un des facteurs est nul)⟦\\iff⟧⟦x = 0 \\text{ ou } \\log(x) = -\\frac{2}{3}⟧(on isole le logarithme)⟦\\iff⟧⟦x = 0 \\text{ ou } x = 10^{-\\frac{2}{3}}⟧(exponentielle des deux membres)",
+     "titre": "Étape 2Mise en évidence et produit nul"
+    },
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 3Vérification⟦x = 0 \\notin ED⟧(rejetée : log(x) n'est pas défini : x = 0)⟦10^{-\\frac{2}{3}} \\approx 0{,}215⟧(dans l'ensemble de définition ✓)",
+     "titre": "Étape 3Vérification"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\left\\{10^{-\\frac{2}{3}}\\right\\} \\text{, soit } x \\approx 0{,}215⟧",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationConventions : 1 an = 12 mois et 1 mois = 30 jours.⟦x \\approx 0{,}215⟧ : 0 an ; reste ⟦0{,}215⟧ an.⟦0{,}215 \\cdot 12 \\approx 2{,}585⟧ mois → 2 mois ; reste ⟦0{,}585⟧ mois.⟦0{,}585 \\cdot 30 \\approx 17{,}560⟧ jours → 18 jours.Au bout de 17 jours, la durée cherchée n'est pas encore écoulée : on arrondit au jour supérieur.Au bout de 0 an, 2 mois et 18 jours.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 5 / 5"
+  },
+  "progression_finale": "Étape 4 / 4"
+ },
  "3*2^(2(x+1))-10*2^(x+2)=32": {
   "au_depart": {
    "progression": "Étape 1 / 4",
@@ -6569,6 +6787,115 @@
   ],
   "progression_finale": "Étape 5 / 5"
  },
+ "3x-x*log(x)=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Mise en évidence et produit nul⟦3x - x \\cdot \\log(x) = 0⟧⟦\\iff⟧⟦x(3 - \\log(x)) = 0⟧(mise en évidence)⟦\\iff⟧⟦x = 0 \\text{ ou } 3 - \\log(x) = 0⟧(un produit est nul si l'un des facteurs est nul)⟦\\iff⟧⟦x = 0 \\text{ ou } \\log(x) = 3⟧(on isole le logarithme)⟦\\iff⟧⟦x = 0 \\text{ ou } x = 10^{3} = 1\\text{’}000⟧(exponentielle des deux membres)",
+    "titre": "Étape 2Mise en évidence et produit nul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 0 \\notin ED⟧(rejetée : log(x) n'est pas défini : x = 0)⟦x = 1\\text{’}000⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{1\\text{’}000\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+     "titre": "Étape 1Ensemble de définition"
+    },
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 2Mise en évidence et produit nul⟦3x - x \\cdot \\log(x) = 0⟧⟦\\iff⟧⟦x(3 - \\log(x)) = 0⟧(mise en évidence)⟦\\iff⟧⟦x = 0 \\text{ ou } 3 - \\log(x) = 0⟧(un produit est nul si l'un des facteurs est nul)⟦\\iff⟧⟦x = 0 \\text{ ou } \\log(x) = 3⟧(on isole le logarithme)⟦\\iff⟧⟦x = 0 \\text{ ou } x = 10^{3} = 1\\text{’}000⟧(exponentielle des deux membres)",
+     "titre": "Étape 2Mise en évidence et produit nul"
+    },
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 3Vérification⟦x = 0 \\notin ED⟧(rejetée : log(x) n'est pas défini : x = 0)⟦x = 1\\text{’}000⟧(dans l'ensemble de définition ✓)",
+     "titre": "Étape 3Vérification"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\left\\{1\\text{’}000\\right\\}⟧",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationConventions : 1 an = 12 mois et 1 mois = 30 jours.⟦x = 1\\text{’}000⟧ : 1000 ans ; reste ⟦0⟧ an.⟦0 \\cdot 12 = 0⟧ mois → 0 mois ; reste ⟦0⟧ mois.⟦0 \\cdot 30 = 0⟧ jour → 0 jour.Au bout de 1000 ans, 0 mois et 0 jour.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 5 / 5"
+  },
+  "progression_finale": "Étape 4 / 4"
+ },
  "4*2^(-3x)-5*2^(-x)+2^x=0": {
   "au_depart": {
    "progression": "Étape 1 / 6",
@@ -8166,6 +8493,115 @@
     "progression_finale": "Étape 2 / 2"
    }
   }
+ },
+ "5x^3=x^3*log(x)": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Mise en évidence et produit nul⟦5x^{3} = x^{3} \\cdot \\log(x)⟧⟦\\iff⟧⟦5x^{3} - x^{3} \\cdot \\log(x) = 0⟧(on passe un terme de l'autre côté)⟦\\iff⟧⟦x^{3} \\cdot (5 - \\log(x)) = 0⟧(mise en évidence)⟦\\iff⟧⟦x^{3} = 0 \\text{ ou } 5 - \\log(x) = 0⟧(un produit est nul si l'un des facteurs est nul)⟦\\iff⟧⟦x = 0 \\text{ ou } 5 - \\log(x) = 0⟧⟦\\iff⟧⟦x = 0 \\text{ ou } \\log(x) = 5⟧(on isole le logarithme)⟦\\iff⟧⟦x = 0 \\text{ ou } x = 10^{5} = 100\\text{’}000⟧(exponentielle des deux membres)",
+    "titre": "Étape 2Mise en évidence et produit nul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 0 \\notin ED⟧(rejetée : log(x) n'est pas défini : x = 0)⟦x = 100\\text{’}000⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{100\\text{’}000\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+     "titre": "Étape 1Ensemble de définition"
+    },
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 2Mise en évidence et produit nul⟦5x^{3} = x^{3} \\cdot \\log(x)⟧⟦\\iff⟧⟦5x^{3} - x^{3} \\cdot \\log(x) = 0⟧(on passe un terme de l'autre côté)⟦\\iff⟧⟦x^{3} \\cdot (5 - \\log(x)) = 0⟧(mise en évidence)⟦\\iff⟧⟦x^{3} = 0 \\text{ ou } 5 - \\log(x) = 0⟧(un produit est nul si l'un des facteurs est nul)⟦\\iff⟧⟦x = 0 \\text{ ou } 5 - \\log(x) = 0⟧⟦\\iff⟧⟦x = 0 \\text{ ou } \\log(x) = 5⟧(on isole le logarithme)⟦\\iff⟧⟦x = 0 \\text{ ou } x = 10^{5} = 100\\text{’}000⟧(exponentielle des deux membres)",
+     "titre": "Étape 2Mise en évidence et produit nul"
+    },
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 3Vérification⟦x = 0 \\notin ED⟧(rejetée : log(x) n'est pas défini : x = 0)⟦x = 100\\text{’}000⟧(dans l'ensemble de définition ✓)",
+     "titre": "Étape 3Vérification"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\left\\{100\\text{’}000\\right\\}⟧",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationConventions : 1 an = 12 mois et 1 mois = 30 jours.⟦x = 100\\text{’}000⟧ : 100000 ans ; reste ⟦0⟧ an.⟦0 \\cdot 12 = 0⟧ mois → 0 mois ; reste ⟦0⟧ mois.⟦0 \\cdot 30 = 0⟧ jour → 0 jour.Au bout de 100000 ans, 0 mois et 0 jour.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 5 / 5"
+  },
+  "progression_finale": "Étape 4 / 4"
  },
  "7^(8x^2+4)=7^((2-3x)^2)": {
   "au_depart": {
@@ -21979,6 +22415,371 @@
   ],
   "progression_finale": "Étape 4 / 4"
  },
+ "x*ln(x)+1=0": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cette équation ne se résout pas avec les méthodes du cours.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "x*ln(x)=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Mise en évidence et produit nul⟦x \\cdot \\ln(x) = 0⟧⟦\\iff⟧⟦x = 0 \\text{ ou } \\ln(x) = 0⟧(un produit est nul si l'un des facteurs est nul)⟦\\iff⟧⟦x = 0 \\text{ ou } x = 1⟧(exponentielle des deux membres)",
+    "titre": "Étape 2Mise en évidence et produit nul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 0 \\notin ED⟧(rejetée : ln(x) n'est pas défini : x = 0)⟦x = 1⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{1\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+     "titre": "Étape 1Ensemble de définition"
+    },
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 2Mise en évidence et produit nul⟦x \\cdot \\ln(x) = 0⟧⟦\\iff⟧⟦x = 0 \\text{ ou } \\ln(x) = 0⟧(un produit est nul si l'un des facteurs est nul)⟦\\iff⟧⟦x = 0 \\text{ ou } x = 1⟧(exponentielle des deux membres)",
+     "titre": "Étape 2Mise en évidence et produit nul"
+    },
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 3Vérification⟦x = 0 \\notin ED⟧(rejetée : ln(x) n'est pas défini : x = 0)⟦x = 1⟧(dans l'ensemble de définition ✓)",
+     "titre": "Étape 3Vérification"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\left\\{1\\right\\}⟧",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationConventions : 1 an = 12 mois et 1 mois = 30 jours.⟦x = 1⟧ : 1 an ; reste ⟦0⟧ an.⟦0 \\cdot 12 = 0⟧ mois → 0 mois ; reste ⟦0⟧ mois.⟦0 \\cdot 30 = 0⟧ jour → 0 jour.Au bout de 1 an, 0 mois et 0 jour.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 5 / 5"
+  },
+  "progression_finale": "Étape 4 / 4"
+ },
+ "x*ln(x)=2x": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Mise en évidence et produit nul⟦x \\cdot \\ln(x) = 2x⟧⟦\\iff⟧⟦x \\cdot \\ln(x) - 2x = 0⟧(on passe un terme de l'autre côté)⟦\\iff⟧⟦x(\\ln(x) - 2) = 0⟧(mise en évidence)⟦\\iff⟧⟦x = 0 \\text{ ou } \\ln(x) - 2 = 0⟧(un produit est nul si l'un des facteurs est nul)⟦\\iff⟧⟦x = 0 \\text{ ou } \\ln(x) = 2⟧(on isole le logarithme)⟦\\iff⟧⟦x = 0 \\text{ ou } x = e^{2}⟧(exponentielle des deux membres)",
+    "titre": "Étape 2Mise en évidence et produit nul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 0 \\notin ED⟧(rejetée : ln(x) n'est pas défini : x = 0)⟦e^{2} \\approx 7{,}389⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{e^{2}\\right\\} \\text{, soit } x \\approx 7{,}389⟧",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+     "titre": "Étape 1Ensemble de définition"
+    },
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 2Mise en évidence et produit nul⟦x \\cdot \\ln(x) = 2x⟧⟦\\iff⟧⟦x \\cdot \\ln(x) - 2x = 0⟧(on passe un terme de l'autre côté)⟦\\iff⟧⟦x(\\ln(x) - 2) = 0⟧(mise en évidence)⟦\\iff⟧⟦x = 0 \\text{ ou } \\ln(x) - 2 = 0⟧(un produit est nul si l'un des facteurs est nul)⟦\\iff⟧⟦x = 0 \\text{ ou } \\ln(x) = 2⟧(on isole le logarithme)⟦\\iff⟧⟦x = 0 \\text{ ou } x = e^{2}⟧(exponentielle des deux membres)",
+     "titre": "Étape 2Mise en évidence et produit nul"
+    },
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 3Vérification⟦x = 0 \\notin ED⟧(rejetée : ln(x) n'est pas défini : x = 0)⟦e^{2} \\approx 7{,}389⟧(dans l'ensemble de définition ✓)",
+     "titre": "Étape 3Vérification"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\left\\{e^{2}\\right\\} \\text{, soit } x \\approx 7{,}389⟧",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationConventions : 1 an = 12 mois et 1 mois = 30 jours.⟦x \\approx 7{,}389⟧ : 7 ans ; reste ⟦0{,}389⟧ an.⟦0{,}389 \\cdot 12 \\approx 4{,}669⟧ mois → 4 mois ; reste ⟦0{,}669⟧ mois.⟦0{,}669 \\cdot 30 \\approx 20{,}060⟧ jours → 21 jours.Au bout de 20 jours, la durée cherchée n'est pas encore écoulée : on arrondit au jour supérieur.Au bout de 7 ans, 4 mois et 21 jours.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 5 / 5"
+  },
+  "progression_finale": "Étape 4 / 4"
+ },
+ "x*ln(x)=x^2": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cette équation ne se résout pas avec les méthodes du cours.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "x*log(x)+x=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Mise en évidence et produit nul⟦x \\cdot \\log(x) + x = 0⟧⟦\\iff⟧⟦x(1 + \\log(x)) = 0⟧(mise en évidence)⟦\\iff⟧⟦x = 0 \\text{ ou } 1 + \\log(x) = 0⟧(un produit est nul si l'un des facteurs est nul)⟦\\iff⟧⟦x = 0 \\text{ ou } \\log(x) = -1⟧(on isole le logarithme)⟦\\iff⟧⟦x = 0 \\text{ ou } x = 10^{-1} = \\frac{1}{10}⟧(exponentielle des deux membres)",
+    "titre": "Étape 2Mise en évidence et produit nul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 0 \\notin ED⟧(rejetée : log(x) n'est pas défini : x = 0)⟦x = \\frac{1}{10}⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{1}{10}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+     "titre": "Étape 1Ensemble de définition"
+    },
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 2Mise en évidence et produit nul⟦x \\cdot \\log(x) + x = 0⟧⟦\\iff⟧⟦x(1 + \\log(x)) = 0⟧(mise en évidence)⟦\\iff⟧⟦x = 0 \\text{ ou } 1 + \\log(x) = 0⟧(un produit est nul si l'un des facteurs est nul)⟦\\iff⟧⟦x = 0 \\text{ ou } \\log(x) = -1⟧(on isole le logarithme)⟦\\iff⟧⟦x = 0 \\text{ ou } x = 10^{-1} = \\frac{1}{10}⟧(exponentielle des deux membres)",
+     "titre": "Étape 2Mise en évidence et produit nul"
+    },
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 3Vérification⟦x = 0 \\notin ED⟧(rejetée : log(x) n'est pas défini : x = 0)⟦x = \\frac{1}{10}⟧(dans l'ensemble de définition ✓)",
+     "titre": "Étape 3Vérification"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\left\\{\\frac{1}{10}\\right\\}⟧",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationConventions : 1 an = 12 mois et 1 mois = 30 jours.⟦x = 0{,}1⟧ : 0 an ; reste ⟦0{,}1⟧ an.⟦0{,}1 \\cdot 12 = 1{,}2⟧ mois → 1 mois ; reste ⟦0{,}2⟧ mois.⟦0{,}2 \\cdot 30 = 6⟧ jours → 6 jours.Au bout de 0 an, 1 mois et 6 jours.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 5 / 5"
+  },
+  "progression_finale": "Étape 4 / 4"
+ },
  "x*log(x)=1": {
   "au_depart": {
    "progression": "",
@@ -21997,5 +22798,332 @@
    }
   ],
   "progression_finale": ""
+ },
+ "x*log_2(x)=3x": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Mise en évidence et produit nul⟦x \\cdot \\log_{2}(x) = 3x⟧⟦\\iff⟧⟦x \\cdot \\log_{2}(x) - 3x = 0⟧(on passe un terme de l'autre côté)⟦\\iff⟧⟦x(\\log_{2}(x) - 3) = 0⟧(mise en évidence)⟦\\iff⟧⟦x = 0 \\text{ ou } \\log_{2}(x) - 3 = 0⟧(un produit est nul si l'un des facteurs est nul)⟦\\iff⟧⟦x = 0 \\text{ ou } \\log_{2}(x) = 3⟧(on isole le logarithme)⟦\\iff⟧⟦x = 0 \\text{ ou } x = 2^{3} = 8⟧(exponentielle des deux membres)",
+    "titre": "Étape 2Mise en évidence et produit nul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 0 \\notin ED⟧(rejetée : log_2(x) n'est pas défini : x = 0)⟦x = 8⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{8\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+     "titre": "Étape 1Ensemble de définition"
+    },
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 2Mise en évidence et produit nul⟦x \\cdot \\log_{2}(x) = 3x⟧⟦\\iff⟧⟦x \\cdot \\log_{2}(x) - 3x = 0⟧(on passe un terme de l'autre côté)⟦\\iff⟧⟦x(\\log_{2}(x) - 3) = 0⟧(mise en évidence)⟦\\iff⟧⟦x = 0 \\text{ ou } \\log_{2}(x) - 3 = 0⟧(un produit est nul si l'un des facteurs est nul)⟦\\iff⟧⟦x = 0 \\text{ ou } \\log_{2}(x) = 3⟧(on isole le logarithme)⟦\\iff⟧⟦x = 0 \\text{ ou } x = 2^{3} = 8⟧(exponentielle des deux membres)",
+     "titre": "Étape 2Mise en évidence et produit nul"
+    },
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 3Vérification⟦x = 0 \\notin ED⟧(rejetée : log_2(x) n'est pas défini : x = 0)⟦x = 8⟧(dans l'ensemble de définition ✓)",
+     "titre": "Étape 3Vérification"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\left\\{8\\right\\}⟧",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationConventions : 1 an = 12 mois et 1 mois = 30 jours.⟦x = 8⟧ : 8 ans ; reste ⟦0⟧ an.⟦0 \\cdot 12 = 0⟧ mois → 0 mois ; reste ⟦0⟧ mois.⟦0 \\cdot 30 = 0⟧ jour → 0 jour.Au bout de 8 ans, 0 mois et 0 jour.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 5 / 5"
+  },
+  "progression_finale": "Étape 4 / 4"
+ },
+ "x-x*ln(x)=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Mise en évidence et produit nul⟦x - x \\cdot \\ln(x) = 0⟧⟦\\iff⟧⟦x(1 - \\ln(x)) = 0⟧(mise en évidence)⟦\\iff⟧⟦x = 0 \\text{ ou } 1 - \\ln(x) = 0⟧(un produit est nul si l'un des facteurs est nul)⟦\\iff⟧⟦x = 0 \\text{ ou } \\ln(x) = 1⟧(on isole le logarithme)⟦\\iff⟧⟦x = 0 \\text{ ou } x = e⟧(exponentielle des deux membres)",
+    "titre": "Étape 2Mise en évidence et produit nul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 0 \\notin ED⟧(rejetée : ln(x) n'est pas défini : x = 0)⟦e \\approx 2{,}718⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{e\\right\\} \\text{, soit } x \\approx 2{,}718⟧",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+     "titre": "Étape 1Ensemble de définition"
+    },
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 2Mise en évidence et produit nul⟦x - x \\cdot \\ln(x) = 0⟧⟦\\iff⟧⟦x(1 - \\ln(x)) = 0⟧(mise en évidence)⟦\\iff⟧⟦x = 0 \\text{ ou } 1 - \\ln(x) = 0⟧(un produit est nul si l'un des facteurs est nul)⟦\\iff⟧⟦x = 0 \\text{ ou } \\ln(x) = 1⟧(on isole le logarithme)⟦\\iff⟧⟦x = 0 \\text{ ou } x = e⟧(exponentielle des deux membres)",
+     "titre": "Étape 2Mise en évidence et produit nul"
+    },
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 3Vérification⟦x = 0 \\notin ED⟧(rejetée : ln(x) n'est pas défini : x = 0)⟦e \\approx 2{,}718⟧(dans l'ensemble de définition ✓)",
+     "titre": "Étape 3Vérification"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\left\\{e\\right\\} \\text{, soit } x \\approx 2{,}718⟧",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationConventions : 1 an = 12 mois et 1 mois = 30 jours.⟦x \\approx 2{,}718⟧ : 2 ans ; reste ⟦0{,}718⟧ an.⟦0{,}718 \\cdot 12 \\approx 8{,}619⟧ mois → 8 mois ; reste ⟦0{,}619⟧ mois.⟦0{,}619 \\cdot 30 \\approx 18{,}581⟧ jours → 19 jours.Au bout de 18 jours, la durée cherchée n'est pas encore écoulée : on arrondit au jour supérieur.Au bout de 2 ans, 8 mois et 19 jours.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 5 / 5"
+  },
+  "progression_finale": "Étape 4 / 4"
+ },
+ "x^2*ln(x)=x^2": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Mise en évidence et produit nul⟦x^{2} \\cdot \\ln(x) = x^{2}⟧⟦\\iff⟧⟦x^{2} \\cdot \\ln(x) - x^{2} = 0⟧(on passe un terme de l'autre côté)⟦\\iff⟧⟦x^{2} \\cdot (\\ln(x) - 1) = 0⟧(mise en évidence)⟦\\iff⟧⟦x^{2} = 0 \\text{ ou } \\ln(x) - 1 = 0⟧(un produit est nul si l'un des facteurs est nul)⟦\\iff⟧⟦x = 0 \\text{ ou } \\ln(x) - 1 = 0⟧⟦\\iff⟧⟦x = 0 \\text{ ou } \\ln(x) = 1⟧(on isole le logarithme)⟦\\iff⟧⟦x = 0 \\text{ ou } x = e⟧(exponentielle des deux membres)",
+    "titre": "Étape 2Mise en évidence et produit nul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x = 0 \\notin ED⟧(rejetée : ln(x) n'est pas défini : x = 0)⟦e \\approx 2{,}718⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{e\\right\\} \\text{, soit } x \\approx 2{,}718⟧",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+     "titre": "Étape 1Ensemble de définition"
+    },
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 2Mise en évidence et produit nul⟦x^{2} \\cdot \\ln(x) = x^{2}⟧⟦\\iff⟧⟦x^{2} \\cdot \\ln(x) - x^{2} = 0⟧(on passe un terme de l'autre côté)⟦\\iff⟧⟦x^{2} \\cdot (\\ln(x) - 1) = 0⟧(mise en évidence)⟦\\iff⟧⟦x^{2} = 0 \\text{ ou } \\ln(x) - 1 = 0⟧(un produit est nul si l'un des facteurs est nul)⟦\\iff⟧⟦x = 0 \\text{ ou } \\ln(x) - 1 = 0⟧⟦\\iff⟧⟦x = 0 \\text{ ou } \\ln(x) = 1⟧(on isole le logarithme)⟦\\iff⟧⟦x = 0 \\text{ ou } x = e⟧(exponentielle des deux membres)",
+     "titre": "Étape 2Mise en évidence et produit nul"
+    },
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 3Vérification⟦x = 0 \\notin ED⟧(rejetée : ln(x) n'est pas défini : x = 0)⟦e \\approx 2{,}718⟧(dans l'ensemble de définition ✓)",
+     "titre": "Étape 3Vérification"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\left\\{e\\right\\} \\text{, soit } x \\approx 2{,}718⟧",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationConventions : 1 an = 12 mois et 1 mois = 30 jours.⟦x \\approx 2{,}718⟧ : 2 ans ; reste ⟦0{,}718⟧ an.⟦0{,}718 \\cdot 12 \\approx 8{,}619⟧ mois → 8 mois ; reste ⟦0{,}619⟧ mois.⟦0{,}619 \\cdot 30 \\approx 18{,}581⟧ jours → 19 jours.Au bout de 18 jours, la durée cherchée n'est pas encore écoulée : on arrondit au jour supérieur.Au bout de 2 ans, 8 mois et 19 jours.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 5 / 5"
+  },
+  "progression_finale": "Étape 4 / 4"
  }
 }

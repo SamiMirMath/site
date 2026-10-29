@@ -20,7 +20,7 @@ from noyau import analyser_complet
 from exp_log import (Car, Chaine, Defini, E, Eq, Fn, Log, Message, Neg, Nb, Op, Ou, Pow, Rel, Texte, Var, _Hors, _arbre_poly, _avec_decimaux,
                      _base_du_logarithme, _carte, _const, _contient_log, _nb_exact, _nom_tex, _padd, _par_exponentielle, _pnet, _precis, _produit,
                      _racine_entiere, _resoudre_polynome, _somme_arbres, _suite_polynome, _milieu_exact, _valeur_exacte, _valeur_rationnelle, _exposant_entier, _poly, _regrouper as _regrouper_3c, _puissance_rationnelle_exacte, _racine_carree, _racine_primitive, tex_element, logarithmique_m, _fin_beta,
-                     resolution_exponentielle, tex, tex_approx, valeur, variables, METHODE_LOGARITHMES, METHODE_MEME_BASE, METHODES, PROP_EXPONENTIELLE, PROP_ISOLER_LOG, PROP_PUISSANCE_NEGATIVE, PROP_EXP_LOG_BASE,
+                     resolution_exponentielle, tex, tex_approx, valeur, variables, METHODE_LOGARITHMES, METHODE_MEME_BASE, METHODES, PROP_EXPONENTIELLE, PROP_ISOLER_LOG, PROP_PUISSANCE_NEGATIVE, PROP_EXP_LOG_BASE, PROP_AUTRE_COTE, PROP_MISE_EN_EVIDENCE, PROP_PRODUIT_NUL,
                      PROP_AUCUNE_SOLUTION, PROP_CAR_LN_E, PROP_CAR_LOG_10, PROP_DEFINITION_LOG, PROP_FOIS_MOINS_UN, PROP_LN_DEUX_MEMBRES,
                      PROP_LN_E_PUISSANCE, PROP_LN_PUISSANCE, PROP_LOG_BASE_PUISSANCE, PROP_LOG_DEUX_MEMBRES, PROP_LOG_PUISSANCE, PROP_MEME_BASE)
 
@@ -1807,6 +1807,106 @@ def _calcul_du_second_membre(g, d, x):
 
 
 # =====================================================================
+# 4 octies. xᵏ·(a + b·log x) = 0 : x − x ln(x) = 0 (T36, partie G3)
+# =====================================================================
+def _monome_x_log(n, x):
+    """(coefficient, k, j, logarithme) pour n = c · xᵏ · log(x)ʲ avec j = 0 ou 1 (le logarithme de l'inconnue seule, base constante) ; sinon _Hors."""
+    if not variables(n):
+        v = _const(n)
+        if v is None:
+            raise _Hors
+        return v, 0, 0, None
+    if isinstance(n, Var):
+        if n.nom != x:
+            raise _Hors
+        return F(1), 1, 0, None
+    if isinstance(n, Neg):
+        c, k, j, lg = _monome_x_log(n.a, x)
+        return -c, k, j, lg
+    if isinstance(n, Pow):
+        c = _const(n.b)
+        if n.a != Var(x) or c is None or c.denominator != 1 or not 1 <= c <= 6:
+            raise _Hors
+        return F(1), int(c), 0, None
+    if isinstance(n, Log):
+        if n.a != Var(x) or (n.base is not None and variables(n.base)):
+            raise _Hors
+        return F(1), 0, 1, n
+    if isinstance(n, Op) and n.op == "*":
+        c1, k1, j1, l1 = _monome_x_log(n.a, x)
+        c2, k2, j2, l2 = _monome_x_log(n.b, x)
+        if j1 + j2 > 1:
+            raise _Hors
+        return c1 * c2, k1 + k2, j1 + j2, l1 or l2
+    if isinstance(n, Op) and n.op == "/":
+        c1, k1, j1, l1 = _monome_x_log(n.a, x)
+        d = _const(n.b)
+        if d is None or d == 0:
+            raise _Hors
+        return c1 / d, k1, j1, l1
+    raise _Hors
+
+
+@_avec_decimaux
+def produit_x_log(g, d, x):
+    """Le corrigé de xᵏ·(a + b·log x) = 0 (x − x ln(x) = 0, 2x + 3x ln(x) = 0, x ln(x) = x) : mise en évidence de xᵏ, produit nul, x = 0 (rejetée par
+    l'ensemble de définition) ou log x = −a/b. Tous les termes ont le même xᵏ (k ≥ 1) ; x ln x = 1 reste hors programme. None sinon."""
+    try:
+        return _produit_x_log(g, d, x)
+    except _Hors:
+        return None
+
+
+def _produit_x_log(g, d, x):
+    enonce = Eq(g, d)
+    termes = [(sg, _monome_x_log(t, x)) for sg, t in _additifs(g)] + [(-sg, _monome_x_log(t, x)) for sg, t in _additifs(d)]
+    ks = {m[1] for _, m in termes if m[0] != 0}
+    logs = [m[3] for _, m in termes if m[2] == 1]
+    if len(ks) != 1 or not logs or min(ks) < 1:
+        raise _Hors
+    base_a_comparer = {tex(lg) for lg in logs}
+    if len(base_a_comparer) != 1:
+        raise _Hors
+    k, lg = ks.pop(), logs[0]
+    a = sum((sg * m[0] for sg, m in termes if m[2] == 0), F(0))
+    b = sum((sg * m[0] for sg, m in termes if m[2] == 1), F(0))
+    if b == 0:
+        raise _Hors
+    X = Var(x)
+    xk = X if k == 1 else Pow(X, Nb(k))
+    chaine = Chaine([enonce])
+    if not (isinstance(d, Nb) and d.val == 0):
+        chaine.ajouter(Eq(_somme_arbres([t for t in _termes_ecrits(g, d)]), Nb(0)), "⇔", PROP_AUTRE_COTE)
+    terme_log = lg if abs(b) == 1 else Op("*", _nb_exact(abs(b)), lg)
+    terme_b = Neg(terme_log) if b < 0 else terme_log
+    facteur = terme_b if a == 0 else _somme_arbres([_nb_exact(a), terme_b] if a > 0 else [terme_b, _nb_exact(a)])
+    if a != 0:
+        chaine.ajouter(Eq(Op("*", xk, facteur), Nb(0)), "⇔", PROP_MISE_EN_EVIDENCE)
+    q = -a / b
+    nul = Eq(X, Nb(0)) if k == 1 else Eq(xk, Nb(0))
+    chaine.ajouter(Ou([nul, Eq(facteur if a != 0 else lg, Nb(0))]), "⇔", PROP_PRODUIT_NUL)
+    if k > 1:
+        chaine.ajouter(Ou([Eq(X, Nb(0)), Eq(facteur if a != 0 else lg, Nb(0))]), "⇔")
+    base_noeud, _ = _base_du_logarithme(lg.base)
+    egalite = Eq(lg, _nb_exact(q))
+    if a != 0:
+        chaine.ajouter(Ou([Eq(X, Nb(0)), egalite]), "⇔", PROP_ISOLER_LOG)
+    puissance = base_noeud if isinstance(base_noeud, E) and q == 1 else Pow(base_noeud, _nb_exact(q))
+    exact = _valeur_exacte(puissance) if q != 0 else Nb(1)
+    solution = exact or puissance
+    chaine.ajouter(Ou([Eq(X, Nb(0)), Eq(X, solution, _milieu_exact(puissance, exact) if exact is not None and q != 0 else [])]), "⇔", PROP_EXPONENTIELLE)
+    return {"genre": "produit_x_log", "inconnue": x, "enonce": enonce, "base": None, "etapes": [_carte("Mise en évidence et produit nul", [chaine])],
+            "solutions": sorted([Nb(0), solution], key=valeur), "remarque": None}
+
+
+def _termes_ecrits(g, d):
+    """Les termes de g − d écrits dans l'ordre de l'énoncé (ceux de d changent de signe) : x − x ln(x) = 0 reste x − x ln(x)."""
+    haut = [t if sg > 0 else Neg(t) for sg, t in _additifs(g)]
+    bas = [Neg(t) if sg > 0 else t for sg, t in _additifs(d)]
+    return haut + bas
+
+
+# =====================================================================
 # 5. CORRIGÉ D'UNE ÉQUATION LOGARITHMIQUE EN FILIÈRE M
 # =====================================================================
 def _nommer_racines(r):
@@ -1858,7 +1958,7 @@ def corriger_equation(g, d, x):
         if r is None:
             return None
         return _avec_ed_et_verification(ed, {**r, "etapes": [carte_calcul] + list(r["etapes"])}, x)
-    r = logarithmique_m(g, d, x) or regrouper(g, d, x) or base_polynomiale(g, d, x) or base_inconnue_rationnelle(g, d, x)
+    r = logarithmique_m(g, d, x) or regrouper(g, d, x) or base_polynomiale(g, d, x) or base_inconnue_rationnelle(g, d, x) or produit_x_log(g, d, x)
     if r is None:
         return None
     return _avec_ed_et_verification(ed, r, x)

@@ -272,11 +272,17 @@ BATTERIE_M_SECOND_MEMBRE_CALCULE = [
     ("log(x)=(log(8)+log(125))/(log(10)+log(100)-log(10))", [31.623]),
 ]
 
+# T36, partie G3 : xᵏ·(a + b·log x) = 0, la solution x = 0 est rejetée par l'ensemble de définition (Amaudruz 7.8 b)
+BATTERIE_M_PRODUIT_X_LOG = [
+    ("x-x*ln(x)=0", [2.718]), ("2x+3x*log(x)=0", [0.215]), ("x^2*ln(x)=x^2", [2.718]), ("x*log_2(x)=3x", [8.0]), ("x*ln(x)=0", [1.0]), ("-x*ln(x)-x=0", [0.368]),
+    ("3x-x*log(x)=0", [1000.0]), ("x*ln(x)=2x", [7.389]), ("5x^3=x^3*log(x)", [100000.0]), ("x*log(x)+x=0", [0.1]),
+]
+
 # identités sur l'ensemble de définition : S = ED (solutions None)
 M_TOUT_L_ED = ["log(x)=log(x)", "log(x)+log(x-1)=log(x^2-x)", "2log(x)=log(x^2)+log(1)"]
 # formes du programme M que l'outil ne traite pas encore, et vrais hors-programme
 M_PAS_ENCORE = ["3^(2sqrt(x)-1)=5", "2^(sqrt(x)-1)=3", "ln(x)-ln(x+1)=1", "ln(x^3)+ln(2)=1", "log(x)=ln(2)", "log(1/x)=2", "log(x)*log(x-1)=1", "ln(x)=2ln(x+1)+1", "log(sqrt(x))=1"]
-M_HORS_PROGRAMME = ["log(x)=x-1", "x*log(x)=1", "e^x=ln(x)", "log(x)+2^x=3"]
+M_HORS_PROGRAMME = ["log(x)=x-1", "x*log(x)=1", "x*ln(x)=x^2", "x*ln(x)+1=0", "e^x=ln(x)", "log(x)+2^x=3"]
 
 
 
@@ -287,7 +293,8 @@ def entrees_el_m():
                                   + [s for s, _ in BATTERIE_M_EXPOSANTS] + [s for s, _ in BATTERIE_M_BASE_POLYNOMIALE]
                                   + [s for s, _ in BATTERIE_M_BICARRE] + [s for s, _ in BATTERIE_M_BASE_RATIONNELLE]
                                   + [s for s, _ in BATTERIE_M_IRRATIONNEL] + [s for s, _ in BATTERIE_M_CARRE_DANS_L_EXPOSANT]
-                                  + [s for s, _ in BATTERIE_M_SECOND_MEMBRE_CALCULE]))
+                                  + [s for s, _ in BATTERIE_M_SECOND_MEMBRE_CALCULE]
+                                  + [s for s, _ in BATTERIE_M_PRODUIT_X_LOG]))
 
 
 def entrees_el():
