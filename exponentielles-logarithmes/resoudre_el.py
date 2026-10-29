@@ -126,6 +126,13 @@ def resoudre(entree, filiere="C"):
     if filiere not in el.FILIERES:
         return so.sortie_erreur(el.MESSAGE_FILIERE)
     try:
+        return _resoudre(entree, filiere)
+    except OverflowError:                                # log(log(log(x))) = 1 : x = 10^(10^10), que l'arithmétique flottante ne peut pas écrire
+        return so.sortie_erreur(el.MESSAGE_TROP_GRAND)
+
+
+def _resoudre(entree, filiere):
+    try:
         s = el.analyser_saisie(entree)
     except ErreurSaisie as e:
         return so.sortie_erreur(str(e))

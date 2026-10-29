@@ -563,6 +563,16 @@ class TestRobustesse(unittest.TestCase):
             with self.subTest(saisie):
                 self.assertFalse(rel.resoudre(saisie)["ok"])
 
+    def test_une_solution_trop_grande_donne_un_message_et_non_une_exception(self):
+        """log(log(log(x − 1))) = 1 : x = 1 + 10^(10^10), que les flottants ne savent pas écrire (OverflowError avant le 29.10.2026, en C comme en M)."""
+        for filiere in el.FILIERES:
+            for saisie in ["log(log(log(x-1)))=1", "ln(x)=10^10", "ln(ln(ln(x)))=2"]:
+                with self.subTest(filiere=filiere, saisie=saisie):
+                    s = rel.resoudre(saisie, filiere)
+                    self.assertEqual(so.valider(s), [])
+                    if not s["ok"]:
+                        self.assertIn(s["erreur"], (el.MESSAGE_TROP_GRAND, el.MESSAGE_PAS_ENCORE, el.MESSAGE_HORS_PROGRAMME))
+
 
 if __name__ == "__main__":
     unittest.main()

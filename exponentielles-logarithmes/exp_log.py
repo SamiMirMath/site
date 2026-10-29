@@ -42,6 +42,7 @@ MESSAGE_PAS_UN_LOGARITHME = "Écrivez une équation (avec =) ou un logarithme à
 MESSAGE_CALCUL_PAS_ENCORE = "Cet outil ne traite pas encore ce type de calcul."
 MESSAGE_ARGUMENT_NON_POSITIF = "Le logarithme d'un nombre négatif ou nul n'est pas défini."
 MESSAGE_POURCENT = "Le signe % se place juste après un nombre : 3,75 %."
+MESSAGE_TROP_GRAND = "Une solution de cette équation est trop grande pour être écrite par cet outil."
 MESSAGE_FILIERE = "La filière doit être C (3C) ou M (2M)."
 FILIERES = ("C", "M")          # C : 3C (sans ensemble de définition) ; M : 2Ms et 2Mr (exp_log_m.py)
 
