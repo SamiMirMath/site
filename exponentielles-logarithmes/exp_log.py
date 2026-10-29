@@ -313,6 +313,22 @@ def _lire_nom(texte, i):
     return (texte[i] + (m.group(1) or m.group(2)), m.end()) if m else (texte[i], i + 1)
 
 
+def _base_entre_parentheses(s, debut, brut):
+    """(("expr", jetons), fin) pour la base écrite entre parenthèses en s[debut] == "(" (la parenthèse fermante qui lui correspond)."""
+    profondeur = 0
+    for k in range(debut, len(s)):
+        if s[k] == "(":
+            profondeur += 1
+        elif s[k] == ")":
+            profondeur -= 1
+            if profondeur == 0:
+                interieur = brut[debut + 1:k]
+                if not interieur.strip():
+                    raise ErreurSaisie("La base d'un logarithme est vide : log_(2x)(1296).")
+                return ("expr", tokeniser(interieur)), k + 1
+    raise ErreurSaisie("Il manque une parenthèse fermante.")
+
+
 def tokeniser(texte):
     brut = texte.strip().translate(_SYMBOLES)
     s = brut.translate(_MINUSCULES)                     # les noms de fonction ne tiennent pas compte de la casse, les lettres oui
@@ -344,7 +360,16 @@ def tokeniser(texte):
             i += 1
         elif c.isalpha() and c.isascii():
             f = _fonction(s, i)
-            if f:
+            if f and f[0] == "log" and f[1] is None and s[f[2]:f[2] + 2] == "_(":
+                base, j = _base_entre_parentheses(s, f[2] + 1, brut)           # log_(2x)(1296) : une base du 1er degré (acceptée par la filière M)
+                k = j
+                while k < len(s) and s[k].isspace():
+                    k += 1
+                if s[k:k + 1] != "(":
+                    raise ErreurSaisie(MESSAGE_AUTRE_BASE)                         # log_(x) sans argument : le message de toujours
+                toks.append(Tok("fn", "log", base))
+                i = j
+            elif f:
                 nom, base, j = f
                 if base is not None and base.isalpha() and base != "e":
                     base = brut[j - 1]                  # log_Q(x) : la base garde sa casse
@@ -353,7 +378,7 @@ def tokeniser(texte):
                     k += 1
                 if s[k:k + 1] != "(":
                     if nom == "log" and s[j:j + 1] == "_":
-                        raise ErreurSaisie("Pour une autre base, écrivez log_2(x) ou log_a(x) : un nombre ou une lettre après le tiret bas.")
+                        raise ErreurSaisie(MESSAGE_AUTRE_BASE)
                     suite = nom + ("_" + base if base else "")
                     raise ErreurSaisie(f"Après {suite}, ouvrez une parenthèse : {suite}(x).")
                 toks.append(Tok("fn", nom, base))
@@ -390,9 +415,19 @@ def _pourcentage(brut):
 
 
 def _base(nom_base):
-    """Nœud de base d'un log_a : None pour 10, E() pour e, sinon un nombre (> 0, ≠ 1) ou une inconnue."""
+    """Nœud de base d'un log_a : None pour 10, E() pour e, sinon un nombre (> 0, ≠ 1), une inconnue ou, écrite entre parenthèses, une expression."""
     if nom_base is None:
         return None
+    if isinstance(nom_base, tuple):
+        b = _Parseur(nom_base[1]).tout()
+        if variables(b):
+            return b
+        v = _const(b)
+        if v is None:
+            raise ErreurSaisie("La base d'un logarithme est un nombre, une lettre ou une expression du 1er degré : log_2(x), log_a(x), log_(2x)(1296).")
+        if v <= 0 or v == 1:
+            raise ErreurSaisie("La base d'un logarithme est strictement positive et différente de 1.")
+        return None if v == 10 else b if isinstance(b, Nb) else Nb(v)
     if nom_base[0].isdigit() or nom_base[0] in ".,":
         b = _nombre(nom_base)
         if b.val <= 0 or b.val == 1:
@@ -588,8 +623,26 @@ def _liste_de_lettres(noms):
     return noms[0] if len(noms) == 1 else ", ".join(noms[:-1]) + " et " + noms[-1]
 
 
-def analyser_saisie(texte):
+MESSAGE_AUTRE_BASE = "Pour une autre base, écrivez log_2(x) ou log_a(x) : un nombre ou une lettre après le tiret bas."
+
+
+def _base_composee(n):
+    """Vrai quand un logarithme de l'arbre a une base qui n'est ni un nombre, ni e, ni une seule lettre : log_(2x)(1296), log_(x+1)(5)."""
+    if isinstance(n, Log):
+        base = n.base
+        return (base is not None and not isinstance(base, E) and variables(base) and not isinstance(base, Var)) or _base_composee(n.a)
+    if isinstance(n, (Neg, Fn)):
+        return _base_composee(n.a)
+    if isinstance(n, (Op, Pow)):
+        return _base_composee(n.a) or _base_composee(n.b)
+    return False
+
+
+def analyser_saisie(texte, filiere="C"):
+    """La saisie analysée. `filiere` : "C" ou "M" ; une base de logarithme écrite comme une expression (log_(2x)(1296)) n'est lue qu'en filière M."""
     g, d = lire_membres(texte)
+    if filiere != "M" and (_base_composee(g) or (d is not None and _base_composee(d))):
+        raise ErreurSaisie(MESSAGE_AUTRE_BASE)
     if d is None:
         if variables(g):
             raise ErreurSaisie("Écrivez une équation (avec =), ou une expression sans lettre pour calculer un logarithme.")

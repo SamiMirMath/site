@@ -231,6 +231,13 @@ BATTERIE_M_EXPOSANTS = [
     ("e^(-ln(x-1))=3", [1.333]), ("e^(-ln(x))=-2", []),
 ]
 
+# T36, partie C : base polynomiale du 1er degré, argument constant (Amaudruz 7.3 b, 7.7 e, 7.7 i) ; k entier non nul
+BATTERIE_M_BASE_POLYNOMIALE = [
+    ("log_(2x)(1296)=4", [3.0]), ("log_(5x)(1000)=3", [2.0]), ("log_(x+1)(5)=16", [0.106]), ("log_(3x)(1/8)=-3", [0.667]), ("log_(x-1)(27)=3", [4.0]),
+    ("log_(-x)(4)=2", [-2.0]), ("log_(2x)(9)=2", [1.5]), ("log_(x+2)(16)=2", [2.0]), ("log_(2x-1)(25)=2", [3.0]), ("log_(x+1)(8)=3", [1.0]),
+    ("2=log_(x+1)(9)", [2.0]), ("log_(x+3)(1)=2", []), ("log_(2x)(5)=2", [1.118]), ("log_(x+4)(1/16)=-2", [0.0]), ("log_(3-x)(125)=3", [-2.0]),
+]
+
 # identités sur l'ensemble de définition : S = ED (solutions None)
 M_TOUT_L_ED = ["log(x)=log(x)", "log(x)+log(x-1)=log(x^2-x)", "2log(x)=log(x^2)+log(1)"]
 # formes du programme M que l'outil ne traite pas encore, et vrais hors-programme
@@ -243,7 +250,7 @@ def entrees_el_m():
     """Entrées de l'instantané de la filière M : les équations logarithmiques de la 3C (avec ensemble de définition en M) et BATTERIE_M."""
     return list(dict.fromkeys([s for s, _ in BATTERIE_E4] + [s for s, _ in BATTERIE_M] + M_TOUT_L_ED + M_PAS_ENCORE + M_HORS_PROGRAMME
                                   + [s for s, _ in BATTERIE_M_VAR] + M_VAR_PAS_ENCORE + [s for s, _ in BATTERIE_M_DEUX_TERMES]
-                                  + [s for s, _ in BATTERIE_M_EXPOSANTS]))
+                                  + [s for s, _ in BATTERIE_M_EXPOSANTS] + [s for s, _ in BATTERIE_M_BASE_POLYNOMIALE]))
 
 
 def entrees_el():

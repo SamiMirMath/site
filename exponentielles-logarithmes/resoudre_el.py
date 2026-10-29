@@ -133,7 +133,7 @@ def resoudre(entree, filiere="C"):
 
 def _resoudre(entree, filiere):
     try:
-        s = el.analyser_saisie(entree)
+        s = el.analyser_saisie(entree, filiere)
     except ErreurSaisie as e:
         return so.sortie_erreur(str(e))
     if s.genre == "calcul":

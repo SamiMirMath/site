@@ -20,7 +20,7 @@ from noyau import analyser_complet
 from exp_log import (Car, Chaine, Defini, E, Eq, Fn, Log, Message, Neg, Nb, Op, Ou, Pow, Rel, Texte, Var, _Hors, _arbre_poly, _avec_decimaux,
                      _base_du_logarithme, _carte, _const, _contient_log, _nb_exact, _nom_tex, _padd, _par_exponentielle, _pnet, _precis, _produit,
                      _racine_entiere, _resoudre_polynome, _somme_arbres, _suite_polynome, _milieu_exact, _valeur_exacte, _valeur_rationnelle, _exposant_entier, _racine_primitive, logarithmique_m, _fin_beta,
-                     resolution_exponentielle, tex, tex_approx, valeur, variables, METHODE_LOGARITHMES, METHODE_MEME_BASE, METHODES, PROP_EXPONENTIELLE, PROP_ISOLER_LOG,
+                     resolution_exponentielle, tex, tex_approx, valeur, variables, METHODE_LOGARITHMES, METHODE_MEME_BASE, METHODES, PROP_EXPONENTIELLE, PROP_ISOLER_LOG, PROP_PUISSANCE_NEGATIVE, PROP_EXP_LOG_BASE,
                      PROP_AUCUNE_SOLUTION, PROP_CAR_LN_E, PROP_CAR_LOG_10, PROP_DEFINITION_LOG, PROP_FOIS_MOINS_UN, PROP_LN_DEUX_MEMBRES,
                      PROP_LN_E_PUISSANCE, PROP_LN_PUISSANCE, PROP_LOG_BASE_PUISSANCE, PROP_LOG_DEUX_MEMBRES, PROP_LOG_PUISSANCE, PROP_MEME_BASE)
 
@@ -74,6 +74,16 @@ def _txt(n, mini=0):
     raise TypeError(n)
 
 
+def _txt_lineaire(n, x):
+    """Un polynôme du 1er degré en texte simple, comme on l'écrit à la main : 2x, x + 1, −x + 3 (la base d'un logarithme)."""
+    b0, b1 = _pq(n)
+    coef = "" if abs(b1) == 1 else _txt(Nb(abs(b1)))
+    terme = ("−" if b1 < 0 else "") + coef + x
+    if b0 == 0:
+        return terme
+    return terme + (" − " if b0 < 0 else " + ") + _txt(Nb(abs(b0)))
+
+
 # =====================================================================
 # 2. CONDITIONS D'EXISTENCE (parcours de l'arbre) ET APPARTENANCE EXACTE
 # =====================================================================
@@ -112,9 +122,12 @@ def _liste_conditions(n, x, sortie, general=False):
     elif isinstance(n, Log):
         _liste_conditions(n.a, x, sortie, general)
         if n.base is not None and not isinstance(n.base, E) and variables(n.base):
-            if n.base != Var(x):
-                raise _Hors                            # base polynomiale (log_(x+1)) : hors du chantier
-            sortie.append(("base", None, n))
+            if n.base == Var(x):
+                sortie.append(("base", None, n))
+            elif variables(n.a) or len(_pq(n.base)) != 2:
+                raise _Hors                            # log_(x+1)(x+2), base de degré ≥ 2 : pas encore
+            else:
+                sortie.append(("basep", n.base, n))    # log_(2x)(1296) : base du 1er degré, argument constant
         if variables(n.a):
             sortie.append(("arg", n.a, n))
     elif isinstance(n, Op):
@@ -173,6 +186,10 @@ def _violation(condition, x, s):
         if genre == "base":
             signe_x, signe_un = _signe_exact(s), _signe_exact(Op("-", s, Nb(1)))
             return None if signe_x > 0 and signe_un != 0 else (-1 if signe_x < 0 else 0)
+        if genre == "basep":
+            base = _substituer(expr, x, s)
+            signe_b, signe_un = _signe_exact(base), _signe_exact(Op("-", base, Nb(1)))
+            return None if signe_b > 0 and signe_un != 0 else (-1 if signe_b < 0 else 0 if signe_b == 0 else 1)
         signe = _signe_exact(_substituer(expr, x, s))
     except (ArithmeticError, ValueError, decimal.DecimalException):
         return -1                                      # un logarithme intérieur n'est pas défini : la condition extérieure ne l'est pas non plus
@@ -188,6 +205,9 @@ def _raison(condition, x, signe):
     genre, expr, log = condition
     if genre == "base":
         return f"{x} est la base d'un logarithme : {x} doit être strictement positif et différent de 1"
+    if genre == "basep":
+        base = _txt_lineaire(expr, x)
+        return f"log_({base})({_txt(log.a)}) n'est pas défini : la base {base} {'< 0' if signe < 0 else '= 0' if signe == 0 else '= 1'}"
     if genre == "den":
         return f"{_txt(expr)} = 0 : division par 0"
     if genre == "rac":
@@ -369,6 +389,25 @@ def _ed_imbrique(g, d, x, conditions):
     return EnsembleDef(x, res, None, ed_tex, vide, conditions, besoin)
 
 
+def _ed_base_polynomiale(x, conditions):
+    """L'ensemble de définition de log_B(n) = k avec B du 1er degré : B > 0 et B ≠ 1 (les cartes de l'outil ED pour 1/ln(B), la seconde renommée)."""
+    if len(conditions) != 1:
+        raise _Hors                                    # une base polynomiale et une autre condition : pas encore
+    base = conditions[0][1]
+    res, _, _ = analyser_complet("1/ln(" + _vers_ed(base, x) + ")")
+    if not res["ok"] or not res["complet"] or len(res["conditions"]) != 2:
+        raise _Hors
+    positive, differente = (dict(c) for c in res["conditions"])
+    ln_b = r"\ln\left(" + tex(base) + r"\right)"
+    positive["titre"], differente["titre"] = "base strictement positive", "base différente de 1"
+    differente["cond_tex"] = tex(base) + r" \neq 1"
+    etapes = [dict(e) for e in differente["etapes"][1:]]                       # « ln(2x) = 0 ⇔ 2x = 1 » n'est plus utile : on écrit 2x ≠ 1 directement
+    etapes = [{**e, "html": e["html"].replace(ln_b + r" \neq 0", tex(base) + r" \neq 1")} if e.get("type") == "texte" else e for e in etapes]
+    differente["etapes"] = etapes
+    res = {**res, "conditions": [positive, differente]}
+    return EnsembleDef(x, res, None, res["ED_tex"], res["ED_tex"] == r"\varnothing", conditions, res["besoin_sympy"])
+
+
 def ensemble_de_definition(g, d, x, general=False):
     """L'EnsembleDef de l'équation g = d (arbres) : par l'outil ED, ou pour une base inconnue (log_x(256) = 4) la condition x > 0 et x ≠ 1.
     Lève _Hors quand l'équation sort de ce que la filière M traite (base polynomiale, condition non résolue). `general` : équation exponentielle dont
@@ -387,6 +426,8 @@ def ensemble_de_definition(g, d, x, general=False):
             c["num"] = k
         res = {**res, "conditions": utiles, "inter_tex": r" \cap ".join(c["E_tex"] for c in utiles) if len(utiles) > 1 else ""}
         return EnsembleDef(x, res, None, res["ED_tex"], res["ED_tex"] == r"\varnothing", conditions, res["besoin_sympy"])
+    if any(genre == "basep" for genre, _, _ in conditions):
+        return _ed_base_polynomiale(x, conditions)
     if not (_logs_imbriques_ok(g) and _logs_imbriques_ok(d)):
         return _ed_imbrique(g, d, x, conditions)
     if any(genre == "base" for genre, _, _ in conditions):
@@ -1457,6 +1498,90 @@ def variantes_exposant(g, d, x):
 
 
 # =====================================================================
+# 4 quinquies. BASE POLYNOMIALE : log_(2x)(1296) = 4, log_(5x)(1000) = 3, log_(x+1)(5) = 16 (T36, partie C)
+# =====================================================================
+def _puissance(base, m):
+    return base if m == 1 else Pow(base, Nb(m))
+
+
+def _x_selon_la_base(b, valeur_base, valeur_exacte):
+    """x tel que b0 + b1·x = valeur_base (un arbre sans inconnue ; `valeur_exacte` : sa valeur rationnelle ou None) ; b = [b0, b1]."""
+    b0, b1 = b
+    if valeur_exacte is not None:
+        return _nb_exact((valeur_exacte - b0) / b1)
+    haut = valeur_base if b0 == 0 else Op("-", valeur_base, _nb_exact(b0)) if b0 > 0 else Op("+", valeur_base, _nb_exact(-b0))
+    return haut if b1 == 1 else Op("/", haut, _nb_exact(b1))
+
+
+@_avec_decimaux
+def base_polynomiale(g, d, x):
+    """Le corrigé de log_B(n) = k où B est du 1er degré en x (2x, 5x, x + 1), n un rationnel > 0 et k un entier non nul : l'exponentielle des deux membres
+    B^(log_B(n)) = B^k, n = B^k, puis B = ±n^(1/k) et x. None quand la forme n'est pas celle-là (pas encore)."""
+    try:
+        return _base_polynomiale(g, d, x)
+    except _Hors:
+        return None
+
+
+def _base_polynomiale(g, d, x):
+    enonce = Eq(g, d)
+    if variables(g) and not variables(d):
+        s, o, inverse = g, d, False
+    elif variables(d) and not variables(g):
+        s, o, inverse = d, g, True
+    else:
+        raise _Hors
+    k = _const(o)
+    if not isinstance(s, Log) or k is None or s.base is None or isinstance(s.base, (E, Var)) or not variables(s.base):
+        raise _Hors
+    n = _const(s.a)
+    if variables(s.a) or n is None or n <= 0:
+        raise _Hors
+    b = _pq(s.base)
+    if len(b) != 2 or k.denominator != 1 or k == 0 or abs(k) > 16:
+        raise _Hors
+    B, X, k = s.base, Var(x), int(k)
+    m = abs(k)
+    chaine = Chaine([enonce])
+    if inverse:
+        chaine.ajouter(Eq(s, o), "⇔")
+    chaine.ajouter(Eq(Pow(B, s), _puissance(B, k) if k > 0 else Pow(B, Nb(k))), "⇔", PROP_EXPONENTIELLE)          # B^(log_B(n)) = B^k
+    chaine.ajouter(Eq(_nb_exact(n), Pow(B, Nb(k)) if k != 1 else B), "⇔", PROP_EXP_LOG_BASE)
+    if k < 0:                                                         # n = B^(−m) = 1/B^m ⇔ B^m = 1/n
+        chaine.ajouter(Eq(_nb_exact(n), Op("/", Nb(1), _puissance(B, m))), "⇔", PROP_PUISSANCE_NEGATIVE)
+        chaine.ajouter(Eq(_puissance(B, m), _nb_exact(1 / n)), "⇔")
+        n = 1 / n
+    racine = _racine_entiere(n, m)
+    if racine is not None:
+        rho = _nb_exact(racine)
+        if m > 1 and not (k < 0):
+            chaine.ajouter(Eq(Pow(rho, Nb(m)), _puissance(B, m)), "⇔")      # 1296 = 6^4 : le premier membre réécrit en puissance
+    else:
+        rho = Fn("sqrt", _nb_exact(n)) if m == 2 else Pow(_nb_exact(n), Nb(F(1, m)))
+    valeur_rho = racine
+    if m % 2 == 0:
+        negatif = Neg(rho) if racine is None else _nb_exact(-racine)
+        chaine.ajouter(Ou([Eq(B, negatif), Eq(B, rho)]), "⇔", PROP_RACINE_PAIRE)
+        candidats = [(negatif, None if racine is None else -racine), (rho, valeur_rho)]
+    else:
+        if m > 1 or k < 0:
+            chaine.ajouter(Eq(B, rho), "⇔", PROP_RACINE_IMPAIRE)
+        candidats = [(rho, valeur_rho)]
+    solutions = [_x_selon_la_base(b, v, e) for v, e in candidats]
+    solutions.sort(key=valeur)
+    lignes = [chaine]
+    if all(_const(t) is not None for t in solutions):
+        if len(solutions) == 1:
+            chaine.ajouter(Eq(X, solutions[0]), "⇔")
+        else:
+            chaine.ajouter(Ou([Eq(X, t) for t in solutions]), "⇔")
+    else:
+        lignes.append(Chaine([Ou([Eq(X, t) for t in solutions])]) if len(solutions) > 1 else Chaine([Eq(X, solutions[0])]))
+    return {"genre": "logarithmique", "inconnue": x, "enonce": enonce, "base": None, "etapes": [_carte("Exponentielle des deux membres", lignes)],
+            "solutions": solutions, "remarque": None}
+
+
+# =====================================================================
 # 5. CORRIGÉ D'UNE ÉQUATION LOGARITHMIQUE EN FILIÈRE M
 # =====================================================================
 def _nommer_racines(r):
@@ -1501,7 +1626,7 @@ def corriger_equation(g, d, x):
         etapes = [_carte_ed(ed, [Message("L'ensemble de définition est vide : l'équation n'a aucune solution.")])]
         return {"genre": "logarithmique", "inconnue": x, "enonce": None, "base": None, "etapes": etapes, "solutions": [], "remarque": None,
                 "ed": ed, "besoin_sympy": ed.besoin_sympy}
-    r = logarithmique_m(g, d, x) or regrouper(g, d, x)
+    r = logarithmique_m(g, d, x) or regrouper(g, d, x) or base_polynomiale(g, d, x)
     if r is None:
         return None
     return _avec_ed_et_verification(ed, r, x)

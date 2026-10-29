@@ -10,13 +10,13 @@ import exp_log as el
 import exp_log_m as elm
 import resoudre_el as rel
 import sortie as so
-from cas_el import BATTERIE_M_EXPOSANTS
+from cas_el import BATTERIE_M_BASE_POLYNOMIALE, BATTERIE_M_EXPOSANTS
 from test_exp_log_m import MP, ecart, racines
 
 
 def corrige_m(entree):
     """{méthode: résultat} de la filière M pour l'entrée (une seule méthode « logarithmes » quand l'équation n'en a pas deux), None si elle n'est pas traitée."""
-    s = el.analyser_saisie(entree)
+    s = el.analyser_saisie(entree, "M")
     v = elm.variantes_exposant(s.g, s.d, s.inconnue) or elm.variantes_changement(s.g, s.d, s.inconnue)
     if v is not None:
         return v
@@ -48,7 +48,7 @@ class _Batterie:
     def test_oracle_les_solutions_sont_exactement_les_racines_dans_l_ensemble_de_definition(self):
         for entree, _ in self.BATTERIE:
             with self.subTest(entree=entree):
-                s = el.analyser_saisie(entree)
+                s = el.analyser_saisie(entree, "M")
                 for methode, r in corrige_m(entree).items():
                     if r.get("message"):
                         continue
@@ -86,6 +86,34 @@ class _Batterie:
 
 class TestExposants(_Batterie, unittest.TestCase):
     BATTERIE = BATTERIE_M_EXPOSANTS
+
+
+class TestBasePolynomiale(_Batterie, unittest.TestCase):
+    BATTERIE = BATTERIE_M_BASE_POLYNOMIALE
+    DEUX_METHODES = False
+
+    def test_la_3c_garde_son_message_de_lecture(self):
+        for entree, _ in self.BATTERIE:
+            with self.subTest(entree=entree):
+                self.assertEqual(rel.resoudre(entree, "C"), {"ok": False, "erreur": el.MESSAGE_AUTRE_BASE})
+                self.assertEqual(el.apercu(entree)["ok"], True)             # l'aperçu lit la base : le message ne vient qu'à la résolution
+
+    def test_les_formes_refusees_restent_en_pas_encore(self):
+        for entree in ["log_(x+1)(x+2)=1", "log_(x^2)(4)=1", "log_(2x)(5)=1/2", "log_(2x)(1296)=0", "log_(2x)(-4)=2", "log_(2x)(1296)=x"]:
+            with self.subTest(entree=entree):
+                r = rel.resoudre(entree, "M")
+                self.assertFalse(r["ok"])
+                self.assertIn(r["erreur"], (el.MESSAGE_PAS_ENCORE, el.MESSAGE_HORS_PROGRAMME))
+
+    def test_lecture_de_la_base(self):
+        self.assertEqual(el.tex_saisie(*el.lire_membres("log_(2x)(1296)=4")), r"\log_{2x}(1\text{’}296) = 4")
+        self.assertEqual(el.tex_saisie(*el.lire_membres("log_( 2 )(8)=3")), el.tex_saisie(*el.lire_membres("log_2(8)=3")))
+        self.assertEqual(el.tex_saisie(*el.lire_membres("log_(10)(x)=3")), el.tex_saisie(*el.lire_membres("log(x)=3")))
+        for faux, message in [("log_()(8)=3", "vide"), ("log_(2x(8)=3", "parenthèse"), ("log_(1)(8)=3", "différente de 1"), ("log_(2x)=3", "Pour une autre base")]:
+            with self.subTest(faux=faux):
+                with self.assertRaises(el.ErreurSaisie) as e:
+                    el.analyser_saisie(faux, "M")
+                self.assertIn(message, str(e.exception))
 
 
 if __name__ == "__main__":

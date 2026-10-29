@@ -1830,6 +1830,88 @@
    }
   ]
  },
+ "2=log_(x+1)(9)": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · base strictement positive",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 1 > 0 \\iff x > -1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · base différente de 1",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 1 = 1 \\iff x = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 1 \\neq 1 \\iff x \\neq 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]-1 \\,;\\, +\\infty\\right[ \\setminus \\left\\{0\\right\\} = \\left]-1 \\,;\\, 0\\right[ \\cup \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2 = \\log_{x + 1}(9)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log_{x + 1}(9) = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 1)^{\\log_{x + 1}(9)} = (x + 1)^{2}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(9 = (x + 1)^{2}\\)</span><span class=\"prop\">(a^(log_a(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3^{2} = (x + 1)^{2}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x + 1 = -3 \\text{ ou } x + 1 = 3\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -4 \\text{ ou } x = 2\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -4 \\notin ED\\)</span><span class=\"prop\">(rejetée : log_(x + 1)(9) n'est pas défini : la base x + 1 &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 2\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{2\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2 = \\log_{x + 1}(9)",
+  "erreur": null,
+  "ok": true
+ },
  "2^(-log_2(x))=3": {
   "cartes": [
    {
@@ -18527,6 +18609,1154 @@
    }
   ],
   "enonce_tex": "\\log_{8}(x) = \\frac{2}{3}",
+  "erreur": null,
+  "ok": true
+ },
+ "log_(-x)(4)=2": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · base strictement positive",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(-x > 0 \\iff x < 0\\) (on divise par un nombre négatif : le sens s'inverse).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · base différente de 1",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(-x = 1 \\iff x = -1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(-x \\neq 1 \\iff x \\neq -1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]-\\infty \\,;\\, 0\\right[ \\setminus \\left\\{-1\\right\\} = \\left]-\\infty \\,;\\, -1\\right[ \\cup \\left]-1 \\,;\\, 0\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{-x}(4) = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((-x)^{\\log_{-x}(4)} = (-x)^{2}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(4 = (-x)^{2}\\)</span><span class=\"prop\">(a^(log_a(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{2} = (-x)^{2}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(-x = -2 \\text{ ou } -x = 2\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -2 \\text{ ou } x = 2\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -2\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 2 \\notin ED\\)</span><span class=\"prop\">(rejetée : log_(−x)(4) n'est pas défini : la base −x &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-2\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{-x}(4) = 2",
+  "erreur": null,
+  "ok": true
+ },
+ "log_(2x)(1296)=4": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · base strictement positive",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x > 0 \\iff x > 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · base différente de 1",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x = 1 \\iff x = \\frac{1}{2}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x \\neq 1 \\iff x \\neq \\frac{1}{2}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ \\setminus \\left\\{\\frac{1}{2}\\right\\} = \\left]0 \\,;\\, \\frac{1}{2}\\right[ \\cup \\left]\\frac{1}{2} \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{2x}(1\\text{’}296) = 4\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((2x)^{\\log_{2x}(1\\text{’}296)} = (2x)^{4}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(1\\text{’}296 = (2x)^{4}\\)</span><span class=\"prop\">(a^(log_a(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(6^{4} = (2x)^{4}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2x = -6 \\text{ ou } 2x = 6\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -3 \\text{ ou } x = 3\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -3 \\notin ED\\)</span><span class=\"prop\">(rejetée : log_(2x)(1296) n'est pas défini : la base 2x &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 3\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{3\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{2x}(1\\text{’}296) = 4",
+  "erreur": null,
+  "ok": true
+ },
+ "log_(2x)(5)=2": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · base strictement positive",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x > 0 \\iff x > 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · base différente de 1",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x = 1 \\iff x = \\frac{1}{2}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x \\neq 1 \\iff x \\neq \\frac{1}{2}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ \\setminus \\left\\{\\frac{1}{2}\\right\\} = \\left]0 \\,;\\, \\frac{1}{2}\\right[ \\cup \\left]\\frac{1}{2} \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{2x}(5) = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((2x)^{\\log_{2x}(5)} = (2x)^{2}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(5 = (2x)^{2}\\)</span><span class=\"prop\">(a^(log_a(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2x = -\\sqrt{5} \\text{ ou } 2x = \\sqrt{5}\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = \\frac{-\\sqrt{5}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\frac{\\sqrt{5}}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} \\approx -1{,}118 \\notin ED\\)</span><span class=\"prop\">(rejetée : log_(2x)(5) n'est pas défini : la base 2x &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} \\approx 1{,}118\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\sqrt{5}}{2}\\right\\} \\text{, soit } x \\approx 1{,}118",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{2x}(5) = 2",
+  "erreur": null,
+  "ok": true
+ },
+ "log_(2x)(9)=2": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · base strictement positive",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x > 0 \\iff x > 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · base différente de 1",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x = 1 \\iff x = \\frac{1}{2}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x \\neq 1 \\iff x \\neq \\frac{1}{2}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ \\setminus \\left\\{\\frac{1}{2}\\right\\} = \\left]0 \\,;\\, \\frac{1}{2}\\right[ \\cup \\left]\\frac{1}{2} \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{2x}(9) = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((2x)^{\\log_{2x}(9)} = (2x)^{2}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(9 = (2x)^{2}\\)</span><span class=\"prop\">(a^(log_a(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3^{2} = (2x)^{2}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2x = -3 \\text{ ou } 2x = 3\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -\\frac{3}{2} \\text{ ou } x = \\frac{3}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -\\frac{3}{2} \\notin ED\\)</span><span class=\"prop\">(rejetée : log_(2x)(9) n'est pas défini : la base 2x &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{3}{2}\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{3}{2}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{2x}(9) = 2",
+  "erreur": null,
+  "ok": true
+ },
+ "log_(2x-1)(25)=2": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · base strictement positive",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x - 1 > 0 \\iff x > \\frac{1}{2}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · base différente de 1",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x - 1 = 1 \\iff x = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(2x - 1 \\neq 1 \\iff x \\neq 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]\\frac{1}{2} \\,;\\, +\\infty\\right[ \\setminus \\left\\{1\\right\\} = \\left]\\frac{1}{2} \\,;\\, 1\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{2x - 1}(25) = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((2x - 1)^{\\log_{2x - 1}(25)} = (2x - 1)^{2}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(25 = (2x - 1)^{2}\\)</span><span class=\"prop\">(a^(log_a(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(5^{2} = (2x - 1)^{2}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2x - 1 = -5 \\text{ ou } 2x - 1 = 5\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -2 \\text{ ou } x = 3\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -2 \\notin ED\\)</span><span class=\"prop\">(rejetée : log_(2x − 1)(25) n'est pas défini : la base 2x − 1 &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 3\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{3\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{2x - 1}(25) = 2",
+  "erreur": null,
+  "ok": true
+ },
+ "log_(3-x)(125)=3": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · base strictement positive",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(3 - x > 0 \\iff x < 3\\) (on divise par un nombre négatif : le sens s'inverse).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · base différente de 1",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(3 - x = 1 \\iff x = 2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(3 - x \\neq 1 \\iff x \\neq 2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]-\\infty \\,;\\, 3\\right[ \\setminus \\left\\{2\\right\\} = \\left]-\\infty \\,;\\, 2\\right[ \\cup \\left]2 \\,;\\, 3\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{3 - x}(125) = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((3 - x)^{\\log_{3 - x}(125)} = (3 - x)^{3}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(125 = (3 - x)^{3}\\)</span><span class=\"prop\">(a^(log_a(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(5^{3} = (3 - x)^{3}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3 - x = 5\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = c^(1/n) (n impair))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -2\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -2\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-2\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{3 - x}(125) = 3",
+  "erreur": null,
+  "ok": true
+ },
+ "log_(3x)(1/8)=-3": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · base strictement positive",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(3x > 0 \\iff x > 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · base différente de 1",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(3x = 1 \\iff x = \\frac{1}{3}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(3x \\neq 1 \\iff x \\neq \\frac{1}{3}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ \\setminus \\left\\{\\frac{1}{3}\\right\\} = \\left]0 \\,;\\, \\frac{1}{3}\\right[ \\cup \\left]\\frac{1}{3} \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{3x}\\left(\\frac{1}{8}\\right) = -3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((3x)^{\\log_{3x}\\left(\\frac{1}{8}\\right)} = (3x)^{-3}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\frac{1}{8} = (3x)^{-3}\\)</span><span class=\"prop\">(a^(log_a(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\frac{1}{8} = \\frac{1}{(3x)^{3}}\\)</span><span class=\"prop\">(a⁻ᵐ = 1/aᵐ)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((3x)^{3} = 8\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3x = 2\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = c^(1/n) (n impair))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{2}{3}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{2}{3}\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{2}{3}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{3x}\\left(\\frac{1}{8}\\right) = -3",
+  "erreur": null,
+  "ok": true
+ },
+ "log_(5x)(1000)=3": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · base strictement positive",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(5x > 0 \\iff x > 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · base différente de 1",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(5x = 1 \\iff x = \\frac{1}{5}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(5x \\neq 1 \\iff x \\neq \\frac{1}{5}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]0 \\,;\\, +\\infty\\right[ \\setminus \\left\\{\\frac{1}{5}\\right\\} = \\left]0 \\,;\\, \\frac{1}{5}\\right[ \\cup \\left]\\frac{1}{5} \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{5x}(1\\text{’}000) = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((5x)^{\\log_{5x}(1\\text{’}000)} = (5x)^{3}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(1\\text{’}000 = (5x)^{3}\\)</span><span class=\"prop\">(a^(log_a(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{3} = (5x)^{3}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(5x = 10\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = c^(1/n) (n impair))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 2\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 2\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{2\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{5x}(1\\text{’}000) = 3",
+  "erreur": null,
+  "ok": true
+ },
+ "log_(x+1)(5)=16": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · base strictement positive",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 1 > 0 \\iff x > -1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · base différente de 1",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 1 = 1 \\iff x = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 1 \\neq 1 \\iff x \\neq 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]-1 \\,;\\, +\\infty\\right[ \\setminus \\left\\{0\\right\\} = \\left]-1 \\,;\\, 0\\right[ \\cup \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{x + 1}(5) = 16\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 1)^{\\log_{x + 1}(5)} = (x + 1)^{16}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(5 = (x + 1)^{16}\\)</span><span class=\"prop\">(a^(log_a(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x + 1 = -5^{\\frac{1}{16}} \\text{ ou } x + 1 = 5^{\\frac{1}{16}}\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -5^{\\frac{1}{16}} - 1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = 5^{\\frac{1}{16}} - 1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} \\approx -2{,}106 \\notin ED\\)</span><span class=\"prop\">(rejetée : log_(x + 1)(5) n'est pas défini : la base x + 1 &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} \\approx 0{,}106\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{5^{\\frac{1}{16}} - 1\\right\\} \\text{, soit } x \\approx 0{,}106",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{x + 1}(5) = 16",
+  "erreur": null,
+  "ok": true
+ },
+ "log_(x+1)(8)=3": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · base strictement positive",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 1 > 0 \\iff x > -1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · base différente de 1",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 1 = 1 \\iff x = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 1 \\neq 1 \\iff x \\neq 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]-1 \\,;\\, +\\infty\\right[ \\setminus \\left\\{0\\right\\} = \\left]-1 \\,;\\, 0\\right[ \\cup \\left]0 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{x + 1}(8) = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 1)^{\\log_{x + 1}(8)} = (x + 1)^{3}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(8 = (x + 1)^{3}\\)</span><span class=\"prop\">(a^(log_a(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2^{3} = (x + 1)^{3}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x + 1 = 2\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = c^(1/n) (n impair))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 1\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{1\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{x + 1}(8) = 3",
+  "erreur": null,
+  "ok": true
+ },
+ "log_(x+2)(16)=2": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · base strictement positive",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 2 > 0 \\iff x > -2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · base différente de 1",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 2 = 1 \\iff x = -1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 2 \\neq 1 \\iff x \\neq -1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]-2 \\,;\\, +\\infty\\right[ \\setminus \\left\\{-1\\right\\} = \\left]-2 \\,;\\, -1\\right[ \\cup \\left]-1 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{x + 2}(16) = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 2)^{\\log_{x + 2}(16)} = (x + 2)^{2}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(16 = (x + 2)^{2}\\)</span><span class=\"prop\">(a^(log_a(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(4^{2} = (x + 2)^{2}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x + 2 = -4 \\text{ ou } x + 2 = 4\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -6 \\text{ ou } x = 2\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -6 \\notin ED\\)</span><span class=\"prop\">(rejetée : log_(x + 2)(16) n'est pas défini : la base x + 2 &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 2\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{2\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{x + 2}(16) = 2",
+  "erreur": null,
+  "ok": true
+ },
+ "log_(x+3)(1)=2": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · base strictement positive",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 3 > 0 \\iff x > -3\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · base différente de 1",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 3 = 1 \\iff x = -2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 3 \\neq 1 \\iff x \\neq -2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]-3 \\,;\\, +\\infty\\right[ \\setminus \\left\\{-2\\right\\} = \\left]-3 \\,;\\, -2\\right[ \\cup \\left]-2 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{x + 3}(1) = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 3)^{\\log_{x + 3}(1)} = (x + 3)^{2}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(1 = (x + 3)^{2}\\)</span><span class=\"prop\">(a^(log_a(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(1^{2} = (x + 3)^{2}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x + 3 = -1 \\text{ ou } x + 3 = 1\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -4 \\text{ ou } x = -2\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -4 \\notin ED\\)</span><span class=\"prop\">(rejetée : log_(x + 3)(1) n'est pas défini : la base x + 3 &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -2 \\notin ED\\)</span><span class=\"prop\">(rejetée : log_(x + 3)(1) n'est pas défini : la base x + 3 = 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Aucune solution de l'équation n'est dans l'ensemble de définition.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\varnothing",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{x + 3}(1) = 2",
+  "erreur": null,
+  "ok": true
+ },
+ "log_(x+4)(1/16)=-2": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · base strictement positive",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 4 > 0 \\iff x > -4\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · base différente de 1",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 4 = 1 \\iff x = -3\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x + 4 \\neq 1 \\iff x \\neq -3\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]-4 \\,;\\, +\\infty\\right[ \\setminus \\left\\{-3\\right\\} = \\left]-4 \\,;\\, -3\\right[ \\cup \\left]-3 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{x + 4}\\left(\\frac{1}{16}\\right) = -2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 4)^{\\log_{x + 4}\\left(\\frac{1}{16}\\right)} = (x + 4)^{-2}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\frac{1}{16} = (x + 4)^{-2}\\)</span><span class=\"prop\">(a^(log_a(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\frac{1}{16} = \\frac{1}{(x + 4)^{2}}\\)</span><span class=\"prop\">(a⁻ᵐ = 1/aᵐ)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 4)^{2} = 16\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x + 4 = -4 \\text{ ou } x + 4 = 4\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -8 \\text{ ou } x = 0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -8 \\notin ED\\)</span><span class=\"prop\">(rejetée : log_(x + 4)(1/16) n'est pas défini : la base x + 4 &lt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{0\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{x + 4}\\left(\\frac{1}{16}\\right) = -2",
+  "erreur": null,
+  "ok": true
+ },
+ "log_(x-1)(27)=3": {
+  "cartes": [
+   {
+    "badge": "Ensemble de définition",
+    "blocs": [
+     {
+      "html": "<strong>Condition 1</strong> · base strictement positive",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 1 > 0 \\iff x > 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<strong>Condition 2</strong> · base différente de 1",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 1 = 1 \\iff x = 2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x - 1 \\neq 1 \\iff x \\neq 2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\left]1 \\,;\\, +\\infty\\right[ \\setminus \\left\\{2\\right\\} = \\left]1 \\,;\\, 2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{x - 1}(27) = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x - 1)^{\\log_{x - 1}(27)} = (x - 1)^{3}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(27 = (x - 1)^{3}\\)</span><span class=\"prop\">(a^(log_a(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3^{3} = (x - 1)^{3}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x - 1 = 3\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = c^(1/n) (n impair))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 4\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Vérification",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = 4\\)</span><span class=\"prop\">(dans l'ensemble de définition ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{4\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{x - 1}(27) = 3",
   "erreur": null,
   "ok": true
  },
