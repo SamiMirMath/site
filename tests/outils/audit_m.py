@@ -176,8 +176,8 @@ def racines_numeriques(s):
     return out
 
 def solutions_du_moteur(e):
-    s = el.analyser_saisie(e)
-    v = elm.variantes_changement(s.g, s.d, s.inconnue)
+    s = el.analyser_saisie(e, "M")
+    v = elm.variantes_changement(s.g, s.d, s.inconnue) or elm.variantes_exposant(s.g, s.d, s.inconnue)
     if v is not None: return s, v[el.METHODE_LOGARITHMES]
     r = elm.corriger_equation(s.g, s.d, s.inconnue)
     if r is None:                                # équation exponentielle de la 3C : résolue sans ensemble de définition

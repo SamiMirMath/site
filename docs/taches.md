@@ -515,6 +515,15 @@ l'élève, un « Calcul en cours… » qui dure parce que SymPy se charge encore
 - **Vérification** : EL-26 à EL-34 ; suite Python et suite de pages vertes ; instantanés C et ED inchangés.
 - **État (28.10.2026)** : étapes 0 à 8 commitées, rien poussé (eb4084c … dernier commit « étape 8 »). **Arrêt : relecture à l'écran par l'enseignant** (`?filiere=M`, exemples M1 à M8, pool M, accueil 2Ms et 2Mr), puis éventuelles retouches.
 
+### T36 — Filière M : les trous relevés dans Javet et Amaudruz — demande du 29.10.2026 (suite de T35)
+- Demande de l'enseignant (plan en 5 chantiers du 29.10.2026, partie 3) : combler les formes du polycopié Javet 2M et de la brochure Amaudruz 2M que la filière M ne traitait pas, **sans changer la 3C ni l'outil ED**.
+- **Spécification** : [specifications/exponentielles-logarithmes.md](specifications/exponentielles-logarithmes.md), section « Filière M », paragraphe 6 (EL-35 à EL-42) ; règle R18 du guide de rédaction.
+- **Étapes (un commit chacune, aucun push)** : 1c logarithmes imbriqués de toute base · B exposants 1/x, √x, ±ln x · C base polynomiale `log_(2x)` · D bicarré · E `log_x(n) = p/q` · F constante irrationnelle dans un regroupement ·
+  G1 carré d'une somme dans un exposant · G2 second membre calculé · G3 `xᵏ(a + b log x) = 0` · G4 π en M · docs.
+- **Fichiers** : `exponentielles-logarithmes/exp_log_m.py` (sections 4 quater à 4 octies), `exp_log.py` (nœud `Pi`, lecture de `log_(expr)(arg)`, `_fin_beta`, `analyser_saisie(texte, filiere)`), `resoudre_el.py`, `tests/python/cas_el.py`, `test_exp_log_m_t36.py`, instantanés et références de rendu M, `tests/outils/audit_m.py`.
+- **Vérification** : suite Python et suite de pages vertes ; instantanés C et ED inchangés ; audit avant/après (6 803 saisies) : exception 0.
+- **État (29.10.2026)** : toutes les étapes commitées, rien poussé. **Reste** : relecture à l'écran (les 10 saisies M du rapport), puis éventuelles retouches. Limites assumées (« pas encore ») : voir le paragraphe 6 de la spécification.
+
 ## Plus tard (hors plan, si les tests tiennent)
 
 - Découpage de `ensemble_def.py` en modules (`moteur/expr.py`, `poly.py`, `ensembles.py`…),
