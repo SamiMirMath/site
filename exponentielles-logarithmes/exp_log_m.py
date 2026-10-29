@@ -802,10 +802,12 @@ def _regrouper(g, d, x):
         rhs = _nb_exact(c0)
         puissance = base if isinstance(base, E) and rhs == Nb(1) else Pow(base, rhs)
         v = F(1) if c0 == 0 else _const(puissance)          # e⁰ = 1
-        if v is None or v <= 0:
+        if v is not None and v <= 0:
             raise _Hors
         exact = _valeur_exacte(puissance)
         _par_exponentielle(carte2, logarithme, base, puissance, exact or puissance, _milieu_exact(puissance, exact))
+        if v is None:                                       # e³, 10^(1/2) : le second membre est une constante irrationnelle
+            return _fin_irrationnelle(enonce, x, cartes, carte2, r, base, c0, exact or puissance)
         egal = (r, _Rap([_nb_exact(v)], []))
         titre = "Exponentielle des deux membres"
     else:
@@ -825,6 +827,34 @@ def _regrouper(g, d, x):
     if solutions is None:
         remarque = "Cette égalité est vraie pour tout x de l'ensemble de définition."
     cartes.append(_carte(titre, [carte2] + suite))
+    return {"genre": "logarithmique", "inconnue": x, "enonce": enonce, "base": None, "etapes": cartes, "solutions": solutions, "remarque": remarque}
+
+
+def _fin_irrationnelle(enonce, x, cartes, carte2, r, base, c0, K):
+    """La fin d'un regroupement dont le second membre K (e³, √10) est irrationnel : P(x) = K avec P du 1er ou du 2ᵉ degré (le discriminant et les
+    racines x₁ et x₂ comme pour une constante avec logarithme), ou xⁿ = K (x = K^(1/n), ±K^(1/n) pour n pair). None-Hors sinon."""
+    if r.den:
+        raise _Hors
+    P = _pq(r.arbre)
+    X = Var(x)
+    if len(P) == 1:
+        raise _Hors
+    if len(P) <= 3:
+        suite, solutions, remarque = _suite_polynome(carte2, P, r.arbre, K, x)
+    else:
+        n = len(P) - 1
+        if any(P[:n]) or P[n] != 1:
+            raise _Hors                                    # degré ≥ 3 avec autre chose que xⁿ : pas encore
+        racine = Pow(base, _nb_exact(c0 / n))              # (b^c)^(1/n) = b^(c/n)
+        milieu = [Pow(K, Nb(F(1, n)))] if tex(K) != tex(Pow(base, _nb_exact(c0))) else [Pow(Pow(base, _nb_exact(c0)), Nb(F(1, n)))]
+        if n % 2 == 1:
+            carte2.ajouter(Eq(X, racine, milieu), "⇔", PROP_RACINE_IMPAIRE)
+            suite, solutions, remarque = [], [racine], None
+        else:
+            carte2.ajouter(Ou([Eq(X, Neg(racine)), Eq(X, racine)]), "⇔", PROP_RACINE_PAIRE)
+            noms = [Defini("x_{1}", Neg(racine)), Defini("x_{2}", racine)]
+            suite, solutions, remarque = [Chaine([Eq(nom, nom.arbre)]) for nom in noms], noms, None
+    cartes.append(_carte("Exponentielle des deux membres", [carte2] + suite))
     return {"genre": "logarithmique", "inconnue": x, "enonce": enonce, "base": None, "etapes": cartes, "solutions": solutions, "remarque": remarque}
 
 

@@ -251,10 +251,18 @@ BATTERIE_M_BASE_RATIONNELLE = [
     ("log_x(9)=3/2", [4.327]), ("log_x(27)=3/2", [9.0]), ("log_x(16)=4/3", [8.0]), ("log_x(4)=1/2", [16.0]), ("log_x(0,25)=-1/2", [16.0]), ("log_x(2)=3/4", [2.520]),
 ]
 
+# T36, partie F : second membre irrationnel (e³, √10) d'un regroupement, P(x) = K du 1er ou du 2ᵉ degré ou xⁿ = K ; ln, log et log_a
+BATTERIE_M_IRRATIONNEL = [
+    ("ln(x)+ln(x+1)=3", [4.009]), ("log(x)+log(x+1)=1/2", [1.347]), ("ln(x)+ln(x-1)=1", [2.223]), ("ln(x^3)=2", [1.948]), ("ln(x^4)=2", [-1.649, 1.649]),
+    ("ln(x)+ln(2)=3", [10.043]), ("log_2(x)+log_2(x+1)=1/2", [0.790]), ("ln(x)+ln(x+2)=1", [0.928]), ("2ln(x)+ln(3)=5", [7.034]), ("ln(x-1)+ln(x+1)=2", [2.896]),
+    ("log(x^2-1)=1/2", [-2.040, 2.040]), ("ln(x)+ln(x-3)=2", [4.605]), ("log_3(x)+log_3(x+2)=1/2", [0.653]), ("ln(x^2+x)=3", [-5.009, 4.009]),
+    ("ln(x)+ln(x+1)=-1", [0.286]), ("ln(2x)+ln(x)=1", [1.166]), ("ln(x^5)=3", [1.822]), ("ln(x^6)=1", [-1.181, 1.181]), ("log(x^3)=1/2", [1.468]),
+]
+
 # identités sur l'ensemble de définition : S = ED (solutions None)
 M_TOUT_L_ED = ["log(x)=log(x)", "log(x)+log(x-1)=log(x^2-x)", "2log(x)=log(x^2)+log(1)"]
 # formes du programme M que l'outil ne traite pas encore, et vrais hors-programme
-M_PAS_ENCORE = ["3^(2sqrt(x)-1)=5", "2^(sqrt(x)-1)=3", "ln(x)+ln(x-1)=1", "log(x)=ln(2)", "log(1/x)=2", "log(x)*log(x-1)=1", "ln(x)=2ln(x+1)+1", "log(sqrt(x))=1"]
+M_PAS_ENCORE = ["3^(2sqrt(x)-1)=5", "2^(sqrt(x)-1)=3", "ln(x)-ln(x+1)=1", "ln(x^3)+ln(2)=1", "log(x)=ln(2)", "log(1/x)=2", "log(x)*log(x-1)=1", "ln(x)=2ln(x+1)+1", "log(sqrt(x))=1"]
 M_HORS_PROGRAMME = ["log(x)=x-1", "x*log(x)=1", "e^x=ln(x)", "log(x)+2^x=3"]
 
 
@@ -264,7 +272,8 @@ def entrees_el_m():
     return list(dict.fromkeys([s for s, _ in BATTERIE_E4] + [s for s, _ in BATTERIE_M] + M_TOUT_L_ED + M_PAS_ENCORE + M_HORS_PROGRAMME
                                   + [s for s, _ in BATTERIE_M_VAR] + M_VAR_PAS_ENCORE + [s for s, _ in BATTERIE_M_DEUX_TERMES]
                                   + [s for s, _ in BATTERIE_M_EXPOSANTS] + [s for s, _ in BATTERIE_M_BASE_POLYNOMIALE]
-                                  + [s for s, _ in BATTERIE_M_BICARRE] + [s for s, _ in BATTERIE_M_BASE_RATIONNELLE]))
+                                  + [s for s, _ in BATTERIE_M_BICARRE] + [s for s, _ in BATTERIE_M_BASE_RATIONNELLE]
+                                  + [s for s, _ in BATTERIE_M_IRRATIONNEL]))
 
 
 def entrees_el():

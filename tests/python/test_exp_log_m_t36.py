@@ -4,13 +4,14 @@ méthodes quand l'équation en a deux), l'oracle mpmath indépendant du moteur (
 perdue), les propriétés de la liste fermée, une sortie valide, et la 3C qui ne change pas (aucune carte d'ensemble de définition)."""
 import json
 import unittest
+from fractions import Fraction as F
 
 import moteurs  # noqa: F401  (chemins des moteurs)
 import exp_log as el
 import exp_log_m as elm
 import resoudre_el as rel
 import sortie as so
-from cas_el import BATTERIE_M_BASE_POLYNOMIALE, BATTERIE_M_BASE_RATIONNELLE, BATTERIE_M_BICARRE, BATTERIE_M_EXPOSANTS
+from cas_el import BATTERIE_M_BASE_POLYNOMIALE, BATTERIE_M_BASE_RATIONNELLE, BATTERIE_M_BICARRE, BATTERIE_M_EXPOSANTS, BATTERIE_M_IRRATIONNEL
 from test_exp_log_m import MP, ecart, racines
 
 
@@ -147,6 +148,29 @@ class TestBaseRationnelle(_Batterie, unittest.TestCase):
 
     def test_les_formes_refusees_restent_en_pas_encore(self):
         for entree in ["log_x(5)=13/2", "log_x(5)=1/13", "log_x(x+1)=3/2"]:
+            with self.subTest(entree=entree):
+                r = rel.resoudre(entree, "M")
+                self.assertFalse(r["ok"])
+
+
+class TestIrrationnel(_Batterie, unittest.TestCase):
+    BATTERIE = BATTERIE_M_IRRATIONNEL
+    DEUX_METHODES = False
+
+    def test_le_signe_et_l_appartenance_sont_exacts_pres_de_zero(self):
+        """Δ et l'appartenance à l'ED sont décidés par `_signe_exact` (80 chiffres, zéro sous 10⁻⁵⁰), jamais par un arrondi d'affichage : deux écritures d'un
+        même irrationnel donnent exactement 0, un écart de 10⁻⁴⁰ garde son signe."""
+        s = el.analyser_saisie("ln(x)+ln(x+1)=3", "M")
+        r = elm.corriger_equation(s.g, s.d, s.inconnue)
+        self.assertEqual(len(r["candidats"]), 2)
+        self.assertEqual(len(r["solutions"]), 1)
+        racine_basse, racine_haute = sorted(r["candidats"], key=el.valeur)
+        self.assertEqual(elm._signe_exact(el.Op("+", racine_basse, el.Nb(0))), -1)
+        self.assertEqual(elm._signe_exact(el.Op("-", racine_haute, racine_haute)), 0)           # deux écritures d'un même irrationnel : zéro exact
+        self.assertEqual(elm._signe_exact(el.Op("-", racine_haute, el.Op("+", racine_haute, el.Nb(F(1, 10 ** 40))))), -1)
+
+    def test_les_limites_assumees_restent_en_pas_encore(self):
+        for entree in ["ln(x)-ln(x+1)=1", "ln(x^3)+ln(2)=1", "ln(x)=ln(x+1)+1/2", "ln(x)*ln(x+1)=3"]:
             with self.subTest(entree=entree):
                 r = rel.resoudre(entree, "M")
                 self.assertFalse(r["ok"])

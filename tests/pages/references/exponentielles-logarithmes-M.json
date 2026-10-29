@@ -3783,6 +3783,65 @@
    }
   }
  },
+ "2ln(x)+ln(3)=5": {
+  "au_depart": {
+   "progression": "Étape 1 / 5",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Regroupement des logarithmes⟦2\\ln(x) + \\ln(3) = 5⟧⟦\\iff⟧⟦\\ln(x^{2}) + \\ln(3) = 5⟧(k · ln u = ln(u^k), sur l'ED)⟦\\iff⟧⟦\\ln(3x^{2}) = 5⟧(ln u + ln v = ln(uv), sur l'ED)",
+    "titre": "Étape 2Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Exponentielle des deux membres⟦\\ln(3x^{2}) = 5⟧⟦\\iff⟧⟦e^{\\ln(3x^{2})} = e^{5}⟧(exponentielle des deux membres)⟦\\iff⟧⟦3x^{2} = e^{5}⟧(e^(ln(A)) = A, A > 0)⟦\\iff⟧⟦x^{2} = \\frac{e^{5}}{3}⟧⟦x_{1} = -\\sqrt{\\frac{e^{5}}{3}}⟧⟦x_{2} = \\sqrt{\\frac{e^{5}}{3}}⟧",
+    "titre": "Étape 3Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Vérification⟦x_{1} \\approx -7{,}034 \\notin ED⟧(rejetée : ln(x) n'est pas défini : x < 0)⟦x_{2} \\approx 7{,}034⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 4Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\sqrt{\\frac{e^{5}}{3}}\\right\\} \\text{, soit } x \\approx 7{,}034⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 5 / 5"
+ },
  "2log(log(x))=1": {
   "au_depart": {
    "progression": "Étape 1 / 5",
@@ -11334,6 +11393,65 @@
   ],
   "progression_finale": "Étape 4 / 4"
  },
+ "ln(2x)+ln(x)=1": {
+  "au_depart": {
+   "progression": "Étape 1 / 5",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦2x > 0 \\iff x > 0⟧.Condition 2 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]0 \\,;\\, +\\infty\\right[ = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Regroupement des logarithmes⟦\\ln(2x) + \\ln(x) = 1⟧⟦\\iff⟧⟦\\ln(2x \\cdot x) = 1⟧(ln u + ln v = ln(uv), sur l'ED)",
+    "titre": "Étape 2Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Exponentielle des deux membres⟦\\ln(2x \\cdot x) = 1⟧⟦\\iff⟧⟦e^{\\ln(2x \\cdot x)} = e⟧(exponentielle des deux membres)⟦\\iff⟧⟦2x \\cdot x = e⟧(e^(ln(A)) = A, A > 0)⟦\\iff⟧⟦x^{2} = \\frac{e}{2}⟧⟦x_{1} = -\\sqrt{\\frac{e}{2}}⟧⟦x_{2} = \\sqrt{\\frac{e}{2}}⟧",
+    "titre": "Étape 3Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Vérification⟦x_{1} \\approx -1{,}166 \\notin ED⟧(rejetée : ln(2·x) n'est pas défini : 2·x < 0)⟦x_{2} \\approx 1{,}166⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 4Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\sqrt{\\frac{e}{2}}\\right\\} \\text{, soit } x \\approx 1{,}166⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 5 / 5"
+ },
  "ln(2x-5)+ln(3x+7)=4ln(2)": {
   "au_depart": {
    "progression": "Étape 1 / 5",
@@ -11540,6 +11658,183 @@
   ],
   "progression_finale": "Étape 4 / 4"
  },
+ "ln(x)+ln(2)=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 5",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Regroupement des logarithmes⟦\\ln(x) + \\ln(2) = 3⟧⟦\\iff⟧⟦\\ln(2x) = 3⟧(ln u + ln v = ln(uv), sur l'ED)",
+    "titre": "Étape 2Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Exponentielle des deux membres⟦\\ln(2x) = 3⟧⟦\\iff⟧⟦e^{\\ln(2x)} = e^{3}⟧(exponentielle des deux membres)⟦\\iff⟧⟦2x = e^{3}⟧(e^(ln(A)) = A, A > 0)⟦\\iff⟧⟦x = \\frac{e^{3}}{2}⟧",
+    "titre": "Étape 3Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Vérification⟦\\frac{e^{3}}{2} \\approx 10{,}043⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 4Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{e^{3}}{2}\\right\\} \\text{, soit } x \\approx 10{,}043⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 5 / 5"
+ },
+ "ln(x)+ln(x+1)=-1": {
+  "au_depart": {
+   "progression": "Étape 1 / 5",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧Condition 2 · logarithme⟦x + 1 > 0 \\iff x > -1⟧.⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]-1 \\,;\\, +\\infty\\right[ = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Regroupement des logarithmes⟦\\ln(x) + \\ln(x + 1) = -1⟧⟦\\iff⟧⟦\\ln(x(x + 1)) = -1⟧(ln u + ln v = ln(uv), sur l'ED)",
+    "titre": "Étape 2Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Exponentielle des deux membres⟦\\ln(x(x + 1)) = -1⟧⟦\\iff⟧⟦e^{\\ln(x(x + 1))} = e^{-1}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x(x + 1) = e^{-1}⟧(e^(ln(A)) = A, A > 0)⟦\\iff⟧⟦x^{2} + x - e^{-1} = 0⟧⟦Δ = 1^{2} - 4 \\cdot 1 \\cdot (-e^{-1}) = 1 + 4e^{-1}⟧(formule du discriminant)⟦x_{1} = \\frac{-1 - \\sqrt{Δ}}{2}⟧⟦x_{2} = \\frac{-1 + \\sqrt{Δ}}{2}⟧",
+    "titre": "Étape 3Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Vérification⟦x_{1} \\approx -1{,}286 \\notin ED⟧(rejetée : ln(x) n'est pas défini : x < 0)⟦x_{2} \\approx 0{,}286⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 4Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{-1 + \\sqrt{Δ}}{2}\\right\\} \\text{, soit } x \\approx 0{,}286⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 5 / 5"
+ },
+ "ln(x)+ln(x+1)=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 5",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧Condition 2 · logarithme⟦x + 1 > 0 \\iff x > -1⟧.⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]-1 \\,;\\, +\\infty\\right[ = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Regroupement des logarithmes⟦\\ln(x) + \\ln(x + 1) = 3⟧⟦\\iff⟧⟦\\ln(x(x + 1)) = 3⟧(ln u + ln v = ln(uv), sur l'ED)",
+    "titre": "Étape 2Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Exponentielle des deux membres⟦\\ln(x(x + 1)) = 3⟧⟦\\iff⟧⟦e^{\\ln(x(x + 1))} = e^{3}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x(x + 1) = e^{3}⟧(e^(ln(A)) = A, A > 0)⟦\\iff⟧⟦x^{2} + x - e^{3} = 0⟧⟦Δ = 1^{2} - 4 \\cdot 1 \\cdot (-e^{3}) = 1 + 4e^{3}⟧(formule du discriminant)⟦x_{1} = \\frac{-1 - \\sqrt{Δ}}{2}⟧⟦x_{2} = \\frac{-1 + \\sqrt{Δ}}{2}⟧",
+    "titre": "Étape 3Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Vérification⟦x_{1} \\approx -5{,}009 \\notin ED⟧(rejetée : ln(x) n'est pas défini : x < 0)⟦x_{2} \\approx 4{,}009⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 4Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{-1 + \\sqrt{Δ}}{2}\\right\\} \\text{, soit } x \\approx 4{,}009⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 5 / 5"
+ },
  "ln(x)+ln(x+1)=ln(6)": {
   "au_depart": {
    "progression": "Étape 1 / 5",
@@ -11594,6 +11889,65 @@
     "listes": [],
     "tableaux": [],
     "texte": "Solution⟦S = \\left\\{2\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 5 / 5"
+ },
+ "ln(x)+ln(x+2)=1": {
+  "au_depart": {
+   "progression": "Étape 1 / 5",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧Condition 2 · logarithme⟦x + 2 > 0 \\iff x > -2⟧.⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]-2 \\,;\\, +\\infty\\right[ = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Regroupement des logarithmes⟦\\ln(x) + \\ln(x + 2) = 1⟧⟦\\iff⟧⟦\\ln(x(x + 2)) = 1⟧(ln u + ln v = ln(uv), sur l'ED)",
+    "titre": "Étape 2Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Exponentielle des deux membres⟦\\ln(x(x + 2)) = 1⟧⟦\\iff⟧⟦e^{\\ln(x(x + 2))} = e⟧(exponentielle des deux membres)⟦\\iff⟧⟦x(x + 2) = e⟧(e^(ln(A)) = A, A > 0)⟦\\iff⟧⟦x^{2} + 2x - e = 0⟧⟦Δ = 2^{2} - 4 \\cdot 1 \\cdot (-e) = 4 + 4e⟧(formule du discriminant)⟦x_{1} = \\frac{-2 - \\sqrt{Δ}}{2}⟧⟦x_{2} = \\frac{-2 + \\sqrt{Δ}}{2}⟧",
+    "titre": "Étape 3Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Vérification⟦x_{1} \\approx -2{,}928 \\notin ED⟧(rejetée : ln(x) n'est pas défini : x < 0)⟦x_{2} \\approx 0{,}928⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 4Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{-2 + \\sqrt{Δ}}{2}\\right\\} \\text{, soit } x \\approx 0{,}928⟧",
     "titre": "Solution"
    }
   ],
@@ -11659,6 +12013,124 @@
   "progression_finale": "Étape 5 / 5"
  },
  "ln(x)+ln(x-1)=1": {
+  "au_depart": {
+   "progression": "Étape 1 / 5",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧Condition 2 · logarithme⟦x - 1 > 0 \\iff x > 1⟧.⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]1 \\,;\\, +\\infty\\right[ = \\left]1 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Regroupement des logarithmes⟦\\ln(x) + \\ln(x - 1) = 1⟧⟦\\iff⟧⟦\\ln(x(x - 1)) = 1⟧(ln u + ln v = ln(uv), sur l'ED)",
+    "titre": "Étape 2Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Exponentielle des deux membres⟦\\ln(x(x - 1)) = 1⟧⟦\\iff⟧⟦e^{\\ln(x(x - 1))} = e⟧(exponentielle des deux membres)⟦\\iff⟧⟦x(x - 1) = e⟧(e^(ln(A)) = A, A > 0)⟦\\iff⟧⟦x^{2} - x - e = 0⟧⟦Δ = (-1)^{2} - 4 \\cdot 1 \\cdot (-e) = 1 + 4e⟧(formule du discriminant)⟦x_{1} = \\frac{1 - \\sqrt{Δ}}{2}⟧⟦x_{2} = \\frac{1 + \\sqrt{Δ}}{2}⟧",
+    "titre": "Étape 3Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Vérification⟦x_{1} \\approx -1{,}223 \\notin ED⟧(rejetée : ln(x) n'est pas défini : x < 0)⟦x_{2} \\approx 2{,}223⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 4Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{1 + \\sqrt{Δ}}{2}\\right\\} \\text{, soit } x \\approx 2{,}223⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 5 / 5"
+ },
+ "ln(x)+ln(x-3)=2": {
+  "au_depart": {
+   "progression": "Étape 1 / 5",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧Condition 2 · logarithme⟦x - 3 > 0 \\iff x > 3⟧.⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]3 \\,;\\, +\\infty\\right[ = \\left]3 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Regroupement des logarithmes⟦\\ln(x) + \\ln(x - 3) = 2⟧⟦\\iff⟧⟦\\ln(x(x - 3)) = 2⟧(ln u + ln v = ln(uv), sur l'ED)",
+    "titre": "Étape 2Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Exponentielle des deux membres⟦\\ln(x(x - 3)) = 2⟧⟦\\iff⟧⟦e^{\\ln(x(x - 3))} = e^{2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x(x - 3) = e^{2}⟧(e^(ln(A)) = A, A > 0)⟦\\iff⟧⟦x^{2} - 3x - e^{2} = 0⟧⟦Δ = (-3)^{2} - 4 \\cdot 1 \\cdot (-e^{2}) = 9 + 4e^{2}⟧(formule du discriminant)⟦x_{1} = \\frac{3 - \\sqrt{Δ}}{2}⟧⟦x_{2} = \\frac{3 + \\sqrt{Δ}}{2}⟧",
+    "titre": "Étape 3Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Vérification⟦x_{1} \\approx -1{,}605 \\notin ED⟧(rejetée : ln(x) n'est pas défini : x < 0)⟦x_{2} \\approx 4{,}605⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 4Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{3 + \\sqrt{Δ}}{2}\\right\\} \\text{, soit } x \\approx 4{,}605⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 5 / 5"
+ },
+ "ln(x)-ln(x+1)=1": {
   "au_depart": {
    "progression": "",
    "visibles": 1
@@ -11843,6 +12315,65 @@
   ],
   "progression_finale": "Étape 4 / 4"
  },
+ "ln(x-1)+ln(x+1)=2": {
+  "au_depart": {
+   "progression": "Étape 1 / 5",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x - 1 > 0 \\iff x > 1⟧.Condition 2 · logarithme⟦x + 1 > 0 \\iff x > -1⟧.⟦ED = \\left]1 \\,;\\, +\\infty\\right[ \\cap \\left]-1 \\,;\\, +\\infty\\right[ = \\left]1 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Regroupement des logarithmes⟦\\ln(x - 1) + \\ln(x + 1) = 2⟧⟦\\iff⟧⟦\\ln((x - 1)(x + 1)) = 2⟧(ln u + ln v = ln(uv), sur l'ED)",
+    "titre": "Étape 2Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Exponentielle des deux membres⟦\\ln((x - 1)(x + 1)) = 2⟧⟦\\iff⟧⟦e^{\\ln((x - 1)(x + 1))} = e^{2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦(x - 1)(x + 1) = e^{2}⟧(e^(ln(A)) = A, A > 0)⟦\\iff⟧⟦x^{2} = 1 + e^{2}⟧⟦x_{1} = -\\sqrt{1 + e^{2}}⟧⟦x_{2} = \\sqrt{1 + e^{2}}⟧",
+    "titre": "Étape 3Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Vérification⟦x_{1} \\approx -2{,}896 \\notin ED⟧(rejetée : ln(x − 1) n'est pas défini : x − 1 < 0)⟦x_{2} \\approx 2{,}896⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 4Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\sqrt{1 + e^{2}}\\right\\} \\text{, soit } x \\approx 2{,}896⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 5 / 5"
+ },
  "ln(x-1)=2": {
   "au_depart": {
    "progression": "Étape 1 / 4",
@@ -11887,6 +12418,665 @@
     "listes": [],
     "tableaux": [],
     "texte": "Solution⟦S = \\left\\{1 + e^{2}\\right\\} \\text{, soit } x \\approx 8{,}389⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "ln(x^2+x)=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "bar",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x + 1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "bar",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x^{2} + x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithmeOn met ⟦x⟧ en évidence : ⟦x^{2} + x = x\\left(x + 1\\right)⟧⟦x + 1 = 0 \\iff x = -1⟧⟦x⟧⟦-\\infty⟧⟦-1⟧⟦0⟧⟦+\\infty⟧⟦x⟧−−0+⟦x + 1⟧−0++⟦x^{2} + x⟧+0−0+⟦x^{2} + x > 0 \\iff x \\in \\left]-\\infty \\,;\\, -1\\right[ \\cup \\left]0 \\,;\\, +\\infty\\right[⟧.⟦ED = \\left]-\\infty \\,;\\, -1\\right[ \\cup \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\ln(x^{2} + x) = 3⟧⟦\\iff⟧⟦e^{\\ln(x^{2} + x)} = e^{3}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x^{2} + x = e^{3}⟧(e^(ln(A)) = A, A > 0)⟦\\iff⟧⟦x^{2} + x - e^{3} = 0⟧⟦Δ = 1^{2} - 4 \\cdot 1 \\cdot (-e^{3}) = 1 + 4e^{3}⟧(formule du discriminant)⟦x_{1} = \\frac{-1 - \\sqrt{Δ}}{2}⟧⟦x_{2} = \\frac{-1 + \\sqrt{Δ}}{2}⟧",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x_{1} \\approx -5{,}009⟧(dans l'ensemble de définition ✓)⟦x_{2} \\approx 4{,}009⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -5{,}009 \\text{ ou } x \\approx 4{,}009⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "ln(x^3)+ln(2)=1": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "ln(x^3)=2": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x^{3}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithmeOn met ⟦x^{3}⟧ en évidence : ⟦x^{3} = x^{3}\\left(1\\right)⟧⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦x^{3}⟧−0+⟦x^{3} > 0 \\iff x \\in \\left]0 \\,;\\, +\\infty\\right[⟧.⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\ln(x^{3}) = 2⟧⟦\\iff⟧⟦e^{\\ln(x^{3})} = e^{2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x^{3} = e^{2}⟧(e^(ln(A)) = A, A > 0)⟦\\iff⟧⟦x = (e^{2})^{\\frac{1}{3}} = e^{\\frac{2}{3}}⟧(xⁿ = c ⇔ x = c^(1/n) (n impair))",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦e^{\\frac{2}{3}} \\approx 1{,}948⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{e^{\\frac{2}{3}}\\right\\} \\text{, soit } x \\approx 1{,}948⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "ln(x^4)=2": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x^{4}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithmeOn met ⟦x^{4}⟧ en évidence : ⟦x^{4} = x^{4}\\left(1\\right)⟧⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦x^{4}⟧+0+⟦x^{4} > 0 \\iff x \\in \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\ln(x^{4}) = 2⟧⟦\\iff⟧⟦e^{\\ln(x^{4})} = e^{2}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x^{4} = e^{2}⟧(e^(ln(A)) = A, A > 0)⟦\\iff⟧⟦x = -e^{\\frac{1}{2}} \\text{ ou } x = e^{\\frac{1}{2}}⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))⟦x_{1} = -e^{\\frac{1}{2}}⟧⟦x_{2} = e^{\\frac{1}{2}}⟧",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x_{1} \\approx -1{,}649⟧(dans l'ensemble de définition ✓)⟦x_{2} \\approx 1{,}649⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -1{,}649 \\text{ ou } x \\approx 1{,}649⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "ln(x^5)=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x^{5}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithmeOn met ⟦x^{5}⟧ en évidence : ⟦x^{5} = x^{5}\\left(1\\right)⟧⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦x^{5}⟧−0+⟦x^{5} > 0 \\iff x \\in \\left]0 \\,;\\, +\\infty\\right[⟧.⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\ln(x^{5}) = 3⟧⟦\\iff⟧⟦e^{\\ln(x^{5})} = e^{3}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x^{5} = e^{3}⟧(e^(ln(A)) = A, A > 0)⟦\\iff⟧⟦x = (e^{3})^{\\frac{1}{5}} = e^{\\frac{3}{5}}⟧(xⁿ = c ⇔ x = c^(1/n) (n impair))",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦e^{\\frac{3}{5}} \\approx 1{,}822⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{e^{\\frac{3}{5}}\\right\\} \\text{, soit } x \\approx 1{,}822⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "ln(x^6)=1": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x^{6}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithmeOn met ⟦x^{6}⟧ en évidence : ⟦x^{6} = x^{6}\\left(1\\right)⟧⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦x^{6}⟧+0+⟦x^{6} > 0 \\iff x \\in \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧.⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\ln(x^{6}) = 1⟧⟦\\iff⟧⟦e^{\\ln(x^{6})} = e⟧(exponentielle des deux membres)⟦\\iff⟧⟦x^{6} = e⟧(e^(ln(A)) = A, A > 0)⟦\\iff⟧⟦x = -e^{\\frac{1}{6}} \\text{ ou } x = e^{\\frac{1}{6}}⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))⟦x_{1} = -e^{\\frac{1}{6}}⟧⟦x_{2} = e^{\\frac{1}{6}}⟧",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x_{1} \\approx -1{,}181⟧(dans l'ensemble de définition ✓)⟦x_{2} \\approx 1{,}181⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -1{,}181 \\text{ ou } x \\approx 1{,}181⟧",
     "titre": "Solution"
    }
   ],
@@ -13232,6 +14422,65 @@
     "listes": [],
     "tableaux": [],
     "texte": "Solution⟦S = \\left\\{10\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 5 / 5"
+ },
+ "log(x)+log(x+1)=1/2": {
+  "au_depart": {
+   "progression": "Étape 1 / 5",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧Condition 2 · logarithme⟦x + 1 > 0 \\iff x > -1⟧.⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]-1 \\,;\\, +\\infty\\right[ = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Regroupement des logarithmes⟦\\log(x) + \\log(x + 1) = \\frac{1}{2}⟧⟦\\iff⟧⟦\\log(x(x + 1)) = \\frac{1}{2}⟧(log u + log v = log(uv), sur l'ED)",
+    "titre": "Étape 2Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Exponentielle des deux membres⟦\\log(x(x + 1)) = \\frac{1}{2}⟧⟦\\iff⟧⟦10^{\\log(x(x + 1))} = 10^{\\frac{1}{2}}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x(x + 1) = 10^{\\frac{1}{2}} = \\sqrt{10}⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦x^{2} + x - \\sqrt{10} = 0⟧⟦Δ = 1^{2} - 4 \\cdot 1 \\cdot (-\\sqrt{10}) = 1 + 4\\sqrt{10}⟧(formule du discriminant)⟦x_{1} = \\frac{-1 - \\sqrt{Δ}}{2}⟧⟦x_{2} = \\frac{-1 + \\sqrt{Δ}}{2}⟧",
+    "titre": "Étape 3Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Vérification⟦x_{1} \\approx -2{,}347 \\notin ED⟧(rejetée : log(x) n'est pas défini : x < 0)⟦x_{2} \\approx 1{,}347⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 4Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{-1 + \\sqrt{Δ}}{2}\\right\\} \\text{, soit } x \\approx 1{,}347⟧",
     "titre": "Solution"
    }
   ],
@@ -15470,6 +16719,206 @@
   ],
   "progression_finale": "Étape 3 / 3"
  },
+ "log(x^2-1)=1/2": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x - 1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "bar",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x + 1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "bar",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x^{2} - 1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x^{2} - 1 = (x - 1)(x + 1)⟧ : zéros ⟦-1⟧ et ⟦1⟧.⟦x⟧⟦-\\infty⟧⟦-1⟧⟦1⟧⟦+\\infty⟧⟦x - 1⟧−−0+⟦x + 1⟧−0++⟦x^{2} - 1⟧+0−0+⟦x^{2} - 1 > 0 \\iff x \\in \\left]-\\infty \\,;\\, -1\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[⟧.⟦ED = \\left]-\\infty \\,;\\, -1\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log(x^{2} - 1) = \\frac{1}{2}⟧⟦\\iff⟧⟦10^{\\log(x^{2} - 1)} = 10^{\\frac{1}{2}}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x^{2} - 1 = 10^{\\frac{1}{2}} = \\sqrt{10}⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦x^{2} = 1 + \\sqrt{10}⟧⟦x_{1} = -\\sqrt{1 + \\sqrt{10}}⟧⟦x_{2} = \\sqrt{1 + \\sqrt{10}}⟧",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦x_{1} \\approx -2{,}040⟧(dans l'ensemble de définition ✓)⟦x_{2} \\approx 2{,}040⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -2{,}040 \\text{ ou } x \\approx 2{,}040⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
  "log(x^2-3x)=1": {
   "au_depart": {
    "progression": "Étape 1 / 4",
@@ -16001,6 +17450,116 @@
     "listes": [],
     "tableaux": [],
     "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -2{,}702 \\text{ ou } x \\approx 3{,}702⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "log(x^3)=1/2": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x^{3}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithmeOn met ⟦x^{3}⟧ en évidence : ⟦x^{3} = x^{3}\\left(1\\right)⟧⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦x^{3}⟧−0+⟦x^{3} > 0 \\iff x \\in \\left]0 \\,;\\, +\\infty\\right[⟧.⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log(x^{3}) = \\frac{1}{2}⟧⟦\\iff⟧⟦10^{\\log(x^{3})} = 10^{\\frac{1}{2}}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x^{3} = 10^{\\frac{1}{2}} = \\sqrt{10}⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦x = \\sqrt{10}^{\\frac{1}{3}} = 10^{\\frac{1}{6}}⟧(xⁿ = c ⇔ x = c^(1/n) (n impair))",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Vérification⟦10^{\\frac{1}{6}} \\approx 1{,}468⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 3Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{10^{\\frac{1}{6}}\\right\\} \\text{, soit } x \\approx 1{,}468⟧",
     "titre": "Solution"
    }
   ],
@@ -17859,6 +19418,65 @@
   ],
   "progression_finale": "Étape 4 / 4"
  },
+ "log_2(x)+log_2(x+1)=1/2": {
+  "au_depart": {
+   "progression": "Étape 1 / 5",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧Condition 2 · logarithme⟦x + 1 > 0 \\iff x > -1⟧.⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]-1 \\,;\\, +\\infty\\right[ = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Regroupement des logarithmes⟦\\log_{2}(x) + \\log_{2}(x + 1) = \\frac{1}{2}⟧⟦\\iff⟧⟦\\log_{2}(x(x + 1)) = \\frac{1}{2}⟧(log_a u + log_a v = log_a(uv), sur l'ED)",
+    "titre": "Étape 2Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Exponentielle des deux membres⟦\\log_{2}(x(x + 1)) = \\frac{1}{2}⟧⟦\\iff⟧⟦2^{\\log_{2}(x(x + 1))} = 2^{\\frac{1}{2}}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x(x + 1) = 2^{\\frac{1}{2}} = \\sqrt{2}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x^{2} + x - \\sqrt{2} = 0⟧⟦Δ = 1^{2} - 4 \\cdot 1 \\cdot (-\\sqrt{2}) = 1 + 4\\sqrt{2}⟧(formule du discriminant)⟦x_{1} = \\frac{-1 - \\sqrt{Δ}}{2}⟧⟦x_{2} = \\frac{-1 + \\sqrt{Δ}}{2}⟧",
+    "titre": "Étape 3Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Vérification⟦x_{1} \\approx -1{,}790 \\notin ED⟧(rejetée : log_2(x) n'est pas défini : x < 0)⟦x_{2} \\approx 0{,}790⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 4Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{-1 + \\sqrt{Δ}}{2}\\right\\} \\text{, soit } x \\approx 0{,}790⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 5 / 5"
+ },
  "log_2(x)=4": {
   "au_depart": {
    "progression": "Étape 1 / 4",
@@ -17956,6 +19574,65 @@
    }
   ],
   "progression_finale": "Étape 4 / 4"
+ },
+ "log_3(x)+log_3(x+2)=1/2": {
+  "au_depart": {
+   "progression": "Étape 1 / 5",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ensemble de définitionCondition 1 · logarithme⟦x > 0⟧Condition 2 · logarithme⟦x + 2 > 0 \\iff x > -2⟧.⟦ED = \\left]0 \\,;\\, +\\infty\\right[ \\cap \\left]-2 \\,;\\, +\\infty\\right[ = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Étape 1Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Regroupement des logarithmes⟦\\log_{3}(x) + \\log_{3}(x + 2) = \\frac{1}{2}⟧⟦\\iff⟧⟦\\log_{3}(x(x + 2)) = \\frac{1}{2}⟧(log_a u + log_a v = log_a(uv), sur l'ED)",
+    "titre": "Étape 2Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Exponentielle des deux membres⟦\\log_{3}(x(x + 2)) = \\frac{1}{2}⟧⟦\\iff⟧⟦3^{\\log_{3}(x(x + 2))} = 3^{\\frac{1}{2}}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x(x + 2) = 3^{\\frac{1}{2}} = \\sqrt{3}⟧(a^(log_a(A)) = A, A > 0)⟦\\iff⟧⟦x^{2} + 2x - \\sqrt{3} = 0⟧⟦Δ = 2^{2} - 4 \\cdot 1 \\cdot (-\\sqrt{3}) = 4 + 4\\sqrt{3}⟧(formule du discriminant)⟦x_{1} = \\frac{-2 - \\sqrt{Δ}}{2}⟧⟦x_{2} = \\frac{-2 + \\sqrt{Δ}}{2}⟧",
+    "titre": "Étape 3Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Vérification⟦x_{1} \\approx -2{,}653 \\notin ED⟧(rejetée : log_3(x) n'est pas défini : x < 0)⟦x_{2} \\approx 0{,}653⟧(dans l'ensemble de définition ✓)",
+    "titre": "Étape 4Vérification"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{-2 + \\sqrt{Δ}}{2}\\right\\} \\text{, soit } x \\approx 0{,}653⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 5 / 5"
  },
  "log_4(x)=-3/2": {
   "au_depart": {
