@@ -586,6 +586,468 @@
    }
   ]
  },
+ "0,5^x-5*0,5^(-x)+4*0,5^(-3x)=0": {
+  "cartes": [
+   {
+    "badge": "Changement de variable",
+    "blocs": [
+     {
+      "html": "On pose \\(t = 2^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(0{,}5^{x} = \\frac{1}{2^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{0{,}5^{x}} = \\frac{1}{t}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5 \\cdot 0{,}5^{-x} = 5 \\cdot 2^{x}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{5 \\cdot 0{,}5^{-x}} = 5t\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4 \\cdot 0{,}5^{-3x} = 4(2^{x})^{3}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{4 \\cdot 0{,}5^{-3x}} = 4t^{3}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(0{,}5^{x} - 5 \\cdot 0{,}5^{-x} + 4 \\cdot 0{,}5^{-3x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\frac{1}{t} - 5t + 4t^{3} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(4t^{4} - 5t^{2} + 1 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t, t &gt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Équation bicarrée",
+    "blocs": [
+     {
+      "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4t^{4} - 5t^{2} + 1 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(4u^{2} - 5u + 1 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(Δ = (-5)^{2} - 4 \\cdot 4 \\cdot 1 = 9\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = \\frac{1}{4} \\text{ ou } u = 1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = \\frac{1}{4} &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 0{,}25\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -0{,}5 \\text{ ou } t = 0{,}5\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -1 \\text{ ou } t = 1\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Valeurs de t",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -1 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -0{,}5 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 0{,}5 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Logarithme des deux membres (t = 1/2)",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 0{,}5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(0{,}5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(0{,}5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(0{,}5)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "badge": "Logarithme des deux membres (t = 1)",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(1)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(1)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = 0\\)</span><span class=\"prop\">(log(1) = 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 5"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(0{,}5)}{\\log(2)} \\,;\\, 0\\right\\}",
+      "type": "resultat"
+     },
+     {
+      "html": "Contrôlez à la calculatrice : on retrouve \\(x = -1\\) ou \\(x = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "0{,}5^{x} - 5 \\cdot 0{,}5^{-x} + 4 \\cdot 0{,}5^{-3x} = 0",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Changement de variable",
+      "blocs": [
+       {
+        "html": "On pose \\(t = 2^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(0{,}5^{x} = \\frac{1}{2^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{0{,}5^{x}} = \\frac{1}{t}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5 \\cdot 0{,}5^{-x} = 5 \\cdot 2^{x}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{5 \\cdot 0{,}5^{-x}} = 5t\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4 \\cdot 0{,}5^{-3x} = 4(2^{x})^{3}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{4 \\cdot 0{,}5^{-3x}} = 4t^{3}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(0{,}5^{x} - 5 \\cdot 0{,}5^{-x} + 4 \\cdot 0{,}5^{-3x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\frac{1}{t} - 5t + 4t^{3} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(4t^{4} - 5t^{2} + 1 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t, t &gt; 0)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Équation bicarrée",
+      "blocs": [
+       {
+        "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4t^{4} - 5t^{2} + 1 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(4u^{2} - 5u + 1 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(Δ = (-5)^{2} - 4 \\cdot 4 \\cdot 1 = 9\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = \\frac{1}{4} \\text{ ou } u = 1\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = \\frac{1}{4} &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 0{,}25\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -0{,}5 \\text{ ou } t = 0{,}5\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -1 \\text{ ou } t = 1\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de t",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -1 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -0{,}5 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 0{,}5 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Même base (t = 1/2)",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(0{,}5 = 2^{-1}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2^{-1}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -1\\)</span><span class=\"prop\">(même base : a^A = a^B ⇔ A = B)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "badge": "Même base (t = 1)",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 = 2^{0}\\)</span><span class=\"prop\">(1 = a⁰)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2^{0}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\">(même base : a^A = a^B ⇔ A = B)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 5"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{-1 \\,;\\, 0\\right\\}",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Changement de variable",
+      "blocs": [
+       {
+        "html": "On pose \\(t = 2^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(0{,}5^{x} = \\frac{1}{2^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{0{,}5^{x}} = \\frac{1}{t}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5 \\cdot 0{,}5^{-x} = 5 \\cdot 2^{x}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{5 \\cdot 0{,}5^{-x}} = 5t\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4 \\cdot 0{,}5^{-3x} = 4(2^{x})^{3}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{4 \\cdot 0{,}5^{-3x}} = 4t^{3}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(0{,}5^{x} - 5 \\cdot 0{,}5^{-x} + 4 \\cdot 0{,}5^{-3x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\frac{1}{t} - 5t + 4t^{3} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(4t^{4} - 5t^{2} + 1 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t, t &gt; 0)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Équation bicarrée",
+      "blocs": [
+       {
+        "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4t^{4} - 5t^{2} + 1 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(4u^{2} - 5u + 1 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(Δ = (-5)^{2} - 4 \\cdot 4 \\cdot 1 = 9\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = \\frac{1}{4} \\text{ ou } u = 1\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = \\frac{1}{4} &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 0{,}25\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -0{,}5 \\text{ ou } t = 0{,}5\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -1 \\text{ ou } t = 1\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de t",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -1 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -0{,}5 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 0{,}5 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Logarithme des deux membres (t = 1/2)",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 0{,}5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(0{,}5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(0{,}5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(0{,}5)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "badge": "Logarithme des deux membres (t = 1)",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(1)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(1)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = 0\\)</span><span class=\"prop\">(log(1) = 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 5"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\frac{\\log(0{,}5)}{\\log(2)} \\,;\\, 0\\right\\}",
+        "type": "resultat"
+       },
+       {
+        "html": "Contrôlez à la calculatrice : on retrouve \\(x = -1\\) ou \\(x = 0\\).",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
  "10^(-log(x))=4": {
   "cartes": [
    {
@@ -3243,6 +3705,398 @@
       "blocs": [
        {
         "tex": "S = \\left\\{\\frac{\\log\\left(\\frac{8}{5}\\right)}{\\log(5)}\\right\\} \\text{, soit } x \\approx 0{,}292",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
+ "2^(3x)-10*2^x+9*2^(-x)=0": {
+  "cartes": [
+   {
+    "badge": "Changement de variable",
+    "blocs": [
+     {
+      "html": "On pose \\(t = 2^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{3x} = (2^{x})^{3}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{2^{3x}} = t^{3}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(9 \\cdot 2^{-x} = \\frac{9}{2^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{9 \\cdot 2^{-x}} = \\frac{9}{t}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{3x} - 10 \\cdot 2^{x} + 9 \\cdot 2^{-x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{3} - 10t + \\frac{9}{t} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{4} - 10t^{2} + 9 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t, t &gt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Équation bicarrée",
+    "blocs": [
+     {
+      "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{4} - 10t^{2} + 9 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u^{2} - 10u + 9 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((u - 1)(u - 9) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u = 1 \\text{ ou } u = 9\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 9 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -1 \\text{ ou } t = 1\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 9\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -3 \\text{ ou } t = 3\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Valeurs de t",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -3 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -1 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 3 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Logarithme des deux membres (t = 1)",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(1)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(1)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = 0\\)</span><span class=\"prop\">(log(1) = 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "badge": "Logarithme des deux membres (t = 3)",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 5"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{0 \\,;\\, \\frac{\\log(3)}{\\log(2)}\\right\\} \\text{, soit } x = 0 \\text{ ou } x \\approx 1{,}585",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2^{3x} - 10 \\cdot 2^{x} + 9 \\cdot 2^{-x} = 0",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Changement de variable",
+      "blocs": [
+       {
+        "html": "On pose \\(t = 2^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{3x} = (2^{x})^{3}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{2^{3x}} = t^{3}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(9 \\cdot 2^{-x} = \\frac{9}{2^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{9 \\cdot 2^{-x}} = \\frac{9}{t}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{3x} - 10 \\cdot 2^{x} + 9 \\cdot 2^{-x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{3} - 10t + \\frac{9}{t} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{4} - 10t^{2} + 9 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t, t &gt; 0)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Équation bicarrée",
+      "blocs": [
+       {
+        "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{4} - 10t^{2} + 9 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u^{2} - 10u + 9 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((u - 1)(u - 9) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u = 1 \\text{ ou } u = 9\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 9 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -1 \\text{ ou } t = 1\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 9\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -3 \\text{ ou } t = 3\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de t",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -3 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -1 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 3 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Même base (t = 1)",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 = 2^{0}\\)</span><span class=\"prop\">(1 = a⁰)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2^{0}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\">(même base : a^A = a^B ⇔ A = B)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "badge": "Même base / définition (t = 3)",
+      "blocs": [
+       {
+        "html": "\\(3\\) n'est pas une puissance de \\(2\\) : il faut les logarithmes.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 5"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Changement de variable",
+      "blocs": [
+       {
+        "html": "On pose \\(t = 2^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{3x} = (2^{x})^{3}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{2^{3x}} = t^{3}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(9 \\cdot 2^{-x} = \\frac{9}{2^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{9 \\cdot 2^{-x}} = \\frac{9}{t}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{3x} - 10 \\cdot 2^{x} + 9 \\cdot 2^{-x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{3} - 10t + \\frac{9}{t} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{4} - 10t^{2} + 9 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t, t &gt; 0)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Équation bicarrée",
+      "blocs": [
+       {
+        "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{4} - 10t^{2} + 9 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u^{2} - 10u + 9 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((u - 1)(u - 9) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u = 1 \\text{ ou } u = 9\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 9 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -1 \\text{ ou } t = 1\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 9\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -3 \\text{ ou } t = 3\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de t",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -3 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -1 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 3 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Logarithme des deux membres (t = 1)",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(1)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(1)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = 0\\)</span><span class=\"prop\">(log(1) = 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "badge": "Logarithme des deux membres (t = 3)",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 5"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{0 \\,;\\, \\frac{\\log(3)}{\\log(2)}\\right\\} \\text{, soit } x = 0 \\text{ ou } x \\approx 1{,}585",
         "type": "resultat"
        }
       ],
@@ -6390,6 +7244,453 @@
    }
   ]
  },
+ "3^x+3*3^(-x)+2*3^(-3x)=0": {
+  "cartes": [
+   {
+    "badge": "Changement de variable",
+    "blocs": [
+     {
+      "html": "On pose \\(t = 3^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3 \\cdot 3^{-x} = \\frac{3}{3^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{3 \\cdot 3^{-x}} = \\frac{3}{t}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2 \\cdot 3^{-3x} = \\frac{2}{(3^{x})^{3}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{2 \\cdot 3^{-3x}} = \\frac{2}{t^{3}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} + 3 \\cdot 3^{-x} + 2 \\cdot 3^{-3x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t + \\frac{3}{t} + \\frac{2}{t^{3}} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{4} + 3t^{2} + 2 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t³, t &gt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Équation bicarrée",
+    "blocs": [
+     {
+      "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{4} + 3t^{2} + 2 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u^{2} + 3u + 2 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((u + 2)(u + 1) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u = -2 \\text{ ou } u = -1\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = -2 \\le 0\\)</span><span class=\"prop\">(rejetée : u = t² est strictement positif)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = -1 \\le 0\\)</span><span class=\"prop\">(rejetée : u = t² est strictement positif)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Aucune valeur de \\(u\\) ne convient : l'équation n'a aucune solution.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\varnothing",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3^{x} + 3 \\cdot 3^{-x} + 2 \\cdot 3^{-3x} = 0",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Changement de variable",
+      "blocs": [
+       {
+        "html": "On pose \\(t = 3^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3 \\cdot 3^{-x} = \\frac{3}{3^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{3 \\cdot 3^{-x}} = \\frac{3}{t}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2 \\cdot 3^{-3x} = \\frac{2}{(3^{x})^{3}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{2 \\cdot 3^{-3x}} = \\frac{2}{t^{3}}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} + 3 \\cdot 3^{-x} + 2 \\cdot 3^{-3x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t + \\frac{3}{t} + \\frac{2}{t^{3}} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{4} + 3t^{2} + 2 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t³, t &gt; 0)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Équation bicarrée",
+      "blocs": [
+       {
+        "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{4} + 3t^{2} + 2 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u^{2} + 3u + 2 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((u + 2)(u + 1) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u = -2 \\text{ ou } u = -1\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = -2 \\le 0\\)</span><span class=\"prop\">(rejetée : u = t² est strictement positif)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = -1 \\le 0\\)</span><span class=\"prop\">(rejetée : u = t² est strictement positif)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "Aucune valeur de \\(u\\) ne convient : l'équation n'a aucune solution.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\varnothing",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Changement de variable",
+      "blocs": [
+       {
+        "html": "On pose \\(t = 3^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3 \\cdot 3^{-x} = \\frac{3}{3^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{3 \\cdot 3^{-x}} = \\frac{3}{t}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2 \\cdot 3^{-3x} = \\frac{2}{(3^{x})^{3}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{2 \\cdot 3^{-3x}} = \\frac{2}{t^{3}}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} + 3 \\cdot 3^{-x} + 2 \\cdot 3^{-3x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t + \\frac{3}{t} + \\frac{2}{t^{3}} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{4} + 3t^{2} + 2 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t³, t &gt; 0)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Équation bicarrée",
+      "blocs": [
+       {
+        "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{4} + 3t^{2} + 2 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u^{2} + 3u + 2 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((u + 2)(u + 1) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u = -2 \\text{ ou } u = -1\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = -2 \\le 0\\)</span><span class=\"prop\">(rejetée : u = t² est strictement positif)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = -1 \\le 0\\)</span><span class=\"prop\">(rejetée : u = t² est strictement positif)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "Aucune valeur de \\(u\\) ne convient : l'équation n'a aucune solution.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\varnothing",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
+ "3^x+3^(-x)+3^(-3x)=0": {
+  "cartes": [
+   {
+    "badge": "Changement de variable",
+    "blocs": [
+     {
+      "html": "On pose \\(t = 3^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{-x} = \\frac{1}{3^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{3^{-x}} = \\frac{1}{t}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{-3x} = \\frac{1}{(3^{x})^{3}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{3^{-3x}} = \\frac{1}{t^{3}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} + 3^{-x} + 3^{-3x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t + \\frac{1}{t} + \\frac{1}{t^{3}} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{4} + t^{2} + 1 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t³, t &gt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Équation bicarrée",
+    "blocs": [
+     {
+      "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{4} + t^{2} + 1 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u^{2} + u + 1 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(Δ = 1^{2} - 4 \\cdot 1 \\cdot 1 = -3\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Δ &lt; 0 : l'équation n'a aucune solution réelle.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\varnothing",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3^{x} + 3^{-x} + 3^{-3x} = 0",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Changement de variable",
+      "blocs": [
+       {
+        "html": "On pose \\(t = 3^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{-x} = \\frac{1}{3^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{3^{-x}} = \\frac{1}{t}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{-3x} = \\frac{1}{(3^{x})^{3}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{3^{-3x}} = \\frac{1}{t^{3}}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} + 3^{-x} + 3^{-3x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t + \\frac{1}{t} + \\frac{1}{t^{3}} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{4} + t^{2} + 1 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t³, t &gt; 0)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Équation bicarrée",
+      "blocs": [
+       {
+        "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{4} + t^{2} + 1 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u^{2} + u + 1 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(Δ = 1^{2} - 4 \\cdot 1 \\cdot 1 = -3\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "Δ &lt; 0 : l'équation n'a aucune solution réelle.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\varnothing",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Changement de variable",
+      "blocs": [
+       {
+        "html": "On pose \\(t = 3^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{-x} = \\frac{1}{3^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{3^{-x}} = \\frac{1}{t}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{-3x} = \\frac{1}{(3^{x})^{3}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{3^{-3x}} = \\frac{1}{t^{3}}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} + 3^{-x} + 3^{-3x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t + \\frac{1}{t} + \\frac{1}{t^{3}} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{4} + t^{2} + 1 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t³, t &gt; 0)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Équation bicarrée",
+      "blocs": [
+       {
+        "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{4} + t^{2} + 1 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u^{2} + u + 1 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(Δ = 1^{2} - 4 \\cdot 1 \\cdot 1 = -3\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "Δ &lt; 0 : l'équation n'a aucune solution réelle.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\varnothing",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
+ "3^x+3^(-x)-6*3^(-3x)=0": {
+  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
+  "ok": false
+ },
  "3^x+9^x=90": {
   "cartes": [
    {
@@ -6599,6 +7900,312 @@
         "html": "Contrôlez à la calculatrice : \\(x = \\frac{\\log(9)}{\\log(3)} = 2\\).",
         "style": "etape",
         "type": "texte"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
+ "3^x-3*3^(-x)-4*3^(-3x)=0": {
+  "cartes": [
+   {
+    "badge": "Changement de variable",
+    "blocs": [
+     {
+      "html": "On pose \\(t = 3^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3 \\cdot 3^{-x} = \\frac{3}{3^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{3 \\cdot 3^{-x}} = \\frac{3}{t}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4 \\cdot 3^{-3x} = \\frac{4}{(3^{x})^{3}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{4 \\cdot 3^{-3x}} = \\frac{4}{t^{3}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} - 3 \\cdot 3^{-x} - 4 \\cdot 3^{-3x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t - \\frac{3}{t} - \\frac{4}{t^{3}} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{4} - 3t^{2} - 4 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t³, t &gt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Équation bicarrée",
+    "blocs": [
+     {
+      "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{4} - 3t^{2} - 4 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u^{2} - 3u - 4 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((u + 1)(u - 4) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u = -1 \\text{ ou } u = 4\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = -1 \\le 0\\)</span><span class=\"prop\">(rejetée : u = t² est strictement positif)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 4 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 4\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -2 \\text{ ou } t = 2\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Valeurs de t",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -2 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 2 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Logarithme des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{\\log(2)}{\\log(3)}\\right\\} \\text{, soit } x \\approx 0{,}631",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3^{x} - 3 \\cdot 3^{-x} - 4 \\cdot 3^{-3x} = 0",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Changement de variable",
+      "blocs": [
+       {
+        "html": "On pose \\(t = 3^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3 \\cdot 3^{-x} = \\frac{3}{3^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{3 \\cdot 3^{-x}} = \\frac{3}{t}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4 \\cdot 3^{-3x} = \\frac{4}{(3^{x})^{3}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{4 \\cdot 3^{-3x}} = \\frac{4}{t^{3}}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} - 3 \\cdot 3^{-x} - 4 \\cdot 3^{-3x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t - \\frac{3}{t} - \\frac{4}{t^{3}} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{4} - 3t^{2} - 4 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t³, t &gt; 0)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Équation bicarrée",
+      "blocs": [
+       {
+        "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{4} - 3t^{2} - 4 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u^{2} - 3u - 4 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((u + 1)(u - 4) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u = -1 \\text{ ou } u = 4\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = -1 \\le 0\\)</span><span class=\"prop\">(rejetée : u = t² est strictement positif)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 4 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 4\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -2 \\text{ ou } t = 2\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de t",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -2 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 2 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Même base / définition",
+      "blocs": [
+       {
+        "html": "\\(2\\) n'est pas une puissance de \\(3\\) : il faut les logarithmes.",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Changement de variable",
+      "blocs": [
+       {
+        "html": "On pose \\(t = 3^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3 \\cdot 3^{-x} = \\frac{3}{3^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{3 \\cdot 3^{-x}} = \\frac{3}{t}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4 \\cdot 3^{-3x} = \\frac{4}{(3^{x})^{3}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{4 \\cdot 3^{-3x}} = \\frac{4}{t^{3}}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} - 3 \\cdot 3^{-x} - 4 \\cdot 3^{-3x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t - \\frac{3}{t} - \\frac{4}{t^{3}} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{4} - 3t^{2} - 4 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t³, t &gt; 0)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Équation bicarrée",
+      "blocs": [
+       {
+        "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{4} - 3t^{2} - 4 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u^{2} - 3u - 4 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((u + 1)(u - 4) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u = -1 \\text{ ou } u = 4\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = -1 \\le 0\\)</span><span class=\"prop\">(rejetée : u = t² est strictement positif)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 4 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 4\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -2 \\text{ ou } t = 2\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de t",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -2 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 2 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Logarithme des deux membres",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{\\frac{\\log(2)}{\\log(3)}\\right\\} \\text{, soit } x \\approx 0{,}631",
+        "type": "resultat"
        }
       ],
       "style": "final",
@@ -6886,6 +8493,423 @@
   "enonce_tex": "3\\log(x) = 2\\log(8)",
   "erreur": null,
   "ok": true
+ },
+ "4*2^(-3x)-5*2^(-x)+2^x=0": {
+  "cartes": [
+   {
+    "badge": "Changement de variable",
+    "blocs": [
+     {
+      "html": "On pose \\(t = 2^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4 \\cdot 2^{-3x} = \\frac{4}{(2^{x})^{3}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{4 \\cdot 2^{-3x}} = \\frac{4}{t^{3}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5 \\cdot 2^{-x} = \\frac{5}{2^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{5 \\cdot 2^{-x}} = \\frac{5}{t}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4 \\cdot 2^{-3x} - 5 \\cdot 2^{-x} + 2^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\frac{4}{t^{3}} - \\frac{5}{t} + t = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{4} - 5t^{2} + 4 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t³, t &gt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Équation bicarrée",
+    "blocs": [
+     {
+      "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{4} - 5t^{2} + 4 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u^{2} - 5u + 4 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((u - 1)(u - 4) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u = 1 \\text{ ou } u = 4\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 4 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -1 \\text{ ou } t = 1\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 4\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -2 \\text{ ou } t = 2\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Valeurs de t",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -2 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -1 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 2 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Logarithme des deux membres (t = 1)",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(1)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(1)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = 0\\)</span><span class=\"prop\">(log(1) = 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "badge": "Logarithme des deux membres (t = 2)",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 5"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{0 \\,;\\, \\frac{\\log(2)}{\\log(2)}\\right\\}",
+      "type": "resultat"
+     },
+     {
+      "html": "Contrôlez à la calculatrice : on retrouve \\(x = 0\\) ou \\(x = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "4 \\cdot 2^{-3x} - 5 \\cdot 2^{-x} + 2^{x} = 0",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Changement de variable",
+      "blocs": [
+       {
+        "html": "On pose \\(t = 2^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4 \\cdot 2^{-3x} = \\frac{4}{(2^{x})^{3}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{4 \\cdot 2^{-3x}} = \\frac{4}{t^{3}}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5 \\cdot 2^{-x} = \\frac{5}{2^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{5 \\cdot 2^{-x}} = \\frac{5}{t}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4 \\cdot 2^{-3x} - 5 \\cdot 2^{-x} + 2^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\frac{4}{t^{3}} - \\frac{5}{t} + t = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{4} - 5t^{2} + 4 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t³, t &gt; 0)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Équation bicarrée",
+      "blocs": [
+       {
+        "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{4} - 5t^{2} + 4 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u^{2} - 5u + 4 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((u - 1)(u - 4) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u = 1 \\text{ ou } u = 4\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 4 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -1 \\text{ ou } t = 1\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 4\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -2 \\text{ ou } t = 2\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de t",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -2 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -1 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 2 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Même base (t = 1)",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 = 2^{0}\\)</span><span class=\"prop\">(1 = a⁰)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2^{0}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\">(même base : a^A = a^B ⇔ A = B)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "badge": "Même base (t = 2)",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2 = 2^{1}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2^{1}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 1\\)</span><span class=\"prop\">(même base : a^A = a^B ⇔ A = B)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 5"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{0 \\,;\\, 1\\right\\}",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Changement de variable",
+      "blocs": [
+       {
+        "html": "On pose \\(t = 2^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4 \\cdot 2^{-3x} = \\frac{4}{(2^{x})^{3}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{4 \\cdot 2^{-3x}} = \\frac{4}{t^{3}}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5 \\cdot 2^{-x} = \\frac{5}{2^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{5 \\cdot 2^{-x}} = \\frac{5}{t}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4 \\cdot 2^{-3x} - 5 \\cdot 2^{-x} + 2^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\frac{4}{t^{3}} - \\frac{5}{t} + t = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{4} - 5t^{2} + 4 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t³, t &gt; 0)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Équation bicarrée",
+      "blocs": [
+       {
+        "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{4} - 5t^{2} + 4 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u^{2} - 5u + 4 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((u - 1)(u - 4) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u = 1 \\text{ ou } u = 4\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 4 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -1 \\text{ ou } t = 1\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 4\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -2 \\text{ ou } t = 2\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de t",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -2 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -1 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 2 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Logarithme des deux membres (t = 1)",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(1)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(1)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = 0\\)</span><span class=\"prop\">(log(1) = 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "badge": "Logarithme des deux membres (t = 2)",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 5"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{0 \\,;\\, \\frac{\\log(2)}{\\log(2)}\\right\\}",
+        "type": "resultat"
+       },
+       {
+        "html": "Contrôlez à la calculatrice : on retrouve \\(x = 0\\) ou \\(x = 1\\).",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
  },
  "4^(x+2)-8^x=0": {
   "cartes": [
@@ -7986,6 +10010,423 @@
        {
         "tex": "S = \\left\\{\\frac{\\log(3)}{\\log(2)}\\right\\} \\text{, soit } x \\approx 1{,}585",
         "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
+ "5^(3x)-26*5^x+25*5^(-x)=0": {
+  "cartes": [
+   {
+    "badge": "Changement de variable",
+    "blocs": [
+     {
+      "html": "On pose \\(t = 5^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{3x} = (5^{x})^{3}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{5^{3x}} = t^{3}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(25 \\cdot 5^{-x} = \\frac{25}{5^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{25 \\cdot 5^{-x}} = \\frac{25}{t}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{3x} - 26 \\cdot 5^{x} + 25 \\cdot 5^{-x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{3} - 26t + \\frac{25}{t} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{4} - 26t^{2} + 25 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t, t &gt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Équation bicarrée",
+    "blocs": [
+     {
+      "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{4} - 26t^{2} + 25 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u^{2} - 26u + 25 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((u - 1)(u - 25) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u = 1 \\text{ ou } u = 25\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 25 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -1 \\text{ ou } t = 1\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 25\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -5 \\text{ ou } t = 5\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Valeurs de t",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -5 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -1 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 5 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Logarithme des deux membres (t = 1)",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{x} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5^{x}) = \\log(1)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(5) = \\log(1)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(5) = 0\\)</span><span class=\"prop\">(log(1) = 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\">(car \\(\\log(5) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "badge": "Logarithme des deux membres (t = 5)",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{x} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5^{x}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(5) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(5)}{\\log(5)}\\)</span><span class=\"prop\">(car \\(\\log(5) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 5"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{0 \\,;\\, \\frac{\\log(5)}{\\log(5)}\\right\\}",
+      "type": "resultat"
+     },
+     {
+      "html": "Contrôlez à la calculatrice : on retrouve \\(x = 0\\) ou \\(x = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "5^{3x} - 26 \\cdot 5^{x} + 25 \\cdot 5^{-x} = 0",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Changement de variable",
+      "blocs": [
+       {
+        "html": "On pose \\(t = 5^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{3x} = (5^{x})^{3}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{5^{3x}} = t^{3}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(25 \\cdot 5^{-x} = \\frac{25}{5^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{25 \\cdot 5^{-x}} = \\frac{25}{t}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{3x} - 26 \\cdot 5^{x} + 25 \\cdot 5^{-x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{3} - 26t + \\frac{25}{t} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{4} - 26t^{2} + 25 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t, t &gt; 0)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Équation bicarrée",
+      "blocs": [
+       {
+        "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{4} - 26t^{2} + 25 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u^{2} - 26u + 25 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((u - 1)(u - 25) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u = 1 \\text{ ou } u = 25\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 25 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -1 \\text{ ou } t = 1\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 25\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -5 \\text{ ou } t = 5\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de t",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -5 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -1 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 5 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Même base (t = 1)",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 = 5^{0}\\)</span><span class=\"prop\">(1 = a⁰)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{x} = 5^{0}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\">(même base : a^A = a^B ⇔ A = B)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "badge": "Même base (t = 5)",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5 = 5^{1}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{x} = 5^{1}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 1\\)</span><span class=\"prop\">(même base : a^A = a^B ⇔ A = B)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 5"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{0 \\,;\\, 1\\right\\}",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Changement de variable",
+      "blocs": [
+       {
+        "html": "On pose \\(t = 5^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{3x} = (5^{x})^{3}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{5^{3x}} = t^{3}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(25 \\cdot 5^{-x} = \\frac{25}{5^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{25 \\cdot 5^{-x}} = \\frac{25}{t}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{3x} - 26 \\cdot 5^{x} + 25 \\cdot 5^{-x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{3} - 26t + \\frac{25}{t} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{4} - 26t^{2} + 25 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t, t &gt; 0)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Équation bicarrée",
+      "blocs": [
+       {
+        "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{4} - 26t^{2} + 25 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u^{2} - 26u + 25 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((u - 1)(u - 25) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u = 1 \\text{ ou } u = 25\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 25 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -1 \\text{ ou } t = 1\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 25\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -5 \\text{ ou } t = 5\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de t",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -5 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -1 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 5 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Logarithme des deux membres (t = 1)",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{x} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5^{x}) = \\log(1)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(5) = \\log(1)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(5) = 0\\)</span><span class=\"prop\">(log(1) = 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\">(car \\(\\log(5) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "badge": "Logarithme des deux membres (t = 5)",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{x} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5^{x}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(5) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(5)}{\\log(5)}\\)</span><span class=\"prop\">(car \\(\\log(5) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 5"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{0 \\,;\\, \\frac{\\log(5)}{\\log(5)}\\right\\}",
+        "type": "resultat"
+       },
+       {
+        "html": "Contrôlez à la calculatrice : on retrouve \\(x = 0\\) ou \\(x = 1\\).",
+        "style": "etape",
+        "type": "texte"
        }
       ],
       "style": "final",
@@ -9114,6 +11555,423 @@
        },
        {
         "html": "Contrôlez à la calculatrice : \\(x = \\frac{\\log(4)}{\\log(2)} = 2\\).",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
+ "9*3^(-3x)-10*3^(-x)+3^x=0": {
+  "cartes": [
+   {
+    "badge": "Changement de variable",
+    "blocs": [
+     {
+      "html": "On pose \\(t = 3^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(9 \\cdot 3^{-3x} = \\frac{9}{(3^{x})^{3}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{9 \\cdot 3^{-3x}} = \\frac{9}{t^{3}}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(10 \\cdot 3^{-x} = \\frac{10}{3^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{10 \\cdot 3^{-x}} = \\frac{10}{t}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(9 \\cdot 3^{-3x} - 10 \\cdot 3^{-x} + 3^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\frac{9}{t^{3}} - \\frac{10}{t} + t = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{4} - 10t^{2} + 9 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t³, t &gt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Équation bicarrée",
+    "blocs": [
+     {
+      "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{4} - 10t^{2} + 9 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u^{2} - 10u + 9 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((u - 1)(u - 9) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u = 1 \\text{ ou } u = 9\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 9 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -1 \\text{ ou } t = 1\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 9\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -3 \\text{ ou } t = 3\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Valeurs de t",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -3 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -1 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 3 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Logarithme des deux membres (t = 1)",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x}) = \\log(1)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = \\log(1)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = 0\\)</span><span class=\"prop\">(log(1) = 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "badge": "Logarithme des deux membres (t = 3)",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 5"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{0 \\,;\\, \\frac{\\log(3)}{\\log(3)}\\right\\}",
+      "type": "resultat"
+     },
+     {
+      "html": "Contrôlez à la calculatrice : on retrouve \\(x = 0\\) ou \\(x = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "9 \\cdot 3^{-3x} - 10 \\cdot 3^{-x} + 3^{x} = 0",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Changement de variable",
+      "blocs": [
+       {
+        "html": "On pose \\(t = 3^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(9 \\cdot 3^{-3x} = \\frac{9}{(3^{x})^{3}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{9 \\cdot 3^{-3x}} = \\frac{9}{t^{3}}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(10 \\cdot 3^{-x} = \\frac{10}{3^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{10 \\cdot 3^{-x}} = \\frac{10}{t}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(9 \\cdot 3^{-3x} - 10 \\cdot 3^{-x} + 3^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\frac{9}{t^{3}} - \\frac{10}{t} + t = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{4} - 10t^{2} + 9 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t³, t &gt; 0)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Équation bicarrée",
+      "blocs": [
+       {
+        "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{4} - 10t^{2} + 9 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u^{2} - 10u + 9 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((u - 1)(u - 9) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u = 1 \\text{ ou } u = 9\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 9 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -1 \\text{ ou } t = 1\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 9\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -3 \\text{ ou } t = 3\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de t",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -3 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -1 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 3 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Même base (t = 1)",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1 = 3^{0}\\)</span><span class=\"prop\">(1 = a⁰)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 3^{0}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\">(même base : a^A = a^B ⇔ A = B)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "badge": "Même base (t = 3)",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3 = 3^{1}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 3^{1}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 1\\)</span><span class=\"prop\">(même base : a^A = a^B ⇔ A = B)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 5"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{0 \\,;\\, 1\\right\\}",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Changement de variable",
+      "blocs": [
+       {
+        "html": "On pose \\(t = 3^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(9 \\cdot 3^{-3x} = \\frac{9}{(3^{x})^{3}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{9 \\cdot 3^{-3x}} = \\frac{9}{t^{3}}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(10 \\cdot 3^{-x} = \\frac{10}{3^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{10 \\cdot 3^{-x}} = \\frac{10}{t}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(9 \\cdot 3^{-3x} - 10 \\cdot 3^{-x} + 3^{x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\frac{9}{t^{3}} - \\frac{10}{t} + t = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{4} - 10t^{2} + 9 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t³, t &gt; 0)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Équation bicarrée",
+      "blocs": [
+       {
+        "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{4} - 10t^{2} + 9 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u^{2} - 10u + 9 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((u - 1)(u - 9) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u = 1 \\text{ ou } u = 9\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 9 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -1 \\text{ ou } t = 1\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 9\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -3 \\text{ ou } t = 3\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de t",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -3 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -1 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 3 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Logarithme des deux membres (t = 1)",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x}) = \\log(1)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = \\log(1)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = 0\\)</span><span class=\"prop\">(log(1) = 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "badge": "Logarithme des deux membres (t = 3)",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 5"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{0 \\,;\\, \\frac{\\log(3)}{\\log(3)}\\right\\}",
+        "type": "resultat"
+       },
+       {
+        "html": "Contrôlez à la calculatrice : on retrouve \\(x = 0\\) ou \\(x = 1\\).",
         "style": "etape",
         "type": "texte"
        }
@@ -11108,6 +13966,403 @@
       ],
       "style": "normal",
       "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{0 \\,;\\, \\ln(2)\\right\\} \\text{, soit } x = 0 \\text{ ou } x \\approx 0{,}693",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "logarithmes",
+    "libelle": "Logarithmes"
+   }
+  ]
+ },
+ "e^(3x)-5*e^x+4*e^(-x)=0": {
+  "cartes": [
+   {
+    "badge": "Changement de variable",
+    "blocs": [
+     {
+      "html": "On pose \\(t = e^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{3x} = (e^{x})^{3}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{e^{3x}} = t^{3}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4e^{-x} = \\frac{4}{e^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{4e^{-x}} = \\frac{4}{t}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{3x} - 5e^{x} + 4e^{-x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{3} - 5t + \\frac{4}{t} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{4} - 5t^{2} + 4 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t, t &gt; 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Équation bicarrée",
+    "blocs": [
+     {
+      "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{4} - 5t^{2} + 4 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u^{2} - 5u + 4 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((u - 1)(u - 4) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u = 1 \\text{ ou } u = 4\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 4 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -1 \\text{ ou } t = 1\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 4\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -2 \\text{ ou } t = 2\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Valeurs de t",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -2 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -1 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 2 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Logarithme des deux membres (t = 1)",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(e^{x}) = \\ln(1)\\)</span><span class=\"prop\">(ln des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\ln(e) = \\ln(1)\\)</span><span class=\"prop\">(ln(a^A) = A · ln(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\ln(e) = 0\\)</span><span class=\"prop\">(ln(1) = 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "badge": "Logarithme des deux membres (t = 2)",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(e^{x}) = \\ln(2)\\)</span><span class=\"prop\">(ln des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\ln(e) = \\ln(2)\\)</span><span class=\"prop\">(ln(a^A) = A · ln(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\ln(2)\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 5"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{0 \\,;\\, \\ln(2)\\right\\} \\text{, soit } x = 0 \\text{ ou } x \\approx 0{,}693",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "e^{3x} - 5e^{x} + 4e^{-x} = 0",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "logarithmes",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Changement de variable",
+      "blocs": [
+       {
+        "html": "On pose \\(t = e^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{3x} = (e^{x})^{3}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{e^{3x}} = t^{3}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4e^{-x} = \\frac{4}{e^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{4e^{-x}} = \\frac{4}{t}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{3x} - 5e^{x} + 4e^{-x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{3} - 5t + \\frac{4}{t} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{4} - 5t^{2} + 4 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t, t &gt; 0)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Équation bicarrée",
+      "blocs": [
+       {
+        "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{4} - 5t^{2} + 4 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u^{2} - 5u + 4 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((u - 1)(u - 4) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u = 1 \\text{ ou } u = 4\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 4 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -1 \\text{ ou } t = 1\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 4\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -2 \\text{ ou } t = 2\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de t",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -2 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -1 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 2 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Définition du logarithme (t = 1)",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\">(ln(1) = 0)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "badge": "Définition du logarithme (t = 2)",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\ln(2)\\)</span><span class=\"prop\">(définition du logarithme)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 5"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\left\\{0 \\,;\\, \\ln(2)\\right\\} \\text{, soit } x = 0 \\text{ ou } x \\approx 0{,}693",
+        "type": "resultat"
+       }
+      ],
+      "style": "final",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "meme_base",
+    "libelle": "Même base / définition"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Changement de variable",
+      "blocs": [
+       {
+        "html": "On pose \\(t = e^{x}\\). Une exponentielle est strictement positive : \\(t &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{3x} = (e^{x})^{3}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{e^{3x}} = t^{3}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4e^{-x} = \\frac{4}{e^{x}}\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{4e^{-x}} = \\frac{4}{t}\\)</span><span class=\"prop\"></span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{3x} - 5e^{x} + 4e^{-x} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{3} - 5t + \\frac{4}{t} = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t^{4} - 5t^{2} + 4 = 0\\)</span><span class=\"prop\">(on multiplie les deux membres par t, t &gt; 0)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Équation bicarrée",
+      "blocs": [
+       {
+        "html": "Équation bicarrée : on pose \\(u = t^{2}\\). Comme \\(t &gt; 0\\), \\(u &gt; 0\\).",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{4} - 5t^{2} + 4 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u^{2} - 5u + 4 = 0\\)</span><span class=\"prop\">(on pose u = t²)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((u - 1)(u - 4) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(u = 1 \\text{ ou } u = 4\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(u = 4 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -1 \\text{ ou } t = 1\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t^{2} = 4\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = -2 \\text{ ou } t = 2\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c &gt; 0))</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de t",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -2 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = -1 \\le 0\\)</span><span class=\"prop\">(rejetée : une exponentielle est strictement positive)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 1 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       },
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(t = 2 &gt; 0\\)</span><span class=\"prop\">(retenue ✓)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Logarithme des deux membres (t = 1)",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(e^{x}) = \\ln(1)\\)</span><span class=\"prop\">(ln des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\ln(e) = \\ln(1)\\)</span><span class=\"prop\">(ln(a^A) = A · ln(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\ln(e) = 0\\)</span><span class=\"prop\">(ln(1) = 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "badge": "Logarithme des deux membres (t = 2)",
+      "blocs": [
+       {
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(e^{x} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\ln(e^{x}) = \\ln(2)\\)</span><span class=\"prop\">(ln des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\ln(e) = \\ln(2)\\)</span><span class=\"prop\">(ln(a^A) = A · ln(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\ln(2)\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div></div>",
+        "style": "etape",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 5"
      },
      {
       "blocs": [

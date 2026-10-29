@@ -10,7 +10,7 @@ import exp_log as el
 import exp_log_m as elm
 import resoudre_el as rel
 import sortie as so
-from cas_el import BATTERIE_M_BASE_POLYNOMIALE, BATTERIE_M_EXPOSANTS
+from cas_el import BATTERIE_M_BASE_POLYNOMIALE, BATTERIE_M_BICARRE, BATTERIE_M_EXPOSANTS
 from test_exp_log_m import MP, ecart, racines
 
 
@@ -28,6 +28,7 @@ class _Batterie:
     """Les vérifications communes à toutes les batteries ; chaque sous-classe donne BATTERIE (saisie, solutions arrondies à 10⁻³) et DEUX_METHODES."""
     BATTERIE = []
     DEUX_METHODES = True
+    ED_EN_PREMIER = True                      # une équation exponentielle sans logarithme ni dénominateur n'a pas de carte d'ensemble de définition
 
     def test_les_solutions_attendues_dans_chaque_methode(self):
         for entree, attendu in self.BATTERIE:
@@ -64,14 +65,15 @@ class _Batterie:
         for entree, _ in self.BATTERIE:
             with self.subTest(entree=entree):
                 for r in corrige_m(entree).values():
-                    self.assertEqual(r["etapes"][0]["titre"], "Ensemble de définition")
+                    if self.ED_EN_PREMIER:
+                        self.assertEqual(r["etapes"][0]["titre"], "Ensemble de définition")
                     for carte in r["etapes"]:
                         for ligne in carte.get("lignes", []):
                             if isinstance(ligne, el.Chaine):
                                 for p in ligne.props:
                                     self.assertTrue(p is None or p in el.PROPRIETES or p in elm.PROPRIETES_M or isinstance(p, el.Car), (entree, p))
                                 if ligne.note:
-                                    self.assertTrue(ligne.note in el.PROPRIETES or ligne.note.startswith(("dans l'ensemble", "rejetée")), (entree, ligne.note))
+                                    self.assertTrue(ligne.note in el.PROPRIETES or ligne.note.startswith(("dans l'ensemble", "rejetée", "retenue")), (entree, ligne.note))
 
     def test_sortie_valide_vouvoiement_et_3c_inchangee(self):
         for entree, _ in self.BATTERIE:
@@ -114,6 +116,23 @@ class TestBasePolynomiale(_Batterie, unittest.TestCase):
                 with self.assertRaises(el.ErreurSaisie) as e:
                     el.analyser_saisie(faux, "M")
                 self.assertIn(message, str(e.exception))
+
+
+class TestBicarre(_Batterie, unittest.TestCase):
+    BATTERIE = BATTERIE_M_BICARRE
+    ED_EN_PREMIER = False
+
+    def test_la_carte_bicarree_pose_u_et_garde_les_u_positifs(self):
+        v = corrige_m("3^x-3*3^(-x)-4*3^(-3x)=0")[el.METHODE_LOGARITHMES]
+        titres = [c["titre"] for c in v["etapes"]]
+        self.assertEqual(titres[:3], ["Changement de variable", "Équation bicarrée", "Valeurs de t"])
+        notes = [l.note for c in v["etapes"] for l in c.get("lignes", []) if isinstance(l, el.Chaine) and l.note]
+        self.assertTrue(any(n.startswith("rejetée : u = t²") for n in notes), notes)       # u = −1 rejeté
+        self.assertTrue(any(n.startswith("rejetée") and "exponentielle" in n for n in notes), notes)       # t = −2 rejeté
+
+    def test_une_racine_irrationnelle_de_t_reste_pas_encore(self):
+        self.assertEqual(rel.resoudre("3^x+3^(-x)-6*3^(-3x)=0", "M"), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
+        self.assertFalse(rel.resoudre("3^x+3^(-x)-6*3^(-3x)=0", "C")["ok"])
 
 
 if __name__ == "__main__":

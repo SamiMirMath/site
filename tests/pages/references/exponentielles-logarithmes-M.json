@@ -407,6 +407,221 @@
    }
   }
  },
+ "0,5^x-5*0,5^(-x)+4*0,5^(-3x)=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 6",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Changement de variableOn pose ⟦t = 2^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦0{,}5^{x} = \\frac{1}{2^{x}}⟧(propriétés des puissances)⟦\\phantom{0{,}5^{x}} = \\frac{1}{t}⟧⟦5 \\cdot 0{,}5^{-x} = 5 \\cdot 2^{x}⟧(propriétés des puissances)⟦\\phantom{5 \\cdot 0{,}5^{-x}} = 5t⟧⟦4 \\cdot 0{,}5^{-3x} = 4(2^{x})^{3}⟧(propriétés des puissances)⟦\\phantom{4 \\cdot 0{,}5^{-3x}} = 4t^{3}⟧⟦0{,}5^{x} - 5 \\cdot 0{,}5^{-x} + 4 \\cdot 0{,}5^{-3x} = 0⟧⟦\\iff⟧⟦\\frac{1}{t} - 5t + 4t^{3} = 0⟧⟦\\iff⟧⟦4t^{4} - 5t^{2} + 1 = 0⟧(on multiplie les deux membres par t, t > 0)",
+    "titre": "Étape 1Changement de variable"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦4t^{4} - 5t^{2} + 1 = 0⟧⟦\\iff⟧⟦4u^{2} - 5u + 1 = 0⟧(on pose u = t²)⟦Δ = (-5)^{2} - 4 \\cdot 4 \\cdot 1 = 9⟧⟦u = \\frac{1}{4} \\text{ ou } u = 1⟧⟦u = \\frac{1}{4} > 0⟧(retenue ✓)⟦u = 1 > 0⟧(retenue ✓)⟦t^{2} = 0{,}25⟧⟦\\iff⟧⟦t = -0{,}5 \\text{ ou } t = 0{,}5⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))⟦t^{2} = 1⟧⟦\\iff⟧⟦t = -1 \\text{ ou } t = 1⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))",
+    "titre": "Étape 2Équation bicarrée"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Valeurs de t⟦t = -1 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = -0{,}5 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = 0{,}5 > 0⟧(retenue ✓)⟦t = 1 > 0⟧(retenue ✓)",
+    "titre": "Étape 3Valeurs de t"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Logarithme des deux membres (t = 1/2)⟦2^{x} = 0{,}5⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(0{,}5)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(0{,}5)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(0{,}5)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)",
+    "titre": "Étape 4Logarithme des deux membres (t = 1/2)"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 5Logarithme des deux membres (t = 1)⟦2^{x} = 1⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(1)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(1)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) = 0⟧(log(1) = 0)⟦\\iff⟧⟦x = 0⟧(car ⟦\\log(2) \\neq 0⟧)",
+    "titre": "Étape 5Logarithme des deux membres (t = 1)"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(0{,}5)}{\\log(2)} \\,;\\, 0\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = -1⟧ ou ⟦x = 0⟧.",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 6 / 6",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Changement de variableOn pose ⟦t = 2^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦0{,}5^{x} = \\frac{1}{2^{x}}⟧(propriétés des puissances)⟦\\phantom{0{,}5^{x}} = \\frac{1}{t}⟧⟦5 \\cdot 0{,}5^{-x} = 5 \\cdot 2^{x}⟧(propriétés des puissances)⟦\\phantom{5 \\cdot 0{,}5^{-x}} = 5t⟧⟦4 \\cdot 0{,}5^{-3x} = 4(2^{x})^{3}⟧(propriétés des puissances)⟦\\phantom{4 \\cdot 0{,}5^{-3x}} = 4t^{3}⟧⟦0{,}5^{x} - 5 \\cdot 0{,}5^{-x} + 4 \\cdot 0{,}5^{-3x} = 0⟧⟦\\iff⟧⟦\\frac{1}{t} - 5t + 4t^{3} = 0⟧⟦\\iff⟧⟦4t^{4} - 5t^{2} + 1 = 0⟧(on multiplie les deux membres par t, t > 0)",
+      "titre": "Étape 1Changement de variable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦4t^{4} - 5t^{2} + 1 = 0⟧⟦\\iff⟧⟦4u^{2} - 5u + 1 = 0⟧(on pose u = t²)⟦Δ = (-5)^{2} - 4 \\cdot 4 \\cdot 1 = 9⟧⟦u = \\frac{1}{4} \\text{ ou } u = 1⟧⟦u = \\frac{1}{4} > 0⟧(retenue ✓)⟦u = 1 > 0⟧(retenue ✓)⟦t^{2} = 0{,}25⟧⟦\\iff⟧⟦t = -0{,}5 \\text{ ou } t = 0{,}5⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))⟦t^{2} = 1⟧⟦\\iff⟧⟦t = -1 \\text{ ou } t = 1⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))",
+      "titre": "Étape 2Équation bicarrée"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Valeurs de t⟦t = -1 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = -0{,}5 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = 0{,}5 > 0⟧(retenue ✓)⟦t = 1 > 0⟧(retenue ✓)",
+      "titre": "Étape 3Valeurs de t"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 4Logarithme des deux membres (t = 1/2)⟦2^{x} = 0{,}5⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(0{,}5)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(0{,}5)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(0{,}5)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)",
+      "titre": "Étape 4Logarithme des deux membres (t = 1/2)"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 5Logarithme des deux membres (t = 1)⟦2^{x} = 1⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(1)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(1)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) = 0⟧(log(1) = 0)⟦\\iff⟧⟦x = 0⟧(car ⟦\\log(2) \\neq 0⟧)",
+      "titre": "Étape 5Logarithme des deux membres (t = 1)"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{\\log(0{,}5)}{\\log(2)} \\,;\\, 0\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = -1⟧ ou ⟦x = 0⟧.",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 6 / 6"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Changement de variableOn pose ⟦t = 2^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦0{,}5^{x} = \\frac{1}{2^{x}}⟧(propriétés des puissances)⟦\\phantom{0{,}5^{x}} = \\frac{1}{t}⟧⟦5 \\cdot 0{,}5^{-x} = 5 \\cdot 2^{x}⟧(propriétés des puissances)⟦\\phantom{5 \\cdot 0{,}5^{-x}} = 5t⟧⟦4 \\cdot 0{,}5^{-3x} = 4(2^{x})^{3}⟧(propriétés des puissances)⟦\\phantom{4 \\cdot 0{,}5^{-3x}} = 4t^{3}⟧⟦0{,}5^{x} - 5 \\cdot 0{,}5^{-x} + 4 \\cdot 0{,}5^{-3x} = 0⟧⟦\\iff⟧⟦\\frac{1}{t} - 5t + 4t^{3} = 0⟧⟦\\iff⟧⟦4t^{4} - 5t^{2} + 1 = 0⟧(on multiplie les deux membres par t, t > 0)",
+      "titre": "Étape 1Changement de variable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦4t^{4} - 5t^{2} + 1 = 0⟧⟦\\iff⟧⟦4u^{2} - 5u + 1 = 0⟧(on pose u = t²)⟦Δ = (-5)^{2} - 4 \\cdot 4 \\cdot 1 = 9⟧⟦u = \\frac{1}{4} \\text{ ou } u = 1⟧⟦u = \\frac{1}{4} > 0⟧(retenue ✓)⟦u = 1 > 0⟧(retenue ✓)⟦t^{2} = 0{,}25⟧⟦\\iff⟧⟦t = -0{,}5 \\text{ ou } t = 0{,}5⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))⟦t^{2} = 1⟧⟦\\iff⟧⟦t = -1 \\text{ ou } t = 1⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))",
+      "titre": "Étape 2Équation bicarrée"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Valeurs de t⟦t = -1 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = -0{,}5 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = 0{,}5 > 0⟧(retenue ✓)⟦t = 1 > 0⟧(retenue ✓)",
+      "titre": "Étape 3Valeurs de t"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 4Même base (t = 1/2)⟦0{,}5 = 2^{-1}⟧⟦2^{x} = 2^{-1}⟧⟦\\iff⟧⟦x = -1⟧(même base : a^A = a^B ⇔ A = B)",
+      "titre": "Étape 4Même base (t = 1/2)"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 5Même base (t = 1)⟦1 = 2^{0}⟧(1 = a⁰)⟦2^{x} = 2^{0}⟧⟦\\iff⟧⟦x = 0⟧(même base : a^A = a^B ⇔ A = B)",
+      "titre": "Étape 5Même base (t = 1)"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-1 \\,;\\, 0\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 6 / 6"
+   }
+  }
+ },
  "10^(-log(x))=4": {
   "au_depart": {
    "progression": "Étape 1 / 4",
@@ -2392,6 +2607,211 @@
     ],
     "imprimee": "Méthode : Même base / définition",
     "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "2^(3x)-10*2^x+9*2^(-x)=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 6",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Changement de variableOn pose ⟦t = 2^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦2^{3x} = (2^{x})^{3}⟧(propriétés des puissances)⟦\\phantom{2^{3x}} = t^{3}⟧⟦9 \\cdot 2^{-x} = \\frac{9}{2^{x}}⟧(propriétés des puissances)⟦\\phantom{9 \\cdot 2^{-x}} = \\frac{9}{t}⟧⟦2^{3x} - 10 \\cdot 2^{x} + 9 \\cdot 2^{-x} = 0⟧⟦\\iff⟧⟦t^{3} - 10t + \\frac{9}{t} = 0⟧⟦\\iff⟧⟦t^{4} - 10t^{2} + 9 = 0⟧(on multiplie les deux membres par t, t > 0)",
+    "titre": "Étape 1Changement de variable"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦t^{4} - 10t^{2} + 9 = 0⟧⟦\\iff⟧⟦u^{2} - 10u + 9 = 0⟧(on pose u = t²)⟦\\iff⟧⟦(u - 1)(u - 9) = 0⟧⟦\\iff⟧⟦u = 1 \\text{ ou } u = 9⟧(un produit est nul si l'un des facteurs est nul)⟦u = 1 > 0⟧(retenue ✓)⟦u = 9 > 0⟧(retenue ✓)⟦t^{2} = 1⟧⟦\\iff⟧⟦t = -1 \\text{ ou } t = 1⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))⟦t^{2} = 9⟧⟦\\iff⟧⟦t = -3 \\text{ ou } t = 3⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))",
+    "titre": "Étape 2Équation bicarrée"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Valeurs de t⟦t = -3 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = -1 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = 1 > 0⟧(retenue ✓)⟦t = 3 > 0⟧(retenue ✓)",
+    "titre": "Étape 3Valeurs de t"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Logarithme des deux membres (t = 1)⟦2^{x} = 1⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(1)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(1)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) = 0⟧(log(1) = 0)⟦\\iff⟧⟦x = 0⟧(car ⟦\\log(2) \\neq 0⟧)",
+    "titre": "Étape 4Logarithme des deux membres (t = 1)"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 5Logarithme des deux membres (t = 3)⟦2^{x} = 3⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)",
+    "titre": "Étape 5Logarithme des deux membres (t = 3)"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{0 \\,;\\, \\frac{\\log(3)}{\\log(2)}\\right\\} \\text{, soit } x = 0 \\text{ ou } x \\approx 1{,}585⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 6 / 6",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Changement de variableOn pose ⟦t = 2^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦2^{3x} = (2^{x})^{3}⟧(propriétés des puissances)⟦\\phantom{2^{3x}} = t^{3}⟧⟦9 \\cdot 2^{-x} = \\frac{9}{2^{x}}⟧(propriétés des puissances)⟦\\phantom{9 \\cdot 2^{-x}} = \\frac{9}{t}⟧⟦2^{3x} - 10 \\cdot 2^{x} + 9 \\cdot 2^{-x} = 0⟧⟦\\iff⟧⟦t^{3} - 10t + \\frac{9}{t} = 0⟧⟦\\iff⟧⟦t^{4} - 10t^{2} + 9 = 0⟧(on multiplie les deux membres par t, t > 0)",
+      "titre": "Étape 1Changement de variable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦t^{4} - 10t^{2} + 9 = 0⟧⟦\\iff⟧⟦u^{2} - 10u + 9 = 0⟧(on pose u = t²)⟦\\iff⟧⟦(u - 1)(u - 9) = 0⟧⟦\\iff⟧⟦u = 1 \\text{ ou } u = 9⟧(un produit est nul si l'un des facteurs est nul)⟦u = 1 > 0⟧(retenue ✓)⟦u = 9 > 0⟧(retenue ✓)⟦t^{2} = 1⟧⟦\\iff⟧⟦t = -1 \\text{ ou } t = 1⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))⟦t^{2} = 9⟧⟦\\iff⟧⟦t = -3 \\text{ ou } t = 3⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))",
+      "titre": "Étape 2Équation bicarrée"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Valeurs de t⟦t = -3 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = -1 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = 1 > 0⟧(retenue ✓)⟦t = 3 > 0⟧(retenue ✓)",
+      "titre": "Étape 3Valeurs de t"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 4Logarithme des deux membres (t = 1)⟦2^{x} = 1⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(1)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(1)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) = 0⟧(log(1) = 0)⟦\\iff⟧⟦x = 0⟧(car ⟦\\log(2) \\neq 0⟧)",
+      "titre": "Étape 4Logarithme des deux membres (t = 1)"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 5Logarithme des deux membres (t = 3)⟦2^{x} = 3⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)",
+      "titre": "Étape 5Logarithme des deux membres (t = 3)"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{0 \\,;\\, \\frac{\\log(3)}{\\log(2)}\\right\\} \\text{, soit } x = 0 \\text{ ou } x \\approx 1{,}585⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 6 / 6"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Changement de variableOn pose ⟦t = 2^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦2^{3x} = (2^{x})^{3}⟧(propriétés des puissances)⟦\\phantom{2^{3x}} = t^{3}⟧⟦9 \\cdot 2^{-x} = \\frac{9}{2^{x}}⟧(propriétés des puissances)⟦\\phantom{9 \\cdot 2^{-x}} = \\frac{9}{t}⟧⟦2^{3x} - 10 \\cdot 2^{x} + 9 \\cdot 2^{-x} = 0⟧⟦\\iff⟧⟦t^{3} - 10t + \\frac{9}{t} = 0⟧⟦\\iff⟧⟦t^{4} - 10t^{2} + 9 = 0⟧(on multiplie les deux membres par t, t > 0)",
+      "titre": "Étape 1Changement de variable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦t^{4} - 10t^{2} + 9 = 0⟧⟦\\iff⟧⟦u^{2} - 10u + 9 = 0⟧(on pose u = t²)⟦\\iff⟧⟦(u - 1)(u - 9) = 0⟧⟦\\iff⟧⟦u = 1 \\text{ ou } u = 9⟧(un produit est nul si l'un des facteurs est nul)⟦u = 1 > 0⟧(retenue ✓)⟦u = 9 > 0⟧(retenue ✓)⟦t^{2} = 1⟧⟦\\iff⟧⟦t = -1 \\text{ ou } t = 1⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))⟦t^{2} = 9⟧⟦\\iff⟧⟦t = -3 \\text{ ou } t = 3⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))",
+      "titre": "Étape 2Équation bicarrée"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Valeurs de t⟦t = -3 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = -1 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = 1 > 0⟧(retenue ✓)⟦t = 3 > 0⟧(retenue ✓)",
+      "titre": "Étape 3Valeurs de t"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 4Même base (t = 1)⟦1 = 2^{0}⟧(1 = a⁰)⟦2^{x} = 2^{0}⟧⟦\\iff⟧⟦x = 0⟧(même base : a^A = a^B ⇔ A = B)",
+      "titre": "Étape 4Même base (t = 1)"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 5Même base / définition (t = 3)⟦3⟧ n'est pas une puissance de ⟦2⟧ : il faut les logarithmes.",
+      "titre": "Étape 5Même base / définition (t = 3)"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 5 / 5"
    }
   }
  },
@@ -4894,6 +5314,275 @@
    }
   }
  },
+ "3^x+3*3^(-x)+2*3^(-3x)=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Changement de variableOn pose ⟦t = 3^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦3 \\cdot 3^{-x} = \\frac{3}{3^{x}}⟧(propriétés des puissances)⟦\\phantom{3 \\cdot 3^{-x}} = \\frac{3}{t}⟧⟦2 \\cdot 3^{-3x} = \\frac{2}{(3^{x})^{3}}⟧(propriétés des puissances)⟦\\phantom{2 \\cdot 3^{-3x}} = \\frac{2}{t^{3}}⟧⟦3^{x} + 3 \\cdot 3^{-x} + 2 \\cdot 3^{-3x} = 0⟧⟦\\iff⟧⟦t + \\frac{3}{t} + \\frac{2}{t^{3}} = 0⟧⟦\\iff⟧⟦t^{4} + 3t^{2} + 2 = 0⟧(on multiplie les deux membres par t³, t > 0)",
+    "titre": "Étape 1Changement de variable"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦t^{4} + 3t^{2} + 2 = 0⟧⟦\\iff⟧⟦u^{2} + 3u + 2 = 0⟧(on pose u = t²)⟦\\iff⟧⟦(u + 2)(u + 1) = 0⟧⟦\\iff⟧⟦u = -2 \\text{ ou } u = -1⟧(un produit est nul si l'un des facteurs est nul)⟦u = -2 \\le 0⟧(rejetée : u = t² est strictement positif)⟦u = -1 \\le 0⟧(rejetée : u = t² est strictement positif)Aucune valeur de ⟦u⟧ ne convient : l'équation n'a aucune solution.",
+    "titre": "Étape 2Équation bicarrée"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Changement de variableOn pose ⟦t = 3^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦3 \\cdot 3^{-x} = \\frac{3}{3^{x}}⟧(propriétés des puissances)⟦\\phantom{3 \\cdot 3^{-x}} = \\frac{3}{t}⟧⟦2 \\cdot 3^{-3x} = \\frac{2}{(3^{x})^{3}}⟧(propriétés des puissances)⟦\\phantom{2 \\cdot 3^{-3x}} = \\frac{2}{t^{3}}⟧⟦3^{x} + 3 \\cdot 3^{-x} + 2 \\cdot 3^{-3x} = 0⟧⟦\\iff⟧⟦t + \\frac{3}{t} + \\frac{2}{t^{3}} = 0⟧⟦\\iff⟧⟦t^{4} + 3t^{2} + 2 = 0⟧(on multiplie les deux membres par t³, t > 0)",
+      "titre": "Étape 1Changement de variable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦t^{4} + 3t^{2} + 2 = 0⟧⟦\\iff⟧⟦u^{2} + 3u + 2 = 0⟧(on pose u = t²)⟦\\iff⟧⟦(u + 2)(u + 1) = 0⟧⟦\\iff⟧⟦u = -2 \\text{ ou } u = -1⟧(un produit est nul si l'un des facteurs est nul)⟦u = -2 \\le 0⟧(rejetée : u = t² est strictement positif)⟦u = -1 \\le 0⟧(rejetée : u = t² est strictement positif)Aucune valeur de ⟦u⟧ ne convient : l'équation n'a aucune solution.",
+      "titre": "Étape 2Équation bicarrée"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\varnothing⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Changement de variableOn pose ⟦t = 3^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦3 \\cdot 3^{-x} = \\frac{3}{3^{x}}⟧(propriétés des puissances)⟦\\phantom{3 \\cdot 3^{-x}} = \\frac{3}{t}⟧⟦2 \\cdot 3^{-3x} = \\frac{2}{(3^{x})^{3}}⟧(propriétés des puissances)⟦\\phantom{2 \\cdot 3^{-3x}} = \\frac{2}{t^{3}}⟧⟦3^{x} + 3 \\cdot 3^{-x} + 2 \\cdot 3^{-3x} = 0⟧⟦\\iff⟧⟦t + \\frac{3}{t} + \\frac{2}{t^{3}} = 0⟧⟦\\iff⟧⟦t^{4} + 3t^{2} + 2 = 0⟧(on multiplie les deux membres par t³, t > 0)",
+      "titre": "Étape 1Changement de variable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦t^{4} + 3t^{2} + 2 = 0⟧⟦\\iff⟧⟦u^{2} + 3u + 2 = 0⟧(on pose u = t²)⟦\\iff⟧⟦(u + 2)(u + 1) = 0⟧⟦\\iff⟧⟦u = -2 \\text{ ou } u = -1⟧(un produit est nul si l'un des facteurs est nul)⟦u = -2 \\le 0⟧(rejetée : u = t² est strictement positif)⟦u = -1 \\le 0⟧(rejetée : u = t² est strictement positif)Aucune valeur de ⟦u⟧ ne convient : l'équation n'a aucune solution.",
+      "titre": "Étape 2Équation bicarrée"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\varnothing⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "3^x+3^(-x)+3^(-3x)=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Changement de variableOn pose ⟦t = 3^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦3^{-x} = \\frac{1}{3^{x}}⟧(propriétés des puissances)⟦\\phantom{3^{-x}} = \\frac{1}{t}⟧⟦3^{-3x} = \\frac{1}{(3^{x})^{3}}⟧(propriétés des puissances)⟦\\phantom{3^{-3x}} = \\frac{1}{t^{3}}⟧⟦3^{x} + 3^{-x} + 3^{-3x} = 0⟧⟦\\iff⟧⟦t + \\frac{1}{t} + \\frac{1}{t^{3}} = 0⟧⟦\\iff⟧⟦t^{4} + t^{2} + 1 = 0⟧(on multiplie les deux membres par t³, t > 0)",
+    "titre": "Étape 1Changement de variable"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦t^{4} + t^{2} + 1 = 0⟧⟦\\iff⟧⟦u^{2} + u + 1 = 0⟧(on pose u = t²)⟦Δ = 1^{2} - 4 \\cdot 1 \\cdot 1 = -3⟧Δ < 0 : l'équation n'a aucune solution réelle.",
+    "titre": "Étape 2Équation bicarrée"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Changement de variableOn pose ⟦t = 3^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦3^{-x} = \\frac{1}{3^{x}}⟧(propriétés des puissances)⟦\\phantom{3^{-x}} = \\frac{1}{t}⟧⟦3^{-3x} = \\frac{1}{(3^{x})^{3}}⟧(propriétés des puissances)⟦\\phantom{3^{-3x}} = \\frac{1}{t^{3}}⟧⟦3^{x} + 3^{-x} + 3^{-3x} = 0⟧⟦\\iff⟧⟦t + \\frac{1}{t} + \\frac{1}{t^{3}} = 0⟧⟦\\iff⟧⟦t^{4} + t^{2} + 1 = 0⟧(on multiplie les deux membres par t³, t > 0)",
+      "titre": "Étape 1Changement de variable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦t^{4} + t^{2} + 1 = 0⟧⟦\\iff⟧⟦u^{2} + u + 1 = 0⟧(on pose u = t²)⟦Δ = 1^{2} - 4 \\cdot 1 \\cdot 1 = -3⟧Δ < 0 : l'équation n'a aucune solution réelle.",
+      "titre": "Étape 2Équation bicarrée"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\varnothing⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Changement de variableOn pose ⟦t = 3^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦3^{-x} = \\frac{1}{3^{x}}⟧(propriétés des puissances)⟦\\phantom{3^{-x}} = \\frac{1}{t}⟧⟦3^{-3x} = \\frac{1}{(3^{x})^{3}}⟧(propriétés des puissances)⟦\\phantom{3^{-3x}} = \\frac{1}{t^{3}}⟧⟦3^{x} + 3^{-x} + 3^{-3x} = 0⟧⟦\\iff⟧⟦t + \\frac{1}{t} + \\frac{1}{t^{3}} = 0⟧⟦\\iff⟧⟦t^{4} + t^{2} + 1 = 0⟧(on multiplie les deux membres par t³, t > 0)",
+      "titre": "Étape 1Changement de variable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦t^{4} + t^{2} + 1 = 0⟧⟦\\iff⟧⟦u^{2} + u + 1 = 0⟧(on pose u = t²)⟦Δ = 1^{2} - 4 \\cdot 1 \\cdot 1 = -3⟧Δ < 0 : l'équation n'a aucune solution réelle.",
+      "titre": "Étape 2Équation bicarrée"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\varnothing⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "3^x+3^(-x)-6*3^(-3x)=0": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
  "3^x+9^x=90": {
   "au_depart": {
    "progression": "Étape 1 / 4",
@@ -5042,6 +5731,181 @@
       "tableaux": [],
       "texte": "Solution⟦S = \\left\\{2\\right\\}⟧",
       "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "3^x-3*3^(-x)-4*3^(-3x)=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 5",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Changement de variableOn pose ⟦t = 3^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦3 \\cdot 3^{-x} = \\frac{3}{3^{x}}⟧(propriétés des puissances)⟦\\phantom{3 \\cdot 3^{-x}} = \\frac{3}{t}⟧⟦4 \\cdot 3^{-3x} = \\frac{4}{(3^{x})^{3}}⟧(propriétés des puissances)⟦\\phantom{4 \\cdot 3^{-3x}} = \\frac{4}{t^{3}}⟧⟦3^{x} - 3 \\cdot 3^{-x} - 4 \\cdot 3^{-3x} = 0⟧⟦\\iff⟧⟦t - \\frac{3}{t} - \\frac{4}{t^{3}} = 0⟧⟦\\iff⟧⟦t^{4} - 3t^{2} - 4 = 0⟧(on multiplie les deux membres par t³, t > 0)",
+    "titre": "Étape 1Changement de variable"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦t^{4} - 3t^{2} - 4 = 0⟧⟦\\iff⟧⟦u^{2} - 3u - 4 = 0⟧(on pose u = t²)⟦\\iff⟧⟦(u + 1)(u - 4) = 0⟧⟦\\iff⟧⟦u = -1 \\text{ ou } u = 4⟧(un produit est nul si l'un des facteurs est nul)⟦u = -1 \\le 0⟧(rejetée : u = t² est strictement positif)⟦u = 4 > 0⟧(retenue ✓)⟦t^{2} = 4⟧⟦\\iff⟧⟦t = -2 \\text{ ou } t = 2⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))",
+    "titre": "Étape 2Équation bicarrée"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Valeurs de t⟦t = -2 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = 2 > 0⟧(retenue ✓)",
+    "titre": "Étape 3Valeurs de t"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Logarithme des deux membres⟦3^{x} = 2⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(2)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(2)}{\\log(3)}⟧(car ⟦\\log(3) \\neq 0⟧)",
+    "titre": "Étape 4Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{\\log(2)}{\\log(3)}\\right\\} \\text{, soit } x \\approx 0{,}631⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 5 / 5",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Changement de variableOn pose ⟦t = 3^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦3 \\cdot 3^{-x} = \\frac{3}{3^{x}}⟧(propriétés des puissances)⟦\\phantom{3 \\cdot 3^{-x}} = \\frac{3}{t}⟧⟦4 \\cdot 3^{-3x} = \\frac{4}{(3^{x})^{3}}⟧(propriétés des puissances)⟦\\phantom{4 \\cdot 3^{-3x}} = \\frac{4}{t^{3}}⟧⟦3^{x} - 3 \\cdot 3^{-x} - 4 \\cdot 3^{-3x} = 0⟧⟦\\iff⟧⟦t - \\frac{3}{t} - \\frac{4}{t^{3}} = 0⟧⟦\\iff⟧⟦t^{4} - 3t^{2} - 4 = 0⟧(on multiplie les deux membres par t³, t > 0)",
+      "titre": "Étape 1Changement de variable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦t^{4} - 3t^{2} - 4 = 0⟧⟦\\iff⟧⟦u^{2} - 3u - 4 = 0⟧(on pose u = t²)⟦\\iff⟧⟦(u + 1)(u - 4) = 0⟧⟦\\iff⟧⟦u = -1 \\text{ ou } u = 4⟧(un produit est nul si l'un des facteurs est nul)⟦u = -1 \\le 0⟧(rejetée : u = t² est strictement positif)⟦u = 4 > 0⟧(retenue ✓)⟦t^{2} = 4⟧⟦\\iff⟧⟦t = -2 \\text{ ou } t = 2⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))",
+      "titre": "Étape 2Équation bicarrée"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Valeurs de t⟦t = -2 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = 2 > 0⟧(retenue ✓)",
+      "titre": "Étape 3Valeurs de t"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 4Logarithme des deux membres⟦3^{x} = 2⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(2)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(2)}{\\log(3)}⟧(car ⟦\\log(3) \\neq 0⟧)",
+      "titre": "Étape 4Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{\\log(2)}{\\log(3)}\\right\\} \\text{, soit } x \\approx 0{,}631⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 5 / 5"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Changement de variableOn pose ⟦t = 3^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦3 \\cdot 3^{-x} = \\frac{3}{3^{x}}⟧(propriétés des puissances)⟦\\phantom{3 \\cdot 3^{-x}} = \\frac{3}{t}⟧⟦4 \\cdot 3^{-3x} = \\frac{4}{(3^{x})^{3}}⟧(propriétés des puissances)⟦\\phantom{4 \\cdot 3^{-3x}} = \\frac{4}{t^{3}}⟧⟦3^{x} - 3 \\cdot 3^{-x} - 4 \\cdot 3^{-3x} = 0⟧⟦\\iff⟧⟦t - \\frac{3}{t} - \\frac{4}{t^{3}} = 0⟧⟦\\iff⟧⟦t^{4} - 3t^{2} - 4 = 0⟧(on multiplie les deux membres par t³, t > 0)",
+      "titre": "Étape 1Changement de variable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦t^{4} - 3t^{2} - 4 = 0⟧⟦\\iff⟧⟦u^{2} - 3u - 4 = 0⟧(on pose u = t²)⟦\\iff⟧⟦(u + 1)(u - 4) = 0⟧⟦\\iff⟧⟦u = -1 \\text{ ou } u = 4⟧(un produit est nul si l'un des facteurs est nul)⟦u = -1 \\le 0⟧(rejetée : u = t² est strictement positif)⟦u = 4 > 0⟧(retenue ✓)⟦t^{2} = 4⟧⟦\\iff⟧⟦t = -2 \\text{ ou } t = 2⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))",
+      "titre": "Étape 2Équation bicarrée"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Valeurs de t⟦t = -2 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = 2 > 0⟧(retenue ✓)",
+      "titre": "Étape 3Valeurs de t"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 4Même base / définition⟦2⟧ n'est pas une puissance de ⟦3⟧ : il faut les logarithmes.",
+      "titre": "Étape 4Même base / définition"
      }
     ],
     "imprimee": "Méthode : Même base / définition",
@@ -5301,6 +6165,221 @@
    }
   ],
   "progression_finale": "Étape 5 / 5"
+ },
+ "4*2^(-3x)-5*2^(-x)+2^x=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 6",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Changement de variableOn pose ⟦t = 2^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦4 \\cdot 2^{-3x} = \\frac{4}{(2^{x})^{3}}⟧(propriétés des puissances)⟦\\phantom{4 \\cdot 2^{-3x}} = \\frac{4}{t^{3}}⟧⟦5 \\cdot 2^{-x} = \\frac{5}{2^{x}}⟧(propriétés des puissances)⟦\\phantom{5 \\cdot 2^{-x}} = \\frac{5}{t}⟧⟦4 \\cdot 2^{-3x} - 5 \\cdot 2^{-x} + 2^{x} = 0⟧⟦\\iff⟧⟦\\frac{4}{t^{3}} - \\frac{5}{t} + t = 0⟧⟦\\iff⟧⟦t^{4} - 5t^{2} + 4 = 0⟧(on multiplie les deux membres par t³, t > 0)",
+    "titre": "Étape 1Changement de variable"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦t^{4} - 5t^{2} + 4 = 0⟧⟦\\iff⟧⟦u^{2} - 5u + 4 = 0⟧(on pose u = t²)⟦\\iff⟧⟦(u - 1)(u - 4) = 0⟧⟦\\iff⟧⟦u = 1 \\text{ ou } u = 4⟧(un produit est nul si l'un des facteurs est nul)⟦u = 1 > 0⟧(retenue ✓)⟦u = 4 > 0⟧(retenue ✓)⟦t^{2} = 1⟧⟦\\iff⟧⟦t = -1 \\text{ ou } t = 1⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))⟦t^{2} = 4⟧⟦\\iff⟧⟦t = -2 \\text{ ou } t = 2⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))",
+    "titre": "Étape 2Équation bicarrée"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Valeurs de t⟦t = -2 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = -1 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = 1 > 0⟧(retenue ✓)⟦t = 2 > 0⟧(retenue ✓)",
+    "titre": "Étape 3Valeurs de t"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Logarithme des deux membres (t = 1)⟦2^{x} = 1⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(1)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(1)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) = 0⟧(log(1) = 0)⟦\\iff⟧⟦x = 0⟧(car ⟦\\log(2) \\neq 0⟧)",
+    "titre": "Étape 4Logarithme des deux membres (t = 1)"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 5Logarithme des deux membres (t = 2)⟦2^{x} = 2⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(2)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(2)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)",
+    "titre": "Étape 5Logarithme des deux membres (t = 2)"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{0 \\,;\\, \\frac{\\log(2)}{\\log(2)}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = 0⟧ ou ⟦x = 1⟧.",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 6 / 6",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Changement de variableOn pose ⟦t = 2^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦4 \\cdot 2^{-3x} = \\frac{4}{(2^{x})^{3}}⟧(propriétés des puissances)⟦\\phantom{4 \\cdot 2^{-3x}} = \\frac{4}{t^{3}}⟧⟦5 \\cdot 2^{-x} = \\frac{5}{2^{x}}⟧(propriétés des puissances)⟦\\phantom{5 \\cdot 2^{-x}} = \\frac{5}{t}⟧⟦4 \\cdot 2^{-3x} - 5 \\cdot 2^{-x} + 2^{x} = 0⟧⟦\\iff⟧⟦\\frac{4}{t^{3}} - \\frac{5}{t} + t = 0⟧⟦\\iff⟧⟦t^{4} - 5t^{2} + 4 = 0⟧(on multiplie les deux membres par t³, t > 0)",
+      "titre": "Étape 1Changement de variable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦t^{4} - 5t^{2} + 4 = 0⟧⟦\\iff⟧⟦u^{2} - 5u + 4 = 0⟧(on pose u = t²)⟦\\iff⟧⟦(u - 1)(u - 4) = 0⟧⟦\\iff⟧⟦u = 1 \\text{ ou } u = 4⟧(un produit est nul si l'un des facteurs est nul)⟦u = 1 > 0⟧(retenue ✓)⟦u = 4 > 0⟧(retenue ✓)⟦t^{2} = 1⟧⟦\\iff⟧⟦t = -1 \\text{ ou } t = 1⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))⟦t^{2} = 4⟧⟦\\iff⟧⟦t = -2 \\text{ ou } t = 2⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))",
+      "titre": "Étape 2Équation bicarrée"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Valeurs de t⟦t = -2 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = -1 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = 1 > 0⟧(retenue ✓)⟦t = 2 > 0⟧(retenue ✓)",
+      "titre": "Étape 3Valeurs de t"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 4Logarithme des deux membres (t = 1)⟦2^{x} = 1⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(1)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(1)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) = 0⟧(log(1) = 0)⟦\\iff⟧⟦x = 0⟧(car ⟦\\log(2) \\neq 0⟧)",
+      "titre": "Étape 4Logarithme des deux membres (t = 1)"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 5Logarithme des deux membres (t = 2)⟦2^{x} = 2⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(2)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(2)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)",
+      "titre": "Étape 5Logarithme des deux membres (t = 2)"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{0 \\,;\\, \\frac{\\log(2)}{\\log(2)}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = 0⟧ ou ⟦x = 1⟧.",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 6 / 6"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Changement de variableOn pose ⟦t = 2^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦4 \\cdot 2^{-3x} = \\frac{4}{(2^{x})^{3}}⟧(propriétés des puissances)⟦\\phantom{4 \\cdot 2^{-3x}} = \\frac{4}{t^{3}}⟧⟦5 \\cdot 2^{-x} = \\frac{5}{2^{x}}⟧(propriétés des puissances)⟦\\phantom{5 \\cdot 2^{-x}} = \\frac{5}{t}⟧⟦4 \\cdot 2^{-3x} - 5 \\cdot 2^{-x} + 2^{x} = 0⟧⟦\\iff⟧⟦\\frac{4}{t^{3}} - \\frac{5}{t} + t = 0⟧⟦\\iff⟧⟦t^{4} - 5t^{2} + 4 = 0⟧(on multiplie les deux membres par t³, t > 0)",
+      "titre": "Étape 1Changement de variable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦t^{4} - 5t^{2} + 4 = 0⟧⟦\\iff⟧⟦u^{2} - 5u + 4 = 0⟧(on pose u = t²)⟦\\iff⟧⟦(u - 1)(u - 4) = 0⟧⟦\\iff⟧⟦u = 1 \\text{ ou } u = 4⟧(un produit est nul si l'un des facteurs est nul)⟦u = 1 > 0⟧(retenue ✓)⟦u = 4 > 0⟧(retenue ✓)⟦t^{2} = 1⟧⟦\\iff⟧⟦t = -1 \\text{ ou } t = 1⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))⟦t^{2} = 4⟧⟦\\iff⟧⟦t = -2 \\text{ ou } t = 2⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))",
+      "titre": "Étape 2Équation bicarrée"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Valeurs de t⟦t = -2 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = -1 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = 1 > 0⟧(retenue ✓)⟦t = 2 > 0⟧(retenue ✓)",
+      "titre": "Étape 3Valeurs de t"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 4Même base (t = 1)⟦1 = 2^{0}⟧(1 = a⁰)⟦2^{x} = 2^{0}⟧⟦\\iff⟧⟦x = 0⟧(même base : a^A = a^B ⇔ A = B)",
+      "titre": "Étape 4Même base (t = 1)"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 5Même base (t = 2)⟦2 = 2^{1}⟧⟦2^{x} = 2^{1}⟧⟦\\iff⟧⟦x = 1⟧(même base : a^A = a^B ⇔ A = B)",
+      "titre": "Étape 5Même base (t = 2)"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{0 \\,;\\, 1\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 6 / 6"
+   }
+  }
  },
  "4^(x+2)-8^x=0": {
   "au_depart": {
@@ -6171,6 +7250,221 @@
    }
   }
  },
+ "5^(3x)-26*5^x+25*5^(-x)=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 6",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Changement de variableOn pose ⟦t = 5^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦5^{3x} = (5^{x})^{3}⟧(propriétés des puissances)⟦\\phantom{5^{3x}} = t^{3}⟧⟦25 \\cdot 5^{-x} = \\frac{25}{5^{x}}⟧(propriétés des puissances)⟦\\phantom{25 \\cdot 5^{-x}} = \\frac{25}{t}⟧⟦5^{3x} - 26 \\cdot 5^{x} + 25 \\cdot 5^{-x} = 0⟧⟦\\iff⟧⟦t^{3} - 26t + \\frac{25}{t} = 0⟧⟦\\iff⟧⟦t^{4} - 26t^{2} + 25 = 0⟧(on multiplie les deux membres par t, t > 0)",
+    "titre": "Étape 1Changement de variable"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦t^{4} - 26t^{2} + 25 = 0⟧⟦\\iff⟧⟦u^{2} - 26u + 25 = 0⟧(on pose u = t²)⟦\\iff⟧⟦(u - 1)(u - 25) = 0⟧⟦\\iff⟧⟦u = 1 \\text{ ou } u = 25⟧(un produit est nul si l'un des facteurs est nul)⟦u = 1 > 0⟧(retenue ✓)⟦u = 25 > 0⟧(retenue ✓)⟦t^{2} = 1⟧⟦\\iff⟧⟦t = -1 \\text{ ou } t = 1⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))⟦t^{2} = 25⟧⟦\\iff⟧⟦t = -5 \\text{ ou } t = 5⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))",
+    "titre": "Étape 2Équation bicarrée"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Valeurs de t⟦t = -5 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = -1 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = 1 > 0⟧(retenue ✓)⟦t = 5 > 0⟧(retenue ✓)",
+    "titre": "Étape 3Valeurs de t"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Logarithme des deux membres (t = 1)⟦5^{x} = 1⟧⟦\\iff⟧⟦\\log(5^{x}) = \\log(1)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(5) = \\log(1)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(5) = 0⟧(log(1) = 0)⟦\\iff⟧⟦x = 0⟧(car ⟦\\log(5) \\neq 0⟧)",
+    "titre": "Étape 4Logarithme des deux membres (t = 1)"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 5Logarithme des deux membres (t = 5)⟦5^{x} = 5⟧⟦\\iff⟧⟦\\log(5^{x}) = \\log(5)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(5) = \\log(5)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(5)}{\\log(5)}⟧(car ⟦\\log(5) \\neq 0⟧)",
+    "titre": "Étape 5Logarithme des deux membres (t = 5)"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{0 \\,;\\, \\frac{\\log(5)}{\\log(5)}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = 0⟧ ou ⟦x = 1⟧.",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 6 / 6",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Changement de variableOn pose ⟦t = 5^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦5^{3x} = (5^{x})^{3}⟧(propriétés des puissances)⟦\\phantom{5^{3x}} = t^{3}⟧⟦25 \\cdot 5^{-x} = \\frac{25}{5^{x}}⟧(propriétés des puissances)⟦\\phantom{25 \\cdot 5^{-x}} = \\frac{25}{t}⟧⟦5^{3x} - 26 \\cdot 5^{x} + 25 \\cdot 5^{-x} = 0⟧⟦\\iff⟧⟦t^{3} - 26t + \\frac{25}{t} = 0⟧⟦\\iff⟧⟦t^{4} - 26t^{2} + 25 = 0⟧(on multiplie les deux membres par t, t > 0)",
+      "titre": "Étape 1Changement de variable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦t^{4} - 26t^{2} + 25 = 0⟧⟦\\iff⟧⟦u^{2} - 26u + 25 = 0⟧(on pose u = t²)⟦\\iff⟧⟦(u - 1)(u - 25) = 0⟧⟦\\iff⟧⟦u = 1 \\text{ ou } u = 25⟧(un produit est nul si l'un des facteurs est nul)⟦u = 1 > 0⟧(retenue ✓)⟦u = 25 > 0⟧(retenue ✓)⟦t^{2} = 1⟧⟦\\iff⟧⟦t = -1 \\text{ ou } t = 1⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))⟦t^{2} = 25⟧⟦\\iff⟧⟦t = -5 \\text{ ou } t = 5⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))",
+      "titre": "Étape 2Équation bicarrée"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Valeurs de t⟦t = -5 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = -1 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = 1 > 0⟧(retenue ✓)⟦t = 5 > 0⟧(retenue ✓)",
+      "titre": "Étape 3Valeurs de t"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 4Logarithme des deux membres (t = 1)⟦5^{x} = 1⟧⟦\\iff⟧⟦\\log(5^{x}) = \\log(1)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(5) = \\log(1)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(5) = 0⟧(log(1) = 0)⟦\\iff⟧⟦x = 0⟧(car ⟦\\log(5) \\neq 0⟧)",
+      "titre": "Étape 4Logarithme des deux membres (t = 1)"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 5Logarithme des deux membres (t = 5)⟦5^{x} = 5⟧⟦\\iff⟧⟦\\log(5^{x}) = \\log(5)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(5) = \\log(5)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(5)}{\\log(5)}⟧(car ⟦\\log(5) \\neq 0⟧)",
+      "titre": "Étape 5Logarithme des deux membres (t = 5)"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{0 \\,;\\, \\frac{\\log(5)}{\\log(5)}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = 0⟧ ou ⟦x = 1⟧.",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 6 / 6"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Changement de variableOn pose ⟦t = 5^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦5^{3x} = (5^{x})^{3}⟧(propriétés des puissances)⟦\\phantom{5^{3x}} = t^{3}⟧⟦25 \\cdot 5^{-x} = \\frac{25}{5^{x}}⟧(propriétés des puissances)⟦\\phantom{25 \\cdot 5^{-x}} = \\frac{25}{t}⟧⟦5^{3x} - 26 \\cdot 5^{x} + 25 \\cdot 5^{-x} = 0⟧⟦\\iff⟧⟦t^{3} - 26t + \\frac{25}{t} = 0⟧⟦\\iff⟧⟦t^{4} - 26t^{2} + 25 = 0⟧(on multiplie les deux membres par t, t > 0)",
+      "titre": "Étape 1Changement de variable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦t^{4} - 26t^{2} + 25 = 0⟧⟦\\iff⟧⟦u^{2} - 26u + 25 = 0⟧(on pose u = t²)⟦\\iff⟧⟦(u - 1)(u - 25) = 0⟧⟦\\iff⟧⟦u = 1 \\text{ ou } u = 25⟧(un produit est nul si l'un des facteurs est nul)⟦u = 1 > 0⟧(retenue ✓)⟦u = 25 > 0⟧(retenue ✓)⟦t^{2} = 1⟧⟦\\iff⟧⟦t = -1 \\text{ ou } t = 1⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))⟦t^{2} = 25⟧⟦\\iff⟧⟦t = -5 \\text{ ou } t = 5⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))",
+      "titre": "Étape 2Équation bicarrée"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Valeurs de t⟦t = -5 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = -1 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = 1 > 0⟧(retenue ✓)⟦t = 5 > 0⟧(retenue ✓)",
+      "titre": "Étape 3Valeurs de t"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 4Même base (t = 1)⟦1 = 5^{0}⟧(1 = a⁰)⟦5^{x} = 5^{0}⟧⟦\\iff⟧⟦x = 0⟧(même base : a^A = a^B ⇔ A = B)",
+      "titre": "Étape 4Même base (t = 1)"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 5Même base (t = 5)⟦5 = 5^{1}⟧⟦5^{x} = 5^{1}⟧⟦\\iff⟧⟦x = 1⟧(même base : a^A = a^B ⇔ A = B)",
+      "titre": "Étape 5Même base (t = 5)"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{0 \\,;\\, 1\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 6 / 6"
+   }
+  }
+ },
  "5^(x/(x-1))=25": {
   "au_depart": {
    "progression": "Étape 1 / 4",
@@ -7027,6 +8321,221 @@
     ],
     "imprimee": "Méthode : Même base / définition",
     "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "9*3^(-3x)-10*3^(-x)+3^x=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 6",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Changement de variableOn pose ⟦t = 3^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦9 \\cdot 3^{-3x} = \\frac{9}{(3^{x})^{3}}⟧(propriétés des puissances)⟦\\phantom{9 \\cdot 3^{-3x}} = \\frac{9}{t^{3}}⟧⟦10 \\cdot 3^{-x} = \\frac{10}{3^{x}}⟧(propriétés des puissances)⟦\\phantom{10 \\cdot 3^{-x}} = \\frac{10}{t}⟧⟦9 \\cdot 3^{-3x} - 10 \\cdot 3^{-x} + 3^{x} = 0⟧⟦\\iff⟧⟦\\frac{9}{t^{3}} - \\frac{10}{t} + t = 0⟧⟦\\iff⟧⟦t^{4} - 10t^{2} + 9 = 0⟧(on multiplie les deux membres par t³, t > 0)",
+    "titre": "Étape 1Changement de variable"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦t^{4} - 10t^{2} + 9 = 0⟧⟦\\iff⟧⟦u^{2} - 10u + 9 = 0⟧(on pose u = t²)⟦\\iff⟧⟦(u - 1)(u - 9) = 0⟧⟦\\iff⟧⟦u = 1 \\text{ ou } u = 9⟧(un produit est nul si l'un des facteurs est nul)⟦u = 1 > 0⟧(retenue ✓)⟦u = 9 > 0⟧(retenue ✓)⟦t^{2} = 1⟧⟦\\iff⟧⟦t = -1 \\text{ ou } t = 1⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))⟦t^{2} = 9⟧⟦\\iff⟧⟦t = -3 \\text{ ou } t = 3⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))",
+    "titre": "Étape 2Équation bicarrée"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Valeurs de t⟦t = -3 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = -1 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = 1 > 0⟧(retenue ✓)⟦t = 3 > 0⟧(retenue ✓)",
+    "titre": "Étape 3Valeurs de t"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Logarithme des deux membres (t = 1)⟦3^{x} = 1⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(1)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(1)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(3) = 0⟧(log(1) = 0)⟦\\iff⟧⟦x = 0⟧(car ⟦\\log(3) \\neq 0⟧)",
+    "titre": "Étape 4Logarithme des deux membres (t = 1)"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 5Logarithme des deux membres (t = 3)⟦3^{x} = 3⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log(3)}⟧(car ⟦\\log(3) \\neq 0⟧)",
+    "titre": "Étape 5Logarithme des deux membres (t = 3)"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{0 \\,;\\, \\frac{\\log(3)}{\\log(3)}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = 0⟧ ou ⟦x = 1⟧.",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 6 / 6",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Changement de variableOn pose ⟦t = 3^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦9 \\cdot 3^{-3x} = \\frac{9}{(3^{x})^{3}}⟧(propriétés des puissances)⟦\\phantom{9 \\cdot 3^{-3x}} = \\frac{9}{t^{3}}⟧⟦10 \\cdot 3^{-x} = \\frac{10}{3^{x}}⟧(propriétés des puissances)⟦\\phantom{10 \\cdot 3^{-x}} = \\frac{10}{t}⟧⟦9 \\cdot 3^{-3x} - 10 \\cdot 3^{-x} + 3^{x} = 0⟧⟦\\iff⟧⟦\\frac{9}{t^{3}} - \\frac{10}{t} + t = 0⟧⟦\\iff⟧⟦t^{4} - 10t^{2} + 9 = 0⟧(on multiplie les deux membres par t³, t > 0)",
+      "titre": "Étape 1Changement de variable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦t^{4} - 10t^{2} + 9 = 0⟧⟦\\iff⟧⟦u^{2} - 10u + 9 = 0⟧(on pose u = t²)⟦\\iff⟧⟦(u - 1)(u - 9) = 0⟧⟦\\iff⟧⟦u = 1 \\text{ ou } u = 9⟧(un produit est nul si l'un des facteurs est nul)⟦u = 1 > 0⟧(retenue ✓)⟦u = 9 > 0⟧(retenue ✓)⟦t^{2} = 1⟧⟦\\iff⟧⟦t = -1 \\text{ ou } t = 1⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))⟦t^{2} = 9⟧⟦\\iff⟧⟦t = -3 \\text{ ou } t = 3⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))",
+      "titre": "Étape 2Équation bicarrée"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Valeurs de t⟦t = -3 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = -1 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = 1 > 0⟧(retenue ✓)⟦t = 3 > 0⟧(retenue ✓)",
+      "titre": "Étape 3Valeurs de t"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 4Logarithme des deux membres (t = 1)⟦3^{x} = 1⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(1)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(1)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(3) = 0⟧(log(1) = 0)⟦\\iff⟧⟦x = 0⟧(car ⟦\\log(3) \\neq 0⟧)",
+      "titre": "Étape 4Logarithme des deux membres (t = 1)"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 5Logarithme des deux membres (t = 3)⟦3^{x} = 3⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log(3)}⟧(car ⟦\\log(3) \\neq 0⟧)",
+      "titre": "Étape 5Logarithme des deux membres (t = 3)"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{0 \\,;\\, \\frac{\\log(3)}{\\log(3)}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = 0⟧ ou ⟦x = 1⟧.",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 6 / 6"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Changement de variableOn pose ⟦t = 3^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦9 \\cdot 3^{-3x} = \\frac{9}{(3^{x})^{3}}⟧(propriétés des puissances)⟦\\phantom{9 \\cdot 3^{-3x}} = \\frac{9}{t^{3}}⟧⟦10 \\cdot 3^{-x} = \\frac{10}{3^{x}}⟧(propriétés des puissances)⟦\\phantom{10 \\cdot 3^{-x}} = \\frac{10}{t}⟧⟦9 \\cdot 3^{-3x} - 10 \\cdot 3^{-x} + 3^{x} = 0⟧⟦\\iff⟧⟦\\frac{9}{t^{3}} - \\frac{10}{t} + t = 0⟧⟦\\iff⟧⟦t^{4} - 10t^{2} + 9 = 0⟧(on multiplie les deux membres par t³, t > 0)",
+      "titre": "Étape 1Changement de variable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦t^{4} - 10t^{2} + 9 = 0⟧⟦\\iff⟧⟦u^{2} - 10u + 9 = 0⟧(on pose u = t²)⟦\\iff⟧⟦(u - 1)(u - 9) = 0⟧⟦\\iff⟧⟦u = 1 \\text{ ou } u = 9⟧(un produit est nul si l'un des facteurs est nul)⟦u = 1 > 0⟧(retenue ✓)⟦u = 9 > 0⟧(retenue ✓)⟦t^{2} = 1⟧⟦\\iff⟧⟦t = -1 \\text{ ou } t = 1⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))⟦t^{2} = 9⟧⟦\\iff⟧⟦t = -3 \\text{ ou } t = 3⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))",
+      "titre": "Étape 2Équation bicarrée"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Valeurs de t⟦t = -3 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = -1 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = 1 > 0⟧(retenue ✓)⟦t = 3 > 0⟧(retenue ✓)",
+      "titre": "Étape 3Valeurs de t"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 4Même base (t = 1)⟦1 = 3^{0}⟧(1 = a⁰)⟦3^{x} = 3^{0}⟧⟦\\iff⟧⟦x = 0⟧(même base : a^A = a^B ⇔ A = B)",
+      "titre": "Étape 4Même base (t = 1)"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 5Même base (t = 3)⟦3 = 3^{1}⟧⟦3^{x} = 3^{1}⟧⟦\\iff⟧⟦x = 1⟧(même base : a^A = a^B ⇔ A = B)",
+      "titre": "Étape 5Même base (t = 3)"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{0 \\,;\\, 1\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 6 / 6"
    }
   }
  },
@@ -8607,6 +10116,221 @@
     ],
     "imprimee": "Méthode : Même base / définition",
     "progression_finale": "Étape 5 / 5"
+   }
+  }
+ },
+ "e^(3x)-5*e^x+4*e^(-x)=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 6",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Changement de variableOn pose ⟦t = e^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦e^{3x} = (e^{x})^{3}⟧(propriétés des puissances)⟦\\phantom{e^{3x}} = t^{3}⟧⟦4e^{-x} = \\frac{4}{e^{x}}⟧(propriétés des puissances)⟦\\phantom{4e^{-x}} = \\frac{4}{t}⟧⟦e^{3x} - 5e^{x} + 4e^{-x} = 0⟧⟦\\iff⟧⟦t^{3} - 5t + \\frac{4}{t} = 0⟧⟦\\iff⟧⟦t^{4} - 5t^{2} + 4 = 0⟧(on multiplie les deux membres par t, t > 0)",
+    "titre": "Étape 1Changement de variable"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦t^{4} - 5t^{2} + 4 = 0⟧⟦\\iff⟧⟦u^{2} - 5u + 4 = 0⟧(on pose u = t²)⟦\\iff⟧⟦(u - 1)(u - 4) = 0⟧⟦\\iff⟧⟦u = 1 \\text{ ou } u = 4⟧(un produit est nul si l'un des facteurs est nul)⟦u = 1 > 0⟧(retenue ✓)⟦u = 4 > 0⟧(retenue ✓)⟦t^{2} = 1⟧⟦\\iff⟧⟦t = -1 \\text{ ou } t = 1⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))⟦t^{2} = 4⟧⟦\\iff⟧⟦t = -2 \\text{ ou } t = 2⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))",
+    "titre": "Étape 2Équation bicarrée"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Valeurs de t⟦t = -2 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = -1 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = 1 > 0⟧(retenue ✓)⟦t = 2 > 0⟧(retenue ✓)",
+    "titre": "Étape 3Valeurs de t"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Logarithme des deux membres (t = 1)⟦e^{x} = 1⟧⟦\\iff⟧⟦\\ln(e^{x}) = \\ln(1)⟧(ln des deux membres)⟦\\iff⟧⟦x \\cdot \\ln(e) = \\ln(1)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦x \\cdot \\ln(e) = 0⟧(ln(1) = 0)⟦\\iff⟧⟦x = 0⟧(car ln(e) = 1)",
+    "titre": "Étape 4Logarithme des deux membres (t = 1)"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 5Logarithme des deux membres (t = 2)⟦e^{x} = 2⟧⟦\\iff⟧⟦\\ln(e^{x}) = \\ln(2)⟧(ln des deux membres)⟦\\iff⟧⟦x \\cdot \\ln(e) = \\ln(2)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦x = \\ln(2)⟧(car ln(e) = 1)",
+    "titre": "Étape 5Logarithme des deux membres (t = 2)"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{0 \\,;\\, \\ln(2)\\right\\} \\text{, soit } x = 0 \\text{ ou } x \\approx 0{,}693⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 6 / 6",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Changement de variableOn pose ⟦t = e^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦e^{3x} = (e^{x})^{3}⟧(propriétés des puissances)⟦\\phantom{e^{3x}} = t^{3}⟧⟦4e^{-x} = \\frac{4}{e^{x}}⟧(propriétés des puissances)⟦\\phantom{4e^{-x}} = \\frac{4}{t}⟧⟦e^{3x} - 5e^{x} + 4e^{-x} = 0⟧⟦\\iff⟧⟦t^{3} - 5t + \\frac{4}{t} = 0⟧⟦\\iff⟧⟦t^{4} - 5t^{2} + 4 = 0⟧(on multiplie les deux membres par t, t > 0)",
+      "titre": "Étape 1Changement de variable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦t^{4} - 5t^{2} + 4 = 0⟧⟦\\iff⟧⟦u^{2} - 5u + 4 = 0⟧(on pose u = t²)⟦\\iff⟧⟦(u - 1)(u - 4) = 0⟧⟦\\iff⟧⟦u = 1 \\text{ ou } u = 4⟧(un produit est nul si l'un des facteurs est nul)⟦u = 1 > 0⟧(retenue ✓)⟦u = 4 > 0⟧(retenue ✓)⟦t^{2} = 1⟧⟦\\iff⟧⟦t = -1 \\text{ ou } t = 1⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))⟦t^{2} = 4⟧⟦\\iff⟧⟦t = -2 \\text{ ou } t = 2⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))",
+      "titre": "Étape 2Équation bicarrée"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Valeurs de t⟦t = -2 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = -1 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = 1 > 0⟧(retenue ✓)⟦t = 2 > 0⟧(retenue ✓)",
+      "titre": "Étape 3Valeurs de t"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 4Logarithme des deux membres (t = 1)⟦e^{x} = 1⟧⟦\\iff⟧⟦\\ln(e^{x}) = \\ln(1)⟧(ln des deux membres)⟦\\iff⟧⟦x \\cdot \\ln(e) = \\ln(1)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦x \\cdot \\ln(e) = 0⟧(ln(1) = 0)⟦\\iff⟧⟦x = 0⟧(car ln(e) = 1)",
+      "titre": "Étape 4Logarithme des deux membres (t = 1)"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 5Logarithme des deux membres (t = 2)⟦e^{x} = 2⟧⟦\\iff⟧⟦\\ln(e^{x}) = \\ln(2)⟧(ln des deux membres)⟦\\iff⟧⟦x \\cdot \\ln(e) = \\ln(2)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦x = \\ln(2)⟧(car ln(e) = 1)",
+      "titre": "Étape 5Logarithme des deux membres (t = 2)"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{0 \\,;\\, \\ln(2)\\right\\} \\text{, soit } x = 0 \\text{ ou } x \\approx 0{,}693⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 6 / 6"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Changement de variableOn pose ⟦t = e^{x}⟧. Une exponentielle est strictement positive : ⟦t > 0⟧.⟦e^{3x} = (e^{x})^{3}⟧(propriétés des puissances)⟦\\phantom{e^{3x}} = t^{3}⟧⟦4e^{-x} = \\frac{4}{e^{x}}⟧(propriétés des puissances)⟦\\phantom{4e^{-x}} = \\frac{4}{t}⟧⟦e^{3x} - 5e^{x} + 4e^{-x} = 0⟧⟦\\iff⟧⟦t^{3} - 5t + \\frac{4}{t} = 0⟧⟦\\iff⟧⟦t^{4} - 5t^{2} + 4 = 0⟧(on multiplie les deux membres par t, t > 0)",
+      "titre": "Étape 1Changement de variable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Équation bicarréeÉquation bicarrée : on pose ⟦u = t^{2}⟧. Comme ⟦t > 0⟧, ⟦u > 0⟧.⟦t^{4} - 5t^{2} + 4 = 0⟧⟦\\iff⟧⟦u^{2} - 5u + 4 = 0⟧(on pose u = t²)⟦\\iff⟧⟦(u - 1)(u - 4) = 0⟧⟦\\iff⟧⟦u = 1 \\text{ ou } u = 4⟧(un produit est nul si l'un des facteurs est nul)⟦u = 1 > 0⟧(retenue ✓)⟦u = 4 > 0⟧(retenue ✓)⟦t^{2} = 1⟧⟦\\iff⟧⟦t = -1 \\text{ ou } t = 1⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))⟦t^{2} = 4⟧⟦\\iff⟧⟦t = -2 \\text{ ou } t = 2⟧(xⁿ = c ⇔ x = ±c^(1/n) (n pair, c > 0))",
+      "titre": "Étape 2Équation bicarrée"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Valeurs de t⟦t = -2 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = -1 \\le 0⟧(rejetée : une exponentielle est strictement positive)⟦t = 1 > 0⟧(retenue ✓)⟦t = 2 > 0⟧(retenue ✓)",
+      "titre": "Étape 3Valeurs de t"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 4Définition du logarithme (t = 1)⟦e^{x} = 1⟧⟦\\iff⟧⟦x = 0⟧(ln(1) = 0)",
+      "titre": "Étape 4Définition du logarithme (t = 1)"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 5Définition du logarithme (t = 2)⟦e^{x} = 2⟧⟦\\iff⟧⟦x = \\ln(2)⟧(définition du logarithme)",
+      "titre": "Étape 5Définition du logarithme (t = 2)"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{0 \\,;\\, \\ln(2)\\right\\} \\text{, soit } x = 0 \\text{ ou } x \\approx 0{,}693⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 6 / 6"
    }
   }
  },

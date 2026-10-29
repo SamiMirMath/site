@@ -217,7 +217,7 @@ BATTERIE_M_VAR = [
     ("8^x-2*4^x-8*2^x=0", [2.0]), ("4^x+3*2^x=-4", []),
 ]
 # au programme M, reconnues, mais avec des racines irrationnelles : pas encore ; en 3C : hors programme
-M_VAR_PAS_ENCORE = ["e^x+e^(-x)=3", "4^x-2^x-1=0", "2^x+2^(-x)=3"]
+M_VAR_PAS_ENCORE = ["e^x+e^(-x)=3", "4^x-2^x-1=0", "2^x+2^(-x)=3", "3^x+3^(-x)-6*3^(-3x)=0"]
 
 # T36 (29.10.2026), partie B : exposants 1/x, √x, ±ln x (Javet 2.2 i, 3.15 d e f ; Amaudruz 7.8 d). (saisie, solutions arrondies à 10⁻³) ; les deux méthodes
 # donnent le même S, sauf la méthode « même base / définition » quand le second membre n'est pas une puissance de la base (message)
@@ -238,6 +238,13 @@ BATTERIE_M_BASE_POLYNOMIALE = [
     ("2=log_(x+1)(9)", [2.0]), ("log_(x+3)(1)=2", []), ("log_(2x)(5)=2", [1.118]), ("log_(x+4)(1/16)=-2", [0.0]), ("log_(3-x)(125)=3", [-2.0]),
 ]
 
+# T36, partie D : bicarré en t = aˣ (exposants de t : −3, −1, 1 ou 1, 3, 5 …), Javet ex. 4 et 2.4 b : t⁴ − 10t² + 9 = 0 ; u = t² > 0
+BATTERIE_M_BICARRE = [
+    ("9*3^(-3x)-10*3^(-x)+3^x=0", [0.0, 1.0]), ("4*2^(-3x)-5*2^(-x)+2^x=0", [0.0, 1.0]), ("5^(3x)-26*5^x+25*5^(-x)=0", [0.0, 1.0]),
+    ("e^(3x)-5*e^x+4*e^(-x)=0", [0.0, 0.693]), ("2^(3x)-10*2^x+9*2^(-x)=0", [0.0, 1.585]), ("3^x-3*3^(-x)-4*3^(-3x)=0", [0.631]),
+    ("3^x+3*3^(-x)+2*3^(-3x)=0", []), ("3^x+3^(-x)+3^(-3x)=0", []), ("0,5^x-5*0,5^(-x)+4*0,5^(-3x)=0", [0.0, -1.0]),
+]
+
 # identités sur l'ensemble de définition : S = ED (solutions None)
 M_TOUT_L_ED = ["log(x)=log(x)", "log(x)+log(x-1)=log(x^2-x)", "2log(x)=log(x^2)+log(1)"]
 # formes du programme M que l'outil ne traite pas encore, et vrais hors-programme
@@ -250,7 +257,8 @@ def entrees_el_m():
     """Entrées de l'instantané de la filière M : les équations logarithmiques de la 3C (avec ensemble de définition en M) et BATTERIE_M."""
     return list(dict.fromkeys([s for s, _ in BATTERIE_E4] + [s for s, _ in BATTERIE_M] + M_TOUT_L_ED + M_PAS_ENCORE + M_HORS_PROGRAMME
                                   + [s for s, _ in BATTERIE_M_VAR] + M_VAR_PAS_ENCORE + [s for s, _ in BATTERIE_M_DEUX_TERMES]
-                                  + [s for s, _ in BATTERIE_M_EXPOSANTS] + [s for s, _ in BATTERIE_M_BASE_POLYNOMIALE]))
+                                  + [s for s, _ in BATTERIE_M_EXPOSANTS] + [s for s, _ in BATTERIE_M_BASE_POLYNOMIALE]
+                                  + [s for s, _ in BATTERIE_M_BICARRE]))
 
 
 def entrees_el():

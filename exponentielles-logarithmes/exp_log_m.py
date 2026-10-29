@@ -19,7 +19,7 @@ from math import gcd
 from noyau import analyser_complet
 from exp_log import (Car, Chaine, Defini, E, Eq, Fn, Log, Message, Neg, Nb, Op, Ou, Pow, Rel, Texte, Var, _Hors, _arbre_poly, _avec_decimaux,
                      _base_du_logarithme, _carte, _const, _contient_log, _nb_exact, _nom_tex, _padd, _par_exponentielle, _pnet, _precis, _produit,
-                     _racine_entiere, _resoudre_polynome, _somme_arbres, _suite_polynome, _milieu_exact, _valeur_exacte, _valeur_rationnelle, _exposant_entier, _racine_primitive, logarithmique_m, _fin_beta,
+                     _racine_entiere, _resoudre_polynome, _somme_arbres, _suite_polynome, _milieu_exact, _valeur_exacte, _valeur_rationnelle, _exposant_entier, _racine_carree, _racine_primitive, tex_element, logarithmique_m, _fin_beta,
                      resolution_exponentielle, tex, tex_approx, valeur, variables, METHODE_LOGARITHMES, METHODE_MEME_BASE, METHODES, PROP_EXPONENTIELLE, PROP_ISOLER_LOG, PROP_PUISSANCE_NEGATIVE, PROP_EXP_LOG_BASE,
                      PROP_AUCUNE_SOLUTION, PROP_CAR_LN_E, PROP_CAR_LOG_10, PROP_DEFINITION_LOG, PROP_FOIS_MOINS_UN, PROP_LN_DEUX_MEMBRES,
                      PROP_LN_E_PUISSANCE, PROP_LN_PUISSANCE, PROP_LOG_BASE_PUISSANCE, PROP_LOG_DEUX_MEMBRES, PROP_LOG_PUISSANCE, PROP_MEME_BASE)
@@ -510,12 +510,17 @@ PROP_ISOLER_RACINE = "on isole la racine"
 
 def _prop_fois(nom, decalage):
     """« on multiplie les deux membres par t, t > 0 » (t² pour un décalage de 2 ; « divise » quand le décalage est négatif : 8ˣ − 2·4ˣ − 8·2ˣ = 0)."""
-    return f"on {'multiplie' if decalage > 0 else 'divise'} les deux membres par {nom}{'²' if abs(decalage) == 2 else ''}, {nom} > 0"
+    return f"on {'multiplie' if decalage > 0 else 'divise'} les deux membres par {nom}{'' if abs(decalage) == 1 else '²³⁴'[abs(decalage) - 2]}, {nom} > 0"
+
+
+def _prop_pose(t, u):
+    """« on pose u = t² » : l'équation bicarrée t⁴ − 10t² + 9 = 0 devient u² − 10u + 9 = 0."""
+    return f"on pose {u} = {t}²"
 
 
 PROPRIETES_M = frozenset({_propriete(f, g) for f in _FAMILLES for g in ("puissance", "produit", "quotient", "mixte", "constante", "egaux", "oppose")} |
                          {PROP_CARRE_DES_DEUX_MEMBRES, PROP_ISOLER_RACINE, PROP_FOIS_DENOMINATEURS, PROP_RACINE_IMPAIRE, PROP_RACINE_PAIRE, PROP_PUISSANCE_PAIRE, PROP_PUISSANCES} |
-                         {_prop_fois(nom, k) for nom in ("t", "u") for k in (-2, -1, 1, 2)})
+                         {_prop_fois(nom, k) for nom in ("t", "u") for k in (-4, -3, -2, -1, 1, 2, 3, 4)} | {_prop_pose("t", "u"), _prop_pose("u", "v")})
 DEGRE_MAX = 8
 
 
@@ -952,7 +957,10 @@ def _analyse(g, d, x):
         raise _Hors
     mus = {int(sg / pas) for sg in pentes} | ({0} if constantes["g"] != 0 or constantes["d"] != 0 else set())
     decalage = -min(mus)
-    if max(mus) - min(mus) != 2 or max(mus) > 4 or abs(decalage) > 2:
+    bicarre = len(mus) == 3 and max(mus) - min(mus) == 4 and sorted(mus)[1] == min(mus) + 2      # t⁻³, t⁻¹, t : t⁴ − 10t² + 9 après multiplication par t³
+    if not bicarre and (max(mus) - min(mus) != 2 or max(mus) > 4 or abs(decalage) > 2):
+        raise _Hors
+    if bicarre and (max(mus) > 5 or abs(decalage) > 4):
         raise _Hors
     return termes, b0, base_noeud, lignes, constantes, pas, mus, decalage
 
@@ -964,6 +972,43 @@ def reconnu_changement(g, d, x):
         return True
     except _Hors:
         return False
+
+
+def _bicarre(chaine, At, Bt, t):
+    """L'équation bicarrée at⁴ + bt² + c = 0 (t > 0) : on pose u = t², u > 0, on résout le trinôme en u (les valeurs de u retenues sont celles qui sont
+    strictement positives), puis les candidats t = ±√u (la racine négative est rejetée par la carte « Valeurs de t »). (cartes, candidats t, remarque)."""
+    A, B = _pq(At), _pq(Bt)
+    P = _padd(A, B, -1)
+    if len(P) != 5 or P[1] != 0 or P[3] != 0:
+        raise _Hors
+    u = "v" if t == "u" else "u"
+    standard = Eq(_arbre_poly(P, t), Nb(0))
+    if tex_element(standard) != tex_element(chaine.elements[-1]):
+        chaine.ajouter(standard, "⇔")
+    quadratique = P[0::2]
+    ligne = Chaine([standard, Eq(_arbre_poly(quadratique, u), Nb(0))], ["⇔"], [_prop_pose(t, u)])
+    suite, valeurs_u, remarque = _resoudre_egalite(ligne, _arbre_poly(quadratique, u), Nb(0), u)
+    lignes = [Message("Équation bicarrée : on pose ", Texte(f"{u} = {t}^{{2}}"), ". Comme ", Texte(f"{t} > 0"), ", ", Texte(f"{u} > 0"), ".")]
+    lignes += [ligne] + suite
+    if valeurs_u is None or any(_const(v) is None for v in valeurs_u):
+        raise _Hors
+    candidats, retenues = [], []
+    for v in sorted(valeurs_u, key=_const):
+        q = _const(v)
+        if q > 0:
+            retenues.append(q)
+            lignes.append(Chaine([Texte(f"{u} = {tex(v)} > 0")], note="retenue ✓"))
+        else:
+            lignes.append(Chaine([Texte(f"{u} = {tex(v)} \\le 0")], note=f"rejetée : {u} = {t}² est strictement positif"))
+    if valeurs_u and not retenues:
+        lignes.append(Message("Aucune valeur de ", Texte(u), " ne convient : l'équation n'a aucune solution."))
+    for q in retenues:
+        r = _racine_carree(q)
+        if r is None:
+            raise _Hors                                  # t = √2 : pas encore (2ˣ = √2 n'est pas traité)
+        lignes.append(Chaine([Eq(Pow(Var(t), Nb(2)), _nb_exact(q)), Ou([Eq(Var(t), _nb_exact(-r)), Eq(Var(t), _nb_exact(r))])], ["⇔"], [PROP_RACINE_PAIRE]))
+        candidats += [_nb_exact(-r), _nb_exact(r)]
+    return [_carte("Équation bicarrée", lignes)], sorted(candidats, key=_const), remarque
 
 
 def _plan_apres(g, d, x, termes, b0, base_noeud, lignes, constantes, pas, mus, decalage):
@@ -992,11 +1037,15 @@ def _plan_apres(g, d, x, termes, b0, base_noeud, lignes, constantes, pas, mus, d
     At, Bt = _arbre_poly(polys["g"], t), _arbre_poly(polys["d"], t)
     if decalage:
         chaine.ajouter(Eq(At, Bt), "⇔", _prop_fois(t, decalage))
-    suite, solutions, remarque = _resoudre_egalite(chaine, At, Bt, t)
+    if max(mus) - min(mus) == 4:
+        cartes_bicarre, solutions, remarque = _bicarre(chaine, At, Bt, t)
+        cartes = [_carte("Changement de variable", carte + [chaine])] + cartes_bicarre
+    else:
+        suite, solutions, remarque = _resoudre_egalite(chaine, At, Bt, t)
+        cartes = [_carte("Changement de variable", carte + [chaine] + suite)]
     if solutions is None or any(_const(s) is None for s in solutions):
         raise _Hors                                      # identité en t ou racines irrationnelles : pas encore
     plan.remarque = remarque
-    cartes = [_carte("Changement de variable", carte + [chaine] + suite)]
     solutions = sorted(solutions, key=_const)
     lignes_t, retenues = [], []
     for s in solutions:
