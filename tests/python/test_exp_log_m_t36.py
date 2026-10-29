@@ -11,7 +11,7 @@ import exp_log as el
 import exp_log_m as elm
 import resoudre_el as rel
 import sortie as so
-from cas_el import BATTERIE_M_BASE_POLYNOMIALE, BATTERIE_M_BASE_RATIONNELLE, BATTERIE_M_BICARRE, BATTERIE_M_EXPOSANTS, BATTERIE_M_IRRATIONNEL
+from cas_el import BATTERIE_M_BASE_POLYNOMIALE, BATTERIE_M_CARRE_DANS_L_EXPOSANT, BATTERIE_M_BASE_RATIONNELLE, BATTERIE_M_BICARRE, BATTERIE_M_EXPOSANTS, BATTERIE_M_IRRATIONNEL
 from test_exp_log_m import MP, ecart, racines
 
 
@@ -174,6 +174,17 @@ class TestIrrationnel(_Batterie, unittest.TestCase):
             with self.subTest(entree=entree):
                 r = rel.resoudre(entree, "M")
                 self.assertFalse(r["ok"])
+
+
+class TestCarreDansLExposant(_Batterie, unittest.TestCase):
+    BATTERIE = BATTERIE_M_CARRE_DANS_L_EXPOSANT
+    ED_EN_PREMIER = False
+
+    def test_la_3c_ne_change_pas(self):
+        for entree, _ in self.BATTERIE:
+            with self.subTest(entree=entree):
+                self.assertEqual(rel.resoudre(entree, "C"), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
+                self.assertIsNone(elm.variantes_exposant(*(lambda s: (s.g, s.d, s.inconnue))(el.analyser_saisie("2^x=8", "M"))))
 
 
 if __name__ == "__main__":

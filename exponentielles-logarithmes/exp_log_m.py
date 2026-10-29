@@ -19,7 +19,7 @@ from math import gcd
 from noyau import analyser_complet
 from exp_log import (Car, Chaine, Defini, E, Eq, Fn, Log, Message, Neg, Nb, Op, Ou, Pow, Rel, Texte, Var, _Hors, _arbre_poly, _avec_decimaux,
                      _base_du_logarithme, _carte, _const, _contient_log, _nb_exact, _nom_tex, _padd, _par_exponentielle, _pnet, _precis, _produit,
-                     _racine_entiere, _resoudre_polynome, _somme_arbres, _suite_polynome, _milieu_exact, _valeur_exacte, _valeur_rationnelle, _exposant_entier, _puissance_rationnelle_exacte, _racine_carree, _racine_primitive, tex_element, logarithmique_m, _fin_beta,
+                     _racine_entiere, _resoudre_polynome, _somme_arbres, _suite_polynome, _milieu_exact, _valeur_exacte, _valeur_rationnelle, _exposant_entier, _poly, _puissance_rationnelle_exacte, _racine_carree, _racine_primitive, tex_element, logarithmique_m, _fin_beta,
                      resolution_exponentielle, tex, tex_approx, valeur, variables, METHODE_LOGARITHMES, METHODE_MEME_BASE, METHODES, PROP_EXPONENTIELLE, PROP_ISOLER_LOG, PROP_PUISSANCE_NEGATIVE, PROP_EXP_LOG_BASE,
                      PROP_AUCUNE_SOLUTION, PROP_CAR_LN_E, PROP_CAR_LOG_10, PROP_DEFINITION_LOG, PROP_FOIS_MOINS_UN, PROP_LN_DEUX_MEMBRES,
                      PROP_LN_E_PUISSANCE, PROP_LN_PUISSANCE, PROP_LOG_BASE_PUISSANCE, PROP_LOG_DEUX_MEMBRES, PROP_LOG_PUISSANCE, PROP_MEME_BASE)
@@ -506,6 +506,7 @@ PROP_PUISSANCE_PAIRE = "une puissance paire est positive ou nulle"
 PROP_PUISSANCES = "propriétés des puissances"
 PROP_CARRE_DES_DEUX_MEMBRES = "les deux membres sont positifs : on élève au carré"
 PROP_ISOLER_RACINE = "on isole la racine"
+PROP_DEVELOPPER = "(a ± b)² = a² ± 2ab + b²"
 PROP_PUISSANCE_INVERSE = "x > 0 : on élève les deux membres à la puissance inverse de l'exposant, (aᵐ)ⁿ = aᵐⁿ"
 
 
@@ -520,7 +521,7 @@ def _prop_pose(t, u):
 
 
 PROPRIETES_M = frozenset({_propriete(f, g) for f in _FAMILLES for g in ("puissance", "produit", "quotient", "mixte", "constante", "egaux", "oppose")} |
-                         {PROP_CARRE_DES_DEUX_MEMBRES, PROP_ISOLER_RACINE, PROP_PUISSANCE_INVERSE, PROP_FOIS_DENOMINATEURS, PROP_RACINE_IMPAIRE, PROP_RACINE_PAIRE, PROP_PUISSANCE_PAIRE, PROP_PUISSANCES} |
+                         {PROP_CARRE_DES_DEUX_MEMBRES, PROP_DEVELOPPER, PROP_ISOLER_RACINE, PROP_PUISSANCE_INVERSE, PROP_FOIS_DENOMINATEURS, PROP_RACINE_IMPAIRE, PROP_RACINE_PAIRE, PROP_PUISSANCE_PAIRE, PROP_PUISSANCES} |
                          {_prop_fois(nom, k) for nom in ("t", "u") for k in (-4, -3, -2, -1, 1, 2, 3, 4)} | {_prop_pose("t", "u"), _prop_pose("u", "v")})
 DEGRE_MAX = 8
 
@@ -1246,6 +1247,17 @@ def _exposant_logarithme(a, valeur_base):
     return signe, a
 
 
+def _a_developper(A, B, x):
+    """Vrai quand les exposants sont des polynômes que `_pq` lit mais pas la 3C (un carré de somme : (2 − 3x)²), de degré 2 au plus après développement."""
+    try:
+        _poly(A, x), _poly(B, x)
+        return False                                    # la 3C sait les lire : elle traite l'équation
+    except _Hors:
+        pass
+    pa, pb = _pq(A), _pq(B)
+    return max(len(pa), len(pb)) <= 3
+
+
 class _Situation:
     """L'équation b^A = c ou b^A = b^B décrite pour les deux méthodes."""
     __slots__ = ("x", "g", "d", "echange", "noeud", "base", "exposant", "genre", "second", "autre", "constante", "m")
@@ -1265,6 +1277,9 @@ def _situation(g, d, x):
         s.noeud, s.base, s.exposant = gauche
         s.autre = droite[2]
         genres = {_genre_exposant(s.exposant), _genre_exposant(s.autre)}
+        if genres == {"poly"} and _a_developper(s.exposant, s.autre, x):
+            s.genre = "meme_base_developper"            # 7^(8x²+4) = 7^((2−3x)²) : la 3C ne développe pas le carré d'une somme dans un exposant
+            return s
         if genres != {"frac"} and genres != {"frac", "poly"}:
             raise _Hors
         s.genre = "meme_base"
@@ -1320,6 +1335,21 @@ def _fin_egalite_des_exposants(chaine, s, resultat, titre):
     if len(_pq(gauche)) < len(_pq(droite)):             # x(x − 1) = 6 plutôt que 6 = x(x − 1) : le côté de plus haut degré à gauche
         gauche, droite = droite, gauche
     chaine.ajouter(Eq(gauche, droite), "⇔", PROP_FOIS_DENOMINATEURS)
+    suite, solutions, remarque = _resoudre_egalite(chaine, gauche, droite, x)
+    return resultat([_carte(titre, [chaine] + suite)], solutions, remarque)
+
+
+def _fin_developpee(chaine, s, resultat, titre):
+    """A = B où un exposant contient le carré d'une somme : on développe ((a − b)² = a² − 2ab + b²), puis l'équation du 2ᵉ degré, le côté de coefficient
+    directeur positif à gauche (8x² + 4 = 9x² − 12x + 4 ⇔ x² − 12x + … ⇔ x(x − 12) = 0)."""
+    x = s.x
+    pa, pb = _pq(s.exposant), _pq(s.autre)
+    gauche, droite = _arbre_poly(pa, x), _arbre_poly(pb, x)
+    if tex(gauche) != tex(s.exposant) or tex(droite) != tex(s.autre):
+        chaine.ajouter(Eq(gauche, droite), "⇔", PROP_DEVELOPPER)
+    if _padd(pa, pb, -1)[-1] < 0:                         # le coefficient directeur de A − B doit être positif
+        gauche, droite = droite, gauche
+        chaine.ajouter(Eq(gauche, droite), "⇔")
     suite, solutions, remarque = _resoudre_egalite(chaine, gauche, droite, x)
     return resultat([_carte(titre, [chaine] + suite)], solutions, remarque)
 
@@ -1456,7 +1486,7 @@ def _methode_exposant(s, methode):
     def resultat(cartes, solutions, remarque=None, **autres):
         return {"genre": "exposant", "inconnue": x, "enonce": enonce, "base": None, "etapes": cartes, "solutions": solutions, "remarque": remarque, **autres}
 
-    if s.genre == "meme_base":
+    if s.genre in ("meme_base", "meme_base_developper"):
         if methode == METHODE_MEME_BASE:
             titre = "Même base"
             chaine.ajouter(Eq(s.exposant, s.autre), "⇔", PROP_MEME_BASE)
@@ -1470,6 +1500,8 @@ def _methode_exposant(s, methode):
                 lb = Log(s.noeud)
                 chaine.ajouter(Eq(Op("*", s.exposant, lb), Op("*", s.autre, lb)), "⇔", PROP_LOG_PUISSANCE)
                 chaine.ajouter(Eq(s.exposant, s.autre), "⇔", Car(lb))
+        if s.genre == "meme_base_developper":
+            return _fin_developpee(chaine, s, resultat, titre)
         return _fin_egalite_des_exposants(chaine, s, resultat, titre)
 
     if s.m is not None:                                  # b^A = b^m
@@ -1571,6 +1603,8 @@ def variantes_exposant(g, d, x):
     en tête et la « Vérification » ; None si l'équation n'est pas de cette forme."""
     try:
         s = _situation(g, d, x)
+        if s.genre == "meme_base_developper":            # exposants polynomiaux : aucune condition d'existence, donc ni carte ED ni vérification
+            return {m: _methode_exposant(s, m) for m in METHODES}
         ed = ensemble_de_definition(g, d, x, general=True)
         return {m: _avec_ed_et_verification(ed, _methode_exposant(s, m), x) for m in METHODES}
     except _Hors:

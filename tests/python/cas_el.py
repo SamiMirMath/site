@@ -259,6 +259,12 @@ BATTERIE_M_IRRATIONNEL = [
     ("ln(x)+ln(x+1)=-1", [0.286]), ("ln(2x)+ln(x)=1", [1.166]), ("ln(x^5)=3", [1.822]), ("ln(x^6)=1", [-1.181, 1.181]), ("log(x^3)=1/2", [1.468]),
 ]
 
+# T36, partie G1 : exposant avec le carré d'une somme (Amaudruz 6.1 b) : la 3C ne le développe pas, la filière M oui
+BATTERIE_M_CARRE_DANS_L_EXPOSANT = [
+    ("7^(8x^2+4)=7^((2-3x)^2)", [0.0, 12.0]), ("2^(x^2+1)=2^((x+1)^2)", [0.0]), ("3^(x^2)=3^((x-2)^2)", [1.0]), ("5^(x^2-1)=5^((x-3)^2)", [1.667]),
+    ("e^(x^2+x)=e^((x+2)^2)", [-1.333]), ("2^((x-1)^2)=2^(x^2+4)", [-1.5]),
+]
+
 # identités sur l'ensemble de définition : S = ED (solutions None)
 M_TOUT_L_ED = ["log(x)=log(x)", "log(x)+log(x-1)=log(x^2-x)", "2log(x)=log(x^2)+log(1)"]
 # formes du programme M que l'outil ne traite pas encore, et vrais hors-programme
@@ -273,7 +279,7 @@ def entrees_el_m():
                                   + [s for s, _ in BATTERIE_M_VAR] + M_VAR_PAS_ENCORE + [s for s, _ in BATTERIE_M_DEUX_TERMES]
                                   + [s for s, _ in BATTERIE_M_EXPOSANTS] + [s for s, _ in BATTERIE_M_BASE_POLYNOMIALE]
                                   + [s for s, _ in BATTERIE_M_BICARRE] + [s for s, _ in BATTERIE_M_BASE_RATIONNELLE]
-                                  + [s for s, _ in BATTERIE_M_IRRATIONNEL]))
+                                  + [s for s, _ in BATTERIE_M_IRRATIONNEL] + [s for s, _ in BATTERIE_M_CARRE_DANS_L_EXPOSANT]))
 
 
 def entrees_el():
