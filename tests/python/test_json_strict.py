@@ -2,6 +2,7 @@
 Bug : x^(2/3) en −∞ (SymPy : oo*(-1)**(2/3)) donnait valeur_val = Infinity, donc une erreur du moteur."""
 import json
 import math
+import random
 import unittest
 
 from moteurs import ensemble_def as ed  # noqa: F401  (chemins + SymPy)
@@ -98,6 +99,7 @@ class TestJsonStrict(unittest.TestCase):
             self.assertEqual(list(non_finis(resoudre_el.resoudre(entree))), [], entree)
 
     def test_exercices_de_factorisation(self):
+        random.seed(2026_10_29)                   # tirages reproductibles, quel que soit l'ordre des tests
         for niveau in ("facile", "moyen", "difficile", "tresDifficile"):
             for _ in range(60):
                 strict(fa.exercice_json(niveau))

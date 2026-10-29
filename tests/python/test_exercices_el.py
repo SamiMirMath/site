@@ -1,6 +1,7 @@
 """T33 (étape 8) — Exercices au hasard de l'outil « Exponentielles et logarithmes » (pool C, EL-13) : `exercice(niveau, graine)` est déterministe,
 produit un gabarit du niveau, n'a jamais d'exposant de degré supérieur à 2, et le moteur le résout (oracle mpmath, EL-02) pour 500 graines."""
 import json
+import random
 import re
 import unittest
 from fractions import Fraction as F
@@ -132,6 +133,7 @@ class TestExercices(unittest.TestCase):
         self.assertFalse(json.loads(rel.exercice_json("n'importe quoi"))["ok"])
 
     def test_exercice_json_est_du_json_strict_au_hasard(self):
+        random.seed(2026_10_29)                   # exercice_json tire sa graine dans le générateur global : tirages reproductibles
         for niveau in el.NIVEAUX:
             for _ in range(30):
                 r = json.loads(rel.exercice_json(niveau))

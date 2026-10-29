@@ -302,7 +302,7 @@ class TestComportement(unittest.TestCase):
         page = self.ouvrir("exponentielles-logarithmes")
         page.evaluer("try { localStorage.clear(); } catch (e) {}")
         vus = set()
-        for _ in range(14):
+        for _ in range(200):                         # 14 tirages ne montraient pas les deux genres une fois sur 60 ; 200 : échec < 1e-9
             page.evaluer("document.querySelector('#exoHasard').click()")
             page.attendre("document.querySelector('#exoEnonce annotation')", 30)
             enonce = page.evaluer("document.querySelector('#exoEnonce annotation').textContent")

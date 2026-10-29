@@ -56,9 +56,13 @@ def polynome_entree(entree):
 def exercices_generes():
     niveaux = ["facile", "moyen", "difficile", "tresDifficile"]
     out = []
-    for k in range(N_GENERES):
-        random.seed(k)
-        out.append(fa.genere_exercice(niveaux[k % 4]))
+    etat = random.getstate()                      # le générateur global est rendu tel qu'il était : aucun test ne dépend de l'ordre d'exécution
+    try:
+        for k in range(N_GENERES):
+            random.seed(k)
+            out.append(fa.genere_exercice(niveaux[k % 4]))
+    finally:
+        random.setstate(etat)
     return out
 
 
