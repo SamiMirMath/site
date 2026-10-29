@@ -1115,7 +1115,7 @@
   "ok": true
  },
  "sin(x)": {
-  "erreur": "Symbole inconnu « s ». La variable s'appelle x ; fonctions permises : ln, exp, sqrt (ou e^…, √).",
+  "erreur": "La fonction sin n'est pas encore prise en charge par cet outil.",
   "ok": false
  },
  "sqrt(-x^2)": {

@@ -67,25 +67,210 @@ def _sympify_point(num):
     return sp.sympify(num.py, locals={"sqrt": sp.sqrt, "exp": sp.exp, "log": sp.log, "pi": sp.pi})
 
 
+def _rejete(r):
+    """Résultat SymPy inutilisable : absent, symbole libre, i, zoo, nan, AccumBounds, partie imaginaire, ou infini mêlé à autre chose
+    (oo·(−1)^(2/3)…). ±∞ seuls sont acceptés."""
+    sp = charger_sympy()
+    if r is None:
+        return True
+    if r == sp.oo or r == -sp.oo:
+        return False
+    if r.free_symbols or r.has(sp.I, sp.zoo, sp.nan, sp.AccumBounds, sp.oo, -sp.oo) or r.is_real is False:
+        return True
+    if r.is_real is None:
+        try:
+            return abs(complex(sp.N(r, 30)).imag) > 1e-20
+        except Exception:
+            return True
+    return False
+
+
+def _limite_brute(fe, point, direction):
+    """Limite SymPy de fe (expression SymPy) ; une réponse inutilisable (point irrationnel : SymPy laisse parfois x, i·π…) est
+    reprise par composition quand fe est ln(u) ou e^u. None si l'on ne conclut pas."""
+    sp = charger_sympy()
+    try:
+        r = sp.limit(fe, SYMPY["x"], point, dir=direction) if direction else sp.limit(fe, SYMPY["x"], point)
+    except Exception:
+        r = None
+    if not _rejete(r):
+        return r
+    if isinstance(fe, (sp.log, sp.exp)):
+        return _par_composition(fe, point, direction)
+    return None
+
+
+def _par_composition(fe, point, direction):
+    """ln(u) ou e^u : limite de u (calculée à part), puis de la fonction extérieure ; None si le cas n'est pas net."""
+    sp = charger_sympy()
+    u = fe.args[0]
+    ru = _limite_brute(u, point, direction)
+    if ru is None:
+        return None
+    if isinstance(fe, sp.exp):
+        return sp.oo if ru == sp.oo else sp.Integer(0) if ru == -sp.oo else sp.exp(ru)
+    if ru == sp.oo:
+        return sp.oo
+    if ru == -sp.oo:
+        return None
+    if ru == 0:
+        return -sp.oo if _limite_brute(1 / u, point, direction) == sp.oo else None     # u → 0⁺
+    return sp.log(ru) if ru.is_positive else None
+
+
+def _contient_ln(n):
+    if isinstance(n, Fn):
+        return n.nom == "ln" or _contient_ln(n.a)
+    if isinstance(n, Neg):
+        return _contient_ln(n.a)
+    return isinstance(n, Op) and (_contient_ln(n.a) or _contient_ln(n.b))
+
+
+def _sonde_lointaine(n):
+    """Les sondes 10^100 et 10^1000 ne servent qu'aux fonctions avec ln (convergence lente), sans exponentielle."""
+    return _contient_ln(n) and not _contient_exp(n)
+
+
+def _contient_exp(n):
+    """Exponentielle ou exposant variable : e^(10^1000) coûte cher à évaluer, la sonde se limite alors aux points ordinaires."""
+    if isinstance(n, Fn):
+        return n.nom == "exp" or _contient_exp(n.a)
+    if isinstance(n, Neg):
+        return _contient_exp(n.a)
+    return isinstance(n, Op) and (_contient_exp(n.a) or _contient_exp(n.b) or (n.op == "^" and not sans_x(n.b)))
+
+
+def _val_mp(mp, n, x):
+    """Valeur de l'arbre n en x (mpmath, haute précision) ; None si n n'est pas défini en x (mêmes conventions que le cours)."""
+    if isinstance(n, Nb):
+        return mp.mpf(n.v.numerator) / n.v.denominator
+    if isinstance(n, X):
+        return x
+    if isinstance(n, E):
+        return mp.e
+    if isinstance(n, Neg):
+        a = _val_mp(mp, n.a, x)
+        return None if a is None else -a
+    if isinstance(n, Fn):
+        a = _val_mp(mp, n.a, x)
+        if a is None:
+            return None
+        if n.nom == "ln":
+            return mp.log(a) if a > 0 else None
+        if n.nom == "sqrt":
+            return mp.sqrt(a) if a >= 0 else None
+        return mp.exp(a)
+    a = _val_mp(mp, n.a, x)
+    b_exp = valeur_constante(n.b) if n.op == "^" else None
+    if a is None:
+        return None
+    if n.op == "^":
+        if b_exp is None or isinstance(b_exp, float):
+            b = _val_mp(mp, n.b, x)
+            return None if (b is None or a <= 0) else mp.exp(b * mp.log(a))
+        if b_exp == 0:
+            return mp.mpf(1)
+        if a == 0:
+            return mp.mpf(0) if b_exp > 0 else None
+        if b_exp.denominator == 1:
+            return a ** int(b_exp)
+        if a < 0:
+            if b_exp.denominator % 2 == 0:
+                return None
+            r = (-a) ** (mp.mpf(b_exp.numerator) / b_exp.denominator)
+            return -r if b_exp.numerator % 2 else r
+        return a ** (mp.mpf(b_exp.numerator) / b_exp.denominator)
+    b = _val_mp(mp, n.b, x)
+    if b is None:
+        return None
+    if n.op == "+":
+        return a + b
+    if n.op == "-":
+        return a - b
+    if n.op == "*":
+        return a * b
+    return None if b == 0 else a / b
+
+
+def _quotient_mp(mp, f, t):
+    v = _val_mp(mp, f, t)
+    return None if v is None else v / t
+
+
+def _moins_ax_mp(mp, f, a, t):
+    v = _val_mp(mp, f, t)
+    return None if v is None else v - mp.mpf(str(a)) * t
+
+
+def _contradit_par_sonde(g, avec_ln, point, direction, r):
+    """True si la sonde haute précision CONTREDIT nettement la valeur SymPy r (signe opposé, infini contre fini, fini contre infini,
+    écart qui ne décroît pas). Une convergence lente (ln) n'est pas une contradiction ; en cas de doute (mpmath absent, trop peu de points
+    évaluables) : False. g(mp, x) = valeur de la fonction sondée ; x → point, du côté de `direction` (les deux si None)."""
+    sp = charger_sympy()
+    try:
+        import mpmath
+        infini = point in (sp.oo, -sp.oo)
+        rationnel = (not infini) and point.is_Rational
+        valeur_infinie = r == sp.oo or r == -sp.oo
+        # sondes très lointaines (10^100, 10^1000) pour les logarithmes, qui convergent lentement ; inutiles (et fragiles : les
+        # compensations s'arrondissent à 0) pour une valeur infinie, qui se juge sur la croissance
+        fin_ln = [100, 1000] if avec_ln and not valeur_infinie and (infini or rationnel) else []
+        ks = [2, 4, 8, 16, 30] + fin_ln if infini else [3, 6, 12, 30] + fin_ln
+        mp = mpmath.MPContext()
+        mp.dps = 60 + 2 * max(ks)
+        if infini:
+            centre, signe = None, 1 if point == sp.oo else -1
+        else:
+            centre = mp.mpf(point.p) / point.q if rationnel else mp.mpf(str(sp.N(point, mp.dps)))
+        cotes = (1,) if direction == "+" else (-1,) if direction == "-" else (-1, 1)
+        if r == sp.oo or r == -sp.oo:
+            s = 1 if r == sp.oo else -1
+            cible = None
+        else:
+            s, cible = 0, mp.mpf(str(sp.N(r, mp.dps)))
+        for cote in (cotes if not infini else (1,)):
+            vals = []
+            for k in ks:
+                x = signe * mp.mpf(10) ** k if infini else centre + cote * mp.mpf(10) ** (-k)
+                try:
+                    v = g(mp, x)
+                except (ArithmeticError, ValueError, OverflowError):
+                    v = None
+                if v is not None:
+                    vals.append(v)
+            if len(vals) < 2:
+                continue
+            if cible is None:
+                if s * vals[-1] <= 0 or abs(vals[-1]) <= abs(vals[-2]):
+                    return True
+            else:
+                ecarts = [abs(v - cible) for v in vals]       # le meilleur écart : les sondes extrêmes peuvent s'arrondir à 0
+                if min(ecarts) > max(ecarts[0] / 2, mp.mpf(10) ** -25 * (1 + abs(cible))):
+                    return True
+        return False
+    except Exception:
+        return False
+
+
 def _limite_sympy(f, point, direction=None):
-    """point : sp.oo, -sp.oo, ou objet SymPy exact. direction : '+', '-' ou None."""
+    """point : sp.oo, -sp.oo, ou objet SymPy exact. direction : '+', '-' ou None. Renvoie la valeur SymPy (±oo ou nombre réel
+    exact), jamais un résultat avec symbole libre, i, zoo, nan… ; None si l'on ne conclut pas ou si la sonde la contredit."""
     sp = charger_sympy()
     if sp is None:
         return None
     try:
-        fe = en_sympy_reel(f)
-        r = sp.limit(fe, SYMPY["x"], point, dir=direction) if direction else sp.limit(fe, SYMPY["x"], point)
+        r = _limite_brute(en_sympy_reel(f), point, direction)
     except Exception:
         return None
-    if r.has(sp.oo, -sp.oo, sp.zoo, sp.nan) and r not in (sp.oo, -sp.oo):
-        return None   # infini « complexe » (oo*(-1)**(2/3)…) : on ne conclut pas (ne devrait plus arriver, cf. en_sympy_reel)
+    if _rejete(r) or _contradit_par_sonde(lambda mp, x: _val_mp(mp, f, x), _sonde_lointaine(f), point, direction, r):
+        return None
     return r
 
 
 def _valeur_tex(res_sympy):
-    """Valeur SymPy (finie, +oo, -oo, ou autre) → (texte tex, est_infinie, est_plus, valeur_num)."""
+    """Valeur SymPy (finie, +oo, -oo) → (texte tex, est_infinie, est_plus, valeur_num) ; « ? » si elle est absente ou inutilisable."""
     sp = charger_sympy()
-    if res_sympy is None:
+    if _rejete(res_sympy):
         return "?", False, None, None
     if res_sympy == sp.oo:
         return r"+\infty", True, True, None
@@ -95,7 +280,7 @@ def _valeur_tex(res_sympy):
         n = num_sympy(res_sympy)
         return n.tex, False, None, n.val
     except Exception:
-        return sp.latex(res_sympy), False, None, None
+        return "?", False, None, None
 
 
 # =====================================================================
@@ -3024,13 +3209,17 @@ def _oblique_generale(f, signe, items):
     cible = sp.oo if signe > 0 else -sp.oo
     try:
         fe = en_sympy_reel(f)
-        a_val = sp.limit(fe / x, x, cible)
-        if not a_val.is_finite or a_val == 0:
+        a_val = _limite_brute(fe / x, cible, None)
+        if _rejete(a_val) or not a_val.is_finite or a_val == 0:
             return None
-        b_val = sp.limit(fe - a_val * x, x, cible)
-        if not b_val.is_finite:
+        b_val = _limite_brute(fe - a_val * x, cible, None)
+        if _rejete(b_val) or not b_val.is_finite:
             return None
     except Exception:
+        return None
+    a_mp, avec_ln = sp.N(a_val, 30), _sonde_lointaine(f)
+    if (_contradit_par_sonde(lambda mp, t: _quotient_mp(mp, f, t), avec_ln, cible, None, a_val)
+            or _contradit_par_sonde(lambda mp, t: _moins_ax_mp(mp, f, a_mp, t), avec_ln, cible, None, b_val)):
         return None
     a_tex, b_tex = num_sympy(a_val).tex, num_sympy(b_val).tex
     eq = _equation_affine(a_tex, b_tex)

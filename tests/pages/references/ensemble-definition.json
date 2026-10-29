@@ -1956,7 +1956,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Symbole inconnu « s ». La variable s'appelle x ; fonctions permises : ln, exp, sqrt (ou e^…, √).",
+    "texte": "La fonction sin n'est pas encore prise en charge par cet outil.",
     "titre": null
    }
   ],

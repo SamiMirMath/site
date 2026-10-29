@@ -104,6 +104,17 @@ def ftxt(q):
 NOMS = ["sqrt", "racine", "exp", "log", "ln", "x", "e"]
 
 
+FONCTIONS_ABSENTES = ["arcsin", "arccos", "arctan", "sinh", "cosh", "tanh", "sin", "cos", "tan", "cot"]
+
+
+def _fonction_non_prise_en_charge(s, i):
+    """Nom d'une fonction que le cours connaît mais pas l'outil (sin, cos, tan…, log_a), lu en s[i:] ; None sinon."""
+    for nm in FONCTIONS_ABSENTES:
+        if s[i:i + len(nm)].lower() == nm:
+            return nm
+    return None
+
+
 def tokeniser(s):
     rempl = [("−", "-"), ("–", "-"), ("·", "*"), ("×", "*"), ("**", "^"), ("²", "^2"), ("³", "^3"),
              ("√", "sqrt"), ("{", "("), ("}", ")"), ("[", "("), ("]", ")"), (":", "/"), ("÷", "/")]
@@ -133,6 +144,9 @@ def tokeniser(s):
                     i += len(nm)
                     break
             else:
+                mot = _fonction_non_prise_en_charge(s, i)
+                if mot:
+                    raise ErreurSaisie(f"La fonction {mot} n'est pas encore prise en charge par cet outil.")
                 raise ErreurSaisie(f"Symbole inconnu « {c} ». La variable s'appelle x ; "
                                    "fonctions permises : ln, exp, sqrt (ou e^…, √).")
             continue
@@ -140,6 +154,8 @@ def tokeniser(s):
             toks.append(("op", c))
             i += 1
             continue
+        if c == "_" and toks and toks[-1] == ("nom", "log"):
+            raise ErreurSaisie("La fonction log_a (logarithme de base a) n'est pas encore prise en charge par cet outil.")
         raise ErreurSaisie(f"Caractère non reconnu : « {c} ».")
     return toks
 
