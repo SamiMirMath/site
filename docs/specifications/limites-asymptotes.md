@@ -53,7 +53,7 @@ d'annonce), « Style de rédaction » (points 1 à 5) et le modèle ci-dessous :
 (`lim_(x→3⁻) … = « 8/0⁻ » = −∞  (x − 3 < 0 : cf. tableau de signes)`), tableau de signes TOUJOURS donné pour un dénominateur ou un
 argument de ln qui tend vers 0 (même affine), une ligne par facteur y compris évident ou constant, conclusions courtes
 (« Asymptote verticale : x = 3. », « Limite finie : pas d'asymptote verticale, trou dans le graphique en (a ; ℓ). »), division
-euclidienne écrite une fois, L'Hôpital en une parenthèse qui nomme les hypothèses. Les méthodes, leur ordre et le garde-fou sont inchangés.
+euclidienne écrite une fois, L'Hôpital en une parenthèse qui donne les dérivées du haut et du bas (depuis le 29.10.2026 : plus d'hypothèses affichées). Les méthodes, leur ordre et le garde-fou sont inchangés.
 
 ### Rédaction détaillée (tranché le 14.10.2026, Q9 ; formulations remplacées par le guide)
 
@@ -67,13 +67,14 @@ Chaque limite affichée est rédigée par la **première méthode du cours qui s
    aussi par la mise en évidence.
 2. **Expression conjuguée** (∞ − ∞ et 0/0 avec une racine).
 3. (Plus de méthode « limites de référence et croissance comparée » depuis le 29.10.2026 : voir plus haut.)
-4. **Bernoulli-L'Hôpital**, avec ses quatre hypothèses écrites :
+4. **Bernoulli-L'Hôpital**, avec ses quatre hypothèses **vérifiées** (elles ne s'affichent plus depuis le 29.10.2026) :
    (a) forme 0/0 ou ∞/∞ (0·∞ et ∞ − ∞ d'abord mis en quotient) ; (b) f et g dérivables au voisinage de a
    (sauf peut-être en a) ; (c) g'(x) ≠ 0 au voisinage de a (sauf peut-être en a) ; (d) lim f'/g' existe
    (finie ou infinie), alors lim f/g = lim f'/g'. Au plus trois applications de suite. Si une hypothèse
    n'est pas vérifiée ou si lim f'/g' n'existe pas, la règle n'est pas appliquée et ne conclut rien.
-   Dans la sortie, f désigne la fonction étudiée : jamais « f'/g' » ni « g'(x) » ; les hypothèses s'écrivent
-   « (x − 1)' = 1 ≠ 0 » (guide de rédaction, R9).
+   Dans la sortie, le signe égal du pas porte l'étiquette `\overset{\text{BH}}{=}` et la parenthèse à droite donne les deux dérivées séparément,
+   avant toute simplification, sous leur forme naturelle : « (haut : (ln x)′ = 1/x ; bas : (x)′ = 1) » (guide de rédaction, R9). Ni « f'/g' »,
+   ni « g'(x) », ni phrase sur la dérivabilité ; le tableau « haut → dérivée / bas → dérivée » avant la ligne BH reste prévu à l'étape 4 du chantier.
    **0·(±∞) en quotient** (règle du corrigé, 29.10.2026) : le facteur qui tend vers 0 passe en bas, l'autre reste en haut ; un facteur
    ln(…) reste toujours en haut ; eᵘ passe en bas sous la forme 1/e^(−u) ; xᵏ passe en bas sous la forme 1/x^(−k) ; une constante
    multiplicative (e^(3x−5) = e^(−5)·e^(3x)) est sortie du produit quand c'est simple. L'ordre de saisie des facteurs ne compte pas.
@@ -175,7 +176,7 @@ Modèle (1/(x² − 2) en −√2) :
 | LA-13 | Une forme indéterminée levée est toujours nommée ; aucune forme indéterminée n'est annoncée quand il n'y en a pas | [auto-py] |
 | LA-14 | Valeur interdite sans forme indéterminée : limite du numérateur, signe du dénominateur de chaque côté, « ℓ/0^± », asymptote x = a | [auto-py] |
 | LA-15 | Ordre des méthodes : la première qui s'applique ; mise en évidence et factorisation pour une fraction rationnelle (jamais L'Hôpital) ; Bernoulli-L'Hôpital pour une autre forme 0/0 ou ∞/∞, y compris eˣ/xⁿ, xⁿ/eˣ, ln x/xⁿ, xⁿ ln x en 0⁺ ; **jamais de croissance comparée comme justification** (doctrine du 29.10.2026) | [auto-py] |
-| LA-16 | L'Hôpital : hypothèses (a) à (d) écrites ; non appliquée hors 0/0 et ∞/∞, si g' ≠ 0 n'est pas établi, ou si lim f'/g' n'est pas obtenue | [auto-py] |
+| LA-16 | L'Hôpital : hypothèses (a) à (d) vérifiées (non affichées depuis le 29.10.2026) ; signe égal étiqueté BH et dérivées du haut et du bas en parenthèse ; non appliquée hors 0/0 et ∞/∞, si g' ≠ 0 n'est pas établi, ou si lim f'/g' n'est pas obtenue | [auto-py] |
 | LA-17 | Oblique (L8) : fraction rationnelle = division euclidienne écrite sans « + 0 » ni « + − » (N = D·Q ± R, f(x) = Q ± R/D), f(x) − (ax + b) = R/D → 0 en chaîne d'égalités, puis position relative près de ±∞ (signes de R et de D) ; autres fonctions : a = lim f(x)/x puis b = lim (f(x) − ax), chacune en chaîne d'égalités (racines en −∞ comprises) ; position relative seulement quand le signe de f(x) − (ax + b) se lit (√Q ± affine : ±r/(√Q + W)) | [auto-py] (`TestOblique`) |
 | LA-18 | Chaque borne se conclut par une phrase avec l'équation de l'asymptote, ou « pas d'asymptote … » | [auto-py] |
 | LA-19 | Écriture : coefficient 3/(2x) (pas de fraction dans une fraction) ; polynôme jamais écrit en quotient « /1 » | [auto-py] |
@@ -191,7 +192,7 @@ Modèle (1/(x² − 2) en −√2) :
 | LA-29 | Mise en évidence sous une racine (L5, retouche du 15.10) : en ±∞, quotient ou produit dont un membre est une racine ; √(4x²+1) = √(x²(4 + 1/x²)) = \|x\|√(4 + 1/x²), puis \|x\| = x ou −x, simplification, limite de ce qui reste ; « x < 0 donc √(x²) = \|x\| = −x » en −∞ ; jamais d'équivalent ; jamais pour une fraction rationnelle ni quand les termes de plus haut degré d'une somme se compensent | [auto-py] |
 | LA-30 | Expression conjuguée (L4) : ∞ − ∞ avec une racine en ±∞ (√(x²+x) − x → 1/2 en +∞ ; en −∞ pas de forme indéterminée, +∞) ; 0/0 avec une racine en une valeur ((√(x+3) − 2)/(x − 1) → 1/4) ; jamais sans racine | [auto-py] |
 | LA-31 | (Retiré le 29.10.2026 : la croissance comparée n'est plus une méthode.) Mise en évidence de l'exponentielle conservée (e^x − x² = e^x(1 − x²e^(−x)), (e^x+1)/(e^x−1)), sans citer de croissance comparée ; la limite de x²e^(−x) est établie à part par Bernoulli-L'Hôpital | [auto-py] |
-| LA-32 | Bernoulli-L'Hôpital (L7) : hypothèses (a) à (d) écrites ((e^x−1)/x en 0, ln(x)/(x−1) en 1, x·ln(x²) en 0, x²e^(−x) en +∞, ln(x²−4x)/(x−5) en ±∞) ; jamais hors forme 0/0 ou ∞/∞, jamais pour une fraction rationnelle ; non appliquée (phrase de repli) si g' ≠ 0 ou lim f'/g' n'est pas établi ; **au plus 3 BH de suite** ; 0·(±∞) mis en quotient selon la règle du corrigé (ln en haut, eᵘ en bas sous la forme 1/e^(−u), xᵏ en bas sous la forme 1/x^(−k), constante sortie) | [auto-py] |
+| LA-32 | Bernoulli-L'Hôpital (L7) : hypothèses (a) à (d) vérifiées, non affichées ((e^x−1)/x en 0, ln(x)/(x−1) en 1, x·ln(x²) en 0, x²e^(−x) en +∞, ln(x²−4x)/(x−5) en ±∞) ; jamais hors forme 0/0 ou ∞/∞, jamais pour une fraction rationnelle ; non appliquée (phrase de repli) si g' ≠ 0 ou lim f'/g' n'est pas établi ; **au plus 3 BH de suite** ; 0·(±∞) mis en quotient selon la règle du corrigé (ln en haut, eᵘ en bas sous la forme 1/e^(−u), xᵏ en bas sous la forme 1/x^(−k), constante sortie) | [auto-py] |
 | LA-33 | Aucune sortie ne contient « ∼ », « équivalent » ni « se comporte comme » | [auto-py] (`test_vocabulaire.py`) |
 | LA-34 | ln(u)/v en ±∞ (u, v polynômes) et ln(x²+1)/x : **se traitent par Bernoulli-L'Hôpital** (plus de mise en évidence de ln ni de croissance comparée) | [auto-py] |
 | LA-35 | √(x²) = \|x\| : x/√(x²) en 0 se rédige (x/\|x\| = −1 à gauche, 1 à droite), sans phrase de repli ; (x−1)/√((x−1)²) en 1 de même | [auto-py] |

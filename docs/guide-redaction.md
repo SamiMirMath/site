@@ -56,12 +56,13 @@ signe de chaque facteur ». Avant le tableau, une seule ligne : zéros et valeur
 tend vers 0, même affine** (x − 3, x − 5), en tête de l'étude. Justification courte dans la ligne de la
 limite : `(x − 3 < 0 : cf. tableau de signes)`.
 
-**R9. Bernoulli-L'Hôpital** : forme annoncée (R2), puis `= lim` du quotient des dérivées, avec les
-hypothèses toutes nommées en une parenthèse (dérivables sur …, `(dénominateur)' ≠ 0`). f désigne déjà
-la fonction étudiée : jamais « f'/g' » ni « g'(x) » dans la sortie ; le dénominateur est nommé par son
-expression, `(x − 1)' = 1 ≠ 0`. Quand la dérivée du dénominateur est une constante, le quotient est
-écrit tel quel, `(1/x)/1`, et la valeur suit directement. Chaque membre de la chaîne garde son
-`lim_(x→a)`. L'existence de la limite du quotient des dérivées est la chaîne elle-même (pas de phrase).
+**R9. Bernoulli-L'Hôpital** : forme annoncée (R2), puis le pas BH sur sa ligne : le signe égal porte l'étiquette `\overset{\text{BH}}{=}`, suivi de
+`lim` du quotient des dérivées ; la parenthèse à droite donne les deux dérivées séparément, avant toute simplification et sous leur forme naturelle,
+`(haut : (ln x)′ = 1/x ; bas : (x)′ = 1)`, `(e^(1/x))′ = −(1/x²)·e^(1/x)`, `(e^(−3x))′ = −3e^(−3x)` (décision du 29.10.2026). Les hypothèses
+(dérivabilité, `g′ ≠ 0`) sont vérifiées par le moteur mais ne s'affichent plus. f désigne déjà la fonction étudiée : jamais « f'/g' » ni « g'(x) ».
+Quand la dérivée du dénominateur est une constante, le quotient est écrit tel quel, `(1/x)/1`, et la valeur suit directement. Chaque membre de la
+chaîne garde son `lim_(x→a)`. L'existence de la limite du quotient des dérivées est la chaîne elle-même (pas de phrase). Le tableau
+« haut → dérivée / bas → dérivée » avant la ligne BH reste prévu à l'étape 4 du chantier.
 Si une hypothèse n'est pas vérifiée, la règle n'est pas appliquée (phrase de repli). Jusqu'à **trois**
 applications de suite (x³e^(3x−5) en demande trois). **0·(±∞)** (règle du corrigé, 29.10.2026) : on le met en quotient, le facteur qui
 tend vers 0 en bas, l'autre en haut ; un facteur ln(…) reste toujours en haut ; eᵘ passe en bas sous la forme 1/e^(−u), xᵏ sous la forme
@@ -191,7 +192,7 @@ lim_(x→5⁺) ln(x² − 4x)/(x − 5) = « ln 5/0⁺ » = +∞    (x − 5 > 0
 Asymptote verticale : x = 5.
 
 lim_(x→+∞) ln(x² − 4x)/(x − 5) = « ln(+∞)/(+∞) » = « +∞/+∞ » : forme indéterminée    (le terme dominant de x² − 4x est x²)
-   = lim_(x→+∞) (2x − 4)/(x² − 4x)    (Bernoulli-L'Hôpital : ln(x² − 4x) et x − 5 dérivables sur ]4 ; +∞[, (x − 5)' = 1 ≠ 0)
+   =_BH lim_(x→+∞) (2x − 4)/(x² − 4x)    (haut : (ln(x² − 4x))′ = (2x − 4)/(x² − 4x) ; bas : (x − 5)′ = 1)
    = lim_(x→+∞) x(2 − 4/x)/(x²(1 − 4/x))                        (mise en évidence)
    = lim_(x→+∞) (2 − 4/x)/(x(1 − 4/x)) = « 2/(+∞ · 1) » = 0
 Asymptote horizontale : y = 0.
@@ -230,7 +231,7 @@ Asymptote horizontale : y = −2.
 ```
 lim_(x→+∞) x²e^(−x) = « +∞ · e^(−∞) » = « +∞ · 0⁺ » : forme indéterminée
    = lim_(x→+∞) x²/e^x                  (on écrit un quotient de la forme « ∞/∞ »)
-   = lim_(x→+∞) 2x e^(−x) = « 2 · +∞ · 0⁺ » = 0    (Bernoulli-L'Hôpital : x² et e^x dérivables sur ℝ, (e^x)' = e^x ne s'annule pas sur ℝ)
+   =_BH lim_(x→+∞) 2x e^(−x) = « 2 · +∞ · 0⁺ » = 0    (haut : (x²)′ = 2x ; bas : (e^x)′ = e^x)
 Asymptote horizontale : y = 0.
 ```
 (La limite de x e^(−x), obtenue de la même façon, est écrite avant, comme sous-limite.)
@@ -239,7 +240,7 @@ Asymptote horizontale : y = 0.
 
 ```
 lim_(x→1) ln(x)/(x − 1) = « ln 1/0 » = « 0/0 » : forme indéterminée
-   = lim_(x→1) (1/x)/1 = 1      (Bernoulli-L'Hôpital : ln x et x − 1 dérivables sur ]0 ; +∞[, (x − 1)' = 1 ≠ 0)
+   =_BH lim_(x→1) (1/x)/1 = 1      (haut : (ln x)′ = 1/x ; bas : (x − 1)′ = 1)
 Limite finie : pas d'asymptote verticale, trou dans le graphique en (1 ; 1).
 ```
 

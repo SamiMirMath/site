@@ -47,6 +47,15 @@ class TestAucuneJustificationParLePodium(unittest.TestCase):
             with self.subTest(f=entree):
                 self.verifier(la.etudier(entree), entree)
 
+    def test_pas_bh_sans_hypotheses_affichees(self):
+        """Les hypothèses de BH (dérivabilité, g' ≠ 0) sont vérifiées mais ne s'affichent plus ; le pas porte l'étiquette BH."""
+        for entree in ENTREES:
+            with self.subTest(f=entree):
+                for t in chaines(la.etudier(entree)):
+                    self.assertNotIn("dérivable", t)
+                    self.assertNotIn("ne s'annule pas sur", t)
+                    self.assertNotIn("Bernoulli-L'Hôpital", t)
+
     def test_corrige_de_la_page(self):
         for entree in dict.fromkeys(entrees_page("limites-asymptotes") + [e[1] for e in ETUDES]):
             with self.subTest(f=entree):

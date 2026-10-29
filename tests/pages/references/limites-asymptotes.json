@@ -270,7 +270,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x}}{x} &= \\text{« }\\dfrac{e^{+\\infty}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{e^{x}}{1} = +\\infty \\qquad \\left(\\text{Bernoulli-L'Hôpital : } e^{x} \\text{ et } x \\text{ dérivables sur } \\mathbb{R} ,\\; x' = 1 \\neq 0\\right)\\end{aligned}⟧⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x} - 1}{x} &= \\text{« }\\dfrac{e^{+\\infty} - 1}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty - 1}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{e^{x}}{x}\\,\\left(1 - e^{-x}\\right) = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty \\qquad \\left(\\text{mise en évidence}\\right)\\end{aligned}⟧",
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x}}{x} &= \\text{« }\\dfrac{e^{+\\infty}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{e^{x}}{1} = +\\infty \\qquad \\left(\\text{haut : } \\left(e^{x}\\right)' = e^{x} \\; ;\\; \\text{bas : } \\left(x\\right)' = 1\\right)\\end{aligned}⟧⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x} - 1}{x} &= \\text{« }\\dfrac{e^{+\\infty} - 1}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty - 1}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{e^{x}}{x}\\,\\left(1 - e^{-x}\\right) = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty \\qquad \\left(\\text{mise en évidence}\\right)\\end{aligned}⟧",
     "titre": "⟦x \\to +\\infty⟧limite"
    },
    {
@@ -280,7 +280,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to 0⟧limite⟦\\begin{aligned}\\lim_{x\\to 0} \\frac{e^{x} - 1}{x} &= \\text{« }\\dfrac{e^{0} - 1}{0}\\text{ »} = \\text{« }\\dfrac{1 - 1}{0}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 0} \\frac{e^{x}}{1} = 1 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } e^{x} - 1 \\text{ et } x \\text{ dérivables sur } \\mathbb{R} ,\\; x' = 1 \\neq 0\\right)\\end{aligned}⟧Limite finie : pas d'asymptote verticale, trou dans le graphique en ⟦(0\\,;\\,1)⟧.",
+    "texte": "⟦x \\to 0⟧limite⟦\\begin{aligned}\\lim_{x\\to 0} \\frac{e^{x} - 1}{x} &= \\text{« }\\dfrac{e^{0} - 1}{0}\\text{ »} = \\text{« }\\dfrac{1 - 1}{0}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to 0} \\frac{e^{x}}{1} = 1 \\qquad \\left(\\text{haut : } \\left(e^{x} - 1\\right)' = e^{x} \\; ;\\; \\text{bas : } \\left(x\\right)' = 1\\right)\\end{aligned}⟧Limite finie : pas d'asymptote verticale, trou dans le graphique en ⟦(0\\,;\\,1)⟧.",
     "titre": "⟦x \\to 0⟧limite"
    },
    {
@@ -336,7 +336,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x} - e^{2}}{x - 2} &= \\text{« }\\dfrac{e^{+\\infty} - e^{2}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty - e^{2}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{e^{x}}{1} = +\\infty \\qquad \\left(\\text{Bernoulli-L'Hôpital : } e^{x} - e^{2} \\text{ et } x - 2 \\text{ dérivables sur } \\mathbb{R} ,\\; \\left(x - 2\\right)' = 1 \\neq 0\\right)\\end{aligned}⟧",
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x} - e^{2}}{x - 2} &= \\text{« }\\dfrac{e^{+\\infty} - e^{2}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty - e^{2}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{e^{x}}{1} = +\\infty \\qquad \\left(\\text{haut : } \\left(e^{x} - e^{2}\\right)' = e^{x} \\; ;\\; \\text{bas : } \\left(x - 2\\right)' = 1\\right)\\end{aligned}⟧",
     "titre": "⟦x \\to +\\infty⟧limite"
    },
    {
@@ -346,7 +346,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to 2⟧limite⟦\\begin{aligned}\\lim_{x\\to 2} \\frac{e^{x} - e^{2}}{x - 2} &= \\text{« }\\dfrac{e^{2} - e^{2}}{0}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 2} \\frac{e^{x}}{1} = e^{2} \\qquad \\left(\\text{Bernoulli-L'Hôpital : } e^{x} - e^{2} \\text{ et } x - 2 \\text{ dérivables sur } \\mathbb{R} ,\\; \\left(x - 2\\right)' = 1 \\neq 0\\right)\\end{aligned}⟧Limite finie : pas d'asymptote verticale, trou dans le graphique en ⟦(2\\,;\\,e^{2})⟧.",
+    "texte": "⟦x \\to 2⟧limite⟦\\begin{aligned}\\lim_{x\\to 2} \\frac{e^{x} - e^{2}}{x - 2} &= \\text{« }\\dfrac{e^{2} - e^{2}}{0}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to 2} \\frac{e^{x}}{1} = e^{2} \\qquad \\left(\\text{haut : } \\left(e^{x} - e^{2}\\right)' = e^{x} \\; ;\\; \\text{bas : } \\left(x - 2\\right)' = 1\\right)\\end{aligned}⟧Limite finie : pas d'asymptote verticale, trou dans le graphique en ⟦(2\\,;\\,e^{2})⟧.",
     "titre": "⟦x \\to 2⟧limite"
    },
    {
@@ -402,7 +402,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln(x) - 1}{x - e} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right) - 1}{+\\infty - e}\\text{ »} = \\text{« }\\dfrac{+\\infty - 1}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{\\frac{1}{x}}{1} = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln(x) - 1 \\text{ et } x - e \\text{ dérivables sur } \\left]0 \\,;\\, +\\infty\\right[ ,\\; \\left(x - e\\right)' = 1 \\neq 0\\right)\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln(x) - 1}{x - e} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right) - 1}{+\\infty - e}\\text{ »} = \\text{« }\\dfrac{+\\infty - 1}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{\\frac{1}{x}}{1} = 0 \\qquad \\left(\\text{haut : } \\left(\\ln(x) - 1\\right)' = \\frac{1}{x} \\; ;\\; \\text{bas : } \\left(x - e\\right)' = 1\\right)\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
     "titre": "⟦x \\to +\\infty⟧limite"
    },
    {
@@ -412,7 +412,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to e⟧limite⟦\\begin{aligned}\\lim_{x\\to e} \\frac{\\ln(x) - 1}{x - e} &= \\text{« }\\dfrac{\\ln e - 1}{e - e}\\text{ »} = \\text{« }\\dfrac{1 - 1}{0}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to e} \\frac{\\frac{1}{x}}{1} = e^{-1} \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln(x) - 1 \\text{ et } x - e \\text{ dérivables sur } \\left]0 \\,;\\, +\\infty\\right[ ,\\; \\left(x - e\\right)' = 1 \\neq 0\\right)\\end{aligned}⟧Limite finie : pas d'asymptote verticale, trou dans le graphique en ⟦(e\\,;\\,e^{-1})⟧.",
+    "texte": "⟦x \\to e⟧limite⟦\\begin{aligned}\\lim_{x\\to e} \\frac{\\ln(x) - 1}{x - e} &= \\text{« }\\dfrac{\\ln e - 1}{e - e}\\text{ »} = \\text{« }\\dfrac{1 - 1}{0}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to e} \\frac{\\frac{1}{x}}{1} = e^{-1} \\qquad \\left(\\text{haut : } \\left(\\ln(x) - 1\\right)' = \\frac{1}{x} \\; ;\\; \\text{bas : } \\left(x - e\\right)' = 1\\right)\\end{aligned}⟧Limite finie : pas d'asymptote verticale, trou dans le graphique en ⟦(e\\,;\\,e^{-1})⟧.",
     "titre": "⟦x \\to e⟧limite"
    },
    {
@@ -546,7 +546,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to 0^+⟧limite⟦\\begin{aligned}\\lim_{x\\to 0^{+}} \\frac{\\ln(x) - 2}{\\ln(x) - 1} &= \\text{« }\\dfrac{\\ln\\left(0^{+}\\right) - 2}{\\ln\\left(0^{+}\\right) - 1}\\text{ »} = \\text{« }\\dfrac{-\\infty - 2}{-\\infty - 1}\\text{ »} = \\text{« }\\dfrac{-\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 0^{+}} 1 = 1 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln(x) - 2 \\text{ et } \\ln(x) - 1 \\text{ dérivables sur } \\left]0 \\,;\\, +\\infty\\right[ ,\\; \\left(\\ln(x) - 1\\right)' = \\frac{1}{x} \\text{ ne s'annule pas sur } \\left]0 \\,;\\, +\\infty\\right[\\right)\\end{aligned}⟧Limite finie : pas d'asymptote verticale, trou dans le graphique en ⟦(0\\,;\\,1)⟧.",
+    "texte": "⟦x \\to 0^+⟧limite⟦\\begin{aligned}\\lim_{x\\to 0^{+}} \\frac{\\ln(x) - 2}{\\ln(x) - 1} &= \\text{« }\\dfrac{\\ln\\left(0^{+}\\right) - 2}{\\ln\\left(0^{+}\\right) - 1}\\text{ »} = \\text{« }\\dfrac{-\\infty - 2}{-\\infty - 1}\\text{ »} = \\text{« }\\dfrac{-\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to 0^{+}} 1 = 1 \\qquad \\left(\\text{haut : } \\left(\\ln(x) - 2\\right)' = \\frac{1}{x} \\; ;\\; \\text{bas : } \\left(\\ln(x) - 1\\right)' = \\frac{1}{x}\\right)\\end{aligned}⟧Limite finie : pas d'asymptote verticale, trou dans le graphique en ⟦(0\\,;\\,1)⟧.",
     "titre": "⟦x \\to 0^+⟧limite"
    },
    {
@@ -556,7 +556,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln(x) - 2}{\\ln(x) - 1} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right) - 2}{\\ln\\left(+\\infty\\right) - 1}\\text{ »} = \\text{« }\\dfrac{+\\infty - 2}{+\\infty - 1}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} 1 = 1 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln(x) - 2 \\text{ et } \\ln(x) - 1 \\text{ dérivables sur } \\left]0 \\,;\\, +\\infty\\right[ ,\\; \\left(\\ln(x) - 1\\right)' = \\frac{1}{x} \\text{ ne s'annule pas sur } \\left]0 \\,;\\, +\\infty\\right[\\right)\\end{aligned}⟧Asymptote horizontale : ⟦y = 1⟧.",
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln(x) - 2}{\\ln(x) - 1} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right) - 2}{\\ln\\left(+\\infty\\right) - 1}\\text{ »} = \\text{« }\\dfrac{+\\infty - 2}{+\\infty - 1}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} 1 = 1 \\qquad \\left(\\text{haut : } \\left(\\ln(x) - 2\\right)' = \\frac{1}{x} \\; ;\\; \\text{bas : } \\left(\\ln(x) - 1\\right)' = \\frac{1}{x}\\right)\\end{aligned}⟧Asymptote horizontale : ⟦y = 1⟧.",
     "titre": "⟦x \\to +\\infty⟧limite"
    },
    {
@@ -1687,7 +1687,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x}}{\\ln(x)} &= \\text{« }\\dfrac{e^{+\\infty}}{\\ln\\left(+\\infty\\right)}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} x\\,e^{x} = \\text{« }+\\infty \\cdot +\\infty\\text{ »} = +\\infty \\qquad \\left(\\text{Bernoulli-L'Hôpital : } e^{x} \\text{ et } \\ln(x) \\text{ dérivables sur } \\left]0 \\,;\\, +\\infty\\right[ ,\\; \\left(\\ln(x)\\right)' = \\frac{1}{x} \\text{ ne s'annule pas sur } \\left]0 \\,;\\, +\\infty\\right[\\right)\\end{aligned}⟧",
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x}}{\\ln(x)} &= \\text{« }\\dfrac{e^{+\\infty}}{\\ln\\left(+\\infty\\right)}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} x\\,e^{x} = \\text{« }+\\infty \\cdot +\\infty\\text{ »} = +\\infty \\qquad \\left(\\text{haut : } \\left(e^{x}\\right)' = e^{x} \\; ;\\; \\text{bas : } \\left(\\ln(x)\\right)' = \\frac{1}{x}\\right)\\end{aligned}⟧",
     "titre": "⟦x \\to +\\infty⟧limite"
    },
    {
@@ -1824,7 +1824,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x}}{x} &= \\text{« }\\dfrac{e^{+\\infty}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{e^{x}}{1} = +\\infty \\qquad \\left(\\text{Bernoulli-L'Hôpital : } e^{x} \\text{ et } x \\text{ dérivables sur } \\mathbb{R} ,\\; x' = 1 \\neq 0\\right)\\end{aligned}⟧",
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x}}{x} &= \\text{« }\\dfrac{e^{+\\infty}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{e^{x}}{1} = +\\infty \\qquad \\left(\\text{haut : } \\left(e^{x}\\right)' = e^{x} \\; ;\\; \\text{bas : } \\left(x\\right)' = 1\\right)\\end{aligned}⟧",
     "titre": "⟦x \\to +\\infty⟧limite"
    },
    {
@@ -1899,7 +1899,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{\\ln\\left(1 + e^{x}\\right)}{e^{x}} &= \\text{« }\\dfrac{\\ln\\left(1 + e^{-\\infty}\\right)}{e^{-\\infty}}\\text{ »} = \\text{« }\\dfrac{\\ln\\left(1 + 0\\right)}{0}\\text{ »} = \\text{« }\\dfrac{\\ln 1}{0}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\frac{1}{e^{x} + 1} = 1 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln\\left(1 + e^{x}\\right) \\text{ et } e^{x} \\text{ dérivables sur } \\mathbb{R} ,\\; \\left(e^{x}\\right)' = e^{x} \\text{ ne s'annule pas sur } \\mathbb{R}\\right)\\end{aligned}⟧Asymptote horizontale : ⟦y = 1⟧.",
+    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{\\ln\\left(1 + e^{x}\\right)}{e^{x}} &= \\text{« }\\dfrac{\\ln\\left(1 + e^{-\\infty}\\right)}{e^{-\\infty}}\\text{ »} = \\text{« }\\dfrac{\\ln\\left(1 + 0\\right)}{0}\\text{ »} = \\text{« }\\dfrac{\\ln 1}{0}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to -\\infty} \\frac{1}{e^{x} + 1} = 1 \\qquad \\left(\\text{haut : } \\left(\\ln\\left(1 + e^{x}\\right)\\right)' = \\frac{e^{x}}{1 + e^{x}} \\; ;\\; \\text{bas : } \\left(e^{x}\\right)' = e^{x}\\right)\\end{aligned}⟧Asymptote horizontale : ⟦y = 1⟧.",
     "titre": "⟦x \\to -\\infty⟧limite"
    },
    {
@@ -1909,7 +1909,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln\\left(1 + e^{x}\\right)}{e^{x}} &= \\text{« }\\dfrac{\\ln\\left(1 + e^{+\\infty}\\right)}{e^{+\\infty}}\\text{ »} = \\text{« }\\dfrac{\\ln\\left(1 + \\infty\\right)}{+\\infty}\\text{ »} = \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{1}{e^{x} + 1} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln\\left(1 + e^{x}\\right) \\text{ et } e^{x} \\text{ dérivables sur } \\mathbb{R} ,\\; \\left(e^{x}\\right)' = e^{x} \\text{ ne s'annule pas sur } \\mathbb{R}\\right)\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln\\left(1 + e^{x}\\right)}{e^{x}} &= \\text{« }\\dfrac{\\ln\\left(1 + e^{+\\infty}\\right)}{e^{+\\infty}}\\text{ »} = \\text{« }\\dfrac{\\ln\\left(1 + \\infty\\right)}{+\\infty}\\text{ »} = \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{1}{e^{x} + 1} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0 \\qquad \\left(\\text{haut : } \\left(\\ln\\left(1 + e^{x}\\right)\\right)' = \\frac{e^{x}}{1 + e^{x}} \\; ;\\; \\text{bas : } \\left(e^{x}\\right)' = e^{x}\\right)\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
     "titre": "⟦x \\to +\\infty⟧limite"
    },
    {
@@ -2020,7 +2020,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln(x)}{e^{2x}} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{e^{+\\infty}}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{\\frac{1}{2}e^{-2x}}{x} = \\text{« }\\dfrac{\\frac{1}{2} \\cdot 0^{+}}{+\\infty}\\text{ »} = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln(x) \\text{ et } e^{2x} \\text{ dérivables sur } \\left]0 \\,;\\, +\\infty\\right[ ,\\; \\left(e^{2x}\\right)' = 2e^{2x} \\text{ ne s'annule pas sur } \\left]0 \\,;\\, +\\infty\\right[\\right)\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln(x)}{e^{2x}} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{e^{+\\infty}}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{\\frac{1}{2}e^{-2x}}{x} = \\text{« }\\dfrac{\\frac{1}{2} \\cdot 0^{+}}{+\\infty}\\text{ »} = 0 \\qquad \\left(\\text{haut : } \\left(\\ln(x)\\right)' = \\frac{1}{x} \\; ;\\; \\text{bas : } \\left(e^{2x}\\right)' = 2e^{2x}\\right)\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
     "titre": "⟦x \\to +\\infty⟧limite"
    },
    {
@@ -2147,7 +2147,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln\\left(x + 1\\right)}{x} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{\\frac{1}{x + 1}}{1} = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln\\left(x + 1\\right) \\text{ et } x \\text{ dérivables sur } \\left]-1 \\,;\\, +\\infty\\right[ ,\\; x' = 1 \\neq 0\\right)\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln\\left(x + 1\\right)}{x} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{\\frac{1}{x + 1}}{1} = 0 \\qquad \\left(\\text{haut : } \\left(\\ln\\left(x + 1\\right)\\right)' = \\frac{1}{x + 1} \\; ;\\; \\text{bas : } \\left(x\\right)' = 1\\right)\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
     "titre": "⟦x \\to +\\infty⟧limite"
    },
    {
@@ -2157,7 +2157,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to 0⟧limite⟦\\begin{aligned}\\lim_{x\\to 0} \\frac{\\ln\\left(x + 1\\right)}{x} &= \\text{« }\\dfrac{\\ln 1}{0}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 0} \\frac{\\frac{1}{x + 1}}{1} = 1 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln\\left(x + 1\\right) \\text{ et } x \\text{ dérivables sur } \\left]-1 \\,;\\, +\\infty\\right[ ,\\; x' = 1 \\neq 0\\right)\\end{aligned}⟧Limite finie : pas d'asymptote verticale, trou dans le graphique en ⟦(0\\,;\\,1)⟧.",
+    "texte": "⟦x \\to 0⟧limite⟦\\begin{aligned}\\lim_{x\\to 0} \\frac{\\ln\\left(x + 1\\right)}{x} &= \\text{« }\\dfrac{\\ln 1}{0}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to 0} \\frac{\\frac{1}{x + 1}}{1} = 1 \\qquad \\left(\\text{haut : } \\left(\\ln\\left(x + 1\\right)\\right)' = \\frac{1}{x + 1} \\; ;\\; \\text{bas : } \\left(x\\right)' = 1\\right)\\end{aligned}⟧Limite finie : pas d'asymptote verticale, trou dans le graphique en ⟦(0\\,;\\,1)⟧.",
     "titre": "⟦x \\to 0⟧limite"
    },
    {
@@ -2417,7 +2417,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{\\ln\\left(x^{2} - 3\\right)}{2 - x} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\frac{-2x}{x^{2} - 3} \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln\\left(x^{2} - 3\\right) \\text{ et } 2 - x \\text{ dérivables sur } \\left]-\\infty \\,;\\, -\\sqrt{3}\\right[ ,\\; \\left(2 - x\\right)' = -1 \\neq 0\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{-2x}{x^{2}\\,\\left(1 - \\frac{3}{x^{2}}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} -\\frac{2}{x\\,\\left(1 - \\frac{3}{x^{2}}\\right)} = \\text{« }-\\left(\\dfrac{2}{-\\infty \\cdot 1}\\right)\\text{ »} = 0\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{\\ln\\left(x^{2} - 3\\right)}{2 - x} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to -\\infty} \\frac{-2x}{x^{2} - 3} \\qquad \\left(\\text{haut : } \\left(\\ln\\left(x^{2} - 3\\right)\\right)' = \\frac{2x}{x^{2} - 3} \\; ;\\; \\text{bas : } \\left(2 - x\\right)' = -1\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{-2x}{x^{2}\\,\\left(1 - \\frac{3}{x^{2}}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} -\\frac{2}{x\\,\\left(1 - \\frac{3}{x^{2}}\\right)} = \\text{« }-\\left(\\dfrac{2}{-\\infty \\cdot 1}\\right)\\text{ »} = 0\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
     "titre": "⟦x \\to -\\infty⟧limite"
    },
    {
@@ -2427,7 +2427,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln\\left(x^{2} - 3\\right)}{2 - x} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{-\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{-2x}{x^{2} - 3} \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln\\left(x^{2} - 3\\right) \\text{ et } 2 - x \\text{ dérivables sur } \\left]\\sqrt{3} \\,;\\, +\\infty\\right[ ,\\; \\left(2 - x\\right)' = -1 \\neq 0\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{-2x}{x^{2}\\,\\left(1 - \\frac{3}{x^{2}}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} -\\frac{2}{x\\,\\left(1 - \\frac{3}{x^{2}}\\right)} = \\text{« }-\\left(\\dfrac{2}{+\\infty \\cdot 1}\\right)\\text{ »} = 0\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln\\left(x^{2} - 3\\right)}{2 - x} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{-\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{-2x}{x^{2} - 3} \\qquad \\left(\\text{haut : } \\left(\\ln\\left(x^{2} - 3\\right)\\right)' = \\frac{2x}{x^{2} - 3} \\; ;\\; \\text{bas : } \\left(2 - x\\right)' = -1\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{-2x}{x^{2}\\,\\left(1 - \\frac{3}{x^{2}}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} -\\frac{2}{x\\,\\left(1 - \\frac{3}{x^{2}}\\right)} = \\text{« }-\\left(\\dfrac{2}{+\\infty \\cdot 1}\\right)\\text{ »} = 0\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
     "titre": "⟦x \\to +\\infty⟧limite"
    },
    {
@@ -2457,7 +2457,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to 2⟧limite⟦\\begin{aligned}\\lim_{x\\to 2} \\frac{\\ln\\left(x^{2} - 3\\right)}{2 - x} &= \\text{« }\\dfrac{\\ln 1}{0}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 2} \\frac{\\frac{2x}{x^{2} - 3}}{-1} = -4 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln\\left(x^{2} - 3\\right) \\text{ et } 2 - x \\text{ dérivables sur } \\left]\\sqrt{3} \\,;\\, +\\infty\\right[ ,\\; \\left(2 - x\\right)' = -1 \\neq 0\\right)\\end{aligned}⟧Limite finie : pas d'asymptote verticale, trou dans le graphique en ⟦(2\\,;\\,-4)⟧.",
+    "texte": "⟦x \\to 2⟧limite⟦\\begin{aligned}\\lim_{x\\to 2} \\frac{\\ln\\left(x^{2} - 3\\right)}{2 - x} &= \\text{« }\\dfrac{\\ln 1}{0}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to 2} \\frac{\\frac{2x}{x^{2} - 3}}{-1} = -4 \\qquad \\left(\\text{haut : } \\left(\\ln\\left(x^{2} - 3\\right)\\right)' = \\frac{2x}{x^{2} - 3} \\; ;\\; \\text{bas : } \\left(2 - x\\right)' = -1\\right)\\end{aligned}⟧Limite finie : pas d'asymptote verticale, trou dans le graphique en ⟦(2\\,;\\,-4)⟧.",
     "titre": "⟦x \\to 2⟧limite"
    },
    {
@@ -2727,7 +2727,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} &= \\text{« }\\dfrac{\\ln\\left(+\\infty + \\infty\\right)}{-\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\frac{2x - 4}{x^{2} - 4x} \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln\\left(x^{2} - 4x\\right) \\text{ et } x - 5 \\text{ dérivables sur } \\left]-\\infty \\,;\\, 0\\right[ ,\\; \\left(x - 5\\right)' = 1 \\neq 0\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x\\,\\left(2 - \\frac{4}{x}\\right)}{x^{2}\\,\\left(1 - \\frac{4}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{2 - \\frac{4}{x}}{x\\,\\left(1 - \\frac{4}{x}\\right)} = \\text{« }\\dfrac{2}{-\\infty \\cdot 1}\\text{ »} = 0\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} &= \\text{« }\\dfrac{\\ln\\left(+\\infty + \\infty\\right)}{-\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to -\\infty} \\frac{2x - 4}{x^{2} - 4x} \\qquad \\left(\\text{haut : } \\left(\\ln\\left(x^{2} - 4x\\right)\\right)' = \\frac{2x - 4}{x^{2} - 4x} \\; ;\\; \\text{bas : } \\left(x - 5\\right)' = 1\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x\\,\\left(2 - \\frac{4}{x}\\right)}{x^{2}\\,\\left(1 - \\frac{4}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{2 - \\frac{4}{x}}{x\\,\\left(1 - \\frac{4}{x}\\right)} = \\text{« }\\dfrac{2}{-\\infty \\cdot 1}\\text{ »} = 0\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
     "titre": "⟦x \\to -\\infty⟧limite"
    },
    {
@@ -2737,7 +2737,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\qquad \\left(\\text{le terme dominant de } x^{2} - 4x \\text{ est } x^{2}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{2x - 4}{x^{2} - 4x} \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln\\left(x^{2} - 4x\\right) \\text{ et } x - 5 \\text{ dérivables sur } \\left]4 \\,;\\, +\\infty\\right[ ,\\; \\left(x - 5\\right)' = 1 \\neq 0\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x\\,\\left(2 - \\frac{4}{x}\\right)}{x^{2}\\,\\left(1 - \\frac{4}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{2 - \\frac{4}{x}}{x\\,\\left(1 - \\frac{4}{x}\\right)} = \\text{« }\\dfrac{2}{+\\infty \\cdot 1}\\text{ »} = 0\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\qquad \\left(\\text{le terme dominant de } x^{2} - 4x \\text{ est } x^{2}\\right) \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{2x - 4}{x^{2} - 4x} \\qquad \\left(\\text{haut : } \\left(\\ln\\left(x^{2} - 4x\\right)\\right)' = \\frac{2x - 4}{x^{2} - 4x} \\; ;\\; \\text{bas : } \\left(x - 5\\right)' = 1\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x\\,\\left(2 - \\frac{4}{x}\\right)}{x^{2}\\,\\left(1 - \\frac{4}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{2 - \\frac{4}{x}}{x\\,\\left(1 - \\frac{4}{x}\\right)} = \\text{« }\\dfrac{2}{+\\infty \\cdot 1}\\text{ »} = 0\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
     "titre": "⟦x \\to +\\infty⟧limite"
    },
    {
@@ -2928,7 +2928,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} x\\,e^{x} &= \\text{« }-\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }-\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x}{e^{-x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &= \\lim_{x\\to -\\infty} -e^{x} = \\text{« }-\\left(e^{-\\infty}\\right)\\text{ »} = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } x \\text{ et } e^{-x} \\text{ dérivables sur } \\mathbb{R} ,\\; \\left(e^{-x}\\right)' = -e^{-x} \\text{ ne s'annule pas sur } \\mathbb{R}\\right)\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} x\\,e^{x} &= \\text{« }-\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }-\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x}{e^{-x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to -\\infty} -e^{x} = \\text{« }-\\left(e^{-\\infty}\\right)\\text{ »} = 0 \\qquad \\left(\\text{haut : } \\left(x\\right)' = 1 \\; ;\\; \\text{bas : } \\left(e^{-x}\\right)' = -e^{-x}\\right)\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
     "titre": "⟦x \\to -\\infty⟧limite"
    },
    {
@@ -3074,7 +3074,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to 0⟧limite⟦\\begin{aligned}\\lim_{x\\to 0^{-}} x\\,\\ln\\left(x^{2}\\right) &= \\text{« }0^{-} \\cdot \\ln\\left(0^{+}\\right)\\text{ »} = \\text{« }0^{-} \\cdot \\left(-\\infty\\right)\\text{ »}\\text{ : forme indéterminée} \\qquad \\left(x^{2} > 0 \\text{ : cf. tableau de signes}\\right) \\\\ &= \\lim_{x\\to 0^{-}} \\dfrac{\\ln\\left(x^{2}\\right)}{\\frac{1}{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &= \\lim_{x\\to 0^{-}} -2x = -2 \\cdot 0 = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln\\left(x^{2}\\right) \\text{ et } \\frac{1}{x} \\text{ dérivables sur } \\mathbb{R} \\setminus \\left\\{0\\right\\} ,\\; \\left(\\frac{1}{x}\\right)' = \\frac{-1}{x^{2}} \\text{ ne s'annule pas sur } \\mathbb{R} \\setminus \\left\\{0\\right\\}\\right)\\end{aligned}⟧⟦\\begin{aligned}\\lim_{x\\to 0^{+}} x\\,\\ln\\left(x^{2}\\right) &= \\text{« }0^{+} \\cdot \\ln\\left(0^{+}\\right)\\text{ »} = \\text{« }0^{+} \\cdot \\left(-\\infty\\right)\\text{ »}\\text{ : forme indéterminée} \\qquad \\left(x^{2} > 0 \\text{ : cf. tableau de signes}\\right) \\\\ &= \\lim_{x\\to 0^{+}} \\dfrac{\\ln\\left(x^{2}\\right)}{\\frac{1}{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &= \\lim_{x\\to 0^{+}} -2x = -2 \\cdot 0 = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln\\left(x^{2}\\right) \\text{ et } \\frac{1}{x} \\text{ dérivables sur } \\mathbb{R} \\setminus \\left\\{0\\right\\} ,\\; \\left(\\frac{1}{x}\\right)' = \\frac{-1}{x^{2}} \\text{ ne s'annule pas sur } \\mathbb{R} \\setminus \\left\\{0\\right\\}\\right)\\end{aligned}⟧Limite finie : pas d'asymptote verticale, trou dans le graphique en ⟦(0\\,;\\,0)⟧.",
+    "texte": "⟦x \\to 0⟧limite⟦\\begin{aligned}\\lim_{x\\to 0^{-}} x\\,\\ln\\left(x^{2}\\right) &= \\text{« }0^{-} \\cdot \\ln\\left(0^{+}\\right)\\text{ »} = \\text{« }0^{-} \\cdot \\left(-\\infty\\right)\\text{ »}\\text{ : forme indéterminée} \\qquad \\left(x^{2} > 0 \\text{ : cf. tableau de signes}\\right) \\\\ &= \\lim_{x\\to 0^{-}} \\dfrac{\\ln\\left(x^{2}\\right)}{\\frac{1}{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to 0^{-}} -2x = -2 \\cdot 0 = 0 \\qquad \\left(\\text{haut : } \\left(\\ln\\left(x^{2}\\right)\\right)' = \\frac{2x}{x^{2}} \\; ;\\; \\text{bas : } \\left(\\frac{1}{x}\\right)' = -\\frac{1}{x^{2}}\\right)\\end{aligned}⟧⟦\\begin{aligned}\\lim_{x\\to 0^{+}} x\\,\\ln\\left(x^{2}\\right) &= \\text{« }0^{+} \\cdot \\ln\\left(0^{+}\\right)\\text{ »} = \\text{« }0^{+} \\cdot \\left(-\\infty\\right)\\text{ »}\\text{ : forme indéterminée} \\qquad \\left(x^{2} > 0 \\text{ : cf. tableau de signes}\\right) \\\\ &= \\lim_{x\\to 0^{+}} \\dfrac{\\ln\\left(x^{2}\\right)}{\\frac{1}{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to 0^{+}} -2x = -2 \\cdot 0 = 0 \\qquad \\left(\\text{haut : } \\left(\\ln\\left(x^{2}\\right)\\right)' = \\frac{2x}{x^{2}} \\; ;\\; \\text{bas : } \\left(\\frac{1}{x}\\right)' = -\\frac{1}{x^{2}}\\right)\\end{aligned}⟧Limite finie : pas d'asymptote verticale, trou dans le graphique en ⟦(0\\,;\\,0)⟧.",
     "titre": "⟦x \\to 0⟧limite"
    },
    {
@@ -3289,7 +3289,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} x\\,e^{-x} &= \\text{« }+\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }+\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x}{e^{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &= \\lim_{x\\to +\\infty} e^{-x} = \\text{« }e^{-\\infty}\\text{ »} = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } x \\text{ et } e^{x} \\text{ dérivables sur } \\mathbb{R} ,\\; \\left(e^{x}\\right)' = e^{x} \\text{ ne s'annule pas sur } \\mathbb{R}\\right)\\end{aligned}⟧⟦\\begin{aligned}\\lim_{x\\to +\\infty} x^{2}\\,e^{-x} &= \\text{« }+\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }+\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}}{e^{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &= \\lim_{x\\to +\\infty} 2x\\,e^{-x} = \\text{« }2 \\cdot +\\infty \\cdot 0^{+}\\text{ »} = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } x^{2} \\text{ et } e^{x} \\text{ dérivables sur } \\mathbb{R} ,\\; \\left(e^{x}\\right)' = e^{x} \\text{ ne s'annule pas sur } \\mathbb{R}\\right)\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} x\\,e^{-x} &= \\text{« }+\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }+\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x}{e^{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} e^{-x} = \\text{« }e^{-\\infty}\\text{ »} = 0 \\qquad \\left(\\text{haut : } \\left(x\\right)' = 1 \\; ;\\; \\text{bas : } \\left(e^{x}\\right)' = e^{x}\\right)\\end{aligned}⟧⟦\\begin{aligned}\\lim_{x\\to +\\infty} x^{2}\\,e^{-x} &= \\text{« }+\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }+\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}}{e^{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} 2x\\,e^{-x} = \\text{« }2 \\cdot +\\infty \\cdot 0^{+}\\text{ »} = 0 \\qquad \\left(\\text{haut : } \\left(x^{2}\\right)' = 2x \\; ;\\; \\text{bas : } \\left(e^{x}\\right)' = e^{x}\\right)\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
     "titre": "⟦x \\to +\\infty⟧limite"
    },
    {
@@ -3472,7 +3472,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} x\\,e^{3x} &= \\text{« }-\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }-\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x}{e^{-3x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &= \\lim_{x\\to -\\infty} -\\frac{1}{3}e^{3x} = \\text{« }\\left(- \\frac{1}{3}\\right) \\cdot 0^{+}\\text{ »} = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } x \\text{ et } e^{-3x} \\text{ dérivables sur } \\mathbb{R} ,\\; \\left(e^{-3x}\\right)' = -3e^{-3x} \\text{ ne s'annule pas sur } \\mathbb{R}\\right)\\end{aligned}⟧⟦\\begin{aligned}\\lim_{x\\to -\\infty} x^{3}\\,e^{3x} &= \\text{« }-\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }-\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x^{3}}{e^{-3x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &= \\lim_{x\\to -\\infty} -x^{2}\\,e^{3x} \\qquad \\left(\\text{Bernoulli-L'Hôpital : } x^{3} \\text{ et } e^{-3x} \\text{ dérivables sur } \\mathbb{R} ,\\; \\left(e^{-3x}\\right)' = -3e^{-3x} \\text{ ne s'annule pas sur } \\mathbb{R}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{-x^{2}}{e^{-3x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{2}{3}x\\,e^{3x} = \\text{« }\\frac{2}{3} \\cdot \\left(-\\infty\\right) \\cdot 0^{+}\\text{ »} = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } -x^{2} \\text{ et } e^{-3x} \\text{ dérivables sur } \\mathbb{R} ,\\; \\left(e^{-3x}\\right)' = -3e^{-3x} \\text{ ne s'annule pas sur } \\mathbb{R}\\right)\\end{aligned}⟧⟦\\begin{aligned}\\lim_{x\\to -\\infty} x^{3}\\,e^{3x - 5} &= \\text{« }-\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }-\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} e^{-5}\\,x^{3}\\,e^{3x} = \\text{« }e^{-5} \\cdot \\left(-\\infty\\right) \\cdot 0^{+}\\text{ »} = 0 \\qquad \\left(\\text{on sort la constante}\\right)\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} x\\,e^{3x} &= \\text{« }-\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }-\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x}{e^{-3x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to -\\infty} -\\frac{1}{3}e^{3x} = \\text{« }\\left(- \\frac{1}{3}\\right) \\cdot 0^{+}\\text{ »} = 0 \\qquad \\left(\\text{haut : } \\left(x\\right)' = 1 \\; ;\\; \\text{bas : } \\left(e^{-3x}\\right)' = -3e^{-3x}\\right)\\end{aligned}⟧⟦\\begin{aligned}\\lim_{x\\to -\\infty} x^{3}\\,e^{3x} &= \\text{« }-\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }-\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x^{3}}{e^{-3x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to -\\infty} -x^{2}\\,e^{3x} \\qquad \\left(\\text{haut : } \\left(x^{3}\\right)' = 3x^{2} \\; ;\\; \\text{bas : } \\left(e^{-3x}\\right)' = -3e^{-3x}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{-x^{2}}{e^{-3x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to -\\infty} \\frac{2}{3}x\\,e^{3x} = \\text{« }\\frac{2}{3} \\cdot \\left(-\\infty\\right) \\cdot 0^{+}\\text{ »} = 0 \\qquad \\left(\\text{haut : } \\left(-x^{2}\\right)' = -2x \\; ;\\; \\text{bas : } \\left(e^{-3x}\\right)' = -3e^{-3x}\\right)\\end{aligned}⟧⟦\\begin{aligned}\\lim_{x\\to -\\infty} x^{3}\\,e^{3x - 5} &= \\text{« }-\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }-\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} e^{-5}\\,x^{3}\\,e^{3x} = \\text{« }e^{-5} \\cdot \\left(-\\infty\\right) \\cdot 0^{+}\\text{ »} = 0 \\qquad \\left(\\text{on sort la constante}\\right)\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
     "titre": "⟦x \\to -\\infty⟧limite"
    },
    {

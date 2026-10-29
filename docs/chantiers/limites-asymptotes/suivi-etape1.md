@@ -39,3 +39,10 @@ Temps dans Pyodide (page, SymPy précompilé) : de 0,9 s à 3,4 s par exemple (3
 - Nettoyage : supprimer le code mort `_comparee_pure`, `_comparee_avec_polynomes`, `REFERENCES`, `_reference`, `_ligne_reference`, `_evidence_ln`.
 - Rédaction à améliorer (hors périmètre ce soir) : les 0·∞ en cascade s'écrivent en blocs imbriqués (sous-limite d'abord), non en « BH (1re fois), (2e fois) » ; « −0 = 0 » ; l'hypothèse (d) n'est pas écrite.
 - Un `3.10e` rédigé par mise en évidence et l'asymptote oblique de x·e^(1/x) (repli) à reprendre avec la décision de l'étape 2.
+
+## Présentation du pas BH (demande du 29.10.2026, soir)
+
+- Le signe égal du pas BH porte l'étiquette `\overset{\text{BH}}{=}` ; la parenthèse à droite donne les deux dérivées séparément, avant la simplification de f′/g′, sous leur forme naturelle (`_derivee_nat`, confirmée numériquement par la dérivée de SymPy, sinon repli sur la forme de SymPy) : `(haut : (ln x)′ = 1/x ; bas : (x)′ = 1)`.
+- Les hypothèses (dérivabilité sur l'intervalle, g′ ≠ 0) ne s'affichent plus (il n'existe pas de « détail » dépliable : `detail` ne va qu'à la console) ; le moteur les vérifie toujours.
+- S'applique à tous les chemins (limite simple, 0·∞ en quotient, exposant, asymptote oblique, Étude complète) : un seul endroit, `_lhopital_avec`.
+- **Reste prévu à l'étape 4** : le tableau « haut → dérivée / bas → dérivée » avant la ligne BH, et la table de dérivées maison pour la simplification de f′/g′ (aujourd'hui `sp.simplify`).

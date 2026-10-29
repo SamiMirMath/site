@@ -147,7 +147,7 @@
     "badge": "limite",
     "blocs": [
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x}}{x} &= \\text{« }\\dfrac{e^{+\\infty}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{e^{x}}{1} = +\\infty \\qquad \\left(\\text{Bernoulli-L'Hôpital : } e^{x} \\text{ et } x \\text{ dérivables sur } \\mathbb{R} ,\\; x' = 1 \\neq 0\\right)\\end{aligned}\\]",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x}}{x} &= \\text{« }\\dfrac{e^{+\\infty}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{e^{x}}{1} = +\\infty \\qquad \\left(\\text{haut : } \\left(e^{x}\\right)' = e^{x} \\; ;\\; \\text{bas : } \\left(x\\right)' = 1\\right)\\end{aligned}\\]",
       "style": "etape",
       "type": "texte"
      },
@@ -165,7 +165,7 @@
     "badge": "limite",
     "blocs": [
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to 0} \\frac{e^{x} - 1}{x} &= \\text{« }\\dfrac{e^{0} - 1}{0}\\text{ »} = \\text{« }\\dfrac{1 - 1}{0}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 0} \\frac{e^{x}}{1} = 1 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } e^{x} - 1 \\text{ et } x \\text{ dérivables sur } \\mathbb{R} ,\\; x' = 1 \\neq 0\\right)\\end{aligned}\\]",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0} \\frac{e^{x} - 1}{x} &= \\text{« }\\dfrac{e^{0} - 1}{0}\\text{ »} = \\text{« }\\dfrac{1 - 1}{0}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to 0} \\frac{e^{x}}{1} = 1 \\qquad \\left(\\text{haut : } \\left(e^{x} - 1\\right)' = e^{x} \\; ;\\; \\text{bas : } \\left(x\\right)' = 1\\right)\\end{aligned}\\]",
       "style": "etape",
       "type": "texte"
      },
@@ -773,7 +773,7 @@
     "badge": "limite",
     "blocs": [
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} x\\,\\ln(x) &= \\text{« }0^{+} \\cdot \\ln\\left(0^{+}\\right)\\text{ »} = \\text{« }0^{+} \\cdot \\left(-\\infty\\right)\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 0^{+}} \\dfrac{\\ln(x)}{\\frac{1}{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &= \\lim_{x\\to 0^{+}} -x = -0 = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln(x) \\text{ et } \\frac{1}{x} \\text{ dérivables sur } \\left]0 \\,;\\, +\\infty\\right[ ,\\; \\left(\\frac{1}{x}\\right)' = \\frac{-1}{x^{2}} \\text{ ne s'annule pas sur } \\left]0 \\,;\\, +\\infty\\right[\\right)\\end{aligned}\\]",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} x\\,\\ln(x) &= \\text{« }0^{+} \\cdot \\ln\\left(0^{+}\\right)\\text{ »} = \\text{« }0^{+} \\cdot \\left(-\\infty\\right)\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 0^{+}} \\dfrac{\\ln(x)}{\\frac{1}{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to 0^{+}} -x = -0 = 0 \\qquad \\left(\\text{haut : } \\left(\\ln(x)\\right)' = \\frac{1}{x} \\; ;\\; \\text{bas : } \\left(\\frac{1}{x}\\right)' = -\\frac{1}{x^{2}}\\right)\\end{aligned}\\]",
       "style": "etape",
       "type": "texte"
      },
@@ -1559,7 +1559,7 @@
     "badge": "limite",
     "blocs": [
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln(x)}{x} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{\\frac{1}{x}}{1} = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln(x) \\text{ et } x \\text{ dérivables sur } \\left]0 \\,;\\, +\\infty\\right[ ,\\; x' = 1 \\neq 0\\right)\\end{aligned}\\]",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln(x)}{x} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{\\frac{1}{x}}{1} = 0 \\qquad \\left(\\text{haut : } \\left(\\ln(x)\\right)' = \\frac{1}{x} \\; ;\\; \\text{bas : } \\left(x\\right)' = 1\\right)\\end{aligned}\\]",
       "style": "etape",
       "type": "texte"
      },
@@ -2088,7 +2088,7 @@
     "badge": "limite",
     "blocs": [
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} x\\,\\ln(x) &= \\text{« }0^{+} \\cdot \\ln\\left(0^{+}\\right)\\text{ »} = \\text{« }0^{+} \\cdot \\left(-\\infty\\right)\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 0^{+}} \\dfrac{\\ln(x)}{\\frac{1}{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &= \\lim_{x\\to 0^{+}} -x = -0 = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln(x) \\text{ et } \\frac{1}{x} \\text{ dérivables sur } \\left]0 \\,;\\, +\\infty\\right[ ,\\; \\left(\\frac{1}{x}\\right)' = \\frac{-1}{x^{2}} \\text{ ne s'annule pas sur } \\left]0 \\,;\\, +\\infty\\right[\\right)\\end{aligned}\\]",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 0^{+}} x\\,\\ln(x) &= \\text{« }0^{+} \\cdot \\ln\\left(0^{+}\\right)\\text{ »} = \\text{« }0^{+} \\cdot \\left(-\\infty\\right)\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 0^{+}} \\dfrac{\\ln(x)}{\\frac{1}{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to 0^{+}} -x = -0 = 0 \\qquad \\left(\\text{haut : } \\left(\\ln(x)\\right)' = \\frac{1}{x} \\; ;\\; \\text{bas : } \\left(\\frac{1}{x}\\right)' = -\\frac{1}{x^{2}}\\right)\\end{aligned}\\]",
       "style": "etape",
       "type": "texte"
      },
@@ -3095,12 +3095,12 @@
     "badge": "limite",
     "blocs": [
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} x\\,e^{-x} &= \\text{« }+\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }+\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x}{e^{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &= \\lim_{x\\to +\\infty} e^{-x} = \\text{« }e^{-\\infty}\\text{ »} = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } x \\text{ et } e^{x} \\text{ dérivables sur } \\mathbb{R} ,\\; \\left(e^{x}\\right)' = e^{x} \\text{ ne s'annule pas sur } \\mathbb{R}\\right)\\end{aligned}\\]",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} x\\,e^{-x} &= \\text{« }+\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }+\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x}{e^{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} e^{-x} = \\text{« }e^{-\\infty}\\text{ »} = 0 \\qquad \\left(\\text{haut : } \\left(x\\right)' = 1 \\; ;\\; \\text{bas : } \\left(e^{x}\\right)' = e^{x}\\right)\\end{aligned}\\]",
       "style": "etape",
       "type": "texte"
      },
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} x^{2}\\,e^{-x} &= \\text{« }+\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }+\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}}{e^{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &= \\lim_{x\\to +\\infty} 2x\\,e^{-x} = \\text{« }2 \\cdot +\\infty \\cdot 0^{+}\\text{ »} = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } x^{2} \\text{ et } e^{x} \\text{ dérivables sur } \\mathbb{R} ,\\; \\left(e^{x}\\right)' = e^{x} \\text{ ne s'annule pas sur } \\mathbb{R}\\right)\\end{aligned}\\]",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} x^{2}\\,e^{-x} &= \\text{« }+\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }+\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}}{e^{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} 2x\\,e^{-x} = \\text{« }2 \\cdot +\\infty \\cdot 0^{+}\\text{ »} = 0 \\qquad \\left(\\text{haut : } \\left(x^{2}\\right)' = 2x \\; ;\\; \\text{bas : } \\left(e^{x}\\right)' = e^{x}\\right)\\end{aligned}\\]",
       "style": "etape",
       "type": "texte"
      },

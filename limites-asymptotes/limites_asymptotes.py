@@ -1816,6 +1816,7 @@ class Chaine:
     def __init__(self, pt, debut, arbre=None, prefixe=None):
         self.pt = pt
         self.pas = [("lim", debut, None, arbre)]
+        self.egal = {}                             # indice du pas -> signe égal étiqueté de la ligne (\overset{\text{BH}}{=})
         self.complete = False                      # la dernière égalité est la valeur de la limite
         self.prefixe = prefixe
         self.annonce = None
@@ -1824,13 +1825,15 @@ class Chaine:
         self.cf_tete = []                          # justifications de signe de la ligne d'annonce
         self.cf = []                               # justifications de signe de la dernière ligne
 
-    def lim(self, tex_, just=None, arbre=None):
+    def lim(self, tex_, just=None, arbre=None, egal=None):
         if self.pas[-1][1] == tex_ and self.pas[-1][0] == "lim":
             if just:                               # même expression : la justification s'ajoute
                 g, t_, j, a = self.pas[-1]
                 self.pas[-1] = (g, t_, rf"{j}\; ;\; {just}" if j else just, a)
             return self
         self.pas.append(("lim", tex_, just, arbre))
+        if egal:
+            self.egal[len(self.pas) - 1] = egal
         return self
 
     def val(self, tex_, just=None, force=False):
@@ -1844,7 +1847,9 @@ class Chaine:
 
     def suite(self, autre):
         """Prolonge cette chaîne par une autre qui commence par la même expression (méthode appelée sur le reste)."""
+        debut = len(self.pas) - 1
         self.pas += autre.pas[1:]
+        self.egal.update({debut + i: e for i, e in autre.egal.items() if i >= 1})
         self.complete = autre.complete
         self.cf += autre.cf_tete + autre.cf
         return self
@@ -1864,21 +1869,22 @@ class Chaine:
             somme = isinstance(arbre, Op) and arbre.op in "+-" or (isinstance(arbre, Neg) and isinstance(arbre.a, Op)
                                                                    and arbre.a.op in "+-")
             return rf"\left({tex_}\right)" if somme else tex_
-        lignes = []                                 # [gauche, corps, [justifications], ligne d'annonce ?]
+        lignes = []                                 # [gauche, corps, [justifications], ligne d'annonce ?, signe égal]
         for i, (genre, tex_, just, arbre) in enumerate(self.pas):
             js = [just] if just else []
             if i == 0:
                 gauche = (rf"{self.prefixe} = " if self.prefixe else "") + f"{lim} {arg(tex_, arbre)}"
-                lignes.append([gauche, self.annonce, js, bool(self.annonce)])
+                lignes.append([gauche, self.annonce, js, bool(self.annonce), "="])
             elif genre == "lim":
                 corps = f"{lim} {arg(tex_, arbre)}"
                 if lignes[-1][1] is None:
                     lignes[-1][1] = corps
                     lignes[-1][2] += js
+                    lignes[-1][4] = self.egal.get(i, "=")
                 else:
-                    lignes.append(["", corps, js, False])
+                    lignes.append(["", corps, js, False, self.egal.get(i, "=")])
             elif lignes[-1][3]:                     # la ligne d'annonce est close : la valeur a sa propre ligne
-                lignes.append(["", tex_, js, False])
+                lignes.append(["", tex_, js, False, "="])
             elif lignes[-1][1] is None:
                 lignes[-1][1] = tex_
                 lignes[-1][2] += js
@@ -1888,13 +1894,13 @@ class Chaine:
         lignes[-1][2] += self.cf
 
         def ecrit(l):
-            gauche, corps, js, _ = l
+            gauche, corps, js = l[:3]
             return corps + ((r" \qquad \left(" + r" \; ;\; ".join(js) + r"\right)") if js else "")
         if len(lignes) == 1:
-            g, c, js, _ = lignes[0]
-            corps = f"{g} = {ecrit(lignes[0])}" if c is not None else g
+            g, c = lignes[0][:2]
+            corps = f"{g} {lignes[0][4]} {ecrit(lignes[0])}" if c is not None else g
         else:
-            corps = r" \\ ".join((f"{l[0]} &= {ecrit(l)}" if l[0] else f"&= {ecrit(l)}") for l in lignes)
+            corps = r" \\ ".join((f"{l[0]} &{l[4]} {ecrit(l)}" if l[0] else f"&{l[4]} {ecrit(l)}") for l in lignes)
         return r"\[\begin{aligned}" + corps + r"\end{aligned}\]"
 
 
@@ -2966,6 +2972,107 @@ def _est_ln(h):
     return isinstance(h, Fn) and h.nom == "ln"
 
 
+# --- dérivées affichées dans le pas BH : forme naturelle (règles du cours), avant toute simplification de f'/g' ---------
+def _est_nb(n, v):
+    return isinstance(n, Nb) and n.v == v
+
+
+def _neg_nat(a):
+    if isinstance(a, Neg):
+        return a.a
+    if isinstance(a, Nb):
+        return Nb(-a.v)
+    return Neg(a)
+
+
+def _fois_nat(a, b):
+    if _est_nb(a, 0) or _est_nb(b, 0):
+        return Nb(F(0))
+    if isinstance(a, Neg):
+        return _neg_nat(_fois_nat(a.a, b))
+    if isinstance(b, Neg):
+        return _neg_nat(_fois_nat(a, b.a))
+    if _est_nb(a, 1):
+        return b
+    if _est_nb(b, 1):
+        return a
+    if _est_nb(a, -1):
+        return _neg_nat(b)
+    if _est_nb(b, -1):
+        return _neg_nat(a)
+    return Op("*", a, b)
+
+
+def _somme_nat(a, b, op):
+    if _est_nb(b, 0):
+        return a
+    if _est_nb(a, 0):
+        return b if op == "+" else _neg_nat(b)
+    if isinstance(b, Neg):                                       # a + (−b) = a − b ; a − (−b) = a + b
+        return Op("-" if op == "+" else "+", a, b.a)
+    return Op(op, a, b)
+
+
+def _puissance_nat(u, k):
+    """u^k écrit sans exposant 0 ni 1."""
+    if k == 0:
+        return Nb(F(1))
+    return u if k == 1 else Op("^", u, Nb(k))
+
+
+def _derivee_nat(n):
+    """Dérivée de n par les règles du cours, en forme naturelle (u'·e^u, u'/u, k·u^(k−1)·u', u'v + uv'…). Lève Abandon si n sort de ces règles."""
+    if sans_x(n):
+        return Nb(F(0))
+    if isinstance(n, X):
+        return Nb(F(1))
+    if isinstance(n, Neg):
+        return _neg_nat(_derivee_nat(n.a))
+    if isinstance(n, Fn):
+        u, du = n.a, _derivee_nat(n.a)
+        if n.nom == "exp":
+            return _fois_nat(du, n)
+        if n.nom == "ln":
+            if isinstance(du, Nb) and isinstance(u, Neg):
+                return Op("/", Nb(-du.v), u.a)                   # (ln(−x))' = 1/x
+            return Op("/", du, u)
+        return Op("/", du, Op("*", Nb(F(2)), n))                 # racine carrée
+    if n.op in "+-":
+        return _somme_nat(_derivee_nat(n.a), _derivee_nat(n.b), n.op)
+    if n.op == "*":
+        if sans_x(n.a):
+            return _fois_nat(n.a, _derivee_nat(n.b))
+        if sans_x(n.b):
+            return _fois_nat(_derivee_nat(n.a), n.b)
+        return _somme_nat(_fois_nat(_derivee_nat(n.a), n.b), _fois_nat(n.a, _derivee_nat(n.b)), "+")
+    if n.op == "/":
+        if sans_x(n.b):
+            return Op("/", _derivee_nat(n.a), n.b)
+        if sans_x(n.a):
+            return _neg_nat(Op("/", _fois_nat(n.a, _derivee_nat(n.b)), Op("^", n.b, Nb(F(2)))))
+        return Op("/", _somme_nat(_fois_nat(_derivee_nat(n.a), n.b), _fois_nat(n.a, _derivee_nat(n.b)), "-"), Op("^", n.b, Nb(F(2))))
+    if n.op == "^":
+        k = valeur_constante(n.b)
+        if k is None or isinstance(k, float):
+            raise Abandon("exposant non constant")
+        return _fois_nat(_fois_nat(Nb(k), _puissance_nat(n.a, k - 1)), _derivee_nat(n.a))
+    raise Abandon("dérivée hors des règles du cours")
+
+
+def _derivee_affichee(h, d_sympy, ctx):
+    """Dérivée de h pour l'affichage : la forme naturelle quand elle est confirmée numériquement par la dérivée de SymPy, sinon celle de SymPy."""
+    try:
+        d = _derivee_nat(h)
+        _meme_fonction(d_sympy, d, ctx)
+        return d
+    except Exception:
+        return d_sympy
+
+
+def _derivee_tex(h, d):
+    return rf"\left({tex(h)}\right)' = {tex(d)}"
+
+
 def _candidats_lhopital(n, ctx, fi):
     """(f, g, lignes d'introduction) : f/g est une forme 0/0 ou ∞/∞ égale à n. Produit 0·∞ (règle du corrigé, 29.10.2026) : le facteur
     qui tend vers 0 passe en bas, l'autre reste en haut (un ln reste toujours en haut) ; l'ordre de saisie ne compte pas."""
@@ -3088,9 +3195,11 @@ def _lhopital_avec(n, f, g, intro, nom, ctx, fi):
         if intro:                                        # produit mis en quotient : u·v = u/(1/v)
             ch.lim(rf"\dfrac{{{tex(f)}}}{{{tex(g)}}}", rf"\text{{on écrit un quotient de la forme }} « \infty/\infty »"
                    if nom == "∞/∞" else r"\text{on écrit un quotient de la forme } « 0/0 »", Op("/", f, g))
-        hyp = (rf"\text{{Bernoulli-L'Hôpital : }} {tex(f)} \text{{ et }} {tex(g)} \text{{ dérivables sur }} {ens_tex(I)} ,\; "
-               rf"{texte_c}")
-        ch.lim(tex(q_arbre), hyp, q_arbre)
+        # les hypothèses (dérivabilité sur I, g' ≠ 0 : texte_c) sont vérifiées plus haut mais ne s'affichent plus (29.10.2026) ;
+        # le signe égal porte l'étiquette BH et la parenthèse donne les deux dérivées séparément, comme dans le corrigé
+        dh, db = _derivee_affichee(f, f_arbre, ctx), _derivee_affichee(g, g_arbre, ctx)
+        deriv = rf"\text{{haut : }} {_derivee_tex(f, dh)} \; ;\; \text{{bas : }} {_derivee_tex(g, db)}"
+        ch.lim(tex(q_arbre), deriv, q_arbre, egal=r"\overset{\text{BH}}{=}")
         if brut is not None:                             # (1/x)/1 = 1 : la valeur suit directement, sans substitution
             ch.val(L.tex(False), force=True)
             ch.complete = True
