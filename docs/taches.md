@@ -524,6 +524,22 @@ l'élève, un « Calcul en cours… » qui dure parce que SymPy se charge encore
 - **Vérification** : suite Python et suite de pages vertes ; instantanés C et ED inchangés ; audit avant/après (6 803 saisies) : exception 0.
 - **État (29.10.2026)** : toutes les étapes commitées, rien poussé. **Reste** : relecture à l'écran (les 10 saisies M du rapport), puis éventuelles retouches. Limites assumées (« pas encore ») : voir le paragraphe 6 de la spécification.
 
+### T37 — Suivi « Exponentielles et logarithmes » — demandes du 29.10.2026 (suite de T36), **chantier en pause**
+- **État** : rien commencé. Liste établie à la fin de T36 ; chaque point est indépendant. Règles habituelles : un commit par point, suite Python et suite de pages vertes (`python3 tests/lancer.py complet`), instantanés C et ED inchangés sauf mention.
+- **Calculs et rédactions**
+  1. **`2^x = √2`** : vérifier le comportement en C **et** en M (aujourd'hui « pas encore » en M, la racine n'est pas lue comme une puissance de la base). Décider avec l'enseignant s'il faut `√2 = 2^(1/2)` (alors `x = 1/2`), ce qui débloque aussi la racine irrationnelle de t des bicarrés (`3^x + 3^(-x) - 6·3^(-3x) = 0`).
+  2. **`log(x²) = 1/2` en 3C** : la solution s'écrit `x₁ = −√√10`, `x₂ = √√10` ; la réécrire `−10^(1/4)` et `10^(1/4)` (changement de sortie C : instantané à régénérer et à relire).
+  3. **`b^(p+q√x) = c` irrationnel avec p ≠ 0** (`2^(√x−1) = 3`, `3^(2√x−1) = 5`) : aujourd'hui « pas encore » parce que `S = {((log 3/log 2) + 1)²}, soit x ≈ …` déborde à 360 px. **Nommer la solution** (comme x₁, x₂ pour un trinôme) au lieu du message.
+  4. **`ln(ln(x²−1)) = 2`** : logarithme imbriqué dont l'argument intérieur est du 2ᵉ degré ; aujourd'hui « pas encore » (`_chaine_de_logarithmes` exige un argument du 1er degré).
+- **Sécurité** (rapport du 29.10.2026, § phase 5 ; rien n'est corrigé à ce jour)
+  5. **`count.js` hébergé** sur le site au lieu de `//gc.zgo.at/count.js` (script tiers sur les 8 pages) ; adapter la balise, le test `TestComptage` et l'interception du navigateur de test.
+  6. **`integrity` + `crossorigin` sur KaTeX** (CSS, JS, auto-render, 6 pages) avec les hash calculés ; à terme KaTeX et Pyodide hébergés (D10 de `choix-techniques.md`).
+  7. **`textContent` pour les messages d'erreur** (`commun/outil.js` l. 103 et 334) et échappement du repli de `K()` (`commun/rendu.js` l. 28) ; test avec des chaînes hostiles.
+  8. **Échappement des attributs du simplexe** (`simplexe/index.html` l. 399 et 405 : `value="${…}"`).
+  9. **`permissions: contents: read`** dans `.github/workflows/tests.yml` (éventuellement actions fixées par SHA, Dependabot pour les actions).
+- **Idée (non décidée)**
+  10. **Bouton « Signaler cette équation »** : l'élève ou l'enseignant signale une équation mal traitée (l'équation et la filière seraient transmises, sans donnée personnelle). À cadrer d'abord : où va le signalement (courriel, formulaire, GoatCounter événement ?), confidentialité, effet sur la CSP et sur les scripts tiers.
+
 ## Plus tard (hors plan, si les tests tiennent)
 
 - Découpage de `ensemble_def.py` en modules (`moteur/expr.py`, `poly.py`, `ensembles.py`…),
