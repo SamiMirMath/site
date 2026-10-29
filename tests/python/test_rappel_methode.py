@@ -23,10 +23,11 @@ class TestRappelDeLaMethode(unittest.TestCase):
         ordre = ["Opérations sur les limites", "Mise en évidence", "Expression conjuguée", "Croissance comparée", "Bernoulli-L'Hôpital"]
         places = [t.index(mot) for mot in ordre]
         self.assertEqual(places, sorted(places), ordre)
-        # même ordre que dans le moteur : mise en évidence, conjuguée, croissance comparée, L'Hôpital
+        # moteur (doctrine du 29.10.2026) : mise en évidence, conjuguée, constante sortie, L'Hôpital ; plus de croissance comparée
         noms = [m.__name__ for m in la.METHODES]
-        self.assertLess(noms.index("_conjuguee"), noms.index("_comparee_pure"))
-        self.assertLess(noms.index("_comparee_pure"), noms.index("_lhopital"))
+        self.assertLess(noms.index("_conjuguee"), noms.index("_lhopital"))
+        self.assertNotIn("_comparee_pure", noms)
+        self.assertNotIn("_evidence_ln", noms)
 
     def test_chaine_d_egalites_et_asymptotes(self):
         t = encadre()

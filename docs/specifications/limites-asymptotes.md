@@ -24,17 +24,16 @@ URL : `/limites-asymptotes/` · moteur : `limites-asymptotes/limites_asymptotes.
 
 ## Conventions
 
-### Croissance comparée (tranché le 14.10.2026, Q1)
+### Croissance comparée et règle du podium (doctrine du 29.10.2026, remplace Q1 du 14.10.2026)
 
-- Citée **uniquement** face à une forme indéterminée entre une puissance x^n (n > 0 réel) et une
-  exponentielle e^(ax) (a > 0) ou un logarithme : ∞/∞, 0·∞, ou ∞ − ∞ levée par factorisation
-  (e^x − x² = e^x(1 − x²/e^x) ; x − ln x = x(1 − ln(x)/x)).
-- En ±∞, et en 0⁺ pour le logarithme.
-- Limites de référence : en +∞, e^(ax)/x^n → +∞, x^n·e^(−ax) → 0, ln(x)/x^n → 0 ; en −∞,
-  x^n·e^(ax) → 0 ; en 0⁺, x^n·ln(x) → 0.
-- La phrase **nomme toujours la limite de référence utilisée**, par ex.
-  « x²·e^(−x) → 0 en +∞ par croissance comparée (lim x^n e^(−x) = 0) ».
-- Jamais ailleurs (x·e^x en +∞ : pas de forme indéterminée ; e^x/x en 0 : pas une croissance comparée).
+- La croissance comparée (limites de référence du type eˣ/xⁿ, xⁿ/eˣ, ln x/xⁿ, xⁿ ln x en 0⁺…) ne sert **jamais de justification** dans
+  une rédaction : ni « croissance comparée », ni « podium », ni « limite de référence » ne s'écrivent dans une chaîne d'égalités.
+- Ces limites se justifient par **Bernoulli-L'Hôpital** (BH), comme dans le corrigé du chapitre 8 : x²e^(−x), ln(x)/x, x ln(x) en 0⁺,
+  ln(x²+1)/x, ln(x²−4x)/(x−5) en ±∞… passent par BH, avec 0·(±∞) d'abord mis en quotient (voir « Bernoulli-L'Hôpital »).
+- La mise en évidence d'une puissance ou d'une exponentielle (e^x − x² = e^x(1 − x²e^(−x)) ; (e^x+1)/(e^x−1)) reste permise, sans invoquer
+  de croissance comparée : la limite de x²e^(−x) est alors établie à part, par BH.
+- La règle du podium (eˣ bat xⁿ qui bat ln x) servira plus tard à **prédire** le résultat, dans un encadré à part (étape 6 du chantier).
+- Un repli (phrase « Le calcul détaillé de cette limite n'est pas rédigé ici ») est acceptable ; une justification par le podium ne l'est pas.
 
 ### Limite finie en une valeur interdite (tranché le 14.10.2026, Q7)
 
@@ -67,14 +66,17 @@ Chaque limite affichée est rédigée par la **première méthode du cours qui s
    **égalités exactes**, jamais avec un équivalent (voir ci-dessous). Les racines de polynômes passent
    aussi par la mise en évidence.
 2. **Expression conjuguée** (∞ − ∞ et 0/0 avec une racine).
-3. **Limites de référence et croissance comparée** (Q1 seulement, voir plus haut).
-4. **Bernoulli-L'Hôpital**, en dernier recours, avec ses quatre hypothèses écrites :
+3. (Plus de méthode « limites de référence et croissance comparée » depuis le 29.10.2026 : voir plus haut.)
+4. **Bernoulli-L'Hôpital**, avec ses quatre hypothèses écrites :
    (a) forme 0/0 ou ∞/∞ (0·∞ et ∞ − ∞ d'abord mis en quotient) ; (b) f et g dérivables au voisinage de a
    (sauf peut-être en a) ; (c) g'(x) ≠ 0 au voisinage de a (sauf peut-être en a) ; (d) lim f'/g' existe
-   (finie ou infinie), alors lim f/g = lim f'/g'. Au plus deux applications de suite. Si une hypothèse
+   (finie ou infinie), alors lim f/g = lim f'/g'. Au plus trois applications de suite. Si une hypothèse
    n'est pas vérifiée ou si lim f'/g' n'existe pas, la règle n'est pas appliquée et ne conclut rien.
    Dans la sortie, f désigne la fonction étudiée : jamais « f'/g' » ni « g'(x) » ; les hypothèses s'écrivent
    « (x − 1)' = 1 ≠ 0 » (guide de rédaction, R9).
+   **0·(±∞) en quotient** (règle du corrigé, 29.10.2026) : le facteur qui tend vers 0 passe en bas, l'autre reste en haut ; un facteur
+   ln(…) reste toujours en haut ; eᵘ passe en bas sous la forme 1/e^(−u) ; xᵏ passe en bas sous la forme 1/x^(−k) ; une constante
+   multiplicative (e^(3x−5) = e^(−5)·e^(3x)) est sortie du produit quand c'est simple. L'ordre de saisie des facteurs ne compte pas.
 
 **Pas d'équivalent** (décidé le 15.10.2026). Ni le symbole ∼, ni le mot « équivalent », ni « se comporte
 comme », dans aucune sortie. La méthode « termes dominants » est supprimée : tout passe par la mise en
@@ -83,8 +85,7 @@ comme », dans aucune sortie. La méthode « termes dominants » est supprimée 
   |x| = −x (x < 0), puis simplification. En −∞ : f(x) = −x·√(4 + 1/x²)/(x(1 + 2/x)) = −√(4 + 1/x²)/(1 + 2/x) → −2.
 - **Après une conjuguée** : x/(√(x²+x) + x) = x/(x(√(1 + 1/x) + 1)) = 1/(√(1 + 1/x) + 1) → 1/2.
 - **ln d'un polynôme en ±∞** : ln(x²+1) = ln(x²(1 + 1/x²)) = 2 ln|x| + ln(1 + 1/x²). Pour ln(u)/v
-  (u, v polynômes), on écrit ln(u) = k ln|x| + ln(c + …), on met x^p en évidence dans v, puis on conclut
-  par **croissance comparée** (ln x / x^n → 0 ; en −∞ avec t = −x), **avant** Bernoulli-L'Hôpital.
+  (u, v polynômes), on applique **Bernoulli-L'Hôpital** (décidé le 29.10.2026 : plus de croissance comparée).
 - **√(x²) = |x|** (et √(u²) = |u|) : reconnu en une valeur, d'un seul côté ; x/√(x²) en 0 donne x/|x|, soit
   −1 à gauche (x < 0) et 1 à droite (x > 0), sans phrase de repli. Le signe de u se lit sur sa factorisation en (x − a).
 
@@ -134,7 +135,7 @@ mécanique interne (le détail technique va dans la clé `detail` / `controles_d
    d'équation x = 0 (du côté droit) ; à gauche, f(x) → 0 ».
 
 5. **Chaîne d'égalités** (décidé le 15.10.2026) : chaque méthode rédigée (mise en évidence, expression conjuguée,
-   croissance comparée, Bernoulli-L'Hôpital, simplification 0/0, √(u²) = |u|) s'écrit comme au tableau, en une
+   Bernoulli-L'Hôpital, simplification 0/0, √(u²) = |u|) s'écrit comme au tableau, en une
    formule affichée `lim f(x) = lim … = … = valeur`, plutôt qu'en phrases successives. Le texte se limite à la forme
    indéterminée nommée avant la chaîne, aux justifications courtes entre parenthèses, et à la conclusion (asymptote).
    Les limites par opérations (L1/L2 : sommes, produits, valeur interdite avec tableau de signes) gardent leurs
@@ -144,8 +145,7 @@ mécanique interne (le détail technique va dans la clé `detail` / `controles_d
    >          = lim −x√(4 + 1/x²) / (x(1 + 2/x))   (x < 0, donc |x| = −x)
    >          = lim −√(4 + 1/x²) / (1 + 2/x) = −√4 / 1 = −2   (on simplifie par x ; 1/x² → 0, 2/x → 0)
    Une chaîne de méthode appelée sur le reste (la mise en évidence après la conjuguée) prolonge la même chaîne ; un
-   morceau qui demande sa propre méthode (x²e^(−x) dans e^x − x²) a sa chaîne écrite avant. Chaque limite de référence
-   cite son point (lim_{x→+∞} ln x / xⁿ = 0 ; en −∞, avec t = −x → +∞). Quand √(u²) = |u| ramène à une fraction
+   morceau qui demande sa propre méthode (x²e^(−x) dans e^x − x²) a sa chaîne écrite avant. Quand √(u²) = |u| ramène à une fraction
    simplifiable (x/√(x²) en 0 : x/|x| = x/(−x) = −1), la simplification est dans la même chaîne : pas de « 0/0 » répété.
 
 Modèle (1/(x² − 2) en −√2) :
@@ -166,7 +166,7 @@ Modèle (1/(x² − 2) en −√2) :
 | LA-04 | Pour ≥ 40 fonctions, chaque limite annoncée est confirmée par une sonde numérique (x = ±10⁶, a ± 10⁻⁶) ou par `sympy.limit` indépendamment | [auto-py] |
 | LA-05 | Fonctions rationnelles : asymptote oblique y = ax + b telle que f(x) − (ax + b) → 0 numériquement | [auto-py] |
 | LA-06 | Sorties des exemples et exercices identiques aux instantanés | [auto-py] |
-| LA-07 | « croissance comparée » apparaît pour x²·e^(−x) (+∞), x^(1/2)·e^(−x) (+∞), ln(x)/x (+∞), x·ln(x) (0⁺), e^x − x² (+∞), x − ln(x) (+∞), x·e^x (−∞), avec la limite de référence nommée ; jamais pour x·e^x (+∞), e^x/x (0), e^(2x) (±∞) | [auto-py] |
+| LA-07 | Jamais « croissance comparée », « podium » ni « limite de référence » dans une rédaction (corpus du cours, exemples et exercices de la page, Étude complète comprise) : x²·e^(−x) (+∞), x^(1/2)·e^(−x) (+∞), ln(x)/x (+∞), x·ln(x) (0⁺), e^x − x² (+∞), x − ln(x) (+∞), x·e^x (−∞) se justifient par Bernoulli-L'Hôpital ou par la mise en évidence de l'exponentielle ; x·e^x (+∞), e^x/x (0), e^(2x) (±∞) : aucune forme indéterminée | [auto-py] |
 | LA-09 | x^(2/3), x^(1/3), x^(-1/3), x^(4/3), (x−2)^(1/3), x·x^(1/3) : limites en −∞ et en un point négatif justes dans ℝ (racine réelle) ; aucun `Infinity` ni `NaN` dans une sortie (JSON strict) | [auto-py] (`test_racines_reelles.py`, `test_json_strict.py`) |
 | LA-08 | Aucune sortie ne contient « point de discontinuité » ni le genre « saut » ; la formulation Q7 raccourcie « Limite finie : pas d'asymptote verticale, trou dans le graphique en (a ; ℓ). » apparaît pour (e^x−1)/x, (x²−1)/(x−1) et x·ln(x) ; x/√(x²) en 0 : « Limites à gauche et à droite différentes … » | [auto-py] |
 | LA-10 | Toute limite étudiée est rédigée (méthode du cours) ou suivie de la phrase de repli mot pour mot ; jamais « lim f(x) = v » seul | [auto-py] |
@@ -174,7 +174,7 @@ Modèle (1/(x² − 2) en −√2) :
 | LA-12 | Chaque limite intermédiaire écrite est confirmée par l'oracle haute précision (corpus de `test_proprietes_limites.py`) | [auto-py] |
 | LA-13 | Une forme indéterminée levée est toujours nommée ; aucune forme indéterminée n'est annoncée quand il n'y en a pas | [auto-py] |
 | LA-14 | Valeur interdite sans forme indéterminée : limite du numérateur, signe du dénominateur de chaque côté, « ℓ/0^± », asymptote x = a | [auto-py] |
-| LA-15 | Ordre des méthodes : la première qui s'applique ; jamais L'Hôpital pour une fraction rationnelle ni quand une limite de référence s'applique | [auto-py] |
+| LA-15 | Ordre des méthodes : la première qui s'applique ; mise en évidence et factorisation pour une fraction rationnelle (jamais L'Hôpital) ; Bernoulli-L'Hôpital pour une autre forme 0/0 ou ∞/∞, y compris eˣ/xⁿ, xⁿ/eˣ, ln x/xⁿ, xⁿ ln x en 0⁺ ; **jamais de croissance comparée comme justification** (doctrine du 29.10.2026) | [auto-py] |
 | LA-16 | L'Hôpital : hypothèses (a) à (d) écrites ; non appliquée hors 0/0 et ∞/∞, si g' ≠ 0 n'est pas établi, ou si lim f'/g' n'est pas obtenue | [auto-py] |
 | LA-17 | Oblique (L8) : fraction rationnelle = division euclidienne écrite sans « + 0 » ni « + − » (N = D·Q ± R, f(x) = Q ± R/D), f(x) − (ax + b) = R/D → 0 en chaîne d'égalités, puis position relative près de ±∞ (signes de R et de D) ; autres fonctions : a = lim f(x)/x puis b = lim (f(x) − ax), chacune en chaîne d'égalités (racines en −∞ comprises) ; position relative seulement quand le signe de f(x) − (ax + b) se lit (√Q ± affine : ±r/(√Q + W)) | [auto-py] (`TestOblique`) |
 | LA-18 | Chaque borne se conclut par une phrase avec l'équation de l'asymptote, ou « pas d'asymptote … » | [auto-py] |
@@ -190,13 +190,13 @@ Modèle (1/(x² − 2) en −√2) :
 | LA-28 | Chaque parenthèse « (X > 0 : cf. tableau de signes) » renvoie à un tableau titré « Signe de X » présent dans la même étude | [auto-py] |
 | LA-29 | Mise en évidence sous une racine (L5, retouche du 15.10) : en ±∞, quotient ou produit dont un membre est une racine ; √(4x²+1) = √(x²(4 + 1/x²)) = \|x\|√(4 + 1/x²), puis \|x\| = x ou −x, simplification, limite de ce qui reste ; « x < 0 donc √(x²) = \|x\| = −x » en −∞ ; jamais d'équivalent ; jamais pour une fraction rationnelle ni quand les termes de plus haut degré d'une somme se compensent | [auto-py] |
 | LA-30 | Expression conjuguée (L4) : ∞ − ∞ avec une racine en ±∞ (√(x²+x) − x → 1/2 en +∞ ; en −∞ pas de forme indéterminée, +∞) ; 0/0 avec une racine en une valeur ((√(x+3) − 2)/(x − 1) → 1/4) ; jamais sans racine | [auto-py] |
-| LA-31 | Croissance comparée (L6, T09, Q1) : citée seulement devant une forme indéterminée, limite de référence nommée ; mise en évidence de l'exponentielle (e^x − x² = e^x(1 − x²e^(−x)), (e^x+1)/(e^x−1)) ; jamais pour x·e^x en +∞, e^x/x en 0, e^(2x) | [auto-py] |
-| LA-32 | Bernoulli-L'Hôpital (L7) : en dernier recours, hypothèses (a) à (d) écrites ((e^x−1)/x en 0, ln(x)/(x−1) en 1, x·ln(x²) en 0 ; ln(x²−4x)/(x−5) en ±∞ ne passe plus par la règle : mise en évidence de ln puis croissance comparée) ; jamais hors forme 0/0 ou ∞/∞, jamais pour une fraction rationnelle ni quand une limite de référence s'applique ; non appliquée (phrase de repli) si g' ≠ 0 ou lim f'/g' n'est pas établi ; au plus deux applications de suite | [auto-py] |
+| LA-31 | (Retiré le 29.10.2026 : la croissance comparée n'est plus une méthode.) Mise en évidence de l'exponentielle conservée (e^x − x² = e^x(1 − x²e^(−x)), (e^x+1)/(e^x−1)), sans citer de croissance comparée ; la limite de x²e^(−x) est établie à part par Bernoulli-L'Hôpital | [auto-py] |
+| LA-32 | Bernoulli-L'Hôpital (L7) : hypothèses (a) à (d) écrites ((e^x−1)/x en 0, ln(x)/(x−1) en 1, x·ln(x²) en 0, x²e^(−x) en +∞, ln(x²−4x)/(x−5) en ±∞) ; jamais hors forme 0/0 ou ∞/∞, jamais pour une fraction rationnelle ; non appliquée (phrase de repli) si g' ≠ 0 ou lim f'/g' n'est pas établi ; **au plus 3 BH de suite** ; 0·(±∞) mis en quotient selon la règle du corrigé (ln en haut, eᵘ en bas sous la forme 1/e^(−u), xᵏ en bas sous la forme 1/x^(−k), constante sortie) | [auto-py] |
 | LA-33 | Aucune sortie ne contient « ∼ », « équivalent » ni « se comporte comme » | [auto-py] (`test_vocabulaire.py`) |
-| LA-34 | ln(u)/v en ±∞ (u, v polynômes) : ln(u) = k ln\|x\| + ln(c + …), v mis en évidence, puis croissance comparée (limite de référence nommée) ; jamais Bernoulli-L'Hôpital pour ln(x²+1)/x et ln(x²−4x)/(x−5) en ±∞ | [auto-py] |
+| LA-34 | ln(u)/v en ±∞ (u, v polynômes) et ln(x²+1)/x : **se traitent par Bernoulli-L'Hôpital** (plus de mise en évidence de ln ni de croissance comparée) | [auto-py] |
 | LA-35 | √(x²) = \|x\| : x/√(x²) en 0 se rédige (x/\|x\| = −1 à gauche, 1 à droite), sans phrase de repli ; (x−1)/√((x−1)²) en 1 de même | [auto-py] |
 | LA-36 | Facteurs de signe évident (carré, exponentielle, racine, constante) : une ligne dans le tableau de signes, aucune phrase ni « donc … est du signe de … » | [auto-py] (`test_redaction_limites.py`, `TestTableauxDeSignes`) |
-| LA-37 | Chaîne d'égalités : forme annoncée en tête (`lim f = « … » = « … » : forme indéterminée`), mise en évidence de la puissance de x seule, une seule ligne pour √(x²) = |x| = ±x, conjuguée en une ligne, croissance comparée avec sa limite de référence ; plus de « on simplifie par x » ni de refactorisation en justification | [auto-py] |
-| LA-38 | Encadré « Rappel de la méthode » (page Limites, L9) : opérations, puis mise en évidence, expression conjuguée, croissance comparée, Bernoulli-L'Hôpital dans cet ordre ; chaîne d'égalités ; asymptotes horizontale, verticale, trou, oblique (division euclidienne, a puis b, position relative) ; aucun équivalent | [auto-py] (`test_rappel_methode.py`) |
+| LA-37 | Chaîne d'égalités : forme annoncée en tête (`lim f = « … » = « … » : forme indéterminée`), mise en évidence de la puissance de x seule, une seule ligne pour √(x²) = |x| = ±x, conjuguée en une ligne, Bernoulli-L'Hôpital en deux lignes (haut/bas puis quotient des dérivées) ; plus de « on simplifie par x » ni de refactorisation en justification | [auto-py] |
+| LA-38 | Encadré « Rappel de la méthode » (page Limites, étape 1 du chantier 3M, 29.10.2026) : le mode d'emploi en 7 points du corrigé du chapitre 8 (on remplace, on regarde la forme, on prédit avec le podium, 0·∞ en quotient, BH, on recommence, on compare), puis « La règle du podium vous sert à prédire le résultat ; la justification se fait avec la règle de BH. » ; asymptotes ; asymptotes horizontale, verticale, trou, oblique (division euclidienne, a puis b, position relative) ; aucun équivalent | [auto-py] (`test_rappel_methode.py`) |
 | LA-39 | Chaque formule écrite par le moteur est équilibrée (accolades, \\left/\\right, aligned) | [auto-py] (`test_rappel_methode.py`) |
 | LA-40 | `resoudre()` (T12) respecte le schéma de sortie commun et écrit lui-même la phrase de chaque asymptote (horizontale, oblique, verticale, trou, sans limite, branche parabolique, « Aucune asymptote détectée. ») ; instantanés `instantanes/resoudre/limites-asymptotes.json` | [auto-py] (`test_resoudre_la.py`) |

@@ -1768,13 +1768,15 @@ def _meme_fonction(n, g, ctx):
         raise Abandon("réécriture non vérifiable numériquement")
 
 
+MAX_LHOPITAL = 3       # au plus trois applications de BH de suite (8.12e en demande trois)
+MAX_PROFONDEUR = 8     # réécritures imbriquées ; réduit si une page devient lente (un repli vaut mieux qu'une attente)
 METHODES = []          # méthodes du cours, dans l'ordre : chacune renvoie (Lim, lignes) ou None si elle ne s'applique pas
 
 
 def _lever(n, ctx, fi, n0=None):
     """Lève une forme indéterminée par la première méthode du cours qui s'applique ; Abandon sinon. Les signes lus pour
     les opérandes de n vont sur la ligne d'annonce de sa chaîne, ceux lus ensuite sur sa dernière ligne."""
-    if ctx.profondeur >= 4:
+    if ctx.profondeur >= MAX_PROFONDEUR:
         raise Abandon("trop de réécritures successives")
     n0 = len(ctx.cf) if n0 is None else n0
     fi.cf_tete = ctx.cf[n0:]
@@ -2886,6 +2888,13 @@ def _g_prime_non_nul(g, gp, I, ctx):
             Z = [iv for iv in Z if not (iv.lo is not None and proche(iv.lo.val, a))]
     except Exception:
         return None
+    if Z and pt.s:
+        # en ±∞ il suffit que g' ne s'annule pas au voisinage : après son dernier zéro (x > z en +∞, x < z en −∞)
+        if any(iv.lo is None or iv.hi is None or iv.lo.val != iv.hi.val for iv in Z):
+            return None
+        z = max((iv.lo for iv in Z), key=lambda m: m.val) if pt.s > 0 else min((iv.lo for iv in Z), key=lambda m: m.val)
+        I = [Iv(z, False, None, False)] if pt.s > 0 else [Iv(None, False, z, False)]
+        Z = []
     if Z:
         return None
     return rf"{deriv} = {tex(gp)} \text{{ ne s'annule pas sur }} {ens_tex(I)}"
@@ -2929,26 +2938,94 @@ def _derivee(h):
     return sp.diff(e, SYMPY["x"])
 
 
+def _oppose_arbre(u):
+    """Arbre de −u : −(−v) = v, −(c·v) = (−c)·v."""
+    if isinstance(u, Neg):
+        return u.a
+    if isinstance(u, Nb):
+        return Nb(-u.v)
+    if isinstance(u, Op) and u.op == "*" and isinstance(u.a, Nb):
+        return Op("*", Nb(-u.a.v), u.b)
+    return Neg(u)
+
+
+def _inverse_en_bas(z):
+    """Dénominateur g tel que z = 1/g, écrit comme dans le corrigé : eᵘ = 1/e^(−u), xᵏ = 1/x^(−k), x = 1/(1/x) ; sinon 1/z."""
+    if isinstance(z, Fn) and z.nom == "exp":
+        return Fn("exp", _oppose_arbre(z.a))
+    if isinstance(z, X):
+        return Op("/", Nb(F(1)), X())
+    if isinstance(z, Op) and z.op == "^" and isinstance(z.a, X):
+        k = valeur_constante(z.b)
+        if k is not None and not isinstance(k, float) and k > 0:
+            return Op("^", X(), Nb(-k))
+    return Op("/", Nb(F(1)), z)
+
+
+def _est_ln(h):
+    return isinstance(h, Fn) and h.nom == "ln"
+
+
 def _candidats_lhopital(n, ctx, fi):
-    """(f, g, lignes d'introduction) : f/g est une forme 0/0 ou ∞/∞ égale à n."""
+    """(f, g, lignes d'introduction) : f/g est une forme 0/0 ou ∞/∞ égale à n. Produit 0·∞ (règle du corrigé, 29.10.2026) : le facteur
+    qui tend vers 0 passe en bas, l'autre reste en haut (un ln reste toujours en haut) ; l'ordre de saisie ne compte pas."""
     if isinstance(n, Op) and n.op == "/" and fi.nom in ("0/0", "∞/∞"):
         return [(n.a, n.b, [], fi.nom)]
     if isinstance(n, Op) and n.op == "*" and fi.nom == "0 · ∞":
         out = []
-        for u, v in ((n.b, n.a), (n.a, n.b)):            # u/(1/v) : on met d'abord au dénominateur le facteur qui tend vers 0
-            g = Op("/", Nb(F(1)), v)
-            out.append((u, g, [rf"On écrit \({tex(n)} = \dfrac{{{tex(u)}}}{{{tex(g)}}}\) pour obtenir un quotient."], None))
+        zero_a = fi.A is not None and fi.A.nul()
+        z, u = (n.a, n.b) if zero_a else (n.b, n.a)                # z tend vers 0, u vers ±∞
+        ordres = []
+        if not _est_ln(z):
+            ordres.append((u, z))
+        ordres += [(n.b, n.a), (n.a, n.b)]                         # repli : l'ancien ordre
+        for haut, bas in ordres:
+            g = _inverse_en_bas(bas)
+            if any(tex(haut) == tex(c[0]) and tex(g) == tex(c[1]) for c in out):
+                continue
+            out.append((haut, g, [rf"On écrit \({tex(n)} = \dfrac{{{tex(haut)}}}{{{tex(g)}}}\) pour obtenir un quotient."], None))
         return out
     return []
 
 
+def _sortir_constante(n, ctx, fi):
+    """0·(±∞) avec une constante multiplicative (x³e^(3x−5) = e^(−5)·x³e^(3x)) : on la sort du produit, elle ne change ni le résultat 0 ou ∞
+    ni (si elle est positive) son signe ; la limite du reste se fait à part (Bernoulli-L'Hôpital)."""
+    if fi.nom != "0 · ∞" or not (isinstance(n, Op) and n.op == "*"):
+        return None
+    facteurs = []
+    _facteurs(n, facteurs)
+    cstes, autres, change = [], [], False
+    for h in facteurs:
+        if sans_x(h):
+            cstes.append(h)
+            change = True
+        elif isinstance(h, Fn) and h.nom == "exp" and (P := _polynome_de(h.a)) is not None and deg(P) == 1 and P[0] != 0:
+            cstes.append(Fn("exp", Nb(P[0])))
+            autres.append(Fn("exp", _arbre_poly([F(0), P[1]])))
+            change = True
+        else:
+            autres.append(h)
+    if not change or not autres:
+        return None
+    produit = lambda L: L[0] if len(L) == 1 else Op("*", produit(L[:-1]), L[-1])
+    g = Op("*", produit(cstes), produit(autres))
+    _meme_fonction(n, g, ctx)
+    L, narration = _noeud(g, ctx)
+    ch = ctx.chaine(n)
+    ch.lim(tex(g), r"\text{on sort la constante}", g)
+    avant, apres = _prolonger(ch, g, L, narration, ctx)
+    _annoncer(ch, n, fi, ctx)
+    return L, avant + [ch] + apres
+
+
 def _lhopital(n, ctx, fi):
-    if ctx.nb_lhopital >= 2:
+    if ctx.nb_lhopital >= MAX_LHOPITAL:
         return None
     if isinstance(n, Op) and n.op == "/" and _poly_ou_const(n.a) is not None and _poly_ou_const(n.b) is not None:
         return None                                  # fraction rationnelle : mise en évidence ou factorisation, jamais L'Hôpital
     for f, g, intro, nom in _candidats_lhopital(n, ctx, fi):
-        c0 = len(ctx.cf)
+        c0, d0 = len(ctx.cf), len(ctx.demandes)
         try:
             r = _lhopital_avec(n, f, g, intro, nom, ctx, fi)
         except Abandon:
@@ -2956,6 +3033,7 @@ def _lhopital(n, ctx, fi):
         if r is not None:
             return r
         del ctx.cf[c0:]
+        del ctx.demandes[d0:]
     return None
 
 
@@ -2964,10 +3042,11 @@ def _lhopital_avec(n, f, g, intro, nom, ctx, fi):
     pt = ctx.pt
     # (a) forme indéterminée 0/0 ou ∞/∞
     if nom is None:
-        c0 = len(ctx.cf)
+        c0, d0 = len(ctx.cf), len(ctx.demandes)
         Lf, _ = _noeud(f, ctx)
         Lg, _ = _noeud(g, ctx)
         del ctx.cf[c0:]                                  # les signes lus ici ne servent qu'à reconnaître la forme
+        del ctx.demandes[d0:]                            # ... ni les tableaux de signes (aucun tableau sans renvoi)
         if Lf.nul() and Lg.nul():
             nom = "0/0"
         elif Lf.inf and Lg.inf:
@@ -3051,8 +3130,10 @@ def _simplifier_zero_sur_zero(n, ctx, fi):
     return L, list(narration) + [ch]
 
 
-# ordre du cours : mise en évidence, conjuguée, mise en évidence sous une racine, croissance comparée, L'Hôpital
-METHODES[:] = [_racine_carre_parfait, _simplifier_zero_sur_zero, _evidence_exp, _conjuguee, _evidence_racine, _comparee_pure, _evidence_ln, _lhopital]
+# ordre du cours : mise en évidence, conjuguée, mise en évidence sous une racine, constante sortie du produit, L'Hôpital.
+# Depuis le 29.10.2026 (doctrine du chantier 3M) la croissance comparée ne justifie plus rien : _comparee_pure et _evidence_ln ne sont plus
+# dans la liste (leur code reste, à supprimer plus tard) ; les limites eˣ/xⁿ, xⁿ/eˣ, ln x/xⁿ, xⁿ ln x passent par Bernoulli-L'Hôpital.
+METHODES[:] = [_racine_carre_parfait, _simplifier_zero_sur_zero, _evidence_exp, _conjuguee, _evidence_racine, _sortir_constante, _lhopital]
 
 
 

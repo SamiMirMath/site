@@ -340,7 +340,7 @@
     "badge": "limite",
     "blocs": [
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x}}{x} &= \\text{« }\\dfrac{e^{+\\infty}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= +\\infty \\qquad \\left(\\text{croissance comparée : } \\lim_{x\\to +\\infty} \\dfrac{e^{ax}}{x^{n}} = +\\infty\\right)\\end{aligned}\\]",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x}}{x} &= \\text{« }\\dfrac{e^{+\\infty}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{e^{x}}{1} = +\\infty \\qquad \\left(\\text{Bernoulli-L'Hôpital : } e^{x} \\text{ et } x \\text{ dérivables sur } \\mathbb{R} ,\\; x' = 1 \\neq 0\\right)\\end{aligned}\\]",
       "style": "etape",
       "type": "texte"
      },
@@ -1424,7 +1424,7 @@
     "badge": "limite",
     "blocs": [
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x}}{x} &= \\text{« }\\dfrac{e^{+\\infty}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= +\\infty \\qquad \\left(\\text{croissance comparée : } \\lim_{x\\to +\\infty} \\dfrac{e^{ax}}{x^{n}} = +\\infty\\right)\\end{aligned}\\]",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x}}{x} &= \\text{« }\\dfrac{e^{+\\infty}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{e^{x}}{1} = +\\infty \\qquad \\left(\\text{Bernoulli-L'Hôpital : } e^{x} \\text{ et } x \\text{ dérivables sur } \\mathbb{R} ,\\; x' = 1 \\neq 0\\right)\\end{aligned}\\]",
       "style": "etape",
       "type": "texte"
      }
@@ -1737,7 +1737,7 @@
     "badge": "limite",
     "blocs": [
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} &= \\text{« }\\dfrac{\\ln\\left(+\\infty + \\infty\\right)}{-\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{\\ln\\left(x^{2}\\left(1 - \\frac{4}{x}\\right)\\right)}{x\\,\\left(1 - \\frac{5}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{2\\ln|x| + \\ln\\left(1 - \\frac{4}{x}\\right)}{x\\,\\left(1 - \\frac{5}{x}\\right)} \\qquad \\left(\\text{propriétés de } \\ln\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{1}{1 - \\frac{5}{x}}\\left(2\\,\\dfrac{\\ln|x|}{x} + \\dfrac{\\ln\\left(1 - \\frac{4}{x}\\right)}{x}\\right) = 2 \\cdot 0 + 0 = 0 \\qquad \\left(t = -x \\to +\\infty ,\\; \\dfrac{\\ln|x|}{x} = -\\dfrac{\\ln t}{t} \\text{ : croissance comparée, } \\lim_{t\\to +\\infty} \\dfrac{\\ln t}{t^{n}} = 0\\right)\\end{aligned}\\]",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} &= \\text{« }\\dfrac{\\ln\\left(+\\infty + \\infty\\right)}{-\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{-\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\frac{2x - 4}{x^{2} - 4x} \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln\\left(x^{2} - 4x\\right) \\text{ et } x - 5 \\text{ dérivables sur } \\left]-\\infty \\,;\\, 0\\right[ ,\\; \\left(x - 5\\right)' = 1 \\neq 0\\right) \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x\\,\\left(2 - \\frac{4}{x}\\right)}{x^{2}\\,\\left(1 - \\frac{4}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{2 - \\frac{4}{x}}{x\\,\\left(1 - \\frac{4}{x}\\right)} = \\text{« }\\dfrac{2}{-\\infty \\cdot 1}\\text{ »} = 0\\end{aligned}\\]",
       "style": "etape",
       "type": "texte"
      },
@@ -1755,7 +1755,7 @@
     "badge": "limite",
     "blocs": [
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\qquad \\left(\\text{le terme dominant de } x^{2} - 4x \\text{ est } x^{2}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{\\ln\\left(x^{2}\\left(1 - \\frac{4}{x}\\right)\\right)}{x\\,\\left(1 - \\frac{5}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{2\\ln x + \\ln\\left(1 - \\frac{4}{x}\\right)}{x\\,\\left(1 - \\frac{5}{x}\\right)} \\qquad \\left(\\text{propriétés de } \\ln\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{1}{1 - \\frac{5}{x}}\\left(2\\,\\dfrac{\\ln x}{x} + \\dfrac{\\ln\\left(1 - \\frac{4}{x}\\right)}{x}\\right) = 2 \\cdot 0 + 0 = 0 \\qquad \\left(\\text{croissance comparée : } \\lim_{x\\to +\\infty} \\dfrac{\\ln x}{x^{n}} = 0\\right)\\end{aligned}\\]",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\qquad \\left(\\text{le terme dominant de } x^{2} - 4x \\text{ est } x^{2}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{2x - 4}{x^{2} - 4x} \\qquad \\left(\\text{Bernoulli-L'Hôpital : } \\ln\\left(x^{2} - 4x\\right) \\text{ et } x - 5 \\text{ dérivables sur } \\left]4 \\,;\\, +\\infty\\right[ ,\\; \\left(x - 5\\right)' = 1 \\neq 0\\right) \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x\\,\\left(2 - \\frac{4}{x}\\right)}{x^{2}\\,\\left(1 - \\frac{4}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{2 - \\frac{4}{x}}{x\\,\\left(1 - \\frac{4}{x}\\right)} = \\text{« }\\dfrac{2}{+\\infty \\cdot 1}\\text{ »} = 0\\end{aligned}\\]",
       "style": "etape",
       "type": "texte"
      },
@@ -2098,7 +2098,7 @@
     "badge": "limite",
     "blocs": [
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} x\\,e^{x} &= \\text{« }-\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }-\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= 0 \\qquad \\left(\\text{croissance comparée : } \\lim_{x\\to -\\infty} x^{n}e^{ax} = 0\\right)\\end{aligned}\\]",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} x\\,e^{x} &= \\text{« }-\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }-\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x}{e^{-x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &= \\lim_{x\\to -\\infty} -e^{x} = \\text{« }-\\left(e^{-\\infty}\\right)\\text{ »} = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } x \\text{ et } e^{-x} \\text{ dérivables sur } \\mathbb{R} ,\\; \\left(e^{-x}\\right)' = -e^{-x} \\text{ ne s'annule pas sur } \\mathbb{R}\\right)\\end{aligned}\\]",
       "style": "etape",
       "type": "texte"
      },
@@ -2182,29 +2182,6 @@
         ],
         "final": true,
         "label": "x^{2}"
-       }
-      ],
-      "type": "tableau",
-      "var": "x"
-     },
-     {
-      "html": "Signe de \\(x\\) :",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "crit": [
-       "0"
-      ],
-      "rows": [
-       {
-        "cells": [
-         "-",
-         "||",
-         "+"
-        ],
-        "final": true,
-        "label": "x"
        }
       ],
       "type": "tableau",
@@ -2527,7 +2504,12 @@
     "badge": "limite",
     "blocs": [
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} x^{2}\\,e^{-x} &= \\text{« }+\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }+\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= 0 \\qquad \\left(\\text{croissance comparée : } \\lim_{x\\to +\\infty} x^{n}e^{-ax} = 0\\right)\\end{aligned}\\]",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} x\\,e^{-x} &= \\text{« }+\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }+\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x}{e^{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &= \\lim_{x\\to +\\infty} e^{-x} = \\text{« }e^{-\\infty}\\text{ »} = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } x \\text{ et } e^{x} \\text{ dérivables sur } \\mathbb{R} ,\\; \\left(e^{x}\\right)' = e^{x} \\text{ ne s'annule pas sur } \\mathbb{R}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} x^{2}\\,e^{-x} &= \\text{« }+\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }+\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}}{e^{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &= \\lim_{x\\to +\\infty} 2x\\,e^{-x} = \\text{« }2 \\cdot +\\infty \\cdot 0^{+}\\text{ »} = 0 \\qquad \\left(\\text{Bernoulli-L'Hôpital : } x^{2} \\text{ et } e^{x} \\text{ dérivables sur } \\mathbb{R} ,\\; \\left(e^{x}\\right)' = e^{x} \\text{ ne s'annule pas sur } \\mathbb{R}\\right)\\end{aligned}\\]",
       "style": "etape",
       "type": "texte"
      },

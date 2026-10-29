@@ -16,7 +16,7 @@ d'une affine, 1/xⁿ → 0, constante/∞ → 0, substitution d'une valeur, sign
 son zéro), signe d'un carré, d'une exponentielle, d'une racine, d'un polynôme sans zéro.
 Toujours justifié, en quelques mots : √(x²) = |x| = −x (x < 0) ; un 0⁺ ou 0⁻ (« cf. tableau de
 signes ») ; le signe d'une constante qui décide (ln 5 > 0) ; la méthode (mise en évidence,
-conjuguée, croissance comparée avec sa limite de référence, Bernoulli-L'Hôpital).
+conjuguée, Bernoulli-L'Hôpital ; jamais la croissance comparée, voir R19).
 
 **R2. Annoncer une forme en UNE ligne**, par substitution des limites, signes gardés, entre « » :
 `lim … = « √(+∞)/(−∞) » = « +∞/−∞ » : forme indéterminée`. Sans forme indéterminée, la même ligne
@@ -27,7 +27,7 @@ comme » restent interdits.
 
 **R3. Chaîne d'égalités, une étape par ligne**, la forme annoncée en tête de chaîne. Justification
 entre parenthèses, en un à cinq mots : (mise en évidence), (conjuguée), (x < 0 : √(x²) = −x),
-(propriétés de ln), (croissance comparée : lim …). On ne recopie pas la factorisation dans la
+(propriétés de ln), (Bernoulli-L'Hôpital : …). On ne recopie pas la factorisation dans la
 justification, ni « on simplifie par x ; 1/x² → 0 » : la dernière ligne montre déjà la valeur.
 
 **R4. Mise en évidence de la puissance de x seule** : x(−4 + 5/x), x²(1 − 4/x + 5/x²) ; jamais le
@@ -62,7 +62,10 @@ la fonction étudiée : jamais « f'/g' » ni « g'(x) » dans la sortie ; le d�
 expression, `(x − 1)' = 1 ≠ 0`. Quand la dérivée du dénominateur est une constante, le quotient est
 écrit tel quel, `(1/x)/1`, et la valeur suit directement. Chaque membre de la chaîne garde son
 `lim_(x→a)`. L'existence de la limite du quotient des dérivées est la chaîne elle-même (pas de phrase).
-Si une hypothèse n'est pas vérifiée, la règle n'est pas appliquée (phrase de repli).
+Si une hypothèse n'est pas vérifiée, la règle n'est pas appliquée (phrase de repli). Jusqu'à **trois**
+applications de suite (x³e^(3x−5) en demande trois). **0·(±∞)** (règle du corrigé, 29.10.2026) : on le met en quotient, le facteur qui
+tend vers 0 en bas, l'autre en haut ; un facteur ln(…) reste toujours en haut ; eᵘ passe en bas sous la forme 1/e^(−u), xᵏ sous la forme
+1/x^(−k) ; une constante multiplicative est sortie du produit (e^(3x−5) = e^(−5)·e^(3x)). L'ordre de saisie des facteurs ne compte pas.
 
 **R10. Ensemble de définition** : une carte par condition, sans phrase de rappel de la règle, « condition
 ⇔ solution » ; une racine au dénominateur = une seule condition A > 0 ; Δ au plus une fois, en une ligne ;
@@ -114,6 +117,12 @@ logarithme (`x = −1`) n'a pas de contrôle.
 
 **R18. Équation de la filière M hors du cadre « un logarithme = une constante »** (décision du 29.10.2026, T36). (1) **Exposant rationnel, racine, logarithme** (`e^(6/x) = e^(x − 1)`, `7^√x = 3`, `e^(−ln x) = 0,2`) : l'ensemble de définition d'abord (outil ED), on multiplie par le dénominateur **en le disant** (« on multiplie les deux membres par les dénominateurs, non nuls sur l'ED »), on élève au carré **après** avoir isolé la racine (« les deux membres sont positifs : on élève au carré »), −ln a s'écrit ln(1/a) (propriété « −ln a = ln(1/a) »). (2) **Base polynomiale** `log_(2x)` : deux conditions (`2x > 0`, `2x ≠ 1`), puis l'exponentielle des deux membres avec la base `(2x)` ; une racine qui rend la base négative est rejetée par la vérification. (3) **Bicarré** : `u = t²`, `u > 0` ; on ne garde que les u > 0, puis `t = ±√u` ; t ≤ 0 est rejeté (« une exponentielle est strictement positive »). (4) **Constante irrationnelle** (e³, √10) : le trinôme garde la rédaction du discriminant avec logarithme (`Δ = 1 + 4e³`, x₁ et x₂ nommés) ; on ne remplace jamais une racine par son arrondi pour décider si elle est dans l'ED. (5) **Second membre à calculer** : une carte « Calcul du second membre » avant l'exponentielle, chaque somme de logarithmes regroupée puis évaluée (`log(1000) = log(10³) = 3`). (6) **Produit avec x en facteur** : mise en évidence de xᵏ, produit nul, x = 0 rejeté par l'ensemble de définition. (7) **π** s'écrit π et se résout en M seulement ; les valeurs approchées suivent R13.
 
+
+**R19. Jamais de croissance comparée comme justification** (décision du 29.10.2026, chantier « Limites et asymptotes » 3M). Les limites de
+référence eˣ/xⁿ, xⁿ/eˣ, ln x/xⁿ, xⁿ ln x en 0⁺… se justifient par Bernoulli-L'Hôpital (R9), comme dans le corrigé du chapitre 8 ; ln(x²+1)/x
+aussi. Ni « croissance comparée », ni « podium », ni « limite de référence » dans une rédaction. La mise en évidence d'une puissance ou d'une
+exponentielle reste permise, sans invoquer de croissance comparée. La règle du podium servira seulement à **prédire** le résultat, dans un
+encadré à part (étape 6 du chantier).
 
 ---
 
@@ -182,10 +191,9 @@ lim_(x→5⁺) ln(x² − 4x)/(x − 5) = « ln 5/0⁺ » = +∞    (x − 5 > 0
 Asymptote verticale : x = 5.
 
 lim_(x→+∞) ln(x² − 4x)/(x − 5) = « ln(+∞)/(+∞) » = « +∞/+∞ » : forme indéterminée    (le terme dominant de x² − 4x est x²)
-   = lim_(x→+∞) ln(x²(1 − 4/x))/(x(1 − 5/x))                 (mise en évidence)
-   = lim_(x→+∞) (2 ln x + ln(1 − 4/x))/(x(1 − 5/x))          (propriétés de ln)
-   = lim_(x→+∞) (2 · ln(x)/x + ln(1 − 4/x)/x)/(1 − 5/x)
-   = (2 · 0 + 0)/1 = 0                                        (croissance comparée : lim_(x→+∞) ln(x)/x = 0)
+   = lim_(x→+∞) (2x − 4)/(x² − 4x)    (Bernoulli-L'Hôpital : ln(x² − 4x) et x − 5 dérivables sur ]4 ; +∞[, (x − 5)' = 1 ≠ 0)
+   = lim_(x→+∞) x(2 − 4/x)/(x²(1 − 4/x))                        (mise en évidence)
+   = lim_(x→+∞) (2 − 4/x)/(x(1 − 4/x)) = « 2/(+∞ · 1) » = 0
 Asymptote horizontale : y = 0.
 ```
 
@@ -217,13 +225,15 @@ lim_(x→−∞) √(4x² + 1)/(x + 2) = « √(+∞)/(−∞) » = « +∞/−�
 Asymptote horizontale : y = −2.
 ```
 
-### 5. x²e^(−x) en +∞
+### 5. x²e^(−x) en +∞ (Bernoulli-L'Hôpital, 0·∞ mis en quotient)
 
 ```
-lim_(x→+∞) x²e^(−x) = « +∞ · 0⁺ » : forme indéterminée
-   = 0          (croissance comparée : lim_(x→+∞) xⁿe^(−x) = 0)
+lim_(x→+∞) x²e^(−x) = « +∞ · e^(−∞) » = « +∞ · 0⁺ » : forme indéterminée
+   = lim_(x→+∞) x²/e^x                  (on écrit un quotient de la forme « ∞/∞ »)
+   = lim_(x→+∞) 2x e^(−x) = « 2 · +∞ · 0⁺ » = 0    (Bernoulli-L'Hôpital : x² et e^x dérivables sur ℝ, (e^x)' = e^x ne s'annule pas sur ℝ)
 Asymptote horizontale : y = 0.
 ```
+(La limite de x e^(−x), obtenue de la même façon, est écrite avant, comme sous-limite.)
 
 ### 6. ln(x)/(x − 1) en 1 (Bernoulli-L'Hôpital)
 

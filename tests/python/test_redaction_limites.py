@@ -219,8 +219,8 @@ class TestValeursInterdites(unittest.TestCase):
 
 
 class TestLogarithmeSurAffine(unittest.TestCase):
-    """ln(x²−4x)/(x−5) : toutes les bornes sont rédigées (±∞ par mise en évidence de ln puis croissance comparée, 0⁻, 4⁺, 5⁻ et 5⁺
-    par les règles sur les limites) ; aucune phrase de repli."""
+    """ln(x²−4x)/(x−5) : toutes les bornes sont rédigées (±∞ par Bernoulli-L'Hôpital, 0⁻, 4⁺, 5⁻ et 5⁺ par les règles sur les limites) ;
+    aucune phrase de repli."""
 
     def test_aucun_repli(self):
         r = la.etudier("ln(x^2-4x)/(x-5)")
@@ -240,17 +240,14 @@ class TestLogarithmeSurAffine(unittest.TestCase):
         self.assertEqual(titres, [r"Signe de \(x^{2} - 4x\) :", r"Signe de \(x - 5\) :"])
 
     def test_en_plus_l_infini_exemple_3_du_guide(self):
-        self.assertEqual(textes("ln(x^2-4x)/(x-5)", INF)[0],
-                         r"\[\begin{aligned}\lim_{x\to +\infty} \frac{\ln\left(x^{2} - 4x\right)}{x - 5} &= "
-                         r"\text{« }\dfrac{\ln\left(+\infty\right)}{+\infty}\text{ »} = \text{« }\dfrac{+\infty}{+\infty}\text{ »}"
-                         r"\text{ : forme indéterminée} \qquad \left(\text{le terme dominant de } x^{2} - 4x \text{ est } x^{2}\right) \\ "
-                         r"&= \lim_{x\to +\infty} \dfrac{\ln\left(x^{2}\left(1 - \frac{4}{x}\right)\right)}{x\,\left(1 - \frac{5}{x}\right)} "
-                         r"\qquad \left(\text{mise en évidence}\right) \\ "
-                         r"&= \lim_{x\to +\infty} \dfrac{2\ln x + \ln\left(1 - \frac{4}{x}\right)}{x\,\left(1 - \frac{5}{x}\right)} "
-                         r"\qquad \left(\text{propriétés de } \ln\right) \\ "
-                         r"&= \lim_{x\to +\infty} \dfrac{1}{1 - \frac{5}{x}}\left(2\,\dfrac{\ln x}{x} + "
-                         r"\dfrac{\ln\left(1 - \frac{4}{x}\right)}{x}\right) = 2 \cdot 0 + 0 = 0 \qquad "
-                         r"\left(\text{croissance comparée : } \lim_{x\to +\infty} \dfrac{\ln x}{x^{n}} = 0\right)\end{aligned}\]")
+        """Doctrine du 29.10.2026 : Bernoulli-L'Hôpital (plus de mise en évidence de ln ni de croissance comparée)."""
+        ch = textes("ln(x^2-4x)/(x-5)", INF)[0]
+        self.assertIn(r"\text{« }\dfrac{\ln\left(+\infty\right)}{+\infty}\text{ »} = \text{« }\dfrac{+\infty}{+\infty}\text{ »}"
+                      r"\text{ : forme indéterminée}", ch)
+        self.assertIn(r"&= \lim_{x\to +\infty} \frac{2x - 4}{x^{2} - 4x} \qquad \left(\text{Bernoulli-L'Hôpital : } \ln\left(x^{2} - 4x\right) "
+                      r"\text{ et } x - 5 \text{ dérivables sur } \left]4 \,;\, +\infty\right[ ,\; \left(x - 5\right)' = 1 \neq 0\right)", ch)
+        self.assertIn(r"\text{ »} = 0\end{aligned}", ch)
+        self.assertNotIn("croissance comparée", ch)
 
 
 class TestTableauxDeSignes(unittest.TestCase):
@@ -547,31 +544,27 @@ class TestChaineEtReferences(unittest.TestCase):
                 self.assertIn(r"\text{« }", premiere)
 
 
-class TestEvidenceLn(unittest.TestCase):
-    """Retouche 2 : ln(u)/v en ±∞ avec u polynôme : ln(u) = k ln|x| + ln(c + …), puis croissance comparée
-    (ln x / x^n → 0), avant Bernoulli-L'Hôpital — en chaîne d'égalités."""
+class TestLogarithmeSurPolynomeParBH(unittest.TestCase):
+    """Doctrine du 29.10.2026 (LA-34) : ln(u)/v en ±∞ (u, v polynômes) se traite par Bernoulli-L'Hôpital, jamais par croissance comparée."""
 
     def test_ln_de_x_carre_plus_1_sur_x(self):
-        ch = chaine("ln(x^2+1)/x", INF)
-        self.assertIn(r"\ln\left(x^{2}\left(1 + \frac{1}{x^{2}}\right)\right)", ch)
-        self.assertIn(r"2\ln x + \ln\left(1 + \frac{1}{x^{2}}\right)", ch)
-        self.assertIn(r"2\,\dfrac{\ln x}{x} + \dfrac{\ln\left(1 + \frac{1}{x^{2}}\right)}{x} = 2 \cdot 0 + 0 = 0", ch)
-        self.assertIn(r"\text{croissance comparée : } \lim_{x\to +\infty} \dfrac{\ln x}{x^{n}} = 0", ch)
-        self.assertFalse(any("Bernoulli" in p for p in textes("ln(x^2+1)/x", INF)))
+        for ou in (INF, MINF):
+            with self.subTest(ou=ou):
+                t = textes("ln(x^2+1)/x", ou)
+                ch = chaine("ln(x^2+1)/x", ou)
+                self.assertEqual(sum(p.count("Bernoulli-L'Hôpital") for p in t), 1)
+                self.assertIn(r"\frac{2x}{x^{2} + 1} \qquad \left(\text{Bernoulli-L'Hôpital : } \ln\left(x^{2} + 1\right) \text{ et } x", ch)
+                self.assertNotIn("croissance comparée", ch)
+                self.assertNotIn("propriétés de", ch)
 
-    def test_en_moins_l_infini_on_pose_t_egal_moins_x(self):
-        ch = chaine("ln(x^2+1)/x", MINF)
-        self.assertIn(r"2\ln|x|", ch)
-        self.assertIn(r"t = -x \to +\infty", ch)
-        self.assertIn(r"\lim_{t\to +\infty} \dfrac{\ln t}{t^{n}} = 0", ch)
-        self.assertFalse(any("Bernoulli" in p for p in textes("ln(x^2+1)/x", MINF)))
+    def test_denominateur_ln_de_trinome(self):
+        for ou in (INF, MINF):
+            with self.subTest(ou=ou):
+                t = textes("ln(x^2-4x)/(x-5)", ou)
+                self.assertEqual(sum(p.count("Bernoulli-L'Hôpital") for p in t), 1)
+                self.assertFalse(any(REPLI[1:] in p for p in t))
 
-    def test_denominateur_mis_en_evidence(self):
-        ch = chaine("ln(x^2-4x)/(x-5)", INF)
-        self.assertIn(r"x\,\left(1 - \frac{5}{x}\right)", ch)
-        self.assertFalse(any("Bernoulli" in p for p in textes("ln(x^2-4x)/(x-5)", INF)))
-
-    def test_avant_l_hopital_seulement_pour_ln_de_polynome(self):
+    def test_ln_de_x_sur_x_moins_1_et_x_ln_x_carre(self):
         for entree, ou in [("ln(x)/(x-1)", r"x \to 1"), ("x*ln(x^2)", r"x \to 0")]:
             self.assertTrue(any("Bernoulli" in p for p in textes(entree, ou)), entree)
 
@@ -657,67 +650,64 @@ class TestConjuguee(unittest.TestCase):
         self.assertFalse(any("conjuguée" in e["html"] for e in t))
 
 
-class TestCroissanceComparee(unittest.TestCase):
-    """L6 / T09 (Q1) : la croissance comparée n'est citée que devant une forme indéterminée, avec la limite de
-    référence nommée ; mise en évidence de l'exponentielle (LA-07)."""
+class TestJamaisDeCroissanceComparee(unittest.TestCase):
+    """Doctrine du 29.10.2026 (LA-07, LA-15) : la croissance comparée ne justifie plus rien ; xⁿe^(−ax), ln x/xⁿ, xⁿ ln x en 0⁺… passent par
+    Bernoulli-L'Hôpital, 0·(±∞) étant d'abord mis en quotient. La mise en évidence de l'exponentielle reste permise (LA-31)."""
 
-    def test_x2_exp_moins_x(self):                              # exemple 5 du guide
-        self.assertEqual(textes("x^2*e^(-x)", INF), [
-            r"\[\begin{aligned}\lim_{x\to +\infty} x^{2}\,e^{-x} &= \text{« }+\infty \cdot e^{-\infty}\text{ »} = "
-            r"\text{« }+\infty \cdot 0^{+}\text{ »}\text{ : forme indéterminée} \\ "
-            r"&= 0 \qquad \left(\text{croissance comparée : } \lim_{x\to +\infty} x^{n}e^{-ax} = 0\right)\end{aligned}\]",
-            r"Asymptote horizontale : \(y = 0\).",
-        ])
+    MOTS = ("croissance comparée", "podium", "limite de référence")
+
+    def test_x2_exp_moins_x(self):                              # exemple 5 du corrigé
+        t = textes("x^2*e^(-x)", INF)
+        ch = chaine("x^2*e^(-x)", INF)
+        self.assertIn(r"\lim_{x\to +\infty} x^{2}\,e^{-x} &= \text{« }+\infty \cdot e^{-\infty}\text{ »} = "
+                      r"\text{« }+\infty \cdot 0^{+}\text{ »}\text{ : forme indéterminée}", ch)
+        self.assertIn(r"&= \lim_{x\to +\infty} \dfrac{x^{2}}{e^{x}} \qquad \left(\text{on écrit un quotient de la forme } « \infty/\infty »\right)", ch)
+        self.assertEqual(sum(p.count("Bernoulli-L'Hôpital") for p in t), 2)      # x·e^(−x), puis x²e^(−x)
+        self.assertIn("Asymptote horizontale : \\(y = 0\\).", t)
 
     def test_liste_de_la_specification(self):
-        cas = [("x^2*e^(-x)", INF, "x^{n}e^{-ax} = 0"), ("x^(1/2)*e^(-x)", INF, "x^{n}e^{-ax} = 0"),
-               ("ln(x)/x", INF, r"\dfrac{\ln x}{x^{n}} = 0"), ("x*ln(x)", r"x \to 0^+", r"x^{n}\ln x = 0"),
-               ("e^x-x^2", INF, "x^{n}e^{-ax} = 0"), ("x-ln(x)", INF, r"\dfrac{\ln x}{x^{n}} = 0"),
-               ("x*e^x", MINF, "x^{n}e^{ax} = 0"), ("e^x/x", INF, r"\dfrac{e^{ax}}{x^{n}} = +\infty"),
-               ("e^(2x)/x^3", INF, r"\dfrac{e^{ax}}{x^{n}} = +\infty")]
-        for entree, ou, reference in cas:
+        cas = [("x^2*e^(-x)", INF), ("x^(1/2)*e^(-x)", INF), ("ln(x)/x", INF), ("x*ln(x)", r"x \to 0^+"), ("e^x-x^2", INF),
+               ("x-ln(x)", INF), ("x*e^x", MINF), ("e^x/x", INF), ("e^(2x)/x^3", INF), ("e^(-x)*(x+1)", INF), ("ln(x)^2/x", INF)]
+        for entree, ou in cas:
             with self.subTest(f=entree):
                 t = " ".join(textes(entree, ou))
-                self.assertIn("croissance comparée", t)
-                self.assertIn(reference, t)
                 self.assertIn("forme indéterminée", t)
+                self.assertTrue("Bernoulli-L'Hôpital" in t or "mise en évidence" in t, t)
+                for mot in self.MOTS:
+                    self.assertNotIn(mot, t)
 
     def test_jamais_hors_forme_indeterminee(self):
         for entree, ou in [("x*e^x", INF), ("e^x/x", r"x \to 0"), ("e^(2x)", INF),
                            ("e^(2x)", MINF), ("x^2*e^(-x)", MINF), ("ln(x)/x", r"x \to 0^+")]:
             with self.subTest(f=entree, ou=ou):
-                self.assertFalse(any("croissance comparée" in p for p in textes(entree, ou)))
+                t = textes(entree, ou)
+                self.assertFalse(any("croissance comparée" in p or "Bernoulli" in p for p in t))
 
-    def test_toute_mention_suit_une_forme_indeterminee(self):
+    def test_aucune_mention_dans_aucun_texte(self):
         for entree, ou, t in TestStyle().tous_les_textes():
             for p in t:
-                if "croissance comparée" in p:
-                    with self.subTest(f=entree, ou=ou):
-                        self.assertIn("forme indéterminée", p)
-                        self.assertLess(p.index("forme indéterminée"), p.index("croissance comparée"))
+                for mot in self.MOTS:
+                    with self.subTest(f=entree, ou=ou, mot=mot):
+                        self.assertNotIn(mot, p)
 
     def test_mise_en_evidence_de_l_exponentielle(self):
         ch = chaine("e^x-x^2", INF)
         self.assertIn(r"\lim_{x\to +\infty} e^{x}\,\left(1 - x^{2}\,e^{-x}\right) = \text{« }+\infty \cdot 1\text{ »} = +\infty", ch)
         self.assertIn(r"\text{mise en évidence}", ch)
-        self.assertIn(r"\lim_{x\to +\infty} x^{2}\,e^{-x}", ch)                   # la limite de x²e^{-x} est établie à part
+        self.assertIn(r"\lim_{x\to +\infty} x^{2}\,e^{-x}", ch)                   # la limite de x²e^{-x} est établie à part (par BH)
         ch = chaine("(e^x+1)/(e^x-1)", INF)
         self.assertIn(r"\lim_{x\to +\infty} \frac{1 + e^{-x}}{1 - e^{-x}} = 1", ch)
 
     def test_polynome_devant_l_exponentielle(self):
         ch = chaine("e^(-x)*(x+1)", INF)
-        self.assertIn(r"\lim_{x\to +\infty} x\,e^{-x}\,\left(1 + \frac{1}{x}\right) = \text{« }+\infty \cdot 0^{+} \cdot 1\text{ »} = 0", ch)
-
-    def test_garde_fou(self):
-        with mock.patch.object(la, "_reference", return_value=("puissance_exp_neg", la.Lim.infini(1))):
-            t = etapes("x^2*e^(-x)", INF)
-        self.assertTrue(any(REPLI[1:] in e["html"] for e in t))
+        self.assertIn(r"\dfrac{x + 1}{e^{x}} \qquad \left(\text{on écrit un quotient de la forme } « \infty/\infty »\right)", ch)
+        self.assertIn(r"\text{Bernoulli-L'Hôpital : } x + 1 \text{ et } e^{x}", ch)
 
 
 class TestLHopital(unittest.TestCase):
     """L7 : règle de Bernoulli-L'Hôpital en dernier recours ; une parenthèse nomme les hypothèses (dérivables, (g)' ≠ 0 ; f désigne
     déjà la fonction étudiée : jamais « g'(x) » ni « f'/g' » dans la sortie), la forme 0/0 ou ∞/∞ est annoncée en tête de chaîne
-    (LA-15, LA-16)."""
+    (LA-15, LA-16, LA-32)."""
 
     def test_exponentielle_moins_1_sur_x_en_0(self):
         t = textes("(e^x-1)/x", r"x \to 0")
@@ -747,9 +737,9 @@ class TestLHopital(unittest.TestCase):
             for interdit in ["g'(x)", r"\dfrac{f'}{g'}", "f'/g'", "existe"]:
                 self.assertNotIn(interdit, t, (entree, interdit))
 
-    def test_ln_de_trinome_sur_affine_ne_passe_plus_par_la_regle(self):     # retouche 2 : mise en évidence de ln, avant L'Hôpital
+    def test_ln_de_trinome_sur_affine_passe_par_la_regle(self):             # LA-34 (29.10.2026) : plus de mise en évidence de ln
         for ou in (INF, MINF):
-            self.assertFalse(any("Bernoulli" in p for p in textes("ln(x^2-4x)/(x-5)", ou)), ou)
+            self.assertTrue(any("Bernoulli" in p for p in textes("ln(x^2-4x)/(x-5)", ou)), ou)
 
     def test_produit_mis_en_quotient(self):
         t = " ".join(textes("x*ln(x^2)", r"x \to 0"))
@@ -758,12 +748,12 @@ class TestLHopital(unittest.TestCase):
         self.assertIn(r"\text{ dérivables sur } \mathbb{R} \setminus \left\{0\right\}", t)
         self.assertIn(r"\lim_{x\to 0^{-}} -2x = -2 \cdot 0 = 0", t)
 
-    def test_une_seconde_forme_se_traite_par_croissance_comparee(self):
+    def test_une_seconde_forme_se_traite_par_une_seconde_application(self):
         t = textes("ln(x)^2/x", INF)
         ch = chaine("ln(x)^2/x", INF)
         self.assertIn(r"&= \lim_{x\to +\infty} \frac{2\ln(x)}{x} \qquad \left(\text{Bernoulli-L'Hôpital", ch)
-        self.assertEqual(sum(p.count("croissance comparée") for p in t), 1)
-        self.assertEqual(sum(p.count("Bernoulli-L'Hôpital") for p in t), 1)
+        self.assertEqual(sum(p.count("croissance comparée") for p in t), 0)
+        self.assertEqual(sum(p.count("Bernoulli-L'Hôpital") for p in t), 2)
 
     def test_jamais_hors_forme_indeterminee(self):
         for entree, ou in [("(x+1)/x", r"x \to 0"), ("1/(x-2)", r"x \to 2"), ("e^x/x", r"x \to 0"), ("x*e^x", INF),
@@ -771,13 +761,30 @@ class TestLHopital(unittest.TestCase):
             with self.subTest(f=entree, ou=ou):
                 self.assertFalse(any("Bernoulli" in p for p in textes(entree, ou)))
 
-    def test_jamais_pour_une_fraction_rationnelle_ni_une_limite_de_reference(self):    # LA-15
+    def test_jamais_pour_une_fraction_rationnelle(self):    # LA-15 : mise en évidence et factorisation restent la règle des fractions rationnelles
         for entree in ["(x^2-1)/(x-1)", "(x^2-4)/(x^2-4x+4)", "(2x^2+3x)/(x^2+1)", "x^2/(x-1)", "e^((x^2-1)/(x-1))"]:
             for etude in la.etudier(entree)["etudes"]:
                 self.assertFalse(any("Bernoulli" in e["html"] for e in etude["etapes"]), (entree, etude["ou"]))
-        for entree, ou in [("x^2*e^(-x)", INF), ("ln(x)/x", INF), ("x*ln(x)", r"x \to 0^+"),
-                           ("e^x-x^2", INF), ("x*e^x", MINF), ("x-ln(x)", INF)]:
-            self.assertFalse(any("Bernoulli" in p for p in textes(entree, ou)), entree)
+
+    def test_les_limites_de_reference_passent_par_la_regle(self):    # LA-15 (29.10.2026)
+        for entree, ou in [("x^2*e^(-x)", INF), ("ln(x)/x", INF), ("x*ln(x)", r"x \to 0^+"), ("x*e^x", MINF), ("x-ln(x)", INF)]:
+            t = textes(entree, ou)
+            self.assertTrue(any("Bernoulli" in p for p in t), entree)
+            self.assertFalse(any("croissance comparée" in p for p in t), entree)
+
+    def test_zero_fois_infini_en_quotient_selon_le_corrige(self):    # LA-32 : ln en haut, e^u en bas sous la forme 1/e^(−u), x^k sous la forme 1/x^(−k)
+        for entree, ou, quotient in [("x^3*ln(x)", r"x \to 0^+", r"\dfrac{\ln(x)}{x^{-3}}"), ("ln(x)*x^3", r"x \to 0^+", r"\dfrac{\ln(x)}{x^{-3}}"),
+                                     ("x*ln(x)", r"x \to 0^+", r"\dfrac{\ln(x)}{\frac{1}{x}}"), ("x^2*e^x", MINF, r"\dfrac{x^{2}}{e^{-x}}"),
+                                     ("e^x*x^2", MINF, r"\dfrac{x^{2}}{e^{-x}}"), ("e^(-x)*ln(x^3)", INF, r"\dfrac{\ln\left(x^{3}\right)}{e^{x}}"),
+                                     ("e^x*ln(-x)", MINF, r"\dfrac{\ln\left(-x\right)}{e^{-x}}"), ("e^(1/x)*x^2", r"x \to 0", r"\dfrac{e^{\frac{1}{x}}}{x^{-2}}")]:
+            with self.subTest(f=entree):
+                self.assertIn(quotient, chaine(entree, ou))
+
+    def test_constante_sortie_du_produit(self):                      # 8.12e : e^(3x−5) = e^(−5)·e^(3x)
+        ch = chaine("x^3*e^(3x-5)", MINF)
+        self.assertIn(r"\lim_{x\to -\infty} e^{-5}\,x^{3}\,e^{3x}", ch)
+        self.assertIn(r"\text{on sort la constante}", ch)
+        self.assertFalse(any(REPLI[1:] in p for p in textes("x^3*e^(3x-5)", MINF)))
 
     def test_non_appliquee_si_g_prime_n_est_pas_non_nul(self):
         with mock.patch.object(la, "_g_prime_non_nul", return_value=None):
@@ -807,11 +814,13 @@ class TestLHopital(unittest.TestCase):
         self.assertFalse(any("Bernoulli" in p for p in t), t)
         self.assertTrue(any(REPLI[1:] in p for p in t))
 
-    def test_au_plus_deux_applications_de_suite(self):
-        for entree in ["(e^x-1)/x", "ln(x)/(x-1)", "x*ln(x^2)", "ln(x)^2/x", "x*e^(1/x)"]:
+    def test_au_plus_trois_applications_de_suite(self):             # LA-32 (29.10.2026) ; 8.12e en demande trois
+        for entree in ["(e^x-1)/x", "ln(x)/(x-1)", "x*ln(x^2)", "ln(x)^2/x", "x*e^(1/x)", "x^3*e^(3x-5)", "x^2*e^(-5x)"]:
             for etude in la.etudier(entree)["etudes"]:
                 with self.subTest(f=entree, ou=etude["ou"]):
-                    self.assertLessEqual(sum(e["html"].count("Bernoulli-L'Hôpital") for e in etude["etapes"]), 2)
+                    self.assertLessEqual(sum(e["html"].count("Bernoulli-L'Hôpital") for e in etude["etapes"]), 3)
+        trois = sum(e["html"].count("Bernoulli-L'Hôpital") for e in etapes("x^3*e^(3x-5)", MINF))
+        self.assertEqual(trois, 3)
 
     def test_garde_fou(self):
         with mock.patch.object(la, "_arbre_propre", side_effect=lambda t: la.Nb(la.F(7))):     # 7/7 = 1 ≠ 2

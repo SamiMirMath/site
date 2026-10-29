@@ -540,6 +540,11 @@ l'élève, un « Calcul en cours… » qui dure parce que SymPy se charge encore
 - **Idée (non décidée)**
   10. **Bouton « Signaler cette équation »** : l'élève ou l'enseignant signale une équation mal traitée (l'équation et la filière seraient transmises, sans donnée personnelle). À cadrer d'abord : où va le signalement (courriel, formulaire, GoatCounter événement ?), confidentialité, effet sur la CSP et sur les scripts tiers.
 
+### T38 — Limites et asymptotes (3M) : étape 1 urgente — demande du 29.10.2026 (outil utilisé le 30.10.2026 au matin)
+- **Contenu** : (1) bug 8.13e (pôles irrationnels, `ln((3x²−3x+2)/(x²−5x+2))`) ; (2) garde-fou générique sur les résultats de SymPy (symbole libre, i, zoo, nan, AccumBounds) et sonde mpmath = détecteur de contradiction ; (3) message clair pour `sin`, `cos`, `tan`, `log_a` ; (4) corpus de l'enseignant (`tests/python/donnees/corpus_limites_3m.py`) contre un oracle mpmath ; (5) doctrine : la croissance comparée et le podium ne justifient plus rien, tout passe par Bernoulli-L'Hôpital (jusqu'à 3 de suite, 0·∞ en quotient selon le corrigé) ; LA-15, LA-32, LA-34 réécrites ; (6) page : exemples et « Rappel de la méthode » (mode d'emploi en 7 points du corrigé).
+- **Faite** : points 1 à 3 (`f6b130a`), puis 5 et 6 + 4 (voir `git log`). **Reste** : étapes 2 à 9 du chantier (`docs/chantiers/limites-asymptotes/audit-etape0.md`), dont la décision « BH partout » (étape 2), la prédiction du podium dans un encadré (étape 6), les signes 0⁺/0⁻ (étape 5, test marqué « échec attendu »), la suppression du code mort `_comparee_pure`, `_comparee_avec_polynomes`, `REFERENCES`, `_reference`, `_ligne_reference`, `_evidence_ln`.
+- **Vérification** : LA-07, LA-15, LA-32, LA-34 ; `test_garde_fou_limites.py`, `test_doctrine_bh.py`, `test_corpus_limites_3m.py`.
+
 ## Plus tard (hors plan, si les tests tiennent)
 
 - Découpage de `ensemble_def.py` en modules (`moteur/expr.py`, `poly.py`, `ensembles.py`…),

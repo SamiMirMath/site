@@ -7,7 +7,7 @@ dépendent sont bloquées (voir [taches.md](taches.md)).
 elle ne bloque aucune tâche, seulement un gabarit de factorisation. **Q10 à Q12 (outil Exponentielles et logarithmes)
 sont tranchées le 26.10.2026.**
 
-## ~~Q1 — « Croissance comparée » dans l'outil Limites~~ (tranchée le 14.10.2026)
+## ~~Q1 — « Croissance comparée » dans l'outil Limites~~ (tranchée le 14.10.2026 ; **remplacée le 29.10.2026** : plus jamais de croissance comparée comme justification, tout passe par Bernoulli-L'Hôpital, voir R19 du guide de rédaction)
 
 **Rappel.** Les croissances comparées sont les limites de référence qui lèvent les formes
 indéterminées entre puissances, exponentielle et logarithme.
@@ -102,7 +102,7 @@ Le comportement actuel est déjà conforme (vérifié le 14.10.2026) ; critère 
 Voir [specifications/limites-asymptotes.md](specifications/limites-asymptotes.md) ; nouvelle
 tâche **T08b**.
 
-## ~~Q9 — Rédaction détaillée des limites et des asymptotes~~ (tranchée le 14.10.2026)
+## ~~Q9 — Rédaction détaillée des limites et des asymptotes~~ (tranchée le 14.10.2026 ; **retouchée le 29.10.2026** : l'étape (3) « limites de référence et croissance comparée » est supprimée, Bernoulli-L'Hôpital la remplace, jusqu'à 3 applications de suite ; ln(u)/v en ±∞ passe par Bernoulli-L'Hôpital)
 
 **Décision.** Chaque limite est rédigée avec la méthode du cours, la première qui s'applique :
 (0) opérations et composition de limites, s'il n'y a pas de forme indéterminée ; (1) mise en
