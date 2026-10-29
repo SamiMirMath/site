@@ -57,24 +57,23 @@ class TestPoolM(unittest.TestCase):
                     self.assertTrue(s["ok"], (expr, s))
                     self.assertEqual(so.valider(s), [])
 
-    def test_oracle_les_solutions_sont_les_racines_dans_l_ensemble_de_definition(self):
-        """Chaque solution annule g − d et est dans l'ED (500 graines par niveau) ; aucune racine n'est perdue (balayage, une graine sur vingt-cinq)."""
-        for niveau in elm.NIVEAUX_M:
-            for graine in GRAINES:
-                expr = el.exercice(niveau, graine, "M")["expr"]
-                s = el.analyser_saisie(expr)
-                v = elm.variantes_changement(s.g, s.d, s.inconnue)
-                r = v[el.METHODE_LOGARITHMES] if v is not None else (elm.corriger_equation(s.g, s.d, s.inconnue) or el.corriger_equation(s.g, s.d, s.inconnue, parametres=s.parametres))
-                with self.subTest(niveau=niveau, expr=expr):
-                    self.assertIsNotNone(r)
-                    retenues = [MP.mpf(el.valeur(n)) for n in r["solutions"]]
-                    for x in retenues:
-                        e = ecart(s, x)
-                        self.assertIsNotNone(e, "solution hors de l'ensemble de définition")
-                        self.assertLess(abs(e), MP.mpf("1e-9") * (1 + abs(x)))
-                    if graine in GRAINES_BALAYAGE and niveau != "exponentielle":
-                        for rac in racines(s):
-                            self.assertTrue(any(abs(rac - x) < MP.mpf("1e-9") * (1 + abs(rac)) for x in retenues), ("racine perdue", rac))
+    def _oracle(self, niveau):
+        """Chaque solution annule g − d et est dans l'ED (500 graines) ; aucune racine n'est perdue (balayage, une graine sur vingt-cinq)."""
+        for graine in GRAINES:
+            expr = el.exercice(niveau, graine, "M")["expr"]
+            s = el.analyser_saisie(expr)
+            v = elm.variantes_changement(s.g, s.d, s.inconnue)
+            r = v[el.METHODE_LOGARITHMES] if v is not None else (elm.corriger_equation(s.g, s.d, s.inconnue) or el.corriger_equation(s.g, s.d, s.inconnue, parametres=s.parametres))
+            with self.subTest(niveau=niveau, expr=expr):
+                self.assertIsNotNone(r)
+                retenues = [MP.mpf(el.valeur(n)) for n in r["solutions"]]
+                for x in retenues:
+                    e = ecart(s, x)
+                    self.assertIsNotNone(e, "solution hors de l'ensemble de définition")
+                    self.assertLess(abs(e), MP.mpf("1e-9") * (1 + abs(x)))
+                if graine in GRAINES_BALAYAGE and niveau != "exponentielle":
+                    for rac in racines(s):
+                        self.assertTrue(any(abs(rac - x) < MP.mpf("1e-9") * (1 + abs(rac)) for x in retenues), ("racine perdue", rac))
 
     def test_les_deux_methodes_des_exercices_exponentiels_ont_le_meme_s(self):
         for niveau in ("exponentielle", "variable"):
@@ -119,6 +118,17 @@ class TestPoolM(unittest.TestCase):
             s = el.analyser_saisie(el.exercice("difficile", graine, "M")["expr"])
             vides += elm.corriger_equation(s.g, s.d, s.inconnue)["etapes"][0]["ed"].vide
         self.assertGreater(vides, 40)
+
+
+def _methode_oracle(niveau):
+    def test(self):
+        self._oracle(niveau)
+    test.__doc__ = f"Oracle mpmath sur le niveau « {niveau} » (une méthode par niveau : les niveaux se répartissent entre les processus de pytest-xdist)."
+    return test
+
+
+for _niveau in elm.NIVEAUX_M:
+    setattr(TestPoolM, f"test_oracle_les_solutions_sont_les_racines_dans_l_ensemble_de_definition_{_niveau}", _methode_oracle(_niveau))
 
 
 if __name__ == "__main__":

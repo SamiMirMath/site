@@ -197,10 +197,12 @@ class TestBatterieM(unittest.TestCase):
                 for a, b in zip(v, sorted(attendu)):
                     self.assertAlmostEqual(a, b, delta=1e-3 * (1 + abs(b)))
 
-    def test_oracle_les_solutions_sont_exactement_les_racines_dans_l_ensemble_de_definition(self):
+    TRANCHES_ORACLE = 4
+
+    def _oracle(self, tranche):
         """Chaque solution retenue annule g − d et est dans l'ED ; aucune racine de l'équation de départ n'est perdue (balayage numérique
-        indépendant), et chaque candidat rejeté est hors de l'ED."""
-        for entree, _ in BATTERIE_M + E4_M:
+        indépendant). Une tranche = une entrée sur TRANCHES_ORACLE de la batterie."""
+        for entree, _ in (BATTERIE_M + E4_M)[tranche::self.TRANCHES_ORACLE]:
             r = solutions_m(entree)
             if r is None:
                 continue
@@ -223,6 +225,18 @@ class TestBatterieM(unittest.TestCase):
                 self.assertEqual(len(v), len(attendu))
                 for a, b in zip(v, sorted(attendu)):
                     self.assertAlmostEqual(a, b, delta=1e-3 * (1 + abs(b)))
+
+
+
+def _tranche_oracle(tranche):
+    def test(self):
+        self._oracle(tranche)
+    test.__doc__ = "Oracle mpmath sur une tranche de la batterie (les tranches se répartissent entre les processus de pytest-xdist)."
+    return test
+
+
+for _t in range(TestBatterieM.TRANCHES_ORACLE):
+    setattr(TestBatterieM, f"test_oracle_les_solutions_sont_exactement_les_racines_dans_l_ensemble_de_definition_tranche_{_t}", _tranche_oracle(_t))
 
 
 def grille(n=121):
