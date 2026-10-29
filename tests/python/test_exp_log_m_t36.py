@@ -11,7 +11,7 @@ import exp_log as el
 import exp_log_m as elm
 import resoudre_el as rel
 import sortie as so
-from cas_el import BATTERIE_M_BASE_POLYNOMIALE, BATTERIE_M_CARRE_DANS_L_EXPOSANT, BATTERIE_M_BASE_RATIONNELLE, BATTERIE_M_BICARRE, BATTERIE_M_EXPOSANTS, BATTERIE_M_IRRATIONNEL
+from cas_el import BATTERIE_M_BASE_POLYNOMIALE, BATTERIE_M_CARRE_DANS_L_EXPOSANT, BATTERIE_M_SECOND_MEMBRE_CALCULE, BATTERIE_M_BASE_RATIONNELLE, BATTERIE_M_BICARRE, BATTERIE_M_EXPOSANTS, BATTERIE_M_IRRATIONNEL
 from test_exp_log_m import MP, ecart, racines
 
 
@@ -185,6 +185,20 @@ class TestCarreDansLExposant(_Batterie, unittest.TestCase):
             with self.subTest(entree=entree):
                 self.assertEqual(rel.resoudre(entree, "C"), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
                 self.assertIsNone(elm.variantes_exposant(*(lambda s: (s.g, s.d, s.inconnue))(el.analyser_saisie("2^x=8", "M"))))
+
+
+class TestSecondMembreCalcule(_Batterie, unittest.TestCase):
+    BATTERIE = BATTERIE_M_SECOND_MEMBRE_CALCULE
+    DEUX_METHODES = False
+
+    def test_la_carte_du_calcul_suit_l_ensemble_de_definition(self):
+        r = corrige_m(self.BATTERIE[0][0])[el.METHODE_LOGARITHMES]
+        self.assertEqual([c["titre"] for c in r["etapes"]], ["Ensemble de définition", "Calcul du second membre", "Exponentielle des deux membres", "Vérification"])
+
+    def test_les_formes_non_calculables_restent_en_pas_encore(self):
+        for entree in ["log(x)=(log(3)+log(5))/(log(2)+log(7))", "log(x)=(ln(3)+ln(5))/(ln(2)+ln(7))", "log(x)=(log(2)+log(5))/(log(5)-log(5))"]:
+            with self.subTest(entree=entree):
+                self.assertFalse(rel.resoudre(entree, "M")["ok"])
 
 
 if __name__ == "__main__":

@@ -265,6 +265,13 @@ BATTERIE_M_CARRE_DANS_L_EXPOSANT = [
     ("e^(x^2+x)=e^((x+2)^2)", [-1.333]), ("2^((x-1)^2)=2^(x^2+4)", [-1.5]),
 ]
 
+# T36, partie G2 : second membre à calculer (quotient de sommes de logarithmes en base 10, Amaudruz 7.4 b)
+BATTERIE_M_SECOND_MEMBRE_CALCULE = [
+    ("log(x)=(log(20)+log(100)-log(2))/(log(5000)-log(5)+log(0,1))", [31.623]), ("log(x)=(log(20)+log(5))/(log(50)-log(5))", [100.0]),
+    ("log(x+1)=(log(2)+log(500))/(log(50)-log(5))", [999.0]), ("(log(4)+log(25))/(log(2)+log(5))=log(x)", [100.0]), ("log(x)=(log(2)+log(5))/(log(20)+log(500))", [1.778]),
+    ("log(x)=(log(8)+log(125))/(log(10)+log(100)-log(10))", [31.623]),
+]
+
 # identités sur l'ensemble de définition : S = ED (solutions None)
 M_TOUT_L_ED = ["log(x)=log(x)", "log(x)+log(x-1)=log(x^2-x)", "2log(x)=log(x^2)+log(1)"]
 # formes du programme M que l'outil ne traite pas encore, et vrais hors-programme
@@ -279,7 +286,8 @@ def entrees_el_m():
                                   + [s for s, _ in BATTERIE_M_VAR] + M_VAR_PAS_ENCORE + [s for s, _ in BATTERIE_M_DEUX_TERMES]
                                   + [s for s, _ in BATTERIE_M_EXPOSANTS] + [s for s, _ in BATTERIE_M_BASE_POLYNOMIALE]
                                   + [s for s, _ in BATTERIE_M_BICARRE] + [s for s, _ in BATTERIE_M_BASE_RATIONNELLE]
-                                  + [s for s, _ in BATTERIE_M_IRRATIONNEL] + [s for s, _ in BATTERIE_M_CARRE_DANS_L_EXPOSANT]))
+                                  + [s for s, _ in BATTERIE_M_IRRATIONNEL] + [s for s, _ in BATTERIE_M_CARRE_DANS_L_EXPOSANT]
+                                  + [s for s, _ in BATTERIE_M_SECOND_MEMBRE_CALCULE]))
 
 
 def entrees_el():

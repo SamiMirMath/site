@@ -19,7 +19,7 @@ from math import gcd
 from noyau import analyser_complet
 from exp_log import (Car, Chaine, Defini, E, Eq, Fn, Log, Message, Neg, Nb, Op, Ou, Pow, Rel, Texte, Var, _Hors, _arbre_poly, _avec_decimaux,
                      _base_du_logarithme, _carte, _const, _contient_log, _nb_exact, _nom_tex, _padd, _par_exponentielle, _pnet, _precis, _produit,
-                     _racine_entiere, _resoudre_polynome, _somme_arbres, _suite_polynome, _milieu_exact, _valeur_exacte, _valeur_rationnelle, _exposant_entier, _poly, _puissance_rationnelle_exacte, _racine_carree, _racine_primitive, tex_element, logarithmique_m, _fin_beta,
+                     _racine_entiere, _resoudre_polynome, _somme_arbres, _suite_polynome, _milieu_exact, _valeur_exacte, _valeur_rationnelle, _exposant_entier, _poly, _regrouper as _regrouper_3c, _puissance_rationnelle_exacte, _racine_carree, _racine_primitive, tex_element, logarithmique_m, _fin_beta,
                      resolution_exponentielle, tex, tex_approx, valeur, variables, METHODE_LOGARITHMES, METHODE_MEME_BASE, METHODES, PROP_EXPONENTIELLE, PROP_ISOLER_LOG, PROP_PUISSANCE_NEGATIVE, PROP_EXP_LOG_BASE,
                      PROP_AUCUNE_SOLUTION, PROP_CAR_LN_E, PROP_CAR_LOG_10, PROP_DEFINITION_LOG, PROP_FOIS_MOINS_UN, PROP_LN_DEUX_MEMBRES,
                      PROP_LN_E_PUISSANCE, PROP_LN_PUISSANCE, PROP_LOG_BASE_PUISSANCE, PROP_LOG_DEUX_MEMBRES, PROP_LOG_PUISSANCE, PROP_MEME_BASE)
@@ -223,6 +223,8 @@ def _vers_ed(n, x):
     """La saisie du moteur de l'outil ED pour l'arbre n (les logarithmes deviennent ln ; l'inconnue devient x)."""
     if isinstance(n, Defini):
         return _vers_ed(n.arbre, x)
+    if isinstance(n, (Op, Neg, Pow)) and not variables(n) and _contient_log(n):
+        return "1"                                     # (log 20 + log 100)/(log 5 − log 5) : une constante, aucune condition sur x (jamais une division par 0 fabriquée)
     if isinstance(n, Nb):
         if n.dec:
             return "(" + n.dec.replace(",", ".") + ")" if n.val < 0 else n.dec.replace(",", ".")
@@ -1743,6 +1745,68 @@ def _base_inconnue_rationnelle(g, d, x):
 
 
 # =====================================================================
+# 4 septies. SECOND MEMBRE À CALCULER : log(x) = (log 20 + log 100 − log 2)/(log 5000 − log 5 + log 0,1) (T36, partie G2)
+# =====================================================================
+def _somme_de_logarithmes(n):
+    """(termes, écrit) pour n = somme de ±log(c) (log en base 10, c rationnel > 0 écrit comme dans la saisie) : termes = [(coefficient entier, 0, c)], écrit :
+    c → nœud écrit ; None sinon."""
+    try:
+        decoupe = _decouper(n)
+    except _Hors:
+        return None
+    termes, ecrit = [], {}
+    for coefficient, log in decoupe:
+        if log is None or log.base is not None or variables(log.a) or coefficient.denominator != 1:
+            return None
+        c = _const(log.a)
+        if c is None or c <= 0:
+            return None
+        termes.append((coefficient, 0, c))
+        ecrit.setdefault(c, log.a)
+    return (termes, ecrit) if termes else None
+
+
+def _valeur_dune_somme(n):
+    """(entier k, chaîne de calcul) pour n = Σ ±log(c) dont le produit des c^±1 est 10^k : log(20) + log(100) − log(2) = log(20·100/2) = log(1000) = 3 ; None sinon."""
+    lue = _somme_de_logarithmes(n)
+    if lue is None:
+        return None
+    termes, ecrit = lue
+    regroupe = _regrouper_3c(termes, ecrit)
+    if regroupe is None:
+        return None
+    final, _, ligne = regroupe
+    R = _const(final.a)
+    k = _exposant_entier(R, F(10)) if R != 1 else 0
+    if k is None:
+        return None
+    if ligne is None:
+        ligne = Chaine([final])
+    ligne.ajouter(Log(Pow(Nb(10), Nb(k))), "=")
+    ligne.ajouter(_nb_exact(k), "=", PROP_LOG_BASE_PUISSANCE)
+    return k, ligne
+
+
+def _calcul_du_second_membre(g, d, x):
+    """(g', d', carte) quand un membre sans inconnue est un quotient de deux sommes de logarithmes en base 10 dont chaque somme vaut un entier (log 20 + log 100
+    − log 2 = 3, log 5000 − log 5 + log 0,1 = 2) : l'équation devient log(x) = 3/2 ; None sinon."""
+    for cote, autre in ((d, g), (g, d)):
+        if variables(cote) or not (isinstance(cote, Op) and cote.op == "/") or not _contient_log(cote):
+            continue
+        haut, bas = _valeur_dune_somme(cote.a), _valeur_dune_somme(cote.b)
+        if haut is None or bas is None or bas[0] == 0:
+            continue
+        valeur_ = F(haut[0], bas[0])
+        lignes = [haut[1], bas[1]]
+        resultat = Chaine([cote, Op("/", _nb_exact(haut[0]), _nb_exact(bas[0]))] + ([_nb_exact(valeur_)] if valeur_.denominator == 1 else []),
+                          ["="] * (2 if valeur_.denominator == 1 else 1), [None] * (2 if valeur_.denominator == 1 else 1))
+        lignes.append(resultat)
+        nouveau = _nb_exact(valeur_)
+        return (autre, nouveau, _carte("Calcul du second membre", lignes)) if cote is d else (nouveau, autre, _carte("Calcul du second membre", lignes))
+    return None
+
+
+# =====================================================================
 # 5. CORRIGÉ D'UNE ÉQUATION LOGARITHMIQUE EN FILIÈRE M
 # =====================================================================
 def _nommer_racines(r):
@@ -1787,6 +1851,13 @@ def corriger_equation(g, d, x):
         etapes = [_carte_ed(ed, [Message("L'ensemble de définition est vide : l'équation n'a aucune solution.")])]
         return {"genre": "logarithmique", "inconnue": x, "enonce": None, "base": None, "etapes": etapes, "solutions": [], "remarque": None,
                 "ed": ed, "besoin_sympy": ed.besoin_sympy}
+    calcul = _calcul_du_second_membre(g, d, x)
+    if calcul is not None:                              # le second membre est d'abord calculé, puis l'équation suit son cours
+        g2, d2, carte_calcul = calcul
+        r = logarithmique_m(g2, d2, x) or regrouper(g2, d2, x)
+        if r is None:
+            return None
+        return _avec_ed_et_verification(ed, {**r, "etapes": [carte_calcul] + list(r["etapes"])}, x)
     r = logarithmique_m(g, d, x) or regrouper(g, d, x) or base_polynomiale(g, d, x) or base_inconnue_rationnelle(g, d, x)
     if r is None:
         return None
