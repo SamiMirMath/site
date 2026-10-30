@@ -197,7 +197,8 @@ const range=(a,b)=>{ if(b===undefined){b=a;a=0;} const r=[]; for(let i=a;i<b;i++
 /* nombres lus dans le formulaire */
 class ErreurSaisie extends Error{}
 function lireNombre(txt,quoi){
-  let s=String(txt==null?'':txt).trim().replace(/\s+/g,'').replace(/−/g,'-'); if(s==='') return null;
+  /* signe moins : tout tiret qu'un clavier peut insérer (U+2212 −, U+2013 –, U+2014 —, U+2010 ‐, U+2011 ‑) vaut « - » (U+002D) */
+  let s=String(txt==null?'':txt).trim().replace(/\s+/g,'').replace(/[\u2212\u2013\u2014\u2010\u2011]/g,'-'); if(s==='') return null;
   if(!/^[+-]?\d+(?:[.,]\d+)?(?:\/\d+)?$/.test(s)) throw new ErreurSaisie(`${quoi} : « ${txt.trim()} » n'est pas un nombre (entier, décimal 0,5 ou fraction 1/2).`);
   try{ return Fr.parse(s);}catch(e){ throw new ErreurSaisie(`${quoi} : « ${txt.trim()} » est illisible.`);} }
 
@@ -398,15 +399,15 @@ function dessinerFormulaire(){
   const para=S.meth==='para', NM=j=>para?`<i class="v">${['x','y'][j]}</i>`:X(j+1);
   document.querySelectorAll('[data-meth]').forEach(b=>b.classList.toggle('on',b.dataset.meth===(S.meth||'simplexe')));
   document.querySelector('[data-dim="3"]').disabled=para; $('exS').hidden=para; $('exP').hidden=!para;
-  $('hint').textContent=para?"Méthode graphique : toutes les contraintes ≤ ou ≥ sont acceptées (second membre quelconque). Nombres : 3, 0,5 ou 1/2 ; case vide = 0."
-    :"Nombres : 3, 0,5 ou 1/2 ; case vide = 0. Méthode algébrique : contraintes ≤ à second membre ≥ 0 (une contrainte ≥ est acceptée si elle le devient après multiplication par −1).";
-  const coefHtml=(vals,onchange)=>range(n).map(j=>`<input inputmode="decimal" data-j="${j}" value="${vals[j]||''}" aria-label="coefficient"> ${NM(j)}${j<n-1?' +':''}`).join(' ');
+  $('hint').textContent=para?"Nombres : 3, −2, 0,5 ou 1/2 ; case vide = 0. Méthode graphique : toutes les contraintes ≤ ou ≥ sont acceptées (second membre quelconque)."
+    :"Nombres : 3, −2, 0,5 ou 1/2 ; case vide = 0. Méthode algébrique : contraintes ≤ à second membre ≥ 0 (une contrainte ≥ est acceptée si elle le devient après multiplication par −1).";
+  const coefHtml=(vals,onchange)=>range(n).map(j=>`<input inputmode="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-j="${j}" value="${vals[j]||''}" aria-label="coefficient"> ${NM(j)}${j<n-1?' +':''}`).join(' ');
   $('objRow').innerHTML='<b>f&nbsp;=</b> '+coefHtml(S.f);
   $('objRow').querySelectorAll('input').forEach(inp=>inp.oninput=()=>{S.f[+inp.dataset.j]=inp.value;});
   const box=$('consRows'); box.innerHTML='';
   S.rows.forEach((r,i)=>{
     const d=document.createElement('div'); d.className='coefs row';
-    d.innerHTML=`<span class="num">(${i+1})</span>`+coefHtml(r.a)+`<button class="opb">${r.op==='<='?'≤':'≥'}</button><input class="rhs" inputmode="decimal" value="${r.b||''}" aria-label="second membre"><button class="del" title="supprimer">✕</button>`;
+    d.innerHTML=`<span class="num">(${i+1})</span>`+coefHtml(r.a)+`<button class="opb">${r.op==='<='?'≤':'≥'}</button><input class="rhs" inputmode="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value="${r.b||''}" aria-label="second membre"><button class="del" title="supprimer">✕</button>`;
     d.querySelectorAll('input[data-j]').forEach(inp=>inp.oninput=()=>{r.a[+inp.dataset.j]=inp.value;});
     d.querySelector('.rhs').oninput=e=>{r.b=e.target.value;};
     d.querySelector('.opb').onclick=e=>{ r.op=r.op==='<='?'>=':'<='; e.target.textContent=r.op==='<='?'≤':'≥'; };
