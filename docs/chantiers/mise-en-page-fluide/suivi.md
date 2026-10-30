@@ -122,7 +122,7 @@ Outils, dans l'ordre : Limites et asymptotes, Étude complète, Ensemble de déf
 | Étude complète | **faite** (suite complète verte : voir ci-dessous) | `git log` : « phase 4 : Étude complète » |
 | Ensemble de définition | **faite** (rien à migrer) | `git log` : « phase 4 : Ensemble de définition » |
 | Dérivée et variations | **faite** (rien à migrer) | `git log` : « phase 4 : Dérivée et variations » |
-| Exponentielles et logarithmes | à faire (`@container` à la place de `@media 820px`) | |
+| Exponentielles et logarithmes | **faite** (suite complète verte : voir ci-dessous) | `git log` : « phase 4 : Exponentielles » |
 | Factorisation | **faite** (rien à migrer) | `git log` : « phase 4 : Factorisation » |
 
 ### Limites et asymptotes, et socle commun (premier commit de la phase 4)
@@ -162,3 +162,12 @@ Aucun `<style>` local ni largeur codée : l'outil n'utilise que la feuille commu
 ### Factorisation
 
 Styles locaux (`details ol`, `.final .res`, `.final .c`) : mises en forme du contenu, sans largeur d'écran. Balayage et 8 exemples : aucune faute. Rien à modifier dans la page.
+
+### Exponentielles et logarithmes
+
+Seule page qui avait une largeur d'écran codée : `@media (max-width:820px)` sur les chaînes de ⇔ (`.chaine`). Remplacée par `@container (max-width: 47rem)` : le bloc `.etape` qui contient une chaîne est un conteneur
+(`.etape:has(>.chaine){container-type:inline-size}`, sélecteur propre à la page ; un `container-type` sur tous les `.etape` aurait écrasé ceux qui sont dans des boîtes à largeur ajustée). La disposition suit donc la place de
+la carte, pas l'écran : trois colonnes (⇔, expression, propriété) quand le bloc fait au moins 752 px, deux colonnes (propriété sous l'expression) sinon, comme avant (même seuil pour l'ancienne mise en page :
+750 px de bloc à 820 px d'écran). Vérifié à 1100 (3 colonnes, 1030 px), 900 (3 colonnes, 830 px), 800 (2 colonnes, 730 px) et 390 (2 colonnes, 333 px). `.prop` : `max-width:min(22em,100%)`.
+Navigateurs sans `:has()` (avant iOS 15.4) : la requête ne s'applique pas, la disposition à trois colonnes reste et défile dans son bloc.
+Garde ajoutée : `test_style_commun.py` interdit toute requête `@media` ou `@container` en pixels dans le `<style>` local d'un outil (simplexe compris).
