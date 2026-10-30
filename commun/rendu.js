@@ -132,11 +132,11 @@ export function rendreCarte(c, contexte) {
   const d = document.createElement("div");
   if (c.detail) console.error(c.detail);
   if (c.style === "erreur") {
-    d.className = "card err";
+    d.className = "card carte-etape err";
     d.textContent = c.blocs.filter(b => b.type === "erreur").map(b => b.texte).join(" ");
     return d;
   }
-  d.className = "card" + (c.badge ? " cond" : "") + (c.style === "final" ? " final" : "");
+  d.className = "card carte-etape" + (c.badge ? " cond" : "") + (c.style === "final" ? " final" : "");
   let h = titre(c);
   for (const b of c.blocs) {
     const fn = BLOCS[b.type];
@@ -152,7 +152,7 @@ export function rendreCarte(c, contexte) {
 /** Sortie ok:false d'un moteur : le message seul, dans une carte d'erreur. */
 export function rendreErreur(sortie) {
   const d = document.createElement("div");
-  d.className = "card err";
+  d.className = "card carte-etape err";
   d.textContent = sortie.erreur;
   if (sortie.detail) console.error(sortie.detail);
   return d;

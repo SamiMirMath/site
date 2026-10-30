@@ -26,27 +26,8 @@ CHOISIS = [o for o in os.environ.get("OUTILS", "").split(",") if o] or TOUS
 # Échecs connus au 30.10.2026 (rapport initial : docs/chantiers/mise-en-page-fluide/suivi.md) : {outil: {critère: [largeurs]}}.
 # À vider au fil de la migration (phases 3 et 4 du chantier) : la suite échoue tant qu'une entrée corrigée y reste.
 CONNUS = {
-    "ensemble-definition": {
-        "cible-44": [320, 360, 375, 390, 430],
-    },
-    "derivee-variations": {
-        "cible-44": [320, 360, 375, 390, 430],
-    },
-    "limites-asymptotes": {
-        "cible-44": [320, 360, 375, 390, 430],
-    },
     "etude-complete": {
-        "cible-44": [320, 360, 375, 390, 430],
         "debordement": [320, 360, 375, 390, 768],
-    },
-    "exponentielles-logarithmes": {
-        "cible-44": [320, 360, 375, 390, 430],
-    },
-    "exponentielles-logarithmes-M": {
-        "cible-44": [320, 360, 375, 390, 430],
-    },
-    "factorisation": {
-        "cible-44": [320, 360, 375, 390, 430],
     },
 }
 

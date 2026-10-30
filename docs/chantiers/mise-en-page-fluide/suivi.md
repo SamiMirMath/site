@@ -25,7 +25,7 @@ Plan détaillé : `/Users/samimir/.claude/plans/pasted-content-id-3a8a-chantier-
 | 1 | Règle et composants communs (`composants.css`, `composants.js`) | **faite** (suite complète verte : 911 + 80) |
 | 2 | Test de balayage des largeurs (`test_largeurs.py`), rapport initial | **faite** (suite complète verte : 911 + 89) |
 | 3 | Simplexe | **faite** (suite complète verte : 911 + 99) |
-| 4 | Autres outils, un commit par outil | à faire |
+| 4 | Autres outils, un commit par outil | en cours (voir ci-dessous) |
 | 5 | Fin : suivi complet, commande de fusion, résumé | à faire |
 
 ## Phase 1 — règle et composants communs
@@ -111,3 +111,28 @@ bonne hauteur, étiquettes sans chevauchement (deux méthodes), axes x₁/x₂ o
 
 **Reste, hors périmètre** : en 3D, les trois étiquettes de flèches (« x₃↑ : +8 »…) se touchent encore (elles ne sont pas dans les étiquettes écartées) ; le polyèdre 3D reste petit quand il est mince ;
 `touch-action:none` sur les canvas empêche le défilement de la page au doigt sur la figure (socle : « un glissement vertical sur un graphique fait défiler la page »).
+
+## Phase 4 — outils à cartes (un commit par outil)
+
+Outils, dans l'ordre : Limites et asymptotes, Étude complète, Ensemble de définition, Dérivée et variations, Exponentielles et logarithmes, Factorisation.
+
+| Outil | État | Commit |
+|---|---|---|
+| Limites et asymptotes (+ socle commun des outils à cartes) | **faite** | voir `git log` |
+| Étude complète | à faire (débordement de page à diagnostiquer) | |
+| Ensemble de définition | à faire | |
+| Dérivée et variations | à faire | |
+| Exponentielles et logarithmes | à faire (`@container` à la place de `@media 820px`) | |
+| Factorisation | à faire | |
+
+### Limites et asymptotes, et socle commun (premier commit de la phase 4)
+
+`commun/outil.js`, `commun/rendu.js` et `commun/style.css` sont partagés : le premier outil migré porte donc les changements communs aux 6 outils, ce qui retire d'un coup toutes les entrées `cible-44`
+de `CONNUS`.
+- Les 6 pages chargent `commun/composants.css` (après `style.css`, avant leur `<style>`) ; `test_style_commun.py` l'exige.
+- **Cibles tactiles** : `button{min-height:44px}` dans `style.css` (boutons d'exemple, `#tout`, `#pdf`, sélecteur de méthode, zoom du graphique), résumés « Rappel » (`padding:10px 0`), case à cocher de l'option (`.option{min-height:44px}`).
+- **Bouton flottant** : `#suivantFlottant` prend la classe `.bouton-flottant` (les règles `button.flottant` et `--flottant-*` sont retirées de `style.css`, elles vivent dans `composants.css`). Même comportement :
+  visible seulement s'il reste des cartes, même action que `#suivant` (qui reste en place), défilement doux jusqu'à la nouvelle carte, place réservée sous les cartes (`#cartes{padding-bottom}`).
+- **Cartes** : `rendreCarte` et `rendreErreur` ajoutent `.carte-etape` (marges intérieures `clamp(10px, 3vw, 18px)` au lieu de 22 / 26 px fixes : un peu plus serré sur ordinateur). `.final` devient `.card.final`
+  pour garder sa bordure verte. Les instantanés ignorent désormais la classe `carte-etape` (classe de mise en page, comme `cache`) : **les références ne changent pas d'un octet** (aucun texte mathématique touché).
+- Limites : aucun style local à remplacer (`details ol/li`, `.rappel` sont propres à la page) ; ses formules et tableaux longs défilaient déjà dans leur propre bloc.

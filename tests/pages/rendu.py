@@ -69,7 +69,7 @@ JS_CAPTURE = r"""
   };
   const txt = el => norm(el).textContent.replace(/\s+/g, ' ').trim();
   const cartes = [...document.querySelectorAll('#cartes > *')].map(card => ({
-    classes: [...card.classList].filter(c => c !== 'cache').sort(),
+    classes: [...card.classList].filter(c => c !== 'cache' && c !== 'carte-etape').sort(),      // classes de mise en page ignorées
     titre: (card.querySelector('h3') ? txt(card.querySelector('h3')) : null),
     texte: txt(card),
     tableaux: [...card.querySelectorAll('.tsigne table')].map(t => [...t.rows].map(r => ({
