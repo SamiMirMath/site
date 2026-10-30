@@ -118,8 +118,8 @@ Outils, dans l'ordre : Limites et asymptotes, Étude complète, Ensemble de déf
 
 | Outil | État | Commit |
 |---|---|---|
-| Limites et asymptotes (+ socle commun des outils à cartes) | **faite** | voir `git log` |
-| Étude complète | à faire (débordement de page à diagnostiquer) | |
+| Limites et asymptotes (+ socle commun des outils à cartes) | **faite** (suite complète verte : 911 + 99) | `git log` : « phase 4 : Limites » |
+| Étude complète | **faite** (suite complète verte : voir ci-dessous) | `git log` : « phase 4 : Étude complète » |
 | Ensemble de définition | à faire | |
 | Dérivée et variations | à faire | |
 | Exponentielles et logarithmes | à faire (`@container` à la place de `@media 820px`) | |
@@ -136,3 +136,11 @@ de `CONNUS`.
 - **Cartes** : `rendreCarte` et `rendreErreur` ajoutent `.carte-etape` (marges intérieures `clamp(10px, 3vw, 18px)` au lieu de 22 / 26 px fixes : un peu plus serré sur ordinateur). `.final` devient `.card.final`
   pour garder sa bordure verte. Les instantanés ignorent désormais la classe `carte-etape` (classe de mise en page, comme `cache`) : **les références ne changent pas d'un octet** (aucun texte mathématique touché).
 - Limites : aucun style local à remplacer (`details ol/li`, `.rappel` sont propres à la page) ; ses formules et tableaux longs défilaient déjà dans leur propre bloc.
+
+### Étude complète
+
+Débordement de page diagnostiqué (417 px à 320–390 px, 783 px à 768 px, uniquement en « corrigé complet ») : KaTeX ajoute à chaque formule une copie MathML invisible en `position:absolute`. Comme les blocs
+qui défilent (`.etape`, `.res`, `.cond .c`, `.enonce`, `.tsigne`, `.apercu`) n'étaient pas positionnés, ce MathML n'était **pas rogné** par eux : il étendait la zone défilable *de la page*. Le correctif
+(`position:relative` sur ces blocs) existait déjà pour les blocs de Limites (`.bh`, `.vals`, `.enc-c p`…) ; il est étendu aux blocs communs dans `commun/style.css`. Même cause, même cure pour tous les outils : le test de
+balayage n'ouvre qu'un exemple par outil, d'autres formules larges pouvaient donc déborder ailleurs. L'entrée `etude-complete` de `CONNUS` est retirée : **`CONNUS` est vide**.
+Aucun autre changement de l'outil (pas de style local, pas de largeur codée).

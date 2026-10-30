@@ -25,11 +25,7 @@ CHOISIS = [o for o in os.environ.get("OUTILS", "").split(",") if o] or TOUS
 
 # Échecs connus au 30.10.2026 (rapport initial : docs/chantiers/mise-en-page-fluide/suivi.md) : {outil: {critère: [largeurs]}}.
 # À vider au fil de la migration (phases 3 et 4 du chantier) : la suite échoue tant qu'une entrée corrigée y reste.
-CONNUS = {
-    "etude-complete": {
-        "debordement": [320, 360, 375, 390, 768],
-    },
-}
+CONNUS = {}
 
 JS_MESURE = r"""
 (async () => {
