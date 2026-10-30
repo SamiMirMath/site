@@ -8,7 +8,7 @@
    pour qu'un raccourci de page (flèches = pages précédente/suivante) ne se déclenche pas en même temps.
    `surChoix(bouton)` est appelée à chaque activation (clic ou clavier). Renvoie { choisir(bouton|index), actif() }. */
 export function monterOnglets(conteneur, surChoix) {
-  const onglets = [...conteneur.querySelectorAll("button")];
+  const onglets = [...conteneur.querySelectorAll("button")].filter((b) => !b.hidden);        // un onglet masqué n'est ni atteint ni activé par les flèches
   conteneur.setAttribute("role", "tablist");
   const choisir = (cible, { focus = false, notifier = true } = {}) => {
     const b = typeof cible === "number" ? onglets[(cible + onglets.length) % onglets.length] : cible;

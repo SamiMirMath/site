@@ -100,9 +100,9 @@ class TestSimplexe(unittest.TestCase):
                 self.assertFalse(self.defile_horizontalement(page))
 
     def test_a_lancer_a_vide_donne_des_messages_clairs_au_vouvoiement(self):
-        page = self.ouvrir(360)
         for methode in ("simplexe", "para"):
             with self.subTest(methode=methode):
+                page = self.ouvrir(360)                                  # page neuve pour chaque méthode (saisie remise à zéro)
                 self.clic(page, f'[data-meth="{methode}"]')
                 self.clic(page, "#launch")
                 self.assertEqual(page.evaluer("document.querySelector('#err').textContent"),
@@ -118,8 +118,6 @@ class TestSimplexe(unittest.TestCase):
                 self.clic(page, "#launch")
                 msg = page.evaluer("document.querySelector('#err').textContent")
                 self.assertTrue(msg.startswith("✗ Il faut au moins une contrainte"), msg)
-                page.evaluer("location.reload()")                       # saisie remise à zéro pour la méthode suivante
-                page.attendre("document.readyState === 'complete' && document.querySelector('#objRow input')", 30)
 
     def test_a_modifier_le_probleme_garde_la_saisie(self):
         for methode, exemple, apres in (("simplexe", "Exemple 2D", "#app"), ("para", "Parallèles : max", "#appPara")):
@@ -192,7 +190,7 @@ class TestSimplexe(unittest.TestCase):
                     self.assertEqual(page.evaluer("[...document.querySelectorAll('#objRow .sgn, #consRows .sgn')].filter(b => b.nextElementSibling.tagName !== 'INPUT').length"), 0)
                     geo = page.evaluer("[...document.querySelectorAll('#objRow .sgn, #consRows .sgn')].map(b => { const r = b.getBoundingClientRect(); return [r.width, r.height, b.tagName, b.type]; })")
                     for w, h, balise, type_ in geo:
-                        self.assertGreaterEqual(w, 36)
+                        self.assertGreaterEqual(w, 30)                         # ≈ 32 px de large, 44 px de haut
                         self.assertGreaterEqual(h, 44)
                         self.assertEqual((balise, type_), ("BUTTON", "button"))
                     self.assertEqual(page.evaluer("document.querySelector('#objRow .sgn').getAttribute('aria-label')"),
@@ -364,9 +362,9 @@ class TestSimplexe(unittest.TestCase):
         onglet = "data-modep" if para else "data-mode"
         zone, grille = ("#solP", "#gridP") if para else ("#sol", "#gridSim")
         # vue par défaut
-        self.assertEqual(page.evaluer(f"document.querySelector('[{onglet}=\"sol\"]').textContent"), "Solution complète")
-        self.assertEqual(page.evaluer(f"[...document.querySelectorAll('[{onglet}]')].filter(b => b.offsetParent).map(b => b.textContent + '|' + b.classList.contains('on'))"),
-                         ["Solution complète|true", "Pas à pas|false"] + ([] if para else ["Explorer|false"]))
+        self.assertEqual(page.evaluer(f"document.querySelector('[{onglet}=\"sol\"]').textContent"), "Solution")
+        self.assertEqual(page.evaluer(f"[...document.querySelectorAll('[{onglet}]')].filter(b => b.offsetParent).map(b => b.textContent + '|' + b.getAttribute('aria-selected'))"),
+                         ["Solution|true", "Visualisation graphique|false"] + ([] if para else ["Explorer|false"]))
         self.assertFalse(page.evaluer(f"document.querySelector({zone!r}).hidden"))
         self.assertTrue(page.evaluer(f"document.querySelector({grille!r}).hidden"))
         # une carte par étape, autant que dans le rapport imprimable (même source)
@@ -388,12 +386,16 @@ class TestSimplexe(unittest.TestCase):
             self.assertIn("infinité de solutions", derniere)
             self.assertIn("infinité", verdict)
         self.assertEqual(page.evaluer(f"document.querySelector('{zone}').lastElementChild.textContent.trim()"), "↑ Haut de la page")
-        self.assertEqual("Faites tourner le polyèdre dans l'onglet Pas à pas." in page.evaluer(f"document.querySelector({zone!r}).textContent"), trois_d)
+        self.assertEqual("Faites tourner le polyèdre dans l'onglet Visualisation graphique." in page.evaluer(f"document.querySelector({zone!r}).textContent"), trois_d)
         # pas de défilement horizontal, les formules longues défilent dans leur bloc
         d = page.evaluer(self.DEBORDEMENT)
         self.assertLessEqual(d[0], d[1], d)
         self.assertEqual(d[2], [], d)
-        self.verifier_figures(page)
+        if para:
+            self.verifier_figures(page)
+        else:
+            self.assertEqual(page.evaluer(f"document.querySelectorAll('{zone} canvas').length"), 0, "la solution algébrique ne contient aucune figure")
+            self.assertEqual(page.evaluer(f"document.querySelectorAll('{zone} .carte-sol').length"), page.evaluer(f"document.querySelectorAll('{zone} .lien-graphique').length"))
         d = page.evaluer(self.DEBORDEMENT)
         self.assertLessEqual(d[0], d[1], d)
         # « ↑ Haut de la page »
@@ -461,7 +463,8 @@ class TestSimplexe(unittest.TestCase):
 
     def test_c_figures_suivent_le_theme_et_la_largeur(self):
         page = self.ouvrir(360)
-        self.lancer_exemple(page, "Exemple 2D")
+        self.clic(page, '[data-meth="para"]')
+        self.lancer_exemple(page, "Parallèles : max")
         page.attendre("document.querySelector('canvas.fig').dataset.dessine", 10)
         avant = page.evaluer("document.querySelector('canvas.fig').toDataURL()")
         page.taille(360, 800, sombre=True)
@@ -486,6 +489,226 @@ class TestSimplexe(unittest.TestCase):
         page.attendre("!document.querySelector('#sol').hidden", 5)
         self.assertTrue(page.evaluer("document.querySelector('#gridSim').hidden"))
         self.assertEqual(page.evaluer("document.querySelector('#sol').hidden || ST.sub"), 0)             # aucun pas n'a été avancé
+
+    # ---------- E. mise en page fluide (chantier du 30.10.2026) ----------
+    LIGNES = "(sel => [...document.querySelectorAll(sel)].map(r => new Set([...r.children].filter(c => c.offsetParent).map(c => Math.round(c.getBoundingClientRect().top))).size))"
+
+    def test_e_une_contrainte_tient_sur_deux_lignes_au_plus_des_390_px(self):
+        """Dès 390 px : une contrainte 2D sur 2 lignes au plus, une contrainte 3D sur 2 lignes au plus (exactement 2 à 390 px). « (1) » reste collé au premier
+        terme, « f = » aussi, et le bloc « ≤ second membre ✕ » ne se coupe jamais."""
+        for largeur in (390, 430, 768, 1100):
+            page = self.ouvrir(largeur)
+            for dim, exemple in ((2, "Exemple 2D"), (3, "Exemple 3D")):
+                with self.subTest(largeur=largeur, dim=dim):
+                    self.clic(page, f'[data-ex="{exemple}"]')
+                    lignes = page.evaluer(f"{self.LIGNES}('#consRows .coefs')")
+                    self.assertEqual(len(lignes), 3)
+                    self.assertTrue(all(n <= 2 for n in lignes), lignes)
+                    if largeur == 390 and dim == 3:
+                        self.assertEqual(lignes, [2, 2, 2])
+                    self.assertFalse(self.defile_horizontalement(page))
+                    # chaque bloc insécable tient sur une seule ligne et dans son conteneur
+                    coupes = page.evaluer("""[...document.querySelectorAll('#formCard .insecable')].filter(b => {
+                        const tops = new Set([...b.children].map(c => Math.round(c.getBoundingClientRect().top + c.getBoundingClientRect().height / 2)));
+                        const r = b.getBoundingClientRect(), p = b.parentElement.getBoundingClientRect();
+                        return tops.size > 1 || r.right > p.right + 1 || r.right > innerWidth; }).length""")
+                    self.assertEqual(coupes, 0)
+                    self.assertEqual(page.evaluer("""[...document.querySelectorAll('#consRows .coefs')].filter(r => {
+                        const num = r.querySelector('.num').getBoundingClientRect(), champ = r.querySelector('input').getBoundingClientRect();
+                        return Math.abs((num.top + num.bottom) / 2 - (champ.top + champ.bottom) / 2) > 12; }).length"""), 0)       # « (i) » sur la ligne de son premier champ
+                    self.assertEqual(page.evaluer("(() => { const o = document.querySelector('#objRow'); const b = o.querySelector('b').getBoundingClientRect(), c = o.querySelector('input').getBoundingClientRect(); return Math.abs((b.top + b.bottom) / 2 - (c.top + c.bottom) / 2) < 12; })()"), True)
+
+    ETAT_FORMULAIRE = """JSON.stringify({signes: [...document.querySelectorAll('#objRow .sgn, #consRows .sgn')].map(b => b.textContent),
+        valeurs: [...document.querySelectorAll('#objRow input, #consRows input')].map(i => i.value), ops: [...document.querySelectorAll('#consRows .opb')].map(b => b.textContent),
+        actifs: [...document.querySelectorAll('[data-meth].on, [data-dim].on, [data-sens].on')].map(b => b.textContent), etat: JSON.stringify(S)})"""
+
+    def test_e_modifier_le_probleme_restitue_tout(self):
+        problemes = {
+            "simplexe": {"meth": "simplexe", "n": 3, "sens": "min", "f": ["1", "-2", "3"],
+                         "rows": [{"a": ["1", "-1", "0"], "op": "<=", "b": "4"}, {"a": ["-1", "0", "2"], "op": ">=", "b": "-3"}, {"a": ["0", "1", "0"], "op": "<=", "b": "5"}]},
+            "para": {"meth": "para", "n": 2, "sens": "min", "f": ["-1/2", "3", ""],
+                     "rows": [{"a": ["1", "1", ""], "op": ">=", "b": "4"}, {"a": ["1", "-3", ""], "op": "<=", "b": "8"}, {"a": ["-1", "0", ""], "op": ">=", "b": "-9"}]},
+        }
+        for largeur in LARGEURS:
+            for methode, probleme in problemes.items():
+                with self.subTest(largeur=largeur, methode=methode):
+                    page = self.ouvrir(largeur)
+                    self.lancer_exemple(page, probleme=probleme)
+                    self.clic(page, "#editBtnP" if methode == "para" else "#editBtn")
+                    avant = page.evaluer(self.ETAT_FORMULAIRE)
+                    self.assertTrue(page.evaluer("!document.querySelector('#formCard').hidden"))
+                    # le formulaire est redessiné depuis l'état : même rendu (méthode, dimension, sens, signes, ≤ / ≥, valeurs)
+                    page.evaluer("dessinerFormulaire()")
+                    self.assertEqual(page.evaluer(self.ETAT_FORMULAIRE), avant)
+                    etat = json.loads(avant)
+                    self.assertIn("−", etat["signes"])
+                    self.assertEqual(etat["valeurs"][:3 if methode == "simplexe" else 2], ["1", "2", "3"] if methode == "simplexe" else ["1/2", "3"])
+                    self.assertEqual(etat["ops"], ["≤", "≥", "≤"] if methode == "simplexe" else ["≥", "≤", "≥"])
+
+    def test_e_la_solution_algebrique_ne_depend_pas_de_la_visualisation_graphique(self):
+        """« Solution » : texte seul, toujours depuis le programme initial avec Dantzig, quels que soient les pivots choisis dans « Visualisation graphique »."""
+        page = self.ouvrir(390)
+        self.lancer_exemple(page, "Exemple 2D")
+        self.assertEqual(page.evaluer("document.querySelectorAll('#sol canvas').length"), 0)
+        reference = page.evaluer("document.querySelector('#sol').innerText")
+        self.clic(page, '[data-mode="sim"]')
+        page.evaluer("[...document.querySelectorAll('#chips .chip')].find(b => !/Dantzig/.test(b.textContent)).click()")        # une entrante qui n'est pas celle de Dantzig
+        for _ in range(9):
+            page.attendre("!ST.anim", 15)
+            self.clic(page, "#bNext")
+        page.attendre("!ST.anim", 15)
+        self.assertGreaterEqual(page.evaluer("ST.hist.length"), 2)
+        self.clic(page, '[data-mode="sol"]')
+        self.assertEqual(page.evaluer("document.querySelector('#sol').innerText"), reference)
+        self.assertEqual(page.evaluer("document.querySelectorAll('#sol canvas').length"), 0)
+        self.assertEqual(page.evaluer("document.querySelectorAll('#sol .carte-etape').length"), page.evaluer("document.querySelectorAll('#sol .carte-sol').length"))
+
+    def test_e_voir_sur_le_graphique_ouvre_le_bon_pivot(self):
+        page = self.ouvrir(390)
+        self.lancer_exemple(page, "Exemple 2D")
+        pivots = page.evaluer("Math.max(...[...document.querySelectorAll('#sol .lien-graphique')].map(b => +b.dataset.pivot))")
+        self.assertGreaterEqual(pivots, 2)
+        for pivot, sub, attendu in ((2, 3, "3) On pousse"), (2, 5, "5) On réécrit"), (1, 0, "Programme de base n°1"), (pivots, 0, f"Programme de base n°{pivots}")):
+            with self.subTest(pivot=pivot, sub=sub):
+                self.clic(page, '[data-mode="sol"]')
+                page.evaluer(f"document.querySelector('#sol .lien-graphique[data-pivot=\"{pivot}\"][data-sub=\"{sub}\"]').click()")
+                self.assertEqual(page.evaluer("document.querySelector('[data-mode=\"sim\"]').getAttribute('aria-selected')"), "true")
+                self.assertFalse(page.evaluer("document.querySelector('#gridSim').hidden"))
+                self.assertEqual(page.evaluer("[ST.hist.length, ST.sub]"), [pivot, sub])
+                self.assertIn(f"Pivot {pivot} / ", page.evaluer("document.querySelector('#pagebar').textContent"))
+                self.assertIn(attendu, page.evaluer("document.querySelector('#pageBody').textContent"))
+                self.assertGreater(page.evaluer("document.querySelector('#cv').clientWidth"), 100)
+
+    TAP = """(async (idx, fraction) => {
+        const cv = document.getElementById('cv'); cv.scrollIntoView({block: 'center'}); await new Promise(r => setTimeout(r, 100));
+        const r = cv.getBoundingClientRect(), bx = cv.clientLeft, by = cv.clientTop, p = idx === null ? centre() : R.V[R.reels[idx]].p, px = scene.proj(p);
+        const cw = r.width - 2 * bx, ch = r.height - 2 * by;             // zone de dessin = boîte affichée sans la bordure du canvas
+        return {x: r.left + bx + px[0] * cw / scene.W, y: r.top + by + px[1] * ch / scene.H, p, boite: [cw, ch], scene: [scene.W, scene.H]}; })"""
+
+    def appuyer(self, page, x, y):
+        page.appel("Input.dispatchMouseEvent", type="mousePressed", x=x, y=y, button="left", clickCount=1)
+        page.appel("Input.dispatchMouseEvent", type="mouseReleased", x=x, y=y, button="left", clickCount=1)
+
+    def test_e_un_appui_sur_la_figure_place_le_point_au_bon_endroit(self):
+        """Explorer, 2D, hauteur de canvas variable : un appui à la position écran d'un sommet connu place le point sur ce sommet (à la tolérance d'accrochage
+        près) ; un appui à l'intérieur place le point à moins d'un demi-pour-cent de la diagonale. L'onglet « Gradient » (choix d'un sommet par appui) est masqué
+        (AFFICHER_GRADIENT = false) : il utilise la même conversion `ptSouris`, couverte ici."""
+        for largeur in (390, 1100):
+            page = self.ouvrir(largeur)
+            self.lancer_exemple(page, "Exemple 2D")
+            self.clic(page, '[data-mode="exp"]')
+            self.assertTrue(page.evaluer("document.querySelector('[data-mode=\"grad\"]').hidden"))
+            nb_sommets = page.evaluer("R.reels.length")
+            self.assertGreaterEqual(nb_sommets, 4)
+            for idx in list(range(nb_sommets)) + [None]:
+                with self.subTest(largeur=largeur, sommet=idx):
+                    t = page.evaluer(f"{self.TAP}({'null' if idx is None else idx})")
+                    self.assertAlmostEqual(t["boite"][0], t["scene"][0], delta=1.5)            # la boîte affichée a la taille de la scène : pas d'étirement
+                    self.assertAlmostEqual(t["boite"][1], t["scene"][1], delta=1.5)
+                    self.appuyer(page, t["x"], t["y"])
+                    ecart, diag = page.evaluer(f"[Math.hypot(...ST.expPt.map((v, i) => v - {json.dumps(t['p'])}[i])), R.diag]")
+                    if idx is None:
+                        self.assertLess(ecart, 0.005 * diag)
+                    else:
+                        self.assertLessEqual(ecart, 0.03 * diag)                                 # tolérance d'accrochage
+                        self.assertEqual(page.evaluer("R.reels.indexOf(R.indiceSommet(ST.expPt))"), idx)
+                        self.assertIn("Sommet", page.evaluer("document.querySelector('#pageBody').textContent"))
+
+    def test_e_la_figure_remplit_son_cadre_et_le_canvas_suit_sa_hauteur(self):
+        for largeur in (390, 1100):
+            page = self.ouvrir(largeur)
+            self.lancer_exemple(page, "Exemple 2D")
+            self.clic(page, '[data-mode="sim"]')
+            with self.subTest(largeur=largeur):
+                d = page.evaluer("""(() => { const cv = document.getElementById('cv'), q = scene.marges, xs = R.reels.map(k => scene.proj(R.V[k].p)[0]), ys = R.reels.map(k => scene.proj(R.V[k].p)[1]);
+                    return {haut: cv.clientHeight, H: scene.H, larg: cv.clientWidth, W: scene.W, style: cv.style.height, plein: (Math.max(...xs) - Math.min(...xs)) / (scene.W - q.ML - q.MR),
+                            pleinY: (Math.max(...ys) - Math.min(...ys)) / (scene.H - q.MT - q.MB), mx: Math.min(...xs) - q.ML}; })()""")
+                self.assertAlmostEqual(d["haut"], d["H"], delta=1)
+                self.assertGreaterEqual(d["H"], 0.5 * d["W"] - 1)
+                self.assertLessEqual(d["H"], 1.1 * d["W"] + 1)
+                self.assertGreaterEqual(max(d["plein"], d["pleinY"]), 0.8)                       # marges d'environ 8 % : la figure remplit son cadre
+                self.assertGreater(d["mx"], 0)
+
+    OVERLAP = """(cv => { const sc = cv && cv._scene; if (!sc) return ['pas de scène'];
+        const inter = (a, b) => Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0) > 0.5 && Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0) > 0.5;
+        const textes = sc.occ.filter(o => o.txt && ['sommet', 'axe', 'graduation', 'f', 'p', 'contrainte'].includes(o.kind)), pts = sc.occ.filter(o => o.kind === 'point'), out = [];
+        for (let i = 0; i < textes.length; i++) for (let j = i + 1; j < textes.length; j++) if (inter(textes[i], textes[j])) out.push(textes[i].kind + ' « ' + textes[i].txt + ' » × ' + textes[j].kind + ' « ' + textes[j].txt + ' »');
+        for (const t of textes) for (const p of pts) if (inter(t, p)) out.push(t.kind + ' « ' + t.txt + ' » sur un point');
+        return out; })"""
+
+    def sans_chevauchement(self, page, canvas, contexte):
+        self.assertEqual(page.evaluer(f"{self.OVERLAP}(document.querySelector({canvas!r}))"), [], contexte)
+
+    def test_e_etiquettes_sans_chevauchement_methode_algebrique(self):
+        """« f = … », numéros de sommets, noms d'axes et graduations ne se chevauchent pas (ni ne couvrent un sommet) : pas à pas complet, Explorer et chaque
+        exemple du site, à 390 et 1100 px."""
+        for largeur in (390, 1100):
+            for nom in ("Exemple 2D", "Exemple 3D", "9 sommets (3D)"):
+                with self.subTest(largeur=largeur, exemple=nom):
+                    page = self.ouvrir(largeur)
+                    self.lancer_exemple(page, nom)
+                    self.clic(page, '[data-mode="sim"]')
+                    for pas in range(60):
+                        page.attendre("!ST.anim", 15)
+                        self.sans_chevauchement(page, "#cv", f"{nom} {largeur} px, pas {pas} (pivot {page.evaluer('ST.hist.length')}, sous-étape {page.evaluer('ST.sub')})")
+                        if page.evaluer("document.querySelector('#bNext').disabled"):
+                            break
+                        self.clic(page, "#bNext")
+                    else:
+                        self.fail("le pas à pas ne se termine pas")
+                    if nom == "Exemple 2D":
+                        self.clic(page, '[data-mode="exp"]')
+                        for k in range(page.evaluer("R.reels.length")):
+                            page.evaluer(f"ST.expPt = R.V[R.reels[{k}]].p.slice(); rendre()")
+                            self.sans_chevauchement(page, "#cv", f"Explorer, sommet {k}")
+                    else:
+                        for angle in (0.0, 0.6, 1.2, 2.4, 3.6):             # le polyèdre tourne : les numéros s'écartent à chaque position
+                            page.evaluer(f"scene.yaw += {angle}; rendre()")
+                            self.sans_chevauchement(page, "#cv", f"{nom} {largeur} px, rotation {angle}")
+
+    def test_e_etiquettes_sans_chevauchement_methode_geometrique(self):
+        for largeur in (390, 1100):
+            for nom in ("Parallèles : max", "Parallèles : min avec ≥", "Parallèles : coefficient de y négatif"):
+                with self.subTest(largeur=largeur, exemple=nom):
+                    page = self.ouvrir(largeur)
+                    self.clic(page, '[data-meth="para"]')
+                    self.lancer_exemple(page, nom)
+                    total = page.evaluer("document.querySelectorAll('canvas.fig').length")
+                    for i in range(total):                                    # solution : une figure par étape
+                        page.evaluer(f"document.querySelectorAll('canvas.fig')[{i}].scrollIntoView({{block: 'center'}})")
+                        page.attendre(f"document.querySelectorAll('canvas.fig')[{i}].dataset.dessine", 10)
+                        self.assertEqual(page.evaluer(f"{self.OVERLAP}(document.querySelectorAll('canvas.fig')[{i}])"), [], f"{nom} {largeur} px, figure {i + 1}")
+                    self.assertTrue(page.evaluer("[...document.querySelectorAll('canvas.fig')].every(c => c._scene.marges.MT > 0)"))
+                    noms_axes = page.evaluer("[...new Set(Array.from(document.querySelectorAll('canvas.fig'), c => c._scene.occ.filter(o => o.kind === 'axe').map(o => o.txt).join('/')))]")
+                    self.assertEqual(noms_axes, ["x/y"])                       # la méthode géométrique nomme ses axes x et y
+                    self.clic(page, '[data-modep="sim"]')                     # visualisation graphique, étape par étape
+                    for pas in range(40):
+                        page.attendre("!PS.anim", 15)
+                        self.sans_chevauchement(page, "#cvp", f"{nom} {largeur} px, étape {page.evaluer('PS.k')}")
+                        if page.evaluer("document.querySelector('#bNextP').disabled"):
+                            break
+                        self.clic(page, "#bNextP")
+
+    def test_e_la_methode_algebrique_garde_les_axes_x1_x2(self):
+        page = self.ouvrir(390)
+        self.lancer_exemple(page, "Exemple 2D")
+        self.clic(page, '[data-mode="sim"]')
+        self.assertEqual(page.evaluer("document.getElementById('cv')._scene.occ.filter(o => o.kind === 'axe').map(o => o.txt)"), ["x₁", "x₂"])
+
+    def test_e_les_onglets_se_parcourent_aux_fleches(self):
+        page = self.ouvrir(1100)
+        self.lancer_exemple(page, "Exemple 2D")
+        self.assertEqual(page.evaluer("document.querySelector('#ongletsAlgo').getAttribute('role')"), "tablist")
+        self.assertEqual(page.evaluer("[...document.querySelectorAll('#ongletsAlgo [role=tab]')].map(b => b.textContent + '|' + b.tabIndex)"),
+                         ["Solution|0", "Visualisation graphique|-1", "Explorer|-1"])               # « Gradient » masqué : ni affiché ni dans l'ordre des flèches
+        page.evaluer("document.querySelector('[data-mode=\"sol\"]').focus()")
+        for touche, code, vk, attendu in (("ArrowRight", "ArrowRight", 39, "sim"), ("ArrowRight", "ArrowRight", 39, "exp"), ("ArrowRight", "ArrowRight", 39, "sol"),
+                                          ("ArrowLeft", "ArrowLeft", 37, "exp"), ("Home", "Home", 36, "sol"), ("End", "End", 35, "exp")):
+            page.appel("Input.dispatchKeyEvent", type="keyDown", key=touche, code=code, windowsVirtualKeyCode=vk)
+            page.appel("Input.dispatchKeyEvent", type="keyUp", key=touche, code=code, windowsVirtualKeyCode=vk)
+            self.assertEqual(page.evaluer("document.querySelector('#ongletsAlgo [aria-selected=true]').dataset.mode"), attendu)
+            self.assertEqual(page.evaluer("document.activeElement.dataset.mode"), attendu)
+        self.assertEqual(page.evaluer("ST.hist.length"), 1)                                           # les flèches n'ont avancé aucun pivot
 
 
 if __name__ == "__main__":

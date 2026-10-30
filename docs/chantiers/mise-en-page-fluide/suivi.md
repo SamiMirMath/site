@@ -24,7 +24,7 @@ Plan détaillé : `/Users/samimir/.claude/plans/pasted-content-id-3a8a-chantier-
 | 0 | Branche, conditions, suivi | **faite** (inclus dans le commit de la phase 1) |
 | 1 | Règle et composants communs (`composants.css`, `composants.js`) | **faite** (suite complète verte : 911 + 80) |
 | 2 | Test de balayage des largeurs (`test_largeurs.py`), rapport initial | **faite** (suite complète verte : 911 + 89) |
-| 3 | Simplexe | à faire |
+| 3 | Simplexe | **faite** (suite complète verte : 911 + 99) |
 | 4 | Autres outils, un commit par outil | à faire |
 | 5 | Fin : suivi complet, commande de fusion, résumé | à faire |
 
@@ -68,3 +68,46 @@ Les échecs sont :
 
 Lecture : les corrections de cible tactile sont communes aux 6 outils à cartes (une règle dans `commun/style.css`, faite avec le premier outil de la phase 4) ;
 le simplexe est traité en phase 3 ; seul Étude complète demande un diagnostic de débordement.
+
+## Phase 3 — simplexe (`simplexe/index.html`)
+
+**Chargement.** La page charge `commun/composants.css`, et un petit `<script type="module">` importe `commun/composants.js`, expose `window.Composants` et appelle
+`demarrer()`. Le script principal reste **classique** : ses variables globales (`S`, `ST`, `PS`…) sont lues et écrites par les tests de page (17 appels), qu'un module
+aurait silencieusement cassés. Le test de console (phase 2) vérifie qu'aucune erreur ne vient de ce chargement.
+
+**Formulaire.** Chaque coefficient et chaque second membre est un `.champ-signe` (`champNombre` s'appuie sur `Composants.champSigne`) ; plus aucun « + » écrit en dur.
+Blocs `.insecable` : `[signe + champ + variable]`, `(i)` et `f =` collés au premier terme, `[≤ + second membre + ✕]` en un bloc. Rangées `.flux`. Aucune largeur d'écran codée :
+`@media 920px`, `.lab` 190 px, `.num` 30 px, champs en px et `.sol` 780 px remplacés (`min(100%, 12rem)`, `auto-fit`, `ch`, `rem`). À 390 px : 2D sur 2 lignes, 3D sur exactement 2 lignes
+(marge de 16 px avec la police de ce Mac ; 3 lignes à 360 px, ce que le filet de sécurité autorise). Toutes les cibles font au moins 44 px de haut (`button{min-height:44px}`, curseurs).
+
+**Onglets** : « Solution » | « Visualisation graphique » | « Explorer » (algébrique), « Solution » | « Visualisation graphique » (géométrique), `role="tablist"`, flèches, Début, Fin.
+« Gradient » reste masqué (`AFFICHER_GRADIENT = false`) et n'est pas dans l'ordre des flèches. **Texte modifié** (nécessaire, l'onglet change de nom) : « Faites tourner le polyèdre dans l'onglet
+Visualisation graphique. » ; le titre « Solution complète » des cartes est inchangé.
+
+**Solution algébrique** : texte seul (une `.carte-etape` par étape, aucun canvas), toujours depuis le programme initial avec Dantzig (`enregistrements(true, true)`), indépendante des
+pivots choisis dans la visualisation graphique. Lien « Voir sur le graphique » dans chaque carte : rejoue le chemin de Dantzig jusqu'à ce pivot et fixe la sous-étape. **Changement de
+comportement** : jusqu'ici la vue reprenait le chemin choisi par l'élève (le suivi du chantier « Programmation linéaire » le disait voulu) ; `docs/specifications/simplexe.md` est mis à jour.
+L'impression « toutes les étapes » reste sur le chemin de l'élève.
+
+**Solution géométrique** : garde ses figures. Noms d'axes **x / y** dans ses figures (autorisé le 30.10.2026) ; la méthode algébrique garde x₁, x₂, x₃.
+
+**Figures.** Marge des données 8 % (au lieu de 16 %), marges en pixels réduites aux graduations ; hauteur du canvas = hauteur de la figure (2D : de 0,5 à 1,1 largeur, 3D en 4:3).
+Étiquettes posées par ordre de priorité (`Scene.placerPx`) : 1 + 8 directions à 3 distances, en évitant points, textes et noms d'axes ; rendu en deux passes pour connaître tous les points
+(sommets et point mobile) avant de poser les étiquettes. « f = … » ne chevauche plus ni un sommet ni un nom d'axe ; vérifié par `test_simplexe.py` sur tous les exemples du site, pas à pas complet,
+Explorer, 3D en rotation, 390 et 1100 px.
+
+**Deux défauts trouvés en écrivant le test d'appui (votre ajout 2)** :
+1. La bordure de 1 px du canvas décalait la conversion écran → coordonnées, et, en `border-box`, la hauteur affichée était 2 px plus courte que le dessin (léger écrasement vertical). Corrigé :
+   `ptSouris` retire la bordure et la hauteur CSS ajoute la bordure.
+2. `clampPoint` laissait le point sur place quand l'appui tombait à peine hors de la région (d'un arrondi) et que le point était déjà sur un bord : un appui sur un coin ne déplaçait pas le point depuis
+   le sommet voisin. Il projette maintenant sur les contraintes violées (repli : l'ancienne recherche le long du segment). Comportement un peu différent hors zone : le point glisse le long du bord.
+Le choix d'un sommet par appui existe dans le mode « Gradient », masqué : même fonction `ptSouris`, couverte par l'appui d'Explorer (le test vérifie que l'onglet est masqué).
+
+**Test fiabilisé** : `test_a_lancer_a_vide…` rechargeait la page puis cliquait sans attendre le nouveau document (course latente révélée par le chargement en module) ; il ouvre maintenant une page neuve.
+
+**Tests ajoutés** (`test_simplexe.py`, partie E) : lignes de contrainte (≤ 2 dès 390 px, 3D = 2 à 390), « Modifier le problème » restitue tout (deux méthodes, signes, ≤/≥, valeurs), « Solution » identique après des
+choix non-Dantzig, « Voir sur le graphique » ouvre le bon pivot et la bonne sous-étape, appui sur chaque sommet et au centre (Explorer, 390 et 1100 px), figure qui remplit son cadre et canvas à la
+bonne hauteur, étiquettes sans chevauchement (deux méthodes), axes x₁/x₂ ou x/y, flèches du clavier sur les onglets. L'entrée `simplexe` de `CONNUS` est retirée : le balayage ne trouve plus aucune faute.
+
+**Reste, hors périmètre** : en 3D, les trois étiquettes de flèches (« x₃↑ : +8 »…) se touchent encore (elles ne sont pas dans les étiquettes écartées) ; le polyèdre 3D reste petit quand il est mince ;
+`touch-action:none` sur les canvas empêche le défilement de la page au doigt sur la figure (socle : « un glissement vertical sur un graphique fait défiler la page »).

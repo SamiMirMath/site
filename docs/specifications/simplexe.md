@@ -13,8 +13,19 @@ URL : `/simplexe/` · page autonome en JS (pas de Pyodide, pas de KaTeX).
 - **Méthode algébrique (2Mr/OS)** : dictionnaire du simplexe en fractions exactes
   (BigInt), variable entrante au choix (Dantzig par défaut), rapports, pivot animé, polygone ou
   polyèdre 3D, mode exploration ; phase 1 non traitée (message clair).
-- **Solution complète** (30.10.2026) : après « Lancer », vue par défaut des deux méthodes : toutes les étapes à la suite (une carte par étape, figure à chaque
-  changement de dessin, rendu paresseux), résultat en bas ; « Pas à pas » (et « Explorer » en algébrique) restent en onglets.
+- **Onglets** (mise en page fluide, 30.10.2026) : « Solution » | « Visualisation graphique » (l'ancien « Pas à pas ») | « Explorer » (algébrique seulement), en
+  `role="tablist"` avec les flèches du clavier ; après « Lancer », « Solution » est la vue par défaut.
+  - **Méthode algébrique** : « Solution » est du texte seul (une carte par étape, **aucune figure**). Elle part toujours du programme initial et suit Dantzig,
+    **quels que soient les pivots choisis** dans « Visualisation graphique ». Chaque carte a un lien « Voir sur le graphique » qui ouvre la visualisation
+    graphique sur ce pivot et cette sous-étape (le chemin de Dantzig est rejoué depuis le départ). *(Avant le 30.10.2026, la vue reprenait le chemin choisi.)*
+  - **Méthode géométrique** : « Solution » garde ses figures (une par étape, rendu paresseux), puisque la méthode est graphique ; axes nommés x et y
+    (la méthode algébrique garde x₁, x₂, x₃).
+- **Formulaire fluide** : chaque coefficient et chaque second membre est un bloc `.champ-signe` (bouton de signe + champ collés ; le champ montre la valeur absolue,
+  l'état garde la valeur signée ; champ vide = 0). Blocs insécables : `[signe + champ + variable]`, `[≤ + second membre + ✕]` en entier, « (1) » et « f = »
+  collés au premier terme. Dès 390 px, une contrainte tient sur deux lignes au plus (3 variables : exactement deux à 390 px).
+- **Figures** : le cadre des données a 8 % de marge, la hauteur du canvas suit la figure (2D : entre 0,5 et 1,1 fois la largeur ; 3D en 4:3). Les étiquettes
+  (« f = … », numéros et coordonnées des sommets, noms d'axes, graduations, « p = … ») sont posées par ordre de priorité en évitant les points et les textes déjà
+  posés. La conversion écran → coordonnées (Explorer) tient compte de la bordure du canvas ; un appui à peine hors de la région place le point à l'endroit le plus proche.
 - Impression : rapport dédié avec images.
 
 ## Répartition par filière (validé, Q2)

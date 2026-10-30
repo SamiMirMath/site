@@ -48,9 +48,6 @@ CONNUS = {
     "factorisation": {
         "cible-44": [320, 360, 375, 390, 430],
     },
-    "simplexe": {
-        "cible-44": [320, 360, 375, 390, 430],
-    },
 }
 
 JS_MESURE = r"""
