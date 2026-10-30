@@ -220,7 +220,7 @@ function construireProbleme(S){
     let aa=a, bb=rhs; if(r.op===">="){ aa=a.map(x=>x.neg()); bb=rhs.neg(); }
     if(bb.sign()<0) throw new ErreurSaisie(`Contrainte ${num} : après mise sous la forme a·x ≤ b, le second membre est négatif : l'origine n'est pas admissible. La méthode algébrique suppose des contraintes ≤ à second membre ≥ 0 (les autres cas demandent la phase 1).`);
     A.push(aa); b.push(bb); });
-  if(!A.length) throw new ErreurSaisie("Il faut au moins une contrainte.");
+  if(!A.length) throw new ErreurSaisie("Il faut au moins une contrainte : remplissez au moins une ligne (coefficients et second membre).");
   const m=A.length, nv=n+m, cint=S.sens==='max'?c:c.map(x=>x.neg());
   const N=[],B=[];
   for(let i=0;i<n;i++){ N.push(range(n).map(j=>j===i?-1:0)); B.push(0); }
@@ -236,7 +236,7 @@ function construireProblemeGraphique(S){
   S.rows.forEach((r,i)=>{ const num=i+1, a=[0,1].map(j=>lireNombre(r.a[j],`Contrainte ${num}, coefficient de ${NOMS[j]}`)||ZERO), rhs=lireNombre(r.b,`Contrainte ${num}, second membre`), nul=a.every(x=>x.isZero());
     if(nul&&rhs===null) return; if(rhs===null) throw new ErreurSaisie(`Contrainte ${num} : second membre manquant.`); if(nul) throw new ErreurSaisie(`Contrainte ${num} : aucun coefficient non nul.`);
     rows.push({a,op:r.op,b:rhs}); });
-  if(!rows.length) throw new ErreurSaisie("Il faut au moins une contrainte.");
+  if(!rows.length) throw new ErreurSaisie("Il faut au moins une contrainte : remplissez au moins une ligne (coefficients et second membre).");
   const m=rows.length, N=[[-1,0],[0,-1]], B=[0,0];
   rows.forEach(r=>{ const a=r.a.map(x=>x.num()), b=r.b.num(); if(r.op==='<='){N.push(a);B.push(b);} else {N.push(a.map(x=>-x));B.push(-b);} });
   const cint=S.sens==='max'?c:c.map(x=>x.neg());
@@ -381,7 +381,10 @@ const EXEMPLES={
   "Exemple 3D":{meth:"simplexe",n:3,sens:"max",f:["6","7","8"],rows:[{a:["1","2","1"],op:"<=",b:"100"},{a:["3","4","2"],op:"<=",b:"120"},{a:["2","6","4"],op:"<=",b:"200"}]},
   "9 sommets (3D)":{meth:"simplexe",n:3,sens:"max",f:["2","3","1"],rows:[{a:["1","0","0"],op:"<=",b:"4"},{a:["0","1","0"],op:"<=",b:"5"},{a:["0","0","1"],op:"<=",b:"6"},{a:["1","1","1"],op:"<=",b:"10"}]}
 };
-let S=JSON.parse(JSON.stringify(EXEMPLES["Exemple 2D"]));     // état du formulaire
+/* À l'ouverture, aucun champ n'est prérempli : fonction économique vide, trois contraintes vides (≤), 2 variables, « Maximiser ».
+   Les boutons « Remplir avec un exemple » sont le seul moyen de préremplir. */
+const formulaireVide=()=>({meth:"simplexe",n:2,sens:"max",f:["","",""],rows:[0,1,2].map(()=>({a:["","",""],op:"<=",b:""}))});
+let S=formulaireVide();                                          // état du formulaire
 let P=null, R=null, scene=null;                                  // problème, région, scène
 let ST=null;                                                     // état de la résolution
 const MAXL=8;
