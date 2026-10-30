@@ -144,3 +144,8 @@ qui défilent (`.etape`, `.res`, `.cond .c`, `.enonce`, `.tsigne`, `.apercu`) n'
 (`position:relative` sur ces blocs) existait déjà pour les blocs de Limites (`.bh`, `.vals`, `.enc-c p`…) ; il est étendu aux blocs communs dans `commun/style.css`. Même cause, même cure pour tous les outils : le test de
 balayage n'ouvre qu'un exemple par outil, d'autres formules larges pouvaient donc déborder ailleurs. L'entrée `etude-complete` de `CONNUS` est retirée : **`CONNUS` est vide**.
 Aucun autre changement de l'outil (pas de style local, pas de largeur codée).
+
+### Contrôle de tous les exemples (une fois, hors CI)
+
+Le test de balayage n'ouvre qu'un exemple par outil. Un script jetable a mesuré **tous** les exemples de chaque page (82 au total : ED 20, Dérivée 12, Factorisation 8, Limites 14, Étude complète 8, Exponentielles 10 + 10 en filière M),
+corrigé complet affiché, aux 7 largeurs, avec les mêmes quatre critères : **aucune faute et aucune erreur de console** sur l'arbre de 216f9cd. À refaire après tout changement des feuilles communes.
