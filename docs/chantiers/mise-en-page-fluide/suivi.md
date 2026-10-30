@@ -123,7 +123,7 @@ Outils, dans l'ordre : Limites et asymptotes, Étude complète, Ensemble de déf
 | Ensemble de définition | **faite** (rien à migrer) | `git log` : « phase 4 : Ensemble de définition » |
 | Dérivée et variations | **faite** (rien à migrer) | `git log` : « phase 4 : Dérivée et variations » |
 | Exponentielles et logarithmes | à faire (`@container` à la place de `@media 820px`) | |
-| Factorisation | à faire | |
+| Factorisation | **faite** (rien à migrer) | `git log` : « phase 4 : Factorisation » |
 
 ### Limites et asymptotes, et socle commun (premier commit de la phase 4)
 
@@ -158,3 +158,7 @@ Balayage et 20 exemples : aucune faute. Rien à modifier dans la page.
 ### Dérivée et variations
 
 Aucun `<style>` local ni largeur codée : l'outil n'utilise que la feuille commune (tableaux de signe et de variations défilants dans leur bloc, `position:relative` ajouté en Étude complète). Balayage et 12 exemples : aucune faute.
+
+### Factorisation
+
+Styles locaux (`details ol`, `.final .res`, `.final .c`) : mises en forme du contenu, sans largeur d'écran. Balayage et 8 exemples : aucune faute. Rien à modifier dans la page.
