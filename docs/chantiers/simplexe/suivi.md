@@ -8,6 +8,7 @@ Page : `simplexe/index.html` (autonome, sans Pyodide). Tests de page : `tests/pa
 | A | Aucun champ prérempli à l'ouverture | **faite** (commit A) |
 | B | Clavier du téléphone : négatifs et fractions | **faite** (commit B) |
 | C | Solution complète en défilement (au lieu d'« Étape suivante ») | **faite** (commit C) |
+| D | Retour iPhone : clavier chiffres + bouton de signe (remplace l'approche de B) | **faite** (commit D) |
 
 ## A — Aucun champ prérempli
 
@@ -20,7 +21,7 @@ Page : `simplexe/index.html` (autonome, sans Pyodide). Tests de page : `tests/pa
 
 ## B — Négatifs et fractions au clavier du téléphone
 
-- Les champs numériques (fonction économique, coefficients et seconds membres, deux méthodes, 2D et 3D) passent de `inputmode="decimal"` à
+- **Remplacé par D** (retour iPhone). Les champs numériques passaient de `inputmode="decimal"` à
   `inputmode="text"` avec `autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"`.
 - `lireNombre` : tout tiret de clavier vaut le signe moins (U+002D, U+2212, U+2013, U+2014, U+2010, U+2011) ; virgule et point restent des séparateurs décimaux.
 - Aide sous le formulaire : « Nombres : 3, −2, 0,5 ou 1/2 ; case vide = 0. » suivie de la phrase propre à chaque méthode.
@@ -53,6 +54,26 @@ Page : `simplexe/index.html` (autonome, sans Pyodide). Tests de page : `tests/pa
   de chaque méthode et un cas à infinité de solutions ; valeur optimale recalculée par énumération exacte des sommets (fractions) ; nombre de cartes =
   nombre de `.bloc` du rapport imprimable ; rendu paresseux, figures non vides et deux à deux différentes ; thème sombre et largeur ; « Pas à pas » jusqu'au résultat.
 
+## D — Clavier chiffres et bouton de signe (retour terrain iPhone, 30.10.2026)
+
+Avec `inputmode="text"` (B), le clavier de l'iPhone s'ouvrait en lettres et y revenait sans cesse. Nouvelle approche : `inputmode="decimal"` partout
+(avec `autocomplete`, `autocorrect`, `autocapitalize` désactivés et `spellcheck="false"`) et un **bouton de signe** devant chaque champ numérique.
+
+- `champNombre()` crée le groupe `.terme` : bouton `.sgn` (« + » / « − », `aria-label` « signe du coefficient de x₁ : plus » / « moins », « signe du second membre : … »,
+  36 × 44 px au moins, vert / rouge lisibles en thème clair et sombre), champ (valeur absolue) et nom de variable (jamais séparés à la ligne). Il remplace le « + » écrit en dur.
+- L'état (`S.f`, `r.a`, `r.b`) garde la valeur signée : « -3 » si le bouton est sur « − » et le champ contient 3. Un champ vide avec « − » vaut « - » :
+  `lireNombre('-')` et `lireNombre('+')` renvoient `null` (case vide = 0), et le bouton survit à un redessin du formulaire.
+- Un tiret (toutes les variantes de B) tapé ou collé **en tête** du champ est retiré et met le bouton sur « − » ; un « + » en tête est retiré sans changer le signe.
+  Les fractions restent possibles au clavier d'ordinateur (« 1/2 », « -1/2 » collé), mais l'aide ne les mentionne plus.
+- Les exemples à coefficients négatifs (« Coefficient de y négatif ») s'affichent avec « − » et la valeur absolue ; « Modifier le problème » restitue boutons et valeurs.
+- Aide : « Nombres : 3 ou 0,5 ; touchez + pour le changer en −. Case vide = 0. » suivie de la phrase propre à chaque méthode.
+- Les champs sont maintenant créés par le DOM (`input.value`, plus de `value="${…}"`) : le ticket 8 de `docs/taches.md` (échappement des attributs) est **réglé pour
+  ces champs** ; les autres `${…}` du simplexe n'ont pas été relus.
+- Les champs ont une hauteur minimale de 44 px. À 360 px, un terme (signe + champ + variable) ne se coupe pas ; une ligne de contrainte passe à la ligne, la page ne défile jamais.
+- Tests (`test_simplexe.py`, 360 px et 1100 px) : un bouton par champ (2D, 3D, géométrique), bascule du signe et valeur signée dans le problème lancé
+  (f = 3x₁ − 2x₂), case vide + « − » = 0, « − » puis 3 = −3, tirets tapés ou collés, exemple « Coefficient de y négatif », plus aucun `inputmode="text"`,
+  contraste ≥ 4,5 des boutons dans les deux thèmes, pas de défilement horizontal.
+
 ## À traiter ailleurs (hors chantier)
 
-- Ticket 8 de `docs/taches.md` : échappement des attributs `value="${…}"` du formulaire (toujours ouvert).
+- Ticket 8 de `docs/taches.md` : échappement des attributs `value="${…}"` : réglé pour les champs du formulaire (D) ; relire le reste de la page s'il est fermé.

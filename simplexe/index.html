@@ -32,7 +32,11 @@ button.primary{background:var(--accent);border-color:var(--accent);color:#fff;fo
 .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
 .row .lab{min-width:190px;color:var(--muted)}
 .coefs{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-.coefs input{width:78px;padding:6px 8px;border:1px solid var(--border);border-radius:6px;background:var(--card);text-align:right}
+.coefs input{width:78px;min-height:44px;padding:6px 8px;border:1px solid var(--border);border-radius:6px;background:var(--card);text-align:right}
+.terme{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}      /* signe, valeur et nom de variable ne se séparent pas à la ligne */
+.coefs .sgn{min-width:36px;min-height:44px;padding:0 6px;font-size:1.3rem;font-weight:700;line-height:1;color:var(--good);border-color:var(--good)}
+.coefs .sgn[data-signe="-"]{color:var(--bad);border-color:var(--bad)}
+.coefs .sgn:focus-visible,.coefs input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
 .coefs input.rhs{width:96px}
 .coefs .opb{min-width:44px;font-weight:700}
 .coefs .del{padding:6px 10px}
@@ -216,7 +220,7 @@ const range=(a,b)=>{ if(b===undefined){b=a;a=0;} const r=[]; for(let i=a;i<b;i++
 class ErreurSaisie extends Error{}
 function lireNombre(txt,quoi){
   /* signe moins : tout tiret qu'un clavier peut insérer (U+2212 −, U+2013 –, U+2014 —, U+2010 ‐, U+2011 ‑) vaut « - » (U+002D) */
-  let s=String(txt==null?'':txt).trim().replace(/\s+/g,'').replace(/[\u2212\u2013\u2014\u2010\u2011]/g,'-'); if(s==='') return null;
+  let s=String(txt==null?'':txt).trim().replace(/\s+/g,'').replace(/[\u2212\u2013\u2014\u2010\u2011]/g,'-'); if(s===''||s==='-'||s==='+') return null;     // « - » seul : bouton de signe sur « − » et case vide = 0
   if(!/^[+-]?\d+(?:[.,]\d+)?(?:\/\d+)?$/.test(s)) throw new ErreurSaisie(`${quoi} : « ${txt.trim()} » n'est pas un nombre (entier, décimal 0,5 ou fraction 1/2).`);
   try{ return Fr.parse(s);}catch(e){ throw new ErreurSaisie(`${quoi} : « ${txt.trim()} » est illisible.`);} }
 
@@ -410,6 +414,24 @@ const MAXL=8, PIVOTS_MAX=500;                                    // contraintes 
 const $=id=>document.getElementById(id);
 
 /* ----- formulaire ----- */
+/* Champ numérique précédé d'un bouton de signe (« + » / « − »). Le clavier chiffres du téléphone (inputmode="decimal") n'a pas de « − » : le signe est porté
+   par le bouton, le champ ne montre que la valeur absolue. L'état du formulaire garde la valeur signée (« -3 » ; « - » seul : signe moins et case vide = 0).
+   Un tiret tapé ou collé en tête du champ (clavier d'ordinateur) est retiré du champ et met le bouton sur « − ». */
+const SIGNE_EN_TETE=/^\s*([+\-−–—‐‑])\s*/, MOINS_EN_TETE=/^\s*[-−–—‐‑]/;
+function champNombre(valeur,quoiSigne,quoi,enregistrer,suffixe,attrs){
+  let moins=MOINS_EN_TETE.test(valeur||'');
+  const t=document.createElement('span'); t.className='terme';
+  const b=document.createElement('button'); b.type='button'; b.className='sgn';
+  const inp=document.createElement('input'); inp.setAttribute('aria-label',quoi); inp.value=String(valeur||'').replace(SIGNE_EN_TETE,'');
+  Object.entries({inputmode:'decimal',autocomplete:'off',autocorrect:'off',autocapitalize:'off',spellcheck:'false'}).forEach(([k,v])=>inp.setAttribute(k,v));
+  Object.entries(attrs||{}).forEach(([k,v])=>inp.setAttribute(k,v));
+  const maj=()=>{ b.textContent=moins?'−':'+'; b.dataset.signe=moins?'-':'+'; b.setAttribute('aria-label',`signe ${quoiSigne} : ${moins?'moins':'plus'}`); };
+  const ecrire=()=>enregistrer((moins?'-':'')+inp.value.trim());
+  b.onclick=()=>{ moins=!moins; maj(); ecrire(); };
+  inp.oninput=()=>{ const m=SIGNE_EN_TETE.exec(inp.value); if(m){ if(m[1]!=='+') moins=true; inp.value=inp.value.slice(m[0].length); maj(); } ecrire(); };
+  maj(); t.append(b,inp);
+  if(suffixe){ const nom=document.createElement('span'); nom.innerHTML=suffixe; t.appendChild(nom); }
+  return t; }
 function dessinerFormulaire(){
   const n=S.n;
   document.querySelectorAll('[data-dim]').forEach(b=>b.classList.toggle('on',+b.dataset.dim===n));
@@ -417,19 +439,23 @@ function dessinerFormulaire(){
   const para=S.meth==='para', NM=j=>para?`<i class="v">${['x','y'][j]}</i>`:X(j+1);
   document.querySelectorAll('[data-meth]').forEach(b=>b.classList.toggle('on',b.dataset.meth===(S.meth||'simplexe')));
   document.querySelector('[data-dim="3"]').disabled=para; $('exS').hidden=para; $('exP').hidden=!para;
-  $('hint').textContent=para?"Nombres : 3, −2, 0,5 ou 1/2 ; case vide = 0. Méthode graphique : toutes les contraintes ≤ ou ≥ sont acceptées (second membre quelconque)."
-    :"Nombres : 3, −2, 0,5 ou 1/2 ; case vide = 0. Méthode algébrique : contraintes ≤ à second membre ≥ 0 (une contrainte ≥ est acceptée si elle le devient après multiplication par −1).";
-  const coefHtml=(vals,onchange)=>range(n).map(j=>`<input inputmode="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-j="${j}" value="${vals[j]||''}" aria-label="coefficient"> ${NM(j)}${j<n-1?' +':''}`).join(' ');
-  $('objRow').innerHTML='<b>f&nbsp;=</b> '+coefHtml(S.f);
-  $('objRow').querySelectorAll('input').forEach(inp=>inp.oninput=()=>{S.f[+inp.dataset.j]=inp.value;});
+  $('hint').textContent=para?"Nombres : 3 ou 0,5 ; touchez + pour le changer en −. Case vide = 0. Méthode graphique : toutes les contraintes ≤ ou ≥ sont acceptées (second membre quelconque)."
+    :"Nombres : 3 ou 0,5 ; touchez + pour le changer en −. Case vide = 0. Méthode algébrique : contraintes ≤ à second membre ≥ 0 (une contrainte ≥ est acceptée si elle le devient après multiplication par −1).";
+  const nomVar=j=>para?['x','y'][j]:xs(j+1);
+  const terme=(vals,j)=>champNombre(vals[j],'du coefficient de '+nomVar(j),'coefficient de '+nomVar(j),v=>{vals[j]=v;},NM(j),{'data-j':j});
+  const obj=$('objRow'); obj.innerHTML='<b>f&nbsp;=</b>';
+  range(n).forEach(j=>obj.appendChild(terme(S.f,j)));
   const box=$('consRows'); box.innerHTML='';
   S.rows.forEach((r,i)=>{
     const d=document.createElement('div'); d.className='coefs row';
-    d.innerHTML=`<span class="num">(${i+1})</span>`+coefHtml(r.a)+`<button class="opb">${r.op==='<='?'≤':'≥'}</button><input class="rhs" inputmode="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value="${r.b||''}" aria-label="second membre"><button class="del" title="supprimer">✕</button>`;
-    d.querySelectorAll('input[data-j]').forEach(inp=>inp.oninput=()=>{r.a[+inp.dataset.j]=inp.value;});
-    d.querySelector('.rhs').oninput=e=>{r.b=e.target.value;};
-    d.querySelector('.opb').onclick=e=>{ r.op=r.op==='<='?'>=':'<='; e.target.textContent=r.op==='<='?'≤':'≥'; };
-    d.querySelector('.del').onclick=()=>{ if(S.rows.length>1){S.rows.splice(i,1);dessinerFormulaire();} };
+    d.innerHTML=`<span class="num">(${i+1})</span>`;
+    range(n).forEach(j=>d.appendChild(terme(r.a,j)));
+    const op=document.createElement('button'); op.className='opb'; op.textContent=r.op==='<='?'≤':'≥';
+    op.onclick=()=>{ r.op=r.op==='<='?'>=':'<='; op.textContent=r.op==='<='?'≤':'≥'; };
+    const del=document.createElement('button'); del.className='del'; del.title='supprimer'; del.textContent='✕';
+    del.onclick=()=>{ if(S.rows.length>1){S.rows.splice(i,1);dessinerFormulaire();} };
+    const rhs=champNombre(r.b,'du second membre','second membre',v=>{r.b=v;},'',{class:'rhs'});
+    d.append(op,rhs,del);
     box.appendChild(d); });
   $('addRow').disabled=S.rows.length>=MAXL; }
 document.querySelectorAll('[data-meth]').forEach(b=>b.onclick=()=>{ S.meth=b.dataset.meth; if(S.meth==='para'&&S.n===3){ S.n=2; } $('err').textContent=''; dessinerFormulaire(); });

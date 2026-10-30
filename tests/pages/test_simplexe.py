@@ -144,15 +144,17 @@ class TestSimplexe(unittest.TestCase):
         lire = "(t => { const f = lireNombre(t, 'x'); return f === null ? null : f.n.toString() + '/' + f.d.toString(); })(%s)"
         for texte, attendu in (("-3", "-3/1"), ("\u22123", "-3/1"), ("\u20133", "-3/1"), ("\u20143", "-3/1"), ("\u20103", "-3/1"), ("\u20113", "-3/1"),
                                ("-1/2", "-1/2"), ("\u22121/2", "-1/2"), ("-0,5", "-1/2"), ("-0.5", "-1/2"), ("0,5", "1/2"), ("1/2", "1/2"), ("+3", "3/1"),
-                               (" - 3 ", "-3/1"), ("", None), ("   ", None)):
+                               (" - 3 ", "-3/1"), ("", None), ("   ", None), ("-", None), ("\u2212", None), ("+", None)):
             with self.subTest(texte=texte):
                 self.assertEqual(page.evaluer(lire % repr(texte).replace("'", '"')), attendu)
         for texte in ("3-", "--3", "1/-2", "1/2/3", "abc", "3\u2212\u22122", "1/0,5"):
             with self.subTest(refuse=texte):
                 self.assertTrue(page.evaluer("(t => { try { lireNombre(t, 'x'); return false; } catch (e) { return e instanceof ErreurSaisie; } })(%s)" % repr(texte).replace("'", '"')))
 
-    def test_b_aucun_champ_n_a_inputmode_decimal_et_aide_sous_le_formulaire(self):
-        attendus = {"inputmode": "text", "autocomplete": "off", "autocorrect": "off", "autocapitalize": "off", "spellcheck": "false"}
+    def test_b_clavier_chiffres_et_aide_sous_le_formulaire(self):
+        """Retour terrain iPhone (30.10.2026) : inputmode="text" ouvrait le clavier en lettres ; les champs numériques reviennent à inputmode="decimal"
+        (le signe est porté par un bouton) et gardent les quatre attributs anti-correction."""
+        attendus = {"inputmode": "decimal", "autocomplete": "off", "autocorrect": "off", "autocapitalize": "off", "spellcheck": "false"}
         page = self.ouvrir(360)
         for methode, dim in (("simplexe", "2"), ("simplexe", "3"), ("para", "2")):
             with self.subTest(methode=methode, dim=dim):
@@ -162,34 +164,166 @@ class TestSimplexe(unittest.TestCase):
                 self.assertEqual(len(champs), (2 if dim == "2" else 3) * 4 + 3)       # (fonction + 3 contraintes) × variables + 3 seconds membres
                 for c in champs:
                     self.assertEqual(c, attendus)
-                self.assertEqual(page.evaluer("document.querySelectorAll('input[inputmode=decimal], input[inputmode=numeric]').length"), 0)
+                self.assertEqual(page.evaluer("document.querySelectorAll('#formCard input[inputmode=text], #formCard input:not([inputmode])').length"), 0)
                 aide = page.evaluer("document.querySelector('#hint').textContent")
-                self.assertTrue(aide.startswith("Nombres : 3, −2, 0,5 ou 1/2 ; case vide = 0."), aide)
+                self.assertTrue(aide.startswith("Nombres : 3 ou 0,5 ; touchez + pour le changer en −. Case vide = 0."), aide)
                 self.assertTrue(aide.endswith(")."), aide)                    # la suite propre à chaque méthode est gardée
                 self.assertIn("graphique" if methode == "para" else "algébrique", aide)
         with open(os.path.join(os.path.dirname(__file__), "..", "..", "simplexe", "index.html"), encoding="utf-8") as f:
-            self.assertNotRegex(f.read(), r'inputmode="(decimal|numeric)"')
+            source = f.read()
+        self.assertNotIn('inputmode="text"', source)
+        self.assertNotIn("inputmode:'text'", source)
 
-    def test_b_negatifs_et_fractions_saisis_au_clavier(self):
-        """Saisie par insertion de texte (comme un clavier de téléphone) : tiret demi-cadratin, signe moins, fraction ; le problème se lance."""
+    # ---------- D. bouton de signe devant chaque champ numérique ----------
+    SIGNES = "[...document.querySelectorAll('#objRow .sgn, #consRows .sgn')].map(b => b.dataset.signe)"
+
+    def champ(self, page, selecteur, texte):
+        page.taper(selecteur, texte, pause=0.01)
+
+    def test_d_un_bouton_de_signe_devant_chaque_champ(self):
+        for largeur in LARGEURS:
+            for methode, dim, nombre in (("simplexe", "2", 11), ("simplexe", "3", 15), ("para", "2", 11)):
+                with self.subTest(largeur=largeur, methode=methode, dim=dim):
+                    page = self.ouvrir(largeur)
+                    self.clic(page, f'[data-meth="{methode}"]')
+                    self.clic(page, f'[data-dim="{dim}"]')
+                    self.assertEqual(page.evaluer("document.querySelectorAll('#objRow .sgn, #consRows .sgn').length"), nombre)
+                    self.assertEqual(page.evaluer(self.SIGNES), ["+"] * nombre)
+                    self.assertEqual(page.evaluer("[...document.querySelectorAll('#objRow .sgn, #consRows .sgn')].filter(b => b.nextElementSibling.tagName !== 'INPUT').length"), 0)
+                    geo = page.evaluer("[...document.querySelectorAll('#objRow .sgn, #consRows .sgn')].map(b => { const r = b.getBoundingClientRect(); return [r.width, r.height, b.tagName, b.type]; })")
+                    for w, h, balise, type_ in geo:
+                        self.assertGreaterEqual(w, 36)
+                        self.assertGreaterEqual(h, 44)
+                        self.assertEqual((balise, type_), ("BUTTON", "button"))
+                    self.assertEqual(page.evaluer("document.querySelector('#objRow .sgn').getAttribute('aria-label')"),
+                                     "signe du coefficient de x : plus" if methode == "para" else "signe du coefficient de x₁ : plus")
+                    self.assertEqual(page.evaluer("document.querySelector('#consRows .rhs').previousElementSibling.getAttribute('aria-label')"), "signe du second membre : plus")
+                    self.assertEqual(page.evaluer("document.querySelector('#objRow .sgn').textContent"), "+")
+                    self.assertEqual(page.evaluer("document.querySelector('#objRow').textContent.replace(/\\s+/g, '')").count("+"), 2 if dim == "2" else 3)    # un « + » par terme de f
+                    # pas de défilement horizontal, ligne de contrainte pleine (3 variables, signes « − », seconds membres à 6 chiffres)
+                    page.evaluer("document.querySelectorAll('#objRow .sgn, #consRows .sgn').forEach(b => b.click())")
+                    page.evaluer("document.querySelectorAll('#objRow input, #consRows input').forEach(i => { i.value = '123456'; i.dispatchEvent(new Event('input')); })")
+                    self.assertFalse(self.defile_horizontalement(page))
+                    self.assertEqual(page.evaluer(self.SIGNES), ["-"] * nombre)
+                    debord = page.evaluer("[...document.querySelectorAll('#formCard .coefs, #formCard .terme')].filter(e => e.getBoundingClientRect().right > innerWidth + 1).length")
+                    self.assertEqual(debord, 0)
+
+    def test_d_le_bouton_bascule_le_signe_et_la_valeur_signee_arrive_dans_le_probleme(self):
+        for largeur in LARGEURS:
+            for methode, resume, attendu in (("simplexe", "#sumTxt", "f = 3x1 − 2x2"), ("para", "#sumTxtP", "f = 3x − 2y")):
+                with self.subTest(largeur=largeur, methode=methode):
+                    page = self.ouvrir(largeur)
+                    self.clic(page, f'[data-meth="{methode}"]')
+                    self.champ(page, '#objRow input[data-j="0"]', "3")
+                    self.champ(page, '#objRow input[data-j="1"]', "2")
+                    self.clic(page, "#objRow .terme:nth-of-type(2) .sgn")
+                    self.assertEqual(page.evaluer("document.querySelectorAll('#objRow .sgn')[1].textContent"), "−")
+                    self.assertEqual(page.evaluer("document.querySelectorAll('#objRow .sgn')[1].getAttribute('aria-label')").split(" : ")[1], "moins")
+                    self.assertEqual(page.evaluer("S.f"), ["3", "-2", ""])                       # l'état garde la valeur signée
+                    self.assertEqual(page.evaluer("document.querySelector('#objRow input[data-j=\"1\"]').value"), "2")     # le champ, la valeur absolue
+                    ligne = "#consRows .coefs:nth-child(1)"
+                    self.champ(page, ligne + ' input[data-j="0"]', "1")
+                    self.champ(page, ligne + ' input[data-j="1"]', "1")
+                    self.champ(page, ligne + " .rhs", "10")
+                    self.clic(page, "#launch")
+                    self.assertEqual(page.evaluer("document.querySelector('#err').textContent"), "")
+                    texte = page.evaluer(f"document.querySelector({resume!r}).textContent").replace("\u2009", "")
+                    self.assertIn(attendu, texte)
+                    # le bouton redonne +, la valeur redevient positive
+                    self.clic(page, "#editBtnP" if methode == "para" else "#editBtn")
+                    self.clic(page, "#objRow .terme:nth-of-type(2) .sgn")
+                    self.assertEqual(page.evaluer("S.f"), ["3", "2", ""])
+
+    def test_d_champ_vide_avec_moins_vaut_zero_et_moins_puis_chiffre_donne_un_negatif(self):
+        for largeur in LARGEURS:
+            with self.subTest(largeur=largeur):
+                page = self.ouvrir(largeur)
+                self.champ(page, '#objRow input[data-j="0"]', "3")
+                self.clic(page, "#objRow .terme:nth-of-type(2) .sgn")                               # « − » sur un champ vide
+                self.assertEqual(page.evaluer("S.f"), ["3", "-", ""])
+                ligne = "#consRows .coefs:nth-child(1)"
+                self.champ(page, ligne + ' input[data-j="0"]', "1")
+                self.champ(page, ligne + " .rhs", "5")
+                self.clic(page, "#launch")
+                self.assertEqual(page.evaluer("document.querySelector('#err').textContent"), "")
+                self.assertRegex(page.evaluer("document.querySelector('#sumTxt').textContent").replace("\u2009", ""), r"f = 3x1\s*·")     # le coefficient de x₂ est 0
+                self.clic(page, "#editBtn")
+                self.assertEqual(page.evaluer("document.querySelectorAll('#objRow .sgn')[1].textContent"), "−")           # le bouton est restitué
+                self.assertEqual(page.evaluer("document.querySelectorAll('#objRow input')[1].value"), "")
+                # « − » puis on tape 3 : −3
+                self.champ(page, '#objRow input[data-j="1"]', "3")
+                self.assertEqual(page.evaluer("S.f"), ["3", "-3", ""])
+                # un redessin du formulaire (nombre de variables, ligne ajoutée) garde « − » sur un champ vide
+                self.clic(page, "#consRows .coefs:nth-child(2) .sgn")
+                self.clic(page, "#addRow")
+                self.clic(page, "[data-dim='3']")
+                self.assertEqual(page.evaluer("document.querySelectorAll('#consRows .coefs:nth-child(2) .sgn')[0].textContent"), "−")
+                self.assertEqual(page.evaluer("S.rows[1].a"), ["-", "", ""])
+                self.assertEqual(page.evaluer("document.querySelectorAll('#objRow .sgn')[1].textContent"), "−")
+                # second membre négatif avec la méthode algébrique : contrainte ≥ → message clair sur l'origine
+                self.clic(page, '[data-ex="Exemple 2D"]')
+                page.evaluer("S.rows[0].b = '-4'; dessinerFormulaire()")
+                self.assertEqual(page.evaluer("document.querySelector('#consRows .rhs').value"), "4")
+                self.assertEqual(page.evaluer("document.querySelector('#consRows .rhs').previousElementSibling.textContent"), "−")
+                self.clic(page, "#launch")
+                self.assertIn("second membre est négatif", page.evaluer("document.querySelector('#err').textContent"))
+
+    def test_d_un_tiret_tape_ou_colle_devient_le_bouton_moins(self):
+        page = self.ouvrir(360)
+        for tiret in ("-", "\u2212", "\u2013", "\u2014", "\u2010", "\u2011"):
+            with self.subTest(tiret=tiret):
+                page.evaluer("S = formulaireVide(); dessinerFormulaire()")
+                self.champ(page, '#objRow input[data-j="0"]', tiret + "5")                         # clavier d'ordinateur : touche « - » puis 5
+                self.assertEqual(page.evaluer("document.querySelector('#objRow .sgn').textContent"), "−")
+                self.assertEqual(page.evaluer("document.querySelector('#objRow input[data-j=\"0\"]').value"), "5")
+                self.assertEqual(page.evaluer("S.f[0]"), "-5")
+        page.evaluer("S = formulaireVide(); dessinerFormulaire()")
+        page.evaluer("document.querySelector('#objRow input[data-j=\"1\"]').focus()")
+        page.appel("Input.insertText", text="-1/2")                                                # collage d'une fraction négative
+        self.assertEqual(page.evaluer("document.querySelectorAll('#objRow input')[1].value"), "1/2")
+        self.assertEqual(page.evaluer("document.querySelectorAll('#objRow .sgn')[1].textContent"), "−")
+        self.assertEqual(page.evaluer("S.f[1]"), "-1/2")
+        page.evaluer("document.querySelectorAll('#objRow .sgn')[1].click()")                       # un clic ramène à « + » : 1/2
+        self.assertEqual(page.evaluer("S.f[1]"), "1/2")
+        self.assertEqual(page.evaluer("lireNombre('-', 'x') === null && lireNombre('+', 'x') === null"), True)
+
+    def test_d_les_exemples_a_coefficients_negatifs_remplissent_le_bouton_moins(self):
         for largeur in LARGEURS:
             with self.subTest(largeur=largeur):
                 page = self.ouvrir(largeur)
                 self.clic(page, '[data-meth="para"]')
-                ligne = "#consRows .coefs:nth-child(1)"
-                champs = [('#objRow input[data-j="0"]', "\u22123"), ('#objRow input[data-j="1"]', "1/2"),
-                          (ligne + ' input[data-j="0"]', "1"), (ligne + ' input[data-j="1"]', "\u20131"), (ligne + " .rhs", "\u20142")]
-                for selecteur, texte in champs:
-                    page.taper(selecteur, texte, pause=0.01)
-                    self.assertEqual(page.evaluer(f"document.querySelector({selecteur!r}).value"), texte)
+                self.clic(page, '[data-ex="Parallèles : coefficient de y négatif"]')
+                self.assertEqual(page.evaluer("[...document.querySelectorAll('#objRow .sgn')].map(b => b.textContent)"), ["+", "−"])
+                self.assertEqual(page.evaluer("[...document.querySelectorAll('#objRow input')].map(i => i.value)"), ["3", "2"])
+                self.assertEqual(page.evaluer("S.f.slice(0, 2)"), ["3", "-2"])
                 self.clic(page, "#launch")
                 self.assertEqual(page.evaluer("document.querySelector('#err').textContent"), "")
-                self.assertFalse(page.evaluer("document.querySelector('#appPara').hidden"))
-                resume = page.evaluer("document.querySelector('#sumTxtP').innerHTML")
-                self.assertIn('f = −3\u2009<i class="v">x</i> + <span class="fr"><span>1</span><span>2</span></span>', resume)     # −3 et 1/2 lus
-                legende = page.evaluer("document.querySelector('#legendP').textContent")
-                self.assertIn("x − y ≤ −2", legende)                           # coefficient −1 et second membre −2 lus
-                self.assertFalse(self.defile_horizontalement(page))
+                self.assertIn("f = 3x − 2y", page.evaluer("document.querySelector('#sumTxtP').textContent").replace("\u2009", ""))
+                self.clic(page, "#editBtnP")                                                         # « Modifier le problème » restitue boutons et valeurs
+                self.assertEqual(page.evaluer("[...document.querySelectorAll('#objRow .sgn')].map(b => b.textContent)"), ["+", "−"])
+                self.assertEqual(page.evaluer("[...document.querySelectorAll('#objRow input')].map(i => i.value)"), ["3", "2"])
+
+    def test_d_le_bouton_de_signe_est_lisible_en_theme_clair_et_sombre(self):
+        def luminance(rgb):
+            def c(v):
+                v /= 255
+                return v / 12.92 if v <= 0.03928 else ((v + 0.055) / 1.055) ** 2.4
+            r, g, b = rgb
+            return 0.2126 * c(r) + 0.7152 * c(g) + 0.0722 * c(b)
+
+        def contraste(a, b):
+            la, lb = sorted((luminance(a), luminance(b)), reverse=True)
+            return (la + 0.05) / (lb + 0.05)
+
+        page = self.ouvrir(360)
+        for sombre in (False, True):
+            page.taille(360, 800, sombre=sombre)
+            for etat in ("+", "-"):
+                with self.subTest(sombre=sombre, signe=etat):
+                    page.evaluer("S = formulaireVide(); if (%r === '-') S.f[0] = '-'; dessinerFormulaire()" % etat)
+                    c = page.evaluer("(() => { const b = document.querySelector('#objRow .sgn'), s = getComputedStyle(b); return [s.color, s.backgroundColor]; })()")
+                    rgb = [[int(x) for x in __import__("re").findall(r"\d+", t)[:3]] for t in c]
+                    self.assertGreaterEqual(contraste(*rgb), 4.5, c)
 
     # ---------- C. solution complète ----------
     PIXELS = """(cv => { const d = cv.getContext('2d').getImageData(0, 0, cv.width, cv.height).data; let n = 0;
