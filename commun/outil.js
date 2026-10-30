@@ -34,6 +34,10 @@
    et appelle `surFiliere(cle)` (la page montre ou cache ce qui est propre à une filière). Les `exemples` peuvent être un tableau ou { cle: tableau }.
    Une ligne « Filière : … » n'apparaît qu'à l'impression. Sans l'option, rien ne change.
 
+   Bouton flottant : un second « Étape suivante ▶ » (`#suivantFlottant`, créé ici, `no-print`) est fixé en bas à droite de l'écran, pour que l'élève n'ait pas
+   à remonter à la barre d'outils. Il déclenche le même clic que `#suivant` (qui reste à sa place) et n'est visible que s'il reste des cartes à montrer.
+   La place qu'il prend est réservée par commun/style.css (marge sous `#cartes`, `scroll-margin-bottom` des cartes).
+
    Les textes d'interface (états, compteur d'étapes, messages de délai) sont écrits ici une seule fois.
    Les textes du corrigé viennent de `resoudre()` (Python) et sont rendus par commun/rendu.js.
    Test : `window.__delaiCalcul` (ms) remplace le délai de 30 s. */
@@ -58,6 +62,21 @@ function demarrerOutil(config) {
   let cartes = [], visibles = 0, numCalcul = 0;
   let sortie = null, entreeCourante = "", varianteChoisie = null;          // sortie affichée, saisie dont elle est le corrigé, choix de l'élève (mémoire de la page)
   let optionChoix = null, entreeOption = "";                              // état de la case choisi par l'élève (null : celui de la sortie), pour la saisie entreeOption
+
+  /* ---------- bouton « Étape suivante » flottant ---------- */
+  function creerBoutonFlottant() {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.id = "suivantFlottant";
+    b.className = "primary flottant no-print";
+    b.innerHTML = 'Étape suivante <span aria-hidden="true">▶</span>';
+    b.hidden = true;
+    b.onclick = () => $("suivant").click();                                    // exactement l'action du bouton de la barre
+    document.body.appendChild(b);
+    return b;
+  }
+  const flottant = creerBoutonFlottant();
+  function majFlottant() { flottant.hidden = $("resultat").hidden || !cartes.length || visibles >= cartes.length; }
 
   function majEtat() { $("etat").textContent = moteur.sympyOK ? "Prêt." : "Chargement du moteur de calcul…"; }
 
@@ -178,6 +197,7 @@ function demarrerOutil(config) {
       box.appendChild(rendreErreur(r));
       $("suivant").disabled = $("tout").disabled = true;
       $("progression").textContent = "";
+      majFlottant();
       return;
     }
     if (r.variantes) barreVariantes(r);
@@ -293,6 +313,7 @@ function demarrerOutil(config) {
     cartes.forEach((c, i) => c.classList.toggle("cache", i >= visibles));
     $("suivant").disabled = $("tout").disabled = visibles >= cartes.length;
     $("progression").textContent = `Étape ${visibles} / ${cartes.length}`;
+    majFlottant();
     const der = cartes[visibles - 1];
     if (der && defiler) der.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
@@ -319,6 +340,7 @@ function demarrerOutil(config) {
     $("resultat").hidden = true;
     $("cartes").innerHTML = "";
     cartes = [];
+    majFlottant();
     $("exoCorrige").hidden = false;
     $("exoCorrige").textContent = "Afficher le corrigé ▶";
     const box = $("exoEnonce");

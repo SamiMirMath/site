@@ -725,6 +725,64 @@ class TestComportement(unittest.TestCase):
                 page.evaluer("document.querySelector('#tout').click()")
                 self.assertEqual(etat(), [m, m, 0])
 
+    def test_bouton_etape_suivante_flottant(self):
+        """Bouton « Étape suivante ▶ » flottant (retour des élèves, 30.10.2026) : caché avant le calcul, fixé en bas à droite, 44 px au moins, il avance
+        d'une carte par clic (comme #suivant, qui reste) et la nouvelle carte défile jusqu'à être visible ; il disparaît à la dernière carte et avec « Tout
+        afficher » ; de la place lui est réservée sous les cartes ; caché à l'impression ; la page ne défile pas horizontalement (360 px et ordinateur)."""
+        for outil in ("limites-asymptotes", "ensemble-definition"):
+            if outil not in CHOISIS:
+                continue
+            for largeur in (360, 1100):
+                with self.subTest(outil=outil, largeur=largeur):
+                    page = self.ouvrir(outil)
+                    page.taille(largeur, 700)
+                    bouton = "document.querySelector('#suivantFlottant')"
+                    visible = lambda: page.evaluer(f"!{bouton}.hidden && getComputedStyle({bouton}).display !== 'none'")
+                    self.assertFalse(visible())                                             # rien à montrer avant le lancement
+                    self.calculer(page, CALCUL[outil])
+                    total = page.evaluer("+document.querySelector('#progression').textContent.match(/\\/ (\\d+)/)[1]")
+                    self.assertGreaterEqual(total, 3)
+                    self.assertTrue(visible())
+                    geo = page.evaluer(f"""(() => {{
+                        const b = {bouton}, r = b.getBoundingClientRect(), s = getComputedStyle(b);
+                        return {{position: s.position, h: r.height, droite: innerWidth - r.right, bas: innerHeight - r.bottom, lisible: b.textContent.trim(),
+                                 vrai: b.tagName, place: parseFloat(getComputedStyle(document.querySelector('#cartes')).paddingBottom)}};
+                    }})()""")
+                    self.assertEqual((geo["position"], geo["vrai"], geo["lisible"]), ("fixed", "BUTTON", "Étape suivante ▶"))
+                    self.assertGreaterEqual(geo["h"], 44)
+                    self.assertTrue(0 <= geo["droite"] <= 24 and 0 <= geo["bas"] <= 24, geo)       # coin bas droit de l'écran
+                    self.assertGreaterEqual(geo["place"], geo["h"] + 16, geo)                         # espace réservé sous les cartes
+                    for k in range(1, total):
+                        page.evaluer(f"{bouton}.click()")
+                        self.assertEqual(page.evaluer("document.querySelector('#progression').textContent"), f"Étape {k + 1} / {total}")
+                        self.assertEqual(page.evaluer("document.querySelectorAll('#cartes .cache').length"), total - k - 1)
+                        page.evaluer("new Promise(r => setTimeout(r, 1200))")                       # défilement doux
+                        vue = page.evaluer(f"""(() => {{
+                            const c = [...document.querySelectorAll('#cartes > :not(.cache)')].pop().getBoundingClientRect();
+                            return {{haut: c.top, bas: c.bottom, h: c.height, hauteur: innerHeight, boutonHaut: innerHeight - {geo["bas"] + geo["h"]}, defile: document.documentElement.scrollWidth - innerWidth}};
+                        }})()""")
+                        self.assertLess(vue["haut"], vue["hauteur"] - 40, vue)                       # la nouvelle carte est à l'écran
+                        self.assertGreater(vue["bas"], 0, vue)
+                        if vue["h"] < vue["hauteur"] - 120:
+                            self.assertLessEqual(vue["bas"], vue["boutonHaut"] + 2, vue)             # entière, au-dessus du bouton
+                        self.assertLessEqual(vue["defile"], 0, vue)
+                        self.assertEqual(visible(), k + 1 < total)                                   # disparaît à la dernière carte
+                    self.assertTrue(page.evaluer("document.querySelector('#suivant').disabled"))
+                    # « Tout afficher » : le bouton ne revient pas ; un nouveau calcul le ramène ; l'impression le cache
+                    self.calculer(page, CALCUL[outil])
+                    self.assertTrue(visible())
+                    page.taille(900, 700, imprimante=True)
+                    self.assertFalse(visible())
+                    self.assertEqual(page.evaluer("getComputedStyle(document.querySelector('#cartes')).paddingBottom"), "0px")
+                    page.taille(largeur, 700, sombre=True)
+                    self.assertTrue(visible())
+                    self.assertEqual(page.evaluer(f"getComputedStyle({bouton}).backgroundColor"), page.evaluer("getComputedStyle(document.querySelector('#suivant')).backgroundColor"))
+                    page.evaluer("document.querySelector('#tout').click()")
+                    self.assertFalse(visible())
+                    time.sleep(0.5)
+                    self.assertLessEqual(page.evaluer("document.documentElement.scrollWidth - innerWidth"), 0)
+                    page.taille(1100)
+
     def test_soc09_pas_de_defilement_horizontal_a_360_px(self):
         for outil in OUTILS:
             with self.subTest(outil=outil):

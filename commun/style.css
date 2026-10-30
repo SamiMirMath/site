@@ -119,10 +119,21 @@ details ul{margin:.4em 0 0;padding-left:1.2em}
 .extrema{margin-top:10px;font-size:.98rem}
 .extrema li{margin:3px 0}
 
+/* Bouton « Étape suivante » flottant (commun/outil.js) : fixé en bas à droite, au-dessus des cartes, avec la marge de sécurité des téléphones.
+   La place qu'il prend (hauteur + marge) est réservée sous les cartes, et une carte qui vient d'apparaître défile jusqu'au-dessus de lui. */
+:root{ --flottant-h:48px; --flottant-place:calc(var(--flottant-h) + 32px + env(safe-area-inset-bottom, 0px)); }
+button.flottant{position:fixed;z-index:50;right:calc(16px + env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  min-height:var(--flottant-h);min-width:44px;padding:0 24px;font-size:1.05rem;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+button.flottant[hidden]{display:none}
+button.flottant:focus-visible{outline:3px solid var(--fg);outline-offset:3px}
+#cartes{padding-bottom:var(--flottant-place)}
+#cartes>*{scroll-margin-bottom:var(--flottant-place)}
+
 @media print{
   :root{ --bg:#fff; --fg:#000; --muted:#444; --card:#fff; --border:#bbb; --eq:#f3f6fb; --good:#0d5c36; --bad:#9c2a1c; }
   body{background:#fff}
   .no-print{display:none !important}
+  #cartes{padding-bottom:0}
   .imprime-seulement{display:block;margin:0 0 10px;font-weight:600}
   .cache{display:block !important}
   .card{box-shadow:none; break-inside:avoid}
