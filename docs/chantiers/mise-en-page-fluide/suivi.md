@@ -120,7 +120,7 @@ Outils, dans l'ordre : Limites et asymptotes, Étude complète, Ensemble de déf
 |---|---|---|
 | Limites et asymptotes (+ socle commun des outils à cartes) | **faite** (suite complète verte : 911 + 99) | `git log` : « phase 4 : Limites » |
 | Étude complète | **faite** (suite complète verte : voir ci-dessous) | `git log` : « phase 4 : Étude complète » |
-| Ensemble de définition | à faire | |
+| Ensemble de définition | **faite** (rien à migrer) | `git log` : « phase 4 : Ensemble de définition » |
 | Dérivée et variations | à faire | |
 | Exponentielles et logarithmes | à faire (`@container` à la place de `@media 820px`) | |
 | Factorisation | à faire | |
@@ -149,3 +149,8 @@ Aucun autre changement de l'outil (pas de style local, pas de largeur codée).
 
 Le test de balayage n'ouvre qu'un exemple par outil. Un script jetable a mesuré **tous** les exemples de chaque page (82 au total : ED 20, Dérivée 12, Factorisation 8, Limites 14, Étude complète 8, Exponentielles 10 + 10 en filière M),
 corrigé complet affiché, aux 7 largeurs, avec les mêmes quatre critères : **aucune faute et aucune erreur de console** sur l'arbre de 216f9cd. À refaire après tout changement des feuilles communes.
+
+### Ensemble de définition
+
+Aucune largeur d'écran codée ; ses seules règles locales (`.verif`, pastille du contrôle numérique) sont propres à son contenu et sans équivalent commun. Les cibles tactiles viennent du socle commun (20 boutons d'exemple à 44 px).
+Balayage et 20 exemples : aucune faute. Rien à modifier dans la page.
