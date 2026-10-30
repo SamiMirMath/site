@@ -121,7 +121,7 @@ Outils, dans l'ordre : Limites et asymptotes, Étude complète, Ensemble de déf
 | Limites et asymptotes (+ socle commun des outils à cartes) | **faite** (suite complète verte : 911 + 99) | `git log` : « phase 4 : Limites » |
 | Étude complète | **faite** (suite complète verte : voir ci-dessous) | `git log` : « phase 4 : Étude complète » |
 | Ensemble de définition | **faite** (rien à migrer) | `git log` : « phase 4 : Ensemble de définition » |
-| Dérivée et variations | à faire | |
+| Dérivée et variations | **faite** (rien à migrer) | `git log` : « phase 4 : Dérivée et variations » |
 | Exponentielles et logarithmes | à faire (`@container` à la place de `@media 820px`) | |
 | Factorisation | à faire | |
 
@@ -154,3 +154,7 @@ corrigé complet affiché, aux 7 largeurs, avec les mêmes quatre critères : **
 
 Aucune largeur d'écran codée ; ses seules règles locales (`.verif`, pastille du contrôle numérique) sont propres à son contenu et sans équivalent commun. Les cibles tactiles viennent du socle commun (20 boutons d'exemple à 44 px).
 Balayage et 20 exemples : aucune faute. Rien à modifier dans la page.
+
+### Dérivée et variations
+
+Aucun `<style>` local ni largeur codée : l'outil n'utilise que la feuille commune (tableaux de signe et de variations défilants dans leur bloc, `position:relative` ajouté en Étude complète). Balayage et 12 exemples : aucune faute.
