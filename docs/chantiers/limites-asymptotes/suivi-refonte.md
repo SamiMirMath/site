@@ -12,13 +12,13 @@ Décisions à valider : `docs/a-valider.md` (section « refonte de la rédaction
 |---|---|---|
 | 0. Version de secours sur `main` (8.12e retiré de la page) | fait, suite complète verte | 40b3d8d |
 | A. Spécification + brouillons + `.gitignore` | fait | f2cd628 |
-| B. Rendu (blocs `bh`, `encadre`, `resultat_lim`, `valeurs`, `sous_calcul`, cartes « Étape n ») | fait | voir `git log` |
-| C. Descente, BH détaillé, simplification à part, dérivées confirmées | fait (24 exercices du corrigé en descente) | idem |
-| D. Formes déterminées + « Attention », 0·∞, constante, `ln(x³)` | fait | idem |
-| E. Podium (t = x, −x, 1/x), tableau de valeurs, ✓ | fait | idem |
-| F. Exposant / ln (R16), « BH tourne en rond » (8.12 h), sous-limite « on calcule à part » (8.12 g), bord (R19) | fait ; 0⁻ de 8.12 f non couvert (voir plus bas) | idem |
-| G. Études 3.10 / 3.11 et Étude complète | fait : mêmes cartes (`cartes_etude`), `limites_bornes` signées (0⁺/0⁻), bilan inchangé sur le fond | idem |
-| H. Page : 8.12e remis, +5 exemples (8.11b, 8.12b, 8.12h, Ex6, 8.13c) | fait | idem |
+| B. Rendu (blocs `bh`, `encadre`, `resultat_lim`, `valeurs`, `sous_calcul`, cartes « Étape n ») | fait | 7c1be3d |
+| C. Descente, BH détaillé, simplification à part, dérivées confirmées | fait (24 exercices du corrigé en descente) | 7c1be3d |
+| D. Formes déterminées + « Attention », 0·∞, constante, `ln(x³)` | fait | 7c1be3d |
+| E. Podium (t = x, −x, 1/x), tableau de valeurs, ✓ | fait | 7c1be3d |
+| F. Exposant / ln (R16), « BH tourne en rond » (8.12 h), sous-limite « on calcule à part » (8.12 g), bord (R19) | fait ; 0⁻ de 8.12 f non couvert (voir plus bas) | 7c1be3d |
+| G. Études 3.10 / 3.11 et Étude complète | fait : mêmes cartes (`cartes_etude`), `limites_bornes` signées (0⁺/0⁻), bilan inchangé sur le fond | 7c1be3d |
+| H. Page : 8.12e remis, +5 exemples (8.11b, 8.12b, 8.12h, Ex6, 8.13c) | fait | 7c1be3d |
 
 ## Principe du moteur
 
@@ -32,6 +32,7 @@ Décisions à valider : `docs/a-valider.md` (section « refonte de la rédaction
 ## Écarts mineurs avec le corrigé (tolérés par les tests)
 
 - 8.11 a : « on remplace » au lieu de « on remplace à nouveau ».
+- 8.11 c et d : la forme revérifiée entre deux BH est écrite sous la chaîne (« Forme −∞/−∞ : encore indéterminée ») ; le corrigé la met dans une étape à part ou à droite de la ligne ; en 8.11 d, l'outil ajoute l'étape « on vérifie la forme » et finit par « on remplace ».
 - Ex5 a : deux étapes BH détaillées au lieu de « BH deux fois » condensé.
 - 8.12 d et 8.14 : « BH » puis « on simplifie » en deux étapes au lieu de « BH et simplification » ; en 8.12 d la forme finale est −1/(x e^(−x)).
 - Simplifications : l'étape « on simplifie » écrit « fraction ÷ fraction = fraction × inverse = forme réduite » ; les intermédiaires du corrigé
@@ -57,14 +58,18 @@ Décisions à valider : `docs/a-valider.md` (section « refonte de la rédaction
   `test_resoudre_import.py`, `test_limites_deux_cotes.py` (bord vs trou), `test_corpus_limites_3m.py` (le xfail du signe 0⁺/0⁻ passe : retiré).
 - Instantanés (Python et pages) régénérés : les diffs ne touchent que Limites et Étude complète.
 
-## Mesures de temps (Pyodide) — plafond 6 s par fonction
+## Mesures de temps (Pyodide, Chrome sans interface sur le Mac de développement) — plafond 6 s par fonction
 
-(Remplies après la suite complète : voir la ligne « Temps des exemples de la page Limites (Pyodide) » du test
-`test_limites_exemples_et_rappel_a_360_px`.)
+Mesure du 30.10.2026 sur les 14 exemples de la page et les 26 autres saisies du corpus (40 fonctions, page déjà chargée) : **maximum 4,5 s**
+(`x*e^x/(1-e^x)`, ancienne rédaction en repli de la descendante), moyenne 0,6 s. Page : `ln(x^2-3)/(2-x)` 2,1 s ; tous les autres exemples ≤ 1,1 s.
+Le premier calcul d'une session est plus lent (chargement de SymPy). Le test `test_limites_exemples_et_rappel_a_360_px` impose désormais < 6 s.
+Avant correction, `e^(-2x/(x^2-5))` demandait 7,6 s (5,9 s de `sympy.limit` en 4 points irrationnels) : la limite de `e^u` / `ln u` est maintenant
+cherchée par composition d'abord (`_limite_brute`), 0,6 s ; la sonde mpmath contrôle toujours le résultat.
 
 ## État des tests
 
-À compléter après la dernière suite complète.
+Suite complète du 30.10.2026 (commit des jalons B-H) : 904 passed (Python) + 62 passed (pages, 360 px compris), code de retour 0.
+Test de fumée du jalon A : 20 passed.
 
 ## Fusion (si validé)
 
