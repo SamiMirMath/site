@@ -15,8 +15,9 @@ Python pur, bibliothèque standard seulement. Une sortie de `resoudre()` est un 
 """
 
 STYLES_CARTE = ("normal", "etape", "final", "erreur")
-STYLES_TEXTE = ("etape", "discret", "indice")
+STYLES_TEXTE = ("etape", "discret", "indice", "confirme")
 STYLES_LISTE = ("extrema", "bilan")
+GENRES_ENCADRE = ("prediction", "attention", "piege", "autre")
 CASES = ("+", "-", "0", "|", "||", "x", "asym", "extremum", "",
          "\\nearrow", "\\searrow", "\\rightarrow")
 
@@ -28,6 +29,12 @@ BLOCS = {
     "erreur": ({"texte"}, set()),
     "liste": ({"items"}, {"style"}),
     "tableau": ({"var", "crit", "rows"}, {"limites"}),
+    # blocs du corrigé des limites (refonte 3M, 30.10.2026)
+    "bh": ({"haut", "dhaut", "bas", "dbas"}, set()),
+    "encadre": ({"genre", "titre", "lignes"}, set()),
+    "resultat_lim": ({"tex"}, set()),
+    "valeurs": ({"expr", "xs", "fs"}, set()),
+    "sous_calcul": ({"titre", "etapes"}, set()),
     "graphique": ({"xmin", "xmax", "ymin", "ymax", "segments", "extrema", "asymptotes"}, {"recalculable"}),
 }
 CARTE = ({"titre", "style", "blocs"}, {"titre_tex", "badge", "detail", "titre_masque"})
@@ -65,6 +72,31 @@ def liste(items, style=None):
     if style:
         b["style"] = style
     return b
+
+
+def bh(haut, dhaut, bas, dbas):
+    """Tableau BH du corrigé : « haut : f ⟶ dérivée : f′ » / « bas : g ⟶ dérivée : g′ » (tex)."""
+    return {"type": "bh", "haut": haut, "dhaut": dhaut, "bas": bas, "dbas": dbas}
+
+
+def encadre(genre, titre, lignes):
+    """Encadré du corrigé (genre : prediction, attention, piege, autre) ; `lignes` : html (formules entre \\( \\))."""
+    return {"type": "encadre", "genre": genre, "titre": titre, "lignes": list(lignes)}
+
+
+def resultat_lim(tex):
+    """Résultat d'une limite, encadré vert (« lim … = … »)."""
+    return {"type": "resultat_lim", "tex": tex}
+
+
+def valeurs(expr, xs, fs):
+    """Tableau de valeurs (8.14) : ligne des x et ligne des valeurs de l'expression (tex)."""
+    return {"type": "valeurs", "expr": expr, "xs": list(xs), "fs": list(fs)}
+
+
+def sous_calcul(titre, etapes):
+    """Sous-limite calculée à part (« On calcule à part … ») : étapes = [{titre, blocs}]."""
+    return {"type": "sous_calcul", "titre": titre, "etapes": list(etapes)}
 
 
 def carte(titre, blocs, style="normal", badge=None, titre_tex=None, detail=None, titre_masque=False):
@@ -187,6 +219,28 @@ def _valider_bloc(b, chemin, ecarts):
             ecarts.append(f"{chemin} : style « {b['style']} » inconnu")
     elif t == "tableau":
         _valider_tableau(b, chemin, ecarts)
+    elif t in ("bh", "resultat_lim"):
+        for k in obl:
+            if not _texte_non_vide(b[k]):
+                ecarts.append(f"{chemin} : {k} vide")
+    elif t == "encadre":
+        if b["genre"] not in GENRES_ENCADRE:
+            ecarts.append(f"{chemin} : genre « {b['genre']} » inconnu")
+        if not _texte_non_vide(b["titre"]) or not isinstance(b["lignes"], list) or not all(_texte_non_vide(x) for x in b["lignes"]):
+            ecarts.append(f"{chemin} : titre et lignes (textes non vides) attendus")
+    elif t == "valeurs":
+        if not _texte_non_vide(b["expr"]) or not isinstance(b["xs"], list) or not isinstance(b["fs"], list) or len(b["xs"]) != len(b["fs"]):
+            ecarts.append(f"{chemin} : valeurs : expr, xs et fs de même longueur attendus")
+    elif t == "sous_calcul":
+        if not _texte_non_vide(b["titre"]) or not isinstance(b["etapes"], list):
+            ecarts.append(f"{chemin} : sous_calcul : titre et étapes attendus")
+        else:
+            for i, e in enumerate(b["etapes"]):
+                if not isinstance(e, dict) or not _texte_non_vide(e.get("titre")) or not isinstance(e.get("blocs"), list):
+                    ecarts.append(f"{chemin}.etapes[{i}] : titre et blocs attendus")
+                else:
+                    for j, bb in enumerate(e["blocs"]):
+                        _valider_bloc(bb, f"{chemin}.etapes[{i}].blocs[{j}]", ecarts)
 
 
 def valider(s):

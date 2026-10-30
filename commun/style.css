@@ -128,3 +128,34 @@ details ul{margin:.4em 0 0;padding-left:1.2em}
   .card{box-shadow:none; break-inside:avoid}
   .wrap{max-width:none; padding:0}
 }
+
+/* ---- Corrigé des limites (refonte 3M, 30.10.2026) : encadrés, tableau BH, résultat, tableau de valeurs. Ajouts seulement. ---- */
+:root{ --pred:#5b1a5e; --pred-soft:#f4eaf5; --alerte:#a40000; --alerte-soft:#fdecec; --autre:#b35c00; --autre-soft:#fff6df; --ok-soft:#e9f8ee; }
+@media (prefers-color-scheme: dark){
+  :root{ --pred:#d79bdb; --pred-soft:#2c1d30; --alerte:#ff8d8d; --alerte-soft:#33201f; --autre:#f0b05a; --autre-soft:#302717; --ok-soft:#1c2c23; }
+}
+.ind{color:var(--alerte);font-weight:700}
+.det{color:var(--good);font-weight:700}
+.enc{margin:12px 0;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.enc-t{padding:5px 12px;font-weight:700;color:#fff}
+.enc-c{padding:8px 12px}
+.enc-c p{margin:4px 0;overflow-x:auto;position:relative}
+.enc-prediction{border-color:var(--pred);background:var(--pred-soft)}
+.enc-prediction .enc-t{background:var(--pred)}
+.enc-attention,.enc-piege{border-color:var(--alerte);background:var(--alerte-soft)}
+.enc-attention .enc-t,.enc-piege .enc-t{background:var(--alerte)}
+.enc-autre{border-color:var(--autre);background:var(--autre-soft)}
+.enc-autre .enc-t{background:var(--autre)}
+@media (prefers-color-scheme: dark){ .enc-t{color:#14110f} }
+.bh{margin:10px 0;overflow-x:auto;position:relative}   /* position:relative : le MathML caché de KaTeX (absolu) est rogné avec le reste */
+.bh table{margin:0 auto;border-collapse:separate;border-spacing:14px 6px}
+.bh td{padding:2px 4px;text-align:center;white-space:nowrap}
+.rbox{position:relative;display:block;width:fit-content;max-width:100%;margin:12px auto;padding:6px 12px;border:1px solid var(--good);background:var(--ok-soft);border-radius:4px;overflow-x:auto;font-size:1.12rem}
+.confirme{color:var(--good);font-style:italic;margin:8px 0}
+.vals{margin:10px 0;overflow-x:auto;position:relative}
+.vals table{margin:0 auto;border-collapse:collapse}
+.vals td{border:1px solid var(--border);padding:6px 10px;text-align:center;white-space:nowrap}
+.vals td:first-child{background:var(--eq)}
+.sous{margin:10px 0;padding:6px 12px;border-left:3px solid var(--accent);background:var(--eq);border-radius:0 6px 6px 0}
+.sous-t{font-weight:700;margin-bottom:4px;overflow-x:auto;position:relative}
+.sous-e{margin:8px 0 2px;font-weight:700;color:var(--accent)}

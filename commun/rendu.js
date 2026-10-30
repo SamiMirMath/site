@@ -14,6 +14,7 @@
      erreur     .res.err ; dans une carte « final » → .err (le .res y est vert)
      liste      <ul class="extrema|bilan">
      tableau    tableau de signes ou de variations (voir cellule())
+     bh, encadre, resultat_lim, valeurs, sous_calcul   blocs du corrigé des limites (refonte 3M) ; texte style confirme
    Un bloc de type inconnu n'est pas affiché (message dans la console), jamais une exception.
    `ajouterBloc(type, fn)` enregistre un rendu supplémentaire.
    `ajouterGreffon({ type, rendu, barre, activer })` enregistre un bloc qui a aussi du comportement (le graphique, T19) :
@@ -81,6 +82,7 @@ const STYLE_TEXTE = {
   etape: h => `<div class="etape">${h}</div>`,
   discret: h => `<div class="muted" style="margin-top:4px">${h}</div>`,
   indice: h => `<div class="hint">${h}</div>`,
+  confirme: h => `<div class="confirme">${h}</div>`,
 };
 
 const BLOCS = {
@@ -93,6 +95,16 @@ const BLOCS = {
   erreur: (b, c) => `<div class="${c.style === "final" ? "err" : "res err"}">${b.texte}</div>`,
   liste: b => `<ul class="${b.style || ""}">` + b.items.map(i => `<li>${i}</li>`).join("") + "</ul>",
   tableau: b => rendreTableau(b),
+  // blocs du corrigé des limites (refonte 3M) : tableau haut/bas des dérivées, encadrés, résultat, tableau de valeurs, sous-calcul
+  bh: b => `<div class="bh"><table><tr><td>haut : ${K(b.haut)}</td><td>${K("\\longrightarrow")}</td><td>dérivée : ${K(b.dhaut)}</td></tr>` +
+    `<tr><td>bas : ${K(b.bas)}</td><td>${K("\\longrightarrow")}</td><td>dérivée : ${K(b.dbas)}</td></tr></table></div>`,
+  encadre: b => `<div class="enc enc-${b.genre}"><div class="enc-t">${b.titre}</div><div class="enc-c">` +
+    b.lignes.map(l => `<p>${l}</p>`).join("") + "</div></div>",
+  resultat_lim: b => `<div class="rbox">${K(b.tex)}</div>`,
+  valeurs: b => `<div class="vals"><table><tr><td>${K("x")}</td>` + b.xs.map(x => `<td>${K(x)}</td>`).join("") + "</tr>" +
+    `<tr><td>${K(b.expr)}</td>` + b.fs.map(v => `<td>${K(v)}</td>`).join("") + "</tr></table></div>",
+  sous_calcul: (b, c) => `<div class="sous"><div class="sous-t">${b.titre}</div>` +
+    b.etapes.map((e, i) => `<div class="sous-e">Étape ${i + 1} : ${e.titre}.</div>` + e.blocs.map(x => (BLOCS[x.type] ? BLOCS[x.type](x, c) : "")).join("")).join("") + "</div>",
 };
 
 const BARRES = {};

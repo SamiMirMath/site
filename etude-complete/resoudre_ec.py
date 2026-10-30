@@ -41,7 +41,8 @@ def resoudre(entree):
             cartes.append(rdv.carte_signe(dv, r["variations_limites"], ec=True))
     if lim.get("tableaux_signe"):
         cartes.append(rla.carte_tableaux(lim["tableaux_signe"]))
-    cartes += [rla.carte_etude(et) for et in lim["etudes"]]
+    for et in lim["etudes"]:
+        cartes += rla.cartes_etude(et)
     cartes.append(rla.carte_bilan(lim["asymptotes"], style="normal"))
     cartes.append(carte_graphique(r))
     return so.sortie_ok(rdv.enonce(r), cartes)

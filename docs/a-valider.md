@@ -168,3 +168,17 @@ log u + log v = log(uv), log u − log v = log(u/v), k log u = log(u^k), puis lo
 « Vérification » rejette après chaque solution hors de l'ED, avec la raison (exemple : log(x+1) + log(2x) = log(3), x ≈ −1,823 rejetée, x ≈ 0,823). (3) **Constante et logarithmes des deux côtés** : 1 = log(10), puis log = log (façon Javet 3.11-3.12).
 (4) **Le 2ᵉ degré en aˣ** (4^x − 2^x − 6 = 0, e^(2x) − 3e^x + 2 = 0) est traité en M dans ce chantier (t = aˣ, t > 0) ; en C, le message hors programme reste. (5) Support de cours : polycopié Javet 2M et brochure Amaudruz 2M.
 Voir [specifications/exponentielles-logarithmes.md](specifications/exponentielles-logarithmes.md), section « Filière M », et la tâche **T35**. **Pool M** : niveaux et poids proposés (exponentielle 25 %, définition 15 %, sommes 20 %, log = log 15 %, changement de variable 15 %, difficile 10 %), à relire à l'écran.
+
+## Chantier « refonte de la rédaction » des limites (3M) — décisions de nuit du 29-30.10.2026 (à valider)
+
+Décisions prises sans l'enseignant, fidèles au corrigé (`docs/specifications/redaction-limites-3m.md`). Chacune a son alternative.
+
+- **R18 — fonctions purement rationnelles** (sans exp, ln, aˣ) : méthodes actuelles inchangées (mise en évidence, factorisation, division
+  euclidienne). *Alternative* : BH partout, comme le corrigé le fait pour les fractions DANS un exposant ou un ln (R16, déjà appliqué).
+- **R19 — vocabulaire du bord** : « trou » est réservé à un point intérieur de l'ensemble de définition. Au bord : « Le graphe s'arrête au
+  point (0 ; 1), qui n'en fait pas partie. » *Alternative* : « point exclu ».
+- **Repli plutôt qu'une ancienne rédaction défectueuse** : si la nouvelle rédaction abandonne et que l'ancienne contient une forme
+  indéterminée suivie de « = valeur » (R14), l'outil affiche le message de repli. *Alternative* : garder l'ancienne rédaction.
+- **Écarts mineurs assumés** (liste tenue à jour dans `docs/chantiers/limites-asymptotes/suivi-refonte.md`) : « on remplace » au lieu de
+  « on remplace à nouveau » (8.11 a) ; Ex5 a) avec deux étapes BH détaillées ; « BH » puis « on simplifie » en deux étapes au lieu de « BH et
+  simplification » (8.12 d, 8.14) ; étapes intermédiaires de simplification génériques.
