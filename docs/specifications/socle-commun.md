@@ -80,6 +80,7 @@ Retours d'élèves sur iPhone : formulaires trop larges, lignes coupées au hasa
   `.conteneur-fluide` / `.cadre-fluide` (pas de carte dans un cadre sur petit écran).
 - **Cibles tactiles ≥ 44 px de haut** pour tout bouton, champ ou onglet, aux largeurs ≤ 430 px.
 - **Formules et tableaux longs** défilent dans leur propre bloc (`overflow-x:auto`), jamais la page.
+  Tout bloc qui défile porte aussi `position:relative` : sans lui, la copie MathML invisible de KaTeX (position absolue) n'est pas rognée et élargit la page.
 - **Contrôle automatique** : `tests/pages/test_largeurs.py` ouvre chaque outil, lance un exemple et vérifie 320, 360, 375, 390, 430, 768 et 1100 px
   (pas de défilement horizontal, rien hors de l'écran, cibles ≥ 44 px, blocs insécables entiers). Un nouvel échec fait échouer la suite.
 

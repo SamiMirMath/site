@@ -25,8 +25,8 @@ Plan détaillé : `/Users/samimir/.claude/plans/pasted-content-id-3a8a-chantier-
 | 1 | Règle et composants communs (`composants.css`, `composants.js`) | **faite** (suite complète verte : 911 + 80) |
 | 2 | Test de balayage des largeurs (`test_largeurs.py`), rapport initial | **faite** (suite complète verte : 911 + 89) |
 | 3 | Simplexe | **faite** (suite complète verte : 911 + 99) |
-| 4 | Autres outils, un commit par outil | en cours (voir ci-dessous) |
-| 5 | Fin : suivi complet, commande de fusion, résumé | à faire |
+| 4 | Autres outils, un commit par outil | **faite** (6 outils, voir le tableau de la phase 4) |
+| 5 | Fin : suivi complet, commande de fusion, résumé | **faite** |
 
 ## Phase 1 — règle et composants communs
 
@@ -118,12 +118,12 @@ Outils, dans l'ordre : Limites et asymptotes, Étude complète, Ensemble de déf
 
 | Outil | État | Commit |
 |---|---|---|
-| Limites et asymptotes (+ socle commun des outils à cartes) | **faite** (suite complète verte : 911 + 99) | `git log` : « phase 4 : Limites » |
-| Étude complète | **faite** (suite complète verte : voir ci-dessous) | `git log` : « phase 4 : Étude complète » |
-| Ensemble de définition | **faite** (rien à migrer) | `git log` : « phase 4 : Ensemble de définition » |
-| Dérivée et variations | **faite** (rien à migrer) | `git log` : « phase 4 : Dérivée et variations » |
-| Exponentielles et logarithmes | **faite** (suite complète verte : voir ci-dessous) | `git log` : « phase 4 : Exponentielles » |
-| Factorisation | **faite** (rien à migrer) | `git log` : « phase 4 : Factorisation » |
+| Limites et asymptotes (+ socle commun des outils à cartes) | **faite** (911 + 99) | 11120fd |
+| Étude complète | **faite** (911 + 99) | 216f9cd |
+| Ensemble de définition | **faite** (rien à migrer) | e26359d |
+| Dérivée et variations | **faite** (rien à migrer) | 6c27392 |
+| Exponentielles et logarithmes | **faite** (912 + 99) | eac8a5b |
+| Factorisation | **faite** (rien à migrer) | 28bac75 |
 
 ### Limites et asymptotes, et socle commun (premier commit de la phase 4)
 
@@ -171,3 +171,37 @@ la carte, pas l'écran : trois colonnes (⇔, expression, propriété) quand le 
 750 px de bloc à 820 px d'écran). Vérifié à 1100 (3 colonnes, 1030 px), 900 (3 colonnes, 830 px), 800 (2 colonnes, 730 px) et 390 (2 colonnes, 333 px). `.prop` : `max-width:min(22em,100%)`.
 Navigateurs sans `:has()` (avant iOS 15.4) : la requête ne s'applique pas, la disposition à trois colonnes reste et défile dans son bloc.
 Garde ajoutée : `test_style_commun.py` interdit toute requête `@media` ou `@container` en pixels dans le `<style>` local d'un outil (simplexe compris).
+
+## Phase 5 — fin
+
+**État.** Phases 0 à 5 faites sur la branche `mise-en-page-fluide` (10 commits depuis `main`, du 30.10.2026 : fade6af … eac8a5b). Suite complète verte avant chaque commit de code (dernier passage : 912 tests Python, 99 tests de pages,
+code de retour 0, sans pipe). `main` n'a pas été touché, rien n'est poussé ni fusionné. Les commits « Ensemble de définition », « Dérivée et variations », « Factorisation » et celui du contrôle des exemples ne contiennent que de la
+documentation : le code testé est celui de 216f9cd.
+
+**`xfail` restants (`CONNUS` dans `tests/pages/test_largeurs.py`) : aucun.** Le tableau est vide ; il reste strict (un nouvel échec fait échouer la suite, et une entrée corrigée y ferait échouer aussi).
+
+**Ce qui reste, et qui n'est pas dans ce chantier.**
+- Simplexe 3D : les trois étiquettes de flèches (« x₃↑ : +8 »…) se touchent encore au départ ; le polyèdre est petit quand il est mince.
+- Simplexe : `touch-action:none` sur les canvas empêche de faire défiler la page en glissant sur la figure (le socle demande l'inverse hors Explorer).
+- Le mode « Gradient » (choix d'un sommet par appui) est masqué : sa conversion est la même que celle d'Explorer, testée ; il n'a pas de test propre tant qu'il est masqué.
+- « Exactement deux lignes » pour une contrainte 3D à 390 px dépend des chasses de police : 16 px de marge avec la police de ce Mac. Si la CI (Linux) a des chiffres plus larges, ce test peut demander un ajustement (largeur du champ ou marges).
+- Le balayage de la CI n'ouvre qu'un exemple par outil ; le contrôle de tous les exemples (82) est un script jetable, à refaire après un changement des feuilles communes.
+- Le débordement par le MathML caché de KaTeX est corrigé pour tous les blocs qui défilent ; tout **nouveau** bloc `overflow-x:auto` doit porter `position:relative` (à retenir dans `docs/specifications/socle-commun.md`).
+- Non vérifié sur un vrai iPhone ni dans la CI GitHub (les tests ont tourné en local, Chrome sur Mac). `:has()` (Exponentielles) demande iOS 15.4 ou plus.
+
+**Fusion, si vous validez** :
+```
+git switch main && git merge --no-ff mise-en-page-fluide
+```
+
+### Ce qui change pour l'élève, outil par outil
+
+- **Tous les outils à cartes** : les boutons d'exemple, « Tout afficher », « Télécharger le corrigé », le sélecteur de méthode, le zoom du graphique, les « Rappel » et la case d'option font au moins 44 px de haut
+  (touchables au pouce) ; « Étape suivante ▶ » flotte en bas à droite, toujours sous le pouce, et la page défile en douceur jusqu'à la nouvelle carte ; les cartes ont des marges qui s'adaptent à l'écran.
+- **Programmation linéaire (simplexe)** : un bouton « + / − » collé à chaque champ, pas de coupure au milieu d'un terme (« (1) + 3 x₁ + 4 x₂ » puis « ≤ 4200 ✕ » à la ligne, en entier) ; deux lignes par contrainte sur iPhone ;
+  onglets « Solution », « Visualisation graphique », « Explorer » ; « Solution » est un texte à suivre, sans figure, toujours depuis le départ avec Dantzig, avec un lien « Voir sur le graphique » dans chaque étape ; figures plus
+  grandes, hauteur adaptée, « f = … » et les numéros de sommets ne se recouvrent plus ; dans la méthode géométrique, les axes s'appellent x et y ; un appui sur un coin de la figure (Explorer) place le point sur ce coin.
+- **Limites et asymptotes** : cibles tactiles et bouton flottant (socle commun) ; rien d'autre.
+- **Étude complète** : la page ne dépasse plus de l'écran en « corrigé complet » (elle mesurait 417 px sur un écran de 390 px).
+- **Ensemble de définition, Dérivée et variations, Factorisation** : cibles tactiles et bouton flottant (socle commun) ; aucune autre modification.
+- **Exponentielles et logarithmes** : les chaînes de ⇔ se mettent sur deux colonnes selon la place de la carte et non selon la largeur de l'écran (sur tablette en largeur réduite ou fenêtre étroite aussi).
