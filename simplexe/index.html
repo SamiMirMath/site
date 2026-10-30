@@ -80,6 +80,19 @@ input[type=range]{width:100%}
 .slid{display:grid;grid-template-columns:36px 1fr 60px;gap:8px;align-items:center;margin:4px 0}
 [hidden]{display:none !important}
 #rapport{display:none}
+/* Solution complète : une carte par étape, à la suite, avec une figure chaque fois que le dessin change */
+.sol{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;max-width:780px;margin:0 auto}
+.sol .card{margin:0}
+.carte-sol .bloc{margin:0;padding-top:0;border-top:none}
+canvas.fig{width:100%;aspect-ratio:4/3;display:block;margin-top:12px;background:var(--card);border:1px solid var(--border);border-radius:10px;touch-action:pan-y}
+.enonce-sol h2{font-size:1.25rem;margin:0 0 6px}
+.verdict{border:2px solid var(--good);border-radius:12px;padding:14px 16px;font-size:1.2rem;font-weight:700;color:var(--good);background:var(--card)}
+.verdict.warn{border-color:var(--bad);color:var(--bad)}
+.verdict .small{font-weight:400}
+.haut{display:inline-block;padding:12px 4px;min-height:44px;color:var(--accent);font-weight:600}
+.tabs button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+@media (prefers-color-scheme: dark){.tabs button[aria-pressed="true"]{color:#0b1220}}
+.tabs{flex-wrap:wrap}
 @media print{
   body{background:#fff;color:#000}
   body>*:not(#rapport){display:none !important}
@@ -94,7 +107,7 @@ input[type=range]{width:100%}
 </head>
 <body>
 <div class="wrap">
-  <h1>Programmation linéaire</h1>
+  <h1 id="haut">Programmation linéaire</h1>
   <p class="lead">Méthode algébrique ou bien géométrique.</p>
 
   <section id="formCard" class="card">
@@ -122,9 +135,10 @@ input[type=range]{width:100%}
       <div class="row" style="margin:0"><button id="editBtn">✎ Modifier le problème</button><button id="printBtn">Imprimer / PDF de toutes les étapes</button></div>
     </div>
     <div class="tabs">
-      <button data-mode="sim" class="on">Pas à pas</button><button data-mode="exp">Explorer</button><button data-mode="grad">Gradient</button>
+      <button data-mode="sol" class="on">Solution complète</button><button data-mode="sim">Pas à pas</button><button data-mode="exp">Explorer</button><button data-mode="grad">Gradient</button>
     </div>
-    <div class="grid">
+    <div id="sol" class="sol" hidden></div>
+    <div class="grid" id="gridSim" hidden>
       <div>
         <canvas id="cv"></canvas>
         <div class="legend" id="legend"></div>
@@ -155,7 +169,11 @@ input[type=range]{width:100%}
       <div class="txt" id="sumTxtP"></div>
       <div class="row" style="margin:0"><button id="editBtnP">✎ Modifier le problème</button><button id="printBtnP">Imprimer / PDF de toutes les étapes</button></div>
     </div>
-    <div class="grid">
+    <div class="tabs">
+      <button data-modep="sol" class="on">Solution complète</button><button data-modep="sim">Pas à pas</button>
+    </div>
+    <div id="solP" class="sol" hidden></div>
+    <div class="grid" id="gridP" hidden>
       <div>
         <canvas id="cvp"></canvas>
         <div class="legend" id="legendP"></div>
@@ -388,7 +406,7 @@ const formulaireVide=()=>({meth:"simplexe",n:2,sens:"max",f:["","",""],rows:[0,1
 let S=formulaireVide();                                          // état du formulaire
 let P=null, R=null, scene=null;                                  // problème, région, scène
 let ST=null;                                                     // état de la résolution
-const MAXL=8;
+const MAXL=8, PIVOTS_MAX=500;                                    // contraintes du formulaire ; plafond de pivots (même valeur que resoudre())
 const $=id=>document.getElementById(id);
 
 /* ----- formulaire ----- */
@@ -426,14 +444,14 @@ $('printBtn').onclick=imprimerRapport;
 function lancer(){
   if(S.meth==='para') return lancerPara();
   let p; try{ p=construireProbleme(S); }catch(e){ if(e instanceof ErreurSaisie){ $('err').textContent='✗ '+e.message; return; } throw e; }
-  $('err').textContent=''; P=p; R=construireRegion(P); PS=null; $('appPara').hidden=true;
-  ST={hist:[etatInitial(P)],sub:0,n2:null,pending:null,unb:false,chosen:null,vue:null,anim:null,auto:false,timer:null,mode:'sim',
+  $('err').textContent=''; P=p; R=construireRegion(P); PS=null; $('appPara').hidden=true; viderFigures();
+  ST={hist:[etatInitial(P)],sub:0,n2:null,pending:null,unb:false,chosen:null,vue:null,anim:null,auto:false,timer:null,mode:'sol',
       expPt:centre(),gradV:0};
   scene=new Scene($('cv'),R,P);
   $('formCard').hidden=true; $('app').hidden=false;
   const fexpr=expr(ZERO,range(1,P.n+1),P.corig);
   $('sumTxt').innerHTML=`<b>Méthode algébrique (2Mr/OS)</b> &nbsp;·&nbsp; <b>${P.sens==='max'?'Maximiser':'Minimiser'}</b> f = ${fexpr} &nbsp;·&nbsp; ${P.m} contrainte${P.m>1?'s':''} &nbsp;·&nbsp; ${P.n} variables`;
-  construireLegende(); construireSliders(); setMode('sim'); }
+  construireLegende(); construireSliders(); setMode('sol'); }
 function centre(){ const pts=R.V.filter(v=>v.reel).map(v=>v.p); return range(P.n).map(i=>pts.reduce((s,p)=>s+p[i],0)/pts.length); }
 
 /* =====================================================================
@@ -446,7 +464,7 @@ function couleurs(){ const dark=matchMedia('(prefers-color-scheme: dark)').match
 function heat(t){ t=Math.max(0,Math.min(1,t)); const a=[255,243,196], b=[220,70,60]; return `rgb(${a.map((x,i)=>Math.round(x+(b[i]-x)*t)).join(',')})`; }
 
 class Scene{
-  constructor(cv,R,P){ this.cv=cv; this.R=R; this.P=P; this.n=P.n; this.yaw=-0.62; this.pitch=0.5; this.zoom=1; this.attach(); }
+  constructor(cv,R,P,fixe){ this.cv=cv; this.R=R; this.P=P; this.n=P.n; this.yaw=-0.62; this.pitch=0.5; this.zoom=1; if(!fixe) this.attach(); }   // `fixe` : figure de la solution complète, sans rotation à la souris
   attach(){ if(this.n!==3) return; const cv=this.cv; let drag=null;
     cv.onpointerdown=e=>{ if(ST&&ST.mode==='exp'&&false) return; drag={x:e.clientX,y:e.clientY}; cv.setPointerCapture(e.pointerId); };
     cv.onpointermove=e=>{ if(!drag) return; this.yaw+=(e.clientX-drag.x)*0.008; this.pitch=Math.max(-1.45,Math.min(1.45,this.pitch+(e.clientY-drag.y)*0.008)); drag={x:e.clientX,y:e.clientY}; rendre(); };
@@ -590,7 +608,7 @@ function enregistrements(complet){
     recs.push({s:H[H.length-1],n2:ST.n2,info:ST.pending,unb:ST.unb,hist:H.slice(),sub:ST.unb?Math.min(ST.sub,2):ST.sub}); return recs; }
   if(ST.n2) H.push(ST.n2);
   let nonborne=(ST.unb&&ST.pending)?ST.pending:null;
-  while(!nonborne&&candidates(H[H.length-1]).length){ const st=H[H.length-1], e=dantzig(st), rr=ratios(st,e);
+  while(!nonborne&&H.length<=PIVOTS_MAX&&candidates(H[H.length-1]).length){ const st=H[H.length-1], e=dantzig(st), rr=ratios(st,e);
     if(rr.best===null) nonborne={ent:e,sort:null,lignes:rr.lignes,best:null,t:null}; else H.push(pivoter(st,e)); }
   for(let i=0;i<H.length-1;i++) recs.push({s:H[i],n2:H[i+1],info:H[i+1].dernier,sub:6,unb:false,hist:H.slice(0,i+1)});
   recs.push({s:H[H.length-1],n2:null,info:nonborne,sub:nonborne?2:0,unb:!!nonborne,hist:H.slice()}); return recs; }
@@ -598,7 +616,7 @@ function enregistrements(complet){
 /* =====================================================================
    10. RENDU DE L'INTERFACE
    ===================================================================== */
-function rendre(){ if(!ST) return; if(ST.mode==='sim') rendreSim(); else if(ST.mode==='exp') rendreExp(); else rendreGrad(); }
+function rendre(){ if(!ST||ST.mode==='sol') return; if(ST.mode==='sim') rendreSim(); else if(ST.mode==='exp') rendreExp(); else rendreGrad(); }
 function setBars(pt,ent,sort){ const v=range(P.nv).map(i=>P.B[i]-dot(P.N[i],pt));
   $('bars').innerHTML=v.map((x,i)=>`<div class="bar ${i+1===ent?'ent':''} ${i+1===sort?'lea':''}"><span>${X(i+1)}</span><div class="tr"><div class="fl" style="width:${Math.min(100,Math.max(0,x)/R.maxvar[i]*100)}%"></div></div><span class="nm">${nb(Math.max(0,x))}</span></div>`).join(''); }
 function construireLegende(){ $('legend').innerHTML=P.A.map((a,k)=>`<span><b class="sw" style="background:${PAL[k%PAL.length]}"></b>(${k+1}) ${expr(ZERO,range(1,P.n+1),a)} ≤ ${fAbs(P.b[k])} &nbsp;(${X(P.n+k+1)} = 0)</span>`).join('')
@@ -699,14 +717,20 @@ $('gP').onclick=()=>{ ST.gradV=(ST.gradV-1+R.reels.length)%R.reels.length; rendr
 
 /* ---- onglets ---- */
 function setMode(m){ if(m==='grad'&&!AFFICHER_GRADIENT) m='sim'; ST.mode=m; stopAuto();
-  document.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('on',b.dataset.mode===m));
-  $('ctrlSim').hidden=m!=='sim'; $('ctrlExp').hidden=m!=='exp'; $('ctrlGrad').hidden=m!=='grad'; rendre(); }
+  document.querySelectorAll('[data-mode]').forEach(b=>{ const on=b.dataset.mode===m; b.classList.toggle('on',on); b.setAttribute('aria-pressed',String(on)); });
+  $('ctrlSim').hidden=m!=='sim'; $('ctrlExp').hidden=m!=='exp'; $('ctrlGrad').hidden=m!=='grad';
+  $('sol').hidden=m!=='sol'; $('gridSim').hidden=m==='sol';
+  if(m==='sol') construireSolution(); else rendre(); }
 document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
 if(!AFFICHER_GRADIENT) document.querySelector('[data-mode="grad"]').hidden=true;
-addEventListener('resize',()=>{ if(ST) rendre(); else if(PS) rendrePara(); });
-addEventListener('keydown',e=>{ if(PS&&!$('appPara').hidden&&!/INPUT|TEXTAREA/.test(document.activeElement.tagName)){ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); $('bNextP').click(); } else if(e.key==='Backspace') $('bBackP').click(); return; }
+function majAffichage(){ if(ST) rendre(); else if(PS) rendrePara(); redessinerFigures(); }
+addEventListener('resize',majAffichage);
+{ const sombre=matchMedia('(prefers-color-scheme: dark)'); if(sombre.addEventListener) sombre.addEventListener('change',majAffichage); else if(sombre.addListener) sombre.addListener(majAffichage); }     // les figures prennent les couleurs du nouveau thème
+const surOnglet=()=>!!(document.activeElement&&document.activeElement.closest('.tabs'));     // Entrée ou Espace sur un onglet : l'onglet s'active, ce n'est pas « étape suivante »
+addEventListener('keydown',e=>{ if(PS&&!$('appPara').hidden&&!/INPUT|TEXTAREA/.test(document.activeElement.tagName)){ if(PS.mode!=='sim') return;
+    if((e.key===' '||e.key==='Enter')&&!surOnglet()){ e.preventDefault(); $('bNextP').click(); } else if(e.key==='Backspace') $('bBackP').click(); return; }
   if(!ST||$('app').hidden||/INPUT|TEXTAREA/.test(document.activeElement.tagName)) return;
-  if(ST.mode==='sim'){ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); $('bNext').click(); } else if(e.key==='Backspace'){ $('bBack').click(); }
+  if(ST.mode==='sim'){ if((e.key===' '||e.key==='Enter')&&!surOnglet()){ e.preventDefault(); $('bNext').click(); } else if(e.key==='Backspace'){ $('bBack').click(); }
     else if(e.key==='ArrowLeft'&&$('pp')&&!$('pp').disabled) $('pp').click(); else if(e.key==='ArrowRight'&&$('ps')&&!$('ps').disabled) $('ps').click(); } });
 
 /* =====================================================================
@@ -823,6 +847,7 @@ function drawPara(sc,d){ const c=sc.g,C=sc.C,A=PA; sc.grille2D();
   if(d.family){ const lo=A.vlo, hi=A.vhi, raw=(hi-lo)/9, mag=Math.pow(10,Math.floor(Math.log10(raw))), st=[1,2,2.5,5,10].map(m=>m*mag).find(s=>s>=raw); let k=0;
     for(let v=Math.ceil(lo/st)*st; v<=hi+1e-9; v+=st,k++){ ligneF(sc,v,'rgba(214,51,108,0.35)',1.1,[5,5]);
       if(Math.abs(A.b)>1e-12&&k%2===0){ const p=v/A.b, view0=sc.inv2D(0,sc.H); if(p>view0[1]&&p<sc.inv2D(0,0)[1]-0.03*R.diag){ sc.text([0,p],'p = '+nb(p),{size:11,col:C.iso,dx:6,dy:-4,bg:true}); } } } }
+  if(d.fantomes) d.fantomes.forEach(c=>ligneF(sc,c,'rgba(214,51,108,0.3)',1.3,[3,5]));       // positions intermédiaires du glissement (solution complète)
   if(d.sweep!=null){ const cc=d.sweep; ligneF(sc,cc,d.contact?C.good:C.iso,4,null);
     if(Math.abs(A.b)>1e-12){ const p=cc/A.b; sc.dotP([0,p],d.contact?C.good:C.iso,6.5); sc.text([0,p],'p = '+nb(p),{bold:true,size:13,col:d.contact?C.good:C.iso,dx:10,dy:-8,bg:true}); }
     sc.text(sc.inv2D(sc.W*0.62,sc.H*0.12),'f = '+nb(cc),{bold:true,size:15,col:d.contact?C.good:C.iso,bg:true}); }
@@ -831,8 +856,9 @@ function drawPara(sc,d){ const c=sc.g,C=sc.C,A=PA; sc.grille2D();
   if(d.contact&&!A.nonborne){ if(A.opt.length>1){ sc.line(A.opt[0].p,A.opt[A.opt.length-1].p,C.good,7,null); }
     A.opt.forEach(v=>sc.dotP(v.p,C.good,9)); } }
 
-function etatDessinPara(){ const m=P.rowsG.length, k=PS.k; return {nc:Math.min(k,m),region:k>m,family:k>m+1,sens:k>m+2,sweep:(k>m+3||(PS.manual&&k>m+1))?PS.cnow:null,contact:PS.contact}; }
-function rendrePara(){ if(!PS) return; const m=P.rowsG.length, k=PS.k, total=PS.steps.length;
+function etatPara(k,cnow,contact,manual){ const m=P.rowsG.length; return {nc:Math.min(k,m),region:k>m,family:k>m+1,sens:k>m+2,sweep:(k>m+3||(manual&&k>m+1))?cnow:null,contact}; }
+function etatDessinPara(){ return etatPara(PS.k,PS.cnow,PS.contact,PS.manual); }
+function rendrePara(){ if(!PS||PS.mode==='sol') return; const m=P.rowsG.length, k=PS.k, total=PS.steps.length;
   const intro=`<div class="bloc"><h3>Méthode géométrique (2C) — droites parallèles</h3><div>${P.sens==='max'?'<b>Maximiser</b>':'<b>Minimiser</b>'} f = ${termeXY(P.corig[0],P.corig[1])}</div><div class="small">sous ${m} contrainte${m>1?'s':''} ; x ≥ 0, y ≥ 0.</div><div class="small">Cliquez sur « Étape suivante » : on trace les contraintes, on délimite la zone admissible, puis on fait glisser une droite parallèle jusqu'au premier contact.</div></div>`;
   $('pageBodyP').innerHTML=(k===0?intro:'')+PS.steps.slice(0,k).map(s=>`<div class="bloc">${s.html}</div>`).join('');
   $('pagebarP').innerHTML=`<b>Étape ${k} / ${total}</b>`; if(k>0) $('pageBodyP').scrollTo({top:1e6,behavior:'smooth'});
@@ -858,17 +884,22 @@ function reinitPara(){ if(PS.anim) return; stopAutoP(); PS.k=0; PS.contact=false
 $('bNextP').onclick=()=>{ stopAutoP(); avancerPara(); }; $('bBackP').onclick=retourPara; $('bResetP').onclick=reinitPara;
 $('bAutoP').onclick=()=>{ if(PS.auto){ stopAutoP(); rendrePara(); } else { PS.auto=true; avancerPara(); } };
 $('slC').oninput=e=>{ PS.manual=true; PS.cnow=+e.target.value; PS.contact=Math.abs(PS.cnow-PA.best)<1e-6*Math.max(1,Math.abs(PA.best))&&!PA.nonborne; rendrePara(); };
-$('editBtnP').onclick=()=>{ stopAutoP(); $('appPara').hidden=true; $('formCard').hidden=false; PS=null; };
+$('editBtnP').onclick=()=>{ stopAutoP(); $('appPara').hidden=true; $('formCard').hidden=false; PS=null; viderFigures(); };
+document.querySelectorAll('[data-modep]').forEach(b=>b.onclick=()=>setModeP(b.dataset.modep));
+function setModeP(m){ PS.mode=m; stopAutoP();
+  document.querySelectorAll('[data-modep]').forEach(b=>{ const on=b.dataset.modep===m; b.classList.toggle('on',on); b.setAttribute('aria-pressed',String(on)); });
+  $('solP').hidden=m!=='sol'; $('gridP').hidden=m==='sol';
+  if(m==='sol') construireSolutionPara(); else rendrePara(); }
 
 function lancerPara(){
   let p; try{ p=construireProblemeGraphique(S); }catch(e){ if(e instanceof ErreurSaisie){ $('err').textContent='✗ '+e.message; return; } throw e; }
   const reg=construireRegion(p); if(reg.empty||!reg.V.length){ $('err').textContent="✗ Région admissible vide : aucun point ne vérifie toutes les contraintes (vérifiez les signes ≤ / ≥)."; return; }
-  $('err').textContent=''; P=p; R=reg; ST=null; PA=analyserPara(); sceneP=new Scene($('cvp'),R,P);
-  PS={k:0,cnow:PA.c0,contact:false,manual:false,anim:null,auto:false,timer:null,steps:etapesPara()};
+  $('err').textContent=''; P=p; R=reg; ST=null; PA=analyserPara(); sceneP=new Scene($('cvp'),R,P); viderFigures();
+  PS={k:0,cnow:PA.c0,contact:false,manual:false,anim:null,auto:false,timer:null,steps:etapesPara(),mode:'sol'};
   $('formCard').hidden=true; $('app').hidden=true; $('appPara').hidden=false;
   $('sumTxtP').innerHTML=`<b>Méthode géométrique (2C)</b> &nbsp;·&nbsp; <b>${P.sens==='max'?'Maximiser':'Minimiser'}</b> f = ${termeXY(P.corig[0],P.corig[1])} &nbsp;·&nbsp; ${P.rowsG.length} contrainte${P.rowsG.length>1?'s':''} &nbsp;·&nbsp; parallèles`;
   $('legendP').innerHTML=P.rowsG.map((r,k)=>`<span><b class="sw" style="background:${PAL[k%PAL.length]}"></b>(${k+1}) ${termeXY(r.a[0],r.a[1])} ${r.op==='<='?'≤':'≥'} ${fSig(r.b)}</span>`).join('')+(R.bornee?'':'<span>⚠ région non bornée : cadre d\'affichage en pointillés</span>');
-  rendrePara(); }
+  setModeP('sol'); }
 function imprimerPara(){ const m=P.rowsG.length, box=$('rapport'), total=PS.steps.length;
   const snap=(k,cnow,contact)=>{ const save=[PS.k,PS.cnow,PS.contact,PS.manual,PS.anim]; PS.k=k; PS.cnow=cnow; PS.contact=contact; PS.manual=false; PS.anim=null;
     const cv=document.createElement('canvas'), sc=new Scene(cv,R,P); sc.render(cv,s=>drawPara(s,etatDessinPara()),{w:900,h:675,dpr:1.5,nodecor:true}); [PS.k,PS.cnow,PS.contact,PS.manual,PS.anim]=save; return cv.toDataURL('image/png'); };
@@ -879,6 +910,75 @@ function imprimerPara(){ const m=P.rowsG.length, box=$('rapport'), total=PS.step
   html+=`<div class="pg"><img src="${snap(total,PA.c1,!PA.nonborne)}" alt="">${txt(m+3,total)}</div>`;
   box.innerHTML=html; setTimeout(()=>window.print(),150); }
 $('printBtnP').onclick=imprimerPara;
+
+/* =====================================================================
+   13. SOLUTION COMPLÈTE : toutes les étapes à la suite (défilement), une carte par étape
+   ===================================================================== */
+/* Les figures sont dessinées chacune dans son <canvas> (classe Scene, largeur de la carte, devicePixelRatio), seulement quand elles approchent de
+   l'écran (IntersectionObserver), et redessinées au redimensionnement et au changement de thème. */
+const FIGURES=[]; let observateur=null;
+function viderFigures(){ if(observateur){ observateur.disconnect(); observateur=null; } FIGURES.length=0; }
+function nouvelleFigure(dessiner,titre){ const cv=document.createElement('canvas'); cv.className='fig'; cv.setAttribute('role','img'); cv.setAttribute('aria-label',titre);
+  const f={cv,dessiner,ok:false,proche:false}; cv._fig=f; FIGURES.push(f); return cv; }
+function dessinerFigure(f){ if(f.cv.clientWidth<20) return;                       // vue masquée : on dessinera quand elle réapparaît
+  const anim=ST&&ST.anim, msg=ST&&ST.msg; if(ST){ ST.anim=null; ST.msg=''; }       // dessinSim lit ces deux champs (animation et message du pas à pas)
+  try{ f.dessiner(f.cv); } finally { if(ST){ ST.anim=anim; ST.msg=msg; } }
+  f.ok=true; f.cv.dataset.dessine='1'; }
+function observerFigures(){
+  if(!('IntersectionObserver' in window)){ FIGURES.forEach(f=>{ f.proche=true; dessinerFigure(f); }); return; }
+  observateur=new IntersectionObserver(es=>es.forEach(e=>{ const f=e.target._fig; f.proche=e.isIntersecting; if(f.proche&&!f.ok) dessinerFigure(f); }),{rootMargin:'300px 0px'});
+  FIGURES.forEach(f=>observateur.observe(f.cv)); }
+function redessinerFigures(){ FIGURES.forEach(f=>{ f.ok=false; delete f.cv.dataset.dessine; if(f.proche) dessinerFigure(f); }); }
+
+function carteSol(html,fig){ const d=document.createElement('article'); d.className='card carte-sol'; d.innerHTML=`<div class="bloc">${html}</div>`; if(fig) d.appendChild(fig); return d; }
+function lienHaut(){ const p=document.createElement('p'); p.style.margin='0'; p.innerHTML='<a href="#haut" class="haut">↑ Haut de la page</a>';
+  p.firstChild.onclick=e=>{ e.preventDefault(); window.scrollTo({top:0,behavior:'smooth'}); }; return p; }
+function enteteSol(html){ const d=document.createElement('section'); d.className='card enonce-sol'; d.innerHTML=html; return d; }
+const pluriel=(n,mot)=>n+' '+mot+(n>1?'s':'');
+
+/* Méthode algébrique : les blocs de blocsPivot() de chaque enregistrement de enregistrements(true), comme le rapport imprimable. */
+function construireSolution(){
+  viderFigures(); const box=$('sol'); box.innerHTML='';
+  const recs=enregistrements(true), yaw=scene.yaw, pitch=scene.pitch, cartes=[];
+  recs.forEach((rec,ir)=>{ let derniere=null;
+    blocsPivot(rec.s,rec.info,rec.n2,rec.sub,rec.unb,false).forEach(b=>{
+      // le dessin ne change qu'aux étapes 0, 1, 2 (pointillé vers le sommet suivant, absent si non borné) et 3 (déplacement) ; les étapes 4 à 6 gardent celui de la 3
+      const cle=(b.sub===2&&!rec.n2)?1:Math.min(b.sub,3); let fig=null;
+      if(cle!==derniere){ derniere=cle;
+        const ctx={hist:rec.hist,n2:rec.n2,pending:rec.info,sub:b.sub,unb:rec.unb};
+        fig=nouvelleFigure(cv=>{ const sc=new Scene(cv,R,P,true); sc.yaw=yaw; sc.pitch=pitch; sc.render(cv,s=>{ dessinSim(s,ctx,null); }); },
+          `Figure : ${P.n===2?'polygone':'polyèdre'} des solutions, programme de base n°${rec.s.pivots+1}`); }
+      cartes.push(carteSol(b.html,fig)); }); });
+  const rows=P.A.map((a,k)=>`<div>(${k+1}) ${expr(ZERO,range(1,P.n+1),a)} ≤ ${fAbs(P.b[k])}</div>`).join('');
+  box.appendChild(enteteSol(`<h2>Solution complète</h2><p style="margin:0 0 6px"><b>${P.sens==='max'?'Maximiser':'Minimiser'}</b> f = ${expr(ZERO,range(1,P.n+1),P.corig)}</p><div>sous les contraintes :</div>${rows}<div>${range(1,P.n+1).map(X).join(', ')} ≥ 0</div>`
+    +`<p class="small" style="margin:8px 0 0">${pluriel(cartes.length,'étape')} à la suite, en faisant défiler la page.${P.n===3?' Faites tourner le polyèdre dans l\'onglet Pas à pas.':''}</p>`));
+  cartes.forEach(c=>box.appendChild(c));
+  const der=recs[recs.length-1], g=P.sens==='max'?'f':'g';
+  box.appendChild(Object.assign(document.createElement('section'),{className:der.unb?'verdict warn':'verdict',innerHTML:der.unb
+    ?`PROBLÈME NON BORNÉ : ${g==='f'?'f peut augmenter':'f peut diminuer'} sans limite, il n'y a pas d'optimum.`
+    :`${P.sens==='max'?'Maximum':'Minimum'} de f = ${nb(fdisp(der.s.f0.num()))}<div class="small">atteint pour ${range(1,P.n+1).map(v=>`${X(v)} = ${fSig(valeur(der.s,v))}`).join(', ')} (sommet ${nomSommet(position(der.s,P.n))})</div>`}));
+  box.appendChild(lienHaut());
+  observerFigures(); }
+
+/* Méthode géométrique : une carte par élément de etapesPara(), avec le dessin de l'étape (les mêmes états que le pas à pas). */
+function construireSolutionPara(){
+  viderFigures(); const box=$('solP'); box.innerHTML='';
+  const m=P.rowsG.length, total=PS.steps.length, A=PA;
+  const fant=[.25,.5,.75].map(t=>A.c0+(A.c1-A.c0)*t), cartes=[];
+  PS.steps.forEach((st,i)=>{ const k=i+1, fin=k>=m+5, cnow=fin?A.c1:A.c0, contact=fin&&!A.nonborne, fantomes=k===m+4?fant:null;
+    const fig=nouvelleFigure(cv=>{ const sc=new Scene(cv,R,P,true); sc.render(cv,s=>drawPara(s,Object.assign(etatPara(k,cnow,contact,false),{fantomes})),{nodecor:true}); },
+      `Figure : droites des contraintes, zone admissible et parallèles, étape ${k}`);
+    cartes.push(carteSol(st.html,fig)); });
+  const rows=P.rowsG.map((r,k)=>`<div>(${k+1}) ${termeXY(r.a[0],r.a[1])} ${r.op==='<='?'≤':'≥'} ${fSig(r.b)}</div>`).join('');
+  box.appendChild(enteteSol(`<h2>Solution complète</h2><p style="margin:0 0 6px"><b>${P.sens==='max'?'Maximiser':'Minimiser'}</b> f = ${termeXY(P.corig[0],P.corig[1])}</p><div>sous les contraintes :</div>${rows}<div>x ≥ 0, y ≥ 0</div>`
+    +`<p class="small" style="margin:8px 0 0">${pluriel(total,'étape')} à la suite, en faisant défiler la page.</p>`));
+  cartes.forEach(c=>box.appendChild(c));
+  const best=plain(A.best), ids=A.opt.map(v=>lab(R.etiquette[R.V.indexOf(v)])).join(' et '), v0=A.opt[0];
+  box.appendChild(Object.assign(document.createElement('section'),{className:A.nonborne?'verdict warn':'verdict',innerHTML:A.nonborne
+    ?`PROBLÈME NON BORNÉ : f ${A.mx?'augmente':'diminue'} sans limite, il n'y a pas d'optimum.`
+    :`${A.mx?'Maximum':'Minimum'} de f = ${best}<div class="small">${A.opt.length>1?`atteint sur tout le côté ${ids} (infinité de solutions)`:`atteint en ${ids} (${plain(v0.p[0])} ; ${plain(v0.p[1])})`}</div>`}));
+  box.appendChild(lienHaut());
+  observerFigures(); }
 
 dessinerFormulaire();
 </script>

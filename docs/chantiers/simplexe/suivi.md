@@ -7,7 +7,7 @@ Page : `simplexe/index.html` (autonome, sans Pyodide). Tests de page : `tests/pa
 |---|---|---|
 | A | Aucun champ prérempli à l'ouverture | **faite** (commit A) |
 | B | Clavier du téléphone : négatifs et fractions | **faite** (commit B) |
-| C | Solution complète en défilement (au lieu d'« Étape suivante ») | à faire |
+| C | Solution complète en défilement (au lieu d'« Étape suivante ») | **faite** (commit C) |
 
 ## A — Aucun champ prérempli
 
@@ -28,6 +28,30 @@ Page : `simplexe/index.html` (autonome, sans Pyodide). Tests de page : `tests/pa
   avaient `inputmode`. **Aucun autre outil n'a de champ `decimal` ou `numeric`** : les autres outils utilisent un champ texte (`#entree`), rien à corriger.
 - Tests : `lireNombre` (−3, –3, —3, ‐3, ‑3, -1/2, -0,5…), refus des écritures ambiguës, attributs de tous les champs dans les trois configurations,
   saisie par insertion de texte (comme un clavier de téléphone) puis lancement, à 360 px et 1100 px.
+
+## C — Solution complète en défilement
+
+- **Onglets** : méthode algébrique « Solution complète » (par défaut, première position) · « Pas à pas » · « Explorer » ; méthode géométrique : « Solution complète » (par défaut) · « Pas à pas ».
+  Le pas à pas (animation, choix de la variable entrante, lecture auto, curseur des parallèles) est inchangé. Les onglets portent `aria-pressed` ;
+  Entrée ou Espace sur un onglet l'active (le raccourci « étape suivante » du clavier ne le détourne plus).
+- **Méthode algébrique** : `construireSolution()` prend `enregistrements(true)` (la source du rapport imprimable) et, pour chaque enregistrement, les blocs de
+  `blocsPivot(…)` : une carte par bloc (étapes 0 à 6), la dernière est la carte finale (optimum ou non borné). Au lancement c'est le chemin de Dantzig ;
+  si l'élève a déjà avancé dans le pas à pas, la vue reprend son chemin puis Dantzig (comme le rapport, c'est voulu : « toujours identiques »).
+- **Méthode géométrique** : `construireSolutionPara()` : une carte par élément de `etapesPara()`. `etatPara(k, c, contact, manuel)` est l'état de dessin pur
+  d'un pas (`etatDessinPara()` l'appelle avec l'état courant : pas à pas inchangé). `drawPara` accepte `fantomes` (positions intermédiaires du glissement).
+- **Figures** : une par changement de dessin, pas deux identiques de suite. Algébrique : étape 0 (sommet et arêtes), 1 (arête entrante), 2 (pointillé vers le sommet
+  suivant ; omise si non borné car identique à la 1), 3 (déplacement) ; les étapes 4 à 6 gardent la figure de la 3. Géométrique : une par carte.
+  Chaque figure a son `<canvas class="fig">` (`Scene(…, fixe=true)` : pas de rotation à la souris), à la largeur de la carte et au `devicePixelRatio`,
+  dessiné quand il approche de l'écran (`IntersectionObserver`, marge 300 px ; `data-dessine`), redessiné au redimensionnement et au changement de thème.
+  3D : orientation courante figée, phrase « Faites tourner le polyèdre dans l'onglet Pas à pas. » dans l'en-tête de la vue.
+- **Mise en page** : en-tête (problème et nombre d'étapes), cartes, résultat dans un encadré (`.verdict`), lien « ↑ Haut de la page ». Colonne de 780 px au plus ;
+  les équations longues défilent dans leur propre bloc (`.eq`), jamais la page.
+- `enregistrements(true)` est désormais plafonné à 500 pivots (comme `resoudre`) : la vue s'ouvre au lancement, une boucle sans fin figerait la page.
+- **Impression** : le bouton « Imprimer / PDF de toutes les étapes » est inchangé (rapport à images). Le réutiliser pour la vue défilante n'est pas simple
+  (le rapport est paginé, une image par pivot) : non fait, comme prévu par la demande.
+- Tests (`tests/pages/test_simplexe.py`, 360 px et 1100 px) : Exemple 2D, Exemple 3D, les trois exemples de la méthode géométrique, un cas non borné
+  de chaque méthode et un cas à infinité de solutions ; valeur optimale recalculée par énumération exacte des sommets (fractions) ; nombre de cartes =
+  nombre de `.bloc` du rapport imprimable ; rendu paresseux, figures non vides et deux à deux différentes ; thème sombre et largeur ; « Pas à pas » jusqu'au résultat.
 
 ## À traiter ailleurs (hors chantier)
 

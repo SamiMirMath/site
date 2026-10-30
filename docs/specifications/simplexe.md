@@ -13,6 +13,8 @@ URL : `/simplexe/` · page autonome en JS (pas de Pyodide, pas de KaTeX).
 - **Méthode algébrique (2Mr/OS)** : dictionnaire du simplexe en fractions exactes
   (BigInt), variable entrante au choix (Dantzig par défaut), rapports, pivot animé, polygone ou
   polyèdre 3D, mode exploration ; phase 1 non traitée (message clair).
+- **Solution complète** (30.10.2026) : après « Lancer », vue par défaut des deux méthodes : toutes les étapes à la suite (une carte par étape, figure à chaque
+  changement de dessin, rendu paresseux), résultat en bas ; « Pas à pas » (et « Explorer » en algébrique) restent en onglets.
 - Impression : rapport dédié avec images.
 
 ## Répartition par filière (validé, Q2)
