@@ -89,6 +89,10 @@ def _limite_brute(fe, point, direction):
     """Limite SymPy de fe (expression SymPy) ; une réponse inutilisable (point irrationnel : SymPy laisse parfois x, i·π…) est
     reprise par composition quand fe est ln(u) ou e^u. None si l'on ne conclut pas."""
     sp = charger_sympy()
+    if isinstance(fe, (sp.log, sp.exp)):          # e^u, ln u : la limite de u (rapide) d'abord ; SymPy sur l'ensemble est lent en un point irrationnel
+        r = _par_composition(fe, point, direction)    # (plafond de 6 s par fonction dans Pyodide, refonte 3M ; la sonde mpmath contrôle toujours le résultat)
+        if r is not None and not _rejete(r):
+            return r
     try:
         r = sp.limit(fe, SYMPY["x"], point, dir=direction) if direction else sp.limit(fe, SYMPY["x"], point)
     except Exception:
@@ -599,6 +603,12 @@ def _phrase_trou(point_tex, valeur_tex):
     """Valeur interdite où la limite (éventuellement latérale) est finie."""
     return (rf"Limite finie : pas d'asymptote verticale, trou dans le graphique "
             rf"en \(({point_tex}\,;\,{valeur_tex})\).")
+
+
+def _phrase_bord(point_tex, valeur_tex):
+    """Limite finie au BORD de l'ensemble de définition (R19 : « trou » est réservé à un point intérieur)."""
+    return (rf"Limite finie : pas d'asymptote verticale. Le graphe s'arrête au point \(({point_tex}\,;\,{valeur_tex})\), "
+            rf"qui n'en fait pas partie.")
 
 
 def _x_moins(a):
@@ -3362,10 +3372,41 @@ def _repli(pt, vtex, detail, label="f(x)"):
     return item
 
 
+_LIMS_SIGNEES = {}      # limite (avec le signe d'approche de 0) de chaque côté de la borne en cours d'étude, d'après la rédaction descendante
+
+
+def _signe_zero(val, pt):
+    """« 0 » devient « 0^{+} » ou « 0^{-} » quand la rédaction descendante a établi le signe (R17)."""
+    L = _LIMS_SIGNEES.get(pt.tex())
+    if val == "0" and L is not None and L.nul() and L.ap:
+        return "0^{+}" if L.ap > 0 else "0^{-}"
+    return val
+
+
+def _descente(f, pt, ref):
+    """Rédaction descendante du corrigé (redaction_bh.py) ; None si elle abandonne (l'ancienne rédaction prend alors le relais)."""
+    try:
+        d = redaction_bh.descente(f, pt, ref)
+    except Exception:           # Abandon, forme imbriquée, module absent… : rien ne doit faire échouer l'étude
+        return None
+    _LIMS_SIGNEES[pt.tex()] = d["valeur"]
+    return {"type": "descente", "etapes": d["etapes"], "alertes": d["alertes"],
+            "html": redaction_bh.texte_des_etapes(d["etapes"]),
+            "enonce_tex": rf"\displaystyle\lim_{{x\to {pt.tex()}}} {tex(f)}"}
+
+
 def _narrer_limite(f, pt, ref, vtex, items, alternative=None, label="f(x)", prefixe=None):
     """Étapes de lim f en pt : rédigées si possible, sinon phrase de repli et résultat de référence.
     alternative = (arbre équivalent, phrase d'introduction) : essayée si f, telle qu'elle est écrite, résiste."""
+    if label == "f(x)" and prefixe is None:
+        item = _descente(f, pt, ref)
+        if item is not None:
+            items.append(item)
+            return
     lignes, detail = _rediger(f, pt, ref, prefixe)
+    if lignes is not None:                  # défaut R14 de l'ancienne rédaction (forme indéterminée suivie de « = valeur ») : repli
+        if any(redaction_bh.viole_r14(l if isinstance(l, str) else l.html()) for l in lignes):
+            lignes, detail = None, "ancienne rédaction écartée (R14)"
     if lignes is None and alternative is not None:
         g, intro = alternative
         lignes2, detail2 = _rediger(g, pt, ref, prefixe)
@@ -3526,6 +3567,12 @@ def _narrer_cotes(f, borne, items, ref_de, cotes=("gauche", "droite")):
         return sortie
     (_, pg, vg_ref, vg, _), (_, pd, vd_ref, vd, _) = cas
     if "?" not in (vg, vd):
+        ds = [_descente(f, pt_, val_, ) for _, pt_, val_, _, _ in cas]
+        if any(ds):                                  # au moins un côté en rédaction descendante : une rédaction par côté (l'autre en ancienne)
+            for _, pt_, val_, vt_, _ in cas:
+                _narrer_limite(f, pt_, val_, vt_, items)
+            return sortie
+    if "?" not in (vg, vd):
         lg, dg = _rediger(f, pg, vg_ref)
         ld, dd = _rediger(f, pd, vd_ref)
         if lg is not None and ld is not None:
@@ -3574,7 +3621,7 @@ def _etude_transcendante(f, borne, items):
         elif inf:
             items.append(txt(rf"Asymptote verticale : \(x = {point.tex}\)."))
         else:
-            items.append(txt(_phrase_trou(point.tex, vtex)))
+            items.append(txt(_phrase_bord(point.tex, vtex)))
         return vtex, inf, extra, vval
 
     def ref_de(pt):
@@ -3655,6 +3702,7 @@ def etudier(entree, avec_bornes=False):
     vues = {}                                   # divisions euclidiennes déjà écrites (−∞ puis +∞)
     for borne in _bornes(ED):
         items = []
+        _LIMS_SIGNEES.clear()
         if borne["type"] == "inf":
             cote_tex = r"x \to +\infty" if borne["signe"] > 0 else r"x \to -\infty"
             if rationnelle:
@@ -3699,17 +3747,19 @@ def etudier(entree, avec_bornes=False):
                     if asym is not None and not est_asymptote:
                         asym["valeur_tex"] = val
                         asym["valeur_val"] = vval
+                        asym["bord"] = True                         # R19 : un point du bord n'est pas un « trou »
                 if asym is not None:
                     res["asymptotes"].append(asym)
 
         # Valeurs de cette borne, reprises telles quelles par le tableau de variations de l'Étude complète
         # (T06c) : une seule source de calcul, jamais un second calcul indépendant. « ? » : non déterminée.
         if borne["type"] == "inf":
-            bornes_val.append({"type": "inf", "signe": borne["signe"], "tex": val_borne})
+            bornes_val.append({"type": "inf", "signe": borne["signe"], "tex": _signe_zero(val_borne, Pt(borne))})
         else:
             cotes = {"gauche": val_borne[0], "droite": val_borne[1]} if isinstance(val_borne, tuple) else val_borne
             bornes_val.append({"type": "fini", "point_tex": point.tex, "point_val": point.val,
-                               "gauche": cotes.get("gauche"), "droite": cotes.get("droite")})
+                               "gauche": _signe_zero(cotes.get("gauche"), Pt(borne, -1)),
+                               "droite": _signe_zero(cotes.get("droite"), Pt(borne, 1))})
 
         res["etudes"].append({"ou": cote_tex, "etapes": items})
 
@@ -3721,6 +3771,9 @@ def etudier(entree, avec_bornes=False):
 
 def etudier_json(entree):
     return json_strict(etudier(entree))
+
+
+import redaction_bh      # noqa: E402  (rédaction descendante, 3M ; importe ce module : placé en fin de fichier pour le cycle)
 
 
 if __name__ == "__main__":

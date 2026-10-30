@@ -6,7 +6,7 @@ import unittest
 import moteurs  # noqa: F401  (chemins des moteurs)
 import limites_asymptotes as la
 import resoudre_la as rla
-from aides_sortie import manquantes, valide, blocs_de_type
+from aides_sortie import manquantes, valide, blocs_de_type, titres_etude
 from cas import entrees_page, CAS_LIMITES
 
 ENTREES = list(dict.fromkeys(entrees_page("limites-asymptotes") + CAS_LIMITES["limites-asymptotes"]))
@@ -32,12 +32,12 @@ class TestResoudreLA(unittest.TestCase):
                 continue
             with self.subTest(entree=entree):
                 s = rla.resoudre(entree)
-                n = 1 + (1 if ancien.get("tableaux_signe") else 0) + len(ancien["etudes"]) + 1
+                n = 1 + (1 if ancien.get("tableaux_signe") else 0) + sum(len(titres_etude(e)) for e in ancien["etudes"]) + 1
                 self.assertEqual(len(s["cartes"]), n)
                 self.assertEqual(s["cartes"][0]["titre"], "Fonction")
                 self.assertEqual(s["cartes"][-1]["titre"], "Bilan des asymptotes")
                 self.assertEqual([c["titre_tex"] for c in s["cartes"] if c["titre"] == "Limite"],
-                                 [e["ou"] for e in ancien["etudes"]])
+                                 [e["ou"] for e in ancien["etudes"] for t in titres_etude(e) if t == "Limite"])
 
     def test_phrases_des_asymptotes(self):
         self.assertEqual(bilan("(x^2-1)/(x-3)"), [

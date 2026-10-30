@@ -1,7 +1,7 @@
 {
  "(e^x-1)/x": {
   "au_depart": {
-   "progression": "Étape 1 / 8",
+   "progression": "Étape 1 / 20",
    "visibles": 1
   },
   "cartes": [
@@ -156,7 +156,7 @@
         ],
         [
          "",
-         "⟦0⟧"
+         "⟦0^{+}⟧"
         ],
         [
          "",
@@ -179,7 +179,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{x\\,e^{x} - e^{x} + 1}{x^{2}}⟧ ne s'annule jamais ; valeur interdite : ⟦x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦\\left(x\\,e^{x} - e^{x} + 1\\right)⟧++⟦x^{2}⟧++⟦f'(x)⟧++⟦f(x)⟧⟦0⟧⟦\\nearrow⟧⟦1⟧⟦1⟧⟦1⟧⟦1⟧⟦\\nearrow⟧⟦+\\infty⟧Aucun extremum local.",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{x\\,e^{x} - e^{x} + 1}{x^{2}}⟧ ne s'annule jamais ; valeur interdite : ⟦x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦\\left(x\\,e^{x} - e^{x} + 1\\right)⟧++⟦x^{2}⟧++⟦f'(x)⟧++⟦f(x)⟧⟦0^{+}⟧⟦\\nearrow⟧⟦1⟧⟦1⟧⟦1⟧⟦1⟧⟦\\nearrow⟧⟦+\\infty⟧Aucun extremum local.",
     "titre": "Signe de f' et variationstableau"
    },
    {
@@ -189,18 +189,26 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{e^{x} - 1}{x} = \\text{« }\\dfrac{e^{-\\infty} - 1}{-\\infty}\\text{ »} = \\text{« }\\dfrac{0^{+} - 1}{-\\infty}\\text{ »} = \\text{« }\\dfrac{-1}{-\\infty}\\text{ »} = 0\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "texte": "⟦x \\to -\\infty⟧limite⟦\\displaystyle\\lim_{x\\to -\\infty} \\frac{e^{x} - 1}{x}⟧",
     "titre": "⟦x \\to -\\infty⟧limite"
    },
    {
     "classes": [
-     "card",
-     "cond"
+     "card"
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x}}{x} &= \\text{« }\\dfrac{e^{+\\infty}}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{e^{x}}{1} = +\\infty \\qquad \\left(\\text{haut : } \\left(e^{x}\\right)' = e^{x} \\; ;\\; \\text{bas : } \\left(x\\right)' = 1\\right)\\end{aligned}⟧⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{e^{x} - 1}{x} &= \\text{« }\\dfrac{e^{+\\infty} - 1}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty - 1}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\frac{e^{x}}{x}\\,\\left(1 - e^{-x}\\right) = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty \\qquad \\left(\\text{mise en évidence}\\right)\\end{aligned}⟧",
-    "titre": "⟦x \\to +\\infty⟧limite"
+    "texte": "Étape 1 : on remplace.Haut : ⟦e^{x} - 1 \\to -1⟧. Bas : ⟦x \\to -\\infty⟧. Forme ⟦\\dfrac{-1}{-\\infty}⟧ : pas indéterminée!",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2 : on conclut directement.On conclut avec les règles de calcul :⟦\\lim_{x\\to -\\infty} \\frac{e^{x} - 1}{x} = \\dfrac{-1}{-\\infty} = 0^{+}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "titre": "Étape 2 : on conclut directement."
    },
    {
     "classes": [
@@ -209,8 +217,109 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to 0⟧limite⟦\\begin{aligned}\\lim_{x\\to 0} \\frac{e^{x} - 1}{x} &= \\text{« }\\dfrac{e^{0} - 1}{0}\\text{ »} = \\text{« }\\dfrac{1 - 1}{0}\\text{ »} = \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to 0} \\frac{e^{x}}{1} = 1 \\qquad \\left(\\text{haut : } \\left(e^{x} - 1\\right)' = e^{x} \\; ;\\; \\text{bas : } \\left(x\\right)' = 1\\right)\\end{aligned}⟧Limite finie : pas d'asymptote verticale, trou dans le graphique en ⟦(0\\,;\\,1)⟧.",
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\displaystyle\\lim_{x\\to +\\infty} \\frac{e^{x} - 1}{x}⟧",
+    "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.Haut : ⟦e^{x} - 1 \\to +\\infty⟧. Bas : ⟦x \\to +\\infty⟧. Forme ⟦\\dfrac{+\\infty}{+\\infty}⟧ : indéterminée.Prédiction avec la règle du podiumIci, le podium ne peut pas aider : il n'y a pas de « course » entre une exponentielle, une puissance et un logarithme qui partent vers l'infini.Pour prédire, on utilise la calculatrice (tableau ci-dessous).⟦x⟧⟦1⟧⟦10⟧⟦20⟧⟦50⟧⟦100⟧⟦\\frac{e^{x} - 1}{x}⟧⟦1{,}7183⟧⟦2202{,}5466⟧⟦2{,}43 \\cdot 10^{7}⟧⟦1{,}04 \\cdot 10^{20}⟧⟦2{,}69 \\cdot 10^{41}⟧La calculatrice ne prouve rien : c'est le calcul qui suit qui donne la réponse sûre.",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2 : BH.haut : ⟦e^{x} - 1⟧⟦\\longrightarrow⟧dérivée : ⟦e^{x}⟧bas : ⟦x⟧⟦\\longrightarrow⟧dérivée : ⟦1⟧⟦\\lim_{x\\to +\\infty} \\frac{e^{x} - 1}{x} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{e^{x}}{1}⟧",
+    "titre": "Étape 2 : BH."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3 : on remplace.⟦e^{x} \\to +\\infty⟧ et ⟦\\frac{e^{x}}{1} \\to \\dfrac{+\\infty}{1} = +\\infty⟧.⟦\\lim_{x\\to +\\infty} \\frac{e^{x} - 1}{x} = +\\infty⟧La calculatrice avait bien « deviné » : le calcul le confirme.",
+    "titre": "Étape 3 : on remplace."
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to 0⟧limite⟦\\displaystyle\\lim_{x\\to 0^{-}} \\frac{e^{x} - 1}{x}⟧",
     "titre": "⟦x \\to 0⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.Haut : ⟦e^{x} - 1 \\to 0^{-}⟧. Bas : ⟦x \\to 0^{-}⟧. Forme ⟦\\dfrac{0^{-}}{0^{-}}⟧ : indéterminée.Prédiction avec la règle du podiumIci, le podium ne peut pas aider : il n'y a pas de « course » entre une exponentielle, une puissance et un logarithme qui partent vers l'infini.Pour prédire, on utilise la calculatrice (tableau ci-dessous).⟦x⟧⟦-10^{-1}⟧⟦-10^{-2}⟧⟦-10^{-3}⟧⟦-10^{-4}⟧⟦-10^{-5}⟧⟦\\frac{e^{x} - 1}{x}⟧⟦0{,}9516⟧⟦0{,}9950⟧⟦0{,}9995⟧⟦0{,}99995⟧⟦0{,}999995⟧La calculatrice ne prouve rien : c'est le calcul qui suit qui donne la réponse sûre.",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2 : BH.haut : ⟦e^{x} - 1⟧⟦\\longrightarrow⟧dérivée : ⟦e^{x}⟧bas : ⟦x⟧⟦\\longrightarrow⟧dérivée : ⟦1⟧⟦\\lim_{x\\to 0^{-}} \\frac{e^{x} - 1}{x} \\overset{\\text{BH}}{=} \\lim_{x\\to 0^{-}} \\frac{e^{x}}{1}⟧",
+    "titre": "Étape 2 : BH."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3 : on remplace.⟦e^{x} \\to 1⟧ et ⟦\\frac{e^{x}}{1} \\to \\dfrac{1}{1} = 1⟧.⟦\\lim_{x\\to 0^{-}} \\frac{e^{x} - 1}{x} = 1⟧La calculatrice avait bien « deviné » : le calcul le confirme.",
+    "titre": "Étape 3 : on remplace."
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to 0⟧limite⟦\\displaystyle\\lim_{x\\to 0^{+}} \\frac{e^{x} - 1}{x}⟧",
+    "titre": "⟦x \\to 0⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.Haut : ⟦e^{x} - 1 \\to 0^{+}⟧. Bas : ⟦x \\to 0^{+}⟧. Forme ⟦\\dfrac{0^{+}}{0^{+}}⟧ : indéterminée.Prédiction avec la règle du podiumIci, le podium ne peut pas aider : il n'y a pas de « course » entre une exponentielle, une puissance et un logarithme qui partent vers l'infini.Pour prédire, on utilise la calculatrice (tableau ci-dessous).⟦x⟧⟦10^{-1}⟧⟦10^{-2}⟧⟦10^{-3}⟧⟦10^{-4}⟧⟦10^{-5}⟧⟦\\frac{e^{x} - 1}{x}⟧⟦1{,}0517⟧⟦1{,}0050⟧⟦1{,}0005⟧⟦1{,}0001⟧⟦1{,}00001⟧La calculatrice ne prouve rien : c'est le calcul qui suit qui donne la réponse sûre.",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2 : BH.haut : ⟦e^{x} - 1⟧⟦\\longrightarrow⟧dérivée : ⟦e^{x}⟧bas : ⟦x⟧⟦\\longrightarrow⟧dérivée : ⟦1⟧⟦\\lim_{x\\to 0^{+}} \\frac{e^{x} - 1}{x} \\overset{\\text{BH}}{=} \\lim_{x\\to 0^{+}} \\frac{e^{x}}{1}⟧",
+    "titre": "Étape 2 : BH."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3 : on remplace.⟦e^{x} \\to 1⟧ et ⟦\\frac{e^{x}}{1} \\to \\dfrac{1}{1} = 1⟧.⟦\\lim_{x\\to 0^{+}} \\frac{e^{x} - 1}{x} = 1⟧La calculatrice avait bien « deviné » : le calcul le confirme.Limite finie : pas d'asymptote verticale, trou dans le graphique en ⟦(0\\,;\\,1)⟧.",
+    "titre": "Étape 3 : on remplace."
    },
    {
     "classes": [
@@ -239,7 +348,7 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 8 / 8"
+  "progression_finale": "Étape 20 / 20"
  },
  "(x^2-1)/(x-3)": {
   "au_depart": {
@@ -645,7 +754,7 @@
  },
  "3(x*ln(x))": {
   "au_depart": {
-   "progression": "Étape 1 / 7",
+   "progression": "Étape 1 / 15",
    "visibles": 1
   },
   "cartes": [
@@ -847,7 +956,7 @@
         ],
         [
          "vi",
-         "⟦0⟧⟦0⟧"
+         "⟦0^{-}⟧⟦0^{-}⟧"
         ],
         [
          "",
@@ -870,7 +979,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦\\ln(x) + 1 = 0 \\iff \\ln(x) = -1⟧ (on soustrait 1).⟦\\ln(x) = -1 \\iff x = e^{-1}⟧⟦f'(x) = 3\\left(\\ln(x) + 1\\right) = 0 \\iff \\ln(x) + 1 = 0 \\iff x = e^{-1}⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e^{-1}⟧⟦+\\infty⟧⟦3⟧+++⟦\\left(\\ln(x) + 1\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦0⟧⟦0⟧⟦\\searrow⟧•⟦\\nearrow⟧⟦+\\infty⟧minimum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=- \\frac{3}{e}⟧",
+    "texte": "Signe de f' et variationstableau⟦\\ln(x) + 1 = 0 \\iff \\ln(x) = -1⟧ (on soustrait 1).⟦\\ln(x) = -1 \\iff x = e^{-1}⟧⟦f'(x) = 3\\left(\\ln(x) + 1\\right) = 0 \\iff \\ln(x) + 1 = 0 \\iff x = e^{-1}⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e^{-1}⟧⟦+\\infty⟧⟦3⟧+++⟦\\left(\\ln(x) + 1\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦0^{-}⟧⟦0^{-}⟧⟦\\searrow⟧•⟦\\nearrow⟧⟦+\\infty⟧minimum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=- \\frac{3}{e}⟧",
     "titre": "Signe de f' et variationstableau"
    },
    {
@@ -880,8 +989,62 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to 0^+⟧limite⟦\\begin{aligned}\\lim_{x\\to 0^{+}} x\\,\\ln(x) &= \\text{« }0^{+} \\cdot \\ln\\left(0^{+}\\right)\\text{ »} = \\text{« }0^{+} \\cdot \\left(-\\infty\\right)\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 0^{+}} \\dfrac{\\ln(x)}{\\frac{1}{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to 0^{+}} -x = -0 = 0 \\qquad \\left(\\text{haut : } \\left(\\ln(x)\\right)' = \\frac{1}{x} \\; ;\\; \\text{bas : } \\left(\\frac{1}{x}\\right)' = -\\frac{1}{x^{2}}\\right)\\end{aligned}⟧⟦\\begin{aligned}\\lim_{x\\to 0^{+}} 3x\\,\\ln(x) = \\text{« }3 \\cdot 0^{+} \\cdot \\ln\\left(0^{+}\\right)\\text{ »} = \\text{« }3 \\cdot 0^{+} \\cdot \\left(-\\infty\\right)\\text{ »} = \\text{« }3 \\cdot 0^{-}\\text{ »} = 0\\end{aligned}⟧Limite finie : pas d'asymptote verticale, trou dans le graphique en ⟦(0\\,;\\,0)⟧.",
+    "texte": "⟦x \\to 0^+⟧limite⟦\\displaystyle\\lim_{x\\to 0^{+}} 3x\\,\\ln(x)⟧",
     "titre": "⟦x \\to 0^+⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.⟦x \\to 0^{+}⟧. ⟦\\ln(x) \\to -\\infty⟧. Forme ⟦0 \\cdot \\left(-\\infty\\right)⟧ : indéterminée.Prédiction avec la règle du podiumProduit : ⟦x \\to 0^{+}⟧ et ⟦\\ln(x) \\to -\\infty⟧. La puissance est plus forte que le logarithme : c'est ⟦x⟧ qui impose sa limite, donc 0.Signe : ⟦x⟧ > 0 et ⟦\\ln(x)⟧ < 0, donc produit < 0.On s'attend à : ⟦0^{-}⟧",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2 : on transforme le produit en quotient.BH ne marche pas sur un produit. On écrit ⟦x = \\frac{1}{\\frac{1}{x}}⟧ :⟦3x\\,\\ln(x) = \\frac{3\\ln(x)}{\\frac{1}{x}}⟧Pourquoi garder ⟦\\ln(x)⟧ en haut ? Parce que sa dérivée ⟦\\frac{1}{x}⟧ est simple. Si on mettait ⟦\\dfrac{1}{\\ln(x)}⟧ en bas, sa dérivée serait compliquée.",
+    "titre": "Étape 2 : on transforme le produit en quotient."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3 : on vérifie la forme.Haut : ⟦3\\ln(x) \\to -\\infty⟧. Bas : ⟦\\frac{1}{x} \\to \\dfrac{1}{0^{+}} = +\\infty⟧. Forme ⟦\\dfrac{-\\infty}{+\\infty}⟧ : indéterminée.",
+    "titre": "Étape 3 : on vérifie la forme."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4 : BH.haut : ⟦3\\ln(x)⟧⟦\\longrightarrow⟧dérivée : ⟦\\frac{3}{x}⟧bas : ⟦\\frac{1}{x}⟧⟦\\longrightarrow⟧dérivée : ⟦-\\frac{1}{x^{2}}⟧⟦\\lim_{x\\to 0^{+}} \\frac{3\\ln(x)}{\\frac{1}{x}} \\overset{\\text{BH}}{=} \\lim_{x\\to 0^{+}} \\frac{\\frac{3}{x}}{-\\frac{1}{x^{2}}}⟧",
+    "titre": "Étape 4 : BH."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 5 : on simplifie.Diviser par une fraction, c'est multiplier par son inverse :⟦\\frac{\\frac{3}{x}}{-\\frac{1}{x^{2}}} = \\frac{3}{x}\\,\\left(-x^{2}\\right) = -3x⟧",
+    "titre": "Étape 5 : on simplifie."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 6 : on remplace.⟦-3x \\to 0^{-}⟧.⟦\\lim_{x\\to 0^{+}} 3x\\,\\ln(x) = 0^{-}⟧✓ Le calcul confirme la prédiction du podium.Limite finie : pas d'asymptote verticale. Le graphe s'arrête au point ⟦(0\\,;\\,0)⟧, qui n'en fait pas partie.",
+    "titre": "Étape 6 : on remplace."
    },
    {
     "classes": [
@@ -890,8 +1053,26 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} 3x\\,\\ln(x) = \\text{« }3 \\cdot +\\infty \\cdot \\ln\\left(+\\infty\\right)\\text{ »} = \\text{« }3 \\cdot +\\infty \\cdot +\\infty\\text{ »} = \\text{« }3 \\cdot +\\infty\\text{ »} = +\\infty\\end{aligned}⟧",
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\displaystyle\\lim_{x\\to +\\infty} 3x\\,\\ln(x)⟧",
     "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.⟦x \\to +\\infty⟧. ⟦\\ln(x) \\to +\\infty⟧. Forme ⟦\\left(+\\infty\\right) \\cdot \\left(+\\infty\\right)⟧ : pas indéterminée!",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2 : on conclut directement.(règle des signes : + · + = +) :⟦\\lim_{x\\to +\\infty} 3x\\,\\ln(x) = \\left(+\\infty\\right) \\cdot \\left(+\\infty\\right) = +\\infty⟧AttentionPas de BH ici : un produit de deux « énormes » n'est jamais indéterminé.",
+    "titre": "Étape 2 : on conclut directement."
    },
    {
     "classes": [
@@ -901,12 +1082,12 @@
      [
       "bilan",
       [
-       "Trou en ⟦(0\\,;\\,0)⟧ : f n'est pas définie en ⟦x = 0⟧, mais ⟦f(x) \\to 0⟧ (pas une asymptote verticale)"
+       "Bord du graphe : f n'est pas définie en ⟦x = 0⟧, mais ⟦f(x) \\to 0⟧ ; le graphe s'arrête au point ⟦(0\\,;\\,0)⟧, qui n'en fait pas partie (pas une asymptote verticale)"
       ]
      ]
     ],
     "tableaux": [],
-    "texte": "Bilan des asymptotesTrou en ⟦(0\\,;\\,0)⟧ : f n'est pas définie en ⟦x = 0⟧, mais ⟦f(x) \\to 0⟧ (pas une asymptote verticale)",
+    "texte": "Bilan des asymptotesBord du graphe : f n'est pas définie en ⟦x = 0⟧, mais ⟦f(x) \\to 0⟧ ; le graphe s'arrête au point ⟦(0\\,;\\,0)⟧, qui n'en fait pas partie (pas une asymptote verticale)",
     "titre": "Bilan des asymptotes"
    },
    {
@@ -919,11 +1100,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 7 / 7"
+  "progression_finale": "Étape 15 / 15"
  },
  "e^(1/x)": {
   "au_depart": {
-   "progression": "Étape 1 / 9",
+   "progression": "Étape 1 / 13",
    "visibles": 1
   },
   "cartes": [
@@ -1115,7 +1296,7 @@
         ],
         [
          "vi",
-         "⟦0⟧⟦+\\infty⟧⟦+\\infty⟧⟦0⟧"
+         "⟦0^{+}⟧⟦+\\infty⟧⟦+\\infty⟧⟦0^{+}⟧"
         ],
         [
          "",
@@ -1130,7 +1311,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{-e^{\\frac{1}{x}}}{x^{2}}⟧ ne s'annule jamais ; valeur interdite : ⟦x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦-1⟧−−⟦e^{\\frac{1}{x}}⟧++⟦x^{2}⟧++⟦f'(x)⟧−−⟦f(x)⟧⟦1⟧⟦\\searrow⟧⟦0⟧⟦+\\infty⟧⟦+\\infty⟧⟦0⟧⟦\\searrow⟧⟦1⟧Aucun extremum local.",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{-e^{\\frac{1}{x}}}{x^{2}}⟧ ne s'annule jamais ; valeur interdite : ⟦x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦-1⟧−−⟦e^{\\frac{1}{x}}⟧++⟦x^{2}⟧++⟦f'(x)⟧−−⟦f(x)⟧⟦1⟧⟦\\searrow⟧⟦0^{+}⟧⟦+\\infty⟧⟦+\\infty⟧⟦0^{+}⟧⟦\\searrow⟧⟦1⟧Aucun extremum local.",
     "titre": "Signe de f' et variationstableau"
    },
    {
@@ -1139,90 +1320,18 @@
      "cond"
     ],
     "listes": [],
-    "tableaux": [
-     [
-      {
-       "cases": [
-        [
-         "lab",
-         "⟦x⟧"
-        ],
-        [
-         "",
-         "⟦-\\infty⟧"
-        ],
-        [
-         "",
-         ""
-        ],
-        [
-         "",
-         "⟦0⟧"
-        ],
-        [
-         "",
-         ""
-        ],
-        [
-         "",
-         "⟦+\\infty⟧"
-        ]
-       ],
-       "classe": ""
-      },
-      {
-       "cases": [
-        [
-         "lab",
-         "⟦x⟧"
-        ],
-        [
-         "",
-         ""
-        ],
-        [
-         "m",
-         "−"
-        ],
-        [
-         "vi",
-         ""
-        ],
-        [
-         "p",
-         "+"
-        ],
-        [
-         "",
-         ""
-        ]
-       ],
-       "classe": "final"
-      }
-     ]
-    ],
-    "texte": "Tableaux de signestableauSigne de ⟦x⟧ :⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦x⟧−+",
-    "titre": "Tableaux de signestableau"
-   },
-   {
-    "classes": [
-     "card",
-     "cond"
-    ],
-    "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} e^{\\frac{1}{x}} = \\text{« }e^{\\dfrac{1}{-\\infty}}\\text{ »} = \\text{« }e^{0^{-}}\\text{ »} = 1\\end{aligned}⟧Asymptote horizontale : ⟦y = 1⟧.",
+    "texte": "⟦x \\to -\\infty⟧limite⟦\\displaystyle\\lim_{x\\to -\\infty} e^{\\frac{1}{x}}⟧",
     "titre": "⟦x \\to -\\infty⟧limite"
    },
    {
     "classes": [
-     "card",
-     "cond"
+     "card"
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} e^{\\frac{1}{x}} = \\text{« }e^{\\dfrac{1}{+\\infty}}\\text{ »} = \\text{« }e^{0^{+}}\\text{ »} = 1\\end{aligned}⟧Asymptote horizontale : ⟦y = 1⟧.",
-    "titre": "⟦x \\to +\\infty⟧limite"
+    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{1}{x} \\to \\dfrac{1}{-\\infty} = 0^{-}⟧. Donc ⟦e^{\\frac{1}{x}} \\to e^{0^{-}} = 1⟧.⟦\\lim_{x\\to -\\infty} e^{\\frac{1}{x}} = 1⟧Asymptote horizontale : ⟦y = 1⟧.",
+    "titre": "Étape 1 : on remplace."
    },
    {
     "classes": [
@@ -1231,8 +1340,55 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to 0⟧limite⟦\\begin{aligned}\\lim_{x\\to 0^{-}} e^{\\frac{1}{x}} = \\text{« }e^{\\dfrac{1}{0^{-}}}\\text{ »} = \\text{« }e^{-\\infty}\\text{ »} = 0 \\qquad \\left(x < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}⟧⟦\\begin{aligned}\\lim_{x\\to 0^{+}} e^{\\frac{1}{x}} = \\text{« }e^{\\dfrac{1}{0^{+}}}\\text{ »} = \\text{« }e^{+\\infty}\\text{ »} = +\\infty \\qquad \\left(x > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}⟧Asymptote verticale : ⟦x = 0⟧ (du côté droit) ; à gauche, ⟦f(x) \\to 0⟧.",
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\displaystyle\\lim_{x\\to +\\infty} e^{\\frac{1}{x}}⟧",
+    "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{1}{x} \\to \\dfrac{1}{+\\infty} = 0^{+}⟧. Donc ⟦e^{\\frac{1}{x}} \\to e^{0^{+}} = 1⟧.⟦\\lim_{x\\to +\\infty} e^{\\frac{1}{x}} = 1⟧Asymptote horizontale : ⟦y = 1⟧.",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to 0⟧limite⟦\\displaystyle\\lim_{x\\to 0^{-}} e^{\\frac{1}{x}}⟧",
     "titre": "⟦x \\to 0⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{1}{x} \\to \\dfrac{1}{0^{-}} = -\\infty⟧. Donc ⟦e^{\\frac{1}{x}} \\to e^{-\\infty} = 0^{+}⟧.⟦\\lim_{x\\to 0^{-}} e^{\\frac{1}{x}} = 0^{+}⟧",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to 0⟧limite⟦\\displaystyle\\lim_{x\\to 0^{+}} e^{\\frac{1}{x}}⟧",
+    "titre": "⟦x \\to 0⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{1}{x} \\to \\dfrac{1}{0^{+}} = +\\infty⟧. Donc ⟦e^{\\frac{1}{x}} \\to e^{+\\infty} = +\\infty⟧.⟦\\lim_{x\\to 0^{+}} e^{\\frac{1}{x}} = +\\infty⟧Asymptote verticale : ⟦x = 0⟧ (du côté droit) ; à gauche, ⟦f(x) \\to 0⟧.",
+    "titre": "Étape 1 : on remplace."
    },
    {
     "classes": [
@@ -1262,11 +1418,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 9 / 9"
+  "progression_finale": "Étape 13 / 13"
  },
  "e^(2x)": {
   "au_depart": {
-   "progression": "Étape 1 / 7",
+   "progression": "Étape 1 / 9",
    "visibles": 1
   },
   "cartes": [
@@ -1389,7 +1545,7 @@
         ],
         [
          "",
-         "⟦0⟧"
+         "⟦0^{+}⟧"
         ],
         [
          "",
@@ -1404,7 +1560,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = 2e^{2x}⟧ ne s'annule jamais.⟦x⟧⟦-\\infty⟧⟦+\\infty⟧⟦2⟧+⟦e^{2x}⟧+⟦f'(x)⟧+⟦f(x)⟧⟦0⟧⟦\\nearrow⟧⟦+\\infty⟧Aucun extremum local.",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 2e^{2x}⟧ ne s'annule jamais.⟦x⟧⟦-\\infty⟧⟦+\\infty⟧⟦2⟧+⟦e^{2x}⟧+⟦f'(x)⟧+⟦f(x)⟧⟦0^{+}⟧⟦\\nearrow⟧⟦+\\infty⟧Aucun extremum local.",
     "titre": "Signe de f' et variationstableau"
    },
    {
@@ -1414,8 +1570,17 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} e^{2x} = \\text{« }e^{-\\infty}\\text{ »} = 0\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "texte": "⟦x \\to -\\infty⟧limite⟦\\displaystyle\\lim_{x\\to -\\infty} e^{2x}⟧",
     "titre": "⟦x \\to -\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.Exposant : ⟦2x \\to -\\infty⟧. Donc ⟦e^{2x} \\to e^{-\\infty} = 0^{+}⟧.⟦\\lim_{x\\to -\\infty} e^{2x} = 0^{+}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "titre": "Étape 1 : on remplace."
    },
    {
     "classes": [
@@ -1424,8 +1589,17 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} e^{2x} = \\text{« }e^{+\\infty}\\text{ »} = +\\infty\\end{aligned}⟧",
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\displaystyle\\lim_{x\\to +\\infty} e^{2x}⟧",
     "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.Exposant : ⟦2x \\to +\\infty⟧. Donc ⟦e^{2x} \\to e^{+\\infty} = +\\infty⟧.⟦\\lim_{x\\to +\\infty} e^{2x} = +\\infty⟧",
+    "titre": "Étape 1 : on remplace."
    },
    {
     "classes": [
@@ -1453,7 +1627,7 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 7 / 7"
+  "progression_finale": "Étape 9 / 9"
  },
  "ln(": {
   "au_depart": {
@@ -1476,7 +1650,7 @@
  },
  "ln(x)/x": {
   "au_depart": {
-   "progression": "Étape 1 / 8",
+   "progression": "Étape 1 / 13",
    "visibles": 1
   },
   "cartes": [
@@ -1731,14 +1905,14 @@
         ],
         [
          "",
-         "⟦0⟧"
+         "⟦0^{+}⟧"
         ]
        ],
        "classe": "variation"
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦\\ln(x) - 1 = 0 \\iff \\ln(x) = 1⟧ (on ajoute 1).⟦\\ln(x) = 1 \\iff x = e⟧⟦f'(x) = \\frac{-\\left(\\ln(x) - 1\\right)}{x^{2}} = 0 \\iff \\ln(x) - 1 = 0 \\iff x = e⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e⟧⟦+\\infty⟧⟦-1⟧−−−⟦\\left(\\ln(x) - 1\\right)⟧−0+⟦x^{2}⟧+++⟦f'(x)⟧+0−⟦f(x)⟧⟦-\\infty⟧⟦-\\infty⟧⟦\\nearrow⟧•⟦\\searrow⟧⟦0⟧maximum local en ⟦x=e⟧ : ⟦f(e)=e^{-1}⟧",
+    "texte": "Signe de f' et variationstableau⟦\\ln(x) - 1 = 0 \\iff \\ln(x) = 1⟧ (on ajoute 1).⟦\\ln(x) = 1 \\iff x = e⟧⟦f'(x) = \\frac{-\\left(\\ln(x) - 1\\right)}{x^{2}} = 0 \\iff \\ln(x) - 1 = 0 \\iff x = e⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e⟧⟦+\\infty⟧⟦-1⟧−−−⟦\\left(\\ln(x) - 1\\right)⟧−0+⟦x^{2}⟧+++⟦f'(x)⟧+0−⟦f(x)⟧⟦-\\infty⟧⟦-\\infty⟧⟦\\nearrow⟧•⟦\\searrow⟧⟦0^{+}⟧maximum local en ⟦x=e⟧ : ⟦f(e)=e^{-1}⟧",
     "titre": "Signe de f' et variationstableau"
    },
    {
@@ -1747,90 +1921,73 @@
      "cond"
     ],
     "listes": [],
-    "tableaux": [
-     [
-      {
-       "cases": [
-        [
-         "lab",
-         "⟦x⟧"
-        ],
-        [
-         "",
-         "⟦-\\infty⟧"
-        ],
-        [
-         "",
-         ""
-        ],
-        [
-         "",
-         "⟦0⟧"
-        ],
-        [
-         "",
-         ""
-        ],
-        [
-         "",
-         "⟦+\\infty⟧"
-        ]
-       ],
-       "classe": ""
-      },
-      {
-       "cases": [
-        [
-         "lab",
-         "⟦x⟧"
-        ],
-        [
-         "",
-         ""
-        ],
-        [
-         "m",
-         "−"
-        ],
-        [
-         "vi",
-         ""
-        ],
-        [
-         "p",
-         "+"
-        ],
-        [
-         "",
-         ""
-        ]
-       ],
-       "classe": "final"
-      }
-     ]
-    ],
-    "texte": "Tableaux de signestableauSigne de ⟦x⟧ :⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦x⟧−+",
-    "titre": "Tableaux de signestableau"
-   },
-   {
-    "classes": [
-     "card",
-     "cond"
-    ],
-    "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to 0^+⟧limite⟦\\begin{aligned}\\lim_{x\\to 0^{+}} \\frac{\\ln(x)}{x} = \\text{« }\\dfrac{\\ln\\left(0^{+}\\right)}{0^{+}}\\text{ »} = \\text{« }\\dfrac{-\\infty}{0^{+}}\\text{ »} = -\\infty \\qquad \\left(x > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}⟧Asymptote verticale : ⟦x = 0⟧.",
+    "texte": "⟦x \\to 0^+⟧limite⟦\\displaystyle\\lim_{x\\to 0^{+}} \\frac{\\ln(x)}{x}⟧",
     "titre": "⟦x \\to 0^+⟧limite"
    },
    {
     "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.Haut : ⟦\\ln(x) \\to -\\infty⟧. Bas : ⟦x \\to 0^{+}⟧. Forme ⟦\\dfrac{-\\infty}{0^{+}}⟧ : pas indéterminée!",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2 : on conclut directement.Un nombre énorme (positif ou négatif) divisé par un nombre minuscule devient encore plus énorme :⟦\\lim_{x\\to 0^{+}} \\frac{\\ln(x)}{x} = \\dfrac{-\\infty}{0^{+}} = -\\infty⟧AttentionIci, il ne faut pas utiliser BH : la forme ⟦\\dfrac{\\infty}{0}⟧ n'est pas indéterminée. C'est exactement pour cela qu'on vérifie toujours la forme en premier.Asymptote verticale : ⟦x = 0⟧.",
+    "titre": "Étape 2 : on conclut directement."
+   },
+   {
+    "classes": [
      "card",
      "cond"
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{\\ln(x)}{x} &= \\text{« }\\dfrac{\\ln\\left(+\\infty\\right)}{+\\infty}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{\\frac{1}{x}}{1} = 0 \\qquad \\left(\\text{haut : } \\left(\\ln(x)\\right)' = \\frac{1}{x} \\; ;\\; \\text{bas : } \\left(x\\right)' = 1\\right)\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\displaystyle\\lim_{x\\to +\\infty} \\frac{\\ln(x)}{x}⟧",
     "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.Haut : ⟦\\ln(x) \\to +\\infty⟧. Bas : ⟦x \\to +\\infty⟧. Forme ⟦\\dfrac{+\\infty}{+\\infty}⟧ : indéterminée.Prédiction avec la règle du podiumAu haut : ⟦\\ln(x)⟧. Au bas : ⟦x⟧. Sur le podium, la puissance bat le logarithme : c'est le bas qui gagne, donc le quotient tend vers 0.Signe : haut > 0, bas > 0, donc quotient > 0.On s'attend à : ⟦0^{+}⟧",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2 : BH.haut : ⟦\\ln(x)⟧⟦\\longrightarrow⟧dérivée : ⟦\\frac{1}{x}⟧bas : ⟦x⟧⟦\\longrightarrow⟧dérivée : ⟦1⟧⟦\\lim_{x\\to +\\infty} \\frac{\\ln(x)}{x} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{\\frac{1}{x}}{1}⟧",
+    "titre": "Étape 2 : BH."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3 : on simplifie.Diviser par une fraction, c'est multiplier par son inverse :⟦\\frac{\\frac{1}{x}}{1} = \\frac{1}{x} \\cdot 1 = \\frac{1}{x}⟧",
+    "titre": "Étape 3 : on simplifie."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4 : on remplace.⟦x \\to +\\infty⟧ et ⟦\\frac{1}{x} \\to \\dfrac{1}{+\\infty} = 0^{+}⟧.⟦\\lim_{x\\to +\\infty} \\frac{\\ln(x)}{x} = 0^{+}⟧✓ Le calcul confirme la prédiction du podium.Asymptote horizontale : ⟦y = 0⟧.",
+    "titre": "Étape 4 : on remplace."
    },
    {
     "classes": [
@@ -1859,7 +2016,7 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 8 / 8"
+  "progression_finale": "Étape 13 / 13"
  },
  "sqrt(x^2-4)": {
   "au_depart": {
@@ -2143,7 +2300,7 @@
  },
  "x*ln(x)": {
   "au_depart": {
-   "progression": "Étape 1 / 7",
+   "progression": "Étape 1 / 15",
    "visibles": 1
   },
   "cartes": [
@@ -2308,7 +2465,7 @@
         ],
         [
          "vi",
-         "⟦0⟧⟦0⟧"
+         "⟦0^{-}⟧⟦0^{-}⟧"
         ],
         [
          "",
@@ -2331,7 +2488,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦\\ln(x) + 1 = 0 \\iff \\ln(x) = -1⟧ (on soustrait 1).⟦\\ln(x) = -1 \\iff x = e^{-1}⟧⟦f'(x) = \\ln(x) + 1 = 0 \\iff x = e^{-1}⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e^{-1}⟧⟦+\\infty⟧⟦\\left(\\ln(x) + 1\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦0⟧⟦0⟧⟦\\searrow⟧•⟦\\nearrow⟧⟦+\\infty⟧minimum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=- \\frac{1}{e}⟧",
+    "texte": "Signe de f' et variationstableau⟦\\ln(x) + 1 = 0 \\iff \\ln(x) = -1⟧ (on soustrait 1).⟦\\ln(x) = -1 \\iff x = e^{-1}⟧⟦f'(x) = \\ln(x) + 1 = 0 \\iff x = e^{-1}⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e^{-1}⟧⟦+\\infty⟧⟦\\left(\\ln(x) + 1\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦0^{-}⟧⟦0^{-}⟧⟦\\searrow⟧•⟦\\nearrow⟧⟦+\\infty⟧minimum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=- \\frac{1}{e}⟧",
     "titre": "Signe de f' et variationstableau"
    },
    {
@@ -2341,8 +2498,62 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to 0^+⟧limite⟦\\begin{aligned}\\lim_{x\\to 0^{+}} x\\,\\ln(x) &= \\text{« }0^{+} \\cdot \\ln\\left(0^{+}\\right)\\text{ »} = \\text{« }0^{+} \\cdot \\left(-\\infty\\right)\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 0^{+}} \\dfrac{\\ln(x)}{\\frac{1}{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to 0^{+}} -x = -0 = 0 \\qquad \\left(\\text{haut : } \\left(\\ln(x)\\right)' = \\frac{1}{x} \\; ;\\; \\text{bas : } \\left(\\frac{1}{x}\\right)' = -\\frac{1}{x^{2}}\\right)\\end{aligned}⟧Limite finie : pas d'asymptote verticale, trou dans le graphique en ⟦(0\\,;\\,0)⟧.",
+    "texte": "⟦x \\to 0^+⟧limite⟦\\displaystyle\\lim_{x\\to 0^{+}} x\\,\\ln(x)⟧",
     "titre": "⟦x \\to 0^+⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.⟦x \\to 0^{+}⟧. ⟦\\ln(x) \\to -\\infty⟧. Forme ⟦0 \\cdot \\left(-\\infty\\right)⟧ : indéterminée.Prédiction avec la règle du podiumProduit : ⟦x \\to 0^{+}⟧ et ⟦\\ln(x) \\to -\\infty⟧. La puissance est plus forte que le logarithme : c'est ⟦x⟧ qui impose sa limite, donc 0.Signe : ⟦x⟧ > 0 et ⟦\\ln(x)⟧ < 0, donc produit < 0.On s'attend à : ⟦0^{-}⟧",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2 : on transforme le produit en quotient.BH ne marche pas sur un produit. On écrit ⟦x = \\frac{1}{\\frac{1}{x}}⟧ :⟦x\\,\\ln(x) = \\frac{\\ln(x)}{\\frac{1}{x}}⟧Pourquoi garder ⟦\\ln(x)⟧ en haut ? Parce que sa dérivée ⟦\\frac{1}{x}⟧ est simple. Si on mettait ⟦\\dfrac{1}{\\ln(x)}⟧ en bas, sa dérivée serait compliquée.",
+    "titre": "Étape 2 : on transforme le produit en quotient."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3 : on vérifie la forme.Haut : ⟦\\ln(x) \\to -\\infty⟧. Bas : ⟦\\frac{1}{x} \\to \\dfrac{1}{0^{+}} = +\\infty⟧. Forme ⟦\\dfrac{-\\infty}{+\\infty}⟧ : indéterminée.",
+    "titre": "Étape 3 : on vérifie la forme."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4 : BH.haut : ⟦\\ln(x)⟧⟦\\longrightarrow⟧dérivée : ⟦\\frac{1}{x}⟧bas : ⟦\\frac{1}{x}⟧⟦\\longrightarrow⟧dérivée : ⟦-\\frac{1}{x^{2}}⟧⟦\\lim_{x\\to 0^{+}} \\frac{\\ln(x)}{\\frac{1}{x}} \\overset{\\text{BH}}{=} \\lim_{x\\to 0^{+}} \\frac{\\frac{1}{x}}{-\\frac{1}{x^{2}}}⟧",
+    "titre": "Étape 4 : BH."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 5 : on simplifie.Diviser par une fraction, c'est multiplier par son inverse :⟦\\frac{\\frac{1}{x}}{-\\frac{1}{x^{2}}} = \\frac{1}{x}\\,\\left(-x^{2}\\right) = -x⟧",
+    "titre": "Étape 5 : on simplifie."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 6 : on remplace.⟦-x \\to 0^{-}⟧.⟦\\lim_{x\\to 0^{+}} x\\,\\ln(x) = 0^{-}⟧✓ Le calcul confirme la prédiction du podium.Limite finie : pas d'asymptote verticale. Le graphe s'arrête au point ⟦(0\\,;\\,0)⟧, qui n'en fait pas partie.",
+    "titre": "Étape 6 : on remplace."
    },
    {
     "classes": [
@@ -2351,8 +2562,26 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} x\\,\\ln(x) = \\text{« }+\\infty \\cdot \\ln\\left(+\\infty\\right)\\text{ »} = \\text{« }+\\infty \\cdot +\\infty\\text{ »} = +\\infty\\end{aligned}⟧",
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\displaystyle\\lim_{x\\to +\\infty} x\\,\\ln(x)⟧",
     "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.⟦x \\to +\\infty⟧. ⟦\\ln(x) \\to +\\infty⟧. Forme ⟦\\left(+\\infty\\right) \\cdot \\left(+\\infty\\right)⟧ : pas indéterminée!",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2 : on conclut directement.(règle des signes : + · + = +) :⟦\\lim_{x\\to +\\infty} x\\,\\ln(x) = \\left(+\\infty\\right) \\cdot \\left(+\\infty\\right) = +\\infty⟧AttentionPas de BH ici : un produit de deux « énormes » n'est jamais indéterminé.",
+    "titre": "Étape 2 : on conclut directement."
    },
    {
     "classes": [
@@ -2362,12 +2591,12 @@
      [
       "bilan",
       [
-       "Trou en ⟦(0\\,;\\,0)⟧ : f n'est pas définie en ⟦x = 0⟧, mais ⟦f(x) \\to 0⟧ (pas une asymptote verticale)"
+       "Bord du graphe : f n'est pas définie en ⟦x = 0⟧, mais ⟦f(x) \\to 0⟧ ; le graphe s'arrête au point ⟦(0\\,;\\,0)⟧, qui n'en fait pas partie (pas une asymptote verticale)"
       ]
      ]
     ],
     "tableaux": [],
-    "texte": "Bilan des asymptotesTrou en ⟦(0\\,;\\,0)⟧ : f n'est pas définie en ⟦x = 0⟧, mais ⟦f(x) \\to 0⟧ (pas une asymptote verticale)",
+    "texte": "Bilan des asymptotesBord du graphe : f n'est pas définie en ⟦x = 0⟧, mais ⟦f(x) \\to 0⟧ ; le graphe s'arrête au point ⟦(0\\,;\\,0)⟧, qui n'en fait pas partie (pas une asymptote verticale)",
     "titre": "Bilan des asymptotes"
    },
    {
@@ -2380,7 +2609,7 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 7 / 7"
+  "progression_finale": "Étape 15 / 15"
  },
  "x/(x^2+1)": {
   "au_depart": {
@@ -3183,7 +3412,7 @@
  },
  "x^2*e^(-x)": {
   "au_depart": {
-   "progression": "Étape 1 / 7",
+   "progression": "Étape 1 / 15",
    "visibles": 1
   },
   "cartes": [
@@ -3476,14 +3705,14 @@
         ],
         [
          "",
-         "⟦0⟧"
+         "⟦0^{+}⟧"
         ]
        ],
        "classe": "variation"
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = -x\\,\\left(x - 2\\right)\\,e^{-x} = 0 \\iff x = 0 \\text{ ou } x - 2 = 0 \\iff x = 0 \\text{ ou } x = 2⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦2⟧⟦+\\infty⟧⟦-1⟧−−−−−⟦x⟧−0+++⟦\\left(x - 2\\right)⟧−−−0+⟦e^{-x}⟧+++++⟦f'(x)⟧−0+0−⟦f(x)⟧⟦+\\infty⟧⟦\\searrow⟧•⟦\\nearrow⟧•⟦\\searrow⟧⟦0⟧minimum local en ⟦x=0⟧ : ⟦f(0)=0⟧maximum local en ⟦x=2⟧ : ⟦f(2)=\\frac{4}{e^{2}}⟧",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = -x\\,\\left(x - 2\\right)\\,e^{-x} = 0 \\iff x = 0 \\text{ ou } x - 2 = 0 \\iff x = 0 \\text{ ou } x = 2⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦2⟧⟦+\\infty⟧⟦-1⟧−−−−−⟦x⟧−0+++⟦\\left(x - 2\\right)⟧−−−0+⟦e^{-x}⟧+++++⟦f'(x)⟧−0+0−⟦f(x)⟧⟦+\\infty⟧⟦\\searrow⟧•⟦\\nearrow⟧•⟦\\searrow⟧⟦0^{+}⟧minimum local en ⟦x=0⟧ : ⟦f(0)=0⟧maximum local en ⟦x=2⟧ : ⟦f(2)=\\frac{4}{e^{2}}⟧",
     "titre": "Signe de f' et variationstableau"
    },
    {
@@ -3493,8 +3722,26 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} x^{2}\\,e^{-x} = \\text{« }+\\infty \\cdot e^{+\\infty}\\text{ »} = \\text{« }+\\infty \\cdot +\\infty\\text{ »} = +\\infty\\end{aligned}⟧",
+    "texte": "⟦x \\to -\\infty⟧limite⟦\\displaystyle\\lim_{x\\to -\\infty} x^{2}\\,e^{-x}⟧",
     "titre": "⟦x \\to -\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.⟦x^{2} \\to \\left(-\\infty\\right)^{2} = +\\infty⟧. ⟦-x \\to +\\infty\\text{, donc }e^{-x} \\to +\\infty⟧. Forme ⟦\\left(+\\infty\\right) \\cdot \\left(+\\infty\\right)⟧ : pas indéterminée!",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2 : on conclut directement.(règle des signes : + · + = +) :⟦\\lim_{x\\to -\\infty} x^{2}\\,e^{-x} = \\left(+\\infty\\right) \\cdot \\left(+\\infty\\right) = +\\infty⟧AttentionPas de BH ici : un produit de deux « énormes » n'est jamais indéterminé.",
+    "titre": "Étape 2 : on conclut directement."
    },
    {
     "classes": [
@@ -3503,8 +3750,62 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} x\\,e^{-x} &= \\text{« }+\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }+\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x}{e^{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} e^{-x} = \\text{« }e^{-\\infty}\\text{ »} = 0 \\qquad \\left(\\text{haut : } \\left(x\\right)' = 1 \\; ;\\; \\text{bas : } \\left(e^{x}\\right)' = e^{x}\\right)\\end{aligned}⟧⟦\\begin{aligned}\\lim_{x\\to +\\infty} x^{2}\\,e^{-x} &= \\text{« }+\\infty \\cdot e^{-\\infty}\\text{ »} = \\text{« }+\\infty \\cdot 0^{+}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}}{e^{x}} \\qquad \\left(\\text{on écrit un quotient de la forme } « \\infty/\\infty »\\right) \\\\ &\\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} 2x\\,e^{-x} = \\text{« }2 \\cdot +\\infty \\cdot 0^{+}\\text{ »} = 0 \\qquad \\left(\\text{haut : } \\left(x^{2}\\right)' = 2x \\; ;\\; \\text{bas : } \\left(e^{x}\\right)' = e^{x}\\right)\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\displaystyle\\lim_{x\\to +\\infty} x^{2}\\,e^{-x}⟧",
     "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.⟦x^{2} \\to \\left(+\\infty\\right)^{2} = +\\infty⟧. ⟦-x \\to -\\infty\\text{, donc }e^{-x} \\to 0^{+}⟧. Forme ⟦\\left(+\\infty\\right) \\cdot 0⟧ : indéterminée.Prédiction avec la règle du podiumProduit : ⟦x^{2} \\to +\\infty⟧ et ⟦e^{-x} \\to 0^{+}⟧. L'exponentielle bat la puissance : c'est ⟦e^{-x}⟧ qui impose sa limite, donc 0.Signe : ⟦x^{2}⟧ > 0 et ⟦e^{-x}⟧ > 0, donc produit > 0.On s'attend à : ⟦0^{+}⟧",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2 : on transforme le produit en quotient.BH ne marche pas sur un produit. On écrit ⟦e^{-x} = \\frac{1}{e^{x}}⟧ :⟦x^{2}\\,e^{-x} = \\frac{x^{2}}{e^{x}}⟧",
+    "titre": "Étape 2 : on transforme le produit en quotient."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3 : on vérifie la forme.Haut : ⟦x^{2} \\to \\left(+\\infty\\right)^{2} = +\\infty⟧. Bas : ⟦e^{x} \\to +\\infty⟧. Forme ⟦\\dfrac{+\\infty}{+\\infty}⟧ : indéterminée.",
+    "titre": "Étape 3 : on vérifie la forme."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4 : BH (1re fois).haut : ⟦x^{2}⟧⟦\\longrightarrow⟧dérivée : ⟦2x⟧bas : ⟦e^{x}⟧⟦\\longrightarrow⟧dérivée : ⟦e^{x}⟧⟦\\lim_{x\\to +\\infty} \\frac{x^{2}}{e^{x}} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{2x}{e^{x}}⟧Forme ⟦\\dfrac{+\\infty}{+\\infty}⟧ : encore indéterminée.",
+    "titre": "Étape 4 : BH (1re fois)."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 5 : BH (2e fois).haut : ⟦2x⟧⟦\\longrightarrow⟧dérivée : ⟦2⟧bas : ⟦e^{x}⟧⟦\\longrightarrow⟧dérivée : ⟦e^{x}⟧⟦\\lim_{x\\to +\\infty} \\frac{2x}{e^{x}} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{2}{e^{x}}⟧",
+    "titre": "Étape 5 : BH (2e fois)."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 6 : on remplace.⟦e^{x} \\to +\\infty⟧ et ⟦\\frac{2}{e^{x}} \\to \\dfrac{2}{+\\infty} = 0^{+}⟧.⟦\\lim_{x\\to +\\infty} x^{2}\\,e^{-x} = 0^{+}⟧✓ Le calcul confirme la prédiction du podium.Asymptote horizontale : ⟦y = 0⟧.",
+    "titre": "Étape 6 : on remplace."
    },
    {
     "classes": [
@@ -3532,7 +3833,7 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 7 / 7"
+  "progression_finale": "Étape 15 / 15"
  },
  "x^2-4x+3": {
   "au_depart": {

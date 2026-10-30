@@ -8,7 +8,7 @@ import etude_complete as ec
 import resoudre_dv as rdv
 import resoudre_la as rla
 import resoudre_ec as rec
-from aides_sortie import manquantes, valide, blocs_de_type
+from aides_sortie import manquantes, valide, blocs_de_type, titres_etude
 from cas import entrees_page, CAS_LIMITES
 
 ENTREES = list(dict.fromkeys(entrees_page("etude-complete") + CAS_LIMITES["etude-complete"]))
@@ -44,7 +44,7 @@ class TestResoudreEC(unittest.TestCase):
                     attendu.append("Signe de f' et variations")
             if lim.get("tableaux_signe"):
                 attendu.append("Tableaux de signes")
-            attendu += ["Limite"] * len(lim["etudes"]) + ["Bilan des asymptotes", "Graphique"]
+            attendu += [t for e in lim["etudes"] for t in titres_etude(e)] + ["Bilan des asymptotes", "Graphique"]
             with self.subTest(entree=entree):
                 self.assertEqual(titres(rec.resoudre(entree)), attendu)
 

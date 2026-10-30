@@ -73,12 +73,22 @@ class TestVocabulaireQ7(unittest.TestCase):
                 self.assertNotIn("saut", " ".join(textes).lower().split())
 
     def test_formulation_trou(self):
-        for entree in ["(e^x-1)/x", "(x^2-1)/(x-1)", "x*ln(x)"]:
+        for entree in ["(e^x-1)/x", "(x^2-1)/(x-1)"]:          # point INTÉRIEUR de l'ensemble de définition : un trou
             with self.subTest(f=entree):
                 _, textes, genres = textes_et_genres(entree)
                 self.assertIn("trou", genres)
                 dernier = next(t for t in textes if t.startswith("Limite finie"))
                 self.assertIn("pas d'asymptote verticale, trou dans le graphique en", dernier)
+
+    def test_formulation_du_bord(self):
+        """R19 (refonte 3M) : au bord de l'ensemble de définition, pas de « trou » : le graphe s'arrête au point."""
+        for entree in ["x*ln(x)", "x^2*ln(x)"]:
+            with self.subTest(f=entree):
+                _, textes, genres = textes_et_genres(entree)
+                dernier = next(t for t in textes if t.startswith("Limite finie"))
+                self.assertIn("Le graphe s'arrête au point", dernier)
+                self.assertIn("qui n'en fait pas partie", dernier)
+                self.assertNotIn("trou", dernier)
 
     def test_formulation_sans_limite(self):
         _, textes, genres = textes_et_genres("x/sqrt(x^2)")

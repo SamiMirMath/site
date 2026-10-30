@@ -18,7 +18,7 @@ from test_redaction_limites import TestStyle
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "donnees"))
 from corpus_limites_3m import CAS, ETUDES, PAS_PRIS_EN_CHARGE  # noqa: E402
 
-MOTS = ("croissance comparée", "podium", "limite de référence")
+MOTS = ("croissance comparée", "limite de référence")
 ENTREES = list(dict.fromkeys(
     entrees_page("limites-asymptotes") + CAS_LIMITES["limites-asymptotes"] + TestStyle.CORPUS
     + [c.saisie for c in CAS if c.id not in PAS_PRIS_EN_CHARGE] + [e[1] for e in ETUDES]))
@@ -36,11 +36,31 @@ def chaines(o):
             yield from chaines(v)
 
 
+def blocs_hors_prediction(o):
+    """Les chaînes d'une sortie, hors celles des encadrés de prédiction et des lignes de confirmation (refonte 3M, 30.10.2026 : le corrigé annonce
+    le résultat attendu avec le podium, dans un encadré, puis le confirme par le calcul ; le podium ne justifie jamais une égalité)."""
+    if isinstance(o, str):
+        yield o
+    elif isinstance(o, dict):
+        if o.get("type") == "encadre" and o.get("genre") == "prediction":
+            return
+        if o.get("type") == "texte" and o.get("style") == "confirme":
+            return
+        for k, v in o.items():
+            if not (k == "html" and o.get("type") == "descente"):      # le texte à plat d'une descente contient ses encadrés
+                yield from blocs_hors_prediction(v)
+    elif isinstance(o, (list, tuple)):
+        for v in o:
+            yield from blocs_hors_prediction(v)
+
+
 class TestAucuneJustificationParLePodium(unittest.TestCase):
     def verifier(self, sortie, nom):
         for t in chaines(sortie):
             for mot in MOTS:
                 self.assertNotIn(mot, t, nom)
+        for t in blocs_hors_prediction(sortie):
+            self.assertNotIn("podium", t, nom)
 
     def test_outil_limites(self):
         for entree in ENTREES:

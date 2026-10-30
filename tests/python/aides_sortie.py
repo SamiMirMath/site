@@ -40,6 +40,8 @@ def chaines(v, exclure=()):
     if isinstance(v, str):
         return [v]
     if isinstance(v, dict):
+        if v.get("type") == "descente":          # rédaction descendante des limites : ses blocs deviennent des cartes « Étape n » (testées à part)
+            return []
         return [s for k, x in v.items() if k not in exclure for s in chaines(x, exclure)]
     if isinstance(v, (list, tuple)):
         return [s for x in v for s in chaines(x, exclure)]
@@ -72,3 +74,22 @@ def en_json(sortie):
 def valide(test, sortie):
     test.assertEqual(so.valider(sortie), [])
     en_json(sortie)
+
+
+def titres_etude(etude):
+    """Titres des cartes que produit une borne d'une étude de limites : « Limite » seule (ancienne rédaction) ou, pour chaque rédaction
+    descendante, « Limite » (l'énoncé) puis « Étape n : titre. » ; les lignes qui suivent rejoignent la dernière étape."""
+    items = etude["etapes"]
+    if not any(i.get("type") == "descente" for i in items):
+        return ["Limite"]
+    out, attente = [], False
+    for it in items:
+        if it.get("type") == "descente":
+            if attente:
+                out.append("Limite")
+                attente = False
+            out.append("Limite")
+            out += [f"Étape {i} : {e['titre']}." for i, e in enumerate(it["etapes"], 1)]
+        elif not (out and out[-1].startswith("Étape")):
+            attente = True
+    return out + (["Limite"] if attente else [])

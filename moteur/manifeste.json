@@ -22,14 +22,14 @@
     },
     "limites-asymptotes": {
       "module": "resoudre_la",
-      "fichiers": ["ensemble-definition/ensemble_def.py", "moteur/noyau.py", "moteur/sortie.py", "limites-asymptotes/limites_asymptotes.py",
+      "fichiers": ["ensemble-definition/ensemble_def.py", "moteur/noyau.py", "moteur/sortie.py", "limites-asymptotes/limites_asymptotes.py", "limites-asymptotes/redaction_bh.py",
                    "limites-asymptotes/resoudre_la.py"],
       "fonctions": ["resoudre", "apercu"]
     },
     "etude-complete": {
       "module": "resoudre_ec",
       "fichiers": ["ensemble-definition/ensemble_def.py", "moteur/noyau.py", "moteur/sortie.py", "derivee-variations/derivee_variations.py",
-                   "derivee-variations/resoudre_dv.py", "limites-asymptotes/limites_asymptotes.py", "limites-asymptotes/resoudre_la.py",
+                   "derivee-variations/resoudre_dv.py", "limites-asymptotes/limites_asymptotes.py", "limites-asymptotes/redaction_bh.py", "limites-asymptotes/resoudre_la.py",
                    "etude-complete/etude_complete.py", "etude-complete/resoudre_ec.py"],
       "fonctions": ["resoudre", "apercu", "fenetre", "etudier"],
       "anciennes": ["etudier"]

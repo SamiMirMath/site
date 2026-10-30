@@ -134,9 +134,8 @@ class TestValeursDeLOutil(unittest.TestCase):
                 else:
                     self.assertAlmostEqual(v, float(sp.N(attendu)), places=9, msg=tex)
 
-    @unittest.expectedFailure
     def test_signe_zero_plus_ou_moins_ecrit(self):
-        """Étape 5 du chantier : la valeur 0 s'écrit 0⁺ ou 0⁻ comme dans le corrigé (aujourd'hui : 0 sans signe)."""
+        """Refonte de la rédaction (30.10.2026) : la valeur 0 s'écrit 0⁺ ou 0⁻ comme dans le corrigé (R17), cas du corpus compris."""
         for cas in CAS:
             if cas.signe0 is None or cas.id in PAS_PRIS_EN_CHARGE:
                 continue

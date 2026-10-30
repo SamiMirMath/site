@@ -740,7 +740,7 @@ class TestComportement(unittest.TestCase):
                 page.taille(1100)
 
     def test_limites_exemples_et_rappel_a_360_px(self):
-        """Chantier 3M, étape 1 (29.10.2026) : chaque exemple de la page Limites (cas du corpus de l'enseignant, rédigés par BH)
+        """Chantier 3M (29-30.10.2026) : chaque exemple de la page Limites (cas du corpus de l'enseignant, rédigés comme le corrigé : cartes « Étape n »)
         tient à 360 px — ni la page ni un élément des cartes ne défile horizontalement — sans phrase de repli ni mot « croissance comparée » ;
         le nouveau « Rappel de la méthode » (mode d'emploi en 7 points) aussi. Le temps de chaque exemple dans Pyodide reste raisonnable."""
         if "limites-asymptotes" not in CHOISIS:
@@ -777,7 +777,7 @@ class TestComportement(unittest.TestCase):
                 self.assertLessEqual(d[0], d[1], (e, d))
                 self.assertEqual(d[2], [], (e, d))
         print("\nTemps des exemples de la page Limites (Pyodide) :", {k: round(v, 1) for k, v in temps.items()})
-        self.assertLess(max(temps.values()), 45, temps)
+        self.assertLess(max(temps.values()), 6, temps)          # plafond de la refonte : 6 s par fonction (Pyodide, 30.10.2026)
         page.taille(1100)
 
     def test_soc13_page_delai_depasse_puis_relance(self):

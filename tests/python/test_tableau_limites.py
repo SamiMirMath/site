@@ -80,6 +80,11 @@ class TestIndeterminee(unittest.TestCase):
         self.assertEqual(v["non_determinees"], ["2^{-}", INF_P])
 
 
+def sans_signe_de_zero(tex):
+    """Le tableau de variations écrit 0⁺ / 0⁻ (R17, refonte 3M) là où la phrase de l'asymptote écrit y = 0."""
+    return "0" if tex in ("0^{+}", "0^{-}") else tex
+
+
 class TestMemeSourceQueLimites(unittest.TestCase):
     def test_sortie_de_l_outil_limites_inchangee(self):  # EC-12 (partie Limites)
         self.assertNotIn("limites_bornes", la.etudier("1/(x-2)"))
@@ -105,10 +110,10 @@ class TestMemeSourceQueLimites(unittest.TestCase):
                             attendu = a.get(cote + "_tex", a.get("valeur_tex"))
                             if attendu is not None and c[cote] is not None:
                                 attendu = "?" if "non déterminée" in attendu else attendu
-                                self.assertEqual(c[cote], attendu)
+                                self.assertEqual(sans_signe_de_zero(c[cote]), attendu)
                                 verifiees += 1
                     elif "valeur_tex" in a:
-                        self.assertEqual(v["moins_inf" if "-" in a["ou"] else "plus_inf"], a["valeur_tex"])
+                        self.assertEqual(sans_signe_de_zero(v["moins_inf" if "-" in a["ou"] else "plus_inf"]), a["valeur_tex"])
                         verifiees += 1
         self.assertGreater(verifiees, 40)
 

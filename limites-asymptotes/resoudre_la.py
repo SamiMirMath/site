@@ -34,6 +34,33 @@ def carte_etude(et):
     return so.carte("Limite", _blocs(et["etapes"]), badge="limite", titre_tex=et["ou"])
 
 
+def cartes_etude(et):
+    """Cartes d'une borne : une seule carte « Limite » (ancienne rédaction) ou, pour une rédaction descendante, l'énoncé puis
+    une carte « Étape n : titre. » par étape ; les lignes qui suivent (asymptote…) rejoignent la dernière carte."""
+    items = et["etapes"]
+    if not any(it.get("type") == "descente" for it in items):
+        return [carte_etude(et)]
+    cartes, reste = [], []
+
+    def vider():
+        if reste:
+            cartes.append(so.carte("Limite", _blocs(reste), badge="limite", titre_tex=et["ou"]))
+            reste.clear()
+
+    for it in items:
+        if it.get("type") == "descente":
+            vider()
+            cartes.append(so.carte("Limite", [so.texte("\\[" + it["enonce_tex"] + "\\]", style="etape")], badge="limite", titre_tex=et["ou"]))
+            for i, e in enumerate(it["etapes"], 1):
+                cartes.append(so.carte(f"Étape {i} : {e['titre']}.", e["blocs"]))
+        elif cartes and cartes[-1]["titre"].startswith("Étape"):
+            cartes[-1]["blocs"] += _blocs([it])
+        else:
+            reste.append(it)
+    vider()
+    return cartes
+
+
 def ligne_asymptote(a):
     m = lambda t: "\\(" + t + "\\)"
     g = a["genre"]
@@ -49,6 +76,10 @@ def ligne_asymptote(a):
         if a.get("droite_tex"):
             bouts.append(m("\\lim_{x\\to " + p + "^+} f(x) = " + a["droite_tex"]))
         return f"Asymptote verticale : {m('x = ' + p)} ({' ; '.join(bouts)})"
+    if g == "trou" and a.get("bord"):
+        p, v = a["point_tex"], a["valeur_tex"]
+        return (f"Bord du graphe : f n'est pas définie en {m('x = ' + p)}, mais {m('f(x) \\to ' + v)} ; le graphe s'arrête au point "
+                f"{m('(' + p + '\\,;\\,' + v + ')')}, qui n'en fait pas partie (pas une asymptote verticale)")
     if g == "trou":
         p, v = a["point_tex"], a["valeur_tex"]
         return (f"Trou en {m('(' + p + '\\,;\\,' + v + ')')} : f n'est pas définie en {m('x = ' + p)}, "
@@ -75,7 +106,8 @@ def resoudre(entree):
     cartes = [carte_rappel(r, " — détail dans l'outil « Ensemble de définition ».")]
     if r.get("tableaux_signe"):
         cartes.append(carte_tableaux(r["tableaux_signe"]))
-    cartes += [carte_etude(et) for et in r["etudes"]]
+    for et in r["etudes"]:
+        cartes += cartes_etude(et)
     cartes.append(carte_bilan(r["asymptotes"]))
     return so.sortie_ok(enonce(r), cartes)
 
