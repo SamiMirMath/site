@@ -1,0 +1,50 @@
+/* Composants de mise en page fluide, communs à toutes les pages outils (règle : docs/specifications/socle-commun.md, « Mise en page fluide »).
+   Ajouts seulement : cette feuille ne modifie aucune règle de style.css et se charge seule (le simplexe ne charge pas style.css).
+   Aucune largeur d'écran en pixels : les largeurs sont en ch, en rem ou en clamp(), les changements de disposition se font par
+   retour à la ligne (flex-wrap) ou par @container. Les couleurs viennent des variables de :root de la page (--card, --border, --muted, --bad, --accent…). */
+
+/* Place réservée au bouton flottant (identique à style.css) */
+:root{ --flottant-h:48px; --flottant-place:calc(var(--flottant-h) + 32px + env(safe-area-inset-bottom, 0px)); }
+
+/* ---- Utilitaires de mise en page fluide ---- */
+/* Bloc insécable : ses éléments ne se séparent jamais à la ligne ; c'est le bloc entier qui passe à la ligne suivante. */
+.insecable{display:inline-flex;align-items:center;gap:clamp(2px,1vw,6px);white-space:nowrap;max-width:100%}
+/* Rangée qui passe à la ligne d'elle-même, entre ses blocs et jamais au milieu d'un bloc. */
+.flux{display:flex;flex-wrap:wrap;align-items:center;gap:clamp(4px,1.5vw,10px)}
+/* Conteneur de requêtes : ses descendants s'adaptent à SA largeur, pas à celle de la fenêtre. */
+.conteneur-fluide{container-type:inline-size}
+/* Grand cadre autour de cartes : sur un conteneur étroit, il perd son cadre (pas de carte dans une carte). */
+.cadre-fluide{border:1px solid var(--border);border-radius:12px;padding:clamp(6px,2vw,14px);background:var(--card)}
+@container (max-width: 34rem){
+  .cadre-fluide{border:0;border-radius:0;padding:0;background:none}
+}
+
+/* ---- Champ précédé d'un bouton de signe : un seul bloc, bordure commune, coins arrondis à l'extérieur ---- */
+.champ-signe{display:inline-flex;align-items:stretch;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--card)}
+.champ-signe:focus-within{outline:2px solid var(--accent);outline-offset:1px}
+.champ-signe>button{flex:none;box-sizing:border-box;width:2rem;min-height:44px;padding:0;border:0;border-right:1px solid var(--border);border-radius:0;
+  background:var(--eq);color:var(--muted);font-size:1.3rem;font-weight:700;line-height:1}
+.champ-signe>button[data-signe="-"]{color:var(--bad)}
+.champ-signe>button:focus-visible{outline:2px solid var(--accent);outline-offset:-3px}
+.champ-signe>input{box-sizing:content-box;width:4.5ch;min-height:44px;padding:0 .45em;border:0;border-radius:0;background:transparent;
+  text-align:right;font-size:max(16px,1em)}                 /* ≥ 16 px : pas de zoom automatique sur iOS */
+.champ-signe>input:focus-visible{outline:0}
+.champ-signe.membre>input{width:7ch}
+
+/* ---- Onglets (role="tablist", flèches du clavier : commun/composants.js) ---- */
+.onglets{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.onglets>[role="tab"]{min-height:44px;padding:0 clamp(10px,3vw,16px)}
+.onglets>[role="tab"][aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+@media (prefers-color-scheme: dark){.onglets>[role="tab"][aria-selected="true"]{color:#0b1220}}
+.onglets>[role="tab"]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+[role="tabpanel"][hidden]{display:none}
+
+/* ---- Carte d'étape ---- */
+.carte-etape{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:clamp(10px,3vw,18px);margin-bottom:12px}
+
+/* ---- Bouton flottant (« Étape suivante ») : fixé en bas à droite, hors impression ---- */
+.bouton-flottant{position:fixed;z-index:50;right:calc(16px + env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  min-height:max(44px,var(--flottant-h));min-width:44px;padding:0 24px;font-size:1.05rem;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+.bouton-flottant[hidden]{display:none}
+.bouton-flottant:focus-visible{outline:3px solid var(--fg);outline-offset:3px}
+@media print{ .bouton-flottant{display:none !important} }
