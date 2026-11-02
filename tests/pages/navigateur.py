@@ -252,17 +252,18 @@ class Page:
 
     def toucher(self, selecteur):
         """Appui d'un doigt (touchStart puis touchEnd) au centre de l'élément, après l'avoir amené à l'écran ; le navigateur en tire le clic
-        (page ouverte avec `tactile=True`)."""
-        # défilement immédiat (il interrompt un défilement doux en cours, p. ex. vers la carte qui vient d'apparaître), puis on attend que la position soit stable
-        position = f"(() => {{ const r = document.querySelector({selecteur!r}).getBoundingClientRect(); return [r.x + r.width / 2, r.y + r.height / 2]; }})()"
+        (page ouverte avec `tactile=True`). On attend que la page soit immobile avant d'appuyer : un défilement doux en cours (vers la carte qui vient
+        d'apparaître) fait avaler l'appui par le navigateur, ce que l'élève ne fait jamais (il ne touche pas pendant que la page défile)."""
+        position = (f"(() => {{ const r = document.querySelector({selecteur!r}).getBoundingClientRect(); "
+                    "return [scrollX, scrollY, r.x + r.width / 2, r.y + r.height / 2, document.documentElement.scrollHeight]; })()")
         self.evaluer(f"document.querySelector({selecteur!r}).scrollIntoView({{block: 'center', behavior: 'instant'}})")
-        x, y = self.evaluer(position)
-        for _ in range(40):
+        derniere, calme, fin = None, 0, time.time() + 10
+        while calme < 6 and time.time() < fin:                      # 6 mesures identiques de suite, à 50 ms : 0,3 s sans bouger
             time.sleep(0.05)
-            suivante = self.evaluer(position)
-            if suivante == [x, y]:
-                break
-            x, y = suivante
+            mesure = self.evaluer(position)
+            calme = calme + 1 if mesure == derniere else 0
+            derniere = mesure
+        x, y = derniere[2], derniere[3]
         self.appel("Input.dispatchTouchEvent", type="touchStart", touchPoints=[{"x": x, "y": y}])
         self.appel("Input.dispatchTouchEvent", type="touchEnd", touchPoints=[])
 

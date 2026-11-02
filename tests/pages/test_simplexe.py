@@ -15,6 +15,7 @@ from navigateur import Navigateur
 CHOISI = not os.environ.get("OUTILS") or "simplexe" in os.environ["OUTILS"].split(",")
 
 CHAMPS = "[...document.querySelectorAll('#objRow input, #consRows input')]"
+ANDROID = ("Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36", "Linux armv8l")
 LARGEURS = (360, 1100)
 
 
@@ -66,12 +67,12 @@ class TestSimplexe(unittest.TestCase):
     def tearDownClass(cls):
         cls.nav.__exit__(None, None, None)
 
-    def ouvrir(self, largeur=1100, requete="", elargir=1.0):
+    def ouvrir(self, largeur=1100, requete="", elargir=1.0, tactile=False):
         """`elargir` > 1 : tous les textes des canvas mesurent `elargir` fois plus large (la police de la CI sous Linux est plus large que celle du Mac)."""
         script = None if elargir == 1.0 else (
             "(() => { const m = CanvasRenderingContext2D.prototype.measureText; CanvasRenderingContext2D.prototype.measureText = function (s) {"
             f" const r = m.call(this, s); return {{ width: r.width * {elargir}, actualBoundingBoxLeft: r.actualBoundingBoxLeft, actualBoundingBoxRight: r.actualBoundingBoxRight }}; }}; }})()")
-        page = self.nav.ouvrir(f"simplexe/index.html{requete}", script_initial=script)
+        page = self.nav.ouvrir(f"simplexe/index.html{requete}", script_initial=script, tactile=tactile, agent=ANDROID if tactile else None)
         page.attendre("document.readyState === 'complete' && document.querySelector('#objRow input')", 30)
         page.taille(largeur, 800)
         return page
@@ -714,6 +715,74 @@ class TestSimplexe(unittest.TestCase):
             self.assertEqual(page.evaluer("document.querySelector('#ongletsAlgo [aria-selected=true]').dataset.mode"), attendu)
             self.assertEqual(page.evaluer("document.activeElement.dataset.mode"), attendu)
         self.assertEqual(page.evaluer("ST.hist.length"), 1)                                           # les flèches n'ont avancé aucun pivot
+
+
+    # ---------- F. pavé numérique de l'écran tactile (chantier « Clavier intégré », 02.11.2026) ----------
+    PAVE_VISIBLE = "!document.querySelector('.pave').hidden"
+    AU_DESSUS = """(f => { const r = f.getBoundingClientRect(), p = document.querySelector('.pave').getBoundingClientRect(); return r.top >= 0 && r.bottom <= p.top + 0.5; })"""
+
+    def valeur_S(self, i):
+        """Valeur de S (état du formulaire) pour le champ n° i dans l'ordre de lecture : f, puis chaque contrainte (coefficients, second membre), 2 variables."""
+        return f"(i => {{ const n = S.n; if (i < n) return S.f[i]; const k = i - n, r = S.rows[Math.floor(k / (n + 1))], c = k % (n + 1); return c < n ? r.a[c] : r.b; }})({i})"
+
+    def pave_ouvrir(self, page, i):
+        page.evaluer(f"{CHAMPS}.forEach((c, k) => c.dataset.i = k)")
+        page.toucher(f'.champ-signe > input[data-i="{i}"]')
+        page.attendre(self.PAVE_VISIBLE, 5)
+
+    def test_f_probleme_2d_rempli_uniquement_avec_le_pave_et_suivant(self):
+        """Tactile, 390 px (écran bas : le pavé couvre la moitié) : f = 3x₁ + 2x₂ et trois contraintes, dont « 1,5 » et « 7/2 », tapés uniquement avec le pavé et « Suivant ▶ ».
+        Après chaque touche, la valeur du champ ET l'état S sont à jour ; le champ actif reste au-dessus du pavé ; après le dernier champ le pavé se ferme ; la solution est la bonne."""
+        valeurs = ["3", "2", "1", "1", "4", "1", "3", "6", "1,5", "1", "7/2"]
+        page = self.ouvrir(390, tactile=True)
+        page.taille(390, 420)
+        self.assertEqual(page.evaluer("document.querySelectorAll('.pave').length"), 1)
+        self.assertTrue(page.evaluer("document.querySelector('.pave').hidden"), "le pavé n'apparaît qu'au focus d'un champ")
+        self.assertEqual(page.evaluer(f"{CHAMPS}.every(c => c.getAttribute('inputmode') === 'none')"), True)
+        self.pave_ouvrir(page, 0)
+        for i, valeur in enumerate(valeurs):
+            page.attendre(f"document.activeElement.dataset.i === '{i}'", 5)
+            page.attendre(f"({self.AU_DESSUS})(document.activeElement)", 5)
+            courant = ""
+            for car in valeur:
+                page.toucher(f'.pave button[data-t="{car}"]')
+                courant += car
+                page.attendre(f"{CHAMPS}[{i}].value === {json.dumps(courant)} && {self.valeur_S(i)} === {json.dumps(courant)}", 10)       # champ ET état S
+            page.toucher(".pave .suivant")
+        page.attendre("document.querySelector('.pave').hidden", 5)
+        self.assertEqual(page.evaluer("document.querySelector('.avec-pave')"), None)                    # la place réservée en bas de la page est rendue
+        self.assertEqual(page.evaluer(f"{CHAMPS}.map(c => c.value)"), valeurs)
+        self.assertEqual(page.evaluer("S.f.slice(0, 2).concat(S.rows.flatMap(r => r.a.slice(0, 2).concat(r.b)))"), valeurs)
+        opt = optimum_exact([Fraction(3), Fraction(2)], [([Fraction(1), Fraction(1)], "<=", Fraction(4)), ([Fraction(1), Fraction(3)], "<=", Fraction(6)),
+                                                         ([Fraction(3, 2), Fraction(1)], "<=", Fraction(7, 2))], "max")
+        page.toucher("#launch")
+        page.attendre("!document.querySelector('#app').hidden", 10)
+        self.assertEqual(page.evaluer("document.querySelector('#err').textContent"), "")
+        self.controle_solution_complete(page, 390, False, format_nb(opt))
+
+    def test_f_le_signe_garde_le_pave_ouvert_et_un_toucher_dehors_ou_le_lancement_le_ferme(self):
+        page = self.ouvrir(390, tactile=True)
+        self.pave_ouvrir(page, 0)
+        page.toucher('.champ-signe > button')                                                  # le bouton de signe fait partie du champ : le pavé reste
+        page.attendre("document.querySelector('.champ-signe > button').dataset.signe === '-'", 5)
+        self.assertTrue(page.evaluer(self.PAVE_VISIBLE))
+        page.toucher('.pave button[data-t="5"]')                                              # la touche écrit dans le champ du signe, même sans focus
+        page.attendre(f"{CHAMPS}[0].value === '5' && {self.valeur_S(0)} === '-5'", 10)         # signe moins + 5 = « -5 » dans l'état
+        page.toucher("#hint")                                                                  # hors du pavé et des champs
+        page.attendre("document.querySelector('.pave').hidden", 5)
+        self.pave_ouvrir(page, 3)
+        self.assertTrue(page.evaluer(self.PAVE_VISIBLE))
+        self.clic(page, "#launch")                                                             # le lancement ferme le pavé (ici : message « saisie vide », le calcul n'a pas lieu)
+        self.assertTrue(page.evaluer("document.querySelector('.pave').hidden"))
+
+    def test_f_pas_de_pave_sur_ordinateur(self):
+        page = self.ouvrir(390)
+        self.assertEqual(page.evaluer("matchMedia('(pointer: coarse)').matches"), False)
+        self.assertEqual(page.evaluer("document.querySelectorAll('.pave').length"), 0)
+        self.assertEqual(page.evaluer(f"{CHAMPS}.every(c => c.getAttribute('inputmode') === 'decimal' && !c.readOnly)"), True)
+        self.champ(page, '#objRow input[data-j="0"]', "3")                                      # la saisie au clavier d'ordinateur est inchangée
+        self.assertEqual(page.evaluer("S.f[0]"), "3")
+        self.assertEqual(page.evaluer("document.querySelector('.pave')"), None)
 
 
 if __name__ == "__main__":

@@ -403,6 +403,7 @@ const formulaireVide=()=>({meth:"simplexe",n:2,sens:"max",f:["","",""],rows:[0,1
 let S=formulaireVide();                                          // état du formulaire
 let P=null, R=null, scene=null;                                  // problème, région, scène
 let ST=null;                                                     // état de la résolution
+let pave=null;                                                   // pavé numérique de l'écran tactile (Composants.monterPave), null sur ordinateur
 const MAXL=8, PIVOTS_MAX=500;                                    // contraintes du formulaire ; plafond de pivots (même valeur que resoudre())
 const $=id=>document.getElementById(id);
 
@@ -413,7 +414,7 @@ const $=id=>document.getElementById(id);
 /* Le bouton de signe et le champ forment un seul bloc (Composants.champSigne) ; avec le nom de la variable, le terme ne se coupe jamais à la ligne. */
 function champNombre(valeur,quoiSigne,quoi,enregistrer,suffixe,attrs,membre){
   const t=document.createElement('span'); t.className='terme insecable';
-  const cs=Composants.champSigne({valeur,signe:quoiSigne,nom:quoi,membre,attrs,surChange:enregistrer});
+  const cs=Composants.champSigne({valeur,signe:quoiSigne,nom:quoi,membre,attrs,pave:true,surChange:enregistrer});
   cs.bouton.classList.add('sgn'); t.append(cs);
   if(suffixe){ const nom=document.createElement('span'); nom.innerHTML=suffixe; t.appendChild(nom); }
   return t; }
@@ -454,6 +455,7 @@ $('editBtn').onclick=()=>{ stopAuto(); $('app').hidden=true; $('formCard').hidde
 $('printBtn').onclick=imprimerRapport;
 
 function lancer(){
+  if(pave) pave.fermer();
   if(S.meth==='para') return lancerPara();
   let p; try{ p=construireProbleme(S); }catch(e){ if(e instanceof ErreurSaisie){ $('err').textContent='✗ '+e.message; return; } throw e; }
   $('err').textContent=''; P=p; R=construireRegion(P); PS=null; $('appPara').hidden=true; viderFigures();
@@ -1041,18 +1043,19 @@ function construireSolutionPara(){
   box.appendChild(lienHaut());
   observerFigures(); }
 
-/* Démarrage : appelé par le module ci-dessous une fois commun/composants.js chargé (Composants.champSigne, Composants.monterOnglets). */
+/* Démarrage : appelé par le module ci-dessous une fois commun/composants.js chargé (Composants.champSigne, Composants.monterOnglets, Composants.monterPave). */
 let ongletsAlgo=null, ongletsPara=null;
 function demarrer(){
   if(!AFFICHER_GRADIENT) document.querySelector('[data-mode="grad"]').hidden=true;
   ongletsAlgo=Composants.monterOnglets($('ongletsAlgo'),b=>setMode(b.dataset.mode));
   ongletsPara=Composants.monterOnglets($('ongletsPara'),b=>setModeP(b.dataset.modep));
+  pave=Composants.monterPave({champs:()=>[...document.querySelectorAll('#objRow input, #consRows input')]});         // ordre de lecture : fonction économique, puis chaque contrainte, second membre compris
   dessinerFormulaire(); }
 </script>
 <!-- Le script principal reste classique : ses variables globales (S, ST, PS…) sont lues par les tests de page. Seuls les composants sont un module ES. -->
 <script type="module">
-import { monterOnglets, champSigne } from "../commun/composants.js";
-window.Composants = { monterOnglets, champSigne };
+import { monterOnglets, champSigne, monterPave } from "../commun/composants.js";
+window.Composants = { monterOnglets, champSigne, monterPave };
 window.demarrer();
 </script>
 </body>

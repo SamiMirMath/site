@@ -53,3 +53,16 @@
 .clavier .abc{grid-column:1 / span 2}                       /* la rangée tactile commence toujours à la ligne, même si la dernière rangée de touches est incomplète */
 .clavier .lancer{grid-column:3 / span 4}
 @media (hover: none){ .clavier button:hover{border-color:var(--border)} }                /* au doigt, le survol reste collé à la dernière touche : on ne le montre pas */
+
+/* ---- Pavé numérique du simplexe (commun/composants.js, monterPave) : fixé en bas de l'écran, sous le pouce, au-dessus de la barre d'accueil ---- */
+:root{ --pave-h:0px; }
+body.avec-pave{padding-bottom:var(--pave-h)}                                   /* le bas de la page reste atteignable : le dernier champ passe au-dessus du pavé */
+.champ-signe{scroll-margin-bottom:calc(var(--pave-h) + 16px)}
+.pave{position:fixed;z-index:60;left:0;right:0;bottom:0;max-width:34rem;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(4px,1.2vw,8px);
+  padding:10px max(12px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));
+  background:var(--card);border-top:1px solid var(--border);box-shadow:0 -4px 14px rgba(0,0,0,.18)}
+.pave[hidden]{display:none}
+.pave button{min-height:48px;padding:0;font-size:1.25rem}
+.pave .suivant{grid-column:2 / span 3;font-size:1.05rem}
+@media (hover: none){ .pave button:hover{border-color:var(--border)} .pave button.primary:hover{border-color:var(--accent)} }
+@media print{ .pave{display:none !important} }

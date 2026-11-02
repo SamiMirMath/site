@@ -35,7 +35,7 @@ reçoit le clavier tactile sans rien écrire de plus.
 | Partie | Sujet | État |
 |---|---|---|
 | 1 | Clavier des outils à saisie de fonction | **faite** (suite complète verte : 914 + 105) |
-| 2 | Pavé numérique du simplexe | à faire |
+| 2 | Pavé numérique du simplexe | **faite** (suite complète verte : 914 + 108) |
 | 3 | Défilement sur les figures du simplexe | à faire |
 
 ## Partie 1 — clavier des outils à saisie de fonction
@@ -60,3 +60,26 @@ reçoit le clavier tactile sans rien écrire de plus.
 **Écart rencontré** : `test_limites_exemples_et_rappel_a_360_px` (plafond de 6 s par fonction, Pyodide) a échoué deux fois sur ce Mac (7,8 s dans la suite complète, 6,2 s seul) puis a passé (5,9 s, 4,3 s, et suite complète verte) :
 la machine était chargée (charge ≈ 111 pour 2 cœurs) et le clavier n'intervient pas dans ce calcul. Le plafond n'a pas été relevé. Si l'échec revient, c'est à l'enseignant de décider.
 Les appuis du doigt sont asynchrones (le clic est fabriqué par le navigateur après coup) : les tests attendent l'effet de chaque appui (`attendre_valeur`, `attendre_etat`) au lieu de le lire aussitôt.
+
+## Partie 2 — pavé numérique du simplexe
+
+**Fichiers** : `commun/composants.js` (`monterPave`, option `pave` de `champSigne`), `commun/composants.css` (`.pave`, `body.avec-pave`, `--pave-h`), `simplexe/index.html` (champs `pave:true`, montage dans `demarrer()`, `lancer()` ferme le pavé),
+`tests/pages/test_simplexe.py` (partie F), `docs/specifications/simplexe.md`.
+
+**Comportement** (écran tactile seulement ; sur ordinateur, aucun pavé) :
+- Pavé fixé en bas (`safe-area-inset-bottom`), 4 colonnes : `7 8 9 ⌫ / 4 5 6 , / 1 2 3 / / 0 [Suivant ▶]` ; touches de 48 px. Mêmes places que le clavier de la partie 1 pour 0–9, la virgule et ⌫ (la virgule est à droite du 6, comme sur la grille demandée).
+- Il apparaît au focus d'un champ `.champ-signe`. Chaque touche modifie la valeur au curseur puis envoie un événement `input` : le champ prévient la page, l'état `S` est à jour comme après une frappe.
+- Le signe reste sur le bouton du champ (pas de touche « − ») ; toucher ce bouton garde le pavé ouvert, et la touche suivante écrit dans le même champ.
+- « Suivant ▶ » : champ suivant dans l'ordre de lecture (fonction économique, puis chaque contrainte de gauche à droite, second membre compris) ; après le dernier, le pavé se ferme.
+- Fermeture : toucher en dehors du pavé et des champs, lancement du calcul, après le dernier champ.
+- Le champ actif reste visible : la page gagne en bas la hauteur du pavé (`--pave-h`) et le bloc du champ est amené à l'écran avec `scroll-margin-bottom`.
+
+**Défaut trouvé par le test** : le défilement visait l'`input` alors que la marge `scroll-margin-bottom` est sur le bloc `.champ-signe` ; le champ restait sous le pavé. Corrigé (`amener()`).
+
+**Tests** (`test_simplexe.py`, partie F) : écran de 390 × 420 px (le pavé couvre la moitié) : un problème 2D complet (f et trois contraintes, avec « 1,5 » et « 7/2 ») rempli uniquement avec le pavé et « Suivant ▶ » ; valeur du champ ET état `S`
+vérifiés après chaque touche ; le champ actif est au-dessus du pavé ; le pavé se ferme après le dernier champ et rend la place ; lancement et solution exacte (`optimum_exact`) ; le bouton de signe garde le pavé ouvert ;
+un toucher dehors et le lancement le ferment ; aucun pavé sur ordinateur (`inputmode="decimal"` conservé).
+
+**Écart rencontré** : `test_clavier.py::test_a_…` a échoué deux fois dans la suite complète (jamais seul) : l'appui du doigt sur « C » juste après un calcul était perdu, la page faisant encore un défilement doux vers le corrigé
+(Chrome avale un appui synthétique donné pendant un défilement). Ce n'est pas un défaut de la page : l'élève ne touche pas pendant que la page défile. `Page.toucher` (`tests/pages/navigateur.py`) attend maintenant que la page soit
+immobile (6 mesures identiques de suite, à 50 ms) avant d'appuyer. Contrôle : les tests du clavier passent 4 fois sur 4 avec 3 processus qui saturent le processeur.

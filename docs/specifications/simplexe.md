@@ -13,6 +13,10 @@ URL : `/simplexe/` · page autonome en JS (pas de Pyodide, pas de KaTeX).
 - **Méthode algébrique (2Mr/OS)** : dictionnaire du simplexe en fractions exactes
   (BigInt), variable entrante au choix (Dantzig par défaut), rapports, pivot animé, polygone ou
   polyèdre 3D, mode exploration ; phase 1 non traitée (message clair).
+- **Saisie sur écran tactile** (chantier « Clavier intégré », 02.11.2026) : les champs numériques n'ouvrent pas le clavier du système (`inputmode="none"`, et `readonly` sur iPhone et iPad) ;
+  un pavé fixé en bas de l'écran apparaît au focus d'un champ (`7 8 9 ⌫ / 4 5 6 , / 1 2 3 / / 0 Suivant ▶` ; le signe reste sur le bouton du champ). « Suivant ▶ » passe au champ suivant dans l'ordre
+  de lecture (fonction économique, puis chaque contrainte, second membre compris) ; le dernier ferme le pavé, comme un toucher en dehors des champs et le lancement. Le champ actif reste au-dessus du pavé.
+  Sur ordinateur : aucun pavé, saisie inchangée.
 - **Onglets** (mise en page fluide, 30.10.2026) : « Solution » | « Visualisation graphique » (l'ancien « Pas à pas ») | « Explorer » (algébrique seulement), en
   `role="tablist"` avec les flèches du clavier ; après « Lancer », « Solution » est la vue par défaut.
   - **Méthode algébrique** : « Solution » est du texte seul (une carte par étape, **aucune figure**). Elle part toujours du programme initial et suit Dantzig,
