@@ -37,6 +37,7 @@ reçoit le clavier tactile sans rien écrire de plus.
 | 1 | Clavier des outils à saisie de fonction | **faite** (suite complète verte : 914 + 105) |
 | 2 | Pavé numérique du simplexe | **faite** (suite complète verte : 914 + 108) |
 | 3 | Défilement sur les figures du simplexe | **faite** (suite complète : 914 + 112 verts, **un seul échec de chronométrage, hors chantier** : voir ci-dessous) |
+| 4 | Retours iPhone du 02.11.2026 : « ABC » et lenteur de l'aperçu | **faite** (suite complète verte : 914 + 115, y compris le chronométrage de Limites) |
 
 ## Partie 1 — clavier des outils à saisie de fonction
 
@@ -123,3 +124,29 @@ git switch main && git merge --no-ff clavier-integre
 
 À savoir avant de fusionner : (1) le test de chronométrage de la page Limites (plafond de 6 s) échoue sur ce Mac, sur `main` aussi (voir « Entorse » ci-dessus) ; (2) le clavier n'a pas pu être essayé sur un vrai iPhone : `readonly` sur iOS est une précaution
 (Safari ouvre parfois son clavier malgré `inputmode="none"`) à vérifier sur un téléphone ; (3) à 320 px, les touches font 40 px de large (44 px de haut), le filet de sécurité.
+
+## Partie 4 — retours de l'enseignant sur iPhone (02.11.2026)
+
+Constat de l'enseignant, testé en local sur iPhone : « ABC » n'ouvre pas le clavier ; l'aperçu prend du temps.
+
+**1. « ABC »** (`commun/composants.js`). Cause probable : après toute touche de la page, le champ garde le focus (en lecture seule) ; `focus()` sur un champ déjà focalisé ne fait rien et iOS n'ouvre son clavier que pour un focus
+donné dans le geste de l'élève. Correctif : `blur()` puis `focus()` dans le même geste, `readonly` et `inputmode` retirés avant le focus ; « 123 » fait `blur()` (le clavier se ferme) puis remet le champ muet. Le `mousedown` n'est plus annulé
+sur « ABC » (le navigateur fait son travail). Test : le geste produit bien `blur` puis `focus`, champ ni muet ni en lecture seule au moment du focus. **iOS lui-même n'est pas testable ici : à confirmer sur l'iPhone.**
+Si le clavier ne s'ouvre toujours pas : prochaine piste = ouvrir le clavier avec un champ de saisie réel (un second `input` visible pour la saisie inhabituelle) plutôt que de basculer les attributs du même champ.
+
+**2. Aperçu.** Mesures sur ce Mac (processeur ralenti ×1, ×4, ×6 : aucune différence sur le worker) :
+- **En régime établi, l'aperçu est instantané** : 150 ms de pause volontaire (anti-rebond), 5 à 7 ms de calcul Python, 10 ms d'affichage.
+- **Le retard est au chargement.** Aucun aperçu ne part tant que Python n'est pas prêt (`appelPy` attend `pret`) ; tout ce qui a été tapé avant arrive d'un coup. Décomposition du démarrage (copie locale de Pyodide) :
+  `loadPyodide` 5,1 à 6,4 s (le gros du temps : réseau, compilation WebAssembly) ; import des modules du site 0,25 à 0,7 s ; **installation des roues SymPy 0,8 à 1,0 s puis `import sympy` 0,6 à 0,9 s, qui bloquent le worker**.
+  Le worker ne fait qu'une chose à la fois, et la demande « SymPy » partait juste après l'initialisation, **avant** le premier aperçu : celui-ci attendait 1,5 à 2 s de plus (plus sur un téléphone).
+- **Correctif** (`commun/moteur-python.js`, `commun/outil.js`) : SymPy ne se charge qu'après une pause de frappe (700 ms sans activité), au plus tard 8 s après le démarrage de Python, ou tout de suite si un calcul en a besoin
+  (`hater()`, déjà prévu par `sympyAvant` et `besoin_sympy`). Mesure avant/après, mêmes touches tapées pendant le chargement : **premier aperçu à 9,1 s → 5,3 s** (−3,8 s, soit −40 %).
+- Test : `test_t40_l_apercu_ne_attend_pas_sympy` (sur les 4 outils à SymPy) ; il échoue sur l'ancien code (vérifié sur une copie).
+
+**Pistes mesurées, non faites (à décider)** :
+- *Aperçu en JavaScript, sans Python* : instantané dès l'ouverture de la page, mais il faut réécrire en JavaScript l'analyse de trois grammaires (ensemble_def, factorisation, exp_log) et les garder identiques au Python (risque d'aperçu faux : à protéger par un test de parité sur tout le corpus).
+- *`loadPyodide` (5 à 6 s)* : cache du navigateur, hébergement de Pyodide avec le site (voir `docs/choix-techniques.md`), ou chargement progressif.
+- *Précompiler les modules Python du site* (0,25 à 0,7 s de compilation à chaque ouverture) comme les roues SymPy.
+
+**Suite complète de la partie 4 : entièrement verte** (914 Python, 115 pages), y compris `test_limites_exemples_et_rappel_a_360_px` qui échouait dans les suites précédentes de la branche.
+Ce test n'a pas été modifié ; il passe ici parce que SymPy ne se charge plus pendant que la page Limites est utilisée (la mesure reste une mesure de machine : à surveiller).

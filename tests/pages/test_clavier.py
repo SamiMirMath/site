@@ -128,6 +128,28 @@ class TestClavierIntegre(unittest.TestCase):
                 self.attendre_etat(page, ["none", readonly, "ABC"])
                 self.ecrire(page, ["8"], depart="7")
 
+    def test_c_abc_defocalise_puis_refocalise_le_champ_dans_le_meme_geste(self):
+        """Retour de l'enseignant sur iPhone (02.11.2026) : « ABC » n'ouvrait pas le clavier. Après une touche de la page, le champ a déjà le focus : sans blur(), focus() ne fait rien et iOS
+        n'ouvre pas son clavier. Le geste doit donc faire blur() puis focus(), champ ni muet (inputmode) ni en lecture seule au moment du focus. (iOS lui-même n'est pas testable ici.)"""
+        for nom, agent in (("Android", ANDROID), ("iPhone", IPHONE)):
+            page = self.ouvrir(tactile=True, agent=agent)
+            with self.subTest(appareil=nom):
+                self.ecrire(page, ["7"])                                                   # le champ a le focus, comme après toute touche
+                self.assertEqual(page.evaluer("document.activeElement.id"), "entree")
+                page.evaluer("""(() => { const e = document.querySelector('#entree'); window.__j = [];
+                    e.addEventListener('blur', () => window.__j.push(['blur', e.readOnly, e.getAttribute('inputmode')]));
+                    e.addEventListener('focus', () => window.__j.push(['focus', e.readOnly, e.getAttribute('inputmode')])); })()""")
+                page.toucher("#clavier button.abc")
+                page.attendre("window.__j.length >= 2", 10)
+                self.assertEqual(page.evaluer("window.__j"), [["blur", page.evaluer("window.__j[0][1]"), page.evaluer("window.__j[0][2]")], ["focus", False, None]])
+                self.assertEqual(page.evaluer("window.__j[0][0] + ',' + window.__j[1][0]"), "blur,focus")
+                self.assertEqual(page.evaluer("document.activeElement.id"), "entree")
+                page.evaluer("window.__j.length = 0")
+                page.toucher("#clavier button.abc")                                         # « 123 » : le clavier se ferme, le champ redevient muet
+                page.attendre("window.__j.length >= 2", 10)
+                self.assertEqual(page.evaluer("window.__j[0][0] + ',' + window.__j[1][0]"), "blur,focus")
+                self.assertEqual(page.evaluer("window.__j[1][2]"), "none")
+
     def test_d_calculer_suit_le_bouton_de_la_page(self):
         """« Calculer ▶ » porte le libellé du bouton de la page et reste grisé tant que celui-ci l'est (moteur en chargement ou calcul en cours)."""
         page = self.nav.ouvrir("factorisation/index.html", tactile=True)

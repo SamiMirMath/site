@@ -119,12 +119,15 @@ export function monterClavierTactile({ clavier, champ, lancer }) {
   abc.addEventListener("click", () => {
     systeme = !systeme;
     majAbc();
+    // Le champ a déjà le focus (les touches le lui rendent) : sans blur(), focus() ne fait rien et iOS n'ouvre pas son clavier. blur() puis focus() dans le même
+    // geste (iOS n'ouvre le clavier que pour un focus donné dans un geste de l'élève) ; « 123 » : blur() ferme le clavier, le champ est de nouveau muet.
+    champ.blur();
     if (systeme) { avecClavierSysteme(champ); champ.focus(); }
-    else { champ.blur(); sansClavierSysteme(champ); champ.focus({ preventScroll: true }); }
+    else { sansClavierSysteme(champ); champ.focus({ preventScroll: true }); }
   });
   calculer.addEventListener("click", () => { if (!lancer.disabled) lancer.click(); });
   new MutationObserver(majLancer).observe(lancer, { attributes: true, attributeFilter: ["disabled"], childList: true, characterData: true, subtree: true });
-  clavier.addEventListener("mousedown", (e) => e.preventDefault());                              // la touche ne prend pas le focus : le champ le garde
+  clavier.addEventListener("mousedown", (e) => { if (!e.target.closest(".abc")) e.preventDefault(); });           // une touche ne prend pas le focus : le champ le garde (« ABC » : le navigateur fait son travail)
   clavier.addEventListener("click", (e) => { if (e.target.closest("button[data-t], button[data-k]") && document.activeElement !== champ) champ.focus({ preventScroll: true }); });
   majAbc();
   majLancer();

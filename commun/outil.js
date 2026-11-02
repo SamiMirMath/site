@@ -107,6 +107,7 @@ function demarrerOutil(config) {
   let tAp = null, seqAp = 0, tFrappe = 0, dernierApercu = "";
   const apercuVide = $("apercu").innerHTML;             // le texte d'attente (« Aperçu de la fonction », « du polynôme ») est celui de la page
   function apercu() {
+    moteur.noterActivite();                             // l'élève tape : SymPy attend une pause (il bloquerait l'aperçu)
     clearTimeout(tAp);
     const mon = ++seqAp, box = $("apercu");
     tFrappe = Date.now();
@@ -166,11 +167,12 @@ function demarrerOutil(config) {
     const delai = window.__delaiCalcul || delaiCalcul;
     let r;
     try {
-      if (attendSympy) { await moteur.sympyPret; $("etat").textContent = "Calcul en cours…"; }
+      if (attendSympy) { moteur.hater(); await moteur.sympyPret; $("etat").textContent = "Calcul en cours…"; }
       const arg = filiere ? [s, filiere] : s;
       r = await appelPy("resoudre", arg, delai);
       if (r.besoin_sympy) {
         $("etat").textContent = "Chargement du moteur de calcul pour cette fonction…";
+        moteur.hater();
         await moteur.sympyPret;
         if (moteur.sympyOK) r = await appelPy("resoudre", arg, delai);
       }

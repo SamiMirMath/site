@@ -643,6 +643,21 @@ class TestComportement(unittest.TestCase):
                 historique = [t for i, t in enumerate(historique) if t != "Prêt." or i == len(historique) - 1]   # « Prêt. » passe un instant quand SymPy arrive
                 self.assertEqual(historique, ["Chargement du moteur de calcul pour cette fonction…", "Calcul en cours…", "Prêt."])
 
+    def test_t40_l_apercu_ne_attend_pas_sympy(self):
+        """Retour de l'enseignant sur iPhone (02.11.2026) : l'aperçu tardait. Le worker ne fait qu'une chose à la fois et l'installation puis l'import de SymPy le bloquent
+        1,5 à 2 s (davantage sur un téléphone). SymPy ne se charge qu'après une pause de frappe : dès que Python est prêt, un aperçu demandé s'affiche tout de suite,
+        pendant que « Chargement du moteur de calcul… » est encore affiché."""
+        for outil in ("limites-asymptotes", "derivee-variations", "etude-complete", "factorisation"):
+            with self.subTest(outil=outil):
+                if outil not in CHOISIS:
+                    continue
+                page = self.nav.ouvrir(f"{outil}/index.html")
+                page.attendre("document.querySelector('#etat').textContent === 'Chargement du moteur de calcul…' && !document.querySelector('#calculer').disabled", 240, pas=0.02)
+                page.taper("#entree", "x^2-1", pause=0.05)                                  # on tape pendant que SymPy attend la pause
+                page.attendre("document.querySelector('#apercu .katex')", 10)
+                self.assertEqual(page.evaluer("document.querySelector('#etat').textContent"), "Chargement du moteur de calcul…")
+                page.attendre("document.querySelector('#etat').textContent === 'Prêt.'", 60)       # puis SymPy se charge : la pause est arrivée
+
     def test_soc04_parametre_f(self):
         for outil in OUTILS:
             with self.subTest(outil=outil):
