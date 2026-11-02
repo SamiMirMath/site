@@ -148,7 +148,7 @@ class TestComportement(unittest.TestCase):
                     page.evaluer("document.querySelector('#variantes button[data-variante=\"logarithmes\"]').click()")
         page.taille(1100)
         self.calculer(page, "log(5-x)=8")
-        self.assertEqual(page.evaluer("document.querySelectorAll('#cartes .chaine').length"), 2)
+        self.assertEqual(page.evaluer("document.querySelectorAll('#cartes .chaine').length"), 3)          # la résolution, puis les deux membres du Contrôle
         # sur grand écran la propriété est à droite de la ligne (3e colonne), sur écran étroit sous l'expression
         self.calculer(page, "2^(x-1)=3^x")
         page.evaluer("document.querySelector('#tout').click()")
@@ -160,6 +160,38 @@ class TestComportement(unittest.TestCase):
         page.evaluer("document.querySelector('#tout').click()")
         self.assertGreater(haut(".ligne:nth-child(2) .prop")[0], haut(".ligne:nth-child(2) .expr")[0])
         self.assertEqual(haut(".ligne:nth-child(2) .prop")[1], haut(".ligne:nth-child(2) .expr")[1])
+        page.taille(1100)
+
+    def test_explog_3c_controle_a_390_px(self):
+        """Correctif 3C du 02.11.2026 : log(x) + log(x − 3) = 1 se résout en 3C (sans ensemble de définition) et se termine par la carte « Contrôle » :
+        x = −2 donne log(−2), qui n'existe pas (rejetée), x = 5 vérifie l'équation de départ ; à 390 px rien ne déborde, le ⇒ est à gauche des lignes."""
+        if "exponentielles-logarithmes" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.ouvrir("exponentielles-logarithmes")
+        page.evaluer("try { localStorage.clear(); } catch (e) {}")
+        for largeur in (390, 1100):
+            page.taille(largeur)
+            self.calculer(page, "log(x) + log(x-3) = 1")
+            page.evaluer("document.querySelector('#tout').click()")
+            self.assertFalse(page.evaluer("document.querySelector('#cartes .err')"))
+            self.assertEqual(self.titres_et_badges(page),
+                             ["Regroupement des logarithmes", "Exponentielle des deux membres", "Contrôle", "Solution"])
+            controle = page.evaluer("""(() => { const c = [...document.querySelectorAll('#cartes .card')].find(c => (c.querySelector('.badge') || {}).textContent === 'Contrôle');
+                return {formules: [...c.querySelectorAll('annotation')].map(a => a.textContent), texte: c.textContent}; })()""")
+            self.assertIn(r"\log(-2)", controle["formules"])
+            self.assertIn(r"\log(5 \cdot 2)", " ".join(controle["formules"]))
+            for morceau in ("n'existe pas", "est rejetée", "On remplace", "Les deux membres sont égaux", "est solution ✓"):
+                self.assertIn(morceau, controle["texte"])
+            self.assertIn(r"S = \left\{5\right\}", page.evaluer("[...document.querySelectorAll('#cartes .card.final annotation')].map(a => a.textContent).join(' ')"))
+            debordements = page.evaluer("""(() => {
+                const trop = [...document.querySelectorAll('#cartes *')].filter(n => n.scrollWidth > n.clientWidth + 1 && n.clientWidth > 0
+                    && !n.closest('.katex') && getComputedStyle(n).display !== 'inline').map(n => n.className + ' ' + n.scrollWidth + '>' + n.clientWidth);
+                return [document.documentElement.scrollWidth, window.innerWidth, trop.slice(0, 5)]; })()""")
+            self.assertLessEqual(debordements[0], debordements[1], (largeur, debordements))
+            self.assertEqual(debordements[2], [], (largeur, debordements))
+            liens = page.evaluer("[...document.querySelectorAll('#cartes .chaine .lien annotation')].map(a => a.textContent)")
+            self.assertIn(r"\Rightarrow", liens)
+            self.assertIn(r"\iff", liens)
         page.taille(1100)
 
     def titres_et_badges(self, page):
@@ -505,8 +537,11 @@ class TestComportement(unittest.TestCase):
         self.assertEqual(self.filiere(page), "C")
         self.assertIn("filiere=C", page.evaluer("location.search"))
         # le calcul d'une nouvelle équation suit la filière choisie
-        self.calculer(page, "4^x-2^x-6=0")
-        self.assertTrue(page.evaluer("!!document.querySelector('#cartes .err')"))                # 3C : « ne se résout pas avec les méthodes du cours »
+        self.calculer(page, "x*2^x=8")
+        self.assertTrue(page.evaluer("!!document.querySelector('#cartes .err')"))                # « ne se résout pas avec les méthodes du cours » (hors programme)
+        self.calculer(page, "4^x-2^x-6=0")                                                       # depuis le 02.11.2026 la 3C le résout aussi (t = 2^x)
+        self.assertFalse(page.evaluer("!!document.querySelector('#cartes .err')"))
+        self.assertTrue(page.evaluer("/Changement de variable/.test(document.querySelector('#cartes').textContent)"))
         page.evaluer("document.querySelector('#filiere button[data-filiere=M]').click()")
         page.attendre("document.querySelector('#cartes .card') && /Changement de variable/.test(document.querySelector('#cartes').textContent)", 60)
         self.assertTrue(page.evaluer("!!document.querySelector('#variantes') && !document.querySelector('#variantes').hidden"))     # le sélecteur de méthode aussi

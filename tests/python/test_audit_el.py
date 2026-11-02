@@ -6,6 +6,7 @@ import unittest
 
 import moteurs  # noqa: F401  (chemins des moteurs)
 import exp_log as el
+import exp_log_m as elm
 import resoudre_el as rel
 import sortie as so
 from cas_el import BATTERIE_AUDIT, HORS_PROGRAMME, PAS_ENCORE, entrees_el
@@ -21,7 +22,9 @@ def resultats(saisie):
     """Le résultat de chaque méthode : les deux variantes d'une équation exponentielle, sinon l'unique corrigé."""
     s = el.analyser_saisie(saisie)
     v = el.variantes_equation(s.g, s.d, s.inconnue)
-    return v if v is not None else {"-": el.corriger_equation(s.g, s.d, s.inconnue)}
+    if v is None:                                           # depuis le 02.11.2026 : le 2e degré en aˣ et les exposants 1/x, √x, ln x ont aussi deux méthodes en 3C
+        v = elm.variantes_changement(s.g, s.d, s.inconnue, "C") or elm.variantes_exposant(s.g, s.d, s.inconnue, "C")
+    return v if v is not None else {"-": elm.corriger_equation_c(s.g, s.d, s.inconnue)}
 
 
 # Grille de formes du chapitre : aucune ne doit lever d'exception (F5), chaque sortie respecte le format commun
@@ -87,7 +90,7 @@ class TestBatterieAudit(unittest.TestCase):
                             if isinstance(l, el.Message):
                                 continue
                             for p in l.props + [l.note]:
-                                self.assertTrue(p is None or p in el.PROPRIETES or isinstance(p, el.Car), (saisie, p))
+                                self.assertTrue(p is None or p in el.PROPRIETES or p in elm.PROPRIETES_C_AJOUTEES or isinstance(p, el.Car), (saisie, p))
 
 
 class TestRacineDouble(unittest.TestCase):
@@ -132,6 +135,8 @@ class TestRacineDouble(unittest.TestCase):
                     self.assertNotIn(" + -", texte)
             sa = el.analyser_saisie(saisie)
             for methode, r in resultats(saisie).items():
+                if r is None:
+                    continue
                 valeurs = [round(el.valeur(n), 9) for n in r["solutions"] or []]
                 self.assertEqual(len(valeurs), len(set(valeurs)), (saisie, methode))
 
@@ -309,7 +314,9 @@ class TestLogarithmeDeXCarre(unittest.TestCase):
             self.assertNotIn(r"2\log(x)", texte)
             self.assertNotIn(r"2\ln(x)", texte)
             self.assertNotIn(r"\left|", texte)
-        self.assertEqual(rel.resoudre("log(x^2-1)=1/2"), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
+        s = rel.resoudre("log(x^2-1)=1/2")                       # depuis le 02.11.2026 : la 3C résout comme la 2M, puis contrôle (x₁ et x₂ sont les deux racines)
+        self.assertTrue(s["ok"], s)
+        self.assertEqual(s["cartes"][-2]["badge"], "Contrôle")
 
 
 class TestExposantsEnChiffresSuperieurs(unittest.TestCase):
@@ -414,7 +421,8 @@ class TestOrdreDesSolutions(unittest.TestCase):
 
     @staticmethod
     def ou(r):
-        return [e for c in r["etapes"] for l in c["lignes"] if isinstance(l, el.Chaine) for e in l.elements if isinstance(e, el.Ou)]
+        return [e for c in r["etapes"] for l in c["lignes"] if isinstance(l, el.Chaine) for e in l.elements
+                if isinstance(e, el.Ou) and all(isinstance(q.g, el.Var) for q in e.eqs)]       # « x = a ou x = b » : pas « x = 0 ou ln(x) = −1 » (deux branches)
 
     def test_croissant_et_meme_ordre_dans_les_deux_methodes(self):
         n = 0
@@ -509,8 +517,9 @@ class TestMiseEnEvidence(unittest.TestCase):
                     self.assertEqual([round(el.valeur(n), 3) for n in corriger(saisie, methode)["solutions"]], [attendu])
 
     def test_formes_qui_restent_hors_de_la_methode(self):
-        for saisie in ["4^x-2^x-6=0", "e^x+e^(-x)=3", "2^x+1=3^x", "e^x+e^(x+1)=2^x"]:
+        for saisie in ["2^x+1=3^x", "e^x+e^(x+1)=2^x"]:                       # (4^x − 2^x − 6 = 0 : résolu depuis le 02.11.2026, comme en 2M)
             self.assertEqual(rel.resoudre(saisie), {"ok": False, "erreur": el.MESSAGE_HORS_PROGRAMME})
+        self.assertEqual(rel.resoudre("e^x+e^(-x)=3"), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
 
 
 class TestMessages(unittest.TestCase):
@@ -529,17 +538,19 @@ class TestMessages(unittest.TestCase):
         for saisie in ["log(x)=x-1", "ln(x)=x", "x*log(x)=1", "e^x=ln(x)", "log(x)=2^x", "log(x)/x=1", "ln(x)+x=2", "2^x*log(x)=1"]:
             with self.subTest(saisie):
                 self.assertEqual(rel.resoudre(saisie), {"ok": False, "erreur": el.MESSAGE_HORS_PROGRAMME})
-        for saisie in ["log(x)=log(5)", "log(x)+log(x-1)=1", "2^(x^3)=8"]:            # formes du programme pas encore gérées
+        for saisie in ["2^(x^3)=8"]:            # formes du programme pas encore gérées (log(x) = log(5), log(x) + log(x − 1) = 1 : résolues depuis le 02.11.2026)
             with self.subTest(saisie):
                 self.assertEqual(rel.resoudre(saisie), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
 
-    def test_second_degre_en_a_puissance_x_hors_programme_quelle_que_soit_la_base(self):
-        """Groupe 10 (D2) : le même message pour 4^x − 2^x − 6 = 0 et e^(2x) − 3e^x + 2 = 0 (avant : « hors programme » ou « pas encore » selon la base) ;
-        la mise en évidence (D1) est au programme : voir TestMiseEnEvidence."""
-        for saisie in ["4^x-2^x-6=0", "9^x-3^x=6",
-                       "4^x+2^x=6", "e^(2x)-3e^x+2=0", "e^x+e^(-x)=3", "2^(2x)-5*2^x+4=0", "3^(2x)-4*3^x+3=0", "2^x+2^(-x)=2", "2*4^x-3*2^x+1=0"]:
+    def test_second_degre_en_a_puissance_x_meme_corrige_en_3c_et_en_2m(self):
+        """Groupe 10 (D2), amendé le 02.11.2026 : le 2e degré en aˣ était « hors programme » en 3C ; la 3C le résout maintenant comme la 2M (t = aˣ, t > 0),
+        et les racines irrationnelles de t (e^x + e^(−x) = 3) ont le même message « pas encore » dans les deux filières. La mise en évidence (D1) : voir TestMiseEnEvidence."""
+        for saisie in ["4^x-2^x-6=0", "9^x-3^x=6", "4^x+2^x=6", "e^(2x)-3e^x+2=0", "2^(2x)-5*2^x+4=0", "3^(2x)-4*3^x+3=0", "2^x+2^(-x)=2", "2*4^x-3*2^x+1=0"]:
             with self.subTest(saisie):
-                self.assertEqual(rel.resoudre(saisie), {"ok": False, "erreur": el.MESSAGE_HORS_PROGRAMME})
+                c = rel.resoudre(saisie)
+                self.assertTrue(c["ok"], c)
+                self.assertEqual(c, rel.resoudre(saisie, "M"))
+        self.assertEqual(rel.resoudre("e^x+e^(-x)=3"), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
 
     def test_aucune_forme_resolue_n_est_classee_hors_programme(self):
         for saisie, _ in BATTERIE_AUDIT:
@@ -550,13 +561,15 @@ class TestMessages(unittest.TestCase):
 
 class TestRobustesse(unittest.TestCase):
     def test_aucune_exception_et_format_commun(self):
-        """F5 : aucune saisie de la grille ne lève d'exception ; log(x) + log(2) = 1 a le message « pas encore »."""
+        """F5 : aucune saisie de la grille ne lève d'exception ; log(x) + log(2) = 1 est résolu depuis le 02.11.2026 (x = 5, contrôlé)."""
         for saisie in grille():
             with self.subTest(saisie):
                 s = rel.resoudre(saisie)
                 self.assertEqual(so.valider(s), [])
-        for saisie in ["log(x)+log(2)=1", "log(x)-log(2)=1"]:
-            self.assertEqual(rel.resoudre(saisie), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
+        for saisie, S in [("log(x)+log(2)=1", "5"), ("log(x)-log(2)=1", "20")]:
+            sortie = rel.resoudre(saisie)
+            self.assertTrue(sortie["ok"], sortie)
+            self.assertEqual(sortie["cartes"][-1]["blocs"][0]["tex"], r"S = \left\{" + S + r"\right\}")
 
     def test_les_listes_de_messages_restent_sans_solution(self):
         for saisie in HORS_PROGRAMME + PAS_ENCORE:

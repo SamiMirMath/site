@@ -6,6 +6,7 @@ import unittest
 
 import moteurs  # noqa: F401  (chemins des moteurs)
 import exp_log as el
+import exp_log_m as elm
 import resoudre_el as rel
 import sortie as so
 from cas_el import (BATTERIE_C1, BATTERIE_E1, BATTERIE_E2, BATTERIE_E3, BATTERIE_E4, CALCULS_NON_RESOLUS, ERREURS_DE_LECTURE, HORS_PROGRAMME,
@@ -93,7 +94,9 @@ class TestOption(unittest.TestCase):
             if s is None or s.genre != "equation":
                 continue
             variantes = el.variantes_equation(s.g, s.d, s.inconnue, s.parametres)
-            r = variantes[el.METHODE_LOGARITHMES] if variantes else el.corriger_equation(s.g, s.d, s.inconnue, parametres=s.parametres)
+            r = variantes[el.METHODE_LOGARITHMES] if variantes else elm.corriger_equation_c(s.g, s.d, s.inconnue, parametres=s.parametres)
+            if r is None:                                   # changement de variable, exposants 1/x √x ln x : deux variantes, pas de case d'interprétation
+                continue
             inter = el.interpretation(r)
             sortie = rel.resoudre(entree)
             with self.subTest(entree):
@@ -228,7 +231,7 @@ class TestCartes(unittest.TestCase):
     def test_les_methodes_en_badge_dans_l_ordre(self):
         titres = lambda e: [(c["titre"], c.get("badge")) for c in rel.resoudre(e)["cartes"]]
         self.assertEqual(titres("3^(x+1)-27=0"), [("Étape 1", "Isoler l'exponentielle"), ("Étape 2", "Logarithme des deux membres"), ("Solution", None)])
-        self.assertEqual(titres("log_x(256)=4"), [("Étape 1", "Condition"), ("Étape 2", "Exponentielle des deux membres"), ("Solution", None)])
+        self.assertEqual(titres("log_x(256)=4"), [("Étape 1", "Condition"), ("Étape 2", "Exponentielle des deux membres"), ("Étape 3", "Contrôle"), ("Solution", None)])
         self.assertEqual([t for t, _ in titres("10^x*(10^x-4)=0")], ["Étape 1", "Étape 2", "Étape 3", "Solution"])
         self.assertEqual([b for _, b in titres("10^x*(10^x-4)=0")][:3], ["Produit nul", "Facteur 1", "Facteur 2"])
 
@@ -276,6 +279,16 @@ def est_exponentielle(entree):
     return s.genre == "equation" and el.variantes_equation(s.g, s.d, s.inconnue, s.parametres) is not None
 
 
+def a_deux_methodes(entree):
+    """Depuis le 02.11.2026 la 3C résout aussi le 2e degré en aˣ et les exposants 1/x, √x, ln x, qui ont leurs deux méthodes comme toute exponentielle."""
+    try:
+        s = el.analyser_saisie(entree)
+    except el.ErreurSaisie:
+        return False
+    return s.genre == "equation" and (elm.variantes_changement(s.g, s.d, s.inconnue, "C") is not None
+                                      or elm.variantes_exposant(s.g, s.d, s.inconnue, "C") is not None)
+
+
 def exponentielles():
     return [e for e in entrees_el() if est_exponentielle(e)]
 
@@ -298,7 +311,7 @@ class TestVariantes(unittest.TestCase):
 
     def test_ni_les_equations_logarithmiques_ni_les_calculs_ni_les_erreurs_n_ont_de_variantes(self):
         for entree in entrees_el():
-            if est_exponentielle(entree):
+            if est_exponentielle(entree) or a_deux_methodes(entree):
                 continue
             with self.subTest(entree=entree):
                 s = rel.resoudre(entree)

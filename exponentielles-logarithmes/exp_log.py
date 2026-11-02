@@ -666,12 +666,8 @@ def _base_composee(n):
 
 
 def analyser_saisie(texte, filiere="C"):
-    """La saisie analysée. `filiere` : "C" ou "M" ; une base de logarithme écrite comme une expression (log_(2x)(1296)) n'est lue qu'en filière M."""
+    """La saisie analysée. `filiere` : "C" ou "M" (sans effet depuis le 02.11.2026 : la 3C lit aussi une base écrite comme une expression, log_(2x)(1296), et le nombre π)."""
     g, d = lire_membres(texte)
-    if filiere != "M" and (_base_composee(g) or (d is not None and _base_composee(d))):
-        raise ErreurSaisie(MESSAGE_AUTRE_BASE)
-    if filiere != "M" and (_contient_pi(g) or (d is not None and _contient_pi(d))):
-        raise ErreurSaisie(MESSAGE_PI_EN_3C)
     if d is None:
         if variables(g):
             raise ErreurSaisie("Écrivez une équation (avec =), ou une expression sans lettre pour calculer un logarithme.")
@@ -1011,11 +1007,14 @@ def tex_element(e):
     return tex(e)
 
 
+LIENS_TEX = {"⇔": r" \iff ", "⇒": r" \Rightarrow ", "≈": r" \approx "}                 # « = » pour tout autre lien
+
+
 def tex_chaine(c):
     """TeX d'une ligne : la propriété de chaque lien suit l'élément qu'elle justifie, entre parenthèses."""
     s = tex_element(c.elements[0])
     for e, lien, prop in zip(c.elements[1:], c.liens, c.props):
-        s += (r" \iff " if lien == "⇔" else " = ") + tex_element(e)
+        s += LIENS_TEX.get(lien, " = ") + tex_element(e)
         if isinstance(prop, Divise):
             q = _nom_tex(prop.nom)
             s += r" \quad \text{(on divise les deux membres par } " + q + r" \text{ ; } " + q + r" > 0 \text{ : une quantité de départ est positive)}"
@@ -1048,14 +1047,14 @@ def rangees_chaine(c):
                 r"(\(" + premier.detail + r"\))" if isinstance(premier, Texte) and premier.detail else None]]
     ancre = _gauche(premier)
     for e, lien, prop in zip(c.elements[1:], c.liens, c.props):
-        if lien == "⇔":
-            rangees.append([r"\iff", tex_element(e), None])
+        if lien in ("⇔", "⇒"):                                        # ⇒ : l'implication, quand la ligne ne se lit pas dans l'autre sens
+            rangees.append([LIENS_TEX[lien].strip(), tex_element(e), None])
             ancre = _gauche(e)
         elif rangees[-1][2] is None:                                  # pas de propriété sur la ligne : la suite d'égalités continue
-            rangees[-1][1] += " = " + tex_element(e)
+            rangees[-1][1] += LIENS_TEX.get(lien, " = ") + tex_element(e)
         else:                                                         # nouvelle ligne, son « = » sous celui de la ligne d'au-dessus
             cale = r"\phantom{" + ancre + "}" if ancre and len(ancre) <= 30 else ""
-            rangees.append(["", cale + " = " + tex_element(e), None])
+            rangees.append(["", cale + LIENS_TEX.get(lien, " = ") + tex_element(e), None])
         if isinstance(prop, Divise):
             rangees[-1][2] = "(" + prop.texte() + ")"
         elif isinstance(prop, Car):
