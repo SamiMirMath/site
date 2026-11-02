@@ -666,12 +666,8 @@ def _base_composee(n):
 
 
 def analyser_saisie(texte, filiere="C"):
-    """La saisie analysée. `filiere` : "C" ou "M" ; une base de logarithme écrite comme une expression (log_(2x)(1296)) n'est lue qu'en filière M."""
+    """La saisie analysée. `filiere` : "C" ou "M" (sans effet depuis le 02.11.2026 : la 3C lit aussi une base écrite comme une expression, log_(2x)(1296), et le nombre π)."""
     g, d = lire_membres(texte)
-    if filiere != "M" and (_base_composee(g) or (d is not None and _base_composee(d))):
-        raise ErreurSaisie(MESSAGE_AUTRE_BASE)
-    if filiere != "M" and (_contient_pi(g) or (d is not None and _contient_pi(d))):
-        raise ErreurSaisie(MESSAGE_PI_EN_3C)
     if d is None:
         if variables(g):
             raise ErreurSaisie("Écrivez une équation (avec =), ou une expression sans lettre pour calculer un logarithme.")

@@ -5,7 +5,7 @@ Demande du 02.11.2026, branche `correctif-explog-3c` (depuis `main`). Deux commi
 | Commit | Contenu | État |
 |---|---|---|
 | (a) | adaptateur 3C → 2M, carte « Contrôle », famille « regroupement » (les 5 équations de l'énoncé) | **faite** (suite complète verte : 931 tests Python, 100 tests de pages) |
-| (b) | les autres familles de la 2M (voir le tableau) | à faire |
+| (b) | les autres familles de la 2M (voir le tableau) | **faite** (voir « Réalisation (commit b) ») |
 
 ## Symptôme et cause exacte
 
@@ -67,3 +67,29 @@ Demande du 02.11.2026, branche `correctif-explog-3c` (depuis `main`). Deux commi
 - Les cartes de la sortie portent « Étape k » en titre et le nom de la méthode en **badge** : les tests cherchent « Contrôle » dans le badge.
 - `racines()` (oracle de balayage) renvoie parfois deux fois la même racine : dédoublonner avant de comparer.
 - `_valeur_rationnelle` reconnaît un rationnel numériquement (60 chiffres) : « = » n'est écrit que pour un calcul exact (`_const`), sinon « ≈ ».
+
+## Réalisation (commit b)
+
+- `exp_log_m.py` : `corriger_equation` de la 2M est découpée en `_resoudre_sans_ed` (réutilisée par la 3C : calcul du second membre, `logarithmique_m`, `regrouper`, base polynomiale, `log_x(n) = p/q`, `x·ln x`) et la carte ED/Vérification ;
+  `variantes_changement` et `variantes_exposant` prennent `filiere` (`"C"` : `en_3c` ; exposants : `_controler_decimaux` à la place de l'ensemble de définition) ; `lecture_3c(g, d)` (ni π ni base composée) ; `corriger_equation_c` ne passe par le moteur 3C d'avant que si la 3C sait lire l'équation.
+  La liste fermée de la 3C accepte les propriétés de la 2M qui ne parlent pas de l'ED (`PROPRIETES_C_COMMUNES` : racines paires/impaires, « on multiplie par t, t > 0 », « on pose u = t² »…).
+- `exp_log.py` : `analyser_saisie` ne refuse plus ni la base composée (`log_(2x)(1296)`) ni π en 3C (`MESSAGE_AUTRE_BASE` et `MESSAGE_PI_EN_3C` restent définis, sans appel).
+- `resoudre_el.py` : `_voie_exposants(s, filiere)` (changement de variable, puis exposants) partagée par M et C ; la voie exponentielle de la 3C d'avant passe toujours en premier, sauf pour π et les bases composées.
+- Contrôle : bases et exposants rationnels calculés (`e^(6/(−2)) = e^(−3)`, `log_(2·3) = log_6`), `ln(e) = 1` / `log_b(b^q) = q` dans tout le membre, valeur exacte avec e (`e − e·1 = 0`), exposant rationnel (`log_8(32) = log_8(8^(5/3)) = 5/3`, `10√10 = 10^(3/2)` par « propriétés des puissances »).
+- Page : le rappel de méthode 3C décrit le regroupement, le contrôle et le 2ᵉ degré en aˣ (vouvoiement).
+- Spécification : amendements des points 10, C, G4, EL-11, EL-26, EL-31 ; EL-42 étendu à toutes les familles.
+
+## Mesures (commit b)
+
+- Comparaison 3C/2M sur 1 163 saisies (corpus, pools C et M, 60 graines par niveau) : **0** saisie résolue en 2M et pas en 3C ; **0** S différent ; mêmes messages quand la 2M refuse (`test_les_messages_de_refus_ne_different_que_par_la_lecture`).
+- Oracle mpmath sur les dix familles (110 équations, les deux méthodes) : chaque solution annule g − d, aucune racine perdue, mêmes solutions qu'en 2M. Lignes vraies en chaque racine pour les exposants, `x·ln x` et `log_x(n) = p/q`.
+- Instantané M identique (aucun changement) ; instantané 3C : 128 entrées ajoutées, 3 erreurs devenues des corrigés, 0 corrigé devenu une erreur.
+- Les chaînes à embranchement (2ᵉ degré en aˣ : `3^x = 9` ou `3^x = 1`) ne sont pas des implications de l'équation de départ : exclues du test « ligne vraie en chaque racine », couvertes par l'oracle sur les solutions.
+
+## Pièges notés (commit b)
+
+- Déplacer la voie exponentielle native de la 3C sous un `elif` a fait régresser la filière M : la branche M doit encore passer par `el.variantes_equation` (les instantanés M l'ont vu).
+- Le dossier `tests/pages/pyodide-local/` (ignoré par git) manque dans un nouveau worktree : le copier depuis le dépôt principal (`/Users/samimir/site/tests/pages/pyodide-local`) au lieu de le télécharger.
+- Le test de largeur à 360 px a trouvé un vrai défaut : le Contrôle de `3x − x·log(x) = 0` (x = 1000) écrivait `log(1000^1000)`. Corrigé : dans un membre composé, `log_b(b^k)` d'un argument rationnel devient k avant tout regroupement (`1000·log(1000) = 1000·3`), et un regroupement dont un coefficient dépasse 12 est refusé.
+- `test_limites_exemples_et_rappel_a_360_px` (page Limites, chronométré) a échoué une fois dans `complet` sous charge (11,97 s contre 6 s) et passe seul comme dans la relance de la suite de pages : test sensible à la charge, sans lien avec ce chantier.
+- Verdict final avant le commit (b) : 943 tests Python (987 s) et 100 tests de pages (857 s), code de retour 0 ; références de la page 3C : 582 entrées.

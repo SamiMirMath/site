@@ -390,18 +390,22 @@ class TestChangementDeVariable(unittest.TestCase):
                             if ligne.note:
                                 self.assertTrue(ligne.note in el.PROPRIETES or ligne.note.startswith(("retenue", "rejetée")), (entree, ligne.note))
 
-    def test_au_programme_m_mais_pas_encore_traite_en_m_et_hors_programme_en_3c(self):
+    def test_au_programme_m_mais_pas_encore_traite_meme_message_en_3c(self):
+        """Depuis le 02.11.2026 la 3C a les mêmes messages que la 2M (avant : « hors programme » pour le 2e degré en aˣ)."""
         for entree in M_VAR_PAS_ENCORE:
             with self.subTest(entree=entree):
                 self.assertEqual(rel.resoudre(entree, "M"), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
-                self.assertEqual(rel.resoudre(entree, "C"), {"ok": False, "erreur": el.MESSAGE_HORS_PROGRAMME})
+                self.assertEqual(rel.resoudre(entree, "C"), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
 
-    def test_en_3c_ces_equations_gardent_leur_message(self):
+    def test_la_3c_resout_le_second_degre_en_a_puissance_x_comme_la_2m(self):
+        """Depuis le 02.11.2026 : mêmes cartes (t = aˣ, t > 0, valeurs de t), mêmes S, les deux méthodes ; pas de carte « Ensemble de définition » (il n'y en a pas non plus en 2M)."""
         for entree, _ in BATTERIE_M_VAR:
-            if entree in ("3*2^(2(x+1))-10*2^(x+2)=32", "2*2^(6x-1)+3*2^(3x+1)+9=0", "2^(2x+2)-7*2^(x+1)=8", "4^x=2^(x+1)+3", "2^(2t)-3*2^t=-2"):
-                continue
             with self.subTest(entree=entree):
-                self.assertEqual(rel.resoudre(entree, "C"), {"ok": False, "erreur": el.MESSAGE_HORS_PROGRAMME})
+                c, m = rel.resoudre(entree, "C"), rel.resoudre(entree, "M")
+                self.assertTrue(c["ok"], c)
+                self.assertEqual(so.valider(c), [])
+                self.assertEqual(c, m)
+                self.assertEqual([x["cle"] for x in c["variantes"]], [el.METHODE_MEME_BASE, el.METHODE_LOGARITHMES])
 
     def test_une_equation_de_la_filiere_m_a_deux_variantes_et_pas_d_option(self):
         for entree, _ in BATTERIE_M_VAR:

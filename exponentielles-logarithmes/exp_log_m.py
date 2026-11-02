@@ -19,14 +19,14 @@ from math import gcd
 
 from noyau import analyser_complet
 import exp_log as _el
-from exp_log import (Car, Chaine, Defini, E, Eq, Fn, Log, Message, Neg, Nb, Op, Ou, Pi, Pow, Rel, Texte, Var, _Hors, _contient_pi, _arbre_poly, _avec_decimaux,
+from exp_log import (Car, Chaine, Defini, E, Eq, Fn, Log, Message, Neg, Nb, Op, Ou, Pi, Pow, Rel, Texte, Var, _Hors, _contient_pi, _base_composee, _arbre_poly, _avec_decimaux,
                      _base_du_logarithme, _carte, _const, _contient_log, _nb_exact, _nom_tex, _padd, _par_exponentielle, _pnet, _precis, _produit,
                      _racine_entiere, _resoudre_polynome, _somme_arbres, _suite_polynome, _milieu_exact, _valeur_exacte, _valeur_rationnelle, _exposant_entier, _poly, _regrouper as _regrouper_3c, _suite_lineaire, _puissance_rationnelle_exacte, _racine_carree, _racine_primitive, tex_element, logarithmique_m, _fin_beta,
                      resolution_exponentielle, tex, tex_approx, tex_chaine, valeur, variables, METHODE_LOGARITHMES, METHODE_MEME_BASE, METHODES, PROP_EXPONENTIELLE, PROP_ISOLER_LOG, PROP_PUISSANCE_NEGATIVE, PROP_EXP_LOG_BASE, PROP_AUTRE_COTE, PROP_MISE_EN_EVIDENCE, PROP_PRODUIT_NUL,
                      PROP_AUCUNE_SOLUTION, PROP_CAR_LN_E, PROP_CAR_LOG_10, PROP_LN_UN, PROP_LOG_UN, PROP_DEFINITION_LOG, PROP_FOIS_MOINS_UN, PROP_LN_DEUX_MEMBRES,
                      PROP_LN_E_PUISSANCE, PROP_LN_PUISSANCE, PROP_LOG_BASE_PUISSANCE, PROP_LOG_DEUX_MEMBRES, PROP_LOG_PUISSANCE, PROP_MEME_BASE)
 
-__all__ = ["controler_3c", "corriger_equation_c", "corriger_equation_3c", "EnsembleDef", "ensemble_de_definition", "verification", "regrouper", "variantes_changement", "variantes_exposant", "reconnu_exposant", "reconnu_changement", "corriger_equation",
+__all__ = ["lecture_3c", "controler_3c", "corriger_equation_c", "corriger_equation_3c", "EnsembleDef", "ensemble_de_definition", "verification", "regrouper", "variantes_changement", "variantes_exposant", "reconnu_exposant", "reconnu_changement", "corriger_equation",
            "exercice_m", "NIVEAUX_M", "POIDS_M", "PROPRIETES_M"]
 
 
@@ -1127,11 +1127,12 @@ def _resultat_methode(plan, methode):
 
 
 @_avec_decimaux
-def variantes_changement(g, d, x):
-    """{méthode: résultat} d'une équation du 2ᵉ degré en aˣ (t = aˣ, t > 0), les deux méthodes du retour à x ; None si ce n'est pas une telle équation."""
+def variantes_changement(g, d, x, filiere="M"):
+    """{méthode: résultat} d'une équation du 2ᵉ degré en aˣ (t = aˣ, t > 0), les deux méthodes du retour à x ; None si ce n'est pas une telle équation.
+    Rien ne change en 3C (`en_3c` : mêmes cartes, aucune propriété ne parle de l'ensemble de définition)."""
     try:
         plan = _plan(g, d, x)
-        return {m: _resultat_methode(plan, m) for m in METHODES}
+        return {m: (_resultat_methode(plan, m) if filiere == "M" else en_3c(_resultat_methode(plan, m))) for m in METHODES}
     except _Hors:
         return None
 
@@ -1640,13 +1641,15 @@ def reconnu_exposant(g, d, x):
 
 
 @_avec_decimaux
-def variantes_exposant(g, d, x):
+def variantes_exposant(g, d, x, filiere="M"):
     """{méthode: résultat} d'une équation exponentielle dont l'exposant n'est pas un polynôme (6/x, √x, ln x), avec la carte « Ensemble de définition »
     en tête et la « Vérification » ; None si l'équation n'est pas de cette forme."""
     try:
         s = _situation(g, d, x)
         if s.genre in ("meme_base_developper", "poly_pi"):            # exposants polynomiaux : aucune condition d'existence, donc ni carte ED ni vérification
-            return {m: _methode_exposant(s, m) for m in METHODES}
+            return {m: (_methode_exposant(s, m) if filiere == "M" else en_3c(_methode_exposant(s, m))) for m in METHODES}
+        if filiere == "C":                                            # 3C : la même résolution sans ED, puis le Contrôle de chaque solution
+            return {m: _controler_decimaux(g, d, en_3c(_methode_exposant(s, m)), x) for m in METHODES}
         ed = ensemble_de_definition(g, d, x, general=True)
         return {m: _avec_ed_et_verification(ed, _methode_exposant(s, m), x) for m in METHODES}
     except _Hors:
@@ -1991,17 +1994,19 @@ def corriger_equation(g, d, x):
         etapes = [_carte_ed(ed, [Message("L'ensemble de définition est vide : l'équation n'a aucune solution.")])]
         return {"genre": "logarithmique", "inconnue": x, "enonce": None, "base": None, "etapes": etapes, "solutions": [], "remarque": None,
                 "ed": ed, "besoin_sympy": ed.besoin_sympy}
+    r = _resoudre_sans_ed(g, d, x)
+    return None if r is None else _avec_ed_et_verification(ed, r, x)
+
+
+def _resoudre_sans_ed(g, d, x):
+    """La résolution d'une équation logarithmique de la filière M, sans la carte « Ensemble de définition » ni la « Vérification » (la 3C la réutilise avec
+    sa carte « Contrôle ») ; None quand aucune forme ne s'applique."""
     calcul = _calcul_du_second_membre(g, d, x)
     if calcul is not None:                              # le second membre est d'abord calculé, puis l'équation suit son cours
         g2, d2, carte_calcul = calcul
         r = logarithmique_m(g2, d2, x) or regrouper(g2, d2, x)
-        if r is None:
-            return None
-        return _avec_ed_et_verification(ed, {**r, "etapes": [carte_calcul] + list(r["etapes"])}, x)
-    r = logarithmique_m(g, d, x) or regrouper(g, d, x) or base_polynomiale(g, d, x) or base_inconnue_rationnelle(g, d, x) or produit_x_log(g, d, x)
-    if r is None:
-        return None
-    return _avec_ed_et_verification(ed, r, x)
+        return None if r is None else {**r, "etapes": [carte_calcul] + list(r["etapes"])}
+    return logarithmique_m(g, d, x) or regrouper(g, d, x) or base_polynomiale(g, d, x) or base_inconnue_rationnelle(g, d, x) or produit_x_log(g, d, x)
 
 
 def _avec_ed_et_verification(ed, r, x):
@@ -2042,15 +2047,14 @@ for _famille in _FAMILLES:
         _m = _propriete(_famille, _genre)
         _c = f"{_n} u = {_n} v ⇒ u = v" if _genre == "egaux" else _m[:-len(", sur l'ED")] if _m.endswith(", sur l'ED") else _m
         PROPRIETES_C[_m] = (_c, "⇒" if _genre in _IMPLICATIONS else None)
+_MOT_ED = re.compile(r"\bED\b|ensemble de définition", re.IGNORECASE)
 PROP_FOIS_DENOMINATEURS_C = "on multiplie les deux membres par les dénominateurs"
 PROPRIETES_C[PROP_FOIS_DENOMINATEURS] = (PROP_FOIS_DENOMINATEURS_C, "⇒")
 PROPRIETES_C[PROP_PUISSANCE_INVERSE] = (PROP_PUISSANCE_INVERSE, "⇒")            # x > 0 : la base d'un logarithme
 # propriétés de la filière M qui n'ont rien à voir avec l'ensemble de définition et qui passent telles quelles dans la 3C
-PROPRIETES_C_COMMUNES = frozenset({PROP_CARRE_DES_DEUX_MEMBRES, PROP_DEVELOPPER, PROP_ISOLER_RACINE, PROP_RACINE_IMPAIRE, PROP_RACINE_PAIRE,
-                                   PROP_PUISSANCE_PAIRE, PROP_PUISSANCES})
+PROPRIETES_C_COMMUNES = frozenset(p for p in PROPRIETES_M if not _MOT_ED.search(p) and p not in PROPRIETES_C)
 # toutes les propriétés ajoutées à la liste fermée de la 3C par cette rédaction
 PROPRIETES_C_AJOUTEES = frozenset({c for c, _ in PROPRIETES_C.values()}) | PROPRIETES_C_COMMUNES
-_MOT_ED = re.compile(r"\bED\b|ensemble de définition", re.IGNORECASE)
 
 
 def _convertir_chaine(c):
@@ -2092,22 +2096,119 @@ def en_3c(r):
 
 # ---------- le calcul d'un membre, sans inconnue : substitué, arguments calculés, regroupé, valeur ----------
 def _args_calcules(n):
-    """n où chaque argument de logarithme valant un rationnel est remplacé par sa valeur : log(6 + 3) devient log(9), 2·log(2·8 − 1) devient 2·log(15)."""
+    """n où chaque argument de logarithme, chaque base et chaque exposant valant un rationnel est remplacé par sa valeur : log(6 + 3) devient log(9),
+    log_(2·3)(1296) devient log_6(1296), e^(6/(−2)) devient e^(−3)."""
+    def valeur_ecrite(a):
+        if isinstance(a, (Nb, Defini, E)):
+            return a
+        v = _valeur_rationnelle(a)
+        return a if v is None else _nb_exact(v)
+
     if isinstance(n, Log):
-        a = _args_calcules(n.a)
-        if not isinstance(a, Nb):
-            v = _valeur_rationnelle(a) if not isinstance(a, Defini) else None
-            a = a if v is None else _nb_exact(v)
-        return Log(a, n.base)
+        base = n.base if n.base is None or isinstance(n.base, E) else valeur_ecrite(_args_calcules(n.base))
+        return Log(valeur_ecrite(_args_calcules(n.a)), base)
     if isinstance(n, Neg):
         return Neg(_args_calcules(n.a))
     if isinstance(n, Op):
         return Op(n.op, _args_calcules(n.a), _args_calcules(n.b))
     if isinstance(n, Pow):
-        return Pow(_args_calcules(n.a), _args_calcules(n.b))
+        return Pow(_args_calcules(n.a), valeur_ecrite(_args_calcules(n.b)))
     if isinstance(n, Fn):
         return Fn(n.nom, _args_calcules(n.a))
     return n
+
+
+def _logs_de_puissances(n):
+    """(n', propriétés) : chaque log_b(b^q) ou ln(e) de n devient q (ln(e) = 1, ln(e³) = 3) ; propriétés : celles de ces remplacements, sans doublon.
+    Dans un membre qui n'est pas un seul logarithme, un argument rationnel qui est une puissance entière de la base compte aussi (1000·log(1000) = 1000·3) ;
+    un membre qui est un seul logarithme garde son écriture log(10³) = 3 (voir `_regrouper_membre`)."""
+    props = []
+    seul = isinstance(n, Log)
+
+    def rec(m):
+        if isinstance(m, Log):
+            a = m.a
+            if not variables(a):
+                if isinstance(a, Nb) and not seul and a.val > 0:
+                    vb = F(10) if m.base is None else None if isinstance(m.base, E) else _const(m.base)
+                    k = None if vb is None or vb <= 0 or vb == 1 else _exposant_entier(a.val, vb)
+                    if k is not None and k != 0 and abs(k) <= 30:
+                        props.append(PROP_CAR_LOG_10 if vb == 10 and k == 1 else PROP_LOG_BASE_PUISSANCE)
+                        return _nb_exact(k)
+                if isinstance(a, E) and isinstance(m.base, E):
+                    props.append(PROP_CAR_LN_E)
+                    return Nb(1)
+                if isinstance(a, Pow) and a.a == (Nb(10) if m.base is None else m.base) and _const(a.b) is not None:
+                    props.append(PROP_LN_E_PUISSANCE if isinstance(m.base, E) else PROP_LOG_BASE_PUISSANCE)
+                    return _nb_exact(_const(a.b))
+            return m
+        if isinstance(m, Neg):
+            return Neg(rec(m.a))
+        if isinstance(m, Op):
+            return Op(m.op, rec(m.a), rec(m.b))
+        if isinstance(m, Pow):
+            return Pow(rec(m.a), rec(m.b))
+        if isinstance(m, Fn):
+            return Fn(m.nom, rec(m.a))
+        return m
+
+    nouveau = rec(n)
+    return nouveau, list(dict.fromkeys(props))
+
+
+def _a_un_log_de_puissance(n):
+    """Vrai si un logarithme de l'arbre a pour argument une puissance (log(10^(3/2)))."""
+    if isinstance(n, Log):
+        return isinstance(n.a, Pow)
+    if isinstance(n, (Neg, Fn)):
+        return _a_un_log_de_puissance(n.a)
+    if isinstance(n, (Op, Pow)):
+        return _a_un_log_de_puissance(n.a) or _a_un_log_de_puissance(n.b)
+    return False
+
+
+def _valeur_avec_e(n):
+    """La valeur exacte (rationnel) d'un arbre fait de rationnels et de e quand les puissances de e se simplifient (e − e·1 = 0), sinon None."""
+    def poly(m):
+        if isinstance(m, Nb):
+            return {0: m.val}
+        if isinstance(m, E):
+            return {1: F(1)}
+        if isinstance(m, Neg):
+            return {k: -c for k, c in poly(m.a).items()}
+        if isinstance(m, Op):
+            a, b = poly(m.a), poly(m.b)
+            if m.op in "+-":
+                r = dict(a)
+                for k, c in b.items():
+                    r[k] = r.get(k, F(0)) + (c if m.op == "+" else -c)
+                return r
+            if m.op == "*":
+                r = {}
+                for i, c in a.items():
+                    for j, d in b.items():
+                        r[i + j] = r.get(i + j, F(0)) + c * d
+                return r
+            if set(b) == {0} and b[0] != 0:
+                return {k: c / b[0] for k, c in a.items()}
+        if isinstance(m, Pow):
+            k = _const(m.b)
+            if k is not None and k.denominator == 1 and 0 <= k <= 8:
+                base_p, r = poly(m.a), {0: F(1)}
+                for _ in range(int(k)):
+                    suivant = {}
+                    for i, c in r.items():
+                        for j, d in base_p.items():
+                            suivant[i + j] = suivant.get(i + j, F(0)) + c * d
+                    r = suivant
+                return r
+        raise _Hors
+
+    try:
+        r = {k: c for k, c in poly(n).items() if c != 0}
+    except (_Hors, ArithmeticError):
+        return None
+    return r.get(0, F(0)) if set(r) <= {0} else None
 
 
 def _exposant_de_la_base(a, base):
@@ -2182,14 +2283,11 @@ def _chaine_membre(n):
     suite(courant)
     en_puissance = _args_en_puissance(courant)
     if tex_element(en_puissance) != tex_element(courant):
-        fraction = isinstance(en_puissance, Log) and isinstance(en_puissance.a, Pow)
-        suite(en_puissance, "=", PROP_PUISSANCES if fraction else None)
+        suite(en_puissance, "=", PROP_PUISSANCES if _a_un_log_de_puissance(en_puissance) else None)       # 10√10 = 10^(3/2) ; 2 − (2 − e) = e : calcul évident
         courant = en_puissance
-    if isinstance(courant, Log) and isinstance(courant.a, (Pow, E)) and not variables(courant.a):       # log_b(b^q) = q, ln(e) = 1
-        a = courant.a
-        k = _const(a.b) if isinstance(a, Pow) else F(1)
-        if k is not None and (a == courant.base or (isinstance(a, Pow) and a.a == (Nb(10) if courant.base is None else courant.base))):
-            suite(_nb_exact(k), "=", PROP_CAR_LN_E if isinstance(a, E) else PROP_LN_E_PUISSANCE if isinstance(courant.base, E) else PROP_LOG_BASE_PUISSANCE)
+    resolu, props = _logs_de_puissances(courant)                         # ln(e) = 1, log_b(b^q) = q, dans tout le membre
+    if props:
+        suite(resolu, "=", props[0] if len(props) == 1 else PROP_LOG_BASE_PUISSANCE)
     lu = _lecture_membre(chaine.elements[-1])
     if lu is not None:
         try:
@@ -2198,6 +2296,8 @@ def _chaine_membre(n):
             pass                                       # un regroupement impossible (exposant fractionnaire, constante pour ln) : la valeur seule
     dernier = chaine.elements[-1]
     exact = _const(dernier)                            # « = » seulement pour un calcul exact ; une valeur reconnue par le calcul numérique reste « ≈ »
+    if exact is None and not _contient_log(dernier):
+        exact = _valeur_avec_e(dernier)                # e − e·1 = 0
     if exact is not None and not isinstance(dernier, Nb):
         suite(_nb_exact(exact))
     elif exact is None and not isinstance(dernier, Texte):
@@ -2211,6 +2311,8 @@ def _chaine_membre(n):
 def _regrouper_membre(lu, suite, chaine):
     """Les lignes du regroupement de Σ c·log(u) + K en un seul logarithme (`suite(arbre, lien, propriété)` les ajoute), puis log_b(b^k) = k."""
     logs, cte = lu
+    if any(abs(c) > 12 for c, _ in logs):                                         # 1000·log(7) : log(7^1000) n'a aucun sens à écrire
+        raise _Hors
     ecrite = logs[0][1].base
     base, vb = _base_du_logarithme(ecrite)
     famille = "e" if vb is None else "10" if vb == 10 else "a"
@@ -2247,6 +2349,13 @@ def _regrouper_membre(lu, suite, chaine):
         suite(Nb(0), "=", PROP_LN_UN if vb is None else PROP_LOG_UN)
     elif vb is not None:
         k = _exposant_entier(q, vb)
+        if k is None:                                                             # log_8(32) = log_8(8^(5/3)) = 5/3
+            k = _exposant_de_la_base(Nb(q), ecrite)
+            if k is not None and k.denominator != 1:
+                suite(Log(_puissance_ecrite(base, k), ecrite), "=", PROP_PUISSANCES)
+                suite(_nb_exact(k), "=", PROP_LOG_BASE_PUISSANCE)
+                return
+            k = None
         if k is not None:                                                         # log(10^3) = 3, log(10) = 1
             if abs(k) != 1 or q != vb:
                 cible = Log(_puissance_ecrite(base, k), ecrite)
@@ -2376,10 +2485,15 @@ def _controler(r, g, d, x):
     return {**r, "etapes": etapes, "solutions": retenues, "remarque": None, **autres}
 
 
+def lecture_3c(g, d):
+    """Vrai si la 3C d'avant sait lire l'équation (ni π ni base de logarithme composée : log_(2x)(1296)) ; sinon seule la résolution de la 2M, écrite pour la 3C, s'applique."""
+    return not (_contient_pi(g) or _contient_pi(d) or _base_composee(g) or _base_composee(d))
+
+
 def corriger_equation_c(g, d, x, parametres=()):
     """Le corrigé complet de la 3C d'une équation (exponentielle, premier degré, logarithmique) : celui de exp_log.py, avec la carte « Contrôle » pour
     une équation logarithmique ; une équation logarithmique que exp_log.py ne traite pas passe par la résolution de la filière M écrite pour la 3C."""
-    r = _el.corriger_equation(g, d, x, parametres=parametres)
+    r = _el.corriger_equation(g, d, x, parametres=parametres) if lecture_3c(g, d) else None
     if r is None:
         return corriger_equation_3c(g, d, x)
     return controler_3c(r, g, d, x) if r.get("genre") == "logarithmique" else r
@@ -2390,7 +2504,7 @@ def corriger_equation_3c(g, d, x):
     filière M écrite pour la 3C (`en_3c`), puis la carte « Contrôle ». None quand elle ne s'applique pas."""
     if not contient_log_en_x(g, d):
         return None
-    r = regrouper(g, d, x)
+    r = _resoudre_sans_ed(g, d, x)
     if r is None:
         return None
     try:

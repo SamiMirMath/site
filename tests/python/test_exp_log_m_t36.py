@@ -25,6 +25,21 @@ def corrige_m(entree):
     return None if r is None else {el.METHODE_LOGARITHMES: r}
 
 
+
+def s_final(sortie):
+    """Le « S = … » de la dernière carte d'une sortie ok (la dernière variante quand il y en a deux)."""
+    cartes = sortie["cartes"] if "cartes" in sortie else sortie["variantes"][-1]["cartes"]
+    return next(b["tex"] for c in cartes for b in c["blocs"] if (c.get("badge") or c["titre"]) in ("Solution", "Résultat") and b["type"] == "resultat")
+
+
+def meme_s_en_3c(test, entree):
+    """Depuis le 02.11.2026 la 3C résout comme la 2M (contrôle des solutions au lieu de l'ensemble de définition) : même S."""
+    c, m = rel.resoudre(entree, "C"), rel.resoudre(entree, "M")
+    test.assertTrue(c["ok"], (entree, c))
+    test.assertEqual(s_final(c), s_final(m), entree)
+    test.assertNotIn("Ensemble de définition", [(k.get("badge") or k["titre"]) for k in (c["cartes"] if "cartes" in c else c["variantes"][-1]["cartes"])])
+
+
 class _Batterie:
     """Les vérifications communes à toutes les batteries ; chaque sous-classe donne BATTERIE (saisie, solutions arrondies à 10⁻³) et DEUX_METHODES."""
     BATTERIE = []
@@ -95,11 +110,12 @@ class TestBasePolynomiale(_Batterie, unittest.TestCase):
     BATTERIE = BATTERIE_M_BASE_POLYNOMIALE
     DEUX_METHODES = False
 
-    def test_la_3c_garde_son_message_de_lecture(self):
+    def test_la_3c_lit_la_base_et_resout_comme_la_2m(self):
+        """Depuis le 02.11.2026 la 3C lit log_(2x)(1296) et la résout comme la 2M : carte « Contrôle » (x = −3 : la base −6 n'existe pas), même S."""
         for entree, _ in self.BATTERIE:
             with self.subTest(entree=entree):
-                self.assertEqual(rel.resoudre(entree, "C"), {"ok": False, "erreur": el.MESSAGE_AUTRE_BASE})
-                self.assertEqual(el.apercu(entree)["ok"], True)             # l'aperçu lit la base : le message ne vient qu'à la résolution
+                meme_s_en_3c(self, entree)
+                self.assertEqual(el.apercu(entree)["ok"], True)
 
     def test_les_formes_refusees_restent_en_pas_encore(self):
         for entree in ["log_(x+1)(x+2)=1", "log_(x^2)(4)=1", "log_(2x)(5)=1/2", "log_(2x)(1296)=0", "log_(2x)(-4)=2", "log_(2x)(1296)=x"]:
@@ -180,11 +196,10 @@ class TestCarreDansLExposant(_Batterie, unittest.TestCase):
     BATTERIE = BATTERIE_M_CARRE_DANS_L_EXPOSANT
     ED_EN_PREMIER = False
 
-    def test_la_3c_ne_change_pas(self):
+    def test_la_3c_resout_comme_la_2m(self):
         for entree, _ in self.BATTERIE:
             with self.subTest(entree=entree):
-                self.assertEqual(rel.resoudre(entree, "C"), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
-                self.assertIsNone(elm.variantes_exposant(*(lambda s: (s.g, s.d, s.inconnue))(el.analyser_saisie("2^x=8", "M"))))
+                meme_s_en_3c(self, entree)
 
 
 class TestSecondMembreCalcule(_Batterie, unittest.TestCase):
@@ -223,10 +238,11 @@ class TestPi(_Batterie, unittest.TestCase):
     BATTERIE = BATTERIE_M_PI
     ED_EN_PREMIER = False
 
-    def test_la_3c_ne_lit_pas_pi_et_son_message_remplace_celui_des_trois_inconnues(self):
+    def test_la_3c_lit_pi_et_resout_comme_la_2m(self):
+        """Depuis le 02.11.2026 la 3C lit π et résout comme la 2M (e^x = π donne x = ln(π))."""
         for entree, _ in self.BATTERIE:
             with self.subTest(entree=entree):
-                self.assertEqual(rel.resoudre(entree, "C"), {"ok": False, "erreur": el.MESSAGE_PI_EN_3C})
+                meme_s_en_3c(self, entree)
 
     def test_lecture_de_pi(self):
         self.assertEqual(el.tex_saisie(*el.lire_membres("2pi")), r"2\pi")

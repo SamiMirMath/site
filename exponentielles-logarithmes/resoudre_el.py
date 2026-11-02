@@ -143,36 +143,54 @@ def _resoudre(entree, filiere):
         final = so.carte("Résultat", [so.resultat(el.tex_resultat(r))], style="final")
         return so.sortie_ok(el.tex_saisie(s.g, s.d), _cartes(r) + [final])
     if filiere == "M":
-        variantes = elm.variantes_changement(s.g, s.d, s.inconnue)
-        if variantes is not None:
-            return so.sortie_ok_variantes(el.tex_saisie(s.g, s.d), [so.variante(m, LIBELLES[m], _cartes_equation(variantes[m])) for m in el.METHODES],
-                                          el.METHODE_LOGARITHMES)
-        if elm.reconnu_changement(s.g, s.d, s.inconnue):          # au programme M (e^x + e^(−x) = 3 : racines irrationnelles) mais pas encore traité
-            return so.sortie_erreur(el.MESSAGE_PAS_ENCORE)
-        variantes = elm.variantes_exposant(s.g, s.d, s.inconnue)  # e^(6/x) = e^(x − 1), 7^√x = 3, e^(−ln x) = 3 : l'ensemble de définition d'abord
-        if variantes is not None:
-            return so.sortie_ok_variantes(el.tex_saisie(s.g, s.d), [so.variante(m, LIBELLES[m], _cartes_equation(variantes[m])) for m in el.METHODES],
-                                          el.METHODE_LOGARITHMES)
-        if elm.reconnu_exposant(s.g, s.d, s.inconnue):
-            return so.sortie_erreur(el.MESSAGE_PAS_ENCORE)
+        sortie = _voie_exposants(s, "M")
+        if sortie is not None:
+            return sortie
         r = elm.corriger_equation(s.g, s.d, s.inconnue)
         if r is not None:
             return _sortie_equation(s, r)
         if elm.contient_log_en_x(s.g, s.d):              # jamais le corrigé de la 3C (sans ensemble de définition) pour un 2M
             return so.sortie_erreur(el.message_non_resolu(s.g, s.d, s.inconnue))
-    variantes = el.variantes_equation(s.g, s.d, s.inconnue, s.parametres)
-    if variantes is not None:
-        option = _option(s, variantes[el.METHODE_LOGARITHMES])
-        return so.sortie_ok_variantes(
-            el.tex_saisie(s.g, s.d),
-            [so.variante(m, LIBELLES[m], _cartes_equation(variantes[m]), option=option is None or el.interpretation(variantes[m]) is not None)
-             for m in el.METHODES],
-            el.METHODE_LOGARITHMES, option=option)
-    r = elm.corriger_equation_c(s.g, s.d, s.inconnue, parametres=s.parametres)      # logarithmique : la carte « Contrôle » ; log(x + 3) = 2 log(3) : la résolution de la 2M sans ED
+    if filiere == "M" or elm.lecture_3c(s.g, s.d):         # équations exponentielles de la 3C (en 3C, hors π et base écrite comme une expression)
+        variantes = el.variantes_equation(s.g, s.d, s.inconnue, s.parametres)
+        if variantes is not None:
+            option = _option(s, variantes[el.METHODE_LOGARITHMES])
+            return so.sortie_ok_variantes(
+                el.tex_saisie(s.g, s.d),
+                [so.variante(m, LIBELLES[m], _cartes_equation(variantes[m]), option=option is None or el.interpretation(variantes[m]) is not None)
+                 for m in el.METHODES],
+                el.METHODE_LOGARITHMES, option=option)
+    if filiere == "C":
+        sortie = _voie_exposants(s, "C")                 # 3C = 2M depuis le 02.11.2026 : changement de variable, exposants 1/x √x ln x
+        if sortie is not None:
+            return sortie
+    corriger = el.corriger_equation if filiere == "M" else elm.corriger_equation_c
+    r = corriger(s.g, s.d, s.inconnue, parametres=s.parametres)     # 3C, logarithmique : la carte « Contrôle » ; log(x + 3) = 2 log(3) : la résolution de la 2M sans ED
     if r is None:
         g, d, _ = el.preparer_application(s.g, s.d, s.inconnue, s.parametres)
         return so.sortie_erreur(el.message_non_resolu(g, d, s.inconnue))
     return so.sortie_ok(el.tex_saisie(s.g, s.d), _cartes_equation(r), option=_option(s, r), besoin_sympy=r.get("besoin_sympy") or None)
+
+
+def _sortie_variantes(s, variantes):
+    return so.sortie_ok_variantes(el.tex_saisie(s.g, s.d), [so.variante(m, LIBELLES[m], _cartes_equation(variantes[m])) for m in el.METHODES],
+                                  el.METHODE_LOGARITHMES)
+
+
+def _voie_exposants(s, filiere):
+    """Les équations de la 2M qui ont deux méthodes sans être des équations exponentielles « simples » : second degré en aˣ (changement de variable) puis
+    exposants 1/x, √x, ±ln x ; la sortie, ou None quand l'équation n'est pas de cette forme. `filiere` : "C" écrit la 3C (Contrôle au lieu de l'ensemble de définition)."""
+    variantes = elm.variantes_changement(s.g, s.d, s.inconnue, filiere)
+    if variantes is not None:
+        return _sortie_variantes(s, variantes)
+    if elm.reconnu_changement(s.g, s.d, s.inconnue):          # au programme M (e^x + e^(−x) = 3 : racines irrationnelles) mais pas encore traité
+        return so.sortie_erreur(el.MESSAGE_PAS_ENCORE)
+    variantes = elm.variantes_exposant(s.g, s.d, s.inconnue, filiere)  # e^(6/x) = e^(x − 1), 7^√x = 3, e^(−ln x) = 3 : l'ensemble de définition d'abord (M)
+    if variantes is not None:
+        return _sortie_variantes(s, variantes)
+    if elm.reconnu_exposant(s.g, s.d, s.inconnue):
+        return so.sortie_erreur(el.MESSAGE_PAS_ENCORE)
+    return None
 
 
 def resoudre_json(entree, filiere="C"):

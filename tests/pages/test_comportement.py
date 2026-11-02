@@ -537,8 +537,11 @@ class TestComportement(unittest.TestCase):
         self.assertEqual(self.filiere(page), "C")
         self.assertIn("filiere=C", page.evaluer("location.search"))
         # le calcul d'une nouvelle équation suit la filière choisie
-        self.calculer(page, "4^x-2^x-6=0")
-        self.assertTrue(page.evaluer("!!document.querySelector('#cartes .err')"))                # 3C : « ne se résout pas avec les méthodes du cours »
+        self.calculer(page, "x*2^x=8")
+        self.assertTrue(page.evaluer("!!document.querySelector('#cartes .err')"))                # « ne se résout pas avec les méthodes du cours » (hors programme)
+        self.calculer(page, "4^x-2^x-6=0")                                                       # depuis le 02.11.2026 la 3C le résout aussi (t = 2^x)
+        self.assertFalse(page.evaluer("!!document.querySelector('#cartes .err')"))
+        self.assertTrue(page.evaluer("/Changement de variable/.test(document.querySelector('#cartes').textContent)"))
         page.evaluer("document.querySelector('#filiere button[data-filiere=M]').click()")
         page.attendre("document.querySelector('#cartes .card') && /Changement de variable/.test(document.querySelector('#cartes').textContent)", 60)
         self.assertTrue(page.evaluer("!!document.querySelector('#variantes') && !document.querySelector('#variantes').hidden"))     # le sélecteur de méthode aussi

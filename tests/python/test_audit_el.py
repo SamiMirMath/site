@@ -22,6 +22,8 @@ def resultats(saisie):
     """Le résultat de chaque méthode : les deux variantes d'une équation exponentielle, sinon l'unique corrigé."""
     s = el.analyser_saisie(saisie)
     v = el.variantes_equation(s.g, s.d, s.inconnue)
+    if v is None:                                           # depuis le 02.11.2026 : le 2e degré en aˣ et les exposants 1/x, √x, ln x ont aussi deux méthodes en 3C
+        v = elm.variantes_changement(s.g, s.d, s.inconnue, "C") or elm.variantes_exposant(s.g, s.d, s.inconnue, "C")
     return v if v is not None else {"-": elm.corriger_equation_c(s.g, s.d, s.inconnue)}
 
 
@@ -133,6 +135,8 @@ class TestRacineDouble(unittest.TestCase):
                     self.assertNotIn(" + -", texte)
             sa = el.analyser_saisie(saisie)
             for methode, r in resultats(saisie).items():
+                if r is None:
+                    continue
                 valeurs = [round(el.valeur(n), 9) for n in r["solutions"] or []]
                 self.assertEqual(len(valeurs), len(set(valeurs)), (saisie, methode))
 
@@ -417,7 +421,8 @@ class TestOrdreDesSolutions(unittest.TestCase):
 
     @staticmethod
     def ou(r):
-        return [e for c in r["etapes"] for l in c["lignes"] if isinstance(l, el.Chaine) for e in l.elements if isinstance(e, el.Ou)]
+        return [e for c in r["etapes"] for l in c["lignes"] if isinstance(l, el.Chaine) for e in l.elements
+                if isinstance(e, el.Ou) and all(isinstance(q.g, el.Var) for q in e.eqs)]       # « x = a ou x = b » : pas « x = 0 ou ln(x) = −1 » (deux branches)
 
     def test_croissant_et_meme_ordre_dans_les_deux_methodes(self):
         n = 0
@@ -512,8 +517,9 @@ class TestMiseEnEvidence(unittest.TestCase):
                     self.assertEqual([round(el.valeur(n), 3) for n in corriger(saisie, methode)["solutions"]], [attendu])
 
     def test_formes_qui_restent_hors_de_la_methode(self):
-        for saisie in ["4^x-2^x-6=0", "e^x+e^(-x)=3", "2^x+1=3^x", "e^x+e^(x+1)=2^x"]:
+        for saisie in ["2^x+1=3^x", "e^x+e^(x+1)=2^x"]:                       # (4^x − 2^x − 6 = 0 : résolu depuis le 02.11.2026, comme en 2M)
             self.assertEqual(rel.resoudre(saisie), {"ok": False, "erreur": el.MESSAGE_HORS_PROGRAMME})
+        self.assertEqual(rel.resoudre("e^x+e^(-x)=3"), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
 
 
 class TestMessages(unittest.TestCase):
@@ -536,13 +542,15 @@ class TestMessages(unittest.TestCase):
             with self.subTest(saisie):
                 self.assertEqual(rel.resoudre(saisie), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
 
-    def test_second_degre_en_a_puissance_x_hors_programme_quelle_que_soit_la_base(self):
-        """Groupe 10 (D2) : le même message pour 4^x − 2^x − 6 = 0 et e^(2x) − 3e^x + 2 = 0 (avant : « hors programme » ou « pas encore » selon la base) ;
-        la mise en évidence (D1) est au programme : voir TestMiseEnEvidence."""
-        for saisie in ["4^x-2^x-6=0", "9^x-3^x=6",
-                       "4^x+2^x=6", "e^(2x)-3e^x+2=0", "e^x+e^(-x)=3", "2^(2x)-5*2^x+4=0", "3^(2x)-4*3^x+3=0", "2^x+2^(-x)=2", "2*4^x-3*2^x+1=0"]:
+    def test_second_degre_en_a_puissance_x_meme_corrige_en_3c_et_en_2m(self):
+        """Groupe 10 (D2), amendé le 02.11.2026 : le 2e degré en aˣ était « hors programme » en 3C ; la 3C le résout maintenant comme la 2M (t = aˣ, t > 0),
+        et les racines irrationnelles de t (e^x + e^(−x) = 3) ont le même message « pas encore » dans les deux filières. La mise en évidence (D1) : voir TestMiseEnEvidence."""
+        for saisie in ["4^x-2^x-6=0", "9^x-3^x=6", "4^x+2^x=6", "e^(2x)-3e^x+2=0", "2^(2x)-5*2^x+4=0", "3^(2x)-4*3^x+3=0", "2^x+2^(-x)=2", "2*4^x-3*2^x+1=0"]:
             with self.subTest(saisie):
-                self.assertEqual(rel.resoudre(saisie), {"ok": False, "erreur": el.MESSAGE_HORS_PROGRAMME})
+                c = rel.resoudre(saisie)
+                self.assertTrue(c["ok"], c)
+                self.assertEqual(c, rel.resoudre(saisie, "M"))
+        self.assertEqual(rel.resoudre("e^x+e^(-x)=3"), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
 
     def test_aucune_forme_resolue_n_est_classee_hors_programme(self):
         for saisie, _ in BATTERIE_AUDIT:

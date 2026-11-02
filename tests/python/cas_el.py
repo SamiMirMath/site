@@ -153,12 +153,10 @@ BATTERIE_APPLICATIONS = [
     ("-2Q=Q*1,04^n", []), ("Q*1,04^n=Q", [0.0]), ("5Q/2=Q*(1+3,5%)^t", [26.635]), ("2C=C*(1+4,5%)^n", [15.747]),
 ]
 
-# Aucune méthode ne s'applique (EL-11) : un vrai hors-programme, ou une forme du programme que l'outil ne gère pas encore
-HORS_PROGRAMME = ["x*2^x=8", "2^x+3^x=5", "2^x+3^x+1=5", "2^x-3^(x+1)=3^x+1", "e^x+e^(x+1)=2^x", "x^x=4", "2^x=x+1", "2^(sqrt(x))=4", "2^(1/x)=4", "x/2^x=1", "x*e^x=1", "2^x=3^x+x",
-                  "log(x)=x-1", "ln(x)=x", "x*log(x)=1", "e^x=ln(x)", "log(x)=2^x", "log(x)/x=1", "ln(x)+x=2",
-                  # pour les 3C, le 2e degré en a^x et les exposants qui ne diffèrent pas d'un entier (la mise en évidence est au programme)
-                  "4^x-2^x-6=0", "9^x-3^x=6", "e^(2x)-3e^x+2=0",
-                  "e^x+e^(-x)=3", "2^(2x)-5*2^x+4=0", "2^x+1=3^x"]
+# Aucune méthode ne s'applique (EL-11) : un vrai hors-programme, ou une forme du programme que l'outil ne gère pas encore.
+# Depuis le 02.11.2026 la 3C résout tout ce que la 2M résout : le 2e degré en a^x, 2^(√x) = 4, 2^(1/x) = 4… n'y figurent plus.
+HORS_PROGRAMME = ["x*2^x=8", "2^x+3^x=5", "2^x+3^x+1=5", "2^x-3^(x+1)=3^x+1", "e^x+e^(x+1)=2^x", "x^x=4", "2^x=x+1", "x/2^x=1", "x*e^x=1", "2^x=3^x+x",
+                  "log(x)=x-1", "ln(x)=x", "x*log(x)=1", "e^x=ln(x)", "log(x)=2^x", "log(x)/x=1", "ln(x)+x=2"]
 PAS_ENCORE = ["2^(x^3)=8", "2^(x^3)=3^x", "5^(x^3+1)=7"]
 
 # Correctif du 02.11.2026 : la 3C résout ce que la 2M résolvait (regroupement des logarithmes), puis contrôle chaque solution dans l'équation de départ.
@@ -174,6 +172,11 @@ BATTERIE_3C_REGROUPEMENT = [
 # (saisie, solutions trouvées puis rejetées au contrôle) : le logarithme d'un nombre négatif ou nul « n'existe pas »
 BATTERIE_3C_REJETS = [("log(x) + log(x-3) = 1", [F(-2)]), ("2log(x) = log(4x)", [F(0)]), ("log(x-3)+log(1-x)=0", [F(2)]),
                       ("log(x)=log(x^2-6)", [F(-2)]), ("log(x+1)+log(x-2)=log(x+1)+1", [F(-1)])]
+
+# Exponentielles « hors programme 3C » jusqu'au 02.11.2026 (2e degré en aˣ, exposants 1/x et √x) : résolues comme en 2M
+EXPONENTIELLES_3C_NOUVELLES = ["2^(1/x)=4", "2^(sqrt(x))=4", "9^x-3^x=6"]
+# racines irrationnelles de t : « pas encore » dans les deux filières depuis le 02.11.2026 (le moteur 3C seul dit encore « hors programme »)
+PAS_ENCORE_COMME_EN_2M = ["e^x+e^(-x)=3"]
 
 # Équations sans exponentielle ni logarithme : le message dit ce que l'outil traite
 SANS_EXP_LOG = ["x^2=4", "2x+1=9", "sqrt(x)=3", "(x+1)^3=8", "x^3-x=0", "3x=6", "x/2=1"]
@@ -320,6 +323,10 @@ def entrees_el_m():
 def entrees_el():
     """Toutes les entrées de l'outil, sans doublon, dans l'ordre : équations résolues, calculs, messages, erreurs de lecture."""
     saisies = [s for batterie in (BATTERIE_E1, BATTERIE_E2, BATTERIE_E3, BATTERIE_E4, BATTERIE_C1, BATTERIE_AUDIT, BATTERIE_APPLICATIONS) for s, _ in batterie]
-    saisies += [s for s, _ in BATTERIE_3C_REGROUPEMENT] + [s for s, _ in BATTERIE_3C_REJETS]
+    saisies += [s for s, _ in BATTERIE_3C_REGROUPEMENT] + [s for s, _ in BATTERIE_3C_REJETS] + EXPONENTIELLES_3C_NOUVELLES + PAS_ENCORE_COMME_EN_2M
+    # les autres formes de la 2M, résolues aussi en 3C depuis le 02.11.2026 (changement de variable, exposants 1/x √x ln x, base polynomiale, π…)
+    for batterie in (BATTERIE_M_VAR, BATTERIE_M_EXPOSANTS, BATTERIE_M_BASE_POLYNOMIALE, BATTERIE_M_BICARRE, BATTERIE_M_BASE_RATIONNELLE, BATTERIE_M_IRRATIONNEL,
+                     BATTERIE_M_CARRE_DANS_L_EXPOSANT, BATTERIE_M_SECOND_MEMBRE_CALCULE, BATTERIE_M_PRODUIT_X_LOG, BATTERIE_M_PI):
+        saisies += [s for s, _ in batterie]
     saisies += SANS_E1 + SANS_E2 + SANS_E3 + HORS_PROGRAMME + PAS_ENCORE + SANS_EXP_LOG + CALCULS_NON_RESOLUS + ERREURS_DE_LECTURE
     return list(dict.fromkeys(saisies))

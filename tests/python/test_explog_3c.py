@@ -1,7 +1,8 @@
 """Correctif du 02.11.2026 — « Exponentielles et logarithmes », filière 3C : tout ce que la 2M résout, la 3C le résout aussi (log(x + 3) = 2 log(3)),
 sans ensemble de définition : on résout directement, puis la carte « Contrôle » remplace x par chaque solution dans l'équation de DÉPART.
 
-EL-42  la 3C résout ce que la 2M résout (famille « regroupement » ; les autres familles au commit suivant), avec exactement le même S ;
+EL-42  la 3C résout tout ce que la 2M résout (regroupement, constante irrationnelle, log_x(n) = p/q, second membre calculé, carré dans l'exposant, x − x·ln x = 0,
+       2e degré en aˣ, bicarré, exposants 1/x √x ln x, base polynomiale, π), avec exactement le même S et les mêmes messages quand rien ne s'applique ;
 EL-43  la carte « Contrôle » : chaque solution est remplacée, chaque membre calculé (propriété nommée, valeur exacte puis approchée), conclusion ;
        un logarithme d'un nombre négatif ou nul « n'existe pas » : la solution est rejetée ; rien de faux n'est jamais affiché ;
 EL-44  chaque ligne de la 3C est une implication vraie sur tout le domaine de l'équation de départ (aucune racine perdue), propriétés de la liste fermée,
@@ -15,7 +16,9 @@ import exp_log as el
 import exp_log_m as elm
 import resoudre_el as rel
 import sortie as so
-from cas_el import BATTERIE_3C_REGROUPEMENT, BATTERIE_3C_REJETS, BATTERIE_M, M_TOUT_L_ED, entrees_el, entrees_el_m
+from cas_el import (BATTERIE_3C_REGROUPEMENT, BATTERIE_3C_REJETS, BATTERIE_M, BATTERIE_M_BASE_POLYNOMIALE, BATTERIE_M_BASE_RATIONNELLE, BATTERIE_M_BICARRE,
+                    BATTERIE_M_CARRE_DANS_L_EXPOSANT, BATTERIE_M_EXPOSANTS, BATTERIE_M_IRRATIONNEL, BATTERIE_M_PI, BATTERIE_M_PRODUIT_X_LOG,
+                    BATTERIE_M_SECOND_MEMBRE_CALCULE, BATTERIE_M_VAR, M_TOUT_L_ED, entrees_el, entrees_el_m)
 from test_exp_log_m import MP, ecart, evaluer, racines
 
 SANS_PERTE = [("log(x^2)=2", [-10, 10]), ("log(x(x-3))=1", [-2, 5]), ("log(x)+log(x-3)=1", [5]), ("ln(x^2)=2ln(3)", [-3, 3])]
@@ -258,31 +261,108 @@ class TestImplicationsVraies(unittest.TestCase):
 
 
 class TestSDeCEgalSDeM(unittest.TestCase):
-    """EL-42 : pour tout le corpus, quand la 3C résout, son S est exactement celui de la 2M (jamais une solution de moins ni de plus) ; toute équation de la
-    famille « regroupement » est résolue en 3C. (Les autres familles de la 2M passent en 3C au commit suivant.)"""
+    """EL-42 : pour tout le corpus, la 3C résout exactement ce que la 2M résout, avec le même S (jamais une solution de moins ni de plus) ; quand la 2M ne
+    résout pas, la 3C donne le même message."""
 
     def test_meme_s_sur_tout_le_corpus(self):
-        compares = regroupement = 0
+        compares = refus = 0
         for entree in dict.fromkeys(entrees_el() + entrees_el_m()):
             c, m = rel.resoudre(entree, "C"), rel.resoudre(entree, "M")
-            if not m["ok"]:
-                continue
-            s = el.analyser_saisie(entree, "M")
-            famille = s.genre == "equation" and elm.contient_log_en_x(s.g, s.d) and elm.regrouper(s.g, s.d, s.inconnue) is not None
-            if famille:
-                regroupement += 1
+            if m["ok"]:
                 self.assertTrue(c["ok"], (entree, c))
-            if c["ok"]:
-                compares += 1
                 self.assertEqual(solution_finale(c), solution_finale(m), entree)
-        self.assertGreater(compares, 400)
-        self.assertGreater(regroupement, 60)
+                compares += 1
+            elif c["ok"]:
+                self.fail(f"{entree} : résolue en 3C seulement")
+            else:
+                refus += 1
+        self.assertGreater(compares, 500)
+        self.assertGreater(refus, 30)
+
+    def test_les_messages_de_refus_ne_different_que_par_la_lecture(self):
+        """Quand la 2M refuse une équation sans logarithme de l'inconnue (hors programme, pas encore), la 3C donne le même message."""
+        for entree in dict.fromkeys(entrees_el() + entrees_el_m()):
+            c, m = rel.resoudre(entree, "C"), rel.resoudre(entree, "M")
+            if not c["ok"] and not m["ok"]:
+                with self.subTest(entree=entree):
+                    self.assertEqual(c["erreur"], m["erreur"])
 
     def test_le_format_est_valide_et_le_json_strict(self):
         for entree, _ in BATTERIE_3C_REGROUPEMENT + BATTERIE_3C_REJETS:
             with self.subTest(entree=entree):
                 self.assertEqual(so.valider(rel.resoudre(entree, "C")), [])
                 self.assertEqual(rel.resoudre_json(entree), rel.resoudre_json(entree, "C"))
+
+
+def resultats_c(entree):
+    """Les résultats du moteur pour la 3C : chacune des deux méthodes d'une équation exponentielle, sinon l'unique corrigé."""
+    s = el.analyser_saisie(entree, "C")
+    v = el.variantes_equation(s.g, s.d, s.inconnue, s.parametres) if elm.lecture_3c(s.g, s.d) else None
+    v = v or elm.variantes_changement(s.g, s.d, s.inconnue, "C") or elm.variantes_exposant(s.g, s.d, s.inconnue, "C")
+    return s, (list(v.values()) if v else [elm.corriger_equation_c(s.g, s.d, s.inconnue)])
+
+
+FAMILLES = {"2e degré en a^x": BATTERIE_M_VAR, "exposants 1/x √x ln x": BATTERIE_M_EXPOSANTS, "base polynomiale": BATTERIE_M_BASE_POLYNOMIALE,
+            "bicarré": BATTERIE_M_BICARRE, "log_x(n) = p/q": BATTERIE_M_BASE_RATIONNELLE, "constante irrationnelle": BATTERIE_M_IRRATIONNEL,
+            "carré dans l'exposant": BATTERIE_M_CARRE_DANS_L_EXPOSANT, "second membre calculé": BATTERIE_M_SECOND_MEMBRE_CALCULE,
+            "x − x·ln x = 0": BATTERIE_M_PRODUIT_X_LOG, "π": BATTERIE_M_PI}
+
+
+def _oracle_famille(nom):
+    def test(self):
+        """Chaque entrée de la famille est résolue en 3C, chaque solution annule g − d (oracle mpmath), aucune racine n'est perdue (balayage numérique), le
+        Contrôle rejette ce qui n'existe pas ; mêmes solutions qu'en 2M."""
+        for entree, _ in FAMILLES[nom]:
+            with self.subTest(entree=entree):
+                s, rs = resultats_c(entree)
+                self.assertTrue(all(r is not None for r in rs), "la 3C ne résout pas cette équation")
+                m = elm.corriger_equation(s.g, s.d, s.inconnue)
+                for r in rs:
+                    if r.get("message"):                        # méthode « même base » qui ne s'applique pas : pas de solution à comparer
+                        continue
+                    trouvees = solutions(r)
+                    for v in trouvees:
+                        e = ecart(s, v)
+                        self.assertIsNotNone(e, "solution où une expression n'existe pas")
+                        self.assertLess(abs(e), MP.mpf("1e-9") * (1 + abs(v)))
+                    for rac in racines(s):
+                        self.assertTrue(any(abs(rac - v) < MP.mpf("1e-9") * (1 + abs(rac)) for v in trouvees), ("racine perdue", rac))
+                    if m is not None and m["solutions"] is not None:
+                        self.assertEqual([float(v) for v in trouvees], [float(v) for v in solutions(m)])
+    test.__doc__ = f"Oracle mpmath sur la famille « {nom} » en 3C."
+    return test
+
+
+class TestToutesLesFamilles(unittest.TestCase):
+    pass
+
+
+for _i, _nom in enumerate(FAMILLES):
+    setattr(TestToutesLesFamilles, f"test_oracle_{_i}", _oracle_famille(_nom))
+
+
+class TestImplicationsAutresFamilles(unittest.TestCase):
+    """Les familles sans embranchement (exposants, x − x·ln x = 0) : chaque équation d'une chaîne est vraie en toute racine, comme pour le regroupement."""
+
+    def test_toute_ligne_est_vraie_en_chaque_racine(self):
+        verifiees = 0
+        for entree, _ in BATTERIE_M_EXPOSANTS + BATTERIE_M_PRODUIT_X_LOG + BATTERIE_M_BASE_RATIONNELLE:
+            s, rs = resultats_c(entree)
+            for r in rs:
+                for rac in racines(s):
+                    for carte in r["etapes"]:
+                        if carte["titre"] == "Contrôle":
+                            continue
+                        for ligne in carte["lignes"]:
+                            for e in (ligne.elements if isinstance(ligne, el.Chaine) else []):
+                                if not isinstance(e, el.Eq) or el.variables(e.g) | el.variables(e.d) != {s.inconnue}:
+                                    continue
+                                a, b = evaluer(e.g, rac), evaluer(e.d, rac)
+                                if a is None or b is None:
+                                    continue
+                                verifiees += 1
+                                self.assertLess(abs(a - b), MP.mpf("1e-9") * (1 + abs(a) + abs(b)), (entree, el.tex_element(e), rac))
+        self.assertGreater(verifiees, 40)
 
 
 class TestM(unittest.TestCase):
