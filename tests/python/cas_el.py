@@ -159,8 +159,21 @@ HORS_PROGRAMME = ["x*2^x=8", "2^x+3^x=5", "2^x+3^x+1=5", "2^x-3^(x+1)=3^x+1", "e
                   # pour les 3C, le 2e degré en a^x et les exposants qui ne diffèrent pas d'un entier (la mise en évidence est au programme)
                   "4^x-2^x-6=0", "9^x-3^x=6", "e^(2x)-3e^x+2=0",
                   "e^x+e^(-x)=3", "2^(2x)-5*2^x+4=0", "2^x+1=3^x"]
-PAS_ENCORE = ["log(x)=log(5)", "log(x^2+1)=-1",
-              "log(x)+log(x-1)=1", "2^(x^3)=8", "2^(x^3)=3^x", "5^(x^3+1)=7", "log(x)+log(2)=1", "log(x)-log(2)=1"]
+PAS_ENCORE = ["2^(x^3)=8", "2^(x^3)=3^x", "5^(x^3+1)=7"]
+
+# Correctif du 02.11.2026 : la 3C résout ce que la 2M résolvait (regroupement des logarithmes), puis contrôle chaque solution dans l'équation de départ.
+# (saisie, solutions) ; les cinq premières sont celles de l'énoncé du correctif, les trois suivantes ne doivent perdre aucune solution
+# (log(x²) = 2, log(x(x − 3)) = 1 : le carré ou le produit garde les solutions négatives ; ln(x²) = 2 ln(3)).
+BATTERIE_3C_REGROUPEMENT = [
+    ("log(x+3) = 2log(3)", [F(6)]), ("log(2x-1) = log(3) + log(5)", [F(8)]), ("log(x) + log(x-3) = 1", [F(5)]), ("2log(x) = log(4x)", [F(4)]),
+    ("ln(x+1) = 3ln(2)", [F(7)]),
+    ("log(x^2)=2", [F(-10), F(10)]), ("log(x(x-3))=1", [F(-2), F(5)]), ("ln(x^2)=2ln(3)", [F(-3), F(3)]),
+    ("log(x)=log(5)", [F(5)]), ("log(x)+log(2)=1", [F(5)]), ("log(x)-log(2)=1", [F(20)]), ("log(5+x)=log(4-x)+1", [F(35, 11)]),
+    ("3log(x)=2log(8)", [F(4)]), ("log(x-3)+log(1-x)=0", []), ("log2(3x-4)+log2(10x-4)=2log2(5x-2)", [F(6)]),
+]
+# (saisie, solutions trouvées puis rejetées au contrôle) : le logarithme d'un nombre négatif ou nul « n'existe pas »
+BATTERIE_3C_REJETS = [("log(x) + log(x-3) = 1", [F(-2)]), ("2log(x) = log(4x)", [F(0)]), ("log(x-3)+log(1-x)=0", [F(2)]),
+                      ("log(x)=log(x^2-6)", [F(-2)]), ("log(x+1)+log(x-2)=log(x+1)+1", [F(-1)])]
 
 # Équations sans exponentielle ni logarithme : le message dit ce que l'outil traite
 SANS_EXP_LOG = ["x^2=4", "2x+1=9", "sqrt(x)=3", "(x+1)^3=8", "x^3-x=0", "3x=6", "x/2=1"]
@@ -307,5 +320,6 @@ def entrees_el_m():
 def entrees_el():
     """Toutes les entrées de l'outil, sans doublon, dans l'ordre : équations résolues, calculs, messages, erreurs de lecture."""
     saisies = [s for batterie in (BATTERIE_E1, BATTERIE_E2, BATTERIE_E3, BATTERIE_E4, BATTERIE_C1, BATTERIE_AUDIT, BATTERIE_APPLICATIONS) for s, _ in batterie]
+    saisies += [s for s, _ in BATTERIE_3C_REGROUPEMENT] + [s for s, _ in BATTERIE_3C_REJETS]
     saisies += SANS_E1 + SANS_E2 + SANS_E3 + HORS_PROGRAMME + PAS_ENCORE + SANS_EXP_LOG + CALCULS_NON_RESOLUS + ERREURS_DE_LECTURE
     return list(dict.fromkeys(saisies))

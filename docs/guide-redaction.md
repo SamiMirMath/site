@@ -125,6 +125,15 @@ aussi. Ni « croissance comparée », ni « podium », ni « limite de référen
 exponentielle reste permise, sans invoquer de croissance comparée. La règle du podium servira seulement à **prédire** le résultat, dans un
 encadré à part (étape 6 du chantier).
 
+**R20. Contrôle d'une équation logarithmique en 3C** (décision du 02.11.2026, outil « Exponentielles et logarithmes », filière 3C). La 3C n'a pas d'ensemble de définition : on **résout directement**, puis une dernière carte
+« Contrôle » **remplace x par chaque solution trouvée dans l'équation de DÉPART**. (1) Chaque ligne de la résolution est une **implication vraie sur tout le domaine de l'équation de départ** : le regroupement
+(`k·log u = log(u^k)`, `log u + log v = log(uv)`, `log u − log v = log(u/v)`), `log u = log v ⇒ u = v` et « on multiplie les deux membres par les dénominateurs » s'écrivent **⇒** (et non ⇔), les propriétés sans « sur l'ED » ;
+on ne **développe** jamais (`log(u²) = 2 log(u)` perd les solutions négatives, `log(uv) = log u + log v` aussi : `log(x²) = 2` donne `x² = 10²`, `x = −10 ou x = 10`). (2) Pour chaque solution : une phrase « On remplace x = 6 dans l'équation de départ », puis **une
+chaîne par membre** : le membre avec x remplacé, ses arguments calculés (`log(6 + 3) = log(9)`), le regroupement avec sa propriété nommée (`2 log(3) = log(3²) = log(9)`), `log_a(a^k) = k` quand l'argument est une puissance de la base (`log(10) = 1`),
+puis la valeur **approchée** (`≈ 0,954`) quand elle n'est pas rationnelle ; une valeur reconnue seulement par le calcul numérique (solution irrationnelle) s'écrit toujours avec « ≈ », jamais « = ». Conclusion : « Les deux membres sont égaux : x = 6 est solution ✓ ».
+(3) Un logarithme d'un nombre négatif ou nul : « x = −2 : log(−2) n'existe pas. x = −2 est rejetée. » (de même une base ≤ 0 ou égale à 1, un dénominateur nul, une racine d'un nombre négatif) ; l'ensemble final ne contient que les solutions contrôlées,
+et « Aucune solution trouvée ne convient » quand elles sont toutes rejetées. (4) Remplace l'ancienne carte « Vérification » (argument > 0). La filière M garde l'ensemble de définition d'abord et sa « Vérification » (R17).
+
 ---
 
 ## Exemples de référence

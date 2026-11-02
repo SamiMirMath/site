@@ -6,6 +6,7 @@ import unittest
 
 import moteurs  # noqa: F401  (chemins des moteurs)
 import exp_log as el
+import exp_log_m as elm
 import resoudre_el as rel
 import sortie as so
 from cas_el import BATTERIE_AUDIT, HORS_PROGRAMME, PAS_ENCORE, entrees_el
@@ -21,7 +22,7 @@ def resultats(saisie):
     """Le résultat de chaque méthode : les deux variantes d'une équation exponentielle, sinon l'unique corrigé."""
     s = el.analyser_saisie(saisie)
     v = el.variantes_equation(s.g, s.d, s.inconnue)
-    return v if v is not None else {"-": el.corriger_equation(s.g, s.d, s.inconnue)}
+    return v if v is not None else {"-": elm.corriger_equation_c(s.g, s.d, s.inconnue)}
 
 
 # Grille de formes du chapitre : aucune ne doit lever d'exception (F5), chaque sortie respecte le format commun
@@ -87,7 +88,7 @@ class TestBatterieAudit(unittest.TestCase):
                             if isinstance(l, el.Message):
                                 continue
                             for p in l.props + [l.note]:
-                                self.assertTrue(p is None or p in el.PROPRIETES or isinstance(p, el.Car), (saisie, p))
+                                self.assertTrue(p is None or p in el.PROPRIETES or p in elm.PROPRIETES_C_AJOUTEES or isinstance(p, el.Car), (saisie, p))
 
 
 class TestRacineDouble(unittest.TestCase):
@@ -309,7 +310,9 @@ class TestLogarithmeDeXCarre(unittest.TestCase):
             self.assertNotIn(r"2\log(x)", texte)
             self.assertNotIn(r"2\ln(x)", texte)
             self.assertNotIn(r"\left|", texte)
-        self.assertEqual(rel.resoudre("log(x^2-1)=1/2"), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
+        s = rel.resoudre("log(x^2-1)=1/2")                       # depuis le 02.11.2026 : la 3C résout comme la 2M, puis contrôle (x₁ et x₂ sont les deux racines)
+        self.assertTrue(s["ok"], s)
+        self.assertEqual(s["cartes"][-2]["badge"], "Contrôle")
 
 
 class TestExposantsEnChiffresSuperieurs(unittest.TestCase):
@@ -529,7 +532,7 @@ class TestMessages(unittest.TestCase):
         for saisie in ["log(x)=x-1", "ln(x)=x", "x*log(x)=1", "e^x=ln(x)", "log(x)=2^x", "log(x)/x=1", "ln(x)+x=2", "2^x*log(x)=1"]:
             with self.subTest(saisie):
                 self.assertEqual(rel.resoudre(saisie), {"ok": False, "erreur": el.MESSAGE_HORS_PROGRAMME})
-        for saisie in ["log(x)=log(5)", "log(x)+log(x-1)=1", "2^(x^3)=8"]:            # formes du programme pas encore gérées
+        for saisie in ["2^(x^3)=8"]:            # formes du programme pas encore gérées (log(x) = log(5), log(x) + log(x − 1) = 1 : résolues depuis le 02.11.2026)
             with self.subTest(saisie):
                 self.assertEqual(rel.resoudre(saisie), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
 
@@ -550,13 +553,15 @@ class TestMessages(unittest.TestCase):
 
 class TestRobustesse(unittest.TestCase):
     def test_aucune_exception_et_format_commun(self):
-        """F5 : aucune saisie de la grille ne lève d'exception ; log(x) + log(2) = 1 a le message « pas encore »."""
+        """F5 : aucune saisie de la grille ne lève d'exception ; log(x) + log(2) = 1 est résolu depuis le 02.11.2026 (x = 5, contrôlé)."""
         for saisie in grille():
             with self.subTest(saisie):
                 s = rel.resoudre(saisie)
                 self.assertEqual(so.valider(s), [])
-        for saisie in ["log(x)+log(2)=1", "log(x)-log(2)=1"]:
-            self.assertEqual(rel.resoudre(saisie), {"ok": False, "erreur": el.MESSAGE_PAS_ENCORE})
+        for saisie, S in [("log(x)+log(2)=1", "5"), ("log(x)-log(2)=1", "20")]:
+            sortie = rel.resoudre(saisie)
+            self.assertTrue(sortie["ok"], sortie)
+            self.assertEqual(sortie["cartes"][-1]["blocs"][0]["tex"], r"S = \left\{" + S + r"\right\}")
 
     def test_les_listes_de_messages_restent_sans_solution(self):
         for saisie in HORS_PROGRAMME + PAS_ENCORE:

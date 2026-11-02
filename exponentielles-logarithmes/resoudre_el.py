@@ -168,11 +168,11 @@ def _resoudre(entree, filiere):
             [so.variante(m, LIBELLES[m], _cartes_equation(variantes[m]), option=option is None or el.interpretation(variantes[m]) is not None)
              for m in el.METHODES],
             el.METHODE_LOGARITHMES, option=option)
-    r = el.corriger_equation(s.g, s.d, s.inconnue, parametres=s.parametres)
+    r = elm.corriger_equation_c(s.g, s.d, s.inconnue, parametres=s.parametres)      # logarithmique : la carte « Contrôle » ; log(x + 3) = 2 log(3) : la résolution de la 2M sans ED
     if r is None:
         g, d, _ = el.preparer_application(s.g, s.d, s.inconnue, s.parametres)
         return so.sortie_erreur(el.message_non_resolu(g, d, s.inconnue))
-    return so.sortie_ok(el.tex_saisie(s.g, s.d), _cartes_equation(r), option=_option(s, r))
+    return so.sortie_ok(el.tex_saisie(s.g, s.d), _cartes_equation(r), option=_option(s, r), besoin_sympy=r.get("besoin_sympy") or None)
 
 
 def resoudre_json(entree, filiere="C"):

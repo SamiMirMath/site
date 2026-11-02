@@ -3124,7 +3124,7 @@
  },
  "-log(x)=2": {
   "au_depart": {
-   "progression": "Étape 1 / 3",
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
@@ -3151,6 +3151,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = \\frac{1}{100}⟧ dans l'équation de départ :⟦-\\log\\left(\\frac{1}{100}\\right) \\approx 2{,}000⟧⟦2⟧Les deux membres sont égaux : ⟦x = \\frac{1}{100}⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -3159,7 +3169,7 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 3 / 3"
+  "progression_finale": "Étape 4 / 4"
  },
  "0,1^x=2^(x+1)": {
   "au_depart": {
@@ -22016,8 +22026,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 3Vérification⟦x^{2} = e^{\\frac{5}{2}} > 0⟧(le logarithme est bien défini) ⟦\\checkmark⟧",
-    "titre": "Étape 3Vérification"
+    "texte": "Étape 3ContrôleOn remplace ⟦x_{1} \\approx -3{,}490⟧ dans l'équation de départ :⟦2\\ln(x_{1}^{2}) - 5 = 2\\ln\\left(e^{\\frac{5}{2}}\\right) - 5 \\approx 0{,}000⟧⟦0⟧Les deux membres sont égaux : ⟦x_{1} \\approx -3{,}490⟧ est solution ✓.On remplace ⟦x_{2} \\approx 3{,}490⟧ dans l'équation de départ :⟦2\\ln(x_{2}^{2}) - 5 = 2\\ln\\left(e^{\\frac{5}{2}}\\right) - 5 \\approx 0{,}000⟧⟦0⟧Les deux membres sont égaux : ⟦x_{2} \\approx 3{,}490⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
    },
    {
     "classes": [
@@ -22051,9 +22061,58 @@
   ],
   "progression_finale": ""
  },
+ "2log(x) = log(4x)": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Regroupement des logarithmes⟦2\\log(x) = \\log(4x)⟧⟦\\Rightarrow⟧⟦\\log(x^{2}) = \\log(4x)⟧(k · log u = log(u^k))",
+    "titre": "Étape 1Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Égalité des logarithmes⟦\\log(x^{2}) = \\log(4x)⟧⟦\\Rightarrow⟧⟦x^{2} = 4x⟧(log u = log v ⇒ u = v)⟦\\iff⟧⟦x^{2} - 4x = 0⟧⟦\\iff⟧⟦x(x - 4) = 0⟧⟦\\iff⟧⟦x = 0 \\text{ ou } x = 4⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 2Égalité des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Contrôle⟦x = 0⟧ : ⟦\\log(0)⟧ n'existe pas. ⟦x = 0⟧ est rejetée.On remplace ⟦x = 4⟧ dans l'équation de départ :⟦2\\log(4) = \\log(4^{2})⟧(k · log u = log(u^k))⟦\\phantom{2\\log(4)} = \\log(16) \\approx 1{,}204⟧⟦\\log(4 \\cdot 4) = \\log(16) \\approx 1{,}204⟧Les deux membres sont égaux : ⟦x = 4⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{4\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
  "2log(x)-5=0": {
   "au_depart": {
-   "progression": "Étape 1 / 3",
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
@@ -22080,6 +22139,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = 100\\sqrt{10} \\approx 316{,}228⟧ dans l'équation de départ :⟦2\\log(100\\sqrt{10}) - 5 = 2\\log\\left(10^{\\frac{5}{2}}\\right) - 5 \\approx 0{,}000⟧⟦0⟧Les deux membres sont égaux : ⟦x = 100\\sqrt{10} \\approx 316{,}228⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -22088,11 +22157,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 3 / 3"
+  "progression_finale": "Étape 4 / 4"
  },
  "2log_3(x)=10": {
   "au_depart": {
-   "progression": "Étape 1 / 3",
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
@@ -22119,6 +22188,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = 243⟧ dans l'équation de départ :⟦2\\log_{3}(243) = \\log_{3}(243^{2})⟧(k · log_a u = log_a(u^k))⟦\\phantom{2\\log_{3}(243)} = \\log_{3}(59\\text{’}049) = \\log_{3}(3^{10}) = 10⟧(log_a(a^k) = k)⟦10⟧Les deux membres sont égaux : ⟦x = 243⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -22127,7 +22206,7 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 3 / 3"
+  "progression_finale": "Étape 4 / 4"
  },
  "2x+1=9": {
   "au_depart": {
@@ -24234,7 +24313,7 @@
  },
  "3=log(x)": {
   "au_depart": {
-   "progression": "Étape 1 / 2",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
@@ -24251,6 +24330,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x = 1\\text{’}000⟧ dans l'équation de départ :⟦3⟧⟦\\log(1\\text{’}000) = \\log(10^{3}) = 3⟧(log_a(a^k) = k)Les deux membres sont égaux : ⟦x = 1\\text{’}000⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -24259,7 +24348,7 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 2 / 2"
+  "progression_finale": "Étape 3 / 3"
  },
  "3Q = Q*(1+3,75%)^x": {
   "au_depart": {
@@ -27423,6 +27512,55 @@
     "progression_finale": "Étape 3 / 3"
    }
   }
+ },
+ "3log(x)=2log(8)": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Regroupement des logarithmes⟦3\\log(x) = 2\\log(8)⟧⟦\\Rightarrow⟧⟦\\log(x^{3}) = \\log(64)⟧(k · log u = log(u^k))",
+    "titre": "Étape 1Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Égalité des logarithmes⟦\\log(x^{3}) = \\log(64)⟧⟦\\Rightarrow⟧⟦x^{3} = 64⟧(log u = log v ⇒ u = v)⟦\\iff⟧⟦x = 4⟧(xⁿ = c ⇔ x = c^(1/n) (n impair))",
+    "titre": "Étape 2Égalité des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = 4⟧ dans l'équation de départ :⟦3\\log(4) = \\log(4^{3})⟧(k · log u = log(u^k))⟦\\phantom{3\\log(4)} = \\log(64) \\approx 1{,}806⟧⟦2\\log(8) = \\log(8^{2})⟧(k · log u = log(u^k))⟦\\phantom{2\\log(8)} = \\log(64) \\approx 1{,}806⟧Les deux membres sont égaux : ⟦x = 4⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{4\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
  },
  "3x*2^x=0": {
   "au_depart": {
@@ -32121,8 +32259,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Vérification⟦2x + 1 = 10^{8} > 0⟧(le logarithme est bien défini) ⟦\\checkmark⟧",
-    "titre": "Étape 2Vérification"
+    "texte": "Étape 2ContrôleOn remplace ⟦x = \\frac{99\\text{’}999\\text{’}999}{2}⟧ dans l'équation de départ :⟦8⟧⟦\\log\\left(2 \\cdot \\frac{99\\text{’}999\\text{’}999}{2} + 1\\right) = \\log(100\\text{’}000\\text{’}000) = \\log(10^{8}) = 8⟧(log_a(a^k) = k)Les deux membres sont égaux : ⟦x = \\frac{99\\text{’}999\\text{’}999}{2}⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
    },
    {
     "classes": [
@@ -38478,8 +38616,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Vérification⟦2 - x = e > 0⟧(le logarithme est bien défini) ⟦\\checkmark⟧",
-    "titre": "Étape 2Vérification"
+    "texte": "Étape 2ContrôleOn remplace ⟦x = 2 - e \\approx -0{,}718⟧ dans l'équation de départ :⟦\\ln(2 - (2 - e)) = \\ln(e) = 1⟧(car ln(e) = 1)⟦1⟧Les deux membres sont égaux : ⟦x = 2 - e \\approx -0{,}718⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
    },
    {
     "classes": [
@@ -38573,7 +38711,7 @@
  },
  "ln(ln(x))=0": {
   "au_depart": {
-   "progression": "Étape 1 / 2",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
@@ -38590,6 +38728,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x = e \\approx 2{,}718⟧ dans l'équation de départ :⟦\\ln(\\ln(e)) = \\ln(1) = 0⟧(ln(1) = 0)⟦0⟧Les deux membres sont égaux : ⟦x = e \\approx 2{,}718⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -38598,11 +38746,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 2 / 2"
+  "progression_finale": "Étape 3 / 3"
  },
  "ln(ln(x^2))=1": {
   "au_depart": {
-   "progression": "Étape 1 / 2",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
@@ -38619,6 +38767,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x_{1} \\approx -3{,}893⟧ dans l'équation de départ :⟦\\ln(\\ln(x_{1}^{2})) = \\ln(e) = 1⟧(car ln(e) = 1)⟦1⟧Les deux membres sont égaux : ⟦x_{1} \\approx -3{,}893⟧ est solution ✓.On remplace ⟦x_{2} \\approx 3{,}893⟧ dans l'équation de départ :⟦\\ln(\\ln(x_{2}^{2})) = \\ln(e) = 1⟧(car ln(e) = 1)⟦1⟧Les deux membres sont égaux : ⟦x_{2} \\approx 3{,}893⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -38627,7 +38785,7 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 2 / 2"
+  "progression_finale": "Étape 3 / 3"
  },
  "ln(x)+x=2": {
   "au_depart": {
@@ -38650,7 +38808,7 @@
  },
  "ln(x)=0": {
   "au_depart": {
-   "progression": "Étape 1 / 2",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
@@ -38667,6 +38825,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x = 1⟧ dans l'équation de départ :⟦\\ln(1) = 0⟧(ln(1) = 0)⟦0⟧Les deux membres sont égaux : ⟦x = 1⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -38675,11 +38843,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 2 / 2"
+  "progression_finale": "Étape 3 / 3"
  },
  "ln(x)=1": {
   "au_depart": {
-   "progression": "Étape 1 / 2",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
@@ -38696,6 +38864,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x = e \\approx 2{,}718⟧ dans l'équation de départ :⟦\\ln(e) = 1⟧(car ln(e) = 1)⟦1⟧Les deux membres sont égaux : ⟦x = e \\approx 2{,}718⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -38704,11 +38882,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 2 / 2"
+  "progression_finale": "Étape 3 / 3"
  },
  "ln(x)=3": {
   "au_depart": {
-   "progression": "Étape 1 / 2",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
@@ -38725,6 +38903,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x = e^{3} \\approx 20{,}086⟧ dans l'équation de départ :⟦\\ln(e^{3}) = 3⟧(ln(e^k) = k)⟦3⟧Les deux membres sont égaux : ⟦x = e^{3} \\approx 20{,}086⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -38733,7 +38921,7 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 2 / 2"
+  "progression_finale": "Étape 3 / 3"
  },
  "ln(x)=x": {
   "au_depart": {
@@ -38753,6 +38941,55 @@
    }
   ],
   "progression_finale": ""
+ },
+ "ln(x+1) = 3ln(2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Regroupement des logarithmes⟦\\ln(x + 1) = 3\\ln(2)⟧⟦\\Rightarrow⟧⟦\\ln(x + 1) = \\ln(8)⟧(k · ln u = ln(u^k))",
+    "titre": "Étape 1Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Égalité des logarithmes⟦\\ln(x + 1) = \\ln(8)⟧⟦\\Rightarrow⟧⟦x + 1 = 8⟧(ln u = ln v ⇒ u = v)⟦\\iff⟧⟦x = 7⟧",
+    "titre": "Étape 2Égalité des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = 7⟧ dans l'équation de départ :⟦\\ln(7 + 1) = \\ln(8) \\approx 2{,}079⟧⟦3\\ln(2) = \\ln(2^{3})⟧(k · ln u = ln(u^k))⟦\\phantom{3\\ln(2)} = \\ln(8) \\approx 2{,}079⟧Les deux membres sont égaux : ⟦x = 7⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{7\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
  },
  "ln(x^2)=1": {
   "au_depart": {
@@ -38777,8 +39014,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Vérification⟦x^{2} = e > 0⟧(le logarithme est bien défini) ⟦\\checkmark⟧",
-    "titre": "Étape 2Vérification"
+    "texte": "Étape 2ContrôleOn remplace ⟦x_{1} \\approx -1{,}649⟧ dans l'équation de départ :⟦\\ln(x_{1}^{2}) = \\ln(e) = 1⟧(car ln(e) = 1)⟦1⟧Les deux membres sont égaux : ⟦x_{1} \\approx -1{,}649⟧ est solution ✓.On remplace ⟦x_{2} \\approx 1{,}649⟧ dans l'équation de départ :⟦\\ln(x_{2}^{2}) = \\ln(e) = 1⟧(car ln(e) = 1)⟦1⟧Les deux membres sont égaux : ⟦x_{2} \\approx 1{,}649⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
    },
    {
     "classes": [
@@ -38792,6 +39029,55 @@
    }
   ],
   "progression_finale": "Étape 3 / 3"
+ },
+ "ln(x^2)=2ln(3)": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Regroupement des logarithmes⟦\\ln(x^{2}) = 2\\ln(3)⟧⟦\\Rightarrow⟧⟦\\ln(x^{2}) = \\ln(9)⟧(k · ln u = ln(u^k))",
+    "titre": "Étape 1Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Égalité des logarithmes⟦\\ln(x^{2}) = \\ln(9)⟧⟦\\Rightarrow⟧⟦x^{2} = 9⟧(ln u = ln v ⇒ u = v)⟦\\iff⟧⟦x^{2} - 9 = 0⟧⟦\\iff⟧⟦(x + 3)(x - 3) = 0⟧⟦\\iff⟧⟦x = -3 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 2Égalité des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = -3⟧ dans l'équation de départ :⟦\\ln((-3)^{2}) = \\ln(9) \\approx 2{,}197⟧⟦2\\ln(3) = \\ln(3^{2})⟧(k · ln u = ln(u^k))⟦\\phantom{2\\ln(3)} = \\ln(9) \\approx 2{,}197⟧Les deux membres sont égaux : ⟦x = -3⟧ est solution ✓.On remplace ⟦x = 3⟧ dans l'équation de départ :⟦\\ln(3^{2}) = \\ln(9) \\approx 2{,}197⟧⟦2\\ln(3) = \\ln(3^{2})⟧(k · ln u = ln(u^k))⟦\\phantom{2\\ln(3)} = \\ln(9) \\approx 2{,}197⟧Les deux membres sont égaux : ⟦x = 3⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-3 \\,;\\, 3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
  },
  "log x = 2": {
   "au_depart": {
@@ -38835,8 +39121,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Vérification⟦-3 - x = 10^{1} > 0⟧(le logarithme est bien défini) ⟦\\checkmark⟧",
-    "titre": "Étape 2Vérification"
+    "texte": "Étape 2ContrôleOn remplace ⟦x = -13⟧ dans l'équation de départ :⟦\\log(-3 - (-13)) = \\log(10) = 1⟧(car log(10) = 1)⟦1⟧Les deux membres sont égaux : ⟦x = -13⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
    },
    {
     "classes": [
@@ -38893,8 +39179,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Vérification⟦-x = 10^{2} > 0⟧(le logarithme est bien défini) ⟦\\checkmark⟧",
-    "titre": "Étape 2Vérification"
+    "texte": "Étape 2ContrôleOn remplace ⟦x = -100⟧ dans l'équation de départ :⟦\\log(--100) = \\log(100) = \\log(10^{2}) = 2⟧(log_a(a^k) = k)⟦2⟧Les deux membres sont égaux : ⟦x = -100⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
    },
    {
     "classes": [
@@ -39202,8 +39488,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Vérification⟦2x + 1 = 10^{3} > 0⟧(le logarithme est bien défini) ⟦\\checkmark⟧",
-    "titre": "Étape 2Vérification"
+    "texte": "Étape 2ContrôleOn remplace ⟦x = \\frac{999}{2}⟧ dans l'équation de départ :⟦\\log\\left(2 \\cdot \\frac{999}{2} + 1\\right) = \\log(1\\text{’}000) = \\log(10^{3}) = 3⟧(log_a(a^k) = k)⟦3⟧Les deux membres sont égaux : ⟦x = \\frac{999}{2}⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
    },
    {
     "classes": [
@@ -39217,6 +39503,55 @@
    }
   ],
   "progression_finale": "Étape 3 / 3"
+ },
+ "log(2x-1) = log(3) + log(5)": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Regroupement des logarithmes⟦\\log(2x - 1) = \\log(3) + \\log(5)⟧⟦\\Rightarrow⟧⟦\\log(2x - 1) = \\log(15)⟧(log u + log v = log(uv))",
+    "titre": "Étape 1Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Égalité des logarithmes⟦\\log(2x - 1) = \\log(15)⟧⟦\\Rightarrow⟧⟦2x - 1 = 15⟧(log u = log v ⇒ u = v)⟦\\iff⟧⟦2x = 16⟧⟦\\iff⟧⟦x = 8⟧",
+    "titre": "Étape 2Égalité des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = 8⟧ dans l'équation de départ :⟦\\log(2 \\cdot 8 - 1) = \\log(15) \\approx 1{,}176⟧⟦\\log(3) + \\log(5) = \\log(3 \\cdot 5)⟧(log u + log v = log(uv))⟦\\phantom{\\log(3) + \\log(5)} = \\log(15) \\approx 1{,}176⟧Les deux membres sont égaux : ⟦x = 8⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{8\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
  },
  "log(3-2x)=1": {
   "au_depart": {
@@ -39241,8 +39576,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Vérification⟦3 - 2x = 10^{1} > 0⟧(le logarithme est bien défini) ⟦\\checkmark⟧",
-    "titre": "Étape 2Vérification"
+    "texte": "Étape 2ContrôleOn remplace ⟦x = -\\frac{7}{2}⟧ dans l'équation de départ :⟦\\log\\left(3 - 2\\left(-\\frac{7}{2}\\right)\\right) = \\log(10) = 1⟧(car log(10) = 1)⟦1⟧Les deux membres sont égaux : ⟦x = -\\frac{7}{2}⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
    },
    {
     "classes": [
@@ -39256,6 +39591,55 @@
    }
   ],
   "progression_finale": "Étape 3 / 3"
+ },
+ "log(5+x)=log(4-x)+1": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Regroupement des logarithmes⟦\\log(5 + x) = \\log(4 - x) + 1⟧⟦\\iff⟧⟦\\log(5 + x) = \\log(4 - x) + \\log(10)⟧(c = log(10^c))⟦\\Rightarrow⟧⟦\\log(5 + x) = \\log(10(4 - x))⟧(log u + log v = log(uv))",
+    "titre": "Étape 1Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Égalité des logarithmes⟦\\log(5 + x) = \\log(10(4 - x))⟧⟦\\Rightarrow⟧⟦5 + x = 10(4 - x)⟧(log u = log v ⇒ u = v)⟦\\iff⟧⟦11x = 35⟧⟦\\iff⟧⟦x = \\frac{35}{11}⟧",
+    "titre": "Étape 2Égalité des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = \\frac{35}{11}⟧ dans l'équation de départ :⟦\\log\\left(5 + \\frac{35}{11}\\right) = \\log\\left(\\frac{90}{11}\\right) \\approx 0{,}913⟧⟦\\log\\left(4 - \\frac{35}{11}\\right) + 1 = \\log\\left(\\frac{9}{11}\\right) + 1 = \\log\\left(\\frac{9}{11}\\right) + \\log(10)⟧(c = log(10^c))⟦ = \\log\\left(\\frac{9}{11} \\cdot 10\\right)⟧(log u + log v = log(uv))⟦ = \\log\\left(\\frac{90}{11}\\right) \\approx 0{,}913⟧Les deux membres sont égaux : ⟦x = \\frac{35}{11}⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{35}{11}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
  },
  "log(5-x)=8": {
   "au_depart": {
@@ -39280,8 +39664,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Vérification⟦5 - x = 10^{8} > 0⟧(le logarithme est bien défini) ⟦\\checkmark⟧",
-    "titre": "Étape 2Vérification"
+    "texte": "Étape 2ContrôleOn remplace ⟦x = -99\\text{’}999\\text{’}995⟧ dans l'équation de départ :⟦\\log(5 - (-99\\text{’}999\\text{’}995)) = \\log(100\\text{’}000\\text{’}000) = \\log(10^{8}) = 8⟧(log_a(a^k) = k)⟦8⟧Les deux membres sont égaux : ⟦x = -99\\text{’}999\\text{’}995⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
    },
    {
     "classes": [
@@ -39327,7 +39711,7 @@
  },
  "log(log(log(x)))=0": {
   "au_depart": {
-   "progression": "Étape 1 / 2",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
@@ -39344,6 +39728,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x = 10^{10}⟧ dans l'équation de départ :⟦\\log(\\log(\\log(10^{10}))) = \\log(1) = 0⟧(log(1) = 0)⟦0⟧Les deux membres sont égaux : ⟦x = 10^{10}⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -39352,11 +39746,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 2 / 2"
+  "progression_finale": "Étape 3 / 3"
  },
  "log(log(x))=1": {
   "au_depart": {
-   "progression": "Étape 1 / 2",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
@@ -39373,6 +39767,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x = 10^{10}⟧ dans l'équation de départ :⟦\\log(\\log(10^{10})) = \\log(10) = 1⟧(car log(10) = 1)⟦1⟧Les deux membres sont égaux : ⟦x = 10^{10}⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -39381,11 +39785,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 2 / 2"
+  "progression_finale": "Étape 3 / 3"
  },
  "log(log(x-1))=0": {
   "au_depart": {
-   "progression": "Étape 1 / 2",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
@@ -39402,6 +39806,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x = 11⟧ dans l'équation de départ :⟦\\log(\\log(11 - 1)) = \\log(1) = 0⟧(log(1) = 0)⟦0⟧Les deux membres sont égaux : ⟦x = 11⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -39410,7 +39824,7 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 2 / 2"
+  "progression_finale": "Étape 3 / 3"
  },
  "log(sqrt(10))": {
   "au_depart": {
@@ -39441,9 +39855,97 @@
   ],
   "progression_finale": "Étape 2 / 2"
  },
- "log(x)+1=3": {
+ "log(x(x-3))=1": {
   "au_depart": {
    "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Exponentielle des deux membres⟦\\log(x(x - 3)) = 1⟧⟦\\iff⟧⟦10^{\\log(x(x - 3))} = 10^{1}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x(x - 3) = 10^{1} = 10⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦x^{2} - 3x - 10 = 0⟧⟦\\iff⟧⟦(x + 2)(x - 5) = 0⟧⟦\\iff⟧⟦x = -2 \\text{ ou } x = 5⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 1Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x = -2⟧ dans l'équation de départ :⟦\\log((-2)(-2 - 3)) = \\log(10) = 1⟧(car log(10) = 1)⟦1⟧Les deux membres sont égaux : ⟦x = -2⟧ est solution ✓.On remplace ⟦x = 5⟧ dans l'équation de départ :⟦\\log(5(5 - 3)) = \\log(10) = 1⟧(car log(10) = 1)⟦1⟧Les deux membres sont égaux : ⟦x = 5⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-2 \\,;\\, 5\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "log(x) + log(x-3) = 1": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Regroupement des logarithmes⟦\\log(x) + \\log(x - 3) = 1⟧⟦\\Rightarrow⟧⟦\\log(x(x - 3)) = 1⟧(log u + log v = log(uv))",
+    "titre": "Étape 1Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log(x(x - 3)) = 1⟧⟦\\iff⟧⟦10^{\\log(x(x - 3))} = 10^{1}⟧(exponentielle des deux membres)⟦\\iff⟧⟦x(x - 3) = 10^{1} = 10⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦x^{2} - 3x - 10 = 0⟧⟦\\iff⟧⟦(x + 2)(x - 5) = 0⟧⟦\\iff⟧⟦x = -2 \\text{ ou } x = 5⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Contrôle⟦x = -2⟧ : ⟦\\log(-2)⟧ n'existe pas. ⟦x = -2⟧ est rejetée.On remplace ⟦x = 5⟧ dans l'équation de départ :⟦\\log(5) + \\log(5 - 3) = \\log(5) + \\log(2) = \\log(5 \\cdot 2)⟧(log u + log v = log(uv))⟦\\phantom{\\log(5) + \\log(5 - 3)} = \\log(10) = 1⟧(car log(10) = 1)⟦1⟧Les deux membres sont égaux : ⟦x = 5⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{5\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "log(x)+1=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
@@ -39470,6 +39972,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = 100⟧ dans l'équation de départ :⟦\\log(100) + 1 = \\log(100) + \\log(10)⟧(c = log(10^c))⟦\\phantom{\\log(100) + 1} = \\log(100 \\cdot 10)⟧(log u + log v = log(uv))⟦\\phantom{\\log(100) + 1} = \\log(1\\text{’}000) = \\log(10^{3}) = 3⟧(log_a(a^k) = k)⟦3⟧Les deux membres sont égaux : ⟦x = 100⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -39478,68 +39990,109 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 3 / 3"
+  "progression_finale": "Étape 4 / 4"
  },
  "log(x)+log(2)=1": {
   "au_depart": {
-   "progression": "",
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
    {
     "classes": [
      "card",
-     "err"
+     "cond"
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Cet outil ne traite pas encore ce type d'équation.",
-    "titre": null
-   }
-  ],
-  "progression_finale": ""
- },
- "log(x)+log(x-1)=1": {
-  "au_depart": {
-   "progression": "",
-   "visibles": 1
-  },
-  "cartes": [
+    "texte": "Étape 1Regroupement des logarithmes⟦\\log(x) + \\log(2) = 1⟧⟦\\Rightarrow⟧⟦\\log(2x) = 1⟧(log u + log v = log(uv))",
+    "titre": "Étape 1Regroupement des logarithmes"
+   },
    {
     "classes": [
      "card",
-     "err"
+     "cond"
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Cet outil ne traite pas encore ce type d'équation.",
-    "titre": null
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log(2x) = 1⟧⟦\\iff⟧⟦10^{\\log(2x)} = 10^{1}⟧(exponentielle des deux membres)⟦\\iff⟧⟦2x = 10^{1} = 10⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦x = 5⟧",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = 5⟧ dans l'équation de départ :⟦\\log(5) + \\log(2) = \\log(5 \\cdot 2)⟧(log u + log v = log(uv))⟦\\phantom{\\log(5) + \\log(2)} = \\log(10) = 1⟧(car log(10) = 1)⟦1⟧Les deux membres sont égaux : ⟦x = 5⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{5\\right\\}⟧",
+    "titre": "Solution"
    }
   ],
-  "progression_finale": ""
+  "progression_finale": "Étape 4 / 4"
  },
  "log(x)-log(2)=1": {
   "au_depart": {
-   "progression": "",
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
    {
     "classes": [
      "card",
-     "err"
+     "cond"
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Cet outil ne traite pas encore ce type d'équation.",
-    "titre": null
+    "texte": "Étape 1Regroupement des logarithmes⟦\\log(x) - \\log(2) = 1⟧⟦\\Rightarrow⟧⟦\\log\\left(\\frac{x}{2}\\right) = 1⟧(log u − log v = log(u/v))",
+    "titre": "Étape 1Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log\\left(\\frac{x}{2}\\right) = 1⟧⟦\\iff⟧⟦10^{\\log\\left(\\frac{x}{2}\\right)} = 10^{1}⟧(exponentielle des deux membres)⟦\\iff⟧⟦\\frac{x}{2} = 10^{1} = 10⟧(10^(log(A)) = A, A > 0)⟦\\Rightarrow⟧⟦x = 20⟧(on multiplie les deux membres par les dénominateurs)",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = 20⟧ dans l'équation de départ :⟦\\log(20) - \\log(2) = \\log\\left(\\frac{20}{2}\\right)⟧(log u − log v = log(u/v))⟦\\phantom{\\log(20) - \\log(2)} = \\log(10) = 1⟧(car log(10) = 1)⟦1⟧Les deux membres sont égaux : ⟦x = 20⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{20\\right\\}⟧",
+    "titre": "Solution"
    }
   ],
-  "progression_finale": ""
+  "progression_finale": "Étape 4 / 4"
  },
  "log(x)/2=1": {
   "au_depart": {
-   "progression": "Étape 1 / 3",
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
@@ -39566,6 +40119,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = 100⟧ dans l'équation de départ :⟦\\frac{\\log(100)}{2} \\approx 1{,}000⟧⟦1⟧Les deux membres sont égaux : ⟦x = 100⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -39574,7 +40137,7 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 3 / 3"
+  "progression_finale": "Étape 4 / 4"
  },
  "log(x)/x=1": {
   "au_depart": {
@@ -39597,7 +40160,7 @@
  },
  "log(x)=-0,27": {
   "au_depart": {
-   "progression": "Étape 1 / 2",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
@@ -39614,6 +40177,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x = 10^{-0{,}27} \\approx 0{,}537⟧ dans l'équation de départ :⟦\\log(10^{-0{,}27}) = \\log\\left(10^{-\\frac{27}{100}}\\right)⟧(propriétés des puissances)⟦\\phantom{\\log(10^{-0{,}27})} = -0{,}27⟧(log_a(a^k) = k)⟦-0{,}27⟧Les deux membres sont égaux : ⟦x = 10^{-0{,}27} \\approx 0{,}537⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -39622,11 +40195,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 2 / 2"
+  "progression_finale": "Étape 3 / 3"
  },
  "log(x)=-1": {
   "au_depart": {
-   "progression": "Étape 1 / 2",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
@@ -39643,6 +40216,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x = \\frac{1}{10}⟧ dans l'équation de départ :⟦\\log\\left(\\frac{1}{10}\\right) = \\log(10^{-1}) = -1⟧(log_a(a^k) = k)⟦-1⟧Les deux membres sont égaux : ⟦x = \\frac{1}{10}⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -39651,11 +40234,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 2 / 2"
+  "progression_finale": "Étape 3 / 3"
  },
  "log(x)=-4": {
   "au_depart": {
-   "progression": "Étape 1 / 2",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
@@ -39672,6 +40255,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x = 10^{-4}⟧ dans l'équation de départ :⟦\\log(10^{-4}) = -4⟧(log_a(a^k) = k)⟦-4⟧Les deux membres sont égaux : ⟦x = 10^{-4}⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -39680,11 +40273,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 2 / 2"
+  "progression_finale": "Étape 3 / 3"
  },
  "log(x)=0": {
   "au_depart": {
-   "progression": "Étape 1 / 2",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
@@ -39701,6 +40294,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x = 1⟧ dans l'équation de départ :⟦\\log(1) = 0⟧(log(1) = 0)⟦0⟧Les deux membres sont égaux : ⟦x = 1⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -39709,11 +40312,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 2 / 2"
+  "progression_finale": "Étape 3 / 3"
  },
  "log(x)=1,5": {
   "au_depart": {
-   "progression": "Étape 1 / 2",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
@@ -39730,6 +40333,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x = 10\\sqrt{10} \\approx 31{,}623⟧ dans l'équation de départ :⟦\\log(10\\sqrt{10}) = \\log\\left(10^{\\frac{3}{2}}\\right)⟧(propriétés des puissances)⟦\\phantom{\\log(10\\sqrt{10})} = 1{,}5⟧(log_a(a^k) = k)⟦1{,}5⟧Les deux membres sont égaux : ⟦x = 10\\sqrt{10} \\approx 31{,}623⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -39738,11 +40351,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 2 / 2"
+  "progression_finale": "Étape 3 / 3"
  },
  "log(x)=2": {
   "au_depart": {
-   "progression": "Étape 1 / 2",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
@@ -39759,6 +40372,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x = 100⟧ dans l'équation de départ :⟦\\log(100) = \\log(10^{2}) = 2⟧(log_a(a^k) = k)⟦2⟧Les deux membres sont égaux : ⟦x = 100⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -39767,7 +40390,7 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 2 / 2"
+  "progression_finale": "Étape 3 / 3"
  },
  "log(x)=2^x": {
   "au_depart": {
@@ -39790,7 +40413,7 @@
  },
  "log(x)=3": {
   "au_depart": {
-   "progression": "Étape 1 / 2",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
@@ -39807,6 +40430,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x = 1\\text{’}000⟧ dans l'équation de départ :⟦\\log(1\\text{’}000) = \\log(10^{3}) = 3⟧(log_a(a^k) = k)⟦3⟧Les deux membres sont égaux : ⟦x = 1\\text{’}000⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -39815,26 +40448,85 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 2 / 2"
+  "progression_finale": "Étape 3 / 3"
  },
  "log(x)=log(5)": {
   "au_depart": {
-   "progression": "",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
    {
     "classes": [
      "card",
-     "err"
+     "cond"
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Cet outil ne traite pas encore ce type d'équation.",
-    "titre": null
+    "texte": "Étape 1Égalité des logarithmes⟦\\log(x) = \\log(5)⟧⟦\\Rightarrow⟧⟦x = 5⟧(log u = log v ⇒ u = v)",
+    "titre": "Étape 1Égalité des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x = 5⟧ dans l'équation de départ :⟦\\log(5) \\approx 0{,}699⟧⟦\\log(5) \\approx 0{,}699⟧Les deux membres sont égaux : ⟦x = 5⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{5\\right\\}⟧",
+    "titre": "Solution"
    }
   ],
-  "progression_finale": ""
+  "progression_finale": "Étape 3 / 3"
+ },
+ "log(x)=log(x^2-6)": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Égalité des logarithmes⟦\\log(x) = \\log(x^{2} - 6)⟧⟦\\Rightarrow⟧⟦x = x^{2} - 6⟧(log u = log v ⇒ u = v)⟦\\iff⟧⟦-x^{2} + x + 6 = 0⟧⟦Δ = 1^{2} - 4(-1) \\cdot 6 = 25⟧⟦x = -2 \\text{ ou } x = 3⟧",
+    "titre": "Étape 1Égalité des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Contrôle⟦x = -2⟧ : ⟦\\log(-2)⟧ n'existe pas. ⟦x = -2⟧ est rejetée.On remplace ⟦x = 3⟧ dans l'équation de départ :⟦\\log(3) \\approx 0{,}477⟧⟦\\log(3^{2} - 6) = \\log(3) \\approx 0{,}477⟧Les deux membres sont égaux : ⟦x = 3⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
  },
  "log(x)=x-1": {
   "au_depart": {
@@ -39854,6 +40546,153 @@
    }
   ],
   "progression_finale": ""
+ },
+ "log(x+1)+log(x-2)=log(x+1)+1": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Regroupement des logarithmes⟦\\log(x + 1) + \\log(x - 2) = \\log(x + 1) + 1⟧⟦\\iff⟧⟦\\log(x + 1) + \\log(x - 2) = \\log(x + 1) + \\log(10)⟧(c = log(10^c))⟦\\Rightarrow⟧⟦\\log((x + 1)(x - 2)) = \\log(10(x + 1))⟧(log u + log v = log(uv))",
+    "titre": "Étape 1Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Égalité des logarithmes⟦\\log((x + 1)(x - 2)) = \\log(10(x + 1))⟧⟦\\Rightarrow⟧⟦(x + 1)(x - 2) = 10(x + 1)⟧(log u = log v ⇒ u = v)⟦\\iff⟧⟦x^{2} - 11x - 12 = 0⟧⟦\\iff⟧⟦(x + 1)(x - 12) = 0⟧⟦\\iff⟧⟦x = -1 \\text{ ou } x = 12⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 2Égalité des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Contrôle⟦x = -1⟧ : ⟦\\log(-1 + 1) = \\log(0)⟧ n'existe pas. ⟦x = -1⟧ est rejetée.On remplace ⟦x = 12⟧ dans l'équation de départ :⟦\\log(12 + 1) + \\log(12 - 2) = \\log(13) + \\log(10) = \\log(13 \\cdot 10)⟧(log u + log v = log(uv))⟦\\phantom{\\log(12 + 1) + \\log(12 - 2)} = \\log(130) \\approx 2{,}114⟧⟦\\log(12 + 1) + 1 = \\log(13) + 1 = \\log(13) + \\log(10)⟧(c = log(10^c))⟦\\phantom{\\log(12 + 1) + 1} = \\log(13 \\cdot 10)⟧(log u + log v = log(uv))⟦\\phantom{\\log(12 + 1) + 1} = \\log(130) \\approx 2{,}114⟧Les deux membres sont égaux : ⟦x = 12⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{12\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "log(x+3) = 2log(3)": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Regroupement des logarithmes⟦\\log(x + 3) = 2\\log(3)⟧⟦\\Rightarrow⟧⟦\\log(x + 3) = \\log(9)⟧(k · log u = log(u^k))",
+    "titre": "Étape 1Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Égalité des logarithmes⟦\\log(x + 3) = \\log(9)⟧⟦\\Rightarrow⟧⟦x + 3 = 9⟧(log u = log v ⇒ u = v)⟦\\iff⟧⟦x = 6⟧",
+    "titre": "Étape 2Égalité des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = 6⟧ dans l'équation de départ :⟦\\log(6 + 3) = \\log(9) \\approx 0{,}954⟧⟦2\\log(3) = \\log(3^{2})⟧(k · log u = log(u^k))⟦\\phantom{2\\log(3)} = \\log(9) \\approx 0{,}954⟧Les deux membres sont égaux : ⟦x = 6⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{6\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "log(x-3)+log(1-x)=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Regroupement des logarithmes⟦\\log(x - 3) + \\log(1 - x) = 0⟧⟦\\Rightarrow⟧⟦\\log((x - 3)(1 - x)) = 0⟧(log u + log v = log(uv))",
+    "titre": "Étape 1Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Exponentielle des deux membres⟦\\log((x - 3)(1 - x)) = 0⟧⟦\\iff⟧⟦10^{\\log((x - 3)(1 - x))} = 10^{0}⟧(exponentielle des deux membres)⟦\\iff⟧⟦(x - 3)(1 - x) = 10^{0} = 1⟧(10^(log(A)) = A, A > 0)⟦\\iff⟧⟦-x^{2} + 4x - 4 = 0⟧⟦Δ = 4^{2} - 4(-1) \\cdot (-4) = 0⟧⟦Δ = 0 \\text{ : une seule solution}⟧⟦x = \\frac{-b}{2a} = \\frac{-4}{2(-1)} = 2⟧",
+    "titre": "Étape 2Exponentielle des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Contrôle⟦x = 2⟧ : ⟦\\log(2 - 3) = \\log(-1)⟧ n'existe pas. ⟦x = 2⟧ est rejetée.Aucune solution trouvée ne convient : l'équation n'a pas de solution.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
  },
  "log(x^2)=-1": {
   "au_depart": {
@@ -39878,8 +40717,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Vérification⟦x^{2} = 10^{-1} > 0⟧(le logarithme est bien défini) ⟦\\checkmark⟧",
-    "titre": "Étape 2Vérification"
+    "texte": "Étape 2ContrôleOn remplace ⟦x_{1} \\approx -0{,}316⟧ dans l'équation de départ :⟦\\log(x_{1}^{2}) = \\log\\left(\\frac{1}{10}\\right) = \\log(10^{-1}) = -1⟧(log_a(a^k) = k)⟦-1⟧Les deux membres sont égaux : ⟦x_{1} \\approx -0{,}316⟧ est solution ✓.On remplace ⟦x_{2} \\approx 0{,}316⟧ dans l'équation de départ :⟦\\log(x_{2}^{2}) = \\log\\left(\\frac{1}{10}\\right) = \\log(10^{-1}) = -1⟧(log_a(a^k) = k)⟦-1⟧Les deux membres sont égaux : ⟦x_{2} \\approx 0{,}316⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
    },
    {
     "classes": [
@@ -39917,8 +40756,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Vérification⟦x^{2} = 10^{1{,}5} > 0⟧(le logarithme est bien défini) ⟦\\checkmark⟧",
-    "titre": "Étape 2Vérification"
+    "texte": "Étape 2ContrôleOn remplace ⟦x_{1} \\approx -5{,}623⟧ dans l'équation de départ :⟦\\log(x_{1}^{2}) = \\log\\left(10^{\\frac{3}{2}}\\right)⟧(propriétés des puissances)⟦\\phantom{\\log(x_{1}^{2})} = 1{,}5⟧(log_a(a^k) = k)⟦1{,}5⟧Les deux membres sont égaux : ⟦x_{1} \\approx -5{,}623⟧ est solution ✓.On remplace ⟦x_{2} \\approx 5{,}623⟧ dans l'équation de départ :⟦\\log(x_{2}^{2}) = \\log\\left(10^{\\frac{3}{2}}\\right)⟧(propriétés des puissances)⟦\\phantom{\\log(x_{2}^{2})} = 1{,}5⟧(log_a(a^k) = k)⟦1{,}5⟧Les deux membres sont égaux : ⟦x_{2} \\approx 5{,}623⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
    },
    {
     "classes": [
@@ -39956,8 +40795,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Vérification⟦x^{2} = 10^{\\frac{1}{2}} > 0⟧(le logarithme est bien défini) ⟦\\checkmark⟧",
-    "titre": "Étape 2Vérification"
+    "texte": "Étape 2ContrôleOn remplace ⟦x_{1} \\approx -1{,}778⟧ dans l'équation de départ :⟦\\log(x_{1}^{2}) = \\log\\left(10^{\\frac{1}{2}}\\right)⟧(propriétés des puissances)⟦\\phantom{\\log(x_{1}^{2})} = \\frac{1}{2}⟧(log_a(a^k) = k)⟦\\frac{1}{2}⟧Les deux membres sont égaux : ⟦x_{1} \\approx -1{,}778⟧ est solution ✓.On remplace ⟦x_{2} \\approx 1{,}778⟧ dans l'équation de départ :⟦\\log(x_{2}^{2}) = \\log\\left(10^{\\frac{1}{2}}\\right)⟧(propriétés des puissances)⟦\\phantom{\\log(x_{2}^{2})} = \\frac{1}{2}⟧(log_a(a^k) = k)⟦\\frac{1}{2}⟧Les deux membres sont égaux : ⟦x_{2} \\approx 1{,}778⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
    },
    {
     "classes": [
@@ -39995,8 +40834,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Vérification⟦x^{2} = 10^{2} > 0⟧(le logarithme est bien défini) ⟦\\checkmark⟧",
-    "titre": "Étape 2Vérification"
+    "texte": "Étape 2ContrôleOn remplace ⟦x = -10⟧ dans l'équation de départ :⟦\\log((-10)^{2}) = \\log(100) = \\log(10^{2}) = 2⟧(log_a(a^k) = k)⟦2⟧Les deux membres sont égaux : ⟦x = -10⟧ est solution ✓.On remplace ⟦x = 10⟧ dans l'équation de départ :⟦\\log(10^{2}) = 2⟧(log_a(a^k) = k)⟦2⟧Les deux membres sont égaux : ⟦x = 10⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
    },
    {
     "classes": [
@@ -40010,25 +40849,6 @@
    }
   ],
   "progression_finale": "Étape 3 / 3"
- },
- "log(x^2+1)=-1": {
-  "au_depart": {
-   "progression": "",
-   "visibles": 1
-  },
-  "cartes": [
-   {
-    "classes": [
-     "card",
-     "err"
-    ],
-    "listes": [],
-    "tableaux": [],
-    "texte": "Cet outil ne traite pas encore ce type d'équation.",
-    "titre": null
-   }
-  ],
-  "progression_finale": ""
  },
  "log(x^2+x+3)+1=1": {
   "au_depart": {
@@ -40121,8 +40941,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Vérification⟦x^{2} - 3x = 10^{1} > 0⟧(le logarithme est bien défini) ⟦\\checkmark⟧",
-    "titre": "Étape 2Vérification"
+    "texte": "Étape 2ContrôleOn remplace ⟦x = -2⟧ dans l'équation de départ :⟦\\log((-2)^{2} - 3(-2)) = \\log(10) = 1⟧(car log(10) = 1)⟦1⟧Les deux membres sont égaux : ⟦x = -2⟧ est solution ✓.On remplace ⟦x = 5⟧ dans l'équation de départ :⟦\\log(5^{2} - 3 \\cdot 5) = \\log(10) = 1⟧(car log(10) = 1)⟦1⟧Les deux membres sont égaux : ⟦x = 5⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
    },
    {
     "classes": [
@@ -40160,8 +40980,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Vérification⟦x^{2} = 10^{2} > 0⟧(le logarithme est bien défini) ⟦\\checkmark⟧",
-    "titre": "Étape 2Vérification"
+    "texte": "Étape 2ContrôleOn remplace ⟦x = -10⟧ dans l'équation de départ :⟦\\log((-10)^{2}) = \\log(100) = \\log(10^{2}) = 2⟧(log_a(a^k) = k)⟦2⟧Les deux membres sont égaux : ⟦x = -10⟧ est solution ✓.On remplace ⟦x = 10⟧ dans l'équation de départ :⟦\\log(10^{2}) = 2⟧(log_a(a^k) = k)⟦2⟧Les deux membres sont égaux : ⟦x = 10⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
    },
    {
     "classes": [
@@ -40175,6 +40995,55 @@
    }
   ],
   "progression_finale": "Étape 3 / 3"
+ },
+ "log2(3x-4)+log2(10x-4)=2log2(5x-2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Regroupement des logarithmes⟦\\log_{2}(3x - 4) + \\log_{2}(10x - 4) = 2\\log_{2}(5x - 2)⟧⟦\\Rightarrow⟧⟦\\log_{2}(3x - 4) + \\log_{2}(10x - 4) = \\log_{2}((5x - 2)^{2})⟧(k · log_a u = log_a(u^k))⟦\\Rightarrow⟧⟦\\log_{2}((3x - 4)(10x - 4)) = \\log_{2}((5x - 2)^{2})⟧(log_a u + log_a v = log_a(uv))",
+    "titre": "Étape 1Regroupement des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Égalité des logarithmes⟦\\log_{2}((3x - 4)(10x - 4)) = \\log_{2}((5x - 2)^{2})⟧⟦\\Rightarrow⟧⟦(3x - 4)(10x - 4) = (5x - 2)^{2}⟧(log_a u = log_a v ⇒ u = v)⟦\\iff⟧⟦5x^{2} - 32x + 12 = 0⟧⟦Δ = (-32)^{2} - 4 \\cdot 5 \\cdot 12 = 784⟧⟦x = \\frac{2}{5} \\text{ ou } x = 6⟧",
+    "titre": "Étape 2Égalité des logarithmes"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Contrôle⟦x = \\frac{2}{5}⟧ : ⟦\\log_{2}\\left(3 \\cdot \\frac{2}{5} - 4\\right) = \\log_{2}\\left(-\\frac{14}{5}\\right)⟧ n'existe pas. ⟦x = \\frac{2}{5}⟧ est rejetée.On remplace ⟦x = 6⟧ dans l'équation de départ :⟦\\log_{2}(3 \\cdot 6 - 4) + \\log_{2}(10 \\cdot 6 - 4) = \\log_{2}(14) + \\log_{2}(56) = \\log_{2}(14 \\cdot 56)⟧(log_a u + log_a v = log_a(uv))⟦ = \\log_{2}(784) \\approx 9{,}615⟧⟦2\\log_{2}(5 \\cdot 6 - 2) = 2\\log_{2}(28) = \\log_{2}(28^{2})⟧(k · log_a u = log_a(u^k))⟦\\phantom{2\\log_{2}(5 \\cdot 6 - 2)} = \\log_{2}(784) \\approx 9{,}615⟧Les deux membres sont égaux : ⟦x = 6⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{6\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
  },
  "log2(64)": {
   "au_depart": {
@@ -40207,7 +41076,7 @@
  },
  "log2(x)=4": {
   "au_depart": {
-   "progression": "Étape 1 / 2",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
@@ -40224,6 +41093,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x = 16⟧ dans l'équation de départ :⟦\\log_{2}(16) = \\log_{2}(2^{4}) = 4⟧(log_a(a^k) = k)⟦4⟧Les deux membres sont égaux : ⟦x = 16⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -40232,11 +41111,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 2 / 2"
+  "progression_finale": "Étape 3 / 3"
  },
  "log5(x)=-2": {
   "au_depart": {
-   "progression": "Étape 1 / 2",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
@@ -40253,6 +41132,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x = \\frac{1}{25}⟧ dans l'équation de départ :⟦\\log_{5}\\left(\\frac{1}{25}\\right) = \\log_{5}(5^{-2}) = -2⟧(log_a(a^k) = k)⟦-2⟧Les deux membres sont égaux : ⟦x = \\frac{1}{25}⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -40261,11 +41150,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 2 / 2"
+  "progression_finale": "Étape 3 / 3"
  },
  "log8(x)=2/3": {
   "au_depart": {
-   "progression": "Étape 1 / 2",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
@@ -40282,6 +41171,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x = 4⟧ dans l'équation de départ :⟦\\log_{8}(4) \\approx 0{,}667⟧⟦\\frac{2}{3}⟧Les deux membres sont égaux : ⟦x = 4⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -40290,11 +41189,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 2 / 2"
+  "progression_finale": "Étape 3 / 3"
  },
  "log_0,01(x)=1/2": {
   "au_depart": {
-   "progression": "Étape 1 / 2",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
@@ -40311,6 +41210,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x = 0{,}1⟧ dans l'équation de départ :⟦\\log_{0{,}01}(0{,}1) \\approx 0{,}500⟧⟦\\frac{1}{2} = 0{,}5⟧Les deux membres sont égaux : ⟦x = 0{,}1⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -40319,7 +41228,7 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 2 / 2"
+  "progression_finale": "Étape 3 / 3"
  },
  "log_1(x)=2": {
   "au_depart": {
@@ -40622,7 +41531,7 @@
  },
  "log_2(x)=4": {
   "au_depart": {
-   "progression": "Étape 1 / 2",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
@@ -40639,6 +41548,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x = 16⟧ dans l'équation de départ :⟦\\log_{2}(16) = \\log_{2}(2^{4}) = 4⟧(log_a(a^k) = k)⟦4⟧Les deux membres sont égaux : ⟦x = 16⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -40647,7 +41566,7 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 2 / 2"
+  "progression_finale": "Étape 3 / 3"
  },
  "log_2(x^2)=-1": {
   "au_depart": {
@@ -40672,8 +41591,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2Vérification⟦x^{2} = 2^{-1} > 0⟧(le logarithme est bien défini) ⟦\\checkmark⟧",
-    "titre": "Étape 2Vérification"
+    "texte": "Étape 2ContrôleOn remplace ⟦x_{1} \\approx -0{,}707⟧ dans l'équation de départ :⟦\\log_{2}(x_{1}^{2}) = \\log_{2}\\left(\\frac{1}{2}\\right) = \\log_{2}(2^{-1}) = -1⟧(log_a(a^k) = k)⟦-1⟧Les deux membres sont égaux : ⟦x_{1} \\approx -0{,}707⟧ est solution ✓.On remplace ⟦x_{2} \\approx 0{,}707⟧ dans l'équation de départ :⟦\\log_{2}(x_{2}^{2}) = \\log_{2}\\left(\\frac{1}{2}\\right) = \\log_{2}(2^{-1}) = -1⟧(log_a(a^k) = k)⟦-1⟧Les deux membres sont égaux : ⟦x_{2} \\approx 0{,}707⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
    },
    {
     "classes": [
@@ -40922,7 +41841,7 @@
  },
  "log_4(x)=-3/2": {
   "au_depart": {
-   "progression": "Étape 1 / 2",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
@@ -40939,6 +41858,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x = \\frac{1}{8}⟧ dans l'équation de départ :⟦\\log_{4}\\left(\\frac{1}{8}\\right) \\approx -1{,}500⟧⟦-\\frac{3}{2}⟧Les deux membres sont égaux : ⟦x = \\frac{1}{8}⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -40947,7 +41876,7 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 2 / 2"
+  "progression_finale": "Étape 3 / 3"
  },
  "log_5(0,2)": {
   "au_depart": {
@@ -41154,7 +42083,7 @@
  },
  "log_8(x)=1/3": {
   "au_depart": {
-   "progression": "Étape 1 / 2",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
@@ -41171,6 +42100,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x = 2⟧ dans l'équation de départ :⟦\\log_{8}(2) \\approx 0{,}333⟧⟦\\frac{1}{3}⟧Les deux membres sont égaux : ⟦x = 2⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -41179,7 +42118,7 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 2 / 2"
+  "progression_finale": "Étape 3 / 3"
  },
  "log_9(27)": {
   "au_depart": {
@@ -41212,7 +42151,7 @@
  },
  "log_9(x)=3/2": {
   "au_depart": {
-   "progression": "Étape 1 / 2",
+   "progression": "Étape 1 / 3",
    "visibles": 1
   },
   "cartes": [
@@ -41229,6 +42168,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2ContrôleOn remplace ⟦x = 27⟧ dans l'équation de départ :⟦\\log_{9}(27) \\approx 1{,}500⟧⟦\\frac{3}{2}⟧Les deux membres sont égaux : ⟦x = 27⟧ est solution ✓.",
+    "titre": "Étape 2Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -41237,7 +42186,7 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 2 / 2"
+  "progression_finale": "Étape 3 / 3"
  },
  "log_x(-1)=0": {
   "au_depart": {
@@ -41574,7 +42523,7 @@
  },
  "log_x(1)=0": {
   "au_depart": {
-   "progression": "Étape 1 / 3",
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
@@ -41601,6 +42550,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleLes logarithmes de l'équation existent pour ⟦x \\in \\left]0 \\,;\\, 1\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[⟧ : l'égalité est vraie pour tout nombre de cet ensemble.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -41609,7 +42568,7 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 3 / 3"
+  "progression_finale": "Étape 4 / 4"
  },
  "log_x(1)=2": {
   "au_depart": {
@@ -41691,7 +42650,7 @@
  },
  "log_x(1/16)=4": {
   "au_depart": {
-   "progression": "Étape 1 / 3",
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
@@ -41718,6 +42677,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = \\frac{1}{2}⟧ dans l'équation de départ :⟦\\log_{\\frac{1}{2}}\\left(\\frac{1}{16}\\right) = \\log_{\\frac{1}{2}}\\left(\\left(\\frac{1}{2}\\right)^{4}\\right) = 4⟧(log_a(a^k) = k)⟦4⟧Les deux membres sont égaux : ⟦x = \\frac{1}{2}⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -41726,11 +42695,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 3 / 3"
+  "progression_finale": "Étape 4 / 4"
  },
  "log_x(1/8)=3": {
   "au_depart": {
-   "progression": "Étape 1 / 3",
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
@@ -41757,6 +42726,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = \\frac{1}{2}⟧ dans l'équation de départ :⟦\\log_{\\frac{1}{2}}\\left(\\frac{1}{8}\\right) = \\log_{\\frac{1}{2}}\\left(\\left(\\frac{1}{2}\\right)^{3}\\right) = 3⟧(log_a(a^k) = k)⟦3⟧Les deux membres sont égaux : ⟦x = \\frac{1}{2}⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -41765,11 +42744,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 3 / 3"
+  "progression_finale": "Étape 4 / 4"
  },
  "log_x(1/9)=-2": {
   "au_depart": {
-   "progression": "Étape 1 / 3",
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
@@ -41796,6 +42775,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = 3⟧ dans l'équation de départ :⟦\\log_{3}\\left(\\frac{1}{9}\\right) = \\log_{3}(3^{-2}) = -2⟧(log_a(a^k) = k)⟦-2⟧Les deux membres sont égaux : ⟦x = 3⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -41804,11 +42793,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 3 / 3"
+  "progression_finale": "Étape 4 / 4"
  },
  "log_x(12)=4": {
   "au_depart": {
-   "progression": "Étape 1 / 3",
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
@@ -41835,6 +42824,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = 12^{\\frac{1}{4}} \\approx 1{,}861⟧ dans l'équation de départ :⟦\\log_{12^{\\frac{1}{4}}}(12) \\approx 4{,}000⟧⟦4⟧Les deux membres sont égaux : ⟦x = 12^{\\frac{1}{4}} \\approx 1{,}861⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -41843,11 +42842,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 3 / 3"
+  "progression_finale": "Étape 4 / 4"
  },
  "log_x(16)=2": {
   "au_depart": {
-   "progression": "Étape 1 / 3",
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
@@ -41874,6 +42873,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = 4⟧ dans l'équation de départ :⟦\\log_{4}(16) = \\log_{4}(4^{2}) = 2⟧(log_a(a^k) = k)⟦2⟧Les deux membres sont égaux : ⟦x = 4⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -41882,11 +42891,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 3 / 3"
+  "progression_finale": "Étape 4 / 4"
  },
  "log_x(2)=-3": {
   "au_depart": {
-   "progression": "Étape 1 / 3",
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
@@ -41913,6 +42922,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = \\left(\\frac{1}{2}\\right)^{\\frac{1}{3}} \\approx 0{,}794⟧ dans l'équation de départ :⟦\\log_{\\left(\\frac{1}{2}\\right)^{\\frac{1}{3}}}(2) \\approx -3{,}000⟧⟦-3⟧Les deux membres sont égaux : ⟦x = \\left(\\frac{1}{2}\\right)^{\\frac{1}{3}} \\approx 0{,}794⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -41921,11 +42940,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 3 / 3"
+  "progression_finale": "Étape 4 / 4"
  },
  "log_x(2)=3": {
   "au_depart": {
-   "progression": "Étape 1 / 3",
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
@@ -41952,6 +42971,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = 2^{\\frac{1}{3}} \\approx 1{,}260⟧ dans l'équation de départ :⟦\\log_{2^{\\frac{1}{3}}}(2) \\approx 3{,}000⟧⟦3⟧Les deux membres sont égaux : ⟦x = 2^{\\frac{1}{3}} \\approx 1{,}260⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -41960,11 +42989,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 3 / 3"
+  "progression_finale": "Étape 4 / 4"
  },
  "log_x(255)=2": {
   "au_depart": {
-   "progression": "Étape 1 / 3",
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
@@ -41991,6 +43020,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = \\sqrt{255} \\approx 15{,}969⟧ dans l'équation de départ :⟦\\log_{\\sqrt{255}}(255) \\approx 2{,}000⟧⟦2⟧Les deux membres sont égaux : ⟦x = \\sqrt{255} \\approx 15{,}969⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -41999,11 +43038,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 3 / 3"
+  "progression_finale": "Étape 4 / 4"
  },
  "log_x(256)=4": {
   "au_depart": {
-   "progression": "Étape 1 / 3",
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
@@ -42030,6 +43069,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = 4⟧ dans l'équation de départ :⟦\\log_{4}(256) = \\log_{4}(4^{4}) = 4⟧(log_a(a^k) = k)⟦4⟧Les deux membres sont égaux : ⟦x = 4⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -42038,11 +43087,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 3 / 3"
+  "progression_finale": "Étape 4 / 4"
  },
  "log_x(4)=-2": {
   "au_depart": {
-   "progression": "Étape 1 / 3",
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
@@ -42069,6 +43118,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = \\frac{1}{2}⟧ dans l'équation de départ :⟦\\log_{\\frac{1}{2}}(4) = \\log_{\\frac{1}{2}}\\left(\\left(\\frac{1}{2}\\right)^{-2}\\right) = -2⟧(log_a(a^k) = k)⟦-2⟧Les deux membres sont égaux : ⟦x = \\frac{1}{2}⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -42077,7 +43136,7 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 3 / 3"
+  "progression_finale": "Étape 4 / 4"
  },
  "log_x(5)=0": {
   "au_depart": {
@@ -42120,7 +43179,7 @@
  },
  "log_x(5/2)=2": {
   "au_depart": {
-   "progression": "Étape 1 / 3",
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
@@ -42147,6 +43206,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = \\sqrt{\\frac{5}{2}} \\approx 1{,}581⟧ dans l'équation de départ :⟦\\log_{\\sqrt{\\frac{5}{2}}}\\left(\\frac{5}{2}\\right) \\approx 2{,}000⟧⟦2⟧Les deux membres sont égaux : ⟦x = \\sqrt{\\frac{5}{2}} \\approx 1{,}581⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -42155,11 +43224,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 3 / 3"
+  "progression_finale": "Étape 4 / 4"
  },
  "log_x(7)=1": {
   "au_depart": {
-   "progression": "Étape 1 / 3",
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
@@ -42186,6 +43255,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = 7⟧ dans l'équation de départ :⟦\\log_{7}(7) = 1⟧(log_a(a^k) = k)⟦1⟧Les deux membres sont égaux : ⟦x = 7⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -42194,11 +43273,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 3 / 3"
+  "progression_finale": "Étape 4 / 4"
  },
  "log_x(8)=-1": {
   "au_depart": {
-   "progression": "Étape 1 / 3",
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
@@ -42225,6 +43304,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = \\frac{1}{8}⟧ dans l'équation de départ :⟦\\log_{\\frac{1}{8}}(8) = \\log_{\\frac{1}{8}}\\left(\\left(\\frac{1}{8}\\right)^{-1}\\right) = -1⟧(log_a(a^k) = k)⟦-1⟧Les deux membres sont égaux : ⟦x = \\frac{1}{8}⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -42233,11 +43322,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 3 / 3"
+  "progression_finale": "Étape 4 / 4"
  },
  "log_x(8)=3": {
   "au_depart": {
-   "progression": "Étape 1 / 3",
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
@@ -42264,6 +43353,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = 2⟧ dans l'équation de départ :⟦\\log_{2}(8) = \\log_{2}(2^{3}) = 3⟧(log_a(a^k) = k)⟦3⟧Les deux membres sont égaux : ⟦x = 2⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -42272,11 +43371,11 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 3 / 3"
+  "progression_finale": "Étape 4 / 4"
  },
  "log_x(81)=4": {
   "au_depart": {
-   "progression": "Étape 1 / 3",
+   "progression": "Étape 1 / 4",
    "visibles": 1
   },
   "cartes": [
@@ -42303,6 +43402,16 @@
    {
     "classes": [
      "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3ContrôleOn remplace ⟦x = 3⟧ dans l'équation de départ :⟦\\log_{3}(81) = \\log_{3}(3^{4}) = 4⟧(log_a(a^k) = k)⟦4⟧Les deux membres sont égaux : ⟦x = 3⟧ est solution ✓.",
+    "titre": "Étape 3Contrôle"
+   },
+   {
+    "classes": [
+     "card",
      "final"
     ],
     "listes": [],
@@ -42311,7 +43420,7 @@
     "titre": "Solution"
    }
   ],
-  "progression_finale": "Étape 3 / 3"
+  "progression_finale": "Étape 4 / 4"
  },
  "sin x = 0": {
   "au_depart": {

@@ -3005,6 +3005,33 @@
     "titre": "Étape 2"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = \\frac{1}{100}\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-\\log\\left(\\frac{1}{100}\\right) \\approx 2{,}000\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = \\frac{1}{100}\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left\\{\\frac{1}{100}\\right\\}",
@@ -21587,10 +21614,45 @@
     "titre": "Étape 2"
    },
    {
-    "badge": "Vérification",
+    "badge": "Contrôle",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x^{2} = e^{\\frac{5}{2}} &gt; 0\\)</span><span class=\"prop\">(le logarithme est bien défini) \\(\\checkmark\\)</span></div></div>",
+      "html": "On remplace \\(x_{1} \\approx -3{,}490\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\ln(x_{1}^{2}) - 5 = 2\\ln\\left(e^{\\frac{5}{2}}\\right) - 5 \\approx 0{,}000\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x_{1} \\approx -3{,}490\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "On remplace \\(x_{2} \\approx 3{,}490\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\ln(x_{2}^{2}) - 5 = 2\\ln\\left(e^{\\frac{5}{2}}\\right) - 5 \\approx 0{,}000\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x_{2} \\approx 3{,}490\\) est solution ✓.",
       "style": "etape",
       "type": "texte"
      }
@@ -21617,6 +21679,79 @@
   "erreur": "Cet outil ne traite pas encore ce type de calcul.",
   "ok": false
  },
+ "2log(x) = log(4x)": {
+  "cartes": [
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\log(x) = \\log(4x)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\(\\log(x^{2}) = \\log(4x)\\)</span><span class=\"prop\">(k · log u = log(u^k))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x^{2}) = \\log(4x)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\(x^{2} = 4x\\)</span><span class=\"prop\">(log u = log v ⇒ u = v)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - 4x = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(x - 4) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 0 \\text{ ou } x = 4\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "\\(x = 0\\) : \\(\\log(0)\\) n'existe pas. \\(x = 0\\) est rejetée.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "On remplace \\(x = 4\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\log(4) = \\log(4^{2})\\)</span><span class=\"prop\">(k · log u = log(u^k))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{2\\log(4)} = \\log(16) \\approx 1{,}204\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(4 \\cdot 4) = \\log(16) \\approx 1{,}204\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 4\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{4\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2\\log(x) = \\log(4x)",
+  "erreur": null,
+  "ok": true
+ },
  "2log(x)-5=0": {
   "cartes": [
    {
@@ -21642,6 +21777,33 @@
     ],
     "style": "normal",
     "titre": "Étape 2"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 100\\sqrt{10} \\approx 316{,}228\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\log(100\\sqrt{10}) - 5 = 2\\log\\left(10^{\\frac{5}{2}}\\right) - 5 \\approx 0{,}000\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 100\\sqrt{10} \\approx 316{,}228\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
    },
    {
     "blocs": [
@@ -21683,6 +21845,33 @@
     ],
     "style": "normal",
     "titre": "Étape 2"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 243\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\log_{3}(243) = \\log_{3}(243^{2})\\)</span><span class=\"prop\">(k · log_a u = log_a(u^k))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{2\\log_{3}(243)} = \\log_{3}(59\\text{’}049) = \\log_{3}(3^{10}) = 10\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(10\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 243\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
    },
    {
     "blocs": [
@@ -23746,6 +23935,33 @@
     ],
     "style": "normal",
     "titre": "Étape 1"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 1\\text{’}000\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(1\\text{’}000) = \\log(10^{3}) = 3\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 1\\text{’}000\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
    },
    {
     "blocs": [
@@ -26755,6 +26971,74 @@
     "libelle": "Logarithmes"
    }
   ]
+ },
+ "3log(x)=2log(8)": {
+  "cartes": [
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3\\log(x) = 2\\log(8)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\(\\log(x^{3}) = \\log(64)\\)</span><span class=\"prop\">(k · log u = log(u^k))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x^{3}) = \\log(64)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\(x^{3} = 64\\)</span><span class=\"prop\">(log u = log v ⇒ u = v)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 4\\)</span><span class=\"prop\">(xⁿ = c ⇔ x = c^(1/n) (n impair))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 4\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3\\log(4) = \\log(4^{3})\\)</span><span class=\"prop\">(k · log u = log(u^k))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{3\\log(4)} = \\log(64) \\approx 1{,}806\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\log(8) = \\log(8^{2})\\)</span><span class=\"prop\">(k · log u = log(u^k))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{2\\log(8)} = \\log(64) \\approx 1{,}806\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 4\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{4\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "3\\log(x) = 2\\log(8)",
+  "erreur": null,
+  "ok": true
  },
  "3x*2^x=0": {
   "cartes": [
@@ -31450,10 +31734,25 @@
     "titre": "Étape 1"
    },
    {
-    "badge": "Vérification",
+    "badge": "Contrôle",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2x + 1 = 10^{8} &gt; 0\\)</span><span class=\"prop\">(le logarithme est bien défini) \\(\\checkmark\\)</span></div></div>",
+      "html": "On remplace \\(x = \\frac{99\\text{’}999\\text{’}999}{2}\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(8\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log\\left(2 \\cdot \\frac{99\\text{’}999\\text{’}999}{2} + 1\\right) = \\log(100\\text{’}000\\text{’}000) = \\log(10^{8}) = 8\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = \\frac{99\\text{’}999\\text{’}999}{2}\\) est solution ✓.",
       "style": "etape",
       "type": "texte"
      }
@@ -37473,10 +37772,25 @@
     "titre": "Étape 1"
    },
    {
-    "badge": "Vérification",
+    "badge": "Contrôle",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2 - x = e &gt; 0\\)</span><span class=\"prop\">(le logarithme est bien défini) \\(\\checkmark\\)</span></div></div>",
+      "html": "On remplace \\(x = 2 - e \\approx -0{,}718\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(2 - (2 - e)) = \\ln(e) = 1\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 2 - e \\approx -0{,}718\\) est solution ✓.",
       "style": "etape",
       "type": "texte"
      }
@@ -37589,6 +37903,33 @@
     "titre": "Étape 1"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = e \\approx 2{,}718\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(\\ln(e)) = \\ln(1) = 0\\)</span><span class=\"prop\">(ln(1) = 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = e \\approx 2{,}718\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left\\{e\\right\\} \\text{, soit } x \\approx 2{,}718",
@@ -37628,6 +37969,53 @@
     "titre": "Étape 1"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x_{1} \\approx -3{,}893\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(\\ln(x_{1}^{2})) = \\ln(e) = 1\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x_{1} \\approx -3{,}893\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "On remplace \\(x_{2} \\approx 3{,}893\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(\\ln(x_{2}^{2})) = \\ln(e) = 1\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x_{2} \\approx 3{,}893\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -3{,}893 \\text{ ou } x \\approx 3{,}893",
@@ -37661,6 +38049,33 @@
     "titre": "Étape 1"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 1\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(1) = 0\\)</span><span class=\"prop\">(ln(1) = 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 1\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left\\{1\\right\\}",
@@ -37688,6 +38103,33 @@
     ],
     "style": "normal",
     "titre": "Étape 1"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = e \\approx 2{,}718\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(e) = 1\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = e \\approx 2{,}718\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
    },
    {
     "blocs": [
@@ -37719,6 +38161,33 @@
     "titre": "Étape 1"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = e^{3} \\approx 20{,}086\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(e^{3}) = 3\\)</span><span class=\"prop\">(ln(e^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = e^{3} \\approx 20{,}086\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left\\{e^{3}\\right\\} \\text{, soit } x \\approx 20{,}086",
@@ -37736,6 +38205,74 @@
  "ln(x)=x": {
   "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
   "ok": false
+ },
+ "ln(x+1) = 3ln(2)": {
+  "cartes": [
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(x + 1) = 3\\ln(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\(\\ln(x + 1) = \\ln(8)\\)</span><span class=\"prop\">(k · ln u = ln(u^k))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(x + 1) = \\ln(8)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\(x + 1 = 8\\)</span><span class=\"prop\">(ln u = ln v ⇒ u = v)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 7\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 7\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(7 + 1) = \\ln(8) \\approx 2{,}079\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3\\ln(2) = \\ln(2^{3})\\)</span><span class=\"prop\">(k · ln u = ln(u^k))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{3\\ln(2)} = \\ln(8) \\approx 2{,}079\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 7\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{7\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\ln(x + 1) = 3\\ln(2)",
+  "erreur": null,
+  "ok": true
  },
  "ln(x^2)=1": {
   "cartes": [
@@ -37762,10 +38299,45 @@
     "titre": "Étape 1"
    },
    {
-    "badge": "Vérification",
+    "badge": "Contrôle",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x^{2} = e &gt; 0\\)</span><span class=\"prop\">(le logarithme est bien défini) \\(\\checkmark\\)</span></div></div>",
+      "html": "On remplace \\(x_{1} \\approx -1{,}649\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(x_{1}^{2}) = \\ln(e) = 1\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x_{1} \\approx -1{,}649\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "On remplace \\(x_{2} \\approx 1{,}649\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(x_{2}^{2}) = \\ln(e) = 1\\)</span><span class=\"prop\">(car ln(e) = 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x_{2} \\approx 1{,}649\\) est solution ✓.",
       "style": "etape",
       "type": "texte"
      }
@@ -37788,6 +38360,94 @@
   "erreur": null,
   "ok": true
  },
+ "ln(x^2)=2ln(3)": {
+  "cartes": [
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(x^{2}) = 2\\ln(3)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\(\\ln(x^{2}) = \\ln(9)\\)</span><span class=\"prop\">(k · ln u = ln(u^k))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(x^{2}) = \\ln(9)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\(x^{2} = 9\\)</span><span class=\"prop\">(ln u = ln v ⇒ u = v)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - 9 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 3)(x - 3) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -3 \\text{ ou } x = 3\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = -3\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln((-3)^{2}) = \\ln(9) \\approx 2{,}197\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\ln(3) = \\ln(3^{2})\\)</span><span class=\"prop\">(k · ln u = ln(u^k))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{2\\ln(3)} = \\ln(9) \\approx 2{,}197\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = -3\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "On remplace \\(x = 3\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\ln(3^{2}) = \\ln(9) \\approx 2{,}197\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\ln(3) = \\ln(3^{2})\\)</span><span class=\"prop\">(k · ln u = ln(u^k))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{2\\ln(3)} = \\ln(9) \\approx 2{,}197\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 3\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-3 \\,;\\, 3\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\ln(x^{2}) = 2\\ln(3)",
+  "erreur": null,
+  "ok": true
+ },
  "log x = 2": {
   "erreur": "Après log, ouvrez une parenthèse : log(x).",
   "ok": false
@@ -37807,10 +38467,25 @@
     "titre": "Étape 1"
    },
    {
-    "badge": "Vérification",
+    "badge": "Contrôle",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-3 - x = 10^{1} &gt; 0\\)</span><span class=\"prop\">(le logarithme est bien défini) \\(\\checkmark\\)</span></div></div>",
+      "html": "On remplace \\(x = -13\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(-3 - (-13)) = \\log(10) = 1\\)</span><span class=\"prop\">(car log(10) = 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = -13\\) est solution ✓.",
       "style": "etape",
       "type": "texte"
      }
@@ -37852,10 +38527,25 @@
     "titre": "Étape 1"
    },
    {
-    "badge": "Vérification",
+    "badge": "Contrôle",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-x = 10^{2} &gt; 0\\)</span><span class=\"prop\">(le logarithme est bien défini) \\(\\checkmark\\)</span></div></div>",
+      "html": "On remplace \\(x = -100\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(--100) = \\log(100) = \\log(10^{2}) = 2\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = -100\\) est solution ✓.",
       "style": "etape",
       "type": "texte"
      }
@@ -38168,10 +38858,25 @@
     "titre": "Étape 1"
    },
    {
-    "badge": "Vérification",
+    "badge": "Contrôle",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2x + 1 = 10^{3} &gt; 0\\)</span><span class=\"prop\">(le logarithme est bien défini) \\(\\checkmark\\)</span></div></div>",
+      "html": "On remplace \\(x = \\frac{999}{2}\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log\\left(2 \\cdot \\frac{999}{2} + 1\\right) = \\log(1\\text{’}000) = \\log(10^{3}) = 3\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = \\frac{999}{2}\\) est solution ✓.",
       "style": "etape",
       "type": "texte"
      }
@@ -38194,6 +38899,74 @@
   "erreur": null,
   "ok": true
  },
+ "log(2x-1) = log(3) + log(5)": {
+  "cartes": [
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(2x - 1) = \\log(3) + \\log(5)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\(\\log(2x - 1) = \\log(15)\\)</span><span class=\"prop\">(log u + log v = log(uv))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(2x - 1) = \\log(15)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\(2x - 1 = 15\\)</span><span class=\"prop\">(log u = log v ⇒ u = v)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2x = 16\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 8\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 8\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(2 \\cdot 8 - 1) = \\log(15) \\approx 1{,}176\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(3) + \\log(5) = \\log(3 \\cdot 5)\\)</span><span class=\"prop\">(log u + log v = log(uv))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{\\log(3) + \\log(5)} = \\log(15) \\approx 1{,}176\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 8\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{8\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(2x - 1) = \\log(3) + \\log(5)",
+  "erreur": null,
+  "ok": true
+ },
  "log(3-2x)=1": {
   "cartes": [
    {
@@ -38209,10 +38982,25 @@
     "titre": "Étape 1"
    },
    {
-    "badge": "Vérification",
+    "badge": "Contrôle",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3 - 2x = 10^{1} &gt; 0\\)</span><span class=\"prop\">(le logarithme est bien défini) \\(\\checkmark\\)</span></div></div>",
+      "html": "On remplace \\(x = -\\frac{7}{2}\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log\\left(3 - 2\\left(-\\frac{7}{2}\\right)\\right) = \\log(10) = 1\\)</span><span class=\"prop\">(car log(10) = 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = -\\frac{7}{2}\\) est solution ✓.",
       "style": "etape",
       "type": "texte"
      }
@@ -38235,6 +39023,74 @@
   "erreur": null,
   "ok": true
  },
+ "log(5+x)=log(4-x)+1": {
+  "cartes": [
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(5 + x) = \\log(4 - x) + 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5 + x) = \\log(4 - x) + \\log(10)\\)</span><span class=\"prop\">(c = log(10^c))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\(\\log(5 + x) = \\log(10(4 - x))\\)</span><span class=\"prop\">(log u + log v = log(uv))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(5 + x) = \\log(10(4 - x))\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\(5 + x = 10(4 - x)\\)</span><span class=\"prop\">(log u = log v ⇒ u = v)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(11x = 35\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{35}{11}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = \\frac{35}{11}\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log\\left(5 + \\frac{35}{11}\\right) = \\log\\left(\\frac{90}{11}\\right) \\approx 0{,}913\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log\\left(4 - \\frac{35}{11}\\right) + 1 = \\log\\left(\\frac{9}{11}\\right) + 1 = \\log\\left(\\frac{9}{11}\\right) + \\log(10)\\)</span><span class=\"prop\">(c = log(10^c))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\( = \\log\\left(\\frac{9}{11} \\cdot 10\\right)\\)</span><span class=\"prop\">(log u + log v = log(uv))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\( = \\log\\left(\\frac{90}{11}\\right) \\approx 0{,}913\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = \\frac{35}{11}\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{\\frac{35}{11}\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(5 + x) = \\log(4 - x) + 1",
+  "erreur": null,
+  "ok": true
+ },
  "log(5-x)=8": {
   "cartes": [
    {
@@ -38250,10 +39106,25 @@
     "titre": "Étape 1"
    },
    {
-    "badge": "Vérification",
+    "badge": "Contrôle",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5 - x = 10^{8} &gt; 0\\)</span><span class=\"prop\">(le logarithme est bien défini) \\(\\checkmark\\)</span></div></div>",
+      "html": "On remplace \\(x = -99\\text{’}999\\text{’}995\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(5 - (-99\\text{’}999\\text{’}995)) = \\log(100\\text{’}000\\text{’}000) = \\log(10^{8}) = 8\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(8\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = -99\\text{’}999\\text{’}995\\) est solution ✓.",
       "style": "etape",
       "type": "texte"
      }
@@ -38320,6 +39191,33 @@
     "titre": "Étape 1"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 10^{10}\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(\\log(\\log(10^{10}))) = \\log(1) = 0\\)</span><span class=\"prop\">(log(1) = 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 10^{10}\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left\\{10^{10}\\right\\}",
@@ -38349,6 +39247,33 @@
     "titre": "Étape 1"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 10^{10}\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(\\log(10^{10})) = \\log(10) = 1\\)</span><span class=\"prop\">(car log(10) = 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 10^{10}\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left\\{10^{10}\\right\\}",
@@ -38376,6 +39301,33 @@
     ],
     "style": "normal",
     "titre": "Étape 1"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 11\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(\\log(11 - 1)) = \\log(1) = 0\\)</span><span class=\"prop\">(log(1) = 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 11\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
    },
    {
     "blocs": [
@@ -38426,6 +39378,155 @@
   "erreur": null,
   "ok": true
  },
+ "log(x(x-3))=1": {
+  "cartes": [
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x(x - 3)) = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{\\log(x(x - 3))} = 10^{1}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(x - 3) = 10^{1} = 10\\)</span><span class=\"prop\">(10^(log(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - 3x - 10 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 2)(x - 5) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -2 \\text{ ou } x = 5\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = -2\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log((-2)(-2 - 3)) = \\log(10) = 1\\)</span><span class=\"prop\">(car log(10) = 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = -2\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "On remplace \\(x = 5\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(5(5 - 3)) = \\log(10) = 1\\)</span><span class=\"prop\">(car log(10) = 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 5\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{-2 \\,;\\, 5\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x(x - 3)) = 1",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x) + log(x-3) = 1": {
+  "cartes": [
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x) + \\log(x - 3) = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\(\\log(x(x - 3)) = 1\\)</span><span class=\"prop\">(log u + log v = log(uv))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x(x - 3)) = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{\\log(x(x - 3))} = 10^{1}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x(x - 3) = 10^{1} = 10\\)</span><span class=\"prop\">(10^(log(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - 3x - 10 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 2)(x - 5) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -2 \\text{ ou } x = 5\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "\\(x = -2\\) : \\(\\log(-2)\\) n'existe pas. \\(x = -2\\) est rejetée.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "On remplace \\(x = 5\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(5) + \\log(5 - 3) = \\log(5) + \\log(2) = \\log(5 \\cdot 2)\\)</span><span class=\"prop\">(log u + log v = log(uv))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{\\log(5) + \\log(5 - 3)} = \\log(10) = 1\\)</span><span class=\"prop\">(car log(10) = 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 5\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{5\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x) + \\log(x - 3) = 1",
+  "erreur": null,
+  "ok": true
+ },
  "log(x)+1=3": {
   "cartes": [
    {
@@ -38453,6 +39554,33 @@
     "titre": "Étape 2"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 100\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(100) + 1 = \\log(100) + \\log(10)\\)</span><span class=\"prop\">(c = log(10^c))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{\\log(100) + 1} = \\log(100 \\cdot 10)\\)</span><span class=\"prop\">(log u + log v = log(uv))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{\\log(100) + 1} = \\log(1\\text{’}000) = \\log(10^{3}) = 3\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 100\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left\\{100\\right\\}",
@@ -38468,16 +39596,140 @@
   "ok": true
  },
  "log(x)+log(2)=1": {
-  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
-  "ok": false
- },
- "log(x)+log(x-1)=1": {
-  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
-  "ok": false
+  "cartes": [
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x) + \\log(2) = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\(\\log(2x) = 1\\)</span><span class=\"prop\">(log u + log v = log(uv))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(2x) = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{\\log(2x)} = 10^{1}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2x = 10^{1} = 10\\)</span><span class=\"prop\">(10^(log(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 5\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 5\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(5) + \\log(2) = \\log(5 \\cdot 2)\\)</span><span class=\"prop\">(log u + log v = log(uv))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{\\log(5) + \\log(2)} = \\log(10) = 1\\)</span><span class=\"prop\">(car log(10) = 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 5\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{5\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x) + \\log(2) = 1",
+  "erreur": null,
+  "ok": true
  },
  "log(x)-log(2)=1": {
-  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
-  "ok": false
+  "cartes": [
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x) - \\log(2) = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\(\\log\\left(\\frac{x}{2}\\right) = 1\\)</span><span class=\"prop\">(log u − log v = log(u/v))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log\\left(\\frac{x}{2}\\right) = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{\\log\\left(\\frac{x}{2}\\right)} = 10^{1}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\frac{x}{2} = 10^{1} = 10\\)</span><span class=\"prop\">(10^(log(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\(x = 20\\)</span><span class=\"prop\">(on multiplie les deux membres par les dénominateurs)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 20\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(20) - \\log(2) = \\log\\left(\\frac{20}{2}\\right)\\)</span><span class=\"prop\">(log u − log v = log(u/v))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{\\log(20) - \\log(2)} = \\log(10) = 1\\)</span><span class=\"prop\">(car log(10) = 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 20\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{20\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x) - \\log(2) = 1",
+  "erreur": null,
+  "ok": true
  },
  "log(x)/2=1": {
   "cartes": [
@@ -38504,6 +39756,33 @@
     ],
     "style": "normal",
     "titre": "Étape 2"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 100\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{\\log(100)}{2} \\approx 1{,}000\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 100\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
    },
    {
     "blocs": [
@@ -38539,6 +39818,33 @@
     "titre": "Étape 1"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 10^{-0{,}27} \\approx 0{,}537\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(10^{-0{,}27}) = \\log\\left(10^{-\\frac{27}{100}}\\right)\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{\\log(10^{-0{,}27})} = -0{,}27\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-0{,}27\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 10^{-0{,}27} \\approx 0{,}537\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left\\{10^{-0{,}27}\\right\\} \\text{, soit } x \\approx 0{,}537",
@@ -38566,6 +39872,33 @@
     ],
     "style": "normal",
     "titre": "Étape 1"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = \\frac{1}{10}\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log\\left(\\frac{1}{10}\\right) = \\log(10^{-1}) = -1\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = \\frac{1}{10}\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
    },
    {
     "blocs": [
@@ -38597,6 +39930,33 @@
     "titre": "Étape 1"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 10^{-4}\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(10^{-4}) = -4\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-4\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 10^{-4}\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left\\{10^{-4}\\right\\}",
@@ -38624,6 +39984,33 @@
     ],
     "style": "normal",
     "titre": "Étape 1"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 1\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(1) = 0\\)</span><span class=\"prop\">(log(1) = 0)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 1\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
    },
    {
     "blocs": [
@@ -38655,6 +40042,33 @@
     "titre": "Étape 1"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 10\\sqrt{10} \\approx 31{,}623\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(10\\sqrt{10}) = \\log\\left(10^{\\frac{3}{2}}\\right)\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{\\log(10\\sqrt{10})} = 1{,}5\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1{,}5\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 10\\sqrt{10} \\approx 31{,}623\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left\\{10\\sqrt{10}\\right\\} \\text{, soit } x \\approx 31{,}623",
@@ -38682,6 +40096,33 @@
     ],
     "style": "normal",
     "titre": "Étape 1"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 100\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(100) = \\log(10^{2}) = 2\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 100\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
    },
    {
     "blocs": [
@@ -38717,6 +40158,33 @@
     "titre": "Étape 1"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 1\\text{’}000\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(1\\text{’}000) = \\log(10^{3}) = 3\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 1\\text{’}000\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left\\{1\\text{’}000\\right\\}",
@@ -38732,12 +40200,349 @@
   "ok": true
  },
  "log(x)=log(5)": {
-  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
-  "ok": false
+  "cartes": [
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x) = \\log(5)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\(x = 5\\)</span><span class=\"prop\">(log u = log v ⇒ u = v)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 5\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(5) \\approx 0{,}699\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(5) \\approx 0{,}699\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 5\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{5\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x) = \\log(5)",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x)=log(x^2-6)": {
+  "cartes": [
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x) = \\log(x^{2} - 6)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\(x = x^{2} - 6\\)</span><span class=\"prop\">(log u = log v ⇒ u = v)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(-x^{2} + x + 6 = 0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(Δ = 1^{2} - 4(-1) \\cdot 6 = 25\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = -2 \\text{ ou } x = 3\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "\\(x = -2\\) : \\(\\log(-2)\\) n'existe pas. \\(x = -2\\) est rejetée.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "On remplace \\(x = 3\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(3) \\approx 0{,}477\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(3^{2} - 6) = \\log(3) \\approx 0{,}477\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 3\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{3\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x) = \\log(x^{2} - 6)",
+  "erreur": null,
+  "ok": true
  },
  "log(x)=x-1": {
   "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
   "ok": false
+ },
+ "log(x+1)+log(x-2)=log(x+1)+1": {
+  "cartes": [
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x + 1) + \\log(x - 2) = \\log(x + 1) + 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(x + 1) + \\log(x - 2) = \\log(x + 1) + \\log(10)\\)</span><span class=\"prop\">(c = log(10^c))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\(\\log((x + 1)(x - 2)) = \\log(10(x + 1))\\)</span><span class=\"prop\">(log u + log v = log(uv))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log((x + 1)(x - 2)) = \\log(10(x + 1))\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\((x + 1)(x - 2) = 10(x + 1)\\)</span><span class=\"prop\">(log u = log v ⇒ u = v)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} - 11x - 12 = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x + 1)(x - 12) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -1 \\text{ ou } x = 12\\)</span><span class=\"prop\">(un produit est nul si l'un des facteurs est nul)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "\\(x = -1\\) : \\(\\log(-1 + 1) = \\log(0)\\) n'existe pas. \\(x = -1\\) est rejetée.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "On remplace \\(x = 12\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(12 + 1) + \\log(12 - 2) = \\log(13) + \\log(10) = \\log(13 \\cdot 10)\\)</span><span class=\"prop\">(log u + log v = log(uv))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{\\log(12 + 1) + \\log(12 - 2)} = \\log(130) \\approx 2{,}114\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(12 + 1) + 1 = \\log(13) + 1 = \\log(13) + \\log(10)\\)</span><span class=\"prop\">(c = log(10^c))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{\\log(12 + 1) + 1} = \\log(13 \\cdot 10)\\)</span><span class=\"prop\">(log u + log v = log(uv))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{\\log(12 + 1) + 1} = \\log(130) \\approx 2{,}114\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 12\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{12\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x + 1) + \\log(x - 2) = \\log(x + 1) + 1",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x+3) = 2log(3)": {
+  "cartes": [
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x + 3) = 2\\log(3)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\(\\log(x + 3) = \\log(9)\\)</span><span class=\"prop\">(k · log u = log(u^k))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x + 3) = \\log(9)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\(x + 3 = 9\\)</span><span class=\"prop\">(log u = log v ⇒ u = v)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 6\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 6\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(6 + 3) = \\log(9) \\approx 0{,}954\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\log(3) = \\log(3^{2})\\)</span><span class=\"prop\">(k · log u = log(u^k))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{2\\log(3)} = \\log(9) \\approx 0{,}954\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 6\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{6\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x + 3) = 2\\log(3)",
+  "erreur": null,
+  "ok": true
+ },
+ "log(x-3)+log(1-x)=0": {
+  "cartes": [
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x - 3) + \\log(1 - x) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\(\\log((x - 3)(1 - x)) = 0\\)</span><span class=\"prop\">(log u + log v = log(uv))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Exponentielle des deux membres",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log((x - 3)(1 - x)) = 0\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(10^{\\log((x - 3)(1 - x))} = 10^{0}\\)</span><span class=\"prop\">(exponentielle des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x - 3)(1 - x) = 10^{0} = 1\\)</span><span class=\"prop\">(10^(log(A)) = A, A &gt; 0)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(-x^{2} + 4x - 4 = 0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(Δ = 4^{2} - 4(-1) \\cdot (-4) = 0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(Δ = 0 \\text{ : une seule solution}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{-b}{2a} = \\frac{-4}{2(-1)} = 2\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "\\(x = 2\\) : \\(\\log(2 - 3) = \\log(-1)\\) n'existe pas. \\(x = 2\\) est rejetée.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Aucune solution trouvée ne convient : l'équation n'a pas de solution.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\varnothing",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log(x - 3) + \\log(1 - x) = 0",
+  "erreur": null,
+  "ok": true
  },
  "log(x^2)=-1": {
   "cartes": [
@@ -38764,10 +40569,45 @@
     "titre": "Étape 1"
    },
    {
-    "badge": "Vérification",
+    "badge": "Contrôle",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x^{2} = 10^{-1} &gt; 0\\)</span><span class=\"prop\">(le logarithme est bien défini) \\(\\checkmark\\)</span></div></div>",
+      "html": "On remplace \\(x_{1} \\approx -0{,}316\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x_{1}^{2}) = \\log\\left(\\frac{1}{10}\\right) = \\log(10^{-1}) = -1\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x_{1} \\approx -0{,}316\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "On remplace \\(x_{2} \\approx 0{,}316\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x_{2}^{2}) = \\log\\left(\\frac{1}{10}\\right) = \\log(10^{-1}) = -1\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x_{2} \\approx 0{,}316\\) est solution ✓.",
       "style": "etape",
       "type": "texte"
      }
@@ -38815,10 +40655,45 @@
     "titre": "Étape 1"
    },
    {
-    "badge": "Vérification",
+    "badge": "Contrôle",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x^{2} = 10^{1{,}5} &gt; 0\\)</span><span class=\"prop\">(le logarithme est bien défini) \\(\\checkmark\\)</span></div></div>",
+      "html": "On remplace \\(x_{1} \\approx -5{,}623\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x_{1}^{2}) = \\log\\left(10^{\\frac{3}{2}}\\right)\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{\\log(x_{1}^{2})} = 1{,}5\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1{,}5\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x_{1} \\approx -5{,}623\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "On remplace \\(x_{2} \\approx 5{,}623\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x_{2}^{2}) = \\log\\left(10^{\\frac{3}{2}}\\right)\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{\\log(x_{2}^{2})} = 1{,}5\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1{,}5\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x_{2} \\approx 5{,}623\\) est solution ✓.",
       "style": "etape",
       "type": "texte"
      }
@@ -38866,10 +40741,45 @@
     "titre": "Étape 1"
    },
    {
-    "badge": "Vérification",
+    "badge": "Contrôle",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x^{2} = 10^{\\frac{1}{2}} &gt; 0\\)</span><span class=\"prop\">(le logarithme est bien défini) \\(\\checkmark\\)</span></div></div>",
+      "html": "On remplace \\(x_{1} \\approx -1{,}778\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x_{1}^{2}) = \\log\\left(10^{\\frac{1}{2}}\\right)\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{\\log(x_{1}^{2})} = \\frac{1}{2}\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x_{1} \\approx -1{,}778\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "On remplace \\(x_{2} \\approx 1{,}778\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(x_{2}^{2}) = \\log\\left(10^{\\frac{1}{2}}\\right)\\)</span><span class=\"prop\">(propriétés des puissances)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{\\log(x_{2}^{2})} = \\frac{1}{2}\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x_{2} \\approx 1{,}778\\) est solution ✓.",
       "style": "etape",
       "type": "texte"
      }
@@ -38907,10 +40817,45 @@
     "titre": "Étape 1"
    },
    {
-    "badge": "Vérification",
+    "badge": "Contrôle",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x^{2} = 10^{2} &gt; 0\\)</span><span class=\"prop\">(le logarithme est bien défini) \\(\\checkmark\\)</span></div></div>",
+      "html": "On remplace \\(x = -10\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log((-10)^{2}) = \\log(100) = \\log(10^{2}) = 2\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = -10\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "On remplace \\(x = 10\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(10^{2}) = 2\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 10\\) est solution ✓.",
       "style": "etape",
       "type": "texte"
      }
@@ -38932,10 +40877,6 @@
   "enonce_tex": "\\log(x^{2}) = 2",
   "erreur": null,
   "ok": true
- },
- "log(x^2+1)=-1": {
-  "erreur": "Cet outil ne traite pas encore ce type d'équation.",
-  "ok": false
  },
  "log(x^2+x+3)+1=1": {
   "cartes": [
@@ -39042,10 +40983,45 @@
     "titre": "Étape 1"
    },
    {
-    "badge": "Vérification",
+    "badge": "Contrôle",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x^{2} - 3x = 10^{1} &gt; 0\\)</span><span class=\"prop\">(le logarithme est bien défini) \\(\\checkmark\\)</span></div></div>",
+      "html": "On remplace \\(x = -2\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log((-2)^{2} - 3(-2)) = \\log(10) = 1\\)</span><span class=\"prop\">(car log(10) = 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = -2\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "On remplace \\(x = 5\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(5^{2} - 3 \\cdot 5) = \\log(10) = 1\\)</span><span class=\"prop\">(car log(10) = 1)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 5\\) est solution ✓.",
       "style": "etape",
       "type": "texte"
      }
@@ -39083,10 +41059,45 @@
     "titre": "Étape 1"
    },
    {
-    "badge": "Vérification",
+    "badge": "Contrôle",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x^{2} = 10^{2} &gt; 0\\)</span><span class=\"prop\">(le logarithme est bien défini) \\(\\checkmark\\)</span></div></div>",
+      "html": "On remplace \\(x = -10\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log((-10)^{2}) = \\log(100) = \\log(10^{2}) = 2\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = -10\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "On remplace \\(x = 10\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(10^{2}) = 2\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 10\\) est solution ✓.",
       "style": "etape",
       "type": "texte"
      }
@@ -39106,6 +41117,89 @@
    }
   ],
   "enonce_tex": "\\log(x^{2}) = 2",
+  "erreur": null,
+  "ok": true
+ },
+ "log2(3x-4)+log2(10x-4)=2log2(5x-2)": {
+  "cartes": [
+   {
+    "badge": "Regroupement des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{2}(3x - 4) + \\log_{2}(10x - 4) = 2\\log_{2}(5x - 2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\(\\log_{2}(3x - 4) + \\log_{2}(10x - 4) = \\log_{2}((5x - 2)^{2})\\)</span><span class=\"prop\">(k · log_a u = log_a(u^k))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\(\\log_{2}((3x - 4)(10x - 4)) = \\log_{2}((5x - 2)^{2})\\)</span><span class=\"prop\">(log_a u + log_a v = log_a(uv))</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Égalité des logarithmes",
+    "blocs": [
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{2}((3x - 4)(10x - 4)) = \\log_{2}((5x - 2)^{2})\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\Rightarrow\\)</span><span class=\"expr\">\\((3x - 4)(10x - 4) = (5x - 2)^{2}\\)</span><span class=\"prop\">(log_a u = log_a v ⇒ u = v)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(5x^{2} - 32x + 12 = 0\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(Δ = (-32)^{2} - 4 \\cdot 5 \\cdot 12 = 784\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{2}{5} \\text{ ou } x = 6\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "\\(x = \\frac{2}{5}\\) : \\(\\log_{2}\\left(3 \\cdot \\frac{2}{5} - 4\\right) = \\log_{2}\\left(-\\frac{14}{5}\\right)\\) n'existe pas. \\(x = \\frac{2}{5}\\) est rejetée.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "On remplace \\(x = 6\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{2}(3 \\cdot 6 - 4) + \\log_{2}(10 \\cdot 6 - 4) = \\log_{2}(14) + \\log_{2}(56) = \\log_{2}(14 \\cdot 56)\\)</span><span class=\"prop\">(log_a u + log_a v = log_a(uv))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\( = \\log_{2}(784) \\approx 9{,}615\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\log_{2}(5 \\cdot 6 - 2) = 2\\log_{2}(28) = \\log_{2}(28^{2})\\)</span><span class=\"prop\">(k · log_a u = log_a(u^k))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{2\\log_{2}(5 \\cdot 6 - 2)} = \\log_{2}(784) \\approx 9{,}615\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 6\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\left\\{6\\right\\}",
+      "type": "resultat"
+     }
+    ],
+    "style": "final",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\log_{2}(3x - 4) + \\log_{2}(10x - 4) = 2\\log_{2}(5x - 2)",
   "erreur": null,
   "ok": true
  },
@@ -39158,6 +41252,33 @@
     "titre": "Étape 1"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 16\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{2}(16) = \\log_{2}(2^{4}) = 4\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 16\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left\\{16\\right\\}",
@@ -39185,6 +41306,33 @@
     ],
     "style": "normal",
     "titre": "Étape 1"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = \\frac{1}{25}\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{5}\\left(\\frac{1}{25}\\right) = \\log_{5}(5^{-2}) = -2\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-2\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = \\frac{1}{25}\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
    },
    {
     "blocs": [
@@ -39216,6 +41364,33 @@
     "titre": "Étape 1"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 4\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{8}(4) \\approx 0{,}667\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{2}{3}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 4\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left\\{4\\right\\}",
@@ -39243,6 +41418,33 @@
     ],
     "style": "normal",
     "titre": "Étape 1"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 0{,}1\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{0{,}01}(0{,}1) \\approx 0{,}500\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1}{2} = 0{,}5\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 0{,}1\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
    },
    {
     "blocs": [
@@ -39588,6 +41790,33 @@
     "titre": "Étape 1"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 16\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{2}(16) = \\log_{2}(2^{4}) = 4\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 16\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left\\{16\\right\\}",
@@ -39627,10 +41856,45 @@
     "titre": "Étape 1"
    },
    {
-    "badge": "Vérification",
+    "badge": "Contrôle",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x^{2} = 2^{-1} &gt; 0\\)</span><span class=\"prop\">(le logarithme est bien défini) \\(\\checkmark\\)</span></div></div>",
+      "html": "On remplace \\(x_{1} \\approx -0{,}707\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{2}(x_{1}^{2}) = \\log_{2}\\left(\\frac{1}{2}\\right) = \\log_{2}(2^{-1}) = -1\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x_{1} \\approx -0{,}707\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "On remplace \\(x_{2} \\approx 0{,}707\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{2}(x_{2}^{2}) = \\log_{2}\\left(\\frac{1}{2}\\right) = \\log_{2}(2^{-1}) = -1\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x_{2} \\approx 0{,}707\\) est solution ✓.",
       "style": "etape",
       "type": "texte"
      }
@@ -39940,6 +42204,33 @@
     "titre": "Étape 1"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = \\frac{1}{8}\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{4}\\left(\\frac{1}{8}\\right) \\approx -1{,}500\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-\\frac{3}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = \\frac{1}{8}\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left\\{\\frac{1}{8}\\right\\}",
@@ -40207,6 +42498,33 @@
     "titre": "Étape 1"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 2\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{8}(2) \\approx 0{,}333\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{1}{3}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 2\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left\\{2\\right\\}",
@@ -40268,6 +42586,33 @@
     ],
     "style": "normal",
     "titre": "Étape 1"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 27\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{9}(27) \\approx 1{,}500\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\frac{3}{2}\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 27\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
    },
    {
     "blocs": [
@@ -40710,6 +43055,18 @@
     "titre": "Étape 2"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "Les logarithmes de l'équation existent pour \\(x \\in \\left]0 \\,;\\, 1\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[\\) : l'égalité est vraie pour tout nombre de cet ensemble.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left]0 \\,;\\, 1\\right[ \\cup \\left]1 \\,;\\, +\\infty\\right[",
@@ -40848,6 +43205,33 @@
     "titre": "Étape 2"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = \\frac{1}{2}\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{\\frac{1}{2}}\\left(\\frac{1}{16}\\right) = \\log_{\\frac{1}{2}}\\left(\\left(\\frac{1}{2}\\right)^{4}\\right) = 4\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = \\frac{1}{2}\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left\\{\\frac{1}{2}\\right\\}",
@@ -40887,6 +43271,33 @@
     ],
     "style": "normal",
     "titre": "Étape 2"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = \\frac{1}{2}\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{\\frac{1}{2}}\\left(\\frac{1}{8}\\right) = \\log_{\\frac{1}{2}}\\left(\\left(\\frac{1}{2}\\right)^{3}\\right) = 3\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = \\frac{1}{2}\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
    },
    {
     "blocs": [
@@ -40935,6 +43346,33 @@
     "titre": "Étape 2"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 3\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{3}\\left(\\frac{1}{9}\\right) = \\log_{3}(3^{-2}) = -2\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-2\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 3\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left\\{3\\right\\}",
@@ -40979,6 +43417,33 @@
     ],
     "style": "normal",
     "titre": "Étape 2"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 12^{\\frac{1}{4}} \\approx 1{,}861\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{12^{\\frac{1}{4}}}(12) \\approx 4{,}000\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 12^{\\frac{1}{4}} \\approx 1{,}861\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
    },
    {
     "blocs": [
@@ -41027,6 +43492,33 @@
     "titre": "Étape 2"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 4\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{4}(16) = \\log_{4}(4^{2}) = 2\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 4\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left\\{4\\right\\}",
@@ -41068,6 +43560,33 @@
     "titre": "Étape 2"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = \\left(\\frac{1}{2}\\right)^{\\frac{1}{3}} \\approx 0{,}794\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{\\left(\\frac{1}{2}\\right)^{\\frac{1}{3}}}(2) \\approx -3{,}000\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-3\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = \\left(\\frac{1}{2}\\right)^{\\frac{1}{3}} \\approx 0{,}794\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left\\{\\left(\\frac{1}{2}\\right)^{\\frac{1}{3}}\\right\\} \\text{, soit } x \\approx 0{,}794",
@@ -41107,6 +43626,33 @@
     ],
     "style": "normal",
     "titre": "Étape 2"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 2^{\\frac{1}{3}} \\approx 1{,}260\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{2^{\\frac{1}{3}}}(2) \\approx 3{,}000\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 2^{\\frac{1}{3}} \\approx 1{,}260\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
    },
    {
     "blocs": [
@@ -41155,6 +43701,33 @@
     "titre": "Étape 2"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = \\sqrt{255} \\approx 15{,}969\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{\\sqrt{255}}(255) \\approx 2{,}000\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = \\sqrt{255} \\approx 15{,}969\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left\\{\\sqrt{255}\\right\\} \\text{, soit } x \\approx 15{,}969",
@@ -41201,6 +43774,33 @@
     "titre": "Étape 2"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 4\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{4}(256) = \\log_{4}(4^{4}) = 4\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 4\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left\\{4\\right\\}",
@@ -41245,6 +43845,33 @@
     ],
     "style": "normal",
     "titre": "Étape 2"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = \\frac{1}{2}\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{\\frac{1}{2}}(4) = \\log_{\\frac{1}{2}}\\left(\\left(\\frac{1}{2}\\right)^{-2}\\right) = -2\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-2\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = \\frac{1}{2}\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
    },
    {
     "blocs": [
@@ -41339,6 +43966,33 @@
     "titre": "Étape 2"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = \\sqrt{\\frac{5}{2}} \\approx 1{,}581\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{\\sqrt{\\frac{5}{2}}}\\left(\\frac{5}{2}\\right) \\approx 2{,}000\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = \\sqrt{\\frac{5}{2}} \\approx 1{,}581\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left\\{\\sqrt{\\frac{5}{2}}\\right\\} \\text{, soit } x \\approx 1{,}581",
@@ -41378,6 +44032,33 @@
     ],
     "style": "normal",
     "titre": "Étape 2"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 7\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{7}(7) = 1\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 7\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
    },
    {
     "blocs": [
@@ -41421,6 +44102,33 @@
     "titre": "Étape 2"
    },
    {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = \\frac{1}{8}\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{\\frac{1}{8}}(8) = \\log_{\\frac{1}{8}}\\left(\\left(\\frac{1}{8}\\right)^{-1}\\right) = -1\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-1\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = \\frac{1}{8}\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
     "blocs": [
      {
       "tex": "S = \\left\\{\\frac{1}{8}\\right\\}",
@@ -41460,6 +44168,33 @@
     ],
     "style": "normal",
     "titre": "Étape 2"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 2\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{2}(8) = \\log_{2}(2^{3}) = 3\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 2\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
    },
    {
     "blocs": [
@@ -41506,6 +44241,33 @@
     ],
     "style": "normal",
     "titre": "Étape 2"
+   },
+   {
+    "badge": "Contrôle",
+    "blocs": [
+     {
+      "html": "On remplace \\(x = 3\\) dans l'équation de départ :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{3}(81) = \\log_{3}(3^{4}) = 4\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4\\)</span><span class=\"prop\"></span></div></div>",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Les deux membres sont égaux : \\(x = 3\\) est solution ✓.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
    },
    {
     "blocs": [
