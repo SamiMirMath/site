@@ -250,10 +250,9 @@ class Page:
             self.appel("Input.insertText", text=c)
             time.sleep(pause)
 
-    def toucher(self, selecteur):
-        """Appui d'un doigt (touchStart puis touchEnd) au centre de l'élément, après l'avoir amené à l'écran ; le navigateur en tire le clic
-        (page ouverte avec `tactile=True`). On attend que la page soit immobile avant d'appuyer : un défilement doux en cours (vers la carte qui vient
-        d'apparaître) fait avaler l'appui par le navigateur, ce que l'élève ne fait jamais (il ne touche pas pendant que la page défile)."""
+    def _centre_immobile(self, selecteur):
+        """Amène l'élément au milieu de l'écran et renvoie son centre (x, y) une fois la page immobile : un défilement doux en cours (vers la carte qui vient
+        d'apparaître) fait avaler le geste par le navigateur, ce que l'élève ne fait jamais (il ne touche pas pendant que la page défile)."""
         position = (f"(() => {{ const r = document.querySelector({selecteur!r}).getBoundingClientRect(); "
                     "return [scrollX, scrollY, r.x + r.width / 2, r.y + r.height / 2, document.documentElement.scrollHeight]; })()")
         self.evaluer(f"document.querySelector({selecteur!r}).scrollIntoView({{block: 'center', behavior: 'instant'}})")
@@ -263,8 +262,23 @@ class Page:
             mesure = self.evaluer(position)
             calme = calme + 1 if mesure == derniere else 0
             derniere = mesure
-        x, y = derniere[2], derniere[3]
+        return derniere[2], derniere[3]
+
+    def toucher(self, selecteur):
+        """Appui d'un doigt (touchStart puis touchEnd) au centre de l'élément, après l'avoir amené à l'écran ; le navigateur en tire le clic
+        (page ouverte avec `tactile=True`)."""
+        x, y = self._centre_immobile(selecteur)
         self.appel("Input.dispatchTouchEvent", type="touchStart", touchPoints=[{"x": x, "y": y}])
+        self.appel("Input.dispatchTouchEvent", type="touchEnd", touchPoints=[])
+
+    def glisser(self, selecteur, dx=0, dy=0, etapes=12, pause=0.016):
+        """Glissement d'un doigt de (dx, dy) pixels à partir du centre de l'élément (touchStart, touchMove en `etapes` pas, touchEnd) ; la page décide
+        si le geste fait défiler (touch-action) ou le manipule. Page ouverte avec `tactile=True`."""
+        x, y = self._centre_immobile(selecteur)
+        self.appel("Input.dispatchTouchEvent", type="touchStart", touchPoints=[{"x": x, "y": y}])
+        for k in range(1, etapes + 1):
+            self.appel("Input.dispatchTouchEvent", type="touchMove", touchPoints=[{"x": x + dx * k / etapes, "y": y + dy * k / etapes}])
+            time.sleep(pause)
         self.appel("Input.dispatchTouchEvent", type="touchEnd", touchPoints=[])
 
     def capture(self, chemin):

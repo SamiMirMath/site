@@ -785,5 +785,95 @@ class TestSimplexe(unittest.TestCase):
         self.assertEqual(page.evaluer("document.querySelector('.pave')"), None)
 
 
+    # ---------- G. défilement sur les figures (chantier « Clavier intégré », partie 3) ----------
+    IMMOBILE = "(() => [scrollX, scrollY])()"
+
+    def immobile(self, page):
+        """Attend que la page ait fini de défiler (élan d'un glissement) et renvoie scrollY."""
+        derniere, calme, fin = None, 0, time.time() + 10
+        while calme < 6 and time.time() < fin:
+            time.sleep(0.05)
+            mesure = page.evaluer(self.IMMOBILE)
+            calme = calme + 1 if mesure == derniere else 0
+            derniere = mesure
+        return derniere[1]
+
+    def glissement_vertical(self, page, selecteur, dy=-150):
+        """Glisse un doigt verticalement sur la figure ; renvoie (scrollY avant, scrollY après)."""
+        page.evaluer(f"document.querySelector({selecteur!r}).scrollIntoView({{block: 'center', behavior: 'instant'}})")
+        avant = self.immobile(page)
+        place = page.evaluer("document.documentElement.scrollHeight - innerHeight - scrollY")
+        self.assertGreater(place, abs(dy) + 50, f"la page doit pouvoir défiler de plus de {abs(dy)} px pour que le test ait un sens")
+        page.glisser(selecteur, dy=dy)
+        return avant, self.immobile(page)
+
+    def test_g_un_glissement_vertical_sur_une_figure_de_la_solution_geometrique_fait_defiler_la_page(self):
+        page = self.ouvrir(390, tactile=True)
+        page.taille(390, 500)
+        self.clic(page, '[data-meth="para"]')
+        self.lancer_exemple(page, "Parallèles : max")
+        page.evaluer("document.querySelector('canvas.fig').scrollIntoView({block: 'center', behavior: 'instant'})")          # les figures se dessinent à l'approche de l'écran
+        page.attendre("document.querySelector('canvas.fig[data-dessine]')", 10)
+        self.assertEqual(page.evaluer("getComputedStyle(document.querySelector('canvas.fig')).touchAction"), "pan-y")
+        avant, apres = self.glissement_vertical(page, "canvas.fig")
+        self.assertGreater(apres, avant + 50, "le glissement sur la figure doit faire défiler la page")
+
+    def test_g_visualisation_graphique_sans_glisser_defile_dans_les_deux_methodes(self):
+        page = self.ouvrir(390, tactile=True)
+        page.taille(390, 500)
+        self.lancer_exemple(page, "Exemple 2D")                                                # méthode algébrique, polygone 2D
+        self.clic(page, '[data-mode="sim"]')
+        page.attendre("!ST.anim", 15)
+        self.assertEqual(page.evaluer("getComputedStyle(document.querySelector('#cv')).touchAction"), "pan-y")
+        avant, apres = self.glissement_vertical(page, "#cv")
+        self.assertGreater(apres, avant + 50, "algébrique 2D, Visualisation graphique")
+        page = self.ouvrir(390, tactile=True)
+        page.taille(390, 500)
+        self.clic(page, '[data-meth="para"]')
+        self.lancer_exemple(page, "Parallèles : max")
+        self.clic(page, '[data-modep="sim"]')
+        page.attendre("!PS.anim", 15)
+        self.assertEqual(page.evaluer("getComputedStyle(document.querySelector('#cvp')).touchAction"), "pan-y")
+        avant, apres = self.glissement_vertical(page, "#cvp")
+        self.assertGreater(apres, avant + 50, "géométrique, Visualisation graphique")
+
+    def test_g_dans_explorer_le_glissement_deplace_le_point_et_ne_fait_pas_defiler(self):
+        page = self.ouvrir(390, tactile=True)
+        page.taille(390, 500)
+        self.lancer_exemple(page, "Exemple 2D")
+        self.clic(page, '[data-mode="exp"]')
+        self.assertEqual(page.evaluer("getComputedStyle(document.querySelector('#cv')).touchAction"), "none")
+        point = lambda: page.evaluer("ST.expPt.map(v => Math.round(v * 1000) / 1000)")
+        avant_point = point()
+        avant, apres = self.glissement_vertical(page, "#cv", dy=-120)
+        self.assertEqual(apres, avant, "le glissement dans Explorer ne doit pas faire défiler")
+        self.assertNotEqual(point(), avant_point, "le glissement déplace le point")
+        self.clic(page, '[data-mode="sim"]')                                                   # on quitte Explorer : la figure redevient défilable
+        self.assertEqual(page.evaluer("getComputedStyle(document.querySelector('#cv')).touchAction"), "pan-y")
+
+    def test_g_en_3d_le_glissement_fait_tourner_le_polyedre_et_ne_fait_pas_defiler(self):
+        page = self.ouvrir(390, tactile=True)
+        page.taille(390, 500)
+        self.lancer_exemple(page, "Exemple 3D")
+        self.clic(page, '[data-mode="sim"]')
+        page.attendre("!ST.anim", 15)
+        for mode in ("sim", "exp"):
+            self.clic(page, f'[data-mode="{mode}"]')
+            self.assertEqual(page.evaluer("getComputedStyle(document.querySelector('#cv')).touchAction"), "none", mode)
+            angles = lambda: page.evaluer("[scene.yaw, scene.pitch]")
+            avant_angles = angles()
+            avant, apres = self.glissement_vertical(page, "#cv", dy=-100)
+            self.assertEqual(apres, avant, f"en 3D ({mode}) le glissement ne fait pas défiler")
+            self.assertNotEqual(angles(), avant_angles, f"en 3D ({mode}) le glissement fait tourner le polyèdre")
+
+    def test_g_une_figure_2d_ne_garde_pas_les_gestes_d_une_scene_3d_precedente(self):
+        page = self.ouvrir(390)
+        self.lancer_exemple(page, "Exemple 3D")
+        self.assertIsNotNone(page.evaluer("document.querySelector('#cv').onpointerdown && 1"))
+        self.clic(page, "#editBtn")
+        self.lancer_exemple(page, "Exemple 2D")
+        self.assertEqual(page.evaluer("[document.querySelector('#cv').onpointerdown, document.querySelector('#cv').onpointermove]"), [None, None])
+
+
 if __name__ == "__main__":
     unittest.main()

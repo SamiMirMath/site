@@ -36,7 +36,7 @@ reçoit le clavier tactile sans rien écrire de plus.
 |---|---|---|
 | 1 | Clavier des outils à saisie de fonction | **faite** (suite complète verte : 914 + 105) |
 | 2 | Pavé numérique du simplexe | **faite** (suite complète verte : 914 + 108) |
-| 3 | Défilement sur les figures du simplexe | à faire |
+| 3 | Défilement sur les figures du simplexe | **faite** (suite complète : 914 + 112 verts, **un seul échec de chronométrage, hors chantier** : voir ci-dessous) |
 
 ## Partie 1 — clavier des outils à saisie de fonction
 
@@ -83,3 +83,43 @@ un toucher dehors et le lancement le ferment ; aucun pavé sur ordinateur (`inpu
 **Écart rencontré** : `test_clavier.py::test_a_…` a échoué deux fois dans la suite complète (jamais seul) : l'appui du doigt sur « C » juste après un calcul était perdu, la page faisant encore un défilement doux vers le corrigé
 (Chrome avale un appui synthétique donné pendant un défilement). Ce n'est pas un défaut de la page : l'élève ne touche pas pendant que la page défile. `Page.toucher` (`tests/pages/navigateur.py`) attend maintenant que la page soit
 immobile (6 mesures identiques de suite, à 50 ms) avant d'appuyer. Contrôle : les tests du clavier passent 4 fois sur 4 avec 3 processus qui saturent le processeur.
+
+## Partie 3 — défilement sur les figures (simplexe)
+
+**Constat** : les figures de la « Solution » géométrique (`canvas.fig`) étaient déjà en `touch-action: pan-y` ; c'étaient `#cv` (algébrique : Visualisation graphique et Explorer) et `#cvp` (géométrique : Visualisation graphique)
+qui étaient en `touch-action: none` partout, alors que `#cvp` n'a aucun geste et que `#cv` n'en a que dans deux cas.
+
+**Changement** (`simplexe/index.html`) : `#cv` et `#cvp` passent en `pan-y` ; `#cv.manipulable` reste en `none`. La classe est posée par `majManipulable()` (appelée par `setMode`) : en 3D (rotation du polyèdre, en « Visualisation
+graphique » comme en « Explorer ») et en « Explorer » 2D (glisser le point). Au passage : `Scene.attach()` retire les gestes d'une scène 3D précédente (ils restaient sur `#cv` après un lancement en 2D), et `pointercancel` arrête le glissement du point.
+
+**Tests** (`test_simplexe.py`, partie G, doigt émulé à 390 × 500 px, glissement de 150 px) : sur une figure de la Solution géométrique, sur `#cv` en 2D « Visualisation graphique » et sur `#cvp`, la page défile ;
+dans Explorer 2D le point bouge et la page ne défile pas, et la figure redevient défilable en quittant Explorer ; en 3D (Visualisation graphique et Explorer) le polyèdre tourne (`yaw`, `pitch`) et la page ne défile pas ;
+une scène 2D n'a plus les gestes d'une scène 3D précédente. Sensibilité vérifiée : avec l'ancienne règle `none`, le même glissement laisse la page à 282 px au lieu de 471 px.
+`tests/pages/navigateur.py` : `Page.glisser(sélecteur, dx, dy)` (glissement d'un doigt), qui partage avec `toucher` l'attente d'une page immobile.
+
+**Entorse à la règle « jamais de commit si un test échoue », accordée par l'enseignant le 02.11.2026 pour ce seul commit** : `test_comportement.py::test_limites_exemples_et_rappel_a_360_px`
+(plafond de 6 s par fonction, Pyodide) échoue sur ce Mac, toujours sur `ln(x^2-3)/(2-x)` : 7,8 s, 8,1 s et 7,6 s dans trois suites complètes de la branche (3 échecs sur 6), 4,3 à 6,2 s seul.
+**Indépendant du chantier** : une copie de `main` sans aucun de ces changements l'échoue aussi (5,2 s ; 6,9 s ; 7,3 s, mesures du même jour) ; la CI (Linux) le passe en 0,7 s ; le clavier et les figures n'interviennent pas dans ce calcul.
+Les 5 nouveaux tests de la partie 3 et tout le reste de la suite (914 Python, 112 pages) sont verts. Le plafond n'a pas été modifié ; à reprendre séparément (mesure plus stable, ou machine moins chargée).
+
+## Ce qui change pour l'élève
+
+Sur téléphone et tablette (écran tactile), partout où il saisit une formule ou un nombre :
+- **Outils à saisie de fonction** (Ensemble de définition, Dérivée et variations, Limites et asymptotes, Étude complète, Factorisation, Exponentielles et logarithmes) : le clavier du téléphone ne s'ouvre plus. Les touches de la page, disposées
+  comme une calculatrice (chiffres, virgule, × ÷ + − ^, parenthèses, ⌫ et C, puis les fonctions de l'outil), écrivent dans le champ, au curseur. Une rangée « Calculer ▶ » (ou « Factoriser ▶ », « Résoudre ▶ ») est juste en dessous ;
+  « ABC » rouvre le clavier du téléphone pour une saisie inhabituelle, « 123 » revient aux touches. La touche × écrit `*`, la virgule est comprise comme virgule décimale.
+- **Programmation linéaire** : un pavé numérique (7 8 9 ⌫ / 4 5 6 , / 1 2 3 / / 0 « Suivant ▶ ») apparaît en bas de l'écran dès qu'on touche un champ ; « Suivant ▶ » passe au champ suivant, dans l'ordre de lecture, et ferme le pavé après le dernier.
+  Le signe reste sur le bouton « + / − » du champ. Le champ actif reste visible au-dessus du pavé.
+- **Figures du simplexe** : on fait défiler la page en glissant le doigt sur une figure ; seuls « Explorer » (glisser le point) et la 3D (faire tourner le polyèdre) gardent le geste pour la figure.
+- **Ordinateur** : rien ne change (saisie au clavier, pas de pavé, pas de rangée « ABC »).
+
+## Fin du chantier
+
+Trois commits locaux sur `clavier-integre` (parties 1 à 3), rien n'est poussé ni fusionné. Fusion (à lancer par l'enseignant) :
+
+```
+git switch main && git merge --no-ff clavier-integre
+```
+
+À savoir avant de fusionner : (1) le test de chronométrage de la page Limites (plafond de 6 s) échoue sur ce Mac, sur `main` aussi (voir « Entorse » ci-dessus) ; (2) le clavier n'a pas pu être essayé sur un vrai iPhone : `readonly` sur iOS est une précaution
+(Safari ouvre parfois son clavier malgré `inputmode="none"`) à vérifier sur un téléphone ; (3) à 320 px, les touches font 40 px de large (44 px de haut), le filet de sécurité.
