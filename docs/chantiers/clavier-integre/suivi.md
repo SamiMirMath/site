@@ -150,3 +150,20 @@ Si le clavier ne s'ouvre toujours pas : prochaine piste = ouvrir le clavier avec
 
 **Suite complète de la partie 4 : entièrement verte** (914 Python, 115 pages), y compris `test_limites_exemples_et_rappel_a_360_px` qui échouait dans les suites précédentes de la branche.
 Ce test n'a pas été modifié ; il passe ici parce que SymPy ne se charge plus pendant que la page Limites est utilisée (la mesure reste une mesure de machine : à surveiller).
+
+### Partie 4 bis — « ABC » ouvre le clavier, mais plus après « 123 » (retour iPhone, 02.11.2026)
+
+Première correction confirmée sur l'iPhone : « ABC » ouvre le clavier du système. Mais après « 123 », il ne s'ouvrait plus.
+**Cause probable** (non vérifiable ici) : « 123 » refocalisait le champ par programme alors qu'il venait d'être rendu muet et en lecture seule ; l'appui suivant sur « ABC » ne partait donc plus du même état que le premier.
+**Correctif** (`commun/composants.js`) : chaque appui part du même état, **champ muet et non focalisé**. Les touches de la page ne focalisent plus le champ (il n'est focalisé que par l'élève) ; « 123 » fait `blur()`
+(ce qui ferme le clavier) et rend le champ muet sans le refocaliser ; « ABC » fait `blur()`, rend le champ au système, puis le focalise dans le geste de l'élève. Le caret n'est plus visible tant que l'élève n'a pas touché le champ.
+**Test** : `test_c_abc_et_123_repartent_chaque_fois_du_meme_etat` : trois tours ABC / 123 sur Android et iPhone émulés, événements `focus` et `blur` et état du champ vérifiés à chaque appui, puis le cas où l'élève a touché le champ.
+**À confirmer sur l'iPhone** : ABC → 123 → ABC → 123, plusieurs fois.
+**Autre point, à décider** : quand le clavier du système est ouvert, il couvre le bas de l'écran, donc la rangée « 123 / Calculer ▶ » (sous les touches) peut être masquée. Si c'est gênant, la bascule « ABC / 123 » peut être placée sur la ligne du champ, toujours visible.
+
+**Écarts de test rencontrés pendant la suite complète de la partie 4 bis** (machine chargée, tous hors du code du chantier) :
+- un appui du doigt sans réponse du navigateur pendant 180 s dans `test_clavier.py::test_b…` (accroc de Chrome sous charge ; ne se reproduit ni seul ni sous charge artificielle, 3 passages sur 3) ;
+- `test_bouton_etape_suivante_flottant` (retour des élèves du 30.10.2026) attendait 1,2 s fixes la fin d'un défilement doux et a mesuré la carte à 720 px au lieu de moins de 660 : l'attente est maintenant « la page est immobile depuis 0,3 s » (10 s au plus) ;
+  les assertions n'ont pas changé.
+
+**Suite complète de la partie 4 bis : entièrement verte** (914 Python, 115 pages), à la 4ᵉ tentative ; les trois échecs précédents sont les écarts de test ci-dessus.

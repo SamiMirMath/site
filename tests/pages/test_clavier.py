@@ -128,27 +128,41 @@ class TestClavierIntegre(unittest.TestCase):
                 self.attendre_etat(page, ["none", readonly, "ABC"])
                 self.ecrire(page, ["8"], depart="7")
 
-    def test_c_abc_defocalise_puis_refocalise_le_champ_dans_le_meme_geste(self):
-        """Retour de l'enseignant sur iPhone (02.11.2026) : « ABC » n'ouvrait pas le clavier. Après une touche de la page, le champ a déjà le focus : sans blur(), focus() ne fait rien et iOS
-        n'ouvre pas son clavier. Le geste doit donc faire blur() puis focus(), champ ni muet (inputmode) ni en lecture seule au moment du focus. (iOS lui-même n'est pas testable ici.)"""
-        for nom, agent in (("Android", ANDROID), ("iPhone", IPHONE)):
+    def test_c_abc_et_123_repartent_chaque_fois_du_meme_etat(self):
+        """Retours de l'enseignant sur iPhone (02.11.2026) : « ABC » n'ouvrait pas le clavier (le champ avait déjà le focus : focus() ne fait rien), puis il ne s'ouvrait plus
+        après « 123 ». Chaque appui sur « ABC » doit partir du même état, celui du premier : champ muet et non focalisé (les touches ne le focalisent jamais). « ABC » : focus donné
+        dans le geste, champ ni muet ni en lecture seule à cet instant ; « 123 » : blur, puis champ muet et non focalisé. Si l'élève a touché le champ, blur puis focus.
+        (iOS lui-même n'est pas testable ici.)"""
+        suivi = """(() => { const e = document.querySelector('#entree'); window.__j = [];
+            for (const t of ['blur', 'focus']) e.addEventListener(t, () => window.__j.push([t, e.readOnly, e.getAttribute('inputmode')])); })()"""
+        for nom, agent, readonly in (("Android", ANDROID, False), ("iPhone", IPHONE, True)):
             page = self.ouvrir(tactile=True, agent=agent)
+            actif = lambda: page.evaluer("document.activeElement.id")
+            evenements = lambda: page.evaluer("window.__j")
             with self.subTest(appareil=nom):
-                self.ecrire(page, ["7"])                                                   # le champ a le focus, comme après toute touche
-                self.assertEqual(page.evaluer("document.activeElement.id"), "entree")
-                page.evaluer("""(() => { const e = document.querySelector('#entree'); window.__j = [];
-                    e.addEventListener('blur', () => window.__j.push(['blur', e.readOnly, e.getAttribute('inputmode')]));
-                    e.addEventListener('focus', () => window.__j.push(['focus', e.readOnly, e.getAttribute('inputmode')])); })()""")
+                self.ecrire(page, ["7"])
+                self.assertNotEqual(actif(), "entree", "les touches ne focalisent pas le champ muet")
+                page.evaluer(suivi)
+                for tour in (1, 2, 3):                                                     # ABC, 123, ABC, 123, ABC, 123 : toujours le même état de départ
+                    page.evaluer("window.__j.length = 0")
+                    page.toucher("#clavier button.abc")
+                    page.attendre("window.__j.length >= 1", 10)
+                    self.assertEqual(evenements(), [["focus", False, None]], f"tour {tour}, ABC")
+                    self.assertEqual(actif(), "entree")
+                    page.evaluer("window.__j.length = 0")
+                    page.toucher("#clavier button.abc")
+                    page.attendre("window.__j.length >= 1", 10)
+                    self.assertEqual(evenements(), [["blur", False, None]], f"tour {tour}, 123")
+                    self.attendre_etat(page, ["none", readonly, "ABC"])
+                    self.assertNotEqual(actif(), "entree", f"tour {tour} : après « 123 » le champ n'est pas focalisé")
+                self.toucher_valeur(page, "#clavier button[data-t=\"8\"]", "78")                  # et les touches écrivent toujours
+                page.toucher("#entree")                                                    # l'élève touche le champ (muet) puis « ABC » : blur puis focus
+                page.attendre("document.activeElement.id === 'entree'", 10)
+                page.evaluer("window.__j.length = 0")
                 page.toucher("#clavier button.abc")
                 page.attendre("window.__j.length >= 2", 10)
-                self.assertEqual(page.evaluer("window.__j"), [["blur", page.evaluer("window.__j[0][1]"), page.evaluer("window.__j[0][2]")], ["focus", False, None]])
-                self.assertEqual(page.evaluer("window.__j[0][0] + ',' + window.__j[1][0]"), "blur,focus")
-                self.assertEqual(page.evaluer("document.activeElement.id"), "entree")
-                page.evaluer("window.__j.length = 0")
-                page.toucher("#clavier button.abc")                                         # « 123 » : le clavier se ferme, le champ redevient muet
-                page.attendre("window.__j.length >= 2", 10)
-                self.assertEqual(page.evaluer("window.__j[0][0] + ',' + window.__j[1][0]"), "blur,focus")
-                self.assertEqual(page.evaluer("window.__j[1][2]"), "none")
+                self.assertEqual([e[0] for e in evenements()], ["blur", "focus"])
+                self.assertEqual(evenements()[1][1:], [False, None])
 
     def test_d_calculer_suit_le_bouton_de_la_page(self):
         """« Calculer ▶ » porte le libellé du bouton de la page et reste grisé tant que celui-ci l'est (moteur en chargement ou calcul en cours)."""

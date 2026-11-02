@@ -771,7 +771,8 @@ class TestComportement(unittest.TestCase):
                         page.evaluer(f"{bouton}.click()")
                         self.assertEqual(page.evaluer("document.querySelector('#progression').textContent"), f"Étape {k + 1} / {total}")
                         self.assertEqual(page.evaluer("document.querySelectorAll('#cartes .cache').length"), total - k - 1)
-                        page.evaluer("new Promise(r => setTimeout(r, 1200))")                       # défilement doux
+                        # défilement doux : on attend que la page s'immobilise (0,3 s sans bouger, 10 s au plus) plutôt qu'un délai fixe, que la charge de la machine rend trop court
+                        page.evaluer("new Promise(r => { let d = scrollY, n = 0; const t = setInterval(() => { n = scrollY === d ? n + 1 : 0; d = scrollY; if (n >= 6) { clearInterval(t); r(); } }, 50); setTimeout(() => { clearInterval(t); r(); }, 10000); })")
                         vue = page.evaluer(f"""(() => {{
                             const c = [...document.querySelectorAll('#cartes > :not(.cache)')].pop().getBoundingClientRect();
                             return {{haut: c.top, bas: c.bottom, h: c.height, hauteur: innerHeight, boutonHaut: innerHeight - {geo["bas"] + geo["h"]}, defile: document.documentElement.scrollWidth - innerWidth}};
