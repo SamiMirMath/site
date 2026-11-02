@@ -1,9 +1,33 @@
 # Instructions pour Claude
 
-- Avant chaque commit, lancer la suite complète sans pipe (ou avec `set -o pipefail`) et vérifier le
-  code de retour ; ne jamais commiter si un test échoue.
+## Git
+- Toujours une branche dédiée par chantier, créée depuis `main` à jour ; un commit par partie (ou par phase).
+- Avant chaque commit, lancer la suite complète (`python3 tests/lancer.py complet`) sans pipe (ou avec
+  `set -o pipefail`) et vérifier le code de retour ; ne jamais commiter si un test échoue.
 - Jamais `git add -A` ni `git add .` : ajouter explicitement les fichiers de la tâche ; jamais de commit
   lancé en arrière-plan ; vérifier `git status` et `git diff --cached` avant chaque commit.
+- Ne jamais pousser ni fusionner : c'est l'enseignant qui le fait (donner la commande de fusion en fin de chantier).
+- `docs/reference/` ne doit jamais être commité (il est dans `.gitignore` : jamais de `git add -f`).
+
+## Contenu affiché
+- Rien de faux à l'écran : un résultat incertain ou non traité donne un message clair, jamais un résultat douteux.
+  Les garde-fous (valeur de référence, replis, sondes numériques) ne sont jamais affaiblis pour faire passer un cas.
+- Vouvoiement des élèves dans tout texte qui leur est destiné (R12) ; conventions de rédaction de
+  `docs/guide-redaction.md` (R1–R19).
+
+## Mise en page
+- Mise en page fluide : cible 390 px (iPhone), filet de sécurité 320–360 px (rien ne déborde ni ne sort de
+  l'écran) ; cibles tactiles ≥ 44 px ; composants communs (`commun/composants.css`, `commun/composants.js`)
+  plutôt que du code propre à une page (SOC-19, `docs/specifications/socle-commun.md`).
+
+## Tests
+- Oracle numérique (`tests/python/oracle.py`) pour les valeurs calculées ; instantanés (`test_instantanes*.py`)
+  pour la rédaction ; balayage des largeurs (`tests/pages/test_largeurs.py`, 320 à 1100 px), `CONNUS` vide.
+  Toute nouveauté est couverte par l'un de ces tests.
+
+## Suivi
+- Une fiche de suivi par chantier : `docs/chantiers/<chantier>/suivi.md`, créée au début, tenue à jour à chaque
+  commit (décisions, état des parties, suite verte, écarts), avec une section « Reprise après compactage ».
 
 # Commandes de test
 
