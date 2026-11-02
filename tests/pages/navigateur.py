@@ -250,6 +250,37 @@ class Page:
             self.appel("Input.insertText", text=c)
             time.sleep(pause)
 
+    def _centre_immobile(self, selecteur):
+        """Amène l'élément au milieu de l'écran et renvoie son centre (x, y) une fois la page immobile : un défilement doux en cours (vers la carte qui vient
+        d'apparaître) fait avaler le geste par le navigateur, ce que l'élève ne fait jamais (il ne touche pas pendant que la page défile)."""
+        position = (f"(() => {{ const r = document.querySelector({selecteur!r}).getBoundingClientRect(); "
+                    "return [scrollX, scrollY, r.x + r.width / 2, r.y + r.height / 2, document.documentElement.scrollHeight]; })()")
+        self.evaluer(f"document.querySelector({selecteur!r}).scrollIntoView({{block: 'center', behavior: 'instant'}})")
+        derniere, calme, fin = None, 0, time.time() + 10
+        while calme < 6 and time.time() < fin:                      # 6 mesures identiques de suite, à 50 ms : 0,3 s sans bouger
+            time.sleep(0.05)
+            mesure = self.evaluer(position)
+            calme = calme + 1 if mesure == derniere else 0
+            derniere = mesure
+        return derniere[2], derniere[3]
+
+    def toucher(self, selecteur):
+        """Appui d'un doigt (touchStart puis touchEnd) au centre de l'élément, après l'avoir amené à l'écran ; le navigateur en tire le clic
+        (page ouverte avec `tactile=True`)."""
+        x, y = self._centre_immobile(selecteur)
+        self.appel("Input.dispatchTouchEvent", type="touchStart", touchPoints=[{"x": x, "y": y}])
+        self.appel("Input.dispatchTouchEvent", type="touchEnd", touchPoints=[])
+
+    def glisser(self, selecteur, dx=0, dy=0, etapes=12, pause=0.016):
+        """Glissement d'un doigt de (dx, dy) pixels à partir du centre de l'élément (touchStart, touchMove en `etapes` pas, touchEnd) ; la page décide
+        si le geste fait défiler (touch-action) ou le manipule. Page ouverte avec `tactile=True`."""
+        x, y = self._centre_immobile(selecteur)
+        self.appel("Input.dispatchTouchEvent", type="touchStart", touchPoints=[{"x": x, "y": y}])
+        for k in range(1, etapes + 1):
+            self.appel("Input.dispatchTouchEvent", type="touchMove", touchPoints=[{"x": x + dx * k / etapes, "y": y + dy * k / etapes}])
+            time.sleep(pause)
+        self.appel("Input.dispatchTouchEvent", type="touchEnd", touchPoints=[])
+
     def capture(self, chemin):
         import base64
         d = self.appel("Page.captureScreenshot", format="png", captureBeyondViewport=True)["data"]
@@ -308,10 +339,13 @@ class Navigateur:
                     raise ErreurPage(m["error"])
                 return m["result"]
 
-    def ouvrir(self, chemin, script_initial=None, conserver_stockage=False):
+    def ouvrir(self, chemin, script_initial=None, conserver_stockage=False, tactile=False, agent=None):
         """Ouvre `chemin` (relatif à la racine du site) dans un nouvel onglet ; renvoie la Page.
         `script_initial` : JavaScript exécuté dans la page avant tout autre script (banc du graphique).
-        `conserver_stockage` : ne pas vider le localStorage (test qui rouvre une page pour vérifier qu'un choix est gardé)."""
+        `conserver_stockage` : ne pas vider le localStorage (test qui rouvre une page pour vérifier qu'un choix est gardé).
+        `tactile` : écran tactile émulé dès le chargement (`(pointer: coarse)` vrai, 5 points de contact) : les pages lisent ce média au démarrage.
+        `agent` : (agent utilisateur, plateforme) imposés, p. ex. un iPhone ou un téléphone Android : sur un Mac, le navigateur tactile émulé se déclare « MacIntel »
+        avec des points de contact, comme un iPad."""
         # un seul onglet à la fois : chaque page lance un worker Pyodide (plusieurs dizaines de Mo), les laisser
         # s'accumuler fait dépasser les délais de chargement
         for ancien in getattr(self, "_cibles", []):
@@ -327,6 +361,10 @@ class Navigateur:
         page.appel("Page.enable")
         page.appel("Runtime.enable")
         page.appel("Log.enable")
+        if tactile:
+            page.appel("Emulation.setTouchEmulationEnabled", enabled=True, maxTouchPoints=5)
+        if agent:
+            page.appel("Emulation.setUserAgentOverride", userAgent=agent[0], platform=agent[1])
         # chaque page part d'un état propre : le navigateur et le serveur sont les mêmes pour tous les tests, donc le localStorage aussi
         # (test_acc04 mémorise une filière sur l'accueil, que la page « Exponentielles et logarithmes » reprend ensuite)
         if not conserver_stockage:

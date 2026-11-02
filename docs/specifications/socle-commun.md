@@ -9,7 +9,8 @@ S'applique à toutes les pages outils, sauf mention contraire pour le simplexe
 2. **Exercice au hasard** : bouton « Nouvel exercice » ; l'énoncé s'affiche (aperçu KaTeX) sans
    le corrigé ; bouton « Afficher le corrigé ». Pas d'étiquette de difficulté visible. L'énoncé
    tiré a une URL partageable `?exo=<niveau>-<graine>`.
-3. **Saisie** : champ texte + clavier virtuel propre à l'outil ; aperçu en direct ; exemples
+3. **Saisie** : champ texte + clavier virtuel à 6 colonnes (7 8 9 ( ) ⌫ / 4 5 6 × ÷ C / 1 2 3 + − ^ / 0 , x …, seule la dernière rangée dépend de l'outil) ; **sur écran tactile**
+   le clavier du système ne s'ouvre pas (`inputmode="none"`, `readonly` sur iOS) et une rangée « ABC » (clavier du système) + « Calculer ▶ » est ajoutée ; aperçu en direct ; exemples
    cliquables ; touche Entrée = calculer ; `?f=<expression>` pré-remplit et calcule.
 4. **Corrigé par étapes** : cartes affichées une à une (« Étape k / n », « Étape suivante »,
    « Tout afficher ») ; la dernière carte donne le résultat encadré.
@@ -115,4 +116,6 @@ Retours d'élèves sur iPhone : formulaires trop larges, lignes coupées au hasa
 | SOC-17 | Variantes de résolution : `valider()` refuse une variante sans clé, deux clés identiques, un défaut inconnu ou des `cartes` différentes de celles du défaut ; la page affiche le sélecteur seulement quand la sortie a des `variantes`, change de variante sans message au moteur, garde le choix | [auto-py] + [auto-page] |
 | SOC-18 | Option : `valider()` refuse une option sans clé, sans libellé, avec `cochee` non booléen ou des `cartes` invalides ; la page affiche la case seulement quand la sortie a une `option`, ajoute et retire ses cartes sans message au moteur, garde l'état au changement de variante ; aucune autre sortie n'en porte | [auto-py] + [auto-page] |
 | SOC-19 | Mise en page fluide : pour chaque outil, aux largeurs 320, 360, 375, 390, 430, 768 et 1100 px, pas de défilement horizontal de la page, aucun bouton ni champ hors de l'écran, cibles ≥ 44 px de haut jusqu'à 430 px, blocs `.insecable` entiers ; aucune erreur de console. Les échecs connus sont listés (`CONNUS`), tout nouvel échec fait échouer la suite | [auto-page] (`test_largeurs.py`) |
+| SOC-20 | Clavier intégré (écran tactile) : le champ n'ouvre pas le clavier du système ; deux formules tapées uniquement avec les touches et « Calculer ▶ » donnent le corrigé de la saisie directe ; « × » insère `*` ; « ABC » rouvre le clavier du système ; touches ≥ 44 px, pas de défilement horizontal de 320 à 1100 px ; sur ordinateur, saisie inchangée | [auto-page] (`test_clavier.py`) |
+| SOC-21 | L'aperçu n'attend pas SymPy : dès que Python est prêt, une saisie s'affiche en aperçu pendant que « Chargement du moteur de calcul… » est encore affiché ; SymPy se charge après une pause de frappe (700 ms), au plus tard 8 s après le démarrage de Python, ou tout de suite si un calcul en a besoin | [auto-page] (`test_t40_l_apercu_ne_attend_pas_sympy`) |
 | SOC-14 | Chargement sur un vrai téléphone : délai jusqu'à « Prêt » relevé et noté dans `docs/` | [manuel] (enseignant) |

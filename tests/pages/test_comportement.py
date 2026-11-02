@@ -102,12 +102,12 @@ class TestComportement(unittest.TestCase):
             self.assertEqual(page.evaluer("document.querySelector('#cartes .card.final h3').textContent"), "Solution")
 
     def test_t33_el_clavier_virtuel(self):
-        """Le clavier de la page écrit log_10(x)=e : log_, un nombre, parenthèses, =, e, et ln(, sqrt(, virgule."""
+        """Le clavier de la page écrit log_10(x)=e : log_, les chiffres 1 et 0, parenthèses, =, e (et ln(, sqrt(, virgule sont sur ses touches)."""
         if "exponentielles-logarithmes" not in CHOISIS:
             self.skipTest("hors de OUTILS")
         page = self.ouvrir("exponentielles-logarithmes")
         page.evaluer("document.querySelector('#entree').value=''")
-        for t in ("log_", "10", "(", "x", ")", "=", "e"):
+        for t in ("log_", "1", "0", "(", "x", ")", "=", "e"):
             page.evaluer("document.querySelector(" + json.dumps(f'#clavier button[data-t="{t}"]') + ").click()")
         self.assertEqual(page.evaluer("document.querySelector('#entree').value"), "log_10(x)=e")
         page.attendre("document.querySelector('#apercu .katex')", 10)
@@ -643,6 +643,21 @@ class TestComportement(unittest.TestCase):
                 historique = [t for i, t in enumerate(historique) if t != "Prêt." or i == len(historique) - 1]   # « Prêt. » passe un instant quand SymPy arrive
                 self.assertEqual(historique, ["Chargement du moteur de calcul pour cette fonction…", "Calcul en cours…", "Prêt."])
 
+    def test_t40_l_apercu_ne_attend_pas_sympy(self):
+        """Retour de l'enseignant sur iPhone (02.11.2026) : l'aperçu tardait. Le worker ne fait qu'une chose à la fois et l'installation puis l'import de SymPy le bloquent
+        1,5 à 2 s (davantage sur un téléphone). SymPy ne se charge qu'après une pause de frappe : dès que Python est prêt, un aperçu demandé s'affiche tout de suite,
+        pendant que « Chargement du moteur de calcul… » est encore affiché."""
+        for outil in ("limites-asymptotes", "derivee-variations", "etude-complete", "factorisation"):
+            with self.subTest(outil=outil):
+                if outil not in CHOISIS:
+                    continue
+                page = self.nav.ouvrir(f"{outil}/index.html")
+                page.attendre("document.querySelector('#etat').textContent === 'Chargement du moteur de calcul…' && !document.querySelector('#calculer').disabled", 240, pas=0.02)
+                page.taper("#entree", "x^2-1", pause=0.05)                                  # on tape pendant que SymPy attend la pause
+                page.attendre("document.querySelector('#apercu .katex')", 10)
+                self.assertEqual(page.evaluer("document.querySelector('#etat').textContent"), "Chargement du moteur de calcul…")
+                page.attendre("document.querySelector('#etat').textContent === 'Prêt.'", 60)       # puis SymPy se charge : la pause est arrivée
+
     def test_soc04_parametre_f(self):
         for outil in OUTILS:
             with self.subTest(outil=outil):
@@ -756,7 +771,8 @@ class TestComportement(unittest.TestCase):
                         page.evaluer(f"{bouton}.click()")
                         self.assertEqual(page.evaluer("document.querySelector('#progression').textContent"), f"Étape {k + 1} / {total}")
                         self.assertEqual(page.evaluer("document.querySelectorAll('#cartes .cache').length"), total - k - 1)
-                        page.evaluer("new Promise(r => setTimeout(r, 1200))")                       # défilement doux
+                        # défilement doux : on attend que la page s'immobilise (0,3 s sans bouger, 10 s au plus) plutôt qu'un délai fixe, que la charge de la machine rend trop court
+                        page.evaluer("new Promise(r => { let d = scrollY, n = 0; const t = setInterval(() => { n = scrollY === d ? n + 1 : 0; d = scrollY; if (n >= 6) { clearInterval(t); r(); } }, 50); setTimeout(() => { clearInterval(t); r(); }, 10000); })")
                         vue = page.evaluer(f"""(() => {{
                             const c = [...document.querySelectorAll('#cartes > :not(.cache)')].pop().getBoundingClientRect();
                             return {{haut: c.top, bas: c.bottom, h: c.height, hauteur: innerHeight, boutonHaut: innerHeight - {geo["bas"] + geo["h"]}, defile: document.documentElement.scrollWidth - innerWidth}};

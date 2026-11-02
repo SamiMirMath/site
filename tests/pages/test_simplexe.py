@@ -15,6 +15,7 @@ from navigateur import Navigateur
 CHOISI = not os.environ.get("OUTILS") or "simplexe" in os.environ["OUTILS"].split(",")
 
 CHAMPS = "[...document.querySelectorAll('#objRow input, #consRows input')]"
+ANDROID = ("Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36", "Linux armv8l")
 LARGEURS = (360, 1100)
 
 
@@ -66,12 +67,12 @@ class TestSimplexe(unittest.TestCase):
     def tearDownClass(cls):
         cls.nav.__exit__(None, None, None)
 
-    def ouvrir(self, largeur=1100, requete="", elargir=1.0):
+    def ouvrir(self, largeur=1100, requete="", elargir=1.0, tactile=False):
         """`elargir` > 1 : tous les textes des canvas mesurent `elargir` fois plus large (la police de la CI sous Linux est plus large que celle du Mac)."""
         script = None if elargir == 1.0 else (
             "(() => { const m = CanvasRenderingContext2D.prototype.measureText; CanvasRenderingContext2D.prototype.measureText = function (s) {"
             f" const r = m.call(this, s); return {{ width: r.width * {elargir}, actualBoundingBoxLeft: r.actualBoundingBoxLeft, actualBoundingBoxRight: r.actualBoundingBoxRight }}; }}; }})()")
-        page = self.nav.ouvrir(f"simplexe/index.html{requete}", script_initial=script)
+        page = self.nav.ouvrir(f"simplexe/index.html{requete}", script_initial=script, tactile=tactile, agent=ANDROID if tactile else None)
         page.attendre("document.readyState === 'complete' && document.querySelector('#objRow input')", 30)
         page.taille(largeur, 800)
         return page
@@ -714,6 +715,164 @@ class TestSimplexe(unittest.TestCase):
             self.assertEqual(page.evaluer("document.querySelector('#ongletsAlgo [aria-selected=true]').dataset.mode"), attendu)
             self.assertEqual(page.evaluer("document.activeElement.dataset.mode"), attendu)
         self.assertEqual(page.evaluer("ST.hist.length"), 1)                                           # les flèches n'ont avancé aucun pivot
+
+
+    # ---------- F. pavé numérique de l'écran tactile (chantier « Clavier intégré », 02.11.2026) ----------
+    PAVE_VISIBLE = "!document.querySelector('.pave').hidden"
+    AU_DESSUS = """(f => { const r = f.getBoundingClientRect(), p = document.querySelector('.pave').getBoundingClientRect(); return r.top >= 0 && r.bottom <= p.top + 0.5; })"""
+
+    def valeur_S(self, i):
+        """Valeur de S (état du formulaire) pour le champ n° i dans l'ordre de lecture : f, puis chaque contrainte (coefficients, second membre), 2 variables."""
+        return f"(i => {{ const n = S.n; if (i < n) return S.f[i]; const k = i - n, r = S.rows[Math.floor(k / (n + 1))], c = k % (n + 1); return c < n ? r.a[c] : r.b; }})({i})"
+
+    def pave_ouvrir(self, page, i):
+        page.evaluer(f"{CHAMPS}.forEach((c, k) => c.dataset.i = k)")
+        page.toucher(f'.champ-signe > input[data-i="{i}"]')
+        page.attendre(self.PAVE_VISIBLE, 5)
+
+    def test_f_probleme_2d_rempli_uniquement_avec_le_pave_et_suivant(self):
+        """Tactile, 390 px (écran bas : le pavé couvre la moitié) : f = 3x₁ + 2x₂ et trois contraintes, dont « 1,5 » et « 7/2 », tapés uniquement avec le pavé et « Suivant ▶ ».
+        Après chaque touche, la valeur du champ ET l'état S sont à jour ; le champ actif reste au-dessus du pavé ; après le dernier champ le pavé se ferme ; la solution est la bonne."""
+        valeurs = ["3", "2", "1", "1", "4", "1", "3", "6", "1,5", "1", "7/2"]
+        page = self.ouvrir(390, tactile=True)
+        page.taille(390, 420)
+        self.assertEqual(page.evaluer("document.querySelectorAll('.pave').length"), 1)
+        self.assertTrue(page.evaluer("document.querySelector('.pave').hidden"), "le pavé n'apparaît qu'au focus d'un champ")
+        self.assertEqual(page.evaluer(f"{CHAMPS}.every(c => c.getAttribute('inputmode') === 'none')"), True)
+        self.pave_ouvrir(page, 0)
+        for i, valeur in enumerate(valeurs):
+            page.attendre(f"document.activeElement.dataset.i === '{i}'", 5)
+            page.attendre(f"({self.AU_DESSUS})(document.activeElement)", 5)
+            courant = ""
+            for car in valeur:
+                page.toucher(f'.pave button[data-t="{car}"]')
+                courant += car
+                page.attendre(f"{CHAMPS}[{i}].value === {json.dumps(courant)} && {self.valeur_S(i)} === {json.dumps(courant)}", 10)       # champ ET état S
+            page.toucher(".pave .suivant")
+        page.attendre("document.querySelector('.pave').hidden", 5)
+        self.assertEqual(page.evaluer("document.querySelector('.avec-pave')"), None)                    # la place réservée en bas de la page est rendue
+        self.assertEqual(page.evaluer(f"{CHAMPS}.map(c => c.value)"), valeurs)
+        self.assertEqual(page.evaluer("S.f.slice(0, 2).concat(S.rows.flatMap(r => r.a.slice(0, 2).concat(r.b)))"), valeurs)
+        opt = optimum_exact([Fraction(3), Fraction(2)], [([Fraction(1), Fraction(1)], "<=", Fraction(4)), ([Fraction(1), Fraction(3)], "<=", Fraction(6)),
+                                                         ([Fraction(3, 2), Fraction(1)], "<=", Fraction(7, 2))], "max")
+        page.toucher("#launch")
+        page.attendre("!document.querySelector('#app').hidden", 10)
+        self.assertEqual(page.evaluer("document.querySelector('#err').textContent"), "")
+        self.controle_solution_complete(page, 390, False, format_nb(opt))
+
+    def test_f_le_signe_garde_le_pave_ouvert_et_un_toucher_dehors_ou_le_lancement_le_ferme(self):
+        page = self.ouvrir(390, tactile=True)
+        self.pave_ouvrir(page, 0)
+        page.toucher('.champ-signe > button')                                                  # le bouton de signe fait partie du champ : le pavé reste
+        page.attendre("document.querySelector('.champ-signe > button').dataset.signe === '-'", 5)
+        self.assertTrue(page.evaluer(self.PAVE_VISIBLE))
+        page.toucher('.pave button[data-t="5"]')                                              # la touche écrit dans le champ du signe, même sans focus
+        page.attendre(f"{CHAMPS}[0].value === '5' && {self.valeur_S(0)} === '-5'", 10)         # signe moins + 5 = « -5 » dans l'état
+        page.toucher("#hint")                                                                  # hors du pavé et des champs
+        page.attendre("document.querySelector('.pave').hidden", 5)
+        self.pave_ouvrir(page, 3)
+        self.assertTrue(page.evaluer(self.PAVE_VISIBLE))
+        self.clic(page, "#launch")                                                             # le lancement ferme le pavé (ici : message « saisie vide », le calcul n'a pas lieu)
+        self.assertTrue(page.evaluer("document.querySelector('.pave').hidden"))
+
+    def test_f_pas_de_pave_sur_ordinateur(self):
+        page = self.ouvrir(390)
+        self.assertEqual(page.evaluer("matchMedia('(pointer: coarse)').matches"), False)
+        self.assertEqual(page.evaluer("document.querySelectorAll('.pave').length"), 0)
+        self.assertEqual(page.evaluer(f"{CHAMPS}.every(c => c.getAttribute('inputmode') === 'decimal' && !c.readOnly)"), True)
+        self.champ(page, '#objRow input[data-j="0"]', "3")                                      # la saisie au clavier d'ordinateur est inchangée
+        self.assertEqual(page.evaluer("S.f[0]"), "3")
+        self.assertEqual(page.evaluer("document.querySelector('.pave')"), None)
+
+
+    # ---------- G. défilement sur les figures (chantier « Clavier intégré », partie 3) ----------
+    IMMOBILE = "(() => [scrollX, scrollY])()"
+
+    def immobile(self, page):
+        """Attend que la page ait fini de défiler (élan d'un glissement) et renvoie scrollY."""
+        derniere, calme, fin = None, 0, time.time() + 10
+        while calme < 6 and time.time() < fin:
+            time.sleep(0.05)
+            mesure = page.evaluer(self.IMMOBILE)
+            calme = calme + 1 if mesure == derniere else 0
+            derniere = mesure
+        return derniere[1]
+
+    def glissement_vertical(self, page, selecteur, dy=-150):
+        """Glisse un doigt verticalement sur la figure ; renvoie (scrollY avant, scrollY après)."""
+        page.evaluer(f"document.querySelector({selecteur!r}).scrollIntoView({{block: 'center', behavior: 'instant'}})")
+        avant = self.immobile(page)
+        place = page.evaluer("document.documentElement.scrollHeight - innerHeight - scrollY")
+        self.assertGreater(place, abs(dy) + 50, f"la page doit pouvoir défiler de plus de {abs(dy)} px pour que le test ait un sens")
+        page.glisser(selecteur, dy=dy)
+        return avant, self.immobile(page)
+
+    def test_g_un_glissement_vertical_sur_une_figure_de_la_solution_geometrique_fait_defiler_la_page(self):
+        page = self.ouvrir(390, tactile=True)
+        page.taille(390, 500)
+        self.clic(page, '[data-meth="para"]')
+        self.lancer_exemple(page, "Parallèles : max")
+        page.evaluer("document.querySelector('canvas.fig').scrollIntoView({block: 'center', behavior: 'instant'})")          # les figures se dessinent à l'approche de l'écran
+        page.attendre("document.querySelector('canvas.fig[data-dessine]')", 10)
+        self.assertEqual(page.evaluer("getComputedStyle(document.querySelector('canvas.fig')).touchAction"), "pan-y")
+        avant, apres = self.glissement_vertical(page, "canvas.fig")
+        self.assertGreater(apres, avant + 50, "le glissement sur la figure doit faire défiler la page")
+
+    def test_g_visualisation_graphique_sans_glisser_defile_dans_les_deux_methodes(self):
+        page = self.ouvrir(390, tactile=True)
+        page.taille(390, 500)
+        self.lancer_exemple(page, "Exemple 2D")                                                # méthode algébrique, polygone 2D
+        self.clic(page, '[data-mode="sim"]')
+        page.attendre("!ST.anim", 15)
+        self.assertEqual(page.evaluer("getComputedStyle(document.querySelector('#cv')).touchAction"), "pan-y")
+        avant, apres = self.glissement_vertical(page, "#cv")
+        self.assertGreater(apres, avant + 50, "algébrique 2D, Visualisation graphique")
+        page = self.ouvrir(390, tactile=True)
+        page.taille(390, 500)
+        self.clic(page, '[data-meth="para"]')
+        self.lancer_exemple(page, "Parallèles : max")
+        self.clic(page, '[data-modep="sim"]')
+        page.attendre("!PS.anim", 15)
+        self.assertEqual(page.evaluer("getComputedStyle(document.querySelector('#cvp')).touchAction"), "pan-y")
+        avant, apres = self.glissement_vertical(page, "#cvp")
+        self.assertGreater(apres, avant + 50, "géométrique, Visualisation graphique")
+
+    def test_g_dans_explorer_le_glissement_deplace_le_point_et_ne_fait_pas_defiler(self):
+        page = self.ouvrir(390, tactile=True)
+        page.taille(390, 500)
+        self.lancer_exemple(page, "Exemple 2D")
+        self.clic(page, '[data-mode="exp"]')
+        self.assertEqual(page.evaluer("getComputedStyle(document.querySelector('#cv')).touchAction"), "none")
+        point = lambda: page.evaluer("ST.expPt.map(v => Math.round(v * 1000) / 1000)")
+        avant_point = point()
+        avant, apres = self.glissement_vertical(page, "#cv", dy=-120)
+        self.assertEqual(apres, avant, "le glissement dans Explorer ne doit pas faire défiler")
+        self.assertNotEqual(point(), avant_point, "le glissement déplace le point")
+        self.clic(page, '[data-mode="sim"]')                                                   # on quitte Explorer : la figure redevient défilable
+        self.assertEqual(page.evaluer("getComputedStyle(document.querySelector('#cv')).touchAction"), "pan-y")
+
+    def test_g_en_3d_le_glissement_fait_tourner_le_polyedre_et_ne_fait_pas_defiler(self):
+        page = self.ouvrir(390, tactile=True)
+        page.taille(390, 500)
+        self.lancer_exemple(page, "Exemple 3D")
+        self.clic(page, '[data-mode="sim"]')
+        page.attendre("!ST.anim", 15)
+        for mode in ("sim", "exp"):
+            self.clic(page, f'[data-mode="{mode}"]')
+            self.assertEqual(page.evaluer("getComputedStyle(document.querySelector('#cv')).touchAction"), "none", mode)
+            angles = lambda: page.evaluer("[scene.yaw, scene.pitch]")
+            avant_angles = angles()
+            avant, apres = self.glissement_vertical(page, "#cv", dy=-100)
+            self.assertEqual(apres, avant, f"en 3D ({mode}) le glissement ne fait pas défiler")
+            self.assertNotEqual(angles(), avant_angles, f"en 3D ({mode}) le glissement fait tourner le polyèdre")
+
+    def test_g_une_figure_2d_ne_garde_pas_les_gestes_d_une_scene_3d_precedente(self):
+        page = self.ouvrir(390)
+        self.lancer_exemple(page, "Exemple 3D")
+        self.assertIsNotNone(page.evaluer("document.querySelector('#cv').onpointerdown && 1"))
+        self.clic(page, "#editBtn")
+        self.lancer_exemple(page, "Exemple 2D")
+        self.assertEqual(page.evaluer("[document.querySelector('#cv').onpointerdown, document.querySelector('#cv').onpointermove]"), [None, None])
 
 
 if __name__ == "__main__":

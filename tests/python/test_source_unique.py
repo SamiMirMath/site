@@ -51,5 +51,35 @@ class TestAccessibilite(unittest.TestCase):
                         self.assertIn("aria-label=", attrs, texte)
 
 
+class TestDispositionDuClavier(unittest.TestCase):
+    """Clavier « calculatrice » à 6 colonnes (chantier Clavier intégré, 02.11.2026) : les trois premières rangées sont les mêmes sur les six outils ;
+    seule la dernière change. Les chiffres, la virgule et les opérations ne changent jamais de place, pour que l'élève retrouve ses touches d'un outil à l'autre."""
+    TROIS_RANGEES = ["7", "8", "9", "(", ")", "back", "4", "5", "6", "*", "/", "clear", "1", "2", "3", "+", "-", "^"]
+    FONCTION = ["0", ",", "x", "ln(", "e^(", "sqrt("]
+    PAGES = {
+        "ensemble-definition": FONCTION, "derivee-variations": FONCTION, "limites-asymptotes": FONCTION, "etude-complete": FONCTION,
+        "factorisation": ["0", ",", "x"],
+        "exponentielles-logarithmes": ["0", ",", "x", "=", "e", "ln(", "log(", "log_", "sqrt(", "%", "n", "t", "Q", "C", "V"],
+    }
+
+    @staticmethod
+    def touches(o):
+        clavier = re.search(r'<div class="clavier" id="clavier">(.*?)</div>', lire(f"{o}/index.html"), re.S).group(1)
+        return [re.search(r'data-(?:t|k)="([^"]*)"', attrs).group(1) for attrs in re.findall(r"<button([^>]*)>", clavier)]
+
+    def test_les_trois_premieres_rangees_et_la_derniere(self):
+        for o, fin in self.PAGES.items():
+            with self.subTest(outil=o):
+                self.assertEqual(self.touches(o), self.TROIS_RANGEES + fin)
+
+    def test_x_fois_et_virgule_ont_leur_texte_et_leur_nom(self):
+        for o in self.PAGES:
+            src = lire(f"{o}/index.html")
+            with self.subTest(outil=o):
+                self.assertIn('<button aria-label="fois" data-t="*">×</button>', src)
+                self.assertIn('<button aria-label="divisé par" data-t="/">÷</button>', src)
+                self.assertIn('<button aria-label="virgule" data-t=",">,</button>', src)
+
+
 if __name__ == "__main__":
     unittest.main()

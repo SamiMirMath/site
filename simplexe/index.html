@@ -48,7 +48,8 @@ sub{font-size:.7em;line-height:0}
 #summary .txt{font-size:1.02rem}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,26rem),1fr));gap:14px;align-items:start}      /* deux colonnes s'il y a la place, sinon une */
 .grid>*{min-width:0}
-canvas#cv,canvas#cvp{width:100%;aspect-ratio:4/3;display:block;background:var(--card);border:1px solid var(--border);border-radius:10px;touch-action:none}
+canvas#cv,canvas#cvp{width:100%;aspect-ratio:4/3;display:block;background:var(--card);border:1px solid var(--border);border-radius:10px;touch-action:pan-y}      /* un glissement vertical sur la figure fait défiler la page… */
+canvas#cv.manipulable{touch-action:none}                                             /* … sauf quand le doigt la manipule : point glissé (Explorer 2D) ou polyèdre tourné (3D) */
 .ctrl{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
 .chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:4px 0}
 .chip.on{box-shadow:0 0 0 2px var(--good) inset;border-color:var(--good)}
@@ -403,6 +404,7 @@ const formulaireVide=()=>({meth:"simplexe",n:2,sens:"max",f:["","",""],rows:[0,1
 let S=formulaireVide();                                          // état du formulaire
 let P=null, R=null, scene=null;                                  // problème, région, scène
 let ST=null;                                                     // état de la résolution
+let pave=null;                                                   // pavé numérique de l'écran tactile (Composants.monterPave), null sur ordinateur
 const MAXL=8, PIVOTS_MAX=500;                                    // contraintes du formulaire ; plafond de pivots (même valeur que resoudre())
 const $=id=>document.getElementById(id);
 
@@ -413,7 +415,7 @@ const $=id=>document.getElementById(id);
 /* Le bouton de signe et le champ forment un seul bloc (Composants.champSigne) ; avec le nom de la variable, le terme ne se coupe jamais à la ligne. */
 function champNombre(valeur,quoiSigne,quoi,enregistrer,suffixe,attrs,membre){
   const t=document.createElement('span'); t.className='terme insecable';
-  const cs=Composants.champSigne({valeur,signe:quoiSigne,nom:quoi,membre,attrs,surChange:enregistrer});
+  const cs=Composants.champSigne({valeur,signe:quoiSigne,nom:quoi,membre,attrs,pave:true,surChange:enregistrer});
   cs.bouton.classList.add('sgn'); t.append(cs);
   if(suffixe){ const nom=document.createElement('span'); nom.innerHTML=suffixe; t.appendChild(nom); }
   return t; }
@@ -454,6 +456,7 @@ $('editBtn').onclick=()=>{ stopAuto(); $('app').hidden=true; $('formCard').hidde
 $('printBtn').onclick=imprimerRapport;
 
 function lancer(){
+  if(pave) pave.fermer();
   if(S.meth==='para') return lancerPara();
   let p; try{ p=construireProbleme(S); }catch(e){ if(e instanceof ErreurSaisie){ $('err').textContent='✗ '+e.message; return; } throw e; }
   $('err').textContent=''; P=p; R=construireRegion(P); PS=null; $('appPara').hidden=true; viderFigures();
@@ -481,7 +484,8 @@ const nomGrad=v=>String(Math.round(v*100)/100);
 
 class Scene{
   constructor(cv,R,P,fixe){ this.cv=cv; this.R=R; this.P=P; this.n=P.n; this.yaw=-0.62; this.pitch=0.5; this.zoom=1; if(!fixe) this.attach(); }   // `fixe` : figure de la solution complète, sans rotation à la souris
-  attach(){ if(this.n!==3) return; const cv=this.cv; let drag=null;
+  attach(){ const cv=this.cv; cv.onpointerdown=cv.onpointermove=cv.onpointerup=cv.onpointercancel=null;      // pas de rotation 2D : on retire les gestes d'une scène 3D précédente
+    if(this.n!==3) return; let drag=null;
     cv.onpointerdown=e=>{ if(ST&&ST.mode==='exp'&&false) return; drag={x:e.clientX,y:e.clientY}; cv.setPointerCapture(e.pointerId); };
     cv.onpointermove=e=>{ if(!drag) return; this.yaw+=(e.clientX-drag.x)*0.008; this.pitch=Math.max(-1.45,Math.min(1.45,this.pitch+(e.clientY-drag.y)*0.008)); drag={x:e.clientX,y:e.clientY}; rendre(); };
     cv.onpointerup=cv.onpointercancel=()=>{drag=null;}; }
@@ -757,6 +761,7 @@ $('cv').addEventListener('pointerdown',e=>{ if(!ST||P.n!==2) return; if(ST.mode=
   else if(ST.mode==='grad'){ const q=ptSouris(e); let best=0,bd=Infinity; R.reels.forEach((k,i)=>{ const d=norm(sub_(q,R.V[k].p)); if(d<bd){bd=d;best=i;} }); if(bd<0.07*R.diag){ ST.gradV=best; rendre(); } } });
 $('cv').addEventListener('pointermove',e=>{ if(dragExp&&ST.mode==='exp') deplacerPoint(ptSouris(e)); });
 $('cv').addEventListener('pointerup',()=>{dragExp=false;});
+$('cv').addEventListener('pointercancel',()=>{dragExp=false;});
 $('eP').onclick=()=>sautExp(-1); $('eN').onclick=()=>sautExp(1); $('eC').onclick=()=>{ ST.expPt=centre(); rendre(); };
 function sautExp(d){ const i=R.indiceSommet(ST.expPt); const k=(i!==null&&R.reels.includes(i))?R.reels.indexOf(i):-1; const nk=(k+d+R.reels.length)%R.reels.length; ST.expPt=R.V[R.reels[(k<0?0:nk)]].p.slice(); rendre(); }
 
@@ -779,7 +784,9 @@ function rendreGrad(){ const k=R.reels[ST.gradV], p=R.V[k].p.slice(), H=baseHors
 $('gP').onclick=()=>{ ST.gradV=(ST.gradV-1+R.reels.length)%R.reels.length; rendre(); }; $('gN').onclick=()=>{ ST.gradV=(ST.gradV+1)%R.reels.length; rendre(); };
 
 /* ---- onglets ---- */
-function setMode(m){ if(m==='grad'&&!AFFICHER_GRADIENT) m='sim'; ST.mode=m; stopAuto();
+/* Le doigt ne fait défiler la page que là où il ne manipule pas la figure : touch-action:none seulement pour glisser le point (Explorer 2D) et faire tourner le polyèdre (3D). */
+function majManipulable(){ $('cv').classList.toggle('manipulable',!!ST&&(P.n===3||ST.mode==='exp')); }
+function setMode(m){ if(m==='grad'&&!AFFICHER_GRADIENT) m='sim'; ST.mode=m; stopAuto(); majManipulable();
   ongletsAlgo.choisir(document.querySelector(`[data-mode="${m}"]`),{notifier:false});
   $('ctrlSim').hidden=m!=='sim'; $('ctrlExp').hidden=m!=='exp'; $('ctrlGrad').hidden=m!=='grad';
   $('sol').hidden=m!=='sol'; $('gridSim').hidden=m==='sol';
@@ -1041,18 +1048,19 @@ function construireSolutionPara(){
   box.appendChild(lienHaut());
   observerFigures(); }
 
-/* Démarrage : appelé par le module ci-dessous une fois commun/composants.js chargé (Composants.champSigne, Composants.monterOnglets). */
+/* Démarrage : appelé par le module ci-dessous une fois commun/composants.js chargé (Composants.champSigne, Composants.monterOnglets, Composants.monterPave). */
 let ongletsAlgo=null, ongletsPara=null;
 function demarrer(){
   if(!AFFICHER_GRADIENT) document.querySelector('[data-mode="grad"]').hidden=true;
   ongletsAlgo=Composants.monterOnglets($('ongletsAlgo'),b=>setMode(b.dataset.mode));
   ongletsPara=Composants.monterOnglets($('ongletsPara'),b=>setModeP(b.dataset.modep));
+  pave=Composants.monterPave({champs:()=>[...document.querySelectorAll('#objRow input, #consRows input')]});         // ordre de lecture : fonction économique, puis chaque contrainte, second membre compris
   dessinerFormulaire(); }
 </script>
 <!-- Le script principal reste classique : ses variables globales (S, ST, PS…) sont lues par les tests de page. Seuls les composants sont un module ES. -->
 <script type="module">
-import { monterOnglets, champSigne } from "../commun/composants.js";
-window.Composants = { monterOnglets, champSigne };
+import { monterOnglets, champSigne, monterPave } from "../commun/composants.js";
+window.Composants = { monterOnglets, champSigne, monterPave };
 window.demarrer();
 </script>
 </body>
