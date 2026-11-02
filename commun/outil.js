@@ -68,7 +68,7 @@ function demarrerOutil(config) {
     const b = document.createElement("button");
     b.type = "button";
     b.id = "suivantFlottant";
-    b.className = "primary flottant no-print";
+    b.className = "primary bouton-flottant no-print";
     b.innerHTML = 'Étape suivante <span aria-hidden="true">▶</span>';
     b.hidden = true;
     b.onclick = () => $("suivant").click();                                    // exactement l'action du bouton de la barre

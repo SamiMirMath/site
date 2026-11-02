@@ -65,6 +65,25 @@ S'applique à toutes les pages outils, sauf mention contraire pour le simplexe
 - Champ de saisie ≥ 16 px (pas de zoom automatique sur iOS).
 - Un glissement vertical à un doigt sur un graphique fait défiler la page.
 
+### Mise en page fluide (décision du 30.10.2026)
+
+Retours d'élèves sur iPhone : formulaires trop larges, lignes coupées au hasard, figures trop chargées, « Étape suivante » trop loin.
+
+- **Fluide, sans largeur d'écran codée en dur.** Aucune `@media (max-width: …px)` pour disposer le contenu : les éléments passent à la ligne d'eux-mêmes
+  (`flex-wrap`, `.flux`), les largeurs sont en `ch`, en `rem`, en `%` ou en `clamp()`, et une disposition qui dépend de la place disponible utilise
+  `@container` (`.conteneur-fluide`). Les seuls px admis sont les bordures, les ombres et les cibles tactiles minimales.
+- **Blocs insécables.** Ce qui se lit d'un bloc ne se coupe jamais à la ligne : `[signe + champ + nom de variable]`, `[≤ + signe + second membre + ✕]`,
+  « (1) » collé au premier terme. On pose `.insecable` ; c'est le bloc entier qui passe à la ligne suivante.
+- **Cible de présentation : 390 px** (iPhone 14). Filet de sécurité : 320 à 360 px, où rien ne doit déborder ni sortir de l'écran, quitte à être moins joli.
+- **Composants communs** (`commun/composants.css`, `commun/composants.js`), à réutiliser plutôt que de refaire un style local : `.champ-signe`
+  (bouton de signe + champ collés), `.onglets` (`role="tablist"`, flèches du clavier), `.carte-etape`, `.bouton-flottant`, `.insecable`, `.flux`,
+  `.conteneur-fluide` / `.cadre-fluide` (pas de carte dans un cadre sur petit écran).
+- **Cibles tactiles ≥ 44 px de haut** pour tout bouton, champ ou onglet, aux largeurs ≤ 430 px.
+- **Formules et tableaux longs** défilent dans leur propre bloc (`overflow-x:auto`), jamais la page.
+  Tout bloc qui défile porte aussi `position:relative` : sans lui, la copie MathML invisible de KaTeX (position absolue) n'est pas rognée et élargit la page.
+- **Contrôle automatique** : `tests/pages/test_largeurs.py` ouvre chaque outil, lance un exemple et vérifie 320, 360, 375, 390, 430, 768 et 1100 px
+  (pas de défilement horizontal, rien hors de l'écran, cibles ≥ 44 px, blocs insécables entiers). Un nouvel échec fait échouer la suite.
+
 ## Accessibilité
 
 - `lang="fr"`, titres hiérarchisés, un seul `<h1>`.
@@ -95,4 +114,5 @@ S'applique à toutes les pages outils, sauf mention contraire pour le simplexe
 | SOC-16 | En tapant `ln(x)/x` (clavier ou bouton ln), aucun message rouge n'apparaît pendant la frappe ni à la fin ; une saisie incomplète (`ln(`) n'affiche son erreur qu'après ≈ 0,5 s | [auto-page] (Chrome, CI, T15) |
 | SOC-17 | Variantes de résolution : `valider()` refuse une variante sans clé, deux clés identiques, un défaut inconnu ou des `cartes` différentes de celles du défaut ; la page affiche le sélecteur seulement quand la sortie a des `variantes`, change de variante sans message au moteur, garde le choix | [auto-py] + [auto-page] |
 | SOC-18 | Option : `valider()` refuse une option sans clé, sans libellé, avec `cochee` non booléen ou des `cartes` invalides ; la page affiche la case seulement quand la sortie a une `option`, ajoute et retire ses cartes sans message au moteur, garde l'état au changement de variante ; aucune autre sortie n'en porte | [auto-py] + [auto-page] |
+| SOC-19 | Mise en page fluide : pour chaque outil, aux largeurs 320, 360, 375, 390, 430, 768 et 1100 px, pas de défilement horizontal de la page, aucun bouton ni champ hors de l'écran, cibles ≥ 44 px de haut jusqu'à 430 px, blocs `.insecable` entiers ; aucune erreur de console. Les échecs connus sont listés (`CONNUS`), tout nouvel échec fait échouer la suite | [auto-page] (`test_largeurs.py`) |
 | SOC-14 | Chargement sur un vrai téléphone : délai jusqu'à « Prêt » relevé et noté dans `docs/` | [manuel] (enseignant) |

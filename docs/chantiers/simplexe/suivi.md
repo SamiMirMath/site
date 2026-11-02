@@ -77,3 +77,8 @@ Avec `inputmode="text"` (B), le clavier de l'iPhone s'ouvrait en lettres et y re
 ## À traiter ailleurs (hors chantier)
 
 - Ticket 8 de `docs/taches.md` : échappement des attributs `value="${…}"` : réglé pour les champs du formulaire (D) ; relire le reste de la page s'il est fermé.
+
+## Mise à jour du 30.10.2026 (chantier « Mise en page fluide »)
+
+La vue « Solution complète » de la méthode algébrique a changé : elle s'appelle « Solution », n'a plus de figure et part toujours de Dantzig, quels que soient les pivots choisis dans « Visualisation graphique »
+(l'ancien « Pas à pas »). Voir `docs/chantiers/mise-en-page-fluide/suivi.md`, phase 3.

@@ -102,7 +102,7 @@ Inchangé : interdiction des équivalents, phrase de repli, virgule décimale, g
 
 **R14. Une chaîne de ⇔ s'écrit une étape par ligne** (décision du 26.10.2026, outil « Exponentielles et logarithmes »), comme le corrigé de
 l'enseignant : le ⇔ en début de ligne, les ⇔ alignés les uns sous les autres, l'expression à côté, la **propriété nommée à droite de la ligne**
-(sous l'expression sur un écran étroit, jamais de défilement horizontal à 360 px). Des égalités qui se suivent sans propriété restent sur la même
+(sous l'expression sur un écran étroit, jamais de défilement horizontal à 360 px) ; la règle de mise en page fluide (blocs insécables, 390 px, composants communs) est dans `docs/specifications/socle-commun.md`. Des égalités qui se suivent sans propriété restent sur la même
 ligne (`√2 = 2^(1/2) = 4^(1/4)`, `Δ = 1² − 4·1·2 = −7`) ; une suite d'égalités qui a une propriété repart sur une nouvelle ligne dont le « = » est
 aligné sous celui de la ligne d'au-dessus (`x = log(2)/(log(2) − log(3))` puis `= log(2)/log(2/3)`). Les autres outils ne sont pas encore concernés.
 

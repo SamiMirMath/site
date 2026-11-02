@@ -4,7 +4,7 @@
 /* ---- Tableaux de signe et de variations ---- */
 /* Tableaux de signe et de variations : même feuille pour tous les outils (Ensemble de définition,
    Dérivée, Limites, Étude complète). Les couleurs viennent des variables de chaque page. */
-.tsigne{overflow-x:auto;margin:14px 0}
+.tsigne{overflow-x:auto;position:relative;margin:14px 0}      /* position:relative sur tout bloc qui défile : le MathML caché de KaTeX (position absolue) est alors rogné avec le reste, au lieu d'élargir la page */
 /* Bordures « haut + gauche » sur chaque cellule, « droite + bas » sur le tableau : la 1re colonne peut
    rester fixe (sticky) pendant le défilement, ce que border-collapse ne permet pas. */
 .tsigne table{border-collapse:separate;border-spacing:0;font-size:1.12rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -66,7 +66,7 @@ h1{font-size:1.5rem;margin:4px 0 2px}
 .lead{color:var(--muted);margin:0 0 14px}
 .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px}
 button,input{font:inherit;color:inherit}
-button{cursor:pointer;border:1px solid var(--border);background:var(--card);border-radius:8px;padding:7px 12px}
+button{cursor:pointer;border:1px solid var(--border);background:var(--card);border-radius:8px;padding:7px 12px;min-height:44px}      /* cible tactile ≥ 44 px */
 button:hover{border-color:var(--accent)}
 button:disabled{opacity:.45;cursor:default}
 button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600;padding:9px 22px}
@@ -79,7 +79,7 @@ button.primary{background:var(--accent);border-color:var(--accent);color:#fff;fo
 @media (prefers-color-scheme: dark){.variantes button[aria-pressed="true"]{color:#0b1220}}
 .variantes button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 /* Case à cocher d'une option de la sortie (commun/outil.js) : « Problème d'application (temps en années) » */
-.option{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-weight:600;line-height:1.3;cursor:pointer}
+.option{display:flex;align-items:center;gap:10px;margin:0 0 12px;min-height:44px;font-weight:600;line-height:1.3;cursor:pointer}
 .option[hidden]{display:none}
 .option input{flex:none;width:20px;height:20px;margin:0;accent-color:var(--accent)}
 .option:focus-within{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
@@ -90,7 +90,7 @@ button.primary{background:var(--accent);border-color:var(--accent);color:#fff;fo
 #entree:focus{outline:2px solid var(--accent);outline-offset:1px}
 .clavier{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:10px 0}
 .clavier button{padding:9px 0;font-size:1rem}
-.apercu{min-height:2.6em;display:flex;align-items:center;overflow-x:auto;padding:4px 2px;font-size:1.1rem}
+.apercu{min-height:2.6em;display:flex;align-items:center;overflow-x:auto;position:relative;padding:4px 2px;font-size:1.1rem}
 .apercu .obsolete{opacity:.5}
 .apercu .katex{font-size:1.15em}
 .err{color:var(--bad);font-weight:600}
@@ -100,18 +100,18 @@ canvas.graphique{width:100%;height:380px;display:block;border-radius:8px;backgro
 canvas.graphique~.hint{margin-top:6px}
 .exemples{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .exemples button{font-size:.88rem;padding:5px 9px}
-details summary{cursor:pointer;font-weight:600}
+details summary{cursor:pointer;font-weight:600;padding:10px 0}      /* cible tactile ≥ 44 px */
 details ul{margin:.4em 0 0;padding-left:1.2em}
 .etat{font-size:.9rem;color:var(--muted);margin-top:8px}
 .barre{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin:4px 0 12px}
-#cartes .card{padding:22px 26px}
+/* Les cartes d'étape (rendu.js) portent aussi .carte-etape (commun/composants.css) : marges intérieures fluides, clamp(10px, 3vw, 18px) */
 .cond h3{margin:0 0 10px;font-size:1.18rem}
 .cond .badge{display:inline-block;font-size:.78rem;font-weight:700;padding:1px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent);margin-left:6px;vertical-align:middle}
-.cond .c{background:var(--eq);border-radius:8px;padding:12px 16px;margin:8px 0 12px;overflow-x:auto;font-size:1.22rem}
-.etape{margin:9px 0;overflow-x:auto;overflow-y:hidden;font-size:1.06rem}
-.res{margin-top:14px;padding-top:12px;border-top:1px dashed var(--border);font-weight:600;overflow-x:auto;font-size:1.1rem}
-.enonce{font-size:1.15rem;overflow-x:auto}
-.final{border:2px solid var(--good)}
+.cond .c{background:var(--eq);border-radius:8px;padding:12px 16px;margin:8px 0 12px;overflow-x:auto;position:relative;font-size:1.22rem}
+.etape{margin:9px 0;overflow-x:auto;overflow-y:hidden;position:relative;font-size:1.06rem}
+.res{margin-top:14px;padding-top:12px;border-top:1px dashed var(--border);font-weight:600;overflow-x:auto;position:relative;font-size:1.1rem}
+.enonce{font-size:1.15rem;overflow-x:auto;position:relative}
+.card.final{border:2px solid var(--good)}
 .final .res{border:none;margin:0;padding:0;font-size:1.28rem;color:var(--good)}
 .bilan{margin-top:8px}
 .bilan li{margin:6px 0}
@@ -119,13 +119,8 @@ details ul{margin:.4em 0 0;padding-left:1.2em}
 .extrema{margin-top:10px;font-size:.98rem}
 .extrema li{margin:3px 0}
 
-/* Bouton « Étape suivante » flottant (commun/outil.js) : fixé en bas à droite, au-dessus des cartes, avec la marge de sécurité des téléphones.
-   La place qu'il prend (hauteur + marge) est réservée sous les cartes, et une carte qui vient d'apparaître défile jusqu'au-dessus de lui. */
-:root{ --flottant-h:48px; --flottant-place:calc(var(--flottant-h) + 32px + env(safe-area-inset-bottom, 0px)); }
-button.flottant{position:fixed;z-index:50;right:calc(16px + env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
-  min-height:var(--flottant-h);min-width:44px;padding:0 24px;font-size:1.05rem;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.3)}
-button.flottant[hidden]{display:none}
-button.flottant:focus-visible{outline:3px solid var(--fg);outline-offset:3px}
+/* Bouton « Étape suivante » flottant (commun/outil.js) : composant .bouton-flottant de commun/composants.css (fixé en bas à droite, hors impression).
+   La place qu'il prend (--flottant-place, défini là-bas) est réservée sous les cartes, et une carte qui vient d'apparaître défile jusqu'au-dessus de lui. */
 #cartes{padding-bottom:var(--flottant-place)}
 #cartes>*{scroll-margin-bottom:var(--flottant-place)}
 

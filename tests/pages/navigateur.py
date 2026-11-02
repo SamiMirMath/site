@@ -207,6 +207,7 @@ class Page:
     def __init__(self, ws, session):
         self.ws, self.session, self._id = ws, session, itertools.count(1)
         self.console = []
+        self.erreurs = []             # exceptions non attrapées, erreurs du journal du navigateur (ressource introuvable, module refusé…) et console.error
 
     def appel(self, methode, **params):
         i = next(self._id)
@@ -215,6 +216,14 @@ class Page:
             m = json.loads(self.ws.recv(timeout=180))
             if m.get("method") == "Runtime.consoleAPICalled":
                 self.console.append((m["params"]["type"], " ".join(str(a.get("value", a.get("description", ""))) for a in m["params"]["args"])))
+                if m["params"]["type"] == "error":
+                    self.erreurs.append("console.error : " + self.console[-1][1])
+            elif m.get("method") == "Runtime.exceptionThrown":
+                d = m["params"]["exceptionDetails"]
+                self.erreurs.append("exception : " + (d.get("exception", {}).get("description") or d.get("text", "")))
+            elif m.get("method") == "Log.entryAdded" and m["params"]["entry"].get("level") == "error":
+                e = m["params"]["entry"]
+                self.erreurs.append(f"journal : {e.get('text', '')} ({e.get('url', '')})")
             if m.get("id") == i:
                 if "error" in m:
                     raise ErreurPage(m["error"])
@@ -317,6 +326,7 @@ class Navigateur:
         page = Page(self.ws, session)
         page.appel("Page.enable")
         page.appel("Runtime.enable")
+        page.appel("Log.enable")
         # chaque page part d'un état propre : le navigateur et le serveur sont les mêmes pour tous les tests, donc le localStorage aussi
         # (test_acc04 mémorise une filière sur l'accueil, que la page « Exponentielles et logarithmes » reprend ensuite)
         if not conserver_stockage:
