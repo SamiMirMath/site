@@ -531,6 +531,11 @@ class Scene{
     let choix=null, pire=Infinity;
     for(const [dx,dy,al] of essais){ const r=this.rectTexte(ax+dx,ay+dy,w,size,al), cout=this.gene(r,2)+4*this.horsCadre(r);
       if(cout<pire){ pire=cout; choix={dx,dy,al,r}; } if(cout===0) break; }
+    if(pire>0){                                   // aucune des 25 positions n'est libre (ancre hors du cadre, zone chargée, police plus large) : on balaie le cadre
+      let dmin=Infinity;                          // et on prend la place libre la plus proche de l'ancre ; sinon la moins gênante
+      for(let y=Math.ceil(0.8*size)+1; y<=this.H-0.25*size-1; y+=4) for(let x=2; x+w<=this.W-2; x+=6){
+        const r=this.rectTexte(x,y,w,size,'left'), cout=this.gene(r,2)+4*this.horsCadre(r), d=Math.hypot(x-ax,y-ay);
+        if(cout<pire||(cout===0&&d<dmin)){ pire=cout; dmin=d; choix={dx:x-ax,dy:y-ay,al:'left',r}; } } }
     this.txtAbs(ax+choix.dx,ay+choix.dy,s,o,choix.al); this.occ.push(Object.assign(choix.r,{kind:kind||'texte',txt:s})); }
   placer(p,s,o,kind){ const a=this.proj(p); this.placerPx(a[0],a[1],s,o,kind); }
   // décor statique

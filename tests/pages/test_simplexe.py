@@ -66,8 +66,12 @@ class TestSimplexe(unittest.TestCase):
     def tearDownClass(cls):
         cls.nav.__exit__(None, None, None)
 
-    def ouvrir(self, largeur=1100, requete=""):
-        page = self.nav.ouvrir(f"simplexe/index.html{requete}")
+    def ouvrir(self, largeur=1100, requete="", elargir=1.0):
+        """`elargir` > 1 : tous les textes des canvas mesurent `elargir` fois plus large (la police de la CI sous Linux est plus large que celle du Mac)."""
+        script = None if elargir == 1.0 else (
+            "(() => { const m = CanvasRenderingContext2D.prototype.measureText; CanvasRenderingContext2D.prototype.measureText = function (s) {"
+            f" const r = m.call(this, s); return {{ width: r.width * {elargir}, actualBoundingBoxLeft: r.actualBoundingBoxLeft, actualBoundingBoxRight: r.actualBoundingBoxRight }}; }}; }})()")
+        page = self.nav.ouvrir(f"simplexe/index.html{requete}", script_initial=script)
         page.attendre("document.readyState === 'complete' && document.querySelector('#objRow input')", 30)
         page.taille(largeur, 800)
         return page
@@ -642,10 +646,10 @@ class TestSimplexe(unittest.TestCase):
     def test_e_etiquettes_sans_chevauchement_methode_algebrique(self):
         """« f = … », numéros de sommets, noms d'axes et graduations ne se chevauchent pas (ni ne couvrent un sommet) : pas à pas complet, Explorer et chaque
         exemple du site, à 390 et 1100 px."""
-        for largeur in (390, 1100):
+        for largeur, elargir in ((390, 1.0), (390, 1.3), (1100, 1.0)):
             for nom in ("Exemple 2D", "Exemple 3D", "9 sommets (3D)"):
-                with self.subTest(largeur=largeur, exemple=nom):
-                    page = self.ouvrir(largeur)
+                with self.subTest(largeur=largeur, elargir=elargir, exemple=nom):
+                    page = self.ouvrir(largeur, elargir=elargir)
                     self.lancer_exemple(page, nom)
                     self.clic(page, '[data-mode="sim"]')
                     for pas in range(60):
@@ -667,10 +671,11 @@ class TestSimplexe(unittest.TestCase):
                             self.sans_chevauchement(page, "#cv", f"{nom} {largeur} px, rotation {angle}")
 
     def test_e_etiquettes_sans_chevauchement_methode_geometrique(self):
-        for largeur in (390, 1100):
+        """À 390 px aussi avec des textes 1,3 fois plus larges : la CI (Linux) a échoué le 02.11.2026 sur « p = 1’133,33 » (ancre hors du cadre) × nom d'axe « y »."""
+        for largeur, elargir in ((390, 1.0), (390, 1.3), (1100, 1.0)):
             for nom in ("Parallèles : max", "Parallèles : min avec ≥", "Parallèles : coefficient de y négatif"):
-                with self.subTest(largeur=largeur, exemple=nom):
-                    page = self.ouvrir(largeur)
+                with self.subTest(largeur=largeur, elargir=elargir, exemple=nom):
+                    page = self.ouvrir(largeur, elargir=elargir)
                     self.clic(page, '[data-meth="para"]')
                     self.lancer_exemple(page, nom)
                     total = page.evaluer("document.querySelectorAll('canvas.fig').length")

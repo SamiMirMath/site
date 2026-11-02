@@ -205,3 +205,12 @@ git switch main && git merge --no-ff mise-en-page-fluide
 - **Étude complète** : la page ne dépasse plus de l'écran en « corrigé complet » (elle mesurait 417 px sur un écran de 390 px).
 - **Ensemble de définition, Dérivée et variations, Factorisation** : cibles tactiles et bouton flottant (socle commun) ; aucune autre modification.
 - **Exponentielles et logarithmes** : les chaînes de ⇔ se mettent sur deux colonnes selon la place de la carte et non selon la largeur de l'écran (sur tablette en largeur réduite ou fenêtre étroite aussi).
+
+## Correctif après la fusion (02.11.2026) : échec de la CI sur les étiquettes de la méthode géométrique
+
+Le push de la fusion a échoué en CI (Linux, Chrome 156) : `test_e_etiquettes_sans_chevauchement_methode_geometrique`, 390 px, « Parallèles : max », figure 8 :
+`axe « y » × p « p = 1’133,33 »`. La suite passait sur le Mac de l'enseignant ; la police de la CI est plus large.
+**Cause** : l'ancre de « p = 1’133,33 » (intersection de la parallèle avec l'axe des y) est hors du cadre (y = −35 px). Aucune des 25 positions essayées par `Scene.placerPx` n'est libre ;
+le repli gardait la « moins gênante », qui touchait le nom d'axe « y ». **Correctif** : si aucune des 25 positions n'est libre, `placerPx` balaie le cadre (pas de 6 × 4 px) et prend la place libre la plus proche
+de l'ancre (sinon la moins gênante comme avant) ; les étiquettes qui trouvaient déjà une place ne bougent pas. **Test** : `ouvrir(..., elargir=1.3)` mesure les textes des canvas 1,3 fois plus larges
+(reproduit exactement l'échec de la CI avant correction) ; les deux tests d'étiquettes (méthodes algébrique et géométrique) tournent aussi à 390 px avec cet élargissement.
