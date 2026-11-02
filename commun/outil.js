@@ -38,11 +38,15 @@
    à remonter à la barre d'outils. Il déclenche le même clic que `#suivant` (qui reste à sa place) et n'est visible que s'il reste des cartes à montrer.
    La place qu'il prend est réservée par commun/style.css (marge sous `#cartes`, `scroll-margin-bottom` des cartes).
 
+   Clavier : sur un écran tactile (pointeur « coarse »), le champ `#entree` n'ouvre pas le clavier du système (inputmode="none", et readonly sur iOS) ; les touches
+   de `#clavier` écrivent, une rangée « ABC » (clavier du système) et « Calculer ▶ » est ajoutée en bas (commun/composants.js, monterClavierTactile). Sur ordinateur, rien ne change.
+
    Les textes d'interface (états, compteur d'étapes, messages de délai) sont écrits ici une seule fois.
    Les textes du corrigé viennent de `resoudre()` (Python) et sont rendus par commun/rendu.js.
    Test : `window.__delaiCalcul` (ms) remplace le délai de 30 s. */
 import { MoteurPython } from "./moteur-python.js";
 import { K, math, ajouterGreffon, rendreCarte, rendreErreur } from "./rendu.js";
+import { monterClavierTactile } from "./composants.js";
 
 const $ = id => document.getElementById(id);
 const PAUSE_ERREUR = 500;
@@ -125,7 +129,7 @@ function demarrerOutil(config) {
   $("entree").addEventListener("input", apercu);
   $("entree").addEventListener("keydown", e => { if (e.key === "Enter" && !$("calculer").disabled) calculer(); });
   $("clavier").addEventListener("click", e => {
-    const b = e.target.closest("button");
+    const b = e.target.closest("button[data-t], button[data-k]");                  // les touches d'action du clavier tactile (ABC, Calculer) ont leur propre gestionnaire
     if (!b) return;
     const inp = $("entree");
     const a = inp.selectionStart ?? inp.value.length, z = inp.selectionEnd ?? a;
@@ -136,6 +140,7 @@ function demarrerOutil(config) {
     } else { const t = b.dataset.t; inp.value = inp.value.slice(0, a) + t + inp.value.slice(z); inp.setSelectionRange(a + t.length, a + t.length); }
     apercu();
   });
+  monterClavierTactile({ clavier: $("clavier"), champ: $("entree"), lancer: $("calculer") });       // téléphone et tablette : pas de clavier du système, « ABC » et « Calculer ▶ »
   function afficherExemples() {
     const liste = Array.isArray(exemples) ? exemples : (exemples[filiere] || []);
     $("exemples").innerHTML = '<span class="hint" style="align-self:center">Exemples :</span>' + liste.map(s => `<button data-ex="${s}">${s}</button>`).join("");

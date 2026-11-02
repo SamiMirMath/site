@@ -88,7 +88,7 @@ button.primary{background:var(--accent);border-color:var(--accent);color:#fff;fo
 .saisie label{font-weight:700;white-space:nowrap}
 #entree{flex:1;min-width:0;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:var(--card);font-size:1.05rem;font-family:ui-monospace,Menlo,Consolas,monospace}
 #entree:focus{outline:2px solid var(--accent);outline-offset:1px}
-.clavier{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:10px 0}
+.clavier{display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(3px,1vw,6px);margin:10px 0}      /* 6 colonnes comme une calculatrice : touches de 44 px de haut au moins, et de large dès 360 px (40 px à 320 px) */
 .clavier button{padding:9px 0;font-size:1rem}
 .apercu{min-height:2.6em;display:flex;align-items:center;overflow-x:auto;position:relative;padding:4px 2px;font-size:1.1rem}
 .apercu .obsolete{opacity:.5}

@@ -1,6 +1,6 @@
 /* Composants interactifs communs (style : commun/composants.css). Module ES :
 
-     import { monterOnglets, champSigne } from "../commun/composants.js";                                          */
+     import { monterOnglets, champSigne, estTactile, sansClavierSysteme, avecClavierSysteme, monterClavierTactile } from "../commun/composants.js";   */
 
 /* ---- Onglets accessibles ----
    `conteneur` contient des <button> : ils reçoivent role="tab", aria-selected et un tabindex mobile (seul l'onglet actif est dans l'ordre de tabulation).
@@ -76,4 +76,56 @@ export function champSigne({ valeur = "", signe, nom, membre = false, attrs = {}
   bloc.append(bouton, champ);
   Object.assign(bloc, { bouton, champ, signee });
   return bloc;
+}
+
+/* ---- Clavier de la page ou clavier du système ----
+   Sur un écran tactile (pointeur « coarse »), l'élève tape les nombres et les formules avec les touches de la page : le clavier du système ne doit pas s'ouvrir.
+     estTactile()                    vrai sur téléphone et tablette
+     sansClavierSysteme(champ)       inputmode="none" ; sur iPhone et iPad aussi readonly (iOS ouvre parfois son clavier malgré inputmode="none") : seules les touches écrivent
+     avecClavierSysteme(champ)       remet l'état d'origine du champ (saisie inhabituelle : lettres, symboles) */
+export const estTactile = () => typeof matchMedia === "function" && matchMedia("(pointer: coarse)").matches;
+const SUR_IOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);     // iPadOS se présente comme un Mac
+
+export function sansClavierSysteme(champ) {
+  if (!("modeOrigine" in champ.dataset)) champ.dataset.modeOrigine = champ.getAttribute("inputmode") ?? "";
+  champ.setAttribute("inputmode", "none");
+  if (SUR_IOS()) champ.readOnly = true;
+}
+export function avecClavierSysteme(champ) {
+  const origine = champ.dataset.modeOrigine;
+  if (origine) champ.setAttribute("inputmode", origine); else champ.removeAttribute("inputmode");
+  champ.readOnly = false;
+}
+
+/* ---- Clavier à touches des outils à saisie de fonction (.clavier, champ #entree) ----
+   Sur tactile seulement : coupe le clavier du système sur `champ` et ajoute au bas de `clavier` une rangée « ABC » + « Calculer ▶ ».
+   « ABC » rouvre le clavier du système (« 123 » revient aux touches) ; « Calculer ▶ » fait le clic du bouton `lancer` et en suit le libellé et l'état :
+   le bouton de la page, devenu doublon, est caché (il reste dans la page : les autres scripts le déclenchent toujours).
+   Un appui sur une touche ne retire pas le focus du champ (le curseur reste visible). Sur ordinateur : rien n'est changé, renvoie null. */
+export function monterClavierTactile({ clavier, champ, lancer }) {
+  if (!estTactile()) return null;
+  sansClavierSysteme(champ);
+  lancer.hidden = true;
+  const bouton = (classe, texte) => { const b = document.createElement("button"); b.type = "button"; b.className = classe; b.textContent = texte; return b; };
+  const abc = bouton("abc", "ABC"), calculer = bouton("primary lancer", lancer.textContent);
+  let systeme = false;
+  const majAbc = () => {
+    abc.textContent = systeme ? "123" : "ABC";
+    abc.setAttribute("aria-label", systeme ? "Revenir aux touches de la page" : "Ouvrir le clavier du système pour une saisie inhabituelle");
+  };
+  const majLancer = () => { calculer.textContent = lancer.textContent; calculer.disabled = lancer.disabled; };
+  abc.addEventListener("click", () => {
+    systeme = !systeme;
+    majAbc();
+    if (systeme) { avecClavierSysteme(champ); champ.focus(); }
+    else { champ.blur(); sansClavierSysteme(champ); champ.focus({ preventScroll: true }); }
+  });
+  calculer.addEventListener("click", () => { if (!lancer.disabled) lancer.click(); });
+  new MutationObserver(majLancer).observe(lancer, { attributes: true, attributeFilter: ["disabled"], childList: true, characterData: true, subtree: true });
+  clavier.addEventListener("mousedown", (e) => e.preventDefault());                              // la touche ne prend pas le focus : le champ le garde
+  clavier.addEventListener("click", (e) => { if (e.target.closest("button[data-t], button[data-k]") && document.activeElement !== champ) champ.focus({ preventScroll: true }); });
+  majAbc();
+  majLancer();
+  clavier.append(abc, calculer);
+  return { abc, calculer };
 }

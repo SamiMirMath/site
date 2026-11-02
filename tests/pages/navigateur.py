@@ -250,6 +250,22 @@ class Page:
             self.appel("Input.insertText", text=c)
             time.sleep(pause)
 
+    def toucher(self, selecteur):
+        """Appui d'un doigt (touchStart puis touchEnd) au centre de l'élément, après l'avoir amené à l'écran ; le navigateur en tire le clic
+        (page ouverte avec `tactile=True`)."""
+        # défilement immédiat (il interrompt un défilement doux en cours, p. ex. vers la carte qui vient d'apparaître), puis on attend que la position soit stable
+        position = f"(() => {{ const r = document.querySelector({selecteur!r}).getBoundingClientRect(); return [r.x + r.width / 2, r.y + r.height / 2]; }})()"
+        self.evaluer(f"document.querySelector({selecteur!r}).scrollIntoView({{block: 'center', behavior: 'instant'}})")
+        x, y = self.evaluer(position)
+        for _ in range(40):
+            time.sleep(0.05)
+            suivante = self.evaluer(position)
+            if suivante == [x, y]:
+                break
+            x, y = suivante
+        self.appel("Input.dispatchTouchEvent", type="touchStart", touchPoints=[{"x": x, "y": y}])
+        self.appel("Input.dispatchTouchEvent", type="touchEnd", touchPoints=[])
+
     def capture(self, chemin):
         import base64
         d = self.appel("Page.captureScreenshot", format="png", captureBeyondViewport=True)["data"]
@@ -308,10 +324,13 @@ class Navigateur:
                     raise ErreurPage(m["error"])
                 return m["result"]
 
-    def ouvrir(self, chemin, script_initial=None, conserver_stockage=False):
+    def ouvrir(self, chemin, script_initial=None, conserver_stockage=False, tactile=False, agent=None):
         """Ouvre `chemin` (relatif à la racine du site) dans un nouvel onglet ; renvoie la Page.
         `script_initial` : JavaScript exécuté dans la page avant tout autre script (banc du graphique).
-        `conserver_stockage` : ne pas vider le localStorage (test qui rouvre une page pour vérifier qu'un choix est gardé)."""
+        `conserver_stockage` : ne pas vider le localStorage (test qui rouvre une page pour vérifier qu'un choix est gardé).
+        `tactile` : écran tactile émulé dès le chargement (`(pointer: coarse)` vrai, 5 points de contact) : les pages lisent ce média au démarrage.
+        `agent` : (agent utilisateur, plateforme) imposés, p. ex. un iPhone ou un téléphone Android : sur un Mac, le navigateur tactile émulé se déclare « MacIntel »
+        avec des points de contact, comme un iPad."""
         # un seul onglet à la fois : chaque page lance un worker Pyodide (plusieurs dizaines de Mo), les laisser
         # s'accumuler fait dépasser les délais de chargement
         for ancien in getattr(self, "_cibles", []):
@@ -327,6 +346,10 @@ class Navigateur:
         page.appel("Page.enable")
         page.appel("Runtime.enable")
         page.appel("Log.enable")
+        if tactile:
+            page.appel("Emulation.setTouchEmulationEnabled", enabled=True, maxTouchPoints=5)
+        if agent:
+            page.appel("Emulation.setUserAgentOverride", userAgent=agent[0], platform=agent[1])
         # chaque page part d'un état propre : le navigateur et le serveur sont les mêmes pour tous les tests, donc le localStorage aussi
         # (test_acc04 mémorise une filière sur l'accueil, que la page « Exponentielles et logarithmes » reprend ensuite)
         if not conserver_stockage:

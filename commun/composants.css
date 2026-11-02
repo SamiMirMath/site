@@ -48,3 +48,8 @@
 .bouton-flottant[hidden]{display:none}
 .bouton-flottant:focus-visible{outline:3px solid var(--fg);outline-offset:3px}
 @media print{ .bouton-flottant{display:none !important} }
+
+/* ---- Clavier tactile des outils à saisie de fonction (commun/composants.js, monterClavierTactile) : 5e rangée « ABC » + « Calculer ▶ » ---- */
+.clavier .abc{grid-column:1 / span 2}                       /* la rangée tactile commence toujours à la ligne, même si la dernière rangée de touches est incomplète */
+.clavier .lancer{grid-column:3 / span 4}
+@media (hover: none){ .clavier button:hover{border-color:var(--border)} }                /* au doigt, le survol reste collé à la dernière touche : on ne le montre pas */

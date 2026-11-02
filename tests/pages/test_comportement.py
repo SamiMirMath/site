@@ -102,12 +102,12 @@ class TestComportement(unittest.TestCase):
             self.assertEqual(page.evaluer("document.querySelector('#cartes .card.final h3').textContent"), "Solution")
 
     def test_t33_el_clavier_virtuel(self):
-        """Le clavier de la page écrit log_10(x)=e : log_, un nombre, parenthèses, =, e, et ln(, sqrt(, virgule."""
+        """Le clavier de la page écrit log_10(x)=e : log_, les chiffres 1 et 0, parenthèses, =, e (et ln(, sqrt(, virgule sont sur ses touches)."""
         if "exponentielles-logarithmes" not in CHOISIS:
             self.skipTest("hors de OUTILS")
         page = self.ouvrir("exponentielles-logarithmes")
         page.evaluer("document.querySelector('#entree').value=''")
-        for t in ("log_", "10", "(", "x", ")", "=", "e"):
+        for t in ("log_", "1", "0", "(", "x", ")", "=", "e"):
             page.evaluer("document.querySelector(" + json.dumps(f'#clavier button[data-t="{t}"]') + ").click()")
         self.assertEqual(page.evaluer("document.querySelector('#entree').value"), "log_10(x)=e")
         page.attendre("document.querySelector('#apercu .katex')", 10)
