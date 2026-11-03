@@ -1,8 +1,8 @@
 # Outil « Étude complète de fonction » (3e Ms, Mr)
 
 URL : `/etude-complete/` · moteur : `etude-complete/etude_complete.py`, qui assemble le noyau,
-la dérivée et les limites ; adaptateur `etude-complete/resoudre_ec.py`. Les parties propres à l'Étude complète (aujourd'hui les parties 1 et 2 ; plus tard
-zéros, signe, ordonnée à l'origine ; bilan) sont dans `etude-complete/parties.py` (créé au chantier `etude-complete`, P3, déclaré dans
+la dérivée et les limites ; adaptateur `etude-complete/resoudre_ec.py`. Les parties propres à l'Étude complète (aujourd'hui les parties 1, 2 et 3 ; plus tard
+le bilan) sont dans `etude-complete/parties.py` (créé au chantier `etude-complete`, P3, déclaré dans
 `moteur/manifeste.json` avec `ensemble-definition/resoudre_ed.py`, dont il reprend les cartes de condition). Décisions de rédaction : `docs/chantiers/etude-complete/decisions.md`.
 
 ## Fonctionnel
@@ -11,7 +11,7 @@ zéros, signe, ordonnée à l'origine ; bilan) sont dans `etude-complete/parties
   l'origine · 4. Limites et asymptotes · 5. Dérivée, tableau de variation, extremums · 6. Graphe. Chaque partie s'ouvre par un
   intertitre (carte de style `partie` du format commun : un titre sans cadre, affiché avec la carte qui le suit, hors du compteur
   d'étapes). Une partie que l'outil ne sait pas encore rédiger reste vide (son intertitre seul) : rien plutôt qu'une affirmation
-  non démontrée (EC-15). Aujourd'hui : parties 1 et 2 = voir ci-dessous ; 3 vide ; 4 = cartes de l'outil Limites
+  non démontrée (EC-15). Aujourd'hui : parties 1, 2 et 3 = voir ci-dessous ; 4 = cartes de l'outil Limites
   (tableaux de signes, une carte par borne, bilan des asymptotes) ; 5 = cartes de l'outil Dérivée (dérivée, signe de f′ et variations,
   avec les limites dans le tableau, T06c) ; 6 = graphique.
 - **Partie 1, domaine de définition** (D1, D3 ; P3) : carte « Fonction » (f seule) ; carte « Mise en forme » quand f(x) = e^{haut/bas},
@@ -39,6 +39,27 @@ zéros, signe, ordonnée à l'origine ; bilan) sont dans `etude-complete/parties
   f(x) se simplifie en 0, chaque ligne de la chaîne vaut f(−x), chaque valeur écrite vaut f(a)) **et** par une sonde mpmath (l'arbre
   évalué à 30 chiffres en ±x) ; un désaccord, une borne approchée ou SymPy absent donnent « La parité de f n'a pas pu être établie avec
   certitude : l'outil ne conclut pas. », sans conclusion. Calculée par `resoudre` (hors d'`etudier()`), sur l'analyse en cache.
+- **Partie 3, zéros, signe, ordonnée à l'origine** (D5 ; P5) : carte « Zéros de f » (ou « Zéros et signe de f »). Chaque facteur
+  e^{…} : « e^{−2x} > 0 pour tout x (une exponentielle est strictement positive) ; il ne s'annule jamais. » (« pour tout x ∈ ED » si
+  ED ≠ ℝ ; « e^{g(x)} » quand la partie 1 a nommé g ; f = e^{…} seule : sans « il ne s'annule jamais »). Puis f(x) = 0 en chaîne, une
+  étape par ligne, la propriété nommée entre parenthèses : « (x² − 6)e^{−2x} = 0 ⇔ x² − 6 = 0 (car e^{−2x} > 0) ⇔ x² = 6 ⇔ x = −√6
+  ≈ −2,45 ou x = √6 ≈ 2,45 » ; « numérateur nul », « on divise par 3 », « produit nul » (facteurs menés ensemble), « mise en
+  évidence », « Somme-Produit » (comme la partie 1), lignes « A ⇔ B (propriété) » de l'outil ED pour un facteur non polynomial
+  (« e^{x} = 6 (on isole e^{x} …) ») ; un zéro hors de l'ED est rejeté (« x = 0 est rejeté, car 0 ∉ ED. ») ; une forme que la chaîne
+  ne couvre pas (√(x² − 4), x² + 1) garde les lignes de l'outil ED, puis « Donc x = … ». Valeur exacte puis approchée (decisions.md §2 ;
+  entier exact sans « ≈ » ; R13 sous 10⁻³ et dès 10⁶ ; entre 1000 et 10⁶ la valeur exacte seule). Sans zéro et de signe constant :
+  « Donc f n'a pas de zéro et f(x) > 0 sur ED. », pas de tableau ; sinon carte « Signe de f » : le tableau de signes de f, construit
+  par la machinerie R7 du tableau de f′ (`derivee_variations.tableau_signes` : une ligne par facteur, constante à part, zéros et valeurs
+  interdites, zones hors de l'ED barrées). Zéros non exacts (x³ + x + 1) : « Les zéros de f ne se calculent pas exactement : l'outil ne
+  dresse pas le tableau de signes de f. » ; zéros non calculés : « Les zéros de f n'ont pas pu être calculés par l'outil : le signe de
+  f n'est pas traité. ». Carte « Ordonnée à l'origine » : « f(0) = −6. » (exact puis ≈ ; « g(0) = −2/(−12) = 1/6, donc f(0) =
+  e^{1/6} ≈ 1,18 » quand g est nommé), puis « Le graphe coupe l'axe des y au point (0 ; f(0)). » ; « 0 ∉ ED : le graphe ne coupe pas
+  l'axe des y. ». Garde-fous (EC-15, principe 0.2) : les zéros sont confirmés par SymPy (f(z) = 0, et `solveset` ne trouve aucun autre
+  zéro dans l'ED, appartenance décidée exactement) et par la sonde (|f(z)| < 10⁻²⁰ à 30 chiffres) ; le signe de chaque intervalle de
+  l'ED est le signe exact (SymPy) de f en un point rationnel et celui de la sonde en 9 points ; la chaîne doit finir sur les zéros
+  calculés (sinon les lignes de l'outil ED) ; f(0) écrit = valeur SymPy = sonde. Au moindre désaccord : « Le signe de f n'a pas pu
+  être établi avec certitude : l'outil ne conclut pas. » (ou « L'ordonnée à l'origine n'a pas pu être établie avec certitude… »).
+  Calculée par `resoudre`, sur l'analyse en cache.
 - **Une seule analyse par saisie** (D19) : le résultat de `analyser_complet` (ED) est gardé en cache (`functools.lru_cache`, clé =
   saisie aux espaces réduits et présence de SymPy) ; `etudier()` le passe aux outils Dérivée et Limites (paramètre facultatif
   `analyse` de leur `etudier`, sans effet sur ces outils seuls), et `fenetre()` (zoom) le relit sans recalcul.
@@ -155,4 +176,4 @@ f(x)     | +∞  ↘  −∞ ‖  ░░░░░░  ‖ −∞  ↗  +∞
 | EC-06 | Graduations et coordonnées du graphique sans point décimal (virgule), par la seule fonction `etiquette()` | [auto-page] (`test_graphique.py`) |
 | EC-07 | Le graphique est imprimé (image) dans le PDF, en clair même en mode sombre | [manuel] (vérifié sur téléphone, 21.10.2026) |
 | EC-14 | `resoudre()` (T12) respecte le schéma de sortie commun, ses cartes sont dans l'ordre des six parties (D1, intertitres compris), celles de la dérivée et des limites sont les cartes des outils séparés, les limites figurent dans le tableau de variations ; instantanés `instantanes/resoudre/etude-complete.json` | [auto-py] (`test_resoudre_ec.py`) |
-| EC-15 | Toute partie propre à l'EC a un garde-fou numérique et un message clair en cas de doute (D2) ; tant qu'une partie n'est pas rédigée, elle reste vide | [auto-py] (`test_corpus_etude_complete.py` : oracle mpmath indépendant ; parties 1 et 2 : `test_parties_ec.py`, garde-fous forcés en échec) |
+| EC-15 | Toute partie propre à l'EC a un garde-fou numérique et un message clair en cas de doute (D2) ; tant qu'une partie n'est pas rédigée, elle reste vide | [auto-py] (`test_corpus_etude_complete.py` : oracle mpmath indépendant ; parties 1 à 3 : `test_parties_ec.py`, garde-fous forcés en échec) |

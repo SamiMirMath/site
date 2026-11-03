@@ -107,6 +107,53 @@
     "titre": "3. Zéros, signe, ordonnée à l'origine"
    },
    {
+    "blocs": [
+     {
+      "html": "\\(\\frac{e^{x} - 1}{x} = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff e^{x} - 1 = 0\\) (numérateur nul)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff e^{x} = 1\\) (on ajoute 1)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff\\) \\(x = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x = 0\\) est rejeté, car \\(0 \\notin ED\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc f n'a pas de zéro et \\(f(x) > 0\\) sur ED.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Zéros et signe de f"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(0 \\notin ED\\) : le graphe ne coupe pas l'axe des y.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Ordonnée à l'origine"
+   },
+   {
     "blocs": [],
     "style": "partie",
     "titre": "4. Limites et asymptotes"
@@ -712,6 +759,103 @@
     "titre": "3. Zéros, signe, ordonnée à l'origine"
    },
    {
+    "blocs": [
+     {
+      "html": "\\(\\frac{x^{2} - 1}{x - 3} = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff x^{2} - 1 = 0\\) (numérateur nul)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff x^{2} = 1\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff\\) \\(x = -1\\) ou \\(x = 1\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Zéros de f"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "crit": [
+       "-1",
+       "1",
+       "3"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "0",
+         "+",
+         "||",
+         "+"
+        ],
+        "label": "\\left(x^{2} - 1\\right)"
+       },
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "-",
+         "-",
+         "||",
+         "+"
+        ],
+        "label": "\\left(x - 3\\right)"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "0",
+         "-",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "f(x)"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(0) = \\frac{1}{3}\\) ≈ 0,33.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Le graphe coupe l'axe des y au point \\((0\\,;\\,\\frac{1}{3})\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Ordonnée à l'origine"
+   },
+   {
     "blocs": [],
     "style": "partie",
     "titre": "4. Limites et asymptotes"
@@ -1129,6 +1273,106 @@
     "blocs": [],
     "style": "partie",
     "titre": "3. Zéros, signe, ordonnée à l'origine"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(3x\\,\\ln(x) = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff x\\,\\ln(x) = 0\\) (on divise par \\(3\\))",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff x = 0 \\text{ ou } \\ln(x) = 0\\) (produit nul)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff\\) \\(x = 0\\) ou \\(x = 1\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x = 0\\) est rejeté, car \\(0 \\notin ED\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Zéros de f"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "crit": [
+       "0",
+       "1"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "x",
+         "||",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "3"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\ln(x)"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f(x)"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(0 \\notin ED\\) : le graphe ne coupe pas l'axe des y.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Ordonnée à l'origine"
    },
    {
     "blocs": [],
@@ -1613,6 +1857,38 @@
     "blocs": [],
     "style": "partie",
     "titre": "3. Zéros, signe, ordonnée à l'origine"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(e^{g(x)} > 0\\) pour tout \\(x \\in ED\\) (une exponentielle est strictement positive).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc f n'a pas de zéro et \\(f(x) > 0\\) sur ED.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Zéros et signe de f"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(g(0) = \\frac{-2}{-12} = \\frac{1}{6}\\), donc \\(f(0) = e^{\\frac{1}{6}}\\) ≈ 1,18.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Le graphe coupe l'axe des y au point \\((0\\,;\\,e^{\\frac{1}{6}})\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Ordonnée à l'origine"
    },
    {
     "blocs": [],
@@ -2169,6 +2445,33 @@
     "titre": "3. Zéros, signe, ordonnée à l'origine"
    },
    {
+    "blocs": [
+     {
+      "html": "\\(e^{\\frac{1}{x}} > 0\\) pour tout \\(x \\in ED\\) (une exponentielle est strictement positive).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc f n'a pas de zéro et \\(f(x) > 0\\) sur ED.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Zéros et signe de f"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(0 \\notin ED\\) : le graphe ne coupe pas l'axe des y.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Ordonnée à l'origine"
+   },
+   {
     "blocs": [],
     "style": "partie",
     "titre": "4. Limites et asymptotes"
@@ -2586,6 +2889,38 @@
     "blocs": [],
     "style": "partie",
     "titre": "3. Zéros, signe, ordonnée à l'origine"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(e^{\\frac{2}{x^{2} - 4}} > 0\\) pour tout \\(x \\in ED\\) (une exponentielle est strictement positive).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc f n'a pas de zéro et \\(f(x) > 0\\) sur ED.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Zéros et signe de f"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(0) = e^{-\\frac{1}{2}}\\) ≈ 0,61.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Le graphe coupe l'axe des y au point \\((0\\,;\\,e^{-\\frac{1}{2}})\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Ordonnée à l'origine"
    },
    {
     "blocs": [],
@@ -3162,6 +3497,38 @@
     "titre": "3. Zéros, signe, ordonnée à l'origine"
    },
    {
+    "blocs": [
+     {
+      "html": "\\(e^{2x} > 0\\) pour tout \\(x\\) (une exponentielle est strictement positive).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc f n'a pas de zéro et \\(f(x) > 0\\) sur ED.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Zéros et signe de f"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(0) = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Le graphe coupe l'axe des y au point \\((0\\,;\\,1)\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Ordonnée à l'origine"
+   },
+   {
     "blocs": [],
     "style": "partie",
     "titre": "4. Limites et asymptotes"
@@ -3444,6 +3811,86 @@
     "blocs": [],
     "style": "partie",
     "titre": "3. Zéros, signe, ordonnée à l'origine"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(\\frac{\\ln(x)}{x} = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff \\ln(x) = 0\\) (numérateur nul)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff\\) \\(x = 1\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Zéros de f"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "crit": [
+       "0",
+       "1"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\ln(x)"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f(x)"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(0 \\notin ED\\) : le graphe ne coupe pas l'axe des y.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Ordonnée à l'origine"
    },
    {
     "blocs": [],
@@ -3944,6 +4391,86 @@
     "titre": "3. Zéros, signe, ordonnée à l'origine"
    },
    {
+    "blocs": [
+     {
+      "html": "\\(\\sqrt{x^{2} - 4} = 0 \\iff x^{2} - 4 = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "On résout \\(x^{2} - 4 = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2} - 4 = (x - 2)(x + 2)\\) : zéros \\(-2\\) et \\(2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Solutions : \\(x = -2\\), \\(x = 2\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc \\(x = -2\\) ou \\(x = 2\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Zéros de f"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "crit": [
+       "-2",
+       "2"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "0",
+         "x",
+         "0",
+         "+"
+        ],
+        "label": "\\sqrt{x^{2} - 4}"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "x",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f(x)"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(0 \\notin ED\\) : le graphe ne coupe pas l'axe des y.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Ordonnée à l'origine"
+   },
+   {
     "blocs": [],
     "style": "partie",
     "titre": "4. Limites et asymptotes"
@@ -4302,6 +4829,91 @@
     "blocs": [],
     "style": "partie",
     "titre": "3. Zéros, signe, ordonnée à l'origine"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(x\\,\\ln(x) = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff x = 0 \\text{ ou } \\ln(x) = 0\\) (produit nul)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff\\) \\(x = 0\\) ou \\(x = 1\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x = 0\\) est rejeté, car \\(0 \\notin ED\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Zéros de f"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "crit": [
+       "0",
+       "1"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "x",
+         "||",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\ln(x)"
+       },
+       {
+        "cells": [
+         "x",
+         "||",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f(x)"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(0 \\notin ED\\) : le graphe ne coupe pas l'axe des y.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Ordonnée à l'origine"
    },
    {
     "blocs": [],
@@ -4778,6 +5390,79 @@
     "titre": "3. Zéros, signe, ordonnée à l'origine"
    },
    {
+    "blocs": [
+     {
+      "html": "\\(\\frac{x}{x^{2} + 1} = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff\\) \\(x = 0\\) (numérateur nul)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Zéros de f"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "\\left(x^{2} + 1\\right)"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f(x)"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(0) = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Le graphe coupe l'axe des y au point \\((0\\,;\\,0)\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Ordonnée à l'origine"
+   },
+   {
     "blocs": [],
     "style": "partie",
     "titre": "4. Limites et asymptotes"
@@ -5155,6 +5840,84 @@
     "titre": "3. Zéros, signe, ordonnée à l'origine"
    },
    {
+    "blocs": [
+     {
+      "html": "\\(\\frac{x}{\\sqrt{x^{2}}} = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff\\) \\(x = 0\\) (numérateur nul)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x = 0\\) est rejeté, car \\(0 \\notin ED\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc f n'a pas de zéro.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Zéros de f"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "||",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "+",
+         "||",
+         "+"
+        ],
+        "label": "\\sqrt{x^{2}}"
+       },
+       {
+        "cells": [
+         "-",
+         "||",
+         "+"
+        ],
+        "final": true,
+        "label": "f(x)"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(0 \\notin ED\\) : le graphe ne coupe pas l'axe des y.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Ordonnée à l'origine"
+   },
+   {
     "blocs": [],
     "style": "partie",
     "titre": "4. Limites et asymptotes"
@@ -5504,6 +6267,81 @@
     "titre": "3. Zéros, signe, ordonnée à l'origine"
    },
    {
+    "blocs": [
+     {
+      "html": "\\(\\sqrt[3]{x^{2}} = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff \\left(\\sqrt[3]{x}\\right)^{2} = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff \\sqrt[3]{x} = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff\\) \\(x = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Zéros de f"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "0",
+         "+"
+        ],
+        "label": "\\left(\\sqrt[3]{x}\\right)^{2}"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f(x)"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(0) = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Le graphe coupe l'axe des y au point \\((0\\,;\\,0)\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Ordonnée à l'origine"
+   },
+   {
     "blocs": [],
     "style": "partie",
     "titre": "4. Limites et asymptotes"
@@ -5793,6 +6631,89 @@
     "blocs": [],
     "style": "partie",
     "titre": "3. Zéros, signe, ordonnée à l'origine"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(e^{-x} > 0\\) pour tout \\(x\\) (une exponentielle est strictement positive) ; il ne s'annule jamais.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(x^{2}\\,e^{-x} = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff x^{2} = 0\\) (car \\(e^{-x} > 0\\))",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff\\) \\(x = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Zéros de f"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "crit": [
+       "0"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "0",
+         "+"
+        ],
+        "label": "x^{2}"
+       },
+       {
+        "cells": [
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "e^{-x}"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f(x)"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(0) = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Le graphe coupe l'axe des y au point \\((0\\,;\\,0)\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Ordonnée à l'origine"
    },
    {
     "blocs": [],
@@ -6294,6 +7215,86 @@
     "titre": "3. Zéros, signe, ordonnée à l'origine"
    },
    {
+    "blocs": [
+     {
+      "html": "\\(x^{2} - 4x + 3 = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff (x - 1)(x - 3) = 0\\) (Somme-Produit)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff x - 1 = 0 \\text{ ou } x - 3 = 0\\) (produit nul)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff\\) \\(x = 1\\) ou \\(x = 3\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Zéros de f"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "crit": [
+       "1",
+       "3"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(x^{2} - 4x + 3\\right)"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f(x)"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(0) = 3\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Le graphe coupe l'axe des y au point \\((0\\,;\\,3)\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Ordonnée à l'origine"
+   },
+   {
     "blocs": [],
     "style": "partie",
     "titre": "4. Limites et asymptotes"
@@ -6595,6 +7596,96 @@
     "blocs": [],
     "style": "partie",
     "titre": "3. Zéros, signe, ordonnée à l'origine"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(x^{3} - 3x = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff x(x^{2} - 3) = 0\\) (mise en évidence)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff x = 0 \\text{ ou } x^{2} - 3 = 0\\) (produit nul)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff x = 0 \\text{ ou } x^{2} = 3\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff\\) \\(x = -\\sqrt{3}\\) ≈ −1,73 ou \\(x = 0\\) ou \\(x = \\sqrt{3}\\) ≈ 1,73",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Zéros de f"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "crit": [
+       "-\\sqrt{3}",
+       "0",
+       "\\sqrt{3}"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(x^{3} - 3x\\right)"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f(x)"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(0) = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Le graphe coupe l'axe des y au point \\((0\\,;\\,0)\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Ordonnée à l'origine"
    },
    {
     "blocs": [],
@@ -6920,6 +8011,96 @@
     "blocs": [],
     "style": "partie",
     "titre": "3. Zéros, signe, ordonnée à l'origine"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(x^{4} - 2x^{2} = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff x^{2}(x^{2} - 2) = 0\\) (mise en évidence)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff x = 0 \\text{ ou } x^{2} - 2 = 0\\) (produit nul)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff x = 0 \\text{ ou } x^{2} = 2\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff\\) \\(x = -\\sqrt{2}\\) ≈ −1,41 ou \\(x = 0\\) ou \\(x = \\sqrt{2}\\) ≈ 1,41",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Zéros de f"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "crit": [
+       "-\\sqrt{2}",
+       "0",
+       "\\sqrt{2}"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(x^{4} - 2x^{2}\\right)"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f(x)"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(0) = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Le graphe coupe l'axe des y au point \\((0\\,;\\,0)\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Ordonnée à l'origine"
    },
    {
     "blocs": [],

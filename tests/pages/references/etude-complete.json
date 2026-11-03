@@ -1,7 +1,7 @@
 {
  "(e^x-1)/x": {
   "au_depart": {
-   "progression": "Étape 1 / 25",
+   "progression": "Étape 1 / 27",
    "visibles": 2
   },
   "cartes": [
@@ -89,6 +89,24 @@
     "tableaux": [],
     "texte": "3. Zéros, signe, ordonnée à l'origine",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Zéros et signe de f⟦\\frac{e^{x} - 1}{x} = 0⟧⟦\\iff e^{x} - 1 = 0⟧ (numérateur nul)⟦\\iff e^{x} = 1⟧ (on ajoute 1)⟦\\iff⟧ ⟦x = 0⟧⟦x = 0⟧ est rejeté, car ⟦0 \\notin ED⟧.Donc f n'a pas de zéro et ⟦f(x) > 0⟧ sur ED.",
+    "titre": "Zéros et signe de f"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ordonnée à l'origine⟦0 \\notin ED⟧ : le graphe ne coupe pas l'axe des y.",
+    "titre": "Ordonnée à l'origine"
    },
    {
     "classes": [
@@ -454,11 +472,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 25 / 25"
+  "progression_finale": "Étape 27 / 27"
  },
  "(x^2-1)/(x-3)": {
   "au_depart": {
-   "progression": "Étape 1 / 12",
+   "progression": "Étape 1 / 15",
    "visibles": 2
   },
   "cartes": [
@@ -528,6 +546,217 @@
     "tableaux": [],
     "texte": "3. Zéros, signe, ordonnée à l'origine",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Zéros de f⟦\\frac{x^{2} - 1}{x - 3} = 0⟧⟦\\iff x^{2} - 1 = 0⟧ (numérateur nul)⟦\\iff x^{2} = 1⟧⟦\\iff⟧ ⟦x = -1⟧ ou ⟦x = 1⟧",
+    "titre": "Zéros de f"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦3⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x^{2} - 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x - 3\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Signe de ftableau⟦x⟧⟦-\\infty⟧⟦-1⟧⟦1⟧⟦3⟧⟦+\\infty⟧⟦\\left(x^{2} - 1\\right)⟧+0−0++⟦\\left(x - 3\\right)⟧−−−−−+⟦f(x)⟧−0+0−+",
+    "titre": "Signe de ftableau"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ordonnée à l'origine⟦f(0) = \\frac{1}{3}⟧ ≈ 0,33.Le graphe coupe l'axe des y au point ⟦(0\\,;\\,\\frac{1}{3})⟧.",
+    "titre": "Ordonnée à l'origine"
    },
    {
     "classes": [
@@ -944,11 +1173,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 12 / 12"
+  "progression_finale": "Étape 15 / 15"
  },
  "3(x*ln(x))": {
   "au_depart": {
-   "progression": "Étape 1 / 18",
+   "progression": "Étape 1 / 21",
    "visibles": 2
   },
   "cartes": [
@@ -1018,6 +1247,222 @@
     "tableaux": [],
     "texte": "3. Zéros, signe, ordonnée à l'origine",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Zéros de f⟦3x\\,\\ln(x) = 0⟧⟦\\iff x\\,\\ln(x) = 0⟧ (on divise par ⟦3⟧)⟦\\iff x = 0 \\text{ ou } \\ln(x) = 0⟧ (produit nul)⟦\\iff⟧ ⟦x = 0⟧ ou ⟦x = 1⟧⟦x = 0⟧ est rejeté, car ⟦0 \\notin ED⟧.",
+    "titre": "Zéros de f"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦3⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\ln(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Signe de ftableau⟦x⟧⟦-\\infty⟧⟦0⟧⟦1⟧⟦+\\infty⟧⟦3⟧+++⟦x⟧+++⟦\\ln(x)⟧−0+⟦f(x)⟧−0+",
+    "titre": "Signe de ftableau"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ordonnée à l'origine⟦0 \\notin ED⟧ : le graphe ne coupe pas l'axe des y.",
+    "titre": "Ordonnée à l'origine"
    },
    {
     "classes": [
@@ -1382,11 +1827,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 18 / 18"
+  "progression_finale": "Étape 21 / 21"
  },
  "e^((x^2+x-2)/(6x-12))": {
   "au_depart": {
-   "progression": "Étape 1 / 19",
+   "progression": "Étape 1 / 21",
    "visibles": 2
   },
   "cartes": [
@@ -1465,6 +1910,24 @@
     "tableaux": [],
     "texte": "3. Zéros, signe, ordonnée à l'origine",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Zéros et signe de f⟦e^{g(x)} > 0⟧ pour tout ⟦x \\in ED⟧ (une exponentielle est strictement positive).Donc f n'a pas de zéro et ⟦f(x) > 0⟧ sur ED.",
+    "titre": "Zéros et signe de f"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ordonnée à l'origine⟦g(0) = \\frac{-2}{-12} = \\frac{1}{6}⟧, donc ⟦f(0) = e^{\\frac{1}{6}}⟧ ≈ 1,18.Le graphe coupe l'axe des y au point ⟦(0\\,;\\,e^{\\frac{1}{6}})⟧.",
+    "titre": "Ordonnée à l'origine"
    },
    {
     "classes": [
@@ -2008,11 +2471,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 19 / 19"
+  "progression_finale": "Étape 21 / 21"
  },
  "e^(1/x)": {
   "au_depart": {
-   "progression": "Étape 1 / 18",
+   "progression": "Étape 1 / 20",
    "visibles": 2
   },
   "cartes": [
@@ -2100,6 +2563,24 @@
     "tableaux": [],
     "texte": "3. Zéros, signe, ordonnée à l'origine",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Zéros et signe de f⟦e^{\\frac{1}{x}} > 0⟧ pour tout ⟦x \\in ED⟧ (une exponentielle est strictement positive).Donc f n'a pas de zéro et ⟦f(x) > 0⟧ sur ED.",
+    "titre": "Zéros et signe de f"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ordonnée à l'origine⟦0 \\notin ED⟧ : le graphe ne coupe pas l'axe des y.",
+    "titre": "Ordonnée à l'origine"
    },
    {
     "classes": [
@@ -2432,11 +2913,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 18 / 18"
+  "progression_finale": "Étape 20 / 20"
  },
  "e^(2/(x^2-4))": {
   "au_depart": {
-   "progression": "Étape 1 / 21",
+   "progression": "Étape 1 / 23",
    "visibles": 2
   },
   "cartes": [
@@ -2515,6 +2996,24 @@
     "tableaux": [],
     "texte": "3. Zéros, signe, ordonnée à l'origine",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Zéros et signe de f⟦e^{\\frac{2}{x^{2} - 4}} > 0⟧ pour tout ⟦x \\in ED⟧ (une exponentielle est strictement positive).Donc f n'a pas de zéro et ⟦f(x) > 0⟧ sur ED.",
+    "titre": "Zéros et signe de f"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ordonnée à l'origine⟦f(0) = e^{-\\frac{1}{2}}⟧ ≈ 0,61.Le graphe coupe l'axe des y au point ⟦(0\\,;\\,e^{-\\frac{1}{2}})⟧.",
+    "titre": "Ordonnée à l'origine"
    },
    {
     "classes": [
@@ -3079,11 +3578,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 21 / 21"
+  "progression_finale": "Étape 23 / 23"
  },
  "e^(2x)": {
   "au_depart": {
-   "progression": "Étape 1 / 13",
+   "progression": "Étape 1 / 15",
    "visibles": 2
   },
   "cartes": [
@@ -3161,6 +3660,24 @@
     "tableaux": [],
     "texte": "3. Zéros, signe, ordonnée à l'origine",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Zéros et signe de f⟦e^{2x} > 0⟧ pour tout ⟦x⟧ (une exponentielle est strictement positive).Donc f n'a pas de zéro et ⟦f(x) > 0⟧ sur ED.",
+    "titre": "Zéros et signe de f"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ordonnée à l'origine⟦f(0) = 1⟧.Le graphe coupe l'axe des y au point ⟦(0\\,;\\,1)⟧.",
+    "titre": "Ordonnée à l'origine"
    },
    {
     "classes": [
@@ -3384,7 +3901,7 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 13 / 13"
+  "progression_finale": "Étape 15 / 15"
  },
  "ln(": {
   "au_depart": {
@@ -3407,7 +3924,7 @@
  },
  "ln(x)/x": {
   "au_depart": {
-   "progression": "Étape 1 / 17",
+   "progression": "Étape 1 / 20",
    "visibles": 2
   },
   "cartes": [
@@ -3487,6 +4004,185 @@
     "tableaux": [],
     "texte": "3. Zéros, signe, ordonnée à l'origine",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Zéros de f⟦\\frac{\\ln(x)}{x} = 0⟧⟦\\iff \\ln(x) = 0⟧ (numérateur nul)⟦\\iff⟧ ⟦x = 1⟧",
+    "titre": "Zéros de f"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\ln(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Signe de ftableau⟦x⟧⟦-\\infty⟧⟦0⟧⟦1⟧⟦+\\infty⟧⟦\\ln(x)⟧−0+⟦x⟧+++⟦f(x)⟧−0+",
+    "titre": "Signe de ftableau"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ordonnée à l'origine⟦0 \\notin ED⟧ : le graphe ne coupe pas l'axe des y.",
+    "titre": "Ordonnée à l'origine"
    },
    {
     "classes": [
@@ -3834,11 +4530,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 17 / 17"
+  "progression_finale": "Étape 20 / 20"
  },
  "sqrt(x^2-4)": {
   "au_depart": {
-   "progression": "Étape 1 / 11",
+   "progression": "Étape 1 / 14",
    "visibles": 2
   },
   "cartes": [
@@ -4068,6 +4764,148 @@
     "tableaux": [],
     "texte": "3. Zéros, signe, ordonnée à l'origine",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Zéros de f⟦\\sqrt{x^{2} - 4} = 0 \\iff x^{2} - 4 = 0⟧On résout ⟦x^{2} - 4 = 0⟧.⟦x^{2} - 4 = (x - 2)(x + 2)⟧ : zéros ⟦-2⟧ et ⟦2⟧.Solutions : ⟦x = -2⟧, ⟦x = 2⟧.Donc ⟦x = -2⟧ ou ⟦x = 2⟧.",
+    "titre": "Zéros de f"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\sqrt{x^{2} - 4}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Signe de ftableau⟦x⟧⟦-\\infty⟧⟦-2⟧⟦2⟧⟦+\\infty⟧⟦\\sqrt{x^{2} - 4}⟧+00+⟦f(x)⟧+00+",
+    "titre": "Signe de ftableau"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ordonnée à l'origine⟦0 \\notin ED⟧ : le graphe ne coupe pas l'axe des y.",
+    "titre": "Ordonnée à l'origine"
    },
    {
     "classes": [
@@ -4362,11 +5200,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 11 / 11"
+  "progression_finale": "Étape 14 / 14"
  },
  "x*ln(x)": {
   "au_depart": {
-   "progression": "Étape 1 / 18",
+   "progression": "Étape 1 / 21",
    "visibles": 2
   },
   "cartes": [
@@ -4436,6 +5274,185 @@
     "tableaux": [],
     "texte": "3. Zéros, signe, ordonnée à l'origine",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Zéros de f⟦x\\,\\ln(x) = 0⟧⟦\\iff x = 0 \\text{ ou } \\ln(x) = 0⟧ (produit nul)⟦\\iff⟧ ⟦x = 0⟧ ou ⟦x = 1⟧⟦x = 0⟧ est rejeté, car ⟦0 \\notin ED⟧.",
+    "titre": "Zéros de f"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\ln(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "hors",
+         ""
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Signe de ftableau⟦x⟧⟦-\\infty⟧⟦0⟧⟦1⟧⟦+\\infty⟧⟦x⟧+++⟦\\ln(x)⟧−0+⟦f(x)⟧−0+",
+    "titre": "Signe de ftableau"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ordonnée à l'origine⟦0 \\notin ED⟧ : le graphe ne coupe pas l'axe des y.",
+    "titre": "Ordonnée à l'origine"
    },
    {
     "classes": [
@@ -4763,11 +5780,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 18 / 18"
+  "progression_finale": "Étape 21 / 21"
  },
  "x/(x^2+1)": {
   "au_depart": {
-   "progression": "Étape 1 / 11",
+   "progression": "Étape 1 / 14",
    "visibles": 2
   },
   "cartes": [
@@ -4846,6 +5863,153 @@
     "tableaux": [],
     "texte": "3. Zéros, signe, ordonnée à l'origine",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Zéros de f⟦\\frac{x}{x^{2} + 1} = 0⟧⟦\\iff⟧ ⟦x = 0⟧ (numérateur nul)",
+    "titre": "Zéros de f"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x^{2} + 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Signe de ftableau⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦x⟧−0+⟦\\left(x^{2} + 1\\right)⟧+++⟦f(x)⟧−0+",
+    "titre": "Signe de ftableau"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ordonnée à l'origine⟦f(0) = 0⟧.Le graphe coupe l'axe des y au point ⟦(0\\,;\\,0)⟧.",
+    "titre": "Ordonnée à l'origine"
    },
    {
     "classes": [
@@ -5214,11 +6378,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 11 / 11"
+  "progression_finale": "Étape 14 / 14"
  },
  "x/sqrt(x^2)": {
   "au_depart": {
-   "progression": "Étape 1 / 12",
+   "progression": "Étape 1 / 15",
    "visibles": 2
   },
   "cartes": [
@@ -5358,6 +6522,153 @@
     "tableaux": [],
     "texte": "3. Zéros, signe, ordonnée à l'origine",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Zéros de f⟦\\frac{x}{\\sqrt{x^{2}}} = 0⟧⟦\\iff⟧ ⟦x = 0⟧ (numérateur nul)⟦x = 0⟧ est rejeté, car ⟦0 \\notin ED⟧.Donc f n'a pas de zéro.",
+    "titre": "Zéros de f"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\sqrt{x^{2}}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Signe de ftableau⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦x⟧−+⟦\\sqrt{x^{2}}⟧++⟦f(x)⟧−+",
+    "titre": "Signe de ftableau"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ordonnée à l'origine⟦0 \\notin ED⟧ : le graphe ne coupe pas l'axe des y.",
+    "titre": "Ordonnée à l'origine"
    },
    {
     "classes": [
@@ -5586,11 +6897,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 12 / 12"
+  "progression_finale": "Étape 15 / 15"
  },
  "x^(2/3)": {
   "au_depart": {
-   "progression": "Étape 1 / 10",
+   "progression": "Étape 1 / 13",
    "visibles": 2
   },
   "cartes": [
@@ -5659,6 +6970,124 @@
     "tableaux": [],
     "texte": "3. Zéros, signe, ordonnée à l'origine",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Zéros de f⟦\\sqrt[3]{x^{2}} = 0⟧⟦\\iff \\left(\\sqrt[3]{x}\\right)^{2} = 0⟧⟦\\iff \\sqrt[3]{x} = 0⟧⟦\\iff⟧ ⟦x = 0⟧",
+    "titre": "Zéros de f"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(\\sqrt[3]{x}\\right)^{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Signe de ftableau⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦\\left(\\sqrt[3]{x}\\right)^{2}⟧+0+⟦f(x)⟧+0+",
+    "titre": "Signe de ftableau"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ordonnée à l'origine⟦f(0) = 0⟧.Le graphe coupe l'axe des y au point ⟦(0\\,;\\,0)⟧.",
+    "titre": "Ordonnée à l'origine"
    },
    {
     "classes": [
@@ -5904,11 +7333,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 10 / 10"
+  "progression_finale": "Étape 13 / 13"
  },
  "x^2*e^(-x)": {
   "au_depart": {
-   "progression": "Étape 1 / 19",
+   "progression": "Étape 1 / 22",
    "visibles": 2
   },
   "cartes": [
@@ -5986,6 +7415,153 @@
     "tableaux": [],
     "texte": "3. Zéros, signe, ordonnée à l'origine",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Zéros de f⟦e^{-x} > 0⟧ pour tout ⟦x⟧ (une exponentielle est strictement positive) ; il ne s'annule jamais.⟦x^{2}\\,e^{-x} = 0⟧⟦\\iff x^{2} = 0⟧ (car ⟦e^{-x} > 0⟧)⟦\\iff⟧ ⟦x = 0⟧",
+    "titre": "Zéros de f"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x^{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦e^{-x}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Signe de ftableau⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦x^{2}⟧+0+⟦e^{-x}⟧+++⟦f(x)⟧+0+",
+    "titre": "Signe de ftableau"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ordonnée à l'origine⟦f(0) = 0⟧.Le graphe coupe l'axe des y au point ⟦(0\\,;\\,0)⟧.",
+    "titre": "Ordonnée à l'origine"
    },
    {
     "classes": [
@@ -6425,11 +8001,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 19 / 19"
+  "progression_finale": "Étape 22 / 22"
  },
  "x^2-4x+3": {
   "au_depart": {
-   "progression": "Étape 1 / 11",
+   "progression": "Étape 1 / 14",
    "visibles": 2
   },
   "cartes": [
@@ -6507,6 +8083,148 @@
     "tableaux": [],
     "texte": "3. Zéros, signe, ordonnée à l'origine",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Zéros de f⟦x^{2} - 4x + 3 = 0⟧⟦\\iff (x - 1)(x - 3) = 0⟧ (Somme-Produit)⟦\\iff x - 1 = 0 \\text{ ou } x - 3 = 0⟧ (produit nul)⟦\\iff⟧ ⟦x = 1⟧ ou ⟦x = 3⟧",
+    "titre": "Zéros de f"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦3⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x^{2} - 4x + 3\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Signe de ftableau⟦x⟧⟦-\\infty⟧⟦1⟧⟦3⟧⟦+\\infty⟧⟦\\left(x^{2} - 4x + 3\\right)⟧+0−0+⟦f(x)⟧+0−0+",
+    "titre": "Signe de ftableau"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ordonnée à l'origine⟦f(0) = 3⟧.Le graphe coupe l'axe des y au point ⟦(0\\,;\\,3)⟧.",
+    "titre": "Ordonnée à l'origine"
    },
    {
     "classes": [
@@ -6760,11 +8478,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 11 / 11"
+  "progression_finale": "Étape 14 / 14"
  },
  "x^3-3x": {
   "au_depart": {
-   "progression": "Étape 1 / 10",
+   "progression": "Étape 1 / 13",
    "visibles": 2
   },
   "cartes": [
@@ -6833,6 +8551,172 @@
     "tableaux": [],
     "texte": "3. Zéros, signe, ordonnée à l'origine",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Zéros de f⟦x^{3} - 3x = 0⟧⟦\\iff x(x^{2} - 3) = 0⟧ (mise en évidence)⟦\\iff x = 0 \\text{ ou } x^{2} - 3 = 0⟧ (produit nul)⟦\\iff x = 0 \\text{ ou } x^{2} = 3⟧⟦\\iff⟧ ⟦x = -\\sqrt{3}⟧ ≈ −1,73 ou ⟦x = 0⟧ ou ⟦x = \\sqrt{3}⟧ ≈ 1,73",
+    "titre": "Zéros de f"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-\\sqrt{3}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\sqrt{3}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x^{3} - 3x\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Signe de ftableau⟦x⟧⟦-\\infty⟧⟦-\\sqrt{3}⟧⟦0⟧⟦\\sqrt{3}⟧⟦+\\infty⟧⟦\\left(x^{3} - 3x\\right)⟧−0+0−0+⟦f(x)⟧−0+0−0+",
+    "titre": "Signe de ftableau"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ordonnée à l'origine⟦f(0) = 0⟧.Le graphe coupe l'axe des y au point ⟦(0\\,;\\,0)⟧.",
+    "titre": "Ordonnée à l'origine"
    },
    {
     "classes": [
@@ -7164,11 +9048,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 10 / 10"
+  "progression_finale": "Étape 13 / 13"
  },
  "x^4-2x^2": {
   "au_depart": {
-   "progression": "Étape 1 / 10",
+   "progression": "Étape 1 / 13",
    "visibles": 2
   },
   "cartes": [
@@ -7237,6 +9121,172 @@
     "tableaux": [],
     "texte": "3. Zéros, signe, ordonnée à l'origine",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Zéros de f⟦x^{4} - 2x^{2} = 0⟧⟦\\iff x^{2}(x^{2} - 2) = 0⟧ (mise en évidence)⟦\\iff x = 0 \\text{ ou } x^{2} - 2 = 0⟧ (produit nul)⟦\\iff x = 0 \\text{ ou } x^{2} = 2⟧⟦\\iff⟧ ⟦x = -\\sqrt{2}⟧ ≈ −1,41 ou ⟦x = 0⟧ ou ⟦x = \\sqrt{2}⟧ ≈ 1,41",
+    "titre": "Zéros de f"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-\\sqrt{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\sqrt{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x^{4} - 2x^{2}\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Signe de ftableau⟦x⟧⟦-\\infty⟧⟦-\\sqrt{2}⟧⟦0⟧⟦\\sqrt{2}⟧⟦+\\infty⟧⟦\\left(x^{4} - 2x^{2}\\right)⟧+0−0−0+⟦f(x)⟧+0−0−0+",
+    "titre": "Signe de ftableau"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ordonnée à l'origine⟦f(0) = 0⟧.Le graphe coupe l'axe des y au point ⟦(0\\,;\\,0)⟧.",
+    "titre": "Ordonnée à l'origine"
    },
    {
     "classes": [
@@ -7662,6 +9712,6 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 10 / 10"
+  "progression_finale": "Étape 13 / 13"
  }
 }

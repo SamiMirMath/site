@@ -18,17 +18,27 @@ Partie 2. Parité (D4). Toute affirmation est confirmée deux fois (principe 0.2
   écrite que si la parité se lit sur l'arbre (puissances de x, sommes, produits, quotients, exp / ln / √ d'une expression paire) ;
 - sinon : « pas impaire » par f(0) ≠ 0 (ou un contre-exemple f(−a) ≠ −f(a)), « pas paire » par un contre-exemple f(−a) ≠ f(a), valeurs
   exactes puis approchées, les deux valeurs arrondies affichées différentes.
+
+Partie 3. Zéros, signe, ordonnée à l'origine (D5), mêmes garde-fous (SymPy et sonde mpmath ; au moindre doute, un message clair) :
+- un facteur e^{…} : « e^{…} > 0 pour tout x (une exponentielle est strictement positive) ; il ne s'annule jamais » ;
+- f(x) = 0 résolue en chaîne, une étape par ligne, la propriété nommée (« car e^{−2x} > 0 », « produit nul », « mise en évidence »,
+  « Somme-Produit ») ; les zéros calculés par le moteur de l'outil ED (`preimage`), valeur exacte puis approchée ; un zéro hors de l'ED est
+  rejeté ; une forme que la chaîne ne couvre pas garde les lignes de l'outil ED ; zéros non exacts ou non calculés : message, pas de tableau ;
+- sans zéro et de signe constant : « Donc f n'a pas de zéro et f(x) > 0 sur ED » ; sinon le tableau de signes de f, construit par la
+  machinerie R7 du tableau de f′ (`derivee_variations.tableau_signes`) ;
+- f(0) exact puis approché, et le point (0 ; f(0)) ; « 0 ∉ ED : le graphe ne coupe pas l'axe des y ».
 """
+import re
 from decimal import Decimal, ROUND_HALF_UP, localcontext
 from fractions import Fraction as F
 from math import gcd, isqrt
 
-from noyau import (X, E, Nb, Neg, Fn, Op, tex, ptex, qtex, decomposer, deg, pn, pmul, evaluer, conditions, valeur_constante, sans_x,
-                   fusion, en_sympy_reel, charger_sympy, SYMPY, NonPrisEnCharge, ErreurSaisie)
+from noyau import (X, E, Nb, Neg, Fn, Op, Num, tex, ptex, qtex, decomposer, deg, pn, pmul, evaluer, conditions, valeur_constante,
+                   sans_x, fusion, points, proche, preimage, aplatir, en_sympy_reel, charger_sympy, SYMPY, NonPrisEnCharge, ErreurSaisie)
 import sortie as so
 import resoudre_ed
 
-__all__ = ["cartes_domaine", "cartes_parite", "mise_en_forme", "resolution_denominateur"]
+__all__ = ["cartes_domaine", "cartes_parite", "cartes_zeros_signe", "mise_en_forme", "resolution_denominateur"]
 
 AUCUNE_CONDITION = "Ni logarithme, ni dénominateur, ni racine : aucune condition."     # phrase de l'outil ED (en-tête)
 POINTS_DE_CONTROLE = (-2.7, -0.6, 0.35, 1.45, 3.2)                                    # sondes numériques (garde-fou)
@@ -72,15 +82,12 @@ def _facteur_tex(r):
     return "(" + ptex([-r, F(1)], "x") + ")"
 
 
-def factorisation(P):
-    """Factorisation d'un polynôme à coefficients entiers, coefficient dominant positif, avec les méthodes du cours :
-    mise en évidence de c·xᵏ (c = pgcd des coefficients), puis Somme-Produit pour un trinôme unitaire à deux racines entières
-    distinctes (facteurs rangés par racine croissante : (x + 2)(x − 1)).
-    Résultat : ([(écriture, méthode)], écriture finale, valeur) : les lignes de la chaîne (vide si rien ne se factorise) et la valeur de
-    l'écriture finale calculée à partir de ses facteurs (fonction float → float, pour la sonde numérique) ; None quand rien ne se factorise."""
+def _factoriser(P):
+    """P = c·xᵏ·∏ facteurs (polynômes) par les méthodes du cours, avec les lignes de la chaîne : (lignes, c, k, facteurs), ou None
+    quand rien ne se factorise (ou si le garde-fou exact refuse : le produit développé doit redonner P)."""
     P = pn(P)
     if deg(P) < 1 or P[-1] <= 0:
-        return [], ptex(P, "x"), None
+        return None
     k = next(i for i, a in enumerate(P) if a != 0)
     c = 0
     for a in P:
@@ -101,12 +108,26 @@ def factorisation(P):
                 facteurs = [[-r1, F(1)], [-r2, F(1)]]
                 lignes.append((devant + _facteur_tex(r1) + _facteur_tex(r2), "Somme-Produit"))
     if not lignes:
-        return [], ptex(P, "x"), None
+        return None
     produit = [F(0)] * k + [c]                      # garde-fou exact : le produit développé redonne P
     for h in facteurs:
         produit = pmul(produit, h)
     if pn(produit) != P:
+        return None
+    return lignes, c, k, facteurs
+
+
+def factorisation(P):
+    """Factorisation d'un polynôme à coefficients entiers, coefficient dominant positif, avec les méthodes du cours :
+    mise en évidence de c·xᵏ (c = pgcd des coefficients), puis Somme-Produit pour un trinôme unitaire à deux racines entières
+    distinctes (facteurs rangés par racine croissante : (x + 2)(x − 1)).
+    Résultat : ([(écriture, méthode)], écriture finale, valeur) : les lignes de la chaîne (vide si rien ne se factorise) et la valeur de
+    l'écriture finale calculée à partir de ses facteurs (fonction float → float, pour la sonde numérique) ; None quand rien ne se factorise."""
+    P = pn(P)
+    r = _factoriser(P)
+    if r is None:
         return [], ptex(P, "x"), None
+    lignes, c, k, facteurs = r
     flottants = [[float(a) for a in h] for h in facteurs]
 
     def valeur(x):
@@ -166,6 +187,12 @@ def resolution_denominateur(A):
     P = polynome_ecrit(A)
     if P is None or P == [F(0), F(1)]:              # x = 0 : la condition « x ≠ 0 » est déjà la solution
         return None
+    return resolution_polynome(P)
+
+
+def resolution_polynome(P):
+    """Chaîne courte de « P = 0 » pour un polynôme P (coefficients, du degré 0 au plus haut) affine ou de la forme ax² + c (c/a < 0) :
+    (membres de la chaîne, [(écriture de la racine, valeur flottante)]), ou None."""
     membres = [ptex(P, "x") + " = 0"]
     if deg(P) == 1:
         b, a = P
@@ -321,6 +348,8 @@ def plier(n):
     elif n.op == "^":
         if vb == 1:
             return a
+        if va == 1 or (va == 0 and vb is not None and vb > 0):            # 1^p = 1, 0^p = 0 (p > 0) : ∛(0²) = 0
+            return Nb(va)
         if isinstance(a, E):
             return Fn("exp", b)
     m = Op(n.op, a, b)
@@ -609,13 +638,10 @@ def ecrire_decimal(d):
     return format(d if d != 0 else Decimal(0), "f").replace(".", ",").replace("-", "−")
 
 
-def valeur_en(f, fe, a, sp, mpmath):
-    """f(a) pour a rationnel de l'ED : {tex (écriture exacte), entier (bool), arrondi (Decimal), approx (texte ou None)}, ou None si
-    un garde-fou refuse (écriture trop longue, désaccord entre l'écriture, la valeur SymPy et la sonde, valeur non affichable)."""
+def valeur_verifiee(f, fe, a, sp, mpmath):
+    """f(a) pour a rationnel de l'ED : (écriture exacte tex, valeur SymPy, Decimal à 30 chiffres), ou None si un garde-fou refuse
+    (valeur non réelle ou infinie, désaccord entre l'écriture, la valeur SymPy et la sonde)."""
     T = plier(substituer(f, nombre(a)))
-    ecrit = tex(T)
-    if len(ecrit) > LONGUEUR_MAX:
-        return None
     V = fe.subs(SYMPY["x"], sp.Rational(a.numerator, a.denominator))
     if V.has(sp.zoo, sp.nan, sp.oo, -sp.oo) or V.is_real is not True:
         return None
@@ -633,6 +659,18 @@ def valeur_en(f, fe, a, sp, mpmath):
             dec = Decimal(int(V.p)) / Decimal(int(V.q))
         else:
             dec = Decimal(mpmath.nstr(reference, CHIFFRES, min_fixed=-mp.inf, max_fixed=mp.inf))
+    return tex(T), V, dec
+
+
+def valeur_en(f, fe, a, sp, mpmath):
+    """f(a) pour a rationnel de l'ED : {tex (écriture exacte), entier (bool), arrondi (Decimal), approx (texte ou None)}, ou None si
+    un garde-fou refuse (écriture trop longue, désaccord entre l'écriture, la valeur SymPy et la sonde, valeur non affichable)."""
+    if len(tex(plier(substituer(f, nombre(a))))) > LONGUEUR_MAX:
+        return None
+    v = valeur_verifiee(f, fe, a, sp, mpmath)
+    if v is None:
+        return None
+    ecrit, V, dec = v
     entier = bool(V.is_Integer)
     r = (dec if abs(dec) < 1000 else None) if entier else arrondi(dec)
     if r is None:
@@ -737,3 +775,440 @@ def cartes_parite(analyse):
             return _cartes_parite(f, fusion(ED), sp, mpmath)
     except Exception:                       # Doute, ou SymPy / mpmath en échec : rien plutôt qu'une affirmation non confirmée
         return _message(DOUTE)
+
+
+# ---------------------------------------------------------------------------------------------------------------------------
+# Partie 3. Zéros, signe, ordonnée à l'origine (D5)
+# ---------------------------------------------------------------------------------------------------------------------------
+DOUTE_SIGNE = "Le signe de f n'a pas pu être établi avec certitude : l'outil ne conclut pas."
+ZEROS_NON_EXACTS = "Les zéros de f ne se calculent pas exactement : l'outil ne dresse pas le tableau de signes de f."
+ZEROS_NON_TRAITES = "Les zéros de f n'ont pas pu être calculés par l'outil : le signe de f n'est pas traité."
+DOUTE_F0 = "L'ordonnée à l'origine n'a pas pu être établie avec certitude : l'outil ne conclut pas."
+NUMERATEUR_CONSTANT = "Le numérateur de f est une constante non nulle : f n'a pas de zéro."
+PAS_DE_ZERO = "Donc f n'a pas de zéro."
+NE_COUPE_PAS = r"\(0 \notin ED\) : le graphe ne coupe pas l'axe des y."
+SONDES_RELATIVES = ("0.001", "0.01", "0.1", "0.3", "0.5", "0.7", "0.9", "0.99", "0.999")    # sonde du signe sur un intervalle borné
+SONDES_INFINIES = ("0.001", "0.01", "0.1", "1", "10", "100")                               # écarts à la borne d'un intervalle infini
+NUL = "1e-20"                                                                               # |f(z)| à la sonde : zéro
+
+
+class NonTraite(Exception):
+    """Les zéros de f ne sont pas calculés par l'outil (message : ZEROS_NON_TRAITES ou ZEROS_NON_EXACTS)."""
+    def __init__(self, message):
+        super().__init__(message)
+        self.message = message
+
+
+def est_exponentielle(h):
+    """e^{u} (u non constant) : strictement positive pour tout x où u est définie."""
+    return (isinstance(h, Fn) and h.nom == "exp" and not sans_x(h.a)) or \
+        (isinstance(h, Op) and h.op == "^" and isinstance(h.a, E) and not sans_x(h.b))
+
+
+def _produit(facteurs):
+    """L'arbre de ∏ hᵏ (k > 0)."""
+    out = None
+    for h, k in facteurs:
+        t = h if k == 1 else Op("^", h, Nb(k))
+        out = t if out is None else Op("*", out, t)
+    return out
+
+
+# ---------- zéros d'un facteur : valeurs (outil ED) et chaîne d'équivalences ----------
+def zeros_facteur(h):
+    """Zéros de h (h = 0) par le moteur de l'outil ED : ([Num] exacts, isolés, croissants, lignes de l'outil ED). NonTraite si le moteur
+    ne résout pas, si un zéro n'est connu qu'en valeur approchée ou si h s'annule sur un intervalle."""
+    items = []
+    try:
+        Z = preimage(h, points([Num.rat(0)]), items)
+    except Exception:
+        raise NonTraite(ZEROS_NON_TRAITES)
+    zeros = []
+    for iv in fusion(Z):
+        if iv.lo is None or iv.hi is None or not (iv.lf and iv.hf and proche(iv.lo.val, iv.hi.val)):
+            raise NonTraite(ZEROS_NON_TRAITES)
+        if iv.lo.approx:
+            raise NonTraite(ZEROS_NON_EXACTS)
+        zeros.append(iv.lo)
+    return zeros, items
+
+
+def _etapes_items(h, items):
+    """Chaîne lue dans les lignes de l'outil ED quand chacune est « A ⇔ B (propriété) » et qu'elles s'enchaînent
+    (6 − eˣ = 0 ⇔ eˣ = 6 ⇔ x = ln(6)) : [(alternatives, propriété)] ; None sinon."""
+    etapes = []
+    for it in items:
+        m = re.fullmatch(r"\\\((.+?) \\iff (.+?)\\\)(?: \((.+)\))?\.?", it.get("html", ""))
+        if not m:
+            return None
+        a, b, p = m.groups()
+        if not etapes:
+            if a != tex(h) + " = 0":
+                return None
+            etapes.append(([a], None))
+        elif etapes[-1][0] != [a]:
+            return None
+        etapes.append((b.split(r" \text{ ou } "), p))
+    return etapes or None
+
+
+def _en_parallele(chaines, propriete):
+    """Chaînes de plusieurs facteurs menées ensemble : « h₁ = 0 ou h₂ = 0 (produit nul) ⇔ … », chacune avance d'un pas par ligne."""
+    etapes = [([a for ch in chaines for a in ch[0][0]], propriete)]
+    for j in range(1, max(len(ch) for ch in chaines)):
+        alternatives, proprietes = [], []
+        for ch in chaines:
+            alt, p = ch[min(j, len(ch) - 1)]
+            alternatives += alt
+            if j < len(ch) and p and p not in proprietes:
+                proprietes.append(p)
+        etapes.append((alternatives, " ; ".join(proprietes) or None))
+    return etapes
+
+
+def etapes_polynome(P):
+    """Chaîne de « P = 0 » (P écrit développé) : x = 0 ; affine ou ax² + c en chaîne courte (partie 1) ; sinon mise en évidence et
+    Somme-Produit (carte « Mise en forme »), produit nul, puis chaque facteur de même. None si P ne se résout pas ainsi."""
+    P = pn(P)
+    if P == [F(0), F(1)]:
+        return [(["x = 0"], None)]
+    res = resolution_polynome(P) if deg(P) in (1, 2) else None
+    if res is not None:
+        membres = res[0]
+        return [([membres[0]], None)] + [(m.split(r" \text{ ou } "), None) for m in membres[1:]]
+    r = _factoriser(P)
+    if r is None:
+        return None
+    lignes, _, k, facteurs = r
+    etapes = [([ptex(P, "x") + " = 0"], None)] + [([e + " = 0"], methode) for e, methode in lignes]
+    chaines = ([[(["x = 0"], None)]] if k > 0 else []) + [etapes_polynome(h) for h in facteurs]
+    if any(ch is None for ch in chaines):
+        return None
+    if len(chaines) == 1:
+        return etapes + chaines[0][1:]
+    return etapes + _en_parallele(chaines, "produit nul")
+
+
+def etapes_facteur(h, items):
+    """Chaîne de « h = 0 » : polynôme (etapes_polynome) ou lignes de l'outil ED enchaînées ; None sinon (l'outil ED rédige)."""
+    if isinstance(h, X):
+        return [(["x = 0"], None)]
+    P = polynome_ecrit(h)
+    if P is not None:
+        return etapes_polynome(P)
+    return _etapes_items(h, items)
+
+
+# ---------- valeurs exactes (SymPy) et approchées ----------
+def _sympy_num(p, sp):
+    if p.approx or p.py is None:
+        raise Doute()
+    return _sympy_de(p, sp)
+
+
+def _signe_sp(v):
+    if v.is_zero:
+        return 0
+    if v.is_positive:
+        return 1
+    if v.is_negative:
+        return -1
+    raise Doute()
+
+
+def appartient(ivs, v, sp):
+    """v (nombre SymPy réel) ∈ ED, décidé exactement ; Doute si une comparaison n'est pas tranchée."""
+    for iv in ivs:
+        if iv.lo is not None:
+            s = _signe_sp(sp.simplify(v - _sympy_num(iv.lo, sp)))
+            if s < 0 or (s == 0 and not iv.lf):
+                continue
+        if iv.hi is not None:
+            s = _signe_sp(sp.simplify(v - _sympy_num(iv.hi, sp)))
+            if s > 0 or (s == 0 and not iv.hf):
+                continue
+        return True
+    return False
+
+
+def approchee(v, sp):
+    """Valeur approchée affichée d'un nombre SymPy (texte, à écrire après « ≈ »), None pour un entier exact (écrit tel quel) ou une
+    valeur sans écriture convenue : decisions.md §2 entre 10⁻³ et 1000 ; R13 sous 10⁻³ et dès 10⁶ (3,162 × 10⁻⁵, notation
+    scientifique, question 1 de suivi.md) ; entre 1000 et 10⁶, aucune (séparateur des milliers pas encore tranché pour l'EC)."""
+    if v.is_Integer:
+        return None
+    with localcontext() as ctx:
+        ctx.prec = 50
+        d = Decimal(str(sp.N(v, CHIFFRES)))
+        if Decimal("0.001") <= abs(d) < 1000:
+            return ecrire_decimal(arrondi(d))
+        if Decimal(1000) <= abs(d) < Decimal(10) ** 6:
+            return None
+        e = d.adjusted()
+        m = (d.scaleb(-e)).quantize(Decimal("0.001"), rounding=ROUND_HALF_UP)
+        if abs(m) >= 10:
+            e += 1
+            m = (d.scaleb(-e)).quantize(Decimal("0.001"), rounding=ROUND_HALF_UP)
+    t = format(m, "f")
+    t = t[:-4] if t.endswith(".000") else t
+    return r"\(" + t.replace(".", "{,}") + r" \times 10^{" + str(e) + r"}\)"
+
+
+def _avec_approx(texte, v, sp):
+    a = approchee(v, sp)
+    return texte if a is None else f"{texte} ≈ {a}"
+
+
+# ---------- confirmation du signe (principe 0.2) ----------
+def _rationnel_entre(a, b):
+    """Un rationnel simple strictement entre a et b (flottants, a < b, ±∞ permis)."""
+    if a == -float("inf") and b == float("inf"):
+        return F(0)
+    if a == -float("inf"):
+        return F(int(b) - 1) if int(b) - 1 < b else F(int(b) - 2)
+    if b == float("inf"):
+        return F(int(a) + 1) if int(a) + 1 > a else F(int(a) + 2)
+    for den in (1, 2, 4, 10, 100, 1000, 10 ** 6):
+        q = F(round((a + b) / 2 * den), den)
+        if a < q < b:
+            return q
+    return F((a + b) / 2)
+
+
+def _sondes(a, b, mp):
+    """Points de la sonde dans ]a ; b[ (mpf ; a ou b infinis permis)."""
+    if a is None and b is None:
+        return [s * mp.mpf(t) for t in SONDES_INFINIES for s in (-1, 1)] + [mp.mpf(0)]
+    if a is None:
+        return [b - mp.mpf(t) for t in SONDES_INFINIES]
+    if b is None:
+        return [a + mp.mpf(t) for t in SONDES_INFINIES]
+    return [a + (b - a) * mp.mpf(t) for t in SONDES_RELATIVES]
+
+
+def confirmer_signe(f, fe, crit, cellules, zeros, ivs, sp, mpmath):
+    """Garde-fous de la ligne f(x) du tableau (principe 0.2) ; Doute au moindre désaccord :
+    - SymPy : les zéros de f sur l'ED (solveset) sont exactement `zeros` ; f(z) = 0 exactement ; sur chaque intervalle de l'ED, le
+      signe exact de f en un point rationnel est celui de la case (f est continue sur chaque intervalle de son ED : entre deux zéros
+      ou valeurs interdites consécutifs, son signe ne change pas) ; chaque point critique est dans l'ED ou non, exactement ;
+    - sonde mpmath (30 chiffres) : f(z) ≈ 0 ; le signe de la case en 9 points de chaque intervalle ; f non définie hors de l'ED."""
+    mp, x = mpmath.mp, SYMPY["x"]
+    zs = [_sympy_num(z, sp) for z in zeros]
+    for z, zsp in zip(zeros, zs):
+        if not (fe.subs(x, zsp) == 0 or sp.simplify(fe.subs(x, zsp)) == 0):
+            raise Doute()
+        v = valeur_mp(f, mp.mpf(str(sp.N(zsp, CHIFFRES + 5))))
+        if v is None or abs(v) > mp.mpf(NUL):
+            raise Doute()
+    S = sp.solveset(fe, x, sp.S.Reals)
+    if S == sp.S.EmptySet:
+        S = []
+    elif not isinstance(S, sp.FiniteSet):
+        raise Doute()
+    dans = [s for s in S if appartient(ivs, s, sp)]
+    if len(dans) != len(zs) or any(not any(sp.simplify(s - z) == 0 for z in zs) for s in dans):
+        raise Doute()
+    bornes = [None] + [_sympy_num(p, sp) for p in crit] + [None]
+    valeurs = [None] + [p.val for p in crit] + [None]
+    for i in range(len(crit) + 1):
+        case = cellules[2 * i]
+        a, b = valeurs[i], valeurs[i + 1]
+        milieu = _rationnel_entre(-float("inf") if a is None else a, float("inf") if b is None else b)
+        q = sp.Rational(milieu.numerator, milieu.denominator)
+        if (bornes[i] is not None and _signe_sp(sp.simplify(q - bornes[i])) <= 0) or \
+                (bornes[i + 1] is not None and _signe_sp(sp.simplify(bornes[i + 1] - q)) <= 0):
+            raise Doute()
+        if case == "x":
+            if appartient(ivs, q, sp) or valeur_mp(f, mp.mpf(milieu.numerator) / milieu.denominator) is not None:
+                raise Doute()
+            continue
+        if case not in ("+", "-") or not appartient(ivs, q, sp):
+            raise Doute()
+        s = 1 if case == "+" else -1
+        if _signe_sp(sp.simplify(fe.subs(x, q))) != s:
+            raise Doute()
+        ma = None if a is None else mp.mpf(str(sp.N(bornes[i], CHIFFRES + 5)))
+        mb = None if b is None else mp.mpf(str(sp.N(bornes[i + 1], CHIFFRES + 5)))
+        for t in _sondes(ma, mb, mp):
+            v = valeur_mp(f, t)
+            if v is None or v == 0 or (v > 0) != (s > 0):
+                raise Doute()
+    for j, (p, psp) in enumerate(zip(crit, bornes[1:-1])):
+        case = cellules[2 * j + 1]
+        est_zero = any(sp.simplify(psp - z) == 0 for z in zs)
+        if appartient(ivs, psp, sp):
+            if (case == "0") != est_zero or (not est_zero and case not in ("+", "-")):
+                raise Doute()
+            if not est_zero and _signe_sp(sp.simplify(fe.subs(x, psp))) != (1 if case == "+" else -1):
+                raise Doute()
+        elif case not in ("||", "x"):
+            raise Doute()
+
+
+# ---------- les cartes ----------
+def _ligne_chaine(i, alternatives, propriete):
+    corps = r" \text{ ou } ".join(alternatives)
+    return _ligne((r"\(" if i == 0 else r"\(\iff ") + corps + r"\)" + (f" ({propriete})" if propriete else ""))
+
+
+def _positives(expos, f, ivs, seule):
+    """« e^{…} > 0 pour tout x (une exponentielle est strictement positive) ; il ne s'annule jamais. » (D5) ; « e^{g(x)} » quand la
+    partie 1 a nommé g ; f = e^{…} seule : sans « il ne s'annule jamais » (la conclusion suit)."""
+    partout = len(ivs) == 1 and ivs[0].lo is None and ivs[0].hi is None
+    pour_tout = r"pour tout \(x\)" if partout else r"pour tout \(x \in ED\)"
+    lignes = []
+    for h in expos:
+        ecrit = "e^{g(x)}" if (h is f and mise_en_forme(f) is not None) else tex(h)
+        fin = "." if seule else " ; il ne s'annule jamais."
+        lignes.append(_ligne(rf"\({ecrit} > 0\) {pour_tout} (une exponentielle est strictement positive){fin}"))
+    return lignes
+
+
+def _zeros_et_signe(f, ivs, ED, sp, mpmath):
+    """(blocs de la carte des zéros, tableau ou None, signe constant ou None). NonTraite / Doute remontent."""
+    import derivee_variations as dv
+    c, facs = aplatir(f)
+    expos = []
+    for h, _ in facs:
+        if est_exponentielle(h) and not any(h.key() == e.key() for e in expos):
+            expos.append(h)
+    numerateur = [(h, k) for h, k in facs if k > 0 and not est_exponentielle(h)]
+    denominateur = [(h, k) for h, k in facs if k < 0 and not est_exponentielle(h)]
+    blocs = _positives(expos, f, ivs, seule=not numerateur and not denominateur and c > 0)
+    zeros, rejetes, chaines, items = [], [], [], []
+    for h, _ in numerateur:
+        zh, it = zeros_facteur(h)
+        zeros += zh
+        items.append(it)
+        chaines.append(etapes_facteur(h, it))
+    vus = []
+    for z in sorted(zeros, key=lambda p: p.val):
+        if not any(proche(z.val, w.val) for w in vus):
+            vus.append(z)
+    zeros = vus
+    fe = en_sympy_reel(f)
+    for z in zeros:
+        dedans = appartient(ivs, _sympy_num(z, sp), sp)
+        if dedans != (valeur_mp(f, mpmath.mp.mpf(str(sp.N(_sympy_num(z, sp), CHIFFRES + 5)))) is not None):
+            raise Doute()                                    # l'appartenance exacte et la sonde ne s'accordent pas
+        if not dedans:
+            rejetes.append(z)
+    finale = " ou ".join(_avec_approx(rf"\(x = {z.tex}\)", _sympy_num(z, sp), sp) for z in zeros)
+    if numerateur:
+        etapes = [([tex(f) + " = 0"], None)]
+        proprietes = (["car " + " et ".join(rf"\({tex(h)} > 0\)" for h in expos)] if expos else []) + \
+                     (["numérateur nul"] if denominateur else []) + ([rf"on divise par \({qtex(c)}\)"] if c != 1 else [])
+        N = _produit(numerateur)
+        if tex(N) + " = 0" != etapes[0][0][0]:
+            etapes.append(([tex(N) + " = 0"], " ; ".join(proprietes) or None))
+        if len(numerateur) == 1:
+            h, k = numerateur[0]
+            if k > 1:
+                etapes.append(([tex(h) + " = 0"], None))
+            tout = None if chaines[0] is None else etapes + chaines[0][1:]        # etapes finit sur « h = 0 », 1ʳᵉ étape de sa chaîne
+        else:
+            tout = None if any(ch is None for ch in chaines) else etapes + _en_parallele(chaines, "produit nul")
+        if tout is not None and sorted(set(tout[-1][0])) != sorted({rf"x = {z.tex}" for z in zeros}):
+            tout = None                                      # la chaîne ne finit pas sur les zéros calculés : rédaction de l'outil ED
+        if tout is not None:
+            blocs += [_ligne_chaine(i, alt, p) for i, (alt, p) in enumerate(tout[:-1])]
+            fin = (r"\(\iff\) " if len(tout) > 1 else "") + (finale or "")
+            blocs.append(_ligne(fin + (f" ({tout[-1][1]})" if tout[-1][1] else "")))
+        else:
+            if len(numerateur) > 1:
+                etapes.append(([tex(h) + " = 0" for h, _ in numerateur], "produit nul"))
+            if len(etapes) > 1:
+                blocs += [_ligne_chaine(i, alt, p) for i, (alt, p) in enumerate(etapes)]
+            for it in items:
+                blocs += [_ligne(b["html"]) for b in it]
+            if finale:
+                blocs.append(_ligne("Donc " + finale + "."))
+        for z in rejetes:
+            blocs.append(_ligne(rf"\(x = {z.tex}\) est rejeté, car \({z.tex} \notin ED\)."))
+    elif not expos:
+        blocs.append(_ligne(NUMERATEUR_CONSTANT))
+    zeros_ed = [z for z in zeros if z not in rejetes]
+    D = fusion(ED)
+    Z = points(zeros_ed)
+    crit, lignes, _ = dv.tableau_signes(f, Z, D, ED, "f(x)", c, facs)
+    cellules = lignes[-1]["cells"]
+    confirmer_signe(f, fe, crit, cellules, zeros_ed, ivs, sp, mpmath)
+    signes = {cellules[2 * i] for i in range(len(crit) + 1)} - {"x"}
+    constant = not zeros_ed and len(signes) == 1
+    if constant:
+        s = signes.pop()
+        blocs.append(_ligne(rf"Donc f n'a pas de zéro et \(f(x) {'>' if s == '+' else '<'} 0\) sur ED."))
+        return blocs, None
+    if not zeros_ed and blocs and blocs[-1]["html"] not in (NUMERATEUR_CONSTANT, PAS_DE_ZERO):
+        blocs.append(_ligne(PAS_DE_ZERO))
+    tableau = {"type": "tableau", "var": "x", "crit": [p.tex for p in crit], "rows": lignes}
+    return blocs, tableau
+
+
+def _ordonnee(f, ivs, sp, mpmath):
+    """Blocs de la carte « Ordonnée à l'origine » : f(0) exact puis ≈ et le point (0 ; f(0)), ou « 0 ∉ ED » ; Doute sinon.
+    Quand la partie 1 a nommé g (f = e^{g(x)}), g(0) est calculé d'abord (« g(0) = −2/(−12) = 1/6, donc f(0) = e^{1/6} »)."""
+    if not dans_ed(ivs, F(0), sp):
+        if valeur_mp(f, mpmath.mp.mpf(0)) is not None:
+            raise Doute()
+        return [_ligne(NE_COUPE_PAS)]
+    v = valeur_verifiee(f, en_sympy_reel(f), F(0), sp, mpmath)
+    if v is None:
+        raise Doute()
+    ecrit, V, _ = v
+    egalite = _avec_approx(rf"\(f(0) = {ecrit}\)", V, sp)
+    if mise_en_forme(f) is not None:
+        P, Q = polynome_ecrit(f.a.a), polynome_ecrit(f.a.b)
+        h0, b0 = P[0], Q[0]
+        g0 = h0 / b0
+        if tex(Fn("exp", nombre(g0))) == ecrit and abs(valeur_mp(f.a, mpmath.mp.mpf(0)) - mpmath.mp.mpf(g0.numerator) / g0.denominator) \
+                <= mpmath.mp.mpf(EGAL):
+            calcul = qtex(g0) if b0 == 1 else rf"\frac{{{qtex(h0)}}}{{{qtex(b0)}}} = {qtex(g0)}"
+            egalite = _avec_approx(rf"\(g(0) = {calcul}\), donc \(f(0) = {ecrit}\)", V, sp)
+    return [_ligne(egalite + "."), _ligne(rf"Le graphe coupe l'axe des y au point \((0\,;\,{ecrit})\).")]
+
+
+def cartes_zeros_signe(analyse):
+    """Les cartes de la partie 3 (D5) ; `analyse` : (résultat de l'outil ED, arbre, ED), celle de `etudier` (en cache).
+    Carte des zéros (exponentielle strictement positive, résolution en chaîne avec la propriété nommée, valeurs approchées), tableau
+    de signes de f (machinerie R7 de l'outil Dérivée) ou, sans zéro et de signe constant, la phrase « f n'a pas de zéro et f(x) > 0
+    sur ED » ; carte de l'ordonnée à l'origine. Chaque affirmation confirmée par SymPy et par la sonde (principe 0.2) ; sinon un
+    message clair, sans conclusion."""
+    _, f, ED = analyse
+    sp = charger_sympy()
+    try:
+        import mpmath
+    except ImportError:
+        mpmath = None
+    if sp is None or mpmath is None:
+        return [so.carte("Zéros et signe de f", [_ligne(DOUTE_SIGNE)]), so.carte("Ordonnée à l'origine", [_ligne(DOUTE_F0)])]
+    ivs = fusion(ED)
+    with mpmath.workdps(CHIFFRES):
+        try:
+            blocs, tableau = _zeros_et_signe(f, ivs, ED, sp, mpmath)
+            if tableau is None:
+                cartes = [so.carte("Zéros et signe de f", blocs)]
+            else:
+                cartes = [so.carte("Zéros de f", blocs), so.carte("Signe de f", [tableau], badge="tableau")]
+        except NonTraite as e:
+            cartes = [so.carte("Zéros et signe de f", _positives_seules(f, ivs) + [_ligne(e.message)])]
+        except Exception:                   # Doute, ou SymPy / mpmath en échec : rien plutôt qu'une affirmation non confirmée
+            cartes = [so.carte("Zéros et signe de f", _positives_seules(f, ivs) + [_ligne(DOUTE_SIGNE)])]
+        try:
+            ordonnee = _ordonnee(f, ivs, sp, mpmath)
+        except Exception:
+            ordonnee = [_ligne(DOUTE_F0)]
+    return cartes + [so.carte("Ordonnée à l'origine", ordonnee)]
+
+
+def _positives_seules(f, ivs):
+    """Les phrases « e^{…} > 0 » restent vraies quand la suite échoue (aucune conclusion sur f)."""
+    try:
+        _, facs = aplatir(f)
+    except Exception:
+        return []
+    expos = []
+    for h, _ in facs:
+        if est_exponentielle(h) and not any(h.key() == e.key() for e in expos):
+            expos.append(h)
+    return _positives(expos, f, ivs, seule=False)

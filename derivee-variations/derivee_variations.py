@@ -33,7 +33,7 @@ from noyau import (
     txt, NonPrisEnCharge, ErreurSaisie, analyser_complet, apercu_json, signe_facteur, complement,
 )
 
-__all__ = ["etudier", "etudier_json", "apercu_json"]
+__all__ = ["etudier", "etudier_json", "apercu_json", "tableau_signes"]
 
 
 # =====================================================================
@@ -659,6 +659,137 @@ def _ligne_zeros(fprime, c_const, facs, Z, D, items):
     return ligne + "."
 
 
+def _point_test(crit, i):
+    """Point de test de l'intervalle i (entre crit[i − 1] et crit[i])."""
+    k = len(crit)
+    if k == 0:
+        return 0.0
+    if i == 0:
+        return crit[0].val - 1
+    if i == k:
+        return crit[-1].val + 1
+    return (crit[i - 1].val + crit[i].val) / 2
+
+
+def _zone_hors(hors, j):
+    """Case j du tableau (intervalle si j pair, point critique si j impair) entièrement hors de l'ED :
+    un point critique ne l'est que si l'intervalle de chaque côté l'est."""
+    return hors[j // 2] if j % 2 == 0 else (hors[(j - 1) // 2] and hors[(j + 1) // 2])
+
+
+def tableau_signes(expr, Z, D, ED, etiquette, c_const, facs):
+    """Tableau de signes « papier » (guide de rédaction, R7) de expr = c_const · ∏ hᵏ (facs, issus d'`aplatir`) : une ligne par
+    facteur (constante à part), puis la ligne combinée `etiquette` (« f'(x) », « f(x) »). Z : zéros de expr ; D : ensemble où expr est
+    étudiée (dans l'ED de f) ; ED : ensemble de définition de f (zones hors de l'ED barrées, double barre aux valeurs interdites).
+    Résultat : (points critiques [Num], lignes, hors) ; hors[i] : l'intervalle i est hors de l'ED. Partagé par l'outil Dérivée
+    (tableau de f') et l'Étude complète (tableau de f, partie 3)."""
+    # Points critiques = zéros de expr ∪ bornes finies du domaine d'étude (valeurs interdites,
+    # asymptotes) — une seule liste, servant à la fois aux tests de signe et (outil Dérivée) aux
+    # valeurs exactes des extrema.
+    crit = []
+
+    def _ajouter(p):
+        if p is not None and not any(proche(p.val, q.val) for q in crit):
+            crit.append(p)
+
+    for iv in Z:
+        _ajouter(iv.lo)
+        _ajouter(iv.hi)
+    for iv in D:
+        _ajouter(iv.lo)
+        _ajouter(iv.hi)
+    crit.sort(key=lambda p: p.val)
+    # Une colonne n'existe que pour un point de l'ED ou une borne de l'ED : un point critique situé
+    # au milieu d'une zone hors de l'ED (0 pour ln(x²−4)) n'est pas un point d'étude.
+    ed_ivs = fusion(ED)
+
+    def _borne_de_ed(pt):
+        return any(b is not None and proche(b.val, pt.val) for iv in ed_ivs for b in (iv.lo, iv.hi))
+    crit = [pt for pt in crit if contient(ED, pt.val) or _borne_de_ed(pt)]
+    k = len(crit)
+
+    def _test(i):
+        return _point_test(crit, i)
+
+    # 3) Une ligne par facteur (expr étant gardée factorisée), puis la ligne combinée — même
+    # présentation qu'un tableau de signes « papier ».
+
+    def _cellule(v, expo, critique=False):
+        if v is None:
+            # facteur non défini : en un point critique de l'ED, expr n'y est pas définie (double barre) ;
+            # sur un intervalle, on est hors du domaine (zone barrée en aval)
+            return "||" if critique else "x"
+        if abs(v) <= 1e-9:
+            return "||" if expo < 0 else "0"
+        s = "+" if v > 0 else "-"
+        return "+" if (s == "-" and expo % 2 == 0) else s
+
+    # Intervalles hors de l'ED de f : ni signe ni flèche, case barrée (« x ») sur toutes les lignes.
+    # Chaque intervalle entre deux points critiques est entièrement dans l'ED ou entièrement dehors
+    # (les bornes de l'ED sont des points critiques).
+    hors = [not contient(ED, _test(i)) for i in range(k + 1)]
+
+    def _dans_zone_hors(j):
+        return _zone_hors(hors, j)
+
+    def _barrer(cells):
+        """Zone hors de l'ED : hachurée (« x »). Valeur interdite de f (borne hors de l'ED) : double barre
+        « || » sur toute la colonne, quelle que soit la ligne (facteurs, f', f)."""
+        out = []
+        for j, c in enumerate(cells):
+            if _dans_zone_hors(j):
+                out.append("x")
+            elif j % 2 == 1 and not contient(ED, crit[j // 2].val):
+                out.append("||")
+            else:
+                out.append(c)
+        return out
+
+    lignes = []
+    if c_const < 0:
+        lignes.append({"label": qtex(c_const), "cells": _barrer(["-"] * (2 * k + 1))})
+    elif c_const != 1:
+        lignes.append({"label": qtex(c_const), "cells": _barrer(["+"] * (2 * k + 1))})
+    for h, expo in facs:
+        label = tex(h) if prec(h) >= 3 else r"\left(" + tex(h) + r"\right)"
+        if abs(expo) > 1:
+            if indice_racine(h) is not None:
+                label = r"\left(" + label + r"\right)"
+            label += "^{" + str(abs(expo)) + "}"
+        cells = []
+        for i in range(k + 1):
+            cells.append(_cellule(evaluer(h, _test(i)), expo))
+            if i < k:
+                cells.append(_cellule(evaluer(h, crit[i].val), expo, critique=True))
+        lignes.append({"label": label, "cells": _barrer(cells)})
+
+    combinee = []
+    for i in range(k + 1):
+        colonne = [l["cells"][2 * i] for l in lignes]
+        combinee.append("x" if "x" in colonne else "||" if "||" in colonne else "0" if "0" in colonne else
+                         ("-" if colonne.count("-") % 2 else "+"))
+        if i < k:
+            colonne = [l["cells"][2 * i + 1] for l in lignes]
+            combinee.append("x" if "x" in colonne else "||" if "||" in colonne else "0" if "0" in colonne else
+                             ("-" if colonne.count("-") % 2 else "+"))
+    # Valeur interdite de f : double barre sur la ligne combinée aussi quand aucune ligne de facteur ne la porte
+    # (trou de (x²−1)/(x−1), où f' = 1).
+    for j in range(1, 2 * k + 1, 2):
+        if combinee[j] not in ("x", "||") and not contient(ED, crit[j // 2].val):
+            combinee[j] = "||"
+    # expr identiquement nulle (f' nulle : f constante sur chaque morceau de son ED) : « 0 » sur chaque
+    # intervalle de l'ED, « || » aux valeurs interdites, hors de l'ED la case est barrée.
+    f_constante = valeur_constante(expr) == 0
+    if f_constante:
+        for i in range(2 * k + 1):
+            if i % 2 == 0:
+                combinee[i] = "x" if hors[i // 2] else "0" if contient(D, _test(i // 2)) else "x"
+            else:
+                combinee[i] = "x" if _dans_zone_hors(i) else "0" if contient(D, crit[i // 2].val) else "||"
+    lignes.append({"label": etiquette, "cells": combinee, "final": True})
+    return crit, lignes, hors
+
+
 def etudier(entree, analyse=None):
     """`analyse` : le résultat de analyser_complet(entree) quand l'appelant l'a déjà (Étude complète, D19) ; sinon il est calculé ici."""
     try:
@@ -742,118 +873,16 @@ def etudier(entree, analyse=None):
     else:
         items_signe.append(txt(ligne))
 
-    # 2) Points critiques = zéros de f' (ci-dessus) ∪ bornes finies du domaine d'étude
-    # (valeurs interdites, asymptotes) — une seule liste, servant à la fois aux tests
-    # de signe et aux valeurs exactes des extrema.
-    crit = []
-
-    def _ajouter(p):
-        if p is not None and not any(proche(p.val, q.val) for q in crit):
-            crit.append(p)
-
-    for iv in Z:
-        _ajouter(iv.lo)
-        _ajouter(iv.hi)
-    for iv in D:
-        _ajouter(iv.lo)
-        _ajouter(iv.hi)
-    crit.sort(key=lambda p: p.val)
-    # Une colonne n'existe que pour un point de l'ED ou une borne de l'ED : un point critique situé
-    # au milieu d'une zone hors de l'ED (0 pour ln(x²−4)) n'est pas un point d'étude.
-    ed_ivs = fusion(ED)
-
-    def _borne_de_ed(pt):
-        return any(b is not None and proche(b.val, pt.val) for iv in ed_ivs for b in (iv.lo, iv.hi))
-    crit = [pt for pt in crit if contient(ED, pt.val) or _borne_de_ed(pt)]
+    # 2) et 3) Points critiques (zéros de f' ∪ bornes finies du domaine d'étude) et tableau de signes (R7), une ligne par
+    # facteur de f' puis la ligne f'(x) : `tableau_signes`, partagé avec l'Étude complète (tableau de f).
+    crit, lignes, hors = tableau_signes(fprime, Z, D, ED, "f'(x)", c_const, facs)
     k = len(crit)
-
-    def _test(i):
-        if k == 0:
-            return 0.0
-        if i == 0:
-            return crit[0].val - 1
-        if i == k:
-            return crit[-1].val + 1
-        return (crit[i - 1].val + crit[i].val) / 2
-
-    # 3) Une ligne par facteur de f' (f' étant gardée factorisée, cf. plus haut), puis
-    # la ligne combinée — même présentation qu'un tableau de signes « papier ».
-
-    def _cellule(v, expo, critique=False):
-        if v is None:
-            # facteur non défini : en un point critique de l'ED, f' n'y est pas définie (double barre) ;
-            # sur un intervalle, on est hors du domaine (zone barrée en aval)
-            return "||" if critique else "x"
-        if abs(v) <= 1e-9:
-            return "||" if expo < 0 else "0"
-        s = "+" if v > 0 else "-"
-        return "+" if (s == "-" and expo % 2 == 0) else s
-
-    # Intervalles hors de l'ED de f : ni signe ni flèche, case barrée (« x ») sur toutes les lignes.
-    # Chaque intervalle entre deux points critiques est entièrement dans l'ED ou entièrement dehors
-    # (les bornes de l'ED sont des points critiques).
-    hors = [not contient(ED, _test(i)) for i in range(k + 1)]
+    ed_ivs = fusion(ED)
+    combinee = lignes[-1]["cells"]
+    f_constante = valeur_constante(fprime) == 0
 
     def _dans_zone_hors(j):
-        """Case j du tableau (intervalle si j pair, point critique si j impair) entièrement hors de l'ED :
-        un point critique ne l'est que si l'intervalle de chaque côté l'est."""
-        return hors[j // 2] if j % 2 == 0 else (hors[(j - 1) // 2] and hors[(j + 1) // 2])
-
-    def _barrer(cells):
-        """Zone hors de l'ED : hachurée (« x »). Valeur interdite de f (borne hors de l'ED) : double barre
-        « || » sur toute la colonne, quelle que soit la ligne (facteurs, f', f)."""
-        out = []
-        for j, c in enumerate(cells):
-            if _dans_zone_hors(j):
-                out.append("x")
-            elif j % 2 == 1 and not contient(ED, crit[j // 2].val):
-                out.append("||")
-            else:
-                out.append(c)
-        return out
-
-    lignes = []
-    if c_const < 0:
-        lignes.append({"label": qtex(c_const), "cells": _barrer(["-"] * (2 * k + 1))})
-    elif c_const != 1:
-        lignes.append({"label": qtex(c_const), "cells": _barrer(["+"] * (2 * k + 1))})
-    for h, expo in facs:
-        label = tex(h) if prec(h) >= 3 else r"\left(" + tex(h) + r"\right)"
-        if abs(expo) > 1:
-            if indice_racine(h) is not None:
-                label = r"\left(" + label + r"\right)"
-            label += "^{" + str(abs(expo)) + "}"
-        cells = []
-        for i in range(k + 1):
-            cells.append(_cellule(evaluer(h, _test(i)), expo))
-            if i < k:
-                cells.append(_cellule(evaluer(h, crit[i].val), expo, critique=True))
-        lignes.append({"label": label, "cells": _barrer(cells)})
-
-    combinee = []
-    for i in range(k + 1):
-        colonne = [l["cells"][2 * i] for l in lignes]
-        combinee.append("x" if "x" in colonne else "||" if "||" in colonne else "0" if "0" in colonne else
-                         ("-" if colonne.count("-") % 2 else "+"))
-        if i < k:
-            colonne = [l["cells"][2 * i + 1] for l in lignes]
-            combinee.append("x" if "x" in colonne else "||" if "||" in colonne else "0" if "0" in colonne else
-                             ("-" if colonne.count("-") % 2 else "+"))
-    # Valeur interdite de f : double barre sur f'(x) aussi quand aucune ligne de facteur ne la porte
-    # (trou de (x²−1)/(x−1), où f' = 1).
-    for j in range(1, 2 * k + 1, 2):
-        if combinee[j] not in ("x", "||") and not contient(ED, crit[j // 2].val):
-            combinee[j] = "||"
-    # f' identiquement nulle (f constante sur chaque morceau de son ED) : « 0 » sur chaque
-    # intervalle de l'ED, « || » aux valeurs interdites, hors de l'ED la case est barrée.
-    f_constante = valeur_constante(fprime) == 0
-    if f_constante:
-        for i in range(2 * k + 1):
-            if i % 2 == 0:
-                combinee[i] = "x" if hors[i // 2] else "0" if contient(D, _test(i // 2)) else "x"
-            else:
-                combinee[i] = "x" if _dans_zone_hors(i) else "0" if contient(D, crit[i // 2].val) else "||"
-    lignes.append({"label": "f'(x)", "cells": combinee, "final": True})
+        return _zone_hors(hors, j)
 
     res["signe_resolu"] = True
     res["signe_etapes"] = items_signe

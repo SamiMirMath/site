@@ -628,7 +628,7 @@ def tableau_de_signe_de_f(ident):
     return None
 
 
-@pytest.mark.parametrize("ident", avec(set(IDS), xfail("P5", "zéros, signe et ordonnée à l'origine (D5)")))
+@pytest.mark.parametrize("ident", IDS)
 def test_P5_zeros_signe_f0(ident):
     fn = PAR_ID[ident]
     t, m = texte(sortie(ident)["cartes"]), maths(sortie(ident)["cartes"])

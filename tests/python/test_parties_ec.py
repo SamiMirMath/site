@@ -519,5 +519,371 @@ class TestGardeFousParite(unittest.TestCase):
                 self.assertEqual(parties.tex(parties.plier(parties.substituer(lire(entree), parties.nombre(a)))), ecrit)
 
 
+# ---------------------------------------------------------------------------------------------------------------------------
+# Partie 3. Zéros, signe, ordonnée à l'origine (D5)
+# ---------------------------------------------------------------------------------------------------------------------------
+def cartes_zeros(entree):
+    return parties.cartes_zeros_signe(ec.analyse(entree))
+
+
+def resume_zeros(cartes):
+    """Titres et lignes ; un tableau devient ('TABLEAU', crit, [(étiquette, cases accolées, « [||] » pour une case de 2 signes)])."""
+    out = []
+    for c in cartes:
+        blocs = []
+        for b in c["blocs"]:
+            if b["type"] == "tableau":
+                blocs.append(("TABLEAU", b["crit"], [(r["label"], "".join(x if len(x) == 1 else "[" + x + "]" for x in r["cells"]))
+                                                    for r in b["rows"]]))
+            else:
+                blocs.append(b["html"])
+        out.append((c["titre"], blocs))
+    return out
+
+
+POSITIVE = "(une exponentielle est strictement positive)"
+MESSAGES_ZEROS = (parties.DOUTE_SIGNE, parties.ZEROS_NON_EXACTS, parties.ZEROS_NON_TRAITES)
+
+
+def ordonnee(*lignes):
+    return ("Ordonnée à l'origine", list(lignes))
+
+
+COUPE_PAS = ordonnee(parties.NE_COUPE_PAS)
+
+
+class TestZerosSigne(unittest.TestCase):
+    CARTES = {
+        "e^((x^2+x-2)/(6x-12))": [
+            ("Zéros et signe de f", [rf"\(e^{{g(x)}} > 0\) pour tout \(x \in ED\) {POSITIVE}.", r"Donc f n'a pas de zéro et \(f(x) > 0\) sur ED."]),
+            ordonnee(r"\(g(0) = \frac{-2}{-12} = \frac{1}{6}\), donc \(f(0) = e^{\frac{1}{6}}\) ≈ 1,18.",
+                     r"Le graphe coupe l'axe des y au point \((0\,;\,e^{\frac{1}{6}})\).")],
+        "e^(-x^2)": [
+            ("Zéros et signe de f", [rf"\(e^{{-x^{{2}}}} > 0\) pour tout \(x\) {POSITIVE}.", r"Donc f n'a pas de zéro et \(f(x) > 0\) sur ED."]),
+            ordonnee(r"\(f(0) = 1\).", r"Le graphe coupe l'axe des y au point \((0\,;\,1)\).")],
+        "(x^2-6)e^(-2x)": [
+            ("Zéros de f", [rf"\(e^{{-2x}} > 0\) pour tout \(x\) {POSITIVE} ; il ne s'annule jamais.",
+                            r"\(\left(x^{2} - 6\right)\,e^{-2x} = 0\)", r"\(\iff x^{2} - 6 = 0\) (car \(e^{-2x} > 0\))", r"\(\iff x^{2} = 6\)",
+                            r"\(\iff\) \(x = -\sqrt{6}\) ≈ −2,45 ou \(x = \sqrt{6}\) ≈ 2,45"]),
+            ("Signe de f", [("TABLEAU", [r"-\sqrt{6}", r"\sqrt{6}"], [(r"\left(x^{2} - 6\right)", "+0-0+"), ("e^{-2x}", "+++++"),
+                                                                       ("f(x)", "+0-0+")])]),
+            ordonnee(r"\(f(0) = -6\).", r"Le graphe coupe l'axe des y au point \((0\,;\,-6)\).")],
+        "e^x(6-e^x)": [
+            ("Zéros de f", [rf"\(e^{{x}} > 0\) pour tout \(x\) {POSITIVE} ; il ne s'annule jamais.", r"\(e^{x}\,\left(6 - e^{x}\right) = 0\)",
+                            r"\(\iff 6 - e^{x} = 0\) (car \(e^{x} > 0\))",
+                            r"\(\iff e^{x} = 6\) (on isole \(e^{x}\) du côté où son coefficient est positif)", r"\(\iff\) \(x = \ln(6)\) ≈ 1,79"]),
+            ("Signe de f", [("TABLEAU", [r"\ln(6)"], [("e^{x}", "+++"), (r"\left(6 - e^{x}\right)", "+0-"), ("f(x)", "+0-")])]),
+            ordonnee(r"\(f(0) = 5\).", r"Le graphe coupe l'axe des y au point \((0\,;\,5)\).")],
+        "e^(2/(x^2-4))": [
+            ("Zéros et signe de f", [rf"\(e^{{\frac{{2}}{{x^{{2}} - 4}}}} > 0\) pour tout \(x \in ED\) {POSITIVE}.",
+                                     r"Donc f n'a pas de zéro et \(f(x) > 0\) sur ED."]),
+            ordonnee(r"\(f(0) = e^{-\frac{1}{2}}\) ≈ 0,61.", r"Le graphe coupe l'axe des y au point \((0\,;\,e^{-\frac{1}{2}})\).")],
+        "x*ln(x)": [
+            ("Zéros de f", [r"\(x\,\ln(x) = 0\)", r"\(\iff x = 0 \text{ ou } \ln(x) = 0\) (produit nul)", r"\(\iff\) \(x = 0\) ou \(x = 1\)",
+                            r"\(x = 0\) est rejeté, car \(0 \notin ED\)."]),
+            ("Signe de f", [("TABLEAU", ["0", "1"], [("x", "x[||]+++"), (r"\ln(x)", "x[||]-0+"), ("f(x)", "x[||]-0+")])]), COUPE_PAS],
+        "x/sqrt(x^2)": [
+            ("Zéros de f", [r"\(\frac{x}{\sqrt{x^{2}}} = 0\)", r"\(\iff\) \(x = 0\) (numérateur nul)",
+                            r"\(x = 0\) est rejeté, car \(0 \notin ED\).", parties.PAS_DE_ZERO]),
+            ("Signe de f", [("TABLEAU", ["0"], [("x", "-[||]+"), (r"\sqrt{x^{2}}", "+[||]+"), ("f(x)", "-[||]+")])]), COUPE_PAS],
+        "(e^x-1)/x": [
+            ("Zéros et signe de f", [r"\(\frac{e^{x} - 1}{x} = 0\)", r"\(\iff e^{x} - 1 = 0\) (numérateur nul)", r"\(\iff e^{x} = 1\) (on ajoute 1)",
+                                     r"\(\iff\) \(x = 0\)", r"\(x = 0\) est rejeté, car \(0 \notin ED\).",
+                                     r"Donc f n'a pas de zéro et \(f(x) > 0\) sur ED."]), COUPE_PAS],
+        "x^2-4x+3": [
+            ("Zéros de f", [r"\(x^{2} - 4x + 3 = 0\)", r"\(\iff (x - 1)(x - 3) = 0\) (Somme-Produit)",
+                            r"\(\iff x - 1 = 0 \text{ ou } x - 3 = 0\) (produit nul)", r"\(\iff\) \(x = 1\) ou \(x = 3\)"]),
+            ("Signe de f", [("TABLEAU", ["1", "3"], [(r"\left(x^{2} - 4x + 3\right)", "+0-0+"), ("f(x)", "+0-0+")])]),
+            ordonnee(r"\(f(0) = 3\).", r"Le graphe coupe l'axe des y au point \((0\,;\,3)\).")],
+        "x^4-2x^2": [
+            ("Zéros de f", [r"\(x^{4} - 2x^{2} = 0\)", r"\(\iff x^{2}(x^{2} - 2) = 0\) (mise en évidence)",
+                            r"\(\iff x = 0 \text{ ou } x^{2} - 2 = 0\) (produit nul)", r"\(\iff x = 0 \text{ ou } x^{2} = 2\)",
+                            r"\(\iff\) \(x = -\sqrt{2}\) ≈ −1,41 ou \(x = 0\) ou \(x = \sqrt{2}\) ≈ 1,41"]),
+            ("Signe de f", [("TABLEAU", [r"-\sqrt{2}", "0", r"\sqrt{2}"], [(r"\left(x^{4} - 2x^{2}\right)", "+0-0-0+"), ("f(x)", "+0-0-0+")])]),
+            ordonnee(r"\(f(0) = 0\).", r"Le graphe coupe l'axe des y au point \((0\,;\,0)\).")],
+        "1/x": [
+            ("Zéros de f", [parties.NUMERATEUR_CONSTANT]), ("Signe de f", [("TABLEAU", ["0"], [("x", "-[||]+"), ("f(x)", "-[||]+")])]),
+            COUPE_PAS],
+        "e^x/x": [
+            ("Zéros de f", [rf"\(e^{{x}} > 0\) pour tout \(x \in ED\) {POSITIVE} ; il ne s'annule jamais.", parties.PAS_DE_ZERO]),
+            ("Signe de f", [("TABLEAU", ["0"], [("e^{x}", "+[||]+"), ("x", "-[||]+"), ("f(x)", "-[||]+")])]), COUPE_PAS],
+        "-e^x": [
+            ("Zéros et signe de f", [rf"\(e^{{x}} > 0\) pour tout \(x\) {POSITIVE} ; il ne s'annule jamais.",
+                                     r"Donc f n'a pas de zéro et \(f(x) < 0\) sur ED."]),
+            ordonnee(r"\(f(0) = -1\).", r"Le graphe coupe l'axe des y au point \((0\,;\,-1)\).")],
+        "sqrt(x^2-4)": [
+            ("Zéros de f", [r"\(\sqrt{x^{2} - 4} = 0 \iff x^{2} - 4 = 0\)", r"On résout \(x^{2} - 4 = 0\).",
+                            r"\(x^{2} - 4 = (x - 2)(x + 2)\) : zéros \(-2\) et \(2\).", r"Solutions : \(x = -2\), \(x = 2\).",
+                            r"Donc \(x = -2\) ou \(x = 2\)."]),
+            ("Signe de f", [("TABLEAU", ["-2", "2"], [(r"\sqrt{x^{2} - 4}", "+0x0+"), ("f(x)", "+0x0+")])]), COUPE_PAS],
+        "x^3+x+1": [("Zéros et signe de f", [parties.ZEROS_NON_EXACTS]), ordonnee(r"\(f(0) = 1\).",
+                                                                              r"Le graphe coupe l'axe des y au point \((0\,;\,1)\).")],
+        "x^(2/3)": [
+            ("Zéros de f", [r"\(\sqrt[3]{x^{2}} = 0\)", r"\(\iff \left(\sqrt[3]{x}\right)^{2} = 0\)", r"\(\iff \sqrt[3]{x} = 0\)",
+                            r"\(\iff\) \(x = 0\)"]),
+            ("Signe de f", [("TABLEAU", ["0"], [(r"\left(\sqrt[3]{x}\right)^{2}", "+0+"), ("f(x)", "+0+")])]),
+            ordonnee(r"\(f(0) = 0\).", r"Le graphe coupe l'axe des y au point \((0\,;\,0)\).")],
+    }
+
+    def test_cartes_exactes(self):
+        """D5 : corrigé (decisions.md §4–5 : Ex7, a–d) et autres formes : exponentielle seule ou en facteur, chaîne avec la propriété
+        nommée, Somme-Produit, mise en évidence, zéro rejeté, lignes de l'outil ED, zéros non exacts, numérateur constant, f(0)."""
+        for entree, attendu in self.CARTES.items():
+            with self.subTest(entree=entree):
+                self.assertEqual(resume_zeros(cartes_zeros(entree)), attendu)
+
+    def test_tableau_par_la_machinerie_du_tableau_de_f_prime(self):
+        """Le tableau de f est celui de `derivee_variations.tableau_signes` (R7), la ligne f(x) en dernier (« final »)."""
+        import derivee_variations as dv
+        from noyau import aplatir, fusion
+        _, f, ED = ec.analyse("(x^2-6)e^(-2x)")
+        c, facs = aplatir(f)
+        Z = parties.points([z for h, _ in facs if not parties.est_exponentielle(h) for z in parties.zeros_facteur(h)[0]])
+        crit, lignes, _ = dv.tableau_signes(f, Z, fusion(ED), ED, "f(x)", c, facs)
+        tableau = dict(cartes_zeros("(x^2-6)e^(-2x)")[1]["blocs"][0])
+        self.assertEqual(tableau, {"type": "tableau", "var": "x", "crit": [p.tex for p in crit], "rows": lignes})
+        self.assertTrue(lignes[-1]["final"])
+
+    def test_chaines(self):
+        self.assertEqual(parties.etapes_polynome([F(-3), F(2)]), [(["2x - 3 = 0"], None), (["2x = 3"], None), ([r"x = \frac{3}{2}"], None)])
+        self.assertEqual(parties.etapes_polynome([F(0), F(-3), F(0), F(1)]), [
+            (["x^{3} - 3x = 0"], None), (["x(x^{2} - 3) = 0"], "mise en évidence"), (["x = 0", "x^{2} - 3 = 0"], "produit nul"),
+            (["x = 0", "x^{2} = 3"], None), (["x = 0", r"x = -\sqrt{3}", r"x = \sqrt{3}"], None)])
+        self.assertIsNone(parties.etapes_polynome([F(1), F(1), F(1)]))           # x² + x + 1 : rédaction de l'outil ED
+        h = lire("ln(x)+1")
+        self.assertEqual(parties.etapes_facteur(h, parties.zeros_facteur(h)[1]), [
+            ([r"\ln(x) + 1 = 0"], None), ([r"\ln(x) = -1"], "on soustrait 1"), (["x = e^{-1}"], None)])
+
+    def test_valeurs_approchees(self):
+        """decisions.md §2 entre 10⁻³ et 1000, entier exact tel quel (question 2), R13 sous 10⁻³ et dès 10⁶ (question 1)."""
+        sp = parties.charger_sympy()
+        for v, attendu in ((sp.sqrt(6), "2,45"), (-sp.sqrt(6), "−2,45"), (3 * sp.exp(-6), "0,0074"), (sp.Integer(9), None),
+                           (sp.Integer(-6), None), (sp.Rational(1, 3), "0,33"), (sp.Rational(1, 8), "0,13"),
+                           (sp.exp(-10), r"\(4{,}540 \times 10^{-5}\)"), (sp.Rational(10 ** 10, 3), r"\(3{,}333 \times 10^{9}\)"),
+                           (sp.Rational(10 ** 6 - 1, 10 ** 6 * 10 ** 4), r"\(1 \times 10^{-4}\)"), (sp.exp(8), None)):
+            with self.subTest(v=v):
+                self.assertEqual(parties.approchee(v, sp), attendu)
+
+    def test_resoudre_place_la_partie_3_sous_son_intertitre(self):
+        for entree in ("e^(-x^2)", "e^((x^2+x-2)/(6x-12))", "(x^2-6)e^(-2x)", "ln(x)/x"):
+            with self.subTest(entree=entree):
+                cartes = rec.resoudre(entree)["cartes"]
+                t = [c["titre"] for c in cartes]
+                self.assertEqual(cartes[t.index(rec.PARTIES[2]) + 1:t.index(rec.PARTIES[3])], cartes_zeros(entree))
+
+
+# ---------- oracle : zéros, signe et f(0) affichés ----------
+def nombre_affiche(t):
+    """Valeur mpmath (50 chiffres) d'une écriture LaTeX de l'outil : entiers, fractions, racines, ln, e^{…}. Lecture écrite à la main
+    (liste fermée de motifs), ni parseur de l'outil ni SymPy ; ValueError sinon."""
+    s = t.replace(r"\left(", "(").replace(r"\right)", ")").replace(" ", "")
+    for _ in range(6):
+        s = re.sub(r"\\d?frac\{([^{}]*)\}\{([^{}]*)\}", r"((\1)/(\2))", s)
+        s = re.sub(r"\\sqrt\{([^{}]*)\}", r"sqrt(\1)", s)
+        s = re.sub(r"\\ln\(([^()]*)\)", r"log(\1)", s)
+        s = re.sub(r"e\^\{([^{}]*)\}", r"exp(\1)", s)
+    s = re.sub(r"(?<![a-z])e(?![a-z(])", "exp(1)", s)
+    if not re.fullmatch(r"(?:[0-9+\-*/().]|exp|log|sqrt)*", s):
+        raise ValueError(t)
+    s = re.sub(r"(\d|\))(?=[a-z(])", r"\1*", s)
+    s = re.sub(r"\d+", lambda m: f"mpf({m.group(0)})", s)                  # entiers en mpf : 1/6 calculé à 50 chiffres
+    return eval(s, {"__builtins__": {}}, {"exp": mp.exp, "log": mp.log, "sqrt": mp.sqrt, "mpf": mp.mpf})
+
+
+class TestZerosSigneOracle(unittest.TestCase):
+    def verifier(self, entree):
+        """Ce que la partie 3 affiche, recoupé par l'oracle mpmath (tests/python/oracle.py : ni `evaluer`, ni SymPy, ni la sonde) :
+        chaque zéro annule f (et un zéro rejeté est hors de l'ED), son arrondi est celui de l'oracle ; le signe de chaque case du
+        tableau (ou « f(x) > 0 sur ED ») est celui de f sur une grille de 60 points par intervalle, sans autre zéro ; f(0) ou 0 ∉ ED."""
+        f = lire(entree)
+        cartes = cartes_zeros(entree)
+        lignes = [b["html"] for c in cartes for b in c["blocs"] if b["type"] == "texte"]
+        tout = "\n".join(lignes)
+        tableaux = [b for c in cartes for b in c["blocs"] if b["type"] == "tableau"]
+        issue = "message" if any(m in tout for m in MESSAGES_ZEROS) else "tableau" if tableaux else "constant"
+        if issue == "message":
+            self.assertFalse(tableaux or "n'a pas de zéro" in tout, tout)
+        zeros = list(re.finditer(r"\\\(x = ([^()]+?)\\\)(?: ≈ ([−0-9,]+))?( est rejeté)?", tout))
+        rejetes = {m.group(1) for m in zeros if m.group(3)}
+        for m in zeros:
+            z = nombre_affiche(m.group(1))
+            v = oracle.valeur(f, z)
+            if m.group(1) in rejetes:                                     # zéro d'un facteur hors de l'ED
+                self.assertIsNone(v, (entree, m.group(0)))
+            else:
+                self.assertIsNotNone(v, (entree, m.group(0)))
+                self.assertLess(abs(v), mp.mpf(10) ** -35, (entree, m.group(0)))
+            if m.group(2):
+                self.assertEqual(decimal_affiche(m.group(2)), arrondi_oracle(z), (entree, m.group(0)))
+            else:
+                self.assertEqual(z, mp.nint(z), (entree, m.group(0)))
+        if issue == "tableau":
+            (tab,) = tableaux
+            ligne = tab["rows"][-1]
+            self.assertEqual(ligne["label"], "f(x)")
+            crit = [nombre_affiche(t) for t in tab["crit"]]
+            bornes = [None] + crit + [None]
+            for i in range(len(crit) + 1):
+                a, b = bornes[i], bornes[i + 1]
+                lo = a if a is not None else (b if b is not None else mp.mpf(0)) - 30
+                hi = b if b is not None else (a if a is not None else mp.mpf(0)) + 30
+                case = ligne["cells"][2 * i]
+                for j in range(1, 60):
+                    v = oracle.valeur(f, lo + (hi - lo) * j / 60)
+                    if case == "x":
+                        self.assertIsNone(v, (entree, i))
+                    else:
+                        self.assertIsNotNone(v, (entree, i))
+                        self.assertEqual("+" if v > 0 else "-", case, (entree, i, j))
+            for c, case in zip(crit, ligne["cells"][1::2]):
+                v = oracle.valeur(f, c)
+                if case == "0":
+                    self.assertLess(abs(v), mp.mpf(10) ** -35, (entree, c))
+                elif case in ("||", "x"):
+                    self.assertIsNone(v, (entree, c))
+                else:
+                    self.assertEqual("+" if v > 0 else "-", case, (entree, c))
+        if issue == "constant":
+            s = 1 if r"\(f(x) > 0\)" in tout else -1
+            self.assertIn(r"\(f(x) " + (">" if s > 0 else "<") + r" 0\) sur ED", tout)
+            for k in range(-300, 301):
+                v = oracle.valeur(f, mp.mpf(k) / 10 + mp.mpf(1) / 7)
+                if v is not None:
+                    self.assertGreater(s * v, 0, (entree, k))
+        ordo = [b["html"] for b in cartes[-1]["blocs"]]
+        if ordo == [parties.NE_COUPE_PAS]:
+            self.assertIsNone(oracle.valeur(f, 0), entree)
+        elif ordo != [parties.DOUTE_F0]:
+            m = re.search(r"\\\(f\(0\) = (.+?)\\\)(?: ≈ ([−0-9,]+))?\.$", ordo[0])
+            v0 = oracle.valeur(f, 0)
+            self.assertLess(abs(nombre_affiche(m.group(1)) - v0), mp.mpf(10) ** -40, (entree, ordo))
+            if m.group(2):
+                self.assertEqual(decimal_affiche(m.group(2)), arrondi_oracle(v0), (entree, ordo))
+            else:
+                self.assertEqual(v0, mp.nint(v0), (entree, ordo))
+        return issue
+
+    def test_entrees_de_la_page(self):
+        vues = set()
+        for entree in dict.fromkeys(entrees_page("etude-complete") + CAS_LIMITES["etude-complete"] + list(TestZerosSigne.CARTES)):
+            if not ec.etudier(entree)["ok"]:
+                continue
+            with self.subTest(entree=entree):
+                vues.add(self.verifier(entree))
+        self.assertEqual(vues, {"message", "tableau", "constant"})
+
+    def test_famille_au_hasard(self):
+        """Polynômes à racines entières (développés), produits par une exponentielle, eˣ(k − eˣ), quotients, x·ln(x) − k·x…"""
+        hasard = random.Random(5)
+        vues = {}
+        formes = ["x^2-{s}x+{p}", "(x^2-{k})e^({c}x)", "e^x({k}-e^x)", "(x-{a})/(x-{b})", "(x^2-{k})/(x-{b})", "x*e^({c}x)",
+                  "(x-{a})*ln(x)", "e^(({a})/(x-{b}))", "x^3-{k}x"]
+        for _ in range(45):
+            a, b = hasard.sample(range(-4, 5), 2)
+            valeurs = dict(a=a, b=b, s=a + b, p=a * b, k=hasard.randint(1, 9), c=hasard.choice([-2, -1, 1, 3]))
+            entree = hasard.choice(formes).format(**valeurs).replace("--", "+").replace("+-", "-").replace("-+", "-")
+            r, _, _ = ec.analyse(entree)
+            if not (r.get("ok") and r.get("complet")):
+                continue
+            with self.subTest(entree=entree):
+                issue = self.verifier(entree)
+                vues[issue] = vues.get(issue, 0) + 1
+        self.assertGreaterEqual(vues.get("tableau", 0), 15, vues)
+        self.assertGreaterEqual(vues.get("constant", 0), 3, vues)
+
+
+# ---------- garde-fous forcés (principe 0.2) ----------
+class TestGardeFousZerosSigne(unittest.TestCase):
+    def doute(self, entree, positives=()):
+        attendu = ("Zéros et signe de f", list(positives) + [parties.DOUTE_SIGNE])
+        self.assertEqual(resume_zeros(cartes_zeros(entree))[0], attendu)
+        self.assertEqual(len(cartes_zeros(entree)), 2)
+
+    POS_B = rf"\(e^{{-2x}} > 0\) pour tout \(x\) {POSITIVE} ; il ne s'annule jamais."
+
+    def test_sonde_contredit_le_signe(self):
+        """La sonde trouve un signe opposé sur ]√6 ; +∞[ : aucune conclusion (ni tableau, ni phrase)."""
+        vrai = parties.valeur_mp
+        for entree, positives in (("(x^2-6)e^(-2x)", [self.POS_B]),
+                                  ("e^(-x^2)", [rf"\(e^{{-x^{{2}}}} > 0\) pour tout \(x\) {POSITIVE} ; il ne s'annule jamais."])):
+            haut = parties.tex(lire(entree))
+
+            def sonde(n, x):
+                v = vrai(n, x)                                             # la valeur de f seule est faussée (pas ses sous-arbres)
+                return -v if (v is not None and x > 3 and parties.tex(n) == haut) else v
+            with mock.patch.object(parties, "valeur_mp", sonde), self.subTest(entree=entree):
+                self.doute(entree, positives)
+
+    def test_sonde_ne_trouve_pas_le_zero(self):
+        vrai = parties.valeur_mp
+        with mock.patch.object(parties, "valeur_mp", lambda n, x: (vrai(n, x) or 0) + mp.mpf("1e-15")):
+            self.doute("x^2-4x+3")
+
+    def test_tableau_faux(self):
+        """Une case de la ligne f(x) fausse (la machinerie du tableau se trompe) : SymPy et la sonde la refusent."""
+        import derivee_variations as dv
+        vrai = dv.tableau_signes
+
+        def faux(*args):
+            crit, lignes, hors = vrai(*args)
+            lignes[-1]["cells"][-1] = "-" if lignes[-1]["cells"][-1] == "+" else "+"
+            return crit, lignes, hors
+        with mock.patch.object(dv, "tableau_signes", faux):
+            self.doute("(x^2-6)e^(-2x)", [self.POS_B])
+            self.doute("e^(2/(x^2-4))", [rf"\(e^{{\frac{{2}}{{x^{{2}} - 4}}}} > 0\) pour tout \(x \in ED\) {POSITIVE} ; il ne s'annule jamais."])
+
+    def test_sympy_trouve_un_autre_zero(self):
+        sp = parties.charger_sympy()
+        vrai = sp.solveset
+        with mock.patch.object(sp, "solveset", lambda e, x, d: vrai(e, x, d) | sp.FiniteSet(sp.Rational(1, 2))):
+            self.doute("(x^2-6)e^(-2x)", [self.POS_B])
+            self.doute("x^2-4x+3")
+
+    def test_sympy_ne_conclut_pas(self):
+        sp = parties.charger_sympy()
+        x = parties.SYMPY["x"]
+        with mock.patch.object(sp, "solveset", lambda e, v, d: sp.ConditionSet(x, sp.Eq(e, 0), d)):
+            self.doute("x^2-4x+3")
+
+    def test_sympy_contredit_la_sonde(self):
+        """SymPy calcule une autre fonction (f + 1) : f(z) ≠ 0 exactement, aucune conclusion."""
+        vrai = parties.en_sympy_reel
+        with mock.patch.object(parties, "en_sympy_reel", lambda T: vrai(T) + 1):
+            self.doute("x^2-4x+3")
+
+    def test_zeros_non_calcules(self):
+        def refus(*a, **k):
+            raise parties.NonPrisEnCharge("forcé")
+        with mock.patch.object(parties, "preimage", refus):
+            self.assertEqual(resume_zeros(cartes_zeros("(x^2-6)e^(-2x)"))[0],
+                             ("Zéros et signe de f", [self.POS_B, parties.ZEROS_NON_TRAITES]))
+
+    def test_chaine_qui_ne_finit_pas_sur_les_zeros(self):
+        """Une chaîne qui ne mène pas aux zéros calculés n'est pas écrite : lignes de l'outil ED, puis « Donc … »."""
+        with mock.patch.object(parties, "etapes_facteur", lambda h, items: [([parties.tex(h) + " = 0"], None), (["x = 7"], None)]):
+            lignes = resume_zeros(cartes_zeros("x^2-4x+3"))[0][1]
+        self.assertEqual(lignes[0], r"On résout \(x^{2} - 4x + 3 = 0\).")
+        self.assertEqual(lignes[-1], r"Donc \(x = 1\) ou \(x = 3\).")
+        self.assertFalse(any("x = 7" in l for l in lignes))
+
+    def test_ordonnee_en_doute(self):
+        with mock.patch.object(parties, "valeur_verifiee", lambda *a: None):
+            self.assertEqual(resume_zeros(cartes_zeros("(x^2-6)e^(-2x)"))[-1], ordonnee(parties.DOUTE_F0))
+        vrai = parties.valeur_mp
+        with mock.patch.object(parties, "valeur_mp", lambda n, x: mp.mpf(1) if x == 0 else vrai(n, x)):
+            self.assertEqual(resume_zeros(cartes_zeros("ln(x)/x"))[-1], ordonnee(parties.DOUTE_F0))
+
+    def test_sans_sympy(self):
+        with mock.patch.object(parties, "charger_sympy", lambda: None):
+            self.assertEqual(resume_zeros(cartes_zeros("e^(-x^2)")),
+                             [("Zéros et signe de f", [parties.DOUTE_SIGNE]), ordonnee(parties.DOUTE_F0)])
+
+    def test_borne_approchee(self):
+        sp = parties.charger_sympy()
+        ivs = [Iv(Num.approche(1.234), False, None, False)]
+        with self.assertRaises(parties.Doute):
+            parties.appartient(ivs, sp.Integer(2), sp)
+
+
 if __name__ == "__main__":
     unittest.main()

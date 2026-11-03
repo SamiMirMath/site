@@ -18,8 +18,8 @@ passe fait échouer la suite). Temps natif : `docs/chantiers/etude-complete/mesu
 | P1 | D6, D7 (parenthèses, doublons), D17 | Dérivée | **fait** | edf17c3 |
 | P2 | Squelette des 6 parties titrées (D1), spécification (D2, D19) | EC | **fait** | 4cf3e9e |
 | P3 | Partie 1 : mise en forme + ED détaillé (D3) | EC | **fait** | f108f7f |
-| P4 | Partie 2 : parité (D4) | EC | **fait** | (voir `git log`) |
-| P5 | Partie 3 : zéros, signe, f(0) (D5) | EC | à faire | |
+| P4 | Partie 2 : parité (D4) | EC | **fait** | 62781a8 |
+| P5 | Partie 3 : zéros, signe, f(0) (D5) | EC | **fait** | (voir `git log`) |
 | P6 | Partie 4 : D12, D13, D16 | Limites | reportée (hors de la nuit du 02.11) | |
 | P7a | Dérivée de l'exposant détaillée, tableau u/v (D7, D8, D7b si simple) | Dérivée | à faire | |
 | P7b | Valeurs dans le tableau de variations (D10), extremums (D11) | EC + Dérivée | à faire | |
@@ -50,6 +50,13 @@ passe fait échouer la suite). Temps natif : `docs/chantiers/etude-complete/mesu
   impaire » (f(0) ≠ 0 ou contre-exemple) et « Pas paire » (contre-exemple, valeurs exactes puis arrondies, arrondis différents).
   Chaque affirmation confirmée par SymPy et par une sonde mpmath (30 chiffres) ; sinon un message clair, sans conclusion. 5 xfail P4
   retirés ; instantanés de l'EC : partie 2 seule (liste sous « À relire ») ; questions 15 à 21 ; `etudier()` inchangé, parité 0,2 à 9 ms.
+- **P5 faite** : partie 3 (D5) dans `parties.py` (`cartes_zeros_signe`) : « e^{…} > 0 pour tout x (une exponentielle est strictement
+  positive) », f(x) = 0 en chaîne une étape par ligne avec la propriété nommée (« car e^{−2x} > 0 », « produit nul », Somme-Produit…),
+  chaque zéro exact puis ≈, zéro hors de l'ED rejeté ; sans zéro et de signe constant « Donc f n'a pas de zéro et f(x) > 0 sur ED » ;
+  sinon tableau de signes de f par la machinerie R7 du tableau de f′ (extraite en `derivee_variations.tableau_signes`, outil Dérivée
+  inchangé) ; f(0) exact puis ≈ et le point, ou « 0 ∉ ED » ; zéros non exacts ou doute : message clair. Garde-fous SymPy (f(z) = 0,
+  `solveset`, signe exact par intervalle) et sonde mpmath. 5 xfail P5 retirés ; instantanés de l'EC : partie 3 seule (liste sous « À
+  relire ») ; largeurs 320/360/390 sans faute ; questions 22 à 30 ; `etudier()` inchangé, partie 3 de 5 à 61 ms.
 
 ## Plans
 
@@ -163,6 +170,29 @@ message clair et aucune conclusion.
    `test_resoudre_ec.py` suit les nouvelles cartes. Instantanés `resoudre` et références de pages de l'EC régénérés (liste sous « À
    relire ») ; largeurs ; suite complète ; temps natif (et coût de la parité, calculée hors d'`etudier()`) ; commit « EC P4 : … ».
 
+### P5 (03.11.2026)
+
+Partie 3 de l'EC (D5), dans `etude-complete/parties.py` (`cartes_zeros_signe`, appelée par `resoudre_ec` sur l'analyse en cache, D19).
+Le tableau de signes de f réutilise la machinerie R7 du tableau de f′ : le bloc de `derivee_variations.etudier` qui construit les points
+critiques, les lignes de facteurs et la ligne combinée devient la fonction publique `tableau_signes(expr, Z, D, ED, étiquette, c, facteurs)`,
+appelée par `etudier` (sortie de l'outil Dérivée inchangée : instantanés identiques) et par la partie 3 (étiquette « f(x) »).
+1. **Exponentielle** : chaque facteur e^{…} de f (`aplatir`) donne « e^{…} > 0 pour tout x (une exponentielle est strictement
+   positive) ; il ne s'annule jamais. » (« x ∈ ED » si ED ≠ ℝ ; f = e^{…} seule : phrase de decisions.md §4, « e^{g(x)} » si g est nommé).
+2. **Zéros** : chaque autre facteur du numérateur résolu par le moteur de l'outil ED (`preimage`) ; chaîne une étape par ligne, la
+   propriété nommée (« car e^{−2x} > 0 », « numérateur nul », « produit nul » avec les facteurs menés ensemble ; polynômes : chaîne courte
+   de la partie 1, mise en évidence et Somme-Produit ; autres facteurs : lignes « A ⇔ B (propriété) » de l'outil ED enchaînées) ; dernière
+   étape : chaque zéro exact puis ≈ ; zéro hors de l'ED rejeté ; forme non couverte : lignes de l'outil ED ; zéro approché ou non calculé :
+   message clair, pas de tableau.
+3. **Signe** : sans zéro et de signe constant, « Donc f n'a pas de zéro et f(x) > 0 sur ED. » ; sinon carte « Signe de f » (tableau).
+   Garde-fous (principe 0.2) : SymPy (f(z) = 0 ; `solveset` ne donne aucun autre zéro dans l'ED ; signe exact en un point rationnel de
+   chaque intervalle ; appartenance à l'ED exacte) et sonde mpmath (f(z) ≈ 0 ; signe en 9 points de chaque intervalle) ; sinon message.
+4. **Ordonnée à l'origine** : f(0) exact (substitution calculée, comme P4) puis ≈, « g(0) = −2/(−12) = 1/6, donc f(0) = e^{1/6} » quand
+   g est nommé, puis le point ; « 0 ∉ ED : le graphe ne coupe pas l'axe des y » ; ≈ : decisions.md §2 et R13 (questions 1 et 2).
+5. Tests : xfail P5 retirés ; `test_parties_ec.py` (cartes exactes du corpus et des entrées de la page, oracle mpmath de `oracle.py` pour
+   les zéros, le signe et f(0), famille au hasard, garde-fous forcés) ; `test_resoudre_ec.py` suit les nouvelles cartes ; spécification.
+   Instantanés `resoudre` et références de pages de l'EC régénérés (liste sous « À relire ») ; largeurs 320/360/390 ; suite complète ;
+   temps natif (et coût de la partie 3) ; commit « EC P5 : … ».
+
 ## Temps natif de etudier() (s, médiane de 3 processus neufs)
 
 | Partie | Ex7 | a | b | c | d |
@@ -172,11 +202,16 @@ message clair et aucune conclusion.
 | P2 | 0,60 | 0,02 | 0,43 | 0,18 | 0,32 |
 | P3 | 0,59 | 0,02 | 0,42 | 0,19 | 0,30 |
 | P4 | 0,60 | 0,02 | 0,43 | 0,18 | 0,29 |
+| P5 | 0,59 | 0,02 | 0,43 | 0,19 | 0,29 |
 
 P3 ne touche pas `etudier()` ; la partie 1 (`parties.cartes_domaine`, appelée par `resoudre`) coûte en plus 0,5 ms (Ex7), 0,2 ms (d),
 moins de 0,01 ms (a, b, c).
 P4 ne touche pas `etudier()` ; la partie 2 (`parties.cartes_parite`, appelée par `resoudre`, SymPy déjà chargé, médiane de 3 processus
 neufs) coûte en plus 0,2 ms (Ex7 : ED non symétrique, sans SymPy), 4,8 ms (a), 7,2 ms (b), 8,6 ms (c), 6,2 ms (d).
+P5 ne change pas la sortie d'`etudier()` (le tableau de f′ passe par `tableau_signes`, même calcul) ; la partie 3
+(`parties.cartes_zeros_signe`, appelée par `resoudre`, SymPy déjà chargé, médiane de 3 processus neufs) coûte en plus 43 ms (Ex7),
+5 ms (a), 61 ms (b), 44 ms (c), 27 ms (d) : surtout `solveset` et `simplify` (garde-fous du principe 0.2). Coût sous Pyodide à
+mesurer en P9.
 
 ## Suite complète
 
@@ -190,6 +225,8 @@ neufs) coûte en plus 0,2 ms (Ex7 : ED non symétrique, sans SymPy), 4,8 ms (a),
 | P3 | 1091 passés, 48 xfail (637 s) | 116 passés (870 s) ; code de retour 0 (2ᵉ lancement : le 1ᵉʳ a échoué sur `test_resoudre_import`, liste de fichiers mise à jour, voir Écarts) | 03.11.2026 |
 | P3 (contrôle du chef d'orchestre) | 1091 passés, 48 xfail (634 s) | 116 passés (886 s) ; code de retour 0 | 03.11.2026 |
 | P4 | 1113 passés, 43 xfail (631 s) | 116 passés (873 s) ; code de retour 0 (1ᵉʳ lancement) | 03.11.2026 |
+| P4 (contrôle du chef d'orchestre) | 1113 passés, 43 xfail (629 s) | 116 passés (875 s) ; code de retour 0 | 03.11.2026 |
+| P5 | 1136 passés, 38 xfail (662 s) | 116 passés (870 s) ; code de retour 0 (1ᵉʳ lancement) | 03.11.2026 |
 
 ## Écarts acceptés
 
@@ -227,6 +264,18 @@ neufs) coûte en plus 0,2 ms (Ex7 : ED non symétrique, sans SymPy), 4,8 ms (a),
   `parties.cartes_parite` (comme « Mise en forme » à P3) : le reste de l'ordre est vérifié comme avant ; le contenu de la partie 2 est
   vérifié à part (`test_parties_ec.py` : cartes exactes, oracle mpmath, garde-fous ; `test_resoudre_place_la_parite_sous_son_intertitre`).
   La spécification `docs/specifications/etude-complete.md` décrit la partie 2 (sinon elle serait fausse : « 2 vide »).
+
+- P5 : `derivee-variations/derivee_variations.py` : le bloc d'`etudier` qui construit les points critiques et le tableau de signes
+  (R7) devient la fonction publique `tableau_signes` (et deux petites fonctions `_point_test`, `_zone_hors`), appelée par `etudier` et
+  par la partie 3 de l'EC ; même calcul : instantanés de l'outil Dérivée et sortie d'`etudier()` de l'EC identiques.
+- P5 : `parties.py` : `factorisation` (partie 1) s'appuie sur `_factoriser` (facteurs exposés pour la chaîne de la partie 3),
+  `resolution_denominateur` sur `resolution_polynome`, `valeur_en` (partie 2) sur `valeur_verifiee` (partagée avec f(0)) : sorties
+  inchangées (parties 1 et 2 des instantanés identiques). `plier` calcule aussi 1^p = 1 et 0^p = 0 (p > 0) : f(0) de x^(2/3) s'écrit
+  « 0 » et non « ∛(0²) » ; aucune carte de parité des instantanés ne change.
+- P5 : `tests/python/test_resoudre_ec.py::test_ordre_des_cartes_comme_la_page` place sous « 3. Zéros, signe, ordonnée à l'origine » les
+  titres des cartes de `parties.cartes_zeros_signe` (comme la partie 2 à P4) : le reste de l'ordre est vérifié comme avant ; le
+  contenu est vérifié à part (`test_parties_ec.py` : cartes exactes, oracle mpmath, garde-fous ; `test_resoudre_place_la_partie_3…`).
+  La spécification décrit la partie 3 (sinon elle serait fausse : « 3 vide »).
 
 ## Questions pour l'enseignant
 
@@ -293,6 +342,32 @@ neufs) coûte en plus 0,2 ms (Ex7 : ED non symétrique, sans SymPy), 4,8 ms (a),
 20. **P4, point a d'un ED non symétrique** : d'abord le symétrique d'une borne rationnelle exclue (Ex7 : −2 ; (x² − 1)/(x − 3) : −3),
     sinon le premier de 1, −1, 2, −2, 1/2… (ln(x)/x : « 1 ∈ ED, mais −1 ∉ ED » ; √(x + 1) : « 2 ∈ ED, mais −2 ∉ ED »).
 21. **P4, b : −36,95** : le .tex écrit f(−1) ≈ −36,9 ; decisions.md §5 écrit −36,95 (2 décimales, §2) : c'est −36,95 qui est affiché.
+
+22. **P5, chaîne une étape par ligne** : decisions.md §2 écrit la résolution sur une ligne ; elle est écrite une étape par ligne
+    (principe 5, comme la chaîne f(−x) de P4) : « (x² − 6)e^{−2x} = 0 », « ⇔ x² − 6 = 0 (car e^{−2x} > 0) », « ⇔ x² = 6 »,
+    « ⇔ x = −√6 ≈ −2,45 ou x = √6 ≈ 2,45 ». La valeur approchée suit chaque zéro (et non « ≈ ±2,45 » en bout de chaîne) : une seule
+    écriture pour un ou plusieurs zéros, symétriques ou non. À confirmer.
+23. **P5, tableau de f avec les facteurs écrits** : le tableau prend les facteurs de f tels que saisis (machinerie R7) : x² − 4x + 3 a
+    une seule ligne « x² − 4x + 3 » puis f(x), bien que la chaîne l'ait factorisé en (x − 1)(x − 3) (Somme-Produit). Faut-il une ligne
+    par facteur de la factorisation de la chaîne ?
+24. **P5, phrase de l'exponentielle** : écrite comme decisions.md §2 (« … strictement positive) ; il ne s'annule jamais. ») ; « pour
+    tout x ∈ ED » quand ED ≠ ℝ (Ex7, d, e^(1/x)), « pour tout x » sinon ; f = e^{…} seule : phrase de §4 sans « il ne s'annule
+    jamais », puis « Donc f n'a pas de zéro et f(x) > 0 sur ED. ».
+25. **P5, propriétés ajoutées** (absentes de decisions.md) : « numérateur nul » (quotient : (x² − 1)/(x − 3) = 0 ⇔ x² − 1 = 0),
+    « on divise par 3 » (3x ln x), « produit nul », « mise en évidence », « Somme-Produit », et celles de l'outil ED (« on ajoute 1 »,
+    « on isole e^x du côté où son coefficient est positif »). Un zéro hors de l'ED : « x = 0 est rejeté, car 0 ∉ ED. ». Les mots
+    vous conviennent-ils ?
+26. **P5, formes que la chaîne ne couvre pas** (√(x² − 4), x² + 1, x³ − 12x² + 44x − 48, trinôme à Δ non carré) : les lignes de
+    l'outil ED telles quelles (« On résout … », Δ, « Solutions : … »), puis « Donc x = −2 ou x = 2. ». Faut-il une autre rédaction ?
+27. **P5, le point (0 ; f(0))** : « Le graphe coupe l'axe des y au point (0 ; e^{1/6}). » (le .tex écrit « Point (0 ; e^{1/6}) ») :
+    phrase symétrique de « 0 ∉ ED : le graphe ne coupe pas l'axe des y » (decisions.md §2).
+28. **P5, valeurs approchées** : R13 appliqué (question 1) : notation scientifique sous 10⁻³ et dès 10⁶ (« ≈ 4,540 × 10⁻⁵ ») ; entre
+    1000 et 10⁶, aucune valeur approchée (la valeur exacte seule, option qui affiche le moins) tant que le séparateur des milliers
+    n'est pas tranché pour l'EC (question 19). Aucune valeur du corpus n'est concernée.
+29. **P5, après le tableau** : aucune phrase de conclusion (« f(x) > 0 sur … ; f(x) < 0 sur … ») : le tableau la porte (option qui
+    affiche le moins). En voulez-vous une ?
+30. **P5, sans zéro mais avec changement de signe** (e^x/x, 1/x, x/√(x²)) : « Donc f n'a pas de zéro. » puis le tableau (decisions.md
+    ne prévoit la phrase « f(x) > 0 sur ED » sans tableau que pour un signe constant).
 
 ## À relire par l'enseignant
 
@@ -368,3 +443,30 @@ neufs) coûte en plus 0,2 ms (Ex7 : ED non symétrique, sans SymPy), 4,8 ms (a),
   « f(1) = e(6 − e) ≈ 8,92 », « f(−1) = e^{−1}(6 − e^{−1}) ≈ 2,07 » ; a « f(−x) = e^{−(−x)²} = e^{−x²} (car (−x)² = x²) = f(x) ».
   Largeurs 320 / 360 / 390 px vérifiées à part (script de mesure de `test_largeurs.py`) pour 12 entrées dont Ex7, b, c, d, ln(x² + 1)/x
   et x² + x/1000 : aucune faute.
+
+- **P5** (EC seule ; outil Dérivée : `tableau_signes` extrait d'`etudier`, instantanés identiques ; ED, Limites, Exp-log : identiques ;
+  `tests/python/instantanes/etude-complete.json` (sortie d'`etudier()`) identique). Instantanés modifiés :
+  `tests/python/instantanes/resoudre/etude-complete.json` (17 entrées modifiées) et `tests/pages/references/etude-complete.json`
+  (17 modifiées ; l'entrée d'erreur `ln(` est identique). Vérifié par programme : dans chaque entrée, tout ce qui précède et suit la
+  partie 3 est identique ; seules les cartes de la partie 3 s'ajoutent (2 ou 3 ; le compteur d'étapes augmente d'autant).
+
+  | Entrée | Avant (partie 3) | Après (partie 3) |
+  |---|---|---|
+  | toutes | intertitre seul | [Zéros de f · Signe de f (tableau)] ou [Zéros et signe de f] · Ordonnée à l'origine |
+  | `e^((x^2+x-2)/(6x-12))` (Ex7) | — | e^{g(x)} > 0 pour tout x ∈ ED (une exponentielle est strictement positive). Donc f n'a pas de zéro et f(x) > 0 sur ED. · g(0) = −2/(−12) = 1/6, donc f(0) = e^{1/6} ≈ 1,18. Le graphe coupe l'axe des y au point (0 ; e^{1/6}). |
+  | `e^(2/(x^2-4))` (d), `e^(2x)`, `e^(1/x)` | — | même phrase (« pour tout x » si ED = ℝ) et « f(x) > 0 sur ED » ; f(0) = e^{−1/2} ≈ 0,61 (d), f(0) = 1 ; e^(1/x) : 0 ∉ ED : le graphe ne coupe pas l'axe des y |
+  | `x^2*e^(-x)` | — | e^{−x} > 0 … ; il ne s'annule jamais. x²e^{−x} = 0 ⇔ x² = 0 (car e^{−x} > 0) ⇔ x = 0 · tableau x², e^{−x}, f(x) : + 0 + · f(0) = 0 |
+  | `x^2-4x+3` | — | x² − 4x + 3 = 0 ⇔ (x − 1)(x − 3) = 0 (Somme-Produit) ⇔ x − 1 = 0 ou x − 3 = 0 (produit nul) ⇔ x = 1 ou x = 3 · tableau (une ligne x² − 4x + 3, question 23) · f(0) = 3 |
+  | `x^3-3x`, `x^4-2x^2` | — | mise en évidence, produit nul, x² = 3 ⇔ x = −√3 ≈ −1,73 ou x = 0 ou x = √3 ≈ 1,73 (de même ±√2 ≈ ±1,41) · tableau · f(0) = 0 |
+  | `(x^2-1)/(x-3)`, `x/(x^2+1)`, `ln(x)/x` | — | « ⇔ x² − 1 = 0 (numérateur nul) ⇔ x² = 1 ⇔ x = −1 ou x = 1 » (de même x = 0 ; ln(x) = 0 ⇔ x = 1) · tableau avec la valeur interdite (‖) et la zone hors de l'ED (hachurée) · f(0) = 1/3 ≈ 0,33 ; 0 ; 0 ∉ ED |
+  | `x*ln(x)`, `3(x*ln(x))` | — | « ⇔ x = 0 ou ln(x) = 0 (produit nul) ⇔ x = 0 ou x = 1 », « x = 0 est rejeté, car 0 ∉ ED. » (3x ln x : « (on divise par 3) ») · tableau · 0 ∉ ED |
+  | `(e^x-1)/x` | — | « ⇔ eˣ − 1 = 0 (numérateur nul) ⇔ eˣ = 1 (on ajoute 1) ⇔ x = 0 », x = 0 rejeté, « Donc f n'a pas de zéro et f(x) > 0 sur ED. » (pas de tableau) · 0 ∉ ED |
+  | `x/sqrt(x^2)` | — | « ⇔ x = 0 (numérateur nul) », rejeté, « Donc f n'a pas de zéro. » · tableau − ‖ + (question 30) · 0 ∉ ED |
+  | `sqrt(x^2-4)` | — | lignes de l'outil ED (« √(x² − 4) = 0 ⇔ x² − 4 = 0 », « On résout … », « Solutions : … »), « Donc x = −2 ou x = 2. » (question 26) · tableau + 0 (hachuré) 0 + · 0 ∉ ED |
+  | `x^(2/3)` | — | « ∛(x²) = 0 ⇔ (∛x)² = 0 ⇔ ∛x = 0 ⇔ x = 0 » · tableau + 0 + · f(0) = 0 |
+
+  Hors instantanés (corpus) : b « (x² − 6)e^{−2x} = 0 ⇔ x² − 6 = 0 (car e^{−2x} > 0) ⇔ x² = 6 ⇔ x = −√6 ≈ −2,45 ou x = √6 ≈ 2,45 »,
+  tableau x² − 6, e^{−2x}, f(x) : + 0 − 0 +, f(0) = −6 ; c « eˣ(6 − eˣ) = 0 ⇔ 6 − eˣ = 0 (car eˣ > 0) ⇔ eˣ = 6 (on isole eˣ …) ⇔
+  x = ln(6) ≈ 1,79 », tableau + 0 −, f(0) = 5 ; a « e^{−x²} > 0 pour tout x … Donc f n'a pas de zéro et f(x) > 0 sur ED », f(0) = 1.
+  Largeurs 320 / 360 / 390 px vérifiées à part (mesure de `test_largeurs.py`, corrigé complet affiché) pour 18 entrées dont Ex7, a–d,
+  x⁴ − 2x², ln(x)/x, √(x² − 4), (x² − 5)(x² − 7)e^{−x} (tableau à 4 zéros) : aucune faute.

@@ -3,8 +3,8 @@ resoudre_ec.py — Adaptateur « format de sortie commun » (moteur/sortie.py) d
 
 Six parties titrées, dans l'ordre du corrigé (decisions.md D1), chacune ouverte par un intertitre (`so.partie`) :
 1. Domaine de définition (`parties.cartes_domaine` : fonction, mise en forme, une carte par condition, ED encadré, D3) ;
-2. Parité (`parties.cartes_parite`, D4) ; 3. Zéros, signe, ordonnée à l'origine (vide pour l'instant : rien plutôt qu'une affirmation
-non démontrée) ; 4. Limites et asymptotes (cartes de `resoudre_la` : tableaux de signes, limites, bilan) ;
+2. Parité (`parties.cartes_parite`, D4) ; 3. Zéros, signe, ordonnée à l'origine (`parties.cartes_zeros_signe`, D5 : zéros en chaîne,
+tableau de signes de f, f(0)) ; 4. Limites et asymptotes (cartes de `resoudre_la` : tableaux de signes, limites, bilan) ;
 5. Dérivée, tableau de variation, extremums (cartes de `resoudre_dv`, avec les limites dans le tableau) ; 6. Graphe.
 La recalculation du graphique au zoom reste l'appel séparé `fenetre_json`.
 
@@ -42,6 +42,7 @@ def resoudre(entree):
     dv, lim = r["derivee"], r["limites"]
     domaine = parties.cartes_domaine(rdv.enonce(r), analyse(entree))    # analyse en cache : celle d'etudier (D19)
     parite = parties.cartes_parite(analyse(entree))
+    zeros = parties.cartes_zeros_signe(analyse(entree))
     limites = [rla.carte_tableaux(lim["tableaux_signe"])] if lim.get("tableaux_signe") else []
     for et in lim["etudes"]:
         limites += rla.cartes_etude(et)
@@ -52,7 +53,7 @@ def resoudre(entree):
         if dv["signe_resolu"]:
             derivee.append(rdv.carte_signe(dv, r["variations_limites"], ec=True))
     cartes = []
-    for titre, contenu in zip(PARTIES, (domaine, parite, [], limites, derivee, [carte_graphique(r)])):
+    for titre, contenu in zip(PARTIES, (domaine, parite, zeros, limites, derivee, [carte_graphique(r)])):
         cartes += [so.partie(titre)] + contenu
     return so.sortie_ok(rdv.enonce(r), cartes)
 
