@@ -502,8 +502,7 @@ def derivee_resultat(ident):
     return next(b["tex"] for c in cartes_de(ident, "Dérivée") for b in c["blocs"] if b["type"] == "resultat")
 
 
-@pytest.mark.parametrize("ident", [p for p in avec({"Ex7"}, xfail("P1", "e^(somme) gardé entier, une seule exponentielle (D6)"))
-                                   if p.values[0] != "c"])
+@pytest.mark.parametrize("ident", [i for i in IDS if i != "c"])
 def test_P1_une_seule_exponentielle(ident):
     """c est à part : f′ = 2eˣ(3 − eˣ) garde deux eˣ, comme le corrigé."""
     assert derivee_resultat(ident).count("e^{") == 1, derivee_resultat(ident)
@@ -511,25 +510,22 @@ def test_P1_une_seule_exponentielle(ident):
     assert sum(1 for l in table["rows"] if l["label"].startswith("e^")) == 1, [l["label"] for l in table["rows"]]
 
 
-@pytest.mark.parametrize("ident", avec({"b"}, xfail("P1", "parenthèses autour d'un facteur négatif (D7)")))
+@pytest.mark.parametrize("ident", IDS)
 def test_P1_parentheses_facteur_negatif(ident):
     t = texte(cartes_de(ident, "Dérivée"))
     assert not re.search(r"\\cdot\s*-", t), t
 
 
-@xfail("P1", "« (eˣ)′ = eˣ » écrit une seule fois (D7)")
 def test_P1_derivee_de_e_x_une_seule_fois():
     t = maths(cartes_de("c", "Dérivée"))
     assert t.count("(e^{x})'=e^{x}") <= 1, t
 
 
-@xfail("P1", "3e^{−6} plutôt que 3/e⁶ (D17)")
 def test_P1_forme_exacte_3e_moins_6():
     t = maths(sortie("b")["cartes"])
     assert r"\frac{3}{e^{6}}" not in t and re.search(r"3e\^\{-6\}", t), t
 
 
-@xfail("P1", "coefficient constant positif en tête : 2eˣ(3 − eˣ) (D17)")
 def test_P1_forme_exacte_c():
     r = re.sub(r"\s+", "", derivee_resultat("c").replace(r"\left", "").replace(r"\right", "").replace(r"\,", ""))
     assert r.startswith("f'(x)=2e^{x}") and "(3-e^{x})" in r, r

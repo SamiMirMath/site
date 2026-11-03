@@ -776,7 +776,7 @@
    "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
    "extrema": [
     {
-     "f_tex": "- \\frac{3}{e}",
+     "f_tex": "- 3 e^{-1}",
      "f_val": -1.10363832,
      "genre": "minimum local",
      "x_tex": "e^{-1}",
@@ -1519,12 +1519,12 @@
      "type": "texte"
     },
     {
-     "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{\\frac{1}{x}\\,x - \\ln(x)}{x^{2}} = \\frac{-\\left(\\ln(x) - 1\\right)}{x^{2}}\\).",
+     "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{\\frac{1}{x}\\,x - \\ln(x)}{x^{2}} = \\frac{1 - \\ln(x)}{x^{2}}\\).",
      "type": "texte"
     }
    ],
    "deriv_resolu": true,
-   "deriv_tex": "\\frac{-\\left(\\ln(x) - 1\\right)}{x^{2}}",
+   "deriv_tex": "\\frac{1 - \\ln(x)}{x^{2}}",
    "domaine_etude_tex": "\\left]0 \\,;\\, +\\infty\\right[",
    "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
    "extrema": [
@@ -1540,7 +1540,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "\\(\\ln(x) - 1 = 0 \\iff \\ln(x) = 1\\) (on ajoute 1).",
+     "html": "\\(1 - \\ln(x) = 0 \\iff \\ln(x) = 1\\) (on isole \\(\\ln(x)\\) du côté où son coefficient est positif).",
      "type": "texte"
     },
     {
@@ -1548,7 +1548,7 @@
      "type": "texte"
     },
     {
-     "html": "\\(f'(x) = \\frac{-\\left(\\ln(x) - 1\\right)}{x^{2}} = 0 \\iff \\ln(x) - 1 = 0 \\iff x = e\\).",
+     "html": "\\(f'(x) = \\frac{1 - \\ln(x)}{x^{2}} = 0 \\iff 1 - \\ln(x) = 0 \\iff x = e\\).",
      "type": "texte"
     }
    ],
@@ -1563,21 +1563,11 @@
       "cells": [
        "x",
        "||",
-       "-",
-       "-",
+       "+",
+       "0",
        "-"
       ],
-      "label": "-1"
-     },
-     {
-      "cells": [
-       "x",
-       "||",
-       "-",
-       "0",
-       "+"
-      ],
-      "label": "\\left(\\ln(x) - 1\\right)"
+      "label": "\\left(1 - \\ln(x)\\right)"
      },
      {
       "cells": [
@@ -2068,7 +2058,7 @@
    "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
    "extrema": [
     {
-     "f_tex": "- \\frac{1}{e}",
+     "f_tex": "- e^{-1}",
      "f_val": -0.367879441,
      "genre": "minimum local",
      "x_tex": "e^{-1}",
@@ -2938,7 +2928,7 @@
      "x_val": 0.0
     },
     {
-     "f_tex": "\\frac{4}{e^{2}}",
+     "f_tex": "4 e^{-2}",
      "f_val": 0.541341133,
      "genre": "maximum local",
      "x_tex": "2",

@@ -223,6 +223,93 @@ def _ordre_naturel(n):
     return out
 
 
+def _factoriser_avec_exp(sp, e):
+    """factor(e) en gardant chaque exponentielle entière (décisions EC, D6) : factor développe e^(a + b) en e^a·e^b
+    (e^{(x² + x − 2)/(6x − 12)} devenait trois exponentielles). On regroupe d'abord les produits d'exponentielles
+    (powsimp), puis chaque e^a devient T^k, T symbole muet par famille d'exposants proportionnels (a = k·w, k entier :
+    e^{2x} = T² si T = eˣ) ; on factorise, puis on remet e^w à la place de T. Le remplacement est exact."""
+    e = sp.powsimp(e, combine="exp")
+    familles = []                                    # [w0, [(exposant, rapport rationnel à w0)]]
+    exposants = sorted((q.args[0] for q in e.atoms(sp.exp)), key=sp.default_sort_key)
+    exposants.sort(key=lambda a: bool(a.could_extract_minus_sign()))      # base eˣ plutôt que e^{−x} (comme factor)
+    for a in exposants:
+        for fam in familles:
+            r = sp.cancel(a / fam[0])
+            if r.is_Rational and r != 0:
+                fam[1].append((a, r))
+                break
+        else:
+            familles.append([a, [(a, sp.Integer(1))]])
+    if not familles:
+        return sp.factor(e)
+    remplacer, remettre = {}, {}
+    for w0, membres in familles:
+        g = sp.Rational(0)
+        for _, r in membres:                         # pgcd des rapports rationnels : e^a = (e^w)^(r/g), r/g entier
+            g = sp.Rational(sp.igcd(g.p * r.q, r.p * g.q), g.q * r.q) if g != 0 else abs(r)
+        T = sp.Dummy("T")
+        remettre[T] = sp.exp(w0 * g)
+        for a, r in membres:
+            remplacer[sp.exp(a)] = T ** int(r / g)
+    c, facteurs = sp.factor(e.xreplace(remplacer)).as_coeff_mul()
+    # facteur par facteur : un « −1 » reste devant le produit au lieu d'entrer dans la somme ((−e^{2x} − 1)·e^{−x})
+    return c * sp.Mul(*[f.xreplace(remettre) for f in facteurs])
+
+
+def _contient(n, cible):
+    if n.key() == cible.key():
+        return True
+    if isinstance(n, (Neg, Fn)):
+        return _contient(n.a, cible)
+    if isinstance(n, Op):
+        return _contient(n.a, cible) or _contient(n.b, cible)
+    return False
+
+
+def _oppose_somme(h):
+    """−h pour une somme h, écrit comme une somme (−(eˣ − 3) = 3 − eˣ)."""
+    termes = [(-sg, t) for sg, t in _termes(h)]
+    out = termes[0][1] if termes[0][0] > 0 else Neg(termes[0][1])
+    for sg, t in termes[1:]:
+        out = Op("+" if sg > 0 else "-", out, t)
+    return _ordre_naturel(out)
+
+
+def _forme_du_corrige(n):
+    """Formes du corrigé (décisions EC, D17), seulement là où l'écriture ne fait que changer de place un signe ou un facteur :
+      - c·… avec c < 0 et un seul facteur somme non polynomial de puissance impaire, avec un terme négatif (eˣ − 3) : le signe
+        entre dans ce facteur, −2(eˣ − 3)eˣ = 2(3 − eˣ)eˣ ; les facteurs polynomiaux (x − 3) restent tels quels (R7) ;
+      - un facteur e^{u} seul passe devant le premier facteur somme qui le contient : 2eˣ(3 − eˣ) (« on met eˣ en évidence »).
+    Dans un quotient, seul le numérateur est concerné. Sans changement, l'arbre est rendu tel quel."""
+    if isinstance(n, Op) and n.op == "/":
+        haut = _forme_du_corrige(n.a)
+        return n if haut is n.a else Op("/", haut, n.b)
+    try:
+        c, facs = aplatir(n)
+    except Exception:
+        return n
+    if c == 0 or c.denominator != 1 or not facs or any(k <= 0 for _, k in facs):
+        return n
+    facs = [list(f) for f in facs]
+    change = False
+    if c < 0:
+        sommes = [f for f in facs if f[1] % 2 == 1 and isinstance(f[0], Op) and f[0].op in "+-" and not _est_polynome(f[0])]
+        # seulement si l'opposé commence par un terme positif (3 − eˣ) ; jamais −e^{2x} − 1
+        if len(sommes) == 1 and any(sg < 0 for sg, _ in _termes(sommes[0][0])):
+            sommes[0][0] = _oppose_somme(sommes[0][0])
+            c, change = -c, True
+    for f in [f for f in facs if isinstance(f[0], Fn) and f[0].nom == "exp"]:
+        i = next(i for i, g in enumerate(facs) if g is f)
+        j = next((j for j, (s, _) in enumerate(facs) if isinstance(s, Op) and s.op in "+-" and _contient(s, f[0])), None)
+        if j is not None and j < i:
+            facs.insert(j, facs.pop(i))
+            change = True
+    if not change:
+        return n
+    out = _produit(([Nb(abs(c))] if abs(c) != 1 else []) + [_puiss_sure(h, k) for h, k in facs])
+    return Neg(out) if c < 0 else out
+
+
 def _simplifier(n):
     """Met f' en forme factorisée (jamais développée) : plus facile à lire, et les
     zéros s'y lisent directement. Le résultat
@@ -237,7 +324,12 @@ def _simplifier(n):
             # exposant constant irrationnel : x^α·ln x + x^α/x → x^(α−1)(α ln x + 1) (les puissances de x se combinent)
             e = sp.powsimp(sp.expand(e))
             e = sp.collect(e, [q for q in e.atoms(sp.Pow) if not q.exp.is_Rational])
-        return _en_quotient(_ordre_naturel(_nettoyer(arbre_depuis_sympy(e if irrationnel else sp.factor(e)))))
+        else:
+            try:
+                e = _factoriser_avec_exp(sp, e)
+            except Exception:
+                e = sp.factor(e)
+        return _forme_du_corrige(_en_quotient(_ordre_naturel(_nettoyer(arbre_depuis_sympy(e)))))
     except Exception:
         return _en_quotient(_ordre_naturel(_nettoyer(n)))
 
@@ -370,6 +462,13 @@ def _derivee_somme(n, items, top, etiq=F_PRIME):
     return resultat
 
 
+def _signe_devant(n):
+    """Facteur négatif (−2e^{−2x}, −1…) écrit −(…) : placé à droite d'un produit, tex le met entre parenthèses,
+    (x² − 6)(−2e^{−2x}) et non (x² − 6) · −2e^{−2x} (décisions EC, D7)."""
+    reste, negatif = _pos_et_signe(n)
+    return Neg(reste) if negatif and not isinstance(n, Neg) else n
+
+
 def _derivee_produit(n, items, top, etiq=F_PRIME):
     a, b = n.a, n.b
     ca, cb = valeur_constante(a), valeur_constante(b)
@@ -388,7 +487,7 @@ def _derivee_produit(n, items, top, etiq=F_PRIME):
         ua, ub = _simplifier(ua), _simplifier(ub)
         items.append(txt(rf"\(u'(x) = {tex(ua)}\)."))
         items.append(txt(rf"\(v'(x) = {tex(ub)}\)."))
-    brut = _epurer(_add(_mul(ua, b), _mul(a, ub)))
+    brut = _epurer(_add(_mul(ua, b), _mul(a, _signe_devant(ub) if top else ub)))
     if not top:
         return brut
     simplifie = _simplifier(brut)
@@ -410,7 +509,7 @@ def _derivee_quotient(n, items, top, etiq=F_PRIME):
         ua, ub = _simplifier(ua), _simplifier(ub)
         items.append(txt(rf"\(u'(x) = {tex(ua)}\)."))
         items.append(txt(rf"\(v'(x) = {tex(ub)}\)."))
-    brut = _epurer(_div(_sub(_mul(ua, b), _mul(a, ub)), _pow(b, Nb(2))))
+    brut = _epurer(_div(_sub(_mul(ua, b), _mul(a, _signe_devant(ub) if top else ub)), _pow(b, Nb(2))))
     if not top:
         return brut
     simplifie = _simplifier(brut)
@@ -451,6 +550,18 @@ def derivee_narree(n, items, top=True, etiq=F_PRIME):
 # =====================================================================
 # Signe de f', variations, extrema
 # =====================================================================
+def _exp_au_numerateur(sp, r, valeur):
+    """Écriture du corrigé (décisions EC, D17) : 3e^{−6} et non 3/e⁶. Seulement pour un entier fois une exponentielle
+    d'exposant constant négatif (3e^{−6}, −e^{−1}) ; seule l'écriture change (la valeur reste celle de num_sympy)."""
+    if valeur.approx or not isinstance(r, sp.Mul) or len(r.args) != 2:
+        return valeur
+    c, q = sorted(r.args, key=lambda a: not a.is_Integer)
+    if not (c.is_Integer and isinstance(q, sp.exp) and q.args[0].is_number and q.args[0].is_negative):
+        return valeur
+    t = ("- " if c < 0 else "") + ("" if abs(c) == 1 else f"{abs(c)} ") + sp.latex(q)      # « - 2 e^{4} » comme sp.latex
+    return Num(valeur.val, t, q=valeur.q, genre=valeur.genre, data=valeur.data, py=valeur.py)
+
+
 def _valeur_exacte(f_tree, point):
     """f(point) en forme exacte (objet Num) si possible via SymPy, sinon None."""
     sp = charger_sympy()
@@ -462,7 +573,7 @@ def _valeur_exacte(f_tree, point):
         r = sp.simplify(fe.subs(SYMPY["x"], val))
         if r.is_real is False:
             return None
-        return num_sympy(r)
+        return _exp_au_numerateur(sp, r, num_sympy(r))
     except Exception:
         return None
 
@@ -572,7 +683,13 @@ def etudier(entree):
         return res
     fprime = _simplifier(fprime)
     res["deriv_tex"] = tex(fprime)
-    res["deriv_etapes"] = items_deriv
+    etapes, vues = [], set()                             # une même phrase n'est écrite qu'une fois ((eˣ)′ = eˣ pour u et v : D7)
+    for it in items_deriv:
+        cle = json.dumps(it, sort_keys=True)
+        if cle not in vues:
+            vues.add(cle)
+            etapes.append(it)
+    res["deriv_etapes"] = etapes
     res["deriv_resolu"] = True
 
     try:

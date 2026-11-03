@@ -76,5 +76,57 @@ class TestSansOperationNeutre(unittest.TestCase):
                     self.assertNotIn("dén", ligne["label"])
 
 
+class TestFormesDuCorrige(unittest.TestCase):
+    """Chantier étude complète, P1 (decisions.md D6, D7, D17) : e^(somme) gardé entier, une exponentielle par exposant
+    distinct ; facteur négatif entre parenthèses ; une phrase écrite une seule fois ; 3e^{−6} ; signe dans le facteur eˣ − 3."""
+    FAMILLE = ["e^((x^2+x-2)/(6x-12))", "e^(2x)-4e^x", "e^x(6-e^x)", "e^(-x)-e^x", "(x+1)e^(x^2+x)", "e^x*e^(x+1)",
+               "x*e^(1/x)", "ln(x)/x", "(x^2-6)e^(-2x)", "(1-e^x)/(1+e^x)"]
+
+    def test_resultat_juste(self):
+        for entree in self.FAMILLE:
+            f = ed.lire(entree)
+            r = dv.etudier(entree)
+            fp = dv._simplifier(dv.derivee_narree(f, [], top=True))
+            self.assertEqual(ed.tex(fp), r["deriv_tex"], entree)
+            for t in (-1.3, 0.7, 1.9, 2.6):
+                attendu = derivee_numerique(f, t)
+                if attendu is None:
+                    continue
+                with self.subTest(f=entree, x=t):
+                    self.assertTrue(proches(ed.evaluer(fp, t), attendu))
+
+    def test_une_exponentielle_par_exposant(self):
+        attendus = {"e^((x^2+x-2)/(6x-12))": [r"e^{\frac{x^{2} + x - 2}{6x - 12}}"], "e^(2x)-4e^x": ["e^{x}"],
+                    "(x+1)e^(x^2+x)": ["e^{x^{2} + x}"], "x*e^(1/x)": [r"e^{\frac{1}{x}}"]}
+        for entree, exps in attendus.items():
+            t = dv.etudier(entree)["deriv_tex"]
+            with self.subTest(f=entree):
+                for e in exps:
+                    self.assertIn(e, t)
+                self.assertEqual(t.count("e^{"), sum(t.count(e) for e in exps), t)     # aucune autre exponentielle
+
+    def test_facteur_negatif_entre_parentheses(self):
+        r = dv.etudier("(x^2-6)e^(-2x)")
+        ligne = next(it["html"] for it in r["deriv_etapes"] if "u'(x)v(x) + u(x)v'(x)" in it["html"])
+        self.assertIn(r"\left(x^{2} - 6\right)\,\left(-2e^{-2x}\right)", ligne)
+        self.assertNotIn(r"\cdot -", ligne)
+
+    def test_phrase_ecrite_une_fois(self):
+        etapes = [it["html"] for it in dv.etudier("e^x(6-e^x)")["deriv_etapes"]]
+        self.assertEqual(len(etapes), len(set(etapes)), etapes)
+        self.assertEqual(sum(r"\left(e^{x}\right)' = e^{x}" in h for h in etapes), 1, etapes)
+
+    def test_formes_exactes(self):
+        self.assertEqual(dv.etudier("e^x(6-e^x)")["deriv_tex"], r"2e^{x}\,\left(3 - e^{x}\right)")
+        self.assertEqual(dv.etudier("ln(x)/x")["deriv_tex"], r"\frac{1 - \ln(x)}{x^{2}}")
+        self.assertEqual(dv.etudier("(x^2-6)e^(-2x)")["deriv_tex"], r"-2\left(x - 3\right)\,\left(x + 2\right)\,e^{-2x}")
+        valeurs = {e["x_tex"]: e["f_tex"] for e in dv.etudier("(x^2-6)e^(-2x)")["extrema"]}
+        self.assertEqual(valeurs, {"-2": "- 2 e^{4}", "3": "3 e^{-6}"})
+        self.assertEqual(dv.etudier("x*e^x")["extrema"][0]["f_tex"], "- e^{-1}")
+        self.assertEqual(dv.etudier("x*e^(2x)")["extrema"][0]["f_tex"], r"- \frac{1}{2 e}")        # coefficient non entier : inchangé
+        # somme sans terme négatif : le signe reste devant (jamais −e^{2x} − 1)
+        self.assertEqual(dv.etudier("e^(-x)-e^x")["deriv_tex"], r"-\left(e^{2x} + 1\right)\,e^{-x}")
+
+
 if __name__ == "__main__":
     unittest.main()
