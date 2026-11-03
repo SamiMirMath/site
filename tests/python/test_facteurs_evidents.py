@@ -36,8 +36,8 @@ class TestDerivee(unittest.TestCase):
         self.assertEqual(lignes[r"\sqrt{4x^{2} + 1}"], ["+", "||", "+", "+", "+"])
         self.assertEqual(lignes[r"\left(x + 2\right)^{2}"], ["+", "||", "+", "+", "+"])
         t = phrases(r["signe_etapes"])
-        self.assertEqual(t, [r"\(f'(x) = \frac{8x - 1}{\sqrt{4x^{2} + 1}\,\left(x + 2\right)^{2}} = 0 \iff 8x - 1 = 0 \iff "
-                             r"x = \frac{1}{8}\) ; valeur interdite : \(x = -2\)."])
+        # decisions EC, Q56 : « f′(x) = 0 ⇔ … » (f′ est écrite juste au-dessus, dans la carte « Dérivée »)
+        self.assertEqual(t, [r"\(f'(x) = 0 \iff 8x - 1 = 0 \iff x = \frac{1}{8}\) ; valeur interdite : \(x = -2\)."])
         sans_phrase_de_signe(self, t)
 
     def test_exponentielle_et_constante_negative(self):

@@ -311,10 +311,70 @@ def _forme_du_corrige(n):
     return Neg(out) if c < 0 else out
 
 
+def _exposants(n, out):
+    """Les exposants des exponentielles de n, dans l'ordre d'écriture, sans doublon d'écriture."""
+    if isinstance(n, Fn):
+        if n.nom == "exp" and not any(a.key() == n.a.key() for a in out):
+            out.append(n.a)
+        _exposants(n.a, out)
+    elif isinstance(n, Neg):
+        _exposants(n.a, out)
+    elif isinstance(n, Op):
+        _exposants(n.a, out)
+        _exposants(n.b, out)
+    return out
+
+
+SONDES_EXPOSANT = (-2.7, -0.6, 0.35, 1.3, 3.1)
+
+
+def _meme_exposant(sp, a, b):
+    """a et b sont le même exposant : différence nulle par SymPy (cancel, exact) et valeurs égales à la sonde (au moins un point)."""
+    try:
+        if sp.cancel(sp.together(en_sympy(a) - en_sympy(b))) != 0:
+            return False
+    except Exception:
+        return False
+    vus = 0
+    for t in SONDES_EXPOSANT:
+        va, vb = evaluer(a, t), evaluer(b, t)
+        if (va is None) != (vb is None):
+            return False
+        if va is not None:
+            if abs(va - vb) > 1e-9 * (1 + abs(va) + abs(vb)):
+                return False
+            vus += 1
+    return vus > 0
+
+
+def _exposants_de_l_enonce(sp, n, out):
+    """Chaque exponentielle de f' garde l'exposant écrit comme dans l'énoncé (décisions EC, Q37 : mêmes termes, même ordre) :
+    l'aller-retour par SymPy réécrit (x² + 1)/(2x) en (½x² + ½)/x et réordonne −2x² + 3x − 1 en 3x − 2x² − 1. Un exposant de
+    f' égal (SymPy et sonde) à un exposant écrit dans n est remplacé par celui-ci ; sinon il reste tel quel."""
+    ecrits = _exposants(n, [])
+    if not ecrits:
+        return out
+
+    def remettre(m):
+        if isinstance(m, Fn):
+            if m.nom == "exp" and not any(a.key() == m.a.key() for a in ecrits):
+                for a in ecrits:
+                    if _meme_exposant(sp, m.a, a):
+                        return Fn("exp", a)
+            return Fn(m.nom, remettre(m.a))
+        if isinstance(m, Neg):
+            return Neg(remettre(m.a))
+        if isinstance(m, Op):
+            return Op(m.op, remettre(m.a), remettre(m.b))
+        return m
+    return remettre(out)
+
+
 def _simplifier(n):
     """Met f' en forme factorisée (jamais développée) : plus facile à lire, et les
     zéros s'y lisent directement. Le résultat
-    est écrit en un quotient numérateur / dénominateur (_en_quotient)."""
+    est écrit en un quotient numérateur / dénominateur (_en_quotient) ; chaque exponentielle garde l'exposant de
+    l'énoncé (_exposants_de_l_enonce)."""
     sp = charger_sympy()
     if sp is None:
         return _en_quotient(_ordre_naturel(_nettoyer(n)))
@@ -330,7 +390,8 @@ def _simplifier(n):
                 e = _factoriser_avec_exp(sp, e)
             except Exception:
                 e = sp.factor(e)
-        return _forme_du_corrige(_en_quotient(_ordre_naturel(_nettoyer(arbre_depuis_sympy(e)))))
+        out = _forme_du_corrige(_en_quotient(_ordre_naturel(_nettoyer(arbre_depuis_sympy(e)))))
+        return _exposants_de_l_enonce(sp, n, out)
     except Exception:
         return _en_quotient(_ordre_naturel(_nettoyer(n)))
 
@@ -932,22 +993,54 @@ def _point_isole(iv):
     return iv.lo is not None and iv.hi is not None and iv.lf and iv.hf and proche(iv.lo.val, iv.hi.val)
 
 
+def _est_exponentielle(h):
+    """e^{u} (u non constant) : strictement positive partout où elle est définie."""
+    return (isinstance(h, Fn) and h.nom == "exp" and not sans_x(h.a)) or \
+        (isinstance(h, Op) and h.op == "^" and isinstance(h.a, E) and not sans_x(h.b))
+
+
+def _unitaire_affine(h):
+    """x, x + a ou x − a (a constante) : le zéro se lit directement (x − 4 = 0 s'écrit x = 4)."""
+    return isinstance(h, X) or (isinstance(h, Op) and h.op in "+-" and isinstance(h.a, X) and sans_x(h.b))
+
+
+def _chaine_annotee(etapes):
+    """« \\(A \\iff B\\) (propriété) \\(\\iff C\\) … » : [formule, propriété ou None] enchaînées par ⇔, la propriété écrite hors de
+    la formule, juste après l'étape qu'elle justifie."""
+    morceaux, courant = [], ""
+    for i, (formule, propriete) in enumerate(etapes):
+        courant += (r" \iff " if courant else (r"\iff " if i else "")) + formule
+        if propriete:
+            morceaux.append(rf"\({courant}\) ({propriete})")
+            courant = ""
+    if courant:
+        morceaux.append(rf"\({courant}\)")
+    return " ".join(morceaux)
+
+
 def _ligne_zeros(fprime, c_const, facs, Z, D, items):
-    """La ligne qui précède le tableau (guide de rédaction, R7) : zéros de f' et valeurs interdites, sans phrase sur le signe
-    d'un facteur ; None si les zéros ne sont pas des points isolés. Un facteur qui n'est pas un polynôme et qui s'annule garde
-    l'explication de son zéro (ln(x) + 1 = 0 ⇔ ln(x) = −1 : on soustrait 1), ajoutée à items avant la ligne."""
+    """La ligne qui précède le tableau (guide de rédaction, R7) : zéros de f' et valeurs interdites ; None si les zéros ne sont
+    pas des points isolés. « f'(x) = 0 ⇔ produit des facteurs du numérateur hors exponentielles = 0 (car e^{…} > 0) ⇔ … (produit
+    nul) » (decisions EC, Q56). Un facteur qui n'est pas un polynôme et qui s'annule garde l'explication de son zéro
+    (ln(x) + 1 = 0 ⇔ ln(x) = −1 : on soustrait 1), ajoutée à items avant la ligne."""
     if not all(_point_isole(iv) for iv in Z):
         return None
     zeros = sorted((iv.lo for iv in Z), key=lambda p: p.val)
     interdites = sorted((iv.lo for iv in complement(D) if _point_isole(iv)), key=lambda p: p.val)
-    equations = []
+    expos, autres, equations = [], [], []
     for h, expo in facs:
         if expo < 0:
             continue
+        if _est_exponentielle(h):
+            if not any(h.key() == e.key() for e in expos):
+                expos.append(h)
+            continue
+        autres.append((h, expo))
         zh = [z for z in zeros if (evaluer(h, z.val) is not None and abs(evaluer(h, z.val)) <= 1e-9)]
         if not zh:
             continue
-        equations.append(f"{tex(h)} = 0")
+        # x − a = 0 s'écrit directement x = a (decisions EC, Q56 : « x(x − 4) = 0 ⇔ x = 0 ou x = 4 (produit nul) »)
+        equations.append(f"x = {zh[0].tex}" if (_unitaire_affine(h) and len(zh) == 1) else f"{tex(h)} = 0")
         if not _est_polynome(h):
             explication = []
             try:
@@ -959,13 +1052,27 @@ def _ligne_zeros(fprime, c_const, facs, Z, D, items):
     if not zeros:
         ligne = rf"\(f'(x) = {tex(fprime)}\) ne s'annule jamais"
     else:
-        etapes = [rf"f'(x) = {tex(fprime)} = 0"]
-        if len(facs) > 1 or c_const != 1 or facs[0][1] != 1:
-            moyen = r" \text{ ou } ".join(equations)
-            if moyen != finale:
-                etapes.append(moyen)
-        etapes.append(finale)
-        ligne = r"\(" + r" \iff ".join(etapes) + r"\)"
+        # decisions EC, Q56 (outil Dérivée, une seule rédaction) : on retire les facteurs qui ne s'annulent jamais avec leur raison,
+        # puis produit nul : « f′(x) = 0 ⇔ x(x − 4) = 0 (car e^{…} > 0) ⇔ x = 0 ou x = 4 (produit nul) »
+        produit = tex(_produit([_puiss_sure(h, k) for h, k in autres])) + " = 0" if autres else None
+        raison = ("car " + " et ".join(rf"\({tex(h)} > 0\)" for h in expos)) if expos else None
+        etapes = [["f'(x) = 0", None]]
+        if produit is not None and produit != finale:
+            etapes.append([produit, raison])
+            raison = None
+        if len(equations) > 1:
+            if sorted(equations) == sorted(f"x = {z.tex}" for z in zeros):
+                etapes.append([finale, "produit nul"])
+            else:
+                etapes.append([r" \text{ ou } ".join(equations), "produit nul"])
+                etapes.append([finale, None])
+        else:
+            if equations and equations[0] not in (produit, finale):
+                etapes.append([equations[0], None])
+            etapes.append([finale, None])
+        if raison is not None:                          # f′(x) = 0 ⇔ x = 0 (car e^{−x²} > 0)
+            etapes[-1][1] = raison if etapes[-1][1] is None else raison + " ; " + etapes[-1][1]
+        ligne = _chaine_annotee(etapes)
     if interdites:
         ligne += (" ; valeur interdite : " if len(interdites) == 1 else " ; valeurs interdites : ")
         ligne += " ; ".join(rf"\(x = {p.tex}\)" for p in interdites)

@@ -520,7 +520,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "\\(f'(x) = \\frac{x^{2} - 6x + 1}{\\left(x - 3\\right)^{2}} = 0 \\iff x^{2} - 6x + 1 = 0 \\iff x = 3 - 2\\sqrt{2} \\text{ ou } x = 3 + 2\\sqrt{2}\\) ; valeur interdite : \\(x = 3\\).",
+     "html": "\\(f'(x) = 0 \\iff x^{2} - 6x + 1 = 0 \\iff x = 3 - 2\\sqrt{2} \\text{ ou } x = 3 + 2\\sqrt{2}\\) ; valeur interdite : \\(x = 3\\).",
      "type": "texte"
     }
    ],
@@ -815,7 +815,7 @@
      "type": "texte"
     },
     {
-     "html": "\\(f'(x) = 3\\left(\\ln(x) + 1\\right) = 0 \\iff \\ln(x) + 1 = 0 \\iff x = e^{-1}\\).",
+     "html": "\\(f'(x) = 0 \\iff \\ln(x) + 1 = 0 \\iff x = e^{-1}\\).",
      "type": "texte"
     }
    ],
@@ -1186,7 +1186,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "\\(f'(x) = \\frac{x\\,\\left(x - 4\\right)\\,e^{\\frac{x^{2} + x - 2}{6x - 12}}}{6\\left(x - 2\\right)^{2}} = 0 \\iff x = 0 \\text{ ou } x - 4 = 0 \\iff x = 0 \\text{ ou } x = 4\\) ; valeur interdite : \\(x = 2\\).",
+     "html": "\\(f'(x) = 0 \\iff x\\,\\left(x - 4\\right) = 0\\) (car \\(e^{\\frac{x^{2} + x - 2}{6x - 12}} > 0\\)) \\(\\iff x = 0 \\text{ ou } x = 4\\) (produit nul) ; valeur interdite : \\(x = 2\\).",
      "type": "texte"
     }
    ],
@@ -1911,7 +1911,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "\\(f'(x) = \\frac{-4x\\,e^{\\frac{2}{x^{2} - 4}}}{\\left(x - 2\\right)^{2}\\,\\left(x + 2\\right)^{2}} = 0 \\iff x = 0\\) ; valeurs interdites : \\(x = -2\\) ; \\(x = 2\\).",
+     "html": "\\(f'(x) = 0 \\iff x = 0\\) (car \\(e^{\\frac{2}{x^{2} - 4}} > 0\\)) ; valeurs interdites : \\(x = -2\\) ; \\(x = 2\\).",
      "type": "texte"
     }
    ],
@@ -2515,7 +2515,7 @@
      "type": "texte"
     },
     {
-     "html": "\\(f'(x) = \\frac{1 - \\ln(x)}{x^{2}} = 0 \\iff 1 - \\ln(x) = 0 \\iff x = e\\).",
+     "html": "\\(f'(x) = 0 \\iff 1 - \\ln(x) = 0 \\iff x = e\\).",
      "type": "texte"
     }
    ],
@@ -3058,7 +3058,7 @@
      "type": "texte"
     },
     {
-     "html": "\\(f'(x) = \\ln(x) + 1 = 0 \\iff x = e^{-1}\\).",
+     "html": "\\(f'(x) = 0 \\iff \\ln(x) + 1 = 0 \\iff x = e^{-1}\\).",
      "type": "texte"
     }
    ],
@@ -3383,7 +3383,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "\\(f'(x) = \\frac{-\\left(x + 1\\right)\\,\\left(x - 1\\right)}{\\left(x^{2} + 1\\right)^{2}} = 0 \\iff x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 1\\).",
+     "html": "\\(f'(x) = 0 \\iff \\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x = -1 \\text{ ou } x = 1\\) (produit nul).",
      "type": "texte"
     }
    ],
@@ -3954,7 +3954,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "\\(f'(x) = -x\\,\\left(x - 2\\right)\\,e^{-x} = 0 \\iff x = 0 \\text{ ou } x - 2 = 0 \\iff x = 0 \\text{ ou } x = 2\\).",
+     "html": "\\(f'(x) = 0 \\iff x\\,\\left(x - 2\\right) = 0\\) (car \\(e^{-x} > 0\\)) \\(\\iff x = 0 \\text{ ou } x = 2\\) (produit nul).",
      "type": "texte"
     }
    ],
@@ -4281,7 +4281,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "\\(f'(x) = 2\\left(x - 2\\right) = 0 \\iff x - 2 = 0 \\iff x = 2\\).",
+     "html": "\\(f'(x) = 0 \\iff x - 2 = 0 \\iff x = 2\\).",
      "type": "texte"
     }
    ],
@@ -4464,7 +4464,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "\\(f'(x) = 3\\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 1\\).",
+     "html": "\\(f'(x) = 0 \\iff \\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x = -1 \\text{ ou } x = 1\\) (produit nul).",
      "type": "texte"
     }
    ],
@@ -4683,7 +4683,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "\\(f'(x) = 4x\\,\\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x = 0 \\text{ ou } x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 0 \\text{ ou } x = 1\\).",
+     "html": "\\(f'(x) = 0 \\iff x\\,\\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x = -1 \\text{ ou } x = 0 \\text{ ou } x = 1\\) (produit nul).",
      "type": "texte"
     }
    ],

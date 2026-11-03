@@ -365,7 +365,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = 3\\left(x - 1\\right)^{2} = 0 \\iff x - 1 = 0 \\iff x = 1⟧.⟦x⟧⟦-\\infty⟧⟦1⟧⟦+\\infty⟧⟦3⟧+++⟦\\left(x - 1\\right)^{2}⟧+0+⟦f'(x)⟧+0+⟦f(x)⟧⟦\\nearrow⟧⟦\\nearrow⟧Aucun extremum local : f est strictement monotone (ou n'a que des points où f' s'annule sans changer de signe).",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 0 \\iff \\left(x - 1\\right)^{2} = 0 \\iff x = 1⟧.⟦x⟧⟦-\\infty⟧⟦1⟧⟦+\\infty⟧⟦3⟧+++⟦\\left(x - 1\\right)^{2}⟧+0+⟦f'(x)⟧+0+⟦f(x)⟧⟦\\nearrow⟧⟦\\nearrow⟧Aucun extremum local : f est strictement monotone (ou n'a que des points où f' s'annule sans changer de signe).",
     "titre": "Signe de f' et variationstableau"
    }
   ],
@@ -558,7 +558,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{x}{\\sqrt{x^{2} + 1}} = 0 \\iff x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦x⟧−0+⟦\\sqrt{x^{2} + 1}⟧+++⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧⟦1⟧⟦\\nearrow⟧minimum local en ⟦x=0⟧ : ⟦f(0)=1⟧",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 0 \\iff x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦x⟧−0+⟦\\sqrt{x^{2} + 1}⟧+++⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧⟦1⟧⟦\\nearrow⟧minimum local en ⟦x=0⟧ : ⟦f(0)=1⟧",
     "titre": "Signe de f' et variationstableau"
    }
   ],
@@ -832,7 +832,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{x^{2} - 6x + 1}{\\left(x - 3\\right)^{2}} = 0 \\iff x^{2} - 6x + 1 = 0 \\iff x = 3 - 2\\sqrt{2} \\text{ ou } x = 3 + 2\\sqrt{2}⟧ ; valeur interdite : ⟦x = 3⟧.⟦x⟧⟦-\\infty⟧⟦3 - 2\\sqrt{2}⟧⟦3⟧⟦3 + 2\\sqrt{2}⟧⟦+\\infty⟧⟦\\left(x^{2} - 6x + 1\\right)⟧+0−−0+⟦\\left(x - 3\\right)^{2}⟧++++++⟦f'(x)⟧+0−−0+⟦f(x)⟧⟦\\nearrow⟧⟦6 - 4 \\sqrt{2}⟧⟦\\searrow⟧⟦\\searrow⟧⟦4 \\sqrt{2} + 6⟧⟦\\nearrow⟧maximum local en ⟦x=3 - 2\\sqrt{2}⟧ : ⟦f(3 - 2\\sqrt{2})=6 - 4 \\sqrt{2}⟧minimum local en ⟦x=3 + 2\\sqrt{2}⟧ : ⟦f(3 + 2\\sqrt{2})=4 \\sqrt{2} + 6⟧",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 0 \\iff x^{2} - 6x + 1 = 0 \\iff x = 3 - 2\\sqrt{2} \\text{ ou } x = 3 + 2\\sqrt{2}⟧ ; valeur interdite : ⟦x = 3⟧.⟦x⟧⟦-\\infty⟧⟦3 - 2\\sqrt{2}⟧⟦3⟧⟦3 + 2\\sqrt{2}⟧⟦+\\infty⟧⟦\\left(x^{2} - 6x + 1\\right)⟧+0−−0+⟦\\left(x - 3\\right)^{2}⟧++++++⟦f'(x)⟧+0−−0+⟦f(x)⟧⟦\\nearrow⟧⟦6 - 4 \\sqrt{2}⟧⟦\\searrow⟧⟦\\searrow⟧⟦4 \\sqrt{2} + 6⟧⟦\\nearrow⟧maximum local en ⟦x=3 - 2\\sqrt{2}⟧ : ⟦f(3 - 2\\sqrt{2})=6 - 4 \\sqrt{2}⟧minimum local en ⟦x=3 + 2\\sqrt{2}⟧ : ⟦f(3 + 2\\sqrt{2})=4 \\sqrt{2} + 6⟧",
     "titre": "Signe de f' et variationstableau"
    }
   ],
@@ -1028,7 +1028,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦-\\ln(x) - 1 = 0 \\iff \\ln(x) = -1⟧ (on isole ⟦\\ln(x)⟧ du côté où son coefficient est positif).⟦\\ln(x) = -1 \\iff x = e^{-1}⟧⟦f'(x) = -\\ln(x) - 1 = 0 \\iff x = e^{-1}⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e^{-1}⟧⟦+\\infty⟧⟦\\left(-\\ln(x) - 1\\right)⟧+0−⟦f'(x)⟧+0−⟦f(x)⟧⟦\\nearrow⟧⟦e^{-1}⟧⟦\\searrow⟧maximum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=e^{-1}⟧",
+    "texte": "Signe de f' et variationstableau⟦-\\ln(x) - 1 = 0 \\iff \\ln(x) = -1⟧ (on isole ⟦\\ln(x)⟧ du côté où son coefficient est positif).⟦\\ln(x) = -1 \\iff x = e^{-1}⟧⟦f'(x) = 0 \\iff -\\ln(x) - 1 = 0 \\iff x = e^{-1}⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e^{-1}⟧⟦+\\infty⟧⟦\\left(-\\ln(x) - 1\\right)⟧+0−⟦f'(x)⟧+0−⟦f(x)⟧⟦\\nearrow⟧⟦e^{-1}⟧⟦\\searrow⟧maximum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=e^{-1}⟧",
     "titre": "Signe de f' et variationstableau"
    }
   ],
@@ -1221,7 +1221,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = -2x = 0 \\iff x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦-2⟧−−−⟦x⟧−0+⟦f'(x)⟧+0−⟦f(x)⟧⟦\\nearrow⟧⟦0⟧⟦\\searrow⟧maximum local en ⟦x=0⟧ : ⟦f(0)=0⟧",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 0 \\iff x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦-2⟧−−−⟦x⟧−0+⟦f'(x)⟧+0−⟦f(x)⟧⟦\\nearrow⟧⟦0⟧⟦\\searrow⟧maximum local en ⟦x=0⟧ : ⟦f(0)=0⟧",
     "titre": "Signe de f' et variationstableau"
    }
   ],
@@ -1669,7 +1669,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦\\ln(x) + 1 = 0 \\iff \\ln(x) = -1⟧ (on soustrait 1).⟦\\ln(x) = -1 \\iff x = e^{-1}⟧⟦f'(x) = 3\\left(\\ln(x) + 1\\right) = 0 \\iff \\ln(x) + 1 = 0 \\iff x = e^{-1}⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e^{-1}⟧⟦+\\infty⟧⟦3⟧+++⟦\\left(\\ln(x) + 1\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧⟦- 3 e^{-1}⟧⟦\\nearrow⟧minimum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=- 3 e^{-1}⟧",
+    "texte": "Signe de f' et variationstableau⟦\\ln(x) + 1 = 0 \\iff \\ln(x) = -1⟧ (on soustrait 1).⟦\\ln(x) = -1 \\iff x = e^{-1}⟧⟦f'(x) = 0 \\iff \\ln(x) + 1 = 0 \\iff x = e^{-1}⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e^{-1}⟧⟦+\\infty⟧⟦3⟧+++⟦\\left(\\ln(x) + 1\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧⟦- 3 e^{-1}⟧⟦\\nearrow⟧minimum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=- 3 e^{-1}⟧",
     "titre": "Signe de f' et variationstableau"
    }
   ],
@@ -1862,7 +1862,780 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = 2\\left(3x - 2\\right) = 0 \\iff 3x - 2 = 0 \\iff x = \\frac{2}{3}⟧.⟦x⟧⟦-\\infty⟧⟦\\frac{2}{3}⟧⟦+\\infty⟧⟦2⟧+++⟦\\left(3x - 2\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧⟦- \\frac{4}{3}⟧⟦\\nearrow⟧minimum local en ⟦x=\\frac{2}{3}⟧ : ⟦f(\\frac{2}{3})=- \\frac{4}{3}⟧",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 0 \\iff 3x - 2 = 0 \\iff x = \\frac{2}{3}⟧.⟦x⟧⟦-\\infty⟧⟦\\frac{2}{3}⟧⟦+\\infty⟧⟦2⟧+++⟦\\left(3x - 2\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧⟦- \\frac{4}{3}⟧⟦\\nearrow⟧minimum local en ⟦x=\\frac{2}{3}⟧ : ⟦f(\\frac{2}{3})=- \\frac{4}{3}⟧",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "e^((-2x^2+3x-1)/(3x-6))": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = e^{\\frac{-2x^{2} + 3x - 1}{3x - 6}}⟧⟦ED = \\mathbb{R} \\setminus \\left\\{2\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Dérivéecalcul⟦f(x) = e^{g(x)}⟧ avec ⟦g(x) = \\frac{-2x^{2} + 3x - 1}{3x - 6}⟧, donc ⟦f'(x) = g'(x) \\cdot e^{g(x)}⟧ (dérivée d'une composée). On calcule d'abord ⟦g'(x)⟧.Dérivée de l'exposantÉtape 1 : règle du quotient.On applique la règle du quotient, ⟦\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}⟧, avec :⟦u = -2x^{2} + 3x - 1⟧⟦u' = -4x + 3⟧⟦v = 3x - 6⟧⟦v' = 3⟧⟦g'(x) = \\frac{\\left(-4x + 3\\right)\\,\\left(3x - 6\\right) - \\left(-2x^{2} + 3x - 1\\right) \\cdot 3}{\\left(3x - 6\\right)^{2}}⟧ (règle du quotient)Étape 2 : calcul du numérateur, puis simplification.⟦g'(x) = \\frac{-12x^{2} + 24x + 9x - 18 + 6x^{2} - 9x + 3}{9\\left(x - 2\\right)^{2}}⟧ (développement)⟦= \\frac{-6x^{2} + 24x - 15}{9\\left(x - 2\\right)^{2}}⟧ (réduction)⟦= \\frac{-3\\left(2x^{2} - 8x + 5\\right)}{9\\left(x - 2\\right)^{2}}⟧ (mise en évidence)⟦= \\frac{-\\left(2x^{2} - 8x + 5\\right)}{3\\left(x - 2\\right)^{2}}⟧ (simplification par 3)On remplace ⟦g'(x)⟧ dans ⟦f'(x) = g'(x) \\cdot e^{g(x)}⟧ :⟦f'(x) = \\frac{-\\left(2x^{2} - 8x + 5\\right)\\,e^{\\frac{-2x^{2} + 3x - 1}{3x - 6}}}{3\\left(x - 2\\right)^{2}}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "minimum local en ⟦x=\\frac{4 - \\sqrt{6}}{2}⟧ : ⟦f(\\frac{4 - \\sqrt{6}}{2})=e^{- \\frac{5}{3} + \\frac{2 \\sqrt{6}}{3}}⟧",
+       "maximum local en ⟦x=\\frac{4 + \\sqrt{6}}{2}⟧ : ⟦f(\\frac{4 + \\sqrt{6}}{2})=e^{- \\frac{5}{3} - \\frac{2 \\sqrt{6}}{3}}⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\frac{4 - \\sqrt{6}}{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\frac{4 + \\sqrt{6}}{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦-\\frac{1}{3}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(2x^{2} - 8x + 5\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦e^{\\frac{-2x^{2} + 3x - 1}{3x - 6}}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x - 2\\right)^{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "⟦e^{- \\frac{5}{3} + \\frac{2 \\sqrt{6}}{3}}⟧"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "pt",
+         "⟦e^{- \\frac{5}{3} - \\frac{2 \\sqrt{6}}{3}}⟧"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 0 \\iff 2x^{2} - 8x + 5 = 0⟧ (car ⟦e^{\\frac{-2x^{2} + 3x - 1}{3x - 6}} > 0⟧) ⟦\\iff x = \\frac{4 - \\sqrt{6}}{2} \\text{ ou } x = \\frac{4 + \\sqrt{6}}{2}⟧ ; valeur interdite : ⟦x = 2⟧.⟦x⟧⟦-\\infty⟧⟦\\frac{4 - \\sqrt{6}}{2}⟧⟦2⟧⟦\\frac{4 + \\sqrt{6}}{2}⟧⟦+\\infty⟧⟦-\\frac{1}{3}⟧−−−−−−⟦\\left(2x^{2} - 8x + 5\\right)⟧+0−−0+⟦e^{\\frac{-2x^{2} + 3x - 1}{3x - 6}}⟧++++++⟦\\left(x - 2\\right)^{2}⟧++++++⟦f'(x)⟧−0++0−⟦f(x)⟧⟦\\searrow⟧⟦e^{- \\frac{5}{3} + \\frac{2 \\sqrt{6}}{3}}⟧⟦\\nearrow⟧⟦\\nearrow⟧⟦e^{- \\frac{5}{3} - \\frac{2 \\sqrt{6}}{3}}⟧⟦\\searrow⟧minimum local en ⟦x=\\frac{4 - \\sqrt{6}}{2}⟧ : ⟦f(\\frac{4 - \\sqrt{6}}{2})=e^{- \\frac{5}{3} + \\frac{2 \\sqrt{6}}{3}}⟧maximum local en ⟦x=\\frac{4 + \\sqrt{6}}{2}⟧ : ⟦f(\\frac{4 + \\sqrt{6}}{2})=e^{- \\frac{5}{3} - \\frac{2 \\sqrt{6}}{3}}⟧",
+    "titre": "Signe de f' et variationstableau"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "e^((x^2+1)/(2x))": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = e^{\\frac{x^{2} + 1}{2x}}⟧⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧ — détail dans l'outil « Ensemble de définition ».",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Dérivéecalcul⟦f(x) = e^{g(x)}⟧ avec ⟦g(x) = \\frac{x^{2} + 1}{2x}⟧, donc ⟦f'(x) = g'(x) \\cdot e^{g(x)}⟧ (dérivée d'une composée). On calcule d'abord ⟦g'(x)⟧.Dérivée de l'exposantÉtape 1 : règle du quotient.On applique la règle du quotient, ⟦\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}⟧, avec :⟦u = x^{2} + 1⟧⟦u' = 2x⟧⟦v = 2x⟧⟦v' = 2⟧⟦g'(x) = \\frac{2x \\cdot 2x - \\left(x^{2} + 1\\right) \\cdot 2}{\\left(2x\\right)^{2}}⟧ (règle du quotient)Étape 2 : calcul du numérateur, puis simplification.⟦g'(x) = \\frac{4x^{2} - 2x^{2} - 2}{4x^{2}}⟧ (développement)⟦= \\frac{2x^{2} - 2}{4x^{2}}⟧ (réduction)⟦= \\frac{2\\left(x^{2} - 1\\right)}{4x^{2}}⟧ (mise en évidence)⟦= \\frac{x^{2} - 1}{2x^{2}}⟧ (simplification par 2)On remplace ⟦g'(x)⟧ dans ⟦f'(x) = g'(x) \\cdot e^{g(x)}⟧ :⟦f'(x) = \\frac{\\left(x + 1\\right)\\,\\left(x - 1\\right)\\,e^{\\frac{x^{2} + 1}{2x}}}{2x^{2}}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "maximum local en ⟦x=-1⟧ : ⟦f(-1)=e^{-1}⟧",
+       "minimum local en ⟦x=1⟧ : ⟦f(1)=e⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦1⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\frac{1}{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x + 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x - 1\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦e^{\\frac{x^{2} + 1}{2x}}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x^{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "pt",
+         "⟦e^{-1}⟧"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "⟦e⟧"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 0 \\iff \\left(x + 1\\right)\\,\\left(x - 1\\right) = 0⟧ (car ⟦e^{\\frac{x^{2} + 1}{2x}} > 0⟧) ⟦\\iff x = -1 \\text{ ou } x = 1⟧ (produit nul) ; valeur interdite : ⟦x = 0⟧.⟦x⟧⟦-\\infty⟧⟦-1⟧⟦0⟧⟦1⟧⟦+\\infty⟧⟦\\frac{1}{2}⟧++++++⟦\\left(x + 1\\right)⟧−0++++⟦\\left(x - 1\\right)⟧−−−−0+⟦e^{\\frac{x^{2} + 1}{2x}}⟧++++++⟦x^{2}⟧++++++⟦f'(x)⟧+0−−0+⟦f(x)⟧⟦\\nearrow⟧⟦e^{-1}⟧⟦\\searrow⟧⟦\\searrow⟧⟦e⟧⟦\\nearrow⟧maximum local en ⟦x=-1⟧ : ⟦f(-1)=e^{-1}⟧minimum local en ⟦x=1⟧ : ⟦f(1)=e⟧",
     "titre": "Signe de f' et variationstableau"
    }
   ],
@@ -2230,7 +3003,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = 2x\\,e^{x^{2}} = 0 \\iff x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦2⟧+++⟦x⟧−0+⟦e^{x^{2}}⟧+++⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧⟦1⟧⟦\\nearrow⟧minimum local en ⟦x=0⟧ : ⟦f(0)=1⟧",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 0 \\iff x = 0⟧ (car ⟦e^{x^{2}} > 0⟧).⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦2⟧+++⟦x⟧−0+⟦e^{x^{2}}⟧+++⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧⟦1⟧⟦\\nearrow⟧minimum local en ⟦x=0⟧ : ⟦f(0)=1⟧",
     "titre": "Signe de f' et variationstableau"
    }
   ],
@@ -2482,7 +3255,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦1 - \\ln(x) = 0 \\iff \\ln(x) = 1⟧ (on isole ⟦\\ln(x)⟧ du côté où son coefficient est positif).⟦\\ln(x) = 1 \\iff x = e⟧⟦f'(x) = \\frac{1 - \\ln(x)}{x^{2}} = 0 \\iff 1 - \\ln(x) = 0 \\iff x = e⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e⟧⟦+\\infty⟧⟦\\left(1 - \\ln(x)\\right)⟧+0−⟦x^{2}⟧+++⟦f'(x)⟧+0−⟦f(x)⟧⟦\\nearrow⟧⟦e^{-1}⟧⟦\\searrow⟧maximum local en ⟦x=e⟧ : ⟦f(e)=e^{-1}⟧",
+    "texte": "Signe de f' et variationstableau⟦1 - \\ln(x) = 0 \\iff \\ln(x) = 1⟧ (on isole ⟦\\ln(x)⟧ du côté où son coefficient est positif).⟦\\ln(x) = 1 \\iff x = e⟧⟦f'(x) = 0 \\iff 1 - \\ln(x) = 0 \\iff x = e⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e⟧⟦+\\infty⟧⟦\\left(1 - \\ln(x)\\right)⟧+0−⟦x^{2}⟧+++⟦f'(x)⟧+0−⟦f(x)⟧⟦\\nearrow⟧⟦e^{-1}⟧⟦\\searrow⟧maximum local en ⟦x=e⟧ : ⟦f(e)=e^{-1}⟧",
     "titre": "Signe de f' et variationstableau"
    }
   ],
@@ -2782,7 +3555,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{2x}{\\left(x - 2\\right)\\,\\left(x + 2\\right)} = 0 \\iff x = 0⟧.⟦x⟧⟦-\\infty⟧⟦-2⟧⟦2⟧⟦+\\infty⟧⟦2⟧++⟦x⟧−+⟦\\left(x - 2\\right)⟧−+⟦\\left(x + 2\\right)⟧−+⟦f'(x)⟧−+⟦f(x)⟧⟦\\searrow⟧⟦\\nearrow⟧Aucun extremum local : f est strictement monotone (ou n'a que des points où f' s'annule sans changer de signe).",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 0 \\iff x = 0⟧.⟦x⟧⟦-\\infty⟧⟦-2⟧⟦2⟧⟦+\\infty⟧⟦2⟧++⟦x⟧−+⟦\\left(x - 2\\right)⟧−+⟦\\left(x + 2\\right)⟧−+⟦f'(x)⟧−+⟦f(x)⟧⟦\\searrow⟧⟦\\nearrow⟧Aucun extremum local : f est strictement monotone (ou n'a que des points où f' s'annule sans changer de signe).",
     "titre": "Signe de f' et variationstableau"
    }
   ],
@@ -3402,7 +4175,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{x - 2}{\\sqrt{x^{2} - 4x + 5}} = 0 \\iff x - 2 = 0 \\iff x = 2⟧.⟦x⟧⟦-\\infty⟧⟦2⟧⟦+\\infty⟧⟦\\left(x - 2\\right)⟧−0+⟦\\sqrt{x^{2} - 4x + 5}⟧+++⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧⟦1⟧⟦\\nearrow⟧minimum local en ⟦x=2⟧ : ⟦f(2)=1⟧",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 0 \\iff x - 2 = 0 \\iff x = 2⟧.⟦x⟧⟦-\\infty⟧⟦2⟧⟦+\\infty⟧⟦\\left(x - 2\\right)⟧−0+⟦\\sqrt{x^{2} - 4x + 5}⟧+++⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧⟦1⟧⟦\\nearrow⟧minimum local en ⟦x=2⟧ : ⟦f(2)=1⟧",
     "titre": "Signe de f' et variationstableau"
    }
   ],
@@ -3598,7 +4371,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦\\ln(x) + 1 = 0 \\iff \\ln(x) = -1⟧ (on soustrait 1).⟦\\ln(x) = -1 \\iff x = e^{-1}⟧⟦f'(x) = \\ln(x) + 1 = 0 \\iff x = e^{-1}⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e^{-1}⟧⟦+\\infty⟧⟦\\left(\\ln(x) + 1\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧⟦- e^{-1}⟧⟦\\nearrow⟧minimum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=- e^{-1}⟧",
+    "texte": "Signe de f' et variationstableau⟦\\ln(x) + 1 = 0 \\iff \\ln(x) = -1⟧ (on soustrait 1).⟦\\ln(x) = -1 \\iff x = e^{-1}⟧⟦f'(x) = 0 \\iff \\ln(x) + 1 = 0 \\iff x = e^{-1}⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e^{-1}⟧⟦+\\infty⟧⟦\\left(\\ln(x) + 1\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧⟦- e^{-1}⟧⟦\\nearrow⟧minimum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=- e^{-1}⟧",
     "titre": "Signe de f' et variationstableau"
    }
   ],
@@ -3794,7 +4567,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦\\ln(x) + 2 = 0 \\iff \\ln(x) = -2⟧ (on soustrait 2).⟦\\ln(x) = -2 \\iff x = e^{-2}⟧⟦f'(x) = \\ln(x) + 2 = 0 \\iff x = e^{-2}⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e^{-2}⟧⟦+\\infty⟧⟦\\left(\\ln(x) + 2\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧⟦- e^{-2}⟧⟦\\nearrow⟧minimum local en ⟦x=e^{-2}⟧ : ⟦f(e^{-2})=- e^{-2}⟧",
+    "texte": "Signe de f' et variationstableau⟦\\ln(x) + 2 = 0 \\iff \\ln(x) = -2⟧ (on soustrait 2).⟦\\ln(x) = -2 \\iff x = e^{-2}⟧⟦f'(x) = 0 \\iff \\ln(x) + 2 = 0 \\iff x = e^{-2}⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e^{-2}⟧⟦+\\infty⟧⟦\\left(\\ln(x) + 2\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧⟦- e^{-2}⟧⟦\\nearrow⟧minimum local en ⟦x=e^{-2}⟧ : ⟦f(e^{-2})=- e^{-2}⟧",
     "titre": "Signe de f' et variationstableau"
    }
   ],
@@ -4102,7 +4875,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{-\\left(x + 1\\right)\\,\\left(x - 1\\right)}{\\left(x^{2} + 1\\right)^{2}} = 0 \\iff x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 1⟧.⟦x⟧⟦-\\infty⟧⟦-1⟧⟦1⟧⟦+\\infty⟧⟦-1⟧−−−−−⟦\\left(x + 1\\right)⟧−0+++⟦\\left(x - 1\\right)⟧−−−0+⟦\\left(x^{2} + 1\\right)^{2}⟧+++++⟦f'(x)⟧−0+0−⟦f(x)⟧⟦\\searrow⟧⟦- \\frac{1}{2}⟧⟦\\nearrow⟧⟦\\frac{1}{2}⟧⟦\\searrow⟧minimum local en ⟦x=-1⟧ : ⟦f(-1)=- \\frac{1}{2}⟧maximum local en ⟦x=1⟧ : ⟦f(1)=\\frac{1}{2}⟧",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 0 \\iff \\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x = -1 \\text{ ou } x = 1⟧ (produit nul).⟦x⟧⟦-\\infty⟧⟦-1⟧⟦1⟧⟦+\\infty⟧⟦-1⟧−−−−−⟦\\left(x + 1\\right)⟧−0+++⟦\\left(x - 1\\right)⟧−−−0+⟦\\left(x^{2} + 1\\right)^{2}⟧+++++⟦f'(x)⟧−0+0−⟦f(x)⟧⟦\\searrow⟧⟦- \\frac{1}{2}⟧⟦\\nearrow⟧⟦\\frac{1}{2}⟧⟦\\searrow⟧minimum local en ⟦x=-1⟧ : ⟦f(-1)=- \\frac{1}{2}⟧maximum local en ⟦x=1⟧ : ⟦f(1)=\\frac{1}{2}⟧",
     "titre": "Signe de f' et variationstableau"
    }
   ],
@@ -4992,7 +5765,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦\\sqrt{x} = 0 \\iff x = 0⟧⟦f'(x) = \\frac{3\\sqrt{x}}{2} = 0 \\iff \\sqrt{x} = 0 \\iff x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦\\frac{3}{2}⟧++⟦\\sqrt{x}⟧0+⟦f'(x)⟧0+⟦f(x)⟧⟦0⟧⟦\\nearrow⟧minimum local en ⟦x=0⟧ : ⟦f(0)=0⟧",
+    "texte": "Signe de f' et variationstableau⟦\\sqrt{x} = 0 \\iff x = 0⟧⟦f'(x) = 0 \\iff \\sqrt{x} = 0 \\iff x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦\\frac{3}{2}⟧++⟦\\sqrt{x}⟧0+⟦f'(x)⟧0+⟦f(x)⟧⟦0⟧⟦\\nearrow⟧minimum local en ⟦x=0⟧ : ⟦f(0)=0⟧",
     "titre": "Signe de f' et variationstableau"
    }
   ],
@@ -5300,7 +6073,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = -x\\,\\left(x - 2\\right)\\,e^{-x} = 0 \\iff x = 0 \\text{ ou } x - 2 = 0 \\iff x = 0 \\text{ ou } x = 2⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦2⟧⟦+\\infty⟧⟦-1⟧−−−−−⟦x⟧−0+++⟦\\left(x - 2\\right)⟧−−−0+⟦e^{-x}⟧+++++⟦f'(x)⟧−0+0−⟦f(x)⟧⟦\\searrow⟧⟦0⟧⟦\\nearrow⟧⟦4 e^{-2}⟧⟦\\searrow⟧minimum local en ⟦x=0⟧ : ⟦f(0)=0⟧maximum local en ⟦x=2⟧ : ⟦f(2)=4 e^{-2}⟧",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 0 \\iff x\\,\\left(x - 2\\right) = 0⟧ (car ⟦e^{-x} > 0⟧) ⟦\\iff x = 0 \\text{ ou } x = 2⟧ (produit nul).⟦x⟧⟦-\\infty⟧⟦0⟧⟦2⟧⟦+\\infty⟧⟦-1⟧−−−−−⟦x⟧−0+++⟦\\left(x - 2\\right)⟧−−−0+⟦e^{-x}⟧+++++⟦f'(x)⟧−0+0−⟦f(x)⟧⟦\\searrow⟧⟦0⟧⟦\\nearrow⟧⟦4 e^{-2}⟧⟦\\searrow⟧minimum local en ⟦x=0⟧ : ⟦f(0)=0⟧maximum local en ⟦x=2⟧ : ⟦f(2)=4 e^{-2}⟧",
     "titre": "Signe de f' et variationstableau"
    }
   ],
@@ -5493,7 +6266,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = 2\\left(x - 2\\right) = 0 \\iff x - 2 = 0 \\iff x = 2⟧.⟦x⟧⟦-\\infty⟧⟦2⟧⟦+\\infty⟧⟦2⟧+++⟦\\left(x - 2\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧⟦-1⟧⟦\\nearrow⟧minimum local en ⟦x=2⟧ : ⟦f(2)=-1⟧",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 0 \\iff x - 2 = 0 \\iff x = 2⟧.⟦x⟧⟦-\\infty⟧⟦2⟧⟦+\\infty⟧⟦2⟧+++⟦\\left(x - 2\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧⟦-1⟧⟦\\nearrow⟧minimum local en ⟦x=2⟧ : ⟦f(2)=-1⟧",
     "titre": "Signe de f' et variationstableau"
    }
   ],
@@ -5679,7 +6452,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = 3x^{2} = 0 \\iff x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦3⟧+++⟦x^{2}⟧+0+⟦f'(x)⟧+0+⟦f(x)⟧⟦\\nearrow⟧⟦\\nearrow⟧Aucun extremum local : f est strictement monotone (ou n'a que des points où f' s'annule sans changer de signe).",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 0 \\iff x^{2} = 0 \\iff x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦3⟧+++⟦x^{2}⟧+0+⟦f'(x)⟧+0+⟦f(x)⟧⟦\\nearrow⟧⟦\\nearrow⟧Aucun extremum local : f est strictement monotone (ou n'a que des points où f' s'annule sans changer de signe).",
     "titre": "Signe de f' et variationstableau"
    }
   ],
@@ -5950,7 +6723,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = 3\\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 1⟧.⟦x⟧⟦-\\infty⟧⟦-1⟧⟦1⟧⟦+\\infty⟧⟦3⟧+++++⟦\\left(x + 1\\right)⟧−0+++⟦\\left(x - 1\\right)⟧−−−0+⟦f'(x)⟧+0−0+⟦f(x)⟧⟦\\nearrow⟧⟦2⟧⟦\\searrow⟧⟦-2⟧⟦\\nearrow⟧maximum local en ⟦x=-1⟧ : ⟦f(-1)=2⟧minimum local en ⟦x=1⟧ : ⟦f(1)=-2⟧",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 0 \\iff \\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x = -1 \\text{ ou } x = 1⟧ (produit nul).⟦x⟧⟦-\\infty⟧⟦-1⟧⟦1⟧⟦+\\infty⟧⟦3⟧+++++⟦\\left(x + 1\\right)⟧−0+++⟦\\left(x - 1\\right)⟧−−−0+⟦f'(x)⟧+0−0+⟦f(x)⟧⟦\\nearrow⟧⟦2⟧⟦\\searrow⟧⟦-2⟧⟦\\nearrow⟧maximum local en ⟦x=-1⟧ : ⟦f(-1)=2⟧minimum local en ⟦x=1⟧ : ⟦f(1)=-2⟧",
     "titre": "Signe de f' et variationstableau"
    }
   ],
@@ -6315,7 +7088,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = 4x\\,\\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x = 0 \\text{ ou } x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 0 \\text{ ou } x = 1⟧.⟦x⟧⟦-\\infty⟧⟦-1⟧⟦0⟧⟦1⟧⟦+\\infty⟧⟦4⟧+++++++⟦x⟧−−−0+++⟦\\left(x + 1\\right)⟧−0+++++⟦\\left(x - 1\\right)⟧−−−−−0+⟦f'(x)⟧−0+0−0+⟦f(x)⟧⟦\\searrow⟧⟦-1⟧⟦\\nearrow⟧⟦0⟧⟦\\searrow⟧⟦-1⟧⟦\\nearrow⟧minimum local en ⟦x=-1⟧ : ⟦f(-1)=-1⟧maximum local en ⟦x=0⟧ : ⟦f(0)=0⟧minimum local en ⟦x=1⟧ : ⟦f(1)=-1⟧",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 0 \\iff x\\,\\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x = -1 \\text{ ou } x = 0 \\text{ ou } x = 1⟧ (produit nul).⟦x⟧⟦-\\infty⟧⟦-1⟧⟦0⟧⟦1⟧⟦+\\infty⟧⟦4⟧+++++++⟦x⟧−−−0+++⟦\\left(x + 1\\right)⟧−0+++++⟦\\left(x - 1\\right)⟧−−−−−0+⟦f'(x)⟧−0+0−0+⟦f(x)⟧⟦\\searrow⟧⟦-1⟧⟦\\nearrow⟧⟦0⟧⟦\\searrow⟧⟦-1⟧⟦\\nearrow⟧minimum local en ⟦x=-1⟧ : ⟦f(-1)=-1⟧maximum local en ⟦x=0⟧ : ⟦f(0)=0⟧minimum local en ⟦x=1⟧ : ⟦f(1)=-1⟧",
     "titre": "Signe de f' et variationstableau"
    }
   ],
@@ -6548,7 +7321,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦\\ln(x) + 1 = 0 \\iff \\ln(x) = -1⟧ (on soustrait 1).⟦\\ln(x) = -1 \\iff x = e^{-1}⟧⟦f'(x) = x^{x}\\,\\left(\\ln(x) + 1\\right) = 0 \\iff \\ln(x) + 1 = 0 \\iff x = e^{-1}⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e^{-1}⟧⟦+\\infty⟧⟦x^{x}⟧+++⟦\\left(\\ln(x) + 1\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧⟦e^{- \\frac{1}{e}}⟧⟦\\nearrow⟧minimum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=e^{- \\frac{1}{e}}⟧",
+    "texte": "Signe de f' et variationstableau⟦\\ln(x) + 1 = 0 \\iff \\ln(x) = -1⟧ (on soustrait 1).⟦\\ln(x) = -1 \\iff x = e^{-1}⟧⟦f'(x) = 0 \\iff x^{x}\\,\\left(\\ln(x) + 1\\right) = 0 \\iff \\ln(x) + 1 = 0 \\iff x = e^{-1}⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e^{-1}⟧⟦+\\infty⟧⟦x^{x}⟧+++⟦\\left(\\ln(x) + 1\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦\\searrow⟧⟦e^{- \\frac{1}{e}}⟧⟦\\nearrow⟧minimum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=e^{- \\frac{1}{e}}⟧",
     "titre": "Signe de f' et variationstableau"
    }
   ],

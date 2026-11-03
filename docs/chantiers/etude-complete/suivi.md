@@ -5,7 +5,12 @@ Branche `etude-complete`, créée le 02.11.2026 depuis `main` à jour (9716912, 
 Ordre de priorité : `CLAUDE.md` > `decisions.md` (validé par l'enseignant le 02.11.2026) > `audit-etape0.md`.
 Un commit « EC P{N} : … » par partie ; suite complète verte (`python3 tests/lancer.py complet`, code de retour lu sans pipe) avant chaque commit.
 
-**Reprise après compactage** : la nuit du 02–03.11.2026 est **terminée** (P0 à P5, P7a, P7b, P8 commitées ; résumé ci-dessous ;
+**Reprise après compactage (session 2, 03.11.2026)** : `decisions.md` a été mis à jour par l'enseignant le 03.11 (§7 : réponses aux
+questions 1 à 56 ; §2 Extremums révisé ; parties R1 et R2). Ordre de la session 2 : **R1, R2, P6, P9** (P10 exclue), un sous-agent par
+partie, l'un après l'autre ; le commit R1 verse aussi la nouvelle version de `decisions.md`. Nouvelles questions numérotées à partir
+de 57. État : tableau « Parties » ci-dessous.
+
+**Reprise après compactage (nuit du 02–03.11)** : la nuit du 02–03.11.2026 est **terminée** (P0 à P5, P7a, P7b, P8 commitées ; résumé ci-dessous ;
 rien n'est poussé ni fusionné). Prochaine étape : **relecture de l'enseignant** (questions « à trancher avant la fusion », instantanés
 « À relire », texte rendu de l'Ex7), puis **P6** (partie 4, Limites : D12, D13, D16), puis **P9** (D18, D20, mesure Pyodide), P10
 facultative. Pour reprendre : relire ce fichier, `decisions.md`, puis `git log --oneline main..HEAD` ; reprendre à la première partie
@@ -327,11 +332,13 @@ encadré ; les cartes « Étape k : … » de la partie 4 sont les étapes de la
 | P3 | Partie 1 : mise en forme + ED détaillé (D3) | EC | **fait** | f108f7f |
 | P4 | Partie 2 : parité (D4) | EC | **fait** | 62781a8 |
 | P5 | Partie 3 : zéros, signe, f(0) (D5) | EC | **fait** | 8fc2fa2 |
-| P6 | Partie 4 : D12, D13, D16 | Limites | reportée (hors de la nuit du 02.11) | |
+| R1 | Corrections après relecture, outil Dérivée : Q37, Q56, Q32 (§7) | Dérivée | **fait** | (voir commit « EC R1 ») |
+| R2 | Corrections après relecture, EC : Q7, Q11, Q15, Q23, Q28, Q41, Q43 (§7) | EC | à faire (session 2) | |
+| P6 | Partie 4 : D12, D13, D16 | Limites | à faire (session 2) | |
 | P7a | Dérivée de l'exposant détaillée, tableau u/v (D7, D8, D7b si simple) | Dérivée | **fait** | 1799fff |
 | P7b | Valeurs dans le tableau de variations (D10), extremums (D11) | EC + Dérivée | **fait** | cfe88de |
 | P8 | Graphe (D15, §3) | EC | **fait** | 3ece3c9 |
-| P9 | Exemples (D18), Bilan (D20), instantanés, largeurs 320–390 px, mesure Pyodide | EC | reportée (hors de la nuit du 02.11) | |
+| P9 | Exemples (D18), Bilan (D20), instantanés, largeurs 320–390 px, mesure Pyodide | EC | à faire (session 2) | |
 | P10 | *(facultatif)* Pente au point exclu (D14) | EC | reportée (hors de la nuit du 02.11) | |
 
 ## Plans
@@ -557,6 +564,30 @@ l'asymptote, au-delà de tous les points à montrer et des valeurs interdites.
    `graphique-traces.json` régénéré ; largeurs. Instantanés de l'EC régénérés (liste sous « À relire ») ; spécification ; suite
    complète ; temps natif ; commit « EC P8 : … ».
 
+### R1 (03.11.2026, session 2)
+
+Corrections après relecture qui touchent l'**outil Dérivée** (donc aussi l'EC) : Q37, Q56, Q32 (decisions.md §7). Tout dans
+`derivee-variations/derivee_variations.py` ; les autres outils ne changent pas (leurs instantanés doivent rester identiques).
+1. **Q37, exposant de l'énoncé** : à la fin de `_simplifier`, chaque `e^{a}` de f′ dont l'exposant a est égal à un exposant écrit
+   dans l'arbre dérivé (donc dans l'énoncé) reprend cet exposant tel qu'il est écrit (mêmes termes, même ordre). Égalité prouvée
+   deux fois : `cancel(together(a − b)) = 0` (SymPy, exact) **et** sonde (évaluation en 5 points, au moins un point défini) ;
+   sinon l'écriture de SymPy reste (elle est juste). f′ ne change pas de valeur ; seules les écritures changent.
+   Tests : e^((x²+1)/(2x)) et e^((−2x²+3x−1)/(3x−6)) entrent dans les cas limites de l'outil Dérivée (`tests/python/cas.py`,
+   cités dans la spécification : instantanés et références de pages) ; `TestExposantDeLEnonce` (ces deux cas, Ex7, e^(x/2),
+   x·e^(−x/3+1) ; famille de 60 fonctions tirées au hasard, e^{u/v}, P·e^{Q}, e^{Q}/v : tout exposant de f′ est un exposant de
+   l'énoncé et f′ = dérivée de l'oracle mpmath).
+2. **Q56, ligne des zéros de f′** (une seule rédaction, `_ligne_zeros`) : « f′(x) = 0 ⇔ P = 0 (car e^{…} > 0) ⇔ … (produit nul) »,
+   P = produit des facteurs du numérateur qui ne sont pas des exponentielles (constante et dénominateur retirés, sans phrase, comme
+   l'exemple de §7) ; un facteur x − a s'écrit directement x = a ; « (produit nul) » dès que deux facteurs s'annulent ; une seule
+   équation : l'équation, puis ses solutions ; aucun zéro : la ligne « ne s'annule jamais » ne change pas. Tests : lignes exactes
+   (Ex7, b, a, c, d, x³ − 3x, x³, (x² − 1)/(x − 3), x ln x, e^{2x}) ; propriété sur ≥ 25 fonctions avec l'oracle mpmath (le produit
+   écrit s'annule là où f′ s'annule, chaque zéro final annule f′, exponentielles citées = lignes du tableau) ;
+   `test_facteurs_evidents.py` suit la nouvelle ligne (même égalité exacte).
+3. **Q32, guide R11** : « u, u′, v, v′ dans un tableau 2 × 2 » (D8) ; exemple 4 du guide (tableau u/v, nouvelle ligne des zéros) ;
+   R7 décrit la ligne des zéros. Spécification de l'outil Dérivée (points 2 et 4, DV-17, DV-18).
+4. Instantanés de l'outil Dérivée et de l'EC (moteur, `resoudre`, références de pages) régénérés et listés sous « À relire » (avant /
+   après) ; suite complète ; temps natif ; commit « EC R1 : … » avec la nouvelle version de `decisions.md`.
+
 ## Temps natif de etudier() (s, médiane de 3 processus neufs)
 
 | Partie | Ex7 | a | b | c | d |
@@ -570,6 +601,7 @@ l'asymptote, au-delà de tous les points à montrer et des valeurs interdites.
 | P7a | 0,64 | 0,02 | 0,42 | 0,20 | 0,31 |
 | P7b | 0,64 | 0,02 | 0,43 | 0,20 | 0,30 |
 | P8 | 0,58 | 0,03 | 0,36 | 0,26 | 0,21 |
+| R1 | 0,58 | 0,03 | 0,35 | 0,25 | 0,21 |
 
 P3 ne touche pas `etudier()` ; la partie 1 (`parties.cartes_domaine`, appelée par `resoudre`) coûte en plus 0,5 ms (Ex7), 0,2 ms (d),
 moins de 0,01 ms (a, b, c).
@@ -592,6 +624,8 @@ e^{lim u}, au lieu de la limite de e^{u}, 200 à 290 ms) et le cadrage (élargis
 chaque côté). a : 0,02 → 0,03 s (+ 5 à 10 ms, + 50 % à l'arrondi près : partie 3 et cadrage) ; c : 0,20 → 0,26 s (+ 30 %, surtout
 la partie 3, 44 ms) ; Ex7, b, d : en dessous de P7b (bruit de la machine, mesures du même jour 0,56 à 0,58 s pour Ex7). Le temps de
 `resoudre` (page) ne monte que des ronds vides et du cadrage. Question 55.
+R1 : aucune hausse (la restitution de l'exposant de l'énoncé ajoute un `cancel` par exponentielle réécrite par SymPy ; la ligne des
+zéros ne fait aucun calcul de plus).
 
 ## Suite complète
 
@@ -614,6 +648,7 @@ la partie 3, 44 ms) ; Ex7, b, d : en dessous de P7b (bruit de la machine, mesure
 | P7b (contrôle du chef d'orchestre) | 1181 passés, 24 xfail (667 s) | 118 passés (936 s) ; code de retour 0 | 03.11.2026 |
 | P8 | 1220 passés, 21 xfail (689 s) | 119 passés (954 s, dont le nouveau test `test_graphique.py::test_d15_ronds_vides_et_points_marques`) ; code de retour 0 (1ᵉʳ lancement) | 03.11.2026 |
 | P8 (contrôle du chef d'orchestre) | 1220 passés, 21 xfail (647 s) | 119 passés (923 s) ; code de retour 0 | 03.11.2026 |
+| R1 | 1224 passés, 21 xfail (679 s) | 119 passés (908 s) ; code de retour 0 (1ᵉʳ lancement) | 03.11.2026 |
 
 ## Écarts acceptés
 
@@ -704,6 +739,13 @@ la partie 3, 44 ms) ; Ex7, b, d : en dessous de P7b (bruit de la machine, mesure
   (exemple du bloc `graphique`, clés facultatives) et la spécification (partie 6, EC-16) sont mis à jour (sinon ils seraient faux).
 - P8 : la courbe est échantillonnée une largeur de fenêtre au-delà de chaque côté (l'écran, à échelle égale, montre souvent plus large
   que la fenêtre) : environ 3 fois plus de points dans le bloc du graphique (fenêtre et cadrage inchangés par ce tracé).
+
+- R1 : `tests/python/test_facteurs_evidents.py::test_racine_positive_et_carre_au_denominateur` attend la nouvelle ligne des zéros
+  (« f′(x) = 0 ⇔ 8x − 1 = 0 ⇔ x = 1/8 ; valeur interdite : x = −2 », Q56) au lieu de « f′(x) = (8x − 1)/(…) = 0 ⇔ … » : même égalité
+  exacte, même force. Exemple 4 du guide mis à jour de même (et le tableau u/v, Q32) ; sa ligne f(x) garde « min » (D10, P7b, hors R1).
+- R1 : e^((x²+1)/(2x)) et e^((−2x²+3x−1)/(3x−6)) entrent dans les cas limites de l'outil Dérivée (`tests/python/cas.py`), cités dans
+  la spécification (point 2, DV-17) : 2 entrées nouvelles dans les instantanés et les références de pages de la Dérivée (Q37,
+  « ajouter au corpus »). La famille tirée au hasard est dans `test_derivee_narration.py` (`TestExposantDeLEnonce`).
 
 ## Questions pour l'enseignant
 
@@ -879,6 +921,15 @@ la partie 3, 44 ms) ; Ex7, b, d : en dessous de P7b (bruit de la machine, mesure
 56. **Résumé, ligne des zéros de f′ (outil Dérivée)** : vue en transcrivant l'Ex7 : « f′(x) = … = 0 ⇔ x = 0 ou x − 4 = 0 ⇔ x = 0
     ou x = 4 ; valeur interdite : x = 2 » ; decisions.md §4 écrit « f′(x) = 0 ⇔ x(x − 4) = 0 ⇔ x = 0 ou x = 4 (produit nul) ». La ligne
     est celle de l'outil Dérivée (aucune décision ne la vise) : la changer toucherait ses instantanés. Faut-il l'aligner sur §4 ?
+
+57. **R1, ligne des zéros de f′ (Q56)** : écrite comme l'exemple de §7, « f′(x) = 0 ⇔ x(x − 4) = 0 (car e^{…} > 0) ⇔ … » : f′ n'est
+    pas réécrite (elle est encadrée juste au-dessus, dans la carte « Dérivée ») ; la constante (1/6, −2) et le dénominateur
+    (6(x − 2)²) sont retirés **sans** propriété, alors que la partie 3 de l'EC écrit « (numérateur nul ; on divise par …) » ; un
+    facteur du numérateur qui ne s'annule pas et qui n'est pas une exponentielle (x² + 1, x^x) reste dans le produit, sans raison
+    (option qui affiche le moins). Faut-il ajouter « (numérateur nul) » et « on divise par … » comme en partie 3 ?
+58. **R1, x^x** : x^x n'est pas reconnu comme une exponentielle (il s'écrit e^{x ln x}) : « f′(x) = 0 ⇔ x^x(ln(x) + 1) = 0 ⇔ ln(x)
+    + 1 = 0 ⇔ x = e^{−1} », sans « (car x^x > 0) ». Les lignes d'explication de l'outil ED (« ln(x) + 1 = 0 ⇔ ln(x) = −1 (on
+    soustrait 1) ») restent **avant** la ligne des zéros, comme avant R1 (x ln x, ln(x)/x, c). À garder ?
 
 ## À relire par l'enseignant
 
@@ -1092,3 +1143,33 @@ la partie 3, 44 ms) ; Ex7, b, d : en dessous de P7b (bruit de la machine, mesure
   Hors instantanés (corpus) : b fenêtre [−5,17 ; 5,72] ; [−143,3 ; 61,4] (avant [−4,5 ; 5,5] ; [−144,9 ; 69,5]), points (±√6 ; 0) et
   (0 ; −6) ; c [−2 ; 3,79] ; [−5,06 ; 11,81] (avant [−0,9 ; 3,1] ; [−51,3 ; 21,1]), points (ln 6 ; 0) et (0 ; 5) ; a inchangée.
   Captures relues (360 et 700 px) : Ex7, b, c, d, x/√(x²), e^(1/x), (x² − 1)/(x − 1).
+
+- **R1** (outil Dérivée, donc aussi EC ; Q37, Q56). Instantanés modifiés : `tests/python/instantanes/{derivee-variations,etude-complete}.json`,
+  `tests/python/instantanes/resoudre/{derivee-variations,etude-complete}.json`, `tests/pages/references/{derivee-variations,etude-complete}.json` :
+  21 entrées de la Dérivée modifiées et 2 nouvelles (Q37), 11 entrées de l'EC modifiées. Vérifié par programme : dans chaque entrée
+  modifiée, **seule la ligne des zéros de f′** change (carte « Signe de f′ et variations ») ; aucun exposant ne change dans les entrées
+  existantes. ED, Limites, Factorisation, Exp-log : instantanés identiques.
+
+  | Entrée | Avant | Après |
+  |---|---|---|
+  | `e^((x^2+x-2)/(6x-12))` (Ex7, EC) | f′(x) = x(x − 4)e^{…}/(6(x − 2)²) = 0 ⇔ x = 0 ou x − 4 = 0 ⇔ x = 0 ou x = 4 ; valeur interdite : x = 2. | f′(x) = 0 ⇔ x(x − 4) = 0 (car e^{(x² + x − 2)/(6x − 12)} > 0) ⇔ x = 0 ou x = 4 (produit nul) ; valeur interdite : x = 2. |
+  | `e^(2/(x^2-4))` (d, EC) | f′(x) = −4x e^{…}/((x − 2)²(x + 2)²) = 0 ⇔ x = 0 ; valeurs interdites : x = −2 ; x = 2. | f′(x) = 0 ⇔ x = 0 (car e^{2/(x² − 4)} > 0) ; valeurs interdites : x = −2 ; x = 2. |
+  | `x^2*e^(-x)` (Dérivée, EC) | f′(x) = −x(x − 2)e^{−x} = 0 ⇔ x = 0 ou x − 2 = 0 ⇔ x = 0 ou x = 2. | f′(x) = 0 ⇔ x(x − 2) = 0 (car e^{−x} > 0) ⇔ x = 0 ou x = 2 (produit nul). |
+  | `e^(x^2)` (Dérivée) | f′(x) = 2xe^{x²} = 0 ⇔ x = 0. | f′(x) = 0 ⇔ x = 0 (car e^{x²} > 0). |
+  | `x^3-3x` (Dérivée, EC) ; de même `x/(x^2+1)` (Dérivée, EC) | f′(x) = 3(x + 1)(x − 1) = 0 ⇔ x + 1 = 0 ou x − 1 = 0 ⇔ x = −1 ou x = 1. | f′(x) = 0 ⇔ (x + 1)(x − 1) = 0 ⇔ x = −1 ou x = 1 (produit nul). |
+  | `x^4-2x^2` (Dérivée, EC) | f′(x) = 4x(x + 1)(x − 1) = 0 ⇔ x = 0 ou x + 1 = 0 ou x − 1 = 0 ⇔ x = −1 ou x = 0 ou x = 1. | f′(x) = 0 ⇔ x(x + 1)(x − 1) = 0 ⇔ x = −1 ou x = 0 ou x = 1 (produit nul). |
+  | `(x^2-1)/(x-3)` (Dérivée, EC) | f′(x) = (x² − 6x + 1)/(x − 3)² = 0 ⇔ x² − 6x + 1 = 0 ⇔ x = 3 − 2√2 ou x = 3 + 2√2 ; valeur interdite : x = 3. | f′(x) = 0 ⇔ x² − 6x + 1 = 0 ⇔ x = 3 − 2√2 ou x = 3 + 2√2 ; valeur interdite : x = 3. |
+  | `3x^2-4x`, `x^2-4x+3`, `sqrt(x^2-4x+5)` (Dérivée ; x² − 4x + 3 aussi EC) | f′(x) = 2(3x − 2) = 0 ⇔ 3x − 2 = 0 ⇔ x = 2/3 (de même 2(x − 2), (x − 2)/√(x² − 4x + 5)) | f′(x) = 0 ⇔ 3x − 2 = 0 ⇔ x = 2/3 (de même x − 2 = 0 ⇔ x = 2) |
+  | `-x^2`, `ln(x^2-4)`, `(x^2+1)^(1/2)` (Dérivée) | f′(x) = −2x = 0 ⇔ x = 0 (de même 2x/((x − 2)(x + 2)), x/√(x² + 1)) | f′(x) = 0 ⇔ x = 0 |
+  | `x^3` (Dérivée) | f′(x) = 3x² = 0 ⇔ x = 0. | f′(x) = 0 ⇔ x² = 0 ⇔ x = 0. |
+  | `(x-1)^3` (Dérivée) | f′(x) = 3(x − 1)² = 0 ⇔ x − 1 = 0 ⇔ x = 1. | f′(x) = 0 ⇔ (x − 1)² = 0 ⇔ x = 1. |
+  | `x^(3/2)` (Dérivée) | f′(x) = 3√x/2 = 0 ⇔ √x = 0 ⇔ x = 0. | f′(x) = 0 ⇔ √x = 0 ⇔ x = 0. |
+  | `x*ln(x)`, `x*ln(x)+x`, `3(x*ln(x))`, `-(x*ln(x))`, `ln(x)/x` (Dérivée ; x ln x, 3x ln x, ln(x)/x aussi EC) | f′(x) = ln(x) + 1 = 0 ⇔ x = e^{−1} (3(ln(x) + 1) = 0 ⇔ ln(x) + 1 = 0 ⇔ … ; (1 − ln(x))/x² = 0 ⇔ 1 − ln(x) = 0 ⇔ x = e) | f′(x) = 0 ⇔ ln(x) + 1 = 0 ⇔ x = e^{−1} (de même ln(x) + 2, −ln(x) − 1, 1 − ln(x)) ; les lignes d'explication de l'outil ED qui précèdent sont inchangées |
+  | `x^x` (Dérivée) | f′(x) = x^x(ln(x) + 1) = 0 ⇔ ln(x) + 1 = 0 ⇔ x = e^{−1}. | f′(x) = 0 ⇔ x^x(ln(x) + 1) = 0 ⇔ ln(x) + 1 = 0 ⇔ x = e^{−1}. (question 58) |
+  | `e^((x^2+1)/(2x))` (nouvelle, Dérivée, Q37) | (HEAD, hors instantanés) f′ avec e^{(½x² + ½)/x}, dans f′ encadré, la ligne des zéros et le tableau | f′(x) = (x + 1)(x − 1)e^{(x² + 1)/(2x)}/(2x²) ; « f′(x) = 0 ⇔ (x + 1)(x − 1) = 0 (car e^{(x² + 1)/(2x)} > 0) ⇔ x = −1 ou x = 1 (produit nul) ; valeur interdite : x = 0. » |
+  | `e^((-2x^2+3x-1)/(3x-6))` (nouvelle, Dérivée, Q37) | (HEAD, hors instantanés) f′ avec e^{(3x − 2x² − 1)/(3x − 6)} | f′(x) = −(2x² − 8x + 5)e^{(−2x² + 3x − 1)/(3x − 6)}/(3(x − 2)²) ; « f′(x) = 0 ⇔ 2x² − 8x + 5 = 0 (car e^{…} > 0) ⇔ x = (4 − √6)/2 ou x = (4 + √6)/2 ; valeur interdite : x = 2. » |
+
+  Hors instantanés (corpus) : b « f′(x) = 0 ⇔ (x − 3)(x + 2) = 0 (car e^{−2x} > 0) ⇔ x = −2 ou x = 3 (produit nul) » (avant « f′(x) =
+  −2(x − 3)(x + 2)e^{−2x} = 0 ⇔ x − 3 = 0 ou x + 2 = 0 ⇔ x = −2 ou x = 3 ») ; a « f′(x) = 0 ⇔ x = 0 (car e^{−x²} > 0) » ; c
+  « f′(x) = 0 ⇔ 3 − eˣ = 0 (car eˣ > 0) ⇔ x = ln(3) » ; x·e^(−x/3 + 1) : exposant de f′ e^{−x/3 + 1} (avant e^{1 − x/3}), e^(x/2) :
+  e^{x/2} (avant e^{½x}). Guide : R7 (ligne des zéros), R11 (tableau u/v, Q32), exemple 4.

@@ -50,7 +50,10 @@ du quotient**, même pour un facteur évident (x² + 1, √(4x² + 1), (x + 2)²
 constante (positive : « 3 : + + + » ; négative : « −1 : − − − »). Aucune phrase ne justifie le signe d'un
 facteur évident ou affine (seulement le zéro d'une affine) : la ligne du tableau suffit. Plus de « donc
 f'(x) est du signe de … », de « Bilan », de « Un produit est nul si et seulement si … », de « On étudie le
-signe de chaque facteur ». Avant le tableau, une seule ligne : zéros et valeurs interdites.
+signe de chaque facteur ». Avant le tableau, une seule ligne : zéros et valeurs interdites. Dans l'outil Dérivée (chantier
+étude complète, Q56), elle part de « f'(x) = 0 », garde les facteurs du numérateur qui ne sont pas des exponentielles, retire
+chaque exponentielle avec sa raison, puis « produit nul » : « f'(x) = 0 ⇔ x(x − 4) = 0 (car e^{…} > 0) ⇔ x = 0 ou x = 4
+(produit nul) ; valeur interdite : x = 2 » (x − a = 0 s'écrit directement x = a).
 
 **R8. Limites : le tableau de signes est TOUJOURS donné pour un dénominateur ou un argument de ln qui
 tend vers 0, même affine** (x − 3, x − 5), en tête de l'étude. Justification courte dans la ligne de la
@@ -80,7 +83,10 @@ critique y porte un trait simple « | » (en −2 pour 2 − x, en 2 pour 2 + x)
 **R11. Dérivée** : les justifications restent TOUJOURS, car les élèves les oublient : « (x²)' = 2x (règle de la
 puissance) », « (ln x)' = 1/x (règle de base) », règle du produit, du quotient, de la chaîne (« de la forme √u »).
 Seules les opérations neutres sont supprimées : jamais « + 0 », « − 0 », « · 1 », « 1 · » ni équivalents
-(u'(x) = 8x, pas 8x + 0). u, u', v, v' sur une ligne ; l'étape délicate (chasser une racine du numérateur) est écrite.
+(u'(x) = 8x, pas 8x + 0). u, u', v, v' dans un tableau 2 × 2, comme le corrigé (colonnes u | v ; lignes fonction | dérivée),
+après « On applique la règle du produit (du quotient), …, avec : » ; si les deux colonnes ne tiennent pas côte à côte (320 px),
+elles s'empilent dans l'ordre u, u', v, v' (composant commun `.uv` ; chantier étude complète, D8, Q32) ; l'étape délicate (chasser
+une racine du numérateur) est écrite.
 
 **R12. Vouvoiement.** L'enseignant vouvoie ses élèves : tout texte qui leur est destiné vouvoie — messages d'erreur
 (« Écrivez une équation », « Ouvrez une parenthèse : ln(x). », « Choisissez une autre lettre »), invites des pages (« Cliquez sur … »,
@@ -210,7 +216,7 @@ Asymptote horizontale : y = 0.
 ### 4. √(4x² + 1)/(x + 2) : signe de f' (Dérivée) et limite en −∞
 
 ```
-f'(x) = (8x − 1)/(√(4x² + 1)(x + 2)²) = 0 ⇔ 8x − 1 = 0 ⇔ x = 1/8 ; valeur interdite : x = −2.
+f'(x) = 0 ⇔ 8x − 1 = 0 ⇔ x = 1/8 ; valeur interdite : x = −2.
 
 x           | −∞     −2     1/8     +∞
 8x − 1      |    −   ‖   −   0   +
@@ -222,7 +228,9 @@ f(x)        |    ↘   ‖   ↘  min  ↗
 Minimum local en x = 1/8 : f(1/8) = 2√17/17.
 ```
 ```
-u = √(4x² + 1), u' = 4x/√(4x² + 1) ; v = x + 2, v' = 1
+On applique la règle du quotient, (u/v)' = (u'v − uv')/v², avec :
+u = √(4x² + 1)          | v = x + 2
+u' = 4x/√(4x² + 1)      | v' = 1
 f'(x) = (u'v − uv')/v² = (4x(x + 2)/√(4x² + 1) − √(4x² + 1))/(x + 2)²
       = (4x(x + 2) − (4x² + 1))/(√(4x² + 1)(x + 2)²)        (on multiplie par √(4x² + 1))
       = (8x − 1)/(√(4x² + 1)(x + 2)²)
