@@ -5,29 +5,266 @@ Branche `etude-complete`, créée le 02.11.2026 depuis `main` à jour (9716912, 
 Ordre de priorité : `CLAUDE.md` > `decisions.md` (validé par l'enseignant le 02.11.2026) > `audit-etape0.md`.
 Un commit « EC P{N} : … » par partie ; suite complète verte (`python3 tests/lancer.py complet`, code de retour lu sans pipe) avant chaque commit.
 
-**Reprise après compactage** : relire ce fichier, `decisions.md`, puis `git log --oneline main..HEAD` ; reprendre à la première partie « à faire ».
+**Reprise après compactage** : la nuit du 02–03.11.2026 est **terminée** (P0 à P5, P7a, P7b, P8 commitées ; résumé ci-dessous ;
+rien n'est poussé ni fusionné). Prochaine étape : **relecture de l'enseignant** (questions « à trancher avant la fusion », instantanés
+« À relire », texte rendu de l'Ex7), puis **P6** (partie 4, Limites : D12, D13, D16), puis **P9** (D18, D20, mesure Pyodide), P10
+facultative. Pour reprendre : relire ce fichier, `decisions.md`, puis `git log --oneline main..HEAD` ; reprendre à la première partie
+« reportée », après les réponses de l'enseignant.
 Les tests du chantier sont dans `tests/python/test_corpus_etude_complete.py` (corpus : `tests/python/donnees/corpus_etude_complete.py`) ; chaque
-vérification pas encore faite y est marquée `xfail` **strict** avec le numéro de sa partie : la partie qui la traite retire la marque (un xfail qui
-passe fait échouer la suite). Temps natif : `docs/chantiers/etude-complete/mesurer_temps.py`.
+vérification pas encore faite y est marquée `xfail` **strict** avec le numéro de sa partie (21 restent : P6, P9, P10) : la partie qui la
+traite retire la marque (un xfail qui passe fait échouer la suite). Temps natif : `docs/chantiers/etude-complete/mesurer_temps.py`.
 
-## Parties
+## Résumé de la nuit (02–03.11.2026)
 
-| Partie | Contenu (decisions.md §6) | Touche | État | Commit |
-|---|---|---|---|---|
-| P0 | `suivi.md`, corpus + oracle mpmath, xfail marqués avec leur partie | tests | **fait** | 5eadf34 |
-| P1 | D6, D7 (parenthèses, doublons), D17 | Dérivée | **fait** | edf17c3 |
-| P2 | Squelette des 6 parties titrées (D1), spécification (D2, D19) | EC | **fait** | 4cf3e9e |
-| P3 | Partie 1 : mise en forme + ED détaillé (D3) | EC | **fait** | f108f7f |
-| P4 | Partie 2 : parité (D4) | EC | **fait** | 62781a8 |
-| P5 | Partie 3 : zéros, signe, f(0) (D5) | EC | **fait** | 8fc2fa2 |
-| P6 | Partie 4 : D12, D13, D16 | Limites | reportée (hors de la nuit du 02.11) | |
-| P7a | Dérivée de l'exposant détaillée, tableau u/v (D7, D8, D7b si simple) | Dérivée | **fait** | 1799fff |
-| P7b | Valeurs dans le tableau de variations (D10), extremums (D11) | EC + Dérivée | **fait** | cfe88de |
-| P8 | Graphe (D15, §3) | EC | **fait** | |
-| P9 | Exemples (D18), Bilan (D20), instantanés, largeurs 320–390 px, mesure Pyodide | EC | reportée (hors de la nuit du 02.11) | |
-| P10 | *(facultatif)* Pente au point exclu (D14) | EC | reportée (hors de la nuit du 02.11) | |
+### Parties faites
 
-## Résumé de la nuit
+Vérifié par `git log --oneline main..HEAD` (9 commits, rien n'est poussé ni fusionné).
+
+| Partie | Commit | Ce que l'élève voit de nouveau |
+|---|---|---|
+| P0 | 5eadf34 | Rien (tests seulement) : corpus Ex7, a–d, oracle mpmath, 66 vérifications de rédaction marquées xfail. |
+| P1 | edf17c3 | **Outil Dérivée** et EC : f′ avec une seule exponentielle par exposant (Ex7 : une au lieu de trois), facteur négatif entre parenthèses, « (eˣ)′ = eˣ » écrit une fois, formes du corrigé 3e^{−6} et 2eˣ(3 − eˣ). |
+| P2 | 4cf3e9e | L'étude suit les six parties titrées du corrigé (limites avant la dérivée) ; un seul calcul par étude (cache). |
+| P3 | f108f7f | Partie 1 : carte « Mise en forme » (factorisations, g(x) nommé), une carte par condition avec la résolution courte « 6x − 12 = 0 ⇔ 6x = 12 ⇔ x = 2 », ED encadré. |
+| P4 | 62781a8 | Partie 2 : parité justifiée (ED non symétrique, chaîne f(−x) une étape par ligne, ou contre-exemples chiffrés). |
+| P5 | 8fc2fa2 | Partie 3 : zéros en chaîne avec la propriété nommée, signe de f (phrase ou tableau), f(0) exact puis approché. |
+| P7a | 1799fff | **Outil Dérivée** et EC : tableau u / v ; sous-carte « Dérivée de l'exposant » une étape par ligne (Ex7, d) ; « On développe d'abord » pour c. |
+| P7b | cfe88de | **Outil Dérivée** et EC : valeur exacte de chaque extremum dans le tableau de variations ; dans l'EC, extremums avec valeur approchée et « global » / « pas global » justifié. |
+| P8 | 3ece3c9 | Partie 6 : zéros et (0 ; f(0)) marqués, rond vide à chaque point exclu à limite finie, fenêtre qui montre l'approche des AH. |
+
+### Échecs, parties reportées, xfail
+
+- Échecs : **aucun**.
+- Reportées (non faites cette nuit, sur consigne) : **P6** (partie 4, Limites : D12, D13, D16), **P9** (exemples D18, Bilan D20,
+  instantanés, largeurs, mesure Pyodide), **P10** (facultative, pente au point exclu D14).
+- 21 xfail stricts restent dans `tests/python/test_corpus_etude_complete.py`, tous rattachés à une partie reportée :
+  - P6 (14) : signe d'approche 1⁺ de d dans le tableau (1) ; position du graphe par rapport à l'AH (5 : Ex7, a–d) ; valeur d'essai
+    0⁺ / 0⁻ (2 : Ex7, d) ; x → ±∞ regroupés (2 : a, d) ; 0⁺ dans la phrase de l'AV et le bilan (2 : Ex7, d) ; AV d'un seul côté et
+    point exclu (2 : Ex7, d) ;
+  - P9 (6) : fonctions du corrigé dans la page (1) ; carte « Bilan de l'étude » (5) ;
+  - P10 (1) : pente au point exclu.
+
+### Suite complète
+
+Dernière vérification du chef d'orchestre sur 3ece3c9 (P8) : suite Python **1220 passés, 21 xfail** ; suite de pages **119 passés** ;
+code de retour 0 (tableau « Suite complète » plus bas). Test instable **préexistant** `tests/pages/test_clavier.py::test_a_deux_formules…`
+(page Limites ; échoue aussi sur P0, environ 1 fois sur 6 lancé seul) : non modifié, à traiter hors chantier (voir Écarts, P1).
+
+### Temps natif
+
+Voir le tableau « Temps natif de etudier() » plus bas : aucune hausse notable, sauf celle signalée à la **question 55** (a : 0,02 →
+0,03 s, quelques millisecondes ; c : + 30 % ; la partie 3 est maintenant comptée dans `etudier()` et non plus dans `resoudre`).
+La mesure sous Pyodide est prévue en P9.
+
+### Questions pour l'enseignant : index
+
+La liste complète, numérotée, est dans la section « Questions pour l'enseignant » plus bas.
+
+**À trancher avant la fusion** :
+- Q9 — fusionner sans P6 ni P9 ? (P4 et P5, demandées par Q9, sont faites)
+- Q37 — exposant de f′ parfois différent de l'énoncé (**outil Dérivée**, D6)
+- Q40 — raison « pas global » de d : −2⁻ au lieu de 2⁺
+- Q5 — −1/e écrit −e^{−1} (**outil Dérivée**)
+- Q6 — ln(x)/x : f′ = (1 − ln x)/x² (**outil Dérivée**)
+- Q32 — tableau u/v à la place de R11 (**outil Dérivée**, guide)
+- Q46 — tableau de variations de d défile à 390 px
+- Q52 — deux ronds vides pour x/√(x²) (affirmation nouvelle du graphe)
+
+**Toutes, par partie** :
+- P0 : Q1 notation scientifique, R13 contre decisions.md §2 · Q2 entier exact sans « ≈ » (9, pas 9,00) ·
+  Q3 lecture du critère « AH visible » (§3) · Q4 « (x²)′ = 2x » gardé pour a, b, d.
+- P1 : Q5 −1/e devient −e^{−1} · Q6 ln(x)/x : (1 − ln x)/x².
+- P2 : Q7 partie 5 vide si la dérivée sort du cadre · Q8 titre « Graphique » répète l'intertitre · Q9 ne pas fusionner sans P4, P5.
+- P3 : Q10 quand afficher « Mise en forme » · Q11 chaîne courte pour d'autres trinômes · Q12 « On résout … » contre R10 ·
+  Q13 « ED = ]0 ; +∞[ = ]0 ; +∞[ » repris de l'outil ED · Q14 Somme-Produit aussi pour a² − b².
+- P4 : Q15 « ≈ » écrit hors de la formule · Q16 carte « Symétrie de l'ED » toujours affichée · Q17 mots de la chaîne f(−x) ·
+  Q18 parité confirmée mais chaîne non rédigée · Q19 choix de a, écritures exactes · Q20 point a d'un ED non symétrique ·
+  Q21 b : −36,95 (.tex : −36,9).
+- P5 : Q22 chaîne une étape par ligne, ≈ par zéro · Q23 tableau de f avec les facteurs saisis · Q24 phrase de l'exponentielle ·
+  Q25 propriétés ajoutées (numérateur nul, produit nul…) · Q26 formes non couvertes : lignes de l'outil ED · Q27 « Le graphe coupe
+  l'axe des y au point … » · Q28 pas de ≈ entre 1000 et 10⁶ · Q29 pas de phrase après le tableau · Q30 sans zéro mais signe changeant.
+- P7a : Q31 quand la sous-carte « Dérivée de l'exposant » · Q32 place du tableau u/v, R11 · Q33 forme finale de g′ · Q34 f′ encadré
+  avec l'exposant en entier · Q35 mots de la sous-carte, g écrit développé · Q36 D7b : critère et dernière ligne · Q37 exposant de f′
+  différent de l'énoncé · Q38 « · » seulement devant un facteur négatif · Q39 temps : aucune hausse de plus de 50 %.
+- P7b : Q40 raison de « pas global » (d) · Q41 ligne g(x₀) pour chaque extremum · Q42 extremum à une borne fermée ·
+  Q43 mots de « global » · Q44 limite « ? » : « local » seul · Q45 égalité avec une limite : « local » seul · Q46 tableau de d défile
+  à 390 px · Q47 notation scientifique dans un point · Q48 « pas global » par un autre extremum.
+- P8 : Q49 élargissement de la fenêtre pour l'AH · Q50 échelle égale : fenêtres larges et plates · Q51 branches infinies coupées en y ·
+  Q52 deux ronds vides pour x/√(x²) · Q53 limite finie hors liste : pas de rond · Q54 coordonnées écrites à côté des zéros ·
+  Q55 temps : a + 50 % (quelques ms).
+- Résumé (vue en transcrivant l'Ex7) : Q56 ligne des zéros de f′ sans « produit nul » (**outil Dérivée**).
+
+### À relire par l'enseignant
+
+Détail (tableaux avant / après) dans la section « À relire par l'enseignant » plus bas. **D'abord l'outil Dérivée** :
+- **P1, P7a, P7b** : `tests/python/instantanes/{derivee-variations,etude-complete}.json`,
+  `tests/python/instantanes/resoudre/{derivee-variations,etude-complete}.json`, `tests/pages/references/{derivee-variations,etude-complete}.json`
+  (P1 : 5 entrées ; P7a : 9 entrées de la Dérivée, 11 de l'EC ; P7b : 18 de la Dérivée, 13 de l'EC).
+- P2, P4, P5 (EC seule) : `tests/python/instantanes/resoudre/etude-complete.json`, `tests/pages/references/etude-complete.json`.
+- P3 (EC seule) : les deux mêmes, plus `tests/python/instantanes/etude-complete.json` (2 entrées nouvelles : Ex7, d).
+- P8 (EC seule) : `tests/python/instantanes/etude-complete.json`, `tests/python/instantanes/resoudre/etude-complete.json`,
+  `tests/pages/references/etude-complete.json`, `tests/pages/references/graphique-traces.json`.
+- P0 : aucun instantané.
+
+### Fusion
+
+À lancer par l'enseignant **seulement après relecture** (rien n'est poussé ni fusionné) :
+
+```
+git switch main && git merge --no-ff etude-complete
+```
+
+P6 (Limites : D12, D13, D16) et P9 (exemples de la page D18, Bilan D20, mesure Pyodide) ne sont pas faites : l'outil est cohérent
+(chaque partie affichée est vérifiée), mais la partie 4 garde la rédaction de l'outil Limites et l'Ex7 n'est pas encore un exemple de
+la page (il n'est visible qu'en le saisissant).
+
+### Exemple 7 : texte rendu (sortie de resoudre_ec)
+
+Sortie de `resoudre_ec.resoudre("e^((x^2+x-2)/(6x-12))")` sur 3ece3c9 (Python 3.12, SymPy 1.13.3), transcrite par un script de
+conversion (LaTeX → écriture lisible), relue à la main ; le contenu mathématique n'est pas changé. « [encadré] » : bloc résultat
+encadré ; les cartes « Étape k : … » de la partie 4 sont les étapes de la carte « Limite » qui les précède.
+
+Énoncé (en tête de la page) : f(x) = e^((x² + x − 2)/(6x − 12))
+
+#### 1. Domaine de définition
+
+- Carte « Fonction » [titre masqué] :
+  - f(x) = e^((x² + x − 2)/(6x − 12))
+- Carte « Mise en forme » :
+  - x² + x − 2 = (x + 2)(x − 1) (Somme-Produit)
+  - 6x − 12 = 6(x − 2) (mise en évidence)
+  - On note g(x) = ((x + 2)(x − 1))/(6(x − 2)), donc f(x) = e^(g(x)).
+- Carte « Condition 1 » [badge « dénominateur »] :
+  - 6x − 12 ≠ 0
+  - On résout 6x − 12 = 0 ⇔ 6x = 12 ⇔ x = 2.
+- Carte « Ensemble de définition » :
+  - **[encadré]** ED = ℝ ∖ {2}
+
+#### 2. Parité
+
+- Carte « Symétrie de l'ED » :
+  - −2 ∈ ED, mais 2 ∉ ED : ED n'est pas symétrique par rapport à 0.
+  - Donc **f n'est ni paire ni impaire**.
+
+#### 3. Zéros, signe, ordonnée à l'origine
+
+- Carte « Zéros et signe de f » :
+  - e^(g(x)) > 0 pour tout x ∈ ED (une exponentielle est strictement positive).
+  - Donc f n'a pas de zéro et f(x) > 0 sur ED.
+- Carte « Ordonnée à l'origine » :
+  - g(0) = (−2)/(−12) = 1/6, donc f(0) = e^(1/6) ≈ 1,18.
+  - Le graphe coupe l'axe des y au point (0 ; e^(1/6)).
+
+#### 4. Limites et asymptotes
+
+- Carte « Limite (x → −∞) » [badge « limite »] :
+  - lim_(x → −∞) e^((x² + x − 2)/(6x − 12))
+- Carte « Étape 1 : limite de l'exposant, à part. » :
+  - Haut : x² + x − 2 → +∞. Bas : 6x − 12 → −∞. Forme +∞/−∞ : indéterminée.
+  - Encadré « Prédiction avec la règle du podium » :
+    - En haut x², en bas x : la plus grande puissance est au **haut**, donc l'exposant part vers l'infini.
+    - Signe : haut > 0, bas < 0, donc −∞.
+    - **On s'attend à :** exposant → −∞, donc e^(⋯) → 0⁺
+  - Calcul avec BH :
+  - lim_(x → −∞) (x² + x − 2)/(6x − 12) =(BH) lim_(x → −∞) (2x + 1)/6 = −∞
+- Carte « Étape 2 : on applique l'exponentielle. » :
+  - **[encadré]** lim_(x → −∞) e^((x² + x − 2)/(6x − 12)) = e^(−∞) = 0⁺
+  - ✓ Le calcul confirme la prédiction du podium.
+  - Asymptote horizontale : y = 0.
+- Carte « Limite (x → +∞) » [badge « limite »] :
+  - lim_(x → +∞) e^((x² + x − 2)/(6x − 12))
+- Carte « Étape 1 : limite de l'exposant, à part. » :
+  - Haut : x² + x − 2 → +∞. Bas : 6x − 12 → +∞. Forme +∞/+∞ : indéterminée.
+  - Encadré « Prédiction avec la règle du podium » :
+    - En haut x², en bas x : la plus grande puissance est au **haut**, donc l'exposant part vers l'infini.
+    - Signe : haut > 0, bas > 0, donc +∞.
+    - **On s'attend à :** exposant → +∞, donc e^(⋯) → +∞
+  - Calcul avec BH :
+  - lim_(x → +∞) (x² + x − 2)/(6x − 12) =(BH) lim_(x → +∞) (2x + 1)/6 = +∞
+- Carte « Étape 2 : on applique l'exponentielle. » :
+  - **[encadré]** lim_(x → +∞) e^((x² + x − 2)/(6x − 12)) = e^(+∞) = +∞
+  - ✓ Le calcul confirme la prédiction du podium.
+- Carte « Limite (x → 2) » [badge « limite »] :
+  - lim_(x → 2⁻) e^((x² + x − 2)/(6x − 12))
+- Carte « Étape 1 : on remplace. » :
+  - Exposant : (x² + x − 2)/(6x − 12) → 4/0⁻ = −∞. Donc e^((x² + x − 2)/(6x − 12)) → e^(−∞) = 0⁺.
+  - **[encadré]** lim_(x → 2⁻) e^((x² + x − 2)/(6x − 12)) = 0⁺
+- Carte « Limite (x → 2) » [badge « limite »] :
+  - lim_(x → 2⁺) e^((x² + x − 2)/(6x − 12))
+- Carte « Étape 1 : on remplace. » :
+  - Exposant : (x² + x − 2)/(6x − 12) → 4/0⁺ = +∞. Donc e^((x² + x − 2)/(6x − 12)) → e^(+∞) = +∞.
+  - **[encadré]** lim_(x → 2⁺) e^((x² + x − 2)/(6x − 12)) = +∞
+  - Asymptote verticale : x = 2 (du côté droit) ; à gauche, f(x) → 0.
+- Carte « Bilan des asymptotes » :
+  - Liste :
+    - Asymptote horizontale (x → −∞) : y = 0
+    - Asymptote verticale : x = 2 (lim_(x → 2⁻) f(x) = 0 ; lim_(x → 2⁺) f(x) = +∞)
+
+#### 5. Dérivée, tableau de variation, extremums
+
+- Carte « Dérivée » [badge « calcul »] :
+  - f(x) = e^(g(x)) avec g(x) = (x² + x − 2)/(6x − 12), donc f′(x) = g′(x) · e^(g(x)) (dérivée d'une composée). On calcule d'abord g′(x).
+  - Sous-carte « Dérivée de l'exposant » :
+    - Étape 1 : règle du quotient.
+      - On applique la règle du quotient, (u/v)′ = (u′v − uv′)/v², avec :
+      - Tableau u / v :
+
+        | u = x² + x − 2 | v = 6x − 12 |
+        |---|---|
+        | u′ = 2x + 1 | v′ = 6 |
+
+      - g′(x) = ((2x + 1)(6x − 12) − (x² + x − 2) · 6)/(6x − 12)² (règle du quotient)
+    - Étape 2 : calcul du numérateur, puis simplification.
+      - g′(x) = (12x² − 24x + 6x − 12 − 6x² − 6x + 12)/(36(x − 2)²) (développement)
+      - = (6x² − 24x)/(36(x − 2)²) (réduction)
+      - = (6x(x − 4))/(36(x − 2)²) (mise en évidence)
+      - = (x(x − 4))/(6(x − 2)²) (simplification par 6)
+  - On remplace g′(x) dans f′(x) = g′(x) · e^(g(x)) :
+  - **[encadré]** f′(x) = (x(x − 4)e^((x² + x − 2)/(6x − 12)))/(6(x − 2)²)
+- Carte « Signe de f' et variations » [badge « tableau »] :
+  - f′(x) = (x(x − 4)e^((x² + x − 2)/(6x − 12)))/(6(x − 2)²) = 0 ⇔ x = 0 ou x − 4 = 0 ⇔ x = 0 ou x = 4 ; valeur interdite : x = 2.
+  - Tableau de signes et de variations :
+
+    | x | −∞ |  | 0 |  | 2 |  | 4 |  | +∞ |
+    |---|---|---|---|---|---|---|---|---|---|
+    | 1/6 |  | + | + | + | ‖ | + | + | + |  |
+    | x |  | − | 0 | + | ‖ | + | + | + |  |
+    | (x − 4) |  | − | − | − | ‖ | − | 0 | + |  |
+    | e^((x² + x − 2)/(6x − 12)) |  | + | + | + | ‖ | + | + | + |  |
+    | (x − 2)² |  | + | + | + | ‖ | + | + | + |  |
+    | **f′(x)** |  | + | 0 | − | ‖ | − | 0 | + |  |
+    | **f(x)** | 0⁺ | ↗ | e^(1/6) | ↘ | 0⁺ ‖ +∞ | ↘ | e^(3/2) | ↗ | +∞ |
+
+  - g(0) = (−2)/(−12) = 1/6, donc f(0) = e^(1/6) ≈ 1,18.
+  - g(4) = 18/12 = 3/2, donc f(4) = e^(3/2) ≈ 4,48.
+  - Liste des extremums :
+    - **Maximum local** en x = 0 : (0 ; e^(1/6)) ≈ (0 ; 1,18) (f′ passe de + à −). Pas global : f(x) → +∞ quand x → 2⁺.
+    - **Minimum local** en x = 4 : (4 ; e^(3/2)) ≈ (4 ; 4,48) (f′ passe de − à +). Pas global : f(x) → 0⁺ quand x → −∞.
+
+#### 6. Graphe
+
+- Carte « Graphique » :
+  - Graphique : fenêtre x de −9,62 à 6, y de −1,40 à 7,00 ; courbe en deux morceaux (de part et d'autre de x = 2) ; en pointillé, AH y = 0 (x → −∞) et AV x = 2 (à gauche → 0, à droite → +∞) ; points pleins : maximum (0 ; 1,18), qui est aussi (0 ; f(0)), et minimum (4 ; 4,48) ; aucun zéro ; rond vide en (2 ; 0).
+  - Texte d'aide : Courbe (trait plein), asymptotes (pointillé), extremums, zéros et point (0 ; f(0)) (points pleins), points exclus du graphe (ronds vides). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.
+
+#### Écarts restants avec la cible (decisions.md §4)
+
+- Partie 4, x → 2⁻ et 2⁺ : « Exposant : … → 4/0⁻ » sans les lignes haut / bas ni la valeur d'essai (x = 1,99 : 6·1,99 − 12 = −0,06,
+  donc 0⁻) → **P6** (D12).
+- Partie 4, asymptotes : « Asymptote horizontale : y = 0 » sans « à gauche » ni « le graphe est au-dessus » ; AV « (du côté droit) ;
+  à gauche, f(x) → 0 » au lieu de 0⁺, « seulement du côté droit » et du point (2 ; 0) exclu (rond vide) ; bilan « = 0 » sans 0⁺ → **P6** (D13).
+- Partie 4, ordre : −∞, +∞, 2⁻, 2⁺ au lieu de −∞, 2⁻, 2⁺, +∞ ; « pas d'AH à droite » non écrit en +∞ → **P6** (D16 ; la phrase en +∞ :
+  à confirmer).
+- Partie 3 : « Le graphe coupe l'axe des y au point (0 ; e^{1/6}) » au lieu de « Point (0 ; e^{1/6}) » → question 27.
+- Partie 5 : f′ encadré avec l'exposant écrit en entier, et non « x(x − 4)/(6(x − 2)²) · e^{g(x)} » → question 34 ; g(x) nommé sous forme
+  développée dans la carte « Dérivée » (factorisée dans « Mise en forme ») → question 35 ; ligne g(0) répétée (déjà en partie 3) → question 41.
+- Partie 5 : « f′(x) = … = 0 ⇔ x = 0 ou x − 4 = 0 ⇔ x = 0 ou x = 4 » au lieu de « ⇔ x(x − 4) = 0 ⇔ x = 0 ou x = 4 (produit nul) » →
+  question 56. Ordre des lignes du tableau (e^{…} avant (x − 2)², §4 : l'inverse) et libellé e^{(x² + x − 2)/(6x − 12)} plutôt que
+  e^{g(x)} : machinerie R7 de l'outil Dérivée (D9, écart accepté).
+- Partie 6 : carte « Graphique » sous l'intertitre « 6. Graphe » (question 8) ; fenêtre x de −9,62 à 6 (.tex : −8 à 10, question 49).
+- Pas de carte « Bilan de l'étude » ni d'Ex7 dans les exemples de la page → **P9** (D20, D18) ; pente au point exclu → **P10** (D14).
+
+### Détail par partie (rapports de la nuit)
 
 - **P0 faite** : branche `etude-complete` ; `audit-etape0.md` (copie inchangée du rapport d'audit) et `decisions.md` versés au dépôt ; corpus
   Ex7, a–d avec les résultats de decisions.md §4–5 ; oracle mpmath (fonctions écrites à la main) : tout le corpus est confirmé ; les valeurs de
@@ -79,6 +316,23 @@ passe fait échouer la suite). Temps natif : `docs/chantiers/etude-complete/mesu
   cadrage : fenêtre des points à montrer, branches infinies coupées en y, côté de chaque AH élargi jusqu'à l'approche à 5 % (Ex7,
   c, d) ; courbe tracée une largeur au-delà ; `commun/graphique.js` : un dessin de rond vide, un dessin de point plein. 3 xfail P8
   retirés ; instantanés et traces de l'EC régénérés (liste sous « À relire ») ; questions 49 à 55.
+
+## Parties
+
+| Partie | Contenu (decisions.md §6) | Touche | État | Commit |
+|---|---|---|---|---|
+| P0 | `suivi.md`, corpus + oracle mpmath, xfail marqués avec leur partie | tests | **fait** | 5eadf34 |
+| P1 | D6, D7 (parenthèses, doublons), D17 | Dérivée | **fait** | edf17c3 |
+| P2 | Squelette des 6 parties titrées (D1), spécification (D2, D19) | EC | **fait** | 4cf3e9e |
+| P3 | Partie 1 : mise en forme + ED détaillé (D3) | EC | **fait** | f108f7f |
+| P4 | Partie 2 : parité (D4) | EC | **fait** | 62781a8 |
+| P5 | Partie 3 : zéros, signe, f(0) (D5) | EC | **fait** | 8fc2fa2 |
+| P6 | Partie 4 : D12, D13, D16 | Limites | reportée (hors de la nuit du 02.11) | |
+| P7a | Dérivée de l'exposant détaillée, tableau u/v (D7, D8, D7b si simple) | Dérivée | **fait** | 1799fff |
+| P7b | Valeurs dans le tableau de variations (D10), extremums (D11) | EC + Dérivée | **fait** | cfe88de |
+| P8 | Graphe (D15, §3) | EC | **fait** | 3ece3c9 |
+| P9 | Exemples (D18), Bilan (D20), instantanés, largeurs 320–390 px, mesure Pyodide | EC | reportée (hors de la nuit du 02.11) | |
+| P10 | *(facultatif)* Pente au point exclu (D14) | EC | reportée (hors de la nuit du 02.11) | |
 
 ## Plans
 
@@ -359,6 +613,7 @@ la partie 3, 44 ms) ; Ex7, b, d : en dessous de P7b (bruit de la machine, mesure
 | P7b | 1181 passés, 24 xfail (650 s) | 118 passés (939 s, dont le nouveau test de largeurs du tableau de variations) ; code de retour 0 (2ᵉ lancement : le 1ᵉʳ, arrêté avant la fin, pour corriger « Global … () » d'un ED fermé, √(4 − x²), vu en relisant des cas hors corpus) | 03.11.2026 |
 | P7b (contrôle du chef d'orchestre) | 1181 passés, 24 xfail (667 s) | 118 passés (936 s) ; code de retour 0 | 03.11.2026 |
 | P8 | 1220 passés, 21 xfail (689 s) | 119 passés (954 s, dont le nouveau test `test_graphique.py::test_d15_ronds_vides_et_points_marques`) ; code de retour 0 (1ᵉʳ lancement) | 03.11.2026 |
+| P8 (contrôle du chef d'orchestre) | 1220 passés, 21 xfail (647 s) | 119 passés (923 s) ; code de retour 0 | 03.11.2026 |
 
 ## Écarts acceptés
 
@@ -620,6 +875,10 @@ la partie 3, 44 ms) ; Ex7, b, d : en dessous de P7b (bruit de la machine, mesure
 55. **P8, temps** : a passe de 0,02 à 0,03 s (+ 50 % à l'arrondi près, quelques millisecondes : la partie 3, déjà payée par
     `resoudre`, est maintenant comptée dans `etudier()`) ; aucune autre hausse de plus de 50 % (c + 30 %). Signalé selon la règle ;
     sans effet pour l'élève (le temps de la page ne change que de quelques millisecondes).
+
+56. **Résumé, ligne des zéros de f′ (outil Dérivée)** : vue en transcrivant l'Ex7 : « f′(x) = … = 0 ⇔ x = 0 ou x − 4 = 0 ⇔ x = 0
+    ou x = 4 ; valeur interdite : x = 2 » ; decisions.md §4 écrit « f′(x) = 0 ⇔ x(x − 4) = 0 ⇔ x = 0 ou x = 4 (produit nul) ». La ligne
+    est celle de l'outil Dérivée (aucune décision ne la vise) : la changer toucherait ses instantanés. Faut-il l'aligner sur §4 ?
 
 ## À relire par l'enseignant
 
