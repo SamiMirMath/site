@@ -1,7 +1,7 @@
 {
  "(e^x-1)/x": {
   "au_depart": {
-   "progression": "Étape 1 / 22",
+   "progression": "Étape 1 / 25",
    "visibles": 2
   },
   "cartes": [
@@ -52,6 +52,33 @@
     "tableaux": [],
     "texte": "2. Parité",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Symétrie de l'EDED est symétrique par rapport à 0.",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Pas impaire⟦f(1) = e - 1⟧ ≈ 1,72, donc ⟦-f(1)⟧ ≈ −1,72⟦f(-1) = -\\left(e^{-1} - 1\\right)⟧ ≈ 0,63⟦f(-1) \\neq -f(1)⟧ : f n'est pas impaire.",
+    "titre": "Pas impaire"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Pas paire⟦f(1) = e - 1⟧ ≈ 1,72⟦f(-1) = -\\left(e^{-1} - 1\\right)⟧ ≈ 0,63⟦f(-1) \\neq f(1)⟧ : f n'est pas paire.Donc f n'est ni paire ni impaire.",
+    "titre": "Pas paire"
    },
    {
     "classes": [
@@ -427,11 +454,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 22 / 22"
+  "progression_finale": "Étape 25 / 25"
  },
  "(x^2-1)/(x-3)": {
   "au_depart": {
-   "progression": "Étape 1 / 11",
+   "progression": "Étape 1 / 12",
    "visibles": 2
   },
   "cartes": [
@@ -482,6 +509,15 @@
     "tableaux": [],
     "texte": "2. Parité",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Symétrie de l'ED⟦-3 \\in ED⟧, mais ⟦3 \\notin ED⟧ : ED n'est pas symétrique par rapport à 0.Donc f n'est ni paire ni impaire.",
+    "titre": "Symétrie de l'ED"
    },
    {
     "classes": [
@@ -908,11 +944,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 11 / 11"
+  "progression_finale": "Étape 12 / 12"
  },
  "3(x*ln(x))": {
   "au_depart": {
-   "progression": "Étape 1 / 17",
+   "progression": "Étape 1 / 18",
    "visibles": 2
   },
   "cartes": [
@@ -963,6 +999,15 @@
     "tableaux": [],
     "texte": "2. Parité",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Symétrie de l'ED⟦1 \\in ED⟧, mais ⟦-1 \\notin ED⟧ : ED n'est pas symétrique par rapport à 0.Donc f n'est ni paire ni impaire.",
+    "titre": "Symétrie de l'ED"
    },
    {
     "classes": [
@@ -1337,11 +1382,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 17 / 17"
+  "progression_finale": "Étape 18 / 18"
  },
  "e^((x^2+x-2)/(6x-12))": {
   "au_depart": {
-   "progression": "Étape 1 / 18",
+   "progression": "Étape 1 / 19",
    "visibles": 2
   },
   "cartes": [
@@ -1401,6 +1446,15 @@
     "tableaux": [],
     "texte": "2. Parité",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Symétrie de l'ED⟦-2 \\in ED⟧, mais ⟦2 \\notin ED⟧ : ED n'est pas symétrique par rapport à 0.Donc f n'est ni paire ni impaire.",
+    "titre": "Symétrie de l'ED"
    },
    {
     "classes": [
@@ -1954,11 +2008,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 18 / 18"
+  "progression_finale": "Étape 19 / 19"
  },
  "e^(1/x)": {
   "au_depart": {
-   "progression": "Étape 1 / 15",
+   "progression": "Étape 1 / 18",
    "visibles": 2
   },
   "cartes": [
@@ -2009,6 +2063,33 @@
     "tableaux": [],
     "texte": "2. Parité",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Symétrie de l'EDED est symétrique par rapport à 0.",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Pas impaire⟦f(1) = e⟧ ≈ 2,72, donc ⟦-f(1)⟧ ≈ −2,72⟦f(-1) = e^{-1}⟧ ≈ 0,37⟦f(-1) \\neq -f(1)⟧ : f n'est pas impaire.",
+    "titre": "Pas impaire"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Pas paire⟦f(1) = e⟧ ≈ 2,72⟦f(-1) = e^{-1}⟧ ≈ 0,37⟦f(-1) \\neq f(1)⟧ : f n'est pas paire.Donc f n'est ni paire ni impaire.",
+    "titre": "Pas paire"
    },
    {
     "classes": [
@@ -2351,11 +2432,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 15 / 15"
+  "progression_finale": "Étape 18 / 18"
  },
  "e^(2/(x^2-4))": {
   "au_depart": {
-   "progression": "Étape 1 / 19",
+   "progression": "Étape 1 / 21",
    "visibles": 2
   },
   "cartes": [
@@ -2406,6 +2487,24 @@
     "tableaux": [],
     "texte": "2. Parité",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Symétrie de l'EDED est symétrique par rapport à 0.",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Calcul de f(−x)⟦f(-x) = e^{\\frac{2}{\\left(-x\\right)^{2} - 4}}⟧ (on remplace x par −x)⟦ = e^{\\frac{2}{x^{2} - 4}}⟧ (car ⟦\\left(-x\\right)^{2} = x^{2}⟧)⟦ = f(x)⟧Donc f est paire.",
+    "titre": "Calcul de f(−x)"
    },
    {
     "classes": [
@@ -2980,11 +3079,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 19 / 19"
+  "progression_finale": "Étape 21 / 21"
  },
  "e^(2x)": {
   "au_depart": {
-   "progression": "Étape 1 / 10",
+   "progression": "Étape 1 / 13",
    "visibles": 2
   },
   "cartes": [
@@ -3025,6 +3124,33 @@
     "tableaux": [],
     "texte": "2. Parité",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Symétrie de l'EDED est symétrique par rapport à 0.",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Pas impaire⟦f(0) = 1 \\neq 0⟧Une fonction impaire vérifie ⟦f(0) = 0⟧ : f n'est pas impaire.",
+    "titre": "Pas impaire"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Pas paire⟦f(1) = e^{2}⟧ ≈ 7,39⟦f(-1) = e^{-2}⟧ ≈ 0,14⟦f(-1) \\neq f(1)⟧ : f n'est pas paire.Donc f n'est ni paire ni impaire.",
+    "titre": "Pas paire"
    },
    {
     "classes": [
@@ -3258,7 +3384,7 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 10 / 10"
+  "progression_finale": "Étape 13 / 13"
  },
  "ln(": {
   "au_depart": {
@@ -3281,7 +3407,7 @@
  },
  "ln(x)/x": {
   "au_depart": {
-   "progression": "Étape 1 / 16",
+   "progression": "Étape 1 / 17",
    "visibles": 2
   },
   "cartes": [
@@ -3342,6 +3468,15 @@
     "tableaux": [],
     "texte": "2. Parité",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Symétrie de l'ED⟦1 \\in ED⟧, mais ⟦-1 \\notin ED⟧ : ED n'est pas symétrique par rapport à 0.Donc f n'est ni paire ni impaire.",
+    "titre": "Symétrie de l'ED"
    },
    {
     "classes": [
@@ -3699,11 +3834,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 16 / 16"
+  "progression_finale": "Étape 17 / 17"
  },
  "sqrt(x^2-4)": {
   "au_depart": {
-   "progression": "Étape 1 / 9",
+   "progression": "Étape 1 / 11",
    "visibles": 2
   },
   "cartes": [
@@ -3905,6 +4040,24 @@
     "tableaux": [],
     "texte": "2. Parité",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Symétrie de l'EDED est symétrique par rapport à 0.",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Calcul de f(−x)⟦f(-x) = \\sqrt{\\left(-x\\right)^{2} - 4}⟧ (on remplace x par −x)⟦ = \\sqrt{x^{2} - 4}⟧ (car ⟦\\left(-x\\right)^{2} = x^{2}⟧)⟦ = f(x)⟧Donc f est paire.",
+    "titre": "Calcul de f(−x)"
    },
    {
     "classes": [
@@ -4209,11 +4362,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 9 / 9"
+  "progression_finale": "Étape 11 / 11"
  },
  "x*ln(x)": {
   "au_depart": {
-   "progression": "Étape 1 / 17",
+   "progression": "Étape 1 / 18",
    "visibles": 2
   },
   "cartes": [
@@ -4264,6 +4417,15 @@
     "tableaux": [],
     "texte": "2. Parité",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Symétrie de l'ED⟦1 \\in ED⟧, mais ⟦-1 \\notin ED⟧ : ED n'est pas symétrique par rapport à 0.Donc f n'est ni paire ni impaire.",
+    "titre": "Symétrie de l'ED"
    },
    {
     "classes": [
@@ -4601,11 +4763,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 17 / 17"
+  "progression_finale": "Étape 18 / 18"
  },
  "x/(x^2+1)": {
   "au_depart": {
-   "progression": "Étape 1 / 9",
+   "progression": "Étape 1 / 11",
    "visibles": 2
   },
   "cartes": [
@@ -4656,6 +4818,24 @@
     "tableaux": [],
     "texte": "2. Parité",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Symétrie de l'EDED est symétrique par rapport à 0.",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Calcul de f(−x)⟦f(-x) = \\frac{\\left(-x\\right)}{\\left(-x\\right)^{2} + 1}⟧ (on remplace x par −x)⟦ = -\\frac{x}{x^{2} + 1}⟧ (car ⟦\\left(-x\\right)^{2} = x^{2}⟧ ; règle des signes)⟦ = -f(x)⟧Donc f est impaire.",
+    "titre": "Calcul de f(−x)"
    },
    {
     "classes": [
@@ -5034,11 +5214,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 9 / 9"
+  "progression_finale": "Étape 11 / 11"
  },
  "x/sqrt(x^2)": {
   "au_depart": {
-   "progression": "Étape 1 / 10",
+   "progression": "Étape 1 / 12",
    "visibles": 2
   },
   "cartes": [
@@ -5150,6 +5330,24 @@
     "tableaux": [],
     "texte": "2. Parité",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Symétrie de l'EDED est symétrique par rapport à 0.",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Calcul de f(−x)⟦f(-x) = \\frac{\\left(-x\\right)}{\\sqrt{\\left(-x\\right)^{2}}}⟧ (on remplace x par −x)⟦ = -\\frac{x}{\\sqrt{x^{2}}}⟧ (car ⟦\\left(-x\\right)^{2} = x^{2}⟧ ; règle des signes)⟦ = -f(x)⟧Donc f est impaire.",
+    "titre": "Calcul de f(−x)"
    },
    {
     "classes": [
@@ -5388,11 +5586,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 10 / 10"
+  "progression_finale": "Étape 12 / 12"
  },
  "x^(2/3)": {
   "au_depart": {
-   "progression": "Étape 1 / 8",
+   "progression": "Étape 1 / 10",
    "visibles": 2
   },
   "cartes": [
@@ -5433,6 +5631,24 @@
     "tableaux": [],
     "texte": "2. Parité",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Symétrie de l'EDED est symétrique par rapport à 0.",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Calcul de f(−x)⟦f(-x) = \\sqrt[3]{\\left(-x\\right)^{2}}⟧ (on remplace x par −x)⟦ = \\sqrt[3]{x^{2}}⟧ (car ⟦\\left(-x\\right)^{2} = x^{2}⟧)⟦ = f(x)⟧Donc f est paire.",
+    "titre": "Calcul de f(−x)"
    },
    {
     "classes": [
@@ -5688,11 +5904,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 8 / 8"
+  "progression_finale": "Étape 10 / 10"
  },
  "x^2*e^(-x)": {
   "au_depart": {
-   "progression": "Étape 1 / 16",
+   "progression": "Étape 1 / 19",
    "visibles": 2
   },
   "cartes": [
@@ -5733,6 +5949,33 @@
     "tableaux": [],
     "texte": "2. Parité",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Symétrie de l'EDED est symétrique par rapport à 0.",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Pas impaire⟦f(1) = e^{-1}⟧ ≈ 0,37, donc ⟦-f(1)⟧ ≈ −0,37⟦f(-1) = e⟧ ≈ 2,72⟦f(-1) \\neq -f(1)⟧ : f n'est pas impaire.",
+    "titre": "Pas impaire"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Pas paire⟦f(1) = e^{-1}⟧ ≈ 0,37⟦f(-1) = e⟧ ≈ 2,72⟦f(-1) \\neq f(1)⟧ : f n'est pas paire.Donc f n'est ni paire ni impaire.",
+    "titre": "Pas paire"
    },
    {
     "classes": [
@@ -6182,11 +6425,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 16 / 16"
+  "progression_finale": "Étape 19 / 19"
  },
  "x^2-4x+3": {
   "au_depart": {
-   "progression": "Étape 1 / 8",
+   "progression": "Étape 1 / 11",
    "visibles": 2
   },
   "cartes": [
@@ -6227,6 +6470,33 @@
     "tableaux": [],
     "texte": "2. Parité",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Symétrie de l'EDED est symétrique par rapport à 0.",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Pas impaire⟦f(0) = 3 \\neq 0⟧Une fonction impaire vérifie ⟦f(0) = 0⟧ : f n'est pas impaire.",
+    "titre": "Pas impaire"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Pas paire⟦f(1) = 0⟧⟦f(-1) = 8⟧⟦f(-1) \\neq f(1)⟧ : f n'est pas paire.Donc f n'est ni paire ni impaire.",
+    "titre": "Pas paire"
    },
    {
     "classes": [
@@ -6490,11 +6760,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 8 / 8"
+  "progression_finale": "Étape 11 / 11"
  },
  "x^3-3x": {
   "au_depart": {
-   "progression": "Étape 1 / 8",
+   "progression": "Étape 1 / 10",
    "visibles": 2
   },
   "cartes": [
@@ -6535,6 +6805,24 @@
     "tableaux": [],
     "texte": "2. Parité",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Symétrie de l'EDED est symétrique par rapport à 0.",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Calcul de f(−x)⟦f(-x) = \\left(-x\\right)^{3} - 3\\left(-x\\right)⟧ (on remplace x par −x)⟦ = -x^{3} + 3x⟧ (car ⟦\\left(-x\\right)^{3} = -x^{3}⟧ ; règle des signes)⟦ = -\\left(x^{3} - 3x\\right)⟧ (mise en évidence de −1)⟦ = -f(x)⟧Donc f est impaire.",
+    "titre": "Calcul de f(−x)"
    },
    {
     "classes": [
@@ -6876,11 +7164,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 8 / 8"
+  "progression_finale": "Étape 10 / 10"
  },
  "x^4-2x^2": {
   "au_depart": {
-   "progression": "Étape 1 / 8",
+   "progression": "Étape 1 / 10",
    "visibles": 2
   },
   "cartes": [
@@ -6921,6 +7209,24 @@
     "tableaux": [],
     "texte": "2. Parité",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Symétrie de l'EDED est symétrique par rapport à 0.",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Calcul de f(−x)⟦f(-x) = \\left(-x\\right)^{4} - 2\\left(-x\\right)^{2}⟧ (on remplace x par −x)⟦ = x^{4} - 2x^{2}⟧ (car ⟦\\left(-x\\right)^{4} = x^{4}⟧ et ⟦\\left(-x\\right)^{2} = x^{2}⟧)⟦ = f(x)⟧Donc f est paire.",
+    "titre": "Calcul de f(−x)"
    },
    {
     "classes": [
@@ -7356,6 +7662,6 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 8 / 8"
+  "progression_finale": "Étape 10 / 10"
  }
 }

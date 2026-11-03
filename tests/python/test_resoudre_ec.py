@@ -44,7 +44,8 @@ class TestResoudreEC(unittest.TestCase):
             dv, lim = ancien["derivee"], ancien["limites"]
             p = rec.PARTIES
             attendu = [p[0], "Fonction"] + (["Mise en forme"] if parties.mise_en_forme(lire(entree)) else [])
-            attendu += [f"Condition {c['num']}" for c in ed.analyser(entree)["conditions"]] + ["Ensemble de définition", p[1], p[2], p[3]]
+            attendu += [f"Condition {c['num']}" for c in ed.analyser(entree)["conditions"]] + ["Ensemble de définition", p[1]]
+            attendu += [c["titre"] for c in parties.cartes_parite(ec.analyse(entree))] + [p[2], p[3]]
             if lim.get("tableaux_signe"):
                 attendu.append("Tableaux de signes")
             attendu += [t for e in lim["etudes"] for t in titres_etude(e)] + ["Bilan des asymptotes", p[4]]

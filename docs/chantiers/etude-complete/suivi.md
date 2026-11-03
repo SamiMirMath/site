@@ -17,8 +17,8 @@ passe fait échouer la suite). Temps natif : `docs/chantiers/etude-complete/mesu
 | P0 | `suivi.md`, corpus + oracle mpmath, xfail marqués avec leur partie | tests | **fait** | 5eadf34 |
 | P1 | D6, D7 (parenthèses, doublons), D17 | Dérivée | **fait** | edf17c3 |
 | P2 | Squelette des 6 parties titrées (D1), spécification (D2, D19) | EC | **fait** | 4cf3e9e |
-| P3 | Partie 1 : mise en forme + ED détaillé (D3) | EC | **fait** | voir `git log` (« EC P3 ») |
-| P4 | Partie 2 : parité (D4) | EC | à faire | |
+| P3 | Partie 1 : mise en forme + ED détaillé (D3) | EC | **fait** | f108f7f |
+| P4 | Partie 2 : parité (D4) | EC | **fait** | (voir `git log`) |
 | P5 | Partie 3 : zéros, signe, f(0) (D5) | EC | à faire | |
 | P6 | Partie 4 : D12, D13, D16 | Limites | reportée (hors de la nuit du 02.11) | |
 | P7a | Dérivée de l'exposant détaillée, tableau u/v (D7, D8, D7b si simple) | Dérivée | à faire | |
@@ -45,6 +45,11 @@ passe fait échouer la suite). Temps natif : `docs/chantiers/etude-complete/mesu
   ax² + c en chaîne courte « On résout 6x − 12 = 0 ⇔ 6x = 12 ⇔ x = 2. »), carte « Ensemble de définition » (ED encadré). Garde-fous exact
   et numérique ; les outils ED, Dérivée, Limites, Exp-log ne changent pas. 7 xfail P3 retirés ; instantanés de l'EC : partie 1 seule
   (liste sous « À relire ») ; questions 10 à 14 ; temps inchangé.
+- **P4 faite** : partie 2 (parité, D4) dans `parties.py` (`cartes_parite`, appelée par `resoudre` sur l'analyse en cache) : ED non
+  symétrique (« −2 ∈ ED, mais 2 ∉ ED »), chaîne f(−x) une étape par ligne avec la propriété nommée (paire / impaire), sinon « Pas
+  impaire » (f(0) ≠ 0 ou contre-exemple) et « Pas paire » (contre-exemple, valeurs exactes puis arrondies, arrondis différents).
+  Chaque affirmation confirmée par SymPy et par une sonde mpmath (30 chiffres) ; sinon un message clair, sans conclusion. 5 xfail P4
+  retirés ; instantanés de l'EC : partie 2 seule (liste sous « À relire ») ; questions 15 à 21 ; `etudier()` inchangé, parité 0,2 à 9 ms.
 
 ## Plans
 
@@ -132,6 +137,32 @@ fonctions publiques de `resoudre_ed` (`blocs_condition`, `blocs_ensemble`), sans
    références de pages de l'EC régénérés ; largeurs 320/360/390 vérifiées à part pour Ex7, d, 1/(4x²−1) et une mise en forme à
    deux lignes (aucune faute) ; suite complète ; temps natif ; commit « EC P3 : … ».
 
+### P4 (03.11.2026)
+
+Partie 2 de l'EC (D4), tout dans `etude-complete/parties.py` (`cartes_parite`, appelée par `resoudre_ec` sur l'analyse en cache : aucun
+nouveau calcul de l'ED, D19) ; les autres outils ne changent pas. Toute affirmation est confirmée deux fois (principe 0.2) : SymPy exact
+et une sonde mpmath (évaluation de l'arbre à 30 chiffres, écrite dans `parties.py` : `evaluer` est en flottants) ; au moindre doute, un
+message clair et aucune conclusion.
+1. **ED non symétrique (règle 1)** : comparaison exacte des intervalles de l'ED et de leurs symétriques (bornes rationnelles, sinon SymPy ;
+   une borne approchée = doute). Point a : d'abord le symétrique d'une borne rationnelle (Ex7 : « −2 ∈ ED, mais 2 ∉ ED »), sinon 1, 2, 1/2,
+   3… ; appartenance exacte, puis sonde (f(a) définie, f(−a) non définie). Une carte « Symétrie de l'ED », conclusion « ni paire ni impaire ».
+2. **ED symétrique** : carte « Symétrie de l'ED » (« ED est symétrique par rapport à 0. »), puis la sonde classe f (paire, impaire, ni
+   l'une ni l'autre, doute) sur des points de l'ED.
+   - Paire ou impaire : confirmée par SymPy (f(−x) ∓ f(x) se simplifie en 0) ; carte « Calcul de f(−x) », une étape par ligne :
+     substitution « (on remplace x par −x) », puis la forme simplifiée avec la propriété (« car (−x)² = x² », « règle des signes » pour
+     les signes), pour une fonction impaire somme « −(…) (mise en évidence de −1) », enfin « = f(x) » ou « = −f(x) » ; chaque ligne est
+     vérifiée (SymPy et sonde). La chaîne n'est écrite que si la parité se lit sur l'arbre (puissances de x, sommes, produits, quotients,
+     exp/ln/√ d'une expression paire) ; sinon message clair.
+   - Ni l'une ni l'autre (règle 3) : carte « Pas impaire » (f(0) ≠ 0 en valeur exacte si 0 ∈ ED et f(0) ≠ 0, sinon contre-exemple
+     f(−a) ≠ −f(a)), carte « Pas paire » (contre-exemple f(−a) ≠ f(a)), a dans 1, 2, 1/2, 3, 4, 1/3, 5 avec ±a ∈ ED ; valeurs exactes
+     (f(a) écrit par substitution et calcul des constantes rationnelles, vérifié égal à la valeur SymPy et à la sonde), puis approchées
+     (decisions.md §2 ; entier exact sans « ≈ ») ; les deux valeurs arrondies affichées doivent différer, sinon a suivant, sinon message.
+3. `resoudre_ec` : cartes de la partie 2 sous l'intertitre « 2. Parité ».
+4. Tests : xfail P4 retirés ; `test_parties_ec.py` (cartes exactes du corpus et des entrées de la page, oracle mpmath de `tests/python/
+   oracle.py` pour les valeurs et la parité, garde-fous forcés : sonde ou SymPy en désaccord, arrondis égaux, SymPy absent) ;
+   `test_resoudre_ec.py` suit les nouvelles cartes. Instantanés `resoudre` et références de pages de l'EC régénérés (liste sous « À
+   relire ») ; largeurs ; suite complète ; temps natif (et coût de la parité, calculée hors d'`etudier()`) ; commit « EC P4 : … ».
+
 ## Temps natif de etudier() (s, médiane de 3 processus neufs)
 
 | Partie | Ex7 | a | b | c | d |
@@ -140,9 +171,12 @@ fonctions publiques de `resoudre_ed` (`blocs_condition`, `blocs_ensemble`), sans
 | P1 | 0,63 | 0,02 | 0,42 | 0,19 | 0,30 |
 | P2 | 0,60 | 0,02 | 0,43 | 0,18 | 0,32 |
 | P3 | 0,59 | 0,02 | 0,42 | 0,19 | 0,30 |
+| P4 | 0,60 | 0,02 | 0,43 | 0,18 | 0,29 |
 
 P3 ne touche pas `etudier()` ; la partie 1 (`parties.cartes_domaine`, appelée par `resoudre`) coûte en plus 0,5 ms (Ex7), 0,2 ms (d),
 moins de 0,01 ms (a, b, c).
+P4 ne touche pas `etudier()` ; la partie 2 (`parties.cartes_parite`, appelée par `resoudre`, SymPy déjà chargé, médiane de 3 processus
+neufs) coûte en plus 0,2 ms (Ex7 : ED non symétrique, sans SymPy), 4,8 ms (a), 7,2 ms (b), 8,6 ms (c), 6,2 ms (d).
 
 ## Suite complète
 
@@ -154,6 +188,8 @@ moins de 0,01 ms (a, b, c).
 | P2 | 1071 passés, 55 xfail (655 s) | 116 passés (880 s) ; code de retour 0 (2ᵉ lancement : le 1ᵉʳ a échoué sur `test_soc07_etapes`, adapté aux intertitres, voir Écarts) | 03.11.2026 |
 | P2 (contrôle du chef d'orchestre) | 1071 passés, 55 xfail (649 s) | 116 passés (865 s) ; code de retour 0 | 03.11.2026 |
 | P3 | 1091 passés, 48 xfail (637 s) | 116 passés (870 s) ; code de retour 0 (2ᵉ lancement : le 1ᵉʳ a échoué sur `test_resoudre_import`, liste de fichiers mise à jour, voir Écarts) | 03.11.2026 |
+| P3 (contrôle du chef d'orchestre) | 1091 passés, 48 xfail (634 s) | 116 passés (886 s) ; code de retour 0 | 03.11.2026 |
+| P4 | 1113 passés, 43 xfail (631 s) | 116 passés (873 s) ; code de retour 0 (1ᵉʳ lancement) | 03.11.2026 |
 
 ## Écarts acceptés
 
@@ -187,6 +223,10 @@ moins de 0,01 ms (a, b, c).
   n'aurait ni instantané ni rendu de page testé (P9 les mettra dans les exemples, D18).
 - P3 : `tests/python/test_resoudre_import.py` (import à plat de l'EC avec les fichiers d'une page) reçoit les deux fichiers ajoutés au
   manifeste (`resoudre_ed.py`, `parties.py`) : même vérification, liste à jour (1ᵉʳ lancement de la suite complète en échec sur ce point).
+- P4 : `tests/python/test_resoudre_ec.py::test_ordre_des_cartes_comme_la_page` place sous « 2. Parité » les titres des cartes de
+  `parties.cartes_parite` (comme « Mise en forme » à P3) : le reste de l'ordre est vérifié comme avant ; le contenu de la partie 2 est
+  vérifié à part (`test_parties_ec.py` : cartes exactes, oracle mpmath, garde-fous ; `test_resoudre_place_la_parite_sous_son_intertitre`).
+  La spécification `docs/specifications/etude-complete.md` décrit la partie 2 (sinon elle serait fausse : « 2 vide »).
 
 ## Questions pour l'enseignant
 
@@ -231,6 +271,28 @@ moins de 0,01 ms (a, b, c).
     dans l'outil ED si vous le souhaitez.
 14. **P3, Somme-Produit aussi pour a² − b²** : x² − 9 = (x + 3)(x − 3) (Somme-Produit), facteurs par racine croissante, alors que R10
     (outil ED) factorise a² − b² directement. Une seule méthode pour tous les trinômes unitaires (principe 6) ; à confirmer.
+
+15. **P4, « ≈ » hors de la formule** : « \(f(1) = −5e^{−2}\) ≈ −0,68 » ; la valeur approchée est écrite en texte (virgule, signe
+    « − »), après la formule, et non dans la formule (« 0{,}68 ») comme les autres outils : le test du corpus (P0) la cherche telle
+    quelle dans le texte. À l'écran, la police du « ≈ −0,68 » est celle du texte. Faut-il la passer dans la formule ?
+16. **P4, cartes de la partie 2** : toujours une carte « Symétrie de l'ED » d'abord (« ED est symétrique par rapport à 0. », même pour
+    ED = ℝ, que le .tex ne dit pas : même suite d'étapes pour toutes les fonctions, principe 6), puis « Calcul de f(−x) » ou « Pas
+    impaire » et « Pas paire » ; la conclusion en gras (« Donc f est paire. ») à la fin de la dernière carte. La phrase « une fonction
+    impaire vérifie f(0) = 0 » vient du .tex (c).
+17. **P4, propriétés de la chaîne** : la 1ʳᵉ ligne porte « (on remplace x par −x) » (absent du .tex) ; les signes sont justifiés par
+    « règle des signes » (x³ − 3x : « car (−x)³ = −x³ ; règle des signes »), une somme impaire passe par « −(x³ − 3x) (mise en
+    évidence de −1) » avant « = −f(x) ». Les mots vous conviennent-ils ?
+18. **P4, chaîne non rédigée** : quand la parité est confirmée (SymPy et sonde) mais ne se lit pas sur l'arbre (e^x + e^(−x),
+    x^(1/3), (x³ − x)²), l'outil écrit « Le calcul de f(−x) n'a pas pu être rédigé par l'outil : la parité n'est pas traitée. » (option
+    qui affiche le moins). Aucune entrée de la page ni du corpus n'est concernée.
+19. **P4, valeurs des contre-exemples** : a est pris dans 1, 2, 1/2, 3, 4, 1/3, 5 ; une valeur hors de [10⁻³ ; 1000[ fait passer au a
+    suivant (notation scientifique : question 1 ; séparateur des milliers ’ : pas encore dans l'EC) ; un entier exact s'écrit sans
+    « ≈ » (question 2 : f(1) = 0, f(−1) = 8) ; un f(0) non entier s'écrit « f(0) = … ≠ 0 (≈ 0,61) ». L'écriture exacte est la
+    substitution, constantes rationnelles calculées, sans autre simplification : (e^x − 1)/x donne f(−1) = −(e^{−1} − 1) (et non
+    1 − e^{−1}).
+20. **P4, point a d'un ED non symétrique** : d'abord le symétrique d'une borne rationnelle exclue (Ex7 : −2 ; (x² − 1)/(x − 3) : −3),
+    sinon le premier de 1, −1, 2, −2, 1/2… (ln(x)/x : « 1 ∈ ED, mais −1 ∉ ED » ; √(x + 1) : « 2 ∈ ED, mais −2 ∉ ED »).
+21. **P4, b : −36,95** : le .tex écrit f(−1) ≈ −36,9 ; decisions.md §5 écrit −36,95 (2 décimales, §2) : c'est −36,95 qui est affiché.
 
 ## À relire par l'enseignant
 
@@ -280,3 +342,29 @@ moins de 0,01 ms (a, b, c).
   | `e^(2x)`, `x^(2/3)`, `x^2*e^(-x)`, `x^2-4x+3`, `x^3-3x`, `x^4-2x^2` | ED = ℝ | « Ni logarithme, ni dénominateur, ni racine : aucune condition. » · ED = ℝ encadré |
   | `e^((x^2+x-2)/(6x-12))` (nouvelle, Ex7) | — | Mise en forme : x² + x − 2 = (x + 2)(x − 1) (Somme-Produit) ; 6x − 12 = 6(x − 2) (mise en évidence) ; On note g(x) = (x + 2)(x − 1)/(6(x − 2)), donc f(x) = e^{g(x)}. · Condition 1 : 6x − 12 ≠ 0 ; On résout 6x − 12 = 0 ⇔ 6x = 12 ⇔ x = 2. · ED = ℝ ∖ {2} |
   | `e^(2/(x^2-4))` (nouvelle, d) | — | Condition 1 : x² − 4 ≠ 0 ; On résout x² − 4 = 0 ⇔ x² = 4 ⇔ x = −2 ou x = 2. · ED = ℝ ∖ {−2 ; 2} |
+
+- **P4** (EC seule ; aucun autre outil ne change : instantanés identiques, `etudier()` identique). Instantanés modifiés :
+  `tests/python/instantanes/resoudre/etude-complete.json` (17 entrées modifiées) et `tests/pages/references/etude-complete.json`
+  (17 modifiées ; l'entrée d'erreur `ln(` est identique). Vérifié par programme : dans chaque entrée, tout ce qui précède « 2. Parité »
+  et tout ce qui suit « 3. Zéros, signe, ordonnée à l'origine » est identique ; seules les cartes de la partie 2 s'ajoutent (le compteur
+  d'étapes augmente de 1 à 3).
+
+  | Entrée | Avant (partie 2) | Après (partie 2) |
+  |---|---|---|
+  | toutes | intertitre seul | Symétrie de l'ED · [Calcul de f(−x)] ou [Pas impaire · Pas paire] |
+  | `e^((x^2+x-2)/(6x-12))` (Ex7) | — | −2 ∈ ED, mais 2 ∉ ED : ED n'est pas symétrique par rapport à 0. Donc **f n'est ni paire ni impaire**. |
+  | `(x^2-1)/(x-3)` | — | −3 ∈ ED, mais 3 ∉ ED : … ni paire ni impaire |
+  | `ln(x)/x`, `x*ln(x)`, `3(x*ln(x))` | — | 1 ∈ ED, mais −1 ∉ ED : … ni paire ni impaire |
+  | `e^(2/(x^2-4))` (d), `sqrt(x^2-4)`, `x^4-2x^2`, `x^(2/3)` | — | ED symétrique ; f(−x) = e^{2/((−x)² − 4)} (on remplace x par −x) = e^{2/(x² − 4)} (car (−x)² = x²) = f(x) ; **f est paire** (de même √((−x)² − 4), (−x)⁴ − 2(−x)², ∛((−x)²)) |
+  | `x^3-3x` | — | f(−x) = (−x)³ − 3(−x) = −x³ + 3x (car (−x)³ = −x³ ; règle des signes) = −(x³ − 3x) (mise en évidence de −1) = −f(x) ; **f est impaire** |
+  | `x/(x^2+1)`, `x/sqrt(x^2)` | — | f(−x) = (−x)/((−x)² + 1) = −x/(x² + 1) (car (−x)² = x² ; règle des signes) = −f(x) ; **f est impaire** |
+  | `e^(2x)` | — | f(0) = 1 ≠ 0 : pas impaire ; f(1) = e² ≈ 7,39, f(−1) = e^{−2} ≈ 0,14 : pas paire |
+  | `x^2-4x+3` | — | f(0) = 3 ≠ 0 ; f(1) = 0, f(−1) = 8 (entiers, sans ≈) |
+  | `e^(1/x)` | — | 0 ∉ ED : f(1) = e ≈ 2,72, donc −f(1) ≈ −2,72 ; f(−1) = e^{−1} ≈ 0,37 : pas impaire ; même a pour « pas paire » |
+  | `x^2*e^(-x)` | — | f(0) = 0 : contre-exemple f(1) = e^{−1} ≈ 0,37, −f(1) ≈ −0,37, f(−1) = e ≈ 2,72 ; pas paire avec le même a |
+  | `(e^x-1)/x` | — | f(1) = e − 1 ≈ 1,72 ; f(−1) = −(e^{−1} − 1) ≈ 0,63 (question 19) |
+
+  Hors instantanés (corpus) : b « f(0) = −6 ≠ 0 », « f(1) = −5e^{−2} ≈ −0,68 », « f(−1) = −5e^{2} ≈ −36,95 » ; c « f(0) = 5 ≠ 0 »,
+  « f(1) = e(6 − e) ≈ 8,92 », « f(−1) = e^{−1}(6 − e^{−1}) ≈ 2,07 » ; a « f(−x) = e^{−(−x)²} = e^{−x²} (car (−x)² = x²) = f(x) ».
+  Largeurs 320 / 360 / 390 px vérifiées à part (script de mesure de `test_largeurs.py`) pour 12 entrées dont Ex7, b, c, d, ln(x² + 1)/x
+  et x² + x/1000 : aucune faute.

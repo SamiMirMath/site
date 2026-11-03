@@ -44,6 +44,64 @@
     "titre": "2. Parité"
    },
    {
+    "blocs": [
+     {
+      "html": "ED est symétrique par rapport à 0.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(1) = e - 1\\) ≈ 1,72, donc \\(-f(1)\\) ≈ −1,72",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(-1) = -\\left(e^{-1} - 1\\right)\\) ≈ 0,63",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(-1) \\neq -f(1)\\) : f n'est pas impaire.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Pas impaire"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(1) = e - 1\\) ≈ 1,72",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(-1) = -\\left(e^{-1} - 1\\right)\\) ≈ 0,63",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(-1) \\neq f(1)\\) : f n'est pas paire.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc <b>f n'est ni paire ni impaire</b>.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Pas paire"
+   },
+   {
     "blocs": [],
     "style": "partie",
     "titre": "3. Zéros, signe, ordonnée à l'origine"
@@ -633,6 +691,22 @@
     "titre": "2. Parité"
    },
    {
+    "blocs": [
+     {
+      "html": "\\(-3 \\in ED\\), mais \\(3 \\notin ED\\) : ED n'est pas symétrique par rapport à 0.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc <b>f n'est ni paire ni impaire</b>.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Symétrie de l'ED"
+   },
+   {
     "blocs": [],
     "style": "partie",
     "titre": "3. Zéros, signe, ordonnée à l'origine"
@@ -1034,6 +1108,22 @@
     "blocs": [],
     "style": "partie",
     "titre": "2. Parité"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(1 \\in ED\\), mais \\(-1 \\notin ED\\) : ED n'est pas symétrique par rapport à 0.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc <b>f n'est ni paire ni impaire</b>.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Symétrie de l'ED"
    },
    {
     "blocs": [],
@@ -1502,6 +1592,22 @@
     "blocs": [],
     "style": "partie",
     "titre": "2. Parité"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(-2 \\in ED\\), mais \\(2 \\notin ED\\) : ED n'est pas symétrique par rapport à 0.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc <b>f n'est ni paire ni impaire</b>.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Symétrie de l'ED"
    },
    {
     "blocs": [],
@@ -2000,6 +2106,64 @@
     "titre": "2. Parité"
    },
    {
+    "blocs": [
+     {
+      "html": "ED est symétrique par rapport à 0.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(1) = e\\) ≈ 2,72, donc \\(-f(1)\\) ≈ −2,72",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(-1) = e^{-1}\\) ≈ 0,37",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(-1) \\neq -f(1)\\) : f n'est pas impaire.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Pas impaire"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(1) = e\\) ≈ 2,72",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(-1) = e^{-1}\\) ≈ 0,37",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(-1) \\neq f(1)\\) : f n'est pas paire.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc <b>f n'est ni paire ni impaire</b>.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Pas paire"
+   },
+   {
     "blocs": [],
     "style": "partie",
     "titre": "3. Zéros, signe, ordonnée à l'origine"
@@ -2380,6 +2544,43 @@
     "blocs": [],
     "style": "partie",
     "titre": "2. Parité"
+   },
+   {
+    "blocs": [
+     {
+      "html": "ED est symétrique par rapport à 0.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(-x) = e^{\\frac{2}{\\left(-x\\right)^{2} - 4}}\\) (on remplace x par −x)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\( = e^{\\frac{2}{x^{2} - 4}}\\) (car \\(\\left(-x\\right)^{2} = x^{2}\\))",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\( = f(x)\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc <b>f est paire</b>.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Calcul de f(−x)"
    },
    {
     "blocs": [],
@@ -2903,6 +3104,59 @@
     "titre": "2. Parité"
    },
    {
+    "blocs": [
+     {
+      "html": "ED est symétrique par rapport à 0.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(0) = 1 \\neq 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Une fonction impaire vérifie \\(f(0) = 0\\) : f n'est pas impaire.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Pas impaire"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(1) = e^{2}\\) ≈ 7,39",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(-1) = e^{-2}\\) ≈ 0,14",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(-1) \\neq f(1)\\) : f n'est pas paire.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc <b>f n'est ni paire ni impaire</b>.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Pas paire"
+   },
+   {
     "blocs": [],
     "style": "partie",
     "titre": "3. Zéros, signe, ordonnée à l'origine"
@@ -3169,6 +3423,22 @@
     "blocs": [],
     "style": "partie",
     "titre": "2. Parité"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(1 \\in ED\\), mais \\(-1 \\notin ED\\) : ED n'est pas symétrique par rapport à 0.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc <b>f n'est ni paire ni impaire</b>.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Symétrie de l'ED"
    },
    {
     "blocs": [],
@@ -3632,6 +3902,43 @@
     "titre": "2. Parité"
    },
    {
+    "blocs": [
+     {
+      "html": "ED est symétrique par rapport à 0.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(-x) = \\sqrt{\\left(-x\\right)^{2} - 4}\\) (on remplace x par −x)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\( = \\sqrt{x^{2} - 4}\\) (car \\(\\left(-x\\right)^{2} = x^{2}\\))",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\( = f(x)\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc <b>f est paire</b>.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Calcul de f(−x)"
+   },
+   {
     "blocs": [],
     "style": "partie",
     "titre": "3. Zéros, signe, ordonnée à l'origine"
@@ -3974,6 +4281,22 @@
     "blocs": [],
     "style": "partie",
     "titre": "2. Parité"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(1 \\in ED\\), mais \\(-1 \\notin ED\\) : ED n'est pas symétrique par rapport à 0.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc <b>f n'est ni paire ni impaire</b>.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Symétrie de l'ED"
    },
    {
     "blocs": [],
@@ -4413,6 +4736,43 @@
     "titre": "2. Parité"
    },
    {
+    "blocs": [
+     {
+      "html": "ED est symétrique par rapport à 0.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(-x) = \\frac{\\left(-x\\right)}{\\left(-x\\right)^{2} + 1}\\) (on remplace x par −x)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\( = -\\frac{x}{x^{2} + 1}\\) (car \\(\\left(-x\\right)^{2} = x^{2}\\) ; règle des signes)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\( = -f(x)\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc <b>f est impaire</b>.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Calcul de f(−x)"
+   },
+   {
     "blocs": [],
     "style": "partie",
     "titre": "3. Zéros, signe, ordonnée à l'origine"
@@ -4753,6 +5113,43 @@
     "titre": "2. Parité"
    },
    {
+    "blocs": [
+     {
+      "html": "ED est symétrique par rapport à 0.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(-x) = \\frac{\\left(-x\\right)}{\\sqrt{\\left(-x\\right)^{2}}}\\) (on remplace x par −x)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\( = -\\frac{x}{\\sqrt{x^{2}}}\\) (car \\(\\left(-x\\right)^{2} = x^{2}\\) ; règle des signes)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\( = -f(x)\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc <b>f est impaire</b>.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Calcul de f(−x)"
+   },
+   {
     "blocs": [],
     "style": "partie",
     "titre": "3. Zéros, signe, ordonnée à l'origine"
@@ -5065,6 +5462,43 @@
     "titre": "2. Parité"
    },
    {
+    "blocs": [
+     {
+      "html": "ED est symétrique par rapport à 0.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(-x) = \\sqrt[3]{\\left(-x\\right)^{2}}\\) (on remplace x par −x)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\( = \\sqrt[3]{x^{2}}\\) (car \\(\\left(-x\\right)^{2} = x^{2}\\))",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\( = f(x)\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc <b>f est paire</b>.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Calcul de f(−x)"
+   },
+   {
     "blocs": [],
     "style": "partie",
     "titre": "3. Zéros, signe, ordonnée à l'origine"
@@ -5296,6 +5730,64 @@
     "blocs": [],
     "style": "partie",
     "titre": "2. Parité"
+   },
+   {
+    "blocs": [
+     {
+      "html": "ED est symétrique par rapport à 0.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(1) = e^{-1}\\) ≈ 0,37, donc \\(-f(1)\\) ≈ −0,37",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(-1) = e\\) ≈ 2,72",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(-1) \\neq -f(1)\\) : f n'est pas impaire.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Pas impaire"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(1) = e^{-1}\\) ≈ 0,37",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(-1) = e\\) ≈ 2,72",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(-1) \\neq f(1)\\) : f n'est pas paire.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc <b>f n'est ni paire ni impaire</b>.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Pas paire"
    },
    {
     "blocs": [],
@@ -5744,6 +6236,59 @@
     "titre": "2. Parité"
    },
    {
+    "blocs": [
+     {
+      "html": "ED est symétrique par rapport à 0.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(0) = 3 \\neq 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Une fonction impaire vérifie \\(f(0) = 0\\) : f n'est pas impaire.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Pas impaire"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(1) = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(-1) = 8\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(-1) \\neq f(1)\\) : f n'est pas paire.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc <b>f n'est ni paire ni impaire</b>.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Pas paire"
+   },
+   {
     "blocs": [],
     "style": "partie",
     "titre": "3. Zéros, signe, ordonnée à l'origine"
@@ -6003,6 +6548,48 @@
     "blocs": [],
     "style": "partie",
     "titre": "2. Parité"
+   },
+   {
+    "blocs": [
+     {
+      "html": "ED est symétrique par rapport à 0.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(-x) = \\left(-x\\right)^{3} - 3\\left(-x\\right)\\) (on remplace x par −x)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\( = -x^{3} + 3x\\) (car \\(\\left(-x\\right)^{3} = -x^{3}\\) ; règle des signes)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\( = -\\left(x^{3} - 3x\\right)\\) (mise en évidence de −1)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\( = -f(x)\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc <b>f est impaire</b>.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Calcul de f(−x)"
    },
    {
     "blocs": [],
@@ -6291,6 +6878,43 @@
     "blocs": [],
     "style": "partie",
     "titre": "2. Parité"
+   },
+   {
+    "blocs": [
+     {
+      "html": "ED est symétrique par rapport à 0.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(-x) = \\left(-x\\right)^{4} - 2\\left(-x\\right)^{2}\\) (on remplace x par −x)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\( = x^{4} - 2x^{2}\\) (car \\(\\left(-x\\right)^{4} = x^{4}\\) et \\(\\left(-x\\right)^{2} = x^{2}\\))",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\( = f(x)\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc <b>f est paire</b>.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Calcul de f(−x)"
    },
    {
     "blocs": [],

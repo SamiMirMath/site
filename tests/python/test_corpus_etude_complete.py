@@ -608,7 +608,7 @@ PARITE = {
 PARITE_MATHS = {"Ex7": [r"-2\in", r"2\notin"], "a": ["(-x)^{2}=x^{2}"], "d": ["(-x)^{2}=x^{2}"], "b": ["f(0)=-6"], "c": ["f(0)=5"]}
 
 
-@pytest.mark.parametrize("ident", avec(set(IDS), xfail("P4", "parité (D4)")))
+@pytest.mark.parametrize("ident", IDS)
 def test_P4_parite(ident):
     t, m = texte(sortie(ident)["cartes"]), maths(sortie(ident)["cartes"])
     assert "Parité" in t
