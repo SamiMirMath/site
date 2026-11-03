@@ -1072,6 +1072,389 @@
    "plus_inf": "+\\infty"
   }
  },
+ "e^((x^2+x-2)/(6x-12))": {
+  "derivee": {
+   "deriv_etapes": [
+    {
+     "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+     "type": "texte"
+    },
+    {
+     "html": "\\(e^{\\frac{x^{2} + x - 2}{6x - 12}}\\) est de la forme \\(e^{u}\\) avec \\(u(x) = \\frac{x^{2} + x - 2}{6x - 12}\\) (dérivée interne \\(u'(x) = \\frac{\\left(2x + 1\\right)\\,\\left(6x - 12\\right) - \\left(x^{2} + x - 2\\right) \\cdot 6}{\\left(6x - 12\\right)^{2}}\\)) \\(\\Rightarrow\\) \\(\\left(e^{\\frac{x^{2} + x - 2}{6x - 12}}\\right)' = u' e^{u} = \\frac{x\\,\\left(x - 4\\right)\\,e^{\\frac{x^{2} + x - 2}{6x - 12}}}{6\\left(x - 2\\right)^{2}}\\).",
+     "type": "texte"
+    }
+   ],
+   "deriv_resolu": true,
+   "deriv_tex": "\\frac{x\\,\\left(x - 4\\right)\\,e^{\\frac{x^{2} + x - 2}{6x - 12}}}{6\\left(x - 2\\right)^{2}}",
+   "domaine_etude_tex": "\\mathbb{R} \\setminus \\left\\{2\\right\\}",
+   "ed_tex": "\\mathbb{R} \\setminus \\left\\{2\\right\\}",
+   "extrema": [
+    {
+     "f_tex": "e^{\\frac{1}{6}}",
+     "f_val": 1.18136041,
+     "genre": "maximum local",
+     "x_tex": "0",
+     "x_val": 0.0
+    },
+    {
+     "f_tex": "e^{\\frac{3}{2}}",
+     "f_val": 4.48168907,
+     "genre": "minimum local",
+     "x_tex": "4",
+     "x_val": 4.0
+    }
+   ],
+   "f_tex": "e^{\\frac{x^{2} + x - 2}{6x - 12}}",
+   "ok": true,
+   "signe_etapes": [
+    {
+     "html": "\\(f'(x) = \\frac{x\\,\\left(x - 4\\right)\\,e^{\\frac{x^{2} + x - 2}{6x - 12}}}{6\\left(x - 2\\right)^{2}} = 0 \\iff x = 0 \\text{ ou } x - 4 = 0 \\iff x = 0 \\text{ ou } x = 4\\) ; valeur interdite : \\(x = 2\\).",
+     "type": "texte"
+    }
+   ],
+   "signe_resolu": true,
+   "table_signe": {
+    "crit": [
+     "0",
+     "2",
+     "4"
+    ],
+    "rows": [
+     {
+      "cells": [
+       "+",
+       "+",
+       "+",
+       "||",
+       "+",
+       "+",
+       "+"
+      ],
+      "label": "\\frac{1}{6}"
+     },
+     {
+      "cells": [
+       "-",
+       "0",
+       "+",
+       "||",
+       "+",
+       "+",
+       "+"
+      ],
+      "label": "x"
+     },
+     {
+      "cells": [
+       "-",
+       "-",
+       "-",
+       "||",
+       "-",
+       "0",
+       "+"
+      ],
+      "label": "\\left(x - 4\\right)"
+     },
+     {
+      "cells": [
+       "+",
+       "+",
+       "+",
+       "||",
+       "+",
+       "+",
+       "+"
+      ],
+      "label": "e^{\\frac{x^{2} + x - 2}{6x - 12}}"
+     },
+     {
+      "cells": [
+       "+",
+       "+",
+       "+",
+       "||",
+       "+",
+       "+",
+       "+"
+      ],
+      "label": "\\left(x - 2\\right)^{2}"
+     },
+     {
+      "cells": [
+       "+",
+       "0",
+       "-",
+       "||",
+       "-",
+       "0",
+       "+"
+      ],
+      "final": true,
+      "label": "f'(x)"
+     },
+     {
+      "cells": [
+       "\\nearrow",
+       "extremum",
+       "\\searrow",
+       "asym",
+       "\\searrow",
+       "extremum",
+       "\\nearrow"
+      ],
+      "label": "f(x)",
+      "variation": true
+     }
+    ],
+    "var": "x"
+   }
+  },
+  "ed_tex": "\\mathbb{R} \\setminus \\left\\{2\\right\\}",
+  "f_tex": "e^{\\frac{x^{2} + x - 2}{6x - 12}}",
+  "graphique": {
+   "segments": [
+    {
+     "dernier": [
+      1.984,
+      1.84141017e-18
+     ],
+     "empreinte": "48f5fe71efdd6007",
+     "n": 200,
+     "premier": [
+      -1.984,
+      1.00199932
+     ]
+    },
+    {
+     "dernier": [
+      5.984,
+      5.2839258
+     ],
+     "empreinte": "7b52668a082fc2d3",
+     "n": 200,
+     "premier": [
+      2.016,
+      null
+     ]
+    }
+   ],
+   "xmax": 6.0,
+   "xmin": -2.0,
+   "ymax": 7.47444968,
+   "ymin": -1.49488994
+  },
+  "limites": {
+   "asymptotes": [
+    {
+     "genre": "horizontale",
+     "ou": "x \\to -\\infty",
+     "valeur_tex": "0",
+     "valeur_val": 0.0
+    },
+    {
+     "droite_tex": "+\\infty",
+     "droite_val": null,
+     "gauche_tex": "0",
+     "gauche_val": 0.0,
+     "genre": "verticale",
+     "ou": "x \\to 2",
+     "point_tex": "2",
+     "point_val": 2.0
+    }
+   ],
+   "ed_tex": "\\mathbb{R} \\setminus \\left\\{2\\right\\}",
+   "etudes": [
+    {
+     "etapes": [
+      {
+       "alertes": [],
+       "enonce_tex": "\\displaystyle\\lim_{x\\to -\\infty} e^{\\frac{x^{2} + x - 2}{6x - 12}}",
+       "etapes": [
+        {
+         "blocs": [
+          {
+           "html": "Haut : \\(x^{2} + x - 2 \\to +\\infty\\). Bas : \\(6x - 12 \\to -\\infty\\). Forme \\(\\dfrac{+\\infty}{-\\infty}\\) : <span class=\"ind\">indéterminée</span>.",
+           "style": "etape",
+           "type": "texte"
+          },
+          {
+           "genre": "prediction",
+           "lignes": [
+            "En haut \\(x^{2}\\), en bas \\(x\\) : la plus grande puissance est au <b>haut</b>, donc l'exposant part vers l'infini.",
+            "Signe : haut > 0, bas < 0, donc \\(-\\infty\\).",
+            "<b>On s'attend à :</b> exposant \\(\\to -\\infty\\), donc \\(e^{\\cdots} \\to 0^{+}\\)"
+           ],
+           "titre": "Prédiction avec la règle du podium",
+           "type": "encadre"
+          },
+          {
+           "html": "Calcul avec BH :",
+           "style": "etape",
+           "type": "texte"
+          },
+          {
+           "html": "\\[\\lim_{x\\to -\\infty} \\frac{x^{2} + x - 2}{6x - 12} \\overset{\\text{BH}}{=} \\lim_{x\\to -\\infty} \\frac{2x + 1}{6} = -\\infty\\]",
+           "style": "etape",
+           "type": "texte"
+          }
+         ],
+         "titre": "limite de l'exposant, à part"
+        },
+        {
+         "blocs": [
+          {
+           "tex": "\\lim_{x\\to -\\infty} e^{\\frac{x^{2} + x - 2}{6x - 12}} = e^{-\\infty} = 0^{+}",
+           "type": "resultat_lim"
+          },
+          {
+           "html": "✓ Le calcul confirme la prédiction du podium.",
+           "style": "confirme",
+           "type": "texte"
+          }
+         ],
+         "titre": "on applique l'exponentielle"
+        }
+       ],
+       "html": "limite de l'exposant, à part\nHaut : \\(x^{2} + x - 2 \\to +\\infty\\). Bas : \\(6x - 12 \\to -\\infty\\). Forme \\(\\dfrac{+\\infty}{-\\infty}\\) : <span class=\"ind\">indéterminée</span>.\nPrédiction avec la règle du podium En haut \\(x^{2}\\), en bas \\(x\\) : la plus grande puissance est au <b>haut</b>, donc l'exposant part vers l'infini. Signe : haut > 0, bas < 0, donc \\(-\\infty\\). <b>On s'attend à :</b> exposant \\(\\to -\\infty\\), donc \\(e^{\\cdots} \\to 0^{+}\\)\nCalcul avec BH :\n\\[\\lim_{x\\to -\\infty} \\frac{x^{2} + x - 2}{6x - 12} \\overset{\\text{BH}}{=} \\lim_{x\\to -\\infty} \\frac{2x + 1}{6} = -\\infty\\]\non applique l'exponentielle\n\\lim_{x\\to -\\infty} e^{\\frac{x^{2} + x - 2}{6x - 12}} = e^{-\\infty} = 0^{+}\n✓ Le calcul confirme la prédiction du podium.",
+       "type": "descente"
+      },
+      {
+       "html": "Asymptote horizontale : \\(y = 0\\).",
+       "type": "texte"
+      }
+     ],
+     "ou": "x \\to -\\infty"
+    },
+    {
+     "etapes": [
+      {
+       "alertes": [],
+       "enonce_tex": "\\displaystyle\\lim_{x\\to +\\infty} e^{\\frac{x^{2} + x - 2}{6x - 12}}",
+       "etapes": [
+        {
+         "blocs": [
+          {
+           "html": "Haut : \\(x^{2} + x - 2 \\to +\\infty\\). Bas : \\(6x - 12 \\to +\\infty\\). Forme \\(\\dfrac{+\\infty}{+\\infty}\\) : <span class=\"ind\">indéterminée</span>.",
+           "style": "etape",
+           "type": "texte"
+          },
+          {
+           "genre": "prediction",
+           "lignes": [
+            "En haut \\(x^{2}\\), en bas \\(x\\) : la plus grande puissance est au <b>haut</b>, donc l'exposant part vers l'infini.",
+            "Signe : haut > 0, bas > 0, donc \\(+\\infty\\).",
+            "<b>On s'attend à :</b> exposant \\(\\to +\\infty\\), donc \\(e^{\\cdots} \\to +\\infty\\)"
+           ],
+           "titre": "Prédiction avec la règle du podium",
+           "type": "encadre"
+          },
+          {
+           "html": "Calcul avec BH :",
+           "style": "etape",
+           "type": "texte"
+          },
+          {
+           "html": "\\[\\lim_{x\\to +\\infty} \\frac{x^{2} + x - 2}{6x - 12} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{2x + 1}{6} = +\\infty\\]",
+           "style": "etape",
+           "type": "texte"
+          }
+         ],
+         "titre": "limite de l'exposant, à part"
+        },
+        {
+         "blocs": [
+          {
+           "tex": "\\lim_{x\\to +\\infty} e^{\\frac{x^{2} + x - 2}{6x - 12}} = e^{+\\infty} = +\\infty",
+           "type": "resultat_lim"
+          },
+          {
+           "html": "✓ Le calcul confirme la prédiction du podium.",
+           "style": "confirme",
+           "type": "texte"
+          }
+         ],
+         "titre": "on applique l'exponentielle"
+        }
+       ],
+       "html": "limite de l'exposant, à part\nHaut : \\(x^{2} + x - 2 \\to +\\infty\\). Bas : \\(6x - 12 \\to +\\infty\\). Forme \\(\\dfrac{+\\infty}{+\\infty}\\) : <span class=\"ind\">indéterminée</span>.\nPrédiction avec la règle du podium En haut \\(x^{2}\\), en bas \\(x\\) : la plus grande puissance est au <b>haut</b>, donc l'exposant part vers l'infini. Signe : haut > 0, bas > 0, donc \\(+\\infty\\). <b>On s'attend à :</b> exposant \\(\\to +\\infty\\), donc \\(e^{\\cdots} \\to +\\infty\\)\nCalcul avec BH :\n\\[\\lim_{x\\to +\\infty} \\frac{x^{2} + x - 2}{6x - 12} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{2x + 1}{6} = +\\infty\\]\non applique l'exponentielle\n\\lim_{x\\to +\\infty} e^{\\frac{x^{2} + x - 2}{6x - 12}} = e^{+\\infty} = +\\infty\n✓ Le calcul confirme la prédiction du podium.",
+       "type": "descente"
+      }
+     ],
+     "ou": "x \\to +\\infty"
+    },
+    {
+     "etapes": [
+      {
+       "alertes": [],
+       "enonce_tex": "\\displaystyle\\lim_{x\\to 2^{-}} e^{\\frac{x^{2} + x - 2}{6x - 12}}",
+       "etapes": [
+        {
+         "blocs": [
+          {
+           "html": "Exposant : \\(\\frac{x^{2} + x - 2}{6x - 12} \\to \\dfrac{4}{0^{-}} = -\\infty\\). Donc \\(e^{\\frac{x^{2} + x - 2}{6x - 12}} \\to e^{-\\infty} = 0^{+}\\).",
+           "style": "etape",
+           "type": "texte"
+          },
+          {
+           "tex": "\\lim_{x\\to 2^{-}} e^{\\frac{x^{2} + x - 2}{6x - 12}} = 0^{+}",
+           "type": "resultat_lim"
+          }
+         ],
+         "titre": "on remplace"
+        }
+       ],
+       "html": "on remplace\nExposant : \\(\\frac{x^{2} + x - 2}{6x - 12} \\to \\dfrac{4}{0^{-}} = -\\infty\\). Donc \\(e^{\\frac{x^{2} + x - 2}{6x - 12}} \\to e^{-\\infty} = 0^{+}\\).\n\\lim_{x\\to 2^{-}} e^{\\frac{x^{2} + x - 2}{6x - 12}} = 0^{+}",
+       "type": "descente"
+      },
+      {
+       "alertes": [],
+       "enonce_tex": "\\displaystyle\\lim_{x\\to 2^{+}} e^{\\frac{x^{2} + x - 2}{6x - 12}}",
+       "etapes": [
+        {
+         "blocs": [
+          {
+           "html": "Exposant : \\(\\frac{x^{2} + x - 2}{6x - 12} \\to \\dfrac{4}{0^{+}} = +\\infty\\). Donc \\(e^{\\frac{x^{2} + x - 2}{6x - 12}} \\to e^{+\\infty} = +\\infty\\).",
+           "style": "etape",
+           "type": "texte"
+          },
+          {
+           "tex": "\\lim_{x\\to 2^{+}} e^{\\frac{x^{2} + x - 2}{6x - 12}} = +\\infty",
+           "type": "resultat_lim"
+          }
+         ],
+         "titre": "on remplace"
+        }
+       ],
+       "html": "on remplace\nExposant : \\(\\frac{x^{2} + x - 2}{6x - 12} \\to \\dfrac{4}{0^{+}} = +\\infty\\). Donc \\(e^{\\frac{x^{2} + x - 2}{6x - 12}} \\to e^{+\\infty} = +\\infty\\).\n\\lim_{x\\to 2^{+}} e^{\\frac{x^{2} + x - 2}{6x - 12}} = +\\infty",
+       "type": "descente"
+      },
+      {
+       "html": "Asymptote verticale : \\(x = 2\\) (du côté droit) ; à gauche, \\(f(x) \\to 0\\).",
+       "type": "texte"
+      }
+     ],
+     "ou": "x \\to 2"
+    }
+   ],
+   "f_tex": "e^{\\frac{x^{2} + x - 2}{6x - 12}}",
+   "ok": true,
+   "tableaux_signe": []
+  },
+  "ok": true,
+  "variations_limites": {
+   "colonnes": [
+    {
+     "droite": "+\\infty",
+     "gauche": "0^{+}",
+     "j": 3
+    }
+   ],
+   "moins_inf": "0^{+}",
+   "non_determinees": [],
+   "plus_inf": "+\\infty"
+  }
+ },
  "e^(1/x)": {
   "derivee": {
    "deriv_etapes": [
@@ -1333,6 +1716,412 @@
      "droite": "+\\infty",
      "gauche": "0^{+}",
      "j": 1
+    }
+   ],
+   "moins_inf": "1",
+   "non_determinees": [],
+   "plus_inf": "1"
+  }
+ },
+ "e^(2/(x^2-4))": {
+  "derivee": {
+   "deriv_etapes": [
+    {
+     "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+     "type": "texte"
+    },
+    {
+     "html": "\\(e^{\\frac{2}{x^{2} - 4}}\\) est de la forme \\(e^{u}\\) avec \\(u(x) = \\frac{2}{x^{2} - 4}\\) (dérivée interne \\(u'(x) = \\frac{-2 \\cdot 2x}{\\left(x^{2} - 4\\right)^{2}}\\)) \\(\\Rightarrow\\) \\(\\left(e^{\\frac{2}{x^{2} - 4}}\\right)' = u' e^{u} = \\frac{-4x\\,e^{\\frac{2}{x^{2} - 4}}}{\\left(x - 2\\right)^{2}\\,\\left(x + 2\\right)^{2}}\\).",
+     "type": "texte"
+    }
+   ],
+   "deriv_resolu": true,
+   "deriv_tex": "\\frac{-4x\\,e^{\\frac{2}{x^{2} - 4}}}{\\left(x - 2\\right)^{2}\\,\\left(x + 2\\right)^{2}}",
+   "domaine_etude_tex": "\\mathbb{R} \\setminus \\left\\{-2 \\,;\\, 2\\right\\}",
+   "ed_tex": "\\mathbb{R} \\setminus \\left\\{-2 \\,;\\, 2\\right\\}",
+   "extrema": [
+    {
+     "f_tex": "e^{- \\frac{1}{2}}",
+     "f_val": 0.60653066,
+     "genre": "maximum local",
+     "x_tex": "0",
+     "x_val": 0.0
+    }
+   ],
+   "f_tex": "e^{\\frac{2}{x^{2} - 4}}",
+   "ok": true,
+   "signe_etapes": [
+    {
+     "html": "\\(f'(x) = \\frac{-4x\\,e^{\\frac{2}{x^{2} - 4}}}{\\left(x - 2\\right)^{2}\\,\\left(x + 2\\right)^{2}} = 0 \\iff x = 0\\) ; valeurs interdites : \\(x = -2\\) ; \\(x = 2\\).",
+     "type": "texte"
+    }
+   ],
+   "signe_resolu": true,
+   "table_signe": {
+    "crit": [
+     "-2",
+     "0",
+     "2"
+    ],
+    "rows": [
+     {
+      "cells": [
+       "-",
+       "||",
+       "-",
+       "-",
+       "-",
+       "||",
+       "-"
+      ],
+      "label": "-4"
+     },
+     {
+      "cells": [
+       "-",
+       "||",
+       "-",
+       "0",
+       "+",
+       "||",
+       "+"
+      ],
+      "label": "x"
+     },
+     {
+      "cells": [
+       "+",
+       "||",
+       "+",
+       "+",
+       "+",
+       "||",
+       "+"
+      ],
+      "label": "e^{\\frac{2}{x^{2} - 4}}"
+     },
+     {
+      "cells": [
+       "+",
+       "||",
+       "+",
+       "+",
+       "+",
+       "||",
+       "+"
+      ],
+      "label": "\\left(x - 2\\right)^{2}"
+     },
+     {
+      "cells": [
+       "+",
+       "||",
+       "+",
+       "+",
+       "+",
+       "||",
+       "+"
+      ],
+      "label": "\\left(x + 2\\right)^{2}"
+     },
+     {
+      "cells": [
+       "+",
+       "||",
+       "+",
+       "0",
+       "-",
+       "||",
+       "-"
+      ],
+      "final": true,
+      "label": "f'(x)"
+     },
+     {
+      "cells": [
+       "\\nearrow",
+       "asym",
+       "\\nearrow",
+       "extremum",
+       "\\searrow",
+       "asym",
+       "\\searrow"
+      ],
+      "label": "f(x)",
+      "variation": true
+     }
+    ],
+    "var": "x"
+   }
+  },
+  "ed_tex": "\\mathbb{R} \\setminus \\left\\{-2 \\,;\\, 2\\right\\}",
+  "f_tex": "e^{\\frac{2}{x^{2} - 4}}",
+  "graphique": {
+   "segments": [
+    {
+     "dernier": [
+      -2.008,
+      null
+     ],
+     "empreinte": "0fbc4a6eb9c9e71f",
+     "n": 100,
+     "premier": [
+      -3.992,
+      1.18241555
+     ]
+    },
+    {
+     "dernier": [
+      1.984,
+      2.36479017e-14
+     ],
+     "empreinte": "501e22d39a8a4216",
+     "n": 200,
+     "premier": [
+      -1.984,
+      2.36479017e-14
+     ]
+    },
+    {
+     "dernier": [
+      3.992,
+      1.18241555
+     ],
+     "empreinte": "6964517199ce855d",
+     "n": 100,
+     "premier": [
+      2.008,
+      null
+     ]
+    }
+   ],
+   "xmax": 4.0,
+   "xmin": -4.0,
+   "ymax": 3.67607048,
+   "ymin": -0.180419017
+  },
+  "limites": {
+   "asymptotes": [
+    {
+     "genre": "horizontale",
+     "ou": "x \\to -\\infty",
+     "valeur_tex": "1",
+     "valeur_val": 1.0
+    },
+    {
+     "genre": "horizontale",
+     "ou": "x \\to +\\infty",
+     "valeur_tex": "1",
+     "valeur_val": 1.0
+    },
+    {
+     "droite_tex": "0",
+     "droite_val": 0.0,
+     "gauche_tex": "+\\infty",
+     "gauche_val": null,
+     "genre": "verticale",
+     "ou": "x \\to -2",
+     "point_tex": "-2",
+     "point_val": -2.0
+    },
+    {
+     "droite_tex": "+\\infty",
+     "droite_val": null,
+     "gauche_tex": "0",
+     "gauche_val": 0.0,
+     "genre": "verticale",
+     "ou": "x \\to 2",
+     "point_tex": "2",
+     "point_val": 2.0
+    }
+   ],
+   "ed_tex": "\\mathbb{R} \\setminus \\left\\{-2 \\,;\\, 2\\right\\}",
+   "etudes": [
+    {
+     "etapes": [
+      {
+       "alertes": [],
+       "enonce_tex": "\\displaystyle\\lim_{x\\to -\\infty} e^{\\frac{2}{x^{2} - 4}}",
+       "etapes": [
+        {
+         "blocs": [
+          {
+           "html": "Exposant : \\(\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{+\\infty} = 0^{+}\\). Donc \\(e^{\\frac{2}{x^{2} - 4}} \\to e^{0^{+}} = 1\\).",
+           "style": "etape",
+           "type": "texte"
+          },
+          {
+           "tex": "\\lim_{x\\to -\\infty} e^{\\frac{2}{x^{2} - 4}} = 1",
+           "type": "resultat_lim"
+          }
+         ],
+         "titre": "on remplace"
+        }
+       ],
+       "html": "on remplace\nExposant : \\(\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{+\\infty} = 0^{+}\\). Donc \\(e^{\\frac{2}{x^{2} - 4}} \\to e^{0^{+}} = 1\\).\n\\lim_{x\\to -\\infty} e^{\\frac{2}{x^{2} - 4}} = 1",
+       "type": "descente"
+      },
+      {
+       "html": "Asymptote horizontale : \\(y = 1\\).",
+       "type": "texte"
+      }
+     ],
+     "ou": "x \\to -\\infty"
+    },
+    {
+     "etapes": [
+      {
+       "alertes": [],
+       "enonce_tex": "\\displaystyle\\lim_{x\\to +\\infty} e^{\\frac{2}{x^{2} - 4}}",
+       "etapes": [
+        {
+         "blocs": [
+          {
+           "html": "Exposant : \\(\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{+\\infty} = 0^{+}\\). Donc \\(e^{\\frac{2}{x^{2} - 4}} \\to e^{0^{+}} = 1\\).",
+           "style": "etape",
+           "type": "texte"
+          },
+          {
+           "tex": "\\lim_{x\\to +\\infty} e^{\\frac{2}{x^{2} - 4}} = 1",
+           "type": "resultat_lim"
+          }
+         ],
+         "titre": "on remplace"
+        }
+       ],
+       "html": "on remplace\nExposant : \\(\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{+\\infty} = 0^{+}\\). Donc \\(e^{\\frac{2}{x^{2} - 4}} \\to e^{0^{+}} = 1\\).\n\\lim_{x\\to +\\infty} e^{\\frac{2}{x^{2} - 4}} = 1",
+       "type": "descente"
+      },
+      {
+       "html": "Asymptote horizontale : \\(y = 1\\).",
+       "type": "texte"
+      }
+     ],
+     "ou": "x \\to +\\infty"
+    },
+    {
+     "etapes": [
+      {
+       "alertes": [],
+       "enonce_tex": "\\displaystyle\\lim_{x\\to -2^{-}} e^{\\frac{2}{x^{2} - 4}}",
+       "etapes": [
+        {
+         "blocs": [
+          {
+           "html": "Exposant : \\(\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{0^{+}} = +\\infty\\). Donc \\(e^{\\frac{2}{x^{2} - 4}} \\to e^{+\\infty} = +\\infty\\).",
+           "style": "etape",
+           "type": "texte"
+          },
+          {
+           "tex": "\\lim_{x\\to -2^{-}} e^{\\frac{2}{x^{2} - 4}} = +\\infty",
+           "type": "resultat_lim"
+          }
+         ],
+         "titre": "on remplace"
+        }
+       ],
+       "html": "on remplace\nExposant : \\(\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{0^{+}} = +\\infty\\). Donc \\(e^{\\frac{2}{x^{2} - 4}} \\to e^{+\\infty} = +\\infty\\).\n\\lim_{x\\to -2^{-}} e^{\\frac{2}{x^{2} - 4}} = +\\infty",
+       "type": "descente"
+      },
+      {
+       "alertes": [],
+       "enonce_tex": "\\displaystyle\\lim_{x\\to -2^{+}} e^{\\frac{2}{x^{2} - 4}}",
+       "etapes": [
+        {
+         "blocs": [
+          {
+           "html": "Exposant : \\(\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{0^{-}} = -\\infty\\). Donc \\(e^{\\frac{2}{x^{2} - 4}} \\to e^{-\\infty} = 0^{+}\\).",
+           "style": "etape",
+           "type": "texte"
+          },
+          {
+           "tex": "\\lim_{x\\to -2^{+}} e^{\\frac{2}{x^{2} - 4}} = 0^{+}",
+           "type": "resultat_lim"
+          }
+         ],
+         "titre": "on remplace"
+        }
+       ],
+       "html": "on remplace\nExposant : \\(\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{0^{-}} = -\\infty\\). Donc \\(e^{\\frac{2}{x^{2} - 4}} \\to e^{-\\infty} = 0^{+}\\).\n\\lim_{x\\to -2^{+}} e^{\\frac{2}{x^{2} - 4}} = 0^{+}",
+       "type": "descente"
+      },
+      {
+       "html": "Asymptote verticale : \\(x = -2\\) (du côté gauche) ; à droite, \\(f(x) \\to 0\\).",
+       "type": "texte"
+      }
+     ],
+     "ou": "x \\to -2"
+    },
+    {
+     "etapes": [
+      {
+       "alertes": [],
+       "enonce_tex": "\\displaystyle\\lim_{x\\to 2^{-}} e^{\\frac{2}{x^{2} - 4}}",
+       "etapes": [
+        {
+         "blocs": [
+          {
+           "html": "Exposant : \\(\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{0^{-}} = -\\infty\\). Donc \\(e^{\\frac{2}{x^{2} - 4}} \\to e^{-\\infty} = 0^{+}\\).",
+           "style": "etape",
+           "type": "texte"
+          },
+          {
+           "tex": "\\lim_{x\\to 2^{-}} e^{\\frac{2}{x^{2} - 4}} = 0^{+}",
+           "type": "resultat_lim"
+          }
+         ],
+         "titre": "on remplace"
+        }
+       ],
+       "html": "on remplace\nExposant : \\(\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{0^{-}} = -\\infty\\). Donc \\(e^{\\frac{2}{x^{2} - 4}} \\to e^{-\\infty} = 0^{+}\\).\n\\lim_{x\\to 2^{-}} e^{\\frac{2}{x^{2} - 4}} = 0^{+}",
+       "type": "descente"
+      },
+      {
+       "alertes": [],
+       "enonce_tex": "\\displaystyle\\lim_{x\\to 2^{+}} e^{\\frac{2}{x^{2} - 4}}",
+       "etapes": [
+        {
+         "blocs": [
+          {
+           "html": "Exposant : \\(\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{0^{+}} = +\\infty\\). Donc \\(e^{\\frac{2}{x^{2} - 4}} \\to e^{+\\infty} = +\\infty\\).",
+           "style": "etape",
+           "type": "texte"
+          },
+          {
+           "tex": "\\lim_{x\\to 2^{+}} e^{\\frac{2}{x^{2} - 4}} = +\\infty",
+           "type": "resultat_lim"
+          }
+         ],
+         "titre": "on remplace"
+        }
+       ],
+       "html": "on remplace\nExposant : \\(\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{0^{+}} = +\\infty\\). Donc \\(e^{\\frac{2}{x^{2} - 4}} \\to e^{+\\infty} = +\\infty\\).\n\\lim_{x\\to 2^{+}} e^{\\frac{2}{x^{2} - 4}} = +\\infty",
+       "type": "descente"
+      },
+      {
+       "html": "Asymptote verticale : \\(x = 2\\) (du côté droit) ; à gauche, \\(f(x) \\to 0\\).",
+       "type": "texte"
+      }
+     ],
+     "ou": "x \\to 2"
+    }
+   ],
+   "f_tex": "e^{\\frac{2}{x^{2} - 4}}",
+   "ok": true,
+   "tableaux_signe": []
+  },
+  "ok": true,
+  "variations_limites": {
+   "colonnes": [
+    {
+     "droite": "0^{+}",
+     "gauche": "+\\infty",
+     "j": 1
+    },
+    {
+     "droite": "+\\infty",
+     "gauche": "0^{+}",
+     "j": 5
     }
    ],
    "moins_inf": "1",

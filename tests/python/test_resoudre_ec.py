@@ -8,6 +8,10 @@ import etude_complete as ec
 import resoudre_dv as rdv
 import resoudre_la as rla
 import resoudre_ec as rec
+import resoudre_ed as red
+import ensemble_def as ed
+import parties
+from noyau import lire
 import sortie as so
 from aides_sortie import manquantes, valide, blocs_de_type, titres_etude
 from cas import entrees_page, CAS_LIMITES
@@ -39,7 +43,8 @@ class TestResoudreEC(unittest.TestCase):
                 continue
             dv, lim = ancien["derivee"], ancien["limites"]
             p = rec.PARTIES
-            attendu = [p[0], "Fonction", p[1], p[2], p[3]]
+            attendu = [p[0], "Fonction"] + (["Mise en forme"] if parties.mise_en_forme(lire(entree)) else [])
+            attendu += [f"Condition {c['num']}" for c in ed.analyser(entree)["conditions"]] + ["Ensemble de définition", p[1], p[2], p[3]]
             if lim.get("tableaux_signe"):
                 attendu.append("Tableaux de signes")
             attendu += [t for e in lim["etudes"] for t in titres_etude(e)] + ["Bilan des asymptotes", p[4]]
@@ -74,8 +79,28 @@ class TestResoudreEC(unittest.TestCase):
         s = rec.resoudre("x^3")
         self.assertEqual(carte(s, "Signe de f' et variations")["blocs"][-1]["html"], "Aucun extremum local.")
         s = rec.resoudre("ln(x)/x")
-        self.assertEqual(carte(s, "Fonction")["blocs"][1]["html"], "\\(ED = \\left]0 \\,;\\, +\\infty\\right[\\)")
+        self.assertEqual(carte(s, "Fonction")["blocs"], [so.formule("f(x) = \\frac{\\ln(x)}{x}")])     # P3 : l'ED est établi plus bas
+        self.assertEqual(carte(s, "Ensemble de définition")["blocs"],
+                         [so.resultat("ED = \\left]0 \\,;\\, +\\infty\\right[ = \\left]0 \\,;\\, +\\infty\\right[")])
         self.assertEqual(carte(s, "Bilan des asymptotes")["style"], "normal")
+
+    def test_ed_identique_a_l_outil_ed(self):
+        """EC-01 (P3) : partie 1, l'ED encadré est la conclusion de l'outil ED ; une carte par condition, avec le titre et le badge de
+        l'outil ED, et ses blocs tels quels quand la chaîne courte (D3) ne s'applique pas."""
+        for entree in ENTREES:
+            if not ec.etudier(entree)["ok"]:
+                continue
+            with self.subTest(entree=entree):
+                s, r = rec.resoudre(entree), ed.analyser(entree)
+                fin = carte(s, "Ensemble de définition")["blocs"]
+                self.assertEqual(fin[len(fin) - len(red.blocs_ensemble(r)):], red.blocs_ensemble(r))
+                self.assertEqual(blocs_de_type({"cartes": [carte(s, "Ensemble de définition")]}, "resultat"),
+                                 [b for b in red.blocs_ensemble(r) if b["type"] == "resultat"])
+                for c in r["conditions"]:
+                    ce = carte(s, f"Condition {c['num']}")
+                    self.assertEqual((ce["badge"], ce.get("detail")), (c["titre"], c.get("detail")))
+                    if not any("On résout" in b.get("html", "") for b in ce["blocs"]) and c["cond_tex"] != "x \\neq 0":
+                        self.assertEqual(ce["blocs"], red.blocs_condition(c))
 
     def test_graphique(self):
         s = rec.resoudre("ln(x)/x")

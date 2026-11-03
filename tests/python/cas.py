@@ -38,6 +38,7 @@ CAS_LIMITES = {
     ],
     "etude-complete": [
         "(e^x-1)/x", "x/sqrt(x^2)", "sqrt(x^2-4)", "x^(2/3)", "e^(1/x)", "3(x*ln(x))",
+        "e^((x^2+x-2)/(6x-12))", "e^(2/(x^2-4))",
     ],
 }
 

@@ -583,13 +583,12 @@ def test_P2_cache_sans_effet_sur_les_resultats():
     assert froid["limites"] == lim
 
 
-@pytest.mark.parametrize("ident", avec(set(IDS), xfail("P3", "ED détaillé et encadré (D3)")))
+@pytest.mark.parametrize("ident", IDS)
 def test_P3_ed_encadre(ident):
     blocs = [b for c in sortie(ident)["cartes"] for b in c["blocs"] if b["type"] in ("resultat", "encadre")]
     assert any(r"\mathbb{R}" in "".join(chaines(b)) for b in blocs), ident
 
 
-@xfail("P3", "mise en forme et résolution de la condition (D1, D3)")
 def test_P3_ex7_mise_en_forme_et_condition():
     m, t = maths(sortie("Ex7")["cartes"]), texte(sortie("Ex7")["cartes"])
     assert "Mise en forme" in t
@@ -597,7 +596,6 @@ def test_P3_ex7_mise_en_forme_et_condition():
         assert morceau in m, morceau
 
 
-@xfail("P3", "résolution de la condition x² − 4 = 0 (D3)")
 def test_P3_d_condition():
     m = maths(sortie("d")["cartes"])
     assert "x^{2}-4=0" in m and "x=-2" in m, m

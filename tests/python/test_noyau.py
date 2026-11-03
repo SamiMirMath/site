@@ -17,6 +17,7 @@ MOTEURS = [
     "derivee-variations/derivee_variations.py",
     "limites-asymptotes/limites_asymptotes.py",
     "etude-complete/etude_complete.py",
+    "etude-complete/parties.py",
     "factorisation/factorisation.py",
 ]
 

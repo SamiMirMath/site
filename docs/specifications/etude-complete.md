@@ -1,9 +1,9 @@
 # Outil « Étude complète de fonction » (3e Ms, Mr)
 
 URL : `/etude-complete/` · moteur : `etude-complete/etude_complete.py`, qui assemble le noyau,
-la dérivée et les limites ; adaptateur `etude-complete/resoudre_ec.py`. Les parties propres à l'Étude complète (parité ; zéros, signe,
-ordonnée à l'origine ; plus tard le bilan) iront dans `etude-complete/parties.py`, créé avec la première d'entre elles (chantier
-`etude-complete`, P4) et déclaré alors dans `moteur/manifeste.json`. Décisions de rédaction : `docs/chantiers/etude-complete/decisions.md`.
+la dérivée et les limites ; adaptateur `etude-complete/resoudre_ec.py`. Les parties propres à l'Étude complète (aujourd'hui la partie 1 ; plus tard parité ;
+zéros, signe, ordonnée à l'origine ; bilan) sont dans `etude-complete/parties.py` (créé au chantier `etude-complete`, P3, déclaré dans
+`moteur/manifeste.json` avec `ensemble-definition/resoudre_ed.py`, dont il reprend les cartes de condition). Décisions de rédaction : `docs/chantiers/etude-complete/decisions.md`.
 
 ## Fonctionnel
 
@@ -11,9 +11,20 @@ ordonnée à l'origine ; plus tard le bilan) iront dans `etude-complete/parties.
   l'origine · 4. Limites et asymptotes · 5. Dérivée, tableau de variation, extremums · 6. Graphe. Chaque partie s'ouvre par un
   intertitre (carte de style `partie` du format commun : un titre sans cadre, affiché avec la carte qui le suit, hors du compteur
   d'étapes). Une partie que l'outil ne sait pas encore rédiger reste vide (son intertitre seul) : rien plutôt qu'une affirmation
-  non démontrée (EC-15). Aujourd'hui : partie 1 = carte « Fonction » (f et ED) ; 2 et 3 vides ; 4 = cartes de l'outil Limites
+  non démontrée (EC-15). Aujourd'hui : partie 1 = voir ci-dessous ; 2 et 3 vides ; 4 = cartes de l'outil Limites
   (tableaux de signes, une carte par borne, bilan des asymptotes) ; 5 = cartes de l'outil Dérivée (dérivée, signe de f′ et variations,
   avec les limites dans le tableau, T06c) ; 6 = graphique.
+- **Partie 1, domaine de définition** (D1, D3 ; P3) : carte « Fonction » (f seule) ; carte « Mise en forme » quand f(x) = e^{haut/bas},
+  haut et bas polynômes de degré ≥ 1 écrits développés à coefficients entiers, dont l'un au moins se factorise par mise en évidence de
+  c·xᵏ ou par Somme-Produit (trinôme unitaire, deux racines entières distinctes, facteurs par racine croissante) : une ligne par
+  méthode, la méthode entre parenthèses, puis « On note g(x) = …, donc f(x) = e^{g(x)}. » (`e^((x^2+x-2)/(6x-12))`, Ex7 du corrigé) ;
+  rien à factoriser : pas de carte (`e^(2/(x^2-4))`). Une carte par condition (titre et badge de l'outil ED) ; un dénominateur affine ou
+  de la forme ax² + c écrit développé est résolu en chaîne courte, « On résout 6x − 12 = 0 ⇔ 6x = 12 ⇔ x = 2. », « x² − 4 = 0 ⇔ x² = 4
+  ⇔ x = −2 ou x = 2 » (racines rationnelles ou k√m) ; un dénominateur x s'écrit « x ≠ 0 » seul ; toute autre condition garde les lignes
+  de l'outil ED. Carte « Ensemble de définition » : l'ED encadré (conclusion de l'outil ED), précédé de « Ni logarithme, ni
+  dénominateur, ni racine : aucune condition. » quand il n'y a pas de condition. Garde-fous (EC-15) : la factorisation développée
+  redonne le polynôme et une sonde numérique compare les deux écritures ; les racines de la chaîne donnent exactement l'ensemble de
+  l'outil ED et annulent le dénominateur ; sinon la ligne n'est pas écrite (mise en forme) ou la condition garde la rédaction de l'outil ED.
 - **Une seule analyse par saisie** (D19) : le résultat de `analyser_complet` (ED) est gardé en cache (`functools.lru_cache`, clé =
   saisie aux espaces réduits et présence de SymPy) ; `etudier()` le passe aux outils Dérivée et Limites (paramètre facultatif
   `analyse` de leur `etudier`, sans effet sur ces outils seuls), et `fenetre()` (zoom) le relit sans recalcul.
@@ -130,4 +141,4 @@ f(x)     | +∞  ↘  −∞ ‖  ░░░░░░  ‖ −∞  ↗  +∞
 | EC-06 | Graduations et coordonnées du graphique sans point décimal (virgule), par la seule fonction `etiquette()` | [auto-page] (`test_graphique.py`) |
 | EC-07 | Le graphique est imprimé (image) dans le PDF, en clair même en mode sombre | [manuel] (vérifié sur téléphone, 21.10.2026) |
 | EC-14 | `resoudre()` (T12) respecte le schéma de sortie commun, ses cartes sont dans l'ordre des six parties (D1, intertitres compris), celles de la dérivée et des limites sont les cartes des outils séparés, les limites figurent dans le tableau de variations ; instantanés `instantanes/resoudre/etude-complete.json` | [auto-py] (`test_resoudre_ec.py`) |
-| EC-15 | Toute partie propre à l'EC a un garde-fou numérique et un message clair en cas de doute (D2) ; tant qu'une partie n'est pas rédigée, elle reste vide | [auto-py] (`test_corpus_etude_complete.py` : oracle mpmath indépendant) |
+| EC-15 | Toute partie propre à l'EC a un garde-fou numérique et un message clair en cas de doute (D2) ; tant qu'une partie n'est pas rédigée, elle reste vide | [auto-py] (`test_corpus_etude_complete.py` : oracle mpmath indépendant ; partie 1 : `test_parties_ec.py`, garde-fous forcés en échec) |

@@ -16,8 +16,8 @@ passe fait échouer la suite). Temps natif : `docs/chantiers/etude-complete/mesu
 |---|---|---|---|---|
 | P0 | `suivi.md`, corpus + oracle mpmath, xfail marqués avec leur partie | tests | **fait** | 5eadf34 |
 | P1 | D6, D7 (parenthèses, doublons), D17 | Dérivée | **fait** | edf17c3 |
-| P2 | Squelette des 6 parties titrées (D1), spécification (D2, D19) | EC | **fait** | voir `git log` (« EC P2 ») |
-| P3 | Partie 1 : mise en forme + ED détaillé (D3) | EC | à faire | |
+| P2 | Squelette des 6 parties titrées (D1), spécification (D2, D19) | EC | **fait** | 4cf3e9e |
+| P3 | Partie 1 : mise en forme + ED détaillé (D3) | EC | **fait** | voir `git log` (« EC P3 ») |
 | P4 | Partie 2 : parité (D4) | EC | à faire | |
 | P5 | Partie 3 : zéros, signe, f(0) (D5) | EC | à faire | |
 | P6 | Partie 4 : D12, D13, D16 | Limites | reportée (hors de la nuit du 02.11) | |
@@ -40,6 +40,11 @@ passe fait échouer la suite). Temps natif : `docs/chantiers/etude-complete/mesu
   les outils, affiché avec la carte qui le suit et hors du compteur d'étapes) ; limites avant la dérivée ; parties 2 et 3 vides ;
   cache de l'analyse (D19) : un seul calcul par `etudier()`, aucun par `fenetre()` ; spécification réécrite (EC-01, EC-02 testé, EC-15).
   2 xfail P2 retirés ; seuls les instantanés de l'EC changent (ordre des cartes et intertitres) ; questions 7 à 9.
+- **P3 faite** : partie 1 rédigée par le nouveau module `etude-complete/parties.py` (D2) : carte « Fonction » (f seule), carte « Mise en
+  forme » (Ex7 : Somme-Produit, mise en évidence, g(x) nommé), une carte par condition (cartes de l'outil ED ; dénominateur affine ou
+  ax² + c en chaîne courte « On résout 6x − 12 = 0 ⇔ 6x = 12 ⇔ x = 2. »), carte « Ensemble de définition » (ED encadré). Garde-fous exact
+  et numérique ; les outils ED, Dérivée, Limites, Exp-log ne changent pas. 7 xfail P3 retirés ; instantanés de l'EC : partie 1 seule
+  (liste sous « À relire ») ; questions 10 à 14 ; temps inchangé.
 
 ## Plans
 
@@ -101,6 +106,32 @@ Squelette sans contenu mathématique nouveau (D1), spécification (D2), cache (D
 5. Tests : retrait des xfail P2 ; `test_resoudre_ec.py` suit le nouvel ordre ; `test_sortie.py` (style `partie`) ; instantanés `resoudre`
    et références de pages de l'EC régénérés ; suite complète ; temps natif ; commit « EC P2 : … ».
 
+### P3 (03.11.2026)
+
+Partie 1 de l'EC (D1, D3), tout dans un nouveau module `etude-complete/parties.py` (D2) ; les outils ED, Dérivée, Limites et Exp-log ne
+changent pas (leurs instantanés restent identiques). Comme la filière M de l'outil Exp-log (`resoudre_el._blocs_ed`), on reprend les
+fonctions publiques de `resoudre_ed` (`blocs_condition`, `blocs_ensemble`), sans les modifier.
+1. `parties.mise_en_forme(f)` : seulement si f = e^{haut/bas}, haut et bas polynômes de degré ≥ 1 écrits développés à coefficients
+   entiers. Chaque membre : mise en évidence de c·xᵏ (c = pgcd), puis Somme-Produit (trinôme unitaire, deux racines entières distinctes,
+   facteurs par racine croissante : (x + 2)(x − 1)) ; une ligne par méthode, « (méthode) » à droite ; puis « On note g(x) = haut/bas
+   factorisés, donc f(x) = e^{g(x)}. ». Garde-fous : produit développé = polynôme (exact), sonde `evaluer` de l'arbre en 5 points ;
+   sinon la ligne n'est pas écrite. Aucune ligne : pas de carte (d n'en a pas, comme le .tex : haut constant).
+2. `parties.blocs_condition(c, A)` : un dénominateur affine ou ax² + c (c/a < 0, racines rationnelles ou k√m), écrit développé, donne la
+   chaîne courte du .tex (« On résout … ⇔ … ») sous l'inégalité de l'outil ED ; garde-fous : l'ensemble ℝ ∖ {racines} écrit comme l'outil
+   ED est exactement son `E_tex`, et `evaluer(A, racine) ≈ 0` ; dénominateur x : « x ≠ 0 » seul (l'outil ED écrit « x ≠ 0 ⇔ x ≠ 0 ») ;
+   tout le reste (ln, racine, Δ, écriture factorisée…) : les blocs de l'outil ED tels quels. Les arbres des conditions viennent de
+   `conditions` (réexporté par `noyau`, sans changement de `ensemble_def`), sur l'analyse en cache (aucun nouveau calcul, D19).
+3. `parties.cartes_domaine` : Fonction (formule seule : l'ED est établi juste après), Mise en forme, Condition k (titre, badge et
+   détail de l'outil ED), « Ensemble de définition » (style normal, `blocs_ensemble` : ED encadré ; sans condition, précédé de la phrase
+   de l'outil ED « Ni logarithme, ni dénominateur, ni racine : aucune condition. »). `resoudre_ec` l'appelle à la place de
+   `rdv.carte_rappel`. Manifeste : `resoudre_ed.py` et `parties.py` ajoutés à l'EC.
+4. Tests : xfail P3 retirés ; `test_parties_ec.py` (lignes exactes, oracle mpmath sur 150 polynômes tirés au hasard et sur les racines,
+   formes laissées à l'outil ED, garde-fous forcés en échec) ; `test_resoudre_ec.py` (ordre des cartes calculé depuis l'analyse de
+   l'outil ED, ED et conditions identiques à l'outil ED) ; `test_noyau.py` (parties.py n'importe que du noyau) ; Ex7 et d ajoutés aux cas
+   limites de l'EC (`cas.py`, cités dans la spécification) pour les instantanés et le rendu de page. Instantanés `resoudre` et
+   références de pages de l'EC régénérés ; largeurs 320/360/390 vérifiées à part pour Ex7, d, 1/(4x²−1) et une mise en forme à
+   deux lignes (aucune faute) ; suite complète ; temps natif ; commit « EC P3 : … ».
+
 ## Temps natif de etudier() (s, médiane de 3 processus neufs)
 
 | Partie | Ex7 | a | b | c | d |
@@ -108,6 +139,10 @@ Squelette sans contenu mathématique nouveau (D1), spécification (D2), cache (D
 | P0 | 0,59 | 0,02 | 0,42 | 0,18 | 0,30 |
 | P1 | 0,63 | 0,02 | 0,42 | 0,19 | 0,30 |
 | P2 | 0,60 | 0,02 | 0,43 | 0,18 | 0,32 |
+| P3 | 0,59 | 0,02 | 0,42 | 0,19 | 0,30 |
+
+P3 ne touche pas `etudier()` ; la partie 1 (`parties.cartes_domaine`, appelée par `resoudre`) coûte en plus 0,5 ms (Ex7), 0,2 ms (d),
+moins de 0,01 ms (a, b, c).
 
 ## Suite complète
 
@@ -117,6 +152,8 @@ Squelette sans contenu mathématique nouveau (D1), spécification (D2), cache (D
 | P1 | 1062 passés, 61 xfail (641 s) | 116 passés (871 s) ; code de retour 0 (3ᵉ lancement, voir Écarts) | 03.11.2026 |
 | P1 (contrôle du chef d'orchestre) | 1062 passés, 61 xfail (643 s) | 115 passés, 1 échec : `test_clavier.py::test_a_deux_formules…` (le test instable, voir Écarts) ; ce test seul sur P0 (5eadf34, sans P1) dans un arbre séparé : 1 échec sur 6 → défaut préexistant, P1 acceptée | 03.11.2026 |
 | P2 | 1071 passés, 55 xfail (655 s) | 116 passés (880 s) ; code de retour 0 (2ᵉ lancement : le 1ᵉʳ a échoué sur `test_soc07_etapes`, adapté aux intertitres, voir Écarts) | 03.11.2026 |
+| P2 (contrôle du chef d'orchestre) | 1071 passés, 55 xfail (649 s) | 116 passés (865 s) ; code de retour 0 | 03.11.2026 |
+| P3 | 1091 passés, 48 xfail (637 s) | 116 passés (870 s) ; code de retour 0 (2ᵉ lancement : le 1ᵉʳ a échoué sur `test_resoudre_import`, liste de fichiers mise à jour, voir Écarts) | 03.11.2026 |
 
 ## Écarts acceptés
 
@@ -139,6 +176,17 @@ Squelette sans contenu mathématique nouveau (D1), spécification (D2), cache (D
 - P2 : `tests/pages/test_comportement.py::test_soc07_etapes` (« Étape suivante révèle exactement une carte ») comptait toutes les cartes
   cachées, intertitres compris : il échouait sur l'EC (19 cachées pour 14 étapes). Il compte maintenant les cartes cachées hors intertitres
   et vérifie **en plus** qu'un intertitre n'est jamais la dernière carte visible ; pour les autres outils, rien ne change.
+- P3 : `tests/python/test_resoudre_ec.py` suit la nouvelle partie 1 : l'ordre attendu des cartes est maintenant calculé depuis
+  l'analyse de l'outil ED (une carte « Condition k » par condition, « Mise en forme » quand `parties.mise_en_forme` en donne une,
+  « Ensemble de définition ») au lieu de la seule carte « Fonction » : vérification plus forte. La ligne « ED = ]0 ; +∞[ » de la carte
+  « Fonction » de ln(x)/x est vérifiée dans la carte « Ensemble de définition » (encadrée) ; nouveau test : ED et conditions identiques
+  à l'outil ED (EC-01).
+- P3 : `moteur/noyau.py` réexporte `conditions` (liste (genre, arbre) des conditions d'existence, celle qu'utilise l'analyse), pour que
+  `parties.py` n'importe que du noyau (`test_noyau.py`) ; `ensemble_def.py` ne change pas. Ex7 et d entrent dans `CAS_LIMITES` de l'EC
+  (`tests/python/cas.py`, cités dans la spécification) : aucune entrée des pages n'a de carte « Mise en forme », et sans eux elle
+  n'aurait ni instantané ni rendu de page testé (P9 les mettra dans les exemples, D18).
+- P3 : `tests/python/test_resoudre_import.py` (import à plat de l'EC avec les fichiers d'une page) reçoit les deux fichiers ajoutés au
+  manifeste (`resoudre_ed.py`, `parties.py`) : même vérification, liste à jour (1ᵉʳ lancement de la suite complète en échec sur ce point).
 
 ## Questions pour l'enseignant
 
@@ -170,6 +218,20 @@ Squelette sans contenu mathématique nouveau (D1), spécification (D2), cache (D
    l'origine » sans rien dessous (un clic sur « Étape suivante » montre d'un coup 2, 3, 4 et la première carte des limites). Ne pas
    fusionner la branche dans cet état sans P4 et P5.
 
+10. **P3, quand afficher la carte « Mise en forme »** : seulement si f(x) = e^{haut/bas}, haut et bas de degré ≥ 1 écrits développés, et
+    si l'un des deux se factorise (mise en évidence de c·xᵏ, Somme-Produit à racines entières). d n'en a pas (haut constant, comme le
+    .tex) ; f = P(x)·e^{…}, un exposant non rationnel, un coefficient dominant négatif ou un trinôme à racines non entières non plus
+    (option qui affiche le moins). Faut-il l'étendre (par exemple nommer g(x) même sans factorisation) ?
+11. **P3, chaîne courte limitée** aux dénominateurs affines et ax² + c : un autre trinôme garde la rédaction de l'outil ED (Δ et zéros),
+    par exemple x² − 3x + 2. Voulez-vous aussi « x² − 3x + 2 = 0 ⇔ (x − 1)(x − 2) = 0 (Somme-Produit) ⇔ x = 1 ou x = 2 » ?
+12. **P3, « On résout … »** : écrit comme decisions.md §4 et le .tex, alors que R10 (outil ED) a retiré « On résout » (« condition ⇔
+    solution »). L'inégalité de l'outil ED reste au-dessus (« 6x − 12 ≠ 0 »). À confirmer.
+13. **P3, conclusion de l'outil ED reprise telle quelle** : pour ln(x)/x, « ED = ]0 ; +∞[ = ]0 ; +∞[ » (l'intersection des deux
+    conditions est déjà ]0 ; +∞[ ; même écriture dans l'outil ED). Gardée pour que l'ED soit celui de l'outil ED (EC-01) ; à corriger
+    dans l'outil ED si vous le souhaitez.
+14. **P3, Somme-Produit aussi pour a² − b²** : x² − 9 = (x + 3)(x − 3) (Somme-Produit), facteurs par racine croissante, alors que R10
+    (outil ED) factorise a² − b² directement. Une seule méthode pour tous les trinômes unitaires (principe 6) ; à confirmer.
+
 ## À relire par l'enseignant
 
 - P0 : rien (aucun changement du moteur, aucun instantané modifié).
@@ -200,3 +262,21 @@ Squelette sans contenu mathématique nouveau (D1), spécification (D2), cache (D
   |---|---|---|
   | toutes (15) | Fonction · Dérivée · Signe de f′ et variations · [Tableaux de signes] · Limite… · Bilan des asymptotes · Graphique | **1. Domaine de définition** · Fonction · **2. Parité** · **3. Zéros, signe, ordonnée à l'origine** · **4. Limites et asymptotes** · [Tableaux de signes] · Limite… · Bilan des asymptotes · **5. Dérivée, tableau de variation, extremums** · Dérivée · Signe de f′ et variations · **6. Graphe** · Graphique |
   | page, au départ | 1 carte visible, « Étape 1 / n » | l'intertitre 1 et la carte « Fonction » visibles, « Étape 1 / n » (n inchangé : les intertitres ne comptent pas) |
+
+- **P3** (EC seule ; outils ED, Dérivée, Limites, Exp-log : instantanés identiques). Instantanés modifiés :
+  `tests/python/instantanes/resoudre/etude-complete.json` (15 entrées modifiées, 2 nouvelles : Ex7 et d) ;
+  `tests/pages/references/etude-complete.json` (15 modifiées, 2 nouvelles) ; `tests/python/instantanes/etude-complete.json` (sortie
+  d'`etudier()`) : 2 nouvelles entrées, aucune modifiée. Vérifié par programme : dans chaque entrée modifiée, tout ce qui suit
+  « 2. Parité » est identique ; seule la partie 1 change (et le compteur d'étapes : + 1 à + 3).
+
+  | Entrée | Avant (partie 1) | Après (partie 1) |
+  |---|---|---|
+  | toutes | Fonction : f(x) = … et « ED = … » (discret) | Fonction : f(x) = … seule · [Mise en forme] · Condition k (une carte par condition, badge) · Ensemble de définition : **ED = …** encadré |
+  | `(x^2-1)/(x-3)` | ED = ℝ ∖ {3} | Condition 1 (dénominateur) : x − 3 ≠ 0 ; « On résout x − 3 = 0 ⇔ x = 3. » · ED = ℝ ∖ {3} |
+  | `e^(1/x)`, `(e^x-1)/x` | ED = ℝ ∖ {0} | Condition 1 (dénominateur) : x ≠ 0 · ED = ℝ ∖ {0} |
+  | `x/(x^2+1)` | ED = ℝ | Condition 1 : x² + 1 ≠ 0, lignes de l'outil ED (Δ = −4, ne s'annule jamais) · ED = ℝ |
+  | `ln(x)/x` | ED = ]0 ; +∞[ | Condition 1 (logarithme) : x > 0 · Condition 2 (dénominateur) : x ≠ 0 · ED = ]0 ; +∞[ = ]0 ; +∞[ (question 13) |
+  | `x*ln(x)`, `3(x*ln(x))`, `sqrt(x^2-4)`, `x/sqrt(x^2)` | ED = … | une carte de condition de l'outil ED (lignes et tableau tels quels) · ED encadré |
+  | `e^(2x)`, `x^(2/3)`, `x^2*e^(-x)`, `x^2-4x+3`, `x^3-3x`, `x^4-2x^2` | ED = ℝ | « Ni logarithme, ni dénominateur, ni racine : aucune condition. » · ED = ℝ encadré |
+  | `e^((x^2+x-2)/(6x-12))` (nouvelle, Ex7) | — | Mise en forme : x² + x − 2 = (x + 2)(x − 1) (Somme-Produit) ; 6x − 12 = 6(x − 2) (mise en évidence) ; On note g(x) = (x + 2)(x − 1)/(6(x − 2)), donc f(x) = e^{g(x)}. · Condition 1 : 6x − 12 ≠ 0 ; On résout 6x − 12 = 0 ⇔ 6x = 12 ⇔ x = 2. · ED = ℝ ∖ {2} |
+  | `e^(2/(x^2-4))` (nouvelle, d) | — | Condition 1 : x² − 4 ≠ 0 ; On résout x² − 4 = 0 ⇔ x² = 4 ⇔ x = −2 ou x = 2. · ED = ℝ ∖ {−2 ; 2} |

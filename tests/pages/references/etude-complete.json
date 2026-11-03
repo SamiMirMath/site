@@ -1,7 +1,7 @@
 {
  "(e^x-1)/x": {
   "au_depart": {
-   "progression": "Étape 1 / 20",
+   "progression": "Étape 1 / 22",
    "visibles": 2
   },
   "cartes": [
@@ -21,8 +21,27 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\frac{e^{x} - 1}{x}⟧⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "texte": "⟦f(x) = \\frac{e^{x} - 1}{x}⟧",
     "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1dénominateur⟦x \\neq 0⟧",
+    "titre": "Condition 1dénominateur"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ensemble de définition⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "titre": "Ensemble de définition"
    },
    {
     "classes": [
@@ -408,11 +427,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 20 / 20"
+  "progression_finale": "Étape 22 / 22"
  },
  "(x^2-1)/(x-3)": {
   "au_depart": {
-   "progression": "Étape 1 / 9",
+   "progression": "Étape 1 / 11",
    "visibles": 2
   },
   "cartes": [
@@ -432,8 +451,27 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\frac{x^{2} - 1}{x - 3}⟧⟦ED = \\mathbb{R} \\setminus \\left\\{3\\right\\}⟧",
+    "texte": "⟦f(x) = \\frac{x^{2} - 1}{x - 3}⟧",
     "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1dénominateur⟦x - 3 \\neq 0⟧On résout ⟦x - 3 = 0 \\iff x = 3⟧.",
+    "titre": "Condition 1dénominateur"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ensemble de définition⟦ED = \\mathbb{R} \\setminus \\left\\{3\\right\\}⟧",
+    "titre": "Ensemble de définition"
    },
    {
     "classes": [
@@ -870,11 +908,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 9 / 9"
+  "progression_finale": "Étape 11 / 11"
  },
  "3(x*ln(x))": {
   "au_depart": {
-   "progression": "Étape 1 / 15",
+   "progression": "Étape 1 / 17",
    "visibles": 2
   },
   "cartes": [
@@ -894,8 +932,27 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = 3x\\,\\ln(x)⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "texte": "⟦f(x) = 3x\\,\\ln(x)⟧",
     "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1logarithme⟦x > 0⟧",
+    "titre": "Condition 1logarithme"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ensemble de définition⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Ensemble de définition"
    },
    {
     "classes": [
@@ -1280,11 +1337,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 15 / 15"
+  "progression_finale": "Étape 17 / 17"
  },
- "e^(1/x)": {
+ "e^((x^2+x-2)/(6x-12))": {
   "au_depart": {
-   "progression": "Étape 1 / 13",
+   "progression": "Étape 1 / 18",
    "visibles": 2
   },
   "cartes": [
@@ -1304,8 +1361,644 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = e^{\\frac{1}{x}}⟧⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "texte": "⟦f(x) = e^{\\frac{x^{2} + x - 2}{6x - 12}}⟧",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Mise en forme⟦x^{2} + x - 2 = (x + 2)(x - 1)⟧ (Somme-Produit)⟦6x - 12 = 6(x - 2)⟧ (mise en évidence)On note ⟦g(x) = \\dfrac{(x + 2)(x - 1)}{6(x - 2)}⟧, donc ⟦f(x) = e^{g(x)}⟧.",
+    "titre": "Mise en forme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1dénominateur⟦6x - 12 \\neq 0⟧On résout ⟦6x - 12 = 0 \\iff 6x = 12 \\iff x = 2⟧.",
+    "titre": "Condition 1dénominateur"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ensemble de définition⟦ED = \\mathbb{R} \\setminus \\left\\{2\\right\\}⟧",
+    "titre": "Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "partie"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "2. Parité",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "partie"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "3. Zéros, signe, ordonnée à l'origine",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "partie"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "4. Limites et asymptotes",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to -\\infty⟧limite⟦\\displaystyle\\lim_{x\\to -\\infty} e^{\\frac{x^{2} + x - 2}{6x - 12}}⟧",
+    "titre": "⟦x \\to -\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : limite de l'exposant, à part.Haut : ⟦x^{2} + x - 2 \\to +\\infty⟧. Bas : ⟦6x - 12 \\to -\\infty⟧. Forme ⟦\\dfrac{+\\infty}{-\\infty}⟧ : indéterminée.Prédiction avec la règle du podiumEn haut ⟦x^{2}⟧, en bas ⟦x⟧ : la plus grande puissance est au haut, donc l'exposant part vers l'infini.Signe : haut > 0, bas < 0, donc ⟦-\\infty⟧.On s'attend à : exposant ⟦\\to -\\infty⟧, donc ⟦e^{\\cdots} \\to 0^{+}⟧Calcul avec BH :⟦\\lim_{x\\to -\\infty} \\frac{x^{2} + x - 2}{6x - 12} \\overset{\\text{BH}}{=} \\lim_{x\\to -\\infty} \\frac{2x + 1}{6} = -\\infty⟧",
+    "titre": "Étape 1 : limite de l'exposant, à part."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2 : on applique l'exponentielle.⟦\\lim_{x\\to -\\infty} e^{\\frac{x^{2} + x - 2}{6x - 12}} = e^{-\\infty} = 0^{+}⟧✓ Le calcul confirme la prédiction du podium.Asymptote horizontale : ⟦y = 0⟧.",
+    "titre": "Étape 2 : on applique l'exponentielle."
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\displaystyle\\lim_{x\\to +\\infty} e^{\\frac{x^{2} + x - 2}{6x - 12}}⟧",
+    "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : limite de l'exposant, à part.Haut : ⟦x^{2} + x - 2 \\to +\\infty⟧. Bas : ⟦6x - 12 \\to +\\infty⟧. Forme ⟦\\dfrac{+\\infty}{+\\infty}⟧ : indéterminée.Prédiction avec la règle du podiumEn haut ⟦x^{2}⟧, en bas ⟦x⟧ : la plus grande puissance est au haut, donc l'exposant part vers l'infini.Signe : haut > 0, bas > 0, donc ⟦+\\infty⟧.On s'attend à : exposant ⟦\\to +\\infty⟧, donc ⟦e^{\\cdots} \\to +\\infty⟧Calcul avec BH :⟦\\lim_{x\\to +\\infty} \\frac{x^{2} + x - 2}{6x - 12} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{2x + 1}{6} = +\\infty⟧",
+    "titre": "Étape 1 : limite de l'exposant, à part."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2 : on applique l'exponentielle.⟦\\lim_{x\\to +\\infty} e^{\\frac{x^{2} + x - 2}{6x - 12}} = e^{+\\infty} = +\\infty⟧✓ Le calcul confirme la prédiction du podium.",
+    "titre": "Étape 2 : on applique l'exponentielle."
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to 2⟧limite⟦\\displaystyle\\lim_{x\\to 2^{-}} e^{\\frac{x^{2} + x - 2}{6x - 12}}⟧",
+    "titre": "⟦x \\to 2⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{x^{2} + x - 2}{6x - 12} \\to \\dfrac{4}{0^{-}} = -\\infty⟧. Donc ⟦e^{\\frac{x^{2} + x - 2}{6x - 12}} \\to e^{-\\infty} = 0^{+}⟧.⟦\\lim_{x\\to 2^{-}} e^{\\frac{x^{2} + x - 2}{6x - 12}} = 0^{+}⟧",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to 2⟧limite⟦\\displaystyle\\lim_{x\\to 2^{+}} e^{\\frac{x^{2} + x - 2}{6x - 12}}⟧",
+    "titre": "⟦x \\to 2⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{x^{2} + x - 2}{6x - 12} \\to \\dfrac{4}{0^{+}} = +\\infty⟧. Donc ⟦e^{\\frac{x^{2} + x - 2}{6x - 12}} \\to e^{+\\infty} = +\\infty⟧.⟦\\lim_{x\\to 2^{+}} e^{\\frac{x^{2} + x - 2}{6x - 12}} = +\\infty⟧Asymptote verticale : ⟦x = 2⟧ (du côté droit) ; à gauche, ⟦f(x) \\to 0⟧.",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [
+     [
+      "bilan",
+      [
+       "Asymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 0⟧",
+       "Asymptote verticale : ⟦x = 2⟧ (⟦\\lim_{x\\to 2^-} f(x) = 0⟧ ; ⟦\\lim_{x\\to 2^+} f(x) = +\\infty⟧)"
+      ]
+     ]
+    ],
+    "tableaux": [],
+    "texte": "Bilan des asymptotesAsymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 0⟧Asymptote verticale : ⟦x = 2⟧ (⟦\\lim_{x\\to 2^-} f(x) = 0⟧ ; ⟦\\lim_{x\\to 2^+} f(x) = +\\infty⟧)",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "classes": [
+     "card",
+     "partie"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "5. Dérivée, tableau de variation, extremums",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Dérivéecalcul⟦\\left(x^{2}\\right)' = 2x⟧ (règle de la puissance).⟦e^{\\frac{x^{2} + x - 2}{6x - 12}}⟧ est de la forme ⟦e^{u}⟧ avec ⟦u(x) = \\frac{x^{2} + x - 2}{6x - 12}⟧ (dérivée interne ⟦u'(x) = \\frac{\\left(2x + 1\\right)\\,\\left(6x - 12\\right) - \\left(x^{2} + x - 2\\right) \\cdot 6}{\\left(6x - 12\\right)^{2}}⟧) ⟦\\Rightarrow⟧ ⟦\\left(e^{\\frac{x^{2} + x - 2}{6x - 12}}\\right)' = u' e^{u} = \\frac{x\\,\\left(x - 4\\right)\\,e^{\\frac{x^{2} + x - 2}{6x - 12}}}{6\\left(x - 2\\right)^{2}}⟧.⟦f'(x) = \\frac{x\\,\\left(x - 4\\right)\\,e^{\\frac{x^{2} + x - 2}{6x - 12}}}{6\\left(x - 2\\right)^{2}}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "maximum local en ⟦x=0⟧ : ⟦f(0)=e^{\\frac{1}{6}}⟧",
+       "minimum local en ⟦x=4⟧ : ⟦f(4)=e^{\\frac{3}{2}}⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦4⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\frac{1}{6}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x - 4\\right)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦e^{\\frac{x^{2} + x - 2}{6x - 12}}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x - 2\\right)^{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         "⟦0^{+}⟧"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "vi",
+         "⟦0^{+}⟧⟦+\\infty⟧⟦+\\infty⟧⟦0^{+}⟧"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{x\\,\\left(x - 4\\right)\\,e^{\\frac{x^{2} + x - 2}{6x - 12}}}{6\\left(x - 2\\right)^{2}} = 0 \\iff x = 0 \\text{ ou } x - 4 = 0 \\iff x = 0 \\text{ ou } x = 4⟧ ; valeur interdite : ⟦x = 2⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦2⟧⟦4⟧⟦+\\infty⟧⟦\\frac{1}{6}⟧++++++⟦x⟧−0++++⟦\\left(x - 4\\right)⟧−−−−0+⟦e^{\\frac{x^{2} + x - 2}{6x - 12}}⟧++++++⟦\\left(x - 2\\right)^{2}⟧++++++⟦f'(x)⟧+0−−0+⟦f(x)⟧⟦0^{+}⟧⟦\\nearrow⟧•⟦\\searrow⟧⟦0^{+}⟧⟦+\\infty⟧⟦+\\infty⟧⟦0^{+}⟧⟦\\searrow⟧•⟦\\nearrow⟧⟦+\\infty⟧maximum local en ⟦x=0⟧ : ⟦f(0)=e^{\\frac{1}{6}}⟧minimum local en ⟦x=4⟧ : ⟦f(4)=e^{\\frac{3}{2}}⟧",
+    "titre": "Signe de f' et variationstableau"
+   },
+   {
+    "classes": [
+     "card",
+     "partie"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "6. Graphe",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "titre": "Graphique"
+   }
+  ],
+  "progression_finale": "Étape 18 / 18"
+ },
+ "e^(1/x)": {
+  "au_depart": {
+   "progression": "Étape 1 / 15",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "partie"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "1. Domaine de définition",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = e^{\\frac{1}{x}}⟧",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1dénominateur⟦x \\neq 0⟧",
+    "titre": "Condition 1dénominateur"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ensemble de définition⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "titre": "Ensemble de définition"
    },
    {
     "classes": [
@@ -1658,11 +2351,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 13 / 13"
+  "progression_finale": "Étape 15 / 15"
  },
- "e^(2x)": {
+ "e^(2/(x^2-4))": {
   "au_depart": {
-   "progression": "Étape 1 / 9",
+   "progression": "Étape 1 / 19",
    "visibles": 2
   },
   "cartes": [
@@ -1682,8 +2375,646 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = e^{2x}⟧⟦ED = \\mathbb{R}⟧",
+    "texte": "⟦f(x) = e^{\\frac{2}{x^{2} - 4}}⟧",
     "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1dénominateur⟦x^{2} - 4 \\neq 0⟧On résout ⟦x^{2} - 4 = 0 \\iff x^{2} = 4 \\iff x = -2 \\text{ ou } x = 2⟧.",
+    "titre": "Condition 1dénominateur"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ensemble de définition⟦ED = \\mathbb{R} \\setminus \\left\\{-2 \\,;\\, 2\\right\\}⟧",
+    "titre": "Ensemble de définition"
+   },
+   {
+    "classes": [
+     "card",
+     "partie"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "2. Parité",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "partie"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "3. Zéros, signe, ordonnée à l'origine",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "partie"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "4. Limites et asymptotes",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to -\\infty⟧limite⟦\\displaystyle\\lim_{x\\to -\\infty} e^{\\frac{2}{x^{2} - 4}}⟧",
+    "titre": "⟦x \\to -\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{+\\infty} = 0^{+}⟧. Donc ⟦e^{\\frac{2}{x^{2} - 4}} \\to e^{0^{+}} = 1⟧.⟦\\lim_{x\\to -\\infty} e^{\\frac{2}{x^{2} - 4}} = 1⟧Asymptote horizontale : ⟦y = 1⟧.",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\displaystyle\\lim_{x\\to +\\infty} e^{\\frac{2}{x^{2} - 4}}⟧",
+    "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{+\\infty} = 0^{+}⟧. Donc ⟦e^{\\frac{2}{x^{2} - 4}} \\to e^{0^{+}} = 1⟧.⟦\\lim_{x\\to +\\infty} e^{\\frac{2}{x^{2} - 4}} = 1⟧Asymptote horizontale : ⟦y = 1⟧.",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to -2⟧limite⟦\\displaystyle\\lim_{x\\to -2^{-}} e^{\\frac{2}{x^{2} - 4}}⟧",
+    "titre": "⟦x \\to -2⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{0^{+}} = +\\infty⟧. Donc ⟦e^{\\frac{2}{x^{2} - 4}} \\to e^{+\\infty} = +\\infty⟧.⟦\\lim_{x\\to -2^{-}} e^{\\frac{2}{x^{2} - 4}} = +\\infty⟧",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to -2⟧limite⟦\\displaystyle\\lim_{x\\to -2^{+}} e^{\\frac{2}{x^{2} - 4}}⟧",
+    "titre": "⟦x \\to -2⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{0^{-}} = -\\infty⟧. Donc ⟦e^{\\frac{2}{x^{2} - 4}} \\to e^{-\\infty} = 0^{+}⟧.⟦\\lim_{x\\to -2^{+}} e^{\\frac{2}{x^{2} - 4}} = 0^{+}⟧Asymptote verticale : ⟦x = -2⟧ (du côté gauche) ; à droite, ⟦f(x) \\to 0⟧.",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to 2⟧limite⟦\\displaystyle\\lim_{x\\to 2^{-}} e^{\\frac{2}{x^{2} - 4}}⟧",
+    "titre": "⟦x \\to 2⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{0^{-}} = -\\infty⟧. Donc ⟦e^{\\frac{2}{x^{2} - 4}} \\to e^{-\\infty} = 0^{+}⟧.⟦\\lim_{x\\to 2^{-}} e^{\\frac{2}{x^{2} - 4}} = 0^{+}⟧",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to 2⟧limite⟦\\displaystyle\\lim_{x\\to 2^{+}} e^{\\frac{2}{x^{2} - 4}}⟧",
+    "titre": "⟦x \\to 2⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{0^{+}} = +\\infty⟧. Donc ⟦e^{\\frac{2}{x^{2} - 4}} \\to e^{+\\infty} = +\\infty⟧.⟦\\lim_{x\\to 2^{+}} e^{\\frac{2}{x^{2} - 4}} = +\\infty⟧Asymptote verticale : ⟦x = 2⟧ (du côté droit) ; à gauche, ⟦f(x) \\to 0⟧.",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [
+     [
+      "bilan",
+      [
+       "Asymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 1⟧",
+       "Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 1⟧",
+       "Asymptote verticale : ⟦x = -2⟧ (⟦\\lim_{x\\to -2^-} f(x) = +\\infty⟧ ; ⟦\\lim_{x\\to -2^+} f(x) = 0⟧)",
+       "Asymptote verticale : ⟦x = 2⟧ (⟦\\lim_{x\\to 2^-} f(x) = 0⟧ ; ⟦\\lim_{x\\to 2^+} f(x) = +\\infty⟧)"
+      ]
+     ]
+    ],
+    "tableaux": [],
+    "texte": "Bilan des asymptotesAsymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 1⟧Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 1⟧Asymptote verticale : ⟦x = -2⟧ (⟦\\lim_{x\\to -2^-} f(x) = +\\infty⟧ ; ⟦\\lim_{x\\to -2^+} f(x) = 0⟧)Asymptote verticale : ⟦x = 2⟧ (⟦\\lim_{x\\to 2^-} f(x) = 0⟧ ; ⟦\\lim_{x\\to 2^+} f(x) = +\\infty⟧)",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "classes": [
+     "card",
+     "partie"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "5. Dérivée, tableau de variation, extremums",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Dérivéecalcul⟦\\left(x^{2}\\right)' = 2x⟧ (règle de la puissance).⟦e^{\\frac{2}{x^{2} - 4}}⟧ est de la forme ⟦e^{u}⟧ avec ⟦u(x) = \\frac{2}{x^{2} - 4}⟧ (dérivée interne ⟦u'(x) = \\frac{-2 \\cdot 2x}{\\left(x^{2} - 4\\right)^{2}}⟧) ⟦\\Rightarrow⟧ ⟦\\left(e^{\\frac{2}{x^{2} - 4}}\\right)' = u' e^{u} = \\frac{-4x\\,e^{\\frac{2}{x^{2} - 4}}}{\\left(x - 2\\right)^{2}\\,\\left(x + 2\\right)^{2}}⟧.⟦f'(x) = \\frac{-4x\\,e^{\\frac{2}{x^{2} - 4}}}{\\left(x - 2\\right)^{2}\\,\\left(x + 2\\right)^{2}}⟧",
+    "titre": "Dérivéecalcul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [
+     [
+      "extrema",
+      [
+       "maximum local en ⟦x=0⟧ : ⟦f(0)=e^{- \\frac{1}{2}}⟧"
+      ]
+     ]
+    ],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦-4⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦e^{\\frac{2}{x^{2} - 4}}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x - 2\\right)^{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦\\left(x + 2\\right)^{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f'(x)⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "vi",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦f(x)⟧"
+        ],
+        [
+         "",
+         "⟦1⟧"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "vi",
+         "⟦+\\infty⟧⟦0^{+}⟧⟦0^{+}⟧⟦+\\infty⟧"
+        ],
+        [
+         "",
+         "⟦\\nearrow⟧"
+        ],
+        [
+         "pt",
+         "•"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "vi",
+         "⟦0^{+}⟧⟦+\\infty⟧⟦+\\infty⟧⟦0^{+}⟧"
+        ],
+        [
+         "",
+         "⟦\\searrow⟧"
+        ],
+        [
+         "",
+         "⟦1⟧"
+        ]
+       ],
+       "classe": "variation"
+      }
+     ]
+    ],
+    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{-4x\\,e^{\\frac{2}{x^{2} - 4}}}{\\left(x - 2\\right)^{2}\\,\\left(x + 2\\right)^{2}} = 0 \\iff x = 0⟧ ; valeurs interdites : ⟦x = -2⟧ ; ⟦x = 2⟧.⟦x⟧⟦-\\infty⟧⟦-2⟧⟦0⟧⟦2⟧⟦+\\infty⟧⟦-4⟧−−−−−⟦x⟧−−0++⟦e^{\\frac{2}{x^{2} - 4}}⟧+++++⟦\\left(x - 2\\right)^{2}⟧+++++⟦\\left(x + 2\\right)^{2}⟧+++++⟦f'(x)⟧++0−−⟦f(x)⟧⟦1⟧⟦\\nearrow⟧⟦+\\infty⟧⟦0^{+}⟧⟦0^{+}⟧⟦+\\infty⟧⟦\\nearrow⟧•⟦\\searrow⟧⟦0^{+}⟧⟦+\\infty⟧⟦+\\infty⟧⟦0^{+}⟧⟦\\searrow⟧⟦1⟧maximum local en ⟦x=0⟧ : ⟦f(0)=e^{- \\frac{1}{2}}⟧",
+    "titre": "Signe de f' et variationstableau"
+   },
+   {
+    "classes": [
+     "card",
+     "partie"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "6. Graphe",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "titre": "Graphique"
+   }
+  ],
+  "progression_finale": "Étape 19 / 19"
+ },
+ "e^(2x)": {
+  "au_depart": {
+   "progression": "Étape 1 / 10",
+   "visibles": 2
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "partie"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "1. Domaine de définition",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦f(x) = e^{2x}⟧",
+    "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ensemble de définitionNi logarithme, ni dénominateur, ni racine : aucune condition.⟦ED = \\mathbb{R}⟧",
+    "titre": "Ensemble de définition"
    },
    {
     "classes": [
@@ -1927,7 +3258,7 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 9 / 9"
+  "progression_finale": "Étape 10 / 10"
  },
  "ln(": {
   "au_depart": {
@@ -1950,7 +3281,7 @@
  },
  "ln(x)/x": {
   "au_depart": {
-   "progression": "Étape 1 / 13",
+   "progression": "Étape 1 / 16",
    "visibles": 2
   },
   "cartes": [
@@ -1970,8 +3301,37 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\frac{\\ln(x)}{x}⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "texte": "⟦f(x) = \\frac{\\ln(x)}{x}⟧",
     "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1logarithme⟦x > 0⟧",
+    "titre": "Condition 1logarithme"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 2dénominateur⟦x \\neq 0⟧",
+    "titre": "Condition 2dénominateur"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ensemble de définition⟦ED = \\left]0 \\,;\\, +\\infty\\right[ = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Ensemble de définition"
    },
    {
     "classes": [
@@ -2339,11 +3699,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 13 / 13"
+  "progression_finale": "Étape 16 / 16"
  },
  "sqrt(x^2-4)": {
   "au_depart": {
-   "progression": "Étape 1 / 7",
+   "progression": "Étape 1 / 9",
    "visibles": 2
   },
   "cartes": [
@@ -2363,8 +3723,178 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\sqrt{x^{2} - 4}⟧⟦ED = \\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[⟧",
+    "texte": "⟦f(x) = \\sqrt{x^{2} - 4}⟧",
     "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦-2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x - 2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "bar",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x + 2⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "bar",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x^{2} - 4⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "m",
+         "−"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Condition 1racine carrée⟦x^{2} - 4 = (x - 2)(x + 2)⟧ : zéros ⟦-2⟧ et ⟦2⟧.⟦x⟧⟦-\\infty⟧⟦-2⟧⟦2⟧⟦+\\infty⟧⟦x - 2⟧−−0+⟦x + 2⟧−0++⟦x^{2} - 4⟧+0−0+⟦x^{2} - 4 \\geq 0 \\iff x \\in \\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[⟧.",
+    "titre": "Condition 1racine carrée"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ensemble de définition⟦ED = \\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Ensemble de définition"
    },
    {
     "classes": [
@@ -2679,11 +4209,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 7 / 7"
+  "progression_finale": "Étape 9 / 9"
  },
  "x*ln(x)": {
   "au_depart": {
-   "progression": "Étape 1 / 15",
+   "progression": "Étape 1 / 17",
    "visibles": 2
   },
   "cartes": [
@@ -2703,8 +4233,27 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = x\\,\\ln(x)⟧⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "texte": "⟦f(x) = x\\,\\ln(x)⟧",
     "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1logarithme⟦x > 0⟧",
+    "titre": "Condition 1logarithme"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ensemble de définition⟦ED = \\left]0 \\,;\\, +\\infty\\right[⟧",
+    "titre": "Ensemble de définition"
    },
    {
     "classes": [
@@ -3052,11 +4601,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 15 / 15"
+  "progression_finale": "Étape 17 / 17"
  },
  "x/(x^2+1)": {
   "au_depart": {
-   "progression": "Étape 1 / 7",
+   "progression": "Étape 1 / 9",
    "visibles": 2
   },
   "cartes": [
@@ -3076,8 +4625,27 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\frac{x}{x^{2} + 1}⟧⟦ED = \\mathbb{R}⟧",
+    "texte": "⟦f(x) = \\frac{x}{x^{2} + 1}⟧",
     "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Condition 1dénominateur⟦x^{2} + 1 \\neq 0⟧Trinôme ⟦x^{2} + 1⟧ : ⟦\\Delta = b^2 - 4ac = 0^2 - 4 \\cdot 1 \\cdot 1 = -4⟧ : aucun zéro ; le trinôme garde le signe de ⟦a = 1⟧, il est toujours positif.⟦x^{2} + 1⟧ ne s'annule jamais : aucune valeur interdite.",
+    "titre": "Condition 1dénominateur"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ensemble de définition⟦ED = \\mathbb{R}⟧",
+    "titre": "Ensemble de définition"
    },
    {
     "classes": [
@@ -3466,11 +5034,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 7 / 7"
+  "progression_finale": "Étape 9 / 9"
  },
  "x/sqrt(x^2)": {
   "au_depart": {
-   "progression": "Étape 1 / 8",
+   "progression": "Étape 1 / 10",
    "visibles": 2
   },
   "cartes": [
@@ -3490,8 +5058,88 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = \\frac{x}{\\sqrt{x^{2}}}⟧⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "texte": "⟦f(x) = \\frac{x}{\\sqrt{x^{2}}}⟧",
     "titre": null
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [
+     [
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x⟧"
+        ],
+        [
+         "",
+         "⟦-\\infty⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦0⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "",
+         "⟦+\\infty⟧"
+        ]
+       ],
+       "classe": ""
+      },
+      {
+       "cases": [
+        [
+         "lab",
+         "⟦x^{2}⟧"
+        ],
+        [
+         "",
+         ""
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         "0"
+        ],
+        [
+         "p",
+         "+"
+        ],
+        [
+         "",
+         ""
+        ]
+       ],
+       "classe": "final"
+      }
+     ]
+    ],
+    "texte": "Condition 1racine au dénominateurOn met ⟦x^{2}⟧ en évidence : ⟦x^{2} = x^{2}\\left(1\\right)⟧⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦x^{2}⟧+0+⟦x^{2} > 0 \\iff x \\in \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧.",
+    "titre": "Condition 1racine au dénominateur"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ensemble de définition⟦ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧",
+    "titre": "Ensemble de définition"
    },
    {
     "classes": [
@@ -3740,11 +5388,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 8 / 8"
+  "progression_finale": "Étape 10 / 10"
  },
  "x^(2/3)": {
   "au_depart": {
-   "progression": "Étape 1 / 7",
+   "progression": "Étape 1 / 8",
    "visibles": 2
   },
   "cartes": [
@@ -3764,8 +5412,17 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = x^{\\frac{2}{3}} = \\sqrt[3]{x^{2}}⟧⟦ED = \\mathbb{R}⟧",
+    "texte": "⟦f(x) = x^{\\frac{2}{3}} = \\sqrt[3]{x^{2}}⟧",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ensemble de définitionNi logarithme, ni dénominateur, ni racine : aucune condition.⟦ED = \\mathbb{R}⟧",
+    "titre": "Ensemble de définition"
    },
    {
     "classes": [
@@ -4031,11 +5688,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 7 / 7"
+  "progression_finale": "Étape 8 / 8"
  },
  "x^2*e^(-x)": {
   "au_depart": {
-   "progression": "Étape 1 / 15",
+   "progression": "Étape 1 / 16",
    "visibles": 2
   },
   "cartes": [
@@ -4055,8 +5712,17 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = x^{2}\\,e^{-x}⟧⟦ED = \\mathbb{R}⟧",
+    "texte": "⟦f(x) = x^{2}\\,e^{-x}⟧",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ensemble de définitionNi logarithme, ni dénominateur, ni racine : aucune condition.⟦ED = \\mathbb{R}⟧",
+    "titre": "Ensemble de définition"
    },
    {
     "classes": [
@@ -4516,11 +6182,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 15 / 15"
+  "progression_finale": "Étape 16 / 16"
  },
  "x^2-4x+3": {
   "au_depart": {
-   "progression": "Étape 1 / 7",
+   "progression": "Étape 1 / 8",
    "visibles": 2
   },
   "cartes": [
@@ -4540,8 +6206,17 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = x^{2} - 4x + 3⟧⟦ED = \\mathbb{R}⟧",
+    "texte": "⟦f(x) = x^{2} - 4x + 3⟧",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ensemble de définitionNi logarithme, ni dénominateur, ni racine : aucune condition.⟦ED = \\mathbb{R}⟧",
+    "titre": "Ensemble de définition"
    },
    {
     "classes": [
@@ -4815,11 +6490,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 7 / 7"
+  "progression_finale": "Étape 8 / 8"
  },
  "x^3-3x": {
   "au_depart": {
-   "progression": "Étape 1 / 7",
+   "progression": "Étape 1 / 8",
    "visibles": 2
   },
   "cartes": [
@@ -4839,8 +6514,17 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = x^{3} - 3x⟧⟦ED = \\mathbb{R}⟧",
+    "texte": "⟦f(x) = x^{3} - 3x⟧",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ensemble de définitionNi logarithme, ni dénominateur, ni racine : aucune condition.⟦ED = \\mathbb{R}⟧",
+    "titre": "Ensemble de définition"
    },
    {
     "classes": [
@@ -5192,11 +6876,11 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 7 / 7"
+  "progression_finale": "Étape 8 / 8"
  },
  "x^4-2x^2": {
   "au_depart": {
-   "progression": "Étape 1 / 7",
+   "progression": "Étape 1 / 8",
    "visibles": 2
   },
   "cartes": [
@@ -5216,8 +6900,17 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦f(x) = x^{4} - 2x^{2}⟧⟦ED = \\mathbb{R}⟧",
+    "texte": "⟦f(x) = x^{4} - 2x^{2}⟧",
     "titre": null
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Ensemble de définitionNi logarithme, ni dénominateur, ni racine : aucune condition.⟦ED = \\mathbb{R}⟧",
+    "titre": "Ensemble de définition"
    },
    {
     "classes": [
@@ -5663,6 +7356,6 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 7 / 7"
+  "progression_finale": "Étape 8 / 8"
  }
 }

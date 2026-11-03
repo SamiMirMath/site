@@ -21,6 +21,8 @@ from ensemble_def import (
     # polynômes exacts
     pn, deg, peval, pdivlin, pmul, padd, pscal, nul, decomposer, r_norm,
     trinome, racine_rationnelle,
+    # conditions d'existence (liste (genre, arbre), dans l'ordre de l'analyse)
+    conditions,
     # tableaux de signes
     signe_facteur, tableau_facteurs,
     # pont vers SymPy
