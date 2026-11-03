@@ -82,36 +82,38 @@
   "ed_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
   "f_tex": "\\frac{e^{x} - 1}{x}",
   "graphique": {
+   "points": [],
+   "ronds_vides": [],
    "segments": [
     {
      "dernier": [
-      -0.008,
-      0.996010645
+      -0.070125,
+      0.965742917
      ],
-     "empreinte": "7386be9806a0ed26",
-     "n": 200,
+     "empreinte": "29f3daf050a17551",
+     "n": 718,
      "premier": [
-      -1.992,
-      0.433522938
+      -17.461125,
+      0.057270077
      ]
     },
     {
      "dernier": [
-      1.992,
-      3.17780094
+      11.7185625,
+      10481.6379
      ],
-     "empreinte": "0e484480ab95bf0f",
-     "n": 200,
+     "empreinte": "a3ada04c2f882f6e",
+     "n": 481,
      "premier": [
-      0.008,
-      1.00401069
+      0.0470625,
+      1.02390478
      ]
     }
    ],
    "xmax": 2.0,
-   "xmin": -2.0,
-   "ymax": 3.07516389,
-   "ymin": -0.615032778
+   "xmin": -7.765625,
+   "ymax": 2.5,
+   "ymin": -0.5
   },
   "limites": {
    "asymptotes": [
@@ -587,36 +589,51 @@
   "ed_tex": "\\mathbb{R} \\setminus \\left\\{3\\right\\}",
   "f_tex": "\\frac{x^{2} - 1}{x - 3}",
   "graphique": {
+   "points": [
+    {
+     "f_val": 0.0,
+     "x_val": -1.0
+    },
+    {
+     "f_val": 0.0,
+     "x_val": 1.0
+    },
+    {
+     "f_val": 0.333333333,
+     "x_val": 0.0
+    }
+   ],
+   "ronds_vides": [],
    "segments": [
     {
      "dernier": [
-      2.97737258,
-      -347.576018
+      2.91571573,
+      -89.0011636
      ],
-     "empreinte": "e21b096c8c1a41ab",
-     "n": 199,
+     "empreinte": "a396a6cbd05b38ca",
+     "n": 617,
      "premier": [
-      -2.63422683,
-      -1.05411997
+      -17.9867835,
+      -15.3679758
      ]
     },
     {
      "dernier": [
-      8.63422683,
-      13.05412
+      22.819897,
+      26.2235317
      ],
-     "empreinte": "2a6fe7c9128d72a4",
-     "n": 199,
+     "empreinte": "3d0be4ffdc0a463b",
+     "n": 582,
      "premier": [
-      3.02262742,
-      359.576018
+      3.07959798,
+      106.584661
      ]
     }
    ],
-   "xmax": 8.65685425,
-   "xmin": -2.65685425,
-   "ymax": 18.1125002,
-   "ymin": -6.11250022
+   "xmax": 9.24264069,
+   "xmin": -4.41421356,
+   "ymax": 17.3463002,
+   "ymin": -4.9952399
   },
   "limites": {
    "asymptotes": [
@@ -858,24 +875,31 @@
   "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
   "f_tex": "3x\\,\\ln(x)",
   "graphique": {
+   "points": [
+    {
+     "f_val": 0.0,
+     "x_val": 1.0
+    }
+   ],
+   "ronds_vides": [],
    "segments": [
     {
      "dernier": [
-      2.35840792,
-      6.07044848
+      6.5736,
+      37.1354817
      ],
-     "empreinte": "7888e2e77ddcf9a0",
-     "n": 319,
+     "empreinte": "747700d1eafb62b0",
+     "n": 733,
      "premier": [
-      0.00947151776,
-      -0.132396648
+      0.0264,
+      -0.287843788
      ]
     }
    ],
-   "xmax": 2.36787944,
+   "xmax": 3.0,
    "xmin": -0.6,
-   "ymax": 4.80639139,
-   "ymin": -2.28564427
+   "ymax": 1.52590958,
+   "ymin": -1.6295479
   },
   "limites": {
    "asymptotes": [
@@ -1267,36 +1291,43 @@
   "ed_tex": "\\mathbb{R} \\setminus \\left\\{2\\right\\}",
   "f_tex": "e^{\\frac{x^{2} + x - 2}{6x - 12}}",
   "graphique": {
+   "points": [],
+   "ronds_vides": [
+    [
+     2.0,
+     0.0
+    ]
+   ],
    "segments": [
     {
      "dernier": [
-      1.984,
-      1.84141017e-18
+      1.891,
+      0.00498639894
      ],
-     "empreinte": "48f5fe71efdd6007",
-     "n": 200,
+     "empreinte": "45ae9419ad53e722",
+     "n": 697,
      "premier": [
-      -1.984,
-      1.00199932
+      -25.141,
+      0.024362024
      ]
     },
     {
      "dernier": [
-      5.984,
-      5.2839258
+      21.5465,
+      61.8795675
      ],
-     "empreinte": "7b52668a082fc2d3",
-     "n": 200,
+     "empreinte": "68146e682fe89626",
+     "n": 502,
      "premier": [
-      2.016,
-      null
+      2.0785,
+      11372.8665
      ]
     }
    ],
    "xmax": 6.0,
-   "xmin": -2.0,
-   "ymax": 7.47444968,
-   "ymin": -1.49488994
+   "xmin": -9.625,
+   "ymax": 7.00263917,
+   "ymin": -1.40052783
   },
   "limites": {
    "asymptotes": [
@@ -1615,36 +1646,43 @@
   "ed_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
   "f_tex": "e^{\\frac{1}{x}}",
   "graphique": {
+   "points": [],
+   "ronds_vides": [
+    [
+     0.0,
+     0.0
+    ]
+   ],
    "segments": [
     {
      "dernier": [
-      -0.008,
-      5.16642063e-55
+      -0.12825,
+      0.000410854691
      ],
-     "empreinte": "903d52c6c47a9681",
-     "n": 200,
+     "empreinte": "4693c12f6765d438",
+     "n": 608,
      "premier": [
-      -1.992,
-      0.605313949
+      -31.93425,
+      0.969170875
      ]
     },
     {
      "dernier": [
-      1.992,
-      1.65203528
+      31.093875,
+      1.03268342
      ],
-     "empreinte": "2973f1f8cb34c9d4",
-     "n": 200,
+     "empreinte": "4a923b5efc402263",
+     "n": 592,
      "premier": [
-      0.008,
-      null
+      0.124875,
+      3004.92536
      ]
     }
    ],
-   "xmax": 2.0,
-   "xmin": -2.0,
-   "ymax": 14.5839905,
-   "ymin": -2.81409627
+   "xmax": 10.125,
+   "xmin": -10.96875,
+   "ymax": 2.13311422,
+   "ymin": -0.5
   },
   "limites": {
    "asymptotes": [
@@ -1978,17 +2016,28 @@
   "ed_tex": "\\mathbb{R} \\setminus \\left\\{-2 \\,;\\, 2\\right\\}",
   "f_tex": "e^{\\frac{2}{x^{2} - 4}}",
   "graphique": {
+   "points": [],
+   "ronds_vides": [
+    [
+     -2.0,
+     0.0
+    ],
+    [
+     2.0,
+     0.0
+    ]
+   ],
    "segments": [
     {
      "dernier": [
-      -2.008,
-      null
+      -2.064,
+      2185.21282
      ],
-     "empreinte": "0fbc4a6eb9c9e71f",
-     "n": 100,
+     "empreinte": "6d238e99658f876d",
+     "n": 533,
      "premier": [
-      -3.992,
-      1.18241555
+      -17.936,
+      1.0063151
      ]
     },
     {
@@ -1996,8 +2045,8 @@
       1.984,
       2.36479017e-14
      ],
-     "empreinte": "501e22d39a8a4216",
-     "n": 200,
+     "empreinte": "d5a5eb597fe71e4e",
+     "n": 133,
      "premier": [
       -1.984,
       2.36479017e-14
@@ -2005,21 +2054,21 @@
     },
     {
      "dernier": [
-      3.992,
-      1.18241555
+      17.936,
+      1.0063151
      ],
-     "empreinte": "6964517199ce855d",
-     "n": 100,
+     "empreinte": "979fdc72b11295a2",
+     "n": 533,
      "premier": [
-      2.008,
-      null
+      2.064,
+      2185.21282
      ]
     }
    ],
-   "xmax": 4.0,
-   "xmin": -4.0,
-   "ymax": 3.67607048,
-   "ymin": -0.180419017
+   "xmax": 6.0,
+   "xmin": -6.0,
+   "ymax": 2.14964432,
+   "ymin": -0.5
   },
   "limites": {
    "asymptotes": [
@@ -2308,24 +2357,31 @@
   "ed_tex": "\\mathbb{R}",
   "f_tex": "e^{2x}",
   "graphique": {
+   "points": [
+    {
+     "f_val": 1.0,
+     "x_val": 0.0
+    }
+   ],
+   "ronds_vides": [],
    "segments": [
     {
      "dernier": [
-      1.984,
-      52.8786677
+      5.952,
+      147856.871
      ],
-     "empreinte": "b432b4e87042448b",
-     "n": 400,
+     "empreinte": "11f990aa2893ca44",
+     "n": 1200,
      "premier": [
-      -1.984,
-      0.0189112178
+      -5.952,
+      6.76329744e-06
      ]
     }
    ],
    "xmax": 2.0,
    "xmin": -2.0,
-   "ymax": 13.7337366,
-   "ymin": -2.74674732
+   "ymax": 2.5,
+   "ymin": -0.5
   },
   "limites": {
    "asymptotes": [
@@ -2519,17 +2575,24 @@
   "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
   "f_tex": "\\frac{\\ln(x)}{x}",
   "graphique": {
+   "points": [
+    {
+     "f_val": 0.0,
+     "x_val": 1.0
+    }
+   ],
+   "ronds_vides": [],
    "segments": [
     {
      "dernier": [
-      4.6994087,
-      0.329283276
+      9.9964174,
+      0.230305186
      ],
-     "empreinte": "a3184065a571454d",
-     "n": 354,
+     "empreinte": "295e4d6dcf8f55af",
+     "n": 754,
      "premier": [
-      0.0188731273,
-      -210.352855
+      0.0401462546,
+      -80.0878228
      ]
     }
    ],
@@ -2818,36 +2881,38 @@
   "ed_tex": "\\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[",
   "f_tex": "\\sqrt{x^{2} - 4}",
   "graphique": {
+   "points": [],
+   "ronds_vides": [],
    "segments": [
     {
      "dernier": [
-      -2.008,
-      0.179064234
+      -2.04,
+      0.401995025
      ],
-     "empreinte": "dda8835217be4383",
-     "n": 100,
+     "empreinte": "d4bc2c44547b1a0a",
+     "n": 500,
      "premier": [
-      -3.992,
-      3.45486092
+      -11.96,
+      11.7915902
      ]
     },
     {
      "dernier": [
-      3.992,
-      3.45486092
+      11.96,
+      11.7915902
      ],
-     "empreinte": "553d2ddce5b1b60a",
-     "n": 100,
+     "empreinte": "a24c0587548ce569",
+     "n": 500,
      "premier": [
-      2.008,
-      0.179064234
+      2.04,
+      0.401995025
      ]
     }
    ],
    "xmax": 4.0,
    "xmin": -4.0,
-   "ymax": 3.72840855,
-   "ymin": -0.74568171
+   "ymax": 1.5,
+   "ymin": -0.5
   },
   "limites": {
    "asymptotes": [
@@ -3043,23 +3108,30 @@
   "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
   "f_tex": "x\\,\\ln(x)",
   "graphique": {
+   "points": [
+    {
+     "f_val": 0.0,
+     "x_val": 1.0
+    }
+   ],
+   "ronds_vides": [],
    "segments": [
     {
      "dernier": [
-      2.35840792,
-      2.02348283
+      6.5736,
+      12.3784939
      ],
-     "empreinte": "ebe59e70c9f1e682",
-     "n": 319,
+     "empreinte": "999e4cb731da41bc",
+     "n": 733,
      "premier": [
-      0.00947151776,
-      -0.0441322161
+      0.0264,
+      -0.0959479295
      ]
     }
    ],
-   "xmax": 2.36787944,
+   "xmax": 3.0,
    "xmin": -0.6,
-   "ymax": 1.70812848,
+   "ymax": 1.5,
    "ymin": -0.867879441
   },
   "limites": {
@@ -3391,22 +3463,29 @@
   "ed_tex": "\\mathbb{R}",
   "f_tex": "\\frac{x}{x^{2} + 1}",
   "graphique": {
+   "points": [
+    {
+     "f_val": 0.0,
+     "x_val": 0.0
+    }
+   ],
+   "ronds_vides": [],
    "segments": [
     {
      "dernier": [
-      2.976,
-      0.301930407
+      30.132,
+      0.033150797
      ],
-     "empreinte": "f650a43414993e43",
-     "n": 400,
+     "empreinte": "1283b441ede7d0bb",
+     "n": 1200,
      "premier": [
-      -2.976,
-      -0.301930407
+      -30.132,
+      -0.033150797
      ]
     }
    ],
-   "xmax": 3.0,
-   "xmin": -3.0,
+   "xmax": 10.125,
+   "xmin": -10.125,
    "ymax": 1.0,
    "ymin": -1.0
   },
@@ -3546,28 +3625,39 @@
   "ed_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
   "f_tex": "\\frac{x}{\\sqrt{x^{2}}}",
   "graphique": {
+   "points": [],
+   "ronds_vides": [
+    [
+     0.0,
+     -1.0
+    ],
+    [
+     0.0,
+     1.0
+    ]
+   ],
    "segments": [
     {
      "dernier": [
-      -0.008,
+      -0.024,
       -1.0
      ],
-     "empreinte": "0ad76bb84f9119fc",
-     "n": 200,
+     "empreinte": "c024c2de37ded13e",
+     "n": 600,
      "premier": [
-      -1.992,
+      -5.976,
       -1.0
      ]
     },
     {
      "dernier": [
-      1.992,
+      5.976,
       1.0
      ],
-     "empreinte": "3a07cf016fdb4e53",
-     "n": 200,
+     "empreinte": "827bf2fb8a6b45f4",
+     "n": 600,
      "premier": [
-      0.008,
+      0.024,
       1.0
      ]
     }
@@ -3751,23 +3841,25 @@
   "f_saisie_tex": "x^{\\frac{2}{3}}",
   "f_tex": "\\sqrt[3]{x^{2}}",
   "graphique": {
+   "points": [],
+   "ronds_vides": [],
    "segments": [
     {
      "dernier": [
-      1.984,
-      1.57892358
+      5.952,
+      3.28429341
      ],
-     "empreinte": "93edcbedbbb29793",
-     "n": 400,
+     "empreinte": "e783cc9f0d2b774f",
+     "n": 1200,
      "premier": [
-      -1.984,
-      1.57892358
+      -5.952,
+      3.28429341
      ]
     }
    ],
    "xmax": 2.0,
    "xmin": -2.0,
-   "ymax": 1.62821155,
+   "ymax": 1.5,
    "ymin": -0.5
   },
   "limites": {
@@ -3942,23 +4034,25 @@
   "ed_tex": "\\mathbb{R}",
   "f_tex": "x^{2}\\,e^{-x}",
   "graphique": {
+   "points": [],
+   "ronds_vides": [],
    "segments": [
     {
      "dernier": [
-      3.976,
-      0.296577289
+      16.6375,
+      1.6466515e-05
      ],
-     "empreinte": "94178f29f208a270",
-     "n": 400,
+     "empreinte": "20e86752089cb5e7",
+     "n": 1200,
      "premier": [
-      -1.976,
-      28.166947
+      -11.2625,
+      9874411.24
      ]
     }
    ],
-   "xmax": 4.0,
+   "xmax": 7.375,
    "xmin": -2.0,
-   "ymax": 1.9120913,
+   "ymax": 1.04134113,
    "ymin": -0.5
   },
   "limites": {
@@ -4238,24 +4332,39 @@
   "ed_tex": "\\mathbb{R}",
   "f_tex": "x^{2} - 4x + 3",
   "graphique": {
+   "points": [
+    {
+     "f_val": 0.0,
+     "x_val": 1.0
+    },
+    {
+     "f_val": 0.0,
+     "x_val": 3.0
+    },
+    {
+     "f_val": 3.0,
+     "x_val": 0.0
+    }
+   ],
+   "ronds_vides": [],
    "segments": [
     {
      "dernier": [
-      3.984,
-      2.936256
+      11.916,
+      97.327056
      ],
-     "empreinte": "816874989d17cef2",
-     "n": 400,
+     "empreinte": "7efc07b1d7f24cce",
+     "n": 1200,
      "premier": [
-      0.016,
-      2.936256
+      -8.916,
+      118.159056
      ]
     }
    ],
-   "xmax": 4.0,
-   "xmin": 0.0,
-   "ymax": 0.936056838,
-   "ymin": -1.5
+   "xmax": 5.0,
+   "xmin": -2.0,
+   "ymax": 5.25,
+   "ymin": -2.25
   },
   "limites": {
    "asymptotes": [
@@ -4425,24 +4534,39 @@
   "ed_tex": "\\mathbb{R}",
   "f_tex": "x^{3} - 3x",
   "graphique": {
+   "points": [
+    {
+     "f_val": 0.0,
+     "x_val": -1.73205081
+    },
+    {
+     "f_val": 0.0,
+     "x_val": 0.0
+    },
+    {
+     "f_val": 0.0,
+     "x_val": 1.73205081
+    }
+   ],
+   "ronds_vides": [],
    "segments": [
     {
      "dernier": [
-      2.976,
-      17.4291702
+      11.1065832,
+      1336.74604
      ],
-     "empreinte": "d466b40288ace53b",
-     "n": 400,
+     "empreinte": "76d8f21cbff1000d",
+     "n": 1200,
      "premier": [
-      -2.976,
-      -17.4291702
+      -11.1065832,
+      -1336.74604
      ]
     }
    ],
-   "xmax": 3.0,
-   "xmin": -3.0,
-   "ymax": 3.0,
-   "ymin": -3.0
+   "xmax": 3.73205081,
+   "xmin": -3.73205081,
+   "ymax": 4.5,
+   "ymin": -4.5
   },
   "limites": {
    "asymptotes": [
@@ -4652,24 +4776,35 @@
   "ed_tex": "\\mathbb{R}",
   "f_tex": "x^{4} - 2x^{2}",
   "graphique": {
+   "points": [
+    {
+     "f_val": 0.0,
+     "x_val": -1.41421356
+    },
+    {
+     "f_val": 0.0,
+     "x_val": 1.41421356
+    }
+   ],
+   "ronds_vides": [],
    "segments": [
     {
      "dernier": [
-      2.976,
-      60.7257864
+      10.1606996,
+      10451.9799
      ],
-     "empreinte": "213905ba82b65ae0",
-     "n": 400,
+     "empreinte": "d2ae8f96905ef22e",
+     "n": 1199,
      "premier": [
-      -2.976,
-      60.7257864
+      -10.1606996,
+      10451.9799
      ]
     }
    ],
-   "xmax": 3.0,
-   "xmin": -3.0,
-   "ymax": 5.22241456,
-   "ymin": -2.24448291
+   "xmax": 3.41421356,
+   "xmin": -3.41421356,
+   "ymax": 1.5,
+   "ymin": -1.5
   },
   "limites": {
    "asymptotes": [

@@ -113,6 +113,12 @@ class TestResoudreEC(unittest.TestCase):
         self.assertEqual(g["extrema"], ancien["derivee"]["extrema"])
         self.assertEqual(g["asymptotes"], ancien["limites"]["asymptotes"])
         self.assertTrue(g["recalculable"])
+        # D15 (P8) : points marqués (zéro x = 1 de ln(x)/x) et ronds vides, ceux d'etudier()
+        self.assertEqual((g["points"], g["ronds_vides"]), (ancien["graphique"]["points"], ancien["graphique"]["ronds_vides"]))
+        self.assertEqual(g["points"], [{"x_val": 1.0, "f_val": 0.0}])
+        s = rec.resoudre("e^((x^2+x-2)/(6x-12))")
+        self.assertEqual(blocs_de_type(s, "graphique")[0]["ronds_vides"], [[2.0, 0.0]])
+        self.assertIn("ronds vides", blocs_de_type(s, "texte")[-1]["html"])
 
     def test_limites_dans_le_tableau_de_variations(self):
         s = rec.resoudre("e^(1/x)")

@@ -1,7 +1,8 @@
 """Graphique de l'Étude complète : la trace des appels canvas de chaque scénario (3 fonctions × 2 vues × 8 états : tracé
 initial, boutons, molette, glisser, pincer, impression) est égale à l'empreinte enregistrée dans
 references/graphique-traces.json. EC-04 : si le calcul de la fenêtre échoue, la courbe reste celle de la dernière fenêtre
-réussie et un message discret l'indique. EC-06 : aucun nombre du graphique n'est écrit avec un point décimal. EC-05 : sur écran tactile, un doigt fait défiler la
+réussie et un message discret l'indique. EC-06 : aucun nombre du graphique n'est écrit avec un point décimal. D15 (chantier
+etude-complete, P8) : ronds vides aux points exclus à limite finie, zéros, (0 ; f(0)) et extremums en points pleins, à leur place. EC-05 : sur écran tactile, un doigt fait défiler la
 page (la courbe ne bouge pas) ; deux doigts déplacent et zooment la courbe sans faire défiler la page, et le point de la
 courbe sous le milieu des doigts reste sous le milieu des doigts, quel que soit le nombre de mouvements livrés par le navigateur. Aucune police n'entre dans la trace (le dessin n'appelle pas measureText) et la molette vise un point exact du canvas, donc
 elle est la même en local et en CI. Voir graphique.py pour le détail des niveaux de preuve.
@@ -143,6 +144,38 @@ class TestGraphique(unittest.TestCase):
         for champ in ("xmin", "xmax", "ymin", "ymax"):
             self.assertAlmostEqual(finaux[0][champ], finaux[1][champ], delta=1e-6 * abs(finaux[0]["xmax"] - finaux[0]["xmin"]),
                                    msg=f"la fenêtre finale ({champ}) dépend du nombre de mouvements")
+
+    def test_d15_ronds_vides_et_points_marques(self):
+        """D15 (P8) : chaque rond vide (point exclu à limite finie, Ex7 et d du corrigé ; trou de l'outil Limites) est dessiné à sa
+        place, et seulement là ; chaque zéro, le point (0 ; f(0)) et chaque extremum sont des points pleins à leur place (b). Lu dans
+        la trace des appels canvas : rond vide = deux cercles de rayon 4,5 (fond, puis contour), point plein = cercle de rayon 3,5."""
+        if CHOISIS and "etude-complete" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.nav.ouvrir(PAGE, JS_TRACE)
+        attendre_pret(page)
+        r6 = math.sqrt(6)
+        cas = (("e^((x^2+x-2)/(6x-12))", [(2, 0)], [(0, math.exp(1 / 6)), (4, math.exp(1.5))]),
+               ("e^(2/(x^2-4))", [(-2, 0), (2, 0)], [(0, math.exp(-0.5))]),
+               ("(x^2-6)e^(-2x)", [], [(-r6, 0), (r6, 0), (0, -6), (-2, -2 * math.exp(4)), (3, 3 * math.exp(-6))]),
+               ("(x^2-1)/(x-1)", [(1, 2)], [(-1, 0), (0, 1)]))
+        for entree, ronds, pleins in cas:
+            with self.subTest(entree=entree):
+                calculer(page, entree)
+                attendre_calme(page)
+                trace = page.evaluer("""(() => { const t = window.__trace; let i = t.length - 1;
+                    while (i > 0 && t[i][0] !== 'size.width') i--; return t.slice(i); })()""")
+                rendu = json.loads(page.evaluer("JSON.stringify(document.querySelector('#graphique').__rendu)"))
+                ecran = lambda x, y: (round(rendu["padL"] + (x - rendu["xmin"]) * rendu["echelle"], 2),
+                                      round(rendu["padT"] + rendu["availH"] - (y - rendu["ymin"]) * rendu["echelle"], 2))
+                cercles = [(round(e[1], 2), round(e[2], 2), e[3]) for e in trace if e[0] == "arc"]
+                vides = sorted({(x, y) for x, y, r in cercles if r == 4.5 and cercles.count((x, y, 4.5)) == 2})
+                pleins_dessines = sorted((x, y) for x, y, r in cercles if r == 3.5)
+                proches = lambda a, b: len(a) == len(b) and all(abs(p[0] - q[0]) < 0.05 and abs(p[1] - q[1]) < 0.05
+                                                              for p, q in zip(sorted(a), sorted(b)))
+                self.assertTrue(proches(vides, [ecran(x, y) for x, y in ronds]), (vides, ronds))
+                visibles = [(x, y) for x, y in pleins if rendu["ymin"] <= y <= rendu["ymax"] and rendu["xmin"] <= x <= rendu["xmax"]]
+                self.assertTrue(proches(pleins_dessines, [ecran(x, y) for x, y in visibles]), (pleins_dessines, visibles))
+        self.assertEqual([m for t, m in page.console if t == "error"], [])
 
     def test_molette_independante_de_la_position_fractionnaire_du_canvas(self):
         """La trace de la molette était fausse en CI (Linux) : la position du canvas dans la page n'y est pas entière et les

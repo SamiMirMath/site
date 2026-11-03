@@ -105,7 +105,7 @@ Schéma de `resoudre` (T12, `moteur/sortie.py` : constructeurs et `valider()`, f
         {"type": "formule", "tex": "…"},
         {"type": "tableau", "var": "x", "crit": ["…"], "rows": [{"label": "…", "cells": ["+", "0", "-"], "final": false}]},
         {"type": "liste", "items": ["…"], "style": "extrema"},
-        {"type": "graphique", "xmin": 0, "xmax": 1, "ymin": 0, "ymax": 1, "segments": [], "extrema": [], "asymptotes": [], "recalculable": true},
+        {"type": "graphique", "xmin": 0, "xmax": 1, "ymin": 0, "ymax": 1, "segments": [], "extrema": [], "asymptotes": [], "points": [], "ronds_vides": [], "recalculable": true},
         {"type": "resultat", "tex": "E_1 = \\left]1;+\\infty\\right["}
       ]
     }
@@ -172,6 +172,9 @@ Livré comme module (et non comme code de page) pour les outils de la phase F (N
 - **`graphique.js`** : `dessinerGraphique(canvas, g, extrema, asymptotes, vista, forcerClair)` (dessin, échelle égale en x et en y),
   `monterGraphique(éléments, {g, extrema, asymptotes, fenetre})` (interaction), `greffonGraphique` (bloc `graphique` de
   `moteur/sortie.py`). La page l'active par `monterOutil({greffons: [greffonGraphique]})` et ne contient plus aucun code de graphique.
+  Clés facultatives du bloc (Étude complète, D15) : `points` ([{x_val, f_val}], zéros et (0 ; f(0)), dessinés comme les extrema :
+  point plein et coordonnées) et `ronds_vides` ([[x, y]], points exclus à limite finie, dessinés comme les trous des asymptotes :
+  un seul dessin de rond vide).
 - **Recalcul de la courbe** : si le bloc est `recalculable`, un zoom ou un déplacement appelle
   `appelPy("fenetre", JSON {f: saisie, xmin, xmax, n})` → `{ok, segments}` (`resoudre_ec.fenetre_json`). Si le calcul échoue (`ok:false`
   ou erreur), la courbe reste celle de la dernière fenêtre réussie et un message discret l'indique (EC-04).

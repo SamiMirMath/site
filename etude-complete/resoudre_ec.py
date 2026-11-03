@@ -6,7 +6,8 @@ Six parties titrées, dans l'ordre du corrigé (decisions.md D1), chacune ouvert
 2. Parité (`parties.cartes_parite`, D4) ; 3. Zéros, signe, ordonnée à l'origine (`parties.cartes_zeros_signe`, D5 : zéros en chaîne,
 tableau de signes de f, f(0)) ; 4. Limites et asymptotes (cartes de `resoudre_la` : tableaux de signes, limites, bilan) ;
 5. Dérivée, tableau de variation, extremums (cartes de `resoudre_dv`, avec les limites dans le tableau et les valeurs des extremums,
-D10 ; extremums rédigés par `parties.blocs_extremums`, D11 : valeur en chaîne, point exact puis ≈, global ou non) ; 6. Graphe.
+D10 ; extremums rédigés par `parties.blocs_extremums`, D11 : valeur en chaîne, point exact puis ≈, global ou non) ; 6. Graphe (D15 :
+courbe, asymptotes, extremums, zéros et (0 ; f(0)) marqués, ronds vides aux points exclus à limite finie, cadrage de decisions.md §3).
 La recalculation du graphique au zoom reste l'appel séparé `fenetre_json`.
 
 `etudier_json` (ancienne page, avant T19) est réexportée : une page restée en cache qui lit le nouveau
@@ -17,33 +18,34 @@ import sortie as so
 import resoudre_dv as rdv
 import resoudre_la as rla
 import parties
-from etude_complete import analyse, etudier, etudier_json, apercu_json, fenetre_json
+from etude_complete import analyse, etude_et_partie3, etudier_json, apercu_json, fenetre_json
 
 __all__ = ["resoudre", "resoudre_json", "apercu_json", "fenetre_json", "etudier_json"]
 
 PARTIES = ("1. Domaine de définition", "2. Parité", "3. Zéros, signe, ordonnée à l'origine", "4. Limites et asymptotes",
            "5. Dérivée, tableau de variation, extremums", "6. Graphe")
 
-AIDE_GRAPHIQUE = ("Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). "
-                  "Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.")
+AIDE_GRAPHIQUE = ("Courbe (trait plein), asymptotes (pointillé), extremums, zéros et point (0 ; f(0)) (points pleins), "
+                  "points exclus du graphe (ronds vides). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.")
 
 
 def carte_graphique(r):
     g = r["graphique"]
     bloc = {"type": "graphique", "xmin": g["xmin"], "xmax": g["xmax"], "ymin": g["ymin"], "ymax": g["ymax"],
             "segments": g["segments"], "extrema": r["derivee"].get("extrema") or [],
-            "asymptotes": r["limites"].get("asymptotes") or [], "recalculable": True}
+            "asymptotes": r["limites"].get("asymptotes") or [], "points": g["points"], "ronds_vides": g["ronds_vides"],
+            "recalculable": True}
     return so.carte("Graphique", [bloc, so.texte(AIDE_GRAPHIQUE, style="indice")])
 
 
 def resoudre(entree):
-    r = etudier(entree)
+    r, p3 = etude_et_partie3(entree)                                       # partie 3 calculée une fois, avec le graphique (D15)
     if not r["ok"]:
         return so.sortie_erreur(r["erreur"], r.get("detail"))
     dv, lim = r["derivee"], r["limites"]
     domaine = parties.cartes_domaine(rdv.enonce(r), analyse(entree))    # analyse en cache : celle d'etudier (D19)
     parite = parties.cartes_parite(analyse(entree))
-    zeros = parties.cartes_zeros_signe(analyse(entree))
+    zeros = p3["cartes"]
     limites = [rla.carte_tableaux(lim["tableaux_signe"])] if lim.get("tableaux_signe") else []
     for et in lim["etudes"]:
         limites += rla.cartes_etude(et)

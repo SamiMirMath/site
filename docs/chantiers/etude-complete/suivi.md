@@ -22,8 +22,8 @@ passe fait échouer la suite). Temps natif : `docs/chantiers/etude-complete/mesu
 | P5 | Partie 3 : zéros, signe, f(0) (D5) | EC | **fait** | 8fc2fa2 |
 | P6 | Partie 4 : D12, D13, D16 | Limites | reportée (hors de la nuit du 02.11) | |
 | P7a | Dérivée de l'exposant détaillée, tableau u/v (D7, D8, D7b si simple) | Dérivée | **fait** | 1799fff |
-| P7b | Valeurs dans le tableau de variations (D10), extremums (D11) | EC + Dérivée | **fait** | |
-| P8 | Graphe (D15, §3) | EC | à faire | |
+| P7b | Valeurs dans le tableau de variations (D10), extremums (D11) | EC + Dérivée | **fait** | cfe88de |
+| P8 | Graphe (D15, §3) | EC | **fait** | |
 | P9 | Exemples (D18), Bilan (D20), instantanés, largeurs 320–390 px, mesure Pyodide | EC | reportée (hors de la nuit du 02.11) | |
 | P10 | *(facultatif)* Pente au point exclu (D14) | EC | reportée (hors de la nuit du 02.11) | |
 
@@ -73,6 +73,12 @@ passe fait échouer la suite). Temps natif : `docs/chantiers/etude-complete/mesu
   Comparaisons par SymPy et mpmath, « global » confirmé par une sonde de f sur l'ED, « pas global » par une valeur de f au-delà de
   f(x₀). 10 xfail P7b retirés (2 tests) ; 18 entrées de la Dérivée et 13 de l'EC modifiées (liste sous « À relire ») ; questions 40 à
   48 ; temps d'`etudier()` inchangé, D11 coûte 16 à 30 ms dans `resoudre`.
+- **P8 faite** (EC seule, D15, §3) : partie 6 « Graphe » : zéros et (0 ; f(0)) marqués (données de la partie 3, calculée une fois
+  par étude, `etude_et_partie3`) ; rond vide à chaque point exclu à limite finie d'un côté (Ex7 (2 ; 0), d (±2 ; 0)) ou à deux
+  limites finies différentes (x/√(x²)), confirmé par SymPy (limite latérale par les règles) et par une sonde mpmath, sinon rien ;
+  cadrage : fenêtre des points à montrer, branches infinies coupées en y, côté de chaque AH élargi jusqu'à l'approche à 5 % (Ex7,
+  c, d) ; courbe tracée une largeur au-delà ; `commun/graphique.js` : un dessin de rond vide, un dessin de point plein. 3 xfail P8
+  retirés ; instantanés et traces de l'EC régénérés (liste sous « À relire ») ; questions 49 à 55.
 
 ## Plans
 
@@ -267,6 +273,36 @@ D10 dans l'outil Dérivée (donc aussi l'EC) ; D11 dans l'EC seule (`parties.py`
    outils, 320 à 1100 px). Instantanés Dérivée et EC régénérés (moteur, `resoudre`, références de pages), listés sous « À relire » ;
    spécifications ; suite complète ; temps natif ; commit « EC P7b : … ».
 
+### P8 (03.11.2026)
+
+Partie 6 de l'EC (D15, decisions.md §3), EC seule. Lecture de « AH visible » retenue (question 3) : le x cherché est du côté de
+l'asymptote, au-delà de tous les points à montrer et des valeurs interdites.
+1. **Données de la partie 3 réutilisées** : `parties.partie3(analyse)` rend les cartes de la partie 3 (inchangées) **et** les zéros
+   confirmés et f(0) confirmé (les mêmes garde-fous : rien si doute) ; `etude_complete.etude_et_partie3` la calcule une fois par
+   étude : `etudier()` s'en sert pour le graphique, `resoudre` pour les cartes (le coût de la partie 3 passe de `resoudre` à
+   `etudier()`). Pas de cache entre deux appels (un test qui fausse un garde-fou ne doit pas laisser un résultat faussé en cache).
+   `cartes_zeros_signe` reste (mêmes cartes).
+2. **Ronds vides** (`parties.ronds_vides`, nouvelle section « Partie 6 ») : pour chaque borne finie de l'ED, chaque côté dont la
+   limite (valeurs T06c de la partie Limites, une seule source) est finie, hors des points déjà dessinés comme « trou » par l'outil
+   Limites : (a ; L) seulement si L se lit sur la liste fermée de `lire_limite`, si SymPy donne exactement L (limite latérale ; pour
+   f = e^{u}, e^{lim u}, beaucoup plus rapide que la limite de f) **et** si la sonde mpmath (f(a ± 10⁻ᵏ), 30 chiffres) s'approche de
+   L du bon côté (signe d'approche compris) ; sinon pas de rond (principe 0.2). Ex7 : (2 ; 0) ; d : (−2 ; 0), (2 ; 0) ;
+   x/√(x²) : (0 ; −1), (0 ; 1).
+3. **Points marqués** : zéros et (0 ; f(0)) dans le bloc du graphique (`points`), sans doublon avec un extremum (déjà marqué).
+4. **Cadrage** (`_cadrage_et_courbe`) : x d'intérêt = bornes finies de l'ED, extremums, zéros, 0 (si f(0) existe), ronds ; y d'intérêt
+   = leurs ordonnées et les AH ; les échantillons (bande centrale, comme avant) sont ramenés dans [min − e ; max + e] des y d'intérêt
+   (e = max(étendue/4 ; 1)) : une branche qui file vers ±∞ n'écrase plus l'échelle (c : y de −51 à 21 avant). Puis, pour chaque AH
+   y = L en ±∞, tant qu'aucun échantillon au-delà de tous les points à montrer n'est à moins de 5 % de la hauteur de L, le côté de
+   l'AH est élargi de 25 % de la largeur (6 fois au plus, fenêtre au plus 3,8 fois plus large ; sinon le cadrage sans élargissement). `fenetre()` ne change pas.
+5. **Dessin** (`commun/graphique.js`) : un seul dessin de rond vide pour les trous de l'outil Limites et les `ronds_vides`, un seul
+   dessin de point plein (avec ses coordonnées) pour les extremums et les `points` ; bloc `graphique` : clés facultatives `points`,
+   `ronds_vides` (`moteur/sortie.py`) ; texte d'aide de la carte mis à jour.
+6. Tests : xfail P8 retirés ; corpus (ronds vides = oracle, zéros et f(0) marqués, fenêtre §3, AH visible) ; `test_parties_ec.py`
+   (ronds vides et cadrage sur d'autres fonctions, oracle mpmath ; garde-fous forcés : SymPy ou sonde en désaccord, SymPy absent) ;
+   `test_resoudre_ec.py` (bloc du graphique) ; page : `test_graphique.py` (ronds vides et points dessinés à leur place),
+   `graphique-traces.json` régénéré ; largeurs. Instantanés de l'EC régénérés (liste sous « À relire ») ; spécification ; suite
+   complète ; temps natif ; commit « EC P8 : … ».
+
 ## Temps natif de etudier() (s, médiane de 3 processus neufs)
 
 | Partie | Ex7 | a | b | c | d |
@@ -279,6 +315,7 @@ D10 dans l'outil Dérivée (donc aussi l'EC) ; D11 dans l'EC seule (`parties.py`
 | P5 | 0,59 | 0,02 | 0,43 | 0,19 | 0,29 |
 | P7a | 0,64 | 0,02 | 0,42 | 0,20 | 0,31 |
 | P7b | 0,64 | 0,02 | 0,43 | 0,20 | 0,30 |
+| P8 | 0,58 | 0,03 | 0,36 | 0,26 | 0,21 |
 
 P3 ne touche pas `etudier()` ; la partie 1 (`parties.cartes_domaine`, appelée par `resoudre`) coûte en plus 0,5 ms (Ex7), 0,2 ms (d),
 moins de 0,01 ms (a, b, c).
@@ -295,6 +332,12 @@ P7b : `etudier()` ne fait aucun calcul de plus (D10 place une valeur déjà calc
 premier lancement a donné Ex7 0,77 s et b 0,48 s, le second (retenu, ci-dessus) 0,64 s et 0,43 s : bruit de la machine. Les extremums
 D11 (`parties.blocs_extremums`, appelé par `resoudre`, SymPy chargé, médiane de 3) coûtent en plus 18 ms (Ex7), 16 ms (a), 30 ms (b),
 23 ms (c), 22 ms (d) : surtout la sonde « global » (400 points par intervalle à 30 chiffres) et les comparaisons SymPy.
+P8 : `etudier()` calcule maintenant la partie 3 (zéros et f(0) du graphique ; ses cartes sont reprises par `resoudre`, qui ne la
+recalcule plus : le coût passe de `resoudre` à `etudier()`, 5 à 61 ms selon P5), les ronds vides (3 à 8 ms : limite par les règles,
+e^{lim u}, au lieu de la limite de e^{u}, 200 à 290 ms) et le cadrage (élargissement pour les AH, courbe tracée une largeur au-delà de
+chaque côté). a : 0,02 → 0,03 s (+ 5 à 10 ms, + 50 % à l'arrondi près : partie 3 et cadrage) ; c : 0,20 → 0,26 s (+ 30 %, surtout
+la partie 3, 44 ms) ; Ex7, b, d : en dessous de P7b (bruit de la machine, mesures du même jour 0,56 à 0,58 s pour Ex7). Le temps de
+`resoudre` (page) ne monte que des ronds vides et du cadrage. Question 55.
 
 ## Suite complète
 
@@ -314,6 +357,8 @@ D11 (`parties.blocs_extremums`, appelé par `resoudre`, SymPy chargé, médiane 
 | P7a | 1149 passés, 34 xfail (643 s) | 117 passés (914 s, dont le nouveau test de largeurs du tableau u/v) ; code de retour 0 (1ᵉʳ lancement) | 03.11.2026 |
 | P7a (contrôle du chef d'orchestre) | 1149 passés, 34 xfail (657 s) | 116 passés, 1 échec : `test_clavier.py::test_a_deux_formules…` (le test instable, même symptôme : « effacer » laisse `(x^2-1)/(x-3)`) ; ce test seul sur P7a : 6 réussites sur 6 → P7a acceptée | 03.11.2026 |
 | P7b | 1181 passés, 24 xfail (650 s) | 118 passés (939 s, dont le nouveau test de largeurs du tableau de variations) ; code de retour 0 (2ᵉ lancement : le 1ᵉʳ, arrêté avant la fin, pour corriger « Global … () » d'un ED fermé, √(4 − x²), vu en relisant des cas hors corpus) | 03.11.2026 |
+| P7b (contrôle du chef d'orchestre) | 1181 passés, 24 xfail (667 s) | 118 passés (936 s) ; code de retour 0 | 03.11.2026 |
+| P8 | 1220 passés, 21 xfail (689 s) | 119 passés (954 s, dont le nouveau test `test_graphique.py::test_d15_ronds_vides_et_points_marques`) ; code de retour 0 (1ᵉʳ lancement) | 03.11.2026 |
 
 ## Écarts acceptés
 
@@ -392,6 +437,18 @@ D11 (`parties.blocs_extremums`, appelé par `resoudre`, SymPy chargé, médiane 
 - P7b (largeurs) : avec les valeurs, le tableau de variations défile horizontalement (repli du composant commun `.tsigne` : libellés
   fixes, aucune faute du balayage) à 320 px pour Ex7 (comme avant), de 320 à 390 px pour d (avant : 320 à 375 px) et pour
   (x² − 1)/(x − 3) dans l'outil Dérivée (comme avant). Nouveau test `test_largeurs.py::test_tableau_de_variations_avec_valeurs`.
+
+- P8 : `etude_complete.etudier()` appelle maintenant la partie 3 (`parties.partie3`) et `parties.ronds_vides` (données du graphique,
+  D15) : `etude_complete` importe `parties` (le module restait un assemblage sans calcul propre ; les garde-fous sont dans `parties.py`).
+  La partie 3 est calculée une fois par étude (`etude_et_partie3`, `resoudre` en reprend les cartes) ; pas de cache entre deux appels
+  (un test qui fausse un garde-fou laisserait sinon un résultat faussé en cache). `cartes_zeros_signe` garde sa sortie.
+- P8 : les « trous » de l'outil Limites (limites finies égales, ou bord de l'ED) gardent leur dessin (d'après la partie Limites, qui
+  les écrit déjà « trou dans le graphique ») ; seuls les nouveaux ronds vides (`ronds_vides`) passent par la double confirmation.
+  `tests/python/test_corpus_etude_complete.py::ronds_vides_de_l_outil` (P0) les additionne déjà : inchangé.
+- P8 : `tests/python/test_resoudre_ec.py::test_graphique` vérifie en plus `points` et `ronds_vides` du bloc ; `docs/choix-techniques.md`
+  (exemple du bloc `graphique`, clés facultatives) et la spécification (partie 6, EC-16) sont mis à jour (sinon ils seraient faux).
+- P8 : la courbe est échantillonnée une largeur de fenêtre au-delà de chaque côté (l'écran, à échelle égale, montre souvent plus large
+  que la fenêtre) : environ 3 fois plus de points dans le bloc du graphique (fenêtre et cadrage inchangés par ce tracé).
 
 ## Questions pour l'enseignant
 
@@ -541,6 +598,28 @@ D11 (`parties.blocs_extremums`, appelé par `resoudre`, SymPy chargé, médiane 
 47. **P7b, notation scientifique dans un point** : e^(7/(x² − 1)) donne « (0 ; e^{−7}) ≈ (0 ; 9,119 × 10⁻⁴) » (R13, question 1).
 48. **P7b, « pas global » par un autre extremum** : « Pas global : le maximum local en x = … est plus grand. » (aucune entrée de la page
     ni du corpus n'est concernée : une limite infinie l'emporte toujours). Les mots vous conviennent-ils ?
+
+49. **P8, « AH visible » (question 3)** : appliquée telle que lue par le test du corpus (x au-delà de tous les points à montrer et des
+    valeurs interdites, |f(x) − L| < 5 % de la hauteur de la fenêtre). Le côté de l'AH est élargi de 25 % de la largeur à la fois,
+    6 fois au plus (fenêtre au plus 3,8 fois plus large) ; au-delà, la fenêtre des points reste (ln(x)/x : l'approche de y = 0
+    demanderait x ≈ 60 et écraserait le maximum). Ex7 : x de −9,6 à 6 (.tex : −8 à 10) ; d : −6 à 6 (comme le .tex) ; c : la fenêtre
+    en y passe de [−51 ; 21] à [−5,1 ; 11,8] et la courbe va jusqu'à x ≈ −7,8 : l'approche de y = 0 se voit. À confirmer.
+50. **P8, échelle égale en x et en y** (graphique de T19) : pour une AH approchée lentement (en 1/x), l'élargissement rend la fenêtre
+    large et plate : e^(1/x) x de −11 à 10, x/(x² + 1) de −10 à 10, (e^x − 1)/x de −7,8 à 2. Le .tex n'est pas à échelle égale.
+    Gardez-vous l'échelle égale (le zoom compense) ?
+51. **P8, ordonnées : branches coupées** : la hauteur de la fenêtre suit les points à montrer (extremums, zéros, f(0), ronds, AH) ; une
+    branche qui file vers ±∞ sort du cadre (comme « restrict y to domain » du .tex). e^(2x) : y de −0,5 à 2,5 (avant −2,75 à 13,73) ;
+    x⁴ − 2x² : −1,5 à 1,5 (avant −2,24 à 5,22) ; √(x² − 4) : −0,5 à 1,5. À relire à l'écran.
+52. **P8, deux limites finies différentes** (x/√(x²) en 0 : −1 et 1) : deux ronds vides, (0 ; −1) et (0 ; 1) (D15 « d'un côté ou des
+    deux »), alors que la spécification disait « rien n'est dessiné ». À confirmer.
+53. **P8, limite finie hors de la liste fermée** (e, √2, ln 2… : e^(1/(x − 1)) + e en 1⁻) : pas de rond vide (la valeur ne se compare
+    pas exactement : option qui affiche le moins). Aucune entrée de la page ni du corpus n'est concernée.
+54. **P8, coordonnées écrites à côté des zéros et de (0 ; f(0))** : comme pour les extremums (« (−2,45 ; 0) », « (0 ; −6) ») ; la
+    figure du .tex ne les écrit pas. Dans la vue d'ensemble de b (y de −143 à 61), les étiquettes se chevauchent près de l'origine
+    (le zoom les sépare). Les garder ?
+55. **P8, temps** : a passe de 0,02 à 0,03 s (+ 50 % à l'arrondi près, quelques millisecondes : la partie 3, déjà payée par
+    `resoudre`, est maintenant comptée dans `etudier()`) ; aucune autre hausse de plus de 50 % (c + 30 %). Signalé selon la règle ;
+    sans effet pour l'élève (le temps de la page ne change que de quelques millisecondes).
 
 ## À relire par l'enseignant
 
@@ -719,3 +798,38 @@ D11 (`parties.blocs_extremums`, appelé par `resoudre`, SymPy chargé, médiane 
   et −∞ en +∞). » ; tableaux b : +∞ ↘ −2e⁴ ↗ 3e^{−6} ↘ 0⁺, c : 0⁺ ↗ 9 ↘ −∞ (comme le .tex).
   Largeurs : `test_largeurs.py::test_tableau_de_variations_avec_valeurs` (Dérivée `(x^2-1)/(x-3)`, EC Ex7 et d, 320 à 1100 px) :
   aucune faute, chaque tableau dans sa carte, chaque valeur en formule dans sa case ; défilement du tableau : voir Écarts.
+
+- **P8** (EC seule ; aucun autre outil ne change : instantanés des outils ED, Dérivée, Limites, Factorisation, Exp-log identiques).
+  Instantanés modifiés : `tests/python/instantanes/etude-complete.json` (sortie d'`etudier()` : seul le bloc `graphique` change, 17
+  entrées), `tests/python/instantanes/resoudre/etude-complete.json` (17 entrées : seule la carte « Graphique » change, bloc et texte
+  d'aide), `tests/pages/references/etude-complete.json` (17 entrées : texte d'aide seul), `tests/pages/references/graphique-traces.json`
+  (48 empreintes : les 3 fonctions du banc, x²e^{−x}, e^(1/x), (x² − 1)/(x − 1), changent de cadrage ou de points). Vérifié par
+  programme : aucune autre carte ne change.
+
+  Texte d'aide de la carte : avant « Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). … » ;
+  après « Courbe (trait plein), asymptotes (pointillé), extremums, zéros et point (0 ; f(0)) (points pleins), points exclus du graphe
+  (ronds vides). … ».
+
+  | Entrée | Fenêtre avant (x ; y) | Fenêtre après (x ; y) | Points marqués ajoutés | Ronds vides ajoutés |
+  |---|---|---|---|---|
+  | `e^((x^2+x-2)/(6x-12))` (Ex7) | [−2 ; 6] ; [−1,49 ; 7,47] | [−9,62 ; 6] ; [−1,40 ; 7,00] (AH à gauche) | — ((0 ; f(0)) = maximum) | (2 ; 0) |
+  | `e^(2/(x^2-4))` (d) | [−4 ; 4] ; [−0,18 ; 3,68] | [−6 ; 6] ; [−0,50 ; 2,15] | — | (−2 ; 0), (2 ; 0) |
+  | `e^(1/x)` | [−2 ; 2] ; [−2,81 ; 14,58] | [−10,97 ; 10,12] ; [−0,50 ; 2,13] (AH y = 1) | — | (0 ; 0) |
+  | `x/sqrt(x^2)` | [−2 ; 2] ; [−1,5 ; 1,5] | inchangée | — | (0 ; −1), (0 ; 1) |
+  | `(e^x-1)/x` | [−2 ; 2] ; [−0,62 ; 3,08] | [−7,77 ; 2] ; [−0,50 ; 2,50] (AH à gauche) | — | — (trou (0 ; 1) déjà dessiné) |
+  | `(x^2-1)/(x-3)` | [−2,66 ; 8,66] ; [−6,11 ; 18,11] | [−4,41 ; 9,24] ; [−5,00 ; 17,35] | (−1 ; 0), (1 ; 0), (0 ; 0,33) | — |
+  | `x^2-4x+3` | [0 ; 4] ; [−1,50 ; 0,94] | [−2 ; 5] ; [−2,25 ; 5,25] ((0 ; 3) était hors de la fenêtre) | (1 ; 0), (3 ; 0), (0 ; 3) | — |
+  | `x^3-3x` | [−3 ; 3] ; [−3 ; 3] | [−3,73 ; 3,73] ; [−4,5 ; 4,5] | (−1,73 ; 0), (0 ; 0), (1,73 ; 0) | — |
+  | `x^4-2x^2` | [−3 ; 3] ; [−2,24 ; 5,22] | [−3,41 ; 3,41] ; [−1,5 ; 1,5] | (−1,41 ; 0), (1,41 ; 0) | — |
+  | `x/(x^2+1)` | [−3 ; 3] ; [−1 ; 1] | [−10,12 ; 10,12] ; [−1 ; 1] (AH y = 0) | (0 ; 0) | — |
+  | `x^2*e^(-x)` | [−2 ; 4] ; [−0,50 ; 1,91] | [−2 ; 7,38] ; [−0,50 ; 1,04] (AH à droite) | — ((0 ; 0) = minimum) | — |
+  | `e^(2x)` | [−2 ; 2] ; [−2,75 ; 13,73] | [−2 ; 2] ; [−0,5 ; 2,5] | (0 ; 1) | — |
+  | `x*ln(x)`, `3(x*ln(x))` | [−0,6 ; 2,37] ; [−0,87 ; 1,71] (3x ln x : [−2,29 ; 4,81]) | [−0,6 ; 3] ; [−0,87 ; 1,50] ([−1,63 ; 1,53]) | (1 ; 0) | — (bord 0 : trou déjà dessiné) |
+  | `ln(x)/x` | [−0,6 ; 4,72] ; [−0,56 ; 0,87] | inchangée (approche de l'AH trop lente, question 49) | (1 ; 0) | — |
+  | `sqrt(x^2-4)` | [−4 ; 4] ; [−0,75 ; 3,73] | [−4 ; 4] ; [−0,5 ; 1,5] | — | — |
+  | `x^(2/3)` | [−2 ; 2] ; [−0,5 ; 1,63] | [−2 ; 2] ; [−0,5 ; 1,5] | — | — |
+
+  Toutes les entrées : la courbe est tracée une largeur de fenêtre au-delà de chaque côté (segments environ 3 fois plus longs).
+  Hors instantanés (corpus) : b fenêtre [−5,17 ; 5,72] ; [−143,3 ; 61,4] (avant [−4,5 ; 5,5] ; [−144,9 ; 69,5]), points (±√6 ; 0) et
+  (0 ; −6) ; c [−2 ; 3,79] ; [−5,06 ; 11,81] (avant [−0,9 ; 3,1] ; [−51,3 ; 21,1]), points (ln 6 ; 0) et (0 ; 5) ; a inchangée.
+  Captures relues (360 et 700 px) : Ex7, b, c, d, x/√(x²), e^(1/x), (x² − 1)/(x − 1).

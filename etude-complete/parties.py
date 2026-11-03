@@ -34,6 +34,10 @@ Partie 5. Extremums (D11), à la place de la liste de l'outil Dérivée (la lign
   dépasse strictement les autres extremums du même genre et toutes les limites aux bornes de l'ED, « Pas global : f(x) → +∞ quand
   x → 2⁺. » si l'une d'elles dépasse f(x₀), rien sinon (« ? », égalité, doute). Comparaisons par SymPy et par mpmath, « global »
   confirmé par une sonde de f sur l'ED, « pas global » par une valeur de f au-delà de f(x₀).
+
+Partie 6. Graphe (D15) : `partie3` donne aussi au graphique les zéros et f(0) que ses cartes écrivent (rien en cas de doute) ;
+`ronds_vides` : un rond vide en (a ; L) pour chaque point exclu a dont la limite L d'un côté est finie (en plus des « trous » de
+l'outil Limites), confirmé par SymPy (limite latérale exacte) et par une sonde mpmath (approche de L du bon côté) ; sinon pas de rond.
 """
 import re
 from decimal import Decimal, ROUND_HALF_UP, localcontext
@@ -45,7 +49,7 @@ from noyau import (X, E, Nb, Neg, Fn, Op, Num, tex, ptex, qtex, decomposer, deg,
 import sortie as so
 import resoudre_ed
 
-__all__ = ["cartes_domaine", "cartes_parite", "cartes_zeros_signe", "blocs_extremums", "mise_en_forme", "resolution_denominateur"]
+__all__ = ["cartes_domaine", "cartes_parite", "cartes_zeros_signe", "partie3", "blocs_extremums", "ronds_vides", "mise_en_forme", "resolution_denominateur"]
 
 AUCUNE_CONDITION = "Ni logarithme, ni dénominateur, ni racine : aucune condition."     # phrase de l'outil ED (en-tête)
 POINTS_DE_CONTROLE = (-2.7, -0.6, 0.35, 1.45, 3.2)                                    # sondes numériques (garde-fou)
@@ -1072,7 +1076,7 @@ def _positives(expos, f, ivs, seule):
 
 
 def _zeros_et_signe(f, ivs, ED, sp, mpmath):
-    """(blocs de la carte des zéros, tableau ou None, signe constant ou None). NonTraite / Doute remontent."""
+    """(blocs de la carte des zéros, tableau ou None, zéros de f dans l'ED : points confirmés). NonTraite / Doute remontent."""
     import derivee_variations as dv
     c, facs = aplatir(f)
     expos = []
@@ -1145,20 +1149,21 @@ def _zeros_et_signe(f, ivs, ED, sp, mpmath):
     if constant:
         s = signes.pop()
         blocs.append(_ligne(rf"Donc f n'a pas de zéro et \(f(x) {'>' if s == '+' else '<'} 0\) sur ED."))
-        return blocs, None
+        return blocs, None, zeros_ed
     if not zeros_ed and blocs and blocs[-1]["html"] not in (NUMERATEUR_CONSTANT, PAS_DE_ZERO):
         blocs.append(_ligne(PAS_DE_ZERO))
     tableau = {"type": "tableau", "var": "x", "crit": [p.tex for p in crit], "rows": lignes}
-    return blocs, tableau
+    return blocs, tableau, zeros_ed
 
 
 def _ordonnee(f, ivs, sp, mpmath):
-    """Blocs de la carte « Ordonnée à l'origine » : f(0) exact puis ≈ et le point (0 ; f(0)), ou « 0 ∉ ED » ; Doute sinon.
-    Quand la partie 1 a nommé g (f = e^{g(x)}), g(0) est calculé d'abord (« g(0) = −2/(−12) = 1/6, donc f(0) = e^{1/6} »)."""
+    """(blocs de la carte « Ordonnée à l'origine », valeur SymPy de f(0) ou None si 0 ∉ ED) : f(0) exact puis ≈ et le point
+    (0 ; f(0)), ou « 0 ∉ ED » ; Doute sinon. Quand la partie 1 a nommé g (f = e^{g(x)}), g(0) est calculé d'abord (« g(0) =
+    −2/(−12) = 1/6, donc f(0) = e^{1/6} »)."""
     if not dans_ed(ivs, F(0), sp):
         if valeur_mp(f, mpmath.mp.mpf(0)) is not None:
             raise Doute()
-        return [_ligne(NE_COUPE_PAS)]
+        return [_ligne(NE_COUPE_PAS)], None
     v = valeur_verifiee(f, en_sympy_reel(f), F(0), sp, mpmath)
     if v is None:
         raise Doute()
@@ -1172,15 +1177,17 @@ def _ordonnee(f, ivs, sp, mpmath):
                 <= mpmath.mp.mpf(EGAL):
             calcul = qtex(g0) if b0 == 1 else rf"\frac{{{qtex(h0)}}}{{{qtex(b0)}}} = {qtex(g0)}"
             egalite = _avec_approx(rf"\(g(0) = {calcul}\), donc \(f(0) = {ecrit}\)", V, sp)
-    return [_ligne(egalite + "."), _ligne(rf"Le graphe coupe l'axe des y au point \((0\,;\,{ecrit})\).")]
+    return [_ligne(egalite + "."), _ligne(rf"Le graphe coupe l'axe des y au point \((0\,;\,{ecrit})\).")], V
 
 
-def cartes_zeros_signe(analyse):
-    """Les cartes de la partie 3 (D5) ; `analyse` : (résultat de l'outil ED, arbre, ED), celle de `etudier` (en cache).
-    Carte des zéros (exponentielle strictement positive, résolution en chaîne avec la propriété nommée, valeurs approchées), tableau
-    de signes de f (machinerie R7 de l'outil Dérivée) ou, sans zéro et de signe constant, la phrase « f n'a pas de zéro et f(x) > 0
-    sur ED » ; carte de l'ordonnée à l'origine. Chaque affirmation confirmée par SymPy et par la sonde (principe 0.2) ; sinon un
-    message clair, sans conclusion."""
+def partie3(analyse):
+    """La partie 3 (D5) : {"cartes", "zeros", "f0"} ; `analyse` : (résultat de l'outil ED, arbre, ED), celle de `etudier` (en cache).
+    Cartes : carte des zéros (exponentielle strictement positive, résolution en chaîne avec la propriété nommée, valeurs approchées),
+    tableau de signes de f (machinerie R7 de l'outil Dérivée) ou, sans zéro et de signe constant, la phrase « f n'a pas de zéro et
+    f(x) > 0 sur ED » ; carte de l'ordonnée à l'origine. Chaque affirmation confirmée par SymPy et par la sonde (principe 0.2) ;
+    sinon un message clair, sans conclusion. Données du graphique (D15, partie 6), celles des cartes et rien d'autre : "zeros", les
+    zéros de f dans l'ED (flottants) quand la carte des zéros conclut, sinon [] ; "f0", f(0) (flottant) quand la carte de l'ordonnée
+    à l'origine l'écrit, sinon None."""
     _, f, ED = analyse
     sp = charger_sympy()
     try:
@@ -1188,24 +1195,33 @@ def cartes_zeros_signe(analyse):
     except ImportError:
         mpmath = None
     if sp is None or mpmath is None:
-        return [so.carte("Zéros et signe de f", [_ligne(DOUTE_SIGNE)]), so.carte("Ordonnée à l'origine", [_ligne(DOUTE_F0)])]
+        return {"cartes": [so.carte("Zéros et signe de f", [_ligne(DOUTE_SIGNE)]), so.carte("Ordonnée à l'origine", [_ligne(DOUTE_F0)])],
+                "zeros": [], "f0": None}
     ivs = fusion(ED)
+    zeros, f0 = [], None
     with mpmath.workdps(CHIFFRES):
         try:
-            blocs, tableau = _zeros_et_signe(f, ivs, ED, sp, mpmath)
+            blocs, tableau, zs = _zeros_et_signe(f, ivs, ED, sp, mpmath)
             if tableau is None:
                 cartes = [so.carte("Zéros et signe de f", blocs)]
             else:
                 cartes = [so.carte("Zéros de f", blocs), so.carte("Signe de f", [tableau], badge="tableau")]
+            zeros = [float(sp.N(_sympy_num(z, sp), 20)) for z in zs]
         except NonTraite as e:
             cartes = [so.carte("Zéros et signe de f", _positives_seules(f, ivs) + [_ligne(e.message)])]
         except Exception:                   # Doute, ou SymPy / mpmath en échec : rien plutôt qu'une affirmation non confirmée
             cartes = [so.carte("Zéros et signe de f", _positives_seules(f, ivs) + [_ligne(DOUTE_SIGNE)])]
         try:
-            ordonnee = _ordonnee(f, ivs, sp, mpmath)
+            ordonnee, V = _ordonnee(f, ivs, sp, mpmath)
+            f0 = None if V is None else float(sp.N(V, 20))
         except Exception:
             ordonnee = [_ligne(DOUTE_F0)]
-    return cartes + [so.carte("Ordonnée à l'origine", ordonnee)]
+    return {"cartes": cartes + [so.carte("Ordonnée à l'origine", ordonnee)], "zeros": zeros, "f0": f0}
+
+
+def cartes_zeros_signe(analyse):
+    """Les cartes de la partie 3 (D5) : voir `partie3`."""
+    return partie3(analyse)["cartes"]
 
 
 def _positives_seules(f, ivs):
@@ -1552,3 +1568,103 @@ def blocs_extremums(dv, limites, analyse):
         except Exception:
             return None
     return blocs + [so.liste(items, style="extrema")]
+
+
+# ---------------------------------------------------------------------------------------------------------------------------
+# Partie 6. Graphe (D15) : ronds vides
+# ---------------------------------------------------------------------------------------------------------------------------
+SIGNE_D_APPROCHE = re.compile(r"\^\{([+-])\}$")
+SONDES_ROND = range(3, 13)              # f(a ± 10⁻ᵏ), k = 3 … 12
+PRES_DU_ROND = "1e-6"                   # écart relatif à L, au plus près de a, sous lequel la sonde tient la limite pour atteinte
+
+
+def _reelle_ou_infinie(L, sp):
+    if L in (sp.oo, -sp.oo) or (L.is_real and L.is_finite):
+        return L
+    raise Doute()                               # bornes oscillantes, nombre complexe, limite non trouvée…
+
+
+def limite_laterale(fe, a, cote, sp):
+    """Limite de fe (SymPy) en a (exact) du côté `cote` ('-' ou '+'), calculée par SymPy, par les règles de calcul des limites
+    quand elles s'appliquent : e^{u} donne e^{lim u} (exp est continue, e^{−∞} = 0, e^{+∞} = +∞) ; un produit (une somme) dont chaque
+    facteur (terme) a une limite finie, le produit (la somme) des limites ; sinon la limite de l'expression entière. Beaucoup plus
+    rapide que la limite de e^{u} elle-même (Ex7 : 3 ms au lieu de 200 ; x·e^{1/(x − 1)} : 10 ms au lieu de 1,2 s). Doute si le
+    résultat n'est ni un réel ni ±∞."""
+    x = SYMPY["x"]
+    if fe.func == sp.exp:
+        return sp.exp(limite_laterale(fe.args[0], a, cote, sp))
+    if fe.is_Mul or fe.is_Add:
+        try:
+            morceaux = [limite_laterale(t, a, cote, sp) for t in fe.args]
+        except Doute:
+            morceaux = None                     # un morceau sans limite : la limite de l'expression entière décide
+        if morceaux is not None and all(m.is_finite for m in morceaux):
+            return _reelle_ou_infinie(sp.Mul(*morceaux) if fe.is_Mul else sp.Add(*morceaux), sp)
+    return _reelle_ou_infinie(sp.limit(fe, x, a, cote), sp)
+
+
+def _sonde_rond(f, a, cote, L, signe, mp):
+    """Sonde mpmath (30 chiffres) : f(a ± 10⁻ᵏ) est définie, s'approche de L (écarts qui ne croissent pas, le plus proche sous
+    10⁻⁶ en relatif) et, si le tableau écrit un signe d'approche (0⁺), se trouve du bon côté de L ; Doute sinon."""
+    s = 1 if cote == "+" else -1
+    ecarts = []
+    for k in SONDES_ROND:
+        v = valeur_mp(f, a + s * mp.mpf(10) ** -k)
+        if v is None:
+            raise Doute()
+        e = v - L
+        if signe is not None and (e == 0 or (e > 0) != (signe == "+")):
+            raise Doute()
+        ecarts.append(abs(e))
+    if ecarts[-1] > mp.mpf(PRES_DU_ROND) * (1 + abs(L)) or any(b > a_ for a_, b in zip(ecarts[-5:], ecarts[-4:])):
+        raise Doute()
+
+
+def ronds_vides(analyse, bornes, asymptotes):
+    """D15 : [[a, L]], un rond vide en (a ; L) pour chaque point exclu a dont la limite L d'un côté est finie (Ex7 : (2 ; 0) à gauche ;
+    d : (−2 ; 0) et (2 ; 0) ; x/√(x²) : (0 ; −1) et (0 ; 1)), en plus des « trous » de l'outil Limites (déjà dessinés, non repris).
+    `bornes` : les limites aux bornes finies de l'ED (celles du tableau T06c, une seule source) ; `asymptotes` : celles de la partie
+    Limites. Le rond est une affirmation nouvelle (principe 0.2) : L se lit sur la liste fermée de `lire_limite`, a est exclu de l'ED
+    (décidé exactement), SymPy donne exactement L (`limite_laterale`) et la sonde mpmath s'en approche du bon côté ; sinon pas de
+    rond. Sans SymPy ou sans mpmath : aucun rond."""
+    _, f, ED = analyse
+    sp = charger_sympy()
+    try:
+        import mpmath
+    except ImportError:
+        return []
+    if sp is None:
+        return []
+    mp = mpmath.mp
+    ivs = fusion(ED)
+    trous = [a["point_val"] for a in asymptotes if a.get("genre") == "trou" and a.get("point_val") is not None]
+    exclus = [p for iv in ivs for p in (iv.lo, iv.hi) if p is not None]
+    out = []
+    with mpmath.workdps(CHIFFRES):
+        fe = None
+        for b in bornes:
+            if b.get("type") != "fini" or any(proche(b["point_val"], t) for t in trous):
+                continue
+            borne = next((p for p in exclus if proche(p.val, b["point_val"])), None)
+            for nom, cote in (("gauche", "-"), ("droite", "+")):
+                t = b.get(nom)
+                if borne is None or t is None:
+                    continue
+                L = lire_limite(t, sp)
+                if L is None or L in (sp.oo, -sp.oo):
+                    continue
+                try:
+                    a = _sympy_num(borne, sp)
+                    if appartient(ivs, a, sp):
+                        continue                                # a ∈ ED : pas un point exclu
+                    fe = en_sympy_reel(f) if fe is None else fe
+                    if sp.simplify(limite_laterale(fe, a, cote, sp) - L) != 0:
+                        continue
+                    m = SIGNE_D_APPROCHE.search(t.replace(" ", ""))
+                    _sonde_rond(f, _mp_de(a, sp, mp), cote, _mp_de(L, sp, mp), m.group(1) if m else None, mp)
+                except Exception:                               # Doute, SymPy ou mpmath en échec : pas de rond
+                    continue
+                point = [float(b["point_val"]), float(L)]
+                if point not in out:
+                    out.append(point)
+    return out

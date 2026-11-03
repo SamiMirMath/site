@@ -10,6 +10,11 @@ Partie 2, parité (D4, P4) : cartes exactes du corrigé et des entrées de la pa
 (f(−x) = ±f(x) sur une grille, point a ∈ ED avec −a ∉ ED, valeurs des contre-exemples et leurs arrondis), sur les entrées de la page et
 une famille tirée au hasard ; garde-fous forcés (SymPy et sonde en désaccord dans les deux sens, sonde dans la zone grise, borne
 approchée, ligne de la chaîne ou valeur écrite fausse, arrondis affichés égaux, SymPy absent) : un message clair, jamais de conclusion.
+
+Partie 6, graphe (D15, P8) : ronds vides recoupés par l'oracle mpmath (limites latérales par sondes, 50 chiffres) sur une famille de
+fonctions (un côté fini, deux limites finies différentes, trous et bords laissés à l'outil Limites, limites infinies) ; garde-fous forcés
+(limite SymPy fausse ou en échec, sonde qui s'éloigne, du mauvais côté ou non définie, point dans l'ED, écriture illisible, SymPy
+absent) : pas de rond ; cadrage (decisions.md §3) recoupé par l'oracle : points à montrer dans la fenêtre, approche de chaque AH.
 """
 import random
 import re
@@ -1260,3 +1265,242 @@ class TestGardeFousExtremums(unittest.TestCase):
             self.assertIsNone(parties.valeur_par_l_exposant(lire("x^2-4x+3"), {"x_tex": "2", "x_py": "2", "f_py": "-1", "f_tex": "-1"},
                                                             sp, mp))
             self.assertIsNone(parties.valeur_par_l_exposant(f, {"x_tex": "4", "x_py": "4", "f_py": "exp(2)", "f_tex": "e^{2}"}, sp, mp))
+
+
+# ---------------------------------------------------------------------------------------------------------------------------
+# Partie 6. Graphe (D15, P8) : ronds vides, points marqués, cadrage (decisions.md §3)
+# ---------------------------------------------------------------------------------------------------------------------------
+# saisie : points exclus de l'ED (écrits à la main, pour l'oracle)
+EXCLUS = {
+    "e^((x^2+x-2)/(6x-12))": [2], "e^(2/(x^2-4))": [-2, 2], "e^(1/x)": [0], "e^(-1/x)": [0], "x/sqrt(x^2)": [0],
+    "e^(1/(x-1))+3": [1], "e^(x/(x^2-1))": [-1, 1], "(x+1)e^(1/x)": [0], "1/x": [0], "(x^2-1)/(x-1)": [1], "(e^x-1)/x": [0],
+    "x*ln(x)": [0], "ln(x)/x": [0], "e^(1/x^2)": [0], "e^(-1/x^2)": [0], "(x^2-1)/(x-3)": [3],
+}
+ILLISIBLE = {"e^(1/(x-1))+e": [1]}          # limite finie e en 1⁻ : écriture hors de la liste fermée de lire_limite, pas de rond
+
+
+def limite_oracle(f, a, s):
+    """Limite latérale de l'arbre f en a (côté s = ±1) par l'oracle (50 chiffres, sans SymPy ni `evaluer`) : nombre, ±inf, ou None
+    si f n'est pas définie de ce côté."""
+    vs = [oracle.valeur(f, mp.mpf(a) + s * mp.mpf(10) ** -k) for k in (6, 9, 12, 15)]
+    if any(v is None for v in vs):
+        return None
+    if abs(vs[-1]) > 10 ** 6 and abs(vs[-1]) > abs(vs[0]):
+        return mp.inf if vs[-1] > 0 else -mp.inf
+    assert abs(vs[-1] - vs[-2]) < mp.mpf("1e-5"), (a, s, vs)
+    return vs[-1]
+
+
+def ronds_attendus(entree, exclus):
+    """(ronds vides, trous) d'après l'oracle : un point exclu dont toutes les limites latérales définies sont finies et égales est un
+    trou (dessiné d'après l'outil Limites) ; sinon chaque côté de limite finie donne un rond vide."""
+    f = lire(entree)
+    ronds, trous = [], []
+    for a in exclus:
+        assert oracle.valeur(f, a) is None, (entree, a)
+        lims = [L for L in (limite_oracle(f, a, -1), limite_oracle(f, a, 1)) if L is not None]
+        finies = [L for L in lims if mp.isfinite(L)]
+        if lims and len(finies) == len(lims) and all(abs(L - finies[0]) < mp.mpf("1e-6") for L in finies):
+            trous.append((float(a), float(finies[0])))
+        else:
+            ronds += [(float(a), float(L)) for L in finies]
+    return sorted(ronds), sorted(trous)
+
+
+def proche_liste(test, obtenu, attendu, contexte):
+    test.assertEqual(len(obtenu), len(attendu), (contexte, obtenu, attendu))
+    for (x, y), (a, b) in zip(sorted(obtenu), sorted(attendu)):
+        test.assertAlmostEqual(x, a, delta=1e-9, msg=contexte)
+        test.assertAlmostEqual(y, b, delta=1e-6, msg=contexte)
+
+
+class TestRondsVides(unittest.TestCase):
+    def test_oracle(self):
+        """Chaque point exclu à limite finie d'un côté (ou deux limites finies différentes) a un rond vide, et seulement lui ; un trou
+        (limites finies égales, ou bord de l'ED) est dessiné d'après l'outil Limites, sans rond en double."""
+        for entree, exclus in EXCLUS.items():
+            with self.subTest(entree=entree):
+                r = ec.etudier(entree)
+                ronds, trous = ronds_attendus(entree, exclus)
+                proche_liste(self, [tuple(p) for p in r["graphique"]["ronds_vides"]], ronds, entree)
+                trous_outil = [(a["point_val"], a["valeur_val"]) for a in r["limites"]["asymptotes"] if a["genre"] == "trou"]
+                proche_liste(self, trous_outil, trous, entree)
+
+    def test_valeurs_attendues(self):
+        attendu = {"e^((x^2+x-2)/(6x-12))": [[2.0, 0.0]], "e^(2/(x^2-4))": [[-2.0, 0.0], [2.0, 0.0]], "x/sqrt(x^2)": [[0.0, -1.0], [0.0, 1.0]],
+                   "e^(1/(x-1))+3": [[1.0, 3.0]], "e^(x/(x^2-1))": [[-1.0, 0.0], [1.0, 0.0]], "1/x": [], "(x^2-1)/(x-1)": []}
+        for entree, ronds in attendu.items():
+            with self.subTest(entree=entree):
+                self.assertEqual(ec.etudier(entree)["graphique"]["ronds_vides"], ronds)
+
+    def test_limite_illisible_pas_de_rond(self):
+        """La limite finie existe (oracle), mais s'écrit hors de la liste fermée (e) : pas de rond (rien plutôt qu'un rond non
+        confirmé)."""
+        for entree, exclus in ILLISIBLE.items():
+            with self.subTest(entree=entree):
+                self.assertTrue(ronds_attendus(entree, exclus)[0])
+                self.assertEqual(ec.etudier(entree)["graphique"]["ronds_vides"], [])
+
+    def test_limite_laterale_par_les_regles(self):
+        """Les règles (e^{lim u}, produit et somme de limites finies) donnent la limite de SymPy, beaucoup plus vite."""
+        sp = parties.charger_sympy()
+        x = parties.SYMPY["x"]
+        for expr, a, cote in ((sp.exp((x ** 2 + x - 2) / (6 * x - 12)), 2, "-"), (x * sp.exp(1 / (x - 1)), 1, "-"),
+                              (sp.exp(1 / (x - 1)) + 3, 1, "-"), (sp.exp(2 / (x ** 2 - 4)), -2, "+"), (sp.exp(1 / x), 0, "+"),
+                              (x / sp.sqrt(x ** 2), 0, "-"), ((x + 1) * sp.exp(1 / x), 0, "-")):
+            with self.subTest(expr=expr, a=a, cote=cote):
+                self.assertEqual(parties.limite_laterale(expr, sp.Integer(a), cote, sp), sp.limit(expr, x, a, cote))
+
+
+def ronds_d(entree, **faux):
+    """Ronds vides d'etudier() avec des fonctions de parties.py remplacées."""
+    with ExitStack() as pile:
+        for nom, valeur in faux.items():
+            pile.enter_context(mock.patch.object(parties, nom, valeur))
+        return ec.etudier(entree)["graphique"]["ronds_vides"]
+
+
+class TestGardeFousRondsVides(unittest.TestCase):
+    """Principe 0.2 : un rond vide n'est dessiné que si SymPy et la sonde confirment la limite ; au moindre doute, pas de rond."""
+    EX7, D = "e^((x^2+x-2)/(6x-12))", "e^(2/(x^2-4))"
+
+    def test_limite_sympy_differente(self):
+        vraie = parties.limite_laterale
+        self.assertEqual(ronds_d(self.EX7, limite_laterale=lambda fe, a, cote, sp: vraie(fe, a, cote, sp) + 1), [])
+
+    def test_limite_sympy_en_echec(self):
+        def echec(*args):
+            raise parties.Doute()
+        self.assertEqual(ronds_d(self.D, limite_laterale=echec), [])
+
+    def test_limite_sympy_d_un_seul_cote_fausse(self):
+        """d : SymPy se trompe en −2⁺ seulement ; le rond (2 ; 0) reste."""
+        vraie = parties.limite_laterale
+        fausse = lambda fe, a, cote, sp: vraie(fe, a, cote, sp) + (1 if a == -2 else 0)
+        self.assertEqual(ronds_d(self.D, limite_laterale=fausse), [[2.0, 0.0]])
+
+    def sonde(self, transformer):
+        vraie = parties.valeur_mp
+
+        def fausse(n, x):
+            v = vraie(n, x)
+            return transformer(v) if (v is not None and abs(x - 2) < mp.mpf("0.01") and parties.tex(n) == parties.tex(lire(self.EX7))) else v
+        return fausse
+
+    def test_sonde_qui_ne_s_approche_pas(self):
+        self.assertEqual(ronds_d(self.EX7, valeur_mp=self.sonde(lambda v: v + mp.mpf("0.001"))), [])
+
+    def test_sonde_du_mauvais_cote(self):
+        """Le tableau écrit 0⁺ ; la sonde trouve des valeurs négatives : pas de rond."""
+        self.assertEqual(ronds_d(self.EX7, valeur_mp=self.sonde(lambda v: -v)), [])
+
+    def test_sonde_non_definie(self):
+        self.assertEqual(ronds_d(self.EX7, valeur_mp=self.sonde(lambda v: None)), [])
+
+    def test_point_dans_l_ed(self):
+        self.assertEqual(ronds_d(self.EX7, appartient=lambda ivs, v, sp: True), [])
+
+    def test_ecriture_illisible(self):
+        self.assertEqual(ronds_d(self.EX7, lire_limite=lambda t, sp: None), [])
+
+    def test_sans_sympy(self):
+        self.assertEqual(ronds_d(self.EX7, charger_sympy=lambda: None), [])
+
+    def test_sans_rond_le_graphique_reste_juste(self):
+        """Sans rond (doute), la fenêtre contient toujours les points à montrer et le bloc de la page n'a pas de rond."""
+        with mock.patch.object(parties, "lire_limite", lambda t, sp: None):
+            s = rec.resoudre(self.EX7)
+        g = next(b for c in s["cartes"] for b in c["blocs"] if b["type"] == "graphique")
+        self.assertEqual(g["ronds_vides"], [])
+        self.assertTrue(g["xmin"] < 0 < 4 < g["xmax"] and g["ymin"] < 0 < 4.49 < g["ymax"], g)
+
+
+class TestPointsMarques(unittest.TestCase):
+    def test_zeros_et_f0_de_la_partie_3(self):
+        """Les points marqués sont les zéros et f(0) écrits par la partie 3 (oracle : f s'y annule, f(0) juste), sans les extremums."""
+        for entree in ("(x^2-6)e^(-2x)", "e^x(6-e^x)", "x^3-3x", "x^2-4x+3", "(x^2-1)/(x-3)", "ln(x)/x", "x^2*e^(-x)", "e^(1/x)"):
+            with self.subTest(entree=entree):
+                r = ec.etudier(entree)
+                f = lire(entree)
+                extremums = {(e["x_val"], e["f_val"]) for e in r["derivee"]["extrema"]}
+                for p in r["graphique"]["points"]:
+                    x, y = mp.mpf(p["x_val"]), mp.mpf(p["f_val"])
+                    self.assertAlmostEqual(float(oracle.valeur(f, x)), float(y), delta=1e-9)
+                    self.assertTrue(y == 0 or x == 0, p)
+                    self.assertNotIn((p["x_val"], p["f_val"]), extremums)
+
+    def test_doute_de_la_partie_3_rien_de_marque(self):
+        """La partie 3 doute (sonde du signe contredite) : aucun zéro marqué ; f(0), confirmé à part, reste."""
+        def doute(*args):
+            raise parties.Doute()
+        with mock.patch.object(parties, "confirmer_signe", doute):
+            r, p3 = ec.etude_et_partie3("(x^2-6)e^(-2x)")
+        self.assertEqual(p3["zeros"], [])
+        self.assertEqual(r["graphique"]["points"], [{"x_val": 0.0, "f_val": -6.0}])
+        with mock.patch.object(parties, "charger_sympy", lambda: None):
+            r = ec.etudier("(x^2-6)e^(-2x)")
+        self.assertEqual(r["graphique"]["points"], [])
+
+    def test_partie_3_calculee_une_fois(self):
+        """resoudre() : une seule partie 3 (cartes et données du graphique du même calcul)."""
+        vraie, appels = parties.partie3, []
+
+        def espion(a):
+            appels.append(a)
+            return vraie(a)
+        with mock.patch.object(parties, "partie3", espion):
+            s = rec.resoudre("(x^2-6)e^(-2x)")
+        self.assertEqual(len(appels), 1)
+        t = [c["titre"] for c in s["cartes"]]
+        self.assertEqual(s["cartes"][t.index(rec.PARTIES[2]) + 1:t.index(rec.PARTIES[3])], cartes_zeros("(x^2-6)e^(-2x)"))
+
+
+CADRAGE = ["e^((x^2+x-2)/(6x-12))", "e^(-x^2)", "(x^2-6)e^(-2x)", "e^x(6-e^x)", "e^(2/(x^2-4))", "e^x", "e^(-x)", "x*e^x",
+           "x^2*e^(-x)", "e^(1/x)", "e^(-1/x)", "1/(x^2+1)", "x/(x^2+1)", "(x^2-1)/(x-3)", "e^(x/(x^2-1))", "(e^x-1)/x", "1/x",
+           "x^3-3x", "x/sqrt(x^2)", "e^(1/(x-1))+3"]
+
+
+class TestCadrage(unittest.TestCase):
+    """decisions.md §3, recoupé par l'oracle : la fenêtre contient les extremums, les zéros, (0 ; f(0)) et les ronds vides ; pour chaque
+    AH y = L en ±∞, un x de la fenêtre, au-delà de tous les points à montrer et des valeurs interdites (lecture de la question 3),
+    où |f(x) − L| < 5 % de la hauteur de la fenêtre."""
+
+    def test_criteres_du_graphe(self):
+        for entree in CADRAGE:
+            with self.subTest(entree=entree):
+                r = ec.etudier(entree)
+                f, g = lire(entree), r["graphique"]
+                montres = [(e["x_val"], e["f_val"]) for e in r["derivee"]["extrema"]] + \
+                          [(p["x_val"], p["f_val"]) for p in g["points"]] + [tuple(p) for p in g["ronds_vides"]]
+                for x, y in montres:
+                    self.assertTrue(g["xmin"] < x < g["xmax"] and g["ymin"] < y < g["ymax"], (x, y, g["xmin"], g["xmax"], g["ymin"], g["ymax"]))
+                reperes = [x for x, _ in montres] + EXCLUS.get(entree, [])           # points à montrer et valeurs interdites
+                hauteur = g["ymax"] - g["ymin"]
+                for a in r["limites"]["asymptotes"]:
+                    if a["genre"] != "horizontale":
+                        continue
+                    L, droite = a["valeur_val"], a["ou"].endswith(r"+\infty")
+                    self.assertAlmostEqual(float(oracle.valeur(f, mp.mpf(10) ** 6 * (1 if droite else -1))), L, delta=1e-3)
+                    bas, haut = (max(reperes), g["xmax"]) if droite else (g["xmin"], min(reperes))
+                    xs = [mp.mpf(bas) + (mp.mpf(haut) - bas) * k / 200 for k in range(201)]
+                    vs = [v for v in (oracle.valeur(f, x) for x in xs) if v is not None]
+                    self.assertTrue(any(abs(v - L) < mp.mpf("0.05") * hauteur for v in vs), (entree, droite, bas, haut))
+
+    def test_c_l_ah_gauche_se_voit(self):
+        """c : avant P8, la branche qui file vers −∞ fixait l'échelle (y de −51 à 21) ; maintenant la fenêtre en y suit les points à
+        montrer (entre 0 et 9) et l'approche de y = 0 à gauche se voit."""
+        g = ec.etudier("e^x(6-e^x)")["graphique"]
+        self.assertLess(g["ymax"] - g["ymin"], 20)
+        self.assertLessEqual(g["xmin"], -2)
+
+    def test_approche_trop_lente_fenetre_des_points(self):
+        """ln(x)/x : l'approche de y = 0 demanderait une fenêtre plus de 3,8 fois plus large : la fenêtre reste celle des points à
+        montrer (le graphe n'est pas écrasé)."""
+        g = ec.etudier("ln(x)/x")["graphique"]
+        self.assertLess(g["xmax"], 6)
+
+    def test_fenetre_ne_recalcule_rien(self):
+        """Le zoom (fenetre) ne relance ni la partie 3 ni les ronds vides."""
+        with mock.patch.object(parties, "partie3", side_effect=AssertionError), \
+                mock.patch.object(parties, "ronds_vides", side_effect=AssertionError):
+            self.assertTrue(ec.fenetre("e^((x^2+x-2)/(6x-12))", -5, 5)["ok"])

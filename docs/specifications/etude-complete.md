@@ -1,8 +1,8 @@
 # Outil « Étude complète de fonction » (3e Ms, Mr)
 
 URL : `/etude-complete/` · moteur : `etude-complete/etude_complete.py`, qui assemble le noyau,
-la dérivée et les limites ; adaptateur `etude-complete/resoudre_ec.py`. Les parties propres à l'Étude complète (aujourd'hui les parties 1, 2 et 3 et les extremums de la partie 5 ; plus tard
-le bilan) sont dans `etude-complete/parties.py` (créé au chantier `etude-complete`, P3, déclaré dans
+la dérivée et les limites ; adaptateur `etude-complete/resoudre_ec.py`. Les parties propres à l'Étude complète (aujourd'hui les parties 1, 2 et 3, les extremums de la partie 5 et les ronds vides de la
+partie 6 ; plus tard le bilan) sont dans `etude-complete/parties.py` (créé au chantier `etude-complete`, P3, déclaré dans
 `moteur/manifeste.json` avec `ensemble-definition/resoudre_ed.py`, dont il reprend les cartes de condition). Décisions de rédaction : `docs/chantiers/etude-complete/decisions.md`.
 
 ## Fonctionnel
@@ -14,7 +14,7 @@ le bilan) sont dans `etude-complete/parties.py` (créé au chantier `etude-compl
   non démontrée (EC-15). Aujourd'hui : parties 1, 2 et 3 = voir ci-dessous ; 4 = cartes de l'outil Limites
   (tableaux de signes, une carte par borne, bilan des asymptotes) ; 5 = cartes de l'outil Dérivée (dérivée, signe de f′ et variations,
   avec les limites et les valeurs des extremums dans le tableau, T06c et D10), extremums rédigés selon D11 (voir ci-dessous) ;
-  6 = graphique.
+  6 = graphique (D15, voir ci-dessous).
 - **Partie 1, domaine de définition** (D1, D3 ; P3) : carte « Fonction » (f seule) ; carte « Mise en forme » quand f(x) = e^{haut/bas},
   haut et bas polynômes de degré ≥ 1 écrits développés à coefficients entiers, dont l'un au moins se factorise par mise en évidence de
   c·xᵏ ou par Somme-Produit (trinôme unitaire, deux racines entières distinctes, facteurs par racine croissante) : une ligne par
@@ -60,7 +60,8 @@ le bilan) sont dans `etude-complete/parties.py` (créé au chantier `etude-compl
   l'ED est le signe exact (SymPy) de f en un point rationnel et celui de la sonde en 9 points ; la chaîne doit finir sur les zéros
   calculés (sinon les lignes de l'outil ED) ; f(0) écrit = valeur SymPy = sonde. Au moindre désaccord : « Le signe de f n'a pas pu
   être établi avec certitude : l'outil ne conclut pas. » (ou « L'ordonnée à l'origine n'a pas pu être établie avec certitude… »).
-  Calculée par `resoudre`, sur l'analyse en cache.
+  Calculée une fois par étude (`etude_complete.etude_et_partie3`, sur l'analyse en cache) : ses cartes pour `resoudre`, ses zéros
+  et f(0) pour le graphique (P8).
 - **Partie 5, extremums** (D11 ; P7b) : à la place de la liste de l'outil Dérivée, dans la carte « Signe de f′ et variations ». Quand
   la carte « Dérivée » a nommé g (f = e^{u/v}) et x₀ est entier, la valeur est calculée en chaîne : « g(4) = 18/12 = 3/2, donc
   f(4) = e^{3/2} ≈ 4,48. ». Puis une ligne par extremum : « **Maximum local** en x = 0 : (0 ; e^{1/6}) ≈ (0 ; 1,18) (f′ passe de + à
@@ -77,9 +78,22 @@ le bilan) sont dans `etude-complete/parties.py` (créé au chantier `etude-compl
 - **Une seule analyse par saisie** (D19) : le résultat de `analyser_complet` (ED) est gardé en cache (`functools.lru_cache`, clé =
   saisie aux espaces réduits et présence de SymPy) ; `etudier()` le passe aux outils Dérivée et Limites (paramètre facultatif
   `analyse` de leur `etudier`, sans effet sur ces outils seuls), et `fenetre()` (zoom) le relit sans recalcul.
-- **Graphique** : cadrage automatique (bornes de l'ED, extrema, asymptotes horizontales) ;
-  courbe tracée par morceaux de l'ED ; asymptotes en pointillé ; extrema en points pleins ;
-  trous (limite finie en une valeur interdite) en ronds vides ; rééchantillonnage de la fenêtre visible.
+- **Partie 6, graphe** (D15, decisions.md §3 ; P8) : courbe tracée par morceaux de l'ED ; asymptotes en pointillé ; extremums,
+  zéros et point (0 ; f(0)) en points pleins avec leurs coordonnées (zéros et f(0) : ceux qu'écrit la partie 3, calculée une seule
+  fois par étude, `etude_complete.etude_et_partie3` ; rien en cas de doute ; un point déjà extremum n'est pas repris) ; **rond vide**
+  à chaque point exclu dont la limite est finie, d'un côté ou des deux : trous de l'outil Limites (limites finies égales, ou bord de
+  l'ED) et `ronds_vides` (`parties.ronds_vides` : limite finie d'un seul côté, Ex7 (2 ; 0), d (±2 ; 0), ou deux limites finies
+  différentes, x/√(x²) (0 ; ±1)). Garde-fous (EC-15, principe 0.2) : la limite du tableau T06c se lit sur la liste fermée
+  (entiers, fractions, avec signe d'approche ; « e » : pas de rond), le point est hors de l'ED (exact), SymPy donne exactement la
+  limite latérale (règles des limites : e^{lim u}, produit et somme de limites finies ; sinon `limit`) et une sonde mpmath
+  (f(a ± 10⁻ᵏ), k = 3 … 12, 30 chiffres) s'en approche du bon côté ; sinon pas de rond. **Cadrage** : la fenêtre contient les
+  extremums, les zéros, (0 ; f(0)), les ronds vides, les trous et les bornes finies de l'ED ; en y, les échantillons (bande centrale de
+  chaque morceau) sont ramenés dans [min − e ; max + e] des ordonnées de ces points et des AH (e = max(étendue/4 ; 1)) : une branche
+  qui file vers ±∞ ne fixe pas l'échelle ; pour chaque AH y = L en ±∞, le côté de l'AH est élargi (25 % de la largeur, 6 fois au
+  plus) jusqu'à ce qu'un échantillon au-delà de tous les points à montrer et des valeurs interdites soit à moins de 5 % de la hauteur
+  de la fenêtre de L, sinon la fenêtre des points reste (ln(x)/x). La courbe est tracée une largeur de fenêtre au-delà de chaque côté
+  (l'écran, à échelle égale, montre souvent plus large). Rééchantillonnage de la fenêtre visible au zoom (`fenetre`, inchangé). Pas
+  de seconde figure : le zoom la remplace.
   **Souris** : molette et boutons (zoom), glisser (déplacement). **Écran tactile** : un doigt fait défiler la page (la courbe ne
   bouge pas), deux doigts déplacent et zooment la courbe, le point sous le milieu des doigts y reste (T19, EC-05).
 - Les valeurs communes (ED, f′, zéros de f′, limites) sont exactement celles des outils séparés (EC-01).
@@ -87,8 +101,8 @@ le bilan) sont dans `etude-complete/parties.py` (créé au chantier `etude-compl
 ## Conventions
 
 - Celles des outils séparés. Limite finie ℓ en une valeur interdite a : rond vide en (a ; ℓ)
-  (« trou dans le graphique », Q7) ; limites latérales finies et différentes : rien n'est dessiné
-  comme une asymptote (comportement actuel du graphique).
+  (« trou dans le graphique », Q7) ; limite finie d'un seul côté, ou limites latérales finies et différentes : un rond vide par
+  limite finie (D15, P8), aucune asymptote.
 - Graduations du graphique en notation suisse (virgule décimale).
 
 ## Tableau de variations avec limites (T06c) — validée le 16.10.2026
@@ -190,4 +204,5 @@ f(x)     | +∞  ↘  −∞ ‖  ░░░░░░  ‖ −∞  ↗  +∞
 | EC-06 | Graduations et coordonnées du graphique sans point décimal (virgule), par la seule fonction `etiquette()` | [auto-page] (`test_graphique.py`) |
 | EC-07 | Le graphique est imprimé (image) dans le PDF, en clair même en mode sombre | [manuel] (vérifié sur téléphone, 21.10.2026) |
 | EC-14 | `resoudre()` (T12) respecte le schéma de sortie commun, ses cartes sont dans l'ordre des six parties (D1, intertitres compris), celles de la dérivée et des limites sont les cartes des outils séparés, les limites figurent dans le tableau de variations ; instantanés `instantanes/resoudre/etude-complete.json` | [auto-py] (`test_resoudre_ec.py`) |
-| EC-15 | Toute partie propre à l'EC a un garde-fou numérique et un message clair en cas de doute (D2) ; tant qu'une partie n'est pas rédigée, elle reste vide | [auto-py] (`test_corpus_etude_complete.py` : oracle mpmath indépendant ; parties 1 à 3 : `test_parties_ec.py`, garde-fous forcés en échec) |
+| EC-15 | Toute partie propre à l'EC a un garde-fou numérique et un message clair en cas de doute (D2) ; tant qu'une partie n'est pas rédigée, elle reste vide | [auto-py] (`test_corpus_etude_complete.py` : oracle mpmath indépendant ; parties 1 à 3, 5 et 6 : `test_parties_ec.py`, garde-fous forcés en échec) |
+| EC-16 | Graphe (D15, decisions.md §3) : la fenêtre contient les extremums, les zéros, (0 ; f(0)) et les ronds vides ; pour chaque AH y = L, un x de la fenêtre au-delà de tous ces points et des valeurs interdites où \|f(x) − L\| < 5 % de la hauteur ; un rond vide à chaque point exclu à limite finie et nulle part ailleurs ; zéros, (0 ; f(0)) et extremums marqués | [auto-py] (`test_corpus_etude_complete.py` P8, `test_parties_ec.py` : oracle mpmath, garde-fous forcés) + [auto-page] (`test_graphique.py::test_d15_ronds_vides_et_points_marques`) |

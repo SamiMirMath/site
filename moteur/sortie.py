@@ -39,7 +39,7 @@ BLOCS = {
     "sous_calcul": ({"titre", "etapes"}, set()),
     # tableau u | v / u′ | v′ des règles du produit et du quotient (Étude complète, D8 ; outil Dérivée)
     "uv": ({"u", "du", "v", "dv"}, set()),
-    "graphique": ({"xmin", "xmax", "ymin", "ymax", "segments", "extrema", "asymptotes"}, {"recalculable"}),
+    "graphique": ({"xmin", "xmax", "ymin", "ymax", "segments", "extrema", "asymptotes"}, {"recalculable", "points", "ronds_vides"}),
 }
 CARTE = ({"titre", "style", "blocs"}, {"titre_tex", "badge", "detail", "titre_masque"})
 LIGNE = ({"label", "cells"}, {"final", "variation"})

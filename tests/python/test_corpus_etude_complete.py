@@ -745,19 +745,19 @@ def test_P7b_extremums(ident):
 
 
 def ronds_vides_de_l_outil(r):
-    """Ronds vides du graphique : trous des asymptotes (genre « trou ») et liste `ronds_vides` du graphique (ajout prévu en P8)."""
+    """Ronds vides du graphique : trous des asymptotes (genre « trou ») et liste `ronds_vides` du graphique (P8)."""
     out = [(a["point_val"], a["valeur_val"]) for a in r["limites"]["asymptotes"] if a["genre"] == "trou"]
     out += [tuple(p) for p in r["graphique"].get("ronds_vides", [])]
     return sorted(out)
 
 
-@pytest.mark.parametrize("ident", avec({"Ex7", "d"}, xfail("P8", "rond vide à chaque point exclu à limite finie (D15)")))
+@pytest.mark.parametrize("ident", IDS)
 def test_P8_ronds_vides(ident):
     attendu = sorted((float(a), float(y)) for a, y in PAR_ID[ident].ronds_vides)
     assert ronds_vides_de_l_outil(etude(ident)) == attendu
 
 
-@pytest.mark.parametrize("ident", avec({"Ex7"}, xfail("P8", "la fenêtre montre l'approche de chaque AH (§3)")))
+@pytest.mark.parametrize("ident", IDS)
 def test_P8_approche_des_ah_visible(ident):
     """§3 : pour chaque AH y = L en ±∞, un x visible où |f(x) − L| < 5 % de la hauteur de la fenêtre. Le x est pris du côté de
     l'asymptote, au-delà de tous les points à montrer et des valeurs interdites (sinon une branche qui file vers 0 en une valeur
@@ -773,6 +773,40 @@ def test_P8_approche_des_ah_visible(ident):
         xs = [mp.mpf(a) + (mp.mpf(b) - a) * k / 200 for k in range(201)] if b > a else []
         valeurs = [v for v in (valeur(fn, x) for x in xs) if v is not None]
         assert any(abs(v - L) < mp.mpf("0.05") * hauteur for v in valeurs), (ident, cote, a, b)
+
+
+@pytest.mark.parametrize("ident", IDS)
+def test_P8_ronds_vides_dans_la_fenetre(ident):
+    """§3 : chaque rond vide est dans la fenêtre, et seulement en un point exclu (f n'y est pas définie, oracle)."""
+    fn, g = PAR_ID[ident], etude(ident)["graphique"]
+    for x, y in ronds_vides_de_l_outil(etude(ident)):
+        assert valeur(fn, x) is None, (ident, x)
+        assert g["xmin"] < x < g["xmax"] and g["ymin"] < y < g["ymax"], (ident, x, y)
+
+
+@pytest.mark.parametrize("ident", IDS)
+def test_P8_zeros_et_f0_marques(ident):
+    """D15 : chaque zéro et le point (0 ; f(0)) (valeurs du corpus, oracle) sont marqués une seule fois, comme point du graphique ou
+    comme extremum ; le graphique ne marque rien d'autre."""
+    fn, r = PAR_ID[ident], etude(ident)
+    points = [(mp.mpf(p["x_val"]), mp.mpf(p["f_val"])) for p in r["graphique"]["points"]]
+    extremums = [(mp.mpf(e["x_val"]), mp.mpf(e["f_val"])) for e in r["derivee"]["extrema"]]
+    attendus = [(z, mp.mpf(0)) for _, z, _ in fn.zeros] + ([(mp.mpf(0), fn.f0[1])] if fn.f0 is not None else [])
+    meme = lambda p, q: proches(p[0], q[0]) and proches(p[1], q[1])
+    for p in attendus:
+        assert sum(1 for q in points + extremums if meme(p, q)) == 1, (ident, p)
+    for q in points:
+        assert any(meme(p, q) for p in attendus), (ident, q)
+    assert len(points) == len({(float(x), float(y)) for x, y in points}), ident
+
+
+@pytest.mark.parametrize("ident", IDS)
+def test_P8_bloc_du_graphique(ident):
+    """Le bloc « graphique » de la page porte les points marqués et les ronds vides d'etudier() ; un seul graphique."""
+    blocs = [b for c in sortie(ident)["cartes"] for b in c["blocs"] if b["type"] == "graphique"]
+    assert len(blocs) == 1
+    g = etude(ident)["graphique"]
+    assert blocs[0]["points"] == g["points"] and blocs[0]["ronds_vides"] == g["ronds_vides"], ident
 
 
 def exemples_de_la_page():

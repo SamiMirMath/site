@@ -5,7 +5,9 @@
    données, donc la même suite d'appels sur toutes les machines (tests/pages/graphique.py enregistre et compare cette trace).
 
    dessinerGraphique(canvas, g, extrema, asymptotes, vista, forcerClair)
-     g            { xmin, xmax, ymin, ymax, segments }   segments : listes de [x, y] ; y = null lève le crayon
+     g            { xmin, xmax, ymin, ymax, segments,    segments : listes de [x, y] ; y = null lève le crayon
+                    points, ronds_vides }                points : [{ x_val, f_val }] (zéros, (0 ; f(0))), points pleins ;
+                                                         ronds_vides : [[x, y]] (points exclus à limite finie), ronds vides
      extrema      [{ x_val, f_val }]                     points pleins, avec leurs coordonnées écrites à côté
      asymptotes   [{ genre, … }]                         horizontale, verticale, oblique (pointillé) ; trou (rond vide)
      vista        fenêtre voulue { xmin, xmax, ymin, ymax } (zoom, déplacement) ; g si absente
@@ -142,19 +144,20 @@ export function dessinerGraphique(canvas, g, extrema, asymptotes, vista, forcerC
   });
   ctx.restore();
 
-  // trous (limite finie en une valeur interdite) : rond vide
-  (asymptotes||[]).forEach(a=>{
-    if(a.genre!=="trou" || a.point_val==null || a.valeur_val==null) return;
-    if(a.point_val<xmin||a.point_val>xmax||a.valeur_val<ymin||a.valeur_val>ymax) return;
-    const px=X(a.point_val), py=Y(a.valeur_val);
+  // points exclus à limite finie (D15) : rond vide ; trous de l'outil Limites (limite finie des deux côtés) et `g.ronds_vides`
+  // (limite finie d'un seul côté, ou deux limites finies différentes), même dessin
+  const visible=(x,y)=>x!=null && y!=null && x>=xmin && x<=xmax && y>=ymin && y<=ymax;
+  const ronds=(asymptotes||[]).filter(a=>a.genre==="trou").map(a=>[a.point_val, a.valeur_val]).concat(g.ronds_vides||[]);
+  ronds.forEach(([x,y])=>{
+    if(!visible(x,y)) return;
+    const px=X(x), py=Y(y);
     ctx.fillStyle=colBg; ctx.beginPath(); ctx.arc(px,py,4.5,0,2*Math.PI); ctx.fill();
     ctx.strokeStyle=colAccent; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(px,py,4.5,0,2*Math.PI); ctx.stroke();
   });
 
-  // extrema
-  (extrema||[]).forEach(e=>{
-    if(e.x_val==null || e.f_val==null) return;
-    if(e.x_val<xmin||e.x_val>xmax||e.f_val<ymin||e.f_val>ymax) return;
+  // points pleins, avec leurs coordonnées : zéros et (0 ; f(0)) (`g.points`, D15), puis extrema (dessinés par-dessus)
+  (g.points||[]).concat(extrema||[]).forEach(e=>{
+    if(!visible(e.x_val, e.f_val)) return;
     const px=X(e.x_val), py=Y(e.f_val);
     ctx.fillStyle=colBg; ctx.beginPath(); ctx.arc(px,py,4.5,0,2*Math.PI); ctx.fill();
     ctx.fillStyle=colGood; ctx.beginPath(); ctx.arc(px,py,3.5,0,2*Math.PI); ctx.fill();
@@ -326,7 +329,7 @@ export function monterGraphique({ canvas: cv, plus, moins, reinit, message }, { 
 }
 
 /* Greffon de commun/rendu.js pour le bloc « graphique » de la sortie d'un moteur :
-     { type: "graphique", xmin, xmax, ymin, ymax, segments, extrema, asymptotes, recalculable }
+     { type: "graphique", xmin, xmax, ymin, ymax, segments, extrema, asymptotes, points, ronds_vides, recalculable }
    Le titre de la carte vient des données ; ce greffon ajoute les boutons de zoom à droite du titre, le canvas et le
    message d'échec. Si `recalculable`, un zoom ou un déplacement redemande la courbe au moteur : appel
    appelPy("fenetre", JSON {f: saisie, xmin, xmax, n}) → { ok, segments } (resoudre_ec.fenetre_json).
@@ -357,6 +360,7 @@ export const greffonGraphique = {
     monterGraphique({
       canvas: carte.querySelector("#graphique"), plus: carte.querySelector("#zoomPlus"), moins: carte.querySelector("#zoomMoins"),
       reinit: carte.querySelector("#zoomReset"), message: carte.querySelector("#msgFenetre"),
-    }, { g: { xmin: b.xmin, xmax: b.xmax, ymin: b.ymin, ymax: b.ymax, segments: b.segments }, extrema: b.extrema || [], asymptotes: b.asymptotes || [], fenetre });
+    }, { g: { xmin: b.xmin, xmax: b.xmax, ymin: b.ymin, ymax: b.ymax, segments: b.segments, points: b.points || [], ronds_vides: b.ronds_vides || [] },
+      extrema: b.extrema || [], asymptotes: b.asymptotes || [], fenetre });
   },
 };

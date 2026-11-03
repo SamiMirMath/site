@@ -468,7 +468,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extremums, zéros et point (0 ; f(0)) (points pleins), points exclus du graphe (ronds vides). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -1169,7 +1169,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extremums, zéros et point (0 ; f(0)) (points pleins), points exclus du graphe (ronds vides). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -1823,7 +1823,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extremums, zéros et point (0 ; f(0)) (points pleins), points exclus du graphe (ronds vides). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -2467,7 +2467,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extremums, zéros et point (0 ; f(0)) (points pleins), points exclus du graphe (ronds vides). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -2909,7 +2909,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extremums, zéros et point (0 ; f(0)) (points pleins), points exclus du graphe (ronds vides). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -3574,7 +3574,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extremums, zéros et point (0 ; f(0)) (points pleins), points exclus du graphe (ronds vides). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -3897,7 +3897,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extremums, zéros et point (0 ; f(0)) (points pleins), points exclus du graphe (ronds vides). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -4526,7 +4526,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extremums, zéros et point (0 ; f(0)) (points pleins), points exclus du graphe (ronds vides). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -5196,7 +5196,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extremums, zéros et point (0 ; f(0)) (points pleins), points exclus du graphe (ronds vides). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -5776,7 +5776,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extremums, zéros et point (0 ; f(0)) (points pleins), points exclus du graphe (ronds vides). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -6374,7 +6374,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extremums, zéros et point (0 ; f(0)) (points pleins), points exclus du graphe (ronds vides). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -6893,7 +6893,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extremums, zéros et point (0 ; f(0)) (points pleins), points exclus du graphe (ronds vides). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -7329,7 +7329,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extremums, zéros et point (0 ; f(0)) (points pleins), points exclus du graphe (ronds vides). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -7997,7 +7997,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extremums, zéros et point (0 ; f(0)) (points pleins), points exclus du graphe (ronds vides). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -8474,7 +8474,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extremums, zéros et point (0 ; f(0)) (points pleins), points exclus du graphe (ronds vides). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -9044,7 +9044,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extremums, zéros et point (0 ; f(0)) (points pleins), points exclus du graphe (ronds vides). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
@@ -9708,7 +9708,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extrema (points pleins), trou (rond vide). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+    "texte": "Graphique − + Réinitialiser [canvas]La courbe n'a pas pu être recalculée pour cette fenêtre : le tracé affiché correspond à la dernière fenêtre réussie.Courbe (trait plein), asymptotes (pointillé), extremums, zéros et point (0 ; f(0)) (points pleins), points exclus du graphe (ronds vides). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
     "titre": "Graphique"
    }
   ],
