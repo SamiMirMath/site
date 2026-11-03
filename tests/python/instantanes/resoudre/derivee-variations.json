@@ -21,19 +21,16 @@
     "badge": "calcul",
     "blocs": [
      {
-      "html": "On pose \\(u(x) = x + 1\\) et \\(v(x) = x - 1\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+      "html": "On applique la règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\), avec :",
       "style": "etape",
       "type": "texte"
      },
      {
-      "html": "\\(u'(x) = 1\\).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "\\(v'(x) = 1\\).",
-      "style": "etape",
-      "type": "texte"
+      "du": "u' = 1",
+      "dv": "v' = 1",
+      "type": "uv",
+      "u": "u = x + 1",
+      "v": "v = x - 1"
      },
      {
       "html": "\\(\\left(\\frac{x + 1}{x - 1}\\right)' = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{x - 1 - \\left(x + 1\\right)}{\\left(x - 1\\right)^{2}} = \\frac{-2}{\\left(x - 1\\right)^{2}}\\).",
@@ -345,22 +342,19 @@
     "badge": "calcul",
     "blocs": [
      {
-      "html": "On pose \\(u(x) = x^{2} - 1\\) et \\(v(x) = x - 3\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+      "html": "On applique la règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\), avec :",
       "style": "etape",
       "type": "texte"
+     },
+     {
+      "du": "u' = 2x",
+      "dv": "v' = 1",
+      "type": "uv",
+      "u": "u = x^{2} - 1",
+      "v": "v = x - 3"
      },
      {
       "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "\\(u'(x) = 2x\\).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "\\(v'(x) = 1\\).",
       "style": "etape",
       "type": "texte"
      },
@@ -485,22 +479,19 @@
     "badge": "calcul",
     "blocs": [
      {
-      "html": "On pose \\(u(x) = x\\) et \\(v(x) = \\ln(x)\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+      "html": "On applique la règle du produit, \\((uv)' = u'v + uv'\\), avec :",
       "style": "etape",
       "type": "texte"
+     },
+     {
+      "du": "u' = 1",
+      "dv": "v' = \\frac{1}{x}",
+      "type": "uv",
+      "u": "u = x",
+      "v": "v = \\ln(x)"
      },
      {
       "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "\\(u'(x) = 1\\).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "\\(v'(x) = \\frac{1}{x}\\).",
       "style": "etape",
       "type": "texte"
      },
@@ -853,22 +844,19 @@
     "badge": "calcul",
     "blocs": [
      {
-      "html": "On pose \\(u(x) = x\\) et \\(v(x) = \\ln(x)\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+      "html": "On applique la règle du produit, \\((uv)' = u'v + uv'\\), avec :",
       "style": "etape",
       "type": "texte"
+     },
+     {
+      "du": "u' = 1",
+      "dv": "v' = \\frac{1}{x}",
+      "type": "uv",
+      "u": "u = x",
+      "v": "v = \\ln(x)"
      },
      {
       "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "\\(u'(x) = 1\\).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "\\(v'(x) = \\frac{1}{x}\\).",
       "style": "etape",
       "type": "texte"
      },
@@ -1317,22 +1305,19 @@
     "badge": "calcul",
     "blocs": [
      {
-      "html": "On pose \\(u(x) = \\ln(x)\\) et \\(v(x) = x\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+      "html": "On applique la règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\), avec :",
       "style": "etape",
       "type": "texte"
+     },
+     {
+      "du": "u' = \\frac{1}{x}",
+      "dv": "v' = 1",
+      "type": "uv",
+      "u": "u = \\ln(x)",
+      "v": "v = x"
      },
      {
       "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "\\(u'(x) = \\frac{1}{x}\\).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "\\(v'(x) = 1\\).",
       "style": "etape",
       "type": "texte"
      },
@@ -1928,22 +1913,19 @@
     "badge": "calcul",
     "blocs": [
      {
-      "html": "On pose \\(u(x) = x\\) et \\(v(x) = \\ln(x)\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+      "html": "On applique la règle du produit, \\((uv)' = u'v + uv'\\), avec :",
       "style": "etape",
       "type": "texte"
+     },
+     {
+      "du": "u' = 1",
+      "dv": "v' = \\frac{1}{x}",
+      "type": "uv",
+      "u": "u = x",
+      "v": "v = \\ln(x)"
      },
      {
       "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "\\(u'(x) = 1\\).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "\\(v'(x) = \\frac{1}{x}\\).",
       "style": "etape",
       "type": "texte"
      },
@@ -2063,22 +2045,19 @@
       "type": "texte"
      },
      {
-      "html": "On pose \\(u(x) = x\\) et \\(v(x) = \\ln(x)\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+      "html": "On applique la règle du produit, \\((uv)' = u'v + uv'\\), avec :",
       "style": "etape",
       "type": "texte"
+     },
+     {
+      "du": "u' = 1",
+      "dv": "v' = \\frac{1}{x}",
+      "type": "uv",
+      "u": "u = x",
+      "v": "v = \\ln(x)"
      },
      {
       "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "\\(u'(x) = 1\\).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "\\(v'(x) = \\frac{1}{x}\\).",
       "style": "etape",
       "type": "texte"
      },
@@ -2198,22 +2177,19 @@
     "badge": "calcul",
     "blocs": [
      {
-      "html": "On pose \\(u(x) = x\\) et \\(v(x) = x^{2} + 1\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+      "html": "On applique la règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\), avec :",
       "style": "etape",
       "type": "texte"
+     },
+     {
+      "du": "u' = 1",
+      "dv": "v' = 2x",
+      "type": "uv",
+      "u": "u = x",
+      "v": "v = x^{2} + 1"
      },
      {
       "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "\\(u'(x) = 1\\).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "\\(v'(x) = 2x\\).",
       "style": "etape",
       "type": "texte"
      },
@@ -2849,9 +2825,16 @@
     "badge": "calcul",
     "blocs": [
      {
-      "html": "On pose \\(u(x) = x^{2}\\) et \\(v(x) = e^{-x}\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+      "html": "On applique la règle du produit, \\((uv)' = u'v + uv'\\), avec :",
       "style": "etape",
       "type": "texte"
+     },
+     {
+      "du": "u' = 2x",
+      "dv": "v' = -e^{-x}",
+      "type": "uv",
+      "u": "u = x^{2}",
+      "v": "v = e^{-x}"
      },
      {
       "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
@@ -2864,17 +2847,7 @@
       "type": "texte"
      },
      {
-      "html": "\\(u'(x) = 2x\\).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "\\(v'(x) = -e^{-x}\\).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "\\(f'(x) = u'(x)v(x) + u(x)v'(x) = 2x\\,e^{-x} + x^{2}\\,\\left(-e^{-x}\\right) = -x\\,\\left(x - 2\\right)\\,e^{-x}\\).",
+      "html": "\\(f'(x) = u'(x)v(x) + u(x)v'(x) = 2x\\,e^{-x} + x^{2} \\cdot \\left(-e^{-x}\\right) = -x\\,\\left(x - 2\\right)\\,e^{-x}\\).",
       "style": "etape",
       "type": "texte"
      },

@@ -8,8 +8,16 @@ URL : `/derivee-variations/` · moteur : `derivee-variations/derivee_variations.
 1. **Rappel** : f(x) et son ED (détail renvoyé à l'outil « Ensemble de définition »).
 2. **Dérivée** (méthode décidée avec l'enseignant) :
    - somme/différence : terme à terme ;
-   - produit u·v et quotient u/v (facteurs non constants) : u, v, u', v' nommés, puis la formule,
-     **au premier niveau seulement** (f ou chaque terme d'une somme) ;
+   - produit u·v et quotient u/v (facteurs non constants) : « On applique la règle du produit (du quotient), …, avec : », puis
+     u, v, u', v' dans un **tableau 2 × 2** (colonnes u | v, lignes fonction | dérivée ; colonnes empilées u, u', v, v' si elles ne
+     tiennent pas côte à côte : bloc `uv`, composant commun `.uv`), les justifications des dérivées, puis la formule,
+     **au premier niveau seulement** (f ou chaque terme d'une somme) ; un facteur négatif à droite d'un produit est écrit entre
+     parenthèses avec le point, (x² − 6)·(−2e^{−2x}) (chantier étude complète, decisions.md D7, D8) ;
+   - f = e^{g(x)}, g = u/v (polynômes écrits développés, coefficients entiers, v non constant) : sous-carte « Dérivée de
+     l'exposant » (tableau u/v, règle du quotient, puis le numérateur une étape par ligne : développement, réduction, mise en
+     évidence, simplification), puis « On remplace g'(x) dans f'(x) = g'(x)·e^{g(x)} » et f' encadré (D7) ; f = produit de deux
+     sommes de c·e^{kx} et de constantes : « On développe d'abord » (eˣ(6 − eˣ) = 6eˣ − eˣ · eˣ = 6eˣ − e^{2x}), puis la dérivée de
+     la somme (D7b). Chaque ligne est vérifiée (SymPy et sonde numérique) ; au moindre doute, la rédaction habituelle ;
    - composée ln(u), e^u, √u, u^n : u et u' nommés dans la même phrase que le résultat, sans tableau ;
    - facteur constant c·g, g·c, g/c, signe moins : on dérive g, puis une ligne conclut
      « f'(x) = c · (g)' = … » (correction `a9b2a6e`) ;

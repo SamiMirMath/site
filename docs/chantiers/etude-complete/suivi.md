@@ -19,9 +19,9 @@ passe fait échouer la suite). Temps natif : `docs/chantiers/etude-complete/mesu
 | P2 | Squelette des 6 parties titrées (D1), spécification (D2, D19) | EC | **fait** | 4cf3e9e |
 | P3 | Partie 1 : mise en forme + ED détaillé (D3) | EC | **fait** | f108f7f |
 | P4 | Partie 2 : parité (D4) | EC | **fait** | 62781a8 |
-| P5 | Partie 3 : zéros, signe, f(0) (D5) | EC | **fait** | (voir `git log`) |
+| P5 | Partie 3 : zéros, signe, f(0) (D5) | EC | **fait** | 8fc2fa2 |
 | P6 | Partie 4 : D12, D13, D16 | Limites | reportée (hors de la nuit du 02.11) | |
-| P7a | Dérivée de l'exposant détaillée, tableau u/v (D7, D8, D7b si simple) | Dérivée | à faire | |
+| P7a | Dérivée de l'exposant détaillée, tableau u/v (D7, D8, D7b si simple) | Dérivée | **fait** | |
 | P7b | Valeurs dans le tableau de variations (D10), extremums (D11) | EC + Dérivée | à faire | |
 | P8 | Graphe (D15, §3) | EC | à faire | |
 | P9 | Exemples (D18), Bilan (D20), instantanés, largeurs 320–390 px, mesure Pyodide | EC | reportée (hors de la nuit du 02.11) | |
@@ -57,6 +57,14 @@ passe fait échouer la suite). Temps natif : `docs/chantiers/etude-complete/mesu
   inchangé) ; f(0) exact puis ≈ et le point, ou « 0 ∉ ED » ; zéros non exacts ou doute : message clair. Garde-fous SymPy (f(z) = 0,
   `solveset`, signe exact par intervalle) et sonde mpmath. 5 xfail P5 retirés ; instantanés de l'EC : partie 3 seule (liste sous « À
   relire ») ; largeurs 320/360/390 sans faute ; questions 22 à 30 ; `etudier()` inchangé, partie 3 de 5 à 61 ms.
+- **P7a faite** (outil Dérivée, donc aussi EC) : tableau u | v / u′ | v′ (D8, nouveau bloc `uv`, composant commun `.uv` qui empile
+  u, u′, v, v′ quand les colonnes ne tiennent pas) à la place de « On pose … » et des lignes u′, v′ ; facteur négatif entre
+  parenthèses **avec** le point, (x² − 6)·(−2e^{−2x}) (écart de P1 résorbé) ; f = e^{u/v} (Ex7, d, e^(1/x)) : sous-carte « Dérivée de
+  l'exposant » (règle du quotient, tableau, puis développement, réduction, mise en évidence, simplification par 6, une étape par
+  ligne), sans « (x²)′ = 2x » parasite ; D7b fait (critère simple : produit de deux sommes de c·e^{kx}) : « On développe d'abord »
+  eˣ(6 − eˣ) = 6eˣ − eˣ · eˣ = 6eˣ − e^{2x}. f′ inchangée ; chaque ligne vérifiée (SymPy et sonde), sinon rédaction habituelle.
+  4 xfail P7a retirés (3 tests) ; 9 entrées de la Dérivée et 11 de l'EC modifiées (carte « Dérivée » seule, liste sous « À relire ») ;
+  questions 31 à 39 ; temps : Ex7 0,64 s (+ 8 %), autres inchangés.
 
 ## Plans
 
@@ -193,6 +201,36 @@ appelée par `etudier` (sortie de l'outil Dérivée inchangée : instantanés id
    Instantanés `resoudre` et références de pages de l'EC régénérés (liste sous « À relire ») ; largeurs 320/360/390 ; suite complète ;
    temps natif (et coût de la partie 3) ; commit « EC P5 : … ».
 
+### P7a (03.11.2026)
+
+Outil Dérivée (`derivee-variations/derivee_variations.py`, `resoudre_dv.carte_derivee`), donc aussi l'EC (portée EC + Dérivée) ; f′ ne
+change pas (même calcul, même écriture de `deriv_tex`), seules les étapes de la carte « Dérivée » changent.
+1. **D8, tableau u, v / u′, v′** : nouveau bloc `uv` du format de sortie (`sortie.uv`, `valider`), rendu par `commun/rendu.js` en deux
+   colonnes (u, u′) | (v, v′) ; composant commun `.uv` dans `commun/composants.css` : si les deux colonnes ne tiennent pas côte à côte, la
+   colonne v passe sous la colonne u (u, u′, v, v′ empilés, par retour à la ligne, aucune largeur en pixels). Règle du produit et du
+   quotient (premier niveau) : « On applique la règle du produit, (uv)′ = u′v + uv′, avec : », le tableau, les justifications des
+   dérivées (R11), puis la ligne f′ ; les phrases « On pose u(x) = … et v(x) = … » et « u′(x) = … », « v′(x) = … » disparaissent.
+2. **D7, parenthèses avec le point** : dans la ligne u′v ± uv′, un facteur négatif à droite d'un produit s'écrit `(x² − 6)·(−2e^{−2x})`
+   (`_tex_brut`, partout ailleurs l'écriture de `tex`) : l'écart de P1 est résorbé.
+3. **D7, dérivée de l'exposant** : f = e^{g(x)}, g = u/v avec u et v polynômes écrits développés à coefficients entiers, v non constant
+   (Ex7, d, e^(1/x)). Une phrase « f(x) = e^{g(x)} avec g(x) = …, donc f′(x) = g′(x)·e^{g(x)} (dérivée d'une composée) », puis la
+   sous-carte « Dérivée de l'exposant » (bloc `sous_calcul` existant) : étape « règle du quotient » (formule, tableau u/v, ligne
+   g′(x) = …), étape « calcul du numérateur, puis simplification » (développement terme à terme, réduction, mise en évidence de c·xᵏ,
+   simplification par le pgcd avec le coefficient du dénominateur (6x − 12)² = 36(x − 2)²), une étape par ligne ; puis « On remplace
+   g′(x) dans f′(x) = g′(x)·e^{g(x)} : » et f′ encadré. Plus de « (x²)′ = 2x » parasite. Garde-fous : chaque ligne égale à la précédente
+   (SymPy et sonde en 7 points), la dernière égale à g′ (SymPy `diff` et différence centrée), g′·e^{g} égale à f′ ; sinon la rédaction
+   actuelle. Exposant polynôme (a : −x²) : rédaction actuelle (le .tex n'a pas de sous-carte).
+4. **D7b, développer d'abord** (critère simple et sûr, donc fait) : f = A·B, A et B sommes de c·e^{kx} (k entier ≥ 1) et de constantes
+   entières, une exponentielle dans chacun, une somme dans l'un : « On développe d'abord (c'est plus simple à dériver) : », f(x) = eˣ(6 − eˣ)
+   = 6eˣ − eˣ · eˣ (développement) = 6eˣ − e^{2x} (réduction), puis la dérivée de la somme. Garde-fous : SymPy et sonde, et la dérivée
+   de la forme développée doit s'écrire exactement comme f′ ; sinon la rédaction actuelle.
+5. Tests : xfail P7a retirés ; `test_derivee_narration.py` (lignes exactes Ex7, d, c, b ; famille d'exposants u/v tirés au hasard dont
+   chaque ligne affichée, relue et évaluée en mpmath, égale g′ ; cas laissés à la rédaction actuelle ; garde-fous forcés) ; les tests
+   qui lisaient `it["html"]` lisent tout le texte de l'étape (`moteurs.texte_etape`, tableau et sous-carte compris) ; `test_sortie.py`
+   (bloc `uv`), `test_composants.py` (`.uv`), `test_largeurs.py` (tableau u/v et sous-carte à 320–1100 px : rien ne déborde, colonnes
+   alignées côte à côte, empilées dans l'ordre u, u′, v, v′ quand elles ne tiennent pas). Instantanés Dérivée et EC régénérés (moteur,
+   `resoudre`, références de pages), listés sous « À relire » ; spécification de l'outil Dérivée ; suite complète ; temps natif ; commit.
+
 ## Temps natif de etudier() (s, médiane de 3 processus neufs)
 
 | Partie | Ex7 | a | b | c | d |
@@ -203,6 +241,7 @@ appelée par `etudier` (sortie de l'outil Dérivée inchangée : instantanés id
 | P3 | 0,59 | 0,02 | 0,42 | 0,19 | 0,30 |
 | P4 | 0,60 | 0,02 | 0,43 | 0,18 | 0,29 |
 | P5 | 0,59 | 0,02 | 0,43 | 0,19 | 0,29 |
+| P7a | 0,64 | 0,02 | 0,42 | 0,20 | 0,31 |
 
 P3 ne touche pas `etudier()` ; la partie 1 (`parties.cartes_domaine`, appelée par `resoudre`) coûte en plus 0,5 ms (Ex7), 0,2 ms (d),
 moins de 0,01 ms (a, b, c).
@@ -212,6 +251,9 @@ P5 ne change pas la sortie d'`etudier()` (le tableau de f′ passe par `tableau_
 (`parties.cartes_zeros_signe`, appelée par `resoudre`, SymPy déjà chargé, médiane de 3 processus neufs) coûte en plus 43 ms (Ex7),
 5 ms (a), 61 ms (b), 44 ms (c), 27 ms (d) : surtout `solveset` et `simplify` (garde-fous du principe 0.2). Coût sous Pyodide à
 mesurer en P9.
+P7a : la rédaction D7 / D7b est calculée dans `etudier()` (outil Dérivée) : + 58 ms (Ex7, sous-carte) et + 16 ms (c, développement),
+surtout les preuves SymPy de chaque ligne. Une première version (preuve par `simplify`) donnait Ex7 0,77 s et c 0,37 s (+ 95 %) ; la
+preuve passe maintenant d'abord par `cancel(expand(…))` (exacte, rapide), `simplify` seulement si elle ne conclut pas.
 
 ## Suite complète
 
@@ -227,6 +269,8 @@ mesurer en P9.
 | P4 | 1113 passés, 43 xfail (631 s) | 116 passés (873 s) ; code de retour 0 (1ᵉʳ lancement) | 03.11.2026 |
 | P4 (contrôle du chef d'orchestre) | 1113 passés, 43 xfail (629 s) | 116 passés (875 s) ; code de retour 0 | 03.11.2026 |
 | P5 | 1136 passés, 38 xfail (662 s) | 116 passés (870 s) ; code de retour 0 (1ᵉʳ lancement) | 03.11.2026 |
+| P5 (contrôle du chef d'orchestre) | 1136 passés, 38 xfail (657 s) | 116 passés (885 s) ; code de retour 0 | 03.11.2026 |
+| P7a | 1149 passés, 34 xfail (643 s) | 117 passés (914 s, dont le nouveau test de largeurs du tableau u/v) ; code de retour 0 (1ᵉʳ lancement) | 03.11.2026 |
 
 ## Écarts acceptés
 
@@ -276,6 +320,18 @@ mesurer en P9.
   titres des cartes de `parties.cartes_zeros_signe` (comme la partie 2 à P4) : le reste de l'ordre est vérifié comme avant ; le
   contenu est vérifié à part (`test_parties_ec.py` : cartes exactes, oracle mpmath, garde-fous ; `test_resoudre_place_la_partie_3…`).
   La spécification décrit la partie 3 (sinon elle serait fausse : « 3 vide »).
+
+- P7a : les tests qui lisaient le texte des étapes de la dérivée par `it["html"]` (`test_derivee_narration.py`,
+  `test_proprietes_derivee.py`, `test_racines_reelles.py`, `test_derivee_exposant_irrationnel.py`) lisent maintenant tout le texte de
+  l'étape (`moteurs.texte_etape` : html d'un texte, toutes les chaînes d'un tableau `uv` ou d'une sous-carte) : mêmes vérifications,
+  étendues aux cases du tableau et aux lignes de la sous-carte (`test_racines_reelles` garde `get("html", "")` pour les étapes du signe,
+  comme avant). `test_facteur_negatif_entre_parentheses` attend `(x² − 6) \cdot (−2e^{−2x})` (parenthèses et point, D7) au lieu de
+  `(x² − 6)\,(−2e^{−2x})` : même force (le refus de `\cdot -` reste).
+- P7a : `docs/specifications/derivee-variations.md` (point 2, « Dérivée ») décrit le tableau u/v, la sous-carte et le développement
+  d'abord (sinon elle serait fausse). Le guide de rédaction (R11 : « u, u', v, v' sur une ligne ») n'est pas modifié : D8 (tableau) le
+  remplace pour ces deux règles (question 32).
+- P7a : l'écart de P1 « parenthèses sans point » est résorbé : `(x² − 6)·(−2e^{−2x})` (outil Dérivée et EC), par `_tex_brut`, qui
+  n'écrit autrement que `tex` ; les autres produits gardent l'écriture de `tex` (`(2x + 1)(6x − 12)`, `(x² + x − 2)·6`).
 
 ## Questions pour l'enseignant
 
@@ -368,6 +424,38 @@ mesurer en P9.
     affiche le moins). En voulez-vous une ?
 30. **P5, sans zéro mais avec changement de signe** (e^x/x, 1/x, x/√(x²)) : « Donc f n'a pas de zéro. » puis le tableau (decisions.md
     ne prévoit la phrase « f(x) > 0 sur ED » sans tableau que pour un signe constant).
+
+31. **P7a, quand la sous-carte « Dérivée de l'exposant »** : seulement si f = e^{u/v}, u et v polynômes écrits développés à
+    coefficients entiers, v non constant (Ex7, d, e^(1/x)). Un exposant polynôme (a : −x², e^(x²)) garde la phrase « de la forme e^u »
+    (le .tex de a n'a pas de sous-carte) ; e^(−1/x) aussi (la règle du quotient donnerait « −(−1) »), de même un exposant non développé
+    ((x + 1)²/(x − 1)), à coefficient non entier, ou f = P(x)·e^{u/v} (option qui affiche le moins). Faut-il l'étendre ?
+32. **P7a, place du tableau u/v** : « On applique la règle du produit, (uv)′ = u′v + uv′, avec : », le tableau, puis les justifications
+    des dérivées (R11 : « (x²)′ = 2x (règle de la puissance) », « e^{−2x} est de la forme e^u avec u(x) = −2x … »), puis la ligne f′.
+    Le nom u de la phrase « de la forme e^u » n'est pas le u du tableau (comme avant P7a, où « On pose u(x) = x² − 6 » précédait la
+    même phrase). Le guide (R11) dit encore « u, u', v, v' sur une ligne » : à mettre à jour si le tableau vous convient.
+33. **P7a, forme finale de g′** : la chaîne s'arrête après la simplification par le pgcd (mise en évidence de c·xᵏ seulement, pas de
+    Somme-Produit) : d donne g′(x) = −4x/(x² − 4)² (comme le .tex), mais f′ encadré garde l'écriture factorisée de l'outil,
+    −4x·e^{…}/((x − 2)²(x + 2)²). De même, x² − 6x + 1 ou 2x² − 8x + 5 restent tels quels.
+34. **P7a, résultat encadré** : la ligne « On remplace g′(x) dans f′(x) = g′(x)·e^{g(x)} : » précède le résultat encadré habituel
+    f′(x) = x(x − 4)e^{g}/(6(x − 2)²) (écriture de l'outil, une seule exponentielle, avec l'exposant écrit en entier), et non
+    « f′(x) = x(x − 4)/(6(x − 2)²) · e^{g(x)} » du .tex : changer l'écriture de f′ changerait la ligne des zéros et le tableau de signes.
+35. **P7a, mots de la sous-carte** : étapes « Étape 1 : règle du quotient. » et « Étape 2 : calcul du numérateur, puis
+    simplification. » (rendu du bloc `sous_calcul` des limites) ; propriétés « (règle du quotient) », « (développement) » — « (calcul) »
+    quand aucun produit de sommes n'est développé (d : −2·2x = −4x) —, « (réduction) », « (mise en évidence) », « (simplification par
+    6) » ; dénominateur (6x − 12)² écrit 36(x − 2)² dès la ligne du développement (decisions.md §4 ; (−6x − 18)² = 36(x + 3)²). La
+    phrase d'entrée nomme g(x) = (x² + x − 2)/(6x − 12) (écrit développé), alors que la carte « Mise en forme » de l'EC le nomme sous
+    forme factorisée.
+36. **P7a, D7b** : après le développement, la dérivée de la somme suit la rédaction habituelle (« (6eˣ)′ = 6·(eˣ)′ = 6eˣ », phrase de
+    e^{2x}, puis « f′(x) = 2eˣ(3 − eˣ) ») ; la ligne du .tex « f′(x) = 6eˣ − 2e^{2x} = 2eˣ(3 − eˣ) (on a mis 2eˣ en évidence) »
+    n'est pas écrite (changement de la rédaction de toutes les sommes de l'outil). Critère : f = produit de deux sommes de c·e^{kx}
+    (k ≥ 1 entier) et de constantes entières, une exponentielle dans chacune ; e^{−x}(eˣ + 1), (eˣ + 1)², eˣ(eˣ + x) gardent la
+    rédaction habituelle.
+37. **P7a, écart à D6 vu en passant (non corrigé, hors corpus)** : l'exposant de f′ n'est pas toujours celui de l'énoncé :
+    e^((x² + 1)/(2x)) donne f′ avec e^{(½x² + ½)/x}, et e^((−2x² + 3x − 1)/(3x − 6)) réordonne le haut (3x − 2x² − 1). Cela vient du
+    `_simplifier` de P1 (SymPy) ; à corriger avec P7b ou à part ?
+38. **P7a, « · » seulement devant un facteur négatif** : (x² − 6)·(−2e^{−2x}), x²·(−e^{−x}), (3x² + x − 3)·(−6) ; deux parenthèses
+    positives restent côte à côte, (2x + 1)(6x − 12), comme dans l'outil.
+39. **P7a, temps** : aucune hausse de plus de 50 % (Ex7 + 8 %, c + 5 %, d + 7 %).
 
 ## À relire par l'enseignant
 
@@ -470,3 +558,24 @@ mesurer en P9.
   x = ln(6) ≈ 1,79 », tableau + 0 −, f(0) = 5 ; a « e^{−x²} > 0 pour tout x … Donc f n'a pas de zéro et f(x) > 0 sur ED », f(0) = 1.
   Largeurs 320 / 360 / 390 px vérifiées à part (mesure de `test_largeurs.py`, corrigé complet affiché) pour 18 entrées dont Ex7, a–d,
   x⁴ − 2x², ln(x)/x, √(x² − 4), (x² − 5)(x² − 7)e^{−x} (tableau à 4 zéros) : aucune faute.
+
+- **P7a** (outil Dérivée, donc aussi EC). Instantanés modifiés : `tests/python/instantanes/{derivee-variations,etude-complete}.json`,
+  `tests/python/instantanes/resoudre/{derivee-variations,etude-complete}.json`, `tests/pages/references/{derivee-variations,etude-complete}.json` :
+  9 entrées de la Dérivée et 11 de l'EC, aucune nouvelle ni retirée. Vérifié par programme : dans chaque entrée, seule la carte
+  « Dérivée » change (étapes de la dérivée ; f′, tableaux, extremums identiques). Aucun autre outil ne change.
+
+  | Entrée | Avant | Après |
+  |---|---|---|
+  | produit et quotient (Dérivée : `(x+1)/(x-1)/2`, `(x^2-1)/(x-3)`, `-(x*ln(x))`, `3(x*ln(x))`, `ln(x)/x`, `x*ln(x)`, `x*ln(x)+x`, `x/(x^2+1)`, `x^2*e^(-x)` ; EC : `(e^x-1)/x`, `(x^2-1)/(x-3)`, `3(x*ln(x))`, `ln(x)/x`, `x*ln(x)`, `x/(x^2+1)`, `x/sqrt(x^2)`, `x^2*e^(-x)`) | « On pose u(x) = … et v(x) = … : règle du produit, (uv)′ = u′v + uv′. » · justifications · « u′(x) = … . » · « v′(x) = … . » · ligne f′ | « On applique la règle du produit, (uv)′ = u′v + uv′, avec : » · **tableau** u = … \| v = … / u′ = … \| v′ = … · justifications · ligne f′ (inchangée) |
+  | `x^2*e^(-x)` (Dérivée, EC) | … = 2xe^{−x} + x²(−e^{−x}) = … | … = 2xe^{−x} + x²·(−e^{−x}) = … |
+  | `e^((x^2+x-2)/(6x-12))` (Ex7, EC) | « (x²)′ = 2x (règle de la puissance). » · « e^{…} est de la forme e^u avec u(x) = (x² + x − 2)/(6x − 12) (dérivée interne u′(x) = ((2x + 1)(6x − 12) − (x² + x − 2)·6)/(6x − 12)²) ⇒ (e^{…})′ = u′e^u = x(x − 4)e^{…}/(6(x − 2)²). » | « f(x) = e^{g(x)} avec g(x) = (x² + x − 2)/(6x − 12), donc f′(x) = g′(x)·e^{g(x)} (dérivée d'une composée). On calcule d'abord g′(x). » · sous-carte **Dérivée de l'exposant** : Étape 1 règle du quotient (formule, tableau u = x² + x − 2 \| v = 6x − 12 / u′ = 2x + 1 \| v′ = 6, g′(x) = ((2x + 1)(6x − 12) − (x² + x − 2)·6)/(6x − 12)²) ; Étape 2 = (12x² − 24x + 6x − 12 − 6x² − 6x + 12)/(36(x − 2)²) (développement) = (6x² − 24x)/(36(x − 2)²) (réduction) = 6x(x − 4)/(36(x − 2)²) (mise en évidence) = x(x − 4)/(6(x − 2)²) (simplification par 6) · « On remplace g′(x) dans f′(x) = g′(x)·e^{g(x)} : » · f′ encadré (inchangé) |
+  | `e^(2/(x^2-4))` (d, EC) | « (x²)′ = 2x » · phrase « de la forme e^u … u′(x) = −2·2x/(x² − 4)² » | même structure : tableau u = 2 \| v = x² − 4 / u′ = 0 \| v′ = 2x ; g′(x) = −2·2x/(x² − 4)² (règle du quotient) ; = −4x/(x² − 4)² (calcul) |
+  | `e^(1/x)` (EC) | phrase « de la forme e^u … u′(x) = −1/x² … » | même structure : tableau u = 1 \| v = x / u′ = 0 \| v′ = 1 ; g′(x) = −1/x² (règle du quotient), pas d'étape 2 |
+
+  Hors instantanés (corpus) : b « On applique la règle du produit … » · tableau u = x² − 6 \| v = e^{−2x} / u′ = 2x \| v′ = −2e^{−2x} ·
+  « f′(x) = … = 2xe^{−2x} + (x² − 6)·(−2e^{−2x}) = −2(x − 3)(x + 2)e^{−2x} » ; c « On développe d'abord (c'est plus simple à
+  dériver) : » · « f(x) = eˣ(6 − eˣ) = 6eˣ − eˣ · eˣ (développement) » · « = 6eˣ − e^{2x} (réduction) » · dérivée de la somme
+  (« (eˣ)′ = eˣ », « (6eˣ)′ = 6·(eˣ)′ = 6eˣ », « e^{2x} est de la forme e^u … = 2e^{2x} », « f′(x) = 2eˣ(3 − eˣ) ») au lieu de la
+  règle du produit ; a inchangé. Largeurs : `test_largeurs.py::test_tableau_uv_et_derivee_de_l_exposant` (Dérivée
+  `(x^3+2x)^4*e^x`, EC Ex7, 320 à 1100 px) : aucune faute, tableaux dans leur carte, côte à côte à 1100 px, empilés u, u′, v, v′ à
+  320 px ; captures relues à 320 et 1100 px.

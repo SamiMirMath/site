@@ -3,19 +3,18 @@
   "derivee": {
    "deriv_etapes": [
     {
-     "html": "On pose \\(u(x) = e^{x} - 1\\) et \\(v(x) = x\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+     "html": "On applique la règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\), avec :",
      "type": "texte"
+    },
+    {
+     "du": "u' = e^{x}",
+     "dv": "v' = 1",
+     "type": "uv",
+     "u": "u = e^{x} - 1",
+     "v": "v = x"
     },
     {
      "html": "\\(\\left(e^{x}\\right)' = e^{x}\\) (règle de base).",
-     "type": "texte"
-    },
-    {
-     "html": "\\(u'(x) = e^{x}\\).",
-     "type": "texte"
-    },
-    {
-     "html": "\\(v'(x) = 1\\).",
      "type": "texte"
     },
     {
@@ -472,19 +471,18 @@
   "derivee": {
    "deriv_etapes": [
     {
-     "html": "On pose \\(u(x) = x^{2} - 1\\) et \\(v(x) = x - 3\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+     "html": "On applique la règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\), avec :",
      "type": "texte"
+    },
+    {
+     "du": "u' = 2x",
+     "dv": "v' = 1",
+     "type": "uv",
+     "u": "u = x^{2} - 1",
+     "v": "v = x - 3"
     },
     {
      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
-     "type": "texte"
-    },
-    {
-     "html": "\\(u'(x) = 2x\\).",
-     "type": "texte"
-    },
-    {
-     "html": "\\(v'(x) = 1\\).",
      "type": "texte"
     },
     {
@@ -746,19 +744,18 @@
   "derivee": {
    "deriv_etapes": [
     {
-     "html": "On pose \\(u(x) = x\\) et \\(v(x) = \\ln(x)\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+     "html": "On applique la règle du produit, \\((uv)' = u'v + uv'\\), avec :",
      "type": "texte"
+    },
+    {
+     "du": "u' = 1",
+     "dv": "v' = \\frac{1}{x}",
+     "type": "uv",
+     "u": "u = x",
+     "v": "v = \\ln(x)"
     },
     {
      "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
-     "type": "texte"
-    },
-    {
-     "html": "\\(u'(x) = 1\\).",
-     "type": "texte"
-    },
-    {
-     "html": "\\(v'(x) = \\frac{1}{x}\\).",
      "type": "texte"
     },
     {
@@ -1076,11 +1073,58 @@
   "derivee": {
    "deriv_etapes": [
     {
-     "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+     "html": "\\(f(x) = e^{g(x)}\\) avec \\(g(x) = \\frac{x^{2} + x - 2}{6x - 12}\\), donc \\(f'(x) = g'(x) \\cdot e^{g(x)}\\) (dérivée d'une composée). On calcule d'abord \\(g'(x)\\).",
      "type": "texte"
     },
     {
-     "html": "\\(e^{\\frac{x^{2} + x - 2}{6x - 12}}\\) est de la forme \\(e^{u}\\) avec \\(u(x) = \\frac{x^{2} + x - 2}{6x - 12}\\) (dérivée interne \\(u'(x) = \\frac{\\left(2x + 1\\right)\\,\\left(6x - 12\\right) - \\left(x^{2} + x - 2\\right) \\cdot 6}{\\left(6x - 12\\right)^{2}}\\)) \\(\\Rightarrow\\) \\(\\left(e^{\\frac{x^{2} + x - 2}{6x - 12}}\\right)' = u' e^{u} = \\frac{x\\,\\left(x - 4\\right)\\,e^{\\frac{x^{2} + x - 2}{6x - 12}}}{6\\left(x - 2\\right)^{2}}\\).",
+     "etapes": [
+      {
+       "blocs": [
+        {
+         "html": "On applique la règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\), avec :",
+         "type": "texte"
+        },
+        {
+         "du": "u' = 2x + 1",
+         "dv": "v' = 6",
+         "type": "uv",
+         "u": "u = x^{2} + x - 2",
+         "v": "v = 6x - 12"
+        },
+        {
+         "html": "\\(g'(x) = \\frac{\\left(2x + 1\\right)\\,\\left(6x - 12\\right) - \\left(x^{2} + x - 2\\right) \\cdot 6}{\\left(6x - 12\\right)^{2}}\\) (règle du quotient)",
+         "type": "texte"
+        }
+       ],
+       "titre": "règle du quotient"
+      },
+      {
+       "blocs": [
+        {
+         "html": "\\(g'(x) = \\frac{12x^{2} - 24x + 6x - 12 - 6x^{2} - 6x + 12}{36\\left(x - 2\\right)^{2}}\\) (développement)",
+         "type": "texte"
+        },
+        {
+         "html": "\\(= \\frac{6x^{2} - 24x}{36\\left(x - 2\\right)^{2}}\\) (réduction)",
+         "type": "texte"
+        },
+        {
+         "html": "\\(= \\frac{6x\\,\\left(x - 4\\right)}{36\\left(x - 2\\right)^{2}}\\) (mise en évidence)",
+         "type": "texte"
+        },
+        {
+         "html": "\\(= \\frac{x\\,\\left(x - 4\\right)}{6\\left(x - 2\\right)^{2}}\\) (simplification par 6)",
+         "type": "texte"
+        }
+       ],
+       "titre": "calcul du numérateur, puis simplification"
+      }
+     ],
+     "titre": "Dérivée de l'exposant",
+     "type": "sous_calcul"
+    },
+    {
+     "html": "On remplace \\(g'(x)\\) dans \\(f'(x) = g'(x) \\cdot e^{g(x)}\\) :",
      "type": "texte"
     }
    ],
@@ -1459,7 +1503,37 @@
   "derivee": {
    "deriv_etapes": [
     {
-     "html": "\\(e^{\\frac{1}{x}}\\) est de la forme \\(e^{u}\\) avec \\(u(x) = \\frac{1}{x}\\) (dérivée interne \\(u'(x) = \\frac{-1}{x^{2}}\\)) \\(\\Rightarrow\\) \\(\\left(e^{\\frac{1}{x}}\\right)' = u' e^{u} = \\frac{-e^{\\frac{1}{x}}}{x^{2}}\\).",
+     "html": "\\(f(x) = e^{g(x)}\\) avec \\(g(x) = \\frac{1}{x}\\), donc \\(f'(x) = g'(x) \\cdot e^{g(x)}\\) (dérivée d'une composée). On calcule d'abord \\(g'(x)\\).",
+     "type": "texte"
+    },
+    {
+     "etapes": [
+      {
+       "blocs": [
+        {
+         "html": "On applique la règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\), avec :",
+         "type": "texte"
+        },
+        {
+         "du": "u' = 0",
+         "dv": "v' = 1",
+         "type": "uv",
+         "u": "u = 1",
+         "v": "v = x"
+        },
+        {
+         "html": "\\(g'(x) = \\frac{-1}{x^{2}}\\) (règle du quotient)",
+         "type": "texte"
+        }
+       ],
+       "titre": "règle du quotient"
+      }
+     ],
+     "titre": "Dérivée de l'exposant",
+     "type": "sous_calcul"
+    },
+    {
+     "html": "On remplace \\(g'(x)\\) dans \\(f'(x) = g'(x) \\cdot e^{g(x)}\\) :",
      "type": "texte"
     }
    ],
@@ -1727,11 +1801,46 @@
   "derivee": {
    "deriv_etapes": [
     {
-     "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+     "html": "\\(f(x) = e^{g(x)}\\) avec \\(g(x) = \\frac{2}{x^{2} - 4}\\), donc \\(f'(x) = g'(x) \\cdot e^{g(x)}\\) (dérivée d'une composée). On calcule d'abord \\(g'(x)\\).",
      "type": "texte"
     },
     {
-     "html": "\\(e^{\\frac{2}{x^{2} - 4}}\\) est de la forme \\(e^{u}\\) avec \\(u(x) = \\frac{2}{x^{2} - 4}\\) (dérivée interne \\(u'(x) = \\frac{-2 \\cdot 2x}{\\left(x^{2} - 4\\right)^{2}}\\)) \\(\\Rightarrow\\) \\(\\left(e^{\\frac{2}{x^{2} - 4}}\\right)' = u' e^{u} = \\frac{-4x\\,e^{\\frac{2}{x^{2} - 4}}}{\\left(x - 2\\right)^{2}\\,\\left(x + 2\\right)^{2}}\\).",
+     "etapes": [
+      {
+       "blocs": [
+        {
+         "html": "On applique la règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\), avec :",
+         "type": "texte"
+        },
+        {
+         "du": "u' = 0",
+         "dv": "v' = 2x",
+         "type": "uv",
+         "u": "u = 2",
+         "v": "v = x^{2} - 4"
+        },
+        {
+         "html": "\\(g'(x) = \\frac{-2 \\cdot 2x}{\\left(x^{2} - 4\\right)^{2}}\\) (règle du quotient)",
+         "type": "texte"
+        }
+       ],
+       "titre": "règle du quotient"
+      },
+      {
+       "blocs": [
+        {
+         "html": "\\(g'(x) = \\frac{-4x}{\\left(x^{2} - 4\\right)^{2}}\\) (calcul)",
+         "type": "texte"
+        }
+       ],
+       "titre": "calcul du numérateur, puis simplification"
+      }
+     ],
+     "titre": "Dérivée de l'exposant",
+     "type": "sous_calcul"
+    },
+    {
+     "html": "On remplace \\(g'(x)\\) dans \\(f'(x) = g'(x) \\cdot e^{g(x)}\\) :",
      "type": "texte"
     }
    ],
@@ -2292,19 +2401,18 @@
   "derivee": {
    "deriv_etapes": [
     {
-     "html": "On pose \\(u(x) = \\ln(x)\\) et \\(v(x) = x\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+     "html": "On applique la règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\), avec :",
      "type": "texte"
+    },
+    {
+     "du": "u' = \\frac{1}{x}",
+     "dv": "v' = 1",
+     "type": "uv",
+     "u": "u = \\ln(x)",
+     "v": "v = x"
     },
     {
      "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
-     "type": "texte"
-    },
-    {
-     "html": "\\(u'(x) = \\frac{1}{x}\\).",
-     "type": "texte"
-    },
-    {
-     "html": "\\(v'(x) = 1\\).",
      "type": "texte"
     },
     {
@@ -2821,19 +2929,18 @@
   "derivee": {
    "deriv_etapes": [
     {
-     "html": "On pose \\(u(x) = x\\) et \\(v(x) = \\ln(x)\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+     "html": "On applique la règle du produit, \\((uv)' = u'v + uv'\\), avec :",
      "type": "texte"
+    },
+    {
+     "du": "u' = 1",
+     "dv": "v' = \\frac{1}{x}",
+     "type": "uv",
+     "u": "u = x",
+     "v": "v = \\ln(x)"
     },
     {
      "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
-     "type": "texte"
-    },
-    {
-     "html": "\\(u'(x) = 1\\).",
-     "type": "texte"
-    },
-    {
-     "html": "\\(v'(x) = \\frac{1}{x}\\).",
      "type": "texte"
     },
     {
@@ -3137,19 +3244,18 @@
   "derivee": {
    "deriv_etapes": [
     {
-     "html": "On pose \\(u(x) = x\\) et \\(v(x) = x^{2} + 1\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+     "html": "On applique la règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\), avec :",
      "type": "texte"
+    },
+    {
+     "du": "u' = 1",
+     "dv": "v' = 2x",
+     "type": "uv",
+     "u": "u = x",
+     "v": "v = x^{2} + 1"
     },
     {
      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
-     "type": "texte"
-    },
-    {
-     "html": "\\(u'(x) = 1\\).",
-     "type": "texte"
-    },
-    {
-     "html": "\\(v'(x) = 2x\\).",
      "type": "texte"
     },
     {
@@ -3340,8 +3446,15 @@
   "derivee": {
    "deriv_etapes": [
     {
-     "html": "On pose \\(u(x) = x\\) et \\(v(x) = \\sqrt{x^{2}}\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+     "html": "On applique la règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\), avec :",
      "type": "texte"
+    },
+    {
+     "du": "u' = 1",
+     "dv": "v' = \\frac{x}{\\sqrt{x^{2}}}",
+     "type": "uv",
+     "u": "u = x",
+     "v": "v = \\sqrt{x^{2}}"
     },
     {
      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
@@ -3349,14 +3462,6 @@
     },
     {
      "html": "\\(\\sqrt{x^{2}}\\) est de la forme \\(\\sqrt{u}\\) avec \\(u(x) = x^{2}\\) (dérivée interne \\(u'(x) = 2x\\)) \\(\\Rightarrow\\) \\(\\left(\\sqrt{x^{2}}\\right)' = \\frac{u'}{2\\sqrt{u}} = \\frac{x}{\\sqrt{x^{2}}}\\).",
-     "type": "texte"
-    },
-    {
-     "html": "\\(u'(x) = 1\\).",
-     "type": "texte"
-    },
-    {
-     "html": "\\(v'(x) = \\frac{x}{\\sqrt{x^{2}}}\\).",
      "type": "texte"
     },
     {
@@ -3680,8 +3785,15 @@
   "derivee": {
    "deriv_etapes": [
     {
-     "html": "On pose \\(u(x) = x^{2}\\) et \\(v(x) = e^{-x}\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+     "html": "On applique la règle du produit, \\((uv)' = u'v + uv'\\), avec :",
      "type": "texte"
+    },
+    {
+     "du": "u' = 2x",
+     "dv": "v' = -e^{-x}",
+     "type": "uv",
+     "u": "u = x^{2}",
+     "v": "v = e^{-x}"
     },
     {
      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
@@ -3692,15 +3804,7 @@
      "type": "texte"
     },
     {
-     "html": "\\(u'(x) = 2x\\).",
-     "type": "texte"
-    },
-    {
-     "html": "\\(v'(x) = -e^{-x}\\).",
-     "type": "texte"
-    },
-    {
-     "html": "\\(f'(x) = u'(x)v(x) + u(x)v'(x) = 2x\\,e^{-x} + x^{2}\\,\\left(-e^{-x}\\right) = -x\\,\\left(x - 2\\right)\\,e^{-x}\\).",
+     "html": "\\(f'(x) = u'(x)v(x) + u(x)v'(x) = 2x\\,e^{-x} + x^{2} \\cdot \\left(-e^{-x}\\right) = -x\\,\\left(x - 2\\right)\\,e^{-x}\\).",
      "type": "texte"
     }
    ],

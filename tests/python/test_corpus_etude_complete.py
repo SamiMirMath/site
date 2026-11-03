@@ -683,7 +683,6 @@ def test_P6_av_d_un_seul_cote(ident):
         assert f"({int(a)};{int(y)})" in m, (a, y)
 
 
-@xfail("P7a", "dérivée de l'exposant détaillée, sans « (x²)′ = 2x » parasite (D7)")
 def test_P7a_derivee_de_l_exposant_ex7():
     t, m = texte(cartes_de("Ex7", "Dérivée")), maths(cartes_de("Ex7", "Dérivée"))
     assert "Dérivée de l'exposant" in t
@@ -692,13 +691,12 @@ def test_P7a_derivee_de_l_exposant_ex7():
         assert morceau in m, morceau
 
 
-@pytest.mark.parametrize("ident", [pytest.param(i, id=i, marks=[xfail("P7a", "tableau u, u′, v, v′ (D8)")]) for i in ("Ex7", "b")])
+@pytest.mark.parametrize("ident", ["Ex7", "b"])
 def test_P7a_tableau_u_v(ident):
     blocs = [b for c in cartes_de(ident, "Dérivée") for b in c["blocs"] if b["type"] != "texte"]
     assert any("u'" in "".join(chaines(b)) and "v'" in "".join(chaines(b)) for b in blocs), ident
 
 
-@xfail("P7a", "on développe d'abord eˣ(6 − eˣ) = 6eˣ − e^{2x} (D7b, reportable)")
 def test_P7a_c_developpe_d_abord():
     assert "6e^{x}-e^{2x}" in maths(cartes_de("c", "Dérivée")), maths(cartes_de("c", "Dérivée"))
 

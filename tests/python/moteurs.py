@@ -29,3 +29,22 @@ def derivee_numerique(arbre, x, h=1e-6):
 
 def proches(a, b, tol=1e-5):
     return abs(a - b) <= tol * (1 + abs(a) + abs(b))
+
+
+def texte_etape(it):
+    """Tout le texte d'une étape de dérivée (`deriv_etapes`) : le html d'un bloc texte ; pour un tableau u, v / u′, v′ (bloc « uv ») ou
+    la sous-carte « Dérivée de l'exposant » (bloc « sous_calcul »), toutes ses chaînes mises bout à bout (décisions EC, D7, D8)."""
+    if it["type"] == "texte":
+        return it["html"]
+
+    def chaines(v):
+        if isinstance(v, str):
+            yield v
+        elif isinstance(v, dict):
+            for k, x in v.items():
+                if k not in ("type", "style"):
+                    yield from chaines(x)
+        elif isinstance(v, list):
+            for x in v:
+                yield from chaines(x)
+    return " ".join(chaines(it))

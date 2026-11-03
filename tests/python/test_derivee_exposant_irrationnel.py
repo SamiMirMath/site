@@ -1,7 +1,7 @@
 """Dérivée de u^α avec α constant irrationnel : α·u^(α−1)·u' (et non e^(α ln u))."""
 import unittest
 
-from moteurs import ensemble_def as ed, derivee_numerique, proches
+from moteurs import ensemble_def as ed, derivee_numerique, proches, texte_etape
 import derivee_variations as dv
 import oracle
 
@@ -27,7 +27,7 @@ class TestDeriveeExposantIrrationnel(unittest.TestCase):
     def test_regle_de_la_puissance_pas_exponentielle(self):
         for entree in ("x^(ln(2))", "x^(sqrt(2))", "(x^2+1)^(sqrt(2))"):
             r = dv.etudier(entree)
-            textes = " ".join(e["html"] for e in r["deriv_etapes"])
+            textes = " ".join(texte_etape(e) for e in r["deriv_etapes"])
             with self.subTest(f=entree):
                 self.assertIn("règle de la puissance", textes + " ") if entree != "(x^2+1)^(sqrt(2))" else self.assertIn(r"\alpha\,u^{\alpha - 1}u'", textes)
                 self.assertNotIn(r"e^{", textes)
@@ -39,7 +39,7 @@ class TestDeriveeExposantIrrationnel(unittest.TestCase):
 
     def test_exposant_variable_inchange(self):
         r = dv.etudier("x^x")
-        self.assertIn(r"s'écrit", " ".join(e["html"] for e in r["deriv_etapes"]))
+        self.assertIn(r"s'écrit", " ".join(texte_etape(e) for e in r["deriv_etapes"]))
 
     def test_f_prime_non_definie_en_zero_pour_alpha_inferieur_a_1(self):    # Q3 : double barre sur f', f(0) sur la ligne f
         r = dv.etudier("x^(ln(2))")
@@ -60,7 +60,7 @@ class TestDeriveeExposantIrrationnel(unittest.TestCase):
         self.assertEqual(r["deriv_tex"], r"\frac{\ln(3) - 1}{x^{2 - \ln(3)}}")
         for entree in CAS + ["x^(ln(3)-1)", "x^(ln(3)-1)+x", "x^(ln(3)-2)*ln(x)", "(ln(3)-1)*x^2", "x^2+ln(2)-3"]:
             r = dv.etudier(entree)
-            textes = [r.get("deriv_tex", "")] + [e["html"] for e in r.get("deriv_etapes", [])]
+            textes = [r.get("deriv_tex", "")] + [texte_etape(e) for e in r.get("deriv_etapes", [])]
             for t in textes:
                 with self.subTest(f=entree):
                     self.assertNotRegex(t, r"(?<![\w}])-\d+ \+ \\(ln|sqrt)", t)
@@ -69,7 +69,7 @@ class TestDeriveeExposantIrrationnel(unittest.TestCase):
         """f' de x^√2·ln x = x^(√2−1)(√2 ln x + 1) (sert à l'étude du signe) ; les justifications restent (R11)."""
         r = dv.etudier("x^(sqrt(2))*ln(x)")
         self.assertEqual(r["deriv_tex"], r"x^{\sqrt{2} - 1}\,\left(\sqrt{2}\,\ln(x) + 1\right)")
-        textes = " ".join(e["html"] for e in r["deriv_etapes"])
+        textes = " ".join(texte_etape(e) for e in r["deriv_etapes"])
         self.assertIn("règle de la puissance", textes)
         self.assertIn("règle du produit", textes)
         self.assertEqual(dv.etudier("x^(ln(3)-1)+x")["deriv_tex"], r"\frac{\ln(3) - 1}{x^{2 - \ln(3)}} + 1")

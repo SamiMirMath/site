@@ -65,6 +65,23 @@ JS_MESURE = r"""
 """
 
 
+# Tableaux u, v / u′, v′ visibles : débordement de la carte ou de l'écran, colonnes côte à côte (cote), lignes alignées si côte à côte ou
+# colonne v sous la colonne u si empilées (aligne), u au-dessus de u′ (ordre).
+JS_UV = r"""
+(async () => {
+  await new Promise(r => setTimeout(r, 150));
+  return [...document.querySelectorAll('#cartes .uv')].filter(u => u.getBoundingClientRect().width > 0).map(u => {
+    const r = u.getBoundingClientRect(), carte = u.closest('.card').getBoundingClientRect();
+    const cols = [...u.children].map(c => [...c.children].map(d => d.getBoundingClientRect()));
+    const cote = Math.abs(cols[0][0].top - cols[1][0].top) < 1;
+    return {deborde: r.right > carte.right + 1 || r.left < carte.left - 1 || r.right > innerWidth + 1, cote,
+            aligne: cote ? Math.abs(cols[0][1].top - cols[1][1].top) < 1 : cols[1][0].top >= cols[0][1].bottom - 1,
+            ordre: cols[0][0].bottom <= cols[0][1].top + 1 && cols[1][0].bottom <= cols[1][1].top + 1};
+  });
+})()
+"""
+
+
 def erreurs_a_signaler(page):
     """Erreurs de la page, sans le bruit de ressources extérieures (compteur, polices…) ni l'icône de l'onglet."""
     return [e for e in page.erreurs if "favicon" not in e
@@ -127,6 +144,46 @@ class TestLargeurs(unittest.TestCase):
         page.evaluer("document.querySelector('#tout') && !document.querySelector('#tout').disabled && document.querySelector('#tout').click()")
         self.balayer(page, "corrigé complet", fautes)
         self.conclure(outil, page, fautes)
+
+    # ---------- tableau u, v / u′, v′ (D8) et sous-carte « Dérivée de l'exposant » (D7), chantier étude complète P7a ----------
+    def test_tableau_uv_et_derivee_de_l_exposant(self):
+        """Une saisie dont le tableau u/v est large (Dérivée) et Ex7 (Étude complète : sous-carte et tableau dans la sous-carte) : aucune
+        faute du balayage à aucune largeur ; chaque tableau reste dans sa carte ; colonnes côte à côte avec les lignes u | v et u′ | v′
+        alignées, ou empilées dans l'ordre u, u′, v, v′ ; côte à côte à 1100 px, empilées à 320 px pour le tableau large."""
+        cas = {"derivee-variations": ("(x^3+2x)^4*e^x", True), "etude-complete": ("e^((x^2+x-2)/(6x-12))", False)}
+        for outil, (entree, empile_a_320) in cas.items():
+            if outil not in CHOISIS:
+                continue
+            with self.subTest(outil=outil):
+                dossier, requete = page_de(outil)
+                page = self.nav.ouvrir(f"{dossier}/index.html{requete}")
+                attendre_pret(page)
+                page.taille(1100, 800)
+                page.evaluer(f"document.querySelector('#entree').value = {json.dumps(entree)}; document.querySelector('#calculer').click()")
+                page.attendre("document.querySelector('#cartes').children.length > 0 && !document.querySelector('#calculer').disabled", 120)
+                page.evaluer("document.querySelector('#tout') && !document.querySelector('#tout').disabled && document.querySelector('#tout').click()")
+                fautes = []
+                self.balayer(page, "corrigé complet : " + entree, fautes)
+                self.assertEqual(fautes, [], fautes[:5])
+                mesures = {}
+                try:
+                    for w in LARGEURS:
+                        page.taille(w, 800)
+                        mesures[w] = page.evaluer(JS_UV)
+                finally:
+                    page.taille(1100, 800)
+                for w, tableaux in mesures.items():
+                    self.assertTrue(tableaux, f"aucun tableau u/v visible à {w} px")
+                    for t in tableaux:
+                        with self.subTest(largeur=w):
+                            self.assertFalse(t["deborde"], t)
+                            self.assertTrue(t["aligne"] and t["ordre"], t)
+                self.assertTrue(all(t["cote"] for t in mesures[1100]), mesures[1100])
+                if empile_a_320:
+                    self.assertTrue(any(not t["cote"] for t in mesures[320]), mesures[320])
+                if outil == "etude-complete":
+                    self.assertTrue(page.evaluer("[...document.querySelectorAll('#cartes .sous-t')].some(t => t.textContent === \"Dérivée de l'exposant\")"))
+                self.assertEqual(erreurs_a_signaler(page), [])
 
     # ---------- simplexe (page autonome) ----------
     def clic(self, page, selecteur):

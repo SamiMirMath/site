@@ -24,6 +24,7 @@ Convention pédagogique :
 import json
 
 from fractions import Fraction as F
+from math import gcd
 
 from noyau import (
     Nb, X, E, Neg, Op, Fn,
@@ -463,10 +464,35 @@ def _derivee_somme(n, items, top, etiq=F_PRIME):
 
 
 def _signe_devant(n):
-    """Facteur négatif (−2e^{−2x}, −1…) écrit −(…) : placé à droite d'un produit, tex le met entre parenthèses,
-    (x² − 6)(−2e^{−2x}) et non (x² − 6) · −2e^{−2x} (décisions EC, D7)."""
+    """Facteur négatif (−2e^{−2x}, −1…) écrit −(…) : placé à droite d'un produit, il est écrit entre parenthèses, avec le point
+    (_tex_brut) : (x² − 6)·(−2e^{−2x}) et non (x² − 6) · −2e^{−2x} (décisions EC, D7)."""
     reste, negatif = _pos_et_signe(n)
     return Neg(reste) if negatif and not isinstance(n, Neg) else n
+
+
+def _tex_brut(n):
+    """tex(n), sauf qu'un facteur négatif à droite d'un produit est précédé du point : (x² − 6)·(−2e^{−2x}) (décisions EC, D7 ;
+    tex écrit deux parenthèses côte à côte sans point). Seuls les sommes, différences et quotients sont parcourus : partout
+    ailleurs, l'écriture est exactement celle de tex."""
+    if isinstance(n, Op):
+        if n.op == "*" and isinstance(n.b, Neg):
+            return par(n.a, 1.5) + r" \cdot " + par(n.b, 2)
+        if n.op == "+" and not isinstance(n.b, Neg):
+            return _tex_brut(n.a) + " + " + _tex_brut(n.b)
+        if n.op == "-" and prec(n.b) >= 2:
+            return _tex_brut(n.a) + " - " + _tex_brut(n.b)
+        if n.op == "/" and not (isinstance(n.a, Neg) and isinstance(n.a.a, Nb) and isinstance(n.b, Nb)):
+            return r"\frac{" + _tex_brut(n.a) + "}{" + tex(n.b) + "}"
+    return tex(n)
+
+
+def bloc_uv(u, du, v, dv):
+    """Tableau u | v / u′ | v′ des règles du produit et du quotient (décisions EC, D8), bloc « uv » du format de sortie (tex)."""
+    return {"type": "uv", "u": "u = " + tex(u), "du": "u' = " + tex(du), "v": "v = " + tex(v), "dv": "v' = " + tex(dv)}
+
+
+REGLE_PRODUIT = r"On applique la règle du produit, \((uv)' = u'v + uv'\), avec :"
+REGLE_QUOTIENT = r"On applique la règle du quotient, \(\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}\), avec :"
 
 
 def _derivee_produit(n, items, top, etiq=F_PRIME):
@@ -479,19 +505,18 @@ def _derivee_produit(n, items, top, etiq=F_PRIME):
     if cb is not None:
         return _facteur_constant(b, a, "g*c", items, top, etiq)
     if top:
-        items.append(txt(rf"On pose \(u(x) = {tex(a)}\) et \(v(x) = {tex(b)}\) : règle du produit, "
-                         rf"\((uv)' = u'v + uv'\)."))
+        items.append(txt(REGLE_PRODUIT))
+        place = len(items)                   # le tableau u, v / u′, v′ suit la règle ; les justifications des dérivées viennent après
     ua = derivee_narree(a, items, top=False)
     ub = derivee_narree(b, items, top=False)
     if top:
         ua, ub = _simplifier(ua), _simplifier(ub)
-        items.append(txt(rf"\(u'(x) = {tex(ua)}\)."))
-        items.append(txt(rf"\(v'(x) = {tex(ub)}\)."))
+        items.insert(place, bloc_uv(a, ua, b, ub))
     brut = _epurer(_add(_mul(ua, b), _mul(a, _signe_devant(ub) if top else ub)))
     if not top:
         return brut
     simplifie = _simplifier(brut)
-    items.append(txt(rf"\({etiq} = u'(x)v(x) + u(x)v'(x) = {tex(brut)} = {tex(simplifie)}\)."))
+    items.append(txt(rf"\({etiq} = u'(x)v(x) + u(x)v'(x) = {_tex_brut(brut)} = {tex(simplifie)}\)."))
     return simplifie
 
 
@@ -501,20 +526,308 @@ def _derivee_quotient(n, items, top, etiq=F_PRIME):
     if cb is not None:
         return _facteur_constant(b, a, "g/c", items, top, etiq)
     if top:
-        items.append(txt(rf"On pose \(u(x) = {tex(a)}\) et \(v(x) = {tex(b)}\) : règle du quotient, "
-                         rf"\(\left(\frac{{u}}{{v}}\right)' = \frac{{u'v - uv'}}{{v^2}}\)."))
+        items.append(txt(REGLE_QUOTIENT))
+        place = len(items)
     ua = derivee_narree(a, items, top=False)
     ub = derivee_narree(b, items, top=False)
     if top:
         ua, ub = _simplifier(ua), _simplifier(ub)
-        items.append(txt(rf"\(u'(x) = {tex(ua)}\)."))
-        items.append(txt(rf"\(v'(x) = {tex(ub)}\)."))
+        items.insert(place, bloc_uv(a, ua, b, ub))
     brut = _epurer(_div(_sub(_mul(ua, b), _mul(a, _signe_devant(ub) if top else ub)), _pow(b, Nb(2))))
     if not top:
         return brut
     simplifie = _simplifier(brut)
-    items.append(txt(rf"\({etiq} = \dfrac{{u'(x)v(x) - u(x)v'(x)}}{{v(x)^2}} = {tex(brut)} = {tex(simplifie)}\)."))
+    items.append(txt(rf"\({etiq} = \dfrac{{u'(x)v(x) - u(x)v'(x)}}{{v(x)^2}} = {_tex_brut(brut)} = {tex(simplifie)}\)."))
     return simplifie
+
+
+# =====================================================================
+# Dérivée de l'exposant détaillée (D7) et développement d'abord (D7b)
+# =====================================================================
+POINTS_SONDE = (-3.7, -1.3, -0.45, 0.35, 1.6, 2.9, 5.1)
+
+
+def _monome(t):
+    """c·xᵏ écrit tel quel (c entier non nul, k ≥ 0) → (c, k) ; None sinon."""
+    if isinstance(t, Nb):
+        return (t.v, 0) if t.v.denominator == 1 and t.v != 0 else None
+    if isinstance(t, X):
+        return F(1), 1
+    if isinstance(t, Op) and t.op == "^" and isinstance(t.a, X) and isinstance(t.b, Nb):
+        return (F(1), int(t.b.v)) if t.b.v.denominator == 1 and t.b.v >= 2 else None
+    if isinstance(t, Op) and t.op == "*" and isinstance(_coefficient(t.a), F):
+        m = _monome(t.b)
+        return (_coefficient(t.a) * m[0], m[1]) if m is not None and m[1] >= 1 else None
+    return None
+
+
+def _coefficient(n):
+    """Coefficient entier non nul écrit devant : Nb (6) ou Neg(Nb) (le parseur lit −2x² comme (−2)·x²) ; None sinon."""
+    if isinstance(n, Neg) and isinstance(n.a, Nb):
+        c = _coefficient(n.a)
+        return None if c is None else -c
+    return n.v if isinstance(n, Nb) and n.v.denominator == 1 and n.v != 0 else None
+
+
+def _monomes(n):
+    """Termes (c, k) d'un polynôme écrit développé (somme de c·xᵏ, c entier), dans l'ordre d'écriture ; None sinon."""
+    out = []
+    for sg, t in _termes(n):
+        m = _monome(t)
+        if m is None:
+            return None
+        out.append((sg * m[0], m[1]))
+    return out
+
+
+def _reduire(termes):
+    """Termes semblables regroupés, degrés décroissants, coefficients nuls retirés."""
+    somme = {}
+    for c, k in termes:
+        somme[k] = somme.get(k, 0) + c
+    return [(somme[k], k) for k in sorted(somme, reverse=True) if somme[k] != 0]
+
+
+def _monome_arbre(c, k):
+    """Arbre de c·xᵏ, c > 0."""
+    if k == 0:
+        return Nb(c)
+    xk = X() if k == 1 else Op("^", X(), Nb(k))
+    return xk if c == 1 else Op("*", Nb(c), xk)
+
+
+def _somme_arbre(termes):
+    """Arbre de la somme des c·xᵏ, dans l'ordre donné, sans rien regrouper (12x² − 24x + 6x − 12)."""
+    out = None
+    for c, k in termes:
+        m = _monome_arbre(abs(c), k)
+        out = (Neg(m) if c < 0 else m) if out is None else Op("-" if c < 0 else "+", out, m)
+    return out
+
+
+def _egaux(sp, arbres):
+    """Toutes les écritures sont égales à la première : différence nulle pour SymPy ET sonde numérique en 7 points (au moins 4
+    points où toutes sont définies). False au moindre doute."""
+    try:
+        ref = en_sympy(arbres[0])
+        if any(not _nul(sp, en_sympy(t) - ref) for t in arbres[1:]):
+            return False
+        testes = 0
+        for x in POINTS_SONDE:
+            vals = [_valeur_num(t, x) for t in arbres]
+            if all(v is None for v in vals):
+                continue
+            if any(v is None for v in vals) or any(abs(v - vals[0]) > 1e-9 * (1 + abs(vals[0])) for v in vals):
+                return False
+            testes += 1
+        return testes >= 4
+    except Exception:
+        return False
+
+
+def _nul(sp, e):
+    """e est nulle pour SymPy : d'abord `cancel` après développement (fractions rationnelles, polynômes en exponentielles), rapide ;
+    sinon `simplify`. Une réponse « non nul » vaut doute (jamais d'égalité affirmée sans preuve)."""
+    if sp.cancel(sp.expand(sp.powsimp(e, combine="exp"))) == 0:
+        return True
+    return sp.simplify(e) == 0
+
+
+def _derivee_juste(sp, g, gp):
+    """gp est la dérivée de g : SymPy (diff) et sonde numérique (différence centrée)."""
+    try:
+        if not _nul(sp, sp.diff(en_sympy(g), SYMPY["x"]) - en_sympy(gp)):
+            return False
+        testes = 0
+        for x in POINTS_SONDE:
+            h = 1e-6 * (1 + abs(x))
+            a, b, d = _valeur_num(g, x + h), _valeur_num(g, x - h), _valeur_num(gp, x)
+            if None in (a, b, d):
+                continue
+            if abs((a - b) / (2 * h) - d) > 1e-4 * (1 + abs(d)):
+                return False
+            testes += 1
+        return testes >= 4
+    except Exception:
+        return False
+
+
+def _ligne(gauche, quotient, propriete):
+    return txt(rf"\({gauche}{tex(quotient)}\) ({propriete})")
+
+
+def _derivee_exposant(f, fprime):
+    """Décisions EC, D7 : f = e^{g(x)} avec g = u/v, u et v polynômes écrits développés à coefficients entiers, v non constant
+    (exposant qui n'est pas affine, comme Ex7 et d). Sous-carte « Dérivée de l'exposant » : tableau u, v / u′, v′ (D8), règle du
+    quotient, puis le numérateur une étape par ligne (développement, réduction, mise en évidence, simplification). Chaque ligne
+    est vérifiée égale à la précédente et la dernière égale à g′ (SymPy et sonde), et g′·e^{g} égale à f′ ; au moindre doute,
+    None (rédaction habituelle). Renvoie les étapes de la carte « Dérivée » (avant le résultat encadré)."""
+    if not (isinstance(f, Fn) and f.nom == "exp" and isinstance(f.a, Op) and f.a.op == "/"):
+        return None
+    sp = charger_sympy()
+    if sp is None:
+        return None
+    g, A, B = f.a, f.a.a, f.a.b
+    mA, mB = _monomes(A), _monomes(B)
+    if mA is None or mB is None or all(k == 0 for _, k in mB):
+        return None
+    dA = _reduire([(c * k, k - 1) for c, k in mA if k >= 1])
+    dB = _reduire([(c * k, k - 1) for c, k in mB if k >= 1])
+    ua = _somme_arbre(dA) if dA else Nb(0)
+    ub = _somme_arbre(dB)
+    den1 = _pow(B, Nb(2))
+    brut = _epurer(_div(_sub(_mul(ua, B), _mul(A, _signe_devant(ub))), den1))
+    if r"-\left(-" in _tex_brut(brut):                 # « −(−1) » (e^{−1/x}) : écriture maladroite, rédaction habituelle
+        return None
+    # développement : chaque produit terme à terme, rien n'est regroupé ; dénominateur (c·w)² = c²·w² si c = pgcd > 1
+    developpe = [(p * q, i + j) for p, i in dA for q, j in mB] + [(-p * q, i + j) for p, i in mA for q, j in dB]
+    cB = 0
+    for c, _ in mB:
+        cB = gcd(cB, int(abs(c)))
+    signe = -1 if mB[0][0] < 0 else 1                    # (−6x − 18)² = 36(x + 3)² : le carré ne dépend pas du signe
+    W = _somme_arbre([(signe * c / cB, k) for c, k in mB]) if cB > 1 else B
+    den = Op("*", Nb(cB * cB), _pow(W, Nb(2))) if cB > 1 else den1
+    reduit = _reduire(developpe)
+    if not reduit:
+        return None
+    distribue = len(dA) * len(mB) > 1 or len(mA) * len(dB) > 1          # un produit de sommes : développement ; sinon un calcul
+    lignes = [(_div(_somme_arbre(developpe), den), "développement" if distribue else "calcul"),
+              (_div(_somme_arbre(reduit), den), "réduction")]
+    # mise en évidence de c·xᵏ (c = pgcd des coefficients, du signe du premier terme), puis simplification par le pgcd avec le
+    # coefficient du dénominateur
+    cN = 0
+    for c, _ in reduit:
+        cN = gcd(cN, int(abs(c)))
+    cN = -cN if reduit[0][0] < 0 else cN
+    kN = min(k for _, k in reduit)
+    reste = [(c / cN, k - kN) for c, k in reduit]
+    if len(reduit) >= 2 and (abs(cN) != 1 or kN >= 1):
+        def facteur(c):
+            corps = _monome_arbre(abs(c), kN) if (abs(c) != 1 or kN >= 1) else None
+            produit = _somme_arbre(reste) if corps is None else Op("*", corps, _somme_arbre(reste))
+            return Neg(produit) if c < 0 else produit
+        lignes.append((_div(facteur(cN), den), "mise en évidence"))
+    elif len(reduit) == 1:
+        cN, kN, reste = reduit[0][0], reduit[0][1], []
+
+        def facteur(c):
+            return _somme_arbre([(c, kN)])
+    else:
+        cN = 1
+    d = gcd(int(abs(cN)), cB * cB) if cB > 1 else 1
+    if d > 1:
+        haut = facteur(cN / d)
+        bas = _pow(W, Nb(2)) if cB * cB == d else Op("*", Nb(cB * cB // d), _pow(W, Nb(2)))
+        lignes.append((_div(haut, bas), f"simplification par {d}"))
+    # une ligne identique à la précédente n'est pas écrite
+    chaine, vu = [], tex(brut)
+    for q, propriete in lignes:
+        if tex(q) != vu:
+            chaine.append((q, propriete))
+            vu = tex(q)
+    gp = chaine[-1][0] if chaine else brut
+    if not (_egaux(sp, [brut] + [q for q, _ in chaine]) and _derivee_juste(sp, g, gp)
+            and _egaux(sp, [fprime, Op("*", gp, Fn("exp", g))])):
+        return None
+    etape1 = [txt(REGLE_QUOTIENT), bloc_uv(A, ua, B, ub), txt(rf"\(g'(x) = {_tex_brut(brut)}\) (règle du quotient)")]
+    etapes = [{"titre": "règle du quotient", "blocs": etape1}]
+    if chaine:
+        blocs = [_ligne("g'(x) = ", chaine[0][0], chaine[0][1])] + [_ligne("= ", q, p) for q, p in chaine[1:]]
+        etapes.append({"titre": "calcul du numérateur, puis simplification", "blocs": blocs})
+    return [
+        txt(rf"\(f(x) = e^{{g(x)}}\) avec \(g(x) = {tex(g)}\), donc \(f'(x) = g'(x) \cdot e^{{g(x)}}\) (dérivée d'une composée). "
+            r"On calcule d'abord \(g'(x)\)."),
+        {"type": "sous_calcul", "titre": "Dérivée de l'exposant", "etapes": etapes},
+        txt(r"On remplace \(g'(x)\) dans \(f'(x) = g'(x) \cdot e^{g(x)}\) :"),
+    ]
+
+
+def _terme_exp(t):
+    """c·e^{kx} (c entier non nul, k entier ≥ 1) → (c, k) ; constante entière non nulle c → (c, 0) ; None sinon."""
+    def k_de(a):
+        if isinstance(a, X):
+            return 1
+        if isinstance(a, Op) and a.op == "*" and isinstance(a.a, Nb) and isinstance(a.b, X) and a.a.v.denominator == 1 and a.a.v >= 2:
+            return int(a.a.v)
+        return None
+    if isinstance(t, Nb):
+        return (t.v, 0) if t.v.denominator == 1 and t.v != 0 else None
+    c = F(1)
+    if isinstance(t, Op) and t.op == "*" and _coefficient(t.a) is not None:
+        c, t = _coefficient(t.a), t.b
+    if isinstance(t, Fn) and t.nom == "exp" and k_de(t.a) is not None:
+        return c, k_de(t.a)
+    return None
+
+
+def _exp_kx(k):
+    return Fn("exp", X() if k == 1 else Op("*", Nb(k), X()))
+
+
+def _tex_termes(termes):
+    """Somme écrite terme à terme ; un terme (c, [k₁, k₂…]) est c·e^{k₁x}·e^{k₂x}… (eˣ · eˣ, sans regrouper)."""
+    out = ""
+    for i, (c, ks) in enumerate(termes):
+        corps = r" \cdot ".join(tex(_exp_kx(k)) for k in ks)
+        corps = tex(Nb(abs(c))) if not ks else ("" if abs(c) == 1 else tex(Nb(abs(c)))) + corps
+        out += ("-" if c < 0 else "") + corps if i == 0 else (" - " if c < 0 else " + ") + corps
+    return out
+
+
+def _developpe_d_abord(f, fprime):
+    """Décisions EC, D7b (.tex c) : f produit de deux facteurs, chacun somme de termes c·e^{kx} (k entier ≥ 1) et de constantes
+    entières, avec au moins une exponentielle dans chacun et une somme dans l'un d'eux (polynôme en eˣ, aucun x hors des
+    exponentielles) : on développe d'abord, eˣ(6 − eˣ) = 6eˣ − eˣ · eˣ = 6eˣ − e^{2x}, puis on dérive la somme. Chaque ligne est
+    vérifiée (SymPy et sonde), et la dérivée de la forme développée doit s'écrire exactement comme f′ ; sinon None."""
+    if not (isinstance(f, Op) and f.op == "*"):
+        return None
+    facteurs = []
+    for h in (f.a, f.b):
+        termes = [(sg, _terme_exp(t)) for sg, t in _termes(h)]
+        if any(m is None for _, m in termes) or not any(m[1] for _, m in termes):
+            return None
+        facteurs.append([(sg * m[0], m[1]) for sg, m in termes])
+    if all(len(fa) == 1 for fa in facteurs):
+        return None
+    sp = charger_sympy()
+    if sp is None:
+        return None
+    produits = [(c1 * c2, [k for k in (k1, k2) if k]) for c1, k1 in facteurs[0] for c2, k2 in facteurs[1]]
+    ordre, somme = [], {}
+    for c, ks in produits:
+        if sum(ks) not in somme:
+            ordre.append(sum(ks))
+            somme[sum(ks)] = 0
+        somme[sum(ks)] += c
+    reduits = [(somme[k], k) for k in ordre if somme[k] != 0]
+    if not reduits:
+        return None
+    dev = None
+    for c, k in reduits:
+        m = Nb(abs(c)) if k == 0 else _exp_kx(k) if abs(c) == 1 else Op("*", Nb(abs(c)), _exp_kx(k))
+        dev = (Neg(m) if c < 0 else m) if dev is None else Op("-" if c < 0 else "+", dev, m)
+    l1, l2 = _tex_termes(produits), _tex_termes([(c, [k] if k else []) for c, k in reduits])
+    try:
+        e1 = sp.Add(*[int(c) * sp.Mul(*[sp.exp(k * SYMPY["x"]) for k in ks]) for c, ks in produits], evaluate=False)
+        if not _nul(sp, e1 - en_sympy(f)):
+            return None
+    except Exception:
+        return None
+    if not _egaux(sp, [f, dev]):
+        return None
+    items = []
+    try:
+        d = derivee_narree(dev, items, top=True)
+    except Exception:
+        return None
+    if tex(_simplifier(d)) != tex(fprime):
+        return None
+    lignes = [txt("On développe d'abord (c'est plus simple à dériver) :")]
+    if l1 != l2:
+        lignes += [txt(rf"\(f(x) = {tex(f)} = {l1}\) (développement)"), txt(rf"\(= {l2}\) (réduction)")]
+    else:
+        lignes.append(txt(rf"\(f(x) = {tex(f)} = {l2}\) (développement)"))
+    return lignes + items
 
 
 def derivee_narree(n, items, top=True, etiq=F_PRIME):
@@ -814,6 +1127,9 @@ def etudier(entree, analyse=None):
         res["deriv_detail"] = str(e)
         return res
     fprime = _simplifier(fprime)
+    # rédactions du corrigé (décisions EC) : dérivée de l'exposant détaillée (D7), développement d'abord (D7b) ; f' est la même
+    # (calculée ci-dessus), seules les étapes changent, et seulement si chaque ligne est vérifiée
+    items_deriv = _derivee_exposant(f, fprime) or _developpe_d_abord(f, fprime) or items_deriv
     res["deriv_tex"] = tex(fprime)
     etapes, vues = [], set()                             # une même phrase n'est écrite qu'une fois ((eˣ)′ = eˣ pour u et v : D7)
     for it in items_deriv:

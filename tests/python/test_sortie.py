@@ -100,6 +100,25 @@ class TestValidateur(unittest.TestCase):
         c["titre_masque"] = "oui"
         self.assertTrue(so.valider(so.sortie_ok("f", [c])))
 
+    def test_tableau_uv(self):
+        """Bloc « uv » (décisions EC, D8) : quatre formules non vides ; aussi dans la sous-carte d'un sous_calcul (dérivée de l'exposant).
+        Le tableau de l'outil Dérivée (derivee_variations.bloc_uv) est exactement ce bloc."""
+        import derivee_variations as dv
+        from moteurs import ensemble_def as ed
+        b = so.uv("u = x^{2} - 6", "u' = 2x", "v = e^{-2x}", "v' = -2e^{-2x}")
+        self.assertEqual(b, {"type": "uv", "u": "u = x^{2} - 6", "du": "u' = 2x", "v": "v = e^{-2x}", "dv": "v' = -2e^{-2x}"})
+        self.assertEqual(dv.bloc_uv(ed.lire("x^2-6"), ed.lire("2x"), ed.lire("e^(-2x)"), ed.lire("-2e^(-2x)")), b)
+        self.assertEqual(so.valider(so.sortie_ok("f", [so.carte("Dérivée", [b])])), [])
+        sous = so.sous_calcul("Dérivée de l'exposant", [{"titre": "règle du quotient", "blocs": [b]}])
+        self.assertEqual(so.valider(so.sortie_ok("f", [so.carte("Dérivée", [sous])])), [])
+        for cle in ("u", "du", "v", "dv"):
+            with self.subTest(cle=cle):
+                self.assertTrue(so.valider(so.sortie_ok("f", [so.carte("Dérivée", [dict(b, **{cle: ""})])])))
+                sans = {k: v for k, v in b.items() if k != cle}
+                self.assertTrue(so.valider(so.sortie_ok("f", [so.carte("Dérivée", [sans])])))
+                mauvais = so.sous_calcul("t", [{"titre": "e", "blocs": [dict(b, **{cle: ""})]}])
+                self.assertTrue(so.valider(so.sortie_ok("f", [so.carte("Dérivée", [mauvais])])))
+
     def test_limites_du_tableau(self):
         s = exemple()
         s["cartes"][0]["blocs"][2]["limites"] = {"colonnes": [], "moins_inf": "1", "plus_inf": "1", "non_determinees": []}

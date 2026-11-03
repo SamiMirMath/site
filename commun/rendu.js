@@ -16,7 +16,10 @@
      erreur     .res.err ; dans une carte « final » → .err (le .res y est vert)
      liste      <ul class="extrema|bilan">
      tableau    tableau de signes ou de variations (voir cellule())
-     bh, encadre, resultat_lim, valeurs, sous_calcul   blocs du corrigé des limites (refonte 3M) ; texte style confirme
+     bh, encadre, resultat_lim, valeurs, sous_calcul   blocs du corrigé des limites (refonte 3M) ; texte style confirme ;
+                sous_calcul sert aussi à la dérivée de l'exposant (Étude complète, D7)
+     uv         tableau u | v / u′ | v′ des règles du produit et du quotient (D8) : deux colonnes .uv-col dans .uv (composant commun,
+                commun/composants.css) ; si elles ne tiennent pas côte à côte, la colonne v passe sous la colonne u (u, u′, v, v′)
    Un bloc de type inconnu n'est pas affiché (message dans la console), jamais une exception.
    `ajouterBloc(type, fn)` enregistre un rendu supplémentaire.
    `ajouterGreffon({ type, rendu, barre, activer })` enregistre un bloc qui a aussi du comportement (le graphique, T19) :
@@ -105,6 +108,8 @@ const BLOCS = {
   resultat_lim: b => `<div class="rbox">${K(b.tex)}</div>`,
   valeurs: b => `<div class="vals"><table><tr><td>${K("x")}</td>` + b.xs.map(x => `<td>${K(x)}</td>`).join("") + "</tr>" +
     `<tr><td>${K(b.expr)}</td>` + b.fs.map(v => `<td>${K(v)}</td>`).join("") + "</tr></table></div>",
+  uv: b => `<div class="uv"><div class="uv-col"><div>${K(b.u)}</div><div>${K(b.du)}</div></div>` +
+    `<div class="uv-col"><div>${K(b.v)}</div><div>${K(b.dv)}</div></div></div>`,
   sous_calcul: (b, c) => `<div class="sous"><div class="sous-t">${b.titre}</div>` +
     b.etapes.map((e, i) => `<div class="sous-e">Étape ${i + 1} : ${e.titre}.</div>` + e.blocs.map(x => (BLOCS[x.type] ? BLOCS[x.type](x, c) : "")).join("")).join("") + "</div>",
 };

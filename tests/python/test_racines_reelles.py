@@ -5,7 +5,7 @@ import re
 import unittest
 from fractions import Fraction as F
 
-from moteurs import ensemble_def as ed
+from moteurs import ensemble_def as ed, texte_etape
 import derivee_variations as dv
 import limites_asymptotes as la
 import etude_complete as ec
@@ -112,7 +112,7 @@ class TestRacinesExactes(unittest.TestCase):
 
     def textes(self, entree):
         r = dv.etudier(entree)
-        return " ".join(e.get("html", "") for e in r["deriv_etapes"] + r["signe_etapes"])
+        return " ".join([texte_etape(e) for e in r["deriv_etapes"]] + [e.get("html", "") for e in r["signe_etapes"]])
 
     def test_aucune_phrase_de_calcul_formel_pour_une_racine(self):
         for entree in CAS + ["x^(3/2)", "x^(-3/2)", "x^(1/4)", "(x-1)^(2/3)", "x^(5/3)"]:
@@ -183,7 +183,7 @@ class TestDeriveeEnQuotient(unittest.TestCase):
             with self.subTest(f=entree):
                 self.assertNotIn(r"\frac{\frac", r["deriv_tex"])
                 for e in r["deriv_etapes"]:
-                    self.assertNotIn(r"\frac{\frac", e["html"])
+                    self.assertNotIn(r"\frac{\frac", texte_etape(e))
 
     def test_dv07_tous_les_exemples(self):   # DV-07 : f' sans fraction imbriquée, pour les exemples et cas limites
         from cas import CAS_LIMITES, entrees_page

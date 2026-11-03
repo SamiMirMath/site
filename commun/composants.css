@@ -45,6 +45,16 @@
 .carte-etape.partie{background:none;border:0;border-radius:0;padding:0;margin:22px 0 8px;break-after:avoid}
 .carte-etape.partie h2{margin:0;font-size:1.25rem;line-height:1.3;color:var(--accent);overflow-wrap:break-word}
 
+/* ---- Tableau u | v / u′ | v′ des règles du produit et du quotient (bloc « uv » de moteur/sortie.py, commun/rendu.js, D8) ----
+   Deux colonnes (u, u′) et (v, v′) côte à côte ; si elles ne tiennent pas, la colonne v passe sous la colonne u : u, u′, v, v′ empilés
+   (retour à la ligne, aucune largeur fixe). Les filets sont le fond du bloc vu à travers un écart de 1 px ; les colonnes ont la même
+   hauteur (étirées) et deux lignes égales, donc les lignes u | v et u′ | v′ restent alignées. Une case trop large défile seule. */
+.uv{display:flex;flex-wrap:wrap;gap:1px;width:fit-content;max-width:100%;margin:10px auto;border:1px solid var(--border);
+  background:var(--border);border-radius:6px;overflow:hidden}
+.uv-col{flex:1 1 auto;min-width:0;display:grid;grid-template-rows:1fr 1fr;gap:1px}
+.uv-col>div{display:flex;flex-direction:column;justify-content:center;min-width:0;padding:6px 14px;background:var(--card);
+  text-align:center;white-space:nowrap;overflow-x:auto;position:relative}     /* position:relative : le MathML caché de KaTeX est rogné */
+
 /* ---- Bouton flottant (« Étape suivante ») : fixé en bas à droite, hors impression ---- */
 .bouton-flottant{position:fixed;z-index:50;right:calc(16px + env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
   min-height:max(44px,var(--flottant-h));min-width:44px;padding:0 24px;font-size:1.05rem;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.3)}

@@ -27,7 +27,8 @@ def carte_rappel(r, suffixe_ed=""):
 def carte_derivee(r):
     if not r["deriv_resolu"]:
         return so.carte("Dérivée", [so.erreur(r["deriv_erreur"])], style="erreur", detail=r.get("deriv_detail"))
-    blocs = [so.texte(e["html"], style="etape") for e in r["deriv_etapes"]]
+    # tableau u, v / u′, v′ (bloc « uv ») et sous-carte « Dérivée de l'exposant » (bloc « sous_calcul ») tels quels (D7, D8)
+    blocs = [so.texte(e["html"], style="etape") if e["type"] == "texte" else dict(e) for e in r["deriv_etapes"]]
     blocs.append(so.resultat("f'(x) = " + r["deriv_tex"]))
     return so.carte("Dérivée", blocs, badge="calcul")
 
