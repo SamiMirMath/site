@@ -21,8 +21,8 @@ passe fait échouer la suite). Temps natif : `docs/chantiers/etude-complete/mesu
 | P4 | Partie 2 : parité (D4) | EC | **fait** | 62781a8 |
 | P5 | Partie 3 : zéros, signe, f(0) (D5) | EC | **fait** | 8fc2fa2 |
 | P6 | Partie 4 : D12, D13, D16 | Limites | reportée (hors de la nuit du 02.11) | |
-| P7a | Dérivée de l'exposant détaillée, tableau u/v (D7, D8, D7b si simple) | Dérivée | **fait** | |
-| P7b | Valeurs dans le tableau de variations (D10), extremums (D11) | EC + Dérivée | à faire | |
+| P7a | Dérivée de l'exposant détaillée, tableau u/v (D7, D8, D7b si simple) | Dérivée | **fait** | 1799fff |
+| P7b | Valeurs dans le tableau de variations (D10), extremums (D11) | EC + Dérivée | **fait** | |
 | P8 | Graphe (D15, §3) | EC | à faire | |
 | P9 | Exemples (D18), Bilan (D20), instantanés, largeurs 320–390 px, mesure Pyodide | EC | reportée (hors de la nuit du 02.11) | |
 | P10 | *(facultatif)* Pente au point exclu (D14) | EC | reportée (hors de la nuit du 02.11) | |
@@ -65,6 +65,14 @@ passe fait échouer la suite). Temps natif : `docs/chantiers/etude-complete/mesu
   eˣ(6 − eˣ) = 6eˣ − eˣ · eˣ = 6eˣ − e^{2x}. f′ inchangée ; chaque ligne vérifiée (SymPy et sonde), sinon rédaction habituelle.
   4 xfail P7a retirés (3 tests) ; 9 entrées de la Dérivée et 11 de l'EC modifiées (carte « Dérivée » seule, liste sous « À relire ») ;
   questions 31 à 39 ; temps : Ex7 0,64 s (+ 8 %), autres inchangés.
+- **P7b faite** (D10 : outil Dérivée, donc aussi EC ; D11 : EC seule) : la case de chaque extremum de la ligne f(x) porte sa valeur
+  exacte (e^{1/6}, −2e⁴, 4√2 + 6…) au lieu de « • » (case `val:` déjà rendue par `commun/rendu.js` ; « • » reste si la valeur est
+  inconnue). Dans l'EC, `parties.blocs_extremums` remplace la liste : « g(4) = 18/12 = 3/2, donc f(4) = e^{3/2} ≈ 4,48. » quand g est
+  nommé, puis « **Maximum local** en x = 0 : (0 ; e^{1/6}) ≈ (0 ; 1,18) (f′ passe de + à −). Pas global : f(x) → +∞ quand x → 2⁺. »,
+  « Global : les autres valeurs de f sont plus petites (limites 0⁺ en ±∞). » ou rien (« local » seul : « ? », égalité, doute).
+  Comparaisons par SymPy et mpmath, « global » confirmé par une sonde de f sur l'ED, « pas global » par une valeur de f au-delà de
+  f(x₀). 10 xfail P7b retirés (2 tests) ; 18 entrées de la Dérivée et 13 de l'EC modifiées (liste sous « À relire ») ; questions 40 à
+  48 ; temps d'`etudier()` inchangé, D11 coûte 16 à 30 ms dans `resoudre`.
 
 ## Plans
 
@@ -231,6 +239,34 @@ change pas (même calcul, même écriture de `deriv_tex`), seules les étapes de
    alignées côte à côte, empilées dans l'ordre u, u′, v, v′ quand elles ne tiennent pas). Instantanés Dérivée et EC régénérés (moteur,
    `resoudre`, références de pages), listés sous « À relire » ; spécification de l'outil Dérivée ; suite complète ; temps natif ; commit.
 
+### P7b (03.11.2026)
+
+D10 dans l'outil Dérivée (donc aussi l'EC) ; D11 dans l'EC seule (`parties.py`, appelé par `resoudre_ec`, sur l'analyse en cache).
+1. **D10** (`derivee_variations.etudier`) : la case d'un extremum de la ligne f(x) porte sa valeur exacte (case `val:…` déjà rendue par
+   `commun/rendu.js`, comme f(a) là où f′ n'est pas définie) au lieu de « • » ; « • » reste seulement si la valeur n'est pas connue
+   (« ? »). Chaque extremum garde aussi ses écritures SymPy (`x_py`, `f_py`) pour l'EC. La liste des extremums de l'outil Dérivée ne
+   change pas.
+2. **D11** (`parties.blocs_extremums`, à la place de la liste dans la carte « Signe de f′ et variations » de l'EC, `carte_signe(…,
+   extremums=…)`) :
+   - quand la carte « Dérivée » a nommé g (f = e^{u/v}, sous-carte « Dérivée de l'exposant ») et x₀ rationnel : « g(4) = 18/12 = 3/2,
+     donc f(4) = e^{3/2} ≈ 4,48. » (u(x₀)/v(x₀) calculé, réduit ; vérifié : e^{g(x₀)} = f(x₀) par SymPy et par la sonde) ;
+   - une ligne par extremum : « **Maximum local** en x = 0 : (0 ; e^{1/6}) ≈ (0 ; 1,18) (f′ passe de + à −). » (≈ : `approchee` de P5,
+     decisions.md §2 et R13 ; entier exact sans ≈ ; « (f′ passe … ) » seulement si f′ change de signe) ;
+   - puis, selon D11 : « Global : les autres valeurs de f sont plus petites (limites 0⁺ en ±∞). » si f(x₀) dépasse strictement les
+     autres extremums du même genre et **toutes** les limites aux bornes de l'ED (±∞, chaque côté ouvert de chaque borne, lues dans le
+     tableau T06c) ; « Pas global : f(x) → +∞ quand x → 2⁺. » si une limite ou un autre extremum dépasse strictement (raison : la valeur
+     la plus extrême, puis l'ordre du tableau) ; rien sinon (une limite « ? » ou absente, une égalité, une borne fermée qui n'est pas un
+     extremum, une valeur non exacte, un doute).
+   - Garde-fous (principe 0.2) : chaque comparaison est faite par SymPy (signe exact de la différence) et par mpmath ; « global » est
+     confirmé par une sonde de f sur l'ED (grille et points près de chaque borne : aucune valeur au-delà de f(x₀)) ; « pas global » par
+     une sonde qui trouve un x de l'ED où f dépasse f(x₀) ; sinon « local » seul. Limites lues sur une liste fermée d'écritures (±∞,
+     0^{±}, entiers, fractions, avec signe d'approche) : toute autre écriture = doute.
+3. Tests : xfail P7b retirés ; `test_tableau_variations.py` attend la valeur à la place de « extremum » ; `test_parties_ec.py` (lignes
+   exactes du corpus et des entrées de la page, oracle mpmath : valeurs, arrondis, global ou non recalculé sur une grille dense de l'ED,
+   raison vérifiée ; famille au hasard ; garde-fous forcés) ; `test_largeurs.py` (tableau de variations avec valeurs dans les deux
+   outils, 320 à 1100 px). Instantanés Dérivée et EC régénérés (moteur, `resoudre`, références de pages), listés sous « À relire » ;
+   spécifications ; suite complète ; temps natif ; commit « EC P7b : … ».
+
 ## Temps natif de etudier() (s, médiane de 3 processus neufs)
 
 | Partie | Ex7 | a | b | c | d |
@@ -242,6 +278,7 @@ change pas (même calcul, même écriture de `deriv_tex`), seules les étapes de
 | P4 | 0,60 | 0,02 | 0,43 | 0,18 | 0,29 |
 | P5 | 0,59 | 0,02 | 0,43 | 0,19 | 0,29 |
 | P7a | 0,64 | 0,02 | 0,42 | 0,20 | 0,31 |
+| P7b | 0,64 | 0,02 | 0,43 | 0,20 | 0,30 |
 
 P3 ne touche pas `etudier()` ; la partie 1 (`parties.cartes_domaine`, appelée par `resoudre`) coûte en plus 0,5 ms (Ex7), 0,2 ms (d),
 moins de 0,01 ms (a, b, c).
@@ -254,6 +291,10 @@ mesurer en P9.
 P7a : la rédaction D7 / D7b est calculée dans `etudier()` (outil Dérivée) : + 58 ms (Ex7, sous-carte) et + 16 ms (c, développement),
 surtout les preuves SymPy de chaque ligne. Une première version (preuve par `simplify`) donnait Ex7 0,77 s et c 0,37 s (+ 95 %) ; la
 preuve passe maintenant d'abord par `cancel(expand(…))` (exacte, rapide), `simplify` seulement si elle ne conclut pas.
+P7b : `etudier()` ne fait aucun calcul de plus (D10 place une valeur déjà calculée ; l'écriture SymPy de la valeur est gardée) ; un
+premier lancement a donné Ex7 0,77 s et b 0,48 s, le second (retenu, ci-dessus) 0,64 s et 0,43 s : bruit de la machine. Les extremums
+D11 (`parties.blocs_extremums`, appelé par `resoudre`, SymPy chargé, médiane de 3) coûtent en plus 18 ms (Ex7), 16 ms (a), 30 ms (b),
+23 ms (c), 22 ms (d) : surtout la sonde « global » (400 points par intervalle à 30 chiffres) et les comparaisons SymPy.
 
 ## Suite complète
 
@@ -271,6 +312,8 @@ preuve passe maintenant d'abord par `cancel(expand(…))` (exacte, rapide), `sim
 | P5 | 1136 passés, 38 xfail (662 s) | 116 passés (870 s) ; code de retour 0 (1ᵉʳ lancement) | 03.11.2026 |
 | P5 (contrôle du chef d'orchestre) | 1136 passés, 38 xfail (657 s) | 116 passés (885 s) ; code de retour 0 | 03.11.2026 |
 | P7a | 1149 passés, 34 xfail (643 s) | 117 passés (914 s, dont le nouveau test de largeurs du tableau u/v) ; code de retour 0 (1ᵉʳ lancement) | 03.11.2026 |
+| P7a (contrôle du chef d'orchestre) | 1149 passés, 34 xfail (657 s) | 116 passés, 1 échec : `test_clavier.py::test_a_deux_formules…` (le test instable, même symptôme : « effacer » laisse `(x^2-1)/(x-3)`) ; ce test seul sur P7a : 6 réussites sur 6 → P7a acceptée | 03.11.2026 |
+| P7b | 1181 passés, 24 xfail (650 s) | 118 passés (939 s, dont le nouveau test de largeurs du tableau de variations) ; code de retour 0 (2ᵉ lancement : le 1ᵉʳ, arrêté avant la fin, pour corriger « Global … () » d'un ED fermé, √(4 − x²), vu en relisant des cas hors corpus) | 03.11.2026 |
 
 ## Écarts acceptés
 
@@ -332,6 +375,23 @@ preuve passe maintenant d'abord par `cancel(expand(…))` (exacte, rapide), `sim
   remplace pour ces deux règles (question 32).
 - P7a : l'écart de P1 « parenthèses sans point » est résorbé : `(x² − 6)·(−2e^{−2x})` (outil Dérivée et EC), par `_tex_brut`, qui
   n'écrit autrement que `tex` ; les autres produits gardent l'écriture de `tex` (`(2x + 1)(6x − 12)`, `(x² + x − 2)·6`).
+
+- P7b (D10) : pas de « drapeau du tableau » à part : D10 vaut pour les deux outils, la case d'un extremum prend le type `val:` qui existe
+  déjà (valeur de f là où f′ n'est pas définie, même rendu `.pt` dans `commun/rendu.js`, inchangé) ; « extremum » (•) reste pour une
+  valeur inconnue. Chaque extremum de `etudier()` (outil Dérivée) reçoit deux champs techniques, `x_py` et `f_py` (écritures SymPy, pour
+  les garde-fous de l'EC), jamais affichés ; `tests/python/test_resoudre_dv.py` les ajoute à `TECHNIQUE` (champs non affichés, comme
+  `domaine_etude_tex`) : même vérification pour tout le reste. Ils figurent aussi dans le bloc du graphique de l'EC (liste des extremums
+  passée telle quelle, `test_resoudre_ec.py::test_graphique`).
+- P7b : `tests/python/test_tableau_variations.py` attend la valeur à la place de « extremum » (ln(x)/x : `val:e^{-1}`, √(4 − x²) :
+  `val:2`, 1/(2x² − 4x + 1) : `val:-1`) : vérification plus forte ; nouveau test `TestValeursDesExtremums` (chaque extremum, valeur
+  recoupée par l'évaluateur, cas « ? » et ≈ forcés).
+- P7b : `tests/python/test_corpus_etude_complete.py::test_P6_regroupement_infini` (xfail P6 inchangé) cherchait « ±∞ » dans toutes les
+  cartes ; la partie 5 écrit maintenant « (limites 0⁺ en ±∞) » (D11, mots de decisions.md) pour a, ce qui faisait passer le test xfail
+  (XPASS) sans que D16 soit fait. Il cherche « ±∞ » dans la partie 4 seule (la partie que vise D16), et vérifie que cette partie
+  n'est pas vide : même force pour D16.
+- P7b (largeurs) : avec les valeurs, le tableau de variations défile horizontalement (repli du composant commun `.tsigne` : libellés
+  fixes, aucune faute du balayage) à 320 px pour Ex7 (comme avant), de 320 à 390 px pour d (avant : 320 à 375 px) et pour
+  (x² − 1)/(x − 3) dans l'outil Dérivée (comme avant). Nouveau test `test_largeurs.py::test_tableau_de_variations_avec_valeurs`.
 
 ## Questions pour l'enseignant
 
@@ -457,6 +517,31 @@ preuve passe maintenant d'abord par `cancel(expand(…))` (exacte, rapide), `sim
     positives restent côte à côte, (2x + 1)(6x − 12), comme dans l'outil.
 39. **P7a, temps** : aucune hausse de plus de 50 % (Ex7 + 8 %, c + 5 %, d + 7 %).
 
+40. **P7b, raison de « pas global »** : la limite (ou l'extremum) la plus extrême, puis la première dans l'ordre du tableau (−∞, valeurs
+    interdites de gauche à droite, +∞). Ex7, b et le minimum d'Ex7 donnent la raison de decisions.md ; **d donne « f(x) → +∞ quand
+    x → −2⁻ »** et non « x → 2⁺ » (§5 d) : aucune règle simple ne redonne les quatre raisons du corrigé (Ex7 max : 2⁺ plutôt que +∞ ;
+    Ex7 min : −∞ plutôt que 2⁻ ; d : 2⁺ plutôt que −2⁻). Laquelle préférez-vous ?
+41. **P7b, valeur en chaîne** : écrite pour **chaque** extremum quand la carte « Dérivée » a nommé g (f = e^{u/v}) et que x₀ est entier :
+    Ex7 a donc aussi « g(0) = −2/(−12) = 1/6, donc f(0) = e^{1/6} ≈ 1,18. » (déjà en partie 3 ; decisions.md §4 ne montre que g(4),
+    le .tex écrit les deux à l'étape 6) et d « g(0) = 2/(−4) = −1/2, donc f(0) = e^{−1/2} ≈ 0,61. ». x₀ non entier (fractions de
+    fractions) ou f qui n'est pas e^{u/v} : pas de ligne (b : pas de « f(−2) = (4 − 6)e⁴ = −2e⁴ » du .tex). À confirmer.
+42. **P7b, extremum à une borne fermée de l'ED** (√(x² − 4) en ±2) : f′ n'y change pas de signe, la parenthèse « (f′ passe de … à …) »
+    n'est pas écrite (rien plutôt qu'une phrase inventée). Voulez-vous une autre justification (« borne de l'ED ») ?
+43. **P7b, mots de « global »** : « Global : les autres valeurs de f sont plus petites (limites 0⁺ en ±∞). » ; les limites égales en
+    −∞ et en +∞ s'écrivent « en ±∞ », sinon « limites 0⁺ en −∞ et −∞ en +∞ » ; avec un autre extremum du même genre, « (autre maximum
+    local : f(…) = … ; limites …) ». Sans limite à citer (ED fermé, √(4 − x²)) : « Global : les autres valeurs de f sont plus
+    petites. », sans parenthèse. La ligne commence toujours par « Maximum local » (decisions.md §2), même quand il est global (le
+    .tex de a et c écrit « Maximum (global) »). Les limites sans signe d'approche (x/(x² + 1) : « limites 0 en ±∞ ») attendent P6.
+44. **P7b, « ? » pris à la lettre** : une limite « ? » (ou absente) donne « local » seul, même si une autre borne prouverait « pas
+    global » (decisions.md §2). Aucune entrée de la page ni du corpus n'est concernée.
+45. **P7b, cas limite x²e^{−x}** : le minimum (0 ; 0) égale la limite 0⁺ en +∞ : « local » seul (decisions.md §2), bien que f ≥ 0
+    partout. De même x⁴ − 2x² (deux minimums égaux à −1) et √(x² − 4) (deux minimums égaux à 0).
+46. **P7b, largeur** : à 390 px, le tableau de d défile maintenant (voir Écarts) ; les valeurs exactes sont gardées (repli du composant
+    commun plutôt qu'une écriture ≈ dans le tableau). Vous convient-il ?
+47. **P7b, notation scientifique dans un point** : e^(7/(x² − 1)) donne « (0 ; e^{−7}) ≈ (0 ; 9,119 × 10⁻⁴) » (R13, question 1).
+48. **P7b, « pas global » par un autre extremum** : « Pas global : le maximum local en x = … est plus grand. » (aucune entrée de la page
+    ni du corpus n'est concernée : une limite infinie l'emporte toujours). Les mots vous conviennent-ils ?
+
 ## À relire par l'enseignant
 
 - P0 : rien (aucun changement du moteur, aucun instantané modifié).
@@ -579,3 +664,58 @@ preuve passe maintenant d'abord par `cancel(expand(…))` (exacte, rapide), `sim
   règle du produit ; a inchangé. Largeurs : `test_largeurs.py::test_tableau_uv_et_derivee_de_l_exposant` (Dérivée
   `(x^3+2x)^4*e^x`, EC Ex7, 320 à 1100 px) : aucune faute, tableaux dans leur carte, côte à côte à 1100 px, empilés u, u′, v, v′ à
   320 px ; captures relues à 320 et 1100 px.
+
+- **P7b** (D10 : outil Dérivée, donc aussi EC ; D11 : EC seule). Instantanés modifiés :
+  `tests/python/instantanes/{derivee-variations,etude-complete}.json` (sortie d'`etudier()`),
+  `tests/python/instantanes/resoudre/{derivee-variations,etude-complete}.json`, `tests/pages/references/{derivee-variations,etude-complete}.json` :
+  18 entrées de la Dérivée (22 pour `etudier()` : les 4 dont l'extremum portait déjà sa valeur, √(x²), √(x² − 4), x^(1/2), x^(2/3),
+  ne gagnent que les champs techniques `x_py`, `f_py`) et 13 de l'EC, aucune nouvelle ni retirée. Vérifié par programme : dans la
+  sortie d'`etudier()`, seules changent la case de l'extremum (ligne f(x)) et les champs `x_py`, `f_py` ; dans la Dérivée, seule la
+  case ; dans l'EC, la case, la liste des extremums (remplacée par les lignes D11) et les champs techniques du bloc du graphique.
+  Aucun autre outil ne change.
+
+  **Outil Dérivée (et EC) : ligne f(x) du tableau de variations, « • » → valeur**
+
+  | Entrée | Avant | Après |
+  |---|---|---|
+  | `(x^2-1)/(x-3)` | ↗ • ↘ ‖ ↘ • ↗ | ↗ 6 − 4√2 ↘ ‖ ↘ 4√2 + 6 ↗ |
+  | `ln(x)/x`, `-(x*ln(x))` | … • … | … e^{−1} … |
+  | `x*ln(x)`, `3(x*ln(x))`, `x*ln(x)+x` | … • … | … −e^{−1} … ; −3e^{−1} ; −e^{−2} |
+  | `x/(x^2+1)` | ↘ • ↗ • ↘ | ↘ −1/2 ↗ 1/2 ↘ |
+  | `x^2*e^(-x)` | ↘ • ↗ • ↘ | ↘ 0 ↗ 4e^{−2} ↘ |
+  | `x^2-4x+3`, `3x^2-4x`, `-x^2` | ↘ • ↗ (↗ • ↘) | −1 ; −4/3 ; 0 |
+  | `x^3-3x` | ↗ • ↘ • ↗ | ↗ 2 ↘ −2 ↗ |
+  | `x^4-2x^2` | ↘ • ↗ • ↘ • ↗ | ↘ −1 ↗ 0 ↘ −1 ↗ |
+  | `(x^2+1)^(1/2)`, `e^(x^2)`, `sqrt(x^2-4x+5)` | ↘ • ↗ | ↘ 1 ↗ |
+  | `x^(3/2)` | • ↗ | 0 ↗ |
+  | `x^x` | ↘ • ↗ | ↘ e^{−1/e} ↗ |
+  | `e^((x^2+x-2)/(6x-12))` (Ex7, EC) | 0⁺ ↗ • ↘ 0⁺ ‖ +∞ ↘ • ↗ +∞ | 0⁺ ↗ e^{1/6} ↘ 0⁺ ‖ +∞ ↘ e^{3/2} ↗ +∞ (comme le .tex) |
+  | `e^(2/(x^2-4))` (d, EC) | 1 ↗ +∞ ‖ 0⁺ ↗ • ↘ 0⁺ ‖ +∞ ↘ 1 | 1 ↗ +∞ ‖ 0⁺ ↗ e^{−1/2} ↘ 0⁺ ‖ +∞ ↘ 1 |
+
+  La liste des extremums de l'outil Dérivée (« maximum local en x = 0 : f(0) = … ») ne change pas.
+
+  **Étude complète : extremums (D11), à la place de la liste « maximum local en x = … : f(…) = … »**
+
+  | Entrée | Après |
+  |---|---|
+  | `e^((x^2+x-2)/(6x-12))` (Ex7) | g(0) = −2/(−12) = 1/6, donc f(0) = e^{1/6} ≈ 1,18. · g(4) = 18/12 = 3/2, donc f(4) = e^{3/2} ≈ 4,48. · **Maximum local** en x = 0 : (0 ; e^{1/6}) ≈ (0 ; 1,18) (f′ passe de + à −). Pas global : f(x) → +∞ quand x → 2⁺. · **Minimum local** en x = 4 : (4 ; e^{3/2}) ≈ (4 ; 4,48) (f′ passe de − à +). Pas global : f(x) → 0⁺ quand x → −∞. |
+  | `e^(2/(x^2-4))` (d) | g(0) = 2/(−4) = −1/2, donc f(0) = e^{−1/2} ≈ 0,61. · **Maximum local** en x = 0 : (0 ; e^{−1/2}) ≈ (0 ; 0,61) (f′ passe de + à −). Pas global : f(x) → +∞ quand x → −2⁻ (question 40). |
+  | `(x^2-1)/(x-3)` | **Maximum local** en x = 3 − 2√2 : (3 − 2√2 ; 6 − 4√2) ≈ (0,17 ; 0,34) (+ à −). Pas global : f(x) → +∞ quand x → 3⁺. · **Minimum local** en x = 3 + 2√2 : (…) ≈ (5,83 ; 11,66) (− à +). Pas global : f(x) → −∞ quand x → −∞. |
+  | `ln(x)/x` | **Maximum local** en x = e : (e ; e^{−1}) ≈ (2,72 ; 0,37) (+ à −). Global : les autres valeurs de f sont plus petites (limites −∞ en 0⁺ et 0⁺ en +∞). |
+  | `x*ln(x)`, `3(x*ln(x))` | **Minimum local** en x = e^{−1} : (e^{−1} ; −e^{−1}) ≈ (0,37 ; −0,37) (− à +). Global : les autres valeurs de f sont plus grandes (limites 0⁻ en 0⁺ et +∞ en +∞). (de même −3e^{−1} ≈ −1,10) |
+  | `x/(x^2+1)` | **Minimum local** en x = −1 : (−1 ; −1/2) ≈ (−1 ; −0,50) (− à +). Global : … plus grandes (limites 0 en ±∞). · **Maximum local** en x = 1 : (1 ; 1/2) ≈ (1 ; 0,50) (+ à −). Global : … plus petites (limites 0 en ±∞). |
+  | `x^2*e^(-x)` | **Minimum local** en x = 0 : (0 ; 0) (− à +). (rien : égal à la limite 0⁺, question 45) · **Maximum local** en x = 2 : (2 ; 4e^{−2}) ≈ (2 ; 0,54) (+ à −). Pas global : f(x) → +∞ quand x → −∞. |
+  | `x^2-4x+3` | **Minimum local** en x = 2 : (2 ; −1) (− à +). Global : … plus grandes (limites +∞ en ±∞). |
+  | `x^3-3x` | **Maximum local** en x = −1 : (−1 ; 2) (+ à −). Pas global : f(x) → +∞ quand x → +∞. · **Minimum local** en x = 1 : (1 ; −2) (− à +). Pas global : f(x) → −∞ quand x → −∞. |
+  | `x^4-2x^2` | **Minimum local** en x = −1 : (−1 ; −1) (− à +). · **Maximum local** en x = 0 : (0 ; 0) (+ à −). Pas global : f(x) → +∞ quand x → −∞. · **Minimum local** en x = 1 : (1 ; −1) (− à +). (minimums égaux : rien) |
+  | `sqrt(x^2-4)` | **Minimum local** en x = −2 : (−2 ; 0). · **Minimum local** en x = 2 : (2 ; 0). (bornes fermées, minimums égaux : rien, question 42) |
+  | `x^(2/3)` | **Minimum local** en x = 0 : (0 ; 0) (− à +). Global : … plus grandes (limites +∞ en ±∞). |
+
+  Avant P7b, ces entrées de l'EC avaient la liste de l'outil Dérivée (« maximum local en x = 0 : f(0) = e^{1/6} », etc.).
+  Hors instantanés (corpus) : a « **Maximum local** en x = 0 : (0 ; 1) (f′ passe de + à −). Global : les autres valeurs de f sont plus
+  petites (limites 0⁺ en ±∞). » ; b « **Minimum local** en x = −2 : (−2 ; −2e⁴) ≈ (−2 ; −109,20) (− à +). Global : … plus grandes
+  (limites +∞ en −∞ et 0⁺ en +∞). » et « **Maximum local** en x = 3 : (3 ; 3e^{−6}) ≈ (3 ; 0,0074) (+ à −). Pas global : f(x) → +∞
+  quand x → −∞. » ; c « **Maximum local** en x = ln(3) : (ln(3) ; 9) ≈ (1,10 ; 9) (+ à −). Global : … plus petites (limites 0⁺ en −∞
+  et −∞ en +∞). » ; tableaux b : +∞ ↘ −2e⁴ ↗ 3e^{−6} ↘ 0⁺, c : 0⁺ ↗ 9 ↘ −∞ (comme le .tex).
+  Largeurs : `test_largeurs.py::test_tableau_de_variations_avec_valeurs` (Dérivée `(x^2-1)/(x-3)`, EC Ex7 et d, 320 à 1100 px) :
+  aucune faute, chaque tableau dans sa carte, chaque valeur en formule dans sa case ; défilement du tableau : voir Écarts.

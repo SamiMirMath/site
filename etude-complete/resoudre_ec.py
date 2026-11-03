@@ -5,7 +5,8 @@ Six parties titrées, dans l'ordre du corrigé (decisions.md D1), chacune ouvert
 1. Domaine de définition (`parties.cartes_domaine` : fonction, mise en forme, une carte par condition, ED encadré, D3) ;
 2. Parité (`parties.cartes_parite`, D4) ; 3. Zéros, signe, ordonnée à l'origine (`parties.cartes_zeros_signe`, D5 : zéros en chaîne,
 tableau de signes de f, f(0)) ; 4. Limites et asymptotes (cartes de `resoudre_la` : tableaux de signes, limites, bilan) ;
-5. Dérivée, tableau de variation, extremums (cartes de `resoudre_dv`, avec les limites dans le tableau) ; 6. Graphe.
+5. Dérivée, tableau de variation, extremums (cartes de `resoudre_dv`, avec les limites dans le tableau et les valeurs des extremums,
+D10 ; extremums rédigés par `parties.blocs_extremums`, D11 : valeur en chaîne, point exact puis ≈, global ou non) ; 6. Graphe.
 La recalculation du graphique au zoom reste l'appel séparé `fenetre_json`.
 
 `etudier_json` (ancienne page, avant T19) est réexportée : une page restée en cache qui lit le nouveau
@@ -51,7 +52,8 @@ def resoudre(entree):
     if dv["deriv_resolu"]:
         derivee.append(rdv.carte_derivee(dv))
         if dv["signe_resolu"]:
-            derivee.append(rdv.carte_signe(dv, r["variations_limites"], ec=True))
+            extremums = parties.blocs_extremums(dv, r["variations_limites"], analyse(entree))     # D11 (EC seule)
+            derivee.append(rdv.carte_signe(dv, r["variations_limites"], ec=True, extremums=extremums))
     cartes = []
     for titre, contenu in zip(PARTIES, (domaine, parite, zeros, limites, derivee, [carte_graphique(r)])):
         cartes += [so.partie(titre)] + contenu

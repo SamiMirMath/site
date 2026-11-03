@@ -1,6 +1,9 @@
 """T06 / T06b : tableau de variations (Q3, 14.10.2026) — ED de f', double barre sur f',
-valeur de f sans barre, extrema (i) et (ii), fonction constante."""
+valeur de f sans barre, extrema (i) et (ii), fonction constante ; valeur de chaque extremum dans la ligne f(x)
+(chantier étude complète, D10, outils Dérivée et Étude complète)."""
+import math
 import unittest
+from unittest import mock
 
 from moteurs import ensemble_def as ed
 import derivee_variations as dv
@@ -99,8 +102,47 @@ class TestFonctionConstante(unittest.TestCase):
         self.assertEqual(L["f(x)"][2], r"\rightarrow")
 
 
-if __name__ == "__main__":
-    unittest.main()
+class TestValeursDesExtremums(unittest.TestCase):
+    """D10 : la case d'un extremum (ligne f(x)) porte sa valeur exacte, celle de la liste des extremums ; « • » (case « extremum »)
+    seulement si la valeur n'est pas connue. La valeur est recoupée par l'évaluateur de l'arbre."""
+    ENTREES = ["(x^2-1)/(x-3)", "ln(x)/x", "x*ln(x)", "x/(x^2+1)", "x^2*e^(-x)", "x^2-4x+3", "x^3-3x", "x^4-2x^2", "sqrt(x^2-4)",
+               "x^(2/3)", "sqrt(4-x^2)", "3x^2-4x", "x^x", "e^((x^2+x-2)/(6x-12))", "e^(2/(x^2-4))", "(x^2-6)e^(-2x)", "e^x(6-e^x)"]
+
+    def test_case_de_chaque_extremum(self):
+        for entree in self.ENTREES:
+            with self.subTest(f=entree):
+                r, t, L = lignes(entree)
+                self.assertTrue(r["extrema"])
+                self.assertNotIn("extremum", L["f(x)"])
+                for e in r["extrema"]:
+                    j = 2 * t["crit"].index(e["x_tex"]) + 1
+                    self.assertEqual(L["f(x)"][j], "val:" + e["f_tex"])
+                    v = ed.evaluer(ed.lire(entree), e["x_val"])
+                    self.assertTrue(math.isclose(v, e["f_val"], rel_tol=1e-9, abs_tol=1e-12), (v, e))
+
+    def test_ecritures_exactes_pour_l_etude_complete(self):
+        """x_py et f_py (écritures SymPy) accompagnent chaque extremum exact : mêmes valeurs que x_val et f_val."""
+        sp = ed._sympy()
+        for entree in self.ENTREES:
+            for e in dv.etudier(entree)["extrema"]:
+                with self.subTest(f=entree, x=e["x_tex"]):
+                    self.assertTrue(math.isclose(float(sp.sympify(e["x_py"])), e["x_val"], rel_tol=1e-12, abs_tol=1e-12))
+                    self.assertTrue(math.isclose(float(sp.sympify(e["f_py"])), e["f_val"], rel_tol=1e-12, abs_tol=1e-12))
+
+    def test_valeur_inconnue_garde_le_point(self):
+        with mock.patch.object(dv, "_valeur_exacte", return_value=None), mock.patch.object(dv, "_valeur_num", return_value=None):
+            r, t, L = lignes("x^2-4x+3")
+        self.assertEqual(L["f(x)"], [r"\searrow", "extremum", r"\nearrow"])
+        self.assertEqual(r["extrema"][0]["f_tex"], "?")
+        self.assertNotIn("f_py", r["extrema"][0])
+
+    def test_valeur_approchee(self):
+        """Point critique exact mais valeur non exacte (SymPy ne la donne pas) : la valeur approchée, avec ≈, comme la liste."""
+        with mock.patch.object(dv, "_valeur_exacte", return_value=None):
+            r, t, L = lignes("x^2-4x+3")
+        self.assertEqual(L["f(x)"][1], "val:" + r["extrema"][0]["f_tex"])
+        self.assertTrue(r["extrema"][0]["f_tex"].startswith(r"{\approx}"))
+        self.assertNotIn("f_py", r["extrema"][0])
 
 
 class TestZonesHorsED(unittest.TestCase):
@@ -115,7 +157,7 @@ class TestZonesHorsED(unittest.TestCase):
         r, t, L = lignes("ln(x)/x")
         self.assertEqual(t["crit"], ["0", "e"])
         self.assertEqual(L["f'(x)"], ["x", "||", "+", "0", "-"])
-        self.assertEqual(L["f(x)"], ["x", "asym", r"\nearrow", "extremum", r"\searrow"])
+        self.assertEqual(L["f(x)"], ["x", "asym", r"\nearrow", "val:e^{-1}", r"\searrow"])     # valeur du maximum (D10)
 
     def test_valeur_interdite_double_barre_sur_toute_la_colonne(self):
         """ln(x²−4), ED = ]−∞ ; −2[ ∪ ]2 ; +∞[ : colonnes −2 et 2 barrées sur TOUTES les lignes, zone ]−2 ; 2[ hachurée,
@@ -160,12 +202,12 @@ class TestZonesHorsED(unittest.TestCase):
         r, t, L = lignes("sqrt(4-x^2)")
         self.assertEqual(L["f(x)"][0], "x")
         self.assertEqual(L["f(x)"][-1], "x")
-        self.assertEqual(L["f(x)"][1:-1], ["val:0", r"\nearrow", "extremum", r"\searrow", "val:0"])
+        self.assertEqual(L["f(x)"][1:-1], ["val:0", r"\nearrow", "val:2", r"\searrow", "val:0"])
 
     def test_pas_de_doublon_de_points_critiques(self):
         r, t, L = lignes("1/(2x^2-4x+1)")        # pôles irrationnels : (2 ± √2)/2 ne doivent apparaître qu'une fois
         self.assertEqual(t["crit"], [r"\frac{2 - \sqrt{2}}{2}", "1", r"\frac{2 + \sqrt{2}}{2}"])
-        self.assertEqual(L["f(x)"], [r"\nearrow", "asym", r"\nearrow", "extremum", r"\searrow", "asym", r"\searrow"])
+        self.assertEqual(L["f(x)"], [r"\nearrow", "asym", r"\nearrow", "val:-1", r"\searrow", "asym", r"\searrow"])
 
     def test_x_exactement_hors_de_l_ed(self):
         """Pour des exemples et 150 fonctions générées : sur chaque intervalle, les lignes f'(x) et f(x) sont
@@ -202,3 +244,7 @@ class TestZonesHorsED(unittest.TestCase):
             for j in range(2, 2 * k, 2):         # pas de colonne parasite entre deux zones hors de l'ED
                 with self.subTest(f=entree, intervalle=j):
                     self.assertFalse(t["rows"][-1]["cells"][j - 2] == "x" and t["rows"][-1]["cells"][j] == "x")
+
+
+if __name__ == "__main__":
+    unittest.main()

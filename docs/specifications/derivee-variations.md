@@ -33,9 +33,10 @@ URL : `/derivee-variations/` · moteur : `derivee-variations/derivee_variations.
    « Un produit est nul si et seulement si … ». Exemple √(4x²+1)/(x+2), f'(x) = (8x−1)/(√(4x²+1)(x+2)²) :
    « f'(x) = … = 0 ⇔ 8x − 1 = 0 ⇔ x = 1/8 ; valeur interdite : x = −2 », puis lignes 8x − 1, √(4x²+1), (x+2)², f'(x).
    Un zéro qui demande une étape délicate (ln(x) + 1 = 0 ⇔ ln(x) = −1 : on soustrait 1) garde cette étape.
-5. **Variations** : ligne f(x) en **flèches seules** (validé), points d'extremum marqués ;
-   en un point où f est définie mais pas f', la ligne f(x) porte la valeur f(a) (Q3) ;
-   liste des extrema locaux avec valeur exacte de f quand c'est possible (sinon ≈).
+5. **Variations** : ligne f(x) en flèches ; en chaque extremum, la ligne f(x) porte la **valeur** de l'extremum (exacte : e^{1/6},
+   −2e⁴, 4√2 + 6… ; sinon ≈ ; « • » seulement si la valeur est inconnue) (chantier étude complète, D10, outils Dérivée et Étude
+   complète ; le tableau défile horizontalement s'il ne tient pas, `.tsigne`) ; en un point où f est définie mais pas f', la ligne
+   f(x) porte la valeur f(a) (Q3) ; liste des extrema locaux avec valeur exacte de f quand c'est possible (sinon ≈).
 
 ## Conventions
 

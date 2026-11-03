@@ -1,7 +1,7 @@
 # Outil « Étude complète de fonction » (3e Ms, Mr)
 
 URL : `/etude-complete/` · moteur : `etude-complete/etude_complete.py`, qui assemble le noyau,
-la dérivée et les limites ; adaptateur `etude-complete/resoudre_ec.py`. Les parties propres à l'Étude complète (aujourd'hui les parties 1, 2 et 3 ; plus tard
+la dérivée et les limites ; adaptateur `etude-complete/resoudre_ec.py`. Les parties propres à l'Étude complète (aujourd'hui les parties 1, 2 et 3 et les extremums de la partie 5 ; plus tard
 le bilan) sont dans `etude-complete/parties.py` (créé au chantier `etude-complete`, P3, déclaré dans
 `moteur/manifeste.json` avec `ensemble-definition/resoudre_ed.py`, dont il reprend les cartes de condition). Décisions de rédaction : `docs/chantiers/etude-complete/decisions.md`.
 
@@ -13,7 +13,8 @@ le bilan) sont dans `etude-complete/parties.py` (créé au chantier `etude-compl
   d'étapes). Une partie que l'outil ne sait pas encore rédiger reste vide (son intertitre seul) : rien plutôt qu'une affirmation
   non démontrée (EC-15). Aujourd'hui : parties 1, 2 et 3 = voir ci-dessous ; 4 = cartes de l'outil Limites
   (tableaux de signes, une carte par borne, bilan des asymptotes) ; 5 = cartes de l'outil Dérivée (dérivée, signe de f′ et variations,
-  avec les limites dans le tableau, T06c) ; 6 = graphique.
+  avec les limites et les valeurs des extremums dans le tableau, T06c et D10), extremums rédigés selon D11 (voir ci-dessous) ;
+  6 = graphique.
 - **Partie 1, domaine de définition** (D1, D3 ; P3) : carte « Fonction » (f seule) ; carte « Mise en forme » quand f(x) = e^{haut/bas},
   haut et bas polynômes de degré ≥ 1 écrits développés à coefficients entiers, dont l'un au moins se factorise par mise en évidence de
   c·xᵏ ou par Somme-Produit (trinôme unitaire, deux racines entières distinctes, facteurs par racine croissante) : une ligne par
@@ -60,6 +61,19 @@ le bilan) sont dans `etude-complete/parties.py` (créé au chantier `etude-compl
   calculés (sinon les lignes de l'outil ED) ; f(0) écrit = valeur SymPy = sonde. Au moindre désaccord : « Le signe de f n'a pas pu
   être établi avec certitude : l'outil ne conclut pas. » (ou « L'ordonnée à l'origine n'a pas pu être établie avec certitude… »).
   Calculée par `resoudre`, sur l'analyse en cache.
+- **Partie 5, extremums** (D11 ; P7b) : à la place de la liste de l'outil Dérivée, dans la carte « Signe de f′ et variations ». Quand
+  la carte « Dérivée » a nommé g (f = e^{u/v}) et x₀ est entier, la valeur est calculée en chaîne : « g(4) = 18/12 = 3/2, donc
+  f(4) = e^{3/2} ≈ 4,48. ». Puis une ligne par extremum : « **Maximum local** en x = 0 : (0 ; e^{1/6}) ≈ (0 ; 1,18) (f′ passe de + à
+  −). » (≈ : decisions.md §2 et R13, entier exact sans ≈ ; « (f′ passe … ) » seulement si f′ change de signe), suivie de « Global : les
+  autres valeurs de f sont plus petites (limites 0⁺ en ±∞). » quand f(x₀) dépasse strictement les autres extremums du même genre et
+  toutes les limites aux bornes de l'ED (±∞ et chaque côté ouvert de chaque borne, celles du tableau T06c), ou de « Pas global :
+  f(x) → +∞ quand x → 2⁺. » (raison : la limite ou l'extremum le plus extrême, le premier dans l'ordre du tableau à égalité) ; rien
+  (« local » seul) si une limite vaut « ? » ou manque, en cas d'égalité, si une borne fermée de l'ED n'est pas un extremum ou si la
+  valeur n'est pas exacte. Garde-fous (EC-15, principe 0.2) : chaque comparaison est faite par SymPy (signe exact de la différence) et
+  par mpmath ; « global » est confirmé par une sonde de f sur l'ED (grille, points près de chaque borne et lointains : aucune valeur
+  au-delà de f(x₀)), « pas global » par une valeur de f au-delà de f(x₀) près de la borne nommée ; les limites sont lues sur une liste
+  fermée d'écritures (±∞, entiers, fractions, avec signe d'approche) ; au moindre doute, « local » seul. Sans SymPy : la liste de l'outil
+  Dérivée. Calculée par `resoudre`, sur l'analyse en cache.
 - **Une seule analyse par saisie** (D19) : le résultat de `analyser_complet` (ED) est gardé en cache (`functools.lru_cache`, clé =
   saisie aux espaces réduits et présence de SymPy) ; `etudier()` le passe aux outils Dérivée et Limites (paramètre facultatif
   `analyse` de leur `etudier`, sans effet sur ces outils seuls), et `fenetre()` (zoom) le relit sans recalcul.

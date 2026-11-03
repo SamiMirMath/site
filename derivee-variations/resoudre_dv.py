@@ -33,7 +33,8 @@ def carte_derivee(r):
     return so.carte("Dérivée", blocs, badge="calcul")
 
 
-def carte_signe(r, limites=None, ec=False):
+def carte_signe(r, limites=None, ec=False, extremums=None):
+    """`extremums` (Étude complète, D11) : blocs qui remplacent la liste des extremums ; sans eux, la liste de l'outil Dérivée."""
     if not r["signe_resolu"]:
         return so.carte(TITRE_SIGNE, [so.erreur(r["signe_erreur"])], style="erreur", detail=r.get("signe_detail"))
     blocs = [dict(e) if e["type"] == "tableau" else so.texte(e["html"], style="etape") for e in r["signe_etapes"]]
@@ -43,7 +44,9 @@ def carte_signe(r, limites=None, ec=False):
     blocs.append(tab)
     for o in (limites or {}).get("non_determinees", []):
         blocs.append(so.texte(f"Limite non déterminée automatiquement en \\({o}\\).", style="indice"))
-    if r["extrema"]:
+    if r["extrema"] and extremums:
+        blocs += extremums
+    elif r["extrema"]:
         blocs.append(so.liste([f"{e['genre']} en \\(x={e['x_tex']}\\) : \\(f({e['x_tex']})={e['f_tex']}\\)" for e in r["extrema"]],
                               style="extrema"))
     elif r.get("f_constante"):

@@ -887,3 +887,376 @@ class TestGardeFousZerosSigne(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# ---------------------------------------------------------------------------------------------------------------------------
+# Partie 5. Extremums (D11, P7b) ; les valeurs dans la ligne f(x) du tableau (D10) sont testées dans test_tableau_variations.py
+# ---------------------------------------------------------------------------------------------------------------------------
+def carte_signe_ec(entree):
+    return next(c for c in rec.resoudre(entree)["cartes"] if c["titre"] == "Signe de f' et variations")
+
+
+def lignes_extremums(entree):
+    """(lignes de valeur en chaîne, lignes des extremums) de la carte « Signe de f′ et variations » de l'Étude complète."""
+    blocs = carte_signe_ec(entree)["blocs"]
+    i = next(k for k, b in enumerate(blocs) if b["type"] == "tableau")
+    chaine = [b["html"] for b in blocs[i + 1:] if b["type"] == "texte"]
+    items = [it for b in blocs[i + 1:] if b["type"] == "liste" for it in b["items"]]
+    return chaine, items
+
+
+def blocs_d11(entree, limites=None):
+    r = ec.etudier(entree)
+    return parties.blocs_extremums(r["derivee"], r["variations_limites"] if limites is None else limites, ec.analyse(entree))
+
+
+def items_d11(entree, limites=None):
+    return [it for b in blocs_d11(entree, limites) if b["type"] == "liste" for it in b["items"]]
+
+
+MAX, MIN = "<b>Maximum local</b>", "<b>Minimum local</b>"
+PLUS_MOINS, MOINS_PLUS = r"(\(f'\) passe de \(+\) à \(-\))", r"(\(f'\) passe de \(-\) à \(+\))"
+
+
+class TestExtremums(unittest.TestCase):
+    ATTENDU = {
+        "e^((x^2+x-2)/(6x-12))": ([
+            r"\(g(0) = \frac{-2}{-12} = \frac{1}{6}\), donc \(f(0) = e^{\frac{1}{6}}\) ≈ 1,18.",
+            r"\(g(4) = \frac{18}{12} = \frac{3}{2}\), donc \(f(4) = e^{\frac{3}{2}}\) ≈ 4,48."], [
+            rf"{MAX} en \(x = 0\) : \(\left(0\,;\,e^{{\frac{{1}}{{6}}}}\right)\) ≈ (0 ; 1,18) {PLUS_MOINS}. "
+            r"Pas global : \(f(x) \to +\infty\) quand \(x \to 2^{+}\).",
+            rf"{MIN} en \(x = 4\) : \(\left(4\,;\,e^{{\frac{{3}}{{2}}}}\right)\) ≈ (4 ; 4,48) {MOINS_PLUS}. "
+            r"Pas global : \(f(x) \to 0^{+}\) quand \(x \to -\infty\)."]),
+        "e^(-x^2)": ([], [
+            rf"{MAX} en \(x = 0\) : \(\left(0\,;\,1\right)\) {PLUS_MOINS}. "
+            r"Global : les autres valeurs de f sont plus petites (limites \(0^{+}\) en \(\pm\infty\))."]),
+        "(x^2-6)e^(-2x)": ([], [
+            rf"{MIN} en \(x = -2\) : \(\left(-2\,;\,- 2 e^{{4}}\right)\) ≈ (−2 ; −109,20) {MOINS_PLUS}. "
+            r"Global : les autres valeurs de f sont plus grandes (limites \(+\infty\) en \(-\infty\) et \(0^{+}\) en \(+\infty\)).",
+            rf"{MAX} en \(x = 3\) : \(\left(3\,;\,3 e^{{-6}}\right)\) ≈ (3 ; 0,0074) {PLUS_MOINS}. "
+            r"Pas global : \(f(x) \to +\infty\) quand \(x \to -\infty\)."]),
+        "e^x(6-e^x)": ([], [
+            rf"{MAX} en \(x = \ln(3)\) : \(\left(\ln(3)\,;\,9\right)\) ≈ (1,10 ; 9) {PLUS_MOINS}. "
+            r"Global : les autres valeurs de f sont plus petites (limites \(0^{+}\) en \(-\infty\) et \(-\infty\) en \(+\infty\))."]),
+        "e^(2/(x^2-4))": ([r"\(g(0) = \frac{2}{-4} = -\frac{1}{2}\), donc \(f(0) = e^{- \frac{1}{2}}\) ≈ 0,61."], [
+            rf"{MAX} en \(x = 0\) : \(\left(0\,;\,e^{{- \frac{{1}}{{2}}}}\right)\) ≈ (0 ; 0,61) {PLUS_MOINS}. "
+            r"Pas global : \(f(x) \to +\infty\) quand \(x \to -2^{-}\)."]),
+        # cas limites (D11 : « local » seul) : égalité avec une limite (0 et 0⁺), deux minimums égaux, bornes fermées de l'ED
+        "x^2*e^(-x)": ([], [
+            rf"{MIN} en \(x = 0\) : \(\left(0\,;\,0\right)\) {MOINS_PLUS}.",
+            rf"{MAX} en \(x = 2\) : \(\left(2\,;\,4 e^{{-2}}\right)\) ≈ (2 ; 0,54) {PLUS_MOINS}. "
+            r"Pas global : \(f(x) \to +\infty\) quand \(x \to -\infty\)."]),
+        "x^4-2x^2": ([], [
+            rf"{MIN} en \(x = -1\) : \(\left(-1\,;\,-1\right)\) {MOINS_PLUS}.",
+            rf"{MAX} en \(x = 0\) : \(\left(0\,;\,0\right)\) {PLUS_MOINS}. Pas global : \(f(x) \to +\infty\) quand \(x \to -\infty\).",
+            rf"{MIN} en \(x = 1\) : \(\left(1\,;\,-1\right)\) {MOINS_PLUS}."]),
+        "sqrt(x^2-4)": ([], [rf"{MIN} en \(x = -2\) : \(\left(-2\,;\,0\right)\).", rf"{MIN} en \(x = 2\) : \(\left(2\,;\,0\right)\)."]),
+        # ED fermé : aucune limite à citer ; deux autres valeurs (minimums de bord) sous le maximum
+        "sqrt(4-x^2)": ([], [
+            rf"{MIN} en \(x = -2\) : \(\left(-2\,;\,0\right)\).",
+            rf"{MAX} en \(x = 0\) : \(\left(0\,;\,2\right)\) {PLUS_MOINS}. Global : les autres valeurs de f sont plus petites.",
+            rf"{MIN} en \(x = 2\) : \(\left(2\,;\,0\right)\)."]),
+        # deux maximums égaux (« local » seul), minimum égal à la limite 0⁺
+        "x^2e^(-x^2)": ([], [
+            rf"{MAX} en \(x = -1\) : \(\left(-1\,;\,e^{{-1}}\right)\) ≈ (−1 ; 0,37) {PLUS_MOINS}.",
+            rf"{MIN} en \(x = 0\) : \(\left(0\,;\,0\right)\) {MOINS_PLUS}.",
+            rf"{MAX} en \(x = 1\) : \(\left(1\,;\,e^{{-1}}\right)\) ≈ (1 ; 0,37) {PLUS_MOINS}."]),
+        # borne ouverte de l'ED (0⁺) et limite 0⁻ ; deux extremums globaux ; f′ non définie au minimum
+        "x*ln(x)": ([], [
+            rf"{MIN} en \(x = e^{{-1}}\) : \(\left(e^{{-1}}\,;\,- e^{{-1}}\right)\) ≈ (0,37 ; −0,37) {MOINS_PLUS}. "
+            r"Global : les autres valeurs de f sont plus grandes (limites \(0^{-}\) en \(0^{+}\) et \(+\infty\) en \(+\infty\))."]),
+        "x/(x^2+1)": ([], [
+            rf"{MIN} en \(x = -1\) : \(\left(-1\,;\,- \frac{{1}}{{2}}\right)\) ≈ (−1 ; −0,50) {MOINS_PLUS}. "
+            r"Global : les autres valeurs de f sont plus grandes (limites \(0\) en \(\pm\infty\)).",
+            rf"{MAX} en \(x = 1\) : \(\left(1\,;\,\frac{{1}}{{2}}\right)\) ≈ (1 ; 0,50) {PLUS_MOINS}. "
+            r"Global : les autres valeurs de f sont plus petites (limites \(0\) en \(\pm\infty\))."]),
+        "x^(2/3)": ([], [
+            rf"{MIN} en \(x = 0\) : \(\left(0\,;\,0\right)\) {MOINS_PLUS}. "
+            r"Global : les autres valeurs de f sont plus grandes (limites \(+\infty\) en \(\pm\infty\))."]),
+        "(x^2-1)/(x-3)": ([], [
+            rf"{MAX} en \(x = 3 - 2\sqrt{{2}}\) : \(\left(3 - 2\sqrt{{2}}\,;\,6 - 4 \sqrt{{2}}\right)\) ≈ (0,17 ; 0,34) {PLUS_MOINS}. "
+            r"Pas global : \(f(x) \to +\infty\) quand \(x \to 3^{+}\).",
+            rf"{MIN} en \(x = 3 + 2\sqrt{{2}}\) : \(\left(3 + 2\sqrt{{2}}\,;\,4 \sqrt{{2}} + 6\right)\) ≈ (5,83 ; 11,66) {MOINS_PLUS}. "
+            r"Pas global : \(f(x) \to -\infty\) quand \(x \to -\infty\)."]),
+    }
+
+    def test_lignes_exactes(self):
+        for entree, attendu in self.ATTENDU.items():
+            with self.subTest(entree=entree):
+                self.assertEqual(lignes_extremums(entree), attendu)
+
+    def test_l_outil_derivee_garde_sa_liste(self):
+        """D11 est propre à l'EC : l'outil Dérivée garde la liste « maximum local en x = … : f(…) = … »."""
+        import resoudre_dv as rdv
+        c = next(c for c in rdv.resoudre("e^((x^2+x-2)/(6x-12))")["cartes"] if c["titre"] == rdv.TITRE_SIGNE)
+        self.assertEqual(c["blocs"][-1]["items"], [r"maximum local en \(x=0\) : \(f(0)=e^{\frac{1}{6}}\)",
+                                                   r"minimum local en \(x=4\) : \(f(4)=e^{\frac{3}{2}}\)"])
+
+    def test_sans_extremum_inchange(self):
+        for entree in ("e^(2x)", "e^(1/x)", "(e^x-1)/x"):
+            with self.subTest(entree=entree):
+                self.assertEqual(carte_signe_ec(entree)["blocs"][-1]["html"], "Aucun extremum local.")
+                self.assertIsNone(blocs_d11(entree))
+
+    def test_lecture_des_limites(self):
+        sp = ed._sympy()
+        lues = {r"+\infty": sp.oo, r"-\infty": -sp.oo, "0^{+}": 0, "0^{-}": 0, "1": 1, "1^{+}": 1, "-3": -3, r"\frac{1}{2}": sp.Rational(1, 2),
+                r"- \frac{3}{4}^{-}": sp.Rational(-3, 4), r"\dfrac{5}{2}": sp.Rational(5, 2)}
+        for t, v in lues.items():
+            with self.subTest(t=t):
+                self.assertEqual(parties.lire_limite(t, sp), v)
+        for t in ("?", None, r"\sqrt{2}", "e^{2}", r"\frac{1}{0}", r"\ln(2)", "1{,}5", "x"):
+            with self.subTest(t=t):
+                self.assertIsNone(parties.lire_limite(t, sp))
+
+
+def arrondi_scientifique(v):
+    """R13 (question 1 de suivi.md) : notation scientifique à 4 chiffres significatifs, « 9{,}119 \\times 10^{-4} », calculée ici."""
+    d = Decimal(mp.nstr(v, 45, min_fixed=-mp.inf, max_fixed=mp.inf))
+    e = d.adjusted()
+    m = d.scaleb(-e).quantize(Decimal("0.001"), rounding=ROUND_HALF_UP)
+    if abs(m) >= 10:
+        e += 1
+        m = d.scaleb(-e).quantize(Decimal("0.001"), rounding=ROUND_HALF_UP)
+    t = format(m, "f")
+    t = t[:-4] if t.endswith(".000") else t
+    return r"\(" + t.replace(".", "{,}") + r" \times 10^{" + str(e) + r"}\)"
+
+
+def verifier_approchee(test, t, v, contexte):
+    """t : valeur approchée affichée (« 1,18 », « −109,20 » ou notation scientifique) ; v : valeur de l'oracle."""
+    if r"\times" in t:
+        test.assertEqual(t, arrondi_scientifique(v), contexte)
+    else:
+        test.assertEqual(decimal_affiche(t), arrondi_oracle(v), contexte)
+
+
+def oracle_x_y(item, f):
+    """Point affiché (x, f(x)) d'une ligne d'extremum, relu à la main et recoupé : f(x) de l'oracle = valeur affichée."""
+    m = re.match(r"<b>(Maximum|Minimum) local</b> en \\\(x = (.+?)\\\)(?: : \\\(\\left\((.+?)\\,;\\,(.+?)\\right\)\\\))?"
+                 r"(?: ≈ \((.+?) ; (.+?)\))?(?: \(\\\(f'\\\) passe de \\\(([+-])\\\) à \\\(([+-])\\\)\))?\.(?: (.*))?$", item)
+    assert m, item
+    return m
+
+
+class TestExtremumsOracle(unittest.TestCase):
+    """Ce que la partie 5 affiche (D11), recoupé par l'oracle mpmath (tests/python/oracle.py : ni `evaluer`, ni SymPy, ni la sonde) :
+    point exact (f(x₀) de l'oracle), arrondis, changement de signe de f′, « global » (aucune valeur de f plus grande, ou plus petite,
+    sur une grille dense de l'ED et des points lointains), « pas global » (la raison : une valeur de f au-delà de f(x₀) près de la
+    borne nommée, la limite écrite retrouvée), valeur en chaîne par l'exposant."""
+    GRILLE = [mp.mpf(k) / 20 - 60 + mp.mpf(1) / 977 for k in range(0, 2401)] + \
+        [s * mp.mpf(10) ** k for k in range(2, 7) for s in (-1, 1)]
+
+    def verifier(self, entree):
+        f = lire(entree)
+        chaine, items = lignes_extremums(entree)
+        statuts = []
+        for it in items:
+            m = oracle_x_y(it, f)
+            s = 1 if m.group(1) == "Maximum" else -1
+            x0 = nombre_affiche(m.group(2))
+            y = oracle.valeur(f, x0)
+            self.assertIsNotNone(y, (entree, it))
+            if m.group(3) is not None:
+                self.assertEqual(m.group(3), m.group(2))
+                self.assertLess(abs(nombre_affiche(m.group(4)) - y), mp.mpf(10) ** -35 * (1 + abs(y)), (entree, it))
+            for t, v in ((m.group(5), x0), (m.group(6), y)):
+                if t is None:
+                    continue
+                if v == mp.nint(v) and abs(v) < 10 ** 6:
+                    self.assertEqual(decimal_affiche(t), Decimal(int(mp.nint(v))), (entree, it))
+                else:
+                    verifier_approchee(self, t, v, (entree, it))
+            if m.group(5) is None and m.group(3) is not None:
+                self.assertTrue(x0 == mp.nint(x0) and y == mp.nint(y), (entree, it))          # sans ≈ : deux entiers
+            if m.group(7):
+                h = mp.mpf(10) ** -6
+                avant, apres = oracle.derivee(f, x0 - h), oracle.derivee(f, x0 + h)
+                self.assertEqual(("+" if avant > 0 else "-", "+" if apres > 0 else "-"), (m.group(7), m.group(8)), (entree, it))
+                self.assertEqual(m.group(7), "+" if s > 0 else "-", (entree, it))
+            fin = m.group(9) or ""
+            if fin.startswith("Global"):
+                statuts.append("global")
+                pire = max((s * (v - y) for v in (oracle.valeur(f, t) for t in self.GRILLE) if v is not None), default=None)
+                self.assertIsNotNone(pire)
+                self.assertLessEqual(pire, mp.mpf(10) ** -30, (entree, it))
+                self.assertIn("plus petites" if s > 0 else "plus grandes", fin)
+                self.assertNotIn("()", fin)
+            elif fin.startswith("Pas global"):
+                statuts.append("pas global")
+                r = re.fullmatch(r"Pas global : \\\(f\(x\) \\to (.+?)\\\) quand \\\(x \\to (.+?)\\\)\.", fin)
+                self.assertIsNotNone(r, (entree, fin))
+                lim, ou = r.groups()
+                if ou in (r"-\infty", r"+\infty"):
+                    pts = [(-1 if ou == r"-\infty" else 1) * mp.mpf(10) ** k for k in range(1, 9)]
+                else:
+                    a, cote = nombre_affiche(ou[:-4]), ou[-2]
+                    pts = [a + (1 if cote == "+" else -1) * mp.mpf(10) ** -k for k in range(2, 14)]
+                vals = [v for v in (oracle.valeur(f, t) for t in pts) if v is not None]
+                self.assertTrue(any(s * (v - y) > 0 for v in vals), (entree, it))
+                if lim in (r"+\infty", r"-\infty"):
+                    self.assertGreater((1 if lim == r"+\infty" else -1) * vals[-1], 10 ** 6, (entree, it))
+                else:
+                    self.assertLess(abs(vals[-1] - nombre_affiche(lim.replace("^{+}", "").replace("^{-}", ""))), mp.mpf("0.01"))
+                    self.assertGreater(s * (nombre_affiche(lim.replace("^{+}", "").replace("^{-}", "")) - y), 0, (entree, it))
+            else:
+                self.assertEqual(fin, "", (entree, it))
+                statuts.append("local")
+        for ligne in chaine:
+            m = re.fullmatch(r"\\\(g\((.+?)\) = (?:\\frac\{(-?\d+)\}\{(-?\d+)\} = )?(.+?)\\\), donc \\\(f\(\1\) = (.+?)\\\)(?: ≈ ([−0-9,]+|\\\(.+\\\)))?\.",
+                             ligne)
+            self.assertIsNotNone(m, ligne)
+            x0 = mp.mpf(int(m.group(1)))
+            g = oracle.valeur(f.a, x0)
+            if m.group(2):
+                self.assertEqual(mp.mpf(int(m.group(2))) / int(m.group(3)), g)
+                self.assertEqual(oracle.valeur(f.a.a, x0), int(m.group(2)))                     # haut et bas calculés en x₀
+                self.assertEqual(oracle.valeur(f.a.b, x0), int(m.group(3)))
+            self.assertLess(abs(nombre_affiche(m.group(4)) - g), mp.mpf(10) ** -40)
+            y = oracle.valeur(f, x0)
+            self.assertLess(abs(nombre_affiche(m.group(5)) - y), mp.mpf(10) ** -35 * (1 + y))
+            if m.group(6):
+                verifier_approchee(self, m.group(6), y, ligne)
+        return statuts
+
+    def test_corpus_et_entrees_de_la_page(self):
+        vus = []
+        for entree in dict.fromkeys(list(TestExtremums.ATTENDU) + entrees_page("etude-complete") + CAS_LIMITES["etude-complete"]):
+            r = ec.etudier(entree)
+            if not (r["ok"] and r["derivee"].get("extrema")):
+                continue
+            with self.subTest(entree=entree):
+                vus += self.verifier(entree)
+        self.assertGreaterEqual(min(vus.count(s) for s in ("global", "pas global", "local")), 4, vus)
+
+    def test_famille_au_hasard(self):
+        """Polynômes, produits par une exponentielle, eˣ(k − eˣ), quotients, e^{(x² − k)/(x − b)}, x·ln(x) − k·x…"""
+        hasard = random.Random(11)
+        formes = ["x^3-{k}x", "x^2-{s}x+{p}", "(x^2-{k})e^({c}x)", "e^x({k}-e^x)", "x*e^({c}x)", "(x-{a})/(x^2+{k})",
+                  "e^((x^2-{k})/(x-{b}))", "x^4-{k}x^2", "x*ln(x)-{k}x", "(x^2+{k})/(x-{b})", "e^({k}/(x^2-{q}))", "x^2e^(-x^2)"]
+        vus = []
+        for _ in range(30):
+            a, b = hasard.sample(range(-4, 5), 2)
+            valeurs = dict(a=a, b=b, s=a + b, p=a * b, k=hasard.randint(1, 9), q=hasard.choice([1, 4, 9]), c=hasard.choice([-2, -1, 1, 3]))
+            entree = hasard.choice(formes).format(**valeurs).replace("--", "+").replace("+-", "-").replace("-+", "-")
+            r = ec.etudier(entree)
+            if not (r["ok"] and r["derivee"].get("extrema")):
+                continue
+            with self.subTest(entree=entree):
+                vus += self.verifier(entree)
+        self.assertGreaterEqual(vus.count("global"), 5, vus)
+        self.assertGreaterEqual(vus.count("pas global"), 10, vus)
+
+
+class TestGardeFousExtremums(unittest.TestCase):
+    """Principe 0.2 : au moindre doute (SymPy et sonde en désaccord, sonde qui contredit, limite illisible ou absente, borne fermée qui
+    n'est pas un extremum, erreur), « local » seul, jamais « global » ni « pas global » ; sans SymPy, la liste de l'outil Dérivée."""
+
+    def locales_seules(self, items):
+        for it in items:
+            self.assertNotIn("global", it.lower(), it)
+
+    def test_sonde_globale_contredit(self):
+        """a : une valeur de f plus grande que 1 trouvée par la sonde (fausse ici, au-delà de x = 5) : pas de « global »."""
+        vraie = parties.valeur_mp
+
+        def fausse(n, x):
+            v = vraie(n, x)
+            return v + 2 if (v is not None and x > 5) else v
+        with mock.patch.object(parties, "valeur_mp", fausse):
+            items = items_d11("e^(-x^2)")
+        self.assertEqual(items, [rf"{MAX} en \(x = 0\) : \(\left(0\,;\,1\right)\) {PLUS_MOINS}."])
+
+    def test_sonde_pas_global_ne_trouve_rien(self):
+        """b, maximum en 3 : la sonde (faussée) ne trouve aucune valeur au-delà de f(3) près de −∞ : pas de « pas global »."""
+        vraie = parties.valeur_mp
+
+        def fausse(n, x):
+            v = vraie(n, x)
+            return mp.mpf(-1000) if (v is not None and x < -1) else v
+        with mock.patch.object(parties, "valeur_mp", fausse):
+            items = items_d11("(x^2-6)e^(-2x)")
+        self.assertTrue(items[1].endswith(rf"(3 ; 0,0074) {PLUS_MOINS}."), items[1])
+        self.assertNotIn("global", items[1].lower())
+
+    def test_sympy_contredit_la_sonde(self):
+        """x/(x² + 1) : le signe exact de f(x₀) − 0 inversé : SymPy et mpmath en désaccord, « local » seul."""
+        with mock.patch.object(parties, "_signe_sp", lambda v: -1 if v > 0 else 1):
+            self.locales_seules(items_d11("x/(x^2+1)"))
+
+    def test_sympy_ne_tranche_pas(self):
+        def indecis(v):
+            raise parties.Doute()
+        with mock.patch.object(parties, "_signe_sp", indecis):
+            self.locales_seules(items_d11("x/(x^2+1)"))
+
+    def test_limite_illisible_ou_absente(self):
+        lim = ec.etudier("e^((x^2+x-2)/(6x-12))")["variations_limites"]
+        for modif in ({"moins_inf": "?"}, {"moins_inf": r"\sqrt{2}"}, {"plus_inf": None},
+                      {"colonnes": [dict(lim["colonnes"][0], droite=None)]}, {"colonnes": []}):
+            with self.subTest(modif=modif):
+                items = items_d11("e^((x^2+x-2)/(6x-12))", dict(lim, **modif))
+                self.locales_seules(items)
+                self.assertEqual(len(items), 2)
+
+    def test_limite_qui_cache_un_depassement(self):
+        """D11 littéral : une limite « ? » suffit pour « local » seul, même si une autre borne prouverait « pas global »."""
+        lim = ec.etudier("(x^2-6)e^(-2x)")["variations_limites"]
+        self.locales_seules(items_d11("(x^2-6)e^(-2x)", dict(lim, plus_inf="?")))
+
+    def test_valeur_exacte_contredite_par_la_sonde(self):
+        """f_py faux : ni ≈, ni « global », ni valeur en chaîne."""
+        r = ec.etudier("e^((x^2+x-2)/(6x-12))")
+        dv = dict(r["derivee"], extrema=[dict(e, f_py="exp(2)") for e in r["derivee"]["extrema"]])
+        blocs = parties.blocs_extremums(dv, r["variations_limites"], ec.analyse("e^((x^2+x-2)/(6x-12))"))
+        self.assertEqual([b["type"] for b in blocs], ["liste"])
+        for it in blocs[0]["items"]:
+            self.assertNotIn("≈", it)
+            self.assertNotIn("global", it.lower())
+
+    def test_valeur_inconnue(self):
+        """Valeur non exacte (pas de f_py) : le point n'est pas écrit en coordonnées, aucune affirmation."""
+        r = ec.etudier("x^2-4x+3")
+        e = {k: v for k, v in r["derivee"]["extrema"][0].items() if k not in ("x_py", "f_py")}
+        for f_tex, attendu in ((r"{\approx}\,-1{,}00", rf"{MIN} en \(x = 2\) : \(f(2) {{\approx}}\,-1{{,}}00\) {MOINS_PLUS}."),
+                               ("?", rf"{MIN} en \(x = 2\) {MOINS_PLUS}.")):
+            dv = dict(r["derivee"], extrema=[dict(e, f_tex=f_tex)])
+            blocs = parties.blocs_extremums(dv, r["variations_limites"], ec.analyse("x^2-4x+3"))
+            self.assertEqual(blocs[-1]["items"], [attendu])
+
+    def test_erreur_pendant_le_statut(self):
+        with mock.patch.object(parties, "_bornes_de_l_ed", side_effect=RuntimeError("panne")):
+            items = items_d11("e^(-x^2)")
+        self.assertEqual(items, [rf"{MAX} en \(x = 0\) : \(\left(0\,;\,1\right)\) {PLUS_MOINS}."])
+
+    def test_sans_sympy(self):
+        """Sans SymPy : la liste de l'outil Dérivée, telle quelle."""
+        with mock.patch.object(parties, "charger_sympy", return_value=None):
+            self.assertIsNone(blocs_d11("e^(-x^2)"))
+            c = carte_signe_ec("e^(-x^2)")
+        self.assertEqual(c["blocs"][-1]["items"], [r"maximum local en \(x=0\) : \(f(0)=1\)"])
+
+    def test_borne_fermee_qui_n_est_pas_un_extremum(self):
+        """sqrt(x² − 4) privé de son minimum en 2 : la borne fermée 2 n'est plus un extremum connu, « local » seul pour l'autre."""
+        r = ec.etudier("sqrt(x^2-4)")
+        dv = dict(r["derivee"], extrema=r["derivee"]["extrema"][:1])
+        sp = ed._sympy()
+        with mpmath.workdps(parties.CHIFFRES):
+            _, f, ED = ec.analyse("sqrt(x^2-4)")
+            crit = dv["table_signe"]["crit"]
+            cellules = dv["table_signe"]["rows"][-2]["cells"]
+            with self.assertRaises(parties.Doute):
+                parties._bornes_de_l_ed(ed.fusion(ED), crit, r["variations_limites"], {"-2"})
+            with self.assertRaises(parties.Doute):
+                parties.statut_global(dv["extrema"][0], dv["extrema"], ed.fusion(ED), crit, cellules, r["variations_limites"], f, sp, mp)
+        self.locales_seules(parties.blocs_extremums(dv, r["variations_limites"], ec.analyse("sqrt(x^2-4)"))[-1]["items"])
+
+    def test_chaine_refusee_sans_g_nomme_ou_x_non_entier(self):
+        sp = ed._sympy()
+        f = lire("e^((x^2+x-2)/(6x-12))")
+        with mpmath.workdps(parties.CHIFFRES):
+            self.assertIsNone(parties.valeur_par_l_exposant(f, {"x_tex": r"\frac{1}{2}", "x_py": "1/2", "f_py": "exp(3/4)",
+                                                               "f_tex": "?"}, sp, mp))
+            self.assertIsNone(parties.valeur_par_l_exposant(lire("x^2-4x+3"), {"x_tex": "2", "x_py": "2", "f_py": "-1", "f_tex": "-1"},
+                                                            sp, mp))
+            self.assertIsNone(parties.valeur_par_l_exposant(f, {"x_tex": "4", "x_py": "4", "f_py": "exp(2)", "f_tex": "e^{2}"}, sp, mp))

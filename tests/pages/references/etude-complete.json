@@ -916,8 +916,8 @@
      [
       "extrema",
       [
-       "maximum local en ⟦x=3 - 2\\sqrt{2}⟧ : ⟦f(3 - 2\\sqrt{2})=6 - 4 \\sqrt{2}⟧",
-       "minimum local en ⟦x=3 + 2\\sqrt{2}⟧ : ⟦f(3 + 2\\sqrt{2})=4 \\sqrt{2} + 6⟧"
+       "Maximum local en ⟦x = 3 - 2\\sqrt{2}⟧ : ⟦\\left(3 - 2\\sqrt{2}\\,;\\,6 - 4 \\sqrt{2}\\right)⟧ ≈ (0,17 ; 0,34) (⟦f'⟧ passe de ⟦+⟧ à ⟦-⟧). Pas global : ⟦f(x) \\to +\\infty⟧ quand ⟦x \\to 3^{+}⟧.",
+       "Minimum local en ⟦x = 3 + 2\\sqrt{2}⟧ : ⟦\\left(3 + 2\\sqrt{2}\\,;\\,4 \\sqrt{2} + 6\\right)⟧ ≈ (5,83 ; 11,66) (⟦f'⟧ passe de ⟦-⟧ à ⟦+⟧). Pas global : ⟦f(x) \\to -\\infty⟧ quand ⟦x \\to -\\infty⟧."
       ]
      ]
     ],
@@ -1119,7 +1119,7 @@
         ],
         [
          "pt",
-         "•"
+         "⟦6 - 4 \\sqrt{2}⟧"
         ],
         [
          "",
@@ -1135,7 +1135,7 @@
         ],
         [
          "pt",
-         "•"
+         "⟦4 \\sqrt{2} + 6⟧"
         ],
         [
          "",
@@ -1150,7 +1150,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{x^{2} - 6x + 1}{\\left(x - 3\\right)^{2}} = 0 \\iff x^{2} - 6x + 1 = 0 \\iff x = 3 - 2\\sqrt{2} \\text{ ou } x = 3 + 2\\sqrt{2}⟧ ; valeur interdite : ⟦x = 3⟧.⟦x⟧⟦-\\infty⟧⟦3 - 2\\sqrt{2}⟧⟦3⟧⟦3 + 2\\sqrt{2}⟧⟦+\\infty⟧⟦\\left(x^{2} - 6x + 1\\right)⟧+0−−0+⟦\\left(x - 3\\right)^{2}⟧++++++⟦f'(x)⟧+0−−0+⟦f(x)⟧⟦-\\infty⟧⟦\\nearrow⟧•⟦\\searrow⟧⟦-\\infty⟧⟦+\\infty⟧⟦+\\infty⟧⟦-\\infty⟧⟦\\searrow⟧•⟦\\nearrow⟧⟦+\\infty⟧maximum local en ⟦x=3 - 2\\sqrt{2}⟧ : ⟦f(3 - 2\\sqrt{2})=6 - 4 \\sqrt{2}⟧minimum local en ⟦x=3 + 2\\sqrt{2}⟧ : ⟦f(3 + 2\\sqrt{2})=4 \\sqrt{2} + 6⟧",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{x^{2} - 6x + 1}{\\left(x - 3\\right)^{2}} = 0 \\iff x^{2} - 6x + 1 = 0 \\iff x = 3 - 2\\sqrt{2} \\text{ ou } x = 3 + 2\\sqrt{2}⟧ ; valeur interdite : ⟦x = 3⟧.⟦x⟧⟦-\\infty⟧⟦3 - 2\\sqrt{2}⟧⟦3⟧⟦3 + 2\\sqrt{2}⟧⟦+\\infty⟧⟦\\left(x^{2} - 6x + 1\\right)⟧+0−−0+⟦\\left(x - 3\\right)^{2}⟧++++++⟦f'(x)⟧+0−−0+⟦f(x)⟧⟦-\\infty⟧⟦\\nearrow⟧⟦6 - 4 \\sqrt{2}⟧⟦\\searrow⟧⟦-\\infty⟧⟦+\\infty⟧⟦+\\infty⟧⟦-\\infty⟧⟦\\searrow⟧⟦4 \\sqrt{2} + 6⟧⟦\\nearrow⟧⟦+\\infty⟧Maximum local en ⟦x = 3 - 2\\sqrt{2}⟧ : ⟦\\left(3 - 2\\sqrt{2}\\,;\\,6 - 4 \\sqrt{2}\\right)⟧ ≈ (0,17 ; 0,34) (⟦f'⟧ passe de ⟦+⟧ à ⟦-⟧). Pas global : ⟦f(x) \\to +\\infty⟧ quand ⟦x \\to 3^{+}⟧.Minimum local en ⟦x = 3 + 2\\sqrt{2}⟧ : ⟦\\left(3 + 2\\sqrt{2}\\,;\\,4 \\sqrt{2} + 6\\right)⟧ ≈ (5,83 ; 11,66) (⟦f'⟧ passe de ⟦-⟧ à ⟦+⟧). Pas global : ⟦f(x) \\to -\\infty⟧ quand ⟦x \\to -\\infty⟧.",
     "titre": "Signe de f' et variationstableau"
    },
    {
@@ -1611,7 +1611,7 @@
      [
       "extrema",
       [
-       "minimum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=- 3 e^{-1}⟧"
+       "Minimum local en ⟦x = e^{-1}⟧ : ⟦\\left(e^{-1}\\,;\\,- 3 e^{-1}\\right)⟧ ≈ (0,37 ; −1,10) (⟦f'⟧ passe de ⟦-⟧ à ⟦+⟧). Global : les autres valeurs de f sont plus grandes (limites ⟦0^{-}⟧ en ⟦0^{+}⟧ et ⟦+\\infty⟧ en ⟦+\\infty⟧)."
       ]
      ]
     ],
@@ -1789,7 +1789,7 @@
         ],
         [
          "pt",
-         "•"
+         "⟦- 3 e^{-1}⟧"
         ],
         [
          "",
@@ -1804,7 +1804,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦\\ln(x) + 1 = 0 \\iff \\ln(x) = -1⟧ (on soustrait 1).⟦\\ln(x) = -1 \\iff x = e^{-1}⟧⟦f'(x) = 3\\left(\\ln(x) + 1\\right) = 0 \\iff \\ln(x) + 1 = 0 \\iff x = e^{-1}⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e^{-1}⟧⟦+\\infty⟧⟦3⟧+++⟦\\left(\\ln(x) + 1\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦0^{-}⟧⟦0^{-}⟧⟦\\searrow⟧•⟦\\nearrow⟧⟦+\\infty⟧minimum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=- 3 e^{-1}⟧",
+    "texte": "Signe de f' et variationstableau⟦\\ln(x) + 1 = 0 \\iff \\ln(x) = -1⟧ (on soustrait 1).⟦\\ln(x) = -1 \\iff x = e^{-1}⟧⟦f'(x) = 3\\left(\\ln(x) + 1\\right) = 0 \\iff \\ln(x) + 1 = 0 \\iff x = e^{-1}⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e^{-1}⟧⟦+\\infty⟧⟦3⟧+++⟦\\left(\\ln(x) + 1\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦0^{-}⟧⟦0^{-}⟧⟦\\searrow⟧⟦- 3 e^{-1}⟧⟦\\nearrow⟧⟦+\\infty⟧Minimum local en ⟦x = e^{-1}⟧ : ⟦\\left(e^{-1}\\,;\\,- 3 e^{-1}\\right)⟧ ≈ (0,37 ; −1,10) (⟦f'⟧ passe de ⟦-⟧ à ⟦+⟧). Global : les autres valeurs de f sont plus grandes (limites ⟦0^{-}⟧ en ⟦0^{+}⟧ et ⟦+\\infty⟧ en ⟦+\\infty⟧).",
     "titre": "Signe de f' et variationstableau"
    },
    {
@@ -2079,8 +2079,8 @@
      [
       "extrema",
       [
-       "maximum local en ⟦x=0⟧ : ⟦f(0)=e^{\\frac{1}{6}}⟧",
-       "minimum local en ⟦x=4⟧ : ⟦f(4)=e^{\\frac{3}{2}}⟧"
+       "Maximum local en ⟦x = 0⟧ : ⟦\\left(0\\,;\\,e^{\\frac{1}{6}}\\right)⟧ ≈ (0 ; 1,18) (⟦f'⟧ passe de ⟦+⟧ à ⟦-⟧). Pas global : ⟦f(x) \\to +\\infty⟧ quand ⟦x \\to 2^{+}⟧.",
+       "Minimum local en ⟦x = 4⟧ : ⟦\\left(4\\,;\\,e^{\\frac{3}{2}}\\right)⟧ ≈ (4 ; 4,48) (⟦f'⟧ passe de ⟦-⟧ à ⟦+⟧). Pas global : ⟦f(x) \\to 0^{+}⟧ quand ⟦x \\to -\\infty⟧."
       ]
      ]
     ],
@@ -2417,7 +2417,7 @@
         ],
         [
          "pt",
-         "•"
+         "⟦e^{\\frac{1}{6}}⟧"
         ],
         [
          "",
@@ -2433,7 +2433,7 @@
         ],
         [
          "pt",
-         "•"
+         "⟦e^{\\frac{3}{2}}⟧"
         ],
         [
          "",
@@ -2448,7 +2448,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{x\\,\\left(x - 4\\right)\\,e^{\\frac{x^{2} + x - 2}{6x - 12}}}{6\\left(x - 2\\right)^{2}} = 0 \\iff x = 0 \\text{ ou } x - 4 = 0 \\iff x = 0 \\text{ ou } x = 4⟧ ; valeur interdite : ⟦x = 2⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦2⟧⟦4⟧⟦+\\infty⟧⟦\\frac{1}{6}⟧++++++⟦x⟧−0++++⟦\\left(x - 4\\right)⟧−−−−0+⟦e^{\\frac{x^{2} + x - 2}{6x - 12}}⟧++++++⟦\\left(x - 2\\right)^{2}⟧++++++⟦f'(x)⟧+0−−0+⟦f(x)⟧⟦0^{+}⟧⟦\\nearrow⟧•⟦\\searrow⟧⟦0^{+}⟧⟦+\\infty⟧⟦+\\infty⟧⟦0^{+}⟧⟦\\searrow⟧•⟦\\nearrow⟧⟦+\\infty⟧maximum local en ⟦x=0⟧ : ⟦f(0)=e^{\\frac{1}{6}}⟧minimum local en ⟦x=4⟧ : ⟦f(4)=e^{\\frac{3}{2}}⟧",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{x\\,\\left(x - 4\\right)\\,e^{\\frac{x^{2} + x - 2}{6x - 12}}}{6\\left(x - 2\\right)^{2}} = 0 \\iff x = 0 \\text{ ou } x - 4 = 0 \\iff x = 0 \\text{ ou } x = 4⟧ ; valeur interdite : ⟦x = 2⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦2⟧⟦4⟧⟦+\\infty⟧⟦\\frac{1}{6}⟧++++++⟦x⟧−0++++⟦\\left(x - 4\\right)⟧−−−−0+⟦e^{\\frac{x^{2} + x - 2}{6x - 12}}⟧++++++⟦\\left(x - 2\\right)^{2}⟧++++++⟦f'(x)⟧+0−−0+⟦f(x)⟧⟦0^{+}⟧⟦\\nearrow⟧⟦e^{\\frac{1}{6}}⟧⟦\\searrow⟧⟦0^{+}⟧⟦+\\infty⟧⟦+\\infty⟧⟦0^{+}⟧⟦\\searrow⟧⟦e^{\\frac{3}{2}}⟧⟦\\nearrow⟧⟦+\\infty⟧⟦g(0) = \\frac{-2}{-12} = \\frac{1}{6}⟧, donc ⟦f(0) = e^{\\frac{1}{6}}⟧ ≈ 1,18.⟦g(4) = \\frac{18}{12} = \\frac{3}{2}⟧, donc ⟦f(4) = e^{\\frac{3}{2}}⟧ ≈ 4,48.Maximum local en ⟦x = 0⟧ : ⟦\\left(0\\,;\\,e^{\\frac{1}{6}}\\right)⟧ ≈ (0 ; 1,18) (⟦f'⟧ passe de ⟦+⟧ à ⟦-⟧). Pas global : ⟦f(x) \\to +\\infty⟧ quand ⟦x \\to 2^{+}⟧.Minimum local en ⟦x = 4⟧ : ⟦\\left(4\\,;\\,e^{\\frac{3}{2}}\\right)⟧ ≈ (4 ; 4,48) (⟦f'⟧ passe de ⟦-⟧ à ⟦+⟧). Pas global : ⟦f(x) \\to 0^{+}⟧ quand ⟦x \\to -\\infty⟧.",
     "titre": "Signe de f' et variationstableau"
    },
    {
@@ -3187,7 +3187,7 @@
      [
       "extrema",
       [
-       "maximum local en ⟦x=0⟧ : ⟦f(0)=e^{- \\frac{1}{2}}⟧"
+       "Maximum local en ⟦x = 0⟧ : ⟦\\left(0\\,;\\,e^{- \\frac{1}{2}}\\right)⟧ ≈ (0 ; 0,61) (⟦f'⟧ passe de ⟦+⟧ à ⟦-⟧). Pas global : ⟦f(x) \\to +\\infty⟧ quand ⟦x \\to -2^{-}⟧."
       ]
      ]
     ],
@@ -3532,7 +3532,7 @@
         ],
         [
          "pt",
-         "•"
+         "⟦e^{- \\frac{1}{2}}⟧"
         ],
         [
          "",
@@ -3555,7 +3555,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{-4x\\,e^{\\frac{2}{x^{2} - 4}}}{\\left(x - 2\\right)^{2}\\,\\left(x + 2\\right)^{2}} = 0 \\iff x = 0⟧ ; valeurs interdites : ⟦x = -2⟧ ; ⟦x = 2⟧.⟦x⟧⟦-\\infty⟧⟦-2⟧⟦0⟧⟦2⟧⟦+\\infty⟧⟦-4⟧−−−−−⟦x⟧−−0++⟦e^{\\frac{2}{x^{2} - 4}}⟧+++++⟦\\left(x - 2\\right)^{2}⟧+++++⟦\\left(x + 2\\right)^{2}⟧+++++⟦f'(x)⟧++0−−⟦f(x)⟧⟦1⟧⟦\\nearrow⟧⟦+\\infty⟧⟦0^{+}⟧⟦0^{+}⟧⟦+\\infty⟧⟦\\nearrow⟧•⟦\\searrow⟧⟦0^{+}⟧⟦+\\infty⟧⟦+\\infty⟧⟦0^{+}⟧⟦\\searrow⟧⟦1⟧maximum local en ⟦x=0⟧ : ⟦f(0)=e^{- \\frac{1}{2}}⟧",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{-4x\\,e^{\\frac{2}{x^{2} - 4}}}{\\left(x - 2\\right)^{2}\\,\\left(x + 2\\right)^{2}} = 0 \\iff x = 0⟧ ; valeurs interdites : ⟦x = -2⟧ ; ⟦x = 2⟧.⟦x⟧⟦-\\infty⟧⟦-2⟧⟦0⟧⟦2⟧⟦+\\infty⟧⟦-4⟧−−−−−⟦x⟧−−0++⟦e^{\\frac{2}{x^{2} - 4}}⟧+++++⟦\\left(x - 2\\right)^{2}⟧+++++⟦\\left(x + 2\\right)^{2}⟧+++++⟦f'(x)⟧++0−−⟦f(x)⟧⟦1⟧⟦\\nearrow⟧⟦+\\infty⟧⟦0^{+}⟧⟦0^{+}⟧⟦+\\infty⟧⟦\\nearrow⟧⟦e^{- \\frac{1}{2}}⟧⟦\\searrow⟧⟦0^{+}⟧⟦+\\infty⟧⟦+\\infty⟧⟦0^{+}⟧⟦\\searrow⟧⟦1⟧⟦g(0) = \\frac{2}{-4} = -\\frac{1}{2}⟧, donc ⟦f(0) = e^{- \\frac{1}{2}}⟧ ≈ 0,61.Maximum local en ⟦x = 0⟧ : ⟦\\left(0\\,;\\,e^{- \\frac{1}{2}}\\right)⟧ ≈ (0 ; 0,61) (⟦f'⟧ passe de ⟦+⟧ à ⟦-⟧). Pas global : ⟦f(x) \\to +\\infty⟧ quand ⟦x \\to -2^{-}⟧.",
     "titre": "Signe de f' et variationstableau"
    },
    {
@@ -4314,7 +4314,7 @@
      [
       "extrema",
       [
-       "maximum local en ⟦x=e⟧ : ⟦f(e)=e^{-1}⟧"
+       "Maximum local en ⟦x = e⟧ : ⟦\\left(e\\,;\\,e^{-1}\\right)⟧ ≈ (2,72 ; 0,37) (⟦f'⟧ passe de ⟦+⟧ à ⟦-⟧). Global : les autres valeurs de f sont plus petites (limites ⟦-\\infty⟧ en ⟦0^{+}⟧ et ⟦0^{+}⟧ en ⟦+\\infty⟧)."
       ]
      ]
     ],
@@ -4492,7 +4492,7 @@
         ],
         [
          "pt",
-         "•"
+         "⟦e^{-1}⟧"
         ],
         [
          "",
@@ -4507,7 +4507,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦1 - \\ln(x) = 0 \\iff \\ln(x) = 1⟧ (on isole ⟦\\ln(x)⟧ du côté où son coefficient est positif).⟦\\ln(x) = 1 \\iff x = e⟧⟦f'(x) = \\frac{1 - \\ln(x)}{x^{2}} = 0 \\iff 1 - \\ln(x) = 0 \\iff x = e⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e⟧⟦+\\infty⟧⟦\\left(1 - \\ln(x)\\right)⟧+0−⟦x^{2}⟧+++⟦f'(x)⟧+0−⟦f(x)⟧⟦-\\infty⟧⟦-\\infty⟧⟦\\nearrow⟧•⟦\\searrow⟧⟦0^{+}⟧maximum local en ⟦x=e⟧ : ⟦f(e)=e^{-1}⟧",
+    "texte": "Signe de f' et variationstableau⟦1 - \\ln(x) = 0 \\iff \\ln(x) = 1⟧ (on isole ⟦\\ln(x)⟧ du côté où son coefficient est positif).⟦\\ln(x) = 1 \\iff x = e⟧⟦f'(x) = \\frac{1 - \\ln(x)}{x^{2}} = 0 \\iff 1 - \\ln(x) = 0 \\iff x = e⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e⟧⟦+\\infty⟧⟦\\left(1 - \\ln(x)\\right)⟧+0−⟦x^{2}⟧+++⟦f'(x)⟧+0−⟦f(x)⟧⟦-\\infty⟧⟦-\\infty⟧⟦\\nearrow⟧⟦e^{-1}⟧⟦\\searrow⟧⟦0^{+}⟧Maximum local en ⟦x = e⟧ : ⟦\\left(e\\,;\\,e^{-1}\\right)⟧ ≈ (2,72 ; 0,37) (⟦f'⟧ passe de ⟦+⟧ à ⟦-⟧). Global : les autres valeurs de f sont plus petites (limites ⟦-\\infty⟧ en ⟦0^{+}⟧ et ⟦0^{+}⟧ en ⟦+\\infty⟧).",
     "titre": "Signe de f' et variationstableau"
    },
    {
@@ -4983,8 +4983,8 @@
      [
       "extrema",
       [
-       "minimum local en ⟦x=-2⟧ : ⟦f(-2)=0⟧",
-       "minimum local en ⟦x=2⟧ : ⟦f(2)=0⟧"
+       "Minimum local en ⟦x = -2⟧ : ⟦\\left(-2\\,;\\,0\\right)⟧.",
+       "Minimum local en ⟦x = 2⟧ : ⟦\\left(2\\,;\\,0\\right)⟧."
       ]
      ]
     ],
@@ -5177,7 +5177,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableauED de f' : ⟦D_{f'} = \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[⟧, différent de l'ED de f, ⟦D_f = \\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[⟧.⟦f'(x) = \\frac{x}{\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}}⟧ ne s'annule jamais.⟦x⟧⟦-\\infty⟧⟦-2⟧⟦2⟧⟦+\\infty⟧⟦x⟧−−++⟦\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}⟧++⟦f'(x)⟧−+⟦f(x)⟧⟦+\\infty⟧⟦\\searrow⟧⟦0⟧⟦0⟧⟦\\nearrow⟧⟦+\\infty⟧minimum local en ⟦x=-2⟧ : ⟦f(-2)=0⟧minimum local en ⟦x=2⟧ : ⟦f(2)=0⟧",
+    "texte": "Signe de f' et variationstableauED de f' : ⟦D_{f'} = \\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[⟧, différent de l'ED de f, ⟦D_f = \\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[⟧.⟦f'(x) = \\frac{x}{\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}}⟧ ne s'annule jamais.⟦x⟧⟦-\\infty⟧⟦-2⟧⟦2⟧⟦+\\infty⟧⟦x⟧−−++⟦\\sqrt{\\left(x - 2\\right)\\,\\left(x + 2\\right)}⟧++⟦f'(x)⟧−+⟦f(x)⟧⟦+\\infty⟧⟦\\searrow⟧⟦0⟧⟦0⟧⟦\\nearrow⟧⟦+\\infty⟧Minimum local en ⟦x = -2⟧ : ⟦\\left(-2\\,;\\,0\\right)⟧.Minimum local en ⟦x = 2⟧ : ⟦\\left(2\\,;\\,0\\right)⟧.",
     "titre": "Signe de f' et variationstableau"
    },
    {
@@ -5601,7 +5601,7 @@
      [
       "extrema",
       [
-       "minimum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=- e^{-1}⟧"
+       "Minimum local en ⟦x = e^{-1}⟧ : ⟦\\left(e^{-1}\\,;\\,- e^{-1}\\right)⟧ ≈ (0,37 ; −0,37) (⟦f'⟧ passe de ⟦-⟧ à ⟦+⟧). Global : les autres valeurs de f sont plus grandes (limites ⟦0^{-}⟧ en ⟦0^{+}⟧ et ⟦+\\infty⟧ en ⟦+\\infty⟧)."
       ]
      ]
     ],
@@ -5742,7 +5742,7 @@
         ],
         [
          "pt",
-         "•"
+         "⟦- e^{-1}⟧"
         ],
         [
          "",
@@ -5757,7 +5757,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦\\ln(x) + 1 = 0 \\iff \\ln(x) = -1⟧ (on soustrait 1).⟦\\ln(x) = -1 \\iff x = e^{-1}⟧⟦f'(x) = \\ln(x) + 1 = 0 \\iff x = e^{-1}⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e^{-1}⟧⟦+\\infty⟧⟦\\left(\\ln(x) + 1\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦0^{-}⟧⟦0^{-}⟧⟦\\searrow⟧•⟦\\nearrow⟧⟦+\\infty⟧minimum local en ⟦x=e^{-1}⟧ : ⟦f(e^{-1})=- e^{-1}⟧",
+    "texte": "Signe de f' et variationstableau⟦\\ln(x) + 1 = 0 \\iff \\ln(x) = -1⟧ (on soustrait 1).⟦\\ln(x) = -1 \\iff x = e^{-1}⟧⟦f'(x) = \\ln(x) + 1 = 0 \\iff x = e^{-1}⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦e^{-1}⟧⟦+\\infty⟧⟦\\left(\\ln(x) + 1\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦0^{-}⟧⟦0^{-}⟧⟦\\searrow⟧⟦- e^{-1}⟧⟦\\nearrow⟧⟦+\\infty⟧Minimum local en ⟦x = e^{-1}⟧ : ⟦\\left(e^{-1}\\,;\\,- e^{-1}\\right)⟧ ≈ (0,37 ; −0,37) (⟦f'⟧ passe de ⟦-⟧ à ⟦+⟧). Global : les autres valeurs de f sont plus grandes (limites ⟦0^{-}⟧ en ⟦0^{+}⟧ et ⟦+\\infty⟧ en ⟦+\\infty⟧).",
     "titre": "Signe de f' et variationstableau"
    },
    {
@@ -6087,8 +6087,8 @@
      [
       "extrema",
       [
-       "minimum local en ⟦x=-1⟧ : ⟦f(-1)=- \\frac{1}{2}⟧",
-       "maximum local en ⟦x=1⟧ : ⟦f(1)=\\frac{1}{2}⟧"
+       "Minimum local en ⟦x = -1⟧ : ⟦\\left(-1\\,;\\,- \\frac{1}{2}\\right)⟧ ≈ (−1 ; −0,50) (⟦f'⟧ passe de ⟦-⟧ à ⟦+⟧). Global : les autres valeurs de f sont plus grandes (limites ⟦0⟧ en ⟦\\pm\\infty⟧).",
+       "Maximum local en ⟦x = 1⟧ : ⟦\\left(1\\,;\\,\\frac{1}{2}\\right)⟧ ≈ (1 ; 0,50) (⟦f'⟧ passe de ⟦+⟧ à ⟦-⟧). Global : les autres valeurs de f sont plus petites (limites ⟦0⟧ en ⟦\\pm\\infty⟧)."
       ]
      ]
     ],
@@ -6332,7 +6332,7 @@
         ],
         [
          "pt",
-         "•"
+         "⟦- \\frac{1}{2}⟧"
         ],
         [
          "",
@@ -6340,7 +6340,7 @@
         ],
         [
          "pt",
-         "•"
+         "⟦\\frac{1}{2}⟧"
         ],
         [
          "",
@@ -6355,7 +6355,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{-\\left(x + 1\\right)\\,\\left(x - 1\\right)}{\\left(x^{2} + 1\\right)^{2}} = 0 \\iff x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 1⟧.⟦x⟧⟦-\\infty⟧⟦-1⟧⟦1⟧⟦+\\infty⟧⟦-1⟧−−−−−⟦\\left(x + 1\\right)⟧−0+++⟦\\left(x - 1\\right)⟧−−−0+⟦\\left(x^{2} + 1\\right)^{2}⟧+++++⟦f'(x)⟧−0+0−⟦f(x)⟧⟦0⟧⟦\\searrow⟧•⟦\\nearrow⟧•⟦\\searrow⟧⟦0⟧minimum local en ⟦x=-1⟧ : ⟦f(-1)=- \\frac{1}{2}⟧maximum local en ⟦x=1⟧ : ⟦f(1)=\\frac{1}{2}⟧",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{-\\left(x + 1\\right)\\,\\left(x - 1\\right)}{\\left(x^{2} + 1\\right)^{2}} = 0 \\iff x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 1⟧.⟦x⟧⟦-\\infty⟧⟦-1⟧⟦1⟧⟦+\\infty⟧⟦-1⟧−−−−−⟦\\left(x + 1\\right)⟧−0+++⟦\\left(x - 1\\right)⟧−−−0+⟦\\left(x^{2} + 1\\right)^{2}⟧+++++⟦f'(x)⟧−0+0−⟦f(x)⟧⟦0⟧⟦\\searrow⟧⟦- \\frac{1}{2}⟧⟦\\nearrow⟧⟦\\frac{1}{2}⟧⟦\\searrow⟧⟦0⟧Minimum local en ⟦x = -1⟧ : ⟦\\left(-1\\,;\\,- \\frac{1}{2}\\right)⟧ ≈ (−1 ; −0,50) (⟦f'⟧ passe de ⟦-⟧ à ⟦+⟧). Global : les autres valeurs de f sont plus grandes (limites ⟦0⟧ en ⟦\\pm\\infty⟧).Maximum local en ⟦x = 1⟧ : ⟦\\left(1\\,;\\,\\frac{1}{2}\\right)⟧ ≈ (1 ; 0,50) (⟦f'⟧ passe de ⟦+⟧ à ⟦-⟧). Global : les autres valeurs de f sont plus petites (limites ⟦0⟧ en ⟦\\pm\\infty⟧).",
     "titre": "Signe de f' et variationstableau"
    },
    {
@@ -7157,7 +7157,7 @@
      [
       "extrema",
       [
-       "minimum local en ⟦x=0⟧ : ⟦f(0)=0⟧"
+       "Minimum local en ⟦x = 0⟧ : ⟦\\left(0\\,;\\,0\\right)⟧ (⟦f'⟧ passe de ⟦-⟧ à ⟦+⟧). Global : les autres valeurs de f sont plus grandes (limites ⟦+\\infty⟧ en ⟦\\pm\\infty⟧)."
       ]
      ]
     ],
@@ -7310,7 +7310,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableauED de f' : ⟦D_{f'} = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧, différent de l'ED de f, ⟦D_f = \\mathbb{R}⟧.⟦f'(x) = \\frac{2}{3\\sqrt[3]{x}}⟧ ne s'annule jamais ; valeur interdite : ⟦x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦\\frac{2}{3}⟧+++⟦\\sqrt[3]{x}⟧−+⟦f'(x)⟧−+⟦f(x)⟧⟦+\\infty⟧⟦\\searrow⟧⟦0⟧⟦\\nearrow⟧⟦+\\infty⟧minimum local en ⟦x=0⟧ : ⟦f(0)=0⟧",
+    "texte": "Signe de f' et variationstableauED de f' : ⟦D_{f'} = \\mathbb{R} \\setminus \\left\\{0\\right\\}⟧, différent de l'ED de f, ⟦D_f = \\mathbb{R}⟧.⟦f'(x) = \\frac{2}{3\\sqrt[3]{x}}⟧ ne s'annule jamais ; valeur interdite : ⟦x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦\\frac{2}{3}⟧+++⟦\\sqrt[3]{x}⟧−+⟦f'(x)⟧−+⟦f(x)⟧⟦+\\infty⟧⟦\\searrow⟧⟦0⟧⟦\\nearrow⟧⟦+\\infty⟧Minimum local en ⟦x = 0⟧ : ⟦\\left(0\\,;\\,0\\right)⟧ (⟦f'⟧ passe de ⟦-⟧ à ⟦+⟧). Global : les autres valeurs de f sont plus grandes (limites ⟦+\\infty⟧ en ⟦\\pm\\infty⟧).",
     "titre": "Signe de f' et variationstableau"
    },
    {
@@ -7710,8 +7710,8 @@
      [
       "extrema",
       [
-       "minimum local en ⟦x=0⟧ : ⟦f(0)=0⟧",
-       "maximum local en ⟦x=2⟧ : ⟦f(2)=4 e^{-2}⟧"
+       "Minimum local en ⟦x = 0⟧ : ⟦\\left(0\\,;\\,0\\right)⟧ (⟦f'⟧ passe de ⟦-⟧ à ⟦+⟧).",
+       "Maximum local en ⟦x = 2⟧ : ⟦\\left(2\\,;\\,4 e^{-2}\\right)⟧ ≈ (2 ; 0,54) (⟦f'⟧ passe de ⟦+⟧ à ⟦-⟧). Pas global : ⟦f(x) \\to +\\infty⟧ quand ⟦x \\to -\\infty⟧."
       ]
      ]
     ],
@@ -7955,7 +7955,7 @@
         ],
         [
          "pt",
-         "•"
+         "⟦0⟧"
         ],
         [
          "",
@@ -7963,7 +7963,7 @@
         ],
         [
          "pt",
-         "•"
+         "⟦4 e^{-2}⟧"
         ],
         [
          "",
@@ -7978,7 +7978,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = -x\\,\\left(x - 2\\right)\\,e^{-x} = 0 \\iff x = 0 \\text{ ou } x - 2 = 0 \\iff x = 0 \\text{ ou } x = 2⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦2⟧⟦+\\infty⟧⟦-1⟧−−−−−⟦x⟧−0+++⟦\\left(x - 2\\right)⟧−−−0+⟦e^{-x}⟧+++++⟦f'(x)⟧−0+0−⟦f(x)⟧⟦+\\infty⟧⟦\\searrow⟧•⟦\\nearrow⟧•⟦\\searrow⟧⟦0^{+}⟧minimum local en ⟦x=0⟧ : ⟦f(0)=0⟧maximum local en ⟦x=2⟧ : ⟦f(2)=4 e^{-2}⟧",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = -x\\,\\left(x - 2\\right)\\,e^{-x} = 0 \\iff x = 0 \\text{ ou } x - 2 = 0 \\iff x = 0 \\text{ ou } x = 2⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦2⟧⟦+\\infty⟧⟦-1⟧−−−−−⟦x⟧−0+++⟦\\left(x - 2\\right)⟧−−−0+⟦e^{-x}⟧+++++⟦f'(x)⟧−0+0−⟦f(x)⟧⟦+\\infty⟧⟦\\searrow⟧⟦0⟧⟦\\nearrow⟧⟦4 e^{-2}⟧⟦\\searrow⟧⟦0^{+}⟧Minimum local en ⟦x = 0⟧ : ⟦\\left(0\\,;\\,0\\right)⟧ (⟦f'⟧ passe de ⟦-⟧ à ⟦+⟧).Maximum local en ⟦x = 2⟧ : ⟦\\left(2\\,;\\,4 e^{-2}\\right)⟧ ≈ (2 ; 0,54) (⟦f'⟧ passe de ⟦+⟧ à ⟦-⟧). Pas global : ⟦f(x) \\to +\\infty⟧ quand ⟦x \\to -\\infty⟧.",
     "titre": "Signe de f' et variationstableau"
    },
    {
@@ -8302,7 +8302,7 @@
      [
       "extrema",
       [
-       "minimum local en ⟦x=2⟧ : ⟦f(2)=-1⟧"
+       "Minimum local en ⟦x = 2⟧ : ⟦\\left(2\\,;\\,-1\\right)⟧ (⟦f'⟧ passe de ⟦-⟧ à ⟦+⟧). Global : les autres valeurs de f sont plus grandes (limites ⟦+\\infty⟧ en ⟦\\pm\\infty⟧)."
       ]
      ]
     ],
@@ -8440,7 +8440,7 @@
         ],
         [
          "pt",
-         "•"
+         "⟦-1⟧"
         ],
         [
          "",
@@ -8455,7 +8455,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = 2\\left(x - 2\\right) = 0 \\iff x - 2 = 0 \\iff x = 2⟧.⟦x⟧⟦-\\infty⟧⟦2⟧⟦+\\infty⟧⟦2⟧+++⟦\\left(x - 2\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦+\\infty⟧⟦\\searrow⟧•⟦\\nearrow⟧⟦+\\infty⟧minimum local en ⟦x=2⟧ : ⟦f(2)=-1⟧",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 2\\left(x - 2\\right) = 0 \\iff x - 2 = 0 \\iff x = 2⟧.⟦x⟧⟦-\\infty⟧⟦2⟧⟦+\\infty⟧⟦2⟧+++⟦\\left(x - 2\\right)⟧−0+⟦f'(x)⟧−0+⟦f(x)⟧⟦+\\infty⟧⟦\\searrow⟧⟦-1⟧⟦\\nearrow⟧⟦+\\infty⟧Minimum local en ⟦x = 2⟧ : ⟦\\left(2\\,;\\,-1\\right)⟧ (⟦f'⟧ passe de ⟦-⟧ à ⟦+⟧). Global : les autres valeurs de f sont plus grandes (limites ⟦+\\infty⟧ en ⟦\\pm\\infty⟧).",
     "titre": "Signe de f' et variationstableau"
    },
    {
@@ -8794,8 +8794,8 @@
      [
       "extrema",
       [
-       "maximum local en ⟦x=-1⟧ : ⟦f(-1)=2⟧",
-       "minimum local en ⟦x=1⟧ : ⟦f(1)=-2⟧"
+       "Maximum local en ⟦x = -1⟧ : ⟦\\left(-1\\,;\\,2\\right)⟧ (⟦f'⟧ passe de ⟦+⟧ à ⟦-⟧). Pas global : ⟦f(x) \\to +\\infty⟧ quand ⟦x \\to +\\infty⟧.",
+       "Minimum local en ⟦x = 1⟧ : ⟦\\left(1\\,;\\,-2\\right)⟧ (⟦f'⟧ passe de ⟦-⟧ à ⟦+⟧). Pas global : ⟦f(x) \\to -\\infty⟧ quand ⟦x \\to -\\infty⟧."
       ]
      ]
     ],
@@ -9002,7 +9002,7 @@
         ],
         [
          "pt",
-         "•"
+         "⟦2⟧"
         ],
         [
          "",
@@ -9010,7 +9010,7 @@
         ],
         [
          "pt",
-         "•"
+         "⟦-2⟧"
         ],
         [
          "",
@@ -9025,7 +9025,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = 3\\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 1⟧.⟦x⟧⟦-\\infty⟧⟦-1⟧⟦1⟧⟦+\\infty⟧⟦3⟧+++++⟦\\left(x + 1\\right)⟧−0+++⟦\\left(x - 1\\right)⟧−−−0+⟦f'(x)⟧+0−0+⟦f(x)⟧⟦-\\infty⟧⟦\\nearrow⟧•⟦\\searrow⟧•⟦\\nearrow⟧⟦+\\infty⟧maximum local en ⟦x=-1⟧ : ⟦f(-1)=2⟧minimum local en ⟦x=1⟧ : ⟦f(1)=-2⟧",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 3\\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 1⟧.⟦x⟧⟦-\\infty⟧⟦-1⟧⟦1⟧⟦+\\infty⟧⟦3⟧+++++⟦\\left(x + 1\\right)⟧−0+++⟦\\left(x - 1\\right)⟧−−−0+⟦f'(x)⟧+0−0+⟦f(x)⟧⟦-\\infty⟧⟦\\nearrow⟧⟦2⟧⟦\\searrow⟧⟦-2⟧⟦\\nearrow⟧⟦+\\infty⟧Maximum local en ⟦x = -1⟧ : ⟦\\left(-1\\,;\\,2\\right)⟧ (⟦f'⟧ passe de ⟦+⟧ à ⟦-⟧). Pas global : ⟦f(x) \\to +\\infty⟧ quand ⟦x \\to +\\infty⟧.Minimum local en ⟦x = 1⟧ : ⟦\\left(1\\,;\\,-2\\right)⟧ (⟦f'⟧ passe de ⟦-⟧ à ⟦+⟧). Pas global : ⟦f(x) \\to -\\infty⟧ quand ⟦x \\to -\\infty⟧.",
     "titre": "Signe de f' et variationstableau"
    },
    {
@@ -9364,9 +9364,9 @@
      [
       "extrema",
       [
-       "minimum local en ⟦x=-1⟧ : ⟦f(-1)=-1⟧",
-       "maximum local en ⟦x=0⟧ : ⟦f(0)=0⟧",
-       "minimum local en ⟦x=1⟧ : ⟦f(1)=-1⟧"
+       "Minimum local en ⟦x = -1⟧ : ⟦\\left(-1\\,;\\,-1\\right)⟧ (⟦f'⟧ passe de ⟦-⟧ à ⟦+⟧).",
+       "Maximum local en ⟦x = 0⟧ : ⟦\\left(0\\,;\\,0\\right)⟧ (⟦f'⟧ passe de ⟦+⟧ à ⟦-⟧). Pas global : ⟦f(x) \\to +\\infty⟧ quand ⟦x \\to -\\infty⟧.",
+       "Minimum local en ⟦x = 1⟧ : ⟦\\left(1\\,;\\,-1\\right)⟧ (⟦f'⟧ passe de ⟦-⟧ à ⟦+⟧)."
       ]
      ]
     ],
@@ -9658,7 +9658,7 @@
         ],
         [
          "pt",
-         "•"
+         "⟦-1⟧"
         ],
         [
          "",
@@ -9666,7 +9666,7 @@
         ],
         [
          "pt",
-         "•"
+         "⟦0⟧"
         ],
         [
          "",
@@ -9674,7 +9674,7 @@
         ],
         [
          "pt",
-         "•"
+         "⟦-1⟧"
         ],
         [
          "",
@@ -9689,7 +9689,7 @@
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = 4x\\,\\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x = 0 \\text{ ou } x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 0 \\text{ ou } x = 1⟧.⟦x⟧⟦-\\infty⟧⟦-1⟧⟦0⟧⟦1⟧⟦+\\infty⟧⟦4⟧+++++++⟦x⟧−−−0+++⟦\\left(x + 1\\right)⟧−0+++++⟦\\left(x - 1\\right)⟧−−−−−0+⟦f'(x)⟧−0+0−0+⟦f(x)⟧⟦+\\infty⟧⟦\\searrow⟧•⟦\\nearrow⟧•⟦\\searrow⟧•⟦\\nearrow⟧⟦+\\infty⟧minimum local en ⟦x=-1⟧ : ⟦f(-1)=-1⟧maximum local en ⟦x=0⟧ : ⟦f(0)=0⟧minimum local en ⟦x=1⟧ : ⟦f(1)=-1⟧",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 4x\\,\\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x = 0 \\text{ ou } x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 0 \\text{ ou } x = 1⟧.⟦x⟧⟦-\\infty⟧⟦-1⟧⟦0⟧⟦1⟧⟦+\\infty⟧⟦4⟧+++++++⟦x⟧−−−0+++⟦\\left(x + 1\\right)⟧−0+++++⟦\\left(x - 1\\right)⟧−−−−−0+⟦f'(x)⟧−0+0−0+⟦f(x)⟧⟦+\\infty⟧⟦\\searrow⟧⟦-1⟧⟦\\nearrow⟧⟦0⟧⟦\\searrow⟧⟦-1⟧⟦\\nearrow⟧⟦+\\infty⟧Minimum local en ⟦x = -1⟧ : ⟦\\left(-1\\,;\\,-1\\right)⟧ (⟦f'⟧ passe de ⟦-⟧ à ⟦+⟧).Maximum local en ⟦x = 0⟧ : ⟦\\left(0\\,;\\,0\\right)⟧ (⟦f'⟧ passe de ⟦+⟧ à ⟦-⟧). Pas global : ⟦f(x) \\to +\\infty⟧ quand ⟦x \\to -\\infty⟧.Minimum local en ⟦x = 1⟧ : ⟦\\left(1\\,;\\,-1\\right)⟧ (⟦f'⟧ passe de ⟦-⟧ à ⟦+⟧).",
     "titre": "Signe de f' et variationstableau"
    },
    {

@@ -294,7 +294,7 @@
        {
         "cells": [
          "\\searrow",
-         "extremum",
+         "val:1",
          "\\nearrow"
         ],
         "label": "f(x)",
@@ -426,11 +426,11 @@
        {
         "cells": [
          "\\nearrow",
-         "extremum",
+         "val:6 - 4 \\sqrt{2}",
          "\\searrow",
          "asym",
          "\\searrow",
-         "extremum",
+         "val:4 \\sqrt{2} + 6",
          "\\nearrow"
         ],
         "label": "f(x)",
@@ -563,7 +563,7 @@
          "x",
          "asym",
          "\\nearrow",
-         "extremum",
+         "val:e^{-1}",
          "\\searrow"
         ],
         "label": "f(x)",
@@ -669,7 +669,7 @@
        {
         "cells": [
          "\\nearrow",
-         "extremum",
+         "val:0",
          "\\searrow"
         ],
         "label": "f(x)",
@@ -938,7 +938,7 @@
          "x",
          "asym",
          "\\searrow",
-         "extremum",
+         "val:- 3 e^{-1}",
          "\\nearrow"
         ],
         "label": "f(x)",
@@ -1054,7 +1054,7 @@
        {
         "cells": [
          "\\searrow",
-         "extremum",
+         "val:- \\frac{4}{3}",
          "\\nearrow"
         ],
         "label": "f(x)",
@@ -1257,7 +1257,7 @@
        {
         "cells": [
          "\\searrow",
-         "extremum",
+         "val:1",
          "\\nearrow"
         ],
         "label": "f(x)",
@@ -1394,7 +1394,7 @@
          "x",
          "asym",
          "\\nearrow",
-         "extremum",
+         "val:e^{-1}",
          "\\searrow"
         ],
         "label": "f(x)",
@@ -1865,7 +1865,7 @@
        {
         "cells": [
          "\\searrow",
-         "extremum",
+         "val:1",
          "\\nearrow"
         ],
         "label": "f(x)",
@@ -1992,7 +1992,7 @@
          "x",
          "asym",
          "\\searrow",
-         "extremum",
+         "val:- e^{-1}",
          "\\nearrow"
         ],
         "label": "f(x)",
@@ -2129,7 +2129,7 @@
          "x",
          "asym",
          "\\searrow",
-         "extremum",
+         "val:- e^{-2}",
          "\\nearrow"
         ],
         "label": "f(x)",
@@ -2274,9 +2274,9 @@
        {
         "cells": [
          "\\searrow",
-         "extremum",
+         "val:- \\frac{1}{2}",
          "\\nearrow",
-         "extremum",
+         "val:\\frac{1}{2}",
          "\\searrow"
         ],
         "label": "f(x)",
@@ -2777,7 +2777,7 @@
        {
         "cells": [
          "x",
-         "extremum",
+         "val:0",
          "\\nearrow"
         ],
         "label": "f(x)",
@@ -2927,9 +2927,9 @@
        {
         "cells": [
          "\\searrow",
-         "extremum",
+         "val:0",
          "\\nearrow",
-         "extremum",
+         "val:4 e^{-2}",
          "\\searrow"
         ],
         "label": "f(x)",
@@ -3041,7 +3041,7 @@
        {
         "cells": [
          "\\searrow",
-         "extremum",
+         "val:-1",
          "\\nearrow"
         ],
         "label": "f(x)",
@@ -3268,9 +3268,9 @@
        {
         "cells": [
          "\\nearrow",
-         "extremum",
+         "val:2",
          "\\searrow",
-         "extremum",
+         "val:-2",
          "\\nearrow"
         ],
         "label": "f(x)",
@@ -3430,11 +3430,11 @@
        {
         "cells": [
          "\\searrow",
-         "extremum",
+         "val:-1",
          "\\nearrow",
-         "extremum",
+         "val:0",
          "\\searrow",
-         "extremum",
+         "val:-1",
          "\\nearrow"
         ],
         "label": "f(x)",
@@ -3556,7 +3556,7 @@
          "x",
          "asym",
          "\\searrow",
-         "extremum",
+         "val:e^{- \\frac{1}{e}}",
          "\\nearrow"
         ],
         "label": "f(x)",

@@ -1076,11 +1076,11 @@
        {
         "cells": [
          "\\nearrow",
-         "extremum",
+         "val:6 - 4 \\sqrt{2}",
          "\\searrow",
          "asym",
          "\\searrow",
-         "extremum",
+         "val:4 \\sqrt{2} + 6",
          "\\nearrow"
         ],
         "label": "f(x)",
@@ -1092,8 +1092,8 @@
      },
      {
       "items": [
-       "maximum local en \\(x=3 - 2\\sqrt{2}\\) : \\(f(3 - 2\\sqrt{2})=6 - 4 \\sqrt{2}\\)",
-       "minimum local en \\(x=3 + 2\\sqrt{2}\\) : \\(f(3 + 2\\sqrt{2})=4 \\sqrt{2} + 6\\)"
+       "<b>Maximum local</b> en \\(x = 3 - 2\\sqrt{2}\\) : \\(\\left(3 - 2\\sqrt{2}\\,;\\,6 - 4 \\sqrt{2}\\right)\\) ≈ (0,17 ; 0,34) (\\(f'\\) passe de \\(+\\) à \\(-\\)). Pas global : \\(f(x) \\to +\\infty\\) quand \\(x \\to 3^{+}\\).",
+       "<b>Minimum local</b> en \\(x = 3 + 2\\sqrt{2}\\) : \\(\\left(3 + 2\\sqrt{2}\\,;\\,4 \\sqrt{2} + 6\\right)\\) ≈ (5,83 ; 11,66) (\\(f'\\) passe de \\(-\\) à \\(+\\)). Pas global : \\(f(x) \\to -\\infty\\) quand \\(x \\to -\\infty\\)."
       ],
       "style": "extrema",
       "type": "liste"
@@ -1142,16 +1142,20 @@
       ],
       "extrema": [
        {
+        "f_py": "6 - 4*sqrt(2)",
         "f_tex": "6 - 4 \\sqrt{2}",
         "f_val": 0.343145751,
         "genre": "maximum local",
+        "x_py": "((3)+(-2)*sqrt(2))",
         "x_tex": "3 - 2\\sqrt{2}",
         "x_val": 0.171572875
        },
        {
+        "f_py": "4*sqrt(2) + 6",
         "f_tex": "4 \\sqrt{2} + 6",
         "f_val": 11.6568542,
         "genre": "minimum local",
+        "x_py": "((3)+(2)*sqrt(2))",
         "x_tex": "3 + 2\\sqrt{2}",
         "x_val": 5.82842712
        }
@@ -1673,7 +1677,7 @@
          "x",
          "asym",
          "\\searrow",
-         "extremum",
+         "val:- 3 e^{-1}",
          "\\nearrow"
         ],
         "label": "f(x)",
@@ -1685,7 +1689,7 @@
      },
      {
       "items": [
-       "minimum local en \\(x=e^{-1}\\) : \\(f(e^{-1})=- 3 e^{-1}\\)"
+       "<b>Minimum local</b> en \\(x = e^{-1}\\) : \\(\\left(e^{-1}\\,;\\,- 3 e^{-1}\\right)\\) ≈ (0,37 ; −1,10) (\\(f'\\) passe de \\(-\\) à \\(+\\)). Global : les autres valeurs de f sont plus grandes (limites \\(0^{-}\\) en \\(0^{+}\\) et \\(+\\infty\\) en \\(+\\infty\\))."
       ],
       "style": "extrema",
       "type": "liste"
@@ -1716,9 +1720,11 @@
       ],
       "extrema": [
        {
+        "f_py": "-3*exp(-1)",
         "f_tex": "- 3 e^{-1}",
         "f_val": -1.10363832,
         "genre": "minimum local",
+        "x_py": "exp((-1)/(1))",
         "x_tex": "e^{-1}",
         "x_val": 0.367879441
        }
@@ -2260,11 +2266,11 @@
        {
         "cells": [
          "\\nearrow",
-         "extremum",
+         "val:e^{\\frac{1}{6}}",
          "\\searrow",
          "asym",
          "\\searrow",
-         "extremum",
+         "val:e^{\\frac{3}{2}}",
          "\\nearrow"
         ],
         "label": "f(x)",
@@ -2275,9 +2281,19 @@
       "var": "x"
      },
      {
+      "html": "\\(g(0) = \\frac{-2}{-12} = \\frac{1}{6}\\), donc \\(f(0) = e^{\\frac{1}{6}}\\) ≈ 1,18.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(g(4) = \\frac{18}{12} = \\frac{3}{2}\\), donc \\(f(4) = e^{\\frac{3}{2}}\\) ≈ 4,48.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
       "items": [
-       "maximum local en \\(x=0\\) : \\(f(0)=e^{\\frac{1}{6}}\\)",
-       "minimum local en \\(x=4\\) : \\(f(4)=e^{\\frac{3}{2}}\\)"
+       "<b>Maximum local</b> en \\(x = 0\\) : \\(\\left(0\\,;\\,e^{\\frac{1}{6}}\\right)\\) ≈ (0 ; 1,18) (\\(f'\\) passe de \\(+\\) à \\(-\\)). Pas global : \\(f(x) \\to +\\infty\\) quand \\(x \\to 2^{+}\\).",
+       "<b>Minimum local</b> en \\(x = 4\\) : \\(\\left(4\\,;\\,e^{\\frac{3}{2}}\\right)\\) ≈ (4 ; 4,48) (\\(f'\\) passe de \\(-\\) à \\(+\\)). Pas global : \\(f(x) \\to 0^{+}\\) quand \\(x \\to -\\infty\\)."
       ],
       "style": "extrema",
       "type": "liste"
@@ -2314,16 +2330,20 @@
       ],
       "extrema": [
        {
+        "f_py": "exp(1/6)",
         "f_tex": "e^{\\frac{1}{6}}",
         "f_val": 1.18136041,
         "genre": "maximum local",
+        "x_py": "(0)/(1)",
         "x_tex": "0",
         "x_val": 0.0
        },
        {
+        "f_py": "exp(3/2)",
         "f_tex": "e^{\\frac{3}{2}}",
         "f_val": 4.48168907,
         "genre": "minimum local",
+        "x_py": "(4)/(1)",
         "x_tex": "4",
         "x_val": 4.0
        }
@@ -3371,7 +3391,7 @@
          "\\nearrow",
          "asym",
          "\\nearrow",
-         "extremum",
+         "val:e^{- \\frac{1}{2}}",
          "\\searrow",
          "asym",
          "\\searrow"
@@ -3384,8 +3404,13 @@
       "var": "x"
      },
      {
+      "html": "\\(g(0) = \\frac{2}{-4} = -\\frac{1}{2}\\), donc \\(f(0) = e^{- \\frac{1}{2}}\\) ≈ 0,61.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
       "items": [
-       "maximum local en \\(x=0\\) : \\(f(0)=e^{- \\frac{1}{2}}\\)"
+       "<b>Maximum local</b> en \\(x = 0\\) : \\(\\left(0\\,;\\,e^{- \\frac{1}{2}}\\right)\\) ≈ (0 ; 0,61) (\\(f'\\) passe de \\(+\\) à \\(-\\)). Pas global : \\(f(x) \\to +\\infty\\) quand \\(x \\to -2^{-}\\)."
       ],
       "style": "extrema",
       "type": "liste"
@@ -3438,9 +3463,11 @@
       ],
       "extrema": [
        {
+        "f_py": "exp(-1/2)",
         "f_tex": "e^{- \\frac{1}{2}}",
         "f_val": 0.60653066,
         "genre": "maximum local",
+        "x_py": "(0)/(1)",
         "x_tex": "0",
         "x_val": 0.0
        }
@@ -4270,7 +4297,7 @@
          "x",
          "asym",
          "\\nearrow",
-         "extremum",
+         "val:e^{-1}",
          "\\searrow"
         ],
         "label": "f(x)",
@@ -4282,7 +4309,7 @@
      },
      {
       "items": [
-       "maximum local en \\(x=e\\) : \\(f(e)=e^{-1}\\)"
+       "<b>Maximum local</b> en \\(x = e\\) : \\(\\left(e\\,;\\,e^{-1}\\right)\\) ≈ (2,72 ; 0,37) (\\(f'\\) passe de \\(+\\) à \\(-\\)). Global : les autres valeurs de f sont plus petites (limites \\(-\\infty\\) en \\(0^{+}\\) et \\(0^{+}\\) en \\(+\\infty\\))."
       ],
       "style": "extrema",
       "type": "liste"
@@ -4316,9 +4343,11 @@
       ],
       "extrema": [
        {
+        "f_py": "exp(-1)",
         "f_tex": "e^{-1}",
         "f_val": 0.367879441,
         "genre": "maximum local",
+        "x_py": "exp((1)/(1))",
         "x_tex": "e",
         "x_val": 2.71828183
        }
@@ -4765,8 +4794,8 @@
      },
      {
       "items": [
-       "minimum local en \\(x=-2\\) : \\(f(-2)=0\\)",
-       "minimum local en \\(x=2\\) : \\(f(2)=0\\)"
+       "<b>Minimum local</b> en \\(x = -2\\) : \\(\\left(-2\\,;\\,0\\right)\\).",
+       "<b>Minimum local</b> en \\(x = 2\\) : \\(\\left(2\\,;\\,0\\right)\\)."
       ],
       "style": "extrema",
       "type": "liste"
@@ -4805,16 +4834,20 @@
       ],
       "extrema": [
        {
+        "f_py": "0",
         "f_tex": "0",
         "f_val": 0.0,
         "genre": "minimum local",
+        "x_py": "(-2)/(1)",
         "x_tex": "-2",
         "x_val": -2.0
        },
        {
+        "f_py": "0",
         "f_tex": "0",
         "f_val": 0.0,
         "genre": "minimum local",
+        "x_py": "(2)/(1)",
         "x_tex": "2",
         "x_val": 2.0
        }
@@ -5306,7 +5339,7 @@
          "x",
          "asym",
          "\\searrow",
-         "extremum",
+         "val:- e^{-1}",
          "\\nearrow"
         ],
         "label": "f(x)",
@@ -5318,7 +5351,7 @@
      },
      {
       "items": [
-       "minimum local en \\(x=e^{-1}\\) : \\(f(e^{-1})=- e^{-1}\\)"
+       "<b>Minimum local</b> en \\(x = e^{-1}\\) : \\(\\left(e^{-1}\\,;\\,- e^{-1}\\right)\\) ≈ (0,37 ; −0,37) (\\(f'\\) passe de \\(-\\) à \\(+\\)). Global : les autres valeurs de f sont plus grandes (limites \\(0^{-}\\) en \\(0^{+}\\) et \\(+\\infty\\) en \\(+\\infty\\))."
       ],
       "style": "extrema",
       "type": "liste"
@@ -5349,9 +5382,11 @@
       ],
       "extrema": [
        {
+        "f_py": "-exp(-1)",
         "f_tex": "- e^{-1}",
         "f_val": -0.367879441,
         "genre": "minimum local",
+        "x_py": "exp((-1)/(1))",
         "x_tex": "e^{-1}",
         "x_val": 0.367879441
        }
@@ -5727,9 +5762,9 @@
        {
         "cells": [
          "\\searrow",
-         "extremum",
+         "val:- \\frac{1}{2}",
          "\\nearrow",
-         "extremum",
+         "val:\\frac{1}{2}",
          "\\searrow"
         ],
         "label": "f(x)",
@@ -5741,8 +5776,8 @@
      },
      {
       "items": [
-       "minimum local en \\(x=-1\\) : \\(f(-1)=- \\frac{1}{2}\\)",
-       "maximum local en \\(x=1\\) : \\(f(1)=\\frac{1}{2}\\)"
+       "<b>Minimum local</b> en \\(x = -1\\) : \\(\\left(-1\\,;\\,- \\frac{1}{2}\\right)\\) ≈ (−1 ; −0,50) (\\(f'\\) passe de \\(-\\) à \\(+\\)). Global : les autres valeurs de f sont plus grandes (limites \\(0\\) en \\(\\pm\\infty\\)).",
+       "<b>Maximum local</b> en \\(x = 1\\) : \\(\\left(1\\,;\\,\\frac{1}{2}\\right)\\) ≈ (1 ; 0,50) (\\(f'\\) passe de \\(+\\) à \\(-\\)). Global : les autres valeurs de f sont plus petites (limites \\(0\\) en \\(\\pm\\infty\\))."
       ],
       "style": "extrema",
       "type": "liste"
@@ -5775,16 +5810,20 @@
       ],
       "extrema": [
        {
+        "f_py": "-1/2",
         "f_tex": "- \\frac{1}{2}",
         "f_val": -0.5,
         "genre": "minimum local",
+        "x_py": "(-1)/(1)",
         "x_tex": "-1",
         "x_val": -1.0
        },
        {
+        "f_py": "1/2",
         "f_tex": "\\frac{1}{2}",
         "f_val": 0.5,
         "genre": "maximum local",
+        "x_py": "(1)/(1)",
         "x_tex": "1",
         "x_val": 1.0
        }
@@ -6561,7 +6600,7 @@
      },
      {
       "items": [
-       "minimum local en \\(x=0\\) : \\(f(0)=0\\)"
+       "<b>Minimum local</b> en \\(x = 0\\) : \\(\\left(0\\,;\\,0\\right)\\) (\\(f'\\) passe de \\(-\\) à \\(+\\)). Global : les autres valeurs de f sont plus grandes (limites \\(+\\infty\\) en \\(\\pm\\infty\\))."
       ],
       "style": "extrema",
       "type": "liste"
@@ -6581,9 +6620,11 @@
       "asymptotes": [],
       "extrema": [
        {
+        "f_py": "0",
         "f_tex": "0",
         "f_val": 0.0,
         "genre": "minimum local",
+        "x_py": "(0)/(1)",
         "x_tex": "0",
         "x_val": 0.0
        }
@@ -7116,9 +7157,9 @@
        {
         "cells": [
          "\\searrow",
-         "extremum",
+         "val:0",
          "\\nearrow",
-         "extremum",
+         "val:4 e^{-2}",
          "\\searrow"
         ],
         "label": "f(x)",
@@ -7130,8 +7171,8 @@
      },
      {
       "items": [
-       "minimum local en \\(x=0\\) : \\(f(0)=0\\)",
-       "maximum local en \\(x=2\\) : \\(f(2)=4 e^{-2}\\)"
+       "<b>Minimum local</b> en \\(x = 0\\) : \\(\\left(0\\,;\\,0\\right)\\) (\\(f'\\) passe de \\(-\\) à \\(+\\)).",
+       "<b>Maximum local</b> en \\(x = 2\\) : \\(\\left(2\\,;\\,4 e^{-2}\\right)\\) ≈ (2 ; 0,54) (\\(f'\\) passe de \\(+\\) à \\(-\\)). Pas global : \\(f(x) \\to +\\infty\\) quand \\(x \\to -\\infty\\)."
       ],
       "style": "extrema",
       "type": "liste"
@@ -7158,16 +7199,20 @@
       ],
       "extrema": [
        {
+        "f_py": "0",
         "f_tex": "0",
         "f_val": 0.0,
         "genre": "minimum local",
+        "x_py": "(0)/(1)",
         "x_tex": "0",
         "x_val": 0.0
        },
        {
+        "f_py": "4*exp(-2)",
         "f_tex": "4 e^{-2}",
         "f_val": 0.541341133,
         "genre": "maximum local",
+        "x_py": "(2)/(1)",
         "x_tex": "2",
         "x_val": 2.0
        }
@@ -7516,7 +7561,7 @@
        {
         "cells": [
          "\\searrow",
-         "extremum",
+         "val:-1",
          "\\nearrow"
         ],
         "label": "f(x)",
@@ -7528,7 +7573,7 @@
      },
      {
       "items": [
-       "minimum local en \\(x=2\\) : \\(f(2)=-1\\)"
+       "<b>Minimum local</b> en \\(x = 2\\) : \\(\\left(2\\,;\\,-1\\right)\\) (\\(f'\\) passe de \\(-\\) à \\(+\\)). Global : les autres valeurs de f sont plus grandes (limites \\(+\\infty\\) en \\(\\pm\\infty\\))."
       ],
       "style": "extrema",
       "type": "liste"
@@ -7559,9 +7604,11 @@
       ],
       "extrema": [
        {
+        "f_py": "-1",
         "f_tex": "-1",
         "f_val": -1.0,
         "genre": "minimum local",
+        "x_py": "(2)/(1)",
         "x_tex": "2",
         "x_val": 2.0
        }
@@ -7926,9 +7973,9 @@
        {
         "cells": [
          "\\nearrow",
-         "extremum",
+         "val:2",
          "\\searrow",
-         "extremum",
+         "val:-2",
          "\\nearrow"
         ],
         "label": "f(x)",
@@ -7940,8 +7987,8 @@
      },
      {
       "items": [
-       "maximum local en \\(x=-1\\) : \\(f(-1)=2\\)",
-       "minimum local en \\(x=1\\) : \\(f(1)=-2\\)"
+       "<b>Maximum local</b> en \\(x = -1\\) : \\(\\left(-1\\,;\\,2\\right)\\) (\\(f'\\) passe de \\(+\\) à \\(-\\)). Pas global : \\(f(x) \\to +\\infty\\) quand \\(x \\to +\\infty\\).",
+       "<b>Minimum local</b> en \\(x = 1\\) : \\(\\left(1\\,;\\,-2\\right)\\) (\\(f'\\) passe de \\(-\\) à \\(+\\)). Pas global : \\(f(x) \\to -\\infty\\) quand \\(x \\to -\\infty\\)."
       ],
       "style": "extrema",
       "type": "liste"
@@ -7972,16 +8019,20 @@
       ],
       "extrema": [
        {
+        "f_py": "2",
         "f_tex": "2",
         "f_val": 2.0,
         "genre": "maximum local",
+        "x_py": "(-1)/(1)",
         "x_tex": "-1",
         "x_val": -1.0
        },
        {
+        "f_py": "-2",
         "f_tex": "-2",
         "f_val": -2.0,
         "genre": "minimum local",
+        "x_py": "(1)/(1)",
         "x_tex": "1",
         "x_val": 1.0
        }
@@ -8372,11 +8423,11 @@
        {
         "cells": [
          "\\searrow",
-         "extremum",
+         "val:-1",
          "\\nearrow",
-         "extremum",
+         "val:0",
          "\\searrow",
-         "extremum",
+         "val:-1",
          "\\nearrow"
         ],
         "label": "f(x)",
@@ -8388,9 +8439,9 @@
      },
      {
       "items": [
-       "minimum local en \\(x=-1\\) : \\(f(-1)=-1\\)",
-       "maximum local en \\(x=0\\) : \\(f(0)=0\\)",
-       "minimum local en \\(x=1\\) : \\(f(1)=-1\\)"
+       "<b>Minimum local</b> en \\(x = -1\\) : \\(\\left(-1\\,;\\,-1\\right)\\) (\\(f'\\) passe de \\(-\\) à \\(+\\)).",
+       "<b>Maximum local</b> en \\(x = 0\\) : \\(\\left(0\\,;\\,0\\right)\\) (\\(f'\\) passe de \\(+\\) à \\(-\\)). Pas global : \\(f(x) \\to +\\infty\\) quand \\(x \\to -\\infty\\).",
+       "<b>Minimum local</b> en \\(x = 1\\) : \\(\\left(1\\,;\\,-1\\right)\\) (\\(f'\\) passe de \\(-\\) à \\(+\\))."
       ],
       "style": "extrema",
       "type": "liste"
@@ -8421,23 +8472,29 @@
       ],
       "extrema": [
        {
+        "f_py": "-1",
         "f_tex": "-1",
         "f_val": -1.0,
         "genre": "minimum local",
+        "x_py": "(-1)/(1)",
         "x_tex": "-1",
         "x_val": -1.0
        },
        {
+        "f_py": "0",
         "f_tex": "0",
         "f_val": 0.0,
         "genre": "maximum local",
+        "x_py": "(0)/(1)",
         "x_tex": "0",
         "x_val": 0.0
        },
        {
+        "f_py": "-1",
         "f_tex": "-1",
         "f_val": -1.0,
         "genre": "minimum local",
+        "x_py": "(1)/(1)",
         "x_tex": "1",
         "x_val": 1.0
        }

@@ -876,7 +876,7 @@ def _exp_au_numerateur(sp, r, valeur):
 
 
 def _valeur_exacte(f_tree, point):
-    """f(point) en forme exacte (objet Num) si possible via SymPy, sinon None."""
+    """f(point) en forme exacte : (objet Num, écriture SymPy de la valeur) si possible via SymPy, sinon None."""
     sp = charger_sympy()
     if sp is None or point.py is None:
         return None
@@ -886,7 +886,7 @@ def _valeur_exacte(f_tree, point):
         r = sp.simplify(fe.subs(SYMPY["x"], val))
         if r.is_real is False:
             return None
-        return _exp_au_numerateur(sp, r, num_sympy(r))
+        return _exp_au_numerateur(sp, r, num_sympy(r)), str(r)
     except Exception:
         return None
 
@@ -1218,13 +1218,15 @@ def etudier(entree, analyse=None):
     memo = {}
 
     def _valeur_en(pt):
+        """(valeur, écriture tex, écriture SymPy ou None si la valeur n'est pas exacte)."""
         if pt.val not in memo:
-            valeur = None if pt.approx else _valeur_exacte(f, pt)
-            if valeur is None:
+            exacte = None if pt.approx else _valeur_exacte(f, pt)
+            if exacte is None:
                 v = _valeur_num(f, pt.val)
-                memo[pt.val] = (v, Num.approche(v).tex if v is not None else "?")
+                memo[pt.val] = (v, Num.approche(v).tex if v is not None else "?", None)
             else:
-                memo[pt.val] = (valeur.val, valeur.tex)
+                valeur, py = exacte
+                memo[pt.val] = (valeur.val, valeur.tex, py)
         return memo[pt.val]
 
     fleche_cells, extrema = [], []
@@ -1248,15 +1250,21 @@ def etudier(entree, analyse=None):
         elif not gauche and s in ("+", "-") and s_droite in ("+", "-") and s != s_droite:
             # "local" : un changement de signe de f' donne un extremum local
             genre = "maximum local" if s == "+" else "minimum local"
+        valeur_tex = None
         if genre is not None:
-            v, valeur_tex = _valeur_en(p)
-            extrema.append({"genre": genre, "x_tex": p.tex, "f_tex": valeur_tex,
-                            "x_val": p.val, "f_val": v})
+            v, valeur_tex, valeur_py = _valeur_en(p)
+            e = {"genre": genre, "x_tex": p.tex, "f_tex": valeur_tex, "x_val": p.val, "f_val": v}
+            if valeur_py is not None and not p.approx and p.py is not None:
+                e.update(x_py=p.py, f_py=valeur_py)        # écritures exactes (SymPy) : extremums de l'Étude complète (D11)
+            extrema.append(e)
         if not contient(D, p.val) or f_constante:
-            v, valeur_tex = _valeur_en(p)
+            v, valeur_tex, _ = _valeur_en(p)
             fleche_cells.append("val:" + valeur_tex)
+        elif genre is not None:
+            # décisions EC, D10 (Dérivée et Étude complète) : la valeur de l'extremum dans la ligne f(x) ; « • » si elle est inconnue
+            fleche_cells.append("extremum" if valeur_tex == "?" else "val:" + valeur_tex)
         else:
-            fleche_cells.append("extremum" if genre is not None else "")
+            fleche_cells.append("")
 
     if f_constante:
         res["f_constante"] = True

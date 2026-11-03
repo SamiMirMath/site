@@ -185,6 +185,54 @@ class TestLargeurs(unittest.TestCase):
                     self.assertTrue(page.evaluer("[...document.querySelectorAll('#cartes .sous-t')].some(t => t.textContent === \"Dérivée de l'exposant\")"))
                 self.assertEqual(erreurs_a_signaler(page), [])
 
+    # ---------- valeurs des extremums dans la ligne f(x) du tableau de variations (D10), chantier étude complète P7b ----------
+    def test_tableau_de_variations_avec_valeurs(self):
+        """Dérivée ((x² − 1)/(x − 3) : 6 − 4√2 et 4√2 + 6) et Étude complète (Ex7 : e^{1/6}, e^{3/2} avec les limites ; d : quatre
+        limites et e^{−1/2}) : aucune faute du balayage à aucune largeur ; chaque tableau de variations reste dans sa carte (il défile
+        lui-même s'il est plus large : `.tsigne`) ; chaque valeur d'extremum est une formule dans une case de la ligne f(x)."""
+        cas = {"derivee-variations": [("(x^2-1)/(x-3)", 2)], "etude-complete": [("e^((x^2+x-2)/(6x-12))", 2), ("e^(2/(x^2-4))", 1)]}
+        js = r"""
+        (async () => {
+          await new Promise(r => setTimeout(r, 150));
+          return [...document.querySelectorAll('#cartes .tsigne')].filter(t => t.getBoundingClientRect().width > 0
+                     && t.querySelector('tr.variation')).map(t => {
+            const r = t.getBoundingClientRect(), carte = t.closest('.card').getBoundingClientRect();
+            return {deborde: r.right > carte.right + 1 || r.left < carte.left - 1 || r.right > innerWidth + 1,
+                    defile: t.scrollWidth > t.clientWidth + 1,
+                    valeurs: [...t.querySelectorAll('tr.variation td.pt')].filter(c => c.querySelector('.katex')).length};
+          });
+        })()"""
+        for outil, entrees in cas.items():
+            if outil not in CHOISIS:
+                continue
+            for entree, n_valeurs in entrees:
+                with self.subTest(outil=outil, entree=entree):
+                    dossier, requete = page_de(outil)
+                    page = self.nav.ouvrir(f"{dossier}/index.html{requete}")
+                    attendre_pret(page)
+                    page.taille(1100, 800)
+                    page.evaluer(f"document.querySelector('#entree').value = {json.dumps(entree)}; document.querySelector('#calculer').click()")
+                    page.attendre("document.querySelector('#cartes').children.length > 0 && !document.querySelector('#calculer').disabled", 120)
+                    page.evaluer("document.querySelector('#tout') && !document.querySelector('#tout').disabled && document.querySelector('#tout').click()")
+                    fautes = []
+                    self.balayer(page, "corrigé complet : " + entree, fautes)
+                    self.assertEqual(fautes, [], fautes[:5])
+                    mesures = {}
+                    try:
+                        for w in LARGEURS:
+                            page.taille(w, 800)
+                            mesures[w] = page.evaluer(js)
+                    finally:
+                        page.taille(1100, 800)
+                    if os.environ.get("BALAYAGE_RAPPORT"):                 # le tableau défile-t-il, à chaque largeur ?
+                        with open(os.environ["BALAYAGE_RAPPORT"], "a", encoding="utf-8") as f:
+                            f.write(json.dumps({"variations": entree, "mesures": mesures}) + "\n")
+                    for w, tableaux in mesures.items():
+                        self.assertEqual(len(tableaux), 1, (w, tableaux))
+                        self.assertFalse(tableaux[0]["deborde"], (w, tableaux))
+                        self.assertEqual(tableaux[0]["valeurs"], n_valeurs, (w, tableaux))
+                    self.assertEqual(erreurs_a_signaler(page), [])
+
     # ---------- simplexe (page autonome) ----------
     def clic(self, page, selecteur):
         page.evaluer(f"document.querySelector({selecteur!r}).click()")

@@ -27,18 +27,25 @@ Partie 3. Zéros, signe, ordonnée à l'origine (D5), mêmes garde-fous (SymPy e
 - sans zéro et de signe constant : « Donc f n'a pas de zéro et f(x) > 0 sur ED » ; sinon le tableau de signes de f, construit par la
   machinerie R7 du tableau de f′ (`derivee_variations.tableau_signes`) ;
 - f(0) exact puis approché, et le point (0 ; f(0)) ; « 0 ∉ ED : le graphe ne coupe pas l'axe des y ».
+
+Partie 5. Extremums (D11), à la place de la liste de l'outil Dérivée (la ligne f(x) du tableau porte les valeurs, D10, outil Dérivée) :
+- valeur calculée en chaîne par l'exposant quand la carte « Dérivée » a nommé g : « g(4) = 18/12 = 3/2, donc f(4) = e^{3/2} ≈ 4,48 » ;
+- « Maximum local en x = 0 : (0 ; e^{1/6}) ≈ (0 ; 1,18) (f′ passe de + à −). » puis « Global : … (limites 0⁺ en ±∞). » si f(x₀)
+  dépasse strictement les autres extremums du même genre et toutes les limites aux bornes de l'ED, « Pas global : f(x) → +∞ quand
+  x → 2⁺. » si l'une d'elles dépasse f(x₀), rien sinon (« ? », égalité, doute). Comparaisons par SymPy et par mpmath, « global »
+  confirmé par une sonde de f sur l'ED, « pas global » par une valeur de f au-delà de f(x₀).
 """
 import re
 from decimal import Decimal, ROUND_HALF_UP, localcontext
 from fractions import Fraction as F
 from math import gcd, isqrt
 
-from noyau import (X, E, Nb, Neg, Fn, Op, Num, tex, ptex, qtex, decomposer, deg, pn, pmul, evaluer, conditions, valeur_constante,
+from noyau import (X, E, Nb, Neg, Fn, Op, Num, tex, ptex, qtex, decomposer, deg, pn, peval, pmul, evaluer, conditions, valeur_constante,
                    sans_x, fusion, points, proche, preimage, aplatir, en_sympy_reel, charger_sympy, SYMPY, NonPrisEnCharge, ErreurSaisie)
 import sortie as so
 import resoudre_ed
 
-__all__ = ["cartes_domaine", "cartes_parite", "cartes_zeros_signe", "mise_en_forme", "resolution_denominateur"]
+__all__ = ["cartes_domaine", "cartes_parite", "cartes_zeros_signe", "blocs_extremums", "mise_en_forme", "resolution_denominateur"]
 
 AUCUNE_CONDITION = "Ni logarithme, ni dénominateur, ni racine : aucune condition."     # phrase de l'outil ED (en-tête)
 POINTS_DE_CONTROLE = (-2.7, -0.6, 0.35, 1.45, 3.2)                                    # sondes numériques (garde-fou)
@@ -1212,3 +1219,336 @@ def _positives_seules(f, ivs):
         if est_exponentielle(h) and not any(h.key() == e.key() for e in expos):
             expos.append(h)
     return _positives(expos, f, ivs, seule=False)
+
+
+# ---------------------------------------------------------------------------------------------------------------------------
+# Partie 5. Extremums (D11)
+# ---------------------------------------------------------------------------------------------------------------------------
+LIMITE_LUE = re.compile(r"([+-]?)(?:(\d+)|\\d?frac\{(\d+)\}\{(\d+)\}|(\\infty))(?:\^\{[+-]\})?")
+TOLERANCE = "1e-20"                     # sonde : écart relatif sous lequel deux valeurs sont tenues pour égales
+DEPASSE = "1e-15"                       # sonde : écart relatif au-delà duquel une valeur dépasse clairement f(x₀)
+GRILLE = 400                            # points de la grille de la sonde « global », par intervalle de l'ED
+DEMI_LARGEUR = 20                       # grille sur [x₀ − 20 ; x₀ + 20] (bornée par l'intervalle), plus des points lointains
+
+
+def lire_limite(t, sp):
+    """Valeur SymPy d'une limite du tableau T06c (liste fermée d'écritures : ±∞, entier, fraction, avec signe d'approche ^{±}) ;
+    None pour toute autre écriture (« ? », racine, exponentielle…) : la comparaison n'est alors pas faite (doute)."""
+    if t is None:
+        return None
+    m = LIMITE_LUE.fullmatch(t.replace(" ", ""))
+    if m is None:
+        return None
+    signe = -1 if m.group(1) == "-" else 1
+    if m.group(5):
+        return signe * sp.oo
+    if m.group(2):
+        return signe * sp.Integer(int(m.group(2)))
+    if int(m.group(4)) == 0:
+        return None
+    return signe * sp.Rational(int(m.group(3)), int(m.group(4)))
+
+
+def _mp_de(v, sp, mp):
+    return mp.mpf(str(sp.N(v, CHIFFRES + 5)))
+
+
+def _sympy_de_py(py, sp):
+    return sp.sympify(py, locals={"sqrt": sp.sqrt, "exp": sp.exp, "log": sp.log, "E": sp.E})
+
+
+def _comparer(v, y, s, sp, mp):
+    """Signe exact de s·(v − y) (v : limite ou valeur d'un autre extremum, y = f(x₀), s = 1 pour un maximum, −1 pour un minimum),
+    confirmé par mpmath ; Doute si SymPy ne tranche pas ou si la sonde n'est pas d'accord."""
+    if v in (sp.oo, -sp.oo):
+        return 1 if s * (1 if v == sp.oo else -1) > 0 else -1
+    exact = _signe_sp(sp.simplify(v - y))
+    ecart = _mp_de(v, sp, mp) - _mp_de(y, sp, mp)
+    seuil = mp.mpf(TOLERANCE) * (1 + abs(_mp_de(y, sp, mp)))
+    if exact == 0:
+        if abs(ecart) > seuil:
+            raise Doute()
+        return 0
+    if abs(ecart) <= seuil or (ecart > 0) != (exact > 0):
+        raise Doute()
+    return s * exact
+
+
+def _bornes_de_l_ed(ivs, crit, limites, x_extremums):
+    """[(où, limite tex)] dans l'ordre du tableau : −∞, chaque côté ouvert de chaque borne finie de l'ED, +∞ (D11 : « toutes les
+    limites aux bornes de l'ED ») ; Doute si une limite manque, si une borne fermée n'est pas un extremum ou si un intervalle est un point."""
+    colonnes = {c["j"]: c for c in limites.get("colonnes", [])}
+
+    def cote(borne, nom):
+        if borne.tex not in crit:
+            raise Doute()
+        c = colonnes.get(2 * crit.index(borne.tex) + 1)
+        if c is None or c.get(nom) is None:
+            raise Doute()
+        return c[nom]
+
+    out = []
+    for iv in ivs:
+        if iv.lo is not None and iv.hi is not None and proche(iv.lo.val, iv.hi.val):
+            raise Doute()
+        for borne, ferme, infini, nom, signe in ((iv.lo, iv.lf, "moins_inf", "droite", "+"), (iv.hi, iv.hf, "plus_inf", "gauche", "-")):
+            if borne is None:
+                if limites.get(infini) is None:
+                    raise Doute()
+                out.append((r"-\infty" if infini == "moins_inf" else r"+\infty", limites[infini], None))
+            elif ferme:
+                if borne.tex not in x_extremums:
+                    raise Doute()
+            else:
+                out.append((f"{borne.tex}^{{{signe}}}", cote(borne, nom), (borne, signe)))
+    return out
+
+
+def _points_grille(a, b, x0, mp):
+    """Points de la sonde « global » dans l'intervalle ]a ; b[ de l'ED (a, b : mpf ou None pour ∓∞)."""
+    bas = a if a is not None else (x0 if b is None else min(b, x0)) - DEMI_LARGEUR
+    haut = b if b is not None else (x0 if a is None else max(a, x0)) + DEMI_LARGEUR
+    pts = [bas + (haut - bas) * mp.mpf(k) / GRILLE for k in range(1, GRILLE)]
+    for k in range(1, 11):
+        h = mp.mpf(10) ** -k
+        if a is not None:
+            pts.append(a + h)
+        if b is not None:
+            pts.append(b - h)
+    for k in range(0, 7):
+        h = mp.mpf(10) ** k
+        if a is None:
+            pts.append((b if b is not None else x0) - h)
+        if b is None:
+            pts.append((a if a is not None else x0) + h)
+    return pts
+
+
+def _sonde_globale(f, ivs, x0, y, s, sp, mp):
+    """Sonde de « global » : aucune valeur de f sur l'ED (grille, points près de chaque borne et lointains) ne dépasse f(x₀)."""
+    seuil = mp.mpf(TOLERANCE) * (1 + abs(y))
+    vues = 0
+    for iv in ivs:
+        a = None if iv.lo is None else _mp_de(_sympy_num(iv.lo, sp), sp, mp)
+        b = None if iv.hi is None else _mp_de(_sympy_num(iv.hi, sp), sp, mp)
+        pts = _points_grille(a, b, x0, mp) + [p for p in (a if iv.lf else None, b if iv.hf else None) if p is not None]
+        for t in pts:
+            v = valeur_mp(f, t)
+            if v is None:
+                continue
+            vues += 1
+            if s * (v - y) > seuil:
+                raise Doute()
+    if vues < GRILLE // 2:
+        raise Doute()
+
+
+def _sonde_depasse(f, raison, y, s, sp, mp):
+    """Sonde de « pas global » : un x de l'ED, près de la borne de la raison (ou l'autre extremum), où f dépasse clairement f(x₀)."""
+    seuil = mp.mpf(DEPASSE) * (1 + abs(y))
+    if raison["genre"] == "extremum":
+        pts = [raison["x_mp"]]
+    elif raison["borne"] is None:
+        sg = -1 if raison["ou"] == r"-\infty" else 1
+        pts = [sg * mp.mpf(10) ** k for k in range(0, 9)]
+    else:
+        borne, signe = raison["borne"]
+        a = _mp_de(_sympy_num(borne, sp), sp, mp)
+        pts = [a + (1 if signe == "+" else -1) * mp.mpf(10) ** -k for k in range(1, 13)]
+    for t in pts:
+        v = valeur_mp(f, t)
+        if v is not None and s * (v - y) > seuil:
+            return
+    raise Doute()
+
+
+def _liste_tex(morceaux):
+    return morceaux[0] if len(morceaux) == 1 else ", ".join(morceaux[:-1]) + " et " + morceaux[-1]
+
+
+def _justification_globale(e, s, bornes, autres):
+    """« (limites 0⁺ en ±∞) », avec les autres extremums du même genre ; une limite égale en −∞ et en +∞ s'écrit « en ±∞ »."""
+    groupes = []
+    for ou, t, _ in bornes:
+        g = next((g for g in groupes if g[0] == t), None)
+        if g is None:
+            groupes.append((t, [ou]))
+        else:
+            g[1].append(ou)
+    morceaux = []
+    for t, ous in groupes:
+        if ous == [r"-\infty", r"+\infty"]:
+            morceaux.append(rf"\({t}\) en \(\pm\infty\)")
+        else:
+            morceaux += [rf"\({t}\) en \({ou}\)" for ou in ous]
+    une_seule = len(bornes) == 1
+    parties_j = []
+    if autres:
+        nom = ("autre maximum local" if s > 0 else "autre minimum local") if len(autres) == 1 else \
+              ("autres maximums locaux" if s > 0 else "autres minimums locaux")
+        parties_j.append(nom + " : " + _liste_tex([rf"\(f({a['x_tex']}) = {a['f_tex']}\)" for a in autres]))
+    if morceaux:
+        parties_j.append(("limite " if une_seule else "limites ") + _liste_tex(morceaux))
+    comparatif = "plus petites" if s > 0 else "plus grandes"
+    precision = f" ({' ; '.join(parties_j)})" if parties_j else ""          # ED fermé (√(4 − x²)) : aucune limite à citer
+    return f"Global : les autres valeurs de f sont {comparatif}{precision}."
+
+
+def statut_global(e, extrema, ivs, crit, cellules, limites, f, sp, mp):
+    """D11 : (« global » | « pas global », texte), ou None ou Doute (« local » seul : limite « ? » ou absente, égalité, doute). Chaque comparaison
+    est faite par SymPy et par mpmath ; « global » est confirmé par une sonde de f sur l'ED, « pas global » par une sonde qui trouve
+    une valeur de f au-delà de f(x₀)."""
+    if any(cellules[2 * i] not in ("+", "-", "x") for i in range(len(crit) + 1)):
+        return None                                       # f constante sur un intervalle, signe inconnu : rien d'affirmé
+    s = 1 if e["genre"].startswith("maximum") else -1
+    y = _sympy_de_py(e["f_py"], sp)
+    bornes = _bornes_de_l_ed(ivs, crit, limites, {a["x_tex"] for a in extrema})
+    concurrents = []
+    for ou, t, borne in bornes:
+        v = lire_limite(t, sp)
+        if v is None:
+            return None
+        concurrents.append({"genre": "limite", "ou": ou, "tex": t, "borne": borne, "v": v})
+    autres = [a for a in extrema if a is not e and a["genre"] == e["genre"]]
+    for a in autres:
+        if "f_py" not in a:
+            return None
+        concurrents.append({"genre": "extremum", "e": a, "v": _sympy_de_py(a["f_py"], sp),
+                            "x_mp": _mp_de(_sympy_de_py(a["x_py"], sp), sp, mp)})
+    signes = [_comparer(c["v"], y, s, sp, mp) for c in concurrents]
+    y_mp = _mp_de(y, sp, mp)
+    if any(g > 0 for g in signes):
+        candidats = [c for c, g in zip(concurrents, signes) if g > 0]
+        rang = [(1 if c["v"] == s * sp.oo else 0) for c in candidats]
+        if max(rang) == 0:                                   # valeurs finies : la plus extrême (SymPy), la première à égalité
+            meilleure = candidats[0]
+            for c in candidats[1:]:
+                if _comparer(c["v"], meilleure["v"], s, sp, mp) > 0:
+                    meilleure = c
+        else:
+            meilleure = candidats[rang.index(1)]
+        _sonde_depasse(f, meilleure, y_mp, s, sp, mp)
+        if meilleure["genre"] == "limite":
+            return "pas global", rf"Pas global : \(f(x) \to {meilleure['tex']}\) quand \(x \to {meilleure['ou']}\)."
+        a = meilleure["e"]
+        return "pas global", (rf"Pas global : le {a['genre']} en \(x = {a['x_tex']}\) est "
+                              + ("plus grand." if s > 0 else "plus petit."))
+    if any(g == 0 for g in signes):
+        return None                                          # cas limite (une limite égale à f(x₀)) : « local » seul
+    x0 = _mp_de(_sympy_de_py(e["x_py"], sp), sp, mp)
+    _sonde_globale(f, ivs, x0, y_mp, s, sp, mp)
+    return "global", _justification_globale(e, s, bornes, autres)
+
+
+def _approchee_point(e, X, Y, sp):
+    """« ≈ (1,10 ; 9) » : chaque coordonnée non entière arrondie (approchee : decisions.md §2 et R13), l'entière telle quelle ; ""
+    si les deux sont entières ou si une valeur n'a pas d'écriture approchée convenue."""
+    if X.is_Integer and Y.is_Integer:
+        return ""
+    morceaux = []
+    for V in (X, Y):
+        if V.is_Integer:
+            morceaux.append(str(int(V)).replace("-", "−"))
+        else:
+            a = approchee(V, sp)
+            if a is None:
+                return ""
+            morceaux.append(a)
+    return f" ≈ ({morceaux[0]} ; {morceaux[1]})"
+
+
+def valeur_par_l_exposant(f, e, sp, mp):
+    """« g(4) = 18/12 = 3/2, donc f(4) = e^{3/2} ≈ 4,48. » (D11, valeur calculée en chaîne) quand f = e^{u/v} (u, v polynômes écrits
+    développés) et x₀ entier ; vérifié : e^{g(x₀)} = f(x₀) (SymPy) et la sonde ; None sinon."""
+    if not (isinstance(f, Fn) and f.nom == "exp" and isinstance(f.a, Op) and f.a.op == "/"):
+        return None
+    P, Q = polynome_ecrit(f.a.a), polynome_ecrit(f.a.b)
+    X, Y = _sympy_de_py(e["x_py"], sp), _sympy_de_py(e["f_py"], sp)
+    if P is None or Q is None or deg(Q) < 1 or not X.is_Integer:
+        return None
+    x0 = F(int(X))
+    h0, b0 = peval(P, x0), peval(Q, x0)
+    if b0 == 0:
+        return None
+    g0 = h0 / b0
+    if sp.simplify(sp.exp(sp.Rational(g0.numerator, g0.denominator)) - Y) != 0:
+        return None
+    g_mp = mp.mpf(g0.numerator) / g0.denominator
+    sonde_g, sonde_f = valeur_mp(f.a, mp.mpf(x0.numerator)), valeur_mp(f, mp.mpf(x0.numerator))
+    if sonde_g is None or sonde_f is None or abs(sonde_g - g_mp) > mp.mpf(EGAL) * (1 + abs(g_mp)) \
+            or abs(sonde_f - mp.exp(g_mp)) > mp.mpf(EGAL) * (1 + abs(sonde_f)):
+        return None
+    if b0 == 1 or (g0.numerator == h0 and g0.denominator == b0):
+        calcul = qtex(g0)
+    else:
+        calcul = rf"\frac{{{qtex(h0)}}}{{{qtex(b0)}}} = {qtex(g0)}"
+    x = e["x_tex"]
+    return _ligne(_avec_approx(rf"\(g({x}) = {calcul}\), donc \(f({x}) = {e['f_tex']}\)", Y, sp) + ".")
+
+
+def _ligne_extremum(e, crit, cellules, statut, sp, mp, f):
+    nom = "Maximum local" if e["genre"].startswith("maximum") else "Minimum local"
+    x = e["x_tex"]
+    t = rf"<b>{nom}</b> en \(x = {x}\)"
+    if "f_py" in e:
+        X, Y = _sympy_de_py(e["x_py"], sp), _sympy_de_py(e["f_py"], sp)
+        t += rf" : \(\left({x}\,;\,{e['f_tex']}\right)\)"
+        sonde = valeur_mp(f, _mp_de(X, sp, mp))
+        if sonde is not None and abs(sonde - _mp_de(Y, sp, mp)) <= mp.mpf(EGAL) * (1 + abs(sonde)):
+            t += _approchee_point(e, X, Y, sp)
+        else:
+            statut = None                                    # la sonde ne retrouve pas f(x₀) : ni ≈ ni « global »
+    elif e["f_tex"] != "?":
+        t += rf" : \(f({x}) {'' if e['f_tex'].startswith('{' + chr(92) + 'approx}') else '= '}{e['f_tex']}\)"
+    if x in crit:
+        i = crit.index(x)
+        g, d = cellules[2 * i], cellules[2 * i + 2]
+        if g in ("+", "-") and d in ("+", "-") and g != d:
+            t += rf" (\(f'\) passe de \({g}\) à \({d}\))"
+    t += "."
+    if statut is not None:
+        t += " " + statut[1]
+    return t
+
+
+def blocs_extremums(dv, limites, analyse):
+    """Partie 5 (D11) : les blocs qui remplacent la liste des extremums de l'outil Dérivée dans la carte « Signe de f′ et variations »
+    de l'Étude complète : valeurs calculées en chaîne par l'exposant (quand la carte « Dérivée » a nommé g), puis une ligne par
+    extremum « Maximum local en x = 0 : (0 ; e^{1/6}) ≈ (0 ; 1,18) (f′ passe de + à −). Pas global : … » ; None (liste de l'outil
+    Dérivée) si SymPy ou mpmath manque ou si la rédaction échoue."""
+    extrema = dv.get("extrema") or []
+    if not extrema or not dv.get("signe_resolu"):
+        return None
+    _, f, ED = analyse
+    sp = charger_sympy()
+    try:
+        import mpmath
+    except ImportError:
+        return None
+    if sp is None:
+        return None
+    mp = mpmath.mp
+    ivs = fusion(ED)
+    crit = dv["table_signe"]["crit"]
+    cellules = next(l["cells"] for l in dv["table_signe"]["rows"] if l.get("final"))
+    g_nomme = any(b.get("type") == "sous_calcul" and b.get("titre") == "Dérivée de l'exposant" for b in dv.get("deriv_etapes", []))
+    with mpmath.workdps(CHIFFRES):
+        try:
+            blocs, items = [], []
+            for e in extrema:
+                ligne, statut = None, None
+                if "f_py" in e:
+                    try:
+                        ligne = valeur_par_l_exposant(f, e, sp, mp) if g_nomme else None
+                    except Exception:
+                        ligne = None
+                    try:
+                        statut = statut_global(e, extrema, ivs, crit, cellules, limites or {}, f, sp, mp)
+                    except Exception:                     # Doute, SymPy ou mpmath en échec : « local » seul
+                        statut = None
+                if ligne is not None:
+                    blocs.append(ligne)
+                items.append(_ligne_extremum(e, crit, cellules, statut, sp, mp, f))
+        except Exception:
+            return None
+    return blocs + [so.liste(items, style="extrema")]

@@ -496,16 +496,20 @@
    "ed_tex": "\\mathbb{R} \\setminus \\left\\{3\\right\\}",
    "extrema": [
     {
+     "f_py": "6 - 4*sqrt(2)",
      "f_tex": "6 - 4 \\sqrt{2}",
      "f_val": 0.343145751,
      "genre": "maximum local",
+     "x_py": "((3)+(-2)*sqrt(2))",
      "x_tex": "3 - 2\\sqrt{2}",
      "x_val": 0.171572875
     },
     {
+     "f_py": "4*sqrt(2) + 6",
      "f_tex": "4 \\sqrt{2} + 6",
      "f_val": 11.6568542,
      "genre": "minimum local",
+     "x_py": "((3)+(2)*sqrt(2))",
      "x_tex": "3 + 2\\sqrt{2}",
      "x_val": 5.82842712
     }
@@ -566,11 +570,11 @@
      {
       "cells": [
        "\\nearrow",
-       "extremum",
+       "val:6 - 4 \\sqrt{2}",
        "\\searrow",
        "asym",
        "\\searrow",
-       "extremum",
+       "val:4 \\sqrt{2} + 6",
        "\\nearrow"
       ],
       "label": "f(x)",
@@ -773,9 +777,11 @@
    "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
    "extrema": [
     {
+     "f_py": "-3*exp(-1)",
      "f_tex": "- 3 e^{-1}",
      "f_val": -1.10363832,
      "genre": "minimum local",
+     "x_py": "exp((-1)/(1))",
      "x_tex": "e^{-1}",
      "x_val": 0.367879441
     }
@@ -839,7 +845,7 @@
        "x",
        "asym",
        "\\searrow",
-       "extremum",
+       "val:- 3 e^{-1}",
        "\\nearrow"
       ],
       "label": "f(x)",
@@ -1134,16 +1140,20 @@
    "ed_tex": "\\mathbb{R} \\setminus \\left\\{2\\right\\}",
    "extrema": [
     {
+     "f_py": "exp(1/6)",
      "f_tex": "e^{\\frac{1}{6}}",
      "f_val": 1.18136041,
      "genre": "maximum local",
+     "x_py": "(0)/(1)",
      "x_tex": "0",
      "x_val": 0.0
     },
     {
+     "f_py": "exp(3/2)",
      "f_tex": "e^{\\frac{3}{2}}",
      "f_val": 4.48168907,
      "genre": "minimum local",
+     "x_py": "(4)/(1)",
      "x_tex": "4",
      "x_val": 4.0
     }
@@ -1240,11 +1250,11 @@
      {
       "cells": [
        "\\nearrow",
-       "extremum",
+       "val:e^{\\frac{1}{6}}",
        "\\searrow",
        "asym",
        "\\searrow",
-       "extremum",
+       "val:e^{\\frac{3}{2}}",
        "\\nearrow"
       ],
       "label": "f(x)",
@@ -1850,9 +1860,11 @@
    "ed_tex": "\\mathbb{R} \\setminus \\left\\{-2 \\,;\\, 2\\right\\}",
    "extrema": [
     {
+     "f_py": "exp(-1/2)",
      "f_tex": "e^{- \\frac{1}{2}}",
      "f_val": 0.60653066,
      "genre": "maximum local",
+     "x_py": "(0)/(1)",
      "x_tex": "0",
      "x_val": 0.0
     }
@@ -1951,7 +1963,7 @@
        "\\nearrow",
        "asym",
        "\\nearrow",
-       "extremum",
+       "val:e^{- \\frac{1}{2}}",
        "\\searrow",
        "asym",
        "\\searrow"
@@ -2426,9 +2438,11 @@
    "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
    "extrema": [
     {
+     "f_py": "exp(-1)",
      "f_tex": "e^{-1}",
      "f_val": 0.367879441,
      "genre": "maximum local",
+     "x_py": "exp((1)/(1))",
      "x_tex": "e",
      "x_val": 2.71828183
     }
@@ -2492,7 +2506,7 @@
        "x",
        "asym",
        "\\nearrow",
-       "extremum",
+       "val:e^{-1}",
        "\\searrow"
       ],
       "label": "f(x)",
@@ -2718,16 +2732,20 @@
    "ed_tex": "\\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[",
    "extrema": [
     {
+     "f_py": "0",
      "f_tex": "0",
      "f_val": 0.0,
      "genre": "minimum local",
+     "x_py": "(-2)/(1)",
      "x_tex": "-2",
      "x_val": -2.0
     },
     {
+     "f_py": "0",
      "f_tex": "0",
      "f_val": 0.0,
      "genre": "minimum local",
+     "x_py": "(2)/(1)",
      "x_tex": "2",
      "x_val": 2.0
     }
@@ -2954,9 +2972,11 @@
    "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
    "extrema": [
     {
+     "f_py": "-exp(-1)",
      "f_tex": "- e^{-1}",
      "f_val": -0.367879441,
      "genre": "minimum local",
+     "x_py": "exp((-1)/(1))",
      "x_tex": "e^{-1}",
      "x_val": 0.367879441
     }
@@ -3010,7 +3030,7 @@
        "x",
        "asym",
        "\\searrow",
-       "extremum",
+       "val:- e^{-1}",
        "\\nearrow"
       ],
       "label": "f(x)",
@@ -3269,16 +3289,20 @@
    "ed_tex": "\\mathbb{R}",
    "extrema": [
     {
+     "f_py": "-1/2",
      "f_tex": "- \\frac{1}{2}",
      "f_val": -0.5,
      "genre": "minimum local",
+     "x_py": "(-1)/(1)",
      "x_tex": "-1",
      "x_val": -1.0
     },
     {
+     "f_py": "1/2",
      "f_tex": "\\frac{1}{2}",
      "f_val": 0.5,
      "genre": "maximum local",
+     "x_py": "(1)/(1)",
      "x_tex": "1",
      "x_val": 1.0
     }
@@ -3352,9 +3376,9 @@
      {
       "cells": [
        "\\searrow",
-       "extremum",
+       "val:- \\frac{1}{2}",
        "\\nearrow",
-       "extremum",
+       "val:\\frac{1}{2}",
        "\\searrow"
       ],
       "label": "f(x)",
@@ -3657,9 +3681,11 @@
    "ed_tex": "\\mathbb{R}",
    "extrema": [
     {
+     "f_py": "0",
      "f_tex": "0",
      "f_val": 0.0,
      "genre": "minimum local",
+     "x_py": "(0)/(1)",
      "x_tex": "0",
      "x_val": 0.0
     }
@@ -3814,16 +3840,20 @@
    "ed_tex": "\\mathbb{R}",
    "extrema": [
     {
+     "f_py": "0",
      "f_tex": "0",
      "f_val": 0.0,
      "genre": "minimum local",
+     "x_py": "(0)/(1)",
      "x_tex": "0",
      "x_val": 0.0
     },
     {
+     "f_py": "4*exp(-2)",
      "f_tex": "4 e^{-2}",
      "f_val": 0.541341133,
      "genre": "maximum local",
+     "x_py": "(2)/(1)",
      "x_tex": "2",
      "x_val": 2.0
     }
@@ -3897,9 +3927,9 @@
      {
       "cells": [
        "\\searrow",
-       "extremum",
+       "val:0",
        "\\nearrow",
-       "extremum",
+       "val:4 e^{-2}",
        "\\searrow"
       ],
       "label": "f(x)",
@@ -4144,9 +4174,11 @@
    "ed_tex": "\\mathbb{R}",
    "extrema": [
     {
+     "f_py": "-1",
      "f_tex": "-1",
      "f_val": -1.0,
      "genre": "minimum local",
+     "x_py": "(2)/(1)",
      "x_tex": "2",
      "x_val": 2.0
     }
@@ -4193,7 +4225,7 @@
      {
       "cells": [
        "\\searrow",
-       "extremum",
+       "val:-1",
        "\\nearrow"
       ],
       "label": "f(x)",
@@ -4301,16 +4333,20 @@
    "ed_tex": "\\mathbb{R}",
    "extrema": [
     {
+     "f_py": "2",
      "f_tex": "2",
      "f_val": 2.0,
      "genre": "maximum local",
+     "x_py": "(-1)/(1)",
      "x_tex": "-1",
      "x_val": -1.0
     },
     {
+     "f_py": "-2",
      "f_tex": "-2",
      "f_val": -2.0,
      "genre": "minimum local",
+     "x_py": "(1)/(1)",
      "x_tex": "1",
      "x_val": 1.0
     }
@@ -4374,9 +4410,9 @@
      {
       "cells": [
        "\\nearrow",
-       "extremum",
+       "val:2",
        "\\searrow",
-       "extremum",
+       "val:-2",
        "\\nearrow"
       ],
       "label": "f(x)",
@@ -4492,23 +4528,29 @@
    "ed_tex": "\\mathbb{R}",
    "extrema": [
     {
+     "f_py": "-1",
      "f_tex": "-1",
      "f_val": -1.0,
      "genre": "minimum local",
+     "x_py": "(-1)/(1)",
      "x_tex": "-1",
      "x_val": -1.0
     },
     {
+     "f_py": "0",
      "f_tex": "0",
      "f_val": 0.0,
      "genre": "maximum local",
+     "x_py": "(0)/(1)",
      "x_tex": "0",
      "x_val": 0.0
     },
     {
+     "f_py": "-1",
      "f_tex": "-1",
      "f_val": -1.0,
      "genre": "minimum local",
+     "x_py": "(1)/(1)",
      "x_tex": "1",
      "x_val": 1.0
     }
@@ -4593,11 +4635,11 @@
      {
       "cells": [
        "\\searrow",
-       "extremum",
+       "val:-1",
        "\\nearrow",
-       "extremum",
+       "val:0",
        "\\searrow",
-       "extremum",
+       "val:-1",
        "\\nearrow"
       ],
       "label": "f(x)",

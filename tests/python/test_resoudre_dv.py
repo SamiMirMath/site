@@ -11,7 +11,8 @@ from aides_sortie import manquantes, valide, blocs_de_type
 from cas import entrees_page, CAS_LIMITES
 
 ENTREES = list(dict.fromkeys(entrees_page("derivee-variations") + CAS_LIMITES["derivee-variations"]))
-TECHNIQUE = ("detail", "ok", "deriv_detail", "signe_detail", "domaine_etude_tex", "ed_deriv_tex")
+# x_py, f_py : écritures SymPy des extremums, pour les garde-fous de l'Étude complète (D11) ; jamais affichées
+TECHNIQUE = ("detail", "ok", "deriv_detail", "signe_detail", "domaine_etude_tex", "ed_deriv_tex", "x_py", "f_py")
 
 
 class TestResoudreDV(unittest.TestCase):

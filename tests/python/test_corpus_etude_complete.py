@@ -658,9 +658,22 @@ def test_P6_valeur_d_essai(ident):
         assert morceau in m, morceau
 
 
+def cartes_de_la_partie(ident, titre):
+    """Les cartes placées sous l'intertitre `titre` (jusqu'à l'intertitre suivant)."""
+    out, dedans = [], False
+    for c in sortie(ident)["cartes"]:
+        if c.get("style") == "partie":
+            dedans = c["titre"] == titre
+        elif dedans:
+            out.append(c)
+    return out
+
+
 @pytest.mark.parametrize("ident", avec({"a", "d"}, xfail("P6", "x → ±∞ regroupés quand les chaînes sont identiques (D16)")))
 def test_P6_regroupement_infini(ident):
-    m = maths(sortie(ident)["cartes"])
+    """D16 porte sur les chaînes de limites : on cherche « ±∞ » dans la partie 4 seule (la partie 5 écrit « limites 0⁺ en ±∞ », D11)."""
+    assert cartes_de_la_partie(ident, TITRES[3]), ident
+    m = maths(cartes_de_la_partie(ident, TITRES[3]))
     assert (r"\pm\infty" in m) == PAR_ID[ident].regroupe_infini, ident
 
 
@@ -709,7 +722,7 @@ def tableau_de_variations(ident):
     return None
 
 
-@pytest.mark.parametrize("ident", avec(set(IDS), xfail("P7b", "valeurs des extremums dans la ligne f(x) (D10)")))
+@pytest.mark.parametrize("ident", IDS)
 def test_P7b_valeurs_dans_le_tableau(ident):
     b = tableau_de_variations(ident)
     ligne = next(l for l in b["rows"] if l.get("variation"))
@@ -719,7 +732,7 @@ def test_P7b_valeurs_dans_le_tableau(ident):
         assert e["f_tex"] in contenu, e["f_tex"]
 
 
-@pytest.mark.parametrize("ident", avec(set(IDS), xfail("P7b", "extremums : point, ≈, raison, global ou non (D11)")))
+@pytest.mark.parametrize("ident", IDS)
 def test_P7b_extremums(ident):
     fn = PAR_ID[ident]
     t, m = texte(sortie(ident)["cartes"]), maths(sortie(ident)["cartes"])
