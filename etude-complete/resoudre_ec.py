@@ -50,12 +50,14 @@ def resoudre(entree):
     for et in lim["etudes"]:
         limites += rla.cartes_etude(et)
     limites.append(rla.carte_bilan(lim["asymptotes"], style="normal"))
-    derivee = []
+    # carte « Dérivée » toujours (hors du cadre : la phrase de l'outil Dérivée, Q7) ; signe non étudié : la carte d'erreur de l'outil
+    # Dérivée (un résultat non traité donne un message clair) : jamais d'intertitre seul
+    derivee = [rdv.carte_derivee(dv)]
     if dv["deriv_resolu"]:
-        derivee.append(rdv.carte_derivee(dv))
+        extremums = None
         if dv["signe_resolu"]:
             extremums = parties.blocs_extremums(dv, r["variations_limites"], analyse(entree))     # D11 (EC seule)
-            derivee.append(rdv.carte_signe(dv, r["variations_limites"], ec=True, extremums=extremums))
+        derivee.append(rdv.carte_signe(dv, r.get("variations_limites"), ec=True, extremums=extremums))
     cartes = []
     for titre, contenu in zip(PARTIES, (domaine, parite, zeros, limites, derivee, [carte_graphique(r)])):
         cartes += [so.partie(titre)] + contenu

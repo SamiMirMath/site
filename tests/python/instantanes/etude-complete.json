@@ -761,6 +761,354 @@
    "plus_inf": "+\\infty"
   }
  },
+ "1/(x^2-3x+2)": {
+  "derivee": {
+   "deriv_etapes": [
+    {
+     "html": "On applique la règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\), avec :",
+     "type": "texte"
+    },
+    {
+     "du": "u' = 0",
+     "dv": "v' = 2x - 3",
+     "type": "uv",
+     "u": "u = 1",
+     "v": "v = x^{2} - 3x + 2"
+    },
+    {
+     "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+     "type": "texte"
+    },
+    {
+     "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{-\\left(2x - 3\\right)}{\\left(x^{2} - 3x + 2\\right)^{2}} = \\frac{-\\left(2x - 3\\right)}{\\left(x - 1\\right)^{2}\\,\\left(x - 2\\right)^{2}}\\).",
+     "type": "texte"
+    }
+   ],
+   "deriv_resolu": true,
+   "deriv_tex": "\\frac{-\\left(2x - 3\\right)}{\\left(x - 1\\right)^{2}\\,\\left(x - 2\\right)^{2}}",
+   "domaine_etude_tex": "\\mathbb{R} \\setminus \\left\\{1 \\,;\\, 2\\right\\}",
+   "ed_tex": "\\mathbb{R} \\setminus \\left\\{1 \\,;\\, 2\\right\\}",
+   "extrema": [
+    {
+     "f_py": "-4",
+     "f_tex": "-4",
+     "f_val": -4.0,
+     "genre": "maximum local",
+     "x_py": "(3)/(2)",
+     "x_tex": "\\frac{3}{2}",
+     "x_val": 1.5
+    }
+   ],
+   "f_tex": "\\frac{1}{x^{2} - 3x + 2}",
+   "ok": true,
+   "signe_etapes": [
+    {
+     "html": "\\(f'(x) = 0 \\iff 2x - 3 = 0 \\iff x = \\frac{3}{2}\\) ; valeurs interdites : \\(x = 1\\) ; \\(x = 2\\).",
+     "type": "texte"
+    }
+   ],
+   "signe_resolu": true,
+   "table_signe": {
+    "crit": [
+     "1",
+     "\\frac{3}{2}",
+     "2"
+    ],
+    "rows": [
+     {
+      "cells": [
+       "-",
+       "||",
+       "-",
+       "-",
+       "-",
+       "||",
+       "-"
+      ],
+      "label": "-1"
+     },
+     {
+      "cells": [
+       "-",
+       "||",
+       "-",
+       "0",
+       "+",
+       "||",
+       "+"
+      ],
+      "label": "\\left(2x - 3\\right)"
+     },
+     {
+      "cells": [
+       "+",
+       "||",
+       "+",
+       "+",
+       "+",
+       "||",
+       "+"
+      ],
+      "label": "\\left(x - 1\\right)^{2}"
+     },
+     {
+      "cells": [
+       "+",
+       "||",
+       "+",
+       "+",
+       "+",
+       "||",
+       "+"
+      ],
+      "label": "\\left(x - 2\\right)^{2}"
+     },
+     {
+      "cells": [
+       "+",
+       "||",
+       "+",
+       "0",
+       "-",
+       "||",
+       "-"
+      ],
+      "final": true,
+      "label": "f'(x)"
+     },
+     {
+      "cells": [
+       "\\nearrow",
+       "asym",
+       "\\nearrow",
+       "val:-4",
+       "\\searrow",
+       "asym",
+       "\\searrow"
+      ],
+      "label": "f(x)",
+      "variation": true
+     }
+    ],
+    "var": "x"
+   }
+  },
+  "ed_tex": "\\mathbb{R} \\setminus \\left\\{1 \\,;\\, 2\\right\\}",
+  "f_tex": "\\frac{1}{x^{2} - 3x + 2}",
+  "graphique": {
+   "points": [
+    {
+     "f_val": 0.5,
+     "x_val": 0.0
+    }
+   ],
+   "ronds_vides": [],
+   "segments": [
+    {
+     "dernier": [
+      0.964,
+      26.8125268
+     ],
+     "empreinte": "b5fa0565dda55a4d",
+     "n": 600,
+     "premier": [
+      -7.964,
+      0.0111960398
+     ]
+    },
+    {
+     "dernier": [
+      1.996,
+      -251.004016
+     ],
+     "empreinte": "839228092eece90e",
+     "n": 66,
+     "premier": [
+      1.004,
+      -251.004016
+     ]
+    },
+    {
+     "dernier": [
+      9.968,
+      0.0139944255
+     ],
+     "empreinte": "f92472c4fe7ccfb6",
+     "n": 533,
+     "premier": [
+      2.032,
+      30.2810078
+     ]
+    }
+   ],
+   "xmax": 4.0,
+   "xmin": -2.0,
+   "ymax": 3.3125,
+   "ymin": -6.8125
+  },
+  "limites": {
+   "asymptotes": [
+    {
+     "genre": "horizontale",
+     "ou": "x \\to -\\infty",
+     "valeur_tex": "0",
+     "valeur_val": 0.0
+    },
+    {
+     "genre": "horizontale",
+     "ou": "x \\to +\\infty",
+     "valeur_tex": "0",
+     "valeur_val": 0.0
+    },
+    {
+     "droite_tex": "-\\infty",
+     "gauche_tex": "+\\infty",
+     "genre": "verticale",
+     "ou": "x \\to 1",
+     "point_tex": "1",
+     "point_val": 1.0
+    },
+    {
+     "droite_tex": "+\\infty",
+     "gauche_tex": "-\\infty",
+     "genre": "verticale",
+     "ou": "x \\to 2",
+     "point_tex": "2",
+     "point_val": 2.0
+    }
+   ],
+   "ed_tex": "\\mathbb{R} \\setminus \\left\\{1 \\,;\\, 2\\right\\}",
+   "etudes": [
+    {
+     "etapes": [
+      {
+       "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{1}{x^{2} - 3x + 2} = \\text{« }\\dfrac{1}{+\\infty + \\infty}\\text{ »} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0\\end{aligned}\\]",
+       "type": "texte"
+      },
+      {
+       "html": "Asymptote horizontale : \\(y = 0\\).",
+       "type": "texte"
+      }
+     ],
+     "ou": "x \\to -\\infty"
+    },
+    {
+     "etapes": [
+      {
+       "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{1}{x^{2} - 3x + 2} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0 \\qquad \\left(\\text{le terme dominant de } x^{2} - 3x + 2 \\text{ est } x^{2}\\right)\\end{aligned}\\]",
+       "type": "texte"
+      },
+      {
+       "html": "Asymptote horizontale : \\(y = 0\\).",
+       "type": "texte"
+      }
+     ],
+     "ou": "x \\to +\\infty"
+    },
+    {
+     "etapes": [
+      {
+       "html": "\\[\\begin{aligned}\\lim_{x\\to 1^{-}} \\frac{1}{x^{2} - 3x + 2} = \\text{« }\\dfrac{1}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x^{2} - 3x + 2 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+       "type": "texte"
+      },
+      {
+       "html": "\\[\\begin{aligned}\\lim_{x\\to 1^{+}} \\frac{1}{x^{2} - 3x + 2} = \\text{« }\\dfrac{1}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x^{2} - 3x + 2 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+       "type": "texte"
+      },
+      {
+       "html": "Asymptote verticale : \\(x = 1\\).",
+       "type": "texte"
+      }
+     ],
+     "ou": "x \\to 1"
+    },
+    {
+     "etapes": [
+      {
+       "html": "\\[\\begin{aligned}\\lim_{x\\to 2^{-}} \\frac{1}{x^{2} - 3x + 2} = \\text{« }\\dfrac{1}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x^{2} - 3x + 2 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+       "type": "texte"
+      },
+      {
+       "html": "\\[\\begin{aligned}\\lim_{x\\to 2^{+}} \\frac{1}{x^{2} - 3x + 2} = \\text{« }\\dfrac{1}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x^{2} - 3x + 2 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+       "type": "texte"
+      },
+      {
+       "html": "Asymptote verticale : \\(x = 2\\).",
+       "type": "texte"
+      }
+     ],
+     "ou": "x \\to 2"
+    }
+   ],
+   "f_tex": "\\frac{1}{x^{2} - 3x + 2}",
+   "ok": true,
+   "tableaux_signe": [
+    {
+     "html": "Signe de \\(x^{2} - 3x + 2\\) :",
+     "type": "texte"
+    },
+    {
+     "crit": [
+      "1",
+      "2"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "-",
+        "||",
+        "+",
+        "||",
+        "+"
+       ],
+       "label": "x - 1"
+      },
+      {
+       "cells": [
+        "-",
+        "||",
+        "-",
+        "||",
+        "+"
+       ],
+       "label": "x - 2"
+      },
+      {
+       "cells": [
+        "+",
+        "||",
+        "-",
+        "||",
+        "+"
+       ],
+       "final": true,
+       "label": "x^{2} - 3x + 2"
+      }
+     ],
+     "type": "tableau",
+     "var": "x"
+    }
+   ]
+  },
+  "ok": true,
+  "variations_limites": {
+   "colonnes": [
+    {
+     "droite": "-\\infty",
+     "gauche": "+\\infty",
+     "j": 1
+    },
+    {
+     "droite": "+\\infty",
+     "gauche": "-\\infty",
+     "j": 5
+    }
+   ],
+   "moins_inf": "0",
+   "non_determinees": [],
+   "plus_inf": "0"
+  }
+ },
  "3(x*ln(x))": {
   "derivee": {
    "deriv_etapes": [

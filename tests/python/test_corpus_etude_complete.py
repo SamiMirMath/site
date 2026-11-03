@@ -601,11 +601,11 @@ def test_P3_d_condition():
     assert "x^{2}-4=0" in m and "x=-2" in m, m
 
 
-PARITE = {
-    "Ex7": ["ni paire ni impaire"], "a": ["f est paire"], "d": ["f est paire"],
-    "b": ["ni paire ni impaire", "-0,68", "-36,95"], "c": ["ni paire ni impaire", "8,92", "2,07"],
-}
-PARITE_MATHS = {"Ex7": [r"-2\in", r"2\notin"], "a": ["(-x)^{2}=x^{2}"], "d": ["(-x)^{2}=x^{2}"], "b": ["f(0)=-6"], "c": ["f(0)=5"]}
+PARITE = {"Ex7": ["ni paire ni impaire"], "a": ["f est paire"], "d": ["f est paire"], "b": ["ni paire ni impaire"], "c": ["ni paire ni impaire"]}
+# valeurs approchées dans la formule (question 15) : cherchées dans `maths` (virgule LaTeX {,} rendue en virgule)
+PARITE_MATHS = {"Ex7": [r"-2\in", r"2\notin"], "a": ["(-x)^{2}=x^{2}"], "d": ["(-x)^{2}=x^{2}"],
+                "b": ["f(0)=-6", r"f(1)=-5e^{-2}\approx-0,68", r"f(-1)=-5e^{2}\approx-36,95"],
+                "c": ["f(0)=5", r"\approx8,92", r"\approx2,07"]}
 
 
 @pytest.mark.parametrize("ident", IDS)
@@ -738,10 +738,11 @@ def test_P7b_extremums(ident):
     t, m = texte(sortie(ident)["cartes"]), maths(sortie(ident)["cartes"])
     for e in fn.extremums:
         assert f"({e.approx_x};{e.approx_y})" in m, (e.approx_x, e.approx_y)
-        assert ("Maximum local" if e.genre == "maximum" else "Minimum local") in t
+        nom = ("Maximum" if e.genre == "maximum" else "Minimum") + (" global" if e.global_ else " local")      # §2 révisé (question 43)
+        assert f"<b>{nom}</b> en \\(x = " in t, nom
     pas_global = t.lower().count("pas global")
     assert pas_global == sum(1 for e in fn.extremums if not e.global_), pas_global
-    assert t.lower().count("global") - pas_global >= sum(1 for e in fn.extremums if e.global_)
+    assert t.count("global</b>") == sum(1 for e in fn.extremums if e.global_)
 
 
 def ronds_vides_de_l_outil(r):

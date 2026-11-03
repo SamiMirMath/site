@@ -49,16 +49,39 @@ class TestResoudreEC(unittest.TestCase):
             attendu += [c["titre"] for c in parties.cartes_zeros_signe(ec.analyse(entree))] + [p[3]]
             if lim.get("tableaux_signe"):
                 attendu.append("Tableaux de signes")
-            attendu += [t for e in lim["etudes"] for t in titres_etude(e)] + ["Bilan des asymptotes", p[4]]
+            attendu += [t for e in lim["etudes"] for t in titres_etude(e)] + ["Bilan des asymptotes", p[4], "Dérivée"]
             if dv["deriv_resolu"]:
-                attendu.append("Dérivée")
-                if dv["signe_resolu"]:
-                    attendu.append("Signe de f' et variations")
+                attendu.append("Signe de f' et variations")
             attendu += [p[5], "Graphique"]
             with self.subTest(entree=entree):
                 s = rec.resoudre(entree)
                 self.assertEqual(titres(s), attendu)
                 self.assertEqual([c for c in s["cartes"] if c["style"] == "partie"], [so.partie(t) for t in p])
+
+    def test_partie_5_jamais_vide(self):
+        """Question 7 : dérivée hors du cadre, la carte « Dérivée » de l'outil Dérivée et sa phrase ; signe de f′ non étudié, la carte
+        d'erreur de l'outil Dérivée (un résultat non traité donne un message clair). Jamais d'intertitre seul."""
+        from unittest import mock
+        import derivee_variations as dv
+        from noyau import NonPrisEnCharge
+
+        def sous(s, titre):
+            t = titres(s)
+            return s["cartes"][t.index(titre) + 1:t.index(rec.PARTIES[rec.PARTIES.index(titre) + 1])]
+        with mock.patch.object(dv, "derivee_narree", side_effect=NonPrisEnCharge("forcé")):
+            s = rec.resoudre("x^2-4x+3")
+            d = rdv.resoudre("x^2-4x+3")
+        valide(self, s)
+        self.assertEqual(sous(s, rec.PARTIES[4]), [d["cartes"][1]])
+        self.assertEqual(d["cartes"][1]["blocs"], [so.erreur("Cette fonction sort du cadre de l'outil : la dérivée n'a pas été calculée.")])
+        self.assertEqual(blocs_de_type(s, "graphique")[0]["extrema"], [])
+        with mock.patch.object(dv, "preimage", side_effect=RuntimeError("forcé")):
+            s = rec.resoudre("x^2-4x+3")
+            d = rdv.resoudre("x^2-4x+3")
+        valide(self, s)
+        self.assertEqual([c["titre"] for c in sous(s, rec.PARTIES[4])], ["Dérivée", "Signe de f' et variations"])
+        self.assertEqual(sous(s, rec.PARTIES[4])[1], d["cartes"][2])
+        self.assertEqual(d["cartes"][2]["style"], "erreur")
 
     def test_six_parties_dans_l_ordre_du_corrige(self):
         """D1 : les six intertitres, mots et ordre du corrigé .tex."""

@@ -332,8 +332,8 @@ encadré ; les cartes « Étape k : … » de la partie 4 sont les étapes de la
 | P3 | Partie 1 : mise en forme + ED détaillé (D3) | EC | **fait** | f108f7f |
 | P4 | Partie 2 : parité (D4) | EC | **fait** | 62781a8 |
 | P5 | Partie 3 : zéros, signe, f(0) (D5) | EC | **fait** | 8fc2fa2 |
-| R1 | Corrections après relecture, outil Dérivée : Q37, Q56, Q32 (§7) | Dérivée | **fait** | (voir commit « EC R1 ») |
-| R2 | Corrections après relecture, EC : Q7, Q11, Q15, Q23, Q28, Q41, Q43 (§7) | EC | à faire (session 2) | |
+| R1 | Corrections après relecture, outil Dérivée : Q37, Q56, Q32 (§7) | Dérivée | **fait** | e38278c |
+| R2 | Corrections après relecture, EC : Q7, Q11, Q15, Q23, Q28, Q41, Q43 (§7) | EC | **fait** | (voir commit « EC R2 ») |
 | P6 | Partie 4 : D12, D13, D16 | Limites | à faire (session 2) | |
 | P7a | Dérivée de l'exposant détaillée, tableau u/v (D7, D8, D7b si simple) | Dérivée | **fait** | 1799fff |
 | P7b | Valeurs dans le tableau de variations (D10), extremums (D11) | EC + Dérivée | **fait** | cfe88de |
@@ -588,6 +588,43 @@ Corrections après relecture qui touchent l'**outil Dérivée** (donc aussi l'EC
 4. Instantanés de l'outil Dérivée et de l'EC (moteur, `resoudre`, références de pages) régénérés et listés sous « À relire » (avant /
    après) ; suite complète ; temps natif ; commit « EC R1 : … » avec la nouvelle version de `decisions.md`.
 
+### R2 (03.11.2026, session 2)
+
+Corrections après relecture **propres à l'EC** : Q7, Q11, Q15, Q23, Q28, Q41, Q43 (decisions.md §7, §2 Extremums révisé). Tout dans
+`etude-complete/parties.py` et `etude-complete/resoudre_ec.py` ; les outils ED, Dérivée, Limites, Exp-log ne changent pas (leurs
+instantanés doivent rester identiques).
+1. **Q7** (`resoudre_ec`) : si la dérivée sort du cadre, la carte « Dérivée » de l'outil Dérivée (`rdv.carte_derivee` : « Cette
+   fonction sort du cadre de l'outil : la dérivée n'a pas été calculée. ») sous « 5. … » ; si la dérivée est calculée mais pas son
+   signe, la carte d'erreur « Signe de f′ et variations » de l'outil Dérivée (CLAUDE.md : un résultat non traité donne un message
+   clair). Jamais d'intertitre seul. Test : dérivée forcée hors du cadre, signe forcé non étudié.
+2. **Q11** : partie 1, un dénominateur **trinôme unitaire** (x² + bx + c, b ≠ 0, c ≠ 0) à deux racines entières distinctes : « On
+   résout x² − 3x + 2 = 0 ⇔ (x − 1)(x − 2) = 0 (Somme-Produit) ⇔ x = 1 ou x = 2 (produit nul). » (garde-fous de P3 : produit développé
+   = polynôme, même ensemble que l'outil ED, valeur nulle aux racines) ; partie 3, même chaîne : un facteur x − r d'un produit s'écrit
+   directement x = r (règle de Q56 dans l'outil Dérivée), « (x − 1)(x − 3) = 0 (Somme-Produit) ⇔ x = 1 ou x = 3 (produit nul) » au
+   lieu de l'étape « x − 1 = 0 ou x − 3 = 0 ». Affine et ax² + c gardent la chaîne courte de P3 (x² − 4 = 0 ⇔ x² = 4, comme §2 b).
+3. **Q15, Q28** : une seule écriture des valeurs approchées (`approchee`, TeX) **dans la formule**, après `\approx`, dans les parties
+   2, 3 et 5 : `f(1) = −5e^{−2} ≈ −0,68`, `x = √6 ≈ 2,45`, `(0 ; e^{1/6}) ≈ (0 ; 1,18)`, `g(4) = … = 3/2, donc f(4) = e^{3/2} ≈ 4,48` ;
+   entre 1000 et 10⁶, 2 décimales avec le séparateur des milliers ’ (`moteur/nombres.py`, convention du site, ajouté au manifeste de
+   l'EC) ; R13 sous 10⁻³ et dès 10⁶ (inchangé).
+4. **Q23** : tableau de signes de f (partie 3) avec une ligne par facteur de la factorisation **écrite dans la chaîne** (mise en
+   évidence, Somme-Produit) : x² − 4x + 3 → x − 1, x − 3 ; x³ − 3x → x, x² − 3 ; x⁴ − 2x² → x², x² − 2. Garde-fou : le produit des
+   lignes (constante comprise) est égal à f (SymPy exact et sonde mpmath), sinon les lignes d'avant ; la ligne f(x) reste confirmée par
+   `confirmer_signe`.
+5. **Q41** : une ligne de calcul pour **chaque** extremum : f = e^{u/v} avec g nommé et x₀ entier, la ligne « g(x₀) = …, donc f(x₀) =
+   … » (P7b) ; sinon la substitution en chaîne « f(−2) = ((−2)² − 6)e^{−2·(−2)} = (4 − 6)e⁴ = −2e⁴ ≈ −109,20 » (substitution, puis
+   puissances et produits de nombres calculés avec e^{ln q} = q et ln(e^q) = q, puis le reste, puis l'écriture de l'extremum), pour x₀
+   rationnel, ln(q) ou e^{q}. Chaque membre est vérifié égal à f(x₀) (SymPy exact et sonde mpmath, machinerie `valeur_verifiee` de la
+   partie 2) ; sinon pas de ligne.
+6. **Q43** (§2 révisé) : « **Maximum global** en x = 0 : (0 ; 1) (f′ passe de + à −). Les autres valeurs de f sont plus petites
+   (limites 0⁺ en ±∞). » quand c'est prouvé ; « **Maximum local** … Pas global : … » ; sinon « **Maximum local** … » seul. Mêmes
+   garde-fous qu'en P7b.
+7. Tests : `test_parties_ec.py` (lignes exactes mises à jour ; nouveaux tests : chaîne Somme-Produit d'une condition, lignes du
+   tableau = facteurs écrits avec produit = f et garde-fou forcé, chaîne de valeur de chaque extremum relue et évaluée par l'oracle
+   mpmath, garde-fous forcés, séparateur des milliers, format « Maximum global ») ; `test_corpus_etude_complete.py` (P4 cherche les
+   valeurs dans la formule ; P7b attend « Maximum global » pour un extremum global) ; `test_resoudre_ec.py` (Q7) ;
+   `test_resoudre_import.py` (nombres.py). Instantanés `resoudre` et références de pages de l'EC régénérés, listés sous « À relire » ;
+   largeurs ; spécification ; suite complète ; temps natif ; commit « EC R2 : … ».
+
 ## Temps natif de etudier() (s, médiane de 3 processus neufs)
 
 | Partie | Ex7 | a | b | c | d |
@@ -602,6 +639,7 @@ Corrections après relecture qui touchent l'**outil Dérivée** (donc aussi l'EC
 | P7b | 0,64 | 0,02 | 0,43 | 0,20 | 0,30 |
 | P8 | 0,58 | 0,03 | 0,36 | 0,26 | 0,21 |
 | R1 | 0,58 | 0,03 | 0,35 | 0,25 | 0,21 |
+| R2 | 0,67 | 0,03 | 0,42 | 0,30 | 0,24 |
 
 P3 ne touche pas `etudier()` ; la partie 1 (`parties.cartes_domaine`, appelée par `resoudre`) coûte en plus 0,5 ms (Ex7), 0,2 ms (d),
 moins de 0,01 ms (a, b, c).
@@ -626,6 +664,10 @@ la partie 3, 44 ms) ; Ex7, b, d : en dessous de P7b (bruit de la machine, mesure
 `resoudre` (page) ne monte que des ronds vides et du cadrage. Question 55.
 R1 : aucune hausse (la restitution de l'exposant de l'énoncé ajoute un `cancel` par exponentielle réécrite par SymPy ; la ligne des
 zéros ne fait aucun calcul de plus).
+R2 : aucune hausse due à R2 : le même script, lancé le même jour sur R1 (e38278c, code de R2 mis de côté), donne Ex7 0,70 s, a 0,03 s,
+b 0,42 s, c 0,29 s, d 0,24 s (la machine est plus lente qu'au moment de la mesure R1). Dans `etudier()`, R2 n'ajoute que les lignes du
+tableau de f (Q23), et seulement quand la chaîne de la partie 3 écrit une factorisation (aucune fonction du corpus) ; les lignes de
+calcul des extremums (Q41) sont dans `resoudre` (`blocs_extremums`).
 
 ## Suite complète
 
@@ -649,6 +691,8 @@ zéros ne fait aucun calcul de plus).
 | P8 | 1220 passés, 21 xfail (689 s) | 119 passés (954 s, dont le nouveau test `test_graphique.py::test_d15_ronds_vides_et_points_marques`) ; code de retour 0 (1ᵉʳ lancement) | 03.11.2026 |
 | P8 (contrôle du chef d'orchestre) | 1220 passés, 21 xfail (647 s) | 119 passés (923 s) ; code de retour 0 | 03.11.2026 |
 | R1 | 1224 passés, 21 xfail (679 s) | 119 passés (908 s) ; code de retour 0 (1ᵉʳ lancement) | 03.11.2026 |
+| R1 (contrôle du chef d'orchestre) | 1224 passés, 21 xfail (666 s) | 118 passés, 1 échec : `test_clavier.py::test_a_deux_formules…` (le test instable, même symptôme : « effacer » laisse `(x^2-1)/(x-3)`, page Limites, que R1 ne touche pas) ; ce test seul sur R1 : 3 réussites sur 6 → R1 acceptée | 03.11.2026 |
+| R2 | 1240 passés, 21 xfail (930 s) | 120 passés (1202 s, dont le nouveau test `test_largeurs.py::test_lignes_de_calcul_et_valeurs_approchees`) ; code de retour 0 (1ᵉʳ lancement) | 03.11.2026 |
 
 ## Écarts acceptés
 
@@ -746,6 +790,23 @@ zéros ne fait aucun calcul de plus).
 - R1 : e^((x²+1)/(2x)) et e^((−2x²+3x−1)/(3x−6)) entrent dans les cas limites de l'outil Dérivée (`tests/python/cas.py`), cités dans
   la spécification (point 2, DV-17) : 2 entrées nouvelles dans les instantanés et les références de pages de la Dérivée (Q37,
   « ajouter au corpus »). La famille tirée au hasard est dans `test_derivee_narration.py` (`TestExposantDeLEnonce`).
+
+- R2 : `1/(x^2-3x+2)` entre dans les cas limites de l'EC (`tests/python/cas.py`, cité dans la spécification) : aucune entrée de la page
+  n'a de dénominateur résolu par Somme-Produit (Q11) ni d'extremum en un x₀ fractionnaire (Q41) ; 1 entrée nouvelle dans les
+  instantanés (`etudier()` et `resoudre`) et les références de pages de l'EC.
+- R2 : `moteur/nombres.py` (notation suisse, séparateur des milliers ’, déjà chargé par l'outil Exp-log) entre dans le manifeste de
+  l'EC (Q28) ; `tests/python/test_resoudre_import.py` reçoit ce fichier (même vérification, liste à jour).
+- R2 : `tests/python/test_corpus_etude_complete.py` : P4 cherche les valeurs approchées dans la formule (`maths`, « f(1) = −5e^{−2} ≈
+  −0,68 » en entier, au lieu de « −0,68 » seul dans le texte : vérification plus forte) ; P7b attend « Maximum global » pour un
+  extremum global et « Maximum local » sinon (§2 révisé), et compte les « global</b> » (au lieu de tous les mots « global ») : même
+  force. `test_resoudre_ec.py::test_ordre_des_cartes_comme_la_page` : la carte « Dérivée » est toujours attendue (Q7).
+- R2 : `tests/python/test_parties_ec.py` : lignes exactes mises à jour (≈ dans la formule, Somme-Produit, lignes du tableau, chaînes de
+  valeur, « Maximum global ») ; l'oracle des zéros relit maintenant aussi les zéros écrits avec ln (x = ln(6) de c n'était pas relu :
+  vérification plus forte) ; la lecture des formules (`nombre_affiche`) comprend les puissances, `\cdot` et `\sqrt[3]` pour relire
+  chaque membre des chaînes de valeur ; « 1/(x^2-3x+2) » passe de la liste « laissées à l'outil ED » à la liste des chaînes
+  (Somme-Produit), remplacé dans la première par quatre formes qui y restent (Δ non carré, racine double, sans terme constant, non
+  unitaire). Nouveau test de largeurs `test_largeurs.py::test_lignes_de_calcul_et_valeurs_approchees` (b et 1/(x² − 3x + 2), 320 à
+  1100 px : aucune faute, aucune formule hors de sa carte).
 
 ## Questions pour l'enseignant
 
@@ -930,6 +991,33 @@ zéros ne fait aucun calcul de plus).
 58. **R1, x^x** : x^x n'est pas reconnu comme une exponentielle (il s'écrit e^{x ln x}) : « f′(x) = 0 ⇔ x^x(ln(x) + 1) = 0 ⇔ ln(x)
     + 1 = 0 ⇔ x = e^{−1} », sans « (car x^x > 0) ». Les lignes d'explication de l'outil ED (« ln(x) + 1 = 0 ⇔ ln(x) = −1 (on
     soustrait 1) ») restent **avant** la ligne des zéros, comme avant R1 (x ln x, ln(x)/x, c). À garder ?
+
+59. **R2, Q11, « (produit nul) » en fin de chaîne** : §7 écrit « x² − 3x + 2 = 0 ⇔ (x − 1)(x − 2) = 0 (Somme-Produit) ⇔ x = 1 ou
+    x = 2 », sans propriété à la dernière étape ; la ligne des zéros de f′ (Q56, même page) écrit « ⇔ x = 0 ou x = 4 (produit nul) ».
+    Une seule règle a été prise pour les parties 1, 3 et 5 : « … (Somme-Produit) ⇔ x = 1 ou x = 2 (produit nul) ». À retirer ?
+60. **R2, Q11, portée** : Somme-Produit pour un dénominateur x² + bx + c (unitaire, b ≠ 0, c ≠ 0, deux racines entières distinctes).
+    Restent à l'outil ED : racine double (x² − 2x + 1), sans terme constant (x² − 4x, qui se ferait par mise en évidence), non
+    unitaire (2x² − 6x + 4) ; ax² + c garde « x² − 4 = 0 ⇔ x² = 4 ⇔ … » (§2 b, d). La partie 3 garde la mise en évidence avant
+    Somme-Produit (2x² − 6x + 4 = 2(x² − 3x + 2) = 2(x − 1)(x − 2)). Faut-il étendre la partie 1 (racine double, mise en évidence) ?
+61. **R2, Q28 et Q19** : les valeurs approchées entre 1000 et 10⁶ s'écrivent maintenant avec ’ (≈ 1’234,57) dans les parties 3 et 5 ;
+    la partie 2 garde ses contre-exemples dans [10⁻³ ; 1000[ (Q19 confirmé : une valeur au-delà fait passer au a suivant). Faut-il
+    accepter aussi les contre-exemples entre 1000 et 10⁶ ?
+62. **R2, Q41, forme de la chaîne** : une ligne, comme l'exemple de §7 : substitution (x₀ entre parenthèses s'il est négatif ou
+    fractionnaire), puis puissances, produits et quotients de nombres calculés (avec e^{ln q} = q, ln(e^{q}) = q, e⁰ = 1, 1·a = a,
+    0·a = 0), puis les sommes, puis l'écriture de l'extremum (celle du tableau) : b « f(−2) = ((−2)² − 6)e^{−2(−2)} = (4 − 6)e⁴ = −2e⁴
+    ≈ −109,20 » (l'outil écrit −2(−2), §7 −2·(−2)) ; a « f(0) = e^{−0²} = 1 » ; ln(x)/x « f(e) = ln(e)/e = 1/e = e^{−1} ≈ 0,37 ».
+    Pas de propriété entre parenthèses (comme §7). x₀ irrationnel (3 ± 2√2, (3 ± √3)/3) : pas de ligne (option qui affiche le moins).
+    Les lignes de calcul sont toutes avant la liste des extremums (comme P7b). À relire à l'écran (P9).
+63. **R2, Q41, Ex7 et d** : la ligne « g(x₀) = …, donc f(x₀) = … » (P7b) est gardée quand g est nommé et x₀ entier ; sinon la
+    substitution. g(0) reste répété (accepté par Q41).
+64. **R2, Q7, signe de f′ non étudié** : en plus de la phrase « sort du cadre » (Q7), la carte d'erreur « Signe de f′ et variations »
+    de l'outil Dérivée est maintenant affichée quand la dérivée est calculée mais pas son signe (CLAUDE.md : un résultat non traité
+    donne un message clair ; avant R2, l'EC n'affichait rien). Aucune entrée de la page ni du corpus n'est concernée.
+65. **R2, Q15, f(0) non entier dans « Pas impaire »** : « f(0) = e^{−1/2} ≈ 0,61 ≠ 0 » (une formule) au lieu de « f(0) = e^{−1/2} ≠ 0
+    (≈ 0,61) ». Aucune entrée de la page ni du corpus n'est concernée.
+66. **R2, Q23, dénominateur** : les lignes du tableau de f suivent la factorisation écrite dans la **chaîne de la partie 3** (le
+    numérateur) ; un dénominateur factorisé en partie 1 (1/(x² − 3x + 2) : (x − 1)(x − 2), Somme-Produit) garde une ligne
+    x² − 3x + 2 (option qui affiche le moins). Faut-il aussi une ligne par facteur du dénominateur ?
 
 ## À relire par l'enseignant
 
@@ -1173,3 +1261,29 @@ zéros ne fait aucun calcul de plus).
   −2(x − 3)(x + 2)e^{−2x} = 0 ⇔ x − 3 = 0 ou x + 2 = 0 ⇔ x = −2 ou x = 3 ») ; a « f′(x) = 0 ⇔ x = 0 (car e^{−x²} > 0) » ; c
   « f′(x) = 0 ⇔ 3 − eˣ = 0 (car eˣ > 0) ⇔ x = ln(3) » ; x·e^(−x/3 + 1) : exposant de f′ e^{−x/3 + 1} (avant e^{1 − x/3}), e^(x/2) :
   e^{x/2} (avant e^{½x}). Guide : R7 (ligne des zéros), R11 (tableau u/v, Q32), exemple 4.
+
+- **R2** (EC seule ; ED, Dérivée, Limites, Factorisation, Exp-log : instantanés identiques). Instantanés modifiés :
+  `tests/python/instantanes/resoudre/etude-complete.json` (16 entrées modifiées, 1 nouvelle : `1/(x^2-3x+2)`),
+  `tests/pages/references/etude-complete.json` (16 modifiées, 1 nouvelle), `tests/python/instantanes/etude-complete.json` (sortie
+  d'`etudier()` : 1 nouvelle entrée, aucune modifiée). Vérifié par programme : seules changent les lignes des parties 2, 3 et 5
+  ci-dessous (et la nouvelle entrée) ; `x/sqrt(x^2)` et l'entrée d'erreur `ln(` sont identiques.
+
+  | Entrée | Avant | Après |
+  |---|---|---|
+  | toutes les valeurs approchées (Q15) : `(e^x-1)/x`, `e^(1/x)`, `e^(2x)`, `x^2*e^(-x)` (partie 2) ; `(x^2-1)/(x-3)`, Ex7, d (f(0)) ; `x^3-3x`, `x^4-2x^2` (zéros) ; tous les points des extremums | `\(f(1) = e - 1\)` ≈ 1,72 ; `\(x = -\sqrt{3}\)` ≈ −1,73 ; `\(\left(0\,;\,e^{1/6}\right)\)` ≈ (0 ; 1,18) (≈ en texte) | `\(f(1) = e - 1 \approx 1{,}72\)` ; `\(x = -\sqrt{3} \approx -1{,}73\)` ; `\(\left(0\,;\,e^{1/6}\right) \approx \left(0\,;\,1{,}18\right)\)` (≈ dans la formule) ; « −f(1) ≈ −1,72 » de même |
+  | `x^2-4x+3` (Q11, Q23) | « ⇔ (x − 1)(x − 3) = 0 (Somme-Produit) » · « ⇔ x − 1 = 0 ou x − 3 = 0 (produit nul) » · « ⇔ x = 1 ou x = 3 » ; tableau : ligne x² − 4x + 3 | « ⇔ (x − 1)(x − 3) = 0 (Somme-Produit) » · « ⇔ x = 1 ou x = 3 (produit nul) » ; tableau : lignes (x − 1), (x − 3) |
+  | `x^3-3x`, `x^4-2x^2` (Q23) | tableau : une ligne x³ − 3x (x⁴ − 2x²) | lignes x, (x² − 3) ; x², (x² − 2) |
+  | `x^2-4x+3`, `x^3-3x`, `x^4-2x^2`, `x/(x^2+1)`, `x^2*e^(-x)`, `sqrt(x^2-4)`, `x^(2/3)`, `ln(x)/x`, `x*ln(x)`, `3(x*ln(x))` (Q41, nouvelles lignes avant la liste) | — | « f(2) = 2² − 4·2 + 3 = 4 − 8 + 3 = −1. » ; « f(−1) = (−1)³ − 3(−1) = −1 − (−3) = 2. » ; « f(−1) = (−1)/((−1)² + 1) = −1/(1 + 1) = −1/2 ≈ −0,50. » ; « f(0) = 0²e^{−0} = 0. », « f(2) = 2²e^{−2} = 4e^{−2} ≈ 0,54. » ; « f(−2) = √((−2)² − 4) = √(4 − 4) = 0. » ; « f(0) = ∛(0²) = 0. » ; « f(e) = ln(e)/e = 1/e = e^{−1} ≈ 0,37. » ; « f(e^{−1}) = e^{−1}ln(e^{−1}) = e^{−1}(−1) = −e^{−1} ≈ −0,37. » ; « f(e^{−1}) = 3e^{−1}ln(e^{−1}) = 3e^{−1}(−1) = −3e^{−1} ≈ −1,10. » |
+  | extremums globaux (Q43) : `x^2-4x+3`, `x/(x^2+1)` (2), `x^(2/3)`, `ln(x)/x`, `x*ln(x)`, `3(x*ln(x))` | « **Minimum local** en x = 2 : (2 ; −1) (f′ passe de − à +). Global : les autres valeurs de f sont plus grandes (limites +∞ en ±∞). » | « **Minimum global** en x = 2 : (2 ; −1) (f′ passe de − à +). Les autres valeurs de f sont plus grandes (limites +∞ en ±∞). » |
+  | `1/(x^2-3x+2)` (nouvelle) | — | Condition 1 : « On résout x² − 3x + 2 = 0 ⇔ (x − 1)(x − 2) = 0 (Somme-Produit) ⇔ x = 1 ou x = 2 (produit nul). » ; « f(3/2) = 1/((3/2)² − 3(3/2) + 2) = 1/(9/4 − 9/2 + 2) = −4. » ; « **Maximum local** en x = 3/2 : (3/2 ; −4) ≈ (1,50 ; −4) (f′ passe de + à −). Pas global : f(x) → +∞ quand x → 1⁻. » |
+
+  Inchangés : les « Pas global : … » (mêmes raisons), les lignes « g(x₀) = … » d'Ex7 et de d (≈ dans la formule seulement), les
+  extremums de (x² − 1)/(x − 3) (x₀ = 3 ± 2√2 : pas de ligne de calcul, ≈ dans la formule seulement).
+  Hors instantanés (corpus) : b « f(1) = −5e^{−2} ≈ −0,68 », « f(−1) = −5e^{2} ≈ −36,95 » (formule) ; zéros « x = −√6 ≈ −2,45 ou
+  x = √6 ≈ 2,45 » ; « f(−2) = ((−2)² − 6)e^{−2(−2)} = (4 − 6)e⁴ = −2e⁴ ≈ −109,20. », « f(3) = (3² − 6)e^{−2·3} = (9 − 6)e^{−6} = 3e^{−6}
+  ≈ 0,0074. », « **Minimum global** en x = −2 … Les autres valeurs de f sont plus grandes (limites +∞ en −∞ et 0⁺ en +∞). » ; c
+  « f(ln(3)) = e^{ln(3)}(6 − e^{ln(3)}) = 3(6 − 3) = 9. », « **Maximum global** en x = ln(3) : (ln(3) ; 9) ≈ (1,10 ; 9) … Les autres
+  valeurs de f sont plus petites (…). » ; a « f(0) = e^{−0²} = 1. », « **Maximum global** en x = 0 : (0 ; 1) (f′ passe de + à −). Les
+  autres valeurs de f sont plus petites (limites 0⁺ en ±∞). » ; Ex7 et d : ≈ dans la formule seulement.
+  Largeurs : b, c, a, Ex7, d, 1/(x² − 3x + 2), x⁴ − 2x², x² − 4x + 3, 3x ln x, x ln x + x, 2x² − 6x + 4, (x² + x − 6)e^{−x},
+  x²e^{−x²}, (x² − 1)/(x − 3), corrigé complet à 320 – 1100 px : aucune faute du balayage, aucune formule hors de sa carte.

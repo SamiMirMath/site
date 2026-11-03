@@ -8,7 +8,8 @@ Partie 1. Domaine de définition (D1, D3) :
   haut et bas factorisés une ligne par méthode (mise en évidence, Somme-Produit), puis « On note g(x) = …, donc f(x) = e^{g(x)}. » ;
   aucune carte quand rien ne se factorise ;
 - une carte par condition (cartes de l'outil ED, R10) ; un dénominateur affine ou de la forme ax² + c, écrit développé, est résolu en
-  chaîne, version courte : « On résout 6x − 12 = 0 ⇔ 6x = 12 ⇔ x = 2. » ; sinon les lignes de l'outil ED, telles quelles ;
+  chaîne, version courte : « On résout 6x − 12 = 0 ⇔ 6x = 12 ⇔ x = 2. » ; un trinôme unitaire à deux racines entières, par
+  Somme-Produit (R2, Q11) ; sinon les lignes de l'outil ED, telles quelles ;
 - carte « Ensemble de définition » : ED encadré (conclusion de l'outil ED).
 
 Partie 2. Parité (D4). Toute affirmation est confirmée deux fois (principe 0.2) : par SymPy (calcul exact) et par une sonde mpmath
@@ -25,15 +26,21 @@ Partie 3. Zéros, signe, ordonnée à l'origine (D5), mêmes garde-fous (SymPy e
   « Somme-Produit ») ; les zéros calculés par le moteur de l'outil ED (`preimage`), valeur exacte puis approchée ; un zéro hors de l'ED est
   rejeté ; une forme que la chaîne ne couvre pas garde les lignes de l'outil ED ; zéros non exacts ou non calculés : message, pas de tableau ;
 - sans zéro et de signe constant : « Donc f n'a pas de zéro et f(x) > 0 sur ED » ; sinon le tableau de signes de f, construit par la
-  machinerie R7 du tableau de f′ (`derivee_variations.tableau_signes`) ;
+  machinerie R7 du tableau de f′ (`derivee_variations.tableau_signes`), une ligne par facteur de la factorisation écrite dans la
+  chaîne (R2, Q23 ; garde-fou : le produit des lignes est f, SymPy et sonde) ;
 - f(0) exact puis approché, et le point (0 ; f(0)) ; « 0 ∉ ED : le graphe ne coupe pas l'axe des y ».
 
 Partie 5. Extremums (D11), à la place de la liste de l'outil Dérivée (la ligne f(x) du tableau porte les valeurs, D10, outil Dérivée) :
-- valeur calculée en chaîne par l'exposant quand la carte « Dérivée » a nommé g : « g(4) = 18/12 = 3/2, donc f(4) = e^{3/2} ≈ 4,48 » ;
-- « Maximum local en x = 0 : (0 ; e^{1/6}) ≈ (0 ; 1,18) (f′ passe de + à −). » puis « Global : … (limites 0⁺ en ±∞). » si f(x₀)
-  dépasse strictement les autres extremums du même genre et toutes les limites aux bornes de l'ED, « Pas global : f(x) → +∞ quand
-  x → 2⁺. » si l'une d'elles dépasse f(x₀), rien sinon (« ? », égalité, doute). Comparaisons par SymPy et par mpmath, « global »
-  confirmé par une sonde de f sur l'ED, « pas global » par une valeur de f au-delà de f(x₀).
+- une ligne de calcul pour chaque extremum (R2, Q41) : par l'exposant quand la carte « Dérivée » a nommé g, « g(4) = 18/12 = 3/2,
+  donc f(4) = e^{3/2} ≈ 4,48 » ; sinon par substitution, « f(−2) = ((−2)² − 6)e^{−2(−2)} = (4 − 6)e⁴ = −2e⁴ ≈ −109,20 », chaque
+  membre vérifié (SymPy et sonde) ;
+- « Maximum global en x = 0 : (0 ; 1) (f′ passe de + à −). Les autres valeurs de f sont plus petites (limites 0⁺ en ±∞). » si f(x₀)
+  dépasse strictement les autres extremums du même genre et toutes les limites aux bornes de l'ED, « Maximum local … Pas global :
+  f(x) → +∞ quand x → 2⁺. » si l'une d'elles dépasse f(x₀), « Maximum local … » seul sinon (« ? », égalité, doute) (§2 révisé, Q43).
+  Comparaisons par SymPy et par mpmath, « global » confirmé par une sonde de f sur l'ED, « pas global » par une valeur de f au-delà
+  de f(x₀).
+
+Valeurs approchées (R2, Q15, Q28) : dans la formule, après « \\approx » ; séparateur des milliers ’ entre 1000 et 10⁶.
 
 Partie 6. Graphe (D15) : `partie3` donne aussi au graphique les zéros et f(0) que ses cartes écrivent (rien en cas de doute) ;
 `ronds_vides` : un rond vide en (a ; L) pour chaque point exclu a dont la limite L d'un côté est finie (en plus des « trous » de
@@ -44,6 +51,7 @@ from decimal import Decimal, ROUND_HALF_UP, localcontext
 from fractions import Fraction as F
 from math import gcd, isqrt
 
+from nombres import formater_decimal, formater_entier
 from noyau import (X, E, Nb, Neg, Fn, Op, Num, tex, ptex, qtex, decomposer, deg, pn, peval, pmul, evaluer, conditions, valeur_constante,
                    sans_x, fusion, points, proche, preimage, aplatir, en_sympy_reel, charger_sympy, SYMPY, NonPrisEnCharge, ErreurSaisie)
 import sortie as so
@@ -193,12 +201,47 @@ def _racine_tex(q):
 
 
 def resolution_denominateur(A):
-    """Chaîne courte de « A = 0 » (D3) pour un dénominateur A écrit développé, affine ou de la forme ax² + c (c/a < 0) :
-    (membres de la chaîne, [(écriture de la racine, valeur flottante)]), ou None (autre forme : rédaction de l'outil ED)."""
+    """Chaîne courte de « A = 0 » (D3) pour un dénominateur A écrit développé, affine ou de la forme ax² + c (c/a < 0), ou trinôme
+    unitaire à deux racines entières (Somme-Produit, question 11) : (membres de la chaîne, [(écriture de la racine, valeur flottante)]),
+    un membre étant une écriture ou (écriture, propriété) ; None (autre forme : rédaction de l'outil ED)."""
     P = polynome_ecrit(A)
     if P is None or P == [F(0), F(1)]:              # x = 0 : la condition « x ≠ 0 » est déjà la solution
         return None
-    return resolution_polynome(P)
+    return resolution_polynome(P) or resolution_somme_produit(P)
+
+
+def resolution_somme_produit(P):
+    """« x² − 3x + 2 = 0 ⇔ (x − 1)(x − 2) = 0 (Somme-Produit) ⇔ x = 1 ou x = 2 (produit nul) » (question 11) pour un trinôme unitaire
+    x² + bx + c (b ≠ 0, c ≠ 0) à deux racines entières distinctes ; garde-fou exact de `_factoriser` (le produit développé redonne P).
+    None sinon."""
+    P = pn(P)
+    if deg(P) != 2 or P[2] != 1 or P[1] == 0 or P[0] == 0:
+        return None
+    r = _factoriser(P)
+    if r is None:
+        return None
+    lignes, c, k, facteurs = r
+    if c != 1 or k != 0 or len(facteurs) != 2 or [m for _, m in lignes] != ["Somme-Produit"]:
+        return None
+    racines = sorted(-h[0] for h in facteurs)
+    membres = [ptex(P, "x") + " = 0", (lignes[0][0] + " = 0", "Somme-Produit"),
+               (r" \text{ ou } ".join(f"x = {qtex(q)}" for q in racines), "produit nul")]
+    return membres, [(qtex(q), float(q)) for q in racines]
+
+
+def chaine_en_ligne(membres):
+    """« A ⇔ B ⇔ C » sur une ligne, la propriété d'un membre à droite de ce membre : « \\(A \\iff B\\) (Somme-Produit) \\(\\iff C\\) (produit
+    nul) » (un membre : écriture ou (écriture, propriété))."""
+    morceaux, courant = [], ""
+    for i, m in enumerate(membres):
+        ecrit, propriete = (m, None) if isinstance(m, str) else m
+        courant += (r" \iff " if i else "") + ecrit
+        if propriete:
+            morceaux.append(rf"\({courant.strip()}\) ({propriete})")
+            courant = ""
+    if courant:
+        morceaux.append(rf"\({courant.strip()}\)")
+    return " ".join(morceaux)
 
 
 def resolution_polynome(P):
@@ -244,7 +287,7 @@ def blocs_condition(c, A):
         if res is not None:
             membres, racines = res
             if _ensemble_prive_de(racines) == c["E_tex"] and all(_proches(evaluer(A, v), 0.0) for _, v in racines):
-                return [so.formule(c["cond_tex"]), so.texte("On résout \\(" + r" \iff ".join(membres) + "\\).", style="etape")]
+                return [so.formule(c["cond_tex"]), so.texte("On résout " + chaine_en_ligne(membres) + ".", style="etape")]
     return resoudre_ed.blocs_condition(c)
 
 
@@ -633,20 +676,21 @@ def chaine_f_moins_x(f, p):
 
 
 # ---------- valeurs de f en un point (règle 3) ----------
-def arrondi(d):
+def arrondi(d, plafond=1000):
     """Valeur arrondie affichée (decisions.md §2) d'un Decimal : 2 décimales si |d| ≥ 0,01, 2 chiffres significatifs si
-    10⁻³ ≤ |d| < 0,01 ; None hors de [10⁻³ ; 1000[ (notation scientifique et séparateur des milliers : questions ouvertes)."""
+    10⁻³ ≤ |d| < 0,01 ; None hors de [10⁻³ ; plafond[ (partie 2 : 1000, question 19 ; parties 3 et 5 : 10⁶, question 28)."""
     if d == 0:
         return Decimal(0)
-    if not Decimal("0.001") <= abs(d) < 1000:
+    if not Decimal("0.001") <= abs(d) < plafond:
         return None
     q = Decimal("0.01") if abs(d) >= Decimal("0.01") else Decimal(1).scaleb(d.adjusted() - 1)
     return d.quantize(q, rounding=ROUND_HALF_UP)
 
 
-def ecrire_decimal(d):
-    """−0,68 (virgule décimale, signe moins typographique) ; l'opposé de 0 s'écrit 0."""
-    return format(d if d != 0 else Decimal(0), "f").replace(".", ",").replace("-", "−")
+def decimal_tex(d):
+    """Un Decimal écrit en TeX, notation suisse (`moteur/nombres.py`) : −0{,}68, 1\\text{’}234{,}57 ; l'opposé de 0 s'écrit 0. Les
+    valeurs approchées s'écrivent dans la formule, après « \\approx » (question 15)."""
+    return formater_decimal(format(d if d != 0 else Decimal(0), "f"), tex=True)
 
 
 def valeur_verifiee(f, fe, a, sp, mpmath):
@@ -686,12 +730,12 @@ def valeur_en(f, fe, a, sp, mpmath):
     r = (dec if abs(dec) < 1000 else None) if entier else arrondi(dec)
     if r is None:
         return None
-    return {"tex": ecrit, "entier": entier, "arrondi": r, "approx": None if entier else ecrire_decimal(r)}
+    return {"tex": ecrit, "entier": entier, "arrondi": r, "approx": None if entier else decimal_tex(r)}
 
 
 def _egalite(nom, v):
-    """« f(1) = −5e^{−2} ≈ −0,68 » (entier exact : sans « ≈ »)."""
-    return rf"\({nom} = {v['tex']}\)" + ("" if v["approx"] is None else f" ≈ {v['approx']}")
+    """« f(1) = −5e^{−2} ≈ −0,68 », la valeur approchée dans la formule (entier exact : sans « ≈ »)."""
+    return rf"\({nom} = {v['tex']}" + ("" if v["approx"] is None else rf" \approx {v['approx']}") + r"\)"
 
 
 def contre_exemple(f, fe, ivs, differe, sp, mpmath):
@@ -711,8 +755,8 @@ def _pas_impaire(f, fe, ivs, sp, mpmath):
     if dans_ed(ivs, F(0), sp):
         v0 = valeur_en(f, fe, F(0), sp, mpmath)
         if v0 is not None and v0["arrondi"] != 0:
-            approx = "" if v0["approx"] is None else f" (≈ {v0['approx']})"
-            return [_ligne(rf"\(f(0) = {v0['tex']} \neq 0\){approx}"),
+            approx = "" if v0["approx"] is None else rf" \approx {v0['approx']}"
+            return [_ligne(rf"\(f(0) = {v0['tex']}{approx} \neq 0\)"),
                     _ligne(r"Une fonction impaire vérifie \(f(0) = 0\) : f n'est pas impaire.")]
     ce = contre_exemple(f, fe, ivs, lambda u, v: -u != v, sp, mpmath)
     if ce is None:
@@ -720,8 +764,7 @@ def _pas_impaire(f, fe, ivs, sp, mpmath):
     a, va, vm = ce
     ta, tm = qtex(a), qtex(-a)
     oppose = -va["arrondi"] if va["arrondi"] != 0 else va["arrondi"]
-    moins = (rf"\(-f({ta}) = {ecrire_decimal(oppose).replace('−', '-')}\)" if va["entier"]
-             else rf"\(-f({ta})\) ≈ {ecrire_decimal(oppose)}")
+    moins = rf"\(-f({ta}) {'=' if va['entier'] else chr(92) + 'approx'} {decimal_tex(oppose)}\)"
     return [_ligne(_egalite(f"f({ta})", va) + ", donc " + moins), _ligne(_egalite(f"f({tm})", vm)),
             _ligne(rf"\(f({tm}) \neq -f({ta})\) : f n'est pas impaire.")]
 
@@ -892,12 +935,39 @@ def etapes_polynome(P):
         return None
     lignes, _, k, facteurs = r
     etapes = [([ptex(P, "x") + " = 0"], None)] + [([e + " = 0"], methode) for e, methode in lignes]
-    chaines = ([[(["x = 0"], None)]] if k > 0 else []) + [etapes_polynome(h) for h in facteurs]
+    chaines = ([[(["x = 0"], None)]] if k > 0 else []) + [_dans_un_produit(h) for h in facteurs]
     if any(ch is None for ch in chaines):
         return None
     if len(chaines) == 1:
         return etapes + chaines[0][1:]
     return etapes + _en_parallele(chaines, "produit nul")
+
+
+def _dans_un_produit(P):
+    """Chaîne du facteur P d'un produit nul : un facteur x − r s'écrit directement x = r (« (x − 1)(x − 3) = 0 ⇔ x = 1 ou x = 3
+    (produit nul) », question 11, comme la ligne des zéros de f′, Q56) ; sinon `etapes_polynome`."""
+    P = pn(P)
+    if deg(P) == 1 and P[1] == 1:
+        return [([f"x = {qtex(-P[0])}"], None)]
+    return etapes_polynome(P)
+
+
+def _x_moins_r(h):
+    """h est écrit x − r (ou x + r)."""
+    P = polynome_ecrit(h)
+    return P is not None and deg(P) == 1 and P[1] == 1
+
+
+def facteurs_ecrits(h):
+    """La factorisation de h que la chaîne de la partie 3 écrit (mise en évidence, Somme-Produit : `etapes_polynome`) : (c, k,
+    facteurs), h = c·xᵏ·∏ facteurs (polynômes) ; None si la chaîne n'en écrit pas (affine, ax² + c, x, autre fonction)."""
+    if isinstance(h, X):
+        return None
+    P = polynome_ecrit(h)
+    if P is None or P == [F(0), F(1)] or (deg(P) in (1, 2) and resolution_polynome(P) is not None):
+        return None
+    r = _factoriser(P)
+    return None if r is None else r[1:]
 
 
 def etapes_facteur(h, items):
@@ -943,18 +1013,17 @@ def appartient(ivs, v, sp):
 
 
 def approchee(v, sp):
-    """Valeur approchée affichée d'un nombre SymPy (texte, à écrire après « ≈ »), None pour un entier exact (écrit tel quel) ou une
-    valeur sans écriture convenue : decisions.md §2 entre 10⁻³ et 1000 ; R13 sous 10⁻³ et dès 10⁶ (3,162 × 10⁻⁵, notation
-    scientifique, question 1 de suivi.md) ; entre 1000 et 10⁶, aucune (séparateur des milliers pas encore tranché pour l'EC)."""
+    """Valeur approchée affichée d'un nombre SymPy, en TeX (à écrire dans la formule, après « \\approx », question 15), None pour un
+    entier exact (écrit tel quel) : decisions.md §2 entre 10⁻³ et 10⁶ (séparateur des milliers ’ dès 1000 : 1’234,57, question 28) ;
+    R13 sous 10⁻³ et dès 10⁶ (3,162 × 10⁻⁵, notation scientifique, question 1)."""
     if v.is_Integer:
         return None
     with localcontext() as ctx:
         ctx.prec = 50
         d = Decimal(str(sp.N(v, CHIFFRES)))
-        if Decimal("0.001") <= abs(d) < 1000:
-            return ecrire_decimal(arrondi(d))
-        if Decimal(1000) <= abs(d) < Decimal(10) ** 6:
-            return None
+        r = arrondi(d, plafond=Decimal(10) ** 6)
+        if r is not None:
+            return decimal_tex(r)
         e = d.adjusted()
         m = (d.scaleb(-e)).quantize(Decimal("0.001"), rounding=ROUND_HALF_UP)
         if abs(m) >= 10:
@@ -962,12 +1031,14 @@ def approchee(v, sp):
             m = (d.scaleb(-e)).quantize(Decimal("0.001"), rounding=ROUND_HALF_UP)
     t = format(m, "f")
     t = t[:-4] if t.endswith(".000") else t
-    return r"\(" + t.replace(".", "{,}") + r" \times 10^{" + str(e) + r"}\)"
+    return t.replace(".", "{,}") + r" \times 10^{" + str(e) + "}"
 
 
-def _avec_approx(texte, v, sp):
+def formule_approx(corps, v, sp):
+    """« \\(corps \\approx a\\) » : la formule, puis la valeur approchée de v dans la formule (question 15) ; sans « ≈ » pour un
+    entier exact ou une valeur sans écriture convenue."""
     a = approchee(v, sp)
-    return texte if a is None else f"{texte} ≈ {a}"
+    return rf"\({corps}" + ("" if a is None else rf" \approx {a}") + r"\)"
 
 
 # ---------- confirmation du signe (principe 0.2) ----------
@@ -1087,6 +1158,7 @@ def _zeros_et_signe(f, ivs, ED, sp, mpmath):
     denominateur = [(h, k) for h, k in facs if k < 0 and not est_exponentielle(h)]
     blocs = _positives(expos, f, ivs, seule=not numerateur and not denominateur and c > 0)
     zeros, rejetes, chaines, items = [], [], [], []
+    ecrite = False                                           # la chaîne de f(x) = 0 est écrite (et non les lignes de l'outil ED)
     for h, _ in numerateur:
         zh, it = zeros_facteur(h)
         zeros += zh
@@ -1104,7 +1176,7 @@ def _zeros_et_signe(f, ivs, ED, sp, mpmath):
             raise Doute()                                    # l'appartenance exacte et la sonde ne s'accordent pas
         if not dedans:
             rejetes.append(z)
-    finale = " ou ".join(_avec_approx(rf"\(x = {z.tex}\)", _sympy_num(z, sp), sp) for z in zeros)
+    finale = " ou ".join(formule_approx(rf"x = {z.tex}", _sympy_num(z, sp), sp) for z in zeros)
     if numerateur:
         etapes = [([tex(f) + " = 0"], None)]
         proprietes = (["car " + " et ".join(rf"\({tex(h)} > 0\)" for h in expos)] if expos else []) + \
@@ -1118,10 +1190,12 @@ def _zeros_et_signe(f, ivs, ED, sp, mpmath):
                 etapes.append(([tex(h) + " = 0"], None))
             tout = None if chaines[0] is None else etapes + chaines[0][1:]        # etapes finit sur « h = 0 », 1ʳᵉ étape de sa chaîne
         else:
-            tout = None if any(ch is None for ch in chaines) else etapes + _en_parallele(chaines, "produit nul")
+            directes = [_dans_un_produit(polynome_ecrit(h)) if _x_moins_r(h) else ch for (h, _), ch in zip(numerateur, chaines)]
+            tout = None if any(ch is None for ch in directes) else etapes + _en_parallele(directes, "produit nul")
         if tout is not None and sorted(set(tout[-1][0])) != sorted({rf"x = {z.tex}" for z in zeros}):
             tout = None                                      # la chaîne ne finit pas sur les zéros calculés : rédaction de l'outil ED
         if tout is not None:
+            ecrite = True
             blocs += [_ligne_chaine(i, alt, p) for i, (alt, p) in enumerate(tout[:-1])]
             fin = (r"\(\iff\) " if len(tout) > 1 else "") + (finale or "")
             blocs.append(_ligne(fin + (f" ({tout[-1][1]})" if tout[-1][1] else "")))
@@ -1141,7 +1215,8 @@ def _zeros_et_signe(f, ivs, ED, sp, mpmath):
     zeros_ed = [z for z in zeros if z not in rejetes]
     D = fusion(ED)
     Z = points(zeros_ed)
-    crit, lignes, _ = dv.tableau_signes(f, Z, D, ED, "f(x)", c, facs)
+    c_tab, facs_tab = lignes_du_tableau(f, c, facs, sp, mpmath) if ecrite else (c, facs)
+    crit, lignes, _ = dv.tableau_signes(f, Z, D, ED, "f(x)", c_tab, facs_tab)
     cellules = lignes[-1]["cells"]
     confirmer_signe(f, fe, crit, cellules, zeros_ed, ivs, sp, mpmath)
     signes = {cellules[2 * i] for i in range(len(crit) + 1)} - {"x"}
@@ -1156,6 +1231,77 @@ def _zeros_et_signe(f, ivs, ED, sp, mpmath):
     return blocs, tableau, zeros_ed
 
 
+def arbre_polynome(P):
+    """L'arbre d'un polynôme à coefficients entiers, écrit comme `ptex` (x² − 3, x − 1) ; None si l'écriture diffère."""
+    P = pn(P)
+    out = None
+    for i in range(len(P) - 1, -1, -1):
+        a = P[i]
+        if a == 0:
+            continue
+        mono = Nb(abs(a)) if i == 0 else (X() if i == 1 else Op("^", X(), Nb(i)))
+        if i > 0 and abs(a) != 1:
+            mono = Op("*", Nb(abs(a)), mono)
+        out = (mono if a > 0 else Neg(mono)) if out is None else Op("+" if a > 0 else "-", out, mono)
+    return out if out is not None and tex(out) == ptex(P, "x") else None
+
+
+def lignes_du_tableau(f, c, facs, sp, mpmath):
+    """Lignes du tableau de signes de f (question 23) : chaque facteur que la chaîne de f(x) = 0 a factorisé (mise en évidence,
+    Somme-Produit) est remplacé par les facteurs écrits (x² − 4x + 3 → x − 1, x − 3 ; x³ − 3x → x, x² − 3). Garde-fou : la constante
+    fois le produit des lignes est égal à f, exactement (SymPy) et à la sonde (mpmath) ; sinon les lignes d'avant, (c, facs)."""
+    nouvelles, cn, change = [], F(c), False
+
+    def ajouter(h, k):
+        for i, (g, kg) in enumerate(nouvelles):
+            if g.key() == h.key():
+                nouvelles[i] = (g, kg + k)
+                return
+        nouvelles.append((h, k))
+    for h, k in facs:
+        ecrits = facteurs_ecrits(h) if k > 0 and not est_exponentielle(h) else None
+        arbres = None if ecrits is None else [arbre_polynome(Q) for Q in ecrits[2]]
+        if arbres is None or any(a is None for a in arbres):
+            ajouter(h, k)
+            continue
+        c2, kx, _ = ecrits
+        cn *= F(c2) ** k
+        if kx:
+            ajouter(X(), kx * k)
+        for a in arbres:
+            ajouter(a, k)
+        change = True
+    if not change:
+        return c, facs
+    try:
+        produit = sp.Rational(cn.numerator, cn.denominator)
+        for h, k in nouvelles:
+            produit *= en_sympy_reel(h) ** k
+        d = produit - en_sympy_reel(f)
+        if not (d == 0 or sp.simplify(d) == 0):
+            return c, facs
+        mp, vues = mpmath.mp, 0
+        for t in POINTS_SONDE:
+            for x in (mp.mpf(t), -mp.mpf(t)):
+                v = valeur_mp(f, x)
+                if v is None:
+                    continue
+                p = mp.mpf(cn.numerator) / cn.denominator
+                for h, k in nouvelles:
+                    w = valeur_mp(h, x)
+                    if w is None or (w == 0 and k < 0):
+                        return c, facs
+                    p *= w ** k
+                if abs(p - v) > mp.mpf(EGAL) * (1 + abs(v)):
+                    return c, facs
+                vues += 1
+        if vues < 3:
+            return c, facs
+    except Exception:
+        return c, facs
+    return cn, nouvelles
+
+
 def _ordonnee(f, ivs, sp, mpmath):
     """(blocs de la carte « Ordonnée à l'origine », valeur SymPy de f(0) ou None si 0 ∉ ED) : f(0) exact puis ≈ et le point
     (0 ; f(0)), ou « 0 ∉ ED » ; Doute sinon. Quand la partie 1 a nommé g (f = e^{g(x)}), g(0) est calculé d'abord (« g(0) =
@@ -1168,7 +1314,7 @@ def _ordonnee(f, ivs, sp, mpmath):
     if v is None:
         raise Doute()
     ecrit, V, _ = v
-    egalite = _avec_approx(rf"\(f(0) = {ecrit}\)", V, sp)
+    egalite = formule_approx(rf"f(0) = {ecrit}", V, sp)
     if mise_en_forme(f) is not None:
         P, Q = polynome_ecrit(f.a.a), polynome_ecrit(f.a.b)
         h0, b0 = P[0], Q[0]
@@ -1176,7 +1322,7 @@ def _ordonnee(f, ivs, sp, mpmath):
         if tex(Fn("exp", nombre(g0))) == ecrit and abs(valeur_mp(f.a, mpmath.mp.mpf(0)) - mpmath.mp.mpf(g0.numerator) / g0.denominator) \
                 <= mpmath.mp.mpf(EGAL):
             calcul = qtex(g0) if b0 == 1 else rf"\frac{{{qtex(h0)}}}{{{qtex(b0)}}} = {qtex(g0)}"
-            egalite = _avec_approx(rf"\(g(0) = {calcul}\), donc \(f(0) = {ecrit}\)", V, sp)
+            egalite = rf"\(g(0) = {calcul}\), donc " + formule_approx(rf"f(0) = {ecrit}", V, sp)
     return [_ligne(egalite + "."), _ligne(rf"Le graphe coupe l'axe des y au point \((0\,;\,{ecrit})\).")], V
 
 
@@ -1407,7 +1553,7 @@ def _justification_globale(e, s, bornes, autres):
         parties_j.append(("limite " if une_seule else "limites ") + _liste_tex(morceaux))
     comparatif = "plus petites" if s > 0 else "plus grandes"
     precision = f" ({' ; '.join(parties_j)})" if parties_j else ""          # ED fermé (√(4 − x²)) : aucune limite à citer
-    return f"Global : les autres valeurs de f sont {comparatif}{precision}."
+    return f"Les autres valeurs de f sont {comparatif}{precision}."          # après « Maximum global … » (§2 révisé, question 43)
 
 
 def statut_global(e, extrema, ivs, crit, cellules, limites, f, sp, mp):
@@ -1457,20 +1603,21 @@ def statut_global(e, extrema, ivs, crit, cellules, limites, f, sp, mp):
 
 
 def _approchee_point(e, X, Y, sp):
-    """« ≈ (1,10 ; 9) » : chaque coordonnée non entière arrondie (approchee : decisions.md §2 et R13), l'entière telle quelle ; ""
-    si les deux sont entières ou si une valeur n'a pas d'écriture approchée convenue."""
+    """« \\approx \\left(1{,}10\\,;\\,9\\right) » (dans la formule du point, question 15) : chaque coordonnée non entière arrondie
+    (approchee : decisions.md §2 et R13), l'entière telle quelle ; "" si les deux sont entières ou si une valeur n'a pas d'écriture
+    approchée convenue."""
     if X.is_Integer and Y.is_Integer:
         return ""
     morceaux = []
     for V in (X, Y):
         if V.is_Integer:
-            morceaux.append(str(int(V)).replace("-", "−"))
+            morceaux.append(formater_entier(int(V), tex=True))
         else:
             a = approchee(V, sp)
             if a is None:
                 return ""
             morceaux.append(a)
-    return f" ≈ ({morceaux[0]} ; {morceaux[1]})"
+    return rf" \approx \left({morceaux[0]}\,;\,{morceaux[1]}\right)"
 
 
 def valeur_par_l_exposant(f, e, sp, mp):
@@ -1499,20 +1646,168 @@ def valeur_par_l_exposant(f, e, sp, mp):
     else:
         calcul = rf"\frac{{{qtex(h0)}}}{{{qtex(b0)}}} = {qtex(g0)}"
     x = e["x_tex"]
-    return _ligne(_avec_approx(rf"\(g({x}) = {calcul}\), donc \(f({x}) = {e['f_tex']}\)", Y, sp) + ".")
+    return _ligne(rf"\(g({x}) = {calcul}\), donc " + formule_approx(rf"f({x}) = {e['f_tex']}", Y, sp) + ".")
+
+
+# ---------- valeur d'un extremum par substitution (question 41) ----------
+def _x0_arbre(X, sp):
+    """L'arbre de x₀ (nombre SymPy) quand il est rationnel, ln(q) ou e^{q} (q rationnel) : ce que la substitution sait écrire et
+    calculer ; None sinon (3 − 2√2…)."""
+    def rationnel(v):
+        return v.is_Rational and v.is_finite
+    if rationnel(X):
+        return nombre(F(int(X.p), int(X.q)))
+    if X.func == sp.log and len(X.args) == 1 and rationnel(X.args[0]) and X.args[0] > 0:
+        return Fn("ln", nombre(F(int(X.args[0].p), int(X.args[0].q))))
+    if X == sp.E:
+        return E()
+    if X.func == sp.exp and rationnel(X.args[0]):
+        return Fn("exp", nombre(F(int(X.args[0].p), int(X.args[0].q))))
+    return None
+
+
+def _feuille(texte):
+    """Une feuille qui s'écrit `texte` (substitution ÉCRITE, comme MOINS_X : jamais évaluée)."""
+    return Nb(F(0), texte)
+
+
+def substitution_ecrite(f, x0):
+    """L'arbre de f(x₀) tel qu'il s'écrit : x₀ entre parenthèses quand il est négatif, fractionnaire ou base d'une puissance (sauf
+    entier positif ou e) ; sans parenthèses en argument d'une fonction ou en exposant (e^{ln(3)}, ln(e^{−1}))."""
+    t = tex(x0)
+    nu = _feuille(t)
+    simple = isinstance(x0, E) or (isinstance(x0, Nb) and x0.v.denominator == 1)
+    entre = nu if simple or isinstance(x0, Fn) else _feuille(r"\left(" + t + r"\right)")
+    base = nu if simple else _feuille(r"\left(" + t + r"\right)")
+
+    def rec(n, place):
+        if isinstance(n, X):
+            return {"nu": nu, "base": base}.get(place, entre)
+        if isinstance(n, (Nb, E)):
+            return n
+        if isinstance(n, Neg):
+            return Neg(rec(n.a, None))
+        if isinstance(n, Fn):
+            return Fn(n.nom, rec(n.a, "nu"))
+        if n.op == "^":
+            return Op("^", rec(n.a, "base"), rec(n.b, "nu"))
+        return Op(n.op, rec(n.a, None), rec(n.b, None))
+    return rec(f, "nu")
+
+
+def _sans_somme(n):
+    """n ne contient aucune somme ni différence (seulement puissances, produits, quotients, opposés, fonctions)."""
+    if isinstance(n, Op):
+        return n.op not in "+-" and _sans_somme(n.a) and _sans_somme(n.b)
+    if isinstance(n, (Neg, Fn)):
+        return _sans_somme(n.a)
+    return True
+
+
+def calculer_produits(n):
+    """Première étape du calcul de f(x₀) : les puissances, produits et quotients de nombres sont calculés ((−2)² = 4,
+    −2·(−2) = 4), ainsi que e^{ln q} = q, ln(e^{q}) = q, ln(e) = 1, e⁰ = 1, 1·a = a et 0·a = 0 (jamais « 1e^{−1} », qui se lirait
+    comme une notation scientifique) ; les sommes restent ((4 − 6)e⁴)."""
+    if isinstance(n, (Nb, E, X)):
+        return n
+    if isinstance(n, Neg):
+        a = calculer_produits(n.a)
+        m = a.a if isinstance(a, Neg) and isinstance(a.a, Nb) else Neg(a)
+    elif isinstance(n, Fn):
+        a = calculer_produits(n.a)
+        if n.nom == "exp" and isinstance(a, Fn) and a.nom == "ln":
+            return a.a
+        if n.nom == "ln" and isinstance(a, E):
+            return Nb(1)
+        if n.nom == "ln" and isinstance(a, Fn) and a.nom == "exp":
+            return a.a
+        if n.nom == "exp" and valeur_constante(a) == 0:
+            return Nb(1)
+        m = Fn(n.nom, a)
+    else:
+        a, b = calculer_produits(n.a), calculer_produits(n.b)
+        va, vb = valeur_constante(a), valeur_constante(b)
+        if n.op == "^" and isinstance(a, E) and isinstance(b, Fn) and b.nom == "ln":
+            return b.a
+        if n.op == "^" and isinstance(a, E) and vb == 0:
+            return Nb(1)
+        if n.op == "*" and (va == 0 or vb == 0):
+            return Nb(0)
+        if n.op == "*" and (va == 1 or vb == 1):
+            return b if va == 1 else a
+        m = Op(n.op, a, b)
+    if _sans_somme(m) and not isinstance(m, (Nb, E)):
+        v = valeur_constante(m)
+        if v is not None:
+            return nombre(v)
+    return m
+
+
+NOMBRE_FRACTIONNAIRE = re.compile(r"\d\s*\\d?frac")        # un chiffre collé à une fraction : 4\frac{2}{3} (« quatre et deux tiers »)
+
+
+def _ecriture(t):
+    return re.sub(r"\s+", "", t)
+
+
+def valeur_par_substitution(f, e, sp, mpmath):
+    """« f(−2) = ((−2)² − 6)e^{−2·(−2)} = (4 − 6)e⁴ = −2e⁴ ≈ −109,20. » (question 41) : substitution, puis puissances et produits de
+    nombres calculés, puis le reste (`plier`), puis l'écriture de l'extremum (f_tex) ; x₀ rationnel, ln(q) ou e^{q}. Chaque membre
+    est vérifié égal à f(x₀) par SymPy (calcul exact) et par la sonde mpmath ; None sinon (aucune ligne)."""
+    mp = mpmath.mp
+    X, Y = _sympy_de_py(e["x_py"], sp), _sympy_de_py(e["f_py"], sp)
+    x0 = _x0_arbre(X, sp)
+    if x0 is None or _ecriture(tex(x0)) != _ecriture(e["x_tex"]):
+        return None
+    fe = en_sympy_reel(f)
+    V = fe.subs(SYMPY["x"], X)
+    if V.has(sp.zoo, sp.nan, sp.oo, -sp.oo) or V.is_real is not True or sp.simplify(V - Y) != 0:
+        return None
+    reference = _mp_de(V, sp, mp)
+    seuil = mp.mpf(EGAL) * (1 + abs(reference))
+    sonde_f = valeur_mp(f, _mp_de(X, sp, mp))
+    if sonde_f is None or abs(sonde_f - reference) > seuil:
+        return None
+    reel = substituer(f, x0)
+    etape = calculer_produits(reel)
+    membres = [(tex(substitution_ecrite(f, x0)), reel), (tex(etape), etape)]
+    fin = plier(etape)                      # les sommes calculées : écrites si elles donnent un nombre ou l'écriture de l'extremum
+    if valeur_constante(fin) is not None or _ecriture(tex(fin)) == _ecriture(e["f_tex"]):
+        membres.append((tex(fin), fin))
+    for _, T in membres:                     # chaque membre égal à f(x₀) : SymPy exact, puis la sonde
+        d = en_sympy_reel(T) - V
+        if not (d == 0 or sp.simplify(d) == 0):
+            return None
+        sonde = valeur_mp(T, mp.mpf(0))
+        if sonde is None or abs(sonde - reference) > seuil:
+            return None
+    ecrits = []
+    for t, _ in membres:
+        if NOMBRE_FRACTIONNAIRE.search(t):
+            return None                     # « 2\frac{1}{2} » se lirait 2 + 1/2 : aucune ligne plutôt qu'une écriture ambiguë
+        if not ecrits or _ecriture(t) != _ecriture(ecrits[-1]):
+            ecrits.append(t)
+    if _ecriture(ecrits[-1]) == _ecriture(e["f_tex"]):
+        ecrits[-1] = e["f_tex"]
+    else:
+        ecrits.append(e["f_tex"])           # égale à f(x₀) : f_py = Y, vérifié ci-dessus (SymPy et sonde)
+    if len(ecrits) < 2:
+        return None
+    return _ligne(formule_approx(rf"f({e['x_tex']}) = " + " = ".join(ecrits), Y, sp) + ".")
 
 
 def _ligne_extremum(e, crit, cellules, statut, sp, mp, f):
-    nom = "Maximum local" if e["genre"].startswith("maximum") else "Minimum local"
+    """« Maximum global en x = 0 : (0 ; 1) (f′ passe de + à −). Les autres valeurs … » quand c'est prouvé, « Maximum local en … Pas
+    global : … », sinon « Maximum local en … » seul (decisions.md §2 révisé, question 43)."""
     x = e["x_tex"]
-    t = rf"<b>{nom}</b> en \(x = {x}\)"
+    t = ""
     if "f_py" in e:
         X, Y = _sympy_de_py(e["x_py"], sp), _sympy_de_py(e["f_py"], sp)
-        t += rf" : \(\left({x}\,;\,{e['f_tex']}\right)\)"
         sonde = valeur_mp(f, _mp_de(X, sp, mp))
         if sonde is not None and abs(sonde - _mp_de(Y, sp, mp)) <= mp.mpf(EGAL) * (1 + abs(sonde)):
-            t += _approchee_point(e, X, Y, sp)
+            t += rf" : \(\left({x}\,;\,{e['f_tex']}\right){_approchee_point(e, X, Y, sp)}\)"
         else:
+            t += rf" : \(\left({x}\,;\,{e['f_tex']}\right)\)"
             statut = None                                    # la sonde ne retrouve pas f(x₀) : ni ≈ ni « global »
     elif e["f_tex"] != "?":
         t += rf" : \(f({x}) {'' if e['f_tex'].startswith('{' + chr(92) + 'approx}') else '= '}{e['f_tex']}\)"
@@ -1522,6 +1817,9 @@ def _ligne_extremum(e, crit, cellules, statut, sp, mp, f):
         if g in ("+", "-") and d in ("+", "-") and g != d:
             t += rf" (\(f'\) passe de \({g}\) à \({d}\))"
     t += "."
+    portee = "global" if statut is not None and statut[0] == "global" else "local"
+    nom = ("Maximum " if e["genre"].startswith("maximum") else "Minimum ") + portee
+    t = rf"<b>{nom}</b> en \(x = {x}\)" + t
     if statut is not None:
         t += " " + statut[1]
     return t
@@ -1554,8 +1852,8 @@ def blocs_extremums(dv, limites, analyse):
             for e in extrema:
                 ligne, statut = None, None
                 if "f_py" in e:
-                    try:
-                        ligne = valeur_par_l_exposant(f, e, sp, mp) if g_nomme else None
+                    try:                                  # g nommé : g(x₀) d'abord (P7b) ; sinon la substitution (question 41)
+                        ligne = (valeur_par_l_exposant(f, e, sp, mp) if g_nomme else None) or valeur_par_substitution(f, e, sp, mpmath)
                     except Exception:
                         ligne = None
                     try:

@@ -18,7 +18,7 @@ OUTILS = {
                             "resoudre_ed", "ln(x-1)"),
     "derivee-variations": (BASE + [DV, "derivee-variations/resoudre_dv.py"], "resoudre_dv", "x^2"),
     "limites-asymptotes": (BASE + [LA, RB, "limites-asymptotes/resoudre_la.py"], "resoudre_la", "1/x"),
-    "etude-complete": (BASE + [DV, LA, RB, "derivee-variations/resoudre_dv.py", "limites-asymptotes/resoudre_la.py",
+    "etude-complete": (BASE + ["moteur/nombres.py", DV, LA, RB, "derivee-variations/resoudre_dv.py", "limites-asymptotes/resoudre_la.py",
                                "ensemble-definition/resoudre_ed.py", "etude-complete/etude_complete.py", "etude-complete/parties.py",
                                "etude-complete/resoudre_ec.py"], "resoudre_ec", "1/x"),
     "factorisation": (BASE + ["factorisation/factorisation.py", "factorisation/resoudre_fa.py"], "resoudre_fa", "x^2-1"),

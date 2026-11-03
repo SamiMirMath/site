@@ -132,9 +132,14 @@ class TestResolutionDenominateur(unittest.TestCase):
         "1/(x^2-8)": r"On résout \(x^{2} - 8 = 0 \iff x^{2} = 8 \iff x = -2\sqrt{2} \text{ ou } x = 2\sqrt{2}\).",
         "1/(4x^2-1)": r"On résout \(4x^{2} - 1 = 0 \iff 4x^{2} = 1 \iff x^{2} = \frac{1}{4} \iff x = -\frac{1}{2} \text{ ou } x = \frac{1}{2}\).",
         "1/(-x^2+3)": r"On résout \(-x^{2} + 3 = 0 \iff -x^{2} = -3 \iff x^{2} = 3 \iff x = -\sqrt{3} \text{ ou } x = \sqrt{3}\).",
+        # trinôme unitaire à racines entières : Somme-Produit (question 11), facteurs par racine croissante
+        "1/(x^2-3x+2)": r"On résout \(x^{2} - 3x + 2 = 0 \iff (x - 1)(x - 2) = 0\) (Somme-Produit) \(\iff x = 1 \text{ ou } x = 2\) (produit nul).",
+        "x/(x^2+x-6)": r"On résout \(x^{2} + x - 6 = 0 \iff (x + 3)(x - 2) = 0\) (Somme-Produit) \(\iff x = -3 \text{ ou } x = 2\) (produit nul).",
+        "e^(1/(x^2-7x+10))": r"On résout \(x^{2} - 7x + 10 = 0 \iff (x - 2)(x - 5) = 0\) (Somme-Produit) \(\iff x = 2 \text{ ou } x = 5\) (produit nul).",
     }
-    # formes laissées à l'outil ED : aucune racine, trinôme complet, x seul, écriture factorisée, coefficient fractionnaire, x² = 2/3
-    OUTIL_ED = ("x/(x^2+1)", "1/(x^2-3x+2)", "e^(1/x)", "1/(2(x-3))", "1/(x/2-1)", "1/(3x^2-2)", "1/x^2", "1/(x^3-1)",
+    # formes laissées à l'outil ED : aucune racine, trinôme à racines non entières, racine double, sans terme constant, non unitaire,
+    # x seul, écriture factorisée, coefficient fractionnaire, x² = 2/3
+    OUTIL_ED = ("x/(x^2+1)", "1/(x^2-3x+1)", "1/(x^2-2x+1)", "1/(x^2-4x)", "1/(2x^2-6x+4)", "e^(1/x)", "1/(2(x-3))", "1/(x/2-1)", "1/(3x^2-2)", "1/x^2", "1/(x^3-1)",
                 "x/(1-3e^x)", "1/(ln(x)-1)", "1/(e^x-2)")
 
     def blocs(self, entree):
@@ -180,6 +185,25 @@ class TestResolutionDenominateur(unittest.TestCase):
             self.assertEqual(parties.blocs_condition(c, A), red.blocs_condition(c))
         self.assertEqual(parties.blocs_condition(c, None), red.blocs_condition(c))
         self.assertEqual(parties.blocs_condition(c, lire("x-4")), red.blocs_condition(c))       # arbre d'une autre condition
+
+    def test_garde_fous_somme_produit(self):
+        """Question 11 : ensemble différent de celui de l'outil ED, sonde en désaccord, ou produit développé qui ne redonne pas le
+        trinôme (garde-fou exact de la factorisation) → rédaction de l'outil ED."""
+        c, blocs = self.blocs("1/(x^2-3x+2)")
+        A = arbre_denominateur("1/(x^2-3x+2)")
+        self.assertIn("Somme-Produit", blocs[1]["html"])
+        faux = dict(c, E_tex=r"\mathbb{R} \setminus \left\{1 \,;\, 3\right\}")
+        self.assertEqual(parties.blocs_condition(faux, A), red.blocs_condition(faux))
+        with mock.patch.object(parties, "evaluer", lambda A, x: 1.0):
+            self.assertEqual(parties.blocs_condition(c, A), red.blocs_condition(c))
+        with mock.patch.object(parties, "pmul", lambda p, q: [F(7)]):
+            self.assertIsNone(parties.resolution_somme_produit([F(2), F(-3), F(1)]))
+            self.assertEqual(parties.blocs_condition(c, A), red.blocs_condition(c))
+
+    def test_chaine_en_ligne(self):
+        self.assertEqual(parties.chaine_en_ligne(["a = 0", "b = 0"]), r"\(a = 0 \iff b = 0\)")
+        self.assertEqual(parties.chaine_en_ligne(["a = 0", ("b = 0", "P"), "c = 0", ("d = 0", "Q")]),
+                         r"\(a = 0 \iff b = 0\) (P) \(\iff c = 0 \iff d = 0\) (Q)")
 
 
 class TestCartesDomaine(unittest.TestCase):
@@ -227,10 +251,10 @@ class TestParite(unittest.TestCase):
             r"\( = f(x)\)", parties.PAIRE])],
         "(x^2-6)e^(-2x)": [SYM, ("Pas impaire", [
             r"\(f(0) = -6 \neq 0\)", r"Une fonction impaire vérifie \(f(0) = 0\) : f n'est pas impaire."]), ("Pas paire", [
-            r"\(f(1) = -5e^{-2}\) ≈ −0,68", r"\(f(-1) = -5e^{2}\) ≈ −36,95", r"\(f(-1) \neq f(1)\) : f n'est pas paire.", parties.NI])],
+            r"\(f(1) = -5e^{-2} \approx -0{,}68\)", r"\(f(-1) = -5e^{2} \approx -36{,}95\)", r"\(f(-1) \neq f(1)\) : f n'est pas paire.", parties.NI])],
         "e^x(6-e^x)": [SYM, ("Pas impaire", [
             r"\(f(0) = 5 \neq 0\)", r"Une fonction impaire vérifie \(f(0) = 0\) : f n'est pas impaire."]), ("Pas paire", [
-            r"\(f(1) = e\,\left(6 - e\right)\) ≈ 8,92", r"\(f(-1) = e^{-1}\,\left(6 - e^{-1}\right)\) ≈ 2,07",
+            r"\(f(1) = e\,\left(6 - e\right) \approx 8{,}92\)", r"\(f(-1) = e^{-1}\,\left(6 - e^{-1}\right) \approx 2{,}07\)",
             r"\(f(-1) \neq f(1)\) : f n'est pas paire.", parties.NI])],
         "e^(2/(x^2-4))": [SYM, ("Calcul de f(−x)", [
             r"\(f(-x) = e^{\frac{2}{\left(-x\right)^{2} - 4}}\) (on remplace x par −x)",
@@ -247,9 +271,9 @@ class TestParite(unittest.TestCase):
             r"\( = x^{4} - 2x^{2}\) (car \(\left(-x\right)^{4} = x^{4}\) et \(\left(-x\right)^{2} = x^{2}\))",
             r"\( = f(x)\)", parties.PAIRE])],
         "e^(1/x)": [SYM, ("Pas impaire", [
-            r"\(f(1) = e\) ≈ 2,72, donc \(-f(1)\) ≈ −2,72", r"\(f(-1) = e^{-1}\) ≈ 0,37",
+            r"\(f(1) = e \approx 2{,}72\), donc \(-f(1) \approx -2{,}72\)", r"\(f(-1) = e^{-1} \approx 0{,}37\)",
             r"\(f(-1) \neq -f(1)\) : f n'est pas impaire."]), ("Pas paire", [
-            r"\(f(1) = e\) ≈ 2,72", r"\(f(-1) = e^{-1}\) ≈ 0,37", r"\(f(-1) \neq f(1)\) : f n'est pas paire.", parties.NI])],
+            r"\(f(1) = e \approx 2{,}72\)", r"\(f(-1) = e^{-1} \approx 0{,}37\)", r"\(f(-1) \neq f(1)\) : f n'est pas paire.", parties.NI])],
         "x^2-4x+3": [SYM, ("Pas impaire", [
             r"\(f(0) = 3 \neq 0\)", r"Une fonction impaire vérifie \(f(0) = 0\) : f n'est pas impaire."]), ("Pas paire", [
             r"\(f(1) = 0\)", r"\(f(-1) = 8\)", r"\(f(-1) \neq f(1)\) : f n'est pas paire.", parties.NI])],
@@ -258,9 +282,9 @@ class TestParite(unittest.TestCase):
             r"\( = -x^{3} + x\) (car \(\left(-x\right)^{3} = -x^{3}\) ; règle des signes)",
             r"\( = -\left(x^{3} - x\right)\) (mise en évidence de −1)", r"\( = -f(x)\)", parties.IMPAIRE])],
         "x^2*e^x": [SYM, ("Pas impaire", [
-            r"\(f(1) = e\) ≈ 2,72, donc \(-f(1)\) ≈ −2,72", r"\(f(-1) = e^{-1}\) ≈ 0,37",
+            r"\(f(1) = e \approx 2{,}72\), donc \(-f(1) \approx -2{,}72\)", r"\(f(-1) = e^{-1} \approx 0{,}37\)",
             r"\(f(-1) \neq -f(1)\) : f n'est pas impaire."]), ("Pas paire", [
-            r"\(f(1) = e\) ≈ 2,72", r"\(f(-1) = e^{-1}\) ≈ 0,37", r"\(f(-1) \neq f(1)\) : f n'est pas paire.", parties.NI])],
+            r"\(f(1) = e \approx 2{,}72\)", r"\(f(-1) = e^{-1} \approx 0{,}37\)", r"\(f(-1) \neq f(1)\) : f n'est pas paire.", parties.NI])],
         "x^3+x^2": [SYM, ("Pas impaire", [
             r"\(f(1) = 2\), donc \(-f(1) = -2\)", r"\(f(-1) = 0\)", r"\(f(-1) \neq -f(1)\) : f n'est pas impaire."]), ("Pas paire", [
             r"\(f(1) = 2\)", r"\(f(-1) = 0\)", r"\(f(-1) \neq f(1)\) : f n'est pas paire.", parties.NI])],
@@ -286,7 +310,12 @@ class TestParite(unittest.TestCase):
     def test_contre_exemple_a_suivant_si_les_arrondis_coincident(self):
         """x² + x/1000 : pour a = 1, 2, 1/2, 3, 4, 1/3, f(a) et f(−a) ont le même arrondi (1,00 et 1,00…) ; a = 5 : 25,01 et 25,00."""
         pas_paire = dict(resume(cartes_parite("x^2+x/1000")))["Pas paire"]
-        self.assertEqual(pas_paire[:2], [r"\(f(5) = \frac{5001}{200}\) ≈ 25,01", r"\(f(-5) = \frac{4999}{200}\) ≈ 25,00"])
+        self.assertEqual(pas_paire[:2], [r"\(f(5) = \frac{5001}{200} \approx 25{,}01\)", r"\(f(-5) = \frac{4999}{200} \approx 25{,}00\)"])
+
+    def test_f0_non_entier_dans_la_formule(self):
+        """« f(0) = e^{−1/2} ≈ 0,61 ≠ 0 » : la valeur approchée dans la formule (question 15)."""
+        pas_impaire = dict(resume(cartes_parite("e^(x-1/2)")))["Pas impaire"]
+        self.assertEqual(pas_impaire[0], r"\(f(0) = e^{-\frac{1}{2}} \approx 0{,}61 \neq 0\)")
 
     def test_resoudre_place_la_parite_sous_son_intertitre(self):
         for entree in ("e^(-x^2)", "e^((x^2+x-2)/(6x-12))", "(x^2-6)e^(-2x)"):
@@ -330,7 +359,8 @@ def arrondi_oracle(v):
 
 
 def decimal_affiche(t):
-    return Decimal(t.replace("−", "-").replace(",", "."))
+    """« −0,68 », « -0{,}68 » ou « 1\\text{’}234{,}57 » (TeX, séparateur des milliers ’) → Decimal."""
+    return Decimal(t.replace(r"\text{’}", "").replace("{,}", ".").replace("−", "-").replace(",", "."))
 
 
 class TestPariteOracle(unittest.TestCase):
@@ -370,20 +400,20 @@ class TestPariteOracle(unittest.TestCase):
         valeurs = {}
         for titre in ("Pas impaire", "Pas paire"):
             for h in lignes[titre]:
-                m = re.match(r"\\\(f\((.*?)\) = (.*?)( \\neq 0)?\\\)(?: \(?≈ ([−0-9]+(?:,[0-9]+)?)\)?)?", h)
+                m = re.match(r"\\\(f\((.*?)\) = (.*?)(?: \\approx (-?[0-9]+(?:\{,\}[0-9]+)?))?( \\neq 0)?\\\)", h)
                 if not m:
                     continue
                 a = lire_rationnel(m.group(1))
                 v = oracle.valeur(f, mp.mpf(a.numerator) / a.denominator)
                 self.assertIsNotNone(v, (entree, a))
-                if m.group(4):                                            # valeur approchée : l'arrondi de l'oracle
-                    self.assertEqual(decimal_affiche(m.group(4)), arrondi_oracle(v), (entree, h))
-                    affiche = decimal_affiche(m.group(4))
+                if m.group(3):                                            # valeur approchée (dans la formule) : l'arrondi de l'oracle
+                    self.assertEqual(decimal_affiche(m.group(3)), arrondi_oracle(v), (entree, h))
+                    affiche = decimal_affiche(m.group(3))
                 else:                                                     # entier exact
                     self.assertTrue(re.fullmatch(r"-?\d+", m.group(2)), h)
                     self.assertLess(abs(v - int(m.group(2))), mp.mpf(10) ** -40, (entree, h))
                     affiche = Decimal(int(m.group(2)))
-                if m.group(3):
+                if m.group(4):
                     self.assertNotEqual(affiche, 0, (entree, h))
                 valeurs[(titre, a)] = affiche
         pi = {a: v for (t, a), v in valeurs.items() if t == "Pas impaire"}
@@ -509,9 +539,13 @@ class TestGardeFousParite(unittest.TestCase):
         self.assertEqual(parties.arrondi(Decimal("0.0074363")), Decimal("0.0074"))
         self.assertEqual(parties.arrondi(Decimal("0.125")), Decimal("0.13"))
         self.assertIsNone(parties.arrondi(Decimal("0.00045")))
-        self.assertIsNone(parties.arrondi(Decimal("1234.5")))
-        self.assertEqual(parties.ecrire_decimal(Decimal("-0.68")), "−0,68")
-        self.assertEqual(parties.ecrire_decimal(-Decimal(0)), "0")
+        self.assertIsNone(parties.arrondi(Decimal("1234.5")))                          # partie 2 : [10⁻³ ; 1000[ (question 19)
+        self.assertEqual(parties.arrondi(Decimal("1234.567"), plafond=10 ** 6), Decimal("1234.57"))
+        self.assertIsNone(parties.arrondi(Decimal("1234567"), plafond=10 ** 6))
+        self.assertEqual(parties.decimal_tex(Decimal("-0.68")), "-0{,}68")
+        self.assertEqual(parties.decimal_tex(-Decimal(0)), "0")
+        self.assertEqual(parties.decimal_tex(Decimal("-1234.57")), r"-1\text{’}234{,}57")      # séparateur des milliers (question 28)
+        self.assertEqual(parties.decimal_tex(Decimal("999999.99")), r"999\text{’}999{,}99")
 
     def test_parite_lue_et_plier(self):
         for entree, p in (("e^(-x^2)", 1), ("x^3-3x", -1), ("x/(x^2+1)", -1), ("x^(2/3)", 1), ("x^(1/3)", None), ("e^x+e^(-x)", None),
@@ -561,7 +595,7 @@ class TestZerosSigne(unittest.TestCase):
     CARTES = {
         "e^((x^2+x-2)/(6x-12))": [
             ("Zéros et signe de f", [rf"\(e^{{g(x)}} > 0\) pour tout \(x \in ED\) {POSITIVE}.", r"Donc f n'a pas de zéro et \(f(x) > 0\) sur ED."]),
-            ordonnee(r"\(g(0) = \frac{-2}{-12} = \frac{1}{6}\), donc \(f(0) = e^{\frac{1}{6}}\) ≈ 1,18.",
+            ordonnee(r"\(g(0) = \frac{-2}{-12} = \frac{1}{6}\), donc \(f(0) = e^{\frac{1}{6}} \approx 1{,}18\).",
                      r"Le graphe coupe l'axe des y au point \((0\,;\,e^{\frac{1}{6}})\).")],
         "e^(-x^2)": [
             ("Zéros et signe de f", [rf"\(e^{{-x^{{2}}}} > 0\) pour tout \(x\) {POSITIVE}.", r"Donc f n'a pas de zéro et \(f(x) > 0\) sur ED."]),
@@ -569,20 +603,20 @@ class TestZerosSigne(unittest.TestCase):
         "(x^2-6)e^(-2x)": [
             ("Zéros de f", [rf"\(e^{{-2x}} > 0\) pour tout \(x\) {POSITIVE} ; il ne s'annule jamais.",
                             r"\(\left(x^{2} - 6\right)\,e^{-2x} = 0\)", r"\(\iff x^{2} - 6 = 0\) (car \(e^{-2x} > 0\))", r"\(\iff x^{2} = 6\)",
-                            r"\(\iff\) \(x = -\sqrt{6}\) ≈ −2,45 ou \(x = \sqrt{6}\) ≈ 2,45"]),
+                            r"\(\iff\) \(x = -\sqrt{6} \approx -2{,}45\) ou \(x = \sqrt{6} \approx 2{,}45\)"]),
             ("Signe de f", [("TABLEAU", [r"-\sqrt{6}", r"\sqrt{6}"], [(r"\left(x^{2} - 6\right)", "+0-0+"), ("e^{-2x}", "+++++"),
                                                                        ("f(x)", "+0-0+")])]),
             ordonnee(r"\(f(0) = -6\).", r"Le graphe coupe l'axe des y au point \((0\,;\,-6)\).")],
         "e^x(6-e^x)": [
             ("Zéros de f", [rf"\(e^{{x}} > 0\) pour tout \(x\) {POSITIVE} ; il ne s'annule jamais.", r"\(e^{x}\,\left(6 - e^{x}\right) = 0\)",
                             r"\(\iff 6 - e^{x} = 0\) (car \(e^{x} > 0\))",
-                            r"\(\iff e^{x} = 6\) (on isole \(e^{x}\) du côté où son coefficient est positif)", r"\(\iff\) \(x = \ln(6)\) ≈ 1,79"]),
+                            r"\(\iff e^{x} = 6\) (on isole \(e^{x}\) du côté où son coefficient est positif)", r"\(\iff\) \(x = \ln(6) \approx 1{,}79\)"]),
             ("Signe de f", [("TABLEAU", [r"\ln(6)"], [("e^{x}", "+++"), (r"\left(6 - e^{x}\right)", "+0-"), ("f(x)", "+0-")])]),
             ordonnee(r"\(f(0) = 5\).", r"Le graphe coupe l'axe des y au point \((0\,;\,5)\).")],
         "e^(2/(x^2-4))": [
             ("Zéros et signe de f", [rf"\(e^{{\frac{{2}}{{x^{{2}} - 4}}}} > 0\) pour tout \(x \in ED\) {POSITIVE}.",
                                      r"Donc f n'a pas de zéro et \(f(x) > 0\) sur ED."]),
-            ordonnee(r"\(f(0) = e^{-\frac{1}{2}}\) ≈ 0,61.", r"Le graphe coupe l'axe des y au point \((0\,;\,e^{-\frac{1}{2}})\).")],
+            ordonnee(r"\(f(0) = e^{-\frac{1}{2}} \approx 0{,}61\).", r"Le graphe coupe l'axe des y au point \((0\,;\,e^{-\frac{1}{2}})\).")],
         "x*ln(x)": [
             ("Zéros de f", [r"\(x\,\ln(x) = 0\)", r"\(\iff x = 0 \text{ ou } \ln(x) = 0\) (produit nul)", r"\(\iff\) \(x = 0\) ou \(x = 1\)",
                             r"\(x = 0\) est rejeté, car \(0 \notin ED\)."]),
@@ -595,16 +629,19 @@ class TestZerosSigne(unittest.TestCase):
             ("Zéros et signe de f", [r"\(\frac{e^{x} - 1}{x} = 0\)", r"\(\iff e^{x} - 1 = 0\) (numérateur nul)", r"\(\iff e^{x} = 1\) (on ajoute 1)",
                                      r"\(\iff\) \(x = 0\)", r"\(x = 0\) est rejeté, car \(0 \notin ED\).",
                                      r"Donc f n'a pas de zéro et \(f(x) > 0\) sur ED."]), COUPE_PAS],
+        # Somme-Produit puis x = 1 ou x = 3 directement (question 11) ; une ligne du tableau par facteur écrit (question 23)
         "x^2-4x+3": [
             ("Zéros de f", [r"\(x^{2} - 4x + 3 = 0\)", r"\(\iff (x - 1)(x - 3) = 0\) (Somme-Produit)",
-                            r"\(\iff x - 1 = 0 \text{ ou } x - 3 = 0\) (produit nul)", r"\(\iff\) \(x = 1\) ou \(x = 3\)"]),
-            ("Signe de f", [("TABLEAU", ["1", "3"], [(r"\left(x^{2} - 4x + 3\right)", "+0-0+"), ("f(x)", "+0-0+")])]),
+                            r"\(\iff\) \(x = 1\) ou \(x = 3\) (produit nul)"]),
+            ("Signe de f", [("TABLEAU", ["1", "3"], [(r"\left(x - 1\right)", "-0+++"), (r"\left(x - 3\right)", "---0+"),
+                                                     ("f(x)", "+0-0+")])]),
             ordonnee(r"\(f(0) = 3\).", r"Le graphe coupe l'axe des y au point \((0\,;\,3)\).")],
         "x^4-2x^2": [
             ("Zéros de f", [r"\(x^{4} - 2x^{2} = 0\)", r"\(\iff x^{2}(x^{2} - 2) = 0\) (mise en évidence)",
                             r"\(\iff x = 0 \text{ ou } x^{2} - 2 = 0\) (produit nul)", r"\(\iff x = 0 \text{ ou } x^{2} = 2\)",
-                            r"\(\iff\) \(x = -\sqrt{2}\) ≈ −1,41 ou \(x = 0\) ou \(x = \sqrt{2}\) ≈ 1,41"]),
-            ("Signe de f", [("TABLEAU", [r"-\sqrt{2}", "0", r"\sqrt{2}"], [(r"\left(x^{4} - 2x^{2}\right)", "+0-0-0+"), ("f(x)", "+0-0-0+")])]),
+                            r"\(\iff\) \(x = -\sqrt{2} \approx -1{,}41\) ou \(x = 0\) ou \(x = \sqrt{2} \approx 1{,}41\)"]),
+            ("Signe de f", [("TABLEAU", [r"-\sqrt{2}", "0", r"\sqrt{2}"], [("x^{2}", "+++0+++"), (r"\left(x^{2} - 2\right)", "+0---0+"),
+                                                                           ("f(x)", "+0-0-0+")])]),
             ordonnee(r"\(f(0) = 0\).", r"Le graphe coupe l'axe des y au point \((0\,;\,0)\).")],
         "1/x": [
             ("Zéros de f", [parties.NUMERATEUR_CONSTANT]), ("Signe de f", [("TABLEAU", ["0"], [("x", "-[||]+"), ("f(x)", "-[||]+")])]),
@@ -623,6 +660,27 @@ class TestZerosSigne(unittest.TestCase):
             ("Signe de f", [("TABLEAU", ["-2", "2"], [(r"\sqrt{x^{2} - 4}", "+0x0+"), ("f(x)", "+0x0+")])]), COUPE_PAS],
         "x^3+x+1": [("Zéros et signe de f", [parties.ZEROS_NON_EXACTS]), ordonnee(r"\(f(0) = 1\).",
                                                                               r"Le graphe coupe l'axe des y au point \((0\,;\,1)\).")],
+        "x^3-3x^2+2x": [
+            ("Zéros de f", [r"\(x^{3} - 3x^{2} + 2x = 0\)", r"\(\iff x(x^{2} - 3x + 2) = 0\) (mise en évidence)",
+                            r"\(\iff x(x - 1)(x - 2) = 0\) (Somme-Produit)", r"\(\iff\) \(x = 0\) ou \(x = 1\) ou \(x = 2\) (produit nul)"]),
+            ("Signe de f", [("TABLEAU", ["0", "1", "2"], [("x", "-0+++++"), (r"\left(x - 1\right)", "---0+++"),
+                                                          (r"\left(x - 2\right)", "-----0+"), ("f(x)", "-0+0-0+")])]),
+            ordonnee(r"\(f(0) = 0\).", r"Le graphe coupe l'axe des y au point \((0\,;\,0)\).")],
+        "2x^2-6x+4": [
+            ("Zéros de f", [r"\(2x^{2} - 6x + 4 = 0\)", r"\(\iff 2(x^{2} - 3x + 2) = 0\) (mise en évidence)",
+                            r"\(\iff 2(x - 1)(x - 2) = 0\) (Somme-Produit)", r"\(\iff\) \(x = 1\) ou \(x = 2\) (produit nul)"]),
+            ("Signe de f", [("TABLEAU", ["1", "2"], [("2", "+++++"), (r"\left(x - 1\right)", "-0+++"), (r"\left(x - 2\right)", "---0+"),
+                                                     ("f(x)", "+0-0+")])]),
+            ordonnee(r"\(f(0) = 4\).", r"Le graphe coupe l'axe des y au point \((0\,;\,4)\).")],
+        # facteurs x − r saisis : x = r directement, « produit nul » (comme la ligne des zéros de f′)
+        "(x-1)(x+2)e^x": [
+            ("Zéros de f", [rf"\(e^{{x}} > 0\) pour tout \(x\) {POSITIVE} ; il ne s'annule jamais.",
+                            r"\(\left(x - 1\right)\,\left(x + 2\right)\,e^{x} = 0\)",
+                            r"\(\iff \left(x - 1\right)\,\left(x + 2\right) = 0\) (car \(e^{x} > 0\))",
+                            r"\(\iff\) \(x = -2\) ou \(x = 1\) (produit nul)"]),
+            ("Signe de f", [("TABLEAU", ["-2", "1"], [(r"\left(x - 1\right)", "---0+"), (r"\left(x + 2\right)", "-0+++"), ("e^{x}", "+++++"),
+                                                      ("f(x)", "+0-0+")])]),
+            ordonnee(r"\(f(0) = -2\).", r"Le graphe coupe l'axe des y au point \((0\,;\,-2)\).")],
         "x^(2/3)": [
             ("Zéros de f", [r"\(\sqrt[3]{x^{2}} = 0\)", r"\(\iff \left(\sqrt[3]{x}\right)^{2} = 0\)", r"\(\iff \sqrt[3]{x} = 0\)",
                             r"\(\iff\) \(x = 0\)"]),
@@ -654,18 +712,23 @@ class TestZerosSigne(unittest.TestCase):
         self.assertEqual(parties.etapes_polynome([F(0), F(-3), F(0), F(1)]), [
             (["x^{3} - 3x = 0"], None), (["x(x^{2} - 3) = 0"], "mise en évidence"), (["x = 0", "x^{2} - 3 = 0"], "produit nul"),
             (["x = 0", "x^{2} = 3"], None), (["x = 0", r"x = -\sqrt{3}", r"x = \sqrt{3}"], None)])
+        self.assertEqual(parties.etapes_polynome([F(3), F(-4), F(1)]), [                                     # question 11
+            (["x^{2} - 4x + 3 = 0"], None), (["(x - 1)(x - 3) = 0"], "Somme-Produit"), (["x = 1", "x = 3"], "produit nul")])
         self.assertIsNone(parties.etapes_polynome([F(1), F(1), F(1)]))           # x² + x + 1 : rédaction de l'outil ED
         h = lire("ln(x)+1")
         self.assertEqual(parties.etapes_facteur(h, parties.zeros_facteur(h)[1]), [
             ([r"\ln(x) + 1 = 0"], None), ([r"\ln(x) = -1"], "on soustrait 1"), (["x = e^{-1}"], None)])
 
     def test_valeurs_approchees(self):
-        """decisions.md §2 entre 10⁻³ et 1000, entier exact tel quel (question 2), R13 sous 10⁻³ et dès 10⁶ (question 1)."""
+        """decisions.md §2 entre 10⁻³ et 10⁶, séparateur des milliers ’ dès 1000 (question 28), entier exact tel quel (question 2),
+        R13 sous 10⁻³ et dès 10⁶ (question 1) ; en TeX, pour la formule (question 15)."""
         sp = parties.charger_sympy()
-        for v, attendu in ((sp.sqrt(6), "2,45"), (-sp.sqrt(6), "−2,45"), (3 * sp.exp(-6), "0,0074"), (sp.Integer(9), None),
-                           (sp.Integer(-6), None), (sp.Rational(1, 3), "0,33"), (sp.Rational(1, 8), "0,13"),
-                           (sp.exp(-10), r"\(4{,}540 \times 10^{-5}\)"), (sp.Rational(10 ** 10, 3), r"\(3{,}333 \times 10^{9}\)"),
-                           (sp.Rational(10 ** 6 - 1, 10 ** 6 * 10 ** 4), r"\(1 \times 10^{-4}\)"), (sp.exp(8), None)):
+        for v, attendu in ((sp.sqrt(6), "2{,}45"), (-sp.sqrt(6), "-2{,}45"), (3 * sp.exp(-6), "0{,}0074"), (sp.Integer(9), None),
+                           (sp.Integer(-6), None), (sp.Rational(1, 3), "0{,}33"), (sp.Rational(1, 8), "0{,}13"),
+                           (sp.exp(-10), r"4{,}540 \times 10^{-5}"), (sp.Rational(10 ** 10, 3), r"3{,}333 \times 10^{9}"),
+                           (sp.Rational(10 ** 6 - 1, 10 ** 6 * 10 ** 4), r"1 \times 10^{-4}"),
+                           (sp.exp(8), r"2\text{’}980{,}96"), (-sp.Rational(1234567, 1000), r"-1\text{’}234{,}57"),
+                           (sp.exp(14), r"1{,}203 \times 10^{6}")):
             with self.subTest(v=v):
                 self.assertEqual(parties.approchee(v, sp), attendu)
 
@@ -677,22 +740,94 @@ class TestZerosSigne(unittest.TestCase):
                 self.assertEqual(cartes[t.index(rec.PARTIES[2]) + 1:t.index(rec.PARTIES[3])], cartes_zeros(entree))
 
 
+class TestLignesDuTableau(unittest.TestCase):
+    """Question 23 : une ligne du tableau de signes de f par facteur de la factorisation écrite dans la chaîne (mise en évidence,
+    Somme-Produit) ; la constante fois le produit des lignes est f (oracle mpmath, 50 chiffres) ; garde-fous forcés (ligne fausse :
+    SymPy la refuse ; SymPy aveuglé : la sonde la refuse) : les lignes d'avant."""
+    ENTREES = ("x^2-4x+3", "x^3-3x", "x^4-2x^2", "2x^2-6x+4", "x^3-3x^2+2x", "(x^2-3x+2)/(x-5)", "(x^2+x-6)e^(-x)", "(x^2-5x+6)^2")
+
+    def lignes(self, entree):
+        from noyau import aplatir
+        _, f, _ = ec.analyse(entree)
+        c, facs = aplatir(f)
+        with mpmath.workdps(parties.CHIFFRES):
+            return f, c, facs, parties.lignes_du_tableau(f, c, facs, parties.charger_sympy(), mpmath)
+
+    def test_produit_des_lignes_egal_a_f(self):
+        for entree in self.ENTREES:
+            with self.subTest(entree=entree):
+                f, c, facs, (cn, nouvelles) = self.lignes(entree)
+                self.assertNotEqual([h.key() for h, _ in nouvelles], [h.key() for h, _ in facs])
+                vus = 0
+                for k in range(-40, 41):
+                    x = mp.mpf(k) / 7 + mp.mpf(1) / 1000
+                    v = oracle.valeur(f, x)
+                    if v is None:
+                        continue
+                    produit = mp.mpf(cn.numerator) / cn.denominator
+                    for h, e in nouvelles:
+                        produit *= oracle.valeur(h, x) ** e
+                    self.assertTrue(mp.almosteq(produit, v, rel_eps=mp.mpf(10) ** -40, abs_eps=mp.mpf(10) ** -40), (entree, x))
+                    vus += 1
+                self.assertGreater(vus, 50)
+
+    def test_lignes_du_tableau_dans_la_carte(self):
+        """Les étiquettes des lignes sont les facteurs écrits dans la chaîne, dans l'ordre, puis f(x)."""
+        attendu = {"(x^2-3x+2)/(x-5)": [r"\left(x - 1\right)", r"\left(x - 2\right)", r"\left(x - 5\right)", "f(x)"],
+                   "(x^2+x-6)e^(-x)": [r"\left(x + 3\right)", r"\left(x - 2\right)", "e^{-x}", "f(x)"],
+                   "(x^2-5x+6)^2": [r"\left(x - 2\right)^{2}", r"\left(x - 3\right)^{2}", "f(x)"]}
+        for entree, etiquettes in attendu.items():
+            with self.subTest(entree=entree):
+                (tableau,) = [b for c in cartes_zeros(entree) for b in c["blocs"] if b["type"] == "tableau"]
+                self.assertEqual([r["label"] for r in tableau["rows"]], etiquettes)
+
+    def test_ligne_fausse_refusee(self):
+        with mock.patch.object(parties, "arbre_polynome", lambda P: lire("x-7")):
+            for entree in ("x^2-4x+3", "x^3-3x"):
+                with self.subTest(entree=entree):
+                    f, c, facs, resultat = self.lignes(entree)
+                    self.assertEqual(resultat, (c, facs))
+            (tableau,) = [b for c in cartes_zeros("x^2-4x+3") for b in c["blocs"] if b["type"] == "tableau"]
+            self.assertEqual([r["label"] for r in tableau["rows"]], [r"\left(x^{2} - 4x + 3\right)", "f(x)"])
+
+    def test_sympy_aveugle_la_sonde_refuse(self):
+        sp = parties.charger_sympy()
+        with mock.patch.object(parties, "arbre_polynome", lambda P: lire("x-7")), \
+                mock.patch.object(parties, "en_sympy_reel", lambda T: sp.Integer(0)):
+            f, c, facs, resultat = self.lignes("x^2-4x+3")
+        self.assertEqual(resultat, (c, facs))
+
+    def test_sans_chaine_ecrite_lignes_d_avant(self):
+        """Lignes de l'outil ED (chaîne non écrite) : le tableau garde les facteurs saisis."""
+        with mock.patch.object(parties, "etapes_facteur", lambda h, items: [([parties.tex(h) + " = 0"], None), (["x = 7"], None)]):
+            (tableau,) = [b for c in cartes_zeros("x^2-4x+3") for b in c["blocs"] if b["type"] == "tableau"]
+        self.assertEqual([r["label"] for r in tableau["rows"]], [r"\left(x^{2} - 4x + 3\right)", "f(x)"])
+
+    def test_arbre_polynome(self):
+        for P, ecrit in (([F(-1), F(1)], "x - 1"), ([F(-3), F(0), F(1)], "x^{2} - 3"), ([F(2), F(-3), F(1)], "x^{2} - 3x + 2"),
+                         ([F(0), F(1)], "x"), ([F(5), F(2)], "2x + 5")):
+            with self.subTest(P=P):
+                self.assertEqual(parties.tex(parties.arbre_polynome(P)), ecrit)
+
+
 # ---------- oracle : zéros, signe et f(0) affichés ----------
 def nombre_affiche(t):
     """Valeur mpmath (50 chiffres) d'une écriture LaTeX de l'outil : entiers, fractions, racines, ln, e^{…}. Lecture écrite à la main
     (liste fermée de motifs), ni parseur de l'outil ni SymPy ; ValueError sinon."""
-    s = t.replace(r"\left(", "(").replace(r"\right)", ")").replace(" ", "")
-    for _ in range(6):
+    s = t.replace(r"\left(", "(").replace(r"\right)", ")").replace(r"\,", "").replace(r"\cdot", "*").replace(" ", "")
+    for _ in range(8):
         s = re.sub(r"\\d?frac\{([^{}]*)\}\{([^{}]*)\}", r"((\1)/(\2))", s)
         s = re.sub(r"\\sqrt\{([^{}]*)\}", r"sqrt(\1)", s)
+        s = re.sub(r"\\sqrt\[(\d+)\]\{([^{}]*)\}", r"root(\2,\1)", s)
         s = re.sub(r"\\ln\(([^()]*)\)", r"log(\1)", s)
         s = re.sub(r"e\^\{([^{}]*)\}", r"exp(\1)", s)
+        s = re.sub(r"\^\{([^{}]*)\}", r"**(\1)", s)                        # puissance (après e^{…}) : (−2)^{2}, 3^{2}
     s = re.sub(r"(?<![a-z])e(?![a-z(])", "exp(1)", s)
-    if not re.fullmatch(r"(?:[0-9+\-*/().]|exp|log|sqrt)*", s):
+    if not re.fullmatch(r"(?:[0-9+\-*/().,]|exp|log|sqrt|root)*", s):
         raise ValueError(t)
     s = re.sub(r"(\d|\))(?=[a-z(])", r"\1*", s)
     s = re.sub(r"\d+", lambda m: f"mpf({m.group(0)})", s)                  # entiers en mpf : 1/6 calculé à 50 chiffres
-    return eval(s, {"__builtins__": {}}, {"exp": mp.exp, "log": mp.log, "sqrt": mp.sqrt, "mpf": mp.mpf})
+    return eval(s, {"__builtins__": {}}, {"exp": mp.exp, "log": mp.log, "sqrt": mp.sqrt, "root": mp.root, "mpf": mp.mpf})
 
 
 class TestZerosSigneOracle(unittest.TestCase):
@@ -708,7 +843,7 @@ class TestZerosSigneOracle(unittest.TestCase):
         issue = "message" if any(m in tout for m in MESSAGES_ZEROS) else "tableau" if tableaux else "constant"
         if issue == "message":
             self.assertFalse(tableaux or "n'a pas de zéro" in tout, tout)
-        zeros = list(re.finditer(r"\\\(x = ([^()]+?)\\\)(?: ≈ ([−0-9,]+))?( est rejeté)?", tout))
+        zeros = list(re.finditer(r"\\\(x = (.+?)(?: \\approx (-?[0-9]+(?:\{,\}[0-9]+)?))?\\\)( est rejeté)?", tout))
         rejetes = {m.group(1) for m in zeros if m.group(3)}
         for m in zeros:
             z = nombre_affiche(m.group(1))
@@ -759,7 +894,7 @@ class TestZerosSigneOracle(unittest.TestCase):
         if ordo == [parties.NE_COUPE_PAS]:
             self.assertIsNone(oracle.valeur(f, 0), entree)
         elif ordo != [parties.DOUTE_F0]:
-            m = re.search(r"\\\(f\(0\) = (.+?)\\\)(?: ≈ ([−0-9,]+))?\.$", ordo[0])
+            m = re.search(r"\\\(f\(0\) = (.+?)(?: \\approx (-?[0-9]+(?:\{,\}[0-9]+)?))?\\\)\.$", ordo[0])
             v0 = oracle.valeur(f, 0)
             self.assertLess(abs(nombre_affiche(m.group(1)) - v0), mp.mpf(10) ** -40, (entree, ordo))
             if m.group(2):
@@ -920,69 +1055,109 @@ def items_d11(entree, limites=None):
 
 
 MAX, MIN = "<b>Maximum local</b>", "<b>Minimum local</b>"
+MAX_G, MIN_G = "<b>Maximum global</b>", "<b>Minimum global</b>"          # §2 révisé (question 43)
 PLUS_MOINS, MOINS_PLUS = r"(\(f'\) passe de \(+\) à \(-\))", r"(\(f'\) passe de \(-\) à \(+\))"
 
 
 class TestExtremums(unittest.TestCase):
     ATTENDU = {
         "e^((x^2+x-2)/(6x-12))": ([
-            r"\(g(0) = \frac{-2}{-12} = \frac{1}{6}\), donc \(f(0) = e^{\frac{1}{6}}\) ≈ 1,18.",
-            r"\(g(4) = \frac{18}{12} = \frac{3}{2}\), donc \(f(4) = e^{\frac{3}{2}}\) ≈ 4,48."], [
-            rf"{MAX} en \(x = 0\) : \(\left(0\,;\,e^{{\frac{{1}}{{6}}}}\right)\) ≈ (0 ; 1,18) {PLUS_MOINS}. "
-            r"Pas global : \(f(x) \to +\infty\) quand \(x \to 2^{+}\).",
-            rf"{MIN} en \(x = 4\) : \(\left(4\,;\,e^{{\frac{{3}}{{2}}}}\right)\) ≈ (4 ; 4,48) {MOINS_PLUS}. "
-            r"Pas global : \(f(x) \to 0^{+}\) quand \(x \to -\infty\)."]),
-        "e^(-x^2)": ([], [
-            rf"{MAX} en \(x = 0\) : \(\left(0\,;\,1\right)\) {PLUS_MOINS}. "
-            r"Global : les autres valeurs de f sont plus petites (limites \(0^{+}\) en \(\pm\infty\))."]),
-        "(x^2-6)e^(-2x)": ([], [
-            rf"{MIN} en \(x = -2\) : \(\left(-2\,;\,- 2 e^{{4}}\right)\) ≈ (−2 ; −109,20) {MOINS_PLUS}. "
-            r"Global : les autres valeurs de f sont plus grandes (limites \(+\infty\) en \(-\infty\) et \(0^{+}\) en \(+\infty\)).",
-            rf"{MAX} en \(x = 3\) : \(\left(3\,;\,3 e^{{-6}}\right)\) ≈ (3 ; 0,0074) {PLUS_MOINS}. "
-            r"Pas global : \(f(x) \to +\infty\) quand \(x \to -\infty\)."]),
-        "e^x(6-e^x)": ([], [
-            rf"{MAX} en \(x = \ln(3)\) : \(\left(\ln(3)\,;\,9\right)\) ≈ (1,10 ; 9) {PLUS_MOINS}. "
-            r"Global : les autres valeurs de f sont plus petites (limites \(0^{+}\) en \(-\infty\) et \(-\infty\) en \(+\infty\))."]),
-        "e^(2/(x^2-4))": ([r"\(g(0) = \frac{2}{-4} = -\frac{1}{2}\), donc \(f(0) = e^{- \frac{1}{2}}\) ≈ 0,61."], [
-            rf"{MAX} en \(x = 0\) : \(\left(0\,;\,e^{{- \frac{{1}}{{2}}}}\right)\) ≈ (0 ; 0,61) {PLUS_MOINS}. "
-            r"Pas global : \(f(x) \to +\infty\) quand \(x \to -2^{-}\)."]),
+            r"\(g(0) = \frac{-2}{-12} = \frac{1}{6}\), donc \(f(0) = e^{\frac{1}{6}} \approx 1{,}18\).",
+            r"\(g(4) = \frac{18}{12} = \frac{3}{2}\), donc \(f(4) = e^{\frac{3}{2}} \approx 4{,}48\).",
+        ], [
+            r"<b>Maximum local</b> en \(x = 0\) : \(\left(0\,;\,e^{\frac{1}{6}}\right) \approx \left(0\,;\,1{,}18\right)\) (\(f'\) passe de \(+\) à \(-\)). Pas global : \(f(x) \to +\infty\) quand \(x \to 2^{+}\).",
+            r"<b>Minimum local</b> en \(x = 4\) : \(\left(4\,;\,e^{\frac{3}{2}}\right) \approx \left(4\,;\,4{,}48\right)\) (\(f'\) passe de \(-\) à \(+\)). Pas global : \(f(x) \to 0^{+}\) quand \(x \to -\infty\).",
+        ]),
+        "e^(-x^2)": ([
+            r"\(f(0) = e^{-0^{2}} = 1\).",
+        ], [
+            r"<b>Maximum global</b> en \(x = 0\) : \(\left(0\,;\,1\right)\) (\(f'\) passe de \(+\) à \(-\)). Les autres valeurs de f sont plus petites (limites \(0^{+}\) en \(\pm\infty\)).",
+        ]),
+        "(x^2-6)e^(-2x)": ([
+            r"\(f(-2) = \left(\left(-2\right)^{2} - 6\right)\,e^{-2\left(-2\right)} = \left(4 - 6\right)\,e^{4} = - 2 e^{4} \approx -109{,}20\).",
+            r"\(f(3) = \left(3^{2} - 6\right)\,e^{-2 \cdot 3} = \left(9 - 6\right)\,e^{-6} = 3 e^{-6} \approx 0{,}0074\).",
+        ], [
+            r"<b>Minimum global</b> en \(x = -2\) : \(\left(-2\,;\,- 2 e^{4}\right) \approx \left(-2\,;\,-109{,}20\right)\) (\(f'\) passe de \(-\) à \(+\)). Les autres valeurs de f sont plus grandes (limites \(+\infty\) en \(-\infty\) et \(0^{+}\) en \(+\infty\)).",
+            r"<b>Maximum local</b> en \(x = 3\) : \(\left(3\,;\,3 e^{-6}\right) \approx \left(3\,;\,0{,}0074\right)\) (\(f'\) passe de \(+\) à \(-\)). Pas global : \(f(x) \to +\infty\) quand \(x \to -\infty\).",
+        ]),
+        "e^x(6-e^x)": ([
+            r"\(f(\ln(3)) = e^{\ln(3)}\,\left(6 - e^{\ln(3)}\right) = 3\left(6 - 3\right) = 9\).",
+        ], [
+            r"<b>Maximum global</b> en \(x = \ln(3)\) : \(\left(\ln(3)\,;\,9\right) \approx \left(1{,}10\,;\,9\right)\) (\(f'\) passe de \(+\) à \(-\)). Les autres valeurs de f sont plus petites (limites \(0^{+}\) en \(-\infty\) et \(-\infty\) en \(+\infty\)).",
+        ]),
+        "e^(2/(x^2-4))": ([
+            r"\(g(0) = \frac{2}{-4} = -\frac{1}{2}\), donc \(f(0) = e^{- \frac{1}{2}} \approx 0{,}61\).",
+        ], [
+            r"<b>Maximum local</b> en \(x = 0\) : \(\left(0\,;\,e^{- \frac{1}{2}}\right) \approx \left(0\,;\,0{,}61\right)\) (\(f'\) passe de \(+\) à \(-\)). Pas global : \(f(x) \to +\infty\) quand \(x \to -2^{-}\).",
+        ]),
         # cas limites (D11 : « local » seul) : égalité avec une limite (0 et 0⁺), deux minimums égaux, bornes fermées de l'ED
-        "x^2*e^(-x)": ([], [
-            rf"{MIN} en \(x = 0\) : \(\left(0\,;\,0\right)\) {MOINS_PLUS}.",
-            rf"{MAX} en \(x = 2\) : \(\left(2\,;\,4 e^{{-2}}\right)\) ≈ (2 ; 0,54) {PLUS_MOINS}. "
-            r"Pas global : \(f(x) \to +\infty\) quand \(x \to -\infty\)."]),
-        "x^4-2x^2": ([], [
-            rf"{MIN} en \(x = -1\) : \(\left(-1\,;\,-1\right)\) {MOINS_PLUS}.",
-            rf"{MAX} en \(x = 0\) : \(\left(0\,;\,0\right)\) {PLUS_MOINS}. Pas global : \(f(x) \to +\infty\) quand \(x \to -\infty\).",
-            rf"{MIN} en \(x = 1\) : \(\left(1\,;\,-1\right)\) {MOINS_PLUS}."]),
-        "sqrt(x^2-4)": ([], [rf"{MIN} en \(x = -2\) : \(\left(-2\,;\,0\right)\).", rf"{MIN} en \(x = 2\) : \(\left(2\,;\,0\right)\)."]),
+        "x^2*e^(-x)": ([
+            r"\(f(0) = 0^{2}\,e^{-0} = 0\).",
+            r"\(f(2) = 2^{2}\,e^{-2} = 4 e^{-2} \approx 0{,}54\).",
+        ], [
+            r"<b>Minimum local</b> en \(x = 0\) : \(\left(0\,;\,0\right)\) (\(f'\) passe de \(-\) à \(+\)).",
+            r"<b>Maximum local</b> en \(x = 2\) : \(\left(2\,;\,4 e^{-2}\right) \approx \left(2\,;\,0{,}54\right)\) (\(f'\) passe de \(+\) à \(-\)). Pas global : \(f(x) \to +\infty\) quand \(x \to -\infty\).",
+        ]),
+        "x^4-2x^2": ([
+            r"\(f(-1) = \left(-1\right)^{4} - 2\left(-1\right)^{2} = 1 - 2 = -1\).",
+            r"\(f(0) = 0^{4} - 2 \cdot 0^{2} = 0 - 0 = 0\).",
+            r"\(f(1) = 1^{4} - 2 \cdot 1^{2} = 1 - 2 = -1\).",
+        ], [
+            r"<b>Minimum local</b> en \(x = -1\) : \(\left(-1\,;\,-1\right)\) (\(f'\) passe de \(-\) à \(+\)).",
+            r"<b>Maximum local</b> en \(x = 0\) : \(\left(0\,;\,0\right)\) (\(f'\) passe de \(+\) à \(-\)). Pas global : \(f(x) \to +\infty\) quand \(x \to -\infty\).",
+            r"<b>Minimum local</b> en \(x = 1\) : \(\left(1\,;\,-1\right)\) (\(f'\) passe de \(-\) à \(+\)).",
+        ]),
+        "sqrt(x^2-4)": ([
+            r"\(f(-2) = \sqrt{\left(-2\right)^{2} - 4} = \sqrt{4 - 4} = 0\).",
+            r"\(f(2) = \sqrt{2^{2} - 4} = \sqrt{4 - 4} = 0\).",
+        ], [
+            r"<b>Minimum local</b> en \(x = -2\) : \(\left(-2\,;\,0\right)\).",
+            r"<b>Minimum local</b> en \(x = 2\) : \(\left(2\,;\,0\right)\).",
+        ]),
         # ED fermé : aucune limite à citer ; deux autres valeurs (minimums de bord) sous le maximum
-        "sqrt(4-x^2)": ([], [
-            rf"{MIN} en \(x = -2\) : \(\left(-2\,;\,0\right)\).",
-            rf"{MAX} en \(x = 0\) : \(\left(0\,;\,2\right)\) {PLUS_MOINS}. Global : les autres valeurs de f sont plus petites.",
-            rf"{MIN} en \(x = 2\) : \(\left(2\,;\,0\right)\)."]),
-        # deux maximums égaux (« local » seul), minimum égal à la limite 0⁺
-        "x^2e^(-x^2)": ([], [
-            rf"{MAX} en \(x = -1\) : \(\left(-1\,;\,e^{{-1}}\right)\) ≈ (−1 ; 0,37) {PLUS_MOINS}.",
-            rf"{MIN} en \(x = 0\) : \(\left(0\,;\,0\right)\) {MOINS_PLUS}.",
-            rf"{MAX} en \(x = 1\) : \(\left(1\,;\,e^{{-1}}\right)\) ≈ (1 ; 0,37) {PLUS_MOINS}."]),
-        # borne ouverte de l'ED (0⁺) et limite 0⁻ ; deux extremums globaux ; f′ non définie au minimum
-        "x*ln(x)": ([], [
-            rf"{MIN} en \(x = e^{{-1}}\) : \(\left(e^{{-1}}\,;\,- e^{{-1}}\right)\) ≈ (0,37 ; −0,37) {MOINS_PLUS}. "
-            r"Global : les autres valeurs de f sont plus grandes (limites \(0^{-}\) en \(0^{+}\) et \(+\infty\) en \(+\infty\))."]),
-        "x/(x^2+1)": ([], [
-            rf"{MIN} en \(x = -1\) : \(\left(-1\,;\,- \frac{{1}}{{2}}\right)\) ≈ (−1 ; −0,50) {MOINS_PLUS}. "
-            r"Global : les autres valeurs de f sont plus grandes (limites \(0\) en \(\pm\infty\)).",
-            rf"{MAX} en \(x = 1\) : \(\left(1\,;\,\frac{{1}}{{2}}\right)\) ≈ (1 ; 0,50) {PLUS_MOINS}. "
-            r"Global : les autres valeurs de f sont plus petites (limites \(0\) en \(\pm\infty\))."]),
-        "x^(2/3)": ([], [
-            rf"{MIN} en \(x = 0\) : \(\left(0\,;\,0\right)\) {MOINS_PLUS}. "
-            r"Global : les autres valeurs de f sont plus grandes (limites \(+\infty\) en \(\pm\infty\))."]),
-        "(x^2-1)/(x-3)": ([], [
-            rf"{MAX} en \(x = 3 - 2\sqrt{{2}}\) : \(\left(3 - 2\sqrt{{2}}\,;\,6 - 4 \sqrt{{2}}\right)\) ≈ (0,17 ; 0,34) {PLUS_MOINS}. "
-            r"Pas global : \(f(x) \to +\infty\) quand \(x \to 3^{+}\).",
-            rf"{MIN} en \(x = 3 + 2\sqrt{{2}}\) : \(\left(3 + 2\sqrt{{2}}\,;\,4 \sqrt{{2}} + 6\right)\) ≈ (5,83 ; 11,66) {MOINS_PLUS}. "
-            r"Pas global : \(f(x) \to -\infty\) quand \(x \to -\infty\)."]),
+        "sqrt(4-x^2)": ([
+            r"\(f(-2) = \sqrt{4 - \left(-2\right)^{2}} = \sqrt{4 - 4} = 0\).",
+            r"\(f(0) = \sqrt{4 - 0^{2}} = \sqrt{4 - 0} = 2\).",
+            r"\(f(2) = \sqrt{4 - 2^{2}} = \sqrt{4 - 4} = 0\).",
+        ], [
+            r"<b>Minimum local</b> en \(x = -2\) : \(\left(-2\,;\,0\right)\).",
+            r"<b>Maximum global</b> en \(x = 0\) : \(\left(0\,;\,2\right)\) (\(f'\) passe de \(+\) à \(-\)). Les autres valeurs de f sont plus petites.",
+            r"<b>Minimum local</b> en \(x = 2\) : \(\left(2\,;\,0\right)\).",
+        ]),
+        # deux maximums égaux (« local » seul), minimum égal à la limite 0⁺ ; 1·e^{−1} écrit e^{−1}
+        "x^2e^(-x^2)": ([
+            r"\(f(-1) = \left(-1\right)^{2}\,e^{-\left(-1\right)^{2}} = e^{-1} \approx 0{,}37\).",
+            r"\(f(0) = 0^{2}\,e^{-0^{2}} = 0\).",
+            r"\(f(1) = 1^{2}\,e^{-1^{2}} = e^{-1} \approx 0{,}37\).",
+        ], [
+            r"<b>Maximum local</b> en \(x = -1\) : \(\left(-1\,;\,e^{-1}\right) \approx \left(-1\,;\,0{,}37\right)\) (\(f'\) passe de \(+\) à \(-\)).",
+            r"<b>Minimum local</b> en \(x = 0\) : \(\left(0\,;\,0\right)\) (\(f'\) passe de \(-\) à \(+\)).",
+            r"<b>Maximum local</b> en \(x = 1\) : \(\left(1\,;\,e^{-1}\right) \approx \left(1\,;\,0{,}37\right)\) (\(f'\) passe de \(+\) à \(-\)).",
+        ]),
+        # borne ouverte de l'ED (0⁺) et limite 0⁻ ; x₀ = e^{−1} : ln(e^{−1}) = −1
+        "x*ln(x)": ([
+            r"\(f(e^{-1}) = e^{-1}\ln(e^{-1}) = e^{-1}\,\left(-1\right) = - e^{-1} \approx -0{,}37\).",
+        ], [
+            r"<b>Minimum global</b> en \(x = e^{-1}\) : \(\left(e^{-1}\,;\,- e^{-1}\right) \approx \left(0{,}37\,;\,-0{,}37\right)\) (\(f'\) passe de \(-\) à \(+\)). Les autres valeurs de f sont plus grandes (limites \(0^{-}\) en \(0^{+}\) et \(+\infty\) en \(+\infty\)).",
+        ]),
+        "x/(x^2+1)": ([
+            r"\(f(-1) = \frac{\left(-1\right)}{\left(-1\right)^{2} + 1} = \frac{-1}{1 + 1} = - \frac{1}{2} \approx -0{,}50\).",
+            r"\(f(1) = \frac{1}{1^{2} + 1} = \frac{1}{1 + 1} = \frac{1}{2} \approx 0{,}50\).",
+        ], [
+            r"<b>Minimum global</b> en \(x = -1\) : \(\left(-1\,;\,- \frac{1}{2}\right) \approx \left(-1\,;\,-0{,}50\right)\) (\(f'\) passe de \(-\) à \(+\)). Les autres valeurs de f sont plus grandes (limites \(0\) en \(\pm\infty\)).",
+            r"<b>Maximum global</b> en \(x = 1\) : \(\left(1\,;\,\frac{1}{2}\right) \approx \left(1\,;\,0{,}50\right)\) (\(f'\) passe de \(+\) à \(-\)). Les autres valeurs de f sont plus petites (limites \(0\) en \(\pm\infty\)).",
+        ]),
+        "x^(2/3)": ([
+            r"\(f(0) = \sqrt[3]{0^{2}} = 0\).",
+        ], [
+            r"<b>Minimum global</b> en \(x = 0\) : \(\left(0\,;\,0\right)\) (\(f'\) passe de \(-\) à \(+\)). Les autres valeurs de f sont plus grandes (limites \(+\infty\) en \(\pm\infty\)).",
+        ]),
+        # x₀ = 3 − 2√2 : pas de substitution en chaîne (question 41 : x₀ rationnel, ln q ou e^q)
+        "(x^2-1)/(x-3)": ([
+        ], [
+            r"<b>Maximum local</b> en \(x = 3 - 2\sqrt{2}\) : \(\left(3 - 2\sqrt{2}\,;\,6 - 4 \sqrt{2}\right) \approx \left(0{,}17\,;\,0{,}34\right)\) (\(f'\) passe de \(+\) à \(-\)). Pas global : \(f(x) \to +\infty\) quand \(x \to 3^{+}\).",
+            r"<b>Minimum local</b> en \(x = 3 + 2\sqrt{2}\) : \(\left(3 + 2\sqrt{2}\,;\,4 \sqrt{2} + 6\right) \approx \left(5{,}83\,;\,11{,}66\right)\) (\(f'\) passe de \(-\) à \(+\)). Pas global : \(f(x) \to -\infty\) quand \(x \to -\infty\).",
+        ]),
     }
 
     def test_lignes_exactes(self):
@@ -1025,62 +1200,74 @@ def arrondi_scientifique(v):
         m = d.scaleb(-e).quantize(Decimal("0.001"), rounding=ROUND_HALF_UP)
     t = format(m, "f")
     t = t[:-4] if t.endswith(".000") else t
-    return r"\(" + t.replace(".", "{,}") + r" \times 10^{" + str(e) + r"}\)"
+    return t.replace(".", "{,}") + r" \times 10^{" + str(e) + "}"
 
 
 def verifier_approchee(test, t, v, contexte):
-    """t : valeur approchée affichée (« 1,18 », « −109,20 » ou notation scientifique) ; v : valeur de l'oracle."""
+    """t : valeur approchée affichée, en TeX dans la formule (« 1{,}18 », « -109{,}20 », « 2\\text{’}980{,}96 » ou notation
+    scientifique) ; v : valeur de l'oracle. Séparateur des milliers ’ exactement dès 1000 (question 28)."""
     if r"\times" in t:
         test.assertEqual(t, arrondi_scientifique(v), contexte)
+        test.assertTrue(abs(v) < mp.mpf("0.001") or abs(v) >= 10 ** 6, contexte)
     else:
         test.assertEqual(decimal_affiche(t), arrondi_oracle(v), contexte)
+        test.assertEqual(r"\text{’}" in t, abs(v) >= 1000, contexte)
+
+
+LIGNE_EXTREMUM = re.compile(
+    r"<b>(?P<genre>Maximum|Minimum) (?P<portee>local|global)</b> en \\\(x = (?P<x>.+?)\\\)"
+    r"(?: : \\\(\\left\((?P<px>.+?)\\,;\\,(?P<py>.+?)\\right\)(?: \\approx \\left\((?P<ax>.+?)\\,;\\,(?P<ay>.+?)\\right\))?\\\))?"
+    r"(?: \(\\\(f'\\\) passe de \\\((?P<g>[+-])\\\) à \\\((?P<d>[+-])\\\)\))?\.(?: (?P<fin>.*))?$")
 
 
 def oracle_x_y(item, f):
-    """Point affiché (x, f(x)) d'une ligne d'extremum, relu à la main et recoupé : f(x) de l'oracle = valeur affichée."""
-    m = re.match(r"<b>(Maximum|Minimum) local</b> en \\\(x = (.+?)\\\)(?: : \\\(\\left\((.+?)\\,;\\,(.+?)\\right\)\\\))?"
-                 r"(?: ≈ \((.+?) ; (.+?)\))?(?: \(\\\(f'\\\) passe de \\\(([+-])\\\) à \\\(([+-])\\\)\))?\.(?: (.*))?$", item)
+    """Ligne d'extremum relue à la main (format de decisions.md §2 révisé, question 43)."""
+    m = LIGNE_EXTREMUM.match(item)
     assert m, item
     return m
 
 
 class TestExtremumsOracle(unittest.TestCase):
     """Ce que la partie 5 affiche (D11), recoupé par l'oracle mpmath (tests/python/oracle.py : ni `evaluer`, ni SymPy, ni la sonde) :
-    point exact (f(x₀) de l'oracle), arrondis, changement de signe de f′, « global » (aucune valeur de f plus grande, ou plus petite,
-    sur une grille dense de l'ED et des points lointains), « pas global » (la raison : une valeur de f au-delà de f(x₀) près de la
-    borne nommée, la limite écrite retrouvée), valeur en chaîne par l'exposant."""
+    point exact (f(x₀) de l'oracle), arrondis, changement de signe de f′, « Maximum global » (aucune valeur de f plus grande, ou plus
+    petite, sur une grille dense de l'ED et des points lointains), « pas global » (la raison : une valeur de f au-delà de f(x₀) près de
+    la borne nommée, la limite écrite retrouvée), valeur en chaîne : par l'exposant (g nommé) ou par substitution (question 41), chaque
+    membre de la chaîne relu et évalué, une ligne pour chaque extremum à x₀ entier."""
     GRILLE = [mp.mpf(k) / 20 - 60 + mp.mpf(1) / 977 for k in range(0, 2401)] + \
         [s * mp.mpf(10) ** k for k in range(2, 7) for s in (-1, 1)]
 
     def verifier(self, entree):
         f = lire(entree)
         chaine, items = lignes_extremums(entree)
-        statuts = []
+        statuts, points = [], {}
         for it in items:
             m = oracle_x_y(it, f)
-            s = 1 if m.group(1) == "Maximum" else -1
-            x0 = nombre_affiche(m.group(2))
+            s = 1 if m["genre"] == "Maximum" else -1
+            x0 = nombre_affiche(m["x"])
             y = oracle.valeur(f, x0)
             self.assertIsNotNone(y, (entree, it))
-            if m.group(3) is not None:
-                self.assertEqual(m.group(3), m.group(2))
-                self.assertLess(abs(nombre_affiche(m.group(4)) - y), mp.mpf(10) ** -35 * (1 + abs(y)), (entree, it))
-            for t, v in ((m.group(5), x0), (m.group(6), y)):
+            if m["px"] is not None:
+                self.assertEqual(m["px"], m["x"])
+                self.assertLess(abs(nombre_affiche(m["py"]) - y), mp.mpf(10) ** -35 * (1 + abs(y)), (entree, it))
+                points[m["x"]] = m["py"]
+            for t, v in ((m["ax"], x0), (m["ay"], y)):
                 if t is None:
                     continue
                 if v == mp.nint(v) and abs(v) < 10 ** 6:
                     self.assertEqual(decimal_affiche(t), Decimal(int(mp.nint(v))), (entree, it))
                 else:
                     verifier_approchee(self, t, v, (entree, it))
-            if m.group(5) is None and m.group(3) is not None:
+            if m["ax"] is None and m["px"] is not None:
                 self.assertTrue(x0 == mp.nint(x0) and y == mp.nint(y), (entree, it))          # sans ≈ : deux entiers
-            if m.group(7):
+            if m["g"]:
                 h = mp.mpf(10) ** -6
                 avant, apres = oracle.derivee(f, x0 - h), oracle.derivee(f, x0 + h)
-                self.assertEqual(("+" if avant > 0 else "-", "+" if apres > 0 else "-"), (m.group(7), m.group(8)), (entree, it))
-                self.assertEqual(m.group(7), "+" if s > 0 else "-", (entree, it))
-            fin = m.group(9) or ""
-            if fin.startswith("Global"):
+                self.assertEqual(("+" if avant > 0 else "-", "+" if apres > 0 else "-"), (m["g"], m["d"]), (entree, it))
+                self.assertEqual(m["g"], "+" if s > 0 else "-", (entree, it))
+            fin = m["fin"] or ""
+            self.assertNotIn("Global :", fin)
+            self.assertEqual(m["portee"] == "global", fin.startswith("Les autres valeurs de f sont"), (entree, it))
+            if m["portee"] == "global":
                 statuts.append("global")
                 pire = max((s * (v - y) for v in (oracle.valeur(f, t) for t in self.GRILLE) if v is not None), default=None)
                 self.assertIsNotNone(pire)
@@ -1107,21 +1294,38 @@ class TestExtremumsOracle(unittest.TestCase):
             else:
                 self.assertEqual(fin, "", (entree, it))
                 statuts.append("local")
+        calcules = set()
         for ligne in chaine:
-            m = re.fullmatch(r"\\\(g\((.+?)\) = (?:\\frac\{(-?\d+)\}\{(-?\d+)\} = )?(.+?)\\\), donc \\\(f\(\1\) = (.+?)\\\)(?: ≈ ([−0-9,]+|\\\(.+\\\)))?\.",
-                             ligne)
-            self.assertIsNotNone(m, ligne)
-            x0 = mp.mpf(int(m.group(1)))
-            g = oracle.valeur(f.a, x0)
-            if m.group(2):
-                self.assertEqual(mp.mpf(int(m.group(2))) / int(m.group(3)), g)
-                self.assertEqual(oracle.valeur(f.a.a, x0), int(m.group(2)))                     # haut et bas calculés en x₀
-                self.assertEqual(oracle.valeur(f.a.b, x0), int(m.group(3)))
-            self.assertLess(abs(nombre_affiche(m.group(4)) - g), mp.mpf(10) ** -40)
+            m = re.fullmatch(r"\\\(g\((.+?)\) = (?:\\frac\{(-?\d+)\}\{(-?\d+)\} = )?(.+?)\\\), donc \\\(f\(\1\) = (.+?)"
+                             r"(?: \\approx (.+?))?\\\)\.", ligne)
+            if m:                                                         # par l'exposant (g nommé, P7b)
+                x0 = mp.mpf(int(m.group(1)))
+                g = oracle.valeur(f.a, x0)
+                if m.group(2):
+                    self.assertEqual(mp.mpf(int(m.group(2))) / int(m.group(3)), g)
+                    self.assertEqual(oracle.valeur(f.a.a, x0), int(m.group(2)))                 # haut et bas calculés en x₀
+                    self.assertEqual(oracle.valeur(f.a.b, x0), int(m.group(3)))
+                self.assertLess(abs(nombre_affiche(m.group(4)) - g), mp.mpf(10) ** -40)
+                membres, approx = [m.group(5)], m.group(6)
+            else:                                                         # par substitution (question 41)
+                m = re.fullmatch(r"\\\(f\((.+?)\) = (.+?)(?: \\approx (.+?))?\\\)\.", ligne)
+                self.assertIsNotNone(m, ligne)
+                x0 = nombre_affiche(m.group(1))
+                membres, approx = m.group(2).split(" = "), m.group(3)
+                self.assertGreaterEqual(len(membres), 2, ligne)
+                self.assertNotRegex(m.group(2), r"\d\s*\\d?frac", ligne)                  # jamais « 4\frac{2}{3} »
             y = oracle.valeur(f, x0)
-            self.assertLess(abs(nombre_affiche(m.group(5)) - y), mp.mpf(10) ** -35 * (1 + y))
-            if m.group(6):
-                verifier_approchee(self, m.group(6), y, ligne)
+            for membre in membres:
+                self.assertLess(abs(nombre_affiche(membre) - y), mp.mpf(10) ** -35 * (1 + abs(y)), (ligne, membre))
+            self.assertEqual(membres[-1], points.get(m.group(1)), ligne)                   # l'écriture de l'extremum
+            if approx:
+                verifier_approchee(self, approx, y, ligne)
+            else:
+                self.assertEqual(y, mp.nint(y), ligne)
+            calcules.add(m.group(1))
+        for x in points:                                                  # question 41 : une ligne pour chaque extremum à x₀ entier
+            if re.fullmatch(r"-?\d+", x):
+                self.assertIn(x, calcules, (entree, x))
         return statuts
 
     def test_corpus_et_entrees_de_la_page(self):
@@ -1181,7 +1385,7 @@ class TestGardeFousExtremums(unittest.TestCase):
             return mp.mpf(-1000) if (v is not None and x < -1) else v
         with mock.patch.object(parties, "valeur_mp", fausse):
             items = items_d11("(x^2-6)e^(-2x)")
-        self.assertTrue(items[1].endswith(rf"(3 ; 0,0074) {PLUS_MOINS}."), items[1])
+        self.assertTrue(items[1].endswith(rf"\approx \left(3\,;\,0{{,}}0074\right)\) {PLUS_MOINS}."), items[1])
         self.assertNotIn("global", items[1].lower())
 
     def test_sympy_contredit_la_sonde(self):
@@ -1210,13 +1414,13 @@ class TestGardeFousExtremums(unittest.TestCase):
         self.locales_seules(items_d11("(x^2-6)e^(-2x)", dict(lim, plus_inf="?")))
 
     def test_valeur_exacte_contredite_par_la_sonde(self):
-        """f_py faux : ni ≈, ni « global », ni valeur en chaîne."""
+        """f_py faux : ni ≈, ni « global », ni valeur en chaîne (ni par l'exposant, ni par substitution)."""
         r = ec.etudier("e^((x^2+x-2)/(6x-12))")
         dv = dict(r["derivee"], extrema=[dict(e, f_py="exp(2)") for e in r["derivee"]["extrema"]])
         blocs = parties.blocs_extremums(dv, r["variations_limites"], ec.analyse("e^((x^2+x-2)/(6x-12))"))
         self.assertEqual([b["type"] for b in blocs], ["liste"])
         for it in blocs[0]["items"]:
-            self.assertNotIn("≈", it)
+            self.assertNotIn(r"\approx", it)
             self.assertNotIn("global", it.lower())
 
     def test_valeur_inconnue(self):
@@ -1265,6 +1469,65 @@ class TestGardeFousExtremums(unittest.TestCase):
             self.assertIsNone(parties.valeur_par_l_exposant(lire("x^2-4x+3"), {"x_tex": "2", "x_py": "2", "f_py": "-1", "f_tex": "-1"},
                                                             sp, mp))
             self.assertIsNone(parties.valeur_par_l_exposant(f, {"x_tex": "4", "x_py": "4", "f_py": "exp(2)", "f_tex": "e^{2}"}, sp, mp))
+
+
+class TestValeurParSubstitution(unittest.TestCase):
+    """Question 41 : « f(−2) = ((−2)² − 6)e^{−2·(−2)} = (4 − 6)e⁴ = −2e⁴ ≈ −109,20 » ; garde-fous forcés : aucune ligne."""
+
+    def ligne(self, entree, i=0, **modif):
+        r = ec.etudier(entree)
+        e = dict(r["derivee"]["extrema"][i], **modif)
+        with mpmath.workdps(parties.CHIFFRES):
+            b = parties.valeur_par_substitution(lire(entree), e, ed._sympy(), mpmath)
+        return None if b is None else b["html"]
+
+    def test_lignes_du_corrige(self):
+        self.assertEqual(self.ligne("(x^2-6)e^(-2x)"), r"\(f(-2) = \left(\left(-2\right)^{2} - 6\right)\,e^{-2\left(-2\right)} = "
+                                                       r"\left(4 - 6\right)\,e^{4} = - 2 e^{4} \approx -109{,}20\).")
+        self.assertEqual(self.ligne("e^x(6-e^x)"), r"\(f(\ln(3)) = e^{\ln(3)}\,\left(6 - e^{\ln(3)}\right) = 3\left(6 - 3\right) = 9\).")
+
+    def test_x0_fractionnaire_entre_parentheses(self):
+        """x₀ = 3/2 : « 2(3/2)² − 6(3/2) + 4 », jamais « 6\frac{3}{2} » (lu « six et trois demis »)."""
+        t = self.ligne("2x^2-6x+4")
+        self.assertEqual(t, r"\(f(\frac{3}{2}) = 2\left(\frac{3}{2}\right)^{2} - 6\left(\frac{3}{2}\right) + 4 = \frac{9}{2} - 9 + 4 = "
+                            r"- \frac{1}{2} \approx -0{,}50\).")
+
+    def test_produits_par_0_et_1(self):
+        """1·e^{−1} s'écrit e^{−1} (« 1e^{−1} » se lirait comme une notation scientifique), 0·a = 0, e⁰ = 1."""
+        self.assertEqual(self.ligne("x^2e^(-x^2)"), r"\(f(-1) = \left(-1\right)^{2}\,e^{-\left(-1\right)^{2}} = e^{-1} \approx 0{,}37\).")
+        self.assertEqual(self.ligne("x^2*e^(-x)"), r"\(f(0) = 0^{2}\,e^{-0} = 0\).")
+        for entree in ("x^2e^(-x^2)", "x^2*e^(-x)", "x*ln(x)", "3(x*ln(x))"):
+            for i in range(len(ec.etudier(entree)["derivee"]["extrema"])):
+                with self.subTest(entree=entree, i=i):
+                    self.assertNotRegex(self.ligne(entree, i), r"(?<![\d^{])[01]e\^")
+
+    def test_refus(self):
+        """x₀ irrationnel (3 − 2√2), valeur fausse, écriture de x₀ différente : aucune ligne."""
+        self.assertIsNone(self.ligne("(x^2-1)/(x-3)"))
+        self.assertIsNone(self.ligne("(x^2-6)e^(-2x)", f_py="-2*exp(5)"))
+        self.assertIsNone(self.ligne("(x^2-6)e^(-2x)", x_tex="-3"))
+
+    def test_garde_fous_forces(self):
+        """Un membre faux (SymPy le refuse), SymPy aveuglé (la sonde le refuse), une écriture ambiguë « 4\\frac{2}{3} » : aucune ligne."""
+        self.assertIsNotNone(self.ligne("(x^2-6)e^(-2x)"))
+        with mock.patch.object(parties, "calculer_produits", lambda n: lire("7")):
+            self.assertIsNone(self.ligne("(x^2-6)e^(-2x)"))
+        vrai = parties.en_sympy_reel
+        juste = vrai(lire("(x^2-6)e^(-2x)")).subs(parties.SYMPY["x"], -2)
+        with mock.patch.object(parties, "calculer_produits", lambda n: lire("7")), \
+                mock.patch.object(parties, "en_sympy_reel", lambda T: juste if parties.tex(T) == "7" else vrai(T)):
+            self.assertIsNone(self.ligne("(x^2-6)e^(-2x)"))
+        with mock.patch.object(parties, "substitution_ecrite", lambda f, x0: Nb(F(0), r"4\frac{2}{3}")):
+            self.assertIsNone(self.ligne("(x^2-6)e^(-2x)"))
+
+    def test_chaque_extremum_a_sa_ligne(self):
+        """Une ligne de calcul pour chaque extremum (x₀ rationnel, ln q ou e^q), avant la liste, dans l'ordre des extremums."""
+        for entree, nombre in (("x^4-2x^2", 3), ("(x^2-6)e^(-2x)", 2), ("e^((x^2+x-2)/(6x-12))", 2), ("ln(x)/x", 1), ("x^x", 1),
+                               ("(x^2-1)/(x-3)", 0)):
+            with self.subTest(entree=entree):
+                chaine, items = lignes_extremums(entree)
+                self.assertEqual(len(chaine), nombre, chaine)
+
 
 
 # ---------------------------------------------------------------------------------------------------------------------------

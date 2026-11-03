@@ -14,15 +14,22 @@ partie 6 ; plus tard le bilan) sont dans `etude-complete/parties.py` (créé au 
   non démontrée (EC-15). Aujourd'hui : parties 1, 2 et 3 = voir ci-dessous ; 4 = cartes de l'outil Limites
   (tableaux de signes, une carte par borne, bilan des asymptotes) ; 5 = cartes de l'outil Dérivée (dérivée, signe de f′ et variations,
   avec les limites et les valeurs des extremums dans le tableau, T06c et D10), extremums rédigés selon D11 (voir ci-dessous) ;
-  6 = graphique (D15, voir ci-dessous).
+  6 = graphique (D15, voir ci-dessous). Jamais d'intertitre seul sous « 5. » (R2, Q7) : la carte « Dérivée » est toujours affichée
+  (dérivée hors du cadre : la phrase de l'outil Dérivée, « Cette fonction sort du cadre de l'outil : la dérivée n'a pas été
+  calculée. ») ; signe de f′ non étudié : la carte d'erreur « Signe de f′ et variations » de l'outil Dérivée.
+- **Valeurs approchées** (R2, Q15, Q28) : écrites **dans la formule**, après « ≈ » (`f(1) = −5e^{−2} ≈ −0,68`, `x = √6 ≈ 2,45`,
+  `(0 ; e^{1/6}) ≈ (0 ; 1,18)`), comme les autres outils : 2 décimales, 2 chiffres significatifs entre 10⁻³ et 0,01, séparateur des
+  milliers ’ dès 1000 (`moteur/nombres.py`, convention du site : ≈ 1’234,57), notation scientifique de R13 sous 10⁻³ et dès 10⁶ ;
+  un entier exact s'écrit sans « ≈ ». Partie 2 : les contre-exemples restent pris dans [10⁻³ ; 1000[ (question 19).
 - **Partie 1, domaine de définition** (D1, D3 ; P3) : carte « Fonction » (f seule) ; carte « Mise en forme » quand f(x) = e^{haut/bas},
   haut et bas polynômes de degré ≥ 1 écrits développés à coefficients entiers, dont l'un au moins se factorise par mise en évidence de
   c·xᵏ ou par Somme-Produit (trinôme unitaire, deux racines entières distinctes, facteurs par racine croissante) : une ligne par
   méthode, la méthode entre parenthèses, puis « On note g(x) = …, donc f(x) = e^{g(x)}. » (`e^((x^2+x-2)/(6x-12))`, Ex7 du corrigé) ;
   rien à factoriser : pas de carte (`e^(2/(x^2-4))`). Une carte par condition (titre et badge de l'outil ED) ; un dénominateur affine ou
   de la forme ax² + c écrit développé est résolu en chaîne courte, « On résout 6x − 12 = 0 ⇔ 6x = 12 ⇔ x = 2. », « x² − 4 = 0 ⇔ x² = 4
-  ⇔ x = −2 ou x = 2 » (racines rationnelles ou k√m) ; un dénominateur x s'écrit « x ≠ 0 » seul ; toute autre condition garde les lignes
-  de l'outil ED. Carte « Ensemble de définition » : l'ED encadré (conclusion de l'outil ED), précédé de « Ni logarithme, ni
+  ⇔ x = −2 ou x = 2 » (racines rationnelles ou k√m) ; un trinôme unitaire x² + bx + c (b ≠ 0, c ≠ 0) à deux racines entières
+  distinctes, par Somme-Produit (R2, Q11) : « On résout x² − 3x + 2 = 0 ⇔ (x − 1)(x − 2) = 0 (Somme-Produit) ⇔ x = 1 ou x = 2 (produit
+  nul). » (`1/(x^2-3x+2)`) ; un dénominateur x s'écrit « x ≠ 0 » seul ; toute autre condition garde les lignes de l'outil ED. Carte « Ensemble de définition » : l'ED encadré (conclusion de l'outil ED), précédé de « Ni logarithme, ni
   dénominateur, ni racine : aucune condition. » quand il n'y a pas de condition. Garde-fous (EC-15) : la factorisation développée
   redonne le polynôme et une sonde numérique compare les deux écritures ; les racines de la chaîne donnent exactement l'ensemble de
   l'outil ED et annulent le dénominateur ; sinon la ligne n'est pas écrite (mise en forme) ou la condition garde la rédaction de l'outil ED.
@@ -44,14 +51,17 @@ partie 6 ; plus tard le bilan) sont dans `etude-complete/parties.py` (créé au 
   e^{…} : « e^{−2x} > 0 pour tout x (une exponentielle est strictement positive) ; il ne s'annule jamais. » (« pour tout x ∈ ED » si
   ED ≠ ℝ ; « e^{g(x)} » quand la partie 1 a nommé g ; f = e^{…} seule : sans « il ne s'annule jamais »). Puis f(x) = 0 en chaîne, une
   étape par ligne, la propriété nommée entre parenthèses : « (x² − 6)e^{−2x} = 0 ⇔ x² − 6 = 0 (car e^{−2x} > 0) ⇔ x² = 6 ⇔ x = −√6
-  ≈ −2,45 ou x = √6 ≈ 2,45 » ; « numérateur nul », « on divise par 3 », « produit nul » (facteurs menés ensemble), « mise en
+  ≈ −2,45 ou x = √6 ≈ 2,45 » ; « numérateur nul », « on divise par 3 », « produit nul » (facteurs menés ensemble ; un facteur x − r
+  s'écrit directement x = r, R2, Q11 : « (x − 1)(x − 3) = 0 (Somme-Produit) ⇔ x = 1 ou x = 3 (produit nul) »), « mise en
   évidence », « Somme-Produit » (comme la partie 1), lignes « A ⇔ B (propriété) » de l'outil ED pour un facteur non polynomial
   (« e^{x} = 6 (on isole e^{x} …) ») ; un zéro hors de l'ED est rejeté (« x = 0 est rejeté, car 0 ∉ ED. ») ; une forme que la chaîne
   ne couvre pas (√(x² − 4), x² + 1) garde les lignes de l'outil ED, puis « Donc x = … ». Valeur exacte puis approchée (decisions.md §2 ;
-  entier exact sans « ≈ » ; R13 sous 10⁻³ et dès 10⁶ ; entre 1000 et 10⁶ la valeur exacte seule). Sans zéro et de signe constant :
+  voir « Valeurs approchées »). Sans zéro et de signe constant :
   « Donc f n'a pas de zéro et f(x) > 0 sur ED. », pas de tableau ; sinon carte « Signe de f » : le tableau de signes de f, construit
   par la machinerie R7 du tableau de f′ (`derivee_variations.tableau_signes` : une ligne par facteur, constante à part, zéros et valeurs
-  interdites, zones hors de l'ED barrées). Zéros non exacts (x³ + x + 1) : « Les zéros de f ne se calculent pas exactement : l'outil ne
+  interdites, zones hors de l'ED barrées), avec **une ligne par facteur de la factorisation écrite dans la chaîne** (R2, Q23 :
+  x² − 4x + 3 → x − 1, x − 3 ; x³ − 3x → x, x² − 3) ; garde-fou : la constante fois le produit des lignes est égal à f (SymPy exact
+  et sonde mpmath), sinon les facteurs saisis. Zéros non exacts (x³ + x + 1) : « Les zéros de f ne se calculent pas exactement : l'outil ne
   dresse pas le tableau de signes de f. » ; zéros non calculés : « Les zéros de f n'ont pas pu être calculés par l'outil : le signe de
   f n'est pas traité. ». Carte « Ordonnée à l'origine » : « f(0) = −6. » (exact puis ≈ ; « g(0) = −2/(−12) = 1/6, donc f(0) =
   e^{1/6} ≈ 1,18 » quand g est nommé), puis « Le graphe coupe l'axe des y au point (0 ; f(0)). » ; « 0 ∉ ED : le graphe ne coupe pas
@@ -62,14 +72,18 @@ partie 6 ; plus tard le bilan) sont dans `etude-complete/parties.py` (créé au 
   être établi avec certitude : l'outil ne conclut pas. » (ou « L'ordonnée à l'origine n'a pas pu être établie avec certitude… »).
   Calculée une fois par étude (`etude_complete.etude_et_partie3`, sur l'analyse en cache) : ses cartes pour `resoudre`, ses zéros
   et f(0) pour le graphique (P8).
-- **Partie 5, extremums** (D11 ; P7b) : à la place de la liste de l'outil Dérivée, dans la carte « Signe de f′ et variations ». Quand
-  la carte « Dérivée » a nommé g (f = e^{u/v}) et x₀ est entier, la valeur est calculée en chaîne : « g(4) = 18/12 = 3/2, donc
-  f(4) = e^{3/2} ≈ 4,48. ». Puis une ligne par extremum : « **Maximum local** en x = 0 : (0 ; e^{1/6}) ≈ (0 ; 1,18) (f′ passe de + à
-  −). » (≈ : decisions.md §2 et R13, entier exact sans ≈ ; « (f′ passe … ) » seulement si f′ change de signe), suivie de « Global : les
-  autres valeurs de f sont plus petites (limites 0⁺ en ±∞). » quand f(x₀) dépasse strictement les autres extremums du même genre et
-  toutes les limites aux bornes de l'ED (±∞ et chaque côté ouvert de chaque borne, celles du tableau T06c), ou de « Pas global :
-  f(x) → +∞ quand x → 2⁺. » (raison : la limite ou l'extremum le plus extrême, le premier dans l'ordre du tableau à égalité) ; rien
-  (« local » seul) si une limite vaut « ? » ou manque, en cas d'égalité, si une borne fermée de l'ED n'est pas un extremum ou si la
+- **Partie 5, extremums** (D11 ; P7b, R2) : à la place de la liste de l'outil Dérivée, dans la carte « Signe de f′ et variations ».
+  D'abord une ligne de calcul pour **chaque** extremum (R2, Q41) : quand la carte « Dérivée » a nommé g (f = e^{u/v}) et x₀ est
+  entier, « g(4) = 18/12 = 3/2, donc f(4) = e^{3/2} ≈ 4,48. » ; sinon, pour x₀ rationnel, ln(q) ou e^{q}, la substitution en chaîne
+  « f(−2) = ((−2)² − 6)e^{−2(−2)} = (4 − 6)e⁴ = −2e⁴ ≈ −109,20. » (substitution, x₀ entre parenthèses s'il est négatif ou
+  fractionnaire ; puis puissances, produits et quotients de nombres calculés, avec e^{ln q} = q, ln(e^{q}) = q, e⁰ = 1, 1·a = a,
+  0·a = 0 ; puis les sommes ; puis l'écriture de l'extremum), chaque membre vérifié égal à f(x₀) par SymPy et par la sonde mpmath ;
+  une écriture ambiguë (chiffre collé à une fraction) ou un doute : pas de ligne. Puis une ligne par extremum (§2 révisé, Q43) :
+  « **Maximum global** en x = 0 : (0 ; 1) (f′ passe de + à −). Les autres valeurs de f sont plus petites (limites 0⁺ en ±∞). » quand
+  f(x₀) dépasse strictement les autres extremums du même genre et toutes les limites aux bornes de l'ED (±∞ et chaque côté ouvert de
+  chaque borne, celles du tableau T06c) ; « **Maximum local** en x = 0 : (0 ; e^{1/6}) ≈ (0 ; 1,18) (f′ passe de + à −). Pas global :
+  f(x) → +∞ quand x → 2⁺. » (raison : la limite ou l'extremum le plus extrême, le premier dans l'ordre du tableau à égalité) ;
+  « **Maximum local** … » seul si une limite vaut « ? » ou manque, en cas d'égalité, si une borne fermée de l'ED n'est pas un extremum ou si la
   valeur n'est pas exacte. Garde-fous (EC-15, principe 0.2) : chaque comparaison est faite par SymPy (signe exact de la différence) et
   par mpmath ; « global » est confirmé par une sonde de f sur l'ED (grille, points près de chaque borne et lointains : aucune valeur
   au-delà de f(x₀)), « pas global » par une valeur de f au-delà de f(x₀) près de la borne nommée ; les limites sont lues sur une liste

@@ -233,6 +233,48 @@ class TestLargeurs(unittest.TestCase):
                         self.assertEqual(tableaux[0]["valeurs"], n_valeurs, (w, tableaux))
                     self.assertEqual(erreurs_a_signaler(page), [])
 
+    # ---------- lignes de calcul des extremums et valeurs approchées dans la formule, chantier étude complète R2 (Q15, Q41) ----------
+    def test_lignes_de_calcul_et_valeurs_approchees(self):
+        """Étude complète, b du corrigé ((x² − 6)e^{−2x} : substitution en chaîne, points avec « ≈ » dans la formule) et 1/(x² − 3x + 2)
+        (condition par Somme-Produit, x₀ = 3/2) : aucune faute du balayage à aucune largeur ; aucune formule ne sort de sa carte (hors
+        d'un bloc qui défile lui-même)."""
+        js = r"""
+        (async () => {
+          await new Promise(r => setTimeout(r, 150));
+          const out = [];
+          for (const k of document.querySelectorAll('#cartes .katex')) {
+            const c = k.closest('.card'); if (!c) continue;
+            let defile = false;
+            for (let m = k.parentElement; m && m !== c; m = m.parentElement) {
+              const o = getComputedStyle(m).overflowX; if (o === 'auto' || o === 'scroll') defile = true; }
+            const r = k.getBoundingClientRect(), rc = c.getBoundingClientRect();
+            if (!defile && r.width > 0 && (r.right > rc.right + 1 || r.left < rc.left - 1)) out.push(k.textContent.slice(0, 60));
+          }
+          return out;
+        })()"""
+        if "etude-complete" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        for entree in ("(x^2-6)e^(-2x)", "1/(x^2-3x+2)"):
+            with self.subTest(entree=entree):
+                dossier, requete = page_de("etude-complete")
+                page = self.nav.ouvrir(f"{dossier}/index.html{requete}")
+                attendre_pret(page)
+                page.taille(1100, 800)
+                page.evaluer(f"document.querySelector('#entree').value = {json.dumps(entree)}; document.querySelector('#calculer').click()")
+                page.attendre("document.querySelector('#cartes').children.length > 0 && !document.querySelector('#calculer').disabled", 120)
+                page.evaluer("document.querySelector('#tout') && !document.querySelector('#tout').disabled && document.querySelector('#tout').click()")
+                self.assertTrue(page.evaluer(r"document.querySelector('#cartes').textContent.includes('≈')"))
+                fautes = []
+                self.balayer(page, "corrigé complet : " + entree, fautes)
+                self.assertEqual(fautes, [], fautes[:5])
+                try:
+                    for w in LARGEURS:
+                        page.taille(w, 800)
+                        self.assertEqual(page.evaluer(js), [], w)
+                finally:
+                    page.taille(1100, 800)
+                self.assertEqual(erreurs_a_signaler(page), [])
+
     # ---------- simplexe (page autonome) ----------
     def clic(self, page, selecteur):
         page.evaluer(f"document.querySelector({selecteur!r}).click()")
