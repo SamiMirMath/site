@@ -6,6 +6,8 @@
    Règles de rendu (une seule fois, ici) :
      carte      classes « card » ; + « cond » si elle a un badge ; + « final » si style « final ».
                 style « erreur » : « card err » avec le seul message (pas de titre).
+                style « partie » : intertitre d'une partie (Étude complète), « card partie » avec le seul titre en <h2>, sans cadre
+                (commun/composants.css) ; outil.js l'affiche avec la carte qui le suit.
                 titre : <h3>titre<span class="badge">badge</span></h3> (titre_tex en formule) ;
                 sans badge, <h3> simple ; titre_masque : aucun titre affiché.
      texte      style etape (défaut) → .etape ; discret → .muted ; indice → .hint
@@ -134,6 +136,13 @@ export function rendreCarte(c, contexte) {
   if (c.style === "erreur") {
     d.className = "card carte-etape err";
     d.textContent = c.blocs.filter(b => b.type === "erreur").map(b => b.texte).join(" ");
+    return d;
+  }
+  if (c.style === "partie") {
+    d.className = "card carte-etape partie";
+    const h = document.createElement("h2");
+    h.textContent = c.titre;
+    d.appendChild(h);
     return d;
   }
   d.className = "card carte-etape" + (c.badge ? " cond" : "") + (c.style === "final" ? " final" : "");

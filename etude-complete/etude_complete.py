@@ -9,12 +9,13 @@ l'échantillonnage numérique pour le graphique.
 """
 import json
 import math
+from functools import lru_cache
 
-from noyau import json_strict, ajouter_saisie, lire, tex, evaluer, fusion, ErreurSaisie, Incertain, analyser_complet, apercu_json
+from noyau import json_strict, ajouter_saisie, lire, tex, evaluer, fusion, ErreurSaisie, Incertain, analyser_complet, apercu_json, SYMPY
 import derivee_variations as dv
 import limites_asymptotes as la
 
-__all__ = ["etudier", "etudier_json", "apercu_json", "fenetre_json"]
+__all__ = ["etudier", "etudier_json", "apercu_json", "fenetre_json", "vider_cache"]
 
 
 def _bornes_finies(ED):
@@ -129,22 +130,40 @@ def limites_du_tableau(table, bornes):
     return res
 
 
+@lru_cache(maxsize=16)
+def _analyse_en_cache(saisie, avec_sympy):
+    """D19, EC-02 : l'analyse (ED) d'une saisie n'est calculée qu'une fois, pour etudier() (et les outils Dérivée et Limites qu'elle
+    appelle) comme pour chaque fenetre() du zoom. `avec_sympy` fait partie de la clé : un résultat obtenu sans SymPy n'est jamais
+    resservi une fois SymPy chargé. Le résultat est partagé : personne ne le modifie."""
+    return analyser_complet(saisie)
+
+
+def analyse(entree):
+    """analyser_complet(entree), en cache par entrée normalisée (espaces réduits : ils ne font que séparer les symboles)."""
+    return _analyse_en_cache(" ".join(str(entree).split()), "sp" in SYMPY)
+
+
+def vider_cache():
+    _analyse_en_cache.cache_clear()
+
+
 def etudier(entree):
     try:
         f = lire(entree)
     except ErreurSaisie as e:
         return {"ok": False, "erreur": str(e)}
 
-    res_ed, _, ED = analyser_complet(entree)
+    a = analyse(entree)
+    res_ed, _, ED = a
     if not res_ed.get("ok"):
         return {"ok": False, "erreur": res_ed["erreur"]}
     if not res_ed.get("complet"):
         return {"ok": False, "erreur": "L'ensemble de définition n'a pas pu être calculé pour cette fonction."}
 
-    r_dv = dv.etudier(entree)
+    r_dv = dv.etudier(entree, analyse=a)
     if not r_dv.get("ok"):
         return r_dv
-    r_la = la.etudier(entree, avec_bornes=True)
+    r_la = la.etudier(entree, avec_bornes=True, analyse=a)
     if not r_la.get("ok"):
         return r_la
     bornes = r_la.pop("limites_bornes")    # hors de la partie Limites, qui reste celle de l'outil séparé
@@ -177,7 +196,7 @@ def fenetre(entree, xmin, xmax, n_total=500):
         f = lire(entree)
     except ErreurSaisie as e:
         return {"ok": False, "erreur": str(e)}
-    res_ed, _, ED = analyser_complet(entree)
+    res_ed, _, ED = analyse(entree)                 # en cache : l'ED n'est pas recalculé à chaque zoom (EC-02)
     if not res_ed.get("ok") or not res_ed.get("complet"):
         return {"ok": False, "erreur": "ED indisponible."}
     segments = []

@@ -8,6 +8,7 @@ import etude_complete as ec
 import resoudre_dv as rdv
 import resoudre_la as rla
 import resoudre_ec as rec
+import sortie as so
 from aides_sortie import manquantes, valide, blocs_de_type, titres_etude
 from cas import entrees_page, CAS_LIMITES
 
@@ -37,16 +38,25 @@ class TestResoudreEC(unittest.TestCase):
             if not ancien["ok"]:
                 continue
             dv, lim = ancien["derivee"], ancien["limites"]
-            attendu = ["Fonction"]
+            p = rec.PARTIES
+            attendu = [p[0], "Fonction", p[1], p[2], p[3]]
+            if lim.get("tableaux_signe"):
+                attendu.append("Tableaux de signes")
+            attendu += [t for e in lim["etudes"] for t in titres_etude(e)] + ["Bilan des asymptotes", p[4]]
             if dv["deriv_resolu"]:
                 attendu.append("Dérivée")
                 if dv["signe_resolu"]:
                     attendu.append("Signe de f' et variations")
-            if lim.get("tableaux_signe"):
-                attendu.append("Tableaux de signes")
-            attendu += [t for e in lim["etudes"] for t in titres_etude(e)] + ["Bilan des asymptotes", "Graphique"]
+            attendu += [p[5], "Graphique"]
             with self.subTest(entree=entree):
-                self.assertEqual(titres(rec.resoudre(entree)), attendu)
+                s = rec.resoudre(entree)
+                self.assertEqual(titres(s), attendu)
+                self.assertEqual([c for c in s["cartes"] if c["style"] == "partie"], [so.partie(t) for t in p])
+
+    def test_six_parties_dans_l_ordre_du_corrige(self):
+        """D1 : les six intertitres, mots et ordre du corrigé .tex."""
+        self.assertEqual(rec.PARTIES, ("1. Domaine de définition", "2. Parité", "3. Zéros, signe, ordonnée à l'origine",
+                                       "4. Limites et asymptotes", "5. Dérivée, tableau de variation, extremums", "6. Graphe"))
 
     def test_cartes_identiques_aux_outils_separes(self):
         """EC-01 : dérivée et limites sont les mêmes cartes que dans les outils séparés
@@ -56,7 +66,7 @@ class TestResoudreEC(unittest.TestCase):
                 continue
             with self.subTest(entree=entree):
                 s, d, l = rec.resoudre(entree), rdv.resoudre(entree), rla.resoudre(entree)
-                self.assertEqual(s["cartes"][1], d["cartes"][1])
+                self.assertEqual(carte(s, "Dérivée"), d["cartes"][1])
                 self.assertEqual([c for c in s["cartes"] if c["titre"] == "Limite"],
                                  [c for c in l["cartes"] if c["titre"] == "Limite"])
 
@@ -64,8 +74,8 @@ class TestResoudreEC(unittest.TestCase):
         s = rec.resoudre("x^3")
         self.assertEqual(carte(s, "Signe de f' et variations")["blocs"][-1]["html"], "Aucun extremum local.")
         s = rec.resoudre("ln(x)/x")
-        self.assertEqual(s["cartes"][0]["blocs"][1]["html"], "\\(ED = \\left]0 \\,;\\, +\\infty\\right[\\)")
-        self.assertEqual(s["cartes"][-2]["style"], "normal")
+        self.assertEqual(carte(s, "Fonction")["blocs"][1]["html"], "\\(ED = \\left]0 \\,;\\, +\\infty\\right[\\)")
+        self.assertEqual(carte(s, "Bilan des asymptotes")["style"], "normal")
 
     def test_graphique(self):
         s = rec.resoudre("ln(x)/x")

@@ -535,16 +535,16 @@ TITRES = ["1. Domaine de définition", "2. Parité", "3. Zéros, signe, ordonné
           "5. Dérivée, tableau de variation, extremums", "6. Graphe"]
 
 
-@pytest.mark.parametrize("ident", avec(set(IDS), xfail("P2", "six parties titrées dans l'ordre du .tex (D1)")))
+@pytest.mark.parametrize("ident", IDS)
 def test_P2_six_parties_dans_l_ordre(ident):
     t = texte(sortie(ident)["cartes"])
     positions = [t.find(titre) for titre in TITRES]
     assert -1 not in positions and positions == sorted(positions), positions
 
 
-@xfail("P2", "analyse calculée une seule fois par etudier(), fenetre() sans nouvel appel (D19, EC-02) ; l'espion compte les calculs "
-             "réels : à placer sous le cache s'il est ajouté autour de analyser_complet")
 def test_P2_analyse_calculee_une_seule_fois():
+    """D19, EC-02 : analyse calculée une seule fois par etudier(), fenetre() sans nouveau calcul. L'espion remplace analyser_complet
+    dans chaque module qui l'importe : il est sous le cache (etude_complete l'appelle par son nom), donc il compte les calculs réels."""
     import noyau
     original = noyau.analyser_complet
     appels = []
@@ -553,7 +553,8 @@ def test_P2_analyse_calculee_une_seule_fois():
         appels.append(args)
         return original(*args, **kwargs)
 
-    saisie = PAR_ID["Ex7"].saisie          # un cache par entrée (P2) doit être vidé avant de compter
+    saisie = PAR_ID["Ex7"].saisie
+    ec.vider_cache()                        # le cache par entrée (P2) est vidé avant de compter
     with ExitStack() as pile:
         for module in list(sys.modules.values()):
             if getattr(module, "analyser_complet", None) is original:
@@ -563,6 +564,23 @@ def test_P2_analyse_calculee_une_seule_fois():
         assert ec.fenetre(saisie, -5, 5)["ok"]
         apres_fenetre = len(appels)
     assert (apres_etude, apres_fenetre) == (1, 1), (apres_etude, apres_fenetre)
+
+
+def test_P2_cache_sans_effet_sur_les_resultats():
+    """Le cache ne change rien : même étude avec un cache vide ou plein, et les saisies qui ne diffèrent que par les espaces partagent
+    la même analyse ; les outils Dérivée et Limites seuls calculent la leur (sans le paramètre `analyse`)."""
+    saisie = PAR_ID["d"].saisie
+    ec.vider_cache()
+    froid = ec.etudier(saisie)
+    assert ec.etudier(saisie) == froid
+    assert ec.analyse(saisie) is ec.analyse("  " + saisie + " ")
+    assert ec.analyse("1/(x - 2)") is ec.analyse(" 1/(x   -  2) ") is not ec.analyse("1/(x-2)")    # espaces réduits, pas supprimés
+    import derivee_variations as dv
+    import limites_asymptotes as la
+    assert froid["derivee"] == dv.etudier(saisie)
+    lim = la.etudier(saisie, avec_bornes=True)
+    lim.pop("limites_bornes")
+    assert froid["limites"] == lim
 
 
 @pytest.mark.parametrize("ident", avec(set(IDS), xfail("P3", "ED détaillé et encadré (D3)")))

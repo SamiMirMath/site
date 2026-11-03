@@ -1,17 +1,28 @@
 # Outil « Étude complète de fonction » (3e Ms, Mr)
 
 URL : `/etude-complete/` · moteur : `etude-complete/etude_complete.py`, qui assemble le noyau,
-la dérivée et les limites (aucun calcul mathématique nouveau).
+la dérivée et les limites ; adaptateur `etude-complete/resoudre_ec.py`. Les parties propres à l'Étude complète (parité ; zéros, signe,
+ordonnée à l'origine ; plus tard le bilan) iront dans `etude-complete/parties.py`, créé avec la première d'entre elles (chantier
+`etude-complete`, P4) et déclaré alors dans `moteur/manifeste.json`. Décisions de rédaction : `docs/chantiers/etude-complete/decisions.md`.
 
 ## Fonctionnel
 
-- Enchaîne : ED → dérivée, signe, variations, extrema → limites et asymptotes → graphique.
+- **Six parties titrées, dans l'ordre du corrigé** (D1) : 1. Domaine de définition · 2. Parité · 3. Zéros, signe, ordonnée à
+  l'origine · 4. Limites et asymptotes · 5. Dérivée, tableau de variation, extremums · 6. Graphe. Chaque partie s'ouvre par un
+  intertitre (carte de style `partie` du format commun : un titre sans cadre, affiché avec la carte qui le suit, hors du compteur
+  d'étapes). Une partie que l'outil ne sait pas encore rédiger reste vide (son intertitre seul) : rien plutôt qu'une affirmation
+  non démontrée (EC-15). Aujourd'hui : partie 1 = carte « Fonction » (f et ED) ; 2 et 3 vides ; 4 = cartes de l'outil Limites
+  (tableaux de signes, une carte par borne, bilan des asymptotes) ; 5 = cartes de l'outil Dérivée (dérivée, signe de f′ et variations,
+  avec les limites dans le tableau, T06c) ; 6 = graphique.
+- **Une seule analyse par saisie** (D19) : le résultat de `analyser_complet` (ED) est gardé en cache (`functools.lru_cache`, clé =
+  saisie aux espaces réduits et présence de SymPy) ; `etudier()` le passe aux outils Dérivée et Limites (paramètre facultatif
+  `analyse` de leur `etudier`, sans effet sur ces outils seuls), et `fenetre()` (zoom) le relit sans recalcul.
 - **Graphique** : cadrage automatique (bornes de l'ED, extrema, asymptotes horizontales) ;
   courbe tracée par morceaux de l'ED ; asymptotes en pointillé ; extrema en points pleins ;
   trous (limite finie en une valeur interdite) en ronds vides ; rééchantillonnage de la fenêtre visible.
   **Souris** : molette et boutons (zoom), glisser (déplacement). **Écran tactile** : un doigt fait défiler la page (la courbe ne
   bouge pas), deux doigts déplacent et zooment la courbe, le point sous le milieu des doigts y reste (T19, EC-05).
-- Les résultats des trois étapes sont exactement ceux des outils séparés.
+- Les valeurs communes (ED, f′, zéros de f′, limites) sont exactement celles des outils séparés (EC-01).
 
 ## Conventions
 
@@ -111,11 +122,12 @@ f(x)     | +∞  ↘  −∞ ‖  ░░░░░░  ‖ −∞  ↗  +∞
 
 | Id | Critère | Vérif. |
 |---|---|---|
-| EC-01 | Pour chaque exemple, les parties dérivée et limites sont identiques aux sorties des outils séparés | [auto-py] |
-| EC-02 | L'ED n'est calculé qu'une fois par étude, et `fenetre()` ne recalcule pas l'ED (mise en cache par entrée) | [auto-py] (compteur d'appels) |
+| EC-01 | Les valeurs communes (ED, f′, zéros de f′, limites) sont identiques à celles des outils séparés. La rédaction peut différer, par paramètre (D2) | [auto-py] (`test_resoudre_ec.py`, `test_corpus_etude_complete.py`) |
+| EC-02 | L'ED n'est calculé qu'une fois par étude, et `fenetre()` ne recalcule pas l'ED (mise en cache par entrée, D19) | [auto-py] (`test_corpus_etude_complete.py::test_P2_analyse_calculee_une_seule_fois`, compteur des calculs réels, cache vidé avant) |
 | EC-03 | `fenetre("e^x", -10, 800)`, `fenetre("e^(-x)", -1000, 10)`, `fenetre("x^2*e^(-x)", -2000, 2000)` réussissent ; les points non calculables sont omis | [auto-py] |
 | EC-04 | En cas d'échec de `fenetre`, la courbe affichée reste celle de la dernière fenêtre réussie et un message discret l'indique | [auto-page] (`test_graphique.py`, crochet `window.__echecFenetre`) |
 | EC-05 | Sur téléphone, un glissement vertical à un doigt sur le graphique fait défiler la page ; deux doigts zooment et déplacent, sans faire défiler la page, et le point de la courbe sous le milieu des doigts y reste quel que soit le nombre de mouvements livrés par le navigateur | [auto-page] (`test_graphique.py`, émulation tactile de Chrome) + [manuel] (14 vérifications sur téléphone, 21.10.2026) |
 | EC-06 | Graduations et coordonnées du graphique sans point décimal (virgule), par la seule fonction `etiquette()` | [auto-page] (`test_graphique.py`) |
 | EC-07 | Le graphique est imprimé (image) dans le PDF, en clair même en mode sombre | [manuel] (vérifié sur téléphone, 21.10.2026) |
-| EC-14 | `resoudre()` (T12) respecte le schéma de sortie commun, ses cartes sont dans l'ordre de la page, celles de la dérivée et des limites sont les cartes des outils séparés, les limites figurent dans le tableau de variations ; instantanés `instantanes/resoudre/etude-complete.json` | [auto-py] (`test_resoudre_ec.py`) |
+| EC-14 | `resoudre()` (T12) respecte le schéma de sortie commun, ses cartes sont dans l'ordre des six parties (D1, intertitres compris), celles de la dérivée et des limites sont les cartes des outils séparés, les limites figurent dans le tableau de variations ; instantanés `instantanes/resoudre/etude-complete.json` | [auto-py] (`test_resoudre_ec.py`) |
+| EC-15 | Toute partie propre à l'EC a un garde-fou numérique et un message clair en cas de doute (D2) ; tant qu'une partie n'est pas rédigée, elle reste vide | [auto-py] (`test_corpus_etude_complete.py` : oracle mpmath indépendant) |

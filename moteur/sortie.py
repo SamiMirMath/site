@@ -5,6 +5,7 @@ Python pur, bibliothèque standard seulement. Une sortie de `resoudre()` est un 
 
     {ok, erreur, detail?, enonce_tex, entete?, cartes: [carte], besoin_sympy?, variantes?, variante_defaut?, option?}
     carte = {titre, titre_tex?, titre_masque?, badge?, style, blocs: [bloc]}
+            style « partie » : intertitre d'une partie (Étude complète, D1), sans bloc ; la page l'affiche avec la carte qui le suit
     bloc  = texte | formule | resultat | erreur | liste | tableau | graphique
     variante = {cle, libelle, cartes: [carte], option?: false}   (facultatif : plusieurs résolutions de la même entrée, au choix de l'élève ;
                `cartes` de la sortie est alors celles de la variante par défaut ; `option: false` : pas de case à cocher pour cette variante)
@@ -14,7 +15,7 @@ Python pur, bibliothèque standard seulement. Une sortie de `resoudre()` est un 
 `valider(sortie)` renvoie la liste des écarts au schéma (vide si la sortie est conforme).
 """
 
-STYLES_CARTE = ("normal", "etape", "final", "erreur")
+STYLES_CARTE = ("normal", "etape", "final", "erreur", "partie")
 STYLES_TEXTE = ("etape", "discret", "indice", "confirme")
 STYLES_LISTE = ("extrema", "bilan")
 GENRES_ENCADRE = ("prediction", "attention", "piege", "autre")
@@ -110,6 +111,12 @@ def carte(titre, blocs, style="normal", badge=None, titre_tex=None, detail=None,
     if titre_tex:
         c["titre_tex"] = titre_tex
     return c
+
+
+def partie(titre):
+    """Intertitre d'une partie (« 4. Limites et asymptotes ») : une carte sans bloc, que la page affiche comme un titre, sans cadre, avec
+    la carte qui la suit (ce n'est pas une étape)."""
+    return carte(titre, [], style="partie")
 
 
 def variante(cle, libelle, cartes, option=True):
@@ -336,5 +343,7 @@ def _valider_carte(c, chemin, ecarts):
     if not isinstance(c.get("blocs"), list):
         ecarts.append(f"{chemin} : blocs doit être une liste")
         return
+    if c.get("style") == "partie" and (c["blocs"] or set(c) - {"titre", "style", "blocs"}):
+        ecarts.append(f"{chemin} : un intertitre (style partie) n'a que titre, style et blocs vides")
     for j, b in enumerate(c["blocs"]):
         _valider_bloc(b, f"{chemin}.blocs[{j}]", ecarts)

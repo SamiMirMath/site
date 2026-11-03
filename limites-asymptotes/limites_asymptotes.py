@@ -3675,13 +3675,14 @@ def _valeurs_pole(asym, cote):
     return {c: asym[c + "_tex"] for c in cotes}
 
 
-def etudier(entree, avec_bornes=False):
+def etudier(entree, avec_bornes=False, analyse=None):
+    """`analyse` : le résultat de analyser_complet(entree) quand l'appelant l'a déjà (Étude complète, D19) ; sinon il est calculé ici."""
     try:
         f = lire(entree)
     except ErreurSaisie as e:
         return {"ok": False, "erreur": str(e)}
 
-    res_ed, _, ED = analyser_complet(entree)
+    res_ed, _, ED = analyse if analyse is not None else analyser_complet(entree)
     if not res_ed.get("ok"):
         return {"ok": False, "erreur": res_ed["erreur"]}
     if not res_ed.get("complet"):

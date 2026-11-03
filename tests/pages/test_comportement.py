@@ -751,16 +751,24 @@ class TestComportement(unittest.TestCase):
         page.attendre("document.querySelector('#cartes').children.length > 0 && !document.querySelector('#calculer').disabled", 120)
 
     def test_soc07_etapes(self):
-        """« Étape suivante » révèle exactement une carte, « Tout afficher » toutes ; le compteur est juste."""
+        """« Étape suivante » révèle exactement une carte, « Tout afficher » toutes ; le compteur est juste. Un intertitre de partie
+        (Étude complète, style « partie ») n'est pas une étape : il n'est pas compté et n'est jamais la dernière carte visible (il apparaît
+        avec la carte qui le suit)."""
         for outil in OUTILS:
             with self.subTest(outil=outil):
                 if outil not in CHOISIS:
                     continue
                 page = self.ouvrir(outil)
                 self.calculer(page, CALCUL[outil])
-                etat = lambda: page.evaluer("""(() => {
+                def etat():
+                    e = lire_etat()
+                    self.assertIsInstance(e, list, e)
+                    return e
+                lire_etat = lambda: page.evaluer("""(() => {
                     const m = document.querySelector('#progression').textContent.match(/(\\d+) \\/ (\\d+)/);
-                    return [+m[1], +m[2], document.querySelectorAll('#cartes .cache').length];
+                    const visibles = [...document.querySelectorAll('#cartes > :not(.cache)')];
+                    if (visibles.length && visibles[visibles.length - 1].classList.contains('partie')) return 'intertitre seul en dernier';
+                    return [+m[1], +m[2], document.querySelectorAll('#cartes .cache:not(.partie)').length];
                 })()""")
                 k, m, caches = etat()
                 self.assertEqual((k, caches), (1, m - 1))

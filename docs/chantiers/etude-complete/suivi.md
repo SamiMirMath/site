@@ -15,8 +15,8 @@ passe fait échouer la suite). Temps natif : `docs/chantiers/etude-complete/mesu
 | Partie | Contenu (decisions.md §6) | Touche | État | Commit |
 |---|---|---|---|---|
 | P0 | `suivi.md`, corpus + oracle mpmath, xfail marqués avec leur partie | tests | **fait** | 5eadf34 |
-| P1 | D6, D7 (parenthèses, doublons), D17 | Dérivée | **fait** | voir `git log` (« EC P1 ») |
-| P2 | Squelette des 6 parties titrées (D1), spécification (D2, D19) | EC | à faire | |
+| P1 | D6, D7 (parenthèses, doublons), D17 | Dérivée | **fait** | edf17c3 |
+| P2 | Squelette des 6 parties titrées (D1), spécification (D2, D19) | EC | **fait** | voir `git log` (« EC P2 ») |
 | P3 | Partie 1 : mise en forme + ED détaillé (D3) | EC | à faire | |
 | P4 | Partie 2 : parité (D4) | EC | à faire | |
 | P5 | Partie 3 : zéros, signe, f(0) (D5) | EC | à faire | |
@@ -36,6 +36,10 @@ passe fait échouer la suite). Temps natif : `docs/chantiers/etude-complete/mesu
 - **P1 faite** : outil Dérivée (`derivee_variations.py`) : e^(somme) gardé entier (une exponentielle par exposant, D6) ; facteur négatif entre
   parenthèses et phrase de dérivée écrite une seule fois (D7) ; 3e^{−6} et 2eˣ(3 − eˣ) (D17). 5 xfail P1 retirés ; 5 instantanés de
   l'outil Dérivée / EC modifiés (liste sous « À relire ») ; questions 5 et 6 ; temps inchangé.
+- **P2 faite** : six parties titrées dans l'ordre du .tex (D1) par un nouveau style de carte `partie` (intertitre sans cadre, commun à tous
+  les outils, affiché avec la carte qui le suit et hors du compteur d'étapes) ; limites avant la dérivée ; parties 2 et 3 vides ;
+  cache de l'analyse (D19) : un seul calcul par `etudier()`, aucun par `fenetre()` ; spécification réécrite (EC-01, EC-02 testé, EC-15).
+  2 xfail P2 retirés ; seuls les instantanés de l'EC changent (ordre des cartes et intertitres) ; questions 7 à 9.
 
 ## Plans
 
@@ -78,12 +82,32 @@ touché, pour ne pas changer les autres outils.
    `test_isoler_atome.py` suit la nouvelle forme de ln(x)/x. Instantanés moteurs, `resoudre` et références de pages régénérés, listés sous
    « À relire » ; suite complète ; temps natif ; commit « EC P1 : … ».
 
+### P2 (03.11.2026)
+
+Squelette sans contenu mathématique nouveau (D1), spécification (D2), cache (D19). L'outil Dérivée et l'outil Limites seuls ne changent pas.
+1. **Intertitres (D1)** : nouveau style de carte `partie` dans `moteur/sortie.py` (constructeur `so.partie(titre)`, carte sans bloc), rendu
+   par `commun/rendu.js` en `<h2>` sans cadre (`.carte-etape.partie` dans `commun/composants.css`, composant commun). `commun/outil.js` :
+   un intertitre n'est pas une étape (il apparaît avec la carte qui le suit et n'entre pas dans « Étape k / n »). Les autres outils
+   n'ont pas d'intertitre : rien ne change pour eux.
+2. `resoudre_ec.py` : six intertitres dans l'ordre du .tex ; cartes réordonnées : 1 « Fonction » ; 2 et 3 vides (l'option qui affiche
+   le moins) ; 4 tableaux de signes, limites, bilan des asymptotes ; 5 dérivée, signe de f′ et variations ; 6 graphique.
+3. **D19** : `etude_complete.py`, cache `functools.lru_cache` de `analyser_complet` par entrée normalisée (espaces réduits) et état de
+   SymPy (un résultat obtenu sans SymPy n'est jamais resservi avec) ; `dv.etudier` et `la.etudier` reçoivent un paramètre facultatif
+   `analyse` (résultat déjà calculé) : sans lui, comportement inchangé. Test compteur : vide le cache, puis 1 calcul par `etudier()`,
+   0 de plus par `fenetre()`.
+4. Spécification `docs/specifications/etude-complete.md` : EC-01 réécrit, EC-02 testé, EC-15 nouveau, les 6 parties, module
+   `parties.py` annoncé (créé à P4, quand une partie a un contenu : rien d'utile à y mettre à P2) ; `docs/choix-techniques.md` : style
+   `partie` du format de sortie.
+5. Tests : retrait des xfail P2 ; `test_resoudre_ec.py` suit le nouvel ordre ; `test_sortie.py` (style `partie`) ; instantanés `resoudre`
+   et références de pages de l'EC régénérés ; suite complète ; temps natif ; commit « EC P2 : … ».
+
 ## Temps natif de etudier() (s, médiane de 3 processus neufs)
 
 | Partie | Ex7 | a | b | c | d |
 |---|---|---|---|---|---|
 | P0 | 0,59 | 0,02 | 0,42 | 0,18 | 0,30 |
 | P1 | 0,63 | 0,02 | 0,42 | 0,19 | 0,30 |
+| P2 | 0,60 | 0,02 | 0,43 | 0,18 | 0,32 |
 
 ## Suite complète
 
@@ -91,6 +115,8 @@ touché, pour ne pas changer les autres outils.
 |---|---|---|---|
 | P0 | 1052 passés, 66 xfail (659 s) | 116 passés (885 s) ; code de retour 0 | 02.11.2026 |
 | P1 | 1062 passés, 61 xfail (641 s) | 116 passés (871 s) ; code de retour 0 (3ᵉ lancement, voir Écarts) | 03.11.2026 |
+| P1 (contrôle du chef d'orchestre) | 1062 passés, 61 xfail (643 s) | 115 passés, 1 échec : `test_clavier.py::test_a_deux_formules…` (le test instable, voir Écarts) ; ce test seul sur P0 (5eadf34, sans P1) dans un arbre séparé : 1 échec sur 6 → défaut préexistant, P1 acceptée | 03.11.2026 |
+| P2 | 1071 passés, 55 xfail (655 s) | 116 passés (880 s) ; code de retour 0 (2ᵉ lancement : le 1ᵉʳ a échoué sur `test_soc07_etapes`, adapté aux intertitres, voir Écarts) | 03.11.2026 |
 
 ## Écarts acceptés
 
@@ -106,6 +132,13 @@ touché, pour ne pas changer les autres outils.
   il échoue 2 fois sur 4 avec P1 et **2 fois sur 6 sur `HEAD` (P0, sans P1)** : défaut préexistant, non corrigé ici (aucun test affaibli).
   Le 3ᵉ lancement de la suite complète est vert (code de retour 0). À traiter dans un chantier « clavier » (cause non trouvée : sur 5 essais
   instrumentés, le toucher arrive bien au bouton).
+
+- P2 : `docs/choix-techniques.md` (description du format de sortie et du rendu commun) reçoit une ligne pour le nouveau style de carte
+  `partie` : sans elle, la documentation du format serait fausse. `parties.py` n'est pas créé à P2 (aucune partie n'a encore de contenu
+  propre à l'EC) : la spécification l'annonce pour P4, avec sa déclaration dans `moteur/manifeste.json`.
+- P2 : `tests/pages/test_comportement.py::test_soc07_etapes` (« Étape suivante révèle exactement une carte ») comptait toutes les cartes
+  cachées, intertitres compris : il échouait sur l'EC (19 cachées pour 14 étapes). Il compte maintenant les cartes cachées hors intertitres
+  et vérifie **en plus** qu'un intertitre n'est jamais la dernière carte visible ; pour les autres outils, rien ne change.
 
 ## Questions pour l'enseignant
 
@@ -127,6 +160,15 @@ touché, pour ne pas changer les autres outils.
 6. **P1, ln(x)/x (D17)** : la règle « signe dans le facteur non polynomial » donne aussi f′(x) = (1 − ln x)/x² au lieu de −(ln x − 1)/x²
    (une ligne « −1 » de moins dans le tableau de signes). La justification du zéro devient « 1 − ln(x) = 0 ⇔ ln(x) = 1 (on isole ln(x) du côté
    où son coefficient est positif) », phrase existante du moteur, au lieu de « (on ajoute 1) ». À relire.
+7. **P2, partie 5 sans dérivée** : quand la dérivée sort du cadre de l'outil, l'Étude complète n'affichait aucune carte de dérivée (l'outil
+   Dérivée affiche « Cette fonction sort du cadre de l'outil : la dérivée n'a pas été calculée. »). L'intertitre « 5. Dérivée, tableau de
+   variation, extremums » reste alors seul (option qui affiche le moins). Faut-il y mettre la phrase de l'outil Dérivée ? Aucune fonction du
+   corpus ni des exemples n'est concernée.
+8. **P2, « 6. Graphe » puis la carte « Graphique »** : le titre de la carte répète l'intertitre. Gardé tel quel (titre de la carte du
+   graphique, attendu par les tests de pages) ; à revoir en P8 si vous préférez une carte sans titre.
+9. **P2, parties 2 et 3 vides** : jusqu'à P4 et P5, l'élève voit les intertitres « 2. Parité » et « 3. Zéros, signe, ordonnée à
+   l'origine » sans rien dessous (un clic sur « Étape suivante » montre d'un coup 2, 3, 4 et la première carte des limites). Ne pas
+   fusionner la branche dans cet état sans P4 et P5.
 
 ## À relire par l'enseignant
 
@@ -147,3 +189,14 @@ touché, pour ne pas changer les autres outils.
   exponentielles e^{−2/(6x−12)}e^{x/(6x−12)}e^{x²/(6x−12)}, et trois lignes d'exponentielles dans le tableau) ; b : ligne
   « 2xe^{−2x} + (x² − 6)(−2e^{−2x}) » (avant « (x² − 6) · −2e^{−2x} ») et maximum 3e^{−6} (avant 3/e⁶) ; c : « (eˣ)′ = eˣ » écrit une fois
   (avant deux), f′ = 2eˣ(3 − eˣ) (avant −2(eˣ − 3)eˣ), tableau : lignes 2, eˣ, (3 − eˣ).
+
+- **P2** (EC seule ; l'outil Dérivée et l'outil Limites seuls ne changent pas : leur `etudier` reçoit un paramètre facultatif `analyse`,
+  sans effet quand il est absent, et leurs instantanés sont identiques). Instantanés modifiés : `tests/python/instantanes/resoudre/etude-complete.json`
+  (15 entrées) et `tests/pages/references/etude-complete.json` (16 entrées) ; `tests/python/instantanes/etude-complete.json` (sortie
+  d'`etudier()`) est identique. Vérifié par programme : dans chaque entrée, mêmes cartes qu'avant (aucune n'est modifiée), dans un autre
+  ordre, plus les six intertitres.
+
+  | Entrée | Avant | Après |
+  |---|---|---|
+  | toutes (15) | Fonction · Dérivée · Signe de f′ et variations · [Tableaux de signes] · Limite… · Bilan des asymptotes · Graphique | **1. Domaine de définition** · Fonction · **2. Parité** · **3. Zéros, signe, ordonnée à l'origine** · **4. Limites et asymptotes** · [Tableaux de signes] · Limite… · Bilan des asymptotes · **5. Dérivée, tableau de variation, extremums** · Dérivée · Signe de f′ et variations · **6. Graphe** · Graphique |
+  | page, au départ | 1 carte visible, « Étape 1 / n » | l'intertitre 1 et la carte « Fonction » visibles, « Étape 1 / n » (n inchangé : les intertitres ne comptent pas) |

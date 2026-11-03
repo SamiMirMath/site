@@ -65,6 +65,13 @@ class TestValidateur(unittest.TestCase):
         self._refuse(lambda s: s["cartes"][0].update(style="rose"), "style « rose » inconnu")
         self._refuse(lambda s: s["cartes"][0]["blocs"][3].update(style="x"), "style « x » inconnu")
 
+    def test_intertitre_de_partie(self):
+        """Style « partie » (Étude complète, D1) : un titre seul, sans bloc ni autre clé."""
+        self.assertEqual(so.partie("2. Parité"), {"titre": "2. Parité", "style": "partie", "blocs": []})
+        self.assertEqual(so.valider(so.sortie_ok("f", [so.partie("1. Domaine"), so.carte("t", [so.texte("a")])])), [])
+        self._refuse(lambda s: s["cartes"].insert(0, so.carte("1. Domaine", [so.texte("a")], style="partie")), "intertitre")
+        self._refuse(lambda s: s["cartes"].insert(0, dict(so.partie("1. Domaine"), badge="b")), "intertitre")
+
     def test_case_hors_vocabulaire(self):
         self._refuse(lambda s: s["cartes"][0]["blocs"][2]["rows"][0]["cells"].__setitem__(1, "?"), "hors vocabulaire")
 
