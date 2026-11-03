@@ -10,7 +10,12 @@ from aides_sortie import manquantes, valide, blocs_de_type, titres_etude
 from cas import entrees_page, CAS_LIMITES
 
 ENTREES = list(dict.fromkeys(entrees_page("limites-asymptotes") + CAS_LIMITES["limites-asymptotes"]))
-TECHNIQUE = ("detail", "ok", "genre", "a", "b")
+TECHNIQUE = ("detail", "ok", "genre", "a", "b", "conclusion")     # conclusion : données de regroupement de x → ±∞ (EC D16), non affichées
+
+
+def affichee(r):
+    """La sortie d'`etudier`, études telles qu'elles sont affichées (x → ±∞ regroupés quand les deux chaînes sont identiques, EC D16)."""
+    return dict(r, etudes=rla.etudes_affichees(r["etudes"])) if r.get("ok") else r
 
 
 def bilan(entree):
@@ -23,11 +28,11 @@ class TestResoudreLA(unittest.TestCase):
             with self.subTest(entree=entree):
                 s = rla.resoudre(entree)
                 valide(self, s)
-                self.assertEqual(manquantes(la.etudier(entree), s, TECHNIQUE), [])
+                self.assertEqual(manquantes(affichee(la.etudier(entree)), s, TECHNIQUE), [])
 
     def test_ordre_et_nombre_de_cartes(self):
         for entree in ENTREES:
-            ancien = la.etudier(entree)
+            ancien = affichee(la.etudier(entree))
             if not ancien["ok"]:
                 continue
             with self.subTest(entree=entree):
@@ -40,18 +45,21 @@ class TestResoudreLA(unittest.TestCase):
                                  [e["ou"] for e in ancien["etudes"] for t in titres_etude(e) if t == "Limite"])
 
     def test_phrases_des_asymptotes(self):
-        self.assertEqual(bilan("(x^2-1)/(x-3)"), [
+        self.assertEqual(bilan("(x^2-1)/(x-3)"), [                    # ordre des bornes : −∞, valeurs interdites, +∞ (EC D16)
             "Asymptote oblique (\\(x \\to -\\infty\\)) : \\(y = x + 3\\)",
-            "Asymptote oblique (\\(x \\to +\\infty\\)) : \\(y = x + 3\\)",
             "Asymptote verticale : \\(x = 3\\) (\\(\\lim_{x\\to 3^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 3^+} f(x) = +\\infty\\))",
+            "Asymptote oblique (\\(x \\to +\\infty\\)) : \\(y = x + 3\\)",
         ])
         self.assertTrue(bilan("(2x^2+1)/(x^2-1)")[0].startswith("Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 2\\)"))
-        self.assertEqual(bilan("(x^2-1)/(x-1)")[2],
+        self.assertEqual(bilan("(x^2-1)/(x-1)")[1],
                          "Trou en \\((1\\,;\\,2)\\) : f n'est pas définie en \\(x = 1\\), mais \\(f(x) \\to 2\\) (pas une asymptote verticale)")
         self.assertTrue(any(l.startswith("Pas de limite en \\(x = 0\\) (pas d'asymptote verticale) : ") for l in bilan("x/sqrt(x^2)")))
-        self.assertEqual(bilan("(x^3+1)/(x-2)")[:2], [
+        self.assertEqual(bilan("(x^3+1)/(x-2)")[::2], [
             "Pas d'asymptote (\\(x \\to -\\infty\\)) — branche parabolique.",
             "Pas d'asymptote (\\(x \\to +\\infty\\)) — branche parabolique."])
+        self.assertEqual(bilan("e^((x^2+x-2)/(6x-12))"), [                # position (démontrée) et 0⁺ dans le bilan (EC D13)
+            "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\), graphe au-dessus",
+            "Asymptote verticale : \\(x = 2\\) (\\(\\lim_{x\\to 2^-} f(x) = 0^{+}\\) ; \\(\\lim_{x\\to 2^+} f(x) = +\\infty\\))"])
 
     def test_aucune_asymptote(self):
         s = rla.resoudre("x^(1/2)")

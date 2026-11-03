@@ -8,7 +8,8 @@ Un commit « EC P{N} : … » par partie ; suite complète verte (`python3 tests
 **Reprise après compactage (session 2, 03.11.2026)** : `decisions.md` a été mis à jour par l'enseignant le 03.11 (§7 : réponses aux
 questions 1 à 56 ; §2 Extremums révisé ; parties R1 et R2). Ordre de la session 2 : **R1, R2, P6, P9** (P10 exclue), un sous-agent par
 partie, l'un après l'autre ; le commit R1 verse aussi la nouvelle version de `decisions.md`. Nouvelles questions numérotées à partir
-de 57. État : tableau « Parties » ci-dessous.
+de 57. État : tableau « Parties » ci-dessous. **P6 faite** (14 xfail P6 retirés : 7 xfail restent, P9 (6) et P10 (1) ; questions
+67 à 74 ; instantanés des outils Limites et EC sous « À relire », P6) ; prochaine : **P9**.
 
 **Reprise après compactage (nuit du 02–03.11)** : la nuit du 02–03.11.2026 est **terminée** (P0 à P5, P7a, P7b, P8 commitées ; résumé ci-dessous ;
 rien n'est poussé ni fusionné). Prochaine étape : **relecture de l'enseignant** (questions « à trancher avant la fusion », instantanés
@@ -333,8 +334,8 @@ encadré ; les cartes « Étape k : … » de la partie 4 sont les étapes de la
 | P4 | Partie 2 : parité (D4) | EC | **fait** | 62781a8 |
 | P5 | Partie 3 : zéros, signe, f(0) (D5) | EC | **fait** | 8fc2fa2 |
 | R1 | Corrections après relecture, outil Dérivée : Q37, Q56, Q32 (§7) | Dérivée | **fait** | e38278c |
-| R2 | Corrections après relecture, EC : Q7, Q11, Q15, Q23, Q28, Q41, Q43 (§7) | EC | **fait** | (voir commit « EC R2 ») |
-| P6 | Partie 4 : D12, D13, D16 | Limites | à faire (session 2) | |
+| R2 | Corrections après relecture, EC : Q7, Q11, Q15, Q23, Q28, Q41, Q43 (§7) | EC | **fait** | 0acc931 |
+| P6 | Partie 4 : D12, D13, D16 | Limites | **fait** | (voir commit « EC P6 ») |
 | P7a | Dérivée de l'exposant détaillée, tableau u/v (D7, D8, D7b si simple) | Dérivée | **fait** | 1799fff |
 | P7b | Valeurs dans le tableau de variations (D10), extremums (D11) | EC + Dérivée | **fait** | cfe88de |
 | P8 | Graphe (D15, §3) | EC | **fait** | 3ece3c9 |
@@ -625,6 +626,36 @@ instantanés doivent rester identiques).
    `test_resoudre_import.py` (nombres.py). Instantanés `resoudre` et références de pages de l'EC régénérés, listés sous « À relire » ;
    largeurs ; spécification ; suite complète ; temps natif ; commit « EC R2 : … ».
 
+### P6 (03.11.2026, session 2)
+
+Partie 4 de l'EC (D12, D13, D16), portée **EC + Limites** : une seule rédaction, dans l'outil Limites (`limites_asymptotes.py`,
+`redaction_bh.py`, `resoudre_la.py`), reprise telle quelle par l'EC. Fractions rationnelles : méthodes anciennes inchangées (R18 du
+guide des limites ; seul l'ordre des bornes change pour elles).
+1. **D16, ordre** : `_bornes` rend −∞ (ou la borne finie de gauche), puis les valeurs interdites croissantes (gauche puis droite),
+   puis +∞ (ou la borne finie de droite) ; études, asymptotes et bilan suivent cet ordre (les deux outils).
+2. **D16, regroupement** (rendu, `resoudre_la.cartes_limites`, partagé) : les cartes de −∞ et de +∞ ne font qu'une, « x → ±∞ »,
+   seulement si leurs étapes sont identiques une fois le symbole du point (−∞ / +∞ dans « x → … ») remplacé ; la conclusion devient
+   celle « des deux côtés ». Les données d'`etudier()` ne changent pas (une étude par borne).
+3. **D12, valeur d'essai** (`redaction_bh`, rédaction descendante, les deux outils) : forme k/0 en un point fini (bas → 0, haut ↛ 0),
+   bas polynôme à coefficients rationnels autre que x, point a décimal : « bas : 6x − 12 → 0 ; avec x = 1,99 : 6 · 1,99 − 12 = −0,06 < 0,
+   donc 0⁻ » (haut : substitution « 2² + 2 − 2 = 4 »). Garde-fous : x = a ± 0,01 (sinon 0,001…, jusqu'à 10⁻⁶), aucun autre zéro du bas
+   dans [a ; x] (isolation exacte des racines par SymPy, après division exacte par (x − a)^m), aucune autre valeur interdite de f
+   entre les deux, valeur exacte (fractions) du signe annoncé par les règles de calcul (0⁻) ; sinon l'écriture actuelle.
+4. **D13, signe d'approche partout** : e^{0⁺} = 1⁺ « (e^t > 1 pour t > 0) » dans la descente, le résultat, le tableau de variations de
+   l'EC (T06c) et le bilan ; le signe ℓ⁺ / ℓ⁻ d'une limite finie non nulle n'est écrit que s'il est donné par les règles **et**
+   confirmé par une sonde mpmath (80 chiffres) du signe de f − ℓ ; bilan : les limites latérales des AV avec 0⁺ / 0⁻.
+5. **D13, conclusions** (transcendantes) : AH « Asymptote horizontale : y = 0 (à gauche). f(x) → 0⁺ : le graphe est au-dessus. »
+   (position seulement si le signe d'approche est démontré, comme ci-dessus) ; limite infinie en ±∞ sans asymptote oblique : « Pas
+   d'asymptote horizontale à droite (f(x) → +∞). » — **retiré en cours de partie** : R6 du guide (imposé par CLAUDE.md) supprime
+   cette phrase et les tests de style l'interdisent (question 67) ; AV d'un seul côté : « Asymptote verticale : x = 2, seulement du côté droit. À
+   gauche, f(x) → 0⁺ : le graphe s'approche du point (2 ; 0), qui n'appartient pas au graphe (rond vide). » (l'autre côté « ? » :
+   phrase actuelle) ; asymptote oblique, AV des deux côtés, trou, bord : phrases actuelles. Bilan : la position après l'AH.
+6. Tests : retrait des 14 xfail P6 du corpus de l'EC ; tests de l'outil Limites sur l'ordre, le regroupement (et non-regroupement),
+   la valeur d'essai (garde-fous forcés : autre zéro proche, point irrationnel, bas non polynomial), 1⁺ et la sonde forcée en
+   désaccord, les phrases des conclusions ; tests existants dont la phrase exacte change : nouvelle phrase exacte (même force).
+   Instantanés de l'outil Limites et de l'EC régénérés et listés sous « À relire » (avant / après) ; largeurs ; spécifications
+   (Limites, EC) ; suite complète ; temps natif ; commit « EC P6 : … ».
+
 ## Temps natif de etudier() (s, médiane de 3 processus neufs)
 
 | Partie | Ex7 | a | b | c | d |
@@ -640,6 +671,7 @@ instantanés doivent rester identiques).
 | P8 | 0,58 | 0,03 | 0,36 | 0,26 | 0,21 |
 | R1 | 0,58 | 0,03 | 0,35 | 0,25 | 0,21 |
 | R2 | 0,67 | 0,03 | 0,42 | 0,30 | 0,24 |
+| P6 | 0,76 | 0,03 | 0,41 | 0,27 | 0,27 |
 
 P3 ne touche pas `etudier()` ; la partie 1 (`parties.cartes_domaine`, appelée par `resoudre`) coûte en plus 0,5 ms (Ex7), 0,2 ms (d),
 moins de 0,01 ms (a, b, c).
@@ -668,6 +700,10 @@ R2 : aucune hausse due à R2 : le même script, lancé le même jour sur R1 (e38
 b 0,42 s, c 0,29 s, d 0,24 s (la machine est plus lente qu'au moment de la mesure R1). Dans `etudier()`, R2 n'ajoute que les lignes du
 tableau de f (Q23), et seulement quand la chaîne de la partie 3 écrit une factorisation (aucune fonction du corpus) ; les lignes de
 calcul des extremums (Q41) sont dans `resoudre` (`blocs_extremums`).
+P6 : Ex7 + 12 à 19 % (valeurs d'essai en 2⁻ et 2⁺ : isolation exacte des racines du bas par SymPy, calculées deux fois par côté
+comme toute la descente en un point interdit, `_narrer_cotes`) ; les autres dans le bruit. Même jour, même machine, HEAD (R2, 0acc931,
+arbre séparé) : Ex7 0,64 s, a 0,03 s, b 0,51 s, c 0,35 s, d 0,30 s ; un premier lancement sur P6 avait donné Ex7 0,73 s, a 0,05 s,
+b 0,63 s, c 0,34 s, d 0,28 s (bruit : b ne fait aucun calcul nouveau). Aucune hausse de plus de 50 % au-dessus de 0,1 s.
 
 ## Suite complète
 
@@ -693,6 +729,8 @@ calcul des extremums (Q41) sont dans `resoudre` (`blocs_extremums`).
 | R1 | 1224 passés, 21 xfail (679 s) | 119 passés (908 s) ; code de retour 0 (1ᵉʳ lancement) | 03.11.2026 |
 | R1 (contrôle du chef d'orchestre) | 1224 passés, 21 xfail (666 s) | 118 passés, 1 échec : `test_clavier.py::test_a_deux_formules…` (le test instable, même symptôme : « effacer » laisse `(x^2-1)/(x-3)`, page Limites, que R1 ne touche pas) ; ce test seul sur R1 : 3 réussites sur 6 → R1 acceptée | 03.11.2026 |
 | R2 | 1240 passés, 21 xfail (930 s) | 120 passés (1202 s, dont le nouveau test `test_largeurs.py::test_lignes_de_calcul_et_valeurs_approchees`) ; code de retour 0 (1ᵉʳ lancement) | 03.11.2026 |
+| R2 (contrôle du chef d'orchestre) | 1240 passés, 21 xfail (917 s) | 120 passés (1199 s) ; code de retour 0 | 03.11.2026 |
+| P6 | 1273 passés, 7 xfail (713 s ; 1ᵉʳ lancement : 836 s, mêmes résultats) | 2ᵉ lancement : 119 passés, 1 échec : `test_clavier.py::test_a_deux_formules…` (le test instable, même symptôme : « effacer » laisse `(x^2-1)/(x-3)`) ; ce test seul : 5 réussites sur 6 ; 1ᵉʳ lancement : 16 échecs de `test_graphique.py::test_traces_egales_aux_references`, tous e^(1/x) (ordre des asymptotes, D16 : `graphique-traces.json` régénéré, voir « À relire »), `test_clavier` passé → P6 acceptée comme R1 | 03.11.2026 |
 
 ## Écarts acceptés
 
@@ -807,6 +845,21 @@ calcul des extremums (Q41) sont dans `resoudre` (`blocs_extremums`).
   (Somme-Produit), remplacé dans la première par quatre formes qui y restent (Δ non carré, racine double, sans terme constant, non
   unitaire). Nouveau test de largeurs `test_largeurs.py::test_lignes_de_calcul_et_valeurs_approchees` (b et 1/(x² − 3x + 2), 320 à
   1100 px : aucune faute, aucune formule hors de sa carte).
+
+- P6 : `tests/python/test_redaction_limites.py` : les phrases exactes des conclusions transcendantes suivent D13 (« Asymptote
+  horizontale : y = 0 (à gauche). f(x) → 0⁺ : le graphe est au-dessus. », « Asymptote verticale : x = 0, seulement du côté droit. … (rond
+  vide). », « (à droite) » pour √…) : même égalité exacte, même force. `test_resoudre_la.py::test_phrases_des_asymptotes` : bilans dans
+  l'ordre de D16 ((x³ + 1)/(x − 2) : les deux lignes « branche parabolique » sont les lignes 1 et 3), plus le bilan de l'Ex7 (position,
+  0⁺). `test_limites_deux_cotes.py` : e^(1/x) a pour limite à gauche « 0^{+} » (au lieu de « 0 ») : plus précis.
+- P6 : `test_resoudre_la.py` et `test_resoudre_ec.py` (« rien de perdu », ordre et nombre des cartes) comparent la sortie de `resoudre`
+  aux études **affichées** (`rla.etudes_affichees` : x → ±∞ regroupés, D16) ; la clé `conclusion` (données du regroupement, jamais
+  affichées) rejoint `TECHNIQUE`. Le regroupement lui-même est vérifié à part (`test_limites_d12_d16.py` : étapes identiques au symbole
+  près, même limite par l'oracle mpmath, une étude de moins exactement).
+- P6 : `test_tableau_limites.py::test_corpus_egal_a_la_partie_limites` (EC-10) : les limites latérales (asymptote verticale) sont
+  comparées **avec** leur signe (les deux sont signées par la même fonction : plus fort qu'avant) ; en ±∞, la valeur sans le signe
+  (la phrase écrit y = 1) **et** le signe comparé à la position de l'AH (« au-dessus » ⇔ ⁺) : plus fort qu'avant.
+- P6 : `limites_asymptotes.etudier` : la boucle des bornes passe dans `_etudier_bornes` (même code), pour vider dans un `finally` la
+  liste des bornes de l'ED que lit le garde-fou de la valeur d'essai (jamais de bornes périmées hors d'une étude).
 
 ## Questions pour l'enseignant
 
@@ -1018,6 +1071,36 @@ calcul des extremums (Q41) sont dans `resoudre` (`blocs_extremums`).
 66. **R2, Q23, dénominateur** : les lignes du tableau de f suivent la factorisation écrite dans la **chaîne de la partie 3** (le
     numérateur) ; un dénominateur factorisé en partie 1 (1/(x² − 3x + 2) : (x − 1)(x − 2), Somme-Produit) garde une ligne
     x² − 3x + 2 (option qui affiche le moins). Faut-il aussi une ligne par facteur du dénominateur ?
+
+67. **P6, D13 « Pas d'asymptote horizontale à droite (f(x) → +∞) »** : **non écrit**. Le guide de rédaction (R6) supprime « La
+    limite est infinie : pas d'asymptote horizontale » et CLAUDE.md impose le guide (CLAUDE.md > decisions.md) ; les tests de style
+    (`test_redaction_limites.py`, `test_doctrine_bh.py`, `test_phrases_interdites`) interdisent « pas d'asymptote horizontale »
+    partout. Option qui affiche le moins, sans affaiblir ces tests. Faut-il modifier R6 et la liste des phrases interdites pour écrire
+    cette ligne en chaque borne infinie (D13) ?
+68. **P6, D12 et fractions rationnelles** : la valeur d'essai est écrite dans la rédaction descendante (fonctions transcendantes,
+    les deux outils) ; les fractions rationnelles gardent leur justification par le tableau de signes (« x − 3 < 0 : cf. tableau de
+    signes », R18 du guide des limites 3M ; (x² − 1)/(x − 3), 1/(x² − 3x + 2) dans l'EC). Faut-il la valeur d'essai aussi pour elles ?
+69. **P6, D12, cas sans valeur d'essai** (écriture d'avant, « x² − 5 → 0⁻ ») : bas = x (« x → 0⁻ » se lit directement : e^(1/x)),
+    point irrationnel (±√5 de e^(−2x/(x² − 5))) ou sans écriture décimale finie (1/3), bas non polynomial (eˣ − 1, ln x), forme
+    0/0 (BH ensuite : le signe du 0 ne décide rien). À confirmer.
+70. **P6, D12, mots** : « Haut de l'exposant : x² + x − 2 → 2² + 2 − 2 = 4 (pas 0, donc pas indéterminée). » · « Bas de l'exposant :
+    6x − 12 → 0 ; avec x = 1,99 : 6 · 1,99 − 12 = −0,06 < 0, donc 0⁻. » · « Exposant : (x² + x − 2)/(6x − 12) → 4/0⁻ = −∞. Donc
+    e^{…} → e^{−∞} = 0⁺. » (§4 écrit « g(x) → 4/0⁻ = −∞, donc f(x) → 0⁺ » : l'outil Limites ne nomme pas g). Hors d'un exposant
+    (ln(x² − 4x)/(x − 5)) : seule la ligne « Bas : … » reçoit la valeur d'essai. Point d'essai : a ± 0,01, plus près si un autre zéro
+    du bas ou une borne de l'ED est entre les deux (jusqu'à 10⁻⁶), sinon l'écriture d'avant.
+71. **P6, D13, position et côté de l'AH** : la position n'est écrite que si le signe d'approche est démontré par la rédaction
+    descendante : 0⁺ / 0⁻ (règles, puis sonde du signe de f) et 1⁺ / 1⁻ (e^{0±}, sonde du signe de f − 1). Pas de position pour
+    e³ (e^((3x + 4)/(x − 2))), −1 ((eˣ + 1)/(eˣ − 1)), x²e^(−x) en +∞ (ancienne rédaction, « = 0 » sans signe), ni pour les
+    fractions rationnelles (« Asymptote horizontale : y = 0. », sans « (à gauche) », R18). Faut-il étendre (ℓ⁺ / ℓ⁻ quelconque,
+    fractions rationnelles) ?
+72. **P6, D13, « (rond vide) » dans l'outil Limites** : la phrase de l'AV d'un seul côté est la même dans les deux outils (portée
+    EC + Limites), « rond vide » compris, alors que la page Limites n'a pas de graphique. À garder ?
+73. **P6, D13, bilan** : « Asymptote horizontale (x → −∞) : y = 0, graphe au-dessus » (position démontrée seulement) ; limites
+    latérales des AV avec 0⁺ / 0⁻ ; une ligne par côté (pas de « ±∞ » dans le bilan). L'autre côté d'une AV non déterminé (« ? ») :
+    phrase d'avant « (du côté droit) ; à gauche, … » (sans « seulement » : une limite inconnue pourrait être infinie).
+74. **P6, D16, regroupement des fractions rationnelles** : la règle « chaînes identiques au symbole près » regroupe aussi 1/x²,
+    1/(x² − 2), (2x² + 1)/(x² − 1) (outil Limites) et x⁴ − 2x² (EC). L'ordre −∞, valeurs interdites, +∞ vaut pour tous les
+    outils et pour le bilan ((x² − 1)/(x − 3) : oblique en −∞, AV x = 3, oblique en +∞). À confirmer.
 
 ## À relire par l'enseignant
 
@@ -1287,3 +1370,29 @@ calcul des extremums (Q41) sont dans `resoudre` (`blocs_extremums`).
   autres valeurs de f sont plus petites (limites 0⁺ en ±∞). » ; Ex7 et d : ≈ dans la formule seulement.
   Largeurs : b, c, a, Ex7, d, 1/(x² − 3x + 2), x⁴ − 2x², x² − 4x + 3, 3x ln x, x ln x + x, 2x² − 6x + 4, (x² + x − 6)e^{−x},
   x²e^{−x²}, (x² − 1)/(x − 3), corrigé complet à 320 – 1100 px : aucune faute du balayage, aucune formule hors de sa carte.
+
+- **P6** (outil **Limites**, donc aussi EC ; D12, D13, D16). Instantanés modifiés : `tests/python/instantanes/limites-asymptotes.json`
+  (31 entrées sur 37), `tests/python/instantanes/resoudre/limites-asymptotes.json` (30 sur 37), `tests/pages/references/limites-asymptotes.json`
+  (30 sur 38), `tests/pages/references/graphique-traces.json` (16 empreintes sur 48, toutes de e^(1/x) : même nombre d'appels de
+  dessin, ordre des asymptotes AH (−∞), AV x = 0, AH (+∞) au lieu de AH, AH, AV), `tests/python/instantanes/etude-complete.json` (12 sur 18 : ordre des études, `gauche_tex` / `droite_tex` signés, 1⁺ du
+  tableau de d, `position` des AH), `tests/python/instantanes/resoudre/etude-complete.json` (13 sur 18 : partie 4 seule, plus le bloc
+  du graphique (données des asymptotes, non affichées) et la ligne f(x) du tableau de variations de d (1⁺ en ±∞)),
+  `tests/pages/references/etude-complete.json` (11 sur 19). ED, Dérivée, Factorisation, Exp-log : instantanés identiques. Vérifié par
+  programme : seules changent les lignes ci-dessous et l'ordre des cartes de limites.
+
+  | Changement | Entrées | Avant | Après |
+  |---|---|---|---|
+  | Ordre des bornes (D16) | Limites : (eˣ − 1)/x, (eˣ − e²)/(x − 2), (ln(x) − 1)/(x − e), (ln(x) − 2)/(ln(x) − 1), (x² − 1)/(x − 1), (x² − 1)/(x − 3), (x³ + 1)/(x − 2), 1/(x − 2), e^((3x + 4)/(x − 2)), e^(−1/x)/x, e^(−2x/(x² − 5)), e^(1/x), eˣ/ln(x), eˣ/x, ln(x + 1)/x, ln(x² − 3)/(2 − x), ln(x² − 4x)/(x − 5), x ln(x²), x/√(x²), x²/(x − 1) ; EC : Ex7, (eˣ − 1)/x, (x² − 1)/(x − 3), 1/(x² − 3x + 2), e^(1/x), x/√(x²) | −∞, +∞, puis les valeurs interdites ; bilan dans le même ordre | −∞, valeurs interdites de gauche à droite, +∞ ; bilan : (x² − 1)/(x − 3) « oblique (−∞) · AV x = 3 · oblique (+∞) » |
+  | x → ±∞ regroupés (D16) | Limites : 1/x², 1/(x² − 2), (2x² + 1)/(x² − 1) ; EC : d, x⁴ − 2x² ; corpus : a | deux cartes « Limite x → −∞ » et « x → +∞ », mêmes lignes | une carte « Limite x → ±∞ », `\lim_{x\to \pm\infty}` ; d : « Asymptote horizontale : y = 1 (des deux côtés). f(x) → 1⁺ : le graphe est au-dessus. » |
+  | Valeur d'essai (D12) | Limites : e^((3x + 4)/(x − 2)) (2⁻, 2⁺), ln(x² − 4x)/(x − 5) (5⁻, 5⁺) ; EC : Ex7 (2⁻, 2⁺), d (±2⁻, ±2⁺) | « Exposant : (x² + x − 2)/(6x − 12) → 4/0⁻ = −∞. Donc … » ; « Bas : x − 5 → 0⁻. » | en plus, avant : « Haut de l'exposant : x² + x − 2 → 2² + 2 − 2 = 4 (pas 0, donc pas indéterminée). » · « Bas de l'exposant : 6x − 12 → 0 ; avec x = 1,99 : 6 · 1,99 − 12 = −0,06 < 0, donc 0⁻. » ; d : « avec x = −2,01 : (−2,01)² − 4 = 0,0401 > 0, donc 0⁺ » ; « Bas : x − 5 → 0 ; avec x = 4,99 : 4,99 − 5 = −0,01 < 0, donc 0⁻. » |
+  | 1⁺ / 1⁻ (D13) | Limites et EC : e^(1/x) (±∞) ; EC : d (±∞) | « e^{0⁺} = 1 », résultat « = 1 », tableau de variations de d : 1 en ±∞ | « e^{0⁺} = 1⁺ (e^t > 1 pour t > 0) », résultat « = 1⁺ » ; tableau de d : 1⁺ ; e^(1/x) en −∞ : « e^{0⁻} = 1⁻ (e^t < 1 pour t < 0) » |
+  | AH : côté et position (D13) | Limites : 20 entrées transcendantes (eˣ/x, x·eˣ, e^(2x), ln(x)/e^(2x)…) ; EC : Ex7, (eˣ − 1)/x, e^(1/x), d, e^(2x), ln(x)/x, x/√(x²), x²e^(−x) | « Asymptote horizontale : y = 0. » ; bilan « Asymptote horizontale (x → −∞) : y = 0 » | « Asymptote horizontale : y = 0 (à gauche). f(x) → 0⁺ : le graphe est au-dessus. » (position seulement si démontrée : sans elle pour e³, −1, ±1 de x/√(x²), 1 de ln(1 + eˣ)/eˣ…) ; bilan « … : y = 0, graphe au-dessus » |
+  | AV d'un seul côté (D13) | Limites : e^((3x + 4)/(x − 2)), e^(−1/x)/x, e^(−2x/(x² − 5)) (±√5), e^(1/x) ; EC : Ex7, e^(1/x), d (±2) | « Asymptote verticale : x = 2 (du côté droit) ; à gauche, f(x) → 0. » ; bilan « lim_{x→2⁻} f(x) = 0 » | « Asymptote verticale : x = 2, seulement du côté droit. À gauche, f(x) → 0⁺ : le graphe s'approche du point (2 ; 0), qui n'appartient pas au graphe (rond vide). » ; bilan « lim_{x→2⁻} f(x) = 0⁺ » |
+
+  Hors instantanés (corpus) : a « Limite x → ±∞ » : « Exposant : −x² → −∞. Donc e^{−x²} → e^{−∞} = 0⁺. », « Asymptote horizontale :
+  y = 0 (des deux côtés). f(x) → 0⁺ : le graphe est au-dessus. » ; b « Asymptote horizontale : y = 0 (à droite). f(x) → 0⁺ : le graphe
+  est au-dessus. » ; c « … y = 0 (à gauche). f(x) → 0⁺ : le graphe est au-dessus. ».
+  Partie 4 de l'Ex7 après P6, écarts restants avec decisions.md §4 : « Exposant : … → 4/0⁻ = −∞. Donc e^{…} → e^{−∞} = 0⁺. » au lieu de
+  « g(x) → 4/0⁻ = −∞, donc f(x) → 0⁺ » (question 70) ; la conclusion de l'AV d'un seul côté est écrite une fois, après x → 2⁺ (§4 :
+  « Pas d'AV à gauche » après 2⁻, puis « AV x = 2, seulement du côté droit » après 2⁺) ; pas de « pas d'AH à droite (f(x) → +∞) » en
+  +∞ (question 67). Les cartes de 2⁻ et 2⁺ sont maintenant entre −∞ et +∞ (D16).

@@ -44,6 +44,10 @@ graphique en (1 ; 1). ». Supprimées : « x = a est une valeur interdite », «
 d'asymptote horizontale », « Le degré du numérateur dépasse … », « a et b sont finis (et a ≠ 0) »,
 « Les deux limites sont finies et égales ». Position relative : f(x) − (ax + b) en chaîne, puis
 « > 0 pour x … : la courbe est au-dessus de l'asymptote ».
+Rédaction descendante (fonctions transcendantes, EC D13, 03.11.2026) : le côté de l'asymptote horizontale, et la position quand
+le signe d'approche est démontré : « Asymptote horizontale : y = 0 (à gauche). f(x) → 0⁺ : le graphe est au-dessus. » ; une seule
+limite latérale infinie : « Asymptote verticale : x = 2, seulement du côté droit. À gauche, f(x) → 0⁺ : le graphe s'approche du
+point (2 ; 0), qui n'appartient pas au graphe (rond vide). ».
 
 **R7. Tableau de signes : TOUJOURS une ligne par facteur du numérateur et du dénominateur, puis la ligne
 du quotient**, même pour un facteur évident (x² + 1, √(4x² + 1), (x + 2)², eˣ) et même pour une

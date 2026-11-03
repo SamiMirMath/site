@@ -143,45 +143,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2 : on conclut directement.On conclut avec les règles de calcul :⟦\\lim_{x\\to -\\infty} \\frac{e^{x} - 1}{x} = \\dfrac{-1}{-\\infty} = 0^{+}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "texte": "Étape 2 : on conclut directement.On conclut avec les règles de calcul :⟦\\lim_{x\\to -\\infty} \\frac{e^{x} - 1}{x} = \\dfrac{-1}{-\\infty} = 0^{+}⟧Asymptote horizontale : ⟦y = 0⟧ (à gauche). ⟦f(x) \\to 0^{+}⟧ : le graphe est au-dessus.",
     "titre": "Étape 2 : on conclut directement."
-   },
-   {
-    "classes": [
-     "card",
-     "cond"
-    ],
-    "listes": [],
-    "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\displaystyle\\lim_{x\\to +\\infty} \\frac{e^{x} - 1}{x}⟧",
-    "titre": "⟦x \\to +\\infty⟧limite"
-   },
-   {
-    "classes": [
-     "card"
-    ],
-    "listes": [],
-    "tableaux": [],
-    "texte": "Étape 1 : on remplace.Haut : ⟦e^{x} - 1 \\to +\\infty⟧. Bas : ⟦x \\to +\\infty⟧. Forme ⟦\\dfrac{+\\infty}{+\\infty}⟧ : indéterminée.Prédiction avec la règle du podiumIci, le podium ne peut pas aider : il n'y a pas de « course » entre une exponentielle, une puissance et un logarithme qui partent vers l'infini.Pour prédire, on utilise la calculatrice (tableau ci-dessous).⟦x⟧⟦1⟧⟦10⟧⟦20⟧⟦50⟧⟦100⟧⟦\\frac{e^{x} - 1}{x}⟧⟦1{,}7183⟧⟦2202{,}5466⟧⟦2{,}43 \\cdot 10^{7}⟧⟦1{,}04 \\cdot 10^{20}⟧⟦2{,}69 \\cdot 10^{41}⟧La calculatrice ne prouve rien : c'est le calcul qui suit qui donne la réponse sûre.",
-    "titre": "Étape 1 : on remplace."
-   },
-   {
-    "classes": [
-     "card"
-    ],
-    "listes": [],
-    "tableaux": [],
-    "texte": "Étape 2 : BH.haut : ⟦e^{x} - 1⟧⟦\\longrightarrow⟧dérivée : ⟦e^{x}⟧bas : ⟦x⟧⟦\\longrightarrow⟧dérivée : ⟦1⟧⟦\\lim_{x\\to +\\infty} \\frac{e^{x} - 1}{x} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{e^{x}}{1}⟧",
-    "titre": "Étape 2 : BH."
-   },
-   {
-    "classes": [
-     "card"
-    ],
-    "listes": [],
-    "tableaux": [],
-    "texte": "Étape 3 : on remplace.⟦e^{x} \\to +\\infty⟧ et ⟦\\frac{e^{x}}{1} \\to \\dfrac{+\\infty}{1} = +\\infty⟧.⟦\\lim_{x\\to +\\infty} \\frac{e^{x} - 1}{x} = +\\infty⟧La calculatrice avait bien « deviné » : le calcul le confirme.",
-    "titre": "Étape 3 : on remplace."
    },
    {
     "classes": [
@@ -259,19 +222,56 @@
    },
    {
     "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\displaystyle\\lim_{x\\to +\\infty} \\frac{e^{x} - 1}{x}⟧",
+    "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.Haut : ⟦e^{x} - 1 \\to +\\infty⟧. Bas : ⟦x \\to +\\infty⟧. Forme ⟦\\dfrac{+\\infty}{+\\infty}⟧ : indéterminée.Prédiction avec la règle du podiumIci, le podium ne peut pas aider : il n'y a pas de « course » entre une exponentielle, une puissance et un logarithme qui partent vers l'infini.Pour prédire, on utilise la calculatrice (tableau ci-dessous).⟦x⟧⟦1⟧⟦10⟧⟦20⟧⟦50⟧⟦100⟧⟦\\frac{e^{x} - 1}{x}⟧⟦1{,}7183⟧⟦2202{,}5466⟧⟦2{,}43 \\cdot 10^{7}⟧⟦1{,}04 \\cdot 10^{20}⟧⟦2{,}69 \\cdot 10^{41}⟧La calculatrice ne prouve rien : c'est le calcul qui suit qui donne la réponse sûre.",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2 : BH.haut : ⟦e^{x} - 1⟧⟦\\longrightarrow⟧dérivée : ⟦e^{x}⟧bas : ⟦x⟧⟦\\longrightarrow⟧dérivée : ⟦1⟧⟦\\lim_{x\\to +\\infty} \\frac{e^{x} - 1}{x} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{e^{x}}{1}⟧",
+    "titre": "Étape 2 : BH."
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3 : on remplace.⟦e^{x} \\to +\\infty⟧ et ⟦\\frac{e^{x}}{1} \\to \\dfrac{+\\infty}{1} = +\\infty⟧.⟦\\lim_{x\\to +\\infty} \\frac{e^{x} - 1}{x} = +\\infty⟧La calculatrice avait bien « deviné » : le calcul le confirme.",
+    "titre": "Étape 3 : on remplace."
+   },
+   {
+    "classes": [
      "card"
     ],
     "listes": [
      [
       "bilan",
       [
-       "Asymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 0⟧",
+       "Asymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 0⟧, graphe au-dessus",
        "Trou en ⟦(0\\,;\\,1)⟧ : f n'est pas définie en ⟦x = 0⟧, mais ⟦f(x) \\to 1⟧ (pas une asymptote verticale)"
       ]
      ]
     ],
     "tableaux": [],
-    "texte": "Bilan des asymptotesAsymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 0⟧Trou en ⟦(0\\,;\\,1)⟧ : f n'est pas définie en ⟦x = 0⟧, mais ⟦f(x) \\to 1⟧ (pas une asymptote verticale)",
+    "texte": "Bilan des asymptotesAsymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 0⟧, graphe au-dessusTrou en ⟦(0\\,;\\,1)⟧ : f n'est pas définie en ⟦x = 0⟧, mais ⟦f(x) \\to 1⟧ (pas une asymptote verticale)",
     "titre": "Bilan des asymptotes"
    },
    {
@@ -856,8 +856,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x^{2} - 1}{x - 3} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{x\\,\\left(1 - \\frac{3}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{x\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{1 - \\frac{3}{x}} = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty\\end{aligned}⟧Même division : ⟦f(x) - \\left(x + 3\\right) = \\dfrac{8}{x - 3}⟧ tend vers ⟦0⟧ : asymptote oblique ⟦y = x + 3⟧ ; ⟦\\dfrac{8}{x - 3} > 0⟧ pour ⟦x > 3⟧ : la courbe est au-dessus de l'asymptote.",
-    "titre": "⟦x \\to +\\infty⟧limite"
+    "texte": "⟦x \\to 3⟧limite⟦\\begin{aligned}\\lim_{x\\to 3^{-}} \\frac{x^{2} - 1}{x - 3} = \\text{« }\\dfrac{8}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x - 3 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}⟧⟦\\begin{aligned}\\lim_{x\\to 3^{+}} \\frac{x^{2} - 1}{x - 3} = \\text{« }\\dfrac{8}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x - 3 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}⟧Asymptote verticale : ⟦x = 3⟧.",
+    "titre": "⟦x \\to 3⟧limite"
    },
    {
     "classes": [
@@ -866,8 +866,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to 3⟧limite⟦\\begin{aligned}\\lim_{x\\to 3^{-}} \\frac{x^{2} - 1}{x - 3} = \\text{« }\\dfrac{8}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x - 3 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}⟧⟦\\begin{aligned}\\lim_{x\\to 3^{+}} \\frac{x^{2} - 1}{x - 3} = \\text{« }\\dfrac{8}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x - 3 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}⟧Asymptote verticale : ⟦x = 3⟧.",
-    "titre": "⟦x \\to 3⟧limite"
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x^{2} - 1}{x - 3} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{x\\,\\left(1 - \\frac{3}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{x\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{1 - \\frac{3}{x}} = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty\\end{aligned}⟧Même division : ⟦f(x) - \\left(x + 3\\right) = \\dfrac{8}{x - 3}⟧ tend vers ⟦0⟧ : asymptote oblique ⟦y = x + 3⟧ ; ⟦\\dfrac{8}{x - 3} > 0⟧ pour ⟦x > 3⟧ : la courbe est au-dessus de l'asymptote.",
+    "titre": "⟦x \\to +\\infty⟧limite"
    },
    {
     "classes": [
@@ -878,13 +878,13 @@
       "bilan",
       [
        "Asymptote oblique (⟦x \\to -\\infty⟧) : ⟦y = x + 3⟧",
-       "Asymptote oblique (⟦x \\to +\\infty⟧) : ⟦y = x + 3⟧",
-       "Asymptote verticale : ⟦x = 3⟧ (⟦\\lim_{x\\to 3^-} f(x) = -\\infty⟧ ; ⟦\\lim_{x\\to 3^+} f(x) = +\\infty⟧)"
+       "Asymptote verticale : ⟦x = 3⟧ (⟦\\lim_{x\\to 3^-} f(x) = -\\infty⟧ ; ⟦\\lim_{x\\to 3^+} f(x) = +\\infty⟧)",
+       "Asymptote oblique (⟦x \\to +\\infty⟧) : ⟦y = x + 3⟧"
       ]
      ]
     ],
     "tableaux": [],
-    "texte": "Bilan des asymptotesAsymptote oblique (⟦x \\to -\\infty⟧) : ⟦y = x + 3⟧Asymptote oblique (⟦x \\to +\\infty⟧) : ⟦y = x + 3⟧Asymptote verticale : ⟦x = 3⟧ (⟦\\lim_{x\\to 3^-} f(x) = -\\infty⟧ ; ⟦\\lim_{x\\to 3^+} f(x) = +\\infty⟧)",
+    "texte": "Bilan des asymptotesAsymptote oblique (⟦x \\to -\\infty⟧) : ⟦y = x + 3⟧Asymptote verticale : ⟦x = 3⟧ (⟦\\lim_{x\\to 3^-} f(x) = -\\infty⟧ ; ⟦\\lim_{x\\to 3^+} f(x) = +\\infty⟧)Asymptote oblique (⟦x \\to +\\infty⟧) : ⟦y = x + 3⟧",
     "titre": "Bilan des asymptotes"
    },
    {
@@ -1578,16 +1578,6 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{1}{x^{2} - 3x + 2} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0 \\qquad \\left(\\text{le terme dominant de } x^{2} - 3x + 2 \\text{ est } x^{2}\\right)\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
-    "titre": "⟦x \\to +\\infty⟧limite"
-   },
-   {
-    "classes": [
-     "card",
-     "cond"
-    ],
-    "listes": [],
-    "tableaux": [],
     "texte": "⟦x \\to 1⟧limite⟦\\begin{aligned}\\lim_{x\\to 1^{-}} \\frac{1}{x^{2} - 3x + 2} = \\text{« }\\dfrac{1}{0^{+}}\\text{ »} = +\\infty \\qquad \\left(x^{2} - 3x + 2 > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}⟧⟦\\begin{aligned}\\lim_{x\\to 1^{+}} \\frac{1}{x^{2} - 3x + 2} = \\text{« }\\dfrac{1}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x^{2} - 3x + 2 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}⟧Asymptote verticale : ⟦x = 1⟧.",
     "titre": "⟦x \\to 1⟧limite"
    },
@@ -1603,6 +1593,16 @@
    },
    {
     "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{1}{x^{2} - 3x + 2} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0 \\qquad \\left(\\text{le terme dominant de } x^{2} - 3x + 2 \\text{ est } x^{2}\\right)\\end{aligned}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
      "card"
     ],
     "listes": [
@@ -1610,14 +1610,14 @@
       "bilan",
       [
        "Asymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 0⟧",
-       "Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 0⟧",
        "Asymptote verticale : ⟦x = 1⟧ (⟦\\lim_{x\\to 1^-} f(x) = +\\infty⟧ ; ⟦\\lim_{x\\to 1^+} f(x) = -\\infty⟧)",
-       "Asymptote verticale : ⟦x = 2⟧ (⟦\\lim_{x\\to 2^-} f(x) = -\\infty⟧ ; ⟦\\lim_{x\\to 2^+} f(x) = +\\infty⟧)"
+       "Asymptote verticale : ⟦x = 2⟧ (⟦\\lim_{x\\to 2^-} f(x) = -\\infty⟧ ; ⟦\\lim_{x\\to 2^+} f(x) = +\\infty⟧)",
+       "Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 0⟧"
       ]
      ]
     ],
     "tableaux": [],
-    "texte": "Bilan des asymptotesAsymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 0⟧Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 0⟧Asymptote verticale : ⟦x = 1⟧ (⟦\\lim_{x\\to 1^-} f(x) = +\\infty⟧ ; ⟦\\lim_{x\\to 1^+} f(x) = -\\infty⟧)Asymptote verticale : ⟦x = 2⟧ (⟦\\lim_{x\\to 2^-} f(x) = -\\infty⟧ ; ⟦\\lim_{x\\to 2^+} f(x) = +\\infty⟧)",
+    "texte": "Bilan des asymptotesAsymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 0⟧Asymptote verticale : ⟦x = 1⟧ (⟦\\lim_{x\\to 1^-} f(x) = +\\infty⟧ ; ⟦\\lim_{x\\to 1^+} f(x) = -\\infty⟧)Asymptote verticale : ⟦x = 2⟧ (⟦\\lim_{x\\to 2^-} f(x) = -\\infty⟧ ; ⟦\\lim_{x\\to 2^+} f(x) = +\\infty⟧)Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 0⟧",
     "titre": "Bilan des asymptotes"
    },
    {
@@ -2786,8 +2786,46 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2 : on applique l'exponentielle.⟦\\lim_{x\\to -\\infty} e^{\\frac{x^{2} + x - 2}{6x - 12}} = e^{-\\infty} = 0^{+}⟧✓ Le calcul confirme la prédiction du podium.Asymptote horizontale : ⟦y = 0⟧.",
+    "texte": "Étape 2 : on applique l'exponentielle.⟦\\lim_{x\\to -\\infty} e^{\\frac{x^{2} + x - 2}{6x - 12}} = e^{-\\infty} = 0^{+}⟧✓ Le calcul confirme la prédiction du podium.Asymptote horizontale : ⟦y = 0⟧ (à gauche). ⟦f(x) \\to 0^{+}⟧ : le graphe est au-dessus.",
     "titre": "Étape 2 : on applique l'exponentielle."
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to 2⟧limite⟦\\displaystyle\\lim_{x\\to 2^{-}} e^{\\frac{x^{2} + x - 2}{6x - 12}}⟧",
+    "titre": "⟦x \\to 2⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.Haut de l'exposant : ⟦x^{2} + x - 2 \\to 2^{2} + 2 - 2 = 4⟧ (pas 0, donc pas indéterminée).Bas de l'exposant : ⟦6x - 12 \\to 0⟧ ; avec ⟦x = 1{,}99⟧ : ⟦6 \\cdot 1{,}99 - 12 = -0{,}06 < 0⟧, donc ⟦0^{-}⟧.Exposant : ⟦\\frac{x^{2} + x - 2}{6x - 12} \\to \\dfrac{4}{0^{-}} = -\\infty⟧. Donc ⟦e^{\\frac{x^{2} + x - 2}{6x - 12}} \\to e^{-\\infty} = 0^{+}⟧.⟦\\lim_{x\\to 2^{-}} e^{\\frac{x^{2} + x - 2}{6x - 12}} = 0^{+}⟧",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to 2⟧limite⟦\\displaystyle\\lim_{x\\to 2^{+}} e^{\\frac{x^{2} + x - 2}{6x - 12}}⟧",
+    "titre": "⟦x \\to 2⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.Haut de l'exposant : ⟦x^{2} + x - 2 \\to 2^{2} + 2 - 2 = 4⟧ (pas 0, donc pas indéterminée).Bas de l'exposant : ⟦6x - 12 \\to 0⟧ ; avec ⟦x = 2{,}01⟧ : ⟦6 \\cdot 2{,}01 - 12 = 0{,}06 > 0⟧, donc ⟦0^{+}⟧.Exposant : ⟦\\frac{x^{2} + x - 2}{6x - 12} \\to \\dfrac{4}{0^{+}} = +\\infty⟧. Donc ⟦e^{\\frac{x^{2} + x - 2}{6x - 12}} \\to e^{+\\infty} = +\\infty⟧.⟦\\lim_{x\\to 2^{+}} e^{\\frac{x^{2} + x - 2}{6x - 12}} = +\\infty⟧Asymptote verticale : ⟦x = 2⟧, seulement du côté droit. À gauche, ⟦f(x) \\to 0^{+}⟧ : le graphe s'approche du point ⟦(2\\,;\\,0)⟧, qui n'appartient pas au graphe (rond vide).",
+    "titre": "Étape 1 : on remplace."
    },
    {
     "classes": [
@@ -2819,57 +2857,19 @@
    },
    {
     "classes": [
-     "card",
-     "cond"
-    ],
-    "listes": [],
-    "tableaux": [],
-    "texte": "⟦x \\to 2⟧limite⟦\\displaystyle\\lim_{x\\to 2^{-}} e^{\\frac{x^{2} + x - 2}{6x - 12}}⟧",
-    "titre": "⟦x \\to 2⟧limite"
-   },
-   {
-    "classes": [
-     "card"
-    ],
-    "listes": [],
-    "tableaux": [],
-    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{x^{2} + x - 2}{6x - 12} \\to \\dfrac{4}{0^{-}} = -\\infty⟧. Donc ⟦e^{\\frac{x^{2} + x - 2}{6x - 12}} \\to e^{-\\infty} = 0^{+}⟧.⟦\\lim_{x\\to 2^{-}} e^{\\frac{x^{2} + x - 2}{6x - 12}} = 0^{+}⟧",
-    "titre": "Étape 1 : on remplace."
-   },
-   {
-    "classes": [
-     "card",
-     "cond"
-    ],
-    "listes": [],
-    "tableaux": [],
-    "texte": "⟦x \\to 2⟧limite⟦\\displaystyle\\lim_{x\\to 2^{+}} e^{\\frac{x^{2} + x - 2}{6x - 12}}⟧",
-    "titre": "⟦x \\to 2⟧limite"
-   },
-   {
-    "classes": [
-     "card"
-    ],
-    "listes": [],
-    "tableaux": [],
-    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{x^{2} + x - 2}{6x - 12} \\to \\dfrac{4}{0^{+}} = +\\infty⟧. Donc ⟦e^{\\frac{x^{2} + x - 2}{6x - 12}} \\to e^{+\\infty} = +\\infty⟧.⟦\\lim_{x\\to 2^{+}} e^{\\frac{x^{2} + x - 2}{6x - 12}} = +\\infty⟧Asymptote verticale : ⟦x = 2⟧ (du côté droit) ; à gauche, ⟦f(x) \\to 0⟧.",
-    "titre": "Étape 1 : on remplace."
-   },
-   {
-    "classes": [
      "card"
     ],
     "listes": [
      [
       "bilan",
       [
-       "Asymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 0⟧",
-       "Asymptote verticale : ⟦x = 2⟧ (⟦\\lim_{x\\to 2^-} f(x) = 0⟧ ; ⟦\\lim_{x\\to 2^+} f(x) = +\\infty⟧)"
+       "Asymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 0⟧, graphe au-dessus",
+       "Asymptote verticale : ⟦x = 2⟧ (⟦\\lim_{x\\to 2^-} f(x) = 0^{+}⟧ ; ⟦\\lim_{x\\to 2^+} f(x) = +\\infty⟧)"
       ]
      ]
     ],
     "tableaux": [],
-    "texte": "Bilan des asymptotesAsymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 0⟧Asymptote verticale : ⟦x = 2⟧ (⟦\\lim_{x\\to 2^-} f(x) = 0⟧ ; ⟦\\lim_{x\\to 2^+} f(x) = +\\infty⟧)",
+    "texte": "Bilan des asymptotesAsymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 0⟧, graphe au-dessusAsymptote verticale : ⟦x = 2⟧ (⟦\\lim_{x\\to 2^-} f(x) = 0^{+}⟧ ; ⟦\\lim_{x\\to 2^+} f(x) = +\\infty⟧)",
     "titre": "Bilan des asymptotes"
    },
    {
@@ -3430,26 +3430,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{1}{x} \\to \\dfrac{1}{-\\infty} = 0^{-}⟧. Donc ⟦e^{\\frac{1}{x}} \\to e^{0^{-}} = 1⟧.⟦\\lim_{x\\to -\\infty} e^{\\frac{1}{x}} = 1⟧Asymptote horizontale : ⟦y = 1⟧.",
-    "titre": "Étape 1 : on remplace."
-   },
-   {
-    "classes": [
-     "card",
-     "cond"
-    ],
-    "listes": [],
-    "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\displaystyle\\lim_{x\\to +\\infty} e^{\\frac{1}{x}}⟧",
-    "titre": "⟦x \\to +\\infty⟧limite"
-   },
-   {
-    "classes": [
-     "card"
-    ],
-    "listes": [],
-    "tableaux": [],
-    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{1}{x} \\to \\dfrac{1}{+\\infty} = 0^{+}⟧. Donc ⟦e^{\\frac{1}{x}} \\to e^{0^{+}} = 1⟧.⟦\\lim_{x\\to +\\infty} e^{\\frac{1}{x}} = 1⟧Asymptote horizontale : ⟦y = 1⟧.",
+    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{1}{x} \\to \\dfrac{1}{-\\infty} = 0^{-}⟧. Donc ⟦e^{\\frac{1}{x}} \\to e^{0^{-}} = 1^{-}⟧ (⟦e^{t} < 1⟧ pour ⟦t < 0⟧).⟦\\lim_{x\\to -\\infty} e^{\\frac{1}{x}} = 1^{-}⟧Asymptote horizontale : ⟦y = 1⟧ (à gauche). ⟦f(x) \\to 1^{-}⟧ : le graphe est au-dessous.",
     "titre": "Étape 1 : on remplace."
    },
    {
@@ -3487,7 +3468,26 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{1}{x} \\to \\dfrac{1}{0^{+}} = +\\infty⟧. Donc ⟦e^{\\frac{1}{x}} \\to e^{+\\infty} = +\\infty⟧.⟦\\lim_{x\\to 0^{+}} e^{\\frac{1}{x}} = +\\infty⟧Asymptote verticale : ⟦x = 0⟧ (du côté droit) ; à gauche, ⟦f(x) \\to 0⟧.",
+    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{1}{x} \\to \\dfrac{1}{0^{+}} = +\\infty⟧. Donc ⟦e^{\\frac{1}{x}} \\to e^{+\\infty} = +\\infty⟧.⟦\\lim_{x\\to 0^{+}} e^{\\frac{1}{x}} = +\\infty⟧Asymptote verticale : ⟦x = 0⟧, seulement du côté droit. À gauche, ⟦f(x) \\to 0^{+}⟧ : le graphe s'approche du point ⟦(0\\,;\\,0)⟧, qui n'appartient pas au graphe (rond vide).",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\displaystyle\\lim_{x\\to +\\infty} e^{\\frac{1}{x}}⟧",
+    "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{1}{x} \\to \\dfrac{1}{+\\infty} = 0^{+}⟧. Donc ⟦e^{\\frac{1}{x}} \\to e^{0^{+}} = 1^{+}⟧ (⟦e^{t} > 1⟧ pour ⟦t > 0⟧).⟦\\lim_{x\\to +\\infty} e^{\\frac{1}{x}} = 1^{+}⟧Asymptote horizontale : ⟦y = 1⟧ (à droite). ⟦f(x) \\to 1^{+}⟧ : le graphe est au-dessus.",
     "titre": "Étape 1 : on remplace."
    },
    {
@@ -3498,14 +3498,14 @@
      [
       "bilan",
       [
-       "Asymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 1⟧",
-       "Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 1⟧",
-       "Asymptote verticale : ⟦x = 0⟧ (⟦\\lim_{x\\to 0^-} f(x) = 0⟧ ; ⟦\\lim_{x\\to 0^+} f(x) = +\\infty⟧)"
+       "Asymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 1⟧, graphe au-dessous",
+       "Asymptote verticale : ⟦x = 0⟧ (⟦\\lim_{x\\to 0^-} f(x) = 0^{+}⟧ ; ⟦\\lim_{x\\to 0^+} f(x) = +\\infty⟧)",
+       "Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 1⟧, graphe au-dessus"
       ]
      ]
     ],
     "tableaux": [],
-    "texte": "Bilan des asymptotesAsymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 1⟧Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 1⟧Asymptote verticale : ⟦x = 0⟧ (⟦\\lim_{x\\to 0^-} f(x) = 0⟧ ; ⟦\\lim_{x\\to 0^+} f(x) = +\\infty⟧)",
+    "texte": "Bilan des asymptotesAsymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 1⟧, graphe au-dessousAsymptote verticale : ⟦x = 0⟧ (⟦\\lim_{x\\to 0^-} f(x) = 0^{+}⟧ ; ⟦\\lim_{x\\to 0^+} f(x) = +\\infty⟧)Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 1⟧, graphe au-dessus",
     "titre": "Bilan des asymptotes"
    },
    {
@@ -3689,7 +3689,7 @@
         ],
         [
          "",
-         "⟦1⟧"
+         "⟦1^{-}⟧"
         ],
         [
          "",
@@ -3705,14 +3705,14 @@
         ],
         [
          "",
-         "⟦1⟧"
+         "⟦1^{+}⟧"
         ]
        ],
        "classe": "variation"
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{-e^{\\frac{1}{x}}}{x^{2}}⟧ ne s'annule jamais ; valeur interdite : ⟦x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦-1⟧−−⟦e^{\\frac{1}{x}}⟧++⟦x^{2}⟧++⟦f'(x)⟧−−⟦f(x)⟧⟦1⟧⟦\\searrow⟧⟦0^{+}⟧⟦+\\infty⟧⟦+\\infty⟧⟦0^{+}⟧⟦\\searrow⟧⟦1⟧Aucun extremum local.",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = \\frac{-e^{\\frac{1}{x}}}{x^{2}}⟧ ne s'annule jamais ; valeur interdite : ⟦x = 0⟧.⟦x⟧⟦-\\infty⟧⟦0⟧⟦+\\infty⟧⟦-1⟧−−⟦e^{\\frac{1}{x}}⟧++⟦x^{2}⟧++⟦f'(x)⟧−−⟦f(x)⟧⟦1^{-}⟧⟦\\searrow⟧⟦0^{+}⟧⟦+\\infty⟧⟦+\\infty⟧⟦0^{+}⟧⟦\\searrow⟧⟦1^{+}⟧Aucun extremum local.",
     "titre": "Signe de f' et variationstableau"
    },
    {
@@ -3739,7 +3739,7 @@
  },
  "e^(2/(x^2-4))": {
   "au_depart": {
-   "progression": "Étape 1 / 23",
+   "progression": "Étape 1 / 21",
    "visibles": 2
   },
   "cartes": [
@@ -3854,8 +3854,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to -\\infty⟧limite⟦\\displaystyle\\lim_{x\\to -\\infty} e^{\\frac{2}{x^{2} - 4}}⟧",
-    "titre": "⟦x \\to -\\infty⟧limite"
+    "texte": "⟦x \\to \\pm\\infty⟧limite⟦\\displaystyle\\lim_{x\\to \\pm\\infty} e^{\\frac{2}{x^{2} - 4}}⟧",
+    "titre": "⟦x \\to \\pm\\infty⟧limite"
    },
    {
     "classes": [
@@ -3863,26 +3863,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{+\\infty} = 0^{+}⟧. Donc ⟦e^{\\frac{2}{x^{2} - 4}} \\to e^{0^{+}} = 1⟧.⟦\\lim_{x\\to -\\infty} e^{\\frac{2}{x^{2} - 4}} = 1⟧Asymptote horizontale : ⟦y = 1⟧.",
-    "titre": "Étape 1 : on remplace."
-   },
-   {
-    "classes": [
-     "card",
-     "cond"
-    ],
-    "listes": [],
-    "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\displaystyle\\lim_{x\\to +\\infty} e^{\\frac{2}{x^{2} - 4}}⟧",
-    "titre": "⟦x \\to +\\infty⟧limite"
-   },
-   {
-    "classes": [
-     "card"
-    ],
-    "listes": [],
-    "tableaux": [],
-    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{+\\infty} = 0^{+}⟧. Donc ⟦e^{\\frac{2}{x^{2} - 4}} \\to e^{0^{+}} = 1⟧.⟦\\lim_{x\\to +\\infty} e^{\\frac{2}{x^{2} - 4}} = 1⟧Asymptote horizontale : ⟦y = 1⟧.",
+    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{+\\infty} = 0^{+}⟧. Donc ⟦e^{\\frac{2}{x^{2} - 4}} \\to e^{0^{+}} = 1^{+}⟧ (⟦e^{t} > 1⟧ pour ⟦t > 0⟧).⟦\\lim_{x\\to \\pm\\infty} e^{\\frac{2}{x^{2} - 4}} = 1^{+}⟧Asymptote horizontale : ⟦y = 1⟧ (des deux côtés). ⟦f(x) \\to 1^{+}⟧ : le graphe est au-dessus.",
     "titre": "Étape 1 : on remplace."
    },
    {
@@ -3901,7 +3882,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{0^{+}} = +\\infty⟧. Donc ⟦e^{\\frac{2}{x^{2} - 4}} \\to e^{+\\infty} = +\\infty⟧.⟦\\lim_{x\\to -2^{-}} e^{\\frac{2}{x^{2} - 4}} = +\\infty⟧",
+    "texte": "Étape 1 : on remplace.Bas de l'exposant : ⟦x^{2} - 4 \\to 0⟧ ; avec ⟦x = -2{,}01⟧ : ⟦\\left(-2{,}01\\right)^{2} - 4 = 0{,}0401 > 0⟧, donc ⟦0^{+}⟧.Exposant : ⟦\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{0^{+}} = +\\infty⟧. Donc ⟦e^{\\frac{2}{x^{2} - 4}} \\to e^{+\\infty} = +\\infty⟧.⟦\\lim_{x\\to -2^{-}} e^{\\frac{2}{x^{2} - 4}} = +\\infty⟧",
     "titre": "Étape 1 : on remplace."
    },
    {
@@ -3920,7 +3901,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{0^{-}} = -\\infty⟧. Donc ⟦e^{\\frac{2}{x^{2} - 4}} \\to e^{-\\infty} = 0^{+}⟧.⟦\\lim_{x\\to -2^{+}} e^{\\frac{2}{x^{2} - 4}} = 0^{+}⟧Asymptote verticale : ⟦x = -2⟧ (du côté gauche) ; à droite, ⟦f(x) \\to 0⟧.",
+    "texte": "Étape 1 : on remplace.Bas de l'exposant : ⟦x^{2} - 4 \\to 0⟧ ; avec ⟦x = -1{,}99⟧ : ⟦\\left(-1{,}99\\right)^{2} - 4 = -0{,}0399 < 0⟧, donc ⟦0^{-}⟧.Exposant : ⟦\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{0^{-}} = -\\infty⟧. Donc ⟦e^{\\frac{2}{x^{2} - 4}} \\to e^{-\\infty} = 0^{+}⟧.⟦\\lim_{x\\to -2^{+}} e^{\\frac{2}{x^{2} - 4}} = 0^{+}⟧Asymptote verticale : ⟦x = -2⟧, seulement du côté gauche. À droite, ⟦f(x) \\to 0^{+}⟧ : le graphe s'approche du point ⟦(-2\\,;\\,0)⟧, qui n'appartient pas au graphe (rond vide).",
     "titre": "Étape 1 : on remplace."
    },
    {
@@ -3939,7 +3920,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{0^{-}} = -\\infty⟧. Donc ⟦e^{\\frac{2}{x^{2} - 4}} \\to e^{-\\infty} = 0^{+}⟧.⟦\\lim_{x\\to 2^{-}} e^{\\frac{2}{x^{2} - 4}} = 0^{+}⟧",
+    "texte": "Étape 1 : on remplace.Bas de l'exposant : ⟦x^{2} - 4 \\to 0⟧ ; avec ⟦x = 1{,}99⟧ : ⟦\\left(1{,}99\\right)^{2} - 4 = -0{,}0399 < 0⟧, donc ⟦0^{-}⟧.Exposant : ⟦\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{0^{-}} = -\\infty⟧. Donc ⟦e^{\\frac{2}{x^{2} - 4}} \\to e^{-\\infty} = 0^{+}⟧.⟦\\lim_{x\\to 2^{-}} e^{\\frac{2}{x^{2} - 4}} = 0^{+}⟧",
     "titre": "Étape 1 : on remplace."
    },
    {
@@ -3958,7 +3939,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1 : on remplace.Exposant : ⟦\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{0^{+}} = +\\infty⟧. Donc ⟦e^{\\frac{2}{x^{2} - 4}} \\to e^{+\\infty} = +\\infty⟧.⟦\\lim_{x\\to 2^{+}} e^{\\frac{2}{x^{2} - 4}} = +\\infty⟧Asymptote verticale : ⟦x = 2⟧ (du côté droit) ; à gauche, ⟦f(x) \\to 0⟧.",
+    "texte": "Étape 1 : on remplace.Bas de l'exposant : ⟦x^{2} - 4 \\to 0⟧ ; avec ⟦x = 2{,}01⟧ : ⟦\\left(2{,}01\\right)^{2} - 4 = 0{,}0401 > 0⟧, donc ⟦0^{+}⟧.Exposant : ⟦\\frac{2}{x^{2} - 4} \\to \\dfrac{2}{0^{+}} = +\\infty⟧. Donc ⟦e^{\\frac{2}{x^{2} - 4}} \\to e^{+\\infty} = +\\infty⟧.⟦\\lim_{x\\to 2^{+}} e^{\\frac{2}{x^{2} - 4}} = +\\infty⟧Asymptote verticale : ⟦x = 2⟧, seulement du côté droit. À gauche, ⟦f(x) \\to 0^{+}⟧ : le graphe s'approche du point ⟦(2\\,;\\,0)⟧, qui n'appartient pas au graphe (rond vide).",
     "titre": "Étape 1 : on remplace."
    },
    {
@@ -3969,15 +3950,15 @@
      [
       "bilan",
       [
-       "Asymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 1⟧",
-       "Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 1⟧",
-       "Asymptote verticale : ⟦x = -2⟧ (⟦\\lim_{x\\to -2^-} f(x) = +\\infty⟧ ; ⟦\\lim_{x\\to -2^+} f(x) = 0⟧)",
-       "Asymptote verticale : ⟦x = 2⟧ (⟦\\lim_{x\\to 2^-} f(x) = 0⟧ ; ⟦\\lim_{x\\to 2^+} f(x) = +\\infty⟧)"
+       "Asymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 1⟧, graphe au-dessus",
+       "Asymptote verticale : ⟦x = -2⟧ (⟦\\lim_{x\\to -2^-} f(x) = +\\infty⟧ ; ⟦\\lim_{x\\to -2^+} f(x) = 0^{+}⟧)",
+       "Asymptote verticale : ⟦x = 2⟧ (⟦\\lim_{x\\to 2^-} f(x) = 0^{+}⟧ ; ⟦\\lim_{x\\to 2^+} f(x) = +\\infty⟧)",
+       "Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 1⟧, graphe au-dessus"
       ]
      ]
     ],
     "tableaux": [],
-    "texte": "Bilan des asymptotesAsymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 1⟧Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 1⟧Asymptote verticale : ⟦x = -2⟧ (⟦\\lim_{x\\to -2^-} f(x) = +\\infty⟧ ; ⟦\\lim_{x\\to -2^+} f(x) = 0⟧)Asymptote verticale : ⟦x = 2⟧ (⟦\\lim_{x\\to 2^-} f(x) = 0⟧ ; ⟦\\lim_{x\\to 2^+} f(x) = +\\infty⟧)",
+    "texte": "Bilan des asymptotesAsymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 1⟧, graphe au-dessusAsymptote verticale : ⟦x = -2⟧ (⟦\\lim_{x\\to -2^-} f(x) = +\\infty⟧ ; ⟦\\lim_{x\\to -2^+} f(x) = 0^{+}⟧)Asymptote verticale : ⟦x = 2⟧ (⟦\\lim_{x\\to 2^-} f(x) = 0^{+}⟧ ; ⟦\\lim_{x\\to 2^+} f(x) = +\\infty⟧)Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 1⟧, graphe au-dessus",
     "titre": "Bilan des asymptotes"
    },
    {
@@ -4338,7 +4319,7 @@
         ],
         [
          "",
-         "⟦1⟧"
+         "⟦1^{+}⟧"
         ],
         [
          "",
@@ -4370,14 +4351,14 @@
         ],
         [
          "",
-         "⟦1⟧"
+         "⟦1^{+}⟧"
         ]
        ],
        "classe": "variation"
       }
      ]
     ],
-    "texte": "Signe de f' et variationstableau⟦f'(x) = 0 \\iff x = 0⟧ (car ⟦e^{\\frac{2}{x^{2} - 4}} > 0⟧) ; valeurs interdites : ⟦x = -2⟧ ; ⟦x = 2⟧.⟦x⟧⟦-\\infty⟧⟦-2⟧⟦0⟧⟦2⟧⟦+\\infty⟧⟦-4⟧−−−−−⟦x⟧−−0++⟦e^{\\frac{2}{x^{2} - 4}}⟧+++++⟦\\left(x - 2\\right)^{2}⟧+++++⟦\\left(x + 2\\right)^{2}⟧+++++⟦f'(x)⟧++0−−⟦f(x)⟧⟦1⟧⟦\\nearrow⟧⟦+\\infty⟧⟦0^{+}⟧⟦0^{+}⟧⟦+\\infty⟧⟦\\nearrow⟧⟦e^{- \\frac{1}{2}}⟧⟦\\searrow⟧⟦0^{+}⟧⟦+\\infty⟧⟦+\\infty⟧⟦0^{+}⟧⟦\\searrow⟧⟦1⟧⟦g(0) = \\frac{2}{-4} = -\\frac{1}{2}⟧, donc ⟦f(0) = e^{- \\frac{1}{2}} \\approx 0{,}61⟧.Maximum local en ⟦x = 0⟧ : ⟦\\left(0\\,;\\,e^{- \\frac{1}{2}}\\right) \\approx \\left(0\\,;\\,0{,}61\\right)⟧ (⟦f'⟧ passe de ⟦+⟧ à ⟦-⟧). Pas global : ⟦f(x) \\to +\\infty⟧ quand ⟦x \\to -2^{-}⟧.",
+    "texte": "Signe de f' et variationstableau⟦f'(x) = 0 \\iff x = 0⟧ (car ⟦e^{\\frac{2}{x^{2} - 4}} > 0⟧) ; valeurs interdites : ⟦x = -2⟧ ; ⟦x = 2⟧.⟦x⟧⟦-\\infty⟧⟦-2⟧⟦0⟧⟦2⟧⟦+\\infty⟧⟦-4⟧−−−−−⟦x⟧−−0++⟦e^{\\frac{2}{x^{2} - 4}}⟧+++++⟦\\left(x - 2\\right)^{2}⟧+++++⟦\\left(x + 2\\right)^{2}⟧+++++⟦f'(x)⟧++0−−⟦f(x)⟧⟦1^{+}⟧⟦\\nearrow⟧⟦+\\infty⟧⟦0^{+}⟧⟦0^{+}⟧⟦+\\infty⟧⟦\\nearrow⟧⟦e^{- \\frac{1}{2}}⟧⟦\\searrow⟧⟦0^{+}⟧⟦+\\infty⟧⟦+\\infty⟧⟦0^{+}⟧⟦\\searrow⟧⟦1^{+}⟧⟦g(0) = \\frac{2}{-4} = -\\frac{1}{2}⟧, donc ⟦f(0) = e^{- \\frac{1}{2}} \\approx 0{,}61⟧.Maximum local en ⟦x = 0⟧ : ⟦\\left(0\\,;\\,e^{- \\frac{1}{2}}\\right) \\approx \\left(0\\,;\\,0{,}61\\right)⟧ (⟦f'⟧ passe de ⟦+⟧ à ⟦-⟧). Pas global : ⟦f(x) \\to +\\infty⟧ quand ⟦x \\to -2^{-}⟧.",
     "titre": "Signe de f' et variationstableau"
    },
    {
@@ -4400,7 +4381,7 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 23 / 23"
+  "progression_finale": "Étape 21 / 21"
  },
  "e^(2x)": {
   "au_depart": {
@@ -4527,7 +4508,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1 : on remplace.Exposant : ⟦2x \\to -\\infty⟧. Donc ⟦e^{2x} \\to e^{-\\infty} = 0^{+}⟧.⟦\\lim_{x\\to -\\infty} e^{2x} = 0^{+}⟧Asymptote horizontale : ⟦y = 0⟧.",
+    "texte": "Étape 1 : on remplace.Exposant : ⟦2x \\to -\\infty⟧. Donc ⟦e^{2x} \\to e^{-\\infty} = 0^{+}⟧.⟦\\lim_{x\\to -\\infty} e^{2x} = 0^{+}⟧Asymptote horizontale : ⟦y = 0⟧ (à gauche). ⟦f(x) \\to 0^{+}⟧ : le graphe est au-dessus.",
     "titre": "Étape 1 : on remplace."
    },
    {
@@ -4557,12 +4538,12 @@
      [
       "bilan",
       [
-       "Asymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 0⟧"
+       "Asymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 0⟧, graphe au-dessus"
       ]
      ]
     ],
     "tableaux": [],
-    "texte": "Bilan des asymptotesAsymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 0⟧",
+    "texte": "Bilan des asymptotesAsymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = 0⟧, graphe au-dessus",
     "titre": "Bilan des asymptotes"
    },
    {
@@ -5087,7 +5068,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 4 : on remplace.⟦x \\to +\\infty⟧ et ⟦\\frac{1}{x} \\to \\dfrac{1}{+\\infty} = 0^{+}⟧.⟦\\lim_{x\\to +\\infty} \\frac{\\ln(x)}{x} = 0^{+}⟧✓ Le calcul confirme la prédiction du podium.Asymptote horizontale : ⟦y = 0⟧.",
+    "texte": "Étape 4 : on remplace.⟦x \\to +\\infty⟧ et ⟦\\frac{1}{x} \\to \\dfrac{1}{+\\infty} = 0^{+}⟧.⟦\\lim_{x\\to +\\infty} \\frac{\\ln(x)}{x} = 0^{+}⟧✓ Le calcul confirme la prédiction du podium.Asymptote horizontale : ⟦y = 0⟧ (à droite). ⟦f(x) \\to 0^{+}⟧ : le graphe est au-dessus.",
     "titre": "Étape 4 : on remplace."
    },
    {
@@ -5099,12 +5080,12 @@
       "bilan",
       [
        "Asymptote verticale : ⟦x = 0⟧ (⟦\\lim_{x\\to 0^+} f(x) = -\\infty⟧)",
-       "Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 0⟧"
+       "Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 0⟧, graphe au-dessus"
       ]
      ]
     ],
     "tableaux": [],
-    "texte": "Bilan des asymptotesAsymptote verticale : ⟦x = 0⟧ (⟦\\lim_{x\\to 0^+} f(x) = -\\infty⟧)Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 0⟧",
+    "texte": "Bilan des asymptotesAsymptote verticale : ⟦x = 0⟧ (⟦\\lim_{x\\to 0^+} f(x) = -\\infty⟧)Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 0⟧, graphe au-dessus",
     "titre": "Bilan des asymptotes"
    },
    {
@@ -7509,18 +7490,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{x}{\\sqrt{x^{2}}} &= \\text{« }\\dfrac{-\\infty}{\\sqrt{+\\infty}}\\text{ »} = \\text{« }\\dfrac{-\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x}{-x} \\qquad \\left(x < 0 \\text{ : } \\sqrt{x^{2}} = |x| = -x\\right) \\\\ &= \\lim_{x\\to -\\infty} -1 = -1\\end{aligned}⟧Asymptote horizontale : ⟦y = -1⟧.",
+    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{x}{\\sqrt{x^{2}}} &= \\text{« }\\dfrac{-\\infty}{\\sqrt{+\\infty}}\\text{ »} = \\text{« }\\dfrac{-\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x}{-x} \\qquad \\left(x < 0 \\text{ : } \\sqrt{x^{2}} = |x| = -x\\right) \\\\ &= \\lim_{x\\to -\\infty} -1 = -1\\end{aligned}⟧Asymptote horizontale : ⟦y = -1⟧ (à gauche).",
     "titre": "⟦x \\to -\\infty⟧limite"
-   },
-   {
-    "classes": [
-     "card",
-     "cond"
-    ],
-    "listes": [],
-    "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x}{\\sqrt{x^{2}}} &= \\text{« }\\dfrac{+\\infty}{\\sqrt{+\\infty}}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x}{x} \\qquad \\left(x > 0 \\text{ : } \\sqrt{x^{2}} = |x| = x\\right) \\\\ &= \\lim_{x\\to +\\infty} 1 = 1\\end{aligned}⟧Asymptote horizontale : ⟦y = 1⟧.",
-    "titre": "⟦x \\to +\\infty⟧limite"
    },
    {
     "classes": [
@@ -7534,6 +7505,16 @@
    },
    {
     "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x}{\\sqrt{x^{2}}} &= \\text{« }\\dfrac{+\\infty}{\\sqrt{+\\infty}}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x}{x} \\qquad \\left(x > 0 \\text{ : } \\sqrt{x^{2}} = |x| = x\\right) \\\\ &= \\lim_{x\\to +\\infty} 1 = 1\\end{aligned}⟧Asymptote horizontale : ⟦y = 1⟧ (à droite).",
+    "titre": "⟦x \\to +\\infty⟧limite"
+   },
+   {
+    "classes": [
      "card"
     ],
     "listes": [
@@ -7541,13 +7522,13 @@
       "bilan",
       [
        "Asymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = -1⟧",
-       "Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 1⟧",
-       "Pas de limite en ⟦x = 0⟧ (pas d'asymptote verticale) : ⟦\\lim_{x\\to 0^-} f(x) = -1⟧ ; ⟦\\lim_{x\\to 0^+} f(x) = 1⟧"
+       "Pas de limite en ⟦x = 0⟧ (pas d'asymptote verticale) : ⟦\\lim_{x\\to 0^-} f(x) = -1⟧ ; ⟦\\lim_{x\\to 0^+} f(x) = 1⟧",
+       "Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 1⟧"
       ]
      ]
     ],
     "tableaux": [],
-    "texte": "Bilan des asymptotesAsymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = -1⟧Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 1⟧Pas de limite en ⟦x = 0⟧ (pas d'asymptote verticale) : ⟦\\lim_{x\\to 0^-} f(x) = -1⟧ ; ⟦\\lim_{x\\to 0^+} f(x) = 1⟧",
+    "texte": "Bilan des asymptotesAsymptote horizontale (⟦x \\to -\\infty⟧) : ⟦y = -1⟧Pas de limite en ⟦x = 0⟧ (pas d'asymptote verticale) : ⟦\\lim_{x\\to 0^-} f(x) = -1⟧ ; ⟦\\lim_{x\\to 0^+} f(x) = 1⟧Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 1⟧",
     "titre": "Bilan des asymptotes"
    },
    {
@@ -8484,7 +8465,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 6 : on remplace.⟦e^{x} \\to +\\infty⟧ et ⟦\\frac{2}{e^{x}} \\to \\dfrac{2}{+\\infty} = 0^{+}⟧.⟦\\lim_{x\\to +\\infty} x^{2}\\,e^{-x} = 0^{+}⟧✓ Le calcul confirme la prédiction du podium.Asymptote horizontale : ⟦y = 0⟧.",
+    "texte": "Étape 6 : on remplace.⟦e^{x} \\to +\\infty⟧ et ⟦\\frac{2}{e^{x}} \\to \\dfrac{2}{+\\infty} = 0^{+}⟧.⟦\\lim_{x\\to +\\infty} x^{2}\\,e^{-x} = 0^{+}⟧✓ Le calcul confirme la prédiction du podium.Asymptote horizontale : ⟦y = 0⟧ (à droite). ⟦f(x) \\to 0^{+}⟧ : le graphe est au-dessus.",
     "titre": "Étape 6 : on remplace."
    },
    {
@@ -8495,12 +8476,12 @@
      [
       "bilan",
       [
-       "Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 0⟧"
+       "Asymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 0⟧, graphe au-dessus"
       ]
      ]
     ],
     "tableaux": [],
-    "texte": "Bilan des asymptotesAsymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 0⟧",
+    "texte": "Bilan des asymptotesAsymptote horizontale (⟦x \\to +\\infty⟧) : ⟦y = 0⟧, graphe au-dessus",
     "titre": "Bilan des asymptotes"
    },
    {
@@ -9956,7 +9937,7 @@
  },
  "x^4-2x^2": {
   "au_depart": {
-   "progression": "Étape 1 / 13",
+   "progression": "Étape 1 / 12",
    "visibles": 2
   },
   "cartes": [
@@ -10254,18 +10235,8 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "⟦x \\to -\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to -\\infty} \\left(x^{4} - 2x^{2}\\right) &= \\text{« }+\\infty - \\infty\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} x^{4}\\,\\left(1 - \\frac{2}{x^{2}}\\right) = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty \\qquad \\left(\\text{mise en évidence}\\right)\\end{aligned}⟧Pas d'asymptote oblique : branche parabolique.",
-    "titre": "⟦x \\to -\\infty⟧limite"
-   },
-   {
-    "classes": [
-     "card",
-     "cond"
-    ],
-    "listes": [],
-    "tableaux": [],
-    "texte": "⟦x \\to +\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to +\\infty} \\left(x^{4} - 2x^{2}\\right) &= \\text{« }+\\infty - \\infty\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} x^{4}\\,\\left(1 - \\frac{2}{x^{2}}\\right) = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty \\qquad \\left(\\text{mise en évidence}\\right)\\end{aligned}⟧Pas d'asymptote oblique : branche parabolique.",
-    "titre": "⟦x \\to +\\infty⟧limite"
+    "texte": "⟦x \\to \\pm\\infty⟧limite⟦\\begin{aligned}\\lim_{x\\to \\pm\\infty} \\left(x^{4} - 2x^{2}\\right) &= \\text{« }+\\infty - \\infty\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to \\pm\\infty} x^{4}\\,\\left(1 - \\frac{2}{x^{2}}\\right) = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty \\qquad \\left(\\text{mise en évidence}\\right)\\end{aligned}⟧Pas d'asymptote oblique : branche parabolique.",
+    "titre": "⟦x \\to \\pm\\infty⟧limite"
    },
    {
     "classes": [
@@ -10661,6 +10632,6 @@
     "titre": "Graphique"
    }
   ],
-  "progression_finale": "Étape 13 / 13"
+  "progression_finale": "Étape 12 / 12"
  }
 }

@@ -85,6 +85,13 @@ def sans_signe_de_zero(tex):
     return "0" if tex in ("0^{+}", "0^{-}") else tex
 
 
+def valeur_et_signe(tex):
+    """(valeur, signe d'approche ou None) d'une limite écrite : « 1^{+} » → (« 1 », « + ») (EC D13 : 0⁺, 1⁺… partout)."""
+    if tex is not None and r"\infty" not in tex and tex.endswith(("^{+}", "^{-}")):
+        return tex[:-4], tex[-2]
+    return tex, None
+
+
 class TestMemeSourceQueLimites(unittest.TestCase):
     def test_sortie_de_l_outil_limites_inchangee(self):  # EC-12 (partie Limites)
         self.assertNotIn("limites_bornes", la.etudier("1/(x-2)"))
@@ -110,10 +117,16 @@ class TestMemeSourceQueLimites(unittest.TestCase):
                             attendu = a.get(cote + "_tex", a.get("valeur_tex"))
                             if attendu is not None and c[cote] is not None:
                                 attendu = "?" if "non déterminée" in attendu else attendu
-                                self.assertEqual(sans_signe_de_zero(c[cote]), attendu)
+                                if cote + "_tex" in a:          # limite latérale : même écriture, signe d'approche compris
+                                    self.assertEqual(c[cote], attendu)
+                                else:                           # trou, bord : la phrase écrit le point (a ; ℓ), sans signe
+                                    self.assertEqual(sans_signe_de_zero(c[cote]), attendu)
                                 verifiees += 1
                     elif "valeur_tex" in a:
-                        self.assertEqual(sans_signe_de_zero(v["moins_inf" if "-" in a["ou"] else "plus_inf"]), a["valeur_tex"])
+                        # y = ℓ dans la phrase de l'asymptote ; ℓ⁺ / ℓ⁻ dans le tableau seulement si la position est démontrée (EC D13)
+                        val, signe = valeur_et_signe(v["moins_inf" if "-" in a["ou"] else "plus_inf"])
+                        self.assertEqual(val, a["valeur_tex"])
+                        self.assertEqual(signe, {"au-dessus": "+", "au-dessous": "-"}.get(a.get("position")))
                         verifiees += 1
         self.assertGreater(verifiees, 40)
 

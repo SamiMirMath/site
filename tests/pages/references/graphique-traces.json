@@ -1,67 +1,67 @@
 {
  "e_1_x--360-sombre--glisser": {
   "appels": 978,
-  "sha": "4c4a8c6f98246ea5af5a"
+  "sha": "fc4fc56cc1e26c80ef47"
  },
  "e_1_x--360-sombre--impression": {
   "appels": 980,
-  "sha": "42dd789c0e0368848864"
+  "sha": "6023b4785642c4030b1b"
  },
  "e_1_x--360-sombre--initial": {
   "appels": 980,
-  "sha": "83f33fadd4c07dc27250"
+  "sha": "d9cbc5d3aed4cec65291"
  },
  "e_1_x--360-sombre--moins": {
   "appels": 940,
-  "sha": "ef17fec2f34d28e27332"
+  "sha": "aacb5287b5f52e0480cd"
  },
  "e_1_x--360-sombre--molette": {
   "appels": 1008,
-  "sha": "cc8cf681ecf8f96f5e44"
+  "sha": "49e66e64201a949c573f"
  },
  "e_1_x--360-sombre--pincer": {
   "appels": 984,
-  "sha": "76e753dbcded55f6412e"
+  "sha": "2a1cf6727b9f249b3b25"
  },
  "e_1_x--360-sombre--plus": {
   "appels": 1028,
-  "sha": "2c0d67b1ab356173adb4"
+  "sha": "658eebc7fde6b7c47942"
  },
  "e_1_x--360-sombre--reset": {
   "appels": 980,
-  "sha": "83f33fadd4c07dc27250"
+  "sha": "d9cbc5d3aed4cec65291"
  },
  "e_1_x--clair--glisser": {
   "appels": 2036,
-  "sha": "e5ea8835936ae1a72cbc"
+  "sha": "af580dbdb9563883e2d0"
  },
  "e_1_x--clair--impression": {
   "appels": 2039,
-  "sha": "f35e6b401f4e6a93fdce"
+  "sha": "93d7df85cb7309ae964e"
  },
  "e_1_x--clair--initial": {
   "appels": 1491,
-  "sha": "e4567b24c0f8e8b4c206"
+  "sha": "727a1630a1e3dd8f5dea"
  },
  "e_1_x--clair--moins": {
   "appels": 1940,
-  "sha": "5bc69b76a683e332d940"
+  "sha": "399528dd48795cb23ca2"
  },
  "e_1_x--clair--molette": {
   "appels": 1997,
-  "sha": "a7ec1534f6ebbb383d5b"
+  "sha": "98486e48edb02ff03e0c"
  },
  "e_1_x--clair--pincer": {
   "appels": 1968,
-  "sha": "df421b8837de930eea8e"
+  "sha": "9ad3c28e24a9cb252283"
  },
  "e_1_x--clair--plus": {
   "appels": 1996,
-  "sha": "6bfa6be2b018e31b1918"
+  "sha": "ed38742bfe9ddf318690"
  },
  "e_1_x--clair--reset": {
   "appels": 2039,
-  "sha": "f35e6b401f4e6a93fdce"
+  "sha": "93d7df85cb7309ae964e"
  },
  "x_2_1_x_1--360-sombre--glisser": {
   "appels": 968,

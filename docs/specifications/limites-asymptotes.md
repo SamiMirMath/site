@@ -132,8 +132,26 @@ mécanique interne (le détail technique va dans la clé `detail` / `controles_d
    même limite, une seule conclusion.
 
 4. **Conclusion de chaque valeur interdite** : asymptote verticale, trou ou absence de limite. Quand une
-   seule limite latérale est infinie (e^(1/x) en 0 : 0 à gauche, +∞ à droite), on écrit « asymptote verticale
-   d'équation x = 0 (du côté droit) ; à gauche, f(x) → 0 ».
+   seule limite latérale est infinie (e^(1/x) en 0 : 0⁺ à gauche, +∞ à droite), on écrit (EC D13, 03.11.2026) « Asymptote
+   verticale : x = 0, seulement du côté droit. À gauche, f(x) → 0⁺ : le graphe s'approche du point (0 ; 0), qui n'appartient pas
+   au graphe (rond vide). » ; si l'autre côté n'est pas déterminé (« ? »), l'ancienne phrase « (du côté droit) ; à gauche, … ».
+   **Asymptote horizontale** (fonctions transcendantes) : « Asymptote horizontale : y = 0 (à gauche). f(x) → 0⁺ : le graphe est
+   au-dessus. » ; la position n'est écrite que si le signe d'approche est démontré par la rédaction descendante (0⁺ / 0⁻ confirmé
+   par la sonde du signe ; ℓ⁺ / ℓ⁻ seulement pour e^{0⁺} = 1⁺ « (e^t > 1 pour t > 0) », confirmé par une sonde mpmath du signe de
+   f − ℓ). Le bilan reprend la position (« y = 0, graphe au-dessus ») et les limites latérales avec 0⁺ / 0⁻. Fractions rationnelles :
+   phrases inchangées (R18 du guide des limites 3M). Pas de ligne « Pas d'asymptote horizontale … » pour une limite infinie (R6).
+5bis. **Ordre et regroupement des bornes** (EC D16) : −∞ (ou la borne finie de gauche), puis les valeurs interdites de gauche à
+   droite (la gauche avant la droite), puis +∞ (ou la borne finie de droite) ; études, asymptotes et bilan suivent cet ordre.
+   Les cartes de x → −∞ et de x → +∞ n'en font qu'une, « x → ±∞ », seulement si leurs étapes sont identiques une fois le point
+   (−∞ / +∞) remplacé par ±∞, et leurs conclusions identiques au côté près (« des deux côtés ») ; les données d'`etudier` gardent
+   une étude par borne (`resoudre_la.etudes_affichees`, partagé avec l'Étude complète).
+5ter. **Valeur d'essai** (EC D12, rédaction descendante) : pour une forme k/0 en un point fini (haut ↛ 0, bas → 0), le signe du bas
+   est justifié par une valeur d'essai : « Bas de l'exposant : 6x − 12 → 0 ; avec x = 1,99 : 6 · 1,99 − 12 = −0,06 < 0, donc 0⁻ » ;
+   le haut, s'il est un polynôme, par la substitution « x² + x − 2 → 2² + 2 − 2 = 4 (pas 0, donc pas indéterminée) ». Garde-fous :
+   bas polynôme à coefficients rationnels autre que x, point décimal, x = a ± 0,01 (sinon 0,001… jusqu'à 10⁻⁶) sans autre zéro
+   du bas entre lui et a (racines isolées exactement par SymPy) ni autre valeur interdite, f définie en ce point, valeur exacte du
+   signe donné par les règles de calcul ; sinon l'écriture habituelle (« 6x − 12 → 0⁻ »). Le tableau de signes (point 2) reste
+   celui des fractions rationnelles.
 
 5. **Chaîne d'égalités** (décidé le 15.10.2026) : chaque méthode rédigée (mise en évidence, expression conjuguée,
    Bernoulli-L'Hôpital, simplification 0/0, √(u²) = |u|) s'écrit comme au tableau, en une
@@ -187,7 +205,7 @@ Modèle (1/(x² − 2) en −√2) :
 | LA-24 | Aucun mot de la mécanique interne (SymPy, Abandon, exception, nœud, arbre) dans un texte affiché | [auto-py] |
 | LA-25 | Tableau de signes en tête (clé `tableaux_signe`) : colonnes = valeurs interdites ou zéros, double barre pour un dénominateur, une ligne par facteur (évident ou non) et par constante, puis le produit ; un dénominateur affine a son tableau (x − 3, x − 5) | [auto-py] ; rendu [manuel] |
 | LA-26 | Jamais « x est positif (il vaut 4) » : une variable ne « vaut » pas la valeur vers laquelle elle tend (« proche de » si besoin), y compris dans la justification en texte | [auto-py] |
-| LA-27 | Chaque valeur interdite se termine par sa conclusion ; une seule limite latérale infinie : « asymptote verticale d'équation x = 0 (du côté droit) ; à gauche, f(x) → 0 » | [auto-py] |
+| LA-27 | Chaque valeur interdite se termine par sa conclusion ; une seule limite latérale infinie : « Asymptote verticale : x = 0, seulement du côté droit. À gauche, f(x) → 0⁺ : le graphe s'approche du point (0 ; 0), qui n'appartient pas au graphe (rond vide). » (EC D13) | [auto-py] |
 | LA-28 | Chaque parenthèse « (X > 0 : cf. tableau de signes) » renvoie à un tableau titré « Signe de X » présent dans la même étude | [auto-py] |
 | LA-29 | Mise en évidence sous une racine (L5, retouche du 15.10) : en ±∞, quotient ou produit dont un membre est une racine ; √(4x²+1) = √(x²(4 + 1/x²)) = \|x\|√(4 + 1/x²), puis \|x\| = x ou −x, simplification, limite de ce qui reste ; « x < 0 donc √(x²) = \|x\| = −x » en −∞ ; jamais d'équivalent ; jamais pour une fraction rationnelle ni quand les termes de plus haut degré d'une somme se compensent | [auto-py] |
 | LA-30 | Expression conjuguée (L4) : ∞ − ∞ avec une racine en ±∞ (√(x²+x) − x → 1/2 en +∞ ; en −∞ pas de forme indéterminée, +∞) ; 0/0 avec une racine en une valeur ((√(x+3) − 2)/(x − 1) → 1/4) ; jamais sans racine | [auto-py] |
@@ -201,3 +219,4 @@ Modèle (1/(x² − 2) en −√2) :
 | LA-38 | Encadré « Rappel de la méthode » (page Limites, étape 1 du chantier 3M, 29.10.2026) : le mode d'emploi en 7 points du corrigé du chapitre 8 (on remplace, on regarde la forme, on prédit avec le podium, 0·∞ en quotient, BH, on recommence, on compare), puis « La règle du podium vous sert à prédire le résultat ; la justification se fait avec la règle de BH. » ; asymptotes ; asymptotes horizontale, verticale, trou, oblique (division euclidienne, a puis b, position relative) ; aucun équivalent | [auto-py] (`test_rappel_methode.py`) |
 | LA-39 | Chaque formule écrite par le moteur est équilibrée (accolades, \\left/\\right, aligned) | [auto-py] (`test_rappel_methode.py`) |
 | LA-40 | `resoudre()` (T12) respecte le schéma de sortie commun et écrit lui-même la phrase de chaque asymptote (horizontale, oblique, verticale, trou, sans limite, branche parabolique, « Aucune asymptote détectée. ») ; instantanés `instantanes/resoudre/limites-asymptotes.json` | [auto-py] (`test_resoudre_la.py`) |
+| LA-41 | Ordre des bornes −∞, valeurs interdites croissantes, +∞ ; « x → ±∞ » seulement si les deux chaînes sont identiques au symbole près ; valeur d'essai pour 0⁺ / 0⁻ (forme k/0, rédaction descendante) avec ses garde-fous ; 1⁺ / 1⁻ confirmé par une sonde ; position par rapport à l'AH seulement si le signe d'approche est démontré (EC D12, D13, D16) | [auto-py] (`test_limites_d12_d16.py`, oracle mpmath, garde-fous forcés) |

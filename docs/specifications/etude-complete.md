@@ -12,7 +12,11 @@ partie 6 ; plus tard le bilan) sont dans `etude-complete/parties.py` (créé au 
   intertitre (carte de style `partie` du format commun : un titre sans cadre, affiché avec la carte qui le suit, hors du compteur
   d'étapes). Une partie que l'outil ne sait pas encore rédiger reste vide (son intertitre seul) : rien plutôt qu'une affirmation
   non démontrée (EC-15). Aujourd'hui : parties 1, 2 et 3 = voir ci-dessous ; 4 = cartes de l'outil Limites
-  (tableaux de signes, une carte par borne, bilan des asymptotes) ; 5 = cartes de l'outil Dérivée (dérivée, signe de f′ et variations,
+  (tableaux de signes, une carte par borne, bilan des asymptotes), avec les décisions D12, D13, D16 (P6, portée EC + Limites : une
+  seule rédaction, celle de l'outil Limites, voir `limites-asymptotes.md`) : bornes dans l'ordre −∞, valeurs interdites croissantes
+  (gauche puis droite), +∞ ; x → ±∞ en une seule carte si les deux chaînes sont identiques au symbole près ; 0⁺ / 0⁻ d'un bas qui tend
+  vers 0 justifié par une valeur d'essai (« avec x = 1,99 : 6 · 1,99 − 12 = −0,06 < 0, donc 0⁻ ») ; e^{0⁺} = 1⁺ ; position du graphe
+  par rapport à l'AH quand le signe d'approche est démontré ; AV d'un seul côté avec le point exclu (rond vide) ; 0⁺ dans le bilan ; 5 = cartes de l'outil Dérivée (dérivée, signe de f′ et variations,
   avec les limites et les valeurs des extremums dans le tableau, T06c et D10), extremums rédigés selon D11 (voir ci-dessous) ;
   6 = graphique (D15, voir ci-dessous). Jamais d'intertitre seul sous « 5. » (R2, Q7) : la carte « Dérivée » est toujours affichée
   (dérivée hors du cadre : la phrase de l'outil Dérivée, « Cette fonction sort du cadre de l'outil : la dérivée n'a pas été

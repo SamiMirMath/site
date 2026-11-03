@@ -312,7 +312,12 @@ def _bornes(ED):
                 out.append({"type": "fini", "point": a, "cote": "gauche"})
             if b is not None and not ivs[i + 1].lf:
                 out.append({"type": "fini", "point": b, "cote": "droite"})
-    return out
+    # ordre du corrigé (EC, D16) : −∞, puis les points finis de gauche à droite (pour un même point, la gauche avant la droite), puis +∞
+    def cle(b):
+        if b["type"] == "inf":
+            return (b["signe"] * float("inf"), 0)
+        return (b["point"].val, {"gauche": 0, "deux": 0, "droite": 1}[b["cote"]])
+    return sorted(out, key=cle)
 
 
 # =====================================================================
@@ -3373,14 +3378,49 @@ def _repli(pt, vtex, detail, label="f(x)"):
 
 
 _LIMS_SIGNEES = {}      # limite (avec le signe d'approche de 0) de chaque côté de la borne en cours d'étude, d'après la rédaction descendante
+_BORNES_FINIES = []     # extrémités finies des intervalles de l'ED en cours d'étude (garde-fou de la valeur d'essai, EC D12) ; vide hors d'une étude
 
 
 def _signe_zero(val, pt):
-    """« 0 » devient « 0^{+} » ou « 0^{-} » quand la rédaction descendante a établi le signe (R17)."""
+    """« 0 » devient « 0^{+} » ou « 0^{-} » quand la rédaction descendante a établi le signe (R17) ; une limite finie non nulle
+    devient ℓ^{+} / ℓ^{-} quand la descente l'a écrite ainsi (e^{0⁺} = 1⁺, confirmé par une sonde ; EC D13)."""
     L = _LIMS_SIGNEES.get(pt.tex())
-    if val == "0" and L is not None and L.nul() and L.ap:
+    if L is None or L.inf or not L.ap or val in (None, "?") or r"\infty" in val:
+        return val
+    if val == "0" and L.nul():
         return "0^{+}" if L.ap > 0 else "0^{-}"
+    if L.montre and not L.nul():
+        return val + ("^{+}" if L.ap > 0 else "^{-}")
     return val
+
+
+def _approche(vtex, pt):
+    """(écriture signée, position du graphe) d'une limite finie en ±∞ dont le signe d'approche est démontré par la rédaction
+    descendante (0⁺, 1⁺…) ; (None, None) sinon : la position n'est alors pas écrite (EC D13)."""
+    signee = _signe_zero(vtex, pt)
+    if signee == vtex:
+        return None, None
+    return signee, ("au-dessus" if signee.endswith("^{+}") else "au-dessous")
+
+
+COTES_AH = {-1: "à gauche", 1: "à droite", 0: "des deux côtés"}
+
+
+def phrase_horizontale(vtex, cote, signee=None, position=None):
+    """Conclusion en ±∞ d'une limite finie (cote : −1, 1, 0 pour x → ±∞ regroupés) : l'asymptote, puis la position si elle est démontrée."""
+    p = rf"Asymptote horizontale : \(y = {vtex}\) ({COTES_AH[cote]})."
+    if position:
+        p += rf" \(f(x) \to {signee}\) : le graphe est {position}."
+    return p
+
+
+def conclusion(phrase, **donnees):
+    """Ligne de conclusion d'une asymptote horizontale ; `conclusion` (données, non affichées) permet au rendu de regrouper x → ±∞ (D16).
+    Pas de ligne « Pas d'asymptote horizontale … » pour une limite infinie (EC D13) : le guide de rédaction (R6) la supprime ;
+    question 67 du suivi du chantier etude-complete."""
+    item = txt(phrase)
+    item["conclusion"] = donnees
+    return item
 
 
 def _descente(f, pt, ref):
@@ -3617,7 +3657,9 @@ def _etude_transcendante(f, borne, items):
             if inf:
                 extra = _oblique_generale(f, borne["signe"], items)
             else:
-                items.append(txt(rf"Asymptote horizontale : \(y = {vtex}\)."))
+                signee, position = _approche(vtex, pt)
+                items.append(conclusion(phrase_horizontale(vtex, borne["signe"], signee, position), genre="horizontale",
+                                        valeur_tex=vtex, signee=signee, position=position))
         elif inf:
             items.append(txt(rf"Asymptote verticale : \(x = {point.tex}\)."))
         else:
@@ -3638,16 +3680,23 @@ def _bilan_deux_cotes(point, cote_tex, val, vval, items):
     verticale que si l'une des deux limites latérales est infinie."""
     (vg, vd), (vg_val, vd_val) = val, vval
     base = {"point_tex": point.tex, "point_val": point.val, "ou": cote_tex}
+    borne = {"type": "fini", "point": point, "cote": "deux"}
+    sg, sd = _signe_zero(vg, Pt(borne, -1)), _signe_zero(vd, Pt(borne, 1))     # 0⁺ / 0⁻ partout, bilan compris (EC D13)
     inf_g, inf_d = r"\infty" in vg, r"\infty" in vd
     if inf_g or inf_d:
         if inf_g and inf_d:
-            conclusion = rf"Asymptote verticale : \(x = {point.tex}\)."
+            phrase = rf"Asymptote verticale : \(x = {point.tex}\)."
         else:
-            cote, autre, v_autre = ("droit", "gauche", vg) if inf_d else ("gauche", "droite", vd)
-            conclusion = (rf"Asymptote verticale : \(x = {point.tex}\) (du côté {cote}) ; "
+            cote, autre, v_autre, s_autre = ("droit", "gauche", vg, sg) if inf_d else ("gauche", "droite", vd, sd)
+            if v_autre == "?":
+                phrase = (rf"Asymptote verticale : \(x = {point.tex}\) (du côté {cote}) ; "
                           rf"à {autre}, \(f(x) \to {_affichable(v_autre)}\).")
-        items.append(txt(conclusion))
-        return dict(base, genre="verticale", gauche_tex=_affichable(vg), droite_tex=_affichable(vd),
+            else:                                   # AV d'un seul côté, point exclu de l'autre (EC D13)
+                phrase = (rf"Asymptote verticale : \(x = {point.tex}\), seulement du côté {cote}. "
+                          rf"À {autre}, \(f(x) \to {s_autre}\) : le graphe s'approche du point "
+                          rf"\(({point.tex}\,;\,{v_autre})\), qui n'appartient pas au graphe (rond vide).")
+        items.append(txt(phrase))
+        return dict(base, genre="verticale", gauche_tex=_affichable(sg), droite_tex=_affichable(sd),
                     gauche_val=vg_val, droite_val=vd_val)
     if "?" in (vg, vd):
         items.append(txt("Ces limites n'ont pas pu être déterminées automatiquement : "
@@ -3658,7 +3707,7 @@ def _bilan_deux_cotes(point, cote_tex, val, vval, items):
         return dict(base, genre="trou", valeur_tex=vg, valeur_val=vg_val)
     items.append(txt("Limites à gauche et à droite différentes : f n'a pas de limite en "
                      rf"\(x={point.tex}\) ; pas d'asymptote verticale."))
-    return dict(base, genre="sans_limite", gauche_tex=vg, droite_tex=vd, gauche_val=vg_val, droite_val=vd_val)
+    return dict(base, genre="sans_limite", gauche_tex=sg, droite_tex=sd, gauche_val=vg_val, droite_val=vd_val)
 
 
 # =====================================================================
@@ -3700,8 +3749,23 @@ def etudier(entree, avec_bornes=False, analyse=None):
     if rationnelle:
         N, D = r_norm(dec[1])
 
+    bornes = _bornes(ED)
+    _BORNES_FINIES[:] = [float(p.val) for iv in fusion(ED) for p in (iv.lo, iv.hi) if p is not None]     # bornes ouvertes et fermées
+    try:
+        _etudier_bornes(f, bornes, rationnelle, N if rationnelle else None, D if rationnelle else None, res, bornes_val)
+    finally:
+        _BORNES_FINIES.clear()                  # hors d'une étude, la valeur d'essai ne s'appuie pas sur des bornes périmées
+
+    res["tableaux_signe"] = TABLEAUX.items()
+    if avec_bornes:       # réservé à l'Étude complète : la sortie de l'outil Limites reste inchangée
+        res["limites_bornes"] = bornes_val
+    return res
+
+
+def _etudier_bornes(f, bornes, rationnelle, N, D, res, bornes_val):
+    """Étude de chaque borne de l'ED, dans l'ordre de `_bornes` (remplit res["etudes"], res["asymptotes"] et bornes_val)."""
     vues = {}                                   # divisions euclidiennes déjà écrites (−∞ puis +∞)
-    for borne in _bornes(ED):
+    for borne in bornes:
         items = []
         _LIMS_SIGNEES.clear()
         if borne["type"] == "inf":
@@ -3717,8 +3781,11 @@ def etudier(entree, avec_bornes=False, analyse=None):
                 if val_tex == "?":
                     pass  # limite non déterminée : jamais une asymptote
                 elif inf is False:
-                    res["asymptotes"].append({"genre": "horizontale", "ou": cote_tex,
-                                               "valeur_tex": val_tex, "valeur_val": vval})
+                    asym = {"genre": "horizontale", "ou": cote_tex, "valeur_tex": val_tex, "valeur_val": vval}
+                    position = _approche(val_tex, Pt(borne))[1]
+                    if position:
+                        asym["position"] = position         # démontrée par la rédaction (EC D13) : reprise dans le bilan
+                    res["asymptotes"].append(asym)
                 elif extra is not None:
                     extra["ou"] = cote_tex
                     res["asymptotes"].append(extra)
@@ -3744,7 +3811,7 @@ def etudier(entree, avec_bornes=False, analyse=None):
                     asym = None if val == "?" else {
                         "genre": "verticale" if est_asymptote else "trou",
                         "point_tex": point.tex, "point_val": point.val, "ou": cote_tex,
-                        (cote + "_tex"): val}
+                        (cote + "_tex"): _signe_zero(val, Pt(borne, -1 if cote == "gauche" else 1))}     # 0⁺ / 0⁻ (EC D13)
                     if asym is not None and not est_asymptote:
                         asym["valeur_tex"] = val
                         asym["valeur_val"] = vval
@@ -3763,11 +3830,6 @@ def etudier(entree, avec_bornes=False, analyse=None):
                                "droite": _signe_zero(cotes.get("droite"), Pt(borne, 1))})
 
         res["etudes"].append({"ou": cote_tex, "etapes": items})
-
-    res["tableaux_signe"] = TABLEAUX.items()
-    if avec_bornes:       # réservé à l'Étude complète : la sortie de l'outil Limites reste inchangée
-        res["limites_bornes"] = bornes_val
-    return res
 
 
 def etudier_json(entree):

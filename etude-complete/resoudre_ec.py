@@ -47,8 +47,7 @@ def resoudre(entree):
     parite = parties.cartes_parite(analyse(entree))
     zeros = p3["cartes"]
     limites = [rla.carte_tableaux(lim["tableaux_signe"])] if lim.get("tableaux_signe") else []
-    for et in lim["etudes"]:
-        limites += rla.cartes_etude(et)
+    limites += rla.cartes_limites(lim["etudes"])                        # ordre et regroupement de x → ±∞ de l'outil Limites (D16)
     limites.append(rla.carte_bilan(lim["asymptotes"], style="normal"))
     # carte « Dérivée » toujours (hors du cadre : la phrase de l'outil Dérivée, Q7) ; signe non étudié : la carte d'erreur de l'outil
     # Dérivée (un résultat non traité donne un message clair) : jamais d'intertitre seul

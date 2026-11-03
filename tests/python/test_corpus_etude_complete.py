@@ -426,7 +426,7 @@ def test_outil_limites_du_tableau(ident):
             assert t == "0^{" + signe + "}", (ident, point, cote, t)
 
 
-@pytest.mark.parametrize("ident", avec({"d"}, xfail("P6", "signe d'approche d'une limite finie non nulle (1⁺, D13)")))
+@pytest.mark.parametrize("ident", IDS)
 def test_outil_signe_d_approche_partout(ident):
     """D13 : toute limite finie s'écrit avec son signe d'approche dans le tableau (0⁺, 1⁺…)."""
     fn = PAR_ID[ident]
@@ -642,7 +642,7 @@ def test_P5_zeros_signe_f0(ident):
     assert "f(0)=" in m and fn.f0[2] in m, fn.f0
 
 
-@pytest.mark.parametrize("ident", avec(set(IDS), xfail("P6", "position du graphe par rapport à l'AH (D13)")))
+@pytest.mark.parametrize("ident", IDS)
 def test_P6_position_par_rapport_a_l_ah(ident):
     t = texte(sortie(ident)["cartes"])
     assert t.count("au-dessus") >= len(PAR_ID[ident].horizontales), ident
@@ -651,7 +651,7 @@ def test_P6_position_par_rapport_a_l_ah(ident):
 ESSAIS = {"Ex7": ["1,99", "2,01", "-0,06"], "d": ["-2,01", "-1,99", "1,99", "2,01"]}
 
 
-@pytest.mark.parametrize("ident", [pytest.param(i, id=i, marks=[xfail("P6", "valeur d'essai pour 0⁺ / 0⁻ (D12)")]) for i in ESSAIS])
+@pytest.mark.parametrize("ident", list(ESSAIS))
 def test_P6_valeur_d_essai(ident):
     m = maths(sortie(ident)["cartes"])
     for morceau in ESSAIS[ident]:
@@ -669,7 +669,7 @@ def cartes_de_la_partie(ident, titre):
     return out
 
 
-@pytest.mark.parametrize("ident", avec({"a", "d"}, xfail("P6", "x → ±∞ regroupés quand les chaînes sont identiques (D16)")))
+@pytest.mark.parametrize("ident", IDS)
 def test_P6_regroupement_infini(ident):
     """D16 porte sur les chaînes de limites : on cherche « ±∞ » dans la partie 4 seule (la partie 5 écrit « limites 0⁺ en ±∞ », D11)."""
     assert cartes_de_la_partie(ident, TITRES[3]), ident
@@ -677,7 +677,7 @@ def test_P6_regroupement_infini(ident):
     assert (r"\pm\infty" in m) == PAR_ID[ident].regroupe_infini, ident
 
 
-@pytest.mark.parametrize("ident", avec({"Ex7", "d"}, xfail("P6", "0⁺ dans la phrase de l'AV et dans le bilan (D13)")))
+@pytest.mark.parametrize("ident", IDS)
 def test_P6_zero_signe_dans_les_phrases(ident):
     m = maths(sortie(ident)["cartes"])
     assert not re.search(r"f\(x\)(=|\\to)[01]\\\)", m), ident
@@ -686,7 +686,7 @@ def test_P6_zero_signe_dans_les_phrases(ident):
 COTES_AV = {"Ex7": ["seulement du côté droit"], "d": ["seulement du côté gauche", "seulement du côté droit"]}
 
 
-@pytest.mark.parametrize("ident", [pytest.param(i, id=i, marks=[xfail("P6", "AV d'un seul côté et point exclu (D13)")]) for i in COTES_AV])
+@pytest.mark.parametrize("ident", list(COTES_AV))
 def test_P6_av_d_un_seul_cote(ident):
     t, m = texte(sortie(ident)["cartes"]), maths(sortie(ident)["cartes"])
     for morceau in COTES_AV[ident]:

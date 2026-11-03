@@ -17,7 +17,12 @@ from aides_sortie import manquantes, valide, blocs_de_type, titres_etude
 from cas import entrees_page, CAS_LIMITES
 
 ENTREES = list(dict.fromkeys(entrees_page("etude-complete") + CAS_LIMITES["etude-complete"]))
-TECHNIQUE = ("detail", "ok", "genre", "a", "b", "domaine_etude_tex", "ed_deriv_tex", "deriv_detail", "signe_detail")
+TECHNIQUE = ("detail", "ok", "genre", "a", "b", "domaine_etude_tex", "ed_deriv_tex", "deriv_detail", "signe_detail", "conclusion")
+
+
+def affichee(r):
+    """La sortie d'`etudier`, études de limites telles qu'elles sont affichées (x → ±∞ regroupés, EC D16)."""
+    return dict(r, limites=dict(r["limites"], etudes=rla.etudes_affichees(r["limites"]["etudes"]))) if r.get("ok") else r
 
 
 def carte(s, titre):
@@ -34,11 +39,11 @@ class TestResoudreEC(unittest.TestCase):
             with self.subTest(entree=entree):
                 s = rec.resoudre(entree)
                 valide(self, s)
-                self.assertEqual(manquantes(ec.etudier(entree), s, TECHNIQUE), [])
+                self.assertEqual(manquantes(affichee(ec.etudier(entree)), s, TECHNIQUE), [])
 
     def test_ordre_des_cartes_comme_la_page(self):
         for entree in ENTREES:
-            ancien = ec.etudier(entree)
+            ancien = affichee(ec.etudier(entree))
             if not ancien["ok"]:
                 continue
             dv, lim = ancien["derivee"], ancien["limites"]
