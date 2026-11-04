@@ -1922,22 +1922,37 @@ def _suite_polynome(chaine, f, f_tree, c, x):
             for e, lien, prop in zip(l_poly[0].elements[1:], l_poly[0].liens, l_poly[0].props):
                 chaine.ajouter(e, lien, prop)
             return l_poly[1:], solutions, remarque
-    # a·x² + b·x + q − c = 0, puis Δ = b² − 4a(q − c)
-    constante = Neg(c) if q == 0 else Op("-", _nb_ecrit(q, f_tree), c)
-    chaine.ajouter(Eq(Op("-", _arbre_poly(f, x, f_tree), c), Nb(0)), "⇔")
-    r0 = b * b - 4 * a * q
-    terme = c if 4 * a == 1 else Op("*", _nb_exact(4 * a), c)
-    delta = terme if r0 == 0 else Op("+", _nb_exact(r0), terme)
+    if isinstance(c, Nb):                                  # coefficients rationnels non entiers (x² − x = −1/4) : le calcul se fait, comme
+        q0 = q - c.val                                     # en x² − 5x + 6 = 0 (jamais x² − x − (−1/4) = 0 ni Δ = … (−−1/4), ni Δ = 1 + 4 · 0,5)
+        sans_c = _arbre_poly([F(0), b, a], x, f_tree)
+        chaine.ajouter(Eq(sans_c if q0 == 0 else Op("+" if q0 > 0 else "-", sans_c, _nb_exact(abs(q0))), Nb(0)), "⇔")
+        constante = _nb_exact(q0)
+        delta = _nb_exact(b * b - 4 * a * q0)
+    else:
+        # a·x² + b·x + q − c = 0, puis Δ = b² − 4a(q − c)
+        constante = Neg(c) if q == 0 else Op("-", _nb_ecrit(q, f_tree), c)
+        chaine.ajouter(Eq(Op("-", _arbre_poly(f, x, f_tree), c), Nb(0)), "⇔")
+        r0 = b * b - 4 * a * q
+        terme = c if 4 * a == 1 else Op("*", _nb_exact(4 * a), c)
+        delta = terme if r0 == 0 else Op("+", _nb_exact(r0), terme)
     formule = Op("-", Pow(_nb_exact(b), Nb(2)), Op("*", Op("*", Nb(4), _nb_exact(a)), constante))
     D = Defini("Δ", delta)
     signe = _signe(delta)
-    lignes = [Chaine([D, formule, delta] + ([Nb(0)] if signe == 0 else []), ["="] * (3 if signe == 0 else 2),
-                     [None] * (2 if signe == 0 else 1) + [PROP_DISCRIMINANT])]
+    zero = signe == 0 and not isinstance(delta, Nb)         # Δ = … = 0 une seule fois
+    lignes = [Chaine([D, formule, delta] + ([Nb(0)] if zero else []), ["="] * (3 if zero else 2),
+                     [None] * (2 if zero else 1) + [PROP_DISCRIMINANT])]
     if signe < 0:
         return lignes, [], "Δ < 0 : l'équation n'a aucune solution réelle."
     if signe == 0:
         lignes += _une_seule_solution(X, Op("/", _nb_exact(-b), Op("*", Nb(2), _nb_exact(a))), _nb_exact(-b / (2 * a)))
         return lignes, [_nb_exact(-b / (2 * a))], None
+    if isinstance(delta, Nb):                              # Δ est un nombre : x = (−b ± √Δ)/(2a) calculé quand √Δ est rationnel, √3 écrit sinon
+        r = _racine_carree(delta.val)
+        if r is not None:
+            valeurs = sorted({(-b - r) / (2 * a), (-b + r) / (2 * a)})
+            lignes.append(Chaine([Ou(Eq(X, _nb_exact(v)) for v in valeurs)]))
+            return lignes, [_nb_exact(v) for v in valeurs], None
+        D = delta                                          # √Δ s'écrit √3 : Δ ne garde pas son nom
     moins_b = _nb_exact(-b)
     haut = lambda s: (Op("-" if s < 0 else "+", moins_b, Fn("sqrt", D)) if b != 0 else (Neg(Fn("sqrt", D)) if s < 0 else Fn("sqrt", D)))
     division = lambda h: h if 2 * a == 1 else Op("/", h, _nb_exact(2 * a))
@@ -2016,6 +2031,9 @@ def _alpha(g, d, x, fg, fd, ln):
         else:
             c = Op("/", reste if reste is not None else droite, a_node)
         chaine.ajouter(Eq(f_tree, c), "⇔", Car(a_node))
+    k = _const(c)
+    if k is not None and not isinstance(c, Nb):                      # 2^(x² − 5x) = 2^(−6) : l'exposant écrit −6 est le nombre −6, la suite le calcule
+        c = _nb_exact(k)                                             # (x² − 5x + 6 = 0, jamais x² − 5x − (−6) = 0 ni Δ = … (−−6))
     suite, solutions, remarque = _suite_polynome(chaine, fs.exp, f_tree, c, x)
     return [chaine] + suite, solutions, remarque
 
