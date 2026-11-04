@@ -17,7 +17,7 @@ rapports) : [`journal.md`](journal.md).
 |---|---|---|
 | P0 | `suivi.md`, `journal.md`, deux lancements de référence, `lancer.py complet --rapport` | **faite** (commit « Tests rapides P0 : … ») |
 | P1 | T2 : harnais du toucher (test du clavier) | **faite** (commit « Tests rapides P1 : … ») : test du clavier 20/20 seul et 20/20 sous charge ; listes identiques |
-| P2 | T1 : `lancer.py verifier`, texte proposé pour `CLAUDE.md`, méthode (commit séparé) | **faite** (commit « Tests rapides P2 : `lancer.py verifier` … » ; méthode : commit séparé) : essais de l'audit §M1 dans `journal.md` ; listes identiques |
+| P2 | T1 : `lancer.py verifier`, texte proposé pour `CLAUDE.md`, méthode (commit séparé) | **faite** (commit « Tests rapides P2 : lancer.py verifier … », `verifier` ACCEPTÉ ; méthode : commit séparé « Tests rapides P2 (méthode) : … ») : commit modifié refusé, fichier non suivi signalé et refusé, test disparu refusé ; listes identiques |
 | P3 | T3 : `TestStructure` (calcul une fois par classe) | à faire |
 | P4 | T4 : `memo.py`, test de garde, `MEMO=0` | à faire |
 | P5 | T5 : cache de `racines` | à faire |

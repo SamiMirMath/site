@@ -278,6 +278,77 @@ P2 ne touche aucun moteur. `mesurer_temps.py` : Ex7 0,58 s ; a 0,03 s ; b 0,36 s
   fumée. Le contrôle indépendant de l'audit §M1 (« puis `rapide` ») est donc faible tant que `rapide` n'a pas de base de comparaison
   (question pour l'enseignant, à traiter avec P6 si vous le voulez).
 
+### Vérification propre (audit §M1) : essais sur le commit 1 (55daa1f) et le rapport P2
+
+Commande de chaque essai : `python3 tests/lancer.py verifier <dossier>` (sous `subprocess`, limite 5 min ; chacun dure moins de 2 s).
+Les dossiers des essais 2 et 3 sont des **copies** de `…/scratchpad/P2-rapport`, modifiées par un script du scratchpad
+(`fabriquer.py`) ; aucun test du dépôt n'est retiré ni touché. Les essais du point 1 se font sur deux branches jetables créées depuis
+55daa1f, supprimées ensuite (`git branch -D`).
+
+**Cas normal** — `verifier …/P2-rapport` sur 55daa1f :
+```
+  (a) commit 55daa1f : enfant direct du commit de départ a8d6ab6 ; 4 fichier(s) changé(s)
+      empreintes conformes pour les 2 fichier(s) testé(s)
+  (b) aucun autre fichier modifié ou non suivi pendant le lancement
+  (c) environnement : CORPUS=(non défini), MEMO=(non défini), OUTILS=(non défini)
+  (c) python : 1312 collectés ; 1311 passé, 1 xfail ; 103033 sous-tests
+      identique à la référence, nom par nom (collecte, issues, sous-tests)
+  (c) pages : 122 collectés ; 122 passé ; 2554 sous-tests
+      identique à la référence, nom par nom (collecte, issues, sous-tests)
+  (a) documentation de chantier changée après le début du lancement (aucun test ne la lit) : 2
+      docs/chantiers/tests-rapides/journal.md
+      docs/chantiers/tests-rapides/suivi.md
+VERDICT : ACCEPTÉ (code 0)
+```
+
+**Essai 1 — commit modifié sans relancer → REFUSÉ.**
+- 1a, branche `essai-verifier-p2-amend` : une ligne de commentaire ajoutée à `tests/lancer.py`, `git commit --amend` (même parent
+  a8d6ab6) :
+  ```
+    - (a) fichier(s) du commit différent(s) de ce que le lancement a testé : 1
+      tests/lancer.py : empreinte dans le commit 4ddea94, au lancement c4282f3
+  VERDICT : REFUSÉ (code 1) : 1 motif(s) ci-dessus
+  ```
+- 1b, branche `essai-verifier-p2-dessus` : même changement dans un commit de plus, au-dessus de 55daa1f :
+  ```
+    - (a) 633dd82 n'est ni le commit de départ du lancement (a8d6ab6) ni son enfant direct (parents : 55daa1f) : le lancement ne porte pas sur ce commit
+  VERDICT : REFUSÉ (code 1) : 1 motif(s) ci-dessus
+  ```
+- Retour sur `tests-rapides` (55daa1f, arbre propre), puis `git branch -D` des deux branches.
+
+**Essai 2 — fichier non suivi ajouté pendant le lancement → signalé et REFUSÉ.** Copie où `tests/python/brouillon_essai.py` figure
+dans le relevé de fin seulement :
+```
+  MOTIFS DE REFUS : 1
+    - (b) fichier(s) modifié(s) ou non suivi(s) pendant le lancement, hors du commit et hors de la liste permise : 1
+      tests/python/brouillon_essai.py : apparu pendant le lancement, absent du commit
+VERDICT : REFUSÉ (code 1) : 1 motif(s) ci-dessus
+```
+Variantes : présent dès le début et laissé hors du commit → REFUSÉ (« modifié ou non suivi pendant le lancement, absent du commit ») ;
+`CLAUDE.md` changé pendant le lancement → ACCEPTÉ, listé (« (b) fichier(s) de la liste permise … : CLAUDE.md »).
+
+**Essai 3 — test disparu → REFUSÉ.** Copie où `tests/python/test_nombres.py::TestSaisie::test_nettoyer` est retiré de **tous** les
+témoins du dossier (collecte, résultats, `rapport.json`, JUnit), comme s'il n'avait jamais été collecté :
+```
+  (c) python : 1311 collectés ; 1310 passé, 1 xfail ; 103033 sous-tests
+  MOTIFS DE REFUS : 1
+    - (c) python : test(s) disparu(s) par rapport à la référence : 1
+      tests/python/test_nombres.py::TestSaisie::test_nettoyer
+VERDICT : REFUSÉ (code 1) : 1 motif(s) ci-dessus
+```
+Variantes (copies) : le même test passé → sauté dans tous les témoins → REFUSÉ (« test(s) sauté(s) en plus : … passé -> sauté ») ;
+un sous-test de moins à `test_goatcounter_…` → REFUSÉ (« nombre de sous-tests passés en baisse : … 3 -> 2 ») ; un test **ajouté**
+(`test_nouveau_essai`, passé) → ACCEPTÉ, listé (« test(s) ajouté(s) (acceptés) : 1 ») ; la copie « disparu » comparée avec
+`--reference` à la copie « ajouté » → REFUSÉ, 2 disparus ; `verifier …/P2-rapport --reference <contrôle du chef sur P1>` → ACCEPTÉ.
+
+### Commit 2 (méthode, T10) : suite complète `--rapport …/scratchpad/P2b-rapport`
+
+Départ 55daa1f + `docs/methode-chantiers.md` (« Organisation de nuit » : contrôle allégé ; consigne du sous-agent : donner le dossier de
+`complet --rapport`) + `journal.md`. Python **710 s** (pytest 707 s) : 1311 passés, 1 xfail, 103 033 sous-tests ; pages **968 s**
+(967 s) : 122 passés, 2 554 sous-tests ; codes 0 ; JUnit / extension : 0 écart. `comparer_listes.py` : **identique, nom par nom** ;
+`--collect-only -q` des deux suites : 1312 et 122, identiques à la référence. `verifier …/P2b-rapport` est lancé sur le commit 2
+(résultat dans `suivi.md` et dans le rapport de la partie).
+
 ## Contrôles du chef d'orchestre
 
 P0 (1feb6cf) : suite complète --rapport, code 0 ; Python 1311 passés + 1 xfail, 103 033 sous-tests, 737 s ; pages 122 passés, 2 554 sous-tests, 950 s ; comparer_listes identique nom par nom ; --collect-only -q des deux suites identique à la référence.
