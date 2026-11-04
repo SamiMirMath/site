@@ -28,6 +28,7 @@
 ## Suivi
 - Une fiche de suivi par chantier : `docs/chantiers/<chantier>/suivi.md`, créée au début, tenue à jour à chaque
   commit (décisions, état des parties, suite verte, écarts), avec une section « Reprise après compactage ».
+- Méthode de travail par chantier : docs/methode-chantiers.md.
 
 # Commandes de test
 
@@ -40,6 +41,7 @@ SymPy 1.13.3, mpmath, websockets, pytest et pytest-xdist ; rien n'est installé 
 - `complet` : toute la suite Python (`-n auto`) puis toute la suite de pages (`-n 2`, corpus complet). Le code de retour est celui de pytest,
   sans pipe : c'est la commande à lancer avant chaque commit (règle ci-dessus). `python` et `pages` lancent chaque suite seule.
 - Ne jamais collecter `tests/python` et `tests/pages` dans la même commande (deux `test_accueil.py`).
+- Première installation sur une machine : python3 tests/pages/pyodide_local.py (une fois par version de Pyodide).
 - Mesures du 29.10.2026 sur le Mac de l'enseignant (2 cœurs physiques) : suite Python 595 s → 322 s ; suite de pages 1 102 s → 589 s.
 - Fiche de chantier : suivi.md reste court (état, questions ouvertes, à
   relire) ; tout le détail (plans, tableaux avant/après, temps, rapports)
