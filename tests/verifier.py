@@ -1,0 +1,296 @@
+"""Contrôle, après le commit, du rapport écrit par `lancer.py complet --rapport` (chantier tests-rapides, P2, décision T1, audit §M1).
+
+    python3 tests/lancer.py verifier <dossier> [--reference <dossier>] [--commit <rév>]
+
+Le chef d'orchestre le lance après le commit d'une partie, sur le dossier que le sous-agent a donné à `complet --rapport`. Il ne relance
+aucun test : il vérifie que le lancement noté dans le dossier a bien eu lieu sur le contenu du commit, qu'il était vert et qu'il n'a perdu
+aucun test. Code 0 = ACCEPTÉ ; 1 = REFUSÉ (motifs listés) ; 2 = REFUSÉ, dossier ou fichier manquant.
+
+Notations : D = commit de départ du lancement (`head` de rapport.json) ; C = commit vérifié (HEAD, ou `--commit`) ;
+M = empreintes (`git hash-object`) des fichiers modifiés ou non suivis au début du lancement ; F = le même relevé à la fin.
+
+(a) Commit. C = D, ou C a un seul parent, D. Chaque fichier changé entre D et C (`git diff --no-renames D C`) :
+    - a dans C l'empreinte notée dans M (absent de C si noté supprimé), et la même dans F (pas changé pendant le lancement) ;
+    - sinon REFUS, sauf pour la documentation de chantier écrite après le lancement (DOCS_APRES : `docs/chantiers/<chantier>/suivi.md`
+      et `journal.md`, qu'aucun test ne lit), qui est seulement listée.
+(b) Autres fichiers. Un fichier de M ou de F qui n'est pas changé entre D et C (modifié, non suivi ou apparu pendant le lancement, puis
+    laissé hors du commit) fait REFUSER, sauf s'il est dans PERMIS_HORS_COMMIT (`CLAUDE.md`, que l'enseignant peut être en train de
+    modifier et dont aucun test ne lit le contenu) ou dans DOCS_APRES : il est alors seulement listé.
+(c) Résultats. Codes de retour 0 (global, Python, pages ; les pages lancées) ; `CORPUS` et `OUTILS` non définis au lancement ; JUnit et
+    listes texte concordants ; puis, comparé au dossier de référence (par défaut docs/chantiers/tests-rapides/reference, la référence de
+    P0 ; `--reference` en désigne un autre), REFUS si un test collecté ou un résultat disparaît, si un test est sauté en plus, si une issue
+    change (seules xfail → passé et sauté → passé sont acceptées, et listées) ou si un nombre de sous-tests passés baisse. Un test
+    ajouté (passé ou xfail), ou un nombre de sous-tests en hausse, est accepté et listé.
+
+Sans dépendance (Python du système). Ce fichier ne s'appelle pas `test_*.py` : pytest ne le collecte pas."""
+import json
+import os
+import re
+import subprocess
+
+import comparer_listes
+
+RACINE = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+REFERENCE = "docs/chantiers/tests-rapides/reference"
+DOCS_APRES = re.compile(r"^docs/chantiers/[^/]+/(suivi|journal)\.md$")
+PERMIS_HORS_COMMIT = frozenset({"CLAUDE.md"})
+ENV_INTERDITS = ("CORPUS", "OUTILS")            # corpus réduit ou outils choisis : la suite n'est plus complète
+AMELIORATIONS = {("xfail", "passé"), ("sauté", "passé")}
+MAX_LIGNES = 25                                  # au-delà, la liste d'une rubrique est coupée (le compte reste exact)
+
+
+def git(*args):
+    r = subprocess.run(("git",) + args, cwd=RACINE, capture_output=True, text=True)
+    return r.returncode, r.stdout.strip()
+
+
+def court(rev):
+    return rev[:7] if rev else "?"
+
+
+class Verification:
+    def __init__(self):
+        self.refus = []          # motifs de refus
+        self.listes = []         # (titre, éléments) acceptés mais montrés
+        self.lignes = []         # résumé
+
+    def refuser(self, motif, elements=()):
+        self.refus.append((motif, list(elements)))
+
+    def lister(self, titre, elements):
+        if elements:
+            self.listes.append((titre, list(elements)))
+
+
+def coupe(elements):
+    lignes = [f"      {e}" for e in elements[:MAX_LIGNES]]
+    if len(elements) > MAX_LIGNES:
+        lignes.append(f"      … et {len(elements) - MAX_LIGNES} autre(s)")
+    return lignes
+
+
+# --- (a) et (b) : le commit et les fichiers ------------------------------------------------------------------------------------
+
+def empreinte_dans(commit, chemin):
+    code, sortie = git("rev-parse", "--verify", "-q", f"{commit}:{chemin}")
+    return sortie if code == 0 else None
+
+
+def verifier_commit(v, rapport, commit_demande):
+    depart = rapport.get("head")
+    m = rapport.get("fichiers_modifies")
+    f = rapport.get("fichiers_modifies_fin")
+    if not depart or m is None or f is None:
+        v.refuser("rapport.json incomplet : head, fichiers_modifies ou fichiers_modifies_fin manquant (lancement interrompu ?)")
+        return
+    code, commit = git("rev-parse", "--verify", "-q", f"{commit_demande}^{{commit}}")
+    if code:
+        v.refuser(f"commit introuvable : {commit_demande}")
+        return
+    if git("cat-file", "-e", f"{depart}^{{commit}}")[0]:
+        v.refuser(f"le commit de départ du lancement ({court(depart)}) n'existe pas dans le dépôt")
+        return
+    if commit == depart:
+        changes = []
+        lien = "est le commit de départ du lancement (aucun commit depuis)"
+    else:
+        parents = git("rev-list", "--parents", "-n", "1", commit)[1].split()[1:]
+        if parents != [depart]:
+            v.refuser(f"(a) {court(commit)} n'est ni le commit de départ du lancement ({court(depart)}) ni son enfant direct "
+                      f"(parents : {', '.join(court(p) for p in parents) or 'aucun'}) : le lancement ne porte pas sur ce commit")
+            return
+        changes = git("diff", "--no-renames", "--name-only", depart, commit)[1].splitlines()
+        lien = f"enfant direct du commit de départ {court(depart)}"
+    v.lignes.append(f"(a) commit {court(commit)} : {lien} ; {len(changes)} fichier(s) changé(s)")
+
+    mauvais, docs = [], []
+    for chemin in changes:
+        dans_c = empreinte_dans(commit, chemin)
+        if DOCS_APRES.match(chemin):
+            if not (chemin in m and m[chemin] == dans_c == f.get(chemin)):
+                docs.append(chemin)
+            continue
+        if chemin not in m:
+            mauvais.append(f"{chemin} : dans le commit, mais ni modifié ni non suivi au début du lancement (non testé)")
+        elif m[chemin] != dans_c:
+            mauvais.append(f"{chemin} : empreinte dans le commit {court(dans_c) if dans_c else 'supprimé'}, "
+                           f"au lancement {court(m[chemin]) if m[chemin] else 'supprimé'}")
+        elif f.get(chemin, "absent") != m[chemin]:
+            mauvais.append(f"{chemin} : changé pendant le lancement (début {court(m[chemin])}, fin {court(f.get(chemin))})")
+    if mauvais:
+        v.refuser("(a) fichier(s) du commit différent(s) de ce que le lancement a testé", mauvais)
+    else:
+        v.lignes.append(f"    empreintes conformes pour les {len(changes) - len(docs)} fichier(s) testé(s)")
+    v.lister("(a) documentation de chantier changée après le début du lancement (aucun test ne la lit)", docs)
+
+    autres, permis = [], []
+    for chemin in sorted(set(m) | set(f)):
+        if chemin in changes:
+            continue
+        if chemin not in m:
+            etat = "apparu pendant le lancement"
+        elif chemin not in f or f[chemin] != m[chemin]:
+            etat = "modifié au début, changé ou retiré pendant le lancement"
+        else:
+            etat = "modifié ou non suivi pendant le lancement"
+        ligne = f"{chemin} : {etat}, absent du commit"
+        (permis if chemin in PERMIS_HORS_COMMIT or DOCS_APRES.match(chemin) else autres).append(ligne)
+    if autres:
+        v.refuser("(b) fichier(s) modifié(s) ou non suivi(s) pendant le lancement, hors du commit et hors de la liste permise", autres)
+    else:
+        v.lignes.append("(b) aucun autre fichier modifié ou non suivi pendant le lancement" + (" (hors liste permise ci-dessous)" if permis else ""))
+    v.lister("(b) fichier(s) de la liste permise, modifié(s) pendant le lancement et hors du commit", permis)
+
+
+# --- (c) : codes et listes --------------------------------------------------------------------------------------------------------
+
+def sous_tests(texte):
+    """« 12 » ou « passé:10,échoué:2 » -> {issue: nombre}."""
+    if ":" not in texte:
+        return {"passé": int(texte)} if int(texte) else {}
+    return {k: int(n) for k, n in (p.split(":") for p in texte.split(","))}
+
+
+def verifier_codes(v, rapport):
+    env = rapport.get("environnement")
+    if env is None:
+        v.lignes.append("(c) environnement du lancement non noté (rapport antérieur à P2)")
+    else:
+        v.lignes.append("(c) environnement : " + ", ".join(f"{k}={env.get(k) if env.get(k) is not None else '(non défini)'}"
+                                                          for k in sorted(env)))
+        definis = [k for k in ENV_INTERDITS if env.get(k) not in (None, "")]
+        if definis:
+            v.refuser("(c) suite non complète : " + ", ".join(f"{k}={env[k]}" for k in definis) + " au lancement")
+    py, pa = rapport.get("python") or {}, rapport.get("pages") or {}
+    if rapport.get("code") != 0 or py.get("code") != 0 or pa.get("code") != 0 or not pa.get("lancee"):
+        v.refuser(f"(c) codes de retour : global {rapport.get('code')}, Python {py.get('code')}, "
+                  f"pages {pa.get('code') if pa.get('lancee') else 'non lancées'} (0 exigé partout)")
+    for suite, b in (("python", py), ("pages", pa)):
+        if b.get("ecarts_junit"):
+            v.refuser(f"(c) {suite} : JUnit et extension discordants (rapport.json)", b["ecarts_junit"])
+
+
+def verifier_suite(v, dossier, reference, suite, rapport, variables):
+    b = rapport.get(suite) or {}
+    collecte = comparer_listes.lire_collecte(dossier, suite)
+    resultats = comparer_listes.lire_resultats(dossier, suite)
+    ref_collecte = set(comparer_listes.lire_collecte(reference, suite))
+    ref_resultats = comparer_listes.lire_resultats(reference, suite)
+
+    # concordance des témoins du dossier : listes texte, rapport.json, JUnit
+    par_issue = {}
+    for i, (issue, _) in resultats.items():
+        par_issue.setdefault(issue, set()).add(i)
+    attendu = {"passé": set(b.get("passes", [])), "xfail": set(b.get("xfail", [])), "sauté": set(b.get("sautes", []))}
+    attendu.update({k: set(l) for k, l in (b.get("autres") or {}).items()})
+    if {k: s for k, s in par_issue.items() if s} != {k: s for k, s in attendu.items() if s} or b.get("collectes") != len(collecte):
+        v.refuser(f"(c) {suite} : listes texte et rapport.json discordants (dossier modifié après le lancement ?)")
+    junit = os.path.join(dossier, f"{suite}.xml")
+    if not os.path.exists(junit):
+        v.refuser(f"(c) {suite} : JUnit absent ({suite}.xml)")
+    else:
+        ecarts = comparer_listes.ecarts_junit(junit, {i: r[0] for i, r in resultats.items()})
+        if ecarts:
+            v.refuser(f"(c) {suite} : JUnit et listes texte discordants", ecarts)
+
+    v.lignes.append(f"(c) {suite} : {comparer_listes.resume(dossier, suite)}")
+
+    disparus = sorted(ref_collecte - set(collecte)) + [f"{i} (résultat)" for i in sorted(set(ref_resultats) - set(resultats))
+                                                       if i in collecte]
+    if disparus:
+        v.refuser(f"(c) {suite} : test(s) disparu(s) par rapport à la référence", disparus)
+    nouveaux = sorted((set(collecte) - ref_collecte) | (set(resultats) - set(ref_resultats)))
+    ajoutes, sautes, degrades, ameliores, baisses, hausses = [], [], [], [], [], []
+    for i in nouveaux:
+        issue = resultats.get(i, ("non exécuté", "0"))[0]
+        (ajoutes if issue in ("passé", "xfail") else sautes if issue == "sauté" else degrades).append(f"{i} (nouveau, {issue})")
+    for i in sorted(set(ref_resultats) & set(resultats)):
+        (ri, rs), (ni, ns) = ref_resultats[i], resultats[i]
+        if ri != ni:
+            if (ri, ni) in AMELIORATIONS:
+                ameliores.append(f"{i} : {ri} -> {ni}")
+            else:
+                (sautes if ni == "sauté" else degrades).append(f"{i} : {ri} -> {ni}")
+        if i in variables:
+            continue
+        rp, np_ = sous_tests(rs).get("passé", 0), sous_tests(ns).get("passé", 0)
+        if np_ < rp:
+            baisses.append(f"{i} : {rp} -> {np_}")
+        elif np_ > rp:
+            hausses.append(f"{i} : {rp} -> {np_}")
+        if any(k != "passé" for k in sous_tests(ns)):
+            degrades.append(f"{i} : sous-tests {ns}")
+    if sautes:
+        v.refuser(f"(c) {suite} : test(s) sauté(s) en plus", sautes)
+    if degrades:
+        v.refuser(f"(c) {suite} : issue(s) dégradée(s) ou changée(s)", degrades)
+    if baisses:
+        v.refuser(f"(c) {suite} : nombre de sous-tests passés en baisse", baisses)
+    v.lister(f"(c) {suite} : test(s) ajouté(s) (acceptés)", ajoutes)
+    v.lister(f"(c) {suite} : issue(s) améliorée(s) (acceptées)", ameliores)
+    v.lister(f"(c) {suite} : sous-tests en hausse (acceptés)", hausses)
+    if not (disparus or nouveaux or sautes or degrades or baisses or hausses or ameliores):
+        v.lignes.append(f"    identique à la référence, nom par nom (collecte, issues, sous-tests)")
+
+
+# --- commande ----------------------------------------------------------------------------------------------------------------------
+
+def verifier(dossier, reference=None, commit="HEAD"):
+    dossier = os.path.abspath(dossier)
+    reference = os.path.abspath(reference or os.path.join(RACINE, REFERENCE))
+    print(f"verifier {dossier}")
+    print(f"  référence : {os.path.relpath(reference, RACINE) if reference.startswith(RACINE) else reference}")
+    requis = [os.path.join(dossier, "rapport.json")] + [os.path.join(d, f"{n}-{s}.txt") for d in (dossier, reference)
+                                                         for s in comparer_listes.SUITES for n in ("collecte", "resultats")]
+    manquants = [p for p in requis if not os.path.exists(p)]
+    if manquants:
+        for p in manquants:
+            print(f"  fichier absent : {p}")
+        print("VERDICT : REFUSÉ (code 2) : dossier de rapport ou de référence incomplet")
+        return 2
+    with open(os.path.join(dossier, "rapport.json"), encoding="utf-8") as fichier:
+        rapport = json.load(fichier)
+    print(f"  lancement : départ {court(rapport.get('head'))} ({rapport.get('branche')}), {rapport.get('debut')} -> {rapport.get('fin')}, "
+          f"code {rapport.get('code')} ; Python {(rapport.get('python') or {}).get('duree_s')} s, "
+          f"pages {(rapport.get('pages') or {}).get('duree_s')} s")
+
+    v = Verification()
+    verifier_commit(v, rapport, commit)
+    verifier_codes(v, rapport)
+    variables = comparer_listes.lire_variables(reference)
+    for suite in comparer_listes.SUITES:
+        verifier_suite(v, dossier, reference, suite, rapport, variables)
+
+    for ligne in v.lignes:
+        print("  " + ligne)
+    for titre, elements in v.listes:
+        print(f"  {titre} : {len(elements)}")
+        print("\n".join(coupe(elements)))
+    if v.refus:
+        print(f"  MOTIFS DE REFUS : {len(v.refus)}")
+        for motif, elements in v.refus:
+            print(f"    - {motif}" + (f" : {len(elements)}" if elements else ""))
+            if elements:
+                print("\n".join(coupe(elements)))
+        print(f"VERDICT : REFUSÉ (code 1) : {len(v.refus)} motif(s) ci-dessus")
+        return 1
+    print("VERDICT : ACCEPTÉ (code 0)")
+    return 0
+
+
+def main(argv):
+    """argv : les arguments après `verifier`."""
+    args = list(argv)
+    options = {}
+    for nom in ("--reference", "--commit"):
+        if nom in args:
+            i = args.index(nom)
+            if i + 1 >= len(args):
+                print(__doc__)
+                return 2
+            options[nom] = args[i + 1]
+            del args[i:i + 2]
+    if len(args) != 1 or args[0].startswith("--"):
+        print(__doc__)
+        return 2
+    return verifier(args[0], options.get("--reference"), options.get("--commit", "HEAD"))

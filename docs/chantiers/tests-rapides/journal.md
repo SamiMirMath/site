@@ -174,6 +174,112 @@ P1 ne touche aucun moteur. `mesurer_temps.py` : Ex7 0,59 s ; a 0,03 s ; b 0,36 s
 Aucun. Charge de la vérification : deux processus qui occupent chacun un cœur, comme dans l'audit §2.2 (« 2 processus qui occupent le
 processeur, comme à `-n 2` »).
 
+## P2 (04.11.2026) : `lancer.py verifier` (T1) et méthode (T10)
+
+### Plan
+
+1. Nouveau module `tests/verifier.py` (sans dépendance, Python du système, comme `comparer_listes.py`), appelé par
+   `python3 tests/lancer.py verifier <dossier> [--reference <dossier>] [--commit <rév>]` ; il relit le dossier écrit par
+   `complet --rapport` et contrôle, après le commit, les points (a), (b), (c) de l'audit §M1 et de la décision T1 (règles exactes
+   ci-dessous). Verdict final explicite ; code 0 = accepté, 1 = refusé, 2 = dossier ou fichier manquant (refusé aussi).
+2. `complet --rapport` note en plus dans `rapport.json` les variables `CORPUS`, `OUTILS` et `MEMO` (environnement du lancement).
+3. Essais sur les rapports déjà écrits (P1, contrôle du chef d'orchestre sur a8d6ab6), avant la suite complète.
+4. Suite complète `--rapport` vers `…/scratchpad/P2-rapport`, `comparer_listes.py`, `--collect-only -q` des deux suites.
+5. `suivi.md` (état, texte proposé pour `CLAUDE.md`, procédure allégée), commit 1, puis `verifier` sur ce commit (doit accepter).
+6. Les trois essais de l'audit §M1 sur des copies du dossier P2-rapport et sur une branche jetable (supprimée ensuite) ; notés ici.
+7. Commit 2 (séparé, T10) : `docs/methode-chantiers.md`, « Organisation de nuit » ; suite complète `--rapport` vers
+   `…/scratchpad/P2b-rapport` avant le commit, puis `verifier` sur le commit 2.
+
+### Code
+
+- **`tests/verifier.py`** (nouveau, sans dépendance, comme `comparer_listes.py`, dont il réutilise les lecteurs) ; appelé par
+  `python3 tests/lancer.py verifier <dossier> [--reference <dossier>] [--commit <rév>]`. Il ne relance aucun test.
+- **`tests/lancer.py`** : commande `verifier` (renvoi à `verifier.main`) ; `complet --rapport` note en plus dans `rapport.json`
+  `environnement` = valeurs de `CORPUS`, `OUTILS` et `MEMO` au lancement (`null` si non définies). Sans `--rapport`, `complet` ne change pas.
+- `--commit <rév>` (par défaut `HEAD`) sert à vérifier un commit plus ancien (essais ci-dessous sur les rapports de P0 et P1) ;
+  `--reference <dossier>` désigne la référence de la partie précédente quand ce n'est plus `reference/` (après un renommage accepté).
+
+### Règles exactes de `verifier`
+
+Notations : D = commit de départ du lancement (`head` de `rapport.json`) ; C = commit vérifié (`HEAD`) ; M = empreintes
+`git hash-object` des fichiers modifiés (indexés ou non) ou non suivis **au début** du lancement (`fichiers_modifies`, `null` =
+supprimé) ; F = le même relevé **à la fin** (`fichiers_modifies_fin`). Les fichiers ignorés par git (`.gitignore`) n'y sont jamais.
+
+**(a) Le commit.**
+- C = D (aucun commit depuis le lancement), ou C a **un seul parent**, et c'est D. Sinon REFUS (« ni le commit de départ ni son enfant
+  direct ») : un commit de plus, une fusion ou un commit modifié (`--amend` après un autre commit) sont refusés.
+- Pour chaque fichier changé entre D et C (`git diff --no-renames --name-only D C`) : il doit être dans M, avec dans C
+  (`git rev-parse C:<fichier>`) l'empreinte notée dans M (absent de C s'il est noté supprimé), et la même empreinte dans F (pas changé
+  pendant le lancement). Sinon REFUS, avec le motif : « non testé » (absent de M), « empreinte différente », « changé pendant le lancement ».
+- Ensemble, (a) et (b) disent que C contient **exactement** les fichiers de M, avec les empreintes testées, à la liste permise près.
+
+**(b) Les autres fichiers.** Tout fichier de M ou de F qui n'est **pas** changé entre D et C (modifié, non suivi, ou apparu pendant le
+lancement, puis laissé hors du commit) fait REFUSER : la suite a tourné avec un état local que le commit ne contient pas.
+
+**Liste permise** (seulement listée, jamais refusée) — deux règles, rien d'autre :
+1. `DOCS_APRES` = `docs/chantiers/<chantier>/suivi.md` et `docs/chantiers/<chantier>/journal.md`, dans (a) comme dans (b). Raison : le
+   sous-agent y écrit les murs et les résultats **après** le lancement (P0 et P1 l'ont fait : `suivi.md` absent de M, `journal.md` changé
+   ensuite). Aucun test ne lit `docs/chantiers/` : `grep` des tests (les seules mentions sont des docstrings), et les deux `os.walk` de
+   `test_accueil.py` écartent `docs/`.
+2. `PERMIS_HORS_COMMIT` = `CLAUDE.md`, dans (b) seulement (audit §M1 : l'enseignant peut être en train de le modifier). Aucun test n'en
+   lit le contenu ; `test_les_fichiers_internes_ne_sont_pas_publies` n'en voit que le nom, qui ne change pas. Dans un commit, `CLAUDE.md`
+   reste soumis à la règle (a) (le sous-agent ne le modifie pas).
+
+**(c) Les résultats.**
+- Codes : `code` global, Python et pages valent 0, et les pages ont été lancées.
+- Environnement : `CORPUS` et `OUTILS` non définis au lancement (sinon la suite n'est pas complète) ; `MEMO` est affiché (P4). Un rapport
+  antérieur à P2 (sans `environnement`) le signale.
+- Concordance des témoins du dossier : listes texte (`collecte-*`, `resultats-*`) = listes de `rapport.json` (passés, xfail, sautés,
+  autres ; nombre de collectés) ; JUnit (`python.xml`, `pages.xml`) = listes texte (`comparer_listes.ecarts_junit`) ; `ecarts_junit` de
+  `rapport.json` vide. Un dossier retouché à la main d'un seul côté est refusé.
+- Comparaison avec la référence (par défaut `docs/chantiers/tests-rapides/reference/`, ou `--reference <dossier>`), suite par suite,
+  nom par nom. REFUS si : un identifiant collecté, ou un résultat, **disparaît** ; un test est **sauté en plus** (sauté alors qu'il ne
+  l'était pas, ou nouveau et sauté) ; une **issue change**, sauf xfail → passé et sauté → passé (acceptées, listées) ; un test a des
+  sous-tests en échec ; le nombre de **sous-tests passés** d'un test **baisse** (sauf tests de `soustests-variables.txt`, aucun
+  aujourd'hui). Accepté mais **listé** : un test **ajouté** (passé ou xfail), un nombre de sous-tests en hausse.
+- Sortie : un résumé de quelques lignes ((a), (b), (c) par suite), les listes acceptées, les motifs de refus avec leurs éléments (25 au
+  plus par motif, le compte reste exact), puis `VERDICT : ACCEPTÉ (code 0)` ou `VERDICT : REFUSÉ (code 1) : n motif(s)` ;
+  code 2 (REFUSÉ aussi) si un fichier du dossier ou de la référence manque.
+
+### Essais de mise au point (rapports déjà écrits, avant la suite complète)
+
+| Dossier | Commit vérifié | Verdict | Motif / remarque |
+|---|---|---|---|
+| contrôle du chef sur P1 (départ a8d6ab6, arbre propre) | a8d6ab6 (= D) | ACCEPTÉ | 0 fichier ; listes identiques |
+| P1 du sous-agent (départ 1feb6cf ; M = `navigateur.py`, `journal.md`) | a8d6ab6 (enfant) | ACCEPTÉ | `navigateur.py` conforme ; `journal.md`, `suivi.md` listés |
+| même dossier | 1feb6cf (= D) | REFUSÉ | (b) `navigateur.py` modifié pendant le lancement, absent du commit |
+| 2ᵉ lancement de P0 (départ 7268412) | 1feb6cf (enfant) | REFUSÉ | codes (pages 1) ; issue passé → échoué et sous-tests 2 → 0 du test du clavier |
+| contrôle du chef sur P0 | 1feb6cf (= D) | ACCEPTÉ | |
+| copie du contrôle P1, 8 tests de `test_nombres.py` retirés des listes texte seulement | a8d6ab6 | REFUSÉ | 8 disparus ; listes / `rapport.json` et listes / JUnit discordants |
+| sans argument ; dossier absent | — | code 2 | aide ; « fichier absent » puis `VERDICT : REFUSÉ (code 2)` |
+
+### Suite complète (`complet --rapport …/scratchpad/P2-rapport`, départ a8d6ab6 + `lancer.py`, `verifier.py`, `journal.md`)
+
+| | Mur (pytest) | Résultat |
+|---|---|---|
+| Python | **735 s** (732 s) | 1311 passés, 1 xfail, 103 033 sous-tests ; code 0 ; JUnit / extension : 0 écart |
+| Pages | **994 s** (993 s) | 122 passés, 2 554 sous-tests ; code 0 ; JUnit / extension : 0 écart |
+
+Code global 0 (23:09 → 23:38). `environnement` : `CORPUS`, `OUTILS`, `MEMO` non définis. Empreintes au début et à la fin : `lancer.py`
+c4282f3, `verifier.py` e429b39 (inchangées) ; `journal.md` changé pendant le lancement (rédaction de cette section : liste permise).
+`python3 tests/comparer_listes.py docs/chantiers/tests-rapides/reference <P2-rapport>` : Python et pages **identiques, nom par nom**
+(code 0). `--collect-only -q` de chaque suite, lancée séparément : 1312 et 122 identifiants, **identiques** à `reference/collecte-*.txt`.
+
+### Temps natif
+
+P2 ne touche aucun moteur. `mesurer_temps.py` : Ex7 0,58 s ; a 0,03 s ; b 0,36 s ; c 0,25 s ; d 0,22 s (P1 : 0,59 ; 0,03 ; 0,36 ;
+0,25 ; 0,22) : aucune hausse.
+
+### Remarques
+
+- Libellés de (b) : « apparu pendant le lancement » = absent du relevé du début, présent dans celui de la fin (fichier créé, ou fichier
+  suivi modifié après le début) ; « modifié au début, changé ou retiré pendant le lancement » = empreintes du début et de la fin différentes.
+- Après le commit, l'arbre est propre : `rapide` (qui lit `git diff HEAD` et les fichiers non suivis) ne relance alors que les tests de
+  fumée. Le contrôle indépendant de l'audit §M1 (« puis `rapide` ») est donc faible tant que `rapide` n'a pas de base de comparaison
+  (question pour l'enseignant, à traiter avec P6 si vous le voulez).
+
 ## Contrôles du chef d'orchestre
 
 P0 (1feb6cf) : suite complète --rapport, code 0 ; Python 1311 passés + 1 xfail, 103 033 sous-tests, 737 s ; pages 122 passés, 2 554 sous-tests, 950 s ; comparer_listes identique nom par nom ; --collect-only -q des deux suites identique à la référence.
+
+P1 (a8d6ab6) : suite complète --rapport, code 0 ; Python 1311 passés + 1 xfail, 103 033 sous-tests, 801 s ; pages 122 passés, 2 554 sous-tests, 967 s ; comparer_listes identique nom par nom ; --collect-only -q des deux suites identique à la référence.

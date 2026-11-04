@@ -8,7 +8,11 @@
     python3 tests/lancer.py complet --rapport <dossier>
                                       # comme complet, et écrit en plus dans <dossier> (hors du dépôt, ou ignoré par git) : les deux JUnit
                                       # (python.xml, pages.xml), rapport.json (commit, empreintes des fichiers modifiés ou non suivis,
-                                      # codes, durées, tests passés / xfail / sautés, sous-tests) et les listes texte de comparer_listes.py
+                                      # codes, durées, tests passés / xfail / sautés, sous-tests, variables CORPUS, OUTILS et MEMO) et les
+                                      # listes texte de comparer_listes.py
+    python3 tests/lancer.py verifier <dossier> [--reference <dossier>] [--commit <rév>]
+                                      # après le commit : contrôle le rapport de `complet --rapport` (empreintes du commit, autres
+                                      # fichiers modifiés, codes, tests disparus ou dégradés par rapport à la référence) ; voir verifier.py
 
 Le code de retour est celui de pytest (0 = tout est vert) : pas de pipe, donc rien n'est masqué (CLAUDE.md). Ce fichier ne s'appelle pas
 `test_*.py` : ni pytest ni unittest ne le collectent."""
@@ -21,6 +25,7 @@ import sys
 import time
 
 import comparer_listes
+import verifier
 
 RACINE = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 DOSSIERS_MOTEURS = ("ensemble-definition", "moteur", "derivee-variations", "limites-asymptotes", "etude-complete", "factorisation",
@@ -175,7 +180,8 @@ def complet_avec_rapport(chemin):
             os.remove(os.path.join(dossier, nom))
     rapport = {"commande": "python3 tests/lancer.py complet --rapport", "head": sh("git", "rev-parse", "HEAD").strip(),
                "branche": sh("git", "rev-parse", "--abbrev-ref", "HEAD").strip(),
-               "debut": datetime.datetime.now().astimezone().isoformat(timespec="seconds"), "fichiers_modifies": etat_fichiers()}
+               "debut": datetime.datetime.now().astimezone().isoformat(timespec="seconds"), "fichiers_modifies": etat_fichiers(),
+               "environnement": {k: os.environ.get(k) for k in ("CORPUS", "OUTILS", "MEMO")}}
 
     def en_plus(suite):
         return ["-p", "tests.rapport_pytest", f"--rapport-json={os.path.join(dossier, suite + '.json')}",
@@ -233,6 +239,8 @@ def main(argv):
             return complet_avec_rapport(argv[i + 1])
         code = python()
         return code if code else pages()
+    if commande == "verifier":
+        return verifier.main(argv[2:])
     print(__doc__)
     return 2
 
