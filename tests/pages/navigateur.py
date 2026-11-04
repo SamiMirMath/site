@@ -250,24 +250,41 @@ class Page:
             self.appel("Input.insertText", text=c)
             time.sleep(pause)
 
-    def _centre_immobile(self, selecteur):
-        """Amène l'élément au milieu de l'écran et renvoie son centre (x, y) une fois la page immobile : un défilement doux en cours (vers la carte qui vient
-        d'apparaître) fait avaler le geste par le navigateur, ce que l'élève ne fait jamais (il ne touche pas pendant que la page défile)."""
-        position = (f"(() => {{ const r = document.querySelector({selecteur!r}).getBoundingClientRect(); "
-                    "return [scrollX, scrollY, r.x + r.width / 2, r.y + r.height / 2, document.documentElement.scrollHeight]; })()")
-        self.evaluer(f"document.querySelector({selecteur!r}).scrollIntoView({{block: 'center', behavior: 'instant'}})")
+    def _immobile(self, position):
+        """Évalue `position` toutes les 50 ms jusqu'à 6 mesures identiques de suite (0,3 s sans bouger), 10 s au plus ; renvoie la dernière mesure."""
         derniere, calme, fin = None, 0, time.time() + 10
-        while calme < 6 and time.time() < fin:                      # 6 mesures identiques de suite, à 50 ms : 0,3 s sans bouger
+        while calme < 6 and time.time() < fin:
             time.sleep(0.05)
             mesure = self.evaluer(position)
             calme = calme + 1 if mesure == derniere else 0
             derniere = mesure
-        return derniere[2], derniere[3]
+        return derniere
+
+    def _centre_immobile(self, selecteur):
+        """Amène l'élément au milieu de l'écran et renvoie son centre (x, y) une fois la page immobile : un défilement doux en cours (vers la carte qui vient
+        d'apparaître) fait avaler le geste par le navigateur, ce que l'élève ne fait jamais (il ne touche pas pendant que la page défile).
+        On laisse d'abord finir un défilement de la page en cours (sinon il se bat avec le centrage), puis on centre ; si, une fois la page immobile,
+        l'élément n'est pas entièrement dans l'écran (un défilement de la page l'a emporté), on recentre : 3 essais au plus (chantier « Tests rapides », P1)."""
+        position = (f"(() => {{ const r = document.querySelector({selecteur!r}).getBoundingClientRect(), h = document.documentElement; "
+                    "return [scrollX, scrollY, r.x + r.width / 2, r.y + r.height / 2, h.scrollHeight, "
+                    "r.left >= 0 && r.top >= 0 && r.right <= h.clientWidth && r.bottom <= h.clientHeight]; })()")
+        self._immobile(position)
+        for _ in range(3):
+            self.evaluer(f"document.querySelector({selecteur!r}).scrollIntoView({{block: 'center', behavior: 'instant'}})")
+            mesure = self._immobile(position)
+            if mesure[5]:
+                break
+        return mesure[2], mesure[3]
 
     def toucher(self, selecteur):
         """Appui d'un doigt (touchStart puis touchEnd) au centre de l'élément, après l'avoir amené à l'écran ; le navigateur en tire le clic
-        (page ouverte avec `tactile=True`)."""
+        (page ouverte avec `tactile=True`). Si le point d'appui n'est pas sur l'élément (ou l'un de ses descendants), erreur explicite plutôt qu'un appui
+        perdu (chantier « Tests rapides », P1)."""
         x, y = self._centre_immobile(selecteur)
+        dessous = self.evaluer(f"(() => {{ const e = document.querySelector({selecteur!r}), d = document.elementFromPoint({x}, {y}); "
+                               "return d && (d === e || e.contains(d)) ? '' : (d ? d.outerHTML.slice(0, 160) : 'aucun élément (point hors de l’écran)'); })()")
+        if dessous:
+            raise ErreurPage(f"la touche n'est pas sous le doigt : {selecteur} visé en ({x:.0f}, {y:.0f}), sous le doigt : {dessous}")
         self.appel("Input.dispatchTouchEvent", type="touchStart", touchPoints=[{"x": x, "y": y}])
         self.appel("Input.dispatchTouchEvent", type="touchEnd", touchPoints=[])
 

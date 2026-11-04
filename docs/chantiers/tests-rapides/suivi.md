@@ -16,7 +16,7 @@ rapports) : [`journal.md`](journal.md).
 | Partie | Contenu | État |
 |---|---|---|
 | P0 | `suivi.md`, `journal.md`, deux lancements de référence, `lancer.py complet --rapport` | **faite** (commit « Tests rapides P0 : … ») |
-| P1 | T2 : harnais du toucher (test du clavier) | à faire |
+| P1 | T2 : harnais du toucher (test du clavier) | **faite** (commit « Tests rapides P1 : … ») : test du clavier 20/20 seul et 20/20 sous charge ; listes identiques |
 | P2 | T1 : `lancer.py verifier`, texte proposé pour `CLAUDE.md`, méthode (commit séparé) | à faire |
 | P3 | T3 : `TestStructure` (calcul une fois par classe) | à faire |
 | P4 | T4 : `memo.py`, test de garde, `MEMO=0` | à faire |
@@ -41,16 +41,19 @@ rapports) : [`journal.md`](journal.md).
 
 ## Questions pour l'enseignant
 
-Aucune pour P0.
+Aucune pour P0 ni P1.
 
 ## À relire par l'enseignant
 
 - P0 : aucun instantané modifié. Outil de test modifié : `tests/lancer.py` (option `complet --rapport` ; sans l'option, mêmes
   commandes et même code de retour) ; nouveaux : `tests/rapport_pytest.py` (extension pytest passive, chargée seulement avec
   `--rapport`) et `tests/comparer_listes.py`.
+- P1 : aucun instantané ni aucun test modifié. Harnais modifié : `tests/pages/navigateur.py` (`toucher` : attente d'immobilité avant le
+  centrage, recentrage borné à 3 essais, erreur « la touche n'est pas sous le doigt » si `elementFromPoint` n'est pas l'élément visé).
+  Coût : `test_clavier.py` 218 s → 241 s ; mur des pages 994 s (P0 : 938 à 967 s). Détail : `journal.md`, « P1 ».
 
 ## Reprise après compactage
 
-P0 commitée sur `tests-rapides` (rien poussé). Prochaine partie : **P1** (harnais du toucher), puis P2 à P7 dans l'ordre de
+P0 et P1 commitées sur `tests-rapides` (rien poussé). Prochaine partie : **P2** (`lancer.py verifier`), puis P3 à P7 dans l'ordre de
 `decisions.md` §3. Pour reprendre : lire ce fichier, `decisions.md`, puis `git log --oneline main..HEAD` ; le détail est dans
 `journal.md`. Chaque partie compare son rapport à `reference/` avec la commande ci-dessus.

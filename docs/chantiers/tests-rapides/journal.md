@@ -101,3 +101,79 @@ des suites (tableau ci-dessus).
   (documentation seulement). Les empreintes des fichiers de code (`tests/lancer.py`, `tests/rapport_pytest.py`, `tests/comparer_listes.py`)
   et des listes de référence notées au début du 2ᵉ lancement sont celles du commit.
 - Les mesures de `CLAUDE.md` (322 s et 589 s) ne valent plus (suite plus grosse) ; le texte proposé pour `CLAUDE.md` est prévu en P2 (T10).
+
+## P1 (04.11.2026) : harnais du toucher (T2)
+
+### Plan
+
+1. `tests/pages/navigateur.py` seulement (audit §2.3, décision T2) ; ni la page, ni `test_clavier.py`, ni aucun autre test ne changent :
+   - `Page._centre_immobile` : attendre l'immobilité **avant** le `scrollIntoView` (un défilement doux de la page en cours ne se bat plus
+     avec le défilement instantané du harnais) ; après l'immobilité, vérifier que le rectangle de l'élément est **entièrement dans
+     l'écran** ; sinon recentrer et attendre de nouveau, **3 essais au plus** ;
+   - `Page.toucher` : avant l'appui, vérifier que `document.elementFromPoint(x, y)` est l'élément visé ou l'un de ses descendants ;
+     sinon lever une erreur explicite (« la touche n'est pas sous le doigt »), au lieu d'un appui perdu.
+2. Vérification propre : `test_a_deux_formules…` lancé 20 fois seul, puis 20 fois sous charge (2 processus qui occupent le processeur),
+   chaque lancement sous `subprocess` avec une limite de 5 min ; 40 sur 40 exigés, sinon la partie est un échec.
+3. Temps de `test_clavier.py` avant / après (le recentrage ajoute au plus une attente d'immobilité de 0,3 s par appui).
+4. Suite complète `--rapport` (code 0), `comparer_listes.py` contre `reference/` (identique nom par nom), `--collect-only -q` de chaque
+   suite comparé à la référence ; murs notés ici.
+5. `suivi.md` (état de P1), commit « Tests rapides P1 : … ».
+
+### Code
+
+`tests/pages/navigateur.py` seulement (la page, `test_clavier.py` et les autres tests sont inchangés) :
+- nouvelle `Page._immobile(position)` : la boucle d'immobilité d'avant, sortie telle quelle (6 mesures identiques à 50 ms, 10 s au plus) ;
+- `Page._centre_immobile` : une attente d'immobilité **avant** le centrage, puis jusqu'à **3** centrages (`scrollIntoView` instantané,
+  puis attente d'immobilité) ; on s'arrête dès que le rectangle de l'élément est entièrement dans la partie visible
+  (`0 ≤ left, top` et `right ≤ clientWidth`, `bottom ≤ clientHeight`). Après 3 essais, on rend le centre mesuré : c'est le contrôle de
+  `toucher` qui décide ;
+- `Page.toucher` : avant l'appui, `document.elementFromPoint(x, y)` doit être l'élément visé ou l'un de ses descendants ; sinon
+  `ErreurPage("la touche n'est pas sous le doigt : <sélecteur> visé en (x, y), sous le doigt : <élément trouvé ou « aucun élément »>")`.
+- `Page.glisser` profite du recentrage (même `_centre_immobile`) ; le contrôle `elementFromPoint` n'y est pas ajouté (audit §2.3 : `toucher`).
+
+Sonde du contrôle (scratchpad, hors du dépôt) : page du simplexe en tactile, un `div` fixe posé sur toute la page, `toucher("#launch")`
+→ `ErreurPage : la touche n'est pas sous le doigt : #launch visé en (82, 725), sous le doigt : <div id="cache" …>` ; cache retiré,
+même appui accepté. Le contrôle n'est donc pas vide.
+
+### Vérification propre (test du clavier, 40 lancements)
+
+`tests/pages/test_clavier.py::TestClavierIntegre::test_a_deux_formules_aux_touches_donnent_le_corrige_de_la_saisie_directe`, chaque
+lancement dans son propre processus pytest sous `subprocess` (limite 5 min), par lots de 5 (seul) ou de 4 (sous charge) :
+
+| | Lancements | Réussites | Durée d'un lancement |
+|---|---|---|---|
+| Seul | 20 | **20** (1 passé, 2 sous-tests, à chaque fois) | 41,2 à 43,1 s |
+| Sous charge (2 processus `while True: pass` pendant tout le lot) | 20 | **20** (1 passé, 2 sous-tests, à chaque fois) | 49,7 à 52,8 s |
+
+**40 sur 40.** Autres tests tactiles avec le nouveau harnais : `test_simplexe.py -k "test_f_ or test_g_"` : 8 passés (53 s).
+
+Temps de `test_clavier.py` entier (7 tests, 20 sous-tests), seul : 218 s avant, 241 s après (+ 23 s, environ 0,35 s de plus par appui :
+l'attente d'immobilité avant le centrage).
+
+### Suite complète (`complet --rapport`, HEAD 1feb6cf + `navigateur.py` modifié)
+
+| | Mur (pytest) | Résultat |
+|---|---|---|
+| Python | **715 s** | 1311 passés, 1 xfail, 103 033 sous-tests ; code 0 ; JUnit / extension : 0 écart |
+| Pages | **994 s** (993 s) | 122 passés, 2 554 sous-tests ; code 0 ; JUnit / extension : 0 écart |
+
+Code global 0. `python3 tests/comparer_listes.py docs/chantiers/tests-rapides/reference <P1-rapport>` : Python et pages **identiques,
+nom par nom** (code 0). `--collect-only -q` de chaque suite, lancée séparément : 1312 et 122 identifiants, **identiques** à
+`reference/collecte-*.txt`. Empreintes notées au début et à la fin du lancement : `navigateur.py` 52a0966…, `journal.md` (plan seul).
+
+Mur des pages : 994 s contre 938 à 967 s en P0 (+ 3 à 6 %), cohérent avec le surcoût du toucher (`test_clavier` + 23 s) et le bruit
+de mesure.
+
+### Temps natif
+
+P1 ne touche aucun moteur. `mesurer_temps.py` : Ex7 0,59 s ; a 0,03 s ; b 0,36 s ; c 0,25 s ; d 0,22 s (P0 : 0,61 ; 0,03 ; 0,35 ;
+0,25 ; 0,22) : aucune hausse.
+
+### Écarts
+
+Aucun. Charge de la vérification : deux processus qui occupent chacun un cœur, comme dans l'audit §2.2 (« 2 processus qui occupent le
+processeur, comme à `-n 2` »).
+
+## Contrôles du chef d'orchestre
+
+P0 (1feb6cf) : suite complète --rapport, code 0 ; Python 1311 passés + 1 xfail, 103 033 sous-tests, 737 s ; pages 122 passés, 2 554 sous-tests, 950 s ; comparer_listes identique nom par nom ; --collect-only -q des deux suites identique à la référence.
