@@ -28,6 +28,7 @@
 ## Suivi
 - Une fiche de suivi par chantier : `docs/chantiers/<chantier>/suivi.md`, créée au début, tenue à jour à chaque
   commit (décisions, état des parties, suite verte, écarts), avec une section « Reprise après compactage ».
+- Méthode de travail par chantier : docs/methode-chantiers.md.
 
 # Commandes de test
 
