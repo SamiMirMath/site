@@ -300,6 +300,24 @@ BATTERIE_M_PI = [
     ("5^(x+1)=pi", [-0.289]),
 ]
 
+# Correctif Exp-log Δ (04.11.2026) : a^P(x) = constante, P du 2e degré (ou du 1er), méthode « Logarithmes » (par défaut) : le second membre est calculé
+# (2^(−6) : x² − 5x + 6 = 0, jamais « − (−6) » ni « (−−6) ») et, quand b = a^k exactement, log(1/64) = log(2⁻⁶) = −6 · log(2) (log(a^A) = A · log(a)) ;
+# sinon Δ s'écrit avec les logarithmes, sans double signe. Solutions exactes (Fraction) ou arrondies à 10⁻³ ; filières C et M.
+BATTERIE_DELTA = [
+    ("2^(x^2-5x)=2^(-6)", [F(2), F(3)]), ("2^(x^2-5x)=1/64", [F(2), F(3)]), ("2^(x^2-5x)=64", [F(-1), F(6)]), ("2^(x^2+5x)=2^(-6)", [F(-3), F(-2)]),
+    ("2^(x^2+5x)=1/64", [F(-3), F(-2)]), ("2^(x^2-4)=2^(-3)", [F(-1), F(1)]), ("2^(x^2-4)=1/8", [F(-1), F(1)]), ("2^(x^2-5x)=2^0", [F(0), F(5)]),
+    ("2^(2x^2-5x)=2^(-3)", [F(1), F(3, 2)]), ("2^(2x^2-5x)=1/8", [F(1), F(3, 2)]), ("2^(-x^2+5x)=64", [F(2), F(3)]), ("2^(x^2-5x+1)=2^(-5)", [F(2), F(3)]),
+    ("4^(x^2-5x)=2^(-12)", [F(2), F(3)]), ("4^(x^2-5x)=1/4096", [F(2), F(3)]), ("(1/2)^(x^2-5x)=64", [F(2), F(3)]), ("0,5^(x^2-5x)=64", [F(2), F(3)]),
+    ("e^(x^2-5x)=e^(-6)", [F(2), F(3)]), ("10^(x^2-5x)=10^(-6)", [F(2), F(3)]), ("10^(x^2-5x)=1000^(-2)", [F(2), F(3)]), ("2^(x^2-5x)=4^(-3)", [F(2), F(3)]),
+    ("2^(x^2-5x)=1/2^6", [F(2), F(3)]), ("3*2^(x^2-5x)=3/64", [F(2), F(3)]), ("1/64=2^(x^2-5x)", [F(2), F(3)]), ("2^(x^2-5x)=8^(-2)", [F(2), F(3)]),
+    ("2^(x^2-x)=2^(-1/4)", [F(1, 2)]), ("2^(x^2-5x)=2^(-25/4)", [F(5, 2)]), ("2^(x^2-5x)=2^(-6,5)", []), ("2^(x^2-5x+1)=2^(-6,5)", []), ("2^(x^2+x)=1/2", []), ("2^(x^2)=2^(-6)", []),
+    ("2^(x^2-5x)=2^(-1/2)", [0.102, 4.898]), ("2^(x^2-5x)=2^(3/2)", [-0.284, 5.284]), ("2^(x^2-5x)=8^(1/3)", [-0.193, 5.193]),
+    ("9^(x^2-5x)=1/729", [0.697, 4.303]), ("2^(x^2-5x)=3", [-0.299, 5.299]), ("2^(-x^2+5x)=3", [0.340, 4.660]), ("2^(x^2-5x)=1000", [-1.527, 6.527]),
+    ("2^(x^2-5x)=0,001", []), ("10^(x^2-5x)=7^2", [-0.318, 5.318]),
+    ("2^(x-5)=2^(-6)", [F(-1)]), ("2^(2x+1)=2^(-3)", [F(-2)]),
+]
+DELTA_PAS_ENCORE = ["2^(x^2-5x)=sqrt(2)"]
+
 # identités sur l'ensemble de définition : S = ED (solutions None)
 M_TOUT_L_ED = ["log(x)=log(x)", "log(x)+log(x-1)=log(x^2-x)", "2log(x)=log(x^2)+log(1)"]
 # formes du programme M que l'outil ne traite pas encore, et vrais hors-programme
@@ -317,7 +335,7 @@ def entrees_el_m():
                                   + [s for s, _ in BATTERIE_M_IRRATIONNEL] + [s for s, _ in BATTERIE_M_CARRE_DANS_L_EXPOSANT]
                                   + [s for s, _ in BATTERIE_M_SECOND_MEMBRE_CALCULE]
                                   + [s for s, _ in BATTERIE_M_PRODUIT_X_LOG]
-                                  + [s for s, _ in BATTERIE_M_PI]))
+                                  + [s for s, _ in BATTERIE_M_PI] + [s for s, _ in BATTERIE_DELTA] + DELTA_PAS_ENCORE))
 
 
 def entrees_el():
@@ -326,7 +344,8 @@ def entrees_el():
     saisies += [s for s, _ in BATTERIE_3C_REGROUPEMENT] + [s for s, _ in BATTERIE_3C_REJETS] + EXPONENTIELLES_3C_NOUVELLES + PAS_ENCORE_COMME_EN_2M
     # les autres formes de la 2M, résolues aussi en 3C depuis le 02.11.2026 (changement de variable, exposants 1/x √x ln x, base polynomiale, π…)
     for batterie in (BATTERIE_M_VAR, BATTERIE_M_EXPOSANTS, BATTERIE_M_BASE_POLYNOMIALE, BATTERIE_M_BICARRE, BATTERIE_M_BASE_RATIONNELLE, BATTERIE_M_IRRATIONNEL,
-                     BATTERIE_M_CARRE_DANS_L_EXPOSANT, BATTERIE_M_SECOND_MEMBRE_CALCULE, BATTERIE_M_PRODUIT_X_LOG, BATTERIE_M_PI):
+                     BATTERIE_M_CARRE_DANS_L_EXPOSANT, BATTERIE_M_SECOND_MEMBRE_CALCULE, BATTERIE_M_PRODUIT_X_LOG, BATTERIE_M_PI, BATTERIE_DELTA):
         saisies += [s for s, _ in batterie]
+    saisies += DELTA_PAS_ENCORE
     saisies += SANS_E1 + SANS_E2 + SANS_E3 + HORS_PROGRAMME + PAS_ENCORE + SANS_EXP_LOG + CALCULS_NON_RESOLUS + ERREURS_DE_LECTURE
     return list(dict.fromkeys(saisies))

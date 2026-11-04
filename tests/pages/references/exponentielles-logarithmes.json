@@ -174,6 +174,101 @@
    }
   }
  },
+ "(1/2)^(x^2-5x)=64": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦\\left(\\frac{1}{2}\\right)^{x^{2} - 5x} = 64⟧⟦\\iff⟧⟦\\log\\left(\\left(\\frac{1}{2}\\right)^{x^{2} - 5x}\\right) = \\log(64)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log\\left(\\frac{1}{2}\\right) = \\log(64)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log\\left(\\frac{1}{2}\\right) = \\log\\left(\\left(\\frac{1}{2}\\right)^{-6}\\right) = -6\\log\\left(\\frac{1}{2}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car ⟦\\log\\left(\\frac{1}{2}\\right) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦\\left(\\frac{1}{2}\\right)^{x^{2} - 5x} = 64⟧⟦\\iff⟧⟦\\log\\left(\\left(\\frac{1}{2}\\right)^{x^{2} - 5x}\\right) = \\log(64)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log\\left(\\frac{1}{2}\\right) = \\log(64)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log\\left(\\frac{1}{2}\\right) = \\log\\left(\\left(\\frac{1}{2}\\right)^{-6}\\right) = -6\\log\\left(\\frac{1}{2}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car ⟦\\log\\left(\\frac{1}{2}\\right) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦\\left(\\frac{1}{2}\\right)^{x^{2} - 5x} = (2^{-1})^{x^{2} - 5x} = 2^{(-1)(x^{2} - 5x)}⟧((aᵐ)ⁿ = aᵐⁿ)⟦ = 2^{-x^{2} + 5x}⟧⟦64 = 2^{6}⟧⟦2^{-x^{2} + 5x} = 2^{6}⟧⟦\\iff⟧⟦-x^{2} + 5x = 6⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦-x^{2} + 5x - 6 = 0⟧⟦Δ = 5^{2} - 4(-1) \\cdot (-6) = 1⟧⟦x = 2 \\text{ ou } x = 3⟧",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
  "(1/2)^x=3": {
   "au_depart": {
    "progression": "Étape 1 / 2",
@@ -4199,6 +4294,101 @@
    }
   }
  },
+ "0,5^(x^2-5x)=64": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦0{,}5^{x^{2} - 5x} = 64⟧⟦\\iff⟧⟦\\log(0{,}5^{x^{2} - 5x}) = \\log(64)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(0{,}5) = \\log(64)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(0{,}5) = \\log(0{,}5^{-6}) = -6\\log(0{,}5)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car ⟦\\log(0{,}5) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦0{,}5^{x^{2} - 5x} = 64⟧⟦\\iff⟧⟦\\log(0{,}5^{x^{2} - 5x}) = \\log(64)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(0{,}5) = \\log(64)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(0{,}5) = \\log(0{,}5^{-6}) = -6\\log(0{,}5)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car ⟦\\log(0{,}5) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦0{,}5^{x^{2} - 5x} = (2^{-1})^{x^{2} - 5x} = 2^{(-1)(x^{2} - 5x)}⟧((aᵐ)ⁿ = aᵐⁿ)⟦\\phantom{0{,}5^{x^{2} - 5x}} = 2^{-x^{2} + 5x}⟧⟦64 = 2^{6}⟧⟦2^{-x^{2} + 5x} = 2^{6}⟧⟦\\iff⟧⟦-x^{2} + 5x = 6⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦-x^{2} + 5x - 6 = 0⟧⟦Δ = 5^{2} - 4(-1) \\cdot (-6) = 1⟧⟦x = 2 \\text{ ou } x = 3⟧",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
  "0,5^x+0,5^(x+1)=1,5": {
   "au_depart": {
    "progression": "Étape 1 / 3",
@@ -6019,6 +6209,101 @@
    }
   }
  },
+ "1/64=2^(x^2-5x)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦\\frac{1}{64} = 2^{x^{2} - 5x}⟧⟦\\iff⟧⟦2^{x^{2} - 5x} = \\frac{1}{64}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log\\left(\\frac{1}{64}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log\\left(\\frac{1}{64}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log(2^{-6}) = -6\\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦\\frac{1}{64} = 2^{x^{2} - 5x}⟧⟦\\iff⟧⟦2^{x^{2} - 5x} = \\frac{1}{64}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log\\left(\\frac{1}{64}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log\\left(\\frac{1}{64}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log(2^{-6}) = -6\\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦\\frac{1}{64} = 2^{-6}⟧⟦2^{-6} = 2^{x^{2} - 5x}⟧⟦\\iff⟧⟦-6 = x^{2} - 5x⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦-x^{2} + 5x - 6 = 0⟧⟦Δ = 5^{2} - 4(-1) \\cdot (-6) = 1⟧⟦x = 2 \\text{ ou } x = 3⟧",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
  "10*2^x=3^x": {
   "au_depart": {
    "progression": "Étape 1 / 2",
@@ -6605,7 +6890,7 @@
       ],
       "listes": [],
       "tableaux": [],
-      "texte": "Étape 1Définition du logarithme⟦\\frac{10^{-x}}{10^{x^{2}}} = \\frac{1}{4}⟧⟦\\iff⟧⟦10^{-x^{2} - x} = \\frac{1}{4}⟧(aᵐ / aⁿ = aᵐ⁻ⁿ)⟦\\iff⟧⟦-x^{2} - x = \\log\\left(\\frac{1}{4}\\right)⟧(définition du logarithme)⟦\\iff⟧⟦-x^{2} - x - \\log\\left(\\frac{1}{4}\\right) = 0⟧⟦Δ = (-1)^{2} - 4(-1) \\cdot \\left(-\\log\\left(\\frac{1}{4}\\right)\\right) = 1 + (-4) \\cdot \\log\\left(\\frac{1}{4}\\right)⟧(formule du discriminant)⟦x_{1} = \\frac{1 + \\sqrt{Δ}}{-2}⟧⟦x_{2} = \\frac{1 - \\sqrt{Δ}}{-2}⟧",
+      "texte": "Étape 1Définition du logarithme⟦\\frac{10^{-x}}{10^{x^{2}}} = \\frac{1}{4}⟧⟦\\iff⟧⟦10^{-x^{2} - x} = \\frac{1}{4}⟧(aᵐ / aⁿ = aᵐ⁻ⁿ)⟦\\iff⟧⟦-x^{2} - x = \\log\\left(\\frac{1}{4}\\right)⟧(définition du logarithme)⟦\\iff⟧⟦-x^{2} - x - \\log\\left(\\frac{1}{4}\\right) = 0⟧⟦Δ = (-1)^{2} - 4(-1) \\cdot \\left(-\\log\\left(\\frac{1}{4}\\right)\\right) = 1 - 4\\log\\left(\\frac{1}{4}\\right)⟧(formule du discriminant)⟦x_{1} = \\frac{1 + \\sqrt{Δ}}{-2}⟧⟦x_{2} = \\frac{1 - \\sqrt{Δ}}{-2}⟧",
       "titre": "Étape 1Définition du logarithme"
      },
      {
@@ -7761,6 +8046,291 @@
       "listes": [],
       "tableaux": [],
       "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}836 \\text{ ou } x \\approx 0{,}836⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "10^(x^2-5x)=1000^(-2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦10^{x^{2} - 5x} = 1\\text{’}000^{-2}⟧⟦\\iff⟧⟦\\log(10^{x^{2} - 5x}) = \\log(1\\text{’}000^{-2})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(10) = (-2) \\cdot \\log(1\\text{’}000)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = (-2) \\cdot \\log(1\\text{’}000)⟧(car log(10) = 1)⟦\\iff⟧⟦x^{2} - 5x + 2\\log(1\\text{’}000) = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot 2\\log(1\\text{’}000) = 25 - 4 \\cdot 2\\log(1\\text{’}000)⟧(formule du discriminant)⟦x_{1} = \\frac{5 - \\sqrt{Δ}}{2}⟧⟦x_{2} = \\frac{5 + \\sqrt{Δ}}{2}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = 2⟧ ou ⟦x = 3⟧.",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦10^{x^{2} - 5x} = 1\\text{’}000^{-2}⟧⟦\\iff⟧⟦\\log(10^{x^{2} - 5x}) = \\log(1\\text{’}000^{-2})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(10) = (-2) \\cdot \\log(1\\text{’}000)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = (-2) \\cdot \\log(1\\text{’}000)⟧(car log(10) = 1)⟦\\iff⟧⟦x^{2} - 5x + 2\\log(1\\text{’}000) = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot 2\\log(1\\text{’}000) = 25 - 4 \\cdot 2\\log(1\\text{’}000)⟧(formule du discriminant)⟦x_{1} = \\frac{5 - \\sqrt{Δ}}{2}⟧⟦x_{2} = \\frac{5 + \\sqrt{Δ}}{2}⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = 2⟧ ou ⟦x = 3⟧.",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦1\\text{’}000^{-2} = (10^{3})^{-2} = 10^{-6}⟧((aᵐ)ⁿ = aᵐⁿ)⟦10^{x^{2} - 5x} = 10^{-6}⟧⟦\\iff⟧⟦x^{2} - 5x = -6⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "10^(x^2-5x)=10^(-6)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦10^{x^{2} - 5x} = 10^{-6}⟧⟦\\iff⟧⟦\\log(10^{x^{2} - 5x}) = \\log(10^{-6})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(10) = (-6) \\cdot \\log(10)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car log(10) = 1)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦10^{x^{2} - 5x} = 10^{-6}⟧⟦\\iff⟧⟦\\log(10^{x^{2} - 5x}) = \\log(10^{-6})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(10) = (-6) \\cdot \\log(10)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car log(10) = 1)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦10^{x^{2} - 5x} = 10^{-6}⟧⟦\\iff⟧⟦x^{2} - 5x = -6⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "10^(x^2-5x)=7^2": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦10^{x^{2} - 5x} = 7^{2}⟧⟦\\iff⟧⟦\\log(10^{x^{2} - 5x}) = \\log(7^{2})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(10) = 2\\log(7)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = 2\\log(7)⟧(car log(10) = 1)⟦\\iff⟧⟦x^{2} - 5x - 2\\log(7) = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot (-2\\log(7)) = 25 + 4 \\cdot 2\\log(7)⟧(formule du discriminant)⟦x_{1} = \\frac{5 - \\sqrt{Δ}}{2}⟧⟦x_{2} = \\frac{5 + \\sqrt{Δ}}{2}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}318 \\text{ ou } x \\approx 5{,}318⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦10^{x^{2} - 5x} = 7^{2}⟧⟦\\iff⟧⟦\\log(10^{x^{2} - 5x}) = \\log(7^{2})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(10) = 2\\log(7)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = 2\\log(7)⟧(car log(10) = 1)⟦\\iff⟧⟦x^{2} - 5x - 2\\log(7) = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot (-2\\log(7)) = 25 + 4 \\cdot 2\\log(7)⟧(formule du discriminant)⟦x_{1} = \\frac{5 - \\sqrt{Δ}}{2}⟧⟦x_{2} = \\frac{5 + \\sqrt{Δ}}{2}⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}318 \\text{ ou } x \\approx 5{,}318⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Définition du logarithme⟦10^{x^{2} - 5x} = 7^{2}⟧⟦\\iff⟧⟦x^{2} - 5x = \\log(7^{2})⟧(définition du logarithme)⟦\\iff⟧⟦x^{2} - 5x - \\log(7^{2}) = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot (-\\log(7^{2})) = 25 + 4\\log(7^{2})⟧(formule du discriminant)⟦x_{1} = \\frac{5 - \\sqrt{Δ}}{2}⟧⟦x_{2} = \\frac{5 + \\sqrt{Δ}}{2}⟧",
+      "titre": "Étape 1Définition du logarithme"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}318 \\text{ ou } x \\approx 5{,}318⟧",
       "titre": "Solution"
      }
     ],
@@ -13635,6 +14205,186 @@
    }
   }
  },
+ "2^(-x^2+5x)=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{-x^{2} + 5x} = 3⟧⟦\\iff⟧⟦\\log(2^{-x^{2} + 5x}) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦(-x^{2} + 5x) \\cdot \\log(2) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦-x^{2} + 5x = \\frac{\\log(3)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦-x^{2} + 5x - \\frac{\\log(3)}{\\log(2)} = 0⟧⟦Δ = 5^{2} - 4(-1) \\cdot \\left(-\\frac{\\log(3)}{\\log(2)}\\right) = 25 - 4 \\cdot \\frac{\\log(3)}{\\log(2)}⟧(formule du discriminant)⟦x_{1} = \\frac{-5 + \\sqrt{Δ}}{-2}⟧⟦x_{2} = \\frac{-5 - \\sqrt{Δ}}{-2}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx 0{,}340 \\text{ ou } x \\approx 4{,}660⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{-x^{2} + 5x} = 3⟧⟦\\iff⟧⟦\\log(2^{-x^{2} + 5x}) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦(-x^{2} + 5x) \\cdot \\log(2) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦-x^{2} + 5x = \\frac{\\log(3)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦-x^{2} + 5x - \\frac{\\log(3)}{\\log(2)} = 0⟧⟦Δ = 5^{2} - 4(-1) \\cdot \\left(-\\frac{\\log(3)}{\\log(2)}\\right) = 25 - 4 \\cdot \\frac{\\log(3)}{\\log(2)}⟧(formule du discriminant)⟦x_{1} = \\frac{-5 + \\sqrt{Δ}}{-2}⟧⟦x_{2} = \\frac{-5 - \\sqrt{Δ}}{-2}⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx 0{,}340 \\text{ ou } x \\approx 4{,}660⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base / définition⟦3⟧ n'est pas une puissance de ⟦2⟧ : il faut les logarithmes.",
+      "titre": "Étape 1Même base / définition"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 1 / 1"
+   }
+  }
+ },
+ "2^(-x^2+5x)=64": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{-x^{2} + 5x} = 64⟧⟦\\iff⟧⟦\\log(2^{-x^{2} + 5x}) = \\log(64)⟧(log des deux membres)⟦\\iff⟧⟦(-x^{2} + 5x) \\cdot \\log(2) = \\log(64)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(-x^{2} + 5x) \\cdot \\log(2) = \\log(2^{6}) = 6\\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦-x^{2} + 5x = 6⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦-x^{2} + 5x - 6 = 0⟧⟦Δ = 5^{2} - 4(-1) \\cdot (-6) = 1⟧⟦x = 2 \\text{ ou } x = 3⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{-x^{2} + 5x} = 64⟧⟦\\iff⟧⟦\\log(2^{-x^{2} + 5x}) = \\log(64)⟧(log des deux membres)⟦\\iff⟧⟦(-x^{2} + 5x) \\cdot \\log(2) = \\log(64)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(-x^{2} + 5x) \\cdot \\log(2) = \\log(2^{6}) = 6\\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦-x^{2} + 5x = 6⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦-x^{2} + 5x - 6 = 0⟧⟦Δ = 5^{2} - 4(-1) \\cdot (-6) = 1⟧⟦x = 2 \\text{ ou } x = 3⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦64 = 2^{6}⟧⟦2^{-x^{2} + 5x} = 2^{6}⟧⟦\\iff⟧⟦-x^{2} + 5x = 6⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦-x^{2} + 5x - 6 = 0⟧⟦Δ = 5^{2} - 4(-1) \\cdot (-6) = 1⟧⟦x = 2 \\text{ ou } x = 3⟧",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
  "2^(-x^2+x)=3^x": {
   "au_depart": {
    "progression": "Étape 1 / 2",
@@ -14914,6 +15664,141 @@
   },
   "progression_finale": "Étape 2 / 2"
  },
+ "2^(2x+1)=2^(-3)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{2x + 1} = 2^{-3}⟧⟦\\iff⟧⟦\\log(2^{2x + 1}) = \\log(2^{-3})⟧(log des deux membres)⟦\\iff⟧⟦(2x + 1) \\cdot \\log(2) = (-3) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦2x + 1 = -3⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦2x = -4⟧⟦\\iff⟧⟦x = -2⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-2\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Logarithme des deux membres⟦2^{2x + 1} = 2^{-3}⟧⟦\\iff⟧⟦\\log(2^{2x + 1}) = \\log(2^{-3})⟧(log des deux membres)⟦\\iff⟧⟦(2x + 1) \\cdot \\log(2) = (-3) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦2x + 1 = -3⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦2x = -4⟧⟦\\iff⟧⟦x = -2⟧",
+     "titre": "Étape 1Logarithme des deux membres"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\left\\{-2\\right\\}⟧",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationLa solution est négative : la situation décrite n'arrive jamais.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 3 / 3"
+  },
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{2x + 1} = 2^{-3}⟧⟦\\iff⟧⟦\\log(2^{2x + 1}) = \\log(2^{-3})⟧(log des deux membres)⟦\\iff⟧⟦(2x + 1) \\cdot \\log(2) = (-3) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦2x + 1 = -3⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦2x = -4⟧⟦\\iff⟧⟦x = -2⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-2\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦2^{2x + 1} = 2^{-3}⟧⟦\\iff⟧⟦2x + 1 = -3⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦2x = -4⟧⟦\\iff⟧⟦x = -2⟧",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-2\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
  "2^(2x+2)-7*2^(x+1)=8": {
   "au_depart": {
    "progression": "Étape 1 / 4",
@@ -15066,6 +15951,196 @@
     ],
     "imprimee": "Méthode : Même base / définition",
     "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "2^(2x^2-5x)=1/8": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{2x^{2} - 5x} = \\frac{1}{8}⟧⟦\\iff⟧⟦\\log(2^{2x^{2} - 5x}) = \\log\\left(\\frac{1}{8}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(2x^{2} - 5x) \\cdot \\log(2) = \\log\\left(\\frac{1}{8}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(2x^{2} - 5x) \\cdot \\log(2) = \\log(2^{-3}) = -3\\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦2x^{2} - 5x = -3⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦2x^{2} - 5x + 3 = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 2 \\cdot 3 = 1⟧⟦x = 1 \\text{ ou } x = \\frac{3}{2}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{1 \\,;\\, \\frac{3}{2}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{2x^{2} - 5x} = \\frac{1}{8}⟧⟦\\iff⟧⟦\\log(2^{2x^{2} - 5x}) = \\log\\left(\\frac{1}{8}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(2x^{2} - 5x) \\cdot \\log(2) = \\log\\left(\\frac{1}{8}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(2x^{2} - 5x) \\cdot \\log(2) = \\log(2^{-3}) = -3\\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦2x^{2} - 5x = -3⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦2x^{2} - 5x + 3 = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 2 \\cdot 3 = 1⟧⟦x = 1 \\text{ ou } x = \\frac{3}{2}⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{1 \\,;\\, \\frac{3}{2}\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦\\frac{1}{8} = 2^{-3}⟧⟦2^{2x^{2} - 5x} = 2^{-3}⟧⟦\\iff⟧⟦2x^{2} - 5x = -3⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦2x^{2} - 5x + 3 = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 2 \\cdot 3 = 1⟧⟦x = 1 \\text{ ou } x = \\frac{3}{2}⟧",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{1 \\,;\\, \\frac{3}{2}\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "2^(2x^2-5x)=2^(-3)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{2x^{2} - 5x} = 2^{-3}⟧⟦\\iff⟧⟦\\log(2^{2x^{2} - 5x}) = \\log(2^{-3})⟧(log des deux membres)⟦\\iff⟧⟦(2x^{2} - 5x) \\cdot \\log(2) = (-3) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦2x^{2} - 5x = -3⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦2x^{2} - 5x + 3 = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 2 \\cdot 3 = 1⟧⟦x = 1 \\text{ ou } x = \\frac{3}{2}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{1 \\,;\\, \\frac{3}{2}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{2x^{2} - 5x} = 2^{-3}⟧⟦\\iff⟧⟦\\log(2^{2x^{2} - 5x}) = \\log(2^{-3})⟧(log des deux membres)⟦\\iff⟧⟦(2x^{2} - 5x) \\cdot \\log(2) = (-3) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦2x^{2} - 5x = -3⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦2x^{2} - 5x + 3 = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 2 \\cdot 3 = 1⟧⟦x = 1 \\text{ ou } x = \\frac{3}{2}⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{1 \\,;\\, \\frac{3}{2}\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦2^{2x^{2} - 5x} = 2^{-3}⟧⟦\\iff⟧⟦2x^{2} - 5x = -3⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦2x^{2} - 5x + 3 = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 2 \\cdot 3 = 1⟧⟦x = 1 \\text{ ou } x = \\frac{3}{2}⟧",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{1 \\,;\\, \\frac{3}{2}\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
    }
   }
  },
@@ -17289,6 +18364,141 @@
    }
   }
  },
+ "2^(x-5)=2^(-6)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x - 5} = 2^{-6}⟧⟦\\iff⟧⟦\\log(2^{x - 5}) = \\log(2^{-6})⟧(log des deux membres)⟦\\iff⟧⟦(x - 5) \\cdot \\log(2) = (-6) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x - 5 = -6⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x = -1⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-1\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Logarithme des deux membres⟦2^{x - 5} = 2^{-6}⟧⟦\\iff⟧⟦\\log(2^{x - 5}) = \\log(2^{-6})⟧(log des deux membres)⟦\\iff⟧⟦(x - 5) \\cdot \\log(2) = (-6) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x - 5 = -6⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x = -1⟧",
+     "titre": "Étape 1Logarithme des deux membres"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\left\\{-1\\right\\}⟧",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationLa solution est négative : la situation décrite n'arrive jamais.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 3 / 3"
+  },
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x - 5} = 2^{-6}⟧⟦\\iff⟧⟦\\log(2^{x - 5}) = \\log(2^{-6})⟧(log des deux membres)⟦\\iff⟧⟦(x - 5) \\cdot \\log(2) = (-6) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x - 5 = -6⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x = -1⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-1\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦2^{x - 5} = 2^{-6}⟧⟦\\iff⟧⟦x - 5 = -6⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x = -1⟧",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-1\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
  "2^(x/(x-1))=3": {
   "au_depart": {
    "progression": "Étape 1 / 3",
@@ -18614,6 +19824,141 @@
    }
   }
  },
+ "2^(x^2)=2^(-6)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2}} = 2^{-6}⟧⟦\\iff⟧⟦\\log(2^{x^{2}}) = \\log(2^{-6})⟧(log des deux membres)⟦\\iff⟧⟦x^{2} \\cdot \\log(2) = (-6) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} = -6⟧(car ⟦\\log(2) \\neq 0⟧)⟦x^{2} \\ge 0⟧(un carré est positif ou nul)⟦-6 < 0⟧(aucune solution)",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2}} = 2^{-6}⟧⟦\\iff⟧⟦\\log(2^{x^{2}}) = \\log(2^{-6})⟧(log des deux membres)⟦\\iff⟧⟦x^{2} \\cdot \\log(2) = (-6) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} = -6⟧(car ⟦\\log(2) \\neq 0⟧)⟦x^{2} \\ge 0⟧(un carré est positif ou nul)⟦-6 < 0⟧(aucune solution)",
+     "titre": "Étape 1Logarithme des deux membres"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\varnothing⟧",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationAucune solution : la situation décrite n'arrive jamais.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 3 / 3"
+  },
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2}} = 2^{-6}⟧⟦\\iff⟧⟦\\log(2^{x^{2}}) = \\log(2^{-6})⟧(log des deux membres)⟦\\iff⟧⟦x^{2} \\cdot \\log(2) = (-6) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} = -6⟧(car ⟦\\log(2) \\neq 0⟧)⟦x^{2} \\ge 0⟧(un carré est positif ou nul)⟦-6 < 0⟧(aucune solution)",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\varnothing⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦2^{x^{2}} = 2^{-6}⟧⟦\\iff⟧⟦x^{2} = -6⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x^{2} + 6 = 0⟧⟦Δ = 0^{2} - 4 \\cdot 1 \\cdot 6 = -24⟧Δ < 0 : l'équation n'a aucune solution réelle.",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\varnothing⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
  "2^(x^2)=2^(2x-1)": {
   "au_depart": {
    "progression": "Étape 1 / 2",
@@ -19244,6 +20589,331 @@
    }
   }
  },
+ "2^(x^2+5x)=1/64": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} + 5x} = \\frac{1}{64}⟧⟦\\iff⟧⟦\\log(2^{x^{2} + 5x}) = \\log\\left(\\frac{1}{64}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} + 5x) \\cdot \\log(2) = \\log\\left(\\frac{1}{64}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} + 5x) \\cdot \\log(2) = \\log(2^{-6}) = -6\\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} + 5x = -6⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} + 5x + 6 = 0⟧⟦\\iff⟧⟦(x + 3)(x + 2) = 0⟧⟦\\iff⟧⟦x = -3 \\text{ ou } x = -2⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-3 \\,;\\, -2\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} + 5x} = \\frac{1}{64}⟧⟦\\iff⟧⟦\\log(2^{x^{2} + 5x}) = \\log\\left(\\frac{1}{64}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} + 5x) \\cdot \\log(2) = \\log\\left(\\frac{1}{64}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} + 5x) \\cdot \\log(2) = \\log(2^{-6}) = -6\\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} + 5x = -6⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} + 5x + 6 = 0⟧⟦\\iff⟧⟦(x + 3)(x + 2) = 0⟧⟦\\iff⟧⟦x = -3 \\text{ ou } x = -2⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-3 \\,;\\, -2\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦\\frac{1}{64} = 2^{-6}⟧⟦2^{x^{2} + 5x} = 2^{-6}⟧⟦\\iff⟧⟦x^{2} + 5x = -6⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x^{2} + 5x + 6 = 0⟧⟦\\iff⟧⟦(x + 3)(x + 2) = 0⟧⟦\\iff⟧⟦x = -3 \\text{ ou } x = -2⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-3 \\,;\\, -2\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "2^(x^2+5x)=2^(-6)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} + 5x} = 2^{-6}⟧⟦\\iff⟧⟦\\log(2^{x^{2} + 5x}) = \\log(2^{-6})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} + 5x) \\cdot \\log(2) = (-6) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} + 5x = -6⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} + 5x + 6 = 0⟧⟦\\iff⟧⟦(x + 3)(x + 2) = 0⟧⟦\\iff⟧⟦x = -3 \\text{ ou } x = -2⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-3 \\,;\\, -2\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} + 5x} = 2^{-6}⟧⟦\\iff⟧⟦\\log(2^{x^{2} + 5x}) = \\log(2^{-6})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} + 5x) \\cdot \\log(2) = (-6) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} + 5x = -6⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} + 5x + 6 = 0⟧⟦\\iff⟧⟦(x + 3)(x + 2) = 0⟧⟦\\iff⟧⟦x = -3 \\text{ ou } x = -2⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-3 \\,;\\, -2\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦2^{x^{2} + 5x} = 2^{-6}⟧⟦\\iff⟧⟦x^{2} + 5x = -6⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x^{2} + 5x + 6 = 0⟧⟦\\iff⟧⟦(x + 3)(x + 2) = 0⟧⟦\\iff⟧⟦x = -3 \\text{ ou } x = -2⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-3 \\,;\\, -2\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "2^(x^2+x)=1/2": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} + x} = \\frac{1}{2}⟧⟦\\iff⟧⟦\\log(2^{x^{2} + x}) = \\log\\left(\\frac{1}{2}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} + x) \\cdot \\log(2) = \\log\\left(\\frac{1}{2}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} + x) \\cdot \\log(2) = \\log(2^{-1}) = -\\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} + x = -1⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} + x + 1 = 0⟧⟦Δ = 1^{2} - 4 \\cdot 1 \\cdot 1 = -3⟧Δ < 0 : l'équation n'a aucune solution réelle.",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} + x} = \\frac{1}{2}⟧⟦\\iff⟧⟦\\log(2^{x^{2} + x}) = \\log\\left(\\frac{1}{2}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} + x) \\cdot \\log(2) = \\log\\left(\\frac{1}{2}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} + x) \\cdot \\log(2) = \\log(2^{-1}) = -\\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} + x = -1⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} + x + 1 = 0⟧⟦Δ = 1^{2} - 4 \\cdot 1 \\cdot 1 = -3⟧Δ < 0 : l'équation n'a aucune solution réelle.",
+     "titre": "Étape 1Logarithme des deux membres"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\varnothing⟧",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationAucune solution : la situation décrite n'arrive jamais.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 3 / 3"
+  },
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} + x} = \\frac{1}{2}⟧⟦\\iff⟧⟦\\log(2^{x^{2} + x}) = \\log\\left(\\frac{1}{2}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} + x) \\cdot \\log(2) = \\log\\left(\\frac{1}{2}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} + x) \\cdot \\log(2) = \\log(2^{-1}) = -\\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} + x = -1⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} + x + 1 = 0⟧⟦Δ = 1^{2} - 4 \\cdot 1 \\cdot 1 = -3⟧Δ < 0 : l'équation n'a aucune solution réelle.",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\varnothing⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦\\frac{1}{2} = 2^{-1}⟧⟦2^{x^{2} + x} = 2^{-1}⟧⟦\\iff⟧⟦x^{2} + x = -1⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x^{2} + x + 1 = 0⟧⟦Δ = 1^{2} - 4 \\cdot 1 \\cdot 1 = -3⟧Δ < 0 : l'équation n'a aucune solution réelle.",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\varnothing⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
  "2^(x^2+x)=5": {
   "au_depart": {
    "progression": "Étape 1 / 2",
@@ -19491,6 +21161,2035 @@
       "listes": [],
       "tableaux": [],
       "texte": "Étape 1Même base / définition⟦3⟧ n'est pas une puissance de ⟦2⟧ : il faut les logarithmes.",
+      "titre": "Étape 1Même base / définition"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 1 / 1"
+   }
+  }
+ },
+ "2^(x^2-4)=1/8": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 4} = \\frac{1}{8}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 4}) = \\log\\left(\\frac{1}{8}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 4) \\cdot \\log(2) = \\log\\left(\\frac{1}{8}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 4 = \\frac{\\log\\left(\\frac{1}{8}\\right)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} = 4 + \\frac{\\log\\left(\\frac{1}{8}\\right)}{\\log(2)}⟧⟦x_{1} = -\\sqrt{4 + \\frac{\\log\\left(\\frac{1}{8}\\right)}{\\log(2)}}⟧⟦x_{2} = \\sqrt{4 + \\frac{\\log\\left(\\frac{1}{8}\\right)}{\\log(2)}}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = -1⟧ ou ⟦x = 1⟧.",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 4} = \\frac{1}{8}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 4}) = \\log\\left(\\frac{1}{8}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 4) \\cdot \\log(2) = \\log\\left(\\frac{1}{8}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 4 = \\frac{\\log\\left(\\frac{1}{8}\\right)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} = 4 + \\frac{\\log\\left(\\frac{1}{8}\\right)}{\\log(2)}⟧⟦x_{1} = -\\sqrt{4 + \\frac{\\log\\left(\\frac{1}{8}\\right)}{\\log(2)}}⟧⟦x_{2} = \\sqrt{4 + \\frac{\\log\\left(\\frac{1}{8}\\right)}{\\log(2)}}⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = -1⟧ ou ⟦x = 1⟧.",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦\\frac{1}{8} = 2^{-3}⟧⟦2^{x^{2} - 4} = 2^{-3}⟧⟦\\iff⟧⟦x^{2} - 4 = -3⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x^{2} - 1 = 0⟧⟦\\iff⟧⟦(x + 1)(x - 1) = 0⟧⟦\\iff⟧⟦x = -1 \\text{ ou } x = 1⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-1 \\,;\\, 1\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "2^(x^2-4)=2^(-3)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 4} = 2^{-3}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 4}) = \\log(2^{-3})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 4) \\cdot \\log(2) = (-3) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 4 = -3⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} = 1⟧⟦\\iff⟧⟦x = -1 \\text{ ou } x = 1⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-1 \\,;\\, 1\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 4} = 2^{-3}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 4}) = \\log(2^{-3})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 4) \\cdot \\log(2) = (-3) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 4 = -3⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} = 1⟧⟦\\iff⟧⟦x = -1 \\text{ ou } x = 1⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-1 \\,;\\, 1\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦2^{x^{2} - 4} = 2^{-3}⟧⟦\\iff⟧⟦x^{2} - 4 = -3⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x^{2} - 1 = 0⟧⟦\\iff⟧⟦(x + 1)(x - 1) = 0⟧⟦\\iff⟧⟦x = -1 \\text{ ou } x = 1⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-1 \\,;\\, 1\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "2^(x^2-5x)=0,001": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 0{,}001⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log(0{,}001)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log(0{,}001) = \\log(10^{-3}) = -3\\log(10)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = -3⟧(car log(10) = 1)⟦\\iff⟧⟦x^{2} - 5x = \\frac{-3}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + \\frac{3}{\\log(2)} = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot \\frac{3}{\\log(2)} = 25 - 4 \\cdot \\frac{3}{\\log(2)}⟧(formule du discriminant)Δ < 0 : l'équation n'a aucune solution réelle.",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 0{,}001⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log(0{,}001)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log(0{,}001) = \\log(10^{-3}) = -3\\log(10)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = -3⟧(car log(10) = 1)⟦\\iff⟧⟦x^{2} - 5x = \\frac{-3}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + \\frac{3}{\\log(2)} = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot \\frac{3}{\\log(2)} = 25 - 4 \\cdot \\frac{3}{\\log(2)}⟧(formule du discriminant)Δ < 0 : l'équation n'a aucune solution réelle.",
+     "titre": "Étape 1Logarithme des deux membres"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\varnothing⟧",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationAucune solution : la situation décrite n'arrive jamais.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 3 / 3"
+  },
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 0{,}001⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log(0{,}001)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log(0{,}001) = \\log(10^{-3}) = -3\\log(10)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = -3⟧(car log(10) = 1)⟦\\iff⟧⟦x^{2} - 5x = \\frac{-3}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + \\frac{3}{\\log(2)} = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot \\frac{3}{\\log(2)} = 25 - 4 \\cdot \\frac{3}{\\log(2)}⟧(formule du discriminant)Δ < 0 : l'équation n'a aucune solution réelle.",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\varnothing⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base / définition⟦0{,}001⟧ n'est pas une puissance de ⟦2⟧ : il faut les logarithmes.",
+      "titre": "Étape 1Même base / définition"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 1 / 1"
+   }
+  }
+ },
+ "2^(x^2-5x)=1/2^6": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = \\frac{1}{2^{6}}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log\\left(\\frac{1}{2^{6}}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log\\left(\\frac{1}{2^{6}}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log(2^{-6}) = -6\\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = \\frac{1}{2^{6}}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log\\left(\\frac{1}{2^{6}}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log\\left(\\frac{1}{2^{6}}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log(2^{-6}) = -6\\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦\\frac{1}{2^{6}} = 2^{-6}⟧⟦2^{x^{2} - 5x} = 2^{-6}⟧⟦\\iff⟧⟦x^{2} - 5x = -6⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "2^(x^2-5x)=1/64": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = \\frac{1}{64}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log\\left(\\frac{1}{64}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log\\left(\\frac{1}{64}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log(2^{-6}) = -6\\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = \\frac{1}{64}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log\\left(\\frac{1}{64}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log\\left(\\frac{1}{64}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log(2^{-6}) = -6\\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦\\frac{1}{64} = 2^{-6}⟧⟦2^{x^{2} - 5x} = 2^{-6}⟧⟦\\iff⟧⟦x^{2} - 5x = -6⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "2^(x^2-5x)=1000": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 1\\text{’}000⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log(1\\text{’}000)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log(1\\text{’}000) = \\log(10^{3}) = 3\\log(10)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = 3⟧(car log(10) = 1)⟦\\iff⟧⟦x^{2} - 5x = \\frac{3}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x - \\frac{3}{\\log(2)} = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot \\left(-\\frac{3}{\\log(2)}\\right) = 25 + 4 \\cdot \\frac{3}{\\log(2)}⟧(formule du discriminant)⟦x_{1} = \\frac{5 - \\sqrt{Δ}}{2}⟧⟦x_{2} = \\frac{5 + \\sqrt{Δ}}{2}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -1{,}527 \\text{ ou } x \\approx 6{,}527⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 1\\text{’}000⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log(1\\text{’}000)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log(1\\text{’}000) = \\log(10^{3}) = 3\\log(10)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = 3⟧(car log(10) = 1)⟦\\iff⟧⟦x^{2} - 5x = \\frac{3}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x - \\frac{3}{\\log(2)} = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot \\left(-\\frac{3}{\\log(2)}\\right) = 25 + 4 \\cdot \\frac{3}{\\log(2)}⟧(formule du discriminant)⟦x_{1} = \\frac{5 - \\sqrt{Δ}}{2}⟧⟦x_{2} = \\frac{5 + \\sqrt{Δ}}{2}⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -1{,}527 \\text{ ou } x \\approx 6{,}527⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base / définition⟦1\\text{’}000⟧ n'est pas une puissance de ⟦2⟧ : il faut les logarithmes.",
+      "titre": "Étape 1Même base / définition"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 1 / 1"
+   }
+  }
+ },
+ "2^(x^2-5x)=2^(-1/2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 2^{-\\frac{1}{2}}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log\\left(2^{-\\frac{1}{2}}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\left(-\\frac{1}{2}\\right) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -\\frac{1}{2}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + \\frac{1}{2} = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot \\frac{1}{2} = 23⟧(formule du discriminant)⟦x_{1} = \\frac{5 - \\sqrt{Δ}}{2}⟧⟦x_{2} = \\frac{5 + \\sqrt{Δ}}{2}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx 0{,}102 \\text{ ou } x \\approx 4{,}898⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 2^{-\\frac{1}{2}}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log\\left(2^{-\\frac{1}{2}}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\left(-\\frac{1}{2}\\right) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -\\frac{1}{2}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + \\frac{1}{2} = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot \\frac{1}{2} = 23⟧(formule du discriminant)⟦x_{1} = \\frac{5 - \\sqrt{Δ}}{2}⟧⟦x_{2} = \\frac{5 + \\sqrt{Δ}}{2}⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx 0{,}102 \\text{ ou } x \\approx 4{,}898⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base / définitionIl faut les logarithmes.",
+      "titre": "Étape 1Même base / définition"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 1 / 1"
+   }
+  }
+ },
+ "2^(x^2-5x)=2^(-25/4)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 2^{-\\frac{25}{4}}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log\\left(2^{-\\frac{25}{4}}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\left(-\\frac{25}{4}\\right) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -\\frac{25}{4}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + \\frac{25}{4} = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot \\frac{25}{4} = 0⟧(formule du discriminant)⟦Δ = 0 \\text{ : une seule solution}⟧⟦x = \\frac{-b}{2a} = \\frac{5}{2 \\cdot 1} = \\frac{5}{2}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{5}{2}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 2^{-\\frac{25}{4}}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log\\left(2^{-\\frac{25}{4}}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\left(-\\frac{25}{4}\\right) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -\\frac{25}{4}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + \\frac{25}{4} = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot \\frac{25}{4} = 0⟧(formule du discriminant)⟦Δ = 0 \\text{ : une seule solution}⟧⟦x = \\frac{-b}{2a} = \\frac{5}{2 \\cdot 1} = \\frac{5}{2}⟧",
+     "titre": "Étape 1Logarithme des deux membres"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\left\\{\\frac{5}{2}\\right\\}⟧",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationConventions : 1 an = 12 mois et 1 mois = 30 jours.⟦x = 2{,}5⟧ : 2 ans ; reste ⟦0{,}5⟧ an.⟦0{,}5 \\cdot 12 = 6⟧ mois → 6 mois ; reste ⟦0⟧ mois.⟦0 \\cdot 30 = 0⟧ jour → 0 jour.Au bout de 2 ans, 6 mois et 0 jour.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 3 / 3"
+  },
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 2^{-\\frac{25}{4}}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log\\left(2^{-\\frac{25}{4}}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\left(-\\frac{25}{4}\\right) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -\\frac{25}{4}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + \\frac{25}{4} = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot \\frac{25}{4} = 0⟧(formule du discriminant)⟦Δ = 0 \\text{ : une seule solution}⟧⟦x = \\frac{-b}{2a} = \\frac{5}{2 \\cdot 1} = \\frac{5}{2}⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{5}{2}\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base / définitionIl faut les logarithmes.",
+      "titre": "Étape 1Même base / définition"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 1 / 1"
+   }
+  }
+ },
+ "2^(x^2-5x)=2^(-6)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 2^{-6}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log(2^{-6})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = (-6) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 2^{-6}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log(2^{-6})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = (-6) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦2^{x^{2} - 5x} = 2^{-6}⟧⟦\\iff⟧⟦x^{2} - 5x = -6⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "2^(x^2-5x)=2^(-6,5)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 2^{-6{,}5}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log(2^{-6{,}5})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = (-6{,}5) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6{,}5⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6{,}5 = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot 6{,}5 = -1⟧(formule du discriminant)Δ < 0 : l'équation n'a aucune solution réelle.",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 2^{-6{,}5}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log(2^{-6{,}5})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = (-6{,}5) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6{,}5⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6{,}5 = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot 6{,}5 = -1⟧(formule du discriminant)Δ < 0 : l'équation n'a aucune solution réelle.",
+     "titre": "Étape 1Logarithme des deux membres"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\varnothing⟧",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationAucune solution : la situation décrite n'arrive jamais.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 3 / 3"
+  },
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 2^{-6{,}5}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log(2^{-6{,}5})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = (-6{,}5) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6{,}5⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6{,}5 = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot 6{,}5 = -1⟧(formule du discriminant)Δ < 0 : l'équation n'a aucune solution réelle.",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\varnothing⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base / définitionIl faut les logarithmes.",
+      "titre": "Étape 1Même base / définition"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 1 / 1"
+   }
+  }
+ },
+ "2^(x^2-5x)=2^(3/2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 2^{\\frac{3}{2}}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log\\left(2^{\\frac{3}{2}}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\frac{3}{2} \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = \\frac{3}{2}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x - \\frac{3}{2} = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot \\left(-\\frac{3}{2}\\right) = 31⟧(formule du discriminant)⟦x_{1} = \\frac{5 - \\sqrt{Δ}}{2}⟧⟦x_{2} = \\frac{5 + \\sqrt{Δ}}{2}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}284 \\text{ ou } x \\approx 5{,}284⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 2^{\\frac{3}{2}}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log\\left(2^{\\frac{3}{2}}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\frac{3}{2} \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = \\frac{3}{2}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x - \\frac{3}{2} = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot \\left(-\\frac{3}{2}\\right) = 31⟧(formule du discriminant)⟦x_{1} = \\frac{5 - \\sqrt{Δ}}{2}⟧⟦x_{2} = \\frac{5 + \\sqrt{Δ}}{2}⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}284 \\text{ ou } x \\approx 5{,}284⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base / définitionIl faut les logarithmes.",
+      "titre": "Étape 1Même base / définition"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 1 / 1"
+   }
+  }
+ },
+ "2^(x^2-5x)=2^0": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 2^{0}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log(2^{0})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = 0⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} \\cdot \\log(2) - 5x \\cdot \\log(2) = 0⟧⟦\\iff⟧⟦x(x \\cdot \\log(2) - 5\\log(2)) = 0⟧⟦\\iff⟧⟦x = 0 \\text{ ou } x \\cdot \\log(2) - 5\\log(2) = 0⟧(un produit est nul si l'un des facteurs est nul)⟦x \\cdot \\log(2) - 5\\log(2) = 0⟧⟦\\iff⟧⟦x = \\frac{5\\log(2)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{0 \\,;\\, \\frac{5\\log(2)}{\\log(2)}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = 0⟧ ou ⟦x = 5⟧.",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 2^{0}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log(2^{0})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = 0⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} \\cdot \\log(2) - 5x \\cdot \\log(2) = 0⟧⟦\\iff⟧⟦x(x \\cdot \\log(2) - 5\\log(2)) = 0⟧⟦\\iff⟧⟦x = 0 \\text{ ou } x \\cdot \\log(2) - 5\\log(2) = 0⟧(un produit est nul si l'un des facteurs est nul)⟦x \\cdot \\log(2) - 5\\log(2) = 0⟧⟦\\iff⟧⟦x = \\frac{5\\log(2)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{0 \\,;\\, \\frac{5\\log(2)}{\\log(2)}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = 0⟧ ou ⟦x = 5⟧.",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦2^{x^{2} - 5x} = 2^{0}⟧⟦\\iff⟧⟦x^{2} - 5x = 0⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x(x - 5) = 0⟧⟦\\iff⟧⟦x = 0 \\text{ ou } x = 5⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{0 \\,;\\, 5\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "2^(x^2-5x)=3": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 3⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = \\frac{\\log(3)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x - \\frac{\\log(3)}{\\log(2)} = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot \\left(-\\frac{\\log(3)}{\\log(2)}\\right) = 25 + 4 \\cdot \\frac{\\log(3)}{\\log(2)}⟧(formule du discriminant)⟦x_{1} = \\frac{5 - \\sqrt{Δ}}{2}⟧⟦x_{2} = \\frac{5 + \\sqrt{Δ}}{2}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}299 \\text{ ou } x \\approx 5{,}299⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 3⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = \\frac{\\log(3)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x - \\frac{\\log(3)}{\\log(2)} = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot \\left(-\\frac{\\log(3)}{\\log(2)}\\right) = 25 + 4 \\cdot \\frac{\\log(3)}{\\log(2)}⟧(formule du discriminant)⟦x_{1} = \\frac{5 - \\sqrt{Δ}}{2}⟧⟦x_{2} = \\frac{5 + \\sqrt{Δ}}{2}⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\} \\text{, soit } x \\approx -0{,}299 \\text{ ou } x \\approx 5{,}299⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base / définition⟦3⟧ n'est pas une puissance de ⟦2⟧ : il faut les logarithmes.",
+      "titre": "Étape 1Même base / définition"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 1 / 1"
+   }
+  }
+ },
+ "2^(x^2-5x)=4^(-3)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 4^{-3}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log(4^{-3})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = (-3) \\cdot \\log(4)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log(4^{-3}) = \\log(2^{-6}) = -6\\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 4^{-3}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log(4^{-3})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = (-3) \\cdot \\log(4)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log(4^{-3}) = \\log(2^{-6}) = -6\\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦4^{-3} = (2^{2})^{-3} = 2^{-6}⟧((aᵐ)ⁿ = aᵐⁿ)⟦2^{x^{2} - 5x} = 2^{-6}⟧⟦\\iff⟧⟦x^{2} - 5x = -6⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "2^(x^2-5x)=64": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 64⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log(64)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log(64)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log(2^{6}) = 6\\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = 6⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x - 6 = 0⟧⟦\\iff⟧⟦(x + 1)(x - 6) = 0⟧⟦\\iff⟧⟦x = -1 \\text{ ou } x = 6⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{-1 \\,;\\, 6\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 64⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log(64)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log(64)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log(2^{6}) = 6\\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = 6⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x - 6 = 0⟧⟦\\iff⟧⟦(x + 1)(x - 6) = 0⟧⟦\\iff⟧⟦x = -1 \\text{ ou } x = 6⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-1 \\,;\\, 6\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦64 = 2^{6}⟧⟦2^{x^{2} - 5x} = 2^{6}⟧⟦\\iff⟧⟦x^{2} - 5x = 6⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x^{2} - 5x - 6 = 0⟧⟦\\iff⟧⟦(x + 1)(x - 6) = 0⟧⟦\\iff⟧⟦x = -1 \\text{ ou } x = 6⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{-1 \\,;\\, 6\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "2^(x^2-5x)=8^(-2)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 8^{-2}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log(8^{-2})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = (-2) \\cdot \\log(8)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log(8^{-2}) = \\log(2^{-6}) = -6\\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 8^{-2}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log(8^{-2})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = (-2) \\cdot \\log(8)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log(8^{-2}) = \\log(2^{-6}) = -6\\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦8^{-2} = (2^{3})^{-2} = 2^{-6}⟧((aᵐ)ⁿ = aᵐⁿ)⟦2^{x^{2} - 5x} = 2^{-6}⟧⟦\\iff⟧⟦x^{2} - 5x = -6⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "2^(x^2-5x)=8^(1/3)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 8^{\\frac{1}{3}}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log\\left(8^{\\frac{1}{3}}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\frac{1}{3} \\cdot \\log(8)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log\\left(8^{\\frac{1}{3}}\\right) = \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = 1⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x - 1 = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot (-1) = 29⟧⟦x = \\frac{5 - \\sqrt{29}}{2} \\text{ ou } x = \\frac{5 + \\sqrt{29}}{2}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{5 - \\sqrt{29}}{2} \\,;\\, \\frac{5 + \\sqrt{29}}{2}\\right\\} \\text{, soit } x \\approx -0{,}193 \\text{ ou } x \\approx 5{,}193⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x} = 8^{\\frac{1}{3}}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log\\left(8^{\\frac{1}{3}}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\frac{1}{3} \\cdot \\log(8)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log\\left(8^{\\frac{1}{3}}\\right) = \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = 1⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x - 1 = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot (-1) = 29⟧⟦x = \\frac{5 - \\sqrt{29}}{2} \\text{ ou } x = \\frac{5 + \\sqrt{29}}{2}⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{5 - \\sqrt{29}}{2} \\,;\\, \\frac{5 + \\sqrt{29}}{2}\\right\\} \\text{, soit } x \\approx -0{,}193 \\text{ ou } x \\approx 5{,}193⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦8^{\\frac{1}{3}} = (2^{3})^{\\frac{1}{3}} = 2^{1}⟧((aᵐ)ⁿ = aᵐⁿ)⟦2^{x^{2} - 5x} = 2^{1}⟧⟦\\iff⟧⟦x^{2} - 5x = 1⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x^{2} - 5x - 1 = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot (-1) = 29⟧⟦x = \\frac{5 - \\sqrt{29}}{2} \\text{ ou } x = \\frac{5 + \\sqrt{29}}{2}⟧",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{5 - \\sqrt{29}}{2} \\,;\\, \\frac{5 + \\sqrt{29}}{2}\\right\\} \\text{, soit } x \\approx -0{,}193 \\text{ ou } x \\approx 5{,}193⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "2^(x^2-5x)=sqrt(2)": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Cet outil ne traite pas encore ce type d'équation.",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "2^(x^2-5x+1)=2^(-5)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x + 1} = 2^{-5}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x + 1}) = \\log(2^{-5})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x + 1) \\cdot \\log(2) = (-5) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x + 1 = -5⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x + 1} = 2^{-5}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x + 1}) = \\log(2^{-5})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x + 1) \\cdot \\log(2) = (-5) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x + 1 = -5⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦2^{x^{2} - 5x + 1} = 2^{-5}⟧⟦\\iff⟧⟦x^{2} - 5x + 1 = -5⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "2^(x^2-5x+1)=2^(-6,5)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x + 1} = 2^{-6{,}5}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x + 1}) = \\log(2^{-6{,}5})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x + 1) \\cdot \\log(2) = (-6{,}5) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x + 1 = -6{,}5⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 7{,}5 = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot 7{,}5 = -5⟧(formule du discriminant)Δ < 0 : l'équation n'a aucune solution réelle.",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x + 1} = 2^{-6{,}5}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x + 1}) = \\log(2^{-6{,}5})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x + 1) \\cdot \\log(2) = (-6{,}5) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x + 1 = -6{,}5⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 7{,}5 = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot 7{,}5 = -5⟧(formule du discriminant)Δ < 0 : l'équation n'a aucune solution réelle.",
+     "titre": "Étape 1Logarithme des deux membres"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\varnothing⟧",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationAucune solution : la situation décrite n'arrive jamais.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 3 / 3"
+  },
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - 5x + 1} = 2^{-6{,}5}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x + 1}) = \\log(2^{-6{,}5})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x + 1) \\cdot \\log(2) = (-6{,}5) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x + 1 = -6{,}5⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 7{,}5 = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot 7{,}5 = -5⟧(formule du discriminant)Δ < 0 : l'équation n'a aucune solution réelle.",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\varnothing⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base / définitionIl faut les logarithmes.",
+      "titre": "Étape 1Même base / définition"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 1 / 1"
+   }
+  }
+ },
+ "2^(x^2-x)=2^(-1/4)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - x} = 2^{-\\frac{1}{4}}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - x}) = \\log\\left(2^{-\\frac{1}{4}}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - x) \\cdot \\log(2) = \\left(-\\frac{1}{4}\\right) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - x = -\\frac{1}{4}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - x + \\frac{1}{4} = 0⟧⟦Δ = (-1)^{2} - 4 \\cdot 1 \\cdot \\frac{1}{4} = 0⟧(formule du discriminant)⟦Δ = 0 \\text{ : une seule solution}⟧⟦x = \\frac{-b}{2a} = \\frac{1}{2 \\cdot 1} = \\frac{1}{2}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{1}{2}\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "option": {
+   "cochee": false,
+   "libelle": "Problème d'application (temps en années)"
+  },
+  "option_inversee": {
+   "cartes": [
+    {
+     "classes": [
+      "card",
+      "cond"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - x} = 2^{-\\frac{1}{4}}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - x}) = \\log\\left(2^{-\\frac{1}{4}}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - x) \\cdot \\log(2) = \\left(-\\frac{1}{4}\\right) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - x = -\\frac{1}{4}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - x + \\frac{1}{4} = 0⟧⟦Δ = (-1)^{2} - 4 \\cdot 1 \\cdot \\frac{1}{4} = 0⟧(formule du discriminant)⟦Δ = 0 \\text{ : une seule solution}⟧⟦x = \\frac{-b}{2a} = \\frac{1}{2 \\cdot 1} = \\frac{1}{2}⟧",
+     "titre": "Étape 1Logarithme des deux membres"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "Solution⟦S = \\left\\{\\frac{1}{2}\\right\\}⟧",
+     "titre": "Solution"
+    },
+    {
+     "classes": [
+      "card",
+      "final"
+     ],
+     "listes": [],
+     "tableaux": [],
+     "texte": "InterprétationConventions : 1 an = 12 mois et 1 mois = 30 jours.⟦x = 0{,}5⟧ : 0 an ; reste ⟦0{,}5⟧ an.⟦0{,}5 \\cdot 12 = 6⟧ mois → 6 mois ; reste ⟦0⟧ mois.⟦0 \\cdot 30 = 0⟧ jour → 0 jour.Au bout de 0 an, 6 mois et 0 jour.",
+     "titre": "Interprétation"
+    }
+   ],
+   "cochee": true,
+   "progression_finale": "Étape 3 / 3"
+  },
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x^{2} - x} = 2^{-\\frac{1}{4}}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - x}) = \\log\\left(2^{-\\frac{1}{4}}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - x) \\cdot \\log(2) = \\left(-\\frac{1}{4}\\right) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - x = -\\frac{1}{4}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - x + \\frac{1}{4} = 0⟧⟦Δ = (-1)^{2} - 4 \\cdot 1 \\cdot \\frac{1}{4} = 0⟧(formule du discriminant)⟦Δ = 0 \\text{ : une seule solution}⟧⟦x = \\frac{-b}{2a} = \\frac{1}{2 \\cdot 1} = \\frac{1}{2}⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{1}{2}\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base / définitionIl faut les logarithmes.",
       "titre": "Étape 1Même base / définition"
      }
     ],
@@ -26271,6 +29970,131 @@
       "listes": [],
       "tableaux": [],
       "texte": "Solution⟦S = \\left\\{-2 \\,;\\, 2\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "3*2^(x^2-5x)=3/64": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Isoler l'exponentielle⟦3 \\cdot 2^{x^{2} - 5x} = \\frac{3}{64}⟧⟦\\iff⟧⟦2^{x^{2} - 5x} = \\frac{1}{64}⟧(on isole le terme exponentiel)",
+    "titre": "Étape 1Isoler l'exponentielle"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Logarithme des deux membres⟦2^{x^{2} - 5x} = \\frac{1}{64}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log\\left(\\frac{1}{64}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log\\left(\\frac{1}{64}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log(2^{-6}) = -6\\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 2Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Isoler l'exponentielle⟦3 \\cdot 2^{x^{2} - 5x} = \\frac{3}{64}⟧⟦\\iff⟧⟦2^{x^{2} - 5x} = \\frac{1}{64}⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Isoler l'exponentielle"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Logarithme des deux membres⟦2^{x^{2} - 5x} = \\frac{1}{64}⟧⟦\\iff⟧⟦\\log(2^{x^{2} - 5x}) = \\log\\left(\\frac{1}{64}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log\\left(\\frac{1}{64}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(2) = \\log(2^{-6}) = -6\\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 2Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Isoler l'exponentielle⟦3 \\cdot 2^{x^{2} - 5x} = \\frac{3}{64}⟧⟦\\iff⟧⟦2^{x^{2} - 5x} = \\frac{1}{64}⟧(on isole le terme exponentiel)",
+      "titre": "Étape 1Isoler l'exponentielle"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Même base⟦\\frac{1}{64} = 2^{-6}⟧⟦2^{x^{2} - 5x} = 2^{-6}⟧⟦\\iff⟧⟦x^{2} - 5x = -6⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 2Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
       "titre": "Solution"
      }
     ],
@@ -34232,6 +38056,196 @@
    }
   }
  },
+ "4^(x^2-5x)=1/4096": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦4^{x^{2} - 5x} = \\frac{1}{4\\text{’}096}⟧⟦\\iff⟧⟦\\log(4^{x^{2} - 5x}) = \\log\\left(\\frac{1}{4\\text{’}096}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(4) = \\log\\left(\\frac{1}{4\\text{’}096}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(4) = \\log(4^{-6}) = -6\\log(4)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car ⟦\\log(4) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦4^{x^{2} - 5x} = \\frac{1}{4\\text{’}096}⟧⟦\\iff⟧⟦\\log(4^{x^{2} - 5x}) = \\log\\left(\\frac{1}{4\\text{’}096}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(4) = \\log\\left(\\frac{1}{4\\text{’}096}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(4) = \\log(4^{-6}) = -6\\log(4)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car ⟦\\log(4) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦\\frac{1}{4\\text{’}096} = 4^{-6}⟧⟦4^{x^{2} - 5x} = 4^{-6}⟧⟦\\iff⟧⟦x^{2} - 5x = -6⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "4^(x^2-5x)=2^(-12)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦4^{x^{2} - 5x} = 2^{-12}⟧⟦\\iff⟧⟦\\log(4^{x^{2} - 5x}) = \\log(2^{-12})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(4) = (-12) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(4) = \\log(2^{-12}) = \\log(4^{-6}) = -6\\log(4)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car ⟦\\log(4) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦4^{x^{2} - 5x} = 2^{-12}⟧⟦\\iff⟧⟦\\log(4^{x^{2} - 5x}) = \\log(2^{-12})⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(4) = (-12) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(4) = \\log(2^{-12}) = \\log(4^{-6}) = -6\\log(4)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car ⟦\\log(4) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦4^{x^{2} - 5x} = (2^{2})^{x^{2} - 5x} = 2^{2(x^{2} - 5x)}⟧((aᵐ)ⁿ = aᵐⁿ)⟦\\phantom{4^{x^{2} - 5x}} = 2^{2x^{2} - 10x}⟧⟦2^{2x^{2} - 10x} = 2^{-12}⟧⟦\\iff⟧⟦2x^{2} - 10x = -12⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦2x^{2} - 10x + 12 = 0⟧⟦Δ = (-10)^{2} - 4 \\cdot 2 \\cdot 12 = 4⟧⟦x = 2 \\text{ ou } x = 3⟧",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
  "4^x+2^x=2": {
   "au_depart": {
    "progression": "Étape 1 / 4",
@@ -39806,6 +43820,101 @@
    }
   }
  },
+ "9^(x^2-5x)=1/729": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦9^{x^{2} - 5x} = \\frac{1}{729}⟧⟦\\iff⟧⟦\\log(9^{x^{2} - 5x}) = \\log\\left(\\frac{1}{729}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(9) = \\log\\left(\\frac{1}{729}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(9) = \\log(9^{-3}) = -3\\log(9)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -3⟧(car ⟦\\log(9) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 3 = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot 3 = 13⟧⟦x = \\frac{5 - \\sqrt{13}}{2} \\text{ ou } x = \\frac{5 + \\sqrt{13}}{2}⟧",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{\\frac{5 - \\sqrt{13}}{2} \\,;\\, \\frac{5 + \\sqrt{13}}{2}\\right\\} \\text{, soit } x \\approx 0{,}697 \\text{ ou } x \\approx 4{,}303⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦9^{x^{2} - 5x} = \\frac{1}{729}⟧⟦\\iff⟧⟦\\log(9^{x^{2} - 5x}) = \\log\\left(\\frac{1}{729}\\right)⟧(log des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(9) = \\log\\left(\\frac{1}{729}\\right)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\log(9) = \\log(9^{-3}) = -3\\log(9)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x^{2} - 5x = -3⟧(car ⟦\\log(9) \\neq 0⟧)⟦\\iff⟧⟦x^{2} - 5x + 3 = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot 3 = 13⟧⟦x = \\frac{5 - \\sqrt{13}}{2} \\text{ ou } x = \\frac{5 + \\sqrt{13}}{2}⟧",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{5 - \\sqrt{13}}{2} \\,;\\, \\frac{5 + \\sqrt{13}}{2}\\right\\} \\text{, soit } x \\approx 0{,}697 \\text{ ou } x \\approx 4{,}303⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦\\frac{1}{729} = 9^{-3}⟧⟦9^{x^{2} - 5x} = 9^{-3}⟧⟦\\iff⟧⟦x^{2} - 5x = -3⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x^{2} - 5x + 3 = 0⟧⟦Δ = (-5)^{2} - 4 \\cdot 1 \\cdot 3 = 13⟧⟦x = \\frac{5 - \\sqrt{13}}{2} \\text{ ou } x = \\frac{5 + \\sqrt{13}}{2}⟧",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{\\frac{5 - \\sqrt{13}}{2} \\,;\\, \\frac{5 + \\sqrt{13}}{2}\\right\\} \\text{, soit } x \\approx 0{,}697 \\text{ ou } x \\approx 4{,}303⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
  "9^(x²)=3^(x+1)": {
   "au_depart": {
    "progression": "Étape 1 / 2",
@@ -42528,7 +46637,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Logarithme des deux membres⟦e^{-x^{2} + 3x} = 2⟧⟦\\iff⟧⟦\\ln(e^{-x^{2} + 3x}) = \\ln(2)⟧(ln des deux membres)⟦\\iff⟧⟦(-x^{2} + 3x) \\cdot \\ln(e) = \\ln(2)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦-x^{2} + 3x = \\ln(2)⟧(car ln(e) = 1)⟦\\iff⟧⟦-x^{2} + 3x - \\ln(2) = 0⟧⟦Δ = 3^{2} - 4(-1) \\cdot (-\\ln(2)) = 9 + (-4) \\cdot \\ln(2)⟧(formule du discriminant)⟦x_{1} = \\frac{-3 + \\sqrt{Δ}}{-2}⟧⟦x_{2} = \\frac{-3 - \\sqrt{Δ}}{-2}⟧",
+    "texte": "Étape 1Logarithme des deux membres⟦e^{-x^{2} + 3x} = 2⟧⟦\\iff⟧⟦\\ln(e^{-x^{2} + 3x}) = \\ln(2)⟧(ln des deux membres)⟦\\iff⟧⟦(-x^{2} + 3x) \\cdot \\ln(e) = \\ln(2)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦-x^{2} + 3x = \\ln(2)⟧(car ln(e) = 1)⟦\\iff⟧⟦-x^{2} + 3x - \\ln(2) = 0⟧⟦Δ = 3^{2} - 4(-1) \\cdot (-\\ln(2)) = 9 - 4\\ln(2)⟧(formule du discriminant)⟦x_{1} = \\frac{-3 + \\sqrt{Δ}}{-2}⟧⟦x_{2} = \\frac{-3 - \\sqrt{Δ}}{-2}⟧",
     "titre": "Étape 1Logarithme des deux membres"
    },
    {
@@ -42553,7 +46662,7 @@
       ],
       "listes": [],
       "tableaux": [],
-      "texte": "Étape 1Logarithme des deux membres⟦e^{-x^{2} + 3x} = 2⟧⟦\\iff⟧⟦\\ln(e^{-x^{2} + 3x}) = \\ln(2)⟧(ln des deux membres)⟦\\iff⟧⟦(-x^{2} + 3x) \\cdot \\ln(e) = \\ln(2)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦-x^{2} + 3x = \\ln(2)⟧(car ln(e) = 1)⟦\\iff⟧⟦-x^{2} + 3x - \\ln(2) = 0⟧⟦Δ = 3^{2} - 4(-1) \\cdot (-\\ln(2)) = 9 + (-4) \\cdot \\ln(2)⟧(formule du discriminant)⟦x_{1} = \\frac{-3 + \\sqrt{Δ}}{-2}⟧⟦x_{2} = \\frac{-3 - \\sqrt{Δ}}{-2}⟧",
+      "texte": "Étape 1Logarithme des deux membres⟦e^{-x^{2} + 3x} = 2⟧⟦\\iff⟧⟦\\ln(e^{-x^{2} + 3x}) = \\ln(2)⟧(ln des deux membres)⟦\\iff⟧⟦(-x^{2} + 3x) \\cdot \\ln(e) = \\ln(2)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦-x^{2} + 3x = \\ln(2)⟧(car ln(e) = 1)⟦\\iff⟧⟦-x^{2} + 3x - \\ln(2) = 0⟧⟦Δ = 3^{2} - 4(-1) \\cdot (-\\ln(2)) = 9 - 4\\ln(2)⟧(formule du discriminant)⟦x_{1} = \\frac{-3 + \\sqrt{Δ}}{-2}⟧⟦x_{2} = \\frac{-3 - \\sqrt{Δ}}{-2}⟧",
       "titre": "Étape 1Logarithme des deux membres"
      },
      {
@@ -42579,7 +46688,7 @@
       ],
       "listes": [],
       "tableaux": [],
-      "texte": "Étape 1Définition du logarithme⟦e^{-x^{2} + 3x} = 2⟧⟦\\iff⟧⟦-x^{2} + 3x = \\ln(2)⟧(définition du logarithme)⟦\\iff⟧⟦-x^{2} + 3x - \\ln(2) = 0⟧⟦Δ = 3^{2} - 4(-1) \\cdot (-\\ln(2)) = 9 + (-4) \\cdot \\ln(2)⟧(formule du discriminant)⟦x_{1} = \\frac{-3 + \\sqrt{Δ}}{-2}⟧⟦x_{2} = \\frac{-3 - \\sqrt{Δ}}{-2}⟧",
+      "texte": "Étape 1Définition du logarithme⟦e^{-x^{2} + 3x} = 2⟧⟦\\iff⟧⟦-x^{2} + 3x = \\ln(2)⟧(définition du logarithme)⟦\\iff⟧⟦-x^{2} + 3x - \\ln(2) = 0⟧⟦Δ = 3^{2} - 4(-1) \\cdot (-\\ln(2)) = 9 - 4\\ln(2)⟧(formule du discriminant)⟦x_{1} = \\frac{-3 + \\sqrt{Δ}}{-2}⟧⟦x_{2} = \\frac{-3 - \\sqrt{Δ}}{-2}⟧",
       "titre": "Étape 1Définition du logarithme"
      },
      {
@@ -45294,7 +49403,7 @@
       ],
       "listes": [],
       "tableaux": [],
-      "texte": "Étape 1Définition du logarithme⟦\\frac{e^{\\frac{x}{2}}}{e^{x^{2} + x}} = \\frac{1}{4}⟧⟦\\iff⟧⟦e^{-x^{2} - \\frac{1}{2}x} = \\frac{1}{4}⟧(aᵐ / aⁿ = aᵐ⁻ⁿ)⟦\\iff⟧⟦-x^{2} - \\frac{1}{2}x = \\ln\\left(\\frac{1}{4}\\right)⟧(définition du logarithme)⟦\\iff⟧⟦-x^{2} - \\frac{1}{2}x - \\ln\\left(\\frac{1}{4}\\right) = 0⟧⟦Δ = \\left(-\\frac{1}{2}\\right)^{2} - 4(-1) \\cdot \\left(-\\ln\\left(\\frac{1}{4}\\right)\\right) = \\frac{1}{4} + (-4) \\cdot \\ln\\left(\\frac{1}{4}\\right)⟧(formule du discriminant)⟦x_{1} = \\frac{\\frac{1}{2} + \\sqrt{Δ}}{-2}⟧⟦x_{2} = \\frac{\\frac{1}{2} - \\sqrt{Δ}}{-2}⟧",
+      "texte": "Étape 1Définition du logarithme⟦\\frac{e^{\\frac{x}{2}}}{e^{x^{2} + x}} = \\frac{1}{4}⟧⟦\\iff⟧⟦e^{-x^{2} - \\frac{1}{2}x} = \\frac{1}{4}⟧(aᵐ / aⁿ = aᵐ⁻ⁿ)⟦\\iff⟧⟦-x^{2} - \\frac{1}{2}x = \\ln\\left(\\frac{1}{4}\\right)⟧(définition du logarithme)⟦\\iff⟧⟦-x^{2} - \\frac{1}{2}x - \\ln\\left(\\frac{1}{4}\\right) = 0⟧⟦Δ = \\left(-\\frac{1}{2}\\right)^{2} - 4(-1) \\cdot \\left(-\\ln\\left(\\frac{1}{4}\\right)\\right) = \\frac{1}{4} - 4\\ln\\left(\\frac{1}{4}\\right)⟧(formule du discriminant)⟦x_{1} = \\frac{\\frac{1}{2} + \\sqrt{Δ}}{-2}⟧⟦x_{2} = \\frac{\\frac{1}{2} - \\sqrt{Δ}}{-2}⟧",
       "titre": "Étape 1Définition du logarithme"
      },
      {
@@ -45715,6 +49824,101 @@
       "listes": [],
       "tableaux": [],
       "texte": "Solution⟦S = \\left\\{-\\frac{4}{3}\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Même base / définition",
+    "progression_finale": "Étape 2 / 2"
+   }
+  }
+ },
+ "e^(x^2-5x)=e^(-6)": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": false,
+    "cle": "meme_base",
+    "texte": "Même base / définition"
+   },
+   {
+    "choisi": true,
+    "cle": "logarithmes",
+    "texte": "Logarithmes"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Logarithme des deux membres⟦e^{x^{2} - 5x} = e^{-6}⟧⟦\\iff⟧⟦\\ln(e^{x^{2} - 5x}) = \\ln(e^{-6})⟧(ln des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\ln(e) = (-6) \\cdot \\ln(e)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car ln(e) = 1)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+    "titre": "Étape 1Logarithme des deux membres"
+   },
+   {
+    "classes": [
+     "card",
+     "final"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2",
+  "variantes": {
+   "logarithmes": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Logarithme des deux membres⟦e^{x^{2} - 5x} = e^{-6}⟧⟦\\iff⟧⟦\\ln(e^{x^{2} - 5x}) = \\ln(e^{-6})⟧(ln des deux membres)⟦\\iff⟧⟦(x^{2} - 5x) \\cdot \\ln(e) = (-6) \\cdot \\ln(e)⟧(ln(a^A) = A · ln(a))⟦\\iff⟧⟦x^{2} - 5x = -6⟧(car ln(e) = 1)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Logarithme des deux membres"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Logarithmes",
+    "progression_finale": "Étape 2 / 2"
+   },
+   "meme_base": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Même base⟦e^{x^{2} - 5x} = e^{-6}⟧⟦\\iff⟧⟦x^{2} - 5x = -6⟧(même base : a^A = a^B ⇔ A = B)⟦\\iff⟧⟦x^{2} - 5x + 6 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 3) = 0⟧⟦\\iff⟧⟦x = 2 \\text{ ou } x = 3⟧(un produit est nul si l'un des facteurs est nul)",
+      "titre": "Étape 1Même base"
+     },
+     {
+      "classes": [
+       "card",
+       "final"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\left\\{2 \\,;\\, 3\\right\\}⟧",
       "titre": "Solution"
      }
     ],

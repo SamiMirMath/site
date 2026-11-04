@@ -1879,6 +1879,24 @@ def _suite_lineaire(chaine, p, q0, c, x, ecrit=None):
     return solution
 
 
+def _negatif_ecrit(n):
+    """Vrai quand l'arbre s'écrit avec un signe moins devant : −a, un nombre négatif, (−3)/log(2), (−3) · log(4)."""
+    if isinstance(n, Neg):
+        return True
+    if isinstance(n, Nb):
+        return n.val < 0
+    return isinstance(n, Op) and n.op in "*/" and _negatif_ecrit(n.a)
+
+
+def _sans_moins(n):
+    """L'opposé d'un arbre écrit avec un signe moins devant (`_negatif_ecrit`), écrit sans ce signe : −a → a, −3 → 3, (−3)/log(2) → 3/log(2)."""
+    if isinstance(n, Neg):
+        return n.a
+    if isinstance(n, Nb):
+        return Nb(-n.val, n.dec.lstrip("−-") if n.dec else None)
+    return Op(n.op, _sans_moins(n.a), n.b)
+
+
 def _suite_polynome(chaine, f, f_tree, c, x):
     """Ajoute à `chaine` (qui se termine par « P(x) = c », P de degré 1 ou 2, c une constante écrite, avec ou sans logarithme) les lignes qui
     résolvent l'équation ; renvoie (lignes suivantes, solutions, remarque). Degré 2 : x² = k donne x = ±√k (k < 0 : aucune solution, un carré
@@ -1923,16 +1941,28 @@ def _suite_polynome(chaine, f, f_tree, c, x):
                 chaine.ajouter(e, lien, prop)
             return l_poly[1:], solutions, remarque
     # a·x² + b·x + q − c = 0, puis Δ = b² − 4a(q − c)
-    constante = Neg(c) if q == 0 else Op("-", _nb_ecrit(q, f_tree), c)
-    chaine.ajouter(Eq(Op("-", _arbre_poly(f, x, f_tree), c), Nb(0)), "⇔")
     r0 = b * b - 4 * a * q
-    terme = c if 4 * a == 1 else Op("*", _nb_exact(4 * a), c)
-    delta = terme if r0 == 0 else Op("+", _nb_exact(r0), terme)
+    if isinstance(c, Nb):                                  # coefficients rationnels non entiers (x² − 5x = 3/2) : tout se calcule, Δ = 31
+        k0 = q - c.val
+        poly = _arbre_poly([F(0), b, a], x, f_tree)                     # le terme constant calculé, écrit comme dans Δ (R13 : 6,5 reste décimal)
+        poly = poly if k0 == 0 else Op("+" if k0 > 0 else "-", poly, _nb_exact(abs(k0)))
+        chaine.ajouter(Eq(poly, Nb(0)), "⇔")
+        constante, delta = _nb_exact(k0), _nb_exact(b * b - 4 * a * k0)
+    else:                                                  # c écrit avec un logarithme : jamais « − (−3/log 2) » ni « + (−4) · … »
+        negatif = _negatif_ecrit(c)
+        cc = _sans_moins(c) if negatif else c                  # c = ± cc, cc écrit sans signe moins devant
+        moins = "+" if negatif else "-"
+        constante = (cc if negatif else Neg(cc)) if q == 0 else Op(moins, _nb_ecrit(q, f_tree), cc)
+        chaine.ajouter(Eq(Op(moins, _arbre_poly(f, x, f_tree), cc), Nb(0)), "⇔")
+        m = -4 * a if negatif else 4 * a                   # Δ = r0 + 4a·c = r0 + m·cc
+        terme = cc if abs(m) == 1 else Op("*", _nb_exact(abs(m)), cc)
+        delta = (terme if m > 0 else Neg(terme)) if r0 == 0 else Op("+" if m > 0 else "-", _nb_exact(r0), terme)
     formule = Op("-", Pow(_nb_exact(b), Nb(2)), Op("*", Op("*", Nb(4), _nb_exact(a)), constante))
     D = Defini("Δ", delta)
     signe = _signe(delta)
-    lignes = [Chaine([D, formule, delta] + ([Nb(0)] if signe == 0 else []), ["="] * (3 if signe == 0 else 2),
-                     [None] * (2 if signe == 0 else 1) + [PROP_DISCRIMINANT])]
+    zero = signe == 0 and not isinstance(delta, Nb)        # Δ = … = 0 : le 0 n'est écrit qu'une fois
+    lignes = [Chaine([D, formule, delta] + ([Nb(0)] if zero else []), ["="] * (3 if zero else 2),
+                     [None] * (2 if zero else 1) + [PROP_DISCRIMINANT])]
     if signe < 0:
         return lignes, [], "Δ < 0 : l'équation n'a aucune solution réelle."
     if signe == 0:
@@ -2009,15 +2039,58 @@ def _alpha(g, d, x, fg, fd, ln):
     else:
         if reste is not None and not un:
             chaine.ajouter(Eq(gauche, reste), "⇔", prop_un)
+        k = None
+        if not un and reste is None and len(fs.exp) == 3 and fs.exp[1] != 0 and not (fo.genre == "pow" and fo.base == fs.base):
+            k = _puissance_de_la_base(chaine, gauche, fo, base_s, bl, ln)    # 2e degré (Δ) : log(1/64) = log(2⁻⁶) = −6 · log(2)
         if un:
             c = Nb(0)
+        elif k is not None:                                          # f · log(a) = k · log(a) : on divise par log(a), f = k
+            c = k
         elif fo.genre == "pow" and fo.base == fs.base:               # f · log(a) = k · log(a) : on divise par log(a)
             c = _expo_arbre(fo)
         else:
             c = Op("/", reste if reste is not None else droite, a_node)
         chaine.ajouter(Eq(f_tree, c), "⇔", Car(a_node))
+    c = _second_membre_calcule(chaine, f_tree, c)
     suite, solutions, remarque = _suite_polynome(chaine, fs.exp, f_tree, c, x)
     return [chaine] + suite, solutions, remarque
+
+
+def _second_membre_calcule(chaine, f_tree, c):
+    """Le second membre c de « f = c » en nombre (Nb) quand il vaut un rationnel sans logarithme (2^(x² − 5x) = 2^(−6) : c = −6, écrit Neg(6)) : la suite
+    calcule alors avec lui (x² − 5x + 6 = 0, x = 5 − 6 = −1), au lieu de l'écrire tel quel (« − (−6) », « 5 − 6 »). Une ligne « ⇔ f = valeur » s'ajoute
+    seulement quand l'écriture change (2^(2/4) : 2/4 = 1/2)."""
+    v = _const(c)
+    if v is None or isinstance(c, Nb):
+        return c
+    n = _nb_exact(v)
+    if tex(n) != tex(c):
+        chaine.ajouter(Eq(f_tree, n), "⇔")
+    return n
+
+
+def _puissance_de_la_base(chaine, gauche, fo, base_s, bl, ln):
+    """Au 2e degré (le discriminant suit), quand la constante b est exactement a^k (a la base de l'exponentielle, k rationnel) : la puissance de a est
+    écrite dans le logarithme pour que log(a^A) = A · log(a) s'applique, comme log(100) = log(10²) = 2 · log(10) (méthode B, sans log_a(a^k) = k) ;
+    (x² − 5x) · log(2) = log(1/64) ⇔ (x² − 5x) · log(2) = log(2⁻⁶) = −6 · log(2), puis on divisera par log(2). Renvoie k (Nb), ou None : b n'est pas
+    une puissance de a (Δ s'écrit alors avec les logarithmes)."""
+    try:
+        k = _exposant_de_la_base(fo.arbre, base_s)
+    except _Hors:                                                    # un entier trop grand pour être décomposé : on ne calcule pas
+        k = None
+    if k is None or k == 0:
+        return None
+    n, log_a = _nb_exact(k), Log(base_s, bl)
+    multiple = log_a if k == 1 else Op("*", n, log_a) if k > 0 else Neg(log_a if k == -1 else Op("*", _nb_exact(-k), log_a))
+    ecritures = ([Log(fo.arbre, bl)] if fo.genre == "pow" else []) + ([] if k == 1 else [Log(Pow(base_s, n), bl)]) + [multiple]
+    vues = [tex(chaine.elements[-1].d)]                              # log(8^(1/3)) = log(2) : jamais « log(2) = log(2) »
+    for e in ecritures:
+        if tex(e) != vues[-1]:
+            vues.append(tex(e))
+    ecritures = [e for e in ecritures if tex(e) in vues[1:]]
+    if ecritures:
+        chaine.ajouter(Eq(gauche, ecritures[-1], ecritures[:-1]), "⇔", PROP_LN_PUISSANCE if ln else PROP_LOG_PUISSANCE)
+    return n
 
 
 def _beta(g, d, x, fg, fd, ln):
