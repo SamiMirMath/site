@@ -315,11 +315,15 @@ function demarrerOutil(config) {
     poserCartes(toutAffiche ? total : Math.min(Math.max(visibles, 1), total), toutAffiche && coche);       // cochée avec tout affiché : la carte ajoutée est montrée
   }
 
+  /* Un intertitre (carte de style « partie », rendu.js) n'est pas une étape : il apparaît avec la carte qui le suit et n'est pas compté. */
+  const estIntertitre = c => c.classList.contains("partie");
   function montrer(n, defiler = n === 1) {
     visibles = Math.min(cartes.length, visibles + n);
+    while (visibles < cartes.length && estIntertitre(cartes[visibles - 1])) visibles++;
     cartes.forEach((c, i) => c.classList.toggle("cache", i >= visibles));
     $("suivant").disabled = $("tout").disabled = visibles >= cartes.length;
-    $("progression").textContent = `Étape ${visibles} / ${cartes.length}`;
+    const etapes = cartes.filter(c => !estIntertitre(c));
+    $("progression").textContent = `Étape ${etapes.filter(c => cartes.indexOf(c) < visibles).length} / ${etapes.length}`;
     majFlottant();
     const der = cartes[visibles - 1];
     if (der && defiler) der.scrollIntoView({ behavior: "smooth", block: "nearest" });

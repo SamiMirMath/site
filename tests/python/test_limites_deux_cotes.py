@@ -29,7 +29,7 @@ class TestLimitesDeuxCotes(unittest.TestCase):
         self.assertEqual((a["gauche_tex"], a["droite_tex"]), ("-1", "1"))
 
     def test_limite_infinie_asymptote_verticale(self):
-        for entree, g, d in [("e^x/x", r"-\infty", r"+\infty"), ("e^(1/x)", "0", r"+\infty")]:
+        for entree, g, d in [("e^x/x", r"-\infty", r"+\infty"), ("e^(1/x)", "0^{+}", r"+\infty")]:
             with self.subTest(f=entree):
                 a = asymptote_en(entree, "0")
                 self.assertEqual(a["genre"], "verticale")

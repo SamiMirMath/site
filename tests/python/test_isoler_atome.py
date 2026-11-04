@@ -71,9 +71,10 @@ class TestIsolerAtome(unittest.TestCase):
         self.assertTrue(any("(ln est croissante" in x for x in t), t)
 
     def test_cas_de_la_derivee(self):
-        r = dv.etudier("ln(x)/x")                                      # f' = −(ln x − 1)/x²
+        r = dv.etudier("ln(x)/x")                                      # f' = (1 − ln x)/x² (EC, D17 : le signe entre dans le facteur)
         textes_dv = " ".join(e.get("html", "") for e in r["signe_etapes"])
-        self.assertIn(r"\ln(x) - 1 = 0 \iff \ln(x) = 1\) (on ajoute 1)", textes_dv)      # le zéro seul : plus de phrase de signe
+        self.assertIn(r"1 - \ln(x) = 0 \iff \ln(x) = 1\) (on isole \(\ln(x)\) du côté où son coefficient est positif)",
+                      textes_dv)                                       # le zéro seul : plus de phrase de signe
         self.assertNotIn("On pose", textes_dv)
         r = dv.etudier("x*ln(x)")                                      # f' = ln x + 1
         textes_dv = " ".join(e.get("html", "") for e in r["signe_etapes"])

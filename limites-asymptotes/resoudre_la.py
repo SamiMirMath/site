@@ -6,9 +6,11 @@ signes, une carte par limite, bilan des asymptotes. La phrase de chaque asymptot
 composait en JS (`ligneAsymptote`), est écrite ici une seule fois ; les fonctions `carte_*` sont
 partagées avec l'Étude complète (`resoudre_ec.py`).
 """
-from noyau import json_strict
+import re
+
+from noyau import json_strict, txt
 import sortie as so
-from limites_asymptotes import etudier, apercu_json
+from limites_asymptotes import etudier, apercu_json, phrase_horizontale
 
 __all__ = ["resoudre", "resoudre_json", "apercu_json"]
 
@@ -61,11 +63,60 @@ def cartes_etude(et):
     return cartes
 
 
+_VERS_INFINI = re.compile(r"(x\s*\\to\s*)[+-]\\infty")
+
+
+def _neutre(v):
+    """Le même contenu, le point « x → −∞ » / « x → +∞ » écrit « x → ±∞ » (pour comparer, puis écrire, les deux bornes infinies)."""
+    if isinstance(v, str):
+        return _VERS_INFINI.sub(r"\1\\pm\\infty", v)
+    if isinstance(v, dict):
+        return {k: _neutre(x) for k, x in v.items()}
+    if isinstance(v, list):
+        return [_neutre(x) for x in v]
+    return v
+
+
+def _sans_conclusion(et):
+    return [it for it in et["etapes"] if "conclusion" not in it]
+
+
+def _conclusions(et):
+    return [it["conclusion"] for it in et["etapes"] if "conclusion" in it]
+
+
+def etudes_affichees(etudes):
+    """Études dans l'ordre d'affichage (celui d'`etudier` : −∞, valeurs interdites, +∞, EC D16), x → −∞ et x → +∞ en une seule étude
+    « x → ±∞ » quand leurs étapes sont identiques au symbole près (le point de la limite) et leurs conclusions identiques au côté près ;
+    la conclusion devient alors celle « des deux côtés ». Sinon, les études telles quelles."""
+    ou = {e["ou"]: i for i, e in enumerate(etudes)}
+    i, j = ou.get(r"x \to -\infty"), ou.get(r"x \to +\infty")
+    if i is None or j is None:
+        return list(etudes)
+    g, d = etudes[i], etudes[j]
+    corps = _neutre(_sans_conclusion(g))
+    cg, cd = _conclusions(g), _conclusions(d)
+    if corps != _neutre(_sans_conclusion(d)) or cg != cd or len(cg) > 1:
+        return list(etudes)
+    etapes = corps
+    if cg:
+        c = cg[0]
+        etapes = etapes + [txt(phrase_horizontale(c["valeur_tex"], 0, c["signee"], c["position"]))]
+    groupe = {"ou": r"x \to \pm\infty", "etapes": etapes}
+    return [groupe if k == i else e for k, e in enumerate(etudes) if k != j]
+
+
+def cartes_limites(etudes):
+    """Cartes de toutes les bornes, dans l'ordre d'affichage (partagé par l'outil Limites et l'Étude complète)."""
+    return [c for et in etudes_affichees(etudes) for c in cartes_etude(et)]
+
+
 def ligne_asymptote(a):
     m = lambda t: "\\(" + t + "\\)"
     g = a["genre"]
     if g == "horizontale":
-        return f"Asymptote horizontale ({m(a['ou'])}) : {m('y = ' + a['valeur_tex'])}"
+        position = f", graphe {a['position']}" if a.get("position") else ""
+        return f"Asymptote horizontale ({m(a['ou'])}) : {m('y = ' + a['valeur_tex'])}{position}"
     if g == "oblique":
         return f"Asymptote oblique ({m(a['ou'])}) : {m('y = ' + a['equation_tex'])}"
     if g == "verticale":
@@ -106,8 +157,7 @@ def resoudre(entree):
     cartes = [carte_rappel(r, " — détail dans l'outil « Ensemble de définition ».")]
     if r.get("tableaux_signe"):
         cartes.append(carte_tableaux(r["tableaux_signe"]))
-    for et in r["etudes"]:
-        cartes += cartes_etude(et)
+    cartes += cartes_limites(r["etudes"])
     cartes.append(carte_bilan(r["asymptotes"]))
     return so.sortie_ok(enonce(r), cartes)
 

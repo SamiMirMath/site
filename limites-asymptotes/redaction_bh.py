@@ -356,6 +356,113 @@ def phrase_remplace_final(n, pt):
 
 
 # ---------------------------------------------------------------------------------------------------------------------
+# Valeur d'essai pour 0⁺ / 0⁻ (EC D12, une seule règle pour l'EC et l'outil Limites) et signe d'approche ℓ⁺ / ℓ⁻ (D13)
+# ---------------------------------------------------------------------------------------------------------------------
+PAS_D_ESSAI = [F(1, 10 ** k) for k in range(2, 7)]      # x = a ± 0,01, sinon plus près (jusqu'à 10⁻⁶)
+
+
+def decimal_tex(q):
+    """Écriture décimale exacte d'un rationnel (virgule de LaTeX) ; None s'il n'a pas d'écriture décimale finie courte."""
+    q = F(q)
+    for n in range(0, 13):
+        v = q * 10 ** n
+        if v.denominator == 1:
+            s = str(abs(v.numerator)).rjust(n + 1, "0")
+            ent, dec = (s[:-n], s[-n:]) if n else (s, "")
+            return ("-" if q < 0 else "") + ent + ("{,}" + dec if dec else "")
+    return None
+
+
+def _nombre_decimal(q):
+    """Nœud d'un nombre décimal (écrit avec la virgule) pour une substitution : Nb, ou Neg(Nb) s'il est négatif."""
+    t = decimal_tex(abs(q)).replace("{,}", ",")
+    return Nb(abs(q), t) if q >= 0 else Neg(Nb(abs(q), t))
+
+
+def valeur_d_essai(D, pt, f, B):
+    """Fragment « 6x − 12 → 0 ; avec x = 1,99 : 6 · 1,99 − 12 = −0,06 < 0, donc 0⁻ » pour un bas D qui tend vers 0 (B : sa limite, signe
+    d'approche donné par les règles de calcul), ou None (écriture habituelle) si l'un des garde-fous ne passe pas :
+    point fini, d'un côté, décimal ; D polynôme à coefficients rationnels, autre que x (x → 0⁻ se lit directement) ; aucun autre zéro de
+    D entre le point d'essai et a (racines isolées exactement par SymPy, après division exacte par (x − a)^m) ; aucune borne de l'ED
+    entre les deux, a exclu (le point d'essai est donc dans l'ED ; hors d'une étude, où les bornes ne sont pas connues : f doit y être
+    définie) ; valeur exacte de D au point d'essai du signe annoncé par les règles."""
+    if pt.s or not pt.d or not B.nul() or not B.ap or isinstance(D, X):
+        return None
+    if not pt.a.is_Rational:
+        return None
+    a = F(int(pt.a.p), int(pt.a.q))
+    if decimal_tex(a) is None:
+        return None
+    P = LA._polynome_de(D)
+    if P is None or LA.pn(P) == [F(0), F(1)] or LA.peval(P, a) != 0:
+        return None
+    Q = list(P)
+    while LA.peval(Q, a) == 0:
+        Q, _ = LA.pdivlin(Q, a)
+    sp = charger_sympy()
+    if sp is None:
+        return None
+    x = sp.Symbol("x")
+    poly_q = sp.Poly([sp.Rational(c.numerator, c.denominator) for c in reversed(Q)], x) if LA.deg(Q) >= 1 else None
+    for h in PAS_D_ESSAI:
+        t = a + pt.d * h
+        lo, hi = min(a, t), max(a, t)
+        if poly_q is not None and poly_q.count_roots(sp.Rational(lo.numerator, lo.denominator),
+                                                     sp.Rational(hi.numerator, hi.denominator)) != 0:
+            continue
+        if any(float(lo) - 1e-12 <= b <= float(hi) + 1e-12 and abs(b - float(a)) > 1e-12 for b in LA._BORNES_FINIES):
+            continue
+        if not LA._BORNES_FINIES and _ev(f, float(t)) is None:     # hors d'une étude (bornes de l'ED inconnues) : f définie en ce point
+            continue
+        v = LA.peval(P, t)
+        tt, vt = decimal_tex(t), decimal_tex(v)
+        if v == 0 or (1 if v > 0 else -1) != B.ap or tt is None or vt is None:
+            return None
+        sub = tex(LA._substituer(D, _nombre_decimal(t)))
+        return (f"{M(T(D) + ' \\to 0')} ; avec {M('x = ' + tt)} : {M(sub + ' = ' + vt + (' > 0' if v > 0 else ' < 0'))}, "
+                f"donc {M('0^{+}' if v > 0 else '0^{-}')}")
+    return None
+
+
+def haut_remplace(N, pt):
+    """« x² + x − 2 → 2² + 2 − 2 = 4 » (polynôme en un point rationnel) ; sinon l'écriture simple « ln(x) → ln 2 »."""
+    A = lim(N, pt)
+    if not pt.s and pt.a.is_Rational and not A.inf and LA._polynome_de(N) is not None:
+        sub = LA._tex_en(N, pt)
+        if sub != LT(A):
+            return f"{T(N)} \\to {sub} = {LT(A)}"
+    return plain(N, pt)
+
+
+def ecart_confirme(f, pt, ell, ap):
+    """Sonde mpmath (80 chiffres) : f − ℓ a le signe ap aux points d'approche (±10³, ±10⁵, ±10⁸ ou a ± 10⁻³, 10⁻⁵, 10⁻⁸)."""
+    import mpmath
+    mp = mpmath.MPContext()
+    mp.dps = 80
+    try:
+        c = mp.mpf(str(charger_sympy().N(ell, 70)))
+    except Exception:
+        return False
+    vus = 0
+    for k in (3, 5, 8):
+        if pt.s:
+            x = pt.s * mp.mpf(10) ** k
+        else:
+            x = mp.mpf(str(charger_sympy().N(pt.a, 60))) + pt.d * mp.mpf(10) ** (-k)
+        try:
+            v = LA._val_mp(mp, f, x)
+        except Exception:
+            v = None
+        if v is None:
+            continue
+        e = v - c
+        if e == 0 or (1 if e > 0 else -1) != ap:
+            return False
+        vus += 1
+    return vus >= 2
+
+
+# ---------------------------------------------------------------------------------------------------------------------
 # Dérivées (table maison, confirmées numériquement) et leur présentation
 # ---------------------------------------------------------------------------------------------------------------------
 def _a_expo_neg(n):
@@ -751,6 +858,9 @@ class Desc:
         if isinstance(f, Op) and f.op == "/":
             h = fragment(f.a, pt) or M(plain(f.a, pt))
             b = fragment(f.b, pt) or M(plain(f.b, pt))
+            A, B = lim(f.a, pt), lim(f.b, pt)
+            if B.nul() and not A.nul():                     # forme k/0 : signe du bas par une valeur d'essai (EC D12)
+                b = valeur_d_essai(f.b, pt, self.f, B) or b
             return f"Haut : {h}. Bas : {b}. "
         fs = cotes(f)
         return ". ".join(fragment(x, pt) or M(plain(x, pt)) for x in fs) + ". "
@@ -1263,10 +1373,24 @@ def _m_composee(self, f):
     mot = "Exposant" if f.nom == "exp" else "Intérieur"
     if direct:
         L = LA._exp_lim(Lu) if f.nom == "exp" else LA._ln_lim(Lu)
+        blocs = []
+        if isinstance(u, Op) and u.op == "/" and not pt.s:  # forme k/0 en un point fini : haut, puis bas par une valeur d'essai (EC D12)
+            A, B = lim(u.a, pt), lim(u.b, pt)
+            essai = valeur_d_essai(u.b, pt, self.f, B) if (B.nul() and not A.nul()) else None
+            if essai:
+                ou = "de l'exposant" if f.nom == "exp" else "de l'intérieur du ln"
+                if not sans_x(u.a):
+                    blocs.append(self.txt(f"Haut {ou} : " + M(haut_remplace(u.a, pt)) + " (pas 0, donc pas indéterminée)."))
+                blocs.append(self.txt(f"Bas {ou} : " + essai + "."))
         d = detail(u, pt)
         phrase = f"{mot} : " + M(d if d else plain(u, pt)) + "."
-        phrase += " Donc " + M(f"{T(f)} \\to " + (f"e^{{{LT(Lu)}}}" if f.nom == "exp" else f"\\ln({LT(Lu)})") + f" = {LT(L)}") + "."
-        self.etape("on remplace", [self.txt(phrase), so.resultat_lim(f"{self.lim_tex(f)} = {LT(L)}")])
+        just = ""
+        if f.nom == "exp" and not L.inf and Lu.nul() and Lu.ap and ecart_confirme(f, pt, L.val, Lu.ap):
+            L = Lim.fin(L.val, Lu.ap, montre=True)          # e^{0⁺} = 1⁺ (EC D13), confirmé par la sonde
+            just = " " + (M("e^{t} > 1") + " pour " + M("t > 0") if Lu.ap > 0 else M("e^{t} < 1") + " pour " + M("t < 0"))
+            just = " (" + just.strip() + ")"
+        phrase += " Donc " + M(f"{T(f)} \\to " + (f"e^{{{LT(Lu)}}}" if f.nom == "exp" else f"\\ln({LT(Lu)})") + f" = {LT(L)}") + just + "."
+        self.etape("on remplace", blocs + [self.txt(phrase), so.resultat_lim(f"{self.lim_tex(f)} = {LT(L)}")])
         self.final_deja = True
         return L
     if not (isinstance(u, Op) and u.op == "/"):

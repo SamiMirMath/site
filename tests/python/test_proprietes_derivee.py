@@ -4,7 +4,7 @@ import unittest
 
 import mpmath
 
-from moteurs import ensemble_def as ed
+from moteurs import ensemble_def as ed, texte_etape
 import derivee_variations as dv
 import oracle
 from generateurs import fonctions
@@ -69,7 +69,7 @@ class TestProprietesDerivee(unittest.TestCase):
             r = dv.etudier(f)
             self.assertTrue(r["ok"] and r["deriv_resolu"], f)
             for it in r["deriv_etapes"]:
-                h = it["html"]
+                h = texte_etape(it)
                 if h.startswith(r"\(f'(x) = "):
                     with self.subTest(f=f, ligne=h):
                         self.assertEqual(h[:-len(r"\).")].rsplit(" = ", 1)[1], r["deriv_tex"])

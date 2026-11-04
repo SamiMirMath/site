@@ -74,7 +74,7 @@
     "badge": "limite",
     "blocs": [
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{2x^{2} + 1}{x^{2} - 1} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to -\\infty} \\dfrac{x^{2}\\,\\left(2 + \\frac{1}{x^{2}}\\right)}{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to -\\infty} \\frac{2 + \\frac{1}{x^{2}}}{1 - \\frac{1}{x^{2}}} = 2\\end{aligned}\\]",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to \\pm\\infty} \\frac{2x^{2} + 1}{x^{2} - 1} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to \\pm\\infty} \\dfrac{x^{2}\\,\\left(2 + \\frac{1}{x^{2}}\\right)}{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to \\pm\\infty} \\frac{2 + \\frac{1}{x^{2}}}{1 - \\frac{1}{x^{2}}} = 2\\end{aligned}\\]",
       "style": "etape",
       "type": "texte"
      },
@@ -86,25 +86,7 @@
     ],
     "style": "normal",
     "titre": "Limite",
-    "titre_tex": "x \\to -\\infty"
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{2x^{2} + 1}{x^{2} - 1} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}\\,\\left(2 + \\frac{1}{x^{2}}\\right)}{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{2 + \\frac{1}{x^{2}}}{1 - \\frac{1}{x^{2}}} = 2\\end{aligned}\\]",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale : \\(y = 2\\).",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to +\\infty"
+    "titre_tex": "x \\to \\pm\\infty"
    },
    {
     "badge": "limite",
@@ -157,9 +139,9 @@
      {
       "items": [
        "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 2\\)",
-       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 2\\)",
        "Asymptote verticale : \\(x = -1\\) (\\(\\lim_{x\\to -1^-} f(x) = +\\infty\\) ; \\(\\lim_{x\\to -1^+} f(x) = -\\infty\\))",
-       "Asymptote verticale : \\(x = 1\\) (\\(\\lim_{x\\to 1^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 1^+} f(x) = +\\infty\\))"
+       "Asymptote verticale : \\(x = 1\\) (\\(\\lim_{x\\to 1^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 1^+} f(x) = +\\infty\\))",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 2\\)"
       ],
       "style": "bilan",
       "type": "liste"
@@ -227,107 +209,13 @@
       "type": "resultat_lim"
      },
      {
-      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\) (à gauche). \\(f(x) \\to 0^{+}\\) : le graphe est au-dessus.",
       "style": "etape",
       "type": "texte"
      }
     ],
     "style": "normal",
     "titre": "Étape 2 : on conclut directement."
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\displaystyle\\lim_{x\\to +\\infty} \\frac{e^{x} - 1}{x}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to +\\infty"
-   },
-   {
-    "blocs": [
-     {
-      "html": "Haut : \\(e^{x} - 1 \\to +\\infty\\). Bas : \\(x \\to +\\infty\\). Forme \\(\\dfrac{+\\infty}{+\\infty}\\) : <span class=\"ind\">indéterminée</span>.",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "genre": "prediction",
-      "lignes": [
-       "Ici, le podium <b>ne peut pas aider</b> : il n'y a pas de « course » entre une exponentielle, une puissance et un logarithme qui partent vers l'infini.",
-       "Pour prédire, on utilise la calculatrice (tableau ci-dessous)."
-      ],
-      "titre": "Prédiction avec la règle du podium",
-      "type": "encadre"
-     },
-     {
-      "expr": "\\frac{e^{x} - 1}{x}",
-      "fs": [
-       "1{,}7183",
-       "2202{,}5466",
-       "2{,}43 \\cdot 10^{7}",
-       "1{,}04 \\cdot 10^{20}",
-       "2{,}69 \\cdot 10^{41}"
-      ],
-      "type": "valeurs",
-      "xs": [
-       "1",
-       "10",
-       "20",
-       "50",
-       "100"
-      ]
-     },
-     {
-      "html": "<i>La calculatrice ne prouve rien : c'est le calcul qui suit qui donne la réponse sûre.</i>",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 1 : on remplace."
-   },
-   {
-    "blocs": [
-     {
-      "bas": "x",
-      "dbas": "1",
-      "dhaut": "e^{x}",
-      "haut": "e^{x} - 1",
-      "type": "bh"
-     },
-     {
-      "html": "\\[\\lim_{x\\to +\\infty} \\frac{e^{x} - 1}{x} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{e^{x}}{1}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 2 : BH."
-   },
-   {
-    "blocs": [
-     {
-      "html": "\\(e^{x} \\to +\\infty\\) et \\(\\frac{e^{x}}{1} \\to \\dfrac{+\\infty}{1} = +\\infty\\).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "tex": "\\lim_{x\\to +\\infty} \\frac{e^{x} - 1}{x} = +\\infty",
-      "type": "resultat_lim"
-     },
-     {
-      "html": "La calculatrice avait bien « deviné » : le calcul le confirme.",
-      "style": "confirme",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 3 : on remplace."
    },
    {
     "badge": "limite",
@@ -523,10 +411,104 @@
     "titre": "Étape 3 : on remplace."
    },
    {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\displaystyle\\lim_{x\\to +\\infty} \\frac{e^{x} - 1}{x}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "html": "Haut : \\(e^{x} - 1 \\to +\\infty\\). Bas : \\(x \\to +\\infty\\). Forme \\(\\dfrac{+\\infty}{+\\infty}\\) : <span class=\"ind\">indéterminée</span>.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "genre": "prediction",
+      "lignes": [
+       "Ici, le podium <b>ne peut pas aider</b> : il n'y a pas de « course » entre une exponentielle, une puissance et un logarithme qui partent vers l'infini.",
+       "Pour prédire, on utilise la calculatrice (tableau ci-dessous)."
+      ],
+      "titre": "Prédiction avec la règle du podium",
+      "type": "encadre"
+     },
+     {
+      "expr": "\\frac{e^{x} - 1}{x}",
+      "fs": [
+       "1{,}7183",
+       "2202{,}5466",
+       "2{,}43 \\cdot 10^{7}",
+       "1{,}04 \\cdot 10^{20}",
+       "2{,}69 \\cdot 10^{41}"
+      ],
+      "type": "valeurs",
+      "xs": [
+       "1",
+       "10",
+       "20",
+       "50",
+       "100"
+      ]
+     },
+     {
+      "html": "<i>La calculatrice ne prouve rien : c'est le calcul qui suit qui donne la réponse sûre.</i>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "blocs": [
+     {
+      "bas": "x",
+      "dbas": "1",
+      "dhaut": "e^{x}",
+      "haut": "e^{x} - 1",
+      "type": "bh"
+     },
+     {
+      "html": "\\[\\lim_{x\\to +\\infty} \\frac{e^{x} - 1}{x} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{e^{x}}{1}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2 : BH."
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(e^{x} \\to +\\infty\\) et \\(\\frac{e^{x}}{1} \\to \\dfrac{+\\infty}{1} = +\\infty\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "\\lim_{x\\to +\\infty} \\frac{e^{x} - 1}{x} = +\\infty",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "La calculatrice avait bien « deviné » : le calcul le confirme.",
+      "style": "confirme",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3 : on remplace."
+   },
+   {
     "blocs": [
      {
       "items": [
-       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)",
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\), graphe au-dessus",
        "Trou en \\((0\\,;\\,1)\\) : f n'est pas définie en \\(x = 0\\), mais \\(f(x) \\to 1\\) (pas une asymptote verticale)"
       ],
       "style": "bilan",
@@ -595,112 +577,13 @@
       "type": "resultat_lim"
      },
      {
-      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\) (à gauche). \\(f(x) \\to 0^{+}\\) : le graphe est au-dessus.",
       "style": "etape",
       "type": "texte"
      }
     ],
     "style": "normal",
     "titre": "Étape 2 : on conclut directement."
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\displaystyle\\lim_{x\\to +\\infty} \\frac{e^{x} - e^{2}}{x - 2}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to +\\infty"
-   },
-   {
-    "blocs": [
-     {
-      "html": "Haut : \\(e^{x} - e^{2} \\to +\\infty\\). Bas : \\(x - 2 \\to +\\infty\\). Forme \\(\\dfrac{+\\infty}{+\\infty}\\) : <span class=\"ind\">indéterminée</span>.",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "genre": "prediction",
-      "lignes": [
-       "Ici, le podium <b>ne peut pas aider</b> : il n'y a pas de « course » entre une exponentielle, une puissance et un logarithme qui partent vers l'infini.",
-       "Pour prédire, on utilise la calculatrice (tableau ci-dessous)."
-      ],
-      "titre": "Prédiction avec la règle du podium",
-      "type": "encadre"
-     },
-     {
-      "expr": "\\frac{e^{x} - e^{2}}{x - 2}",
-      "fs": [
-       "4{,}6708",
-       "2752{,}3846",
-       "2{,}70 \\cdot 10^{7}",
-       "1{,}08 \\cdot 10^{20}",
-       "2{,}74 \\cdot 10^{41}"
-      ],
-      "type": "valeurs",
-      "xs": [
-       "1",
-       "10",
-       "20",
-       "50",
-       "100"
-      ]
-     },
-     {
-      "html": "<i>La calculatrice ne prouve rien : c'est le calcul qui suit qui donne la réponse sûre.</i>",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 1 : on remplace."
-   },
-   {
-    "blocs": [
-     {
-      "html": "Pour dériver \\(e^{2}\\), on utilise \\(\\left(e^{u}\\right)' = u'e^{u}\\) avec \\(u = 2\\), \\(u' = 0\\).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "bas": "x - 2",
-      "dbas": "1",
-      "dhaut": "e^{x}",
-      "haut": "e^{x} - e^{2}",
-      "type": "bh"
-     },
-     {
-      "html": "\\[\\lim_{x\\to +\\infty} \\frac{e^{x} - e^{2}}{x - 2} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{e^{x}}{1}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 2 : BH."
-   },
-   {
-    "blocs": [
-     {
-      "html": "\\(e^{x} \\to +\\infty\\) et \\(\\frac{e^{x}}{1} \\to \\dfrac{+\\infty}{1} = +\\infty\\).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "tex": "\\lim_{x\\to +\\infty} \\frac{e^{x} - e^{2}}{x - 2} = +\\infty",
-      "type": "resultat_lim"
-     },
-     {
-      "html": "La calculatrice avait bien « deviné » : le calcul le confirme.",
-      "style": "confirme",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 3 : on remplace."
    },
    {
     "badge": "limite",
@@ -906,10 +789,109 @@
     "titre": "Étape 3 : on remplace."
    },
    {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\displaystyle\\lim_{x\\to +\\infty} \\frac{e^{x} - e^{2}}{x - 2}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "html": "Haut : \\(e^{x} - e^{2} \\to +\\infty\\). Bas : \\(x - 2 \\to +\\infty\\). Forme \\(\\dfrac{+\\infty}{+\\infty}\\) : <span class=\"ind\">indéterminée</span>.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "genre": "prediction",
+      "lignes": [
+       "Ici, le podium <b>ne peut pas aider</b> : il n'y a pas de « course » entre une exponentielle, une puissance et un logarithme qui partent vers l'infini.",
+       "Pour prédire, on utilise la calculatrice (tableau ci-dessous)."
+      ],
+      "titre": "Prédiction avec la règle du podium",
+      "type": "encadre"
+     },
+     {
+      "expr": "\\frac{e^{x} - e^{2}}{x - 2}",
+      "fs": [
+       "4{,}6708",
+       "2752{,}3846",
+       "2{,}70 \\cdot 10^{7}",
+       "1{,}08 \\cdot 10^{20}",
+       "2{,}74 \\cdot 10^{41}"
+      ],
+      "type": "valeurs",
+      "xs": [
+       "1",
+       "10",
+       "20",
+       "50",
+       "100"
+      ]
+     },
+     {
+      "html": "<i>La calculatrice ne prouve rien : c'est le calcul qui suit qui donne la réponse sûre.</i>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "blocs": [
+     {
+      "html": "Pour dériver \\(e^{2}\\), on utilise \\(\\left(e^{u}\\right)' = u'e^{u}\\) avec \\(u = 2\\), \\(u' = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "bas": "x - 2",
+      "dbas": "1",
+      "dhaut": "e^{x}",
+      "haut": "e^{x} - e^{2}",
+      "type": "bh"
+     },
+     {
+      "html": "\\[\\lim_{x\\to +\\infty} \\frac{e^{x} - e^{2}}{x - 2} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{e^{x}}{1}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2 : BH."
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(e^{x} \\to +\\infty\\) et \\(\\frac{e^{x}}{1} \\to \\dfrac{+\\infty}{1} = +\\infty\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "\\lim_{x\\to +\\infty} \\frac{e^{x} - e^{2}}{x - 2} = +\\infty",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "La calculatrice avait bien « deviné » : le calcul le confirme.",
+      "style": "confirme",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3 : on remplace."
+   },
+   {
     "blocs": [
      {
       "items": [
-       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)",
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\), graphe au-dessus",
        "Trou en \\((2\\,;\\,e^{2})\\) : f n'est pas définie en \\(x = 2\\), mais \\(f(x) \\to e^{2}\\) (pas une asymptote verticale)"
       ],
       "style": "bilan",
@@ -985,116 +967,6 @@
     ],
     "style": "normal",
     "titre": "Étape 2 : on conclut directement."
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\displaystyle\\lim_{x\\to +\\infty} \\frac{\\ln(x) - 1}{x - e}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to +\\infty"
-   },
-   {
-    "blocs": [
-     {
-      "html": "Haut : \\(\\ln(x) - 1 \\to +\\infty\\). Bas : \\(x - e \\to +\\infty\\). Forme \\(\\dfrac{+\\infty}{+\\infty}\\) : <span class=\"ind\">indéterminée</span>.",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "genre": "prediction",
-      "lignes": [
-       "Ici, le podium <b>ne peut pas aider</b> : il n'y a pas de « course » entre une exponentielle, une puissance et un logarithme qui partent vers l'infini.",
-       "Pour prédire, on utilise la calculatrice (tableau ci-dessous)."
-      ],
-      "titre": "Prédiction avec la règle du podium",
-      "type": "encadre"
-     },
-     {
-      "expr": "\\frac{\\ln(x) - 1}{x - e}",
-      "fs": [
-       "0{,}5820",
-       "0{,}1789",
-       "0{,}1155",
-       "0{,}0616",
-       "0{,}0371"
-      ],
-      "type": "valeurs",
-      "xs": [
-       "1",
-       "10",
-       "20",
-       "50",
-       "100"
-      ]
-     },
-     {
-      "html": "<i>La calculatrice ne prouve rien : c'est le calcul qui suit qui donne la réponse sûre.</i>",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 1 : on remplace."
-   },
-   {
-    "blocs": [
-     {
-      "bas": "x - e",
-      "dbas": "1",
-      "dhaut": "\\frac{1}{x}",
-      "haut": "\\ln(x) - 1",
-      "type": "bh"
-     },
-     {
-      "html": "\\[\\lim_{x\\to +\\infty} \\frac{\\ln(x) - 1}{x - e} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{\\frac{1}{x}}{1}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 2 : BH."
-   },
-   {
-    "blocs": [
-     {
-      "html": "Diviser par une fraction, c'est multiplier par son inverse :",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\frac{\\frac{1}{x}}{1} = \\frac{1}{x} \\cdot 1 = \\frac{1}{x}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 3 : on simplifie."
-   },
-   {
-    "blocs": [
-     {
-      "html": "\\(x \\to +\\infty\\) et \\(\\frac{1}{x} \\to \\dfrac{1}{+\\infty} = 0^{+}\\).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "tex": "\\lim_{x\\to +\\infty} \\frac{\\ln(x) - 1}{x - e} = 0^{+}",
-      "type": "resultat_lim"
-     },
-     {
-      "html": "Asymptote horizontale : \\(y = 0\\).",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 4 : on remplace."
    },
    {
     "badge": "limite",
@@ -1322,12 +1194,122 @@
     "titre": "Étape 4 : on remplace."
    },
    {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\displaystyle\\lim_{x\\to +\\infty} \\frac{\\ln(x) - 1}{x - e}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "html": "Haut : \\(\\ln(x) - 1 \\to +\\infty\\). Bas : \\(x - e \\to +\\infty\\). Forme \\(\\dfrac{+\\infty}{+\\infty}\\) : <span class=\"ind\">indéterminée</span>.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "genre": "prediction",
+      "lignes": [
+       "Ici, le podium <b>ne peut pas aider</b> : il n'y a pas de « course » entre une exponentielle, une puissance et un logarithme qui partent vers l'infini.",
+       "Pour prédire, on utilise la calculatrice (tableau ci-dessous)."
+      ],
+      "titre": "Prédiction avec la règle du podium",
+      "type": "encadre"
+     },
+     {
+      "expr": "\\frac{\\ln(x) - 1}{x - e}",
+      "fs": [
+       "0{,}5820",
+       "0{,}1789",
+       "0{,}1155",
+       "0{,}0616",
+       "0{,}0371"
+      ],
+      "type": "valeurs",
+      "xs": [
+       "1",
+       "10",
+       "20",
+       "50",
+       "100"
+      ]
+     },
+     {
+      "html": "<i>La calculatrice ne prouve rien : c'est le calcul qui suit qui donne la réponse sûre.</i>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "blocs": [
+     {
+      "bas": "x - e",
+      "dbas": "1",
+      "dhaut": "\\frac{1}{x}",
+      "haut": "\\ln(x) - 1",
+      "type": "bh"
+     },
+     {
+      "html": "\\[\\lim_{x\\to +\\infty} \\frac{\\ln(x) - 1}{x - e} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{\\frac{1}{x}}{1}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2 : BH."
+   },
+   {
+    "blocs": [
+     {
+      "html": "Diviser par une fraction, c'est multiplier par son inverse :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\frac{\\frac{1}{x}}{1} = \\frac{1}{x} \\cdot 1 = \\frac{1}{x}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3 : on simplifie."
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(x \\to +\\infty\\) et \\(\\frac{1}{x} \\to \\dfrac{1}{+\\infty} = 0^{+}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "\\lim_{x\\to +\\infty} \\frac{\\ln(x) - 1}{x - e} = 0^{+}",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\) (à droite). \\(f(x) \\to 0^{+}\\) : le graphe est au-dessus.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4 : on remplace."
+   },
+   {
     "blocs": [
      {
       "items": [
        "Asymptote verticale : \\(x = 0\\) (\\(\\lim_{x\\to 0^+} f(x) = +\\infty\\))",
-       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)",
-       "Trou en \\((e\\,;\\,e^{-1})\\) : f n'est pas définie en \\(x = e\\), mais \\(f(x) \\to e^{-1}\\) (pas une asymptote verticale)"
+       "Trou en \\((e\\,;\\,e^{-1})\\) : f n'est pas définie en \\(x = e\\), mais \\(f(x) \\to e^{-1}\\) (pas une asymptote verticale)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\), graphe au-dessus"
       ],
       "style": "bilan",
       "type": "liste"
@@ -1451,94 +1433,6 @@
     "badge": "limite",
     "blocs": [
      {
-      "html": "\\[\\displaystyle\\lim_{x\\to +\\infty} \\frac{\\ln(x) - 2}{\\ln(x) - 1}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to +\\infty"
-   },
-   {
-    "blocs": [
-     {
-      "html": "Haut : \\(\\ln(x) - 2 \\to +\\infty\\). Bas : \\(\\ln(x) - 1 \\to +\\infty\\). Forme \\(\\dfrac{+\\infty}{+\\infty}\\) : <span class=\"ind\">indéterminée</span>.",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "genre": "prediction",
-      "lignes": [
-       "Ici, le podium <b>ne peut pas aider</b> : il n'y a pas de « course » entre une exponentielle, une puissance et un logarithme qui partent vers l'infini.",
-       "Pour prédire, on utilise la calculatrice (tableau ci-dessous)."
-      ],
-      "titre": "Prédiction avec la règle du podium",
-      "type": "encadre"
-     },
-     {
-      "expr": "\\frac{\\ln(x) - 2}{\\ln(x) - 1}",
-      "fs": [
-       "\\approx 2",
-       "0{,}2323",
-       "0{,}4989",
-       "0{,}6566",
-       "0{,}7226"
-      ],
-      "type": "valeurs",
-      "xs": [
-       "1",
-       "10",
-       "20",
-       "50",
-       "100"
-      ]
-     },
-     {
-      "html": "<i>La calculatrice ne prouve rien : c'est le calcul qui suit qui donne la réponse sûre.</i>",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 1 : on remplace."
-   },
-   {
-    "blocs": [
-     {
-      "bas": "\\ln(x) - 1",
-      "dbas": "\\frac{1}{x}",
-      "dhaut": "\\frac{1}{x}",
-      "haut": "\\ln(x) - 2",
-      "type": "bh"
-     },
-     {
-      "html": "\\[\\lim_{x\\to +\\infty} \\frac{\\ln(x) - 2}{\\ln(x) - 1} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{\\frac{1}{x}}{\\frac{1}{x}} = 1\\]",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "(Les deux \\(\\frac{1}{x}\\) se simplifient.)",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "tex": "\\lim_{x\\to +\\infty} \\frac{\\ln(x) - 2}{\\ln(x) - 1} = 1",
-      "type": "resultat_lim"
-     },
-     {
-      "html": "Asymptote horizontale : \\(y = 1\\).",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 2 : BH."
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
       "html": "\\[\\displaystyle\\lim_{x\\to {e}^{-}} \\frac{\\ln(x) - 2}{\\ln(x) - 1}\\]",
       "style": "etape",
       "type": "texte"
@@ -1619,12 +1513,100 @@
     "titre": "Étape 2 : on conclut directement."
    },
    {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\displaystyle\\lim_{x\\to +\\infty} \\frac{\\ln(x) - 2}{\\ln(x) - 1}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "html": "Haut : \\(\\ln(x) - 2 \\to +\\infty\\). Bas : \\(\\ln(x) - 1 \\to +\\infty\\). Forme \\(\\dfrac{+\\infty}{+\\infty}\\) : <span class=\"ind\">indéterminée</span>.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "genre": "prediction",
+      "lignes": [
+       "Ici, le podium <b>ne peut pas aider</b> : il n'y a pas de « course » entre une exponentielle, une puissance et un logarithme qui partent vers l'infini.",
+       "Pour prédire, on utilise la calculatrice (tableau ci-dessous)."
+      ],
+      "titre": "Prédiction avec la règle du podium",
+      "type": "encadre"
+     },
+     {
+      "expr": "\\frac{\\ln(x) - 2}{\\ln(x) - 1}",
+      "fs": [
+       "\\approx 2",
+       "0{,}2323",
+       "0{,}4989",
+       "0{,}6566",
+       "0{,}7226"
+      ],
+      "type": "valeurs",
+      "xs": [
+       "1",
+       "10",
+       "20",
+       "50",
+       "100"
+      ]
+     },
+     {
+      "html": "<i>La calculatrice ne prouve rien : c'est le calcul qui suit qui donne la réponse sûre.</i>",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "blocs": [
+     {
+      "bas": "\\ln(x) - 1",
+      "dbas": "\\frac{1}{x}",
+      "dhaut": "\\frac{1}{x}",
+      "haut": "\\ln(x) - 2",
+      "type": "bh"
+     },
+     {
+      "html": "\\[\\lim_{x\\to +\\infty} \\frac{\\ln(x) - 2}{\\ln(x) - 1} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{\\frac{1}{x}}{\\frac{1}{x}} = 1\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "(Les deux \\(\\frac{1}{x}\\) se simplifient.)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "\\lim_{x\\to +\\infty} \\frac{\\ln(x) - 2}{\\ln(x) - 1} = 1",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 1\\) (à droite).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2 : BH."
+   },
+   {
     "blocs": [
      {
       "items": [
        "Bord du graphe : f n'est pas définie en \\(x = 0\\), mais \\(f(x) \\to 1\\) ; le graphe s'arrête au point \\((0\\,;\\,1)\\), qui n'en fait pas partie (pas une asymptote verticale)",
-       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 1\\)",
-       "Asymptote verticale : \\(x = e\\) (\\(\\lim_{x\\to e^-} f(x) = +\\infty\\) ; \\(\\lim_{x\\to e^+} f(x) = -\\infty\\))"
+       "Asymptote verticale : \\(x = e\\) (\\(\\lim_{x\\to e^-} f(x) = +\\infty\\) ; \\(\\lim_{x\\to e^+} f(x) = -\\infty\\))",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 1\\)"
       ],
       "style": "bilan",
       "type": "liste"
@@ -1683,6 +1665,24 @@
     "badge": "limite",
     "blocs": [
      {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 1} \\frac{x^{2} - 1}{x - 1} &= \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 1} \\dfrac{\\left(x + 1\\right)\\,\\cancel{\\left(x - 1\\right)}}{\\cancel{\\left(x - 1\\right)}} \\qquad \\left(\\text{on factorise par } \\left(x - 1\\right)\\right) \\\\ &= \\lim_{x\\to 1} \\left(x + 1\\right) = 1 + 1 = 2 \\qquad \\left(\\text{on simplifie}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Limite finie : pas d'asymptote verticale, trou dans le graphique en \\((1\\,;\\,2)\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 1"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
       "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x^{2} - 1}{x - 1} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{x\\,\\left(1 - \\frac{1}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{x\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{1 - \\frac{1}{x}} = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty\\end{aligned}\\]",
       "style": "etape",
       "type": "texte"
@@ -1703,30 +1703,12 @@
     "titre_tex": "x \\to +\\infty"
    },
    {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to 1} \\frac{x^{2} - 1}{x - 1} &= \\text{« }\\dfrac{0}{0}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to 1} \\dfrac{\\left(x + 1\\right)\\,\\cancel{\\left(x - 1\\right)}}{\\cancel{\\left(x - 1\\right)}} \\qquad \\left(\\text{on factorise par } \\left(x - 1\\right)\\right) \\\\ &= \\lim_{x\\to 1} \\left(x + 1\\right) = 1 + 1 = 2 \\qquad \\left(\\text{on simplifie}\\right)\\end{aligned}\\]",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "Limite finie : pas d'asymptote verticale, trou dans le graphique en \\((1\\,;\\,2)\\).",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to 1"
-   },
-   {
     "blocs": [
      {
       "items": [
        "Asymptote oblique (\\(x \\to -\\infty\\)) : \\(y = x + 1\\)",
-       "Asymptote oblique (\\(x \\to +\\infty\\)) : \\(y = x + 1\\)",
-       "Trou en \\((1\\,;\\,2)\\) : f n'est pas définie en \\(x = 1\\), mais \\(f(x) \\to 2\\) (pas une asymptote verticale)"
+       "Trou en \\((1\\,;\\,2)\\) : f n'est pas définie en \\(x = 1\\), mais \\(f(x) \\to 2\\) (pas une asymptote verticale)",
+       "Asymptote oblique (\\(x \\to +\\infty\\)) : \\(y = x + 1\\)"
       ],
       "style": "bilan",
       "type": "liste"
@@ -1820,24 +1802,6 @@
     "badge": "limite",
     "blocs": [
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x^{2} - 1}{x - 3} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{x\\,\\left(1 - \\frac{3}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{x\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{1 - \\frac{3}{x}} = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty\\end{aligned}\\]",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "Même division : \\(f(x) - \\left(x + 3\\right) = \\dfrac{8}{x - 3}\\) tend vers \\(0\\) : asymptote oblique \\(y = x + 3\\) ; \\(\\dfrac{8}{x - 3} > 0\\) pour \\(x > 3\\) : la courbe est au-dessus de l'asymptote.",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to +\\infty"
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
       "html": "\\[\\begin{aligned}\\lim_{x\\to 3^{-}} \\frac{x^{2} - 1}{x - 3} = \\text{« }\\dfrac{8}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x - 3 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "style": "etape",
       "type": "texte"
@@ -1858,12 +1822,30 @@
     "titre_tex": "x \\to 3"
    },
    {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x^{2} - 1}{x - 3} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{x\\,\\left(1 - \\frac{3}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{x\\,\\left(1 - \\frac{1}{x^{2}}\\right)}{1 - \\frac{3}{x}} = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Même division : \\(f(x) - \\left(x + 3\\right) = \\dfrac{8}{x - 3}\\) tend vers \\(0\\) : asymptote oblique \\(y = x + 3\\) ; \\(\\dfrac{8}{x - 3} > 0\\) pour \\(x > 3\\) : la courbe est au-dessus de l'asymptote.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
     "blocs": [
      {
       "items": [
        "Asymptote oblique (\\(x \\to -\\infty\\)) : \\(y = x + 3\\)",
-       "Asymptote oblique (\\(x \\to +\\infty\\)) : \\(y = x + 3\\)",
-       "Asymptote verticale : \\(x = 3\\) (\\(\\lim_{x\\to 3^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 3^+} f(x) = +\\infty\\))"
+       "Asymptote verticale : \\(x = 3\\) (\\(\\lim_{x\\to 3^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 3^+} f(x) = +\\infty\\))",
+       "Asymptote oblique (\\(x \\to +\\infty\\)) : \\(y = x + 3\\)"
       ],
       "style": "bilan",
       "type": "liste"
@@ -1947,24 +1929,6 @@
     "badge": "limite",
     "blocs": [
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x^{3} + 1}{x - 2} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{3}\\,\\left(1 + \\frac{1}{x^{3}}\\right)}{x\\,\\left(1 - \\frac{2}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{x^{2}\\,\\left(1 + \\frac{1}{x^{3}}\\right)}{1 - \\frac{2}{x}} = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty\\end{aligned}\\]",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "Pas d'asymptote oblique : branche parabolique.",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to +\\infty"
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
       "html": "\\[\\begin{aligned}\\lim_{x\\to 2^{-}} \\frac{x^{3} + 1}{x - 2} = \\text{« }\\dfrac{9}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x - 2 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "style": "etape",
       "type": "texte"
@@ -1985,12 +1949,30 @@
     "titre_tex": "x \\to 2"
    },
    {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x^{3} + 1}{x - 2} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{3}\\,\\left(1 + \\frac{1}{x^{3}}\\right)}{x\\,\\left(1 - \\frac{2}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{x^{2}\\,\\left(1 + \\frac{1}{x^{3}}\\right)}{1 - \\frac{2}{x}} = \\text{« }+\\infty \\cdot 1\\text{ »} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Pas d'asymptote oblique : branche parabolique.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
     "blocs": [
      {
       "items": [
        "Pas d'asymptote (\\(x \\to -\\infty\\)) — branche parabolique.",
-       "Pas d'asymptote (\\(x \\to +\\infty\\)) — branche parabolique.",
-       "Asymptote verticale : \\(x = 2\\) (\\(\\lim_{x\\to 2^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 2^+} f(x) = +\\infty\\))"
+       "Asymptote verticale : \\(x = 2\\) (\\(\\lim_{x\\to 2^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 2^+} f(x) = +\\infty\\))",
+       "Pas d'asymptote (\\(x \\to +\\infty\\)) — branche parabolique."
       ],
       "style": "bilan",
       "type": "liste"
@@ -2074,24 +2056,6 @@
     "badge": "limite",
     "blocs": [
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{1}{x - 2} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0\\end{aligned}\\]",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale : \\(y = 0\\).",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to +\\infty"
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
       "html": "\\[\\begin{aligned}\\lim_{x\\to 2^{-}} \\frac{1}{x - 2} = \\text{« }\\dfrac{1}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x - 2 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "style": "etape",
       "type": "texte"
@@ -2112,12 +2076,30 @@
     "titre_tex": "x \\to 2"
    },
    {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{1}{x - 2} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
     "blocs": [
      {
       "items": [
        "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)",
-       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)",
-       "Asymptote verticale : \\(x = 2\\) (\\(\\lim_{x\\to 2^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 2^+} f(x) = +\\infty\\))"
+       "Asymptote verticale : \\(x = 2\\) (\\(\\lim_{x\\to 2^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 2^+} f(x) = +\\infty\\))",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)"
       ],
       "style": "bilan",
       "type": "liste"
@@ -2186,7 +2168,7 @@
     "badge": "limite",
     "blocs": [
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{1}{x^{2} - 2} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0\\end{aligned}\\]",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to \\pm\\infty} \\frac{1}{x^{2} - 2} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0\\end{aligned}\\]",
       "style": "etape",
       "type": "texte"
      },
@@ -2198,25 +2180,7 @@
     ],
     "style": "normal",
     "titre": "Limite",
-    "titre_tex": "x \\to -\\infty"
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{1}{x^{2} - 2} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0\\end{aligned}\\]",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale : \\(y = 0\\).",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to +\\infty"
+    "titre_tex": "x \\to \\pm\\infty"
    },
    {
     "badge": "limite",
@@ -2269,9 +2233,9 @@
      {
       "items": [
        "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)",
-       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)",
        "Asymptote verticale : \\(x = -\\sqrt{2}\\) (\\(\\lim_{x\\to -\\sqrt{2}^-} f(x) = +\\infty\\) ; \\(\\lim_{x\\to -\\sqrt{2}^+} f(x) = -\\infty\\))",
-       "Asymptote verticale : \\(x = \\sqrt{2}\\) (\\(\\lim_{x\\to \\sqrt{2}^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to \\sqrt{2}^+} f(x) = +\\infty\\))"
+       "Asymptote verticale : \\(x = \\sqrt{2}\\) (\\(\\lim_{x\\to \\sqrt{2}^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to \\sqrt{2}^+} f(x) = +\\infty\\))",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)"
       ],
       "style": "bilan",
       "type": "liste"
@@ -2337,7 +2301,7 @@
     "badge": "limite",
     "blocs": [
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to -\\infty} \\frac{1}{x^{2}} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0\\end{aligned}\\]",
+      "html": "\\[\\begin{aligned}\\lim_{x\\to \\pm\\infty} \\frac{1}{x^{2}} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0\\end{aligned}\\]",
       "style": "etape",
       "type": "texte"
      },
@@ -2349,25 +2313,7 @@
     ],
     "style": "normal",
     "titre": "Limite",
-    "titre_tex": "x \\to -\\infty"
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{1}{x^{2}} = \\text{« }\\dfrac{1}{+\\infty}\\text{ »} = 0\\end{aligned}\\]",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale : \\(y = 0\\).",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to +\\infty"
+    "titre_tex": "x \\to \\pm\\infty"
    },
    {
     "badge": "limite",
@@ -2392,8 +2338,8 @@
      {
       "items": [
        "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)",
-       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)",
-       "Asymptote verticale : \\(x = 0\\) (\\(\\lim_{x\\to 0^-} f(x) = +\\infty\\) ; \\(\\lim_{x\\to 0^+} f(x) = +\\infty\\))"
+       "Asymptote verticale : \\(x = 0\\) (\\(\\lim_{x\\to 0^-} f(x) = +\\infty\\) ; \\(\\lim_{x\\to 0^+} f(x) = +\\infty\\))",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)"
       ],
       "style": "bilan",
       "type": "liste"
@@ -2480,13 +2426,94 @@
       "type": "texte"
      },
      {
-      "html": "Asymptote horizontale : \\(y = e^{3}\\).",
+      "html": "Asymptote horizontale : \\(y = e^{3}\\) (à gauche).",
       "style": "etape",
       "type": "texte"
      }
     ],
     "style": "normal",
     "titre": "Étape 2 : on applique l'exponentielle."
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\displaystyle\\lim_{x\\to 2^{-}} e^{\\frac{3x + 4}{x - 2}}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 2"
+   },
+   {
+    "blocs": [
+     {
+      "html": "Haut de l'exposant : \\(3x + 4 \\to 3 \\cdot 2 + 4 = 10\\) (pas 0, donc pas indéterminée).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Bas de l'exposant : \\(x - 2 \\to 0\\) ; avec \\(x = 1{,}99\\) : \\(1{,}99 - 2 = -0{,}01 < 0\\), donc \\(0^{-}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Exposant : \\(\\frac{3x + 4}{x - 2} \\to \\dfrac{10}{0^{-}} = -\\infty\\). Donc \\(e^{\\frac{3x + 4}{x - 2}} \\to e^{-\\infty} = 0^{+}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "\\lim_{x\\to 2^{-}} e^{\\frac{3x + 4}{x - 2}} = 0^{+}",
+      "type": "resultat_lim"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\displaystyle\\lim_{x\\to 2^{+}} e^{\\frac{3x + 4}{x - 2}}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 2"
+   },
+   {
+    "blocs": [
+     {
+      "html": "Haut de l'exposant : \\(3x + 4 \\to 3 \\cdot 2 + 4 = 10\\) (pas 0, donc pas indéterminée).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Bas de l'exposant : \\(x - 2 \\to 0\\) ; avec \\(x = 2{,}01\\) : \\(2{,}01 - 2 = 0{,}01 > 0\\), donc \\(0^{+}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Exposant : \\(\\frac{3x + 4}{x - 2} \\to \\dfrac{10}{0^{+}} = +\\infty\\). Donc \\(e^{\\frac{3x + 4}{x - 2}} \\to e^{+\\infty} = +\\infty\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "\\lim_{x\\to 2^{+}} e^{\\frac{3x + 4}{x - 2}} = +\\infty",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 2\\), seulement du côté droit. À gauche, \\(f(x) \\to 0^{+}\\) : le graphe s'approche du point \\((2\\,;\\,0)\\), qui n'appartient pas au graphe (rond vide).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1 : on remplace."
    },
    {
     "badge": "limite",
@@ -2543,7 +2570,7 @@
       "type": "texte"
      },
      {
-      "html": "Asymptote horizontale : \\(y = e^{3}\\).",
+      "html": "Asymptote horizontale : \\(y = e^{3}\\) (à droite).",
       "style": "etape",
       "type": "texte"
      }
@@ -2552,73 +2579,12 @@
     "titre": "Étape 2 : on applique l'exponentielle."
    },
    {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\displaystyle\\lim_{x\\to 2^{-}} e^{\\frac{3x + 4}{x - 2}}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to 2"
-   },
-   {
-    "blocs": [
-     {
-      "html": "Exposant : \\(\\frac{3x + 4}{x - 2} \\to \\dfrac{10}{0^{-}} = -\\infty\\). Donc \\(e^{\\frac{3x + 4}{x - 2}} \\to e^{-\\infty} = 0^{+}\\).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "tex": "\\lim_{x\\to 2^{-}} e^{\\frac{3x + 4}{x - 2}} = 0^{+}",
-      "type": "resultat_lim"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 1 : on remplace."
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\displaystyle\\lim_{x\\to 2^{+}} e^{\\frac{3x + 4}{x - 2}}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to 2"
-   },
-   {
-    "blocs": [
-     {
-      "html": "Exposant : \\(\\frac{3x + 4}{x - 2} \\to \\dfrac{10}{0^{+}} = +\\infty\\). Donc \\(e^{\\frac{3x + 4}{x - 2}} \\to e^{+\\infty} = +\\infty\\).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "tex": "\\lim_{x\\to 2^{+}} e^{\\frac{3x + 4}{x - 2}} = +\\infty",
-      "type": "resultat_lim"
-     },
-     {
-      "html": "Asymptote verticale : \\(x = 2\\) (du côté droit) ; à gauche, \\(f(x) \\to 0\\).",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 1 : on remplace."
-   },
-   {
     "blocs": [
      {
       "items": [
        "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = e^{3}\\)",
-       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = e^{3}\\)",
-       "Asymptote verticale : \\(x = 2\\) (\\(\\lim_{x\\to 2^-} f(x) = 0\\) ; \\(\\lim_{x\\to 2^+} f(x) = +\\infty\\))"
+       "Asymptote verticale : \\(x = 2\\) (\\(\\lim_{x\\to 2^-} f(x) = 0^{+}\\) ; \\(\\lim_{x\\to 2^+} f(x) = +\\infty\\))",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = e^{3}\\)"
       ],
       "style": "bilan",
       "type": "liste"
@@ -2686,51 +2652,7 @@
       "type": "resultat_lim"
      },
      {
-      "html": "Asymptote horizontale : \\(y = 0\\).",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 2 : on conclut directement."
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\displaystyle\\lim_{x\\to +\\infty} \\frac{e^{\\frac{-1}{x}}}{x}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to +\\infty"
-   },
-   {
-    "blocs": [
-     {
-      "html": "Haut : \\(-\\frac{1}{x} \\to 0^{-}\\text{, donc }e^{-\\frac{1}{x}} \\to 1\\). Bas : \\(x \\to +\\infty\\). Forme \\(\\dfrac{1}{+\\infty}\\) : <span class=\"det\">pas indéterminée</span>!",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 1 : on remplace."
-   },
-   {
-    "blocs": [
-     {
-      "html": "On conclut avec les règles de calcul :",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "tex": "\\lim_{x\\to +\\infty} \\frac{e^{-\\frac{1}{x}}}{x} = \\dfrac{1}{+\\infty} = 0^{+}",
-      "type": "resultat_lim"
-     },
-     {
-      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\) (à gauche). \\(f(x) \\to 0^{-}\\) : le graphe est au-dessous.",
       "style": "etape",
       "type": "texte"
      }
@@ -2895,7 +2817,7 @@
       "type": "texte"
      },
      {
-      "html": "Asymptote verticale : \\(x = 0\\) (du côté gauche) ; à droite, \\(f(x) \\to 0\\).",
+      "html": "Asymptote verticale : \\(x = 0\\), seulement du côté gauche. À droite, \\(f(x) \\to 0^{+}\\) : le graphe s'approche du point \\((0\\,;\\,0)\\), qui n'appartient pas au graphe (rond vide).",
       "style": "etape",
       "type": "texte"
      }
@@ -2904,12 +2826,56 @@
     "titre": "Étape 4 : on remplace."
    },
    {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\displaystyle\\lim_{x\\to +\\infty} \\frac{e^{\\frac{-1}{x}}}{x}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "html": "Haut : \\(-\\frac{1}{x} \\to 0^{-}\\text{, donc }e^{-\\frac{1}{x}} \\to 1\\). Bas : \\(x \\to +\\infty\\). Forme \\(\\dfrac{1}{+\\infty}\\) : <span class=\"det\">pas indéterminée</span>!",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "blocs": [
+     {
+      "html": "On conclut avec les règles de calcul :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "\\lim_{x\\to +\\infty} \\frac{e^{-\\frac{1}{x}}}{x} = \\dfrac{1}{+\\infty} = 0^{+}",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\) (à droite). \\(f(x) \\to 0^{+}\\) : le graphe est au-dessus.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2 : on conclut directement."
+   },
+   {
     "blocs": [
      {
       "items": [
-       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)",
-       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)",
-       "Asymptote verticale : \\(x = 0\\) (\\(\\lim_{x\\to 0^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 0^+} f(x) = 0\\))"
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\), graphe au-dessous",
+       "Asymptote verticale : \\(x = 0\\) (\\(\\lim_{x\\to 0^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 0^+} f(x) = 0^{+}\\))",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\), graphe au-dessus"
       ],
       "style": "bilan",
       "type": "liste"
@@ -2997,71 +2963,7 @@
       "type": "texte"
      },
      {
-      "html": "Asymptote horizontale : \\(y = 1\\).",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 2 : on applique l'exponentielle."
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\displaystyle\\lim_{x\\to +\\infty} e^{\\frac{-2x}{x^{2} - 5}}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to +\\infty"
-   },
-   {
-    "blocs": [
-     {
-      "html": "Haut : \\(-2x \\to -\\infty\\). Bas : \\(x^{2} - 5 \\to +\\infty\\). Forme \\(\\dfrac{-\\infty}{+\\infty}\\) : <span class=\"ind\">indéterminée</span>.",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "genre": "prediction",
-      "lignes": [
-       "En haut \\(x\\), en bas \\(x^{2}\\) : la plus grande puissance est au <b>bas</b>, donc l'exposant tend vers 0.",
-       "Signe : haut < 0, bas > 0, donc \\(0^{-}\\).",
-       "<b>On s'attend à :</b> exposant \\(\\to 0^{-}\\), donc \\(e^{\\cdots} \\to e^{0} = 1\\)"
-      ],
-      "titre": "Prédiction avec la règle du podium",
-      "type": "encadre"
-     },
-     {
-      "html": "Calcul avec BH :",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\lim_{x\\to +\\infty} \\frac{-2x}{x^{2} - 5} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} -\\frac{2}{2x} = \\lim_{x\\to +\\infty} -\\frac{1}{x} = 0^{-}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 1 : limite de l'exposant, à part."
-   },
-   {
-    "blocs": [
-     {
-      "tex": "\\lim_{x\\to +\\infty} e^{\\frac{-2x}{x^{2} - 5}} = e^{0} = 1",
-      "type": "resultat_lim"
-     },
-     {
-      "html": "✓ Le calcul confirme la prédiction du podium.",
-      "style": "confirme",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale : \\(y = 1\\).",
+      "html": "Asymptote horizontale : \\(y = 1\\) (à gauche).",
       "style": "etape",
       "type": "texte"
      }
@@ -3122,7 +3024,7 @@
       "type": "resultat_lim"
      },
      {
-      "html": "Asymptote verticale : \\(x = -\\sqrt{5}\\) (du côté gauche) ; à droite, \\(f(x) \\to 0\\).",
+      "html": "Asymptote verticale : \\(x = -\\sqrt{5}\\), seulement du côté gauche. À droite, \\(f(x) \\to 0^{+}\\) : le graphe s'approche du point \\((-\\sqrt{5}\\,;\\,0)\\), qui n'appartient pas au graphe (rond vide).",
       "style": "etape",
       "type": "texte"
      }
@@ -3183,7 +3085,7 @@
       "type": "resultat_lim"
      },
      {
-      "html": "Asymptote verticale : \\(x = \\sqrt{5}\\) (du côté gauche) ; à droite, \\(f(x) \\to 0\\).",
+      "html": "Asymptote verticale : \\(x = \\sqrt{5}\\), seulement du côté gauche. À droite, \\(f(x) \\to 0^{+}\\) : le graphe s'approche du point \\((\\sqrt{5}\\,;\\,0)\\), qui n'appartient pas au graphe (rond vide).",
       "style": "etape",
       "type": "texte"
      }
@@ -3192,13 +3094,77 @@
     "titre": "Étape 1 : on remplace."
    },
    {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\displaystyle\\lim_{x\\to +\\infty} e^{\\frac{-2x}{x^{2} - 5}}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "html": "Haut : \\(-2x \\to -\\infty\\). Bas : \\(x^{2} - 5 \\to +\\infty\\). Forme \\(\\dfrac{-\\infty}{+\\infty}\\) : <span class=\"ind\">indéterminée</span>.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "genre": "prediction",
+      "lignes": [
+       "En haut \\(x\\), en bas \\(x^{2}\\) : la plus grande puissance est au <b>bas</b>, donc l'exposant tend vers 0.",
+       "Signe : haut < 0, bas > 0, donc \\(0^{-}\\).",
+       "<b>On s'attend à :</b> exposant \\(\\to 0^{-}\\), donc \\(e^{\\cdots} \\to e^{0} = 1\\)"
+      ],
+      "titre": "Prédiction avec la règle du podium",
+      "type": "encadre"
+     },
+     {
+      "html": "Calcul avec BH :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\lim_{x\\to +\\infty} \\frac{-2x}{x^{2} - 5} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} -\\frac{2}{2x} = \\lim_{x\\to +\\infty} -\\frac{1}{x} = 0^{-}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1 : limite de l'exposant, à part."
+   },
+   {
+    "blocs": [
+     {
+      "tex": "\\lim_{x\\to +\\infty} e^{\\frac{-2x}{x^{2} - 5}} = e^{0} = 1",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "✓ Le calcul confirme la prédiction du podium.",
+      "style": "confirme",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 1\\) (à droite).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2 : on applique l'exponentielle."
+   },
+   {
     "blocs": [
      {
       "items": [
        "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 1\\)",
-       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 1\\)",
-       "Asymptote verticale : \\(x = -\\sqrt{5}\\) (\\(\\lim_{x\\to -\\sqrt{5}^-} f(x) = +\\infty\\) ; \\(\\lim_{x\\to -\\sqrt{5}^+} f(x) = 0\\))",
-       "Asymptote verticale : \\(x = \\sqrt{5}\\) (\\(\\lim_{x\\to \\sqrt{5}^-} f(x) = +\\infty\\) ; \\(\\lim_{x\\to \\sqrt{5}^+} f(x) = 0\\))"
+       "Asymptote verticale : \\(x = -\\sqrt{5}\\) (\\(\\lim_{x\\to -\\sqrt{5}^-} f(x) = +\\infty\\) ; \\(\\lim_{x\\to -\\sqrt{5}^+} f(x) = 0^{+}\\))",
+       "Asymptote verticale : \\(x = \\sqrt{5}\\) (\\(\\lim_{x\\to \\sqrt{5}^-} f(x) = +\\infty\\) ; \\(\\lim_{x\\to \\sqrt{5}^+} f(x) = 0^{+}\\))",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 1\\)"
       ],
       "style": "bilan",
       "type": "liste"
@@ -3407,7 +3373,7 @@
       "type": "texte"
      },
      {
-      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\) (à droite). \\(f(x) \\to 0^{+}\\) : le graphe est au-dessus.",
       "style": "etape",
       "type": "texte"
      }
@@ -3420,7 +3386,7 @@
      {
       "items": [
        "Asymptote verticale : \\(x = 0\\) (\\(\\lim_{x\\to 0^+} f(x) = -\\infty\\))",
-       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)"
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\), graphe au-dessus"
       ],
       "style": "bilan",
       "type": "liste"
@@ -3468,49 +3434,16 @@
    {
     "blocs": [
      {
-      "html": "Exposant : \\(\\frac{1}{x} \\to \\dfrac{1}{-\\infty} = 0^{-}\\). Donc \\(e^{\\frac{1}{x}} \\to e^{0^{-}} = 1\\).",
+      "html": "Exposant : \\(\\frac{1}{x} \\to \\dfrac{1}{-\\infty} = 0^{-}\\). Donc \\(e^{\\frac{1}{x}} \\to e^{0^{-}} = 1^{-}\\) (\\(e^{t} < 1\\) pour \\(t < 0\\)).",
       "style": "etape",
       "type": "texte"
      },
      {
-      "tex": "\\lim_{x\\to -\\infty} e^{\\frac{1}{x}} = 1",
+      "tex": "\\lim_{x\\to -\\infty} e^{\\frac{1}{x}} = 1^{-}",
       "type": "resultat_lim"
      },
      {
-      "html": "Asymptote horizontale : \\(y = 1\\).",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 1 : on remplace."
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\displaystyle\\lim_{x\\to +\\infty} e^{\\frac{1}{x}}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to +\\infty"
-   },
-   {
-    "blocs": [
-     {
-      "html": "Exposant : \\(\\frac{1}{x} \\to \\dfrac{1}{+\\infty} = 0^{+}\\). Donc \\(e^{\\frac{1}{x}} \\to e^{0^{+}} = 1\\).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "tex": "\\lim_{x\\to +\\infty} e^{\\frac{1}{x}} = 1",
-      "type": "resultat_lim"
-     },
-     {
-      "html": "Asymptote horizontale : \\(y = 1\\).",
+      "html": "Asymptote horizontale : \\(y = 1\\) (à gauche). \\(f(x) \\to 1^{-}\\) : le graphe est au-dessous.",
       "style": "etape",
       "type": "texte"
      }
@@ -3571,7 +3504,40 @@
       "type": "resultat_lim"
      },
      {
-      "html": "Asymptote verticale : \\(x = 0\\) (du côté droit) ; à gauche, \\(f(x) \\to 0\\).",
+      "html": "Asymptote verticale : \\(x = 0\\), seulement du côté droit. À gauche, \\(f(x) \\to 0^{+}\\) : le graphe s'approche du point \\((0\\,;\\,0)\\), qui n'appartient pas au graphe (rond vide).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\displaystyle\\lim_{x\\to +\\infty} e^{\\frac{1}{x}}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "html": "Exposant : \\(\\frac{1}{x} \\to \\dfrac{1}{+\\infty} = 0^{+}\\). Donc \\(e^{\\frac{1}{x}} \\to e^{0^{+}} = 1^{+}\\) (\\(e^{t} > 1\\) pour \\(t > 0\\)).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "\\lim_{x\\to +\\infty} e^{\\frac{1}{x}} = 1^{+}",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 1\\) (à droite). \\(f(x) \\to 1^{+}\\) : le graphe est au-dessus.",
       "style": "etape",
       "type": "texte"
      }
@@ -3583,9 +3549,9 @@
     "blocs": [
      {
       "items": [
-       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 1\\)",
-       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 1\\)",
-       "Asymptote verticale : \\(x = 0\\) (\\(\\lim_{x\\to 0^-} f(x) = 0\\) ; \\(\\lim_{x\\to 0^+} f(x) = +\\infty\\))"
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 1\\), graphe au-dessous",
+       "Asymptote verticale : \\(x = 0\\) (\\(\\lim_{x\\to 0^-} f(x) = 0^{+}\\) ; \\(\\lim_{x\\to 0^+} f(x) = +\\infty\\))",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 1\\), graphe au-dessus"
       ],
       "style": "bilan",
       "type": "liste"
@@ -3642,7 +3608,7 @@
       "type": "resultat_lim"
      },
      {
-      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\) (à gauche). \\(f(x) \\to 0^{+}\\) : le graphe est au-dessus.",
       "style": "etape",
       "type": "texte"
      }
@@ -3682,7 +3648,7 @@
     "blocs": [
      {
       "items": [
-       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)"
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\), graphe au-dessus"
       ],
       "style": "bilan",
       "type": "liste"
@@ -3751,6 +3717,89 @@
      },
      {
       "html": "Limite finie : pas d'asymptote verticale. Le graphe s'arrête au point \\((0\\,;\\,0)\\), qui n'en fait pas partie.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2 : on conclut directement."
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\displaystyle\\lim_{x\\to 1^{-}} \\frac{e^{x}}{\\ln(x)}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 1"
+   },
+   {
+    "blocs": [
+     {
+      "html": "Haut : \\(e^{x} \\to e^{1^{-}} = e\\). Bas : \\(\\ln(x) \\to 0^{-}\\). Forme \\(\\dfrac{e}{0^{-}}\\) : <span class=\"det\">pas indéterminée</span>!",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "blocs": [
+     {
+      "html": "On conclut avec les règles de calcul :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "\\lim_{x\\to 1^{-}} \\frac{e^{x}}{\\ln(x)} = \\dfrac{e}{0^{-}} = -\\infty",
+      "type": "resultat_lim"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2 : on conclut directement."
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\displaystyle\\lim_{x\\to 1^{+}} \\frac{e^{x}}{\\ln(x)}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 1"
+   },
+   {
+    "blocs": [
+     {
+      "html": "Haut : \\(e^{x} \\to e^{1^{+}} = e\\). Bas : \\(\\ln(x) \\to 0^{+}\\). Forme \\(\\dfrac{e}{0^{+}}\\) : <span class=\"det\">pas indéterminée</span>!",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "blocs": [
+     {
+      "html": "On conclut avec les règles de calcul :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "\\lim_{x\\to 1^{+}} \\frac{e^{x}}{\\ln(x)} = \\dfrac{e}{0^{+}} = +\\infty",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 1\\).",
       "style": "etape",
       "type": "texte"
      }
@@ -3847,89 +3896,6 @@
     "titre": "Étape 4 : on remplace."
    },
    {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\displaystyle\\lim_{x\\to 1^{-}} \\frac{e^{x}}{\\ln(x)}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to 1"
-   },
-   {
-    "blocs": [
-     {
-      "html": "Haut : \\(e^{x} \\to e^{1^{-}} = e\\). Bas : \\(\\ln(x) \\to 0^{-}\\). Forme \\(\\dfrac{e}{0^{-}}\\) : <span class=\"det\">pas indéterminée</span>!",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 1 : on remplace."
-   },
-   {
-    "blocs": [
-     {
-      "html": "On conclut avec les règles de calcul :",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "tex": "\\lim_{x\\to 1^{-}} \\frac{e^{x}}{\\ln(x)} = \\dfrac{e}{0^{-}} = -\\infty",
-      "type": "resultat_lim"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 2 : on conclut directement."
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\displaystyle\\lim_{x\\to 1^{+}} \\frac{e^{x}}{\\ln(x)}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to 1"
-   },
-   {
-    "blocs": [
-     {
-      "html": "Haut : \\(e^{x} \\to e^{1^{+}} = e\\). Bas : \\(\\ln(x) \\to 0^{+}\\). Forme \\(\\dfrac{e}{0^{+}}\\) : <span class=\"det\">pas indéterminée</span>!",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 1 : on remplace."
-   },
-   {
-    "blocs": [
-     {
-      "html": "On conclut avec les règles de calcul :",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "tex": "\\lim_{x\\to 1^{+}} \\frac{e^{x}}{\\ln(x)} = \\dfrac{e}{0^{+}} = +\\infty",
-      "type": "resultat_lim"
-     },
-     {
-      "html": "Asymptote verticale : \\(x = 1\\).",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 2 : on conclut directement."
-   },
-   {
     "blocs": [
      {
       "items": [
@@ -4010,85 +3976,13 @@
       "type": "encadre"
      },
      {
-      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\) (à gauche). \\(f(x) \\to 0^{-}\\) : le graphe est au-dessous.",
       "style": "etape",
       "type": "texte"
      }
     ],
     "style": "normal",
     "titre": "Étape 2 : on conclut directement."
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\displaystyle\\lim_{x\\to +\\infty} \\frac{e^{x}}{x}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to +\\infty"
-   },
-   {
-    "blocs": [
-     {
-      "html": "Haut : \\(e^{x} \\to +\\infty\\). Bas : \\(x \\to +\\infty\\). Forme \\(\\dfrac{+\\infty}{+\\infty}\\) : <span class=\"ind\">indéterminée</span>.",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "genre": "prediction",
-      "lignes": [
-       "Au haut : \\(e^{x}\\). Au bas : \\(x\\). Sur le podium, l'exponentielle bat la puissance : c'est le <b>haut</b> qui gagne, donc le quotient part vers l'infini.",
-       "Signe : haut > 0, bas > 0, donc quotient > 0.",
-       "<b>On s'attend à :</b> \\(+\\infty\\)"
-      ],
-      "titre": "Prédiction avec la règle du podium",
-      "type": "encadre"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 1 : on remplace."
-   },
-   {
-    "blocs": [
-     {
-      "bas": "x",
-      "dbas": "1",
-      "dhaut": "e^{x}",
-      "haut": "e^{x}",
-      "type": "bh"
-     },
-     {
-      "html": "\\[\\lim_{x\\to +\\infty} \\frac{e^{x}}{x} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{e^{x}}{1}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 2 : BH."
-   },
-   {
-    "blocs": [
-     {
-      "html": "\\(e^{x} \\to +\\infty\\) et \\(\\frac{e^{x}}{1} \\to \\dfrac{+\\infty}{1} = +\\infty\\).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "tex": "\\lim_{x\\to +\\infty} \\frac{e^{x}}{x} = +\\infty",
-      "type": "resultat_lim"
-     },
-     {
-      "html": "✓ Le calcul confirme la prédiction du podium.",
-      "style": "confirme",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 3 : on remplace."
    },
    {
     "badge": "limite",
@@ -4174,10 +4068,82 @@
     "titre": "Étape 2 : on conclut directement."
    },
    {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\displaystyle\\lim_{x\\to +\\infty} \\frac{e^{x}}{x}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "html": "Haut : \\(e^{x} \\to +\\infty\\). Bas : \\(x \\to +\\infty\\). Forme \\(\\dfrac{+\\infty}{+\\infty}\\) : <span class=\"ind\">indéterminée</span>.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "genre": "prediction",
+      "lignes": [
+       "Au haut : \\(e^{x}\\). Au bas : \\(x\\). Sur le podium, l'exponentielle bat la puissance : c'est le <b>haut</b> qui gagne, donc le quotient part vers l'infini.",
+       "Signe : haut > 0, bas > 0, donc quotient > 0.",
+       "<b>On s'attend à :</b> \\(+\\infty\\)"
+      ],
+      "titre": "Prédiction avec la règle du podium",
+      "type": "encadre"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "blocs": [
+     {
+      "bas": "x",
+      "dbas": "1",
+      "dhaut": "e^{x}",
+      "haut": "e^{x}",
+      "type": "bh"
+     },
+     {
+      "html": "\\[\\lim_{x\\to +\\infty} \\frac{e^{x}}{x} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{e^{x}}{1}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2 : BH."
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(e^{x} \\to +\\infty\\) et \\(\\frac{e^{x}}{1} \\to \\dfrac{+\\infty}{1} = +\\infty\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "\\lim_{x\\to +\\infty} \\frac{e^{x}}{x} = +\\infty",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "✓ Le calcul confirme la prédiction du podium.",
+      "style": "confirme",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3 : on remplace."
+   },
+   {
     "blocs": [
      {
       "items": [
-       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)",
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\), graphe au-dessous",
        "Asymptote verticale : \\(x = 0\\) (\\(\\lim_{x\\to 0^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 0^+} f(x) = +\\infty\\))"
       ],
       "style": "bilan",
@@ -4322,7 +4288,7 @@
       "type": "texte"
      },
      {
-      "html": "Asymptote horizontale : \\(y = 1\\).",
+      "html": "Asymptote horizontale : \\(y = 1\\) (à gauche).",
       "style": "etape",
       "type": "texte"
      }
@@ -4442,7 +4408,7 @@
       "type": "texte"
      },
      {
-      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\) (à droite). \\(f(x) \\to 0^{+}\\) : le graphe est au-dessus.",
       "style": "etape",
       "type": "texte"
      }
@@ -4455,7 +4421,7 @@
      {
       "items": [
        "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 1\\)",
-       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)"
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\), graphe au-dessus"
       ],
       "style": "bilan",
       "type": "liste"
@@ -4713,7 +4679,7 @@
       "type": "texte"
      },
      {
-      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\) (à droite). \\(f(x) \\to 0^{+}\\) : le graphe est au-dessus.",
       "style": "etape",
       "type": "texte"
      }
@@ -4726,7 +4692,7 @@
      {
       "items": [
        "Asymptote verticale : \\(x = 0\\) (\\(\\lim_{x\\to 0^+} f(x) = -\\infty\\))",
-       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)"
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\), graphe au-dessus"
       ],
       "style": "bilan",
       "type": "liste"
@@ -4801,104 +4767,6 @@
     ],
     "style": "normal",
     "titre": "Étape 2 : on conclut directement."
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\displaystyle\\lim_{x\\to +\\infty} \\frac{\\ln\\left(x + 1\\right)}{x}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to +\\infty"
-   },
-   {
-    "blocs": [
-     {
-      "html": "Haut : \\(x + 1 \\to +\\infty\\text{, donc }\\ln\\left(x + 1\\right) \\to +\\infty\\). Bas : \\(x \\to +\\infty\\). Forme \\(\\dfrac{+\\infty}{+\\infty}\\) : <span class=\"ind\">indéterminée</span>.",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "genre": "prediction",
-      "lignes": [
-       "Au haut : \\(\\ln\\left(x + 1\\right)\\). Au bas : \\(x\\). Sur le podium, la puissance bat le logarithme : c'est le <b>bas</b> qui gagne, donc le quotient tend vers 0.",
-       "Signe : haut > 0, bas > 0, donc quotient > 0.",
-       "<b>On s'attend à :</b> \\(0^{+}\\)"
-      ],
-      "titre": "Prédiction avec la règle du podium",
-      "type": "encadre"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 1 : on remplace."
-   },
-   {
-    "blocs": [
-     {
-      "html": "Pour dériver \\(\\ln\\left(x + 1\\right)\\), on utilise \\(\\left(\\ln u\\right)' = \\dfrac{u'}{u}\\) avec \\(u = x + 1\\) et \\(u' = 1\\).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "bas": "x",
-      "dbas": "1",
-      "dhaut": "\\frac{1}{x + 1}",
-      "haut": "\\ln\\left(x + 1\\right)",
-      "type": "bh"
-     },
-     {
-      "html": "\\[\\lim_{x\\to +\\infty} \\frac{\\ln\\left(x + 1\\right)}{x} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{\\frac{1}{x + 1}}{1}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 2 : BH."
-   },
-   {
-    "blocs": [
-     {
-      "html": "Diviser par une fraction, c'est multiplier par son inverse :",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\frac{\\frac{1}{x + 1}}{1} = \\frac{1}{x + 1} \\cdot 1 = \\frac{1}{x + 1}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 3 : on simplifie."
-   },
-   {
-    "blocs": [
-     {
-      "html": "\\(x + 1 \\to +\\infty\\) et \\(\\frac{1}{x + 1} \\to \\dfrac{1}{+\\infty} = 0^{+}\\).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "tex": "\\lim_{x\\to +\\infty} \\frac{\\ln\\left(x + 1\\right)}{x} = 0^{+}",
-      "type": "resultat_lim"
-     },
-     {
-      "html": "✓ Le calcul confirme la prédiction du podium.",
-      "style": "confirme",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale : \\(y = 0\\).",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 4 : on remplace."
    },
    {
     "badge": "limite",
@@ -5136,12 +5004,110 @@
     "titre": "Étape 4 : on remplace."
    },
    {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\displaystyle\\lim_{x\\to +\\infty} \\frac{\\ln\\left(x + 1\\right)}{x}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "html": "Haut : \\(x + 1 \\to +\\infty\\text{, donc }\\ln\\left(x + 1\\right) \\to +\\infty\\). Bas : \\(x \\to +\\infty\\). Forme \\(\\dfrac{+\\infty}{+\\infty}\\) : <span class=\"ind\">indéterminée</span>.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "genre": "prediction",
+      "lignes": [
+       "Au haut : \\(\\ln\\left(x + 1\\right)\\). Au bas : \\(x\\). Sur le podium, la puissance bat le logarithme : c'est le <b>bas</b> qui gagne, donc le quotient tend vers 0.",
+       "Signe : haut > 0, bas > 0, donc quotient > 0.",
+       "<b>On s'attend à :</b> \\(0^{+}\\)"
+      ],
+      "titre": "Prédiction avec la règle du podium",
+      "type": "encadre"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "blocs": [
+     {
+      "html": "Pour dériver \\(\\ln\\left(x + 1\\right)\\), on utilise \\(\\left(\\ln u\\right)' = \\dfrac{u'}{u}\\) avec \\(u = x + 1\\) et \\(u' = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "bas": "x",
+      "dbas": "1",
+      "dhaut": "\\frac{1}{x + 1}",
+      "haut": "\\ln\\left(x + 1\\right)",
+      "type": "bh"
+     },
+     {
+      "html": "\\[\\lim_{x\\to +\\infty} \\frac{\\ln\\left(x + 1\\right)}{x} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{\\frac{1}{x + 1}}{1}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2 : BH."
+   },
+   {
+    "blocs": [
+     {
+      "html": "Diviser par une fraction, c'est multiplier par son inverse :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\frac{\\frac{1}{x + 1}}{1} = \\frac{1}{x + 1} \\cdot 1 = \\frac{1}{x + 1}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3 : on simplifie."
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(x + 1 \\to +\\infty\\) et \\(\\frac{1}{x + 1} \\to \\dfrac{1}{+\\infty} = 0^{+}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "\\lim_{x\\to +\\infty} \\frac{\\ln\\left(x + 1\\right)}{x} = 0^{+}",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "✓ Le calcul confirme la prédiction du podium.",
+      "style": "confirme",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\) (à droite). \\(f(x) \\to 0^{+}\\) : le graphe est au-dessus.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4 : on remplace."
+   },
+   {
     "blocs": [
      {
       "items": [
        "Asymptote verticale : \\(x = -1\\) (\\(\\lim_{x\\to -1^+} f(x) = +\\infty\\))",
-       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)",
-       "Trou en \\((0\\,;\\,1)\\) : f n'est pas définie en \\(x = 0\\), mais \\(f(x) \\to 1\\) (pas une asymptote verticale)"
+       "Trou en \\((0\\,;\\,1)\\) : f n'est pas définie en \\(x = 0\\), mais \\(f(x) \\to 1\\) (pas une asymptote verticale)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\), graphe au-dessus"
       ],
       "style": "bilan",
       "type": "liste"
@@ -5383,128 +5349,7 @@
       "type": "texte"
      },
      {
-      "html": "Asymptote horizontale : \\(y = 0\\).",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 5 : on remplace."
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\displaystyle\\lim_{x\\to +\\infty} \\frac{\\ln\\left(x^{2} - 3\\right)}{2 - x}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to +\\infty"
-   },
-   {
-    "blocs": [
-     {
-      "html": "Haut : \\(x^{2} - 3 \\to +\\infty\\text{, donc }\\ln\\left(x^{2} - 3\\right) \\to +\\infty\\). Bas : \\(2 - x \\to -\\infty\\). Forme \\(\\dfrac{+\\infty}{-\\infty}\\) : <span class=\"ind\">indéterminée</span>.",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "genre": "prediction",
-      "lignes": [
-       "Au haut : \\(\\ln\\left(x^{2} - 3\\right)\\). Au bas : \\(x\\). Sur le podium, la puissance bat le logarithme : c'est le <b>bas</b> qui gagne, donc le quotient tend vers 0.",
-       "Signe : haut > 0, bas < 0, donc quotient < 0.",
-       "<b>On s'attend à :</b> \\(0^{-}\\)"
-      ],
-      "titre": "Prédiction avec la règle du podium",
-      "type": "encadre"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 1 : on remplace."
-   },
-   {
-    "blocs": [
-     {
-      "html": "Pour dériver \\(\\ln\\left(x^{2} - 3\\right)\\), on utilise \\(\\left(\\ln u\\right)' = \\dfrac{u'}{u}\\) avec \\(u = x^{2} - 3\\) et \\(u' = 2x\\).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "bas": "2 - x",
-      "dbas": "-1",
-      "dhaut": "\\frac{2x}{x^{2} - 3}",
-      "haut": "\\ln\\left(x^{2} - 3\\right)",
-      "type": "bh"
-     },
-     {
-      "html": "\\[\\lim_{x\\to +\\infty} \\frac{\\ln\\left(x^{2} - 3\\right)}{2 - x} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{\\frac{2x}{x^{2} - 3}}{-1}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 2 : BH (1re fois)."
-   },
-   {
-    "blocs": [
-     {
-      "html": "Diviser par une fraction, c'est multiplier par son inverse :",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "\\[\\frac{\\frac{2x}{x^{2} - 3}}{-1} = \\frac{2x}{x^{2} - 3}\\,\\left(-1\\right) = -\\frac{2x}{x^{2} - 3}\\]",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "Forme \\(\\dfrac{-\\infty}{+\\infty}\\) : encore <span class=\"ind\">indéterminée</span>.",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 3 : on simplifie."
-   },
-   {
-    "blocs": [
-     {
-      "bas": "x^{2} - 3",
-      "dbas": "2x",
-      "dhaut": "-2",
-      "haut": "-2x",
-      "type": "bh"
-     },
-     {
-      "html": "\\[\\lim_{x\\to +\\infty} \\frac{-2x}{x^{2} - 3} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} -\\frac{2}{2x} = \\lim_{x\\to +\\infty} -\\frac{1}{x}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 4 : BH (2e fois)."
-   },
-   {
-    "blocs": [
-     {
-      "html": "\\(x \\to +\\infty\\) et \\(-\\frac{1}{x} \\to \\dfrac{-1}{+\\infty} = 0^{-}\\).",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "tex": "\\lim_{x\\to +\\infty} \\frac{\\ln\\left(x^{2} - 3\\right)}{2 - x} = 0^{-}",
-      "type": "resultat_lim"
-     },
-     {
-      "html": "✓ Le calcul confirme la prédiction du podium.",
-      "style": "confirme",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\) (à gauche). \\(f(x) \\to 0^{+}\\) : le graphe est au-dessus.",
       "style": "etape",
       "type": "texte"
      }
@@ -5836,14 +5681,135 @@
     "titre": "Étape 4 : on remplace."
    },
    {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\displaystyle\\lim_{x\\to +\\infty} \\frac{\\ln\\left(x^{2} - 3\\right)}{2 - x}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "html": "Haut : \\(x^{2} - 3 \\to +\\infty\\text{, donc }\\ln\\left(x^{2} - 3\\right) \\to +\\infty\\). Bas : \\(2 - x \\to -\\infty\\). Forme \\(\\dfrac{+\\infty}{-\\infty}\\) : <span class=\"ind\">indéterminée</span>.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "genre": "prediction",
+      "lignes": [
+       "Au haut : \\(\\ln\\left(x^{2} - 3\\right)\\). Au bas : \\(x\\). Sur le podium, la puissance bat le logarithme : c'est le <b>bas</b> qui gagne, donc le quotient tend vers 0.",
+       "Signe : haut > 0, bas < 0, donc quotient < 0.",
+       "<b>On s'attend à :</b> \\(0^{-}\\)"
+      ],
+      "titre": "Prédiction avec la règle du podium",
+      "type": "encadre"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "blocs": [
+     {
+      "html": "Pour dériver \\(\\ln\\left(x^{2} - 3\\right)\\), on utilise \\(\\left(\\ln u\\right)' = \\dfrac{u'}{u}\\) avec \\(u = x^{2} - 3\\) et \\(u' = 2x\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "bas": "2 - x",
+      "dbas": "-1",
+      "dhaut": "\\frac{2x}{x^{2} - 3}",
+      "haut": "\\ln\\left(x^{2} - 3\\right)",
+      "type": "bh"
+     },
+     {
+      "html": "\\[\\lim_{x\\to +\\infty} \\frac{\\ln\\left(x^{2} - 3\\right)}{2 - x} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{\\frac{2x}{x^{2} - 3}}{-1}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2 : BH (1re fois)."
+   },
+   {
+    "blocs": [
+     {
+      "html": "Diviser par une fraction, c'est multiplier par son inverse :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\frac{\\frac{2x}{x^{2} - 3}}{-1} = \\frac{2x}{x^{2} - 3}\\,\\left(-1\\right) = -\\frac{2x}{x^{2} - 3}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Forme \\(\\dfrac{-\\infty}{+\\infty}\\) : encore <span class=\"ind\">indéterminée</span>.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3 : on simplifie."
+   },
+   {
+    "blocs": [
+     {
+      "bas": "x^{2} - 3",
+      "dbas": "2x",
+      "dhaut": "-2",
+      "haut": "-2x",
+      "type": "bh"
+     },
+     {
+      "html": "\\[\\lim_{x\\to +\\infty} \\frac{-2x}{x^{2} - 3} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} -\\frac{2}{2x} = \\lim_{x\\to +\\infty} -\\frac{1}{x}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4 : BH (2e fois)."
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(x \\to +\\infty\\) et \\(-\\frac{1}{x} \\to \\dfrac{-1}{+\\infty} = 0^{-}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "\\lim_{x\\to +\\infty} \\frac{\\ln\\left(x^{2} - 3\\right)}{2 - x} = 0^{-}",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "✓ Le calcul confirme la prédiction du podium.",
+      "style": "confirme",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\) (à droite). \\(f(x) \\to 0^{-}\\) : le graphe est au-dessous.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 5 : on remplace."
+   },
+   {
     "blocs": [
      {
       "items": [
-       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)",
-       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)",
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\), graphe au-dessus",
        "Asymptote verticale : \\(x = -\\sqrt{3}\\) (\\(\\lim_{x\\to -\\sqrt{3}^-} f(x) = -\\infty\\))",
        "Asymptote verticale : \\(x = \\sqrt{3}\\) (\\(\\lim_{x\\to \\sqrt{3}^+} f(x) = -\\infty\\))",
-       "Trou en \\((2\\,;\\,-4)\\) : f n'est pas définie en \\(x = 2\\), mais \\(f(x) \\to -4\\) (pas une asymptote verticale)"
+       "Trou en \\((2\\,;\\,-4)\\) : f n'est pas définie en \\(x = 2\\), mais \\(f(x) \\to -4\\) (pas une asymptote verticale)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\), graphe au-dessous"
       ],
       "style": "bilan",
       "type": "liste"
@@ -6041,13 +6007,158 @@
       "type": "texte"
      },
      {
-      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\) (à gauche). \\(f(x) \\to 0^{-}\\) : le graphe est au-dessous.",
       "style": "etape",
       "type": "texte"
      }
     ],
     "style": "normal",
     "titre": "Étape 5 : on remplace."
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\displaystyle\\lim_{x\\to 0^{-}} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 0^-"
+   },
+   {
+    "blocs": [
+     {
+      "html": "Haut : \\(x^{2} - 4x \\to 0^{+}\\text{, donc }\\ln\\left(x^{2} - 4x\\right) \\to -\\infty\\). Bas : \\(x - 5 \\to -5\\). Forme \\(\\dfrac{-\\infty}{-5}\\) : <span class=\"det\">pas indéterminée</span>!",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "blocs": [
+     {
+      "html": "Un nombre énorme divisé par un nombre ordinaire reste énorme :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "\\lim_{x\\to 0^{-}} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} = \\dfrac{-\\infty}{-5} = +\\infty",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 0\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2 : on conclut directement."
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to 4^{+}} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} = \\text{« }\\dfrac{\\ln\\left(0^{+}\\right)}{-1}\\text{ »} = \\text{« }\\dfrac{-\\infty}{-1}\\text{ »} = +\\infty \\qquad \\left(x^{2} - 4x > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 4\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 4^+"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\displaystyle\\lim_{x\\to 5^{-}} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 5"
+   },
+   {
+    "blocs": [
+     {
+      "html": "Haut : \\(x^{2} - 4x \\to 5\\text{, donc }\\ln\\left(x^{2} - 4x\\right) \\to \\ln 5\\). Bas : \\(x - 5 \\to 0\\) ; avec \\(x = 4{,}99\\) : \\(4{,}99 - 5 = -0{,}01 < 0\\), donc \\(0^{-}\\). Forme \\(\\dfrac{\\ln 5}{0^{-}}\\) : <span class=\"det\">pas indéterminée</span>!",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "blocs": [
+     {
+      "html": "On conclut avec les règles de calcul :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "\\lim_{x\\to 5^{-}} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} = \\dfrac{\\ln 5}{0^{-}} = -\\infty",
+      "type": "resultat_lim"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2 : on conclut directement."
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\displaystyle\\lim_{x\\to 5^{+}} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to 5"
+   },
+   {
+    "blocs": [
+     {
+      "html": "Haut : \\(x^{2} - 4x \\to 5\\text{, donc }\\ln\\left(x^{2} - 4x\\right) \\to \\ln 5\\). Bas : \\(x - 5 \\to 0\\) ; avec \\(x = 5{,}01\\) : \\(5{,}01 - 5 = 0{,}01 > 0\\), donc \\(0^{+}\\). Forme \\(\\dfrac{\\ln 5}{0^{+}}\\) : <span class=\"det\">pas indéterminée</span>!",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "blocs": [
+     {
+      "html": "On conclut avec les règles de calcul :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "\\lim_{x\\to 5^{+}} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} = \\dfrac{\\ln 5}{0^{+}} = +\\infty",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "Asymptote verticale : \\(x = 5\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2 : on conclut directement."
    },
    {
     "badge": "limite",
@@ -6162,7 +6273,7 @@
       "type": "texte"
      },
      {
-      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\) (à droite). \\(f(x) \\to 0^{+}\\) : le graphe est au-dessus.",
       "style": "etape",
       "type": "texte"
      }
@@ -6171,159 +6282,14 @@
     "titre": "Étape 5 : on remplace."
    },
    {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\displaystyle\\lim_{x\\to 0^{-}} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to 0^-"
-   },
-   {
-    "blocs": [
-     {
-      "html": "Haut : \\(x^{2} - 4x \\to 0^{+}\\text{, donc }\\ln\\left(x^{2} - 4x\\right) \\to -\\infty\\). Bas : \\(x - 5 \\to -5\\). Forme \\(\\dfrac{-\\infty}{-5}\\) : <span class=\"det\">pas indéterminée</span>!",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 1 : on remplace."
-   },
-   {
-    "blocs": [
-     {
-      "html": "Un nombre énorme divisé par un nombre ordinaire reste énorme :",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "tex": "\\lim_{x\\to 0^{-}} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} = \\dfrac{-\\infty}{-5} = +\\infty",
-      "type": "resultat_lim"
-     },
-     {
-      "html": "Asymptote verticale : \\(x = 0\\).",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 2 : on conclut directement."
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to 4^{+}} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} = \\text{« }\\dfrac{\\ln\\left(0^{+}\\right)}{-1}\\text{ »} = \\text{« }\\dfrac{-\\infty}{-1}\\text{ »} = +\\infty \\qquad \\left(x^{2} - 4x > 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote verticale : \\(x = 4\\).",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to 4^+"
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\displaystyle\\lim_{x\\to 5^{-}} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to 5"
-   },
-   {
-    "blocs": [
-     {
-      "html": "Haut : \\(x^{2} - 4x \\to 5\\text{, donc }\\ln\\left(x^{2} - 4x\\right) \\to \\ln 5\\). Bas : \\(x - 5 \\to 0^{-}\\). Forme \\(\\dfrac{\\ln 5}{0^{-}}\\) : <span class=\"det\">pas indéterminée</span>!",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 1 : on remplace."
-   },
-   {
-    "blocs": [
-     {
-      "html": "On conclut avec les règles de calcul :",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "tex": "\\lim_{x\\to 5^{-}} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} = \\dfrac{\\ln 5}{0^{-}} = -\\infty",
-      "type": "resultat_lim"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 2 : on conclut directement."
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\displaystyle\\lim_{x\\to 5^{+}} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5}\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to 5"
-   },
-   {
-    "blocs": [
-     {
-      "html": "Haut : \\(x^{2} - 4x \\to 5\\text{, donc }\\ln\\left(x^{2} - 4x\\right) \\to \\ln 5\\). Bas : \\(x - 5 \\to 0^{+}\\). Forme \\(\\dfrac{\\ln 5}{0^{+}}\\) : <span class=\"det\">pas indéterminée</span>!",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 1 : on remplace."
-   },
-   {
-    "blocs": [
-     {
-      "html": "On conclut avec les règles de calcul :",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "tex": "\\lim_{x\\to 5^{+}} \\frac{\\ln\\left(x^{2} - 4x\\right)}{x - 5} = \\dfrac{\\ln 5}{0^{+}} = +\\infty",
-      "type": "resultat_lim"
-     },
-     {
-      "html": "Asymptote verticale : \\(x = 5\\).",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 2 : on conclut directement."
-   },
-   {
     "blocs": [
      {
       "items": [
-       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)",
-       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)",
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\), graphe au-dessous",
        "Asymptote verticale : \\(x = 0\\) (\\(\\lim_{x\\to 0^-} f(x) = +\\infty\\))",
        "Asymptote verticale : \\(x = 4\\) (\\(\\lim_{x\\to 4^+} f(x) = +\\infty\\))",
-       "Asymptote verticale : \\(x = 5\\) (\\(\\lim_{x\\to 5^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 5^+} f(x) = +\\infty\\))"
+       "Asymptote verticale : \\(x = 5\\) (\\(\\lim_{x\\to 5^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 5^+} f(x) = +\\infty\\))",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\), graphe au-dessus"
       ],
       "style": "bilan",
       "type": "liste"
@@ -6677,7 +6643,7 @@
       "type": "texte"
      },
      {
-      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\) (à gauche). \\(f(x) \\to 0^{-}\\) : le graphe est au-dessous.",
       "style": "etape",
       "type": "texte"
      }
@@ -6736,7 +6702,7 @@
     "blocs": [
      {
       "items": [
-       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)"
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\), graphe au-dessous"
       ],
       "style": "bilan",
       "type": "liste"
@@ -6801,53 +6767,6 @@
      },
      {
       "tex": "\\lim_{x\\to -\\infty} x\\,\\ln\\left(x^{2}\\right) = \\left(-\\infty\\right) \\cdot \\left(+\\infty\\right) = -\\infty",
-      "type": "resultat_lim"
-     },
-     {
-      "genre": "attention",
-      "lignes": [
-       "Pas de BH ici : un produit de deux « énormes » n'est jamais indéterminé."
-      ],
-      "titre": "Attention",
-      "type": "encadre"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 2 : on conclut directement."
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\displaystyle\\lim_{x\\to +\\infty} x\\,\\ln\\left(x^{2}\\right)\\]",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to +\\infty"
-   },
-   {
-    "blocs": [
-     {
-      "html": "\\(x \\to +\\infty\\). \\(x^{2} \\to +\\infty\\text{, donc }\\ln\\left(x^{2}\\right) \\to +\\infty\\). Forme \\(\\left(+\\infty\\right) \\cdot \\left(+\\infty\\right)\\) : <span class=\"det\">pas indéterminée</span>!",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Étape 1 : on remplace."
-   },
-   {
-    "blocs": [
-     {
-      "html": "(règle des signes : + · + = +) :",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "tex": "\\lim_{x\\to +\\infty} x\\,\\ln\\left(x^{2}\\right) = \\left(+\\infty\\right) \\cdot \\left(+\\infty\\right) = +\\infty",
       "type": "resultat_lim"
      },
      {
@@ -7129,6 +7048,53 @@
     "titre": "Étape 7 : on remplace."
    },
    {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\displaystyle\\lim_{x\\to +\\infty} x\\,\\ln\\left(x^{2}\\right)\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(x \\to +\\infty\\). \\(x^{2} \\to +\\infty\\text{, donc }\\ln\\left(x^{2}\\right) \\to +\\infty\\). Forme \\(\\left(+\\infty\\right) \\cdot \\left(+\\infty\\right)\\) : <span class=\"det\">pas indéterminée</span>!",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "blocs": [
+     {
+      "html": "(règle des signes : + · + = +) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "\\lim_{x\\to +\\infty} x\\,\\ln\\left(x^{2}\\right) = \\left(+\\infty\\right) \\cdot \\left(+\\infty\\right) = +\\infty",
+      "type": "resultat_lim"
+     },
+     {
+      "genre": "attention",
+      "lignes": [
+       "Pas de BH ici : un produit de deux « énormes » n'est jamais indéterminé."
+      ],
+      "titre": "Attention",
+      "type": "encadre"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2 : on conclut directement."
+   },
+   {
     "blocs": [
      {
       "items": [
@@ -7240,7 +7206,7 @@
       "type": "texte"
      },
      {
-      "html": "Asymptote horizontale : \\(y = -1\\).",
+      "html": "Asymptote horizontale : \\(y = -1\\) (à gauche).",
       "style": "etape",
       "type": "texte"
      }
@@ -7248,24 +7214,6 @@
     "style": "normal",
     "titre": "Limite",
     "titre_tex": "x \\to -\\infty"
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x}{\\sqrt{x^{2}}} &= \\text{« }\\dfrac{+\\infty}{\\sqrt{+\\infty}}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x}{x} \\qquad \\left(x > 0 \\text{ : } \\sqrt{x^{2}} = |x| = x\\right) \\\\ &= \\lim_{x\\to +\\infty} 1 = 1\\end{aligned}\\]",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "Asymptote horizontale : \\(y = 1\\).",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to +\\infty"
    },
    {
     "badge": "limite",
@@ -7291,12 +7239,30 @@
     "titre_tex": "x \\to 0"
    },
    {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x}{\\sqrt{x^{2}}} &= \\text{« }\\dfrac{+\\infty}{\\sqrt{+\\infty}}\\text{ »} = \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x}{x} \\qquad \\left(x > 0 \\text{ : } \\sqrt{x^{2}} = |x| = x\\right) \\\\ &= \\lim_{x\\to +\\infty} 1 = 1\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 1\\) (à droite).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
     "blocs": [
      {
       "items": [
        "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = -1\\)",
-       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 1\\)",
-       "Pas de limite en \\(x = 0\\) (pas d'asymptote verticale) : \\(\\lim_{x\\to 0^-} f(x) = -1\\) ; \\(\\lim_{x\\to 0^+} f(x) = 1\\)"
+       "Pas de limite en \\(x = 0\\) (pas d'asymptote verticale) : \\(\\lim_{x\\to 0^-} f(x) = -1\\) ; \\(\\lim_{x\\to 0^+} f(x) = 1\\)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 1\\)"
       ],
       "style": "bilan",
       "type": "liste"
@@ -7541,7 +7507,7 @@
       "type": "texte"
      },
      {
-      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\) (à droite). \\(f(x) \\to 0^{+}\\) : le graphe est au-dessus.",
       "style": "etape",
       "type": "texte"
      }
@@ -7553,7 +7519,7 @@
     "blocs": [
      {
       "items": [
-       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\)"
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\), graphe au-dessus"
       ],
       "style": "bilan",
       "type": "liste"
@@ -7647,24 +7613,6 @@
     "badge": "limite",
     "blocs": [
      {
-      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x^{2}}{x - 1} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}}{x\\,\\left(1 - \\frac{1}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{x}{1 - \\frac{1}{x}} = +\\infty\\end{aligned}\\]",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "Même division : \\(f(x) - \\left(x + 1\\right) = \\dfrac{1}{x - 1}\\) tend vers \\(0\\) : asymptote oblique \\(y = x + 1\\) ; \\(\\dfrac{1}{x - 1} > 0\\) pour \\(x > 1\\) : la courbe est au-dessus de l'asymptote.",
-      "style": "etape",
-      "type": "texte"
-     }
-    ],
-    "style": "normal",
-    "titre": "Limite",
-    "titre_tex": "x \\to +\\infty"
-   },
-   {
-    "badge": "limite",
-    "blocs": [
-     {
       "html": "\\[\\begin{aligned}\\lim_{x\\to 1^{-}} \\frac{x^{2}}{x - 1} = \\text{« }\\dfrac{1}{0^{-}}\\text{ »} = -\\infty \\qquad \\left(x - 1 < 0 \\text{ : cf. tableau de signes}\\right)\\end{aligned}\\]",
       "style": "etape",
       "type": "texte"
@@ -7685,12 +7633,30 @@
     "titre_tex": "x \\to 1"
    },
    {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\begin{aligned}\\lim_{x\\to +\\infty} \\frac{x^{2}}{x - 1} &= \\text{« }\\dfrac{+\\infty}{+\\infty}\\text{ »}\\text{ : forme indéterminée} \\\\ &= \\lim_{x\\to +\\infty} \\dfrac{x^{2}}{x\\,\\left(1 - \\frac{1}{x}\\right)} \\qquad \\left(\\text{mise en évidence}\\right) \\\\ &= \\lim_{x\\to +\\infty} \\frac{x}{1 - \\frac{1}{x}} = +\\infty\\end{aligned}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Même division : \\(f(x) - \\left(x + 1\\right) = \\dfrac{1}{x - 1}\\) tend vers \\(0\\) : asymptote oblique \\(y = x + 1\\) ; \\(\\dfrac{1}{x - 1} > 0\\) pour \\(x > 1\\) : la courbe est au-dessus de l'asymptote.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
     "blocs": [
      {
       "items": [
        "Asymptote oblique (\\(x \\to -\\infty\\)) : \\(y = x + 1\\)",
-       "Asymptote oblique (\\(x \\to +\\infty\\)) : \\(y = x + 1\\)",
-       "Asymptote verticale : \\(x = 1\\) (\\(\\lim_{x\\to 1^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 1^+} f(x) = +\\infty\\))"
+       "Asymptote verticale : \\(x = 1\\) (\\(\\lim_{x\\to 1^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 1^+} f(x) = +\\infty\\))",
+       "Asymptote oblique (\\(x \\to +\\infty\\)) : \\(y = x + 1\\)"
       ],
       "style": "bilan",
       "type": "liste"
@@ -7891,7 +7857,7 @@
       "type": "texte"
      },
      {
-      "html": "Asymptote horizontale : \\(y = 0\\).",
+      "html": "Asymptote horizontale : \\(y = 0\\) (à gauche). \\(f(x) \\to 0^{-}\\) : le graphe est au-dessous.",
       "style": "etape",
       "type": "texte"
      }
@@ -7950,7 +7916,7 @@
     "blocs": [
      {
       "items": [
-       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\)"
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\), graphe au-dessous"
       ],
       "style": "bilan",
       "type": "liste"

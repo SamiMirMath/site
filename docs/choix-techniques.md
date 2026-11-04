@@ -105,7 +105,7 @@ Schéma de `resoudre` (T12, `moteur/sortie.py` : constructeurs et `valider()`, f
         {"type": "formule", "tex": "…"},
         {"type": "tableau", "var": "x", "crit": ["…"], "rows": [{"label": "…", "cells": ["+", "0", "-"], "final": false}]},
         {"type": "liste", "items": ["…"], "style": "extrema"},
-        {"type": "graphique", "xmin": 0, "xmax": 1, "ymin": 0, "ymax": 1, "segments": [], "extrema": [], "asymptotes": [], "recalculable": true},
+        {"type": "graphique", "xmin": 0, "xmax": 1, "ymin": 0, "ymax": 1, "segments": [], "extrema": [], "asymptotes": [], "points": [], "ronds_vides": [], "recalculable": true},
         {"type": "resultat", "tex": "E_1 = \\left]1;+\\infty\\right["}
       ]
     }
@@ -116,7 +116,8 @@ Schéma de `resoudre` (T12, `moteur/sortie.py` : constructeurs et `valider()`, f
 
 - `ok: false` ⇒ `erreur` est un message en français destiné à l'élève, **jamais une trace Python** ;
   le détail technique va dans `detail` (console), à côté de `erreur`, sur une carte ou sur un bloc `texte`.
-- Styles : carte `normal | etape | final | erreur` ; `texte` `etape | discret | indice` ; `liste` `extrema | bilan`.
+- Styles : carte `normal | etape | final | erreur | partie` (`partie` : intertitre d'une partie de l'Étude complète, sans bloc ; la page
+  l'affiche avec la carte qui le suit, hors du compteur d'étapes) ; `texte` `etape | discret | indice` ; `liste` `extrema | bilan`.
 - Un seul type `tableau` : le format déjà produit par les moteurs d'analyse (cases `+ - 0 | || x asym
   extremum \nearrow \searrow \rightarrow val:<tex>`, une ligne de `2·len(crit)+1` cases). L'Étude complète
   y ajoute `limites` (T06c).
@@ -142,7 +143,7 @@ Schéma de `resoudre` (T12, `moteur/sortie.py` : constructeurs et `valider()`, f
 
 | Élément du format | Rendu |
 |---|---|
-| carte | `card` ; `+ cond` si elle a un badge ; `+ final` si style `final` ; style `erreur` : `card err` avec le seul message |
+| carte | `card` ; `+ cond` si elle a un badge ; `+ final` si style `final` ; style `erreur` : `card err` avec le seul message ; style `partie` : `card partie`, le titre seul en `<h2>`, sans cadre (`commun/composants.css`) |
 | titre | `<h3>titre<span class="badge">badge</span></h3>` (`titre_tex` en formule) ; sans badge, `<h3>` simple ; `titre_masque` : rien |
 | `texte` | `etape` (défaut) → `.etape` ; `discret` → `.muted` ; `indice` → `.hint` |
 | `formule` | carte à titre masqué → `.enonce` ; sinon `.c` |
@@ -171,6 +172,9 @@ Livré comme module (et non comme code de page) pour les outils de la phase F (N
 - **`graphique.js`** : `dessinerGraphique(canvas, g, extrema, asymptotes, vista, forcerClair)` (dessin, échelle égale en x et en y),
   `monterGraphique(éléments, {g, extrema, asymptotes, fenetre})` (interaction), `greffonGraphique` (bloc `graphique` de
   `moteur/sortie.py`). La page l'active par `monterOutil({greffons: [greffonGraphique]})` et ne contient plus aucun code de graphique.
+  Clés facultatives du bloc (Étude complète, D15) : `points` ([{x_val, f_val}], zéros et (0 ; f(0)), dessinés comme les extrema :
+  point plein et coordonnées) et `ronds_vides` ([[x, y]], points exclus à limite finie, dessinés comme les trous des asymptotes :
+  un seul dessin de rond vide).
 - **Recalcul de la courbe** : si le bloc est `recalculable`, un zoom ou un déplacement appelle
   `appelPy("fenetre", JSON {f: saisie, xmin, xmax, n})` → `{ok, segments}` (`resoudre_ec.fenetre_json`). Si le calcul échoue (`ok:false`
   ou erreur), la courbe reste celle de la dernière fenêtre réussie et un message discret l'indique (EC-04).

@@ -2,16 +2,15 @@
  "(x+1)/(x-1)/2": {
   "deriv_etapes": [
    {
-    "html": "On pose \\(u(x) = x + 1\\) et \\(v(x) = x - 1\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+    "html": "On applique la règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\), avec :",
     "type": "texte"
    },
    {
-    "html": "\\(u'(x) = 1\\).",
-    "type": "texte"
-   },
-   {
-    "html": "\\(v'(x) = 1\\).",
-    "type": "texte"
+    "du": "u' = 1",
+    "dv": "v' = 1",
+    "type": "uv",
+    "u": "u = x + 1",
+    "v": "v = x - 1"
    },
    {
     "html": "\\(\\left(\\frac{x + 1}{x - 1}\\right)' = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{x - 1 - \\left(x + 1\\right)}{\\left(x - 1\\right)^{2}} = \\frac{-2}{\\left(x - 1\\right)^{2}}\\).",
@@ -95,7 +94,7 @@
   "ok": true,
   "signe_etapes": [
    {
-    "html": "\\(f'(x) = 3\\left(x - 1\\right)^{2} = 0 \\iff x - 1 = 0 \\iff x = 1\\).",
+    "html": "\\(f'(x) = 0 \\iff \\left(x - 1\\right)^{2} = 0 \\iff x = 1\\).",
     "type": "texte"
    }
   ],
@@ -160,9 +159,11 @@
   "ed_tex": "\\mathbb{R}",
   "extrema": [
    {
+    "f_py": "1",
     "f_tex": "1",
     "f_val": 1.0,
     "genre": "minimum local",
+    "x_py": "(0)/(1)",
     "x_tex": "0",
     "x_val": 0.0
    }
@@ -172,7 +173,7 @@
   "ok": true,
   "signe_etapes": [
    {
-    "html": "\\(f'(x) = \\frac{x}{\\sqrt{x^{2} + 1}} = 0 \\iff x = 0\\).",
+    "html": "\\(f'(x) = 0 \\iff x = 0\\).",
     "type": "texte"
    }
   ],
@@ -210,7 +211,7 @@
     {
      "cells": [
       "\\searrow",
-      "extremum",
+      "val:1",
       "\\nearrow"
      ],
      "label": "f(x)",
@@ -223,19 +224,18 @@
  "(x^2-1)/(x-3)": {
   "deriv_etapes": [
    {
-    "html": "On pose \\(u(x) = x^{2} - 1\\) et \\(v(x) = x - 3\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+    "html": "On applique la règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\), avec :",
     "type": "texte"
+   },
+   {
+    "du": "u' = 2x",
+    "dv": "v' = 1",
+    "type": "uv",
+    "u": "u = x^{2} - 1",
+    "v": "v = x - 3"
    },
    {
     "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
-    "type": "texte"
-   },
-   {
-    "html": "\\(u'(x) = 2x\\).",
-    "type": "texte"
-   },
-   {
-    "html": "\\(v'(x) = 1\\).",
     "type": "texte"
    },
    {
@@ -249,16 +249,20 @@
   "ed_tex": "\\mathbb{R} \\setminus \\left\\{3\\right\\}",
   "extrema": [
    {
+    "f_py": "6 - 4*sqrt(2)",
     "f_tex": "6 - 4 \\sqrt{2}",
     "f_val": 0.343145751,
     "genre": "maximum local",
+    "x_py": "((3)+(-2)*sqrt(2))",
     "x_tex": "3 - 2\\sqrt{2}",
     "x_val": 0.171572875
    },
    {
+    "f_py": "4*sqrt(2) + 6",
     "f_tex": "4 \\sqrt{2} + 6",
     "f_val": 11.6568542,
     "genre": "minimum local",
+    "x_py": "((3)+(2)*sqrt(2))",
     "x_tex": "3 + 2\\sqrt{2}",
     "x_val": 5.82842712
    }
@@ -267,7 +271,7 @@
   "ok": true,
   "signe_etapes": [
    {
-    "html": "\\(f'(x) = \\frac{x^{2} - 6x + 1}{\\left(x - 3\\right)^{2}} = 0 \\iff x^{2} - 6x + 1 = 0 \\iff x = 3 - 2\\sqrt{2} \\text{ ou } x = 3 + 2\\sqrt{2}\\) ; valeur interdite : \\(x = 3\\).",
+    "html": "\\(f'(x) = 0 \\iff x^{2} - 6x + 1 = 0 \\iff x = 3 - 2\\sqrt{2} \\text{ ou } x = 3 + 2\\sqrt{2}\\) ; valeur interdite : \\(x = 3\\).",
     "type": "texte"
    }
   ],
@@ -319,11 +323,11 @@
     {
      "cells": [
       "\\nearrow",
-      "extremum",
+      "val:6 - 4 \\sqrt{2}",
       "\\searrow",
       "asym",
       "\\searrow",
-      "extremum",
+      "val:4 \\sqrt{2} + 6",
       "\\nearrow"
      ],
      "label": "f(x)",
@@ -336,19 +340,18 @@
  "-(x*ln(x))": {
   "deriv_etapes": [
    {
-    "html": "On pose \\(u(x) = x\\) et \\(v(x) = \\ln(x)\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+    "html": "On applique la règle du produit, \\((uv)' = u'v + uv'\\), avec :",
     "type": "texte"
+   },
+   {
+    "du": "u' = 1",
+    "dv": "v' = \\frac{1}{x}",
+    "type": "uv",
+    "u": "u = x",
+    "v": "v = \\ln(x)"
    },
    {
     "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
-    "type": "texte"
-   },
-   {
-    "html": "\\(u'(x) = 1\\).",
-    "type": "texte"
-   },
-   {
-    "html": "\\(v'(x) = \\frac{1}{x}\\).",
     "type": "texte"
    },
    {
@@ -366,9 +369,11 @@
   "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
   "extrema": [
    {
+    "f_py": "exp(-1)",
     "f_tex": "e^{-1}",
     "f_val": 0.367879441,
     "genre": "maximum local",
+    "x_py": "exp((-1)/(1))",
     "x_tex": "e^{-1}",
     "x_val": 0.367879441
    }
@@ -385,7 +390,7 @@
     "type": "texte"
    },
    {
-    "html": "\\(f'(x) = -\\ln(x) - 1 = 0 \\iff x = e^{-1}\\).",
+    "html": "\\(f'(x) = 0 \\iff -\\ln(x) - 1 = 0 \\iff x = e^{-1}\\).",
     "type": "texte"
    }
   ],
@@ -422,7 +427,7 @@
       "x",
       "asym",
       "\\nearrow",
-      "extremum",
+      "val:e^{-1}",
       "\\searrow"
      ],
      "label": "f(x)",
@@ -449,9 +454,11 @@
   "ed_tex": "\\mathbb{R}",
   "extrema": [
    {
+    "f_py": "0",
     "f_tex": "0",
     "f_val": 0.0,
     "genre": "maximum local",
+    "x_py": "(0)/(1)",
     "x_tex": "0",
     "x_val": 0.0
    }
@@ -460,7 +467,7 @@
   "ok": true,
   "signe_etapes": [
    {
-    "html": "\\(f'(x) = -2x = 0 \\iff x = 0\\).",
+    "html": "\\(f'(x) = 0 \\iff x = 0\\).",
     "type": "texte"
    }
   ],
@@ -498,7 +505,7 @@
     {
      "cells": [
       "\\nearrow",
-      "extremum",
+      "val:0",
       "\\searrow"
      ],
      "label": "f(x)",
@@ -599,19 +606,18 @@
  "3(x*ln(x))": {
   "deriv_etapes": [
    {
-    "html": "On pose \\(u(x) = x\\) et \\(v(x) = \\ln(x)\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+    "html": "On applique la règle du produit, \\((uv)' = u'v + uv'\\), avec :",
     "type": "texte"
+   },
+   {
+    "du": "u' = 1",
+    "dv": "v' = \\frac{1}{x}",
+    "type": "uv",
+    "u": "u = x",
+    "v": "v = \\ln(x)"
    },
    {
     "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
-    "type": "texte"
-   },
-   {
-    "html": "\\(u'(x) = 1\\).",
-    "type": "texte"
-   },
-   {
-    "html": "\\(v'(x) = \\frac{1}{x}\\).",
     "type": "texte"
    },
    {
@@ -629,9 +635,11 @@
   "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
   "extrema": [
    {
-    "f_tex": "- \\frac{3}{e}",
+    "f_py": "-3*exp(-1)",
+    "f_tex": "- 3 e^{-1}",
     "f_val": -1.10363832,
     "genre": "minimum local",
+    "x_py": "exp((-1)/(1))",
     "x_tex": "e^{-1}",
     "x_val": 0.367879441
    }
@@ -648,7 +656,7 @@
     "type": "texte"
    },
    {
-    "html": "\\(f'(x) = 3\\left(\\ln(x) + 1\\right) = 0 \\iff \\ln(x) + 1 = 0 \\iff x = e^{-1}\\).",
+    "html": "\\(f'(x) = 0 \\iff \\ln(x) + 1 = 0 \\iff x = e^{-1}\\).",
     "type": "texte"
    }
   ],
@@ -695,7 +703,7 @@
       "x",
       "asym",
       "\\searrow",
-      "extremum",
+      "val:- 3 e^{-1}",
       "\\nearrow"
      ],
      "label": "f(x)",
@@ -730,9 +738,11 @@
   "ed_tex": "\\mathbb{R}",
   "extrema": [
    {
+    "f_py": "-4/3",
     "f_tex": "- \\frac{4}{3}",
     "f_val": -1.33333333,
     "genre": "minimum local",
+    "x_py": "(2)/(3)",
     "x_tex": "\\frac{2}{3}",
     "x_val": 0.666666667
    }
@@ -741,7 +751,7 @@
   "ok": true,
   "signe_etapes": [
    {
-    "html": "\\(f'(x) = 2\\left(3x - 2\\right) = 0 \\iff 3x - 2 = 0 \\iff x = \\frac{2}{3}\\).",
+    "html": "\\(f'(x) = 0 \\iff 3x - 2 = 0 \\iff x = \\frac{2}{3}\\).",
     "type": "texte"
    }
   ],
@@ -779,7 +789,371 @@
     {
      "cells": [
       "\\searrow",
-      "extremum",
+      "val:- \\frac{4}{3}",
+      "\\nearrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "e^((-2x^2+3x-1)/(3x-6))": {
+  "deriv_etapes": [
+   {
+    "html": "\\(f(x) = e^{g(x)}\\) avec \\(g(x) = \\frac{-2x^{2} + 3x - 1}{3x - 6}\\), donc \\(f'(x) = g'(x) \\cdot e^{g(x)}\\) (dérivée d'une composée). On calcule d'abord \\(g'(x)\\).",
+    "type": "texte"
+   },
+   {
+    "etapes": [
+     {
+      "blocs": [
+       {
+        "html": "On applique la règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\), avec :",
+        "type": "texte"
+       },
+       {
+        "du": "u' = -4x + 3",
+        "dv": "v' = 3",
+        "type": "uv",
+        "u": "u = -2x^{2} + 3x - 1",
+        "v": "v = 3x - 6"
+       },
+       {
+        "html": "\\(g'(x) = \\frac{\\left(-4x + 3\\right)\\,\\left(3x - 6\\right) - \\left(-2x^{2} + 3x - 1\\right) \\cdot 3}{\\left(3x - 6\\right)^{2}}\\) (règle du quotient)",
+        "type": "texte"
+       }
+      ],
+      "titre": "règle du quotient"
+     },
+     {
+      "blocs": [
+       {
+        "html": "\\(g'(x) = \\frac{-12x^{2} + 24x + 9x - 18 + 6x^{2} - 9x + 3}{9\\left(x - 2\\right)^{2}}\\) (développement)",
+        "type": "texte"
+       },
+       {
+        "html": "\\(= \\frac{-6x^{2} + 24x - 15}{9\\left(x - 2\\right)^{2}}\\) (réduction)",
+        "type": "texte"
+       },
+       {
+        "html": "\\(= \\frac{-3\\left(2x^{2} - 8x + 5\\right)}{9\\left(x - 2\\right)^{2}}\\) (mise en évidence)",
+        "type": "texte"
+       },
+       {
+        "html": "\\(= \\frac{-\\left(2x^{2} - 8x + 5\\right)}{3\\left(x - 2\\right)^{2}}\\) (simplification par 3)",
+        "type": "texte"
+       }
+      ],
+      "titre": "calcul du numérateur, puis simplification"
+     }
+    ],
+    "titre": "Dérivée de l'exposant",
+    "type": "sous_calcul"
+   },
+   {
+    "html": "On remplace \\(g'(x)\\) dans \\(f'(x) = g'(x) \\cdot e^{g(x)}\\) :",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "\\frac{-\\left(2x^{2} - 8x + 5\\right)\\,e^{\\frac{-2x^{2} + 3x - 1}{3x - 6}}}{3\\left(x - 2\\right)^{2}}",
+  "domaine_etude_tex": "\\mathbb{R} \\setminus \\left\\{2\\right\\}",
+  "ed_tex": "\\mathbb{R} \\setminus \\left\\{2\\right\\}",
+  "extrema": [
+   {
+    "f_py": "exp(-5/3 + 2*sqrt(6)/3)",
+    "f_tex": "e^{- \\frac{5}{3} + \\frac{2 \\sqrt{6}}{3}}",
+    "f_val": 0.966887137,
+    "genre": "minimum local",
+    "x_py": "((2)+(-1/2)*sqrt(6))",
+    "x_tex": "\\frac{4 - \\sqrt{6}}{2}",
+    "x_val": 0.775255129
+   },
+   {
+    "f_py": "exp(-5/3 - 2*sqrt(6)/3)",
+    "f_tex": "e^{- \\frac{5}{3} - \\frac{2 \\sqrt{6}}{3}}",
+    "f_val": 0.0368957161,
+    "genre": "maximum local",
+    "x_py": "((2)+(1/2)*sqrt(6))",
+    "x_tex": "\\frac{4 + \\sqrt{6}}{2}",
+    "x_val": 3.22474487
+   }
+  ],
+  "f_tex": "e^{\\frac{-2x^{2} + 3x - 1}{3x - 6}}",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "\\(f'(x) = 0 \\iff 2x^{2} - 8x + 5 = 0\\) (car \\(e^{\\frac{-2x^{2} + 3x - 1}{3x - 6}} > 0\\)) \\(\\iff x = \\frac{4 - \\sqrt{6}}{2} \\text{ ou } x = \\frac{4 + \\sqrt{6}}{2}\\) ; valeur interdite : \\(x = 2\\).",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "\\frac{4 - \\sqrt{6}}{2}",
+    "2",
+    "\\frac{4 + \\sqrt{6}}{2}"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "-",
+      "-",
+      "-",
+      "||",
+      "-",
+      "-",
+      "-"
+     ],
+     "label": "-\\frac{1}{3}"
+    },
+    {
+     "cells": [
+      "+",
+      "0",
+      "-",
+      "||",
+      "-",
+      "0",
+      "+"
+     ],
+     "label": "\\left(2x^{2} - 8x + 5\\right)"
+    },
+    {
+     "cells": [
+      "+",
+      "+",
+      "+",
+      "||",
+      "+",
+      "+",
+      "+"
+     ],
+     "label": "e^{\\frac{-2x^{2} + 3x - 1}{3x - 6}}"
+    },
+    {
+     "cells": [
+      "+",
+      "+",
+      "+",
+      "||",
+      "+",
+      "+",
+      "+"
+     ],
+     "label": "\\left(x - 2\\right)^{2}"
+    },
+    {
+     "cells": [
+      "-",
+      "0",
+      "+",
+      "||",
+      "+",
+      "0",
+      "-"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "\\searrow",
+      "val:e^{- \\frac{5}{3} + \\frac{2 \\sqrt{6}}{3}}",
+      "\\nearrow",
+      "asym",
+      "\\nearrow",
+      "val:e^{- \\frac{5}{3} - \\frac{2 \\sqrt{6}}{3}}",
+      "\\searrow"
+     ],
+     "label": "f(x)",
+     "variation": true
+    }
+   ],
+   "var": "x"
+  }
+ },
+ "e^((x^2+1)/(2x))": {
+  "deriv_etapes": [
+   {
+    "html": "\\(f(x) = e^{g(x)}\\) avec \\(g(x) = \\frac{x^{2} + 1}{2x}\\), donc \\(f'(x) = g'(x) \\cdot e^{g(x)}\\) (dérivée d'une composée). On calcule d'abord \\(g'(x)\\).",
+    "type": "texte"
+   },
+   {
+    "etapes": [
+     {
+      "blocs": [
+       {
+        "html": "On applique la règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\), avec :",
+        "type": "texte"
+       },
+       {
+        "du": "u' = 2x",
+        "dv": "v' = 2",
+        "type": "uv",
+        "u": "u = x^{2} + 1",
+        "v": "v = 2x"
+       },
+       {
+        "html": "\\(g'(x) = \\frac{2x \\cdot 2x - \\left(x^{2} + 1\\right) \\cdot 2}{\\left(2x\\right)^{2}}\\) (règle du quotient)",
+        "type": "texte"
+       }
+      ],
+      "titre": "règle du quotient"
+     },
+     {
+      "blocs": [
+       {
+        "html": "\\(g'(x) = \\frac{4x^{2} - 2x^{2} - 2}{4x^{2}}\\) (développement)",
+        "type": "texte"
+       },
+       {
+        "html": "\\(= \\frac{2x^{2} - 2}{4x^{2}}\\) (réduction)",
+        "type": "texte"
+       },
+       {
+        "html": "\\(= \\frac{2\\left(x^{2} - 1\\right)}{4x^{2}}\\) (mise en évidence)",
+        "type": "texte"
+       },
+       {
+        "html": "\\(= \\frac{x^{2} - 1}{2x^{2}}\\) (simplification par 2)",
+        "type": "texte"
+       }
+      ],
+      "titre": "calcul du numérateur, puis simplification"
+     }
+    ],
+    "titre": "Dérivée de l'exposant",
+    "type": "sous_calcul"
+   },
+   {
+    "html": "On remplace \\(g'(x)\\) dans \\(f'(x) = g'(x) \\cdot e^{g(x)}\\) :",
+    "type": "texte"
+   }
+  ],
+  "deriv_resolu": true,
+  "deriv_tex": "\\frac{\\left(x + 1\\right)\\,\\left(x - 1\\right)\\,e^{\\frac{x^{2} + 1}{2x}}}{2x^{2}}",
+  "domaine_etude_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
+  "ed_tex": "\\mathbb{R} \\setminus \\left\\{0\\right\\}",
+  "extrema": [
+   {
+    "f_py": "exp(-1)",
+    "f_tex": "e^{-1}",
+    "f_val": 0.367879441,
+    "genre": "maximum local",
+    "x_py": "(-1)/(1)",
+    "x_tex": "-1",
+    "x_val": -1.0
+   },
+   {
+    "f_py": "E",
+    "f_tex": "e",
+    "f_val": 2.71828183,
+    "genre": "minimum local",
+    "x_py": "(1)/(1)",
+    "x_tex": "1",
+    "x_val": 1.0
+   }
+  ],
+  "f_tex": "e^{\\frac{x^{2} + 1}{2x}}",
+  "ok": true,
+  "signe_etapes": [
+   {
+    "html": "\\(f'(x) = 0 \\iff \\left(x + 1\\right)\\,\\left(x - 1\\right) = 0\\) (car \\(e^{\\frac{x^{2} + 1}{2x}} > 0\\)) \\(\\iff x = -1 \\text{ ou } x = 1\\) (produit nul) ; valeur interdite : \\(x = 0\\).",
+    "type": "texte"
+   }
+  ],
+  "signe_resolu": true,
+  "table_signe": {
+   "crit": [
+    "-1",
+    "0",
+    "1"
+   ],
+   "rows": [
+    {
+     "cells": [
+      "+",
+      "+",
+      "+",
+      "||",
+      "+",
+      "+",
+      "+"
+     ],
+     "label": "\\frac{1}{2}"
+    },
+    {
+     "cells": [
+      "-",
+      "0",
+      "+",
+      "||",
+      "+",
+      "+",
+      "+"
+     ],
+     "label": "\\left(x + 1\\right)"
+    },
+    {
+     "cells": [
+      "-",
+      "-",
+      "-",
+      "||",
+      "-",
+      "0",
+      "+"
+     ],
+     "label": "\\left(x - 1\\right)"
+    },
+    {
+     "cells": [
+      "+",
+      "+",
+      "+",
+      "||",
+      "+",
+      "+",
+      "+"
+     ],
+     "label": "e^{\\frac{x^{2} + 1}{2x}}"
+    },
+    {
+     "cells": [
+      "+",
+      "+",
+      "+",
+      "||",
+      "+",
+      "+",
+      "+"
+     ],
+     "label": "x^{2}"
+    },
+    {
+     "cells": [
+      "+",
+      "0",
+      "-",
+      "||",
+      "-",
+      "0",
+      "+"
+     ],
+     "final": true,
+     "label": "f'(x)"
+    },
+    {
+     "cells": [
+      "\\nearrow",
+      "val:e^{-1}",
+      "\\searrow",
+      "asym",
+      "\\searrow",
+      "val:e",
       "\\nearrow"
      ],
      "label": "f(x)",
@@ -860,9 +1234,11 @@
   "ed_tex": "\\mathbb{R}",
   "extrema": [
    {
+    "f_py": "1",
     "f_tex": "1",
     "f_val": 1.0,
     "genre": "minimum local",
+    "x_py": "(0)/(1)",
     "x_tex": "0",
     "x_val": 0.0
    }
@@ -871,7 +1247,7 @@
   "ok": true,
   "signe_etapes": [
    {
-    "html": "\\(f'(x) = 2x\\,e^{x^{2}} = 0 \\iff x = 0\\).",
+    "html": "\\(f'(x) = 0 \\iff x = 0\\) (car \\(e^{x^{2}} > 0\\)).",
     "type": "texte"
    }
   ],
@@ -917,7 +1293,7 @@
     {
      "cells": [
       "\\searrow",
-      "extremum",
+      "val:1",
       "\\nearrow"
      ],
      "label": "f(x)",
@@ -930,35 +1306,36 @@
  "ln(x)/x": {
   "deriv_etapes": [
    {
-    "html": "On pose \\(u(x) = \\ln(x)\\) et \\(v(x) = x\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+    "html": "On applique la règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\), avec :",
     "type": "texte"
+   },
+   {
+    "du": "u' = \\frac{1}{x}",
+    "dv": "v' = 1",
+    "type": "uv",
+    "u": "u = \\ln(x)",
+    "v": "v = x"
    },
    {
     "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
     "type": "texte"
    },
    {
-    "html": "\\(u'(x) = \\frac{1}{x}\\).",
-    "type": "texte"
-   },
-   {
-    "html": "\\(v'(x) = 1\\).",
-    "type": "texte"
-   },
-   {
-    "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{\\frac{1}{x}\\,x - \\ln(x)}{x^{2}} = \\frac{-\\left(\\ln(x) - 1\\right)}{x^{2}}\\).",
+    "html": "\\(f'(x) = \\dfrac{u'(x)v(x) - u(x)v'(x)}{v(x)^2} = \\frac{\\frac{1}{x}\\,x - \\ln(x)}{x^{2}} = \\frac{1 - \\ln(x)}{x^{2}}\\).",
     "type": "texte"
    }
   ],
   "deriv_resolu": true,
-  "deriv_tex": "\\frac{-\\left(\\ln(x) - 1\\right)}{x^{2}}",
+  "deriv_tex": "\\frac{1 - \\ln(x)}{x^{2}}",
   "domaine_etude_tex": "\\left]0 \\,;\\, +\\infty\\right[",
   "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
   "extrema": [
    {
+    "f_py": "exp(-1)",
     "f_tex": "e^{-1}",
     "f_val": 0.367879441,
     "genre": "maximum local",
+    "x_py": "exp((1)/(1))",
     "x_tex": "e",
     "x_val": 2.71828183
    }
@@ -967,7 +1344,7 @@
   "ok": true,
   "signe_etapes": [
    {
-    "html": "\\(\\ln(x) - 1 = 0 \\iff \\ln(x) = 1\\) (on ajoute 1).",
+    "html": "\\(1 - \\ln(x) = 0 \\iff \\ln(x) = 1\\) (on isole \\(\\ln(x)\\) du côté où son coefficient est positif).",
     "type": "texte"
    },
    {
@@ -975,7 +1352,7 @@
     "type": "texte"
    },
    {
-    "html": "\\(f'(x) = \\frac{-\\left(\\ln(x) - 1\\right)}{x^{2}} = 0 \\iff \\ln(x) - 1 = 0 \\iff x = e\\).",
+    "html": "\\(f'(x) = 0 \\iff 1 - \\ln(x) = 0 \\iff x = e\\).",
     "type": "texte"
    }
   ],
@@ -990,21 +1367,11 @@
      "cells": [
       "x",
       "||",
-      "-",
-      "-",
+      "+",
+      "0",
       "-"
      ],
-     "label": "-1"
-    },
-    {
-     "cells": [
-      "x",
-      "||",
-      "-",
-      "0",
-      "+"
-     ],
-     "label": "\\left(\\ln(x) - 1\\right)"
+     "label": "\\left(1 - \\ln(x)\\right)"
     },
     {
      "cells": [
@@ -1032,7 +1399,7 @@
       "x",
       "asym",
       "\\nearrow",
-      "extremum",
+      "val:e^{-1}",
       "\\searrow"
      ],
      "label": "f(x)",
@@ -1062,7 +1429,7 @@
   "ok": true,
   "signe_etapes": [
    {
-    "html": "\\(f'(x) = \\frac{2x}{\\left(x - 2\\right)\\,\\left(x + 2\\right)} = 0 \\iff x = 0\\).",
+    "html": "\\(f'(x) = 0 \\iff x = 0\\).",
     "type": "texte"
    }
   ],
@@ -1157,9 +1524,11 @@
   "ed_tex": "\\mathbb{R}",
   "extrema": [
    {
+    "f_py": "0",
     "f_tex": "0",
     "f_val": 0.0,
     "genre": "minimum local",
+    "x_py": "(0)/(1)",
     "x_tex": "0",
     "x_val": 0.0
    }
@@ -1238,16 +1607,20 @@
   "ed_tex": "\\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[",
   "extrema": [
    {
+    "f_py": "0",
     "f_tex": "0",
     "f_val": 0.0,
     "genre": "minimum local",
+    "x_py": "(-2)/(1)",
     "x_tex": "-2",
     "x_val": -2.0
    },
    {
+    "f_py": "0",
     "f_tex": "0",
     "f_val": 0.0,
     "genre": "minimum local",
+    "x_py": "(2)/(1)",
     "x_tex": "2",
     "x_val": 2.0
    }
@@ -1334,9 +1707,11 @@
   "ed_tex": "\\mathbb{R}",
   "extrema": [
    {
+    "f_py": "1",
     "f_tex": "1",
     "f_val": 1.0,
     "genre": "minimum local",
+    "x_py": "(2)/(1)",
     "x_tex": "2",
     "x_val": 2.0
    }
@@ -1345,7 +1720,7 @@
   "ok": true,
   "signe_etapes": [
    {
-    "html": "\\(f'(x) = \\frac{x - 2}{\\sqrt{x^{2} - 4x + 5}} = 0 \\iff x - 2 = 0 \\iff x = 2\\).",
+    "html": "\\(f'(x) = 0 \\iff x - 2 = 0 \\iff x = 2\\).",
     "type": "texte"
    }
   ],
@@ -1383,7 +1758,7 @@
     {
      "cells": [
       "\\searrow",
-      "extremum",
+      "val:1",
       "\\nearrow"
      ],
      "label": "f(x)",
@@ -1396,19 +1771,18 @@
  "x*ln(x)": {
   "deriv_etapes": [
    {
-    "html": "On pose \\(u(x) = x\\) et \\(v(x) = \\ln(x)\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+    "html": "On applique la règle du produit, \\((uv)' = u'v + uv'\\), avec :",
     "type": "texte"
+   },
+   {
+    "du": "u' = 1",
+    "dv": "v' = \\frac{1}{x}",
+    "type": "uv",
+    "u": "u = x",
+    "v": "v = \\ln(x)"
    },
    {
     "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
-    "type": "texte"
-   },
-   {
-    "html": "\\(u'(x) = 1\\).",
-    "type": "texte"
-   },
-   {
-    "html": "\\(v'(x) = \\frac{1}{x}\\).",
     "type": "texte"
    },
    {
@@ -1422,9 +1796,11 @@
   "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
   "extrema": [
    {
-    "f_tex": "- \\frac{1}{e}",
+    "f_py": "-exp(-1)",
+    "f_tex": "- e^{-1}",
     "f_val": -0.367879441,
     "genre": "minimum local",
+    "x_py": "exp((-1)/(1))",
     "x_tex": "e^{-1}",
     "x_val": 0.367879441
    }
@@ -1441,7 +1817,7 @@
     "type": "texte"
    },
    {
-    "html": "\\(f'(x) = \\ln(x) + 1 = 0 \\iff x = e^{-1}\\).",
+    "html": "\\(f'(x) = 0 \\iff \\ln(x) + 1 = 0 \\iff x = e^{-1}\\).",
     "type": "texte"
    }
   ],
@@ -1478,7 +1854,7 @@
       "x",
       "asym",
       "\\searrow",
-      "extremum",
+      "val:- e^{-1}",
       "\\nearrow"
      ],
      "label": "f(x)",
@@ -1495,19 +1871,18 @@
     "type": "texte"
    },
    {
-    "html": "On pose \\(u(x) = x\\) et \\(v(x) = \\ln(x)\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+    "html": "On applique la règle du produit, \\((uv)' = u'v + uv'\\), avec :",
     "type": "texte"
+   },
+   {
+    "du": "u' = 1",
+    "dv": "v' = \\frac{1}{x}",
+    "type": "uv",
+    "u": "u = x",
+    "v": "v = \\ln(x)"
    },
    {
     "html": "\\(\\left(\\ln(x)\\right)' = \\frac{1}{x}\\) (règle de base).",
-    "type": "texte"
-   },
-   {
-    "html": "\\(u'(x) = 1\\).",
-    "type": "texte"
-   },
-   {
-    "html": "\\(v'(x) = \\frac{1}{x}\\).",
     "type": "texte"
    },
    {
@@ -1525,9 +1900,11 @@
   "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
   "extrema": [
    {
-    "f_tex": "- \\frac{1}{e^{2}}",
+    "f_py": "-exp(-2)",
+    "f_tex": "- e^{-2}",
     "f_val": -0.135335283,
     "genre": "minimum local",
+    "x_py": "exp((-2)/(1))",
     "x_tex": "e^{-2}",
     "x_val": 0.135335283
    }
@@ -1544,7 +1921,7 @@
     "type": "texte"
    },
    {
-    "html": "\\(f'(x) = \\ln(x) + 2 = 0 \\iff x = e^{-2}\\).",
+    "html": "\\(f'(x) = 0 \\iff \\ln(x) + 2 = 0 \\iff x = e^{-2}\\).",
     "type": "texte"
    }
   ],
@@ -1581,7 +1958,7 @@
       "x",
       "asym",
       "\\searrow",
-      "extremum",
+      "val:- e^{-2}",
       "\\nearrow"
      ],
      "label": "f(x)",
@@ -1594,19 +1971,18 @@
  "x/(x^2+1)": {
   "deriv_etapes": [
    {
-    "html": "On pose \\(u(x) = x\\) et \\(v(x) = x^{2} + 1\\) : règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+    "html": "On applique la règle du quotient, \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\), avec :",
     "type": "texte"
+   },
+   {
+    "du": "u' = 1",
+    "dv": "v' = 2x",
+    "type": "uv",
+    "u": "u = x",
+    "v": "v = x^{2} + 1"
    },
    {
     "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
-    "type": "texte"
-   },
-   {
-    "html": "\\(u'(x) = 1\\).",
-    "type": "texte"
-   },
-   {
-    "html": "\\(v'(x) = 2x\\).",
     "type": "texte"
    },
    {
@@ -1620,16 +1996,20 @@
   "ed_tex": "\\mathbb{R}",
   "extrema": [
    {
+    "f_py": "-1/2",
     "f_tex": "- \\frac{1}{2}",
     "f_val": -0.5,
     "genre": "minimum local",
+    "x_py": "(-1)/(1)",
     "x_tex": "-1",
     "x_val": -1.0
    },
    {
+    "f_py": "1/2",
     "f_tex": "\\frac{1}{2}",
     "f_val": 0.5,
     "genre": "maximum local",
+    "x_py": "(1)/(1)",
     "x_tex": "1",
     "x_val": 1.0
    }
@@ -1638,7 +2018,7 @@
   "ok": true,
   "signe_etapes": [
    {
-    "html": "\\(f'(x) = \\frac{-\\left(x + 1\\right)\\,\\left(x - 1\\right)}{\\left(x^{2} + 1\\right)^{2}} = 0 \\iff x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 1\\).",
+    "html": "\\(f'(x) = 0 \\iff \\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x = -1 \\text{ ou } x = 1\\) (produit nul).",
     "type": "texte"
    }
   ],
@@ -1703,9 +2083,9 @@
     {
      "cells": [
       "\\searrow",
-      "extremum",
+      "val:- \\frac{1}{2}",
       "\\nearrow",
-      "extremum",
+      "val:\\frac{1}{2}",
       "\\searrow"
      ],
      "label": "f(x)",
@@ -1793,9 +2173,11 @@
   "ed_tex": "\\left[0 \\,;\\, +\\infty\\right[",
   "extrema": [
    {
+    "f_py": "0",
     "f_tex": "0",
     "f_val": 0.0,
     "genre": "minimum local",
+    "x_py": "(0)/(1)",
     "x_tex": "0",
     "x_val": 0.0
    }
@@ -1920,9 +2302,11 @@
   "ed_tex": "\\mathbb{R}",
   "extrema": [
    {
+    "f_py": "0",
     "f_tex": "0",
     "f_val": 0.0,
     "genre": "minimum local",
+    "x_py": "(0)/(1)",
     "x_tex": "0",
     "x_val": 0.0
    }
@@ -1997,9 +2381,11 @@
   "ed_tex": "\\left[0 \\,;\\, +\\infty\\right[",
   "extrema": [
    {
+    "f_py": "0",
     "f_tex": "0",
     "f_val": 0.0,
     "genre": "minimum local",
+    "x_py": "(0)/(1)",
     "x_tex": "0",
     "x_val": 0.0
    }
@@ -2013,7 +2399,7 @@
     "type": "texte"
    },
    {
-    "html": "\\(f'(x) = \\frac{3\\sqrt{x}}{2} = 0 \\iff \\sqrt{x} = 0 \\iff x = 0\\).",
+    "html": "\\(f'(x) = 0 \\iff \\sqrt{x} = 0 \\iff x = 0\\).",
     "type": "texte"
    }
   ],
@@ -2051,7 +2437,7 @@
     {
      "cells": [
       "x",
-      "extremum",
+      "val:0",
       "\\nearrow"
      ],
      "label": "f(x)",
@@ -2064,8 +2450,15 @@
  "x^2*e^(-x)": {
   "deriv_etapes": [
    {
-    "html": "On pose \\(u(x) = x^{2}\\) et \\(v(x) = e^{-x}\\) : règle du produit, \\((uv)' = u'v + uv'\\).",
+    "html": "On applique la règle du produit, \\((uv)' = u'v + uv'\\), avec :",
     "type": "texte"
+   },
+   {
+    "du": "u' = 2x",
+    "dv": "v' = -e^{-x}",
+    "type": "uv",
+    "u": "u = x^{2}",
+    "v": "v = e^{-x}"
    },
    {
     "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
@@ -2076,15 +2469,7 @@
     "type": "texte"
    },
    {
-    "html": "\\(u'(x) = 2x\\).",
-    "type": "texte"
-   },
-   {
-    "html": "\\(v'(x) = -e^{-x}\\).",
-    "type": "texte"
-   },
-   {
-    "html": "\\(f'(x) = u'(x)v(x) + u(x)v'(x) = 2x\\,e^{-x} + x^{2}\\,\\left(-e^{-x}\\right) = -x\\,\\left(x - 2\\right)\\,e^{-x}\\).",
+    "html": "\\(f'(x) = u'(x)v(x) + u(x)v'(x) = 2x\\,e^{-x} + x^{2} \\cdot \\left(-e^{-x}\\right) = -x\\,\\left(x - 2\\right)\\,e^{-x}\\).",
     "type": "texte"
    }
   ],
@@ -2094,16 +2479,20 @@
   "ed_tex": "\\mathbb{R}",
   "extrema": [
    {
+    "f_py": "0",
     "f_tex": "0",
     "f_val": 0.0,
     "genre": "minimum local",
+    "x_py": "(0)/(1)",
     "x_tex": "0",
     "x_val": 0.0
    },
    {
-    "f_tex": "\\frac{4}{e^{2}}",
+    "f_py": "4*exp(-2)",
+    "f_tex": "4 e^{-2}",
     "f_val": 0.541341133,
     "genre": "maximum local",
+    "x_py": "(2)/(1)",
     "x_tex": "2",
     "x_val": 2.0
    }
@@ -2112,7 +2501,7 @@
   "ok": true,
   "signe_etapes": [
    {
-    "html": "\\(f'(x) = -x\\,\\left(x - 2\\right)\\,e^{-x} = 0 \\iff x = 0 \\text{ ou } x - 2 = 0 \\iff x = 0 \\text{ ou } x = 2\\).",
+    "html": "\\(f'(x) = 0 \\iff x\\,\\left(x - 2\\right) = 0\\) (car \\(e^{-x} > 0\\)) \\(\\iff x = 0 \\text{ ou } x = 2\\) (produit nul).",
     "type": "texte"
    }
   ],
@@ -2177,9 +2566,9 @@
     {
      "cells": [
       "\\searrow",
-      "extremum",
+      "val:0",
       "\\nearrow",
-      "extremum",
+      "val:4 e^{-2}",
       "\\searrow"
      ],
      "label": "f(x)",
@@ -2210,9 +2599,11 @@
   "ed_tex": "\\mathbb{R}",
   "extrema": [
    {
+    "f_py": "-1",
     "f_tex": "-1",
     "f_val": -1.0,
     "genre": "minimum local",
+    "x_py": "(2)/(1)",
     "x_tex": "2",
     "x_val": 2.0
    }
@@ -2221,7 +2612,7 @@
   "ok": true,
   "signe_etapes": [
    {
-    "html": "\\(f'(x) = 2\\left(x - 2\\right) = 0 \\iff x - 2 = 0 \\iff x = 2\\).",
+    "html": "\\(f'(x) = 0 \\iff x - 2 = 0 \\iff x = 2\\).",
     "type": "texte"
    }
   ],
@@ -2259,7 +2650,7 @@
     {
      "cells": [
       "\\searrow",
-      "extremum",
+      "val:-1",
       "\\nearrow"
      ],
      "label": "f(x)",
@@ -2285,7 +2676,7 @@
   "ok": true,
   "signe_etapes": [
    {
-    "html": "\\(f'(x) = 3x^{2} = 0 \\iff x = 0\\).",
+    "html": "\\(f'(x) = 0 \\iff x^{2} = 0 \\iff x = 0\\).",
     "type": "texte"
    }
   ],
@@ -2354,16 +2745,20 @@
   "ed_tex": "\\mathbb{R}",
   "extrema": [
    {
+    "f_py": "2",
     "f_tex": "2",
     "f_val": 2.0,
     "genre": "maximum local",
+    "x_py": "(-1)/(1)",
     "x_tex": "-1",
     "x_val": -1.0
    },
    {
+    "f_py": "-2",
     "f_tex": "-2",
     "f_val": -2.0,
     "genre": "minimum local",
+    "x_py": "(1)/(1)",
     "x_tex": "1",
     "x_val": 1.0
    }
@@ -2372,7 +2767,7 @@
   "ok": true,
   "signe_etapes": [
    {
-    "html": "\\(f'(x) = 3\\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 1\\).",
+    "html": "\\(f'(x) = 0 \\iff \\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x = -1 \\text{ ou } x = 1\\) (produit nul).",
     "type": "texte"
    }
   ],
@@ -2427,9 +2822,9 @@
     {
      "cells": [
       "\\nearrow",
-      "extremum",
+      "val:2",
       "\\searrow",
-      "extremum",
+      "val:-2",
       "\\nearrow"
      ],
      "label": "f(x)",
@@ -2468,23 +2863,29 @@
   "ed_tex": "\\mathbb{R}",
   "extrema": [
    {
+    "f_py": "-1",
     "f_tex": "-1",
     "f_val": -1.0,
     "genre": "minimum local",
+    "x_py": "(-1)/(1)",
     "x_tex": "-1",
     "x_val": -1.0
    },
    {
+    "f_py": "0",
     "f_tex": "0",
     "f_val": 0.0,
     "genre": "maximum local",
+    "x_py": "(0)/(1)",
     "x_tex": "0",
     "x_val": 0.0
    },
    {
+    "f_py": "-1",
     "f_tex": "-1",
     "f_val": -1.0,
     "genre": "minimum local",
+    "x_py": "(1)/(1)",
     "x_tex": "1",
     "x_val": 1.0
    }
@@ -2493,7 +2894,7 @@
   "ok": true,
   "signe_etapes": [
    {
-    "html": "\\(f'(x) = 4x\\,\\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x = 0 \\text{ ou } x + 1 = 0 \\text{ ou } x - 1 = 0 \\iff x = -1 \\text{ ou } x = 0 \\text{ ou } x = 1\\).",
+    "html": "\\(f'(x) = 0 \\iff x\\,\\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x = -1 \\text{ ou } x = 0 \\text{ ou } x = 1\\) (produit nul).",
     "type": "texte"
    }
   ],
@@ -2569,11 +2970,11 @@
     {
      "cells": [
       "\\searrow",
-      "extremum",
+      "val:-1",
       "\\nearrow",
-      "extremum",
+      "val:0",
       "\\searrow",
-      "extremum",
+      "val:-1",
       "\\nearrow"
      ],
      "label": "f(x)",
@@ -2596,9 +2997,11 @@
   "ed_tex": "\\left]0 \\,;\\, +\\infty\\right[",
   "extrema": [
    {
+    "f_py": "exp(-exp(-1))",
     "f_tex": "e^{- \\frac{1}{e}}",
     "f_val": 0.692200628,
     "genre": "minimum local",
+    "x_py": "exp((-1)/(1))",
     "x_tex": "e^{-1}",
     "x_val": 0.367879441
    }
@@ -2615,7 +3018,7 @@
     "type": "texte"
    },
    {
-    "html": "\\(f'(x) = x^{x}\\,\\left(\\ln(x) + 1\\right) = 0 \\iff \\ln(x) + 1 = 0 \\iff x = e^{-1}\\).",
+    "html": "\\(f'(x) = 0 \\iff x^{x}\\,\\left(\\ln(x) + 1\\right) = 0 \\iff \\ln(x) + 1 = 0 \\iff x = e^{-1}\\).",
     "type": "texte"
    }
   ],
@@ -2662,7 +3065,7 @@
       "x",
       "asym",
       "\\searrow",
-      "extremum",
+      "val:e^{- \\frac{1}{e}}",
       "\\nearrow"
      ],
      "label": "f(x)",

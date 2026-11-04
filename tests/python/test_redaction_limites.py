@@ -78,7 +78,8 @@ class TestPhrasesExactes(unittest.TestCase):
         (d,) = descentes("e^(2x)", MINF)
         self.assertEqual(titres_etapes(d), ["on remplace"])
         self.assertEqual(resultats(d), [r"\lim_{x\to -\infty} e^{2x} = 0^{+}"])
-        self.assertEqual(textes("e^(2x)", MINF)[-1], r"Asymptote horizontale : \(y = 0\).")
+        self.assertEqual(textes("e^(2x)", MINF)[-1],
+                         r"Asymptote horizontale : \(y = 0\) (à gauche). \(f(x) \to 0^{+}\) : le graphe est au-dessus.")
 
     def test_exponentielle_en_plus_l_infini(self):
         (d,) = descentes("e^(2x)", INF)
@@ -99,7 +100,7 @@ class TestPhrasesExactes(unittest.TestCase):
         g, dr = descentes("e^(1/x)", r"x \to 0")
         self.assertEqual(resultats(g), [r"\lim_{x\to 0^{-}} e^{\frac{1}{x}} = 0^{+}"])
         self.assertEqual(resultats(dr), [r"\lim_{x\to 0^{+}} e^{\frac{1}{x}} = +\infty"])
-        self.assertEqual(textes("e^(1/x)", r"x \to 0")[-1], r"Asymptote verticale : \(x = 0\) (du côté droit) ; à gauche, \(f(x) \to 0\).")
+        self.assertEqual(textes("e^(1/x)", r"x \to 0")[-1], r"Asymptote verticale : \(x = 0\), seulement du côté droit. À gauche, \(f(x) \to 0^{+}\) : le graphe s'approche du point " r"\((0\,;\,0)\), qui n'appartient pas au graphe (rond vide).")
 
     def test_quotient_dont_le_denominateur_tend_vers_zero(self):
         g, dr = descentes("ln(x^2-4x)/(x-5)", r"x \to 5")
@@ -110,7 +111,7 @@ class TestPhrasesExactes(unittest.TestCase):
     def test_une_sous_expression_n_est_ecrite_qu_une_fois(self):
         (d,) = descentes("(e^x+1)/(e^x-1)", MINF)
         self.assertEqual(resultats(d), [r"\lim_{x\to -\infty} \frac{e^{x} + 1}{e^{x} - 1} = \dfrac{1}{-1} = -1"])
-        self.assertEqual(textes("(e^x+1)/(e^x-1)", MINF)[-1], r"Asymptote horizontale : \(y = -1\).")
+        self.assertEqual(textes("(e^x+1)/(e^x-1)", MINF)[-1], r"Asymptote horizontale : \(y = -1\) (à gauche).")   # −1 sans signe d'approche démontré : pas de position
 
 
 class TestConclusionDesValeursInterdites(unittest.TestCase):
@@ -122,9 +123,9 @@ class TestConclusionDesValeursInterdites(unittest.TestCase):
 
     def test_un_seul_cote_infini(self):
         self.assertEqual(self.conclusion("e^(1/x)", r"x \to 0"),
-                         r"Asymptote verticale : \(x = 0\) (du côté droit) ; à gauche, \(f(x) \to 0\).")
+                         r"Asymptote verticale : \(x = 0\), seulement du côté droit. À gauche, \(f(x) \to 0^{+}\) : le graphe s'approche du point " r"\((0\,;\,0)\), qui n'appartient pas au graphe (rond vide).")
         self.assertEqual(self.conclusion("e^(-1/x)", r"x \to 0"),
-                         r"Asymptote verticale : \(x = 0\) (du côté gauche) ; à droite, \(f(x) \to 0\).")
+                         r"Asymptote verticale : \(x = 0\), seulement du côté gauche. À droite, \(f(x) \to 0^{+}\) : le graphe s'approche du point " r"\((0\,;\,0)\), qui n'appartient pas au graphe (rond vide).")
 
     def test_deux_cotes_infinis(self):
         self.assertEqual(self.conclusion("(e^x+1)/(e^x-1)", r"x \to 0"), r"Asymptote verticale : \(x = 0\).")
@@ -490,7 +491,7 @@ class TestEvidenceRacine(unittest.TestCase):
             r"&= \lim_{x\to -\infty} \dfrac{-x\,\sqrt{4 + \frac{1}{x^{2}}}}{x\,\left(1 + \frac{2}{x}\right)} "
             r"\qquad \left(x < 0 \text{ : } \sqrt{x^{2}} = |x| = -x\right) \\ "
             r"&= \lim_{x\to -\infty} -\frac{\sqrt{4 + \frac{1}{x^{2}}}}{1 + \frac{2}{x}} = -2\end{aligned}\]",
-            r"Asymptote horizontale : \(y = -2\).",
+            r"Asymptote horizontale : \(y = -2\) (à gauche).",
         ])
 
     def test_racine_sur_affine_en_plus_l_infini(self):
@@ -630,7 +631,7 @@ class TestConjuguee(unittest.TestCase):
             r"&= \lim_{x\to +\infty} \dfrac{x}{\sqrt{x^{2}\left(1 + \frac{1}{x}\right)} + x} \qquad \left(\text{mise en évidence}\right) \\ "
             r"&= \lim_{x\to +\infty} \dfrac{x}{x\,\sqrt{1 + \frac{1}{x}} + x} \qquad \left(x > 0 \text{ : } \sqrt{x^{2}} = |x| = x\right) \\ "
             r"&= \lim_{x\to +\infty} \frac{1}{\sqrt{1 + \frac{1}{x}} + 1} = \frac{1}{2}\end{aligned}\]",
-            r"Asymptote horizontale : \(y = \frac{1}{2}\).",
+            r"Asymptote horizontale : \(y = \frac{1}{2}\) (à droite).",
         ])                                                         # une seule chaîne : la conjuguée puis la mise en évidence
 
     def test_racine_moins_x_en_moins_l_infini_pas_de_forme_indeterminee(self):
@@ -691,7 +692,7 @@ class TestJamaisDeCroissanceComparee(unittest.TestCase):
                       r"\text{« }+\infty \cdot 0^{+}\text{ »}\text{ : forme indéterminée}", ch)
         self.assertIn(r"&= \lim_{x\to +\infty} \dfrac{x^{2}}{e^{x}} \qquad \left(\text{on écrit un quotient de la forme } « \infty/\infty »\right)", ch)
         self.assertEqual(sum(p.count(BH) for p in t), 2)      # x·e^(−x), puis x²e^(−x)
-        self.assertIn("Asymptote horizontale : \\(y = 0\\).", t)
+        self.assertIn("Asymptote horizontale : \\(y = 0\\) (à droite).", t)
 
     def test_liste_de_la_specification(self):
         cas = [("x^2*e^(-x)", INF), ("x^(1/2)*e^(-x)", INF), ("ln(x)/x", INF), ("x*ln(x)", r"x \to 0^+"), ("e^x-x^2", INF),
@@ -967,7 +968,7 @@ class TestFormeIndeterminee(unittest.TestCase):
         with mock.patch.object(la, "METHODES", []):
             t = textes("x*e^x", MINF)
         self.assertEqual(len(t), 2)
-        self.assertEqual(t[1], r"Asymptote horizontale : \(y = 0\).")
+        self.assertEqual(t[1], r"Asymptote horizontale : \(y = 0\) (à gauche). \(f(x) \to 0^{-}\) : le graphe est au-dessous.")
 
     def test_aucune_forme_annoncee_quand_il_n_y_en_a_pas(self):
         for entree, ou in [("e^(2x)", INF), ("sqrt(x)", INF), ("ln(x-1)", r"x \to 1^+"), ("x*e^x", INF)]:

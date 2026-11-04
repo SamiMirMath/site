@@ -57,12 +57,12 @@
 <script type="module">
 import { monterOutil } from "../commun/outil.js";
 import { greffonGraphique } from "../commun/graphique.js";
-const EXEMPLES=["(x^2-1)/(x-3)","x^3-3x","x^4-2x^2","x*ln(x)","e^(2x)","x^2*e^(-x)","x/(x^2+1)","ln(x)/x"];
+const EXEMPLES=["(x^2-1)/(x-3)","x^3-3x","x^4-2x^2","x*ln(x)","e^(2x)","x^2*e^(-x)","x/(x^2+1)","ln(x)/x","e^((x^2+x-2)/(6x-12))"];
 const EXOS={
   facile:["x^2-4x+3","x^3-3x","e^(2x)"],
   moyen:["x^4-2x^2","x*ln(x)","ln(x)/x"],
-  difficile:["(x^2-1)/(x-3)","x/(x^2+1)"],
-  tresDifficile:["x^2*e^(-x)"]
+  difficile:["(x^2-1)/(x-3)","x/(x^2+1)","e^(-x^2)","e^x(6-e^x)"],
+  tresDifficile:["x^2*e^(-x)","(x^2-6)e^(-2x)","e^(2/(x^2-4))"]
 };
 monterOutil({
   outil:"etude-complete",

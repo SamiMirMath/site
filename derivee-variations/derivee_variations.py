@@ -24,6 +24,7 @@ Convention pédagogique :
 import json
 
 from fractions import Fraction as F
+from math import gcd
 
 from noyau import (
     Nb, X, E, Neg, Op, Fn,
@@ -33,7 +34,7 @@ from noyau import (
     txt, NonPrisEnCharge, ErreurSaisie, analyser_complet, apercu_json, signe_facteur, complement,
 )
 
-__all__ = ["etudier", "etudier_json", "apercu_json"]
+__all__ = ["etudier", "etudier_json", "apercu_json", "tableau_signes"]
 
 
 # =====================================================================
@@ -223,10 +224,157 @@ def _ordre_naturel(n):
     return out
 
 
+def _factoriser_avec_exp(sp, e):
+    """factor(e) en gardant chaque exponentielle entière (décisions EC, D6) : factor développe e^(a + b) en e^a·e^b
+    (e^{(x² + x − 2)/(6x − 12)} devenait trois exponentielles). On regroupe d'abord les produits d'exponentielles
+    (powsimp), puis chaque e^a devient T^k, T symbole muet par famille d'exposants proportionnels (a = k·w, k entier :
+    e^{2x} = T² si T = eˣ) ; on factorise, puis on remet e^w à la place de T. Le remplacement est exact."""
+    e = sp.powsimp(e, combine="exp")
+    familles = []                                    # [w0, [(exposant, rapport rationnel à w0)]]
+    exposants = sorted((q.args[0] for q in e.atoms(sp.exp)), key=sp.default_sort_key)
+    exposants.sort(key=lambda a: bool(a.could_extract_minus_sign()))      # base eˣ plutôt que e^{−x} (comme factor)
+    for a in exposants:
+        for fam in familles:
+            r = sp.cancel(a / fam[0])
+            if r.is_Rational and r != 0:
+                fam[1].append((a, r))
+                break
+        else:
+            familles.append([a, [(a, sp.Integer(1))]])
+    if not familles:
+        return sp.factor(e)
+    remplacer, remettre = {}, {}
+    for w0, membres in familles:
+        g = sp.Rational(0)
+        for _, r in membres:                         # pgcd des rapports rationnels : e^a = (e^w)^(r/g), r/g entier
+            g = sp.Rational(sp.igcd(g.p * r.q, r.p * g.q), g.q * r.q) if g != 0 else abs(r)
+        T = sp.Dummy("T")
+        remettre[T] = sp.exp(w0 * g)
+        for a, r in membres:
+            remplacer[sp.exp(a)] = T ** int(r / g)
+    c, facteurs = sp.factor(e.xreplace(remplacer)).as_coeff_mul()
+    # facteur par facteur : un « −1 » reste devant le produit au lieu d'entrer dans la somme ((−e^{2x} − 1)·e^{−x})
+    return c * sp.Mul(*[f.xreplace(remettre) for f in facteurs])
+
+
+def _contient(n, cible):
+    if n.key() == cible.key():
+        return True
+    if isinstance(n, (Neg, Fn)):
+        return _contient(n.a, cible)
+    if isinstance(n, Op):
+        return _contient(n.a, cible) or _contient(n.b, cible)
+    return False
+
+
+def _oppose_somme(h):
+    """−h pour une somme h, écrit comme une somme (−(eˣ − 3) = 3 − eˣ)."""
+    termes = [(-sg, t) for sg, t in _termes(h)]
+    out = termes[0][1] if termes[0][0] > 0 else Neg(termes[0][1])
+    for sg, t in termes[1:]:
+        out = Op("+" if sg > 0 else "-", out, t)
+    return _ordre_naturel(out)
+
+
+def _forme_du_corrige(n):
+    """Formes du corrigé (décisions EC, D17), seulement là où l'écriture ne fait que changer de place un signe ou un facteur :
+      - c·… avec c < 0 et un seul facteur somme non polynomial de puissance impaire, avec un terme négatif (eˣ − 3) : le signe
+        entre dans ce facteur, −2(eˣ − 3)eˣ = 2(3 − eˣ)eˣ ; les facteurs polynomiaux (x − 3) restent tels quels (R7) ;
+      - un facteur e^{u} seul passe devant le premier facteur somme qui le contient : 2eˣ(3 − eˣ) (« on met eˣ en évidence »).
+    Dans un quotient, seul le numérateur est concerné. Sans changement, l'arbre est rendu tel quel."""
+    if isinstance(n, Op) and n.op == "/":
+        haut = _forme_du_corrige(n.a)
+        return n if haut is n.a else Op("/", haut, n.b)
+    try:
+        c, facs = aplatir(n)
+    except Exception:
+        return n
+    if c == 0 or c.denominator != 1 or not facs or any(k <= 0 for _, k in facs):
+        return n
+    facs = [list(f) for f in facs]
+    change = False
+    if c < 0:
+        sommes = [f for f in facs if f[1] % 2 == 1 and isinstance(f[0], Op) and f[0].op in "+-" and not _est_polynome(f[0])]
+        # seulement si l'opposé commence par un terme positif (3 − eˣ) ; jamais −e^{2x} − 1
+        if len(sommes) == 1 and any(sg < 0 for sg, _ in _termes(sommes[0][0])):
+            sommes[0][0] = _oppose_somme(sommes[0][0])
+            c, change = -c, True
+    for f in [f for f in facs if isinstance(f[0], Fn) and f[0].nom == "exp"]:
+        i = next(i for i, g in enumerate(facs) if g is f)
+        j = next((j for j, (s, _) in enumerate(facs) if isinstance(s, Op) and s.op in "+-" and _contient(s, f[0])), None)
+        if j is not None and j < i:
+            facs.insert(j, facs.pop(i))
+            change = True
+    if not change:
+        return n
+    out = _produit(([Nb(abs(c))] if abs(c) != 1 else []) + [_puiss_sure(h, k) for h, k in facs])
+    return Neg(out) if c < 0 else out
+
+
+def _exposants(n, out):
+    """Les exposants des exponentielles de n, dans l'ordre d'écriture, sans doublon d'écriture."""
+    if isinstance(n, Fn):
+        if n.nom == "exp" and not any(a.key() == n.a.key() for a in out):
+            out.append(n.a)
+        _exposants(n.a, out)
+    elif isinstance(n, Neg):
+        _exposants(n.a, out)
+    elif isinstance(n, Op):
+        _exposants(n.a, out)
+        _exposants(n.b, out)
+    return out
+
+
+SONDES_EXPOSANT = (-2.7, -0.6, 0.35, 1.3, 3.1)
+
+
+def _meme_exposant(sp, a, b):
+    """a et b sont le même exposant : différence nulle par SymPy (cancel, exact) et valeurs égales à la sonde (au moins un point)."""
+    try:
+        if sp.cancel(sp.together(en_sympy(a) - en_sympy(b))) != 0:
+            return False
+    except Exception:
+        return False
+    vus = 0
+    for t in SONDES_EXPOSANT:
+        va, vb = evaluer(a, t), evaluer(b, t)
+        if (va is None) != (vb is None):
+            return False
+        if va is not None:
+            if abs(va - vb) > 1e-9 * (1 + abs(va) + abs(vb)):
+                return False
+            vus += 1
+    return vus > 0
+
+
+def _exposants_de_l_enonce(sp, n, out):
+    """Chaque exponentielle de f' garde l'exposant écrit comme dans l'énoncé (décisions EC, Q37 : mêmes termes, même ordre) :
+    l'aller-retour par SymPy réécrit (x² + 1)/(2x) en (½x² + ½)/x et réordonne −2x² + 3x − 1 en 3x − 2x² − 1. Un exposant de
+    f' égal (SymPy et sonde) à un exposant écrit dans n est remplacé par celui-ci ; sinon il reste tel quel."""
+    ecrits = _exposants(n, [])
+    if not ecrits:
+        return out
+
+    def remettre(m):
+        if isinstance(m, Fn):
+            if m.nom == "exp" and not any(a.key() == m.a.key() for a in ecrits):
+                for a in ecrits:
+                    if _meme_exposant(sp, m.a, a):
+                        return Fn("exp", a)
+            return Fn(m.nom, remettre(m.a))
+        if isinstance(m, Neg):
+            return Neg(remettre(m.a))
+        if isinstance(m, Op):
+            return Op(m.op, remettre(m.a), remettre(m.b))
+        return m
+    return remettre(out)
+
+
 def _simplifier(n):
     """Met f' en forme factorisée (jamais développée) : plus facile à lire, et les
     zéros s'y lisent directement. Le résultat
-    est écrit en un quotient numérateur / dénominateur (_en_quotient)."""
+    est écrit en un quotient numérateur / dénominateur (_en_quotient) ; chaque exponentielle garde l'exposant de
+    l'énoncé (_exposants_de_l_enonce)."""
     sp = charger_sympy()
     if sp is None:
         return _en_quotient(_ordre_naturel(_nettoyer(n)))
@@ -237,7 +385,13 @@ def _simplifier(n):
             # exposant constant irrationnel : x^α·ln x + x^α/x → x^(α−1)(α ln x + 1) (les puissances de x se combinent)
             e = sp.powsimp(sp.expand(e))
             e = sp.collect(e, [q for q in e.atoms(sp.Pow) if not q.exp.is_Rational])
-        return _en_quotient(_ordre_naturel(_nettoyer(arbre_depuis_sympy(e if irrationnel else sp.factor(e)))))
+        else:
+            try:
+                e = _factoriser_avec_exp(sp, e)
+            except Exception:
+                e = sp.factor(e)
+        out = _forme_du_corrige(_en_quotient(_ordre_naturel(_nettoyer(arbre_depuis_sympy(e)))))
+        return _exposants_de_l_enonce(sp, n, out)
     except Exception:
         return _en_quotient(_ordre_naturel(_nettoyer(n)))
 
@@ -370,6 +524,38 @@ def _derivee_somme(n, items, top, etiq=F_PRIME):
     return resultat
 
 
+def _signe_devant(n):
+    """Facteur négatif (−2e^{−2x}, −1…) écrit −(…) : placé à droite d'un produit, il est écrit entre parenthèses, avec le point
+    (_tex_brut) : (x² − 6)·(−2e^{−2x}) et non (x² − 6) · −2e^{−2x} (décisions EC, D7)."""
+    reste, negatif = _pos_et_signe(n)
+    return Neg(reste) if negatif and not isinstance(n, Neg) else n
+
+
+def _tex_brut(n):
+    """tex(n), sauf qu'un facteur négatif à droite d'un produit est précédé du point : (x² − 6)·(−2e^{−2x}) (décisions EC, D7 ;
+    tex écrit deux parenthèses côte à côte sans point). Seuls les sommes, différences et quotients sont parcourus : partout
+    ailleurs, l'écriture est exactement celle de tex."""
+    if isinstance(n, Op):
+        if n.op == "*" and isinstance(n.b, Neg):
+            return par(n.a, 1.5) + r" \cdot " + par(n.b, 2)
+        if n.op == "+" and not isinstance(n.b, Neg):
+            return _tex_brut(n.a) + " + " + _tex_brut(n.b)
+        if n.op == "-" and prec(n.b) >= 2:
+            return _tex_brut(n.a) + " - " + _tex_brut(n.b)
+        if n.op == "/" and not (isinstance(n.a, Neg) and isinstance(n.a.a, Nb) and isinstance(n.b, Nb)):
+            return r"\frac{" + _tex_brut(n.a) + "}{" + tex(n.b) + "}"
+    return tex(n)
+
+
+def bloc_uv(u, du, v, dv):
+    """Tableau u | v / u′ | v′ des règles du produit et du quotient (décisions EC, D8), bloc « uv » du format de sortie (tex)."""
+    return {"type": "uv", "u": "u = " + tex(u), "du": "u' = " + tex(du), "v": "v = " + tex(v), "dv": "v' = " + tex(dv)}
+
+
+REGLE_PRODUIT = r"On applique la règle du produit, \((uv)' = u'v + uv'\), avec :"
+REGLE_QUOTIENT = r"On applique la règle du quotient, \(\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}\), avec :"
+
+
 def _derivee_produit(n, items, top, etiq=F_PRIME):
     a, b = n.a, n.b
     ca, cb = valeur_constante(a), valeur_constante(b)
@@ -380,19 +566,18 @@ def _derivee_produit(n, items, top, etiq=F_PRIME):
     if cb is not None:
         return _facteur_constant(b, a, "g*c", items, top, etiq)
     if top:
-        items.append(txt(rf"On pose \(u(x) = {tex(a)}\) et \(v(x) = {tex(b)}\) : règle du produit, "
-                         rf"\((uv)' = u'v + uv'\)."))
+        items.append(txt(REGLE_PRODUIT))
+        place = len(items)                   # le tableau u, v / u′, v′ suit la règle ; les justifications des dérivées viennent après
     ua = derivee_narree(a, items, top=False)
     ub = derivee_narree(b, items, top=False)
     if top:
         ua, ub = _simplifier(ua), _simplifier(ub)
-        items.append(txt(rf"\(u'(x) = {tex(ua)}\)."))
-        items.append(txt(rf"\(v'(x) = {tex(ub)}\)."))
-    brut = _epurer(_add(_mul(ua, b), _mul(a, ub)))
+        items.insert(place, bloc_uv(a, ua, b, ub))
+    brut = _epurer(_add(_mul(ua, b), _mul(a, _signe_devant(ub) if top else ub)))
     if not top:
         return brut
     simplifie = _simplifier(brut)
-    items.append(txt(rf"\({etiq} = u'(x)v(x) + u(x)v'(x) = {tex(brut)} = {tex(simplifie)}\)."))
+    items.append(txt(rf"\({etiq} = u'(x)v(x) + u(x)v'(x) = {_tex_brut(brut)} = {tex(simplifie)}\)."))
     return simplifie
 
 
@@ -402,20 +587,308 @@ def _derivee_quotient(n, items, top, etiq=F_PRIME):
     if cb is not None:
         return _facteur_constant(b, a, "g/c", items, top, etiq)
     if top:
-        items.append(txt(rf"On pose \(u(x) = {tex(a)}\) et \(v(x) = {tex(b)}\) : règle du quotient, "
-                         rf"\(\left(\frac{{u}}{{v}}\right)' = \frac{{u'v - uv'}}{{v^2}}\)."))
+        items.append(txt(REGLE_QUOTIENT))
+        place = len(items)
     ua = derivee_narree(a, items, top=False)
     ub = derivee_narree(b, items, top=False)
     if top:
         ua, ub = _simplifier(ua), _simplifier(ub)
-        items.append(txt(rf"\(u'(x) = {tex(ua)}\)."))
-        items.append(txt(rf"\(v'(x) = {tex(ub)}\)."))
-    brut = _epurer(_div(_sub(_mul(ua, b), _mul(a, ub)), _pow(b, Nb(2))))
+        items.insert(place, bloc_uv(a, ua, b, ub))
+    brut = _epurer(_div(_sub(_mul(ua, b), _mul(a, _signe_devant(ub) if top else ub)), _pow(b, Nb(2))))
     if not top:
         return brut
     simplifie = _simplifier(brut)
-    items.append(txt(rf"\({etiq} = \dfrac{{u'(x)v(x) - u(x)v'(x)}}{{v(x)^2}} = {tex(brut)} = {tex(simplifie)}\)."))
+    items.append(txt(rf"\({etiq} = \dfrac{{u'(x)v(x) - u(x)v'(x)}}{{v(x)^2}} = {_tex_brut(brut)} = {tex(simplifie)}\)."))
     return simplifie
+
+
+# =====================================================================
+# Dérivée de l'exposant détaillée (D7) et développement d'abord (D7b)
+# =====================================================================
+POINTS_SONDE = (-3.7, -1.3, -0.45, 0.35, 1.6, 2.9, 5.1)
+
+
+def _monome(t):
+    """c·xᵏ écrit tel quel (c entier non nul, k ≥ 0) → (c, k) ; None sinon."""
+    if isinstance(t, Nb):
+        return (t.v, 0) if t.v.denominator == 1 and t.v != 0 else None
+    if isinstance(t, X):
+        return F(1), 1
+    if isinstance(t, Op) and t.op == "^" and isinstance(t.a, X) and isinstance(t.b, Nb):
+        return (F(1), int(t.b.v)) if t.b.v.denominator == 1 and t.b.v >= 2 else None
+    if isinstance(t, Op) and t.op == "*" and isinstance(_coefficient(t.a), F):
+        m = _monome(t.b)
+        return (_coefficient(t.a) * m[0], m[1]) if m is not None and m[1] >= 1 else None
+    return None
+
+
+def _coefficient(n):
+    """Coefficient entier non nul écrit devant : Nb (6) ou Neg(Nb) (le parseur lit −2x² comme (−2)·x²) ; None sinon."""
+    if isinstance(n, Neg) and isinstance(n.a, Nb):
+        c = _coefficient(n.a)
+        return None if c is None else -c
+    return n.v if isinstance(n, Nb) and n.v.denominator == 1 and n.v != 0 else None
+
+
+def _monomes(n):
+    """Termes (c, k) d'un polynôme écrit développé (somme de c·xᵏ, c entier), dans l'ordre d'écriture ; None sinon."""
+    out = []
+    for sg, t in _termes(n):
+        m = _monome(t)
+        if m is None:
+            return None
+        out.append((sg * m[0], m[1]))
+    return out
+
+
+def _reduire(termes):
+    """Termes semblables regroupés, degrés décroissants, coefficients nuls retirés."""
+    somme = {}
+    for c, k in termes:
+        somme[k] = somme.get(k, 0) + c
+    return [(somme[k], k) for k in sorted(somme, reverse=True) if somme[k] != 0]
+
+
+def _monome_arbre(c, k):
+    """Arbre de c·xᵏ, c > 0."""
+    if k == 0:
+        return Nb(c)
+    xk = X() if k == 1 else Op("^", X(), Nb(k))
+    return xk if c == 1 else Op("*", Nb(c), xk)
+
+
+def _somme_arbre(termes):
+    """Arbre de la somme des c·xᵏ, dans l'ordre donné, sans rien regrouper (12x² − 24x + 6x − 12)."""
+    out = None
+    for c, k in termes:
+        m = _monome_arbre(abs(c), k)
+        out = (Neg(m) if c < 0 else m) if out is None else Op("-" if c < 0 else "+", out, m)
+    return out
+
+
+def _egaux(sp, arbres):
+    """Toutes les écritures sont égales à la première : différence nulle pour SymPy ET sonde numérique en 7 points (au moins 4
+    points où toutes sont définies). False au moindre doute."""
+    try:
+        ref = en_sympy(arbres[0])
+        if any(not _nul(sp, en_sympy(t) - ref) for t in arbres[1:]):
+            return False
+        testes = 0
+        for x in POINTS_SONDE:
+            vals = [_valeur_num(t, x) for t in arbres]
+            if all(v is None for v in vals):
+                continue
+            if any(v is None for v in vals) or any(abs(v - vals[0]) > 1e-9 * (1 + abs(vals[0])) for v in vals):
+                return False
+            testes += 1
+        return testes >= 4
+    except Exception:
+        return False
+
+
+def _nul(sp, e):
+    """e est nulle pour SymPy : d'abord `cancel` après développement (fractions rationnelles, polynômes en exponentielles), rapide ;
+    sinon `simplify`. Une réponse « non nul » vaut doute (jamais d'égalité affirmée sans preuve)."""
+    if sp.cancel(sp.expand(sp.powsimp(e, combine="exp"))) == 0:
+        return True
+    return sp.simplify(e) == 0
+
+
+def _derivee_juste(sp, g, gp):
+    """gp est la dérivée de g : SymPy (diff) et sonde numérique (différence centrée)."""
+    try:
+        if not _nul(sp, sp.diff(en_sympy(g), SYMPY["x"]) - en_sympy(gp)):
+            return False
+        testes = 0
+        for x in POINTS_SONDE:
+            h = 1e-6 * (1 + abs(x))
+            a, b, d = _valeur_num(g, x + h), _valeur_num(g, x - h), _valeur_num(gp, x)
+            if None in (a, b, d):
+                continue
+            if abs((a - b) / (2 * h) - d) > 1e-4 * (1 + abs(d)):
+                return False
+            testes += 1
+        return testes >= 4
+    except Exception:
+        return False
+
+
+def _ligne(gauche, quotient, propriete):
+    return txt(rf"\({gauche}{tex(quotient)}\) ({propriete})")
+
+
+def _derivee_exposant(f, fprime):
+    """Décisions EC, D7 : f = e^{g(x)} avec g = u/v, u et v polynômes écrits développés à coefficients entiers, v non constant
+    (exposant qui n'est pas affine, comme Ex7 et d). Sous-carte « Dérivée de l'exposant » : tableau u, v / u′, v′ (D8), règle du
+    quotient, puis le numérateur une étape par ligne (développement, réduction, mise en évidence, simplification). Chaque ligne
+    est vérifiée égale à la précédente et la dernière égale à g′ (SymPy et sonde), et g′·e^{g} égale à f′ ; au moindre doute,
+    None (rédaction habituelle). Renvoie les étapes de la carte « Dérivée » (avant le résultat encadré)."""
+    if not (isinstance(f, Fn) and f.nom == "exp" and isinstance(f.a, Op) and f.a.op == "/"):
+        return None
+    sp = charger_sympy()
+    if sp is None:
+        return None
+    g, A, B = f.a, f.a.a, f.a.b
+    mA, mB = _monomes(A), _monomes(B)
+    if mA is None or mB is None or all(k == 0 for _, k in mB):
+        return None
+    dA = _reduire([(c * k, k - 1) for c, k in mA if k >= 1])
+    dB = _reduire([(c * k, k - 1) for c, k in mB if k >= 1])
+    ua = _somme_arbre(dA) if dA else Nb(0)
+    ub = _somme_arbre(dB)
+    den1 = _pow(B, Nb(2))
+    brut = _epurer(_div(_sub(_mul(ua, B), _mul(A, _signe_devant(ub))), den1))
+    if r"-\left(-" in _tex_brut(brut):                 # « −(−1) » (e^{−1/x}) : écriture maladroite, rédaction habituelle
+        return None
+    # développement : chaque produit terme à terme, rien n'est regroupé ; dénominateur (c·w)² = c²·w² si c = pgcd > 1
+    developpe = [(p * q, i + j) for p, i in dA for q, j in mB] + [(-p * q, i + j) for p, i in mA for q, j in dB]
+    cB = 0
+    for c, _ in mB:
+        cB = gcd(cB, int(abs(c)))
+    signe = -1 if mB[0][0] < 0 else 1                    # (−6x − 18)² = 36(x + 3)² : le carré ne dépend pas du signe
+    W = _somme_arbre([(signe * c / cB, k) for c, k in mB]) if cB > 1 else B
+    den = Op("*", Nb(cB * cB), _pow(W, Nb(2))) if cB > 1 else den1
+    reduit = _reduire(developpe)
+    if not reduit:
+        return None
+    distribue = len(dA) * len(mB) > 1 or len(mA) * len(dB) > 1          # un produit de sommes : développement ; sinon un calcul
+    lignes = [(_div(_somme_arbre(developpe), den), "développement" if distribue else "calcul"),
+              (_div(_somme_arbre(reduit), den), "réduction")]
+    # mise en évidence de c·xᵏ (c = pgcd des coefficients, du signe du premier terme), puis simplification par le pgcd avec le
+    # coefficient du dénominateur
+    cN = 0
+    for c, _ in reduit:
+        cN = gcd(cN, int(abs(c)))
+    cN = -cN if reduit[0][0] < 0 else cN
+    kN = min(k for _, k in reduit)
+    reste = [(c / cN, k - kN) for c, k in reduit]
+    if len(reduit) >= 2 and (abs(cN) != 1 or kN >= 1):
+        def facteur(c):
+            corps = _monome_arbre(abs(c), kN) if (abs(c) != 1 or kN >= 1) else None
+            produit = _somme_arbre(reste) if corps is None else Op("*", corps, _somme_arbre(reste))
+            return Neg(produit) if c < 0 else produit
+        lignes.append((_div(facteur(cN), den), "mise en évidence"))
+    elif len(reduit) == 1:
+        cN, kN, reste = reduit[0][0], reduit[0][1], []
+
+        def facteur(c):
+            return _somme_arbre([(c, kN)])
+    else:
+        cN = 1
+    d = gcd(int(abs(cN)), cB * cB) if cB > 1 else 1
+    if d > 1:
+        haut = facteur(cN / d)
+        bas = _pow(W, Nb(2)) if cB * cB == d else Op("*", Nb(cB * cB // d), _pow(W, Nb(2)))
+        lignes.append((_div(haut, bas), f"simplification par {d}"))
+    # une ligne identique à la précédente n'est pas écrite
+    chaine, vu = [], tex(brut)
+    for q, propriete in lignes:
+        if tex(q) != vu:
+            chaine.append((q, propriete))
+            vu = tex(q)
+    gp = chaine[-1][0] if chaine else brut
+    if not (_egaux(sp, [brut] + [q for q, _ in chaine]) and _derivee_juste(sp, g, gp)
+            and _egaux(sp, [fprime, Op("*", gp, Fn("exp", g))])):
+        return None
+    etape1 = [txt(REGLE_QUOTIENT), bloc_uv(A, ua, B, ub), txt(rf"\(g'(x) = {_tex_brut(brut)}\) (règle du quotient)")]
+    etapes = [{"titre": "règle du quotient", "blocs": etape1}]
+    if chaine:
+        blocs = [_ligne("g'(x) = ", chaine[0][0], chaine[0][1])] + [_ligne("= ", q, p) for q, p in chaine[1:]]
+        etapes.append({"titre": "calcul du numérateur, puis simplification", "blocs": blocs})
+    return [
+        txt(rf"\(f(x) = e^{{g(x)}}\) avec \(g(x) = {tex(g)}\), donc \(f'(x) = g'(x) \cdot e^{{g(x)}}\) (dérivée d'une composée). "
+            r"On calcule d'abord \(g'(x)\)."),
+        {"type": "sous_calcul", "titre": "Dérivée de l'exposant", "etapes": etapes},
+        txt(r"On remplace \(g'(x)\) dans \(f'(x) = g'(x) \cdot e^{g(x)}\) :"),
+    ]
+
+
+def _terme_exp(t):
+    """c·e^{kx} (c entier non nul, k entier ≥ 1) → (c, k) ; constante entière non nulle c → (c, 0) ; None sinon."""
+    def k_de(a):
+        if isinstance(a, X):
+            return 1
+        if isinstance(a, Op) and a.op == "*" and isinstance(a.a, Nb) and isinstance(a.b, X) and a.a.v.denominator == 1 and a.a.v >= 2:
+            return int(a.a.v)
+        return None
+    if isinstance(t, Nb):
+        return (t.v, 0) if t.v.denominator == 1 and t.v != 0 else None
+    c = F(1)
+    if isinstance(t, Op) and t.op == "*" and _coefficient(t.a) is not None:
+        c, t = _coefficient(t.a), t.b
+    if isinstance(t, Fn) and t.nom == "exp" and k_de(t.a) is not None:
+        return c, k_de(t.a)
+    return None
+
+
+def _exp_kx(k):
+    return Fn("exp", X() if k == 1 else Op("*", Nb(k), X()))
+
+
+def _tex_termes(termes):
+    """Somme écrite terme à terme ; un terme (c, [k₁, k₂…]) est c·e^{k₁x}·e^{k₂x}… (eˣ · eˣ, sans regrouper)."""
+    out = ""
+    for i, (c, ks) in enumerate(termes):
+        corps = r" \cdot ".join(tex(_exp_kx(k)) for k in ks)
+        corps = tex(Nb(abs(c))) if not ks else ("" if abs(c) == 1 else tex(Nb(abs(c)))) + corps
+        out += ("-" if c < 0 else "") + corps if i == 0 else (" - " if c < 0 else " + ") + corps
+    return out
+
+
+def _developpe_d_abord(f, fprime):
+    """Décisions EC, D7b (.tex c) : f produit de deux facteurs, chacun somme de termes c·e^{kx} (k entier ≥ 1) et de constantes
+    entières, avec au moins une exponentielle dans chacun et une somme dans l'un d'eux (polynôme en eˣ, aucun x hors des
+    exponentielles) : on développe d'abord, eˣ(6 − eˣ) = 6eˣ − eˣ · eˣ = 6eˣ − e^{2x}, puis on dérive la somme. Chaque ligne est
+    vérifiée (SymPy et sonde), et la dérivée de la forme développée doit s'écrire exactement comme f′ ; sinon None."""
+    if not (isinstance(f, Op) and f.op == "*"):
+        return None
+    facteurs = []
+    for h in (f.a, f.b):
+        termes = [(sg, _terme_exp(t)) for sg, t in _termes(h)]
+        if any(m is None for _, m in termes) or not any(m[1] for _, m in termes):
+            return None
+        facteurs.append([(sg * m[0], m[1]) for sg, m in termes])
+    if all(len(fa) == 1 for fa in facteurs):
+        return None
+    sp = charger_sympy()
+    if sp is None:
+        return None
+    produits = [(c1 * c2, [k for k in (k1, k2) if k]) for c1, k1 in facteurs[0] for c2, k2 in facteurs[1]]
+    ordre, somme = [], {}
+    for c, ks in produits:
+        if sum(ks) not in somme:
+            ordre.append(sum(ks))
+            somme[sum(ks)] = 0
+        somme[sum(ks)] += c
+    reduits = [(somme[k], k) for k in ordre if somme[k] != 0]
+    if not reduits:
+        return None
+    dev = None
+    for c, k in reduits:
+        m = Nb(abs(c)) if k == 0 else _exp_kx(k) if abs(c) == 1 else Op("*", Nb(abs(c)), _exp_kx(k))
+        dev = (Neg(m) if c < 0 else m) if dev is None else Op("-" if c < 0 else "+", dev, m)
+    l1, l2 = _tex_termes(produits), _tex_termes([(c, [k] if k else []) for c, k in reduits])
+    try:
+        e1 = sp.Add(*[int(c) * sp.Mul(*[sp.exp(k * SYMPY["x"]) for k in ks]) for c, ks in produits], evaluate=False)
+        if not _nul(sp, e1 - en_sympy(f)):
+            return None
+    except Exception:
+        return None
+    if not _egaux(sp, [f, dev]):
+        return None
+    items = []
+    try:
+        d = derivee_narree(dev, items, top=True)
+    except Exception:
+        return None
+    if tex(_simplifier(d)) != tex(fprime):
+        return None
+    lignes = [txt("On développe d'abord (c'est plus simple à dériver) :")]
+    if l1 != l2:
+        lignes += [txt(rf"\(f(x) = {tex(f)} = {l1}\) (développement)"), txt(rf"\(= {l2}\) (réduction)")]
+    else:
+        lignes.append(txt(rf"\(f(x) = {tex(f)} = {l2}\) (développement)"))
+    return lignes + items
 
 
 def derivee_narree(n, items, top=True, etiq=F_PRIME):
@@ -451,8 +924,20 @@ def derivee_narree(n, items, top=True, etiq=F_PRIME):
 # =====================================================================
 # Signe de f', variations, extrema
 # =====================================================================
+def _exp_au_numerateur(sp, r, valeur):
+    """Écriture du corrigé (décisions EC, D17) : 3e^{−6} et non 3/e⁶. Seulement pour un entier fois une exponentielle
+    d'exposant constant négatif (3e^{−6}, −e^{−1}) ; seule l'écriture change (la valeur reste celle de num_sympy)."""
+    if valeur.approx or not isinstance(r, sp.Mul) or len(r.args) != 2:
+        return valeur
+    c, q = sorted(r.args, key=lambda a: not a.is_Integer)
+    if not (c.is_Integer and isinstance(q, sp.exp) and q.args[0].is_number and q.args[0].is_negative):
+        return valeur
+    t = ("- " if c < 0 else "") + ("" if abs(c) == 1 else f"{abs(c)} ") + sp.latex(q)      # « - 2 e^{4} » comme sp.latex
+    return Num(valeur.val, t, q=valeur.q, genre=valeur.genre, data=valeur.data, py=valeur.py)
+
+
 def _valeur_exacte(f_tree, point):
-    """f(point) en forme exacte (objet Num) si possible via SymPy, sinon None."""
+    """f(point) en forme exacte : (objet Num, écriture SymPy de la valeur) si possible via SymPy, sinon None."""
     sp = charger_sympy()
     if sp is None or point.py is None:
         return None
@@ -462,7 +947,7 @@ def _valeur_exacte(f_tree, point):
         r = sp.simplify(fe.subs(SYMPY["x"], val))
         if r.is_real is False:
             return None
-        return num_sympy(r)
+        return _exp_au_numerateur(sp, r, num_sympy(r)), str(r)
     except Exception:
         return None
 
@@ -508,22 +993,54 @@ def _point_isole(iv):
     return iv.lo is not None and iv.hi is not None and iv.lf and iv.hf and proche(iv.lo.val, iv.hi.val)
 
 
+def _est_exponentielle(h):
+    """e^{u} (u non constant) : strictement positive partout où elle est définie."""
+    return (isinstance(h, Fn) and h.nom == "exp" and not sans_x(h.a)) or \
+        (isinstance(h, Op) and h.op == "^" and isinstance(h.a, E) and not sans_x(h.b))
+
+
+def _unitaire_affine(h):
+    """x, x + a ou x − a (a constante) : le zéro se lit directement (x − 4 = 0 s'écrit x = 4)."""
+    return isinstance(h, X) or (isinstance(h, Op) and h.op in "+-" and isinstance(h.a, X) and sans_x(h.b))
+
+
+def _chaine_annotee(etapes):
+    """« \\(A \\iff B\\) (propriété) \\(\\iff C\\) … » : [formule, propriété ou None] enchaînées par ⇔, la propriété écrite hors de
+    la formule, juste après l'étape qu'elle justifie."""
+    morceaux, courant = [], ""
+    for i, (formule, propriete) in enumerate(etapes):
+        courant += (r" \iff " if courant else (r"\iff " if i else "")) + formule
+        if propriete:
+            morceaux.append(rf"\({courant}\) ({propriete})")
+            courant = ""
+    if courant:
+        morceaux.append(rf"\({courant}\)")
+    return " ".join(morceaux)
+
+
 def _ligne_zeros(fprime, c_const, facs, Z, D, items):
-    """La ligne qui précède le tableau (guide de rédaction, R7) : zéros de f' et valeurs interdites, sans phrase sur le signe
-    d'un facteur ; None si les zéros ne sont pas des points isolés. Un facteur qui n'est pas un polynôme et qui s'annule garde
-    l'explication de son zéro (ln(x) + 1 = 0 ⇔ ln(x) = −1 : on soustrait 1), ajoutée à items avant la ligne."""
+    """La ligne qui précède le tableau (guide de rédaction, R7) : zéros de f' et valeurs interdites ; None si les zéros ne sont
+    pas des points isolés. « f'(x) = 0 ⇔ produit des facteurs du numérateur hors exponentielles = 0 (car e^{…} > 0) ⇔ … (produit
+    nul) » (decisions EC, Q56). Un facteur qui n'est pas un polynôme et qui s'annule garde l'explication de son zéro
+    (ln(x) + 1 = 0 ⇔ ln(x) = −1 : on soustrait 1), ajoutée à items avant la ligne."""
     if not all(_point_isole(iv) for iv in Z):
         return None
     zeros = sorted((iv.lo for iv in Z), key=lambda p: p.val)
     interdites = sorted((iv.lo for iv in complement(D) if _point_isole(iv)), key=lambda p: p.val)
-    equations = []
+    expos, autres, equations = [], [], []
     for h, expo in facs:
         if expo < 0:
             continue
+        if _est_exponentielle(h):
+            if not any(h.key() == e.key() for e in expos):
+                expos.append(h)
+            continue
+        autres.append((h, expo))
         zh = [z for z in zeros if (evaluer(h, z.val) is not None and abs(evaluer(h, z.val)) <= 1e-9)]
         if not zh:
             continue
-        equations.append(f"{tex(h)} = 0")
+        # x − a = 0 s'écrit directement x = a (decisions EC, Q56 : « x(x − 4) = 0 ⇔ x = 0 ou x = 4 (produit nul) »)
+        equations.append(f"x = {zh[0].tex}" if (_unitaire_affine(h) and len(zh) == 1) else f"{tex(h)} = 0")
         if not _est_polynome(h):
             explication = []
             try:
@@ -535,26 +1052,172 @@ def _ligne_zeros(fprime, c_const, facs, Z, D, items):
     if not zeros:
         ligne = rf"\(f'(x) = {tex(fprime)}\) ne s'annule jamais"
     else:
-        etapes = [rf"f'(x) = {tex(fprime)} = 0"]
-        if len(facs) > 1 or c_const != 1 or facs[0][1] != 1:
-            moyen = r" \text{ ou } ".join(equations)
-            if moyen != finale:
-                etapes.append(moyen)
-        etapes.append(finale)
-        ligne = r"\(" + r" \iff ".join(etapes) + r"\)"
+        # decisions EC, Q56 (outil Dérivée, une seule rédaction) : on retire les facteurs qui ne s'annulent jamais avec leur raison,
+        # puis produit nul : « f′(x) = 0 ⇔ x(x − 4) = 0 (car e^{…} > 0) ⇔ x = 0 ou x = 4 (produit nul) »
+        produit = tex(_produit([_puiss_sure(h, k) for h, k in autres])) + " = 0" if autres else None
+        raison = ("car " + " et ".join(rf"\({tex(h)} > 0\)" for h in expos)) if expos else None
+        etapes = [["f'(x) = 0", None]]
+        if produit is not None and produit != finale:
+            etapes.append([produit, raison])
+            raison = None
+        if len(equations) > 1:
+            if sorted(equations) == sorted(f"x = {z.tex}" for z in zeros):
+                etapes.append([finale, "produit nul"])
+            else:
+                etapes.append([r" \text{ ou } ".join(equations), "produit nul"])
+                etapes.append([finale, None])
+        else:
+            if equations and equations[0] not in (produit, finale):
+                etapes.append([equations[0], None])
+            etapes.append([finale, None])
+        if raison is not None:                          # f′(x) = 0 ⇔ x = 0 (car e^{−x²} > 0)
+            etapes[-1][1] = raison if etapes[-1][1] is None else raison + " ; " + etapes[-1][1]
+        ligne = _chaine_annotee(etapes)
     if interdites:
         ligne += (" ; valeur interdite : " if len(interdites) == 1 else " ; valeurs interdites : ")
         ligne += " ; ".join(rf"\(x = {p.tex}\)" for p in interdites)
     return ligne + "."
 
 
-def etudier(entree):
+def _point_test(crit, i):
+    """Point de test de l'intervalle i (entre crit[i − 1] et crit[i])."""
+    k = len(crit)
+    if k == 0:
+        return 0.0
+    if i == 0:
+        return crit[0].val - 1
+    if i == k:
+        return crit[-1].val + 1
+    return (crit[i - 1].val + crit[i].val) / 2
+
+
+def _zone_hors(hors, j):
+    """Case j du tableau (intervalle si j pair, point critique si j impair) entièrement hors de l'ED :
+    un point critique ne l'est que si l'intervalle de chaque côté l'est."""
+    return hors[j // 2] if j % 2 == 0 else (hors[(j - 1) // 2] and hors[(j + 1) // 2])
+
+
+def tableau_signes(expr, Z, D, ED, etiquette, c_const, facs):
+    """Tableau de signes « papier » (guide de rédaction, R7) de expr = c_const · ∏ hᵏ (facs, issus d'`aplatir`) : une ligne par
+    facteur (constante à part), puis la ligne combinée `etiquette` (« f'(x) », « f(x) »). Z : zéros de expr ; D : ensemble où expr est
+    étudiée (dans l'ED de f) ; ED : ensemble de définition de f (zones hors de l'ED barrées, double barre aux valeurs interdites).
+    Résultat : (points critiques [Num], lignes, hors) ; hors[i] : l'intervalle i est hors de l'ED. Partagé par l'outil Dérivée
+    (tableau de f') et l'Étude complète (tableau de f, partie 3)."""
+    # Points critiques = zéros de expr ∪ bornes finies du domaine d'étude (valeurs interdites,
+    # asymptotes) — une seule liste, servant à la fois aux tests de signe et (outil Dérivée) aux
+    # valeurs exactes des extrema.
+    crit = []
+
+    def _ajouter(p):
+        if p is not None and not any(proche(p.val, q.val) for q in crit):
+            crit.append(p)
+
+    for iv in Z:
+        _ajouter(iv.lo)
+        _ajouter(iv.hi)
+    for iv in D:
+        _ajouter(iv.lo)
+        _ajouter(iv.hi)
+    crit.sort(key=lambda p: p.val)
+    # Une colonne n'existe que pour un point de l'ED ou une borne de l'ED : un point critique situé
+    # au milieu d'une zone hors de l'ED (0 pour ln(x²−4)) n'est pas un point d'étude.
+    ed_ivs = fusion(ED)
+
+    def _borne_de_ed(pt):
+        return any(b is not None and proche(b.val, pt.val) for iv in ed_ivs for b in (iv.lo, iv.hi))
+    crit = [pt for pt in crit if contient(ED, pt.val) or _borne_de_ed(pt)]
+    k = len(crit)
+
+    def _test(i):
+        return _point_test(crit, i)
+
+    # 3) Une ligne par facteur (expr étant gardée factorisée), puis la ligne combinée — même
+    # présentation qu'un tableau de signes « papier ».
+
+    def _cellule(v, expo, critique=False):
+        if v is None:
+            # facteur non défini : en un point critique de l'ED, expr n'y est pas définie (double barre) ;
+            # sur un intervalle, on est hors du domaine (zone barrée en aval)
+            return "||" if critique else "x"
+        if abs(v) <= 1e-9:
+            return "||" if expo < 0 else "0"
+        s = "+" if v > 0 else "-"
+        return "+" if (s == "-" and expo % 2 == 0) else s
+
+    # Intervalles hors de l'ED de f : ni signe ni flèche, case barrée (« x ») sur toutes les lignes.
+    # Chaque intervalle entre deux points critiques est entièrement dans l'ED ou entièrement dehors
+    # (les bornes de l'ED sont des points critiques).
+    hors = [not contient(ED, _test(i)) for i in range(k + 1)]
+
+    def _dans_zone_hors(j):
+        return _zone_hors(hors, j)
+
+    def _barrer(cells):
+        """Zone hors de l'ED : hachurée (« x »). Valeur interdite de f (borne hors de l'ED) : double barre
+        « || » sur toute la colonne, quelle que soit la ligne (facteurs, f', f)."""
+        out = []
+        for j, c in enumerate(cells):
+            if _dans_zone_hors(j):
+                out.append("x")
+            elif j % 2 == 1 and not contient(ED, crit[j // 2].val):
+                out.append("||")
+            else:
+                out.append(c)
+        return out
+
+    lignes = []
+    if c_const < 0:
+        lignes.append({"label": qtex(c_const), "cells": _barrer(["-"] * (2 * k + 1))})
+    elif c_const != 1:
+        lignes.append({"label": qtex(c_const), "cells": _barrer(["+"] * (2 * k + 1))})
+    for h, expo in facs:
+        label = tex(h) if prec(h) >= 3 else r"\left(" + tex(h) + r"\right)"
+        if abs(expo) > 1:
+            if indice_racine(h) is not None:
+                label = r"\left(" + label + r"\right)"
+            label += "^{" + str(abs(expo)) + "}"
+        cells = []
+        for i in range(k + 1):
+            cells.append(_cellule(evaluer(h, _test(i)), expo))
+            if i < k:
+                cells.append(_cellule(evaluer(h, crit[i].val), expo, critique=True))
+        lignes.append({"label": label, "cells": _barrer(cells)})
+
+    combinee = []
+    for i in range(k + 1):
+        colonne = [l["cells"][2 * i] for l in lignes]
+        combinee.append("x" if "x" in colonne else "||" if "||" in colonne else "0" if "0" in colonne else
+                         ("-" if colonne.count("-") % 2 else "+"))
+        if i < k:
+            colonne = [l["cells"][2 * i + 1] for l in lignes]
+            combinee.append("x" if "x" in colonne else "||" if "||" in colonne else "0" if "0" in colonne else
+                             ("-" if colonne.count("-") % 2 else "+"))
+    # Valeur interdite de f : double barre sur la ligne combinée aussi quand aucune ligne de facteur ne la porte
+    # (trou de (x²−1)/(x−1), où f' = 1).
+    for j in range(1, 2 * k + 1, 2):
+        if combinee[j] not in ("x", "||") and not contient(ED, crit[j // 2].val):
+            combinee[j] = "||"
+    # expr identiquement nulle (f' nulle : f constante sur chaque morceau de son ED) : « 0 » sur chaque
+    # intervalle de l'ED, « || » aux valeurs interdites, hors de l'ED la case est barrée.
+    f_constante = valeur_constante(expr) == 0
+    if f_constante:
+        for i in range(2 * k + 1):
+            if i % 2 == 0:
+                combinee[i] = "x" if hors[i // 2] else "0" if contient(D, _test(i // 2)) else "x"
+            else:
+                combinee[i] = "x" if _dans_zone_hors(i) else "0" if contient(D, crit[i // 2].val) else "||"
+    lignes.append({"label": etiquette, "cells": combinee, "final": True})
+    return crit, lignes, hors
+
+
+def etudier(entree, analyse=None):
+    """`analyse` : le résultat de analyser_complet(entree) quand l'appelant l'a déjà (Étude complète, D19) ; sinon il est calculé ici."""
     try:
         f = lire(entree)
     except ErreurSaisie as e:
         return {"ok": False, "erreur": str(e)}
 
-    res_ed, _, ED = analyser_complet(entree)
+    res_ed, _, ED = analyse if analyse is not None else analyser_complet(entree)
     if not res_ed.get("ok"):
         return {"ok": False, "erreur": res_ed["erreur"]}
     if not res_ed.get("complet"):
@@ -571,8 +1234,17 @@ def etudier(entree):
         res["deriv_detail"] = str(e)
         return res
     fprime = _simplifier(fprime)
+    # rédactions du corrigé (décisions EC) : dérivée de l'exposant détaillée (D7), développement d'abord (D7b) ; f' est la même
+    # (calculée ci-dessus), seules les étapes changent, et seulement si chaque ligne est vérifiée
+    items_deriv = _derivee_exposant(f, fprime) or _developpe_d_abord(f, fprime) or items_deriv
     res["deriv_tex"] = tex(fprime)
-    res["deriv_etapes"] = items_deriv
+    etapes, vues = [], set()                             # une même phrase n'est écrite qu'une fois ((eˣ)′ = eˣ pour u et v : D7)
+    for it in items_deriv:
+        cle = json.dumps(it, sort_keys=True)
+        if cle not in vues:
+            vues.add(cle)
+            etapes.append(it)
+    res["deriv_etapes"] = etapes
     res["deriv_resolu"] = True
 
     try:
@@ -624,118 +1296,16 @@ def etudier(entree):
     else:
         items_signe.append(txt(ligne))
 
-    # 2) Points critiques = zéros de f' (ci-dessus) ∪ bornes finies du domaine d'étude
-    # (valeurs interdites, asymptotes) — une seule liste, servant à la fois aux tests
-    # de signe et aux valeurs exactes des extrema.
-    crit = []
-
-    def _ajouter(p):
-        if p is not None and not any(proche(p.val, q.val) for q in crit):
-            crit.append(p)
-
-    for iv in Z:
-        _ajouter(iv.lo)
-        _ajouter(iv.hi)
-    for iv in D:
-        _ajouter(iv.lo)
-        _ajouter(iv.hi)
-    crit.sort(key=lambda p: p.val)
-    # Une colonne n'existe que pour un point de l'ED ou une borne de l'ED : un point critique situé
-    # au milieu d'une zone hors de l'ED (0 pour ln(x²−4)) n'est pas un point d'étude.
-    ed_ivs = fusion(ED)
-
-    def _borne_de_ed(pt):
-        return any(b is not None and proche(b.val, pt.val) for iv in ed_ivs for b in (iv.lo, iv.hi))
-    crit = [pt for pt in crit if contient(ED, pt.val) or _borne_de_ed(pt)]
+    # 2) et 3) Points critiques (zéros de f' ∪ bornes finies du domaine d'étude) et tableau de signes (R7), une ligne par
+    # facteur de f' puis la ligne f'(x) : `tableau_signes`, partagé avec l'Étude complète (tableau de f).
+    crit, lignes, hors = tableau_signes(fprime, Z, D, ED, "f'(x)", c_const, facs)
     k = len(crit)
-
-    def _test(i):
-        if k == 0:
-            return 0.0
-        if i == 0:
-            return crit[0].val - 1
-        if i == k:
-            return crit[-1].val + 1
-        return (crit[i - 1].val + crit[i].val) / 2
-
-    # 3) Une ligne par facteur de f' (f' étant gardée factorisée, cf. plus haut), puis
-    # la ligne combinée — même présentation qu'un tableau de signes « papier ».
-
-    def _cellule(v, expo, critique=False):
-        if v is None:
-            # facteur non défini : en un point critique de l'ED, f' n'y est pas définie (double barre) ;
-            # sur un intervalle, on est hors du domaine (zone barrée en aval)
-            return "||" if critique else "x"
-        if abs(v) <= 1e-9:
-            return "||" if expo < 0 else "0"
-        s = "+" if v > 0 else "-"
-        return "+" if (s == "-" and expo % 2 == 0) else s
-
-    # Intervalles hors de l'ED de f : ni signe ni flèche, case barrée (« x ») sur toutes les lignes.
-    # Chaque intervalle entre deux points critiques est entièrement dans l'ED ou entièrement dehors
-    # (les bornes de l'ED sont des points critiques).
-    hors = [not contient(ED, _test(i)) for i in range(k + 1)]
+    ed_ivs = fusion(ED)
+    combinee = lignes[-1]["cells"]
+    f_constante = valeur_constante(fprime) == 0
 
     def _dans_zone_hors(j):
-        """Case j du tableau (intervalle si j pair, point critique si j impair) entièrement hors de l'ED :
-        un point critique ne l'est que si l'intervalle de chaque côté l'est."""
-        return hors[j // 2] if j % 2 == 0 else (hors[(j - 1) // 2] and hors[(j + 1) // 2])
-
-    def _barrer(cells):
-        """Zone hors de l'ED : hachurée (« x »). Valeur interdite de f (borne hors de l'ED) : double barre
-        « || » sur toute la colonne, quelle que soit la ligne (facteurs, f', f)."""
-        out = []
-        for j, c in enumerate(cells):
-            if _dans_zone_hors(j):
-                out.append("x")
-            elif j % 2 == 1 and not contient(ED, crit[j // 2].val):
-                out.append("||")
-            else:
-                out.append(c)
-        return out
-
-    lignes = []
-    if c_const < 0:
-        lignes.append({"label": qtex(c_const), "cells": _barrer(["-"] * (2 * k + 1))})
-    elif c_const != 1:
-        lignes.append({"label": qtex(c_const), "cells": _barrer(["+"] * (2 * k + 1))})
-    for h, expo in facs:
-        label = tex(h) if prec(h) >= 3 else r"\left(" + tex(h) + r"\right)"
-        if abs(expo) > 1:
-            if indice_racine(h) is not None:
-                label = r"\left(" + label + r"\right)"
-            label += "^{" + str(abs(expo)) + "}"
-        cells = []
-        for i in range(k + 1):
-            cells.append(_cellule(evaluer(h, _test(i)), expo))
-            if i < k:
-                cells.append(_cellule(evaluer(h, crit[i].val), expo, critique=True))
-        lignes.append({"label": label, "cells": _barrer(cells)})
-
-    combinee = []
-    for i in range(k + 1):
-        colonne = [l["cells"][2 * i] for l in lignes]
-        combinee.append("x" if "x" in colonne else "||" if "||" in colonne else "0" if "0" in colonne else
-                         ("-" if colonne.count("-") % 2 else "+"))
-        if i < k:
-            colonne = [l["cells"][2 * i + 1] for l in lignes]
-            combinee.append("x" if "x" in colonne else "||" if "||" in colonne else "0" if "0" in colonne else
-                             ("-" if colonne.count("-") % 2 else "+"))
-    # Valeur interdite de f : double barre sur f'(x) aussi quand aucune ligne de facteur ne la porte
-    # (trou de (x²−1)/(x−1), où f' = 1).
-    for j in range(1, 2 * k + 1, 2):
-        if combinee[j] not in ("x", "||") and not contient(ED, crit[j // 2].val):
-            combinee[j] = "||"
-    # f' identiquement nulle (f constante sur chaque morceau de son ED) : « 0 » sur chaque
-    # intervalle de l'ED, « || » aux valeurs interdites, hors de l'ED la case est barrée.
-    f_constante = valeur_constante(fprime) == 0
-    if f_constante:
-        for i in range(2 * k + 1):
-            if i % 2 == 0:
-                combinee[i] = "x" if hors[i // 2] else "0" if contient(D, _test(i // 2)) else "x"
-            else:
-                combinee[i] = "x" if _dans_zone_hors(i) else "0" if contient(D, crit[i // 2].val) else "||"
-    lignes.append({"label": "f'(x)", "cells": combinee, "final": True})
+        return _zone_hors(hors, j)
 
     res["signe_resolu"] = True
     res["signe_etapes"] = items_signe
@@ -755,13 +1325,15 @@ def etudier(entree):
     memo = {}
 
     def _valeur_en(pt):
+        """(valeur, écriture tex, écriture SymPy ou None si la valeur n'est pas exacte)."""
         if pt.val not in memo:
-            valeur = None if pt.approx else _valeur_exacte(f, pt)
-            if valeur is None:
+            exacte = None if pt.approx else _valeur_exacte(f, pt)
+            if exacte is None:
                 v = _valeur_num(f, pt.val)
-                memo[pt.val] = (v, Num.approche(v).tex if v is not None else "?")
+                memo[pt.val] = (v, Num.approche(v).tex if v is not None else "?", None)
             else:
-                memo[pt.val] = (valeur.val, valeur.tex)
+                valeur, py = exacte
+                memo[pt.val] = (valeur.val, valeur.tex, py)
         return memo[pt.val]
 
     fleche_cells, extrema = [], []
@@ -785,15 +1357,21 @@ def etudier(entree):
         elif not gauche and s in ("+", "-") and s_droite in ("+", "-") and s != s_droite:
             # "local" : un changement de signe de f' donne un extremum local
             genre = "maximum local" if s == "+" else "minimum local"
+        valeur_tex = None
         if genre is not None:
-            v, valeur_tex = _valeur_en(p)
-            extrema.append({"genre": genre, "x_tex": p.tex, "f_tex": valeur_tex,
-                            "x_val": p.val, "f_val": v})
+            v, valeur_tex, valeur_py = _valeur_en(p)
+            e = {"genre": genre, "x_tex": p.tex, "f_tex": valeur_tex, "x_val": p.val, "f_val": v}
+            if valeur_py is not None and not p.approx and p.py is not None:
+                e.update(x_py=p.py, f_py=valeur_py)        # écritures exactes (SymPy) : extremums de l'Étude complète (D11)
+            extrema.append(e)
         if not contient(D, p.val) or f_constante:
-            v, valeur_tex = _valeur_en(p)
+            v, valeur_tex, _ = _valeur_en(p)
             fleche_cells.append("val:" + valeur_tex)
+        elif genre is not None:
+            # décisions EC, D10 (Dérivée et Étude complète) : la valeur de l'extremum dans la ligne f(x) ; « • » si elle est inconnue
+            fleche_cells.append("extremum" if valeur_tex == "?" else "val:" + valeur_tex)
         else:
-            fleche_cells.append("extremum" if genre is not None else "")
+            fleche_cells.append("")
 
     if f_constante:
         res["f_constante"] = True

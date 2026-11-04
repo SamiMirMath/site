@@ -5,7 +5,9 @@ Python pur, bibliothèque standard seulement. Une sortie de `resoudre()` est un 
 
     {ok, erreur, detail?, enonce_tex, entete?, cartes: [carte], besoin_sympy?, variantes?, variante_defaut?, option?}
     carte = {titre, titre_tex?, titre_masque?, badge?, style, blocs: [bloc]}
-    bloc  = texte | formule | resultat | erreur | liste | tableau | graphique
+            style « partie » : intertitre d'une partie (Étude complète, D1), sans bloc ; la page l'affiche avec la carte qui le suit
+    bloc  = texte | formule | resultat | erreur | liste | tableau | graphique | uv (tableau u, v / u′, v′) | bh, encadre, resultat_lim,
+            valeurs, sous_calcul (corrigé des limites ; sous_calcul aussi pour la dérivée de l'exposant)
     variante = {cle, libelle, cartes: [carte], option?: false}   (facultatif : plusieurs résolutions de la même entrée, au choix de l'élève ;
                `cartes` de la sortie est alors celles de la variante par défaut ; `option: false` : pas de case à cocher pour cette variante)
     option = {cle, libelle, cochee, cartes: [carte]}   (facultatif : une case à cocher dont les cartes s'ajoutent à la fin des cartes affichées ;
@@ -14,7 +16,7 @@ Python pur, bibliothèque standard seulement. Une sortie de `resoudre()` est un 
 `valider(sortie)` renvoie la liste des écarts au schéma (vide si la sortie est conforme).
 """
 
-STYLES_CARTE = ("normal", "etape", "final", "erreur")
+STYLES_CARTE = ("normal", "etape", "final", "erreur", "partie")
 STYLES_TEXTE = ("etape", "discret", "indice", "confirme")
 STYLES_LISTE = ("extrema", "bilan")
 GENRES_ENCADRE = ("prediction", "attention", "piege", "autre")
@@ -35,7 +37,9 @@ BLOCS = {
     "resultat_lim": ({"tex"}, set()),
     "valeurs": ({"expr", "xs", "fs"}, set()),
     "sous_calcul": ({"titre", "etapes"}, set()),
-    "graphique": ({"xmin", "xmax", "ymin", "ymax", "segments", "extrema", "asymptotes"}, {"recalculable"}),
+    # tableau u | v / u′ | v′ des règles du produit et du quotient (Étude complète, D8 ; outil Dérivée)
+    "uv": ({"u", "du", "v", "dv"}, set()),
+    "graphique": ({"xmin", "xmax", "ymin", "ymax", "segments", "extrema", "asymptotes"}, {"recalculable", "points", "ronds_vides"}),
 }
 CARTE = ({"titre", "style", "blocs"}, {"titre_tex", "badge", "detail", "titre_masque"})
 LIGNE = ({"label", "cells"}, {"final", "variation"})
@@ -99,6 +103,12 @@ def sous_calcul(titre, etapes):
     return {"type": "sous_calcul", "titre": titre, "etapes": list(etapes)}
 
 
+def uv(u, du, v, dv):
+    """Tableau 2 × 2 des règles du produit et du quotient (D8) : colonnes u | v, lignes fonction | dérivée ; chaque case est une
+    formule complète (« u = x^{2} - 6 », « u' = 2x »). La page empile les deux colonnes (u, u′, v, v′) si elles ne tiennent pas côte à côte."""
+    return {"type": "uv", "u": u, "du": du, "v": v, "dv": dv}
+
+
 def carte(titre, blocs, style="normal", badge=None, titre_tex=None, detail=None, titre_masque=False):
     c = {"titre": titre, "style": style, "blocs": list(blocs)}
     if titre_masque:
@@ -110,6 +120,12 @@ def carte(titre, blocs, style="normal", badge=None, titre_tex=None, detail=None,
     if titre_tex:
         c["titre_tex"] = titre_tex
     return c
+
+
+def partie(titre):
+    """Intertitre d'une partie (« 4. Limites et asymptotes ») : une carte sans bloc, que la page affiche comme un titre, sans cadre, avec
+    la carte qui la suit (ce n'est pas une étape)."""
+    return carte(titre, [], style="partie")
 
 
 def variante(cle, libelle, cartes, option=True):
@@ -219,7 +235,7 @@ def _valider_bloc(b, chemin, ecarts):
             ecarts.append(f"{chemin} : style « {b['style']} » inconnu")
     elif t == "tableau":
         _valider_tableau(b, chemin, ecarts)
-    elif t in ("bh", "resultat_lim"):
+    elif t in ("bh", "resultat_lim", "uv"):
         for k in obl:
             if not _texte_non_vide(b[k]):
                 ecarts.append(f"{chemin} : {k} vide")
@@ -336,5 +352,7 @@ def _valider_carte(c, chemin, ecarts):
     if not isinstance(c.get("blocs"), list):
         ecarts.append(f"{chemin} : blocs doit être une liste")
         return
+    if c.get("style") == "partie" and (c["blocs"] or set(c) - {"titre", "style", "blocs"}):
+        ecarts.append(f"{chemin} : un intertitre (style partie) n'a que titre, style et blocs vides")
     for j, b in enumerate(c["blocs"]):
         _valider_bloc(b, f"{chemin}.blocs[{j}]", ecarts)
