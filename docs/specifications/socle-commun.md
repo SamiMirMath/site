@@ -30,6 +30,10 @@ S'applique à toutes les pages outils, sauf mention contraire pour le simplexe
    avec un message et relance du moteur. Erreur de connexion : « Vérifiez votre connexion
    internet, puis rechargez la page ». Le détail technique n'est écrit que dans la console
    (`console.error`), jamais dans la page.
+   **Bloc qu'une page ne sait pas afficher** (décidé le 04.11.2026, SOC-22) : jamais sauté en silence. À sa place, la carte affiche l'encadré
+   commun « attention » (`.enc.enc-attention`), titré « Affichage incomplet » : « Une partie du corrigé n'a pas pu s'afficher. Rechargez la page (le navigateur garde peut-être une ancienne version du site). » ; les autres
+   blocs restent affichés ; le type inconnu est écrit dans la console. Cas typique : un ancien `commun/rendu.js` encore en cache reçoit la sortie d'un moteur plus récent (nouveau type de
+   bloc). Un style de texte inconnu est affiché comme une étape ordinaire.
 7b. **Aperçu de la saisie** (décidé le 14.10.2026) : aucun message d'erreur rouge pendant la frappe ;
    une erreur n'apparaît qu'après une pause d'environ 0,5 s, et disparaît dès que la saisie
    redevient valide ; une réponse tardive ou perdue ne laisse jamais un ancien message.
@@ -118,4 +122,5 @@ Retours d'élèves sur iPhone : formulaires trop larges, lignes coupées au hasa
 | SOC-19 | Mise en page fluide : pour chaque outil, aux largeurs 320, 360, 375, 390, 430, 768 et 1100 px, pas de défilement horizontal de la page, aucun bouton ni champ hors de l'écran, cibles ≥ 44 px de haut jusqu'à 430 px, blocs `.insecable` entiers ; aucune erreur de console. Les échecs connus sont listés (`CONNUS`), tout nouvel échec fait échouer la suite | [auto-page] (`test_largeurs.py`) |
 | SOC-20 | Clavier intégré (écran tactile) : le champ n'ouvre pas le clavier du système ; deux formules tapées uniquement avec les touches et « Calculer ▶ » donnent le corrigé de la saisie directe ; « × » insère `*` ; « ABC » rouvre le clavier du système ; touches ≥ 44 px, pas de défilement horizontal de 320 à 1100 px ; sur ordinateur, saisie inchangée | [auto-page] (`test_clavier.py`) |
 | SOC-21 | L'aperçu n'attend pas SymPy : dès que Python est prêt, une saisie s'affiche en aperçu pendant que « Chargement du moteur de calcul… » est encore affiché ; SymPy se charge après une pause de frappe (700 ms), au plus tard 8 s après le démarrage de Python, ou tout de suite si un calcul en a besoin | [auto-page] (`test_t40_l_apercu_ne_attend_pas_sympy`) |
+| SOC-22 | Un bloc de type inconnu (aussi dans un sous-calcul et dans la carte finale) affiche à sa place l'encadré « Affichage incomplet » (`.enc.enc-attention`, visible), les autres blocs de la carte restent affichés dans l'ordre ; un style de texte inconnu est rendu comme « etape », sans exception | [auto-page] (`test_soc22_bloc_inconnu_visible`) |
 | SOC-14 | Chargement sur un vrai téléphone : délai jusqu'à « Prêt » relevé et noté dans `docs/` | [manuel] (enseignant) |

@@ -20,7 +20,9 @@
                 sous_calcul sert aussi à la dérivée de l'exposant (Étude complète, D7)
      uv         tableau u | v / u′ | v′ des règles du produit et du quotient (D8) : deux colonnes .uv-col dans .uv (composant commun,
                 commun/composants.css) ; si elles ne tiennent pas côte à côte, la colonne v passe sous la colonne u (u, u′, v, v′)
-   Un bloc de type inconnu n'est pas affiché (message dans la console), jamais une exception.
+   Un bloc de type inconnu (SOC-22) n'est jamais sauté en silence ni une exception : à sa place, la carte affiche l'encadré commun
+   « attention » (bloc encadre, .enc.enc-attention) avec le message BLOC_INCONNU, et le type est écrit dans la console. Cas typique : un ancien rendu.js encore en
+   cache reçoit la sortie d'un moteur plus récent. Un style de texte inconnu est rendu comme « etape » (le texte reste lisible).
    `ajouterBloc(type, fn)` enregistre un rendu supplémentaire.
    `ajouterGreffon({ type, rendu, barre, activer })` enregistre un bloc qui a aussi du comportement (le graphique, T19) :
      rendu(bloc, carte)             HTML du bloc
@@ -83,6 +85,8 @@ export function rendreTableau(t) {
   return h + "</table></div>";
 }
 
+export const BLOC_INCONNU = "Une partie du corrigé n'a pas pu s'afficher. Rechargez la page (le navigateur garde peut-être une ancienne version du site).";
+
 const STYLE_TEXTE = {
   etape: h => `<div class="etape">${h}</div>`,
   discret: h => `<div class="muted" style="margin-top:4px">${h}</div>`,
@@ -93,7 +97,9 @@ const STYLE_TEXTE = {
 const BLOCS = {
   texte: b => {
     if (b.detail) console.error(b.detail);
-    return STYLE_TEXTE[b.style || "etape"](b.html);
+    const style = STYLE_TEXTE[b.style || "etape"];
+    if (!style) console.error("style de texte inconnu « " + b.style + " » : rendu comme « etape »");
+    return (style || STYLE_TEXTE.etape)(b.html);
   },
   formule: (b, c) => `<div class="${c.titre_masque ? "enonce" : "c"}">${K(b.tex)}</div>`,
   resultat: b => `<div class="res">${K(b.tex)}</div>`,
@@ -111,7 +117,7 @@ const BLOCS = {
   uv: b => `<div class="uv"><div class="uv-col"><div>${K(b.u)}</div><div>${K(b.du)}</div></div>` +
     `<div class="uv-col"><div>${K(b.v)}</div><div>${K(b.dv)}</div></div></div>`,
   sous_calcul: (b, c) => `<div class="sous"><div class="sous-t">${b.titre}</div>` +
-    b.etapes.map((e, i) => `<div class="sous-e">Étape ${i + 1} : ${e.titre}.</div>` + e.blocs.map(x => (BLOCS[x.type] ? BLOCS[x.type](x, c) : "")).join("")).join("") + "</div>",
+    b.etapes.map((e, i) => `<div class="sous-e">Étape ${i + 1} : ${e.titre}.</div>` + e.blocs.map(x => rendreBloc(x, c)).join("")).join("") + "</div>",
 };
 
 const BARRES = {};
@@ -125,6 +131,14 @@ export function ajouterGreffon({ type, rendu, barre, activer }) {
   BLOCS[type] = rendu;
   if (barre) BARRES[type] = barre;
   if (activer) ACTIVATIONS[type] = activer;
+}
+
+/* Un bloc de la carte `c` ; type inconnu : l'encadré « attention » avec BLOC_INCONNU à sa place (SOC-22). */
+function rendreBloc(b, c) {
+  const fn = BLOCS[b.type];
+  if (fn) return fn(b, c);
+  console.error("bloc non affiché : type inconnu « " + b.type + " »");
+  return BLOCS.encadre({ genre: "attention", titre: "Affichage incomplet", lignes: [BLOC_INCONNU] }, c);
 }
 
 function titre(c) {
@@ -152,11 +166,7 @@ export function rendreCarte(c, contexte) {
   }
   d.className = "card carte-etape" + (c.badge ? " cond" : "") + (c.style === "final" ? " final" : "");
   let h = titre(c);
-  for (const b of c.blocs) {
-    const fn = BLOCS[b.type];
-    if (fn) h += fn(b, c);
-    else console.error("bloc non affiché : type inconnu « " + b.type + " »");
-  }
+  for (const b of c.blocs) h += rendreBloc(b, c);
   d.innerHTML = h;
   math(d);
   for (const b of c.blocs) if (ACTIVATIONS[b.type]) ACTIVATIONS[b.type](d, b, contexte);

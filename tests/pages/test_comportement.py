@@ -931,6 +931,48 @@ class TestComportement(unittest.TestCase):
                 self.assertEqual(mauvais, "0", res)
                 self.assertGreater(int(total), 0)
 
+    def test_soc22_bloc_inconnu_visible(self):
+        """SOC-22 (R2) : un bloc de type inconnu (ancien rendu.js en cache, sortie d'un moteur plus récent) n'est jamais sauté en silence :
+        la carte affiche à sa place l'encadré commun « attention » (.enc.enc-attention, visible) avec BLOC_INCONNU, aussi dans la carte
+        finale et dans un sous-calcul ; les autres blocs restent affichés dans l'ordre ; un style de texte inconnu est rendu comme « etape ».
+        Aucune exception JS (page.evaluer en lèverait une)."""
+        page = self.ouvrir("ensemble-definition")                       # n'importe quelle page qui charge KaTeX et rendu.js
+        res = page.evaluer("""(async () => {
+            const { rendreCarte, BLOC_INCONNU } = await import('/commun/rendu.js');
+            const inconnu = { type: 'bloc_de_demain', donnees: [1, 2] };
+            document.querySelector('#resultat').hidden = false;               // comme après un calcul
+            const zone = document.querySelector('#cartes');
+            zone.innerHTML = '';
+            const cartes = [
+                { titre: 'Étape', blocs: [{ type: 'texte', html: 'avant' }, inconnu, { type: 'texte', html: 'après' }] },
+                { titre: 'Résultat', style: 'final', blocs: [inconnu] },
+                { titre: 'Sous-calcul', blocs: [{ type: 'sous_calcul', titre: 'Dérivée', etapes: [{ titre: 'u', blocs: [inconnu] }] }] },
+                { titre: 'Style', blocs: [{ type: 'texte', style: 'style_de_demain', html: 'lisible' }] },
+            ].map(c => zone.appendChild(rendreCarte(c)));
+            const encadres = el => [...el.querySelectorAll('.enc.enc-attention')].map(e => {
+                const r = e.getBoundingClientRect(), st = getComputedStyle(e);
+                return { texte: e.querySelector('.enc-c').textContent, titre: e.querySelector('.enc-t').textContent,
+                         visible: r.height > 0 && r.width > 0 && st.display !== 'none' && st.visibility !== 'hidden' };
+            });
+            return {
+                message: BLOC_INCONNU,
+                etape: encadres(cartes[0]), ordre: cartes[0].textContent,
+                final: encadres(cartes[1]),
+                sous: encadres(cartes[2]).length + ':' + cartes[2].querySelectorAll('.sous .enc.enc-attention').length,
+                style: cartes[3].querySelector('.etape') && cartes[3].querySelector('.etape').textContent,
+                vides: cartes.map(c => /undefined|\\[object/.test(c.innerHTML)),
+            };
+        })()""")
+        message = res["message"]
+        self.assertIn("Rechargez la page", message)
+        attendu = [{"texte": message, "titre": "Affichage incomplet", "visible": True}]
+        self.assertEqual(res["etape"], attendu)
+        self.assertRegex(res["ordre"], "avant.*" + re.escape(message) + ".*après")
+        self.assertEqual(res["final"], attendu)
+        self.assertEqual(res["sous"], "1:1")
+        self.assertEqual(res["style"], "lisible")
+        self.assertEqual(res["vides"], [False] * 4)
+
     def test_rendu_commun_de_l_etude_complete_egal_a_l_ancienne_page(self):
         """EC (T19) : rendre avec commun/rendu.js les sorties de resoudre() de l'Étude complète donne les mêmes cartes
         que la page d'origine, enregistrées dans references/etude-complete.json (classes, titres, textes, formules,
