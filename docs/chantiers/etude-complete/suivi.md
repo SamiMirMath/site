@@ -9,7 +9,9 @@ Un commit « EC P{N} : … » par partie ; suite complète verte (`python3 tests
 questions 1 à 56 ; §2 Extremums révisé ; parties R1 et R2). Ordre de la session 2 : **R1, R2, P6, P9** (P10 exclue), un sous-agent par
 partie, l'un après l'autre ; le commit R1 verse aussi la nouvelle version de `decisions.md`. Nouvelles questions numérotées à partir
 de 57. État : tableau « Parties » ci-dessous. **P6 faite** (14 xfail P6 retirés : 7 xfail restent, P9 (6) et P10 (1) ; questions
-67 à 74 ; instantanés des outils Limites et EC sous « À relire », P6) ; prochaine : **P9**.
+67 à 74 ; instantanés des outils Limites et EC sous « À relire », P6) ; **P9 faite** (6 xfail P9 retirés : 1 xfail reste, P10 ;
+questions 75 à 82 ; instantanés de l'EC sous « À relire », P9 ; temps sous Pyodide et captures à 390 px : section « Temps sous Pyodide
+(P9) ») ; P10 non faite (facultative, hors de la session 2).
 
 **Reprise après compactage (nuit du 02–03.11)** : la nuit du 02–03.11.2026 est **terminée** (P0 à P5, P7a, P7b, P8 commitées ; résumé ci-dessous ;
 rien n'est poussé ni fusionné). Prochaine étape : **relecture de l'enseignant** (questions « à trancher avant la fusion », instantanés
@@ -335,11 +337,11 @@ encadré ; les cartes « Étape k : … » de la partie 4 sont les étapes de la
 | P5 | Partie 3 : zéros, signe, f(0) (D5) | EC | **fait** | 8fc2fa2 |
 | R1 | Corrections après relecture, outil Dérivée : Q37, Q56, Q32 (§7) | Dérivée | **fait** | e38278c |
 | R2 | Corrections après relecture, EC : Q7, Q11, Q15, Q23, Q28, Q41, Q43 (§7) | EC | **fait** | 0acc931 |
-| P6 | Partie 4 : D12, D13, D16 | Limites | **fait** | (voir commit « EC P6 ») |
+| P6 | Partie 4 : D12, D13, D16 | Limites | **fait** | 94168f8 |
 | P7a | Dérivée de l'exposant détaillée, tableau u/v (D7, D8, D7b si simple) | Dérivée | **fait** | 1799fff |
 | P7b | Valeurs dans le tableau de variations (D10), extremums (D11) | EC + Dérivée | **fait** | cfe88de |
 | P8 | Graphe (D15, §3) | EC | **fait** | 3ece3c9 |
-| P9 | Exemples (D18), Bilan (D20), instantanés, largeurs 320–390 px, mesure Pyodide | EC | à faire (session 2) | |
+| P9 | Exemples (D18), Bilan (D20), instantanés, largeurs 320–390 px, mesure Pyodide | EC | **fait** | (voir commit « EC P9 ») |
 | P10 | *(facultatif)* Pente au point exclu (D14) | EC | reportée (hors de la nuit du 02.11) | |
 
 ## Plans
@@ -656,6 +658,42 @@ guide des limites ; seul l'ordre des bornes change pour elles).
    Instantanés de l'outil Limites et de l'EC régénérés et listés sous « À relire » (avant / après) ; largeurs ; spécifications
    (Limites, EC) ; suite complète ; temps natif ; commit « EC P6 : … ».
 
+### P9 (04.11.2026, session 2)
+
+EC seule (D18, D20) : `etude-complete/index.html`, `etude-complete/parties.py`, `etude-complete/resoudre_ec.py` ; les outils ED,
+Dérivée, Limites, Factorisation, Exp-log ne changent pas (leurs instantanés doivent rester identiques).
+1. **D18** : Ex7 ajouté à la fin des exemples de la page (le premier exemple, celui du balayage des largeurs, ne change pas) ; a et c
+   en exercices « difficile », b et d en « très difficile » (a, c : une exponentielle, un extremum ; b, d : deux extremums ou deux
+   AV et quatre limites latérales). Les entrées de la page entrent d'elles-mêmes dans les instantanés et les tests de pages
+   (`cas.entrees_page`) : a, b, c sont nouvelles (Ex7 et d y étaient déjà, cas limites de P3).
+2. **D20, carte « Bilan de l'étude »** : sous « 6. Graphe », avant la carte « Graphique » (« à la fin, avant le graphe » ; D1 garde
+   six intertitres), style `final` (cadre vert, comme le résultat final des autres outils). Une liste, une ligne par résultat, dans
+   l'ordre de D20, chacune terminée par « (partie k) » : ED ; parité ; zéros ; signe ; f(0) ; chaque asymptote (avec la position) ;
+   chaque extremum (nature et ≈). **Aucun calcul nouveau** : chaque ligne reprend un résultat déjà écrit et confirmé par sa partie
+   (une seule source) :
+   - ED : `ed_tex` de l'étude (celui de l'encadré de la partie 1) ;
+   - parité : la conclusion de la partie 2 (`parties.partie2`, nouvelle : cartes + conclusion « paire », « impaire », « ni », ou
+     rien si la partie ne conclut pas) ;
+   - zéros, signe, f(0) : `parties.partie3` rend en plus les écritures de ses cartes (« x = √6 ≈ 2,45 », « f(0) = e^{1/6} ≈ 1,18 ») et
+     les ensembles où f > 0 et f < 0, lus dans la ligne f(x) du tableau de signes **déjà confirmée** (`confirmer_signe` : SymPy et
+     sonde, cases des intervalles et des points critiques), écrits comme l'ED (`ens_tex`) ; f de signe constant : « f(x) > 0 sur ED » ;
+   - asymptotes : les lignes de la carte « Bilan des asymptotes » de la partie 4 (`resoudre_la.ligne_asymptote`), telles quelles ;
+   - extremums : la ligne de la partie 5 sans sa justification (« **Maximum local** en x = 0 : (0 ; e^{1/6}) ≈ (0 ; 1,18) ») ;
+     sans rédaction D11 (repli), la ligne de l'outil Dérivée ; aucun extremum : la phrase de la partie 5.
+   Une partie qui ne conclut pas (doute, message) : sa ligne n'est pas écrite (option qui affiche le moins).
+3. Tests : xfail P9 retirés (6) ; corpus (lignes du bilan contre l'oracle mpmath : parité, zéros, f(0), positions, extremums et ≈) ;
+   `test_parties_ec.py` (lignes exactes d'Ex7, a–d ; pour toutes les entrées de la page et les cas limites : chaque ligne renvoie au
+   résultat de sa partie (ses formules sont dans les cartes de la partie), ensembles du signe recoupés par l'oracle de `oracle.py` ;
+   garde-fous forcés : partie 2 ou 3 en doute, ligne absente) ; `test_resoudre_ec.py` (ordre des cartes) ; `test_largeurs.py`
+   (Ex7, a–d, corrigé complet de 320 à 1100 px : aucune faute du balayage, aucune formule hors de sa carte, bilan visible).
+   Instantanés `resoudre`, moteur et références de pages de l'EC régénérés, listés sous « À relire » ; spécification.
+4. **Mesure Pyodide** (`docs/chantiers/etude-complete/mesurer_pyodide.py`, navigateur et serveur des tests de pages, copie locale de
+   Pyodide) : pour Ex7, a–d, une page neuve par mesure (le cache D19 fausserait une deuxième mesure dans la même page), du clic sur
+   « Calculer ▶ » à la dernière carte affichée (bouton rendu, carte « Graphique » présente), 3 mesures, médiane ; une commande par
+   fonction, limite de 5 minutes. **Captures** PNG à 390 px, page entière, corrigé complet (« Tout afficher ») : Ex7, a–d,
+   e^(1/x), x/(x²+1), dans `docs/chantiers/etude-complete/captures/` ; vérifier que ce dossier n'est ni publié ni collecté.
+5. Suite complète ; temps natif ; commit « EC P9 : … ».
+
 ## Temps natif de etudier() (s, médiane de 3 processus neufs)
 
 | Partie | Ex7 | a | b | c | d |
@@ -672,6 +710,7 @@ guide des limites ; seul l'ordre des bornes change pour elles).
 | R1 | 0,58 | 0,03 | 0,35 | 0,25 | 0,21 |
 | R2 | 0,67 | 0,03 | 0,42 | 0,30 | 0,24 |
 | P6 | 0,76 | 0,03 | 0,41 | 0,27 | 0,27 |
+| P9 | 0,73 | 0,03 | 0,35 | 0,26 | 0,23 |
 
 P3 ne touche pas `etudier()` ; la partie 1 (`parties.cartes_domaine`, appelée par `resoudre`) coûte en plus 0,5 ms (Ex7), 0,2 ms (d),
 moins de 0,01 ms (a, b, c).
@@ -704,6 +743,54 @@ P6 : Ex7 + 12 à 19 % (valeurs d'essai en 2⁻ et 2⁺ : isolation exacte des ra
 comme toute la descente en un point interdit, `_narrer_cotes`) ; les autres dans le bruit. Même jour, même machine, HEAD (R2, 0acc931,
 arbre séparé) : Ex7 0,64 s, a 0,03 s, b 0,51 s, c 0,35 s, d 0,30 s ; un premier lancement sur P6 avait donné Ex7 0,73 s, a 0,05 s,
 b 0,63 s, c 0,34 s, d 0,28 s (bruit : b ne fait aucun calcul nouveau). Aucune hausse de plus de 50 % au-dessus de 0,1 s.
+P9 : aucune hausse (le bilan ne fait aucun calcul : dans `etudier()`, la partie 3 garde en plus ses écritures des zéros et de f(0) et
+les ensembles du signe, lus dans la ligne f(x) déjà confirmée ; la carte du bilan est écrite par `resoudre`).
+
+## Temps sous Pyodide (P9)
+
+Page réelle (`etude-complete/index.html`), navigateur et serveur des tests de pages (Chrome sans interface, copie locale de Pyodide
+0.27.7, SymPy chargé avant « Prêt. »), script `docs/chantiers/etude-complete/mesurer_pyodide.py` : une page neuve par mesure (le
+cache D19 ne sert pas), temps lu dans la page (`performance.now()`) du clic sur « Calculer ▶ » à la dernière carte affichée (bouton
+rendu, dernière carte « Graphique »), largeur 390 px. Une commande par fonction, chacune sous `timeout 300` (31 s par fonction environ,
+chargement des 3 pages compris) : aucune n'a dépassé sa limite. Mac de l'enseignant, 04.11.2026, sur le code de P9.
+
+| Fonction | Mesure 1 (s) | Mesure 2 (s) | Mesure 3 (s) | Médiane (s) |
+|---|---|---|---|---|
+| Ex7 | 1,89 | 1,87 | 1,88 | 1,88 |
+| a | 0,51 | 0,51 | 0,55 | 0,51 |
+| b | 1,53 | 1,54 | 1,53 | 1,53 |
+| c | 1,34 | 1,34 | 1,28 | 1,34 |
+| d | 1,22 | 1,23 | 1,30 | 1,23 |
+
+Aucun temps au-dessus de 30 s (le plus long, Ex7, 1,9 s ; délai de la page : 45 s). Le chargement de Pyodide et de SymPy (avant
+« Prêt. ») n'est pas compté.
+
+**Captures** (PNG, 390 px de large, page entière, corrigé complet après « Tout afficher », 1 px CSS = 1 px ; prises par le même script,
+option `--capture`, première mesure de chaque fonction ; e^(1/x) et x/(x² + 1) avec `--n 0`) :
+
+| Fichier | Fonction | Point ⏸ de decisions.md §7 à juger |
+|---|---|---|
+| `docs/chantiers/etude-complete/captures/Ex7-390.png` | e^((x² + x − 2)/(6x − 12)) | Q50 (échelle égale), Q51 (branche infinie en 2⁺ coupée en y), Q54 (étiquettes des points) ; carte « Bilan de l'étude » |
+| `docs/chantiers/etude-complete/captures/a-390.png` | e^(−x²) | Q50 (fenêtre large et plate) |
+| `docs/chantiers/etude-complete/captures/b-390.png` | (x² − 6)e^(−2x) | Q51 (branche vers +∞ en −∞ coupée), Q54 (étiquettes des zéros ±√6) |
+| `docs/chantiers/etude-complete/captures/c-390.png` | eˣ(6 − eˣ) | Q50, Q51 (branche vers −∞ en +∞), Q54 (étiquette du zéro ln 6) |
+| `docs/chantiers/etude-complete/captures/d-390.png` | e^(2/(x² − 4)) | Q46 (le tableau de variations défile à 390 px : il est capturé dans sa position de départ, à gauche), Q51 (deux AV) |
+| `docs/chantiers/etude-complete/captures/e1x-390.png` | e^(1/x) | Q50, Q51 (branche en 0⁺), AH y = 1 des deux côtés (position) |
+| `docs/chantiers/etude-complete/captures/x1-390.png` | x/(x² + 1) | Q50 (fenêtre plate : max et min à ±0,5), Q54 (zéro et (0 ; f(0)) confondus) |
+
+Les captures sont dans `docs/` : **non publiées** et **non collectées**. Vérifié :
+- `_config.yml` (GitHub Pages, Jekyll) exclut `docs` ; `tests/python/test_accueil.py::test_les_fichiers_internes_ne_sont_pas_publies`
+  vérifie que `docs` reste dans cette liste ;
+- aucune page publiée (`index.html`, pages des outils, `commun/`) ni `moteur/manifeste.json` (fichiers chargés par Pyodide) ne
+  référence `docs/` (`grep -rln "docs/"` sur les .html, .js, .json hors de `docs/` et `tests/` : aucun fichier) ;
+- les tests ne les lisent pas : pytest ne collecte que `tests/python` et `tests/pages` (`tests/lancer.py`, aucun fichier de
+  configuration pytest dans le dépôt), et seulement des `test_*.py` ; aucun test ne nomme `captures/` (le seul « captures » des tests,
+  `tests/pages/captures.py`, écrit dans un dossier passé en argument) ; les parcours de fichiers (`test_accueil.py` : `index.html` et
+  `.md`, hors `docs` et `tests` ; `test_json_strict.py` : `.json` de `tests/python/instantanes`) ignorent les .png ;
+- le serveur HTTP des tests de pages sert tout le dépôt sur 127.0.0.1 pendant les tests (comme avant), mais aucune page ni aucun test
+  n'y demande `docs/` ;
+- aucune règle ne les exclut du dépôt (`git check-ignore` : non ignorés ; `.gitignore` n'exclut que `docs/reference/` dans `docs`) :
+  les 7 PNG (3,6 Mo en tout) sont commités avec P9.
 
 ## Suite complète
 
@@ -731,6 +818,8 @@ b 0,63 s, c 0,34 s, d 0,28 s (bruit : b ne fait aucun calcul nouveau). Aucune ha
 | R2 | 1240 passés, 21 xfail (930 s) | 120 passés (1202 s, dont le nouveau test `test_largeurs.py::test_lignes_de_calcul_et_valeurs_approchees`) ; code de retour 0 (1ᵉʳ lancement) | 03.11.2026 |
 | R2 (contrôle du chef d'orchestre) | 1240 passés, 21 xfail (917 s) | 120 passés (1199 s) ; code de retour 0 | 03.11.2026 |
 | P6 | 1273 passés, 7 xfail (713 s ; 1ᵉʳ lancement : 836 s, mêmes résultats) | 2ᵉ lancement : 119 passés, 1 échec : `test_clavier.py::test_a_deux_formules…` (le test instable, même symptôme : « effacer » laisse `(x^2-1)/(x-3)`) ; ce test seul : 5 réussites sur 6 ; 1ᵉʳ lancement : 16 échecs de `test_graphique.py::test_traces_egales_aux_references`, tous e^(1/x) (ordre des asymptotes, D16 : `graphique-traces.json` régénéré, voir « À relire »), `test_clavier` passé → P6 acceptée comme R1 | 03.11.2026 |
+| P6 (contrôle du chef d'orchestre) | 1273 passés, 7 xfail (696 s) | 120 passés (929 s) ; code de retour 0 | 04.11.2026 |
+| P9 | 1290 passés, 1 xfail (P10) (700 s) | 121 passés (930 s, dont le nouveau test `test_largeurs.py::test_corrige_et_bilan_de_l_etude`) ; code de retour 0 (2ᵉ lancement : le 1ᵉʳ a échoué dans la suite Python, 4 tests, voir Écarts, P9 ; la suite de pages n'avait pas été lancée) | 04.11.2026 |
 
 ## Écarts acceptés
 
@@ -860,6 +949,17 @@ b 0,63 s, c 0,34 s, d 0,28 s (bruit : b ne fait aucun calcul nouveau). Aucune ha
   (la phrase écrit y = 1) **et** le signe comparé à la position de l'AH (« au-dessus » ⇔ ⁺) : plus fort qu'avant.
 - P6 : `limites_asymptotes.etudier` : la boucle des bornes passe dans `_etudier_bornes` (même code), pour vider dans un `finally` la
   liste des bornes de l'ED que lit le garde-fou de la valeur d'essai (jamais de bornes périmées hors d'une étude).
+
+- P9 : `test_resoudre_ec.py::test_ordre_des_cartes_comme_la_page` attend la carte « Bilan de l'étude » entre « 6. Graphe » et
+  « Graphique » ; `test_partie_5_jamais_vide` vérifie en plus qu'aucune ligne « (partie 5) » n'est au bilan quand la partie 5 ne
+  conclut pas (même force, une vérification de plus).
+- P9 : `test_P9_bilan_de_l_etude` (corpus) vérifiait seulement la présence de la carte ; il vérifie maintenant ses lignes contre
+  l'oracle (plus fort).
+- P9 : `test_P7b_extremums` (corpus) comptait « global</b> » et « pas global » dans **tout** le texte de la sortie ; le bilan reprend
+  la nature des extremums (« **Maximum global** … »), donc le compte doublait (1ᵉʳ lancement de la suite complète : 3 échecs, a, b,
+  c). Le test lit maintenant les cartes de la partie 5 seules (mêmes vérifications, même force) ; les lignes du bilan sont vérifiées
+  par `test_P9_bilan_de_l_etude`. Même lancement : `test_bilan_avec_la_liste_de_l_outil_derivee` (nouveau) attendait « minimum en … »
+  au lieu de « minimum local en … » (écriture de la liste de l'outil Dérivée) : attente corrigée.
 
 ## Questions pour l'enseignant
 
@@ -1101,6 +1201,35 @@ b 0,63 s, c 0,34 s, d 0,28 s (bruit : b ne fait aucun calcul nouveau). Aucune ha
 74. **P6, D16, regroupement des fractions rationnelles** : la règle « chaînes identiques au symbole près » regroupe aussi 1/x²,
     1/(x² − 2), (2x² + 1)/(x² − 1) (outil Limites) et x⁴ − 2x² (EC). L'ordre −∞, valeurs interdites, +∞ vaut pour tous les
     outils et pour le bilan ((x² − 1)/(x − 3) : oblique en −∞, AV x = 3, oblique en +∞). À confirmer.
+
+75. **P9, D20, place du bilan** : « à la fin, avant le graphe » ; D1 garde six intertitres, donc la carte « Bilan de l'étude » est la
+    première carte de « 6. Graphe », juste avant « Graphique » (et non un 7ᵉ intertitre, ni la fin de la partie 5). Style `final`
+    (cadre vert, celui du résultat final des autres outils ; l'EC n'en avait pas). À garder ?
+76. **P9, D20, « chaque ligne renvoie au résultat de sa partie »** : lu comme « (partie k) » à la fin de chaque ligne, avec un mot
+    d'entrée régulier : « ED = … », « Parité : f n'est ni paire ni impaire », « Zéros : aucun » ou « Zéros : x = −√6 ≈ −2,45 ; x = √6
+    ≈ 2,45 », « Signe : … », « Ordonnée à l'origine : f(0) = e^{1/6} ≈ 1,18 » (« aucune, car 0 ∉ ED »), les lignes du bilan des
+    asymptotes telles quelles, « **Maximum local** en x = 0 : (0 ; e^{1/6}) ≈ (0 ; 1,18) » (sans « (f′ passe de + à −) » ni la raison
+    de « global » / « pas global ») ; aucun extremum : « Aucun extremum local » (phrase de la partie 5). À relire à l'écran (captures).
+77. **P9, D20, signe** : sans tableau, « Signe : f(x) > 0 sur ED » (phrase de la partie 3) ; avec tableau, les ensembles lus dans la
+    ligne f(x) confirmée, écrits comme l'ED, le positif d'abord : b « f(x) > 0 sur ]−∞ ; −√6[ ∪ ]√6 ; +∞[ ; f(x) < 0 sur ]−√6 ; √6[ » ;
+    x²e^(−x) « f(x) > 0 sur ℝ ∖ {0} » ; une borne fermée de l'ED où f ne s'annule pas est incluse ([a ; …[). Écriture nouvelle pour
+    l'élève (la partie 3 n'a que le tableau) : la garder, ou écrire « voir le tableau de signes » ?
+78. **P9, D20, partie qui ne conclut pas** (doute, message, SymPy absent, repli) : sa ligne n'est pas écrite (option qui affiche le
+    moins) ; aucune entrée de la page ni du corpus n'est concernée. Faut-il plutôt une ligne « Parité : non établie (partie 2) » ?
+79. **P9, D20, asymptotes** : les lignes de la carte « Bilan des asymptotes » de la partie 4 sont reprises telles quelles (la page les
+    montre donc deux fois) : AH une ligne par côté (d : deux lignes y = 1, règle de Q73), « Trou », « Bord du graphe », « Pas de
+    limite », « branche parabolique » compris ; sans asymptote : « Aucune asymptote détectée » (phrase de l'outil Limites, sans le
+    point). Les ronds vides (partie 6) ne sont pas au bilan (D20 ne les cite pas). À garder ?
+80. **P9, D20, extremums sans rédaction D11** (repli, aucune entrée concernée) : la ligne de la liste de l'outil Dérivée (« minimum
+    en x=2 : f(2)=−1 »), telle que la carte l'affiche. À garder ?
+81. **P9, D18, niveaux** : a (e^(−x²)) et c (eˣ(6 − eˣ)) en « difficile » (une exponentielle, un extremum) ; b ((x² − 6)e^(−2x)) et d
+    (e^(2/(x² − 4))) en « très difficile » (deux extremums, ou deux AV et quatre limites latérales) ; Ex7 ajouté **à la fin** des
+    exemples (le premier exemple, (x² − 1)/(x − 3), reste : c'est celui du balayage des largeurs de toutes les pages). Les poids des
+    niveaux ne changent pas (difficile 0,2, très difficile 0,1). À confirmer.
+82. **P9, mesure Pyodide** : temps compté du clic à la dernière carte (toutes les cartes sont écrites d'un coup, puis montrées une à une
+    par « Étape suivante ») ; le chargement de Pyodide n'est pas compté, et la fin du dessin du graphique (canvas) n'est pas
+    attendue. Ex7 1,9 s, a 0,5 s, b 1,5 s,
+    c 1,3 s, d 1,2 s : rien près de 30 s. Mesure du temps sur un téléphone : non faite (navigateur des tests seulement).
 
 ## À relire par l'enseignant
 
@@ -1396,3 +1525,22 @@ b 0,63 s, c 0,34 s, d 0,28 s (bruit : b ne fait aucun calcul nouveau). Aucune ha
   « g(x) → 4/0⁻ = −∞, donc f(x) → 0⁺ » (question 70) ; la conclusion de l'AV d'un seul côté est écrite une fois, après x → 2⁺ (§4 :
   « Pas d'AV à gauche » après 2⁻, puis « AV x = 2, seulement du côté droit » après 2⁺) ; pas de « pas d'AH à droite (f(x) → +∞) » en
   +∞ (question 67). Les cartes de 2⁻ et 2⁺ sont maintenant entre −∞ et +∞ (D16).
+
+- **P9** (EC seule ; ED, Dérivée, Limites, Factorisation, Exp-log : instantanés identiques, vérifié par `git status` après
+  régénération : seuls les fichiers de l'EC changent). Instantanés modifiés : `tests/python/instantanes/resoudre/etude-complete.json`
+  (18 entrées modifiées, 3 nouvelles : e^(−x²), (x² − 6)e^(−2x), eˣ(6 − eˣ)), `tests/pages/references/etude-complete.json` (18
+  modifiées, l'entrée d'erreur `ln(` identique, 3 nouvelles), `tests/python/instantanes/etude-complete.json` (sortie d'`etudier()` :
+  3 nouvelles entrées, **aucune modifiée**). Vérifié par programme : dans chaque entrée existante, la seule différence est la carte
+  « Bilan de l'étude » ajoutée entre « 6. Graphe » et « Graphique » (et, dans les références de pages, le compteur « Étape n / N »
+  qui gagne 1) ; toutes les autres cartes sont identiques.
+
+  | Entrée | Avant | Après (lignes de la carte « Bilan de l'étude », style final) |
+  |---|---|---|
+  | Ex7 | — | « ED = ℝ ∖ {2} (partie 1) » · « Parité : f n'est ni paire ni impaire (partie 2) » · « Zéros : aucun (partie 3) » · « Signe : f(x) > 0 sur ED (partie 3) » · « Ordonnée à l'origine : f(0) = e^{1/6} ≈ 1,18 (partie 3) » · « Asymptote horizontale (x → −∞) : y = 0, graphe au-dessus (partie 4) » · « Asymptote verticale : x = 2 (lim_{x→2⁻} f(x) = 0⁺ ; lim_{x→2⁺} f(x) = +∞) (partie 4) » · « **Maximum local** en x = 0 : (0 ; e^{1/6}) ≈ (0 ; 1,18) (partie 5) » · « **Minimum local** en x = 4 : (4 ; e^{3/2}) ≈ (4 ; 4,48) (partie 5) » |
+  | d | — | « ED = ℝ ∖ {−2 ; 2} » · « Parité : f est paire » · « Zéros : aucun » · « Signe : f(x) > 0 sur ED » · « Ordonnée à l'origine : f(0) = e^{−1/2} ≈ 0,61 » · AH y = 1 (−∞), graphe au-dessus · AV x = −2 (+∞ ; 0⁺) · AV x = 2 (0⁺ ; +∞) · AH y = 1 (+∞), graphe au-dessus · « **Maximum local** en x = 0 : (0 ; e^{−1/2}) ≈ (0 ; 0,61) » |
+  | a, b, c (nouvelles) | — | a : ℝ · paire · aucun zéro · f(x) > 0 sur ED · f(0) = 1 · AH y = 0 (−∞) et (+∞), au-dessus · « **Maximum global** en x = 0 : (0 ; 1) » ; b : ℝ · ni paire ni impaire · « x = −√6 ≈ −2,45 ; x = √6 ≈ 2,45 » · « f(x) > 0 sur ]−∞ ; −√6[ ∪ ]√6 ; +∞[ ; f(x) < 0 sur ]−√6 ; √6[ » · f(0) = −6 · AH y = 0 (+∞), au-dessus · « **Minimum global** en x = −2 : (−2 ; −2e⁴) ≈ (−2 ; −109,20) » · « **Maximum local** en x = 3 : (3 ; 3e^{−6}) ≈ (3 ; 0,0074) » ; c : ℝ · ni paire ni impaire · « x = ln(6) ≈ 1,79 » · « f(x) > 0 sur ]−∞ ; ln(6)[ ; f(x) < 0 sur ]ln(6) ; +∞[ » · f(0) = 5 · AH y = 0 (−∞), au-dessus · « **Maximum global** en x = ln(3) : (ln(3) ; 9) ≈ (1,10 ; 9) » ; et toutes leurs autres cartes (nouvelles entrées : corrigé complet tel que le montrent les captures) |
+  | 16 autres entrées de la page et cas limites | — | même forme ; à noter : e^(1/x) « AH (x → −∞) : y = 1, graphe au-dessous », « Ordonnée à l'origine : aucune, car 0 ∉ ED », « Aucun extremum local » ; x/√(x²) « Pas de limite en x = 0 … », « Aucun extremum » ; x^(2/3) « Aucune asymptote détectée », « f(x) > 0 sur ℝ ∖ {0} » ; √(x² − 4) « f(x) > 0 sur ]−∞ ; −2[ ∪ ]2 ; +∞[ », zéros −2 et 2 ; x³ − 3x « … — branche parabolique (partie 4) » (sans le point de la phrase de l'outil Limites) ; x ln x « Bord du graphe : … » |
+
+  Page : Ex7 est le dernier exemple ; a, c en exercices « difficile », b, d en « très difficile » (question 81). Largeurs : Ex7, a–d,
+  corrigé complet de 320 à 1100 px : aucune faute du balayage, aucune formule hors de sa carte, bilan visible avant le graphique
+  (`test_largeurs.py::test_corrige_et_bilan_de_l_etude`). Captures : section « Temps sous Pyodide (P9) ».

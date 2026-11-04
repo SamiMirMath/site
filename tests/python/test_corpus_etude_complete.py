@@ -734,8 +734,10 @@ def test_P7b_valeurs_dans_le_tableau(ident):
 
 @pytest.mark.parametrize("ident", IDS)
 def test_P7b_extremums(ident):
+    """Partie 5 seule (P9 : le bilan de la partie 6 reprend la nature des extremums, il est vérifié par test_P9_bilan_de_l_etude)."""
     fn = PAR_ID[ident]
-    t, m = texte(sortie(ident)["cartes"]), maths(sortie(ident)["cartes"])
+    partie5 = cartes_de_la_partie(ident, "5. Dérivée, tableau de variation, extremums")
+    t, m = texte(partie5), maths(partie5)
     for e in fn.extremums:
         assert f"({e.approx_x};{e.approx_y})" in m, (e.approx_x, e.approx_y)
         nom = ("Maximum" if e.genre == "maximum" else "Minimum") + (" global" if e.global_ else " local")      # §2 révisé (question 43)
@@ -823,7 +825,6 @@ def meme_fonction(a, b):
     return tex(lire(a)) == tex(lire(b))
 
 
-@xfail("P9", "Ex7 en exemple, a–d en exercices difficile / très difficile (D18)")
 def test_P9_fonctions_du_corrige_dans_la_page():
     exemples, niveaux = exemples_de_la_page()
     assert any(meme_fonction(PAR_ID["Ex7"].saisie, s) for s in exemples)
@@ -832,9 +833,67 @@ def test_P9_fonctions_du_corrige_dans_la_page():
         assert any(meme_fonction(PAR_ID[ident].saisie, s) for s in durs), ident
 
 
-@pytest.mark.parametrize("ident", avec(set(IDS), xfail("P9", "carte « Bilan de l'étude » (D20)")))
+def lignes_du_bilan(ident):
+    (carte,) = cartes_de(ident, "Bilan de l'étude")
+    (liste,) = carte["blocs"]
+    return liste["items"]
+
+
+@pytest.mark.parametrize("ident", IDS)
 def test_P9_bilan_de_l_etude(ident):
-    assert cartes_de(ident, "Bilan de l'étude"), ident
+    """D20 : une carte « Bilan de l'étude » sous « 6. Graphe », juste avant le graphique ; une ligne par résultat, dans l'ordre de D20,
+    chacune renvoyant à sa partie ; les résultats sont ceux du corpus (oracle mpmath) : parité, zéros et f(0) (valeurs approchées),
+    asymptotes (position au-dessus, AV), extremums (nature, global ou local, point approché)."""
+    fn = PAR_ID[ident]
+    assert [c["titre"] for c in cartes_de_la_partie(ident, "6. Graphe")] == ["Bilan de l'étude", "Graphique"]
+    lignes = lignes_du_bilan(ident)
+    parties_des_lignes = [int(re.search(r"\(partie (\d)\)$", l).group(1)) for l in lignes]
+    assert parties_des_lignes == sorted(parties_des_lignes) and set(parties_des_lignes) == {1, 2, 3, 4, 5}, parties_des_lignes
+    par = {k: [l for l, p in zip(lignes, parties_des_lignes) if p == k] for k in range(1, 6)}
+    (ed,) = par[1]
+    assert exclus_de_l_outil(re.search(r"\\\(ED = (.*)\\\)", ed).group(1)) == fn.exclus, ed
+    mots = {"paire": "f est paire", "impaire": "f est impaire", "ni": "f n'est ni paire ni impaire"}
+    assert texte(par[2]) == f"Parité : {mots[fn.parite]} (partie 2)", par[2]
+    zeros, signe, f0 = (maths([l]) for l in par[3])
+    assert zeros.startswith("Zéros:"), zeros
+    if fn.zeros:
+        assert zeros.count("x=") == len(fn.zeros) and all(f"\\approx{z[2]}" in zeros for z in fn.zeros), zeros
+    else:
+        assert zeros == "Zéros:aucun(partie3)", zeros
+    assert signe.startswith("Signe:"), signe
+    if all(s == "+" for s in fn.signe):
+        assert signe == "Signe:\\(f(x)>0\\)surED(partie3)", signe
+    assert f0.startswith("Ordonnéeàl'origine:\\(f(0)=") and f0.endswith(("=" if est_entier(fn.f0[1]) else "\\approx") + fn.f0[2] + "\\)(partie3)"), f0
+    t4 = texte(par[4])
+    assert t4.count("Asymptote horizontale") == len(fn.horizontales) and t4.count("graphe au-dessus") == len(fn.horizontales), t4
+    assert t4.count("Asymptote verticale") == len(fn.verticales), t4
+    assert len(par[5]) == len(fn.extremums)
+    for ligne, e in zip(par[5], fn.extremums):
+        nom = ("Maximum" if e.genre == "maximum" else "Minimum") + (" global" if e.global_ else " local")
+        assert ligne.startswith(f"<b>{nom}</b> en \\(x = "), ligne
+        assert maths([ligne]).endswith(f"\\approx({e.approx_x};{e.approx_y})\\)(partie5)") or \
+            (e.approx_x == e.x_ecrit and e.approx_y == e.y_ecrit and maths([ligne]).endswith(f"({e.approx_x};{e.approx_y})\\)(partie5)")), ligne
+
+
+@pytest.mark.parametrize("ident", IDS)
+def test_P9_signe_du_bilan_contre_l_oracle(ident):
+    """D20 : les ensembles « f(x) > 0 sur … ; f(x) < 0 sur … » du bilan, lus par la lecture écrite à la main, contre l'oracle (signe de
+    f, mpmath, en des points de chaque intervalle délimité par les zéros et les valeurs interdites du corpus)."""
+    fn = PAR_ID[ident]
+    (signe,) = [l for l in lignes_du_bilan(ident) if l.startswith("Signe : ")]
+    if signe == r"Signe : \(f(x) > 0\) sur ED (partie 3)":
+        assert set(fn.signe) == {"+"}
+        return
+    ensembles = {}
+    for o, ens in re.findall(r"\\\(f\(x\) ([<>]) 0\\\) sur \\\((.*?)\\\)(?: ;| \(partie)", signe):
+        ivs = []
+        for g, a, b, d in re.findall(r"\\left([\]\[])(.*?) \\,;\\, (.*?)\\right([\]\[])", ens):
+            ivs.append((nombre_tex(a), nombre_tex(b)))
+        ensembles["+" if o == ">" else "-"] = ivs
+    for x, s in zip(milieux(points_de_coupure(fn)), fn.signe):
+        assert (valeur(fn, x) > 0) == (s == "+")
+        assert any(a < x < b for a, b in ensembles.get(s, [])), (x, s, ensembles)
+        assert not any(a < x < b for a, b in ensembles.get("-" if s == "+" else "+", [])), (x, s, ensembles)
 
 
 @xfail("P10", "pente au point exclu, « Pour aller plus loin » (D14, facultatif)")

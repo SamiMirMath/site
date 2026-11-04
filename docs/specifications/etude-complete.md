@@ -1,8 +1,8 @@
 # Outil « Étude complète de fonction » (3e Ms, Mr)
 
 URL : `/etude-complete/` · moteur : `etude-complete/etude_complete.py`, qui assemble le noyau,
-la dérivée et les limites ; adaptateur `etude-complete/resoudre_ec.py`. Les parties propres à l'Étude complète (aujourd'hui les parties 1, 2 et 3, les extremums de la partie 5 et les ronds vides de la
-partie 6 ; plus tard le bilan) sont dans `etude-complete/parties.py` (créé au chantier `etude-complete`, P3, déclaré dans
+la dérivée et les limites ; adaptateur `etude-complete/resoudre_ec.py`. Les parties propres à l'Étude complète (les parties 1, 2 et 3, les extremums de la partie 5, les ronds vides et
+le bilan de la partie 6) sont dans `etude-complete/parties.py` (créé au chantier `etude-complete`, P3, déclaré dans
 `moteur/manifeste.json` avec `ensemble-definition/resoudre_ed.py`, dont il reprend les cartes de condition). Décisions de rédaction : `docs/chantiers/etude-complete/decisions.md`.
 
 ## Fonctionnel
@@ -18,7 +18,7 @@ partie 6 ; plus tard le bilan) sont dans `etude-complete/parties.py` (créé au 
   vers 0 justifié par une valeur d'essai (« avec x = 1,99 : 6 · 1,99 − 12 = −0,06 < 0, donc 0⁻ ») ; e^{0⁺} = 1⁺ ; position du graphe
   par rapport à l'AH quand le signe d'approche est démontré ; AV d'un seul côté avec le point exclu (rond vide) ; 0⁺ dans le bilan ; 5 = cartes de l'outil Dérivée (dérivée, signe de f′ et variations,
   avec les limites et les valeurs des extremums dans le tableau, T06c et D10), extremums rédigés selon D11 (voir ci-dessous) ;
-  6 = graphique (D15, voir ci-dessous). Jamais d'intertitre seul sous « 5. » (R2, Q7) : la carte « Dérivée » est toujours affichée
+  6 = carte « Bilan de l'étude » puis graphique (D20, D15, voir ci-dessous). Jamais d'intertitre seul sous « 5. » (R2, Q7) : la carte « Dérivée » est toujours affichée
   (dérivée hors du cadre : la phrase de l'outil Dérivée, « Cette fonction sort du cadre de l'outil : la dérivée n'a pas été
   calculée. ») ; signe de f′ non étudié : la carte d'erreur « Signe de f′ et variations » de l'outil Dérivée.
 - **Valeurs approchées** (R2, Q15, Q28) : écrites **dans la formule**, après « ≈ » (`f(1) = −5e^{−2} ≈ −0,68`, `x = √6 ≈ 2,45`,
@@ -93,6 +93,17 @@ partie 6 ; plus tard le bilan) sont dans `etude-complete/parties.py` (créé au 
   au-delà de f(x₀)), « pas global » par une valeur de f au-delà de f(x₀) près de la borne nommée ; les limites sont lues sur une liste
   fermée d'écritures (±∞, entiers, fractions, avec signe d'approche) ; au moindre doute, « local » seul. Sans SymPy : la liste de l'outil
   Dérivée. Calculée par `resoudre`, sur l'analyse en cache.
+- **Exemples et exercices de la page** (D18, P9) : l'exemple 7 du corrigé, e^((x² + x − 2)/(6x − 12)), est le dernier exemple de la
+  page ; les exercices 8.15 a et c, e^(−x²) et eˣ(6 − eˣ), sont au niveau « difficile », b et d, (x² − 6)e^(−2x) et e^(2/(x² − 4)), au
+  niveau « très difficile ». Ils entrent donc dans les instantanés et les tests de pages (entrées de la page).
+- **Partie 6, carte « Bilan de l'étude »** (D20, P9) : sous « 6. Graphe », avant le graphique, style `final` (cadre du résultat final).
+  Une liste, une ligne par résultat, dans l'ordre : ED (partie 1) ; parité (partie 2) ; zéros, signe (« f(x) > 0 sur ED », ou les
+  ensembles où f > 0 et f < 0, écrits comme l'ED), f(0) ou « aucune, car 0 ∉ ED » (partie 3) ; chaque ligne du bilan des asymptotes,
+  position comprise (partie 4) ; chaque extremum, nature et point exact puis ≈, sans la justification (partie 5 ; sans rédaction D11,
+  la liste de l'outil Dérivée ; aucun extremum : « Aucun extremum local »). Chaque ligne se termine par « (partie k) ». **Aucun calcul
+  nouveau** : chaque ligne reprend un résultat que sa partie a écrit et confirmé (`parties.partie2`, `partie3`, `partie5` rendent ces
+  données avec leurs cartes ; le signe est lu dans la ligne f(x) du tableau de signes confirmée par `confirmer_signe`) ; une partie
+  qui ne conclut pas (doute, message) n'a pas de ligne.
 - **Une seule analyse par saisie** (D19) : le résultat de `analyser_complet` (ED) est gardé en cache (`functools.lru_cache`, clé =
   saisie aux espaces réduits et présence de SymPy) ; `etudier()` le passe aux outils Dérivée et Limites (paramètre facultatif
   `analyse` de leur `etudier`, sans effet sur ces outils seuls), et `fenetre()` (zoom) le relit sans recalcul.
@@ -224,3 +235,4 @@ f(x)     | +∞  ↘  −∞ ‖  ░░░░░░  ‖ −∞  ↗  +∞
 | EC-14 | `resoudre()` (T12) respecte le schéma de sortie commun, ses cartes sont dans l'ordre des six parties (D1, intertitres compris), celles de la dérivée et des limites sont les cartes des outils séparés, les limites figurent dans le tableau de variations ; instantanés `instantanes/resoudre/etude-complete.json` | [auto-py] (`test_resoudre_ec.py`) |
 | EC-15 | Toute partie propre à l'EC a un garde-fou numérique et un message clair en cas de doute (D2) ; tant qu'une partie n'est pas rédigée, elle reste vide | [auto-py] (`test_corpus_etude_complete.py` : oracle mpmath indépendant ; parties 1 à 3, 5 et 6 : `test_parties_ec.py`, garde-fous forcés en échec) |
 | EC-16 | Graphe (D15, decisions.md §3) : la fenêtre contient les extremums, les zéros, (0 ; f(0)) et les ronds vides ; pour chaque AH y = L, un x de la fenêtre au-delà de tous ces points et des valeurs interdites où \|f(x) − L\| < 5 % de la hauteur ; un rond vide à chaque point exclu à limite finie et nulle part ailleurs ; zéros, (0 ; f(0)) et extremums marqués | [auto-py] (`test_corpus_etude_complete.py` P8, `test_parties_ec.py` : oracle mpmath, garde-fous forcés) + [auto-page] (`test_graphique.py::test_d15_ronds_vides_et_points_marques`) |
+| EC-17 | Bilan de l'étude (D20) : une carte avant le graphique, une ligne par résultat dans l'ordre ED, parité, zéros, signe, f(0), asymptotes, extremums, chacune suivie de « (partie k) » ; chaque formule d'une ligne est écrite dans les cartes de sa partie ; ensembles du signe justes ; une partie qui ne conclut pas n'a pas de ligne | [auto-py] (`test_parties_ec.py::TestBilan` : lignes exactes, oracle mpmath, garde-fous forcés ; `test_corpus_etude_complete.py` P9) + [auto-page] (`test_largeurs.py::test_corrige_et_bilan_de_l_etude`, 320 à 1100 px) |

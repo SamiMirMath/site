@@ -275,6 +275,57 @@ class TestLargeurs(unittest.TestCase):
                     page.taille(1100, 800)
                 self.assertEqual(erreurs_a_signaler(page), [])
 
+    # ---------- fonctions du corrigé (D18) et carte « Bilan de l'étude » (D20), chantier étude complète P9 ----------
+    def test_corrige_et_bilan_de_l_etude(self):
+        """Étude complète, Ex7 (exemple de la page) et a–d (exercices) du corrigé, corrigé complet : aucune faute du balayage à aucune
+        largeur (320 à 1100 px) ; aucune formule ne sort de sa carte (hors d'un bloc qui défile lui-même) ; la carte « Bilan de
+        l'étude » est visible, juste avant le graphique, et chacune de ses lignes tient dans la carte."""
+        js_formules = r"""
+        (async () => {
+          await new Promise(r => setTimeout(r, 150));
+          const out = [];
+          for (const k of document.querySelectorAll('#cartes .katex')) {
+            const c = k.closest('.card'); if (!c) continue;
+            let defile = false;
+            for (let m = k.parentElement; m && m !== c; m = m.parentElement) {
+              const o = getComputedStyle(m).overflowX; if (o === 'auto' || o === 'scroll') defile = true; }
+            const r = k.getBoundingClientRect(), rc = c.getBoundingClientRect();
+            if (!defile && r.width > 0 && (r.right > rc.right + 1 || r.left < rc.left - 1)) out.push(k.textContent.slice(0, 60));
+          }
+          const cartes = [...document.querySelectorAll('#cartes > *')];
+          const i = cartes.findIndex(c => (c.querySelector('h3') || {}).textContent === "Bilan de l'étude");
+          const b = cartes[i];
+          const lignes = b ? [...b.querySelectorAll('ul.bilan li')] : [];
+          const rb = b ? b.getBoundingClientRect() : null;
+          return {formules: out, bilan: i >= 0 && rb.width > 0, avant_graphique: i >= 0 && !!(cartes[i + 1] && cartes[i + 1].querySelector('canvas')),
+                  lignes: lignes.length, hors: lignes.filter(l => { const r = l.getBoundingClientRect(); return r.right > rb.right + 1 || r.left < rb.left - 1; }).length};
+        })()"""
+        if "etude-complete" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        dossier, requete = page_de("etude-complete")
+        page = self.nav.ouvrir(f"{dossier}/index.html{requete}")
+        attendre_pret(page)
+        for entree in ("e^((x^2+x-2)/(6x-12))", "e^(-x^2)", "(x^2-6)e^(-2x)", "e^x(6-e^x)", "e^(2/(x^2-4))"):
+            with self.subTest(entree=entree):
+                page.taille(1100, 800)
+                page.evaluer("document.querySelector('#cartes').innerHTML = ''")
+                page.evaluer(f"document.querySelector('#entree').value = {json.dumps(entree)}; document.querySelector('#calculer').click()")
+                page.attendre("document.querySelector('#cartes').children.length > 0 && !document.querySelector('#calculer').disabled", 120)
+                page.evaluer("document.querySelector('#tout') && !document.querySelector('#tout').disabled && document.querySelector('#tout').click()")
+                fautes = []
+                self.balayer(page, "corrigé complet : " + entree, fautes)
+                self.assertEqual(fautes, [], fautes[:5])
+                try:
+                    for w in LARGEURS:
+                        page.taille(w, 800)
+                        m = page.evaluer(js_formules)
+                        self.assertEqual(m["formules"], [], (w, m))
+                        self.assertTrue(m["bilan"] and m["avant_graphique"] and m["lignes"] >= 7, (w, m))
+                        self.assertEqual(m["hors"], 0, (w, m))
+                finally:
+                    page.taille(1100, 800)
+        self.assertEqual(erreurs_a_signaler(page), [])
+
     # ---------- simplexe (page autonome) ----------
     def clic(self, page, selecteur):
         page.evaluer(f"document.querySelector({selecteur!r}).click()")

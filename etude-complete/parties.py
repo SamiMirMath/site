@@ -45,6 +45,10 @@ Valeurs approchées (R2, Q15, Q28) : dans la formule, après « \\approx » ; s�
 Partie 6. Graphe (D15) : `partie3` donne aussi au graphique les zéros et f(0) que ses cartes écrivent (rien en cas de doute) ;
 `ronds_vides` : un rond vide en (a ; L) pour chaque point exclu a dont la limite L d'un côté est finie (en plus des « trous » de
 l'outil Limites), confirmé par SymPy (limite latérale exacte) et par une sonde mpmath (approche de L du bon côté) ; sinon pas de rond.
+Carte « Bilan de l'étude » (D20, P9), avant le graphique : une ligne par résultat (ED, parité, zéros, signe, f(0), asymptotes avec la
+position, extremums avec nature et ≈), chacune suivie de « (partie k) » ; aucun calcul nouveau : chaque ligne reprend ce que sa partie
+a écrit et confirmé (`partie2`, `partie3`, `partie5` rendent ces données avec leurs cartes) ; une partie qui ne conclut pas n'a pas de
+ligne.
 """
 import re
 from decimal import Decimal, ROUND_HALF_UP, localcontext
@@ -52,12 +56,13 @@ from fractions import Fraction as F
 from math import gcd, isqrt
 
 from nombres import formater_decimal, formater_entier
-from noyau import (X, E, Nb, Neg, Fn, Op, Num, tex, ptex, qtex, decomposer, deg, pn, peval, pmul, evaluer, conditions, valeur_constante,
+from noyau import (X, E, Nb, Neg, Fn, Op, Num, Iv, ens_tex, tex, ptex, qtex, decomposer, deg, pn, peval, pmul, evaluer, conditions, valeur_constante,
                    sans_x, fusion, points, proche, preimage, aplatir, en_sympy_reel, charger_sympy, SYMPY, NonPrisEnCharge, ErreurSaisie)
 import sortie as so
 import resoudre_ed
 
-__all__ = ["cartes_domaine", "cartes_parite", "cartes_zeros_signe", "partie3", "blocs_extremums", "ronds_vides", "mise_en_forme", "resolution_denominateur"]
+__all__ = ["cartes_domaine", "cartes_parite", "partie2", "cartes_zeros_signe", "partie3", "blocs_extremums", "partie5", "carte_bilan",
+           "lignes_bilan", "ronds_vides", "mise_en_forme", "resolution_denominateur"]
 
 AUCUNE_CONDITION = "Ni logarithme, ni dénominateur, ni racine : aucune condition."     # phrase de l'outil ED (en-tête)
 POINTS_DE_CONTROLE = (-2.7, -0.6, 0.35, 1.45, 3.2)                                    # sondes numériques (garde-fou)
@@ -788,7 +793,7 @@ def _cartes_parite(f, ivs, sp, mpmath):
         if valeur_mp(f, x) is None or valeur_mp(f, -x) is not None:          # sonde : f(a) existe, f(−a) n'existe pas
             raise Doute()
         return [so.carte("Symétrie de l'ED", [
-            _ligne(rf"\({qtex(a)} \in ED\), mais \({qtex(-a)} \notin ED\) : ED n'est pas symétrique par rapport à 0."), _ligne(NI)])]
+            _ligne(rf"\({qtex(a)} \in ED\), mais \({qtex(-a)} \notin ED\) : ED n'est pas symétrique par rapport à 0."), _ligne(NI)])], "ni"
     cartes = [so.carte("Symétrie de l'ED", [_ligne(SYMETRIQUE)])]
     genre = classer_par_la_sonde(f, mpmath)
     fe = en_sympy_reel(f)
@@ -799,23 +804,24 @@ def _cartes_parite(f, ivs, sp, mpmath):
         if not (d == 0 or sp.simplify(d) == 0):                                # SymPy ne confirme pas la sonde
             raise Doute()
         if parite_lue(f) != p:
-            return cartes + _message(NON_REDIGEE)
+            return cartes + _message(NON_REDIGEE), None
         lignes = chaine_f_moins_x(f, p)
         cible = substituer(f, Neg(X()))
         for _, T in lignes:
             if T is not None:
                 _verifier_egalite(T, cible, fm, sp, mpmath)
         blocs = [_ligne(html) for html, _ in lignes] + [_ligne(PAIRE if p > 0 else IMPAIRE)]
-        return cartes + [so.carte("Calcul de f(−x)", blocs)]
+        return cartes + [so.carte("Calcul de f(−x)", blocs)], genre
     impaire, paire = _pas_impaire(f, fe, ivs, sp, mpmath), _pas_paire(f, fe, ivs, sp, mpmath)
     if impaire is None or paire is None:
-        return cartes + _message(SANS_CONTRE_EXEMPLE)
-    return cartes + [so.carte("Pas impaire", impaire), so.carte("Pas paire", paire + [_ligne(NI)])]
+        return cartes + _message(SANS_CONTRE_EXEMPLE), None
+    return cartes + [so.carte("Pas impaire", impaire), so.carte("Pas paire", paire + [_ligne(NI)])], "ni"
 
 
-def cartes_parite(analyse):
-    """Les cartes de la partie 2 (D4) ; `analyse` : (résultat de l'outil ED, arbre, ED), celle de `etudier` (en cache). Sans SymPy ou
-    mpmath, ou si un garde-fou doute : un message clair, aucune conclusion (principe 0.2)."""
+def partie2(analyse):
+    """La partie 2 (D4) : {"cartes", "conclusion"} ; `analyse` : (résultat de l'outil ED, arbre, ED), celle de `etudier` (en cache).
+    "conclusion" : "paire", "impaire" ou "ni", celle qu'écrivent les cartes (« Donc f est paire. »…) ; None quand elles ne concluent
+    pas (sans SymPy ou mpmath, garde-fou en doute, chaîne non rédigée, aucun contre-exemple : un message clair, principe 0.2)."""
     _, f, ED = analyse
     sp = charger_sympy()
     try:
@@ -823,12 +829,18 @@ def cartes_parite(analyse):
     except ImportError:
         mpmath = None
     if sp is None or mpmath is None:
-        return _message(DOUTE)
+        return {"cartes": _message(DOUTE), "conclusion": None}
     try:
         with mpmath.workdps(CHIFFRES):
-            return _cartes_parite(f, fusion(ED), sp, mpmath)
+            cartes, conclusion = _cartes_parite(f, fusion(ED), sp, mpmath)
     except Exception:                       # Doute, ou SymPy / mpmath en échec : rien plutôt qu'une affirmation non confirmée
-        return _message(DOUTE)
+        return {"cartes": _message(DOUTE), "conclusion": None}
+    return {"cartes": cartes, "conclusion": conclusion}
+
+
+def cartes_parite(analyse):
+    """Les cartes de la partie 2 (D4) : voir `partie2`."""
+    return partie2(analyse)["cartes"]
 
 
 # ---------------------------------------------------------------------------------------------------------------------------
@@ -838,6 +850,7 @@ DOUTE_SIGNE = "Le signe de f n'a pas pu être établi avec certitude : l'outil n
 ZEROS_NON_EXACTS = "Les zéros de f ne se calculent pas exactement : l'outil ne dresse pas le tableau de signes de f."
 ZEROS_NON_TRAITES = "Les zéros de f n'ont pas pu être calculés par l'outil : le signe de f n'est pas traité."
 DOUTE_F0 = "L'ordonnée à l'origine n'a pas pu être établie avec certitude : l'outil ne conclut pas."
+HORS_ED = "0 ∉ ED"                                                                          # bilan : pas d'ordonnée à l'origine
 NUMERATEUR_CONSTANT = "Le numérateur de f est une constante non nulle : f n'a pas de zéro."
 PAS_DE_ZERO = "Donc f n'a pas de zéro."
 NE_COUPE_PAS = r"\(0 \notin ED\) : le graphe ne coupe pas l'axe des y."
@@ -1224,11 +1237,31 @@ def _zeros_et_signe(f, ivs, ED, sp, mpmath):
     if constant:
         s = signes.pop()
         blocs.append(_ligne(rf"Donc f n'a pas de zéro et \(f(x) {'>' if s == '+' else '<'} 0\) sur ED."))
-        return blocs, None, zeros_ed
+        return blocs, None, zeros_ed, (rf"\(f(x) {'>' if s == '+' else '<'} 0\) sur ED", None)
     if not zeros_ed and blocs and blocs[-1]["html"] not in (NUMERATEUR_CONSTANT, PAS_DE_ZERO):
         blocs.append(_ligne(PAS_DE_ZERO))
     tableau = {"type": "tableau", "var": "x", "crit": [p.tex for p in crit], "rows": lignes}
-    return blocs, tableau, zeros_ed
+    positif, negatif = ensembles_du_signe(crit, cellules)
+    morceaux = [rf"\(f(x) {o} 0\) sur \({ens_tex(S)}\)" for o, S in ((">", positif), ("<", negatif)) if S]
+    return blocs, tableau, zeros_ed, (" ; ".join(morceaux) or None, (positif, negatif))
+
+
+def ensembles_du_signe(crit, cellules):
+    """Bilan (D20) : (ensemble où f > 0, ensemble où f < 0), listes d'intervalles réunis (`fusion`), lus dans la ligne f(x) du tableau
+    de signes, une fois celle-ci confirmée (`confirmer_signe` : le signe de chaque intervalle et de chaque point critique de l'ED,
+    SymPy et sonde). Un intervalle entre deux points critiques consécutifs est entièrement dans l'ED ou entièrement dehors (« x ») ;
+    un point critique de l'ED où f ne s'annule pas (borne fermée de l'ED) prend le signe de sa case. Le bilan les écrit comme l'ED
+    (`ens_tex`) : « f(x) > 0 sur … ; f(x) < 0 sur … »."""
+    k = len(crit)
+    positif, negatif = [], []
+    for i in range(k + 1):
+        if cellules[2 * i] in ("+", "-"):
+            iv = Iv(crit[i - 1] if i > 0 else None, False, crit[i] if i < k else None, False)
+            (positif if cellules[2 * i] == "+" else negatif).append(iv)
+    for j in range(k):
+        if cellules[2 * j + 1] in ("+", "-"):
+            (positif if cellules[2 * j + 1] == "+" else negatif).append(Iv(crit[j], True, crit[j], True))
+    return fusion(positif), fusion(negatif)
 
 
 def arbre_polynome(P):
@@ -1303,18 +1336,19 @@ def lignes_du_tableau(f, c, facs, sp, mpmath):
 
 
 def _ordonnee(f, ivs, sp, mpmath):
-    """(blocs de la carte « Ordonnée à l'origine », valeur SymPy de f(0) ou None si 0 ∉ ED) : f(0) exact puis ≈ et le point
+    """(blocs de la carte « Ordonnée à l'origine », valeur SymPy de f(0) ou None si 0 ∉ ED, écriture « f(0) = … ≈ … » du bilan ou
+    HORS_ED) : f(0) exact puis ≈ et le point
     (0 ; f(0)), ou « 0 ∉ ED » ; Doute sinon. Quand la partie 1 a nommé g (f = e^{g(x)}), g(0) est calculé d'abord (« g(0) =
     −2/(−12) = 1/6, donc f(0) = e^{1/6} »)."""
     if not dans_ed(ivs, F(0), sp):
         if valeur_mp(f, mpmath.mp.mpf(0)) is not None:
             raise Doute()
-        return [_ligne(NE_COUPE_PAS)], None
+        return [_ligne(NE_COUPE_PAS)], None, HORS_ED
     v = valeur_verifiee(f, en_sympy_reel(f), F(0), sp, mpmath)
     if v is None:
         raise Doute()
     ecrit, V, _ = v
-    egalite = formule_approx(rf"f(0) = {ecrit}", V, sp)
+    egalite = valeur = formule_approx(rf"f(0) = {ecrit}", V, sp)
     if mise_en_forme(f) is not None:
         P, Q = polynome_ecrit(f.a.a), polynome_ecrit(f.a.b)
         h0, b0 = P[0], Q[0]
@@ -1323,7 +1357,7 @@ def _ordonnee(f, ivs, sp, mpmath):
                 <= mpmath.mp.mpf(EGAL):
             calcul = qtex(g0) if b0 == 1 else rf"\frac{{{qtex(h0)}}}{{{qtex(b0)}}} = {qtex(g0)}"
             egalite = rf"\(g(0) = {calcul}\), donc " + formule_approx(rf"f(0) = {ecrit}", V, sp)
-    return [_ligne(egalite + "."), _ligne(rf"Le graphe coupe l'axe des y au point \((0\,;\,{ecrit})\).")], V
+    return [_ligne(egalite + "."), _ligne(rf"Le graphe coupe l'axe des y au point \((0\,;\,{ecrit})\).")], V, valeur
 
 
 def partie3(analyse):
@@ -1333,36 +1367,45 @@ def partie3(analyse):
     f(x) > 0 sur ED » ; carte de l'ordonnée à l'origine. Chaque affirmation confirmée par SymPy et par la sonde (principe 0.2) ;
     sinon un message clair, sans conclusion. Données du graphique (D15, partie 6), celles des cartes et rien d'autre : "zeros", les
     zéros de f dans l'ED (flottants) quand la carte des zéros conclut, sinon [] ; "f0", f(0) (flottant) quand la carte de l'ordonnée
-    à l'origine l'écrit, sinon None."""
+    à l'origine l'écrit, sinon None. Données du bilan (D20, partie 6), écritures des cartes et rien d'autre : "bilan" = {"zeros" :
+    les zéros écrits (« x = √6 ≈ 2,45 »), [] si aucun, None si la carte ne conclut pas ; "signe" : « f(x) > 0 sur ED », ou les
+    ensembles lus dans la ligne f(x) confirmée du tableau, None si elle ne conclut pas ; "ensembles" : ces ensembles (positif, négatif),
+    listes d'intervalles, None sans tableau ; "f0" : « f(0) = e^{1/6} ≈ 1,18 », HORS_ED si
+    0 ∉ ED, None si la carte ne conclut pas}."""
     _, f, ED = analyse
     sp = charger_sympy()
     try:
         import mpmath
     except ImportError:
         mpmath = None
+    bilan = {"zeros": None, "signe": None, "ensembles": None, "f0": None}
     if sp is None or mpmath is None:
         return {"cartes": [so.carte("Zéros et signe de f", [_ligne(DOUTE_SIGNE)]), so.carte("Ordonnée à l'origine", [_ligne(DOUTE_F0)])],
-                "zeros": [], "f0": None}
+                "zeros": [], "f0": None, "bilan": bilan}
     ivs = fusion(ED)
     zeros, f0 = [], None
     with mpmath.workdps(CHIFFRES):
         try:
-            blocs, tableau, zs = _zeros_et_signe(f, ivs, ED, sp, mpmath)
+            blocs, tableau, zs, signe = _zeros_et_signe(f, ivs, ED, sp, mpmath)
             if tableau is None:
                 cartes = [so.carte("Zéros et signe de f", blocs)]
             else:
                 cartes = [so.carte("Zéros de f", blocs), so.carte("Signe de f", [tableau], badge="tableau")]
             zeros = [float(sp.N(_sympy_num(z, sp), 20)) for z in zs]
+            bilan["zeros"] = [formule_approx(rf"x = {z.tex}", _sympy_num(z, sp), sp) for z in zs]
+            bilan["signe"], bilan["ensembles"] = signe
         except NonTraite as e:
             cartes = [so.carte("Zéros et signe de f", _positives_seules(f, ivs) + [_ligne(e.message)])]
+            zeros, bilan["zeros"], bilan["signe"], bilan["ensembles"] = [], None, None, None
         except Exception:                   # Doute, ou SymPy / mpmath en échec : rien plutôt qu'une affirmation non confirmée
             cartes = [so.carte("Zéros et signe de f", _positives_seules(f, ivs) + [_ligne(DOUTE_SIGNE)])]
+            zeros, bilan["zeros"], bilan["signe"], bilan["ensembles"] = [], None, None, None
         try:
-            ordonnee, V = _ordonnee(f, ivs, sp, mpmath)
+            ordonnee, V, bilan["f0"] = _ordonnee(f, ivs, sp, mpmath)
             f0 = None if V is None else float(sp.N(V, 20))
         except Exception:
-            ordonnee = [_ligne(DOUTE_F0)]
-    return {"cartes": cartes + [so.carte("Ordonnée à l'origine", ordonnee)], "zeros": zeros, "f0": f0}
+            ordonnee, f0, bilan["f0"] = [_ligne(DOUTE_F0)], None, None
+    return {"cartes": cartes + [so.carte("Ordonnée à l'origine", ordonnee)], "zeros": zeros, "f0": f0, "bilan": bilan}
 
 
 def cartes_zeros_signe(analyse):
@@ -1797,8 +1840,9 @@ def valeur_par_substitution(f, e, sp, mpmath):
 
 
 def _ligne_extremum(e, crit, cellules, statut, sp, mp, f):
-    """« Maximum global en x = 0 : (0 ; 1) (f′ passe de + à −). Les autres valeurs … » quand c'est prouvé, « Maximum local en … Pas
-    global : … », sinon « Maximum local en … » seul (decisions.md §2 révisé, question 43)."""
+    """(ligne, ligne du bilan) : « Maximum global en x = 0 : (0 ; 1) (f′ passe de + à −). Les autres valeurs … » quand c'est
+    prouvé, « Maximum local en … Pas global : … », sinon « Maximum local en … » seul (decisions.md §2 révisé, question 43) ; le bilan
+    (D20) en garde la nature et le point, sans la justification : « Maximum local en x = 0 : (0 ; e^{1/6}) ≈ (0 ; 1,18) »."""
     x = e["x_tex"]
     t = ""
     if "f_py" in e:
@@ -1811,6 +1855,7 @@ def _ligne_extremum(e, crit, cellules, statut, sp, mp, f):
             statut = None                                    # la sonde ne retrouve pas f(x₀) : ni ≈ ni « global »
     elif e["f_tex"] != "?":
         t += rf" : \(f({x}) {'' if e['f_tex'].startswith('{' + chr(92) + 'approx}') else '= '}{e['f_tex']}\)"
+    point = t
     if x in crit:
         i = crit.index(x)
         g, d = cellules[2 * i], cellules[2 * i + 2]
@@ -1819,10 +1864,11 @@ def _ligne_extremum(e, crit, cellules, statut, sp, mp, f):
     t += "."
     portee = "global" if statut is not None and statut[0] == "global" else "local"
     nom = ("Maximum " if e["genre"].startswith("maximum") else "Minimum ") + portee
-    t = rf"<b>{nom}</b> en \(x = {x}\)" + t
+    debut = rf"<b>{nom}</b> en \(x = {x}\)"
+    t = debut + t
     if statut is not None:
         t += " " + statut[1]
-    return t
+    return t, debut + point
 
 
 def blocs_extremums(dv, limites, analyse):
@@ -1830,6 +1876,13 @@ def blocs_extremums(dv, limites, analyse):
     de l'Étude complète : valeurs calculées en chaîne par l'exposant (quand la carte « Dérivée » a nommé g), puis une ligne par
     extremum « Maximum local en x = 0 : (0 ; e^{1/6}) ≈ (0 ; 1,18) (f′ passe de + à −). Pas global : … » ; None (liste de l'outil
     Dérivée) si SymPy ou mpmath manque ou si la rédaction échoue."""
+    r = partie5(dv, limites, analyse)
+    return None if r is None else r["blocs"]
+
+
+def partie5(dv, limites, analyse):
+    """Les extremums de la partie 5 (D11) : {"blocs" (voir `blocs_extremums`), "bilan" (une ligne par extremum, nature et point,
+    D20)} ; None si la rédaction D11 n'est pas faite (liste de l'outil Dérivée)."""
     extrema = dv.get("extrema") or []
     if not extrema or not dv.get("signe_resolu"):
         return None
@@ -1848,7 +1901,7 @@ def blocs_extremums(dv, limites, analyse):
     g_nomme = any(b.get("type") == "sous_calcul" and b.get("titre") == "Dérivée de l'exposant" for b in dv.get("deriv_etapes", []))
     with mpmath.workdps(CHIFFRES):
         try:
-            blocs, items = [], []
+            blocs, items, bilan = [], [], []
             for e in extrema:
                 ligne, statut = None, None
                 if "f_py" in e:
@@ -1862,10 +1915,47 @@ def blocs_extremums(dv, limites, analyse):
                         statut = None
                 if ligne is not None:
                     blocs.append(ligne)
-                items.append(_ligne_extremum(e, crit, cellules, statut, sp, mp, f))
+                ligne_e, court = _ligne_extremum(e, crit, cellules, statut, sp, mp, f)
+                items.append(ligne_e)
+                bilan.append(court)
         except Exception:
             return None
-    return blocs + [so.liste(items, style="extrema")]
+    return {"blocs": blocs + [so.liste(items, style="extrema")], "bilan": bilan}
+
+
+# ---------------------------------------------------------------------------------------------------------------------------
+# Partie 6. Bilan de l'étude (D20)
+# ---------------------------------------------------------------------------------------------------------------------------
+TITRE_BILAN = "Bilan de l'étude"
+PARITES = {"paire": "f est paire", "impaire": "f est impaire", "ni": "f n'est ni paire ni impaire"}      # mots de la partie 2
+
+
+def lignes_bilan(ed_tex, parite, partie3, asymptotes, extremums):
+    """Les lignes de la carte « Bilan de l'étude » (D20), dans l'ordre de D20, chacune terminée par la partie d'où elle vient :
+    ED (partie 1) ; parité (partie 2) ; zéros, signe, f(0) (partie 3) ; chaque asymptote, avec la position (partie 4) ; chaque
+    extremum, nature et point (partie 5). Aucun calcul : chaque ligne reprend un résultat que sa partie a écrit et confirmé
+    (`ed_tex` de l'étude ; `partie2(…)["conclusion"]` ; `partie3(…)["bilan"]` ; les lignes du bilan des asymptotes de l'outil
+    Limites ; `partie5(…)["bilan"]` ou la liste de l'outil Dérivée). Une donnée None (la partie ne conclut pas) : pas de ligne."""
+    lignes = [(rf"\(ED = {ed_tex}\)", 1)]
+    if parite in PARITES:
+        lignes.append((f"Parité : {PARITES[parite]}", 2))
+    p3 = partie3.get("bilan") or {}
+    if p3.get("zeros") is not None:
+        lignes.append(("Zéros : " + (" ; ".join(p3["zeros"]) or "aucun"), 3))
+    if p3.get("signe") is not None:
+        lignes.append(("Signe : " + p3["signe"], 3))
+    if p3.get("f0") == HORS_ED:
+        lignes.append((r"Ordonnée à l'origine : aucune, car \(0 \notin ED\)", 3))
+    elif p3.get("f0") is not None:
+        lignes.append(("Ordonnée à l'origine : " + p3["f0"], 3))
+    lignes += [(a, 4) for a in asymptotes]
+    lignes += [(e, 5) for e in extremums or []]
+    return [f"{t[:-1] if t.endswith('.') else t} (partie {k})" for t, k in lignes]          # « … parabolique. » : sans le point
+
+
+def carte_bilan(ed_tex, parite, partie3, asymptotes, extremums):
+    """La carte « Bilan de l'étude » (D20), avant le graphique : voir `lignes_bilan`. Style `final` (cadre du résultat final)."""
+    return so.carte(TITRE_BILAN, [so.liste(lignes_bilan(ed_tex, parite, partie3, asymptotes, extremums), style="bilan")], style="final")
 
 
 # ---------------------------------------------------------------------------------------------------------------------------

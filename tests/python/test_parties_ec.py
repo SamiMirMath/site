@@ -15,6 +15,11 @@ Partie 6, graphe (D15, P8) : ronds vides recoupés par l'oracle mpmath (limites 
 fonctions (un côté fini, deux limites finies différentes, trous et bords laissés à l'outil Limites, limites infinies) ; garde-fous forcés
 (limite SymPy fausse ou en échec, sonde qui s'éloigne, du mauvais côté ou non définie, point dans l'ED, écriture illisible, SymPy
 absent) : pas de rond ; cadrage (decisions.md §3) recoupé par l'oracle : points à montrer dans la fenêtre, approche de chaque AH.
+
+Partie 6, carte « Bilan de l'étude » (D20, P9) : lignes exactes (Ex7, a–d et autres formes) ; pour toutes les entrées de la page et les
+cas limites, chaque ligne renvoie au résultat de sa partie (ses formules sont dans les cartes de cette partie) ; ensembles du signe
+recoupés par l'oracle mpmath ; conclusion de la parité recoupée par l'oracle ; garde-fous forcés (partie 2 ou 3 en doute, f(0) non
+établi, zéros non calculés, SymPy absent) : la ligne n'est pas écrite.
 """
 import random
 import re
@@ -1767,3 +1772,280 @@ class TestCadrage(unittest.TestCase):
         with mock.patch.object(parties, "partie3", side_effect=AssertionError), \
                 mock.patch.object(parties, "ronds_vides", side_effect=AssertionError):
             self.assertTrue(ec.fenetre("e^((x^2+x-2)/(6x-12))", -5, 5)["ok"])
+
+
+# ---------------------------------------------------------------------------------------------------------------------------
+# Partie 6 : carte « Bilan de l'étude » (D20, P9)
+# ---------------------------------------------------------------------------------------------------------------------------
+def bilan(entree):
+    s = rec.resoudre(entree)
+    (carte,) = [c for c in s["cartes"] if c["titre"] == parties.TITRE_BILAN]
+    (liste,) = carte["blocs"]
+    return s, carte, liste["items"]
+
+
+def cartes_de_la_partie(s, k):
+    """Les cartes placées sous l'intertitre de la partie k (jusqu'à l'intertitre suivant)."""
+    out, dedans = [], False
+    for c in s["cartes"]:
+        if c.get("style") == "partie":
+            dedans = c["titre"] == rec.PARTIES[k - 1]
+        elif dedans:
+            out.append(c)
+    return out
+
+
+def chaines_de(obj):
+    if isinstance(obj, str):
+        yield obj
+    elif isinstance(obj, dict):
+        for v in obj.values():
+            yield from chaines_de(v)
+    elif isinstance(obj, list):
+        for v in obj:
+            yield from chaines_de(v)
+
+
+BILANS = {
+    "e^((x^2+x-2)/(6x-12))": [
+        r"\(ED = \mathbb{R} \setminus \left\{2\right\}\) (partie 1)",
+        "Parité : f n'est ni paire ni impaire (partie 2)",
+        "Zéros : aucun (partie 3)",
+        r"Signe : \(f(x) > 0\) sur ED (partie 3)",
+        r"Ordonnée à l'origine : \(f(0) = e^{\frac{1}{6}} \approx 1{,}18\) (partie 3)",
+        r"Asymptote horizontale (\(x \to -\infty\)) : \(y = 0\), graphe au-dessus (partie 4)",
+        r"Asymptote verticale : \(x = 2\) (\(\lim_{x\to 2^-} f(x) = 0^{+}\) ; \(\lim_{x\to 2^+} f(x) = +\infty\)) (partie 4)",
+        r"<b>Maximum local</b> en \(x = 0\) : \(\left(0\,;\,e^{\frac{1}{6}}\right) \approx \left(0\,;\,1{,}18\right)\) (partie 5)",
+        r"<b>Minimum local</b> en \(x = 4\) : \(\left(4\,;\,e^{\frac{3}{2}}\right) \approx \left(4\,;\,4{,}48\right)\) (partie 5)",
+    ],
+    "e^(-x^2)": [
+        r"\(ED = \mathbb{R}\) (partie 1)",
+        "Parité : f est paire (partie 2)",
+        "Zéros : aucun (partie 3)",
+        r"Signe : \(f(x) > 0\) sur ED (partie 3)",
+        r"Ordonnée à l'origine : \(f(0) = 1\) (partie 3)",
+        r"Asymptote horizontale (\(x \to -\infty\)) : \(y = 0\), graphe au-dessus (partie 4)",
+        r"Asymptote horizontale (\(x \to +\infty\)) : \(y = 0\), graphe au-dessus (partie 4)",
+        r"<b>Maximum global</b> en \(x = 0\) : \(\left(0\,;\,1\right)\) (partie 5)",
+    ],
+    "(x^2-6)e^(-2x)": [
+        r"\(ED = \mathbb{R}\) (partie 1)",
+        "Parité : f n'est ni paire ni impaire (partie 2)",
+        r"Zéros : \(x = -\sqrt{6} \approx -2{,}45\) ; \(x = \sqrt{6} \approx 2{,}45\) (partie 3)",
+        r"Signe : \(f(x) > 0\) sur \(\left]-\infty \,;\, -\sqrt{6}\right[ \cup \left]\sqrt{6} \,;\, +\infty\right[\) ; "
+        r"\(f(x) < 0\) sur \(\left]-\sqrt{6} \,;\, \sqrt{6}\right[\) (partie 3)",
+        r"Ordonnée à l'origine : \(f(0) = -6\) (partie 3)",
+        r"Asymptote horizontale (\(x \to +\infty\)) : \(y = 0\), graphe au-dessus (partie 4)",
+        r"<b>Minimum global</b> en \(x = -2\) : \(\left(-2\,;\,- 2 e^{4}\right) \approx \left(-2\,;\,-109{,}20\right)\) (partie 5)",
+        r"<b>Maximum local</b> en \(x = 3\) : \(\left(3\,;\,3 e^{-6}\right) \approx \left(3\,;\,0{,}0074\right)\) (partie 5)",
+    ],
+    "e^x(6-e^x)": [
+        r"\(ED = \mathbb{R}\) (partie 1)",
+        "Parité : f n'est ni paire ni impaire (partie 2)",
+        r"Zéros : \(x = \ln(6) \approx 1{,}79\) (partie 3)",
+        r"Signe : \(f(x) > 0\) sur \(\left]-\infty \,;\, \ln(6)\right[\) ; \(f(x) < 0\) sur \(\left]\ln(6) \,;\, +\infty\right[\) (partie 3)",
+        r"Ordonnée à l'origine : \(f(0) = 5\) (partie 3)",
+        r"Asymptote horizontale (\(x \to -\infty\)) : \(y = 0\), graphe au-dessus (partie 4)",
+        r"<b>Maximum global</b> en \(x = \ln(3)\) : \(\left(\ln(3)\,;\,9\right) \approx \left(1{,}10\,;\,9\right)\) (partie 5)",
+    ],
+    "e^(2/(x^2-4))": [
+        r"\(ED = \mathbb{R} \setminus \left\{-2 \,;\, 2\right\}\) (partie 1)",
+        "Parité : f est paire (partie 2)",
+        "Zéros : aucun (partie 3)",
+        r"Signe : \(f(x) > 0\) sur ED (partie 3)",
+        r"Ordonnée à l'origine : \(f(0) = e^{-\frac{1}{2}} \approx 0{,}61\) (partie 3)",
+        r"Asymptote horizontale (\(x \to -\infty\)) : \(y = 1\), graphe au-dessus (partie 4)",
+        r"Asymptote verticale : \(x = -2\) (\(\lim_{x\to -2^-} f(x) = +\infty\) ; \(\lim_{x\to -2^+} f(x) = 0^{+}\)) (partie 4)",
+        r"Asymptote verticale : \(x = 2\) (\(\lim_{x\to 2^-} f(x) = 0^{+}\) ; \(\lim_{x\to 2^+} f(x) = +\infty\)) (partie 4)",
+        r"Asymptote horizontale (\(x \to +\infty\)) : \(y = 1\), graphe au-dessus (partie 4)",
+        r"<b>Maximum local</b> en \(x = 0\) : \(\left(0\,;\,e^{- \frac{1}{2}}\right) \approx \left(0\,;\,0{,}61\right)\) (partie 5)",
+    ],
+    "e^(1/x)": [
+        r"\(ED = \mathbb{R} \setminus \left\{0\right\}\) (partie 1)",
+        "Parité : f n'est ni paire ni impaire (partie 2)",
+        "Zéros : aucun (partie 3)",
+        r"Signe : \(f(x) > 0\) sur ED (partie 3)",
+        r"Ordonnée à l'origine : aucune, car \(0 \notin ED\) (partie 3)",
+        r"Asymptote horizontale (\(x \to -\infty\)) : \(y = 1\), graphe au-dessous (partie 4)",
+        r"Asymptote verticale : \(x = 0\) (\(\lim_{x\to 0^-} f(x) = 0^{+}\) ; \(\lim_{x\to 0^+} f(x) = +\infty\)) (partie 4)",
+        r"Asymptote horizontale (\(x \to +\infty\)) : \(y = 1\), graphe au-dessus (partie 4)",
+        "Aucun extremum local (partie 5)",
+    ],
+    "sqrt(x^2-4)": [
+        r"\(ED = \left]-\infty \,;\, -2\right] \cup \left[2 \,;\, +\infty\right[\) (partie 1)",
+        "Parité : f est paire (partie 2)",
+        r"Zéros : \(x = -2\) ; \(x = 2\) (partie 3)",
+        r"Signe : \(f(x) > 0\) sur \(\left]-\infty \,;\, -2\right[ \cup \left]2 \,;\, +\infty\right[\) (partie 3)",
+        r"Ordonnée à l'origine : aucune, car \(0 \notin ED\) (partie 3)",
+        r"Asymptote oblique (\(x \to -\infty\)) : \(y = -x\) (partie 4)",
+        r"Asymptote oblique (\(x \to +\infty\)) : \(y = x\) (partie 4)",
+        r"<b>Minimum local</b> en \(x = -2\) : \(\left(-2\,;\,0\right)\) (partie 5)",
+        r"<b>Minimum local</b> en \(x = 2\) : \(\left(2\,;\,0\right)\) (partie 5)",
+    ],
+    "x^(2/3)": [
+        r"\(ED = \mathbb{R}\) (partie 1)",
+        "Parité : f est paire (partie 2)",
+        r"Zéros : \(x = 0\) (partie 3)",
+        r"Signe : \(f(x) > 0\) sur \(\mathbb{R} \setminus \left\{0\right\}\) (partie 3)",
+        r"Ordonnée à l'origine : \(f(0) = 0\) (partie 3)",
+        "Aucune asymptote détectée (partie 4)",
+        r"<b>Minimum global</b> en \(x = 0\) : \(\left(0\,;\,0\right)\) (partie 5)",
+    ],
+    "x/sqrt(x^2)": [
+        r"\(ED = \mathbb{R} \setminus \left\{0\right\}\) (partie 1)",
+        "Parité : f est impaire (partie 2)",
+        "Zéros : aucun (partie 3)",
+        r"Signe : \(f(x) > 0\) sur \(\left]0 \,;\, +\infty\right[\) ; \(f(x) < 0\) sur \(\left]-\infty \,;\, 0\right[\) (partie 3)",
+        r"Ordonnée à l'origine : aucune, car \(0 \notin ED\) (partie 3)",
+        r"Asymptote horizontale (\(x \to -\infty\)) : \(y = -1\) (partie 4)",
+        r"Pas de limite en \(x = 0\) (pas d'asymptote verticale) : \(\lim_{x\to 0^-} f(x) = -1\) ; \(\lim_{x\to 0^+} f(x) = 1\) (partie 4)",
+        r"Asymptote horizontale (\(x \to +\infty\)) : \(y = 1\) (partie 4)",
+        "Aucun extremum (partie 5)",
+    ],
+}
+
+TOUTES = list(dict.fromkeys(entrees_page("etude-complete") + CAS_LIMITES["etude-complete"]))
+
+
+class TestBilan(unittest.TestCase):
+    """D20 : carte « Bilan de l'étude », avant le graphique ; une ligne par résultat (ED, parité, zéros, signe, f(0), asymptotes avec
+    la position, extremums avec nature et ≈), chacune terminée par « (partie k) » ; aucun calcul nouveau : chaque ligne reprend ce que
+    sa partie a écrit et confirmé ; une partie qui ne conclut pas n'a pas de ligne."""
+
+    def test_lignes_exactes(self):
+        """Ex7, a–d du corrigé (résultats de decisions.md §4–5) et des cas aux formes différentes (point exclu, ED en deux morceaux,
+        bornes fermées, aucune asymptote, f constante par morceaux)."""
+        for entree, attendu in BILANS.items():
+            with self.subTest(entree=entree):
+                s, carte, lignes = bilan(entree)
+                self.assertEqual(lignes, attendu)
+                self.assertEqual(carte["style"], "final")
+                t = [c["titre"] for c in s["cartes"]]
+                self.assertEqual(t[t.index(rec.PARTIES[5]):], [rec.PARTIES[5], parties.TITRE_BILAN, "Graphique"])
+
+    def test_chaque_ligne_renvoie_au_resultat_de_sa_partie(self):
+        """Toutes les entrées de la page et les cas limites : chaque formule d'une ligne est écrite dans les cartes de sa partie (une
+        seule source) ; parité : la conclusion de la partie 2 ; asymptotes : une ligne du bilan des asymptotes ; ordre de D20."""
+        for entree in TOUTES:
+            s = rec.resoudre(entree)
+            if not s["ok"]:
+                continue
+            with self.subTest(entree=entree):
+                _, _, lignes = bilan(entree)
+                numeros = []
+                for ligne in lignes:
+                    m = re.fullmatch(r"(.*) \(partie (\d)\)", ligne)
+                    self.assertIsNotNone(m, ligne)
+                    corps, k = m.group(1), int(m.group(2))
+                    numeros.append(k)
+                    textes = "\n".join(chaines_de(cartes_de_la_partie(s, k)))
+                    if corps.startswith("Signe : ") and "sur ED" not in corps:
+                        continue                                    # ensembles lus dans le tableau : test_signe_contre_l_oracle
+                    for formule in re.findall(r"\\\((.*?)\\\)", corps):
+                        if k == 3 and formule == r"0 \notin ED":
+                            self.assertIn(parties.NE_COUPE_PAS, textes)
+                        elif k == 3 and formule in ("f(x) > 0", "f(x) < 0"):
+                            self.assertIn(rf"\({formule}\) sur ED", textes)
+                        elif k == 1:
+                            self.assertIn(formule.replace("ED = ", ""), textes)
+                        else:
+                            self.assertIn(formule, textes, (ligne, k))
+                    if k == 2:
+                        self.assertIn(corps.replace("Parité : ", "Donc <b>") + "</b>.", textes)
+                    if k == 3 and corps == "Zéros : aucun":
+                        self.assertIn("pas de zéro", textes)
+                    if k == 4:
+                        (bilan_lim,) = [c for c in cartes_de_la_partie(s, 4) if c["titre"] == "Bilan des asymptotes"]
+                        attendus = [i.rstrip(".") for b in bilan_lim["blocs"] for i in (b.get("items") or [b.get("html", "")])]
+                        self.assertIn(corps, attendus)
+                    if k == 5:
+                        nature = re.match(r"(<b>(?:Maximum|Minimum) (?:local|global)</b> en \\\(x = .*?\\\))", corps)
+                        if nature:
+                            self.assertIn(nature.group(1), textes)
+                        else:
+                            self.assertIn(corps, ("Aucun extremum local", "Aucun extremum"))
+                            self.assertIn(corps.lower(), textes.lower())
+                self.assertEqual(numeros, sorted(numeros))
+                self.assertEqual(numeros[:2], [1, 2])
+
+    def test_signe_contre_l_oracle(self):
+        """Les ensembles où f > 0 et f < 0 (lus dans la ligne f(x) confirmée du tableau de signes) contre l'oracle mpmath
+        (tests/python/oracle.py, 50 chiffres) : en chaque point d'une grille et près de chaque borne, f définie et non nulle ⇔ le point
+        est dans exactement un des deux ensembles, celui de son signe ; f non définie ou nulle ⇒ dans aucun. Le texte du bilan est
+        l'écriture de ces ensembles."""
+        from noyau import ens_tex, contient
+        vus = 0
+        for entree in TOUTES + ["x^2-4", "1/(x^2-1)", "(x-1)^2*(x+2)", "sqrt(x)-1", "ln(x^2-4)", "x*e^x", "(x+1)e^(-x)"]:
+            r, p3 = ec.etude_et_partie3(entree)
+            if not r["ok"] or p3["bilan"]["ensembles"] is None:
+                continue
+            vus += 1
+            with self.subTest(entree=entree):
+                f = lire(entree)
+                pos, neg = p3["bilan"]["ensembles"]
+                attendu = " ; ".join(rf"\(f(x) {o} 0\) sur \({ens_tex(S)}\)" for o, S in ((">", pos), ("<", neg)) if S)
+                self.assertEqual(p3["bilan"]["signe"], attendu)
+                bornes = [b.val for iv in pos + neg for b in (iv.lo, iv.hi) if b is not None]
+                xs = [mp.mpf(k) / 13 for k in range(-91, 92)] + [mp.mpf(b) + d for b in bornes for d in (mp.mpf("-1e-4"), mp.mpf("1e-4"))]
+                for x in xs:
+                    if any(abs(x - b) < 1e-7 for b in bornes):
+                        continue
+                    v = oracle.valeur(f, x)
+                    dans_pos, dans_neg = contient(pos, float(x)), contient(neg, float(x))
+                    if v is None or abs(v) < mp.mpf(10) ** -30:
+                        self.assertFalse(dans_pos or dans_neg, (entree, x, v))
+                    else:
+                        self.assertEqual((dans_pos, dans_neg), (v > 0, v < 0), (entree, x, v))
+        self.assertGreaterEqual(vus, 12)
+
+    def test_partie_qui_ne_conclut_pas_pas_de_ligne(self):
+        """Garde-fous : la partie 2 doute (SymPy et sonde en désaccord), la partie 3 doute (signe contredit), f(0) non établi, zéros
+        non calculés, SymPy absent : la ligne de cette partie n'est pas écrite (aucune affirmation non confirmée) ; les autres restent."""
+        def doute(*args, **kw):
+            raise parties.Doute()
+
+        def sans(lignes, *debuts):
+            return [l for l in lignes if not l.startswith(debuts)]
+        entree = "(x^2-6)e^(-2x)"
+        complet = BILANS[entree]
+        with mock.patch.object(parties, "classer_par_la_sonde", doute):
+            self.assertEqual(bilan(entree)[2], sans(complet, "Parité"))
+        with mock.patch.object(parties, "confirmer_signe", doute):
+            self.assertEqual(bilan(entree)[2], sans(complet, "Zéros", "Signe"))
+        with mock.patch.object(parties, "_ordonnee", doute):
+            self.assertEqual(bilan(entree)[2], sans(complet, "Ordonnée"))
+        with mock.patch.object(parties, "zeros_facteur", side_effect=parties.NonTraite(parties.ZEROS_NON_TRAITES)):
+            self.assertEqual(bilan(entree)[2], sans(complet, "Zéros", "Signe"))
+        analyse = ec.analyse(entree)
+        with mock.patch.object(parties, "charger_sympy", lambda: None):
+            self.assertIsNone(parties.partie2(analyse)["conclusion"])
+            self.assertEqual(parties.partie3(analyse)["bilan"], {"zeros": None, "signe": None, "ensembles": None, "f0": None})
+            self.assertIsNone(parties.partie5(ec.etudier(entree)["derivee"], ec.etudier(entree)["variations_limites"], analyse))
+        self.assertEqual(parties.lignes_bilan(r"\mathbb{R}", None, {"bilan": {"zeros": None, "signe": None, "f0": None}}, [], None),
+                         [r"\(ED = \mathbb{R}\) (partie 1)"])
+
+    def test_conclusion_de_la_partie_2(self):
+        """La conclusion rendue par `partie2` est celle que ses cartes écrivent (Donc f est paire / impaire / ni l'une ni l'autre),
+        recoupée par l'oracle (f(−x) = ±f(x) sur une grille de l'ED)."""
+        for entree in TOUTES:
+            a = ec.analyse(entree)
+            if not a[0].get("ok") or not a[0].get("complet"):
+                continue
+            with self.subTest(entree=entree):
+                p2 = parties.partie2(a)
+                textes = "\n".join(chaines_de(p2["cartes"]))
+                attendu = {"paire": parties.PAIRE, "impaire": parties.IMPAIRE, "ni": parties.NI}
+                if p2["conclusion"] is None:
+                    self.assertFalse(any(v in textes for v in attendu.values()))
+                    continue
+                self.assertIn(attendu[p2["conclusion"]], textes)
+                f = lire(entree)
+                paires = [(oracle.valeur(f, x), oracle.valeur(f, -x)) for x in (mp.mpf(k) / 7 for k in range(1, 30))]
+                paires = [(u, v) for u, v in paires if u is not None and v is not None]
+                if p2["conclusion"] == "paire":
+                    self.assertTrue(paires and all(abs(u - v) < mp.mpf(10) ** -30 for u, v in paires))
+                elif p2["conclusion"] == "impaire":
+                    self.assertTrue(paires and all(abs(u + v) < mp.mpf(10) ** -30 for u, v in paires))
+                else:
+                    self.assertTrue(not paires or any(abs(u - v) > mp.mpf(10) ** -10 for u, v in paires))
+                    self.assertTrue(not paires or any(abs(u + v) > mp.mpf(10) ** -10 for u, v in paires))

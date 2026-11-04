@@ -33,6 +33,10 @@ def titres(s):
     return [c["titre"] for c in s["cartes"]]
 
 
+def lignes_du_bilan(s):
+    return carte(s, "Bilan de l'étude")["blocs"][0]["items"]
+
+
 class TestResoudreEC(unittest.TestCase):
     def test_schema_et_rien_de_perdu(self):
         for entree in ENTREES:
@@ -57,7 +61,7 @@ class TestResoudreEC(unittest.TestCase):
             attendu += [t for e in lim["etudes"] for t in titres_etude(e)] + ["Bilan des asymptotes", p[4], "Dérivée"]
             if dv["deriv_resolu"]:
                 attendu.append("Signe de f' et variations")
-            attendu += [p[5], "Graphique"]
+            attendu += [p[5], "Bilan de l'étude", "Graphique"]                 # D20 : le bilan, avant le graphique
             with self.subTest(entree=entree):
                 s = rec.resoudre(entree)
                 self.assertEqual(titres(s), attendu)
@@ -80,6 +84,7 @@ class TestResoudreEC(unittest.TestCase):
         self.assertEqual(sous(s, rec.PARTIES[4]), [d["cartes"][1]])
         self.assertEqual(d["cartes"][1]["blocs"], [so.erreur("Cette fonction sort du cadre de l'outil : la dérivée n'a pas été calculée.")])
         self.assertEqual(blocs_de_type(s, "graphique")[0]["extrema"], [])
+        self.assertFalse([l for l in lignes_du_bilan(s) if l.endswith("(partie 5)")])    # D20 : partie 5 non conclue, pas de ligne
         with mock.patch.object(dv, "preimage", side_effect=RuntimeError("forcé")):
             s = rec.resoudre("x^2-4x+3")
             d = rdv.resoudre("x^2-4x+3")
@@ -87,6 +92,18 @@ class TestResoudreEC(unittest.TestCase):
         self.assertEqual([c["titre"] for c in sous(s, rec.PARTIES[4])], ["Dérivée", "Signe de f' et variations"])
         self.assertEqual(sous(s, rec.PARTIES[4])[1], d["cartes"][2])
         self.assertEqual(d["cartes"][2]["style"], "erreur")
+        self.assertFalse([l for l in lignes_du_bilan(s) if l.endswith("(partie 5)")])
+
+    def test_bilan_avec_la_liste_de_l_outil_derivee(self):
+        """D20 : sans rédaction D11 (repli), les lignes du bilan pour la partie 5 sont celles de la liste de l'outil Dérivée, telles que
+        la carte « Signe de f′ et variations » les affiche."""
+        from unittest import mock
+        with mock.patch.object(parties, "partie5", return_value=None):
+            s = rec.resoudre("x^2-4x+3")
+        valide(self, s)
+        liste = [i for b in carte(s, "Signe de f' et variations")["blocs"] if b["type"] == "liste" for i in b["items"]]
+        self.assertEqual(liste, [r"minimum local en \(x=2\) : \(f(2)=-1\)"])
+        self.assertEqual([l for l in lignes_du_bilan(s) if l.endswith("(partie 5)")], [liste[0] + " (partie 5)"])
 
     def test_six_parties_dans_l_ordre_du_corrige(self):
         """D1 : les six intertitres, mots et ordre du corrigé .tex."""

@@ -621,6 +621,26 @@
    {
     "blocs": [
      {
+      "items": [
+       "\\(ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}\\) (partie 1)",
+       "Parité : f n'est ni paire ni impaire (partie 2)",
+       "Zéros : aucun (partie 3)",
+       "Signe : \\(f(x) > 0\\) sur ED (partie 3)",
+       "Ordonnée à l'origine : aucune, car \\(0 \\notin ED\\) (partie 3)",
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\), graphe au-dessus (partie 4)",
+       "Trou en \\((0\\,;\\,1)\\) : f n'est pas définie en \\(x = 0\\), mais \\(f(x) \\to 1\\) (pas une asymptote verticale) (partie 4)",
+       "Aucun extremum local (partie 5)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan de l'étude"
+   },
+   {
+    "blocs": [
+     {
       "asymptotes": [
        {
         "genre": "horizontale",
@@ -1113,6 +1133,28 @@
    {
     "blocs": [
      {
+      "items": [
+       "\\(ED = \\mathbb{R} \\setminus \\left\\{3\\right\\}\\) (partie 1)",
+       "Parité : f n'est ni paire ni impaire (partie 2)",
+       "Zéros : \\(x = -1\\) ; \\(x = 1\\) (partie 3)",
+       "Signe : \\(f(x) > 0\\) sur \\(\\left]-1 \\,;\\, 1\\right[ \\cup \\left]3 \\,;\\, +\\infty\\right[\\) ; \\(f(x) < 0\\) sur \\(\\left]-\\infty \\,;\\, -1\\right[ \\cup \\left]1 \\,;\\, 3\\right[\\) (partie 3)",
+       "Ordonnée à l'origine : \\(f(0) = \\frac{1}{3} \\approx 0{,}33\\) (partie 3)",
+       "Asymptote oblique (\\(x \\to -\\infty\\)) : \\(y = x + 3\\) (partie 4)",
+       "Asymptote verticale : \\(x = 3\\) (\\(\\lim_{x\\to 3^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 3^+} f(x) = +\\infty\\)) (partie 4)",
+       "Asymptote oblique (\\(x \\to +\\infty\\)) : \\(y = x + 3\\) (partie 4)",
+       "<b>Maximum local</b> en \\(x = 3 - 2\\sqrt{2}\\) : \\(\\left(3 - 2\\sqrt{2}\\,;\\,6 - 4 \\sqrt{2}\\right) \\approx \\left(0{,}17\\,;\\,0{,}34\\right)\\) (partie 5)",
+       "<b>Minimum local</b> en \\(x = 3 + 2\\sqrt{2}\\) : \\(\\left(3 + 2\\sqrt{2}\\,;\\,4 \\sqrt{2} + 6\\right) \\approx \\left(5{,}83\\,;\\,11{,}66\\right)\\) (partie 5)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan de l'étude"
+   },
+   {
+    "blocs": [
+     {
       "asymptotes": [
        {
         "a": "1",
@@ -1222,6 +1264,647 @@
    }
   ],
   "enonce_tex": "f(x) = \\frac{x^{2} - 1}{x - 3}",
+  "erreur": null,
+  "ok": true
+ },
+ "(x^2-6)e^(-2x)": {
+  "cartes": [
+   {
+    "blocs": [],
+    "style": "partie",
+    "titre": "1. Domaine de définition"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = \\left(x^{2} - 6\\right)\\,e^{-2x}",
+      "type": "formule"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction",
+    "titre_masque": true
+   },
+   {
+    "blocs": [
+     {
+      "html": "Ni logarithme, ni dénominateur, ni racine : aucune condition.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\mathbb{R}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Ensemble de définition"
+   },
+   {
+    "blocs": [],
+    "style": "partie",
+    "titre": "2. Parité"
+   },
+   {
+    "blocs": [
+     {
+      "html": "ED est symétrique par rapport à 0.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(0) = -6 \\neq 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Une fonction impaire vérifie \\(f(0) = 0\\) : f n'est pas impaire.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Pas impaire"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(1) = -5e^{-2} \\approx -0{,}68\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(-1) = -5e^{2} \\approx -36{,}95\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(-1) \\neq f(1)\\) : f n'est pas paire.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc <b>f n'est ni paire ni impaire</b>.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Pas paire"
+   },
+   {
+    "blocs": [],
+    "style": "partie",
+    "titre": "3. Zéros, signe, ordonnée à l'origine"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(e^{-2x} > 0\\) pour tout \\(x\\) (une exponentielle est strictement positive) ; il ne s'annule jamais.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(x^{2} - 6\\right)\\,e^{-2x} = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff x^{2} - 6 = 0\\) (car \\(e^{-2x} > 0\\))",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff x^{2} = 6\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff\\) \\(x = -\\sqrt{6} \\approx -2{,}45\\) ou \\(x = \\sqrt{6} \\approx 2{,}45\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Zéros de f"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "crit": [
+       "-\\sqrt{6}",
+       "\\sqrt{6}"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(x^{2} - 6\\right)"
+       },
+       {
+        "cells": [
+         "+",
+         "+",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "e^{-2x}"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-",
+         "0",
+         "+"
+        ],
+        "final": true,
+        "label": "f(x)"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(0) = -6\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Le graphe coupe l'axe des y au point \\((0\\,;\\,-6)\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Ordonnée à l'origine"
+   },
+   {
+    "blocs": [],
+    "style": "partie",
+    "titre": "4. Limites et asymptotes"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\displaystyle\\lim_{x\\to -\\infty} \\left(x^{2} - 6\\right)\\,e^{-2x}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(x^{2} - 6 \\to +\\infty\\). \\(-2x \\to +\\infty\\text{, donc }e^{-2x} \\to +\\infty\\). Forme \\(\\left(+\\infty\\right) \\cdot \\left(+\\infty\\right)\\) : <span class=\"det\">pas indéterminée</span>!",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "blocs": [
+     {
+      "html": "(règle des signes : + · + = +) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "\\lim_{x\\to -\\infty} \\left(x^{2} - 6\\right)\\,e^{-2x} = \\left(+\\infty\\right) \\cdot \\left(+\\infty\\right) = +\\infty",
+      "type": "resultat_lim"
+     },
+     {
+      "genre": "attention",
+      "lignes": [
+       "Pas de BH ici : un produit de deux « énormes » n'est jamais indéterminé."
+      ],
+      "titre": "Attention",
+      "type": "encadre"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2 : on conclut directement."
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\displaystyle\\lim_{x\\to +\\infty} \\left(x^{2} - 6\\right)\\,e^{-2x}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(x^{2} - 6 \\to +\\infty\\). \\(-2x \\to -\\infty\\text{, donc }e^{-2x} \\to 0^{+}\\). Forme \\(\\left(+\\infty\\right) \\cdot 0\\) : <span class=\"ind\">indéterminée</span>.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "genre": "prediction",
+      "lignes": [
+       "Produit : \\(x^{2} - 6 \\to +\\infty\\) et \\(e^{-2x} \\to 0^{+}\\). L'exponentielle bat la puissance : c'est \\(e^{-2x}\\) qui impose sa limite, donc 0.",
+       "Signe : \\(x^{2} - 6\\) > 0 et \\(e^{-2x}\\) > 0, donc produit > 0.",
+       "<b>On s'attend à :</b> \\(0^{+}\\)"
+      ],
+      "titre": "Prédiction avec la règle du podium",
+      "type": "encadre"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "blocs": [
+     {
+      "html": "BH ne marche pas sur un produit. On écrit \\(e^{-2x} = \\frac{1}{e^{2x}}\\) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\[\\left(x^{2} - 6\\right)\\,e^{-2x} = \\frac{x^{2} - 6}{e^{2x}}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2 : on transforme le produit en quotient."
+   },
+   {
+    "blocs": [
+     {
+      "html": "Haut : \\(x^{2} - 6 \\to +\\infty\\). Bas : \\(2x \\to +\\infty\\text{, donc }e^{2x} \\to +\\infty\\). Forme \\(\\dfrac{+\\infty}{+\\infty}\\) : <span class=\"ind\">indéterminée</span>.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3 : on vérifie la forme."
+   },
+   {
+    "blocs": [
+     {
+      "bas": "e^{2x}",
+      "dbas": "2e^{2x}",
+      "dhaut": "2x",
+      "haut": "x^{2} - 6",
+      "type": "bh"
+     },
+     {
+      "html": "\\[\\lim_{x\\to +\\infty} \\frac{x^{2} - 6}{e^{2x}} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{2x}{2e^{2x}} = \\lim_{x\\to +\\infty} \\frac{x}{e^{2x}}\\]",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Forme \\(\\dfrac{+\\infty}{+\\infty}\\) : encore <span class=\"ind\">indéterminée</span>.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4 : BH (1re fois)."
+   },
+   {
+    "blocs": [
+     {
+      "bas": "e^{2x}",
+      "dbas": "2e^{2x}",
+      "dhaut": "1",
+      "haut": "x",
+      "type": "bh"
+     },
+     {
+      "html": "\\[\\lim_{x\\to +\\infty} \\frac{x}{e^{2x}} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{1}{2e^{2x}}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 5 : BH (2e fois)."
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(e^{2x} \\to +\\infty\\), donc \\(2e^{2x} \\to +\\infty\\) et \\(\\frac{1}{2e^{2x}} \\to \\dfrac{1}{+\\infty} = 0^{+}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "\\lim_{x\\to +\\infty} \\left(x^{2} - 6\\right)\\,e^{-2x} = 0^{+}",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "✓ Le calcul confirme la prédiction du podium.",
+      "style": "confirme",
+      "type": "texte"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\) (à droite). \\(f(x) \\to 0^{+}\\) : le graphe est au-dessus.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 6 : on remplace."
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\), graphe au-dessus"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "blocs": [],
+    "style": "partie",
+    "titre": "5. Dérivée, tableau de variation, extremums"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "On applique la règle du produit, \\((uv)' = u'v + uv'\\), avec :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "du": "u' = 2x",
+      "dv": "v' = -2e^{-2x}",
+      "type": "uv",
+      "u": "u = x^{2} - 6",
+      "v": "v = e^{-2x}"
+     },
+     {
+      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(e^{-2x}\\) est de la forme \\(e^{u}\\) avec \\(u(x) = -2x\\) (dérivée interne \\(u'(x) = -2\\)) \\(\\Rightarrow\\) \\(\\left(e^{-2x}\\right)' = u' e^{u} = -2e^{-2x}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = u'(x)v(x) + u(x)v'(x) = 2x\\,e^{-2x} + \\left(x^{2} - 6\\right) \\cdot \\left(-2e^{-2x}\\right) = -2\\left(x - 3\\right)\\,\\left(x + 2\\right)\\,e^{-2x}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = -2\\left(x - 3\\right)\\,\\left(x + 2\\right)\\,e^{-2x}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = 0 \\iff \\left(x - 3\\right)\\,\\left(x + 2\\right) = 0\\) (car \\(e^{-2x} > 0\\)) \\(\\iff x = -2 \\text{ ou } x = 3\\) (produit nul).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "-2",
+       "3"
+      ],
+      "limites": {
+       "colonnes": [],
+       "moins_inf": "+\\infty",
+       "non_determinees": [],
+       "plus_inf": "0^{+}"
+      },
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "-",
+         "-"
+        ],
+        "label": "-2"
+       },
+       {
+        "cells": [
+         "-",
+         "-",
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "\\left(x - 3\\right)"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "\\left(x + 2\\right)"
+       },
+       {
+        "cells": [
+         "+",
+         "+",
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "e^{-2x}"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+",
+         "0",
+         "-"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\searrow",
+         "val:- 2 e^{4}",
+         "\\nearrow",
+         "val:3 e^{-6}",
+         "\\searrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "\\(f(-2) = \\left(\\left(-2\\right)^{2} - 6\\right)\\,e^{-2\\left(-2\\right)} = \\left(4 - 6\\right)\\,e^{4} = - 2 e^{4} \\approx -109{,}20\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(3) = \\left(3^{2} - 6\\right)\\,e^{-2 \\cdot 3} = \\left(9 - 6\\right)\\,e^{-6} = 3 e^{-6} \\approx 0{,}0074\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "items": [
+       "<b>Minimum global</b> en \\(x = -2\\) : \\(\\left(-2\\,;\\,- 2 e^{4}\\right) \\approx \\left(-2\\,;\\,-109{,}20\\right)\\) (\\(f'\\) passe de \\(-\\) à \\(+\\)). Les autres valeurs de f sont plus grandes (limites \\(+\\infty\\) en \\(-\\infty\\) et \\(0^{+}\\) en \\(+\\infty\\)).",
+       "<b>Maximum local</b> en \\(x = 3\\) : \\(\\left(3\\,;\\,3 e^{-6}\\right) \\approx \\left(3\\,;\\,0{,}0074\\right)\\) (\\(f'\\) passe de \\(+\\) à \\(-\\)). Pas global : \\(f(x) \\to +\\infty\\) quand \\(x \\to -\\infty\\)."
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   },
+   {
+    "blocs": [],
+    "style": "partie",
+    "titre": "6. Graphe"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "\\(ED = \\mathbb{R}\\) (partie 1)",
+       "Parité : f n'est ni paire ni impaire (partie 2)",
+       "Zéros : \\(x = -\\sqrt{6} \\approx -2{,}45\\) ; \\(x = \\sqrt{6} \\approx 2{,}45\\) (partie 3)",
+       "Signe : \\(f(x) > 0\\) sur \\(\\left]-\\infty \\,;\\, -\\sqrt{6}\\right[ \\cup \\left]\\sqrt{6} \\,;\\, +\\infty\\right[\\) ; \\(f(x) < 0\\) sur \\(\\left]-\\sqrt{6} \\,;\\, \\sqrt{6}\\right[\\) (partie 3)",
+       "Ordonnée à l'origine : \\(f(0) = -6\\) (partie 3)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\), graphe au-dessus (partie 4)",
+       "<b>Minimum global</b> en \\(x = -2\\) : \\(\\left(-2\\,;\\,- 2 e^{4}\\right) \\approx \\left(-2\\,;\\,-109{,}20\\right)\\) (partie 5)",
+       "<b>Maximum local</b> en \\(x = 3\\) : \\(\\left(3\\,;\\,3 e^{-6}\\right) \\approx \\left(3\\,;\\,0{,}0074\\right)\\) (partie 5)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan de l'étude"
+   },
+   {
+    "blocs": [
+     {
+      "asymptotes": [
+       {
+        "genre": "horizontale",
+        "ou": "x \\to +\\infty",
+        "position": "au-dessus",
+        "valeur_tex": "0",
+        "valeur_val": 0.0
+       }
+      ],
+      "extrema": [
+       {
+        "f_py": "-2*exp(4)",
+        "f_tex": "- 2 e^{4}",
+        "f_val": -109.1963,
+        "genre": "minimum local",
+        "x_py": "(-2)/(1)",
+        "x_tex": "-2",
+        "x_val": -2.0
+       },
+       {
+        "f_py": "3*exp(-6)",
+        "f_tex": "3 e^{-6}",
+        "f_val": 0.00743625653,
+        "genre": "maximum local",
+        "x_py": "(3)/(1)",
+        "x_tex": "3",
+        "x_val": 3.0
+       }
+      ],
+      "points": [
+       {
+        "f_val": 0.0,
+        "x_val": -2.44948974
+       },
+       {
+        "f_val": 0.0,
+        "x_val": 2.44948974
+       },
+       {
+        "f_val": -6.0,
+        "x_val": 0.0
+       }
+      ],
+      "recalculable": true,
+      "ronds_vides": [],
+      "segments": [
+       {
+        "dernier": [
+         16.4929366,
+         1.25697491e-12
+        ],
+        "empreinte": "993884df54251d79",
+        "n": 1200,
+        "premier": [
+         -15.9424263,
+         null
+        ]
+       }
+      ],
+      "type": "graphique",
+      "xmax": 5.72474487,
+      "xmin": -5.17423461,
+      "ymax": 61.4345379,
+      "ymin": -143.322468
+     },
+     {
+      "html": "Courbe (trait plein), asymptotes (pointillé), extremums, zéros et point (0 ; f(0)) (points pleins), points exclus du graphe (ronds vides). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Graphique"
+   }
+  ],
+  "enonce_tex": "f(x) = \\left(x^{2} - 6\\right)\\,e^{-2x}",
   "erreur": null,
   "ok": true
  },
@@ -1684,6 +2367,28 @@
     "blocs": [],
     "style": "partie",
     "titre": "6. Graphe"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "\\(ED = \\mathbb{R} \\setminus \\left\\{1 \\,;\\, 2\\right\\}\\) (partie 1)",
+       "Parité : f n'est ni paire ni impaire (partie 2)",
+       "Zéros : aucun (partie 3)",
+       "Signe : \\(f(x) > 0\\) sur \\(\\left]-\\infty \\,;\\, 1\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[\\) ; \\(f(x) < 0\\) sur \\(\\left]1 \\,;\\, 2\\right[\\) (partie 3)",
+       "Ordonnée à l'origine : \\(f(0) = \\frac{1}{2} \\approx 0{,}50\\) (partie 3)",
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\) (partie 4)",
+       "Asymptote verticale : \\(x = 1\\) (\\(\\lim_{x\\to 1^-} f(x) = +\\infty\\) ; \\(\\lim_{x\\to 1^+} f(x) = -\\infty\\)) (partie 4)",
+       "Asymptote verticale : \\(x = 2\\) (\\(\\lim_{x\\to 2^-} f(x) = -\\infty\\) ; \\(\\lim_{x\\to 2^+} f(x) = +\\infty\\)) (partie 4)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\) (partie 4)",
+       "<b>Maximum local</b> en \\(x = \\frac{3}{2}\\) : \\(\\left(\\frac{3}{2}\\,;\\,-4\\right) \\approx \\left(1{,}50\\,;\\,-4\\right)\\) (partie 5)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan de l'étude"
    },
    {
     "blocs": [
@@ -2295,6 +3000,25 @@
     "blocs": [],
     "style": "partie",
     "titre": "6. Graphe"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "\\(ED = \\left]0 \\,;\\, +\\infty\\right[\\) (partie 1)",
+       "Parité : f n'est ni paire ni impaire (partie 2)",
+       "Zéros : \\(x = 1\\) (partie 3)",
+       "Signe : \\(f(x) > 0\\) sur \\(\\left]1 \\,;\\, +\\infty\\right[\\) ; \\(f(x) < 0\\) sur \\(\\left]0 \\,;\\, 1\\right[\\) (partie 3)",
+       "Ordonnée à l'origine : aucune, car \\(0 \\notin ED\\) (partie 3)",
+       "Bord du graphe : f n'est pas définie en \\(x = 0\\), mais \\(f(x) \\to 0\\) ; le graphe s'arrête au point \\((0\\,;\\,0)\\), qui n'en fait pas partie (pas une asymptote verticale) (partie 4)",
+       "<b>Minimum global</b> en \\(x = e^{-1}\\) : \\(\\left(e^{-1}\\,;\\,- 3 e^{-1}\\right) \\approx \\left(0{,}37\\,;\\,-1{,}10\\right)\\) (partie 5)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan de l'étude"
    },
    {
     "blocs": [
@@ -2930,6 +3654,27 @@
    {
     "blocs": [
      {
+      "items": [
+       "\\(ED = \\mathbb{R} \\setminus \\left\\{2\\right\\}\\) (partie 1)",
+       "Parité : f n'est ni paire ni impaire (partie 2)",
+       "Zéros : aucun (partie 3)",
+       "Signe : \\(f(x) > 0\\) sur ED (partie 3)",
+       "Ordonnée à l'origine : \\(f(0) = e^{\\frac{1}{6}} \\approx 1{,}18\\) (partie 3)",
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\), graphe au-dessus (partie 4)",
+       "Asymptote verticale : \\(x = 2\\) (\\(\\lim_{x\\to 2^-} f(x) = 0^{+}\\) ; \\(\\lim_{x\\to 2^+} f(x) = +\\infty\\)) (partie 4)",
+       "<b>Maximum local</b> en \\(x = 0\\) : \\(\\left(0\\,;\\,e^{\\frac{1}{6}}\\right) \\approx \\left(0\\,;\\,1{,}18\\right)\\) (partie 5)",
+       "<b>Minimum local</b> en \\(x = 4\\) : \\(\\left(4\\,;\\,e^{\\frac{3}{2}}\\right) \\approx \\left(4\\,;\\,4{,}48\\right)\\) (partie 5)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan de l'étude"
+   },
+   {
+    "blocs": [
+     {
       "asymptotes": [
        {
         "genre": "horizontale",
@@ -3020,6 +3765,369 @@
    }
   ],
   "enonce_tex": "f(x) = e^{\\frac{x^{2} + x - 2}{6x - 12}}",
+  "erreur": null,
+  "ok": true
+ },
+ "e^(-x^2)": {
+  "cartes": [
+   {
+    "blocs": [],
+    "style": "partie",
+    "titre": "1. Domaine de définition"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = e^{-x^{2}}",
+      "type": "formule"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction",
+    "titre_masque": true
+   },
+   {
+    "blocs": [
+     {
+      "html": "Ni logarithme, ni dénominateur, ni racine : aucune condition.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\mathbb{R}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Ensemble de définition"
+   },
+   {
+    "blocs": [],
+    "style": "partie",
+    "titre": "2. Parité"
+   },
+   {
+    "blocs": [
+     {
+      "html": "ED est symétrique par rapport à 0.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(-x) = e^{-\\left(-x\\right)^{2}}\\) (on remplace x par −x)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\( = e^{-x^{2}}\\) (car \\(\\left(-x\\right)^{2} = x^{2}\\))",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\( = f(x)\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc <b>f est paire</b>.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Calcul de f(−x)"
+   },
+   {
+    "blocs": [],
+    "style": "partie",
+    "titre": "3. Zéros, signe, ordonnée à l'origine"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(e^{-x^{2}} > 0\\) pour tout \\(x\\) (une exponentielle est strictement positive).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc f n'a pas de zéro et \\(f(x) > 0\\) sur ED.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Zéros et signe de f"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(0) = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Le graphe coupe l'axe des y au point \\((0\\,;\\,1)\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Ordonnée à l'origine"
+   },
+   {
+    "blocs": [],
+    "style": "partie",
+    "titre": "4. Limites et asymptotes"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\displaystyle\\lim_{x\\to \\pm\\infty} e^{-x^{2}}\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to \\pm\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "html": "Exposant : \\(-x^{2} \\to -\\infty\\). Donc \\(e^{-x^{2}} \\to e^{-\\infty} = 0^{+}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "\\lim_{x\\to \\pm\\infty} e^{-x^{2}} = 0^{+}",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\) (des deux côtés). \\(f(x) \\to 0^{+}\\) : le graphe est au-dessus.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\), graphe au-dessus",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\), graphe au-dessus"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "blocs": [],
+    "style": "partie",
+    "titre": "5. Dérivée, tableau de variation, extremums"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(e^{-x^{2}}\\) est de la forme \\(e^{u}\\) avec \\(u(x) = -x^{2}\\) (dérivée interne \\(u'(x) = -2x\\)) \\(\\Rightarrow\\) \\(\\left(e^{-x^{2}}\\right)' = u' e^{u} = -2x\\,e^{-x^{2}}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = -2x\\,e^{-x^{2}}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(f'(x) = 0 \\iff x = 0\\) (car \\(e^{-x^{2}} > 0\\)).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "0"
+      ],
+      "limites": {
+       "colonnes": [],
+       "moins_inf": "0^{+}",
+       "non_determinees": [],
+       "plus_inf": "0^{+}"
+      },
+      "rows": [
+       {
+        "cells": [
+         "-",
+         "-",
+         "-"
+        ],
+        "label": "-2"
+       },
+       {
+        "cells": [
+         "-",
+         "0",
+         "+"
+        ],
+        "label": "x"
+       },
+       {
+        "cells": [
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "e^{-x^{2}}"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\nearrow",
+         "val:1",
+         "\\searrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "\\(f(0) = e^{-0^{2}} = 1\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "items": [
+       "<b>Maximum global</b> en \\(x = 0\\) : \\(\\left(0\\,;\\,1\\right)\\) (\\(f'\\) passe de \\(+\\) à \\(-\\)). Les autres valeurs de f sont plus petites (limites \\(0^{+}\\) en \\(\\pm\\infty\\))."
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   },
+   {
+    "blocs": [],
+    "style": "partie",
+    "titre": "6. Graphe"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "\\(ED = \\mathbb{R}\\) (partie 1)",
+       "Parité : f est paire (partie 2)",
+       "Zéros : aucun (partie 3)",
+       "Signe : \\(f(x) > 0\\) sur ED (partie 3)",
+       "Ordonnée à l'origine : \\(f(0) = 1\\) (partie 3)",
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\), graphe au-dessus (partie 4)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\), graphe au-dessus (partie 4)",
+       "<b>Maximum global</b> en \\(x = 0\\) : \\(\\left(0\\,;\\,1\\right)\\) (partie 5)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan de l'étude"
+   },
+   {
+    "blocs": [
+     {
+      "asymptotes": [
+       {
+        "genre": "horizontale",
+        "ou": "x \\to -\\infty",
+        "position": "au-dessus",
+        "valeur_tex": "0",
+        "valeur_val": 0.0
+       },
+       {
+        "genre": "horizontale",
+        "ou": "x \\to +\\infty",
+        "position": "au-dessus",
+        "valeur_tex": "0",
+        "valeur_val": 0.0
+       }
+      ],
+      "extrema": [
+       {
+        "f_py": "1",
+        "f_tex": "1",
+        "f_val": 1.0,
+        "genre": "maximum local",
+        "x_py": "(0)/(1)",
+        "x_tex": "0",
+        "x_val": 0.0
+       }
+      ],
+      "points": [],
+      "recalculable": true,
+      "ronds_vides": [],
+      "segments": [
+       {
+        "dernier": [
+         5.952,
+         4.11672312e-16
+        ],
+        "empreinte": "5f7c06712373ff04",
+        "n": 1200,
+        "premier": [
+         -5.952,
+         4.11672312e-16
+        ]
+       }
+      ],
+      "type": "graphique",
+      "xmax": 2.0,
+      "xmin": -2.0,
+      "ymax": 1.5,
+      "ymin": -0.5
+     },
+     {
+      "html": "Courbe (trait plein), asymptotes (pointillé), extremums, zéros et point (0 ; f(0)) (points pleins), points exclus du graphe (ronds vides). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Graphique"
+   }
+  ],
+  "enonce_tex": "f(x) = e^{-x^{2}}",
   "erreur": null,
   "ok": true
  },
@@ -3440,6 +4548,27 @@
     "blocs": [],
     "style": "partie",
     "titre": "6. Graphe"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "\\(ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}\\) (partie 1)",
+       "Parité : f n'est ni paire ni impaire (partie 2)",
+       "Zéros : aucun (partie 3)",
+       "Signe : \\(f(x) > 0\\) sur ED (partie 3)",
+       "Ordonnée à l'origine : aucune, car \\(0 \\notin ED\\) (partie 3)",
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 1\\), graphe au-dessous (partie 4)",
+       "Asymptote verticale : \\(x = 0\\) (\\(\\lim_{x\\to 0^-} f(x) = 0^{+}\\) ; \\(\\lim_{x\\to 0^+} f(x) = +\\infty\\)) (partie 4)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 1\\), graphe au-dessus (partie 4)",
+       "Aucun extremum local (partie 5)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan de l'étude"
    },
    {
     "blocs": [
@@ -4051,6 +5180,28 @@
    {
     "blocs": [
      {
+      "items": [
+       "\\(ED = \\mathbb{R} \\setminus \\left\\{-2 \\,;\\, 2\\right\\}\\) (partie 1)",
+       "Parité : f est paire (partie 2)",
+       "Zéros : aucun (partie 3)",
+       "Signe : \\(f(x) > 0\\) sur ED (partie 3)",
+       "Ordonnée à l'origine : \\(f(0) = e^{-\\frac{1}{2}} \\approx 0{,}61\\) (partie 3)",
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 1\\), graphe au-dessus (partie 4)",
+       "Asymptote verticale : \\(x = -2\\) (\\(\\lim_{x\\to -2^-} f(x) = +\\infty\\) ; \\(\\lim_{x\\to -2^+} f(x) = 0^{+}\\)) (partie 4)",
+       "Asymptote verticale : \\(x = 2\\) (\\(\\lim_{x\\to 2^-} f(x) = 0^{+}\\) ; \\(\\lim_{x\\to 2^+} f(x) = +\\infty\\)) (partie 4)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 1\\), graphe au-dessus (partie 4)",
+       "<b>Maximum local</b> en \\(x = 0\\) : \\(\\left(0\\,;\\,e^{- \\frac{1}{2}}\\right) \\approx \\left(0\\,;\\,0{,}61\\right)\\) (partie 5)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan de l'étude"
+   },
+   {
+    "blocs": [
+     {
       "asymptotes": [
        {
         "genre": "horizontale",
@@ -4460,6 +5611,25 @@
    {
     "blocs": [
      {
+      "items": [
+       "\\(ED = \\mathbb{R}\\) (partie 1)",
+       "Parité : f n'est ni paire ni impaire (partie 2)",
+       "Zéros : aucun (partie 3)",
+       "Signe : \\(f(x) > 0\\) sur ED (partie 3)",
+       "Ordonnée à l'origine : \\(f(0) = 1\\) (partie 3)",
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\), graphe au-dessus (partie 4)",
+       "Aucun extremum local (partie 5)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan de l'étude"
+   },
+   {
+    "blocs": [
+     {
       "asymptotes": [
        {
         "genre": "horizontale",
@@ -4509,6 +5679,539 @@
    }
   ],
   "enonce_tex": "f(x) = e^{2x}",
+  "erreur": null,
+  "ok": true
+ },
+ "e^x(6-e^x)": {
+  "cartes": [
+   {
+    "blocs": [],
+    "style": "partie",
+    "titre": "1. Domaine de définition"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "f(x) = e^{x}\\,\\left(6 - e^{x}\\right)",
+      "type": "formule"
+     }
+    ],
+    "style": "normal",
+    "titre": "Fonction",
+    "titre_masque": true
+   },
+   {
+    "blocs": [
+     {
+      "html": "Ni logarithme, ni dénominateur, ni racine : aucune condition.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "ED = \\mathbb{R}",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Ensemble de définition"
+   },
+   {
+    "blocs": [],
+    "style": "partie",
+    "titre": "2. Parité"
+   },
+   {
+    "blocs": [
+     {
+      "html": "ED est symétrique par rapport à 0.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Symétrie de l'ED"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(0) = 5 \\neq 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Une fonction impaire vérifie \\(f(0) = 0\\) : f n'est pas impaire.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Pas impaire"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(1) = e\\,\\left(6 - e\\right) \\approx 8{,}92\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(-1) = e^{-1}\\,\\left(6 - e^{-1}\\right) \\approx 2{,}07\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(-1) \\neq f(1)\\) : f n'est pas paire.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Donc <b>f n'est ni paire ni impaire</b>.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Pas paire"
+   },
+   {
+    "blocs": [],
+    "style": "partie",
+    "titre": "3. Zéros, signe, ordonnée à l'origine"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(e^{x} > 0\\) pour tout \\(x\\) (une exponentielle est strictement positive) ; il ne s'annule jamais.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(e^{x}\\,\\left(6 - e^{x}\\right) = 0\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff 6 - e^{x} = 0\\) (car \\(e^{x} > 0\\))",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff e^{x} = 6\\) (on isole \\(e^{x}\\) du côté où son coefficient est positif)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\iff\\) \\(x = \\ln(6) \\approx 1{,}79\\)",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Zéros de f"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "crit": [
+       "\\ln(6)"
+      ],
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "e^{x}"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-"
+        ],
+        "label": "\\left(6 - e^{x}\\right)"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-"
+        ],
+        "final": true,
+        "label": "f(x)"
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(f(0) = 5\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "Le graphe coupe l'axe des y au point \\((0\\,;\\,5)\\).",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Ordonnée à l'origine"
+   },
+   {
+    "blocs": [],
+    "style": "partie",
+    "titre": "4. Limites et asymptotes"
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\displaystyle\\lim_{x\\to -\\infty} e^{x}\\,\\left(6 - e^{x}\\right)\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to -\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(e^{x} \\to e^{-\\infty} = 0^{+}\\). \\(6 - e^{x} \\to 6\\). Forme \\(0^{+} \\cdot 6\\) : <span class=\"det\">pas indéterminée</span>!",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "blocs": [
+     {
+      "html": "On conclut avec les règles de calcul :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "\\lim_{x\\to -\\infty} e^{x}\\,\\left(6 - e^{x}\\right) = 0^{+} \\cdot 6 = 0^{+}",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "Asymptote horizontale : \\(y = 0\\) (à gauche). \\(f(x) \\to 0^{+}\\) : le graphe est au-dessus.",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2 : on conclut directement."
+   },
+   {
+    "badge": "limite",
+    "blocs": [
+     {
+      "html": "\\[\\displaystyle\\lim_{x\\to +\\infty} e^{x}\\,\\left(6 - e^{x}\\right)\\]",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Limite",
+    "titre_tex": "x \\to +\\infty"
+   },
+   {
+    "blocs": [
+     {
+      "html": "\\(e^{x} \\to +\\infty\\). \\(6 - e^{x} \\to -\\infty\\). Forme \\(\\left(+\\infty\\right) \\cdot \\left(-\\infty\\right)\\) : <span class=\"det\">pas indéterminée</span>!",
+      "style": "etape",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1 : on remplace."
+   },
+   {
+    "blocs": [
+     {
+      "html": "(règle des signes : + · − = −) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "\\lim_{x\\to +\\infty} e^{x}\\,\\left(6 - e^{x}\\right) = \\left(+\\infty\\right) \\cdot \\left(-\\infty\\right) = -\\infty",
+      "type": "resultat_lim"
+     },
+     {
+      "genre": "attention",
+      "lignes": [
+       "Pas de BH ici : un produit de deux « énormes » n'est jamais indéterminé."
+      ],
+      "titre": "Attention",
+      "type": "encadre"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2 : on conclut directement."
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\), graphe au-dessus"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Bilan des asymptotes"
+   },
+   {
+    "blocs": [],
+    "style": "partie",
+    "titre": "5. Dérivée, tableau de variation, extremums"
+   },
+   {
+    "badge": "calcul",
+    "blocs": [
+     {
+      "html": "On développe d'abord (c'est plus simple à dériver) :",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f(x) = e^{x}\\,\\left(6 - e^{x}\\right) = 6e^{x} - e^{x} \\cdot e^{x}\\) (développement)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(= 6e^{x} - e^{2x}\\) (réduction)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "La dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(e^{x}\\right)' = e^{x}\\) (règle de base).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(\\left(6e^{x}\\right)' = 6 \\cdot \\left(e^{x}\\right)' = 6e^{x}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(e^{2x}\\) est de la forme \\(e^{u}\\) avec \\(u(x) = 2x\\) (dérivée interne \\(u'(x) = 2\\)) \\(\\Rightarrow\\) \\(\\left(e^{2x}\\right)' = u' e^{u} = 2e^{2x}\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = 2e^{x}\\,\\left(3 - e^{x}\\right)\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "tex": "f'(x) = 2e^{x}\\,\\left(3 - e^{x}\\right)",
+      "type": "resultat"
+     }
+    ],
+    "style": "normal",
+    "titre": "Dérivée"
+   },
+   {
+    "badge": "tableau",
+    "blocs": [
+     {
+      "html": "\\(3 - e^{x} = 0 \\iff e^{x} = 3\\) (on isole \\(e^{x}\\) du côté où son coefficient est positif).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(e^{x} = 3 \\iff x = \\ln(3)\\)",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "html": "\\(f'(x) = 0 \\iff 3 - e^{x} = 0\\) (car \\(e^{x} > 0\\)) \\(\\iff x = \\ln(3)\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "crit": [
+       "\\ln(3)"
+      ],
+      "limites": {
+       "colonnes": [],
+       "moins_inf": "0^{+}",
+       "non_determinees": [],
+       "plus_inf": "-\\infty"
+      },
+      "rows": [
+       {
+        "cells": [
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "2"
+       },
+       {
+        "cells": [
+         "+",
+         "+",
+         "+"
+        ],
+        "label": "e^{x}"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-"
+        ],
+        "label": "\\left(3 - e^{x}\\right)"
+       },
+       {
+        "cells": [
+         "+",
+         "0",
+         "-"
+        ],
+        "final": true,
+        "label": "f'(x)"
+       },
+       {
+        "cells": [
+         "\\nearrow",
+         "val:9",
+         "\\searrow"
+        ],
+        "label": "f(x)",
+        "variation": true
+       }
+      ],
+      "type": "tableau",
+      "var": "x"
+     },
+     {
+      "html": "\\(f(\\ln(3)) = e^{\\ln(3)}\\,\\left(6 - e^{\\ln(3)}\\right) = 3\\left(6 - 3\\right) = 9\\).",
+      "style": "etape",
+      "type": "texte"
+     },
+     {
+      "items": [
+       "<b>Maximum global</b> en \\(x = \\ln(3)\\) : \\(\\left(\\ln(3)\\,;\\,9\\right) \\approx \\left(1{,}10\\,;\\,9\\right)\\) (\\(f'\\) passe de \\(+\\) à \\(-\\)). Les autres valeurs de f sont plus petites (limites \\(0^{+}\\) en \\(-\\infty\\) et \\(-\\infty\\) en \\(+\\infty\\))."
+      ],
+      "style": "extrema",
+      "type": "liste"
+     }
+    ],
+    "style": "normal",
+    "titre": "Signe de f' et variations"
+   },
+   {
+    "blocs": [],
+    "style": "partie",
+    "titre": "6. Graphe"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "\\(ED = \\mathbb{R}\\) (partie 1)",
+       "Parité : f n'est ni paire ni impaire (partie 2)",
+       "Zéros : \\(x = \\ln(6) \\approx 1{,}79\\) (partie 3)",
+       "Signe : \\(f(x) > 0\\) sur \\(\\left]-\\infty \\,;\\, \\ln(6)\\right[\\) ; \\(f(x) < 0\\) sur \\(\\left]\\ln(6) \\,;\\, +\\infty\\right[\\) (partie 3)",
+       "Ordonnée à l'origine : \\(f(0) = 5\\) (partie 3)",
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\), graphe au-dessus (partie 4)",
+       "<b>Maximum global</b> en \\(x = \\ln(3)\\) : \\(\\left(\\ln(3)\\,;\\,9\\right) \\approx \\left(1{,}10\\,;\\,9\\right)\\) (partie 5)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan de l'étude"
+   },
+   {
+    "blocs": [
+     {
+      "asymptotes": [
+       {
+        "genre": "horizontale",
+        "ou": "x \\to -\\infty",
+        "position": "au-dessus",
+        "valeur_tex": "0",
+        "valeur_val": 0.0
+       }
+      ],
+      "extrema": [
+       {
+        "f_py": "9",
+        "f_tex": "9",
+        "f_val": 9.0,
+        "genre": "maximum local",
+        "x_py": "log((3)/(1))",
+        "x_tex": "\\ln(3)",
+        "x_val": 1.09861229
+       }
+      ],
+      "points": [
+       {
+        "f_val": 0.0,
+        "x_val": 1.79175947
+       },
+       {
+        "f_val": 5.0,
+        "x_val": 0.0
+       }
+      ],
+      "recalculable": true,
+      "ronds_vides": [],
+      "segments": [
+       {
+        "dernier": [
+         9.51401782,
+         null
+        ],
+        "empreinte": "ff5a1a43e0bf19d7",
+        "n": 1200,
+        "premier": [
+         -7.72225836,
+         0.00265695991
+        ]
+       }
+      ],
+      "type": "graphique",
+      "xmax": 3.79175947,
+      "xmin": -2.0,
+      "ymax": 11.8125,
+      "ymin": -5.0625
+     },
+     {
+      "html": "Courbe (trait plein), asymptotes (pointillé), extremums, zéros et point (0 ; f(0)) (points pleins), points exclus du graphe (ronds vides). Molette ou boutons pour zoomer, cliquer-glisser pour déplacer.",
+      "style": "indice",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Graphique"
+   }
+  ],
+  "enonce_tex": "f(x) = e^{x}\\,\\left(6 - e^{x}\\right)",
   "erreur": null,
   "ok": true
  },
@@ -4972,6 +6675,26 @@
     "blocs": [],
     "style": "partie",
     "titre": "6. Graphe"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "\\(ED = \\left]0 \\,;\\, +\\infty\\right[\\) (partie 1)",
+       "Parité : f n'est ni paire ni impaire (partie 2)",
+       "Zéros : \\(x = 1\\) (partie 3)",
+       "Signe : \\(f(x) > 0\\) sur \\(\\left]1 \\,;\\, +\\infty\\right[\\) ; \\(f(x) < 0\\) sur \\(\\left]0 \\,;\\, 1\\right[\\) (partie 3)",
+       "Ordonnée à l'origine : aucune, car \\(0 \\notin ED\\) (partie 3)",
+       "Asymptote verticale : \\(x = 0\\) (\\(\\lim_{x\\to 0^+} f(x) = -\\infty\\)) (partie 4)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\), graphe au-dessus (partie 4)",
+       "<b>Maximum global</b> en \\(x = e\\) : \\(\\left(e\\,;\\,e^{-1}\\right) \\approx \\left(2{,}72\\,;\\,0{,}37\\right)\\) (partie 5)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan de l'étude"
    },
    {
     "blocs": [
@@ -5476,6 +7199,27 @@
     "blocs": [],
     "style": "partie",
     "titre": "6. Graphe"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "\\(ED = \\left]-\\infty \\,;\\, -2\\right] \\cup \\left[2 \\,;\\, +\\infty\\right[\\) (partie 1)",
+       "Parité : f est paire (partie 2)",
+       "Zéros : \\(x = -2\\) ; \\(x = 2\\) (partie 3)",
+       "Signe : \\(f(x) > 0\\) sur \\(\\left]-\\infty \\,;\\, -2\\right[ \\cup \\left]2 \\,;\\, +\\infty\\right[\\) (partie 3)",
+       "Ordonnée à l'origine : aucune, car \\(0 \\notin ED\\) (partie 3)",
+       "Asymptote oblique (\\(x \\to -\\infty\\)) : \\(y = -x\\) (partie 4)",
+       "Asymptote oblique (\\(x \\to +\\infty\\)) : \\(y = x\\) (partie 4)",
+       "<b>Minimum local</b> en \\(x = -2\\) : \\(\\left(-2\\,;\\,0\\right)\\) (partie 5)",
+       "<b>Minimum local</b> en \\(x = 2\\) : \\(\\left(2\\,;\\,0\\right)\\) (partie 5)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan de l'étude"
    },
    {
     "blocs": [
@@ -6043,6 +7787,25 @@
    {
     "blocs": [
      {
+      "items": [
+       "\\(ED = \\left]0 \\,;\\, +\\infty\\right[\\) (partie 1)",
+       "Parité : f n'est ni paire ni impaire (partie 2)",
+       "Zéros : \\(x = 1\\) (partie 3)",
+       "Signe : \\(f(x) > 0\\) sur \\(\\left]1 \\,;\\, +\\infty\\right[\\) ; \\(f(x) < 0\\) sur \\(\\left]0 \\,;\\, 1\\right[\\) (partie 3)",
+       "Ordonnée à l'origine : aucune, car \\(0 \\notin ED\\) (partie 3)",
+       "Bord du graphe : f n'est pas définie en \\(x = 0\\), mais \\(f(x) \\to 0\\) ; le graphe s'arrête au point \\((0\\,;\\,0)\\), qui n'en fait pas partie (pas une asymptote verticale) (partie 4)",
+       "<b>Minimum global</b> en \\(x = e^{-1}\\) : \\(\\left(e^{-1}\\,;\\,- e^{-1}\\right) \\approx \\left(0{,}37\\,;\\,-0{,}37\\right)\\) (partie 5)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan de l'étude"
+   },
+   {
+    "blocs": [
+     {
       "asymptotes": [
        {
         "bord": true,
@@ -6482,6 +8245,27 @@
     "blocs": [],
     "style": "partie",
     "titre": "6. Graphe"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "\\(ED = \\mathbb{R}\\) (partie 1)",
+       "Parité : f est impaire (partie 2)",
+       "Zéros : \\(x = 0\\) (partie 3)",
+       "Signe : \\(f(x) > 0\\) sur \\(\\left]0 \\,;\\, +\\infty\\right[\\) ; \\(f(x) < 0\\) sur \\(\\left]-\\infty \\,;\\, 0\\right[\\) (partie 3)",
+       "Ordonnée à l'origine : \\(f(0) = 0\\) (partie 3)",
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = 0\\) (partie 4)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\) (partie 4)",
+       "<b>Minimum global</b> en \\(x = -1\\) : \\(\\left(-1\\,;\\,- \\frac{1}{2}\\right) \\approx \\left(-1\\,;\\,-0{,}50\\right)\\) (partie 5)",
+       "<b>Maximum global</b> en \\(x = 1\\) : \\(\\left(1\\,;\\,\\frac{1}{2}\\right) \\approx \\left(1\\,;\\,0{,}50\\right)\\) (partie 5)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan de l'étude"
    },
    {
     "blocs": [
@@ -6944,6 +8728,27 @@
    {
     "blocs": [
      {
+      "items": [
+       "\\(ED = \\mathbb{R} \\setminus \\left\\{0\\right\\}\\) (partie 1)",
+       "Parité : f est impaire (partie 2)",
+       "Zéros : aucun (partie 3)",
+       "Signe : \\(f(x) > 0\\) sur \\(\\left]0 \\,;\\, +\\infty\\right[\\) ; \\(f(x) < 0\\) sur \\(\\left]-\\infty \\,;\\, 0\\right[\\) (partie 3)",
+       "Ordonnée à l'origine : aucune, car \\(0 \\notin ED\\) (partie 3)",
+       "Asymptote horizontale (\\(x \\to -\\infty\\)) : \\(y = -1\\) (partie 4)",
+       "Pas de limite en \\(x = 0\\) (pas d'asymptote verticale) : \\(\\lim_{x\\to 0^-} f(x) = -1\\) ; \\(\\lim_{x\\to 0^+} f(x) = 1\\) (partie 4)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 1\\) (partie 4)",
+       "Aucun extremum (partie 5)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan de l'étude"
+   },
+   {
+    "blocs": [
+     {
       "asymptotes": [
        {
         "genre": "horizontale",
@@ -7328,6 +9133,25 @@
     "blocs": [],
     "style": "partie",
     "titre": "6. Graphe"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "\\(ED = \\mathbb{R}\\) (partie 1)",
+       "Parité : f est paire (partie 2)",
+       "Zéros : \\(x = 0\\) (partie 3)",
+       "Signe : \\(f(x) > 0\\) sur \\(\\mathbb{R} \\setminus \\left\\{0\\right\\}\\) (partie 3)",
+       "Ordonnée à l'origine : \\(f(0) = 0\\) (partie 3)",
+       "Aucune asymptote détectée (partie 4)",
+       "<b>Minimum global</b> en \\(x = 0\\) : \\(\\left(0\\,;\\,0\\right)\\) (partie 5)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan de l'étude"
    },
    {
     "blocs": [
@@ -7916,6 +9740,26 @@
    {
     "blocs": [
      {
+      "items": [
+       "\\(ED = \\mathbb{R}\\) (partie 1)",
+       "Parité : f n'est ni paire ni impaire (partie 2)",
+       "Zéros : \\(x = 0\\) (partie 3)",
+       "Signe : \\(f(x) > 0\\) sur \\(\\mathbb{R} \\setminus \\left\\{0\\right\\}\\) (partie 3)",
+       "Ordonnée à l'origine : \\(f(0) = 0\\) (partie 3)",
+       "Asymptote horizontale (\\(x \\to +\\infty\\)) : \\(y = 0\\), graphe au-dessus (partie 4)",
+       "<b>Minimum local</b> en \\(x = 0\\) : \\(\\left(0\\,;\\,0\\right)\\) (partie 5)",
+       "<b>Maximum local</b> en \\(x = 2\\) : \\(\\left(2\\,;\\,4 e^{-2}\\right) \\approx \\left(2\\,;\\,0{,}54\\right)\\) (partie 5)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan de l'étude"
+   },
+   {
+    "blocs": [
+     {
       "asymptotes": [
        {
         "genre": "horizontale",
@@ -8326,6 +10170,26 @@
     "blocs": [],
     "style": "partie",
     "titre": "6. Graphe"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "\\(ED = \\mathbb{R}\\) (partie 1)",
+       "Parité : f n'est ni paire ni impaire (partie 2)",
+       "Zéros : \\(x = 1\\) ; \\(x = 3\\) (partie 3)",
+       "Signe : \\(f(x) > 0\\) sur \\(\\left]-\\infty \\,;\\, 1\\right[ \\cup \\left]3 \\,;\\, +\\infty\\right[\\) ; \\(f(x) < 0\\) sur \\(\\left]1 \\,;\\, 3\\right[\\) (partie 3)",
+       "Ordonnée à l'origine : \\(f(0) = 3\\) (partie 3)",
+       "Pas d'asymptote (\\(x \\to -\\infty\\)) — branche parabolique (partie 4)",
+       "Pas d'asymptote (\\(x \\to +\\infty\\)) — branche parabolique (partie 4)",
+       "<b>Minimum global</b> en \\(x = 2\\) : \\(\\left(2\\,;\\,-1\\right)\\) (partie 5)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan de l'étude"
    },
    {
     "blocs": [
@@ -8778,6 +10642,27 @@
     "blocs": [],
     "style": "partie",
     "titre": "6. Graphe"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "\\(ED = \\mathbb{R}\\) (partie 1)",
+       "Parité : f est impaire (partie 2)",
+       "Zéros : \\(x = -\\sqrt{3} \\approx -1{,}73\\) ; \\(x = 0\\) ; \\(x = \\sqrt{3} \\approx 1{,}73\\) (partie 3)",
+       "Signe : \\(f(x) > 0\\) sur \\(\\left]-\\sqrt{3} \\,;\\, 0\\right[ \\cup \\left]\\sqrt{3} \\,;\\, +\\infty\\right[\\) ; \\(f(x) < 0\\) sur \\(\\left]-\\infty \\,;\\, -\\sqrt{3}\\right[ \\cup \\left]0 \\,;\\, \\sqrt{3}\\right[\\) (partie 3)",
+       "Ordonnée à l'origine : \\(f(0) = 0\\) (partie 3)",
+       "Pas d'asymptote (\\(x \\to -\\infty\\)) — branche parabolique (partie 4)",
+       "Pas d'asymptote (\\(x \\to +\\infty\\)) — branche parabolique (partie 4)",
+       "<b>Maximum local</b> en \\(x = -1\\) : \\(\\left(-1\\,;\\,2\\right)\\) (partie 5)",
+       "<b>Minimum local</b> en \\(x = 1\\) : \\(\\left(1\\,;\\,-2\\right)\\) (partie 5)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan de l'étude"
    },
    {
     "blocs": [
@@ -9255,6 +11140,28 @@
     "blocs": [],
     "style": "partie",
     "titre": "6. Graphe"
+   },
+   {
+    "blocs": [
+     {
+      "items": [
+       "\\(ED = \\mathbb{R}\\) (partie 1)",
+       "Parité : f est paire (partie 2)",
+       "Zéros : \\(x = -\\sqrt{2} \\approx -1{,}41\\) ; \\(x = 0\\) ; \\(x = \\sqrt{2} \\approx 1{,}41\\) (partie 3)",
+       "Signe : \\(f(x) > 0\\) sur \\(\\left]-\\infty \\,;\\, -\\sqrt{2}\\right[ \\cup \\left]\\sqrt{2} \\,;\\, +\\infty\\right[\\) ; \\(f(x) < 0\\) sur \\(\\left]-\\sqrt{2} \\,;\\, 0\\right[ \\cup \\left]0 \\,;\\, \\sqrt{2}\\right[\\) (partie 3)",
+       "Ordonnée à l'origine : \\(f(0) = 0\\) (partie 3)",
+       "Pas d'asymptote (\\(x \\to -\\infty\\)) — branche parabolique (partie 4)",
+       "Pas d'asymptote (\\(x \\to +\\infty\\)) — branche parabolique (partie 4)",
+       "<b>Minimum local</b> en \\(x = -1\\) : \\(\\left(-1\\,;\\,-1\\right)\\) (partie 5)",
+       "<b>Maximum local</b> en \\(x = 0\\) : \\(\\left(0\\,;\\,0\\right)\\) (partie 5)",
+       "<b>Minimum local</b> en \\(x = 1\\) : \\(\\left(1\\,;\\,-1\\right)\\) (partie 5)"
+      ],
+      "style": "bilan",
+      "type": "liste"
+     }
+    ],
+    "style": "final",
+    "titre": "Bilan de l'étude"
    },
    {
     "blocs": [

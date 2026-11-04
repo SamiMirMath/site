@@ -768,6 +768,373 @@
    "plus_inf": "+\\infty"
   }
  },
+ "(x^2-6)e^(-2x)": {
+  "derivee": {
+   "deriv_etapes": [
+    {
+     "html": "On applique la règle du produit, \\((uv)' = u'v + uv'\\), avec :",
+     "type": "texte"
+    },
+    {
+     "du": "u' = 2x",
+     "dv": "v' = -2e^{-2x}",
+     "type": "uv",
+     "u": "u = x^{2} - 6",
+     "v": "v = e^{-2x}"
+    },
+    {
+     "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+     "type": "texte"
+    },
+    {
+     "html": "\\(e^{-2x}\\) est de la forme \\(e^{u}\\) avec \\(u(x) = -2x\\) (dérivée interne \\(u'(x) = -2\\)) \\(\\Rightarrow\\) \\(\\left(e^{-2x}\\right)' = u' e^{u} = -2e^{-2x}\\).",
+     "type": "texte"
+    },
+    {
+     "html": "\\(f'(x) = u'(x)v(x) + u(x)v'(x) = 2x\\,e^{-2x} + \\left(x^{2} - 6\\right) \\cdot \\left(-2e^{-2x}\\right) = -2\\left(x - 3\\right)\\,\\left(x + 2\\right)\\,e^{-2x}\\).",
+     "type": "texte"
+    }
+   ],
+   "deriv_resolu": true,
+   "deriv_tex": "-2\\left(x - 3\\right)\\,\\left(x + 2\\right)\\,e^{-2x}",
+   "domaine_etude_tex": "\\mathbb{R}",
+   "ed_tex": "\\mathbb{R}",
+   "extrema": [
+    {
+     "f_py": "-2*exp(4)",
+     "f_tex": "- 2 e^{4}",
+     "f_val": -109.1963,
+     "genre": "minimum local",
+     "x_py": "(-2)/(1)",
+     "x_tex": "-2",
+     "x_val": -2.0
+    },
+    {
+     "f_py": "3*exp(-6)",
+     "f_tex": "3 e^{-6}",
+     "f_val": 0.00743625653,
+     "genre": "maximum local",
+     "x_py": "(3)/(1)",
+     "x_tex": "3",
+     "x_val": 3.0
+    }
+   ],
+   "f_tex": "\\left(x^{2} - 6\\right)\\,e^{-2x}",
+   "ok": true,
+   "signe_etapes": [
+    {
+     "html": "\\(f'(x) = 0 \\iff \\left(x - 3\\right)\\,\\left(x + 2\\right) = 0\\) (car \\(e^{-2x} > 0\\)) \\(\\iff x = -2 \\text{ ou } x = 3\\) (produit nul).",
+     "type": "texte"
+    }
+   ],
+   "signe_resolu": true,
+   "table_signe": {
+    "crit": [
+     "-2",
+     "3"
+    ],
+    "rows": [
+     {
+      "cells": [
+       "-",
+       "-",
+       "-",
+       "-",
+       "-"
+      ],
+      "label": "-2"
+     },
+     {
+      "cells": [
+       "-",
+       "-",
+       "-",
+       "0",
+       "+"
+      ],
+      "label": "\\left(x - 3\\right)"
+     },
+     {
+      "cells": [
+       "-",
+       "0",
+       "+",
+       "+",
+       "+"
+      ],
+      "label": "\\left(x + 2\\right)"
+     },
+     {
+      "cells": [
+       "+",
+       "+",
+       "+",
+       "+",
+       "+"
+      ],
+      "label": "e^{-2x}"
+     },
+     {
+      "cells": [
+       "-",
+       "0",
+       "+",
+       "0",
+       "-"
+      ],
+      "final": true,
+      "label": "f'(x)"
+     },
+     {
+      "cells": [
+       "\\searrow",
+       "val:- 2 e^{4}",
+       "\\nearrow",
+       "val:3 e^{-6}",
+       "\\searrow"
+      ],
+      "label": "f(x)",
+      "variation": true
+     }
+    ],
+    "var": "x"
+   }
+  },
+  "ed_tex": "\\mathbb{R}",
+  "f_tex": "\\left(x^{2} - 6\\right)\\,e^{-2x}",
+  "graphique": {
+   "points": [
+    {
+     "f_val": 0.0,
+     "x_val": -2.44948974
+    },
+    {
+     "f_val": 0.0,
+     "x_val": 2.44948974
+    },
+    {
+     "f_val": -6.0,
+     "x_val": 0.0
+    }
+   ],
+   "ronds_vides": [],
+   "segments": [
+    {
+     "dernier": [
+      16.4929366,
+      1.25697491e-12
+     ],
+     "empreinte": "993884df54251d79",
+     "n": 1200,
+     "premier": [
+      -15.9424263,
+      null
+     ]
+    }
+   ],
+   "xmax": 5.72474487,
+   "xmin": -5.17423461,
+   "ymax": 61.4345379,
+   "ymin": -143.322468
+  },
+  "limites": {
+   "asymptotes": [
+    {
+     "genre": "horizontale",
+     "ou": "x \\to +\\infty",
+     "position": "au-dessus",
+     "valeur_tex": "0",
+     "valeur_val": 0.0
+    }
+   ],
+   "ed_tex": "\\mathbb{R}",
+   "etudes": [
+    {
+     "etapes": [
+      {
+       "alertes": [],
+       "enonce_tex": "\\displaystyle\\lim_{x\\to -\\infty} \\left(x^{2} - 6\\right)\\,e^{-2x}",
+       "etapes": [
+        {
+         "blocs": [
+          {
+           "html": "\\(x^{2} - 6 \\to +\\infty\\). \\(-2x \\to +\\infty\\text{, donc }e^{-2x} \\to +\\infty\\). Forme \\(\\left(+\\infty\\right) \\cdot \\left(+\\infty\\right)\\) : <span class=\"det\">pas indéterminée</span>!",
+           "style": "etape",
+           "type": "texte"
+          }
+         ],
+         "titre": "on remplace"
+        },
+        {
+         "blocs": [
+          {
+           "html": "(règle des signes : + · + = +) :",
+           "style": "etape",
+           "type": "texte"
+          },
+          {
+           "tex": "\\lim_{x\\to -\\infty} \\left(x^{2} - 6\\right)\\,e^{-2x} = \\left(+\\infty\\right) \\cdot \\left(+\\infty\\right) = +\\infty",
+           "type": "resultat_lim"
+          },
+          {
+           "genre": "attention",
+           "lignes": [
+            "Pas de BH ici : un produit de deux « énormes » n'est jamais indéterminé."
+           ],
+           "titre": "Attention",
+           "type": "encadre"
+          }
+         ],
+         "titre": "on conclut directement"
+        }
+       ],
+       "html": "on remplace\n\\(x^{2} - 6 \\to +\\infty\\). \\(-2x \\to +\\infty\\text{, donc }e^{-2x} \\to +\\infty\\). Forme \\(\\left(+\\infty\\right) \\cdot \\left(+\\infty\\right)\\) : <span class=\"det\">pas indéterminée</span>!\non conclut directement\n(règle des signes : + · + = +) :\n\\lim_{x\\to -\\infty} \\left(x^{2} - 6\\right)\\,e^{-2x} = \\left(+\\infty\\right) \\cdot \\left(+\\infty\\right) = +\\infty\nAttention Pas de BH ici : un produit de deux « énormes » n'est jamais indéterminé.",
+       "type": "descente"
+      }
+     ],
+     "ou": "x \\to -\\infty"
+    },
+    {
+     "etapes": [
+      {
+       "alertes": [],
+       "enonce_tex": "\\displaystyle\\lim_{x\\to +\\infty} \\left(x^{2} - 6\\right)\\,e^{-2x}",
+       "etapes": [
+        {
+         "blocs": [
+          {
+           "html": "\\(x^{2} - 6 \\to +\\infty\\). \\(-2x \\to -\\infty\\text{, donc }e^{-2x} \\to 0^{+}\\). Forme \\(\\left(+\\infty\\right) \\cdot 0\\) : <span class=\"ind\">indéterminée</span>.",
+           "style": "etape",
+           "type": "texte"
+          },
+          {
+           "genre": "prediction",
+           "lignes": [
+            "Produit : \\(x^{2} - 6 \\to +\\infty\\) et \\(e^{-2x} \\to 0^{+}\\). L'exponentielle bat la puissance : c'est \\(e^{-2x}\\) qui impose sa limite, donc 0.",
+            "Signe : \\(x^{2} - 6\\) > 0 et \\(e^{-2x}\\) > 0, donc produit > 0.",
+            "<b>On s'attend à :</b> \\(0^{+}\\)"
+           ],
+           "titre": "Prédiction avec la règle du podium",
+           "type": "encadre"
+          }
+         ],
+         "titre": "on remplace"
+        },
+        {
+         "blocs": [
+          {
+           "html": "BH ne marche pas sur un produit. On écrit \\(e^{-2x} = \\frac{1}{e^{2x}}\\) :",
+           "style": "etape",
+           "type": "texte"
+          },
+          {
+           "html": "\\[\\left(x^{2} - 6\\right)\\,e^{-2x} = \\frac{x^{2} - 6}{e^{2x}}\\]",
+           "style": "etape",
+           "type": "texte"
+          }
+         ],
+         "titre": "on transforme le produit en quotient"
+        },
+        {
+         "blocs": [
+          {
+           "html": "Haut : \\(x^{2} - 6 \\to +\\infty\\). Bas : \\(2x \\to +\\infty\\text{, donc }e^{2x} \\to +\\infty\\). Forme \\(\\dfrac{+\\infty}{+\\infty}\\) : <span class=\"ind\">indéterminée</span>.",
+           "style": "etape",
+           "type": "texte"
+          }
+         ],
+         "titre": "on vérifie la forme"
+        },
+        {
+         "bh": true,
+         "blocs": [
+          {
+           "bas": "e^{2x}",
+           "dbas": "2e^{2x}",
+           "dhaut": "2x",
+           "haut": "x^{2} - 6",
+           "type": "bh"
+          },
+          {
+           "html": "\\[\\lim_{x\\to +\\infty} \\frac{x^{2} - 6}{e^{2x}} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{2x}{2e^{2x}} = \\lim_{x\\to +\\infty} \\frac{x}{e^{2x}}\\]",
+           "style": "etape",
+           "type": "texte"
+          },
+          {
+           "html": "Forme \\(\\dfrac{+\\infty}{+\\infty}\\) : encore <span class=\"ind\">indéterminée</span>.",
+           "style": "etape",
+           "type": "texte"
+          }
+         ],
+         "titre": "BH (1re fois)"
+        },
+        {
+         "bh": true,
+         "blocs": [
+          {
+           "bas": "e^{2x}",
+           "dbas": "2e^{2x}",
+           "dhaut": "1",
+           "haut": "x",
+           "type": "bh"
+          },
+          {
+           "html": "\\[\\lim_{x\\to +\\infty} \\frac{x}{e^{2x}} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{1}{2e^{2x}}\\]",
+           "style": "etape",
+           "type": "texte"
+          }
+         ],
+         "titre": "BH (2e fois)"
+        },
+        {
+         "blocs": [
+          {
+           "html": "\\(e^{2x} \\to +\\infty\\), donc \\(2e^{2x} \\to +\\infty\\) et \\(\\frac{1}{2e^{2x}} \\to \\dfrac{1}{+\\infty} = 0^{+}\\).",
+           "style": "etape",
+           "type": "texte"
+          },
+          {
+           "tex": "\\lim_{x\\to +\\infty} \\left(x^{2} - 6\\right)\\,e^{-2x} = 0^{+}",
+           "type": "resultat_lim"
+          },
+          {
+           "html": "✓ Le calcul confirme la prédiction du podium.",
+           "style": "confirme",
+           "type": "texte"
+          }
+         ],
+         "titre": "on remplace"
+        }
+       ],
+       "html": "on remplace\n\\(x^{2} - 6 \\to +\\infty\\). \\(-2x \\to -\\infty\\text{, donc }e^{-2x} \\to 0^{+}\\). Forme \\(\\left(+\\infty\\right) \\cdot 0\\) : <span class=\"ind\">indéterminée</span>.\nPrédiction avec la règle du podium Produit : \\(x^{2} - 6 \\to +\\infty\\) et \\(e^{-2x} \\to 0^{+}\\). L'exponentielle bat la puissance : c'est \\(e^{-2x}\\) qui impose sa limite, donc 0. Signe : \\(x^{2} - 6\\) > 0 et \\(e^{-2x}\\) > 0, donc produit > 0. <b>On s'attend à :</b> \\(0^{+}\\)\non transforme le produit en quotient\nBH ne marche pas sur un produit. On écrit \\(e^{-2x} = \\frac{1}{e^{2x}}\\) :\n\\[\\left(x^{2} - 6\\right)\\,e^{-2x} = \\frac{x^{2} - 6}{e^{2x}}\\]\non vérifie la forme\nHaut : \\(x^{2} - 6 \\to +\\infty\\). Bas : \\(2x \\to +\\infty\\text{, donc }e^{2x} \\to +\\infty\\). Forme \\(\\dfrac{+\\infty}{+\\infty}\\) : <span class=\"ind\">indéterminée</span>.\nBH (1re fois)\nhaut : x^{2} - 6 \\longrightarrow dérivée : 2x ; bas : e^{2x} \\longrightarrow dérivée : 2e^{2x}\n\\[\\lim_{x\\to +\\infty} \\frac{x^{2} - 6}{e^{2x}} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{2x}{2e^{2x}} = \\lim_{x\\to +\\infty} \\frac{x}{e^{2x}}\\]\nForme \\(\\dfrac{+\\infty}{+\\infty}\\) : encore <span class=\"ind\">indéterminée</span>.\nBH (2e fois)\nhaut : x \\longrightarrow dérivée : 1 ; bas : e^{2x} \\longrightarrow dérivée : 2e^{2x}\n\\[\\lim_{x\\to +\\infty} \\frac{x}{e^{2x}} \\overset{\\text{BH}}{=} \\lim_{x\\to +\\infty} \\frac{1}{2e^{2x}}\\]\non remplace\n\\(e^{2x} \\to +\\infty\\), donc \\(2e^{2x} \\to +\\infty\\) et \\(\\frac{1}{2e^{2x}} \\to \\dfrac{1}{+\\infty} = 0^{+}\\).\n\\lim_{x\\to +\\infty} \\left(x^{2} - 6\\right)\\,e^{-2x} = 0^{+}\n✓ Le calcul confirme la prédiction du podium.",
+       "type": "descente"
+      },
+      {
+       "conclusion": {
+        "genre": "horizontale",
+        "position": "au-dessus",
+        "signee": "0^{+}",
+        "valeur_tex": "0"
+       },
+       "html": "Asymptote horizontale : \\(y = 0\\) (à droite). \\(f(x) \\to 0^{+}\\) : le graphe est au-dessus.",
+       "type": "texte"
+      }
+     ],
+     "ou": "x \\to +\\infty"
+    }
+   ],
+   "f_tex": "\\left(x^{2} - 6\\right)\\,e^{-2x}",
+   "ok": true,
+   "tableaux_signe": []
+  },
+  "ok": true,
+  "variations_limites": {
+   "colonnes": [],
+   "moins_inf": "+\\infty",
+   "non_determinees": [],
+   "plus_inf": "0^{+}"
+  }
+ },
  "1/(x^2-3x+2)": {
   "derivee": {
    "deriv_etapes": [
@@ -1922,6 +2289,223 @@
    "plus_inf": "+\\infty"
   }
  },
+ "e^(-x^2)": {
+  "derivee": {
+   "deriv_etapes": [
+    {
+     "html": "\\(\\left(x^{2}\\right)' = 2x\\) (règle de la puissance).",
+     "type": "texte"
+    },
+    {
+     "html": "\\(e^{-x^{2}}\\) est de la forme \\(e^{u}\\) avec \\(u(x) = -x^{2}\\) (dérivée interne \\(u'(x) = -2x\\)) \\(\\Rightarrow\\) \\(\\left(e^{-x^{2}}\\right)' = u' e^{u} = -2x\\,e^{-x^{2}}\\).",
+     "type": "texte"
+    }
+   ],
+   "deriv_resolu": true,
+   "deriv_tex": "-2x\\,e^{-x^{2}}",
+   "domaine_etude_tex": "\\mathbb{R}",
+   "ed_tex": "\\mathbb{R}",
+   "extrema": [
+    {
+     "f_py": "1",
+     "f_tex": "1",
+     "f_val": 1.0,
+     "genre": "maximum local",
+     "x_py": "(0)/(1)",
+     "x_tex": "0",
+     "x_val": 0.0
+    }
+   ],
+   "f_tex": "e^{-x^{2}}",
+   "ok": true,
+   "signe_etapes": [
+    {
+     "html": "\\(f'(x) = 0 \\iff x = 0\\) (car \\(e^{-x^{2}} > 0\\)).",
+     "type": "texte"
+    }
+   ],
+   "signe_resolu": true,
+   "table_signe": {
+    "crit": [
+     "0"
+    ],
+    "rows": [
+     {
+      "cells": [
+       "-",
+       "-",
+       "-"
+      ],
+      "label": "-2"
+     },
+     {
+      "cells": [
+       "-",
+       "0",
+       "+"
+      ],
+      "label": "x"
+     },
+     {
+      "cells": [
+       "+",
+       "+",
+       "+"
+      ],
+      "label": "e^{-x^{2}}"
+     },
+     {
+      "cells": [
+       "+",
+       "0",
+       "-"
+      ],
+      "final": true,
+      "label": "f'(x)"
+     },
+     {
+      "cells": [
+       "\\nearrow",
+       "val:1",
+       "\\searrow"
+      ],
+      "label": "f(x)",
+      "variation": true
+     }
+    ],
+    "var": "x"
+   }
+  },
+  "ed_tex": "\\mathbb{R}",
+  "f_tex": "e^{-x^{2}}",
+  "graphique": {
+   "points": [],
+   "ronds_vides": [],
+   "segments": [
+    {
+     "dernier": [
+      5.952,
+      4.11672312e-16
+     ],
+     "empreinte": "5f7c06712373ff04",
+     "n": 1200,
+     "premier": [
+      -5.952,
+      4.11672312e-16
+     ]
+    }
+   ],
+   "xmax": 2.0,
+   "xmin": -2.0,
+   "ymax": 1.5,
+   "ymin": -0.5
+  },
+  "limites": {
+   "asymptotes": [
+    {
+     "genre": "horizontale",
+     "ou": "x \\to -\\infty",
+     "position": "au-dessus",
+     "valeur_tex": "0",
+     "valeur_val": 0.0
+    },
+    {
+     "genre": "horizontale",
+     "ou": "x \\to +\\infty",
+     "position": "au-dessus",
+     "valeur_tex": "0",
+     "valeur_val": 0.0
+    }
+   ],
+   "ed_tex": "\\mathbb{R}",
+   "etudes": [
+    {
+     "etapes": [
+      {
+       "alertes": [],
+       "enonce_tex": "\\displaystyle\\lim_{x\\to -\\infty} e^{-x^{2}}",
+       "etapes": [
+        {
+         "blocs": [
+          {
+           "html": "Exposant : \\(-x^{2} \\to -\\infty\\). Donc \\(e^{-x^{2}} \\to e^{-\\infty} = 0^{+}\\).",
+           "style": "etape",
+           "type": "texte"
+          },
+          {
+           "tex": "\\lim_{x\\to -\\infty} e^{-x^{2}} = 0^{+}",
+           "type": "resultat_lim"
+          }
+         ],
+         "titre": "on remplace"
+        }
+       ],
+       "html": "on remplace\nExposant : \\(-x^{2} \\to -\\infty\\). Donc \\(e^{-x^{2}} \\to e^{-\\infty} = 0^{+}\\).\n\\lim_{x\\to -\\infty} e^{-x^{2}} = 0^{+}",
+       "type": "descente"
+      },
+      {
+       "conclusion": {
+        "genre": "horizontale",
+        "position": "au-dessus",
+        "signee": "0^{+}",
+        "valeur_tex": "0"
+       },
+       "html": "Asymptote horizontale : \\(y = 0\\) (à gauche). \\(f(x) \\to 0^{+}\\) : le graphe est au-dessus.",
+       "type": "texte"
+      }
+     ],
+     "ou": "x \\to -\\infty"
+    },
+    {
+     "etapes": [
+      {
+       "alertes": [],
+       "enonce_tex": "\\displaystyle\\lim_{x\\to +\\infty} e^{-x^{2}}",
+       "etapes": [
+        {
+         "blocs": [
+          {
+           "html": "Exposant : \\(-x^{2} \\to -\\infty\\). Donc \\(e^{-x^{2}} \\to e^{-\\infty} = 0^{+}\\).",
+           "style": "etape",
+           "type": "texte"
+          },
+          {
+           "tex": "\\lim_{x\\to +\\infty} e^{-x^{2}} = 0^{+}",
+           "type": "resultat_lim"
+          }
+         ],
+         "titre": "on remplace"
+        }
+       ],
+       "html": "on remplace\nExposant : \\(-x^{2} \\to -\\infty\\). Donc \\(e^{-x^{2}} \\to e^{-\\infty} = 0^{+}\\).\n\\lim_{x\\to +\\infty} e^{-x^{2}} = 0^{+}",
+       "type": "descente"
+      },
+      {
+       "conclusion": {
+        "genre": "horizontale",
+        "position": "au-dessus",
+        "signee": "0^{+}",
+        "valeur_tex": "0"
+       },
+       "html": "Asymptote horizontale : \\(y = 0\\) (à droite). \\(f(x) \\to 0^{+}\\) : le graphe est au-dessus.",
+       "type": "texte"
+      }
+     ],
+     "ou": "x \\to +\\infty"
+    }
+   ],
+   "f_tex": "e^{-x^{2}}",
+   "ok": true,
+   "tableaux_signe": []
+  },
+  "ok": true,
+  "variations_limites": {
+   "colonnes": [],
+   "moins_inf": "0^{+}",
+   "non_determinees": [],
+   "plus_inf": "0^{+}"
+  }
+ },
  "e^(1/x)": {
   "derivee": {
    "deriv_etapes": [
@@ -2900,6 +3484,275 @@
    "moins_inf": "0^{+}",
    "non_determinees": [],
    "plus_inf": "+\\infty"
+  }
+ },
+ "e^x(6-e^x)": {
+  "derivee": {
+   "deriv_etapes": [
+    {
+     "html": "On développe d'abord (c'est plus simple à dériver) :",
+     "type": "texte"
+    },
+    {
+     "html": "\\(f(x) = e^{x}\\,\\left(6 - e^{x}\\right) = 6e^{x} - e^{x} \\cdot e^{x}\\) (développement)",
+     "type": "texte"
+    },
+    {
+     "html": "\\(= 6e^{x} - e^{2x}\\) (réduction)",
+     "type": "texte"
+    },
+    {
+     "html": "La dérivée d'une somme (ou différence) est la somme (ou différence) des dérivées : on dérive terme à terme.",
+     "type": "texte"
+    },
+    {
+     "html": "\\(\\left(e^{x}\\right)' = e^{x}\\) (règle de base).",
+     "type": "texte"
+    },
+    {
+     "html": "\\(\\left(6e^{x}\\right)' = 6 \\cdot \\left(e^{x}\\right)' = 6e^{x}\\).",
+     "type": "texte"
+    },
+    {
+     "html": "\\(e^{2x}\\) est de la forme \\(e^{u}\\) avec \\(u(x) = 2x\\) (dérivée interne \\(u'(x) = 2\\)) \\(\\Rightarrow\\) \\(\\left(e^{2x}\\right)' = u' e^{u} = 2e^{2x}\\).",
+     "type": "texte"
+    },
+    {
+     "html": "\\(f'(x) = 2e^{x}\\,\\left(3 - e^{x}\\right)\\).",
+     "type": "texte"
+    }
+   ],
+   "deriv_resolu": true,
+   "deriv_tex": "2e^{x}\\,\\left(3 - e^{x}\\right)",
+   "domaine_etude_tex": "\\mathbb{R}",
+   "ed_tex": "\\mathbb{R}",
+   "extrema": [
+    {
+     "f_py": "9",
+     "f_tex": "9",
+     "f_val": 9.0,
+     "genre": "maximum local",
+     "x_py": "log((3)/(1))",
+     "x_tex": "\\ln(3)",
+     "x_val": 1.09861229
+    }
+   ],
+   "f_tex": "e^{x}\\,\\left(6 - e^{x}\\right)",
+   "ok": true,
+   "signe_etapes": [
+    {
+     "html": "\\(3 - e^{x} = 0 \\iff e^{x} = 3\\) (on isole \\(e^{x}\\) du côté où son coefficient est positif).",
+     "type": "texte"
+    },
+    {
+     "html": "\\(e^{x} = 3 \\iff x = \\ln(3)\\)",
+     "type": "texte"
+    },
+    {
+     "html": "\\(f'(x) = 0 \\iff 3 - e^{x} = 0\\) (car \\(e^{x} > 0\\)) \\(\\iff x = \\ln(3)\\).",
+     "type": "texte"
+    }
+   ],
+   "signe_resolu": true,
+   "table_signe": {
+    "crit": [
+     "\\ln(3)"
+    ],
+    "rows": [
+     {
+      "cells": [
+       "+",
+       "+",
+       "+"
+      ],
+      "label": "2"
+     },
+     {
+      "cells": [
+       "+",
+       "+",
+       "+"
+      ],
+      "label": "e^{x}"
+     },
+     {
+      "cells": [
+       "+",
+       "0",
+       "-"
+      ],
+      "label": "\\left(3 - e^{x}\\right)"
+     },
+     {
+      "cells": [
+       "+",
+       "0",
+       "-"
+      ],
+      "final": true,
+      "label": "f'(x)"
+     },
+     {
+      "cells": [
+       "\\nearrow",
+       "val:9",
+       "\\searrow"
+      ],
+      "label": "f(x)",
+      "variation": true
+     }
+    ],
+    "var": "x"
+   }
+  },
+  "ed_tex": "\\mathbb{R}",
+  "f_tex": "e^{x}\\,\\left(6 - e^{x}\\right)",
+  "graphique": {
+   "points": [
+    {
+     "f_val": 0.0,
+     "x_val": 1.79175947
+    },
+    {
+     "f_val": 5.0,
+     "x_val": 0.0
+    }
+   ],
+   "ronds_vides": [],
+   "segments": [
+    {
+     "dernier": [
+      9.51401782,
+      null
+     ],
+     "empreinte": "ff5a1a43e0bf19d7",
+     "n": 1200,
+     "premier": [
+      -7.72225836,
+      0.00265695991
+     ]
+    }
+   ],
+   "xmax": 3.79175947,
+   "xmin": -2.0,
+   "ymax": 11.8125,
+   "ymin": -5.0625
+  },
+  "limites": {
+   "asymptotes": [
+    {
+     "genre": "horizontale",
+     "ou": "x \\to -\\infty",
+     "position": "au-dessus",
+     "valeur_tex": "0",
+     "valeur_val": 0.0
+    }
+   ],
+   "ed_tex": "\\mathbb{R}",
+   "etudes": [
+    {
+     "etapes": [
+      {
+       "alertes": [],
+       "enonce_tex": "\\displaystyle\\lim_{x\\to -\\infty} e^{x}\\,\\left(6 - e^{x}\\right)",
+       "etapes": [
+        {
+         "blocs": [
+          {
+           "html": "\\(e^{x} \\to e^{-\\infty} = 0^{+}\\). \\(6 - e^{x} \\to 6\\). Forme \\(0^{+} \\cdot 6\\) : <span class=\"det\">pas indéterminée</span>!",
+           "style": "etape",
+           "type": "texte"
+          }
+         ],
+         "titre": "on remplace"
+        },
+        {
+         "blocs": [
+          {
+           "html": "On conclut avec les règles de calcul :",
+           "style": "etape",
+           "type": "texte"
+          },
+          {
+           "tex": "\\lim_{x\\to -\\infty} e^{x}\\,\\left(6 - e^{x}\\right) = 0^{+} \\cdot 6 = 0^{+}",
+           "type": "resultat_lim"
+          }
+         ],
+         "titre": "on conclut directement"
+        }
+       ],
+       "html": "on remplace\n\\(e^{x} \\to e^{-\\infty} = 0^{+}\\). \\(6 - e^{x} \\to 6\\). Forme \\(0^{+} \\cdot 6\\) : <span class=\"det\">pas indéterminée</span>!\non conclut directement\nOn conclut avec les règles de calcul :\n\\lim_{x\\to -\\infty} e^{x}\\,\\left(6 - e^{x}\\right) = 0^{+} \\cdot 6 = 0^{+}",
+       "type": "descente"
+      },
+      {
+       "conclusion": {
+        "genre": "horizontale",
+        "position": "au-dessus",
+        "signee": "0^{+}",
+        "valeur_tex": "0"
+       },
+       "html": "Asymptote horizontale : \\(y = 0\\) (à gauche). \\(f(x) \\to 0^{+}\\) : le graphe est au-dessus.",
+       "type": "texte"
+      }
+     ],
+     "ou": "x \\to -\\infty"
+    },
+    {
+     "etapes": [
+      {
+       "alertes": [],
+       "enonce_tex": "\\displaystyle\\lim_{x\\to +\\infty} e^{x}\\,\\left(6 - e^{x}\\right)",
+       "etapes": [
+        {
+         "blocs": [
+          {
+           "html": "\\(e^{x} \\to +\\infty\\). \\(6 - e^{x} \\to -\\infty\\). Forme \\(\\left(+\\infty\\right) \\cdot \\left(-\\infty\\right)\\) : <span class=\"det\">pas indéterminée</span>!",
+           "style": "etape",
+           "type": "texte"
+          }
+         ],
+         "titre": "on remplace"
+        },
+        {
+         "blocs": [
+          {
+           "html": "(règle des signes : + · − = −) :",
+           "style": "etape",
+           "type": "texte"
+          },
+          {
+           "tex": "\\lim_{x\\to +\\infty} e^{x}\\,\\left(6 - e^{x}\\right) = \\left(+\\infty\\right) \\cdot \\left(-\\infty\\right) = -\\infty",
+           "type": "resultat_lim"
+          },
+          {
+           "genre": "attention",
+           "lignes": [
+            "Pas de BH ici : un produit de deux « énormes » n'est jamais indéterminé."
+           ],
+           "titre": "Attention",
+           "type": "encadre"
+          }
+         ],
+         "titre": "on conclut directement"
+        }
+       ],
+       "html": "on remplace\n\\(e^{x} \\to +\\infty\\). \\(6 - e^{x} \\to -\\infty\\). Forme \\(\\left(+\\infty\\right) \\cdot \\left(-\\infty\\right)\\) : <span class=\"det\">pas indéterminée</span>!\non conclut directement\n(règle des signes : + · − = −) :\n\\lim_{x\\to +\\infty} e^{x}\\,\\left(6 - e^{x}\\right) = \\left(+\\infty\\right) \\cdot \\left(-\\infty\\right) = -\\infty\nAttention Pas de BH ici : un produit de deux « énormes » n'est jamais indéterminé.",
+       "type": "descente"
+      }
+     ],
+     "ou": "x \\to +\\infty"
+    }
+   ],
+   "f_tex": "e^{x}\\,\\left(6 - e^{x}\\right)",
+   "ok": true,
+   "tableaux_signe": []
+  },
+  "ok": true,
+  "variations_limites": {
+   "colonnes": [],
+   "moins_inf": "0^{+}",
+   "non_determinees": [],
+   "plus_inf": "-\\infty"
   }
  },
  "ln(x)/x": {
