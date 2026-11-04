@@ -155,9 +155,9 @@ def _cadrage_et_courbe(f, ED, extrema, asymptotes, points=(), ronds=()):
     else:
         xmin, xmax = depart
         segments, ymin, ymax = _courbe_et_hauteur(f, ivs, xmin, xmax, ys_interet)
-    # À échelle égale (commun/graphique.js), l'écran montre souvent plus large que [xmin ; xmax] (c : x de −5 à 7 à 360 px pour une
-    # fenêtre de −2 à 3,8) : la courbe est tracée une largeur de plus de chaque côté, pour que la fin de l'approche d'une AH se voie
-    # au lieu d'un vide. La fenêtre (et donc le cadrage) ne change pas.
+    # La courbe est tracée une largeur de plus de chaque côté : un zoom arrière (commun/graphique.js, une échelle par axe depuis R3,
+    # Q50) montre la fin de l'approche d'une AH au lieu d'un vide avant le rééchantillonnage. La fenêtre (et donc le cadrage) ne
+    # change pas.
     largeur = xmax - xmin
     segments = [pts for _, _, pts in _morceaux(f, ivs, xmin - TRACE_AU_DELA * largeur, xmax + TRACE_AU_DELA * largeur, largeur)]
     return {"xmin": xmin, "xmax": xmax, "ymin": ymin, "ymax": ymax, "segments": segments,

@@ -108,7 +108,7 @@ Le tableau R8 reste utilisé quand l'expression a plusieurs facteurs qui changen
 - AH : « Asymptote horizontale y = 0 (à gauche). f(x) → 0⁺ : le graphe est au-dessus. » La position n'est écrite que si le signe d'approche est démontré.
 - Exposant → 0⁺ : « e^{0⁺} = 1⁺ (e^t > 1 pour t > 0) : le graphe est au-dessus de y = 1 ».
 - AV d'un seul côté : « Asymptote verticale x = 2, seulement du côté droit. À gauche, f(x) → 0⁺ : le graphe s'approche du point (2 ; 0), qui n'appartient pas au graphe (rond vide). »
-- Limite infinie en ±∞ : « Pas d'asymptote horizontale à droite (f(x) → +∞). » — une ligne de conclusion pour **chaque** borne infinie, même sans asymptote (régularité, principe 6). Une asymptote oblique éventuelle garde la rédaction actuelle de l'outil Limites.
+- Limite infinie en ±∞ sans asymptote : **pas de phrase** (la règle R6 du guide l'emporte, Q67), sauf décision contraire de l'enseignant notée en §8.
 
 ---
 
@@ -239,6 +239,7 @@ Le tableau R8 reste utilisé quand l'expression a plusieurs facteurs qui changen
 | R1 | Corrections après relecture qui touchent l'outil Dérivée : Q37, Q56, Q32 (§7) | **Dérivée** |
 | R2 | Corrections après relecture propres à l'EC : Q7, Q11, Q15, Q23, Q28, Q41, Q43 (§7) | EC |
 | P6 | Partie 4 : D12, D13, D16 | **Limites** |
+| R3 | Corrections après la session 2 : Q57, ln(x² − 4), D7b (Dérivée) ; Q66, Q50 (EC) (§8) | **Dérivée** + EC |
 | P7a | Dérivée de l'exposant détaillée, tableau u/v (D7, D8, D7b si simple) | **Dérivée** |
 | P7b | Valeurs dans le tableau de variations (D10), extremums (D11) | EC + **Dérivée** |
 | P8 | Graphe (D15, §3) | EC |
@@ -286,3 +287,33 @@ Les numéros sont ceux de `suivi.md`.
 | 56 | ✎ **R1** (outil Dérivée, une seule rédaction) : on retire les facteurs qui ne s'annulent jamais, avec leur raison, puis produit nul : « f′(x) = 0 ⇔ x(x − 4) = 0 (car e^{…} > 0) ⇔ x = 0 ou x = 4 (produit nul) ; valeur interdite : x = 2 ». |
 
 **Hors chantier, à noter pour plus tard** : le test instable `test_clavier.py::test_a_deux_formules…` ; Q13 (outil ED).
+
+---
+
+## 8. Réponses aux questions de la session 2 (04.11.2026)
+
+Même légende qu'en §7. Les captures à 390 px ont été relues : **aucune affirmation fausse** n'y figure.
+
+| Q | Réponse |
+|---|---|
+| 46 | ✓ Le tableau de d défile à 390 px : accepté (valeurs exactes gardées). |
+| 50 | ✎ **R3** *(confirmé par l'enseignant le 04.11.2026)* : **abandon de l'échelle égale** dans le graphe de l'EC. Les axes x et y suivent chacun leur cadrage (§3), comme le .tex. Raison : à échelle égale, le graphe de b s'étend sur x ∈ [−80 ; 80] et la courbe n'est qu'un trait, celui de x/(x² + 1) est plat (y ∈ [−10 ; 10] pour des extremums à ±0,5). Cadrage (§3, Q49, Q51) inchangé. |
+| 51, 54 | ✓ Branches coupées en y et coordonnées à côté des points gardées ; les chevauchements de b devraient disparaître avec Q50. |
+| 57 | ✎ **R1 bis, dans R3** (outil Dérivée) : ligne des zéros de f′ avec les propriétés de la partie 3, réunies dans une parenthèse : « f′(x) = 0 ⇔ x(x − 4) = 0 (numérateur nul ; e^{…} > 0) ⇔ x = 0 ou x = 4 (produit nul) » ; « (on divise par −2 ; e^{−2x} > 0) » pour b ; « (numérateur nul ; on divise par −1) » pour x/(x² + 1). |
+| 58 | ✓ |
+| 59 | ✓ « (produit nul) » en fin de chaîne Somme-Produit : gardé (même règle que la ligne des zéros de f′). |
+| 60–65 | ✓ (62 : « −2(−2) » accepté). |
+| 66 | ✎ **R3** : une ligne par facteur du dénominateur factorisé en partie 1 dans le tableau de f (même garde-fou que Q23 : produit des lignes = f). |
+| 67 | ✓ *(par défaut)* R6 du guide l'emporte : pas de « pas d'asymptote horizontale ». Si le .tex écrit une phrase en +∞ pour Ex7, l'enseignant le note ici et R6 est adapté pour l'EC. |
+| 68–74 | ✓ (68, 71 : les fractions rationnelles gardent la rédaction R18 du guide des limites). |
+| 75–82 | ✓ |
+| 83 | ⇥ Chantier « robustesse », après la fusion : piste **(b)**, refus immédiat des tours d'exponentielles (e^x^x, e^(e^x), x^(x^x)) avec « pas encore prise en charge », comme sin(x). Dans le même chantier : le message trompeur de abs(x) (« Symbole inconnu « a » »). |
+
+**Ajouts vus en relisant les captures et les tableaux « À relire »** :
+
+| Point | Réponse |
+|---|---|
+| ln(x² − 4) dans l'outil Dérivée | ✎ **R3** (à vérifier, puis corriger si besoin) : la ligne « f′(x) = 0 ⇔ x = 0 » alors que 0 ∉ ED. Si aucune ligne ne rejette x = 0, ajouter « x = 0 est rejeté, car 0 ∉ ED » (phrase de la partie 3) et conclure « f′ ne s'annule pas sur ED ». |
+| D7b, ligne manquante (c) | ✎ **R3** (outil Dérivée, seulement dans le cas « on développe d'abord ») : après les dérivées des termes, écrire « f′(x) = 6eˣ − 2e^{2x} = 2eˣ(3 − eˣ) (mise en évidence de 2eˣ) », une étape par ligne. Aujourd'hui, la page passe directement des dérivées des termes à 2eˣ(3 − eˣ). |
+| Dérivée de x/(x² + 1) | ⇥ Plus tard (chantier Dérivée) : la ligne saute de (x² + 1 − x·2x)/(x² + 1)² à −(x + 1)(x − 1)/(x² + 1)² sans « = (1 − x²)/(x² + 1)² (réduction) ». Défaut antérieur, général à la règle du quotient. |
+| Lignes coupées à 390 px | R3, **constat seulement** : dans la carte limite de x/(x² + 1), la ligne « = « −∞/+∞ » : forme indéterminée … » paraît coupée sur la capture. Vérifier si elle défile ou si elle est tronquée, et le noter sans corriger. |

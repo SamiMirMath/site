@@ -527,7 +527,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "\\(f'(x) = 0 \\iff x^{2} - 6x + 1 = 0 \\iff x = 3 - 2\\sqrt{2} \\text{ ou } x = 3 + 2\\sqrt{2}\\) ; valeur interdite : \\(x = 3\\).",
+     "html": "\\(f'(x) = 0 \\iff x^{2} - 6x + 1 = 0\\) (numérateur nul) \\(\\iff x = 3 - 2\\sqrt{2} \\text{ ou } x = 3 + 2\\sqrt{2}\\) ; valeur interdite : \\(x = 3\\).",
      "type": "texte"
     }
    ],
@@ -823,7 +823,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "\\(f'(x) = 0 \\iff \\left(x - 3\\right)\\,\\left(x + 2\\right) = 0\\) (car \\(e^{-2x} > 0\\)) \\(\\iff x = -2 \\text{ ou } x = 3\\) (produit nul).",
+     "html": "\\(f'(x) = 0 \\iff \\left(x - 3\\right)\\,\\left(x + 2\\right) = 0\\) (on divise par \\(-2\\) ; \\(e^{-2x} > 0\\)) \\(\\iff x = -2 \\text{ ou } x = 3\\) (produit nul).",
      "type": "texte"
     }
    ],
@@ -1177,7 +1177,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "\\(f'(x) = 0 \\iff 2x - 3 = 0 \\iff x = \\frac{3}{2}\\) ; valeurs interdites : \\(x = 1\\) ; \\(x = 2\\).",
+     "html": "\\(f'(x) = 0 \\iff 2x - 3 = 0\\) (numérateur nul ; on divise par \\(-1\\)) \\(\\iff x = \\frac{3}{2}\\) ; valeurs interdites : \\(x = 1\\) ; \\(x = 2\\).",
      "type": "texte"
     }
    ],
@@ -1537,7 +1537,7 @@
      "type": "texte"
     },
     {
-     "html": "\\(f'(x) = 0 \\iff \\ln(x) + 1 = 0 \\iff x = e^{-1}\\).",
+     "html": "\\(f'(x) = 0 \\iff \\ln(x) + 1 = 0\\) (on divise par \\(3\\)) \\(\\iff x = e^{-1}\\).",
      "type": "texte"
     }
    ],
@@ -1908,7 +1908,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "\\(f'(x) = 0 \\iff x\\,\\left(x - 4\\right) = 0\\) (car \\(e^{\\frac{x^{2} + x - 2}{6x - 12}} > 0\\)) \\(\\iff x = 0 \\text{ ou } x = 4\\) (produit nul) ; valeur interdite : \\(x = 2\\).",
+     "html": "\\(f'(x) = 0 \\iff x\\,\\left(x - 4\\right) = 0\\) (numérateur nul ; \\(e^{\\frac{x^{2} + x - 2}{6x - 12}} > 0\\)) \\(\\iff x = 0 \\text{ ou } x = 4\\) (produit nul) ; valeur interdite : \\(x = 2\\).",
      "type": "texte"
     }
    ],
@@ -2320,7 +2320,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "\\(f'(x) = 0 \\iff x = 0\\) (car \\(e^{-x^{2}} > 0\\)).",
+     "html": "\\(f'(x) = 0 \\iff x = 0\\) (on divise par \\(-2\\) ; \\(e^{-x^{2}} > 0\\)).",
      "type": "texte"
     }
    ],
@@ -2891,7 +2891,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "\\(f'(x) = 0 \\iff x = 0\\) (car \\(e^{\\frac{2}{x^{2} - 4}} > 0\\)) ; valeurs interdites : \\(x = -2\\) ; \\(x = 2\\).",
+     "html": "\\(f'(x) = 0 \\iff x = 0\\) (numérateur nul ; on divise par \\(-4\\) ; \\(e^{\\frac{2}{x^{2} - 4}} > 0\\)) ; valeurs interdites : \\(x = -2\\) ; \\(x = 2\\).",
      "type": "texte"
     }
    ],
@@ -3518,7 +3518,7 @@
      "type": "texte"
     },
     {
-     "html": "\\(f'(x) = 2e^{x}\\,\\left(3 - e^{x}\\right)\\).",
+     "html": "\\(f'(x) = 6e^{x} - 2e^{2x} = 2e^{x}\\,\\left(3 - e^{x}\\right)\\) (mise en évidence de \\(2e^{x}\\))",
      "type": "texte"
     }
    ],
@@ -3549,7 +3549,7 @@
      "type": "texte"
     },
     {
-     "html": "\\(f'(x) = 0 \\iff 3 - e^{x} = 0\\) (car \\(e^{x} > 0\\)) \\(\\iff x = \\ln(3)\\).",
+     "html": "\\(f'(x) = 0 \\iff 3 - e^{x} = 0\\) (on divise par \\(2\\) ; \\(e^{x} > 0\\)) \\(\\iff x = \\ln(3)\\).",
      "type": "texte"
     }
    ],
@@ -3805,7 +3805,7 @@
      "type": "texte"
     },
     {
-     "html": "\\(f'(x) = 0 \\iff 1 - \\ln(x) = 0 \\iff x = e\\).",
+     "html": "\\(f'(x) = 0 \\iff 1 - \\ln(x) = 0\\) (numérateur nul) \\(\\iff x = e\\).",
      "type": "texte"
     }
    ],
@@ -4680,7 +4680,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "\\(f'(x) = 0 \\iff \\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x = -1 \\text{ ou } x = 1\\) (produit nul).",
+     "html": "\\(f'(x) = 0 \\iff \\left(x + 1\\right)\\,\\left(x - 1\\right) = 0\\) (numérateur nul ; on divise par \\(-1\\)) \\(\\iff x = -1 \\text{ ou } x = 1\\) (produit nul).",
      "type": "texte"
     }
    ],
@@ -5263,7 +5263,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "\\(f'(x) = 0 \\iff x\\,\\left(x - 2\\right) = 0\\) (car \\(e^{-x} > 0\\)) \\(\\iff x = 0 \\text{ ou } x = 2\\) (produit nul).",
+     "html": "\\(f'(x) = 0 \\iff x\\,\\left(x - 2\\right) = 0\\) (on divise par \\(-1\\) ; \\(e^{-x} > 0\\)) \\(\\iff x = 0 \\text{ ou } x = 2\\) (produit nul).",
      "type": "texte"
     }
    ],
@@ -5597,7 +5597,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "\\(f'(x) = 0 \\iff x - 2 = 0 \\iff x = 2\\).",
+     "html": "\\(f'(x) = 0 \\iff x - 2 = 0\\) (on divise par \\(2\\)) \\(\\iff x = 2\\).",
      "type": "texte"
     }
    ],
@@ -5780,7 +5780,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "\\(f'(x) = 0 \\iff \\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x = -1 \\text{ ou } x = 1\\) (produit nul).",
+     "html": "\\(f'(x) = 0 \\iff \\left(x + 1\\right)\\,\\left(x - 1\\right) = 0\\) (on divise par \\(3\\)) \\(\\iff x = -1 \\text{ ou } x = 1\\) (produit nul).",
      "type": "texte"
     }
    ],
@@ -5999,7 +5999,7 @@
    "ok": true,
    "signe_etapes": [
     {
-     "html": "\\(f'(x) = 0 \\iff x\\,\\left(x + 1\\right)\\,\\left(x - 1\\right) = 0 \\iff x = -1 \\text{ ou } x = 0 \\text{ ou } x = 1\\) (produit nul).",
+     "html": "\\(f'(x) = 0 \\iff x\\,\\left(x + 1\\right)\\,\\left(x - 1\\right) = 0\\) (on divise par \\(4\\)) \\(\\iff x = -1 \\text{ ou } x = 0 \\text{ ou } x = 1\\) (produit nul).",
      "type": "texte"
     }
    ],

@@ -17,7 +17,8 @@ URL : `/derivee-variations/` · moteur : `derivee-variations/derivee_variations.
      l'exposant » (tableau u/v, règle du quotient, puis le numérateur une étape par ligne : développement, réduction, mise en
      évidence, simplification), puis « On remplace g'(x) dans f'(x) = g'(x)·e^{g(x)} » et f' encadré (D7) ; f = produit de deux
      sommes de c·e^{kx} et de constantes : « On développe d'abord » (eˣ(6 − eˣ) = 6eˣ − eˣ · eˣ = 6eˣ − e^{2x}), puis la dérivée de
-     la somme (D7b). Chaque ligne est vérifiée (SymPy et sonde numérique) ; au moindre doute, la rédaction habituelle ;
+     la somme (D7b), dont la dernière ligne écrit la somme des dérivées et sa mise en évidence (« f'(x) = 6eˣ − 2e^{2x} = 2eˣ(3 − eˣ)
+     (mise en évidence de 2eˣ) », chantier étude complète, R3, §8 ; vérifiée par SymPy et la sonde). Chaque ligne est vérifiée (SymPy et sonde numérique) ; au moindre doute, la rédaction habituelle ;
    - composée ln(u), e^u, √u, u^n : u et u' nommés dans la même phrase que le résultat, sans tableau ;
    - facteur constant c·g, g·c, g/c, signe moins : on dérive g, puis une ligne conclut
      « f'(x) = c · (g)' = … » (correction `a9b2a6e`) ;
@@ -33,11 +34,14 @@ URL : `/derivee-variations/` · moteur : `derivee-variations/derivee_variations.
    (x² + 1, √(4x² + 1), (x + 2)², eˣ), une ligne par constante (positive : « 3 : + + + » ; négative : « −1 : − − − »), puis
    la ligne f'(x). Aucune phrase ne justifie le signe d'un facteur : ni « donc f'(x) est du signe de … », ni « Bilan », ni
    « Un produit est nul si et seulement si … ». Exemple √(4x²+1)/(x+2), f'(x) = (8x−1)/(√(4x²+1)(x+2)²) :
-   « f'(x) = 0 ⇔ 8x − 1 = 0 ⇔ x = 1/8 ; valeur interdite : x = −2 », puis lignes 8x − 1, √(4x²+1), (x+2)², f'(x).
+   « f'(x) = 0 ⇔ 8x − 1 = 0 (numérateur nul) ⇔ x = 1/8 ; valeur interdite : x = −2 », puis lignes 8x − 1, √(4x²+1), (x+2)², f'(x).
    La ligne des zéros (chantier étude complète, decisions.md §7, Q56, une seule rédaction) : « f'(x) = 0 », puis le produit des
-   facteurs du numérateur qui ne sont pas des exponentielles (constante et dénominateur retirés), les exponentielles retirées avec
-   leur raison, puis produit nul : « f'(x) = 0 ⇔ x(x − 4) = 0 (car e^{…} > 0) ⇔ x = 0 ou x = 4 (produit nul) ; valeur interdite :
-   x = 2 » ; un facteur x − a s'écrit directement x = a ; « (produit nul) » dès que deux facteurs s'annulent ; sinon l'équation
+   facteurs du numérateur qui ne sont pas des exponentielles, le dénominateur, la constante et les exponentielles retirés avec leurs
+   propriétés, réunies dans une parenthèse (R3, §8, Q57 : celles de la partie 3 de l'Étude complète), puis produit nul : « f'(x) = 0
+   ⇔ x(x − 4) = 0 (numérateur nul ; e^{…} > 0) ⇔ x = 0 ou x = 4 (produit nul) ; valeur interdite : x = 2 », « (on divise par −2 ;
+   e^{−2x} > 0) », « (numérateur nul ; on divise par −1) » ; « (car e^{…} > 0) » quand l'exponentielle est la seule raison. Un zéro
+   hors de l'ED est rejeté (« x = 0 est rejeté, car 0 ∉ ED ») et, s'il n'en reste aucun, « f′ ne s'annule pas sur ED »
+   (ln(x² − 4) ; R3, §8) ; un facteur x − a s'écrit directement x = a ; « (produit nul) » dès que deux facteurs s'annulent ; sinon l'équation
    du facteur, puis ses solutions (« ⇔ x² − 6x + 1 = 0 ⇔ x = 3 − 2√2 ou x = 3 + 2√2 »).
    Un zéro qui demande une étape délicate (ln(x) + 1 = 0 ⇔ ln(x) = −1 : on soustrait 1) garde cette étape.
 5. **Variations** : ligne f(x) en flèches ; en chaque extremum, la ligne f(x) porte la **valeur** de l'extremum (exacte : e^{1/6},
@@ -99,7 +103,7 @@ URL : `/derivee-variations/` · moteur : `derivee-variations/derivee_variations.
 | DV-14 | Tableau de ln(x²−4) : colonnes −2 et 2 (double barre sur toutes les lignes), zone ]−2 ; 2[ hachurée, pas de colonne 0 ; sur les exemples et 150 fonctions générées, une zone est hachurée sur f' et f si et seulement si f n'y est pas définie (oracle) | [auto-py] (`test_tableau_variations.py`) |
 | DV-15 | x^(2/3) : f' = 2/(3∛x), « ne s'annule jamais ; valeur interdite : x = 0 » ; valeur interdite 0 ; minimum en 0. x^(1/3) : ↗ sur ℝ, aucun extremum. Cas −1/3, 4/3, (x−2)^(1/3), x·x^(1/3) avec points négatifs | [auto-py] (`test_racines_reelles.py`) |
 | DV-17 | L'exposant de chaque exponentielle de f' (résultat, étapes, tableau) est celui de l'énoncé : e^((x²+1)/(2x)), e^((−2x²+3x−1)/(3x−6)) (cas limites, instantanés) et 60 fonctions tirées au hasard (e^{u/v}, P·e^{Q}, e^{Q}/v), f' égale à la dérivée de l'oracle mpmath | [auto-py] (`test_derivee_narration.py`, `TestExposantDeLEnonce`) |
-| DV-18 | Ligne des zéros « f'(x) = 0 ⇔ … (car e^{…} > 0) ⇔ … (produit nul) » : lignes exactes (Ex7, b, a, c, d du chantier étude complète…) ; sur ≥ 25 fonctions, le produit écrit s'annule exactement là où f' s'annule et chaque zéro final annule f' (oracle mpmath) | [auto-py] (`test_derivee_narration.py`, `TestLigneDesZeros`) |
+| DV-18 | Ligne des zéros « f'(x) = 0 ⇔ … (numérateur nul ; on divise par c ; e^{…} > 0) ⇔ … (produit nul) » : lignes exactes (Ex7, b, a, c, d du chantier étude complète…) ; sur ≥ 25 fonctions, le produit écrit s'annule exactement là où f' s'annule et chaque zéro final annule f' (ou est rejeté, hors de l'ED) ; « numérateur nul » si et seulement si f' a un dénominateur en x ; le numérateur de f' est c · produit · exponentielles citées (oracle mpmath) ; zéros hors de l'ED rejetés (ln(x² − 4), f non définie au zéro rejeté) | [auto-py] (`test_derivee_narration.py`, `TestLigneDesZeros`) |
 | DV-16 | Rendu : la double barre est centrée sous la valeur de l'en-tête et continue sur toute la hauteur, à 380 px, sur ordinateur et à l'impression | [auto-page] (Chrome, CI, T15) + [manuel] |
 | DV-10 | Tableau de √(x²−4) : ligne f'(x) avec double barre en ±2 ; ligne f(x) avec la valeur 0 en ±2, sans barre | [auto-py] |
 | DV-11 | x^(2−2) : ligne f'(x) « 0 », ligne f(x) →, aucun extremum ; √(x²)/x : « 0 » et → sur chaque intervalle, double barre en 0 (hors de l'ED) | [auto-py] (`test_tableau_variations.py`) |

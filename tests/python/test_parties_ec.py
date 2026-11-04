@@ -815,6 +815,92 @@ class TestLignesDuTableau(unittest.TestCase):
                 self.assertEqual(parties.tex(parties.arbre_polynome(P)), ecrit)
 
 
+class TestLignesDuDenominateur(unittest.TestCase):
+    """Chantier etude-complete, R3 (decisions.md §8, Q66) : une ligne par facteur du dénominateur factorisé en partie 1 dans le
+    tableau de signes de f : chaîne Somme-Produit de l'EC (1/(x² − 3x + 2) : x − 1, x − 2) ou première ligne de l'outil ED (« On met x
+    en évidence : x² − 4x = x(x − 4) »). Même garde-fou que Q23 (produit des lignes = f) ; un dénominateur résolu sans factorisation
+    (x² − 4 : x² = 4 ; 2x² − 6x + 4 : Δ) garde sa ligne ; un facteur écrit à la fois au numérateur et au dénominateur : le
+    dénominateur reste entier."""
+    ATTENDU = {
+        "1/(x^2-3x+2)": [r"\left(x - 1\right)", r"\left(x - 2\right)", "f(x)"],
+        "(x-3)/(x^2-x-2)": [r"\left(x - 3\right)", r"\left(x + 1\right)", r"\left(x - 2\right)", "f(x)"],
+        "1/(x^2-4x)": ["x", r"\left(x - 4\right)", "f(x)"],
+        "1/(2x^2-4x)": ["x", r"\left(2x - 4\right)", "f(x)"],
+        "1/(x^3-4x)": ["x", r"\left(x^{2} - 4\right)", "f(x)"],
+        "(x^2-4x+3)/(x^2-3x+2)": [r"\left(x - 1\right)", r"\left(x - 3\right)", r"\left(x^{2} - 3x + 2\right)", "f(x)"],
+        "(x-1)/(x^2-3x+2)": [r"\left(x - 1\right)", r"\left(x^{2} - 3x + 2\right)", "f(x)"],
+        "x/(x^2-4)": ["x", r"\left(x^{2} - 4\right)", "f(x)"],
+        "x/(2x^2-6x+4)": ["x", r"\left(2x^{2} - 6x + 4\right)", "f(x)"],
+    }
+
+    @staticmethod
+    def tableau(entree):
+        (t,) = [b for c in cartes_zeros(entree) for b in c["blocs"] if b["type"] == "tableau"]
+        return t
+
+    def test_lignes(self):
+        for entree, etiquettes in self.ATTENDU.items():
+            with self.subTest(entree=entree):
+                self.assertEqual([r["label"] for r in self.tableau(entree)["rows"]], etiquettes)
+
+    def test_factorisation_ecrite_en_partie_1(self):
+        """Chaque facteur du dénominateur mis en ligne est écrit dans une carte de condition de la partie 1 (texte des cartes)."""
+        denominateur = {"1/(x^2-3x+2)": 2, "(x-3)/(x^2-x-2)": 2, "1/(x^2-4x)": 2, "1/(2x^2-4x)": 2, "1/(x^3-4x)": 2}
+        for entree, n in denominateur.items():
+            textes = re.sub(r"\\left|\\right|\\,|\s", "", " ".join(
+                b.get("html", "") for c in rec.resoudre(entree)["cartes"] if c["titre"].startswith("Condition") for b in c["blocs"]))
+            for label in self.ATTENDU[entree][-1 - n:-1]:
+                with self.subTest(entree=entree, ligne=label):
+                    self.assertIn(re.sub(r"\\left|\\right|\s", "", label if label.startswith(r"\left") else "x"), textes)
+
+    def test_signe_juste_oracle(self):
+        """Chaque case de chaque ligne et de la ligne f(x) a le signe de son facteur (et de f) au point de test, oracle mpmath ; le
+        produit des lignes (constante comprise) est f."""
+        for entree in self.ATTENDU:
+            with self.subTest(entree=entree):
+                f = ed.lire(entree)
+                t = self.tableau(entree)
+                crit = [oracle.valeur(lire(p.replace("{", "(").replace("}", ")").replace("\\frac", "")), 0)
+                        if "frac" not in p else None for p in t["crit"]]
+                self.assertNotIn(None, crit)
+                tests = [crit[0] - 1] + [(a + b) / 2 for a, b in zip(crit, crit[1:])] + [crit[-1] + 1]
+                for ligne in t["rows"]:
+                    h = f if ligne["label"] == "f(x)" else ed.lire(ligne["label"].replace(r"\left", "").replace(r"\right", "")
+                                                                   .replace("{", "(").replace("}", ")"))
+                    for i, x in enumerate(tests):
+                        v = oracle.valeur(h, x)
+                        if v is None:
+                            self.assertEqual(ligne["cells"][2 * i], "x")
+                            continue
+                        attendu = "+" if v > 0 else "-"
+                        if ligne["label"] != "f(x)" and ligne["cells"][2 * i] != attendu:   # facteur au carré : toujours +
+                            attendu = "+"
+                        self.assertEqual(ligne["cells"][2 * i], attendu, (ligne["label"], x))
+
+    def test_garde_fou(self):
+        """Ligne fausse (arbre_polynome trompé) : SymPy la refuse, le dénominateur garde sa ligne ; SymPy aveuglé : la sonde."""
+        sp = parties.charger_sympy()
+        with mock.patch.object(parties, "arbre_polynome", lambda P: lire("x-7")):
+            self.assertEqual([r["label"] for r in self.tableau("1/(x^2-3x+2)")["rows"]], [r"\left(x^{2} - 3x + 2\right)", "f(x)"])
+        with mock.patch.object(parties, "arbre_polynome", lambda P: lire("x-7")), \
+                mock.patch.object(parties, "en_sympy_reel", lambda T: sp.Integer(0)):
+            from noyau import aplatir
+            analyse = ec.analyse("1/(x^2-3x+2)")
+            c, facs = aplatir(analyse[1])
+            with mpmath.workdps(parties.CHIFFRES):
+                resultat = parties.lignes_du_tableau(analyse[1], c, facs, sp, mpmath, numerateur=False,
+                                                     denominateurs=parties.denominateurs_ecrits(analyse))
+        self.assertEqual(resultat, (c, facs))
+
+    def test_denominateurs_ecrits(self):
+        self.assertEqual(parties.denominateurs_ecrits(ec.analyse("1/(x^2-3x+2)")),
+                         {"x^{2} - 3x + 2": (F(1), 0, [[F(-1), F(1)], [F(-2), F(1)]])})
+        self.assertEqual(parties.denominateurs_ecrits(ec.analyse("1/(x^2-4x)")), {"x^{2} - 4x": (F(1), 1, [[F(-4), F(1)]])})
+        for entree in ("x/(x^2-4)", "x/(2x^2-6x+4)", "e^((x^2+x-2)/(6x-12))", "(x^2-1)/(x-3)", "x^2+1"):
+            with self.subTest(entree=entree):
+                self.assertEqual(parties.denominateurs_ecrits(ec.analyse(entree)), {})
+
+
 # ---------- oracle : zéros, signe et f(0) affichés ----------
 def nombre_affiche(t):
     """Valeur mpmath (50 chiffres) d'une écriture LaTeX de l'outil : entiers, fractions, racines, ln, e^{…}. Lecture écrite à la main
