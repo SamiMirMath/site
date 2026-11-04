@@ -18,7 +18,7 @@ rapports) : [`journal.md`](journal.md).
 | P0 | `suivi.md`, `journal.md`, deux lancements de référence, `lancer.py complet --rapport` | **faite** (commit « Tests rapides P0 : … ») |
 | P1 | T2 : harnais du toucher (test du clavier) | **faite** (commit « Tests rapides P1 : … ») : test du clavier 20/20 seul et 20/20 sous charge ; listes identiques |
 | P2 | T1 : `lancer.py verifier`, texte proposé pour `CLAUDE.md`, méthode (commit séparé) | **faite** (commit « Tests rapides P2 : lancer.py verifier … », `verifier` ACCEPTÉ ; méthode : commit séparé « Tests rapides P2 (méthode) : … ») : commit modifié refusé, fichier non suivi signalé et refusé, test disparu refusé ; listes identiques |
-| P3 | T3 : `TestStructure` (calcul une fois par classe) | à faire |
+| P3 | T3 : `TestStructure` (calcul une fois par classe) | **faite** (commit « Tests rapides P3 : … ») : copie profonde par test ; fichier seul 121 s → 44 s ; mur Python 670 s ; listes et sous-tests identiques |
 | P4 | T4 : `memo.py`, test de garde, `MEMO=0` | à faire |
 | P5 | T5 : cache de `racines` | à faire |
 | P6 | T7 : `rapide` et pages des moteurs | à faire |
@@ -59,6 +59,8 @@ rapports) : [`journal.md`](journal.md).
 - P2 : aucun instantané ni aucun test modifié. Outil de test modifié : `tests/lancer.py` (commande `verifier` ; `rapport.json` note
   `CORPUS`, `OUTILS`, `MEMO`) ; nouveau : `tests/verifier.py`. Les règles exactes de (a), (b), (c) et la liste permise sont dans
   `journal.md`, « P2 ». Méthode (`docs/methode-chantiers.md`, « Organisation de nuit ») : commit séparé, à relire.
+- P3 : aucun instantané ni aucun moteur modifié. Test modifié : `tests/python/test_redaction_bh_3m.py`, classe `TestStructure`
+  (`toutes()` : calcul commun gardé par classe, copie profonde par test ; corps des tests inchangés). Détail : `journal.md`, « P3 ».
 
 ## À reporter par l'enseignant dans CLAUDE.md
 
@@ -90,6 +92,6 @@ Procédure allégée du chef d'orchestre (décision T1 ; écrite aussi dans `doc
 
 ## Reprise après compactage
 
-P0, P1 et P2 (deux commits) commitées sur `tests-rapides` (rien poussé). Prochaine partie : **P3** (`TestStructure`), puis P4 à P7
+P0, P1, P2 (deux commits) et P3 commitées sur `tests-rapides` (rien poussé). Prochaine partie : **P4** (`memo.py`), puis P5 à P7
 dans l'ordre de `decisions.md` §3. Contrôle d'une partie : `python3 tests/lancer.py verifier <dossier de complet --rapport>`. Pour reprendre : lire ce fichier, `decisions.md`, puis `git log --oneline main..HEAD` ; le détail est dans
 `journal.md`. Chaque partie compare son rapport à `reference/` avec la commande ci-dessus.

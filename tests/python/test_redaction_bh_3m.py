@@ -8,6 +8,7 @@ Trois familles :
   - STRUCTURE : règles R1 à R17 vérifiées sur tout le corpus (tableau BH avant la chaîne, forme revérifiée avant chaque BH, R14…).
   - TRANSVERSE : valeurs contre le corpus de l'enseignant, signe 0⁺/0⁻, nombre de replis, aucune alerte, cartes « Étape n » consécutives.
 """
+import copy
 import os
 import re
 import sys
@@ -176,16 +177,34 @@ class TestStructure(unittest.TestCase):
     """Règles du corrigé sur toutes les rédactions descendantes du corpus et des exemples de la page."""
     ENTREES = list(dict.fromkeys([c.saisie for c in CAS if c.id not in PAS_PRIS_EN_CHARGE] + entrees_page("limites-asymptotes")))
 
+    # Chantier tests-rapides, décision T3 : la liste des rédactions descendantes est calculée une seule fois par classe (au premier test
+    # qui en a besoin, dans chaque processus), puis chaque test en reçoit une copie profonde. Mêmes entrées, même filtre, même ordre
+    # qu'avant ; un test ne peut donc pas gêner les suivants en modifiant une rédaction.
+    _REDACTIONS = None
+
     @classmethod
-    def toutes(cls):
-        for saisie in cls.ENTREES:
-            r = la.etudier(saisie)
-            if not r["ok"]:
-                continue
-            for e in r["etudes"]:
-                for i in e["etapes"]:
-                    if i.get("type") == "descente":
-                        yield saisie, e["ou"], i
+    def _redactions(cls):
+        if cls._REDACTIONS is None:
+            liste = []
+            for saisie in cls.ENTREES:
+                r = la.etudier(saisie)
+                if not r["ok"]:
+                    continue
+                for e in r["etudes"]:
+                    for i in e["etapes"]:
+                        if i.get("type") == "descente":
+                            liste.append((saisie, e["ou"], i))
+            cls._REDACTIONS = liste
+        return cls._REDACTIONS
+
+    def setUp(self):
+        self._copie = None
+
+    def toutes(self):
+        """Les rédactions descendantes `(saisie, ou, descente)`, dans la copie profonde propre à ce test."""
+        if self._copie is None:
+            self._copie = copy.deepcopy(self._redactions())
+        return iter(self._copie)
 
     def test_au_moins_cent_redactions_descendantes(self):
         self.assertGreaterEqual(sum(1 for _ in self.toutes()), 100)

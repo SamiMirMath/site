@@ -349,8 +349,71 @@ Départ 55daa1f + `docs/methode-chantiers.md` (« Organisation de nuit » : cont
 `--collect-only -q` des deux suites : 1312 et 122, identiques à la référence. `verifier …/P2b-rapport` est lancé sur le commit 2
 (résultat dans `suivi.md` et dans le rapport de la partie).
 
+## P3 (05.11.2026) : `TestStructure` calculé une fois par classe (T3)
+
+### Plan
+
+1. Temps du fichier `tests/python/test_redaction_bh_3m.py` **avant** (lancé seul, `-n auto` comme `complet`, limite 5 min, extension
+   `rapport_pytest` pour les sous-tests).
+2. `TestStructure` : la liste des rédactions descendantes `(saisie, ou, descente)` est calculée **une fois par classe** (au premier
+   test qui en a besoin, mêmes entrées `ENTREES`, même filtre `r["ok"]`, même ordre) ; chaque test reçoit sa **copie profonde**
+   (`copy.deepcopy`) au premier appel de `toutes()`. Corps des tests inchangés (mêmes vérifications, mêmes boucles, mêmes `subTest`) ;
+   les trois tests qui appellent `descentes()` ne changent pas. Aucun moteur modifié, aucun autre fichier de test touché.
+3. Temps du fichier **après**, mêmes conditions ; sous-tests test par test identiques à la référence.
+4. Suite complète `complet --rapport …/scratchpad/P3-rapport` ; `comparer_listes.py` ; `--collect-only -q` de chaque suite (séparément)
+   contre `reference/collecte-*.txt` ; murs comparés à P0–P2.
+5. Temps natif (`mesurer_temps.py`) ; `suivi.md` ; commit ; `verifier …/P3-rapport`.
+
+### Code
+
+`tests/python/test_redaction_bh_3m.py`, classe `TestStructure` seulement (`git diff` : `import copy` et la méthode `toutes`) :
+- `_redactions()` (méthode de classe) calcule la liste `(saisie, ou, descente)` **une fois** et la garde dans `TestStructure._REDACTIONS` :
+  mêmes `ENTREES`, même `la.etudier(saisie)`, même filtre `r["ok"]`, même parcours `etudes` → `etapes` → `type == "descente"`, même
+  ordre. Calcul paresseux (au premier test qui appelle `toutes()`) plutôt que `setUpClass` : un processus xdist qui ne reçoit que des
+  tests de la classe sans `toutes()` (`test_ln_de_x_cube…`, `test_ln_reste_en_haut…`, `test_les_derivees_composees…`) ne le paie pas.
+  Si `la.etudier` lève une exception, rien n'est gardé et chaque test qui appelle `toutes()` échoue, comme avant.
+- `toutes()` devient une méthode d'instance : au premier appel dans un test, `copy.deepcopy` de la liste commune (copie propre au
+  test, `setUp` la remet à `None`), puis un itérateur sur cette copie. `test_les_deux_signes_zero_sont_ecrits` appelle toujours
+  `toutes()` une fois par cas du corpus : il parcourt sa propre copie à chaque fois, sans recalcul.
+- Corps des 12 tests de la classe (dont 9 appellent `toutes()`) inchangés (mêmes vérifications, mêmes boucles, mêmes `subTest` et leurs paramètres) ; `descentes()` et les autres
+  classes inchangées. Aucun moteur modifié. Aucun autre fichier n'appelle `TestStructure.toutes`.
+
+### Vérification propre : fichier lancé seul (`-n auto`, extension `rapport_pytest`, limite 5 min)
+
+| | Mur (pytest) | Tests | Sous-tests | Test le plus long |
+|---|---|---|---|---|
+| Avant (1f34e3c) | **121 s** | 25 passés | 1 681 | `test_les_deux_signes_zero_sont_ecrits` 110,7 s |
+| Après | **44 s** | 25 passés | 1 681 | 27,5 s (le premier test de chaque processus paie le calcul commun) |
+
+Collecte, issues et sous-tests **identiques test par test** entre avant et après, et identiques aux 25 lignes de
+`reference/resultats-python.txt` pour ce fichier (issue et nombre de sous-tests). Après : 4 tests de 23 à 28 s (le calcul commun,
+une fois par processus, 4 processus), les autres tests de `TestStructure` de 0,02 à 1 s.
+
+### Temps natif
+
+P3 ne touche aucun moteur. `mesurer_temps.py` : Ex7 0,58 s ; a 0,03 s ; b 0,36 s ; c 0,26 s ; d 0,22 s (P2 : 0,58 ; 0,03 ; 0,36 ;
+0,25 ; 0,22) : aucune hausse.
+
+### Suite complète (`complet --rapport …/scratchpad/P3-rapport`, départ 1f34e3c + `test_redaction_bh_3m.py`, `journal.md`)
+
+| | Mur (pytest) | Résultat |
+|---|---|---|
+| Python | **670 s** (668 s) | 1311 passés, 1 xfail, 103 033 sous-tests ; code 0 ; JUnit / extension : 0 écart |
+| Pages | **985 s** (984 s) | 122 passés, 2 554 sous-tests ; code 0 ; JUnit / extension : 0 écart |
+
+Code global 0 (00:16 → 00:44). `environnement` : `CORPUS`, `OUTILS`, `MEMO` non définis. `python3 tests/comparer_listes.py
+docs/chantiers/tests-rapides/reference <P3-rapport>` : Python et pages **identiques, nom par nom** (code 0). `--collect-only -q` de
+chaque suite, lancée séparément : 1312 et 122 identifiants, **identiques** à `reference/collecte-*.txt`.
+
+Mur Python comparé aux parties précédentes (même machine, `-n auto`) : P0 737 et 755 s ; P1 715 s (contrôle du chef 801 s) ; P2 735 s
+et 710 s. P3 : **670 s**, soit 40 à 85 s de moins que P0–P2 (sans compter le 801 s), dans l'ordre de grandeur de l'audit (environ 50 s
+de mur). Le bruit d'un lancement à l'autre (environ ± 40 s) reste du même ordre : le gain du fichier seul (121 s → 44 s) est la mesure
+nette. Pages : 985 s (P1–P2 : 967 à 994 s), sans changement attendu.
+
 ## Contrôles du chef d'orchestre
 
 P0 (1feb6cf) : suite complète --rapport, code 0 ; Python 1311 passés + 1 xfail, 103 033 sous-tests, 737 s ; pages 122 passés, 2 554 sous-tests, 950 s ; comparer_listes identique nom par nom ; --collect-only -q des deux suites identique à la référence.
 
 P1 (a8d6ab6) : suite complète --rapport, code 0 ; Python 1311 passés + 1 xfail, 103 033 sous-tests, 801 s ; pages 122 passés, 2 554 sous-tests, 967 s ; comparer_listes identique nom par nom ; --collect-only -q des deux suites identique à la référence.
+
+P2 (55daa1f, 1f34e3c) : verifier ACCEPTÉ sur les deux commits ; essai du chef d'orchestre « test disparu » (copie du rapport P2b) REFUSÉ avec le motif « disparu » ; rapide code 0 en 9 s (tests de fumée seulement, l'arbre étant propre après le commit).
