@@ -310,6 +310,25 @@ class TestDeriveeExposantEtTableauUV(unittest.TestCase):
                         membre = formule(h)[0].split("=")[-1]
                         for x in (-1.2, 0.3, 1.1):
                             self.assertLess(abs(oracle.valeur(lire_tex(membre), x) - oracle.valeur(f, x)), mpmath.mpf("1e-30"), h)
+                # decisions.md §8 (D7b, ligne manquante) : « f′(x) = 6eˣ − 2e^{2x} = 2eˣ(3 − eˣ) (mise en évidence de 2eˣ) » ;
+                # la somme écrite est f′ (oracle), et le facteur mis en évidence fois le reste aussi
+                derniere = textes[-1]
+                corps, propriete = formule(derniere)
+                somme, fp = corps[len("f'(x) = "):].split(" = ")
+                self.assertTrue(corps.startswith("f'(x) = "), derniere)
+                self.assertEqual(fp, r["deriv_tex"])
+                self.assertTrue(propriete.startswith(r"mise en évidence de \("), derniere)
+                facteur = lire_tex(derniere.rsplit(r"(mise en évidence de \(", 1)[1][:-len(r"\))")])
+                for x in (-1.2, 0.3, 1.1):
+                    d = oracle.derivee(f, x)
+                    self.assertLess(abs(oracle.valeur(lire_tex(somme), x) - d), mpmath.mpf("1e-15") * (1 + abs(d)), derniere)
+                    reste = oracle.valeur(lire_tex(fp), x) / oracle.valeur(facteur, x)
+                    self.assertLess(abs(reste * oracle.valeur(facteur, x) - d), mpmath.mpf("1e-15") * (1 + abs(d)))
+                self.assertGreaterEqual(somme.count(" - ") + somme.count(" + "), 1)          # au moins deux termes
+        self.assertEqual(texte_etape(dv.etudier("e^x(6-e^x)")["deriv_etapes"][-1]),
+                         r"\(f'(x) = 6e^{x} - 2e^{2x} = 2e^{x}\,\left(3 - e^{x}\right)\) (mise en évidence de \(2e^{x}\))")
+        # un seul terme dérivé ((eˣ + 1)(eˣ − 1) = e^{2x} − 1) : pas de mise en évidence, la ligne « f′(x) = 2e^{2x}. » reste
+        self.assertEqual(texte_etape(dv.etudier("(e^x+1)(e^x-1)")["deriv_etapes"][-1]), r"\(f'(x) = 2e^{2x}\).")
         for entree in ("x*e^x", "e^x*e^x", "e^(-x)*(e^x+1)", "(e^x+1)^2", "e^x(6-x)", "2(e^x+1)", "e^x(e^x+x)"):
             with self.subTest(f=entree):
                 self.assertNotIn("On développe d'abord", json.dumps(dv.etudier(entree).get("deriv_etapes", [])))
@@ -387,25 +406,40 @@ class TestExposantDeLEnonce(unittest.TestCase):
 class TestLigneDesZeros(unittest.TestCase):
     """Chantier étude complète, R1 (decisions.md §7, Q56 ; outil Dérivée, une seule rédaction) : « f′(x) = 0 ⇔ x(x − 4) = 0 (car
     e^{…} > 0) ⇔ x = 0 ou x = 4 (produit nul) ; valeur interdite : x = 2 » : les facteurs qui ne s'annulent jamais sont retirés avec
-    leur raison, puis produit nul."""
+    leur raison, puis produit nul. R3 (§8, Q57) : les propriétés de la partie 3 de l'EC, réunies dans une parenthèse : « (numérateur
+    nul ; e^{…} > 0) », « (on divise par −2 ; e^{−2x} > 0) », « (numérateur nul ; on divise par −1) » ; « car e^{…} > 0 » quand
+    l'exponentielle est la seule raison. R3 (§8) : un zéro de f′ hors de l'ED est rejeté (« x = 0 est rejeté, car 0 ∉ ED »), et
+    s'il n'en reste aucun, « f′ ne s'annule pas sur ED »."""
     EX7 = r"e^{\frac{x^{2} + x - 2}{6x - 12}}"
 
+    @staticmethod
+    def textes(entree):
+        return [it["html"] for it in dv.etudier(entree)["signe_etapes"] if it.get("type") == "texte"]
+
     def ligne(self, entree):
-        return [it["html"] for it in dv.etudier(entree)["signe_etapes"] if it.get("type") == "texte"][-1]
+        """La ligne des zéros de f′ (les lignes de rejet et la conclusion la suivent)."""
+        return next(t for t in self.textes(entree) if t.startswith(r"\(f'(x) = "))
 
     def test_lignes_exactes(self):
         attendues = {
-            "e^((x^2+x-2)/(6x-12))": rf"\(f'(x) = 0 \iff x\,\left(x - 4\right) = 0\) (car \({self.EX7} > 0\)) "
+            "e^((x^2+x-2)/(6x-12))": rf"\(f'(x) = 0 \iff x\,\left(x - 4\right) = 0\) (numérateur nul ; \({self.EX7} > 0\)) "
                                      r"\(\iff x = 0 \text{ ou } x = 4\) (produit nul) ; valeur interdite : \(x = 2\).",
-            "(x^2-6)e^(-2x)": r"\(f'(x) = 0 \iff \left(x - 3\right)\,\left(x + 2\right) = 0\) (car \(e^{-2x} > 0\)) "
+            "(x^2-6)e^(-2x)": r"\(f'(x) = 0 \iff \left(x - 3\right)\,\left(x + 2\right) = 0\) (on divise par \(-2\) ; \(e^{-2x} > 0\)) "
                               r"\(\iff x = -2 \text{ ou } x = 3\) (produit nul).",
-            "e^(-x^2)": r"\(f'(x) = 0 \iff x = 0\) (car \(e^{-x^{2}} > 0\)).",
-            "e^x(6-e^x)": r"\(f'(x) = 0 \iff 3 - e^{x} = 0\) (car \(e^{x} > 0\)) \(\iff x = \ln(3)\).",
-            "e^(2/(x^2-4))": r"\(f'(x) = 0 \iff x = 0\) (car \(e^{\frac{2}{x^{2} - 4}} > 0\)) ; valeurs interdites : \(x = -2\) ; \(x = 2\).",
-            "x^3-3x": r"\(f'(x) = 0 \iff \left(x + 1\right)\,\left(x - 1\right) = 0 \iff x = -1 \text{ ou } x = 1\) (produit nul).",
-            "x^3": r"\(f'(x) = 0 \iff x^{2} = 0 \iff x = 0\).",
-            "(x^2-1)/(x-3)": r"\(f'(x) = 0 \iff x^{2} - 6x + 1 = 0 \iff x = 3 - 2\sqrt{2} \text{ ou } x = 3 + 2\sqrt{2}\) ; "
-                             r"valeur interdite : \(x = 3\).",
+            "x/(x^2+1)": r"\(f'(x) = 0 \iff \left(x + 1\right)\,\left(x - 1\right) = 0\) (numérateur nul ; on divise par \(-1\)) "
+                         r"\(\iff x = -1 \text{ ou } x = 1\) (produit nul).",
+            "e^(-x^2)": r"\(f'(x) = 0 \iff x = 0\) (on divise par \(-2\) ; \(e^{-x^{2}} > 0\)).",
+            "(x-1)e^x": r"\(f'(x) = 0 \iff x = 0\) (car \(e^{x} > 0\)).",
+            "e^x(6-e^x)": r"\(f'(x) = 0 \iff 3 - e^{x} = 0\) (on divise par \(2\) ; \(e^{x} > 0\)) \(\iff x = \ln(3)\).",
+            "e^(2/(x^2-4))": r"\(f'(x) = 0 \iff x = 0\) (numérateur nul ; on divise par \(-4\) ; \(e^{\frac{2}{x^{2} - 4}} > 0\)) ; "
+                             r"valeurs interdites : \(x = -2\) ; \(x = 2\).",
+            "x^3-3x": r"\(f'(x) = 0 \iff \left(x + 1\right)\,\left(x - 1\right) = 0\) (on divise par \(3\)) "
+                      r"\(\iff x = -1 \text{ ou } x = 1\) (produit nul).",
+            "x^3": r"\(f'(x) = 0 \iff x^{2} = 0\) (on divise par \(3\)) \(\iff x = 0\).",
+            "(x^2-1)/(x-3)": r"\(f'(x) = 0 \iff x^{2} - 6x + 1 = 0\) (numérateur nul) \(\iff x = 3 - 2\sqrt{2} \text{ ou } "
+                             r"x = 3 + 2\sqrt{2}\) ; valeur interdite : \(x = 3\).",
+            "1/(x^2-3x+2)": r"\(f'(x) = 0 \iff 2x - 3 = 0\) (numérateur nul ; on divise par \(-1\)) \(\iff x = \frac{3}{2}\) ; "
+                            r"valeurs interdites : \(x = 1\) ; \(x = 2\).",
             "x*ln(x)": r"\(f'(x) = 0 \iff \ln(x) + 1 = 0 \iff x = e^{-1}\).",
             "e^(2x)": r"\(f'(x) = 2e^{2x}\) ne s'annule jamais.",
         }
@@ -413,28 +447,100 @@ class TestLigneDesZeros(unittest.TestCase):
             with self.subTest(f=entree):
                 self.assertEqual(self.ligne(entree), attendue)
 
+    def test_zero_hors_de_l_ed_rejete(self):
+        """§8 : ln(x² − 4) ; de même pour tout zéro de f′ hors de l'ED. Oracle : f n'est pas définie au zéro rejeté (ni autour : les
+        trois points sont hors de l'ED) ; un zéro gardé est un point de l'ED."""
+        import oracle
+        attendues = {
+            "ln(x^2-4)": [r"\(f'(x) = 0 \iff x = 0\) (numérateur nul ; on divise par \(2\)).",
+                          r"\(x = 0\) est rejeté, car \(0 \notin ED\).", dv.ANNULE_PAS_SUR_ED],
+            "ln(x^2-4x)": [r"\(f'(x) = 0 \iff x - 2 = 0\) (numérateur nul ; on divise par \(2\)) \(\iff x = 2\).",
+                           r"\(x = 2\) est rejeté, car \(2 \notin ED\).", dv.ANNULE_PAS_SUR_ED],
+            "ln(x^2-1)+x^2": [r"\(f'(x) = 0 \iff x^{3} = 0\) (numérateur nul ; on divise par \(2\)) \(\iff x = 0\).",
+                              r"\(x = 0\) est rejeté, car \(0 \notin ED\).", dv.ANNULE_PAS_SUR_ED],
+        }
+        for entree, lignes in attendues.items():
+            with self.subTest(f=entree):
+                self.assertEqual(self.textes(entree), lignes)
+                r = dv.etudier(entree)
+                self.assertEqual(r["extrema"], [])
+                self.assertNotIn("0", [c for l in r["table_signe"]["rows"] if l["label"] == "f'(x)" for c in l["cells"]])
+        import re
+        entrees = CAS + TestSansOperationNeutre.ENTREES + TestFormesDuCorrige.FAMILLE + list(attendues)
+        vus = 0
+        for entree in entrees:
+            r = dv.etudier(entree)
+            if not r.get("signe_resolu"):
+                continue
+            f, textes = ed.lire(entree), self.textes(entree)
+            for t in textes:
+                m = re.fullmatch(r"\\\(x = (.+?)\\\) est rejeté, car \\\((.+?) \\notin ED\\\)\.", t)
+                if m:
+                    vus += 1
+                    z = oracle.valeur(lire_formule(m.group(1)), 0)
+                    with self.subTest(f=entree, ligne=t):
+                        self.assertEqual(m.group(1), m.group(2))
+                        self.assertFalse(oracle.definie(f, z))
+            if dv.ANNULE_PAS_SUR_ED in textes:
+                with self.subTest(f=entree):
+                    self.assertEqual(textes[-1], dv.ANNULE_PAS_SUR_ED)
+                    self.assertEqual(r["extrema"], [])
+        self.assertGreaterEqual(vus, 3)
+
+    @staticmethod
+    def decouper(ligne):
+        r"""(formules de la chaîne, propriétés) d'une ligne « \(A \iff B\) (propriété ; \(e^{…} > 0\)) \(\iff C\) … » : une formule
+        hors de toute parenthèse fait partie de la chaîne ; le texte entre parenthèses (formules comprises) est une propriété."""
+        chaine, proprietes, i, prof, courant = [], [], 0, 0, ""
+        while i < len(ligne):
+            if ligne.startswith(r"\(", i):
+                j = ligne.index(r"\)", i)
+                if prof == 0:
+                    chaine.append(ligne[i + 2:j])
+                else:
+                    courant += ligne[i:j + 2]
+                i = j + 2
+                continue
+            c = ligne[i]
+            if c == "(":
+                prof += 1
+                if prof == 1:
+                    courant = ""
+                    i += 1
+                    continue
+            elif c == ")":
+                prof -= 1
+                if prof == 0:
+                    proprietes.append(courant)
+                    i += 1
+                    continue
+            if prof:
+                courant += c
+            i += 1
+        return chaine, proprietes
+
     def test_chaine_juste_oracle(self):
         """Sur toutes les entrées de ce fichier : la ligne commence par « f′(x) = 0 ⇔ » ; le produit écrit s'annule exactement là où
-        f′ s'annule (rapport f′/produit fini et non nul en 7 points, oracle mpmath) ; chaque zéro final annule le produit et f′ ;
-        « (produit nul) » seulement si le produit a plusieurs facteurs ; chaque exponentielle citée est un facteur de f′."""
+        f′ s'annule (rapport f′/produit fini et non nul en 7 points, oracle mpmath) ; chaque zéro final annule le produit et f′ (ou est
+        rejeté, hors de l'ED) ; « (produit nul) » seulement si le produit a plusieurs facteurs ; chaque exponentielle citée est un
+        facteur de f′. Q57 : « numérateur nul » si et seulement si f′ est une fraction dont le bas dépend de x ; le numérateur de f′
+        est égal à c · produit · exponentielles citées, c étant le nombre de « on divise par c » (1 sans cette propriété)."""
         import oracle
         entrees = CAS + TestSansOperationNeutre.ENTREES + TestFormesDuCorrige.FAMILLE + [
-            "(x^2-6)e^(-2x)", "e^(-x^2)", "e^(2/(x^2-4))", "x^3", "x^4-2x^2", "x^2*ln(x)", "(x^2+1)*(x-1)^2"]
-        vues = 0
+            "(x^2-6)e^(-2x)", "e^(-x^2)", "e^(2/(x^2-4))", "x^3", "x^4-2x^2", "x^2*ln(x)", "(x^2+1)*(x-1)^2", "x/(x^2+1)",
+            "1/(x^2-3x+2)", "(x-1)e^x", "ln(x^2-4)", "x^(3/2)"]
+        vues = divisions = 0
         for entree in entrees:
             r = dv.etudier(entree)
             if not r.get("signe_resolu", True) or "signe_etapes" not in r:
                 continue
-            ligne = [it["html"] for it in r["signe_etapes"] if it.get("type") == "texte"][-1]
+            ligne = next(t for t in self.textes(entree) if t.startswith(r"\(f'(x) = "))
             if "ne s'annule jamais" in ligne:
                 continue
             vues += 1
             with self.subTest(f=entree, ligne=ligne):
-                self.assertTrue(ligne.startswith(r"\(f'(x) = 0 \iff "))
-                import re
-                chaine = re.sub(r" \(car .*?> 0\\\)\)", "", ligne.split(" ; valeur")[0]).replace(" (produit nul)", "")
-                chaine = chaine.replace(r"\(", "").replace(r"\)", "").rstrip(".")
-                etapes = [e.strip() for e in chaine.split(r"\iff")]
+                chaine, proprietes = self.decouper(ligne.split(" ; valeur")[0])
+                etapes = [e.strip() for e in "".join(chaine).split(r"\iff")]
                 self.assertEqual(etapes[0], "f'(x) = 0")
                 if r"\approx" in ligne:                            # zéros approchés : ni produit ni zéros à relire
                     continue
@@ -449,16 +555,46 @@ class TestLigneDesZeros(unittest.TestCase):
                     self.assertGreater(abs(q), mpmath.mpf("1e-30"))
                 for z in finale:
                     vz = oracle.valeur(z, 0)
-                    self.assertLess(abs(oracle.derivee(f, vz)), mpmath.mpf("1e-15"))
+                    if not oracle.definie(f, vz):                   # zéro hors de l'ED : rejeté juste après
+                        self.assertIn(rf"\(x = {etapes[-1].split('x = ', 1)[1]}\) est rejeté", " ".join(self.textes(entree)))
+                        continue
+                    d = oracle.derivee(f, vz)                       # None en une borne de l'ED (x^(3/2) en 0) : f′ elle-même
+                    self.assertLess(abs(d if d is not None else oracle.valeur(fp, vz)), mpmath.mpf("1e-15"))
                     if produit is not None:
                         self.assertLess(abs(oracle.valeur(produit, vz)), mpmath.mpf("1e-30"))
-                if "(produit nul)" in ligne:
+                if "produit nul" in proprietes:
                     self.assertGreaterEqual(len(dv.aplatir(produit)[1]), 2)
-                raison = ligne.split("(car ", 1)[1].split(r" > 0\))", 1)[0] if "(car " in ligne else ""
-                for e in exposants_tex(raison):                     # chaque exponentielle citée a sa ligne dans le tableau (R7)
-                    self.assertIn("e^{" + e + "}", [l["label"] for l in r["table_signe"]["rows"]])
+                morceaux = [m.strip() for p in proprietes for m in p.split(";")]
+                exps = [e[2:-len(r" > 0\)")] for m in morceaux if m.endswith(r" > 0\)")
+                        for e in m.replace("car ", "", 1).split(" et ")]
+                for e in exps:                                      # chaque exponentielle citée a sa ligne dans le tableau (R7)
+                    self.assertIn(e, [l["label"] for l in r["table_signe"]["rows"]])
+                self.assertTrue(all(m in ("numérateur nul", "produit nul") or m.startswith(("on divise par ", "car "))
+                                    or m.endswith(r" > 0\)") for m in morceaux), morceaux)
+                self.assertTrue(all(m.startswith("car ") == (len(morceaux) - ("produit nul" in morceaux) == 1)
+                                    for m in morceaux if m.endswith(r" > 0\)")), morceaux)
+                fraction = isinstance(fp, ed.Op) and fp.op == "/" and not ed.sans_x(fp.b)
+                self.assertEqual("numérateur nul" in morceaux, fraction)
+                c = [m[len("on divise par "):] for m in morceaux if m.startswith("on divise par ")]
+                if not finale or (produit is None and len(finale) != 1):
+                    continue
+                divisions += bool(c)
+                haut = fp.a if fraction else fp
+                facteur = produit if produit is not None else ed.Op("-", ed.X(), finale[0])
+                for e in exps:
+                    facteur = ed.Op("*", facteur, lire_formule(e))
+                if c:
+                    facteur = ed.Op("*", lire_formule(c[0][2:-2]), facteur)
+                testes = 0
+                for x in (-2.7, -1.4, -0.45, 0.3, 1.15, 2.6, 4.2):
+                    a, b = oracle.valeur(haut, x), oracle.valeur(facteur, x)
+                    if a is None or b is None:
+                        continue
+                    testes += 1
+                    self.assertLess(abs(a - b), mpmath.mpf("1e-25") * (1 + abs(a)), (x, a, b))
+                self.assertGreaterEqual(testes, 3)
         self.assertGreaterEqual(vues, 25)
-
+        self.assertGreaterEqual(divisions, 8)
 
 if __name__ == "__main__":
     unittest.main()

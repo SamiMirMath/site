@@ -56,8 +56,11 @@ facteur évident ou affine (seulement le zéro d'une affine) : la ligne du table
 f'(x) est du signe de … », de « Bilan », de « Un produit est nul si et seulement si … », de « On étudie le
 signe de chaque facteur ». Avant le tableau, une seule ligne : zéros et valeurs interdites. Dans l'outil Dérivée (chantier
 étude complète, Q56), elle part de « f'(x) = 0 », garde les facteurs du numérateur qui ne sont pas des exponentielles, retire
-chaque exponentielle avec sa raison, puis « produit nul » : « f'(x) = 0 ⇔ x(x − 4) = 0 (car e^{…} > 0) ⇔ x = 0 ou x = 4
-(produit nul) ; valeur interdite : x = 2 » (x − a = 0 s'écrit directement x = a).
+le dénominateur, la constante et chaque exponentielle avec leurs propriétés, réunies dans une parenthèse (Q57 : celles de la
+partie 3 de l'Étude complète), puis « produit nul » : « f'(x) = 0 ⇔ x(x − 4) = 0 (numérateur nul ; e^{…} > 0) ⇔ x = 0 ou x = 4
+(produit nul) ; valeur interdite : x = 2 », « (on divise par −2 ; e^{−2x} > 0) », « (numérateur nul ; on divise par −1) » ;
+« (car e^{…} > 0) » quand l'exponentielle est la seule raison (x − a = 0 s'écrit directement x = a). Un zéro hors de l'ED est
+rejeté : « x = 0 est rejeté, car 0 ∉ ED », puis, s'il n'en reste aucun, « f′ ne s'annule pas sur ED » (ln(x² − 4)).
 
 **R8. Limites : le tableau de signes est TOUJOURS donné pour un dénominateur ou un argument de ln qui
 tend vers 0, même affine** (x − 3, x − 5), en tête de l'étude. Justification courte dans la ligne de la
@@ -90,7 +93,8 @@ Seules les opérations neutres sont supprimées : jamais « + 0 », « − 0 »,
 (u'(x) = 8x, pas 8x + 0). u, u', v, v' dans un tableau 2 × 2, comme le corrigé (colonnes u | v ; lignes fonction | dérivée),
 après « On applique la règle du produit (du quotient), …, avec : » ; si les deux colonnes ne tiennent pas côte à côte (320 px),
 elles s'empilent dans l'ordre u, u', v, v' (composant commun `.uv` ; chantier étude complète, D8, Q32) ; l'étape délicate (chasser
-une racine du numérateur) est écrite.
+une racine du numérateur) est écrite. Un polynôme en eˣ est développé d'abord (D7b), et la dernière ligne écrit la somme des
+dérivées puis sa mise en évidence : « f'(x) = 6eˣ − 2e^{2x} = 2eˣ(3 − eˣ) (mise en évidence de 2eˣ) » (chantier étude complète, §8).
 
 **R12. Vouvoiement.** L'enseignant vouvoie ses élèves : tout texte qui leur est destiné vouvoie — messages d'erreur
 (« Écrivez une équation », « Ouvrez une parenthèse : ln(x). », « Choisissez une autre lettre »), invites des pages (« Cliquez sur … »,
@@ -220,7 +224,7 @@ Asymptote horizontale : y = 0.
 ### 4. √(4x² + 1)/(x + 2) : signe de f' (Dérivée) et limite en −∞
 
 ```
-f'(x) = 0 ⇔ 8x − 1 = 0 ⇔ x = 1/8 ; valeur interdite : x = −2.
+f'(x) = 0 ⇔ 8x − 1 = 0 (numérateur nul) ⇔ x = 1/8 ; valeur interdite : x = −2.
 
 x           | −∞     −2     1/8     +∞
 8x − 1      |    −   ‖   −   0   +

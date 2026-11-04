@@ -665,6 +665,41 @@ Dérivée, Limites, Factorisation, Exp-log ne changent pas (leurs instantanés d
    e^(1/x), x/(x²+1), dans `docs/chantiers/etude-complete/captures/` ; vérifier que ce dossier n'est ni publié ni collecté.
 5. Suite complète ; temps natif ; commit « EC P9 : … ».
 
+### R3 (04.11.2026, session 3, branche `etude-complete-r3`)
+
+Corrections après la session 2 (`decisions.md` §8), branche `etude-complete-r3` créée depuis `main` à jour (875b7d7). Un commit
+« EC R3 : … », qui verse aussi la nouvelle version de `decisions.md` (§8, Q50 marquée « confirmé par l'enseignant le 04.11.2026 »).
+1. **Outil Dérivée, Q57** (`derivee_variations._ligne_zeros`, `_numerateur_nul`) : les propriétés de la partie 3 de l'EC, réunies
+   dans une parenthèse, dans l'ordre des exemples de §8 : « numérateur nul » (f′ est une fraction dont le bas dépend de x), « on
+   divise par c » (c : constante du numérateur ; Ex7 : le 6 part avec le dénominateur, pas de division), puis « e^{…} > 0 » ;
+   « (car e^{…} > 0) » quand l'exponentielle est la seule raison (forme de Q56, gardée).
+2. **Outil Dérivée, ln(x² − 4)** : vérifié, aucune ligne ne rejetait x = 0 (« f′(x) = 0 ⇔ x = 0. »). Un zéro de f′ hors de l'ED est
+   rejeté par la phrase de la partie 3 (« x = 0 est rejeté, car 0 ∉ ED. ») et, s'il n'en reste aucun, « f′ ne s'annule pas sur ED. »
+   (une ligne chacune, après la ligne des zéros) ; de même ln(x² − 4x) (x = 2), ln(x² − 1) + x² (x = 0). Le tableau n'avait déjà pas
+   de colonne en 0 (DV-14).
+3. **Outil Dérivée, D7b** (`_mise_en_evidence_finale`) : la dernière ligne « f′(x) = 2eˣ(3 − eˣ). » devient « f′(x) = 6eˣ − 2e^{2x} =
+   2eˣ(3 − eˣ) (mise en évidence de 2eˣ) » : somme des dérivées des termes de la forme développée (dans l'ordre de la réduction),
+   puis f′ ; facteur mis en évidence = constante de f′ fois ses facteurs c·e^{kx}. Garde-fous : la somme est égale à f′ et le
+   facteur fois le reste aussi (SymPy et sonde, `_egaux`) ; un seul terme dérivé ((eˣ + 1)(eˣ − 1) : 2e^{2x}) ou un doute : la ligne
+   d'avant.
+4. **EC, Q66** (`parties.denominateurs_ecrits`, `lignes_du_tableau`) : une ligne par facteur du dénominateur factorisé en partie 1 :
+   chaîne Somme-Produit de la carte de condition (1/(x² − 3x + 2) → x − 1, x − 2) ou première ligne de l'outil ED « On met x en
+   évidence : x² − 4x = x(x − 4) » (→ x, x − 4 ; 1/(2x² − 4x) → x, 2x − 4, comme écrit). Les lignes suivantes de l'outil ED ne sont pas
+   suivies (1/(x³ − 4x) : x, x² − 4 ; question 88). Un facteur écrit à la fois au numérateur et au dénominateur ((x − 1)/(x² − 3x +
+   2)) : le dénominateur reste entier (le numérateur garde sa factorisation, Q23). Garde-fou de Q23 inchangé (produit des lignes = f,
+   SymPy et sonde). Au passage, un numérateur et un dénominateur qui auraient fusionné en un exposant nul ((x² − 4x + 3)/(x − 1)) :
+   lignes d'avant.
+5. **EC, Q50** (`commun/graphique.js`, seule page : EC) : une échelle par axe (`echelleX`, `echelleY` dans `__rendu`), l'écran montre
+   exactement la fenêtre du moteur ; zoom (boutons, molette), glisser et pincer à deux doigts adaptés (les deux échelles changent du
+   même facteur ; le point sous les doigts reste sous les doigts). Cadrage Python inchangé (§3, Q49, Q51) : aucun instantané
+   `resoudre` du graphique ne change ; les 48 empreintes de `graphique-traces.json` changent toutes.
+6. **Constat seul, lignes coupées à 390 px** : voir « À relire », R3.
+7. Tests : `test_derivee_narration.py` (`TestLigneDesZeros` : lignes exactes de Q57, rejet hors de l'ED avec oracle, oracle « numérateur
+   nul ⇔ bas en x » et « numérateur = c · produit · exponentielles citées » ; D7b : ligne exacte et oracle de la somme et du facteur) ;
+   `test_facteurs_evidents.py` (exemple 4 du guide) ; `test_parties_ec.py` (`TestLignesDuDenominateur` : lignes, facteurs écrits en
+   partie 1, signes contre l'oracle, garde-fous forcés) ; `test_graphique.py` (échelles par axe, nouveau `test_q50_fenetre_affichee_
+   telle_quelle` à 390 et 1100 px). Guide (R7, R11, exemple 4), spécifications (Dérivée DV-18, EC), `choix-techniques.md`.
+
 ## Temps natif de etudier() (s, médiane de 3 processus neufs)
 
 | Partie | Ex7 | a | b | c | d |
@@ -682,6 +717,7 @@ Dérivée, Limites, Factorisation, Exp-log ne changent pas (leurs instantanés d
 | R2 | 0,67 | 0,03 | 0,42 | 0,30 | 0,24 |
 | P6 | 0,76 | 0,03 | 0,41 | 0,27 | 0,27 |
 | P9 | 0,73 | 0,03 | 0,35 | 0,26 | 0,23 |
+| R3 | 0,84 | 0,03 | 0,40 | 0,28 | 0,25 |
 
 P3 ne touche pas `etudier()` ; la partie 1 (`parties.cartes_domaine`, appelée par `resoudre`) coûte en plus 0,5 ms (Ex7), 0,2 ms (d),
 moins de 0,01 ms (a, b, c).
@@ -793,6 +829,7 @@ Les captures sont dans `docs/` : **non publiées** et **non collectées**. Véri
 | P9 | 1290 passés, 1 xfail (P10) (700 s) | 121 passés (930 s, dont le nouveau test `test_largeurs.py::test_corrige_et_bilan_de_l_etude`) ; code de retour 0 (2ᵉ lancement : le 1ᵉʳ a échoué dans la suite Python, 4 tests, voir Écarts, P9 ; la suite de pages n'avait pas été lancée) | 04.11.2026 |
 | P9 (contrôle du chef d'orchestre) | 1290 passés, 1 xfail (708 s) | 120 passés, 1 échec : `test_clavier.py::test_a_deux_formules…` (le test instable, même symptôme : « effacer » laisse `(x^2-1)/(x-3)`) ; ce test seul sur P9 : 5 réussites sur 6 → P9 acceptée | 04.11.2026 |
 | Résumé de la session 2 (sur 72ff3bb, suivi.md seul modifié) | 1290 passés, 1 xfail (720 s) | 121 passés (940 s) ; code de retour 0 (1ᵉʳ lancement) | 04.11.2026 |
+| R3 (branche etude-complete-r3) | 1296 passés, 1 xfail (708 s) | 122 passés (953 s, dont le nouveau `test_q50_fenetre_affichee_telle_quelle`) ; code de retour 0 (1ᵉʳ lancement) | 04.11.2026 |
 
 ## Écarts acceptés
 
@@ -1310,3 +1347,46 @@ Les captures sont dans `docs/` : **non publiées** et **non collectées**. Véri
   Hors instantanés (corpus) : b fenêtre [−5,17 ; 5,72] ; [−143,3 ; 61,4] (avant [−4,5 ; 5,5] ; [−144,9 ; 69,5]), points (±√6 ; 0) et
   (0 ; −6) ; c [−2 ; 3,79] ; [−5,06 ; 11,81] (avant [−0,9 ; 3,1] ; [−51,3 ; 21,1]), points (ln 6 ; 0) et (0 ; 5) ; a inchangée.
   Captures relues (360 et 700 px) : Ex7, b, c, d, x/√(x²), e^(1/x), (x² − 1)/(x − 1).
+
+- **R3** (outil **Dérivée**, donc aussi EC ; puis EC seule pour Q66 et Q50). Instantanés modifiés, vérifié par programme (seules
+  changent les lignes ci-dessous ; ED, Limites, Factorisation, Exp-log : instantanés identiques ; aucun bloc graphique `resoudre`
+  ne change) :
+  - Dérivée : `tests/python/instantanes/derivee-variations.json` (19 entrées sur 32), `tests/python/instantanes/resoudre/derivee-variations.json`
+    (19 sur 32), `tests/pages/references/derivee-variations.json` (19 sur 33) : les mêmes 19 entrées, seule la ligne des zéros de f′
+    change (et, pour ln(x² − 4), deux lignes s'y ajoutent).
+  - EC : `tests/python/instantanes/etude-complete.json` (14 sur 21), `tests/python/instantanes/resoudre/etude-complete.json` (14 sur 21),
+    `tests/pages/references/etude-complete.json` (14 sur 22) : la ligne des zéros de f′ (14 entrées), la dernière ligne de la dérivée
+    de c (D7b) et les lignes du tableau de f de 1/(x² − 3x + 2) (Q66).
+  - `tests/pages/references/graphique-traces.json` : les 48 empreintes (Q50 : chaque appel de dessin dépend des deux échelles).
+
+  | Entrée | Avant | Après |
+  |---|---|---|
+  | Ex7 (Dérivée, EC) ; de même `e^((x^2+1)/(2x))` (Dérivée) | f′(x) = 0 ⇔ x(x − 4) = 0 (car e^{…} > 0) ⇔ x = 0 ou x = 4 (produit nul) ; valeur interdite : x = 2. | f′(x) = 0 ⇔ x(x − 4) = 0 (numérateur nul ; e^{…} > 0) ⇔ x = 0 ou x = 4 (produit nul) ; valeur interdite : x = 2. |
+  | b `(x^2-6)e^(-2x)` (EC) | … = 0 (car e^{−2x} > 0) ⇔ … | … = 0 (on divise par −2 ; e^{−2x} > 0) ⇔ … |
+  | a `e^(-x^2)` (EC) ; `e^(x^2)` (Dérivée) ; `x^2*e^(-x)` (Dérivée, EC) | f′(x) = 0 ⇔ x = 0 (car e^{−x²} > 0) ; (car e^{x²} > 0) ; x(x − 2) = 0 (car e^{−x} > 0) | (on divise par −2 ; e^{−x²} > 0) ; (on divise par 2 ; e^{x²} > 0) ; (on divise par −1 ; e^{−x} > 0) |
+  | c `e^x(6-e^x)` (EC) | f′(x) = 0 ⇔ 3 − eˣ = 0 (car eˣ > 0) ⇔ x = ln(3) ; dernière ligne de la dérivée : « f′(x) = 2eˣ(3 − eˣ). » | (on divise par 2 ; eˣ > 0) ; « f′(x) = 6eˣ − 2e^{2x} = 2eˣ(3 − eˣ) (mise en évidence de 2eˣ) » (D7b) |
+  | d `e^(2/(x^2-4))` (EC) | f′(x) = 0 ⇔ x = 0 (car e^{2/(x² − 4)} > 0) ; valeurs interdites : x = −2 ; x = 2. | f′(x) = 0 ⇔ x = 0 (numérateur nul ; on divise par −4 ; e^{2/(x² − 4)} > 0) ; … |
+  | `e^((-2x^2+3x-1)/(3x-6))` (Dérivée) | 2x² − 8x + 5 = 0 (car e^{…} > 0) | 2x² − 8x + 5 = 0 (numérateur nul ; on divise par −1 ; e^{…} > 0) |
+  | `x/(x^2+1)` (Dérivée, EC) ; `1/(x^2-3x+2)` (EC) | (x + 1)(x − 1) = 0 ⇔ … (produit nul) ; 2x − 3 = 0 ⇔ x = 3/2 | (x + 1)(x − 1) = 0 (numérateur nul ; on divise par −1) ⇔ … (produit nul) ; 2x − 3 = 0 (numérateur nul ; on divise par −1) ⇔ x = 3/2 |
+  | `(x^2-1)/(x-3)`, `ln(x)/x` (Dérivée, EC) ; `sqrt(x^2-4x+5)`, `(x^2+1)^(1/2)` (Dérivée) | x² − 6x + 1 = 0 ⇔ … ; 1 − ln(x) = 0 ⇔ x = e ; x − 2 = 0 ⇔ x = 2 ; x = 0 | … = 0 (numérateur nul) ⇔ … ; f′(x) = 0 ⇔ x = 0 (numérateur nul) |
+  | `x^3-3x`, `x^4-2x^2` (Dérivée, EC) ; `x^2-4x+3`, `3(x*ln(x))` (Dérivée, EC) ; `3x^2-4x`, `x^3`, `(x-1)^3`, `-x^2`, `x^(3/2)` (Dérivée) | (x + 1)(x − 1) = 0 ⇔ … ; x(x + 1)(x − 1) = 0 ; x − 2 = 0 ; ln(x) + 1 = 0 ; 3x − 2 = 0 ; x² = 0 ; (x − 1)² = 0 ; f′(x) = 0 ⇔ x = 0 ; √x = 0 | (on divise par 3), (4), (2), (3), (2), (3), (3), (−2), (3/2) après le produit (après x = 0 pour −x²) |
+  | `ln(x^2-4)` (Dérivée) | « f′(x) = 0 ⇔ x = 0. » (0 ∉ ED) | « f′(x) = 0 ⇔ x = 0 (numérateur nul ; on divise par 2). » · « x = 0 est rejeté, car 0 ∉ ED. » · « f′ ne s'annule pas sur ED. » |
+  | `1/(x^2-3x+2)` (EC, tableau de f, Q66) | lignes x² − 3x + 2, f(x) | lignes (x − 1), (x − 2), f(x) |
+
+  Inchangés : `x*ln(x)`, `x*ln(x)+x`, `x^x` (constante 1, pas de dénominateur, pas d'exponentielle : aucune propriété), les « ne
+  s'annule jamais ». Hors instantanés : `(x-1)e^x` « f′(x) = 0 ⇔ x = 0 (car eˣ > 0) » (seule raison : « car » gardé) ; Q66 :
+  1/(x² − 4x) → x, (x − 4) ; (x − 3)/(x² − x − 2) → (x − 3), (x + 1), (x − 2) ; x/(x² − 4), x/(2x² − 6x + 4) (pas de factorisation en
+  partie 1) et (x − 1)/(x² − 3x + 2) (facteur commun) : inchangés.
+
+  **Constat, lignes coupées à 390 px** (decisions.md §8, aucune correction) : mesuré dans la page réelle (Chrome sans interface, 390 px,
+  corrigé complet). Dans les cartes de limite de x/(x² + 1), la formule BH alignée (« = « −∞/+∞ » : forme indéterminée = … (mise en
+  évidence) = … ») mesure 505 px dans un bloc `.etape` de 333 px dont `overflow-x` vaut `auto` : elle **défile** horizontalement (barre
+  de défilement du bloc), elle n'est **pas tronquée** ; la page ne déborde pas (largeur de document 390 px). La capture (page entière)
+  montre le bloc dans sa position de départ, d'où la ligne qui paraît coupée. Même chose, plus courte, pour b (BH en +∞ : 347 px sur
+  333) et Ex7 (limite de l'exposant en ±∞ : 359 px sur 333) ; d : aucune formule plus large que son bloc. Question 90.
+
+  **Captures R3** (390 px, page entière, corrigé complet ; `mesurer_pyodide.py --n 0 --capture`) : `captures/b-390.png` et
+  `captures/x1-390.png` remplacent celles de P9 (versions de P9 : `git show 72ff3bb:docs/chantiers/etude-complete/captures/b-390.png`).
+  Graphe de b : x de −5,2 à 5,7, y de −143 à 61 (avant, à échelle égale : x de −80 à 80 environ, la courbe n'était qu'un trait) ;
+  x/(x² + 1) : x de −10,1 à 10,1, y de −1 à 1 (avant : y de −10 à 10, courbe plate). Sur b, à 390 px, les étiquettes « (2,45 ; 0) »
+  et « (3 ; 0,01) » se chevauchent encore, et « (0 ; −6) » recouvre les graduations 0 et 1 de l'axe des x (question 89).

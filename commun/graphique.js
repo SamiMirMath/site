@@ -1,5 +1,6 @@
 /* Graphique de fonction réutilisable : dessin d'une courbe, de ses asymptotes, de ses extrema et de ses trous
-   sur un <canvas>, à échelle égale en x et en y.
+   sur un <canvas>. Chaque axe a sa propre échelle (chantier etude-complete, decisions.md §8, Q50 : plus d'échelle égale, comme
+   le corrigé .tex) : l'écran montre exactement la fenêtre voulue.
 
    Le dessin ne mesure aucun texte (pas de measureText) : tout ce qu'il écrit sur le canvas se déduit de la fenêtre et des
    données, donc la même suite d'appels sur toutes les machines (tests/pages/graphique.py enregistre et compare cette trace).
@@ -12,7 +13,7 @@
      asymptotes   [{ genre, … }]                         horizontale, verticale, oblique (pointillé) ; trou (rond vide)
      vista        fenêtre voulue { xmin, xmax, ymin, ymax } (zoom, déplacement) ; g si absente
      forcerClair  couleurs du thème clair quel que soit le thème de l'écran (juste avant l'impression)
-   Laisse dans canvas.__rendu la fenêtre réellement affichée (après correction d'aspect) : x/y min/max, échelle, marges. */
+   Laisse dans canvas.__rendu la fenêtre affichée : x/y min/max, échelles echelleX et echelleY (px par unité), marges. */
 
 export function joliPas(etendue){
   const brut=etendue/8, exp=Math.floor(Math.log10(brut)), base=brut/Math.pow(10,exp);
@@ -43,21 +44,18 @@ export function dessinerGraphique(canvas, g, extrema, asymptotes, vista, forcerC
   const padL=14,padR=28,padT=24,padB=14;
   const availW=W-padL-padR, availH=H-padT-padB;
 
-  // Cadrage à échelle égale en x et y (comme GeoGebra) : `vista` est la fenêtre
-  // de données qu'on veut voir (après zoom/déplacement) ; on l'étend sur l'axe
-  // le plus "serré" pour que 1 unité fasse le même nombre de pixels horizontalement
-  // et verticalement — sinon les pentes (ex. une asymptote oblique à 45°) seraient
-  // faussées.
+  // Une échelle par axe (Q50) : `vista` est la fenêtre de données qu'on veut voir (après zoom/déplacement), affichée telle
+  // quelle — à échelle égale, la fenêtre s'étendait sur l'axe le plus « serré » et la courbe de (x² − 6)e^(−2x) n'était qu'un
+  // trait (x de −80 à 80), celle de x/(x² + 1) était plate.
   const boite=vista||g;
   const cx=(boite.xmin+boite.xmax)/2, cy=(boite.ymin+boite.ymax)/2;
   const rx=Math.max((boite.xmax-boite.xmin)/2, 1e-6), ry=Math.max((boite.ymax-boite.ymin)/2, 1e-6);
-  const echelle=Math.min(availW/(2*rx), availH/(2*ry));
-  const rx2=availW/(2*echelle), ry2=availH/(2*echelle);
-  const xmin=cx-rx2, xmax=cx+rx2, ymin=cy-ry2, ymax=cy+ry2;
-  canvas.__rendu={xmin,xmax,ymin,ymax,echelle,padL,padT,availH};
+  const echelleX=availW/(2*rx), echelleY=availH/(2*ry);
+  const xmin=cx-rx, xmax=cx+rx, ymin=cy-ry, ymax=cy+ry;
+  canvas.__rendu={xmin,xmax,ymin,ymax,echelleX,echelleY,padL,padT,availH};
 
-  const X=x=>padL+(x-xmin)*echelle;
-  const Y=y=>padT+availH-(y-ymin)*echelle;
+  const X=x=>padL+(x-xmin)*echelleX;
+  const Y=y=>padT+availH-(y-ymin)*echelleY;
 
   let colFg,colMuted,colGrid,colAccent,colGood,colBg;
   if(forcerClair){
@@ -183,7 +181,7 @@ export function monterGraphique({ canvas: cv, plus, moins, reinit, message }, { 
   cv.__vista={xmin:g.xmin, xmax:g.xmax, ymin:g.ymin, ymax:g.ymax};
   const redessiner=()=>dessinerGraphique(cv, cv.__g, extrema, asymptotes, cv.__vista);
   // À chaque zoom/déplacement, on réinterroge le moteur (fenetre) pour EXACTEMENT la fenêtre
-  // affichée (cv.__rendu, posée par dessinerGraphique après correction d'aspect),
+  // affichée (cv.__rendu, posée par dessinerGraphique),
   // avec une densité liée à la largeur en pixels. Pas de cache : toujours la
   // bonne donnée pour ce qui est réellement affiché. Un court délai évite de
   // spammer pendant un zoom/glissement continu.
@@ -215,8 +213,8 @@ export function monterGraphique({ canvas: cv, plus, moins, reinit, message }, { 
   // curseur/les doigts reste à sa place pendant le zoom, comme Desmos/GeoGebra.
   const zoomVersPoint=(k, px, py)=>{
     const v=cv.__rendu; if(!v) return zoomer(k);
-    const dx=v.xmin+(px-v.padL)/v.echelle;
-    const dy=v.ymin+(v.availH-(py-v.padT))/v.echelle;
+    const dx=v.xmin+(px-v.padL)/v.echelleX;
+    const dy=v.ymin+(v.availH-(py-v.padT))/v.echelleY;
     cv.__vista={
       xmin:dx-(dx-v.xmin)*k, xmax:dx+(v.xmax-dx)*k,
       ymin:dy-(dy-v.ymin)*k, ymax:dy+(v.ymax-dy)*k,
@@ -252,7 +250,7 @@ export function monterGraphique({ canvas: cv, plus, moins, reinit, message }, { 
     geste={
       r:Object.assign({},r),                                          // fenêtre affichée au début du geste
       d0:Math.hypot(p2.x-p1.x,p2.y-p1.y)||1,                          // écart des doigts au début
-      X:r.xmin+(mx-r.padL)/r.echelle, Y:r.ymin+(r.availH-(my-r.padT))/r.echelle,   // point de la courbe sous le milieu des doigts
+      X:r.xmin+(mx-r.padL)/r.echelleX, Y:r.ymin+(r.availH-(my-r.padT))/r.echelleY,   // point de la courbe sous le milieu des doigts
     };
   };
   const appliquerGeste=()=>{
@@ -260,12 +258,14 @@ export function monterGraphique({ canvas: cv, plus, moins, reinit, message }, { 
     const {r,d0,X,Y}=geste;
     const d=Math.hypot(p2.x-p1.x,p2.y-p1.y)||1;
     const mx=(p1.x+p2.x)/2, my=(p1.y+p2.y)/2;
-    const largeur=(r.xmax-r.xmin)*r.echelle, hauteur=r.availH;        // zone de tracé en pixels
-    // doigts qui s'écartent → échelle plus grande ; la demi-étendue de la fenêtre ne descend jamais sous 1e-4
-    const e=Math.min(r.echelle*d/d0, Math.min(largeur,hauteur)/2e-4);
+    const largeur=(r.xmax-r.xmin)*r.echelleX, hauteur=r.availH;       // zone de tracé en pixels
+    // doigts qui s'écartent → les deux échelles grandissent du même facteur ; la demi-étendue de la fenêtre ne descend
+    // jamais sous 1e-4
+    const k=Math.min(d/d0, largeur/(2e-4*r.echelleX), hauteur/(2e-4*r.echelleY));
+    const ex=r.echelleX*k, ey=r.echelleY*k;
     // le point (X, Y) doit se trouver sous le milieu actuel des doigts
-    const xmin=X-(mx-r.padL)/e, ymin=Y-(r.availH-(my-r.padT))/e;
-    cv.__vista={xmin, xmax:xmin+largeur/e, ymin, ymax:ymin+hauteur/e};
+    const xmin=X-(mx-r.padL)/ex, ymin=Y-(r.availH-(my-r.padT))/ey;
+    cv.__vista={xmin, xmax:xmin+largeur/ex, ymin, ymax:ymin+hauteur/ey};
     redessiner();
     reechantillonner();
   };
@@ -291,8 +291,8 @@ export function monterGraphique({ canvas: cv, plus, moins, reinit, message }, { 
     if(glisse && pointeurs.size===1){
       const p=[...pointeurs.values()][0];
       const dxpx=p.x-glisse.mx, dypx=p.y-glisse.my;
-      const ech=(cv.__rendu||{}).echelle||1;
-      const dx=-dxpx/ech, dy=dypx/ech;
+      const r=cv.__rendu||{};
+      const dx=-dxpx/(r.echelleX||1), dy=dypx/(r.echelleY||1);
       cv.__vista={xmin:glisse.vista.xmin+dx, xmax:glisse.vista.xmax+dx, ymin:glisse.vista.ymin+dy, ymax:glisse.vista.ymax+dy};
       redessiner();
       reechantillonner();

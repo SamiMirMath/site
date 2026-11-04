@@ -835,6 +835,41 @@ def _tex_termes(termes):
     return out
 
 
+def _mise_en_evidence_finale(sp, reduits, fprime):
+    """Décisions EC, §8 (D7b, ligne manquante, .tex c) : la dernière ligne de la dérivée de la forme développée, « f′(x) = 6eˣ −
+    2e^{2x} = 2eˣ(3 − eˣ) (mise en évidence de 2eˣ) ». `reduits` : les termes (c, k) de la forme développée (c·e^{kx}, k = 0 pour
+    une constante) ; la somme écrite est celle de leurs dérivées (c·k·e^{kx}). Le facteur mis en évidence est la constante de f′ fois
+    ses facteurs c·e^{kx} ; il faut au moins deux termes et un facteur restant qui soit une somme. Garde-fous : la somme est égale à
+    f′ (SymPy et sonde, `_egaux`) et le facteur fois le reste redonne f′ (idem). None sinon (la ligne « f′(x) = … » reste)."""
+    termes = [(c * k, k) for c, k in reduits if k]
+    if len(termes) < 2:
+        return None
+    somme = None
+    for c, k in termes:
+        m = _exp_kx(k) if abs(c) == 1 else Op("*", Nb(abs(c)), _exp_kx(k))
+        somme = (Neg(m) if c < 0 else m) if somme is None else Op("-" if c < 0 else "+", somme, m)
+    try:
+        c_f, facs = aplatir(fprime)
+    except Exception:
+        return None
+    if any(k < 0 for _, k in facs):
+        return None
+    mis, reste = [], []
+    for h, k in facs:
+        (mis if _terme_exp(h) is not None and _terme_exp(h)[1] >= 1 else reste).append(_puiss_sure(h, k))
+    if not reste or not any(isinstance(h, Op) and h.op in "+-" for h in reste):
+        return None
+    facteur = _produit(mis) if mis else None
+    if c_f != 1:
+        facteur = Nb(c_f) if facteur is None else Op("*", Nb(c_f), facteur)
+    if facteur is None:
+        return None
+    if not _egaux(sp, [fprime, somme]) or not _egaux(sp, [fprime, Op("*", facteur, _produit(reste))]):
+        return None
+    l_somme = _tex_termes([(c, [k]) for c, k in termes])
+    return txt(rf"\(f'(x) = {l_somme} = {tex(fprime)}\) (mise en évidence de \({tex(facteur)}\))")
+
+
 def _developpe_d_abord(f, fprime):
     """Décisions EC, D7b (.tex c) : f produit de deux facteurs, chacun somme de termes c·e^{kx} (k entier ≥ 1) et de constantes
     entières, avec au moins une exponentielle dans chacun et une somme dans l'un d'eux (polynôme en eˣ, aucun x hors des
@@ -883,6 +918,9 @@ def _developpe_d_abord(f, fprime):
         return None
     if tex(_simplifier(d)) != tex(fprime):
         return None
+    fin = _mise_en_evidence_finale(sp, reduits, fprime)
+    if fin is not None and items and items[-1] == txt(rf"\(f'(x) = {tex(fprime)}\)."):
+        items[-1] = fin
     lignes = [txt("On développe d'abord (c'est plus simple à dériver) :")]
     if l1 != l2:
         lignes += [txt(rf"\(f(x) = {tex(f)} = {l1}\) (développement)"), txt(rf"\(= {l2}\) (réduction)")]
@@ -1018,11 +1056,31 @@ def _chaine_annotee(etapes):
     return " ".join(morceaux)
 
 
-def _ligne_zeros(fprime, c_const, facs, Z, D, items):
-    """La ligne qui précède le tableau (guide de rédaction, R7) : zéros de f' et valeurs interdites ; None si les zéros ne sont
-    pas des points isolés. « f'(x) = 0 ⇔ produit des facteurs du numérateur hors exponentielles = 0 (car e^{…} > 0) ⇔ … (produit
-    nul) » (decisions EC, Q56). Un facteur qui n'est pas un polynôme et qui s'annule garde l'explication de son zéro
-    (ln(x) + 1 = 0 ⇔ ln(x) = −1 : on soustrait 1), ajoutée à items avant la ligne."""
+ANNULE_PAS_SUR_ED = r"\(f'\) ne s'annule pas sur ED."
+
+
+def _numerateur_nul(fprime, c_const, facs):
+    """(f′ est une fraction dont le bas dépend de x, constante du numérateur) : la constante par laquelle la ligne des zéros divise
+    (decisions EC, §8, Q57). Ex7 : f′ = x(x − 4)e^{…}/(6(x − 2)²) → (True, 1) (le 6 part avec le dénominateur) ; x/(x² + 1) : f′ =
+    −(x + 1)(x − 1)/(x² + 1)² → (True, −1) ; b : −2(x − 3)(x + 2)e^{−2x} → (False, −2)."""
+    s, n = 1, fprime
+    while isinstance(n, Neg):
+        s, n = -s, n.a
+    if isinstance(n, Op) and n.op == "/" and not sans_x(n.b):
+        try:
+            return True, s * aplatir(n.a)[0]
+        except Exception:
+            return True, c_const
+    return any(k < 0 for _, k in facs), c_const
+
+
+def _ligne_zeros(fprime, c_const, facs, Z, D, ED, items):
+    """Les lignes qui précèdent le tableau (guide de rédaction, R7) : zéros de f' et valeurs interdites ; None si les zéros ne sont
+    pas des points isolés. « f'(x) = 0 ⇔ produit des facteurs du numérateur hors exponentielles = 0 (numérateur nul ; on divise
+    par c ; e^{…} > 0) ⇔ … (produit nul) » (decisions EC, Q56, puis §8, Q57 : les propriétés de la partie 3 de l'EC, réunies dans
+    une parenthèse ; « car e^{…} > 0 » quand c'est la seule). Un zéro hors de l'ED (ln(x² − 4) : x = 0) est rejeté, avec la phrase
+    de la partie 3 de l'EC, et s'il n'en reste aucun : « f′ ne s'annule pas sur ED » (§8). Un facteur qui n'est pas un polynôme et
+    qui s'annule garde l'explication de son zéro (ln(x) + 1 = 0 ⇔ ln(x) = −1 : on soustrait 1), ajoutée à items avant la ligne."""
     if not all(_point_isole(iv) for iv in Z):
         return None
     zeros = sorted((iv.lo for iv in Z), key=lambda p: p.val)
@@ -1049,13 +1107,20 @@ def _ligne_zeros(fprime, c_const, facs, Z, D, items):
                 explication = []
             items.extend(explication)
     finale = r" \text{ ou } ".join(f"x = {z.tex}" for z in zeros)
+    rejetes = [z for z in zeros if not contient(ED, z.val)]
     if not zeros:
         ligne = rf"\(f'(x) = {tex(fprime)}\) ne s'annule jamais"
     else:
         # decisions EC, Q56 (outil Dérivée, une seule rédaction) : on retire les facteurs qui ne s'annulent jamais avec leur raison,
-        # puis produit nul : « f′(x) = 0 ⇔ x(x − 4) = 0 (car e^{…} > 0) ⇔ x = 0 ou x = 4 (produit nul) »
+        # puis produit nul : « f′(x) = 0 ⇔ x(x − 4) = 0 (numérateur nul ; e^{…} > 0) ⇔ x = 0 ou x = 4 (produit nul) » (Q57)
         produit = tex(_produit([_puiss_sure(h, k) for h, k in autres])) + " = 0" if autres else None
-        raison = ("car " + " et ".join(rf"\({tex(h)} > 0\)" for h in expos)) if expos else None
+        fraction, c_div = _numerateur_nul(fprime, c_const, facs)
+        positives = " et ".join(rf"\({tex(h)} > 0\)" for h in expos)
+        proprietes = (["numérateur nul"] if fraction else []) + ([rf"on divise par \({qtex(c_div)}\)"] if c_div != 1 else [])
+        if proprietes:
+            raison = " ; ".join(proprietes + ([positives] if expos else []))
+        else:
+            raison = ("car " + positives) if expos else None
         etapes = [["f'(x) = 0", None]]
         if produit is not None and produit != finale:
             etapes.append([produit, raison])
@@ -1076,7 +1141,12 @@ def _ligne_zeros(fprime, c_const, facs, Z, D, items):
     if interdites:
         ligne += (" ; valeur interdite : " if len(interdites) == 1 else " ; valeurs interdites : ")
         ligne += " ; ".join(rf"\(x = {p.tex}\)" for p in interdites)
-    return ligne + "."
+    lignes = [ligne + "."]
+    # decisions EC, §8 : un zéro de f′ hors de l'ED est rejeté (phrase de la partie 3 de l'EC) ; aucun zéro dans l'ED : conclusion
+    lignes += [rf"\(x = {z.tex}\) est rejeté, car \({z.tex} \notin ED\)." for z in rejetes]
+    if zeros and len(rejetes) == len(zeros):
+        lignes.append(ANNULE_PAS_SUR_ED)
+    return lignes
 
 
 def _point_test(crit, i):
@@ -1290,11 +1360,11 @@ def etudier(entree, analyse=None):
         c_const, facs = aplatir(fprime)
     except Exception:
         c_const, facs = F(1), [(fprime, 1)]
-    ligne = _ligne_zeros(fprime, c_const, facs, Z, D, items_signe)
-    if ligne is None:                                    # zéros non isolés (f' nulle sur un intervalle…) : résolution détaillée
+    lignes_zeros = _ligne_zeros(fprime, c_const, facs, Z, D, ED, items_signe)
+    if lignes_zeros is None:                             # zéros non isolés (f' nulle sur un intervalle…) : résolution détaillée
         items_signe.extend(resolution)
     else:
-        items_signe.append(txt(ligne))
+        items_signe.extend(txt(l) for l in lignes_zeros)
 
     # 2) et 3) Points critiques (zéros de f' ∪ bornes finies du domaine d'étude) et tableau de signes (R7), une ligne par
     # facteur de f' puis la ligne f'(x) : `tableau_signes`, partagé avec l'Étude complète (tableau de f).

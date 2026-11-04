@@ -285,15 +285,75 @@ def blocs_condition(c, A):
     """Les blocs d'une condition (`c` : condition de l'outil ED, `A` : son arbre) : un dénominateur résolu en chaîne courte (D3) quand
     la chaîne existe et que ses deux garde-fous passent (même ensemble que l'outil ED, valeur nulle aux racines) ; sinon les blocs de
     l'outil ED, tels quels."""
-    if c["genre"] == "den" and c["resolu"] and A is not None and tex(A) == c["source_tex"]:
-        if isinstance(A, X):
-            return [so.formule(c["cond_tex"])]
-        res = resolution_denominateur(A)
-        if res is not None:
-            membres, racines = res
-            if _ensemble_prive_de(racines) == c["E_tex"] and all(_proches(evaluer(A, v), 0.0) for _, v in racines):
-                return [so.formule(c["cond_tex"]), so.texte("On résout " + chaine_en_ligne(membres) + ".", style="etape")]
+    if c["genre"] == "den" and c["resolu"] and A is not None and tex(A) == c["source_tex"] and isinstance(A, X):
+        return [so.formule(c["cond_tex"])]
+    res = _chaine_condition(c, A)
+    if res is not None:
+        return [so.formule(c["cond_tex"]), so.texte("On résout " + chaine_en_ligne(res[0]) + ".", style="etape")]
     return resoudre_ed.blocs_condition(c)
+
+
+def _chaine_condition(c, A):
+    """La chaîne courte (D3) que `blocs_condition` écrit pour la condition `c` d'arbre `A` : (membres, racines) quand elle existe et
+    que ses deux garde-fous passent (même ensemble que l'outil ED, valeur nulle aux racines) ; None sinon (lignes de l'outil ED)."""
+    if not (c["genre"] == "den" and c["resolu"] and A is not None and tex(A) == c["source_tex"]) or isinstance(A, X):
+        return None
+    res = resolution_denominateur(A)
+    if res is None:
+        return None
+    membres, racines = res
+    if _ensemble_prive_de(racines) == c["E_tex"] and all(_proches(evaluer(A, v), 0.0) for _, v in racines):
+        return res
+    return None
+
+
+MISE_EN_EVIDENCE_ED = re.compile(r"On met \\\((.+?)\\\) en évidence : \\\((.+?) = (.+?)\\\)\.?")
+
+
+def _sans_mise_en_page(t):
+    return re.sub(r"\\left|\\right|\\,|\s", "", t)
+
+
+def denominateurs_ecrits(analyse):
+    """Question 66 (decisions.md §8) : les dénominateurs que les cartes de condition de la partie 1 écrivent factorisés, {écriture tex
+    du dénominateur : (c, k, facteurs)} (dénominateur = c·xᵏ·∏ facteurs, polynômes), lus comme `cartes_domaine` les écrit : chaîne
+    Somme-Produit de l'EC (« x² − 3x + 2 = 0 ⇔ (x − 1)(x − 2) = 0 (Somme-Produit) ») ou première ligne de l'outil ED « On met x en
+    évidence : x² − 4x = x(x − 4) » (alors xᵏ et le facteur restant, tel que cette ligne l'écrit ; les lignes suivantes de l'outil
+    ED ne sont pas suivies : x³ − 4x → x, x² − 4). Rien d'autre : un dénominateur résolu sans factorisation (x² − 4 = 0 ⇔ x² = 4,
+    Δ) garde sa ligne. Le garde-fou (produit des lignes = f) est celui de `lignes_du_tableau`."""
+    res_ed, f, _ = analyse
+    arbres, out = [], {}
+    try:
+        conditions(f, arbres)
+    except Exception:
+        return out
+    for c in res_ed.get("conditions", []):
+        genre, A = arbres[c["num"] - 1] if c["num"] <= len(arbres) else (None, None)
+        if genre != c["genre"] or genre != "den" or A is None or not c.get("resolu") or tex(A) != c["source_tex"]:
+            continue
+        P = polynome_ecrit(A)
+        if P is None:
+            continue
+        chaine = _chaine_condition(c, A)
+        if chaine is not None:
+            if any(not isinstance(m, str) and m[1] == "Somme-Produit" for m in chaine[0]):
+                r = _factoriser(P)
+                if r is not None:
+                    out[tex(A)] = r[1:]
+            continue
+        etapes = [e for e in c.get("etapes", []) if e.get("type") == "texte"]
+        m = MISE_EN_EVIDENCE_ED.fullmatch(etapes[0]["html"]) if etapes else None
+        if m is None or m.group(2) != tex(A):
+            continue
+        P = pn(P)
+        k = next(i for i, a in enumerate(P) if a != 0)
+        Q = P[k:]                                    # l'outil ED met xᵏ seul en évidence : P = xᵏ·Q
+        devant = "x" if k == 1 else f"x^{{{k}}}"
+        if k == 0 or deg(Q) < 1 or m.group(1) != devant or \
+                _sans_mise_en_page(devant + "(" + ptex(Q, "x") + ")") != _sans_mise_en_page(m.group(3)):
+            continue
+        out[tex(A)] = (F(1), k, [Q])
+    return out
 
 
 def cartes_domaine(enonce, analyse):
@@ -1159,8 +1219,9 @@ def _positives(expos, f, ivs, seule):
     return lignes
 
 
-def _zeros_et_signe(f, ivs, ED, sp, mpmath):
-    """(blocs de la carte des zéros, tableau ou None, zéros de f dans l'ED : points confirmés). NonTraite / Doute remontent."""
+def _zeros_et_signe(f, ivs, ED, sp, mpmath, denominateurs=None):
+    """(blocs de la carte des zéros, tableau ou None, zéros de f dans l'ED : points confirmés). NonTraite / Doute remontent.
+    `denominateurs` : les dénominateurs factorisés en partie 1 (`denominateurs_ecrits`, question 66)."""
     import derivee_variations as dv
     c, facs = aplatir(f)
     expos = []
@@ -1228,7 +1289,11 @@ def _zeros_et_signe(f, ivs, ED, sp, mpmath):
     zeros_ed = [z for z in zeros if z not in rejetes]
     D = fusion(ED)
     Z = points(zeros_ed)
-    c_tab, facs_tab = lignes_du_tableau(f, c, facs, sp, mpmath) if ecrite else (c, facs)
+    denominateurs = denominateurs or {}
+    if ecrite or any(k < 0 and tex(h) in denominateurs for h, k in facs):
+        c_tab, facs_tab = lignes_du_tableau(f, c, facs, sp, mpmath, numerateur=ecrite, denominateurs=denominateurs)
+    else:
+        c_tab, facs_tab = c, facs
     crit, lignes, _ = dv.tableau_signes(f, Z, D, ED, "f(x)", c_tab, facs_tab)
     cellules = lignes[-1]["cells"]
     confirmer_signe(f, fe, crit, cellules, zeros_ed, ivs, sp, mpmath)
@@ -1279,31 +1344,58 @@ def arbre_polynome(P):
     return out if out is not None and tex(out) == ptex(P, "x") else None
 
 
-def lignes_du_tableau(f, c, facs, sp, mpmath):
+def lignes_du_tableau(f, c, facs, sp, mpmath, numerateur=True, denominateurs=None):
     """Lignes du tableau de signes de f (question 23) : chaque facteur que la chaîne de f(x) = 0 a factorisé (mise en évidence,
-    Somme-Produit) est remplacé par les facteurs écrits (x² − 4x + 3 → x − 1, x − 3 ; x³ − 3x → x, x² − 3). Garde-fou : la constante
-    fois le produit des lignes est égal à f, exactement (SymPy) et à la sonde (mpmath) ; sinon les lignes d'avant, (c, facs)."""
-    nouvelles, cn, change = [], F(c), False
+    Somme-Produit) est remplacé par les facteurs écrits (x² − 4x + 3 → x − 1, x − 3 ; x³ − 3x → x, x² − 3) ; de même chaque
+    facteur du dénominateur que la partie 1 a factorisé (question 66, `denominateurs` : `denominateurs_ecrits` ; 1/(x² − 3x + 2) →
+    x − 1, x − 2). `numerateur` : la chaîne de f(x) = 0 est écrite (sinon les facteurs du numérateur restent). Garde-fou : la
+    constante fois le produit des lignes est égal à f, exactement (SymPy) et à la sonde (mpmath) ; sinon les lignes d'avant, (c, facs).
+    Un facteur du dénominateur dont un facteur écrit est déjà au numérateur ((x − 1)/(x² − 3x + 2)) reste entier."""
+    denominateurs = denominateurs or {}
+
+    def ecrits_de(h, k):
+        """(constante, [(arbre, exposant)]) qui remplacent hᵏ, ou None (h reste une ligne)."""
+        if k > 0:
+            e = facteurs_ecrits(h) if numerateur and not est_exponentielle(h) else None
+        else:
+            e = denominateurs.get(tex(h))
+        if e is None:
+            return None
+        arbres = [arbre_polynome(Q) for Q in e[2]]
+        if any(a is None for a in arbres):
+            return None
+        return F(e[0]) ** k, ([(X(), e[1] * k)] if e[1] else []) + [(a, k) for a in arbres]
+
+    remplaces = {}
+    for i, (h, k) in enumerate(facs):                       # le numérateur d'abord
+        if k > 0 and ecrits_de(h, k) is not None:
+            remplaces[i] = ecrits_de(h, k)
+    au_numerateur = {g.key() for i, (h, k) in enumerate(facs) if k > 0 for g, _ in remplaces.get(i, (None, [(h, k)]))[1]}
+    for i, (h, k) in enumerate(facs):                       # un facteur écrit déjà au numérateur : le dénominateur reste entier
+        r = ecrits_de(h, k) if k < 0 else None
+        if r is not None and not any(g.key() in au_numerateur for g, _ in r[1]):
+            remplaces[i] = r
+    nouvelles, cn, change = [], F(c), bool(remplaces)
 
     def ajouter(h, k):
         for i, (g, kg) in enumerate(nouvelles):
             if g.key() == h.key():
+                if (kg > 0) != (k > 0):
+                    raise ValueError("facteur au numérateur et au dénominateur")
                 nouvelles[i] = (g, kg + k)
                 return
         nouvelles.append((h, k))
-    for h, k in facs:
-        ecrits = facteurs_ecrits(h) if k > 0 and not est_exponentielle(h) else None
-        arbres = None if ecrits is None else [arbre_polynome(Q) for Q in ecrits[2]]
-        if arbres is None or any(a is None for a in arbres):
-            ajouter(h, k)
-            continue
-        c2, kx, _ = ecrits
-        cn *= F(c2) ** k
-        if kx:
-            ajouter(X(), kx * k)
-        for a in arbres:
-            ajouter(a, k)
-        change = True
+    try:
+        for i, (h, k) in enumerate(facs):
+            if i not in remplaces:
+                ajouter(h, k)
+                continue
+            c2, lignes = remplaces[i]
+            cn *= c2
+            for a, ka in lignes:
+                ajouter(a, ka)
+    except ValueError:
+        return c, facs
     if not change:
         return c, facs
     try:
@@ -1386,7 +1478,7 @@ def partie3(analyse):
     zeros, f0 = [], None
     with mpmath.workdps(CHIFFRES):
         try:
-            blocs, tableau, zs, signe = _zeros_et_signe(f, ivs, ED, sp, mpmath)
+            blocs, tableau, zs, signe = _zeros_et_signe(f, ivs, ED, sp, mpmath, denominateurs_ecrits(analyse))
             if tableau is None:
                 cartes = [so.carte("Zéros et signe de f", blocs)]
             else:

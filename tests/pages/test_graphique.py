@@ -1,7 +1,8 @@
 """Graphique de l'Étude complète : la trace des appels canvas de chaque scénario (3 fonctions × 2 vues × 8 états : tracé
 initial, boutons, molette, glisser, pincer, impression) est égale à l'empreinte enregistrée dans
 references/graphique-traces.json. EC-04 : si le calcul de la fenêtre échoue, la courbe reste celle de la dernière fenêtre
-réussie et un message discret l'indique. EC-06 : aucun nombre du graphique n'est écrit avec un point décimal. D15 (chantier
+réussie et un message discret l'indique. EC-06 : aucun nombre du graphique n'est écrit avec un point décimal. Q50 (chantier
+etude-complete, R3) : chaque axe a sa propre échelle, l'écran montre exactement la fenêtre calculée. D15 (chantier
 etude-complete, P8) : ronds vides aux points exclus à limite finie, zéros, (0 ; f(0)) et extremums en points pleins, à leur place. EC-05 : sur écran tactile, un doigt fait défiler la
 page (la courbe ne bouge pas) ; deux doigts déplacent et zooment la courbe sans faire défiler la page, et le point de la
 courbe sous le milieu des doigts reste sous le milieu des doigts, quel que soit le nombre de mouvements livrés par le navigateur. Aucune police n'entre dans la trace (le dessin n'appelle pas measureText) et la molette vise un point exact du canvas, donc
@@ -135,11 +136,12 @@ class TestGraphique(unittest.TestCase):
                 self.assertEqual(defilement(), y0, "deux doigts ne doivent pas faire défiler la page")
                 milieu0 = (c["x"] - gauche, c["y"] - haut)                  # milieu des doigts au départ, dans le canvas
                 milieu1 = (c["x"] - 10 - gauche, c["y"] + 5 - haut)         # et à l'arrivée
-                x = lambda r, m: r["xmin"] + (m[0] - r["padL"]) / r["echelle"]
-                y = lambda r, m: r["ymin"] + (r["availH"] - (m[1] - r["padT"])) / r["echelle"]
+                x = lambda r, m: r["xmin"] + (m[0] - r["padL"]) / r["echelleX"]
+                y = lambda r, m: r["ymin"] + (r["availH"] - (m[1] - r["padT"])) / r["echelleY"]
                 self.assertAlmostEqual(x(r0, milieu0), x(r1, milieu1), delta=1e-6 * (r0["xmax"] - r0["xmin"]))
                 self.assertAlmostEqual(y(r0, milieu0), y(r1, milieu1), delta=1e-6 * (r0["ymax"] - r0["ymin"]))
-                self.assertAlmostEqual(r1["echelle"] / r0["echelle"], math.hypot(120, 50) / 60, delta=1e-6)
+                for axe in ("echelleX", "echelleY"):                      # les deux axes zooment du même facteur
+                    self.assertAlmostEqual(r1[axe] / r0[axe], math.hypot(120, 50) / 60, delta=1e-6)
             finaux.append(canvas("__vista"))
         for champ in ("xmin", "xmax", "ymin", "ymax"):
             self.assertAlmostEqual(finaux[0][champ], finaux[1][champ], delta=1e-6 * abs(finaux[0]["xmax"] - finaux[0]["xmin"]),
@@ -165,8 +167,8 @@ class TestGraphique(unittest.TestCase):
                 trace = page.evaluer("""(() => { const t = window.__trace; let i = t.length - 1;
                     while (i > 0 && t[i][0] !== 'size.width') i--; return t.slice(i); })()""")
                 rendu = json.loads(page.evaluer("JSON.stringify(document.querySelector('#graphique').__rendu)"))
-                ecran = lambda x, y: (round(rendu["padL"] + (x - rendu["xmin"]) * rendu["echelle"], 2),
-                                      round(rendu["padT"] + rendu["availH"] - (y - rendu["ymin"]) * rendu["echelle"], 2))
+                ecran = lambda x, y: (round(rendu["padL"] + (x - rendu["xmin"]) * rendu["echelleX"], 2),
+                                      round(rendu["padT"] + rendu["availH"] - (y - rendu["ymin"]) * rendu["echelleY"], 2))
                 cercles = [(round(e[1], 2), round(e[2], 2), e[3]) for e in trace if e[0] == "arc"]
                 vides = sorted({(x, y) for x, y, r in cercles if r == 4.5 and cercles.count((x, y, 4.5)) == 2})
                 pleins_dessines = sorted((x, y) for x, y, r in cercles if r == 3.5)
@@ -175,6 +177,35 @@ class TestGraphique(unittest.TestCase):
                 self.assertTrue(proches(vides, [ecran(x, y) for x, y in ronds]), (vides, ronds))
                 visibles = [(x, y) for x, y in pleins if rendu["ymin"] <= y <= rendu["ymax"] and rendu["xmin"] <= x <= rendu["xmax"]]
                 self.assertTrue(proches(pleins_dessines, [ecran(x, y) for x, y in visibles]), (pleins_dessines, visibles))
+        self.assertEqual([m for t, m in page.console if t == "error"], [])
+
+    def test_q50_fenetre_affichee_telle_quelle(self):
+        """Chantier etude-complete, R3 (decisions.md §8, Q50) : plus d'échelle égale. L'écran montre exactement la fenêtre calculée
+        par le moteur (bloc « graphique » : xmin, xmax, ymin, ymax), à 390 px comme à 1100 px : la zone de tracé va de xmin à xmax
+        et de ymin à ymax, chaque axe avec sa propre échelle. b ((x² − 6)e^(−2x)) montrait x de −80 à 80 à échelle égale ;
+        x/(x² + 1), une courbe plate (y de −10 à 10 pour des extremums à ±0,5)."""
+        if CHOISIS and "etude-complete" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.nav.ouvrir(PAGE, JS_TRACE)
+        attendre_pret(page)
+        for largeur in (390, 1100):
+            page.taille(largeur, 900)
+            for entree in ("(x^2-6)e^(-2x)", "x/(x^2+1)"):
+                with self.subTest(largeur=largeur, entree=entree):
+                    calculer(page, entree)
+                    attendre_calme(page)
+                    rendu = json.loads(page.evaluer("JSON.stringify(document.querySelector('#graphique').__rendu)"))
+                    voulu = json.loads(page.evaluer("JSON.stringify(document.querySelector('#graphique').__vista)"))
+                    g = json.loads(page.evaluer("JSON.stringify(document.querySelector('#graphique').__g)"))
+                    for champ in ("xmin", "xmax", "ymin", "ymax"):
+                        etendue = g["xmax"] - g["xmin"] if champ[0] == "x" else g["ymax"] - g["ymin"]
+                        self.assertAlmostEqual(rendu[champ], g[champ], delta=1e-9 * etendue)
+                        self.assertAlmostEqual(voulu[champ], g[champ], delta=1e-9 * etendue)
+                    largeur_px = rendu["echelleX"] * (rendu["xmax"] - rendu["xmin"])
+                    self.assertAlmostEqual(rendu["echelleY"] * (rendu["ymax"] - rendu["ymin"]), rendu["availH"], delta=1e-6)
+                    cote = json.loads(page.evaluer("JSON.stringify(document.querySelector('#graphique').getBoundingClientRect())"))
+                    self.assertAlmostEqual(largeur_px, cote["width"] - 14 - 28, delta=1e-6)   # padL + padR de graphique.js
+                    self.assertLess(g["xmax"] - g["xmin"], 40, "fenêtre du moteur trop large : le cadrage a changé")
         self.assertEqual([m for t, m in page.console if t == "error"], [])
 
     def test_molette_independante_de_la_position_fractionnaire_du_canvas(self):

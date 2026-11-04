@@ -64,7 +64,9 @@ le bilan de la partie 6) sont dans `etude-complete/parties.py` (créé au chanti
   « Donc f n'a pas de zéro et f(x) > 0 sur ED. », pas de tableau ; sinon carte « Signe de f » : le tableau de signes de f, construit
   par la machinerie R7 du tableau de f′ (`derivee_variations.tableau_signes` : une ligne par facteur, constante à part, zéros et valeurs
   interdites, zones hors de l'ED barrées), avec **une ligne par facteur de la factorisation écrite dans la chaîne** (R2, Q23 :
-  x² − 4x + 3 → x − 1, x − 3 ; x³ − 3x → x, x² − 3) ; garde-fou : la constante fois le produit des lignes est égal à f (SymPy exact
+  x² − 4x + 3 → x − 1, x − 3 ; x³ − 3x → x, x² − 3) et **une ligne par facteur du dénominateur factorisé en partie 1** (R3, Q66 :
+  Somme-Produit de la carte de condition, 1/(x² − 3x + 2) → x − 1, x − 2 ; « On met x en évidence » de l'outil ED, 1/(x² − 4x) → x,
+  x − 4 ; un facteur déjà écrit au numérateur laisse le dénominateur entier) ; garde-fou : la constante fois le produit des lignes est égal à f (SymPy exact
   et sonde mpmath), sinon les facteurs saisis. Zéros non exacts (x³ + x + 1) : « Les zéros de f ne se calculent pas exactement : l'outil ne
   dresse pas le tableau de signes de f. » ; zéros non calculés : « Les zéros de f n'ont pas pu être calculés par l'outil : le signe de
   f n'est pas traité. ». Carte « Ordonnée à l'origine » : « f(0) = −6. » (exact puis ≈ ; « g(0) = −2/(−12) = 1/6, donc f(0) =
@@ -120,8 +122,9 @@ le bilan de la partie 6) sont dans `etude-complete/parties.py` (créé au chanti
   chaque morceau) sont ramenés dans [min − e ; max + e] des ordonnées de ces points et des AH (e = max(étendue/4 ; 1)) : une branche
   qui file vers ±∞ ne fixe pas l'échelle ; pour chaque AH y = L en ±∞, le côté de l'AH est élargi (25 % de la largeur, 6 fois au
   plus) jusqu'à ce qu'un échantillon au-delà de tous les points à montrer et des valeurs interdites soit à moins de 5 % de la hauteur
-  de la fenêtre de L, sinon la fenêtre des points reste (ln(x)/x). La courbe est tracée une largeur de fenêtre au-delà de chaque côté
-  (l'écran, à échelle égale, montre souvent plus large). Rééchantillonnage de la fenêtre visible au zoom (`fenetre`, inchangé). Pas
+  de la fenêtre de L, sinon la fenêtre des points reste (ln(x)/x). **Chaque axe a sa propre échelle** (R3, decisions.md §8, Q50 :
+  plus d'échelle égale, comme le .tex) : l'écran montre exactement cette fenêtre. La courbe est tracée une largeur de fenêtre au-delà
+  de chaque côté (un zoom arrière la montre avant le rééchantillonnage). Rééchantillonnage de la fenêtre visible au zoom (`fenetre`, inchangé). Pas
   de seconde figure : le zoom la remplace.
   **Souris** : molette et boutons (zoom), glisser (déplacement). **Écran tactile** : un doigt fait défiler la page (la courbe ne
   bouge pas), deux doigts déplacent et zooment la courbe, le point sous le milieu des doigts y reste (T19, EC-05).

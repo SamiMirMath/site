@@ -11,7 +11,12 @@ par `decisions.md` §7, sauf 46, 50, 51 et 54, ⏸ à juger à l'écran sur les 
 de P0 à P8 sont dans `journal.md` : les renvois de ce fichier vers ces sections (« plus bas », « voir Écarts », « voir Plans »,
 « À relire, P0 »…) y mènent.
 
-**Reprise après compactage (04.11.2026)** : chantier **à relire par l'enseignant** : P0 à P9, R1 et R2 commitées ; P10 non faite
+**Reprise après compactage (R3, 04.11.2026)** : branche **`etude-complete-r3`**, créée depuis `main` à jour (875b7d7 : P0 à P9, R1,
+R2 fusionnées par l'enseignant) ; **R3 commitée** (« EC R3 : … », section « R3 » ci-dessous) ; rien n'est poussé ni fusionné ; questions
+ouvertes : 84 à 90 (R3) ; P10 non faite (facultative). Pour reprendre : section « R3 », `decisions.md` §8, puis
+`git log --oneline main..HEAD`.
+
+**Reprise après compactage (04.11.2026, avant R3)** : chantier **à relire par l'enseignant** : P0 à P9, R1 et R2 commitées ; P10 non faite
 (facultative) ; 1 xfail reste (P10) ; questions ouvertes : 46, 50, 51, 54 (⏸) et 57 à 83 ; rien n'est poussé ni fusionné. Ce
 fichier est allégé : tout le détail (plans, temps, suites, écarts, questions tranchées, tableaux « À relire » de la nuit) est dans
 `journal.md`, à lire seulement en cas de besoin. Reste hors parties : l'audit tests-rapides (non commité). Pour reprendre : lire le
@@ -25,6 +30,43 @@ facultative. Pour reprendre : relire ce fichier, `decisions.md`, puis `git log -
 Les tests du chantier sont dans `tests/python/test_corpus_etude_complete.py` (corpus : `tests/python/donnees/corpus_etude_complete.py`) ; chaque
 vérification pas encore faite y est marquée `xfail` **strict** avec le numéro de sa partie (21 restent : P6, P9, P10) : la partie qui la
 traite retire la marque (un xfail qui passe fait échouer la suite). Temps natif : `docs/chantiers/etude-complete/mesurer_temps.py`.
+
+## R3 (04.11.2026) : corrections après la session 2
+
+Branche `etude-complete-r3` (depuis `main`, 875b7d7). Un commit « EC R3 : … », qui verse aussi la nouvelle version de `decisions.md`
+(§8 ; Q50 « confirmé par l'enseignant le 04.11.2026 »). Plan, détail et tableaux avant / après : `journal.md`, « Plans, R3 » et
+« À relire, R3 ».
+
+| Point (§8) | Fait | Touche |
+|---|---|---|
+| Q57 | Ligne des zéros de f′ : « (numérateur nul ; e^{…} > 0) », « (on divise par −2 ; e^{−2x} > 0) », « (numérateur nul ; on divise par −1) » ; « (car e^{…} > 0) » si c'est la seule raison | **Dérivée** + EC |
+| ln(x² − 4) | Vérifié : rien ne rejetait x = 0. Ajouté : « x = 0 est rejeté, car 0 ∉ ED. » puis « f′ ne s'annule pas sur ED. », pour tout zéro de f′ hors de l'ED | **Dérivée** |
+| D7b | « f′(x) = 6eˣ − 2e^{2x} = 2eˣ(3 − eˣ) (mise en évidence de 2eˣ) » (SymPy et sonde) | **Dérivée** + EC |
+| Q66 | Tableau de f : une ligne par facteur du dénominateur factorisé en partie 1 (Somme-Produit ; « On met x en évidence » de l'outil ED) | EC |
+| Q50 | Plus d'échelle égale : une échelle par axe, l'écran montre la fenêtre du moteur ; cadrage inchangé | EC (`commun/graphique.js`) |
+| Lignes coupées | **Constat seul** : à 390 px, la formule BH de x/(x² + 1) (505 px) **défile** dans son bloc (333 px, `overflow-x: auto`), elle n'est pas tronquée ; idem b, Ex7 | — |
+
+Captures à 390 px (remplacent celles de P9) : `docs/chantiers/etude-complete/captures/b-390.png`, `docs/chantiers/etude-complete/captures/x1-390.png`.
+
+**À relire** (instantanés, avant / après dans `journal.md`, « À relire, R3 ») :
+- **Dérivée** : `tests/python/instantanes/derivee-variations.json`, `tests/python/instantanes/resoudre/derivee-variations.json`,
+  `tests/pages/references/derivee-variations.json` : 19 entrées modifiées (sur 32, 32, 33), seule la ligne des zéros de f′.
+- **EC** : `tests/python/instantanes/etude-complete.json`, `tests/python/instantanes/resoudre/etude-complete.json`,
+  `tests/pages/references/etude-complete.json` : 14 entrées modifiées (sur 21, 21, 22) : ligne des zéros de f′, dernière ligne de
+  la dérivée de c, tableau de f de 1/(x² − 3x + 2).
+- **Graphique** : `tests/pages/references/graphique-traces.json` : 48 empreintes sur 48 (Q50).
+- Guide : R7, R11, exemple 4 ; spécifications : `derivee-variations.md` (DV-18), `etude-complete.md` ; `choix-techniques.md`.
+
+Suite complète (04.11.2026, avant le commit, 1ᵉʳ lancement) : Python **1296 passés, 1 xfail** (P10) (708 s) ; pages **122 passés**
+(953 s, dont le nouveau `test_graphique.py::test_q50_fenetre_affichee_telle_quelle`) ; **code de retour 0**. Temps natif
+d'`etudier()` (médiane de 3) : Ex7 0,84 s, a 0,03, b 0,40, c 0,28, d 0,25 (P9 : 0,73 ; 0,03 ; 0,35 ; 0,26 ; 0,23) : au plus + 15 %
+(Ex7, que R3 ne touche que par la ligne des zéros : bruit probable), aucune hausse de plus de 50 %.
+
+Fusion (par l'enseignant, après relecture) :
+
+```
+git switch main && git merge --no-ff etude-complete-r3
+```
 
 ## Résumé de la session 2 (03–04.11.2026)
 
@@ -388,6 +430,7 @@ et l'allègement de ce fichier vers `journal.md` (commit séparé).
 | P7b | Valeurs dans le tableau de variations (D10), extremums (D11) | EC + Dérivée | **fait** | cfe88de |
 | P8 | Graphe (D15, §3) | EC | **fait** | 3ece3c9 |
 | P9 | Exemples (D18), Bilan (D20), instantanés, largeurs 320–390 px, mesure Pyodide | EC | **fait** | 72ff3bb |
+| R3 | Corrections après la session 2 : Q57, ln(x² − 4), D7b (Dérivée) ; Q66, Q50 (EC) ; constat 390 px (§8) | Dérivée + EC | **fait** | (ce commit) |
 | P10 | *(facultatif)* Pente au point exclu (D14) | EC | reportée (hors de la nuit du 02.11) | |
 
 ## Questions pour l'enseignant
@@ -526,6 +569,30 @@ et l'allègement de ce fichier vers `journal.md` (commit séparé).
     donner « limite non déterminée ». Une limite de temps dans la sonde ne suffit pas : un seul appel `mp.exp` ne s'interrompt pas.
     (b) Refuser en amont les tours d'exponentielles (exp ou exposant variable dont l'argument contient lui-même exp ou un exposant
     variable : e^x^x, e^(e^x), x^(x^x)) avec un message clair « pas encore prise en charge », comme sin(x). Laquelle ?
+
+84. **R3, Q57, forme de la parenthèse** : ordre des exemples de §8, « numérateur nul ; on divise par c ; e^{…} > 0 », sans « car » ;
+    quand l'exponentielle est la seule raison, « (car e^{…} > 0) » est gardé (forme de Q56 : (x − 1)eˣ). La partie 3 de l'EC garde
+    son ordre (« car e^{…} > 0 ; numérateur nul ; on divise par … »). Faut-il aligner la partie 3 sur la ligne de f′, ou l'inverse ?
+85. **R3, Q57, constante** : « on divise par c », c étant la constante du **numérateur** (Ex7 : f′ = x(x − 4)e^{…}/(6(x − 2)²), le 6
+    part avec « numérateur nul », pas de « on divise par 6 ») ; sans dénominateur en x, la constante entière : x^(3/2), f′ = 3√x/2 →
+    « (on divise par 3/2) ». Vous convient-il, ou « on multiplie par 2/3 » ?
+86. **R3, ln(x² − 4)** : la phrase de rejet n'est écrite que pour un zéro **hors de l'ED** (vérifié par l'oracle : f n'y est pas
+    définie) ; « f′ ne s'annule pas sur ED. » seulement si tous les zéros sont rejetés. Un zéro dans l'ED où f′ n'est pas définie ne
+    se produit dans aucune entrée : non traité (ligne d'avant).
+87. **R3, D7b** : une seule ligne, sans point final, qui **remplace** « f′(x) = 2eˣ(3 − eˣ). » ; les termes de la somme sont dans
+    l'ordre de la ligne « (réduction) » ((2eˣ + 1)(e^{2x} − 3) : « 6e^{3x} − 6eˣ + 2e^{2x} »), pas rangés par degré ; un seul terme
+    dérivé ((eˣ + 1)(eˣ − 1) → 2e^{2x}) : pas de mise en évidence, la ligne d'avant.
+88. **R3, Q66, portée** : seules les factorisations **écrites** en partie 1 sont suivies : chaîne Somme-Produit de l'EC, et la
+    **première** ligne de l'outil ED (« On met x en évidence : x² − 4x = x(x − 4) » ; 1/(2x² − 4x) → x, 2x − 4, comme écrit). Les
+    lignes suivantes de l'outil ED (« x² − 4 = (x − 2)(x + 2) », Δ, racine évidente) ne le sont pas : 1/(x³ − 4x) → x, x² − 4. Un
+    facteur écrit à la fois au numérateur et au dénominateur ((x − 1)/(x² − 3x + 2)) : le dénominateur reste entier. Faut-il aller
+    plus loin ?
+89. **R3, Q50 et Q54, étiquettes de b** : §8 prévoyait que les chevauchements de b disparaîtraient avec Q50. À 390 px, « (2,45 ; 0) »
+    et « (3 ; 0,01) » se chevauchent encore (points à 0,55 d'écart en x) et « (0 ; −6) » recouvre les graduations 0 et 1 de l'axe des x
+    (`captures/b-390.png`). Rien n'est corrigé. Faut-il décaler les étiquettes proches, ou laisser le zoom les séparer ?
+90. **R3, lignes « coupées » à 390 px** (constat, rien corrigé) : elles défilent (barre du bloc), ne sont pas tronquées ; sur un
+    téléphone, la barre de défilement n'apparaît qu'au toucher. Faut-il un indice visuel (ombre au bord droit) dans le composant
+    commun, ou couper ces formules en plusieurs lignes ?
 
 ## À relire par l'enseignant
 

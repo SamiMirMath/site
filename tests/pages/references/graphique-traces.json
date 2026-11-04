@@ -1,194 +1,194 @@
 {
  "e_1_x--360-sombre--glisser": {
-  "appels": 978,
-  "sha": "fc4fc56cc1e26c80ef47"
+  "appels": 988,
+  "sha": "bcf2411748b7f80b36c6"
  },
  "e_1_x--360-sombre--impression": {
-  "appels": 980,
-  "sha": "6023b4785642c4030b1b"
+  "appels": 990,
+  "sha": "d223666708a6ade6ce72"
  },
  "e_1_x--360-sombre--initial": {
-  "appels": 980,
-  "sha": "d9cbc5d3aed4cec65291"
+  "appels": 990,
+  "sha": "26e7fa2d37fc4cd499d7"
  },
  "e_1_x--360-sombre--moins": {
-  "appels": 940,
-  "sha": "aacb5287b5f52e0480cd"
+  "appels": 930,
+  "sha": "707920497e9d4a18e4f1"
  },
  "e_1_x--360-sombre--molette": {
-  "appels": 1008,
-  "sha": "49e66e64201a949c573f"
+  "appels": 998,
+  "sha": "a9ee4c8f543a172b3766"
  },
  "e_1_x--360-sombre--pincer": {
-  "appels": 984,
-  "sha": "2a1cf6727b9f249b3b25"
+  "appels": 981,
+  "sha": "d7eeda1a188cfd967299"
  },
  "e_1_x--360-sombre--plus": {
-  "appels": 1028,
-  "sha": "658eebc7fde6b7c47942"
+  "appels": 1018,
+  "sha": "59e75f4bf721df48c640"
  },
  "e_1_x--360-sombre--reset": {
-  "appels": 980,
-  "sha": "d9cbc5d3aed4cec65291"
+  "appels": 990,
+  "sha": "26e7fa2d37fc4cd499d7"
  },
  "e_1_x--clair--glisser": {
-  "appels": 2036,
-  "sha": "af580dbdb9563883e2d0"
+  "appels": 1986,
+  "sha": "50f67440c96548d592c0"
  },
  "e_1_x--clair--impression": {
-  "appels": 2039,
-  "sha": "93d7df85cb7309ae964e"
+  "appels": 1989,
+  "sha": "a6ab82ab6f128453a619"
  },
  "e_1_x--clair--initial": {
-  "appels": 1491,
-  "sha": "727a1630a1e3dd8f5dea"
+  "appels": 1441,
+  "sha": "dddba44f009e3834253d"
  },
  "e_1_x--clair--moins": {
-  "appels": 1940,
-  "sha": "399528dd48795cb23ca2"
+  "appels": 1930,
+  "sha": "896d93ccccf16a63cb03"
  },
  "e_1_x--clair--molette": {
-  "appels": 1997,
-  "sha": "98486e48edb02ff03e0c"
+  "appels": 2007,
+  "sha": "97d73635f0da790ed86e"
  },
  "e_1_x--clair--pincer": {
-  "appels": 1968,
-  "sha": "9ad3c28e24a9cb252283"
+  "appels": 1985,
+  "sha": "422efb9abca38cd1c44a"
  },
  "e_1_x--clair--plus": {
-  "appels": 1996,
-  "sha": "ed38742bfe9ddf318690"
+  "appels": 2016,
+  "sha": "567f6b605d9debc4184e"
  },
  "e_1_x--clair--reset": {
-  "appels": 2039,
-  "sha": "93d7df85cb7309ae964e"
+  "appels": 1989,
+  "sha": "a6ab82ab6f128453a619"
  },
  "x_2_1_x_1--360-sombre--glisser": {
-  "appels": 968,
-  "sha": "fa8b62e9f64403ca3a8b"
+  "appels": 948,
+  "sha": "c4ea62ef447ac640f587"
  },
  "x_2_1_x_1--360-sombre--impression": {
   "appels": 979,
-  "sha": "7e0d747638e7f6cb8724"
+  "sha": "7c022f2c6af47d129eb2"
  },
  "x_2_1_x_1--360-sombre--initial": {
   "appels": 979,
-  "sha": "53813da80dee82a81c5c"
+  "sha": "7095dab4ec2212196f1e"
  },
  "x_2_1_x_1--360-sombre--moins": {
-  "appels": 999,
-  "sha": "0eb1f74e3d588f68c4c1"
+  "appels": 979,
+  "sha": "2f3a08acb9529a4aa412"
  },
  "x_2_1_x_1--360-sombre--molette": {
-  "appels": 1008,
-  "sha": "d2b60f7fc586536cfcc3"
+  "appels": 1038,
+  "sha": "ee696b4d1191820e22bd"
  },
  "x_2_1_x_1--360-sombre--pincer": {
-  "appels": 978,
-  "sha": "4d03a2db8395966fd707"
+  "appels": 1038,
+  "sha": "80ee0cd2ab15dab60b17"
  },
  "x_2_1_x_1--360-sombre--plus": {
-  "appels": 998,
-  "sha": "3fde9e3b1c6a94063a15"
+  "appels": 1018,
+  "sha": "4eea5696f19eebece20e"
  },
  "x_2_1_x_1--360-sombre--reset": {
   "appels": 979,
-  "sha": "53813da80dee82a81c5c"
+  "sha": "7095dab4ec2212196f1e"
  },
  "x_2_1_x_1--clair--glisser": {
-  "appels": 2008,
-  "sha": "199e1171e0e76bb7ceab"
+  "appels": 1958,
+  "sha": "29707c00c7e1d764fbab"
  },
  "x_2_1_x_1--clair--impression": {
-  "appels": 2018,
-  "sha": "5b2cd3ad9f3237bbd2b6"
+  "appels": 1978,
+  "sha": "aec718b6ea9047a65c67"
  },
  "x_2_1_x_1--clair--initial": {
-  "appels": 1468,
-  "sha": "0ee83f48f5cb2efc0206"
+  "appels": 1428,
+  "sha": "42865d7dcc3793a3173d"
  },
  "x_2_1_x_1--clair--moins": {
   "appels": 1978,
-  "sha": "146c4ba13801e8fc5de7"
+  "sha": "90306e209720f4e7bb3d"
  },
  "x_2_1_x_1--clair--molette": {
-  "appels": 2028,
-  "sha": "ea1288c7f7e67c88b9bc"
+  "appels": 2038,
+  "sha": "90abad3cd44f808690b3"
  },
  "x_2_1_x_1--clair--pincer": {
-  "appels": 2028,
-  "sha": "3109fd027897fe9a05f9"
+  "appels": 2066,
+  "sha": "8a94fe96ee2f6e96e1bc"
  },
  "x_2_1_x_1--clair--plus": {
   "appels": 2018,
-  "sha": "7ad3eeae53ca585f6ea5"
+  "sha": "8255878bdf776794bae9"
  },
  "x_2_1_x_1--clair--reset": {
-  "appels": 2018,
-  "sha": "5b2cd3ad9f3237bbd2b6"
+  "appels": 1978,
+  "sha": "aec718b6ea9047a65c67"
  },
  "x_2_e_x--360-sombre--glisser": {
-  "appels": 994,
-  "sha": "1a5b3e32c65f84753641"
+  "appels": 1004,
+  "sha": "c6aca0681ff62def764d"
  },
  "x_2_e_x--360-sombre--impression": {
-  "appels": 984,
-  "sha": "e050489a90b5f746d75d"
+  "appels": 1004,
+  "sha": "167d3f37620e942ce3f3"
  },
  "x_2_e_x--360-sombre--initial": {
-  "appels": 984,
-  "sha": "d0367b0017f2be5777e6"
+  "appels": 1004,
+  "sha": "d4e9effc75517db1b721"
  },
  "x_2_e_x--360-sombre--moins": {
-  "appels": 1024,
-  "sha": "38fe6b6ecc32bb7c0b60"
+  "appels": 1044,
+  "sha": "cadd9e48a38fefaefd78"
  },
  "x_2_e_x--360-sombre--molette": {
-  "appels": 994,
-  "sha": "ccc26541bbac802efb03"
+  "appels": 954,
+  "sha": "24c51a2e22a69c329cbf"
  },
  "x_2_e_x--360-sombre--pincer": {
-  "appels": 979,
-  "sha": "01a50aff4c7e0fe11473"
+  "appels": 1005,
+  "sha": "98f533453e2cfb0b5fa3"
  },
  "x_2_e_x--360-sombre--plus": {
-  "appels": 1004,
-  "sha": "ea86da4e4bb82ab9d21f"
+  "appels": 964,
+  "sha": "0df408125ec1719ebb7c"
  },
  "x_2_e_x--360-sombre--reset": {
-  "appels": 984,
-  "sha": "d0367b0017f2be5777e6"
+  "appels": 1004,
+  "sha": "d4e9effc75517db1b721"
  },
  "x_2_e_x--clair--glisser": {
-  "appels": 2004,
-  "sha": "d54427b02c17c18bebcc"
+  "appels": 1994,
+  "sha": "21ae123006f5c74c08b1"
  },
  "x_2_e_x--clair--impression": {
-  "appels": 2024,
-  "sha": "6eb239ed2dcab130a804"
+  "appels": 2004,
+  "sha": "5a034b304340c5279a3c"
  },
  "x_2_e_x--clair--initial": {
-  "appels": 1474,
-  "sha": "21a89014241d11c59050"
+  "appels": 1454,
+  "sha": "6535a557076dd8f37f9e"
  },
  "x_2_e_x--clair--moins": {
-  "appels": 2004,
-  "sha": "c18978af546a164d094e"
+  "appels": 2044,
+  "sha": "1791f78af79cc41a5f28"
  },
  "x_2_e_x--clair--molette": {
-  "appels": 1974,
-  "sha": "112802c77d42ff73ad6e"
+  "appels": 1954,
+  "sha": "a29af4fb1e8a4fd1184a"
  },
  "x_2_e_x--clair--pincer": {
-  "appels": 1969,
-  "sha": "6508681d117bc3e53d16"
+  "appels": 2005,
+  "sha": "931f3b3caeef2521b4eb"
  },
  "x_2_e_x--clair--plus": {
-  "appels": 1984,
-  "sha": "b3cdb632274e0b3a91fe"
+  "appels": 1964,
+  "sha": "33df12925efe550ac92a"
  },
  "x_2_e_x--clair--reset": {
-  "appels": 2024,
-  "sha": "6eb239ed2dcab130a804"
+  "appels": 2004,
+  "sha": "5a034b304340c5279a3c"
  }
 }

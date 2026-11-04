@@ -169,7 +169,7 @@ Livré comme module (et non comme code de page) pour les outils de la phase F (N
   place des boutons à droite du **titre de la carte** (le titre reste tiré des données : la barre de titre est un `.barre` avec
   le `<h3>`) ; `activer(carte, bloc, contexte)` est appelé une fois la carte construite. `rendreCarte(carte, contexte)` et
   `monterOutil` transmettent `contexte = { appelPy, entree }` (`entree` : la saisie dont la carte est le corrigé).
-- **`graphique.js`** : `dessinerGraphique(canvas, g, extrema, asymptotes, vista, forcerClair)` (dessin, échelle égale en x et en y),
+- **`graphique.js`** : `dessinerGraphique(canvas, g, extrema, asymptotes, vista, forcerClair)` (dessin, une échelle par axe depuis le chantier étude complète, R3, Q50),
   `monterGraphique(éléments, {g, extrema, asymptotes, fenetre})` (interaction), `greffonGraphique` (bloc `graphique` de
   `moteur/sortie.py`). La page l'active par `monterOutil({greffons: [greffonGraphique]})` et ne contient plus aucun code de graphique.
   Clés facultatives du bloc (Étude complète, D15) : `points` ([{x_val, f_val}], zéros et (0 ; f(0)), dessinés comme les extrema :
