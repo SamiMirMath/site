@@ -48,8 +48,9 @@ Tirée du chantier « Étude complète » (02–04.11.2026). Elle complète `CLA
      `python3 tests/lancer.py verifier <dossier>` : il exige `VERDICT : ACCEPTÉ`. `verifier` refuse si le commit n'est pas exactement
      ce que la suite a testé (empreintes), si un autre fichier était modifié ou non suivi pendant le lancement, si un code de retour
      n'est pas 0, si un test disparaît ou est sauté en plus, si une issue se dégrade ou si des sous-tests manquent ;
-  3. il lance ensuite `python3 tests/lancer.py rapide`, un contrôle indépendant de quelques minutes (sur l'arbre propre d'après le
-     commit, il ne relance aujourd'hui que les tests de fumée : question ouverte du chantier tests-rapides) ;
+  3. il lance ensuite `python3 tests/lancer.py rapide --depuis HEAD~1`, un contrôle indépendant de quelques minutes : les tests Python
+     des fichiers du commit (dépendances d'import comprises) et les tests de fumée, plus les pages à corpus réduit des outils touchés
+     (`rapide` seul, sur l'arbre propre d'après le commit, ne relancerait que les tests de fumée) ;
   4. il note une ligne dans `journal.md`, section « Contrôles du chef d'orchestre » (commit, verdict, nombres, murs).
 - **Un test disparu fait refuser `verifier`.** Le chef d'orchestre n'accepte qu'un **renommage justifié dans `suivi.md`** (ancien nom →
   nouveau nom, raison) ; pour les parties suivantes, il compare alors au dossier de cette partie

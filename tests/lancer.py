@@ -6,6 +6,10 @@
     python3 tests/lancer.py python    # toute la suite Python seule
     python3 tests/lancer.py pages     # toute la suite de pages seule (CORPUS=reduit pour le corpus de la CI)
     python3 tests/lancer.py liste     # affiche ce que « rapide » lancerait, sans rien lancer
+    python3 tests/lancer.py rapide --depuis <commit>
+                                      # (ou liste --depuis) les fichiers modifiés depuis <commit> (par exemple HEAD~1) au lieu de HEAD :
+                                      # changements commités depuis ce commit, plus ceux de l'arbre et les non suivis ; pour le contrôle
+                                      # du chef d'orchestre après un commit
     python3 tests/lancer.py complet --rapport <dossier>
                                       # comme complet, et écrit en plus dans <dossier> (hors du dépôt, ou ignoré par git) : les deux JUnit
                                       # (python.xml, pages.xml), rapport.json (commit, empreintes des fichiers modifiés ou non suivis,
@@ -55,9 +59,9 @@ def sh(*args):
     return subprocess.run(args, cwd=RACINE, capture_output=True, text=True, check=True).stdout
 
 
-def fichiers_modifies():
-    """Fichiers modifiés (indexés ou non) et non suivis, chemins relatifs à la racine."""
-    noms = set(sh("git", "diff", "--name-only", "HEAD").split())
+def fichiers_modifies(depuis="HEAD"):
+    """Fichiers modifiés depuis le commit `depuis` (commités ensuite, indexés ou non) et non suivis, chemins relatifs à la racine."""
+    noms = set(sh("git", "diff", "--name-only", depuis).split())
     noms |= set(sh("git", "ls-files", "--others", "--exclude-standard").split())
     return sorted(n for n in noms if os.path.exists(os.path.join(RACINE, n)))
 
@@ -344,11 +348,11 @@ def rafraichir_reference(chemin):
     return 0
 
 
-def rapide(seulement_lister=False):
-    modifies = fichiers_modifies()
+def rapide(seulement_lister=False, depuis="HEAD"):
+    modifies = fichiers_modifies(depuis)
     tests = tests_python_concernes(modifies)
     outils = outils_de_pages(modifies)
-    print("fichiers modifiés :", ", ".join(modifies) or "aucun")
+    print("fichiers modifiés" + (f" depuis {depuis}" if depuis != "HEAD" else "") + " :", ", ".join(modifies) or "aucun")
     print("tests Python :", ", ".join(os.path.basename(t) for t in tests))
     print("pages (corpus réduit) :", ", ".join(sorted(outils)) or "aucune")
     if seulement_lister:
@@ -367,10 +371,16 @@ def main(argv):
         except ValueError as erreur:
             print(f"erreur : {erreur}")
             return 2
-    if commande == "rapide":
-        return rapide()
-    if commande == "liste":
-        return rapide(seulement_lister=True)
+    if commande in ("rapide", "liste"):
+        options = argv[2:]
+        if options and (len(options) != 2 or options[0] != "--depuis" or options[1].startswith("-")):
+            print(__doc__)
+            return 2
+        depuis = options[1] if options else "HEAD"
+        if subprocess.run(["git", "rev-parse", "--verify", "-q", f"{depuis}^{{commit}}"], cwd=RACINE, capture_output=True).returncode:
+            print(f"erreur : --depuis {depuis} : commit introuvable")
+            return 2
+        return rapide(seulement_lister=commande == "liste", depuis=depuis)
     if commande == "python":
         return python()
     if commande == "pages":

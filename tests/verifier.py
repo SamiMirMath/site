@@ -18,7 +18,8 @@ M = empreintes (`git hash-object`) des fichiers modifiés ou non suivis au débu
     modifier et dont aucun test ne lit le contenu) ou dans DOCS_APRES : il est alors seulement listé.
 (c) Résultats. Codes de retour 0 (global, Python, pages ; les pages lancées) ; `CORPUS` et `OUTILS` non définis au lancement ; JUnit et
     listes texte concordants ; puis, comparé au dossier de référence (par défaut tests/reference, la référence du dépôt, rafraîchie
-    au P0 de chaque chantier par `lancer.py reference` ; `--reference` en désigne un autre), REFUS si un test collecté ou un résultat disparaît, si un test est sauté en plus, si une issue
+    au P0 de chaque chantier par `lancer.py reference` ; `--reference` en désigne un autre), REFUS si un test collecté ou un résultat
+    disparaît, si un test est sauté en plus, si une issue
     change (seules xfail → passé et sauté → passé sont acceptées, et listées) ou si un nombre de sous-tests passés baisse. Un test
     ajouté (passé ou xfail), ou un nombre de sous-tests en hausse, est accepté et listé.
 

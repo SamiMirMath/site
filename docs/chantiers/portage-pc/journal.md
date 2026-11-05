@@ -39,3 +39,17 @@ motif (b) (4 fichiers non suivis de l'enseignant dans `docs/`, hors du commit).
   argument : aide, code 2 ; `ref-main` (c9b257f, `main`) accepté → `tests/reference/` ; relancé : 0 différence.
 - `verifier <p1-n4> --commit 5a3b737` sans `--reference` : prend `tests/reference`, identique nom par nom.
 - Suite d'avant commit `p2` (`PROCESSUS_PAGES=4`) : code 0 ; Python 94 s, pages 294 s ; identique à `tests/reference` nom par nom.
+
+Contrôle de 012b202 : `verifier <p2>` (référence par défaut, `tests/reference`) : empreintes conformes (10 fichiers testés), listes
+identiques ; REFUSÉ pour le seul motif (b) (mêmes 4 fichiers non suivis).
+
+## Point 3 — rapide --depuis
+
+- `git diff --name-only <commit>` (arbre de travail comparé au commit : changements commités depuis, indexés ou non) plus les non
+  suivis ; le reste de `rapide` (dépendances, manifeste, pages) est inchangé. Sans l'option : `HEAD`, comme avant.
+- Essais (`liste`) : sans option, comme avant ; `--depuis HEAD~1` et `HEAD~2` : fichiers des commits en plus ; `--depuis nimporte` :
+  « commit introuvable », code 2 ; `--depuis` sans valeur, `--depui HEAD~1`, `foo` : aide, code 2 ; `--depuis b6aacef~1` (le correctif
+  Exp-log touche `exp_log.py`) : tests Python d'Exp-log et pages « tous » (la plage contient aussi `tests/pages/navigateur.py`, P1 de
+  tests-rapides).
+- Docstring de `verifier.py` : une ligne trop longue du point 2 recoupée (texte inchangé).
+- Suite d'avant commit `p3` (`PROCESSUS_PAGES=4`) : code 0 ; Python 98 s, pages 300 s ; identique à `tests/reference` nom par nom.
