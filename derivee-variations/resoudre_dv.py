@@ -1,7 +1,7 @@
 """
 resoudre_dv.py — Adaptateur « format de sortie commun » (moteur/sortie.py) de la Dérivée.
 
-Reproduit les cartes que la page affiche aujourd'hui à partir de `etudier` : rappel, dérivée,
+Construit, à partir de `etudier`, les cartes que la page affiche : rappel, dérivée,
 signe de f' et variations. Les fonctions `carte_*` sont partagées avec l'Étude complète
 (`resoudre_ec.py`), qui affiche les mêmes cartes avec ses propres phrases (`ec=True`) et les
 limites dans le tableau.

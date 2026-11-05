@@ -1,4 +1,4 @@
-"""T14 — commun/style.css : les cinq pages outils partagent la même feuille et ne redéfinissent
+"""T14 — commun/style.css : les pages outils construites par monterOutil partagent la même feuille et ne redéfinissent
 ni les variables de couleur ni les règles communes (SOC-02)."""
 import os
 import re
@@ -40,7 +40,7 @@ class TestStyleCommun(unittest.TestCase):
                 for v in set(variables):
                     self.assertNotRegex(css, r"--%s\s*:" % re.escape(v))
                 for r in re.findall(r"^([.#a-z][^{\n]*)\{", css, re.M):
-                    if r.strip() in ("details ol", "details li", ".rappel", ".verif", "#graphique", ".final .res"):
+                    if r.strip() in ("details ol", "details li", ".rappel", ".verif", ".final .res"):
                         continue                         # règles propres à une page, listées ici
                     self.assertNotIn(r.strip(), regles, f"« {r.strip()} » est déjà dans commun/style.css")
 

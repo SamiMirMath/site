@@ -24,8 +24,8 @@ LARGEURS = (320, 360, 375, 390, 430, 768, 1100)
 TOUS = outils_du_site.outils()          # tous les outils du registre (F3) ; méthodes test_balayage_* : test_donnees_des_pages.py
 CHOISIS = [o for o in os.environ.get("OUTILS", "").split(",") if o] or TOUS
 
-# Échecs connus au 30.10.2026 (rapport initial : docs/chantiers/mise-en-page-fluide/suivi.md) : {outil: {critère: [largeurs]}}.
-# À vider au fil de la migration (phases 3 et 4 du chantier) : la suite échoue tant qu'une entrée corrigée y reste.
+# Échecs connus : {outil: {critère: [largeurs]}}. Vide depuis la fin du chantier mise-en-page-fluide (rapport initial :
+# docs/chantiers/mise-en-page-fluide/suivi.md) et doit le rester (CLAUDE.md) ; une entrée corrigée qui y resterait fait échouer la suite.
 CONNUS = {}
 
 JS_MESURE = r"""

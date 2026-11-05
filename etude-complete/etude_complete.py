@@ -18,7 +18,7 @@ import derivee_variations as dv
 import limites_asymptotes as la
 import parties
 
-__all__ = ["etudier", "etude_et_partie3", "etudier_json", "apercu_json", "fenetre_json", "vider_cache"]
+__all__ = ["etudier", "etude_et_partie3", "apercu_json", "fenetre_json", "vider_cache"]
 
 
 def _bornes_finies(ED):
@@ -268,10 +268,6 @@ def etude_et_partie3(entree):
 
 def etudier(entree):
     return etude_et_partie3(entree)[0]
-
-
-def etudier_json(entree):
-    return json_strict(etudier(entree))
 
 
 def fenetre(entree, xmin, xmax, n_total=500):

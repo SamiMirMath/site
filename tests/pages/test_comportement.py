@@ -1,4 +1,4 @@
-"""Tests de pages — comportement commun des cinq outils (socle-commun.md), indépendant de la façon dont la
+"""Tests de pages — comportement commun des outils à moteur Python (socle-commun.md), indépendant de la façon dont la
 page est construite : `?f=` (SOC-04), saisie invalide (SOC-06), aperçu sans message rouge pendant la frappe
 (SOC-16), étapes (SOC-07), largeur à 360 px (SOC-09), délai dépassé puis relance du moteur (SOC-13), rendu commun
 des sorties de resoudre() (commun/rendu.js), libellé pendant le chargement de SymPy (T31), exercice tiré en Python (T20)."""
@@ -911,7 +911,7 @@ class TestComportement(unittest.TestCase):
 
     def test_rendu_commun_des_instantanes(self):
         """commun/rendu.js rend sans exception, sans « undefined » ni « [object », chaque sortie de resoudre()
-        des cinq outils (instantanés de tests/python/instantanes/resoudre)."""
+        de chaque outil à moteur Python (instantanés de tests/python/instantanes/resoudre)."""
         page = self.ouvrir("ensemble-definition")
         dossier = os.path.join(RACINE, "tests", "python", "instantanes", "resoudre")
         for outil in OUTILS:

@@ -139,7 +139,7 @@ mécanique interne (le détail technique va dans la clé `detail` / `controles_d
    au-dessus. » ; la position n'est écrite que si le signe d'approche est démontré par la rédaction descendante (0⁺ / 0⁻ confirmé
    par la sonde du signe ; ℓ⁺ / ℓ⁻ seulement pour e^{0⁺} = 1⁺ « (e^t > 1 pour t > 0) », confirmé par une sonde mpmath du signe de
    f − ℓ). Le bilan reprend la position (« y = 0, graphe au-dessus ») et les limites latérales avec 0⁺ / 0⁻. Fractions rationnelles :
-   phrases inchangées (R18 du guide des limites 3M). Pas de ligne « Pas d'asymptote horizontale … » pour une limite infinie (R6).
+   phrases inchangées (RL18 de `redaction-limites-3m.md`). Pas de ligne « Pas d'asymptote horizontale … » pour une limite infinie (R6).
 5bis. **Ordre et regroupement des bornes** (EC D16) : −∞ (ou la borne finie de gauche), puis les valeurs interdites de gauche à
    droite (la gauche avant la droite), puis +∞ (ou la borne finie de droite) ; études, asymptotes et bilan suivent cet ordre.
    Les cartes de x → −∞ et de x → +∞ n'en font qu'une, « x → ±∞ », seulement si leurs étapes sont identiques une fois le point

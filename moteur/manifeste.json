@@ -1,5 +1,5 @@
 {
-  "_note": "Fichiers Python chargés dans Pyodide par chaque outil (chemins depuis la racine du site), module importé et fonctions appelées par la page (suffixe _json). « anciennes » : fonctions que seules des pages restées en cache appellent encore (à retirer après quelques jours en ligne). Vérifié par tests/python/test_manifeste.py.",
+  "_note": "Fichiers Python chargés dans Pyodide par chaque outil (chemins depuis la racine du site), module importé et fonctions appelées par la page (suffixe _json). « anciennes » (clé facultative, absente quand il n'y en a pas) : fonctions que seules des pages restées en cache appellent encore (à retirer après quelques jours en ligne). Vérifié par tests/python/test_manifeste.py.",
   "versions": {
     "pyodide": "0.27.7",
     "python": "3.12",
@@ -11,8 +11,7 @@
     "ensemble-definition": {
       "module": "resoudre_ed",
       "fichiers": ["ensemble-definition/ensemble_def.py", "moteur/sortie.py", "ensemble-definition/resoudre_ed.py"],
-      "fonctions": ["resoudre", "apercu", "controle", "analyser", "verifier"],
-      "anciennes": ["analyser", "verifier"]
+      "fonctions": ["resoudre", "apercu", "controle"]
     },
     "derivee-variations": {
       "module": "resoudre_dv",
@@ -31,8 +30,7 @@
       "fichiers": ["ensemble-definition/ensemble_def.py", "moteur/noyau.py", "moteur/nombres.py", "moteur/sortie.py",
                    "derivee-variations/derivee_variations.py", "derivee-variations/resoudre_dv.py", "limites-asymptotes/limites_asymptotes.py", "limites-asymptotes/redaction_bh.py", "limites-asymptotes/resoudre_la.py",
                    "ensemble-definition/resoudre_ed.py", "etude-complete/etude_complete.py", "etude-complete/parties.py", "etude-complete/resoudre_ec.py"],
-      "fonctions": ["resoudre", "apercu", "fenetre", "etudier"],
-      "anciennes": ["etudier"]
+      "fonctions": ["resoudre", "apercu", "fenetre"]
     },
     "factorisation": {
       "module": "resoudre_fa",

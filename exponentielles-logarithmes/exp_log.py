@@ -638,9 +638,6 @@ def _liste_de_lettres(noms):
 MESSAGE_AUTRE_BASE = "Pour une autre base, écrivez log_2(x) ou log_a(x) : un nombre ou une lettre après le tiret bas."
 
 
-MESSAGE_PI_EN_3C = "Le nombre π n'est pas traité en 3C."
-
-
 def _contient_pi(n):
     if isinstance(n, Pi):
         return True

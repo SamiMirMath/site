@@ -88,7 +88,8 @@ jobs:
           key: ${{ steps.cache-pyodide.outputs.cache-primary-key }}
 
       # Chrome est préinstallé sur ubuntu-latest ; KaTeX vient de jsDelivr, Pyodide de la copie locale.
-      # Corpus réduit (3 entrées par outil dont une erreur) : le corpus complet (≈ 300 entrées) se lance en local.
+      # Corpus réduit (3 entrées par outil dont une erreur) : le corpus complet (≈ 1 190 entrées au 05.11.2026) se lance en local
+      # (python3 tests/lancer.py complet).
       - name: Tests de pages
         env:
           CORPUS: reduit

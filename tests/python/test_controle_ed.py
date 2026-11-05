@@ -1,5 +1,6 @@
 """T16 — resoudre_ed.controle : la phrase du contrôle numérique (écrite en Python, plus en JS) est celle
-que la page composait, mot pour mot ; les anciennes fonctions *_json restent exposées (pages en cache)."""
+que la page composait, mot pour mot. Les fonctions *_json appelées par la page sont exposées ; les anciennes (analyser_json,
+verifier_json, gardées pour les pages en cache) sont retirées depuis le chantier fondations (F5)."""
 import json
 import unittest
 
@@ -30,8 +31,10 @@ class TestControleED(unittest.TestCase):
 
     def test_json_et_anciennes_fonctions(self):
         self.assertTrue(json.loads(red.controle_json("x+1"))["ok"])
-        for nom in ("analyser_json", "verifier_json", "apercu_json", "resoudre_json"):
+        for nom in ("controle_json", "apercu_json", "resoudre_json"):
             self.assertTrue(callable(getattr(red, nom)), nom)
+        for nom in ("analyser_json", "verifier_json"):
+            self.assertFalse(hasattr(red, nom), nom)
 
 
 if __name__ == "__main__":

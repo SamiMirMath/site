@@ -1,13 +1,15 @@
 """
 ensemble_def.py — Calcul détaillé de l'ensemble de définition (ED) d'une fonction.
 
-Python pur (aucune dépendance) : fonctionne en local et dans le navigateur via Pyodide.
+Python pur : fonctionne en local et dans le navigateur via Pyodide. SymPy est facultatif : `_sympy` (section 9 bis, calcul
+formel du cas général) le charge s'il est disponible ; s'il manque, le résultat le signale (`besoin_sympy`) et le calcul reste prudent.
+Ce fichier est aussi la base du noyau commun (`moteur/noyau.py` en réexporte les noms publics pour les autres outils).
 
 Utilisation :
     python3 ensemble_def.py "ln(x^2-4)/(x-5)"
     >>> from ensemble_def import analyser
     >>> analyser("ln(x)/(ln(x)+2)")          # dictionnaire
-    >>> analyser_json("1/(e^x-1)")           # chaîne JSON (utilisée par le site)
+    La page appelle l'adaptateur `resoudre_ed.py` (`resoudre_json`, `controle_json`, `apercu_json`), pas ce module directement.
 
 Fonctions reconnues : ln (ou log), exp (ou e^...), sqrt (ou racine, √), puissances entières,
 puissance 1/2. Multiplication implicite : 2x, 3ln(x), (x+1)(x-2).
@@ -25,7 +27,7 @@ import math
 import re
 import json
 
-__all__ = ["analyser", "analyser_json", "apercu_json", "verifier_json"]
+__all__ = ["analyser", "verifier", "apercu_json"]
 
 
 class ErreurSaisie(Exception):
@@ -1401,13 +1403,6 @@ def decomposer(n):
     raise NonPrisEnCharge(HORS_CADRE)
 
 
-INFO = {
-    "ln": ("t = {t}", r"\ln", "exponentielle"),
-    "exp": ("t = {t}", "e", "logarithme"),
-    "sqrt": ("t = {t}", r"\sqrt{}", "carré"),
-}
-
-
 def retour_atome(genre, S, t_tex, B_tex, items):
     """{B : φ(B) ∈ S} où φ = ln, exp ou √ (fonctions strictement croissantes)."""
     S = fusion(S)
@@ -2406,13 +2401,6 @@ def resoudre_general(A, rel, items):
 # =====================================================================
 # 10. CONDITIONS D'EXISTENCE ET ANALYSE COMPLÈTE
 # =====================================================================
-POURQUOI = {
-    "ln": "L'argument d'un logarithme doit être strictement positif.",
-    "den": "Un dénominateur doit être non nul.",
-    "sqrt": "Le contenu d'une racine carrée doit être positif ou nul.",
-    "pos": "Une puissance a^b d'exposant non entier (a^b = e^{b ln a}) exige une base strictement positive.",
-    "pos0": "Une puissance a^α dont l'exposant α est irrationnel et positif est définie pour a ≥ 0 (0^α = 0).",
-}   # (plus affichées depuis le guide de rédaction R10 : « condition ⇔ solution », sans rappel de la règle)
 TITRE = {"ln": "logarithme", "den": "dénominateur", "sqrt": "racine carrée", "pos": "puissance", "pos0": "puissance",
          "rden": "racine au dénominateur"}
 
@@ -2598,10 +2586,6 @@ def json_strict(o, **options):
     return json.dumps(sans_non_fini(o), ensure_ascii=False, allow_nan=False, **options)
 
 
-def analyser_json(entree):
-    return json_strict(analyser(entree))
-
-
 def egaux(A, B):
     A, B = fusion(A), fusion(B)
     if len(A) != len(B):
@@ -2648,10 +2632,6 @@ def verifier(entree):
 
 def iv_proche(iv, t):
     return any(p is not None and abs(t - p.val) < 1e-9 * (1 + abs(p.val)) for p in (iv.lo, iv.hi))
-
-
-def verifier_json(entree):
-    return json_strict(verifier(entree))
 
 
 def apercu_json(entree):

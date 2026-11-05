@@ -23,7 +23,6 @@
    Un bloc de type inconnu (SOC-22) n'est jamais sauté en silence ni une exception : à sa place, la carte affiche l'encadré commun
    « attention » (bloc encadre, .enc.enc-attention) avec le message BLOC_INCONNU, et le type est écrit dans la console. Cas typique : un ancien rendu.js encore en
    cache reçoit la sortie d'un moteur plus récent. Un style de texte inconnu est rendu comme « etape » (le texte reste lisible).
-   `ajouterBloc(type, fn)` enregistre un rendu supplémentaire.
    `ajouterGreffon({ type, rendu, barre, activer })` enregistre un bloc qui a aussi du comportement (le graphique, T19) :
      rendu(bloc, carte)             HTML du bloc
      barre(bloc, carte)             facultatif : boutons placés à droite du titre de la carte (la carte garde son titre, tiré des données)
@@ -122,10 +121,6 @@ const BLOCS = {
 
 const BARRES = {};
 const ACTIVATIONS = {};
-
-export function ajouterBloc(type, fn) {
-  BLOCS[type] = fn;
-}
 
 export function ajouterGreffon({ type, rendu, barre, activer }) {
   BLOCS[type] = rendu;

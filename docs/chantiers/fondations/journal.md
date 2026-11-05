@@ -443,12 +443,118 @@ modification, les tests visés ; le dépôt réel n'est pas touché.
   5 → 8, `test_aucun_nom_prive_importe_du_noyau` et `test_les_noms_pris_par_les_moteurs_existent_dans_le_noyau` 141 → 155, plus ceux
   des tests nouveaux : 106 160 → 106 298) ; pages identiques à F3 nom par nom.
 
+## F5 — R3 : ménage
+
+### Plan
+
+Points 1 à 7 de la consigne, dans l'ordre : anciennes, code mort (§ 2.4 de la revue), copies, docstrings et commentaires, documentation,
+`.gitignore`, `quiz.md` § 6. Chaque élément retiré est revérifié par `git grep -w` sur `.py`, `.js`, `.html`, `.css`, `.json`, `.yml`
+(tests compris, hors `docs/`) juste avant. Aucune sortie ne change : dump comparé avant la suite.
+
+### Retiré
+
+| Élément | Où | Remarque |
+|---|---|---|
+| `analyser`, `verifier` (ED), `etudier` (EC), clés `anciennes` | `moteur/manifeste.json` | `_note` : la clé `anciennes` reste possible (facultative) ; `test_manifeste` la gère toujours |
+| `analyser_json`, `verifier_json` | `ensemble_def.py` (et `__all__`) | `analyser` et `verifier` (sans `_json`) restent : `resoudre_ed` et les tests s'en servent |
+| import de compatibilité, `__all__` | `resoudre_ed.py` | |
+| `etudier_json` | `etude_complete.py`, réexport et docstring de `resoudre_ec.py` | |
+| `INFO`, `POURQUOI` | `ensemble_def.py` | |
+| `MESSAGE_PI_EN_3C` | `exp_log.py` | |
+| `_arbre_produit_poly`, `POIDS_M` (et `__all__`) | `exp_log_m.py` | la page a ses propres `poids` |
+| `_enumerer`, `_terme_signe_tex`, `_mot_signe`, `_egalites`, `_ligne_reference` | `limites_asymptotes.py` | `REFERENCES` reste (utilisé ailleurs) |
+| `est_zero_mono` | `redaction_bh.py` | |
+| réexport `racine_rationnelle` | `moteur/noyau.py` | la fonction reste dans `ensemble_def` (utilisée l. 1024) |
+| `ajouterBloc` (exporté, jamais importé) et sa ligne de doc | `commun/rendu.js` | |
+| garde `if(ST&&ST.mode==='exp'&&false) return;` | `simplexe/index.html` | toujours fausse, sans effet de bord |
+| branches « client seul » et « fetch inline » | `test_manifeste.py` (`test_conforme_aux_pages`, `test_versions_coherentes`) | toutes les pages sont génériques : remplacées par `assertIn(OUTIL)` et `assertNotIn("writeFile(")`, plus strict ; mêmes sous-tests |
+| exemption `#graphique` | `test_style_commun.py` | aucune page ne la définit (seule `.final .res` sert parmi les six ; les quatre autres ne sont pas dans style.css, laissées) |
+
+### Gardé, et pourquoi
+
+- **`etudier_json` de DV et LA** : interface de test, comme le rapport le prévoyait (`test_json_strict::test_toutes_les_sorties_json`,
+  `test_racines_reelles::test_pas_de_nombre_complexe_dans_les_sorties`) : sortie brute du moteur. La sortie de la page n'en tient pas
+  lieu : `resoudre_ec.resoudre_json("(x-2)^(1/3)")` contient « f(-1) » (partie parité), le contrôle « (-1) » y échouerait à tort.
+- **`relancer()`** (`moteur-python.js`) : n'appelle que `lancer()`, mais c'est l'API qu'appellent `outil.js` et `test_comportement`.
+- **Onglet Gradient** du simplexe (`AFFICHER_GRADIENT=false`) : interrupteur voulu, fonction prête et masquée.
+- **`.enc-autre`** (style.css) : produisible, `sortie.GENRES_ENCADRE` contient « autre » et `rendu.js` écrit `enc-${genre}` ; aucun moteur
+  ne l'emploie encore (« Autre méthode » de `redaction-limites-3m.md`). Le rapport le disait « jamais produit » : vrai des moteurs seulement.
+- **`.exo`, `.asymptotes`, `ol.mode`** : classes du HTML sans style ; les retirer change le DOM des références de pages.
+- **Brouillons** de `docs/chantiers/limites-asymptotes/`, `revue-matin.html` : archives (R14 de la revue), hors F5.
+- **Autre code mort de LA**, hors de la liste du § 2.4 mais cité par `taches.md` T38 : `_comparee_pure`, `_comparee_avec_polynomes`,
+  `_reference`, `_evidence_ln` (une chaîne d'appels morte) : non touché, à faire dans un ménage suivant.
+
+### Tests transposés (noms et entrées gardés, aucun retiré)
+
+- `test_json_strict` : `test_x_puissance_2_sur_3` et `test_aucun_non_fini_dans_les_moteurs` : `ec.etudier_json` → `resoudre_ec.resoudre_json`
+  (les contrôles `non_finis` du dictionnaire restent) ; `test_toutes_les_sorties_json` : ED `analyser_json` → `resoudre_ed.resoudre_json`,
+  `verifier_json` → `resoudre_ed.controle_json`, EC → `resoudre_ec.resoudre_json` : un appel pour un appel, mêmes sous-tests.
+- `test_racines_reelles::test_pas_de_nombre_complexe_dans_les_sorties` : EC → `ed.json_strict(ec.etudier(entree))`, le corps exact de
+  l'ancienne `etudier_json` (raison ci-dessus).
+- `test_constante_nulle` (`ed_de`) : `ed.analyser_json` → `ed.json_strict(ed.analyser(...))`, même chaîne.
+- `test_controle_ed::test_json_et_anciennes_fonctions` : les fonctions de la page (`controle_json`, `apercu_json`, `resoudre_json`) sont
+  exposées, les anciennes ne le sont plus (`assertFalse(hasattr)`) ; docstring mise à jour.
+
+### Copies (point 3)
+
+- `redaction_bh.qtex_` → `qtex` du noyau (même code : entier tel quel, sinon `\frac{|p|}{q}` précédé de « - ») ; arête
+  `redaction_bh -> noyau` déjà présente.
+- « Ni logarithme, ni dénominateur, ni racine : aucune condition. » : une seule source, `resoudre_ed.AUCUNE_CONDITION` (utilisée par
+  `_entete`) ; `parties.AUCUNE_CONDITION = resoudre_ed.AUCUNE_CONDITION` (nom gardé, `test_parties_ec` le lit). Pas d'arête nouvelle :
+  `parties -> resoudre_ed` existe (exception nommée, R11).
+- **Graphe d'imports** : aucune arête ajoutée ni retirée ; `test_imports.py` inchangé et vert.
+
+### Docstrings, commentaires (point 4 ; chacun revérifié périmé après F1–F4)
+
+- `ensemble_def` : « aucune dépendance » → SymPy facultatif (`_sympy`, § 9 bis, `besoin_sympy`), base du noyau ; `analyser_json`
+  « utilisée par le site » → la page appelle `resoudre_ed`.
+- Adaptateurs ED, DV, LA : « Reproduit les cartes que la page affiche aujourd'hui » → « Construit, à partir de …, les cartes que la page affiche ».
+- « cinq outils / pages » : `test_comportement.py` (l. 1 et 914), `test_style_commun.py`, `captures.py` (sans nombre : la liste dérive de
+  `outils_du_site` depuis F3).
+- `test_largeurs.py` : « Échecs connus au 30.10.2026 » → `CONNUS` vide depuis la fin de mise-en-page-fluide, et doit le rester.
+- `tests.yml` : « ≈ 300 entrées » → ≈ 1 190 (compté : 910 + 276 filière M, `rendu.entrees`) et `lancer.py complet`.
+- `commun/moteur-python.js` (exemple `appelPy("analyser"` → `"resoudre"`), `commun/graphique.js` (`commun/nombres.js` « prévu, pas encore
+  écrit »), commentaires de `resoudre_ec.py` et `manifeste.json`.
+
+### Documentation (point 5)
+
+- `docs/README.md` : sommaire complet (architecture, méthode, redaction-limites-3m, analyse marquée archive, `chantiers/`, `reference/`),
+  commandes par `lancer.py`, guide « R1–R20 et 8 exemples », `[auto-js]` « prévu » (ni `tests/js/` ni Node ; 7 critères du simplexe).
+- `ensemble-definition/README.md` (autre README concerné) : fichiers (adaptateur, manifeste), mise en ligne et test local à la racine.
+- `docs/taches.md` : commande par `lancer.py` ; fantômes `moteur/exercices.py` (T13), `tests/python/test_contrastes.py` (T14 : SOC-03 sans
+  test sur style.css, l'accueil et un bouton du simplexe vérifiés), `moteur/expr.py`… (renvoi à R5/R10).
+- `docs/choix-techniques.md` : `nombres.js`, `exercices.py`, `tests/js/` marqués « prévu » ; anciennes retirées (F5).
+- `redaction-limites-3m.md` : R1–R20 → **RL1–RL20** (avec une note), renvois mis à jour dans `a-valider.md`, `limites-asymptotes.md`,
+  commentaires de `limites_asymptotes.py`, `redaction_bh.py`, `test_redaction_bh_3m.py`, `test_corpus_limites_3m.py`. Non renommés :
+  chaînes internes « (R14) », « (R18) », `viole_r14`, archives de chantier.
+- Références à `docs/methode-chantiers.md` gardées (le fichier existe). CLAUDE.md non touché.
+
+### `.gitignore` et `quiz.md` (points 6 et 7)
+
+- `docs/chantiers/**/*.pdf` (vérifié par `git check-ignore`, deux niveaux) ; aucun PDF suivi aujourd'hui.
+- `quiz.md` § 6 : l'onglet « S'entraîner » fera l'objet d'un chantier séparé, la partie P5b est abandonnée ; le reste du fichier inchangé.
+  Les deux fichiers non suivis du dossier (`decisions (1).md:Zone.Identifier`, `decisions.md.md`) laissés tels quels.
+
+### Vérifications
+
+- Dump (`dumps/F5`) : `diff -r --exclude=temps` avec le départ, aucune sortie, code 0 ; `dumps/F5-p1` (`--processus 1`) aussi. Temps
+  (`--processus 1`) : identiques au tableau « Temps » (limites 5,82 s, étude 1,99 s, factorisation 1,87 s, exp-log 0,88 / 0,76 s,
+  autres < 0,3 s).
+- `git diff --exit-code main -- tests/python/instantanes tests/pages/references` : rien.
+- Suite d'avant commit : `PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rapport <scratchpad>/rapports/F5` : code 0. Python 1 391
+  passés + 1 xfail (1 392 collectés), 106 244 sous-tests, 91,3 s ; pages 127 passés, 2 407 sous-tests, 289,9 s. Aucun fichier touché
+  pendant le lancement. `comparer_listes.py tests/reference <F5>` : seuls ajouts, ceux de F1 à F4 ; F5 n'ajoute aucun test. Par rapport
+  à F4 : pages identiques nom par nom ; trois baisses de sous-tests, justifiées dans `suivi.md` (littéraux et réexport retirés : 1216 →
+  1215, 59 → 58, 8706 → 8652, ce dernier compté fichier par fichier contre HEAD : ensemble_def −23, limites_asymptotes −13, exp_log_m −7,
+  redaction_bh −5, resoudre_ed −2, etude_complete, parties, resoudre_ec, exp_log −1 chacun).
+
 ## Contrôles du chef d'orchestre
 
 - F0 `0cb5a64` : verifier ACCEPTÉ (Python 1 335 / 105 807 sous-tests, pages 123 / 2 386, identiques à la référence) ; rapide --depuis HEAD~1 : 22 passés, 224 sous-tests, 2 s (seuls fumée + docs) ; dump = départ.
 - F1 `d4837d6` : verifier ACCEPTÉ (Python 1 354 + 1 xfail / 105 813 sous-tests, pages 123 / 2 386 ; +20 tests test_lancer annoncés) ; rapide --depuis HEAD~1 : 42 passés, 230 sous-tests, 4 s ; dump = départ ; instantanés/références inchangés.
 - F2 `7838091` : verifier ACCEPTÉ (Python 1 371 + 1 xfail / 105 837 sous-tests, pages 123 / 2 386 ; +17 tests annoncés) ; rapide --depuis HEAD~1 : 59 passés, 254 sous-tests, 4 s ; dump = départ ; instantanés/références inchangés. Deux fichiers non suivis apparus sous docs/chantiers/equations-2e-degre/ (pas du chantier, laissés tels quels).
 - F3 `d936027` : verifier ACCEPTÉ (Python 1 381 + 1 xfail / 106 160 sous-tests, pages 127 / 2 407 ; +14 tests annoncés) ; rapide --depuis HEAD~1 : manifeste/outils touchés donc presque tout (Python 1 377 + 1 xfail, pages 127 à corpus réduit), vert, 359 s ; dump = départ ; instantanés/références inchangés.
+- F4 `86207df` : verifier ACCEPTÉ (Python 1 391 + 1 xfail / 106 298 sous-tests, pages 127 / 2 407 ; +10 tests annoncés) ; rapide --depuis HEAD~1 : 75 passés, 756 sous-tests, 5 s ; dump = départ ; instantanés/références/moteur inchangés.
 
 ## Temps
 

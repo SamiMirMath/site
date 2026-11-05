@@ -14,7 +14,7 @@ import re
 from fractions import Fraction as F
 
 import limites_asymptotes as LA
-from noyau import Nb, X, E, Neg, Op, Fn, tex, valeur_constante, sans_x, evaluer, charger_sympy
+from noyau import Nb, X, E, Neg, Op, Fn, tex, qtex, valeur_constante, sans_x, evaluer, charger_sympy
 import sortie as so
 
 Abandon = LA.Abandon
@@ -147,10 +147,6 @@ def mono_arbre(m):
     if bas:
         r = Op("/", r, _produit(bas))
     return Neg(r) if m.coef < 0 else r
-
-
-def est_zero_mono(m):
-    return m.coef == 0
 
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -1136,7 +1132,7 @@ def _m_sous_limite(self, cur):
     self.etape("on remplace", [
         self.txt(texte),
         so.sous_calcul(M(self.lim_tex(core)), sub.etapes),
-        self.txt(f"Donc {M(self.lim_tex(cur) + ' = ' + (qtex_(m.coef) + ' \\cdot ' if m.coef != 1 else '') + LP(Lc) + ' = ' + LT(L))}.")])
+        self.txt(f"Donc {M(self.lim_tex(cur) + ' = ' + (qtex(m.coef) + ' \\cdot ' if m.coef != 1 else '') + LP(Lc) + ' = ' + LT(L))}.")])
     return L
 
 
@@ -1472,8 +1468,8 @@ def _m_prediction_exposant(self, u, f):
     sA, sB = signe_lim(lim(u.a, pt)), signe_lim(lim(u.b, pt))
     if dp == dq:
         c = F(P[-1]) / F(Q[-1])
-        fr = f"\\dfrac{{{qtex_(P[-1])}}}{{{qtex_(Q[-1])}}}"
-        valeur = qtex_(c)
+        fr = f"\\dfrac{{{qtex(P[-1])}}}{{{qtex(Q[-1])}}}"
+        valeur = qtex(c)
         brut = F(P[-1]) / F(Q[-1])
         reduit = F(brut.numerator, brut.denominator) == F(P[-1]) / F(Q[-1]) and F(P[-1]).denominator == 1 and F(Q[-1]).denominator == 1 \
             and brut.numerator == P[-1] and brut.denominator == Q[-1]
@@ -1515,11 +1511,6 @@ def _m_prediction_exposant(self, u, f):
             fin = f"{cible} {M('\\to ' + vu)}, donc {M('e^{\\cdots} \\to e^{0} = 1')}"
     lignes.append(f"<b>On s'attend à :</b> {fin}")
     return so.encadre("prediction", "Prédiction avec la règle du podium", lignes), genre
-
-
-def qtex_(c):
-    c = F(c)
-    return str(c.numerator) if c.denominator == 1 else (("-" if c < 0 else "") + f"\\frac{{{abs(c.numerator)}}}{{{c.denominator}}}")
 
 
 Desc.tourne_en_rond = _m_tourne_en_rond
@@ -1623,7 +1614,7 @@ def descente(f, pt, ref):
 
 
 # ---------------------------------------------------------------------------------------------------------------------
-# R14 : une forme indéterminée n'est jamais suivie de « = valeur »
+# RL14 (redaction-limites-3m.md) : une forme indéterminée n'est jamais suivie de « = valeur »
 # ---------------------------------------------------------------------------------------------------------------------
 _VALEUR = re.compile(r"(?<![{\\\w])=\s*(?:[-+]?\\infty|[-+]?\d|0\^|e\^|\\sqrt|\\ln\s*\d|\\frac\{\d+\}\{\d+\}\s*(?:\\\\|$))")
 
@@ -1638,7 +1629,7 @@ def viole_r14(html):
 
 
 def texte_des_etapes(etapes):
-    """Tout le texte (html + formules) d'une descente, à plat : sert aux contrôles de contenu (tests, R14) sans parcourir les blocs."""
+    """Tout le texte (html + formules) d'une descente, à plat : sert aux contrôles de contenu (tests, RL14) sans parcourir les blocs."""
     out = []
     for e in etapes:
         out.append(e["titre"])

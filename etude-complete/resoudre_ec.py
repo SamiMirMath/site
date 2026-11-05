@@ -11,18 +11,15 @@ de l'étude » (D20 : `parties.carte_bilan`, les résultats des parties 1 à 5, 
 (D15 : courbe, asymptotes, extremums, zéros et (0 ; f(0)) marqués, ronds vides aux points exclus à limite finie, cadrage de
 decisions.md §3).
 La recalculation du graphique au zoom reste l'appel séparé `fenetre_json`.
-
-`etudier_json` (ancienne page, avant T19) est réexportée : une page restée en cache qui lit le nouveau
-manifeste continue de fonctionner. À retirer à la clôture, après quelques jours en ligne.
 """
 from noyau import json_strict
 import sortie as so
 import resoudre_dv as rdv
 import resoudre_la as rla
 import parties
-from etude_complete import analyse, etude_et_partie3, etudier_json, apercu_json, fenetre_json
+from etude_complete import analyse, etude_et_partie3, apercu_json, fenetre_json
 
-__all__ = ["resoudre", "resoudre_json", "apercu_json", "fenetre_json", "etudier_json"]
+__all__ = ["resoudre", "resoudre_json", "apercu_json", "fenetre_json"]
 
 PARTIES = ("1. Domaine de définition", "2. Parité", "3. Zéros, signe, ordonnée à l'origine", "4. Limites et asymptotes",
            "5. Dérivée, tableau de variation, extremums", "6. Graphe")

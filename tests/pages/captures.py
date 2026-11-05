@@ -1,4 +1,4 @@
-"""Captures d'écran des 5 pages (clair, sombre, 360 px, impression ; page vide puis après un calcul),
+"""Captures d'écran des pages à moteur Python (clair, sombre, 360 px, impression ; page vide puis après un calcul),
 pour vérifier qu'un changement de CSS ne modifie aucun pixel (T14).
 
     # avant la modification

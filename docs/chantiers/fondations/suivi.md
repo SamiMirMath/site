@@ -12,7 +12,7 @@ Consigne complète, plan et détails : `journal.md`. La consigne du chantier tie
 | F2 | `lancer.py rapide` (reste de R4) : `-z`, supprimés, donnees/, instantanés, pages, références, scripts | faite (suite verte) | voir `git log` |
 | F3 | R1 : `tests/python/outils_du_site.py` (registre + manifeste), listes dérivées, clés vérifiées ; exp-log dans `MIGREES` et `test_json_strict` (filière M, exercices), exception nommée pour le jeu moteur | faite (suite verte) | voir `git log` |
 | F4 | R6 : `test_noyau` étendu (+ moteurs réclamés), `tests/python/test_imports.py` (45 arêtes figées, 5 exceptions nommées, couches et cycles vérifiés), noms à plat uniques (`test_manifeste`) ; `rapide` relance ces tests quand un moteur change | faite (suite verte) | voir `git log` |
-| F5 | R3 : ménage | à faire | — |
+| F5 | R3, ménage : « anciennes » retirées (manifeste, `analyser_json`, `verifier_json`, `etudier_json` de l'EC), code mort du § 2.4, `qtex_` → `qtex`, « Ni logarithme… » à une source, docstrings, README, fantômes, RL1–RL20, `.gitignore`, quiz.md § 6 | faite (suite verte) | voir `git log` |
 | F6 | Copie locale de KaTeX pour les tests de pages | à faire | — |
 
 ## Vérification après chaque partie
@@ -46,12 +46,24 @@ tests égales à la référence (sauf ajouts annoncés).
 - **F4, CLAUDE.md (description de `rapide`)** : ajouter après la phrase de F3 : « un `.py` des dossiers des moteurs relance
   `test_imports.py` et `test_noyau.py` (ils lisent les moteurs par leur chemin) ; ».
 
+- **F5, CLAUDE.md (ligne « Suite au 05.11.2026 »)** : elle cite encore l'ancienne référence (c9b257f : 1 318 tests Python,
+  101 952 sous-tests ; 123 tests de pages, 2 386 sous-tests) ; la référence de ce chantier (F0) est 1 335 tests Python (dont 1 xfail),
+  105 807 sous-tests, 123 tests de pages, 2 386 sous-tests ; après F5 : 1 392 (dont 1 xfail), 106 244 ; 127, 2 407. R1–R20 y est déjà juste.
+- **F5, RL1–RL20** : les règles de `redaction-limites-3m.md` sont renommées dans les documents actifs et les commentaires ; restent sous
+  l'ancien nom les chaînes internes du moteur (« (R14) », « (R18) ») et l'identifiant `viole_r14` (sorties à l'octet), et les archives de
+  chantier. Les renommer aussi (sans effet visible) ?
 - **F4, couches : un moteur d'outil peut-il importer `moteur/sortie.py` ?** `redaction_bh` et `parties` le font. La table de
   `docs/architecture.md` § 1 le permet (« les briques ») ; le schéma de § 1 dit des adaptateurs « seule couche qui fabrique la sortie
   affichée ». J'ai suivi la table : ces deux arêtes sont dans `ARETES` (permises). Si la règle est « sortie réservée aux adaptateurs »,
   elles deviennent une exception nommée (motif « couches ») et `violation` le vérifie.
 
 ## À relire par l'enseignant
+
+- **F5** : aucun instantané, aucune référence, aucun texte affiché modifié (dump identique à l'octet). Documents changés : `docs/README.md`
+  (sommaire complet, commandes par `lancer.py`, R1–R20, `[auto-js]` « prévu »), `ensemble-definition/README.md`, `docs/taches.md` et
+  `docs/choix-techniques.md` (fichiers fantômes), `redaction-limites-3m.md` (règles **RL1–RL20**, et leurs renvois dans `a-valider.md` et
+  `limites-asymptotes.md`), `quiz.md` § 6 (l'onglet = chantier séparé, P5b abandonnée). Gardé, à confirmer : `etudier_json` de DV et LA
+  (interface de test, raison dans `journal.md`).
 
 - Aucun instantané ni texte affiché modifié (F0 à F4) ; aucun nouvel instantané.
 - **F3, `docs/architecture.md`** (document validé) : § 4 « Ajouter un outil » réécrit (environ 4 fichiers côté site et 10 côté tests,
@@ -71,7 +83,9 @@ tiret : `` - `<identifiant pytest complet>` : <avant> → <après> : <raison> ``
 nombres de sous-tests passés de la référence et du lancement, exactement ceux que `verifier` affiche ; sinon refus. Une baisse non
 justifiée ici fait refuser `verifier` ; un test disparu, échoué ou sauté en plus est refusé même justifié.
 
-(aucune)
+- `tests/python/test_exp_log.py::TestVouvoiement::test_aucun_texte_du_fichier_ne_tutoie` : 1216 → 1215 : un littéral de moins dans exp_log.py, `MESSAGE_PI_EN_3C` (code mort retiré, F5)
+- `tests/python/test_noyau.py::TestNoyau::test_noms_exportes_publics_et_memes_objets` : 59 → 58 : réexport `racine_rationnelle` retiré de moteur/noyau.py, importé par personne (F5)
+- `tests/python/test_vocabulaire.py::TestVouvoiement::test_litteraux_des_moteurs` : 8706 → 8652 : 54 littéraux de code retiré (F5) : ensemble_def 23 (`INFO`, `POURQUOI`, `analyser_json`, `verifier_json`, `__all__`), limites_asymptotes 13, exp_log_m 7, redaction_bh 5, resoudre_ed 2, etude_complete, parties, resoudre_ec et exp_log 1 chacun
 
 ## Reprise après compactage
 

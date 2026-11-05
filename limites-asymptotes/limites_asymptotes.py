@@ -365,16 +365,6 @@ def _facteur_detaille(P, n):
     return tete, interieur, complet, termes
 
 
-def _enumerer(elements):
-    """A ; A et B ; A, B et C."""
-    return elements[0] if len(elements) == 1 else ", ".join(elements[:-1]) + " et " + elements[-1]
-
-
-def _terme_signe_tex(P, k):
-    """Terme c·x^k de P, avec son signe (-3x, x^{3}, 5)."""
-    return ptex(pn([F(0)] * k + [P[k]]), "x")
-
-
 def _polynome_a_termes(P):
     return [k for k in range(len(P) - 1, -1, -1) if P[k] != 0]
 
@@ -428,16 +418,6 @@ def _fraction_signee(R, D):
 def _signe_en_infini(P, s):
     """Signe de P(x) près de s∞ (terme de plus haut degré)."""
     return _signe(P[deg(P)]) * (s if deg(P) % 2 else 1)
-
-
-def _mot_signe(sg):
-    return "positif" if sg > 0 else "négatif"
-
-
-def _egalites(gauche, droites):
-    """Formule affichée : A = B = C, une égalité par ligne (le signe = aligné)."""
-    return (r"\[\begin{aligned}" + gauche + " &= " + droites[0] + "".join(r" \\ &= " + l for l in droites[1:])
-            + r"\end{aligned}\]")
 
 
 def _facteur_poly(P):
@@ -611,7 +591,7 @@ def _phrase_trou(point_tex, valeur_tex):
 
 
 def _phrase_bord(point_tex, valeur_tex):
-    """Limite finie au BORD de l'ensemble de définition (R19 : « trou » est réservé à un point intérieur)."""
+    """Limite finie au BORD de l'ensemble de définition (RL19 : « trou » est réservé à un point intérieur)."""
     return (rf"Limite finie : pas d'asymptote verticale. Le graphe s'arrête au point \(({point_tex}\,;\,{valeur_tex})\), "
             rf"qui n'en fait pas partie.")
 
@@ -2683,11 +2663,6 @@ def _reference(N, B, q, pt):
     return None
 
 
-def _ligne_reference(nom):
-    lim, cond = REFERENCES[nom]
-    return rf"limite de référence : \({lim}\) pour \({cond}\)"
-
-
 def _comparee_pure(n, ctx, fi):
     """Produit ou quotient de x^n, e^{ax}, ln x : on nomme la limite de référence utilisée ; un facteur
     polynôme est d'abord mis sous la forme c·x^m(1 + …)."""
@@ -3382,7 +3357,7 @@ _BORNES_FINIES = []     # extrémités finies des intervalles de l'ED en cours d
 
 
 def _signe_zero(val, pt):
-    """« 0 » devient « 0^{+} » ou « 0^{-} » quand la rédaction descendante a établi le signe (R17) ; une limite finie non nulle
+    """« 0 » devient « 0^{+} » ou « 0^{-} » quand la rédaction descendante a établi le signe (RL17) ; une limite finie non nulle
     devient ℓ^{+} / ℓ^{-} quand la descente l'a écrite ainsi (e^{0⁺} = 1⁺, confirmé par une sonde ; EC D13)."""
     L = _LIMS_SIGNEES.get(pt.tex())
     if L is None or L.inf or not L.ap or val in (None, "?") or r"\infty" in val:
@@ -3444,7 +3419,7 @@ def _narrer_limite(f, pt, ref, vtex, items, alternative=None, label="f(x)", pref
             items.append(item)
             return
     lignes, detail = _rediger(f, pt, ref, prefixe)
-    if lignes is not None:                  # défaut R14 de l'ancienne rédaction (forme indéterminée suivie de « = valeur ») : repli
+    if lignes is not None:                  # défaut RL14 de l'ancienne rédaction (forme indéterminée suivie de « = valeur ») : repli
         if any(redaction_bh.viole_r14(l if isinstance(l, str) else l.html()) for l in lignes):
             lignes, detail = None, "ancienne rédaction écartée (R14)"
     if lignes is None and alternative is not None:
@@ -3815,7 +3790,7 @@ def _etudier_bornes(f, bornes, rationnelle, N, D, res, bornes_val):
                     if asym is not None and not est_asymptote:
                         asym["valeur_tex"] = val
                         asym["valeur_val"] = vval
-                        asym["bord"] = True                         # R19 : un point du bord n'est pas un « trou »
+                        asym["bord"] = True                         # RL19 : un point du bord n'est pas un « trou »
                 if asym is not None:
                     res["asymptotes"].append(asym)
 

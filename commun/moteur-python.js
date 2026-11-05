@@ -7,7 +7,7 @@
      await moteur.demarrer();                        // fichiers + Pyodide ; SymPy se charge ensuite en arrière-plan
                                                      // (roues précompilées du site, téléchargées pendant le chargement de Pyodide ;
                                                      //  à défaut, roue du CDN : voir worker-pyodide.js)
-     const r = await moteur.appelPy("analyser", "ln(x-1)", 30000);   // rejette Error("delai") après 30 s
+     const r = await moteur.appelPy("resoudre", "ln(x-1)", 30000);   // rejette Error("delai") après 30 s
      moteur.relancer();                              // après un délai dépassé : nouveau worker, mêmes fichiers
      moteur.sympyOK, moteur.sympyPret                // état de SymPy (Promise)
      moteur.noterActivite();                         // l'élève tape : SymPy attend une pause

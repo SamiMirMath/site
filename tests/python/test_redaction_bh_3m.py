@@ -5,7 +5,7 @@ Trois familles :
   - CONTRAT : pour chaque exercice du corrigé (8.11 à 8.14, exemples 5 et 6), la suite des titres d'étapes, le nombre de BH, les dérivées
     haut / bas, la prédiction, le résultat signé et la confirmation. Les écarts de formulation mineurs sont listés dans
     docs/chantiers/limites-asymptotes/suivi-refonte.md.
-  - STRUCTURE : règles R1 à R17 vérifiées sur tout le corpus (tableau BH avant la chaîne, forme revérifiée avant chaque BH, R14…).
+  - STRUCTURE : règles RL1 à RL17 vérifiées sur tout le corpus (tableau BH avant la chaîne, forme revérifiée avant chaque BH, RL14…).
   - TRANSVERSE : valeurs contre le corpus de l'enseignant, signe 0⁺/0⁻, nombre de replis, aucune alerte, cartes « Étape n » consécutives.
 """
 import copy
@@ -210,7 +210,7 @@ class TestStructure(unittest.TestCase):
         self.assertGreaterEqual(sum(1 for _ in self.toutes()), 100)
 
     def test_le_tableau_bh_precede_la_chaine(self):
-        """R9 : « haut : … ⟶ dérivée : … » avant la chaîne « lim … =^BH lim … »."""
+        """RL9 : « haut : … ⟶ dérivée : … » avant la chaîne « lim … =^BH lim … »."""
         for saisie, ou, d in self.toutes():
             for e in d["etapes"]:
                 if not e["titre"].startswith("BH"):
@@ -224,7 +224,7 @@ class TestStructure(unittest.TestCase):
                     self.assertLess(ibh[0], ichaine[0])
 
     def test_forme_revérifiée_avant_chaque_nouveau_bh(self):
-        """R11 : un BH suivi d'un autre BH annonce « encore indéterminée » avec ses signes."""
+        """RL11 : un BH suivi d'un autre BH annonce « encore indéterminée » avec ses signes."""
         for saisie, ou, d in self.toutes():
             ets = d["etapes"]
             for i, e in enumerate(ets[:-1]):
@@ -273,7 +273,7 @@ class TestStructure(unittest.TestCase):
                 self.assertTrue(any(b["type"] == "resultat_lim" for b in d["etapes"][-1]["blocs"]))
 
     def test_les_deux_signes_zero_sont_ecrits(self):
-        """R17 : 0⁺ / 0⁻ dès que le signe est connu, y compris dans le résultat (cas du corpus dont la valeur est 0)."""
+        """RL17 : 0⁺ / 0⁻ dès que le signe est connu, y compris dans le résultat (cas du corpus dont la valeur est 0)."""
         for c in CAS:
             if c.id in PAS_PRIS_EN_CHARGE or c.attendu != "0" or not c.signe0 or c.cote != "":
                 continue

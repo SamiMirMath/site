@@ -21,7 +21,8 @@ export function joliPas(etendue){
   return nice*Math.pow(10,exp);
 }
 /* Tout nombre écrit sur le graphique (graduations, coordonnées des extrema) passe par cette seule fonction : au plus deux
-   décimales, sans zéros inutiles, virgule décimale (EC-06). T23 (notation suisse) la remplacera par commun/nombres.js. */
+   décimales, sans zéros inutiles, virgule décimale (EC-06). T23 (notation suisse) la remplacera par un
+   commun/nombres.js, prévu (R7 de la revue de structure), pas encore écrit. */
 export function etiquette(v){
   const r=Math.round(v*100)/100;
   if(Math.abs(r)<1e-9) return "0";

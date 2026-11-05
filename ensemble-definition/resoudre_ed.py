@@ -1,16 +1,18 @@
 """
 resoudre_ed.py — Adaptateur « format de sortie commun » (moteur/sortie.py) de l'Ensemble de définition.
 
-Reproduit les cartes que la page affiche aujourd'hui à partir de `analyser` : l'en-tête (hors
+Construit, à partir de `analyser`, les cartes que la page affiche : l'en-tête (hors
 compteur d'étapes), une carte par condition, la carte finale. Les textes que la page composait
 en JS (nombre de conditions, « Condition non résolue », valeurs ≈) sont écrits ici.
 Le contrôle numérique (`controle`, qui compose sa phrase) reste un appel séparé, lancé après l'affichage.
 """
 from ensemble_def import analyser, apercu_json, json_strict, verifier
-from ensemble_def import analyser_json, verifier_json   # noqa: F401  encore appelés par d'anciennes pages restées en cache
 import sortie as so
 
-__all__ = ["resoudre", "resoudre_json", "controle", "controle_json", "apercu_json", "analyser_json", "verifier_json"]
+__all__ = ["resoudre", "resoudre_json", "controle", "controle_json", "apercu_json"]
+
+# phrase de l'en-tête quand f n'a aucune condition d'existence ; seule source, reprise par l'Étude complète (parties.AUCUNE_CONDITION)
+AUCUNE_CONDITION = "Ni logarithme, ni dénominateur, ni racine : aucune condition."
 
 
 def _enonce(r):
@@ -22,7 +24,7 @@ def _entete(r):
     if n:
         phrase = f"{n} condition{'s' if n > 1 else ''} d'existence : " + ", ".join(c["titre"] for c in r["conditions"]) + "."
     else:
-        phrase = "Ni logarithme, ni dénominateur, ni racine : aucune condition."
+        phrase = AUCUNE_CONDITION
     return so.carte("Fonction", [so.formule(_enonce(r)), so.texte(phrase, style="discret")], titre_masque=True)
 
 

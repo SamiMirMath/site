@@ -76,30 +76,19 @@ class TestManifeste(unittest.TestCase):
         for dossier, o in OUTILS.items():
             s = page(dossier)
             with self.subTest(outil=dossier):
-                if OUTIL in s:
-                    # page générique : la page ne nomme que l'outil ; les appels sont ceux d'outil.js et de sa config
-                    self.assertIn(f'outil:"{dossier}"', s)
-                    self.assertNotIn("loadPyodide", s)
-                    self.assertNotIn("new Worker", s)
-                    greffons = lire("commun/graphique.js") if "graphique.js" in s else ""         # greffon de bloc : ses appels sont ceux de la page
-                    appels = set(re.findall(r'appelPy\("([a-z_]+)"', s + lire("commun/outil.js") + greffons))
-                    appels |= set(re.findall(r'exercicePython:"([a-z_]+)"', s))                   # tirage de l'exercice en Python (outil.js l'appelle par ce nom)
-                    self.assertTrue(appels <= set(o["fonctions"]), appels - set(o["fonctions"]))
-                    self.assertEqual(set(o["fonctions"]) - appels, set(o.get("anciennes", [])),
-                                     "fonctions non appelées = anciennes (pages en cache)")
-                    continue
-                if CLIENT in s:
-                    # client commun : les fichiers viennent du manifeste, la page ne nomme que l'outil et ses appels
-                    self.assertIn(f'new MoteurPython("{dossier}"', s)
-                    self.assertNotIn("loadPyodide", s)
-                    self.assertNotIn("writeFile(", s)
-                else:
-                    charges = {os.path.normpath(os.path.join(dossier, c)) for c in re.findall(r'fetch\("([^"]+\.py)"', s)}
-                    self.assertEqual(charges, {os.path.normpath(c) for c in o["fichiers"]}, "fichiers téléchargés")
-                    ecrits = set(re.findall(r'writeFile\("([^"]+)"', s))
-                    self.assertEqual(ecrits, {os.path.basename(c) for c in o["fichiers"]}, "fichiers écrits dans Pyodide")
-                    self.assertIn(f'runPython("import {o["module"]}")', s)
-                self.assertEqual(set(re.findall(r'appelPy\("([a-z_]+)"', s)), set(o["fonctions"]), "fonctions appelées")
+                # toutes les pages sont génériques (monterOutil, T16) : la page ne nomme que l'outil ; les appels sont ceux d'outil.js et de
+                # sa config. Une page qui chargerait ses fichiers elle-même (fetch, writeFile) ou le client seul échoue ici.
+                self.assertIn(OUTIL, s)
+                self.assertIn(f'outil:"{dossier}"', s)
+                self.assertNotIn("loadPyodide", s)
+                self.assertNotIn("new Worker", s)
+                self.assertNotIn("writeFile(", s)
+                greffons = lire("commun/graphique.js") if "graphique.js" in s else ""         # greffon de bloc : ses appels sont ceux de la page
+                appels = set(re.findall(r'appelPy\("([a-z_]+)"', s + lire("commun/outil.js") + greffons))
+                appels |= set(re.findall(r'exercicePython:"([a-z_]+)"', s))                   # tirage de l'exercice en Python (outil.js l'appelle par ce nom)
+                self.assertTrue(appels <= set(o["fonctions"]), appels - set(o["fonctions"]))
+                self.assertEqual(set(o["fonctions"]) - appels, set(o.get("anciennes", [])),
+                                 "fonctions non appelées = anciennes (pages en cache)")
 
     def test_outil_utilise_le_client_commun(self):
         outil = lire("commun/outil.js")
@@ -139,13 +128,10 @@ class TestManifeste(unittest.TestCase):
                     self.assertFalse(ok, f"{retire} n'est pas nécessaire")
 
     def test_versions_coherentes(self):
-        """La version de Pyodide (pages à worker intégré, client commun) et celles de la CI sont celles du manifeste."""
+        """La version de Pyodide (aucune page ne l'écrit : client commun) et celles de la CI sont celles du manifeste."""
         for dossier in OUTILS:
             with self.subTest(page=dossier):
-                if CLIENT not in page(dossier) and OUTIL not in page(dossier):
-                    self.assertIn(f'const PYODIDE="https://cdn.jsdelivr.net/pyodide/v{VERSIONS["pyodide"]}/full/"', page(dossier))
-                else:
-                    self.assertNotRegex(page(dossier), r"pyodide/v\d")
+                self.assertNotRegex(page(dossier), r"pyodide/v\d")       # pages génériques : la version vient du manifeste seulement
         with open(os.path.join(RACINE, ".github", "workflows", "tests.yml"), encoding="utf-8") as f:
             ci = f.read()
         self.assertIn(f'python-version: "{VERSIONS["python"]}"', ci)

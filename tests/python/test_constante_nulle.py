@@ -7,7 +7,7 @@ from moteurs import ensemble_def as ed
 
 
 def ed_de(entree):
-    r = json.loads(ed.analyser_json(entree))
+    r = json.loads(ed.json_strict(ed.analyser(entree)))     # ce que rendait analyser_json (retirée en F5)
     assert r["ok"], r
     return r["ED_tex"]
 

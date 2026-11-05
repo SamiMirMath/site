@@ -1,10 +1,11 @@
 # Découpage en tâches
 
 Chaque tâche fait **un commit (ou une petite série)**, laisse le site en ligne fonctionnel, et
-se termine par sa vérification. Commande de référence pour les tests Python :
+se termine par sa vérification. Commande de référence pour les tests (depuis la racine du dépôt ; détail dans `CLAUDE.md`) :
 
 ```sh
-uv run -q --no-project --python 3.12 --with sympy==1.13.3 python -m unittest discover -s tests/python
+python3 tests/lancer.py rapide      # pendant le travail : les tests des fichiers modifiés
+python3 tests/lancer.py complet     # avant chaque commit : toute la suite Python puis toute la suite de pages
 ```
 
 Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouverte de
@@ -200,7 +201,8 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
   les pages passeront à `resoudre()` en T17 à T20.
 
 ### T13 — Exercices avec graine
-- **Fichiers** : `moteur/exercices.py` (gabarits validés), `exercice(niveau, graine)` par outil, tests.
+- **Fichiers** : gabarits validés, `exercice(niveau, graine)` par outil, tests. (Un module commun `moteur/exercices.py` était prévu ;
+  il n'existe pas : la factorisation et les exponentielles tirent leurs exercices dans leur moteur, `exercice_json`.)
 - **Dépend** : T12. Gabarits acceptés (Q4, 14.10.2026) : pondérations conservées, racines
   distinctes et exactes (sauf réponse contraire à Q8 pour le carré parfait de la factorisation).
 - **Vérification** : FA-03, SOC-05 (moteur) ; ED-05, DV-08 ; 200 graines × 4 niveaux × outil
@@ -210,7 +212,9 @@ Légende : **Dépend** = tâches à terminer avant ; **Bloquée** = question ouv
 
 ### T14 — `commun/style.css` — **faite, aspect inchangé** (`7656eef`, 17.10.2026)
 - La nouvelle identité de l'accueil (contraste AA, SOC-03) reste à faire, en tâche séparée après les migrations T16 à T20.
-- **Fichiers** : `commun/style.css`, `tests/python/test_contrastes.py`.
+- **Fichiers** : `commun/style.css`. (Le test de contraste prévu, `test_contrastes.py`, n'a pas été écrit : SOC-03 n'a pas de test
+  automatique sur `commun/style.css` ; sont vérifiés l'accueil (`tests/python/test_accueil.py::test_acc05_contraste`) et le bouton
+  de signe du simplexe (`tests/pages/test_simplexe.py`).)
 - **Vérification** : SOC-03, ACC-05.
 
 ### T15 — Client Pyodide commun + tests de pages en CI — **faite** (17.10.2026 : étape 0 `0797de9`, client commun et pilote ED)
@@ -547,7 +551,7 @@ l'élève, un « Calcul en cours… » qui dure parce que SymPy se charge encore
 
 ## Plus tard (hors plan, si les tests tiennent)
 
-- Découpage de `ensemble_def.py` en modules (`moteur/expr.py`, `poly.py`, `ensembles.py`…),
+- Découpage de `ensemble_def.py` en modules (noms à fixer : R5 et R10 de `docs/chantiers/revue-structure/rapport.md`, § 4),
   vérifié par les instantanés et les propriétés.
 - Auto-hébergement de Pyodide (coût dans [choix-techniques.md](choix-techniques.md)).
 - **Déplacer `docs/` dans un dépôt privé** quand le moteur passera sur un serveur (décision du 26.10.2026). D'ici là, `docs/` reste ici, hors du
