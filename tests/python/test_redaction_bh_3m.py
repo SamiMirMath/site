@@ -8,13 +8,14 @@ Trois familles :
   - STRUCTURE : règles R1 à R17 vérifiées sur tout le corpus (tableau BH avant la chaîne, forme revérifiée avant chaque BH, R14…).
   - TRANSVERSE : valeurs contre le corpus de l'enseignant, signe 0⁺/0⁻, nombre de replis, aucune alerte, cartes « Étape n » consécutives.
 """
+import copy
 import os
 import re
 import sys
 import unittest
 
 from moteurs import ensemble_def  # noqa: F401  (chemins + SymPy)
-import limites_asymptotes as la
+import memo  # sorties de l'outil Limites : cache explicite, copie profonde (tests-rapides T4 ; MEMO=0 le coupe)
 import redaction_bh as rb
 import resoudre_la as rla
 import sortie as so
@@ -30,7 +31,7 @@ REPLI = "n'est pas rédigé ici"
 
 
 def descentes(saisie, ou):
-    r = la.etudier(saisie)
+    r = memo.etudier_la(saisie)
     assert r["ok"], r
     return [i for e in r["etudes"] if e["ou"] == ou for i in e["etapes"] if i.get("type") == "descente"]
 
@@ -176,16 +177,34 @@ class TestStructure(unittest.TestCase):
     """Règles du corrigé sur toutes les rédactions descendantes du corpus et des exemples de la page."""
     ENTREES = list(dict.fromkeys([c.saisie for c in CAS if c.id not in PAS_PRIS_EN_CHARGE] + entrees_page("limites-asymptotes")))
 
+    # Chantier tests-rapides, décision T3 : la liste des rédactions descendantes est calculée une seule fois par classe (au premier test
+    # qui en a besoin, dans chaque processus), puis chaque test en reçoit une copie profonde. Mêmes entrées, même filtre, même ordre
+    # qu'avant ; un test ne peut donc pas gêner les suivants en modifiant une rédaction.
+    _REDACTIONS = None
+
     @classmethod
-    def toutes(cls):
-        for saisie in cls.ENTREES:
-            r = la.etudier(saisie)
-            if not r["ok"]:
-                continue
-            for e in r["etudes"]:
-                for i in e["etapes"]:
-                    if i.get("type") == "descente":
-                        yield saisie, e["ou"], i
+    def _redactions(cls):
+        if cls._REDACTIONS is None:
+            liste = []
+            for saisie in cls.ENTREES:
+                r = memo.etudier_la(saisie)
+                if not r["ok"]:
+                    continue
+                for e in r["etudes"]:
+                    for i in e["etapes"]:
+                        if i.get("type") == "descente":
+                            liste.append((saisie, e["ou"], i))
+            cls._REDACTIONS = liste
+        return cls._REDACTIONS
+
+    def setUp(self):
+        self._copie = None
+
+    def toutes(self):
+        """Les rédactions descendantes `(saisie, ou, descente)`, dans la copie profonde propre à ce test."""
+        if self._copie is None:
+            self._copie = copy.deepcopy(self._redactions())
+        return iter(self._copie)
 
     def test_au_moins_cent_redactions_descendantes(self):
         self.assertGreaterEqual(sum(1 for _ in self.toutes()), 100)
@@ -309,14 +328,14 @@ class TestTransverse(unittest.TestCase):
     def test_au_plus_13_replis_sur_le_corpus(self):
         replis = 0
         for c in {(c.saisie) for c in CAS if c.id not in PAS_PRIS_EN_CHARGE}:
-            r = la.etudier(c)
+            r = memo.etudier_la(c)
             replis += sum(REPLI in i.get("html", "") for e in r["etudes"] for i in e["etapes"] if i.get("type") != "descente")
         self.assertLessEqual(replis, 13, replis)
 
     def test_r14_sur_les_ancienne_redactions_conservees(self):
         """L'ancienne rédaction qui prend le relais ne contient jamais « forme indéterminée = valeur » : sinon le repli s'affiche."""
         for saisie in TestStructure.ENTREES:
-            r = la.etudier(saisie)
+            r = memo.etudier_la(saisie)
             for e in r["etudes"]:
                 for i in e["etapes"]:
                     if i.get("type") == "texte":

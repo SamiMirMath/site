@@ -4,7 +4,7 @@ import json
 import unittest
 
 import moteurs  # noqa: F401  (chemins des moteurs)
-import limites_asymptotes as la
+import memo  # sorties de l'outil Limites : cache explicite, copie profonde (tests-rapides T4 ; MEMO=0 le coupe)
 import resoudre_la as rla
 from aides_sortie import manquantes, valide, blocs_de_type, titres_etude
 from cas import entrees_page, CAS_LIMITES
@@ -28,11 +28,11 @@ class TestResoudreLA(unittest.TestCase):
             with self.subTest(entree=entree):
                 s = rla.resoudre(entree)
                 valide(self, s)
-                self.assertEqual(manquantes(affichee(la.etudier(entree)), s, TECHNIQUE), [])
+                self.assertEqual(manquantes(affichee(memo.etudier_la(entree)), s, TECHNIQUE), [])
 
     def test_ordre_et_nombre_de_cartes(self):
         for entree in ENTREES:
-            ancien = affichee(la.etudier(entree))
+            ancien = affichee(memo.etudier_la(entree))
             if not ancien["ok"]:
                 continue
             with self.subTest(entree=entree):
@@ -68,7 +68,7 @@ class TestResoudreLA(unittest.TestCase):
 
     def test_toutes_les_asymptotes_ont_une_phrase(self):
         for entree in ENTREES:
-            ancien = la.etudier(entree)
+            ancien = memo.etudier_la(entree)
             if ancien["ok"] and ancien["asymptotes"]:
                 with self.subTest(entree=entree):
                     self.assertEqual(len(bilan(entree)), len(ancien["asymptotes"]))

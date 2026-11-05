@@ -10,7 +10,8 @@ import exp_log as el
 import exp_log_m as elm
 import resoudre_el as rel
 import sortie as so
-from test_exp_log_m import MP, ecart, racines
+import memo_racines
+from test_exp_log_m import MP, ecart
 
 GRAINES = range(500)
 GRAINES_BALAYAGE = range(0, 500, 25)         # le balayage numérique des racines est lent : une graine sur vingt-cinq
@@ -72,7 +73,7 @@ class TestPoolM(unittest.TestCase):
                     self.assertIsNotNone(e, "solution hors de l'ensemble de définition")
                     self.assertLess(abs(e), MP.mpf("1e-9") * (1 + abs(x)))
                 if graine in GRAINES_BALAYAGE and niveau != "exponentielle":
-                    for rac in racines(s):
+                    for rac in memo_racines.racines(s):
                         self.assertTrue(any(abs(rac - x) < MP.mpf("1e-9") * (1 + abs(rac)) for x in retenues), ("racine perdue", rac))
 
     def test_les_deux_methodes_des_exercices_exponentiels_ont_le_meme_s(self):
