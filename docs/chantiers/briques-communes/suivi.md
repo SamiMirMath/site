@@ -6,6 +6,57 @@ Principe : **aucune sortie existante ne change** (dump brut identique à l'octet
 inchangés). Consigne complète, plans et détails : `journal.md`. La consigne du chantier et `decisions.md` du 2e degré (Prérequis, D13,
 D25, E14, § 5, P3) tiennent lieu de décisions.
 
+## Résumé (05.11.2026, PC)
+
+Sept parties, sept commits, toutes acceptées par le contrôle allégé (`verifier` ACCEPTÉ, `rapide --depuis HEAD~1` vert, dump brut
+identique au départ à l'octet après chaque partie : 4 148 sorties). Aucune sortie existante ne change : aucun instantané, aucune
+référence de page modifiés ; aucun outil n'est rebranché sur `approx`, `exact` ni le bloc « chaine » (détail : `journal.md`,
+« Contrôles du chef d'orchestre »).
+
+| Partie | Contenu | Commit | Suite d'avant commit | Tests ajoutés |
+|---|---|---|---|---|
+| B0 | fiches, référence rafraîchie, dump de départ | `b296741` | 6 min 19 | — |
+| B1 | `moteur/expr.py` : arbre, TeX, lecture avec un `Lexique` | `6be8865` | 6 min 11 | 21 (`test_expr`) |
+| B2 | `moteur/chaine.py` : chaînes du corrigé, 3 propriétés génériques, 3 options | `572f751` | 6 min 44 | 30 (`test_chaine`) |
+| B3 | type de bloc « chaine » (`sortie.py`, `rendu.js`, `bloc_chaine`) | `9cee0c4` | 6 min 45 env. | 13 Python, 7 de pages (dont 3 xfail stricts « B4 ») |
+| B4 | CSS `.chaine` dans `composants.css`, `details ol` dans `style.css` | `d3b7661` | 6 min 54 | 1 (et les 3 xfail « B4 » passent) |
+| B5 | `nombres.approx` et `nombres.exact` (E14, R13, D25) | `abb21fa` | 6 min 51 | 13 (`test_nombres`) |
+| B6 | `oracle.racines(coeffs)` (mpmath, 50 chiffres, Sturm) | `f607702` | 6 min 46 | 24 (`test_oracle`) |
+
+Suite finale (chef d'orchestre, sur `f607702`, `PROCESSUS_PAGES=4`) : Python 1 493 passés + 1 xfail, 106 768 sous-tests (108 s) ;
+pages 145 passés, 2 421 sous-tests (310 s) ; 6 min 58 de mur ; `verifier` ACCEPTÉ ; `comparer_listes` avec `tests/reference` :
+seulement des ajouts (102 tests Python, 7 de pages), des hausses de sous-tests et la baisse justifiée ci-dessous. Même suite avec
+`MEMO=0` : code 0, `verifier` ACCEPTÉ, listes identiques nom par nom (7 min 26). Dump de B6 identique au départ à l'octet.
+
+Questions pour l'enseignant (option retenue en attendant) :
+1. **B5, zéros de la mantisse** : E14 écrit « 1,000 × 10ⁿ⁺¹ », R13 et `exp_log.tex_approx` « 1 × 10ⁿ⁺¹ ». Retenu : `approx` suit E14
+   (zéros gardés) ; aucune sortie actuelle concernée ; à trancher avant de rebrancher Exp-log (R9).
+2. **B5, D25 au-delà de 10⁶** : la notation scientifique est lue pour les valeurs approchées seulement. Retenu : une valeur exacte
+   entière garde son écriture groupée (`exact(1234567)` = 1’234’567, comme `formater_entier`). À confirmer.
+3. **B3–B4, migration d'Exp-log vers le bloc « chaine »** : Exp-log écrit encore sa grille en HTML dans un bloc `texte`. Retenu :
+   Exp-log inchangé ; chantier à décider (instantanés et références de pages d'EL à relire), noté dans `architecture.md` § 5.
+
+Exceptions (`architecture.md`) : aucune exception d'import nouvelle. § 5, lignes changées : `exp_log._DECIMAUX` (B1 : la brique ne le
+lit pas), « 3 parseurs, 2 arbres, 2 classes `Chaine` » (B1–B2 : les briques communes nommées), « 5 formats de ≈ » (B5 : la fonction
+unique existe, outils pas encore rebranchés, R9), « HTML de la grille `.chaine` » (B3–B4 : bloc et CSS communs, reste la migration).
+Aussi § 1 (expr, chaine), A4 (HTML refusé dans les champs des blocs récents) et A5 (`approx`, `exact`). Arêtes nouvelles de
+`test_imports` : `expr -> noyau`, `expr -> nombres`, `chaine -> expr`, `chaine -> sortie`, `exp_log -> expr`, `exp_log -> chaine`.
+
+À relire par l'enseignant (détail ci-dessous, section « À relire ») :
+- B1 : forme du `Lexique` de `moteur/expr.py` et ses deux messages par défaut (`journal.md`, B1).
+- B2 : les trois options de `moteur/chaine.py` : étiquette grise, « impossible », texte au milieu (`journal.md`, B2, « Les trois options »).
+- B3 : forme du bloc « chaine » et son rendu ; captures dans `/tmp/claude-1000/-home-sami-ubuntu-site/4164342b-a2d3-4999-80ff-850ac94e5e5e/scratchpad/b3/`
+  (`sans-b4-390.png`, `sans-b4-1100.png`, `avec-b4-320.png`, `avec-b4-390.png`, `avec-b4-390-sombre.png`, `avec-b4-1100.png`)
+  (`journal.md`, B3, « Exécution »).
+- B4 : `details ol` retiré aussi de Factorisation et de Limites (doublons) ; section « Chaîne de ⇔ » de `commun/composants.css`
+  (`journal.md`, B4, « Rendu identique »).
+- B5 : les quatre écarts voulus d'`approx` avec `tex_approx` et l'état de D25 (ce qui changerait, outil par outil) (`journal.md`, B5,
+  « Échantillon » et « D25 »).
+- B6 : choix d'`oracle.racines` (float refusé, polynôme nul refusé, non réelles non rendues, Sturm, seuil absolu 10⁻²⁰)
+  (`journal.md`, B6).
+
+Variations de sous-tests : une seule baisse, justifiée dans la section « Variations de sous-tests » ci-dessous (lue par `verifier`).
+
 ## État des parties
 
 | Partie | Contenu | État | Commit |
@@ -31,6 +82,7 @@ outil), `test_manifeste` vert, `test_largeurs` avec `CONNUS` vide.
   à trancher avant de rebrancher Exp-log (R9) : garder les zéros partout, ou les retirer dans `approx`.
 - B5, D25 au-delà de 10⁶ : « au-delà, notation scientifique » est lu pour les valeurs **approchées** (R13) ; une valeur exacte entière
   garde son écriture groupée (`exact(1234567)` = 1’234’567, comme `formater_entier` et l'arbre d'EL). À confirmer.
+- B3–B4, migration d'Exp-log vers le bloc « chaine » : chantier à décider (Exp-log inchangé en attendant).
 
 ## À relire par l'enseignant
 
@@ -76,6 +128,9 @@ outil), `test_manifeste` vert, `test_largeurs` avec `CONNUS` vide.
 
 ## Exceptions ajoutées ou changées
 
+- B1–B2 : `architecture.md` § 1 (expr, chaine) et § 5, lignes `exp_log._DECIMAUX` (la brique ne le lit pas) et « 3 parseurs, 2 arbres
+  d'expressions, 2 classes `Chaine` » (les briques communes nommées). Aucune exception d'import nouvelle ; arêtes ajoutées à
+  ARETES : `expr -> noyau`, `expr -> nombres`, `exp_log -> expr` (B1), `chaine -> expr`, `exp_log -> chaine` (B2).
 - B3 : ligne « HTML de la grille `.chaine` écrit dans un bloc `texte` (`resoudre_el.py`) » de `architecture.md` § 5 ajustée : le type de
   bloc `chaine` existe, le CSS passe en B4, la migration d'Exp-log vers le bloc est un chantier **à décider**. Aucune exception
   d'import nouvelle (arête `chaine -> sortie` dans ARETES, brique → brique).
@@ -96,8 +151,10 @@ sous-tests passés de la référence et du lancement, exactement ceux que `verif
 
 ## Reprise après compactage
 
+- **Chantier terminé** : B0–B6 faites, suite finale verte sur `f607702` (avec et sans `MEMO=0`), résumé ci-dessus ; reste la fusion
+  dans `main`, faite par le chef d'orchestre, et les réponses aux questions ci-dessus.
 - Lire `CLAUDE.md`, ce fichier, puis `journal.md` (consigne du chantier, section B0 pour les commandes, section de la dernière partie).
-- `git log --oneline main..briques-communes` : un commit par partie faite.
+- `git log --oneline main..briques-communes` : un commit par partie faite, puis celui de ce résumé.
 - Dump de départ : `/tmp/claude-1000/-home-sami-ubuntu-site/4164342b-a2d3-4999-80ff-850ac94e5e5e/scratchpad/briques/dumps/depart`
   (hors du dépôt ; s'il a disparu, le refaire sur le commit B0 avec `tests/outils/dump_sorties.py`, commande dans `journal.md`).
 - Depuis B6, scratchpad : `/tmp/claude-1000/-home-sami-ubuntu-site/a4deaf70-1c56-43d6-bbe6-eeb2ee49f756/scratchpad/briques/`
