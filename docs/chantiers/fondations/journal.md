@@ -77,9 +77,66 @@ FIN : suite complète relancée par le chef d'orchestre ; si tout est vert et le
 105 807 sous-tests, 108,4 s ; pages 123 passés, 2 386 sous-tests, 298,3 s. Mêmes listes que la référence posée à l'étape 2 (aucun test
 ajouté par F0 : `dump_sorties.py` n'est pas collecté).
 
+## F1 — verifier : docs/ ignoré, baisses de sous-tests justifiées, test_lancer.py
+
+### Plan
+
+1. `tests/verifier.py` : (a)/(b) ignorent tout `docs/` (motif `IGNORES`, comme `HORS_TESTS` de `lancer.py reference`), CLAUDE.md
+   toujours permis hors du commit seulement ; la liste des fichiers ignorés est toujours affichée (« aucun » sinon).
+2. (d) justifications lues dans le suivi.md du chantier ; refus si absentes, aux mauvais nombres, ou si le suivi.md est introuvable.
+3. `tests/python/test_lancer.py` (dépôt git temporaire), docstrings de lancer.py et verifier.py, `docs/methode-chantiers.md`.
+4. Vérifications : `verifier` sur F0, dump, instantanés, suite complète, commit, `verifier` sur F1.
+
+### Choix
+
+- **Ignorés** : tout fichier sous `docs/` (dans le commit avec une autre empreinte, ou hors du commit) ; `CLAUDE.md` hors du commit
+  (dans le commit avec une autre empreinte : toujours refusé, comme avant). Aucun test ne lit `docs/` (vérifié : seules des
+  docstrings le citent ; `test_accueil.py` l'exclut de ses parcours). Le verdict affiche toujours
+  « fichiers ignorés (docs/ ; CLAUDE.md hors du commit) : N » et la liste, ou « aucun ».
+- **Suivi.md lu** : `--suivi <fichier>`, sinon `docs/chantiers/<branche courante>/suivi.md` dans l'arbre de travail (branche du lancement,
+  `branche` de rapport.json, si HEAD est détaché). Introuvable, ou sans la section : toute baisse est refusée (motif affiché).
+- **Format d'une ligne** (section « ## Variations de sous-tests », jusqu'au « ## » suivant) :
+  `` - `<identifiant pytest complet>` : <avant> → <après> : <raison> `` (« -> » accepté pour « → » ; raison non vide). Expression :
+  ``^- `([^`]+)` : (\d+) (?:→|->) (\d+) : (\S.*)$``. Les nombres doivent être exactement ceux que verifier mesure (sous-tests passés,
+  référence → lancement). Plusieurs lignes pour un test : une seule doit correspondre (une par partie). Une ligne « - ` » hors format
+  et une justification sans baisse correspondante sont listées, sans effet. La justification ne vaut que pour un test dont l'issue ne
+  change pas : disparu, échoué, sauté en plus restent des refus.
+- **Choix « qui affiche le moins »** : rien d'affiché aux élèves n'est touché par F1.
+
+### test_lancer.py
+
+- Dépôt jetable (tempfile) : copies de `tests/lancer.py`, `verifier.py`, `comparer_listes.py`, un `.gitignore` (`__pycache__/`),
+  `src/calcul.py`, `CLAUDE.md`, le suivi.md du chantier `essai`. git sans configuration de l'utilisateur (`GIT_CONFIG_GLOBAL=/dev/null`,
+  `GIT_CONFIG_NOSYSTEM`), `GIT_CEILING_DIRECTORIES`, contrôle que la racine git est bien le dossier temporaire ; timeout 60 s à chaque
+  sous-processus. Modèle construit une fois par processus puis copié pour chaque test.
+- Rapports écrits par le vrai `complet_avec_rapport` du lancer.py copié ; seuls `lancer.python` et `lancer.pages` sont remplacés par
+  un faux pytest qui écrit le JSON de `rapport_pytest.py` et un JUnit de la forme de pytest (`testsuites/testsuite/testcase`,
+  `skipped type="pytest.xfail"` ou `"pytest.skip"`, `failure`, `error`). La référence est posée par la vraie commande `reference`.
+- 20 tests (6 sous-tests) : nominal ; test ajouté et sous-tests en hausse ; docs/ modifié, non suivi, apparu, changé après le lancement
+  et CLAUDE.md hors commit ignorés (et listés) ; CLAUDE.md dans le commit changé après le lancement ; fichier non suivi ; fichier
+  apparu pendant le lancement ; commit différent des empreintes ; commit qui n'est pas l'enfant du départ ; test disparu (même
+  justifié) ; échec (pages, et Python : code 2, pages non lancées) ; sauté en plus (même justifié) ; nouveau test sauté ; baisse sans
+  justification ; baisse justifiée (→ et ->) ; mauvais nombres (×2) ; ligne hors format ; suivi.md introuvable puis `--suivi` ;
+  suivi.md sans la section ; code de retour non nul ; fichier manquant (code 2). Durée : 2,9 s seul, 1,3 s avec `-n auto`.
+- Pour F2 : `Depot` (git, ecrire, commiter, `lancer(*args)`), `Depot.rapport`, `ModeleDepot.copie`. À noter : `rapide` ne relance pas
+  `test_lancer.py` quand `tests/lancer.py` ou `tests/verifier.py` change (ils ne sont pas dans `modules_du_depot`, et le test les copie
+  au lieu de les importer) : à régler par F2.
+
+### Vérifications
+
+- `verifier` sur le rapport F0 (HEAD = 0cb5a64, arbre modifié par F1) : ACCEPTÉ ; les empreintes ne portent que sur les fichiers notés
+  au lancement de F0, les fichiers de F1 n'entrent pas en compte. Ignorés listés : journal.md et suivi.md de F0.
+- Dump (`dumps/F1`) : `diff -r --exclude=temps` avec le départ, aucune sortie, code 0. Temps (`--processus 1`) : identiques au
+  tableau « Temps » (limites 5,93 s, étude 2,00 s, factorisation 1,95 s, autres < 1 s).
+- `git diff --exit-code main -- tests/python/instantanes tests/pages/references` : rien.
+- Suite d'avant commit : `PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rapport <scratchpad>/rapports/F1` : code 0. Python
+  1 354 passés + 1 xfail (1 355 collectés), 105 813 sous-tests, 91,4 s ; pages 123 passés, 2 386 sous-tests, 296,6 s. Aucun fichier
+  changé pendant le lancement. `comparer_listes.py tests/reference <F1>` : seuls ajouts, les 20 tests de
+  `tests/python/test_lancer.py::TestVerifier` (passés, 6 sous-tests : 105 807 → 105 813) ; pages identiques nom par nom.
+
 ## Contrôles du chef d'orchestre
 
-(vide)
+- F0 `0cb5a64` : verifier ACCEPTÉ (Python 1 335 / 105 807 sous-tests, pages 123 / 2 386, identiques à la référence) ; rapide --depuis HEAD~1 : 22 passés, 224 sous-tests, 2 s (seuls fumée + docs) ; dump = départ.
 
 ## Temps
 

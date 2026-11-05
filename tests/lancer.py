@@ -15,9 +15,11 @@
                                       # (python.xml, pages.xml), rapport.json (commit, empreintes des fichiers modifiés ou non suivis,
                                       # codes, durées, tests passés / xfail / sautés, sous-tests, variables CORPUS, OUTILS et MEMO) et les
                                       # listes texte de comparer_listes.py
-    python3 tests/lancer.py verifier <dossier> [--reference <dossier>] [--commit <rév>]
+    python3 tests/lancer.py verifier <dossier> [--reference <dossier>] [--commit <rév>] [--suivi <fichier>]
                                       # après le commit : contrôle le rapport de `complet --rapport` (empreintes du commit, autres
-                                      # fichiers modifiés, codes, tests disparus ou dégradés par rapport à la référence) ; voir verifier.py
+                                      # fichiers modifiés hors docs/ et CLAUDE.md, codes, tests disparus, échoués ou sautés en plus par
+                                      # rapport à la référence, sous-tests en baisse non justifiés dans le suivi.md du chantier, section
+                                      # « Variations de sous-tests ») ; voir verifier.py
     python3 tests/lancer.py reference <dossier>
                                       # remplace la référence du dépôt (tests/reference, celle de verifier) par les listes de <dossier>,
                                       # écrit par `complet --rapport` sur un commit de la branche, vert, complet, sans autre fichier modifié

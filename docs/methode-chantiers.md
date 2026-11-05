@@ -46,12 +46,17 @@ Tirée du chantier « Étude complète » (02–04.11.2026). Elle complète `CLA
      dépôt, par exemple dans le scratchpad), commite, puis donne ce dossier dans son rapport ;
   2. le chef d'orchestre lance `git log --oneline -3` (un seul commit de plus, sur la branche du chantier), puis
      `python3 tests/lancer.py verifier <dossier>` : il exige `VERDICT : ACCEPTÉ`. `verifier` refuse si le commit n'est pas exactement
-     ce que la suite a testé (empreintes), si un autre fichier était modifié ou non suivi pendant le lancement, si un code de retour
-     n'est pas 0, si un test disparaît ou est sauté en plus, si une issue se dégrade ou si des sous-tests manquent ;
+     ce que la suite a testé (empreintes), si un autre fichier était modifié ou non suivi pendant le lancement (sauf sous `docs/`, et
+     `CLAUDE.md` hors du commit : ignorés, toujours listés), si un code de retour n'est pas 0, si un test disparaît ou est sauté en
+     plus, si une issue se dégrade, ou si des sous-tests manquent sans justification dans `suivi.md` (ci-dessous) ;
   3. il lance ensuite `python3 tests/lancer.py rapide --depuis HEAD~1`, un contrôle indépendant de quelques minutes : les tests Python
      des fichiers du commit (dépendances d'import comprises) et les tests de fumée, plus les pages à corpus réduit des outils touchés
      (`rapide` seul, sur l'arbre propre d'après le commit, ne relancerait que les tests de fumée) ;
   4. il note une ligne dans `journal.md`, section « Contrôles du chef d'orchestre » (commit, verdict, nombres, murs).
+- **Une baisse de sous-tests** (un test qui reste passé mais perd des sous-tests) est acceptée par `verifier` si elle est justifiée
+  dans `docs/chantiers/<branche>/suivi.md` (ou `--suivi <fichier>`), section « Variations de sous-tests », par une ligne
+  `` - `<identifiant pytest complet>` : <avant> → <après> : <raison> `` dont les nombres sont exactement ceux que `verifier` mesure
+  (référence → lancement) ; sinon, ou sans suivi.md, refus. Aucune justification n'excuse un test disparu, échoué ou sauté en plus.
 - **Un test disparu fait refuser `verifier`.** Le chef d'orchestre n'accepte qu'un **renommage justifié dans `suivi.md`** (ancien nom →
   nouveau nom, raison) ; pour les parties suivantes, il compare alors au dossier de cette partie
   (`verifier <dossier> --reference <dossier de la partie acceptée>`). Tout autre refus : la partie est en échec (règles d'exécution).
