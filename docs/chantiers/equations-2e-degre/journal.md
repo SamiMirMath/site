@@ -550,6 +550,81 @@ par nom (Python et pages). Aucun test ajouté par P0. Commit : « equations-2e-d
 
 ## P2a — affichage commun
 
+### Plan
+
+1. **`moteur/sortie.py`** : bloc `tableau_essais` = `{groupes: [{titre, colonnes}], lignes: [{cases, ok?}]}` (`BLOCS` : `({"groupes",
+   "lignes"}, set())`) ; constructeur `tableau_essais(groupes, lignes, ok=None)` (`groupes` : couples (titre, nombre de colonnes),
+   titre en texte avec le TeX entre `\(` `\)` ; `lignes` : listes de cases TeX ; `ok` : indice de la ligne qui aboutit, ou None pour un
+   échec) ; `_valider_essais` (titres et cases sans HTML, A4 ; `colonnes` entier ≥ 1 ; chaque ligne a autant de cases que la somme des
+   colonnes ; `ok` vaut true ; au plus une ligne ok) ; `BLOCS_DANS_CHAINE += ("tableau_essais",)` ; docstring de `resultat_lim`
+   élargie (« résultat encadré », point 1) ; docstring du module.
+2. **`commun/rendu.js`** : `BLOCS.tableau_essais` (`.essais > table`, en-tête `th colspan` par groupe, filet `.groupe` au début de
+   chaque groupe sauf le premier ; si une ligne est ok, une colonne `.coche` de plus, ✓ seulement sur la ligne ok, `tr.ok`) ; titres
+   échappés (`echapper`, comme les rangées), cases par `K()`. Aucun autre bloc touché.
+3. **`commun/composants.css`** : `.essais` (défile seul s'il est trop large, nombres à droite, filets `--border`) ; `tr.ok` : bordure
+   `--good`, fond `--ok-soft` ; D29 : `.katex .fbox{border-color:var(--good);background:var(--ok-soft)}` (spécificité 0,2,0 > `.katex *`
+   0,1,0). Vérifié avant : aucune page, aucun moteur, aucun instantané ni référence de page n'écrit `\fbox` ni `\boxed` (seuls les docs du
+   chantier) : le sélecteur général ne change aucun rendu existant.
+4. **`moteur/chaine.py`** : `bloc_rangees(rangees, membre_gauche=False)` sorti de `bloc_chaine` (`bloc_chaine = bloc_rangees(
+   rangees_chaine(…), membre_gauche)`), généralisé sans effet sur `bloc_chaine` : le membre de gauche est la première rangée-ligne
+   (pas forcément la première rangée : des lignes pleine largeur peuvent la précéder, phrase de choix et tableau d'abord, § 13.3), et
+   seulement si elle n'a ni lien ni propriété. Option `coupure_ou=False` de `tex_element`, passée par `rangees_chaine` et `bloc_chaine` :
+   chaque membre d'un « ou » entre accolades (insécable) et `\allowbreak` après « ou ». **Écart au plan** : pas d'option `coupure_ou`
+   dans `bloc_rangees`, qui reçoit des rangées déjà écrites en TeX (l'option se donne à `rangees_chaine`).
+5. **Tests** : `test_sortie` (constructeur, `BLOCS_DANS_CHAINE`, conforme dans une chaîne et dans une carte, refus) ; `test_chaine`
+   (`bloc_chaine == bloc_rangees(rangees_chaine)` sur toutes les chaînes du fichier et d'Exp-log ; option désactivée = même TeX ;
+   activée ; membre de gauche après des lignes pleines en tête) ; `test_composants` (`.essais`, `tr.ok`, `.katex .fbox`, rendu.js) ;
+   nouveau `tests/pages/test_tableau_essais.py` (page de l'ED) : 2.10 a, S-P en échec (x² + 4x − 1), x² + 4, étiquette « avec ⟦A = 4z,
+   B = 9⟧ », produit nul à 3 facteurs (2.11 h) ; tableaux tirés de `second_degre.essais_sp`, nombres par `nombres.exact` ;
+   320–1100 px clair et sombre ; bordures calculées = `--good` ; rien ne déborde ; coupure seulement après « ou ».
+6. Captures 390 px (clair, sombre) → `S/captures/P2a/` ; suite complète, dump, temps natif, commit.
+
+### Réalisé
+
+- **`sortie.py`** : `BLOCS["tableau_essais"]`, `GROUPE_ESSAIS`, `LIGNE_ESSAIS`, `tableau_essais(groupes, lignes, ok=None)` (`ok` hors
+  des indices, booléen ou non entier → ValueError), `_valider_essais`, `BLOCS_DANS_CHAINE` + `"tableau_essais"` ; docstrings du module
+  et de `resultat_lim` (« résultat encadré » : limite, ou S d'une équation dans une carte normale).
+- **`rendu.js`** : `rendreEssais` et `BLOCS.tableau_essais` ; titres échappés (`echapper`), cases par `K()`, `colspan` = colonnes du
+  groupe (+ 1 sur le dernier groupe s'il y a une colonne ✓) ; aucun autre bloc touché.
+- **`composants.css`** : `.essais` (bordures séparées, transparentes sauf l'en-tête, le filet `.groupe` et la ligne ok), `tr.ok`
+  (bordure `--good` sur le pourtour, fond `--ok-soft`), `.coche` ; D29 `.katex .fbox{border-color:var(--good)}`.
+  **Piège trouvé à la capture** : dans le HTML de KaTeX 0.16.11, le span du cadre de `\fbox` vient **après** le contenu (pour
+  `\colorbox`, avant) ; un fond sur `.fbox` cachait la valeur (cadres vides sur la 1re capture). Correction, sans toucher une règle
+  existante : `@supports selector(:has(+ *)) { .katex .fbox{background:var(--ok-soft)} .katex .vlist>span:has(+ span>.fbox){z-index:1} }`
+  (le contenu passe au-dessus du cadre) ; sans `:has`, cadre vert sans fond, valeur visible (question 12 de suivi.md). Le test de pages
+  vérifie au centre de chaque valeur encadrée (`elementFromPoint`) que l'élément du dessus est la valeur ; contre-épreuve : la règle
+  `z-index` retirée, les 5 valeurs sont signalées cachées.
+- **`\fbox` ailleurs** : `grep` de `fbox`, `boxed`, `colorbox`, `boxpad` dans tout le dépôt (hors copies de KaTeX et de Pyodide) : seuls
+  les docs du chantier. Le sélecteur général ne change donc aucun rendu existant (pas de limitation à `.chaine`).
+- **`chaine.py`** : `bloc_rangees(rangees, membre_gauche=False)` (dans `__all__`) ; `bloc_chaine` = `bloc_rangees(rangees_chaine(…))` ;
+  membre de gauche = la première rangée-ligne, seulement sans lien ni propriété (dans `bloc_chaine`, c'est toujours la première
+  rangée, sans lien : même résultat) ; `coupure_ou` dans `tex_element`, `rangees_chaine`, `bloc_chaine` (pas dans `bloc_rangees`,
+  écart noté au plan). Rendu mesuré : sans l'option, KaTeX coupe aussi après chaque « = » (7 morceaux pour Az 4.1 d) ; avec, 3 morceaux,
+  un par équation.
+- **Tests** : `test_sortie.TestTableauEssais` (7 tests) + l. 165 et 169 ; `test_chaine.TestBlocRangees` (6 tests, dont
+  `bloc_chaine == bloc_rangees(rangees_chaine)` pour les 16 combinaisons d'options sur 6 chaînes et celles d'Exp-log) ;
+  `test_composants.test_tableau_essais_et_valeur_encadree` ; `tests/pages/test_tableau_essais.py` (6 tests ; contre-épreuves faites à
+  part : sans `coupure_ou`, sans la règle `.fbox`, sans la règle `z-index`, chacune détectée).
+- **Captures** (`S/tmp/p2a_essai.py`, cartes seules) : `S/captures/P2a/cartes-390-clair.png`, `cartes-390-sombre.png`,
+  `cartes-320-clair.png`. Les cartes sont écrites à la main dans le test (illustration de l'affichage commun, pas la rédaction de P2b :
+  par exemple « 2(x + 4) · (2x − 7) », écrit par `expr.tex`).
+- Aucun instantané, aucune référence de page, aucune sortie existante modifiés. xfail stricts ajoutés : aucun. Arête d'import nouvelle :
+  aucune (le test de pages importe `second_degre` et `nombres` ; les tests ne sont pas dans le graphe).
+
+### Suite d'avant commit et dump
+
+- `PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rapport S/rapports/P2a` : **code 0**, 23 h 57 → 00 h 04 (≈ 7 min de mur).
+  Python 1 548 collectés, 1 547 passés + 1 xfail, 112 699 sous-tests, 93,2 s ; pages 151 passés, 2 435 sous-tests, 327,9 s. Aucun
+  échec instable.
+- `comparer_listes.py tests/reference S/rapports/P2a` : par rapport à P1, 14 tests Python nouveaux (7 `test_sortie.TestTableauEssais`,
+  6 `test_chaine.TestBlocRangees`, 1 `test_composants`) et 6 tests de pages (`test_tableau_essais`) ; aucun disparu. Sous-tests : seule
+  baisse, celle de P1 déjà justifiée (`test_exp_log::…::test_aucun_texte_du_fichier_ne_tutoie` 960 → 957) ; hausses :
+  `test_composants` (49 → 62, 9 → 11), `test_sortie::TestBlocChaine::test_conforme` 3 → 4, `test_vocabulaire::test_litteraux_des_moteurs`
+  9 012 → 9 058.
+- **Dump** : `dump_sorties.py S/dumps/P2a --processus 6` (17 fichiers, 4 148 sorties, 4 s), `diff -r --exclude=temps S/dumps/depart
+  S/dumps/P2a` : **code 0, aucune sortie** (invariant tenu).
+- xfail stricts ajoutés : aucun.
+
 ## P2b — rédaction dans `second_degre`
 
 ## P3 — saisie
@@ -563,6 +638,7 @@ par nom (Python et pages). Aucun test ajouté par P0. Commit : « equations-2e-d
 ## Contrôles du chef d'orchestre
 
 - P0 `0fd0060` : verifier ACCEPTÉ (Python 1 494 / 106 768 sous-tests, pages 145 / 2 421, identiques à la nouvelle référence) ; rapide --depuis HEAD~1 : 23 passés, 245 sous-tests, 3 s (fumée + docs). Échec instable de `test_comportement::test_soc04_parametre_f` (ensemble-definition, `#cartes` absent : page pas encore chargée) au 1er lancement de référence : accepté par le chef comme instabilité de chargement (relancé seul vert, deux suites complètes vertes ensuite, aucune sortie en cause, Python vert) ; question 8 de suivi.md. Branche poussée.
+- P1 `5f21ac0` : verifier ACCEPTÉ (Python 1 534 / 112 356 sous-tests, 1 baisse justifiée test_exp_log::…::test_aucun_texte_du_fichier_ne_tutoie 960 → 957 ; pages 145 / 2 421 identiques) ; rapide --depuis HEAD~1 : Python 1 489 passés + 1 xfail, 112 300 sous-tests (95 s), pages 145 passés, 1 256 sous-tests (306 s), mur 6 min 44 ; dump identique au départ (P1). Branche poussée.
 
 ## Temps
 
@@ -573,6 +649,9 @@ solution ; script `S/tmp/temps_p1.py`, Python natif 3.12, 3e de trois tours) : c
 `test_second_degre.CORPUS`) **16,6 ms en tout**, la plus longue 0,45 ms (x⁴ − 16) : bien sous 0,1 s par équation. Pire cas permis
 par les bornes : x² + 999 999x − 499 997 (Δ = 999 999 999 989, premier, `noyau.squarefree` jusqu'à 10⁶) **105 ms** ; au-delà de 10¹²,
 message des bornes (question 9 de suivi.md).
+
+**P2a** (même mesure, `S/tmp/temps_p1.py` ; P2a ne touche pas `second_degre`) : 69 entrées, **16,4 ms en tout**, la plus longue
+0,45 ms (x⁴ − 16) ; pire cas des bornes 91 ms. Aucune hausse.
 
 Temps natifs des outils existants au départ (`S/dumps/depart-p1/temps/temps.json`, `--processus 1`, sur b72fe2e ; somme des appels de
 `resoudre_json` et plus long appel ; 12,9 s de mur) :

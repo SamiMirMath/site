@@ -48,6 +48,31 @@ class TestComposants(unittest.TestCase):
         rendu = lire("commun/rendu.js")
         self.assertIn('uv: b => `<div class="uv"><div class="uv-col">', rendu)
 
+    def test_tableau_essais_et_valeur_encadree(self):
+        """Tableau d'essais (S-P du 2e degré, D4) et valeurs trouvées encadrées (D29) : la ligne ok et \\fbox de KaTeX dans le cadre de
+        .rbox (bordure --good, fond --ok-soft, variables du thème : clair et sombre) ; la règle .fbox est plus précise que « .katex * »
+        de KaTeX (bordure de la couleur du texte), et son fond ne cache jamais la valeur ; le tableau défile seul ; commun/rendu.js le
+        dessine avec ces classes."""
+        self.assertRegex(CSS, r"\.essais\{[^}]*overflow-x:auto")
+        self.assertRegex(CSS, r"\.essais\{[^}]*max-width:100%")
+        self.assertRegex(CSS, r"\.essais table\{[^}]*border-collapse:separate")
+        self.assertRegex(CSS, r"\.essais tr\.ok td\{[^}]*background:var\(--ok-soft\);border-top-color:var\(--good\);"
+                              r"border-bottom-color:var\(--good\)")
+        self.assertRegex(CSS, r"\.essais tr\.ok td:first-child\{border-left-color:var\(--good\)\}")
+        self.assertRegex(CSS, r"\.essais tr\.ok td:last-child\{border-right-color:var\(--good\)\}")
+        self.assertRegex(CSS, r"(?m)^\.katex \.fbox\{border-color:var\(--good\)")
+        # fond seulement si la valeur passe au-dessus du cadre (le span du cadre suit le contenu dans le HTML de KaTeX)
+        self.assertRegex(CSS, r"@supports selector\(:has\(\+ \*\)\)\{\s*\.katex \.fbox\{background:var\(--ok-soft\)\}\s*"
+                              r"\.katex \.vlist>span:has\(\+ span>\.fbox\)\{z-index:1\}")
+        self.assertNotRegex(CSS.split("@supports")[0], r"\.fbox\{[^}]*background")
+        self.assertRegex(STYLE, r"\.rbox\{[^}]*border:1px solid var\(--good\);background:var\(--ok-soft\)")    # le même cadre
+        for regle in re.findall(r"\.essais[^{]*\{[^}]*\}", CSS):
+            self.assertNotRegex(regle, r"width:\s*\d+px")
+        rendu = lire("commun/rendu.js")
+        self.assertIn("tableau_essais: b => rendreEssais(b)", rendu)
+        self.assertIn('<div class="essais"><table>', rendu)
+        self.assertIn("' class=\"ok\"'", rendu)
+
     def test_aucune_largeur_d_ecran_en_pixels(self):
         for requete in re.findall(r"@(?:media|container)\s*([^{]*)\{", CSS):
             with self.subTest(requete=requete.strip()):

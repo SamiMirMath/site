@@ -8,6 +8,7 @@ Python pur, bibliothèque standard seulement. Une sortie de `resoudre()` est un 
             style « partie » : intertitre d'une partie (Étude complète, D1), sans bloc ; la page l'affiche avec la carte qui le suit
     bloc  = texte | formule | resultat | erreur | liste | tableau | graphique | uv (tableau u, v / u′, v′) | bh, encadre, resultat_lim,
             valeurs, sous_calcul (corrigé des limites ; sous_calcul aussi pour la dérivée de l'exposant) | chaine (chaîne du corrigé)
+            | tableau_essais (tableau S-P du 2e degré)
     variante = {cle, libelle, cartes: [carte], option?: false}   (facultatif : plusieurs résolutions de la même entrée, au choix de l'élève ;
                `cartes` de la sortie est alors celles de la variante par défaut ; `option: false` : pas de case à cocher pour cette variante)
     option = {cle, libelle, cochee, cartes: [carte]}   (facultatif : une case à cocher dont les cartes s'ajoutent à la fin des cartes affichées ;
@@ -19,6 +20,10 @@ Python pur, bibliothèque standard seulement. Une sortie de `resoudre()` est un 
                                                          seulement sur la première ligne, avant son lien (le corrigé : « A ⇔ B »)
                    | {texte}                             ligne pleine largeur au milieu de la chaîne (texte, le TeX entre \\( et \\))
                    | {bloc}                              ligne pleine largeur qui contient un bloc (BLOCS_DANS_CHAINE)
+    tableau_essais = {groupes: [{titre, colonnes}], lignes: [{cases, ok?}]}   tableau d'essais du corrigé (S-P du 2e degré, E6, D4) :
+            groupes : l'en-tête, un titre (texte, le TeX entre \\( et \\)) par groupe de `colonnes` colonnes (« produit = −42 » sur deux
+            colonnes, « somme » sur une) ; lignes : une ligne par essai, `cases` en TeX (autant que de colonnes) ; `ok: true` sur la
+            ligne qui aboutit (au plus une ; le rendu l'encadre et y ajoute ✓, D29) ; aucune ligne ok : échec (D3)
             Jamais de HTML dans un champ (A4) : le rendu (commun/rendu.js) échappe les textes et fabrique le HTML.
 
 `valider(sortie)` renvoie la liste des écarts au schéma (vide si la sortie est conforme).
@@ -52,11 +57,16 @@ BLOCS = {
     "graphique": ({"xmin", "xmax", "ymin", "ymax", "segments", "extrema", "asymptotes"}, {"recalculable", "points", "ronds_vides"}),
     # chaîne de ⇔ du corrigé, avec des lignes pleine largeur au milieu (chantier briques-communes, B3 ; docs/architecture.md, A4)
     "chaine": ({"rangees"}, set()),
+    # tableau d'essais du corrigé : S-P du 2e degré (chantier equations-2e-degre, E6, D3, D4, D29)
+    "tableau_essais": ({"groupes", "lignes"}, set()),
 }
 # bloc « chaine » : une ligne de la chaîne, ses liens, et les blocs qu'une ligne pleine largeur peut contenir
 RANGEE = ({"lien", "expr"}, {"prop", "gauche"})
 LIENS_CHAINE = ("", "\\iff", "\\Rightarrow")
-BLOCS_DANS_CHAINE = ("texte", "formule", "tableau")
+BLOCS_DANS_CHAINE = ("texte", "formule", "tableau", "tableau_essais")
+# bloc « tableau_essais » : un groupe de colonnes de l'en-tête, une ligne d'essai
+GROUPE_ESSAIS = ({"titre", "colonnes"}, set())
+LIGNE_ESSAIS = ({"cases"}, {"ok"})
 # HTML dans un champ de texte ou de TeX (A4) : une balise ouvrante ou fermante, ou une entité ; « x < y » et « \(a<b\) » n'en sont pas
 HTML = re.compile(r"</?[A-Za-z][A-Za-z0-9-]*(?:\s[^<>]*)?/?>|&(?:[A-Za-z][A-Za-z0-9]*|#[0-9]+|#[xX][0-9A-Fa-f]+);")
 CARTE = ({"titre", "style", "blocs"}, {"titre_tex", "badge", "detail", "titre_masque"})
@@ -107,7 +117,8 @@ def encadre(genre, titre, lignes):
 
 
 def resultat_lim(tex):
-    """Résultat d'une limite, encadré vert (« lim … = … »)."""
+    """Résultat encadré vert (cadre .rbox) : le résultat d'une limite (« lim … = … ») ; l'ensemble des solutions d'une équation
+    (« S = {…} », 2e degré, D29), dans une carte normale (pas de double cadre)."""
     return {"type": "resultat_lim", "tex": tex}
 
 
@@ -152,6 +163,18 @@ def rangee_texte(texte_):
 def rangee_bloc(bloc):
     """Une ligne pleine largeur au milieu de la chaîne qui contient un bloc (types de BLOCS_DANS_CHAINE, par exemple un tableau)."""
     return {"bloc": bloc}
+
+
+def tableau_essais(groupes, lignes, ok=None):
+    """Tableau d'essais du corrigé (S-P du 2e degré, E6 ; D4) : `groupes` = [(titre, colonnes)] pour l'en-tête (titre : texte, le TeX
+    entre \\( et \\) ; un filet vertical sépare deux groupes), `lignes` = [[case TeX, …]] (une ligne par essai), `ok` = l'indice de la
+    ligne qui aboutit (le rendu l'encadre et y ajoute ✓, D29), ou None pour un échec (aucune ✓, D3). Se place dans une chaîne par
+    `rangee_bloc` (ou `LigneTexte` de moteur/chaine.py)."""
+    lignes = [list(cases) for cases in lignes]
+    if ok is not None and (isinstance(ok, bool) or not isinstance(ok, int) or not 0 <= ok < len(lignes)):
+        raise ValueError(f"ok : indice d'une ligne attendu (0 à {len(lignes) - 1}), pas {ok!r}")
+    return {"type": "tableau_essais", "groupes": [{"titre": titre, "colonnes": n} for titre, n in groupes],
+            "lignes": [dict(cases=cases, **({"ok": True} if i == ok else {})) for i, cases in enumerate(lignes)]}
 
 
 def carte(titre, blocs, style="normal", badge=None, titre_tex=None, detail=None, titre_masque=False):
@@ -304,6 +327,8 @@ def _valider_bloc(b, chemin, ecarts):
                         _valider_bloc(bb, f"{chemin}.etapes[{i}].blocs[{j}]", ecarts)
     elif t == "chaine":
         _valider_chaine(b, chemin, ecarts)
+    elif t == "tableau_essais":
+        _valider_essais(b, chemin, ecarts)
 
 
 def _sans_html(v, chemin, ecarts):
@@ -348,6 +373,47 @@ def _valider_chaine(b, chemin, ecarts):
             ecarts.append(f"{cr} : rangée mal formée (ligne {{lien, expr, prop?, gauche?}}, {{texte}} ou {{bloc}})")
     if not lignes:
         ecarts.append(f"{chemin} : une chaîne a au moins une ligne {{lien, expr}}")
+
+
+def _valider_essais(b, chemin, ecarts):
+    """Bloc « tableau_essais » : au moins un groupe {titre, colonnes} (titre sans HTML, colonnes entier ≥ 1) et une ligne {cases, ok?} ;
+    chaque ligne a autant de cases (TeX sans HTML, A4) que l'en-tête a de colonnes ; ok vaut true, sur une ligne au plus."""
+    groupes, lignes = b["groupes"], b["lignes"]
+    if not isinstance(groupes, list) or not groupes or not isinstance(lignes, list) or not lignes:
+        ecarts.append(f"{chemin} : groupes et lignes doivent être des listes non vides")
+        return
+    colonnes = 0
+    for i, g in enumerate(groupes):
+        cg = f"{chemin}.groupes[{i}]"
+        if not _cles(g, *GROUPE_ESSAIS, cg, ecarts) or not set(GROUPE_ESSAIS[0]) <= set(g):
+            colonnes = None
+            continue
+        _sans_html(g["titre"], cg + ".titre", ecarts)
+        n = g["colonnes"]
+        if isinstance(n, bool) or not isinstance(n, int) or n < 1:
+            ecarts.append(f"{cg} : colonnes doit être un entier ≥ 1")
+            colonnes = None
+        elif colonnes is not None:
+            colonnes += n
+    nb_ok = 0
+    for i, ligne in enumerate(lignes):
+        cl = f"{chemin}.lignes[{i}]"
+        if not _cles(ligne, *LIGNE_ESSAIS, cl, ecarts) or "cases" not in ligne:
+            continue
+        cases = ligne["cases"]
+        if not isinstance(cases, list):
+            ecarts.append(f"{cl} : cases doit être une liste")
+            continue
+        if colonnes is not None and len(cases) != colonnes:
+            ecarts.append(f"{cl} : {len(cases)} cases, {colonnes} attendues (colonnes de l'en-tête)")
+        for j, c in enumerate(cases):
+            _sans_html(c, f"{cl}.cases[{j}]", ecarts)
+        if "ok" in ligne:
+            if ligne["ok"] is not True:
+                ecarts.append(f"{cl} : ok doit être true (absent sur les autres lignes)")
+            nb_ok += 1
+    if nb_ok > 1:
+        ecarts.append(f"{chemin} : {nb_ok} lignes ok, une au plus")
 
 
 def valider(s):

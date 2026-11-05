@@ -162,12 +162,12 @@ class TestBlocChaine(unittest.TestCase):
         self.assertEqual(so.rangee_bloc(so.formule("x")), {"bloc": {"type": "formule", "tex": "x"}})
         self.assertEqual(so.chaine((so.rangee("", "x"),)), {"type": "chaine", "rangees": [{"lien": "", "expr": "x"}]})
         self.assertEqual(so.BLOCS["chaine"], ({"rangees"}, set()))
-        self.assertEqual(so.BLOCS_DANS_CHAINE, ("texte", "formule", "tableau"))
+        self.assertEqual(so.BLOCS_DANS_CHAINE, ("texte", "formule", "tableau", "tableau_essais"))
 
     def test_conforme(self):
         self.assertEqual(so.valider(self.sortie(chaine_bloc())), [])
         for genre in so.BLOCS_DANS_CHAINE:
-            bloc = {"texte": so.texte("a"), "formule": so.formule("x"), "tableau": tableau()}[genre]
+            bloc = {"texte": so.texte("a"), "formule": so.formule("x"), "tableau": tableau(), "tableau_essais": essais_2_10_a()}[genre]
             with self.subTest(genre=genre):
                 self.assertEqual(so.valider(self.sortie(so.chaine([so.rangee("", "x"), so.rangee_bloc(bloc)]))), [])
         sous = so.sous_calcul("Dérivée", [{"titre": "u", "blocs": [chaine_bloc()]}])           # aussi dans un sous-calcul
@@ -217,6 +217,84 @@ class TestBlocChaine(unittest.TestCase):
         self._refuse(lambda b: b.update(rangees="x"), "liste non vide")
         self._refuse(lambda b: b.update(rangees=[so.rangee_texte("a")]), "au moins une ligne")
         self._refuse(lambda b: b.pop("rangees"), "clé « rangees » manquante")
+
+
+def essais_2_10_a(ok=3):
+    """Tableau S-P de x² − 5x − 36 (2.10 a, decisions.md E6) : produit = −36 | somme, arrêt à la ligne ✓ (4, −9 | −5)."""
+    return so.tableau_essais([(r"produit \(= -36\)", 2), ("somme", 1)],
+                             [["1", "-36", "-35"], ["2", "-18", "-16"], ["3", "-12", "-9"], ["4", "-9", "-5"]], ok=ok)
+
+
+class TestTableauEssais(unittest.TestCase):
+    """Bloc « tableau_essais » (chantier equations-2e-degre, P2a ; decisions.md D3, D4, E6, D29) : constructeur et schéma. Rendu :
+    tests/pages/test_tableau_essais.py."""
+
+    def sortie(self, b):
+        return so.sortie_ok("x", [so.carte("t", [b])])
+
+    def _refuse(self, modifier, fragment):
+        b = copy.deepcopy(essais_2_10_a())
+        modifier(b)
+        ecarts = so.valider(self.sortie(b))
+        self.assertTrue(any(fragment in e for e in ecarts), ecarts)
+
+    def test_constructeur(self):
+        self.assertEqual(so.BLOCS["tableau_essais"], ({"groupes", "lignes"}, set()))
+        self.assertEqual(so.tableau_essais([("produit \\(= 4\\)", 2), ("somme", 1)], [("1", "4", "5"), ["2", "2", "4"]]),
+                         {"type": "tableau_essais",
+                          "groupes": [{"titre": "produit \\(= 4\\)", "colonnes": 2}, {"titre": "somme", "colonnes": 1}],
+                          "lignes": [{"cases": ["1", "4", "5"]}, {"cases": ["2", "2", "4"]}]})
+        b = essais_2_10_a()
+        self.assertEqual([l.get("ok") for l in b["lignes"]], [None, None, None, True])
+        self.assertEqual(essais_2_10_a(ok=0)["lignes"][0], {"cases": ["1", "-36", "-35"], "ok": True})
+        for ok in (4, -1, "3", 1.0, True):
+            with self.subTest(ok=ok), self.assertRaises(ValueError):
+                essais_2_10_a(ok=ok)
+
+    def test_conforme(self):
+        """Réussite (une ligne ok), échec (aucune), dans une carte et dans une chaîne (rangee_bloc), et une seule ligne (x² + 4x − 1)."""
+        for b in (essais_2_10_a(), essais_2_10_a(ok=None),
+                  so.tableau_essais([(r"produit \(= -1\)", 2), ("somme", 1)], [["-1", "1", "0"]])):
+            with self.subTest(ok=[l.get("ok") for l in b["lignes"]]):
+                self.assertEqual(so.valider(self.sortie(b)), [])
+                self.assertEqual(so.valider(self.sortie(so.chaine([so.rangee_bloc(b), so.rangee("\\iff", "x = 1")]))), [])
+
+    def test_html_interdit(self):
+        self._refuse(lambda b: b["groupes"][0].update(titre="<b>produit</b>"), "HTML interdit")
+        self._refuse(lambda b: b["lignes"][1]["cases"].__setitem__(0, "1 &amp; 2"), "HTML interdit")
+
+    def test_colonnes_coherentes(self):
+        self._refuse(lambda b: b["lignes"][2]["cases"].pop(), "2 cases, 3 attendues")
+        self._refuse(lambda b: b["groupes"][1].update(colonnes=2), "3 cases, 4 attendues")
+        for n in (0, -1, 1.5, "1", True, None):
+            with self.subTest(colonnes=n):
+                self._refuse(lambda b, n=n: b["groupes"][0].update(colonnes=n), "colonnes doit être un entier ≥ 1")
+        self._refuse(lambda b: b["lignes"][0]["cases"].__setitem__(1, ""), "texte non vide attendu")
+        self._refuse(lambda b: b["lignes"][0]["cases"].__setitem__(1, 36), "texte non vide attendu")
+        self._refuse(lambda b: b["lignes"][0].update(cases="1 -36 -35"), "cases doit être une liste")
+
+    def test_au_plus_une_ligne_ok(self):
+        self._refuse(lambda b: b["lignes"][0].update(ok=True), "2 lignes ok, une au plus")
+        for v in (False, 1, "oui", None):
+            with self.subTest(ok=v):
+                self._refuse(lambda b, v=v: b["lignes"][0].update(ok=v), "ok doit être true")
+
+    def test_forme(self):
+        self._refuse(lambda b: b.update(groupes=[]), "listes non vides")
+        self._refuse(lambda b: b.update(lignes=[]), "listes non vides")
+        self._refuse(lambda b: b.update(lignes="1"), "listes non vides")
+        self._refuse(lambda b: b.pop("groupes"), "clé « groupes » manquante")
+        self._refuse(lambda b: b.update(ok=3), "clé « ok » inconnue")
+        self._refuse(lambda b: b["groupes"][0].pop("titre"), "clé « titre » manquante")
+        self._refuse(lambda b: b["groupes"][0].update(style="gras"), "clé « style » inconnue")
+        self._refuse(lambda b: b["groupes"].append("somme"), "dict attendu")
+        self._refuse(lambda b: b["lignes"][0].update(couleur="vert"), "clé « couleur » inconnue")
+        self._refuse(lambda b: b["lignes"][0].pop("cases"), "clé « cases » manquante")
+        self._refuse(lambda b: b["lignes"].append(["1", "2", "3"]), "dict attendu")
+
+    def test_pas_partout(self):
+        """Hors de BLOCS_DANS_CHAINE, rien ne change : une chaîne n'accepte toujours ni résultat ni liste (test_bloc_imbrique)."""
+        self.assertNotIn("resultat_lim", so.BLOCS_DANS_CHAINE)
 
 
 def avec_variantes():

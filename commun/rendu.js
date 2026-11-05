@@ -24,6 +24,10 @@
                 (.etape > .chaine > .ligne > .lien, .expr, .prop) ; une ligne pleine largeur est un .pleine (texte, ou un bloc imbriqué
                 rendu comme ailleurs) ; avec un membre de gauche, .chaine.avec-gauche et une colonne .gauche avant .lien. Les textes
                 (propriété, ligne pleine largeur) sont échappés ici, leur TeX entre \( \) est rendu par math() ; jamais de HTML venu du moteur.
+     tableau_essais  tableau d'essais du corrigé (S-P du 2e degré, E6) : <table> dans .essais (commun/composants.css) ; en-tête d'un <th>
+                par groupe de colonnes (titre échappé, TeX entre \( \)), filet .groupe au début de chaque groupe suivant ; la ligne ok
+                (au plus une) est un tr.ok, encadré (D29), et le rendu ajoute ✓ dans une dernière colonne .coche (absente si aucune ligne
+                n'est ok : échec, D3).
    Un bloc de type inconnu (SOC-22) n'est jamais sauté en silence ni une exception : à sa place, la carte affiche l'encadré commun
    « attention » (bloc encadre, .enc.enc-attention) avec le message BLOC_INCONNU, et le type est écrit dans la console. Cas typique : un ancien rendu.js encore en
    cache reçoit la sortie d'un moteur plus récent. Un style de texte inconnu est rendu comme « etape » (le texte reste lisible).
@@ -116,6 +120,22 @@ function rendreChaine(b, c) {
   return `<div class="etape"><div class="chaine${gauche ? " avec-gauche" : ""}">${rangees.join("")}</div></div>`;
 }
 
+/* Tableau d'essais (bloc « tableau_essais ») : cases en TeX ; ✓ ajouté ici, sur la ligne ok seulement. */
+function rendreEssais(b) {
+  const debuts = new Set();
+  let n = 0;
+  for (const g of b.groupes) { debuts.add(n); n += g.colonnes; }
+  const coche = b.lignes.some(l => l.ok);
+  const entete = b.groupes.map((g, i) => {
+    const largeur = g.colonnes + (coche && i === b.groupes.length - 1 ? 1 : 0);
+    return `<th colspan="${largeur}"${i ? ' class="groupe"' : ""}>${echapper(g.titre)}</th>`;
+  }).join("");
+  const lignes = b.lignes.map(l => `<tr${l.ok ? ' class="ok"' : ""}>` +
+    l.cases.map((c, j) => `<td${j && debuts.has(j) ? ' class="groupe"' : ""}>${K(c)}</td>`).join("") +
+    (coche ? `<td class="coche">${l.ok ? "✓" : ""}</td>` : "") + "</tr>").join("");
+  return `<div class="essais"><table><thead><tr>${entete}</tr></thead><tbody>${lignes}</tbody></table></div>`;
+}
+
 const BLOCS = {
   texte: b => {
     if (b.detail) console.error(b.detail);
@@ -141,6 +161,7 @@ const BLOCS = {
   sous_calcul: (b, c) => `<div class="sous"><div class="sous-t">${b.titre}</div>` +
     b.etapes.map((e, i) => `<div class="sous-e">Étape ${i + 1} : ${e.titre}.</div>` + e.blocs.map(x => rendreBloc(x, c)).join("")).join("") + "</div>",
   chaine: (b, c) => rendreChaine(b, c),
+  tableau_essais: b => rendreEssais(b),
 };
 
 const BARRES = {};

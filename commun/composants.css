@@ -81,6 +81,35 @@
   .chaine.avec-gauche .gauche:empty{display:none}
 }
 
+/* ---- Tableau d'essais (bloc « tableau_essais » de moteur/sortie.py, commun/rendu.js : tableau S-P du 2e degré, E6, D4) ----
+   En-tête par groupes de colonnes (« produit = −42 | somme »), filet vertical au début de chaque groupe suivant (.groupe), nombres
+   alignés à droite. La ligne qui aboutit (tr.ok, au plus une) est encadrée comme une valeur trouvée (D29 : bordure --good, fond
+   --ok-soft, ceux de .rbox) et suivie de ✓ (.coche). Bordures séparées (pas de fusion : chaque case garde sa couleur de bordure). Un
+   tableau trop large défile seul. */
+.essais{overflow-x:auto;position:relative;max-width:100%;margin:.35em 0}      /* position:relative : le MathML caché de KaTeX est rogné */
+.essais table{border-collapse:separate;border-spacing:0}
+.essais th,.essais td{padding:.2em .65em;border:1px solid transparent;white-space:nowrap}
+.essais th{font-weight:400;text-align:center;border-bottom-color:var(--border)}
+.essais td{text-align:right}
+.essais .groupe{border-left-color:var(--border)}
+.essais tr.ok td{background:var(--ok-soft);border-top-color:var(--good);border-bottom-color:var(--good)}
+.essais tr.ok td:first-child{border-left-color:var(--good)}
+.essais tr.ok td:last-child{border-right-color:var(--good)}
+.essais .coche{padding-left:.15em;color:var(--good);font-weight:700;text-align:left}
+
+/* ---- Valeur trouvée encadrée (D29 : \fbox{$…$} dans le TeX du moteur ; A et B de l'Id. rem., r et △, la valeur de Δ) : le cadre du
+   résultat d'une limite (.rbox : bordure --good, fond --ok-soft), clair et sombre par les variables. Plus précis que « .katex * » de
+   KaTeX (bordure de la couleur du texte, grise dans une étiquette). Une boîte de KaTeX ne se coupe jamais (insécable). Aucune page ni
+   aucun moteur n'écrivait \fbox ni \boxed avant (vérifié en P2a du chantier equations-2e-degre) : aucun rendu existant ne change.
+   Le cadre de \fbox est, dans le HTML de KaTeX, un span placé APRÈS le contenu (\colorbox fait l'inverse) : un fond sur .fbox
+   cacherait la valeur. Le fond n'est donc posé que si le contenu passe au-dessus du cadre (z-index de son span, repéré par :has) ;
+   un navigateur sans :has garde le cadre vert, sans fond, et la valeur reste visible. */
+.katex .fbox{border-color:var(--good);border-radius:3px}
+@supports selector(:has(+ *)){
+  .katex .fbox{background:var(--ok-soft)}
+  .katex .vlist>span:has(+ span>.fbox){z-index:1}
+}
+
 /* ---- Bouton flottant (« Étape suivante ») : fixé en bas à droite, hors impression ---- */
 .bouton-flottant{position:fixed;z-index:50;right:calc(16px + env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
   min-height:max(44px,var(--flottant-h));min-width:44px;padding:0 24px;font-size:1.05rem;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.3)}

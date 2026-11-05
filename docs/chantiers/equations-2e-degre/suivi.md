@@ -13,7 +13,7 @@ au dump de départ (`/home/sami-ubuntu/nuits/equations-2e-degre/dumps/depart`) ;
 |---|---|---|---|
 | P0 | Prérequis présents ; fiches ; référence rafraîchie (1 494 tests Python dont 1 xfail, 106 768 sous-tests ; 145 tests de pages, 2 421 sous-tests) ; dump de départ (4 148 sorties, déterministe) | faite (suite verte) | voir `git log` |
 | P1 | Correction d'`oracle.racines` ; `moteur/polynomes.py` (déplacements Q2) ; `moteur/second_degre.py`, calcul sans texte | faite (suite verte, dump identique) | voir `git log` |
-| P2a | Affichage commun : `tableau_essais`, encadré D29, options de `chaine.py` | à faire | — |
+| P2a | Affichage commun : `tableau_essais`, encadré D29, options de `chaine.py` | faite (suite verte, dump identique) | voir `git log` |
 | P2b | Rédaction dans `second_degre` (§ 5), instantanés hors d'`instantanes/` | à faire | — |
 | P3 | Saisie : E1, E2, `equations-2e-degre/equations.py` | à faire | — |
 | P4a | Formes structurées, sur l'arbre | à faire | — |
@@ -50,7 +50,20 @@ Questions nouvelles de la nuit :
 11. **P1, `s_applique` hors du chemin** : S-P et tâtonnement demandent c ≠ 0 (sinon la ME vient avant) ; le tâtonnement demande a ≥ 2
     (D21 : −pgcd d'abord) ; aucune méthode ne s'applique en degré < 2 (on isole x, E13). Pour le futur quiz.
 
+12. **P2a, fond de l'encadré D29** : dans le HTML de KaTeX, le cadre de `\fbox` est dessiné après la valeur et la cachait avec son
+    fond. Le fond `--ok-soft` n'est donc posé que si le navigateur connaît `:has` (Safari ≥ 15.4, Chrome ≥ 105, Firefox ≥ 121), qui
+    fait passer la valeur au-dessus ; sinon, cadre vert sans fond (valeur toujours visible). Option qui affiche le moins.
+13. **P2a, A et B** : D29 écrit « avec ⟦A = 4z, B = 9⟧ » (un seul cadre pour les deux) ; le test de pages suit cette écriture. P2b
+    choisit (un cadre, ou un par valeur) ; l'affichage commun convient aux deux.
+
 ## À relire par l'enseignant
+
+- **P2a, captures à 390 px** (cartes du test `tests/pages/test_tableau_essais.py`, écrites à la main : affichage commun seulement,
+  pas la rédaction de P2b) : `/home/sami-ubuntu/nuits/equations-2e-degre/captures/P2a/cartes-390-clair.png`, `cartes-390-sombre.png`
+  (et `cartes-320-clair.png`). À juger : tableau S-P (filets, ligne ✓ encadrée), cadres D29, coupure après « ou ».
+- **P2a, règle CSS générale** `.katex .fbox` (bordure `--good`, fond `--ok-soft`) dans `commun/composants.css` : aucune page ni aucun
+  moteur n'écrit `\fbox` ou `\boxed` aujourd'hui (vérifié), donc aucun rendu existant ne change.
+- P2a ne change aucun instantané, aucune référence de page ni aucune sortie (dump identique à l'octet).
 
 - **P1, oracle renforcé** (Q11) : `tests/python/oracle.py::racines` retire d'abord les termes constants nuls (racine 0 de multiplicité
   exacte) ; `[7, -19, 0]` faisait refuser l'oracle. Test `test_oracle.TestCasDemandes.test_racine_nulle_retiree_d_abord`.
