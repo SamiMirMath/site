@@ -20,6 +20,11 @@ reste ici et s'y branche : les nœuds `E` et `Log` (ils s'écrivent eux-mêmes, 
 exp, log_a, e, π et % (le `LEXIQUE` d'Exp-log, passé à la lecture de la brique) ; `tokeniser`, `lire_membres` et `_Parseur` sont
 la lecture de la brique avec ce lexique. L'état décimal (`_DECIMAUX`, `_avec_decimaux`) reste ici : la brique ne le lit pas.
 
+Les chaînes du corrigé (`Eq`, `Rel`, `Ou`, `Texte`, `Chaine`, `Message`, `tex_element`, `tex_chaine`, `rangees_chaine`) et les trois
+propriétés génériques (`PROP_AUTRE_COTE`, `PROP_PRODUIT_NUL`, `PROP_MISE_EN_EVIDENCE`) sont la brique commune moteur/chaine.py
+(briques-communes, B2), réexportée ici sous les mêmes noms ; les autres `PROP_*`, l'élément `Positif` et les justifications `Car` et
+`Divise` (qui s'écrivent eux-mêmes : `chaine.Element`, `chaine.Justification`) restent ici.
+
 Interface : `lire_membres(texte)` (syntaxe seule, sert à l'aperçu), `analyser_saisie(texte)` (équation ou calcul, une seule inconnue),
 `apercu_json(texte)`. Les erreurs sont des `ErreurSaisie` au message français.
 """
@@ -38,6 +43,8 @@ from nombres import (MOTIF_ESPACE_DANS_UN_NOMBRE, MOTIF_SAISIE, formater_decimal
 import expr as _expr
 from expr import (Noeud, Nb, Var, Pi, Neg, Op, Pow, Fn, Defini, variables, tex, tex_saisie, nb_tex, comme_somme, entre_parentheses,
                   nom_tex, DEBUT_COLLABLE, Tok, Lexique, Parseur, MINUSCULES, NOM_INDEXE, SYMBOLES, OPERATEURS, INEGALITES, lire_nombre, lire_pourcentage)
+from chaine import (Eq, Rel, Texte, Ou, Element, Justification, Chaine, Message, tex_element, LIENS_TEX, tex_chaine,
+                    rangees_chaine, PROP_AUTRE_COTE, PROP_PRODUIT_NUL, PROP_MISE_EN_EVIDENCE)
 
 __all__ = ["Nb", "Var", "E", "Neg", "Op", "Pow", "Fn", "Log", "tex", "variables", "lire_membres", "analyser_saisie", "tex_saisie",
            "apercu", "apercu_json", "Saisie", "sans_facteur"]
@@ -576,145 +583,19 @@ def _arbre_poly(p, x="x", ecrit=None):
 # =====================================================================
 # 8. CORRIGÉ : ÉQUATIONS, CHAÎNES, CARTES
 # =====================================================================
-class Eq:
-    """Une équation g = d (arbres)."""
-    __slots__ = ("g", "d", "milieu")
-
-    def __init__(self, g, d, milieu=()):
-        """`milieu` : écritures intermédiaires de d, affichées entre g et d (x = 10³ = 1000) ; d est la dernière."""
-        self.g, self.d, self.milieu = g, d, list(milieu)
-
-    def __eq__(self, o):
-        return isinstance(o, Eq) and (self.g, self.d) == (o.g, o.d)
-
-    def __hash__(self):
-        return hash((self.g, self.d))
-
-    def __repr__(self):
-        return f"Eq({self.g!r}, {self.d!r})"
-
-
-class Rel:
-    """Une relation d'ordre g < d, g ≤ d, g > d (arbres), par exemple 5^(8x) > 0."""
-    SIGNES = {"<": " < ", ">": " > ", "≤": r" \le ", "≥": r" \ge "}
-    __slots__ = ("g", "signe", "d")
-
-    def __init__(self, g, signe, d):
-        self.g, self.signe, self.d = g, signe, d
-
-
-class Positif:
+# Les chaînes du corrigé (Eq, Rel, Ou, Texte, Chaine, Message, leur TeX et leurs rangées) sont la brique commune moteur/chaine.py
+# (chantier briques-communes, B2), réexportée en tête de ce fichier sous les mêmes noms. Ce qui est propre à l'outil s'y branche :
+# `Positif` est un élément qui s'écrit lui-même (`chaine.Element`) ; `Car` et `Divise` (§ 10) sont des justifications qui s'écrivent
+# elles-mêmes (`chaine.Justification`) ; la note « le logarithme est bien défini » est cochée par la chaîne (`coche=True`).
+class Positif(Element):
     """« u = valeur > 0 » : vérification que l'argument d'un logarithme est strictement positif."""
     __slots__ = ("expr", "valeur")
 
     def __init__(self, expr, valeur):
         self.expr, self.valeur = expr, valeur
 
-
-class Texte:
-    """Une condition déjà écrite en TeX (x > 0 et x ≠ 1) ; `detail` : un complément en TeX qui s'affiche entre parenthèses, à droite de la
-    ligne dans la page (l'encadrement 2⁵ = 32 < 50 < 64 = 2⁶)."""
-    __slots__ = ("tex", "detail")
-
-    def __init__(self, tex, detail=None):
-        self.tex, self.detail = tex, detail
-
-
-class Ou:
-    """x = a ou x = b : plusieurs équations dont une au moins est vraie."""
-    __slots__ = ("eqs",)
-
-    def __init__(self, eqs):
-        self.eqs = list(eqs)
-
-
-class Chaine:
-    """Une ligne du corrigé : éléments (arbres, Eq ou Ou) reliés par « = » (expressions) ou « ⇔ » (équations), chaque lien avec
-    sa propriété (texte) ou None quand le calcul est évident."""
-
-    def __init__(self, elements, liens=(), props=(), note=None):
-        self.elements, self.liens, self.props, self.note = list(elements), list(liens), list(props), note
-        assert len(self.liens) == len(self.props) == len(self.elements) - 1
-
-    def ajouter(self, element, lien, prop=None):
-        self.elements.append(element)
-        self.liens.append(lien)
-        self.props.append(prop)
-        return self
-
-
-def tex_element(e):
-    if isinstance(e, Eq):
-        return tex(e.g) + "".join(" = " + tex(m) for m in e.milieu) + " = " + tex(e.d)
-    if isinstance(e, Positif):
-        return tex(e.expr) + " = " + tex(e.valeur) + " > 0"
-    if isinstance(e, Texte):
-        return e.tex + (r" \quad (" + e.detail + ")" if e.detail else "")
-    if isinstance(e, Ou):
-        return r" \text{ ou } ".join(tex_element(q) for q in e.eqs)
-    if isinstance(e, Rel):
-        return tex(e.g) + Rel.SIGNES[e.signe] + tex(e.d)
-    return tex(e)
-
-
-LIENS_TEX = {"⇔": r" \iff ", "⇒": r" \Rightarrow ", "≈": r" \approx "}                 # « = » pour tout autre lien
-
-
-def tex_chaine(c):
-    """TeX d'une ligne : la propriété de chaque lien suit l'élément qu'elle justifie, entre parenthèses."""
-    s = tex_element(c.elements[0])
-    for e, lien, prop in zip(c.elements[1:], c.liens, c.props):
-        s += LIENS_TEX.get(lien, " = ") + tex_element(e)
-        if isinstance(prop, Divise):
-            q = _nom_tex(prop.nom)
-            s += r" \quad \text{(on divise les deux membres par } " + q + r" \text{ ; } " + q + r" > 0 \text{ : une quantité de départ est positive)}"
-        elif isinstance(prop, Car):
-            s += r" \quad \text{(car } " + tex(prop.expr) + r" \neq 0\text{)}"
-        elif prop:
-            s += r" \quad \text{(" + prop + ")}"
-    if c.note:
-        s += r" \quad \text{(" + c.note + ")}" + (r" \; \checkmark" if c.note == PROP_BIEN_DEFINI else "")
-    return s
-
-
-def _gauche(e):
-    """TeX du membre de gauche auquel un lien « = » se rattache : x dans `x = N/D`, l'expression elle-même dans une chaîne de « = »."""
-    if isinstance(e, Eq):
-        return tex(e.g)
-    if isinstance(e, (Positif, Texte, Ou, Rel)):
-        return None
-    return tex(e)
-
-
-def rangees_chaine(c):
-    """La chaîne en lignes alignées, une étape par ligne comme le corrigé : [(lien, expression, propriété)], les trois en TeX/texte.
-    `lien` : « \\iff » ou vide ; `expression` : un élément après un « ⇔ » ; les liens « = » prolongent la ligne (`√2 = 2^(1/2) = 4^(1/4)`)
-    jusqu'à une propriété, après laquelle la suite commence une nouvelle ligne `{} = suite`, alignée sous le « = » précédent ;
-    `propriété` : le texte entre parenthèses (le TeX y est entre `\\(` et `\\)`), ou None. La page met le lien dans une première colonne,
-    l'expression dans la deuxième et la propriété à droite (sous l'expression sur un écran étroit)."""
-    premier = c.elements[0]
-    rangees = [["", premier.tex if isinstance(premier, Texte) else tex_element(premier),
-                r"(\(" + premier.detail + r"\))" if isinstance(premier, Texte) and premier.detail else None]]
-    ancre = _gauche(premier)
-    for e, lien, prop in zip(c.elements[1:], c.liens, c.props):
-        if lien in ("⇔", "⇒"):                                        # ⇒ : l'implication, quand la ligne ne se lit pas dans l'autre sens
-            rangees.append([LIENS_TEX[lien].strip(), tex_element(e), None])
-            ancre = _gauche(e)
-        elif rangees[-1][2] is None:                                  # pas de propriété sur la ligne : la suite d'égalités continue
-            rangees[-1][1] += LIENS_TEX.get(lien, " = ") + tex_element(e)
-        else:                                                         # nouvelle ligne, son « = » sous celui de la ligne d'au-dessus
-            cale = r"\phantom{" + ancre + "}" if ancre and len(ancre) <= 30 else ""
-            rangees.append(["", cale + LIENS_TEX.get(lien, " = ") + tex_element(e), None])
-        if isinstance(prop, Divise):
-            rangees[-1][2] = "(" + prop.texte() + ")"
-        elif isinstance(prop, Car):
-            rangees[-1][2] = r"(car \(" + tex(prop.expr) + r" \neq 0\))"
-        elif prop:
-            rangees[-1][2] = "(" + prop + ")"
-    if c.note:
-        note = "(" + c.note + ")" + (r" \(\checkmark\)" if c.note == PROP_BIEN_DEFINI else "")
-        rangees[-1][2] = note if rangees[-1][2] is None else rangees[-1][2] + " " + note
-    return [tuple(r) for r in rangees]
+    def ecrire_tex(self):
+        return tex(self.expr) + " = " + tex(self.valeur) + " > 0"
 
 
 PROP_PUISSANCE = "(aᵐ)ⁿ = aᵐⁿ"
@@ -722,7 +603,6 @@ PROP_PRODUIT = "aᵐ · aⁿ = aᵐ⁺ⁿ"
 PROP_UN = "1 = a⁰"
 PROP_MEME_BASE = "même base : a^A = a^B ⇔ A = B"
 PROP_ISOLER = "on isole le terme exponentiel"
-PROP_PRODUIT_NUL = "un produit est nul si l'un des facteurs est nul"
 PROP_DISCRIMINANT = "formule du discriminant"
 PROP_DEFINITION_LOG = "définition du logarithme"
 PROP_LOG_DEUX_MEMBRES = "log des deux membres"
@@ -742,7 +622,6 @@ PROP_BIEN_DEFINI = "le logarithme est bien défini"
 PROP_BASE_LOG = "une base de logarithme est strictement positive et différente de 1"
 PROP_SEULE_POSITIVE = "seule la solution positive convient"
 PROP_SOMME_EXPOSANTS = "aᵐ⁺ⁿ = aᵐ · aⁿ"
-PROP_MISE_EN_EVIDENCE = "mise en évidence"
 PROP_REGROUPER = "on regroupe les termes de même base"
 PROP_BASE_PUISSANCE_POSITIVE = "une base admissible est strictement positive, donc xᵏ > 0"
 PROP_LOG_SOMME = "log(ab) = log a + log b"
@@ -761,7 +640,6 @@ PROP_LN_DIFFERENCE = "ln(a/b) = ln a − ln b"
 PROP_CARRE = "un carré est positif ou nul"
 PROP_PUISSANCE_ZERO = "a⁰ = 1"
 PROP_PUISSANCE_NEGATIVE = "a⁻ᵐ = 1/aᵐ"
-PROP_AUTRE_COTE = "on passe un terme de l'autre côté"
 PROP_FOIS_MOINS_UN = "on multiplie les deux membres par −1"
 PROP_FOIS_DENOMINATEUR = "on multiplie les deux membres par le dénominateur"
 PROPRIETES = frozenset({PROP_CARRE, PROP_PUISSANCE_ZERO, PROP_PUISSANCE_NEGATIVE, PROP_AUTRE_COTE, PROP_FOIS_MOINS_UN, PROP_FOIS_DENOMINATEUR, PROP_QUOTIENT, PROP_LOG_DIFFERENCE, PROP_LN_DIFFERENCE,
@@ -1197,22 +1075,6 @@ METHODE_LOGARITHMES = "logarithmes"
 METHODES = (METHODE_MEME_BASE, METHODE_LOGARITHMES)
 
 
-class Message:
-    """Une phrase du corrigé qui n'est pas une chaîne d'équations (« 20 n'est pas une puissance de 3 : il faut les logarithmes. ») :
-    du texte (str) et des arbres, écrits en TeX dans la page."""
-    __slots__ = ("morceaux",)
-
-    def __init__(self, *morceaux):
-        self.morceaux = morceaux
-
-    def texte(self):
-        return "".join(m if isinstance(m, str) else m.tex if isinstance(m, Texte) else tex(m) for m in self.morceaux)
-
-    def html(self):
-        return "".join(_echapper(m, quote=False) if isinstance(m, str)
-                       else r"\(" + _echapper(m.tex if isinstance(m, Texte) else tex(m), quote=False) + r"\)" for m in self.morceaux)
-
-
 def _facteur_log(f, x):
     """Un facteur d'un membre pour la méthode « logarithmes » : comme `_facteur`, la base e en plus."""
     if isinstance(f, Pow) and isinstance(f.a, E):
@@ -1424,15 +1286,22 @@ def _somme_arbres(arbres):
     return Nb(0) if n is None else n
 
 
-class Car:
-    """Justification « car D ≠ 0 » : on divise par le coefficient logarithmique D (1 − ln 2, log 2 − log 3)."""
+class Car(Justification):
+    """Justification « car D ≠ 0 » : on divise par le coefficient logarithmique D (1 − ln 2, log 2 − log 3). Elle s'écrit elle-même
+    dans les chaînes (moteur/chaine.py)."""
     __slots__ = ("expr",)
 
     def __init__(self, expr):
         self.expr = expr
 
+    def ecrire_tex(self):
+        return r"\text{(car } " + tex(self.expr) + r" \neq 0\text{)}"
 
-class Divise:
+    def ecrire_rangee(self):
+        return r"(car \(" + tex(self.expr) + r" \neq 0\))"
+
+
+class Divise(Justification):
     """Justification de la carte « Simplifier par Q » : on divise les deux membres par le paramètre Q, positif parce que c'est une quantité de départ."""
     __slots__ = ("nom",)
 
@@ -1442,6 +1311,13 @@ class Divise:
     def texte(self):
         q = _nom_tex(self.nom)
         return rf"on divise les deux membres par \({q}\) (\({q} > 0\) : une quantité de départ est positive)"
+
+    def ecrire_tex(self):
+        q = _nom_tex(self.nom)
+        return r"\text{(on divise les deux membres par } " + q + r" \text{ ; } " + q + r" > 0 \text{ : une quantité de départ est positive)}"
+
+    def ecrire_rangee(self):
+        return "(" + self.texte() + ")"
 
 
 def _oppose(t):
@@ -2540,7 +2416,7 @@ def _logarithmique(g, d, x, filiere_m=False):
                 raise _Hors                                   # trinôme général à coefficients non entiers : plus tard
     etapes.append(_carte("Exponentielle des deux membres", lignes))
     if profondeur == 1 and not isinstance(u, Var) and solutions and not filiere_m:
-        etapes.append(_carte("Vérification", [Chaine([Positif(u, puissance)], note=PROP_BIEN_DEFINI)]))
+        etapes.append(_carte("Vérification", [Chaine([Positif(u, puissance)], note=PROP_BIEN_DEFINI, coche=True)]))
     return {"genre": "logarithmique", "inconnue": x, "enonce": enonce, "base": None, "etapes": etapes, "solutions": solutions,
             "remarque": remarque}
 

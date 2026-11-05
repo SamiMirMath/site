@@ -12,7 +12,7 @@ D25, E14, § 5, P3) tiennent lieu de décisions.
 |---|---|---|---|
 | B0 | Fiches, référence rafraîchie (1 392 tests Python dont 1 xfail, 106 244 sous-tests ; 138 tests de pages, 2 407 sous-tests), dump de départ (4 148 sorties, déterministe) | faite (suite verte) | voir `git log` |
 | B1 | `moteur/expr.py` : arbre d'Exp-log, `tex`, parseur avec un `Lexique` explicite (« membre = membre » : `lire_membres`) ; e et log restent dans `exp_log` (nœuds `E`, `Log`, `LEXIQUE`) ; réexport par `exp_log` ; manifeste ; `_DECIMAUX` ne traverse pas ; tests ajoutés : `test_expr.py` (21 tests, 144 sous-tests) | faite (suite verte) | voir `git log` |
-| B2 | `moteur/chaine.py` : Eq, Rel, Ou, Texte, Chaine, Message, `tex_element`, `tex_chaine`, `rangees_chaine`, propriétés génériques ; trois options désactivées par défaut | à faire | — |
+| B2 | `moteur/chaine.py` : Eq, Rel, Ou, Texte, Chaine, Message, `tex_element`, `tex_chaine`, `rangees_chaine`, 3 propriétés génériques ; `Positif`, `Car`, `Divise` et les 44 autres `PROP_*` restent dans exp_log (s'écrivent eux-mêmes : `chaine.Element`, `chaine.Justification`), coche par `Chaine(coche=True)` ; trois options désactivées par défaut (`etiquette_grise`, `impossible`, `textes`/`texte_avant`) ; réexport ; manifeste ; arêtes `chaine -> expr`, `exp_log -> chaine` ; tests ajoutés : `test_chaine.py` (30 tests, 76 sous-tests) | faite (suite verte) | voir `git log` |
 | B3 | Type de bloc « chaine » (A4 : `sortie.py`, `valider`, `rendu.js`, test), ligne pleine largeur au milieu ; Exp-log inchangé (exception nommée) | à faire | — |
 | B4 | CSS : `.chaine` dans `commun/composants.css`, `details ol` dans `commun/style.css` | à faire | — |
 | B5 | `nombres.approx(x, decimales=3)` et `nombres.exact(x, decimaux_enonce=False)`, fonctions pures, aucun outil rebranché ; tests croisés | à faire | — |
@@ -33,6 +33,14 @@ outil), `test_manifeste` vert, `test_largeurs` avec `CONNUS` vide.
 - B1 : aucun instantané, aucune référence de page, aucune sortie modifiés (dump identique). À relire : le `Lexique` de
   `moteur/expr.py` (forme du paramètre que le 2e degré passera en P3) et les deux messages par défaut du lexique commun,
   affichés par aucun outil aujourd'hui (`MESSAGE_EXPOSANT_COMMUN`, `MESSAGE_VIDE_COMMUN`) ; détail dans `journal.md`, section B1.
+- B2 : aucun instantané, aucune référence de page, aucune sortie modifiés (dump identique). À relire : la forme des trois options de
+  `moteur/chaine.py` (détail et exemples dans `journal.md`, section B2, « Les trois options ») :
+  - étiquette grise (`etiquette_grise=True`) : propriété sans parenthèses dans les rangées (« ME » ; avec une note : « a ; b ») ; en
+    TeX d'une ligne, `\quad \textcolor{gray}{\text{ME}}` ;
+  - « impossible » (`impossible=True`) : `\underbrace{6 = 0}_{\text{impossible}}`, seulement dans un « ou » et seulement pour une
+    égalité fausse entre deux nombres écrits (6 = 0, −1 = 0) ;
+  - texte au milieu (`Chaine(textes=…)`, `ajouter(texte_avant=…)`) : rangée `LigneTexte(contenu)` pleine largeur avant l'élément,
+    dont le ⇔ reste relié à l'élément d'avant ; en TeX d'une ligne, `\quad \text{…} \quad` avant le lien.
 
 ## Variations de sous-tests
 
@@ -40,7 +48,7 @@ Lue par `verifier` (voir sa docstring, point (d)). Format, une ligne par test, c
 `` - `<identifiant pytest complet>` : <avant> → <après> : <raison> `` (« -> » vaut « → »). <avant> et <après> sont les nombres de
 sous-tests passés de la référence et du lancement, exactement ceux que `verifier` affiche ; sinon refus.
 
-- `tests/python/test_exp_log.py::TestVouvoiement::test_aucun_texte_du_fichier_ne_tutoie` : 1215 → 1026 : B1, les littéraux de l'arbre, du TeX et de la lecture (messages d'erreur de saisie) passent d'exp_log.py à moteur/expr.py, où `test_vocabulaire.py::TestVouvoiement::test_litteraux_des_moteurs` les lit avec le même détecteur (`aides_sortie.TUTOIEMENT`, 8652 → 8694)
+- `tests/python/test_exp_log.py::TestVouvoiement::test_aucun_texte_du_fichier_ne_tutoie` : 1215 → 960 : B1 (1215 → 1026), les littéraux de l'arbre, du TeX et de la lecture (messages d'erreur de saisie) passent d'exp_log.py à moteur/expr.py ; puis B2 (1026 → 960), les 66 littéraux des chaînes du corrigé (Eq, Chaine, Message, TeX, rangées, 3 propriétés génériques) passent à moteur/chaine.py (100 littéraux ; « car » et « on divise » restent dans exp_log.py, sans le `\quad` de tête). `test_vocabulaire.py::TestVouvoiement::test_litteraux_des_moteurs` les lit dans les deux briques avec le même détecteur (`aides_sortie.TUTOIEMENT`, 8652 → 8694 en B1, 8728 en B2 : + 100 − 66)
 
 ## Reprise après compactage
 

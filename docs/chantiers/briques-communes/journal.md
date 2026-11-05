@@ -186,9 +186,118 @@ enveloppes, aucun nom privé importé d'`expr`). `test_imports` : 3 arêtes de p
   `suivi.md` : `test_exp_log` (littéraux d'exp_log.py) 1 215 → 1 026, les littéraux déplacés étant lus dans moteur/expr.py par
   `test_vocabulaire` avec le même détecteur.
 
+## B2 — `moteur/chaine.py` : chaînes du corrigé, propriétés génériques, trois options
+
+### Plan
+
+1. Lecture : `exp_log.py` § 8 (`Eq`, `Rel`, `Positif`, `Texte`, `Ou`, `Chaine`, `tex_element`, `LIENS_TEX`, `tex_chaine`, `_gauche`,
+   `rangees_chaine`, `PROP_*`) et § 10 (`Message`, `Car`, `Divise`). Trois choses propres à Exp-log y sont lues par le rendu commun :
+   l'élément `Positif` (« u = valeur > 0 »), les justifications `Car` et `Divise`, et la coche après la note `PROP_BIEN_DEFINI`.
+2. `moteur/chaine.py` (n'importe que `expr`) : `Eq`, `Rel`, `Ou`, `Texte`, `Chaine`, `Message`, `tex_element`, `LIENS_TEX`,
+   `tex_chaine`, `rangees_chaine` (et `_gauche`), les trois propriétés génériques `PROP_AUTRE_COTE`, `PROP_PRODUIT_NUL`,
+   `PROP_MISE_EN_EVIDENCE`. Ce qui est propre à Exp-log reste dans exp_log et se branche sans que la brique le connaisse (A7, sur le
+   modèle des nœuds `E`/`Log` de B1) : `Positif` hérite de `chaine.Element` (il s'écrit lui-même, `ecrire_tex`) ; `Car` et `Divise`
+   héritent de `chaine.Justification` (`ecrire_tex` après `\quad`, `ecrire_rangee` pour la colonne de droite) ; la coche devient un
+   champ de la chaîne, `Chaine(…, coche=True)`, posé par exp_log là où la note est `PROP_BIEN_DEFINI` (et gardé par
+   `exp_log_m._convertir_chaine`, qui recopie les chaînes). `LIENS_TEX` et `Rel.SIGNES` en lecture seule (`MappingProxyType`).
+3. Trois options nouvelles, désactivées par défaut (sortie d'Exp-log identique) :
+   - `etiquette_grise=False` (`tex_chaine`, `rangees_chaine`) : la propriété et la note sans parenthèses ; en TeX
+     `\quad \textcolor{gray}{\text{ME}}` ;
+   - `impossible=False` (`tex_element`, `tex_chaine`, `rangees_chaine`) : dans un « ou », une égalité entre deux nombres différents
+     (le facteur constant du produit nul, `6 = 0`) s'écrit `\underbrace{6 = 0}_{\text{impossible}}`, comme le corrigé (Id_rem.pdf,
+     2.9 a, c, e, f) ; le moteur ne marque rien lui-même : seule une égalité fausse entre deux nombres reçoit la mention ;
+   - texte au milieu : `Chaine(…, textes={i: [contenu]})` ou `ajouter(…, texte_avant=contenu)` : une ligne pleine largeur avant
+     l'élément i, dont le lien (⇔) relie toujours l'élément i − 1 à l'élément i ; dans les rangées, `LigneTexte(contenu)` (contenu
+     tel quel : `Message`, texte, ou un bloc, pour B3) ; dans `tex_chaine`, `\quad <texte> \quad` avant le lien.
+4. exp_log réexporte chaque nom déplacé (même objet) ; `Message.html` emporte son `escape` dans la brique (exp_log garde le sien,
+   lu ailleurs).
+5. Manifeste (`moteur/chaine.py` pour l'outil EL, après `expr.py`), arêtes `chaine -> expr` et `exp_log -> chaine` ;
+   `architecture.md` § 1 et § 5 ; docstrings ; `tests/python/test_chaine.py` (brique seule, options activées et désactivées,
+   branchements, absence d'état, réexport).
+6. Vérifications : dump `B2` et `B2-1`, temps, `test_imports`, `test_manifeste`, tests EL ; suite complète ; variations de sous-tests.
+
+### Exécution
+
+- **`moteur/chaine.py`** (nouveau, n'importe que `expr` et la bibliothèque standard) : `Eq`, `Rel` (`SIGNES` en lecture seule), `Ou`,
+  `Texte`, `Element`, `Justification`, `Chaine` (avec `coche` et `textes`), `Message`, `LigneTexte`, `tex_element`, `tex_message`,
+  `LIENS_TEX` (lecture seule), `tex_chaine`, `_gauche`, `rangees_chaine`, `est_impossible`, `PROP_AUTRE_COTE`, `PROP_PRODUIT_NUL`,
+  `PROP_MISE_EN_EVIDENCE`. Code repris tel quel d'exp_log ; seuls changements, sans effet sur la sortie : les `isinstance(…, Positif)`,
+  `Divise`, `Car` deviennent `Element` / `Justification` (l'objet s'écrit lui-même), et la coche est lue sur `c.coche` au lieu de
+  `c.note == PROP_BIEN_DEFINI`.
+- **exp_log** : garde `Positif` (sous-classe de `chaine.Element`, `ecrire_tex`), `Car` et `Divise` (sous-classes de
+  `chaine.Justification`, `ecrire_tex` et `ecrire_rangee`, mêmes textes qu'avant), les 44 autres `PROP_*` et `PROPRIETES` (qui
+  contient toujours les trois génériques) ; la seule chaîne à note `PROP_BIEN_DEFINI` (carte « Vérification » de `logarithmique`)
+  reçoit `coche=True`. Réexport : 13 noms, mêmes objets (`exp_log.X is chaine.X`) ; aucun nom privé de la brique n'est importé
+  (`_gauche` n'était lu que par `rangees_chaine`). `exp_log_m._convertir_chaine` recopie aussi `coche` et `textes`. `_echapper` reste
+  importé par exp_log (lu aussi plus bas, l. ~2800).
+- **Arêtes** (ARETES, aucune exception) : `chaine -> expr`, `exp_log -> chaine`. Aucune arête `chaine -> exp_log`, aucune arête
+  `moteur/` → un outil.
+- **Manifeste** : `moteur/chaine.py` pour l'outil exponentielles-logarithmes (seul outil qui charge exp_log), après `moteur/expr.py`.
+- **Docs** : `architecture.md` § 1 (chaine au présent) et § 5 (ligne « 2 classes `Chaine` » : `moteur/chaine.py` reprise d'EL, et
+  celle de LA) ; docstrings d'exp_log et de chaine.
+
+### Les trois options : forme proposée (à relire par l'enseignant)
+
+Toutes désactivées par défaut ; corpus : Id_rem.pdf (2.9 a, c), decisions.md § 7.
+
+1. **Étiquette grise** — `etiquette_grise=True` (`tex_chaine`, `rangees_chaine`). Rangées : la propriété sans parenthèses
+   (`(r"\iff", "6(x^{2} - 1) = 0", "ME")`), le gris étant celui de la colonne `.prop` de la page (déjà `var(--muted)` dans la page EL ;
+   B3/B4 pour la page commune) ; avec une note sur la même ligne : `"a ; b"` (au lieu de `"(a) (b)"`), coche comprise
+   (`"a ; b \(\checkmark\)"`). TeX d'une ligne : `… = 0 \quad \textcolor{gray}{\text{ME}}` (au lieu de `\quad \text{(ME)}`). Une
+   justification d'outil (`Car`, `Divise`) garde sa propre écriture.
+2. **« impossible » sous le facteur constant** — `impossible=True` (`tex_element`, `tex_chaine`, `rangees_chaine`). Dans un « ou », une
+   égalité entre deux nombres écrits différents (`Nb` ou `Neg(Nb)` : 6 = 0, −1 = 0) s'écrit
+   `\underbrace{6 = 0}_{\text{impossible}}`, comme l'accolade du corrigé (2.9 a, c, e, f). La brique décide seule et ne marque qu'une
+   égalité fausse entre deux nombres (`est_impossible`) : 0 = 0, x = 0, une égalité hors d'un « ou » ou avec un milieu ne reçoivent
+   rien. Même TeX dans les rangées (colonne de l'expression).
+3. **Ligne de texte au milieu** — `Chaine(…, textes={i: [contenu, …]})` ou `Chaine.ajouter(…, texte_avant=contenu ou [contenus])` :
+   lignes pleine largeur avant l'élément i (1 ≤ i < nombre d'éléments, vérifié) ; le ⇔ de l'élément i le relie toujours à l'élément
+   i − 1 (2.9 c : « Id. rem. A² − 2AB + B² avec A = 4z, B = 9. Vérification : … ✓ » entre la ME et `⇔ 3(4z − 9)² = 0`). Rangées : une
+   rangée `LigneTexte(contenu)` (namedtuple à un champ : une page qui lit des triplets échoue au lieu de l'ignorer), contenu tel quel
+   (`Message`, texte, ou un bloc comme le futur tableau S-P, pour B3) ; un lien « = » qui la suit commence une nouvelle ligne alignée
+   (`\phantom`). TeX d'une ligne : `… \quad \text{Id. rem. }A^{2} - … \quad \iff 3(4z - 9)^{2} = 0` ; un bloc n'a pas de TeX : `TypeError`
+   (rien de faux).
+
+### Tests ajoutés
+
+`tests/python/test_chaine.py` : 30 tests, 76 sous-tests. La brique seule (`TestElements` 3, `TestChaine` 5 : liens, égalités alignées,
+note et coche, deux chaînes d'Exp-log écrites telles qu'avant la brique, options désactivées par défaut), les branchements
+(`TestBranchements` 3 : élément et justification d'un outil fictif, `Positif`, `Car`, `Divise`), les options activées et désactivées
+(`TestEtiquetteGrise` 3, `TestImpossible` 3, `TestTexteAuMilieu` 5, sorties attendues d'après Id_rem.pdf 2.9 a et c), l'absence d'état
+et les imports (`TestSansEtat` 3), le réexport (`TestReexportParExpLog` 5 : 13 noms identiques, exp_log_m, noms propres à EL absents de
+la brique, la coche posée exactement sur les notes `PROP_BIEN_DEFINI`, aucun nom privé importé de `chaine`). `test_imports` : 2 arêtes de
+plus.
+
+### Vérifications
+
+- Dump `B2` (`--processus 6`) : `diff -r --exclude=temps depart B2` code 0, aucune sortie (fait deux fois, avant et après les
+  dernières retouches). Dump `B2-1` (`--processus 1`) : identique aussi.
+- Suite Python seule avant la suite complète (`-n 6`) : 1 412 passés + 1 xfail (sans test_chaine), puis test_chaine 30 passés.
+- Temps natif (`resoudre_json`, somme sur le corpus, 1 processus, comparé à `un-processus` de B0) :
+
+| Outil | Filière | B0 (s) | B2 (s) | Plus long appel B0 / B2 (s) |
+|---|---|---|---|---|
+| ensemble-definition | – | 0,033 | 0,034 | 0,022 / 0,022 |
+| derivee-variations | – | 0,265 | 0,261 | 0,081 / 0,079 |
+| limites-asymptotes | – | 5,895 | 5,888 | 1,177 / 1,2 |
+| etude-complete | – | 1,998 | 1,978 | 0,29 / 0,275 |
+| factorisation | – | 1,883 | 1,862 | 0,063 / 0,062 |
+| exponentielles-logarithmes | C | 0,888 | 0,923 (+3,9 %) | 0,005 / 0,005 |
+| exponentielles-logarithmes | M | 0,764 | 0,782 (+2,4 %) | 0,003 / 0,003 |
+
+  Aucune hausse de plus de 50 %. Mur du dump : 13 s (1 processus), 4 s (6 processus).
+- Suite d'avant commit : `PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rapport <scratchpad>/briques/rapports/B2`, code 0,
+  17 h 29 → 17 h 36 (6 min 44). Python 1 443 collectés, 1 442 passés + 1 xfail, 106 301 sous-tests (101,5 s) ; pages 138 passés,
+  2 407 sous-tests, 300,7 s (identiques nom par nom). `comparer_listes` contre `tests/reference` (B0) : 51 tests nouveaux
+  (`test_expr.py` 21, `test_chaine.py` 30), aucun disparu ; sous-tests : `test_imports` (liste bien formée) 83 → 93, `test_manifeste_minimal`
+  34 → 36, gardes `memo` et `memo_racines` 19 → 21, `test_vocabulaire` (littéraux des moteurs) 8 652 → 8 728 ; une baisse justifiée
+  dans `suivi.md` : `test_exp_log` (littéraux d'exp_log.py) 1 215 → 960 (B1 puis B2 : les 66 littéraux des chaînes passent à
+  moteur/chaine.py, 100 littéraux, lus par `test_vocabulaire` avec le même détecteur).
+
 ## Contrôles du chef d'orchestre
 
 - B0 `b296741` : verifier ACCEPTÉ (Python 1 392 / 106 244 sous-tests, pages 138 / 2 407, identiques à la référence) ; rapide --depuis HEAD~1 : 23 passés, 243 sous-tests, 3 s (fumée + docs).
+- B1 `6be8865` : verifier ACCEPTÉ (Python 1 413 / 106 250 sous-tests, 21 tests nouveaux de test_expr, 5 hausses, 1 baisse justifiée ; pages 138 / 2 407 identiques) ; rapide --depuis HEAD~1 : Python 1 368 passés + 1 xfail, 106 194 sous-tests (87 s), pages 138 passés, 1 242 sous-tests (276 s), mur 6 min 06 ; dump identique au départ.
 
 ## Temps
 

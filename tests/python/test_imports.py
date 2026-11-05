@@ -34,6 +34,7 @@ ARETES = {
     "noyau -> ensemble_def": "façade de la base (noyau réexporte ensemble_def)",
     "expr -> noyau": "brique : ErreurSaisie, l'erreur de saisie commune (briques-communes, B1)",
     "expr -> nombres": "brique : notation suisse des nombres, lus et écrits par l'arbre (briques-communes, B1)",
+    "chaine -> expr": "brique : les chaînes du corrigé s'écrivent avec le TeX de l'arbre (briques-communes, B2)",
     # outil ED : la base est son moteur
     "resoudre_ed -> ensemble_def": "adaptateur de l'outil ED, sur la base directement (légitime : rapport de la revue, § 1.2)",
     "resoudre_ed -> sortie": "adaptateur : brique de sortie",
@@ -68,6 +69,7 @@ ARETES = {
     "exp_log -> noyau": "moteur : la base par sa façade",
     "exp_log -> nombres": "moteur : brique des nombres",
     "exp_log -> expr": "moteur : brique des expressions (arbre, TeX, lecture), réexportée sous les mêmes noms (briques-communes, B1)",
+    "exp_log -> chaine": "moteur : brique des chaînes du corrigé, réexportée sous les mêmes noms (briques-communes, B2)",
     "exp_log_m -> noyau": "moteur : la base par sa façade",
     "resoudre_el -> noyau": "adaptateur : la base par sa façade",
     "resoudre_el -> sortie": "adaptateur : brique de sortie",
