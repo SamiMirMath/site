@@ -11,6 +11,7 @@ import unittest
 from fractions import Fraction as F
 
 import moteurs  # noqa: F401  (chemins des moteurs)
+import sortie as so
 from moteurs import RACINE
 
 import chaine
@@ -299,8 +300,83 @@ class TestTexteAuMilieu(unittest.TestCase):
         self.assertEqual(Chaine([eq("x = 1"), eq("x = 1")], ["⇔"], [None], textes={1: ("a",)}).textes, {1: ["a"]})
 
 
+class TestBlocChaine(unittest.TestCase):
+    """B3 : le bloc « chaine » de moteur/sortie.py tiré d'une chaîne (bloc_chaine) ; rendu dans la page : tests/pages/test_bloc_chaine.py."""
+
+    def valide(self, b):
+        self.assertEqual(so.valider(so.sortie_ok("x", [so.carte("t", [b])])), [])
+
+    def test_rangees_par_defaut(self):
+        """Sans option : une ligne par rangée de rangees_chaine (mêmes TeX et propriétés), la ligne de texte pleine largeur à sa place."""
+        c = exercice_2_9_c()
+        b = chaine.bloc_chaine(c)
+        self.valide(b)
+        attendu = []
+        for r in rangees_chaine(c):
+            attendu.append({"texte": chaine.texte_message(r.contenu)} if isinstance(r, LigneTexte)
+                           else {k: v for k, v in zip(("lien", "expr", "prop"), r) if v})
+        attendu[0]["lien"] = ""
+        self.assertEqual(b, {"type": "chaine", "rangees": attendu})
+        self.assertEqual(b["rangees"][2], {"texte": r"Id. rem. \(A^{2} - 2AB + B^{2}\) avec \(A = 4z\), \(B = 9\). Vérification : "
+                                                    r"\(2AB = 2 \cdot 4z \cdot 9 = 72z\) ✓"})
+
+    def test_membre_gauche_etiquette_grise_impossible(self):
+        """2.9 a comme le corrigé : « 6x² − 6 = 0 ⇔ 6(x² − 1) = 0  ME », les ⇔ suivants dessous, 6 = 0 « impossible »."""
+        b = chaine.bloc_chaine(exercice_2_9_a(), etiquette_grise=True, impossible=True, membre_gauche=True)
+        self.valide(b)
+        self.assertEqual(b["rangees"], [
+            {"lien": r"\iff", "expr": "6(x^{2} - 1) = 0", "prop": ME, "gauche": "6x^{2} - 6 = 0"},
+            {"lien": r"\iff", "expr": "6(x + 1)(x - 1) = 0", "prop": ID_REM},
+            {"lien": r"\iff", "expr": r"\underbrace{6 = 0}_{\text{impossible}} \text{ ou } x + 1 = 0 \text{ ou } x - 1 = 0",
+             "prop": PRODUIT_NUL},
+            {"lien": r"\iff", "expr": r"x = -1 \text{ ou } x = 1"}])
+
+    def test_membre_gauche_apres_les_lignes_pleines(self):
+        """Une ligne pleine largeur avant le premier ⇔ (2.9 b : « Id. rem. … ✓ » au-dessus de « t² + 20t + 100 = 0 ⇔ (t + 10)² = 0 ») reste
+        au-dessus de la ligne qui porte le membre de gauche ; un bloc (tableau) passe tel quel."""
+        tableau = {"type": "tableau", "var": "x", "crit": ["1"], "rows": [{"label": "x - 1", "cells": ["-", "0", "+"], "final": True}]}
+        c = Chaine([eq("t^2 + 20t + 100 = 0"), eq("(t + 10)^2 = 0")], ["⇔"], [None], textes={1: ["Id. rem.", tableau]})
+        b = chaine.bloc_chaine(c, membre_gauche=True)
+        self.valide(b)
+        self.assertEqual(b["rangees"], [{"texte": "Id. rem."}, {"bloc": tableau},
+                                        {"lien": r"\iff", "expr": "(t + 10)^{2} = 0", "gauche": "t^{2} + 20t + 100 = 0"}])
+
+    def test_membre_gauche_sans_effet(self):
+        """Première rangée avec une propriété, ou ligne suivante sans lien (« = » après une ligne pleine) : la chaîne reste telle quelle."""
+        x = Var("x")
+        avec_prop = Chaine([Texte("x > 0", detail="2 > 0"), eq("x = 1")], ["⇔"], [None])
+        egalites = Chaine([Op("+", x, Nb(1)), Op("+", Nb(1), x)], ["="], [None], textes={1: ["on commute"]})
+        for c in (avec_prop, egalites):
+            with self.subTest(c=c.elements):
+                self.assertEqual(chaine.bloc_chaine(c, membre_gauche=True), chaine.bloc_chaine(c))
+                self.assertNotIn("gauche", str(chaine.bloc_chaine(c, membre_gauche=True)))
+                self.valide(chaine.bloc_chaine(c))
+
+    def test_texte_message(self):
+        self.assertEqual(chaine.texte_message("a < b"), "a < b")
+        self.assertEqual(chaine.texte_message(Message("avec ", Texte("A = x"), " et ", Var("x"))), r"avec \(A = x\) et \(x\)")
+        with self.assertRaises(TypeError):
+            chaine.texte_message(3)
+
+    def test_exp_log_inchange(self):
+        """Exp-log garde sa grille écrite par resoudre_el (exception nommée, docs/architecture.md § 5) : aucun bloc « chaine » dans ses sorties."""
+        import json
+        import resoudre_el
+
+        def types(v):
+            if isinstance(v, dict):
+                return ({v["type"]} if isinstance(v.get("type"), str) else set()) | set().union(*map(types, v.values()))
+            return set().union(*map(types, v)) if isinstance(v, list) else set()
+        for saisie in ("3^(x+1)=27", "2^(x-1)=3^x", "log(5-x)=8"):
+            with self.subTest(saisie=saisie):
+                vus = types(json.loads(resoudre_el.resoudre_json(saisie)))
+                self.assertIn("texte", vus)
+                self.assertNotIn("chaine", vus)
+
+
 class TestSansEtat(unittest.TestCase):
-    """A7 : aucune variable de module modifiée, aucun conteneur modifiable au niveau du module ; la brique n'importe que expr."""
+    """A7 : aucune variable de module modifiée, aucun conteneur modifiable au niveau du module ; la brique n'importe que expr, et sortie
+    pour son bloc (bloc_chaine, B3)."""
 
     def source(self):
         with open(os.path.join(RACINE, "moteur", "chaine.py"), encoding="utf-8") as f:
@@ -321,7 +397,7 @@ class TestSansEtat(unittest.TestCase):
     def test_imports(self):
         internes = {(n.module if isinstance(n, ast.ImportFrom) else a.name) for n in ast.walk(self.source())
                     if isinstance(n, (ast.Import, ast.ImportFrom)) for a in n.names}
-        self.assertEqual(internes, {"collections", "html", "types", "expr"})
+        self.assertEqual(internes, {"collections", "html", "types", "expr", "sortie"})
 
 
 class TestReexportParExpLog(unittest.TestCase):

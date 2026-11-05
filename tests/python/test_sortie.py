@@ -127,6 +127,98 @@ class TestValidateur(unittest.TestCase):
         self.assertTrue(so.valider(s))
 
 
+def chaine_bloc():
+    """Bloc « chaine » (B3) : membre de gauche, étiquettes, une ligne de texte et un tableau pleine largeur au milieu, d'autres ⇔ après."""
+    return so.chaine([
+        so.rangee("\\iff", "6(x^{2} - 1) = 0", prop="ME", gauche="6x^{2} - 6 = 0"),
+        so.rangee_texte("Id. rem. \\(A^{2} - B^{2}\\) avec \\(A = x\\), \\(B = 1\\) ; \\(x < y\\) n'est pas du HTML"),
+        so.rangee_bloc(tableau()),
+        so.rangee("\\iff", "6(x + 1)(x - 1) = 0"),
+        so.rangee_bloc(so.texte("Le <strong>produit</strong> est nul :")),
+        so.rangee("\\iff", "\\underbrace{6 = 0}_{\\text{impossible}} \\text{ ou } x + 1 = 0", prop="produit nul"),
+        so.rangee("\\Rightarrow", "x = -1"),
+        so.rangee("", "\\phantom{x} = 1", prop="(on calcule)"),
+    ])
+
+
+class TestBlocChaine(unittest.TestCase):
+    """Bloc « chaine » (chantier briques-communes, B3 ; A4) : constructeurs et schéma. Rendu : tests/pages/test_bloc_chaine.py ; depuis
+    une chaîne de moteur/chaine.py : test_chaine.TestBlocChaine."""
+
+    def sortie(self, b):
+        return so.sortie_ok("x", [so.carte("t", [b])])
+
+    def _refuse(self, modifier, fragment):
+        b = copy.deepcopy(chaine_bloc())
+        modifier(b)
+        ecarts = so.valider(self.sortie(b))
+        self.assertTrue(any(fragment in e for e in ecarts), ecarts)
+
+    def test_constructeurs(self):
+        self.assertEqual(so.rangee("\\iff", "x = 1"), {"lien": "\\iff", "expr": "x = 1"})
+        self.assertEqual(so.rangee("\\iff", "x = 1", prop="ME", gauche="2x = 2"),
+                         {"lien": "\\iff", "expr": "x = 1", "prop": "ME", "gauche": "2x = 2"})
+        self.assertEqual(so.rangee_texte("a"), {"texte": "a"})
+        self.assertEqual(so.rangee_bloc(so.formule("x")), {"bloc": {"type": "formule", "tex": "x"}})
+        self.assertEqual(so.chaine((so.rangee("", "x"),)), {"type": "chaine", "rangees": [{"lien": "", "expr": "x"}]})
+        self.assertEqual(so.BLOCS["chaine"], ({"rangees"}, set()))
+        self.assertEqual(so.BLOCS_DANS_CHAINE, ("texte", "formule", "tableau"))
+
+    def test_conforme(self):
+        self.assertEqual(so.valider(self.sortie(chaine_bloc())), [])
+        for genre in so.BLOCS_DANS_CHAINE:
+            bloc = {"texte": so.texte("a"), "formule": so.formule("x"), "tableau": tableau()}[genre]
+            with self.subTest(genre=genre):
+                self.assertEqual(so.valider(self.sortie(so.chaine([so.rangee("", "x"), so.rangee_bloc(bloc)]))), [])
+        sous = so.sous_calcul("Dérivée", [{"titre": "u", "blocs": [chaine_bloc()]}])           # aussi dans un sous-calcul
+        self.assertEqual(so.valider(self.sortie(sous)), [])
+
+    def test_html_interdit(self):
+        for cle in ("expr", "prop", "gauche"):
+            with self.subTest(cle=cle):
+                self._refuse(lambda b, cle=cle: b["rangees"][0].update({cle: '<span class="x">a</span>'}), "HTML interdit")
+        self._refuse(lambda b: b["rangees"][1].update(texte="a <b>gras</b>"), "HTML interdit")
+        self._refuse(lambda b: b["rangees"][1].update(texte="a &amp; b"), "HTML interdit")
+        self._refuse(lambda b: b["rangees"][1].update(texte="a &#60; b"), "HTML interdit")
+        self._refuse(lambda b: b["rangees"][3].update(expr="x</div>"), "HTML interdit")
+
+    def test_bloc_imbrique(self):
+        for interdit in ({"type": "video"}, so.chaine([so.rangee("", "x")]), so.resultat("x"), so.liste(["a"]), "texte", None):
+            with self.subTest(bloc=interdit):
+                self._refuse(lambda b, i=interdit: b["rangees"].__setitem__(2, {"bloc": i}), "non permis dans une chaîne")
+        self._refuse(lambda b: b["rangees"][2]["bloc"]["rows"][0]["cells"].__setitem__(1, "?"), "hors vocabulaire")     # validé récursivement
+        self._refuse(lambda b: b["rangees"][4]["bloc"].update(html=""), "html vide")
+
+    def test_rangee_mal_formee(self):
+        self._refuse(lambda b: b["rangees"].append({}), "rangée mal formée")
+        self._refuse(lambda b: b["rangees"].append("x = 1"), "rangée mal formée")
+        self._refuse(lambda b: b["rangees"].append(["\\iff", "x = 1", None]), "rangée mal formée")
+        self._refuse(lambda b: b["rangees"].append({"texte": "a", "bloc": so.formule("x")}), "rangée mal formée")
+        self._refuse(lambda b: b["rangees"].append({"texte": "a", "expr": "x"}), "clé « texte » inconnue")
+        self._refuse(lambda b: b["rangees"].append({"lien": "\\iff"}), "clé « expr » manquante")
+        self._refuse(lambda b: b["rangees"].append({"expr": "x"}), "clé « lien » manquante")
+        self._refuse(lambda b: b["rangees"][3].update(couleur="gris"), "clé « couleur » inconnue")
+        self._refuse(lambda b: b["rangees"][3].update(lien="⇔"), "lien « ⇔ » inconnu")
+        self._refuse(lambda b: b["rangees"][3].update(lien="="), "lien « = » inconnu")
+        self._refuse(lambda b: b["rangees"][3].update(expr=""), "texte non vide attendu")
+        self._refuse(lambda b: b["rangees"][3].update(prop=""), "texte non vide attendu")
+        self._refuse(lambda b: b["rangees"][3].update(prop=None), "texte non vide attendu")
+        self._refuse(lambda b: b["rangees"][1].update(texte=""), "texte non vide attendu")
+        self._refuse(lambda b: b.update(couleur=1), "clé « couleur » inconnue")
+
+    def test_gauche_seulement_sur_la_premiere_ligne_avec_un_lien(self):
+        self._refuse(lambda b: b["rangees"][3].update(gauche="x"), "gauche seulement sur la première ligne")
+        self._refuse(lambda b: b["rangees"][0].update(lien=""), "gauche seulement sur la première ligne")
+        b = so.chaine([so.rangee_texte("a"), so.rangee("\\iff", "x = 1", gauche="2x = 2")])           # après une ligne pleine : permis
+        self.assertEqual(so.valider(self.sortie(b)), [])
+
+    def test_liste_de_rangees(self):
+        self._refuse(lambda b: b.update(rangees=[]), "liste non vide")
+        self._refuse(lambda b: b.update(rangees="x"), "liste non vide")
+        self._refuse(lambda b: b.update(rangees=[so.rangee_texte("a")]), "au moins une ligne")
+        self._refuse(lambda b: b.pop("rangees"), "clé « rangees » manquante")
+
+
 def avec_variantes():
     a = [so.carte("Étape 1", [so.texte("a")], badge="Méthode A"), so.carte("Solution", [so.resultat("S = \\{1\\}")], style="final")]
     b = [so.carte("Étape 1", [so.texte("b")], badge="Méthode B"), so.carte("Solution", [so.resultat("S = \\{1\\}")], style="final")]

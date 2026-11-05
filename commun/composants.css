@@ -55,6 +55,21 @@
 .uv-col>div{display:flex;flex-direction:column;justify-content:center;min-width:0;padding:6px 14px;background:var(--card);
   text-align:center;white-space:nowrap;overflow-x:auto;position:relative}     /* position:relative : le MathML caché de KaTeX est rogné */
 
+/* ---- Chaîne de ⇔ du corrigé (bloc « chaine » de moteur/sortie.py, commun/rendu.js ; chantier briques-communes, B3) ----
+   Ce que le bloc ajoute à la grille .chaine (.ligne, .lien, .expr, .prop, et son repli sur un conteneur étroit), qui est encore dans la page
+   Exponentielles et logarithmes et vient ici en B4. Aucune de ces règles ne touche une chaîne d'Exp-log (ni .pleine, ni .avec-gauche).
+   Ligne pleine largeur (.pleine : un texte ou un bloc, au milieu de la chaîne) : elle occupe toute la ligne de la même grille, donc les
+   colonnes d'avant et d'après restent alignées. Membre de gauche (.avec-gauche) : une colonne de plus, avant le ⇔, comme le corrigé
+   (« A ⇔ B ») ; sur un conteneur étroit, il passe seul sur sa ligne, au-dessus des ⇔ (la disposition d'Exp-log). */
+.chaine>.pleine{grid-column:1 / -1;min-width:0}
+.chaine.avec-gauche{grid-template-columns:auto auto minmax(0,1fr) minmax(0,max-content)}
+.chaine.avec-gauche .gauche{text-align:right}
+@container (max-width: 47rem){
+  .chaine.avec-gauche{grid-template-columns:auto minmax(0,1fr)}
+  .chaine.avec-gauche .gauche{grid-column:1 / -1;text-align:left}
+  .chaine.avec-gauche .gauche:empty{display:none}
+}
+
 /* ---- Bouton flottant (« Étape suivante ») : fixé en bas à droite, hors impression ---- */
 .bouton-flottant{position:fixed;z-index:50;right:calc(16px + env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
   min-height:max(44px,var(--flottant-h));min-width:44px;padding:0 24px;font-size:1.05rem;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.3)}

@@ -20,17 +20,22 @@ désactivées par défaut (la sortie d'Exp-log ne change pas) :
 - une ligne de texte au milieu d'une chaîne (`Chaine(…, textes=…)`, `Chaine.ajouter(…, texte_avant=…)`) : une ligne pleine largeur
   entre deux éléments, sans casser l'alignement des ⇔ (`LigneTexte` dans les rangées).
 
+Pour la page : `bloc_chaine(c)` donne le bloc « chaine » de moteur/sortie.py (B3 : rangées alignées, lignes pleine largeur, et le membre de
+gauche dans sa colonne avec `membre_gauche=True`), que commun/rendu.js affiche ; Exp-log écrit encore sa grille lui-même (resoudre_el.py,
+exception nommée de docs/architecture.md, § 5).
+
 Aucun état : aucune variable de module n'est modifiée, les tables sont en lecture seule (règle A7 de docs/architecture.md).
 """
 from collections import namedtuple
 from html import escape as _echapper
 from types import MappingProxyType
 
+import sortie
 from expr import Nb, Neg, tex
 
 __all__ = ["Eq", "Rel", "Ou", "Texte", "Element", "Justification", "Chaine", "Message", "LigneTexte", "tex_element", "tex_message",
-           "LIENS_TEX", "tex_chaine", "rangees_chaine", "est_impossible", "PROP_AUTRE_COTE", "PROP_PRODUIT_NUL",
-           "PROP_MISE_EN_EVIDENCE"]
+           "LIENS_TEX", "tex_chaine", "rangees_chaine", "est_impossible", "texte_message", "bloc_chaine", "PROP_AUTRE_COTE",
+           "PROP_PRODUIT_NUL", "PROP_MISE_EN_EVIDENCE"]
 
 
 # =====================================================================
@@ -271,6 +276,40 @@ def rangees_chaine(c, etiquette_grise=False, impossible=False):
             note = "(" + c.note + ")" + (r" \(\checkmark\)" if c.coche else "")
             rangees[-1][2] = note if rangees[-1][2] is None else rangees[-1][2] + " " + note
     return [r if isinstance(r, LigneTexte) else tuple(r) for r in rangees]
+
+
+def texte_message(m):
+    """Texte d'une ligne pleine largeur du bloc « chaine » : un `Message` (texte tel quel, arbres en TeX entre \\( et \\)) ou un texte.
+    Jamais de HTML : le rendu de la page échappe le texte."""
+    if isinstance(m, str):
+        return m
+    if isinstance(m, Message):
+        return "".join(x if isinstance(x, str) else r"\(" + (x.tex if isinstance(x, Texte) else tex(x)) + r"\)" for x in m.morceaux)
+    raise TypeError(m)
+
+
+def bloc_chaine(c, etiquette_grise=False, impossible=False, membre_gauche=False):
+    """Le bloc « chaine » de moteur/sortie.py (A4), tiré des rangées de `rangees_chaine` (mêmes options `etiquette_grise` et
+    `impossible`) : une ligne {lien, expr, prop} par rangée, une ligne pleine largeur par `LigneTexte` (un texte ou un `Message` :
+    `rangee_texte` ; un bloc, dict de moteur/sortie.py : `rangee_bloc`).
+
+    `membre_gauche` : comme le corrigé (« 6x² − 6 = 0 ⇔ 6(x² − 1) = 0 », les ⇔ suivants dessous), le premier élément passe dans la
+    colonne de gauche de la première ligne à ⇔ (ou ⇒) ; les lignes pleine largeur écrites avant elle restent au-dessus. Seulement si la
+    première rangée n'a pas de propriété et si la ligne suivante commence par un lien ; sinon la chaîne reste telle quelle."""
+    rangees = rangees_chaine(c, etiquette_grise, impossible)
+    lignes = [r for r in rangees if not isinstance(r, LigneTexte)]
+    gauche = None
+    if membre_gauche and lignes[0][2] is None and len(lignes) > 1 and lignes[1][0]:
+        gauche, rangees = lignes[0][1], rangees[1:]
+    lignes_du_bloc = []
+    for r in rangees:
+        if isinstance(r, LigneTexte):
+            m = r.contenu
+            lignes_du_bloc.append(sortie.rangee_bloc(m) if isinstance(m, dict) else sortie.rangee_texte(texte_message(m)))
+        else:
+            lignes_du_bloc.append(sortie.rangee(*r, gauche=gauche))
+            gauche = None
+    return sortie.chaine(lignes_du_bloc)
 
 
 # =====================================================================

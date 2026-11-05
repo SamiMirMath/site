@@ -35,6 +35,7 @@ ARETES = {
     "expr -> noyau": "brique : ErreurSaisie, l'erreur de saisie commune (briques-communes, B1)",
     "expr -> nombres": "brique : notation suisse des nombres, lus et écrits par l'arbre (briques-communes, B1)",
     "chaine -> expr": "brique : les chaînes du corrigé s'écrivent avec le TeX de l'arbre (briques-communes, B2)",
+    "chaine -> sortie": "brique : une chaîne donne son bloc « chaine » (bloc_chaine, constructeurs de sortie.py ; briques-communes, B3)",
     # outil ED : la base est son moteur
     "resoudre_ed -> ensemble_def": "adaptateur de l'outil ED, sur la base directement (légitime : rapport de la revue, § 1.2)",
     "resoudre_ed -> sortie": "adaptateur : brique de sortie",

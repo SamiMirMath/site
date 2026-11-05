@@ -294,10 +294,130 @@ plus.
   dans `suivi.md` : `test_exp_log` (littéraux d'exp_log.py) 1 215 → 960 (B1 puis B2 : les 66 littéraux des chaînes passent à
   moteur/chaine.py, 100 littéraux, lus par `test_vocabulaire` avec le même détecteur).
 
+## B3 — type de bloc « chaine » (A4)
+
+### Plan
+
+1. Lecture : `moteur/sortie.py` (`BLOCS`, `valider`), `moteur/chaine.py` (`rangees_chaine`, `LigneTexte`), `commun/rendu.js` (`BLOCS`,
+   `rendreBloc`), `commun/composants.css`, `resoudre_el._ligne` (grille `.etape > .chaine > .ligne > .lien/.expr/.prop`) et le CSS
+   `.chaine` de la page EL ; corrigés Id_rem.pdf (2.9 a, b, c) et tatonement.pdf (2.11) : quatre colonnes (membre gauche, ⇔, membre
+   droit, étiquette grise), une ligne de texte pleine largeur entre deux rangées (2.9 c), ⇔ alignés avant et après.
+2. Schéma (`sortie.py`) : `{"type": "chaine", "rangees": [rangée]}` ; rangée = ligne `{lien, expr, prop?, gauche?}` (lien « », `\iff`
+   ou `\Rightarrow` ; expr, gauche : TeX ; prop : texte avec le TeX entre `\(` `\)`), ou ligne pleine largeur `{texte}` (même forme
+   de texte) ou `{bloc}` (bloc imbriqué parmi `texte`, `formule`, `tableau`, validé récursivement ; jamais une chaîne dans une chaîne).
+   `gauche` seulement sur la première ligne, avec un lien. Aucun HTML dans un champ (balise ou entité : écart). Constructeurs
+   `chaine`, `rangee`, `rangee_texte`, `rangee_bloc`.
+3. Depuis une `chaine.Chaine` : `chaine.bloc_chaine(c, etiquette_grise=False, impossible=False, membre_gauche=False)` (les rangées de
+   `rangees_chaine`, une `LigneTexte` devient une ligne pleine largeur : texte, `Message` ou bloc ; `membre_gauche` : le premier
+   élément passe dans la colonne de gauche de la première ligne à ⇔, comme le corrigé). Arête nouvelle `chaine -> sortie` (brique ->
+   brique ; sortie n'importe rien) ; manifeste inchangé (EL charge déjà sortie.py).
+4. Rendu (`commun/rendu.js`) : `<div class="etape"><div class="chaine">` puis `.ligne` (`.gauche`?, `.lien`, `.expr`, `.prop`) et
+   `.pleine`, mêmes classes que la grille d'EL (un seul CSS en B4) ; textes échappés par le rendu (aucun HTML venu du moteur), TeX par
+   KaTeX. `commun/composants.css` : ce que le bloc ajoute (`.chaine>.pleine` sur toute la largeur, `.chaine.avec-gauche` à quatre
+   colonnes et son repli sur un conteneur étroit) ; rien qui touche une chaîne d'EL. Le CSS `.chaine` reste dans la page EL (B4).
+5. Tests : Python (`test_sortie.py` : constructeurs, `valider` accepte et refuse ; `test_chaine.py` : `bloc_chaine` sur 2.9 a et 2.9 c,
+   options, `test_imports` de la brique) ; pages (nouveau `tests/pages/test_bloc_chaine.py`, sur une page existante comme SOC-22 :
+   structure, KaTeX, textes échappés, tableau imbriqué, thème sombre, balayage 320–1100 px ; alignement, repli étroit et étiquette
+   grise en `xfail` strict « B4 » s'ils ne peuvent passer qu'avec le CSS `.chaine` commun).
+6. Docs : `architecture.md` (A4, § 1, § 5 : ligne « HTML de la grille `.chaine` »), docstrings ; puis dump, temps, suite complète.
+
+### Exécution
+
+- **Schéma** (`moteur/sortie.py`, `BLOCS["chaine"] = ({"rangees"}, set())`) :
+
+      {"type": "chaine", "rangees": [rangée, …]}
+      rangée = {"lien": "" | "\\iff" | "\\Rightarrow", "expr": TeX, "prop"?: texte, "gauche"?: TeX}     ligne de la grille
+             | {"texte": texte}                                                                      ligne pleine largeur (texte)
+             | {"bloc": bloc}                                                                        ligne pleine largeur (bloc)
+
+  texte = du texte, le TeX entre `\(` `\)` (comme la colonne des propriétés d'Exp-log) ; bloc imbriqué : `texte`, `formule` ou
+  `tableau` (`BLOCS_DANS_CHAINE`), validé récursivement par `_valider_bloc` ; une chaîne dans une chaîne, un `resultat`, une `liste`,
+  un type inconnu sont refusés. `gauche` : seulement sur la première ligne de la grille, qui a un lien (des lignes pleine largeur
+  peuvent la précéder). Au moins une ligne. **Aucun HTML** dans `expr`, `prop`, `gauche`, `texte` : `valider` refuse une balise
+  (`</?nom …>`) ou une entité (`&amp;`, `&#60;`) ; « x < y » et `\(a<b\)` passent. Le bloc `texte` imbriqué garde son `html` (type
+  existant). Constructeurs : `chaine(rangees)`, `rangee(lien, expr, prop=None, gauche=None)`, `rangee_texte(texte)`, `rangee_bloc(bloc)`.
+- **Depuis une `Chaine`** (`moteur/chaine.py`) : `bloc_chaine(c, etiquette_grise=False, impossible=False, membre_gauche=False)` prend
+  les rangées de `rangees_chaine` (mêmes options) ; une `LigneTexte` devient `rangee_texte` (texte, ou `Message` par
+  `texte_message` : texte tel quel, arbres en TeX entre `\(` `\)`) ou `rangee_bloc` (un dict de sortie.py). `membre_gauche=True` :
+  le premier élément passe dans la colonne de gauche de la première ligne à ⇔/⇒ (« 6x² − 6 = 0 ⇔ 6(x² − 1) = 0  ME », Id_rem.pdf),
+  les lignes pleine largeur d'avant restent au-dessus (2.9 b) ; sans effet si la première rangée a une propriété ou si la ligne
+  suivante n'a pas de lien (suite de « = »). Les trois options de B2 passent donc dans le bloc : étiquette grise (le texte sans
+  parenthèses ; le gris est celui de la colonne `.prop`, CSS de B4), « impossible » (TeX de l'expression), texte au milieu (`.pleine`).
+- **Arête** `chaine -> sortie` (ARETES, brique → brique ; sortie.py n'importe que `re`) ; `test_chaine.TestSansEtat.test_imports`
+  attend maintenant `{collections, html, types, expr, sortie}` (changement voulu, l'égalité reste exacte). Manifeste inchangé : l'outil
+  EL, seul à charger chaine.py, charge déjà sortie.py (`test_manifeste` vert, complet et minimal).
+- **Rendu** (`commun/rendu.js`, `BLOCS.chaine` → `rendreChaine`) : `<div class="etape"><div class="chaine[ avec-gauche]">`, une
+  `<div class="ligne">` par ligne avec `<span class="gauche">` (seulement avec un membre de gauche), `.lien`, `.expr`, `.prop`, et une
+  `<div class="pleine">` par ligne pleine largeur (texte échappé, ou le bloc rendu par `rendreBloc`). Mêmes classes et même structure
+  que la grille écrite par `resoudre_el._ligne` (le CSS d'EL s'applique tel quel). Formules par `K()` (KaTeX) ; textes échappés
+  (`&`, `<`, `>`) puis leur TeX rendu par `math()`.
+- **CSS** (`commun/composants.css`, ajouts seulement) : `.chaine>.pleine{grid-column:1 / -1;min-width:0}` ; `.chaine.avec-gauche` à
+  quatre colonnes (`auto auto minmax(0,1fr) minmax(0,max-content)`), `.gauche` alignée à droite ; sur un conteneur étroit
+  (`@container (max-width: 47rem)`, le même seuil que la page EL) deux colonnes, `.gauche` seule sur sa ligne au-dessus, vide cachée.
+  Aucune règle ne touche une chaîne d'EL (ni `.pleine` ni `.avec-gauche` n'y existent) ; le CSS `.chaine` reste dans la page EL (B4).
+- **Docs** : `architecture.md` § 1 (chaine : « et leur bloc »), A4 (garde-fou : HTML refusé par `valider`, texte échappé par le rendu),
+  § 5 (ligne « HTML de la grille `.chaine` » : le bloc existe, CSS en B4, migration d'Exp-log : chantier à décider) ; docstrings de
+  sortie.py, chaine.py, rendu.js.
+
+### Tests ajoutés
+
+- `tests/python/test_sortie.py::TestBlocChaine` (7 tests) : constructeurs ; forme correcte acceptée (membre de gauche, texte et tableau
+  pleine largeur, bloc texte imbriqué, ⇒, ligne `\phantom` sans lien ; chaque type de `BLOCS_DANS_CHAINE` ; dans un sous-calcul) ;
+  refus : HTML (balises dans expr, prop, gauche, texte ; entités), bloc imbriqué non permis (inconnu, chaîne, resultat, liste, texte
+  nu, None) et bloc imbriqué invalide (validé récursivement), rangée mal formée (dict vide, texte, liste, texte + bloc, clés en trop ou
+  manquantes, lien inconnu dont « ⇔ » et « = », champs vides), `gauche` hors de la première ligne ou sans lien, liste vide ou sans ligne.
+- `tests/python/test_chaine.py::TestBlocChaine` (6 tests) : rangées par défaut égales à `rangees_chaine` (2.9 c), 2.9 a avec membre de
+  gauche, étiquettes grises et « impossible » (sortie attendue écrite), lignes pleine largeur avant le membre de gauche (2.9 b, tableau
+  passé tel quel), `membre_gauche` sans effet (propriété en tête, suite de « = »), `texte_message`, Exp-log inchangé (aucun bloc
+  `chaine` dans ses sorties).
+- `tests/pages/test_bloc_chaine.py::TestBlocChaine` (7 tests), sur la page Ensemble de définition comme SOC-22 (aucune page nouvelle),
+  trois chaînes construites par `bloc_chaine` (2.9 c avec membre de gauche et étiquettes grises, 2.9 c comme Exp-log, chaîne avec un
+  texte, un tableau et un bloc texte pleine largeur) et une chaîne de texte qui ressemble à du HTML. Dès B3 : `test_blocs_valides`,
+  `test_structure_et_formules` (classes, ordre des rangées, colonnes, KaTeX partout, « impossible »), `test_textes_echappes` (aucune
+  balise créée, aucun script lancé), `test_largeurs_et_theme_sombre` (320 à 1100 px, clair et sombre : `test_largeurs.JS_MESURE` sans
+  faute, rien hors de la carte, couleurs du thème ; console vide). **xfail stricts « B4 »** (sans sous-test, pour échouer en entier) :
+  `test_colonnes_alignees_avant_et_apres_la_ligne_pleine` (1100 px), `test_repli_sur_ecran_etroit` (360 et 390 px : propriété sous
+  l'expression, membre de gauche au-dessus, pas de défilement), `test_etiquette_grise` (couleur `--muted`, plus petite, clair et
+  sombre). Contrôle fait : avec le CSS `.chaine` de la page EL injecté dans la page (simulation de B4, script dans le scratchpad
+  `b3/simuler_b4.py`), les trois passent, et les tests de B3 aussi.
+- `test_imports` : une arête de plus. `test_largeurs` inchangé (aucun outil nouveau, `CONNUS` vide) ; `test_style_commun` inchangé
+  (aucune page touchée) ; `test_composants` lit les règles ajoutées (sous-tests en plus).
+
+### Vérifications
+
+- Dump `B3` (`--processus 6`) et `B3-1` (`--processus 1`) : `diff -r --exclude=temps` avec `depart` code 0, aucune sortie
+  (17 fichiers, 4 148 sorties).
+- Tests ciblés (`-n 6`) : test_sortie, test_chaine, test_imports, test_manifeste, test_composants, test_noyau, test_vocabulaire,
+  test_style_commun, test_source_unique : 122 passés, 12 150 sous-tests ; `tests/pages/test_bloc_chaine.py` : 4 passés, 3 xfail.
+- Temps natif (`resoudre_json`, 1 processus, comparé à `un-processus` de B0) :
+
+| Outil | Filière | B0 (s) | B3 (s) | Plus long appel B0 / B3 (s) |
+|---|---|---|---|---|
+| ensemble-definition | – | 0,033 | 0,035 | 0,022 / 0,024 |
+| derivee-variations | – | 0,265 | 0,270 | 0,081 / 0,082 |
+| limites-asymptotes | – | 5,895 | 5,953 (+1 %) | 1,177 / 1,212 |
+| etude-complete | – | 1,998 | 2,050 (+2,6 %) | 0,29 / 0,288 |
+| factorisation | – | 1,883 | 1,904 | 0,063 / 0,066 |
+| exponentielles-logarithmes | C | 0,888 | 0,928 (+4,5 %) | 0,005 / 0,005 |
+| exponentielles-logarithmes | M | 0,764 | 0,780 (+2,1 %) | 0,003 / 0,003 |
+
+  Aucune hausse de plus de 50 % (aucun moteur ne produit le bloc). Mur du dump : 13 s (1 processus), 4 s (6 processus).
+- Captures (scratchpad, hors du dépôt) : `b3/sans-b4-390.png`, `b3/sans-b4-1100.png` (B3 seul : la grille n'a pas encore son CSS
+  dans cette page), `b3/avec-b4-320.png`, `b3/avec-b4-390.png`, `b3/avec-b4-390-sombre.png`, `b3/avec-b4-1100.png` (CSS d'EL injecté).
+- Suite d'avant commit : `PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rapport <scratchpad>/briques/rapports/B3`, code 0,
+  départ 17 h 58 (environ 6 min 45 de mur). Python 1 456 collectés, 1 455 passés + 1 xfail, 106 391 sous-tests (89,2 s) ; pages
+  145 collectés, 142 passés + 3 xfail (les trois « B4 »), 2 421 sous-tests (311 s). `comparer_listes` contre `tests/reference` (B0) :
+  64 tests Python nouveaux (B1 21, B2 30, B3 13) et 7 tests de pages nouveaux (`test_bloc_chaine.py`), aucun disparu ; sous-tests :
+  hausses seulement (`test_composants` 7 → 8 et 35 → 41, `test_imports` 83 → 95, `test_manifeste_minimal` 34 → 36, gardes `memo`
+  19 → 21, `test_vocabulaire` 8 652 → 8 792 : les littéraux de sortie.py et chaine.py ajoutés), plus la baisse déjà justifiée de
+  `test_exp_log` (1 215 → 960, inchangée depuis B2) ; pages : 2 407 → 2 421 (les 14 sous-tests de `test_bloc_chaine.py`), références
+  des autres pages identiques.
+
 ## Contrôles du chef d'orchestre
 
 - B0 `b296741` : verifier ACCEPTÉ (Python 1 392 / 106 244 sous-tests, pages 138 / 2 407, identiques à la référence) ; rapide --depuis HEAD~1 : 23 passés, 243 sous-tests, 3 s (fumée + docs).
 - B1 `6be8865` : verifier ACCEPTÉ (Python 1 413 / 106 250 sous-tests, 21 tests nouveaux de test_expr, 5 hausses, 1 baisse justifiée ; pages 138 / 2 407 identiques) ; rapide --depuis HEAD~1 : Python 1 368 passés + 1 xfail, 106 194 sous-tests (87 s), pages 138 passés, 1 242 sous-tests (276 s), mur 6 min 06 ; dump identique au départ.
+- B2 `572f751` : verifier ACCEPTÉ (Python 1 443 / 106 301 sous-tests, 51 tests ajoutés depuis B0, 5 hausses, 1 baisse justifiée ; pages 138 / 2 407 identiques) ; rapide --depuis HEAD~1 : Python 1 398 passés + 1 xfail, 106 245 sous-tests (97 s), pages 138 passés, 1 242 sous-tests (279 s), mur 6 min 19 ; dump identique au départ (B2).
 
 ## Temps
 

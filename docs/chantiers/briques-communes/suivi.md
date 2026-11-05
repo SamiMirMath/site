@@ -13,7 +13,7 @@ D25, E14, § 5, P3) tiennent lieu de décisions.
 | B0 | Fiches, référence rafraîchie (1 392 tests Python dont 1 xfail, 106 244 sous-tests ; 138 tests de pages, 2 407 sous-tests), dump de départ (4 148 sorties, déterministe) | faite (suite verte) | voir `git log` |
 | B1 | `moteur/expr.py` : arbre d'Exp-log, `tex`, parseur avec un `Lexique` explicite (« membre = membre » : `lire_membres`) ; e et log restent dans `exp_log` (nœuds `E`, `Log`, `LEXIQUE`) ; réexport par `exp_log` ; manifeste ; `_DECIMAUX` ne traverse pas ; tests ajoutés : `test_expr.py` (21 tests, 144 sous-tests) | faite (suite verte) | voir `git log` |
 | B2 | `moteur/chaine.py` : Eq, Rel, Ou, Texte, Chaine, Message, `tex_element`, `tex_chaine`, `rangees_chaine`, 3 propriétés génériques ; `Positif`, `Car`, `Divise` et les 44 autres `PROP_*` restent dans exp_log (s'écrivent eux-mêmes : `chaine.Element`, `chaine.Justification`), coche par `Chaine(coche=True)` ; trois options désactivées par défaut (`etiquette_grise`, `impossible`, `textes`/`texte_avant`) ; réexport ; manifeste ; arêtes `chaine -> expr`, `exp_log -> chaine` ; tests ajoutés : `test_chaine.py` (30 tests, 76 sous-tests) | faite (suite verte) | voir `git log` |
-| B3 | Type de bloc « chaine » (A4 : `sortie.py`, `valider`, `rendu.js`, test), ligne pleine largeur au milieu ; Exp-log inchangé (exception nommée) | à faire | — |
+| B3 | Type de bloc « chaine » : `{rangees: [{lien, expr, prop?, gauche?} \| {texte} \| {bloc}]}` (`sortie.chaine`, `rangee`, `rangee_texte`, `rangee_bloc` ; `valider` : HTML refusé, blocs imbriqués `texte`/`formule`/`tableau` validés récursivement) ; `chaine.bloc_chaine(c, etiquette_grise, impossible, membre_gauche)` ; rendu `commun/rendu.js` (mêmes classes que la grille d'EL, `.pleine`, `.avec-gauche`), compléments dans `commun/composants.css` ; arête `chaine -> sortie` ; Exp-log inchangé ; tests ajoutés : `test_sortie.TestBlocChaine` (7), `test_chaine.TestBlocChaine` (6), `tests/pages/test_bloc_chaine.py` (7, dont 3 xfail stricts « B4 ») | faite (suite verte) | voir `git log` |
 | B4 | CSS : `.chaine` dans `commun/composants.css`, `details ol` dans `commun/style.css` | à faire | — |
 | B5 | `nombres.approx(x, decimales=3)` et `nombres.exact(x, decimaux_enonce=False)`, fonctions pures, aucun outil rebranché ; tests croisés | à faire | — |
 | B6 | `oracle.racines(coeffs)` (mpmath 50 chiffres) et ses tests | à faire | — |
@@ -41,6 +41,20 @@ outil), `test_manifeste` vert, `test_largeurs` avec `CONNUS` vide.
     égalité fausse entre deux nombres écrits (6 = 0, −1 = 0) ;
   - texte au milieu (`Chaine(textes=…)`, `ajouter(texte_avant=…)`) : rangée `LigneTexte(contenu)` pleine largeur avant l'élément,
     dont le ⇔ reste relié à l'élément d'avant ; en TeX d'une ligne, `\quad \text{…} \quad` avant le lien.
+- B3 : aucun instantané, aucune référence de page, aucune sortie modifiés (dump identique ; aucun outil ne produit encore le bloc).
+  À relire : la forme du bloc et son rendu (détail dans `journal.md`, section B3, « Exécution ») :
+  - quatre colonnes comme le corrigé (membre de gauche, ⇔, membre de droite, étiquette) avec `membre_gauche=True`, trois comme
+    Exp-log sans ; sur un écran étroit, le membre de gauche seul au-dessus, la propriété sous l'expression ;
+  - ligne pleine largeur : un texte (TeX entre `\(` `\)`) ou un bloc `texte`, `formule` ou `tableau` (le futur `tableau_essais` de
+    P2 s'ajoutera à `BLOCS_DANS_CHAINE`) ;
+  - captures à 390 et 1100 px avec le CSS de B4 simulé : `/tmp/claude-1000/-home-sami-ubuntu-site/4164342b-a2d3-4999-80ff-850ac94e5e5e/scratchpad/b3/avec-b4-390.png` et
+    `avec-b4-1100.png` dans le même dossier (hors du dépôt).
+
+## Exceptions ajoutées ou changées
+
+- B3 : ligne « HTML de la grille `.chaine` écrit dans un bloc `texte` (`resoudre_el.py`) » de `architecture.md` § 5 ajustée : le type de
+  bloc `chaine` existe, le CSS passe en B4, la migration d'Exp-log vers le bloc est un chantier **à décider**. Aucune exception
+  d'import nouvelle (arête `chaine -> sortie` dans ARETES, brique → brique).
 
 ## Variations de sous-tests
 
