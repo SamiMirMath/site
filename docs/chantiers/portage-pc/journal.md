@@ -23,3 +23,19 @@ décrites dans le résumé de `tests-rapides` (§0 : réconciliation avec `origi
 | `p1-n4` (`PROCESSUS_PAGES=4`) | 0 | 92 s | **299 s** | identiques à la référence, nom par nom |
 | `p1-n2` (absente) | 1 | 94 s | 548 s | test instable du clavier échoué (KaTeX non chargé depuis jsDelivr : `net::ERR_CERT_VERIFIER_CHANGED`, cause réseau) ; relancé seul : passé, 2 sous-tests |
 | `p1-n2b` (absente, relancé) | 0 | 87 s | 548 s | identiques à `p1-n4`, nom par nom |
+
+Contrôle de 5a3b737 : `verifier <p1-n4> --reference <ref-main>` : listes identiques nom par nom, empreintes conformes ; REFUSÉ pour le seul
+motif (b) (4 fichiers non suivis de l'enseignant dans `docs/`, hors du commit).
+
+## Point 2 — référence du dépôt
+
+- `python3 tests/lancer.py reference <dossier>` accepte un dossier de `complet --rapport` si : les 4 listes et `rapport.json` sont là
+  (sinon code 2) ; le commit du lancement existe et est dans l'historique de HEAD ; codes 0 partout, pages lancées ; `CORPUS` et `OUTILS`
+  non définis ; JUnit et extension concordants ; aucun fichier modifié ou non suivi, au début ni à la fin du lancement, hors de `docs/` et
+  de `CLAUDE.md` (aucun test ne lit ces fichiers : vérifié par recherche dans `tests/python` et `tests/pages`, seulement des mentions dans
+  des docstrings). Sinon REFUSÉ (code 1), rien n'est changé. Il affiche les différences avec l'ancienne référence, copie les 4 listes,
+  écrit `origine.txt` (commit, dates, durées, environnement, résumé) et garde `soustests-variables.txt` s'il existe.
+- Essais : `p1-n4` refusé (`tests/lancer.py` modifié) ; `p1-n2` refusé (codes 1 et `tests/lancer.py`) ; dossier absent : code 2 ; sans
+  argument : aide, code 2 ; `ref-main` (c9b257f, `main`) accepté → `tests/reference/` ; relancé : 0 différence.
+- `verifier <p1-n4> --commit 5a3b737` sans `--reference` : prend `tests/reference`, identique nom par nom.
+- Suite d'avant commit `p2` (`PROCESSUS_PAGES=4`) : code 0 ; Python 94 s, pages 294 s ; identique à `tests/reference` nom par nom.

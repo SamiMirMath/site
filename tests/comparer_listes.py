@@ -1,7 +1,7 @@
 """Listes de tests (collectés, issues, sous-tests) écrites en texte trié, et comparaison nom par nom (chantier tests-rapides, P0).
 
     python3 tests/comparer_listes.py <référence> <dossier>
-        compare, suite par suite, les fichiers texte de deux dossiers (par exemple docs/chantiers/tests-rapides/reference et le dossier
+        compare, suite par suite, les fichiers texte de deux dossiers (par exemple tests/reference et le dossier
         écrit par `python3 tests/lancer.py complet --rapport <dossier>`) ; code 0 si tout est identique, 1 sinon, 2 si un fichier manque.
 
 Fichiers d'un dossier, pour chaque suite (python, pages) :
