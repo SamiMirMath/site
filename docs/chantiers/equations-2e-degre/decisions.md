@@ -10,9 +10,11 @@
 - Règles générales : `docs/architecture.md` (A1 à A9), `docs/guide-redaction.md` (R1 à R20), `docs/chantiers/equations-2e-degre/quiz.md`.
 
 **Prérequis.** Les chantiers `fondations` et `briques-communes` sont fusionnés. Ils apportent :
-- `moteur/expr.py` et `moteur/chaine.py`, avec les options du corrigé : étiquette grise, « impossible » sous le facteur constant, texte au milieu de la chaîne ;
+- `moteur/expr.py`, avec **le parseur** (lecture de « membre = membre ») ;
+- `moteur/chaine.py`, avec les options du corrigé : étiquette grise, « impossible » sous le facteur constant, texte au milieu de la chaîne ;
+- le type de bloc « chaine », avec une **ligne pleine largeur** au milieu de la chaîne qui peut contenir un autre bloc (le tableau S-P, D4) sans casser l'alignement des ⇔ ;
 - le CSS `.chaine` commun ;
-- `nombres.approx` (D13) ;
+- `nombres.approx` (D13) et `nombres.exact(x, decimaux_enonce=False)` (E14) ;
 - `oracle.racines`.
 
 Les parties P1 et P2 de l'audit (extraction de la chaîne et du CSS) ne font donc **pas** partie de ce chantier.
@@ -62,9 +64,10 @@ Les parties P1 et P2 de l'audit (extraction de la chaîne et du CSS) ne font don
 | D22 | **Coefficients non entiers** (fractions, décimaux) : pas de multiplication par le dénominateur. L'Id. rem. reste possible (B = 1/2, 2.9 g ; B = 1/3, 2.9 h). Le S-P et le tâtonnement demandent des coefficients entiers ; sinon, la formule (Javet 2.17 e, f). | outil |
 | D23 | **Inconnue** : la lettre saisie (x, t, y, z, u dans le corrigé). Une seule lettre. | outil |
 | D24 | **Carré d'un binôme** : on réécrit toujours `(t + 10)² = 0 ⇔ (t + 10)(t + 10) = 0`, puis le facteur n'apparaît **qu'une fois** au produit nul (2.9 b). Un monôme (x²) n'est pas réécrit. | outil |
-| D25 | **Milliers** : apostrophe dès 4 chiffres (`4’913`), entre 1000 et 10⁶ (au-delà, notation scientifique, R13), partout. C'est probablement déjà en place dans `nombres.py` (Étude complète, Q28). **C'est `briques-communes` qui le vérifie** et qui liste les instantanés d'autres outils qui changeraient. **Ce chantier ne touche pas à `nombres.py`.** | tous |
+| D25 | **Milliers** : apostrophe dès 4 chiffres (`4’913`). Une valeur **exacte** entière la garde toujours (`1’234’567`, décision du 05.11.2026) ; une valeur **approchée** passe en notation scientifique dès 10⁶ (R13). Déjà en place dans `nombres.py` (vérifié par `briques-communes`). Pas encore appliquée par Factorisation, Limites, l'Étude complète, Exp-log (interprétation) ni le contrôle de l'ED : ce sera le chantier « nombres partout », hors de celui-ci. | tous |
 | D26 | **Rappel de la méthode** : un bloc repliable, fermé au départ, en tête de chaque résolution (texte en E15). | outil |
 | D27 | **Développer** seulement quand aucune structure ne s'applique, en montrant les produits, avec l'étiquette « double distribution » ou « distribution » (E2). | outil |
+| D29 | **Mise en relief des valeurs trouvées** (demande de l'enseignant du 05.11.2026, pour faire ressortir les résultats) : ce que l'élève doit trouver est encadré, dans la couleur et le cadre déjà utilisés pour le résultat d'une limite dans l'outil Limites (même composant, déplacé dans `commun/` s'il est propre à cette page, A2 ; clair et sombre). Concerné : **A et B** de l'Id. rem. (« avec ⟦A = 4z, B = 9⟧ ») ; la **ligne ✓** du tableau S-P ; **r et △** du tâtonnement (« ⟦x = −4⟧ est solution », « donc ⟦△ = −7⟧ ») ; la **valeur de Δ** ; **S** (déjà encadré). Chaque encadré est insécable (jamais coupé à 390 px). La « Vérification », les calculs et les étiquettes ne sont pas encadrés. | outil |
 | D28 | **Ordre des méthodes fixe**, même si a = 1 : ME, Id. rem., S-P, tâtonnement, formule (encadré de 2.12, Javet). Le S-P choisi à la place d'une Id. rem. est « juste, pas dans l'ordre » dans le quiz (QZ-05, F7). | outil, quiz |
 
 ---
@@ -181,7 +184,8 @@ x₂ = (−b + √Δ)/(2a) = (−4 + 2√5)/2 = −2 + √5
   - `S = {−√5 ; √5}, soit x ≈ −2,236 ou x ≈ 2,236` ;
   - `S = {−2 − √5 ; −2 + √5}, soit x₁ ≈ −4,236 et x₂ ≈ 0,236` ;
   - `S = {−√2 ; 0 ; √2}, soit x ≈ −1,414 ou x = 0 ou x ≈ 1,414`.
-- 3 décimales, virgule décimale. Notation scientifique sous 10⁻³ et dès 10⁶ (`3,162 × 10⁻⁵`). Une mantisse arrondie à 10,000 devient `1,000 × 10ⁿ⁺¹`. Apostrophe dès 4 chiffres (D25).
+- 3 décimales, virgule décimale, arrondi au plus proche, la moitié vers le haut en valeur absolue, comme la calculatrice (0,0625 ≈ 0,063).
+- Notation scientifique sous 10⁻³ et dès 10⁶, décidée sur la valeur **arrondie** : au plus 4 chiffres significatifs, **zéros finaux de la mantisse retirés** comme dans R13 (`3,162 × 10⁻⁵`, `1 × 10¹⁰`). Une mantisse arrondie à 10 devient `1 × 10ⁿ⁺¹`. Jamais `−0,000`. Apostrophe dès 4 chiffres (D25).
 
 **E15. Rappel de la méthode** (bloc repliable, D26) :
 
@@ -241,7 +245,7 @@ appliquer(methode, polynome) -> Etape | None
 
 ## 6. Tests
 
-- **Oracle.** Pour chaque équation du corpus (§ 8) et des propriétés sur des polynômes générés : solutions = `oracle.racines`, et aucune autre.
+- **Oracle.** Pour chaque équation du corpus (§ 8) et des propriétés sur des polynômes générés : solutions = `oracle.racines`, et aucune autre. `oracle.racines` prend les coefficients du plus haut degré au terme constant (int, Fraction, Decimal, str ; float refusé) et refuse le polynôme nul : l'identité et l'égalité fausse (S = ℝ, S = ∅) se testent à part.
 - **Garde-fou.** Chaque factorisation affichée est redéveloppée exactement ; chaque solution est substituée exactement.
 - **Méthodes.** Pour chaque méthode et chaque polynôme du corpus : `s_applique` vrai ⇒ `appliquer` rend une factorisation qui se redéveloppe exactement ; `s_applique` faux ⇒ `None`.
 - **Invariant des étapes.** La concaténation des `lignes` donne le rendu de « Résoudre » (identique à l'octet).
@@ -496,10 +500,10 @@ commit. Les parties s'enchaînent dans l'ordre : chacune dépend de la précéde
 
 | Partie | Contenu | Tests | Dépend de |
 |---|---|---|---|
-| P0 | Contrôle des prérequis (`main` contient `fondations` et `briques-communes` : `moteur/chaine.py`, `moteur/expr.py`, `nombres.approx`, `oracle.racines`, `.chaine` dans `commun/composants.css` ; sinon **arrêt de toute la session**). PDF déplacés et `git check-ignore` (D0). `suivi.md` (court, avec « Reprise après compactage ») et `journal.md`. Référence des tests (`complet --rapport` puis `reference`), commitée. | — | — |
+| P0 | Contrôle des prérequis (`main` contient `fondations` et `briques-communes` : `moteur/chaine.py`, `moteur/expr.py` avec le parseur, le type de bloc « chaine » avec ligne pleine largeur, `nombres.approx`, `nombres.exact`, `oracle.racines`, `.chaine` dans `commun/composants.css` ; sinon **arrêt de toute la session**). PDF déplacés et `git check-ignore` (D0). `suivi.md` (court, avec « Reprise après compactage ») et `journal.md`. Référence des tests (`complet --rapport` puis `reference`), commitée. | — | — |
 | P1 | **Calcul** (`moteur/second_degre.py`, sans texte) : polynômes exacts (`Fraction`) ; nombres (p + q√m)/d exacts ; ME (pgcd, xᵏ, −pgcd), Id. rem. (E5, polynôme développé), S-P (E6, essais et signes), tâtonnement (E7, racine entière unique), formule (Δ, √Δ simplifié), produit nul ; `s_applique` et `appliquer` ; garde-fou exact. | Oracle sur le corpus § 8 (degré 2 développé) et sur des polynômes générés ; `s_applique` ⇒ `appliquer` se redéveloppe ; garde-fou ; temps natif | P0 |
-| P2 | **Rédaction** : étapes structurées (§ 5) et `lignes` en objets de `chaine.py` ; E3 à E12, E14 (R13 par `nombres.approx`, ≈, apostrophe), D20, D24 ; type de bloc commun `tableau_essais` (A4 : `sortie.py`, `valider`, `rendu.js`, CSS, test). | Instantanés du texte (2.9 à 2.12 développés, Javet 2.17) ; invariant « concaténation des lignes » ; R12, vocabulaire ; cas limites § 6 | P1 |
-| P3 | **Saisie** : « membre = membre » lu par `moteur/expr.py`, inconnue (D23), `decimaux_enonce` (R13), E1 (cas 1 et 2 ; cas 3 par développement seulement, les structures venant en P4), E2 (développer, D27), messages § 4. | Erreurs de saisie, notation suisse, décimaux de l'énoncé, (x + 1)(x + 3) = 15, Az 4.1 g | P2 |
+| P2 | **Rédaction** : étapes structurées (§ 5) et `lignes` en objets de `chaine.py`, rendues par `chaine.bloc_chaine(c, etiquette_grise=True, impossible=True, membre_gauche=True)` (4 colonnes, comme le corrigé) ; E3 à E12, E14 (R13 par `nombres.approx` et `nombres.exact`, ≈, apostrophe), D20, D24, D29 (mise en relief) ; type de bloc commun `tableau_essais` (A4 : `sortie.py`, `valider`, `rendu.js`, CSS, test), ajouté à `BLOCS_DANS_CHAINE`, placé dans une ligne pleine largeur de la chaîne. | Instantanés du texte (2.9 à 2.12 développés, Javet 2.17) ; invariant « concaténation des lignes » ; R12, vocabulaire ; cas limites § 6 | P1 |
+| P3 | **Saisie** : « membre = membre » lu par `expr.lire_membres` avec un `Lexique` propre à l'outil (aucune fonction : ni e, ni log, ni ln ; une seule lettre), inconnue (D23), `decimaux_enonce` (R13), E1 (cas 1 et 2 ; cas 3 par développement seulement, les structures venant en P4), E2 (développer, D27), messages § 4. | Erreurs de saisie, notation suisse, décimaux de l'énoncé, (x + 1)(x + 3) = 15, Az 4.1 g | P2 |
 | P4 | **Formes structurées et degrés ≠ 2** : Id. rem. structurée (2.9 k, l ; 2.12 h), facteur commun aux deux membres avec l'avertissement (2.12 e), produit déjà factorisé (Az 4.1 d), ME de xᵏ en degré ≥ 3 (2.12 c, Az 4.1 f), E9, degré 1, identité et égalité fausse. | Oracle et instantanés sur ces cas ; le reste du corpus § 8 | P3 |
 | P5 | **Outil** `equations-2e-degre/` : `equations.py`, `resoudre_eq.py`, `index.html` (`monterOutil`, exemples = 2.9 à 2.12, clavier commun, variante « Par la formule » E12, rappel repliable D26, avec un type de bloc s'il n'en existe pas, A4) ; manifeste ; nouvelles arêtes d'import déclarées (A1) ; données de test de l'outil (A3). **Pas de registre.** | Instantanés `resoudre`, références de pages, `test_largeurs` de 320 à 1100 px (`CONNUS` vide), `json_strict`, source unique | P4 |
 | P6 | **Après la relecture de l'enseignant** (pas de nuit) : corrections, puis registre et carte de l'accueil, compteur de `tests/pages/test_accueil.py`. | `test_accueil` | P5 et relecture |
