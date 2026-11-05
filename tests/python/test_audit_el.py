@@ -106,10 +106,10 @@ class TestRacineDouble(unittest.TestCase):
     def test_delta_nul_methode_b(self):
         l = lignes("2^(x^2)=2^(2x-1)")
         self.assertEqual(l[1:], [r"Δ = (-2\log(2))^{2} - 4\log(2) \cdot \log(2) = 0 \quad \text{(formule du discriminant)}",
-                                 r"Δ = 0 \text{ : une seule solution}", r"x = \frac{-b}{2a} = \frac{2\log(2)}{2\log(2)}"])
-        r = corriger("2^(x^2)=2^(2x-1)")
-        self.assertEqual(len(r["solutions"]), 1)
-        self.assertEqual(el.controle_calculatrice(r), r"Contrôlez à la calculatrice : \(x = \frac{2\log(2)}{2\log(2)} = 1\).")
+                                 r"Δ = 0 \text{ : une seule solution}", r"x = \frac{-b}{2a} = \frac{2\log(2)}{2\log(2)} = 1"])
+        r = corriger("2^(x^2)=2^(2x-1)")                     # 2log(2)/(2log(2)) = 1 simplifié (explog-q4-q6, Q4) : S = {1}, plus de contrôle
+        self.assertEqual(el.tex_solution(r), r"S = \left\{1\right\}")
+        self.assertIsNone(el.controle_calculatrice(r))
 
     def test_x_carre_fois_log_nul(self):
         self.assertTrue(lignes("2^(x^2)=1")[0].endswith(

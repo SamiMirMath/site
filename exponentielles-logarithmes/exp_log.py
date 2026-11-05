@@ -1187,6 +1187,10 @@ def _facteur(f, x):
             if k is not None:
                 return _Fac("pow", f.a.val, [k], f, False, f.a, f.b)
         v = _const(f)
+        if v is None and isinstance(f, Pow) and _const(f.b) is not None:            # (1/2)^(−1/2) : base rationnelle écrite en quotient,
+            b = _const(f.a)                                                       # valeur irrationnelle (Q6, chantier explog-q4-q6)
+            if b is not None and b > 0 and b != 1:
+                return _Fac("pow", b, [_const(f.b)], f, False, f.a, f.b)
         if v is None or v <= 0:
             raise _Hors
         return _Fac("cte", v, None, f)
@@ -1432,6 +1436,26 @@ def _resoudre_polynome(A, B, At, Bt, x):
     return lignes, racines, None
 
 
+def _resoudre_polynome_rationnel(A, B, At, Bt, x):
+    """_resoudre_polynome, et un trinôme à coefficients rationnels non entiers (x² − 5x = −1/2) se résout comme dans la suite de la méthode B
+    (`_suite_polynome` : x² − 5x + 1/2 = 0, Δ = 23). Pour la méthode « même base » (au lieu du message « Il faut les logarithmes. », faux
+    quand les bases sont les mêmes) et pour la méthode B quand log(10) = 1 ou ln(e) = 1 a rendu le trinôme numérique (e^(x²) = e^(x + 1/2),
+    « pas encore » avant) : chantier explog-q4-q6, Q6."""
+    P = _padd(A, B, -1)
+    if len(P) != 3 or all(v.denominator == 1 for v in P):
+        return _resoudre_polynome(A, B, At, Bt, x)
+    chaine = Chaine([Eq(At, Bt)])
+    if len(B) <= 1:                                        # A = c : la suite de la méthode B, c écrit comme dans l'énoncé (0,5 ; 1/2)
+        f, c = A, _nb_ecrit(B[0] if B else F(0), Bt)
+    else:                                                  # x² = x + 1/2 ⇔ x² − x = 1/2 : l'inconnue d'un seul côté, puis la même suite
+        f, c = [F(0), P[1], P[2]], _nb_ecrit(-P[0], Bt)
+        chaine.ajouter(Eq(_arbre_poly(f, x, At), c), "⇔")
+    suite, solutions, remarque = _suite_polynome(chaine, f, At, c, x)
+    if len(chaine.elements) > 1 and tex_element(chaine.elements[1]) == tex_element(chaine.elements[0]):     # P = 0 déjà écrit : une seule fois
+        del chaine.elements[1], chaine.liens[0], chaine.props[0]
+    return [chaine] + suite, solutions, remarque
+
+
 FORMULE_RACINE_DOUBLE = r"\frac{-b}{2a}"
 
 
@@ -1483,7 +1507,8 @@ def meme_base(g, d, x):
 def _meme_base(g, d, x):
     enonce = Eq(g, d)
     etapes = []
-    g, d, iso = _isoler(g, d, x)
+    # a^A = b^B : rien à isoler, même quand b^B est un irrationnel (2^(−1/2)), que _isoler refuse (Q6, chantier explog-q4-q6)
+    g, d, iso = (g, d, None) if isinstance(g, Pow) and isinstance(d, Pow) else _isoler(g, d, x)
     if iso is not None:
         etapes.append(_carte("Isoler l'exponentielle", [iso]))
     fg, fd = _facteurs(g, x), _facteurs(d, x)
@@ -1496,7 +1521,7 @@ def _meme_base(g, d, x):
     lignes = [c for c in (chaine_g, chaine_d) if c is not None]
     A_tree, B_tree = _exposant_final(g2), _exposant_final(d2)
     A, B = _poly(A_tree, x), _poly(B_tree, x)
-    l_exp, solutions, remarque = _resoudre_polynome(A, B, A_tree, B_tree, x)
+    l_exp, solutions, remarque = _resoudre_polynome_rationnel(A, B, A_tree, B_tree, x)
     debut = Eq(g2, d2)
     premiere = l_exp[0]
     ligne = Chaine([debut], [], [])
@@ -1620,7 +1645,7 @@ def _meme_base_e(g, d, x):
     if not (isinstance(g, Pow) and isinstance(g.a, E) and isinstance(d, Pow) and isinstance(d.a, E)):
         raise _Hors
     At, Bt = g.b, d.b
-    l_exp, solutions, remarque = _resoudre_polynome(_poly(At, x), _poly(Bt, x), At, Bt, x)
+    l_exp, solutions, remarque = _resoudre_polynome_rationnel(_poly(At, x), _poly(Bt, x), At, Bt, x)
     ligne = Chaine([Eq(g, d)])
     premiere = l_exp[0]
     ligne.ajouter(premiere.elements[0], "⇔", PROP_MEME_BASE)
@@ -2031,6 +2056,10 @@ def _alpha(g, d, x, fg, fd, ln):
         else:
             c = Op("/", reste if reste is not None else droite, a_node)
         chaine.ajouter(Eq(f_tree, c), "⇔", Car(a_node))
+        q = _quotient_de_logs(c)
+        if q is not None:                                            # x² = log(2)/log(2) = 1 : la suite se fait avec le nombre (Q4)
+            c = _nb_exact(q)
+            chaine.ajouter(c, "=")
     k = _const(c)
     if k is not None and not isinstance(c, Nb):                      # 2^(x² − 5x) = 2^(−6) : l'exposant écrit −6 est le nombre −6, la suite le calcule
         c = _nb_exact(k)                                             # (x² − 5x + 6 = 0, jamais x² − 5x − (−6) = 0 ni Δ = … (−−6))
@@ -2093,8 +2122,8 @@ def _fin_beta(chaine, monos_g, monos_d, x, ecrit, ln):
     if degre == 2:
         if all(a is None for _, _, a in P):                           # log(10) = 1 a tout rendu numérique : le trinôme ordinaire
             poly = lambda ms: [sum((c for c, k, _ in ms if k == i), F(0)) for i in range(3)]
-            l_poly, solutions, remarque = _resoudre_polynome(_pnet(poly(mg)), _pnet(poly(md)), _somme(mg, x, ecrit, ln, False),
-                                                              _somme(md, x, ecrit, ln, False), x)
+            l_poly, solutions, remarque = _resoudre_polynome_rationnel(_pnet(poly(mg)), _pnet(poly(md)), _somme(mg, x, ecrit, ln, False),
+                                                                       _somme(md, x, ecrit, ln, False), x)
             premiere = l_poly[0]
             for e, lien, prop in zip(premiere.elements[1:], premiere.liens, premiere.props):
                 chaine.ajouter(e, lien, prop)
@@ -2155,6 +2184,11 @@ def _premier_degre(chaine, mg, md, x, ecrit, ln):
         else:
             chaine.ajouter(Eq(X, Op("/", C, D)), "⇔", None if pur else Car(D))
             solution = Op("/", C, D)
+            q = _quotient_de_logs(solution)
+            if q is not None:                                      # x = 3log(2)/log(2) = 3 (Q4) : ni regroupement ni contrôle
+                solution = _nb_exact(q)
+                chaine.ajouter(solution, "=")
+                return [chaine], [solution], None
     lignes = [chaine]
     if not pur and not ln and _fusionner(cte):
         haut, bas = _regrouper(cte, ecrit), _regrouper(coeff, ecrit)
@@ -2201,6 +2235,10 @@ def _second_degre(chaine, P, x, ecrit, ln):
         chaine.ajouter(Ou([Eq(X, Nb(0)), Eq(interieur, Nb(0))]), "⇔", PROP_PRODUIT_NUL)
         racine = Op("/", _somme([_oppose(t) for t in B], x, ecrit, ln), Anode)
         suite = Chaine([Eq(interieur, Nb(0)), Eq(X, racine)], ["⇔"], [Car(Anode)])
+        q = _quotient_de_logs(racine)
+        if q is not None:                                            # x = 5log(2)/log(2) = 5, S = {0 ; 5} (Q4)
+            suite.ajouter(_nb_exact(q), "=")
+            return [chaine, suite], sorted([Nb(0), _nb_exact(q)], key=valeur), None
         if _valeur_rationnelle(racine) is not None:          # log(8)/log(2) = 3 : le contrôle à la calculatrice l'écrit
             return [chaine, suite], sorted([Nb(0), racine], key=valeur), None
         nom = Defini("x_{1}" if valeur(racine) < 0 else "x_{2}", racine)   # S = {x₁ ; 0} tient à 360 px, pas S = {(log 2 − log 3)/log 2 ; 0}
@@ -2219,6 +2257,10 @@ def _second_degre(chaine, P, x, ecrit, ln):
     deux_a = Op("*", Nb(2), Anode)
     if signe == 0:
         racine = Op("/", moins_b, deux_a) if B else Nb(0)
+        q = _quotient_de_logs(racine)
+        if q is not None:                                            # x = −b/(2a) = 2log(2)/(2log(2)) = 1 (Q4)
+            lignes += _une_seule_solution(X, racine, _nb_exact(q))
+            return lignes, [_nb_exact(q)], None
         lignes += _une_seule_solution(X, racine)
         return lignes, [racine], None
     racine = Fn("sqrt", D)
@@ -3176,6 +3218,34 @@ def _valeur_rationnelle(n):
             return f if ecart < decimal.Decimal("1e-40") else None
     except (ArithmeticError, ValueError, decimal.DecimalException):
         return None
+
+
+def _quotient_de_logs(n):
+    """k (Fraction) quand n = p·L / (q·L), le même logarithme L écrit à l'identique en haut et en bas (5log(2)/log(2) = 5, 2log(2)/(2log(2)) = 1),
+    ou quand le numérateur et le dénominateur sont écrits à l'identique ((log(4) − log(2))/(log(4) − log(2)) = 1) :
+    la simplification d'une fraction, sans calcul de logarithme (log(32)/log(2) n'est pas touché : spécification, exemples 10 et 11).
+    Garde-fou : k doit aussi être la valeur trouvée par la sonde à 60 chiffres (_valeur_rationnelle) ; None sinon (chantier explog-q4-q6, Q4)."""
+    def coefficient_et_log(m):
+        if isinstance(m, Log):
+            return F(1), m
+        if isinstance(m, Neg):
+            r = coefficient_et_log(m.a)
+            return None if r is None else (-r[0], r[1])
+        if isinstance(m, Op) and m.op == "*":
+            for k, l in ((m.a, m.b), (m.b, m.a)):
+                if isinstance(l, Log) and _const(k) is not None:
+                    return _const(k), l
+        return None
+    if not (isinstance(n, Op) and n.op == "/") or variables(n):
+        return None
+    if tex(n.a) == tex(n.b) and _contient_log(n.a):                  # (log(4) − log(2))/(log(4) − log(2)) = 1
+        k = F(1)
+    else:
+        haut, bas = coefficient_et_log(n.a), coefficient_et_log(n.b)
+        if haut is None or bas is None or bas[0] == 0 or tex(haut[1]) != tex(bas[1]):
+            return None
+        k = haut[0] / bas[0]
+    return k if _valeur_rationnelle(n) == k else None
 
 
 def _signe(n):
