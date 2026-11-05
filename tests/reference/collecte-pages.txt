@@ -5,6 +5,13 @@ tests/pages/test_accueil.py::TestAccueil::test_goatcounter_la_balise_est_demande
 tests/pages/test_accueil.py::TestAccueil::test_le_registre_donne_16_liens
 tests/pages/test_accueil.py::TestAccueil::test_le_ruban_suit_le_theme_sans_recharger
 tests/pages/test_accueil.py::TestAccueil::test_mouvement_reduit_image_fixe
+tests/pages/test_bloc_chaine.py::TestBlocChaine::test_blocs_valides
+tests/pages/test_bloc_chaine.py::TestBlocChaine::test_colonnes_alignees_avant_et_apres_la_ligne_pleine
+tests/pages/test_bloc_chaine.py::TestBlocChaine::test_etiquette_grise
+tests/pages/test_bloc_chaine.py::TestBlocChaine::test_largeurs_et_theme_sombre
+tests/pages/test_bloc_chaine.py::TestBlocChaine::test_repli_sur_ecran_etroit
+tests/pages/test_bloc_chaine.py::TestBlocChaine::test_structure_et_formules
+tests/pages/test_bloc_chaine.py::TestBlocChaine::test_textes_echappes
 tests/pages/test_clavier.py::TestClavierIntegre::test_a_deux_formules_aux_touches_donnent_le_corrige_de_la_saisie_directe
 tests/pages/test_clavier.py::TestClavierIntegre::test_b_la_touche_fois_insere_une_etoile_et_les_touches_agissent_au_curseur
 tests/pages/test_clavier.py::TestClavierIntegre::test_c_abc_et_123_repartent_chaque_fois_du_meme_etat
