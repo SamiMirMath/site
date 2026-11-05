@@ -1,6 +1,6 @@
 # Équations du 2e degré : décisions
 
-**Statut : validé par l'enseignant le 05.11.2026.** Ce fichier fait foi :
+**Statut : validé par l'enseignant le 05.11.2026, complété le même soir après le plan d'exécution (§ 13, qui prime sur les sections précédentes en cas de contradiction).** Ce fichier fait foi :
 `CLAUDE.md` > `decisions.md` > `suivi.md` > `audit-etape0.md`.
 
 **Références.**
@@ -527,3 +527,109 @@ commit. Les parties s'enchaînent dans l'ordre : chacune dépend de la précéde
 - ~~Q-A~~ Réglée le 05.11.2026 : une seule ME de −pgcd (E3).
 - ~~Q-B~~ Réglée le 05.11.2026 : développer en montrant les produits, avec l'étiquette « double distribution » (E2, D27).
 - ~~Q-C~~ Réglée le 05.11.2026 : une seule ligne avec les diviseurs (D1, E7).
+
+---
+
+## 13. Compléments du 05.11.2026 au soir (après le plan d'exécution) — priment sur les sections précédentes
+
+Numérotation : les réponses Q1 à Q13 et les écarts (a) 1 à 19 renvoient au plan d'exécution recopié en tête de `journal.md`.
+
+### 13.1 Découpage (remplace le § 10 pour la numérotation)
+
+P0 · P1 · **P2a** (affichage commun : `tableau_essais`, encadré D29, options de `chaine.py`) · **P2b** (rédaction dans `second_degre`)
+· P3 · **P4a** (formes structurées, sur l'arbre) · **P4b** (degré ≥ 3, E9, degré 1, identité, bicarrée, reste du corpus) · P5 · P6 (après relecture).
+**Invariant de toute la nuit : `dump_sorties.py` des outils existants identique à l'octet après chaque partie** (P5 n'ajoute que le nouvel outil).
+
+### 13.2 Architecture et réutilisation
+
+- **Q1, registre** : option A. En P5, entrée du registre avec `"filieres": {}` (aucune carte à l'accueil), butée de `test_accueil` (16, 7) → (16, 8).
+  Les filières et la carte viennent en P6. Le « pas de registre » du § 10 est remplacé par ceci.
+- **Q2, A2** : **déplacer**, pas réécrire.
+  - `exp_log_m._pq` (avec `_const`, `_padd`, `_pnet`, `_Hors`) → `moteur/polynomes.py`, réexporté sous les mêmes noms (même objet `_Hors`) ; manifeste d'EL + 1 fichier.
+  - `exp_log._a_des_decimaux` → `moteur/expr.py`, réexporté.
+  - `squarefree` et `racine_q` ajoutés à la façade `noyau`. `Nombre` (p + q√m) s'appuie dessus : pas de 5e simplification de k√m/d.
+  - Garantie : dump d'Exp-log identique à l'octet. Les 4 copies existantes de la simplification deviennent une dette nommée au § 5 d'`architecture.md` (chantier « nombres partout »).
+  - Les fonctions de Factorisation à borne silencieuse (`somme_produit`, `racine_entiere`, BORNE = 3000) ne sont **pas** réutilisées. Ticket au § 11 (f).
+- **Q7, SymPy** : rien à changer dans ce chantier. Ticket au § 11 (g).
+- **Q11, oracle** : oui, corriger `oracle.racines` en tête de P1 (retirer d'abord les racines nulles, test `[7, -19, 0]`).
+- **Q12** :
+  - le découpage du § 13.1 ;
+  - P3 : E1 et E2 dans `second_degre` ; `Lexique`, messages et analyse de la saisie dans `equations-2e-degre/equations.py` dès P3 ;
+  - des instantanés **dès P2b** : le chef d'orchestre choisit la façon la plus simple (JSON rangé hors d'`instantanes/` jusqu'en P5, ou adaptation minimale de `dump_sorties.py`), sans changer le dump des outils existants ;
+  - `rapide` au-delà de 5 min, en arrière-plan : accepté.
+
+### 13.3 Affichage
+
+- **Q3, D29** :
+  - forme : `\fbox{$…$}` dans le TeX, plus une règle dans `commun/composants.css` (bordure `--good`, fond `--ok-soft`), clair et sombre par les variables, insécable, sans HTML (A4) ;
+  - A et B sont encadrés aussi dans l'étiquette grise ; pour Δ, on encadre « Δ = 20 » en entier ;
+  - **S** : dans `sortie.resultat` (`.rbox`, le cadre vert de Limites que l'enseignant a montré), dans une carte **normale**, pour éviter un double cadre.
+- **Q4, chaîne** :
+  - les lignes de Δ, x₁, x₂, « Δ < 0 : … » et la phrase de l'identité sont des **rangées** (`bloc_rangees`) : l'invariant du § 5 porte sur les rangées, en JSON ;
+  - comme dans le corrigé (2.10 a), la phrase de choix et le tableau viennent d'abord, puis la chaîne, qui commence par l'équation en membre de gauche ;
+  - quand aucun ⇔ ne suit (2.12 b, Javet 2.17 d, Δ = 0), l'équation n'est pas répétée, puisque l'énoncé est affiché en tête.
+- **(a) 11** : 2 colonnes à 390 px, avec le membre de gauche seul au-dessus (forme de B3) : accepté, à juger à la relecture.
+- **Q5, rappel D26** : `<details class="card">` statique dans la page, comme sur les autres outils. Pas de type de bloc.
+- **Q6, exemples** : 10 boutons. Le corpus complet va dans les tests.
+  - 2.9 a, 2.9 b, 2.9 j ;
+  - 2.10 a, 2.10 e ;
+  - 2.11 h ;
+  - 2.12 b, 2.12 c, 2.12 e ;
+  - Javet 2.17 c.
+- **Q13, clavier** : le clavier commun, dont la dernière rangée devient `0 , x =` (`^` et `√` gardés ailleurs).
+- **Produit nul à 3 facteurs à 390 px** : nouvelle option de `tex_element`, désactivée par défaut, qui permet une coupure après « ou » (Exp-log inchangé).
+
+### 13.4 Rédaction
+
+- **D9 et E10** : la rédaction de Δ est celle du § 7 (nouvelle, comme Javet), pas celle d'Exp-log. Le § 7 fait foi.
+- **Identité (E13)** : la phrase d'Exp-log, « Cette égalité est vraie pour tout nombre réel. » (réutilisée, et non celle du § 7).
+- **B irrationnel ou fractionnaire** : B est écrit sous sa forme simplifiée : x² − 8 → B = 2√2 ; x² − 1/2 → B = √2/2.
+- **ME avec des coefficients non entiers** : aucune. Id. rem. si elle se lit, sinon la formule (D22).
+- **3x² = 0** : `3x² = 0 ⇔ x = 0` (un seul facteur monôme, D7).
+- **x⁴ − 16** : Id. rem. avec A = x², B = 4 (E13), puis le facteur x² + 4 par la formule sur un facteur (E9 : « Δ < 0 : x² + 4 = 0 n'a aucune solution réelle ») et x² − 4 par l'Id. rem.
+  Le message « bicarrée » ne s'affiche que si ni ME ni Id. rem. ne s'applique (x⁴ − 5x² + 4).
+- **Variante E12 avec a < 0** : x₁ et x₂ sont nommés selon la formule (x₁ avec −√Δ), et S reste croissant.
+- **Degré 1** : on ramène à « … = 0 » (E1), puis on isole x en une ou deux lignes (D20).
+- **`s_applique`** = « la méthode aboutit » :
+  - S-P : un couple existe ;
+  - tâtonnement : une racine entière existe ;
+  - Id. rem. et ME : la factorisation existe ;
+  - formule : elle s'applique toujours. Le test « se redéveloppe » vaut pour Δ ≥ 0 ; pour Δ < 0, on contrôle S = ∅ avec l'oracle.
+
+### 13.5 Bornes et messages (complète le § 4)
+
+**Bornes.**
+- Degré maximal après développement : 8, comme EL-M.
+- Coefficients de plus de 9 chiffres (numérateur ou dénominateur) : message « Cette équation dépasse ce que l'outil sait traiter. »
+- Tableau S-P de plus de 12 lignes : pas de tableau. On écrit « Le trinôme est unitaire, mais il y a trop de couples à tester : on utilise la formule. »
+- La ligne des diviseurs du tâtonnement n'a pas de borne : elle passe à la ligne.
+
+**Messages, dans cet ordre de priorité :**
+
+| Cas | Message |
+|---|---|
+| Saisie vide | « Écrivez une équation. » |
+| Erreur de syntaxe | Message du lexique ; `message_exposant` propre à l'outil, avec l'exemple `x^2` |
+| Pas de « = » | Message du § 4 |
+| Aucune lettre (2 = 2) | « Écrivez une équation avec une inconnue. » |
+| Plusieurs lettres | « Écrivez une équation avec une seule inconnue. » |
+| Inconnue en exposant (2^x) | « L'inconnue est en exposant : utilisez l'outil « Exponentielles et logarithmes ». » |
+| Inconnue sous une racine ou au dénominateur, exposant non entier ou négatif | Message « prochaine version » du § 4 |
+| Racine sans l'inconnue | « Écrivez une équation dont les coefficients n'ont pas de racine. » |
+| Division par 0 | « Division par 0 : vérifiez la saisie. » |
+| Bornes dépassées | Message des bornes ci-dessus |
+| Degré ≥ 3 hors E13 | Message « bicarrée » ou « hors du cours » du § 4 |
+| Garde-fou en échec | Message « ne conclut pas » du § 4 |
+
+### 13.6 Écarts du plan, réglés
+
+- (a) 2 et 18 : les PDF sont déjà rangés ; le ticket § 11 (b) est déjà réglé.
+- (a) 4 : P5 écrit aussi tout ce que la liste de P5 du plan relève, et complète `architecture.md` § 4 avec les oublis.
+- (a) 7 : `appliquer` relève de P2b (calcul de P1 + rédaction). Les noms de quiz.md (`resoudre_polynome`, « P3 ») sont à corriger dans le chantier du quiz (§ 9).
+- (a) 13 : l'état « Chargement… » tant que SymPy n'est pas prêt est accepté pour ce chantier (Q7).
+- (a) 19 : P0 refait la référence des tests, comme le plan le prévoit.
+
+### 13.7 Tickets ajoutés au § 11
+
+- (f) **Factorisation, borne silencieuse** : `somme_produit(-1, -4032)` rend None alors que x² − x − 4032 = (x − 64)(x + 63). Vérifier ce que l'outil Factorisation **affiche** dans ce cas : s'il affirme « ne se factorise pas », c'est un résultat faux à l'écran, donc prioritaire.
+- (g) SymPy chargé pour un outil en Python pur : option de `monterOutil` (valeur par défaut inchangée), dans un chantier à part.
