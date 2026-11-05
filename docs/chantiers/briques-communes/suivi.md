@@ -11,7 +11,7 @@ D25, E14, § 5, P3) tiennent lieu de décisions.
 | Partie | Contenu | État | Commit |
 |---|---|---|---|
 | B0 | Fiches, référence rafraîchie (1 392 tests Python dont 1 xfail, 106 244 sous-tests ; 138 tests de pages, 2 407 sous-tests), dump de départ (4 148 sorties, déterministe) | faite (suite verte) | voir `git log` |
-| B1 | `moteur/expr.py` : arbre d'Exp-log, `tex`, parseur (« membre = membre ») ; réexport par `exp_log` ; manifeste | à faire | — |
+| B1 | `moteur/expr.py` : arbre d'Exp-log, `tex`, parseur avec un `Lexique` explicite (« membre = membre » : `lire_membres`) ; e et log restent dans `exp_log` (nœuds `E`, `Log`, `LEXIQUE`) ; réexport par `exp_log` ; manifeste ; `_DECIMAUX` ne traverse pas ; tests ajoutés : `test_expr.py` (21 tests, 144 sous-tests) | faite (suite verte) | voir `git log` |
 | B2 | `moteur/chaine.py` : Eq, Rel, Ou, Texte, Chaine, Message, `tex_element`, `tex_chaine`, `rangees_chaine`, propriétés génériques ; trois options désactivées par défaut | à faire | — |
 | B3 | Type de bloc « chaine » (A4 : `sortie.py`, `valider`, `rendu.js`, test), ligne pleine largeur au milieu ; Exp-log inchangé (exception nommée) | à faire | — |
 | B4 | CSS : `.chaine` dans `commun/composants.css`, `details ol` dans `commun/style.css` | à faire | — |
@@ -30,13 +30,17 @@ outil), `test_manifeste` vert, `test_largeurs` avec `CONNUS` vide.
 
 ## À relire par l'enseignant
 
-(rien pour l'instant ; B0 ne modifie ni instantané, ni référence de page, ni sortie)
+- B1 : aucun instantané, aucune référence de page, aucune sortie modifiés (dump identique). À relire : le `Lexique` de
+  `moteur/expr.py` (forme du paramètre que le 2e degré passera en P3) et les deux messages par défaut du lexique commun,
+  affichés par aucun outil aujourd'hui (`MESSAGE_EXPOSANT_COMMUN`, `MESSAGE_VIDE_COMMUN`) ; détail dans `journal.md`, section B1.
 
 ## Variations de sous-tests
 
 Lue par `verifier` (voir sa docstring, point (d)). Format, une ligne par test, commençant en début de ligne par un tiret :
 `` - `<identifiant pytest complet>` : <avant> → <après> : <raison> `` (« -> » vaut « → »). <avant> et <après> sont les nombres de
 sous-tests passés de la référence et du lancement, exactement ceux que `verifier` affiche ; sinon refus.
+
+- `tests/python/test_exp_log.py::TestVouvoiement::test_aucun_texte_du_fichier_ne_tutoie` : 1215 → 1026 : B1, les littéraux de l'arbre, du TeX et de la lecture (messages d'erreur de saisie) passent d'exp_log.py à moteur/expr.py, où `test_vocabulaire.py::TestVouvoiement::test_litteraux_des_moteurs` les lit avec le même détecteur (`aides_sortie.TUTOIEMENT`, 8652 → 8694)
 
 ## Reprise après compactage
 

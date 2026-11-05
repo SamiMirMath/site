@@ -14,6 +14,12 @@ l'inconnue est la lettre de l'exposant et toute autre lettre, facteur de chaque 
 Tout le TeX est écrit par notre arbre (`tex`) : ln → \\ln, log → \\log, log_a → \\log_{a}. Aucune conversion depuis SymPy,
 qui écrirait « log » pour ln. Ce fichier n'importe pas SymPy.
 
+L'arbre, son TeX et la lecture (tokeniseur, analyseur) sont la brique commune moteur/expr.py (chantier briques-communes, B1),
+réexportée ici sous les mêmes noms (`exp_log.Nb is expr.Nb`, y compris les noms privés d'avant la brique). Ce qui est propre à l'outil
+reste ici et s'y branche : les nœuds `E` et `Log` (ils s'écrivent eux-mêmes, `ecrire_tex`), `contient_e`, et la lecture de log, ln,
+exp, log_a, e, π et % (le `LEXIQUE` d'Exp-log, passé à la lecture de la brique) ; `tokeniser`, `lire_membres` et `_Parseur` sont
+la lecture de la brique avec ce lexique. L'état décimal (`_DECIMAUX`, `_avec_decimaux`) reste ici : la brique ne le lit pas.
+
 Interface : `lire_membres(texte)` (syntaxe seule, sert à l'aperçu), `analyser_saisie(texte)` (équation ou calcul, une seule inconnue),
 `apercu_json(texte)`. Les erreurs sont des `ErreurSaisie` au message français.
 """
@@ -29,6 +35,9 @@ from math import gcd, isqrt
 
 from noyau import ErreurSaisie, json_strict
 from nombres import (MOTIF_ESPACE_DANS_UN_NOMBRE, MOTIF_SAISIE, formater_decimal, formater_entier, nettoyer_saisie)
+import expr as _expr
+from expr import (Noeud, Nb, Var, Pi, Neg, Op, Pow, Fn, Defini, variables, tex, tex_saisie, nb_tex, comme_somme, entre_parentheses,
+                  nom_tex, DEBUT_COLLABLE, Tok, Lexique, Parseur, MINUSCULES, NOM_INDEXE, SYMBOLES, OPERATEURS, INEGALITES, lire_nombre, lire_pourcentage)
 
 __all__ = ["Nb", "Var", "E", "Neg", "Op", "Pow", "Fn", "Log", "tex", "variables", "lire_membres", "analyser_saisie", "tex_saisie",
            "apercu", "apercu_json", "Saisie", "sans_facteur"]
@@ -48,115 +57,33 @@ FILIERES = ("C", "M")          # C : 3C (sans ensemble de définition) ; M : 2Ms
 
 
 # =====================================================================
-# 1. ARBRE SYNTAXIQUE
+# 1. ARBRE SYNTAXIQUE (moteur/expr.py), ET LES NŒUDS PROPRES À L'OUTIL : e ET LES LOGARITHMES
 # =====================================================================
-class Noeud:
-    __slots__ = ()
-
-    def _cle(self):
-        return (type(self).__name__,) + tuple(getattr(self, s) for s in self.__slots__)
-
-    def __eq__(self, autre):
-        return isinstance(autre, Noeud) and self._cle() == autre._cle()
-
-    def __hash__(self):
-        return hash(self._cle())
-
-    def __repr__(self):
-        return type(self).__name__ + "(" + ", ".join(repr(getattr(self, s)) for s in self.__slots__) + ")"
-
-
-class Nb(Noeud):
-    """Nombre rationnel exact. `dec` : écriture décimale de la saisie (« 0,02 »), gardée pour l'affichage ; hors égalité.
-    `pct` : le nombre écrit avec le signe % dans la saisie (« 3,75 » pour 3,75 % ; `val` vaut alors 3,75/100), affichage seulement."""
-    __slots__ = ("val", "dec", "pct")
-
-    def __init__(self, val, dec=None, pct=None):
-        self.val, self.dec, self.pct = F(val), dec, pct
-
-    def _cle(self):
-        return ("Nb", self.val)
-
-
-class Var(Noeud):
-    __slots__ = ("nom",)
-
-    def __init__(self, nom):
-        self.nom = nom
-
-
 class E(Noeud):
     """Le nombre e."""
     __slots__ = ()
+    LETTRE = True                    # e(x + 1), comme une lettre
 
-
-class Pi(Noeud):
-    """Le nombre π (lu seulement en filière M : e^x = π)."""
-    __slots__ = ()
-
-
-class Neg(Noeud):
-    __slots__ = ("a",)
-
-    def __init__(self, a):
-        self.a = a
-
-
-class Op(Noeud):
-    """Opération binaire : « + », « - », « * », « / »."""
-    __slots__ = ("op", "a", "b")
-
-    def __init__(self, op, a, b):
-        self.op, self.a, self.b = op, a, b
-
-
-class Pow(Noeud):
-    __slots__ = ("a", "b")
-
-    def __init__(self, a, b):
-        self.a, self.b = a, b
-
-
-class Fn(Noeud):
-    """Fonction à un argument : seulement « sqrt » (exp devient Pow(E, …), ln et log deviennent Log)."""
-    __slots__ = ("nom", "a")
-
-    def __init__(self, nom, a):
-        self.nom, self.a = nom, a
+    def ecrire_tex(self):
+        return "e"
 
 
 class Log(Noeud):
     """Logarithme de `a` en base `base` : None = base 10 (log), E() = base e (ln), sinon un nombre ou une inconnue (log_a)."""
     __slots__ = ("a", "base")
+    BASE_ENTRE_PARENTHESES = True    # (log x)²
 
     def __init__(self, a, base=None):
         self.a, self.base = a, base
 
-
-class Defini(Noeud):
-    """Un nombre qui porte un nom dans le corrigé (Δ, x₁ = (−b − √Δ)/(2a)) : écrit par son nom, évalué par sa définition. Il raccourcit les
-    lignes d'un trinôme à coefficients logarithmiques, qui ne tiendraient pas à 360 px."""
-    __slots__ = ("nom", "arbre")
-
-    def __init__(self, nom, arbre):
-        self.nom, self.arbre = nom, arbre
-
-
-def variables(n):
-    """Ensemble des lettres inconnues (jamais e) qui apparaissent dans l'arbre, base des logarithmes comprise."""
-    if isinstance(n, Defini):
-        return variables(n.arbre)
-    if isinstance(n, Var):
-        return {n.nom}
-    if isinstance(n, (Nb, E, Pi)):
-        return set()
-    if isinstance(n, Neg) or isinstance(n, Fn):
-        return variables(n.a)
-    if isinstance(n, (Op, Pow)):
-        return variables(n.a) | variables(n.b)
-    if isinstance(n, Log):
-        return variables(n.a) | (variables(n.base) if n.base is not None else set())
-    raise TypeError(n)
+    def ecrire_tex(self):
+        if self.base is None:
+            nom = r"\log"
+        elif isinstance(self.base, E):
+            nom = r"\ln"
+        else:
+            nom = r"\log_{" + tex(self.base) + "}"
+        return nom + entre_parentheses(tex(self.a))
 
 
 def contient_e(n):
@@ -176,114 +103,27 @@ def contient_e(n):
 
 
 # =====================================================================
-# 2. TEX (écrit par l'arbre, jamais par SymPy)
+# 2. TEX : moteur/expr.py (`tex`, `tex_saisie`) ; e et les logarithmes s'écrivent eux-mêmes (`ecrire_tex`, § 1)
 # =====================================================================
-def _nb_tex(n):
-    """Notation suisse (Q5) : ’ dès 4 chiffres sur la partie entière, virgule décimale (moteur/nombres.py)."""
-    v = n.val
-    if n.pct is not None:
-        return formater_decimal(n.pct, tex=True) + r"\,\%"
-    if n.dec is not None:
-        s = formater_decimal(n.dec, tex=True)
-    elif v.denominator == 1:
-        s = formater_entier(abs(v.numerator), tex=True)
-    else:
-        s = r"\frac{" + formater_entier(abs(v.numerator), tex=True) + "}{" + formater_entier(v.denominator, tex=True) + "}"
-    return "-" + s if v < 0 else s
-
-
-def _comme_somme(n):
-    """Vrai si le nœud doit être mis entre parenthèses comme opérande d'une multiplication, d'une puissance ou d'une soustraction."""
-    return isinstance(n, Neg) or (isinstance(n, Op) and n.op in "+-") or (isinstance(n, Nb) and n.val < 0)
-
-
-def _entre_parentheses(s):
-    return r"\left(" + s + r"\right)" if r"\frac" in s else "(" + s + ")"
-
-
-_DEBUT_COLLABLE = re.compile(r"^([A-Za-z(]|\\left\(|\\ln|\\log|\\sqrt|\\pi)")
-
-
-def _nom_tex(nom):
-    """C0 s'écrit C_{0} (nom indexé : une lettre suivie de chiffres), une lettre seule telle quelle."""
-    return nom[0] + "_{" + nom[1:] + "}" if len(nom) > 1 else nom
-
-
-def tex(n):
-    if isinstance(n, Defini):
-        return n.nom
-    if isinstance(n, Nb):
-        return _nb_tex(n)
-    if isinstance(n, Var):
-        return _nom_tex(n.nom)
-    if isinstance(n, E):
-        return "e"
-    if isinstance(n, Pi):
-        return r"\pi"
-    if isinstance(n, Neg):
-        s = tex(n.a)                                      # −(x + 1), et −(−100) quand x = −100 remplace x dans −x : jamais « −−100 »
-        return "-" + (_entre_parentheses(s) if _comme_somme(n.a) else s)
-    if isinstance(n, Op):
-        if n.op == "/":
-            return r"\frac{" + tex(n.a) + "}{" + tex(n.b) + "}"
-        g, d = tex(n.a), tex(n.b)
-        if n.op == "+":                                   # a + (−b) s'écrit a − b : jamais « + − »
-            if isinstance(n.b, Neg):
-                return tex(Op("-", n.a, n.b.a))
-            if isinstance(n.b, Nb) and n.b.val < 0:
-                return tex(Op("-", n.a, Nb(-n.b.val, n.b.dec)))
-            return g + " + " + (_entre_parentheses(d) if d.startswith("-") else d)       # −x + (−x + 1) : jamais « + − »
-        if n.op == "-":
-            return g + " - " + (_entre_parentheses(d) if _comme_somme(n.b) or d.startswith("-") else d)
-        deux_groupes = _comme_somme(n.a) and _comme_somme(n.b)
-        if _comme_somme(n.a):
-            g = _entre_parentheses(g)
-        if _comme_somme(n.b):
-            d = _entre_parentheses(d)
-        lettre_puis_groupe = isinstance(n.a, (Var, E)) and _comme_somme(n.b)
-        if deux_groupes or lettre_puis_groupe or (isinstance(n.a, Nb) and n.a.val >= 0 and _DEBUT_COLLABLE.match(d)):
-            return g + d
-        return g + r" \cdot " + d
-    if isinstance(n, Pow):
-        base = tex(n.a)
-        if isinstance(n.a, (Op, Neg, Log, Pow)) or (isinstance(n.a, Nb) and (n.a.val < 0 or n.a.pct is not None or (n.a.val.denominator != 1 and n.a.dec is None))):
-            base = _entre_parentheses(base)
-        return base + "^{" + tex(n.b) + "}"
-    if isinstance(n, Fn):
-        return r"\sqrt{" + tex(n.a) + "}"
-    if isinstance(n, Log):
-        if n.base is None:
-            nom = r"\log"
-        elif isinstance(n.base, E):
-            nom = r"\ln"
-        else:
-            nom = r"\log_{" + tex(n.base) + "}"
-        return nom + _entre_parentheses(tex(n.a))
-    raise TypeError(n)
-
-
-def tex_saisie(g, d=None):
-    return tex(g) if d is None else tex(g) + " = " + tex(d)
+# Noms privés d'avant la brique (chantier briques-communes, B1), mêmes objets : exp_log_m lit _nom_tex.
+_nb_tex, _comme_somme, _entre_parentheses, _nom_tex, _DEBUT_COLLABLE = nb_tex, comme_somme, entre_parentheses, nom_tex, DEBUT_COLLABLE
 
 
 # =====================================================================
-# 3. TOKENISEUR (les noms de fonction passent avant les lettres isolées)
+# 3. LECTURE PROPRE À L'OUTIL : log, ln, exp, log_a, le nombre e, π, % (le lexique d'Exp-log, passé à la lecture de moteur/expr.py)
 # =====================================================================
-Tok = namedtuple("Tok", "type val base")      # type : num, var, fn, op ; base : seulement pour log
-
 _BASE_SOULIGNEE = re.compile(r"_(\d+(?:[.,]\d+)?|[a-z])")
 _BASE_COLLEE = re.compile(r"\d+")
-_MINUSCULES = str.maketrans("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz")      # str.lower() peut changer la longueur : seulement l'ASCII
-_NOM_INDEXE = re.compile(r"[A-Za-z](?:_([0-9]+)|(?<=[A-Z])([0-9]+))")      # C0, V0, C_0, c_0 (x2 reste x · 2 : message de lecture)
-_SYMBOLES = str.maketrans({"−": "-", "–": "-", "×": "*", "·": "*", "⋅": "*", "÷": "/", "²": "^2", "³": "^3"})   # x² se lit x^2 (clavier de téléphone)
-_OPERATEURS = "+-*/^()="
-_INEGALITES = "<>≤≥≠"
+_FONCTIONS = ("sqrt", "exp", "log", "ln")
+# Noms privés d'avant la brique (B1), mêmes objets.
+_MINUSCULES, _NOM_INDEXE, _SYMBOLES, _OPERATEURS, _INEGALITES = MINUSCULES, NOM_INDEXE, SYMBOLES, OPERATEURS, INEGALITES
+_nombre, _pourcentage = lire_nombre, lire_pourcentage
 
 
 def _fonction(s, i):
     """(nom, base, fin) si s[i:] commence par un nom de fonction, sinon None. Du plus long au plus court ; log accepte
     une base collée (log2, log10) ou soulignée (log_2, log_x)."""
-    for nom in ("sqrt", "exp", "log", "ln"):
+    for nom in _FONCTIONS:
         if s.startswith(nom, i):
             j, base = i + len(nom), None
             if nom == "log":
@@ -296,28 +136,6 @@ def _fonction(s, i):
                         base, j = m.group(0), m.end()
             return nom, base, j
     return None
-
-
-def _fonction_inconnue(s, i):
-    """Le nom (sin, cos, tan, lg…) si les lettres qui commencent en s[i] forment au moins deux lettres suivies d'une parenthèse sans se
-    terminer par un nom de fonction connu (xlog(x) reste x · log(x)) ; sinon None."""
-    j = i
-    while j < len(s) and s[j].isalpha() and s[j].isascii():
-        j += 1
-    k = j
-    while k < len(s) and s[k].isspace():
-        k += 1
-    if j - i < 2 or s[k:k + 1] != "(" or s[i:j].endswith(("sqrt", "exp", "log", "ln")):
-        return None
-    return s[i:j]
-
-
-def _lire_nom(texte, i):
-    """(nom, fin) de la lettre en texte[i] : un nom indexé (C0, V_0, c_0) est une seule inconnue, écrite sans tiret bas (C0) ; e est le nombre e."""
-    if texte[i] in "eE":
-        return "e", i + 1
-    m = _NOM_INDEXE.match(texte, i)
-    return (texte[i] + (m.group(1) or m.group(2)), m.end()) if m else (texte[i], i + 1)
 
 
 def _base_entre_parentheses(s, debut, brut):
@@ -336,92 +154,32 @@ def _base_entre_parentheses(s, debut, brut):
     raise ErreurSaisie("Il manque une parenthèse fermante.")
 
 
-def tokeniser(texte):
-    brut = texte.strip().translate(_SYMBOLES)
-    s = brut.translate(_MINUSCULES)                     # les noms de fonction ne tiennent pas compte de la casse, les lettres oui
-    toks, i = [], 0
-    while i < len(s):
-        c = s[i]
-        if c.isspace():
-            i += 1
-        elif c == "π" or (s.startswith("pi", i) and not s[i + 2:i + 3].isalpha() and (i == 0 or not s[i - 1].isalpha())):
-            toks.append(Tok("const", "pi", None))                  # le nombre π (« pi » seul, ou le signe π) ; lu seulement en filière M (analyser_saisie)
-            i += 1 if c == "π" else 2
-        elif c == "√":
-            if s[i + 1:i + 2] != "(":
-                raise ErreurSaisie("Après √, écrivez une parenthèse : √(x).")
-            toks.append(Tok("fn", "sqrt", None))
-            i += 1
-        elif c in "0123456789.,":
-            m = MOTIF_SAISIE.match(s, i)
-            if not m:
-                raise ErreurSaisie(f"Caractère non reconnu : « {c} ».")
-            suivant = s[m.end():m.end() + 1]
-            if suivant in ("'", "’") or (suivant.isdigit() and ("'" in m.group(0) or "’" in m.group(0))):
-                raise ErreurSaisie("Une apostrophe dans un nombre est suivie d'exactement 3 chiffres : 1’000.")
-            if m.group(0).isdigit() and MOTIF_ESPACE_DANS_UN_NOMBRE.match(s, m.end()):
-                raise ErreurSaisie("Pas d'espace dans un nombre : écrivez 1000 ou 1’000.")
-            toks.append(Tok("num", m.group(0), None))
-            i = m.end()
-        elif c == "%":
-            if not toks or toks[-1].type != "num":
-                raise ErreurSaisie(MESSAGE_POURCENT)
-            toks.append(Tok("pct", "%", None))
-            i += 1
-        elif c.isalpha() and c.isascii():
-            f = _fonction(s, i)
-            if f and f[0] == "log" and f[1] is None and s[f[2]:f[2] + 2] == "_(":
-                base, j = _base_entre_parentheses(s, f[2] + 1, brut)           # log_(2x)(1296) : une base du 1er degré (acceptée par la filière M)
-                k = j
-                while k < len(s) and s[k].isspace():
-                    k += 1
-                if s[k:k + 1] != "(":
-                    raise ErreurSaisie(MESSAGE_AUTRE_BASE)                         # log_(x) sans argument : le message de toujours
-                toks.append(Tok("fn", "log", base))
-                i = j
-            elif f:
-                nom, base, j = f
-                if base is not None and base.isalpha() and base != "e":
-                    base = brut[j - 1]                  # log_Q(x) : la base garde sa casse
-                k = j
-                while k < len(s) and s[k].isspace():
-                    k += 1
-                if s[k:k + 1] != "(":
-                    if nom == "log" and s[j:j + 1] == "_":
-                        raise ErreurSaisie(MESSAGE_AUTRE_BASE)
-                    suite = nom + ("_" + base if base else "")
-                    raise ErreurSaisie(f"Après {suite}, ouvrez une parenthèse : {suite}(x).")
-                toks.append(Tok("fn", nom, base))
-                i = j
-            else:
-                inconnue = _fonction_inconnue(s, i)
-                if inconnue:
-                    raise ErreurSaisie(f"La fonction {inconnue} n'est pas traitée par cet outil.")
-                nom, i = _lire_nom(brut, i)
-                toks.append(Tok("var", nom, None))
-        elif c in _OPERATEURS or c in _INEGALITES:
-            toks.append(Tok("op", c, None))
-            i += 1
-        else:
-            raise ErreurSaisie(f"Caractère non reconnu : « {c} ».")
-    return toks
-
-
-# =====================================================================
-# 4. ANALYSEUR SYNTAXIQUE
-# =====================================================================
-def _nombre(brut):
-    t = nettoyer_saisie(brut)
-    return Nb(F(t), t.replace(".", ",") if "." in t else None)
-
-
-def _pourcentage(brut):
-    """« 3,75 » suivi de % : le nombre 3,75/100 (décimal 0,0375), écrit 3,75 % pour l'aperçu."""
-    t = nettoyer_saisie(brut)
-    dec = format(decimal.Decimal(t).scaleb(-2), "f")
-    if "." in dec:
-        dec = dec.rstrip("0").rstrip(".")
-    return Nb(F(t) / 100, dec.replace(".", ","), t.replace(".", ","))
+def _lire_fonction(s, i, brut, lexique):
+    """`Lexique.lire_fonction` d'Exp-log : (jeton, fin) pour sqrt, exp, ln, log, log2, log_2, log_x, log_Q (la base garde sa casse),
+    log_(2x) ; None si s[i:] ne commence pas par un nom de fonction."""
+    f = _fonction(s, i)
+    if f and f[0] == "log" and f[1] is None and s[f[2]:f[2] + 2] == "_(":
+        base, j = _base_entre_parentheses(s, f[2] + 1, brut)           # log_(2x)(1296) : une base du 1er degré (acceptée par la filière M)
+        k = j
+        while k < len(s) and s[k].isspace():
+            k += 1
+        if s[k:k + 1] != "(":
+            raise ErreurSaisie(MESSAGE_AUTRE_BASE)                         # log_(x) sans argument : le message de toujours
+        return Tok("fn", "log", base), j
+    if f:
+        nom, base, j = f
+        if base is not None and base.isalpha() and base != "e":
+            base = brut[j - 1]                  # log_Q(x) : la base garde sa casse
+        k = j
+        while k < len(s) and s[k].isspace():
+            k += 1
+        if s[k:k + 1] != "(":
+            if nom == "log" and s[j:j + 1] == "_":
+                raise ErreurSaisie(MESSAGE_AUTRE_BASE)
+            suite = nom + ("_" + base if base else "")
+            raise ErreurSaisie(f"Après {suite}, ouvrez une parenthèse : {suite}(x).")
+        return Tok("fn", nom, base), j
+    return None
 
 
 def _base(nom_base):
@@ -446,143 +204,38 @@ def _base(nom_base):
     return E() if nom_base == "e" else Var(nom_base)
 
 
-class _Parseur:
-    def __init__(self, toks):
-        self.t, self.i = toks, 0
+def _noeud_fonction(p, arg):
+    """`Lexique.noeud_fonction` d'Exp-log : exp devient Pow(E, …), ln et log deviennent Log (sqrt est lu par la brique)."""
+    if p.val == "exp":
+        return Pow(E(), arg)
+    if p.val == "ln":
+        return Log(arg, E())
+    return Log(arg, _base(p.base))
 
-    def pic(self):
-        return self.t[self.i] if self.i < len(self.t) else None
 
-    def est_op(self, *ops):
-        p = self.pic()
-        return p is not None and p.type == "op" and p.val in ops
+def _noeud_lettre(nom):
+    """`Lexique.noeud_lettre` d'Exp-log : la lettre e est toujours le nombre e."""
+    return E() if nom == "e" else Var(nom)
 
-    def prendre(self):
-        p = self.pic()
-        self.i += 1
-        return p
 
-    def attendre(self, op):
-        if not self.est_op(op):
-            raise ErreurSaisie("Il manque une parenthèse fermante." if op == ")" else "Il manque une parenthèse ouvrante.")
-        self.i += 1
+LEXIQUE = Lexique(fonctions=_FONCTIONS, lire_fonction=_lire_fonction, noeud_fonction=_noeud_fonction, lettres_reservees="e",
+                  noeud_lettre=_noeud_lettre, lire_pi=True, message_pourcentage=MESSAGE_POURCENT, message_exposant=MESSAGE_EXPOSANT,
+                  message_vide="Écrivez une équation, par exemple 3^(x+1) = 27.")
 
-    def tout(self):
-        n = self.somme()
-        p = self.pic()
-        if p is not None:
-            raise ErreurSaisie("Parenthèse fermante en trop." if p.val == ")" else f"Je ne comprends pas « {p.val} » ici.")
-        return n
 
-    def somme(self):
-        signe = self.prendre().val if self.est_op("+", "-") else None
-        n = self.produit()
-        if signe == "-":
-            n = Neg(n)
-        while self.est_op("+", "-"):
-            op = self.prendre().val
-            if self.est_op("+", "-"):
-                raise ErreurSaisie("Deux signes à la suite : utilisez des parenthèses, par exemple 3 + (-2).")
-            n = Op(op, n, self.produit())
-        return n
+def tokeniser(texte):
+    return _expr.tokeniser(texte, LEXIQUE)
 
-    def produit(self):
-        n = self.puissance()
-        dernier = None
-        while True:
-            p = self.pic()
-            if self.est_op("*", "/"):
-                dernier = self.prendre().val
-                n = Op(dernier, n, self.puissance())
-            elif p is not None and (p.type in ("num", "var", "fn", "const") or (p.type == "op" and p.val == "(")):
-                if p.type == "num":
-                    raise ErreurSaisie("Un nombre ne peut pas suivre directement une lettre, une parenthèse ou un autre nombre : "
-                                       "écrivez 2x (nombre devant), ou 2*3 avec le signe *.")
-                if dernier == "/":
-                    raise ErreurSaisie("Ajoutez des parenthèses après la division : 1/(2x) ou (1/2)x.")
-                n = Op("*", n, self.puissance())
-                dernier = "*"
-            else:
-                return n
 
-    def puissance(self):
-        base = self.atome()
-        if self.est_op("^"):
-            self.prendre()
-            return Pow(base, self.exposant())
-        return base
-
-    def exposant(self):
-        """Exposant : un seul nombre, une seule lettre, ou une parenthèse. Tout le reste (signe, fonction, nombre ou lettre suivi
-        d'une autre lettre, d'une fonction ou d'une parenthèse, autre puissance) demande des parenthèses."""
-        p = self.pic()
-        if p is None:
-            raise ErreurSaisie("Il manque l'exposant après le signe ^.")
-        if (p.type == "op" and p.val in "+-") or p.type == "fn":
-            raise ErreurSaisie(MESSAGE_EXPOSANT)
-        n = self.atome()
-        if self.est_op("^"):
-            raise ErreurSaisie("Mettez les exposants entre parenthèses : 2^(3^2) ou (2^3)^2.")
-        s = self.pic()
-        if s is not None and p.type in ("num", "var"):
-            colle = s.type == "var" or (p.type == "num" and (s.type == "fn" or (s.type == "op" and s.val == "(")))
-            if colle:
-                raise ErreurSaisie(MESSAGE_EXPOSANT)
-        return n
-
-    def atome(self):
-        p = self.prendre()
-        if p is None:
-            raise ErreurSaisie("Il manque quelque chose à la fin de l'expression.")
-        if p.type == "num":
-            suivant = self.pic()
-            if suivant is not None and suivant.type == "pct":
-                self.i += 1
-                return _pourcentage(p.val)
-            return _nombre(p.val)
-        if p.type == "const":
-            return Pi()
-        if p.type == "var":
-            return E() if p.val == "e" else Var(p.val)
-        if p.type == "fn":
-            self.attendre("(")
-            arg = self.somme()
-            self.attendre(")")
-            if p.val == "sqrt":
-                return Fn("sqrt", arg)
-            if p.val == "exp":
-                return Pow(E(), arg)
-            if p.val == "ln":
-                return Log(arg, E())
-            return Log(arg, _base(p.base))
-        if p.val == "(":
-            n = self.somme()
-            self.attendre(")")
-            return n
-        if p.val == ")":
-            raise ErreurSaisie("Parenthèse fermante en trop.")
-        if p.val in _INEGALITES:
-            raise ErreurSaisie("Les inéquations ne sont pas traitées par cet outil : écrivez une équation avec =.")
-        raise ErreurSaisie(f"Il manque un terme avant « {p.val} ».")
+def _Parseur(toks):
+    """L'analyseur de moteur/expr.py, avec le lexique d'Exp-log."""
+    return Parseur(toks, LEXIQUE)
 
 
 def lire_membres(texte):
     """(gauche, droite) d'une équation, ou (expression, None). Syntaxe seulement : une inconnue ou une lettre e déplacée
     se détecte dans `analyser_saisie`."""
-    toks = tokeniser(texte)
-    if not toks:
-        raise ErreurSaisie("Écrivez une équation, par exemple 3^(x+1) = 27.")
-    if any(t.type == "op" and t.val in _INEGALITES for t in toks):
-        raise ErreurSaisie("Les inéquations ne sont pas traitées par cet outil : écrivez une équation avec =.")
-    egaux = [i for i, t in enumerate(toks) if t.type == "op" and t.val == "="]
-    if len(egaux) > 1:
-        raise ErreurSaisie("Un seul signe = dans une équation.")
-    if not egaux:
-        return _Parseur(toks).tout(), None
-    cote = [toks[:egaux[0]], toks[egaux[0] + 1:]]
-    if not cote[0] or not cote[1]:
-        raise ErreurSaisie("Il manque un membre de l'équation (avant ou après le signe =).")
-    return _Parseur(cote[0]).tout(), _Parseur(cote[1]).tout()
+    return _expr.lire_membres(texte, LEXIQUE)
 
 
 # =====================================================================

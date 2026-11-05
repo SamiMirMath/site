@@ -17,7 +17,8 @@ Chaque couche ne dépend que de celles du dessous.
 2. Moteurs d'outil  <outil>/*.py : résolution et rédaction propres à l'outil ; n'importent que moteur/ (dont sortie.py
                     pour ceux qui rédigent : parties, redaction_bh, demain second_degre)
 1. Briques communes moteur/ : nombres, sortie (blocs affichés, pour les moteurs qui rédigent comme pour les adaptateurs),
-                    noyau (façade de la base), et demain expr, chaine, second_degre
+                    noyau (façade de la base), expr (arbre d'expressions, TeX, lecture avec le lexique de l'outil),
+                    et demain chaine, second_degre
 ```
 
 | Couche | Peut importer | Ne doit jamais importer |
@@ -93,8 +94,8 @@ Elles sont tolérées ; celles qui sont des arêtes d'import (A1) sont **listée
 |---|---|---|
 | Cycles `limites_asymptotes` ⇄ `redaction_bh` (21 noms privés), `exp_log` ⇄ `exp_log_m` (31) | A1, A6 | R11 |
 | `parties` et `resoudre_el` importent l'adaptateur `resoudre_ed` | A1 | R11 |
-| `exp_log._DECIMAUX` | A7 | R5 (la brique ne le lit pas), puis R10 |
-| 3 parseurs, 2 arbres d'expressions, 2 classes `Chaine` | A2 | R5 (une chaîne commune), le reste seulement si un outil en a besoin |
+| `exp_log._DECIMAUX` | A7 | R5 : `moteur/expr.py` ne le lit pas (B1 : il reste dans `exp_log`, seul `_nb_exact` le lit, aucun état dans la brique) ; puis R10 |
+| 3 parseurs (ED, `moteur/expr.py` repris d'EL avec le lexique d'EL, FA), 2 arbres d'expressions (ED, `expr`), 2 classes `Chaine` | A2 | R5 (une chaîne commune), le reste seulement si un outil en a besoin |
 | 5 formats de « ≈ », `qtex` sans notation suisse | A5 | R9, outil par outil |
 | HTML de la grille `.chaine` écrit dans un bloc `texte` (`resoudre_el.py`), CSS dans la page EL | A4 | R5 (CSS commun), puis un vrai type de bloc |
 

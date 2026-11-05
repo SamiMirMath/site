@@ -32,6 +32,8 @@ BRIQUES = "moteur"                        # couche 1 : les briques communes
 ARETES = {
     # couche 1 : briques
     "noyau -> ensemble_def": "façade de la base (noyau réexporte ensemble_def)",
+    "expr -> noyau": "brique : ErreurSaisie, l'erreur de saisie commune (briques-communes, B1)",
+    "expr -> nombres": "brique : notation suisse des nombres, lus et écrits par l'arbre (briques-communes, B1)",
     # outil ED : la base est son moteur
     "resoudre_ed -> ensemble_def": "adaptateur de l'outil ED, sur la base directement (légitime : rapport de la revue, § 1.2)",
     "resoudre_ed -> sortie": "adaptateur : brique de sortie",
@@ -65,6 +67,7 @@ ARETES = {
     # Exponentielles et logarithmes
     "exp_log -> noyau": "moteur : la base par sa façade",
     "exp_log -> nombres": "moteur : brique des nombres",
+    "exp_log -> expr": "moteur : brique des expressions (arbre, TeX, lecture), réexportée sous les mêmes noms (briques-communes, B1)",
     "exp_log_m -> noyau": "moteur : la base par sa façade",
     "resoudre_el -> noyau": "adaptateur : la base par sa façade",
     "resoudre_el -> sortie": "adaptateur : brique de sortie",
