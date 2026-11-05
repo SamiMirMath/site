@@ -53,3 +53,9 @@ identiques ; REFUSÉ pour le seul motif (b) (mêmes 4 fichiers non suivis).
   tests-rapides).
 - Docstring de `verifier.py` : une ligne trop longue du point 2 recoupée (texte inchangé).
 - Suite d'avant commit `p3` (`PROCESSUS_PAGES=4`) : code 0 ; Python 98 s, pages 300 s ; identique à `tests/reference` nom par nom.
+- Contrôle de 80eb839 : `verifier <p3>` : empreintes conformes, listes identiques ; REFUSÉ pour le seul motif (b). `rapide --depuis HEAD~1`
+  (arbre propre) : fumée seule (le commit ne touche aucun module de test ni aucune page), 22 passés, code 0.
+
+## Point 4 — CLAUDE.md
+
+- Suite d'avant commit `p4` (`PROCESSUS_PAGES=4`) : code 0 ; Python 93 s, pages 296 s ; identique à `tests/reference` nom par nom.
