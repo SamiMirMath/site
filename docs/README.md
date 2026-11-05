@@ -46,13 +46,15 @@ utilisé par le site. Le code des moteurs exige Python ≥ 3.12 (syntaxe des f-s
 ## Tests de pages (navigateur, local et CI)
 
 Chrome sans interface piloté depuis Python (Google Chrome installé ; Node inutile). Pyodide, SymPy et mpmath
-viennent d'une copie locale non versionnée (`tests/pages/pyodide-local/`, ≈ 18 Mo) ; KaTeX vient encore de jsDelivr
-(réseau requis). `python3 tests/lancer.py pages` (ou `complet`) les lance ; une seule page :
+viennent d'une copie locale non versionnée (`tests/pages/pyodide-local/`, ≈ 18 Mo), KaTeX et ses polices d'une autre
+(`tests/pages/katex-local/`, ≈ 1,5 Mo) : aucun réseau pendant les tests, et une requête extérieure non servie localement fait
+échouer (garde-fou de `navigateur.py`). `python3 tests/lancer.py pages` (ou `complet`) les lance ; une seule page :
 `OUTILS=etude-complete python3 tests/lancer.py pages`.
 
 ```sh
-# une fois (et à chaque changement de version de Pyodide dans moteur/manifeste.json) : télécharger la copie
+# une fois (et à chaque changement de version de Pyodide dans moteur/manifeste.json, ou de KaTeX dans les pages) : télécharger les copies
 python3 tests/pages/pyodide_local.py
+python3 tests/pages/katex_local.py
 # après un changement VOULU du rendu : régénérer puis relire le diff git
 uv run -q --no-project --python 3.12 --with sympy==1.13.3 --with websockets python tests/pages/capturer_references.py [outil …]
 # captures d'écran avant/après un changement de CSS (non versionnées)

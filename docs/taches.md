@@ -452,6 +452,9 @@ l'élève, un « Calcul en cours… » qui dure parce que SymPy se charge encore
   Les requêtes vers `cdn.jsdelivr.net/pyodide/` sont interceptées (Fetch DevTools sur l'onglet, qui voit aussi celles du worker) et réécrites
   vers le serveur de test ; envoyer les corps par DevTools (base64) rendait la suite plus lente que le CDN (899 s contre 682 s).
   Durée de la suite de pages : 682 s avant, 587 s après (4 tests de plus). Version de la copie ≠ pages : le test échoue.
+- **Suite (chantier fondations, F6, 05.11.2026)** : KaTeX aussi en copie locale (`tests/pages/katex_local.py`, copie dans
+  `tests/pages/katex-local/`, octets vérifiés contre npm et jsDelivr) ; plus aucune requête des tests ne quitte la machine (garde-fou de
+  `navigateur.py` : requête extérieure non servie localement = échec).
 
 ### T32 — Chargement du moteur : SymPy précompilé — FAITE le 2026-10-26
 - Plainte de l'enseignant : « extrêmement lent sur téléphone » (≈ 20 s de compilation de SymPy sur téléphone, à chaque ouverture de page).

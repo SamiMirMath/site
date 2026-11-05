@@ -13,7 +13,7 @@ Consigne complète, plan et détails : `journal.md`. La consigne du chantier tie
 | F3 | R1 : `tests/python/outils_du_site.py` (registre + manifeste), listes dérivées, clés vérifiées ; exp-log dans `MIGREES` et `test_json_strict` (filière M, exercices), exception nommée pour le jeu moteur | faite (suite verte) | voir `git log` |
 | F4 | R6 : `test_noyau` étendu (+ moteurs réclamés), `tests/python/test_imports.py` (45 arêtes figées, 5 exceptions nommées, couches et cycles vérifiés), noms à plat uniques (`test_manifeste`) ; `rapide` relance ces tests quand un moteur change | faite (suite verte) | voir `git log` |
 | F5 | R3, ménage : « anciennes » retirées (manifeste, `analyser_json`, `verifier_json`, `etudier_json` de l'EC), code mort du § 2.4, `qtex_` → `qtex`, « Ni logarithme… » à une source, docstrings, README, fantômes, RL1–RL20, `.gitignore`, quiz.md § 6 | faite (suite verte) | voir `git log` |
-| F6 | Copie locale de KaTeX pour les tests de pages | à faire | — |
+| F6 | Copie locale de KaTeX (`tests/pages/katex_local.py`, copie dans `tests/pages/katex-local/`, empreintes npm et jsDelivr) ; garde-fou réseau de `navigateur.py` (HTTPS interceptées, mandataire local qui refuse le reste, échec si une requête extérieure n'est pas servie) ; `test_katex_local.py` (11 tests) ; site publié inchangé | faite (suite verte) | voir `git log` |
 
 ## Vérification après chaque partie
 
@@ -57,7 +57,18 @@ tests égales à la référence (sauf ajouts annoncés).
   affichée ». J'ai suivi la table : ces deux arêtes sont dans `ARETES` (permises). Si la règle est « sortie réservée aux adaptateurs »,
   elles deviennent une exception nommée (motif « couches ») et `violation` le vérifie.
 
+- **F6, CLAUDE.md (Commandes de test)** : remplacer « Première installation sur une machine : python3 tests/pages/pyodide_local.py (une
+  fois par version de Pyodide). » par « Première installation sur une machine : python3 tests/pages/pyodide_local.py et python3
+  tests/pages/katex_local.py (une fois par version de Pyodide ou de KaTeX ; sans ces copies, les tests de pages échouent avec la commande à
+  lancer). Aucune requête des tests de pages ne quitte la machine : une ressource extérieure non servie par ces copies fait échouer. »
+- **F6, Google Fonts de l'accueil** : pendant les tests, la feuille est servie vide (police de repli), comme la balise GoatCounter ; aucun
+  test ne mesure l'accueil au pixel. Faut-il plutôt une copie locale de Source Serif 4 (pas d'empreinte publiée par Google) ?
+
 ## À relire par l'enseignant
+
+- **F6** : aucun instantané, aucune référence, aucune page modifiée. Ressources extérieures des pages et ce qui les sert pendant les tests :
+  tableau dans `journal.md` (F6). Chrome des tests lancé avec un mandataire local et sans services de Google (options listées dans
+  `journal.md`) ; `.github/workflows/tests.yml` : copie de KaTeX en cache (à voir à la prochaine CI).
 
 - **F5** : aucun instantané, aucune référence, aucun texte affiché modifié (dump identique à l'octet). Documents changés : `docs/README.md`
   (sommaire complet, commandes par `lancer.py`, R1–R20, `[auto-js]` « prévu »), `ensemble-definition/README.md`, `docs/taches.md` et

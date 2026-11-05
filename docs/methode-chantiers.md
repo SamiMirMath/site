@@ -69,7 +69,7 @@ Tirée du chantier « Étude complète » (02–04.11.2026). Elle complète `CLA
 ## Machines
 
 - **Une machine par chantier** ; `git pull` avant de commencer, branche poussée en fin de session.
-- Mac : `caffeinate -i claude`, branché, couvercle ouvert. PC (WSL2 Ubuntu) : alimentation « jamais de mise en veille ». Première installation : `python3 tests/pages/pyodide_local.py`.
+- Mac : `caffeinate -i claude`, branché, couvercle ouvert. PC (WSL2 Ubuntu) : alimentation « jamais de mise en veille ». Première installation : `python3 tests/pages/pyodide_local.py` et `python3 tests/pages/katex_local.py`.
 - `/model` Opus, mode auto (shift+tab), `/clear` avant chaque session.
 - Une commande en arrière-plan peut survivre à son agent : l'arrêter depuis le panneau « Shell details » (touche `x`).
 - Quelques centimes de Haiku dans le relevé de consommation sont normaux (tâches internes), pas des sous-agents.

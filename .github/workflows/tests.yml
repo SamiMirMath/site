@@ -87,7 +87,27 @@ jobs:
           path: tests/pages/pyodide-local
           key: ${{ steps.cache-pyodide.outputs.cache-primary-key }}
 
-      # Chrome est préinstallé sur ubuntu-latest ; KaTeX vient de jsDelivr, Pyodide de la copie locale.
+      # Copie locale de KaTeX et de ses polices (≈ 1,5 Mo), non versionnée, même principe : la clé change avec les pages (version de
+      # KaTeX écrite dans leurs URL) et avec le script. Empreintes vérifiées (npm, jsDelivr) au téléchargement puis à chaque lancement.
+      - name: Cache de la copie locale de KaTeX
+        id: cache-katex
+        uses: actions/cache/restore@v4
+        with:
+          path: tests/pages/katex-local
+          key: katex-local-${{ hashFiles('*/index.html', 'tests/pages/katex_local.py') }}
+
+      - name: Copie locale de KaTeX
+        if: steps.cache-katex.outputs.cache-hit != 'true'
+        run: python tests/pages/katex_local.py
+
+      - name: Sauvegarde de la copie locale de KaTeX
+        if: steps.cache-katex.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: tests/pages/katex-local
+          key: ${{ steps.cache-katex.outputs.cache-primary-key }}
+
+      # Chrome est préinstallé sur ubuntu-latest ; Pyodide et KaTeX viennent de leurs copies locales, aucune requête ne sort (navigateur.py).
       # Corpus réduit (3 entrées par outil dont une erreur) : le corpus complet (≈ 1 190 entrées au 05.11.2026) se lance en local
       # (python3 tests/lancer.py complet).
       - name: Tests de pages

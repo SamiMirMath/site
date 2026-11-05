@@ -1,6 +1,7 @@
 .DS_Store
 __pycache__/
 tests/pages/pyodide-local/
+tests/pages/katex-local/
 tests/outils/resultats_m.json
 docs/reference/
 # PDF de travail des chantiers (corrigés, audits) : jamais versionnés ; les corrigés vont dans docs/reference/

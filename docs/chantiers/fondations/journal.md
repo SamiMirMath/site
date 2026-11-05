@@ -548,6 +548,118 @@ Points 1 à 7 de la consigne, dans l'ordre : anciennes, code mort (§ 2.4 de la 
   1215, 59 → 58, 8706 → 8652, ce dernier compté fichier par fichier contre HEAD : ensemble_def −23, limites_asymptotes −13, exp_log_m −7,
   redaction_bh −5, resoudre_ed −2, etude_complete, parties, resoudre_ec, exp_log −1 chacun).
 
+## F6 — copie locale de KaTeX, garde-fou réseau des tests de pages
+
+### Plan
+
+1. `tests/pages/katex_local.py` sur le modèle de `pyodide_local.py` (même convention : dossier `tests/pages/katex-local/`, ignoré par git ;
+   commande `python3 tests/pages/katex_local.py`, à relancer seulement si la version change). Script à part plutôt qu'une extension de
+   `pyodide_local.py` : sources, version et vérifications différentes (npm + jsDelivr contre `pyodide-lock.json`) ; il reprend `_lire`
+   (essais, attente croissante, contrôle de taille) et `_ecrire` (écriture atomique) de `pyodide_local.py`, sans les copier.
+2. `navigateur.py` : KaTeX servi depuis la copie (même mécanisme que Pyodide : `Fetch.continueRequest` réécrit vers le serveur de test).
+3. Garde-fou réseau (intercepteur + mandataire local), test `tests/pages/test_katex_local.py`, contre-épreuves.
+4. Docs, CI ; site publié inchangé (vérifié par `git diff`).
+
+### Copie de KaTeX
+
+- Version et fichiers lus dans les pages (URL `cdn.jsdelivr.net/npm/katex@<v>/…` des `.html`, `.js`, `.css` hors `docs/` et `tests/`) :
+  une seule version exigée, 0.16.11 ; fichiers demandés : `dist/katex.min.css`, `dist/katex.min.js`, `dist/contrib/auto-render.min.js`
+  (6 pages : ensemble-definition, derivee-variations, limites-asymptotes, etude-complete, factorisation, exponentielles-logarithmes).
+  Polices : les 60 `url(fonts/…)` de `katex.min.css` (20 polices × woff2, woff, ttf ; Chrome ne demande que les woff2). 63 fichiers,
+  ≈ 1,5 Mo.
+- Intégrité : aucune page n'a d'attribut `integrity` (sans SRI, `rapport.md` de la revue de structure). Contrôles faits à la place :
+  paquet npm `katex-0.16.11.tgz` vérifié par le SHA-512 du registre (`dist.integrity`) ; chaque fichier extrait comparé au SHA-256 que
+  jsDelivr publie pour ce fichier (`data.jsdelivr.com/v1/packages/npm/katex@0.16.11?structure=flat`) : les octets servis aux tests sont
+  ceux que jsDelivr sert aux élèves (vérifié aussi une fois à la main, `cmp` des trois fichiers téléchargés depuis les URL des pages).
+  `empreintes.json` (version, paquet, intégrité npm, SHA-256 de chaque fichier) est écrit en dernier ; `verifier()` (une fois par
+  processus, dans `Navigateur.__enter__`) revérifie la version, la présence de chaque fichier demandé par les pages et chaque empreinte.
+- Lecture du paquet : `tarfile`, membres lus par leur nom exact (jamais `extractall`), chemins des polices normalisés et refusés s'ils
+  sortent du paquet.
+
+### Ressources extérieures des pages et ce qui les sert pendant les tests
+
+| Ressource | Pages | Pendant les tests (F6) | Avant F6 |
+|---|---|---|---|
+| Pyodide 0.27.7 (`cdn.jsdelivr.net/pyodide/v0.27.7/full/…`, worker) | 6 pages d'outil | copie locale `pyodide-local/` (T30) | idem |
+| KaTeX 0.16.11 : feuille, script, auto-render | 6 pages d'outil | copie locale `katex-local/` | réseau (jsDelivr) |
+| Polices KaTeX (`…/dist/fonts/*.woff2`, demandées par la feuille) | 6 pages d'outil | copie locale `katex-local/` | réseau (jsDelivr) |
+| Balise GoatCounter `//gc.zgo.at/count.js` | 6 pages d'outil, simplexe, accueil | script vide (`comptage`) | idem |
+| `samimir.goatcounter.com/count` (envoi de la visite) | id. | jamais demandé (script vide) ; serait refusé (`fuites`) | idem |
+| Google Fonts `fonts.googleapis.com/css2?family=Source+Serif+4…` | accueil | feuille vide, police de repli (`polices`) | réseau |
+| Polices Google `fonts.gstatic.com` | accueil (par la feuille) | jamais demandées (feuille vide) | réseau |
+| `<link rel="preconnect">` vers ces deux hôtes | accueil | connexion demandée au puits, refusée (`connexions`) | réseau |
+| Lien `https://samimir.ch` | accueil | lien seulement, jamais chargé par les tests ; serait refusé | — |
+
+Google Fonts : pas de copie locale (pas d'empreinte publiée, feuille qui dépend du navigateur) ; aucun test ne mesure l'accueil au pixel
+ni sa police (`test_largeurs` ne balaie pas l'accueil ; `test_accueil` : liens, filière, animation, thème). Feuille vide : même principe
+que la balise GoatCounter. Question notée dans `suivi.md`.
+
+### Garde-fou réseau
+
+- **Intercepteur** (`Fetch.enable` de chaque onglet, worker compris) : motif `https://*` (au lieu du seul préfixe de Pyodide), plus
+  `*gc.zgo.at*` et `*goatcounter.com*`. Pyodide et KaTeX : copie locale (`servies`), fichier absent : 404 local (`refusees`) ; GoatCounter et
+  Google Fonts : réponses vides ; **toute autre requête HTTPS : refusée** (`Fetch.failRequest`) **et notée** (`intercepteur.fuites`).
+- **Puits** (`_Puits`, mandataire local) : Chrome est lancé avec `--proxy-server=http://127.0.0.1:<puits>` (le serveur de test, en
+  127.0.0.1, n'y passe jamais) et `--host-resolver-rules=MAP * ~NOTFOUND , EXCLUDE 127.0.0.1` (aucun nom résolu, donc aucune requête DNS).
+  Tout ce qui n'est pas intercepté arrive au puits, est noté puis refusé (403) : rien ne quitte la machine. Requête HTTP d'une page
+  (Referer ou Origin du serveur local) → `puits.fuites` ; CONNECT (jamais une requête de page : l'intercepteur prend toutes les requêtes
+  HTTPS des pages avant toute connexion) → `connexions` ; autre requête sans page d'origine (services de Chrome) → `navigateur`.
+- **Échec** : `Navigateur.__exit__` (fin du `with`, `tearDownClass`) lève `ErreurReseau` (une `AssertionError`) qui nomme chaque requête
+  de `fuites()` (intercepteur + puits), sauf si une autre exception est déjà en cours. Couvre toutes les classes de tests de pages et les
+  scripts (`capturer_references.py`, `captures.py`, `graphique.py`).
+- **Services de Chrome** : sans options, Chrome contacte dès son lancement une vingtaine d'hôtes de Google (essai : `update.googleapis.com`,
+  `clients2.google.com`, `accounts.google.com`, `content-autofill.googleapis.com`, `optimizationguide-pa.googleapis.com`,
+  `translate.googleapis.com`…) ; avant F6, ce trafic partait sur le réseau. Options ajoutées (`SANS_SERVICES_DU_NAVIGATEUR`, celles de
+  chromedriver et puppeteer) : `--disable-background-networking`, `--disable-component-update`, `--disable-sync`, `--disable-default-apps`,
+  `--disable-client-side-phishing-detection`, `--disable-domain-reliability`, `--no-pings`, `--disable-features=Translate,OptimizationHints,
+  AutofillServerCommunication,MediaRouter,CertificateTransparencyComponentUpdater`. Il en reste quelques CONNECT (`www.google.com`,
+  `accounts.google.com`, `www.gstatic.com`) et l'horloge réseau (`GET http://clients2.google.com/time/…`) : refusés par le puits, notés
+  (`connexions`, `navigateur`), sans faire échouer (ce ne sont pas des requêtes des pages). Aucune option de rendu touchée.
+
+### Tests ajoutés (aucun retiré ni renommé) : `tests/pages/test_katex_local.py`, 11 tests
+
+- `TestKatexLocal` (5) : version et fichiers de la copie = ceux des pages (3 fichiers + 60 polices) ; copie absente → message avec la
+  commande ; autre version → « supprimer … puis relancer » ; police retirée → « incomplète (dist/fonts/KaTeX_Main-Regular.woff2) » ;
+  octet ajouté à `katex.min.js` → « empreinte différente » ; pages à deux versions → refus.
+- `TestTelechargementVerifie` (3, réseau simulé) : paquet et fichiers conformes → copie écrite ; fichier différent de jsDelivr → refus,
+  rien d'écrit ; paquet d'une autre empreinte SHA-512 → refus après 5 essais, rien d'écrit.
+- `TestGardeFouReseau` (3) : page d'outil (KaTeX, feuille, auto-render, police `KaTeX_Main` chargée, depuis la copie, `refusees` et
+  `fuites()` vides) ; accueil (feuille Google Fonts vide, aucune police déclarée, balise GoatCounter vide, `fuites()` vide) ;
+  contre-épreuve : `fetch('https://exemple.invalid/a.js')` (refusée par l'intercepteur, rejet dans la page) et
+  `fetch('http://exemple.invalid/b.png', {mode: 'no-cors'})` (refusée par le puits, 403 opaque) → notées, et `__exit__` lève
+  `ErreurReseau` en les nommant.
+
+### Contre-épreuves (à la main)
+
+- **Copie KaTeX absente** (`tests/pages/katex-local/` déplacé hors du dépôt) : `pytest tests/pages/test_accueil.py` → 7 erreurs en
+  0,12 s, chacune `RuntimeError: copie locale de KaTeX absente : lancer  python3 tests/pages/katex_local.py` (levée dans `setUpClass`, avant
+  tout Chrome) ; dossier remis, `katex_local.py` → « copie déjà présente et à jour ».
+- **Requête extérieure forcée** : premier essai du garde-fou, sans les options de services de Chrome : `__exit__` a levé `ErreurReseau`
+  avec les requêtes de Chrome lui-même (preuve que le puits voit tout) ; puis le test `test_une_requete_exterieure_forcee_fait_echouer`
+  (HTTPS et HTTP vers `exemple.invalid` → `ErreurReseau` qui les nomme).
+- Essai avant la suite (accueil puis Factorisation, un Chrome) : KaTeX et polices servis (`katex.min.css`, `katex.min.js`,
+  `auto-render.min.js`, `KaTeX_Main-Regular.woff2`, `KaTeX_Math-Italic.woff2`), 32 formules rendues, aucune erreur de page, `fuites()` vide.
+
+### Site publié inchangé
+
+`git diff main -- '*.html' commun/` : seuls les changements de F5 (`commun/graphique.js`, `moteur-python.js`, `rendu.js`,
+`simplexe/index.html`) ; `git diff df8ff3b -- '*.html' '*.js' '*.css'` (hors tests) : rien. Les pages chargent toujours KaTeX depuis jsDelivr.
+Fichiers changés par F6 : `tests/pages/katex_local.py` (nouveau), `tests/pages/test_katex_local.py` (nouveau), `tests/pages/navigateur.py`,
+docstring de `tests/pages/test_rendu.py`, `.gitignore` (`tests/pages/katex-local/`), `.github/workflows/tests.yml` (copie de KaTeX en
+cache, comme Pyodide), `docs/README.md`, `docs/methode-chantiers.md` (Machines : première installation), `docs/taches.md` (T30, suite).
+
+### Vérifications
+
+- Dump (`dumps/F6`, puis `dumps/F6-p1` avec `--processus 1`) : `diff -r --exclude=temps` avec le départ, aucune sortie, code 0. Temps
+  (`--processus 1`) : identiques au tableau « Temps » (limites 5,8 s, étude 1,98 s, factorisation 1,89 s, exp-log 0,88 / 0,76 s, autres
+  < 0,3 s) ; aucun moteur touché.
+- `git diff --exit-code main -- tests/python/instantanes tests/pages/references` : rien (rendu KaTeX identique : même version, mêmes octets ;
+  `test_rendu` vert sur tout le corpus).
+- Suite d'avant commit : `PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rapport <scratchpad>/rapports/F6` : code 0. Python 1 391
+  passés + 1 xfail, 106 244 sous-tests, 89,6 s (identique à F5) ; pages 138 passés, 2 407 sous-tests, 294,7 s (F5 : 127, 289,9 s). Garde-fou
+  actif sur toute la suite : aucune `ErreurReseau`. Aucun fichier touché pendant le lancement. `comparer_listes.py tests/reference <F6>` :
+  seuls ajouts, ceux de F1 à F4 et les 11 tests de `test_katex_local.py` ; aucune baisse de sous-tests nouvelle.
+
 ## Contrôles du chef d'orchestre
 
 - F0 `0cb5a64` : verifier ACCEPTÉ (Python 1 335 / 105 807 sous-tests, pages 123 / 2 386, identiques à la référence) ; rapide --depuis HEAD~1 : 22 passés, 224 sous-tests, 2 s (seuls fumée + docs) ; dump = départ.
@@ -555,6 +667,7 @@ Points 1 à 7 de la consigne, dans l'ordre : anciennes, code mort (§ 2.4 de la 
 - F2 `7838091` : verifier ACCEPTÉ (Python 1 371 + 1 xfail / 105 837 sous-tests, pages 123 / 2 386 ; +17 tests annoncés) ; rapide --depuis HEAD~1 : 59 passés, 254 sous-tests, 4 s ; dump = départ ; instantanés/références inchangés. Deux fichiers non suivis apparus sous docs/chantiers/equations-2e-degre/ (pas du chantier, laissés tels quels).
 - F3 `d936027` : verifier ACCEPTÉ (Python 1 381 + 1 xfail / 106 160 sous-tests, pages 127 / 2 407 ; +14 tests annoncés) ; rapide --depuis HEAD~1 : manifeste/outils touchés donc presque tout (Python 1 377 + 1 xfail, pages 127 à corpus réduit), vert, 359 s ; dump = départ ; instantanés/références inchangés.
 - F4 `86207df` : verifier ACCEPTÉ (Python 1 391 + 1 xfail / 106 298 sous-tests, pages 127 / 2 407 ; +10 tests annoncés) ; rapide --depuis HEAD~1 : 75 passés, 756 sous-tests, 5 s ; dump = départ ; instantanés/références/moteur inchangés.
+- F5 `df8ff3b` : verifier ACCEPTÉ (Python 1 391 + 1 xfail / 106 244 sous-tests, 3 baisses justifiées dans suivi.md ; pages 127 / 2 407) ; rapide --depuis HEAD~1 : vert (Python 1 347 + 1 xfail, pages 127 à corpus réduit), 359 s ; dump = départ ; instantanés/références inchangés ; diff JS relu (garde `&&false` toujours fausse, `ajouterBloc` sans appelant : aucun effet).
 
 ## Temps
 

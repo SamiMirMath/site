@@ -1,9 +1,15 @@
 """Chrome sans interface piloté par le protocole DevTools (CDP), pour les tests de pages (T15).
 
 Python seulement : `uv run -q --no-project --python 3.12 --with websockets python …`. Le site est servi
-par un petit serveur HTTP local (le dépôt tel quel) ; KaTeX vient de jsDelivr (réseau requis). Pyodide, SymPy et mpmath viennent
-de la copie locale (pyodide_local.py, T30) : les requêtes que les pages adressent à jsDelivr sont interceptées (domaine Fetch du
-protocole DevTools, y compris dans le worker) et servies depuis la copie ; seul ce serveur de test redirige, les URL des pages ne changent pas.
+par un petit serveur HTTP local (le dépôt tel quel). Aucun réseau pendant les tests : Pyodide, SymPy et mpmath viennent de la copie locale
+de Pyodide (pyodide_local.py, T30), KaTeX et ses polices de la copie locale de KaTeX (katex_local.py, fondations F6). Les requêtes que
+les pages adressent à jsDelivr sont interceptées (domaine Fetch du protocole DevTools, y compris dans le worker) et servies depuis ces
+copies ; seul ce serveur de test redirige, les URL des pages ne changent pas. Les autres ressources extérieures des pages sont servies
+vides (balise GoatCounter, feuille Google Fonts de l'accueil : police de repli).
+
+Garde-fou réseau (F6) : toute autre requête HTTPS est refusée et notée (`intercepteur.fuites`) ; Chrome passe par un mandataire local
+(`_Puits`) qui refuse et note tout ce qui sortirait encore (HTTP hors du serveur local, connexions) et ne résout aucun nom
+(--host-resolver-rules). Rien ne quitte la machine ; une requête non servie fait échouer la sortie du Navigateur (tearDownClass).
 
     with Navigateur() as nav:
         page = nav.ouvrir("ensemble-definition/?f=ln(x-1)")
@@ -25,6 +31,7 @@ import urllib.request
 
 from websockets.sync.client import connect as _connect
 
+import katex_local
 import pyodide_local
 
 RACINE = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
@@ -47,11 +54,24 @@ _copie_verifiee = False
 
 
 def _verifier_la_copie_locale():
-    """La copie locale de Pyodide ne change pas pendant un processus : la vérifier une fois (elle relit tout le dépôt de fichiers) suffit."""
+    """Les copies locales de Pyodide et de KaTeX ne changent pas pendant un processus : les vérifier une fois (elles relisent tout le dépôt
+    de fichiers) suffit. Une copie absente, incomplète ou d'une autre version que les pages fait échouer ici, avec la commande à lancer."""
     global _copie_verifiee
     if not _copie_verifiee:
         pyodide_local.verifier()
-        _copie_verifiee = True
+        _copie_verifiee = katex_local.verifier()
+    return _copie_verifiee
+
+
+# services de Chrome lui-même (mises à jour de composants, synchronisation, traduction, saisie automatique…) : sans ces options, Chrome
+# contacte des serveurs de Google dès son lancement, sans rapport avec les pages. Le puits refuserait de toute façon ce trafic (rien ne
+# sort) ; ces options en retirent l'essentiel (moins de bruit et de travail inutile). Ce qui en reste est noté par le puits (`connexions`,
+# `navigateur`), sans faire échouer : ce n'est pas une requête des pages.
+SANS_SERVICES_DU_NAVIGATEUR = (
+    "--disable-background-networking", "--disable-component-update", "--disable-sync", "--disable-default-apps",
+    "--disable-client-side-phishing-detection", "--disable-domain-reliability", "--no-pings",
+    "--disable-features=Translate,OptimizationHints,AutofillServerCommunication,MediaRouter,CertificateTransparencyComponentUpdater",
+)
 
 
 def connect(url, **options):
@@ -81,19 +101,67 @@ class _Serveur(http.server.ThreadingHTTPServer):
     request_queue_size = 128
 
 
+class _Puits(http.server.ThreadingHTTPServer):
+    """Mandataire (proxy) de Chrome pendant les tests : tout ce qui n'est ni intercepté ni adressé au serveur local (127.0.0.1, que Chrome
+    ne fait jamais passer par un mandataire) arrive ici, est noté puis refusé (403) ; rien ne part sur le réseau. Trois listes :
+    - `fuites` : requêtes d'une page (en-tête Referer ou Origin du serveur local), URL complète : HTTP hors du serveur local ;
+    - `connexions` : demandes de connexion (CONNECT hôte:port), jamais une requête d'une page, puisque l'intercepteur prend toutes leurs
+      requêtes HTTPS avant toute connexion : connexions d'avance (<link rel="preconnect"> de l'accueil) ou services de Chrome ;
+    - `navigateur` : autres requêtes HTTP, sans page d'origine : services de Chrome lui-même (horloge réseau…)."""
+    daemon_threads = True
+
+    def __init__(self):
+        self.fuites, self.connexions, self.navigateur = [], [], []
+        puits = self
+
+        class _Refus(http.server.BaseHTTPRequestHandler):
+            def handle_one_request(self):
+                self.raw_requestline = self.rfile.readline(65537)
+                if not self.raw_requestline or not self.parse_request():
+                    self.close_connection = True
+                    return
+                cible = f"{self.command} {self.path}"
+                origine = " ".join(self.headers.get(n, "") for n in ("Referer", "Origin"))
+                if self.command == "CONNECT":
+                    puits.connexions.append(cible)
+                elif "http://127.0.0.1:" in origine:
+                    puits.fuites.append(cible)
+                else:
+                    puits.navigateur.append(cible)
+                self.send_response(403, "Hors des copies locales des tests")
+                self.send_header("Content-Length", "0")
+                self.send_header("Connection", "close")
+                self.end_headers()
+                self.close_connection = True
+
+            def log_message(self, *a):
+                pass
+
+        super().__init__(("127.0.0.1", 0), _Refus)
+        threading.Thread(target=self.serve_forever, daemon=True).start()
+
+    def fermer(self):
+        self.shutdown()
+        self.server_close()
+
+
 class _Intercepteur(threading.Thread):
-    """Sert depuis la copie locale les requêtes vers https://cdn.jsdelivr.net/pyodide/ de chaque onglet suivi, y compris celles
-    de son worker (le worker de Pyodide charge pyodide.asm.wasm et les paquets lui-même : le domaine Fetch de la page les voit, sans
-    qu'il faille s'attacher au worker, qui ne le prend pas en charge). Connexion DevTools à part : la page et ses
-    commandes ne sont jamais bloquées par ce fil. Une requête hors de la copie reçoit un 404 (jamais le réseau)."""
-    def __init__(self, url_ws, port_http, dossier, version):
+    """Intercepte toutes les requêtes HTTPS de chaque onglet suivi, y compris celles de son worker (le worker de Pyodide charge
+    pyodide.asm.wasm et les paquets lui-même : le domaine Fetch de la page les voit, sans qu'il faille s'attacher au worker, qui ne le prend
+    pas en charge), et la balise GoatCounter (gc.zgo.at, en HTTP). Connexion DevTools à part : la page et ses commandes ne sont jamais
+    bloquées par ce fil. Pyodide (https://cdn.jsdelivr.net/pyodide/) et KaTeX (https://cdn.jsdelivr.net/npm/katex@…) sont servis depuis
+    leur copie locale (`servies`) ; un fichier absent de la copie reçoit un 404 (`refusees`, jamais le réseau). Toute autre requête HTTPS
+    est refusée et notée (`fuites`), sauf GoatCounter (`comptage`) et la feuille Google Fonts de l'accueil (`polices`), servies vides."""
+    def __init__(self, url_ws, port_http, dossier, version, katex):
         super().__init__(daemon=True)
         self.ws = connect(url_ws, max_size=None)
         self.port_http, self.dossier, self.version = port_http, dossier, version
+        self.katex = katex                    # contenu d'empreintes.json de la copie de KaTeX (version, fichiers)
         self.a_suivre = queue.Queue()
         self.arret = threading.Event()
         self.servies, self.refusees = [], []
-        self.comptage, self.fuites = [], []   # GoatCounter : requêtes de la balise (gc.zgo.at) servies par un script vide ; requêtes vers goatcounter.com (jamais attendues)
+        self.comptage, self.fuites = [], []   # GoatCounter : requêtes de la balise (gc.zgo.at) servies par un script vide ; requêtes extérieures refusées (goatcounter.com, hôte sans copie locale : jamais attendues)
+        self.polices = []                     # feuille Google Fonts de l'accueil, servie vide (police de repli)
         self._recus = queue.Queue()  # événements arrivés pendant l'attente d'une réponse : traités par run(), jamais en cascade
         self._n = 0
         self.start()
@@ -103,9 +171,9 @@ class _Intercepteur(threading.Thread):
         resultat = {"fait": threading.Event()}
         self.a_suivre.put((cible, resultat))
         if not resultat["fait"].wait(30):
-            raise RuntimeError("interception de Pyodide impossible (délai)")
+            raise RuntimeError("interception des requêtes extérieures impossible (délai)")
         if "erreur" in resultat:
-            raise RuntimeError(f"interception de Pyodide impossible : {resultat['erreur']}")
+            raise RuntimeError(f"interception des requêtes extérieures impossible : {resultat['erreur']}")
 
     def _envoyer(self, methode, session=None, **params):
         self._n += 1
@@ -126,7 +194,7 @@ class _Intercepteur(threading.Thread):
             self._recus.put(m)
 
     def _intercepter(self, session):
-        self._appel("Fetch.enable", session, patterns=[{"urlPattern": pyodide_local.PREFIXE_CDN + "*"}, {"urlPattern": "*gc.zgo.at*"},
+        self._appel("Fetch.enable", session, patterns=[{"urlPattern": "https://*"}, {"urlPattern": "*gc.zgo.at*"},
                                                        {"urlPattern": "*goatcounter.com*"}])
 
     def _evenement(self, m):
@@ -154,6 +222,15 @@ class _Intercepteur(threading.Thread):
     def _servir(self, session, requete, url):
         if "gc.zgo.at" in url or "goatcounter.com" in url:
             return self._compteur(session, requete, url)
+        if url.startswith(katex_local.PREFIXE_CDN):
+            return self._katex(session, requete, url)
+        if urllib.parse.urlparse(url).hostname == "fonts.googleapis.com":
+            self.polices.append(url)
+            return self._appel("Fetch.fulfillRequest", session, requestId=requete, responseCode=200, responsePhrase="Feuille vide",
+                               responseHeaders=[{"name": "Content-Type", "value": "text/css"}])
+        if not url.startswith(pyodide_local.PREFIXE_CDN):
+            self.fuites.append(url)
+            return self._appel("Fetch.failRequest", session, requestId=requete, errorReason="BlockedByClient")
         chemin = urllib.parse.urlparse(url).path
         prefixe = f"/pyodide/v{self.version}/full/"
         nom = chemin[len(prefixe):] if chemin.startswith(prefixe) else None
@@ -166,6 +243,19 @@ class _Intercepteur(threading.Thread):
         self.servies.append(nom)
         self._appel("Fetch.continueRequest", session, requestId=requete,
                     url=f"http://127.0.0.1:{self.port_http}/{os.path.relpath(self.dossier, RACINE)}/{nom}")
+
+    def _katex(self, session, requete, url):
+        """KaTeX : https://cdn.jsdelivr.net/npm/katex@<version>/<chemin> réécrit vers la copie locale (même version, fichier de la copie),
+        sinon 404. Les polices, demandées par la feuille de style relativement à son URL d'origine (la réécriture ne se voit pas de la page),
+        passent aussi par ici."""
+        version, _, chemin = url[len(katex_local.PREFIXE_CDN):].split("?")[0].split("#")[0].partition("/")
+        if version != self.katex["version"] or chemin not in self.katex["fichiers"]:
+            self.refusees.append(url)
+            self._appel("Fetch.fulfillRequest", session, requestId=requete, responseCode=404, responsePhrase="Absent de la copie locale")
+            return
+        self.servies.append(f"katex/{chemin}")
+        self._appel("Fetch.continueRequest", session, requestId=requete,
+                    url=f"http://127.0.0.1:{self.port_http}/{os.path.relpath(katex_local.DOSSIER, RACINE)}/{chemin}")
 
     def run(self):
         try:
@@ -201,6 +291,10 @@ class _Intercepteur(threading.Thread):
 
 class ErreurPage(Exception):
     pass
+
+
+class ErreurReseau(AssertionError):
+    """Garde-fou réseau : une page a demandé une ressource extérieure qu'aucune copie locale ne sert."""
 
 
 class Page:
@@ -315,7 +409,8 @@ class Navigateur:
         self.port_http = port_http
 
     def __enter__(self):
-        _verifier_la_copie_locale()  # copie présente, complète, de la version des pages : sinon le test échoue ici, avec la marche à suivre
+        katex = _verifier_la_copie_locale()  # copies présentes, complètes, de la version des pages : sinon le test échoue ici, avec la marche à suivre
+        self.puits = _Puits()
         gestionnaire = functools.partial(_Silencieux, directory=RACINE)
         self.serveur = _Serveur(("127.0.0.1", self.port_http), gestionnaire)
         self.port_http = self.serveur.server_address[1]
@@ -323,7 +418,10 @@ class Navigateur:
         self.profil = tempfile.mkdtemp(prefix="chrome-tests-")
         self.proc = subprocess.Popen(
             [trouver_chrome(), "--headless=new", "--remote-debugging-port=0", f"--user-data-dir={self.profil}",
-             "--no-first-run", "--no-default-browser-check", "--disable-gpu", "--no-sandbox", "--hide-scrollbars", "about:blank"],
+             "--no-first-run", "--no-default-browser-check", "--disable-gpu", "--no-sandbox", "--hide-scrollbars",
+             # garde-fou réseau (F6) : tout ce qui ne va pas au serveur local passe par le puits, et aucun nom n'est résolu
+             f"--proxy-server=http://127.0.0.1:{self.puits.server_address[1]}", "--host-resolver-rules=MAP * ~NOTFOUND , EXCLUDE 127.0.0.1",
+             *SANS_SERVICES_DU_NAVIGATEUR, "about:blank"],
             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         # port DevTools choisi par Chrome (port 0) et écrit dans le profil : plusieurs Chrome peuvent tourner en même temps (pytest-xdist)
         url = None
@@ -339,8 +437,12 @@ class Navigateur:
         if not url:
             raise RuntimeError("Chrome ne répond pas")
         self.ws = connect(url, max_size=None)
-        self.intercepteur = _Intercepteur(url, self.port_http, pyodide_local.DOSSIER, pyodide_local.version_attendue())
+        self.intercepteur = _Intercepteur(url, self.port_http, pyodide_local.DOSSIER, pyodide_local.version_attendue(), katex)
         return self
+
+    def fuites(self):
+        """Requêtes extérieures non servies localement depuis l'ouverture : refusées par l'intercepteur (HTTPS) ou par le puits (le reste)."""
+        return self.intercepteur.fuites + self.puits.fuites
 
     def _appel(self, methode, session=None, **params):
         i = getattr(self, "_n", 0) + 1
@@ -403,4 +505,9 @@ class Navigateur:
                 self.proc.kill()
             self.serveur.shutdown()
             self.serveur.server_close()
+            self.puits.fermer()
             shutil.rmtree(self.profil, ignore_errors=True)
+        # garde-fou réseau (F6) : une requête extérieure non servie localement fait échouer (tearDownClass, fin du `with`) ; une exception
+        # déjà en cours garde la priorité
+        if exc[0] is None and self.fuites():
+            raise ErreurReseau("requêtes extérieures non servies par les copies locales (refusées, rien n'est sorti) : " + " ; ".join(self.fuites()))
