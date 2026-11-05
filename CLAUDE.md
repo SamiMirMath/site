@@ -20,6 +20,10 @@
   l'écran) ; cibles tactiles ≥ 44 px ; composants communs (`commun/composants.css`, `commun/composants.js`)
   plutôt que du code propre à une page (SOC-19, `docs/specifications/socle-commun.md`).
 
+## Architecture
+- Architecture : couches et règles A1–A9 dans `docs/architecture.md` ; un import entre outils, une copie d'une fonction d'un autre outil ou un
+  moteur dupliqué par filière se discutent avant d'être écrits.
+
 ## Tests
 - Oracle numérique (`tests/python/oracle.py`) pour les valeurs calculées ; instantanés (`test_instantanes*.py`)
   pour la rédaction ; balayage des largeurs (`tests/pages/test_largeurs.py`, 320 à 1100 px), `CONNUS` vide.
