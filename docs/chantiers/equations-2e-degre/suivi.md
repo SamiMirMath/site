@@ -14,7 +14,7 @@ au dump de départ (`/home/sami-ubuntu/nuits/equations-2e-degre/dumps/depart`) ;
 | P0 | Prérequis présents ; fiches ; référence rafraîchie (1 494 tests Python dont 1 xfail, 106 768 sous-tests ; 145 tests de pages, 2 421 sous-tests) ; dump de départ (4 148 sorties, déterministe) | faite (suite verte) | voir `git log` |
 | P1 | Correction d'`oracle.racines` ; `moteur/polynomes.py` (déplacements Q2) ; `moteur/second_degre.py`, calcul sans texte | faite (suite verte, dump identique) | voir `git log` |
 | P2a | Affichage commun : `tableau_essais`, encadré D29, options de `chaine.py` | faite (suite verte, dump identique) | voir `git log` |
-| P2b | Rédaction dans `second_degre` (§ 5), instantanés hors d'`instantanes/` | à faire | — |
+| P2b | Rédaction dans `second_degre` (§ 5), instantanés hors d'`instantanes/` | faite (suite verte, dump identique) | voir `git log` |
 | P3 | Saisie : E1, E2, `equations-2e-degre/equations.py` | à faire | — |
 | P4a | Formes structurées, sur l'arbre | à faire | — |
 | P4b | Degrés ≠ 2 et reste du corpus | à faire | — |
@@ -55,8 +55,21 @@ Questions nouvelles de la nuit :
     fait passer la valeur au-dessus ; sinon, cadre vert sans fond (valeur toujours visible). Option qui affiche le moins.
 13. **P2a, A et B** : D29 écrit « avec ⟦A = 4z, B = 9⟧ » (un seul cadre pour les deux) ; le test de pages suit cette écriture. P2b
     choisit (un cadre, ou un par valeur) ; l'affichage commun convient aux deux.
+14. **P2b, § 5 précisé** : statuts `non_traite` (temporaire : P2b ne prend que « P = 0 » développée de degré 2 ; les autres formes
+    attendent P3, P4a, P4b, en xfail stricts) et `hors_bornes` (§ 13.5) ; champ `message` ; `Etape.segment` (sa chaîne).
+15. **P2b, S-P de plus de 12 lignes** : la phrase de choix (D19, « toujours ») puis celle du § 13.5 (« Le trinôme est unitaire, mais
+    il y a trop de couples… ») : « unitaire » deux fois. Autre possibilité : la phrase du § 13.5 seule.
+16. **P2b, petites options de rédaction** (à juger sur les instantanés) : a < 0 avec a ≠ −1 et pgcd 1 → « Le coefficient de x² est
+    négatif (a = −3) : on met d'abord −1 en évidence. » ; ME de −x → « … on met d'abord −x en évidence. » ; Δ avec b = 0 sans le calcul
+    « 0 − 16 » ; 2a = 1 écrit (« \frac{-2}{1} = −2 », 0,5x² − 2 = 0) ; variante « formule » non proposée quand elle n'aurait pas de
+    formule (3x² − 12x).
+17. **P2b, A et B** (question 13) : un seul cadre « ⟦A = 4z, B = 9⟧ », comme D29 l'écrit. **Identité** : la phrase d'Exp-log est
+    prête, branchée en P4b (aucune identité ne peut se produire en P2b).
 
 ## À relire par l'enseignant
+
+- **P2b, instantanés de la rédaction** (nouveaux, aucun existant modifié) : `tests/python/donnees/equations-2e-degre/instantanes.json`
+  (72 équations, variante « formule » comprise) ; texte rendu de 2.11 h et comparaison au § 7 dans `journal.md`, P2b.
 
 - **P2a, captures à 390 px** (cartes du test `tests/pages/test_tableau_essais.py`, écrites à la main : affichage commun seulement,
   pas la rédaction de P2b) : `/home/sami-ubuntu/nuits/equations-2e-degre/captures/P2a/cartes-390-clair.png`, `cartes-390-sombre.png`

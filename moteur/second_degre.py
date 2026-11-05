@@ -1,9 +1,10 @@
 """
 second_degre.py — Brique commune : équations polynomiales du 2e degré (et ce qui s'y ramène), en Python pur, sans SymPy.
 
-Chantier equations-2e-degre (docs/chantiers/equations-2e-degre/decisions.md, § 13 en tête). **P1 : le calcul seul, sans aucun texte**
-(la rédaction, `resoudre_equation` et `appliquer` viennent en P2b, la saisie en P3). Tout est exact : polynômes à coefficients
-`Fraction` (`Polynome`), nombres p + q√m (`Nombre`, sur `noyau.racine_q` : pas de nouvelle simplification de k√m/d, § 13.2).
+Chantier equations-2e-degre (docs/chantiers/equations-2e-degre/decisions.md, § 13 en tête). **P1 : le calcul** (sections 1 à 6),
+**P2b : la rédaction** (section 7 : `resoudre_equation`, `appliquer`, étapes structurées du § 5), la saisie en P3. Tout est exact :
+polynômes à coefficients `Fraction` (`Polynome`), nombres p + q√m (`Nombre`, sur `noyau.racine_q` : pas de nouvelle simplification
+de k√m/d, § 13.2).
 
     Polynome(coeffs)                  tuple de Fraction, ordre croissant (P[k] : coefficient de xᵏ), sans zéro de tête ; nul : (0,)
     vers_polynome(arbre, inconnue)    polynomes.pq, puis les bornes du § 13.5 (degré ≤ 8, numérateurs et dénominateurs ≤ 9 chiffres)
@@ -20,23 +21,35 @@ Chantier equations-2e-degre (docs/chantiers/equations-2e-degre/decisions.md, § 
     produit_nul(facteurs)             D14, D24 ; un monôme k·xʲ donne x = 0 (D7, 3x² = 0 ⇔ x = 0)
     redevelopper, verifier_solution   le garde-fou exact, dans Q(√m) (principe 1)
     approx_garantie(x, decimales)     nombres.approx sur les deux bornes d'un encadrement, raffiné jusqu'à l'égalité (E14)
+    resoudre_equation(g, d, x, …)     la résolution rédigée (§ 5) : {statut, etapes, solutions, S, approx, variantes, message}
+    appliquer(methode, P)             une méthode seule, rédigée (Etape), ou None si elle n'aboutit pas
+    blocs(resolution)                 les blocs de moteur/sortie.py : la chaîne (bloc_rangees, membre de gauche), S encadré, la ligne ≈
+    nb_exact, arbre_polynome,         l'écriture des valeurs exactes en arbres de moteur/expr.py (E11, E14 ; nombres.exact)
+    arbre_nombre, termes_developpes
 
 Les facteurs sont des tuples de `Nombre` (ordre croissant) : (5x + √3) est (Nombre(0, 1, 3), Nombre(5)). Les noms de méthodes sont
 ceux du § 5 (« ME », « IDREM_DIFF », « IDREM_PLUS », « IDREM_MOINS », « SP », « TATONNEMENT », « FORMULE », « PRODUIT_NUL »,
 « ISOLER »), plus « IDREM » (la famille, pour l'ordre du cours) et « ME_PUISSANCE » (la variante E12 : seulement xʲ).
+
+Aucun état : aucune variable de module n'est modifiée (A7) ; les décimaux de l'énoncé sont un paramètre (`decimaux_enonce`).
 """
 from fractions import Fraction as F
 from functools import cmp_to_key
 from math import gcd, isqrt
+from types import MappingProxyType
 
 import polynomes
-from expr import variables
+import sortie
+from chaine import Chaine, Eq, LigneTexte, Ou, bloc_rangees, rangees_chaine
+from expr import Defini, Fn, Nb, Neg, Noeud, Op, Pow, Var, entre_parentheses, nom_tex, tex, variables
 from noyau import racine_q, squarefree
-from nombres import approx
+from nombres import approx, exact
 
 __all__ = ["Polynome", "Nombre", "HorsBornes", "vers_polynome", "mise_en_evidence", "identite", "essais_sp", "diviseurs_signes",
            "racine_entiere_unique", "racines_formule", "s_applique", "calculer", "chemin", "produit_nul", "redevelopper",
-           "verifier_solution", "approx_garantie", "ORDRE_DU_COURS", "ORDRE_PAR_LA_FORMULE", "METHODES"]
+           "verifier_solution", "approx_garantie", "ORDRE_DU_COURS", "ORDRE_PAR_LA_FORMULE", "METHODES",
+           "resoudre_equation", "appliquer", "blocs", "nb_exact", "arbre_polynome", "arbre_nombre", "termes_developpes", "Produit",
+           "SansLien", "rangees", "OPTIONS_CHAINE", "MESSAGES", "PHRASE_IDENTITE", "PHRASE_EGALITE_FAUSSE"]
 
 ORDRE_DU_COURS = ("ME", "IDREM", "SP", "TATONNEMENT", "FORMULE")          # D28 : ordre fixe, même si a = 1
 ORDRE_PAR_LA_FORMULE = ("ME_PUISSANCE", "FORMULE")                       # E12 : seulement xʲ en évidence, puis la formule
@@ -684,3 +697,660 @@ def approx_garantie(x, decimales=3):
             return a
         chiffres *= 2
     raise ValueError("valeur approchée non garantie")
+
+
+# =====================================================================
+# 7. RÉDACTION (P2b) : étapes structurées du § 5, sur le calcul des sections 1 à 6
+# =====================================================================
+OPTIONS_CHAINE = MappingProxyType({"etiquette_grise": True, "impossible": True, "coupure_ou": True})   # D5, D7, § 13.3 (« ou »)
+
+MESSAGES = MappingProxyType({                                                       # § 4 et § 13.5 (vouvoiement : aucun verbe à l'élève)
+    "hors_cours": "Cette équation ne se résout pas avec les méthodes du cours.",
+    "ne_conclut_pas": "Le calcul ne permet pas de conclure avec certitude : cette équation n'est pas résolue ici.",
+    "hors_bornes": "Cette équation dépasse ce que l'outil sait traiter.",
+    "non_traite": "Cette forme d'équation n'est pas encore traitée par l'outil.",
+})
+PHRASE_IDENTITE = "Cette égalité est vraie pour tout nombre réel."                  # celle d'Exp-log (§ 13.4), pour P4b
+PHRASE_EGALITE_FAUSSE = "Cette égalité est fausse : l'équation n'a aucune solution."    # celle d'Exp-log, pour P4b
+PHRASE_SP_TROP = "Le trinôme est unitaire, mais il y a trop de couples à tester : on utilise la formule."      # § 13.5
+PHRASE_SP_ECHEC = "Aucun couple ne convient : on utilise la formule."                                         # D3
+
+
+class _Incoherent(Exception):
+    """Une valeur écrite ne vérifie pas son calcul : la résolution ne conclut pas (principe 1)."""
+
+
+# ---------- écriture des nombres et des polynômes en arbres (moteur/expr.py) ----------
+def nb_exact(v, decimaux_enonce=False):
+    """Le `Nb` d'une valeur exacte calculée (E14, R13), sans état : écrit comme `nombres.exact(v, decimaux_enonce)` (une fraction ;
+    un décimal fini d'au plus 8 décimales si l'énoncé a des décimaux) ; même résultat qu'`exp_log._nb_exact` sous son état
+    `_DECIMAUX` (test croisé)."""
+    v = _fraction(v)
+    s = exact(v, decimaux_enonce)
+    if "{,}" not in s:
+        return Nb(v)
+    return Nb(v, s.lstrip("-").replace(r"\text{’}", "").replace("{,}", ","))
+
+
+def _signe_et_abs(c):
+    return (-1 if c < 0 else 1), abs(c)
+
+
+def _puissance(X, j):
+    return X if j == 1 else Pow(X, Nb(j))
+
+
+def _monome_abs(c, j, X, dec):
+    """|c|·xʲ (c rationnel non nul) en arbre : x², 3x, \\frac{3}{2}x², 5."""
+    c = abs(c)
+    if j == 0:
+        return nb_exact(c, dec)
+    return _puissance(X, j) if c == 1 else Op("*", nb_exact(c, dec), _puissance(X, j))
+
+
+def _somme(termes):
+    """[(signe, arbre)] en une somme : le premier terme porte son signe (Neg), les suivants « + » ou « − »."""
+    (s, t), reste = termes[0], termes[1:]
+    a = Neg(t) if s < 0 else t
+    for s, t in reste:
+        a = Op("-" if s < 0 else "+", a, t)
+    return a
+
+
+def arbre_polynome(P, inconnue="x", decimaux_enonce=False):
+    """L'écriture développée et ordonnée de P (Polynome, ou coefficients exacts en ordre croissant) : 4x² + 2x − 56, x² − 5,
+    \\frac{3}{2}x² − 4x − 1 (décimaux de l'énoncé : 0,5x² − 2)."""
+    P, X = Polynome(P), Var(inconnue)
+    termes = [(_signe_et_abs(c)[0], _monome_abs(c, j, X, decimaux_enonce)) for j, c in reversed(list(enumerate(P))) if c != 0]
+    return _somme(termes) if termes else Nb(0)
+
+
+def arbre_nombre(n, decimaux_enonce=False):
+    """L'écriture exacte d'un Nombre (E11) : fraction réduite, signe devant ; p + q√m regroupé en une seule fraction réduite :
+    −2 − √5, \\frac{-5 - \\sqrt{17}}{2}, -\\frac{\\sqrt{3}}{5}, 2\\sqrt{2}, \\frac{\\sqrt{2}}{2}."""
+    n = nombre(n)
+    if n.rationnel:
+        return nb_exact(n.p, decimaux_enonce)
+    A, B, m, d = n.forme_reduite()
+    racine = Fn("sqrt", Nb(m))
+    qr = racine if abs(B) == 1 else Op("*", Nb(abs(B)), racine)
+    if A == 0:
+        t = qr if d == 1 else Op("/", qr, Nb(d))
+        return Neg(t) if B < 0 else t
+    num = Op("+" if B > 0 else "-", Nb(A), qr)
+    return num if d == 1 else Op("/", num, Nb(d))
+
+
+def _arbre_facteur(f, X, dec):
+    """Un facteur (tuple de Nombre, ordre croissant) écrit développé : 2x − 7, 5x + √3, x² − 2x − 2. Seul le terme constant peut être
+    irrationnel (Id. rem. avec B = √k)."""
+    f = en_nombres(f)
+    termes = []
+    for j in range(len(f) - 1, -1, -1):
+        c = f[j]
+        if c == 0:
+            continue
+        if j > 0:
+            if not c.rationnel:
+                raise _Incoherent("coefficient irrationnel devant l'inconnue")
+            termes.append((_signe_et_abs(c.p)[0], _monome_abs(c.p, j, X, dec)))
+        else:
+            s = c.signe()
+            termes.append((s, arbre_nombre(c if s > 0 else -c, dec)))
+    return _somme(termes) if termes else Nb(0)
+
+
+class Produit(Noeud):
+    """Un produit factorisé du corrigé, écrit comme lui : k·xʲ suivi des facteurs entre parenthèses, chacun avec son exposant
+    (1 ou 2) : 6(x² − 1), 3x(x − 4), −(y − 1)(y − 9), 3(2x − 1)², (t + 10)(t + 10), 2(x + 4)(2x − 7). Nœud propre à l'outil
+    (moteur/expr.py : il s'écrit lui-même)."""
+    __slots__ = ("k", "j", "x", "facteurs")
+
+    def __init__(self, k, j, x, facteurs):
+        self.k, self.j, self.x, self.facteurs = F(k), j, x, tuple(facteurs)
+
+    def ecrire_tex(self):
+        s = "-" if self.k == -1 else "" if self.k == 1 else tex(Nb(self.k))
+        if self.j:
+            s += nom_tex(self.x) + ("^{" + str(self.j) + "}" if self.j > 1 else "")
+        if not self.facteurs:
+            return s if s not in ("", "-") else s + "1"
+        if s == "" and len(self.facteurs) == 1 and self.facteurs[0][1] == 1:
+            return tex(self.facteurs[0][0])
+        return s + "".join(entre_parentheses(tex(a)) + ("^{" + str(e) + "}" if e > 1 else "") for a, e in self.facteurs)
+
+
+def _est_zero(n):
+    return isinstance(n, Nb) and n.val == 0
+
+
+def _constante_ecrite(n):
+    """La valeur d'un coefficient écrit (5 ; 3/2 ; −4), ou None."""
+    if isinstance(n, Nb):
+        return n.val
+    if isinstance(n, Op) and n.op == "/" and isinstance(n.a, Nb) and isinstance(n.b, Nb) and n.b.val != 0:
+        return n.a.val / n.b.val
+    return None
+
+
+def _monome_ecrit(n, x):
+    """(j, k) pour un monôme écrit k·xʲ (5 ; x ; 3x² ; \\frac{3}{2}x² ; −x), ou None."""
+    if isinstance(n, Neg):
+        m = _monome_ecrit(n.a, x)
+        return None if m is None else (m[0], -m[1])
+    k = _constante_ecrite(n)
+    if k is not None:
+        return 0, k
+    if isinstance(n, Var) and n.nom == x:
+        return 1, F(1)
+    if isinstance(n, Pow) and isinstance(n.a, Var) and n.a.nom == x and isinstance(n.b, Nb) and n.b.val.denominator == 1 \
+            and n.b.val >= 2:
+        return int(n.b.val), F(1)
+    if isinstance(n, Op) and n.op == "*":
+        k, m = _constante_ecrite(n.a), _monome_ecrit(n.b, x)
+        if k is not None and m is not None and m[0] >= 1 and m[1] == 1:
+            return m[0], k
+    return None
+
+
+def termes_developpes(arbre, inconnue):
+    """[(j, k)] si l'arbre est une somme de monômes k·xʲ écrits développés, en degrés strictement décroissants, sans coefficient nul
+    (« 0 » seul : le polynôme nul) ; None sinon (à ramener, à développer ou à réordonner : P3)."""
+    def termes(n):
+        if isinstance(n, Op) and n.op in "+-":
+            g, d = termes(n.a), _monome_ecrit(n.b, inconnue)
+            if g is None or d is None:
+                return None
+            return g + [(d[0], -d[1] if n.op == "-" else d[1])]
+        m = _monome_ecrit(n, inconnue)
+        return None if m is None else [m]
+    t = termes(arbre)
+    if t is None:
+        return None
+    if t == [(0, 0)]:
+        return t
+    if any(k == 0 for _, k in t) or any(a <= b for (a, _), (b, _) in zip(t, t[1:])):
+        return None
+    return t
+
+
+# ---------- rangées : segments de chaîne, lignes pleine largeur, rangées sans lien ----------
+class SansLien:
+    """Une rangée sans lien {lien: "", expr} au milieu d'un segment (lignes de Δ, √Δ, x₁, x₂ : point 3 du plan) : passée à la chaîne
+    comme une ligne pleine largeur, puis rendue en rangée par `rangees`."""
+    __slots__ = ("tex",)
+
+    def __init__(self, tex_):
+        self.tex = tex_
+
+    def __eq__(self, o):
+        return isinstance(o, SansLien) and o.tex == self.tex
+
+    def __hash__(self):
+        return hash(self.tex)
+
+
+def _rangee_libre(contenu):
+    return ("", contenu.tex, None) if isinstance(contenu, SansLien) else LigneTexte(contenu)
+
+
+def rangees(segment):
+    """Les rangées d'un segment (`chaine.rangees_chaine` avec OPTIONS_CHAINE), une `SansLien` y devenant la rangée ("", tex, None)."""
+    return [_rangee_libre(r.contenu) if isinstance(r, LigneTexte) else r for r in rangees_chaine(segment, **OPTIONS_CHAINE)]
+
+
+class _Redaction:
+    """Écrit les étapes une à une. Une étape est un segment `Chaine([pivot, …])` dont tous les liens sont des ⇔ (le pivot : le
+    dernier élément écrit, ou l'énoncé), ses lignes pleine largeur au milieu ; l'énoncé n'est écrit qu'au premier ⇔ (§ 13.3 : pas
+    de répétition quand aucun ⇔ ne suit) ; les lignes écrites après le dernier ⇔ d'une étape la terminent."""
+
+    def __init__(self, enonce):
+        self.etapes, self.pivot, self.enonce_ecrit = [], enonce, False
+        self._courante = None
+
+    def etape(self, phase, methode, cible, parametres):
+        self.fermer()
+        self._courante = {"phase": phase, "methode": methode, "cible": cible, "parametres": parametres, "lignes": [],
+                          "segment": None}
+        self._attente, self._segment = [], None
+        self.etapes.append(self._courante)
+
+    def texte(self, contenu):
+        self._attente.append(contenu)
+
+    def rangee(self, tex_):
+        self._attente.append(SansLien(tex_))
+
+    def equiv(self, element, prop=None):
+        if self._segment is None:
+            self._segment = Chaine([self.pivot])
+        self._segment.ajouter(element, "⇔", prop, texte_avant=self._attente or None)
+        self._attente, self.pivot = [], element
+
+    def fermer(self):
+        e = self._courante
+        if e is None:
+            return
+        lignes = []
+        if self._segment is not None:
+            r = rangees(self._segment)
+            lignes = r if not self.enonce_ecrit else r[1:]
+            self.enonce_ecrit = True
+        e["lignes"] = lignes + [_rangee_libre(c) for c in self._attente]
+        e["segment"] = self._segment
+        self._courante, self._attente = None, []
+
+
+# ---------- phrases et lignes de chaque méthode ----------
+def _t(n):
+    return tex(n)
+
+
+def _par(c):
+    """Un entier en TeX, entre parenthèses s'il est négatif : (−4)."""
+    return "(" + exact(c) + ")" if c < 0 else exact(c)
+
+
+def _signe_tex(v):
+    return (" - " if v < 0 else " + ") + exact(abs(v))
+
+
+class _Contexte:
+    """Ce que les méthodes écrivent autour d'elles : l'inconnue, les décimaux de l'énoncé, le préfixe k·xʲ de la ME déjà faite, les
+    phrases de choix (chemin du cours) et le pivot."""
+
+    def __init__(self, inconnue, decimaux_enonce, cours=True):
+        self.x, self.X, self.dec, self.cours = inconnue, Var(inconnue), decimaux_enonce, cours
+        self.k, self.j, self.apres_me = F(1), 0, False
+
+    def produit(self, facteurs):
+        """L'équation « k·xʲ · facteurs = 0 »."""
+        return Eq(Produit(self.k, self.j, self.x, facteurs), Nb(0))
+
+    def poly(self, Q):
+        return arbre_polynome(Q, self.x, self.dec)
+
+    def facteur(self, f):
+        return _arbre_facteur(f, self.X, self.dec)
+
+    def monome(self, k, j):
+        s, _ = _signe_et_abs(k)
+        t = _monome_abs(k, j, self.X, self.dec)
+        return Neg(t) if s < 0 else t
+
+
+def _ecrire_me(R, ctx, Q, r):
+    """E3 : « −6x² + 12x − 6 = 0 ⇔ −6(x² − 2x + 1) = 0 » (ME), précédé de la phrase de a < 0 (D21)."""
+    a, facteur = Q[-1], ctx.monome(r["k"], r["j"])
+    R.etape("factoriser", "ME", _t(ctx.poly(Q)), {"facteur": r["facteur"], "k": r["k"], "j": r["j"], "reste": r["reste"],
+                                                   "facteurs": r["facteurs"]})
+    if r["k"] < 0:
+        if a == -1:
+            R.texte(rf"Le trinôme n'est pas unitaire (\(a = -1\)) : on met d'abord \({_t(facteur)}\) en évidence.")
+        else:
+            R.texte(rf"Le coefficient de \({_t(_puissance(ctx.X, Q.degre))}\) est négatif (\(a = {exact(a)}\)) : on met d'abord "
+                    rf"\({_t(facteur)}\) en évidence.")
+    ctx.k, ctx.j, ctx.apres_me = ctx.k * r["k"], ctx.j + r["j"], True
+    R.equiv(ctx.produit([(ctx.poly(r["reste"]), 1)]), "ME")
+
+
+def _ecrire_idrem(R, ctx, Q, r):
+    """E5 : A² − B² en étiquette ; A² ± 2AB + B² par une ligne de vérification, puis le carré et sa réécriture (D24). A et B
+    encadrés ensemble, comme D29 l'écrit (« avec ⟦A = 4z, B = 9⟧ »)."""
+    (k, j), B = r["A"], r["B"]
+    A_tex, B_tex = _t(_monome_abs(k, j, ctx.X, ctx.dec)), _t(arbre_nombre(B, ctx.dec))
+    R.etape("factoriser", r["methode"], _t(ctx.poly(Q)), {"A": (k, j), "B": B, "facteurs": r["facteurs"]})
+    avec = rf"avec \(\fbox{{$A = {A_tex},\ B = {B_tex}$}}\)"
+    f1, f2 = (ctx.facteur(f) for f in r["facteurs"])
+    if r["methode"] == "IDREM_DIFF":
+        R.equiv(ctx.produit([(f1, 1), (f2, 1)]), rf"Id. rem. \(A^{{2}} - B^{{2}}\) {avec}")
+        return
+    deux_ab = _t(_monome_abs(2 * k * B.p, j, ctx.X, ctx.dec))
+    signe = "+" if r["methode"] == "IDREM_PLUS" else "-"
+    R.texte(rf"Id. rem. \(A^{{2}} {signe} 2AB + B^{{2}}\) {avec}. Vérification : \(2AB = 2 \cdot {A_tex} \cdot {B_tex} = {deux_ab}\) "
+            r"\(\checkmark\)")
+    R.equiv(ctx.produit([(f1, 2)]))
+    R.equiv(ctx.produit([(f1, 1), (f1, 1)]))
+
+
+def _choix(ctx, Q, unitaire, methode):
+    """E4 (D19) : la phrase de choix, avant le S-P, le tâtonnement ou la formule (seulement sur le chemin du cours)."""
+    if methode == "FORMULE":
+        return "Pas de ME, pas d'Id. rem. ; les coefficients ne sont pas entiers : on utilise la formule."
+    if ctx.apres_me:
+        return rf"Le trinôme \({_t(ctx.poly(Q))}\) " + ("est unitaire : S-P." if unitaire else "n'est pas unitaire : tâtonnement.")
+    if unitaire:
+        return r"Pas de ME, pas d'Id. rem. ; le trinôme est unitaire (\(a = 1\)) : S-P."
+    return rf"Pas de ME, pas d'Id. rem. ; \(a = {exact(Q[2])} \neq 1\) : tâtonnement."
+
+
+def _tableau_sp(b, c, essais):
+    return sortie.tableau_essais([(r"produit \(= " + exact(c) + r"\)", 2), ("somme", 1)],
+                                 [[exact(u), exact(v), exact(s)] for u, v, s in essais["lignes"]], ok=essais["ok"])
+
+
+def _ecrire_sp(R, ctx, Q, etape):
+    """E6 : phrase de choix, « On cherche deux nombres… », le tableau (✓ par le bloc, D29), puis (x + p)(x + q) dans l'ordre de la
+    ligne ✓ ; échec (D3) : le tableau complet, puis la formule ; plus de 12 lignes (§ 13.5) : pas de tableau."""
+    c, b, _ = (int(v) for v in Q)
+    r = etape["resultat"]
+    essais = r["essais"]
+    R.etape("factoriser", "SP", _t(ctx.poly(Q)), dict(r, aboutit=etape["aboutit"]))
+    if ctx.cours:
+        R.texte(_choix(ctx, Q, True, "SP"))
+    if essais["trop"]:
+        R.texte(PHRASE_SP_TROP)
+        return
+    R.texte(rf"On cherche deux nombres dont le produit vaut \({exact(c)}\) et la somme vaut \({exact(b)}\) :")
+    R.texte(_tableau_sp(b, c, essais))
+    if not etape["aboutit"]:
+        R.texte(PHRASE_SP_ECHEC)
+        return
+    p, q, s = essais["lignes"][essais["ok"]]
+    if (p * q, p + q) != (c, b) or (Nombre(p), Nombre(1)) != r["facteurs"][0] or (Nombre(q), Nombre(1)) != r["facteurs"][1]:
+        raise _Incoherent("ligne ✓ et facteurs du S-P")
+    R.equiv(ctx.produit([(ctx.facteur(f), 1) for f in r["facteurs"]]))
+
+
+def _tex_calcul_tatonnement(a, b, c, r):
+    """« 2 · (−4)² − 4 − 28 = 32 − 4 − 28 » (E7 : b · r écrit directement quand b = ±1)."""
+    termes, valeurs = [rf"{exact(a)} \cdot {_par(r)}^{{2}}"], [exact(a * r * r)]
+    if b:
+        termes.append(_signe_tex(b * r) if abs(b) == 1 else (" - " if b < 0 else " + ") + rf"{exact(abs(b))} \cdot {_par(r)}")
+        valeurs.append(_signe_tex(b * r))
+    termes.append(_signe_tex(c))
+    valeurs.append(_signe_tex(c))
+    if a * r * r + b * r + c != 0:
+        raise _Incoherent("la racine du tâtonnement n'annule pas le trinôme")
+    return "".join(termes) + " = " + "".join(valeurs) + " = 0"
+
+
+def _ecrire_tatonnement(R, ctx, Q, etape):
+    """E7 : r et △ encadrés (D29) ; en échec (D1), une seule ligne avec les diviseurs testés, puis la formule."""
+    c, b, a = (int(v) for v in Q)
+    r = etape["resultat"]
+    R.etape("factoriser", "TATONNEMENT", _t(ctx.poly(Q)), dict(r, aboutit=etape["aboutit"]))
+    if ctx.cours:
+        R.texte(_choix(ctx, Q, False, "TATONNEMENT"))
+    X, P_tex = ctx.X, _t(ctx.poly(Q))
+    if not etape["aboutit"]:
+        positifs = [d for d in r["diviseurs"] if d > 0]
+        R.texte(rf"On teste les diviseurs de \({exact(c)}\) (" + ", ".join(rf"\(\pm {exact(d)}\)" for d in positifs)
+                + ") : aucun n'est solution. On utilise la formule.")
+        return
+    racine, triangle = r["r"], r["triangle"]
+    if -racine * triangle != c:
+        raise _Incoherent("△ du tâtonnement")
+    de = rf" de \({P_tex} = 0\)" if ctx.apres_me else ""
+    R.texte(rf"\(\fbox{{${_t(X)} = {exact(racine)}$}}\) est solution{de}, car \({_tex_calcul_tatonnement(a, b, c, racine)}\).")
+    R.texte(rf"Donc \({P_tex} = ({_t(ctx.facteur(r['facteurs'][0]))})({_t(Op('*', Nb(a), X))} + \triangle)\) avec "
+            rf"\({exact(-racine)} \cdot \triangle = {exact(c)}\), donc \(\fbox{{$\triangle = {exact(triangle)}$}}\).")
+    R.equiv(ctx.produit([(ctx.facteur(f), 1) for f in r["facteurs"]]))
+
+
+def _delta_tex(f, dec):
+    a, b, c, delta = f["a"], f["b"], f["c"], f["delta"]
+    def facteur(v):                                    # 4 · 1 · (−1), 4 · (−1) · 3, 4 · \frac{3}{2} · (−1) : jamais « 4(−1) »
+        t = _t(nb_exact(v, dec))
+        return entre_parentheses(t) if v < 0 else t
+    subst = _t(Pow(nb_exact(b, dec), Nb(2))) + r" - 4 \cdot " + facteur(a) + r" \cdot " + facteur(c)
+    s = r"\Delta = b^{2} - 4ac = " + subst
+    m = -4 * a * c
+    if b != 0 and m != 0:
+        s += " = " + exact(b * b, dec) + (" + " + exact(m, dec) if m > 0 else " - " + exact(-m, dec))
+    return s + r" = \fbox{$" + exact(delta, dec) + "$}"
+
+
+def _racine_tex(rd, dec):
+    return _t(arbre_nombre(rd, dec))
+
+
+def _ecrire_formule(R, ctx, Q, f, sur_facteur):
+    """E10 (§ 7) : Δ en une ligne, valeur finale encadrée (D29, point 2) ; Δ > 0 : √Δ simplifié, x₁ (avec −√Δ) et x₂ nommés
+    (`Defini`), fraction réduite dans la même ligne (E11) ; Δ = 0 : x = −b/(2a) ; Δ < 0 : aucune solution (sur un facteur :
+    « … = 0 n'a aucune solution réelle », E9)."""
+    dec, X, Q_tex = ctx.dec, ctx.X, _t(ctx.poly(Q))
+    a, b, delta = f["a"], f["b"], f["delta"]
+    if b * b - 4 * a * f["c"] != delta:
+        raise _Incoherent("Δ")
+    R.etape("delta_valeur", "FORMULE", Q_tex, f)
+    R.rangee(_delta_tex(f, dec))
+    R.etape("delta_nombre", "FORMULE", Q_tex, f)
+    if delta < 0:
+        R.texte(rf"\(\Delta < 0\) : \({Q_tex} = 0\) n'a aucune solution réelle." if sur_facteur
+                else r"\(\Delta < 0\) : l'équation n'a aucune solution réelle.")
+        return
+    deux_a = nb_exact(2 * a, dec)
+    if delta == 0:
+        R.texte(r"\(\Delta = 0\) : une seule solution.")
+        quotient = Op("/", nb_exact(-b, dec), deux_a)
+        eg = Eq(X, arbre_nombre(f["x"], dec), [Op("/", Neg(Var("b")), Op("*", Nb(2), Var("a")))]
+                + ([quotient] if _t(quotient) != _t(arbre_nombre(f["x"], dec)) else []))
+        R.rangee(_t_eq(eg))
+        return
+    rd = f["racine_delta"]
+    ligne = r"\Delta > 0 \text{ : deux solutions.} \quad \sqrt{\Delta} = "
+    if rd.rationnel:
+        ligne += _racine_tex(rd, dec)
+    else:
+        sous = r"\sqrt{" + exact(delta, dec) + "}"
+        ligne += sous + ("" if sous == _racine_tex(rd, dec) else " = " + _racine_tex(rd, dec))
+    R.rangee(ligne)
+    rd_arbre = arbre_nombre(rd, dec)
+    D = Defini(r"\Delta", nb_exact(delta, dec))
+    for nom, signe, valeur in (("x_{1}", "-", f["x1"]), ("x_{2}", "+", f["x2"])):
+        if (-b + (-rd if signe == "-" else rd)) / (2 * a) != valeur:
+            raise _Incoherent(nom)
+        generale = Op("/", Op(signe, Neg(Var("b")), Fn("sqrt", D)), Op("*", Nb(2), Var("a")))
+        num = (Neg(rd_arbre) if signe == "-" else rd_arbre) if b == 0 else Op(signe, nb_exact(-b, dec), rd_arbre)
+        subst, final = Op("/", num, deux_a), arbre_nombre(valeur, dec)
+        R.rangee(_t_eq(Eq(Defini(nom, final), final, [generale] + ([subst] if _t(subst) != _t(final) else []))))
+
+
+def _t_eq(e):
+    return _t(e.g) + "".join(" = " + _t(m) for m in e.milieu) + " = " + _t(e.d)
+
+
+def _une_ou_plusieurs(eqs):
+    return eqs[0] if len(eqs) == 1 else Ou(eqs)
+
+
+def _ecrire_produit_nul(R, ctx, P, pn, formules):
+    """E8 (D7, D14, D20, D24) et E9 : la ligne du produit nul (étiquette « produit nul »), un facteur répété une seule fois ; le
+    facteur constant « impossible » ; le monôme 3x = 0 puis x = 0 ; kx = … quand le coefficient de x n'est pas ±1 et que la
+    constante n'est pas entière ; un trinôme par la formule (Δ, puis les solutions)."""
+    X, dec = ctx.X, ctx.dec
+    seul = len(pn["facteurs"]) == 1 and en_nombres(pn["facteurs"][0][0]) == en_nombres(P)
+    R.etape("produit_nul", "PRODUIT_NUL", _t(R.pivot.g) if isinstance(R.pivot, Eq) else _t(ctx.poly(P)),
+            {"facteurs": [f for f, _, _ in pn["facteurs"]], "solutions": pn["solutions"]})
+    nuls, milieu, finals, trinomes = [], [], [], []
+    besoin_milieu = False
+    for f, genre, sols in pn["facteurs"]:
+        if genre == "constante":
+            nuls.append(Eq(Nb(f[0].p), Nb(0)))
+            continue
+        if genre == "monome":
+            j = len(f) - 1
+            nuls.append(Eq(ctx.monome(f[j].p, j), Nb(0)))
+            milieu.append(Eq(X, Nb(0)))
+            finals.append(Eq(X, Nb(0)))
+        elif genre == "lineaire":
+            c0, c1 = f
+            nuls.append(Eq(ctx.facteur(f), Nb(0)))
+            sol = arbre_nombre(sols[0], dec)
+            if c1.p not in (1, -1) and not (c0.rationnel and c0.p.denominator == 1):
+                besoin_milieu = True
+                milieu.append(Eq(ctx.monome(c1.p, 1), arbre_nombre(-c0, dec)))
+            else:
+                milieu.append(Eq(X, sol))
+            finals.append(Eq(X, sol))
+        else:
+            Q = rationnel(f)
+            nuls.append(Eq(ctx.poly(Q), Nb(0)))
+            trinomes.append(Q)
+            fo = formules[Q]
+            finals += [Eq(X, arbre_nombre(v, dec)) for v in ((fo["x1"], fo["x2"]) if fo["delta"] > 0 else
+                                                            (fo["x"],) if fo["delta"] == 0 else ())]
+    if not seul:
+        R.equiv(_une_ou_plusieurs(nuls), "produit nul")
+    if trinomes:
+        if len(trinomes) > 1 or besoin_milieu:
+            raise _Incoherent("plusieurs trinômes ou kx = … avec la formule (P4b)")
+        _ecrire_formule(R, ctx, trinomes[0], formules[trinomes[0]], sur_facteur=True)
+    elif besoin_milieu:
+        R.equiv(_une_ou_plusieurs(milieu))
+    if finals:
+        dernier = _une_ou_plusieurs(finals)
+        if _t_element(dernier) != _t_element(R.pivot):
+            R.equiv(dernier)
+
+
+def _t_element(e):
+    if isinstance(e, Ou):
+        return " ou ".join(_t_element(q) for q in e.eqs)
+    return _t_eq(e) if isinstance(e, Eq) else _t(e)
+
+
+# ---------- S et la ligne « soit … ≈ … » (E11, E14) ----------
+def _tex_S(solutions, dec, ensemble="fini"):
+    if ensemble == "reels":
+        return r"S = \mathbb{R}"
+    if not solutions:
+        return r"S = \varnothing"
+    return r"S = \{" + r"\,;\,".join(_t(arbre_nombre(x, dec)) for x in solutions) + r"\}"
+
+
+def _tex_approx(solutions, noms, x, dec):
+    """« soit x₁ ≈ −4,236 et x₂ ≈ 0,236 » (solutions nommées par la formule), « soit x ≈ −1,414 ou x = 0 ou x ≈ 1,414 » ; None
+    si toutes les solutions sont rationnelles (≈ seulement pour les irrationnelles, une fois, après S)."""
+    if all(s.rationnel for s in solutions):
+        return None
+    nommees = all(s in noms for s in solutions)
+    morceaux = []
+    for s in solutions:
+        nom = noms[s] if nommees else nom_tex(x)
+        valeur = (r" \approx " + approx_garantie(s)) if not s.rationnel else " = " + _t(arbre_nombre(s, dec))
+        morceaux.append(r"\(" + nom + valeur + r"\)")
+    return "soit " + (" et " if nommees else " ou ").join(morceaux)
+
+
+def _non_resolu(statut):
+    return {"statut": statut, "etapes": [], "solutions": [], "S": None, "approx": None, "variantes": [], "message": MESSAGES[statut]}
+
+
+def _formule_utilisee(ch):
+    return any(e["methode"] == "FORMULE" for e in ch["etapes"])
+
+
+def resoudre_equation(gauche, droite, inconnue, decimaux_enonce=False, methodes=ORDRE_DU_COURS):
+    """La résolution rédigée de « gauche = droite » (arbres de moteur/expr.py) en l'inconnue (§ 5) :
+
+    {statut: "resolu" | "non_traite" | "hors_cours" | "ne_conclut_pas" | "hors_bornes",
+     etapes: [Etape], solutions: [Nombre] croissantes, S: TeX, approx: texte « soit … ≈ … » (TeX entre \\( et \\)) ou None,
+     variantes: ["formule"] (E12 : le chemin du cours n'utilise pas la formule) ou [], message: texte pour un statut non résolu}
+    Etape = {phase, methode, cible (TeX), parametres (calcul exact), lignes (rangées : triplets (lien, expr, prop) et `LigneTexte`),
+             segment (la `Chaine` de l'étape, pivot puis ⇔, ou None)}.
+
+    P2b : seulement « P = 0 » développée et ordonnée (`termes_developpes`), de degré 2 ; tout le reste est « non_traite » (ramener et
+    développer : P3 ; formes structurées : P4a ; degrés ≠ 2, identité : P4b). Le calcul est celui de `chemin` (garde-fou exact) ;
+    une valeur écrite qui ne vérifie pas son calcul donne « ne_conclut_pas ». methodes=ORDRE_PAR_LA_FORMULE : la variante E12."""
+    if termes_developpes(gauche, inconnue) is None or not _est_zero(droite) or variables(gauche) - {inconnue}:
+        return _non_resolu("non_traite")
+    try:
+        P = vers_polynome(gauche, inconnue)
+        if P.degre != 2:
+            return _non_resolu("non_traite")
+        ch = chemin(P, methodes)
+        if ch["statut"] != "resolu":
+            return _non_resolu(ch["statut"])
+        res = _rediger(Eq(gauche, droite), P, ch, inconnue, decimaux_enonce, cours=methodes != ORDRE_PAR_LA_FORMULE)
+        if methodes == ORDRE_DU_COURS and not _formule_utilisee(ch):
+            v = chemin(P, ORDRE_PAR_LA_FORMULE)
+            res["variantes"] = ["formule"] if v["statut"] == "resolu" and _formule_utilisee(v) else []
+        return res
+    except HorsBornes:
+        return _non_resolu("hors_bornes")
+    except (_Incoherent, ValueError, TypeError, ZeroDivisionError):      # valeur non garantie, écriture qui ne vérifie pas son calcul
+        return _non_resolu("ne_conclut_pas")
+
+
+def _rediger(enonce, P, ch, inconnue, dec, cours):
+    R, ctx = _Redaction(enonce), _Contexte(inconnue, dec, cours)
+    formules = {e["cible"]: e["resultat"] for e in ch["etapes"] if e["methode"] == "FORMULE"}
+    etapes = ch["etapes"]
+    for i, e in enumerate(etapes):
+        m, Q, r = e["methode"], e["cible"], e["resultat"]
+        if m == "ME":
+            _ecrire_me(R, ctx, Q, r)
+        elif m in IDREM:
+            _ecrire_idrem(R, ctx, Q, r)
+        elif m == "SP":
+            _ecrire_sp(R, ctx, Q, e)
+        elif m == "TATONNEMENT":
+            _ecrire_tatonnement(R, ctx, Q, e)
+        elif m == "FORMULE":
+            if i == 0 or etapes[i - 1]["methode"] not in ("SP", "TATONNEMENT"):      # formule choisie d'emblée (D22, ou E12)
+                R.etape("factoriser", "FORMULE", _t(ctx.poly(Q)), r)
+                if cours:
+                    if Q.entiers() or ctx.apres_me:
+                        raise _Incoherent("formule d'emblée sur un trinôme à coefficients entiers")
+                    R.texte(_choix(ctx, Q, False, "FORMULE"))
+        else:
+            raise _Incoherent(f"méthode {m} hors de P2b")
+    pn = ch["produit_nul"]
+    formule_seule = len(pn["facteurs"]) == 1 and pn["facteurs"][0][1] == "formule"
+    if formule_seule:
+        Q = rationnel(pn["facteurs"][0][0])
+        _ecrire_formule(R, ctx, Q, formules[Q], sur_facteur=False)
+    else:
+        _ecrire_produit_nul(R, ctx, P, pn, formules)
+    R.fermer()
+    noms = {}
+    for f in formules.values():
+        if f["delta"] > 0:
+            noms[f["x1"]], noms[f["x2"]] = "x_{1}", "x_{2}"
+    sols = pn["solutions"]
+    return {"statut": "resolu", "etapes": R.etapes, "solutions": sols, "S": _tex_S(sols, dec),
+            "approx": _tex_approx(sols, noms, inconnue, dec), "variantes": [], "message": None}
+
+
+def appliquer(methode, P, inconnue="x", decimaux_enonce=False):
+    """Une méthode seule sur « P = 0 » (§ 5 ; pour le futur onglet « S'entraîner ») : l'Etape rédigée (phase « factoriser »,
+    lignes de la méthode, sans phrase de choix, l'équation P = 0 en tête), ou None si la méthode n'aboutit pas (`s_applique`). La
+    formule donne toutes ses lignes (Δ, puis les solutions) dans une seule étape ; le S-P de plus de 12 lignes, la phrase du § 13.5."""
+    P = Polynome(P)
+    r = calculer(methode, P)
+    if r is None:
+        return None
+    R, ctx = _Redaction(Eq(arbre_polynome(P, inconnue, decimaux_enonce), Nb(0))), _Contexte(inconnue, decimaux_enonce, cours=False)
+    if methode in ("ME", "ME_PUISSANCE"):
+        _ecrire_me(R, ctx, P, r)
+        R.etapes[-1]["methode"] = methode
+    elif methode == "IDREM" or methode in IDREM:
+        _ecrire_idrem(R, ctx, P, r)
+    elif methode == "SP":
+        e = essais_sp(P[1], P[0])
+        _ecrire_sp(R, ctx, P, {"resultat": dict(r, essais=e), "aboutit": not e["trop"]})
+    elif methode == "TATONNEMENT":
+        _ecrire_tatonnement(R, ctx, P, {"resultat": r, "aboutit": True})
+    else:
+        _ecrire_formule(R, ctx, P, r, sur_facteur=False)
+        R.fermer()
+        lignes = [l for e in R.etapes for l in e["lignes"]]
+        return {"phase": "factoriser", "methode": "FORMULE", "cible": _t(ctx.poly(P)), "parametres": r, "lignes": lignes,
+                "segment": None}
+    R.fermer()
+    return R.etapes[0]
+
+
+def blocs(resolution):
+    """Les blocs de moteur/sortie.py d'une résolution résolue (A4) : la chaîne (`bloc_rangees` de la concaténation des lignes de
+    toutes les étapes, membre de gauche dans sa colonne), S encadré (`resultat_lim`, D29, dans une carte normale), puis la ligne
+    « soit … ≈ … » (E14). La page est construite uniquement à partir des étapes (§ 5)."""
+    if resolution["statut"] != "resolu":
+        raise ValueError(f"résolution non résolue : {resolution['statut']}")
+    lignes = [r for e in resolution["etapes"] for r in e["lignes"]]
+    b = [bloc_rangees(lignes, membre_gauche=True), sortie.resultat_lim(resolution["S"])]
+    if resolution["approx"]:
+        b.append(sortie.texte(resolution["approx"]))
+    return b

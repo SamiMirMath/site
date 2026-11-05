@@ -627,6 +627,121 @@ par nom (Python et pages). Aucun test ajouté par P0. Commit : « equations-2e-d
 
 ## P2b — rédaction dans `second_degre`
 
+### Plan
+
+1. **Entrée de P2b** : `resoudre_equation(gauche, droite, inconnue, decimaux_enonce=False, methodes=ORDRE_DU_COURS)` n'accepte encore
+   que « P = 0 » **développée et ordonnée** (somme de monômes k·xʲ, degrés strictement décroissants, droite = 0) et de degré 2 ; tout
+   le reste donne le statut **`non_traite`** (message clair, aucune étape) : ramener et développer (P3), formes structurées (P4a),
+   degrés ≠ 2, identité, égalité fausse (P4b). Les tests de ces cas sont des xfail stricts nommés « P3 », « P4a », « P4b ».
+2. **Rédaction** sur le calcul de P1 (`chemin`, `produit_nul`, `essais_sp`, `racines_formule`), sans nouveau calcul : un constructeur
+   de rangées (`_Redaction`) écrit chaque étape comme un segment `Chaine([pivot, …])` dont le premier lien est ⇔ (énoncé écrit au
+   premier ⇔ seulement, § 13.3), les phrases et le tableau en `LigneTexte`, les lignes de Δ, √Δ, x₁, x₂ en rangées sans lien
+   (point 3). E3 (phrases de a < 0), E4, E5 (étiquette ou ligne de vérification, D24), E6 (tableau, D3, § 13.5 « trop de couples »),
+   E7 (r, △, diviseurs en une ligne, D1), E8 (D7, D20), E9, E10 (§ 7 : Δ écrit une fois, valeur finale encadrée), E11, E12 (variante
+   « formule », a < 0 : x₁ avec −√Δ), E14 (`nb_exact` sans état, `nombres.exact`, `approx_garantie`, « soit … ≈ … »), D29 (`\fbox`
+   sur A et B en un seul cadre comme D29 l'écrit, r, △, Δ ; ligne ✓ par le bloc), S en `resultat_lim`.
+3. **API** : `Resolution` (§ 5, plus `message` pour un statut non résolu), `Etape` (§ 5, plus `segment`), `appliquer(methode, P)`,
+   `blocs(resolution)` (chaîne par `bloc_rangees(…, membre_gauche=True)`, S, ligne ≈), `nb_exact`, `arbre_polynome`, `arbre_nombre`.
+   Arêtes `second_degre -> chaine`, `-> sortie`.
+4. **Tests** : `tests/python/corpus_second_degre.py` (entrées), `test_redaction_second_degre.py` (invariants JSON et repliement des
+   segments, oracle, garde-fou, `appliquer`, R12 et vocabulaire, cas limites du § 6, `nb_exact` croisé avec `exp_log._nb_exact`,
+   xfail stricts), `test_instantanes_second_degre.py` (JSON `tests/python/donnees/equations-2e-degre/instantanes.json`, JSON strict,
+   vocabulaire). `lancer.py liste` contrôlé.
+5. Texte rendu de 2.11 h développé ci-dessous ; suite complète, dump, temps natif, commit.
+
+### Réalisé
+
+- **`moteur/second_degre.py`, section 7** (≈ 600 lignes, sur le calcul de P1, aucun calcul nouveau) :
+  - `resoudre_equation(gauche, droite, inconnue, decimaux_enonce=False, methodes=ORDRE_DU_COURS) -> Resolution` ; `Resolution` =
+    `{statut, etapes, solutions, S, approx, variantes, message}`. **Précisions au § 5** : deux statuts de plus, `non_traite`
+    (« Cette forme d'équation n'est pas encore traitée par l'outil. », temporaire : disparaît quand P3, P4a et P4b sont faites) et
+    `hors_bornes` (message du § 13.5 ; radicande > 10¹², question 9) ; `message` (texte du statut, None si résolu) ; `Etape` a en plus
+    `segment` (sa `Chaine`, ou None quand l'étape n'écrit aucun ⇔). `pas_encore` (fraction, racine, bicarrée) reste pour P3 et P4b.
+  - Entrée de P2b : `termes_developpes(arbre, x)` (somme de monômes k·xʲ écrits, degrés strictement décroissants, sans coefficient
+    nul) et droite = 0, degré 2 ; sinon `non_traite`. L'énoncé est écrit tel que saisi (décimaux de la saisie gardés, E14).
+  - Étapes : `factoriser` (ME, IDREM_*, SP, TATONNEMENT, FORMULE choisie d'emblée), `produit_nul`, puis `delta_valeur` (ligne de Δ) et
+    `delta_nombre` (Δ > 0, x₁, x₂ ; ou Δ = 0 ; ou Δ < 0) pour la formule (phases de quiz.md QZ-04). Une tentative en échec (S-P,
+    tâtonnement) est l'étape `factoriser` de la méthode du cours (ses lignes : phrase, tableau ou diviseurs, « on utilise la
+    formule ») ; E9 : la ligne ⇔ x = … finale appartient à l'étape `delta_nombre`.
+  - Disposition (§ 13.3) : chaque étape est un segment `Chaine([pivot, …])` (premier lien ⇔, tous ⇔) ; l'énoncé n'est écrit qu'au
+    premier ⇔ ; phrases et tableau en `LigneTexte` ; lignes de Δ, √Δ, x₁, x₂ en rangées sans lien (`SansLien` dans le segment,
+    rendues ("", tex, None) par `rangees`, point 3). `blocs(res)` = `bloc_rangees(concaténation, membre_gauche=True)`, `resultat_lim(S)`,
+    `texte(« soit … »)`.
+  - Rédaction : E3 (a < 0 : « Le trinôme n'est pas unitaire (a = −1) » si a = −1, sinon « Le coefficient de x² est négatif (a = …) »,
+    avec le facteur mis en évidence, −x compris) ; E4 ; E5 (A² − B² en étiquette, A² ± 2AB + B² par la ligne « Vérification … ✓ »,
+    puis le carré et D24) ; E6 (tableau par `sortie.tableau_essais`, D3, § 13.5) ; E7 (calcul « 2 · (−4)² − 4 − 28 », b · r direct si
+    b = ±1 ; échec : une ligne, chaque ±d dans son propre `\(…\)` pour que la ligne passe à la ligne) ; E8 (D7, D14, D20, D24) ; E9 ;
+    E10 (§ 7, Δ = b² − 4ac = subst. = b² ± 4ac = ⟦Δ⟧, sans le calcul intermédiaire quand b = 0, « 0 − 16 ») ; E11 (`arbre_nombre`,
+    une seule fraction réduite) ; E12 (variante sans phrase de choix ; proposée seulement si le chemin du cours n'a pas de formule **et**
+    si la variante en a une : pas pour 3x² − 12x) ; E14 (`nb_exact` sans état, `approx_garantie`, x₁/x₂ nommés si toutes les solutions
+    le sont, sinon x et « ou ») ; D29 (`\fbox{$…$}` : A et B dans un seul cadre, comme D29 l'écrit, question 13 ; r ; △ ; valeur
+    finale de Δ ; jamais la vérification, les calculs ni les étiquettes).
+  - Garde-fou d'écriture : chaque valeur écrite est recalculée (ligne ✓ = facteurs du S-P, r annule le trinôme, (−r)·△ = c, Δ, x₁ et
+    x₂ par la formule) ; un écart lève `_Incoherent` → `ne_conclut_pas` (jamais un résultat douteux). Aucun cas du corpus ni des
+    polynômes générés ne le déclenche.
+  - `appliquer(methode, P)` : l'étape de la méthode seule (sans phrase de choix, P = 0 en tête dès qu'un ⇔ est écrit), ou None ; la
+    formule donne toutes ses lignes dans une seule étape ; le S-P de plus de 12 lignes, la phrase du § 13.5 (pas de tableau).
+  - `PHRASE_IDENTITE` et `PHRASE_EGALITE_FAUSSE` (celles d'Exp-log, test qui les cherche dans exp_log.py) sont prêtes pour P4b :
+    l'identité ne peut pas encore se produire en P2b (degré 0 → `non_traite`). **Écart au plan** : « identité selon Exp-log » est
+    préparée, pas branchée (option qui affiche le moins : sans ⇔ avant elle, le bloc « chaine » n'aurait aucune rangée-ligne et serait
+    refusé par `sortie.valider`).
+- **Tests** :
+  - `tests/python/corpus_second_degre.py` : `P2B` (72 équations : § 8 développé, § 6, § 7, § 13.4–13.5, décimaux, a < 0, Δ = 0) et
+    `A_VENIR` (21 formes, partie et coefficients développés).
+  - `tests/python/test_redaction_second_degre.py` (32 tests + 22 xfail stricts) : invariants (JSON du bloc = `bloc_rangees` de la
+    concaténation ; repliement des segments = `rangees_chaine` de la chaîne entière ; pivots enchaînés, liens ⇔, énoncé une fois et
+    seulement si un ⇔ suit) sur le corpus, les variantes et les 196 polynômes générés de degré 2 de P1 (décimaux de l'énoncé pour un
+    tiers) ; oracle et substitution exacte (écrite dans le test) ; valeurs ≈ contre mpmath ; textes rendus (2.11 h, 2.10 a, Javet
+    2.17 c, x² + 4x − 1, 2.12 b, Javet 2.17 d, x² + 4, −6x² + 12x − 6, 2.10 e, 2.9 b, 2.9 h, 25x² − 3, 2.9 d, x² − 8, x² − 1/2,
+    monômes, Javet 2.17 e, Δ = 0, décimaux, S-P de plus de 12 lignes, E14, variante dont a < 0) ; D29 ; R12 et C6 sur tous les
+    textes ; `nb_exact` croisé avec `exp_log._nb_exact` (sous `_avec_decimaux`, sans toucher à l'état) et `nombres.exact` ;
+    `appliquer` ⇔ `s_applique` pour les 9 méthodes, redéveloppement ; `non_traite`, `hors_bornes`. xfail stricts : 10 « P3 »,
+    5 « P4a », 7 « P4b » (dont la bicarrée).
+  - `tests/python/test_instantanes_second_degre.py` (4 tests) et `tests/python/donnees/equations-2e-degre/instantanes.json` (72
+    entrées, variante « formule » comprise) : `normaliser` de `test_instantanes`, JSON strict, `sortie.valider`, vocabulaire et R12.
+  - `python3 tests/lancer.py liste` : `rapide` relance `test_instantanes_second_degre.py` quand le JSON change (il nomme `donnees`)
+    et quand `second_degre.py` change (import) ; vérifié aussi par `tests_python_concernes` sur chacun des deux fichiers seul.
+- **Arêtes** (`test_imports.ARETES`) : `second_degre -> chaine`, `second_degre -> sortie` (`second_degre -> expr` existe depuis P1).
+- Aucun fichier partagé modifié (`chaine.py`, `sortie.py`, `rendu.js`, CSS intacts) : aucun instantané existant ni aucune référence de
+  page ne change.
+
+### Texte rendu de 2.11 h (forme développée), comparé au § 7
+
+Rangées du bloc « chaine » (`blocs`, JSON ; `gauche` : le membre de gauche de la première ligne), puis S :
+
+    gauche 4x^{2} + 2x - 56 = 0   \iff  2(2x^{2} + x - 28) = 0                                         ME
+    texte  Le trinôme \(2x^{2} + x - 28\) n'est pas unitaire : tâtonnement.
+    texte  \(\fbox{$x = -4$}\) est solution de \(2x^{2} + x - 28 = 0\), car \(2 \cdot (-4)^{2} - 4 - 28 = 32 - 4 - 28 = 0\).
+    texte  Donc \(2x^{2} + x - 28 = (x + 4)(2x + \triangle)\) avec \(4 \cdot \triangle = -28\), donc \(\fbox{$\triangle = -7$}\).
+           \iff  2(x + 4)(2x - 7) = 0
+           \iff  {\underbrace{2 = 0}_{\text{impossible}}} \text{ ou } \allowbreak {x + 4 = 0} \text{ ou } \allowbreak {2x - 7 = 0}
+                                                                                                       produit nul
+           \iff  {x = -4} \text{ ou } \allowbreak {x = \frac{7}{2}}
+    resultat_lim  S = \{-4\,;\,\frac{7}{2}\}
+
+Étapes : factoriser (ME, cible 4x² + 2x − 56) · factoriser (TATONNEMENT, cible 2x² + x − 28, r = −4, △ = −7) · produit_nul.
+**Comparaison au § 7** : mêmes lignes, dans le même ordre, à partir de « 4x² + 2x − 56 = 0 » ; la ligne « 4x² + 2x = 56 ⇔ » et l'étape
+« ramener » viennent en P3. Écarts voulus : étiquette « produit nul » (D5) ; x = −4 et △ = −7 encadrés (D29). Les parenthèses de la ME
+sont ordinaires (le corrigé les agrandit : rendu seulement).
+
+### Suite d'avant commit et dump
+
+- `PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rapport S/rapports/P2b` : **code 0** (≈ 7 min de mur). Python 1 607 collectés,
+  1 584 passés + 23 xfail (1 d'avant + 22 stricts de P2b), 122 989 sous-tests, 92,4 s ; pages 151 passés, 2 435 sous-tests, 329,0 s.
+  Aucun échec instable.
+- `comparer_listes.py tests/reference S/rapports/P2b` : par rapport à P2a, 59 tests Python nouveaux (33 passés et 22 xfail stricts de
+  `test_redaction_second_degre`, 4 de `test_instantanes_second_degre`), aucun disparu ; pages identiques à P2a. Sous-tests : seule
+  baisse, celle de P1 déjà justifiée (960 → 957) ; hausses : `test_imports::test_liste_bien_formee` 109 → 113,
+  `test_vocabulaire::test_litteraux_des_moteurs` 9 058 → 9 447, gardes de memo (+1 chacune).
+- **Dump** : `dump_sorties.py S/dumps/P2b --processus 6` (17 fichiers, 4 148 sorties, 4 s), `diff -r --exclude=temps S/dumps/depart
+  S/dumps/P2b` : **code 0, aucune sortie** (invariant tenu).
+- xfail stricts ajoutés : 22 (10 « P3 », 5 « P4a », 7 « P4b »), dans `test_redaction_second_degre.py` (`test_a_venir[…]`,
+  `test_P4b_bicarree`).
+
+### Temps
+
+Voir « Temps » ci-dessous (P2b).
+
 ## P3 — saisie
 
 ## P4a — formes structurées
@@ -639,6 +754,7 @@ par nom (Python et pages). Aucun test ajouté par P0. Commit : « equations-2e-d
 
 - P0 `0fd0060` : verifier ACCEPTÉ (Python 1 494 / 106 768 sous-tests, pages 145 / 2 421, identiques à la nouvelle référence) ; rapide --depuis HEAD~1 : 23 passés, 245 sous-tests, 3 s (fumée + docs). Échec instable de `test_comportement::test_soc04_parametre_f` (ensemble-definition, `#cartes` absent : page pas encore chargée) au 1er lancement de référence : accepté par le chef comme instabilité de chargement (relancé seul vert, deux suites complètes vertes ensuite, aucune sortie en cause, Python vert) ; question 8 de suivi.md. Branche poussée.
 - P1 `5f21ac0` : verifier ACCEPTÉ (Python 1 534 / 112 356 sous-tests, 1 baisse justifiée test_exp_log::…::test_aucun_texte_du_fichier_ne_tutoie 960 → 957 ; pages 145 / 2 421 identiques) ; rapide --depuis HEAD~1 : Python 1 489 passés + 1 xfail, 112 300 sous-tests (95 s), pages 145 passés, 1 256 sous-tests (306 s), mur 6 min 44 ; dump identique au départ (P1). Branche poussée.
+- P2a `5b9254c` : verifier ACCEPTÉ (Python 1 548 / 112 699 sous-tests, pages 151 / 2 435, ajouts seulement, baisse de P1 toujours justifiée) ; rapide --depuis HEAD~1 : Python 1 327 passés + 1 xfail, 97 492 sous-tests (89 s), pages 151 passés, 1 270 sous-tests (324 s), mur 6 min 55 ; dump identique au départ (P2a). Capture 390 clair regardée par le chef : cadres D29 lisibles, rien ne déborde. Branche poussée.
 
 ## Temps
 
@@ -652,6 +768,11 @@ message des bornes (question 9 de suivi.md).
 
 **P2a** (même mesure, `S/tmp/temps_p1.py` ; P2a ne touche pas `second_degre`) : 69 entrées, **16,4 ms en tout**, la plus longue
 0,45 ms (x⁴ − 16) ; pire cas des bornes 91 ms. Aucune hausse.
+
+**P2b** (`S/tmp/temps_p2b.py`, python3 natif 3.14.4, 3 tours ; `resoudre_equation`, variante « formule » quand elle est proposée,
+et `blocs`) : 93 entrées (les 72 de `corpus_second_degre.P2B` et les 21 formes `A_VENIR`, qui répondent `non_traite`) **77 ms en tout**
+(3e tour), la plus longue 1,6 ms (−9x² − 12x + 12 = 0, avec sa variante) : bien sous 0,1 s par équation. Pire cas des bornes :
+x² + 999 999x − 499 997 = 0 **88 ms** (P1 : 91 ms pour le seul calcul ; la rédaction ne compte pas). Aucune hausse au-delà de 0,1 s.
 
 Temps natifs des outils existants au départ (`S/dumps/depart-p1/temps/temps.json`, `--processus 1`, sur b72fe2e ; somme des appels de
 `resoudre_json` et plus long appel ; 12,9 s de mur) :

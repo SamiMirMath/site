@@ -41,6 +41,10 @@ ARETES = {
     "second_degre -> noyau": "brique : la base par sa façade (squarefree, racine_q pour p + q√m, pn, deg ; equations-2e-degre, P1)",
     "second_degre -> expr": "brique : vers_polynome vérifie qu'il n'y a qu'une lettre dans l'arbre (variables ; equations-2e-degre, P1)",
     "second_degre -> nombres": "brique : valeurs approchées garanties par nombres.approx (approx_garantie, E14 ; equations-2e-degre, P1)",
+    "second_degre -> chaine": "brique : la rédaction écrit chaque étape comme un segment de chaîne du corrigé (Chaine, rangees_chaine, "
+                              "bloc_rangees ; equations-2e-degre, P2b)",
+    "second_degre -> sortie": "brique : tableau S-P (tableau_essais), S encadré (resultat_lim) et ligne ≈ de la résolution (equations-2e-degre, "
+                              "P2b)",
     # outil ED : la base est son moteur
     "resoudre_ed -> ensemble_def": "adaptateur de l'outil ED, sur la base directement (légitime : rapport de la revue, § 1.2)",
     "resoudre_ed -> sortie": "adaptateur : brique de sortie",
