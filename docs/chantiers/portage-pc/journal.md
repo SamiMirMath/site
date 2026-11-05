@@ -59,3 +59,8 @@ identiques ; REFUSÉ pour le seul motif (b) (mêmes 4 fichiers non suivis).
 ## Point 4 — CLAUDE.md
 
 - Suite d'avant commit `p4` (`PROCESSUS_PAGES=4`) : code 0 ; Python 93 s, pages 296 s ; identique à `tests/reference` nom par nom.
+
+## Point 5 — diagnostic.md
+
+- `diagnostic.md` versé sans modification. Suite d'avant commit `p5` (`PROCESSUS_PAGES=4`) : code 0 ; Python 92 s, pages 298 s ;
+  identique à `tests/reference` nom par nom.

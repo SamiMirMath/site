@@ -17,7 +17,7 @@ Avant chaque commit : `PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rappo
 | 2 | Référence propre au dépôt (`tests/reference/`), `lancer.py reference <dossier>`, défaut de `verifier` | **fait** : référence = lancement sur `main` (c9b257f) ; suite verte (`PROCESSUS_PAGES=4`), identique à la référence |
 | 3 | `rapide --depuis <commit>` ; procédure allégée dans la méthode | **fait** (suite verte, identique à la référence) |
 | 4 | `CLAUDE.md` (autorisé pour ce point) | **fait** (suite verte, identique à la référence) |
-| 5 | `diagnostic.md` versé | à faire |
+| 5 | `diagnostic.md` versé | **fait**, texte inchangé (sa phrase « Ce fichier n'est pas commité » date du diagnostic) |
 
 ## Questions ouvertes
 
@@ -48,4 +48,6 @@ Avant chaque commit : `PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rappo
 
 ## Reprise après compactage
 
-Lire ce fichier, puis `git log --oneline main..HEAD` et `journal.md`. Les dossiers de rapport sont dans le scratchpad de la session.
+Points 1 à 5 commités sur `portage-pc` (un commit par point), chaque suite d'avant commit verte avec `PROCESSUS_PAGES=4` et identique
+à `tests/reference` nom par nom. Reste : fusion dans `main` (`--no-ff --no-edit`) et push si tout est vert. Pour reprendre : lire ce
+fichier, puis `git log --oneline main..HEAD` et `journal.md`. Les dossiers de rapport sont dans le scratchpad de la session.
