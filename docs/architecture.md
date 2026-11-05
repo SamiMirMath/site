@@ -13,9 +13,11 @@ Chaque couche ne dépend que de celles du dessous.
 
 ```
 4. Pages            <outil>/index.html : une configuration passée à monterOutil ; tout le reste dans commun/ (JS, CSS)
-3. Adaptateurs      <outil>/resoudre_xx.py : seule couche qui fabrique la sortie affichée (moteur/sortie.py)
-2. Moteurs d'outil  <outil>/*.py : résolution et rédaction propres à l'outil ; n'importent que moteur/
-1. Briques communes moteur/ : nombres, sortie, noyau (façade de la base), et demain expr, chaine, second_degre
+3. Adaptateurs      <outil>/resoudre_xx.py : assemblent la sortie affichée de l'outil (blocs de moteur/sortie.py)
+2. Moteurs d'outil  <outil>/*.py : résolution et rédaction propres à l'outil ; n'importent que moteur/ (dont sortie.py
+                    pour ceux qui rédigent : parties, redaction_bh, demain second_degre)
+1. Briques communes moteur/ : nombres, sortie (blocs affichés, pour les moteurs qui rédigent comme pour les adaptateurs),
+                    noyau (façade de la base), et demain expr, chaine, second_degre
 ```
 
 | Couche | Peut importer | Ne doit jamais importer |

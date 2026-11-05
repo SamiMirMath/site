@@ -43,8 +43,15 @@ Toutes se lancent depuis la racine du dépôt avec `python3 tests/lancer.py <com
 SymPy 1.13.3, mpmath, websockets, pytest et pytest-xdist ; rien n'est installé dans le projet) :
 
 - `rapide` : les tests Python des fichiers modifiés (`git diff HEAD` + fichiers non suivis, dépendances
-  d'import comprises) plus les tests de fumée (manifeste, accueil, source unique) ; les tests de pages à corpus réduit si une page, un
-  fichier commun ou un test de page est touché, et aussi pour chaque outil dont un moteur Python chargé par la page change (d'après
+  d'import comprises, fichiers supprimés aussi, noms lus avec `-z`) plus les tests de fumée (manifeste, accueil, source unique) ; un
+  fichier de `tests/python/donnees/`, d'instantanés ou de références de pages relance les tests qui nomment ce dossier (tous s'il n'y en
+  a aucun) ; une page, un `cas*.py` ou un instantané relance aussi `test_instantanes*` et `test_json_strict` ; un script de commande
+  (`lancer.py`, `verifier.py`, `comparer_listes.py`, `rapport_pytest.py`, `outils_du_site.py`) relance `test_lancer.py` ;
+  `moteur/manifeste.json` ou `commun/registre.json` relance les dépendants de `tests/python/outils_du_site.py` (la liste des outils,
+  dont dérivent les listes des tests) ; un `.py` des dossiers des moteurs relance `test_imports.py` et `test_noyau.py` (ils lisent les
+  moteurs par leur chemin) ; les tests de pages à corpus réduit si une page, un
+  fichier commun ou un test de page est touché, et aussi pour chaque outil dont un moteur Python chargé par la page, la référence de
+  page ou l'instantané resoudre change (d'après
   `moteur/manifeste.json` : un module partagé relance tous les outils qui le chargent ; toutes les pages si on ne sait pas borner, ou
   si un module du corpus des pages, `cas.py`, `cas_el.py`, `moteurs.py`, change). La page des exponentielles vient avec sa filière M.
   `liste` affiche ce que `rapide` lancerait, sans rien lancer. Pour travailler : ne remplace pas la suite complète avant un commit.
@@ -54,15 +61,19 @@ SymPy 1.13.3, mpmath, websockets, pytest et pytest-xdist ; rien n'est installé 
 - `complet` : toute la suite Python (`-n auto`) puis toute la suite de pages (`-n` PROCESSUS_PAGES, 2 par défaut, corpus complet). Le
   code de retour est celui de pytest, sans pipe : c'est la commande à lancer avant chaque commit (règle ci-dessus). `python` et `pages` lancent chaque suite seule.
 - Ne jamais collecter `tests/python` et `tests/pages` dans la même commande (deux `test_accueil.py`).
-- Première installation sur une machine : python3 tests/pages/pyodide_local.py (une fois par version de Pyodide).
+- Première installation sur une machine : python3 tests/pages/pyodide_local.py et python3 tests/pages/katex_local.py (une fois par
+  version de Pyodide ou de KaTeX ; sans ces copies, les tests de pages échouent avec la commande à lancer). Aucune requête des tests de
+  pages ne quitte la machine : une ressource extérieure non servie par ces copies fait échouer.
 - `complet --rapport <dossier>` : comme `complet` (mêmes commandes, même code de retour), et écrit en plus dans <dossier> (hors du
   dépôt, par exemple le scratchpad) les JUnit, les listes de tests (collectés, issues, sous-tests) et rapport.json (commit de départ,
   empreintes des fichiers modifiés ou non suivis au début et à la fin, codes, durées, CORPUS/OUTILS/MEMO). C'est la forme à utiliser
   pour la suite complète d'avant commit dans un chantier.
-- `verifier <dossier> [--reference <dossier>]` : après le commit, contrôle sans rien relancer que le rapport porte exactement sur ce
-  commit (empreintes), qu'aucun autre fichier n'était modifié ou non suivi pendant le lancement (hors suivi.md / journal.md de chantier
-  et CLAUDE.md), que les codes valent 0 et qu'aucun test n'a disparu, n'est sauté en plus, ne se dégrade ni ne perd de sous-tests par
-  rapport à la référence (par défaut tests/reference). Verdict final ACCEPTÉ (code 0) ou REFUSÉ (1, ou 2 si un
+- `verifier <dossier> [--reference <dossier>] [--suivi <fichier>]` : après le commit, contrôle sans rien relancer que le rapport porte
+  exactement sur ce commit (empreintes), qu'aucun autre fichier n'était modifié ou non suivi pendant le lancement (hors `docs/`, et
+  CLAUDE.md hors du commit : ignorés, toujours listés), que les codes valent 0 et qu'aucun test n'a disparu, n'est sauté en plus ni ne
+  se dégrade par rapport à la référence (par défaut tests/reference) ; une baisse de sous-tests n'est acceptée que justifiée dans le
+  suivi.md du chantier (section « Variations de sous-tests », ligne `` - `<test>` : <avant> → <après> : <raison> ``, nombres exacts ;
+  `--suivi <fichier>` pour un autre fichier). Verdict final ACCEPTÉ (code 0) ou REFUSÉ (1, ou 2 si un
   fichier manque). `python3 tests/comparer_listes.py <référence> <dossier>` compare deux dossiers nom par nom.
 - `reference <dossier>` : remplace la référence du dépôt, `tests/reference/` (celle de `verifier` par défaut), par les listes d'un
   dossier de `complet --rapport` lancé sur un commit de la branche, vert, complet, sans autre fichier modifié que dans `docs/` ou
@@ -77,8 +88,9 @@ SymPy 1.13.3, mpmath, websockets, pytest et pytest-xdist ; rien n'est installé 
   appel : chaque appel devient un appel direct du moteur ou de l'oracle. Ces caches ne servent qu'aux fichiers sans aucun mock
   (`test_memo_garde.py`, `test_memo_racines_garde.py` le vérifient). Une fois par session de chantier, lancer aussi `MEMO=0 python3 tests/lancer.py complet --rapport
   <dossier>` : les listes doivent être les mêmes qu'avec le cache.
-- Suite au 05.11.2026 (tests/reference, commit c9b257f) : 1 318 tests Python (dont 1 xfail) et 101 952 sous-tests ; 123 tests de pages
-  et 2 386 sous-tests.
+- Suite au 05.11.2026 (tests/reference, commit 96f183c, référence du chantier fondations) : 1 335 tests Python (dont 1 xfail) et
+  105 807 sous-tests ; 123 tests de pages et 2 386 sous-tests. Après fondations (fedc264) : 1 392 tests Python (dont 1 xfail) et
+  106 244 sous-tests ; 138 tests de pages et 2 407 sous-tests.
 - Mesures du 05.11.2026 sur le Mac de l'enseignant (2 cœurs physiques, PROCESSUS_PAGES absente) : suite Python 556 à 588 s (660 s avec
   `MEMO=0`) ; suite de pages 966 à 999 s ; `complet` environ 25 à 27 min (avant le chantier tests-rapides, le 04.11.2026 : Python 737
   à 755 s, pages 938 à 967 s).
