@@ -8,8 +8,8 @@ Détail (balayages, rapports, temps) : `journal.md`.
 
 | Point | Objet | État |
 |---|---|---|
-| 1 | Doubles signes de la carte « Contrôle » (3C) et de « −(−x) » (C et M) | ✓ commité, suite verte |
-| 2 | Garde générale « deux signes consécutifs », tous les outils | à faire |
+| 1 | Doubles signes de la carte « Contrôle » (3C) et de « −(−x) » (C et M) | ✓ commité (6fb5ec1), suite verte ; `verifier` REFUSÉ (voir Écarts) |
+| 2 | Garde générale « deux signes consécutifs », tous les outils | ✓ commité, suite verte |
 | 3 | Cas 1/64 : **non modifié** (spécification, exemples 10 et 11 : log(32) reste log(32)) | ✓ rien à faire |
 | 4 | Les 7 autres questions du Mac : recommandations ci-dessous, rien d'appliqué | ✓ |
 
@@ -34,7 +34,24 @@ Détail (balayages, rapports, temps) : `journal.md`.
 | (les mêmes) | `log_(-x)(4)=2` | `\log_{--2}(4) = \log_{2}(4) = …` | `\log_{-(-2)}(4) = \log_{2}(4) = …` |
 | (les mêmes) | `-log(x)=2` | `-\log\left(\frac{1}{100}\right) = --2` | `-\log\left(\frac{1}{100}\right) = -(-2)` |
 
-Aucune autre ligne ne change (filière M : instantané et référence identiques).
+Aucune autre ligne ne change (filière M : instantané et référence identiques). Le point 2 ne change aucun instantané.
+
+## Point 2
+
+- **Garde** : `tests/python/test_doubles_signes.py`. Motif : deux signes parmi + - − séparés au plus par des espaces, une accolade ouvrante
+  ou une petite espace TeX (`\,`, `\;`…) ; couvre « -- », « −− », « +- », « -+ », « + - », « - - » (et « ++ », « + {-1} »).
+  - Instantanés `resoudre` (7 outils) : chaque chaîne ; dans le HTML, chaque morceau entre deux balises, ses formules \( \) et \[ \] et son texte.
+  - Références de pages (8 fichiers) : chaque formule ⟦…⟧ et chaque case de tableau. Le texte en clair d'une carte y colle les cases d'un
+    tableau de signes (« −−0+ ») et les boutons du graphique (« − + ») : il est contrôlé dans l'instantané `resoudre`, auquel la page est égale.
+  - Sur `main`, la garde trouve exactement les 3 fautes du point 1 (instantané et référence 3C) ; **aucune dans les autres outils** : rien à lister.
+- **Autre cas trouvé dans Exp-log (hors corpus, par le balayage en (−x))** : `e^(-x)*e^((-x)+1)=5` écrivait « −x + −x + 1 = ln(5) »
+  (somme dont le second terme commence par un signe moins). Corrigé dans `tex()` : « −x + (−x + 1) = ln(5) » ; même règle pour une
+  différence. Aucun instantané ne change.
+- `test_explog_doubles_signes.py` : le balayage du corpus et des variantes en (−x) cherche désormais tous les doubles signes (motif de la
+  garde) ; test du cas ci-dessus en C et M. Sans la correction du point 2 : 3 échecs.
+- **Hors des motifs demandés, non corrigé** (signes doublés séparés par une parenthèse, famille Δ, questions 5 et 7) :
+  `10^(x^2-5x)=1000^(-2)` « x² − 5x − (−2)·log(1’000) = 0 », « 25 + 4(−2)·log(1’000) » ; `2^(-x^2+5x)=3` « 25 + (−4)·… » ;
+  dans le corpus, 3 entrées « + (−4) \cdot » (fiche du Mac, tableau des instantanés).
 
 ## Point 4 : les 7 autres questions du Mac (rien d'appliqué)
 
@@ -54,6 +71,20 @@ Le correctif du Mac (`origin/mac-correctif-explog`) n'est pas dans `main` ; `mai
 Q8 (doubles signes de la carte « Contrôle ») : point 1 de ce chantier.
 
 ## Écarts
+
+- **`verifier` du point 1 : REFUSÉ, deux motifs.**
+  1. Fichiers non suivis de l'enseignant sous `docs/` (`docs/architecture.md`, `docs/chantiers/equations-2e-degre/quiz.md`,
+     `docs/chantiers/revue-structure/rapport.md`) : vaut accepté (consigne du 05.11).
+  2. **Sous-tests en baisse** : `test_exp_log.py::TestVouvoiement::test_aucun_texte_du_fichier_ne_tutoie` 1 208 → 1 207 et
+     `test_vocabulaire.py::TestVouvoiement::test_litteraux_des_moteurs` 8 698 → 8 697. Un sous-test par littéral de chaîne du moteur :
+     la correction a retiré le littéral `"+-"` (`n.a.op in "+-"` devenu `_comme_somme(n.a)`). Aucun test n'est modifié ni affaibli,
+     mais c'est un motif de refus autre que les fichiers non suivis : **pas de fusion** (consigne), branche poussée seule.
+     Pour fusionner, l'enseignant peut accepter ce motif, puis rafraîchir `tests/reference/` (`lancer.py reference`) sur la branche.
+- **`verifier` du point 2** : seul motif, les fichiers non suivis de l'enseignant (vaut accepté) ; listes identiques à la référence, 9 tests
+  ajoutés, les deux sous-tests de vouvoiement remontent à 1 209 et 8 699 (deux littéraux `"-"` ajoutés). Le refus du point 1 empêche
+  quand même la fusion (consigne : tout autre motif de refus, pas de fusion) ; branche poussée seule.
+- Commande de fusion, si l'enseignant accepte le motif du point 1 : `git switch main && git merge --no-ff --no-edit explog-suite`,
+  puis `git push`, puis `git branch -d explog-suite`.
 
 - Pas de nouvelle référence au P0 (`lancer.py reference`) : `tests/reference/` date d'aujourd'hui (PC, c9b257f), les commits suivants ne
   touchent que l'outillage de test ; le prompt demande un commit par point.

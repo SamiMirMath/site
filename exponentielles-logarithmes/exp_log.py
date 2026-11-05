@@ -232,9 +232,9 @@ def tex(n):
                 return tex(Op("-", n.a, n.b.a))
             if isinstance(n.b, Nb) and n.b.val < 0:
                 return tex(Op("-", n.a, Nb(-n.b.val, n.b.dec)))
-            return g + " + " + d
+            return g + " + " + (_entre_parentheses(d) if d.startswith("-") else d)       # −x + (−x + 1) : jamais « + − »
         if n.op == "-":
-            return g + " - " + (_entre_parentheses(d) if _comme_somme(n.b) else d)
+            return g + " - " + (_entre_parentheses(d) if _comme_somme(n.b) or d.startswith("-") else d)
         deux_groupes = _comme_somme(n.a) and _comme_somme(n.b)
         if _comme_somme(n.a):
             g = _entre_parentheses(g)

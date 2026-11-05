@@ -1,13 +1,15 @@
-"""Chantier explog-suite, point 1 (question 8 de la fiche du Mac, correctif-explog-delta) : jamais deux signes moins de suite dans un corrigé
+"""Chantier explog-suite, points 1 et 2 (question 8 de la fiche du Mac, correctif-explog-delta) : jamais deux signes de suite dans un corrigé
 d'Exp-log.
 
 Avant : la carte « Contrôle » de la 3C remplaçait x par une valeur négative dans −x et écrivait « log(--100) » (log(−x) = 2),
 « log_{--2}(4) » (log_(−x)(4) = 2) et « −log(1/100) = --2 » (−log(x) = 2) ; une saisie « −(−x) » était récrite « --x » (filières C et M).
 Cause : tex() (exp_log.py) ne mettait entre parenthèses que la somme sous un signe moins, jamais un opposé ni un nombre négatif.
 Après : « log(−(−100)) = log(100) », « log_{−(−2)}(4) », « −log(1/100) = −(−2) = 2 », « −(−x) ».
+Point 2 : une somme dont le second terme commence par un signe moins s'écrivait « −x + −x + 1 » (e^(−x)·e^((−x)+1) = 5) ; après,
+« −x + (−x + 1) ». Le balayage du point 1 cherche depuis le point 2 tous les doubles signes (motif de test_doubles_signes.py).
 
 Le balayage parcourt le corpus des deux filières (cas_el.py) et chacune de ses entrées où x est remplacé par (−x) : c'est là que les
-opposés de négatifs apparaissent. La garde générale, pour tous les outils et tous les doubles signes, est test_doubles_signes.py."""
+opposés de négatifs apparaissent. La garde générale, pour tous les outils et tout le corpus enregistré, est test_doubles_signes.py."""
 import re
 import unittest
 
@@ -18,11 +20,10 @@ from moteurs import ensemble_def as ed
 import oracle
 import resoudre_el
 from cas_el import entrees_el, entrees_el_m
+from test_doubles_signes import DOUBLE, morceaux_resoudre
 
 mp = mpmath.mp
 LIGNE = re.compile(r'<span class="expr">\\\((.*?)\\\)</span>')
-FORMULE = re.compile(r"\\\((.*?)\\\)")
-DEUX_MOINS = re.compile(r"[-−]\s*[-−]")
 X = re.compile(r"(?<![A-Za-z])x(?![A-Za-z])")
 
 # entrée, solution contrôlée, ligne attendue dans la carte « Contrôle » (3C), g − d pour l'oracle (arbre de l'outil ED : log s'y écrit ln/ln(10))
@@ -34,18 +35,13 @@ CONTROLES = [
 
 
 def _formules(o):
-    """Les formules TeX d'une sortie de resoudre (champs tex, formules \\( \\) du HTML) et le texte du HTML hors formules ; un tableau à part."""
-    if isinstance(o, dict):
-        if o.get("type") == "tableau":
-            return
-        for k, v in o.items():
-            if k in ("tex", "cond_tex") and isinstance(v, str):
-                yield v
-            elif k == "html" and isinstance(v, str):
-                yield from FORMULE.findall(v)
-                yield re.sub(r"<[^>]+>", " ", FORMULE.sub(" ", v))
-            else:
-                yield from _formules(v)
+    """Les morceaux d'une sortie de resoudre, comme dans test_doubles_signes.py : chaque chaîne, et dans le HTML chaque formule et chaque texte
+    entre deux balises."""
+    if isinstance(o, str):
+        yield from morceaux_resoudre(o)
+    elif isinstance(o, dict):
+        for v in o.values():
+            yield from _formules(v)
     elif isinstance(o, list):
         for v in o:
             yield from _formules(v)
@@ -65,7 +61,7 @@ class TestExplogDoublesSignes(unittest.TestCase):
                 lignes = _controle(entree)
                 self.assertIn(attendue, lignes)
                 for ligne in lignes:
-                    self.assertIsNone(DEUX_MOINS.search(ligne), ligne)
+                    self.assertIsNone(DOUBLE.search(ligne), ligne)
 
     def test_controle_3c_oracle(self):
         """La solution contrôlée annule g − d (mpmath, 50 chiffres, arbre de l'outil ED)."""
@@ -79,12 +75,19 @@ class TestExplogDoublesSignes(unittest.TestCase):
             with self.subTest(filiere=filiere, entree=entree):
                 self.assertIn(attendue, list(_formules(resoudre_el.resoudre(entree, filiere))))
 
+    def test_somme_dont_le_second_terme_commence_par_moins(self):
+        """Point 2 : « −x + (−x + 1) », jamais « −x + −x + 1 » (C et M)."""
+        for filiere in ("C", "M"):
+            with self.subTest(filiere=filiere):
+                formules = list(_formules(resoudre_el.resoudre("e^(-x)*e^((-x)+1)=5", filiere)))
+                self.assertIn(r"-x + (-x + 1) = \ln(5)", formules)
+
     def test_balayage_corpus_et_oppose(self):
-        """Aucune formule ni aucun texte du corpus (C et M), ni de ses entrées où x devient (−x), n'a deux signes moins de suite."""
+        """Aucune formule ni aucun texte du corpus (C et M), ni de ses entrées où x devient (−x), n'a deux signes de suite."""
         for filiere, entrees in (("C", entrees_el()), ("M", entrees_el_m())):
             for entree in entrees + [X.sub("(-x)", e) for e in entrees if X.search(e)]:
                 with self.subTest(filiere=filiere, entree=entree):
-                    fautives = [f for f in _formules(resoudre_el.resoudre(entree, filiere)) if DEUX_MOINS.search(f)]
+                    fautives = [f for f in _formules(resoudre_el.resoudre(entree, filiere)) if DOUBLE.search(f)]
                     self.assertEqual(fautives, [])
 
 
