@@ -2,6 +2,31 @@
 
 ## Résumé de session
 
+**0. Réconciliation sur le Mac (05.11.2026, après la session).** Pendant la nuit, le PC a poussé sur `origin/main` ses propres
+étape A (méthode, cea2bf0), R2 (929ca2c, fusion 581e803) et correctif Exp-log (b6aacef, fusion c06d96f). Les commits locaux du Mac
+351fb77 (étape A) et 7268412 (correctif, 123ba43) faisaient doublon : on garde `origin/main`.
+- **Sauvegarde** : branche `mac-correctif-explog` sur 7268412 (correctif du Mac, sa fiche `docs/chantiers/correctif-explog-delta.md`
+  et ses 8 questions). À ne jamais supprimer. `main` remis sur `origin/main` (c06d96f) : plus rien à pousser.
+- **`tests-rapides` replantée** par `git rebase --onto origin/main 7268412 tests-rapides`. Un seul conflit,
+  `docs/methode-chantiers.md` : version d'`origin/main` gardée, seul l'ajout de P2 (contrôle allégé, dossier de `complet --rapport`
+  dans la consigne) réappliqué. Nouveaux hashes : P0 06f0eea, P1 2788794, P2 e0b25a1 et a5aae6b, P3 c11308d, P4 36cd6a3,
+  P5 14e0688, P6 ebe2c22, P7 ea0dd6d, résumé a56794c (anciens : 1feb6cf … 97c5008).
+- **Suite complète sur a56794c : verte (code 0).** Python 1317 passés + 1 xfail, 101 952 sous-tests (534 s) ; pages 123 passés,
+  2 386 sous-tests (993 s). Écarts avec la référence P0 (`comparer_listes.py`), tous attendus :
+  - absents, correctif du Mac : les 15 tests de `tests/python/test_explog_delta.py` (TestFilieres ×2, TestOracle ×2,
+    TestRedaction ×11) ;
+  - présents, correctif du PC : `test_correctif_explog_delta.py::TestCorrectifExplogDelta::` `test_oracle`, `test_redaction`,
+    `test_un_soixante_quatrieme_inchange`, `test_variante_par_defaut_inchangee` ;
+  - présent, R2 : `tests/pages/test_comportement.py::TestComportement::test_soc22_bloc_inconnu_visible` ;
+  - présents, déjà connus : les 17 tests de P4 et P5 ;
+  - sous-tests en baisse, tous sur l'outil Exp-log : les 42 entrées `BATTERIE_DELTA` + `DELTA_PAS_ENCORE` du Mac retirées de
+    `cas_el.py` (625 → 583, 318 → 276, 1 250 → 1 166, 1 595 → 1 511…) et les littéraux de son `exp_log.py` (8 707 → 8 698) ;
+    le correctif du PC ne modifie aucun instantané. Aucun autre écart.
+  - `verifier` sur ce rapport : REFUSÉ, comme prévu (les 15 tests disparus et ces sous-tests). Pour les prochains contrôles, la
+    référence est le dossier de ce lancement (`--reference`), ou une nouvelle référence à refaire.
+- Les paragraphes a et b ci-dessous décrivent l'état d'avant la réconciliation (351fb77, 123ba43, 7268412 ne sont plus dans
+  `main`) ; les hashes du tableau c sont les nouveaux.
+
 Session du 04 au 05.11.2026, sans vous. **Rien n'a été poussé de toute la session** (`origin/main` est resté à ca6c243).
 Pas d'exemple cible à rendre : P0 à P7 ne changent aucun texte affiché (aucun instantané modifié) ; le rendu de l'étape B est
 dans `docs/chantiers/correctif-explog-delta.md`.
@@ -31,14 +56,14 @@ par le système de permissions de Claude Code** (`git push origin main`), sans n
 
 | Partie | Commit | Contenu | État | Contrôle du chef d'orchestre |
 |---|---|---|---|---|
-| P0 | 1feb6cf | Référence (deux lancements), `complet --rapport`, `comparer_listes.py` | faite | suite complète relancée : code 0, identique nom par nom |
-| P1 | a8d6ab6 | Harnais du toucher (test du clavier 40/40) | faite | suite complète relancée : code 0, identique nom par nom |
-| P2 | 55daa1f, 1f34e3c | `lancer.py verifier` ; méthode : contrôle allégé | faite | `verifier` ACCEPTÉ ×2 ; son essai « test disparu » REFUSÉ, comme attendu |
-| P3 | f140f1c | `TestStructure` calculé une fois par classe (fichier 121 s → 44 s) | faite | `verifier` ACCEPTÉ ; tests du commit verts ; diff relu |
-| P4 | 7186b6d | Cache de l'outil Limites (`memo.py`), garde, `MEMO=0` ; 6 tests ajoutés | faite | `verifier` ACCEPTÉ ×2 (avec et sans `MEMO=0`) ; tests du commit verts dans les deux cas |
-| P5 | 46fd547 | Cache de l'oracle `racines` (`memo_racines.py`) ; 563 clés identiques avec et sans cache ; 11 tests ajoutés | faite | `verifier` ACCEPTÉ ; tests du commit verts (avec `MEMO=0` : limite de 5 min dépassée, voir d) |
-| P6 | d116aa1 | `rapide` relance les pages des outils dont un moteur change (manifeste), filière M | faite | `verifier` ACCEPTÉ ; diff relu, `complet` intact |
-| P7 | 8d08a67 | Étude du chargement de Pyodide (`etude-pyodide.md`, aucun code) | faite | `git diff --stat` : 3 fichiers de docs ; `verifier` ACCEPTÉ |
+| P0 | 06f0eea | Référence (deux lancements), `complet --rapport`, `comparer_listes.py` | faite | suite complète relancée : code 0, identique nom par nom |
+| P1 | 2788794 | Harnais du toucher (test du clavier 40/40) | faite | suite complète relancée : code 0, identique nom par nom |
+| P2 | e0b25a1, a5aae6b | `lancer.py verifier` ; méthode : contrôle allégé | faite | `verifier` ACCEPTÉ ×2 ; son essai « test disparu » REFUSÉ, comme attendu |
+| P3 | c11308d | `TestStructure` calculé une fois par classe (fichier 121 s → 44 s) | faite | `verifier` ACCEPTÉ ; tests du commit verts ; diff relu |
+| P4 | 36cd6a3 | Cache de l'outil Limites (`memo.py`), garde, `MEMO=0` ; 6 tests ajoutés | faite | `verifier` ACCEPTÉ ×2 (avec et sans `MEMO=0`) ; tests du commit verts dans les deux cas |
+| P5 | 14e0688 | Cache de l'oracle `racines` (`memo_racines.py`) ; 563 clés identiques avec et sans cache ; 11 tests ajoutés | faite | `verifier` ACCEPTÉ ; tests du commit verts (avec `MEMO=0` : limite de 5 min dépassée, voir d) |
+| P6 | ebe2c22 | `rapide` relance les pages des outils dont un moteur change (manifeste), filière M | faite | `verifier` ACCEPTÉ ; diff relu, `complet` intact |
+| P7 | ea0dd6d | Étude du chargement de Pyodide (`etude-pyodide.md`, aucun code) | faite | `git diff --stat` : 3 fichiers de docs ; `verifier` ACCEPTÉ |
 
 `rapide` (code 0) a aussi été lancé après chaque partie de P2 à P7. Détail : `journal.md`, « Contrôles du chef d'orchestre ».
 
@@ -74,7 +99,7 @@ de session, mais 570 à 588 s pour les suites de P5 à P7 (bruit d'environ ± 40
 P4 pèse 12 à 20 s. Pages : aucun échec au hasard depuis P1 (attendu) ; leur mur ne change pas (aucune partie ne le visait, P7 l'a
 étudié). Par partie, le contrôle allégé ne demande plus qu'une suite complète (environ 25 à 27 min) au lieu de deux.
 
-**g. Fin de session** (suites relancées par le chef d'orchestre sur 8d08a67). Suite normale et suite `MEMO=0` vertes (code 0) :
+**g. Fin de session** (suites relancées par le chef d'orchestre sur 8d08a67, avant la réconciliation). Suite normale et suite `MEMO=0` vertes (code 0) :
 Python 1328 passés + 1 xfail, 103 161 sous-tests ; pages 122 passés, 2 554 sous-tests. Les deux sont identiques entre elles, nom par
 nom (issues et sous-tests). Seuls écarts avec la référence P0 : les 17 tests ajoutés (6 de P4, 11 de P5, listés dans `journal.md`,
 « P4 » et « P5 ») ; aucun test de la référence ne manque. `verifier` : ACCEPTÉ sur les deux rapports.
@@ -85,9 +110,11 @@ nom (issues et sous-tests). Seuls écarts avec la référence P0 : les 17 tests 
 **i. Commandes pour vous** (une à la fois) :
 
 ```
-git push origin main
 git push -u origin tests-rapides
+git push -u origin mac-correctif-explog
 ```
+
+(`main` n'a plus rien à pousser ; la 2ᵉ commande, facultative, met la sauvegarde du correctif du Mac à l'abri.)
 
 Plus tard, après relecture, la fusion :
 
@@ -97,15 +124,13 @@ git merge --no-ff --no-edit tests-rapides
 git push
 ```
 
-Et la branche déjà fusionnée dans `main` :
-
-```
-git branch -d correctif-explog-delta
-```
+La branche locale `correctif-explog-delta` (123ba43) n'est plus fusionnée dans `main` : elle est gardée dans
+`mac-correctif-explog`. Ne pas la supprimer avant d'avoir tranché les 8 questions.
 
 ## Cadre
 
-Branche `tests-rapides`, créée depuis `main` à jour (7268412). Rien n'est poussé ni fusionné.
+Branche `tests-rapides`, créée depuis `main` à jour (7268412), replantée le 05.11.2026 sur `origin/main` (c06d96f, voir 0).
+Rien n'est poussé ni fusionné.
 Ordre de priorité : `CLAUDE.md` > [`decisions.md`](decisions.md) (validé le 04.11.2026) > [`audit.md`](audit.md). Méthode : `docs/methode-chantiers.md`.
 Un commit « Tests rapides P{N} : … » par partie, suite complète verte avant chaque commit. Tout le détail (plans, tableaux, temps,
 rapports) : [`journal.md`](journal.md).
@@ -125,7 +150,7 @@ rapports) : [`journal.md`](journal.md).
 
 ## Référence (P0)
 
-- Listes du 1ᵉʳ lancement (commit 7268412, code inchangé) : [`reference/`](reference/) — `collecte-{python,pages}.txt`,
+- Listes du 1ᵉʳ lancement (commit 7268412, code inchangé ; depuis la réconciliation, écarts attendus : voir 0 du résumé) : [`reference/`](reference/) — `collecte-{python,pages}.txt`,
   `resultats-{python,pages}.txt` (identifiant, issue, nombre de sous-tests).
 - Python : **1312 collectés, 1311 passés, 1 xfail** (`test_P10_pente_au_point_exclu`), 0 sauté, **103 033 sous-tests**.
 - Pages : **122 collectés, 122 passés**, 0 xfail, 0 sauté, **2 554 sous-tests**.
@@ -221,9 +246,10 @@ Procédure allégée du chef d'orchestre (décision T1 ; écrite aussi dans `doc
 ## Reprise après compactage
 
 Chantier terminé : P0 à P7 (P2 en deux commits) commitées sur `tests-rapides`, fin de session faite (suites normale et `MEMO=0`
-vertes, identiques), résumé en tête de ce fichier (commit « Tests rapides : résumé de session »). **Rien n'est poussé** : `main` a 3
-commits locaux (351fb77, 123ba43, 7268412), push refusé par les permissions ; `tests-rapides` n'est ni poussée ni fusionnée.
+vertes, identiques), résumé en tête de ce fichier (commit « Tests rapides : résumé de session »). Réconciliation du 05.11.2026 faite
+(résumé, 0) : `main` = `origin/main` (c06d96f), `tests-rapides` replantée dessus (a56794c, suite verte), correctif du Mac sauvé
+dans `mac-correctif-explog` (7268412, à ne jamais supprimer). **Rien n'est poussé** ; `tests-rapides` n'est ni poussée ni fusionnée.
 Reste à l'enseignant : relire le résumé (questions e, section « À reporter … dans CLAUDE.md »), lancer les commandes de i, trancher
-les 8 questions de `docs/chantiers/correctif-explog-delta.md`. Contrôle d'un commit : `python3 tests/lancer.py verifier <dossier de
+les 8 questions de `docs/chantiers/correctif-explog-delta.md` (branche `mac-correctif-explog`). Contrôle d'un commit : `python3 tests/lancer.py verifier <dossier de
 complet --rapport>`. Pour reprendre : lire ce fichier, `decisions.md`, puis `git log --oneline main..HEAD` ; le détail est dans
 `journal.md`.
