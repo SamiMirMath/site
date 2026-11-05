@@ -833,3 +833,13 @@ les temps sont environ 1,4 fois plus longs qu'à 1).
 | exponentielles-logarithmes | M | 914 | 0,764 | 0,003 | 1,055 / 1,056 |
 
 Mur : dump 4,2 s (6 processus), 12,8 s (1 processus) ; suite de référence 6 min 25 (Python 91,0 s, pages 294,5 s).
+
+## Après la fusion (05.11.2026, sur main)
+
+- Question 1 tranchée par l'enseignant : `nombres.approx` retire les décimales nulles d'une mantisse entière, comme R13 et
+  `exp_log.tex_approx` (`1 \times 10^{-3}`, `2 \times 10^{7}`, `1 \times 10^{10}`, `1 \times 10^{n+1}` pour une mantisse arrondie à 10 ;
+  `4{,}500 \times 10^{6}` inchangé). Dans `tests/python/test_nombres.py`, l'écart `ECART_ZEROS_DE_LA_MANTISSE` est retiré ; ses
+  9 entrées de l'échantillon et les valeurs du test de `tex_approx` sont maintenant égales à `tex_approx` ; restent les écarts « arrondi
+  à 10⁶ », « mi-chemin » et « zéro négatif ». Le tableau de la section B5 ci-dessus garde les valeurs d'avant (`1{,}000 \times …`).
+- Questions 2 (exact garde l'écriture groupée) et 3 (migration d'Exp-log vers le bloc « chaine » : plus tard, quand Exp-log reprendra
+  la brique du 2e degré) : réponses de l'enseignant, reportées dans suivi.md.

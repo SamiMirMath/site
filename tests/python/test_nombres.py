@@ -79,14 +79,12 @@ class TestSaisie(unittest.TestCase):
 # B5 : approx et exact
 # ---------------------------------------------------------------------------------------------------------------------
 # Écarts voulus avec exp_log.tex_approx (E14 et « rien de faux ») ; aucun ne touche une valeur du corpus d'Exp-log (journal, B5)
-ECART_ZEROS_DE_LA_MANTISSE = ("mantisse entière : ses zéros sont gardés, 4 chiffres significatifs (E14 : « 1,000 × 10ⁿ⁺¹ ») ; "
-                              "tex_approx écrit « 1 × 10ⁿ » (exemple « 1 × 10¹⁰ » de R13)")
 ECART_ARRONDI_A_10_6 = ("valeur arrondie à 10⁶ : notation scientifique (R13, E14 : dès 10⁶) ; tex_approx décide avant l'arrondi et "
                         "écrit 1’000’000,000")
 ECART_MI_CHEMIN = ("valeur exactement à mi-chemin : arrondie au-dessus (calcul exact, arrondi usuel, comme Étude complète) ; "
                    "tex_approx arrondit la valeur binaire du float (au pair, ou en dessous après la division par 10ⁿ)")
 ECART_ZERO_NEGATIF = "−0,0 s'écrit 0{,}000 ; tex_approx écrit -0{,}000"
-ECARTS = (ECART_ZEROS_DE_LA_MANTISSE, ECART_ARRONDI_A_10_6, ECART_MI_CHEMIN, ECART_ZERO_NEGATIF)
+ECARTS = (ECART_ARRONDI_A_10_6, ECART_MI_CHEMIN, ECART_ZERO_NEGATIF)
 
 RACINE_1000 = math.sqrt(1_000_004)                      # x² + 1000x − 1 = 0 : x = (−1000 ± √1000004)/2 (cas limite, § 6 du 2e degré)
 
@@ -113,10 +111,10 @@ ECHANTILLON = [
     ("0,000999", 0.000999, r"9{,}990 \times 10^{-4}", None),
     ("0,0009999", 0.0009999, r"9{,}999 \times 10^{-4}", None),
     ("0,0009995 (4 chiffres significatifs : reste sous 10⁻³)", 0.0009995, r"9{,}995 \times 10^{-4}", None),
-    ("0,00099995 (mantisse 10,000)", 0.00099995, r"1{,}000 \times 10^{-3}", (ECART_ZEROS_DE_LA_MANTISSE, r"1 \times 10^{-3}")),
-    ("0,00099999 (mantisse 10,000)", 0.00099999, r"1{,}000 \times 10^{-3}", (ECART_ZEROS_DE_LA_MANTISSE, r"1 \times 10^{-3}")),
-    ("x² + 1000x − 1 = 0, racine positive (mantisse 10,000)", 2 / (1000 + RACINE_1000), r"1{,}000 \times 10^{-3}",
-     (ECART_ZEROS_DE_LA_MANTISSE, r"1 \times 10^{-3}")),
+    ("0,00099995 (mantisse arrondie à 10)", 0.00099995, r"1 \times 10^{-3}", None),
+    ("0,00099999 (mantisse arrondie à 10)", 0.00099999, r"1 \times 10^{-3}", None),
+    ("x² + 1000x − 1 = 0, racine positive (mantisse arrondie à 10)", 2 / (1000 + RACINE_1000), r"1 \times 10^{-3}",
+     None),
     ("x² + 1000x − 1 = 0, racine négative", (-1000 - RACINE_1000) / 2, r"-1\text{’}000{,}001", None),
     ("1234,5678", 1234.5678, r"1\text{’}234{,}568", None),
     ("4913", 4913.0, r"4\text{’}913{,}000", None),
@@ -124,18 +122,18 @@ ECHANTILLON = [
     ("999 999,4", 999999.4, r"999\text{’}999{,}400", None),
     ("999 999,6", 999999.6, r"999\text{’}999{,}600", None),
     ("999 999,9994", 999999.9994, r"999\text{’}999{,}999", None),
-    ("999 999,9996 (arrondi à 10⁶)", 999999.9996, r"1{,}000 \times 10^{6}", (ECART_ARRONDI_A_10_6, r"1\text{’}000\text{’}000{,}000")),
-    ("−999 999,9996 (arrondi à −10⁶)", -999999.9996, r"-1{,}000 \times 10^{6}", (ECART_ARRONDI_A_10_6, r"-1\text{’}000\text{’}000{,}000")),
-    ("10⁶", 1e6, r"1{,}000 \times 10^{6}", (ECART_ZEROS_DE_LA_MANTISSE, r"1 \times 10^{6}")),
-    ("−10⁶", -1e6, r"-1{,}000 \times 10^{6}", (ECART_ZEROS_DE_LA_MANTISSE, r"-1 \times 10^{6}")),
+    ("999 999,9996 (arrondi à 10⁶)", 999999.9996, r"1 \times 10^{6}", (ECART_ARRONDI_A_10_6, r"1\text{’}000\text{’}000{,}000")),
+    ("−999 999,9996 (arrondi à −10⁶)", -999999.9996, r"-1 \times 10^{6}", (ECART_ARRONDI_A_10_6, r"-1\text{’}000\text{’}000{,}000")),
+    ("10⁶", 1e6, r"1 \times 10^{6}", None),
+    ("−10⁶", -1e6, r"-1 \times 10^{6}", None),
     ("4,5 × 10⁶", 4.5e6, r"4{,}500 \times 10^{6}", None),
     ("9,99949 × 10⁶", 9.99949e6, r"9{,}999 \times 10^{6}", None),
-    ("9,9995 × 10⁶ (mantisse 10,000)", 9.9995e6, r"1{,}000 \times 10^{7}", (ECART_MI_CHEMIN, r"9{,}999 \times 10^{6}")),
-    ("2 × 10⁷", 2e7, r"2{,}000 \times 10^{7}", (ECART_ZEROS_DE_LA_MANTISSE, r"2 \times 10^{7}")),
+    ("9,9995 × 10⁶ (mantisse arrondie à 10)", 9.9995e6, r"1 \times 10^{7}", (ECART_MI_CHEMIN, r"9{,}999 \times 10^{6}")),
+    ("2 × 10⁷", 2e7, r"2 \times 10^{7}", None),
     ("−2,5 × 10⁷", -2.5e7, r"-2{,}500 \times 10^{7}", None),
-    ("10¹⁰", 1e10, r"1{,}000 \times 10^{10}", (ECART_ZEROS_DE_LA_MANTISSE, r"1 \times 10^{10}")),
-    ("10⁻⁴", 1e-4, r"1{,}000 \times 10^{-4}", (ECART_ZEROS_DE_LA_MANTISSE, r"1 \times 10^{-4}")),
-    ("10⁻⁵", 1e-5, r"1{,}000 \times 10^{-5}", (ECART_ZEROS_DE_LA_MANTISSE, r"1 \times 10^{-5}")),
+    ("10¹⁰", 1e10, r"1 \times 10^{10}", None),
+    ("10⁻⁴", 1e-4, r"1 \times 10^{-4}", None),
+    ("10⁻⁵", 1e-5, r"1 \times 10^{-5}", None),
     ("3,1623 × 10⁻⁵", 3.1623e-5, r"3{,}162 \times 10^{-5}", None),
     ("−3,162 × 10⁻⁵", -3.162e-5, r"-3{,}162 \times 10^{-5}", None),
     ("0,0625 (mi-chemin)", 0.0625, "0{,}063", (ECART_MI_CHEMIN, "0{,}062")),
@@ -166,28 +164,27 @@ class TestApprox(unittest.TestCase):
         self.assertEqual({e[0] for *_, e in ECHANTILLON if e}, set(ECARTS))
 
     def test_valeurs_du_test_de_tex_approx(self):
-        """Les valeurs de test_exp_log.test_approximation_en_notation_scientifique : égales, sauf les zéros de la mantisse."""
-        for v, attendu in [(6.644, "6{,}644"), (-0.693, "-0{,}693"), (0.0, "0{,}000"), (1e10, r"1{,}000 \times 10^{10}"),
-                           (1e-4, r"1{,}000 \times 10^{-4}"), (3.1623e-5, r"3{,}162 \times 10^{-5}"), (-2.5e7, r"-2{,}500 \times 10^{7}"),
-                           (0.00099999, r"1{,}000 \times 10^{-3}"), (123456.789, r"123\text{’}456{,}789"), (4.5e6, r"4{,}500 \times 10^{6}")]:
+        """Les valeurs de test_exp_log.test_approximation_en_notation_scientifique : égales à tex_approx, toutes."""
+        for v, attendu in [(6.644, "6{,}644"), (-0.693, "-0{,}693"), (0.0, "0{,}000"), (1e10, r"1 \times 10^{10}"),
+                           (1e-4, r"1 \times 10^{-4}"), (3.1623e-5, r"3{,}162 \times 10^{-5}"), (-2.5e7, r"-2{,}500 \times 10^{7}"),
+                           (0.00099999, r"1 \times 10^{-3}"), (123456.789, r"123\text{’}456{,}789"), (4.5e6, r"4{,}500 \times 10^{6}")]:
             with self.subTest(v):
                 self.assertEqual(nb.approx(v), attendu)
-                if nb.approx(v) != el.tex_approx(v):
-                    self.assertEqual(el.tex_approx(v), attendu.replace("{,}000", ""))      # seul écart : ECART_ZEROS_DE_LA_MANTISSE
+                self.assertEqual(el.tex_approx(v), attendu)
 
     def test_valeur_prise_exactement(self):
         """int, Fraction, Decimal sans passer par un float ; SymPy et mpmath par float() ; mêmes écritures."""
         for v, attendu in [(F(1, 3), "0{,}333"), (F(-2, 3), "-0{,}667"), (4913, r"4\text{’}913{,}000"), (D("0.0625"), "0{,}063"),
-                           (D("-0.0009995"), r"-9{,}995 \times 10^{-4}"), (D("0.00099995"), r"1{,}000 \times 10^{-3}"),
-                           (F(19999, 20_000_000), r"1{,}000 \times 10^{-3}"), (10 ** 400, r"1{,}000 \times 10^{400}"),
+                           (D("-0.0009995"), r"-9{,}995 \times 10^{-4}"), (D("0.00099995"), r"1 \times 10^{-3}"),
+                           (F(19999, 20_000_000), r"1 \times 10^{-3}"), (10 ** 400, r"1 \times 10^{400}"),
                            (F(-1, 3 * 10 ** 400), r"-3{,}333 \times 10^{-401}"), (mpmath.sqrt(2), "1{,}414"),
                            (mpmath.mpf("-3.1622776e-5"), r"-3{,}162 \times 10^{-5}"), (moteurs.ensemble_def._sympy().sqrt(5), "2{,}236")]:
             with self.subTest(repr(v)[:40]):
                 self.assertEqual(nb.approx(v), attendu)
 
     def test_decimales(self):
-        for v, d, attendu in [(math.pi, 1, "3{,}1"), (math.pi, 2, "3{,}14"), (math.pi, 5, "3{,}14159"), (0.005, 2, r"5{,}00 \times 10^{-3}"),
-                              (0.01, 2, "0{,}01"), (0.0, 2, "0{,}00"), (1234.5, 1, r"1\text{’}234{,}5"), (9.96e6, 1, r"1{,}0 \times 10^{7}")]:
+        for v, d, attendu in [(math.pi, 1, "3{,}1"), (math.pi, 2, "3{,}14"), (math.pi, 5, "3{,}14159"), (0.005, 2, r"5 \times 10^{-3}"),
+                              (0.01, 2, "0{,}01"), (0.0, 2, "0{,}00"), (1234.5, 1, r"1\text{’}234{,}5"), (9.96e6, 1, r"1 \times 10^{7}")]:
             with self.subTest((v, d)):
                 self.assertEqual(nb.approx(v, decimales=d), attendu)
 

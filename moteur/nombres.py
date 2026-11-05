@@ -108,9 +108,10 @@ def approx(x, decimales=3):
 
     - Entre 10^(−decimales) et 10⁶ : `decimales` décimales (3 par défaut), virgule décimale, apostrophe dès 4 chiffres sur la partie
       entière : 1{,}414 ; -0{,}500 ; 1\\text{’}234{,}568 ; 999\\text{’}999{,}600.
-    - Sous 10^(−decimales) et dès 10⁶ (la valeur arrondie compte : 999 999,9996 s'écrit 1{,}000 \\times 10^{6}) : notation scientifique,
-      mantisse à `decimales` décimales (4 chiffres significatifs par défaut), zéros gardés : 3{,}162 \\times 10^{-5} ;
-      1{,}000 \\times 10^{10} ; une mantisse arrondie à 10,000 devient 1,000 × 10ⁿ⁺¹ (E14) : 0,00099999 s'écrit 1{,}000 \\times 10^{-3}.
+    - Sous 10^(−decimales) et dès 10⁶ (la valeur arrondie compte : 999 999,9996 s'écrit 1 \\times 10^{6}) : notation scientifique,
+      mantisse à `decimales` décimales (4 chiffres significatifs par défaut) : 3{,}162 \\times 10^{-5} ; 4{,}500 \\times 10^{6} ; une
+      mantisse entière perd ses décimales nulles, comme R13 et `exp_log.tex_approx` : 1 \\times 10^{10} ; 2 \\times 10^{7} ; une mantisse
+      arrondie à 10 devient 1 × 10ⁿ⁺¹ : 0,00099999 s'écrit 1 \\times 10^{-3}.
     - Arrondi calculé exactement (fractions) ; une valeur exactement à mi-chemin est arrondie au-dessus en valeur absolue (arrondi
       usuel : 0,0625 ≈ 0,063 ; 9 999 500 ≈ 1,000 × 10⁷), et comme `parties.arrondi` d'Étude complète (ROUND_HALF_UP).
     - 0 s'écrit 0{,}000 (et −0,0 aussi). Signe moins « - » de TeX, comme le reste du site.
@@ -134,10 +135,14 @@ def approx(x, decimales=3):
     if a < Fraction(10) ** e:
         e -= 1
     k = _arrondi(a / Fraction(10) ** e, decimales)
-    if k >= 10 ** (decimales + 1):                                # mantisse arrondie à 10,000 : 1,000 × 10ⁿ⁺¹ (E14)
+    if k >= 10 ** (decimales + 1):                                # mantisse arrondie à 10 : 1 × 10ⁿ⁺¹
         e += 1
         k = _arrondi(a / Fraction(10) ** e, decimales)
-    return _ecrire(k, decimales, signe) + r" \times 10^{" + str(e) + "}"
+    if k % 10 ** decimales == 0:                                  # mantisse entière : sans décimales nulles (R13 : 1 × 10¹⁰)
+        mantisse = signe + str(k // 10 ** decimales)
+    else:
+        mantisse = _ecrire(k, decimales, signe)
+    return mantisse + r" \times 10^{" + str(e) + "}"
 
 
 def _decimales_finies(denominateur):

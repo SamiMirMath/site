@@ -28,13 +28,13 @@ pages 145 passés, 2 421 sous-tests (310 s) ; 6 min 58 de mur ; `verifier` ACCEP
 seulement des ajouts (102 tests Python, 7 de pages), des hausses de sous-tests et la baisse justifiée ci-dessous. Même suite avec
 `MEMO=0` : code 0, `verifier` ACCEPTÉ, listes identiques nom par nom (7 min 26). Dump de B6 identique au départ à l'octet.
 
-Questions pour l'enseignant (option retenue en attendant) :
-1. **B5, zéros de la mantisse** : E14 écrit « 1,000 × 10ⁿ⁺¹ », R13 et `exp_log.tex_approx` « 1 × 10ⁿ⁺¹ ». Retenu : `approx` suit E14
-   (zéros gardés) ; aucune sortie actuelle concernée ; à trancher avant de rebrancher Exp-log (R9).
-2. **B5, D25 au-delà de 10⁶** : la notation scientifique est lue pour les valeurs approchées seulement. Retenu : une valeur exacte
-   entière garde son écriture groupée (`exact(1234567)` = 1’234’567, comme `formater_entier`). À confirmer.
-3. **B3–B4, migration d'Exp-log vers le bloc « chaine »** : Exp-log écrit encore sa grille en HTML dans un bloc `texte`. Retenu :
-   Exp-log inchangé ; chantier à décider (instantanés et références de pages d'EL à relire), noté dans `architecture.md` § 5.
+Questions pour l'enseignant, tranchées le 05.11.2026 :
+1. **B5, zéros de la mantisse** : **tranché**, comme R13 et `exp_log.tex_approx` : une mantisse entière perd ses décimales nulles
+   (`1 \times 10^{-3}`, `2 \times 10^{7}`, `1 \times 10^{10}` ; une mantisse arrondie à 10 donne `1 \times 10^{n+1}`) ; `4{,}500 \times 10^{6}`
+   garde les siennes, comme `tex_approx`. Fait sur `main` après la fusion : l'écart « zéros de la mantisse » disparaît du test croisé,
+   les trois autres écarts nommés restent.
+2. **B5, D25 au-delà de 10⁶** : exact garde l'écriture groupée : confirmé (`exact(1234567)` = 1’234’567).
+3. **B3–B4, migration d'Exp-log vers le bloc « chaine »** : plus tard, quand Exp-log reprendra la brique du 2e degré.
 
 Exceptions (`architecture.md`) : aucune exception d'import nouvelle. § 5, lignes changées : `exp_log._DECIMAUX` (B1 : la brique ne le
 lit pas), « 3 parseurs, 2 arbres, 2 classes `Chaine` » (B1–B2 : les briques communes nommées), « 5 formats de ≈ » (B5 : la fonction
@@ -77,12 +77,7 @@ outil), `test_manifeste` vert, `test_largeurs` avec `CONNUS` vide.
 
 ## Questions pour l'enseignant
 
-- B5, mantisse entière : E14 écrit « 1,000 × 10ⁿ⁺¹ » (4 chiffres significatifs, suivi par `nombres.approx` : `1{,}000 \times 10^{10}`),
-  R13 et `exp_log.tex_approx` « 1 × 10¹⁰ ». Aucune sortie actuelle n'est concernée (aucune notation scientifique dans le dump d'EL) ;
-  à trancher avant de rebrancher Exp-log (R9) : garder les zéros partout, ou les retirer dans `approx`.
-- B5, D25 au-delà de 10⁶ : « au-delà, notation scientifique » est lu pour les valeurs **approchées** (R13) ; une valeur exacte entière
-  garde son écriture groupée (`exact(1234567)` = 1’234’567, comme `formater_entier` et l'arbre d'EL). À confirmer.
-- B3–B4, migration d'Exp-log vers le bloc « chaine » : chantier à décider (Exp-log inchangé en attendant).
+Aucune question ouverte : les trois questions du résumé sont tranchées (05.11.2026).
 
 ## À relire par l'enseignant
 
@@ -111,11 +106,11 @@ outil), `test_manifeste` vert, `test_largeurs` avec `CONNUS` vide.
 
 - B5 : aucun instantané, aucune référence de page, aucune sortie modifiés (dump identique ; aucun outil n'appelle `approx` ni
   `exact`). À relire (tableau complet de l'échantillon : `journal.md`, section B5) :
-  - les quatre écarts voulus avec `tex_approx` : **zéros de la mantisse** (`1{,}000 \times 10^{-3}` au lieu de `1 \times 10^{-3}` :
-    10⁶, 10¹⁰, 10⁻⁴, 10⁻⁵, 2 × 10⁷, 0,00099999 et la racine positive de x² + 1000x − 1 = 0) ; **arrondi à 10⁶** (999 999,9996 :
-    `1{,}000 \times 10^{6}` au lieu de `1\text{’}000\text{’}000{,}000`) ; **mi-chemin** (arrondi au-dessus : 0,0625 ≈ 0,063 au lieu
-    de 0,062 ; 9 999 500 ≈ `1{,}000 \times 10^{7}` au lieu de `9{,}999 \times 10^{6}`) ; **zéro négatif** (`0{,}000`, jamais `-0{,}000`) ;
-  - 0,0009995 reste `9{,}995 \times 10^{-4}` (4 chiffres significatifs) : la mantisse n'atteint 10,000 que dès 0,00099995 ;
+  - les trois écarts voulus avec `tex_approx` (l'écart « zéros de la mantisse » a disparu après la fusion, question 1) : **arrondi
+    à 10⁶** (999 999,9996 : `1 \times 10^{6}` au lieu de `1\text{’}000\text{’}000{,}000`) ; **mi-chemin** (arrondi au-dessus :
+    0,0625 ≈ 0,063 au lieu de 0,062 ; 9 999 500 ≈ `1 \times 10^{7}` au lieu de `9{,}999 \times 10^{6}`) ; **zéro négatif** (`0{,}000`,
+    jamais `-0{,}000`) ;
+  - 0,0009995 reste `9{,}995 \times 10^{-4}` (4 chiffres significatifs) : la mantisse n'est arrondie à 10 que dès 0,00099995 ;
   - D25 appliqué partout changerait (sans rien changer ici) : Factorisation (Δ et P(k), 7 entrées), Limites et Étude complète (tableau
     de valeurs, 4 et 1), Exp-log (« 1000 ans » de l'interprétation, 2 entrées, et la saisie recopiée `log_(2x)(1296)` en M), contrôle
     numérique de l'ED (« 5173 points testés », 36 entrées, sans instantané) ; liste des instantanés et références : `journal.md`, B5.
