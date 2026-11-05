@@ -7,25 +7,14 @@ import sys
 import tempfile
 import unittest
 
+import outils_du_site
 from moteurs import RACINE
 
-BASE = ["ensemble-definition/ensemble_def.py", "moteur/noyau.py", "moteur/sortie.py"]
-DV = "derivee-variations/derivee_variations.py"
-LA = "limites-asymptotes/limites_asymptotes.py"
-RB = "limites-asymptotes/redaction_bh.py"
-OUTILS = {
-    "ensemble-definition": (["ensemble-definition/ensemble_def.py", "moteur/sortie.py", "ensemble-definition/resoudre_ed.py"],
-                            "resoudre_ed", "ln(x-1)"),
-    "derivee-variations": (BASE + [DV, "derivee-variations/resoudre_dv.py"], "resoudre_dv", "x^2"),
-    "limites-asymptotes": (BASE + [LA, RB, "limites-asymptotes/resoudre_la.py"], "resoudre_la", "1/x"),
-    "etude-complete": (BASE + ["moteur/nombres.py", DV, LA, RB, "derivee-variations/resoudre_dv.py", "limites-asymptotes/resoudre_la.py",
-                               "ensemble-definition/resoudre_ed.py", "etude-complete/etude_complete.py", "etude-complete/parties.py",
-                               "etude-complete/resoudre_ec.py"], "resoudre_ec", "1/x"),
-    "factorisation": (BASE + ["factorisation/factorisation.py", "factorisation/resoudre_fa.py"], "resoudre_fa", "x^2-1"),
-    "exponentielles-logarithmes": (BASE + ["moteur/nombres.py", "ensemble-definition/resoudre_ed.py", "exponentielles-logarithmes/exp_log.py",
-                                           "exponentielles-logarithmes/exp_log_m.py", "exponentielles-logarithmes/resoudre_el.py"],
-                                   "resoudre_el", "3^(x+1)=27"),
-}
+# fichiers et module de chaque outil : ceux du manifeste (outils_du_site, F3 ; plus de copie de ses listes de fichiers) ; ici, seulement
+# l'exemple résolu par outil (clés vérifiées par test_outils_du_site.py : chaque outil du manifeste)
+EXEMPLE = {"ensemble-definition": "ln(x-1)", "derivee-variations": "x^2", "limites-asymptotes": "1/x", "etude-complete": "1/x",
+           "factorisation": "x^2-1", "exponentielles-logarithmes": "3^(x+1)=27"}
+OUTILS = {outil: (o["fichiers"], o["module"], EXEMPLE.get(outil)) for outil, o in outils_du_site.manifeste().items()}
 FILIERE_M = {"exponentielles-logarithmes": "log_x(256)=4"}      # outils qui ont une filière M : même import à plat, `resoudre(exemple, "M")`
 
 

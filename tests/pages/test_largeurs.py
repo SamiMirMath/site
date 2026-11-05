@@ -18,9 +18,10 @@ import unittest
 sys.path.insert(0, os.path.dirname(__file__))
 from navigateur import Navigateur
 from rendu import OUTIL_M, OUTILS, attendre_pret, page_de
+import outils_du_site  # noqa: E402  (tests/python est sur le chemin : rendu.py l'y met)
 
 LARGEURS = (320, 360, 375, 390, 430, 768, 1100)
-TOUS = OUTILS + ["simplexe"]
+TOUS = outils_du_site.outils()          # tous les outils du registre (F3) ; méthodes test_balayage_* : test_donnees_des_pages.py
 CHOISIS = [o for o in os.environ.get("OUTILS", "").split(",") if o] or TOUS
 
 # Échecs connus au 30.10.2026 (rapport initial : docs/chantiers/mise-en-page-fluide/suivi.md) : {outil: {critère: [largeurs]}}.

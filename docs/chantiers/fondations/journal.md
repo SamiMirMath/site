@@ -215,10 +215,119 @@ Choix :
   seuls ajouts, les 20 tests de F1 (`TestVerifier`) et les 17 de F2 (14 `TestRapide`, 3 `TestVerifier`), tous passés ; sous-tests
   105 807 → 105 837 (+6 de F1, +24 de F2) ; pages identiques nom par nom.
 
+## F3 — R1 : une seule liste des outils
+
+### Plan
+
+1. `tests/python/outils_du_site.py` (json, os, urllib.parse : aucune dépendance) : lit `commun/registre.json` et `moteur/manifeste.json`,
+   expose `outils()` (registre), `outils_pyodide()` (manifeste), `pages()`, `dossiers_moteurs()`, `filieres()`, `variantes()`
+   (`exponentielles-logarithmes-M`, tiré de `?filiere=M` du registre), `nom_de_test()`. Placé dans `tests/python` (et non `tests/`) :
+   les tests Python et de pages l'importent sans toucher à `sys.path`, et le graphe de `rapide` le voit comme un module (ses
+   dépendants sont relancés quand il change). `lancer.py` le charge par son chemin (`importlib`, `sys.path` inchangé).
+2. Listes dérivées (ci-dessous), en gardant tous les noms de tests et de classes.
+3. Données propres à un outil : clés vérifiées par deux nouveaux fichiers, `tests/python/test_outils_du_site.py` et
+   `tests/pages/test_donnees_des_pages.py` (sans navigateur ; deux noms distincts pour ne pas créer un second doublon comme
+   `test_accueil.py`).
+4. Exp-log : décision au cas par cas (ci-dessous). 5. Butée « 16 liens / 7 outils » gardée (docstring complétée). 6. architecture.md § 4.
+
+### Listes dérivées
+
+| Où | Avant | Après |
+|---|---|---|
+| `tests/python/moteurs.py` | 7 dossiers écrits | `outils_du_site.dossiers_moteurs()` : même ordre, `sys.path` identique (comparé avant / après, et figé par `test_ordre_de_sys_path`) |
+| `tests/lancer.py` | `DOSSIERS_MOTEURS`, `OUTILS_PAGES`, `OUTIL_M`, `MANIFESTE` | dérivés (`VARIANTES` remplace `OUTIL_M`) ; liste illisible → `rapide` relance tout |
+| `test_vocabulaire.py` | `TestVouvoiement.DOSSIERS_MOTEURS`, `TestVocabulairePages.PAGES` | dossiers du manifeste ; registre + accueil (**+ simplexe** : 1 sous-test de plus) |
+| `test_style_commun.py` | `OUTILS` (6) | `outils_pyodide()` (le simplexe, page autonome, n'a pas `composants.css`) |
+| `test_source_unique.py` | `MIGREES` (5) | `outils_pyodide()` : **exp-log ajouté** (13 sous-tests de plus) |
+| `test_tableaux_css.py` | `OUTILS` (4 à tableaux) | `outils_pyodide()` : factorisation et exp-log contrôlées aussi (2 sous-tests de plus) |
+| `test_memo_garde.py` | `DOSSIERS_MOTEURS` (7) | dossiers du manifeste (même ensemble ; aussi lu par `test_memo_racines_garde`) |
+| `test_resoudre_import.py` | `OUTILS` : copie des fichiers et modules du manifeste | fichiers et module lus au manifeste ; reste `EXEMPLE` par outil (mêmes sous-tests, mêmes fichiers) |
+| `tests/pages/rendu.py` | `OUTILS` (6) | `outils_pyodide()` (même liste, même ordre) |
+| `tests/pages/test_largeurs.py` | `TOUS = OUTILS + ["simplexe"]` | `outils()` (même ensemble) |
+| `tests/pages/captures.py` | `CALCUL` (5, sans exp-log : `KeyError` sur sa page) | `test_comportement.CALCUL` (une seule liste) |
+
+Restent écrites à la main, clés vérifiées : `test_instantanes.OUTILS`, `test_instantanes_resoudre.OUTILS` (et une méthode par clé, un
+fichier d'instantané par clé), `test_json_strict.OUTILS_ENTREES` et `ENTREES_FILIERE_M`, `test_resoudre_import.EXEMPLE` et `FILIERE_M`,
+`test_source_unique.TestDispositionDuClavier.PAGES`, `test_vocabulaire.TestVocabulaireEleve.ANALYSES` + `METHODES` (sortis de la méthode
+en attributs de classe ; les méthodes existent), `cas.CAS_LIMITES` (⊆) ; pages : `rendu.REDUIT` (outils + variante), `test_comportement`
+`CALCUL`, `EXEMPLE`, `INVALIDE`, `rendu.ERREURS` et `test_comportement.ANALYSE` (⊆), une méthode par outil dans `TestRendu` et
+`TestLargeurs`, une référence de page par outil et variante (exception nommée : `graphique-traces.json`), la variante du registre =
+`[rendu.OUTIL_M]`.
+
+### Exp-log (point 4)
+
+- **`test_json_strict`** : déjà présent (`test_exponentielles_logarithmes_json`, filière C) ; ajouté à `OUTILS_ENTREES` (la méthode le lit
+  là, mêmes sous-tests) ; **ajoutés** : `test_exponentielles_logarithmes_json_filiere_m` (entrées de l'instantané M, `resoudre_json(…, "M")`
+  strict et sans non-fini) et `test_exercices_d_exponentielles_logarithmes` (filières C et M, chaque niveau, 20 tirages : l'exercice et son
+  corrigé en JSON strict).
+- **`MIGREES`** : **ajouté** (la page passe les trois tests : aucune phrase de corrigé, `outil.js`, SOC-10).
+- **Jeu moteur (`test_instantanes.py`)** : **exception nommée** (`test_outils_du_site.EXCEPTIONS`, vérifiée utile par
+  `test_exceptions_utiles`). Raison : les exponentielles n'ont pas de sortie de moteur unique, l'aiguillage entre `exp_log` et `exp_log_m`
+  (filières, variantes, voie des exposants) est dans l'adaptateur `resoudre_el.py` ; un instantané « moteur » obligerait à recopier cet
+  aiguillage dans le test (copie d'une fonction, CLAUDE.md) ou à figer des structures internes ; le jeu moteur (T01) a servi de référence
+  aux migrations T17 à T20, que l'outil, né avec `resoudre()`, n'a pas eues ; le jeu resoudre (`instantanes/resoudre/exponentielles-
+  logarithmes.json` et `-M.json`, 914 entrées chacun) couvre déjà tout l'outil. Donc aucun nouvel instantané.
+
+### Tests ajoutés (aucun retiré ni renommé)
+
+- `tests/python/test_outils_du_site.py` : `TestSourcesDesOutils::test_registre_et_manifeste`, `::test_ordre_de_sys_path` ;
+  `TestClesDesDonnees::test_cles`, `::test_exceptions_utiles`, `::test_une_methode_par_outil`, `::test_un_instantane_par_outil`.
+- `tests/python/test_json_strict.py` : `test_exponentielles_logarithmes_json_filiere_m`, `test_exercices_d_exponentielles_logarithmes`.
+- `tests/python/test_lancer.py` (`TestRapide`) : `test_manifeste_et_registre_relancent_les_listes_derivees`,
+  `test_liste_des_outils_illisible_relance_tout` ; `test_scripts_de_commande_relancent_test_lancer` a un sous-test de plus
+  (`outils_du_site.py`, copié dans les dépôts jetables : `SCRIPTS`) ; le dépôt modèle a un `commun/registre.json`.
+- `tests/pages/test_donnees_des_pages.py` : `TestDonneesDesPages::test_outils_et_variante_de_filiere`,
+  `::test_cles_des_donnees_propres_a_un_outil`, `::test_une_methode_par_outil`, `::test_une_reference_par_outil`.
+
+### Contre-épreuve (clés retirées ou ajoutées, en mémoire, aucun fichier touché)
+
+Script `scratchpad/F3/contre_epreuve.py` : charge les modules, retire une clé, lance les classes de clés, remet la clé.
+
+| Changement | Résultat |
+|---|---|
+| état réel (avant et après chaque essai) | passe |
+| sans `factorisation` dans `test_instantanes.OUTILS` | échoue (`test_cles`, `test_un_instantane_par_outil`) |
+| sans `exponentielles-logarithmes-M` dans `test_instantanes_resoudre.OUTILS` | échoue (`test_cles`, `test_un_instantane_par_outil`) |
+| sans `exponentielles-logarithmes` dans `test_json_strict.OUTILS_ENTREES` | échoue (`test_cles`) |
+| sans `etude-complete` dans `test_resoudre_import.EXEMPLE` | échoue (`test_cles`) |
+| sans `factorisation` dans `TestDispositionDuClavier.PAGES` | échoue (`test_cles`) |
+| sans `exponentielles-logarithmes` dans `test_vocabulaire.METHODES` | échoue (`test_cles`) |
+| exp-log ajouté à `test_instantanes.OUTILS` (exception devenue inutile) | échoue (4 tests, dont `test_exceptions_utiles`) |
+| outil « nouvel-outil » ajouté au manifeste, données non complétées | échoue (Python : 6 sous-tests de `test_cles` ; pages : 4 tests) |
+| sans `exponentielles-logarithmes-M` dans `rendu.REDUIT` ; sans `factorisation` dans `CALCUL` ; sans `limites-asymptotes` dans `EXEMPLE` ; sans exp-log dans `INVALIDE` | échoue (`test_cles_des_donnees_propres_a_un_outil`), chacun |
+| `simplexe` ajouté à `CALCUL` (outil en trop) | échoue |
+
+### `liste` : mêmes sélections
+
+- `scratchpad/F3/selections.py` (fonctions de `rapide`) sur 262 jeux : chaque fichier suivi seul, 16 fichiers fictifs (supprimés, nouvel
+  outil, variante, référence inconnue…) et 5 combinaisons, avant (HEAD, avant toute modification) et après. Différences : le manifeste,
+  le registre et leur couple (+62 tests Python : les dépendants de `outils_du_site`, voulu), `tests/python/outils_du_site.py` (n'existait
+  pas), et 45 jeux à +1 test qui est toujours `test_outils_du_site.py` (nouveau test, dépendant des modules qu'il lit) ; pages identiques
+  partout sauf `outils_du_site.py` (→ toutes : `rendu.py` l'importe).
+- Ancien `lancer.py` (HEAD) et nouveau sur le **même arbre** (`scratchpad/F3/meme_arbre.py`, 185 jeux) : 3 différences seulement,
+  `outils_du_site.py` (+ `test_lancer.py`, script copié), le manifeste et le registre (+62) ; `DOSSIERS_MOTEURS` et `OUTILS_PAGES`
+  égaux, ordre des clés compris.
+
+### Vérifications
+
+- Dump (`dumps/F3`) : `diff -r --exclude=temps` avec le départ, aucune sortie, code 0 ; `dumps/F3-p1` (`--processus 1`) aussi. Temps
+  (`--processus 1`) : identiques au tableau « Temps » (limites 5,97 s, étude 2,01 s, factorisation 1,90 s, exp-log 0,89 / 0,77 s,
+  autres < 0,3 s).
+- `git diff --exit-code main -- tests/python/instantanes tests/pages/references` : rien ; aucun nouveau fichier d'instantané.
+- `sys.path` après `import moteurs` : identique (comparé avant / après).
+- Suite d'avant commit : `PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rapport <scratchpad>/rapports/F3` : code 0. Python
+  1 381 passés + 1 xfail (1 382 collectés), 106 160 sous-tests, 86,1 s ; pages 127 passés, 2 407 sous-tests, 288,9 s. Aucun fichier
+  changé pendant le lancement (empreintes de début = fin). `comparer_listes.py tests/reference <F3>` : seuls ajouts, les 37 tests de
+  F1 et F2 et les 14 de F3 (10 Python, 4 pages), tous passés ; aucun test disparu ni renommé ; sous-tests en hausse seulement
+  (Python 105 837 → 106 160 depuis F2 : `test_soc10` 5 → 6, `test_aucune_phrase_de_corrige_en_js` 88 → 99,
+  `test_pages_migrees_sans_rendu_local` 5 → 6, `test_pages_utilisent_la_feuille_commune` 4 → 6, `TestVocabulairePages::test_pages`
+  7 → 8, plus ceux des tests nouveaux ; pages 2 386 → 2 407, ceux de `test_donnees_des_pages.py`).
+
 ## Contrôles du chef d'orchestre
 
 - F0 `0cb5a64` : verifier ACCEPTÉ (Python 1 335 / 105 807 sous-tests, pages 123 / 2 386, identiques à la référence) ; rapide --depuis HEAD~1 : 22 passés, 224 sous-tests, 2 s (seuls fumée + docs) ; dump = départ.
 - F1 `d4837d6` : verifier ACCEPTÉ (Python 1 354 + 1 xfail / 105 813 sous-tests, pages 123 / 2 386 ; +20 tests test_lancer annoncés) ; rapide --depuis HEAD~1 : 42 passés, 230 sous-tests, 4 s ; dump = départ ; instantanés/références inchangés.
+- F2 `7838091` : verifier ACCEPTÉ (Python 1 371 + 1 xfail / 105 837 sous-tests, pages 123 / 2 386 ; +17 tests annoncés) ; rapide --depuis HEAD~1 : 59 passés, 254 sous-tests, 4 s ; dump = départ ; instantanés/références inchangés. Deux fichiers non suivis apparus sous docs/chantiers/equations-2e-degre/ (pas du chantier, laissés tels quels).
 
 ## Temps
 

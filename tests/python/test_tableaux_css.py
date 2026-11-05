@@ -5,9 +5,10 @@ import os
 import re
 import unittest
 
+import outils_du_site
 from moteurs import RACINE
 
-OUTILS = ["ensemble-definition", "derivee-variations", "limites-asymptotes", "etude-complete"]
+OUTILS = outils_du_site.outils_pyodide()      # toutes les pages à feuille commune (F3 : plus seulement les quatre à tableaux)
 
 
 def lire(chemin):

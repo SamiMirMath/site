@@ -1,9 +1,10 @@
-"""Chantier fondations, F1 et F2 : `python3 tests/lancer.py verifier` et `liste` (ce que `rapide` lancerait), essayés dans un dépôt
+"""Chantier fondations, F1, F2 et F3 : `python3 tests/lancer.py verifier` et `liste` (ce que `rapide` lancerait), essayés dans un dépôt
 git temporaire.
 
 Chaque test travaille dans un dépôt jetable (tempfile) : jamais dans le vrai dépôt (chaque commande git ou Python y est lancée avec ce
 dossier pour `cwd`, sous GIT_CEILING_DIRECTORIES, et le dépôt jetable vérifie qu'il est bien sa propre racine). On y copie les scripts
-de commande (`tests/lancer.py`, `tests/verifier.py`, `tests/comparer_listes.py`), qui prennent alors ce dépôt pour racine.
+de commande (`tests/lancer.py`, `tests/verifier.py`, `tests/comparer_listes.py`) et la liste des outils que lancer.py charge
+(`tests/python/outils_du_site.py`, F3), qui prennent alors ce dépôt pour racine.
 
 Les dossiers de rapport sont écrits par le vrai `complet_avec_rapport` du lancer.py copié ; seuls les deux lancements de pytest
 (`lancer.python`, `lancer.pages`) sont remplacés par un faux qui écrit ce que pytest aurait écrit : le JSON de l'extension
@@ -13,10 +14,11 @@ est posée par la vraie commande `lancer.py reference`, puis commitée, comme au
 Aides communes : `Depot` (git, écrire, commiter, lancer une commande de lancer.py), `Depot.rapport` (faux lancement complet),
 `ModeleDepot` (dépôt de départ construit une fois par processus, copié pour chaque test).
 
-F2 (`TestRapide`) : un second dépôt modèle, `ModeleRapide`, imite la forme du vrai (moteur/manifeste.json, dossiers d'outils et leurs
-pages, tests/python avec cas.py, donnees/ et instantanes/, tests/pages avec ses références), avec des noms à espaces et non ASCII ; chaque
-test y modifie, supprime ou déplace des fichiers et compare ce que `liste` (et `liste --depuis`) annonce à ce qui est attendu. Rien n'y
-est lancé : `liste` ne lance aucun test."""
+F2 (`TestRapide`) : un second dépôt modèle, `ModeleRapide`, imite la forme du vrai (moteur/manifeste.json, commun/registre.json depuis
+F3, dossiers d'outils et leurs pages, tests/python avec cas.py, donnees/ et instantanes/, tests/pages avec ses références), avec des
+noms à espaces et non ASCII ; chaque test y modifie, supprime ou déplace des fichiers et compare ce que `liste` (et `liste --depuis`)
+annonce à ce qui est attendu. Rien n'y est lancé : `liste` ne lance aucun test. F3 : un manifeste ou un registre modifié relance les
+dépendants de outils_du_site.py ; une liste des outils illisible fait tout relancer."""
 import atexit
 import copy
 import json
@@ -28,7 +30,7 @@ import tempfile
 import unittest
 
 RACINE = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-SCRIPTS = ("tests/lancer.py", "tests/verifier.py", "tests/comparer_listes.py")
+SCRIPTS = ("tests/lancer.py", "tests/verifier.py", "tests/comparer_listes.py", "tests/python/outils_du_site.py")
 DELAI = 60                                   # secondes, pour chaque sous-processus (git ou Python)
 BRANCHE = "essai"
 SUIVI = f"docs/chantiers/{BRANCHE}/suivi.md"
@@ -453,11 +455,18 @@ MANIFESTE_ESSAI = {"outils": {
     "exponentielles-logarithmes": {"fichiers": ["exponentielles-logarithmes/moteur ê.py", "moteur/noyau.py"]},
     "limites-asymptotes": {"fichiers": ["limites-asymptotes/la.py"]},
 }}
+# F3 : les pages d'outil (OUTILS_PAGES de lancer.py) et la variante de filière M (références et instantané resoudre à part) en viennent
+REGISTRE_ESSAI = {"outils": [
+    {"id": "factorisation", "chemin": "factorisation/"},
+    {"id": "exponentielles-logarithmes", "chemin": "exponentielles-logarithmes/", "parametres": {"Ms": "?filiere=M", "Mr": "?filiere=M"}},
+    {"id": "limites-asymptotes", "chemin": "limites-asymptotes/"},
+]}
 
 # Dépôt de forme réelle, petit : chaque module dit ce qu'il importe ou lit, pour que chaque règle de `rapide` se voie seule.
 FICHIERS_RAPIDE = {
     ".gitignore": "__pycache__/\n",
     "moteur/manifeste.json": json.dumps(MANIFESTE_ESSAI, ensure_ascii=False, indent=1) + "\n",
+    "commun/registre.json": json.dumps(REGISTRE_ESSAI, ensure_ascii=False, indent=1) + "\n",
     "moteur/noyau.py": "X = 1\n",
     "commun/rendu.js": "export const X = 1;\n",
     "index.html": "<!doctype html>\n",
@@ -672,6 +681,27 @@ class TestRapide(unittest.TestCase):
                 self.depot.git("reset", "-q", "--hard")
                 self.modifier(chemin)
                 self.annonce([chemin], ["test_lancer.py"], ())
+
+    def test_manifeste_et_registre_relancent_les_listes_derivees(self):
+        """F3 : les listes d'outils des tests dérivent de outils_du_site.py, qui lit le manifeste et le registre."""
+        self.depot.ecrire("tests/python/test_listes.py", "import outils_du_site\n")
+        self.depot.commiter("listes", "tests/python/test_listes.py")
+        for chemin in ("moteur/manifeste.json", "commun/registre.json"):
+            with self.subTest(source=chemin):
+                self.depot.git("reset", "-q", "--hard")
+                self.depot.ecrire(chemin, self.depot.lire(chemin) + "\n")            # encore du JSON valide
+                self.annonce([chemin], ["test_listes.py"], TOUTES_LES_PAGES)
+
+    def test_liste_des_outils_illisible_relance_tout(self):
+        """F3 : registre (ou manifeste) illisible : on ne sait pas borner, tous les tests Python et toutes les pages."""
+        for chemin in ("commun/registre.json", "moteur/manifeste.json"):
+            with self.subTest(source=chemin):
+                self.depot.git("reset", "-q", "--hard")
+                self.depot.ecrire(chemin, "{")
+                fichiers, tests, pages = self.liste()
+                self.assertEqual((fichiers, pages), ({chemin}, TOUTES_LES_PAGES))
+                self.assertTrue(any(t.startswith("tous (tests/python : on ne sait pas borner : liste des outils illisible") for t in tests),
+                                tests)
 
     def test_sans_effet_sur_les_autres_tests(self):
         self.modifier("tests/python/test_isole.py", "commun/rendu.js")

@@ -1,14 +1,16 @@
 """T16 — Une seule source de textes : les pages migrées vers commun/outil.js ne contiennent plus aucune
 phrase de corrigé (elles viennent de resoudre(), en Python), et ni outil.js ni rendu.js non plus.
 SOC-10 : boutons à symbole avec aria-label ; #etat et #apercu en aria-live.
-À chaque migration (T17 à T20), ajouter la page à MIGREES."""
+Toutes les pages à moteur Python sont migrées (T17 à T20, puis les exponentielles, nées sur commun/outil.js) : MIGREES est la liste
+des outils du manifeste (chantier fondations, F3)."""
 import os
 import re
 import unittest
 
+import outils_du_site
 from moteurs import RACINE
 
-MIGREES = ["ensemble-definition", "derivee-variations", "limites-asymptotes", "etude-complete", "factorisation"]
+MIGREES = outils_du_site.outils_pyodide()
 PHRASES = ["conditions d'existence", "condition d'existence", "Condition non résolue", "obtenues numériquement",
            "Contrôle numérique", "Ni logarithme", "aucune condition", "Aucun extremum", "ligneAsymptote",
            "branche parabolique", "Une condition n'a pas pu être résolue"]

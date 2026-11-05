@@ -5,9 +5,11 @@ import math
 import os
 import sys
 
+import outils_du_site
+
 RACINE = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-for dossier in ("ensemble-definition", "moteur", "derivee-variations", "limites-asymptotes",
-                "etude-complete", "factorisation", "exponentielles-logarithmes"):
+# dossiers des moteurs, lus dans moteur/manifeste.json (outils_du_site, F3) : même ordre qu'avant, donc même sys.path
+for dossier in outils_du_site.dossiers_moteurs():
     chemin = os.path.join(RACINE, dossier)
     if chemin not in sys.path:
         sys.path.insert(0, chemin)

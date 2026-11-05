@@ -4,9 +4,10 @@ import os
 import re
 import unittest
 
+import outils_du_site
 from moteurs import RACINE
 
-OUTILS = ["ensemble-definition", "derivee-variations", "limites-asymptotes", "etude-complete", "factorisation", "exponentielles-logarithmes"]
+OUTILS = outils_du_site.outils_pyodide()      # les pages construites par monterOutil (le simplexe, page autonome, a sa propre feuille)
 LIEN = '<link rel="stylesheet" href="../commun/style.css">'
 LIEN_COMPOSANTS = '<link rel="stylesheet" href="../commun/composants.css">'      # composants de mise en page fluide, après la feuille commune
 

@@ -10,7 +10,7 @@ Consigne complète, plan et détails : `journal.md`. La consigne du chantier tie
 | F0 | Fiches, référence rafraîchie, `tests/outils/dump_sorties.py`, dump de départ | faite (suite verte) | voir `git log` |
 | F1 | `verifier` : docs/ ignoré, baisse de sous-tests justifiée ici ; `test_lancer.py` | faite (suite verte) | voir `git log` |
 | F2 | `lancer.py rapide` (reste de R4) : `-z`, supprimés, donnees/, instantanés, pages, références, scripts | faite (suite verte) | voir `git log` |
-| F3 | R1 : une seule liste des outils | à faire | — |
+| F3 | R1 : `tests/python/outils_du_site.py` (registre + manifeste), listes dérivées, clés vérifiées ; exp-log dans `MIGREES` et `test_json_strict` (filière M, exercices), exception nommée pour le jeu moteur | faite (suite verte) | voir `git log` |
 | F4 | R6 : `test_noyau` étendu, graphe d'imports figé, noms à plat uniques | à faire | — |
 | F5 | R3 : ménage | à faire | — |
 | F6 | Copie locale de KaTeX pour les tests de pages | à faire | — |
@@ -39,9 +39,18 @@ tests égales à la référence (sauf ajouts annoncés).
   `rapport_pytest.py`) relance `test_lancer.py` ; » ; et « dont un moteur Python chargé par la page change » par « dont un moteur
   Python chargé par la page, la référence de page ou l'instantané resoudre change ».
 
+- **F3, `CLAUDE.md` (description de `rapide`)** : ajouter après « un script de commande (…) relance `test_lancer.py` ; » (phrase de
+  F2) : « `moteur/manifeste.json` ou `commun/registre.json` relance les dépendants de `tests/python/outils_du_site.py` (la liste des
+  outils, dont dérivent les listes des tests) ; » et, dans la liste des scripts de commande, `outils_du_site.py`.
+
 ## À relire par l'enseignant
 
-(rien : aucun instantané ni texte affiché modifié)
+- Aucun instantané ni texte affiché modifié (F0 à F3) ; aucun nouvel instantané.
+- **F3, `docs/architecture.md`** (document validé) : § 4 « Ajouter un outil » réécrit (environ 4 fichiers côté site et 10 côté tests,
+  tous réclamés par un test ; ce qui dérive désormais) et garde-fou de A3 (« à créer » → les fichiers de F3).
+- **F3, exp-log hors du jeu moteur** (`test_instantanes.py`) : exception nommée dans `tests/python/test_outils_du_site.py`
+  (`EXCEPTIONS`), raison dans `journal.md` (pas de sortie de moteur unique ; le jeu resoudre C et M couvre l'outil). Répond à la
+  question 4 de la revue de structure ; à confirmer.
 
 ## Variations de sous-tests
 

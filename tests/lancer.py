@@ -33,11 +33,13 @@ modifiés, ceux qui importent même de loin un module modifié ou supprimé des 
 qui lisent par son chemin un fichier modifié ou supprimé de tests/python/donnees, tests/python/instantanes ou tests/pages/references
 (modules dont une chaîne nomme ce dossier, puis leurs dépendants ; tous les tests Python si aucun ne le nomme) ; test_instantanes*.py et
 test_json_strict.py quand une page d'outil, un cas*.py ou un instantané change ; test_lancer.py quand un script de commande change
-(lancer.py, verifier.py, comparer_listes.py, rapport_pytest.py) ; toujours les tests de fumée. Pages, corpus réduit (outils_de_pages) :
-l'outil dont la page, un moteur Python chargé par la page (moteur/manifeste.json), la référence de page
-(tests/pages/references/<outil>.json) ou l'instantané resoudre (lu par test_comportement.py) change, avec la filière M pour les
-exponentielles ; toutes les pages pour un fichier commun, un autre fichier de tests/pages ou un module du corpus des pages (cas.py,
-cas_el.py…), ou si on ne sait pas borner. Dans le doute, on élargit, jamais on ne réduit ; `rapide` ne remplace pas `complet` avant
+(lancer.py, verifier.py, comparer_listes.py, rapport_pytest.py, outils_du_site.py) ; les dépendants de tests/python/outils_du_site.py
+quand moteur/manifeste.json ou commun/registre.json change (les listes d'outils des tests et de ce script en dérivent) ; toujours les
+tests de fumée. Pages, corpus réduit (outils_de_pages) : l'outil dont la page, un moteur Python chargé par la page
+(moteur/manifeste.json), la référence de page (tests/pages/references/<outil>.json) ou l'instantané resoudre (lu par
+test_comportement.py) change, avec ses variantes de filière (registre : la filière M pour les exponentielles) ; toutes les pages pour un
+fichier commun, un autre fichier de tests/pages ou un module du corpus des pages (cas.py, cas_el.py…), ou si on ne sait pas borner (liste
+des outils illisible comprise). Dans le doute, on élargit, jamais on ne réduit ; `rapide` ne remplace pas `complet` avant
 un commit.
 
 Variable PROCESSUS_PAGES (entier ≥ 1) : nombre de processus (Chrome) de la suite de pages, pour rapide, pages et complet ; absente : 2
@@ -47,6 +49,7 @@ Le code de retour est celui de pytest (0 = tout est vert) : pas de pipe, donc ri
 `test_*.py` : ni pytest ni unittest ne le collectent."""
 import datetime
 import glob
+import importlib.util
 import json
 import os
 import re
@@ -58,16 +61,35 @@ import comparer_listes
 import verifier
 
 RACINE = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-DOSSIERS_MOTEURS = ("ensemble-definition", "moteur", "derivee-variations", "limites-asymptotes", "etude-complete", "factorisation",
-                    "exponentielles-logarithmes")
+# la liste des outils (chantier fondations, F3) : tests/python/outils_du_site.py, chargé par son chemin (sys.path inchangé), lit
+# moteur/manifeste.json et commun/registre.json ; une modification de l'un d'eux relance les dépendants de ce module
+MODULE_DES_OUTILS = "outils_du_site"
+SOURCES_DES_OUTILS = ("moteur/manifeste.json", "commun/registre.json")
+
+
+def charger_outils_du_site():
+    chemin = os.path.join(RACINE, "tests", "python", MODULE_DES_OUTILS + ".py")
+    spec = importlib.util.spec_from_file_location(MODULE_DES_OUTILS, chemin)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+# DOSSIERS_MOTEURS : dossiers des fichiers Python chargés par les pages (manifeste), dans l'ordre du manifeste ; OUTILS_PAGES : dossier
+# d'outil -> nom donné à OUTILS dans les tests de pages (registre) ; VARIANTES : page ouverte avec une filière à part (références et
+# instantané resoudre à part, par exemple exponentielles-logarithmes-M) -> outil. Liste illisible (manifeste ou registre absent ou
+# invalide) : listes vides et LISTES_ILLISIBLES ; `rapide` relance alors tout (seuls verifier, reference et complet s'en passent).
+try:
+    outils_du_site = charger_outils_du_site()
+    DOSSIERS_MOTEURS = tuple(outils_du_site.dossiers_moteurs(RACINE))
+    OUTILS_PAGES = outils_du_site.pages(RACINE)
+    VARIANTES = outils_du_site.variantes(RACINE)
+    LISTES_ILLISIBLES = None
+except (OSError, ValueError, KeyError, TypeError, AttributeError, StopIteration) as erreur_des_listes:
+    outils_du_site, DOSSIERS_MOTEURS, OUTILS_PAGES, VARIANTES = None, (), {}, {}
+    LISTES_ILLISIBLES = f"liste des outils illisible ({type(erreur_des_listes).__name__} : {erreur_des_listes})"
 # modules lancés quoi qu'on touche : la liste des outils, l'accueil et le manifeste des fichiers chargés par Pyodide
 FUMEE_PYTHON = ("test_manifeste.py", "test_accueil.py", "test_source_unique.py")
-# dossier d'outil -> nom donné à OUTILS dans les tests de pages
-OUTILS_PAGES = {"factorisation": "factorisation", "simplexe": "simplexe", "ensemble-definition": "ensemble-definition",
-                "derivee-variations": "derivee-variations", "limites-asymptotes": "limites-asymptotes", "etude-complete": "etude-complete",
-                "exponentielles-logarithmes": "exponentielles-logarithmes"}
-OUTIL_M = "exponentielles-logarithmes-M"     # filière M de la page des exponentielles (tests/pages/rendu.py) : ses références sont à part
-MANIFESTE = "moteur/manifeste.json"          # fichiers Python que chaque page charge dans Pyodide
 DOSSIERS_TESTS_PYTHON = ("tests/python", "tests/python/donnees")   # modules des tests Python (donnees/ : corpus de l'enseignant)
 TOUS_LES_TESTS_PYTHON = "tests/python"
 # fichiers lus par leur chemin, sans import : dossier -> élément de chemin cherché dans les chaînes des modules qui les lisent
@@ -75,7 +97,8 @@ LUS_PAR_CHEMIN = {"tests/python/donnees/": "donnees", "tests/python/instantanes/
 # relancés quand une page (dont cas.py lit les exemples), un cas*.py ou un instantané change (revue de structure, R4)
 INSTANTANES_ET_JSON = ("tests/python/test_instantanes*.py", "tests/python/test_json_strict.py")
 # scripts de commande que test_lancer.py copie dans un dépôt temporaire (sans les importer) : leur modification relance ce test
-SCRIPTS_DE_COMMANDE = ("tests/lancer.py", "tests/verifier.py", "tests/comparer_listes.py", "tests/rapport_pytest.py")
+SCRIPTS_DE_COMMANDE = ("tests/lancer.py", "tests/verifier.py", "tests/comparer_listes.py", "tests/rapport_pytest.py",
+                       "tests/python/outils_du_site.py")
 TEST_DES_SCRIPTS = "tests/python/test_lancer.py"
 PROCESSUS_PAGES_DEFAUT = 2                   # suite de pages sans la variable PROCESSUS_PAGES (Mac de l'enseignant, CI)
 UV = ["uv", "run", "-q", "--no-project", "--python", "3.12", "--with", "sympy==1.13.3", "--with", "mpmath==1.3.0",
@@ -147,10 +170,15 @@ def tests_python_concernes(modifies):
     - test_instantanes*.py et test_json_strict.py si une page (fichier non .py d'un dossier d'outil, que cas.py lit), un cas*.py ou un
       instantané change ;
     - test_lancer.py si un script de commande change (il les copie au lieu de les importer) ;
-    - et toujours les tests de fumée."""
+    - les dépendants de outils_du_site.py si le manifeste ou le registre change (les listes d'outils des tests en dérivent) ;
+    - et toujours les tests de fumée. Tous les tests si la liste des outils est illisible."""
+    if LISTES_ILLISIBLES:
+        return [TOUS_LES_TESTS_PYTHON]
     modules = modules_du_depot()
     textes = {nom: texte(chemin) for nom, chemin in modules.items()}
     touches = {m for m in map(module_de, modifies) if m}
+    if any(n in SOURCES_DES_OUTILS for n in modifies):
+        touches.add(MODULE_DES_OUTILS)
     noms = set(modules) | touches
     dependances = {nom: set(IMPORT.findall(t)) & noms for nom, t in textes.items()}
     for prefixe, element in sorted(LUS_PAR_CHEMIN.items()):
@@ -192,8 +220,7 @@ def outils_des_moteurs(modifies):
     if not moteurs:
         return set()
     try:
-        with open(os.path.join(RACINE, MANIFESTE), encoding="utf-8") as f:
-            charges = {outil: set(o["fichiers"]) for outil, o in json.load(f)["outils"].items()}
+        charges = {outil: set(o["fichiers"]) for outil, o in outils_du_site.manifeste(RACINE).items()}
     except (OSError, ValueError, KeyError, TypeError, AttributeError):
         return {"tous"}
     outils = set()
@@ -225,18 +252,21 @@ def corpus_des_pages(modifies=()):
 
 
 def outil_du_json(chemin):
-    """Outil d'une référence de page ou d'un instantané resoudre (`<outil>.json`, la filière M avec sa page) ; 'tous' sinon."""
+    """Outil d'une référence de page ou d'un instantané resoudre (`<outil>.json`, une variante de filière avec sa page) ; 'tous'
+    sinon."""
     nom = os.path.basename(chemin)[:-len(".json")]
-    if nom == OUTIL_M:
-        return "exponentielles-logarithmes"
+    if nom in VARIANTES:
+        return VARIANTES[nom]
     return nom if nom in OUTILS_PAGES.values() else "tous"
 
 
 def outils_de_pages(modifies):
     """Outils dont une page (HTML, JS, CSS), un moteur Python chargé par la page, la référence de page (tests/pages/references) ou
     l'instantané resoudre (lu par test_comportement.py) est modifié ou supprimé ; 'tous' si un fichier commun, un autre fichier des
-    tests de pages ou un module de leur corpus l'est. La page des exponentielles et logarithmes vient avec sa filière M (références à
-    part)."""
+    tests de pages ou un module de leur corpus l'est ; 'tous' aussi si la liste des outils est illisible. Une page vient avec ses
+    variantes de filière (la page des exponentielles et logarithmes avec sa filière M : références à part)."""
+    if LISTES_ILLISIBLES:
+        return {"tous"}
     outils = outils_des_moteurs(modifies)
     corpus = corpus_des_pages(modifies)
     for n in modifies:
@@ -253,8 +283,7 @@ def outils_de_pages(modifies):
             outils.add("tous")
     if "tous" in outils:
         return {"tous"}
-    if "exponentielles-logarithmes" in outils:
-        outils.add(OUTIL_M)
+    outils |= {variante for variante, outil in VARIANTES.items() if outil in outils}
     return outils
 
 
@@ -452,7 +481,8 @@ def rapide(seulement_lister=False, depuis="HEAD"):
     outils = outils_de_pages(modifies)
     print("fichiers modifiés" + (f" depuis {depuis}" if depuis != "HEAD" else "") + " :",
           ", ".join(n + ("" if existe(n) else " (supprimé)") for n in modifies) or "aucun")
-    print("tests Python :", "tous (tests/python : on ne sait pas borner)" if tests == [TOUS_LES_TESTS_PYTHON]
+    print("tests Python :", f"tous (tests/python : on ne sait pas borner{' : ' + LISTES_ILLISIBLES if LISTES_ILLISIBLES else ''})"
+          if tests == [TOUS_LES_TESTS_PYTHON]
           else ", ".join(os.path.basename(t) for t in tests))
     print("pages (corpus réduit) :", ", ".join(sorted(outils)) or "aucune")
     if seulement_lister:

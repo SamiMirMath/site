@@ -16,11 +16,11 @@ import os
 import re
 import unittest
 
+import outils_du_site
 from moteurs import RACINE
 
 ICI = os.path.dirname(os.path.abspath(__file__))
-DOSSIERS_MOTEURS = ("ensemble-definition", "moteur", "derivee-variations", "limites-asymptotes", "etude-complete", "factorisation",
-                    "exponentielles-logarithmes")
+DOSSIERS_MOTEURS = tuple(outils_du_site.dossiers_moteurs())      # dossiers des fichiers du manifeste (F3)
 MOCK = re.compile(r"mock|patch|monkeypatch|setattr|delattr", re.IGNORECASE)
 IMPORTE_MEMO = re.compile(r"^\s*(?:import\s+memo\b|from\s+memo\s+import\b)", re.MULTILINE)
 
