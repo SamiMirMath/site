@@ -221,8 +221,8 @@ def tex(n):
     if isinstance(n, Pi):
         return r"\pi"
     if isinstance(n, Neg):
-        s = tex(n.a)
-        return "-" + (_entre_parentheses(s) if isinstance(n.a, Op) and n.a.op in "+-" else s)
+        s = tex(n.a)                                      # −(x + 1), et −(−100) quand x = −100 remplace x dans −x : jamais « −−100 »
+        return "-" + (_entre_parentheses(s) if _comme_somme(n.a) else s)
     if isinstance(n, Op):
         if n.op == "/":
             return r"\frac{" + tex(n.a) + "}{" + tex(n.b) + "}"
@@ -232,9 +232,9 @@ def tex(n):
                 return tex(Op("-", n.a, n.b.a))
             if isinstance(n.b, Nb) and n.b.val < 0:
                 return tex(Op("-", n.a, Nb(-n.b.val, n.b.dec)))
-            return g + " + " + d
+            return g + " + " + (_entre_parentheses(d) if d.startswith("-") else d)       # −x + (−x + 1) : jamais « + − »
         if n.op == "-":
-            return g + " - " + (_entre_parentheses(d) if _comme_somme(n.b) else d)
+            return g + " - " + (_entre_parentheses(d) if _comme_somme(n.b) or d.startswith("-") else d)
         deux_groupes = _comme_somme(n.a) and _comme_somme(n.b)
         if _comme_somme(n.a):
             g = _entre_parentheses(g)

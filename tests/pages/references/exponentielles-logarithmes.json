@@ -3204,7 +3204,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 3ContrôleOn remplace ⟦x = \\frac{1}{100}⟧ dans l'équation de départ :⟦-\\log\\left(\\frac{1}{100}\\right) = --2⟧(log_a(a^k) = k)⟦ = 2⟧⟦2⟧Les deux membres sont égaux : ⟦x = \\frac{1}{100}⟧ est solution ✓.",
+    "texte": "Étape 3ContrôleOn remplace ⟦x = \\frac{1}{100}⟧ dans l'équation de départ :⟦-\\log\\left(\\frac{1}{100}\\right) = -(-2)⟧(log_a(a^k) = k)⟦ = 2⟧⟦2⟧Les deux membres sont égaux : ⟦x = \\frac{1}{100}⟧ est solution ✓.",
     "titre": "Étape 3Contrôle"
    },
    {
@@ -49864,7 +49864,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2ContrôleOn remplace ⟦x = -100⟧ dans l'équation de départ :⟦\\log(--100) = \\log(100) = \\log(10^{2}) = 2⟧(log_a(a^k) = k)⟦2⟧Les deux membres sont égaux : ⟦x = -100⟧ est solution ✓.",
+    "texte": "Étape 2ContrôleOn remplace ⟦x = -100⟧ dans l'équation de départ :⟦\\log(-(-100)) = \\log(100) = \\log(10^{2}) = 2⟧(log_a(a^k) = k)⟦2⟧Les deux membres sont égaux : ⟦x = -100⟧ est solution ✓.",
     "titre": "Étape 2Contrôle"
    },
    {
@@ -52271,7 +52271,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 2ContrôleOn remplace ⟦x = -2⟧ dans l'équation de départ :⟦\\log_{--2}(4) = \\log_{2}(4) = \\log_{2}(2^{2}) = 2⟧(log_a(a^k) = k)⟦2⟧Les deux membres sont égaux : ⟦x = -2⟧ est solution ✓.⟦x = 2⟧ : ⟦\\log_{-2}(4)⟧ n'existe pas : une base doit être strictement positive et différente de 1. ⟦x = 2⟧ est rejetée.",
+    "texte": "Étape 2ContrôleOn remplace ⟦x = -2⟧ dans l'équation de départ :⟦\\log_{-(-2)}(4) = \\log_{2}(4) = \\log_{2}(2^{2}) = 2⟧(log_a(a^k) = k)⟦2⟧Les deux membres sont égaux : ⟦x = -2⟧ est solution ✓.⟦x = 2⟧ : ⟦\\log_{-2}(4)⟧ n'existe pas : une base doit être strictement positive et différente de 1. ⟦x = 2⟧ est rejetée.",
     "titre": "Étape 2Contrôle"
    },
    {

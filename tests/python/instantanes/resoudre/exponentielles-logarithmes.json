@@ -3091,7 +3091,7 @@
       "type": "texte"
      },
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-\\log\\left(\\frac{1}{100}\\right) = --2\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\( = 2\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-\\log\\left(\\frac{1}{100}\\right) = -(-2)\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\( = 2\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      },
@@ -54122,7 +54122,7 @@
       "type": "texte"
      },
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(--100) = \\log(100) = \\log(10^{2}) = 2\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log(-(-100)) = \\log(100) = \\log(10^{2}) = 2\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
       "style": "etape",
       "type": "texte"
      },
@@ -57635,7 +57635,7 @@
       "type": "texte"
      },
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{--2}(4) = \\log_{2}(4) = \\log_{2}(2^{2}) = 2\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\log_{-(-2)}(4) = \\log_{2}(4) = \\log_{2}(2^{2}) = 2\\)</span><span class=\"prop\">(log_a(a^k) = k)</span></div></div>",
       "style": "etape",
       "type": "texte"
      },
