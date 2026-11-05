@@ -1589,7 +1589,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 4Logarithme des deux membres (t = 5)⟦5^{x} = 5⟧⟦\\iff⟧⟦\\log(5^{x}) = \\log(5)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(5) = \\log(5)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(5)}{\\log(5)}⟧(car ⟦\\log(5) \\neq 0⟧)",
+    "texte": "Étape 4Logarithme des deux membres (t = 5)⟦5^{x} = 5⟧⟦\\iff⟧⟦\\log(5^{x}) = \\log(5)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(5) = \\log(5)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(5)}{\\log(5)}⟧(car ⟦\\log(5) \\neq 0⟧)⟦\\phantom{x} = 1⟧",
     "titre": "Étape 4Logarithme des deux membres (t = 5)"
    },
    {
@@ -1599,7 +1599,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Solution⟦S = \\left\\{0 \\,;\\, \\frac{\\log(5)}{\\log(5)}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = 0⟧ ou ⟦x = 1⟧.",
+    "texte": "Solution⟦S = \\left\\{0 \\,;\\, 1\\right\\}⟧",
     "titre": "Solution"
    }
   ],
@@ -1644,7 +1644,7 @@
       ],
       "listes": [],
       "tableaux": [],
-      "texte": "Étape 4Logarithme des deux membres (t = 5)⟦5^{x} = 5⟧⟦\\iff⟧⟦\\log(5^{x}) = \\log(5)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(5) = \\log(5)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(5)}{\\log(5)}⟧(car ⟦\\log(5) \\neq 0⟧)",
+      "texte": "Étape 4Logarithme des deux membres (t = 5)⟦5^{x} = 5⟧⟦\\iff⟧⟦\\log(5^{x}) = \\log(5)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(5) = \\log(5)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(5)}{\\log(5)}⟧(car ⟦\\log(5) \\neq 0⟧)⟦\\phantom{x} = 1⟧",
       "titre": "Étape 4Logarithme des deux membres (t = 5)"
      },
      {
@@ -1654,7 +1654,7 @@
       ],
       "listes": [],
       "tableaux": [],
-      "texte": "Solution⟦S = \\left\\{0 \\,;\\, \\frac{\\log(5)}{\\log(5)}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = 0⟧ ou ⟦x = 1⟧.",
+      "texte": "Solution⟦S = \\left\\{0 \\,;\\, 1\\right\\}⟧",
       "titre": "Solution"
      }
     ],
@@ -2363,7 +2363,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 4Logarithme des deux membres (u = 2)⟦2^{t} = 2⟧⟦\\iff⟧⟦\\log(2^{t}) = \\log(2)⟧(log des deux membres)⟦\\iff⟧⟦t \\cdot \\log(2) = \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦t = \\frac{\\log(2)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)",
+    "texte": "Étape 4Logarithme des deux membres (u = 2)⟦2^{t} = 2⟧⟦\\iff⟧⟦\\log(2^{t}) = \\log(2)⟧(log des deux membres)⟦\\iff⟧⟦t \\cdot \\log(2) = \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦t = \\frac{\\log(2)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\phantom{t} = 1⟧",
     "titre": "Étape 4Logarithme des deux membres (u = 2)"
    },
    {
@@ -2373,7 +2373,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Solution⟦S = \\left\\{0 \\,;\\, \\frac{\\log(2)}{\\log(2)}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦t = 0⟧ ou ⟦t = 1⟧.",
+    "texte": "Solution⟦S = \\left\\{0 \\,;\\, 1\\right\\}⟧",
     "titre": "Solution"
    }
   ],
@@ -2418,7 +2418,7 @@
       ],
       "listes": [],
       "tableaux": [],
-      "texte": "Étape 4Logarithme des deux membres (u = 2)⟦2^{t} = 2⟧⟦\\iff⟧⟦\\log(2^{t}) = \\log(2)⟧(log des deux membres)⟦\\iff⟧⟦t \\cdot \\log(2) = \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦t = \\frac{\\log(2)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)",
+      "texte": "Étape 4Logarithme des deux membres (u = 2)⟦2^{t} = 2⟧⟦\\iff⟧⟦\\log(2^{t}) = \\log(2)⟧(log des deux membres)⟦\\iff⟧⟦t \\cdot \\log(2) = \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦t = \\frac{\\log(2)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\phantom{t} = 1⟧",
       "titre": "Étape 4Logarithme des deux membres (u = 2)"
      },
      {
@@ -2428,7 +2428,7 @@
       ],
       "listes": [],
       "tableaux": [],
-      "texte": "Solution⟦S = \\left\\{0 \\,;\\, \\frac{\\log(2)}{\\log(2)}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦t = 0⟧ ou ⟦t = 1⟧.",
+      "texte": "Solution⟦S = \\left\\{0 \\,;\\, 1\\right\\}⟧",
       "titre": "Solution"
      }
     ],
@@ -3372,7 +3372,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Logarithme des deux membres⟦2^{x + 6} = 2^{3x + 4}⟧⟦\\iff⟧⟦\\log(2^{x + 6}) = \\log(2^{3x + 4})⟧(log des deux membres)⟦\\iff⟧⟦(x + 6) \\cdot \\log(2) = (3x + 4) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) + 6\\log(2) = 3x \\cdot \\log(2) + 4\\log(2)⟧⟦\\iff⟧⟦2\\log(2) = x \\cdot 2\\log(2)⟧⟦\\iff⟧⟦x = \\frac{2\\log(2)}{2\\log(2)}⟧(car ⟦2\\log(2) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(4)}{\\log(4)}⟧(propriétés des logarithmes)⟦\\phantom{x} = 1⟧⟦2\\log(2) = \\log(2^{2})⟧(propriétés des logarithmes)⟦\\phantom{2\\log(2)} = \\log(4)⟧⟦2\\log(2) = \\log(2^{2})⟧(propriétés des logarithmes)⟦\\phantom{2\\log(2)} = \\log(4)⟧",
+    "texte": "Étape 1Logarithme des deux membres⟦2^{x + 6} = 2^{3x + 4}⟧⟦\\iff⟧⟦\\log(2^{x + 6}) = \\log(2^{3x + 4})⟧(log des deux membres)⟦\\iff⟧⟦(x + 6) \\cdot \\log(2) = (3x + 4) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) + 6\\log(2) = 3x \\cdot \\log(2) + 4\\log(2)⟧⟦\\iff⟧⟦2\\log(2) = x \\cdot 2\\log(2)⟧⟦\\iff⟧⟦x = \\frac{2\\log(2)}{2\\log(2)}⟧(car ⟦2\\log(2) \\neq 0⟧)⟦\\phantom{x} = 1⟧",
     "titre": "Étape 1Logarithme des deux membres"
    },
    {
@@ -3399,7 +3399,7 @@
      ],
      "listes": [],
      "tableaux": [],
-     "texte": "Étape 1Logarithme des deux membres⟦2^{x + 6} = 2^{3x + 4}⟧⟦\\iff⟧⟦\\log(2^{x + 6}) = \\log(2^{3x + 4})⟧(log des deux membres)⟦\\iff⟧⟦(x + 6) \\cdot \\log(2) = (3x + 4) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) + 6\\log(2) = 3x \\cdot \\log(2) + 4\\log(2)⟧⟦\\iff⟧⟦2\\log(2) = x \\cdot 2\\log(2)⟧⟦\\iff⟧⟦x = \\frac{2\\log(2)}{2\\log(2)}⟧(car ⟦2\\log(2) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(4)}{\\log(4)}⟧(propriétés des logarithmes)⟦\\phantom{x} = 1⟧⟦2\\log(2) = \\log(2^{2})⟧(propriétés des logarithmes)⟦\\phantom{2\\log(2)} = \\log(4)⟧⟦2\\log(2) = \\log(2^{2})⟧(propriétés des logarithmes)⟦\\phantom{2\\log(2)} = \\log(4)⟧",
+     "texte": "Étape 1Logarithme des deux membres⟦2^{x + 6} = 2^{3x + 4}⟧⟦\\iff⟧⟦\\log(2^{x + 6}) = \\log(2^{3x + 4})⟧(log des deux membres)⟦\\iff⟧⟦(x + 6) \\cdot \\log(2) = (3x + 4) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) + 6\\log(2) = 3x \\cdot \\log(2) + 4\\log(2)⟧⟦\\iff⟧⟦2\\log(2) = x \\cdot 2\\log(2)⟧⟦\\iff⟧⟦x = \\frac{2\\log(2)}{2\\log(2)}⟧(car ⟦2\\log(2) \\neq 0⟧)⟦\\phantom{x} = 1⟧",
      "titre": "Étape 1Logarithme des deux membres"
     },
     {
@@ -3437,7 +3437,7 @@
       ],
       "listes": [],
       "tableaux": [],
-      "texte": "Étape 1Logarithme des deux membres⟦2^{x + 6} = 2^{3x + 4}⟧⟦\\iff⟧⟦\\log(2^{x + 6}) = \\log(2^{3x + 4})⟧(log des deux membres)⟦\\iff⟧⟦(x + 6) \\cdot \\log(2) = (3x + 4) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) + 6\\log(2) = 3x \\cdot \\log(2) + 4\\log(2)⟧⟦\\iff⟧⟦2\\log(2) = x \\cdot 2\\log(2)⟧⟦\\iff⟧⟦x = \\frac{2\\log(2)}{2\\log(2)}⟧(car ⟦2\\log(2) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(4)}{\\log(4)}⟧(propriétés des logarithmes)⟦\\phantom{x} = 1⟧⟦2\\log(2) = \\log(2^{2})⟧(propriétés des logarithmes)⟦\\phantom{2\\log(2)} = \\log(4)⟧⟦2\\log(2) = \\log(2^{2})⟧(propriétés des logarithmes)⟦\\phantom{2\\log(2)} = \\log(4)⟧",
+      "texte": "Étape 1Logarithme des deux membres⟦2^{x + 6} = 2^{3x + 4}⟧⟦\\iff⟧⟦\\log(2^{x + 6}) = \\log(2^{3x + 4})⟧(log des deux membres)⟦\\iff⟧⟦(x + 6) \\cdot \\log(2) = (3x + 4) \\cdot \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(2) + 6\\log(2) = 3x \\cdot \\log(2) + 4\\log(2)⟧⟦\\iff⟧⟦2\\log(2) = x \\cdot 2\\log(2)⟧⟦\\iff⟧⟦x = \\frac{2\\log(2)}{2\\log(2)}⟧(car ⟦2\\log(2) \\neq 0⟧)⟦\\phantom{x} = 1⟧",
       "titre": "Étape 1Logarithme des deux membres"
      },
      {
@@ -6824,7 +6824,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 1Logarithme des deux membres⟦3^{x} = 3 \\cdot 9^{x - 1}⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(3 \\cdot 9^{x - 1})⟧(log des deux membres)⟦\\iff⟧⟦\\log(3^{x}) = \\log(3) + \\log(9^{x - 1})⟧(log(ab) = log a + log b)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(3) + (x - 1) \\cdot \\log(9)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(3) = x \\cdot \\log(9) + \\log(3) - \\log(9)⟧⟦\\iff⟧⟦\\log(9) - \\log(3) = x(\\log(9) - \\log(3))⟧⟦\\iff⟧⟦x = \\frac{\\log(9) - \\log(3)}{\\log(9) - \\log(3)}⟧(car ⟦\\log(9) - \\log(3) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(3)}{\\log(3)}⟧(log a − log b = log(a/b))⟦\\phantom{x} = 1⟧",
+    "texte": "Étape 1Logarithme des deux membres⟦3^{x} = 3 \\cdot 9^{x - 1}⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(3 \\cdot 9^{x - 1})⟧(log des deux membres)⟦\\iff⟧⟦\\log(3^{x}) = \\log(3) + \\log(9^{x - 1})⟧(log(ab) = log a + log b)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(3) + (x - 1) \\cdot \\log(9)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(3) = x \\cdot \\log(9) + \\log(3) - \\log(9)⟧⟦\\iff⟧⟦\\log(9) - \\log(3) = x(\\log(9) - \\log(3))⟧⟦\\iff⟧⟦x = \\frac{\\log(9) - \\log(3)}{\\log(9) - \\log(3)}⟧(car ⟦\\log(9) - \\log(3) \\neq 0⟧)⟦\\phantom{x} = 1⟧",
     "titre": "Étape 1Logarithme des deux membres"
    },
    {
@@ -6851,7 +6851,7 @@
      ],
      "listes": [],
      "tableaux": [],
-     "texte": "Étape 1Logarithme des deux membres⟦3^{x} = 3 \\cdot 9^{x - 1}⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(3 \\cdot 9^{x - 1})⟧(log des deux membres)⟦\\iff⟧⟦\\log(3^{x}) = \\log(3) + \\log(9^{x - 1})⟧(log(ab) = log a + log b)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(3) + (x - 1) \\cdot \\log(9)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(3) = x \\cdot \\log(9) + \\log(3) - \\log(9)⟧⟦\\iff⟧⟦\\log(9) - \\log(3) = x(\\log(9) - \\log(3))⟧⟦\\iff⟧⟦x = \\frac{\\log(9) - \\log(3)}{\\log(9) - \\log(3)}⟧(car ⟦\\log(9) - \\log(3) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(3)}{\\log(3)}⟧(log a − log b = log(a/b))⟦\\phantom{x} = 1⟧",
+     "texte": "Étape 1Logarithme des deux membres⟦3^{x} = 3 \\cdot 9^{x - 1}⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(3 \\cdot 9^{x - 1})⟧(log des deux membres)⟦\\iff⟧⟦\\log(3^{x}) = \\log(3) + \\log(9^{x - 1})⟧(log(ab) = log a + log b)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(3) + (x - 1) \\cdot \\log(9)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(3) = x \\cdot \\log(9) + \\log(3) - \\log(9)⟧⟦\\iff⟧⟦\\log(9) - \\log(3) = x(\\log(9) - \\log(3))⟧⟦\\iff⟧⟦x = \\frac{\\log(9) - \\log(3)}{\\log(9) - \\log(3)}⟧(car ⟦\\log(9) - \\log(3) \\neq 0⟧)⟦\\phantom{x} = 1⟧",
      "titre": "Étape 1Logarithme des deux membres"
     },
     {
@@ -6889,7 +6889,7 @@
       ],
       "listes": [],
       "tableaux": [],
-      "texte": "Étape 1Logarithme des deux membres⟦3^{x} = 3 \\cdot 9^{x - 1}⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(3 \\cdot 9^{x - 1})⟧(log des deux membres)⟦\\iff⟧⟦\\log(3^{x}) = \\log(3) + \\log(9^{x - 1})⟧(log(ab) = log a + log b)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(3) + (x - 1) \\cdot \\log(9)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(3) = x \\cdot \\log(9) + \\log(3) - \\log(9)⟧⟦\\iff⟧⟦\\log(9) - \\log(3) = x(\\log(9) - \\log(3))⟧⟦\\iff⟧⟦x = \\frac{\\log(9) - \\log(3)}{\\log(9) - \\log(3)}⟧(car ⟦\\log(9) - \\log(3) \\neq 0⟧)⟦\\phantom{x} = \\frac{\\log(3)}{\\log(3)}⟧(log a − log b = log(a/b))⟦\\phantom{x} = 1⟧",
+      "texte": "Étape 1Logarithme des deux membres⟦3^{x} = 3 \\cdot 9^{x - 1}⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(3 \\cdot 9^{x - 1})⟧(log des deux membres)⟦\\iff⟧⟦\\log(3^{x}) = \\log(3) + \\log(9^{x - 1})⟧(log(ab) = log a + log b)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(3) + (x - 1) \\cdot \\log(9)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x \\cdot \\log(3) = x \\cdot \\log(9) + \\log(3) - \\log(9)⟧⟦\\iff⟧⟦\\log(9) - \\log(3) = x(\\log(9) - \\log(3))⟧⟦\\iff⟧⟦x = \\frac{\\log(9) - \\log(3)}{\\log(9) - \\log(3)}⟧(car ⟦\\log(9) - \\log(3) \\neq 0⟧)⟦\\phantom{x} = 1⟧",
       "titre": "Étape 1Logarithme des deux membres"
      },
      {
@@ -7226,7 +7226,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 5Logarithme des deux membres (t = 2)⟦2^{x} = 2⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(2)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(2)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)",
+    "texte": "Étape 5Logarithme des deux membres (t = 2)⟦2^{x} = 2⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(2)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(2)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\phantom{x} = 1⟧",
     "titre": "Étape 5Logarithme des deux membres (t = 2)"
    },
    {
@@ -7236,7 +7236,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Solution⟦S = \\left\\{0 \\,;\\, \\frac{\\log(2)}{\\log(2)}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = 0⟧ ou ⟦x = 1⟧.",
+    "texte": "Solution⟦S = \\left\\{0 \\,;\\, 1\\right\\}⟧",
     "titre": "Solution"
    }
   ],
@@ -7291,7 +7291,7 @@
       ],
       "listes": [],
       "tableaux": [],
-      "texte": "Étape 5Logarithme des deux membres (t = 2)⟦2^{x} = 2⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(2)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(2)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)",
+      "texte": "Étape 5Logarithme des deux membres (t = 2)⟦2^{x} = 2⟧⟦\\iff⟧⟦\\log(2^{x}) = \\log(2)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(2) = \\log(2)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(2)}{\\log(2)}⟧(car ⟦\\log(2) \\neq 0⟧)⟦\\phantom{x} = 1⟧",
       "titre": "Étape 5Logarithme des deux membres (t = 2)"
      },
      {
@@ -7301,7 +7301,7 @@
       ],
       "listes": [],
       "tableaux": [],
-      "texte": "Solution⟦S = \\left\\{0 \\,;\\, \\frac{\\log(2)}{\\log(2)}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = 0⟧ ou ⟦x = 1⟧.",
+      "texte": "Solution⟦S = \\left\\{0 \\,;\\, 1\\right\\}⟧",
       "titre": "Solution"
      }
     ],
@@ -8359,7 +8359,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 5Logarithme des deux membres (t = 5)⟦5^{x} = 5⟧⟦\\iff⟧⟦\\log(5^{x}) = \\log(5)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(5) = \\log(5)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(5)}{\\log(5)}⟧(car ⟦\\log(5) \\neq 0⟧)",
+    "texte": "Étape 5Logarithme des deux membres (t = 5)⟦5^{x} = 5⟧⟦\\iff⟧⟦\\log(5^{x}) = \\log(5)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(5) = \\log(5)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(5)}{\\log(5)}⟧(car ⟦\\log(5) \\neq 0⟧)⟦\\phantom{x} = 1⟧",
     "titre": "Étape 5Logarithme des deux membres (t = 5)"
    },
    {
@@ -8369,7 +8369,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Solution⟦S = \\left\\{0 \\,;\\, \\frac{\\log(5)}{\\log(5)}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = 0⟧ ou ⟦x = 1⟧.",
+    "texte": "Solution⟦S = \\left\\{0 \\,;\\, 1\\right\\}⟧",
     "titre": "Solution"
    }
   ],
@@ -8424,7 +8424,7 @@
       ],
       "listes": [],
       "tableaux": [],
-      "texte": "Étape 5Logarithme des deux membres (t = 5)⟦5^{x} = 5⟧⟦\\iff⟧⟦\\log(5^{x}) = \\log(5)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(5) = \\log(5)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(5)}{\\log(5)}⟧(car ⟦\\log(5) \\neq 0⟧)",
+      "texte": "Étape 5Logarithme des deux membres (t = 5)⟦5^{x} = 5⟧⟦\\iff⟧⟦\\log(5^{x}) = \\log(5)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(5) = \\log(5)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(5)}{\\log(5)}⟧(car ⟦\\log(5) \\neq 0⟧)⟦\\phantom{x} = 1⟧",
       "titre": "Étape 5Logarithme des deux membres (t = 5)"
      },
      {
@@ -8434,7 +8434,7 @@
       ],
       "listes": [],
       "tableaux": [],
-      "texte": "Solution⟦S = \\left\\{0 \\,;\\, \\frac{\\log(5)}{\\log(5)}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = 0⟧ ou ⟦x = 1⟧.",
+      "texte": "Solution⟦S = \\left\\{0 \\,;\\, 1\\right\\}⟧",
       "titre": "Solution"
      }
     ],
@@ -9817,7 +9817,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 5Logarithme des deux membres (t = 3)⟦3^{x} = 3⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log(3)}⟧(car ⟦\\log(3) \\neq 0⟧)",
+    "texte": "Étape 5Logarithme des deux membres (t = 3)⟦3^{x} = 3⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log(3)}⟧(car ⟦\\log(3) \\neq 0⟧)⟦\\phantom{x} = 1⟧",
     "titre": "Étape 5Logarithme des deux membres (t = 3)"
    },
    {
@@ -9827,7 +9827,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Solution⟦S = \\left\\{0 \\,;\\, \\frac{\\log(3)}{\\log(3)}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = 0⟧ ou ⟦x = 1⟧.",
+    "texte": "Solution⟦S = \\left\\{0 \\,;\\, 1\\right\\}⟧",
     "titre": "Solution"
    }
   ],
@@ -9882,7 +9882,7 @@
       ],
       "listes": [],
       "tableaux": [],
-      "texte": "Étape 5Logarithme des deux membres (t = 3)⟦3^{x} = 3⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log(3)}⟧(car ⟦\\log(3) \\neq 0⟧)",
+      "texte": "Étape 5Logarithme des deux membres (t = 3)⟦3^{x} = 3⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log(3)}⟧(car ⟦\\log(3) \\neq 0⟧)⟦\\phantom{x} = 1⟧",
       "titre": "Étape 5Logarithme des deux membres (t = 3)"
      },
      {
@@ -9892,7 +9892,7 @@
       ],
       "listes": [],
       "tableaux": [],
-      "texte": "Solution⟦S = \\left\\{0 \\,;\\, \\frac{\\log(3)}{\\log(3)}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = 0⟧ ou ⟦x = 1⟧.",
+      "texte": "Solution⟦S = \\left\\{0 \\,;\\, 1\\right\\}⟧",
       "titre": "Solution"
      }
     ],
@@ -10012,7 +10012,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Étape 3Logarithme des deux membres (t = 3)⟦3^{x} = 3⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log(3)}⟧(car ⟦\\log(3) \\neq 0⟧)",
+    "texte": "Étape 3Logarithme des deux membres (t = 3)⟦3^{x} = 3⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log(3)}⟧(car ⟦\\log(3) \\neq 0⟧)⟦\\phantom{x} = 1⟧",
     "titre": "Étape 3Logarithme des deux membres (t = 3)"
    },
    {
@@ -10032,7 +10032,7 @@
     ],
     "listes": [],
     "tableaux": [],
-    "texte": "Solution⟦S = \\left\\{\\frac{\\log(3)}{\\log(3)} \\,;\\, \\frac{\\log(9)}{\\log(3)}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = 1⟧ ou ⟦x = 2⟧.",
+    "texte": "Solution⟦S = \\left\\{1 \\,;\\, \\frac{\\log(9)}{\\log(3)}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = 1⟧ ou ⟦x = 2⟧.",
     "titre": "Solution"
    }
   ],
@@ -10067,7 +10067,7 @@
       ],
       "listes": [],
       "tableaux": [],
-      "texte": "Étape 3Logarithme des deux membres (t = 3)⟦3^{x} = 3⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log(3)}⟧(car ⟦\\log(3) \\neq 0⟧)",
+      "texte": "Étape 3Logarithme des deux membres (t = 3)⟦3^{x} = 3⟧⟦\\iff⟧⟦\\log(3^{x}) = \\log(3)⟧(log des deux membres)⟦\\iff⟧⟦x \\cdot \\log(3) = \\log(3)⟧(log(a^A) = A · log(a))⟦\\iff⟧⟦x = \\frac{\\log(3)}{\\log(3)}⟧(car ⟦\\log(3) \\neq 0⟧)⟦\\phantom{x} = 1⟧",
       "titre": "Étape 3Logarithme des deux membres (t = 3)"
      },
      {
@@ -10087,7 +10087,7 @@
       ],
       "listes": [],
       "tableaux": [],
-      "texte": "Solution⟦S = \\left\\{\\frac{\\log(3)}{\\log(3)} \\,;\\, \\frac{\\log(9)}{\\log(3)}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = 1⟧ ou ⟦x = 2⟧.",
+      "texte": "Solution⟦S = \\left\\{1 \\,;\\, \\frac{\\log(9)}{\\log(3)}\\right\\}⟧Contrôlez à la calculatrice : on retrouve ⟦x = 1⟧ ou ⟦x = 2⟧.",
       "titre": "Solution"
      }
     ],

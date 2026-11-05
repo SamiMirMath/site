@@ -7,6 +7,12 @@ Avant : 2^(x² − 5x) = 2^(−1/2) (et tout exposant fractionnaire ou décimal 
 - `_resoudre_polynome` refuse un trinôme à coefficients non entiers (x² − 5x + 1/2 = 0), que la méthode B résout (`_suite_polynome`).
 Après : x² − 5x = −1/2 ⇔ x² − 5x + 1/2 = 0, Δ = 23, x₁, x₂ — la suite de la méthode B, dans les filières C et M.
 
+Q4 — Méthode « Logarithmes » : un quotient p·log(a)/(q·log(a)) se simplifie en p/q. Avant : S = {0 ; 5log(2)/log(2)} et « Contrôlez à la
+calculatrice » (2^(x² − 5x) = 2^0) ; x = log(2)/log(2), x² = log(2)/log(2) (x₁ = −√(log(2)/log(2))), x = −b/(2a) = 2log(2)/(2log(2)).
+Après : « x = 5log(2)/log(2) = 5 », S = {0 ; 5}, sans contrôle. Garde-fou (`_quotient_de_logs`) : le même logarithme écrit à l'identique en
+haut et en bas, et la sonde à 60 chiffres qui donne la même valeur ; log(32)/log(2) et log(1/64)/log(2) restent écrits (spécification,
+exemples 10 et 11).
+
 Les solutions sont confirmées par l'oracle (tests/python/oracle.py, mpmath 50 chiffres, arbre de l'outil ED, indépendant d'Exp-log)."""
 import re
 import unittest
@@ -136,6 +142,88 @@ class TestQ6MemeBase(unittest.TestCase):
                     for u in a:
                         x = mp.mpf(u)
                         self.assertLess(abs(oracle.valeur(G, x) - oracle.valeur(D, x)), mp.mpf("1e-9") * (1 + abs(oracle.valeur(D, x))))
+
+
+# entrée, racines exactes, ensemble solution attendu (méthode « Logarithmes »), lignes attendues
+CAS_Q4 = [
+    ("2^(x^2-5x)=2^0", ["0", "5"], r"S = \left\{0 \,;\, 5\right\}", [r"x = \frac{5\log(2)}{\log(2)}", r"\phantom{x} = 5"]),
+    ("2^(x^2)=2^(5x)", ["0", "5"], r"S = \left\{0 \,;\, 5\right\}", [r"\phantom{x} = 5"]),
+    ("3^(2x^2)=3^(6x)", ["0", "3"], r"S = \left\{0 \,;\, 3\right\}", [r"x = \frac{6\log(3)}{2\log(3)}", r"\phantom{x} = 3"]),
+    ("2^(x^2-5x)*2^x=1", ["0", "4"], r"S = \left\{0 \,;\, 4\right\}", [r"\phantom{x} = 4"]),
+    ("3(2^x+1)=9", ["1"], r"S = \left\{1\right\}", [r"x = \frac{\log(2)}{\log(2)}", r"\phantom{x} = 1"]),
+    ("2^(x+1)+2^(x-1)=10", ["2"], r"S = \left\{2\right\}", [r"x - 1 = \frac{\log(2)}{\log(2)}", r"\phantom{x - 1} = 1", r"x = 2"]),
+    ("5*2^(x^2)-3=7", ["-1", "1"], r"S = \left\{-1 \,;\, 1\right\}", [r"\phantom{x^{2}} = 1", r"x = -1 \text{ ou } x = 1"]),
+    ("2^(x^2)=2^(2x-1)", ["1"], r"S = \left\{1\right\}", [r"x = \frac{-b}{2a} = \frac{2\log(2)}{2\log(2)} = 1"]),
+    ("25^x-6*5^x+5=0", ["0", "1"], r"S = \left\{0 \,;\, 1\right\}", []),
+]
+# la spécification garde ces logarithmes écrits, avec le contrôle à la calculatrice (exemples 10 et 11 : log(32) reste log(32))
+GARDES = [("2^x=32", r"\frac{\log(32)}{\log(2)}"), ("2^(x^2-5x)=1/64", r"\frac{\log\left(\frac{1}{64}\right)}{\log(2)}")]
+NOMBRE_FINAL = re.compile(r"= -?(\d+(\{,\}\d+)?|\\frac\{\d+\}\{\d+\})$")
+MEME_LOG = re.compile(r"\\frac\{(\d*)\\(log|ln)(_\{[^}]*\})?\((.*?)\)\}\{(\d*)\\\2\3?\(\4\)\}")
+
+
+class TestQ4QuotientDeLogs(unittest.TestCase):
+    def test_redaction(self):
+        for entree, _, ensemble, attendues in CAS_Q4:
+            for filiere in FILIERES:
+                with self.subTest(entree=entree, filiere=filiere):
+                    texte = lignes(entree, filiere, el.METHODE_LOGARITHMES)
+                    self.assertIn(ensemble, texte)
+                    self.assertFalse([t for t in texte if "Contrôlez" in t], texte)
+                    for ligne in attendues:
+                        self.assertIn(ligne, texte)
+
+    def test_oracle(self):
+        for entree, attendues, _, _ in CAS_Q4:
+            G, D = membres_ed(entree)
+            racines = _racines(attendues)
+            for r in racines:
+                with self.subTest(entree=entree, racine=str(r)):
+                    self.assertLess(abs(oracle.valeur(G, r) - oracle.valeur(D, r)), mp.mpf("1e-40"))
+            for filiere in FILIERES:
+                with self.subTest(entree=entree, filiere=filiere, controle="solutions exactes de l'outil"):
+                    s = el.analyser_saisie(entree, filiere)
+                    v = el.variantes_equation(s.g, s.d, s.inconnue, s.parametres)
+                    if v is None:                                       # changement de variable (25^x) : S est contrôlé par test_redaction
+                        continue
+                    r = v[el.METHODE_LOGARITHMES]
+                    self.assertTrue(all(isinstance(n, el.Nb) for n in r["solutions"]), r["solutions"])
+                    self.assertEqual(sorted(n.val for n in r["solutions"]), sorted(mpmath.nint(v) for v in racines))
+
+    def test_garde_fou(self):
+        L2, L3, L32 = el.Log(el.Nb(2)), el.Log(el.Nb(3)), el.Log(el.Nb(32))
+        fois = lambda k, l: el.Op("*", el.Nb(k), l)
+        self.assertEqual(el._quotient_de_logs(el.Op("/", fois(5, L2), L2)), 5)
+        self.assertEqual(el._quotient_de_logs(el.Op("/", fois(6, L3), fois(2, L3))), 3)
+        self.assertEqual(el._quotient_de_logs(el.Op("/", el.Neg(L2), L2)), -1)
+        for n in (el.Op("/", L32, L2), el.Op("/", fois(5, L2), L3), el.Op("/", L2, fois(0, L2)), el.Op("/", fois(2, L2), el.Nb(2)),
+                  el.Op("/", el.Op("+", L2, L3), L2)):
+            with self.subTest(n=el.tex(n)):
+                self.assertIsNone(el._quotient_de_logs(n))
+
+    def test_specification_inchangee(self):
+        for entree, quotient in GARDES:
+            for filiere in FILIERES:
+                with self.subTest(entree=entree, filiere=filiere):
+                    texte = lignes(entree, filiere, el.METHODE_LOGARITHMES)
+                    self.assertTrue(any(quotient in t for t in texte), texte)
+                    self.assertTrue(any("Contrôlez" in t for t in texte), texte)
+
+    def test_balayage(self):
+        """Aucune ligne du corpus (C et M) ni des voisines de Q6 n'écrit p·log(a)/(q·log(a)) sans le simplifier ensuite, ni dans S."""
+        from cas_el import entrees_el, entrees_el_m
+        for filiere, entrees in (("C", entrees_el() + VOISINES_Q6), ("M", entrees_el_m() + VOISINES_Q6)):
+            for entree in dict.fromkeys(entrees):
+                s = resoudre_el.resoudre(entree, filiere)
+                if not s.get("ok") or not s.get("variantes"):
+                    continue
+                with self.subTest(filiere=filiere, entree=entree):
+                    texte = lignes(entree, filiere, el.METHODE_LOGARITHMES)
+                    for i, t in enumerate(texte):
+                        if MEME_LOG.search(t):
+                            self.assertFalse(t.startswith("S ="), t)
+                            suite = [t] + texte[i + 1:i + 2]                  # « … = 5 » sur la ligne, ou « \phantom{x} = 5 » juste après
+                            self.assertTrue(any(NOMBRE_FINAL.search(u) for u in suite), suite)
 
 
 if __name__ == "__main__":

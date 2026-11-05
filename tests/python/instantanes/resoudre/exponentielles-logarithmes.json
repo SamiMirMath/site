@@ -12008,7 +12008,7 @@
     "badge": "Logarithme des deux membres (t = 5)",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{x} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5^{x}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(5) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(5)}{\\log(5)}\\)</span><span class=\"prop\">(car \\(\\log(5) \\neq 0\\))</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{x} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5^{x}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(5) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(5)}{\\log(5)}\\)</span><span class=\"prop\">(car \\(\\log(5) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -12019,13 +12019,8 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{0 \\,;\\, \\frac{\\log(5)}{\\log(5)}\\right\\}",
+      "tex": "S = \\left\\{0 \\,;\\, 1\\right\\}",
       "type": "resultat"
-     },
-     {
-      "html": "Contrôlez à la calculatrice : on retrouve \\(x = 0\\) ou \\(x = 1\\).",
-      "style": "etape",
-      "type": "texte"
      }
     ],
     "style": "final",
@@ -12183,7 +12178,7 @@
       "badge": "Logarithme des deux membres (t = 5)",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{x} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5^{x}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(5) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(5)}{\\log(5)}\\)</span><span class=\"prop\">(car \\(\\log(5) \\neq 0\\))</span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{x} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5^{x}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(5) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(5)}{\\log(5)}\\)</span><span class=\"prop\">(car \\(\\log(5) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -12194,13 +12189,8 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{0 \\,;\\, \\frac{\\log(5)}{\\log(5)}\\right\\}",
+        "tex": "S = \\left\\{0 \\,;\\, 1\\right\\}",
         "type": "resultat"
-       },
-       {
-        "html": "Contrôlez à la calculatrice : on retrouve \\(x = 0\\) ou \\(x = 1\\).",
-        "style": "etape",
-        "type": "texte"
        }
       ],
       "style": "final",
@@ -14403,7 +14393,7 @@
     "badge": "Logarithme des deux membres (u = 2)",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{t} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{t}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{t} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{t}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{t} = 1\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -14414,13 +14404,8 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{0 \\,;\\, \\frac{\\log(2)}{\\log(2)}\\right\\}",
+      "tex": "S = \\left\\{0 \\,;\\, 1\\right\\}",
       "type": "resultat"
-     },
-     {
-      "html": "Contrôlez à la calculatrice : on retrouve \\(t = 0\\) ou \\(t = 1\\).",
-      "style": "etape",
-      "type": "texte"
      }
     ],
     "style": "final",
@@ -14578,7 +14563,7 @@
       "badge": "Logarithme des deux membres (u = 2)",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{t} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{t}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{t} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{t}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(t = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{t} = 1\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -14589,13 +14574,8 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{0 \\,;\\, \\frac{\\log(2)}{\\log(2)}\\right\\}",
+        "tex": "S = \\left\\{0 \\,;\\, 1\\right\\}",
         "type": "resultat"
-       },
-       {
-        "html": "Contrôlez à la calculatrice : on retrouve \\(t = 0\\) ou \\(t = 1\\).",
-        "style": "etape",
-        "type": "texte"
        }
       ],
       "style": "final",
@@ -16501,7 +16481,7 @@
     "badge": "Logarithme des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x - 1} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x - 1}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x - 1) \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x - 1 = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 1 + \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x - 1} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x - 1}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x - 1) \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x - 1 = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x - 1} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 2\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -16512,13 +16492,8 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{1 + \\frac{\\log(2)}{\\log(2)}\\right\\}",
+      "tex": "S = \\left\\{2\\right\\}",
       "type": "resultat"
-     },
-     {
-      "html": "Contrôlez à la calculatrice : \\(\\frac{\\log(2)}{\\log(2)} = 1\\), on retrouve \\(x = 2\\).",
-      "style": "etape",
-      "type": "texte"
      }
     ],
     "style": "final",
@@ -16641,7 +16616,7 @@
       "badge": "Logarithme des deux membres",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x - 1} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x - 1}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x - 1) \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x - 1 = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 1 + \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\"></span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x - 1} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x - 1}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x - 1) \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x - 1 = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x - 1} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 2\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -16652,13 +16627,8 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{1 + \\frac{\\log(2)}{\\log(2)}\\right\\}",
+        "tex": "S = \\left\\{2\\right\\}",
         "type": "resultat"
-       },
-       {
-        "html": "Contrôlez à la calculatrice : \\(\\frac{\\log(2)}{\\log(2)} = 1\\), on retrouve \\(x = 2\\).",
-        "style": "etape",
-        "type": "texte"
        }
       ],
       "style": "final",
@@ -19668,7 +19638,7 @@
       "type": "texte"
      },
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{-b}{2a} = \\frac{2\\log(2)}{2\\log(2)}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{-b}{2a} = \\frac{2\\log(2)}{2\\log(2)} = 1\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -19679,13 +19649,8 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{\\frac{2\\log(2)}{2\\log(2)}\\right\\}",
+      "tex": "S = \\left\\{1\\right\\}",
       "type": "resultat"
-     },
-     {
-      "html": "Contrôlez à la calculatrice : \\(x = \\frac{2\\log(2)}{2\\log(2)} = 1\\).",
-      "style": "etape",
-      "type": "texte"
      }
     ],
     "style": "final",
@@ -19784,7 +19749,7 @@
         "type": "texte"
        },
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{-b}{2a} = \\frac{2\\log(2)}{2\\log(2)}\\)</span><span class=\"prop\"></span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x = \\frac{-b}{2a} = \\frac{2\\log(2)}{2\\log(2)} = 1\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -19795,13 +19760,8 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{\\frac{2\\log(2)}{2\\log(2)}\\right\\}",
+        "tex": "S = \\left\\{1\\right\\}",
         "type": "resultat"
-       },
-       {
-        "html": "Contrôlez à la calculatrice : \\(x = \\frac{2\\log(2)}{2\\log(2)} = 1\\).",
-        "style": "etape",
-        "type": "texte"
        }
       ],
       "style": "final",
@@ -22246,7 +22206,7 @@
     "badge": "Logarithme des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x - 1} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x - 1}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x - 1) \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x - 1 = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 1 + \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x - 1} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x - 1}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x - 1) \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x - 1 = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x - 1} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 2\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -22257,13 +22217,8 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{1 + \\frac{\\log(2)}{\\log(2)}\\right\\}",
+      "tex": "S = \\left\\{2\\right\\}",
       "type": "resultat"
-     },
-     {
-      "html": "Contrôlez à la calculatrice : \\(\\frac{\\log(2)}{\\log(2)} = 1\\), on retrouve \\(x = 2\\).",
-      "style": "etape",
-      "type": "texte"
      }
     ],
     "style": "final",
@@ -22386,7 +22341,7 @@
       "badge": "Logarithme des deux membres",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x - 1} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x - 1}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x - 1) \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x - 1 = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 1 + \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\"></span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x - 1} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x - 1}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((x - 1) \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x - 1 = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x - 1} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = 2\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -22397,13 +22352,8 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{1 + \\frac{\\log(2)}{\\log(2)}\\right\\}",
+        "tex": "S = \\left\\{2\\right\\}",
         "type": "resultat"
-       },
-       {
-        "html": "Contrôlez à la calculatrice : \\(\\frac{\\log(2)}{\\log(2)} = 1\\), on retrouve \\(x = 2\\).",
-        "style": "etape",
-        "type": "texte"
        }
       ],
       "style": "final",
@@ -22982,7 +22932,7 @@
     "badge": "Logarithme des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2 \\cdot 3^{x - 1}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2 \\cdot 3^{x - 1})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2) + \\log(3^{x - 1})\\)</span><span class=\"prop\">(log(ab) = log a + log b)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(2) + (x - 1) \\cdot \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = x \\cdot \\log(3) + \\log(2) - \\log(3)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3) - \\log(2) = x(\\log(3) - \\log(2))\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3) - \\log(2)}{\\log(3) - \\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(3) - \\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = \\frac{\\log\\left(\\frac{3}{2}\\right)}{\\log\\left(\\frac{3}{2}\\right)}\\)</span><span class=\"prop\">(log a − log b = log(a/b))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2 \\cdot 3^{x - 1}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2 \\cdot 3^{x - 1})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2) + \\log(3^{x - 1})\\)</span><span class=\"prop\">(log(ab) = log a + log b)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(2) + (x - 1) \\cdot \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = x \\cdot \\log(3) + \\log(2) - \\log(3)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3) - \\log(2) = x(\\log(3) - \\log(2))\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3) - \\log(2)}{\\log(3) - \\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(3) - \\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -23161,7 +23111,7 @@
       "badge": "Logarithme des deux membres",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2 \\cdot 3^{x - 1}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2 \\cdot 3^{x - 1})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2) + \\log(3^{x - 1})\\)</span><span class=\"prop\">(log(ab) = log a + log b)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(2) + (x - 1) \\cdot \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = x \\cdot \\log(3) + \\log(2) - \\log(3)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3) - \\log(2) = x(\\log(3) - \\log(2))\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3) - \\log(2)}{\\log(3) - \\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(3) - \\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = \\frac{\\log\\left(\\frac{3}{2}\\right)}{\\log\\left(\\frac{3}{2}\\right)}\\)</span><span class=\"prop\">(log a − log b = log(a/b))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2 \\cdot 3^{x - 1}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2 \\cdot 3^{x - 1})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2) + \\log(3^{x - 1})\\)</span><span class=\"prop\">(log(ab) = log a + log b)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(2) + (x - 1) \\cdot \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = x \\cdot \\log(3) + \\log(2) - \\log(3)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3) - \\log(2) = x(\\log(3) - \\log(2))\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3) - \\log(2)}{\\log(3) - \\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(3) - \\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -23207,12 +23157,7 @@
     "badge": "Logarithme des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2^{2x - 3}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2^{2x - 3})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = (2x - 3) \\cdot \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = 2x \\cdot \\log(2) - 3\\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3\\log(2) = x \\cdot \\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{3\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = \\frac{\\log(8)}{\\log(2)}\\)</span><span class=\"prop\">(propriétés des logarithmes)</span></div></div>",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3\\log(2) = \\log(2^{3})\\)</span><span class=\"prop\">(propriétés des logarithmes)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{3\\log(2)} = \\log(8)\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2^{2x - 3}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2^{2x - 3})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = (2x - 3) \\cdot \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = 2x \\cdot \\log(2) - 3\\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3\\log(2) = x \\cdot \\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{3\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 3\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -23223,13 +23168,8 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{\\frac{\\log(8)}{\\log(2)}\\right\\}",
+      "tex": "S = \\left\\{3\\right\\}",
       "type": "resultat"
-     },
-     {
-      "html": "Contrôlez à la calculatrice : \\(x = \\frac{\\log(8)}{\\log(2)} = 3\\).",
-      "style": "etape",
-      "type": "texte"
      }
     ],
     "style": "final",
@@ -23337,12 +23277,7 @@
       "badge": "Logarithme des deux membres",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2^{2x - 3}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2^{2x - 3})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = (2x - 3) \\cdot \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = 2x \\cdot \\log(2) - 3\\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3\\log(2) = x \\cdot \\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{3\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = \\frac{\\log(8)}{\\log(2)}\\)</span><span class=\"prop\">(propriétés des logarithmes)</span></div></div>",
-        "style": "etape",
-        "type": "texte"
-       },
-       {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3\\log(2) = \\log(2^{3})\\)</span><span class=\"prop\">(propriétés des logarithmes)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{3\\log(2)} = \\log(8)\\)</span><span class=\"prop\"></span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2^{2x - 3}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2^{2x - 3})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = (2x - 3) \\cdot \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = 2x \\cdot \\log(2) - 3\\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3\\log(2) = x \\cdot \\log(2)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{3\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 3\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -23353,13 +23288,8 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{\\frac{\\log(8)}{\\log(2)}\\right\\}",
+        "tex": "S = \\left\\{3\\right\\}",
         "type": "resultat"
-       },
-       {
-        "html": "Contrôlez à la calculatrice : \\(x = \\frac{\\log(8)}{\\log(2)} = 3\\).",
-        "style": "etape",
-        "type": "texte"
        }
       ],
       "style": "final",
@@ -24807,7 +24737,7 @@
     "badge": "Logarithme des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -24818,13 +24748,8 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{\\frac{\\log(2)}{\\log(2)}\\right\\}",
+      "tex": "S = \\left\\{1\\right\\}",
       "type": "resultat"
-     },
-     {
-      "html": "Contrôlez à la calculatrice : \\(x = \\frac{\\log(2)}{\\log(2)} = 1\\).",
-      "style": "etape",
-      "type": "texte"
      }
     ],
     "style": "final",
@@ -24947,7 +24872,7 @@
       "badge": "Logarithme des deux membres",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -24958,13 +24883,8 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{\\frac{\\log(2)}{\\log(2)}\\right\\}",
+        "tex": "S = \\left\\{1\\right\\}",
         "type": "resultat"
-       },
-       {
-        "html": "Contrôlez à la calculatrice : \\(x = \\frac{\\log(2)}{\\log(2)} = 1\\).",
-        "style": "etape",
-        "type": "texte"
        }
       ],
       "style": "final",
@@ -25632,7 +25552,7 @@
     "badge": "Logarithme des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2 \\cdot 4^{x - 1}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2 \\cdot 4^{x - 1})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2) + \\log(4^{x - 1})\\)</span><span class=\"prop\">(log(ab) = log a + log b)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(2) + (x - 1) \\cdot \\log(4)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = x \\cdot \\log(4) + \\log(2) - \\log(4)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(4) - \\log(2) = x(\\log(4) - \\log(2))\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(4) - \\log(2)}{\\log(4) - \\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(4) - \\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(log a − log b = log(a/b))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2 \\cdot 4^{x - 1}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2 \\cdot 4^{x - 1})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2) + \\log(4^{x - 1})\\)</span><span class=\"prop\">(log(ab) = log a + log b)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(2) + (x - 1) \\cdot \\log(4)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = x \\cdot \\log(4) + \\log(2) - \\log(4)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(4) - \\log(2) = x(\\log(4) - \\log(2))\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(4) - \\log(2)}{\\log(4) - \\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(4) - \\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -25733,7 +25653,7 @@
       "badge": "Logarithme des deux membres",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2 \\cdot 4^{x - 1}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2 \\cdot 4^{x - 1})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2) + \\log(4^{x - 1})\\)</span><span class=\"prop\">(log(ab) = log a + log b)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(2) + (x - 1) \\cdot \\log(4)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = x \\cdot \\log(4) + \\log(2) - \\log(4)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(4) - \\log(2) = x(\\log(4) - \\log(2))\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(4) - \\log(2)}{\\log(4) - \\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(4) - \\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(log a − log b = log(a/b))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2 \\cdot 4^{x - 1}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2 \\cdot 4^{x - 1})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2) + \\log(4^{x - 1})\\)</span><span class=\"prop\">(log(ab) = log a + log b)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(2) + (x - 1) \\cdot \\log(4)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = x \\cdot \\log(4) + \\log(2) - \\log(4)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(4) - \\log(2) = x(\\log(4) - \\log(2))\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(4) - \\log(2)}{\\log(4) - \\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(4) - \\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -27049,7 +26969,7 @@
     "badge": "Logarithme des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -27060,13 +26980,8 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{\\frac{\\log(2)}{\\log(2)}\\right\\}",
+      "tex": "S = \\left\\{1\\right\\}",
       "type": "resultat"
-     },
-     {
-      "html": "Contrôlez à la calculatrice : \\(x = \\frac{\\log(2)}{\\log(2)} = 1\\).",
-      "style": "etape",
-      "type": "texte"
      }
     ],
     "style": "final",
@@ -27179,7 +27094,7 @@
       "badge": "Logarithme des deux membres",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -27190,13 +27105,8 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{\\frac{\\log(2)}{\\log(2)}\\right\\}",
+        "tex": "S = \\left\\{1\\right\\}",
         "type": "resultat"
-       },
-       {
-        "html": "Contrôlez à la calculatrice : \\(x = \\frac{\\log(2)}{\\log(2)} = 1\\).",
-        "style": "etape",
-        "type": "texte"
        }
       ],
       "style": "final",
@@ -32811,7 +32721,7 @@
     "badge": "Logarithme des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -32822,13 +32732,8 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{\\frac{\\log(3)}{\\log(3)}\\right\\}",
+      "tex": "S = \\left\\{1\\right\\}",
       "type": "resultat"
-     },
-     {
-      "html": "Contrôlez à la calculatrice : \\(x = \\frac{\\log(3)}{\\log(3)} = 1\\).",
-      "style": "etape",
-      "type": "texte"
      }
     ],
     "style": "final",
@@ -32951,7 +32856,7 @@
       "badge": "Logarithme des deux membres",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -32962,13 +32867,8 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{\\frac{\\log(3)}{\\log(3)}\\right\\}",
+        "tex": "S = \\left\\{1\\right\\}",
         "type": "resultat"
-       },
-       {
-        "html": "Contrôlez à la calculatrice : \\(x = \\frac{\\log(3)}{\\log(3)} = 1\\).",
-        "style": "etape",
-        "type": "texte"
        }
       ],
       "style": "final",
@@ -34781,7 +34681,7 @@
     "badge": "Logarithme des deux membres (t = 2)",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -34792,13 +34692,8 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{0 \\,;\\, \\frac{\\log(2)}{\\log(2)}\\right\\}",
+      "tex": "S = \\left\\{0 \\,;\\, 1\\right\\}",
       "type": "resultat"
-     },
-     {
-      "html": "Contrôlez à la calculatrice : on retrouve \\(x = 0\\) ou \\(x = 1\\).",
-      "style": "etape",
-      "type": "texte"
      }
     ],
     "style": "final",
@@ -35060,7 +34955,7 @@
       "badge": "Logarithme des deux membres (t = 2)",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -35071,13 +34966,8 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{0 \\,;\\, \\frac{\\log(2)}{\\log(2)}\\right\\}",
+        "tex": "S = \\left\\{0 \\,;\\, 1\\right\\}",
         "type": "resultat"
-       },
-       {
-        "html": "Contrôlez à la calculatrice : on retrouve \\(x = 0\\) ou \\(x = 1\\).",
-        "style": "etape",
-        "type": "texte"
        }
       ],
       "style": "final",
@@ -36605,7 +36495,7 @@
     "badge": "Logarithme des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4^{x} = 4\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(4^{x}) = \\log(4)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(4) = \\log(4)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(4)}{\\log(4)}\\)</span><span class=\"prop\">(car \\(\\log(4) \\neq 0\\))</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4^{x} = 4\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(4^{x}) = \\log(4)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(4) = \\log(4)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(4)}{\\log(4)}\\)</span><span class=\"prop\">(car \\(\\log(4) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -36616,13 +36506,8 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{\\frac{\\log(4)}{\\log(4)}\\right\\}",
+      "tex": "S = \\left\\{1\\right\\}",
       "type": "resultat"
-     },
-     {
-      "html": "Contrôlez à la calculatrice : \\(x = \\frac{\\log(4)}{\\log(4)} = 1\\).",
-      "style": "etape",
-      "type": "texte"
      }
     ],
     "style": "final",
@@ -36745,7 +36630,7 @@
       "badge": "Logarithme des deux membres",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4^{x} = 4\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(4^{x}) = \\log(4)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(4) = \\log(4)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(4)}{\\log(4)}\\)</span><span class=\"prop\">(car \\(\\log(4) \\neq 0\\))</span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(4^{x} = 4\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(4^{x}) = \\log(4)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(4) = \\log(4)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(4)}{\\log(4)}\\)</span><span class=\"prop\">(car \\(\\log(4) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -36756,13 +36641,8 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{\\frac{\\log(4)}{\\log(4)}\\right\\}",
+        "tex": "S = \\left\\{1\\right\\}",
         "type": "resultat"
-       },
-       {
-        "html": "Contrôlez à la calculatrice : \\(x = \\frac{\\log(4)}{\\log(4)} = 1\\).",
-        "style": "etape",
-        "type": "texte"
        }
       ],
       "style": "final",
@@ -37801,17 +37681,7 @@
     "badge": "Logarithme des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x^{2}} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x^{2}}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{\\frac{\\log(2)}{\\log(2)}}\\)</span><span class=\"prop\"></span></div></div>",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{\\frac{\\log(2)}{\\log(2)}}\\)</span><span class=\"prop\"></span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x^{2}} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x^{2}}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x^{2}} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -1 \\text{ ou } x = 1\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -37822,13 +37692,8 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\}",
+      "tex": "S = \\left\\{-1 \\,;\\, 1\\right\\}",
       "type": "resultat"
-     },
-     {
-      "html": "Contrôlez à la calculatrice : on retrouve \\(x = -1\\) ou \\(x = 1\\).",
-      "style": "etape",
-      "type": "texte"
      }
     ],
     "style": "final",
@@ -37903,17 +37768,7 @@
       "badge": "Logarithme des deux membres",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x^{2}} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x^{2}}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div></div>",
-        "style": "etape",
-        "type": "texte"
-       },
-       {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{1} = -\\sqrt{\\frac{\\log(2)}{\\log(2)}}\\)</span><span class=\"prop\"></span></div></div>",
-        "style": "etape",
-        "type": "texte"
-       },
-       {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(x_{2} = \\sqrt{\\frac{\\log(2)}{\\log(2)}}\\)</span><span class=\"prop\"></span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2^{x^{2}} = 2\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(2^{x^{2}}) = \\log(2)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} \\cdot \\log(2) = \\log(2)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x^{2} = \\frac{\\log(2)}{\\log(2)}\\)</span><span class=\"prop\">(car \\(\\log(2) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x^{2}} = 1\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = -1 \\text{ ou } x = 1\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -37924,13 +37779,8 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{x_{1} \\,;\\, x_{2}\\right\\}",
+        "tex": "S = \\left\\{-1 \\,;\\, 1\\right\\}",
         "type": "resultat"
-       },
-       {
-        "html": "Contrôlez à la calculatrice : on retrouve \\(x = -1\\) ou \\(x = 1\\).",
-        "style": "etape",
-        "type": "texte"
        }
       ],
       "style": "final",
@@ -39108,7 +38958,7 @@
     "badge": "Logarithme des deux membres (t = 5)",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{x} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5^{x}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(5) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(5)}{\\log(5)}\\)</span><span class=\"prop\">(car \\(\\log(5) \\neq 0\\))</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{x} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5^{x}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(5) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(5)}{\\log(5)}\\)</span><span class=\"prop\">(car \\(\\log(5) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -39119,13 +38969,8 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{0 \\,;\\, \\frac{\\log(5)}{\\log(5)}\\right\\}",
+      "tex": "S = \\left\\{0 \\,;\\, 1\\right\\}",
       "type": "resultat"
-     },
-     {
-      "html": "Contrôlez à la calculatrice : on retrouve \\(x = 0\\) ou \\(x = 1\\).",
-      "style": "etape",
-      "type": "texte"
      }
     ],
     "style": "final",
@@ -39387,7 +39232,7 @@
       "badge": "Logarithme des deux membres (t = 5)",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{x} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5^{x}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(5) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(5)}{\\log(5)}\\)</span><span class=\"prop\">(car \\(\\log(5) \\neq 0\\))</span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{x} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5^{x}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(5) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(5)}{\\log(5)}\\)</span><span class=\"prop\">(car \\(\\log(5) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -39398,13 +39243,8 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{0 \\,;\\, \\frac{\\log(5)}{\\log(5)}\\right\\}",
+        "tex": "S = \\left\\{0 \\,;\\, 1\\right\\}",
         "type": "resultat"
-       },
-       {
-        "html": "Contrôlez à la calculatrice : on retrouve \\(x = 0\\) ou \\(x = 1\\).",
-        "style": "etape",
-        "type": "texte"
        }
       ],
       "style": "final",
@@ -39422,17 +39262,7 @@
     "badge": "Logarithme des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{3x + 2} = (5^{x})^{2}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5^{3x + 2}) = \\log((5^{x})^{2})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((3x + 2) \\cdot \\log(5) = 2x \\cdot \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3x \\cdot \\log(5) + 2\\log(5) = 2x \\cdot \\log(5)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2\\log(5) = x(-\\log(5))\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{2\\log(5)}{-\\log(5)}\\)</span><span class=\"prop\">(car \\(-\\log(5) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = \\frac{\\log(25)}{\\log\\left(\\frac{1}{5}\\right)}\\)</span><span class=\"prop\">(propriétés des logarithmes)</span></div></div>",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\log(5) = \\log(5^{2})\\)</span><span class=\"prop\">(propriétés des logarithmes)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{2\\log(5)} = \\log(25)\\)</span><span class=\"prop\"></span></div></div>",
-      "style": "etape",
-      "type": "texte"
-     },
-     {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-\\log(5) = \\log\\left(\\frac{1}{5}\\right)\\)</span><span class=\"prop\">(propriétés des logarithmes)</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{3x + 2} = (5^{x})^{2}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5^{3x + 2}) = \\log((5^{x})^{2})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((3x + 2) \\cdot \\log(5) = 2x \\cdot \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3x \\cdot \\log(5) + 2\\log(5) = 2x \\cdot \\log(5)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2\\log(5) = x(-\\log(5))\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{2\\log(5)}{-\\log(5)}\\)</span><span class=\"prop\">(car \\(-\\log(5) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = -2\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -39443,13 +39273,8 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{\\frac{\\log(25)}{\\log\\left(\\frac{1}{5}\\right)}\\right\\}",
+      "tex": "S = \\left\\{-2\\right\\}",
       "type": "resultat"
-     },
-     {
-      "html": "Contrôlez à la calculatrice : \\(x = \\frac{\\log(25)}{\\log\\left(\\frac{1}{5}\\right)} = -2\\).",
-      "style": "etape",
-      "type": "texte"
      }
     ],
     "style": "final",
@@ -39518,17 +39343,7 @@
       "badge": "Logarithme des deux membres",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{3x + 2} = (5^{x})^{2}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5^{3x + 2}) = \\log((5^{x})^{2})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((3x + 2) \\cdot \\log(5) = 2x \\cdot \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3x \\cdot \\log(5) + 2\\log(5) = 2x \\cdot \\log(5)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2\\log(5) = x(-\\log(5))\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{2\\log(5)}{-\\log(5)}\\)</span><span class=\"prop\">(car \\(-\\log(5) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = \\frac{\\log(25)}{\\log\\left(\\frac{1}{5}\\right)}\\)</span><span class=\"prop\">(propriétés des logarithmes)</span></div></div>",
-        "style": "etape",
-        "type": "texte"
-       },
-       {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(2\\log(5) = \\log(5^{2})\\)</span><span class=\"prop\">(propriétés des logarithmes)</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{2\\log(5)} = \\log(25)\\)</span><span class=\"prop\"></span></div></div>",
-        "style": "etape",
-        "type": "texte"
-       },
-       {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(-\\log(5) = \\log\\left(\\frac{1}{5}\\right)\\)</span><span class=\"prop\">(propriétés des logarithmes)</span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{3x + 2} = (5^{x})^{2}\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5^{3x + 2}) = \\log((5^{x})^{2})\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\((3x + 2) \\cdot \\log(5) = 2x \\cdot \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(3x \\cdot \\log(5) + 2\\log(5) = 2x \\cdot \\log(5)\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(2\\log(5) = x(-\\log(5))\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{2\\log(5)}{-\\log(5)}\\)</span><span class=\"prop\">(car \\(-\\log(5) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = -2\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -39539,13 +39354,8 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{\\frac{\\log(25)}{\\log\\left(\\frac{1}{5}\\right)}\\right\\}",
+        "tex": "S = \\left\\{-2\\right\\}",
         "type": "resultat"
-       },
-       {
-        "html": "Contrôlez à la calculatrice : \\(x = \\frac{\\log(25)}{\\log\\left(\\frac{1}{5}\\right)} = -2\\).",
-        "style": "etape",
-        "type": "texte"
        }
       ],
       "style": "final",
@@ -40055,7 +39865,7 @@
     "badge": "Logarithme des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{x} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5^{x}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(5) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(5)}{\\log(5)}\\)</span><span class=\"prop\">(car \\(\\log(5) \\neq 0\\))</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{x} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5^{x}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(5) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(5)}{\\log(5)}\\)</span><span class=\"prop\">(car \\(\\log(5) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -40066,13 +39876,8 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{\\frac{\\log(5)}{\\log(5)}\\right\\}",
+      "tex": "S = \\left\\{1\\right\\}",
       "type": "resultat"
-     },
-     {
-      "html": "Contrôlez à la calculatrice : \\(x = \\frac{\\log(5)}{\\log(5)} = 1\\).",
-      "style": "etape",
-      "type": "texte"
      }
     ],
     "style": "final",
@@ -40205,7 +40010,7 @@
       "badge": "Logarithme des deux membres",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{x} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5^{x}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(5) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(5)}{\\log(5)}\\)</span><span class=\"prop\">(car \\(\\log(5) \\neq 0\\))</span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(5^{x} = 5\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(5^{x}) = \\log(5)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(5) = \\log(5)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(5)}{\\log(5)}\\)</span><span class=\"prop\">(car \\(\\log(5) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -40216,13 +40021,8 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{\\frac{\\log(5)}{\\log(5)}\\right\\}",
+        "tex": "S = \\left\\{1\\right\\}",
         "type": "resultat"
-       },
-       {
-        "html": "Contrôlez à la calculatrice : \\(x = \\frac{\\log(5)}{\\log(5)} = 1\\).",
-        "style": "etape",
-        "type": "texte"
        }
       ],
       "style": "final",
@@ -42258,7 +42058,7 @@
     "badge": "Logarithme des deux membres (t = 3)",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -42269,13 +42069,8 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{0 \\,;\\, \\frac{\\log(3)}{\\log(3)}\\right\\}",
+      "tex": "S = \\left\\{0 \\,;\\, 1\\right\\}",
       "type": "resultat"
-     },
-     {
-      "html": "Contrôlez à la calculatrice : on retrouve \\(x = 0\\) ou \\(x = 1\\).",
-      "style": "etape",
-      "type": "texte"
      }
     ],
     "style": "final",
@@ -42537,7 +42332,7 @@
       "badge": "Logarithme des deux membres (t = 3)",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -42548,13 +42343,8 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{0 \\,;\\, \\frac{\\log(3)}{\\log(3)}\\right\\}",
+        "tex": "S = \\left\\{0 \\,;\\, 1\\right\\}",
         "type": "resultat"
-       },
-       {
-        "html": "Contrôlez à la calculatrice : on retrouve \\(x = 0\\) ou \\(x = 1\\).",
-        "style": "etape",
-        "type": "texte"
        }
       ],
       "style": "final",
@@ -42897,7 +42687,7 @@
     "badge": "Logarithme des deux membres",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -42908,13 +42698,8 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{\\frac{\\log(3)}{\\log(3)}\\right\\}",
+      "tex": "S = \\left\\{1\\right\\}",
       "type": "resultat"
-     },
-     {
-      "html": "Contrôlez à la calculatrice : \\(x = \\frac{\\log(3)}{\\log(3)} = 1\\).",
-      "style": "etape",
-      "type": "texte"
      }
     ],
     "style": "final",
@@ -43043,7 +42828,7 @@
       "badge": "Logarithme des deux membres",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -43054,13 +42839,8 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{\\frac{\\log(3)}{\\log(3)}\\right\\}",
+        "tex": "S = \\left\\{1\\right\\}",
         "type": "resultat"
-       },
-       {
-        "html": "Contrôlez à la calculatrice : \\(x = \\frac{\\log(3)}{\\log(3)} = 1\\).",
-        "style": "etape",
-        "type": "texte"
        }
       ],
       "style": "final",
@@ -43122,7 +42902,7 @@
     "badge": "Logarithme des deux membres (t = 3)",
     "blocs": [
      {
-      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div></div>",
+      "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
       "style": "etape",
       "type": "texte"
      }
@@ -43145,7 +42925,7 @@
    {
     "blocs": [
      {
-      "tex": "S = \\left\\{\\frac{\\log(3)}{\\log(3)} \\,;\\, \\frac{\\log(9)}{\\log(3)}\\right\\}",
+      "tex": "S = \\left\\{1 \\,;\\, \\frac{\\log(9)}{\\log(3)}\\right\\}",
       "type": "resultat"
      },
      {
@@ -43307,7 +43087,7 @@
       "badge": "Logarithme des deux membres (t = 3)",
       "blocs": [
        {
-        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div></div>",
+        "html": "<div class=\"chaine\"><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(3^{x} = 3\\)</span><span class=\"prop\"></span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(\\log(3^{x}) = \\log(3)\\)</span><span class=\"prop\">(log des deux membres)</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x \\cdot \\log(3) = \\log(3)\\)</span><span class=\"prop\">(log(a^A) = A · log(a))</span></div><div class=\"ligne\"><span class=\"lien\">\\(\\iff\\)</span><span class=\"expr\">\\(x = \\frac{\\log(3)}{\\log(3)}\\)</span><span class=\"prop\">(car \\(\\log(3) \\neq 0\\))</span></div><div class=\"ligne\"><span class=\"lien\"></span><span class=\"expr\">\\(\\phantom{x} = 1\\)</span><span class=\"prop\"></span></div></div>",
         "style": "etape",
         "type": "texte"
        }
@@ -43330,7 +43110,7 @@
      {
       "blocs": [
        {
-        "tex": "S = \\left\\{\\frac{\\log(3)}{\\log(3)} \\,;\\, \\frac{\\log(9)}{\\log(3)}\\right\\}",
+        "tex": "S = \\left\\{1 \\,;\\, \\frac{\\log(9)}{\\log(3)}\\right\\}",
         "type": "resultat"
        },
        {

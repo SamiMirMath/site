@@ -2056,6 +2056,10 @@ def _alpha(g, d, x, fg, fd, ln):
         else:
             c = Op("/", reste if reste is not None else droite, a_node)
         chaine.ajouter(Eq(f_tree, c), "⇔", Car(a_node))
+        q = _quotient_de_logs(c)
+        if q is not None:                                            # x² = log(2)/log(2) = 1 : la suite se fait avec le nombre (Q4)
+            c = _nb_exact(q)
+            chaine.ajouter(c, "=")
     k = _const(c)
     if k is not None and not isinstance(c, Nb):                      # 2^(x² − 5x) = 2^(−6) : l'exposant écrit −6 est le nombre −6, la suite le calcule
         c = _nb_exact(k)                                             # (x² − 5x + 6 = 0, jamais x² − 5x − (−6) = 0 ni Δ = … (−−6))
@@ -2180,6 +2184,11 @@ def _premier_degre(chaine, mg, md, x, ecrit, ln):
         else:
             chaine.ajouter(Eq(X, Op("/", C, D)), "⇔", None if pur else Car(D))
             solution = Op("/", C, D)
+            q = _quotient_de_logs(solution)
+            if q is not None:                                      # x = 3log(2)/log(2) = 3 (Q4) : ni regroupement ni contrôle
+                solution = _nb_exact(q)
+                chaine.ajouter(solution, "=")
+                return [chaine], [solution], None
     lignes = [chaine]
     if not pur and not ln and _fusionner(cte):
         haut, bas = _regrouper(cte, ecrit), _regrouper(coeff, ecrit)
@@ -2226,6 +2235,10 @@ def _second_degre(chaine, P, x, ecrit, ln):
         chaine.ajouter(Ou([Eq(X, Nb(0)), Eq(interieur, Nb(0))]), "⇔", PROP_PRODUIT_NUL)
         racine = Op("/", _somme([_oppose(t) for t in B], x, ecrit, ln), Anode)
         suite = Chaine([Eq(interieur, Nb(0)), Eq(X, racine)], ["⇔"], [Car(Anode)])
+        q = _quotient_de_logs(racine)
+        if q is not None:                                            # x = 5log(2)/log(2) = 5, S = {0 ; 5} (Q4)
+            suite.ajouter(_nb_exact(q), "=")
+            return [chaine, suite], sorted([Nb(0), _nb_exact(q)], key=valeur), None
         if _valeur_rationnelle(racine) is not None:          # log(8)/log(2) = 3 : le contrôle à la calculatrice l'écrit
             return [chaine, suite], sorted([Nb(0), racine], key=valeur), None
         nom = Defini("x_{1}" if valeur(racine) < 0 else "x_{2}", racine)   # S = {x₁ ; 0} tient à 360 px, pas S = {(log 2 − log 3)/log 2 ; 0}
@@ -2244,6 +2257,10 @@ def _second_degre(chaine, P, x, ecrit, ln):
     deux_a = Op("*", Nb(2), Anode)
     if signe == 0:
         racine = Op("/", moins_b, deux_a) if B else Nb(0)
+        q = _quotient_de_logs(racine)
+        if q is not None:                                            # x = −b/(2a) = 2log(2)/(2log(2)) = 1 (Q4)
+            lignes += _une_seule_solution(X, racine, _nb_exact(q))
+            return lignes, [_nb_exact(q)], None
         lignes += _une_seule_solution(X, racine)
         return lignes, [racine], None
     racine = Fn("sqrt", D)
@@ -3201,6 +3218,34 @@ def _valeur_rationnelle(n):
             return f if ecart < decimal.Decimal("1e-40") else None
     except (ArithmeticError, ValueError, decimal.DecimalException):
         return None
+
+
+def _quotient_de_logs(n):
+    """k (Fraction) quand n = p·L / (q·L), le même logarithme L écrit à l'identique en haut et en bas (5log(2)/log(2) = 5, 2log(2)/(2log(2)) = 1),
+    ou quand le numérateur et le dénominateur sont écrits à l'identique ((log(4) − log(2))/(log(4) − log(2)) = 1) :
+    la simplification d'une fraction, sans calcul de logarithme (log(32)/log(2) n'est pas touché : spécification, exemples 10 et 11).
+    Garde-fou : k doit aussi être la valeur trouvée par la sonde à 60 chiffres (_valeur_rationnelle) ; None sinon (chantier explog-q4-q6, Q4)."""
+    def coefficient_et_log(m):
+        if isinstance(m, Log):
+            return F(1), m
+        if isinstance(m, Neg):
+            r = coefficient_et_log(m.a)
+            return None if r is None else (-r[0], r[1])
+        if isinstance(m, Op) and m.op == "*":
+            for k, l in ((m.a, m.b), (m.b, m.a)):
+                if isinstance(l, Log) and _const(k) is not None:
+                    return _const(k), l
+        return None
+    if not (isinstance(n, Op) and n.op == "/") or variables(n):
+        return None
+    if tex(n.a) == tex(n.b) and _contient_log(n.a):                  # (log(4) − log(2))/(log(4) − log(2)) = 1
+        k = F(1)
+    else:
+        haut, bas = coefficient_et_log(n.a), coefficient_et_log(n.b)
+        if haut is None or bas is None or bas[0] == 0 or tex(haut[1]) != tex(bas[1]):
+            return None
+        k = haut[0] / bas[0]
+    return k if _valeur_rationnelle(n) == k else None
 
 
 def _signe(n):
