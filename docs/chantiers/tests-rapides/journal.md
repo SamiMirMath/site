@@ -453,7 +453,7 @@ Compteur par processus (extension de mesure hors du dépôt) sur les 10 fichiers
   `test_proprietes_limites` (10,8 s de somme), parce que `test_redaction_limites` (avec mock) l'importe : la garde interdit qu'un fichier
   avec mock atteigne, même de loin, un fichier qui importe `memo` (option la plus prudente). `test_doctrine_bh` importe `TestStyle` de
   `test_redaction_limites` (fichier avec mock) : il est gardé, car il ne contient lui-même aucun mock et `TestStyle` (sans mock) appelle
-  `la.etudier` directement, jamais `memo` (voir « Questions » de `suivi.md`).
+  `la.etudier` directement, jamais `memo` (voir « Questions détaillées », plus bas).
 - **Tests ajoutés** (seuls ajouts aux listes) :
   - `tests/python/test_memo.py::TestMemo::test_copie_profonde_egale_au_moteur`, `::test_cache_actif_le_moteur_n_est_appele_qu_une_fois`,
     `::test_memo_0_appelle_vraiment_le_moteur_a_chaque_fois` (6 entrées, dont une avec `avec_bornes=True` et une saisie refusée ; les
@@ -880,3 +880,50 @@ P4 (7186b6d) : verifier ACCEPTÉ sur les deux rapports (MEMO lu correctement, 6 
 P5 (46fd547) : verifier ACCEPTÉ (17 ajouts listés) ; rapide code 0 ; sélection de rapide appliquée aux 10 fichiers du commit : code 0 en 254 s ; avec MEMO=0, la même sélection dépasse la limite de 5 min du contrôle (pas un échec de test ; couvert par la suite MEMO=0 de fin de session).
 
 P6 (d116aa1) : verifier ACCEPTÉ (17 ajouts listés) ; rapide code 0 ; sélection de rapide sur les fichiers du commit (tests de fumée seulement, lancer.py n'étant pas un moteur) code 0 ; diff de lancer.py relu : pages(), python() et complet intacts.
+
+P7 (8d08a67) : git diff --stat du commit = 3 fichiers de docs seulement (aucun code) ; verifier ACCEPTÉ ; rapide code 0.
+
+Fin de session (8d08a67, suites relancées par le chef d'orchestre) : suite complète normale --rapport, code 0 ; Python 1328 passés + 1 xfail, 103 161 sous-tests, 556 s ; pages 122 passés, 2 554 sous-tests, 966 s. Suite complète MEMO=0 --rapport, code 0 ; Python 1328 passés + 1 xfail, 103 161 sous-tests, 660 s ; pages 122 passés, 2 554 sous-tests, 973 s. comparer_listes avec la référence P0 : pages identiques nom par nom ; Python : 34 différences, toutes dues aux 17 tests ajoutés (6 de P4, 11 de P5), en collecte et en résultats, rien d'autre ; aucun test de la référence absent de la collecte (--collect-only -q lancé à part). Normale contre MEMO=0 : identiques nom par nom (Python et pages, issues et sous-tests). verifier ACCEPTÉ sur les deux rapports (MEMO=0 lu). Murs avant (P0, deux lancements + contrôle) : Python 737 / 755 / 737 s, pages 967 / 938 / 950 s ; après : Python 556 s (MEMO=0 : 660 s), pages 966 s (973 s). Test instable du clavier : un échec au 2ᵉ lancement de P0 (avant P1), aucun ensuite (P1 → fin).
+
+Résumé de session (départ 8d08a67 + `suivi.md`, `journal.md`) : suite complète d'avant commit `complet --rapport …/scratchpad/RESUME-rapport`, code 0 ; Python 1328 passés + 1 xfail, 103 161 sous-tests, 571 s ; pages 122 passés, 2 554 sous-tests, 965 s. comparer_listes avec la référence P0 : pages identiques nom par nom ; Python : 34 lignes, toutes « nouveau » (les 17 tests de P4 et P5). comparer_listes avec P7-rapport : identique nom par nom (Python et pages).
+
+## Questions détaillées (texte complet, déplacé de `suivi.md` le 05.11.2026)
+
+`suivi.md` n'en garde qu'une liste courte, dans le « Résumé de session ».
+
+- **P2, `rapide` après le commit.** L'audit §M1 prévoit que le chef d'orchestre lance `rapide` après `verifier`. Mais sur l'arbre propre
+  d'après le commit, `rapide` ne voit aucun fichier modifié et ne relance que les tests de fumée (3 fichiers). Faut-il lui ajouter une
+  base (par exemple `rapide --depuis HEAD~1`, avec P6) ? En attendant (option qui affiche le moins), la méthode dit seulement ce que
+  `rapide` relance aujourd'hui.
+- **P2, liste permise de `verifier`.** Proposée et justifiée dans `journal.md` (« Règles exactes ») : `docs/chantiers/<chantier>/suivi.md`
+  et `journal.md` (écrits après le lancement), `CLAUDE.md` hors du commit. À confirmer.
+
+- **P4, `test_doctrine_bh.py`.** Il ne contient aucun mock et importe `memo`, mais il importe aussi `TestStyle` de
+  `test_redaction_limites.py` (qui contient des mock), classe recollectée dans `test_doctrine_bh` (9 tests, sans mock, qui appellent
+  `la.etudier` directement). Lecture retenue : la décision T4 porte sur le texte du fichier. La garde interdit seulement le sens dangereux
+  (un fichier avec mock qui atteint un fichier qui importe `memo`), d'où l'exclusion de `test_proprietes_limites.py`. À confirmer.
+- **P4, gain.** 20 s de mur sur le groupe des fichiers concernés, 12 s dans la suite complète (dans le bruit) : bien moins que l'audit
+  (1 à 1,5 min), car les gros appelants de l'outil Limites ont des mock. Garder le cache tel quel ?
+
+- **P5, module à part.** Le cache de `racines` est dans `tests/python/memo_racines.py` et non dans `memo.py` : les 4 fichiers appelants
+  créent des méthodes de test par `setattr(TestX, "test_…", …)`, mot que la garde de P4 interdit dans un fichier qui importe `memo`.
+  La garde de P4 n'est pas touchée ; `test_memo_racines_garde.py` admet `setattr` seulement sous cette forme (classe `TestCase` du
+  fichier, nom en `test_`). À confirmer.
+
+- **P6, filière M.** `rapide` ajoute `exponentielles-logarithmes-M` à `OUTILS` dès que la page des exponentielles est relancée (moteur
+  ou page) : sans ce nom, `test_rendu.py::test_exponentielles_logarithmes_filiere_m` était sauté, aussi pour une page modifiée (avant
+  P6). Un test de plus, jamais de moins. À confirmer.
+- **P6, corpus des pages.** Un module de `tests/python` importé par les tests de pages (`cas.py`, `cas_el.py`, `moteurs.py`) relance
+  maintenant toutes les pages (corpus réduit), comme un fichier de `tests/pages/`. Un `.py` d'un dossier d'outil que le manifeste ne
+  cite pas (`moteur/construire_roues.py`, nouveau fichier) donne aussi « tous » (option la plus sûre). À confirmer.
+- **P6, pas de test dans la suite.** La règle de `rapide` n'est couverte par aucun test de la suite (les listes doivent rester celles de
+  la référence + 17) : seulement par le banc de simulations noté dans `journal.md`, « P6 ». Faut-il un test (`test_lancer.py`) dans un
+  chantier suivant ?
+- **P6 et `--depuis`.** P6 rend `--depuis HEAD~1` **plus utile** (il relancerait aussi les pages des moteurs du commit, au prix de
+  quelques minutes de plus) ; toujours pas ajouté (non tranché).
+
+- **P7, Pyodide (décision à prendre, `etude-pyodide.md` §5).** Faire dans une partie suivante (a) l'onglet de réserve (environ 35 s,
+  risque très faible, `navigateur.py` seul) ? (b) le cache de Chrome gardé d'une classe à la suivante (environ 45 à 60 s), ou rouvrir
+  T8 (Chrome partagé) au vu des mesures (T8 ne comptait pas les 11 s de la 1ʳᵉ page à froid de chaque Chrome) ? Confirmer l'abandon
+  du partage de Pyodide entre les tests (M8). Hors chantier : la pause de 0,7 s avant SymPy et `invalidate_caches` (0,3 s), qui
+  coûtent aussi à l'élève. En attendant (option qui affiche le moins) : rien n'est changé.

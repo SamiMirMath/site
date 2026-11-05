@@ -2,7 +2,106 @@
 
 ## Résumé de session
 
-*(À remplir par le chef d'orchestre en fin de session.)*
+Session du 04 au 05.11.2026, sans vous. **Rien n'a été poussé de toute la session** (`origin/main` est resté à ca6c243).
+Pas d'exemple cible à rendre : P0 à P7 ne changent aucun texte affiché (aucun instantané modifié) ; le rendu de l'étape B est
+dans `docs/chantiers/correctif-explog-delta.md`.
+
+**a. Étape A — méthode de chantier (commit 351fb77 sur `main`).** Un seul fichier trouvé, `~/Downloads/methode-chantiers.md`
+(4 nov., 6 258 octets), versé dans `docs/methode-chantiers.md`. Ligne ajoutée à la section « Suivi » de `CLAUDE.md` :
+« - Méthode de travail par chantier : docs/methode-chantiers.md. ». Suite verte avant le commit. **Le push de `main` a été refusé
+par le système de permissions de Claude Code** (`git push origin main`), sans nouvel essai.
+
+**b. Étape B — correctif Exp-log (123ba43, branche `correctif-explog-delta`).**
+- Cause : en méthode « Logarithmes », le second membre est l'exposant tel qu'il est écrit (`2^(-6)` → arbre `Neg(6)`, non reconnu
+  comme nombre) ; il partait dans la branche « coefficients logarithmiques », qui ne calcule rien : « x² − 5x − (−6) = 0 »,
+  « 4·1·(−−6) », S = {x₁ ; x₂}. Même défaut avec `1/64` (Δ jamais calculé), au 1ᵉʳ degré (S = {5 − 6}) et quand a < 0 (« + (−4)· »).
+- Correction (`exp_log.py` seul) : un second membre rationnel est calculé, puis résolu comme en méthode « même base » ; une constante
+  égale à a^k s'écrit log(1/64) = log(2⁻⁶) = −6·log(2) (exactitude décidée par facteurs premiers) ; sinon Δ s'écrit avec les
+  logarithmes, sans double signe, et un Δ rationnel est calculé.
+- Entrées ajoutées : 42 (`BATTERIE_DELTA`, `tests/python/cas_el.py`) ; nouveau `tests/python/test_explog_delta.py` (15 tests).
+- Écart : log₂(1/64) = −6 n'est pas écrit, car EL-20 interdit log_a(a^k) = k en méthode « Logarithmes » ; l'outil passe par
+  log(2⁻⁶) = −6·log(2).
+- **Fusionné dans `main` en local (7268412)**, parce que les deux suites étaient vertes (contrôle du chef d'orchestre sur 123ba43 :
+  Python 1311 + 1 xfail, pages 122, code 0) et que les instantanés modifiés ne concernent que l'outil Exp-log : 3 modifiés et 42 ajoutés
+  par fichier non M, 42 ajoutés par fichier M, aucun retiré. **Non poussé** (permission refusée).
+- **8 questions** à trancher : `docs/chantiers/correctif-explog-delta.md`, « Questions pour l'enseignant » (dont : Δ ou factorisation
+  pour `2^(x^2-5x)=2^(-6)` ; doubles signes `log(--100)` de la carte « Contrôle » 3C, autre défaut, ticket à ouvrir).
+
+**c. Parties P0 à P7 (branche `tests-rapides`).** Aucun échec de partie.
+
+| Partie | Commit | Contenu | État | Contrôle du chef d'orchestre |
+|---|---|---|---|---|
+| P0 | 1feb6cf | Référence (deux lancements), `complet --rapport`, `comparer_listes.py` | faite | suite complète relancée : code 0, identique nom par nom |
+| P1 | a8d6ab6 | Harnais du toucher (test du clavier 40/40) | faite | suite complète relancée : code 0, identique nom par nom |
+| P2 | 55daa1f, 1f34e3c | `lancer.py verifier` ; méthode : contrôle allégé | faite | `verifier` ACCEPTÉ ×2 ; son essai « test disparu » REFUSÉ, comme attendu |
+| P3 | f140f1c | `TestStructure` calculé une fois par classe (fichier 121 s → 44 s) | faite | `verifier` ACCEPTÉ ; tests du commit verts ; diff relu |
+| P4 | 7186b6d | Cache de l'outil Limites (`memo.py`), garde, `MEMO=0` ; 6 tests ajoutés | faite | `verifier` ACCEPTÉ ×2 (avec et sans `MEMO=0`) ; tests du commit verts dans les deux cas |
+| P5 | 46fd547 | Cache de l'oracle `racines` (`memo_racines.py`) ; 563 clés identiques avec et sans cache ; 11 tests ajoutés | faite | `verifier` ACCEPTÉ ; tests du commit verts (avec `MEMO=0` : limite de 5 min dépassée, voir d) |
+| P6 | d116aa1 | `rapide` relance les pages des outils dont un moteur change (manifeste), filière M | faite | `verifier` ACCEPTÉ ; diff relu, `complet` intact |
+| P7 | 8d08a67 | Étude du chargement de Pyodide (`etude-pyodide.md`, aucun code) | faite | `git diff --stat` : 3 fichiers de docs ; `verifier` ACCEPTÉ |
+
+`rapide` (code 0) a aussi été lancé après chaque partie de P2 à P7. Détail : `journal.md`, « Contrôles du chef d'orchestre ».
+
+**d. Échecs rencontrés** (aucun n'est un échec de partie).
+- Test instable du clavier : un échec au 2ᵉ lancement de référence de P0 (avant P1), vert relancé seul (une fois aussi pendant
+  l'étape B). Aucun échec ensuite, de P1 à la fin, dans aucune suite.
+- P5 : le contrôle du chef d'orchestre avec `MEMO=0` sur les 10 fichiers du commit a dépassé la limite de 5 minutes. Ce n'est pas
+  un échec de test ; la suite complète `MEMO=0` de fin de session le couvre (verte).
+
+**e. Questions pour vous** (texte complet : `journal.md`, « Questions détaillées » ; en attendant, l'option qui affiche le moins).
+1. P2 : confirmer la liste permise de `verifier` (`suivi.md` et `journal.md` du chantier ; `CLAUDE.md` hors du commit).
+2. P2, P6 : après le commit, `rapide` ne relance que les tests de fumée (arbre propre). Ajouter `rapide --depuis HEAD~1`, plus utile
+   depuis P6 ? Non fait.
+3. P4 : `test_doctrine_bh.py` (sans mock, passe par `memo`) importe `TestStyle` d'un fichier à mock. Lecture retenue : T4 porte sur le
+   texte du fichier. À confirmer.
+4. P4 : le cache de l'outil Limites ne fait gagner que 12 à 20 s (les gros appelants ont des mock). Le garder ?
+5. P5 : cache de `racines` dans un module à part (`memo_racines.py`), avec une garde qui admet `setattr(TestX, "test_…", …)`. À confirmer.
+6. P6 : confirmer la filière M ajoutée avec la page des exponentielles, et « toutes les pages » quand on ne sait pas borner. Faut-il
+   un test de `lancer.py` (`test_lancer.py`) dans un chantier suivant ?
+7. P7 (`etude-pyodide.md` §5) : faire l'onglet de réserve (≈ 35 s) ? Le cache de Chrome d'une classe à la suivante (≈ 45 à 60 s), ou
+   rouvrir T8 ? Confirmer l'abandon de M8 (Pyodide partagé). Hors chantier : la pause de 0,7 s avant SymPy et `invalidate_caches`
+   (0,3 s), qui coûtent aussi à l'élève.
+
+**f. Murs avant / après.**
+
+| | Avant (P0 : deux lancements + contrôle) | Après (fin de session, 8d08a67) | Après, `MEMO=0` |
+|---|---|---|---|
+| Python | 737 / 755 / 737 s | **556 s** | 660 s |
+| Pages | 967 / 938 / 950 s | **966 s** | 973 s |
+
+Bilan attendu (`decisions.md` §3) : Python d'environ 718 s → 520 à 560 s. **Atteint, dans le haut de la fourchette** : 556 s en fin
+de session, mais 570 à 588 s pour les suites de P5 à P7 (bruit d'environ ± 40 s). Le gain vient surtout de P3 et de P5 ; le cache de
+P4 pèse 12 à 20 s. Pages : aucun échec au hasard depuis P1 (attendu) ; leur mur ne change pas (aucune partie ne le visait, P7 l'a
+étudié). Par partie, le contrôle allégé ne demande plus qu'une suite complète (environ 25 à 27 min) au lieu de deux.
+
+**g. Fin de session** (suites relancées par le chef d'orchestre sur 8d08a67). Suite normale et suite `MEMO=0` vertes (code 0) :
+Python 1328 passés + 1 xfail, 103 161 sous-tests ; pages 122 passés, 2 554 sous-tests. Les deux sont identiques entre elles, nom par
+nom (issues et sous-tests). Seuls écarts avec la référence P0 : les 17 tests ajoutés (6 de P4, 11 de P5, listés dans `journal.md`,
+« P4 » et « P5 ») ; aucun test de la référence ne manque. `verifier` : ACCEPTÉ sur les deux rapports.
+
+**h. À reporter dans `CLAUDE.md`** : section « À reporter par l'enseignant dans CLAUDE.md » plus bas (`--rapport`, `verifier`,
+`MEMO=0` pour les deux caches, `rapide` et pages des moteurs, mesures de temps du 05.11.2026).
+
+**i. Commandes pour vous** (une à la fois) :
+
+```
+git push origin main
+git push -u origin tests-rapides
+```
+
+Plus tard, après relecture, la fusion :
+
+```
+git checkout main
+git merge --no-ff --no-edit tests-rapides
+git push
+```
+
+Et la branche déjà fusionnée dans `main` :
+
+```
+git branch -d correctif-explog-delta
+```
 
 ## Cadre
 
@@ -38,45 +137,6 @@ rapports) : [`journal.md`](journal.md).
   `python3 tests/lancer.py complet --rapport <dossier hors du dépôt>` puis
   `python3 tests/comparer_listes.py docs/chantiers/tests-rapides/reference <dossier>`.
 - Murs : Python 737 s puis 755 s ; pages 967 s puis 938 s (détail : `journal.md`, « P0 »).
-
-## Questions pour l'enseignant
-
-- **P2, `rapide` après le commit.** L'audit §M1 prévoit que le chef d'orchestre lance `rapide` après `verifier`. Mais sur l'arbre propre
-  d'après le commit, `rapide` ne voit aucun fichier modifié et ne relance que les tests de fumée (3 fichiers). Faut-il lui ajouter une
-  base (par exemple `rapide --depuis HEAD~1`, avec P6) ? En attendant (option qui affiche le moins), la méthode dit seulement ce que
-  `rapide` relance aujourd'hui.
-- **P2, liste permise de `verifier`.** Proposée et justifiée dans `journal.md` (« Règles exactes ») : `docs/chantiers/<chantier>/suivi.md`
-  et `journal.md` (écrits après le lancement), `CLAUDE.md` hors du commit. À confirmer.
-
-- **P4, `test_doctrine_bh.py`.** Il ne contient aucun mock et importe `memo`, mais il importe aussi `TestStyle` de
-  `test_redaction_limites.py` (qui contient des mock), classe recollectée dans `test_doctrine_bh` (9 tests, sans mock, qui appellent
-  `la.etudier` directement). Lecture retenue : la décision T4 porte sur le texte du fichier. La garde interdit seulement le sens dangereux
-  (un fichier avec mock qui atteint un fichier qui importe `memo`), d'où l'exclusion de `test_proprietes_limites.py`. À confirmer.
-- **P4, gain.** 20 s de mur sur le groupe des fichiers concernés, 12 s dans la suite complète (dans le bruit) : bien moins que l'audit
-  (1 à 1,5 min), car les gros appelants de l'outil Limites ont des mock. Garder le cache tel quel ?
-
-- **P5, module à part.** Le cache de `racines` est dans `tests/python/memo_racines.py` et non dans `memo.py` : les 4 fichiers appelants
-  créent des méthodes de test par `setattr(TestX, "test_…", …)`, mot que la garde de P4 interdit dans un fichier qui importe `memo`.
-  La garde de P4 n'est pas touchée ; `test_memo_racines_garde.py` admet `setattr` seulement sous cette forme (classe `TestCase` du
-  fichier, nom en `test_`). À confirmer.
-
-- **P6, filière M.** `rapide` ajoute `exponentielles-logarithmes-M` à `OUTILS` dès que la page des exponentielles est relancée (moteur
-  ou page) : sans ce nom, `test_rendu.py::test_exponentielles_logarithmes_filiere_m` était sauté, aussi pour une page modifiée (avant
-  P6). Un test de plus, jamais de moins. À confirmer.
-- **P6, corpus des pages.** Un module de `tests/python` importé par les tests de pages (`cas.py`, `cas_el.py`, `moteurs.py`) relance
-  maintenant toutes les pages (corpus réduit), comme un fichier de `tests/pages/`. Un `.py` d'un dossier d'outil que le manifeste ne
-  cite pas (`moteur/construire_roues.py`, nouveau fichier) donne aussi « tous » (option la plus sûre). À confirmer.
-- **P6, pas de test dans la suite.** La règle de `rapide` n'est couverte par aucun test de la suite (les listes doivent rester celles de
-  la référence + 17) : seulement par le banc de simulations noté dans `journal.md`, « P6 ». Faut-il un test (`test_lancer.py`) dans un
-  chantier suivant ?
-- **P6 et `--depuis`.** P6 rend `--depuis HEAD~1` **plus utile** (il relancerait aussi les pages des moteurs du commit, au prix de
-  quelques minutes de plus) ; toujours pas ajouté (non tranché).
-
-- **P7, Pyodide (décision à prendre, `etude-pyodide.md` §5).** Faire dans une partie suivante (a) l'onglet de réserve (environ 35 s,
-  risque très faible, `navigateur.py` seul) ? (b) le cache de Chrome gardé d'une classe à la suivante (environ 45 à 60 s), ou rouvrir
-  T8 (Chrome partagé) au vu des mesures (T8 ne comptait pas les 11 s de la 1ʳᵉ page à froid de chaque Chrome) ? Confirmer l'abandon
-  du partage de Pyodide entre les tests (M8). Hors chantier : la pause de 0,7 s avant SymPy et `invalidate_caches` (0,3 s), qui
-  coûtent aussi à l'élève. En attendant (option qui affiche le moins) : rien n'est changé.
 
 ## Injectivité de la clé (P5, décision T5)
 
@@ -145,8 +205,9 @@ Texte proposé (décision T10 : Claude Code ne modifie pas `CLAUDE.md`), pour la
   appel : chaque appel devient un appel direct du moteur ou de l'oracle. Ces caches ne servent qu'aux fichiers sans aucun mock
   (`test_memo_garde.py`, `test_memo_racines_garde.py` le vérifient). Une fois par session de chantier, lancer aussi `MEMO=0 python3 tests/lancer.py complet --rapport
   <dossier>` : les listes doivent être les mêmes qu'avec le cache.
-- Mesures du 04.11.2026 sur le Mac de l'enseignant (2 cœurs physiques ; 1312 tests Python et 103 033 sous-tests, 122 tests de pages et
-  2 554 sous-tests) : suite Python 715 à 803 s ; suite de pages 938 à 994 s ; `complet` environ 28 à 30 min.
+- Mesures du 05.11.2026 sur le Mac de l'enseignant (2 cœurs physiques ; 1329 tests Python et 103 161 sous-tests, 122 tests de pages et
+  2 554 sous-tests) : suite Python 556 à 588 s (660 s avec `MEMO=0`) ; suite de pages 966 à 999 s ; `complet` environ 25 à 27 min
+  (avant le chantier tests-rapides, le 04.11.2026 : Python 737 à 755 s, pages 938 à 967 s).
 ```
 
 Procédure allégée du chef d'orchestre (décision T1 ; écrite aussi dans `docs/methode-chantiers.md`, « Organisation de nuit ») :
@@ -159,6 +220,10 @@ Procédure allégée du chef d'orchestre (décision T1 ; écrite aussi dans `doc
 
 ## Reprise après compactage
 
-P0 à P7 (P2 en deux commits) commitées sur `tests-rapides` (rien poussé). Toutes les parties de `decisions.md` §3 sont faites ; reste la
-fin de session du chef d'orchestre (suite complète normale, puis avec `MEMO=0`, comparaison à la référence, résumé). Contrôle d'une partie : `python3 tests/lancer.py verifier <dossier de complet --rapport>`. Pour reprendre : lire ce fichier, `decisions.md`, puis `git log --oneline main..HEAD` ; le détail est dans
-`journal.md`. Chaque partie compare son rapport à `reference/` avec la commande ci-dessus.
+Chantier terminé : P0 à P7 (P2 en deux commits) commitées sur `tests-rapides`, fin de session faite (suites normale et `MEMO=0`
+vertes, identiques), résumé en tête de ce fichier (commit « Tests rapides : résumé de session »). **Rien n'est poussé** : `main` a 3
+commits locaux (351fb77, 123ba43, 7268412), push refusé par les permissions ; `tests-rapides` n'est ni poussée ni fusionnée.
+Reste à l'enseignant : relire le résumé (questions e, section « À reporter … dans CLAUDE.md »), lancer les commandes de i, trancher
+les 8 questions de `docs/chantiers/correctif-explog-delta.md`. Contrôle d'un commit : `python3 tests/lancer.py verifier <dossier de
+complet --rapport>`. Pour reprendre : lire ce fichier, `decisions.md`, puis `git log --oneline main..HEAD` ; le détail est dans
+`journal.md`.
