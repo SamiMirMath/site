@@ -675,6 +675,34 @@ class TestRapide(unittest.TestCase):
                 self.modifier(chemin)
                 self.annonce([chemin], tests, outils)
 
+    def test_moteur_relance_les_lecteurs_des_moteurs(self):
+        """F4 : test_imports.py et test_noyau.py lisent les .py des moteurs par leur chemin (ast) ; un .py des dossiers des moteurs
+        (modifié, nouveau ou supprimé) les relance, une page ou un module de tests non."""
+        lecteurs = {"test_imports.py", "test_noyau.py"}
+        for nom in lecteurs:
+            self.depot.ecrire(f"tests/python/{nom}", "X = 1\n")
+        self.depot.commiter("lecteurs", *(f"tests/python/{nom}" for nom in lecteurs))
+        for chemin, tests, outils in (("factorisation/a b.py", lecteurs, {"factorisation"}),
+                                      ("moteur/noyau.py", lecteurs | {"test_json_strict.py"}, {"factorisation"} | EXP_LOG),
+                                      ("factorisation/index.html", INSTANTANES_ET_JSON, {"factorisation"}),
+                                      ("tests/python/é.py", {"test_accent.py"}, ())):
+            with self.subTest(modifie=chemin):
+                self.depot.git("reset", "-q", "--hard")
+                self.modifier(chemin)
+                self.annonce([chemin], tests, outils)
+        with self.subTest("module nouveau (non suivi) d'un dossier de moteur"):
+            self.depot.git("reset", "-q", "--hard")
+            self.depot.ecrire("limites-asymptotes/nouveau.py", "import noyau\n")
+            self.annonce(["limites-asymptotes/nouveau.py"], lecteurs, TOUTES_LES_PAGES)
+            os.remove(os.path.join(self.depot.racine, "limites-asymptotes/nouveau.py"))
+        with self.subTest("module de moteur supprimé, puis commité (--depuis)"):
+            self.depot.git("reset", "-q", "--hard")
+            self.depot.git("rm", "-q", "--", "exponentielles-logarithmes/moteur ê.py")
+            attendus = (["exponentielles-logarithmes/moteur ê.py (supprimé)"], lecteurs, EXP_LOG)
+            self.annonce(*attendus)
+            self.depot.git("commit", "-q", "-m", "suppression")
+            self.annonce(*attendus, "--depuis", "HEAD~1")
+
     def test_scripts_de_commande_relancent_test_lancer(self):
         for chemin in SCRIPTS + ("tests/rapport_pytest.py",):
             with self.subTest(script=chemin):

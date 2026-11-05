@@ -323,11 +323,132 @@ Script `scratchpad/F3/contre_epreuve.py` : charge les modules, retire une clé, 
   `test_pages_migrees_sans_rendu_local` 5 → 6, `test_pages_utilisent_la_feuille_commune` 4 → 6, `TestVocabulairePages::test_pages`
   7 → 8, plus ceux des tests nouveaux ; pages 2 386 → 2 407, ceux de `test_donnees_des_pages.py`).
 
+## F4 — R6 : garde-fous d'architecture
+
+### Plan
+
+1. `test_noyau.MOTEURS` étendu à `redaction_bh`, `exp_log`, `exp_log_m` ; un test réclame tout nouveau moteur d'outil.
+2. `tests/python/test_imports.py` : graphe des imports internes extrait par `ast`, liste blanche exacte (`ARETES` + `EXCEPTIONS`
+   nommées), couches de `docs/architecture.md` § 1 vérifiées mécaniquement, aucun cycle hors exception.
+3. `test_manifeste.py` : aucun nom de fichier en double dans un manifeste (A8).
+4. `rapide` : un `.py` des dossiers des moteurs relance `test_imports.py` et `test_noyau.py` (ils lisent les moteurs par leur chemin,
+   sans les importer : le graphe de `rapide` ne les aurait pas trouvés).
+5. Docs : `docs/architecture.md` (§ 1, A1, A8, § 4, § 5), `docs/choix-techniques.md` (fichiers à plat), docstring de `tests/lancer.py`.
+
+### test_noyau (point 1)
+
+- `MOTEURS` : 5 → 8 fichiers (`limites-asymptotes/redaction_bh.py`, `exponentielles-logarithmes/exp_log.py`, `exp_log_m.py`) ; aucun
+  test renommé ni retiré ; les trois respectent déjà la frontière (aucun `ensemble_def`, aucun nom privé du noyau).
+- **Ajouté** : `TestNoyau::test_tous_les_moteurs_d_outil_sont_surveilles` : les moteurs d'outil (les `.py` des dossiers d'outil du
+  manifeste, sauf l'adaptateur, `module` du manifeste, et le dossier de la base `ensemble-definition`) = `MOTEURS`, dans les deux sens.
+
+### Graphe des imports (point 2) : `tests/python/test_imports.py`
+
+- **Modules** : tous les `.py` de `moteur/` et des dossiers d'outil du manifeste (`outils_du_site.dossiers_moteurs()`), 19 modules,
+  `moteur/construire_roues.py` compris (script de construction des roues : aucun import interne, il compte comme une brique).
+- **Extraction** (`ast`, rien n'est importé) : `import x`, `import x.y`, `from x import y`, relatifs (`from . import x`,
+  `from .x import y`), `importlib.import_module("x")` et `__import__("x")`. « a -> b » : import exécuté au chargement (tête, corps de
+  classe, `if`/`try` de tête, décorateurs, valeurs par défaut) ; « a ~> b » : paresseux (corps d'une fonction). Seules les cibles qui
+  sont des modules du moteur font des arêtes. `TestExtraction::test_formes` vérifie chaque forme sur un source construit.
+- **Liste blanche exacte : 45 arêtes**, 33 dans `ARETES` (chacune avec sa raison) et 12 dans 5 exceptions nommées (`EXCEPTIONS` :
+  arêtes, motifs, règle, chantier) :
+
+| Exception | Arêtes | Motif | Règle | Chantier |
+|---|---|---|---|---|
+| assemblage de l'Étude complète | `etude_complete -> derivee_variations`, `etude_complete -> limites_asymptotes`, `parties ~> derivee_variations`, `resoudre_ec -> resoudre_dv`, `resoudre_ec -> resoudre_la` | couches | A1, § 1 (voulue) | aucun : voulue |
+| cycle `limites_asymptotes` ⇄ `redaction_bh` | `limites_asymptotes -> redaction_bh` (import de fin de fichier, l. 3839), `redaction_bh -> limites_asymptotes` | cycle | A1, A6 | R11 |
+| cycle `exp_log` ⇄ `exp_log_m` | `exp_log ~> exp_log_m`, `exp_log_m -> exp_log`, `exp_log_m ~> exp_log` (`_GABARITS`, redondant) | cycle | A1, A6 | R11 |
+| `parties` importe l'adaptateur `resoudre_ed` | `parties -> resoudre_ed` | couches | A1 | R11 |
+| `resoudre_el` importe l'adaptateur `resoudre_ed` | `resoudre_el -> resoudre_ed` | couches | A1 | R11 |
+
+- **Couches exprimées mécaniquement** (`couche`, `violation`) : couche 1 = `moteur/` et la base `ensemble_def` (rangée avec l'outil
+  ED) ; couche 3 = le `module` de l'outil au manifeste ; couche 2 = les autres `.py` d'un dossier d'outil. Violations : importer une
+  couche au-dessus ; un moteur ou un adaptateur qui importe un moteur ou un adaptateur d'un autre outil ; la base importée sans sa façade
+  `noyau` par un module d'un autre outil (couche 2 ou 3). `test_couches` : aucune arête ne viole les couches hors exception de motif
+  « couches » ; `test_aucun_cycle_hors_exceptions` : aucune arête sur un cycle hors exception de motif « cycle » ;
+  `test_exceptions_utiles` : chaque arête d'une exception enfreint vraiment chacun de ses motifs (sinon elle va dans `ARETES`) ;
+  `test_liste_bien_formee` ; `test_noms_de_modules_uniques` (un nom de module = un fichier, A8 étendu à tout le moteur).
+- **Aucune violation nouvelle** : les seules arêtes qui violent les couches ou sont sur un cycle sont celles de § 1 (assemblage EC) et
+  § 5 (cycles, `resoudre_ed`). Une seule n'était pas écrite nommément dans `docs/architecture.md` : `parties ~> derivee_variations`
+  (paresseuse, rapport de la revue § 1.2, l. 1225) ; c'est le moteur de l'EC qui importe celui de DV, donc l'assemblage voulu de § 1 :
+  rangée dans cette exception, et § 1 complété pour le dire.
+- **Lecture des couches** : la table de § 1 permet à un moteur d'outil d'importer « les briques », dont `sortie` ; `redaction_bh` et
+  `parties` importent `sortie` (blocs de leur rédaction). Le schéma de § 1 dit pourtant de la couche 3 « seule couche qui fabrique la
+  sortie affichée (moteur/sortie.py) ». J'ai suivi la table (arêtes permises, dans `ARETES`) ; question pour l'enseignant.
+- **Message** d'une arête nouvelle (relevé dans la contre-épreuve) : « arête(s) nouvelle(s) : factorisation -> exp_log
+  (factorisation/factorisation.py l. 1887). Une arête nouvelle s'ajoute exprès, avec sa raison : dans ARETES de
+  tests/python/test_imports.py si elle respecte les couches (docs/architecture.md, § 1 et règle A1) ; sinon elle se discute avant d'être
+  écrite (CLAUDE.md, Architecture) et n'entre que comme exception nommée dans EXCEPTIONS (règle enfreinte, chantier qui la résorbe), après
+  accord de l'enseignant, et dans docs/architecture.md § 5. Une arête disparue se retire de ARETES ou EXCEPTIONS (la liste reste
+  exacte). »
+- Le test ne lit pas `docs/` (choix de F1 : aucun test ne lit `docs/`) ; les exceptions de § 5 sont recopiées dans `EXCEPTIONS`, et
+  § 5 renvoie au test.
+
+### Noms à plat (point 3)
+
+`TestManifeste::test_aucun_nom_de_fichier_en_double` (une vérification de `noms_en_double` sur une liste construite, puis un sous-test
+par outil). Aucun doublon aujourd'hui.
+
+### rapide (point 4)
+
+`LECTEURS_DES_MOTEURS = (test_imports.py, test_noyau.py)` dans `tests/lancer.py`, relancés quand un `.py` d'un dossier des moteurs
+(`DOSSIERS_MOTEURS`) est modifié, nouveau ou supprimé ; filtrés par `existe`, donc sans effet sur les dépôts d'essai qui ne les ont
+pas. `TestRapide::test_moteur_relance_les_lecteurs_des_moteurs` (6 sous-tests : moteur d'outil, brique, page et module de tests sans
+effet, module nouveau non suivi, module supprimé puis `--depuis HEAD~1`). Phrase de CLAUDE.md proposée dans `suivi.md`.
+
+### Contre-épreuve
+
+Script `scratchpad/F4/contre_epreuve.py` : pour chaque cas, copie du dépôt (sans `.git`, `docs/`, roues) dans un dossier jetable, une
+modification, les tests visés ; le dépôt réel n'est pas touché.
+
+| Modification (dans la copie) | Résultat |
+|---|---|
+| aucune (état réel) | passe (13 tests, 478 sous-tests) |
+| `import exp_log` en tête de `factorisation.py` | échoue : `test_aretes_figees`, `test_couches` (moteur d'un autre outil) |
+| `import resoudre_ed` dans une fonction de `exp_log.py` | échoue : `test_aretes_figees`, `test_couches` (`exp_log ~> resoudre_ed`) |
+| `import sortie` dans une fonction de `noyau.py` (permise par les couches) | échoue : `test_aretes_figees` seul |
+| `from . import resoudre_la` dans `derivee_variations.py` | échoue : `test_aretes_figees`, `test_couches` |
+| `importlib.import_module('limites_asymptotes')` dans `factorisation.py` | échoue : `test_aretes_figees`, `test_couches` |
+| `parties.py` sans son `from nombres import` (arête disparue) | échoue : `test_aretes_figees` |
+| `factorisation -> exp_log` dans le code ET dans `ARETES` | échoue : `test_couches` |
+| `parties ~> etude_complete` dans le code ET dans `ARETES` (cycle dans un outil) | échoue : `test_aucun_cycle_hors_exceptions` (2 arêtes) |
+| `exp_log` sans son import de `exp_log_m`, arête retirée de l'exception | échoue : `test_exceptions_utiles` (les 2 arêtes restantes ne sont plus sur un cycle) |
+| `resoudre_dv -> sortie` déplacée dans une exception « couches » | échoue : `test_exceptions_utiles` |
+| `limites-asymptotes/sortie.py` créé | échoue : `test_noms_de_modules_uniques` |
+| `factorisation/noyau.py` ajouté au manifeste de la factorisation | échoue : `test_aucun_nom_de_fichier_en_double` (factorisation) |
+| `exponentielles-logarithmes/nouveau.py` créé | échoue : `test_tous_les_moteurs_d_outil_sont_surveilles` |
+| `import ensemble_def` dans `exp_log_m.py` | échoue : `test_les_moteurs_n_importent_que_de_noyau` (exp_log_m) |
+| `from noyau import _prive` dans `redaction_bh.py` | échoue : `test_aucun_nom_prive_importe_du_noyau`, `test_les_noms_pris_par_les_moteurs_existent_dans_le_noyau` |
+
+### Tests ajoutés (aucun retiré ni renommé)
+
+- `tests/python/test_imports.py` (nouveau) : `TestGrapheDesImports::test_noms_de_modules_uniques`, `::test_aretes_figees`,
+  `::test_liste_bien_formee`, `::test_couches`, `::test_aucun_cycle_hors_exceptions`, `::test_exceptions_utiles` ;
+  `TestExtraction::test_formes`. Durée : environ 1,4 s avec `test_noyau.py` et le test du manifeste.
+- `tests/python/test_noyau.py` : `TestNoyau::test_tous_les_moteurs_d_outil_sont_surveilles` ; sous-tests en hausse (MOTEURS 5 → 8).
+- `tests/python/test_manifeste.py` : `TestManifeste::test_aucun_nom_de_fichier_en_double`.
+- `tests/python/test_lancer.py` : `TestRapide::test_moteur_relance_les_lecteurs_des_moteurs`.
+
+### Vérifications
+
+- Dump (`dumps/F4`) : `diff -r --exclude=temps` avec le départ, aucune sortie, code 0 ; `dumps/F4-p1` (`--processus 1`) aussi. Temps
+  (`--processus 1`) : identiques au tableau « Temps » (limites 5,92 s, étude 2,02 s, factorisation 1,89 s, exp-log 0,89 / 0,77 s,
+  autres < 0,3 s). Aucun code de moteur touché.
+- `git diff --exit-code main -- tests/python/instantanes tests/pages/references` : rien ; aucun nouvel instantané.
+- `rapide` sur l'arbre avant la suite : 75 passés, 756 sous-tests, 4 s (fumée, `test_imports`, `test_lancer`, `test_noyau`).
+- Suite d'avant commit : `PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rapport <scratchpad>/rapports/F4` : code 0. Python
+  1 391 passés + 1 xfail (1 392 collectés), 106 298 sous-tests, 93,5 s ; pages 127 passés, 2 407 sous-tests, 291,9 s. Aucun fichier
+  touché pendant le lancement. `comparer_listes.py tests/reference <F4>` : seuls ajouts, ceux de F1 à F3 et les 10 de F4 ci-dessus, tous
+  passés ; aucun test disparu ni renommé ; sous-tests en hausse seulement (depuis F3 : `test_les_moteurs_n_importent_que_de_noyau`
+  5 → 8, `test_aucun_nom_prive_importe_du_noyau` et `test_les_noms_pris_par_les_moteurs_existent_dans_le_noyau` 141 → 155, plus ceux
+  des tests nouveaux : 106 160 → 106 298) ; pages identiques à F3 nom par nom.
+
 ## Contrôles du chef d'orchestre
 
 - F0 `0cb5a64` : verifier ACCEPTÉ (Python 1 335 / 105 807 sous-tests, pages 123 / 2 386, identiques à la référence) ; rapide --depuis HEAD~1 : 22 passés, 224 sous-tests, 2 s (seuls fumée + docs) ; dump = départ.
 - F1 `d4837d6` : verifier ACCEPTÉ (Python 1 354 + 1 xfail / 105 813 sous-tests, pages 123 / 2 386 ; +20 tests test_lancer annoncés) ; rapide --depuis HEAD~1 : 42 passés, 230 sous-tests, 4 s ; dump = départ ; instantanés/références inchangés.
 - F2 `7838091` : verifier ACCEPTÉ (Python 1 371 + 1 xfail / 105 837 sous-tests, pages 123 / 2 386 ; +17 tests annoncés) ; rapide --depuis HEAD~1 : 59 passés, 254 sous-tests, 4 s ; dump = départ ; instantanés/références inchangés. Deux fichiers non suivis apparus sous docs/chantiers/equations-2e-degre/ (pas du chantier, laissés tels quels).
+- F3 `d936027` : verifier ACCEPTÉ (Python 1 381 + 1 xfail / 106 160 sous-tests, pages 127 / 2 407 ; +14 tests annoncés) ; rapide --depuis HEAD~1 : manifeste/outils touchés donc presque tout (Python 1 377 + 1 xfail, pages 127 à corpus réduit), vert, 359 s ; dump = départ ; instantanés/références inchangés.
 
 ## Temps
 

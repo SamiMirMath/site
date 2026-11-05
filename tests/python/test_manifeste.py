@@ -57,6 +57,15 @@ def importer_isole(fichiers, module, fonctions):
         return p.returncode == 0, (p.stderr.strip().splitlines() or [""])[-1]
 
 
+def noms_en_double(fichiers):
+    """{nom de fichier: [chemins]} des noms portés par plusieurs fichiers de la liste (Pyodide écrit à plat, par nom : le second
+    écraserait le premier sans rien dire ; docs/architecture.md, règle A8)."""
+    par_nom = {}
+    for chemin in fichiers:
+        par_nom.setdefault(os.path.basename(chemin), []).append(chemin)
+    return {nom: chemins for nom, chemins in par_nom.items() if len(chemins) > 1}
+
+
 class TestManifeste(unittest.TestCase):
     def test_tous_les_outils_pyodide_sont_declares(self):
         avec_pyodide = {d for d in os.listdir(RACINE)
@@ -104,6 +113,13 @@ class TestManifeste(unittest.TestCase):
         self.assertNotIn("Blob", client + worker)                      # vrai fichier, plus de Blob
         self.assertNotRegex(client + worker, r"pyodide/v\d")           # la version vient du manifeste seulement
         self.assertIn("importScripts(arg.indexURL", worker)
+
+    def test_aucun_nom_de_fichier_en_double(self):
+        """A8 (chantier fondations, F4) : deux fichiers d'un même outil n'ont jamais le même nom (écriture à plat dans Pyodide)."""
+        self.assertEqual(noms_en_double(["a/x.py", "b/x.py", "a/y.py", "a/x.py"]), {"x.py": ["a/x.py", "b/x.py", "a/x.py"]})
+        for dossier, o in OUTILS.items():
+            with self.subTest(outil=dossier):
+                self.assertEqual(noms_en_double(o["fichiers"]), {}, "noms de fichiers en double")
 
     def test_import_avec_les_seuls_fichiers_du_manifeste(self):
         for dossier, o in OUTILS.items():

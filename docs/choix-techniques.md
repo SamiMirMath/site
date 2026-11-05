@@ -65,7 +65,8 @@ tests/
   (pas une copie) : on le lit, on ne le réaffecte jamais.
 - **Fichiers à plat dans Pyodide** : `ensemble_def.py` et `noyau.py` sont écrits côte à côte, sans
   dossier. `moteur/` n'est pas un paquet Python : pas de `from moteur.noyau import …`, qui
-  casserait l'import dans le navigateur (le test d'import isolé du manifeste le détecte).
+  casserait l'import dans le navigateur (le test d'import isolé du manifeste le détecte). Deux fichiers
+  de même nom dans un manifeste s'écraseraient : `test_manifeste.py` le refuse (fondations, F4).
 - **Déclaration par outil** : chaque outil qui utilise le noyau liste `moteur/noyau.py` dans
   `moteur/manifeste.json` et le charge dans sa page (`fetch` + `writeFile`) ; `test_manifeste.py`
   vérifie les deux. Vaut aussi pour les outils de la phase F.

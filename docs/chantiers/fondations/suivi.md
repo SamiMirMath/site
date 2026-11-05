@@ -11,7 +11,7 @@ Consigne complète, plan et détails : `journal.md`. La consigne du chantier tie
 | F1 | `verifier` : docs/ ignoré, baisse de sous-tests justifiée ici ; `test_lancer.py` | faite (suite verte) | voir `git log` |
 | F2 | `lancer.py rapide` (reste de R4) : `-z`, supprimés, donnees/, instantanés, pages, références, scripts | faite (suite verte) | voir `git log` |
 | F3 | R1 : `tests/python/outils_du_site.py` (registre + manifeste), listes dérivées, clés vérifiées ; exp-log dans `MIGREES` et `test_json_strict` (filière M, exercices), exception nommée pour le jeu moteur | faite (suite verte) | voir `git log` |
-| F4 | R6 : `test_noyau` étendu, graphe d'imports figé, noms à plat uniques | à faire | — |
+| F4 | R6 : `test_noyau` étendu (+ moteurs réclamés), `tests/python/test_imports.py` (45 arêtes figées, 5 exceptions nommées, couches et cycles vérifiés), noms à plat uniques (`test_manifeste`) ; `rapide` relance ces tests quand un moteur change | faite (suite verte) | voir `git log` |
 | F5 | R3 : ménage | à faire | — |
 | F6 | Copie locale de KaTeX pour les tests de pages | à faire | — |
 
@@ -43,14 +43,25 @@ tests égales à la référence (sauf ajouts annoncés).
   F2) : « `moteur/manifeste.json` ou `commun/registre.json` relance les dépendants de `tests/python/outils_du_site.py` (la liste des
   outils, dont dérivent les listes des tests) ; » et, dans la liste des scripts de commande, `outils_du_site.py`.
 
+- **F4, CLAUDE.md (description de `rapide`)** : ajouter après la phrase de F3 : « un `.py` des dossiers des moteurs relance
+  `test_imports.py` et `test_noyau.py` (ils lisent les moteurs par leur chemin) ; ».
+
+- **F4, couches : un moteur d'outil peut-il importer `moteur/sortie.py` ?** `redaction_bh` et `parties` le font. La table de
+  `docs/architecture.md` § 1 le permet (« les briques ») ; le schéma de § 1 dit des adaptateurs « seule couche qui fabrique la sortie
+  affichée ». J'ai suivi la table : ces deux arêtes sont dans `ARETES` (permises). Si la règle est « sortie réservée aux adaptateurs »,
+  elles deviennent une exception nommée (motif « couches ») et `violation` le vérifie.
+
 ## À relire par l'enseignant
 
-- Aucun instantané ni texte affiché modifié (F0 à F3) ; aucun nouvel instantané.
+- Aucun instantané ni texte affiché modifié (F0 à F4) ; aucun nouvel instantané.
 - **F3, `docs/architecture.md`** (document validé) : § 4 « Ajouter un outil » réécrit (environ 4 fichiers côté site et 10 côté tests,
   tous réclamés par un test ; ce qui dérive désormais) et garde-fou de A3 (« à créer » → les fichiers de F3).
 - **F3, exp-log hors du jeu moteur** (`test_instantanes.py`) : exception nommée dans `tests/python/test_outils_du_site.py`
   (`EXCEPTIONS`), raison dans `journal.md` (pas de sortie de moteur unique ; le jeu resoudre C et M couvre l'outil). Répond à la
   question 4 de la revue de structure ; à confirmer.
+- **F4, `docs/architecture.md`** (document validé) : garde-fous de A1 et A8 (« à créer » → les tests de F4), § 5 (« le test d'imports »
+  → `tests/python/test_imports.py`, `EXCEPTIONS`), § 4 (arêtes nouvelles dans `ARETES`), § 1 : `parties ~> derivee_variations`
+  (import paresseux, non nommé jusqu'ici) rangé dans l'exception voulue « assemblage de l'Étude complète ». Aucune violation nouvelle.
 
 ## Variations de sous-tests
 

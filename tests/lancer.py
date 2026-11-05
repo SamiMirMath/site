@@ -33,7 +33,8 @@ modifiés, ceux qui importent même de loin un module modifié ou supprimé des 
 qui lisent par son chemin un fichier modifié ou supprimé de tests/python/donnees, tests/python/instantanes ou tests/pages/references
 (modules dont une chaîne nomme ce dossier, puis leurs dépendants ; tous les tests Python si aucun ne le nomme) ; test_instantanes*.py et
 test_json_strict.py quand une page d'outil, un cas*.py ou un instantané change ; test_lancer.py quand un script de commande change
-(lancer.py, verifier.py, comparer_listes.py, rapport_pytest.py, outils_du_site.py) ; les dépendants de tests/python/outils_du_site.py
+(lancer.py, verifier.py, comparer_listes.py, rapport_pytest.py, outils_du_site.py) ; test_imports.py et test_noyau.py quand un .py des
+dossiers des moteurs change (ils le lisent par son chemin) ; les dépendants de tests/python/outils_du_site.py
 quand moteur/manifeste.json ou commun/registre.json change (les listes d'outils des tests et de ce script en dérivent) ; toujours les
 tests de fumée. Pages, corpus réduit (outils_de_pages) : l'outil dont la page, un moteur Python chargé par la page
 (moteur/manifeste.json), la référence de page (tests/pages/references/<outil>.json) ou l'instantané resoudre (lu par
@@ -100,6 +101,9 @@ INSTANTANES_ET_JSON = ("tests/python/test_instantanes*.py", "tests/python/test_j
 SCRIPTS_DE_COMMANDE = ("tests/lancer.py", "tests/verifier.py", "tests/comparer_listes.py", "tests/rapport_pytest.py",
                        "tests/python/outils_du_site.py")
 TEST_DES_SCRIPTS = "tests/python/test_lancer.py"
+# tests qui lisent les .py des moteurs par leur chemin (ast), sans les importer : relancés quand un .py des dossiers des moteurs change
+# (chantier fondations, F4 : graphe des imports figé, frontière du noyau)
+LECTEURS_DES_MOTEURS = ("tests/python/test_imports.py", "tests/python/test_noyau.py")
 PROCESSUS_PAGES_DEFAUT = 2                   # suite de pages sans la variable PROCESSUS_PAGES (Mac de l'enseignant, CI)
 UV = ["uv", "run", "-q", "--no-project", "--python", "3.12", "--with", "sympy==1.13.3", "--with", "mpmath==1.3.0",
       "--with", "websockets", "--with", "pytest", "--with", "pytest-xdist", "python", "-m", "pytest"]
@@ -170,6 +174,8 @@ def tests_python_concernes(modifies):
     - test_instantanes*.py et test_json_strict.py si une page (fichier non .py d'un dossier d'outil, que cas.py lit), un cas*.py ou un
       instantané change ;
     - test_lancer.py si un script de commande change (il les copie au lieu de les importer) ;
+    - test_imports.py et test_noyau.py si un .py des dossiers des moteurs change, supprimé ou nouveau compris (ils le lisent par
+      son chemin) ;
     - les dépendants de outils_du_site.py si le manifeste ou le registre change (les listes d'outils des tests en dérivent) ;
     - et toujours les tests de fumée. Tous les tests si la liste des outils est illisible."""
     if LISTES_ILLISIBLES:
@@ -202,6 +208,8 @@ def tests_python_concernes(modifies):
             tests |= {os.path.relpath(c, RACINE).replace(os.sep, "/") for c in glob.glob(os.path.join(RACINE, motif))}
     if any(n in SCRIPTS_DE_COMMANDE for n in modifies) and existe(TEST_DES_SCRIPTS):
         tests.add(TEST_DES_SCRIPTS)
+    if any(n.endswith(".py") and os.path.dirname(n) in DOSSIERS_MOTEURS for n in modifies):
+        tests |= set(LECTEURS_DES_MOTEURS)
     tests = {t for t in tests if existe(t)}
     tests |= {f"tests/python/{n}" for n in FUMEE_PYTHON}
     return sorted(tests)
