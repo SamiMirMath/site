@@ -10,21 +10,8 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
 <style>
-details ol,details ul{margin:.4em 0 0;padding-left:1.2em}
 .final .res{font-size:1.3rem}
 .final .c{font-size:1.1rem}
-/* Une chaîne de ⇔ : une étape par ligne, le ⇔ en début de ligne et aligné, la propriété à droite de la ligne (sous l'expression sur un écran étroit) */
-.chaine{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,max-content);column-gap:.7em;row-gap:.4em;align-items:baseline}
-.chaine .ligne{display:contents}
-.chaine .lien{text-align:right}
-.chaine .prop{max-width:min(22em,100%);font-size:.9rem;color:var(--muted)}
-/* La disposition dépend de la place de la carte, pas de la largeur de l'écran : le bloc qui contient la chaîne est un conteneur (comme .conteneur-fluide de commun/composants.css). */
-.etape:has(>.chaine){container-type:inline-size}
-@container (max-width: 47rem){
-  .chaine{grid-template-columns:auto minmax(0,1fr);row-gap:.3em;font-size:.92rem}
-  .chaine .prop{grid-column:2;max-width:none;margin:-.15em 0 .25em}
-  .chaine .prop:empty{display:none}
-}
 </style>
 <script data-goatcounter="https://samimir.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>

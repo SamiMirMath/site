@@ -55,6 +55,32 @@
 .uv-col>div{display:flex;flex-direction:column;justify-content:center;min-width:0;padding:6px 14px;background:var(--card);
   text-align:center;white-space:nowrap;overflow-x:auto;position:relative}     /* position:relative : le MathML caché de KaTeX est rogné */
 
+/* ---- Chaîne de ⇔ du corrigé : la grille .chaine (Exponentielles et logarithmes, HTML écrit par moteur/resoudre_el.py ; bloc « chaine » de
+   moteur/sortie.py, rendu par commun/rendu.js avec les mêmes classes : .etape > .chaine > .ligne > .lien, .expr, .prop) ----
+   Une étape par ligne (.ligne en display:contents : ses colonnes sont celles de la grille) : le ⇔ (.lien) en début de ligne, aligné à
+   droite, l'expression (.expr), la propriété (.prop, grise et plus petite) à droite de la ligne ; sur un conteneur étroit, deux colonnes et
+   la propriété sous l'expression. La disposition dépend de la place du bloc, pas de la largeur de l'écran : le .etape qui contient la
+   chaîne est un conteneur (comme .conteneur-fluide). Ligne pleine largeur (.pleine : un texte ou un bloc, au milieu de la chaîne) : elle
+   occupe toute la ligne de la même grille, donc les colonnes d'avant et d'après restent alignées. Membre de gauche (.avec-gauche) : une
+   colonne de plus, avant le ⇔, comme le corrigé (« A ⇔ B ») ; sur un conteneur étroit, il passe seul sur sa ligne, au-dessus des ⇔.
+   Grille venue de la page Exponentielles et logarithmes (chantier briques-communes, B4, même rendu) ; .pleine et .avec-gauche : B3. */
+.chaine{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,max-content);column-gap:.7em;row-gap:.4em;align-items:baseline}
+.chaine .ligne{display:contents}
+.chaine .lien{text-align:right}
+.chaine .prop{max-width:min(22em,100%);font-size:.9rem;color:var(--muted)}
+.chaine>.pleine{grid-column:1 / -1;min-width:0}
+.chaine.avec-gauche{grid-template-columns:auto auto minmax(0,1fr) minmax(0,max-content)}
+.chaine.avec-gauche .gauche{text-align:right}
+.etape:has(>.chaine){container-type:inline-size}
+@container (max-width: 47rem){
+  .chaine{grid-template-columns:auto minmax(0,1fr);row-gap:.3em;font-size:.92rem}
+  .chaine .prop{grid-column:2;max-width:none;margin:-.15em 0 .25em}
+  .chaine .prop:empty{display:none}
+  .chaine.avec-gauche{grid-template-columns:auto minmax(0,1fr)}        /* redit ici : .chaine.avec-gauche, plus précis, l'emporterait sur .chaine */
+  .chaine.avec-gauche .gauche{grid-column:1 / -1;text-align:left}
+  .chaine.avec-gauche .gauche:empty{display:none}
+}
+
 /* ---- Bouton flottant (« Étape suivante ») : fixé en bas à droite, hors impression ---- */
 .bouton-flottant{position:fixed;z-index:50;right:calc(16px + env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
   min-height:max(44px,var(--flottant-h));min-width:44px;padding:0 24px;font-size:1.05rem;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.3)}

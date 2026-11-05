@@ -40,9 +40,27 @@ class TestStyleCommun(unittest.TestCase):
                 for v in set(variables):
                     self.assertNotRegex(css, r"--%s\s*:" % re.escape(v))
                 for r in re.findall(r"^([.#a-z][^{\n]*)\{", css, re.M):
-                    if r.strip() in ("details ol", "details li", ".rappel", ".verif", ".final .res"):
+                    if r.strip() in ("details li", ".rappel", ".verif", ".final .res"):
                         continue                         # règles propres à une page, listées ici
                     self.assertNotIn(r.strip(), regles, f"« {r.strip()} » est déjà dans commun/style.css")
+
+    def test_grille_chaine_et_listes_des_rappels_dans_les_feuilles_communes(self):
+        """Chantier briques-communes, B4 : la grille .chaine (Exp-log et bloc « chaine ») est dans commun/composants.css, les listes
+        numérotées d'un <details> (details ol) dans commun/style.css, et aucune page ne garde de règle qui les touche (pas de CSS en
+        double)."""
+        self.assertIn("\n.chaine{display:grid;", lire("commun/composants.css"))
+        self.assertIn(".etape:has(>.chaine){container-type:inline-size}", lire("commun/composants.css"))
+        self.assertIn("\ndetails ol,details ul{margin:.4em 0 0;padding-left:1.2em}\n", lire("commun/style.css"))
+        for outil in OUTILS + ["simplexe"]:
+            with self.subTest(outil=outil):
+                m = re.search(r"<style>\n(.*?)</style>", lire(outil + "/index.html"), re.S)
+                css = re.sub(r"/\*.*?\*/", "", m.group(1) if m else "", flags=re.S)
+                for selecteur in re.findall(r"([^{}]+)\{", css):
+                    if selecteur.strip().startswith("@"):
+                        continue
+                    for s in selecteur.split(","):
+                        self.assertNotIn(".chaine", s, f"règle « {s.strip()} » : la grille .chaine est dans commun/composants.css")
+                        self.assertNotRegex(s, r"\bdetails\b.*\bol\b", f"règle « {s.strip()} » : details ol est dans commun/style.css")
 
     def test_aucune_largeur_d_ecran_en_pixels_dans_les_styles_locaux(self):
         """Mise en page fluide (30.10.2026) : un style local ne dispose pas le contenu selon la largeur de l'écran ; il passe à la ligne tout seul ou utilise @container."""

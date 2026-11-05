@@ -2065,7 +2065,7 @@ def _convertir_chaine(c):
         props.append(prop)
     if c.note and _MOT_ED.search(c.note):
         raise _Hors
-    return Chaine(c.elements, liens, props, c.note)
+    return Chaine(c.elements, liens, props, c.note, coche=c.coche, textes=c.textes)
 
 
 REMARQUE_IDENTITE_C = "Cette égalité est vraie pour tout x pour lequel les logarithmes existent."

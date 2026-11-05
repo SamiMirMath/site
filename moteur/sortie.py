@@ -7,14 +7,24 @@ Python pur, bibliothèque standard seulement. Une sortie de `resoudre()` est un 
     carte = {titre, titre_tex?, titre_masque?, badge?, style, blocs: [bloc]}
             style « partie » : intertitre d'une partie (Étude complète, D1), sans bloc ; la page l'affiche avec la carte qui le suit
     bloc  = texte | formule | resultat | erreur | liste | tableau | graphique | uv (tableau u, v / u′, v′) | bh, encadre, resultat_lim,
-            valeurs, sous_calcul (corrigé des limites ; sous_calcul aussi pour la dérivée de l'exposant)
+            valeurs, sous_calcul (corrigé des limites ; sous_calcul aussi pour la dérivée de l'exposant) | chaine (chaîne du corrigé)
     variante = {cle, libelle, cartes: [carte], option?: false}   (facultatif : plusieurs résolutions de la même entrée, au choix de l'élève ;
                `cartes` de la sortie est alors celles de la variante par défaut ; `option: false` : pas de case à cocher pour cette variante)
     option = {cle, libelle, cochee, cartes: [carte]}   (facultatif : une case à cocher dont les cartes s'ajoutent à la fin des cartes affichées ;
                `cochee` est son état au départ)
 
+    chaine = {rangees: [rangée]}   chaîne de ⇔ du corrigé, une étape par ligne, les ⇔ alignés (chantier briques-communes, B3)
+            rangée = ligne {lien, expr, prop?, gauche?}  lien : « », \\iff ou \\Rightarrow (TeX) ; expr, gauche : TeX ; prop : la
+                                                         propriété (texte, le TeX entre \\( et \\)) ; gauche : le membre de gauche,
+                                                         seulement sur la première ligne, avant son lien (le corrigé : « A ⇔ B »)
+                   | {texte}                             ligne pleine largeur au milieu de la chaîne (texte, le TeX entre \\( et \\))
+                   | {bloc}                              ligne pleine largeur qui contient un bloc (BLOCS_DANS_CHAINE)
+            Jamais de HTML dans un champ (A4) : le rendu (commun/rendu.js) échappe les textes et fabrique le HTML.
+
 `valider(sortie)` renvoie la liste des écarts au schéma (vide si la sortie est conforme).
 """
+import re
+
 
 STYLES_CARTE = ("normal", "etape", "final", "erreur", "partie")
 STYLES_TEXTE = ("etape", "discret", "indice", "confirme")
@@ -40,7 +50,15 @@ BLOCS = {
     # tableau u | v / u′ | v′ des règles du produit et du quotient (Étude complète, D8 ; outil Dérivée)
     "uv": ({"u", "du", "v", "dv"}, set()),
     "graphique": ({"xmin", "xmax", "ymin", "ymax", "segments", "extrema", "asymptotes"}, {"recalculable", "points", "ronds_vides"}),
+    # chaîne de ⇔ du corrigé, avec des lignes pleine largeur au milieu (chantier briques-communes, B3 ; docs/architecture.md, A4)
+    "chaine": ({"rangees"}, set()),
 }
+# bloc « chaine » : une ligne de la chaîne, ses liens, et les blocs qu'une ligne pleine largeur peut contenir
+RANGEE = ({"lien", "expr"}, {"prop", "gauche"})
+LIENS_CHAINE = ("", "\\iff", "\\Rightarrow")
+BLOCS_DANS_CHAINE = ("texte", "formule", "tableau")
+# HTML dans un champ de texte ou de TeX (A4) : une balise ouvrante ou fermante, ou une entité ; « x < y » et « \(a<b\) » n'en sont pas
+HTML = re.compile(r"</?[A-Za-z][A-Za-z0-9-]*(?:\s[^<>]*)?/?>|&(?:[A-Za-z][A-Za-z0-9]*|#[0-9]+|#[xX][0-9A-Fa-f]+);")
 CARTE = ({"titre", "style", "blocs"}, {"titre_tex", "badge", "detail", "titre_masque"})
 LIGNE = ({"label", "cells"}, {"final", "variation"})
 SORTIE_OK = ({"ok", "erreur", "enonce_tex", "cartes"}, {"entete", "besoin_sympy", "detail", "variantes", "variante_defaut", "option"})
@@ -107,6 +125,33 @@ def uv(u, du, v, dv):
     """Tableau 2 × 2 des règles du produit et du quotient (D8) : colonnes u | v, lignes fonction | dérivée ; chaque case est une
     formule complète (« u = x^{2} - 6 », « u' = 2x »). La page empile les deux colonnes (u, u′, v, v′) si elles ne tiennent pas côte à côte."""
     return {"type": "uv", "u": u, "du": du, "v": v, "dv": dv}
+
+
+def chaine(rangees):
+    """Chaîne de ⇔ du corrigé (une étape par ligne, ⇔ alignés) : `rangees` est une liste de `rangee(...)`, `rangee_texte(...)` et
+    `rangee_bloc(...)`. Depuis une chaîne de moteur/chaine.py : `chaine.bloc_chaine(c)`."""
+    return {"type": "chaine", "rangees": list(rangees)}
+
+
+def rangee(lien, expr, prop=None, gauche=None):
+    """Une ligne de la chaîne : `lien` (« », « \\iff » ou « \\Rightarrow »), `expr` (TeX), `prop` (texte de la propriété, le TeX entre
+    \\( et \\), ou None) ; `gauche` : le membre de gauche, avant le lien (première ligne seulement)."""
+    r = {"lien": lien, "expr": expr}
+    if prop:
+        r["prop"] = prop
+    if gauche:
+        r["gauche"] = gauche
+    return r
+
+
+def rangee_texte(texte_):
+    """Une ligne pleine largeur au milieu de la chaîne : un texte, le TeX entre \\( et \\) (jamais de HTML)."""
+    return {"texte": texte_}
+
+
+def rangee_bloc(bloc):
+    """Une ligne pleine largeur au milieu de la chaîne qui contient un bloc (types de BLOCS_DANS_CHAINE, par exemple un tableau)."""
+    return {"bloc": bloc}
 
 
 def carte(titre, blocs, style="normal", badge=None, titre_tex=None, detail=None, titre_masque=False):
@@ -257,6 +302,52 @@ def _valider_bloc(b, chemin, ecarts):
                 else:
                     for j, bb in enumerate(e["blocs"]):
                         _valider_bloc(bb, f"{chemin}.etapes[{i}].blocs[{j}]", ecarts)
+    elif t == "chaine":
+        _valider_chaine(b, chemin, ecarts)
+
+
+def _sans_html(v, chemin, ecarts):
+    """Un champ de texte ou de TeX non vide, sans HTML (A4)."""
+    if not _texte_non_vide(v):
+        ecarts.append(f"{chemin} : texte non vide attendu")
+    elif HTML.search(v):
+        ecarts.append(f"{chemin} : HTML interdit dans un champ (A4) : « {HTML.search(v).group(0)} »")
+
+
+def _valider_chaine(b, chemin, ecarts):
+    """Bloc « chaine » : au moins une ligne ; chaque rangée est une ligne {lien, expr, prop?, gauche?} ou une ligne pleine largeur
+    {texte} ou {bloc} ; `gauche` seulement sur la première ligne, avec un lien ; un bloc imbriqué est d'un type de BLOCS_DANS_CHAINE."""
+    rangees = b["rangees"]
+    if not isinstance(rangees, list) or not rangees:
+        ecarts.append(f"{chemin} : rangees doit être une liste non vide")
+        return
+    lignes = 0
+    for i, r in enumerate(rangees):
+        cr = f"{chemin}.rangees[{i}]"
+        if isinstance(r, dict) and set(r) == {"texte"}:
+            _sans_html(r["texte"], cr + ".texte", ecarts)
+        elif isinstance(r, dict) and set(r) == {"bloc"}:
+            bb = r["bloc"]
+            if not isinstance(bb, dict) or bb.get("type") not in BLOCS_DANS_CHAINE:
+                genre = bb.get("type") if isinstance(bb, dict) else bb
+                ecarts.append(f"{cr}.bloc : bloc « {genre} » non permis dans une chaîne ({', '.join(BLOCS_DANS_CHAINE)})")
+            else:
+                _valider_bloc(bb, cr + ".bloc", ecarts)
+        elif isinstance(r, dict) and ("lien" in r or "expr" in r):
+            if not _cles(r, *RANGEE, cr, ecarts) or not {"lien", "expr"} <= set(r):
+                continue
+            if r["lien"] not in LIENS_CHAINE:
+                ecarts.append(f"{cr} : lien « {r['lien']} » inconnu")
+            for cle in ("expr", "prop", "gauche"):
+                if cle in r:
+                    _sans_html(r[cle], f"{cr}.{cle}", ecarts)
+            if "gauche" in r and (lignes or not r["lien"]):
+                ecarts.append(f"{cr} : gauche seulement sur la première ligne, avant un lien")
+            lignes += 1
+        else:
+            ecarts.append(f"{cr} : rangée mal formée (ligne {{lien, expr, prop?, gauche?}}, {{texte}} ou {{bloc}})")
+    if not lignes:
+        ecarts.append(f"{chemin} : une chaîne a au moins une ligne {{lien, expr}}")
 
 
 def valider(s):

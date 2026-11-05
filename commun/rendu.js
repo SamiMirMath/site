@@ -20,6 +20,10 @@
                 sous_calcul sert aussi à la dérivée de l'exposant (Étude complète, D7)
      uv         tableau u | v / u′ | v′ des règles du produit et du quotient (D8) : deux colonnes .uv-col dans .uv (composant commun,
                 commun/composants.css) ; si elles ne tiennent pas côte à côte, la colonne v passe sous la colonne u (u, u′, v, v′)
+     chaine     chaîne de ⇔ du corrigé (chantier briques-communes, B3) : la grille .chaine d'Exp-log, mêmes classes
+                (.etape > .chaine > .ligne > .lien, .expr, .prop) ; une ligne pleine largeur est un .pleine (texte, ou un bloc imbriqué
+                rendu comme ailleurs) ; avec un membre de gauche, .chaine.avec-gauche et une colonne .gauche avant .lien. Les textes
+                (propriété, ligne pleine largeur) sont échappés ici, leur TeX entre \( \) est rendu par math() ; jamais de HTML venu du moteur.
    Un bloc de type inconnu (SOC-22) n'est jamais sauté en silence ni une exception : à sa place, la carte affiche l'encadré commun
    « attention » (bloc encadre, .enc.enc-attention) avec le message BLOC_INCONNU, et le type est écrit dans la console. Cas typique : un ancien rendu.js encore en
    cache reçoit la sortie d'un moteur plus récent. Un style de texte inconnu est rendu comme « etape » (le texte reste lisible).
@@ -93,6 +97,25 @@ const STYLE_TEXTE = {
   confirme: h => `<div class="confirme">${h}</div>`,
 };
 
+/* Texte d'un bloc qui n'admet pas de HTML (chaine : propriété, ligne pleine largeur) : échappé ; le TeX entre \( \) reste pour math(). */
+function echapper(t) {
+  return t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+/* Chaîne de ⇔ (bloc « chaine ») : une grille, une rangée .ligne par étape, une rangée .pleine par ligne pleine largeur ; la même grille
+   pour les lignes d'avant et d'après une ligne pleine largeur, donc les ⇔ restent alignés. */
+function rendreChaine(b, c) {
+  const gauche = b.rangees.some(r => r.gauche);
+  const rangees = b.rangees.map(r => {
+    if (r.bloc) return `<div class="pleine">${rendreBloc(r.bloc, c)}</div>`;
+    if (r.texte != null) return `<div class="pleine">${echapper(r.texte)}</div>`;
+    return '<div class="ligne">' + (gauche ? `<span class="gauche">${r.gauche ? K(r.gauche) : ""}</span>` : "") +
+      `<span class="lien">${r.lien ? K(r.lien) : ""}</span><span class="expr">${K(r.expr)}</span>` +
+      `<span class="prop">${r.prop ? echapper(r.prop) : ""}</span></div>`;
+  });
+  return `<div class="etape"><div class="chaine${gauche ? " avec-gauche" : ""}">${rangees.join("")}</div></div>`;
+}
+
 const BLOCS = {
   texte: b => {
     if (b.detail) console.error(b.detail);
@@ -117,6 +140,7 @@ const BLOCS = {
     `<div class="uv-col"><div>${K(b.v)}</div><div>${K(b.dv)}</div></div></div>`,
   sous_calcul: (b, c) => `<div class="sous"><div class="sous-t">${b.titre}</div>` +
     b.etapes.map((e, i) => `<div class="sous-e">Étape ${i + 1} : ${e.titre}.</div>` + e.blocs.map(x => rendreBloc(x, c)).join("")).join("") + "</div>",
+  chaine: (b, c) => rendreChaine(b, c),
 };
 
 const BARRES = {};

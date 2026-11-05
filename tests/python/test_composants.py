@@ -20,7 +20,7 @@ STYLE = lire("commun/style.css")
 class TestComposants(unittest.TestCase):
     def test_composants_demandes_sont_presents(self):
         for classe in (".champ-signe", ".onglets", ".carte-etape", ".bouton-flottant", ".insecable", ".flux", ".conteneur-fluide", ".cadre-fluide",
-                       ".uv", ".uv-col"):
+                       ".uv", ".uv-col", ".chaine"):
             with self.subTest(classe=classe):
                 self.assertIn(classe + "{", CSS)
 

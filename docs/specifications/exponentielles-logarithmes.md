@@ -80,7 +80,7 @@ Une carte par application de méthode, comme la Factorisation (T21) : « Étape 
 **propriété nommée entre parenthèses (1 à 5 mots)** à chaque ligne, carte finale « Solution ».
 **Mise en page (décision du 26.10.2026, règle R14 du guide)** : une chaîne s'affiche **une étape par ligne** comme le corrigé, le ⇔ en début de ligne et aligné, la propriété à droite de la ligne, sous l'expression
 sur un écran étroit (≤ 820 px) : aucun défilement horizontal à 360 px, y compris la ligne du discriminant et `−99’999’995` (test de page sur toute la batterie). Réalisation : `rangees_chaine` (moteur : `[(lien, expression, propriété)]`),
-puis une grille CSS `.chaine` (page) ; ce n'est pas l'environnement `aligned` de KaTeX, parce qu'une ligne d'`aligned` ne peut pas passer à la ligne ni la propriété passer sous l'expression à 360 px.
+puis une grille CSS `.chaine` (`commun/composants.css` depuis le chantier briques-communes, B4 ; dans la page avant) ; ce n'est pas l'environnement `aligned` de KaTeX, parce qu'une ligne d'`aligned` ne peut pas passer à la ligne ni la propriété passer sous l'expression à 360 px.
 Dans la sortie de `resoudre_el.py` : chaque chaîne est un bloc `texte` (style `etape`) `<div class="chaine">` de lignes `<div class="ligne">` (lien, expression et propriété en trois `span`), chaque TeX entre `\(` et `\)` (le « < » est écrit `&lt;`), la remarque du moteur
 (« Δ < 0 : l'équation n'a aucune solution réelle. ») est le dernier bloc de la dernière carte d'étapes, et la carte finale est « Solution » (bloc `resultat` = `tex_solution`) pour une équation,
 « Résultat » (`tex_resultat`) pour un calcul.
