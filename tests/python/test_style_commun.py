@@ -1,12 +1,13 @@
-"""T14 — commun/style.css : les cinq pages outils partagent la même feuille et ne redéfinissent
+"""T14 — commun/style.css : les pages outils construites par monterOutil partagent la même feuille et ne redéfinissent
 ni les variables de couleur ni les règles communes (SOC-02)."""
 import os
 import re
 import unittest
 
+import outils_du_site
 from moteurs import RACINE
 
-OUTILS = ["ensemble-definition", "derivee-variations", "limites-asymptotes", "etude-complete", "factorisation", "exponentielles-logarithmes"]
+OUTILS = outils_du_site.outils_pyodide()      # les pages construites par monterOutil (le simplexe, page autonome, a sa propre feuille)
 LIEN = '<link rel="stylesheet" href="../commun/style.css">'
 LIEN_COMPOSANTS = '<link rel="stylesheet" href="../commun/composants.css">'      # composants de mise en page fluide, après la feuille commune
 
@@ -39,7 +40,7 @@ class TestStyleCommun(unittest.TestCase):
                 for v in set(variables):
                     self.assertNotRegex(css, r"--%s\s*:" % re.escape(v))
                 for r in re.findall(r"^([.#a-z][^{\n]*)\{", css, re.M):
-                    if r.strip() in ("details ol", "details li", ".rappel", ".verif", "#graphique", ".final .res"):
+                    if r.strip() in ("details ol", "details li", ".rappel", ".verif", ".final .res"):
                         continue                         # règles propres à une page, listées ici
                     self.assertNotIn(r.strip(), regles, f"« {r.strip()} » est déjà dans commun/style.css")
 

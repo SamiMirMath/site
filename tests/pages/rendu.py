@@ -11,11 +11,12 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "python"))
 from cas import CAS_LIMITES, entrees_page, entrees_factorisation  # noqa: E402
 from cas_el import entrees_el, entrees_el_m  # noqa: E402
+import outils_du_site  # noqa: E402
 
 DOSSIER_REFERENCES = os.path.join(os.path.dirname(__file__), "references")
-OUTILS = ["ensemble-definition", "derivee-variations", "limites-asymptotes", "etude-complete", "factorisation",
-          "exponentielles-logarithmes"]
+OUTILS = outils_du_site.outils_pyodide()        # les pages à moteur Python (manifeste, F3) ; le simplexe a ses propres tests
 OUTIL_M = "exponentielles-logarithmes-M"       # la même page, ouverte avec ?filiere=M (filière 2M, T35) : ses références sont à part
+# (les variantes de filière du registre doivent être exactement [OUTIL_M] : test_donnees_des_pages.py)
 
 
 def page_de(outil):

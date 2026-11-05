@@ -56,7 +56,8 @@ class TestAccueil(unittest.TestCase):
 
     def test_le_registre_donne_16_liens(self):
         """Année I : 3 (C, Ms, Mr) ; année II : 4 (simplexe en C et Mr, Exponentielles et logarithmes en Ms et Mr) ; année III : 9 (4 outils × Ms, Mr + 1 en C)
-        = 16 cartes pour 7 outils distincts."""
+        = 16 cartes pour 7 outils distincts. Butée explicite, gardée telle quelle par le chantier fondations (F3, R1) alors que les autres
+        listes d'outils dérivent du registre : un nouvel outil met ces deux nombres à jour exprès."""
         self.assertEqual((LIENS, len(REGISTRE["outils"])), (16, 7))
 
     def test_acc03_sans_javascript_tous_les_liens_sont_visibles(self):

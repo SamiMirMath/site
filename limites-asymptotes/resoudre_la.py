@@ -1,7 +1,7 @@
 """
 resoudre_la.py — Adaptateur « format de sortie commun » (moteur/sortie.py) de Limites et asymptotes.
 
-Reproduit les cartes que la page affiche aujourd'hui à partir de `etudier` : rappel, tableaux de
+Construit, à partir de `etudier`, les cartes que la page affiche : rappel, tableaux de
 signes, une carte par limite, bilan des asymptotes. La phrase de chaque asymptote, que la page
 composait en JS (`ligneAsymptote`), est écrite ici une seule fois ; les fonctions `carte_*` sont
 partagées avec l'Étude complète (`resoudre_ec.py`).

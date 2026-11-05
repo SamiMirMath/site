@@ -1,7 +1,8 @@
 """Commandes de test du dépôt (Python seulement, sans dépendance : les tests sont lancés par `uv`).
 
     python3 tests/lancer.py rapide    # les tests des fichiers modifiés (git) + tests de fumée ; pages à corpus réduit des outils dont
-                                      # une page ou un moteur Python chargé par la page (moteur/manifeste.json) est modifié
+                                      # une page ou un moteur Python chargé par la page (moteur/manifeste.json) est modifié ; règles
+                                      # détaillées ci-dessous
     python3 tests/lancer.py complet   # toute la suite Python puis toute la suite de pages (parallèles) ; code de retour propagé
     python3 tests/lancer.py python    # toute la suite Python seule
     python3 tests/lancer.py pages     # toute la suite de pages seule (CORPUS=reduit pour le corpus de la CI)
@@ -15,13 +16,32 @@
                                       # (python.xml, pages.xml), rapport.json (commit, empreintes des fichiers modifiés ou non suivis,
                                       # codes, durées, tests passés / xfail / sautés, sous-tests, variables CORPUS, OUTILS et MEMO) et les
                                       # listes texte de comparer_listes.py
-    python3 tests/lancer.py verifier <dossier> [--reference <dossier>] [--commit <rév>]
+    python3 tests/lancer.py verifier <dossier> [--reference <dossier>] [--commit <rév>] [--suivi <fichier>]
                                       # après le commit : contrôle le rapport de `complet --rapport` (empreintes du commit, autres
-                                      # fichiers modifiés, codes, tests disparus ou dégradés par rapport à la référence) ; voir verifier.py
+                                      # fichiers modifiés hors docs/ et CLAUDE.md, codes, tests disparus, échoués ou sautés en plus par
+                                      # rapport à la référence, sous-tests en baisse non justifiés dans le suivi.md du chantier, section
+                                      # « Variations de sous-tests ») ; voir verifier.py
     python3 tests/lancer.py reference <dossier>
                                       # remplace la référence du dépôt (tests/reference, celle de verifier) par les listes de <dossier>,
                                       # écrit par `complet --rapport` sur un commit de la branche, vert, complet, sans autre fichier modifié
                                       # que dans docs/ ou CLAUDE.md ; jamais automatique : à lancer au P0 de chaque chantier, puis à commiter
+
+Ce que `rapide` relance (et que `liste` affiche). Fichiers : `git diff --name-only --no-renames -z <commit>` (HEAD, ou --depuis) et
+`git ls-files --others --exclude-standard -z`, découpés sur \\0 (noms à espaces ou non ASCII tels quels), fichiers supprimés compris
+(marqués « supprimé » ; un fichier déplacé donne son ancien et son nouveau chemin). Tests Python (tests_python_concernes) : les test_*.py
+modifiés, ceux qui importent même de loin un module modifié ou supprimé des moteurs, de tests/python ou de tests/python/donnees ; ceux
+qui lisent par son chemin un fichier modifié ou supprimé de tests/python/donnees, tests/python/instantanes ou tests/pages/references
+(modules dont une chaîne nomme ce dossier, puis leurs dépendants ; tous les tests Python si aucun ne le nomme) ; test_instantanes*.py et
+test_json_strict.py quand une page d'outil, un cas*.py ou un instantané change ; test_lancer.py quand un script de commande change
+(lancer.py, verifier.py, comparer_listes.py, rapport_pytest.py, outils_du_site.py) ; test_imports.py et test_noyau.py quand un .py des
+dossiers des moteurs change (ils le lisent par son chemin) ; les dépendants de tests/python/outils_du_site.py
+quand moteur/manifeste.json ou commun/registre.json change (les listes d'outils des tests et de ce script en dérivent) ; toujours les
+tests de fumée. Pages, corpus réduit (outils_de_pages) : l'outil dont la page, un moteur Python chargé par la page
+(moteur/manifeste.json), la référence de page (tests/pages/references/<outil>.json) ou l'instantané resoudre (lu par
+test_comportement.py) change, avec ses variantes de filière (registre : la filière M pour les exponentielles) ; toutes les pages pour un
+fichier commun, un autre fichier de tests/pages ou un module du corpus des pages (cas.py, cas_el.py…), ou si on ne sait pas borner (liste
+des outils illisible comprise). Dans le doute, on élargit, jamais on ne réduit ; `rapide` ne remplace pas `complet` avant
+un commit.
 
 Variable PROCESSUS_PAGES (entier ≥ 1) : nombre de processus (Chrome) de la suite de pages, pour rapide, pages et complet ; absente : 2
 (Mac de l'enseignant, CI) ; 4 sur le PC. Une valeur invalide arrête la commande avant tout lancement (code 2).
@@ -29,6 +49,8 @@ Variable PROCESSUS_PAGES (entier ≥ 1) : nombre de processus (Chrome) de la sui
 Le code de retour est celui de pytest (0 = tout est vert) : pas de pipe, donc rien n'est masqué (CLAUDE.md). Ce fichier ne s'appelle pas
 `test_*.py` : ni pytest ni unittest ne le collectent."""
 import datetime
+import glob
+import importlib.util
 import json
 import os
 import re
@@ -40,16 +62,48 @@ import comparer_listes
 import verifier
 
 RACINE = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-DOSSIERS_MOTEURS = ("ensemble-definition", "moteur", "derivee-variations", "limites-asymptotes", "etude-complete", "factorisation",
-                    "exponentielles-logarithmes")
+# la liste des outils (chantier fondations, F3) : tests/python/outils_du_site.py, chargé par son chemin (sys.path inchangé), lit
+# moteur/manifeste.json et commun/registre.json ; une modification de l'un d'eux relance les dépendants de ce module
+MODULE_DES_OUTILS = "outils_du_site"
+SOURCES_DES_OUTILS = ("moteur/manifeste.json", "commun/registre.json")
+
+
+def charger_outils_du_site():
+    chemin = os.path.join(RACINE, "tests", "python", MODULE_DES_OUTILS + ".py")
+    spec = importlib.util.spec_from_file_location(MODULE_DES_OUTILS, chemin)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+# DOSSIERS_MOTEURS : dossiers des fichiers Python chargés par les pages (manifeste), dans l'ordre du manifeste ; OUTILS_PAGES : dossier
+# d'outil -> nom donné à OUTILS dans les tests de pages (registre) ; VARIANTES : page ouverte avec une filière à part (références et
+# instantané resoudre à part, par exemple exponentielles-logarithmes-M) -> outil. Liste illisible (manifeste ou registre absent ou
+# invalide) : listes vides et LISTES_ILLISIBLES ; `rapide` relance alors tout (seuls verifier, reference et complet s'en passent).
+try:
+    outils_du_site = charger_outils_du_site()
+    DOSSIERS_MOTEURS = tuple(outils_du_site.dossiers_moteurs(RACINE))
+    OUTILS_PAGES = outils_du_site.pages(RACINE)
+    VARIANTES = outils_du_site.variantes(RACINE)
+    LISTES_ILLISIBLES = None
+except (OSError, ValueError, KeyError, TypeError, AttributeError, StopIteration) as erreur_des_listes:
+    outils_du_site, DOSSIERS_MOTEURS, OUTILS_PAGES, VARIANTES = None, (), {}, {}
+    LISTES_ILLISIBLES = f"liste des outils illisible ({type(erreur_des_listes).__name__} : {erreur_des_listes})"
 # modules lancés quoi qu'on touche : la liste des outils, l'accueil et le manifeste des fichiers chargés par Pyodide
 FUMEE_PYTHON = ("test_manifeste.py", "test_accueil.py", "test_source_unique.py")
-# dossier d'outil -> nom donné à OUTILS dans les tests de pages
-OUTILS_PAGES = {"factorisation": "factorisation", "simplexe": "simplexe", "ensemble-definition": "ensemble-definition",
-                "derivee-variations": "derivee-variations", "limites-asymptotes": "limites-asymptotes", "etude-complete": "etude-complete",
-                "exponentielles-logarithmes": "exponentielles-logarithmes"}
-OUTIL_M = "exponentielles-logarithmes-M"     # filière M de la page des exponentielles (tests/pages/rendu.py) : ses références sont à part
-MANIFESTE = "moteur/manifeste.json"          # fichiers Python que chaque page charge dans Pyodide
+DOSSIERS_TESTS_PYTHON = ("tests/python", "tests/python/donnees")   # modules des tests Python (donnees/ : corpus de l'enseignant)
+TOUS_LES_TESTS_PYTHON = "tests/python"
+# fichiers lus par leur chemin, sans import : dossier -> élément de chemin cherché dans les chaînes des modules qui les lisent
+LUS_PAR_CHEMIN = {"tests/python/donnees/": "donnees", "tests/python/instantanes/": "instantanes", "tests/pages/references/": "references"}
+# relancés quand une page (dont cas.py lit les exemples), un cas*.py ou un instantané change (revue de structure, R4)
+INSTANTANES_ET_JSON = ("tests/python/test_instantanes*.py", "tests/python/test_json_strict.py")
+# scripts de commande que test_lancer.py copie dans un dépôt temporaire (sans les importer) : leur modification relance ce test
+SCRIPTS_DE_COMMANDE = ("tests/lancer.py", "tests/verifier.py", "tests/comparer_listes.py", "tests/rapport_pytest.py",
+                       "tests/python/outils_du_site.py")
+TEST_DES_SCRIPTS = "tests/python/test_lancer.py"
+# tests qui lisent les .py des moteurs par leur chemin (ast), sans les importer : relancés quand un .py des dossiers des moteurs change
+# (chantier fondations, F4 : graphe des imports figé, frontière du noyau)
+LECTEURS_DES_MOTEURS = ("tests/python/test_imports.py", "tests/python/test_noyau.py")
 PROCESSUS_PAGES_DEFAUT = 2                   # suite de pages sans la variable PROCESSUS_PAGES (Mac de l'enseignant, CI)
 UV = ["uv", "run", "-q", "--no-project", "--python", "3.12", "--with", "sympy==1.13.3", "--with", "mpmath==1.3.0",
       "--with", "websockets", "--with", "pytest", "--with", "pytest-xdist", "python", "-m", "pytest"]
@@ -60,33 +114,85 @@ def sh(*args):
 
 
 def fichiers_modifies(depuis="HEAD"):
-    """Fichiers modifiés depuis le commit `depuis` (commités ensuite, indexés ou non) et non suivis, chemins relatifs à la racine."""
-    noms = set(sh("git", "diff", "--name-only", depuis).split())
-    noms |= set(sh("git", "ls-files", "--others", "--exclude-standard").split())
-    return sorted(n for n in noms if os.path.exists(os.path.join(RACINE, n)))
+    """Fichiers modifiés depuis le commit `depuis` (commités ensuite, indexés ou non), supprimés compris, et non suivis : chemins
+    relatifs à la racine, lus avec `-z` (noms à espaces ou non ASCII tels quels) ; `--no-renames` : un fichier déplacé donne son
+    ancien chemin (supprimé) et le nouveau."""
+    noms = set(verifier.noms_git("diff", "--name-only", "--no-renames", "-z", depuis, "--"))
+    noms |= set(verifier.noms_git("ls-files", "--others", "--exclude-standard", "-z"))
+    return sorted(noms)
+
+
+def existe(chemin):
+    return os.path.exists(os.path.join(RACINE, chemin))
+
+
+def module_de(chemin):
+    """Nom de module d'un .py des moteurs ou des tests Python (présent ou supprimé), None pour un autre fichier."""
+    dossier, nom = os.path.split(chemin)
+    return nom[:-3] if nom.endswith(".py") and dossier in DOSSIERS_MOTEURS + DOSSIERS_TESTS_PYTHON else None
 
 
 def modules_du_depot():
-    """{nom de module: chemin relatif} pour les .py des moteurs et des tests Python (les noms sont uniques dans le dépôt)."""
+    """{nom de module: chemin relatif} pour les .py présents des moteurs, des tests Python et de leurs données (les noms sont uniques
+    dans le dépôt)."""
     modules = {}
-    for dossier in DOSSIERS_MOTEURS + ("tests/python",):
-        for nom in sorted(os.listdir(os.path.join(RACINE, dossier))):
-            if nom.endswith(".py"):
-                modules.setdefault(nom[:-3], f"{dossier}/{nom}")
+    for dossier in DOSSIERS_MOTEURS + DOSSIERS_TESTS_PYTHON:
+        if os.path.isdir(os.path.join(RACINE, dossier)):
+            for nom in sorted(os.listdir(os.path.join(RACINE, dossier))):
+                if nom.endswith(".py"):
+                    modules.setdefault(nom[:-3], f"{dossier}/{nom}")
     return modules
+
+
+def texte(chemin):
+    with open(os.path.join(RACINE, chemin), encoding="utf-8") as f:
+        return f.read()
+
+
+IMPORT = re.compile(r"^\s*(?:import|from)\s+(\w+)", re.MULTILINE)
 
 
 def imports(chemin):
     """Modules importés (lecture du texte, pas de l'arbre : le script se lance avec n'importe quel Python 3)."""
-    with open(os.path.join(RACINE, chemin), encoding="utf-8") as f:
-        return set(re.findall(r"^\s*(?:import|from)\s+(\w+)", f.read(), re.MULTILINE))
+    return set(IMPORT.findall(texte(chemin)))
+
+
+def nomme_le_dossier(contenu, element):
+    """Vrai si une chaîne du texte (entre guillemets, sur une ligne) a `element` pour élément de chemin : "donnees",
+    "tests/python/donnees/x.json"…"""
+    return re.search(rf"""["'](?:[^"'\n]*/)?{re.escape(element)}(?:/[^"'\n]*)?["']""", contenu) is not None
 
 
 def tests_python_concernes(modifies):
-    """Les test_*.py modifiés, et ceux qui importent (même de loin) un module modifié."""
+    """Tests Python à relancer (chemins), ou [TOUS_LES_TESTS_PYTHON] si on ne sait pas borner :
+    - les test_*.py modifiés (encore présents) ;
+    - ceux qui importent, même de loin, un module modifié ou supprimé. Le graphe est lu sur l'état présent, où le nom d'un module
+      supprimé reste un nœud : un module qui l'importe encore est atteint, et un module qui ne l'importe plus a été modifié, donc est
+      atteint lui aussi ; rien n'est perdu par rapport au graphe d'avant la suppression ;
+    - ceux qui lisent par son chemin un fichier modifié ou supprimé d'un dossier de LUS_PAR_CHEMIN (donnees/, instantanes/, références
+      des pages) : les modules dont une chaîne nomme ce dossier, puis leurs dépendants ; tous les tests si aucun module ne le nomme ;
+    - test_instantanes*.py et test_json_strict.py si une page (fichier non .py d'un dossier d'outil, que cas.py lit), un cas*.py ou un
+      instantané change ;
+    - test_lancer.py si un script de commande change (il les copie au lieu de les importer) ;
+    - test_imports.py et test_noyau.py si un .py des dossiers des moteurs change, supprimé ou nouveau compris (ils le lisent par
+      son chemin) ;
+    - les dépendants de outils_du_site.py si le manifeste ou le registre change (les listes d'outils des tests en dérivent) ;
+    - et toujours les tests de fumée. Tous les tests si la liste des outils est illisible."""
+    if LISTES_ILLISIBLES:
+        return [TOUS_LES_TESTS_PYTHON]
     modules = modules_du_depot()
-    dependances = {nom: imports(chemin) & set(modules) for nom, chemin in modules.items()}
-    touches = {nom for nom, chemin in modules.items() if chemin in modifies}
+    textes = {nom: texte(chemin) for nom, chemin in modules.items()}
+    touches = {m for m in map(module_de, modifies) if m}
+    if any(n in SOURCES_DES_OUTILS for n in modifies):
+        touches.add(MODULE_DES_OUTILS)
+    noms = set(modules) | touches
+    dependances = {nom: set(IMPORT.findall(t)) & noms for nom, t in textes.items()}
+    for prefixe, element in sorted(LUS_PAR_CHEMIN.items()):
+        if any(n.startswith(prefixe) for n in modifies):
+            lecteurs = {nom for nom, t in textes.items() if nomme_le_dossier(t, element)}
+            if not lecteurs:
+                return [TOUS_LES_TESTS_PYTHON]
+            touches |= lecteurs
     atteints = set(touches)
     change = True
     while change:
@@ -95,22 +201,34 @@ def tests_python_concernes(modifies):
             if nom not in atteints and deps & atteints:
                 atteints.add(nom)
                 change = True
-    tests = {modules[n] for n in atteints if modules[n].startswith("tests/python/test_")}
+    tests = {modules[n] for n in atteints if n in modules and modules[n].startswith("tests/python/test_")}
+    if any(est_page(n) or re.fullmatch(r"tests/python/cas[^/]*\.py", n) or n.startswith("tests/python/instantanes/")
+           for n in modifies):
+        for motif in INSTANTANES_ET_JSON:
+            tests |= {os.path.relpath(c, RACINE).replace(os.sep, "/") for c in glob.glob(os.path.join(RACINE, motif))}
+    if any(n in SCRIPTS_DE_COMMANDE for n in modifies) and existe(TEST_DES_SCRIPTS):
+        tests.add(TEST_DES_SCRIPTS)
+    if any(n.endswith(".py") and os.path.dirname(n) in DOSSIERS_MOTEURS for n in modifies):
+        tests |= set(LECTEURS_DES_MOTEURS)
+    tests = {t for t in tests if existe(t)}
     tests |= {f"tests/python/{n}" for n in FUMEE_PYTHON}
-    # un test qui lit un fichier du dépôt (page, JSON) sans l'importer : toute page ou tout JSON modifié relance la fumée seule
     return sorted(tests)
 
 
+def est_page(chemin):
+    """Fichier d'une page d'outil (index.html et ce qui l'accompagne) : tout fichier non .py d'un dossier d'outil."""
+    return chemin.split("/")[0] in OUTILS_PAGES and not chemin.endswith(".py")
+
+
 def outils_des_moteurs(modifies):
-    """Outils dont la page charge (dans Pyodide) un .py modifié d'un dossier d'outil ou de moteur/, d'après moteur/manifeste.json
-    (liste complète et minimale, vérifiée par test_manifeste.py) ; un module partagé donne tous les outils qui le chargent. 'tous' si on
-    ne sait pas borner : fichier cité par aucun outil, outil du manifeste inconnu ici, manifeste illisible."""
+    """Outils dont la page charge (dans Pyodide) un .py modifié ou supprimé d'un dossier d'outil ou de moteur/, d'après
+    moteur/manifeste.json (liste complète et minimale, vérifiée par test_manifeste.py) ; un module partagé donne tous les outils qui le
+    chargent. 'tous' si on ne sait pas borner : fichier cité par aucun outil, outil du manifeste inconnu ici, manifeste illisible."""
     moteurs = [n for n in modifies if n.endswith(".py") and n.split("/")[0] in set(DOSSIERS_MOTEURS) | set(OUTILS_PAGES)]
     if not moteurs:
         return set()
     try:
-        with open(os.path.join(RACINE, MANIFESTE), encoding="utf-8") as f:
-            charges = {outil: set(o["fichiers"]) for outil, o in json.load(f)["outils"].items()}
+        charges = {outil: set(o["fichiers"]) for outil, o in outils_du_site.manifeste(RACINE).items()}
     except (OSError, ValueError, KeyError, TypeError, AttributeError):
         return {"tous"}
     outils = set()
@@ -122,41 +240,58 @@ def outils_des_moteurs(modifies):
     return outils
 
 
-def corpus_des_pages():
-    """Modules de tests/python que les tests de pages importent, même de loin (corpus des pages : cas.py, cas_el.py…)."""
+def corpus_des_pages(modifies=()):
+    """Noms des modules de tests/python (donnees/ comprise) que les tests de pages importent, même de loin (corpus des pages : cas.py,
+    cas_el.py…) ; un module supprimé que l'un d'eux importe encore en fait partie."""
     modules = {nom: chemin for nom, chemin in modules_du_depot().items() if chemin.startswith("tests/python/")}
+    noms = set(modules) | {module_de(n) for n in modifies if n.startswith("tests/python/") and module_de(n)}
     atteints = set()
     for nom in sorted(os.listdir(os.path.join(RACINE, "tests/pages"))):
         if nom.endswith(".py"):
-            atteints |= imports(f"tests/pages/{nom}") & set(modules)
+            atteints |= imports(f"tests/pages/{nom}") & noms
     a_lire = list(atteints)
     while a_lire:
-        for dep in imports(modules[a_lire.pop()]) & set(modules):
+        nom = a_lire.pop()
+        for dep in (imports(modules[nom]) if nom in modules else set()) & noms:
             if dep not in atteints:
                 atteints.add(dep)
                 a_lire.append(dep)
-    return {modules[n] for n in atteints}
+    return atteints
+
+
+def outil_du_json(chemin):
+    """Outil d'une référence de page ou d'un instantané resoudre (`<outil>.json`, une variante de filière avec sa page) ; 'tous'
+    sinon."""
+    nom = os.path.basename(chemin)[:-len(".json")]
+    if nom in VARIANTES:
+        return VARIANTES[nom]
+    return nom if nom in OUTILS_PAGES.values() else "tous"
 
 
 def outils_de_pages(modifies):
-    """Outils dont une page (HTML, JS, CSS) ou un moteur Python chargé par la page est modifié ; 'tous' si un fichier commun, un test de
-    pages ou un module de leur corpus l'est. La page des exponentielles et logarithmes vient avec sa filière M (références à part)."""
+    """Outils dont une page (HTML, JS, CSS), un moteur Python chargé par la page, la référence de page (tests/pages/references) ou
+    l'instantané resoudre (lu par test_comportement.py) est modifié ou supprimé ; 'tous' si un fichier commun, un autre fichier des
+    tests de pages ou un module de leur corpus l'est ; 'tous' aussi si la liste des outils est illisible. Une page vient avec ses
+    variantes de filière (la page des exponentielles et logarithmes avec sa filière M : références à part)."""
+    if LISTES_ILLISIBLES:
+        return {"tous"}
     outils = outils_des_moteurs(modifies)
-    corpus = corpus_des_pages()
+    corpus = corpus_des_pages(modifies)
     for n in modifies:
         haut = n.split("/")[0]
-        if haut in OUTILS_PAGES and not n.endswith(".py"):
+        if est_page(n):
             outils.add(OUTILS_PAGES[haut])
         elif haut in ("commun", "index.html", "moteur") and not n.endswith(".py"):
             outils.add("tous")
-        elif n.startswith("tests/pages/") and n.endswith(".py"):
+        elif re.fullmatch(r"tests/(pages/references|python/instantanes/resoudre)/[^/]+\.json", n):
+            outils.add(outil_du_json(n))
+        elif n.startswith("tests/pages/"):
             outils.add("tous")
-        elif n in corpus:
+        elif n.startswith("tests/python/") and module_de(n) in corpus:
             outils.add("tous")
     if "tous" in outils:
         return {"tous"}
-    if "exponentielles-logarithmes" in outils:
-        outils.add(OUTIL_M)
+    outils |= {variante for variante, outil in VARIANTES.items() if outil in outils}
     return outils
 
 
@@ -197,9 +332,9 @@ FICHIERS_RAPPORT = ("rapport.json", "python.xml", "pages.xml", "python.json", "p
 
 
 def etat_fichiers():
-    """{chemin: empreinte `git hash-object`, ou None si supprimé} des fichiers modifiés (indexés ou non) ou non suivis."""
-    noms = set(sh("git", "diff", "--name-only", "HEAD").splitlines())
-    noms |= set(sh("git", "ls-files", "--others", "--exclude-standard").splitlines())
+    """{chemin: empreinte `git hash-object`, ou None si supprimé} des fichiers modifiés (indexés ou non) ou non suivis ; noms lus
+    comme dans fichiers_modifies (-z, --no-renames), et comme verifier.py lit ceux du commit."""
+    noms = set(fichiers_modifies("HEAD"))
     presents = sorted(n for n in noms if os.path.isfile(os.path.join(RACINE, n)))
     empreintes = sh("git", "hash-object", "--", *presents).split() if presents else []
     etat = dict(zip(presents, empreintes))
@@ -352,8 +487,11 @@ def rapide(seulement_lister=False, depuis="HEAD"):
     modifies = fichiers_modifies(depuis)
     tests = tests_python_concernes(modifies)
     outils = outils_de_pages(modifies)
-    print("fichiers modifiés" + (f" depuis {depuis}" if depuis != "HEAD" else "") + " :", ", ".join(modifies) or "aucun")
-    print("tests Python :", ", ".join(os.path.basename(t) for t in tests))
+    print("fichiers modifiés" + (f" depuis {depuis}" if depuis != "HEAD" else "") + " :",
+          ", ".join(n + ("" if existe(n) else " (supprimé)") for n in modifies) or "aucun")
+    print("tests Python :", f"tous (tests/python : on ne sait pas borner{' : ' + LISTES_ILLISIBLES if LISTES_ILLISIBLES else ''})"
+          if tests == [TOUS_LES_TESTS_PYTHON]
+          else ", ".join(os.path.basename(t) for t in tests))
     print("pages (corpus réduit) :", ", ".join(sorted(outils)) or "aucune")
     if seulement_lister:
         return 0

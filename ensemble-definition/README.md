@@ -1,29 +1,28 @@
 # Ensemble de définition — calcul détaillé
 
-Site statique : la page `index.html` charge Python dans le navigateur (Pyodide) puis exécute
-`ensemble_def.py`, qui fait tout le calcul. Aucun serveur Python n'est nécessaire.
+Site statique : la page `index.html` charge Python dans le navigateur (Pyodide) puis le moteur de cet outil, qui fait tout
+le calcul. Aucun serveur Python n'est nécessaire.
 
 ## Fichiers
-- `ensemble_def.py` — moteur de calcul, Python pur (aucune dépendance).
-- `index.html` — interface (mobile), rendu des formules avec KaTeX.
+- `ensemble_def.py` — moteur de calcul, Python pur (SymPy facultatif, voir plus bas) ; c'est aussi la base du noyau commun
+  des autres outils (`moteur/noyau.py`).
+- `resoudre_ed.py` — adaptateur : met le résultat au format de sortie commun (`moteur/sortie.py`) que la page affiche, et
+  compose la phrase du contrôle numérique.
+- `index.html` — page de l'outil, montée par `commun/outil.js` ; les fichiers Python chargés sont listés dans
+  `moteur/manifeste.json`.
 
-Les deux fichiers doivent être **dans le même dossier**.
-
-## Mise en ligne sur GitHub Pages
-1. Déposer `index.html` et `ensemble_def.py` dans un dépôt (ou un sous-dossier, ex. `ensemble-definition/`).
-2. Settings → Pages → Source : branche `main`, dossier `/ (root)`.
-3. Le site est à `https://<utilisateur>.github.io/<depot>/` (ajouter le sous-dossier le cas échéant).
-
-Lien direct vers un calcul : `…/index.html?f=ln(x^2-4)/(x-5)`.
+## Mise en ligne
+Le site entier (branche `main`) est publié par GitHub Pages ; voir `docs/README.md`.
+Lien direct vers un calcul : `…/ensemble-definition/?f=ln(x^2-4)/(x-5)`.
 
 ## Test en local
 Ouvrir le fichier par double-clic ne marche pas (le navigateur bloque la lecture du `.py`).
-Dans le dossier :
+À la racine du dépôt (la page lit `../commun/` et `../moteur/`) :
 
 ```
 python3 -m http.server
 ```
-puis ouvrir http://localhost:8000.
+puis ouvrir http://localhost:8000/ensemble-definition/.
 
 Le moteur s'utilise aussi seul :
 ```

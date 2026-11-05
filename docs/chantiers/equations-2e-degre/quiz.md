@@ -169,8 +169,9 @@ Etape = {
 
 ## 6. Place dans le chantier
 
-Nouvelle partie **P5b « Onglet S'entraîner »**, après P5 (l'outil existe) et avant P10 (registre). P3 doit déjà produire les étapes structurées du § 4 : c'est la seule
-contrainte que le quiz impose aux parties précédentes.
+L'onglet « S'entraîner » fera l'objet d'un **chantier séparé** (statut du 05.11.2026, en tête), après le chantier qui crée l'outil : celui-ci n'a pas de partie
+« Onglet S'entraîner » (la partie P5b proposée le 04.11.2026 est abandonnée). P3 doit déjà produire les étapes structurées du § 4 : c'est la seule
+contrainte que le quiz impose au premier chantier.
 
 ## 7. Questions (réponses de l'enseignant du 05.11.2026)
 

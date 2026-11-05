@@ -20,7 +20,7 @@ from ensemble_def import (
     evaluer, proche, preimage, resoudre_general,
     # polynômes exacts
     pn, deg, peval, pdivlin, pmul, padd, pscal, nul, decomposer, r_norm,
-    trinome, racine_rationnelle,
+    trinome,
     # conditions d'existence (liste (genre, arbre), dans l'ordre de l'analyse)
     conditions,
     # tableaux de signes

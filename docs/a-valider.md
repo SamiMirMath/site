@@ -171,14 +171,14 @@ Voir [specifications/exponentielles-logarithmes.md](specifications/exponentielle
 
 ## Chantier « refonte de la rédaction » des limites (3M) — décisions de nuit du 29-30.10.2026 (à valider)
 
-Décisions prises sans l'enseignant, fidèles au corrigé (`docs/specifications/redaction-limites-3m.md`). Chacune a son alternative.
+Décisions prises sans l'enseignant, fidèles au corrigé (`docs/specifications/redaction-limites-3m.md`, règles RL1–RL20). Chacune a son alternative.
 
-- **R18 — fonctions purement rationnelles** (sans exp, ln, aˣ) : méthodes actuelles inchangées (mise en évidence, factorisation, division
-  euclidienne). *Alternative* : BH partout, comme le corrigé le fait pour les fractions DANS un exposant ou un ln (R16, déjà appliqué).
-- **R19 — vocabulaire du bord** : « trou » est réservé à un point intérieur de l'ensemble de définition. Au bord : « Le graphe s'arrête au
+- **RL18 — fonctions purement rationnelles** (sans exp, ln, aˣ) : méthodes actuelles inchangées (mise en évidence, factorisation, division
+  euclidienne). *Alternative* : BH partout, comme le corrigé le fait pour les fractions DANS un exposant ou un ln (RL16, déjà appliqué).
+- **RL19 — vocabulaire du bord** : « trou » est réservé à un point intérieur de l'ensemble de définition. Au bord : « Le graphe s'arrête au
   point (0 ; 1), qui n'en fait pas partie. » *Alternative* : « point exclu ».
 - **Repli plutôt qu'une ancienne rédaction défectueuse** : si la nouvelle rédaction abandonne et que l'ancienne contient une forme
-  indéterminée suivie de « = valeur » (R14), l'outil affiche le message de repli. *Alternative* : garder l'ancienne rédaction.
+  indéterminée suivie de « = valeur » (RL14), l'outil affiche le message de repli. *Alternative* : garder l'ancienne rédaction.
 - **Écarts mineurs assumés** (liste tenue à jour dans `docs/chantiers/limites-asymptotes/suivi-refonte.md`) : « on remplace » au lieu de
   « on remplace à nouveau » (8.11 a) ; Ex5 a) avec deux étapes BH détaillées ; « BH » puis « on simplifie » en deux étapes au lieu de « BH et
   simplification » (8.12 d, 8.14) ; étapes intermédiaires de simplification génériques.

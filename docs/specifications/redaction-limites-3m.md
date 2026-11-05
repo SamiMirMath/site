@@ -20,28 +20,32 @@ Il complète `docs/specifications/limites-asymptotes.md` (doctrine, périmètre)
 
 Mots de forme : « **indéterminée** » (rouge) ; « **pas indéterminée** » (vert).
 
-## 2. Règles R1 à R20
+## 2. Règles RL1 à RL20
 
-R1  Déroulement **descendant** : on part de la limite demandée et on descend en une seule suite d'étapes. Plus de blocs imbriqués calculés « avant ». Une sous-limite nécessaire est annoncée et calculée là où on en a besoin (« On calcule à part … »), puis citée quand on la réutilise.
-R2  « Étape 1 : on remplace. » Haut : … → … / Bas : … → … (ou chaque facteur d'un produit), avec les intermédiaires du corrigé (« −x → +∞, donc e^(−x) → +∞ »). Puis « Forme … : indéterminée. » ou « Forme … : pas indéterminée ! ».
-R3  Forme déterminée : « Étape 2 : on conclut directement. » + la phrase du corrigé (règle des signes ; « un nombre minuscule divisé par un nombre énorme reste minuscule »…) + la chaîne (= « 0⁺/+∞ » = 0⁺). Si la forme ressemble à un piège (0/∞, ∞/0, ∞·∞) : encadré « Attention » comme Ex5 d) et 8.12 c).
-R4  Forme indéterminée : encadré « Prédiction avec la règle du podium » : au haut / au bas (ou le produit), qui gagne (eˣ bat xⁿ qui bat ln x ; entre puissances, la plus grande gagne ; à égalité, quotient des coefficients), signe à part, « On s'attend à : … ». En x → −∞ ou 0⁺ : « On pense à t = −x » ou « t = 1/x ». Si le podium ne s'applique pas (8.14) : « Ici, le podium ne peut pas aider… », tableau de valeurs calculé en haute précision (format du corrigé : 0,8515 ; 0,99998 ; ≈ 1), puis « La calculatrice ne prouve rien… ». La prédiction est calculée par des règles puis comparée au résultat final. Si elles divergent, la prédiction n'est pas affichée et un test échoue (c'est un bug).
-R5  Le podium ne justifie jamais une égalité.
-R6  0·(±∞) : « Étape : on transforme le produit en quotient. BH ne marche pas sur un produit. On écrit x³ = 1/x⁻³ : … ». ln reste en haut, avec la remarque « Pourquoi garder ln(x) en haut ? Parce que sa dérivée 1/x est simple. Si on mettait 1/ln(x) en bas, sa dérivée serait compliquée. » ; eᵘ = 1/e^(−u). Puis « Étape : on vérifie la forme. » avec Haut / Bas.
-R7  Constante : « Étape : on sort la constante. Propriété des puissances : e^(3x−5) = e^(3x)·e⁻⁵. Le nombre e⁻⁵ ≈ 0,0067 est une constante positive : elle ne change ni le signe ni le résultat « 0 ou ∞ ». On la garde de côté. » À la fin : « Étape : on n'oublie pas la constante. e⁻⁵·0⁻ = 0⁻ ».
-R8  Simplification préalable : « Étape : on simplifie le logarithme. Propriété des logarithmes : ln(x³) = 3 ln(x) » (8.12 b), et toute simplification évidente avant BH.
-R9  BH : « Étape k : BH (1re fois). », puis le tableau sur deux lignes, AVANT la chaîne : « haut : … ⟶ dérivée : … » / « bas : … ⟶ dérivée : … », puis la chaîne « lim … =^BH lim f′/g′ ». Les dérivées composées sont expliquées comme dans le corrigé (« on utilise (eᵘ)′ = u′eᵘ avec u = 1/x, u′ = −1/x² » ; « on pose u = −x… »).
-R10 Après BH, on garde la forme quotient. La simplification est une étape à part : « Étape : on simplifie. Diviser par 1/x, c'est multiplier par x : … », « (Les deux −1/x² se simplifient.) ». Jamais de retour au produit suivi d'une nouvelle mise en quotient. Les simplifications triviales (facteur constant, signes) restent dans la chaîne, après un « = ».
-R11 Avant chaque nouveau BH, la forme est revérifiée et écrite avec ses signes : « forme −∞/+∞ : encore indéterminée. » (à droite de la chaîne, ou « Étape : on vérifie la forme »). Au moins trois BH de suite.
-R12 « BH tourne en rond » (8.12 h) : encadré « Le piège » qui montre le BH qui empire, puis « Étape : on réécrit » et le bon quotient.
-R13 Étape finale « on remplace » : « x eˣ → (+∞)·(+∞) = +∞ : pas indéterminée. »
-R14 Une forme indéterminée n'est **jamais** suivie de « = valeur ». Test sur tout le corpus.
-R15 Résultat encadré « lim … = … », puis « ✓ Le calcul confirme la prédiction du podium. » (pour 8.14 : « La calculatrice avait bien « deviné » : le calcul le confirme. »).
-R16 e^(…) et ln(…) : « Étape 1 : limite de l'exposant, à part. » (ou de l'intérieur), prédiction (« exposant → 3, donc e^… → e³ »), « Calcul avec BH : », puis « Étape 2 : on applique l'exponentielle. » (ou « le logarithme »). Les fractions rationnelles DANS un exposant ou dans un ln se traitent par BH, comme Ex6 et 8.13.
-R17 Notation : 0⁺ / 0⁻ dès que le signe est connu, y compris dans le résultat ; un infini négatif entre parenthèses dans un produit ((−∞)·0⁺) ; valeur exacte puis approchée (e³ ≈ 20,09 ; √e ≈ 1,65 ; ln 3 ≈ 1,10), virgule décimale.
-R18 Fonctions purement rationnelles (sans exp, ln, aˣ) : méthodes actuelles inchangées (mise en évidence, factorisation, division euclidienne). Voir `docs/a-valider.md`.
-R19 « Trou » est réservé à un point intérieur de l'ensemble de définition. Au bord : « Le graphe s'arrête au point (0 ; 1), qui n'en fait pas partie. » (à valider).
-R20 Vouvoiement ; vocabulaire du corrigé (« haut », « bas », « on remplace », « podium »).
+Préfixe RL (règles des limites), pour ne pas confondre avec les règles R1–R20 de `docs/guide-redaction.md`. Jusqu'au 05.11.2026,
+elles s'appelaient R1 à R20 : les documents de chantier antérieurs, le code et les tests de l'outil Limites (`viole_r14`, messages
+internes) gardent par endroits l'ancien nom.
+
+RL1  Déroulement **descendant** : on part de la limite demandée et on descend en une seule suite d'étapes. Plus de blocs imbriqués calculés « avant ». Une sous-limite nécessaire est annoncée et calculée là où on en a besoin (« On calcule à part … »), puis citée quand on la réutilise.
+RL2  « Étape 1 : on remplace. » Haut : … → … / Bas : … → … (ou chaque facteur d'un produit), avec les intermédiaires du corrigé (« −x → +∞, donc e^(−x) → +∞ »). Puis « Forme … : indéterminée. » ou « Forme … : pas indéterminée ! ».
+RL3  Forme déterminée : « Étape 2 : on conclut directement. » + la phrase du corrigé (règle des signes ; « un nombre minuscule divisé par un nombre énorme reste minuscule »…) + la chaîne (= « 0⁺/+∞ » = 0⁺). Si la forme ressemble à un piège (0/∞, ∞/0, ∞·∞) : encadré « Attention » comme Ex5 d) et 8.12 c).
+RL4  Forme indéterminée : encadré « Prédiction avec la règle du podium » : au haut / au bas (ou le produit), qui gagne (eˣ bat xⁿ qui bat ln x ; entre puissances, la plus grande gagne ; à égalité, quotient des coefficients), signe à part, « On s'attend à : … ». En x → −∞ ou 0⁺ : « On pense à t = −x » ou « t = 1/x ». Si le podium ne s'applique pas (8.14) : « Ici, le podium ne peut pas aider… », tableau de valeurs calculé en haute précision (format du corrigé : 0,8515 ; 0,99998 ; ≈ 1), puis « La calculatrice ne prouve rien… ». La prédiction est calculée par des règles puis comparée au résultat final. Si elles divergent, la prédiction n'est pas affichée et un test échoue (c'est un bug).
+RL5  Le podium ne justifie jamais une égalité.
+RL6  0·(±∞) : « Étape : on transforme le produit en quotient. BH ne marche pas sur un produit. On écrit x³ = 1/x⁻³ : … ». ln reste en haut, avec la remarque « Pourquoi garder ln(x) en haut ? Parce que sa dérivée 1/x est simple. Si on mettait 1/ln(x) en bas, sa dérivée serait compliquée. » ; eᵘ = 1/e^(−u). Puis « Étape : on vérifie la forme. » avec Haut / Bas.
+RL7  Constante : « Étape : on sort la constante. Propriété des puissances : e^(3x−5) = e^(3x)·e⁻⁵. Le nombre e⁻⁵ ≈ 0,0067 est une constante positive : elle ne change ni le signe ni le résultat « 0 ou ∞ ». On la garde de côté. » À la fin : « Étape : on n'oublie pas la constante. e⁻⁵·0⁻ = 0⁻ ».
+RL8  Simplification préalable : « Étape : on simplifie le logarithme. Propriété des logarithmes : ln(x³) = 3 ln(x) » (8.12 b), et toute simplification évidente avant BH.
+RL9  BH : « Étape k : BH (1re fois). », puis le tableau sur deux lignes, AVANT la chaîne : « haut : … ⟶ dérivée : … » / « bas : … ⟶ dérivée : … », puis la chaîne « lim … =^BH lim f′/g′ ». Les dérivées composées sont expliquées comme dans le corrigé (« on utilise (eᵘ)′ = u′eᵘ avec u = 1/x, u′ = −1/x² » ; « on pose u = −x… »).
+RL10 Après BH, on garde la forme quotient. La simplification est une étape à part : « Étape : on simplifie. Diviser par 1/x, c'est multiplier par x : … », « (Les deux −1/x² se simplifient.) ». Jamais de retour au produit suivi d'une nouvelle mise en quotient. Les simplifications triviales (facteur constant, signes) restent dans la chaîne, après un « = ».
+RL11 Avant chaque nouveau BH, la forme est revérifiée et écrite avec ses signes : « forme −∞/+∞ : encore indéterminée. » (à droite de la chaîne, ou « Étape : on vérifie la forme »). Au moins trois BH de suite.
+RL12 « BH tourne en rond » (8.12 h) : encadré « Le piège » qui montre le BH qui empire, puis « Étape : on réécrit » et le bon quotient.
+RL13 Étape finale « on remplace » : « x eˣ → (+∞)·(+∞) = +∞ : pas indéterminée. »
+RL14 Une forme indéterminée n'est **jamais** suivie de « = valeur ». Test sur tout le corpus.
+RL15 Résultat encadré « lim … = … », puis « ✓ Le calcul confirme la prédiction du podium. » (pour 8.14 : « La calculatrice avait bien « deviné » : le calcul le confirme. »).
+RL16 e^(…) et ln(…) : « Étape 1 : limite de l'exposant, à part. » (ou de l'intérieur), prédiction (« exposant → 3, donc e^… → e³ »), « Calcul avec BH : », puis « Étape 2 : on applique l'exponentielle. » (ou « le logarithme »). Les fractions rationnelles DANS un exposant ou dans un ln se traitent par BH, comme Ex6 et 8.13.
+RL17 Notation : 0⁺ / 0⁻ dès que le signe est connu, y compris dans le résultat ; un infini négatif entre parenthèses dans un produit ((−∞)·0⁺) ; valeur exacte puis approchée (e³ ≈ 20,09 ; √e ≈ 1,65 ; ln 3 ≈ 1,10), virgule décimale.
+RL18 Fonctions purement rationnelles (sans exp, ln, aˣ) : méthodes actuelles inchangées (mise en évidence, factorisation, division euclidienne). Voir `docs/a-valider.md`.
+RL19 « Trou » est réservé à un point intérieur de l'ensemble de définition. Au bord : « Le graphe s'arrête au point (0 ; 1), qui n'en fait pas partie. » (à valider).
+RL20 Vouvoiement ; vocabulaire du corrigé (« haut », « bas », « on remplace », « podium »).
 
 ### Titres d'étapes (vocabulaire fermé)
 
@@ -180,7 +184,7 @@ Notation : `E n [titre]` = carte « Étape n : titre » ; `P` = prédiction ; `T
 - E5 [on remplace] x → 0⁺ et e^(1/x) → +∞ : forme 0·(+∞), encore indéterminée. Mais c'est exactement l'exemple 5 b), où l'on a trouvé lim x e^(1/x) = +∞. Donc lim x e^(1/x)/2 = (+∞)/2 = +∞.
 - R : lim e^(1/x) x² = +∞ ; ✓.
 - Autre méthode : le changement de variable. On pose t = 1/x. Quand x → 0⁺, t → +∞, et x² = 1/t². Alors e^(1/x) x² = e^t/t² → +∞ (podium : e^t bat t²).
-- (Outil : la citation de l'exemple 5 b) devient « On calcule à part … » (R1) ; l'encadré « Autre méthode » est facultatif.)
+- (Outil : la citation de l'exemple 5 b) devient « On calcule à part … » (RL1) ; l'encadré « Autre méthode » est facultatif.)
 
 **h) lim_{x→0⁺} e^(−1/x)/x**
 - E1 [on remplace] Haut : −1/x → −∞, donc e^(−1/x) → 0⁺. Bas : x → 0⁺. Forme 0⁺/0⁺ : indéterminée.
@@ -250,5 +254,5 @@ Notation : `E n [titre]` = carte « Étape n : titre » ; `P` = prédiction ; `T
 ## 5. Tests dérivés
 
 1. **Structure** : pour chaque exercice ci-dessus, la suite des titres d'étapes, le nombre de BH, les dérivées haut/bas, la forme revérifiée avec ses signes, la présence de la prédiction, le résultat avec signe et le ✓ — contre cette transcription. Les écarts de formulation mineurs sont listés dans `suivi-refonte.md`.
-2. **Transverses** (tout le corpus de `tests/python/donnees/corpus_limites_3m.py`) : R14 ; aucun « croissance comparée » ; valeurs contre l'oracle mpmath ; signe 0⁺/0⁻ ; au plus 13 replis ; prédiction cohérente avec le résultat.
+2. **Transverses** (tout le corpus de `tests/python/donnees/corpus_limites_3m.py`) : RL14 ; aucun « croissance comparée » ; valeurs contre l'oracle mpmath ; signe 0⁺/0⁻ ; au plus 13 replis ; prédiction cohérente avec le résultat.
 3. **Page** : 360 px, aucun défilement horizontal.

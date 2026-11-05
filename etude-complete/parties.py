@@ -64,7 +64,7 @@ import resoudre_ed
 __all__ = ["cartes_domaine", "cartes_parite", "partie2", "cartes_zeros_signe", "partie3", "blocs_extremums", "partie5", "carte_bilan",
            "lignes_bilan", "ronds_vides", "mise_en_forme", "resolution_denominateur"]
 
-AUCUNE_CONDITION = "Ni logarithme, ni dénominateur, ni racine : aucune condition."     # phrase de l'outil ED (en-tête)
+AUCUNE_CONDITION = resoudre_ed.AUCUNE_CONDITION     # phrase de l'outil ED (en-tête), une seule source
 POINTS_DE_CONTROLE = (-2.7, -0.6, 0.35, 1.45, 3.2)                                    # sondes numériques (garde-fou)
 
 

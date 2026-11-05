@@ -8,19 +8,26 @@ import unittest
 from moteurs import ensemble_def as ed  # noqa: F401  (chemins + SymPy)
 import derivee_variations as dv
 import etude_complete as ec
+import exp_log as el
+import exp_log_m as elm
 import factorisation as fa
 import limites_asymptotes as la
+import resoudre_ec
+import resoudre_ed
 import resoudre_el
 
 import os
 from cas import CAS_LIMITES, entrees_page, entrees_factorisation
-from cas_el import entrees_el
+from cas_el import entrees_el, entrees_el_m
 
+# outil -> entrées (clés vérifiées par test_outils_du_site.py : chaque outil du manifeste) ; la filière M des exponentielles à part
 OUTILS_ENTREES = {
     nom: entrees_page(nom) + CAS_LIMITES[nom]
     for nom in ("ensemble-definition", "derivee-variations", "limites-asymptotes", "etude-complete")
 }
 OUTILS_ENTREES["factorisation"] = entrees_factorisation()
+OUTILS_ENTREES["exponentielles-logarithmes"] = entrees_el()
+ENTREES_FILIERE_M = {"exponentielles-logarithmes": entrees_el_m()}
 DOSSIER_INSTANTANES = os.path.join(os.path.dirname(__file__), "instantanes")
 
 
@@ -56,7 +63,7 @@ class TestJsonStrict(unittest.TestCase):
         self.assertEqual(r["limites"]["asymptotes"], [])        # f → +∞ des deux côtés
         for et in r["limites"]["etudes"]:                       # chaque borne donne la limite +∞
             self.assertTrue(any(r"= +\infty" in e["html"] and r"\lim" in e["html"] for e in et["etapes"]), et)
-        strict(ec.etudier_json("x^(2/3)"))
+        strict(resoudre_ec.resoudre_json("x^(2/3)"))            # la sortie que la page lit (F5 : etudier_json, ancienne, retirée)
 
     def test_garde_fou_remplace_les_infinis_par_null(self):
         for valeur in (math.inf, -math.inf, math.nan):
@@ -68,13 +75,15 @@ class TestJsonStrict(unittest.TestCase):
         for entree in OUTILS_ENTREES["etude-complete"]:
             with self.subTest(f=entree):
                 self.assertEqual(list(non_finis(ec.etudier(entree))), [])
-                strict(ec.etudier_json(entree))
+                strict(resoudre_ec.resoudre_json(entree))
 
     def test_toutes_les_sorties_json(self):
-        fonctions = {"ensemble-definition": [ed.analyser_json, ed.verifier_json, ed.apercu_json],
+        # F5 : les « anciennes » (analyser_json, verifier_json de l'ED, etudier_json de l'EC) sont retirées ; à leur place, les
+        # appels de la page qui les remplacent (resoudre_json, controle_json). etudier_json de DV et LA reste : sortie brute du moteur.
+        fonctions = {"ensemble-definition": [resoudre_ed.resoudre_json, resoudre_ed.controle_json, ed.apercu_json],
                      "derivee-variations": [dv.etudier_json],
                      "limites-asymptotes": [la.etudier_json],
-                     "etude-complete": [ec.etudier_json]}
+                     "etude-complete": [resoudre_ec.resoudre_json]}
         for outil, appels in fonctions.items():
             for entree in OUTILS_ENTREES[outil]:
                 for appel in appels:
@@ -92,7 +101,7 @@ class TestJsonStrict(unittest.TestCase):
                 strict(f.read())
 
     def test_exponentielles_logarithmes_json(self):
-        for entree in entrees_el():
+        for entree in OUTILS_ENTREES["exponentielles-logarithmes"]:
             for appel in (resoudre_el.resoudre_json, resoudre_el.apercu_json):
                 with self.subTest(f=entree, appel=appel.__name__):
                     strict(appel(entree))
@@ -103,6 +112,23 @@ class TestJsonStrict(unittest.TestCase):
         for niveau in ("facile", "moyen", "difficile", "tresDifficile"):
             for _ in range(60):
                 strict(fa.exercice_json(niveau))
+
+    def test_exponentielles_logarithmes_json_filiere_m(self):
+        """F3 : la filière M (2Ms, 2Mr) aussi, sur les entrées de son instantané resoudre."""
+        for entree in ENTREES_FILIERE_M["exponentielles-logarithmes"]:
+            with self.subTest(f=entree):
+                strict(resoudre_el.resoudre_json(entree, "M"))
+                self.assertEqual(list(non_finis(resoudre_el.resoudre(entree, "M"))), [], entree)
+
+    def test_exercices_d_exponentielles_logarithmes(self):
+        """F3 : l'exercice tiré (filières C et M, chaque niveau) et son corrigé sont du JSON strict."""
+        random.seed(2026_10_29)                   # tirages reproductibles, quel que soit l'ordre des tests
+        for filiere, niveaux in (("C", el.NIVEAUX), ("M", elm.NIVEAUX_M)):
+            for niveau in niveaux:
+                for _ in range(20):
+                    exercice = strict(resoudre_el.exercice_json(niveau, filiere))
+                    self.assertTrue(exercice["ok"], (filiere, niveau))
+                    strict(resoudre_el.resoudre_json(exercice["expr"], filiere))
 
 
 if __name__ == "__main__":

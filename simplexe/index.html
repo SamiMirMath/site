@@ -486,7 +486,7 @@ class Scene{
   constructor(cv,R,P,fixe){ this.cv=cv; this.R=R; this.P=P; this.n=P.n; this.yaw=-0.62; this.pitch=0.5; this.zoom=1; if(!fixe) this.attach(); }   // `fixe` : figure de la solution complète, sans rotation à la souris
   attach(){ const cv=this.cv; cv.onpointerdown=cv.onpointermove=cv.onpointerup=cv.onpointercancel=null;      // pas de rotation 2D : on retire les gestes d'une scène 3D précédente
     if(this.n!==3) return; let drag=null;
-    cv.onpointerdown=e=>{ if(ST&&ST.mode==='exp'&&false) return; drag={x:e.clientX,y:e.clientY}; cv.setPointerCapture(e.pointerId); };
+    cv.onpointerdown=e=>{ drag={x:e.clientX,y:e.clientY}; cv.setPointerCapture(e.pointerId); };
     cv.onpointermove=e=>{ if(!drag) return; this.yaw+=(e.clientX-drag.x)*0.008; this.pitch=Math.max(-1.45,Math.min(1.45,this.pitch+(e.clientY-drag.y)*0.008)); drag={x:e.clientX,y:e.clientY}; rendre(); };
     cv.onpointerup=cv.onpointercancel=()=>{drag=null;}; }
   /* Géométrie 2D : cadre des données (étendue + 8 % de chaque côté) et marges en pixels (graduations à gauche et en bas). */

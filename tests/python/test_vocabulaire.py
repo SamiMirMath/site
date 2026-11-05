@@ -7,6 +7,7 @@ import os
 import re
 import unittest
 
+import outils_du_site
 from moteurs import RACINE, ensemble_def as ed
 import derivee_variations as dv
 import etude_complete as ec
@@ -53,10 +54,14 @@ class TestVocabulaireEleve(unittest.TestCase):
                 with self.subTest(fichier=nom, entree=entree):
                     self.verifie(sortie, f"{nom} {entree}")
 
+    # outil -> fonction d'analyse, pour les outils à corpus cas.py ; la factorisation et les exponentielles ont leur méthode (clés et
+    # méthodes vérifiées par test_outils_du_site.py)
+    ANALYSES = {"ensemble-definition": ed.analyser, "derivee-variations": dv.etudier, "limites-asymptotes": la.etudier,
+                "etude-complete": ec.etudier}
+    METHODES = {"factorisation": "test_factorisation", "exponentielles-logarithmes": "test_exponentielles_logarithmes"}
+
     def test_cas_limites_et_exemples_de_racines(self):
-        outils = {"ensemble-definition": ed.analyser, "derivee-variations": dv.etudier,
-                  "limites-asymptotes": la.etudier, "etude-complete": ec.etudier}
-        for outil, fn in outils.items():
+        for outil, fn in self.ANALYSES.items():
             for entree in dict.fromkeys(entrees_page(outil) + CAS_LIMITES[outil] + EXEMPLES_RACINES):
                 with self.subTest(outil=outil, entree=entree):
                     self.verifie(fn(entree), f"{outil} {entree}")
@@ -87,8 +92,7 @@ class TestVouvoiement(unittest.TestCase):
     """L'enseignant vouvoie ses élèves : aucun texte destiné à l'élève (messages d'erreur, corrigés, pages, rappels de méthode) ne tutoie.
     Détecteur : aides_sortie.TUTOIEMENT (tu/ton/ta/tes/toi, impératifs « choisis », « ouvre », « mets »…, impératifs en début de phrase)."""
 
-    DOSSIERS_MOTEURS = ["ensemble-definition", "derivee-variations", "limites-asymptotes", "etude-complete", "factorisation",
-                        "exponentielles-logarithmes", "moteur"]
+    DOSSIERS_MOTEURS = outils_du_site.dossiers_moteurs()      # les dossiers des fichiers du manifeste (moteur/ compris)
     PAS_UN_TEXTE_ELEVE = {"construire_roues.py"}          # script de construction des roues : aucun texte pour l'élève
 
     def fichiers_python(self):
@@ -140,7 +144,7 @@ def texte_visible(chemin):
 
 
 class TestVocabulairePages(unittest.TestCase):
-    PAGES = ["ensemble-definition", "derivee-variations", "limites-asymptotes", "etude-complete", "factorisation", "exponentielles-logarithmes", ""]
+    PAGES = outils_du_site.outils() + [""]                     # toutes les pages d'outil du registre, et l'accueil
 
     def test_pages(self):
         motifs = re.compile(r"SymPy|calcul formel|transcend|dichotom|exacte simple|valeurs approchées|moteur Python|Erreur du moteur"

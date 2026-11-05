@@ -27,7 +27,7 @@ from exp_log import (Car, Chaine, Defini, E, Eq, Fn, Log, Message, Neg, Nb, Op, 
                      PROP_LN_E_PUISSANCE, PROP_LN_PUISSANCE, PROP_LOG_BASE_PUISSANCE, PROP_LOG_DEUX_MEMBRES, PROP_LOG_PUISSANCE, PROP_MEME_BASE)
 
 __all__ = ["lecture_3c", "controler_3c", "corriger_equation_c", "corriger_equation_3c", "EnsembleDef", "ensemble_de_definition", "verification", "regrouper", "variantes_changement", "variantes_exposant", "reconnu_exposant", "reconnu_changement", "corriger_equation",
-           "exercice_m", "NIVEAUX_M", "POIDS_M", "PROPRIETES_M"]
+           "exercice_m", "NIVEAUX_M", "PROPRIETES_M"]
 
 
 class EnsembleDef:
@@ -1328,11 +1328,6 @@ def _puissance_de_la_base(s, c):
     return None if s.base == "e" else _exposant_entier(c, s.base)
 
 
-def _arbre_produit_poly(facteur, poly, x):
-    """facteur · poly(x) écrit proprement : m·D, avec m = 1 (D seul) et m = 0 (0) traités à part."""
-    return _arbre_poly([facteur * c for c in poly], x)
-
-
 def _fin_egalite_des_exposants(chaine, s, resultat, titre):
     """b^A = b^B ⇒ A = B (chaîne déjà écrite jusque-là) ; fractions : on multiplie par le dénominateur, puis l'équation polynomiale."""
     x = s.x
@@ -2517,7 +2512,6 @@ def corriger_equation_3c(g, d, x):
 # 7. EXERCICES AU HASARD (pool M) : construits à l'envers, solutions entières ou rationnelles simples, souvent une solution rejetée
 # =====================================================================
 NIVEAUX_M = ("exponentielle", "definition", "sommes", "egalite", "variable", "difficile")
-POIDS_M = (("exponentielle", .25), ("definition", .15), ("sommes", .20), ("egalite", .15), ("variable", .15), ("difficile", .10))
 
 
 def _lin(p, q, x="x"):

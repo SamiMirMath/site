@@ -1,4 +1,4 @@
-"""Captures d'écran des 5 pages (clair, sombre, 360 px, impression ; page vide puis après un calcul),
+"""Captures d'écran des pages à moteur Python (clair, sombre, 360 px, impression ; page vide puis après un calcul),
 pour vérifier qu'un changement de CSS ne modifie aucun pixel (T14).
 
     # avant la modification
@@ -18,9 +18,7 @@ import sys
 sys.path.insert(0, os.path.dirname(__file__))
 from navigateur import Navigateur
 from rendu import OUTILS, attendre_pret
-
-CALCUL = {"ensemble-definition": "ln(x^2-4x)/(x-5)", "derivee-variations": "ln(x)/x", "limites-asymptotes": "(x^2-1)/(x-3)",
-          "etude-complete": "x^2*e^(-x)", "factorisation": "x^2+5x-14"}
+from test_comportement import CALCUL           # F3 : une seule liste des calculs par outil (clés vérifiées, exponentielles comprises)
 VUES = {"clair": dict(largeur=1100), "sombre": dict(largeur=1100, sombre=True), "360": dict(largeur=360),
         "360-sombre": dict(largeur=360, sombre=True), "impression": dict(largeur=900, imprimante=True)}
 

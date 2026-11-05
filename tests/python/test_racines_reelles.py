@@ -46,7 +46,8 @@ class TestPontReel(unittest.TestCase):
 
     def test_pas_de_nombre_complexe_dans_les_sorties(self):
         for entree in CAS:
-            for sortie in (la.etudier_json(entree), dv.etudier_json(entree), ec.etudier_json(entree)):
+            # EC : la sortie brute du moteur, comme l'ancienne etudier_json (retirée en F5) ; resoudre_json écrit « f(-1) » en toutes lettres
+            for sortie in (la.etudier_json(entree), dv.etudier_json(entree), ed.json_strict(ec.etudier(entree))):
                 with self.subTest(f=entree):
                     self.assertNotIn("(-1)", sortie)
                     json.loads(sortie)

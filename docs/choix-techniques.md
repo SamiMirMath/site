@@ -21,11 +21,12 @@ commun/
   moteur-python.js       client du worker : chargement, progression, délais, relance, erreurs
   worker-pyodide.js      worker (vrai fichier, plus de Blob) ; version de Pyodide définie ici seulement
   rendu.js               KaTeX + rendu générique des cartes et des blocs
-  nombres.js             format suisse côté JS (graphique, simplexe)
+  nombres.js             format suisse côté JS (graphique, simplexe) — prévu (T23, R7), pas encore écrit
 moteur/
   noyau.py               interface publique du noyau (réexporte ensemble_def.py, noms sans « _ »)
   sortie.py              constructeurs du format de sortie commun (cartes, blocs)
-  exercices.py           tirage avec graine à partir de gabarits validés
+  exercices.py           tirage avec graine à partir de gabarits validés — prévu, pas écrit (factorisation et exponentielles :
+                         exercice_json de leur moteur ; autres pages : liste EXOS)
   manifeste.json         fichiers Python à charger dans Pyodide, par outil
 <outil>/index.html       page outil réduite à sa config + son « Rappel de la méthode »
 <outil>/*.py             moteurs actuels, à leur place (ensemble_def.py intact)
@@ -33,7 +34,7 @@ simplexe/
   index.html, simplexe.js (interface), lp.js (fonctions pures exactes, testables)
 tests/
   python/                unittest — local en une commande + CI
-  js/                    node --test — CI uniquement
+  js/                    node --test — CI uniquement — prévu, pas écrit (aucun test [auto-js] aujourd'hui)
   pages/                 tests de pages dans un navigateur sans interface — CI uniquement
 .github/workflows/tests.yml
 ```
@@ -65,7 +66,8 @@ tests/
   (pas une copie) : on le lit, on ne le réaffecte jamais.
 - **Fichiers à plat dans Pyodide** : `ensemble_def.py` et `noyau.py` sont écrits côte à côte, sans
   dossier. `moteur/` n'est pas un paquet Python : pas de `from moteur.noyau import …`, qui
-  casserait l'import dans le navigateur (le test d'import isolé du manifeste le détecte).
+  casserait l'import dans le navigateur (le test d'import isolé du manifeste le détecte). Deux fichiers
+  de même nom dans un manifeste s'écraseraient : `test_manifeste.py` le refuse (fondations, F4).
 - **Déclaration par outil** : chaque outil qui utilise le noyau liste `moteur/noyau.py` dans
   `moteur/manifeste.json` et le charge dans sa page (`fetch` + `writeFile`) ; `test_manifeste.py`
   vérifie les deux. Vaut aussi pour les outils de la phase F.
@@ -133,9 +135,9 @@ Schéma de `resoudre` (T12, `moteur/sortie.py` : constructeurs et `valider()`, f
 - Les textes que les pages composaient en JS (nombre de conditions, phrases des extrema et des
   asymptotes, « Condition non résolue », valeurs ≈) sont écrits par les adaptateurs.
 - Adaptateurs : un `resoudre_<outil>.py` par outil (`resoudre`, `resoudre_json`, `apercu_json`), à côté du
-  moteur, qui ne change pas. Les pages continuent d'appeler les anciennes fonctions (`analyser_json`,
-  `etudier_json`, `factoriser_json`) jusqu'à leur migration (T17 à T20), qui chargera `sortie.py` et
-  `resoudre_<outil>.py` et mettra le manifeste à jour.
+  moteur, qui ne change pas. Les pages ont appelé les anciennes fonctions (`analyser_json`, `etudier_json`,
+  `factoriser_json`) jusqu'à leur migration (T17 à T20) ; celles que le manifeste gardait pour les pages en cache
+  (`analyser_json`, `verifier_json`, `etudier_json` de l'Étude complète) sont retirées (chantier fondations, F5).
 
 ### Rendu commun et page générique (T16, `commun/rendu.js` et `commun/outil.js`)
 
@@ -157,7 +159,8 @@ comportement commun (client Python, aperçu, clavier, exemples, calcul, cartes c
 PDF, exercice) sur le **HTML statique** de la page, qui garde ses `id`. `apres({entree, appelPy,
 derniereCarte, actuel})` est le crochet propre à l'outil (ED : badge du contrôle numérique). Le test
 `test_source_unique.py` interdit les phrases de corrigé dans les pages migrées, `rendu.js` et `outil.js`.
-Le manifeste a une clé `anciennes` : fonctions que seules des pages en cache appellent encore.
+Le manifeste peut avoir une clé `anciennes` : fonctions que seules des pages en cache appellent encore (aucune depuis le
+chantier fondations, F5).
 `delaiCalcul` (ms, 30 000 par défaut ; 45 000 pour l'Étude complète, comme avant) fixe le délai au-delà duquel le calcul est
 abandonné et le moteur relancé. `greffons` : blocs à comportement, voir ci-dessous.
 
@@ -187,7 +190,8 @@ Livré comme module (et non comme code de page) pour les outils de la phase F (N
   calculé **depuis l'état au début du geste** (fenêtre affichée, écart et milieu des doigts) : le point de la courbe sous le milieu des doigts y
   reste, quel que soit le nombre de `pointermove` livrés (Chrome en fusionne ; l'ancien calcul, qui divisait par l'échelle courante, laissait glisser
   le point). Limite connue : si le défilement à un doigt est déjà lancé quand le deuxième doigt arrive, il continue ; il faut lever les doigts.
-- **Nombres** : tout nombre écrit sur le graphique passe par `etiquette()` (au plus deux décimales, virgule) ; T23 la remplacera par `commun/nombres.js`.
+- **Nombres** : tout nombre écrit sur le graphique passe par `etiquette()` (au plus deux décimales, virgule) ; T23 la remplacera par un `commun/nombres.js`, prévu
+  (R7 de la revue de structure), pas encore écrit.
 - **Limite actuelle** : un seul graphique par page (les `id` `graphique`, `zoomPlus`, `zoomMoins`, `zoomReset`, `msgFenetre` sont fixes, les tests
   les utilisent) ; le module n'interroge aucun `id` global. Un préfixe d'`id` sera ajouté au premier outil qui en a besoin.
 - **Crochets de test** : `window.__echecFenetre` (`"refus"` : le moteur répond `ok:false` ; `"exception"` : erreur), `window.__delaiCalcul` (ms).
