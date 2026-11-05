@@ -8,7 +8,7 @@ import sys
 import unittest
 
 from moteurs import ensemble_def  # noqa: F401  (chemins + SymPy)
-import limites_asymptotes as la
+import memo  # sorties de l'outil Limites : cache explicite, copie profonde (tests-rapides T4 ; MEMO=0 le coupe)
 import resoudre_la as rla
 import resoudre_ec as rec
 import etude_complete as ec
@@ -65,13 +65,13 @@ class TestAucuneJustificationParLePodium(unittest.TestCase):
     def test_outil_limites(self):
         for entree in ENTREES:
             with self.subTest(f=entree):
-                self.verifier(la.etudier(entree), entree)
+                self.verifier(memo.etudier_la(entree), entree)
 
     def test_pas_bh_sans_hypotheses_affichees(self):
         """Les hypothèses de BH (dérivabilité, g' ≠ 0) sont vérifiées mais ne s'affichent plus ; le pas porte l'étiquette BH."""
         for entree in ENTREES:
             with self.subTest(f=entree):
-                for t in chaines(la.etudier(entree)):
+                for t in chaines(memo.etudier_la(entree)):
                     self.assertNotIn("dérivable", t)
                     self.assertNotIn("ne s'annule pas sur", t)
                     self.assertNotIn("Bernoulli-L'Hôpital", t)

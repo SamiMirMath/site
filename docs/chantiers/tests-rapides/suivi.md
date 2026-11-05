@@ -19,7 +19,7 @@ rapports) : [`journal.md`](journal.md).
 | P1 | T2 : harnais du toucher (test du clavier) | **faite** (commit « Tests rapides P1 : … ») : test du clavier 20/20 seul et 20/20 sous charge ; listes identiques |
 | P2 | T1 : `lancer.py verifier`, texte proposé pour `CLAUDE.md`, méthode (commit séparé) | **faite** (commit « Tests rapides P2 : lancer.py verifier … », `verifier` ACCEPTÉ ; méthode : commit séparé « Tests rapides P2 (méthode) : … ») : commit modifié refusé, fichier non suivi signalé et refusé, test disparu refusé ; listes identiques |
 | P3 | T3 : `TestStructure` (calcul une fois par classe) | **faite** (commit « Tests rapides P3 : … ») : copie profonde par test ; fichier seul 121 s → 44 s ; mur Python 670 s ; listes et sous-tests identiques |
-| P4 | T4 : `memo.py`, test de garde, `MEMO=0` | à faire |
+| P4 | T4 : `memo.py`, test de garde, `MEMO=0` | **faite** (commit « Tests rapides P4 : … ») : 9 fichiers sans mock passent par `memo` ; 6 tests ajoutés (`test_memo.py`, `test_memo_garde.py`) ; listes identiques avec et sans `MEMO=0` (seuls écarts à la référence : les 6 ajoutés) ; Python 660 s (cache) / 672 s (`MEMO=0`) |
 | P5 | T5 : cache de `racines` | à faire |
 | P6 | T7 : `rapide` et pages des moteurs | à faire |
 | P7 | T9 : étude du chargement de Pyodide (rapport seul) | à faire |
@@ -48,6 +48,13 @@ rapports) : [`journal.md`](journal.md).
 - **P2, liste permise de `verifier`.** Proposée et justifiée dans `journal.md` (« Règles exactes ») : `docs/chantiers/<chantier>/suivi.md`
   et `journal.md` (écrits après le lancement), `CLAUDE.md` hors du commit. À confirmer.
 
+- **P4, `test_doctrine_bh.py`.** Il ne contient aucun mock et importe `memo`, mais il importe aussi `TestStyle` de
+  `test_redaction_limites.py` (qui contient des mock), classe recollectée dans `test_doctrine_bh` (9 tests, sans mock, qui appellent
+  `la.etudier` directement). Lecture retenue : la décision T4 porte sur le texte du fichier. La garde interdit seulement le sens dangereux
+  (un fichier avec mock qui atteint un fichier qui importe `memo`), d'où l'exclusion de `test_proprietes_limites.py`. À confirmer.
+- **P4, gain.** 20 s de mur sur le groupe des fichiers concernés, 12 s dans la suite complète (dans le bruit) : bien moins que l'audit
+  (1 à 1,5 min), car les gros appelants de l'outil Limites ont des mock. Garder le cache tel quel ?
+
 ## À relire par l'enseignant
 
 - P0 : aucun instantané modifié. Outil de test modifié : `tests/lancer.py` (option `complet --rapport` ; sans l'option, mêmes
@@ -61,6 +68,11 @@ rapports) : [`journal.md`](journal.md).
   `journal.md`, « P2 ». Méthode (`docs/methode-chantiers.md`, « Organisation de nuit ») : commit séparé, à relire.
 - P3 : aucun instantané ni aucun moteur modifié. Test modifié : `tests/python/test_redaction_bh_3m.py`, classe `TestStructure`
   (`toutes()` : calcul commun gardé par classe, copie profonde par test ; corps des tests inchangés). Détail : `journal.md`, « P3 ».
+
+- P4 : aucun instantané ni aucun moteur modifié. Nouveaux : `tests/python/memo.py`, `tests/python/test_memo.py`,
+  `tests/python/test_memo_garde.py`. Tests modifiés (seulement `la.etudier(…)` → `memo.etudier_la(…)`, et l'import) : `test_corpus_limites_3m`,
+  `test_doctrine_bh`, `test_instantanes`, `test_limites_deux_cotes`, `test_racines_reelles`, `test_rappel_methode`, `test_redaction_bh_3m`,
+  `test_resoudre_la`, `test_tableau_limites`. Détail : `journal.md`, « P4 ».
 
 ## À reporter par l'enseignant dans CLAUDE.md
 
@@ -77,7 +89,10 @@ Texte proposé (décision T10 : Claude Code ne modifie pas `CLAUDE.md`), pour la
   et CLAUDE.md), que les codes valent 0 et qu'aucun test n'a disparu, n'est sauté en plus, ne se dégrade ni ne perd de sous-tests par
   rapport à la référence (par défaut docs/chantiers/tests-rapides/reference). Verdict final ACCEPTÉ (code 0) ou REFUSÉ (1, ou 2 si un
   fichier manque). `python3 tests/comparer_listes.py <référence> <dossier>` compare deux dossiers nom par nom.
-- `MEMO=0` : … (à compléter en P4).
+- `MEMO=0` (variable d'environnement) : coupe le cache de test `tests/python/memo.py` (sorties de l'outil Limites, gardées par processus,
+  copie profonde à chaque appel) : chaque appel devient un appel direct du moteur. Le cache ne sert qu'aux fichiers sans aucun mock
+  (`test_memo_garde.py` le vérifie). Une fois par session de chantier, lancer aussi `MEMO=0 python3 tests/lancer.py complet --rapport
+  <dossier>` : les listes doivent être les mêmes qu'avec le cache.
 - Mesures du 04.11.2026 sur le Mac de l'enseignant (2 cœurs physiques ; 1312 tests Python et 103 033 sous-tests, 122 tests de pages et
   2 554 sous-tests) : suite Python 715 à 803 s ; suite de pages 938 à 994 s ; `complet` environ 28 à 30 min.
 ```
@@ -92,6 +107,6 @@ Procédure allégée du chef d'orchestre (décision T1 ; écrite aussi dans `doc
 
 ## Reprise après compactage
 
-P0, P1, P2 (deux commits) et P3 commitées sur `tests-rapides` (rien poussé). Prochaine partie : **P4** (`memo.py`), puis P5 à P7
+P0, P1, P2 (deux commits), P3 et P4 commitées sur `tests-rapides` (rien poussé). Prochaine partie : **P5** (cache de `racines`), puis P6 et P7
 dans l'ordre de `decisions.md` §3. Contrôle d'une partie : `python3 tests/lancer.py verifier <dossier de complet --rapport>`. Pour reprendre : lire ce fichier, `decisions.md`, puis `git log --oneline main..HEAD` ; le détail est dans
 `journal.md`. Chaque partie compare son rapport à `reference/` avec la commande ci-dessus.

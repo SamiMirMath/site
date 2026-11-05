@@ -5,7 +5,7 @@ import unittest
 from cas import CAS_LIMITES, entrees_page
 import derivee_variations as dv
 import etude_complete as ec
-import limites_asymptotes as la
+import memo  # sorties de l'outil Limites : cache explicite, copie profonde (tests-rapides T4 ; MEMO=0 le coupe)
 
 INF_M, INF_P = r"-\infty", r"+\infty"
 
@@ -94,7 +94,7 @@ def valeur_et_signe(tex):
 
 class TestMemeSourceQueLimites(unittest.TestCase):
     def test_sortie_de_l_outil_limites_inchangee(self):  # EC-12 (partie Limites)
-        self.assertNotIn("limites_bornes", la.etudier("1/(x-2)"))
+        self.assertNotIn("limites_bornes", memo.etudier_la("1/(x-2)"))
         self.assertNotIn("limites_bornes", ec.etudier("1/(x-2)")["limites"])
 
     def test_corpus_egal_a_la_partie_limites(self):  # EC-10

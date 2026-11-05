@@ -8,6 +8,7 @@ from fractions import Fraction as F
 from moteurs import ensemble_def as ed, texte_etape
 import derivee_variations as dv
 import limites_asymptotes as la
+import memo  # sorties de l'outil Limites : cache explicite, copie profonde (tests-rapides T4 ; MEMO=0 le coupe)
 import etude_complete as ec
 import oracle
 
@@ -53,7 +54,7 @@ class TestPontReel(unittest.TestCase):
 
 class TestLimitesReelles(unittest.TestCase):
     def finies(self, entree):
-        r = la.etudier(entree)
+        r = memo.etudier_la(entree)
         # la phrase qui donne la limite (la dernière étape est la conclusion sur l'asymptote)
         return [(e["ou"], next(t["html"] for t in reversed(e["etapes"]) if r"\lim" in t["html"]))
                 for e in r["etudes"]], r["asymptotes"]
@@ -268,7 +269,7 @@ class TestEnonceSaisieEtRacines(unittest.TestCase):
 
     def test_champ_saisie(self):
         import etude_complete as ec2
-        for outil in (lambda e: ed.analyser(e), dv.etudier, la.etudier, ec2.etudier):
+        for outil in (lambda e: ed.analyser(e), dv.etudier, memo.etudier_la, ec2.etudier):
             r = outil("x^(3/2)")
             self.assertEqual(r["f_tex"], r"\sqrt{x^{3}}")
             self.assertEqual(r["f_saisie_tex"], r"x^{\frac{3}{2}}")

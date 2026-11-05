@@ -15,7 +15,7 @@ import unittest
 
 from moteurs import ensemble_def as ed
 import derivee_variations as dv
-import limites_asymptotes as la
+import memo  # sorties de l'outil Limites : cache explicite, copie profonde (tests-rapides T4 ; MEMO=0 le coupe)
 import etude_complete as ec
 import factorisation as fa
 from cas import CAS_LIMITES, entrees_page, entrees_factorisation
@@ -26,7 +26,7 @@ REGENERER = os.environ.get("REGENERER") == "1"
 OUTILS = {
     "ensemble-definition": (ed.analyser, lambda: entrees_page("ensemble-definition") + CAS_LIMITES["ensemble-definition"]),
     "derivee-variations": (dv.etudier, lambda: entrees_page("derivee-variations") + CAS_LIMITES["derivee-variations"]),
-    "limites-asymptotes": (la.etudier, lambda: entrees_page("limites-asymptotes") + CAS_LIMITES["limites-asymptotes"]),
+    "limites-asymptotes": (memo.etudier_la, lambda: entrees_page("limites-asymptotes") + CAS_LIMITES["limites-asymptotes"]),
     "etude-complete": (ec.etudier, lambda: entrees_page("etude-complete") + CAS_LIMITES["etude-complete"]),
     "factorisation": (fa.factoriser_expr, entrees_factorisation),
 }

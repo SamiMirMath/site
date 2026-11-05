@@ -410,6 +410,100 @@ et 710 s. P3 : **670 s**, soit 40 à 85 s de moins que P0–P2 (sans compter le 
 de mur). Le bruit d'un lancement à l'autre (environ ± 40 s) reste du même ordre : le gain du fichier seul (121 s → 44 s) est la mesure
 nette. Pages : 985 s (P1–P2 : 967 à 994 s), sans changement attendu.
 
+## P4 (05.11.2026) : cache explicite des sorties de l'outil Limites (T4)
+
+### Plan
+
+1. Mesure préalable (outil de mesure du scratchpad, rien dans le dépôt) : appels de `la.etudier` et `rla.resoudre` par entrée, dans
+   chaque processus, sur les fichiers sans mock qui appellent l'outil Limites ; temps évitable par un cache par processus.
+2. `tests/python/memo.py` (module de test, aucun moteur modifié) : `etudier_la(entree, avec_bornes=False)` garde la sortie de
+   `la.etudier` par processus et rend **une copie profonde à chaque appel** (le résultat gardé est lui-même une copie) ; une exception
+   n'est jamais gardée ; `MEMO=0` (lue à chaque appel) : appel direct du moteur, rien n'est gardé. `la.etudier` n'est jamais remplacé.
+3. Choix des fichiers, **par fichier entier** : les fichiers de `tests/python` qui appellent `la.etudier` et ne contiennent aucun mock
+   (ni `mock`, ni `patch`, ni monkeypatch, ni `setattr`/`delattr`, ni affectation d'un attribut du moteur), sauf ceux qu'importe un
+   fichier avec mock. Dans ces fichiers, `la.etudier(…)` → `memo.etudier_la(…)` (mêmes entrées, mêmes arguments) ; rien d'autre ne change.
+4. Tests ajoutés : `test_memo.py` (copie profonde égale au moteur, un seul appel du moteur avec le cache, un appel par appel avec
+   `MEMO=0`, comptés par `sys.setprofile` sans rien remplacer) et `test_memo_garde.py` (garde statique). Essais négatifs de la garde.
+5. Groupe des fichiers concernés lancé avec et sans `MEMO=0` (limite 5 min) ; puis deux suites complètes `--rapport` (normale et
+   `MEMO=0`), comparées à la référence et entre elles ; `--collect-only -q` de chaque suite contre la référence.
+6. Temps natif ; `suivi.md` (état, ligne `MEMO=0` du texte pour `CLAUDE.md`) ; commit ; `verifier` sur les deux dossiers.
+
+### Mesure préalable (scratchpad, `-n auto`, limite 5 min)
+
+Compteur par processus (extension de mesure hors du dépôt) sur les 10 fichiers sans mock qui appellent l'outil Limites : `la.etudier`
+1 338 appels, 307,5 s de somme, dont **757 appels répétés (même entrée, même processus) pour 119,0 s évitables** ; `rla.resoudre`
+205 appels, 39,3 s, dont 81 répétés pour 11,1 s évitables. Seul `la.etudier` est mis en cache (ce que prévoit l'audit §M4) ;
+`rla.resoudre` (11 s de somme, environ 3 s de mur) est laissé hors du cache.
+
+### Code
+
+- **`tests/python/memo.py`** (nouveau) : `etudier_la(entree, avec_bornes=False)`, `actif()` (faux si `MEMO=0`), `vider()`. Clé
+  `(entree, avec_bornes)` : ce sont les seuls arguments acceptés (l'argument `analyse` du moteur, qui porte des objets, n'est jamais
+  passé par les tests ; `etudier_la` ne l'accepte pas). La clé est injective sur ce que le moteur reçoit : `la.etudier` est appelé avec
+  exactement `(entree, avec_bornes=avec_bornes)`. Valeur gardée = `copy.deepcopy` de la sortie ; chaque appel rend un nouveau
+  `copy.deepcopy` de la valeur gardée. Exception du moteur : rien n'est gardé, elle remonte. `MEMO=0` (lue à chaque appel) :
+  `return la.etudier(entree, avec_bornes=avec_bornes)`, rien n'est gardé. Aucun attribut d'aucun moteur n'est touché.
+- **Fichiers qui importent `memo`** (9, plus `test_memo.py`) : `test_corpus_limites_3m`, `test_doctrine_bh`, `test_instantanes`,
+  `test_limites_deux_cotes`, `test_racines_reelles`, `test_rappel_methode`, `test_redaction_bh_3m`, `test_resoudre_la`,
+  `test_tableau_limites`. Changement : `la.etudier(…)` → `memo.etudier_la(…)` (22 appels ou références, mêmes arguments), et
+  `import limites_asymptotes as la` → `import memo` là où `la` ne sert plus (7 fichiers ; `test_rappel_methode` et `test_racines_reelles`
+  gardent `la` pour `la.METHODES` et `la.etudier_json`). Aucune vérification, entrée, boucle ni `subTest` modifiés.
+- **Exclus** (contiennent un mock) : `test_redaction_limites`, `test_garde_fou_limites`, `test_limites_d12_d16`, `test_limite_indeterminee`,
+  `test_vocabulaire`, `test_corpus_etude_complete` (et les autres fichiers avec mock, hors Limites). **Exclu sans mock** :
+  `test_proprietes_limites` (10,8 s de somme), parce que `test_redaction_limites` (avec mock) l'importe : la garde interdit qu'un fichier
+  avec mock atteigne, même de loin, un fichier qui importe `memo` (option la plus prudente). `test_doctrine_bh` importe `TestStyle` de
+  `test_redaction_limites` (fichier avec mock) : il est gardé, car il ne contient lui-même aucun mock et `TestStyle` (sans mock) appelle
+  `la.etudier` directement, jamais `memo` (voir « Questions » de `suivi.md`).
+- **Tests ajoutés** (seuls ajouts aux listes) :
+  - `tests/python/test_memo.py::TestMemo::test_copie_profonde_egale_au_moteur`, `::test_cache_actif_le_moteur_n_est_appele_qu_une_fois`,
+    `::test_memo_0_appelle_vraiment_le_moteur_a_chaque_fois` (6 entrées, dont une avec `avec_bornes=True` et une saisie refusée ; les
+    appels du moteur sont comptés par `sys.setprofile`, observateur qui ne remplace rien ; `MEMO` est remis à sa valeur d'avant) ;
+  - `tests/python/test_memo_garde.py::TestGardeMemo::test_aucun_fichier_qui_importe_memo_ne_contient_de_mock` (texte entier :
+    `mock|patch|monkeypatch|setattr|delattr`, sans casse ; et, par l'arbre syntaxique, aucune affectation ni suppression d'un attribut
+    ou d'un élément d'un module du moteur ou de `memo` ; la liste des fichiers est `FICHIERS_MEMO`, explicite),
+    `::test_aucun_fichier_avec_mock_n_importe_un_fichier_qui_importe_memo` (imports transitifs dans `tests/python`),
+    `::test_memo_reste_un_module_de_test` (aucun moteur n'importe `memo` ; `memo.py` n'affecte aucun attribut du moteur).
+  `test_memo_garde.py` n'importe pas `memo` (il contient les mots qu'il cherche).
+- **Essais négatifs de la garde** (arbre remis ensuite) : `import memo` ajouté à `test_garde_fou_limites.py` → les deux premiers tests de
+  garde échouent (fichier hors `FICHIERS_MEMO` ; fichier avec mock qui atteint `memo`) ; fichier factice avec `la.METHODES = []`,
+  `ed.x.y += 1`, `del la.W`, `etudier.cache = 3`, `la.T['a'] = 1` → 5 remplacements trouvés, `os.environ['MEMO'] = '0'` et un appel
+  `la.etudier(…)` non signalés.
+
+### Groupe des fichiers concernés (11 fichiers, `-n auto`, limite 5 min)
+
+| | Mur (pytest) | Résultat |
+|---|---|---|
+| cache actif | **88 s** | 125 passés, 14 509 sous-tests |
+| `MEMO=0` | **108 s** | 125 passés, 14 509 sous-tests |
+
+### Temps natif
+
+P4 ne touche aucun moteur. `mesurer_temps.py` : Ex7 0,59 s ; a 0,03 s ; b 0,37 s ; c 0,25 s ; d 0,22 s (P3 : 0,58 ; 0,03 ; 0,36 ;
+0,26 ; 0,22) : aucune hausse.
+
+### Suites complètes (départ f140f1c + `memo.py`, `test_memo.py`, `test_memo_garde.py`, 9 fichiers de test, `journal.md`)
+
+| | Python : mur | Python : résultat | Pages : mur | Pages : résultat | Code |
+|---|---|---|---|---|---|
+| `complet --rapport …/scratchpad/P4-rapport` (cache actif, `MEMO` non défini) | **660 s** | 1317 passés, 1 xfail, 103 098 sous-tests | **970 s** | 122 passés, 2 554 sous-tests | 0 |
+| `MEMO=0 complet --rapport …/scratchpad/P4-memo0-rapport` | **672 s** | 1317 passés, 1 xfail, 103 098 sous-tests | **971 s** | 122 passés, 2 554 sous-tests | 0 |
+
+JUnit / extension : 0 écart dans les deux. `environnement` : `MEMO` non défini, puis `MEMO='0'` (CORPUS et OUTILS non définis).
+
+**Comparaisons** :
+- `comparer_listes.py reference P4-rapport` et `reference P4-memo0-rapport` : pages identiques nom par nom ; Python : **les seuls
+  écarts sont les 6 tests ajoutés** (collecte et résultats, tous passés : les 3 de `test_memo.py`, les 3 de `test_memo_garde.py`) ;
+  les 1312 tests de la référence ont la même issue et le même nombre de sous-tests (103 098 = 103 033 + 65 sous-tests des tests ajoutés).
+- `comparer_listes.py P4-rapport P4-memo0-rapport` : Python et pages **identiques, nom par nom** (code 0).
+- `--collect-only -q` de chaque suite, lancée séparément, avec et sans `MEMO=0` : Python 1318 identifiants = référence + les 6 ajoutés ;
+  pages 122 identifiants identiques à la référence.
+
+**Gain du cache** : dans la suite complète, 672 s → 660 s (12 s, dans le bruit d'un lancement à l'autre, environ ± 40 s) ; mesure nette
+sur le groupe des 11 fichiers : 108 s → 88 s (20 s de mur). C'est moins que l'estimation de l'audit (1 à 1,5 min) : les plus gros
+appelants de l'outil Limites (`test_redaction_limites`, `test_vocabulaire`, `test_limites_d12_d16`, `test_garde_fou_limites`) contiennent
+des mock et restent hors du cache (décision T4, par fichier entier), et P3 avait déjà pris la plus grosse répétition (`TestStructure`).
+Murs des quatre suites : Python 660 / 672 s, pages 970 / 971 s (P3 : 670 et 985 s).
+
 ## Contrôles du chef d'orchestre
 
 P0 (1feb6cf) : suite complète --rapport, code 0 ; Python 1311 passés + 1 xfail, 103 033 sous-tests, 737 s ; pages 122 passés, 2 554 sous-tests, 950 s ; comparer_listes identique nom par nom ; --collect-only -q des deux suites identique à la référence.
@@ -417,3 +511,5 @@ P0 (1feb6cf) : suite complète --rapport, code 0 ; Python 1311 passés + 1 xfail
 P1 (a8d6ab6) : suite complète --rapport, code 0 ; Python 1311 passés + 1 xfail, 103 033 sous-tests, 801 s ; pages 122 passés, 2 554 sous-tests, 967 s ; comparer_listes identique nom par nom ; --collect-only -q des deux suites identique à la référence.
 
 P2 (55daa1f, 1f34e3c) : verifier ACCEPTÉ sur les deux commits ; essai du chef d'orchestre « test disparu » (copie du rapport P2b) REFUSÉ avec le motif « disparu » ; rapide code 0 en 9 s (tests de fumée seulement, l'arbre étant propre après le commit).
+
+P3 (f140f1c) : verifier ACCEPTÉ ; rapide code 0 (8 s) ; sélection de rapide appliquée aux fichiers du commit (test_redaction_bh_3m.py + fumée) code 0 en 54 s ; diff relu (mêmes entrées, même filtre, copie profonde).

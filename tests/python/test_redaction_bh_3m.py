@@ -15,7 +15,7 @@ import sys
 import unittest
 
 from moteurs import ensemble_def  # noqa: F401  (chemins + SymPy)
-import limites_asymptotes as la
+import memo  # sorties de l'outil Limites : cache explicite, copie profonde (tests-rapides T4 ; MEMO=0 le coupe)
 import redaction_bh as rb
 import resoudre_la as rla
 import sortie as so
@@ -31,7 +31,7 @@ REPLI = "n'est pas rédigé ici"
 
 
 def descentes(saisie, ou):
-    r = la.etudier(saisie)
+    r = memo.etudier_la(saisie)
     assert r["ok"], r
     return [i for e in r["etudes"] if e["ou"] == ou for i in e["etapes"] if i.get("type") == "descente"]
 
@@ -187,7 +187,7 @@ class TestStructure(unittest.TestCase):
         if cls._REDACTIONS is None:
             liste = []
             for saisie in cls.ENTREES:
-                r = la.etudier(saisie)
+                r = memo.etudier_la(saisie)
                 if not r["ok"]:
                     continue
                 for e in r["etudes"]:
@@ -328,14 +328,14 @@ class TestTransverse(unittest.TestCase):
     def test_au_plus_13_replis_sur_le_corpus(self):
         replis = 0
         for c in {(c.saisie) for c in CAS if c.id not in PAS_PRIS_EN_CHARGE}:
-            r = la.etudier(c)
+            r = memo.etudier_la(c)
             replis += sum(REPLI in i.get("html", "") for e in r["etudes"] for i in e["etapes"] if i.get("type") != "descente")
         self.assertLessEqual(replis, 13, replis)
 
     def test_r14_sur_les_ancienne_redactions_conservees(self):
         """L'ancienne rédaction qui prend le relais ne contient jamais « forme indéterminée = valeur » : sinon le repli s'affiche."""
         for saisie in TestStructure.ENTREES:
-            r = la.etudier(saisie)
+            r = memo.etudier_la(saisie)
             for e in r["etudes"]:
                 for i in e["etapes"]:
                     if i.get("type") == "texte":

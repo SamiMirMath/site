@@ -14,7 +14,7 @@ import mpmath
 import sympy as sp
 
 from moteurs import ensemble_def  # noqa: F401  (chemins + SymPy)
-import limites_asymptotes as la
+import memo  # sorties de l'outil Limites : cache explicite, copie profonde (tests-rapides T4 ; MEMO=0 le coupe)
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "donnees"))
 from corpus_limites_3m import CAS, ETUDES, PAS_PRIS_EN_CHARGE  # noqa: E402
@@ -116,7 +116,7 @@ class TestValeursDeLOutil(unittest.TestCase):
         cls.etudes = {}
         for cas in CAS:
             if cas.id not in PAS_PRIS_EN_CHARGE and cas.saisie not in cls.etudes:
-                cls.etudes[cas.saisie] = la.etudier(cas.saisie, avec_bornes=True)
+                cls.etudes[cas.saisie] = memo.etudier_la(cas.saisie, avec_bornes=True)
 
     def test_chaque_borne_a_la_valeur_de_l_oracle(self):
         for cas in CAS:
@@ -146,7 +146,7 @@ class TestValeursDeLOutil(unittest.TestCase):
         saisies = {c.id: c.saisie for c in CAS}
         for id_, message in PAS_PRIS_EN_CHARGE.items():
             with self.subTest(id=id_):
-                r = la.etudier(saisies[id_])
+                r = memo.etudier_la(saisies[id_])
                 self.assertFalse(r["ok"])
                 self.assertEqual(r["erreur"], message)
 
@@ -183,7 +183,7 @@ class TestAsymptotes(unittest.TestCase):
     def test_exercices_3_10_et_3_11(self):
         for id_, saisie, liste in ETUDES:
             with self.subTest(id=id_, f=saisie):
-                r = la.etudier(saisie)
+                r = memo.etudier_la(saisie)
                 self.assertTrue(r["ok"], r.get("erreur"))
                 self.assertEqual(asymptotes_de_l_outil(r), attendues(liste))
 
@@ -201,7 +201,7 @@ def bornes_en_repli():
         if cas.id in PAS_PRIS_EN_CHARGE or cas.id in vus:
             continue
         vus.add(cas.id)
-        r = etudes.setdefault(cas.saisie, la.etudier(cas.saisie))
+        r = etudes.setdefault(cas.saisie, memo.etudier_la(cas.saisie))
         for e in r["etudes"]:
             if any(REPLI in it.get("html", "") for it in e["etapes"]):
                 out.append((cas.id, e["ou"]))

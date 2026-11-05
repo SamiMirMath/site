@@ -4,11 +4,11 @@ même quand les deux limites sont finies."""
 import unittest
 
 from moteurs import ensemble_def  # noqa: F401  (chemins + SymPy)
-import limites_asymptotes as la
+import memo  # sorties de l'outil Limites : cache explicite, copie profonde (tests-rapides T4 ; MEMO=0 le coupe)
 
 
 def asymptote_en(entree, point_tex):
-    r = la.etudier(entree)
+    r = memo.etudier_la(entree)
     assert r["ok"], r
     trouvees = [a for a in r["asymptotes"] if a.get("point_tex") == point_tex]
     assert len(trouvees) == 1, trouvees
@@ -38,7 +38,7 @@ class TestLimitesDeuxCotes(unittest.TestCase):
     def test_jamais_de_verticale_sans_limite_infinie(self):
         for entree in ["(e^x-1)/x", "x*ln(x^2)", "x/sqrt(x^2)", "e^x/x", "e^(1/x)", "ln(x)/x",
                        "(x^2-1)/(x-1)", "1/(x^2-2)", "x^2/(x-1)"]:
-            r = la.etudier(entree)
+            r = memo.etudier_la(entree)
             for a in r["asymptotes"]:
                 if a["genre"] == "verticale":
                     with self.subTest(f=entree, point=a["point_tex"]):
@@ -46,7 +46,7 @@ class TestLimitesDeuxCotes(unittest.TestCase):
                         self.assertTrue(any(c and r"\infty" in c for c in cotes), a)
 
     def test_narration_conclut(self):
-        r = la.etudier("(e^x-1)/x")
+        r = memo.etudier_la("(e^x-1)/x")
         etude = next(e for e in r["etudes"] if e["ou"] == r"x \to 0")
         self.assertIn("pas d'asymptote verticale", etude["etapes"][-1]["html"])
 
@@ -56,7 +56,7 @@ ENTREES_LA08 = ["(e^x-1)/x", "x*ln(x^2)", "x/sqrt(x^2)", "(x^2-1)/(x-1)", "ln(x)
 
 
 def textes_et_genres(entree):
-    r = la.etudier(entree)
+    r = memo.etudier_la(entree)
     assert r["ok"], r
     textes = [e["html"] for et in r["etudes"] for e in et["etapes"]]
     return r, textes, [a["genre"] for a in r["asymptotes"]]

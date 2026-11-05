@@ -7,6 +7,7 @@ import unittest
 
 from moteurs import RACINE
 import limites_asymptotes as la
+import memo  # sorties de l'outil Limites : cache explicite, copie profonde (tests-rapides T4 ; MEMO=0 le coupe)
 
 PHRASE_PODIUM = "La règle du podium vous sert à prédire le résultat ; la justification se fait avec la règle de BH."
 
@@ -100,7 +101,7 @@ class TestFormulesBienFormees(unittest.TestCase):
                                 ["sqrt(4x^2+1)/(x+2)", "sqrt(x^2+x)-x", "ln(x^2+1)/x", "x/sqrt(x^2)", "(x^3+1)/(x^2+1)",
                                  "sqrt(x^2-4x+5)", "(x^2-1)/(x-3)", "ln(x^2-4x)/(x-5)", "e^x-x^2", "(e^x-1)/x"])
         for entree in entrees:
-            for etude in la.etudier(entree)["etudes"]:
+            for etude in memo.etudier_la(entree)["etudes"]:
                 for e in etude["etapes"]:
                     h = e.get("html", "")
                     for f in re.findall(r"\\\((.*?)\\\)", h, re.S) + re.findall(r"\\\[(.*?)\\\]", h, re.S):
