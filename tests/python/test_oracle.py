@@ -60,6 +60,17 @@ class TestCasDemandes(CasRacines):
         self.assertRacines(produit([1, 0], [1, 0], [1, 8]), [(-8, 1), (0, 2)])
         self.assertEqual(produit([1, 0], [1, 0], [1, 8]), [1, 8, 0, 0])
 
+    def test_racine_nulle_retiree_d_abord(self):
+        """Q11 (2e degré) : 7x² − 19x = 0 faisait refuser l'oracle (racine 0 « non confirmée ») ; les termes constants nuls sont retirés
+        d'abord, avec leur multiplicité exacte."""
+        self.assertRacines([7, -19, 0], [(0, 1), (F(19, 7), 1)], chiffres=48)
+        self.assertRacines([3, 0, 0], [(0, 2)])
+        self.assertRacines([2, 0, 0, 0], [(0, 3)])
+        self.assertRacines([1, 0, 1, 0], [(0, 1)])                                         # x(x² + 1) : 0 seulement
+        self.assertRacines(produit([1, 0], [1, -1], [1, 1]), [(-1, 1), (0, 1), (1, 1)])    # 2.12 c, x³ − x
+        self.assertRacines(produit([1, 0], [1, 0], [1, -2], [1, -2]), [(0, 2), (2, 2)])
+        self.assertEqual(oracle.racines([7, -19, 0])[0][0], 0)
+
     def test_x_carre_plus_1_aucune_racine_reelle(self):
         self.assertEqual(oracle.racines([1, 0, 1]), [])
 

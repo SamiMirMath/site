@@ -482,6 +482,72 @@ par nom (Python et pages). Aucun test ajouté par P0. Commit : « equations-2e-d
 
 ## P1 — calcul, sans texte
 
+### Plan
+
+1. **Oracle (Q11)** : `oracle.racines` retire d'abord les termes constants nuls (racine 0 de multiplicité connue), puis cherche les
+   autres racines sur le quotient ; test `[7, -19, 0]` (et `[1, 8, 0, 0]`, `[3, 0, 0]`) dans `test_oracle.py`. Renforcement : « À relire ».
+2. **`moteur/polynomes.py`** (déplacement verbatim, Q2 et point 6) : `Hors`, `racine_carree`, `racine_entiere_exacte`,
+   `puissance_rationnelle_exacte`, `const`, `pnet`, `padd` (d'`exp_log`) ; `DEGRE_MAX`, `pmul_n`, `pq` (d'`exp_log_m`). Réexport sous les
+   noms privés d'avant (`exp_log._Hors is polynomes.Hors`, etc.) ; `exp_log_m` garde ses imports depuis `exp_log` et prend `_pq`,
+   `_pmul_n`, `DEGRE_MAX` de la brique. Manifeste d'EL : `moteur/polynomes.py` avant `exp_log.py`. `noyau` : + `squarefree`, `racine_q`.
+   `architecture.md` § 5 : ligne « 4 copies de k√m/d » (chantier « nombres partout »).
+3. **`moteur/second_degre.py`** (Python pur, sans texte) : `Polynome`, `HorsBornes`, `vers_polynome` (bornes § 13.5), `Nombre`
+   (p + q√m, sur `noyau.racine_q`), `mise_en_evidence`, `identite`, `essais_sp` (12 lignes affichées au plus, point 5),
+   `diviseurs_signes`, `racine_entiere_unique` (décidée par Δ), `racines_formule`, `s_applique`, `calculer`, `chemin` (D28),
+   `produit_nul`, `redevelopper`, `verifier_solution`, `approx_garantie`.
+4. **Tests** : `test_polynomes.py` (réexports `assertIs`, aucun nom privé importé de la brique, identité de `pq` sur les saisies d'EL) ;
+   `test_second_degre.py` (corpus § 8 développé : chemin et S exacts, oracle ; polynômes générés à graine fixe ; garde-fou avec une
+   multiplication réécrite dans le test ; `s_applique` ⇒ `calculer` se redéveloppe, S = ∅ par l'oracle ; D28 et l'exception nommée
+   « S-P de plus de 12 lignes » ; valeurs ≈ du § 8 ; bornes ; chaque test < 10 s).
+5. **Arêtes** : `polynomes -> expr`, `exp_log -> polynomes`, `exp_log_m -> polynomes`, `second_degre -> polynomes`, `-> noyau`, `-> nombres`.
+6. Suite complète, dump identique, temps natif de `chemin` sur le corpus § 8, commit.
+
+### Réalisé
+
+- **Oracle** : `racines` retire les termes constants nuls avant tout calcul (racine 0, multiplicité = nombre de termes retirés), Sturm
+  et contre-vérification sur le quotient ; `[7, -19, 0]` donnait « racine de multiplicité 1 non confirmée » (la contre-vérification
+  relative à Σ|aᵢ||r|ⁱ ne peut pas conclure en r = 0). Test `test_racine_nulle_retiree_d_abord` (7x² − 19x, 3x², 2x³, x(x² + 1),
+  x³ − x, x²(x − 2)²).
+- **`moteur/polynomes.py`** : les dix noms, recopiés à l'identique (seuls les noms internes perdent leur « _ ») ; `exp_log.py`
+  (`from polynomes import Hors as _Hors, …`) et `exp_log_m.py` (`from polynomes import DEGRE_MAX, pmul_n as _pmul_n, pq as _pq`) ;
+  `exp_log_m` garde ses autres imports d'`exp_log` (mêmes objets). Manifeste d'EL : `moteur/polynomes.py` avant `exp_log.py`
+  (`test_manifeste_minimal` le réclame). `noyau` : `squarefree`, `racine_q`.
+- **`moteur/second_degre.py`** (≈ 690 lignes, sans texte) : tout le tableau du plan. Précisions prises :
+  - `Polynome` est un `tuple` (sous-classe) de Fraction ; les facteurs sont des tuples de `Nombre` (Q(√m)) ;
+  - `vers_polynome` : autre lettre → ValueError (pq prend toute lettre pour l'inconnue) ; `polynomes.Hors` → `HorsBornes` (point 6) ;
+  - `Nombre` : écriture unique (m sans facteur carré), `signe` exact, `comparer` entre radicandes différents par encadrements,
+    `forme_reduite` (A, B, m, d), `encadrement` par `isqrt` ; `BORNE_RADICANDE` = 10¹² (question 9 de suivi.md) ;
+  - `essais_sp` s'arrête à la 13e ligne (« trop ») ; `s_applique("SP")` décide l'existence du couple par Δ (point 5 : vrai même
+    au-delà de 12 lignes) ;
+  - `chemin` : étapes `{methode, cible, aboutit, resultat}`, tentatives en échec comprises (S-P en échec ou « trop », tâtonnement en
+    échec), un trinôme résolu par la formule reste un facteur entier (E9) ; méthode « ME_PUISSANCE » et `ORDRE_PAR_LA_FORMULE` pour
+    la variante E12 (étape notée « ME ») ; garde-fou (étapes, facteurs finals, solutions) → « ne_conclut_pas » ;
+  - `produit_nul(facteurs, formules=None)` reprend la formule déjà calculée par le chemin (une seule simplification de √Δ).
+- **Tests** : `test_polynomes.py` (6 tests : réexports `assertIs`, définitions absentes d'EL, noms publics, `pq` sur 251 sous-arbres
+  du corpus d'EL contre un évaluateur exact écrit dans le test) ; `test_second_degre.py` (33 tests : corpus § 8 développé et § 6/§ 7,
+  69 entrées, chemin et S exacts, oracle ; 240 polynômes générés, graine 20261105 ; garde-fou par un produit dans Q(√m) réécrit dans
+  le test, et deux calculs faussés exprès → « ne_conclut_pas » ; `s_applique` ⇔ `calculer` pour les 9 méthodes ; S-P et tâtonnement
+  confrontés aux racines entières de l'oracle ; D28 avec l'exception nommée (x² + 55 453x + 720 720 : couple à la 13e ligne) ;
+  valeurs ≈ du § 8 dont x² + 1000x − 1 ; bornes ; le plus lent : 0,3 s). `tests/lancer.py liste` les voit sans modification.
+- **Arêtes** (`test_imports.ARETES`) : `polynomes -> expr`, `exp_log -> polynomes`, `exp_log_m -> polynomes`,
+  `second_degre -> polynomes`, `-> noyau`, `-> nombres`, et **`second_degre -> expr`** (en plus de la liste du plan : `variables`,
+  pour refuser une autre lettre ; prévue en P2b de toute façon).
+- **Docs** : `architecture.md` § 1 (polynomes, second_degre) et § 5 (dette « 4 copies de k√m/d », chantier « nombres partout »).
+
+### Suite d'avant commit et dump
+
+- `PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rapport S/rapports/P1` : **code 0**, 23 h 29 → 23 h 36 (6 min 44 de mur).
+  Python 1 534 collectés, 1 533 passés + 1 xfail, 112 356 sous-tests, 90,0 s ; pages 145 passés, 2 421 sous-tests, 311,0 s.
+  Aucun échec instable.
+- `comparer_listes.py tests/reference S/rapports/P1` : 40 tests Python nouveaux (33 de `test_second_degre`, 6 de `test_polynomes`,
+  1 de `test_oracle`), aucun disparu ; pages identiques nom par nom. Sous-tests : une baisse, justifiée dans suivi.md
+  (`test_exp_log::TestVouvoiement::test_aucun_texte_du_fichier_ne_tutoie` 960 → 957, littéraux déplacés dans `polynomes.py`) ; hausses :
+  `test_imports::test_liste_bien_formee` 95 → 109, `test_manifeste::test_manifeste_minimal` 36 → 37, `test_noyau::…memes_objets`
+  58 → 60, `test_vocabulaire::test_litteraux_des_moteurs` 8 812 → 9 012, gardes de memo (+1 ou +2 chacune).
+- **Dump** : `dump_sorties.py S/dumps/P1 --processus 6` (17 fichiers, 4 148 sorties, 4 s), `diff -r --exclude=temps S/dumps/depart
+  S/dumps/P1` : **code 0, aucune sortie** (invariant tenu ; Exp-log identique à l'octet après le déplacement).
+- xfail stricts ajoutés : aucun.
+
 ## P2a — affichage commun
 
 ## P2b — rédaction dans `second_degre`
@@ -496,9 +562,17 @@ par nom (Python et pages). Aucun test ajouté par P0. Commit : « equations-2e-d
 
 ## Contrôles du chef d'orchestre
 
+- P0 `0fd0060` : verifier ACCEPTÉ (Python 1 494 / 106 768 sous-tests, pages 145 / 2 421, identiques à la nouvelle référence) ; rapide --depuis HEAD~1 : 23 passés, 245 sous-tests, 3 s (fumée + docs). Échec instable de `test_comportement::test_soc04_parametre_f` (ensemble-definition, `#cartes` absent : page pas encore chargée) au 1er lancement de référence : accepté par le chef comme instabilité de chargement (relancé seul vert, deux suites complètes vertes ensuite, aucune sortie en cause, Python vert) ; question 8 de suivi.md. Branche poussée.
+
 ## Temps
 
 Temps natif de `resoudre_equation` sur le corpus § 8 (objectif < 0,1 s) : **sans objet en P0** (la fonction n'existe pas encore).
+
+**P1** (`resoudre_equation` n'existe pas encore : mesuré sur son équivalent, `second_degre.chemin` puis `approx_garantie` de chaque
+solution ; script `S/tmp/temps_p1.py`, Python natif 3.12, 3e de trois tours) : corpus § 8 développé, § 6 et § 7 (69 entrées de
+`test_second_degre.CORPUS`) **16,6 ms en tout**, la plus longue 0,45 ms (x⁴ − 16) : bien sous 0,1 s par équation. Pire cas permis
+par les bornes : x² + 999 999x − 499 997 (Δ = 999 999 999 989, premier, `noyau.squarefree` jusqu'à 10⁶) **105 ms** ; au-delà de 10¹²,
+message des bornes (question 9 de suivi.md).
 
 Temps natifs des outils existants au départ (`S/dumps/depart-p1/temps/temps.json`, `--processus 1`, sur b72fe2e ; somme des appels de
 `resoudre_json` et plus long appel ; 12,9 s de mur) :

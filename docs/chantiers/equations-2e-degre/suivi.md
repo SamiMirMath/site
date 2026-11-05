@@ -12,7 +12,7 @@ au dump de départ (`/home/sami-ubuntu/nuits/equations-2e-degre/dumps/depart`) ;
 | Partie | Contenu | État | Commit |
 |---|---|---|---|
 | P0 | Prérequis présents ; fiches ; référence rafraîchie (1 494 tests Python dont 1 xfail, 106 768 sous-tests ; 145 tests de pages, 2 421 sous-tests) ; dump de départ (4 148 sorties, déterministe) | faite (suite verte) | voir `git log` |
-| P1 | Correction d'`oracle.racines` ; `moteur/polynomes.py` (déplacements Q2) ; `moteur/second_degre.py`, calcul sans texte | à faire | — |
+| P1 | Correction d'`oracle.racines` ; `moteur/polynomes.py` (déplacements Q2) ; `moteur/second_degre.py`, calcul sans texte | faite (suite verte, dump identique) | voir `git log` |
 | P2a | Affichage commun : `tableau_essais`, encadré D29, options de `chaine.py` | à faire | — |
 | P2b | Rédaction dans `second_degre` (§ 5), instantanés hors d'`instantanes/` | à faire | — |
 | P3 | Saisie : E1, E2, `equations-2e-degre/equations.py` | à faire | — |
@@ -41,9 +41,21 @@ Questions nouvelles de la nuit :
    seul et dans la suite relancée. Traité comme `test_clavier` (relancé seul, suite relancée), sans rien modifier. À surveiller ; détail
    dans `journal.md`, P0.
 
+9. **P1, radicande** : un Δ non carré dont numérateur × dénominateur dépasse 10¹² (`second_degre.BORNE_RADICANDE`) donne le
+   message des bornes (`HorsBornes`) : `noyau.squarefree` (division d'essai, seule simplification permise, § 13.2) prend 0,1 s à 10¹²
+   et ne finirait pas à 10¹⁸ (coefficients de 9 chiffres). N'arrive qu'avec des coefficients d'environ 6 chiffres ou plus.
+10. **P1, ME non entière en degré ≥ 3** : § 13.4 (« ME avec des coefficients non entiers : aucune ») est appliqué aussi à xʲ ;
+    0,5x³ − 2x = 0 n'a donc aucun chemin (« hors_cours ») au lieu de « ME x, puis la formule ». Option qui affiche le moins ; P4b peut
+    l'ouvrir si vous le voulez.
+11. **P1, `s_applique` hors du chemin** : S-P et tâtonnement demandent c ≠ 0 (sinon la ME vient avant) ; le tâtonnement demande a ≥ 2
+    (D21 : −pgcd d'abord) ; aucune méthode ne s'applique en degré < 2 (on isole x, E13). Pour le futur quiz.
+
 ## À relire par l'enseignant
 
-Rien pour l'instant.
+- **P1, oracle renforcé** (Q11) : `tests/python/oracle.py::racines` retire d'abord les termes constants nuls (racine 0 de multiplicité
+  exacte) ; `[7, -19, 0]` faisait refuser l'oracle. Test `test_oracle.TestCasDemandes.test_racine_nulle_retiree_d_abord`.
+- **P1, dette nommée** : `docs/architecture.md` § 5, « 4 copies de k√m/d » (chantier « nombres partout ») ; § 1 nomme `polynomes`.
+- P1 ne change aucun instantané ni aucune sortie (dump identique à l'octet).
 
 ## Exceptions
 
@@ -52,6 +64,8 @@ Aucune pour l'instant (exceptions d'import, `architecture.md` § 5).
 ## Variations de sous-tests
 
 Lue par `verifier`. Format, une ligne par test : `` - `<identifiant pytest complet>` : <avant> → <après> : <raison> ``.
+
+- `tests/python/test_exp_log.py::TestVouvoiement::test_aucun_texte_du_fichier_ne_tutoie` : 960 → 957 : P1, les docstrings de `_Hors`, `_racine_carree`, `_racine_entiere_exacte`, `_puissance_rationnelle_exacte` et `_const` partent avec leurs fonctions dans `moteur/polynomes.py` (déplacement Q2), dont les littéraux sont contrôlés par `test_vocabulaire.TestVouvoiement.test_litteraux_des_moteurs` (8812 → 9012).
 
 ## Reprise après compactage
 

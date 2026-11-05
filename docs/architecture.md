@@ -18,7 +18,8 @@ Chaque couche ne dépend que de celles du dessous.
                     pour ceux qui rédigent : parties, redaction_bh, demain second_degre)
 1. Briques communes moteur/ : nombres, sortie (blocs affichés, pour les moteurs qui rédigent comme pour les adaptateurs),
                     noyau (façade de la base), expr (arbre d'expressions, TeX, lecture avec le lexique de l'outil),
-                    chaine (chaînes du corrigé : ⇔, propriétés, TeX, rangées alignées et leur bloc « chaine »), et demain second_degre
+                    chaine (chaînes du corrigé : ⇔, propriétés, TeX, rangées alignées et leur bloc « chaine »), polynomes
+                    (coefficients exacts d'un polynôme écrit avec l'arbre), second_degre (calcul du 2e degré, P1 du chantier)
 ```
 
 | Couche | Peut importer | Ne doit jamais importer |
@@ -97,6 +98,7 @@ Elles sont tolérées ; celles qui sont des arêtes d'import (A1) sont **listée
 | `exp_log._DECIMAUX` | A7 | R5 : `moteur/expr.py` ne le lit pas (B1 : il reste dans `exp_log`, seul `_nb_exact` le lit, aucun état dans la brique) ; puis R10 |
 | 3 parseurs (ED, `moteur/expr.py` repris d'EL avec le lexique d'EL, FA), 2 arbres d'expressions (ED, `expr`), 2 classes `Chaine` (`moteur/chaine.py` reprise d'EL, LA) | A2 | R5 (la chaîne commune `moteur/chaine.py`, B2 ; celle de LA reste à elle), le reste seulement si un outil en a besoin |
 | 5 formats de « ≈ » (`exp_log.tex_approx`, `ensemble_def.dec`, `parties.approchee`, `redaction_bh.fmt_approx` et `fmt_val` ; plus `exp_log._trois_decimales` pour l'interprétation, R16), `qtex` sans notation suisse | A5 | La fonction unique existe (`nombres.approx`, et `nombres.exact` pour les valeurs exactes : R5, briques-communes B5) ; les outils ne sont **pas encore rebranchés** : R9, outil par outil (sur le corpus d'Exp-log, `approx` donne exactement `tex_approx` : journal de briques-communes, B5) |
+| 4 copies de la simplification et de l'écriture de k√m/d : la base (`ensemble_def.squarefree`, `racine_q`, `Num.quad`), `factorisation._tex_quad`, `exp_log._racines_du_second_degre` (par `_premiers`), `parties._racine_tex` | A2, A5 | **« nombres partout »** (dette nommée par le chantier equations-2e-degre, § 13.2 de ses décisions) : `squarefree` et `racine_q` sont dans la façade `noyau` depuis son P1, et `second_degre.Nombre` (p + q√m) s'appuie dessus, sans 5e copie ; Factorisation, Exp-log et l'Étude complète ne sont pas rebranchés |
 | HTML de la grille `.chaine` écrit dans un bloc `texte` (`resoudre_el.py`) | A4 | Le type de bloc `chaine` existe (R5, briques-communes B3 : `sortie.chaine`, `chaine.bloc_chaine`, rendu commun avec les mêmes classes) et son CSS est commun (B4 : la grille `.chaine` dans `commun/composants.css`, la page EL n'en garde aucune règle ; `test_style_commun`) ; reste la migration d'Exp-log, qui écrit encore sa grille en HTML, vers le bloc : chantier **à décider** (instantanés et références de pages d'EL à relire) |
 
 ## 6. Ordre des chantiers

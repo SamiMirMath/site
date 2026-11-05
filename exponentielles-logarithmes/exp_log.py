@@ -25,6 +25,9 @@ propriétés génériques (`PROP_AUTRE_COTE`, `PROP_PRODUIT_NUL`, `PROP_MISE_EN_
 (briques-communes, B2), réexportée ici sous les mêmes noms ; les autres `PROP_*`, l'élément `Positif` et les justifications `Car` et
 `Divise` (qui s'écrivent eux-mêmes : `chaine.Element`, `chaine.Justification`) restent ici.
 
+Les coefficients exacts d'un polynôme écrit avec l'arbre (`_Hors`, `_const`, `_pnet`, `_padd` et les racines exactes d'un rationnel)
+sont la brique commune moteur/polynomes.py (equations-2e-degre, P1), réexportée ici sous les mêmes noms privés.
+
 Interface : `lire_membres(texte)` (syntaxe seule, sert à l'aperçu), `analyser_saisie(texte)` (équation ou calcul, une seule inconnue),
 `apercu_json(texte)`. Les erreurs sont des `ErreurSaisie` au message français.
 """
@@ -45,6 +48,8 @@ from expr import (Noeud, Nb, Var, Pi, Neg, Op, Pow, Fn, Defini, variables, tex, 
                   nom_tex, DEBUT_COLLABLE, Tok, Lexique, Parseur, MINUSCULES, NOM_INDEXE, SYMBOLES, OPERATEURS, INEGALITES, lire_nombre, lire_pourcentage)
 from chaine import (Eq, Rel, Texte, Ou, Element, Justification, Chaine, Message, tex_element, LIENS_TEX, tex_chaine,
                     rangees_chaine, PROP_AUTRE_COTE, PROP_PRODUIT_NUL, PROP_MISE_EN_EVIDENCE)
+from polynomes import (Hors as _Hors, racine_carree as _racine_carree, racine_entiere_exacte as _racine_entiere_exacte,
+                       puissance_rationnelle_exacte as _puissance_rationnelle_exacte, const as _const, pnet as _pnet, padd as _padd)
 
 __all__ = ["Nb", "Var", "E", "Neg", "Op", "Pow", "Fn", "Log", "tex", "variables", "lire_membres", "analyser_saisie", "tex_saisie",
            "apercu", "apercu_json", "Saisie", "sans_facteur"]
@@ -365,10 +370,6 @@ def apercu_json(texte):
 # =====================================================================
 # 7. ARITHMÉTIQUE EXACTE ET VALEUR NUMÉRIQUE
 # =====================================================================
-class _Hors(Exception):
-    """La forme sort de ce que la méthode sait traiter : la méthode ne s'applique pas (ce n'est pas une erreur de saisie)."""
-
-
 def _premiers(n):
     """Décomposition en facteurs premiers {p: exposant} d'un entier n ≥ 1 (division d'essai)."""
     if n > 10 ** 12:
@@ -414,59 +415,6 @@ def _exposant_entier(q, b):
     return k if v == q else None
 
 
-def _racine_carree(q):
-    """Racine carrée exacte d'un rationnel ≥ 0, ou None."""
-    a, b = isqrt(q.numerator), isqrt(q.denominator)
-    return F(a, b) if a * a == q.numerator and b * b == q.denominator else None
-
-
-def _racine_entiere_exacte(n, q):
-    """La racine q-ième entière exacte de l'entier n ≥ 0, ou None."""
-    r = round(n ** (1 / q))
-    return next((c for c in (r - 1, r, r + 1) if c >= 0 and c ** q == n), None)
-
-
-def _puissance_rationnelle_exacte(a, b):
-    """a^b (a > 0 rationnel, b rationnel non entier) quand c'est un rationnel (8^(2/3) = 4, 9^(3/2) = 27, (1/4)^(1/2) = 1/2) ; None sinon."""
-    if a <= 0 or b.denominator > 12:
-        return None
-    num, den = (_racine_entiere_exacte(a.numerator, b.denominator), _racine_entiere_exacte(a.denominator, b.denominator))
-    if num is None or den is None or num == 0:
-        return None
-    return (F(num, den)) ** b.numerator
-
-
-def _const(n):
-    """Valeur exacte (Fraction) d'un arbre sans inconnue, ou None si elle n'est pas rationnelle."""
-    if isinstance(n, Nb):
-        return n.val
-    if isinstance(n, Neg):
-        v = _const(n.a)
-        return None if v is None else -v
-    if isinstance(n, Op):
-        a, b = _const(n.a), _const(n.b)
-        if a is None or b is None:
-            return None
-        if n.op == "+":
-            return a + b
-        if n.op == "-":
-            return a - b
-        if n.op == "*":
-            return a * b
-        return None if b == 0 else a / b
-    if isinstance(n, Pow):
-        a, b = _const(n.a), _const(n.b)
-        if a is None or b is None or abs(b) > 64 or (a == 0 and b < 0):
-            return None
-        if b.denominator != 1:
-            return _puissance_rationnelle_exacte(a, b)
-        return a ** int(b)
-    if isinstance(n, Fn):
-        a = _const(n.a)
-        return None if a is None or a < 0 else _racine_carree(a)
-    return None
-
-
 def valeur(n, x=None):
     """Valeur numérique (float) d'un arbre ; x : valeur de l'inconnue. Sert aux valeurs « ≈ » et aux contrôles."""
     if isinstance(n, Defini):
@@ -494,19 +442,7 @@ def valeur(n, x=None):
     raise TypeError(n)
 
 
-# polynômes en l'inconnue, degré ≤ 2 : liste [c0, c1, c2] de Fractions
-def _pnet(p):
-    p = list(p)
-    while len(p) > 1 and p[-1] == 0:
-        p.pop()
-    return p
-
-
-def _padd(a, b, signe=1):
-    n = max(len(a), len(b))
-    return _pnet([(a[i] if i < len(a) else 0) + signe * (b[i] if i < len(b) else 0) for i in range(n)])
-
-
+# polynômes en l'inconnue, degré ≤ 2 : liste [c0, c1, c2] de Fractions (_pnet, _padd : brique moteur/polynomes.py)
 def _pmul(a, b):
     r = [F(0)] * (len(a) + len(b) - 1)
     for i, x in enumerate(a):

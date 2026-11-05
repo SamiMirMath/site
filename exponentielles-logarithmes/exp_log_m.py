@@ -10,6 +10,8 @@ Ce fichier ajoute à exp_log.py (la 3C, inchangée) :
     celles qui n'y sont pas sont rejetées avec la raison ;
   - `corriger_equation(g, d, x)` : le corrigé d'une équation logarithmique en filière M.
 Tout le TeX est écrit par l'arbre de exp_log.py ou par le moteur de l'outil ED ; ce fichier n'importe ni `sortie` ni SymPy.
+Les coefficients d'un polynôme de degré quelconque (`_pq`, `_pmul_n`, `DEGRE_MAX`) sont la brique commune moteur/polynomes.py
+(equations-2e-degre, P1), réexportée ici sous les mêmes noms.
 """
 import decimal
 import random
@@ -18,6 +20,7 @@ from fractions import Fraction as F
 from math import gcd
 
 from noyau import analyser_complet
+from polynomes import DEGRE_MAX, pmul_n as _pmul_n, pq as _pq
 import exp_log as _el
 from exp_log import (Car, Chaine, Defini, E, Eq, Fn, Log, Message, Neg, Nb, Op, Ou, Pi, Pow, Rel, Texte, Var, _Hors, _contient_pi, _base_composee, _arbre_poly, _avec_decimaux,
                      _base_du_logarithme, _carte, _const, _contient_log, _nb_exact, _nom_tex, _padd, _par_exponentielle, _pnet, _precis, _produit,
@@ -531,52 +534,6 @@ def _prop_pose(t, u):
 PROPRIETES_M = frozenset({_propriete(f, g) for f in _FAMILLES for g in ("puissance", "produit", "quotient", "mixte", "constante", "egaux", "oppose")} |
                          {PROP_CARRE_DES_DEUX_MEMBRES, PROP_DEVELOPPER, PROP_ISOLER_RACINE, PROP_PUISSANCE_INVERSE, PROP_FOIS_DENOMINATEURS, PROP_RACINE_IMPAIRE, PROP_RACINE_PAIRE, PROP_PUISSANCE_PAIRE, PROP_PUISSANCES} |
                          {_prop_fois(nom, k) for nom in ("t", "u") for k in (-4, -3, -2, -1, 1, 2, 3, 4)} | {_prop_pose("t", "u"), _prop_pose("u", "v")})
-DEGRE_MAX = 8
-
-
-def _pmul_n(a, b):
-    r = [F(0)] * (len(a) + len(b) - 1)
-    for i, u in enumerate(a):
-        for j, v in enumerate(b):
-            r[i + j] += u * v
-    while len(r) > 1 and r[-1] == 0:
-        r.pop()
-    if len(r) > DEGRE_MAX + 1:
-        raise _Hors
-    return r
-
-
-def _pq(n):
-    """Coefficients de n, un polynôme en l'inconnue de degré quelconque (jusqu'à DEGRE_MAX) à coefficients rationnels ; sinon _Hors."""
-    if not variables(n):
-        v = _const(n)
-        if v is None:
-            raise _Hors
-        return [v]
-    if isinstance(n, Var):
-        return [F(0), F(1)]
-    if isinstance(n, Neg):
-        return [-c for c in _pq(n.a)]
-    if isinstance(n, Op):
-        if n.op in "+-":
-            return _padd(_pq(n.a), _pq(n.b), 1 if n.op == "+" else -1)
-        if n.op == "*":
-            return _pmul_n(_pq(n.a), _pq(n.b))
-        d = _const(n.b)
-        if d is None or d == 0 or variables(n.b):
-            raise _Hors
-        return [c / d for c in _pq(n.a)]
-    if isinstance(n, Pow):
-        k = _const(n.b)
-        if k is None or k.denominator != 1 or not 0 <= k <= DEGRE_MAX:
-            raise _Hors
-        r = [F(1)]
-        for _ in range(int(k)):
-            r = _pmul_n(r, _pq(n.a))
-        return r
-    raise _Hors
-
-
 def _decouper(n, signe=F(1)):
     """Les termes d'un membre : [(coefficient, Log)] pour c·log(u), [(coefficient, None)] pour une constante ; _Hors pour tout autre terme."""
     if isinstance(n, Neg):
