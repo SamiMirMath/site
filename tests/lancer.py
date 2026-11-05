@@ -15,6 +15,9 @@
                                       # après le commit : contrôle le rapport de `complet --rapport` (empreintes du commit, autres
                                       # fichiers modifiés, codes, tests disparus ou dégradés par rapport à la référence) ; voir verifier.py
 
+Variable PROCESSUS_PAGES (entier ≥ 1) : nombre de processus (Chrome) de la suite de pages, pour rapide, pages et complet ; absente : 2
+(Mac de l'enseignant, CI) ; 4 sur le PC. Une valeur invalide arrête la commande avant tout lancement (code 2).
+
 Le code de retour est celui de pytest (0 = tout est vert) : pas de pipe, donc rien n'est masqué (CLAUDE.md). Ce fichier ne s'appelle pas
 `test_*.py` : ni pytest ni unittest ne le collectent."""
 import datetime
@@ -39,6 +42,7 @@ OUTILS_PAGES = {"factorisation": "factorisation", "simplexe": "simplexe", "ensem
                 "exponentielles-logarithmes": "exponentielles-logarithmes"}
 OUTIL_M = "exponentielles-logarithmes-M"     # filière M de la page des exponentielles (tests/pages/rendu.py) : ses références sont à part
 MANIFESTE = "moteur/manifeste.json"          # fichiers Python que chaque page charge dans Pyodide
+PROCESSUS_PAGES_DEFAUT = 2                   # suite de pages sans la variable PROCESSUS_PAGES (Mac de l'enseignant, CI)
 UV = ["uv", "run", "-q", "--no-project", "--python", "3.12", "--with", "sympy==1.13.3", "--with", "mpmath==1.3.0",
       "--with", "websockets", "--with", "pytest", "--with", "pytest-xdist", "python", "-m", "pytest"]
 
@@ -148,6 +152,17 @@ def outils_de_pages(modifies):
     return outils
 
 
+def processus_pages():
+    """Nombre de processus de la suite de pages : PROCESSUS_PAGES (entier ≥ 1), 2 si la variable est absente ; ValueError sinon."""
+    valeur = os.environ.get("PROCESSUS_PAGES")
+    if valeur is None:
+        return PROCESSUS_PAGES_DEFAUT
+    if not re.fullmatch(r"[1-9][0-9]*", valeur):
+        raise ValueError(f"PROCESSUS_PAGES={valeur!r} : un entier ≥ 1 est attendu (par exemple PROCESSUS_PAGES=4), "
+                         f"ou la variable absente ({PROCESSUS_PAGES_DEFAUT} processus)")
+    return int(valeur)
+
+
 def lancer(arguments, env=None):
     commande = UV + arguments
     print("$", " ".join(commande), flush=True)
@@ -164,7 +179,7 @@ def pages(outils=None, reduit=False, en_plus=()):
         env["CORPUS"] = "reduit"
     if outils and "tous" not in outils:
         env["OUTILS"] = ",".join(sorted(outils))
-    return lancer(["tests/pages", "-n", "2", "--dist", "load", "-q", "-p", "no:cacheprovider", "-W", "ignore"] + list(en_plus), env)
+    return lancer(["tests/pages", "-n", str(processus_pages()), "--dist", "load", "-q", "-p", "no:cacheprovider", "-W", "ignore"] + list(en_plus), env)
 
 
 # --- complet --rapport : preuve du lancement (chantier tests-rapides, P0) -------------------------------------------------------
@@ -270,6 +285,12 @@ def rapide(seulement_lister=False):
 
 def main(argv):
     commande = argv[1] if len(argv) > 1 else ""
+    if commande in ("rapide", "pages", "complet"):              # avant tout lancement : pas de suite Python perdue pour rien
+        try:
+            processus_pages()
+        except ValueError as erreur:
+            print(f"erreur : {erreur}")
+            return 2
     if commande == "rapide":
         return rapide()
     if commande == "liste":
