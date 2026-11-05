@@ -668,6 +668,8 @@ cache, comme Pyodide), `docs/README.md`, `docs/methode-chantiers.md` (Machines :
 - F3 `d936027` : verifier ACCEPTÉ (Python 1 381 + 1 xfail / 106 160 sous-tests, pages 127 / 2 407 ; +14 tests annoncés) ; rapide --depuis HEAD~1 : manifeste/outils touchés donc presque tout (Python 1 377 + 1 xfail, pages 127 à corpus réduit), vert, 359 s ; dump = départ ; instantanés/références inchangés.
 - F4 `86207df` : verifier ACCEPTÉ (Python 1 391 + 1 xfail / 106 298 sous-tests, pages 127 / 2 407 ; +10 tests annoncés) ; rapide --depuis HEAD~1 : 75 passés, 756 sous-tests, 5 s ; dump = départ ; instantanés/références/moteur inchangés.
 - F5 `df8ff3b` : verifier ACCEPTÉ (Python 1 391 + 1 xfail / 106 244 sous-tests, 3 baisses justifiées dans suivi.md ; pages 127 / 2 407) ; rapide --depuis HEAD~1 : vert (Python 1 347 + 1 xfail, pages 127 à corpus réduit), 359 s ; dump = départ ; instantanés/références inchangés ; diff JS relu (garde `&&false` toujours fausse, `ajouterBloc` sans appelant : aucun effet).
+- F6 `fedc264` : verifier ACCEPTÉ (Python 1 391 + 1 xfail / 106 244, pages 138 / 2 407 ; +11 tests annoncés) ; rapide --depuis HEAD~1 : 23 + 138 passés (pages à corpus réduit), 279 s ; dump = départ ; instantanés/références inchangés ; aucune page ni JS publié modifié depuis F5.
+- Fin, sur `fedc264` : complet --rapport (scratchpad/rapports/final) code 0, Python 1 391 + 1 xfail / 106 244 (97 s), pages 138 / 2 407 (295 s), 394 s de mur ; verifier ACCEPTÉ ; comparer_listes tests/reference : ajouts + 3 baisses justifiées (F5). MEMO=0 (rapports/final-memo0) : code 0, 410 s, listes identiques nom par nom à final.
 
 ## Temps
 

@@ -3,6 +3,33 @@
 Branche `fondations` (depuis `main` 96f183c), PC (WSL2), `PROCESSUS_PAGES=4`. Principe : aucun changement visible pour les élèves.
 Consigne complète, plan et détails : `journal.md`. La consigne du chantier tient lieu de `decisions.md`.
 
+## Résumé (05.11.2026, PC, 12 h 09 → 14 h 50)
+
+Sept parties, sept commits, toutes acceptées par le contrôle allégé (`verifier` ACCEPTÉ, `rapide --depuis HEAD~1` vert, dump brut
+identique au départ à l'octet, instantanés et références de pages inchangés). Aucun changement visible pour les élèves : aucune page,
+aucun texte affiché, aucune sortie de moteur ne change (4 148 sorties brutes de `resoudre_json`, `apercu_json`, `controle_json`,
+`exercice_json` comparées après chaque partie).
+
+| Partie | Commit | Sous-agent | Tests ajoutés |
+|---|---|---|---|
+| F0 fiches, référence rafraîchie, `dump_sorties.py` | `0cb5a64` | 16 min | — |
+| F1 `verifier` (docs/ ignoré, baisses justifiées) | `d4837d6` | 14 min | 20 |
+| F2 `rapide` (reste de R4) | `7838091` | 22 min | 17 |
+| F3 R1 une seule liste des outils | `d936027` | 22 min | 14 |
+| F4 R6 garde-fous d'architecture | `86207df` | 16 min | 10 |
+| F5 R3 ménage | `df8ff3b` | 18 min | 0 (3 baisses de sous-tests justifiées ci-dessous) |
+| F6 copie locale de KaTeX, garde-fou réseau | `fedc264` | 17 min | 11 |
+
+Suite finale (chef d'orchestre, sur `fedc264`, `PROCESSUS_PAGES=4`) : Python 1 391 passés + 1 xfail, 106 244 sous-tests (97 s) ; pages
+138 passés, 2 407 sous-tests (295 s) ; 6 min 34 de mur ; `verifier` ACCEPTÉ ; `comparer_listes` avec `tests/reference` : seulement des
+ajouts et les 3 baisses justifiées. Même suite avec `MEMO=0` : listes identiques nom par nom (6 min 50).
+
+Questions : neuf, ci-dessous. Six sont des phrases proposées pour CLAUDE.md (non modifié) ; trois à trancher : renommer les « (R14) »
+internes en RL (F5), `sortie.py` permis aux moteurs d'outil ou non (F4), Google Fonts en copie locale ou non (F6). À confirmer (« À relire ») :
+l'exception exp-log du jeu moteur (F3), le maintien d'`etudier_json` de DV et LA (F5).
+Hors chantier : deux fichiers non suivis sont apparus pendant la session sous `docs/chantiers/equations-2e-degre/`
+(`decisions (1).md:Zone.Identifier`, `decisions.md.md`) ; non touchés, non commités.
+
 ## État des parties
 
 | Partie | Contenu | État | Commit |
