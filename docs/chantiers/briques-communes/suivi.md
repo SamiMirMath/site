@@ -15,7 +15,7 @@ D25, E14, § 5, P3) tiennent lieu de décisions.
 | B2 | `moteur/chaine.py` : Eq, Rel, Ou, Texte, Chaine, Message, `tex_element`, `tex_chaine`, `rangees_chaine`, 3 propriétés génériques ; `Positif`, `Car`, `Divise` et les 44 autres `PROP_*` restent dans exp_log (s'écrivent eux-mêmes : `chaine.Element`, `chaine.Justification`), coche par `Chaine(coche=True)` ; trois options désactivées par défaut (`etiquette_grise`, `impossible`, `textes`/`texte_avant`) ; réexport ; manifeste ; arêtes `chaine -> expr`, `exp_log -> chaine` ; tests ajoutés : `test_chaine.py` (30 tests, 76 sous-tests) | faite (suite verte) | voir `git log` |
 | B3 | Type de bloc « chaine » : `{rangees: [{lien, expr, prop?, gauche?} \| {texte} \| {bloc}]}` (`sortie.chaine`, `rangee`, `rangee_texte`, `rangee_bloc` ; `valider` : HTML refusé, blocs imbriqués `texte`/`formule`/`tableau` validés récursivement) ; `chaine.bloc_chaine(c, etiquette_grise, impossible, membre_gauche)` ; rendu `commun/rendu.js` (mêmes classes que la grille d'EL, `.pleine`, `.avec-gauche`), compléments dans `commun/composants.css` ; arête `chaine -> sortie` ; Exp-log inchangé ; tests ajoutés : `test_sortie.TestBlocChaine` (7), `test_chaine.TestBlocChaine` (6), `tests/pages/test_bloc_chaine.py` (7, dont 3 xfail stricts « B4 ») | faite (suite verte) | voir `git log` |
 | B4 | CSS : la grille `.chaine` d'EL dans `commun/composants.css` (une section avec `.pleine`, `.avec-gauche`, un seul `@container`), `details ol` dans `commun/style.css` (avec `details ul`) ; retirés des pages EL, Factorisation, Limites ; rendu identique (styles calculés de toutes les pages, 413 M valeurs, 0 écart) ; les 3 xfail stricts « B4 » de `test_bloc_chaine.py` passent ; test ajouté : `test_style_commun::test_grille_chaine_et_listes_des_rappels_dans_les_feuilles_communes` | faite (suite verte) | voir `git log` |
-| B5 | `nombres.approx(x, decimales=3)` et `nombres.exact(x, decimaux_enonce=False)`, fonctions pures, aucun outil rebranché ; tests croisés | à faire | — |
+| B5 | `nombres.approx(x, decimales=3)` et `nombres.exact(x, decimaux_enonce=False)` (TeX), fonctions pures, calcul exact en fractions, aucune fonction existante changée, aucun outil rebranché ; croisées avec `tex_approx` (4 écarts voulus nommés) et `_nb_exact` (égal partout) ; sur les 1 341 valeurs que le corpus d'EL passe à `tex_approx`, `approx` est identique ; D25 vérifié (en place dans `nombres.py`, pas dans ED, FA, LA ni le texte de l'interprétation d'EL) ; tests ajoutés : `test_nombres` (13 tests : `TestApprox`, `TestExact`, `TestPurete`) | faite (suite verte) | voir `git log` |
 | B6 | `oracle.racines(coeffs)` (mpmath 50 chiffres) et ses tests | à faire | — |
 
 ## Vérification après chaque partie
@@ -26,7 +26,11 @@ outil), `test_manifeste` vert, `test_largeurs` avec `CONNUS` vide.
 
 ## Questions pour l'enseignant
 
-(aucune pour l'instant)
+- B5, mantisse entière : E14 écrit « 1,000 × 10ⁿ⁺¹ » (4 chiffres significatifs, suivi par `nombres.approx` : `1{,}000 \times 10^{10}`),
+  R13 et `exp_log.tex_approx` « 1 × 10¹⁰ ». Aucune sortie actuelle n'est concernée (aucune notation scientifique dans le dump d'EL) ;
+  à trancher avant de rebrancher Exp-log (R9) : garder les zéros partout, ou les retirer dans `approx`.
+- B5, D25 au-delà de 10⁶ : « au-delà, notation scientifique » est lu pour les valeurs **approchées** (R13) ; une valeur exacte entière
+  garde son écriture groupée (`exact(1234567)` = 1’234’567, comme `formater_entier` et l'arbre d'EL). À confirmer.
 
 ## À relire par l'enseignant
 
@@ -53,6 +57,17 @@ outil), `test_manifeste` vert, `test_largeurs` avec `CONNUS` vide.
   sur toutes les pages (méthode et tableau : `journal.md`, section B4). À relire : le `details ol` retiré aussi de Factorisation et de
   Limites (doublons de la règle commune, rendu identique), et la section « Chaîne de ⇔ » de `commun/composants.css`.
 
+- B5 : aucun instantané, aucune référence de page, aucune sortie modifiés (dump identique ; aucun outil n'appelle `approx` ni
+  `exact`). À relire (tableau complet de l'échantillon : `journal.md`, section B5) :
+  - les quatre écarts voulus avec `tex_approx` : **zéros de la mantisse** (`1{,}000 \times 10^{-3}` au lieu de `1 \times 10^{-3}` :
+    10⁶, 10¹⁰, 10⁻⁴, 10⁻⁵, 2 × 10⁷, 0,00099999 et la racine positive de x² + 1000x − 1 = 0) ; **arrondi à 10⁶** (999 999,9996 :
+    `1{,}000 \times 10^{6}` au lieu de `1\text{’}000\text{’}000{,}000`) ; **mi-chemin** (arrondi au-dessus : 0,0625 ≈ 0,063 au lieu
+    de 0,062 ; 9 999 500 ≈ `1{,}000 \times 10^{7}` au lieu de `9{,}999 \times 10^{6}`) ; **zéro négatif** (`0{,}000`, jamais `-0{,}000`) ;
+  - 0,0009995 reste `9{,}995 \times 10^{-4}` (4 chiffres significatifs) : la mantisse n'atteint 10,000 que dès 0,00099995 ;
+  - D25 appliqué partout changerait (sans rien changer ici) : Factorisation (Δ et P(k), 7 entrées), Limites et Étude complète (tableau
+    de valeurs, 4 et 1), Exp-log (« 1000 ans » de l'interprétation, 2 entrées, et la saisie recopiée `log_(2x)(1296)` en M), contrôle
+    numérique de l'ED (« 5173 points testés », 36 entrées, sans instantané) ; liste des instantanés et références : `journal.md`, B5.
+
 ## Exceptions ajoutées ou changées
 
 - B3 : ligne « HTML de la grille `.chaine` écrit dans un bloc `texte` (`resoudre_el.py`) » de `architecture.md` § 5 ajustée : le type de
@@ -62,6 +77,8 @@ outil), `test_manifeste` vert, `test_largeurs` avec `CONNUS` vide.
   migration d'Exp-log vers le bloc (à décider). Liste des règles propres à une page de `test_style_commun` : `details ol` en sort.
 - B4, listes de tests : les 3 tests xfail stricts « B4 » de `tests/pages/test_bloc_chaine.py` deviennent passés (voulu) ; un test
   Python ajouté (`test_style_commun`, 7 sous-tests), un sous-test de plus à `test_composants`.
+- B5 : `architecture.md` A5 (les deux fonctions) et § 5 (ligne « 5 formats de ≈ » : la fonction unique existe, outils pas encore
+  rebranchés, R9 ; `exp_log._trois_decimales` nommé). Aucune exception d'import nouvelle (bibliothèque standard seulement).
 
 ## Variations de sous-tests
 

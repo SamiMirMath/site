@@ -530,12 +530,188 @@ plus.
   `test_ne_redefinit_aucune_regle_de_style_css` 35 → 49, `test_aucune_largeur_d_ecran_en_pixels` 7 → 8 ; et celles de B1–B3), plus la
   baisse déjà justifiée de `test_exp_log` (1 215 → 960) ; pages : 2 421 sous-tests comme en B3, références des pages identiques.
 
+## B5 — `nombres.approx` et `nombres.exact` (E14, R13, D25)
+
+### Plan
+
+1. Lecture : `decisions.md` du 2e degré (D13, D25, E14, § 5 `approx`, § 6 cas limites, § 11 ticket (e)), R13 du guide, A5, A7 et § 5
+   d'`architecture.md` ; `moteur/nombres.py` et `test_nombres.py` ; `exp_log.tex_approx` (et son test
+   `test_approximation_en_notation_scientifique`), `exp_log._nb_exact`, `_DECIMAUX` et `_avec_decimaux` ; les autres formats de « ≈ »
+   (rapport de revue-structure § 2.2 : `ensemble_def.dec`, `parties.arrondi`/`decimal_tex`/`approchee`, `redaction_bh.fmt_approx` et
+   `fmt_val`) et l'écriture des entiers (`qtex` de l'ED et ses copies).
+2. `moteur/nombres.py` : deux fonctions **ajoutées**, aucune fonction existante modifiée, aucune variable de module nouvelle sinon des
+   constantes, bibliothèque standard seulement (aucune arête d'import) :
+   - `approx(x, decimales=3)` : TeX de la valeur approchée, calculé sur `float(x)` avec la même arithmétique que `tex_approx` (égalité à
+     l'octet hors écarts voulus) ; entre 10⁻³ et 10⁶ : 3 décimales, virgule, apostrophe dès 4 chiffres (D25, par `formater_decimal`) ;
+     sous 10⁻³ et dès 10⁶ : mantisse à 3 décimales (4 chiffres significatifs) `× 10ⁿ`, mantisse 10,000 → 1,000 × 10ⁿ⁺¹ (E14) ;
+     valeur non finie : `ValueError` (rien de faux) ;
+   - `exact(x, decimaux_enonce=False)` : TeX d'une valeur exacte (int, Fraction, Decimal ; un float est refusé) : entier, fraction
+     (signe devant), ou décimal fini si `decimaux_enonce` (R13) ; même règle que `_nb_exact` (au plus 8 décimales).
+3. Tests (`tests/python/test_nombres.py`) : l'échantillon de la consigne (0, ±1, ±0,5, 1/3, 2/3, π, √2, 0,001, 0,000999…, 0,0009995,
+   999 999,4, 999 999,6, 10⁶, 9,9995 × 10⁶, 1234,5678, 4913, 10⁻⁵, −3,162 × 10⁻⁵, 10¹⁰, racine positive de x² + 1000x − 1 = 0, plus
+   les cas qui séparent les deux fonctions) : `approx` attendu, et `tex_approx` égal ou **écart nommé** ; `exact` contre
+   `tex(_nb_exact(v))` sous `_DECIMAUX` False et True (remis après), entiers, fractions négatives, décimaux finis, fraction non décimale
+   avec `decimaux_enonce=True`, entiers à 4 chiffres et plus ; pureté (aucun état de module changé, A7) ; erreurs.
+4. D25 : vérifier dans `nombres.py` et dans les sorties (dump de départ, instantanés, références de pages) ; liste des outils et
+   instantanés qui changeraient si D25 était appliqué partout, sans rien changer.
+5. Docs : `architecture.md` (A5, § 5 « 5 formats de ≈ »), docstrings de `nombres.py` ; `suivi.md` (état, écarts, D25, questions).
+6. Vérifications : dump `B5` et `B5-1` identiques au départ, temps, `test_imports`, `test_manifeste`, `test_largeurs` ; suite complète
+   (`complet --rapport <scratchpad>/briques/rapports/B5`), commit, `verifier`.
+
+### Exécution
+
+- **Signatures** (`moteur/nombres.py`, ajoutées en fin de fichier ; `grouper`, `formater_entier`, `formater_decimal`,
+  `nettoyer_saisie`, les motifs et constantes existants **inchangés**) :
+
+      approx(x, decimales=3) -> str      # TeX, à écrire après \approx
+      exact(x, decimaux_enonce=False) -> str   # TeX d'une valeur exacte calculée
+
+  Deux constantes (`PLAFOND_DECIMAL = 10 ** 6`, `DECIMALES_EXACTES_MAX = 8`) et quatre aides privées (`_valeur_exacte_de`, `_arrondi`,
+  `_ecrire`, `_decimales_finies`) ; aucune variable de module modifiée (A7, testé) ; imports : `math`, `decimal.Decimal`,
+  `fractions.Fraction` (bibliothèque standard ; aucune arête nouvelle, `test_imports` inchangé). Aucun outil ne les appelle.
+- **`approx`** : la valeur est prise **exactement** (int, Fraction, Decimal ; un float par sa valeur binaire ; SymPy et mpmath par
+  `float()`), l'arrondi est calculé en fractions (pas d'erreur de la division `v / 10 ** e` en flottant). Entre 10⁻³ et 10⁶ :
+  3 décimales, `formater_decimal` (virgule `{,}`, apostrophe `\text{’}` dès 4 chiffres : D25). Sous 10⁻³, ou dès 10⁶ **après
+  arrondi** : mantisse à 3 décimales (4 chiffres significatifs), zéros gardés, `\times 10^{n}` ; une mantisse arrondie à 10,000 devient
+  1,000 × 10ⁿ⁺¹ (E14). Mi-chemin : au-dessus (arrondi usuel, comme `parties.arrondi`, ROUND_HALF_UP, et `exp_log._trois_decimales`).
+  Signe « - » comme `tex_approx` et l'arbre (`nb_tex`). Valeur non finie : `ValueError` (rien de faux). `decimales` (entier ≥ 1)
+  règle aussi le seuil bas (10^(−decimales)) et la mantisse ; le seuil haut reste 10⁶.
+  Premier essai écarté : la même arithmétique flottante que `tex_approx` (`f"{v / 10 ** e:.3f}"`) donnait 9,999 × 10⁶ pour
+  9 999 500 (9,9995 n'est pas représentable : la division tombe en dessous) et 0,062 pour 0,0625 (arrondi au pair de Python), alors
+  que la consigne attend la mantisse 10,000 pour 9,9995 × 10⁶.
+- **`exact`** : int, Fraction, Decimal fini (ou chaîne que `Fraction` lit) ; un float est refusé (`TypeError`). Entier :
+  `formater_entier` ; fraction : `\frac{…}{…}`, signe devant ; `decimaux_enonce=True` : décimal fini d'au plus 8 décimales en décimal
+  (`formater_decimal`), sinon fraction : exactement la règle de `_nb_exact`, sans son état. Les décimaux de l'énoncé gardent leur
+  écriture par l'arbre (`Nb.dec`), pas par cette fonction (docstring).
+- **D13 sur le corpus d'Exp-log** (script du scratchpad `b5/d13.py`, lecture seule : `tex_approx` enveloppé dans le processus) :
+  `resoudre_json` C et M et `apercu_json` sur les entrées du dump de départ, 2 742 appels, **1 341 valeurs** passées à `tex_approx`
+  (362 distinctes, de 1,1 × 10⁻¹⁶ à 5,8 × 10⁴) : `approx(v) == tex_approx(v)` **pour toutes** (0 écart). Rebrancher Exp-log sur
+  `approx` (R9) laisserait donc son dump identique sur ce corpus. La valeur 1,1 × 10⁻¹⁶ (un reste de calcul flottant) n'est affichée
+  nulle part (aucune notation scientifique dans le dump).
+- **Docs** : `architecture.md` A5 (les deux fonctions, `test_nombres`) et § 5 (ligne « 5 formats de ≈ » : la fonction unique existe,
+  outils pas encore rebranchés, R9 ; `exp_log._trois_decimales` ajouté à la liste, sixième écriture d'un « ≈ », celle de
+  l'interprétation R16) ; docstring du module `nombres.py`.
+
+### Échantillon : `approx` et `tex_approx` (à relire par l'enseignant)
+
+Tableau tiré de `ECHANTILLON` (`tests/python/test_nombres.py`) ; « égal » : `tex_approx` donne exactement la même chaîne.
+
+| Valeur | `approx` | `tex_approx` |
+|---|---|---|
+| 0 | `0{,}000` | égal |
+| −0,0 | `0{,}000` | `-0{,}000` : **zéro négatif** |
+| 1 ; −1 | `1{,}000` ; `-1{,}000` | égal |
+| 0,5 ; −0,5 | `0{,}500` ; `-0{,}500` | égal |
+| 1/3 ; 2/3 ; −2/3 | `0{,}333` ; `0{,}667` ; `-0{,}667` | égal |
+| π ; √2 | `3{,}142` ; `1{,}414` | égal |
+| −√5 ; −2 − √5 ; −2 + √5 (exemples d'E14) | `-2{,}236` ; `-4{,}236` ; `0{,}236` | égal |
+| 6,644 ; −0,693 | `6{,}644` ; `-0{,}693` | égal |
+| 0,001 ; 0,0010004 | `0{,}001` | égal |
+| 0,000999 | `9{,}990 \times 10^{-4}` | égal |
+| 0,0009999 | `9{,}999 \times 10^{-4}` | égal |
+| 0,0009995 (4 chiffres significatifs : reste sous 10⁻³) | `9{,}995 \times 10^{-4}` | égal |
+| 0,00099995 ; 0,00099999 (mantisse 10,000) | `1{,}000 \times 10^{-3}` | `1 \times 10^{-3}` : **zéros de la mantisse** |
+| x² + 1000x − 1 = 0, racine positive (9,99999 × 10⁻⁴ ; mantisse 10,000) | `1{,}000 \times 10^{-3}` | `1 \times 10^{-3}` : **zéros de la mantisse** |
+| x² + 1000x − 1 = 0, racine négative | `-1\text{’}000{,}001` | égal |
+| 1234,5678 | `1\text{’}234{,}568` | égal |
+| 4913 | `4\text{’}913{,}000` | égal |
+| 123 456,789 | `123\text{’}456{,}789` | égal |
+| 999 999,4 ; 999 999,6 ; 999 999,9994 | `999\text{’}999{,}400` ; `…{,}600` ; `…{,}999` | égal |
+| ±999 999,9996 (arrondi à 10⁶) | `1{,}000 \times 10^{6}` (signe « - » devant pour la valeur négative) | `1\text{’}000\text{’}000{,}000` : **arrondi à 10⁶** |
+| 10⁶ ; −10⁶ | `1{,}000 \times 10^{6}` ; `-1{,}000 \times 10^{6}` | `1 \times 10^{6}` : **zéros de la mantisse** |
+| 4,5 × 10⁶ | `4{,}500 \times 10^{6}` | égal |
+| 9,99949 × 10⁶ | `9{,}999 \times 10^{6}` | égal |
+| 9,9995 × 10⁶ (mantisse 10,000) | `1{,}000 \times 10^{7}` | `9{,}999 \times 10^{6}` : **mi-chemin** |
+| 2 × 10⁷ | `2{,}000 \times 10^{7}` | `2 \times 10^{7}` : **zéros de la mantisse** |
+| −2,5 × 10⁷ | `-2{,}500 \times 10^{7}` | égal |
+| 10¹⁰ | `1{,}000 \times 10^{10}` | `1 \times 10^{10}` : **zéros de la mantisse** |
+| 10⁻⁴ ; 10⁻⁵ | `1{,}000 \times 10^{-4}` ; `1{,}000 \times 10^{-5}` | `1 \times 10^{-4}` ; `1 \times 10^{-5}` : **zéros de la mantisse** |
+| 3,1623 × 10⁻⁵ ; −3,162 × 10⁻⁵ | `3{,}162 \times 10^{-5}` ; `-3{,}162 \times 10^{-5}` | égal |
+| 0,0625 ; 2,0625 (mi-chemin) | `0{,}063` ; `2{,}063` | `0{,}062` ; `2{,}062` : **mi-chemin** |
+| 0,1875 (mi-chemin, même arrondi) | `0{,}188` | égal |
+
+Les quatre écarts voulus (constantes `ECART_*` du test, chacun illustré) :
+1. **Zéros de la mantisse** : 4 chiffres significatifs gardés, `1{,}000 \times 10^{n}` (E14 : « 1,000 × 10ⁿ⁺¹ ») ; `tex_approx` retire
+   « ,000 » (`1 \times 10^{n}`, l'exemple « 1 × 10¹⁰ » de R13). Seul écart sur les valeurs de son propre test
+   (`test_approximation_en_notation_scientifique` : 1e10, 1e-4, 0.00099999).
+2. **Arrondi à 10⁶** : une valeur que l'arrondi porte à 10⁶ passe en notation scientifique (R13, E14 : « dès 10⁶ ») ; `tex_approx`
+   décide avant l'arrondi et écrit 1’000’000,000.
+3. **Mi-chemin** : arrondi au-dessus, calculé exactement ; `tex_approx` arrondit la valeur binaire du float (au pair à mi-chemin, ou en
+   dessous après la division par 10ⁿ). E14 ne met « ≈ » que sur des irrationnels : sans effet sur le 2e degré.
+4. **Zéro négatif** : `0{,}000`, jamais `-0{,}000`.
+Aucun ne touche une valeur du corpus d'Exp-log (D13 ci-dessus).
+
+### `exact` et `_nb_exact`
+
+Égalité exacte partout avec `tex(exp_log._nb_exact(v))` sous `_DECIMAUX` = `decimaux_enonce` (mis puis remis par le test, exp_log non
+modifié), sur 28 valeurs × 2 états : 0, ±1, −3, 999, 1000, ±4913, 1 234 567 (entiers : `formater_entier`, apostrophe dès 4 chiffres
+dans les deux états) ; ±1/2, −5/2, −27/100, 761/400 (décimaux finis : `0{,}5`, `-2{,}5`, `-0{,}27`, `1{,}9025` avec
+`decimaux_enonce`) ; 1/3, 2/3, −13/60, 1/3000, 1/512, 1/1024 (pas de décimal fini, ou plus de 8 décimales : fraction gardée avec
+`decimaux_enonce=True`) ; 2469/2 (`\frac{2\text{’}469}{2}` ou `1\text{’}234{,}5`), 1/1000, 1/256 (8 décimales), 3/10⁸ (8) et 3/10⁹ (9 :
+fraction), 123456789/1000 ; `Decimal("0.50")`, `Decimal("-1.25")`, `"13/60"`. Aucun écart.
+
+### D25 (apostrophe dès 4 chiffres) : état et ce qui changerait
+
+- **Dans `nombres.py` : en place** depuis Q5 (14.10.2026) : `grouper` dès 4 chiffres, `formater_entier` et `formater_decimal` (partie
+  entière seulement, `\text{’}` en TeX). `formater_entier` groupe aussi au-delà de 10⁶ (1’234’567) : D25 dit « au-delà, notation
+  scientifique (R13) », ce qui vise les valeurs approchées (R13 : « valeurs approchées … dès 10⁶ ») ; une valeur **exacte** entière
+  garde son écriture groupée (`exact`, comme l'arbre d'Exp-log). Rien n'est changé dans les fonctions existantes.
+- **Outils qui l'appliquent** : Exp-log (arbre `expr.nb_tex`, `tex_approx`, `_trois_decimales`), Étude complète (`parties.decimal_tex`,
+  `formater_entier`). **Qui ne l'appliquent pas** : Ensemble de définition (`qtex`, `dec`, texte des nombres de la saisie), Factorisation
+  (`qtx` sur `qtex`, `tex_arbre`), Limites (`qtex_`, `fmt_val`, `fmt_approx`, `decimal_tex` de `redaction_bh`) ; côté JS : simplexe
+  (`plain`, `nomGrad`) et `graphique.js` (`etiquette`) ; Dérivée écrit ses nombres par SymPy (aucun nombre de 4 chiffres dans son corpus).
+- **Ce qui changerait si D25 était appliqué partout** (relevé sur le dump de départ, les instantanés et les références de pages :
+  tout entier d'au moins 4 chiffres sans apostrophe dans un champ affiché ; script `b5/d25.py` du scratchpad, lecture seule) :
+
+  | Outil | Où | Entrées touchées | Exemples | Instantanés et références qui changeraient |
+  |---|---|---|---|---|
+  | Factorisation | Δ de la formule, valeurs P(k) du test des diviseurs | 7 | `= 370881`, `= 84100`, `= 4489`, `P(25) = 152589843775` | `instantanes/factorisation.json`, `instantanes/resoudre/factorisation.json` (7 entrées chacun) ; `tests/pages/references/factorisation.json` |
+  | Limites et asymptotes | tableau de valeurs (`fmt_val`) | 4 (dump), 2 (instantanés) | `2202{,}5466`, `-19998{,}99998`, `2752{,}3846` | `instantanes/limites-asymptotes.json`, `instantanes/resoudre/limites-asymptotes.json` (2 entrées) ; `tests/pages/references/limites-asymptotes.json` |
+  | Étude complète | tableau de valeurs (même `fmt_val`) | 1 | `(e^x-1)/x` : `2202{,}5466` | `instantanes/etude-complete.json`, `instantanes/resoudre/etude-complete.json` ; `tests/pages/references/etude-complete.json` |
+  | Exp-log (C et M) | carte « Interprétation », texte hors TeX | 2 (+ 1 en M) | « 1000 ans », « Au bout de 100000 ans » (le TeX à côté a déjà `1\text{’}000`) ; M : « (rejetée : log_(2x)(1296) … » (saisie recopiée) | `instantanes/resoudre/exponentielles-logarithmes.json` (2), `…-M.json` (3) ; `tests/pages/references/exponentielles-logarithmes.json` et `-M.json` |
+  | Ensemble de définition | carte de contrôle numérique (`controle_json`) | 36 | « bien définie aux 5173 points testés » | aucun instantané ; `tests/pages/references/ensemble-definition.json` (52 occurrences) |
+
+  Non compté : le message d'erreur « écrivez 1000 ou 1’000 » (voulu), les empreintes, les énoncés d'exercices (`10^(x-1)=1000`, saisie
+  affichée en TeX groupé). Dérivée, simplexe (pas de moteur Python) : rien dans le dump.
+
+### Tests ajoutés
+
+`tests/python/test_nombres.py` (8 → 21 tests ; importe `exp_log` depuis les tests, jamais depuis `moteur/`) :
+- `TestApprox` (8) : `test_echantillon` (48 valeurs), `test_croise_avec_tex_approx` (égal, ou écart nommé avec la sortie exacte de
+  `tex_approx`), `test_tous_les_ecarts_sont_illustres`, `test_valeurs_du_test_de_tex_approx` (les 10 valeurs de
+  `test_exp_log.test_approximation_en_notation_scientifique`), `test_valeur_prise_exactement` (Fraction, Decimal, 10⁴⁰⁰, SymPy, mpmath),
+  `test_decimales` (1, 2, 5 décimales), `test_refuse_ce_qui_serait_faux` (∞, NaN, `decimales` invalide), `test_virgule_apostrophe_et_signe`
+  (D25 sur tout l'échantillon) ;
+- `TestExact` (3) : `test_cas` (28 valeurs, deux états), `test_croise_avec_nb_exact` (56 comparaisons, `_DECIMAUX` remis), refus d'un
+  float et de l'infini ;
+- `TestPurete` (2) : aucune variable de module changée (A7) ; `exact` ne lit pas `_DECIMAUX`, le code de `nombres.py` ne le nomme pas
+  et n'importe que la bibliothèque standard (`ast`).
+Seul : 21 passés, 305 sous-tests, 0,2 s. Ciblés (`-n 6`) avec test_exp_log, test_imports, test_manifeste, test_vocabulaire, test_expr :
+202 passés, 16 473 sous-tests.
+
+### Vérifications
+
+- Dump `B5` (`--processus 6`) et `B5-1` (`--processus 1`) : `diff -r --exclude=temps` avec `depart` code 0, aucune sortie
+  (17 fichiers, 4 148 sorties). Aucun instantané ni référence de page modifié (`git status`).
+- Temps natif (`resoudre_json`, 1 processus, comparé à `un-processus` de B0 ; B5 n'ajoute aucun appel dans les outils, écarts de
+  bruit) : ensemble-definition 0,033 → 0,033 s ; derivee-variations 0,265 → 0,263 ; limites-asymptotes 5,895 → 5,932 (+0,6 %) ;
+  etude-complete 1,998 → 1,982 ; factorisation 1,883 → 1,900 ; EL C 0,888 → 0,933 (+5,1 %) ; EL M 0,764 → 0,784 (+2,6 %). Aucune hausse
+  de plus de 50 %. Mur du dump : 12,9 s (1 processus), 4 s (6 processus). Coût propre : `approx` 7,7 µs, `exact` 2,3 µs par appel.
+- `test_imports` (aucune arête nouvelle : bibliothèque standard), `test_manifeste` verts ; `test_largeurs` : `CONNUS = {}`.
+- Suite d'avant commit : `PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rapport <scratchpad>/briques/rapports/B5`, code 0,
+  19 h 14 → 19 h 21 (6 min 51 de mur). Python 1 470 collectés, 1 469 passés + 1 xfail, 106 696 sous-tests (98,0 s) ; pages 145 passés,
+  2 421 sous-tests (313,3 s). `comparer_listes` contre le dossier de B4 : 13 tests Python nouveaux (`test_nombres`), aucun disparu ;
+  sous-tests : `test_vocabulaire::test_litteraux_des_moteurs` 8 792 → 8 812 (hausse : les littéraux de `nombres.py`) ; pages identiques
+  nom par nom. Contre `tests/reference` (B0) : 78 tests Python nouveaux (B1 21, B2 30, B3 13, B4 1, B5 13), 7 de pages, hausses
+  seulement, plus la baisse déjà justifiée de `test_exp_log` (1 215 → 960).
+
 ## Contrôles du chef d'orchestre
 
 - B0 `b296741` : verifier ACCEPTÉ (Python 1 392 / 106 244 sous-tests, pages 138 / 2 407, identiques à la référence) ; rapide --depuis HEAD~1 : 23 passés, 243 sous-tests, 3 s (fumée + docs).
 - B1 `6be8865` : verifier ACCEPTÉ (Python 1 413 / 106 250 sous-tests, 21 tests nouveaux de test_expr, 5 hausses, 1 baisse justifiée ; pages 138 / 2 407 identiques) ; rapide --depuis HEAD~1 : Python 1 368 passés + 1 xfail, 106 194 sous-tests (87 s), pages 138 passés, 1 242 sous-tests (276 s), mur 6 min 06 ; dump identique au départ.
 - B2 `572f751` : verifier ACCEPTÉ (Python 1 443 / 106 301 sous-tests, 51 tests ajoutés depuis B0, 5 hausses, 1 baisse justifiée ; pages 138 / 2 407 identiques) ; rapide --depuis HEAD~1 : Python 1 398 passés + 1 xfail, 106 245 sous-tests (97 s), pages 138 passés, 1 242 sous-tests (279 s), mur 6 min 19 ; dump identique au départ (B2).
 - B3 `9cee0c4` : verifier ACCEPTÉ (Python 1 456 / 106 391 sous-tests, 64 tests ajoutés depuis B0, 1 baisse justifiée ; pages 145 : 142 passés + 3 xfail stricts « B4 », 2 421 sous-tests) ; rapide --depuis HEAD~1 : Python 1 278 passés + 1 xfail, 96 451 sous-tests (89 s), pages 142 passés + 3 xfail, 1 256 sous-tests (307 s), mur 6 min 38 ; dump identique au départ (B3).
+- B4 `d3b7661` : verifier ACCEPTÉ (Python 1 457 / 106 407 sous-tests, 65 tests ajoutés depuis B0, 1 baisse justifiée ; pages 145 passés, 2 421 sous-tests, les 3 xfail « B4 » passés) ; rapide --depuis HEAD~1 : Python 58 passés, 3 756 sous-tests (12 s), pages 145 passés, 1 256 sous-tests (310 s), mur 5 min 23 ; dump identique au départ (B4).
 
 ## Temps
 
