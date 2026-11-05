@@ -221,8 +221,8 @@ def tex(n):
     if isinstance(n, Pi):
         return r"\pi"
     if isinstance(n, Neg):
-        s = tex(n.a)
-        return "-" + (_entre_parentheses(s) if isinstance(n.a, Op) and n.a.op in "+-" else s)
+        s = tex(n.a)                                      # −(x + 1), et −(−100) quand x = −100 remplace x dans −x : jamais « −−100 »
+        return "-" + (_entre_parentheses(s) if _comme_somme(n.a) else s)
     if isinstance(n, Op):
         if n.op == "/":
             return r"\frac{" + tex(n.a) + "}{" + tex(n.b) + "}"
