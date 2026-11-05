@@ -755,6 +755,116 @@ JUnit / extension : 0 écart. `environnement` : CORPUS, OUTILS, MEMO non défini
 
 Murs : Python 588 s (P5 : 570 s), pages 974 s (P5 : 979 s) : inchangés (bruit), comme attendu (`complet` n'a pas changé).
 
+## P7 (05.11.2026) : étude du chargement de Pyodide (T9, étude seule)
+
+### Plan
+
+1. Étude seule (décision T9) : **aucun fichier de code ni de test modifié**. Livrable : `etude-pyodide.md` ; `journal.md` (ce
+   détail) et `suivi.md` (état, recommandation en une ligne, décision à prendre). Après le commit, `git diff --stat HEAD~1 HEAD` ne
+   doit montrer que des fichiers de `docs/chantiers/tests-rapides/`.
+2. Outils de mesure hors du dépôt (`scratchpad/P7/`), chaque commande sous une limite de 5 min (`subprocess`, `timeout=300`) :
+   - **sonde de suite** (extension pytest chargée par `-p`, seulement dans les lancements de mesure) : elle remplace en mémoire
+     `Navigateur.__enter__` et `Navigateur.ouvrir` par des copies qui notent, pour chaque ouverture, le test, le processus, la classe,
+     la page, les options, et ajoutent à la page un petit script d'observation (horodatage des changements de `#etat` et des messages
+     du worker `init` / `sympy`) ; relevé à la fermeture de l'onglet. Rien n'est changé dans le dépôt ;
+   - **banc de chargement** (script seul, un Chrome comme celui des tests) : temps de chaque phase d'une ouverture (HTML, KaTeX,
+     manifeste et fichiers, `loadPyodide`, import du module, roues SymPy, `import sympy`), à froid (profil neuf) et à chaud (même
+     Chrome), état du cache HTTP (`transferSize` des ressources du worker), type MIME du `.wasm`, cache de code wasm ;
+   - **essais de partage** (banc seul, jamais dans les tests) : ce que coûterait une page gardée (rechargement seul, worker relancé
+     seul), pour chiffrer les options.
+3. Lancements de la suite de pages par lots de moins de 5 min (`-n 2 --dist load`, comme `complet`) avec la sonde : nombre de
+   chargements par processus, par classe, par test ; durée de chaque chargement ; part du mur des pages (comparée aux temps des tests
+   du rapport P6). Jamais en même temps que la suite complète.
+4. Rapport `etude-pyodide.md` : mesures, tableau, options classées par gain et par risque d'isolement entre tests, recommandation,
+   décisions à prendre.
+5. Suite complète `complet --rapport …/scratchpad/P7-rapport` (seule, en arrière-plan), `comparer_listes.py`, `--collect-only -q` de
+   chaque suite ; `suivi.md` ; commit ; `verifier`.
+
+### Outils de mesure (hors du dépôt, `scratchpad/P7/`)
+
+- `sonde_p7.py` (extension pytest, `-p sonde_p7`, `PYTHONPATH=scratchpad/P7`) : enveloppes en mémoire de `Navigateur.__enter__`,
+  `Navigateur.ouvrir`, `Page.appel` (ajout du script d'observation juste avant `Page.navigate`), `Page.attendre` (heure de « Prêt. »
+  vu par le test) ; relevé de la page avant la fermeture de l'onglet et au démontage de chaque test (avant celui de la classe).
+  Sortie : un fichier JSON lignes par processus. Limite : les pages de `test_pyodide_local` (Chrome fermé dans le test) ne sont pas
+  relevées ; elles sont comptées à part (3 premières pages, environ 18 s chacune d'après les murs de ces tests).
+- `lot.py` : un lot de tests de pages avec la sonde, `-n 2 --dist load`, `subprocess.run(…, timeout=300)`.
+- `analyse.py` : comptages par processus, classe, test ; phases ; premières pages d'un Chrome ; rang de l'ouverture dans son Chrome.
+- `banc.py` + `lancer_banc.py` (limite 5 min) : worker « blob » qui charge le vrai `worker-pyodide.js` en horodatant ses étapes,
+  ressources du worker par attache automatique DevTools ; expériences `froid_chaud`, `sans_instr`, `rechargement`, `deux_chrome`,
+  `ouvrir_detail`. `banc_surveiller.py`, `banc_attache.py` (les 0,58 s de l'attache d'un onglet neuf), `banc_profil.py` (profil gardé
+  d'un Chrome au suivant, même port ou non).
+
+### Lots de la suite de pages avec la sonde (chacun sous 5 min, tous verts)
+
+| Lot | Mur | Résultat | Ouvertures (avec Pyodide) | Chrome |
+|---|---|---|---|---|
+| `test_rendu.py` | 139 s | 7 passés, 1 270 sous-tests | 7 (7) | 2 |
+| `test_comportement.py`, 1ʳᵉ moitié (18 tests) | 197 s | 18 passés, 72 sous-tests | 43 (43) | 2 |
+| `test_comportement.py`, 2ᵉ moitié (17 tests) | 201 s | 17 passés, 962 sous-tests | 35 (35) | 2 |
+| `test_clavier.py` | 185 s | 7 passés, 20 sous-tests | 11 (11) | 2 |
+| `test_graphique.py` + `test_accueil.py` + `test_pyodide_local.py` | 192 s | 25 passés, 63 sous-tests | 19 (8 relevées ; + 3 de `test_pyodide_local` non relevées) | 7 |
+| `test_largeurs.py` | 114 s | 13 passés, 50 sous-tests | 17 (15) | 2 |
+
+Ensemble (`analyse.py`) : 132 ouvertures, 119 avec Pyodide relevées (+ 3) ; 17 Chrome démarrés (49,6 s) ; somme des tests 1 773 s ;
+somme `ouvrir` → « Prêt. » 931 s (53 % des tests mesurés), dont `init` 457 s, pause 80 s, `sympy` 260 s.
+
+| Phase (moyenne) | À chaud (n = 107) | 1ʳᵉ page d'un Chrome (n = 12) |
+|---|---|---|
+| navigation → worker lancé | 0,41 s | 0,85 s |
+| `init` (loadPyodide + import du module) | 3,13 s | 10,17 s |
+| pause avant SymPy | 0,68 s | 0,71 s |
+| `sympy` | 1,85 s | 5,48 s |
+| navigation → « Prêt. » | 6,08 s | 17,20 s |
+| `ouvrir` → « Prêt. » vu par le test | 6,91 s | 18,17 s |
+
+Rang dans le Chrome : 17,20 / 6,35 / 5,72 / 6,08 / 6,09 / 6,10 s (6ᵉ et suivantes). `ouvrir` jusqu'à `Page.navigate` : 0,74 s en
+moyenne (0,65 à 0,93 s).
+
+### Banc (page seule, sans charge)
+
+- `froid_chaud` factorisation : 8,11 / 6,67 / 5,38 / 5,19 s ; `loadPyodide` 4,40 / 2,10 / 1,96 / 1,93 s ; `import resoudre_fa`
+  0,29 / 0,68 / 0,28 / 0,21 s ; décompression des roues 0,50 / 1,03 / 0,49 / 0,48 s ; `invalidate_caches` 0,29 / 0,44 / 0,28 / 0,28 s ;
+  `import sympy` 0,64 / 0,69 / 0,60 / 0,58 s. Fichiers de Pyodide tous arrivés avant 0,84 s même à froid. Worker chargé :
+  `fetch` du wasm 30 ms, `WebAssembly.compile` 40 ms, `compileStreaming` 75 puis 72 ms (`application/wasm`). Intercepteur : 23 requêtes
+  servies, 0 refusée.
+- `froid_chaud` etude-complete : 8,79 / 7,65 / 5,47 / 5,51 s ; `loadPyodide` 5,4 / 3,8 / 1,9 / 1,9 s ; `import resoudre_ec` 0,45 à
+  0,65 s.
+- `sans_instr` (contrôle, aucun script ajouté) : 7,46 / 6,60 / 5,30 / 5,18 s.
+- `rechargement` : onglet neuf à froid 7,73 s ; rechargement du même onglet 6,25 / 4,50 / 4,41 s ; onglet neuf à chaud 5,23 / 5,53 s.
+- `deux_chrome` : Chrome 1 démarrage 2,10 s, pages 7,70 / 6,71 s ; Chrome 2 démarrage 2,00 s, pages 8,29 / 6,87 s (repart à froid).
+- `ouvrir_detail` : `ouvrir` 751 ms, dont `intercepteur.surveiller` 593 ms, `Page.navigate` 73 ms, `createTarget` 62 ms, le reste
+  < 10 ms chacun. `banc_surveiller.py` : dans `surveiller`, `Target.attachToTarget` 551 ms, `Fetch.enable` 8 ms. `banc_attache.py` :
+  la 1ʳᵉ attache, quelle que soit la connexion, prend 580 à 594 ms, la 2ᵉ 5 à 19 ms (démarrage du processus de rendu de l'onglet).
+- `banc_profil.py` (profil gardé, trois Chrome successifs, 2 pages chacun) : même port 8,27 / 6,57 ; 6,55 / 6,32 ; 5,45 / 5,87 s ;
+  port différent 8,19 / 6,63 ; 6,98 / 6,37 ; 6,69 / 6,22 s.
+- Pages : seuls `localStorage` et `sessionStorage` sont utilisés (aucun `indexedDB`, `serviceWorker`, `caches.open`, cookie dans
+  `commun/*.js` et les `index.html`).
+
+### Temps natif
+
+P7 ne touche aucun moteur (aucun code). `mesurer_temps.py` : Ex7 0,60 s ; a 0,03 s ; b 0,36 s ; c 0,26 s ; d 0,22 s (P6 : 0,59 ; 0,03 ;
+0,35 ; 0,26 ; 0,22) : aucune hausse.
+
+### Suite complète (`complet --rapport …/scratchpad/P7-rapport`, départ d116aa1 + `etude-pyodide.md`, `journal.md`)
+
+Lancée seule, après toutes les mesures (aucune mesure pendant le lancement).
+
+| | Python : mur | Python : résultat | Pages : mur | Pages : résultat | Code |
+|---|---|---|---|---|---|
+| `complet --rapport …/scratchpad/P7-rapport` (`MEMO` non défini) | **588 s** | 1328 passés, 1 xfail, 103 161 sous-tests | **999 s** | 122 passés, 2 554 sous-tests | 0 |
+
+JUnit / extension : 0 écart. Empreinte de `etude-pyodide.md` identique au début et à la fin ; seuls `journal.md` et `suivi.md` écrits
+pendant le lancement.
+
+**Comparaisons** :
+- `comparer_listes.py reference P7-rapport` : pages identiques nom par nom ; Python : 34 lignes, **toutes « nouveau »** (les 17 tests
+  ajoutés par P4 et P5, collectés et passés) ; aucun manquant.
+- `comparer_listes.py P6-rapport P7-rapport` : **identique nom par nom** (Python et pages, sous-tests compris).
+- `--collect-only -q` de chaque suite, lancée séparément (code 0) : Python 1329 identifiants = référence + les 17, égaux à la collecte
+  du rapport ; pages 122 identifiants identiques à la référence.
+
+Murs : Python 588 s (P6 : 588 s), pages 999 s (P6 : 974 s) : inchangés (bruit ; aucun code modifié).
+
 ## Contrôles du chef d'orchestre
 
 P0 (1feb6cf) : suite complète --rapport, code 0 ; Python 1311 passés + 1 xfail, 103 033 sous-tests, 737 s ; pages 122 passés, 2 554 sous-tests, 950 s ; comparer_listes identique nom par nom ; --collect-only -q des deux suites identique à la référence.
@@ -768,3 +878,5 @@ P3 (f140f1c) : verifier ACCEPTÉ ; rapide code 0 (8 s) ; sélection de rapide ap
 P4 (7186b6d) : verifier ACCEPTÉ sur les deux rapports (MEMO lu correctement, 6 tests ajoutés listés) ; rapide code 0 ; sélection de rapide appliquée aux 15 fichiers du commit : code 0 en 105 s, et avec MEMO=0 code 0 en 129 s ; memo.py relu.
 
 P5 (46fd547) : verifier ACCEPTÉ (17 ajouts listés) ; rapide code 0 ; sélection de rapide appliquée aux 10 fichiers du commit : code 0 en 254 s ; avec MEMO=0, la même sélection dépasse la limite de 5 min du contrôle (pas un échec de test ; couvert par la suite MEMO=0 de fin de session).
+
+P6 (d116aa1) : verifier ACCEPTÉ (17 ajouts listés) ; rapide code 0 ; sélection de rapide sur les fichiers du commit (tests de fumée seulement, lancer.py n'étant pas un moteur) code 0 ; diff de lancer.py relu : pages(), python() et complet intacts.

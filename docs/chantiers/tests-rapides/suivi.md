@@ -22,7 +22,7 @@ rapports) : [`journal.md`](journal.md).
 | P4 | T4 : `memo.py`, test de garde, `MEMO=0` | **faite** (commit « Tests rapides P4 : … ») : 9 fichiers sans mock passent par `memo` ; 6 tests ajoutés (`test_memo.py`, `test_memo_garde.py`) ; listes identiques avec et sans `MEMO=0` (seuls écarts à la référence : les 6 ajoutés) ; Python 660 s (cache) / 672 s (`MEMO=0`) |
 | P5 | T5 : cache de `racines` | **faite** (commit « Tests rapides P5 : … ») : `memo_racines.py` ; 9 appels de 4 fichiers passent par le cache ; `racines` inchangée (empreinte gardée) ; avec et sans cache : 563 clés, 695 racines, 0 écart ; 11 tests ajoutés ; listes identiques (seuls écarts : les ajouts de P4 et P5) ; Python 570 s (P4 : 660 s) |
 | P6 | T7 : `rapide` et pages des moteurs | **faite** (commit « Tests rapides P6 : … ») : un `.py` modifié d'un dossier d'outil ou de `moteur/` relance les pages (corpus réduit) des outils qui le chargent d'après `moteur/manifeste.json`, « tous » si on ne sait pas borner ; filière M avec la page des exponentielles ; `complet` inchangé (commandes identiques octet pour octet) ; suite complète code 0, listes identiques à P5 nom par nom (seuls écarts à la référence : les 17 de P4 et P5) ; Python 588 s, pages 974 s |
-| P7 | T9 : étude du chargement de Pyodide (rapport seul) | à faire |
+| P7 | T9 : étude du chargement de Pyodide (rapport seul) | **faite** (commit « Tests rapides P7 : … ») : rapport [`etude-pyodide.md`](etude-pyodide.md), aucun code modifié ; 122 chargements par suite, 6,9 s à chaud, 18,2 s pour la 1ʳᵉ page de chaque Chrome ; environ 47 % du temps des tests de pages. **Recommandation** : ne pas partager Pyodide entre les tests ; si l'on veut gagner, onglet de réserve puis cache de Chrome gardé d'une classe à la suivante (environ 1,5 min sur la suite de pages) |
 
 ## Référence (P0)
 
@@ -72,6 +72,12 @@ rapports) : [`journal.md`](journal.md).
 - **P6 et `--depuis`.** P6 rend `--depuis HEAD~1` **plus utile** (il relancerait aussi les pages des moteurs du commit, au prix de
   quelques minutes de plus) ; toujours pas ajouté (non tranché).
 
+- **P7, Pyodide (décision à prendre, `etude-pyodide.md` §5).** Faire dans une partie suivante (a) l'onglet de réserve (environ 35 s,
+  risque très faible, `navigateur.py` seul) ? (b) le cache de Chrome gardé d'une classe à la suivante (environ 45 à 60 s), ou rouvrir
+  T8 (Chrome partagé) au vu des mesures (T8 ne comptait pas les 11 s de la 1ʳᵉ page à froid de chaque Chrome) ? Confirmer l'abandon
+  du partage de Pyodide entre les tests (M8). Hors chantier : la pause de 0,7 s avant SymPy et `invalidate_caches` (0,3 s), qui
+  coûtent aussi à l'élève. En attendant (option qui affiche le moins) : rien n'est changé.
+
 ## Injectivité de la clé (P5, décision T5)
 
 Clé de `memo_racines.racines(s)` = (contexte de l'oracle, instantané de `s`). L'instantané est un tuple immuable qui commence par le
@@ -109,6 +115,9 @@ détaillée et pièges écartés (1 == 1.0 == True, assomptions SymPy, arbre mod
 - P6 : aucun instantané, aucun test ni aucun moteur modifié. Outil de test modifié : `tests/lancer.py` (chemin de `rapide` / `liste`
   seulement : `outils_des_moteurs`, `corpus_des_pages`, `outils_de_pages`). Simulations avant / après et preuve de `complet` inchangé :
   `journal.md`, « P6 ».
+
+- P7 : aucun instantané, aucun test, aucun code modifié. Nouveau : [`etude-pyodide.md`](etude-pyodide.md) (mesures, options classées,
+  recommandation, décisions). Mesures et scripts : `journal.md`, « P7 ».
 
 ## À reporter par l'enseignant dans CLAUDE.md
 
@@ -150,6 +159,6 @@ Procédure allégée du chef d'orchestre (décision T1 ; écrite aussi dans `doc
 
 ## Reprise après compactage
 
-P0, P1, P2 (deux commits), P3, P4, P5 et P6 commitées sur `tests-rapides` (rien poussé). Prochaine partie : **P7** (étude du chargement de Pyodide, rapport seul)
-(`decisions.md` §3). Contrôle d'une partie : `python3 tests/lancer.py verifier <dossier de complet --rapport>`. Pour reprendre : lire ce fichier, `decisions.md`, puis `git log --oneline main..HEAD` ; le détail est dans
+P0 à P7 (P2 en deux commits) commitées sur `tests-rapides` (rien poussé). Toutes les parties de `decisions.md` §3 sont faites ; reste la
+fin de session du chef d'orchestre (suite complète normale, puis avec `MEMO=0`, comparaison à la référence, résumé). Contrôle d'une partie : `python3 tests/lancer.py verifier <dossier de complet --rapport>`. Pour reprendre : lire ce fichier, `decisions.md`, puis `git log --oneline main..HEAD` ; le détail est dans
 `journal.md`. Chaque partie compare son rapport à `reference/` avec la commande ci-dessus.
