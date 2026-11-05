@@ -36,6 +36,10 @@ Tirée du chantier « Étude complète » (02–04.11.2026). Elle complète `CLA
 - **Un sous-agent par partie**, l'un après l'autre, jamais en parallèle (même dossier, mêmes instantanés, même suite).
 - Sous-agents de type **general-purpose**, avec **`model: "opus"`** ; jamais Explore.
 - Consigne de chaque sous-agent : lire `CLAUDE.md`, `decisions.md` et `suivi.md`, écrire son plan, exécuter, committer, rendre un rapport de 10 lignes au plus, avec le dossier de `complet --rapport`.
+- **Référence au P0** : sur la branche du chantier, avant toute modification, `python3 tests/lancer.py complet --rapport <dossier>`
+  puis `python3 tests/lancer.py reference <dossier>` (copie les listes dans `tests/reference/`, la référence par défaut de `verifier`,
+  après contrôle : suite verte et complète, lancée sur un commit de la branche, sans autre fichier modifié que dans `docs/` ou
+  `CLAUDE.md`) ; commiter `tests/reference/` avec le P0. Jamais automatique.
 - Le chef d'orchestre vérifie chaque partie par le **contrôle allégé** (chantier tests-rapides, décision T1) ; il ne relance plus la suite
   complète après chaque partie :
   1. le sous-agent lance sa suite complète d'avant commit avec `python3 tests/lancer.py complet --rapport <dossier>` (dossier hors du
@@ -44,14 +48,15 @@ Tirée du chantier « Étude complète » (02–04.11.2026). Elle complète `CLA
      `python3 tests/lancer.py verifier <dossier>` : il exige `VERDICT : ACCEPTÉ`. `verifier` refuse si le commit n'est pas exactement
      ce que la suite a testé (empreintes), si un autre fichier était modifié ou non suivi pendant le lancement, si un code de retour
      n'est pas 0, si un test disparaît ou est sauté en plus, si une issue se dégrade ou si des sous-tests manquent ;
-  3. il lance ensuite `python3 tests/lancer.py rapide`, un contrôle indépendant de quelques minutes (sur l'arbre propre d'après le
-     commit, il ne relance aujourd'hui que les tests de fumée : question ouverte du chantier tests-rapides) ;
+  3. il lance ensuite `python3 tests/lancer.py rapide --depuis HEAD~1`, un contrôle indépendant de quelques minutes : les tests Python
+     des fichiers du commit (dépendances d'import comprises) et les tests de fumée, plus les pages à corpus réduit des outils touchés
+     (`rapide` seul, sur l'arbre propre d'après le commit, ne relancerait que les tests de fumée) ;
   4. il note une ligne dans `journal.md`, section « Contrôles du chef d'orchestre » (commit, verdict, nombres, murs).
 - **Un test disparu fait refuser `verifier`.** Le chef d'orchestre n'accepte qu'un **renommage justifié dans `suivi.md`** (ancien nom →
   nouveau nom, raison) ; pour les parties suivantes, il compare alors au dossier de cette partie
   (`verifier <dossier> --reference <dossier de la partie acceptée>`). Tout autre refus : la partie est en échec (règles d'exécution).
 - **Une suite complète en fin de session** : le chef d'orchestre la relance lui-même sur le dernier commit
-  (`complet --rapport <dossier>`, puis `verifier <dossier>` et `python3 tests/comparer_listes.py <référence> <dossier>`).
+  (`complet --rapport <dossier>`, puis `verifier <dossier>` et `python3 tests/comparer_listes.py tests/reference <dossier>`).
 - Un dernier sous-agent écrit le résumé en tête de `suivi.md`, avec le texte rendu de l'exemple cible.
 - En lecture seule (audits, revues), plusieurs sous-agents peuvent travailler en parallèle.
 

@@ -17,8 +17,9 @@ M = empreintes (`git hash-object`) des fichiers modifiés ou non suivis au débu
     laissé hors du commit) fait REFUSER, sauf s'il est dans PERMIS_HORS_COMMIT (`CLAUDE.md`, que l'enseignant peut être en train de
     modifier et dont aucun test ne lit le contenu) ou dans DOCS_APRES : il est alors seulement listé.
 (c) Résultats. Codes de retour 0 (global, Python, pages ; les pages lancées) ; `CORPUS` et `OUTILS` non définis au lancement ; JUnit et
-    listes texte concordants ; puis, comparé au dossier de référence (par défaut docs/chantiers/tests-rapides/reference, la référence de
-    P0 ; `--reference` en désigne un autre), REFUS si un test collecté ou un résultat disparaît, si un test est sauté en plus, si une issue
+    listes texte concordants ; puis, comparé au dossier de référence (par défaut tests/reference, la référence du dépôt, rafraîchie
+    au P0 de chaque chantier par `lancer.py reference` ; `--reference` en désigne un autre), REFUS si un test collecté ou un résultat
+    disparaît, si un test est sauté en plus, si une issue
     change (seules xfail → passé et sauté → passé sont acceptées, et listées) ou si un nombre de sous-tests passés baisse. Un test
     ajouté (passé ou xfail), ou un nombre de sous-tests en hausse, est accepté et listé.
 
@@ -31,7 +32,7 @@ import subprocess
 import comparer_listes
 
 RACINE = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-REFERENCE = "docs/chantiers/tests-rapides/reference"
+REFERENCE = "tests/reference"                 # rafraîchie par `lancer.py reference <dossier>`, jamais automatiquement
 DOCS_APRES = re.compile(r"^docs/chantiers/[^/]+/(suivi|journal)\.md$")
 PERMIS_HORS_COMMIT = frozenset({"CLAUDE.md"})
 ENV_INTERDITS = ("CORPUS", "OUTILS")            # corpus réduit ou outils choisis : la suite n'est plus complète

@@ -6,6 +6,10 @@
     python3 tests/lancer.py python    # toute la suite Python seule
     python3 tests/lancer.py pages     # toute la suite de pages seule (CORPUS=reduit pour le corpus de la CI)
     python3 tests/lancer.py liste     # affiche ce que « rapide » lancerait, sans rien lancer
+    python3 tests/lancer.py rapide --depuis <commit>
+                                      # (ou liste --depuis) les fichiers modifiés depuis <commit> (par exemple HEAD~1) au lieu de HEAD :
+                                      # changements commités depuis ce commit, plus ceux de l'arbre et les non suivis ; pour le contrôle
+                                      # du chef d'orchestre après un commit
     python3 tests/lancer.py complet --rapport <dossier>
                                       # comme complet, et écrit en plus dans <dossier> (hors du dépôt, ou ignoré par git) : les deux JUnit
                                       # (python.xml, pages.xml), rapport.json (commit, empreintes des fichiers modifiés ou non suivis,
@@ -14,6 +18,13 @@
     python3 tests/lancer.py verifier <dossier> [--reference <dossier>] [--commit <rév>]
                                       # après le commit : contrôle le rapport de `complet --rapport` (empreintes du commit, autres
                                       # fichiers modifiés, codes, tests disparus ou dégradés par rapport à la référence) ; voir verifier.py
+    python3 tests/lancer.py reference <dossier>
+                                      # remplace la référence du dépôt (tests/reference, celle de verifier) par les listes de <dossier>,
+                                      # écrit par `complet --rapport` sur un commit de la branche, vert, complet, sans autre fichier modifié
+                                      # que dans docs/ ou CLAUDE.md ; jamais automatique : à lancer au P0 de chaque chantier, puis à commiter
+
+Variable PROCESSUS_PAGES (entier ≥ 1) : nombre de processus (Chrome) de la suite de pages, pour rapide, pages et complet ; absente : 2
+(Mac de l'enseignant, CI) ; 4 sur le PC. Une valeur invalide arrête la commande avant tout lancement (code 2).
 
 Le code de retour est celui de pytest (0 = tout est vert) : pas de pipe, donc rien n'est masqué (CLAUDE.md). Ce fichier ne s'appelle pas
 `test_*.py` : ni pytest ni unittest ne le collectent."""
@@ -39,6 +50,7 @@ OUTILS_PAGES = {"factorisation": "factorisation", "simplexe": "simplexe", "ensem
                 "exponentielles-logarithmes": "exponentielles-logarithmes"}
 OUTIL_M = "exponentielles-logarithmes-M"     # filière M de la page des exponentielles (tests/pages/rendu.py) : ses références sont à part
 MANIFESTE = "moteur/manifeste.json"          # fichiers Python que chaque page charge dans Pyodide
+PROCESSUS_PAGES_DEFAUT = 2                   # suite de pages sans la variable PROCESSUS_PAGES (Mac de l'enseignant, CI)
 UV = ["uv", "run", "-q", "--no-project", "--python", "3.12", "--with", "sympy==1.13.3", "--with", "mpmath==1.3.0",
       "--with", "websockets", "--with", "pytest", "--with", "pytest-xdist", "python", "-m", "pytest"]
 
@@ -47,9 +59,9 @@ def sh(*args):
     return subprocess.run(args, cwd=RACINE, capture_output=True, text=True, check=True).stdout
 
 
-def fichiers_modifies():
-    """Fichiers modifiés (indexés ou non) et non suivis, chemins relatifs à la racine."""
-    noms = set(sh("git", "diff", "--name-only", "HEAD").split())
+def fichiers_modifies(depuis="HEAD"):
+    """Fichiers modifiés depuis le commit `depuis` (commités ensuite, indexés ou non) et non suivis, chemins relatifs à la racine."""
+    noms = set(sh("git", "diff", "--name-only", depuis).split())
     noms |= set(sh("git", "ls-files", "--others", "--exclude-standard").split())
     return sorted(n for n in noms if os.path.exists(os.path.join(RACINE, n)))
 
@@ -148,6 +160,17 @@ def outils_de_pages(modifies):
     return outils
 
 
+def processus_pages():
+    """Nombre de processus de la suite de pages : PROCESSUS_PAGES (entier ≥ 1), 2 si la variable est absente ; ValueError sinon."""
+    valeur = os.environ.get("PROCESSUS_PAGES")
+    if valeur is None:
+        return PROCESSUS_PAGES_DEFAUT
+    if not re.fullmatch(r"[1-9][0-9]*", valeur):
+        raise ValueError(f"PROCESSUS_PAGES={valeur!r} : un entier ≥ 1 est attendu (par exemple PROCESSUS_PAGES=4), "
+                         f"ou la variable absente ({PROCESSUS_PAGES_DEFAUT} processus)")
+    return int(valeur)
+
+
 def lancer(arguments, env=None):
     commande = UV + arguments
     print("$", " ".join(commande), flush=True)
@@ -164,7 +187,7 @@ def pages(outils=None, reduit=False, en_plus=()):
         env["CORPUS"] = "reduit"
     if outils and "tous" not in outils:
         env["OUTILS"] = ",".join(sorted(outils))
-    return lancer(["tests/pages", "-n", "2", "--dist", "load", "-q", "-p", "no:cacheprovider", "-W", "ignore"] + list(en_plus), env)
+    return lancer(["tests/pages", "-n", str(processus_pages()), "--dist", "load", "-q", "-p", "no:cacheprovider", "-W", "ignore"] + list(en_plus), env)
 
 
 # --- complet --rapport : preuve du lancement (chantier tests-rapides, P0) -------------------------------------------------------
@@ -253,11 +276,83 @@ def complet_avec_rapport(chemin):
     return code
 
 
-def rapide(seulement_lister=False):
-    modifies = fichiers_modifies()
+# --- reference : rafraîchir la référence du dépôt (chantier portage-pc) ---------------------------------------------------------
+
+LISTES_REFERENCE = tuple(f"{n}-{s}.txt" for s in comparer_listes.SUITES for n in ("collecte", "resultats"))
+ORIGINE_REFERENCE = "origine.txt"
+HORS_TESTS = re.compile(r"^(docs/|CLAUDE\.md$)")    # aucun test ne lit ces fichiers : ils peuvent être modifiés pendant le lancement
+
+
+def motifs_refus_reference(dossier, rapport):
+    """Raisons de ne pas prendre ce rapport pour référence (liste vide : accepté)."""
+    motifs = []
+    head = rapport.get("head") or ""
+    if subprocess.run(["git", "cat-file", "-e", f"{head}^{{commit}}"], cwd=RACINE, capture_output=True).returncode:
+        motifs.append(f"commit de départ introuvable : {head or '(non noté)'}")
+    elif subprocess.run(["git", "merge-base", "--is-ancestor", head, "HEAD"], cwd=RACINE).returncode:
+        motifs.append(f"le commit du lancement ({head[:7]}) n'est pas dans l'historique de HEAD")
+    py, pa = rapport.get("python") or {}, rapport.get("pages") or {}
+    if rapport.get("code") != 0 or py.get("code") != 0 or pa.get("code") != 0 or not pa.get("lancee"):
+        motifs.append(f"codes de retour : global {rapport.get('code')}, Python {py.get('code')}, "
+                      f"pages {pa.get('code') if pa.get('lancee') else 'non lancées'} (0 exigé partout)")
+    env = rapport.get("environnement") or {}
+    motifs += [f"suite non complète : {k}={env[k]} au lancement" for k in verifier.ENV_INTERDITS if env.get(k) not in (None, "")]
+    for suite, b in (("python", py), ("pages", pa)):
+        if b.get("ecarts_junit") or b.get("ecarts_junit") is None:
+            motifs.append(f"{suite} : JUnit et extension discordants ou non comparés (rapport.json)")
+    fichiers = set(rapport.get("fichiers_modifies") or {}) | set(rapport.get("fichiers_modifies_fin") or {})
+    if rapport.get("fichiers_modifies") is None or rapport.get("fichiers_modifies_fin") is None:
+        motifs.append("rapport.json incomplet : fichiers modifiés au début ou à la fin non notés")
+    motifs += [f"{f} : modifié ou non suivi pendant le lancement (le lancement ne porte pas sur le commit seul)"
+               for f in sorted(fichiers) if not HORS_TESTS.match(f)]
+    return motifs
+
+
+def rafraichir_reference(chemin):
+    """Copie les listes d'un dossier de `complet --rapport` dans tests/reference, après contrôle ; code 0, 1 (refus) ou 2 (fichier manquant)."""
+    dossier = os.path.abspath(chemin)
+    cible = os.path.join(RACINE, verifier.REFERENCE)
+    manquants = [n for n in ("rapport.json",) + LISTES_REFERENCE if not os.path.exists(os.path.join(dossier, n))]
+    if manquants:
+        print(f"reference : fichier(s) absent(s) de {dossier} : {', '.join(manquants)} ; rien n'est changé")
+        return 2
+    with open(os.path.join(dossier, "rapport.json"), encoding="utf-8") as f:
+        rapport = json.load(f)
+    motifs = motifs_refus_reference(dossier, rapport)
+    if motifs:
+        print(f"reference : REFUSÉ, {verifier.REFERENCE} n'est pas changée :")
+        print("\n".join(f"  - {m}" for m in motifs))
+        return 1
+    if os.path.isdir(cible) and all(os.path.exists(os.path.join(cible, n)) for n in LISTES_REFERENCE):
+        variables = comparer_listes.lire_variables(cible)
+        for suite in comparer_listes.SUITES:
+            ecarts = comparer_listes.comparer_suite(cible, dossier, suite, variables)
+            print(f"{suite} : {len(ecarts)} différence(s) avec l'ancienne référence" + (" :" if ecarts else ""))
+            print("\n".join(verifier.coupe(ecarts)) if ecarts else "", end="\n" if ecarts else "")
+    os.makedirs(cible, exist_ok=True)
+    for nom in LISTES_REFERENCE:                    # soustests-variables.txt, s'il existe, est gardé tel quel
+        with open(os.path.join(dossier, nom), encoding="utf-8") as source, \
+                open(os.path.join(cible, nom), "w", encoding="utf-8") as copie:
+            copie.write(source.read())
+    lignes = [f"Référence de `python3 tests/lancer.py verifier` (et de comparer_listes.py), écrite par `python3 tests/lancer.py reference`.",
+              f"commit du lancement : {rapport['head']} (branche {rapport.get('branche')})",
+              f"lancement : {rapport.get('debut')} -> {rapport.get('fin')} ; Python {rapport['python'].get('duree_s')} s, "
+              f"pages {rapport['pages'].get('duree_s')} s",
+              f"environnement : " + ", ".join(f"{k}={v if v is not None else '(non défini)'}"
+                                              for k, v in sorted((rapport.get("environnement") or {}).items()))]
+    lignes += [f"{suite} : {comparer_listes.resume(cible, suite)}" for suite in comparer_listes.SUITES]
+    with open(os.path.join(cible, ORIGINE_REFERENCE), "w", encoding="utf-8") as f:
+        f.write("\n".join(lignes) + "\n")
+    print("\n".join(lignes[1:]))
+    print(f"reference : {verifier.REFERENCE} remplacée ; à commiter (git add {verifier.REFERENCE})")
+    return 0
+
+
+def rapide(seulement_lister=False, depuis="HEAD"):
+    modifies = fichiers_modifies(depuis)
     tests = tests_python_concernes(modifies)
     outils = outils_de_pages(modifies)
-    print("fichiers modifiés :", ", ".join(modifies) or "aucun")
+    print("fichiers modifiés" + (f" depuis {depuis}" if depuis != "HEAD" else "") + " :", ", ".join(modifies) or "aucun")
     print("tests Python :", ", ".join(os.path.basename(t) for t in tests))
     print("pages (corpus réduit) :", ", ".join(sorted(outils)) or "aucune")
     if seulement_lister:
@@ -270,10 +365,22 @@ def rapide(seulement_lister=False):
 
 def main(argv):
     commande = argv[1] if len(argv) > 1 else ""
-    if commande == "rapide":
-        return rapide()
-    if commande == "liste":
-        return rapide(seulement_lister=True)
+    if commande in ("rapide", "pages", "complet"):              # avant tout lancement : pas de suite Python perdue pour rien
+        try:
+            processus_pages()
+        except ValueError as erreur:
+            print(f"erreur : {erreur}")
+            return 2
+    if commande in ("rapide", "liste"):
+        options = argv[2:]
+        if options and (len(options) != 2 or options[0] != "--depuis" or options[1].startswith("-")):
+            print(__doc__)
+            return 2
+        depuis = options[1] if options else "HEAD"
+        if subprocess.run(["git", "rev-parse", "--verify", "-q", f"{depuis}^{{commit}}"], cwd=RACINE, capture_output=True).returncode:
+            print(f"erreur : --depuis {depuis} : commit introuvable")
+            return 2
+        return rapide(seulement_lister=commande == "liste", depuis=depuis)
     if commande == "python":
         return python()
     if commande == "pages":
@@ -289,6 +396,11 @@ def main(argv):
         return code if code else pages()
     if commande == "verifier":
         return verifier.main(argv[2:])
+    if commande == "reference":
+        if len(argv) != 3 or argv[2].startswith("--"):
+            print(__doc__)
+            return 2
+        return rafraichir_reference(argv[2])
     print(__doc__)
     return 2
 
