@@ -646,6 +646,115 @@ JUnit / extension : 0 écart. `environnement` : CORPUS, OUTILS, MEMO non défini
 à l'autre (environ ± 40 s). L'audit prévoyait environ 1 min. Pages : 979 s (P4 : 970 s), inchangé. Pas de regroupement `xdist_group`
 (décision T6).
 
+## P6 (05.11.2026) : `rapide` relance les pages des moteurs (T7)
+
+### Plan
+
+1. Constat (audit §M6) : `outils_de_pages` ignore tout `.py` ; un moteur modifié ne relance aucun test de pages, alors que les pages
+   chargent ces fichiers dans Pyodide.
+2. Source des dépendances : `moteur/manifeste.json`, qui liste pour chaque outil les fichiers Python que sa page charge (liste complète
+   et minimale, vérifiée par `test_manifeste.py`). Un `.py` d'un dossier d'outil ou de `moteur/` relance les pages de **chaque outil dont
+   le manifeste le cite** (module partagé : tous les outils qui le chargent). Si le fichier n'est cité par aucun outil, si un outil du
+   manifeste n'est pas connu de `lancer.py`, ou si le manifeste est illisible : **« tous »** (on ne sait pas borner : option la plus sûre).
+3. Seulement `rapide` / `liste` : `python()`, `pages()`, `complet`, `complet --rapport`, `verifier` ne sont pas touchés.
+4. Vérification : un banc d'essai hors du dépôt (scratchpad) exécute l'ancien `lancer.py` (HEAD) et le nouveau dans une copie de travail
+   jetable (`git worktree`, HEAD détaché) où les modifications sont simulées, une par une, arbre remis propre après chacune ; `liste`
+   avant / après. Pour `complet` : même banc, `subprocess.run` remplacé par un enregistreur, texte des commandes et variables d'environnement
+   de `complet`, `complet --rapport`, `python`, `pages` (avec et sans `CORPUS=reduit`) comparés avant / après.
+5. Suite complète `--rapport …/scratchpad/P6-rapport`, `comparer_listes.py`, `--collect-only -q` de chaque suite ; `suivi.md` ; commit ;
+   `verifier`.
+
+### Code (`tests/lancer.py`, seulement le chemin de `rapide` / `liste`)
+
+- **`outils_des_moteurs(modifies)`** (nouveau) : pour chaque `.py` modifié dont le premier dossier est un dossier de moteur
+  (`DOSSIERS_MOTEURS`) ou d'outil (`OUTILS_PAGES`), les outils dont l'entrée `fichiers` de `moteur/manifeste.json` le cite. Fichier
+  cité par aucun outil (par exemple `moteur/construire_roues.py`, ou un nouveau `.py` pas encore déclaré), outil du manifeste absent
+  d'`OUTILS_PAGES`, manifeste illisible : `{"tous"}`.
+- **`corpus_des_pages()`** (nouveau) : les modules de `tests/python` que les tests de pages importent, même de loin (aujourd'hui
+  `cas.py`, `cas_el.py` et `moteurs.py`, par `rendu.py` et `test_comportement.py`). Un de ces fichiers modifié : `{"tous"}`, comme un
+  fichier de `tests/pages/` (le corpus des pages change ; on ne sait pas le borner à un outil). Même lecture des imports que
+  `tests_python_concernes`.
+- **`outils_de_pages(modifies)`** : réunit les deux règles ci-dessus et les règles d'avant (inchangées) ; si « tous » est dans
+  l'ensemble, rend `{"tous"}` seul (affichage plus clair, même commande). **La page des exponentielles vient avec sa filière M**
+  (`OUTILS=…,exponentielles-logarithmes-M`) : sans ce nom, `test_rendu.py::test_exponentielles_logarithmes_filiere_m` est sauté
+  (« hors de OUTILS ») alors que `exp_log_m.py` est justement le moteur de cette filière. C'était déjà le cas pour une modification de
+  `exponentielles-logarithmes/index.html` : corrigé aussi (un test de plus, jamais de moins). Essai :
+  `CORPUS=reduit OUTILS=exponentielles-logarithmes,exponentielles-logarithmes-M`, `test_rendu.py` seul : 2 passés (6 sous-tests),
+  5 sautés, 23 s (avant : 1 passé, la filière M sautée). Aucune boucle des tests de pages ne parcourt `OUTILS` (vérifié : le nom M ne
+  sert qu'à des tests d'appartenance ; `test_largeurs.py` le compare déjà sans « -M »).
+- Docstring du module : ligne de `rapide`. Rien d'autre ne change (`python`, `pages`, `complet`, `complet_avec_rapport`, `verifier`,
+  `fichiers_modifies`, `tests_python_concernes` : identiques).
+- Pas de test ajouté à la suite : les listes doivent rester celles de la référence (+ 17 de P4 et P5). La vérification est le banc
+  ci-dessous (question notée dans `suivi.md`).
+
+### Vérification propre : `liste` sur des modifications simulées (banc hors du dépôt, limite 5 min par appel)
+
+Banc : `scratchpad/p6/banc.py` exécute une source de `lancer.py` avec `__file__` = `<copie>/tests/lancer.py` (donc `RACINE` = la
+copie) ; `scratchpad/p6/simuler.py` applique une modification à la fois dans une copie de travail jetable (`git worktree add --detach`,
+HEAD 46fd547), lance `liste` avec l'ancien `lancer.py` (`git show HEAD:tests/lancer.py`) puis avec le nouveau, et remet la copie
+propre (`git checkout -- .`, `git clean`, `git status --porcelain` vide vérifié) après chaque cas. L'arbre du dépôt n'a jamais porté de
+modification simulée ; la copie a été supprimée (`git worktree remove`). Durée totale : 6 s.
+
+| Modification simulée | Tests Python (avant = après) | Pages avant | Pages après |
+|---|---|---|---|
+| moteur d'un outil seul : `factorisation/factorisation.py` | 9 fichiers | aucune | factorisation |
+| moteur chargé aussi par l'étude complète : `limites-asymptotes/limites_asymptotes.py` | 28 | aucune | etude-complete, limites-asymptotes |
+| moteur de la filière M : `exponentielles-logarithmes/exp_log_m.py` | 17 | aucune | exponentielles-logarithmes, exponentielles-logarithmes-M |
+| module partagé `moteur/noyau.py` | 51 | aucune | derivee-variations, etude-complete, exponentielles-logarithmes (+M), factorisation, limites-asymptotes |
+| module partagé `moteur/nombres.py` | 27 | aucune | etude-complete, exponentielles-logarithmes (+M) |
+| module partagé `ensemble-definition/ensemble_def.py` | 62 | aucune | les 6 outils Python (+M) ; pas simplexe |
+| fichier commun de page `commun/outil.js` | 3 (fumée) | tous | tous |
+| page d'un outil `exponentielles-logarithmes/index.html` | 3 | exponentielles-logarithmes | exponentielles-logarithmes (+M) |
+| test Python seul `tests/python/test_memo.py` | 4 | aucune | aucune |
+| doc seul `docs/methode-chantiers.md` | 3 | aucune | aucune |
+| corpus des pages `tests/python/cas_el.py` | 17 | aucune | tous |
+| `.py` hors manifeste `moteur/construire_roues.py` | 3 | aucune | tous |
+| nouveau `.py` non suivi `factorisation/essai_p6.py` | 3 | aucune | tous |
+| `moteur/manifeste.json` | 3 | tous | tous |
+
+La sélection des tests Python est identique avant / après dans tous les cas (fonction non modifiée). `rapide` enregistré (même banc,
+`subprocess.run` remplacé) sur `exp_log_m.py` : même commande Python avant / après ; après, une commande de pages en plus,
+`pytest tests/pages -n 2 --dist load …` avec `CORPUS=reduit`, `OUTILS=exponentielles-logarithmes,exponentielles-logarithmes-M`.
+
+### `complet` inchangé (preuve)
+
+Même banc, `subprocess.run` remplacé par un enregistreur pour les appels `uv run` (texte de la commande, variables d'environnement qui
+diffèrent de l'environnement courant, dossier de lancement) ; appels `git` réels. Commandes `complet`, `complet --rapport <dossier>`,
+`python`, `pages`, `pages` avec `CORPUS=reduit`, ancien et nouveau `lancer.py` : sorties **identiques octet pour octet**
+(`diff scratchpad/p6/commandes-avant.txt scratchpad/p6/commandes-apres.txt` vide). `complet` lance exactement
+`… pytest tests/python -n auto -q -p no:cacheprovider -W ignore` puis `… pytest tests/pages -n 2 --dist load -q -p no:cacheprovider
+-W ignore`, sans variable ajoutée.
+
+### `--depuis` (question ouverte de P2)
+
+P6 rend `rapide` plus utile pendant le travail (avant le commit), mais ne change rien à l'arbre propre d'après le commit : là, `rapide`
+ne voit toujours aucun fichier modifié et ne relance que la fumée. Une base `--depuis HEAD~1` serait donc **plus utile** qu'avant :
+elle relancerait aussi les pages des moteurs du commit (avec un coût plus élevé : jusqu'à six pages à corpus réduit pour `noyau.py` ou
+`ensemble_def.py`). Non ajoutée (non tranchée par `decisions.md`).
+
+### Temps natif
+
+P6 ne touche aucun moteur. `mesurer_temps.py` : Ex7 0,59 s ; a 0,03 s ; b 0,35 s ; c 0,26 s ; d 0,22 s (P5 : 0,58 ; 0,03 ; 0,36 ;
+0,25 ; 0,23) : aucune hausse.
+
+### Suite complète (`complet --rapport …/scratchpad/P6-rapport`, départ 46fd547 + `lancer.py`, `journal.md`)
+
+| | Python : mur | Python : résultat | Pages : mur | Pages : résultat | Code |
+|---|---|---|---|---|---|
+| `complet --rapport …/scratchpad/P6-rapport` (`MEMO` non défini) | **588 s** | 1328 passés, 1 xfail, 103 161 sous-tests | **974 s** | 122 passés, 2 554 sous-tests | 0 |
+
+JUnit / extension : 0 écart. `environnement` : CORPUS, OUTILS, MEMO non définis. Empreinte de `tests/lancer.py` identique au début et
+à la fin du lancement (seuls `journal.md` et `suivi.md` ont été écrits pendant).
+
+**Comparaisons** :
+- `comparer_listes.py reference P6-rapport` : pages identiques nom par nom ; Python : **les seuls écarts sont les 17 tests ajoutés par
+  P4 et P5** (34 lignes : 17 collectés, 17 passés) ; les 1312 tests de la référence ont la même issue et le même nombre de sous-tests.
+- `comparer_listes.py P5-rapport P6-rapport` : **identique nom par nom** (Python et pages, sous-tests compris).
+- `--collect-only -q` de chaque suite, lancée séparément (code 0) : Python 1329 identifiants = référence + les 17 (aucun manquant),
+  égaux à la collecte du rapport ; pages 122 identifiants identiques à la référence.
+
+Murs : Python 588 s (P5 : 570 s), pages 974 s (P5 : 979 s) : inchangés (bruit), comme attendu (`complet` n'a pas changé).
+
 ## Contrôles du chef d'orchestre
 
 P0 (1feb6cf) : suite complète --rapport, code 0 ; Python 1311 passés + 1 xfail, 103 033 sous-tests, 737 s ; pages 122 passés, 2 554 sous-tests, 950 s ; comparer_listes identique nom par nom ; --collect-only -q des deux suites identique à la référence.
@@ -657,3 +766,5 @@ P2 (55daa1f, 1f34e3c) : verifier ACCEPTÉ sur les deux commits ; essai du chef d
 P3 (f140f1c) : verifier ACCEPTÉ ; rapide code 0 (8 s) ; sélection de rapide appliquée aux fichiers du commit (test_redaction_bh_3m.py + fumée) code 0 en 54 s ; diff relu (mêmes entrées, même filtre, copie profonde).
 
 P4 (7186b6d) : verifier ACCEPTÉ sur les deux rapports (MEMO lu correctement, 6 tests ajoutés listés) ; rapide code 0 ; sélection de rapide appliquée aux 15 fichiers du commit : code 0 en 105 s, et avec MEMO=0 code 0 en 129 s ; memo.py relu.
+
+P5 (46fd547) : verifier ACCEPTÉ (17 ajouts listés) ; rapide code 0 ; sélection de rapide appliquée aux 10 fichiers du commit : code 0 en 254 s ; avec MEMO=0, la même sélection dépasse la limite de 5 min du contrôle (pas un échec de test ; couvert par la suite MEMO=0 de fin de session).

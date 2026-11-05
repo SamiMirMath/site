@@ -21,7 +21,7 @@ rapports) : [`journal.md`](journal.md).
 | P3 | T3 : `TestStructure` (calcul une fois par classe) | **faite** (commit « Tests rapides P3 : … ») : copie profonde par test ; fichier seul 121 s → 44 s ; mur Python 670 s ; listes et sous-tests identiques |
 | P4 | T4 : `memo.py`, test de garde, `MEMO=0` | **faite** (commit « Tests rapides P4 : … ») : 9 fichiers sans mock passent par `memo` ; 6 tests ajoutés (`test_memo.py`, `test_memo_garde.py`) ; listes identiques avec et sans `MEMO=0` (seuls écarts à la référence : les 6 ajoutés) ; Python 660 s (cache) / 672 s (`MEMO=0`) |
 | P5 | T5 : cache de `racines` | **faite** (commit « Tests rapides P5 : … ») : `memo_racines.py` ; 9 appels de 4 fichiers passent par le cache ; `racines` inchangée (empreinte gardée) ; avec et sans cache : 563 clés, 695 racines, 0 écart ; 11 tests ajoutés ; listes identiques (seuls écarts : les ajouts de P4 et P5) ; Python 570 s (P4 : 660 s) |
-| P6 | T7 : `rapide` et pages des moteurs | à faire |
+| P6 | T7 : `rapide` et pages des moteurs | **faite** (commit « Tests rapides P6 : … ») : un `.py` modifié d'un dossier d'outil ou de `moteur/` relance les pages (corpus réduit) des outils qui le chargent d'après `moteur/manifeste.json`, « tous » si on ne sait pas borner ; filière M avec la page des exponentielles ; `complet` inchangé (commandes identiques octet pour octet) ; suite complète code 0, listes identiques à P5 nom par nom (seuls écarts à la référence : les 17 de P4 et P5) ; Python 588 s, pages 974 s |
 | P7 | T9 : étude du chargement de Pyodide (rapport seul) | à faire |
 
 ## Référence (P0)
@@ -60,6 +60,18 @@ rapports) : [`journal.md`](journal.md).
   La garde de P4 n'est pas touchée ; `test_memo_racines_garde.py` admet `setattr` seulement sous cette forme (classe `TestCase` du
   fichier, nom en `test_`). À confirmer.
 
+- **P6, filière M.** `rapide` ajoute `exponentielles-logarithmes-M` à `OUTILS` dès que la page des exponentielles est relancée (moteur
+  ou page) : sans ce nom, `test_rendu.py::test_exponentielles_logarithmes_filiere_m` était sauté, aussi pour une page modifiée (avant
+  P6). Un test de plus, jamais de moins. À confirmer.
+- **P6, corpus des pages.** Un module de `tests/python` importé par les tests de pages (`cas.py`, `cas_el.py`, `moteurs.py`) relance
+  maintenant toutes les pages (corpus réduit), comme un fichier de `tests/pages/`. Un `.py` d'un dossier d'outil que le manifeste ne
+  cite pas (`moteur/construire_roues.py`, nouveau fichier) donne aussi « tous » (option la plus sûre). À confirmer.
+- **P6, pas de test dans la suite.** La règle de `rapide` n'est couverte par aucun test de la suite (les listes doivent rester celles de
+  la référence + 17) : seulement par le banc de simulations noté dans `journal.md`, « P6 ». Faut-il un test (`test_lancer.py`) dans un
+  chantier suivant ?
+- **P6 et `--depuis`.** P6 rend `--depuis HEAD~1` **plus utile** (il relancerait aussi les pages des moteurs du commit, au prix de
+  quelques minutes de plus) ; toujours pas ajouté (non tranché).
+
 ## Injectivité de la clé (P5, décision T5)
 
 Clé de `memo_racines.racines(s)` = (contexte de l'oracle, instantané de `s`). L'instantané est un tuple immuable qui commence par le
@@ -94,12 +106,22 @@ détaillée et pièges écartés (1 == 1.0 == True, assomptions SymPy, arbre mod
   `memo_racines.racines(s)` et les imports) : `test_exp_log_m`, `test_exp_log_m_t36`, `test_exercices_el_m`, `test_explog_3c`.
   Détail : `journal.md`, « P5 ».
 
+- P6 : aucun instantané, aucun test ni aucun moteur modifié. Outil de test modifié : `tests/lancer.py` (chemin de `rapide` / `liste`
+  seulement : `outils_des_moteurs`, `corpus_des_pages`, `outils_de_pages`). Simulations avant / après et preuve de `complet` inchangé :
+  `journal.md`, « P6 ».
+
 ## À reporter par l'enseignant dans CLAUDE.md
 
 Texte proposé (décision T10 : Claude Code ne modifie pas `CLAUDE.md`), pour la section « Commandes de test », à la place de la ligne
 « Mesures du 29.10.2026 … » :
 
 ```
+- `rapide` (à la place de la ligne actuelle) : les tests Python des fichiers modifiés (`git diff HEAD` + fichiers non suivis, dépendances
+  d'import comprises) plus les tests de fumée (manifeste, accueil, source unique) ; les tests de pages à corpus réduit si une page, un
+  fichier commun ou un test de page est touché, et aussi pour chaque outil dont un moteur Python chargé par la page change (d'après
+  `moteur/manifeste.json` : un module partagé relance tous les outils qui le chargent ; toutes les pages si on ne sait pas borner, ou
+  si un module du corpus des pages, `cas.py`, `cas_el.py`, `moteurs.py`, change). La page des exponentielles vient avec sa filière M.
+  `liste` affiche ce que `rapide` lancerait, sans rien lancer. Pour travailler : ne remplace pas la suite complète avant un commit.
 - `complet --rapport <dossier>` : comme `complet` (mêmes commandes, même code de retour), et écrit en plus dans <dossier> (hors du
   dépôt, par exemple le scratchpad) les JUnit, les listes de tests (collectés, issues, sous-tests) et rapport.json (commit de départ,
   empreintes des fichiers modifiés ou non suivis au début et à la fin, codes, durées, CORPUS/OUTILS/MEMO). C'est la forme à utiliser
@@ -121,13 +143,13 @@ Texte proposé (décision T10 : Claude Code ne modifie pas `CLAUDE.md`), pour la
 Procédure allégée du chef d'orchestre (décision T1 ; écrite aussi dans `docs/methode-chantiers.md`, « Organisation de nuit ») :
 1. le sous-agent lance `python3 tests/lancer.py complet --rapport <dossier>` avant son commit et donne `<dossier>` dans son rapport ;
 2. le chef d'orchestre : `git log --oneline -3`, puis `python3 tests/lancer.py verifier <dossier>` (`VERDICT : ACCEPTÉ` exigé), puis
-   `python3 tests/lancer.py rapide` ; une ligne dans `journal.md`, « Contrôles du chef d'orchestre » ;
+   `python3 tests/lancer.py rapide` (sur l'arbre propre d'après le commit : tests de fumée seulement) ; une ligne dans `journal.md`, « Contrôles du chef d'orchestre » ;
 3. un test disparu fait refuser `verifier` ; seul un renommage justifié dans `suivi.md` (ancien nom → nouveau nom, raison) est accepté,
    et les parties suivantes se comparent alors au dossier de cette partie (`--reference`) ;
 4. une seule suite complète relancée par le chef d'orchestre, en fin de session (et une avec `MEMO=0`, decisions §3).
 
 ## Reprise après compactage
 
-P0, P1, P2 (deux commits), P3, P4 et P5 commitées sur `tests-rapides` (rien poussé). Prochaine partie : **P6** (`rapide` et pages des moteurs), puis P7
-dans l'ordre de `decisions.md` §3. Contrôle d'une partie : `python3 tests/lancer.py verifier <dossier de complet --rapport>`. Pour reprendre : lire ce fichier, `decisions.md`, puis `git log --oneline main..HEAD` ; le détail est dans
+P0, P1, P2 (deux commits), P3, P4, P5 et P6 commitées sur `tests-rapides` (rien poussé). Prochaine partie : **P7** (étude du chargement de Pyodide, rapport seul)
+(`decisions.md` §3). Contrôle d'une partie : `python3 tests/lancer.py verifier <dossier de complet --rapport>`. Pour reprendre : lire ce fichier, `decisions.md`, puis `git log --oneline main..HEAD` ; le détail est dans
 `journal.md`. Chaque partie compare son rapport à `reference/` avec la commande ci-dessus.

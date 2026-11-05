@@ -1,6 +1,7 @@
 """Commandes de test du dépôt (Python seulement, sans dépendance : les tests sont lancés par `uv`).
 
-    python3 tests/lancer.py rapide    # les tests des fichiers modifiés (git) + tests de fumée ; quelques minutes au plus
+    python3 tests/lancer.py rapide    # les tests des fichiers modifiés (git) + tests de fumée ; pages à corpus réduit des outils dont
+                                      # une page ou un moteur Python chargé par la page (moteur/manifeste.json) est modifié
     python3 tests/lancer.py complet   # toute la suite Python puis toute la suite de pages (parallèles) ; code de retour propagé
     python3 tests/lancer.py python    # toute la suite Python seule
     python3 tests/lancer.py pages     # toute la suite de pages seule (CORPUS=reduit pour le corpus de la CI)
@@ -36,6 +37,8 @@ FUMEE_PYTHON = ("test_manifeste.py", "test_accueil.py", "test_source_unique.py")
 OUTILS_PAGES = {"factorisation": "factorisation", "simplexe": "simplexe", "ensemble-definition": "ensemble-definition",
                 "derivee-variations": "derivee-variations", "limites-asymptotes": "limites-asymptotes", "etude-complete": "etude-complete",
                 "exponentielles-logarithmes": "exponentielles-logarithmes"}
+OUTIL_M = "exponentielles-logarithmes-M"     # filière M de la page des exponentielles (tests/pages/rendu.py) : ses références sont à part
+MANIFESTE = "moteur/manifeste.json"          # fichiers Python que chaque page charge dans Pyodide
 UV = ["uv", "run", "-q", "--no-project", "--python", "3.12", "--with", "sympy==1.13.3", "--with", "mpmath==1.3.0",
       "--with", "websockets", "--with", "pytest", "--with", "pytest-xdist", "python", "-m", "pytest"]
 
@@ -86,9 +89,48 @@ def tests_python_concernes(modifies):
     return sorted(tests)
 
 
-def outils_de_pages(modifies):
-    """Outils dont une page (HTML, JS, CSS) est modifiée ; 'tous' si un fichier commun l'est."""
+def outils_des_moteurs(modifies):
+    """Outils dont la page charge (dans Pyodide) un .py modifié d'un dossier d'outil ou de moteur/, d'après moteur/manifeste.json
+    (liste complète et minimale, vérifiée par test_manifeste.py) ; un module partagé donne tous les outils qui le chargent. 'tous' si on
+    ne sait pas borner : fichier cité par aucun outil, outil du manifeste inconnu ici, manifeste illisible."""
+    moteurs = [n for n in modifies if n.endswith(".py") and n.split("/")[0] in set(DOSSIERS_MOTEURS) | set(OUTILS_PAGES)]
+    if not moteurs:
+        return set()
+    try:
+        with open(os.path.join(RACINE, MANIFESTE), encoding="utf-8") as f:
+            charges = {outil: set(o["fichiers"]) for outil, o in json.load(f)["outils"].items()}
+    except (OSError, ValueError, KeyError, TypeError, AttributeError):
+        return {"tous"}
     outils = set()
+    for n in moteurs:
+        concernes = {outil for outil, fichiers in charges.items() if n in fichiers}
+        if not concernes or not concernes <= set(OUTILS_PAGES):
+            return {"tous"}
+        outils |= {OUTILS_PAGES[o] for o in concernes}
+    return outils
+
+
+def corpus_des_pages():
+    """Modules de tests/python que les tests de pages importent, même de loin (corpus des pages : cas.py, cas_el.py…)."""
+    modules = {nom: chemin for nom, chemin in modules_du_depot().items() if chemin.startswith("tests/python/")}
+    atteints = set()
+    for nom in sorted(os.listdir(os.path.join(RACINE, "tests/pages"))):
+        if nom.endswith(".py"):
+            atteints |= imports(f"tests/pages/{nom}") & set(modules)
+    a_lire = list(atteints)
+    while a_lire:
+        for dep in imports(modules[a_lire.pop()]) & set(modules):
+            if dep not in atteints:
+                atteints.add(dep)
+                a_lire.append(dep)
+    return {modules[n] for n in atteints}
+
+
+def outils_de_pages(modifies):
+    """Outils dont une page (HTML, JS, CSS) ou un moteur Python chargé par la page est modifié ; 'tous' si un fichier commun, un test de
+    pages ou un module de leur corpus l'est. La page des exponentielles et logarithmes vient avec sa filière M (références à part)."""
+    outils = outils_des_moteurs(modifies)
+    corpus = corpus_des_pages()
     for n in modifies:
         haut = n.split("/")[0]
         if haut in OUTILS_PAGES and not n.endswith(".py"):
@@ -97,6 +139,12 @@ def outils_de_pages(modifies):
             outils.add("tous")
         elif n.startswith("tests/pages/") and n.endswith(".py"):
             outils.add("tous")
+        elif n in corpus:
+            outils.add("tous")
+    if "tous" in outils:
+        return {"tous"}
+    if "exponentielles-logarithmes" in outils:
+        outils.add(OUTIL_M)
     return outils
 
 
