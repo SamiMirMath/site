@@ -504,6 +504,148 @@ appelants de l'outil Limites (`test_redaction_limites`, `test_vocabulaire`, `tes
 des mock et restent hors du cache (décision T4, par fichier entier), et P3 avait déjà pris la plus grosse répétition (`TestStructure`).
 Murs des quatre suites : Python 660 / 672 s, pages 970 / 971 s (P3 : 670 et 985 s).
 
+## P5 (05.11.2026) : cache de l'oracle `racines` (T5)
+
+### Plan
+
+1. `racines(s)` (`tests/python/test_exp_log_m.py`) n'est **pas modifiée** (ni signature, ni corps, ni tolérances, ni grille). Elle lit
+   `s.g` et `s.d` (par `ecart`), les arbres de `exp_log` (par `evaluer`) et le contexte `MP` (30 chiffres).
+2. Nouveau module de test `tests/python/memo_racines.py`, sur le modèle de `memo.py` : `racines(s)` appelle
+   `test_exp_log_m.racines(s)` une fois par clé et par processus, garde une copie profonde du résultat et **rend une copie profonde à
+   chaque appel** ; une exception n'est jamais gardée ; `MEMO=0` (lue à chaque appel) : appel direct, rien n'est gardé. Aucun
+   attribut n'est remplacé. Module à part (et non `memo.py`) : les quatre fichiers appelants créent leurs méthodes de test par
+   `setattr(ClasseDeTest, …)`, et la garde de P4 interdit le mot `setattr` dans un fichier qui importe `memo` ; on ne touche pas à
+   cette garde (ce serait l'affaiblir).
+3. Clé : instantané **immuable et structurel** de tout l'argument (la `Saisie` entière : genre, g, d, inconnue, paramètres ; chaque
+   nœud par son **type exact** pris dans une liste fermée et **tous** ses champs ; feuilles : `str`, `None`, `Fraction` par numérateur
+   et dénominateur, `tuple`), plus le contexte de l'oracle (fonctions `racines`, `ecart`, `evaluer`, objet `MP`, sa précision et son
+   arrondi, classes de nœuds lues dans `exp_log` au moment de l'appel). Tout autre type (flottant, entier, SymPy, sous-classe…) :
+   pas de clé, **appel direct** de l'oracle. Démonstration d'injectivité : ci-dessous, « Clé ».
+4. Appelants : `racines(s)` → `memo_racines.racines(s)` aux 9 appels des 4 fichiers (`test_exp_log_m`, `test_exp_log_m_t36`,
+   `test_exercices_el_m`, `test_explog_3c`) ; rien d'autre ne change (mêmes entrées, mêmes boucles, mêmes `subTest`, mêmes tolérances).
+5. Test ajouté `tests/python/test_memo_racines.py` : copie profonde égale à l'oracle ; un seul appel de l'oracle par clé (cache actif) ;
+   `MEMO=0` appelle l'oracle à chaque fois et ne garde rien ; clé (types hors liste → appel direct ; arbre modifié après l'appel →
+   nouvelle clé) ; `racines` non modifiée (empreinte SHA-256 de son texte) ; et, comme en P4, un fichier de garde statique à part
+   (`test_memo_racines_garde.py`, qui n'importe pas `memo_racines`) : fichiers qui importent `memo_racines`, aucun mock, `setattr`
+   seulement sur une classe de test du fichier, aucun fichier avec mock ne l'atteint, aucun moteur ne l'importe.
+6. Vérification propre : les 4 fichiers lancés avec une extension de mesure (scratchpad) qui, en fin de session de chaque processus,
+   reconstruit l'argument de **chaque clé gardée**, rappelle l'oracle sans cache et compare résultat par résultat (longueur, chaque `mpf`
+   exactement égal) ; appels directs (hors clé) comptés par `sys.monitoring`. Lots sous 5 minutes.
+7. Suite complète `--rapport …/scratchpad/P5-rapport`, `comparer_listes.py`, `--collect-only -q` de chaque suite ; temps natif ;
+   `suivi.md` ; commit ; `verifier`.
+
+### Code
+
+- **`tests/python/memo_racines.py`** (nouveau) : `racines(s)`, `cle(s)`, `figer(v)`, `contexte(o)`, `actif()` (faux si `MEMO=0`, même
+  interrupteur que `memo.py`), `vider()`, `oracle()` (importe `test_exp_log_m` à l'appel : ce fichier importe `memo_racines`). Valeur
+  gardée = `copy.deepcopy(test_exp_log_m.racines(s))` ; chaque appel rend un nouveau `copy.deepcopy` (les `mpf` copiés gardent leur type
+  et leur contexte `MP`, essai fait). Exception de l'oracle : rien n'est gardé. `MEMO=0` ou argument hors clé : `return o.racines(s)`.
+  Le module n'importe pas `memo` et ne remplace aucun attribut.
+- **Appelants** (9 appels dans 4 fichiers) : `racines(s)` → `memo_racines.racines(s)` ; `from test_exp_log_m import …, racines` →
+  `import memo_racines` + même import sans `racines` (3 fichiers) ; `import memo_racines` ajouté à `test_exp_log_m.py`. Corps de
+  `racines`, de `ecart` et d'`evaluer` inchangés (`git diff` : seules les lignes d'import et d'appel changent).
+- **Pourquoi pas dans `memo.py`** : les 4 fichiers créent des méthodes de test par `setattr(TestX, "test_…", …)` ; la garde de P4
+  (`test_memo_garde.py`) interdit le mot `setattr` dans un fichier qui importe `memo`. Elle n'est pas modifiée. `import memo_racines`
+  n'est pas lu comme `import memo` par cette garde (`memo\b`).
+
+### Clé (démonstration d'injectivité)
+
+Clé = `(contexte(o), figer(s))`, où `o` est le module `test_exp_log_m` au moment de l'appel.
+
+1. **`figer` est injectif.** `figer(v)` commence toujours par le **type exact** de `v`, puis : pour un nœud (`Nb`, `Var`, `E`, `Pi`,
+   `Neg`, `Op`, `Pow`, `Fn`, `Log`, `Defini`, par `type(v) in …`, donc sans sous-classe), `figer` de **tous** ses champs (`__slots__`
+   de la classe et de ses parents ; ces classes n'ont pas de `__dict__`, ce qui est vérifié : un objet qui en aurait un est hors clé) ;
+   pour la `Saisie` (namedtuple : genre, g, d, inconnue, paramètres) et un `tuple`, `figer` de chaque élément ; pour une `Fraction`, son
+   numérateur et son dénominateur (forme réduite, donc égalité de valeur ⇔ égalité des deux entiers) ; pour une `str`, sa valeur ; pour
+   `None`, rien. **Tout autre type lève `HorsCle`** et l'oracle est appelé directement (aucune clé, rien de gardé). Par récurrence sur la
+   profondeur : `figer(u) == figer(v)` ⇒ `type(u) is type(v)` et champs égaux un à un ⇒ `u` et `v` sont indiscernables pour toute
+   fonction qui ne lit que leurs types et leurs champs.
+2. **Pièges écartés.** Flottants, entiers, booléens (`1 == 1.0 == True`, mêmes hachages) : hors clé, jamais confondus. SymPy : aucun
+   objet SymPy dans les arbres d'`exp_log` (`Nb.val` est une `Fraction`) ; un objet SymPy serait hors clé, donc la question des
+   assomptions (deux expressions égales en texte, différentes en assomptions) ne se pose pas. L'égalité `Noeud.__eq__` d'`exp_log`
+   (qui ignore `Nb.dec` et compare les noms de types) n'est **pas** utilisée : la clé est plus fine (elle distingue même `dec` et
+   `pct`, ce qui ne coûte que des appels en plus).
+3. **Arguments.** `racines(s)` a un seul paramètre, sans valeur par défaut ni mot-clé ; `memo_racines.racines(s)` a la même signature
+   et passe `s` tel quel. `racines` ne lit de `s` que `s.g` et `s.d` (par `ecart`) ; la clé contient toute la `Saisie`.
+4. **Contexte.** Hors de `s`, `racines` dépend de `ecart` et `evaluer` (noms globaux lus à l'appel), du contexte `MP` (objet, précision
+   103 bits, 30 chiffres, arrondi `'n'`) et des classes de nœuds qu'`evaluer` lit dans `exp_log` à l'appel : tout est dans la clé
+   (fonctions et objet `MP` par identité). La grille, la bissection et les tolérances sont des constantes du corps de `racines`, dont
+   l'empreinte est gardée par `test_memo_racines.py` (et la fonction elle-même est dans la clé).
+5. **Déterminisme.** `racines` est une fonction pure de ce qui précède : pas de hasard, ensemble de points trié, mpmath déterministe à
+   précision fixée.
+6. **Instantané.** La clé est un tuple immuable construit à l'appel ; modifier l'arbre ensuite ne change pas la clé gardée (test
+   `test_un_arbre_modifie_apres_l_appel_donne_une_nouvelle_cle`), alors qu'un arbre (mutable) pris comme clé l'aurait faussée.
+
+Donc deux appels de clés égales ont des arguments indiscernables, le même code et le même contexte : ils donnent nécessairement le même
+résultat.
+
+### Tests ajoutés
+
+- `tests/python/test_memo_racines.py` : `TestOracleIntact::test_racines_n_est_pas_modifiee` (SHA-256 du texte de `racines` =
+  `99e567c5…1383`, le même que les lignes 122–147 de `test_exp_log_m.py` au commit 7186b6d ; signature `(s)` ; c'est bien elle que le
+  cache appelle) ; `TestMemoRacines::test_copie_profonde_egale_a_l_oracle`, `::test_cache_actif_l_oracle_n_est_appele_qu_une_fois_par_cle`,
+  `::test_memo_0_appelle_vraiment_l_oracle_a_chaque_fois` ; `TestCle::test_saisies_egales_meme_cle_saisies_differentes_cles_differentes`,
+  `::test_un_objet_hors_des_types_prevus_n_a_pas_de_cle`, `::test_un_arbre_modifie_apres_l_appel_donne_une_nouvelle_cle`,
+  `::test_le_contexte_mpmath_fait_partie_de_la_cle`. Appels de l'oracle comptés par `sys.monitoring` (événement `PY_START` posé sur le
+  seul code de `racines` : observateur, rien n'est remplacé ; avec `sys.setprofile`, le fichier prenait 52 s, 15 s ainsi).
+- `tests/python/test_memo_racines_garde.py` (n'importe pas `memo_racines`) :
+  `TestGardeMemoRacines::test_aucun_fichier_qui_importe_memo_racines_ne_contient_de_mock` (liste explicite `FICHIERS_MEMO_RACINES` ;
+  ni `mock|patch|monkeypatch|delattr` ; `setattr` seulement en appel `setattr(C, "test_…", …)` avec `C` classe `TestCase` du fichier ;
+  aucune affectation d'attribut d'un moteur, de `memo_racines` ou de `test_exp_log_m`), `::test_aucun_fichier_avec_mock_n_importe_un_fichier_qui_importe_memo_racines`,
+  `::test_memo_racines_reste_un_module_de_test`. Fonctions communes reprises de `test_memo_garde.py` (import, sans le modifier).
+- **Essais négatifs** (arbre remis ensuite) : `import memo_racines` ajouté à `test_garde_fou_limites.py` (avec mock) → les deux premiers
+  tests échouent ; fichier factice → `setattr(el, …)`, `setattr(TestFoo, "pas_test", …)`, `setattr(Autre, "test_y", …)` (classe non
+  `TestCase`), `f = setattr` signalés ; `el.Nb = None`, `MP.dps = 40` (MP importé de `test_exp_log_m`), `memo_racines._RACINES = {}`,
+  `del racines.x` signalés.
+
+### Vérification propre : avec et sans cache, pour toutes les clés (4 lots, `-n auto`, limite 5 min chacun)
+
+Extension de vérification hors du dépôt (`scratchpad/p5plugin/p5_verif.py`, chargée par `-p p5_verif`). Dans chaque processus :
+entrées dans `memo_racines.racines` et dans l'oracle comptées par `sys.monitoring` ; en fin de session, pour **chaque clé gardée**,
+l'argument est reconstruit depuis la clé (types exacts, champs un à un), `figer(reconstruit) == clé` et `contexte` inchangé sont
+vérifiés, l'oracle est rappelé **sans cache** et comparé au résultat gardé (longueur ; pour chaque racine : même type, `==` exact et
+même `repr` à 30 chiffres).
+
+| Lot | Mur (vérification comprise) | Code | Appels du cache | Appels de l'oracle | Clés | Racines comparées | Écarts |
+|---|---|---|---|---|---|---|---|
+| `test_exp_log_m.py` | 149 s | 0 | 138 | 136 | 136 | 165 | 0 |
+| `test_explog_3c.py` | 184 s | 0 | 320 | 221 | 221 | 266 | 0 |
+| `test_exp_log_m_t36.py` | 95 s | 0 | 152 | 112 | 112 | 130 | 0 |
+| `test_exercices_el_m.py` | 113 s | 0 | 100 | 94 | 94 | 134 | 0 |
+| **Total** | | | **710** | **563** | **563** | **695** | **0** |
+
+(Clés comptées par processus, sommées sur les 4 processus de chaque lot.) Appels de l'oracle = clés partout : **aucun appel hors clé**
+(tous les arguments de la suite sont dans les types prévus) et aucune exception. 147 appels sur 710 sont servis par le cache quand
+chaque fichier est lancé seul ; dans la suite complète, les fichiers partagent en plus le cache d'un même processus.
+
+### Temps natif
+
+P5 ne touche aucun moteur. `mesurer_temps.py` : Ex7 0,58 s ; a 0,03 s ; b 0,36 s ; c 0,25 s ; d 0,23 s (P4 : 0,59 ; 0,03 ; 0,37 ;
+0,25 ; 0,22) : aucune hausse.
+
+### Suite complète (`complet --rapport …/scratchpad/P5-rapport`, départ 7186b6d + `memo_racines.py`, 2 tests ajoutés, 4 fichiers de test, `journal.md`)
+
+| | Python : mur | Python : résultat | Pages : mur | Pages : résultat | Code |
+|---|---|---|---|---|---|
+| `complet --rapport …/scratchpad/P5-rapport` (`MEMO` non défini) | **570 s** | 1328 passés, 1 xfail, 103 161 sous-tests | **979 s** | 122 passés, 2 554 sous-tests | 0 |
+
+JUnit / extension : 0 écart. `environnement` : CORPUS, OUTILS, MEMO non définis.
+
+**Comparaisons** :
+- `comparer_listes.py reference P5-rapport` : pages identiques nom par nom ; Python : **les seuls écarts sont les 17 tests ajoutés**
+  (6 de P4, 11 de P5 : les 8 de `test_memo_racines.py` et les 3 de `test_memo_racines_garde.py`, tous passés) ; les 1312 tests de la
+  référence ont la même issue et le même nombre de sous-tests.
+- `comparer_listes.py P4-rapport P5-rapport` : pages identiques ; Python : les 11 ajouts de P5, et **un sous-test de plus** (18 → 19)
+  dans `test_memo_garde.py::TestGardeMemo::test_aucun_fichier_avec_mock_n_importe_un_fichier_qui_importe_memo`, qui parcourt chaque
+  fichier contenant un mot de mock : le nouveau `test_memo_racines_garde.py` en est un (il n'atteint pas `memo`). Sous-tests :
+  103 161 = 103 098 + 62 (tests ajoutés) + 1.
+- `--collect-only -q` de chaque suite, lancée séparément (code 0) : Python 1329 identifiants = référence + les 17 ajoutés (aucun
+  manquant) ; pages 122 identifiants identiques à la référence.
+
+**Gain** : Python 660 s (P4, cache Limites) / 672 s (P4, `MEMO=0`) → **570 s** : environ 1,5 min de mur, au-delà du bruit d'un lancement
+à l'autre (environ ± 40 s). L'audit prévoyait environ 1 min. Pages : 979 s (P4 : 970 s), inchangé. Pas de regroupement `xdist_group`
+(décision T6).
+
 ## Contrôles du chef d'orchestre
 
 P0 (1feb6cf) : suite complète --rapport, code 0 ; Python 1311 passés + 1 xfail, 103 033 sous-tests, 737 s ; pages 122 passés, 2 554 sous-tests, 950 s ; comparer_listes identique nom par nom ; --collect-only -q des deux suites identique à la référence.
@@ -513,3 +655,5 @@ P1 (a8d6ab6) : suite complète --rapport, code 0 ; Python 1311 passés + 1 xfail
 P2 (55daa1f, 1f34e3c) : verifier ACCEPTÉ sur les deux commits ; essai du chef d'orchestre « test disparu » (copie du rapport P2b) REFUSÉ avec le motif « disparu » ; rapide code 0 en 9 s (tests de fumée seulement, l'arbre étant propre après le commit).
 
 P3 (f140f1c) : verifier ACCEPTÉ ; rapide code 0 (8 s) ; sélection de rapide appliquée aux fichiers du commit (test_redaction_bh_3m.py + fumée) code 0 en 54 s ; diff relu (mêmes entrées, même filtre, copie profonde).
+
+P4 (7186b6d) : verifier ACCEPTÉ sur les deux rapports (MEMO lu correctement, 6 tests ajoutés listés) ; rapide code 0 ; sélection de rapide appliquée aux 15 fichiers du commit : code 0 en 105 s, et avec MEMO=0 code 0 en 129 s ; memo.py relu.

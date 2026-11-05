@@ -20,7 +20,7 @@ rapports) : [`journal.md`](journal.md).
 | P2 | T1 : `lancer.py verifier`, texte proposé pour `CLAUDE.md`, méthode (commit séparé) | **faite** (commit « Tests rapides P2 : lancer.py verifier … », `verifier` ACCEPTÉ ; méthode : commit séparé « Tests rapides P2 (méthode) : … ») : commit modifié refusé, fichier non suivi signalé et refusé, test disparu refusé ; listes identiques |
 | P3 | T3 : `TestStructure` (calcul une fois par classe) | **faite** (commit « Tests rapides P3 : … ») : copie profonde par test ; fichier seul 121 s → 44 s ; mur Python 670 s ; listes et sous-tests identiques |
 | P4 | T4 : `memo.py`, test de garde, `MEMO=0` | **faite** (commit « Tests rapides P4 : … ») : 9 fichiers sans mock passent par `memo` ; 6 tests ajoutés (`test_memo.py`, `test_memo_garde.py`) ; listes identiques avec et sans `MEMO=0` (seuls écarts à la référence : les 6 ajoutés) ; Python 660 s (cache) / 672 s (`MEMO=0`) |
-| P5 | T5 : cache de `racines` | à faire |
+| P5 | T5 : cache de `racines` | **faite** (commit « Tests rapides P5 : … ») : `memo_racines.py` ; 9 appels de 4 fichiers passent par le cache ; `racines` inchangée (empreinte gardée) ; avec et sans cache : 563 clés, 695 racines, 0 écart ; 11 tests ajoutés ; listes identiques (seuls écarts : les ajouts de P4 et P5) ; Python 570 s (P4 : 660 s) |
 | P6 | T7 : `rapide` et pages des moteurs | à faire |
 | P7 | T9 : étude du chargement de Pyodide (rapport seul) | à faire |
 
@@ -55,6 +55,21 @@ rapports) : [`journal.md`](journal.md).
 - **P4, gain.** 20 s de mur sur le groupe des fichiers concernés, 12 s dans la suite complète (dans le bruit) : bien moins que l'audit
   (1 à 1,5 min), car les gros appelants de l'outil Limites ont des mock. Garder le cache tel quel ?
 
+- **P5, module à part.** Le cache de `racines` est dans `tests/python/memo_racines.py` et non dans `memo.py` : les 4 fichiers appelants
+  créent des méthodes de test par `setattr(TestX, "test_…", …)`, mot que la garde de P4 interdit dans un fichier qui importe `memo`.
+  La garde de P4 n'est pas touchée ; `test_memo_racines_garde.py` admet `setattr` seulement sous cette forme (classe `TestCase` du
+  fichier, nom en `test_`). À confirmer.
+
+## Injectivité de la clé (P5, décision T5)
+
+Clé de `memo_racines.racines(s)` = (contexte de l'oracle, instantané de `s`). L'instantané est un tuple immuable qui commence par le
+**type exact** de chaque objet et contient **tous** ses champs (nœuds d'`exp_log` d'une liste fermée, sans sous-classe ni `__dict__` ;
+`Saisie` entière ; `Fraction` par numérateur et dénominateur ; `str` ; `None` ; `tuple`) ; tout autre type (flottant, entier, booléen,
+SymPy…) n'a pas de clé et l'oracle est appelé directement. Le contexte contient les fonctions `racines`, `ecart`, `evaluer`, l'objet `MP`
+avec sa précision et son arrondi, et les classes que lit `evaluer`. Deux clés égales désignent donc des arguments indiscernables, le même
+code et le même contexte ; `racines` (un seul paramètre, sans défaut) étant déterministe, le résultat est le même. Démonstration
+détaillée et pièges écartés (1 == 1.0 == True, assomptions SymPy, arbre modifié après l'appel) : `journal.md`, « P5 », « Clé ».
+
 ## À relire par l'enseignant
 
 - P0 : aucun instantané modifié. Outil de test modifié : `tests/lancer.py` (option `complet --rapport` ; sans l'option, mêmes
@@ -74,6 +89,11 @@ rapports) : [`journal.md`](journal.md).
   `test_doctrine_bh`, `test_instantanes`, `test_limites_deux_cotes`, `test_racines_reelles`, `test_rappel_methode`, `test_redaction_bh_3m`,
   `test_resoudre_la`, `test_tableau_limites`. Détail : `journal.md`, « P4 ».
 
+- P5 : aucun instantané ni aucun moteur modifié ; `racines`, `ecart`, `evaluer` inchangées. Nouveaux : `tests/python/memo_racines.py`,
+  `tests/python/test_memo_racines.py`, `tests/python/test_memo_racines_garde.py`. Tests modifiés (seulement `racines(s)` →
+  `memo_racines.racines(s)` et les imports) : `test_exp_log_m`, `test_exp_log_m_t36`, `test_exercices_el_m`, `test_explog_3c`.
+  Détail : `journal.md`, « P5 ».
+
 ## À reporter par l'enseignant dans CLAUDE.md
 
 Texte proposé (décision T10 : Claude Code ne modifie pas `CLAUDE.md`), pour la section « Commandes de test », à la place de la ligne
@@ -89,9 +109,10 @@ Texte proposé (décision T10 : Claude Code ne modifie pas `CLAUDE.md`), pour la
   et CLAUDE.md), que les codes valent 0 et qu'aucun test n'a disparu, n'est sauté en plus, ne se dégrade ni ne perd de sous-tests par
   rapport à la référence (par défaut docs/chantiers/tests-rapides/reference). Verdict final ACCEPTÉ (code 0) ou REFUSÉ (1, ou 2 si un
   fichier manque). `python3 tests/comparer_listes.py <référence> <dossier>` compare deux dossiers nom par nom.
-- `MEMO=0` (variable d'environnement) : coupe le cache de test `tests/python/memo.py` (sorties de l'outil Limites, gardées par processus,
-  copie profonde à chaque appel) : chaque appel devient un appel direct du moteur. Le cache ne sert qu'aux fichiers sans aucun mock
-  (`test_memo_garde.py` le vérifie). Une fois par session de chantier, lancer aussi `MEMO=0 python3 tests/lancer.py complet --rapport
+- `MEMO=0` (variable d'environnement) : coupe les caches de test `tests/python/memo.py` (sorties de l'outil Limites) et
+  `tests/python/memo_racines.py` (oracle `racines` des exponentielles et logarithmes), gardés par processus, copie profonde à chaque
+  appel : chaque appel devient un appel direct du moteur ou de l'oracle. Ces caches ne servent qu'aux fichiers sans aucun mock
+  (`test_memo_garde.py`, `test_memo_racines_garde.py` le vérifient). Une fois par session de chantier, lancer aussi `MEMO=0 python3 tests/lancer.py complet --rapport
   <dossier>` : les listes doivent être les mêmes qu'avec le cache.
 - Mesures du 04.11.2026 sur le Mac de l'enseignant (2 cœurs physiques ; 1312 tests Python et 103 033 sous-tests, 122 tests de pages et
   2 554 sous-tests) : suite Python 715 à 803 s ; suite de pages 938 à 994 s ; `complet` environ 28 à 30 min.
@@ -107,6 +128,6 @@ Procédure allégée du chef d'orchestre (décision T1 ; écrite aussi dans `doc
 
 ## Reprise après compactage
 
-P0, P1, P2 (deux commits), P3 et P4 commitées sur `tests-rapides` (rien poussé). Prochaine partie : **P5** (cache de `racines`), puis P6 et P7
+P0, P1, P2 (deux commits), P3, P4 et P5 commitées sur `tests-rapides` (rien poussé). Prochaine partie : **P6** (`rapide` et pages des moteurs), puis P7
 dans l'ordre de `decisions.md` §3. Contrôle d'une partie : `python3 tests/lancer.py verifier <dossier de complet --rapport>`. Pour reprendre : lire ce fichier, `decisions.md`, puis `git log --oneline main..HEAD` ; le détail est dans
 `journal.md`. Chaque partie compare son rapport à `reference/` avec la commande ci-dessus.

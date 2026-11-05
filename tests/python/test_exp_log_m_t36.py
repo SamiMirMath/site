@@ -12,7 +12,8 @@ import exp_log_m as elm
 import resoudre_el as rel
 import sortie as so
 from cas_el import BATTERIE_M_BASE_POLYNOMIALE, BATTERIE_M_CARRE_DANS_L_EXPOSANT, BATTERIE_M_PI, BATTERIE_M_PRODUIT_X_LOG, BATTERIE_M_SECOND_MEMBRE_CALCULE, BATTERIE_M_BASE_RATIONNELLE, BATTERIE_M_BICARRE, BATTERIE_M_EXPOSANTS, BATTERIE_M_IRRATIONNEL
-from test_exp_log_m import MP, ecart, racines
+import memo_racines
+from test_exp_log_m import MP, ecart
 
 
 def corrige_m(entree):
@@ -74,7 +75,7 @@ class _Batterie:
                         e = ecart(s, x)
                         self.assertIsNotNone(e, "solution hors de l'ensemble de définition")
                         self.assertLess(abs(e), MP.mpf("1e-9") * (1 + abs(x)))
-                    for rac in racines(s):
+                    for rac in memo_racines.racines(s):
                         self.assertTrue(any(abs(rac - x) < MP.mpf("1e-9") * (1 + abs(rac)) for x in retenues), ("racine perdue", methode, rac))
 
     def test_proprietes_de_la_liste_fermee_et_ed_en_premier(self):

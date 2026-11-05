@@ -19,7 +19,8 @@ import sortie as so
 from cas_el import (BATTERIE_3C_REGROUPEMENT, BATTERIE_3C_REJETS, BATTERIE_M, BATTERIE_M_BASE_POLYNOMIALE, BATTERIE_M_BASE_RATIONNELLE, BATTERIE_M_BICARRE,
                     BATTERIE_M_CARRE_DANS_L_EXPOSANT, BATTERIE_M_EXPOSANTS, BATTERIE_M_IRRATIONNEL, BATTERIE_M_PI, BATTERIE_M_PRODUIT_X_LOG,
                     BATTERIE_M_SECOND_MEMBRE_CALCULE, BATTERIE_M_VAR, M_TOUT_L_ED, entrees_el, entrees_el_m)
-from test_exp_log_m import MP, ecart, evaluer, racines
+import memo_racines
+from test_exp_log_m import MP, ecart, evaluer
 
 SANS_PERTE = [("log(x^2)=2", [-10, 10]), ("log(x(x-3))=1", [-2, 5]), ("log(x)+log(x-3)=1", [5]), ("ln(x^2)=2ln(3)", [-3, 3])]
 
@@ -72,7 +73,7 @@ class TestBatterie3C(unittest.TestCase):
                     e = ecart(s, v)
                     self.assertIsNotNone(e, "solution où un logarithme n'existe pas")
                     self.assertLess(abs(e), MP.mpf("1e-9") * (1 + abs(v)))
-                for rac in racines(s):
+                for rac in memo_racines.racines(s):
                     self.assertTrue(any(abs(rac - v) < MP.mpf("1e-9") * (1 + abs(rac)) for v in trouvees), ("racine perdue", rac))
                 m = elm.corriger_equation(s.g, s.d, s.inconnue)
                 self.assertEqual([float(v) for v in trouvees], [float(v) for v in solutions(m)])
@@ -102,7 +103,7 @@ class TestSansPerte(unittest.TestCase):
                 self.assertEqual([float(v) for v in solutions(r)], [float(a) for a in attendu])
                 for v in solutions(r):
                     self.assertLess(abs(ecart(s, v)), MP.mpf("1e-9") * (1 + abs(v)))
-                self.assertEqual(sorted({round(float(x), 6) for x in racines(s)}), [float(a) for a in attendu])
+                self.assertEqual(sorted({round(float(x), 6) for x in memo_racines.racines(s)}), [float(a) for a in attendu])
 
     def test_le_rejet_de_moins_deux(self):
         """log(x) + log(x − 3) = 1 : x(x − 3) = 10 donne −2 et 5 ; −2 est rejetée au contrôle, S = {5}."""
@@ -244,7 +245,7 @@ class TestImplicationsVraies(unittest.TestCase):
             s, r = lire(entree)
             if r is None or elm.regrouper(s.g, s.d, s.inconnue) is None:
                 continue
-            for rac in racines(s):
+            for rac in memo_racines.racines(s):
                 for carte in r["etapes"]:
                     if carte["titre"] == "Contrôle":
                         continue
@@ -325,7 +326,7 @@ def _oracle_famille(nom):
                         e = ecart(s, v)
                         self.assertIsNotNone(e, "solution où une expression n'existe pas")
                         self.assertLess(abs(e), MP.mpf("1e-9") * (1 + abs(v)))
-                    for rac in racines(s):
+                    for rac in memo_racines.racines(s):
                         self.assertTrue(any(abs(rac - v) < MP.mpf("1e-9") * (1 + abs(rac)) for v in trouvees), ("racine perdue", rac))
                     if m is not None and m["solutions"] is not None:
                         self.assertEqual([float(v) for v in trouvees], [float(v) for v in solutions(m)])
@@ -349,7 +350,7 @@ class TestImplicationsAutresFamilles(unittest.TestCase):
         for entree, _ in BATTERIE_M_EXPOSANTS + BATTERIE_M_PRODUIT_X_LOG + BATTERIE_M_BASE_RATIONNELLE:
             s, rs = resultats_c(entree)
             for r in rs:
-                for rac in racines(s):
+                for rac in memo_racines.racines(s):
                     for carte in r["etapes"]:
                         if carte["titre"] == "Contrôle":
                             continue

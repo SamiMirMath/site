@@ -11,6 +11,7 @@ import exp_log_m as elm
 import resoudre_el as rel
 import resoudre_ed
 import sortie as so
+import memo_racines
 from cas_el import (BATTERIE_E4, BATTERIE_M, BATTERIE_M_DEUX_TERMES, BATTERIE_M_VAR, M_HORS_PROGRAMME, M_PAS_ENCORE, M_TOUT_L_ED, M_VAR_PAS_ENCORE,
                     entrees_el, entrees_el_m)
 
@@ -215,7 +216,7 @@ class TestBatterieM(unittest.TestCase):
                     e = ecart(s, v)
                     self.assertIsNotNone(e, "solution hors de l'ensemble de définition")
                     self.assertLess(abs(e), MP.mpf("1e-9") * (1 + abs(v)))
-                for rac in racines(s):
+                for rac in memo_racines.racines(s):
                     self.assertTrue(any(abs(rac - v) < MP.mpf("1e-9") * (1 + abs(rac)) for v in retenues), ("racine perdue", rac))
 
     def test_les_solutions_de_la_3c_sont_celles_de_m_quand_l_ed_ne_rejette_rien(self):
@@ -329,7 +330,7 @@ class TestChangementDeVariable(unittest.TestCase):
                 retenues = [MP.mpf(el.valeur(n)) for n in v[el.METHODE_LOGARITHMES]["solutions"]]
                 for x in retenues:
                     self.assertLess(abs(ecart(s, x)), MP.mpf("1e-9") * (1 + abs(x)))
-                for rac in racines(s):
+                for rac in memo_racines.racines(s):
                     self.assertTrue(any(abs(rac - x) < MP.mpf("1e-9") * (1 + abs(rac)) for x in retenues), ("racine perdue", rac))
 
     def test_les_lignes_de_la_carte_du_changement_de_variable_sont_justes(self):
