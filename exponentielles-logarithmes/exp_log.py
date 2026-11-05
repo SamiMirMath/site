@@ -1187,6 +1187,10 @@ def _facteur(f, x):
             if k is not None:
                 return _Fac("pow", f.a.val, [k], f, False, f.a, f.b)
         v = _const(f)
+        if v is None and isinstance(f, Pow) and _const(f.b) is not None:            # (1/2)^(−1/2) : base rationnelle écrite en quotient,
+            b = _const(f.a)                                                       # valeur irrationnelle (Q6, chantier explog-q4-q6)
+            if b is not None and b > 0 and b != 1:
+                return _Fac("pow", b, [_const(f.b)], f, False, f.a, f.b)
         if v is None or v <= 0:
             raise _Hors
         return _Fac("cte", v, None, f)
@@ -1432,6 +1436,26 @@ def _resoudre_polynome(A, B, At, Bt, x):
     return lignes, racines, None
 
 
+def _resoudre_polynome_rationnel(A, B, At, Bt, x):
+    """_resoudre_polynome, et un trinôme à coefficients rationnels non entiers (x² − 5x = −1/2) se résout comme dans la suite de la méthode B
+    (`_suite_polynome` : x² − 5x + 1/2 = 0, Δ = 23). Pour la méthode « même base » (au lieu du message « Il faut les logarithmes. », faux
+    quand les bases sont les mêmes) et pour la méthode B quand log(10) = 1 ou ln(e) = 1 a rendu le trinôme numérique (e^(x²) = e^(x + 1/2),
+    « pas encore » avant) : chantier explog-q4-q6, Q6."""
+    P = _padd(A, B, -1)
+    if len(P) != 3 or all(v.denominator == 1 for v in P):
+        return _resoudre_polynome(A, B, At, Bt, x)
+    chaine = Chaine([Eq(At, Bt)])
+    if len(B) <= 1:                                        # A = c : la suite de la méthode B, c écrit comme dans l'énoncé (0,5 ; 1/2)
+        f, c = A, _nb_ecrit(B[0] if B else F(0), Bt)
+    else:                                                  # x² = x + 1/2 ⇔ x² − x = 1/2 : l'inconnue d'un seul côté, puis la même suite
+        f, c = [F(0), P[1], P[2]], _nb_ecrit(-P[0], Bt)
+        chaine.ajouter(Eq(_arbre_poly(f, x, At), c), "⇔")
+    suite, solutions, remarque = _suite_polynome(chaine, f, At, c, x)
+    if len(chaine.elements) > 1 and tex_element(chaine.elements[1]) == tex_element(chaine.elements[0]):     # P = 0 déjà écrit : une seule fois
+        del chaine.elements[1], chaine.liens[0], chaine.props[0]
+    return [chaine] + suite, solutions, remarque
+
+
 FORMULE_RACINE_DOUBLE = r"\frac{-b}{2a}"
 
 
@@ -1483,7 +1507,8 @@ def meme_base(g, d, x):
 def _meme_base(g, d, x):
     enonce = Eq(g, d)
     etapes = []
-    g, d, iso = _isoler(g, d, x)
+    # a^A = b^B : rien à isoler, même quand b^B est un irrationnel (2^(−1/2)), que _isoler refuse (Q6, chantier explog-q4-q6)
+    g, d, iso = (g, d, None) if isinstance(g, Pow) and isinstance(d, Pow) else _isoler(g, d, x)
     if iso is not None:
         etapes.append(_carte("Isoler l'exponentielle", [iso]))
     fg, fd = _facteurs(g, x), _facteurs(d, x)
@@ -1496,7 +1521,7 @@ def _meme_base(g, d, x):
     lignes = [c for c in (chaine_g, chaine_d) if c is not None]
     A_tree, B_tree = _exposant_final(g2), _exposant_final(d2)
     A, B = _poly(A_tree, x), _poly(B_tree, x)
-    l_exp, solutions, remarque = _resoudre_polynome(A, B, A_tree, B_tree, x)
+    l_exp, solutions, remarque = _resoudre_polynome_rationnel(A, B, A_tree, B_tree, x)
     debut = Eq(g2, d2)
     premiere = l_exp[0]
     ligne = Chaine([debut], [], [])
@@ -1620,7 +1645,7 @@ def _meme_base_e(g, d, x):
     if not (isinstance(g, Pow) and isinstance(g.a, E) and isinstance(d, Pow) and isinstance(d.a, E)):
         raise _Hors
     At, Bt = g.b, d.b
-    l_exp, solutions, remarque = _resoudre_polynome(_poly(At, x), _poly(Bt, x), At, Bt, x)
+    l_exp, solutions, remarque = _resoudre_polynome_rationnel(_poly(At, x), _poly(Bt, x), At, Bt, x)
     ligne = Chaine([Eq(g, d)])
     premiere = l_exp[0]
     ligne.ajouter(premiere.elements[0], "⇔", PROP_MEME_BASE)
@@ -2093,8 +2118,8 @@ def _fin_beta(chaine, monos_g, monos_d, x, ecrit, ln):
     if degre == 2:
         if all(a is None for _, _, a in P):                           # log(10) = 1 a tout rendu numérique : le trinôme ordinaire
             poly = lambda ms: [sum((c for c, k, _ in ms if k == i), F(0)) for i in range(3)]
-            l_poly, solutions, remarque = _resoudre_polynome(_pnet(poly(mg)), _pnet(poly(md)), _somme(mg, x, ecrit, ln, False),
-                                                              _somme(md, x, ecrit, ln, False), x)
+            l_poly, solutions, remarque = _resoudre_polynome_rationnel(_pnet(poly(mg)), _pnet(poly(md)), _somme(mg, x, ecrit, ln, False),
+                                                                       _somme(md, x, ecrit, ln, False), x)
             premiere = l_poly[0]
             for e, lien, prop in zip(premiere.elements[1:], premiere.liens, premiere.props):
                 chaine.ajouter(e, lien, prop)
