@@ -9,7 +9,7 @@ aucun test. Code 0 = ACCEPTÉ ; 1 = REFUSÉ (motifs listés) ; 2 = REFUSÉ, doss
 Notations : D = commit de départ du lancement (`head` de rapport.json) ; C = commit vérifié (HEAD, ou `--commit`) ;
 M = empreintes (`git hash-object`) des fichiers modifiés ou non suivis au début du lancement ; F = le même relevé à la fin.
 
-(a) Commit. C = D, ou C a un seul parent, D. Chaque fichier changé entre D et C (`git diff --no-renames D C`) :
+(a) Commit. C = D, ou C a un seul parent, D. Chaque fichier changé entre D et C (`git diff --no-renames -z D C`) :
     - a dans C l'empreinte notée dans M (absent de C si noté supprimé), et la même dans F (pas changé pendant le lancement) ;
     - sinon REFUS, sauf sous `docs/` (IGNORES : aucun test ne lit docs/, comme pour la commande `reference` ; par exemple le suivi.md et
       le journal.md du chantier, écrits après le lancement) : le fichier est alors seulement listé comme ignoré.
@@ -56,6 +56,13 @@ MAX_LIGNES = 25                                  # au-delà, la liste d'une rubr
 def git(*args):
     r = subprocess.run(("git",) + args, cwd=RACINE, capture_output=True, text=True)
     return r.returncode, r.stdout.strip()
+
+
+def noms_git(*args):
+    """Noms de fichiers d'une commande git lancée avec `-z` : découpage sur \\0, donc ni guillemets ni échappements octaux (noms à
+    espaces ou non ASCII, par exemple « a b.py », « é.py ») ; exception si git échoue (lancer.py s'en sert aussi)."""
+    sortie = subprocess.run(("git",) + args, cwd=RACINE, capture_output=True, check=True).stdout
+    return [os.fsdecode(n) for n in sortie.split(b"\0") if n]
 
 
 def court(rev):
@@ -114,7 +121,7 @@ def verifier_commit(v, rapport, commit_demande):
             v.refuser(f"(a) {court(commit)} n'est ni le commit de départ du lancement ({court(depart)}) ni son enfant direct "
                       f"(parents : {', '.join(court(p) for p in parents) or 'aucun'}) : le lancement ne porte pas sur ce commit")
             return
-        changes = git("diff", "--no-renames", "--name-only", depart, commit)[1].splitlines()
+        changes = noms_git("diff", "--no-renames", "--name-only", "-z", depart, commit, "--")
         lien = f"enfant direct du commit de départ {court(depart)}"
     v.lignes.append(f"(a) commit {court(commit)} : {lien} ; {len(changes)} fichier(s) changé(s)")
 

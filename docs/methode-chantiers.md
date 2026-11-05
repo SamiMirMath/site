@@ -50,8 +50,9 @@ Tirée du chantier « Étude complète » (02–04.11.2026). Elle complète `CLA
      `CLAUDE.md` hors du commit : ignorés, toujours listés), si un code de retour n'est pas 0, si un test disparaît ou est sauté en
      plus, si une issue se dégrade, ou si des sous-tests manquent sans justification dans `suivi.md` (ci-dessous) ;
   3. il lance ensuite `python3 tests/lancer.py rapide --depuis HEAD~1`, un contrôle indépendant de quelques minutes : les tests Python
-     des fichiers du commit (dépendances d'import comprises) et les tests de fumée, plus les pages à corpus réduit des outils touchés
-     (`rapide` seul, sur l'arbre propre d'après le commit, ne relancerait que les tests de fumée) ;
+     des fichiers du commit (dépendances d'import comprises, fichiers supprimés aussi ; données, instantanés, pages et scripts de
+     commande : règles détaillées dans la docstring de `tests/lancer.py`) et les tests de fumée, plus les pages à corpus réduit des
+     outils touchés (`rapide` seul, sur l'arbre propre d'après le commit, ne relancerait que les tests de fumée) ;
   4. il note une ligne dans `journal.md`, section « Contrôles du chef d'orchestre » (commit, verdict, nombres, murs).
 - **Une baisse de sous-tests** (un test qui reste passé mais perd des sous-tests) est acceptée par `verifier` si elle est justifiée
   dans `docs/chantiers/<branche>/suivi.md` (ou `--suivi <fichier>`), section « Variations de sous-tests », par une ligne

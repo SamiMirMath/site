@@ -1,4 +1,5 @@
-"""Chantier fondations, F1 : `python3 tests/lancer.py verifier`, essayé dans un dépôt git temporaire (F2 y ajoutera `rapide`).
+"""Chantier fondations, F1 et F2 : `python3 tests/lancer.py verifier` et `liste` (ce que `rapide` lancerait), essayés dans un dépôt
+git temporaire.
 
 Chaque test travaille dans un dépôt jetable (tempfile) : jamais dans le vrai dépôt (chaque commande git ou Python y est lancée avec ce
 dossier pour `cwd`, sous GIT_CEILING_DIRECTORIES, et le dépôt jetable vérifie qu'il est bien sa propre racine). On y copie les scripts
@@ -9,8 +10,13 @@ Les dossiers de rapport sont écrits par le vrai `complet_avec_rapport` du lance
 `tests/rapport_pytest.py` (collectes, issues, sous-tests, code) et le JUnit (`--junitxml`, même forme que celui de pytest). La référence
 est posée par la vraie commande `lancer.py reference`, puis commitée, comme au P0 d'un chantier.
 
-Aides communes (pour F2) : `Depot` (git, écrire, commiter, lancer une commande de lancer.py), `Depot.rapport` (faux lancement complet),
-`ModeleDepot` (dépôt de départ construit une fois par processus, copié pour chaque test)."""
+Aides communes : `Depot` (git, écrire, commiter, lancer une commande de lancer.py), `Depot.rapport` (faux lancement complet),
+`ModeleDepot` (dépôt de départ construit une fois par processus, copié pour chaque test).
+
+F2 (`TestRapide`) : un second dépôt modèle, `ModeleRapide`, imite la forme du vrai (moteur/manifeste.json, dossiers d'outils et leurs
+pages, tests/python avec cas.py, donnees/ et instantanes/, tests/pages avec ses références), avec des noms à espaces et non ASCII ; chaque
+test y modifie, supprime ou déplace des fichiers et compare ce que `liste` (et `liste --depuis`) annonce à ce qui est attendu. Rien n'y
+est lancé : `liste` ne lance aucun test."""
 import atexit
 import copy
 import json
@@ -407,6 +413,30 @@ class TestVerifier(unittest.TestCase):
         code, sortie = self.partie(suites_avec(code_pages=1))
         self.refuse(code, sortie, "(c) codes de retour : global 1, Python 0, pages 1 (0 exigé partout)")
 
+    # --- F2 : noms lus avec -z (à espaces, non ASCII) et --no-renames, dans le rapport comme dans verifier
+
+    def test_noms_a_espaces_et_non_ascii_dans_le_commit(self):
+        code, sortie = self.partie(avant={"src/é b.py": "X = 1\n"}, commit=("src/calcul.py", "src/é b.py"))
+        self.accepte(code, sortie)
+        self.assertIn("empreintes conformes pour les 2 fichier(s) testé(s)", sortie)
+        with open(os.path.join(self.dossier, "rapport.json"), encoding="utf-8") as f:
+            self.assertIn("src/é b.py", json.load(f)["fichiers_modifies"])
+
+    def test_nom_non_ascii_change_apres_le_lancement_refuse(self):
+        code, sortie = self.partie(avant={"src/é.py": "X = 1\n"}, apres={"src/é.py": "X = 2\n"}, commit=("src/calcul.py", "src/é.py"))
+        self.refuse(code, sortie, "(a) fichier(s) du commit différent(s) de ce que le lancement a testé", "src/é.py : empreinte")
+
+    def test_fichier_deplace_accepte(self):
+        self.depot.git("mv", "src/calcul.py", "src/calcul_deplace.py")
+        _, dossier = self.depot.rapport("partie", SUITES_DEPART)
+        with open(os.path.join(dossier, "rapport.json"), encoding="utf-8") as f:
+            self.assertEqual(sorted(json.load(f)["fichiers_modifies"].items()),
+                             [("src/calcul.py", None), ("src/calcul_deplace.py", self.depot.git("hash-object", "--", "src/calcul_deplace.py").strip())])
+        self.depot.git("commit", "-q", "-m", "déplacement")
+        code, sortie = self.depot.lancer("verifier", dossier)
+        self.accepte(code, sortie)
+        self.assertIn("2 fichier(s) changé(s)", sortie)
+
     def test_fichier_manquant_code_2(self):
         _, sortie = self.partie()
         os.remove(os.path.join(self.dossier, "resultats-pages.txt"))
@@ -414,6 +444,238 @@ class TestVerifier(unittest.TestCase):
         self.assertEqual(code, 2, sortie)
         self.assertIn("VERDICT : REFUSÉ (code 2)", sortie)
         self.assertIn("resultats-pages.txt", sortie)
+
+
+# --- F2 : rapide (ce que `liste` annonce) -----------------------------------------------------------------------------------------
+
+MANIFESTE_ESSAI = {"outils": {
+    "factorisation": {"fichiers": ["factorisation/a b.py", "moteur/noyau.py"]},
+    "exponentielles-logarithmes": {"fichiers": ["exponentielles-logarithmes/moteur ê.py", "moteur/noyau.py"]},
+    "limites-asymptotes": {"fichiers": ["limites-asymptotes/la.py"]},
+}}
+
+# Dépôt de forme réelle, petit : chaque module dit ce qu'il importe ou lit, pour que chaque règle de `rapide` se voie seule.
+FICHIERS_RAPIDE = {
+    ".gitignore": "__pycache__/\n",
+    "moteur/manifeste.json": json.dumps(MANIFESTE_ESSAI, ensure_ascii=False, indent=1) + "\n",
+    "moteur/noyau.py": "X = 1\n",
+    "commun/rendu.js": "export const X = 1;\n",
+    "index.html": "<!doctype html>\n",
+    "factorisation/a b.py": "import noyau\n",
+    "factorisation/index.html": "<script>const EXEMPLES=[\"x+1\"];\n</script>\n",
+    "exponentielles-logarithmes/moteur ê.py": "import noyau\n",
+    "exponentielles-logarithmes/index.html": "<script>const EXEMPLES=[\"e^x\"];\n</script>\n",
+    "limites-asymptotes/la.py": "X = 1\n",
+    "limites-asymptotes/index.html": "<!doctype html>\n",
+    "tests/python/cas.py": 'import os\nPAGE = os.path.join("factorisation", "index.html")\n',
+    "tests/python/cas_el.py": "from cas import PAGE\n",
+    "tests/python/é.py": "X = 1\n",
+    "tests/python/outil_commun.py": "X = 1\n",
+    "tests/python/test_accent.py": "import é\n",
+    "tests/python/test_a b.py": "X = 1\n",
+    "tests/python/test_chaine.py": "import outil_commun\n",
+    "tests/python/test_isole.py": "X = 1\n",
+    "tests/python/test_donnees.py": 'import os, sys\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), "donnees"))\nimport corpus\n',
+    "tests/python/test_par_donnees.py": "import test_donnees\n",
+    "tests/python/test_instantanes.py": 'import os\nfrom cas import PAGE\nDOSSIER = os.path.join(os.path.dirname(__file__), "instantanes")\n',
+    "tests/python/test_instantanes_resoudre.py": 'import os\nimport cas_el\nDOSSIER = os.path.join("instantanes", "resoudre")\n',
+    "tests/python/test_json_strict.py": 'import os\nimport noyau\nDOSSIER = os.path.join(os.path.dirname(__file__), "instantanes")\n',
+    "tests/python/test_vocabulaire.py": 'import os\nDOSSIER = os.path.join(os.path.dirname(__file__), "instantanes")\n',
+    "tests/python/test_refs.py": 'import os\nDOSSIER = os.path.join("..", "pages", "references")\n',
+    "tests/python/test_lancer.py": "X = 1\n",
+    "tests/python/test_manifeste.py": "X = 1\n",
+    "tests/python/test_accueil.py": "X = 1\n",
+    "tests/python/test_source_unique.py": "X = 1\n",
+    "tests/python/donnees/corpus.py": "CORPUS = []\n",
+    "tests/python/donnees/table.json": "{}\n",
+    "tests/python/instantanes/factorisation.json": "{}\n",
+    "tests/python/instantanes/resoudre/factorisation.json": "{}\n",
+    "tests/python/instantanes/resoudre/exponentielles-logarithmes-M.json": "{}\n",
+    "tests/pages/rendu.py": "import os\n",
+    "tests/pages/test_rendu.py": "import rendu\n",
+    "tests/pages/references/factorisation.json": "{}\n",
+    "tests/pages/references/exponentielles-logarithmes-M.json": "{}\n",
+    "tests/pages/references/graphique-traces.json": "{}\n",
+}
+FUMEE = {"test_accueil.py", "test_manifeste.py", "test_source_unique.py"}
+INSTANTANES_ET_JSON = {"test_instantanes.py", "test_instantanes_resoudre.py", "test_json_strict.py"}
+TOUTES_LES_PAGES = {"tous"}
+EXP_LOG = {"exponentielles-logarithmes", "exponentielles-logarithmes-M"}
+
+
+class ModeleRapide(ModeleDepot):
+    """Dépôt de départ des essais de `rapide` : les scripts de commande (rapport_pytest.py compris) et FICHIERS_RAPIDE, commités."""
+    _modele = None
+
+    @staticmethod
+    def _construire(depot):
+        os.makedirs(depot.racine)
+        depot.git("init", "-q", "-b", BRANCHE)
+        depot.verifier_isole()
+        for chemin in SCRIPTS + ("tests/rapport_pytest.py",):
+            with open(os.path.join(RACINE, chemin), encoding="utf-8") as f:
+                depot.ecrire(chemin, f.read())
+        for chemin, contenu in FICHIERS_RAPIDE.items():
+            depot.ecrire(chemin, contenu)
+        depot.git("add", "-A")                                   # dépôt jetable : tout ce qui vient d'être écrit
+        depot.git("commit", "-q", "-m", "départ")
+
+
+class TestRapide(unittest.TestCase):
+    """`lancer.py liste` (ce que `rapide` lancerait) sur des modifications construites : règles du chantier fondations, F2."""
+
+    def setUp(self):
+        self.base = tempfile.mkdtemp(prefix="test-rapide-")
+        self.addCleanup(shutil.rmtree, self.base, True)
+        self.depot = ModeleRapide.copie(self.base)
+
+    def liste(self, *options):
+        """`liste [options]` -> (fichiers annoncés, tests Python annoncés, pages annoncées), chacun en ensemble."""
+        code, sortie = self.depot.lancer("liste", *options)
+        self.assertEqual(code, 0, sortie)
+        lignes = sortie.splitlines()
+        self.assertEqual(len(lignes), 3, sortie)
+        valeurs = []
+        for ligne, debut in zip(lignes, ("fichiers modifiés", "tests Python :", "pages (corpus réduit) :")):
+            self.assertTrue(ligne.startswith(debut), sortie)
+            reste = ligne.split(" : ", 1)[1]
+            valeurs.append(set() if reste in ("aucun", "aucune") else set(reste.split(", ")))
+        return valeurs
+
+    def modifier(self, *chemins):
+        for chemin in chemins:
+            self.depot.ecrire(chemin, self.depot.lire(chemin) + "# modifié\n")
+
+    def annonce(self, fichiers, tests, pages, *options):
+        """Vérifie l'annonce de `liste` : `tests` sans les tests de fumée, toujours attendus."""
+        annonces = self.liste(*options)
+        self.assertEqual(annonces, [set(fichiers), set(tests) | FUMEE, set(pages)])
+
+    def test_rien_de_modifie(self):
+        self.annonce((), (), ())
+
+    def test_noms_a_espaces_et_non_ascii(self):
+        self.modifier("factorisation/a b.py", "tests/python/é.py", "tests/python/test_a b.py")
+        self.depot.ecrire("tests/python/test_nouveau é.py", "import é\n")          # non suivi
+        attendus = (["factorisation/a b.py", "tests/python/é.py", "tests/python/test_a b.py", "tests/python/test_nouveau é.py"],
+                    ["test_accent.py", "test_a b.py", "test_nouveau é.py"], ["factorisation"])
+        self.annonce(*attendus)
+        self.depot.git("add", "--", *attendus[0])
+        self.annonce(*attendus)                                                    # indexés
+        self.depot.git("commit", "-q", "-m", "noms")
+        self.annonce((), (), ())                                                   # arbre propre : la fumée seule
+        self.annonce(*attendus, "--depuis", "HEAD~1")
+
+    def test_fichier_supprime_relance_ses_dependants(self):
+        os.remove(os.path.join(self.depot.racine, "tests/python/outil_commun.py"))
+        attendus = (["tests/python/outil_commun.py (supprimé)"], ["test_chaine.py"], ())
+        self.annonce(*attendus)
+        self.depot.git("rm", "-q", "--cached", "--", "tests/python/outil_commun.py")
+        self.depot.git("commit", "-q", "-m", "suppression")
+        self.annonce((), (), ())
+        self.annonce(*attendus, "--depuis", "HEAD~1")
+
+    def test_test_supprime_et_module_de_moteur_supprime(self):
+        with self.subTest("un test supprimé n'est pas lancé"):
+            self.depot.git("rm", "-q", "--", "tests/python/test_chaine.py")
+            self.annonce(["tests/python/test_chaine.py (supprimé)"], (), ())
+        with self.subTest("module de moteur supprimé : ses dépendants et les pages qui le chargent"):
+            self.depot.git("reset", "-q", "--hard")
+            self.depot.git("rm", "-q", "--", "moteur/noyau.py")
+            self.annonce(["moteur/noyau.py (supprimé)"], ["test_json_strict.py"], {"factorisation"} | EXP_LOG)
+
+    def test_fichier_deplace(self):
+        self.depot.git("mv", "tests/python/outil_commun.py", "tests/python/outil_deplace.py")
+        attendus = (["tests/python/outil_commun.py (supprimé)", "tests/python/outil_deplace.py"], ["test_chaine.py"], ())
+        self.annonce(*attendus)
+        self.depot.git("commit", "-q", "-m", "déplacement")
+        self.annonce(*attendus, "--depuis", "HEAD~1")
+
+    def test_donnees(self):
+        with self.subTest("module de donnees/ : ses importeurs et ceux qui nomment le dossier, puis leurs dépendants"):
+            self.modifier("tests/python/donnees/corpus.py")
+            self.annonce(["tests/python/donnees/corpus.py"], ["test_donnees.py", "test_par_donnees.py"], ())
+        with self.subTest("fichier non Python de donnees/ (modifié, supprimé, nouveau)"):
+            self.depot.git("reset", "-q", "--hard")
+            os.remove(os.path.join(self.depot.racine, "tests/python/donnees/table.json"))
+            self.depot.ecrire("tests/python/donnees/nouveau é.json", "{}\n")
+            self.annonce(["tests/python/donnees/table.json (supprimé)", "tests/python/donnees/nouveau é.json"],
+                         ["test_donnees.py", "test_par_donnees.py"], ())
+        with self.subTest("aucun module ne nomme donnees/ : tous les tests Python"):
+            self.depot.git("reset", "-q", "--hard")
+            self.depot.git("clean", "-q", "-f")
+            self.depot.ecrire("tests/python/test_donnees.py", "import corpus\n")
+            self.depot.git("commit", "-q", "-am", "sans le nom du dossier")
+            self.modifier("tests/python/donnees/table.json")
+            fichiers, tests, pages = self.liste()
+            self.assertEqual((fichiers, tests, pages),
+                             ({"tests/python/donnees/table.json"}, {"tous (tests/python : on ne sait pas borner)"}, set()))
+
+    def test_page(self):
+        for page, outils in (("factorisation/index.html", {"factorisation"}), ("exponentielles-logarithmes/index.html", EXP_LOG),
+                             ("limites-asymptotes/index.html", {"limites-asymptotes"})):
+            with self.subTest(page=page):
+                self.depot.git("reset", "-q", "--hard")
+                self.modifier(page)
+                self.annonce([page], INSTANTANES_ET_JSON, outils)
+
+    def test_page_commitee_depuis(self):
+        self.modifier("factorisation/index.html")
+        self.depot.commiter("page", "factorisation/index.html")
+        self.annonce(["factorisation/index.html"], INSTANTANES_ET_JSON, ["factorisation"], "--depuis", "HEAD~1")
+
+    def test_cas(self):
+        with self.subTest("cas_el.py : ses importeurs, et test_instantanes*, test_json_strict"):
+            self.modifier("tests/python/cas_el.py")
+            self.annonce(["tests/python/cas_el.py"], INSTANTANES_ET_JSON, ())
+        with self.subTest("cas.py supprimé"):
+            self.depot.git("reset", "-q", "--hard")
+            self.depot.git("rm", "-q", "--", "tests/python/cas.py")
+            self.annonce(["tests/python/cas.py (supprimé)"], INSTANTANES_ET_JSON, ())
+
+    def test_instantane(self):
+        with self.subTest("instantané : test_instantanes*, test_json_strict et les modules qui nomment instantanes/"):
+            self.modifier("tests/python/instantanes/factorisation.json")
+            self.annonce(["tests/python/instantanes/factorisation.json"], INSTANTANES_ET_JSON | {"test_vocabulaire.py"}, ())
+        for nom, outils in (("factorisation", {"factorisation"}), ("exponentielles-logarithmes-M", EXP_LOG)):
+            with self.subTest(f"instantané resoudre {nom} : en plus, la page de l'outil (test_comportement le lit)"):
+                self.depot.git("reset", "-q", "--hard")
+                chemin = f"tests/python/instantanes/resoudre/{nom}.json"
+                self.modifier(chemin)
+                self.annonce([chemin], INSTANTANES_ET_JSON | {"test_vocabulaire.py"}, outils)
+        with self.subTest("instantané supprimé"):
+            self.depot.git("reset", "-q", "--hard")
+            self.depot.git("rm", "-q", "--", "tests/python/instantanes/factorisation.json")
+            self.annonce(["tests/python/instantanes/factorisation.json (supprimé)"], INSTANTANES_ET_JSON | {"test_vocabulaire.py"}, ())
+
+    def test_reference_de_page(self):
+        for nom, outils in (("factorisation", {"factorisation"}), ("exponentielles-logarithmes-M", EXP_LOG),
+                            ("graphique-traces", TOUTES_LES_PAGES)):
+            with self.subTest(reference=nom):
+                self.depot.git("reset", "-q", "--hard")
+                chemin = f"tests/pages/references/{nom}.json"
+                self.modifier(chemin)
+                self.annonce([chemin], ["test_refs.py"], outils)
+
+    def test_moteur_relance_la_page_de_l_outil(self):
+        for chemin, tests, outils in (("exponentielles-logarithmes/moteur ê.py", (), EXP_LOG),
+                                      ("moteur/noyau.py", ["test_json_strict.py"], {"factorisation"} | EXP_LOG),
+                                      ("limites-asymptotes/la.py", (), {"limites-asymptotes"})):
+            with self.subTest(moteur=chemin):
+                self.depot.git("reset", "-q", "--hard")
+                self.modifier(chemin)
+                self.annonce([chemin], tests, outils)
+
+    def test_scripts_de_commande_relancent_test_lancer(self):
+        for chemin in SCRIPTS + ("tests/rapport_pytest.py",):
+            with self.subTest(script=chemin):
+                self.depot.git("reset", "-q", "--hard")
+                self.modifier(chemin)
+                self.annonce([chemin], ["test_lancer.py"], ())
+
+    def test_sans_effet_sur_les_autres_tests(self):
+        self.modifier("tests/python/test_isole.py", "commun/rendu.js")
+        self.annonce(["tests/python/test_isole.py", "commun/rendu.js"], ["test_isole.py"], TOUTES_LES_PAGES)
 
 
 if __name__ == "__main__":

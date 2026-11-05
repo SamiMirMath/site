@@ -134,9 +134,91 @@ ajouté par F0 : `dump_sorties.py` n'est pas collecté).
   changé pendant le lancement. `comparer_listes.py tests/reference <F1>` : seuls ajouts, les 20 tests de
   `tests/python/test_lancer.py::TestVerifier` (passés, 6 sous-tests : 105 807 → 105 813) ; pages identiques nom par nom.
 
+## F2 — `lancer.py rapide` (reste de R4)
+
+### Plan
+
+1. Noms de fichiers lus avec `-z` partout où lancer.py (et verifier.py, qui compare au rapport) lit des noms : `noms_git` dans
+   verifier.py (découpage sur `\0`, `os.fsdecode`), utilisé par `fichiers_modifies`, `etat_fichiers` et la liste du commit de
+   `verifier` ; `--no-renames` partout (un déplacement donne l'ancien chemin, supprimé, et le nouveau).
+2. Fichiers supprimés gardés (marqués « (supprimé) » par `liste`), et règles de `rapide` (ci-dessous).
+3. `tests/python/test_lancer.py` : `TestRapide` (dépôt modèle `ModeleRapide`) et trois tests `verifier` (noms, déplacement).
+4. Docstring de lancer.py (règles détaillées de `rapide`), docstring de verifier.py (a), `docs/methode-chantiers.md` (point 3 du
+   contrôle allégé) ; CLAUDE.md non touché (phrase proposée dans suivi.md).
+
+### Ce que tests-rapides avait déjà fait (non refait)
+
+P6 (ebe2c22) : un `.py` de moteur chargé par une page (d'après `moteur/manifeste.json`) relance les pages à corpus réduit de l'outil,
+la filière M avec la page des exponentielles, « toutes » si on ne sait pas borner ; une page, un fichier commun, un test de pages ou un
+module de leur corpus relancent les pages. **Point 5 de la consigne** (« un .py de moteur ou une référence de page change → test_rendu
+de l'outil ») : la moitié moteur était couverte par P6 (`test_rendu` est dans la suite de pages, filtré par `OUTILS`) ; la moitié
+référence ne l'était pas (un `.json` de `tests/pages/references/` ne relançait rien) : faite ici.
+
+### Règles ajoutées à `rapide`
+
+| Changement (modifié, supprimé, déplacé ou nouveau) | Tests Python relancés en plus | Pages (corpus réduit) |
+|---|---|---|
+| tout fichier : noms à espaces ou non ASCII (`-z`) | (comme avant, mais le fichier n'est plus perdu) | (idem) |
+| `.py` supprimé des moteurs, de tests/python ou de donnees/ | ses importeurs, même de loin (son nom reste un nœud du graphe) | celles des outils qui le chargent (manifeste) |
+| test_*.py supprimé | aucun (il n'existe plus ; seulement listé) | — |
+| `tests/python/donnees/*` | `.py` : ses importeurs ; tout fichier : les modules dont une chaîne nomme `donnees`, puis leurs dépendants ; aucun : **tous** | — |
+| `tests/python/instantanes/**` | `test_instantanes*.py`, `test_json_strict.py`, et les modules qui nomment `instantanes` (test_vocabulaire, test_doubles_signes, test_redaction_limites…) | `instantanes/resoudre/<outil>.json` : la page de l'outil (test_comportement le lit) |
+| page d'outil (fichier non `.py` d'un dossier d'outil) | `test_instantanes*.py`, `test_json_strict.py` | l'outil (déjà) |
+| `tests/python/cas*.py` | `test_instantanes*.py`, `test_json_strict.py` (en plus des importeurs) | toutes (corpus des pages, déjà) |
+| `tests/pages/references/<outil>.json` | les modules qui nomment `references` (test_doubles_signes…) | l'outil (filière M : avec la page des exponentielles) ; `graphique-traces.json` ou autre : toutes |
+| autre fichier non `.py` de `tests/pages/` | — | toutes (élargi) |
+| `tests/lancer.py`, `verifier.py`, `comparer_listes.py`, `rapport_pytest.py` | `test_lancer.py` | — |
+
+Choix :
+- **Graphe sur l'état présent, noms des supprimés gardés** (« équivalent sûr » de l'état d'avant) : un module qui importe encore le
+  supprimé est atteint ; un module qui ne l'importe plus a été modifié, donc atteint lui aussi, avec ses dépendants.
+- **Lecteurs par chemin** : une chaîne qui a le nom du dossier pour élément de chemin (`"donnees"`, `"…/references/…"`), puis
+  propagation par le graphe ; si aucun module ne le nomme, tous les tests Python (on élargit).
+- **Page → test_instantanes\* et test_json_strict seulement**, comme la consigne, et non tous les importeurs de cas.py (23 fichiers,
+  dont des oracles lents) : un exemple ajouté ou changé dans une page change les instantanés, qui échouent ; `complet` reste
+  obligatoire avant un commit.
+- **`complet` inchangé** : mêmes commandes ; seuls les noms notés dans rapport.json changent pour un nom non ASCII (en clair au lieu de
+  l'échappement octal de git, que `verifier` notait « supprimé » des deux côtés et acceptait donc sans comparer d'empreinte) ou un
+  déplacement indexé (l'ancien chemin manquait : `verifier` refusait). Deux tests le vérifient.
+- `modules_du_depot` tolère un dossier absent (tous les fichiers d'un dossier supprimés) : les supprimés sont pris dans la liste de git.
+
+### test_lancer.py (ajouts)
+
+- `ModeleRapide` : dépôt de forme réelle, petit (manifeste, trois dossiers d'outils avec page et moteur, `commun/`, tests/python avec
+  cas.py, cas_el.py, donnees/, instantanes/, tests/pages et ses références), noms `factorisation/a b.py`, `tests/python/é.py`,
+  `tests/python/test_a b.py`, `exponentielles-logarithmes/moteur ê.py`, `tests/python/test_nouveau é.py` (non suivi).
+- `TestRapide`, 14 tests (24 sous-tests) : rien de modifié ; noms à espaces et non ASCII (non suivis, indexés, commités puis
+  `--depuis HEAD~1`) ; module supprimé (arbre puis `--depuis`) ; test supprimé et module de moteur supprimé ; fichier déplacé (indexé
+  puis `--depuis`) ; donnees/ (module, JSON supprimé et nouveau, dossier nommé par aucun module → tous) ; page (trois outils) ; page
+  commitée `--depuis` ; cas_el.py modifié, cas.py supprimé ; instantané (simple, resoudre de deux outils, supprimé) ; référence de page
+  (outil, filière M, graphique → toutes) ; moteur → page de l'outil (trois) ; les quatre scripts de commande → test_lancer.py ; un
+  test isolé et un fichier commun (rien d'autre).
+- `TestVerifier`, 3 tests de plus : nom « é b » dans le commit (accepté, empreinte contrôlée) ; nom « é » changé après le lancement
+  (refusé) ; déplacement indexé (accepté).
+- Contre-épreuve : le nouveau test_lancer.py lancé sur les scripts de d4837d6 (worktree jetable) : 33 échecs (tests et sous-tests),
+  dont tous les cas de règles et les trois de `verifier`.
+- Durée : 1,6 s avec `-n auto` (37 tests, 30 sous-tests).
+
+### Vérifications
+
+- Dump (`dumps/F2`) : `diff -r --exclude=temps` avec le départ, aucune sortie, code 0 ; `dumps/F2-p1` (`--processus 1`) aussi. Temps
+  (`--processus 1`) : identiques au tableau « Temps » (limites 5,85 s, étude 1,99 s, factorisation 1,89 s, autres < 1 s).
+- `git diff --exit-code main -- tests/python/instantanes tests/pages/references` : rien.
+- `liste` sur l'arbre réel avant commit : fichiers `docs/chantiers/fondations/journal.md`, `docs/methode-chantiers.md`, `tests/lancer.py`,
+  `tests/python/test_lancer.py`, `tests/verifier.py` ; tests Python : fumée + `test_lancer.py` ; pages : aucune. Cohérent (avant F2,
+  `tests/lancer.py` et `tests/verifier.py` modifiés n'auraient pas relancé `test_lancer.py`).
+- Suite d'avant commit : `PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rapport <scratchpad>/rapports/F2` : code 0. Python
+  1 371 passés + 1 xfail (1 372 collectés), 105 837 sous-tests, 100,4 s ; pages 123 passés, 2 386 sous-tests, 300,3 s (un premier
+  lancement, vert lui aussi, a été refait : une docstring de lancer.py retouchée pendant qu'il tournait). Pendant le lancement, deux
+  fichiers non suivis sont apparus sous `docs/chantiers/equations-2e-degre/` (`decisions (1).md:Zone.Identifier`,
+  `decisions.md.md`), pas de F2 : ignorés par `verifier` (docs/), laissés hors du commit. `comparer_listes.py tests/reference <F2>` :
+  seuls ajouts, les 20 tests de F1 (`TestVerifier`) et les 17 de F2 (14 `TestRapide`, 3 `TestVerifier`), tous passés ; sous-tests
+  105 807 → 105 837 (+6 de F1, +24 de F2) ; pages identiques nom par nom.
+
 ## Contrôles du chef d'orchestre
 
 - F0 `0cb5a64` : verifier ACCEPTÉ (Python 1 335 / 105 807 sous-tests, pages 123 / 2 386, identiques à la référence) ; rapide --depuis HEAD~1 : 22 passés, 224 sous-tests, 2 s (seuls fumée + docs) ; dump = départ.
+- F1 `d4837d6` : verifier ACCEPTÉ (Python 1 354 + 1 xfail / 105 813 sous-tests, pages 123 / 2 386 ; +20 tests test_lancer annoncés) ; rapide --depuis HEAD~1 : 42 passés, 230 sous-tests, 4 s ; dump = départ ; instantanés/références inchangés.
 
 ## Temps
 

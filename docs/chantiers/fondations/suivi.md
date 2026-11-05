@@ -9,7 +9,7 @@ Consigne complète, plan et détails : `journal.md`. La consigne du chantier tie
 |---|---|---|---|
 | F0 | Fiches, référence rafraîchie, `tests/outils/dump_sorties.py`, dump de départ | faite (suite verte) | voir `git log` |
 | F1 | `verifier` : docs/ ignoré, baisse de sous-tests justifiée ici ; `test_lancer.py` | faite (suite verte) | voir `git log` |
-| F2 | `lancer.py rapide` (reste de R4) | à faire | — |
+| F2 | `lancer.py rapide` (reste de R4) : `-z`, supprimés, donnees/, instantanés, pages, références, scripts | faite (suite verte) | voir `git log` |
 | F3 | R1 : une seule liste des outils | à faire | — |
 | F4 | R6 : `test_noyau` étendu, graphe d'imports figé, noms à plat uniques | à faire | — |
 | F5 | R3 : ménage | à faire | — |
@@ -30,6 +30,14 @@ tests égales à la référence (sauf ajouts annoncés).
   référence (par défaut tests/reference) ; une baisse de sous-tests n'est acceptée que justifiée dans le suivi.md du chantier
   (section « Variations de sous-tests », ligne `` - `<test>` : <avant> → <après> : <raison> ``, nombres exacts ; `--suivi <fichier>`
   pour un autre fichier) » ; et `verifier <dossier> [--reference <dossier>] [--suivi <fichier>]` en tête de la ligne.
+
+- **F2, `CLAUDE.md` (description de `rapide`, devenue incomplète)** : remplacer « dépendances d'import comprises) plus les tests de
+  fumée (manifeste, accueil, source unique) ; » par « dépendances d'import comprises, fichiers supprimés aussi, noms lus avec `-z`)
+  plus les tests de fumée (manifeste, accueil, source unique) ; un fichier de `tests/python/donnees/`, d'instantanés ou de références
+  de pages relance les tests qui nomment ce dossier (tous s'il n'y en a aucun) ; une page, un `cas*.py` ou un instantané relance aussi
+  `test_instantanes*` et `test_json_strict` ; un script de commande (`lancer.py`, `verifier.py`, `comparer_listes.py`,
+  `rapport_pytest.py`) relance `test_lancer.py` ; » ; et « dont un moteur Python chargé par la page change » par « dont un moteur
+  Python chargé par la page, la référence de page ou l'instantané resoudre change ».
 
 ## À relire par l'enseignant
 
