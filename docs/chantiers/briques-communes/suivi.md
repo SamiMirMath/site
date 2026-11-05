@@ -16,7 +16,7 @@ D25, E14, § 5, P3) tiennent lieu de décisions.
 | B3 | Type de bloc « chaine » : `{rangees: [{lien, expr, prop?, gauche?} \| {texte} \| {bloc}]}` (`sortie.chaine`, `rangee`, `rangee_texte`, `rangee_bloc` ; `valider` : HTML refusé, blocs imbriqués `texte`/`formule`/`tableau` validés récursivement) ; `chaine.bloc_chaine(c, etiquette_grise, impossible, membre_gauche)` ; rendu `commun/rendu.js` (mêmes classes que la grille d'EL, `.pleine`, `.avec-gauche`), compléments dans `commun/composants.css` ; arête `chaine -> sortie` ; Exp-log inchangé ; tests ajoutés : `test_sortie.TestBlocChaine` (7), `test_chaine.TestBlocChaine` (6), `tests/pages/test_bloc_chaine.py` (7, dont 3 xfail stricts « B4 ») | faite (suite verte) | voir `git log` |
 | B4 | CSS : la grille `.chaine` d'EL dans `commun/composants.css` (une section avec `.pleine`, `.avec-gauche`, un seul `@container`), `details ol` dans `commun/style.css` (avec `details ul`) ; retirés des pages EL, Factorisation, Limites ; rendu identique (styles calculés de toutes les pages, 413 M valeurs, 0 écart) ; les 3 xfail stricts « B4 » de `test_bloc_chaine.py` passent ; test ajouté : `test_style_commun::test_grille_chaine_et_listes_des_rappels_dans_les_feuilles_communes` | faite (suite verte) | voir `git log` |
 | B5 | `nombres.approx(x, decimales=3)` et `nombres.exact(x, decimaux_enonce=False)` (TeX), fonctions pures, calcul exact en fractions, aucune fonction existante changée, aucun outil rebranché ; croisées avec `tex_approx` (4 écarts voulus nommés) et `_nb_exact` (égal partout) ; sur les 1 341 valeurs que le corpus d'EL passe à `tex_approx`, `approx` est identique ; D25 vérifié (en place dans `nombres.py`, pas dans ED, FA, LA ni le texte de l'interprétation d'EL) ; tests ajoutés : `test_nombres` (13 tests : `TestApprox`, `TestExact`, `TestPurete`) | faite (suite verte) | voir `git log` |
-| B6 | `oracle.racines(coeffs)` (mpmath 50 chiffres) et ses tests | à faire | — |
+| B6 | `oracle.racines(coeffs)` dans `tests/python/oracle.py` : coefficients du plus haut degré au terme constant (int, Fraction, Decimal, str ; float refusé ; tête nulle retirée ; polynôme nul refusé) ; liste triée de (racine réelle `mpf` à 50 chiffres, multiplicité), non réelles non rendues (x² + 1 : `[]`) ; compagne `mp.eig` à 30 × degré + 40 chiffres, seuils 10⁻²⁰ tenus pour toute multiplicité ; Newton et nombre de racines réelles par la suite de Sturm exacte ; tests ajoutés : `test_oracle.py` (24 tests, 72 sous-tests) | faite (suite verte) | voir `git log` |
 
 ## Vérification après chaque partie
 
@@ -68,6 +68,12 @@ outil), `test_manifeste` vert, `test_largeurs` avec `CONNUS` vide.
     de valeurs, 4 et 1), Exp-log (« 1000 ans » de l'interprétation, 2 entrées, et la saisie recopiée `log_(2x)(1296)` en M), contrôle
     numérique de l'ED (« 5173 points testés », 36 entrées, sans instantané) ; liste des instantanés et références : `journal.md`, B5.
 
+- B6 : aucun instantané, aucune référence de page, aucune sortie modifiés (dump identique ; seul `tests/python/` change). À relire : la
+  forme de `oracle.racines` (docstring ; détail dans `journal.md`, section B6) : float refusé même exact, tête nulle retirée, polynôme
+  nul refusé (ValueError : l'identité, Az 4.1 g, se teste à part), racines non réelles non rendues, et la contre-vérification ajoutée
+  (suite de Sturm exacte : un oracle qui ne conclut pas lève ValueError). Limite : deux racines distinctes à moins de 10⁻²⁰ seraient
+  regroupées (seuil demandé, absolu).
+
 ## Exceptions ajoutées ou changées
 
 - B3 : ligne « HTML de la grille `.chaine` écrit dans un bloc `texte` (`resoudre_el.py`) » de `architecture.md` § 5 ajustée : le type de
@@ -94,4 +100,6 @@ sous-tests passés de la référence et du lancement, exactement ceux que `verif
 - `git log --oneline main..briques-communes` : un commit par partie faite.
 - Dump de départ : `/tmp/claude-1000/-home-sami-ubuntu-site/4164342b-a2d3-4999-80ff-850ac94e5e5e/scratchpad/briques/dumps/depart`
   (hors du dépôt ; s'il a disparu, le refaire sur le commit B0 avec `tests/outils/dump_sorties.py`, commande dans `journal.md`).
+- Depuis B6, scratchpad : `/tmp/claude-1000/-home-sami-ubuntu-site/a4deaf70-1c56-43d6-bbe6-eeb2ee49f756/scratchpad/briques/`
+  (dumps et rapports recopiés, dump de départ vérifié) ; les chemins ci-dessous sont l'ancien emplacement.
 - Rapports `complet --rapport` : `/tmp/claude-1000/-home-sami-ubuntu-site/4164342b-a2d3-4999-80ff-850ac94e5e5e/scratchpad/briques/rapports/<partie>`.

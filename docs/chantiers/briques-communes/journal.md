@@ -705,6 +705,105 @@ Seul : 21 passés, 305 sous-tests, 0,2 s. Ciblés (`-n 6`) avec test_exp_log, te
   nom par nom. Contre `tests/reference` (B0) : 78 tests Python nouveaux (B1 21, B2 30, B3 13, B4 1, B5 13), 7 de pages, hausses
   seulement, plus la baisse déjà justifiée de `test_exp_log` (1 215 → 960).
 
+## B6 — `oracle.racines(coeffs)` (mpmath, 50 chiffres)
+
+### Plan
+
+1. Lecture : `decisions.md` du 2e degré (« Prérequis », § 1, § 6 « Oracle », § 8 : solutions du corpus = `oracle.racines`, et aucune
+   autre ; ∅ pour Δ < 0 ; Az 4.1 g, identité, ℝ), `architecture.md` § 2 (oracle indépendant), `tests/python/oracle.py` (oracle de
+   l'arbre d'ED, `mp.dps = 50` posé à l'import, aucun test propre), l'oracle `racines(s)` de `test_exp_log_m.py` (grille et bissection
+   sur une saisie d'EL, contexte isolé `MP`) et son cache `memo_racines.py` (gardes `test_memo_racines.py`,
+   `test_memo_racines_garde.py`) : **ne changent pas** ; le nouveau nom vit dans `oracle.py`, jamais importé par `memo_racines`.
+2. `oracle.racines(coeffs)` dans `tests/python/oracle.py`, mpmath seul (aucun module de `moteur/` ni d'un outil, ni SymPy) :
+   - coefficients du plus haut degré au terme constant (ordre de `mpmath.polyroots`) ; int, `Fraction`, `Decimal` fini, str lue par
+     `Fraction` (« 1.5 », « -3/4 ») ; float, bool et tout autre type refusés (`TypeError` : un float n'est pas le décimal écrit) ;
+     coefficients de tête nuls retirés (le polynôme est le même) ; polynôme nul refusé (`ValueError` : tout réel est racine, le test
+     de l'identité se fait à part) ; constante non nulle : `[]` ;
+   - calcul exact des coefficients (entiers, par le PPCM des dénominateurs), racines par `polyroots` à une précision interne
+     croissante avec le degré (assez pour qu'une racine de multiplicité m ≤ degré soit connue bien mieux que 10⁻²⁰), contexte
+     global inchangé (`mp.workdps`) ;
+   - regroupement : deux racines à moins de 10⁻²⁰ forment un groupe (multiplicité = taille) ; groupe réel si |Im| < 10⁻²⁰ pour chaque
+     membre, non réel si aucun, `ValueError` si mélangé (l'oracle ne conclut pas) ;
+   - contre-vérification : moyenne du groupe raffinée par Newton sur P⁽ᵐ⁻¹⁾ (racine simple), puis |P(r)| petit devant l'échelle
+     Σ|aᵢ||r|ⁱ, et P⁽ᵐ⁾(r) non petit (multiplicité pas sous-comptée) ; sinon `ValueError` ;
+   - résultat : liste triée de couples (racine réelle `mpf` arrondie à 50 chiffres, multiplicité `int`) ; les racines non réelles ne
+     sont pas rendues (x² + 1 : `[]`, « aucune solution réelle »).
+3. Tests (`tests/python/test_oracle.py`, nouveau) : (x − 1)², x²(x + 8), x² + 1, 17x² + 288x − 17 (valeurs exactes, 40 chiffres au
+   moins), Fraction, décimaux (str, Decimal), degré 1, degré 3, multiplicités 3 à 5, tête nulle, constante, refus des entrées invalides,
+   contexte mpmath global inchangé (aussi après une erreur), indépendance (le code de `racines` ne nomme ni `ed` ni aucun module du
+   moteur).
+4. Vérifications : gardes `test_memo_garde.py`, `test_memo_racines*.py` ; `test_imports`, `test_manifeste` ; dump `B6` et `B6-1`
+   identiques au départ ; temps ; suite complète (`complet --rapport <S>/rapports/B6`), commit, `verifier`.
+
+`<S>` = `/tmp/claude-1000/-home-sami-ubuntu-site/a4deaf70-1c56-43d6-bbe6-eeb2ee49f756/scratchpad/briques` (nouveau scratchpad).
+
+### Exécution
+
+- **Essais** (scratchpad `b6/essai*.py`) : `mp.polyroots` (Durand-Kerner) ne converge pas pour une racine multiple dès que la
+  précision monte : `NoConvergence` pour (x − 1)³ à 50 chiffres, x²(x + 8) à 100, (x + 2)⁴ et x⁵ même avec 20 000 pas. Les valeurs
+  propres de la matrice compagne (`mp.eig`, QR) convergent toujours ; un groupe de m racines y est à environ 10^(−précision/m) près
+  (mesuré : (x − 1)³ à 130 chiffres, |Im| ≈ 10⁻⁴⁴ ; (x + 2)⁴ à 160, 10⁻⁴⁰ ; x²(x + 8) à 130, 10⁻⁶⁸). D'où la précision interne
+  **30 × degré + 40 chiffres** : pour toute multiplicité m ≤ degré, l'écart du groupe est sous 10⁻³⁰, donc les deux seuils de
+  10⁻²⁰ demandés tiennent (pas seulement pour m = 2).
+- **`oracle.racines(coeffs)`** (`tests/python/oracle.py`, section « racines d'un polynôme », fonctions `racines` et `_racines_*`,
+  constantes `SEUIL_RACINES` = 10⁻²⁰ et `CHIFFRES_RACINES` = 50 ; imports ajoutés : `Decimal`, `math.lcm`) :
+  - **ordre** : du plus haut degré au terme constant (celui de `mpmath.polyroots`) ;
+  - **entrées** : int, Fraction, Decimal fini, str lue par `Fraction` (« 1.5 », « -3/4 », « 1e-3 ») ; refusés : float (TypeError,
+    même 0.5 : un float n'est pas le décimal écrit, règle simple), bool, mpf, complexe, tout autre type ; texte illisible (« 1,5 »,
+    « abc », « 1/0 ») ou Decimal non fini : ValueError ; `coeffs` doit être une liste ou un tuple ;
+  - **tête nulle retirée** ; polynôme nul ou liste vide : ValueError (tout réel est racine : l'identité, Az 4.1 g, se traite à part) ;
+    constante non nulle : `[]` ;
+  - **résultat** : liste triée de couples (racine réelle `mpf` arrondie à 50 chiffres, multiplicité `int`) ; les racines non réelles
+    ne sont pas rendues (x² + 1 : `[]`) ;
+  - **calcul** : coefficients exacts rendus entiers (PPCM des dénominateurs), valeurs propres de la compagne, groupes de proche en
+    proche à 10⁻²⁰ (taille = multiplicité), groupe réel si chaque membre a |Im| < 10⁻²⁰, non réel si aucun, mélangé : ValueError ;
+  - **contre-vérification** : moyenne du groupe raffinée par Newton sur P⁽ᵐ⁻¹⁾ (racine simple), puis |P⁽ᵏ⁾(r)| (k < m) petit devant
+    Σ|aᵢ||r|ⁱ (10^(−précision/2)) et |P⁽ᵐ⁾(r)| non petit ; enfin le nombre de racines réelles distinctes doit être celui de la
+    **suite de Sturm**, calculée exactement en Fraction (`_racines_sturm`) : aucune racine réelle perdue ni ajoutée. Sinon ValueError
+    (« l'oracle ne conclut pas »). Essai hors dépôt avec un seuil volontairement trop fin (10⁻⁶⁰, en mémoire) : (x − 1)³ et (x + 2)⁴
+    seraient rendus `[]` sans Sturm ; avec Sturm : ValueError ;
+  - **contexte mpmath** : `mp.workdps` seulement ; précision et arrondi globaux identiques après l'appel, même après une erreur ; le
+    résultat ne dépend pas de la précision globale (testé à 15, 30, 200 chiffres) ;
+  - **indépendance** : ni `ed`, ni aucun module de `moteur/` ou d'un outil, ni SymPy dans ces fonctions (testé par l'AST) ; `oracle.py`
+    garde son import d'`ensemble_def` pour l'oracle des arbres, à côté.
+- **Limite documentée** (docstring) : seuils absolus ; deux racines distinctes plus proches que 10⁻²⁰ seraient comptées comme une
+  racine multiple (hors du corpus du 2e degré : coefficients rationnels de petite taille). Racines distinctes à 10⁻¹⁰ : séparées (testé).
+- **Coût** : 0,3 à 1 ms par appel en degré 2, 6 ms en degré 3, 0,2 à 0,5 s en degré 5 à 6 avec racine multiple, 1,3 s pour (x² + 1)⁴.
+- `oracle.racines` de `test_exp_log_m.py` et `memo_racines.py` : inchangés, non importés par `test_oracle.py` ; gardes vertes.
+
+### Tests ajoutés
+
+`tests/python/test_oracle.py` (nouveau) : 24 tests, 72 sous-tests, 2,2 s seul.
+- `TestCasDemandes` (4) : (x − 1)² → [(1, 2)] (exactement 1) ; x²(x + 8) → [(−8, 1), (0, 2)] ; x² + 1 → [] ; 17x² + 288x − 17 :
+  (−144 ± √(144² + 17²))/17 à 45 chiffres, et −17, 1/17 à 48 ;
+- `TestEntrees` (7) : Fraction (Javet 2.17 e, f ; 2.9 g, h), décimaux (str, Decimal, « 1/2 », « 5e-1 », 0,1 exact), coefficients
+  proportionnels, tête nulle, constante, polynôme nul refusé, refus des entrées invalides (float, bool, None, complexe, mpf, liste ;
+  « abc », « 1,5 », « 1/0 », NaN, ∞ ; `coeffs` str, int, dict, générateur) ;
+- `TestDegres` (4) : degré 1, degré 2 (√5, Javet 2.17 a, x² + 1000x − 1 de E14, −6x² + 12x − 6, trois Δ < 0), degré 3 (2.12 c,
+  Az 4.1 d, x³ − 2 : une racine réelle, (x − 1)(x² + 1)), racines distinctes à 10⁻¹⁰ non regroupées ;
+- `TestMultiplicites` (3) : **multiplicités 3, 4, 5, 6 et 10** ((x − 1)³, (x + 2)⁴, (x − 2)⁵, (x − 1)⁶, x¹⁰, (2x − 3)³,
+  (x − 1)³(x + 2)²) : le seuil 10⁻²⁰ tient ; (x² − 2)² (±√2 doubles), (x² + 1)²(x − 3) ; somme des multiplicités = degré ssi toutes
+  réelles ;
+- `TestSturm` (1) : nombre exact de racines réelles distinctes sur 14 polynômes, égal à la longueur du résultat ;
+- `TestResultat` (3) : forme (liste triée de (mpf, int)), arrondi à 50 chiffres, indépendance de la précision globale ;
+- `TestContexteEtIndependance` (2) : contexte global inchangé (aussi après ValueError et TypeError), code indépendant des moteurs.
+
+### Vérifications
+
+- `rapide` (fichiers modifiés : `oracle.py`, `test_oracle.py`, et les 17 fichiers qui importent `oracle`) : 431 passés, 34 834
+  sous-tests, 36 s, code 0. Gardes et contrôles (`test_memo_garde`, `test_memo_racines_garde`, `test_memo_racines`, `test_memo`,
+  `test_imports`, `test_manifeste`, `test_noyau`, `test_lancer`, `test_vocabulaire`, `-n 6`) : 86 passés, 12 028 sous-tests, code 0.
+- Dump `B6` (`--processus 6`) et `B6-1` (`--processus 1`) : `diff -r --exclude=temps` avec `depart` code 0, aucune sortie (17 fichiers,
+  4 148 sorties). Aucun fichier de `moteur/`, aucune page, aucun instantané, aucune référence de page modifié.
+- Temps natif (`resoudre_json`, 1 processus, comparé à `un-processus` de B0 ; B6 ne touche aucun outil, écarts de bruit) :
+  ensemble-definition 0,033 → 0,035 s ; derivee-variations 0,265 → 0,267 ; limites-asymptotes 5,895 → 5,957 (+1,1 %) ;
+  etude-complete 1,998 → 2,003 ; factorisation 1,883 → 1,924 (+2,2 %) ; EL C 0,888 → 0,941 (+6,0 %) ; EL M 0,764 → 0,796 (+4,2 %).
+  Aucune hausse de plus de 50 %. Mur du dump : 13,0 s (1 processus), 4 s (6 processus).
+- Suite d'avant commit : `PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rapport <S>/rapports/B6`, code 0, 19 h 37 → 19 h 44
+  (6 min 46 de mur). Python 1 494 collectés, 1 493 passés + 1 xfail, 106 768 sous-tests (90,0 s) ; pages 145 passés, 2 421 sous-tests
+  (312,9 s). `comparer_listes` contre le dossier de B5 : 24 tests Python nouveaux (`test_oracle.py`, 72 sous-tests : 106 696 + 72),
+  rien d'autre ; pages identiques nom par nom.
+
 ## Contrôles du chef d'orchestre
 
 - B0 `b296741` : verifier ACCEPTÉ (Python 1 392 / 106 244 sous-tests, pages 138 / 2 407, identiques à la référence) ; rapide --depuis HEAD~1 : 23 passés, 243 sous-tests, 3 s (fumée + docs).
@@ -712,6 +811,8 @@ Seul : 21 passés, 305 sous-tests, 0,2 s. Ciblés (`-n 6`) avec test_exp_log, te
 - B2 `572f751` : verifier ACCEPTÉ (Python 1 443 / 106 301 sous-tests, 51 tests ajoutés depuis B0, 5 hausses, 1 baisse justifiée ; pages 138 / 2 407 identiques) ; rapide --depuis HEAD~1 : Python 1 398 passés + 1 xfail, 106 245 sous-tests (97 s), pages 138 passés, 1 242 sous-tests (279 s), mur 6 min 19 ; dump identique au départ (B2).
 - B3 `9cee0c4` : verifier ACCEPTÉ (Python 1 456 / 106 391 sous-tests, 64 tests ajoutés depuis B0, 1 baisse justifiée ; pages 145 : 142 passés + 3 xfail stricts « B4 », 2 421 sous-tests) ; rapide --depuis HEAD~1 : Python 1 278 passés + 1 xfail, 96 451 sous-tests (89 s), pages 142 passés + 3 xfail, 1 256 sous-tests (307 s), mur 6 min 38 ; dump identique au départ (B3).
 - B4 `d3b7661` : verifier ACCEPTÉ (Python 1 457 / 106 407 sous-tests, 65 tests ajoutés depuis B0, 1 baisse justifiée ; pages 145 passés, 2 421 sous-tests, les 3 xfail « B4 » passés) ; rapide --depuis HEAD~1 : Python 58 passés, 3 756 sous-tests (12 s), pages 145 passés, 1 256 sous-tests (310 s), mur 5 min 23 ; dump identique au départ (B4).
+- B5 `abb21fa` : verifier ACCEPTÉ (Python 1 470 / 106 696 sous-tests, 78 tests ajoutés depuis B0, 1 baisse justifiée ; pages 145 passés, 2 421 sous-tests) ; rapide --depuis HEAD~1 : Python 995 passés + 1 xfail, 79 498 sous-tests (70 s), pages 85 passés + 60 sautés (hors outils touchés), 1 034 sous-tests (195 s), mur 4 min 26 ; dump identique au départ (B5).
+- Changement de scratchpad après B5 : dumps et rapports recopiés dans `/tmp/claude-1000/-home-sami-ubuntu-site/a4deaf70-1c56-43d6-bbe6-eeb2ee49f756/scratchpad/briques/` (dump de départ vérifié identique à la copie) ; B6 et la fin y écrivent.
 
 ## Temps
 
