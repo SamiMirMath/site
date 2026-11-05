@@ -413,11 +413,129 @@ plus.
   `test_exp_log` (1 215 → 960, inchangée depuis B2) ; pages : 2 407 → 2 421 (les 14 sous-tests de `test_bloc_chaine.py`), références
   des autres pages identiques.
 
+## B4 — CSS commun : `.chaine` dans `commun/composants.css`, `details ol` dans `commun/style.css`
+
+### Plan
+
+1. Lecture : `<style>` des pages (EL : `details ol,details ul` et la grille `.chaine` ; Factorisation et Limites : `details ol`
+   identique ; Limites : `details li`), `commun/style.css` (`details ul` y est déjà, mêmes valeurs), `commun/composants.css` (les
+   compléments de B3), qui charge quoi (les six pages outils : style.css puis composants.css puis leur `<style>` ; simplexe :
+   composants.css seule ; accueil : aucune), tests de style (`test_style_commun`, `test_composants`, `test_tableaux_css`).
+2. Mesure **avant** (sur 9cee0c4, arbre sans autre modification que ce journal) : script du scratchpad `b4/styles.py` (Chrome des tests
+   de pages) ; pour chaque page qui charge style.css ou composants.css (six outils, EL filière M, simplexe), quelques entrées (corpus
+   réduit de `rendu.py`, plus des entrées d'EL à chaînes), corrigé complet affiché (`#tout`), tous les `<details>` ouverts, puis à 320,
+   360, 390, 768 et 1100 px, en clair et en sombre : **tous** les styles calculés (`getComputedStyle`, toutes les propriétés) de
+   **tous** les éléments de la page ; en entier pour les éléments `.chaine` (et leurs descendants, et le `.etape` qui la contient) et
+   les `details ol`/`ul`/`li`, par empreinte pour les autres. Sortie JSON dans `b4/avant/`.
+3. Déplacement : `details ol` rejoint `details ul` dans style.css (`details ol,details ul{…}`, mêmes valeurs) ; les règles
+   `details ol` des pages EL, Factorisation, Limites sont retirées (doublons) ; la grille `.chaine` d'EL (règles de base, `.etape:has`,
+   repli `@container`) passe dans la section B3 de composants.css, fondue avec `.pleine` et `.avec-gauche` (une seule section, un seul
+   `@container`) ; la page EL ne garde aucune règle `.chaine` ni `details ol`.
+4. Mesure **après**, même script (`b4/apres/`), comparaison : identique exigé (sinon, la règle ne bouge pas et la question va sous
+   « Questions pour l'enseignant »).
+5. Tests : les trois xfail stricts « B4 » de `tests/pages/test_bloc_chaine.py` perdent leur marque (docstring du module ajustée) ;
+   `test_style_commun` : `details ol` sort de la liste des règles propres à une page, et un test nouveau vérifie qu'aucune page ne garde
+   de règle `.chaine` ni `details ol` (CSS commun seulement) ; `test_composants` : `.chaine` dans les composants demandés.
+6. Docs : `architecture.md` § 5 (ligne « HTML de la grille `.chaine` » : le CSS est commun, reste la migration d'Exp-log), commentaires
+   de composants.css ; dump, temps, suite complète, commit, `verifier`.
+
+### Exécution
+
+- **`commun/style.css`** : `details ul{…}` devient `details ol,details ul{margin:.4em 0 0;padding-left:1.2em}` (mêmes valeurs que les
+  trois pages). Aucune règle de style.css ni de composants.css ne visait `ol` : rien d'autre ne change de place dans la cascade.
+- **Pages** : EL perd `details ol,details ul` et toute la grille `.chaine` (11 lignes ; il garde `.final .res` et `.final .c`) ;
+  Factorisation et Limites perdent leur `details ol` (doublon ; Limites garde `details li` et `.rappel`). Aucune autre page n'avait de
+  `details ol` ni de règle `.chaine` (Ensemble de définition et Dérivée : un `<ul>` dans leur `<details>`, déjà réglé par style.css ;
+  Étude complète : aucun `<details>` ; simplexe : ne charge pas style.css, aucun `.chaine`).
+- **`commun/composants.css`** : une seule section « Chaîne de ⇔ du corrigé » : les quatre règles de base de la grille (`.chaine`,
+  `.ligne`, `.lien`, `.prop`), puis `.pleine` et `.avec-gauche` (B3), le conteneur `.etape:has(>.chaine)`, et **un seul**
+  `@container (max-width: 47rem)` avec le repli de base (3 règles d'EL) puis celui de `.avec-gauche` (3 règles de B3). Aucune règle en
+  double ; la seule redite voulue, `.chaine.avec-gauche{grid-template-columns:…}` dans le `@container`, est commentée (le sélecteur
+  plus précis l'emporterait sinon sur `.chaine` du repli). Commentaire de tête réécrit (une seule description de la grille).
+- **Docs** : `architecture.md` § 5 (le CSS est commun, reste la migration d'Exp-log vers le bloc, à décider) ;
+  `docs/specifications/exponentielles-logarithmes.md` (« grille CSS `.chaine` » : dans composants.css depuis B4).
+- `moteur/`, `nombres.py`, `oracle.py` : non touchés.
+
+### Rendu identique : méthode et résultat
+
+- Script `<scratchpad>/b4/styles.py` (Chrome et serveur des tests de pages, `tests/pages/navigateur.py`), comparaison
+  `<scratchpad>/b4/comparer.py avant apres`, lancement `<scratchpad>/b4/mesurer.sh <dossier>` (quatre pages à la fois, chacune limitée à
+  5 minutes). Pages : les six outils (qui chargent style.css et composants.css), EL en filière M (`?filiere=M`), simplexe (composants.css
+  seule). États : page prête, puis chaque entrée du corpus réduit de `rendu.py` (3 par outil ; EL C : + `7^(2x+1)=7^9`, `3^x=27`,
+  `ln(x)+ln(x-1)=ln(6)`, `e^(2x)-3e^x+2=0` ; EL M : + `log(x)=3`, `log(x)=-1`), corrigé complet (`#tout`), **tous les `<details>`
+  ouverts** (rappels d'EL C et M, de Factorisation, de Limites…). Pour chaque état, à 320, 360, 390, 768 et 1100 px, en clair et en
+  sombre : `getComputedStyle` de **tous** les éléments de la page, **toutes** les propriétés (triées par nom), une empreinte FNV-1a par
+  élément ; les éléments de la grille (chaque `.chaine`, ses descendants, son `.etape`) et les `ol`/`ul`/`li` d'un `<details>` sont
+  aussi relevés à part, par leur chemin dans le DOM.
+- **Avant** : sur 9cee0c4 (les cinq fichiers de page et de CSS remis à HEAD, le reste de l'arbre : ce journal et les tests seulement) ;
+  **après** : avec B4.
+- Écueil levé en route : un premier essai, propriétés dans l'ordre de `getComputedStyle`, donnait des écarts partout, même entre deux
+  lancements sur le même arbre (l'ordre d'énumération change d'un Chrome à l'autre) ; avec les propriétés triées, deux lancements sur le
+  même arbre sont identiques (Dérivée et simplexe, 41 920 éléments), et la comparaison avant / après est faite ainsi.
+- **Résultat : identique**, 0 écart. 350 mesures (état × largeur × thème), 826 300 éléments mesurés, **413 137 700 valeurs** comparées, dont
+  56 680 relevés d'éléments de la grille `.chaine` ou de listes d'un `<details>` (EL C : 34 280 ; EL M : 20 960 ; Limites 640 ;
+  Factorisation 400 ; Dérivée 240 ; Ensemble 160).
+
+  | Page | Mesures | Éléments | Valeurs | Relevés .chaine / details | Résultat |
+  |---|---|---|---|---|---|
+  | exponentielles-logarithmes (C) | 80 | 283 290 | 141 645 000 | 34 280 | identique |
+  | exponentielles-logarithmes (M) | 60 | 210 640 | 105 320 000 | 20 960 | identique |
+  | limites-asymptotes | 40 | 99 580 | 49 790 000 | 640 | identique |
+  | etude-complete | 40 | 97 700 | 48 850 000 | 0 | identique |
+  | factorisation | 40 | 67 540 | 33 770 000 | 400 | identique |
+  | derivee-variations | 40 | 39 870 | 19 935 000 | 240 | identique |
+  | ensemble-definition | 40 | 25 630 | 12 815 000 | 160 | identique |
+  | simplexe | 10 | 2 050 | 1 012 700 | 0 | identique |
+
+- Références de pages : `tests/pages/test_rendu.py` (corpus complet) dans la suite complète ; aucun fichier de `tests/pages/references/`
+  ni d'instantané modifié (`git status`).
+
+### Tests
+
+- `tests/pages/test_bloc_chaine.py` : les trois xfail stricts « B4 » (`test_colonnes_alignees_avant_et_apres_la_ligne_pleine`,
+  `test_repli_sur_ecran_etroit`, `test_etiquette_grise`) perdent leur marque et passent (la page Ensemble de définition a maintenant la
+  grille par composants.css, sans CSS injecté) ; `xfail_b4` et l'import de pytest retirés, docstrings ajustées. Aucune simulation de
+  B4 dans les tests (celle de B3 était un script du scratchpad, `b3/simuler_b4.py`). Seul : 7 passés, 14 sous-tests, 12 s.
+- `tests/python/test_style_commun.py` : `details ol` sort de la liste des règles propres à une page (une page qui la redéfinirait
+  échouerait) ; **test nouveau** `test_grille_chaine_et_listes_des_rappels_dans_les_feuilles_communes` : la grille est dans
+  composants.css, `details ol` dans style.css, et aucun `<style>` de page (six outils et simplexe, 7 sous-tests) n'a de sélecteur
+  `.chaine` ni `details … ol` (contrôlé : sur 9cee0c4 il aurait relevé les 9 sélecteurs d'EL et le `details ol` de Factorisation et de
+  Limites).
+- `tests/python/test_composants.py` : `.chaine` dans les composants demandés (un sous-test de plus).
+- Ciblés (`-n 6`) : test_style_commun, test_composants, test_tableaux_css, test_imports, test_manifeste, test_vocabulaire,
+  test_source_unique, test_rappel_methode : 51 passés, 12 606 sous-tests.
+
+### Vérifications
+
+- Dump `B4` (`--processus 6`) et `B4-1` (`--processus 1`) : `diff -r --exclude=temps` avec `depart` code 0, aucune sortie
+  (17 fichiers, 4 148 sorties).
+- Temps natif (`resoudre_json`, 1 processus, comparé à `un-processus` de B0 ; B4 ne touche aucun moteur, écarts de bruit) :
+
+| Outil | Filière | B0 (s) | B4 (s) | Plus long appel B0 / B4 (s) |
+|---|---|---|---|---|
+| ensemble-definition | – | 0,033 | 0,035 | 0,022 / 0,023 |
+| derivee-variations | – | 0,265 | 0,277 (+4,5 %) | 0,081 / 0,085 |
+| limites-asymptotes | – | 5,895 | 6,244 (+5,9 %) | 1,177 / 1,259 |
+| etude-complete | – | 1,998 | 2,074 (+3,8 %) | 0,29 / 0,301 |
+| factorisation | – | 1,883 | 1,938 (+2,9 %) | 0,063 / 0,064 |
+| exponentielles-logarithmes | C | 0,888 | 0,933 (+5,1 %) | 0,005 / 0,005 |
+| exponentielles-logarithmes | M | 0,764 | 0,843 (+10,3 %) | 0,003 / 0,003 |
+
+  Aucune hausse de plus de 50 %. Mur du dump : 13,5 s (1 processus), 5 s (6 processus).
+- Suite d'avant commit : `PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rapport <scratchpad>/briques/rapports/B4`, code 0,
+  18 h 47 → 18 h 54 (6 min 54 de mur). Python 1 457 collectés, 1 456 passés + 1 xfail, 106 407 sous-tests (99,2 s) ; pages 145
+  collectés, **145 passés** (les trois anciens xfail « B4 » compris), 2 421 sous-tests (312,7 s). `comparer_listes` contre
+  `tests/reference` (B0) : 65 tests Python nouveaux (B1 21, B2 30, B3 13, B4 1) et 7 tests de pages nouveaux (`test_bloc_chaine.py`),
+  aucun disparu ; sous-tests : hausses seulement (`test_composants` : `test_composants_demandes_sont_presents` 10 → 11,
+  `test_ne_redefinit_aucune_regle_de_style_css` 35 → 49, `test_aucune_largeur_d_ecran_en_pixels` 7 → 8 ; et celles de B1–B3), plus la
+  baisse déjà justifiée de `test_exp_log` (1 215 → 960) ; pages : 2 421 sous-tests comme en B3, références des pages identiques.
+
 ## Contrôles du chef d'orchestre
 
 - B0 `b296741` : verifier ACCEPTÉ (Python 1 392 / 106 244 sous-tests, pages 138 / 2 407, identiques à la référence) ; rapide --depuis HEAD~1 : 23 passés, 243 sous-tests, 3 s (fumée + docs).
 - B1 `6be8865` : verifier ACCEPTÉ (Python 1 413 / 106 250 sous-tests, 21 tests nouveaux de test_expr, 5 hausses, 1 baisse justifiée ; pages 138 / 2 407 identiques) ; rapide --depuis HEAD~1 : Python 1 368 passés + 1 xfail, 106 194 sous-tests (87 s), pages 138 passés, 1 242 sous-tests (276 s), mur 6 min 06 ; dump identique au départ.
 - B2 `572f751` : verifier ACCEPTÉ (Python 1 443 / 106 301 sous-tests, 51 tests ajoutés depuis B0, 5 hausses, 1 baisse justifiée ; pages 138 / 2 407 identiques) ; rapide --depuis HEAD~1 : Python 1 398 passés + 1 xfail, 106 245 sous-tests (97 s), pages 138 passés, 1 242 sous-tests (279 s), mur 6 min 19 ; dump identique au départ (B2).
+- B3 `9cee0c4` : verifier ACCEPTÉ (Python 1 456 / 106 391 sous-tests, 64 tests ajoutés depuis B0, 1 baisse justifiée ; pages 145 : 142 passés + 3 xfail stricts « B4 », 2 421 sous-tests) ; rapide --depuis HEAD~1 : Python 1 278 passés + 1 xfail, 96 451 sous-tests (89 s), pages 142 passés + 3 xfail, 1 256 sous-tests (307 s), mur 6 min 38 ; dump identique au départ (B3).
 
 ## Temps
 

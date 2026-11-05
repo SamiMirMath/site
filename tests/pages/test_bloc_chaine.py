@@ -4,21 +4,18 @@ Une chaîne de ⇔ du corrigé, construite en Python par moteur/chaine.py (`bloc
 2e degré (Id_rem.pdf, 2.9 a et c) : membre de gauche, ⇔ alignés, étiquettes grises, « impossible » sous le facteur constant, une ligne
 pleine largeur au milieu (un texte, ou un bloc : tableau, texte), puis d'autres ⇔. Aucune page nouvelle (rien de publié, rien dans le
 registre) : comme le test SOC-22 (test_comportement.py), les cartes sont rendues dans la page d'un outil existant (Ensemble de
-définition), qui charge KaTeX, commun/style.css, commun/composants.css et commun/rendu.js, mais pas le CSS de la grille .chaine (encore
-dans la page Exponentielles et logarithmes).
+définition), qui charge KaTeX, commun/style.css, commun/composants.css (où est la grille .chaine depuis B4) et commun/rendu.js.
 
-Ce qui passe dès B3 : structure (mêmes classes que la grille d'Exp-log), formules rendues par KaTeX, textes échappés, blocs imbriqués,
-sortie validée par `sortie.valider`, aucune faute du balayage des largeurs (320 à 1100 px, clair et sombre : test_largeurs.JS_MESURE),
-rien hors de la carte, couleurs du thème. Ce qui ne peut passer qu'avec le CSS .chaine commun (B4 : il passe de la page Exp-log à
-commun/composants.css) est marqué xfail STRICT « B4 » : colonnes alignées avant et après la ligne pleine largeur, repli sur un écran
-étroit (propriété sous l'expression, membre de gauche au-dessus, pas de défilement), étiquette grise."""
+Dès B3 : structure (mêmes classes que la grille d'Exp-log), formules rendues par KaTeX, textes échappés, blocs imbriqués, sortie validée
+par `sortie.valider`, aucune faute du balayage des largeurs (320 à 1100 px, clair et sombre : test_largeurs.JS_MESURE), rien hors de la
+carte, couleurs du thème. Depuis B4 (CSS .chaine passé de la page Exp-log à commun/composants.css ; xfail stricts « B4 » jusque-là) :
+colonnes alignées avant et après la ligne pleine largeur, repli sur un écran étroit (propriété sous l'expression, membre de gauche
+au-dessus, pas de défilement), étiquette grise."""
 import json
 import os
 import sys
 import unittest
 from fractions import Fraction as F
-
-import pytest
 
 sys.path.insert(0, os.path.dirname(__file__))
 from navigateur import Navigateur  # noqa: E402
@@ -30,10 +27,6 @@ from chaine import Chaine, Eq, Message, Ou, Texte, bloc_chaine  # noqa: E402
 from expr import LEXIQUE_COMMUN, Nb, Var, lire_membres  # noqa: E402
 
 PAGE = "ensemble-definition"                 # n'importe quelle page d'outil qui charge KaTeX et commun/rendu.js
-
-
-def xfail_b4(quoi):
-    return pytest.mark.xfail(strict=True, reason=f"B4 : {quoi} (CSS .chaine de la page Exp-log vers commun/composants.css)")
 
 
 def eq(texte):
@@ -253,8 +246,7 @@ class TestBlocChaine(unittest.TestCase):
                         self.page.taille(1100, 800)
         self.assertEqual(erreurs_a_signaler(self.page), [])
 
-    # ---------- avec le CSS .chaine commun (B4) ----------
-    @xfail_b4("colonnes de la grille .chaine")
+    # ---------- avec le CSS .chaine commun (depuis B4) ----------
     def test_colonnes_alignees_avant_et_apres_la_ligne_pleine(self):
         """Écran large (1100 px) : une seule grille ; les ⇔ alignés (même bord droit de la colonne .lien), les expressions alignées (même
         bord gauche), les propriétés alignées, avant comme après la ligne pleine largeur ; le membre de gauche avant le premier ⇔ ; la
@@ -274,11 +266,9 @@ class TestBlocChaine(unittest.TestCase):
                 self.assertAlmostEqual(p["g"], ch["chaine"]["g"], delta=1)
                 self.assertAlmostEqual(p["d"], ch["chaine"]["d"], delta=1)
 
-    @xfail_b4("repli de la grille .chaine sur un conteneur étroit")
     def test_repli_sur_ecran_etroit(self):
         """Écran étroit (360 et 390 px) : deux colonnes, la propriété sous l'expression (même bord gauche), les ⇔ toujours alignés, le membre
-        de gauche seul sur sa ligne au-dessus du premier ⇔ ; la chaîne tient dans sa carte sans défiler. (Sans sous-test : un xfail strict
-        doit échouer en entier.)"""
+        de gauche seul sur sa ligne au-dessus du premier ⇔ ; la chaîne tient dans sa carte sans défiler."""
         fautes = []
         for w in (360, 390):
             for ch in self.mesurer(w):
@@ -294,10 +284,9 @@ class TestBlocChaine(unittest.TestCase):
                         fautes.append((ou, "membre de gauche pas au-dessus du ⇔", l))
         self.assertEqual(fautes, [])
 
-    @xfail_b4("couleur de la colonne .prop")
     def test_etiquette_grise(self):
         """La propriété (étiquette grise sans parenthèses, ou entre parenthèses comme Exp-log) est grise (--muted du thème) et plus petite
-        que l'expression, en clair et en sombre. (Sans sous-test : un xfail strict doit échouer en entier.)"""
+        que l'expression, en clair et en sombre."""
         fautes = []
         for sombre in (False, True):
             for ch in self.mesurer(1100, sombre=sombre):

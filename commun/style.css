@@ -101,7 +101,7 @@ canvas.graphique~.hint{margin-top:6px}
 .exemples{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .exemples button{font-size:.88rem;padding:5px 9px}
 details summary{cursor:pointer;font-weight:600;padding:10px 0}      /* cible tactile ≥ 44 px */
-details ul{margin:.4em 0 0;padding-left:1.2em}
+details ol,details ul{margin:.4em 0 0;padding-left:1.2em}
 .etat{font-size:.9rem;color:var(--muted);margin-top:8px}
 .barre{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin:4px 0 12px}
 /* Les cartes d'étape (rendu.js) portent aussi .carte-etape (commun/composants.css) : marges intérieures fluides, clamp(10px, 3vw, 18px) */

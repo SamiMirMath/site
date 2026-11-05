@@ -14,7 +14,7 @@ D25, E14, § 5, P3) tiennent lieu de décisions.
 | B1 | `moteur/expr.py` : arbre d'Exp-log, `tex`, parseur avec un `Lexique` explicite (« membre = membre » : `lire_membres`) ; e et log restent dans `exp_log` (nœuds `E`, `Log`, `LEXIQUE`) ; réexport par `exp_log` ; manifeste ; `_DECIMAUX` ne traverse pas ; tests ajoutés : `test_expr.py` (21 tests, 144 sous-tests) | faite (suite verte) | voir `git log` |
 | B2 | `moteur/chaine.py` : Eq, Rel, Ou, Texte, Chaine, Message, `tex_element`, `tex_chaine`, `rangees_chaine`, 3 propriétés génériques ; `Positif`, `Car`, `Divise` et les 44 autres `PROP_*` restent dans exp_log (s'écrivent eux-mêmes : `chaine.Element`, `chaine.Justification`), coche par `Chaine(coche=True)` ; trois options désactivées par défaut (`etiquette_grise`, `impossible`, `textes`/`texte_avant`) ; réexport ; manifeste ; arêtes `chaine -> expr`, `exp_log -> chaine` ; tests ajoutés : `test_chaine.py` (30 tests, 76 sous-tests) | faite (suite verte) | voir `git log` |
 | B3 | Type de bloc « chaine » : `{rangees: [{lien, expr, prop?, gauche?} \| {texte} \| {bloc}]}` (`sortie.chaine`, `rangee`, `rangee_texte`, `rangee_bloc` ; `valider` : HTML refusé, blocs imbriqués `texte`/`formule`/`tableau` validés récursivement) ; `chaine.bloc_chaine(c, etiquette_grise, impossible, membre_gauche)` ; rendu `commun/rendu.js` (mêmes classes que la grille d'EL, `.pleine`, `.avec-gauche`), compléments dans `commun/composants.css` ; arête `chaine -> sortie` ; Exp-log inchangé ; tests ajoutés : `test_sortie.TestBlocChaine` (7), `test_chaine.TestBlocChaine` (6), `tests/pages/test_bloc_chaine.py` (7, dont 3 xfail stricts « B4 ») | faite (suite verte) | voir `git log` |
-| B4 | CSS : `.chaine` dans `commun/composants.css`, `details ol` dans `commun/style.css` | à faire | — |
+| B4 | CSS : la grille `.chaine` d'EL dans `commun/composants.css` (une section avec `.pleine`, `.avec-gauche`, un seul `@container`), `details ol` dans `commun/style.css` (avec `details ul`) ; retirés des pages EL, Factorisation, Limites ; rendu identique (styles calculés de toutes les pages, 413 M valeurs, 0 écart) ; les 3 xfail stricts « B4 » de `test_bloc_chaine.py` passent ; test ajouté : `test_style_commun::test_grille_chaine_et_listes_des_rappels_dans_les_feuilles_communes` | faite (suite verte) | voir `git log` |
 | B5 | `nombres.approx(x, decimales=3)` et `nombres.exact(x, decimaux_enonce=False)`, fonctions pures, aucun outil rebranché ; tests croisés | à faire | — |
 | B6 | `oracle.racines(coeffs)` (mpmath 50 chiffres) et ses tests | à faire | — |
 
@@ -49,12 +49,19 @@ outil), `test_manifeste` vert, `test_largeurs` avec `CONNUS` vide.
     P2 s'ajoutera à `BLOCS_DANS_CHAINE`) ;
   - captures à 390 et 1100 px avec le CSS de B4 simulé : `/tmp/claude-1000/-home-sami-ubuntu-site/4164342b-a2d3-4999-80ff-850ac94e5e5e/scratchpad/b3/avec-b4-390.png` et
     `avec-b4-1100.png` dans le même dossier (hors du dépôt).
+- B4 : aucun instantané, aucune référence de page, aucune sortie modifiés (dump identique) ; styles calculés identiques avant / après
+  sur toutes les pages (méthode et tableau : `journal.md`, section B4). À relire : le `details ol` retiré aussi de Factorisation et de
+  Limites (doublons de la règle commune, rendu identique), et la section « Chaîne de ⇔ » de `commun/composants.css`.
 
 ## Exceptions ajoutées ou changées
 
 - B3 : ligne « HTML de la grille `.chaine` écrit dans un bloc `texte` (`resoudre_el.py`) » de `architecture.md` § 5 ajustée : le type de
   bloc `chaine` existe, le CSS passe en B4, la migration d'Exp-log vers le bloc est un chantier **à décider**. Aucune exception
   d'import nouvelle (arête `chaine -> sortie` dans ARETES, brique → brique).
+- B4 : même ligne : le CSS `.chaine` est commun (`commun/composants.css`, la page EL n'en garde aucune règle) ; reste seulement la
+  migration d'Exp-log vers le bloc (à décider). Liste des règles propres à une page de `test_style_commun` : `details ol` en sort.
+- B4, listes de tests : les 3 tests xfail stricts « B4 » de `tests/pages/test_bloc_chaine.py` deviennent passés (voulu) ; un test
+  Python ajouté (`test_style_commun`, 7 sous-tests), un sous-test de plus à `test_composants`.
 
 ## Variations de sous-tests
 

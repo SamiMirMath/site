@@ -97,7 +97,7 @@ Elles sont tolérées ; celles qui sont des arêtes d'import (A1) sont **listée
 | `exp_log._DECIMAUX` | A7 | R5 : `moteur/expr.py` ne le lit pas (B1 : il reste dans `exp_log`, seul `_nb_exact` le lit, aucun état dans la brique) ; puis R10 |
 | 3 parseurs (ED, `moteur/expr.py` repris d'EL avec le lexique d'EL, FA), 2 arbres d'expressions (ED, `expr`), 2 classes `Chaine` (`moteur/chaine.py` reprise d'EL, LA) | A2 | R5 (la chaîne commune `moteur/chaine.py`, B2 ; celle de LA reste à elle), le reste seulement si un outil en a besoin |
 | 5 formats de « ≈ », `qtex` sans notation suisse | A5 | R9, outil par outil |
-| HTML de la grille `.chaine` écrit dans un bloc `texte` (`resoudre_el.py`), CSS dans la page EL | A4 | Le type de bloc `chaine` existe (R5, briques-communes B3 : `sortie.chaine`, `chaine.bloc_chaine`, rendu commun avec les mêmes classes) ; le CSS `.chaine` passe dans `commun/composants.css` en B4 ; Exp-log garde sa grille écrite en HTML jusqu'à sa migration vers le bloc : chantier **à décider** (instantanés et références de pages d'EL à relire) |
+| HTML de la grille `.chaine` écrit dans un bloc `texte` (`resoudre_el.py`) | A4 | Le type de bloc `chaine` existe (R5, briques-communes B3 : `sortie.chaine`, `chaine.bloc_chaine`, rendu commun avec les mêmes classes) et son CSS est commun (B4 : la grille `.chaine` dans `commun/composants.css`, la page EL n'en garde aucune règle ; `test_style_commun`) ; reste la migration d'Exp-log, qui écrit encore sa grille en HTML, vers le bloc : chantier **à décider** (instantanés et références de pages d'EL à relire) |
 
 ## 6. Ordre des chantiers
 
