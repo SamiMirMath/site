@@ -5,7 +5,7 @@ Depuis P5, l'instantané est celui de l'outil : tests/python/instantanes/equatio
 par l'outil, la résolution de `second_degre.resoudre_equation` et ses cartes, une par étape (R1), la variante « formule » quand elle
 est proposée), lu par `dump_sorties.py` et contrôlé, comme les autres instantanés, par `test_json_strict` (JSON strict) et
 `test_vocabulaire` (C6, R12). Ce fichier garde ce que ces contrôles communs ne voient pas : chaque exercice du § 8 a son instantané, résolu ; chaque
-entrée du corpus (`RESOLUES`, `NON_RESOLUES`, `STRUCTURES_NON_ECRITES`) est figée avec son statut ; les cartes figées forment une
+entrée du corpus (`RESOLUES`, `NON_RESOLUES`, `FORMES_NON_ECRITES`) est figée avec son statut ; les cartes figées forment une
 sortie conforme au schéma commun."""
 import json
 import os
@@ -14,7 +14,7 @@ import unittest
 import moteurs  # noqa: F401  (chemins des moteurs)
 
 import sortie
-from corpus_second_degre import NON_RESOLUES, RESOLUES, SECTION_8, STRUCTURES_NON_ECRITES
+from corpus_second_degre import FORMES_NON_ECRITES, NON_RESOLUES, RESOLUES, SECTION_8
 from test_instantanes import DOSSIER
 
 CHEMIN = os.path.join(DOSSIER, "equations-2e-degre.json")
@@ -40,7 +40,7 @@ class TestInstantanesSecondDegre(unittest.TestCase):
         """Tout le corpus de la rédaction est figé (P2b à P4b), chaque entrée avec son statut : résolue, ou le message attendu."""
         attendus = {s: "resolu" for s in RESOLUES.values()}
         attendus.update({s: statut for s, statut in NON_RESOLUES.values()})
-        attendus.update({s: "forme_non_traitee" for s in STRUCTURES_NON_ECRITES})
+        attendus.update({s: "forme_non_traitee" for s in FORMES_NON_ECRITES})
         for saisie, statut in attendus.items():
             with self.subTest(saisie=saisie):
                 self.assertIn(saisie, self.reference)

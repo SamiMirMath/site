@@ -31,7 +31,8 @@ VARIANTE_DEFAUT = "cours"
 LIBELLES = {"cours": "Méthodes du cours", "formule": "Par la formule"}         # D2, E12
 
 # badge de la carte d'une étape (phase, méthode) ; {x} : l'inconnue
-TITRES = {("ramener", "RAMENER"): "Ramener à 0", ("ramener", "DEVELOPPER"): "Développer", ("isoler", "ISOLER"): "Isoler {x}",
+TITRES = {("ramener", "FRACTIONS"): "Supprimer les fractions", ("ramener", "RAMENER"): "Ramener à 0",
+          ("ramener", "DEVELOPPER"): "Développer", ("isoler", "ISOLER"): "Isoler {x}",
           ("factoriser", "ME"): "Mise en évidence", ("factoriser", "ME_PUISSANCE"): "Mise en évidence",
           ("factoriser", "IDREM_DIFF"): "Identité remarquable", ("factoriser", "IDREM_PLUS"): "Identité remarquable",
           ("factoriser", "IDREM_MOINS"): "Identité remarquable", ("factoriser", "SP"): "Somme-Produit",

@@ -23,7 +23,8 @@ d'un outil existant modifiés (détail : `journal.md`, « Contrôles du chef d'o
 | P4a | formes structurées sur l'arbre (produit déjà nul, facteur commun, Id. rem. structurée, E1.3) | `06f3daf` | 7 min 12 | 12 Python, 1 renommé (5 xfail « P4a » passent) |
 | P4b | degrés ≠ 2 (ME de xᵏ, E9, x⁴ − 16), degré 1, identité, messages définitifs | `88ea64e` | 7 min 21 | 13 Python, 1 renommé (7 xfail « P4b » passent) |
 | P5 | l'outil (page, `resoudre_eq`, manifeste, registre sans filière) ; message « forme non traitée » (question 29) | `f65131b` | 7 min 10 | 6 Python (3 retirés), 3 de pages |
-| R1 | une carte par étape (question 36) | commit « R1 » de la branche | 7 min (Python 100 s, pages 335 s) | 3 Python, 1 de pages |
+| R1 | une carte par étape (question 36) | `ee52a47` | 7 min (Python 100 s, pages 335 s) | 3 Python, 1 de pages |
+| R2 | développer d'abord, fractions supprimées d'abord (question 29) | commit « R2 » de la branche | 7 min (Python 95 s, pages 334 s) | 8 Python (1 renommé), 1 de pages |
 | P6 | filières, carte de l'accueil, butée de `test_accueil`, `test_acc01` | hors nuit, après relecture | — | — |
 
 Suite finale (chef d'orchestre, sur `f65131b`, `PROCESSUS_PAGES=4`, `…/rapports/FIN`) : code 0 ; Python 1 666 passés + 1 xfail
@@ -54,6 +55,8 @@ ordre et mêmes étapes (ramener · factoriser (ME) · factoriser (TATONNEMENT, 
 à celui de P3 (`journal.md`, P3, « Texte rendu de 2.11 h »).
 
 **À relire par l'enseignant** (détail : section « À relire » ci-dessous et `journal.md`) :
+- **R2** : textes de 2(x + 1)² = 8, x²/2 = 1 + x, Az 4.1 b et h (`journal.md`, R2) ; les 16 instantanés changés (tous « forme non
+  traitée » avant) et les 21 nouveaux ; captures `/home/sami-ubuntu/nuits/equations-2e-degre/captures/R2/` ; question 41.
 - **R1** : captures `/home/sami-ubuntu/nuits/equations-2e-degre/captures/R1/` ; tous les instantanés du nouvel outil, découpage en
   cartes ; question 40 (étape sans ligne de chaîne).
 - Captures à 390 px : `/home/sami-ubuntu/nuits/equations-2e-degre/captures/P5/` (`2.11-h-390-clair.png`, `2.11-h-390-sombre.png`,
@@ -78,7 +81,8 @@ ordre et mêmes étapes (ramener · factoriser (ME) · factoriser (TATONNEMENT, 
   les structures non écrites, un autre texte.
 - **8** instabilité de chargement de `test_soc04_parametre_f` en P0, acceptée par le chef comme celle de `test_clavier`.
 - **40** (R1) étape sans ligne de chaîne (tentative en échec, phrase de choix seule, « Δ < 0 ») : une carte de textes à elle ; badges.
-- 36 **tranché : une carte par étape** (R1, fait) ; 29 **tranché : développer d'abord, fractions supprimées d'abord** (R2) ; 37 et 25
+- **41** (R2) choix de rédaction du développement pas à pas et de la suppression des fractions ; formes encore non écrites.
+- 36 **tranché : une carte par étape** (R1, fait) ; 29 **tranché : développer d'abord, fractions supprimées d'abord** (R2, fait) ; 37 et 25
   **tranchés : les deux boutons pour comparer** (R3) ; autres questions : options par défaut gardées (proposé le 06.11.2026, sans objection de l'enseignant) ; 30 « bicarrée » aussi après une ME ; 31 ordre d'écriture de x⁴ − 16.
 - 9 radicande > 10¹² : message des bornes ; 10 ME non entière en degré ≥ 3 (0,5x³ − 2x) ; 11 `s_applique` hors du chemin (quiz).
 - 12 fond de l'encadré D29 seulement avec `:has` ; 13 et 17 un seul cadre « A = 4z, B = 9 ».
@@ -90,8 +94,8 @@ ordre et mêmes étapes (ramener · factoriser (ME) · factoriser (TATONNEMENT, 
 - 37 libellés de la variante E12 ; 38 aperçu (syntaxe seulement) ; 39 `test_acc03` et outil sans filière.
 - Pour mémoire (réglées pendant la nuit) : 14 (statut `non_traite`, disparu en P4b), 19 (réglée par P4a).
 
-Exceptions (`architecture.md`) : aucune. Variations de sous-tests : deux lignes, section « Variations de sous-tests » (lue par
-`verifier`). Tests renommés ou retirés : trois (P4a, P4b, P5), section « Tests renommés ».
+Exceptions (`architecture.md`) : aucune. Variations de sous-tests : quatre lignes, section « Variations de sous-tests » (lue par
+`verifier`). Tests renommés ou retirés : quatre (P4a, P4b, P5, R2), section « Tests renommés ».
 
 Fusion, par l'enseignant, une commande à la fois : `git checkout main && git merge --no-ff --no-edit equations-2e-degre`, puis
 `git push`, puis `git branch -d equations-2e-degre`.
@@ -108,7 +112,8 @@ Fusion, par l'enseignant, une commande à la fois : `git checkout main && git me
 | P4a | Formes structurées, sur l'arbre (produit déjà nul, facteur commun, Id. rem. structurée ; E1.3) | faite (suite verte, dump identique) | `06f3daf` |
 | P4b | Degrés ≠ 2 (ME de xᵏ, Id. rem. de A = x², E9), degré 1, identité, messages définitifs (bicarrée, hors du cours) ; plus de `non_traite` | faite (suite verte, dump identique) | `88ea64e` |
 | P5 | L'outil (page, adaptateur, manifeste, registre sans filière, tests) ; message vrai « forme non traitée » (question 29) | faite (suite verte, dump : seuls ajouts du nouvel outil) | `f65131b` |
-| R1 | Une carte par étape (question 36) ; invariant du § 5 adapté | faite (suite verte, dump : outils existants identiques au départ) | commit « R1 » |
+| R1 | Une carte par étape (question 36) ; invariant du § 5 adapté | faite (suite verte, dump : outils existants identiques au départ) | `ee52a47` |
+| R2 | Développer d'abord, fractions supprimées d'abord (question 29) | faite (suite verte, dump : outils existants identiques au départ) | commit « R2 » |
 | P6 | Filières, carte de l'accueil, butée de `test_accueil`, `test_acc01` (après relecture) | hors nuit | — |
 
 ## Questions pour l'enseignant
@@ -207,7 +212,7 @@ Questions nouvelles de la nuit :
     **Tranché par l'enseignant (06.11.2026) : développer d'abord** toute forme polynomiale qui n'est pas une forme que l'outil
     factorise directement (A² − B², produit déjà nul, facteur commun) : 2(x + 1)² = 8, 2(x + 1)(x + 3) = 5, (x + 1)³ = 8 + x…, puis le
     chemin habituel ; E2 étendu. Pas de deuxième bouton. **Dénominateur numérique (tranché le 06.11.2026)** : multiplier d'abord
-    par le dénominateur (x²/2 = 1 + x ⇔ x² = 2 + 2x) : « on supprime les fractions de préférence ».
+    par le dénominateur (x²/2 = 1 + x ⇔ x² = 2 + 2x) : « on supprime les fractions de préférence ». **Fait en R2** (question 41).
 30. **P4b, bicarrée à la lettre** (§ 13.4) : x⁴ − 5x² + 4, x⁴ + 4, x⁴ − 5 → « bicarrée » ; 2x⁴ − 10x² + 8 et x⁵ − 5x³ + 4x (une ME
     s'applique) → « hors du cours ». Autre possibilité : « bicarrée » aussi après une ME.
 31. **P4b, ordre d'écriture** (x⁴ − 16) : l'Id. rem. de x² − 4 d'abord, puis le tableau S-P de x² + 4 en échec, juste avant le
@@ -253,7 +258,36 @@ Questions nouvelles de la nuit :
     suivante. La seule étape vide (formule choisie d'emblée, variante) rejoint la carte du discriminant. E9 : la ligne finale
     « ⇔ x = … » de « Valeurs de x » suit les lignes de Δ, sans membre de gauche, comme dans la chaîne entière.
 
+41. **R2, développer d'abord et fractions supprimées d'abord** (question 29) ; choix pris (options qui affichent le moins, ou les plus
+    proches d'E2) :
+    - **étiquette des fractions** : « on multiplie par 12 » (celle d'`ensemble_def`, proche d'Exp-log « on multiplie les deux membres
+      par le dénominateur » ; la référence n'a pas d'exemple rédigé). Chaque terme est multiplié et simplifié sur la même ligne
+      (Az 4.1 b : 2(3x − 2) = 3(x + 1) + 60), puis E2. Seule une division qui a l'inconnue au numérateur déclenche la multiplication ;
+      une constante fractionnaire seule ((1/2)x², x² = 1/4) garde D22 (instantanés inchangés). Après la suppression des fractions,
+      aucune forme structurée : (x + 1)²/4 = 1 ⇔ (x + 1)² = 4 est développée.
+    - **ordre du développement** : les produits de parenthèses d'abord, le coefficient distribué en dernier
+      (2(x + 1)(x + 3) ⇔ 2(x² + 3x + x + 3) ⇔ 2(x² + 4x + 3) ⇔ 2x² + 8x + 6) ; la réduction dans la parenthèse a sa ligne, sans
+      étiquette (comme E2). Plus de deux parenthèses : la double distribution des deux premières, puis de même.
+    - **cube et puissances** : (x + 1)³ ⇔ (x + 1)²(x + 1) (ligne sans étiquette, comme D24), puis l'Id. rem., puis la double
+      distribution ; carré d'une somme qui n'est pas un binôme d'E2 ((x² + x + 1)²) : (B)(B), puis la double distribution. Un produit
+      de monômes écrit (x · 3) se lit comme le monôme : « x · 3 + x² = 1 ⇔ x² + 3x − 1 = 0 ».
+    - **produit déjà nul** : un cube y est réécrit (B)(B)(B) comme un carré (D24, (x + 1)³ = 0) ; un carré à côté d'un trinôme
+      ((x + 1)²(x² − 4) = 0) reste écrit jusqu'au produit nul, où il est réécrit (B)(B) (question 35 revue).
+    - **messages** : une forme structurée non écrite qui, développée, finit en « hors du cours » ou « bicarrée » garde « Cette forme
+      d'équation n'est pas traitée par l'outil. » (un produit nul direct pourrait la résoudre). Un degré ≥ 3 développé sans ME ni
+      Id. rem. reçoit « hors du cours » ((x + 1)³ = 8 + x, (x² + x + 1)² = x), comme Az 4.1 d développé. **Encore non écrites**
+      (message vrai) : fraction dans une parenthèse ou une puissance (2(x + 1/2) = x²/2, (x/2 + 1)² = 1), parenthèses imbriquées,
+      (x² − 3)² = 1, (x − 1)(x + 2)(x + 3) = 5(x − 1), et les degrés ≥ 3 douteux des questions 10 et 30 (0,5x³ − 2x, 2x⁴ − 10x² + 8,
+      x⁶ − 64).
+
 ## À relire par l'enseignant
+
+- **R2, développer d'abord, fractions supprimées d'abord** (question 41) : instantanés du nouvel outil
+  (`tests/python/instantanes/equations-2e-degre.json`, `tests/python/instantanes/resoudre/equations-2e-degre.json`) : **188 entrées
+  identiques**, **16 changées** (toutes « forme non traitée » avant : 14 résolues, dont Az 4.1 b et h, x²/2 = 1 + x, 2(x + 1)² = 8,
+  2(x + 1)(x + 3) = 5, les 8 structures non écrites ; 2 « hors du cours », (x + 1)³ = 8 + x et (x² + x + 1)² = x), **21 nouvelles** ;
+  liste et textes rendus dans `journal.md`, R2. Références de pages : 57 identiques. Captures à 390 px :
+  `/home/sami-ubuntu/nuits/equations-2e-degre/captures/R2/` (x²/2 = 1 + x, 2(x + 1)² = 8, Az 4.1 h).
 
 - **R1, une carte par étape** : captures à 390 px (clair) dans `/home/sami-ubuntu/nuits/equations-2e-degre/captures/R1/` :
   `2.11-h-tout-390-clair.png`, `2.11-h-apres-un-clic-390-clair.png`, `2.10-a-tout-390-clair.png`, `javet-2.17-c-tout-390-clair.png`.
@@ -311,9 +345,16 @@ Aucune pour l'instant (exceptions d'import, `architecture.md` § 5).
 Lue par `verifier`. Format, une ligne par test : `` - `<identifiant pytest complet>` : <avant> → <après> : <raison> ``.
 
 - `tests/python/test_exp_log.py::TestVouvoiement::test_aucun_texte_du_fichier_ne_tutoie` : 960 → 955 : P3, les deux littéraux (« __slots__ », « nom ») de `_a_des_decimaux` partent dans `moteur/expr.py` (`a_des_decimaux`, déplacement Q2, réexporté), contrôlés par `test_vocabulaire.TestVouvoiement.test_litteraux_des_moteurs` ; avant, P1 (960 → 957) : les docstrings de `_Hors`, `_racine_carree`, `_racine_entiere_exacte`, `_puissance_rationnelle_exacte` et `_const` partent avec leurs fonctions dans `moteur/polynomes.py` (déplacement Q2), dont les littéraux sont contrôlés par `test_vocabulaire.TestVouvoiement.test_litteraux_des_moteurs` (8812 → 9012).
+- `tests/python/test_redaction_second_degre.py::TestDegres::test_messages_definitifs` : 21 → 16 : R2 (par rapport à R1 ; test absent de `tests/reference`), six entrées sortent de `NON_RESOLUES` (2(x + 1)(x + 3) = 5, 0,5(x + 2)² = x + 3, x · 3 + x² = 1, x²/2 = 1 + x, Az 4.1 b, Az 4.1 h : maintenant résolues et contrôlées dans `R2` : oracle, invariants, instantanés, `TestR2`) et une y entre ((x − 1)(x + 2)(x + 3) = 1, hors du cours) : 16 → 11 entrées.
+- `tests/python/test_redaction_second_degre.py::TestNonResolu::test_hors_du_cours_seulement_si_vrai` : 27 → 22 : R2 (par rapport à R1 ; test absent de `tests/reference`), même raison : `NON_RESOLUES` passe de 16 à 11 entrées (six résolues dans `R2`, une ajoutée).
 - `tests/python/test_redaction_second_degre.py::TestNonResolu::test_formes_pas_encore_traitees` : 21 → 6 : P3 puis P4a (par rapport à P2b ; test absent de `tests/reference`), les 10 formes « P3 » puis les 5 formes « P4a » d'`A_VENIR` sont maintenant résolues et contrôlées par `test_a_venir[P3-…]` et `test_a_venir[P4a-…]` (xfail retiré), par l'oracle et par les instantanés.
 
 ## Tests renommés
+
+- R2 : `tests/python/test_redaction_second_degre.py::TestNonResolu::test_hors_de_ce_que_e2_developpe` →
+  `::TestNonResolu::test_developper_d_abord` (test de P3, absent de `tests/reference`) : ce qu'E2 n'écrivait pas est maintenant
+  développé ou débarrassé de ses fractions (question 29) ; mêmes saisies, contrôlées résolues (première étape attendue), ou « hors du
+  cours » vrai pour les degrés ≥ 3, plus tout `R2`.
 
 - P5 : `tests/python/test_instantanes_second_degre.py::TestInstantanesSecondDegre::test_instantanes`, `::test_json_strict` et
   `::test_vocabulaire` retirés (tests de P2b, absents de `tests/reference`) : le JSON a quitté `tests/python/donnees/` pour
@@ -331,8 +372,9 @@ Lue par `verifier`. Format, une ligne par test : `` - `<identifiant pytest compl
 
 ## Reprise après compactage
 
-- **R1 faite** (06.11.2026, une carte par étape, question 36) : détail dans `journal.md`, R1. Suivantes : R2 (question 29), R3
-  (questions 37 et 25), P6.
+- **R2 faite** (06.11.2026, développer d'abord, fractions supprimées d'abord, question 29) : détail dans `journal.md`, R2.
+  Suivantes : R3 (questions 37 et 25), P6.
+- **R1 faite** (06.11.2026, une carte par étape, question 36) : détail dans `journal.md`, R1.
 - **Chantier de nuit terminé** (06.11.2026) : P0 à P5 faites et commitées, suite finale verte, résumé en tête de ce fichier (commit
   du résumé : le dernier de la branche). Prochaine étape : relecture par l'enseignant (« Résumé », questions), puis P6 et les
   corrections de relecture (parties R1, R2…) dans une nouvelle session ; rien à reprendre de la nuit.

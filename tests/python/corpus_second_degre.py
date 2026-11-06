@@ -10,12 +10,18 @@
 - `P4B` : les degrés ≠ 2 (E13) : ME de xᵏ en degré ≥ 3 (2.12 c, Az 4.1 f), Id. rem. de A = x² (x⁴ − 16, D28 et E9), degré 1
   (isoler, D20), identité et égalité fausse (Az 4.1 g, phrases d'Exp-log), et les formes structurées laissées à P4b (facteur de degré 2
   dans un produit déjà nul, degré 1 une fois factorisée, identité).
-- `RESOLUES` : `P2B`, `P3`, `P4A` et `P4B`.
+- `R2` : les formes que R2 résout (question 29 de suivi.md, tranchée le 06.11.2026) : fractions supprimées d'abord (x²/2 = 1 + x,
+  Az 4.1 b et h), « développer d'abord » (2(x + 1)² = 8, 2(x + 1)(x + 3) = 5, plus de deux facteurs, cubes, carré d'un trinôme), les
+  structures que l'outil n'écrit pas (développées : `STRUCTURES_DEVELOPPEES`), et le produit déjà nul avec un cube ou un carré à
+  côté d'un trinôme.
+- `RESOLUES` : `P2B`, `P3`, `P4A`, `P4B` et `R2`.
 - `NON_RESOLUES` : ce qui reçoit un message définitif (§ 4, § 13.5) : bicarrée (« pas_encore »), hors du cours (degré ≥ 3 que le
-  cours ne résout pas, seulement quand c'est vrai : `second_degre.hors_du_cours`), forme non traitée par l'outil (les formes que
-  l'outil n'écrit pas et les degrés ≥ 3 douteux : P5, question 29 de suivi.md) ; avec le statut attendu.
-- `STRUCTURES_NON_ECRITES` : des formes où une structure s'applique (`forme_structuree`) mais que l'outil n'écrit pas : « forme non
-  traitée par l'outil » (P5), sans développer (suivi.md, questions de P4a, P4b et 29).
+  cours ne résout pas, seulement quand c'est vrai : `second_degre.hors_du_cours`), forme non traitée par l'outil (les degrés ≥ 3
+  douteux : P5, questions 10, 29 et 30 de suivi.md) ; avec le statut attendu.
+- `STRUCTURES_DEVELOPPEES` : les formes où une structure s'applique (`forme_structuree`) mais que l'outil n'écrit pas : avant R2,
+  « forme non traitée par l'outil » ; depuis R2, développées (« développer d'abord »), avec la raison.
+- `FORMES_NON_ECRITES` : ce que l'outil n'écrit toujours pas après R2 (« forme non traitée par l'outil », message vrai), avec la
+  raison : division ou parenthèses imbriquées, structure non écrite qui, développée, n'aboutit pas par le cours.
 - `SECTION_8` : les noms des exercices du § 8 (chacun a un instantané et le contrôle de l'oracle).
 - `A_VENIR` : les formes que P2b ne traitait pas, avec la partie qui les traite (P3 : ramener, développer ; P4a : formes
   structurées ; P4b : degrés ≠ 2, identité, bicarrée), leurs coefficients développés (ordre décroissant, pour l'oracle) et le S
@@ -218,7 +224,49 @@ P4B = {
     "identité structurée, facteur commun": "(x-1)(x+2)=(x-1)(x+2)",
 }
 
-RESOLUES = {**P2B, **P3, **P4A, **P4B}
+# saisie : ce qui manque (une structure s'applique, l'outil ne l'écrit pas) ; R2 : développée (« développer d'abord »)
+STRUCTURES_DEVELOPPEES = {
+    "2(x-1)=3(1-x)(x+2)": "facteurs seulement proportionnels (x − 1, 1 − x)",
+    "(x-1)(x+2)=2x-2": "facteur commun écrit développé à droite (2x − 2)",
+    "2(x+1)^2=8": "√k irrationnel (A = √2(x + 1))",
+    "-(x+1)^2+5=0": "A constant irrationnel (√5)",
+    "(x+1+2)(x-1)=0": "facteur non réduit",
+    "(x^2-1)^2=0": "carré d'un facteur de degré 2 (D24 sur un produit déjà factorisé)",
+}
+
+R2 = {
+    # fractions supprimées d'abord (on multiplie par le plus petit dénominateur commun)
+    "x²/2 = 1 + x": "x^2/2=1+x",
+    "(x − 1)/3 = x²/6": "(x-1)/3=x^2/6",
+    "Az 4.1 b": "(3x-2)/6=(x+1)/4+5",
+    "Az 4.1 h": "x^2+1-(10-x^2)/8=(6x-3)/4",
+    "fractions, déjà « = 0 »": "x^2/2-x-1=0",
+    "fractions, degré 1": "x/2=3",
+    "fractions, constante fractionnaire comptée": "x^2/2+1/3=x",
+    "fractions, puis Id. rem. (A + B)²": "(x+1)^2/4=1",
+    "fractions, puis double distribution": "x^2/2=(x+1)(x-1)",
+    "fractions, a < 0, ME de −x": "-x^2/2+x=0",
+    "fractions et décimaux": "0,5x+x^2/3=1",
+    # développer d'abord (E2 étendu)
+    "2(x + 1)² = 8": "2(x+1)^2=8",
+    "2(x + 1)(x + 3) = 5": "2(x+1)(x+3)=5",
+    "E2 k(B)² et des termes en x": "0,5(x+2)^2=x+3",
+    "E2 monôme écrit à l'envers": "x*3+x^2=1",
+    "E2 monôme × carré": "x(x+1)^2=4x",
+    "E2 « − » devant k(B)²": "5-2(x-1)^2=x",
+    "E2 trois facteurs, degré 2 une fois ramenée": "(x-1)(x+2)(x+3)=x^3",
+    "E2 « − » devant un cube": "x^3-(x-1)^3=1",
+    # structures que l'outil n'écrit pas : développées
+    **{"structure développée : " + s: s for s in STRUCTURES_DEVELOPPEES},
+    # produit déjà nul : cube (D24), carré à côté d'un trinôme
+    "E13 cube, D24": "(x+1)^3=0",
+    "E13 carré et facteur de degré 2": "(x+1)^2*(x^2-4)=0",
+    "E13 carré et facteur de degré 2 par la formule (E9)": "(x-1)^2*(x^2+x-1)=0",
+    "E13 carré et facteur de degré 2, Δ < 0": "(x+1)^2*(x^2+1)=0",
+    "E13 cube et facteur de degré 2": "(x+1)^3*(x^2-1)=0",
+}
+
+RESOLUES = {**P2B, **P3, **P4A, **P4B, **R2}
 
 PARTIES_FAITES = ("P3", "P4a", "P4b")
 
@@ -235,27 +283,19 @@ NON_RESOLUES = {
     "Az 4.1 d développé": ("-3x^3+14x^2-21x+10=0", "hors_cours"),
     "Id. rem., puis un facteur de degré 3": ("x^6-64=0", "forme_non_traitee"),
     "ME non entière en degré 3 (question 10)": ("0,5x^3-2x=0", "forme_non_traitee"),
-    # ce que E2 ne développe pas (suivi.md, P3 et P4b)
-    "E2 nombre et deux parenthèses": ("2(x+1)(x+3)=5", "forme_non_traitee"),
-    "E2 k(B)² et des termes en x": ("0,5(x+2)^2=x+3", "forme_non_traitee"),
-    "E2 cube": ("(x+1)^3=8+x", "forme_non_traitee"),
-    "E2 monôme écrit à l'envers": ("x*3+x^2=1", "forme_non_traitee"),
-    "E2 carré d'un trinôme": ("(x^2+x+1)^2=x", "forme_non_traitee"),
-    "E2 division par un nombre": ("x^2/2=1+x", "forme_non_traitee"),
-    "Az 4.1 b": ("(3x-2)/6=(x+1)/4+5", "forme_non_traitee"),
-    "Az 4.1 h": ("x^2+1-(10-x^2)/8=(6x-3)/4", "forme_non_traitee"),
+    # R2 : développées d'abord, de degré ≥ 3 sans ME ni Id. rem. (vrai : `hors_du_cours`)
+    "E2 cube": ("(x+1)^3=8+x", "hors_cours"),
+    "E2 carré d'un trinôme": ("(x^2+x+1)^2=x", "hors_cours"),
+    "E2 trois facteurs, degré 3": ("(x-1)(x+2)(x+3)=1", "hors_cours"),
 }
 
-# saisie : ce qui manque (une structure s'applique, l'outil ne l'écrit pas : « forme_non_traitee », jamais développée)
-STRUCTURES_NON_ECRITES = {
-    "2(x-1)=3(1-x)(x+2)": "facteurs seulement proportionnels (x − 1, 1 − x)",
-    "(x-1)(x+2)=2x-2": "facteur commun écrit développé à droite (2x − 2)",
-    "2(x+1)^2=8": "√k irrationnel (A = √2(x + 1))",
-    "-(x+1)^2+5=0": "A constant irrationnel (√5)",
-    "(x+1)^3=0": "cube",
-    "(x+1+2)(x-1)=0": "facteur non réduit",
-    "(x^2-1)^2=0": "carré d'un facteur de degré 2 (D24 sur un produit déjà factorisé)",
-    "(x+1)^2*(x^2-4)=0": "carré et facteur de degré 2 dans le même produit",
+# saisie : pourquoi l'outil ne l'écrit toujours pas après R2 (« forme_non_traitee », message vrai)
+FORMES_NON_ECRITES = {
+    "2(x+1/2)=x^2/2": "fraction dans une parenthèse (division imbriquée)",
+    "(x/2+1)^2=1": "fraction dans une puissance (division imbriquée)",
+    "((x+1)^2+1)(x-1)=x": "parenthèses imbriquées",
+    "(x^2-3)^2=1": "Id. rem. A² − B² avec A = x² − 3 non écrite ; développée, c'est une bicarrée",
+    "(x-1)(x+2)(x+3)=5(x-1)": "facteur commun avec un reste de degré 2 non écrit ; développée, degré 3 hors du cours",
 }
 
 # les exercices du § 8 (noms du corpus)

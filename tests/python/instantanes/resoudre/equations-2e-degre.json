@@ -3,6 +3,10 @@
   "erreur": "Écrivez une équation.",
   "ok": false
  },
+ "((x+1)^2+1)(x-1)=x": {
+  "erreur": "Cette forme d'équation n'est pas traitée par l'outil.",
+  "ok": false
+ },
  "(1/2)x^2+x+1/2=0": {
   "cartes": [
    {
@@ -555,8 +559,95 @@
   "ok": true
  },
  "(3x-2)/6=(x+1)/4+5": {
-  "erreur": "Cette forme d'équation n'est pas traitée par l'outil.",
-  "ok": false
+  "cartes": [
+   {
+    "badge": "Supprimer les fractions",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "2(3x - 2) = 3(x + 1) + 60",
+        "gauche": "\\frac{3x - 2}{6} = \\frac{x + 1}{4} + 5",
+        "lien": "\\iff",
+        "prop": "on multiplie par 12"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Développer",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "6x - 4 = 3x + 3 + 60",
+        "gauche": "2(3x - 2) = 3(x + 1) + 60",
+        "lien": "\\iff",
+        "prop": "distribution"
+       },
+       {
+        "expr": "6x - 4 = 3x + 63",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Ramener à 0",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "3x - 67 = 0",
+        "gauche": "6x - 4 = 3x + 63",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Isoler x",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "x = \\frac{67}{3}",
+        "gauche": "3x - 67 = 0",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{\\frac{67}{3}\\}",
+      "type": "resultat_lim"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\frac{3x - 2}{6} = \\frac{x + 1}{4} + 5",
+  "erreur": null,
+  "ok": true
  },
  "(4-x^2)(x+1)=0": {
   "cartes": [
@@ -1232,9 +1323,182 @@
   "erreur": null,
   "ok": true
  },
+ "(x+1)^2*(x^2+1)=0": {
+  "cartes": [
+   {
+    "badge": "Somme-Produit",
+    "blocs": [
+     {
+      "html": "Le trinôme \\(x^{2} + 1\\) est unitaire : S-P.",
+      "type": "texte"
+     },
+     {
+      "html": "On cherche deux nombres dont le produit vaut \\(1\\) et la somme vaut \\(0\\) :",
+      "type": "texte"
+     },
+     {
+      "groupes": [
+       {
+        "colonnes": 2,
+        "titre": "produit \\(= 1\\)"
+       },
+       {
+        "colonnes": 1,
+        "titre": "somme"
+       }
+      ],
+      "lignes": [
+       {
+        "cases": [
+         "1",
+         "1",
+         "2"
+        ]
+       }
+      ],
+      "type": "tableau_essais"
+     },
+     {
+      "html": "Aucun couple ne convient : on utilise la formule.",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "(x + 1)(x + 1)(x^{2} + 1) = 0",
+        "gauche": "(x + 1)^{2}(x^{2} + 1) = 0",
+        "lien": "\\iff"
+       },
+       {
+        "expr": "{x + 1 = 0} \\text{ ou } \\allowbreak {x^{2} + 1 = 0}",
+        "lien": "\\iff",
+        "prop": "produit nul"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Discriminant",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 1 \\cdot 1 = \\fbox{$-4$}",
+        "lien": ""
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Valeurs de x",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "texte": "\\(\\Delta < 0\\) : \\(x^{2} + 1 = 0\\) n'a aucune solution réelle."
+       },
+       {
+        "expr": "x = -1",
+        "gauche": "{x + 1 = 0} \\text{ ou } \\allowbreak {x^{2} + 1 = 0}",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{-1\\}",
+      "type": "resultat_lim"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "(x + 1)^{2}(x^{2} + 1) = 0",
+  "erreur": null,
+  "ok": true
+ },
  "(x+1)^2*(x^2-4)=0": {
-  "erreur": "Cette forme d'équation n'est pas traitée par l'outil.",
-  "ok": false
+  "cartes": [
+   {
+    "badge": "Identité remarquable",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "(x + 1)^{2}(x + 2)(x - 2) = 0",
+        "gauche": "(x + 1)^{2}(x^{2} - 4) = 0",
+        "lien": "\\iff",
+        "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x,\\ B = 2$}\\)"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "(x + 1)(x + 1)(x + 2)(x - 2) = 0",
+        "gauche": "(x + 1)^{2}(x + 2)(x - 2) = 0",
+        "lien": "\\iff"
+       },
+       {
+        "expr": "{x + 1 = 0} \\text{ ou } \\allowbreak {x + 2 = 0} \\text{ ou } \\allowbreak {x - 2 = 0}",
+        "lien": "\\iff",
+        "prop": "produit nul"
+       },
+       {
+        "expr": "{x = -1} \\text{ ou } \\allowbreak {x = -2} \\text{ ou } \\allowbreak {x = 2}",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{-2\\,;\\,-1\\,;\\,2\\}",
+      "type": "resultat_lim"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "(x + 1)^{2}(x^{2} - 4) = 0",
+  "erreur": null,
+  "ok": true
  },
  "(x+1)^2+3=19": {
   "cartes": [
@@ -1442,6 +1706,403 @@
   "enonce_tex": "(x + 1)^{2} - 16 = 0",
   "erreur": null,
   "ok": true
+ },
+ "(x+1)^2/4=1": {
+  "cartes": [
+   {
+    "badge": "Supprimer les fractions",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "(x + 1)^{2} = 4",
+        "gauche": "\\frac{(x + 1)^{2}}{4} = 1",
+        "lien": "\\iff",
+        "prop": "on multiplie par 4"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Développer",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+       },
+       {
+        "expr": "x^{2} + 2x + 1 = 4",
+        "gauche": "(x + 1)^{2} = 4",
+        "lien": "\\iff",
+        "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Ramener à 0",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "x^{2} + 2x - 3 = 0",
+        "gauche": "x^{2} + 2x + 1 = 4",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Somme-Produit",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "texte": "Pas de ME, pas d'Id. rem. ; le trinôme est unitaire (\\(a = 1\\)) : S-P."
+       },
+       {
+        "texte": "On cherche deux nombres dont le produit vaut \\(-3\\) et la somme vaut \\(2\\) :"
+       },
+       {
+        "bloc": {
+         "groupes": [
+          {
+           "colonnes": 2,
+           "titre": "produit \\(= -3\\)"
+          },
+          {
+           "colonnes": 1,
+           "titre": "somme"
+          }
+         ],
+         "lignes": [
+          {
+           "cases": [
+            "-1",
+            "3",
+            "2"
+           ],
+           "ok": true
+          }
+         ],
+         "type": "tableau_essais"
+        }
+       },
+       {
+        "expr": "(x - 1)(x + 3) = 0",
+        "gauche": "x^{2} + 2x - 3 = 0",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "{x - 1 = 0} \\text{ ou } \\allowbreak {x + 3 = 0}",
+        "gauche": "(x - 1)(x + 3) = 0",
+        "lien": "\\iff",
+        "prop": "produit nul"
+       },
+       {
+        "expr": "{x = 1} \\text{ ou } \\allowbreak {x = -3}",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 5"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{-3\\,;\\,1\\}",
+      "type": "resultat_lim"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\frac{(x + 1)^{2}}{4} = 1",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Supprimer les fractions",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "(x + 1)^{2} = 4",
+          "gauche": "\\frac{(x + 1)^{2}}{4} = 1",
+          "lien": "\\iff",
+          "prop": "on multiplie par 4"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+         },
+         {
+          "expr": "x^{2} + 2x + 1 = 4",
+          "gauche": "(x + 1)^{2} = 4",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} + 2x - 3 = 0",
+          "gauche": "x^{2} + 2x + 1 = 4",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Somme-Produit",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "Pas de ME, pas d'Id. rem. ; le trinôme est unitaire (\\(a = 1\\)) : S-P."
+         },
+         {
+          "texte": "On cherche deux nombres dont le produit vaut \\(-3\\) et la somme vaut \\(2\\) :"
+         },
+         {
+          "bloc": {
+           "groupes": [
+            {
+             "colonnes": 2,
+             "titre": "produit \\(= -3\\)"
+            },
+            {
+             "colonnes": 1,
+             "titre": "somme"
+            }
+           ],
+           "lignes": [
+            {
+             "cases": [
+              "-1",
+              "3",
+              "2"
+             ],
+             "ok": true
+            }
+           ],
+           "type": "tableau_essais"
+          }
+         },
+         {
+          "expr": "(x - 1)(x + 3) = 0",
+          "gauche": "x^{2} + 2x - 3 = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{x - 1 = 0} \\text{ ou } \\allowbreak {x + 3 = 0}",
+          "gauche": "(x - 1)(x + 3) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = 1} \\text{ ou } \\allowbreak {x = -3}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 5"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-3\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Supprimer les fractions",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "(x + 1)^{2} = 4",
+          "gauche": "\\frac{(x + 1)^{2}}{4} = 1",
+          "lien": "\\iff",
+          "prop": "on multiplie par 4"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} + 2x + 1 = 4",
+          "gauche": "(x + 1)^{2} = 4",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} + 2x - 3 = 0",
+          "gauche": "x^{2} + 2x + 1 = 4",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot 1 \\cdot (-3) = 4 + 12 = \\fbox{$16$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 4",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2 - 4}{2} = -3",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-2 + 4}{2} = 1",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 5"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-3\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "(x+1)^2=(2x-3)^2": {
   "cartes": [
@@ -2179,17 +2840,417 @@
   "erreur": null,
   "ok": true
  },
+ "(x+1)^3*(x^2-1)=0": {
+  "cartes": [
+   {
+    "badge": "Identité remarquable",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "(x + 1)^{3}(x + 1)(x - 1) = 0",
+        "gauche": "(x + 1)^{3}(x^{2} - 1) = 0",
+        "lien": "\\iff",
+        "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x,\\ B = 1$}\\)"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "(x + 1)(x + 1)(x + 1)(x + 1)(x - 1) = 0",
+        "gauche": "(x + 1)^{3}(x + 1)(x - 1) = 0",
+        "lien": "\\iff"
+       },
+       {
+        "expr": "{x + 1 = 0} \\text{ ou } \\allowbreak {x - 1 = 0}",
+        "lien": "\\iff",
+        "prop": "produit nul"
+       },
+       {
+        "expr": "{x = -1} \\text{ ou } \\allowbreak {x = 1}",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{-1\\,;\\,1\\}",
+      "type": "resultat_lim"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "(x + 1)^{3}(x^{2} - 1) = 0",
+  "erreur": null,
+  "ok": true
+ },
  "(x+1)^3=0": {
-  "erreur": "Cette forme d'équation n'est pas traitée par l'outil.",
-  "ok": false
+  "cartes": [
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "(x + 1)(x + 1)(x + 1) = 0",
+        "gauche": "(x + 1)^{3} = 0",
+        "lien": "\\iff"
+       },
+       {
+        "expr": "x + 1 = 0",
+        "lien": "\\iff",
+        "prop": "produit nul"
+       },
+       {
+        "expr": "x = -1",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{-1\\}",
+      "type": "resultat_lim"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "(x + 1)^{3} = 0",
+  "erreur": null,
+  "ok": true
  },
  "(x+1)^3=8+x": {
-  "erreur": "Cette forme d'équation n'est pas traitée par l'outil.",
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
   "ok": false
  },
  "(x+1+2)(x-1)=0": {
-  "erreur": "Cette forme d'équation n'est pas traitée par l'outil.",
-  "ok": false
+  "cartes": [
+   {
+    "badge": "Développer",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+       },
+       {
+        "expr": "x^{2} - x + x - 1 + 2x - 2 = 0",
+        "gauche": "(x + 1 + 2)(x - 1) = 0",
+        "lien": "\\iff",
+        "prop": "double distribution"
+       },
+       {
+        "expr": "x^{2} + 2x - 3 = 0",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Somme-Produit",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "texte": "Pas de ME, pas d'Id. rem. ; le trinôme est unitaire (\\(a = 1\\)) : S-P."
+       },
+       {
+        "texte": "On cherche deux nombres dont le produit vaut \\(-3\\) et la somme vaut \\(2\\) :"
+       },
+       {
+        "bloc": {
+         "groupes": [
+          {
+           "colonnes": 2,
+           "titre": "produit \\(= -3\\)"
+          },
+          {
+           "colonnes": 1,
+           "titre": "somme"
+          }
+         ],
+         "lignes": [
+          {
+           "cases": [
+            "-1",
+            "3",
+            "2"
+           ],
+           "ok": true
+          }
+         ],
+         "type": "tableau_essais"
+        }
+       },
+       {
+        "expr": "(x - 1)(x + 3) = 0",
+        "gauche": "x^{2} + 2x - 3 = 0",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "{x - 1 = 0} \\text{ ou } \\allowbreak {x + 3 = 0}",
+        "gauche": "(x - 1)(x + 3) = 0",
+        "lien": "\\iff",
+        "prop": "produit nul"
+       },
+       {
+        "expr": "{x = 1} \\text{ ou } \\allowbreak {x = -3}",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{-3\\,;\\,1\\}",
+      "type": "resultat_lim"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "(x + 1 + 2)(x - 1) = 0",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+         },
+         {
+          "expr": "x^{2} - x + x - 1 + 2x - 2 = 0",
+          "gauche": "(x + 1 + 2)(x - 1) = 0",
+          "lien": "\\iff",
+          "prop": "double distribution"
+         },
+         {
+          "expr": "x^{2} + 2x - 3 = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Somme-Produit",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "Pas de ME, pas d'Id. rem. ; le trinôme est unitaire (\\(a = 1\\)) : S-P."
+         },
+         {
+          "texte": "On cherche deux nombres dont le produit vaut \\(-3\\) et la somme vaut \\(2\\) :"
+         },
+         {
+          "bloc": {
+           "groupes": [
+            {
+             "colonnes": 2,
+             "titre": "produit \\(= -3\\)"
+            },
+            {
+             "colonnes": 1,
+             "titre": "somme"
+            }
+           ],
+           "lignes": [
+            {
+             "cases": [
+              "-1",
+              "3",
+              "2"
+             ],
+             "ok": true
+            }
+           ],
+           "type": "tableau_essais"
+          }
+         },
+         {
+          "expr": "(x - 1)(x + 3) = 0",
+          "gauche": "x^{2} + 2x - 3 = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{x - 1 = 0} \\text{ ou } \\allowbreak {x + 3 = 0}",
+          "gauche": "(x - 1)(x + 3) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = 1} \\text{ ou } \\allowbreak {x = -3}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-3\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} - x + x - 1 + 2x - 2 = 0",
+          "gauche": "(x + 1 + 2)(x - 1) = 0",
+          "lien": "\\iff",
+          "prop": "double distribution"
+         },
+         {
+          "expr": "x^{2} + 2x - 3 = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot 1 \\cdot (-3) = 4 + 12 = \\fbox{$16$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 4",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2 - 4}{2} = -3",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-2 + 4}{2} = 1",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-3\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "(x+2)(x-2)=x^2-4": {
   "cartes": [
@@ -2802,6 +3863,141 @@
   "erreur": null,
   "ok": true
  },
+ "(x-1)(x+2)(x+3)=1": {
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
+  "ok": false
+ },
+ "(x-1)(x+2)(x+3)=5(x-1)": {
+  "erreur": "Cette forme d'équation n'est pas traitée par l'outil.",
+  "ok": false
+ },
+ "(x-1)(x+2)(x+3)=x^3": {
+  "cartes": [
+   {
+    "badge": "Développer",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+       },
+       {
+        "expr": "(x^{2} + 2x - x - 2)(x + 3) = x^{3}",
+        "gauche": "(x - 1)(x + 2)(x + 3) = x^{3}",
+        "lien": "\\iff",
+        "prop": "double distribution"
+       },
+       {
+        "expr": "(x^{2} + x - 2)(x + 3) = x^{3}",
+        "lien": "\\iff"
+       },
+       {
+        "expr": "x^{3} + 3x^{2} + x^{2} + 3x - 2x - 6 = x^{3}",
+        "lien": "\\iff",
+        "prop": "double distribution"
+       },
+       {
+        "expr": "x^{3} + 4x^{2} + x - 6 = x^{3}",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Ramener à 0",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "4x^{2} + x - 6 = 0",
+        "gauche": "x^{3} + 4x^{2} + x - 6 = x^{3}",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Tâtonnement",
+    "blocs": [
+     {
+      "html": "Pas de ME, pas d'Id. rem. ; \\(a = 4 \\neq 1\\) : tâtonnement.",
+      "type": "texte"
+     },
+     {
+      "html": "On teste les diviseurs de \\(-6\\) (\\(\\pm 1\\), \\(\\pm 2\\), \\(\\pm 3\\), \\(\\pm 6\\)) : aucun n'est solution. On utilise la formule.",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Discriminant",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "\\Delta = b^{2} - 4ac = 1^{2} - 4 \\cdot 4 \\cdot (-6) = 1 + 96 = \\fbox{$97$}",
+        "lien": ""
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "badge": "Valeurs de x",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{97}",
+        "lien": ""
+       },
+       {
+        "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-1 - \\sqrt{97}}{8}",
+        "lien": ""
+       },
+       {
+        "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-1 + \\sqrt{97}}{8}",
+        "lien": ""
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 5"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{\\frac{-1 - \\sqrt{97}}{8}\\,;\\,\\frac{-1 + \\sqrt{97}}{8}\\}",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "soit \\(x_{1} \\approx -1{,}356\\) et \\(x_{2} \\approx 1{,}106\\)",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "(x - 1)(x + 2)(x + 3) = x^{3}",
+  "erreur": null,
+  "ok": true
+ },
  "(x-1)(x+2)=(x-1)(x+2)": {
   "cartes": [
    {
@@ -3014,8 +4210,100 @@
   "ok": true
  },
  "(x-1)(x+2)=2x-2": {
-  "erreur": "Cette forme d'équation n'est pas traitée par l'outil.",
-  "ok": false
+  "cartes": [
+   {
+    "badge": "Développer",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "x^{2} + 2x - x - 2 = 2x - 2",
+        "gauche": "(x - 1)(x + 2) = 2x - 2",
+        "lien": "\\iff",
+        "prop": "double distribution"
+       },
+       {
+        "expr": "x^{2} + x - 2 = 2x - 2",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Ramener à 0",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "x^{2} - x = 0",
+        "gauche": "x^{2} + x - 2 = 2x - 2",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Mise en évidence",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "x(x - 1) = 0",
+        "gauche": "x^{2} - x = 0",
+        "lien": "\\iff",
+        "prop": "ME"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "{x = 0} \\text{ ou } \\allowbreak {x - 1 = 0}",
+        "gauche": "x(x - 1) = 0",
+        "lien": "\\iff",
+        "prop": "produit nul"
+       },
+       {
+        "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 1}",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{0\\,;\\,1\\}",
+      "type": "resultat_lim"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "(x - 1)(x + 2) = 2x - 2",
+  "erreur": null,
+  "ok": true
  },
  "(x-1)(x+2)=3(x-1)(x+2)": {
   "cartes": [
@@ -3187,6 +4475,279 @@
   "erreur": null,
   "ok": true
  },
+ "(x-1)/3=x^2/6": {
+  "cartes": [
+   {
+    "badge": "Supprimer les fractions",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "2(x - 1) = x^{2}",
+        "gauche": "\\frac{x - 1}{3} = \\frac{x^{2}}{6}",
+        "lien": "\\iff",
+        "prop": "on multiplie par 6"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Développer",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+       },
+       {
+        "expr": "2x - 2 = x^{2}",
+        "gauche": "2(x - 1) = x^{2}",
+        "lien": "\\iff",
+        "prop": "distribution"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Ramener à 0",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "x^{2} - 2x + 2 = 0",
+        "gauche": "2x - 2 = x^{2}",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Somme-Produit",
+    "blocs": [
+     {
+      "html": "Pas de ME, pas d'Id. rem. ; le trinôme est unitaire (\\(a = 1\\)) : S-P.",
+      "type": "texte"
+     },
+     {
+      "html": "On cherche deux nombres dont le produit vaut \\(2\\) et la somme vaut \\(-2\\) :",
+      "type": "texte"
+     },
+     {
+      "groupes": [
+       {
+        "colonnes": 2,
+        "titre": "produit \\(= 2\\)"
+       },
+       {
+        "colonnes": 1,
+        "titre": "somme"
+       }
+      ],
+      "lignes": [
+       {
+        "cases": [
+         "-1",
+         "-2",
+         "-3"
+        ]
+       }
+      ],
+      "type": "tableau_essais"
+     },
+     {
+      "html": "Aucun couple ne convient : on utilise la formule.",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "badge": "Discriminant",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "\\Delta = b^{2} - 4ac = (-2)^{2} - 4 \\cdot 1 \\cdot 2 = 4 - 8 = \\fbox{$-4$}",
+        "lien": ""
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 5"
+   },
+   {
+    "badge": "Valeurs de x",
+    "blocs": [
+     {
+      "html": "\\(\\Delta < 0\\) : l'équation n'a aucune solution réelle.",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 6"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\varnothing",
+      "type": "resultat_lim"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\frac{x - 1}{3} = \\frac{x^{2}}{6}",
+  "erreur": null,
+  "ok": true
+ },
+ "(x-1)^2*(x^2+x-1)=0": {
+  "cartes": [
+   {
+    "badge": "Somme-Produit",
+    "blocs": [
+     {
+      "html": "Le trinôme \\(x^{2} + x - 1\\) est unitaire : S-P.",
+      "type": "texte"
+     },
+     {
+      "html": "On cherche deux nombres dont le produit vaut \\(-1\\) et la somme vaut \\(1\\) :",
+      "type": "texte"
+     },
+     {
+      "groupes": [
+       {
+        "colonnes": 2,
+        "titre": "produit \\(= -1\\)"
+       },
+       {
+        "colonnes": 1,
+        "titre": "somme"
+       }
+      ],
+      "lignes": [
+       {
+        "cases": [
+         "-1",
+         "1",
+         "0"
+        ]
+       }
+      ],
+      "type": "tableau_essais"
+     },
+     {
+      "html": "Aucun couple ne convient : on utilise la formule.",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "(x - 1)(x - 1)(x^{2} + x - 1) = 0",
+        "gauche": "(x - 1)^{2}(x^{2} + x - 1) = 0",
+        "lien": "\\iff"
+       },
+       {
+        "expr": "{x - 1 = 0} \\text{ ou } \\allowbreak {x^{2} + x - 1 = 0}",
+        "lien": "\\iff",
+        "prop": "produit nul"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Discriminant",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "\\Delta = b^{2} - 4ac = 1^{2} - 4 \\cdot 1 \\cdot (-1) = 1 + 4 = \\fbox{$5$}",
+        "lien": ""
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Valeurs de x",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{5}",
+        "lien": ""
+       },
+       {
+        "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-1 - \\sqrt{5}}{2}",
+        "lien": ""
+       },
+       {
+        "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-1 + \\sqrt{5}}{2}",
+        "lien": ""
+       },
+       {
+        "expr": "{x = 1} \\text{ ou } \\allowbreak {x = \\frac{-1 - \\sqrt{5}}{2}} \\text{ ou } \\allowbreak {x = \\frac{-1 + \\sqrt{5}}{2}}",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{\\frac{-1 - \\sqrt{5}}{2}\\,;\\,\\frac{-1 + \\sqrt{5}}{2}\\,;\\,1\\}",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "soit \\(x \\approx -1{,}618\\) ou \\(x \\approx 0{,}618\\) ou \\(x = 1\\)",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "(x - 1)^{2}(x^{2} + x - 1) = 0",
+  "erreur": null,
+  "ok": true
+ },
+ "(x/2+1)^2=1": {
+  "erreur": "Cette forme d'équation n'est pas traitée par l'outil.",
+  "ok": false
+ },
  "(x^2+1)(x-2)=0": {
   "cartes": [
    {
@@ -3300,7 +4861,7 @@
   "ok": true
  },
  "(x^2+x+1)^2=x": {
-  "erreur": "Cette forme d'équation n'est pas traitée par l'outil.",
+  "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
   "ok": false
  },
  "(x^2-1)(x+2)=0": {
@@ -3361,6 +4922,105 @@
   "ok": true
  },
  "(x^2-1)^2=0": {
+  "cartes": [
+   {
+    "badge": "Développer",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "x^{4} - 2x^{2} + 1 = 0",
+        "gauche": "(x^{2} - 1)^{2} = 0",
+        "lien": "\\iff",
+        "prop": "Id. rem. \\((A - B)^{2}\\) avec \\(A = x^{2},\\ B = 1\\)"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Identité remarquable",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "texte": "Id. rem. \\(A^{2} - 2AB + B^{2}\\) avec \\(\\fbox{$A = x^{2},\\ B = 1$}\\). Vérification : \\(2AB = 2 \\cdot x^{2} \\cdot 1 = 2x^{2}\\) \\(\\checkmark\\)"
+       },
+       {
+        "expr": "(x^{2} - 1)^{2} = 0",
+        "gauche": "x^{4} - 2x^{2} + 1 = 0",
+        "lien": "\\iff"
+       },
+       {
+        "expr": "(x^{2} - 1)(x^{2} - 1) = 0",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Identité remarquable",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "(x + 1)(x - 1)(x + 1)(x - 1) = 0",
+        "gauche": "(x^{2} - 1)(x^{2} - 1) = 0",
+        "lien": "\\iff",
+        "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x,\\ B = 1$}\\)"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "{x + 1 = 0} \\text{ ou } \\allowbreak {x - 1 = 0}",
+        "gauche": "(x + 1)(x - 1)(x + 1)(x - 1) = 0",
+        "lien": "\\iff",
+        "prop": "produit nul"
+       },
+       {
+        "expr": "{x = -1} \\text{ ou } \\allowbreak {x = 1}",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{-1\\,;\\,1\\}",
+      "type": "resultat_lim"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "(x^{2} - 1)^{2} = 0",
+  "erreur": null,
+  "ok": true
+ },
+ "(x^2-3)^2=1": {
   "erreur": "Cette forme d'équation n'est pas traitée par l'outil.",
   "ok": false
  },
@@ -3743,8 +5403,182 @@
   "ok": true
  },
  "-(x+1)^2+5=0": {
-  "erreur": "Cette forme d'équation n'est pas traitée par l'outil.",
-  "ok": false
+  "cartes": [
+   {
+    "badge": "Développer",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "-(x^{2} + 2x + 1) + 5 = 0",
+        "gauche": "-(x + 1)^{2} + 5 = 0",
+        "lien": "\\iff",
+        "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+       },
+       {
+        "expr": "-x^{2} - 2x - 1 + 5 = 0",
+        "lien": "\\iff"
+       },
+       {
+        "expr": "-x^{2} - 2x + 4 = 0",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Mise en évidence",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "texte": "Le trinôme n'est pas unitaire (\\(a = -1\\)) : on met d'abord \\(-1\\) en évidence."
+       },
+       {
+        "expr": "-(x^{2} + 2x - 4) = 0",
+        "gauche": "-x^{2} - 2x + 4 = 0",
+        "lien": "\\iff",
+        "prop": "ME"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Somme-Produit",
+    "blocs": [
+     {
+      "html": "Le trinôme \\(x^{2} + 2x - 4\\) est unitaire : S-P.",
+      "type": "texte"
+     },
+     {
+      "html": "On cherche deux nombres dont le produit vaut \\(-4\\) et la somme vaut \\(2\\) :",
+      "type": "texte"
+     },
+     {
+      "groupes": [
+       {
+        "colonnes": 2,
+        "titre": "produit \\(= -4\\)"
+       },
+       {
+        "colonnes": 1,
+        "titre": "somme"
+       }
+      ],
+      "lignes": [
+       {
+        "cases": [
+         "-1",
+         "4",
+         "3"
+        ]
+       },
+       {
+        "cases": [
+         "-2",
+         "2",
+         "0"
+        ]
+       }
+      ],
+      "type": "tableau_essais"
+     },
+     {
+      "html": "Aucun couple ne convient : on utilise la formule.",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "{\\underbrace{-1 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x^{2} + 2x - 4 = 0}",
+        "gauche": "-(x^{2} + 2x - 4) = 0",
+        "lien": "\\iff",
+        "prop": "produit nul"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "badge": "Discriminant",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot 1 \\cdot (-4) = 4 + 16 = \\fbox{$20$}",
+        "lien": ""
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 5"
+   },
+   {
+    "badge": "Valeurs de x",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{20} = 2\\sqrt{5}",
+        "lien": ""
+       },
+       {
+        "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2 - 2\\sqrt{5}}{2} = -1 - \\sqrt{5}",
+        "lien": ""
+       },
+       {
+        "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-2 + 2\\sqrt{5}}{2} = -1 + \\sqrt{5}",
+        "lien": ""
+       },
+       {
+        "expr": "{x = -1 - \\sqrt{5}} \\text{ ou } \\allowbreak {x = -1 + \\sqrt{5}}",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 6"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{-1 - \\sqrt{5}\\,;\\,-1 + \\sqrt{5}\\}",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "soit \\(x_{1} \\approx -3{,}236\\) et \\(x_{2} \\approx 1{,}236\\)",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "-(x + 1)^{2} + 5 = 0",
+  "erreur": null,
+  "ok": true
  },
  "-(x-1)(x+2)=0": {
   "cartes": [
@@ -4890,6 +6724,84 @@
   "erreur": null,
   "ok": true
  },
+ "-x^2/2+x=0": {
+  "cartes": [
+   {
+    "badge": "Supprimer les fractions",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "-x^{2} + 2x = 0",
+        "gauche": "-\\frac{x^{2}}{2} + x = 0",
+        "lien": "\\iff",
+        "prop": "on multiplie par 2"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Mise en évidence",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "texte": "Le trinôme n'est pas unitaire (\\(a = -1\\)) : on met d'abord \\(-x\\) en évidence."
+       },
+       {
+        "expr": "-x(x - 2) = 0",
+        "gauche": "-x^{2} + 2x = 0",
+        "lien": "\\iff",
+        "prop": "ME"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "{-x = 0} \\text{ ou } \\allowbreak {x - 2 = 0}",
+        "gauche": "-x(x - 2) = 0",
+        "lien": "\\iff",
+        "prop": "produit nul"
+       },
+       {
+        "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 2}",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{0\\,;\\,2\\}",
+      "type": "resultat_lim"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "-\\frac{x^{2}}{2} + x = 0",
+  "erreur": null,
+  "ok": true
+ },
  "-x^3+x=0": {
   "cartes": [
    {
@@ -5857,8 +7769,119 @@
   "ok": true
  },
  "0,5(x+2)^2=x+3": {
-  "erreur": "Cette forme d'équation n'est pas traitée par l'outil.",
-  "ok": false
+  "cartes": [
+   {
+    "badge": "Développer",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+       },
+       {
+        "expr": "0{,}5(x^{2} + 4x + 4) = x + 3",
+        "gauche": "0{,}5(x + 2)^{2} = x + 3",
+        "lien": "\\iff",
+        "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 2\\)"
+       },
+       {
+        "expr": "0{,}5x^{2} + 2x + 2 = x + 3",
+        "lien": "\\iff",
+        "prop": "distribution"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Ramener à 0",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "0{,}5x^{2} + x - 1 = 0",
+        "gauche": "0{,}5x^{2} + 2x + 2 = x + 3",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Formule",
+    "blocs": [
+     {
+      "html": "Pas de ME, pas d'Id. rem. ; les coefficients ne sont pas entiers : on utilise la formule.",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Discriminant",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "\\Delta = b^{2} - 4ac = 1^{2} - 4 \\cdot 0{,}5 \\cdot (-1) = 1 + 2 = \\fbox{$3$}",
+        "lien": ""
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "badge": "Valeurs de x",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{3}",
+        "lien": ""
+       },
+       {
+        "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-1 - \\sqrt{3}}{1} = -1 - \\sqrt{3}",
+        "lien": ""
+       },
+       {
+        "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-1 + \\sqrt{3}}{1} = -1 + \\sqrt{3}",
+        "lien": ""
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 5"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{-1 - \\sqrt{3}\\,;\\,-1 + \\sqrt{3}\\}",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "soit \\(x_{1} \\approx -2{,}732\\) et \\(x_{2} \\approx 0{,}732\\)",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "0{,}5(x + 2)^{2} = x + 3",
+  "erreur": null,
+  "ok": true
  },
  "0,5(x-1)(x+2)=0": {
   "cartes": [
@@ -5896,6 +7919,116 @@
    }
   ],
   "enonce_tex": "0{,}5(x - 1)(x + 2) = 0",
+  "erreur": null,
+  "ok": true
+ },
+ "0,5x+x^2/3=1": {
+  "cartes": [
+   {
+    "badge": "Supprimer les fractions",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "1{,}5x + x^{2} = 3",
+        "gauche": "0{,}5x + \\frac{x^{2}}{3} = 1",
+        "lien": "\\iff",
+        "prop": "on multiplie par 3"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Ramener à 0",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+       },
+       {
+        "expr": "x^{2} + 1{,}5x - 3 = 0",
+        "gauche": "1{,}5x + x^{2} = 3",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Formule",
+    "blocs": [
+     {
+      "html": "Pas de ME, pas d'Id. rem. ; les coefficients ne sont pas entiers : on utilise la formule.",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Discriminant",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "\\Delta = b^{2} - 4ac = 1{,}5^{2} - 4 \\cdot 1 \\cdot (-3) = 2{,}25 + 12 = \\fbox{$14{,}25$}",
+        "lien": ""
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "badge": "Valeurs de x",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{14{,}25} = \\frac{\\sqrt{57}}{2}",
+        "lien": ""
+       },
+       {
+        "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-1{,}5 - \\frac{\\sqrt{57}}{2}}{2} = \\frac{-3 - \\sqrt{57}}{4}",
+        "lien": ""
+       },
+       {
+        "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-1{,}5 + \\frac{\\sqrt{57}}{2}}{2} = \\frac{-3 + \\sqrt{57}}{4}",
+        "lien": ""
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 5"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{\\frac{-3 - \\sqrt{57}}{4}\\,;\\,\\frac{-3 + \\sqrt{57}}{4}\\}",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "soit \\(x_{1} \\approx -2{,}637\\) et \\(x_{2} \\approx 1{,}137\\)",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "0{,}5x + \\frac{x^{2}}{3} = 1",
   "erreur": null,
   "ok": true
  },
@@ -8210,10 +10343,517 @@
   ]
  },
  "2(x+1)(x+3)=5": {
-  "erreur": "Cette forme d'équation n'est pas traitée par l'outil.",
-  "ok": false
+  "cartes": [
+   {
+    "badge": "Développer",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+       },
+       {
+        "expr": "2(x^{2} + 3x + x + 3) = 5",
+        "gauche": "2(x + 1)(x + 3) = 5",
+        "lien": "\\iff",
+        "prop": "double distribution"
+       },
+       {
+        "expr": "2(x^{2} + 4x + 3) = 5",
+        "lien": "\\iff"
+       },
+       {
+        "expr": "2x^{2} + 8x + 6 = 5",
+        "lien": "\\iff",
+        "prop": "distribution"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Ramener à 0",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "2x^{2} + 8x + 1 = 0",
+        "gauche": "2x^{2} + 8x + 6 = 5",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Tâtonnement",
+    "blocs": [
+     {
+      "html": "Pas de ME, pas d'Id. rem. ; \\(a = 2 \\neq 1\\) : tâtonnement.",
+      "type": "texte"
+     },
+     {
+      "html": "On teste les diviseurs de \\(1\\) (\\(\\pm 1\\)) : aucun n'est solution. On utilise la formule.",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Discriminant",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "\\Delta = b^{2} - 4ac = 8^{2} - 4 \\cdot 2 \\cdot 1 = 64 - 8 = \\fbox{$56$}",
+        "lien": ""
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "badge": "Valeurs de x",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{56} = 2\\sqrt{14}",
+        "lien": ""
+       },
+       {
+        "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-8 - 2\\sqrt{14}}{4} = \\frac{-4 - \\sqrt{14}}{2}",
+        "lien": ""
+       },
+       {
+        "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-8 + 2\\sqrt{14}}{4} = \\frac{-4 + \\sqrt{14}}{2}",
+        "lien": ""
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 5"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{\\frac{-4 - \\sqrt{14}}{2}\\,;\\,\\frac{-4 + \\sqrt{14}}{2}\\}",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "soit \\(x_{1} \\approx -3{,}871\\) et \\(x_{2} \\approx -0{,}129\\)",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2(x + 1)(x + 3) = 5",
+  "erreur": null,
+  "ok": true
  },
  "2(x+1)^2=8": {
+  "cartes": [
+   {
+    "badge": "Développer",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "2(x^{2} + 2x + 1) = 8",
+        "gauche": "2(x + 1)^{2} = 8",
+        "lien": "\\iff",
+        "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+       },
+       {
+        "expr": "2x^{2} + 4x + 2 = 8",
+        "lien": "\\iff",
+        "prop": "distribution"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Ramener à 0",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "2x^{2} + 4x - 6 = 0",
+        "gauche": "2x^{2} + 4x + 2 = 8",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Mise en évidence",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "2(x^{2} + 2x - 3) = 0",
+        "gauche": "2x^{2} + 4x - 6 = 0",
+        "lien": "\\iff",
+        "prop": "ME"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Somme-Produit",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "texte": "Le trinôme \\(x^{2} + 2x - 3\\) est unitaire : S-P."
+       },
+       {
+        "texte": "On cherche deux nombres dont le produit vaut \\(-3\\) et la somme vaut \\(2\\) :"
+       },
+       {
+        "bloc": {
+         "groupes": [
+          {
+           "colonnes": 2,
+           "titre": "produit \\(= -3\\)"
+          },
+          {
+           "colonnes": 1,
+           "titre": "somme"
+          }
+         ],
+         "lignes": [
+          {
+           "cases": [
+            "-1",
+            "3",
+            "2"
+           ],
+           "ok": true
+          }
+         ],
+         "type": "tableau_essais"
+        }
+       },
+       {
+        "expr": "2(x - 1)(x + 3) = 0",
+        "gauche": "2(x^{2} + 2x - 3) = 0",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "{\\underbrace{2 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x - 1 = 0} \\text{ ou } \\allowbreak {x + 3 = 0}",
+        "gauche": "2(x - 1)(x + 3) = 0",
+        "lien": "\\iff",
+        "prop": "produit nul"
+       },
+       {
+        "expr": "{x = 1} \\text{ ou } \\allowbreak {x = -3}",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 5"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{-3\\,;\\,1\\}",
+      "type": "resultat_lim"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2(x + 1)^{2} = 8",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "2(x^{2} + 2x + 1) = 8",
+          "gauche": "2(x + 1)^{2} = 8",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+         },
+         {
+          "expr": "2x^{2} + 4x + 2 = 8",
+          "lien": "\\iff",
+          "prop": "distribution"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "2x^{2} + 4x - 6 = 0",
+          "gauche": "2x^{2} + 4x + 2 = 8",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Mise en évidence",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "2(x^{2} + 2x - 3) = 0",
+          "gauche": "2x^{2} + 4x - 6 = 0",
+          "lien": "\\iff",
+          "prop": "ME"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Somme-Produit",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "Le trinôme \\(x^{2} + 2x - 3\\) est unitaire : S-P."
+         },
+         {
+          "texte": "On cherche deux nombres dont le produit vaut \\(-3\\) et la somme vaut \\(2\\) :"
+         },
+         {
+          "bloc": {
+           "groupes": [
+            {
+             "colonnes": 2,
+             "titre": "produit \\(= -3\\)"
+            },
+            {
+             "colonnes": 1,
+             "titre": "somme"
+            }
+           ],
+           "lignes": [
+            {
+             "cases": [
+              "-1",
+              "3",
+              "2"
+             ],
+             "ok": true
+            }
+           ],
+           "type": "tableau_essais"
+          }
+         },
+         {
+          "expr": "2(x - 1)(x + 3) = 0",
+          "gauche": "2(x^{2} + 2x - 3) = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{\\underbrace{2 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x - 1 = 0} \\text{ ou } \\allowbreak {x + 3 = 0}",
+          "gauche": "2(x - 1)(x + 3) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = 1} \\text{ ou } \\allowbreak {x = -3}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 5"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-3\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "2(x^{2} + 2x + 1) = 8",
+          "gauche": "2(x + 1)^{2} = 8",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+         },
+         {
+          "expr": "2x^{2} + 4x + 2 = 8",
+          "lien": "\\iff",
+          "prop": "distribution"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "2x^{2} + 4x - 6 = 0",
+          "gauche": "2x^{2} + 4x + 2 = 8",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 4^{2} - 4 \\cdot 2 \\cdot (-6) = 16 + 48 = \\fbox{$64$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 8",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-4 - 8}{4} = -3",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-4 + 8}{4} = 1",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-3\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
+ },
+ "2(x+1/2)=x^2/2": {
   "erreur": "Cette forme d'équation n'est pas traitée par l'outil.",
   "ok": false
  },
@@ -8365,8 +11005,330 @@
   "ok": true
  },
  "2(x-1)=3(1-x)(x+2)": {
-  "erreur": "Cette forme d'équation n'est pas traitée par l'outil.",
-  "ok": false
+  "cartes": [
+   {
+    "badge": "Développer",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+       },
+       {
+        "expr": "2(x - 1) = 3(x + 2 - x^{2} - 2x)",
+        "gauche": "2(x - 1) = 3(1 - x)(x + 2)",
+        "lien": "\\iff",
+        "prop": "double distribution"
+       },
+       {
+        "expr": "2(x - 1) = 3(-x^{2} - x + 2)",
+        "lien": "\\iff"
+       },
+       {
+        "expr": "2x - 2 = -3x^{2} - 3x + 6",
+        "lien": "\\iff",
+        "prop": "distribution"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Ramener à 0",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "3x^{2} + 5x - 8 = 0",
+        "gauche": "2x - 2 = -3x^{2} - 3x + 6",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Tâtonnement",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "texte": "Pas de ME, pas d'Id. rem. ; \\(a = 3 \\neq 1\\) : tâtonnement."
+       },
+       {
+        "texte": "\\(\\fbox{$x = 1$}\\) est solution, car \\(3 \\cdot 1^{2} + 5 \\cdot 1 - 8 = 3 + 5 - 8 = 0\\)."
+       },
+       {
+        "texte": "Donc \\(3x^{2} + 5x - 8 = (x - 1)(3x + \\triangle)\\) avec \\(-1 \\cdot \\triangle = -8\\), donc \\(\\fbox{$\\triangle = 8$}\\)."
+       },
+       {
+        "expr": "(x - 1)(3x + 8) = 0",
+        "gauche": "3x^{2} + 5x - 8 = 0",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "{x - 1 = 0} \\text{ ou } \\allowbreak {3x + 8 = 0}",
+        "gauche": "(x - 1)(3x + 8) = 0",
+        "lien": "\\iff",
+        "prop": "produit nul"
+       },
+       {
+        "expr": "{x = 1} \\text{ ou } \\allowbreak {x = -\\frac{8}{3}}",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{-\\frac{8}{3}\\,;\\,1\\}",
+      "type": "resultat_lim"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "2(x - 1) = 3(1 - x)(x + 2)",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+         },
+         {
+          "expr": "2(x - 1) = 3(x + 2 - x^{2} - 2x)",
+          "gauche": "2(x - 1) = 3(1 - x)(x + 2)",
+          "lien": "\\iff",
+          "prop": "double distribution"
+         },
+         {
+          "expr": "2(x - 1) = 3(-x^{2} - x + 2)",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "2x - 2 = -3x^{2} - 3x + 6",
+          "lien": "\\iff",
+          "prop": "distribution"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "3x^{2} + 5x - 8 = 0",
+          "gauche": "2x - 2 = -3x^{2} - 3x + 6",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Tâtonnement",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "Pas de ME, pas d'Id. rem. ; \\(a = 3 \\neq 1\\) : tâtonnement."
+         },
+         {
+          "texte": "\\(\\fbox{$x = 1$}\\) est solution, car \\(3 \\cdot 1^{2} + 5 \\cdot 1 - 8 = 3 + 5 - 8 = 0\\)."
+         },
+         {
+          "texte": "Donc \\(3x^{2} + 5x - 8 = (x - 1)(3x + \\triangle)\\) avec \\(-1 \\cdot \\triangle = -8\\), donc \\(\\fbox{$\\triangle = 8$}\\)."
+         },
+         {
+          "expr": "(x - 1)(3x + 8) = 0",
+          "gauche": "3x^{2} + 5x - 8 = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{x - 1 = 0} \\text{ ou } \\allowbreak {3x + 8 = 0}",
+          "gauche": "(x - 1)(3x + 8) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = 1} \\text{ ou } \\allowbreak {x = -\\frac{8}{3}}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-\\frac{8}{3}\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "2(x - 1) = 3(x + 2 - x^{2} - 2x)",
+          "gauche": "2(x - 1) = 3(1 - x)(x + 2)",
+          "lien": "\\iff",
+          "prop": "double distribution"
+         },
+         {
+          "expr": "2(x - 1) = 3(-x^{2} - x + 2)",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "2x - 2 = -3x^{2} - 3x + 6",
+          "lien": "\\iff",
+          "prop": "distribution"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "3x^{2} + 5x - 8 = 0",
+          "gauche": "2x - 2 = -3x^{2} - 3x + 6",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 5^{2} - 4 \\cdot 3 \\cdot (-8) = 25 + 96 = \\fbox{$121$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 11",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-5 - 11}{6} = -\\frac{8}{3}",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-5 + 11}{6} = 1",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-\\frac{8}{3}\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "25x^2-3=0": {
   "cartes": [
@@ -14477,6 +17439,133 @@
   "erreur": null,
   "ok": true
  },
+ "5-2(x-1)^2=x": {
+  "cartes": [
+   {
+    "badge": "Développer",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+       },
+       {
+        "expr": "5 - 2(x^{2} - 2x + 1) = x",
+        "gauche": "5 - 2(x - 1)^{2} = x",
+        "lien": "\\iff",
+        "prop": "Id. rem. \\((A - B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+       },
+       {
+        "expr": "5 - (2x^{2} - 4x + 2) = x",
+        "lien": "\\iff",
+        "prop": "distribution"
+       },
+       {
+        "expr": "5 - 2x^{2} + 4x - 2 = x",
+        "lien": "\\iff"
+       },
+       {
+        "expr": "-2x^{2} + 4x + 3 = x",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Ramener à 0",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "2x^{2} - 3x - 3 = 0",
+        "gauche": "-2x^{2} + 4x + 3 = x",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Tâtonnement",
+    "blocs": [
+     {
+      "html": "Pas de ME, pas d'Id. rem. ; \\(a = 2 \\neq 1\\) : tâtonnement.",
+      "type": "texte"
+     },
+     {
+      "html": "On teste les diviseurs de \\(-3\\) (\\(\\pm 1\\), \\(\\pm 3\\)) : aucun n'est solution. On utilise la formule.",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Discriminant",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "\\Delta = b^{2} - 4ac = (-3)^{2} - 4 \\cdot 2 \\cdot (-3) = 9 + 24 = \\fbox{$33$}",
+        "lien": ""
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "badge": "Valeurs de x",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{33}",
+        "lien": ""
+       },
+       {
+        "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{3 - \\sqrt{33}}{4}",
+        "lien": ""
+       },
+       {
+        "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{3 + \\sqrt{33}}{4}",
+        "lien": ""
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 5"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{\\frac{3 - \\sqrt{33}}{4}\\,;\\,\\frac{3 + \\sqrt{33}}{4}\\}",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "soit \\(x_{1} \\approx -0{,}686\\) et \\(x_{2} \\approx 2{,}186\\)",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "5 - 2(x - 1)^{2} = x",
+  "erreur": null,
+  "ok": true
+ },
  "5y^2-54y-72=0": {
   "cartes": [
    {
@@ -16705,6 +19794,434 @@
   "erreur": null,
   "ok": true
  },
+ "x(x+1)^2=4x": {
+  "cartes": [
+   {
+    "badge": "Développer",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "x(x^{2} + 2x + 1) = 4x",
+        "gauche": "x(x + 1)^{2} = 4x",
+        "lien": "\\iff",
+        "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+       },
+       {
+        "expr": "x^{3} + 2x^{2} + x = 4x",
+        "lien": "\\iff",
+        "prop": "distribution"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Ramener à 0",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "x^{3} + 2x^{2} - 3x = 0",
+        "gauche": "x^{3} + 2x^{2} + x = 4x",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Mise en évidence",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "x(x^{2} + 2x - 3) = 0",
+        "gauche": "x^{3} + 2x^{2} - 3x = 0",
+        "lien": "\\iff",
+        "prop": "ME"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Somme-Produit",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "texte": "Le trinôme \\(x^{2} + 2x - 3\\) est unitaire : S-P."
+       },
+       {
+        "texte": "On cherche deux nombres dont le produit vaut \\(-3\\) et la somme vaut \\(2\\) :"
+       },
+       {
+        "bloc": {
+         "groupes": [
+          {
+           "colonnes": 2,
+           "titre": "produit \\(= -3\\)"
+          },
+          {
+           "colonnes": 1,
+           "titre": "somme"
+          }
+         ],
+         "lignes": [
+          {
+           "cases": [
+            "-1",
+            "3",
+            "2"
+           ],
+           "ok": true
+          }
+         ],
+         "type": "tableau_essais"
+        }
+       },
+       {
+        "expr": "x(x - 1)(x + 3) = 0",
+        "gauche": "x(x^{2} + 2x - 3) = 0",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "{x = 0} \\text{ ou } \\allowbreak {x - 1 = 0} \\text{ ou } \\allowbreak {x + 3 = 0}",
+        "gauche": "x(x - 1)(x + 3) = 0",
+        "lien": "\\iff",
+        "prop": "produit nul"
+       },
+       {
+        "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 1} \\text{ ou } \\allowbreak {x = -3}",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 5"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{-3\\,;\\,0\\,;\\,1\\}",
+      "type": "resultat_lim"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "x(x + 1)^{2} = 4x",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x(x^{2} + 2x + 1) = 4x",
+          "gauche": "x(x + 1)^{2} = 4x",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+         },
+         {
+          "expr": "x^{3} + 2x^{2} + x = 4x",
+          "lien": "\\iff",
+          "prop": "distribution"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{3} + 2x^{2} - 3x = 0",
+          "gauche": "x^{3} + 2x^{2} + x = 4x",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Mise en évidence",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x(x^{2} + 2x - 3) = 0",
+          "gauche": "x^{3} + 2x^{2} - 3x = 0",
+          "lien": "\\iff",
+          "prop": "ME"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Somme-Produit",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "Le trinôme \\(x^{2} + 2x - 3\\) est unitaire : S-P."
+         },
+         {
+          "texte": "On cherche deux nombres dont le produit vaut \\(-3\\) et la somme vaut \\(2\\) :"
+         },
+         {
+          "bloc": {
+           "groupes": [
+            {
+             "colonnes": 2,
+             "titre": "produit \\(= -3\\)"
+            },
+            {
+             "colonnes": 1,
+             "titre": "somme"
+            }
+           ],
+           "lignes": [
+            {
+             "cases": [
+              "-1",
+              "3",
+              "2"
+             ],
+             "ok": true
+            }
+           ],
+           "type": "tableau_essais"
+          }
+         },
+         {
+          "expr": "x(x - 1)(x + 3) = 0",
+          "gauche": "x(x^{2} + 2x - 3) = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{x = 0} \\text{ ou } \\allowbreak {x - 1 = 0} \\text{ ou } \\allowbreak {x + 3 = 0}",
+          "gauche": "x(x - 1)(x + 3) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 1} \\text{ ou } \\allowbreak {x = -3}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 5"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-3\\,;\\,0\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x(x^{2} + 2x + 1) = 4x",
+          "gauche": "x(x + 1)^{2} = 4x",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+         },
+         {
+          "expr": "x^{3} + 2x^{2} + x = 4x",
+          "lien": "\\iff",
+          "prop": "distribution"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{3} + 2x^{2} - 3x = 0",
+          "gauche": "x^{3} + 2x^{2} + x = 4x",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Mise en évidence",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x(x^{2} + 2x - 3) = 0",
+          "gauche": "x^{3} + 2x^{2} - 3x = 0",
+          "lien": "\\iff",
+          "prop": "ME"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{x = 0} \\text{ ou } \\allowbreak {x^{2} + 2x - 3 = 0}",
+          "gauche": "x(x^{2} + 2x - 3) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot 1 \\cdot (-3) = 4 + 12 = \\fbox{$16$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 5"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 4",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2 - 4}{2} = -3",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-2 + 4}{2} = 1",
+          "lien": ""
+         },
+         {
+          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -3} \\text{ ou } \\allowbreak {x = 1}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 6"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-3\\,;\\,0\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
+ },
  "x(x-3)=2(x-3)": {
   "cartes": [
    {
@@ -17130,8 +20647,126 @@
   ]
  },
  "x*3+x^2=1": {
-  "erreur": "Cette forme d'équation n'est pas traitée par l'outil.",
-  "ok": false
+  "cartes": [
+   {
+    "badge": "Ramener à 0",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+       },
+       {
+        "expr": "x^{2} + 3x - 1 = 0",
+        "gauche": "x \\cdot 3 + x^{2} = 1",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Somme-Produit",
+    "blocs": [
+     {
+      "html": "Pas de ME, pas d'Id. rem. ; le trinôme est unitaire (\\(a = 1\\)) : S-P.",
+      "type": "texte"
+     },
+     {
+      "html": "On cherche deux nombres dont le produit vaut \\(-1\\) et la somme vaut \\(3\\) :",
+      "type": "texte"
+     },
+     {
+      "groupes": [
+       {
+        "colonnes": 2,
+        "titre": "produit \\(= -1\\)"
+       },
+       {
+        "colonnes": 1,
+        "titre": "somme"
+       }
+      ],
+      "lignes": [
+       {
+        "cases": [
+         "-1",
+         "1",
+         "0"
+        ]
+       }
+      ],
+      "type": "tableau_essais"
+     },
+     {
+      "html": "Aucun couple ne convient : on utilise la formule.",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Discriminant",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "\\Delta = b^{2} - 4ac = 3^{2} - 4 \\cdot 1 \\cdot (-1) = 9 + 4 = \\fbox{$13$}",
+        "lien": ""
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Valeurs de x",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{13}",
+        "lien": ""
+       },
+       {
+        "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-3 - \\sqrt{13}}{2}",
+        "lien": ""
+       },
+       {
+        "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-3 + \\sqrt{13}}{2}",
+        "lien": ""
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{\\frac{-3 - \\sqrt{13}}{2}\\,;\\,\\frac{-3 + \\sqrt{13}}{2}\\}",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "soit \\(x_{1} \\approx -3{,}303\\) et \\(x_{2} \\approx 0{,}303\\)",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "x \\cdot 3 + x^{2} = 1",
+  "erreur": null,
+  "ok": true
  },
  "x+1=3x-5": {
   "cartes": [
@@ -17225,6 +20860,75 @@
   "erreur": "Écrivez une équation avec une seule inconnue.",
   "ok": false
  },
+ "x/2=3": {
+  "cartes": [
+   {
+    "badge": "Supprimer les fractions",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "x = 6",
+        "gauche": "\\frac{x}{2} = 3",
+        "lien": "\\iff",
+        "prop": "on multiplie par 2"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Ramener à 0",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "x - 6 = 0",
+        "gauche": "x = 6",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Isoler x",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "x = 6",
+        "gauche": "x - 6 = 0",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{6\\}",
+      "type": "resultat_lim"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\frac{x}{2} = 3",
+  "erreur": null,
+  "ok": true
+ },
  "x<3": {
   "erreur": "Les inéquations ne sont pas traitées par cet outil : écrivez une équation avec =.",
   "ok": false
@@ -17238,8 +20942,366 @@
   "ok": false
  },
  "x^2+1-(10-x^2)/8=(6x-3)/4": {
-  "erreur": "Cette forme d'équation n'est pas traitée par l'outil.",
-  "ok": false
+  "cartes": [
+   {
+    "badge": "Supprimer les fractions",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "8x^{2} + 8 - (10 - x^{2}) = 2(6x - 3)",
+        "gauche": "x^{2} + 1 - \\frac{10 - x^{2}}{8} = \\frac{6x - 3}{4}",
+        "lien": "\\iff",
+        "prop": "on multiplie par 8"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Développer",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "8x^{2} + 8 - (10 - x^{2}) = 12x - 6",
+        "gauche": "8x^{2} + 8 - (10 - x^{2}) = 2(6x - 3)",
+        "lien": "\\iff",
+        "prop": "distribution"
+       },
+       {
+        "expr": "8x^{2} + 8 - 10 + x^{2} = 12x - 6",
+        "lien": "\\iff"
+       },
+       {
+        "expr": "9x^{2} - 2 = 12x - 6",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Ramener à 0",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "9x^{2} - 12x + 4 = 0",
+        "gauche": "9x^{2} - 2 = 12x - 6",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Identité remarquable",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "texte": "Id. rem. \\(A^{2} - 2AB + B^{2}\\) avec \\(\\fbox{$A = 3x,\\ B = 2$}\\). Vérification : \\(2AB = 2 \\cdot 3x \\cdot 2 = 12x\\) \\(\\checkmark\\)"
+       },
+       {
+        "expr": "(3x - 2)^{2} = 0",
+        "gauche": "9x^{2} - 12x + 4 = 0",
+        "lien": "\\iff"
+       },
+       {
+        "expr": "(3x - 2)(3x - 2) = 0",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "3x - 2 = 0",
+        "gauche": "(3x - 2)(3x - 2) = 0",
+        "lien": "\\iff",
+        "prop": "produit nul"
+       },
+       {
+        "expr": "x = \\frac{2}{3}",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 5"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{\\frac{2}{3}\\}",
+      "type": "resultat_lim"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "x^{2} + 1 - \\frac{10 - x^{2}}{8} = \\frac{6x - 3}{4}",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Supprimer les fractions",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "8x^{2} + 8 - (10 - x^{2}) = 2(6x - 3)",
+          "gauche": "x^{2} + 1 - \\frac{10 - x^{2}}{8} = \\frac{6x - 3}{4}",
+          "lien": "\\iff",
+          "prop": "on multiplie par 8"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "8x^{2} + 8 - (10 - x^{2}) = 12x - 6",
+          "gauche": "8x^{2} + 8 - (10 - x^{2}) = 2(6x - 3)",
+          "lien": "\\iff",
+          "prop": "distribution"
+         },
+         {
+          "expr": "8x^{2} + 8 - 10 + x^{2} = 12x - 6",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "9x^{2} - 2 = 12x - 6",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "9x^{2} - 12x + 4 = 0",
+          "gauche": "9x^{2} - 2 = 12x - 6",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Identité remarquable",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "Id. rem. \\(A^{2} - 2AB + B^{2}\\) avec \\(\\fbox{$A = 3x,\\ B = 2$}\\). Vérification : \\(2AB = 2 \\cdot 3x \\cdot 2 = 12x\\) \\(\\checkmark\\)"
+         },
+         {
+          "expr": "(3x - 2)^{2} = 0",
+          "gauche": "9x^{2} - 12x + 4 = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "(3x - 2)(3x - 2) = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "3x - 2 = 0",
+          "gauche": "(3x - 2)(3x - 2) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "x = \\frac{2}{3}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 5"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{\\frac{2}{3}\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Supprimer les fractions",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "8x^{2} + 8 - (10 - x^{2}) = 2(6x - 3)",
+          "gauche": "x^{2} + 1 - \\frac{10 - x^{2}}{8} = \\frac{6x - 3}{4}",
+          "lien": "\\iff",
+          "prop": "on multiplie par 8"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "8x^{2} + 8 - (10 - x^{2}) = 12x - 6",
+          "gauche": "8x^{2} + 8 - (10 - x^{2}) = 2(6x - 3)",
+          "lien": "\\iff",
+          "prop": "distribution"
+         },
+         {
+          "expr": "8x^{2} + 8 - 10 + x^{2} = 12x - 6",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "9x^{2} - 2 = 12x - 6",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "9x^{2} - 12x + 4 = 0",
+          "gauche": "9x^{2} - 2 = 12x - 6",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = (-12)^{2} - 4 \\cdot 9 \\cdot 4 = 144 - 144 = \\fbox{$0$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "\\(\\Delta = 0\\) : une seule solution."
+         },
+         {
+          "expr": "x = \\frac{-b}{2a} = \\frac{12}{18} = \\frac{2}{3}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 5"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{\\frac{2}{3}\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "x^2+1000x-1=0": {
   "cartes": [
@@ -22959,9 +27021,749 @@
    }
   ]
  },
+ "x^2/2+1/3=x": {
+  "cartes": [
+   {
+    "badge": "Supprimer les fractions",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "3x^{2} + 2 = 6x",
+        "gauche": "\\frac{x^{2}}{2} + \\frac{1}{3} = x",
+        "lien": "\\iff",
+        "prop": "on multiplie par 6"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Ramener à 0",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+       },
+       {
+        "expr": "3x^{2} - 6x + 2 = 0",
+        "gauche": "3x^{2} + 2 = 6x",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Tâtonnement",
+    "blocs": [
+     {
+      "html": "Pas de ME, pas d'Id. rem. ; \\(a = 3 \\neq 1\\) : tâtonnement.",
+      "type": "texte"
+     },
+     {
+      "html": "On teste les diviseurs de \\(2\\) (\\(\\pm 1\\), \\(\\pm 2\\)) : aucun n'est solution. On utilise la formule.",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Discriminant",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "\\Delta = b^{2} - 4ac = (-6)^{2} - 4 \\cdot 3 \\cdot 2 = 36 - 24 = \\fbox{$12$}",
+        "lien": ""
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "badge": "Valeurs de x",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{12} = 2\\sqrt{3}",
+        "lien": ""
+       },
+       {
+        "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{6 - 2\\sqrt{3}}{6} = \\frac{3 - \\sqrt{3}}{3}",
+        "lien": ""
+       },
+       {
+        "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{6 + 2\\sqrt{3}}{6} = \\frac{3 + \\sqrt{3}}{3}",
+        "lien": ""
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 5"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{\\frac{3 - \\sqrt{3}}{3}\\,;\\,\\frac{3 + \\sqrt{3}}{3}\\}",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "soit \\(x_{1} \\approx 0{,}423\\) et \\(x_{2} \\approx 1{,}577\\)",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\frac{x^{2}}{2} + \\frac{1}{3} = x",
+  "erreur": null,
+  "ok": true
+ },
+ "x^2/2-x-1=0": {
+  "cartes": [
+   {
+    "badge": "Supprimer les fractions",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "x^{2} - 2x - 2 = 0",
+        "gauche": "\\frac{x^{2}}{2} - x - 1 = 0",
+        "lien": "\\iff",
+        "prop": "on multiplie par 2"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Somme-Produit",
+    "blocs": [
+     {
+      "html": "Pas de ME, pas d'Id. rem. ; le trinôme est unitaire (\\(a = 1\\)) : S-P.",
+      "type": "texte"
+     },
+     {
+      "html": "On cherche deux nombres dont le produit vaut \\(-2\\) et la somme vaut \\(-2\\) :",
+      "type": "texte"
+     },
+     {
+      "groupes": [
+       {
+        "colonnes": 2,
+        "titre": "produit \\(= -2\\)"
+       },
+       {
+        "colonnes": 1,
+        "titre": "somme"
+       }
+      ],
+      "lignes": [
+       {
+        "cases": [
+         "1",
+         "-2",
+         "-1"
+        ]
+       }
+      ],
+      "type": "tableau_essais"
+     },
+     {
+      "html": "Aucun couple ne convient : on utilise la formule.",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Discriminant",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "\\Delta = b^{2} - 4ac = (-2)^{2} - 4 \\cdot 1 \\cdot (-2) = 4 + 8 = \\fbox{$12$}",
+        "lien": ""
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Valeurs de x",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{12} = 2\\sqrt{3}",
+        "lien": ""
+       },
+       {
+        "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{2 - 2\\sqrt{3}}{2} = 1 - \\sqrt{3}",
+        "lien": ""
+       },
+       {
+        "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2 + 2\\sqrt{3}}{2} = 1 + \\sqrt{3}",
+        "lien": ""
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{1 - \\sqrt{3}\\,;\\,1 + \\sqrt{3}\\}",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "soit \\(x_{1} \\approx -0{,}732\\) et \\(x_{2} \\approx 2{,}732\\)",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\frac{x^{2}}{2} - x - 1 = 0",
+  "erreur": null,
+  "ok": true
+ },
+ "x^2/2=(x+1)(x-1)": {
+  "cartes": [
+   {
+    "badge": "Supprimer les fractions",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "x^{2} = 2(x + 1)(x - 1)",
+        "gauche": "\\frac{x^{2}}{2} = (x + 1)(x - 1)",
+        "lien": "\\iff",
+        "prop": "on multiplie par 2"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Développer",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "x^{2} = 2(x^{2} - x + x - 1)",
+        "gauche": "x^{2} = 2(x + 1)(x - 1)",
+        "lien": "\\iff",
+        "prop": "double distribution"
+       },
+       {
+        "expr": "x^{2} = 2(x^{2} - 1)",
+        "lien": "\\iff"
+       },
+       {
+        "expr": "x^{2} = 2x^{2} - 2",
+        "lien": "\\iff",
+        "prop": "distribution"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Ramener à 0",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "x^{2} - 2 = 0",
+        "gauche": "x^{2} = 2x^{2} - 2",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Identité remarquable",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "(x + \\sqrt{2})(x - \\sqrt{2}) = 0",
+        "gauche": "x^{2} - 2 = 0",
+        "lien": "\\iff",
+        "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x,\\ B = \\sqrt{2}$}\\)"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "{x + \\sqrt{2} = 0} \\text{ ou } \\allowbreak {x - \\sqrt{2} = 0}",
+        "gauche": "(x + \\sqrt{2})(x - \\sqrt{2}) = 0",
+        "lien": "\\iff",
+        "prop": "produit nul"
+       },
+       {
+        "expr": "{x = -\\sqrt{2}} \\text{ ou } \\allowbreak {x = \\sqrt{2}}",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 5"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{-\\sqrt{2}\\,;\\,\\sqrt{2}\\}",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "soit \\(x \\approx -1{,}414\\) ou \\(x \\approx 1{,}414\\)",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\frac{x^{2}}{2} = (x + 1)(x - 1)",
+  "erreur": null,
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Supprimer les fractions",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} = 2(x + 1)(x - 1)",
+          "gauche": "\\frac{x^{2}}{2} = (x + 1)(x - 1)",
+          "lien": "\\iff",
+          "prop": "on multiplie par 2"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} = 2(x^{2} - x + x - 1)",
+          "gauche": "x^{2} = 2(x + 1)(x - 1)",
+          "lien": "\\iff",
+          "prop": "double distribution"
+         },
+         {
+          "expr": "x^{2} = 2(x^{2} - 1)",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "x^{2} = 2x^{2} - 2",
+          "lien": "\\iff",
+          "prop": "distribution"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} - 2 = 0",
+          "gauche": "x^{2} = 2x^{2} - 2",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Identité remarquable",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "(x + \\sqrt{2})(x - \\sqrt{2}) = 0",
+          "gauche": "x^{2} - 2 = 0",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x,\\ B = \\sqrt{2}$}\\)"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{x + \\sqrt{2} = 0} \\text{ ou } \\allowbreak {x - \\sqrt{2} = 0}",
+          "gauche": "(x + \\sqrt{2})(x - \\sqrt{2}) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = -\\sqrt{2}} \\text{ ou } \\allowbreak {x = \\sqrt{2}}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 5"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-\\sqrt{2}\\,;\\,\\sqrt{2}\\}",
+        "type": "resultat_lim"
+       },
+       {
+        "html": "soit \\(x \\approx -1{,}414\\) ou \\(x \\approx 1{,}414\\)",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Supprimer les fractions",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} = 2(x + 1)(x - 1)",
+          "gauche": "\\frac{x^{2}}{2} = (x + 1)(x - 1)",
+          "lien": "\\iff",
+          "prop": "on multiplie par 2"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} = 2(x^{2} - x + x - 1)",
+          "gauche": "x^{2} = 2(x + 1)(x - 1)",
+          "lien": "\\iff",
+          "prop": "double distribution"
+         },
+         {
+          "expr": "x^{2} = 2(x^{2} - 1)",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "x^{2} = 2x^{2} - 2",
+          "lien": "\\iff",
+          "prop": "distribution"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} - 2 = 0",
+          "gauche": "x^{2} = 2x^{2} - 2",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 1 \\cdot (-2) = \\fbox{$8$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{8} = 2\\sqrt{2}",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2\\sqrt{2}}{2} = -\\sqrt{2}",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2\\sqrt{2}}{2} = \\sqrt{2}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 5"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-\\sqrt{2}\\,;\\,\\sqrt{2}\\}",
+        "type": "resultat_lim"
+       },
+       {
+        "html": "soit \\(x_{1} \\approx -1{,}414\\) et \\(x_{2} \\approx 1{,}414\\)",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
+ },
  "x^2/2=1+x": {
-  "erreur": "Cette forme d'équation n'est pas traitée par l'outil.",
-  "ok": false
+  "cartes": [
+   {
+    "badge": "Supprimer les fractions",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "x^{2} = 2 + 2x",
+        "gauche": "\\frac{x^{2}}{2} = 1 + x",
+        "lien": "\\iff",
+        "prop": "on multiplie par 2"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Ramener à 0",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+       },
+       {
+        "expr": "x^{2} - 2x - 2 = 0",
+        "gauche": "x^{2} = 2 + 2x",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Somme-Produit",
+    "blocs": [
+     {
+      "html": "Pas de ME, pas d'Id. rem. ; le trinôme est unitaire (\\(a = 1\\)) : S-P.",
+      "type": "texte"
+     },
+     {
+      "html": "On cherche deux nombres dont le produit vaut \\(-2\\) et la somme vaut \\(-2\\) :",
+      "type": "texte"
+     },
+     {
+      "groupes": [
+       {
+        "colonnes": 2,
+        "titre": "produit \\(= -2\\)"
+       },
+       {
+        "colonnes": 1,
+        "titre": "somme"
+       }
+      ],
+      "lignes": [
+       {
+        "cases": [
+         "1",
+         "-2",
+         "-1"
+        ]
+       }
+      ],
+      "type": "tableau_essais"
+     },
+     {
+      "html": "Aucun couple ne convient : on utilise la formule.",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Discriminant",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "\\Delta = b^{2} - 4ac = (-2)^{2} - 4 \\cdot 1 \\cdot (-2) = 4 + 8 = \\fbox{$12$}",
+        "lien": ""
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "badge": "Valeurs de x",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{12} = 2\\sqrt{3}",
+        "lien": ""
+       },
+       {
+        "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{2 - 2\\sqrt{3}}{2} = 1 - \\sqrt{3}",
+        "lien": ""
+       },
+       {
+        "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2 + 2\\sqrt{3}}{2} = 1 + \\sqrt{3}",
+        "lien": ""
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 5"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{1 - \\sqrt{3}\\,;\\,1 + \\sqrt{3}\\}",
+      "type": "resultat_lim"
+     },
+     {
+      "html": "soit \\(x_{1} \\approx -0{,}732\\) et \\(x_{2} \\approx 2{,}732\\)",
+      "type": "texte"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "\\frac{x^{2}}{2} = 1 + x",
+  "erreur": null,
+  "ok": true
  },
  "x^2=0": {
   "cartes": [
@@ -23278,6 +28080,115 @@
    }
   ],
   "enonce_tex": "x^{3} + 8x^{2} = 0",
+  "erreur": null,
+  "ok": true
+ },
+ "x^3-(x-1)^3=1": {
+  "cartes": [
+   {
+    "badge": "Développer",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "x^{3} - (x - 1)^{2}(x - 1) = 1",
+        "gauche": "x^{3} - (x - 1)^{3} = 1",
+        "lien": "\\iff"
+       },
+       {
+        "expr": "x^{3} - (x^{2} - 2x + 1)(x - 1) = 1",
+        "lien": "\\iff",
+        "prop": "Id. rem. \\((A - B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+       },
+       {
+        "expr": "x^{3} - (x^{3} - x^{2} - 2x^{2} + 2x + x - 1) = 1",
+        "lien": "\\iff",
+        "prop": "double distribution"
+       },
+       {
+        "expr": "x^{3} - x^{3} + x^{2} + 2x^{2} - 2x - x + 1 = 1",
+        "lien": "\\iff"
+       },
+       {
+        "expr": "3x^{2} - 3x + 1 = 1",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 1"
+   },
+   {
+    "badge": "Ramener à 0",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "3x^{2} - 3x = 0",
+        "gauche": "3x^{2} - 3x + 1 = 1",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 2"
+   },
+   {
+    "badge": "Mise en évidence",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "3x(x - 1) = 0",
+        "gauche": "3x^{2} - 3x = 0",
+        "lien": "\\iff",
+        "prop": "ME"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 3"
+   },
+   {
+    "badge": "Produit nul",
+    "blocs": [
+     {
+      "rangees": [
+       {
+        "expr": "{3x = 0} \\text{ ou } \\allowbreak {x - 1 = 0}",
+        "gauche": "3x(x - 1) = 0",
+        "lien": "\\iff",
+        "prop": "produit nul"
+       },
+       {
+        "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 1}",
+        "lien": "\\iff"
+       }
+      ],
+      "type": "chaine"
+     }
+    ],
+    "style": "normal",
+    "titre": "Étape 4"
+   },
+   {
+    "blocs": [
+     {
+      "tex": "S = \\{0\\,;\\,1\\}",
+      "type": "resultat_lim"
+     }
+    ],
+    "style": "normal",
+    "titre": "Solution"
+   }
+  ],
+  "enonce_tex": "x^{3} - (x - 1)^{3} = 1",
   "erreur": null,
   "ok": true
  },

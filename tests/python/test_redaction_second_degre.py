@@ -38,15 +38,15 @@ import second_degre as sd
 import sortie
 from chaine import Chaine, Eq, LigneTexte, bloc_rangees, tex_element
 from aides_sortie import TUTOIEMENT
-from corpus_second_degre import (A_VENIR, MESSAGE_BICARREE, NON_RESOLUES, P2B, P3, P4A, P4B, PARTIES_FAITES, RESOLUES, SECTION_8,
-                                 STRUCTURES_NON_ECRITES)
+from corpus_second_degre import (A_VENIR, FORMES_NON_ECRITES, MESSAGE_BICARREE, NON_RESOLUES, P2B, P3, P4A, P4B, PARTIES_FAITES, R2,
+                                 RESOLUES, SECTION_8, STRUCTURES_DEVELOPPEES)
 from expr import Nb
 from second_degre import Nombre
 from test_second_degre import GENERES, OracleMixin, egal_au_polynome, valeur_mp
 from test_vocabulaire import INTERDITS, chaines
 
 PHASES = {"ramener", "factoriser", "produit_nul", "delta_valeur", "delta_nombre", "isoler"}
-METHODES_ETAPE = {"RAMENER", "DEVELOPPER", "ISOLER", "ME", "ME_PUISSANCE", "IDREM_DIFF", "IDREM_PLUS", "IDREM_MOINS", "SP",
+METHODES_ETAPE = {"FRACTIONS", "RAMENER", "DEVELOPPER", "ISOLER", "ME", "ME_PUISSANCE", "IDREM_DIFF", "IDREM_PLUS", "IDREM_MOINS", "SP",
                   "TATONNEMENT", "FORMULE", "PRODUIT_NUL"}
 
 
@@ -761,14 +761,22 @@ class TestRamener(unittest.TestCase):
         self.assertEqual(avec, {"2.10 h", "2.10 j", "2.11 f", "E1 côté droit, formule", "E1 décimaux", "E1 fractions, formule",
                                 "(x + 1)(x + 3) = 15", "E2 distribution", "E2 distribution, monôme",
                                 "E2 « − » devant une distribution", "E2 parenthèse précédée de « − »", "E2 Id. rem. (A + B)²",
-                                "E2 Id. rem. (A + B)², Δ < 0", "E2 Id. rem. (A − B)², A constante", "E2 décimaux"})
+                                "E2 Id. rem. (A + B)², Δ < 0", "E2 Id. rem. (A − B)², A constante", "E2 décimaux",
+                                # R2 : après la ligne qui supprime les fractions, ou en tête du développement pas à pas
+                                "x²/2 = 1 + x", "(x − 1)/3 = x²/6", "fractions, constante fractionnaire comptée",
+                                "fractions, puis Id. rem. (A + B)²", "fractions et décimaux", "2(x + 1)(x + 3) = 5",
+                                "E2 k(B)² et des termes en x", "E2 monôme écrit à l'envers", "E2 « − » devant k(B)²",
+                                "E2 trois facteurs, degré 2 une fois ramenée", "structure développée : 2(x-1)=3(1-x)(x+2)",
+                                "structure développée : (x+1+2)(x-1)=0"})
         for nom, res in TOUTES:
             t = textes(res)
             if PHRASE in t:
                 with self.subTest(nom=nom):
-                    self.assertEqual(t.index(PHRASE), 1)                        # après l'énoncé, qui passe à sa droite (B3)
+                    fractions = res["etapes"][0]["methode"] == "FRACTIONS"      # R2 : la phrase ouvre l'étape qui suit
+                    self.assertEqual(t.index(PHRASE), 2 if fractions else 1)    # après l'énoncé, qui passe à sa droite (B3)
+                    self.assertIn(LigneTexte(PHRASE), res["etapes"][1 if fractions else 0]["lignes"])
                     self.assertEqual(res["etapes"][0]["phase"], "ramener")
-                    suite = [x for x in t[2:] if not x.startswith(("\\iff", " | "))]
+                    suite = [x for x in t[t.index(PHRASE) + 1:] if not x.startswith(("\\iff", " | "))]
                     self.assertTrue(suite[0].startswith(("Pas de ME", "Le trinôme")), suite[0])
         res = resoudre(P3["2.10 h"])
         self.assertEqual(textes(res)[:4], [" | x^{2} + 7x = 18 | ", PHRASE, r"\iff | x^{2} + 7x - 18 = 0 | ",
@@ -1332,7 +1340,7 @@ class TestNonResolu(unittest.TestCase):
         self.assertEqual(sd.MESSAGES["pas_encore"], MESSAGE_BICARREE)
         self.assertEqual({partie for _, partie, _, _, _ in A_VENIR.values()} - set(PARTIES_FAITES), set())
         saisies = [(nom, s_, "resolu") for nom, s_ in RESOLUES.items()] + [(nom, s_, st) for nom, (s_, st) in NON_RESOLUES.items()]
-        saisies += [(s_, s_, "forme_non_traitee") for s_ in STRUCTURES_NON_ECRITES]
+        saisies += [(s_, s_, "forme_non_traitee") for s_ in FORMES_NON_ECRITES]
         for nom, saisie, statut in saisies:
             with self.subTest(nom=nom):
                 res = resoudre(saisie)
@@ -1349,14 +1357,19 @@ class TestNonResolu(unittest.TestCase):
 
     def test_structures_sans_developper(self):
         """E1.3 : quand une structure s'applique sans développer (produit nul direct, facteur commun aux deux membres, Id. rem. sur
-        une forme structurée), on ne développe pas (`ramener` rend None) : l'outil la résout, ou, s'il ne l'écrit pas, « hors du
-        cours » (jamais développée). Sinon, on développe (E2)."""
+        une forme structurée), on ne développe pas (`ramener` rend None) : l'outil la résout. R2 (question 29) : une structure qu'il
+        n'écrit pas est développée (« développer d'abord », `STRUCTURES_DEVELOPPEES`), ou, si elle n'aboutit pas par le cours une fois
+        développée, « forme non traitée » (`FORMES_NON_ECRITES`, jamais « hors du cours » : un produit nul direct pourrait la
+        résoudre). Sinon, on développe (E2)."""
         oui = ("4(x-2)^2=1", "(x+1)^2=16", "16-(3x+2)^2=0", "(x-1)(2-x)=(x-1)(x+3)", "(x-1)(2-x)(5-3x)=0", "x(x+1)=0",
-               "3(x+1)^2=0", "(x+1)^2=(2x-3)^2", "(x-1)(x+2)=x-1", "-(x+1)^2+4=0", "(x+1)^2=5", "2(x-1)=3(1-x)(x+2)",
-               "(x^2-1)(x+2)=0", "3(x^2-4)=0", "(x+1)^2=(x-3)^2", "(x-1)(x+2)=(x-1)(x+5)", "(x+1)^2=(x+1)^2")   # P4b
+               "3(x+1)^2=0", "(x+1)^2=(2x-3)^2", "(x-1)(x+2)=x-1", "-(x+1)^2+4=0", "(x+1)^2=5",
+               "(x^2-1)(x+2)=0", "3(x^2-4)=0", "(x+1)^2=(x-3)^2", "(x-1)(x+2)=(x-1)(x+5)", "(x+1)^2=(x+1)^2",   # P4b
+               "(x+1)^3=0", "(x+1)^2*(x^2-4)=0", "(x+1)^3*(x^2-1)=0")                                               # R2
         non = ("(x+1)(x+3)=15", "(x+1)^2=-16", "(2x-1)^2-4x(x-1)=1", "x(x-4)=5", "(x+1)^2+(x-1)^2=10", "(x+1)^2=2x+14",
                "x^2+7x=18", "5-(x+1)(x+3)=0")
-        for saisie in oui + non + tuple(STRUCTURES_NON_ECRITES):
+        non_ecrites = ("(x^2-3)^2=1", "(x-1)(x+2)(x+3)=5(x-1)")
+        self.assertTrue(set(non_ecrites) <= set(FORMES_NON_ECRITES))
+        for saisie in oui + non + tuple(STRUCTURES_DEVELOPPEES) + non_ecrites:
             g, d, x, _ = lire(saisie)
             with self.subTest(saisie=saisie):
                 self.assertEqual(sd.forme_structuree(g, d, x), saisie not in non)
@@ -1364,31 +1377,48 @@ class TestNonResolu(unittest.TestCase):
                     continue
                 self.assertIsNone(sd.ramener(g, d, x))
                 res = resoudre(saisie)
-                if saisie in STRUCTURES_NON_ECRITES:
+                if saisie in STRUCTURES_DEVELOPPEES:
+                    self.assertEqual(res["statut"], "resolu")
+                    self.assertEqual(res["etapes"][0]["methode"], "DEVELOPPER")
+                    self.assertIsNotNone(sd.ramener(g, d, x, structure=False))
+                elif saisie in non_ecrites:
                     self.assertEqual((res["statut"], res["message"], res["etapes"]),
                                      ("forme_non_traitee", sd.MESSAGES["forme_non_traitee"], []))
+                    self.assertIn(sd.chemin(sd.ramener(g, d, x, structure=False)["P"])["statut"], ("hors_cours",))
                 else:
                     self.assertEqual(res["statut"], "resolu")
                     self.assertFalse(any(e["methode"] == "DEVELOPPER" for e in res["etapes"]))
 
-    def test_hors_de_ce_que_e2_developpe(self):
-        """E2 ne développe que nombre ou monôme × parenthèse, deux parenthèses, le carré d'un binôme ; le reste reçoit « Cette forme
-        d'équation n'est pas traitée par l'outil. », sans étape (P5, question 29 de suivi.md : « hors du cours » y serait faux) ; un
-        degré 3 sans ME ni Id. rem. reçoit « hors du cours » (vrai). Ce qui n'est pas de degré 2 une fois ramené est résolu (P4b) :
-        degré 1 (isoler), identité."""
-        for saisie in ("2(x+1)(x+3)=5", "0,5(x+2)^2=x+3", "(x+1)^3=8+x", "x*3+x^2=1", "(x^2+x+1)^2=x", "x^2/2=1+x", "x^3=x+1"):
+    def test_developper_d_abord(self):
+        """R2 (question 29, tranchée le 06.11.2026) : ce qu'E2 n'écrivait pas en une ligne est développé pas à pas (« développer
+        d'abord ») ou débarrassé de ses fractions d'abord, puis résolu par le chemin habituel ; jamais « forme non traitée ». Un degré
+        ≥ 3 sans ME ni Id. rem. une fois développé reçoit « hors du cours » (vrai, `hors_du_cours`). Ce qui n'est pas de degré 2 une
+        fois ramené est résolu (P4b) : degré 1 (isoler), identité."""
+        for saisie, premiere in (("2(x+1)(x+3)=5", "DEVELOPPER"), ("0,5(x+2)^2=x+3", "DEVELOPPER"), ("x*3+x^2=1", "RAMENER"),
+                                 ("x^2/2=1+x", "FRACTIONS"), ("2(x+1)^2=8", "DEVELOPPER"), ("(3x-2)/6=(x+1)/4+5", "FRACTIONS"),
+                                 ("x^2+1-(10-x^2)/8=(6x-3)/4", "FRACTIONS")):
             with self.subTest(saisie=saisie):
-                g, d, x, _ = lire(saisie)
-                if saisie != "x^3=x+1":
-                    self.assertIsNone(sd.ramener(g, d, x))
+                g, d, x, dec = lire(saisie)
+                self.assertIsNotNone(sd.ramener(g, d, x, dec, structure=False))
                 res = resoudre(saisie)
-                self.assertEqual((res["statut"], res["etapes"]), ("hors_cours" if saisie == "x^3=x+1" else "forme_non_traitee", []))
+                self.assertEqual((res["statut"], res["etapes"][0]["methode"]), ("resolu", premiere))
+        for saisie in ("(x+1)^3=8+x", "(x^2+x+1)^2=x", "(x-1)(x+2)(x+3)=1", "x^3=x+1"):
+            with self.subTest(saisie=saisie):
+                res = resoudre(saisie)
+                self.assertEqual((res["statut"], res["etapes"]), ("hors_cours", []))
+                g, d, x, dec = lire(saisie)
+                P = sd.ramener(g, d, x, dec)["P"]
+                self.assertTrue(sd.hors_du_cours(P, sd.chemin(P)))
         for saisie, S in (("(x+1)(x+3)=x^2", r"S = \{-\frac{3}{4}\}"), ("x^2+1=x^2+x", r"S = \{1\}"),
-                          ("(x+2)(x-2)=x^2-4", r"S = \mathbb{R}")):
+                          ("(x+2)(x-2)=x^2-4", r"S = \mathbb{R}"), ("(3x-2)/6=(x+1)/4+5", r"S = \{\frac{67}{3}\}")):
             with self.subTest(saisie=saisie):
                 res = resoudre(saisie)
                 self.assertEqual((res["statut"], res["S"]), ("resolu", S))
-                self.assertEqual(res["etapes"][0]["methode"], "DEVELOPPER" if "(" in saisie else "RAMENER")
+                self.assertEqual(res["etapes"][0]["methode"],
+                                 "FRACTIONS" if "/" in saisie else "DEVELOPPER" if "(" in saisie else "RAMENER")
+        for nom, saisie in R2.items():
+            with self.subTest(nom=nom):
+                self.assertEqual(resoudre(saisie)["statut"], "resolu")
 
     def test_hors_du_cours_seulement_si_vrai(self):
         """P5 (question 29 ; CLAUDE.md, rien de faux à l'écran) : « hors du cours » seulement pour un polynôme développé de degré ≥ 3,
@@ -1454,3 +1484,126 @@ def test_P4b_bicarree():
     """§ 4, § 13.4 : le message « bicarrée » si ni ME ni Id. rem. ne s'applique (x⁴ − 5x² + 4)."""
     res = resoudre("x^4-5x^2+4=0")
     assert (res["statut"], res["message"]) == ("pas_encore", MESSAGE_BICARREE)
+
+
+# ---------------------------------------------------------------------------------------------------------------------------
+# R2 : fractions supprimées d'abord, développer d'abord (question 29 de suivi.md, tranchée par l'enseignant le 06.11.2026)
+# ---------------------------------------------------------------------------------------------------------------------------
+class TestR2(unittest.TestCase):
+
+    def test_2_x_plus_1_au_carre_egal_8(self):
+        """Développer d'abord : l'Id. rem. dans la parenthèse, puis la distribution (étape « Développer »), puis le chemin du cours."""
+        res = resoudre(R2["2(x + 1)² = 8"])
+        self.assertEqual(textes(res)[:5], [
+            " | 2(x + 1)^{2} = 8 | ",
+            r"\iff | 2(x^{2} + 2x + 1) = 8 | Id. rem. \((A + B)^{2}\) avec \(A = x,\ B = 1\)",
+            r"\iff | 2x^{2} + 4x + 2 = 8 | distribution", r"\iff | 2x^{2} + 4x - 6 = 0 | ", r"\iff | 2(x^{2} + 2x - 3) = 0 | ME"])
+        self.assertEqual([(e["phase"], e["methode"]) for e in res["etapes"]], [
+            ("ramener", "DEVELOPPER"), ("ramener", "RAMENER"), ("factoriser", "ME"), ("factoriser", "SP"),
+            ("produit_nul", "PRODUIT_NUL")])
+        self.assertEqual(res["etapes"][0]["parametres"],
+                         {"developpements": [r"Id. rem. \((A + B)^{2}\) avec \(A = x,\ B = 1\)", "distribution"]})
+        self.assertEqual(res["S"], r"S = \{-3\,;\,1\}")
+
+    def test_x2_sur_2_egal_1_plus_x(self):
+        """Fractions supprimées d'abord : « ⇔ x² = 2 + 2x » (on multiplie par 2), étape à part, puis la phrase d'E1 et le S-P."""
+        res = resoudre(R2["x²/2 = 1 + x"])
+        self.assertEqual(textes(res)[:5], [
+            r" | \frac{x^{2}}{2} = 1 + x | ", r"\iff | x^{2} = 2 + 2x | on multiplie par 2", PHRASE, r"\iff | x^{2} - 2x - 2 = 0 | ",
+            r"Pas de ME, pas d'Id. rem. ; le trinôme est unitaire (\(a = 1\)) : S-P."])
+        self.assertEqual((res["etapes"][0]["phase"], res["etapes"][0]["methode"], res["etapes"][0]["parametres"]),
+                         ("ramener", "FRACTIONS", {"facteur": 2}))
+        self.assertEqual(res["S"], r"S = \{1 - \sqrt{3}\,;\,1 + \sqrt{3}\}")
+        import resoudre_eq
+        self.assertEqual(resoudre_eq.titre(res["etapes"][0], "x"), "Supprimer les fractions")
+        self.assertEqual(sd.cartes(res)[0]["etapes"], [0])
+
+    def test_az_4_1_b_et_h(self):
+        """Az 4.1 b et h : chaque terme multiplié par le plus petit dénominateur commun, un numérateur somme entre parenthèses, puis
+        la distribution, les parenthèses enlevées, la réduction (E2)."""
+        self.assertEqual(textes(resoudre(R2["Az 4.1 b"])), [
+            r" | \frac{3x - 2}{6} = \frac{x + 1}{4} + 5 | ", r"\iff | 2(3x - 2) = 3(x + 1) + 60 | on multiplie par 12",
+            r"\iff | 6x - 4 = 3x + 3 + 60 | distribution", r"\iff | 6x - 4 = 3x + 63 | ", r"\iff | 3x - 67 = 0 | ",
+            r"\iff | x = \frac{67}{3} | "])
+        self.assertEqual(textes(resoudre(R2["Az 4.1 h"]))[:6], [
+            r" | x^{2} + 1 - \frac{10 - x^{2}}{8} = \frac{6x - 3}{4} | ",
+            r"\iff | 8x^{2} + 8 - (10 - x^{2}) = 2(6x - 3) | on multiplie par 8",
+            r"\iff | 8x^{2} + 8 - (10 - x^{2}) = 12x - 6 | distribution", r"\iff | 8x^{2} + 8 - 10 + x^{2} = 12x - 6 | ",
+            r"\iff | 9x^{2} - 2 = 12x - 6 | ", r"\iff | 9x^{2} - 12x + 4 = 0 | "])
+        self.assertEqual(resoudre(R2["Az 4.1 h"])["S"], r"S = \{\frac{2}{3}\}")
+
+    def test_developpement_pas_a_pas(self):
+        """Une constante devant deux parenthèses : la double distribution d'abord, la réduction dans la parenthèse, puis la
+        distribution ; un cube : (B)²(B), l'Id. rem., puis la double distribution, « − » devant le produit développé (E2)."""
+        self.assertEqual(textes(resoudre(R2["2(x + 1)(x + 3) = 5"]))[:6], [
+            " | 2(x + 1)(x + 3) = 5 | ", PHRASE, r"\iff | 2(x^{2} + 3x + x + 3) = 5 | double distribution",
+            r"\iff | 2(x^{2} + 4x + 3) = 5 | ", r"\iff | 2x^{2} + 8x + 6 = 5 | distribution", r"\iff | 2x^{2} + 8x + 1 = 0 | "])
+        self.assertEqual(textes(resoudre(R2["E2 « − » devant un cube"]))[:7], [
+            " | x^{3} - (x - 1)^{3} = 1 | ", r"\iff | x^{3} - (x - 1)^{2}(x - 1) = 1 | ",
+            r"\iff | x^{3} - (x^{2} - 2x + 1)(x - 1) = 1 | Id. rem. \((A - B)^{2}\) avec \(A = x,\ B = 1\)",
+            r"\iff | x^{3} - (x^{3} - x^{2} - 2x^{2} + 2x + x - 1) = 1 | double distribution",
+            r"\iff | x^{3} - x^{3} + x^{2} + 2x^{2} - 2x - x + 1 = 1 | ", r"\iff | 3x^{2} - 3x + 1 = 1 | ",
+            r"\iff | 3x^{2} - 3x = 0 | "])
+        self.assertEqual(textes(resoudre(R2["E2 monôme écrit à l'envers"]))[:3],
+                         [r" | x \cdot 3 + x^{2} = 1 | ", PHRASE, r"\iff | x^{2} + 3x - 1 = 0 | "])
+
+    def test_produit_deja_nul_cube_et_carre_avec_un_trinome(self):
+        """Produit déjà nul (E13) : un cube réécrit comme un carré (D24) ; un carré à côté d'un trinôme reste écrit jusqu'au produit
+        nul, où il est réécrit (B)(B)."""
+        self.assertEqual(textes(resoudre(R2["E13 cube, D24"])), [
+            " | (x + 1)^{3} = 0 | ", r"\iff | (x + 1)(x + 1)(x + 1) = 0 | ", r"\iff | x + 1 = 0 | produit nul", r"\iff | x = -1 | "])
+        self.assertEqual(textes(resoudre(R2["E13 carré et facteur de degré 2"]))[:3], [
+            " | (x + 1)^{2}(x^{2} - 4) = 0 | ",
+            r"\iff | (x + 1)^{2}(x + 2)(x - 2) = 0 | Id. rem. \(A^{2} - B^{2}\) avec \(\fbox{$A = x,\ B = 2$}\)",
+            r"\iff | (x + 1)(x + 1)(x + 2)(x - 2) = 0 | "])
+
+    def test_constante_fractionnaire_sans_multiplication(self):
+        """D22 : une constante fractionnaire seule ((1/2)x², x² = 1/4) ne fait rien multiplier ; une division qui a l'inconnue au
+        numérateur, si (et la constante fractionnaire compte alors dans le dénominateur commun)."""
+        for nom, saisie in RESOLUES.items():
+            with self.subTest(nom=nom):
+                g, d, x, _ = lire(saisie)
+                fractions = sd.a_des_fractions(g, d, x)
+                self.assertEqual(fractions, nom in R2 and "/" in saisie)
+                self.assertEqual(resoudre(saisie)["etapes"][0]["methode"] == "FRACTIONS", fractions)
+        self.assertEqual(textes(resoudre(R2["fractions, constante fractionnaire comptée"]))[1],
+                         r"\iff | 3x^{2} + 2 = 6x | on multiplie par 6")
+
+    def test_chaque_ligne_relue(self):
+        """Garde-fou (R2) : chaque ligne de la suppression des fractions vaut, membre par membre, M fois l'énoncé ; chaque ligne du
+        développement pas à pas, l'énoncé (ou M fois) ; relu dans Q(√m), indépendamment de la brique (oracle des membres :
+        vers_polynome de la saisie). Une écriture faussée exprès donne « ne_conclut_pas »."""
+        for nom, saisie in R2.items():
+            g, d, x, _ = lire(saisie)
+            Pg, Pd = sd.vers_polynome(g, x), sd.vers_polynome(d, x)
+            res = resoudre(saisie)
+            M = next((e["parametres"]["facteur"] for e in res["etapes"] if e["methode"] == "FRACTIONS"), 1)
+            for e in res["etapes"]:
+                if e["methode"] in ("FRACTIONS", "DEVELOPPER") and e["segment"] is not None:
+                    for el in e["segment"].elements[1:]:
+                        with self.subTest(nom=nom, ligne=tex_element(el)):
+                            self.assertEqual(sd.en_nombres(sd._ecrit_en_nombres(el.g, x)), sd.en_nombres([M * c for c in Pg]))
+                            self.assertEqual(sd.en_nombres(sd._ecrit_en_nombres(el.d, x)), sd.en_nombres([M * c for c in Pd]))
+        for nom, cible, faux in (
+                ("Az 4.1 b", "_fois", lambda ancien: lambda *a: (lambda r: (r[0], expr.Op("+", r[1], Nb(1)), r[2]))(ancien(*a))),
+                ("Az 4.1 h", "_fois", lambda ancien: lambda *a: (lambda r: (r[0], r[1], expr.Op("+", r[2], Nb(1))))(ancien(*a))),
+                ("2(x + 1)(x + 3) = 5", "_reduire_terme", lambda ancien: lambda t: ancien((t[0] + 1,) + tuple(t[1:]))),
+                ("2(x + 1)² = 8", "_pas_terme", lambda ancien: lambda t, X, dec: ancien((t[0] * 3,) + tuple(t[1:]), X, dec))):
+            ancien = getattr(sd, cible)
+            try:
+                setattr(sd, cible, faux(ancien))
+                with self.subTest(faux=cible):
+                    self.assertEqual(resoudre(R2[nom])["statut"], "ne_conclut_pas")
+            finally:
+                setattr(sd, cible, ancien)
+            self.assertEqual(resoudre(R2[nom])["statut"], "resolu")
+
+    def test_plus_de_forme_non_traitee_dans_le_corpus(self):
+        """Après R2, « Cette forme d'équation n'est pas traitée par l'outil. » ne reste que pour `FORMES_NON_ECRITES` (division ou
+        parenthèses imbriquées, structure non écrite qui n'aboutit pas une fois développée) et les degrés ≥ 3 douteux (questions 10
+        et 30) ; jamais pour une entrée de `R2`."""
+        restes = {s_ for s_, st in NON_RESOLUES.values() if st == "forme_non_traitee"}
+        self.assertEqual(restes, {"2x^4-10x^2+8=0", "x^6-64=0", "0,5x^3-2x=0"})
+        for saisie in list(FORMES_NON_ECRITES) + sorted(restes):
+            with self.subTest(saisie=saisie):
+                self.assertEqual(resoudre(saisie)["statut"], "forme_non_traitee")

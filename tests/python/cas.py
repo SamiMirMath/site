@@ -6,7 +6,7 @@ import os
 import re
 
 from moteurs import RACINE
-from corpus_second_degre import NON_RESOLUES, RESOLUES, SECTION_8, STRUCTURES_NON_ECRITES
+from corpus_second_degre import FORMES_NON_ECRITES, NON_RESOLUES, RESOLUES, SECTION_8
 
 NIVEAUX = {"facile", "moyen", "difficile", "tresDifficile"}
 
@@ -116,6 +116,6 @@ def entrees_factorisation():
 
 def entrees_equations():
     """Équations du 2e degré (P5) : les exemples de la page, le § 8 et le § 6 (CAS_LIMITES), toute la rédaction du corpus (résolues,
-    non résolues, structures que l'outil n'écrit pas) et une saisie par message de la lecture ; sans doublon, dans cet ordre."""
+    non résolues, formes que l'outil n'écrit pas : R2) et une saisie par message de la lecture ; sans doublon, dans cet ordre."""
     return list(dict.fromkeys(entrees_page("equations-2e-degre") + CAS_LIMITES["equations-2e-degre"] + list(RESOLUES.values())
-                              + [s for s, _ in NON_RESOLUES.values()] + list(STRUCTURES_NON_ECRITES) + SAISIES_INVALIDES_EQ))
+                              + [s for s, _ in NON_RESOLUES.values()] + list(FORMES_NON_ECRITES) + SAISIES_INVALIDES_EQ))

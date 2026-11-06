@@ -1390,6 +1390,169 @@ grands que ceux d'une chaîne (bloc texte : 1,06 rem ; texte d'une chaîne étro
   `resoudre/equations-2e-degre.txt` change (les cartes) ; l'aperçu est identique.
 - xfail stricts : aucun ajouté, aucun retiré.
 
+## R2 — développer d'abord, fractions supprimées d'abord
+
+Correction de relecture (question 29 de suivi.md, tranchée par l'enseignant le 06.11.2026 : « développer d'abord » toute forme
+polynomiale que l'outil ne factorise pas directement ; « on supprime les fractions de préférence »). Seul le nouvel outil change
+(`moteur/second_degre.py`, `equations-2e-degre/`).
+
+### Plan
+
+1. **Fractions supprimées d'abord** (`second_degre`, avant toute structure) : si une division a l'inconnue au numérateur
+   (x²/2, (x − 1)/3, (3x − 2)/6), on multiplie les deux membres par le plus petit dénominateur commun M des dénominateurs écrits
+   (entiers ; les fractions constantes comme 1/3 comptent aussi), terme par terme : une ligne « ⇔ x² = 2 + 2x » (Az 4.1 b :
+   « 2(3x − 2) = 3(x + 1) + 60 », un numérateur somme garde ses parenthèses), étiquette « on multiplie par M » (l'étiquette
+   d'`ensemble_def`, proche de celle d'Exp-log « on multiplie les deux membres par le dénominateur » ; aucun exemple rédigé dans
+   la référence : Az 4.1 est sans corrigé, et le texte brut du polycopié de Javet (1MRe, lu par décompression des flux du PDF) ne
+   montre de dénominateur commun que pour les fractions rationnelles, § 4.2), étape à part (phase « ramener », méthode « FRACTIONS »,
+   carte « Supprimer les fractions »). Puis le chemin habituel (développer, ramener, résoudre), sans forme structurée. Une
+   constante fractionnaire seule ((1/2)x², x² = 1/4) ne déclenche rien (D22 ; instantanés inchangés). Décimaux : comme aujourd'hui
+   (E14). Une division imbriquée (dans une parenthèse ou une puissance) : « forme non traitée » (listée).
+2. **Développer d'abord** (E2 étendu, `ramener`) : quand un terme sort de ce qu'E2 développait en une ligne, des lignes de
+   développement le ramènent pas à pas à cette forme, puis E2 comme avant (aucune ligne d'une entrée déjà résolue ne change) :
+   puissance ≥ 3 d'une somme réécrite (B)²(B) (sans étiquette, comme D24) ; carré d'un binôme par l'Id. rem. (même étiquette
+   qu'E2), carré d'une autre somme réécrit (B)(B) ; deux parenthèses (avec un coefficient ou un 3e facteur) : « double
+   distribution » des deux premières ; puis la réduction dans les parenthèses (ligne sans étiquette) ; le coefficient est
+   distribué en dernier (« distribution » d'E2). Un produit de monômes écrit (x · 3) se lit comme un monôme. Toutes ces lignes
+   dans l'étape « Développer ». Exemples : 2(x + 1)² = 8 ⇔ 2(x² + 2x + 1) = 8 (Id. rem.) ⇔ 2x² + 4x + 2 = 8 (distribution) ⇔
+   2x² + 4x − 6 = 0 ; (x + 1)³ = 8 + x ⇔ (x + 1)²(x + 1) = 8 + x ⇔ (x² + 2x + 1)(x + 1) = 8 + x (Id. rem.) ⇔ … (double
+   distribution).
+3. **Structures non écrites** : `_rediger_structure` → None n'est plus « forme non traitée » : on développe (énoncé écrit comme
+   la page, `ecrire_enonce`). Garde-fou de message : une forme structurée développée qui finit en « hors du cours » ou « bicarrée »
+   garde « forme non traitée » (un produit nul direct pourrait la résoudre : « hors du cours » serait douteux). Produit déjà nul :
+   le cube d'un binôme est écrit comme le carré (D24 : (x + 1)³ = 0 ⇔ (x + 1)(x + 1)(x + 1) = 0).
+4. **Garde-fou** : chaque ligne multipliée ou développée est relue dans Q(√m) (`_ecrit_en_nombres` : chaque membre vaut M × le
+   membre de départ, ou le membre de départ) ; sinon « ne conclut pas » (test : une ligne faussée exprès).
+5. **Adaptateur** : badge « Supprimer les fractions » (`TITRES`).
+6. **Tests** : corpus `R2` (les formes « forme non traitée » d'E2 et de `STRUCTURES_NON_ECRITES`, 2(x + 1)² = 8,
+   2(x + 1)(x + 3) = 5, (x + 1)³ = 8 + x, x²/2 = 1 + x, (x − 1)/3 = x²/6, Az 4.1 b et h, et d'autres) dans `RESOLUES` (oracle,
+   invariants, cartes, R12) ; textes rendus ; garde-fou ; tests de `TestNonResolu` adaptés (liste avant / après) ; instantanés
+   régénérés et recoupés entrée par entrée (seules les entrées de ces formes changent) ; références de pages.
+7. Suite complète, dump, temps natif, commit.
+
+### Réalisé
+
+- **`moteur/second_degre.py`** (sous-section « R2 » de la section 7, ≈ 330 lignes ; aucun calcul de méthode refait) :
+  - `a_des_fractions(g, d, x)` (une division écrite a l'inconnue au numérateur) ; `_supprimer_fractions` : M = ppcm des
+    dénominateurs écrits (entiers positifs, fractions constantes comprises), chaque terme multiplié par `_fois` (numérateur monôme :
+    le monôme ; somme : « c(somme) », ou la somme seule si c = 1 et le terme positif, « − (somme) » s'il est négatif ; produit :
+    « c » devant les facteurs), étiquette `ETIQUETTE_FRACTIONS` « on multiplie par M » ; la ligne affichée est relue dans Q(√m)
+    (`_relire_en_nombres` : chaque membre vaut M fois le membre de départ) et les arbres lus par `vers_polynome`.
+  - `_developper_par_etapes` (« développer d'abord ») : chaque terme qu'E2 ne lit pas (`_lire_membre`) est lu (`_terme_lu` :
+    ±k·xʲ·Π(Bᵢ)^eᵢ) et développé une ligne par opération (`_pas_terme` : puissance ≥ 3 → (B)²(B)…, sans étiquette ; carré d'un
+    binôme d'E2 → Id. rem., même étiquette qu'E2 ; carré d'une autre somme → (B)(B) ; sinon « double distribution » des deux
+    premières parenthèses), suivie de la réduction dans les parenthèses (`_reduire_terme`, ligne sans étiquette), jusqu'à ce que
+    chaque terme soit écrit par E2 (distribution, double distribution, carré d'un binôme) ; les autres termes restent tels quels ;
+    chaque ligne relue dans Q(√m). Parenthèses imbriquées : None (« forme non traitée »).
+  - `ramener(…, structure=True)` : les fractions d'abord (étape « FRACTIONS », jamais de forme structurée ensuite), puis, si un
+    membre n'est pas lu par E2, le développement pas à pas, puis E2 et E1 comme avant (lignes d'E2 identiques ; l'étape
+    « DEVELOPPER » reçoit les lignes pas à pas en tête, `developpements` toutes les étiquettes). `_lire_membre` lit un produit de
+    monômes comme un monôme (`_produit_de_monomes` : x · 3). `_ecrire_ramener` : la phrase d'E1 en tête de la première étape qui
+    n'est pas « FRACTIONS ».
+  - `resoudre_equation` : les fractions d'abord ; une forme structurée que `_rediger_structure` n'écrit pas est développée
+    (`ramener(…, structure=False)`), son énoncé écrit par `ecrire_enonce` ; si elle finit en « hors du cours » ou « bicarrée » :
+    « forme_non_traitee » (garde-fou de message : un produit nul direct pourrait la résoudre). `ecrire_enonce` juxtapose aussi
+    les produits d'une forme développée pas à pas (2(x + 1)(x + 3), et non 2(x + 1) · (x + 3)).
+  - Produit déjà nul (E13) : `_produit_ecrit(…, puissances=True)` lit une puissance ≥ 3 d'un binôme, `_sans_carres` la réécrit
+    (B)(B)(B) (D24) ; `_factoriser_produit_ecrit` accepte un carré (ou une puissance) à côté d'un trinôme : écrit tel quel jusqu'au
+    produit nul, réécrit (B)(B) en tête du produit nul. Ces deux branches ne servent qu'aux formes qui rendaient None avant.
+- **`equations-2e-degre/resoudre_eq.py`** : badge « Supprimer les fractions » (`TITRES`).
+- **Tests Python** :
+  - `corpus_second_degre` : `R2` (32 équations : 11 fractions, 8 développements pas à pas, les 6 `STRUCTURES_DEVELOPPEES`, 5 produits
+    déjà nuls avec un cube ou un carré à côté d'un trinôme), `RESOLUES += R2` (oracle, invariants du § 5, cartes, R12, D29 :
+    automatiquement) ; `NON_RESOLUES` : les 6 formes d'E2 résolues en sortent, (x + 1)³ = 8 + x et (x² + x + 1)² = x deviennent
+    « hors_cours » (vrai), + (x − 1)(x + 2)(x + 3) = 1 ; `STRUCTURES_NON_ECRITES` remplacé par `STRUCTURES_DEVELOPPEES` (6, dans
+    `R2`) et `FORMES_NON_ECRITES` (5 formes encore non écrites, avec la raison) ; `cas.py` et `test_instantanes_second_degre`
+    suivent.
+  - `test_redaction_second_degre` : nouvelle classe `TestR2` (8 tests : textes de 2(x + 1)² = 8, x²/2 = 1 + x, Az 4.1 b et h,
+    développement pas à pas, produit déjà nul avec cube et carré, constante fractionnaire sans multiplication sur tout `RESOLUES`,
+    chaque ligne relue dans Q(√m) indépendamment de la brique et quatre écritures faussées → « ne_conclut_pas », plus aucune
+    « forme non traitée » hors de `FORMES_NON_ECRITES` et des trois degrés ≥ 3 douteux) ; `METHODES_ETAPE` + « FRACTIONS » ;
+    `test_phrase_seulement_avant_une_phrase_de_choix` : 12 entrées de R2 en plus, la phrase après la ligne des fractions ;
+    `test_structures_sans_developper` : `STRUCTURES_DEVELOPPEES` résolues en développant (1re étape « DEVELOPPER »), les deux
+    structures de `FORMES_NON_ECRITES` en « forme non traitée », cube et carré à côté d'un trinôme sans développer ;
+    `test_hors_de_ce_que_e2_developpe` **renommé** `test_developper_d_abord` (suivi.md, « Tests renommés ») ;
+    `test_aucun_statut_temporaire` sur `FORMES_NON_ECRITES`.
+- **Test de pages** : `test_largeurs.test_equations_2e_degre_r2` (x²/2 = 1 + x, 2(x + 1)² = 8, Az 4.1 h, x³ − (x − 1)³ = 1,
+  2(x + 1)(x + 3) = 5, (x + 1)²(x² − 4) = 0 ; chemin du cours et variante ; badge présent ; balayage 320 à 1100 px, aucune formule hors
+  de sa carte, console vide) : vert seul (8 sous-tests, 23 s).
+- **Formes encore non écrites** (« Cette forme d'équation n'est pas traitée par l'outil. », message vrai ; `FORMES_NON_ECRITES`) :
+  fraction dans une parenthèse (2(x + 1/2) = x²/2) ou dans une puissance ((x/2 + 1)² = 1) ; parenthèses imbriquées
+  (((x + 1)² + 1)(x − 1) = x) ; (x² − 3)² = 1 (Id. rem. de A = x² − 3 non écrite ; développée : bicarrée) ;
+  (x − 1)(x + 2)(x + 3) = 5(x − 1) (facteur commun avec un reste de degré 2 ; développée : degré 3) ; et, hors de la portée de R2
+  (degrés ≥ 3 douteux, questions 10 et 30) : 2x⁴ − 10x² + 8 = 0, x⁶ − 64 = 0, 0,5x³ − 2x = 0.
+
+**Avant / après (instantanés ; `S/tmp/R2/comparer.py`, entrée par entrée)** :
+- `tests/python/instantanes/equations-2e-degre.json` : 204 entrées avant, 225 après ; **188 identiques** ; **16 changées**, toutes
+  « forme_non_traitee » avant : résolues (14) — Az 4.1 b `(3x-2)/6=(x+1)/4+5`, Az 4.1 h `x^2+1-(10-x^2)/8=(6x-3)/4`, `x^2/2=1+x`,
+  `2(x+1)(x+3)=5`, `2(x+1)^2=8`, `0,5(x+2)^2=x+3`, `x*3+x^2=1`, `2(x-1)=3(1-x)(x+2)`, `(x-1)(x+2)=2x-2`, `-(x+1)^2+5=0`,
+  `(x+1+2)(x-1)=0`, `(x^2-1)^2=0`, `(x+1)^3=0`, `(x+1)^2*(x^2-4)=0` ; « hors_cours » (2, message vrai) — `(x+1)^3=8+x`,
+  `(x^2+x+1)^2=x` ; **21 nouvelles** (16 résolues, 1 hors du cours, 4 formes non écrites) ; aucune disparue.
+- `tests/python/instantanes/resoudre/equations-2e-degre.json` : mêmes nombres (188 identiques, les mêmes 16 changées : message
+  « forme non traitée » → cartes, ou → « hors du cours » ; 21 nouvelles).
+- `tests/pages/references/equations-2e-degre.json` : 57 entrées, **toutes identiques** (aucune ne passe par R2 ; rien à recapturer).
+
+**Texte rendu** (rangées carte par carte, « lien | expr | étiquette ») :
+
+    2(x + 1)² = 8
+      Étape 1 Développer      | 2(x + 1)^{2} = 8 |
+                              \iff | 2(x^{2} + 2x + 1) = 8 | Id. rem. \((A + B)^{2}\) avec \(A = x,\ B = 1\)
+                              \iff | 2x^{2} + 4x + 2 = 8 | distribution
+      Étape 2 Ramener à 0     2x^{2} + 4x + 2 = 8 \iff | 2x^{2} + 4x - 6 = 0 |
+      Étape 3 Mise en évidence 2x^{2} + 4x - 6 = 0 \iff | 2(x^{2} + 2x - 3) = 0 | ME
+      Étape 4 Somme-Produit   Le trinôme \(x^{2} + 2x - 3\) est unitaire : S-P. / On cherche deux nombres dont le produit vaut
+                              \(-3\) et la somme vaut \(2\) : / [tableau : −1, 3 | 2 ✓] / 2(x^{2} + 2x - 3) = 0 \iff | 2(x - 1)(x + 3) = 0 |
+      Étape 5 Produit nul     2(x - 1)(x + 3) = 0 \iff | 2 = 0 (impossible) ou x - 1 = 0 ou x + 3 = 0 | produit nul
+                              \iff | x = 1 ou x = -3 |
+      Solution                S = \{-3\,;\,1\}
+    x²/2 = 1 + x
+      Étape 1 Supprimer les fractions | \frac{x^{2}}{2} = 1 + x |  \iff | x^{2} = 2 + 2x | on multiplie par 2
+      Étape 2 Ramener à 0     On ramène d'abord l'équation à la forme \(\ldots = 0\) : / x^{2} = 2 + 2x \iff | x^{2} - 2x - 2 = 0 |
+      Étape 3 Somme-Produit   Pas de ME, pas d'Id. rem. ; le trinôme est unitaire (\(a = 1\)) : S-P. / On cherche deux nombres dont
+                              le produit vaut \(-2\) et la somme vaut \(-2\) : / [tableau : 1, −2 | −1] / Aucun couple ne convient :
+                              on utilise la formule.
+      Étape 4 Discriminant    \Delta = b^{2} - 4ac = (-2)^{2} - 4 \cdot 1 \cdot (-2) = 4 + 8 = \fbox{$12$}
+      Étape 5 Valeurs de x    \Delta > 0 : deux solutions. \quad \sqrt{\Delta} = \sqrt{12} = 2\sqrt{3} / x_{1} = … = 1 - \sqrt{3} /
+                              x_{2} = … = 1 + \sqrt{3}
+      Solution                S = \{1 - \sqrt{3}\,;\,1 + \sqrt{3}\}, soit x₁ ≈ −0,732 et x₂ ≈ 2,732
+
+Az 4.1 b : `(3x − 2)/6 = (x + 1)/4 + 5 ⇔ 2(3x − 2) = 3(x + 1) + 60` (on multiplie par 12) `⇔ 6x − 4 = 3x + 3 + 60` (distribution)
+`⇔ 6x − 4 = 3x + 63 ⇔ 3x − 67 = 0 ⇔ x = 67/3`. Az 4.1 h : `… ⇔ 8x² + 8 − (10 − x²) = 2(6x − 3)` (on multiplie par 8) `⇔ 8x² + 8 −
+(10 − x²) = 12x − 6` (distribution) `⇔ 8x² + 8 − 10 + x² = 12x − 6 ⇔ 9x² − 2 = 12x − 6 ⇔ 9x² − 12x + 4 = 0`, Id. rem. (3x − 2)²,
+S = {2/3}. (x + 1)³ = 8 + x : `(x + 1)²(x + 1)`, `(x² + 2x + 1)(x + 1)` (Id. rem.), double distribution, x³ + 3x² + 2x − 7 = 0 :
+« hors du cours » (vrai : ni ME ni Id. rem.), message seul.
+
+### Captures à 390 px (`S/captures/R2/`, clair ; `S/tmp/R2/captures_r2.py`)
+
+`x2-sur-2-egal-1-plus-x-tout-390-clair.png`, `2-x-plus-1-carre-egal-8-tout-390-clair.png`, `az-4.1-h-tout-390-clair.png` (« Tout
+afficher ») : aucun défilement horizontal à 320, 360 et 390 px (seuls les éléments MathML cachés et les SVG de KaTeX, rognés, sortent
+du cadre, comme en R1) ; dans chaque carte, les ⇔ ont le même bord droit. Regardée : x²/2 = 1 + x (six cartes, badge « Supprimer les
+fractions » sur une ligne).
+
+### Temps (`S/tmp/R2/temps_r2.py`, même mesure que P5 et R1, python3 natif 3.14.4, 3e de trois tours)
+
+`resoudre_eq.resoudre_json` sur le corpus complet de l'outil (225 entrées) **369,7 ms** (R1 : 290,7 ms pour 204 entrées ; par entrée
+1,64 ms contre 1,42 ms, + 15 %), la plus longue **5,2 ms** (2(x − 1) = 3(1 − x)(x + 2) ; R1 : 4,1 ms) ; § 8 et § 6 (56) 106,2 ms
+(R1 : 101,7 ms) ; `resoudre_equation` seule 69,0 ms (R1 : 66,8 ms) ; `apercu_json` 42,0 ms ; pire cas des bornes 91 ms (R1 : 93 ms).
+Aucune hausse de plus de 50 % au-dessus de 0,1 s ; tout sous 0,1 s par équation.
+
+### Suite d'avant commit et dump
+
+- `PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rapport S/rapports/R2` : **code 0** (console `S/rapports/R2-console.log`).
+  Python 1 678 collectés, 1 677 passés + 1 xfail (celui d'avant le chantier), 130 986 sous-tests, 94,5 s ; pages 156 passés, 2 528
+  sous-tests, 333,5 s. Aucun échec instable.
+- `comparer_listes.py S/rapports/R1 S/rapports/R2` : 9 tests Python nouveaux (`TestR2`, 8 ; `test_developper_d_abord`), 1 disparu
+  (`test_hors_de_ce_que_e2_developpe`, renommé, suivi.md « Tests renommés ») ; 1 de pages (`test_equations_2e_degre_r2`). Sous-tests :
+  deux baisses, justifiées dans suivi.md (`test_messages_definitifs` 21 → 16, `test_hors_du_cours_seulement_si_vrai` 27 → 22 : six
+  entrées de `NON_RESOLUES` résolues dans `R2`, une ajoutée) ; hausses : corpus de 21 entrées (instantanés 204 → 225, invariants 437 → 475, oracle
+  241 → 279, vouvoiement 7 362 → 8 258, `test_litteraux_des_moteurs` 9 836 → 9 884…).
+- **Dump** : `dump_sorties.py S/dumps/R2 --processus 6` (19 fichiers, 4 598 sorties, 4 s) ; `diff -r --exclude=temps S/dumps/depart
+  S/dumps/R2` : seulement `Only in …/R2/apercu: equations-2e-degre.txt`, `Only in …/R2/resoudre: equations-2e-degre.txt` et les deux
+  lignes d'`index.txt` (225 entrées chacun) ; **aucune autre différence** (outils existants identiques à l'octet). Par rapport à R1 :
+  `resoudre` change pour les 16 entrées et les 21 nouvelles ci-dessus ; `apercu` ne change, pour une entrée d'avant, que pour
+  2(x + 1)(x + 3) = 5 (énoncé juxtaposé : « 2(x + 1)(x + 3) = 5 » au lieu de « 2(x + 1) · (x + 3) = 5 »).
+- xfail stricts : aucun ajouté, aucun retiré.
+
 ## Contrôles du chef d'orchestre
 
 - P0 `0fd0060` : verifier ACCEPTÉ (Python 1 494 / 106 768 sous-tests, pages 145 / 2 421, identiques à la nouvelle référence) ; rapide --depuis HEAD~1 : 23 passés, 245 sous-tests, 3 s (fumée + docs). Échec instable de `test_comportement::test_soc04_parametre_f` (ensemble-definition, `#cartes` absent : page pas encore chargée) au 1er lancement de référence : accepté par le chef comme instabilité de chargement (relancé seul vert, deux suites complètes vertes ensuite, aucune sortie en cause, Python vert) ; question 8 de suivi.md. Branche poussée.
@@ -1401,6 +1564,7 @@ grands que ceux d'une chaîne (bloc texte : 1,06 rem ; texte d'une chaîne étro
 - P4b `88ea64e` : verifier ACCEPTÉ (Python 1 664 collectés, 1 663 passés + 1 xfail d'avant le chantier, 127 242 sous-tests ; pages 151 / 2 435 identiques ; renommage justifié test_formes_pas_encore_traitees → test_aucun_statut_temporaire, hors référence) ; rapide --depuis HEAD~1 : 464 passed, 1 xfailed, 32295 subtests passed in 24.10s ; 151 passed, 1270 subtests passed in 324.85s (0:05:24) (code=0 mur=349s) ; dump identique au départ (P4b). Décision du chef sur la question 29 : le message « hors du cours » donné à des équations du cours que l'outil n'écrit pas serait faux à l'écran (CLAUDE.md, « rien de faux », prime sur decisions.md) ; corrigé en tête de P5 par un message vrai, question gardée pour l'enseignant. Branche poussée.
 - P5 `f65131b` : verifier ACCEPTÉ (Python 1 667 collectés, 1 666 passés + 1 xfail, 128 686 sous-tests ; pages 154 / 2 520 ; 3 tests provisoires de test_instantanes_second_degre retirés, hors référence, justifiés) ; rapide --depuis HEAD~1 : 1666 passed, 1 xfailed, 128686 subtests passed in 112.83s (0:01:52) ; 154 passed, 1301 subtests passed in 328.82s (0:05:28) (code=0 mur=445s) ; dump : seuls les fichiers du nouvel outil s'ajoutent. Adaptation de test_acc03 (outil sans filière exclu des cartes) acceptée par le chef : couverture des outils existants inchangée, imposée par l'option A. Capture 2.11 h à 390 px regardée. Branche poussée.
 - Fin, sur `f65131b` : `complet --rapport …/rapports/FIN` code 0 (Python 1 666 passés + 1 xfail, 128 686 sous-tests, 113 s ; pages 154 passés, 2 520 sous-tests, 332 s ; mur 7 min 28) ; verifier ACCEPTÉ ; `comparer_listes tests/reference FIN` : seulement des ajouts (173 tests Python, 9 de pages), des hausses de sous-tests et la baisse justifiée de `test_exp_log::…::test_aucun_texte_du_fichier_ne_tutoie` (960 → 955) ; `comparer_listes P5 FIN` : identique. Même suite avec `MEMO=0` (`…/rapports/FIN-memo0`) : code 0, verifier ACCEPTÉ, listes identiques à FIN nom par nom (Python 140 s, pages 331 s, mur 7 min 54). Dump FIN identique à P5 ; par rapport au départ, seuls `apercu/equations-2e-degre.txt`, `resoudre/equations-2e-degre.txt` et leurs deux lignes d'`index.txt` s'ajoutent.
+- R1 `ee52a47` : verifier ACCEPTÉ (Python 1 670 collectés, 1 669 passés + 1 xfail, 129 187 sous-tests ; pages 155 / 2 520) ; rapide --depuis HEAD~1 : 410 passed, 61727 subtests passed in 29.25s ; 155 passed, 1301 subtests passed in 332.36s (0:05:32) (code=0 mur=363s) ; dump : seul le nouvel outil diffère du départ. Capture 2.11 h « tout afficher » regardée par le chef : 5 cartes, rien ne déborde. Branche poussée.
 
 ## Temps
 
