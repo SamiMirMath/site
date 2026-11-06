@@ -1289,6 +1289,107 @@ grisé (questions 36 et 37 de suivi.md).
 
 Voir « Temps » ci-dessous (P5).
 
+## R1 — une carte par étape
+
+Correction de relecture (question 36 de suivi.md, tranchée par l'enseignant le 06.11.2026 : « une carte par étape », dévoilées une à
+une par « Étape suivante » ; la suite des cartes redonne la chaîne entière). Seul le nouvel outil change.
+
+### Plan
+
+1. **Relevé des étapes** (`S/tmp/R1/etapes.py`, corpus de `cas.entrees_equations`, chemin du cours et variante) : toutes les étapes
+   ont des lignes, sauf `factoriser`/`FORMULE` **vide** (variante « Par la formule », 72 cas) ; quelques étapes n'ont **aucune
+   rangée-ligne** (seulement des lignes pleine largeur) : tentative en échec (S-P avec son tableau, tâtonnement), phrase de choix de
+   la formule (coefficients non entiers), « Δ < 0 : … » (`delta_nombre` sans ⇔).
+2. **Moteur** (`moteur/second_degre.py`) : `cartes(resolution)` = une carte par étape, `[{etapes: [indices], blocs}]` ; une étape
+   vide rejoint la carte de l'étape suivante (la précédente si elle est la dernière) ; une carte dont la première rangée-ligne
+   commence par ⇔ reçoit en membre de gauche le pivot de son segment (le dernier élément écrit, `rangees(segment)[0]`, comme Exp-log
+   écrit l'équation d'arrivée en tête de la carte suivante, une seule fois : colonne de gauche de la première ligne, R5) ; sinon (la
+   première carte, qui porte l'énoncé ; lignes de Δ sans lien) rien n'est ajouté. Bloc : `bloc_rangees(lignes, membre_gauche=True)`.
+   Une étape **sans rangée-ligne** : une chaîne serait refusée par `sortie.valider` (« au moins une ligne {lien, expr} ») et A4
+   interdit le HTML dans un bloc texte : ses lignes deviennent des blocs `texte` (le texte tel quel, TeX entre \( \), comme la ligne
+   ≈ et les textes des autres outils) et `tableau_essais` ; question nouvelle pour l'enseignant (autre possibilité : la joindre à la
+   carte suivante). `blocs_solution(resolution)` : S (`resultat_lim`) et la ligne ≈ ; `blocs` (chaîne entière) inchangé, garde
+   l'invariant du § 5.
+3. **Adaptateur** (`resoudre_eq.py`) : cartes « Étape k » avec un badge court (comme Exp-log et Factorisation ; noms du rappel de la
+   page) : Ramener à 0, Développer, Isoler x, Mise en évidence, Identité remarquable, Somme-Produit, Tâtonnement, Formule,
+   Discriminant (`delta_valeur`), Valeurs de x (`delta_nombre`), Produit nul ; puis la carte « Solution » (S, ligne ≈), normale
+   (§ 13.3, pas de double cadre). Même découpage pour « Par la formule ». Erreurs : une seule carte, inchangées.
+4. **Tests** : invariant du § 5 adapté (JSON) : les rangées des cartes mises bout à bout = les rangées de la chaîne entière, membre
+   de gauche mis à part ; chaque carte à rangée-ligne est un bloc « chaine » valide, son membre de gauche est le dernier élément ⇔
+   écrit avant elle (ou l'énoncé) ; une carte de textes seulement pour une étape sans rangée-ligne ; chaque étape non vide a sa carte,
+   dans l'ordre ; sur tout le corpus, les variantes et les polynômes générés. Textes de 2.11 h (cinq cartes) et des badges.
+   Instantanés : `resume_resolution` fige les cartes (et la solution) au lieu du bloc unique ; `test_sorties_conformes` sur les
+   cartes. Pages : test de comportement des cinq cartes de 2.11 h (« Étape 1 / 5 », un clic : 2 / 5) ; `test_largeurs` inchangé
+   (il clique déjà « Tout afficher »). Références de pages par `capturer_references.py equations-2e-degre`.
+5. Captures à 390 px (2.11 h et 2.10 a « Tout afficher », 2.11 h après un clic), suite complète, dump, temps natif, commit.
+
+### Réalisé
+
+- **`moteur/second_degre.py`** : `cartes(resolution)` (plan, point 2) et `blocs_solution(resolution)` ; `blocs` inchangé (même
+  sortie, la chaîne entière). **Écart trouvé par le test d'invariant** : une carte qui commence par une ligne de Δ suivie d'un ⇔
+  (Δ = 0 dans un produit, variante de 2x³ − 4x² + 2x = 0 : « x = −b/2a = 1 », puis « ⇔ x = 0 ou x = 1 ») aurait vu `bloc_rangees`
+  mettre la ligne de Δ en membre de gauche (« x = −b/2a = 1 ⇔ x = 0 ou x = 1 », faux) : le membre de gauche n'est permis que pour le
+  pivot ajouté ou l'énoncé (test dédié).
+- **`equations-2e-degre/resoudre_eq.py`** : `TITRES`, `titre(etape, x)` (KeyError pour une étape inconnue), `_cartes(res, x)` :
+  « Étape k » + badge, puis « Solution ». Badges sur le corpus (241 résolutions, 645 cartes d'étape) : Produit nul 135,
+  Discriminant 110, Valeurs de x/t/y/z/u/s 110, Ramener à 0 73, Identité remarquable 55, Mise en évidence 52, Somme-Produit 44,
+  Tâtonnement 26, Développer 21, Formule 13, Isoler x 6.
+- **Tests Python** (`test_redaction_second_degre.TestInvariants`, 3 nouveaux) : `test_une_carte_par_etape` (corpus, variantes et 196
+  polynômes générés : concaténation = chaîne entière en JSON, membre de gauche mis à part ; carte à rangée-ligne = un bloc « chaine »
+  valide, membre de gauche = dernier élément ⇔ écrit ou l'énoncé, écrit une fois ; carte de textes seulement pour une étape sans
+  rangée-ligne, sans HTML (`sortie._sans_html`) ; chaque étape dans une carte, dans l'ordre, aucune carte vide ; `blocs_solution`),
+  `test_cartes_de_2_11_h`, `test_carte_d_une_etape_sans_rangee` (Javet 2.17 c, 2.12 b, Javet 2.17 e, 3t² + 5t + 12, Δ = 0 du
+  produit). `test_instantanes.resume_resolution` fige `cartes` et `solution` au lieu de `blocs` ;
+  `test_instantanes_second_degre.test_sorties_conformes` construit la sortie des cartes figées.
+- **Test de pages** : `test_comportement.test_equations_2e_degre_une_carte_par_etape` (2.11 h : « Étape 1 / 5 », un clic : 2 / 5 et
+  deux badges, « Tout afficher » : les cinq titres et badges, membres de gauche des quatre cartes ; variante : Ramener à 0,
+  Discriminant, Valeurs de x, Solution). `test_soc07_etapes`, `test_bouton_etape_suivante_flottant` (CALCUL = Javet 2.17 c, maintenant
+  6 cartes) et `test_largeurs` (il clique « Tout afficher ») : rien à changer, verts.
+- **Instantanés et références** (régénérés : `REGENERER=1` sur `test_equations_2e_degre` de `test_instantanes` et
+  `test_instantanes_resoudre` ; `capturer_references.py equations-2e-degre`, 57 entrées). Recoupés entrée par entrée
+  (`S/tmp/R1/comparer.py`) : mêmes 204 clés ; erreurs et statuts identiques ; pour chaque résolution (241), les rangées des cartes
+  mises bout à bout = l'ancienne chaîne (membre de gauche mis à part), la carte « Solution » = les anciens blocs après la chaîne,
+  tous les autres champs identiques. Exemples avant / après (sortie de la page) :
+  - **2.11 h** `4x^2+2x=56` : avant, une carte « Résolution » (la chaîne, S) et « Étape 1 / 1 » ; après, « Étape 1 / 5 » : Étape 1
+    Ramener à 0 (`4x² + 2x = 56` ⇔ `4x² + 2x − 56 = 0`), Étape 2 Mise en évidence (`4x² + 2x − 56 = 0` ⇔ `2(2x² + x − 28) = 0` ME),
+    Étape 3 Tâtonnement (les trois phrases, puis `2(2x² + x − 28) = 0` ⇔ `2(x + 4)(2x − 7) = 0`), Étape 4 Produit nul
+    (`2(x + 4)(2x − 7) = 0` ⇔ … produit nul ⇔ `x = −4 ou x = 7/2`), Solution (S). Variante : Ramener à 0, Discriminant (Δ = … = ⟦900⟧),
+    Valeurs de x (√Δ, x₁, x₂), Solution.
+  - **Javet 2.17 c** `2x^2-4x-4=0` : avant, une carte ; après, Mise en évidence, Somme-Produit (phrase, tableau, « Aucun couple ne
+    convient : on utilise la formule. », blocs texte et tableau), Produit nul (`2(x² − 2x − 2) = 0` ⇔ 2 = 0 impossible ou …), Discriminant
+    (Δ = … = ⟦12⟧, sans membre de gauche), Valeurs de x (√Δ, x₁, x₂, puis ⇔ x = 1 − √3 ou x = 1 + √3), Solution (S, ligne ≈).
+  - **(x + 2)(x − 2) = x² − 4** : avant, une carte ; après, Développer (… ⇔ x² − 4 = x² − 4), Ramener à 0 (`x² − 4 = x² − 4` ⇔ −4 = −4,
+    « Cette égalité est vraie pour tout nombre réel. »), Solution (S = ℝ).
+
+### Captures à 390 px (`S/captures/R1/`, clair ; `S/tmp/R1/captures_r1.py`)
+
+`2.11-h-tout-390-clair.png` (« Étape 5 / 5 »), `2.11-h-apres-un-clic-390-clair.png` (« Étape 2 / 5 », bouton flottant),
+`2.10-a-tout-390-clair.png`, `javet-2.17-c-tout-390-clair.png`. Regardées : rien ne déborde (aucun défilement horizontal à 320, 360
+et 390 px ; seuls les éléments MathML cachés de KaTeX, rognés, sortent du cadre ; aucun bloc qui défile, `S/tmp/R1/defile.py`) ; dans
+chaque carte, les ⇔ ont le même bord droit (mesuré) ; à 390 px, le membre de gauche passe seul sur sa ligne, au-dessus du ⇔ (règle
+commune d'un conteneur étroit, comme en P5). À juger (question 40) : textes de la carte Somme-Produit de Javet 2.17 c un peu plus
+grands que ceux d'une chaîne (bloc texte : 1,06 rem ; texte d'une chaîne étroite : 0,92 rem).
+
+### Temps (`S/tmp/R1/temps_r1.py`, même mesure que P5, python3 natif 3.14.4, 3e de trois tours)
+
+`resoudre_eq.resoudre_json` sur le corpus complet de l'outil (204 entrées) **290,7 ms** (P5 : 276 ms, + 5 %), la plus longue
+**4,1 ms** (2x⁴ + x³ − 28x² = 0 ; P5 : 3,9 ms) ; § 8 et § 6 (56) 101,7 ms (P5 : 96,7 ms) ; `resoudre_equation` seule 66,8 ms
+(inchangé) ; `apercu_json` 36,0 ms ; pire cas des bornes 93 ms (P5 : 89 ms). Aucune hausse de plus de 50 %, tout sous 0,1 s.
+
+### Suite d'avant commit et dump
+
+- `PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rapport S/rapports/R1` : **code 0** (console `S/rapports/R1-console.log`).
+  Python 1 670 collectés, 1 669 passés + 1 xfail (celui d'avant le chantier), 129 187 sous-tests, 100 s ; pages 155 passés, 2 520
+  sous-tests, 335 s. Aucun échec instable.
+- `comparer_listes.py S/rapports/P5 S/rapports/R1` : 3 tests Python nouveaux (`TestInvariants` : `test_une_carte_par_etape`,
+  `test_cartes_de_2_11_h`, `test_carte_d_une_etape_sans_rangee`), 1 de pages (`test_equations_2e_degre_une_carte_par_etape`) ; aucun
+  disparu ni renommé ; sous-tests : aucune baisse (`test_vocabulaire::TestVouvoiement::test_litteraux_des_moteurs` 9 772 → 9 836).
+- **Dump** : `dump_sorties.py S/dumps/R1 --processus 6` (19 fichiers, 4 556 sorties, 4 s) ; `diff -r --exclude=temps S/dumps/depart
+  S/dumps/R1` : seulement `Only in …/R1/apercu: equations-2e-degre.txt`, `Only in …/R1/resoudre: equations-2e-degre.txt` et les deux
+  lignes d'`index.txt` ; **aucune autre différence** (outils existants identiques à l'octet). Par rapport à P5, seul
+  `resoudre/equations-2e-degre.txt` change (les cartes) ; l'aperçu est identique.
+- xfail stricts : aucun ajouté, aucun retiré.
+
 ## Contrôles du chef d'orchestre
 
 - P0 `0fd0060` : verifier ACCEPTÉ (Python 1 494 / 106 768 sous-tests, pages 145 / 2 421, identiques à la nouvelle référence) ; rapide --depuis HEAD~1 : 23 passés, 245 sous-tests, 3 s (fumée + docs). Échec instable de `test_comportement::test_soc04_parametre_f` (ensemble-definition, `#cartes` absent : page pas encore chargée) au 1er lancement de référence : accepté par le chef comme instabilité de chargement (relancé seul vert, deux suites complètes vertes ensuite, aucune sortie en cause, Python vert) ; question 8 de suivi.md. Branche poussée.

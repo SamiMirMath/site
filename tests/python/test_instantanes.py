@@ -28,12 +28,13 @@ REGENERER = os.environ.get("REGENERER") == "1"
 
 
 def resume_resolution(res):
-    """Ce qui est figé d'une résolution du 2e degré (second_degre.resoudre_equation) : tout ce que la page affiche (blocs) et la
+    """Ce qui est figé d'une résolution du 2e degré (second_degre.resoudre_equation) : tout ce que la page affiche (une carte par
+    étape, R1 : les indices de ses étapes et ses blocs, `second_degre.cartes` ; puis S et la ligne ≈, `blocs_solution`) et la
     structure des étapes (§ 5 de decisions.md : phase, méthode, cible)."""
     r = {"statut": res["statut"], "message": res["message"], "variantes": res["variantes"]}
     if res["statut"] == "resolu":
         r.update(S=res["S"], approx=res["approx"], etapes=[[e["phase"], e["methode"], e["cible"]] for e in res["etapes"]],
-                 blocs=sd.blocs(res))
+                 cartes=sd.cartes(res), solution=sd.blocs_solution(res))
     return r
 
 

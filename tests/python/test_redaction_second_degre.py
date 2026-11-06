@@ -4,6 +4,8 @@ plan, P2b, P3, P4a et P4b).
 - Invariants du § 5 : le bloc affiché est `bloc_rangees(concaténation des lignes de toutes les étapes, membre_gauche=True)` (JSON) ;
   les segments des étapes, mis bout à bout, donnent les rangées de la chaîne entière (`rangees_chaine`) ; chaque segment commence
   par le pivot (le dernier élément écrit) et n'a que des ⇔ ; l'énoncé n'est écrit qu'une fois, et seulement si un ⇔ suit (§ 13.3).
+  R1 (une carte par étape, question 36 de suivi.md) : les cartes de `cartes`, mises bout à bout, redonnent la chaîne entière (JSON,
+  membre de gauche mis à part) ; chaque carte à rangée-ligne est un bloc « chaine » valide, son membre de gauche est le pivot.
 - Oracle (`oracle.racines`) sur toutes les solutions du corpus (`corpus_second_degre.RESOLUES`), des variantes « formule » (E12) et des
   polynômes générés de P1 ; chaque solution est substituée exactement dans l'équation (calcul écrit ici).
 - Rédaction : le texte rendu de 2.11 h, 2.10 a, Javet 2.17 c et des exemples du § 7 ; E3 à E12, E14 ; D20, D24, D29 ; cas limites
@@ -211,6 +213,96 @@ class TestInvariants(unittest.TestCase):
                         self.assertTrue(isinstance(r, LigneTexte) or (isinstance(r, tuple) and len(r) == 3), r)
                 self.assertIsNone(res["message"])
                 self.assertEqual(res["solutions"], sd.croissant(res["solutions"]))
+
+    def test_une_carte_par_etape(self):
+        """R1 (question 36 de suivi.md) : les cartes de la page (`cartes`), mises bout à bout, redonnent la chaîne entière de `blocs`
+        (JSON, membre de gauche mis à part) ; chaque carte qui a une rangée-ligne est un seul bloc « chaine » valide, dont le membre de
+        gauche, s'il y en a un, est le dernier élément écrit avant elle (l'énoncé pour la première) et n'est écrit qu'une fois ; une
+        carte de blocs texte et tableau (sans HTML) seulement pour une étape sans rangée-ligne ; chaque étape a sa carte, dans l'ordre,
+        une étape vide rejoint une carte voisine (aucune carte vide) ; S et la ligne ≈ viennent après (`blocs_solution`)."""
+        for nom, res in self.tous():
+            with self.subTest(nom=nom):
+                cartes = sd.cartes(res)
+                self.assertEqual([i for c in cartes for i in c["etapes"]], list(range(len(res["etapes"]))))
+                concat, dernier = [], ENONCES[nom]
+                for c in cartes:
+                    etapes = [res["etapes"][i] for i in c["etapes"]]
+                    self.assertEqual(len([e for e in etapes if e["lignes"]]), 1)
+                    rangs = [r for e in etapes for r in e["lignes"] if not isinstance(r, LigneTexte)]
+                    s = sortie.sortie_ok("x", [sortie.carte("Étape 1", c["blocs"], badge="badge")])
+                    self.assertEqual(sortie.valider(s), [])
+                    if rangs:
+                        self.assertEqual([b["type"] for b in c["blocs"]], ["chaine"])
+                        rangees = c["blocs"][0]["rangees"]
+                        lignes_ = [r for r in rangees if "lien" in r]
+                        if "gauche" in lignes_[0]:
+                            self.assertEqual(lignes_[0]["gauche"], dernier)
+                            self.assertTrue(lignes_[0]["lien"])
+                        self.assertEqual(sum("gauche" in r for r in rangees), 1 if "gauche" in lignes_[0] else 0)
+                        concat += [{k: v for k, v in r.items() if k != "gauche"} for r in rangees]
+                        dernier = next((r["expr"] for r in reversed(lignes_) if r["lien"]), dernier)
+                    else:
+                        self.assertTrue(c["blocs"])
+                        for b in c["blocs"]:
+                            self.assertIn(b["type"], ("texte", "tableau_essais"))
+                            if b["type"] == "texte":
+                                ecarts = []
+                                sortie._sans_html(b["html"], "texte", ecarts)
+                                self.assertEqual(ecarts, [])
+                                self.assertEqual(set(b), {"type", "html"})
+                        concat += [{"texte": b["html"]} if b["type"] == "texte" else {"bloc": b} for b in c["blocs"]]
+                entiere = [{k: v for k, v in r.items() if k != "gauche"} for r in sd.blocs(res)[0]["rangees"]]
+                self.assertEqual(json.dumps(concat, sort_keys=True, ensure_ascii=False),
+                                 json.dumps(entiere, sort_keys=True, ensure_ascii=False))
+                self.assertEqual(sd.blocs_solution(res), sd.blocs(res)[1:])
+
+    def test_cartes_de_2_11_h(self):
+        """R1, exemple cible : cinq cartes (Ramener à 0, Mise en évidence, Tâtonnement, Produit nul, puis Solution), chacune commence
+        par l'équation d'arrivée de la précédente en membre de gauche ; la variante « Par la formule » est découpée de même (la formule
+        choisie d'emblée, étape vide, rejoint la carte du discriminant)."""
+        res = resoudre(RESOLUES["2.11 h"])
+        cartes = sd.cartes(res)
+        self.assertEqual([[(res["etapes"][i]["phase"], res["etapes"][i]["methode"]) for i in c["etapes"]] for c in cartes],
+                         [[("ramener", "RAMENER")], [("factoriser", "ME")], [("factoriser", "TATONNEMENT")],
+                          [("produit_nul", "PRODUIT_NUL")]])
+        lignes_ = [[(r.get("gauche"), r["lien"], r["expr"]) if "lien" in r else r["texte"] for r in c["blocs"][0]["rangees"]]
+                   for c in cartes]
+        self.assertEqual(lignes_[0], [("4x^{2} + 2x = 56", r"\iff", "4x^{2} + 2x - 56 = 0")])
+        self.assertEqual(lignes_[1], [("4x^{2} + 2x - 56 = 0", r"\iff", "2(2x^{2} + x - 28) = 0")])
+        self.assertEqual(lignes_[2][3], ("2(2x^{2} + x - 28) = 0", r"\iff", "2(x + 4)(2x - 7) = 0"))
+        self.assertTrue(lignes_[2][0].endswith("n'est pas unitaire : tâtonnement."))
+        self.assertEqual([l[0] for l in lignes_[3]], ["2(x + 4)(2x - 7) = 0", None])
+        self.assertEqual(lignes_[3][1][2], r"{x = -4} \text{ ou } \allowbreak {x = \frac{7}{2}}")
+        self.assertEqual(sd.blocs_solution(res), [sortie.resultat_lim(r"S = \{-4\,;\,\frac{7}{2}\}")])
+        formule = resoudre(RESOLUES["2.11 h"], sd.ORDRE_PAR_LA_FORMULE)
+        self.assertEqual([[(formule["etapes"][i]["phase"]) for i in c["etapes"]] for c in sd.cartes(formule)],
+                         [["ramener"], ["factoriser", "delta_valeur"], ["delta_nombre"]])
+        self.assertEqual(formule["etapes"][1]["lignes"], [])
+
+    def test_carte_d_une_etape_sans_rangee(self):
+        """R1 : une tentative en échec (S-P de Javet 2.17 c avec son tableau, tâtonnement de 2.12 b), la phrase de choix seule de la
+        formule (Javet 2.17 e) et « Δ < 0 : … » sans ⇔ ont chacune leur carte, faite de blocs texte et tableau (une chaîne sans ligne
+        {lien, expr} serait refusée) ; la carte suivante ne répète pas l'équation quand elle commence par une ligne de Δ."""
+        res = resoudre(RESOLUES["Javet 2.17 c"])
+        cartes = sd.cartes(res)
+        self.assertEqual([b["type"] for b in cartes[1]["blocs"]], ["texte", "texte", "tableau_essais", "texte"])
+        self.assertEqual(cartes[1]["blocs"][-1], sortie.texte("Aucun couple ne convient : on utilise la formule."))
+        self.assertEqual([c["blocs"][0]["type"] for c in cartes], ["chaine", "texte", "chaine", "chaine", "chaine"])
+        self.assertNotIn("gauche", cartes[3]["blocs"][0]["rangees"][0])
+        self.assertNotIn("gauche", cartes[4]["blocs"][0]["rangees"][0])
+        res = resoudre(RESOLUES["2.12 b"])
+        self.assertEqual([[b["type"] for b in c["blocs"]] for c in sd.cartes(res)], [["texte", "texte"], ["chaine"], ["chaine"]])
+        res = resoudre(RESOLUES["Javet 2.17 e"])
+        self.assertEqual([[b["type"] for b in c["blocs"]] for c in sd.cartes(res)], [["texte"], ["chaine"], ["chaine"]])
+        res = resoudre("3t^2+5t+12=0")
+        cartes = sd.cartes(res)
+        self.assertEqual(cartes[-1]["blocs"], [sortie.texte(r"\(\Delta < 0\) : l'équation n'a aucune solution réelle.")])
+        res = resoudre(RESOLUES["ME de 2x, puis Id. rem. (carré)"], sd.ORDRE_PAR_LA_FORMULE)      # Δ = 0, puis ⇔ x = 0 ou x = 1
+        rangees = sd.cartes(res)[-1]["blocs"][0]["rangees"]
+        self.assertEqual([r.get("lien") for r in rangees], [None, "", r"\iff"])
+        self.assertFalse(any("gauche" in r for r in rangees))      # jamais « x = −b/2a = 1 ⇔ x = 0 ou x = 1 »
+        with self.assertRaises(ValueError):
+            sd.cartes(resoudre("x^4-5x^2+4=0"))
 
 
 # ---------------------------------------------------------------------------------------------------------------------------

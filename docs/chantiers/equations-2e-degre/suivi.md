@@ -23,6 +23,7 @@ d'un outil existant modifiés (détail : `journal.md`, « Contrôles du chef d'o
 | P4a | formes structurées sur l'arbre (produit déjà nul, facteur commun, Id. rem. structurée, E1.3) | `06f3daf` | 7 min 12 | 12 Python, 1 renommé (5 xfail « P4a » passent) |
 | P4b | degrés ≠ 2 (ME de xᵏ, E9, x⁴ − 16), degré 1, identité, messages définitifs | `88ea64e` | 7 min 21 | 13 Python, 1 renommé (7 xfail « P4b » passent) |
 | P5 | l'outil (page, `resoudre_eq`, manifeste, registre sans filière) ; message « forme non traitée » (question 29) | `f65131b` | 7 min 10 | 6 Python (3 retirés), 3 de pages |
+| R1 | une carte par étape (question 36) | commit « R1 » de la branche | 7 min (Python 100 s, pages 335 s) | 3 Python, 1 de pages |
 | P6 | filières, carte de l'accueil, butée de `test_accueil`, `test_acc01` | hors nuit, après relecture | — | — |
 
 Suite finale (chef d'orchestre, sur `f65131b`, `PROCESSUS_PAGES=4`, `…/rapports/FIN`) : code 0 ; Python 1 666 passés + 1 xfail
@@ -53,6 +54,8 @@ ordre et mêmes étapes (ramener · factoriser (ME) · factoriser (TATONNEMENT, 
 à celui de P3 (`journal.md`, P3, « Texte rendu de 2.11 h »).
 
 **À relire par l'enseignant** (détail : section « À relire » ci-dessous et `journal.md`) :
+- **R1** : captures `/home/sami-ubuntu/nuits/equations-2e-degre/captures/R1/` ; tous les instantanés du nouvel outil, découpage en
+  cartes ; question 40 (étape sans ligne de chaîne).
 - Captures à 390 px : `/home/sami-ubuntu/nuits/equations-2e-degre/captures/P5/` (`2.11-h-390-clair.png`, `2.11-h-390-sombre.png`,
   `2.10-a-390-clair.png`, `javet-2.17-c-390-clair.png`, `2.12-e-390-clair.png`, `x+1-x+3-egal-15-390-clair.png`) et
   `/home/sami-ubuntu/nuits/equations-2e-degre/captures/P2a/` (`cartes-390-clair.png`, `cartes-390-sombre.png`, `cartes-320-clair.png`)
@@ -74,7 +77,9 @@ ordre et mêmes étapes (ramener · factoriser (ME) · factoriser (TATONNEMENT, 
   « Cette forme d'équation n'est pas traitée par l'outil. », statut `forme_non_traitee` ; autres possibilités : étendre E2, écrire
   les structures non écrites, un autre texte.
 - **8** instabilité de chargement de `test_soc04_parametre_f` en P0, acceptée par le chef comme celle de `test_clavier`.
-- 36 une seule carte (« Étape 1 / 1 ») ou une carte par étape ; 30 « bicarrée » aussi après une ME ; 31 ordre d'écriture de x⁴ − 16.
+- **40** (R1) étape sans ligne de chaîne (tentative en échec, phrase de choix seule, « Δ < 0 ») : une carte de textes à elle ; badges.
+- 36 **tranché : une carte par étape** (R1, fait) ; 29 **tranché : développer d'abord, fractions supprimées d'abord** (R2) ; 37 et 25
+  **tranchés : les deux boutons pour comparer** (R3) ; autres questions : options par défaut gardées (proposé le 06.11.2026, sans objection de l'enseignant) ; 30 « bicarrée » aussi après une ME ; 31 ordre d'écriture de x⁴ − 16.
 - 9 radicande > 10¹² : message des bornes ; 10 ME non entière en degré ≥ 3 (0,5x³ − 2x) ; 11 `s_applique` hors du chemin (quiz).
 - 12 fond de l'encadré D29 seulement avec `:has` ; 13 et 17 un seul cadre « A = 4z, B = 9 ».
 - 15 « unitaire » deux fois (S-P de plus de 12 lignes) ; 16 petites options de rédaction de P2b ; 32 petites phrases de P4b.
@@ -103,6 +108,7 @@ Fusion, par l'enseignant, une commande à la fois : `git checkout main && git me
 | P4a | Formes structurées, sur l'arbre (produit déjà nul, facteur commun, Id. rem. structurée ; E1.3) | faite (suite verte, dump identique) | `06f3daf` |
 | P4b | Degrés ≠ 2 (ME de xᵏ, Id. rem. de A = x², E9), degré 1, identité, messages définitifs (bicarrée, hors du cours) ; plus de `non_traite` | faite (suite verte, dump identique) | `88ea64e` |
 | P5 | L'outil (page, adaptateur, manifeste, registre sans filière, tests) ; message vrai « forme non traitée » (question 29) | faite (suite verte, dump : seuls ajouts du nouvel outil) | `f65131b` |
+| R1 | Une carte par étape (question 36) ; invariant du § 5 adapté | faite (suite verte, dump : outils existants identiques au départ) | commit « R1 » |
 | P6 | Filières, carte de l'accueil, butée de `test_accueil`, `test_acc01` (après relecture) | hors nuit | — |
 
 ## Questions pour l'enseignant
@@ -198,6 +204,10 @@ Questions nouvelles de la nuit :
     pas bicarré : x³ = x + 1, Az 4.1 d développé). Devenus « forme non traitée » parce que douteux : 2x⁴ − 10x² + 8 (ME puis bicarrée),
     x⁶ − 64 (Id. rem. puis x³ ± 8), 0,5x³ − 2x (question 10). **Reste ouvert** : étendre E2 (2(x + 1)(x + 3), x²/2, fractions d'Az 4.1
     b et h), écrire les structures non écrites, un autre texte, ou « bicarrée » après une ME (question 30).
+    **Tranché par l'enseignant (06.11.2026) : développer d'abord** toute forme polynomiale qui n'est pas une forme que l'outil
+    factorise directement (A² − B², produit déjà nul, facteur commun) : 2(x + 1)² = 8, 2(x + 1)(x + 3) = 5, (x + 1)³ = 8 + x…, puis le
+    chemin habituel ; E2 étendu. Pas de deuxième bouton. **Dénominateur numérique (tranché le 06.11.2026)** : multiplier d'abord
+    par le dénominateur (x²/2 = 1 + x ⇔ x² = 2 + 2x) : « on supprime les fractions de préférence ».
 30. **P4b, bicarrée à la lettre** (§ 13.4) : x⁴ − 5x² + 4, x⁴ + 4, x⁴ − 5 → « bicarrée » ; 2x⁴ − 10x² + 8 et x⁵ − 5x³ + 4x (une ME
     s'applique) → « hors du cours ». Autre possibilité : « bicarrée » aussi après une ME.
 31. **P4b, ordre d'écriture** (x⁴ − 16) : l'Id. rem. de x² − 4 d'abord, puis le tableau S-P de x² + 4 en échec, juste avant le
@@ -217,15 +227,39 @@ Questions nouvelles de la nuit :
 36. **P5, une seule carte** : la page montre une carte « Résolution » (la chaîne entière : la concaténation des lignes de toutes les
     étapes est la chaîne affichée, § 5), donc « Étape 1 / 1 » et « Étape suivante » grisé. Autre possibilité : une carte par étape
     (la chaîne coupée en morceaux, ⇔ alignés carte par carte), à décider avec l'onglet « S'entraîner ».
+    **Tranché par l'enseignant (06.11.2026) : une carte par étape** (« ça rend plus clair la résolution »), dévoilées une à une par
+    « Étape suivante » comme dans les autres outils ; la suite des cartes redonne la chaîne entière (invariant du § 5 adapté).
+    **Fait en R1** (question 40).
 37. **P5, libellés de la variante E12** : « Méthodes du cours » (défaut) et « Par la formule » (D2) ; le choix est gardé d'une saisie
     à l'autre (comportement commun d'`outil.js`, comme Exp-log). Pas de variante sur une forme structurée (question 25).
+    **Tranché par l'enseignant (06.11.2026)** : libellés gardés ; **les deux boutons pour comparer** (« ainsi ils peuvent comparer ») :
+    la variante « Par la formule » est proposée pour toute équation qui se ramène à un trinôme du 2e degré, formes structurées
+    comprises (question 25) et 3x² − 12x = 0 (formule directe, c = 0) ; un seul bouton seulement quand le chemin du cours passe déjà
+    par la formule ; aucun en degré 1 ou ≥ 3. Remplace la règle E12 de decisions.md (« seulement si le chemin du cours n'utilise pas
+    la formule », ME de la puissance de x indispensable) pour ces cas ; decisions.md non modifié.
 38. **P5, aperçu** : seulement la lecture (syntaxe) ; « x+1 » s'affiche sans erreur (le message « pas de = » vient au calcul) ; une
     équation que l'analyse accepte est écrite comme l'énoncé (`ecrire_enonce`). Erreurs de l'analyse (plusieurs lettres, 2^x…) :
     seulement au calcul, comme Exp-log.
 39. **P5, accueil** : `test_acc03` (page) compare les liens de l'accueil aux chemins des outils **qui ont une filière** (option A :
     l'outil est au registre sans carte) ; en P6, avec ses filières, il y revient de lui-même.
 
+40. **R1, une carte par étape** (question 36) : « Étape k » avec un badge court, comme Exp-log et Factorisation (noms du rappel de la
+    page) : Ramener à 0, Développer, Isoler x, Mise en évidence, Identité remarquable, Somme-Produit, Tâtonnement, Formule,
+    Discriminant, Valeurs de x, Produit nul ; puis « Solution » (carte normale, § 13.3). Une carte commence par l'équation d'arrivée
+    de la précédente en membre de gauche, sauf si elle commence par une ligne de Δ (pas de répétition, § 13.3). **Étape sans ligne de
+    chaîne** (tentative en échec du S-P ou du tâtonnement, phrase de choix seule de la formule, « Δ < 0 : … ») : une carte à elle,
+    faite de blocs texte et tableau (une chaîne sans ligne ⇔ est refusée par `sortie.valider`, A4 interdit le HTML) ; ses textes
+    sont un peu plus grands que ceux d'une chaîne (capture de Javet 2.17 c, Étape 2). Autre possibilité : la joindre à la carte
+    suivante. La seule étape vide (formule choisie d'emblée, variante) rejoint la carte du discriminant. E9 : la ligne finale
+    « ⇔ x = … » de « Valeurs de x » suit les lignes de Δ, sans membre de gauche, comme dans la chaîne entière.
+
 ## À relire par l'enseignant
+
+- **R1, une carte par étape** : captures à 390 px (clair) dans `/home/sami-ubuntu/nuits/equations-2e-degre/captures/R1/` :
+  `2.11-h-tout-390-clair.png`, `2.11-h-apres-un-clic-390-clair.png`, `2.10-a-tout-390-clair.png`, `javet-2.17-c-tout-390-clair.png`.
+  Instantanés : **tous les instantanés du nouvel outil, découpage en cartes** (`tests/python/instantanes/equations-2e-degre.json`,
+  `tests/python/instantanes/resoudre/equations-2e-degre.json`, `tests/pages/references/equations-2e-degre.json`) : mêmes lignes,
+  coupées aux étapes (recoupé entrée par entrée, 241 résolutions) ; exemples avant / après dans `journal.md`, R1. Question 40.
 
 - **P5, l'outil** : page `equations-2e-degre/index.html` (accroche, aide de saisie, rappel E15), captures à 390 px dans
   `/home/sami-ubuntu/nuits/equations-2e-degre/captures/P5/` : `2.11-h-390-clair.png`, `2.11-h-390-sombre.png`, `2.10-a-390-clair.png`,
@@ -297,6 +331,8 @@ Lue par `verifier`. Format, une ligne par test : `` - `<identifiant pytest compl
 
 ## Reprise après compactage
 
+- **R1 faite** (06.11.2026, une carte par étape, question 36) : détail dans `journal.md`, R1. Suivantes : R2 (question 29), R3
+  (questions 37 et 25), P6.
 - **Chantier de nuit terminé** (06.11.2026) : P0 à P5 faites et commitées, suite finale verte, résumé en tête de ce fichier (commit
   du résumé : le dernier de la branche). Prochaine étape : relecture par l'enseignant (« Résumé », questions), puis P6 et les
   corrections de relecture (parties R1, R2…) dans une nouvelle session ; rien à reprendre de la nuit.

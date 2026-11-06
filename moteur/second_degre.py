@@ -33,6 +33,8 @@ de k√m/d, § 13.2).
     hors_du_cours(P, chemin)          « hors du cours » seulement s'il est vrai (P5) ; sinon « forme_non_traitee »
     appliquer(methode, P)             une méthode seule, rédigée (Etape), ou None si elle n'aboutit pas
     blocs(resolution)                 les blocs de moteur/sortie.py : la chaîne (bloc_rangees, membre de gauche), S encadré, la ligne ≈
+    cartes(resolution)                la page, une carte par étape (R1) : la chaîne coupée aux étapes, pivot en membre de gauche ;
+                                      blocs_solution(resolution) : S encadré, la ligne ≈
     nb_exact, arbre_polynome,         l'écriture des valeurs exactes en arbres de moteur/expr.py (E11, E14 ; nombres.exact)
     arbre_nombre, termes_developpes
 
@@ -49,7 +51,7 @@ from types import MappingProxyType
 
 import polynomes
 import sortie
-from chaine import Chaine, Eq, LigneTexte, Ou, bloc_rangees, rangees_chaine
+from chaine import Chaine, Eq, LigneTexte, Ou, bloc_rangees, rangees_chaine, texte_message
 from expr import Defini, Fn, Nb, Neg, Noeud, Op, Pow, Var, comme_somme, entre_parentheses, nom_tex, tex, variables
 from noyau import racine_q, squarefree
 from nombres import approx, exact
@@ -57,7 +59,7 @@ from nombres import approx, exact
 __all__ = ["Polynome", "Nombre", "HorsBornes", "vers_polynome", "mise_en_evidence", "identite", "essais_sp", "diviseurs_signes",
            "racine_entiere_unique", "racines_formule", "s_applique", "calculer", "chemin", "produit_nul", "redevelopper",
            "verifier_solution", "approx_garantie", "ORDRE_DU_COURS", "ORDRE_PAR_LA_FORMULE", "METHODES",
-           "resoudre_equation", "appliquer", "blocs", "nb_exact", "arbre_polynome", "arbre_nombre", "termes_developpes", "Produit",
+           "resoudre_equation", "appliquer", "blocs", "cartes", "blocs_solution", "nb_exact", "arbre_polynome", "arbre_nombre", "termes_developpes", "Produit",
            "SansLien", "rangees", "OPTIONS_CHAINE", "MESSAGES", "PHRASE_IDENTITE", "PHRASE_EGALITE_FAUSSE", "ramener",
            "forme_structuree", "PHRASE_RAMENER", "ecrire_enonce", "Groupe", "Crochet", "Juxtaposition", "bicarree", "hors_du_cours"]
 
@@ -2339,11 +2341,70 @@ def appliquer(methode, P, inconnue="x", decimaux_enonce=False):
 def blocs(resolution):
     """Les blocs de moteur/sortie.py d'une résolution résolue (A4) : la chaîne (`bloc_rangees` de la concaténation des lignes de
     toutes les étapes, membre de gauche dans sa colonne), S encadré (`resultat_lim`, D29, dans une carte normale), puis la ligne
-    « soit … ≈ … » (E14). La page est construite uniquement à partir des étapes (§ 5)."""
+    « soit … ≈ … » (E14) : la chaîne entière (invariant du § 5) ; la page la montre coupée en une carte par étape (`cartes`, R1)."""
+    _resolue(resolution)
+    lignes = [r for e in resolution["etapes"] for r in e["lignes"]]
+    return [bloc_rangees(lignes, membre_gauche=True)] + blocs_solution(resolution)
+
+
+def _resolue(resolution):
     if resolution["statut"] != "resolu":
         raise ValueError(f"résolution non résolue : {resolution['statut']}")
-    lignes = [r for e in resolution["etapes"] for r in e["lignes"]]
-    b = [bloc_rangees(lignes, membre_gauche=True), sortie.resultat_lim(resolution["S"])]
+
+
+def blocs_solution(resolution):
+    """Les blocs de la fin d'une résolution résolue : S encadré (`resultat_lim`, D29, dans une carte normale), puis la ligne
+    « soit … ≈ … » (E14)."""
+    _resolue(resolution)
+    b = [sortie.resultat_lim(resolution["S"])]
     if resolution["approx"]:
         b.append(sortie.texte(resolution["approx"]))
     return b
+
+
+def _a_une_rangee(lignes):
+    return any(not isinstance(r, LigneTexte) for r in lignes)
+
+
+def cartes(resolution):
+    """La page d'une résolution résolue, une carte par étape (R1, question 36 de suivi.md : la chaîne coupée aux étapes, dévoilées une
+    à une) : [{etapes: [indices dans resolution["etapes"]], blocs}], dans l'ordre ; S et la ligne ≈ viennent après (`blocs_solution`).
+
+    - Une étape sans aucune ligne (la formule choisie d'emblée dans la variante E12) rejoint la carte de l'étape suivante (la
+      précédente si elle est la dernière) : une carte n'est jamais vide.
+    - Une carte dont la première rangée-ligne commence par ⇔ reçoit, en membre de gauche, le pivot de son segment (le dernier élément
+      écrit avant elle, `rangees(segment)[0]`) : « 4x² + 2x − 56 = 0 ⇔ 2(2x² + x − 28) = 0 », écrit une seule fois (R5), comme Exp-log
+      écrit en tête d'une carte l'équation d'arrivée de la précédente ; la première carte porte l'énoncé dans ses lignes (il passe
+      en membre de gauche comme dans `blocs`), et une carte qui commence par les lignes de Δ (sans lien) n'en reçoit pas (§ 13.3 :
+      pas de répétition quand aucun ⇔ ne suit ; une ligne de Δ ne passe jamais en membre de gauche, « x = −b/2a = 1 ⇔ x = 0 ou
+      x = 1 » serait faux). Bloc : `bloc_rangees`, un bloc « chaine » valide (`sortie.valider`).
+    - Une étape sans rangée-ligne (tentative en échec, phrase de choix de la formule seule, « Δ < 0 : … ») : une chaîne sans ligne
+      {lien, expr} serait refusée et A4 interdit le HTML dans un bloc texte ; ses lignes pleine largeur sont des blocs `texte` (le
+      texte tel quel, TeX entre \\( et \\)) et `tableau_essais`.
+
+    Les rangées des cartes, mises bout à bout (membre de gauche mis à part), sont celles de la chaîne entière de `blocs` (§ 5, testé)."""
+    _resolue(resolution)
+    groupes, attente = [], []
+    for i, e in enumerate(resolution["etapes"]):
+        if not e["lignes"]:
+            attente.append(i)
+            continue
+        groupes.append(attente + [i])
+        attente = []
+    if attente and groupes:
+        groupes[-1] += attente
+    out = []
+    for groupe in groupes:
+        etapes = [resolution["etapes"][i] for i in groupe]
+        lignes = [r for e in etapes for r in e["lignes"]]
+        if _a_une_rangee(lignes):
+            premiere = next(r for r in lignes if not isinstance(r, LigneTexte))
+            e = next(e for e in etapes if e["lignes"])
+            pivot = rangees(e["segment"])[0] if e["segment"] is not None else None
+            if premiere[0]:
+                lignes = [pivot] + lignes
+            blocs_ = [bloc_rangees(lignes, membre_gauche=premiere[0] != "" or premiere == pivot)]
+        else:
+            blocs_ = [r.contenu if isinstance(r.contenu, dict) else sortie.texte(texte_message(r.contenu)) for r in lignes]
+        out.append({"etapes": groupe, "blocs": blocs_})
+    return out

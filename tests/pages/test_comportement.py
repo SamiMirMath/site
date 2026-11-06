@@ -87,6 +87,30 @@ class TestComportement(unittest.TestCase):
         page.evaluer("document.querySelector('#tout').click()")
         self.assertEqual(page.evaluer("document.querySelector('#cartes .card:last-child').classList.contains('final')"), True)
 
+    def test_equations_2e_degre_une_carte_par_etape(self):
+        """R1 (question 36 du chantier equations-2e-degre) : 2.11 h donne une carte par étape (« Étape k », badge Ramener à 0, Mise en
+        évidence, Tâtonnement, Produit nul), puis « Solution » ; « Étape suivante » les dévoile une à une ; chaque carte d'étape
+        commence par l'équation d'arrivée de la précédente, en membre de gauche ; la variante « Par la formule » est découpée de même."""
+        page = self.ouvrir("equations-2e-degre")
+        self.calculer(page, "4x^2+2x=56")
+        progression = "document.querySelector('#progression').textContent"
+        self.assertEqual(page.evaluer(progression), "Étape 1 / 5")
+        self.assertEqual(self.titres_et_badges(page), ["Ramener à 0"])
+        page.evaluer("document.querySelector('#suivant').click()")
+        self.assertEqual((page.evaluer(progression), self.titres_et_badges(page)), ("Étape 2 / 5", ["Ramener à 0", "Mise en évidence"]))
+        page.evaluer("document.querySelector('#tout').click()")
+        self.assertEqual(self.titres_et_badges(page), ["Ramener à 0", "Mise en évidence", "Tâtonnement", "Produit nul", "Solution"])
+        self.assertEqual(page.evaluer("[...document.querySelectorAll('#cartes .card h3')].map(h => h.childNodes[0].textContent.trim())"),
+                         ["Étape 1", "Étape 2", "Étape 3", "Étape 4", "Solution"])
+        gauches = ("[...document.querySelectorAll('#cartes .card')].map(c => { const g = c.querySelector('.gauche annotation');"
+                   " return g ? g.textContent : null; })")
+        self.assertEqual(page.evaluer(gauches), ["4x^{2} + 2x = 56", "4x^{2} + 2x - 56 = 0", "2(2x^{2} + x - 28) = 0",
+                                                 "2(x + 4)(2x - 7) = 0", None])
+        page.evaluer("document.querySelector('#variantes button[data-variante=\"formule\"]').click()")
+        page.evaluer("document.querySelector('#tout').click()")
+        self.assertEqual(self.titres_et_badges(page), ["Ramener à 0", "Discriminant", "Valeurs de x", "Solution"])
+        page.evaluer("document.querySelector('#variantes button[data-variante=\"cours\"]').click()")
+
     def test_t33_el_exercice_tire_en_python(self):
         """Exponentielles et logarithmes : « Nouvelle équation » tire un exercice en Python (énoncé « Résoudre : … ») de chacun des niveaux
         du pool, et « Afficher le corrigé » donne la carte finale « Solution » (ou une erreur de lecture : jamais)."""
