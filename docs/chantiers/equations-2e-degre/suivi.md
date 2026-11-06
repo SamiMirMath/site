@@ -7,19 +7,103 @@ consignes de nuit et détail : `journal.md`.
 **Invariant de la nuit (§ 13.1)** : après chaque partie, `tests/outils/dump_sorties.py` des outils existants est identique à l'octet
 au dump de départ (`/home/sami-ubuntu/nuits/equations-2e-degre/dumps/depart`) ; P5 n'y ajoute que le nouvel outil.
 
+## Résumé (06.11.2026, PC)
+
+Huit parties, huit commits, toutes acceptées par le contrôle allégé (`verifier` ACCEPTÉ, `rapide --depuis HEAD~1` vert) ; dump des
+outils existants identique à l'octet au départ après chaque partie (4 148 sorties) ; aucun instantané ni aucune référence de page
+d'un outil existant modifiés (détail : `journal.md`, « Contrôles du chef d'orchestre » et « Suite d'avant commit » de chaque partie).
+
+| Partie | Contenu | Commit | Suite d'avant commit | Tests ajoutés |
+|---|---|---|---|---|
+| P0 | fiches, référence rafraîchie, dump de départ | `0fd0060` | 6 min 40 | — |
+| P1 | `oracle.racines` (racine nulle), brique `polynomes`, `second_degre` (calcul sans texte) | `5f21ac0` | 6 min 44 | 40 Python |
+| P2a | affichage commun : `tableau_essais`, encadré D29, `bloc_rangees`, coupure après « ou » | `5b9254c` | 7 min 02 | 14 Python, 6 de pages |
+| P2b | rédaction dans `second_degre` (`resoudre_equation`, étapes du § 5) | `a52b58a` | 7 min 05 | 59 Python (dont 22 xfail stricts P3/P4a/P4b) |
+| P3 | saisie (`equations.analyser`), E1 et E2 (ramener, développer), `expr.a_des_decimaux` | `8e838be` | 7 min 00 | 34 Python (10 xfail « P3 » passent) |
+| P4a | formes structurées sur l'arbre (produit déjà nul, facteur commun, Id. rem. structurée, E1.3) | `06f3daf` | 7 min 12 | 12 Python, 1 renommé (5 xfail « P4a » passent) |
+| P4b | degrés ≠ 2 (ME de xᵏ, E9, x⁴ − 16), degré 1, identité, messages définitifs | `88ea64e` | 7 min 21 | 13 Python, 1 renommé (7 xfail « P4b » passent) |
+| P5 | l'outil (page, `resoudre_eq`, manifeste, registre sans filière) ; message « forme non traitée » (question 29) | `f65131b` | 7 min 10 | 6 Python (3 retirés), 3 de pages |
+| P6 | filières, carte de l'accueil, butée de `test_accueil`, `test_acc01` | hors nuit, après relecture | — | — |
+
+Suite finale (chef d'orchestre, sur `f65131b`, `PROCESSUS_PAGES=4`, `…/rapports/FIN`) : code 0 ; Python 1 666 passés + 1 xfail
+(celui d'avant le chantier), 128 686 sous-tests (113 s) ; pages 154 passés, 2 520 sous-tests (332 s) ; 7 min 28 de mur ; `verifier`
+ACCEPTÉ ; `comparer_listes tests/reference FIN` : seulement des ajouts (173 tests Python, 9 de pages), des hausses de sous-tests et
+la baisse justifiée de `test_exp_log::…::test_aucun_texte_du_fichier_ne_tutoie` (960 → 955). Même suite avec `MEMO=0`
+(`…/rapports/FIN-memo0`) : code 0, `verifier` ACCEPTÉ, listes identiques nom par nom (7 min 54). Dump final identique à celui de P5 ;
+par rapport au départ, seuls `apercu/equations-2e-degre.txt`, `resoudre/equations-2e-degre.txt` et leurs deux lignes d'`index.txt`
+s'ajoutent. Aucun xfail du chantier ne reste.
+
+**Texte rendu de l'exemple cible 2.11 h** (`resoudre_eq.resoudre("4x^2+2x=56")`, sur `f65131b`, carte « Résolution », chemin du
+cours ; `gauche` : membre de gauche de la 1re rangée), puis S :
+
+    gauche 4x^{2} + 2x = 56   \iff  4x^{2} + 2x - 56 = 0
+                              \iff  2(2x^{2} + x - 28) = 0                                          ME
+    texte  Le trinôme \(2x^{2} + x - 28\) n'est pas unitaire : tâtonnement.
+    texte  \(\fbox{$x = -4$}\) est solution de \(2x^{2} + x - 28 = 0\), car \(2 \cdot (-4)^{2} - 4 - 28 = 32 - 4 - 28 = 0\).
+    texte  Donc \(2x^{2} + x - 28 = (x + 4)(2x + \triangle)\) avec \(4 \cdot \triangle = -28\), donc \(\fbox{$\triangle = -7$}\).
+                              \iff  2(x + 4)(2x - 7) = 0
+                              \iff  {\underbrace{2 = 0}_{\text{impossible}}} \text{ ou } \allowbreak {x + 4 = 0} \text{ ou } \allowbreak {2x - 7 = 0}
+                                                                                                    produit nul
+                              \iff  {x = -4} \text{ ou } \allowbreak {x = \frac{7}{2}}
+    resultat_lim  S = \{-4\,;\,\frac{7}{2}\}
+
+Variante « Par la formule » proposée (Δ = 4 + 896 = ⟦900⟧, √Δ = 30, x₁ = −4, x₂ = 7/2). Comparaison au § 7 : mêmes lignes, même
+ordre et mêmes étapes (ramener · factoriser (ME) · factoriser (TATONNEMENT, r = −4, △ = −7) · produit_nul) ; écarts voulus :
+étiquette « produit nul » (D5), x = −4 et △ = −7 encadrés (D29), parenthèses de la ME ordinaires (rendu seulement). Texte identique
+à celui de P3 (`journal.md`, P3, « Texte rendu de 2.11 h »).
+
+**À relire par l'enseignant** (détail : section « À relire » ci-dessous et `journal.md`) :
+- Captures à 390 px : `/home/sami-ubuntu/nuits/equations-2e-degre/captures/P5/` (`2.11-h-390-clair.png`, `2.11-h-390-sombre.png`,
+  `2.10-a-390-clair.png`, `javet-2.17-c-390-clair.png`, `2.12-e-390-clair.png`, `x+1-x+3-egal-15-390-clair.png`) et
+  `/home/sami-ubuntu/nuits/equations-2e-degre/captures/P2a/` (`cartes-390-clair.png`, `cartes-390-sombre.png`, `cartes-320-clair.png`)
+  (`journal.md`, P5, « Captures à 390 px » ; P2a).
+- Instantanés nouveaux : `tests/python/instantanes/equations-2e-degre.json` (rédaction, 204 entrées) et
+  `tests/python/instantanes/resoudre/equations-2e-degre.json` (sorties de la page) ; aucun instantané d'un outil existant modifié ;
+  les 11 entrées changées en P5 par la question 29 (`hors_cours` → `forme_non_traitee`), liste dans « À relire », P5.
+- ⏸ ligne du tâtonnement en échec (decisions.md § 10, E7 : « On teste les diviseurs de 3 (±1, ±3) : aucun n'est solution. On utilise
+  la formule. », 2.12 b, Javet 2.17 d) : à juger à l'écran. Coupure de la ligne de Δ de Javet 2.17 c dans « 4 · 1 · (−2) » à 390 px
+  (rien ne déborde ; `journal.md`, P5).
+- Renforcements et adaptations : oracle (`racines`, racine nulle retirée d'abord, P1) ; dette « 4 copies de k√m/d » (chantier
+  « nombres partout ») dans `docs/architecture.md` § 5 ; `test_acc03` adapté (un outil sans filière n'a pas de carte, option A) et
+  butée de `test_accueil` à 16 liens / 8 outils (P5) ; 19 arêtes d'import nouvelles dans `test_imports` (`polynomes`, `second_degre`,
+  `equations`, `resoudre_eq`, `exp_log(_m) -> polynomes`), aucune exception (aucun import entre outils).
+- Les 7 points « Ce qui reste contradictoire » du plan, pris avec leur option par défaut et validés (questions 1 à 7 ci-dessous).
+
+**Questions pour l'enseignant** (texte complet : section « Questions pour l'enseignant » ci-dessous), triées :
+- **29** « hors du cours » faux pour des formes du cours que l'outil n'écrit pas : décision du chef d'orchestre en P5 (rien de faux),
+  « Cette forme d'équation n'est pas traitée par l'outil. », statut `forme_non_traitee` ; autres possibilités : étendre E2, écrire
+  les structures non écrites, un autre texte.
+- **8** instabilité de chargement de `test_soc04_parametre_f` en P0, acceptée par le chef comme celle de `test_clavier`.
+- 36 une seule carte (« Étape 1 / 1 ») ou une carte par étape ; 30 « bicarrée » aussi après une ME ; 31 ordre d'écriture de x⁴ − 16.
+- 9 radicande > 10¹² : message des bornes ; 10 ME non entière en degré ≥ 3 (0,5x³ − 2x) ; 11 `s_applique` hors du chemin (quiz).
+- 12 fond de l'encadré D29 seulement avec `:has` ; 13 et 17 un seul cadre « A = 4z, B = 9 ».
+- 15 « unitaire » deux fois (S-P de plus de 12 lignes) ; 16 petites options de rédaction de P2b ; 32 petites phrases de P4b.
+- 18 ce que E2 développe ; 20 phrase d'E1 devant un simple développement ; 21 saisie (2^(1/2), lettre e, bornes par membre).
+- 22 A et B de 2.12 h en marge ; 23 ligne des parenthèses enlevées ; 24 structures non écrites ; 25 pas de variante sur une forme
+  structurée ; 26 E1.3 « on soustrait le second membre » ; 27 facteur commun ; 28 produit déjà nul (constante en tête).
+- 33 identité et égalité fausse ; 34 degré 1 toujours ramené ; 35 facteur de degré 2 dans un produit déjà nul.
+- 37 libellés de la variante E12 ; 38 aperçu (syntaxe seulement) ; 39 `test_acc03` et outil sans filière.
+- Pour mémoire (réglées pendant la nuit) : 14 (statut `non_traite`, disparu en P4b), 19 (réglée par P4a).
+
+Exceptions (`architecture.md`) : aucune. Variations de sous-tests : deux lignes, section « Variations de sous-tests » (lue par
+`verifier`). Tests renommés ou retirés : trois (P4a, P4b, P5), section « Tests renommés ».
+
+Fusion, par l'enseignant, une commande à la fois : `git checkout main && git merge --no-ff --no-edit equations-2e-degre`, puis
+`git push`, puis `git branch -d equations-2e-degre`.
+
 ## État des parties
 
 | Partie | Contenu | État | Commit |
 |---|---|---|---|
-| P0 | Prérequis présents ; fiches ; référence rafraîchie (1 494 tests Python dont 1 xfail, 106 768 sous-tests ; 145 tests de pages, 2 421 sous-tests) ; dump de départ (4 148 sorties, déterministe) | faite (suite verte) | voir `git log` |
-| P1 | Correction d'`oracle.racines` ; `moteur/polynomes.py` (déplacements Q2) ; `moteur/second_degre.py`, calcul sans texte | faite (suite verte, dump identique) | voir `git log` |
-| P2a | Affichage commun : `tableau_essais`, encadré D29, options de `chaine.py` | faite (suite verte, dump identique) | voir `git log` |
-| P2b | Rédaction dans `second_degre` (§ 5), instantanés hors d'`instantanes/` | faite (suite verte, dump identique) | voir `git log` |
-| P3 | Saisie : E1, E2 (`second_degre.ramener`), `equations-2e-degre/equations.py` (`analyser`), `expr.a_des_decimaux` | faite (suite verte, dump identique) | voir `git log` |
-| P4a | Formes structurées, sur l'arbre (produit déjà nul, facteur commun, Id. rem. structurée ; E1.3) | faite (suite verte, dump identique) | voir `git log` |
-| P4b | Degrés ≠ 2 (ME de xᵏ, Id. rem. de A = x², E9), degré 1, identité, messages définitifs (bicarrée, hors du cours) ; plus de `non_traite` | faite (suite verte, dump identique) | voir `git log` |
-| P5 | L'outil (page, adaptateur, manifeste, registre sans filière, tests) ; message vrai « forme non traitée » (question 29) | faite (suite verte, dump : seuls ajouts du nouvel outil) | voir `git log` |
-| P6 | Filières, carte de l'accueil (après relecture) | hors nuit | — |
+| P0 | Prérequis présents ; fiches ; référence rafraîchie (1 494 tests Python dont 1 xfail, 106 768 sous-tests ; 145 tests de pages, 2 421 sous-tests) ; dump de départ (4 148 sorties, déterministe) | faite (suite verte) | `0fd0060` |
+| P1 | Correction d'`oracle.racines` ; `moteur/polynomes.py` (déplacements Q2) ; `moteur/second_degre.py`, calcul sans texte | faite (suite verte, dump identique) | `5f21ac0` |
+| P2a | Affichage commun : `tableau_essais`, encadré D29, options de `chaine.py` | faite (suite verte, dump identique) | `5b9254c` |
+| P2b | Rédaction dans `second_degre` (§ 5), instantanés hors d'`instantanes/` | faite (suite verte, dump identique) | `a52b58a` |
+| P3 | Saisie : E1, E2 (`second_degre.ramener`), `equations-2e-degre/equations.py` (`analyser`), `expr.a_des_decimaux` | faite (suite verte, dump identique) | `8e838be` |
+| P4a | Formes structurées, sur l'arbre (produit déjà nul, facteur commun, Id. rem. structurée ; E1.3) | faite (suite verte, dump identique) | `06f3daf` |
+| P4b | Degrés ≠ 2 (ME de xᵏ, Id. rem. de A = x², E9), degré 1, identité, messages définitifs (bicarrée, hors du cours) ; plus de `non_traite` | faite (suite verte, dump identique) | `88ea64e` |
+| P5 | L'outil (page, adaptateur, manifeste, registre sans filière, tests) ; message vrai « forme non traitée » (question 29) | faite (suite verte, dump : seuls ajouts du nouvel outil) | `f65131b` |
+| P6 | Filières, carte de l'accueil, butée de `test_accueil`, `test_acc01` (après relecture) | hors nuit | — |
 
 ## Questions pour l'enseignant
 
@@ -213,7 +297,10 @@ Lue par `verifier`. Format, une ligne par test : `` - `<identifiant pytest compl
 
 ## Reprise après compactage
 
+- **Chantier de nuit terminé** (06.11.2026) : P0 à P5 faites et commitées, suite finale verte, résumé en tête de ce fichier (commit
+  du résumé : le dernier de la branche). Prochaine étape : relecture par l'enseignant (« Résumé », questions), puis P6 et les
+  corrections de relecture (parties R1, R2…) dans une nouvelle session ; rien à reprendre de la nuit.
 - Lire `CLAUDE.md`, ce fichier, puis `journal.md` (plan en tête, section P0 pour les commandes, section de la dernière partie).
-- `git log --oneline main..equations-2e-degre` : un commit par partie faite.
+- `git log --oneline main..equations-2e-degre` : un commit par partie faite, puis celui du résumé.
 - Dossier de travail hors du dépôt : `/home/sami-ubuntu/nuits/equations-2e-degre` (`rapports/<partie>`, `dumps/depart`, `dumps/<partie>`,
   `captures/`, `tmp/`). Si le dump de départ a disparu, le refaire sur le commit de P0 (commande dans `journal.md`, P0).
