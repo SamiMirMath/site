@@ -488,7 +488,7 @@ Les exemples de la page (`index.html`) sont les exercices 2.9 à 2.12 (quiz.md, 
 ## 9. Conséquences pour quiz.md (à reporter au chantier « S'entraîner »)
 
 - **F9** (6x² + 5x + 1) : le chemin devient tâtonnement en échec, puis formule (D1). Le piège reste « S-P » (a ≠ 1).
-- **QZ-07** : « Aucun diviseur de −1 (ni fraction ±p/q) n'annule le trinôme » devient « Aucun diviseur de −1 n'annule le trinôme : il faut la formule. »
+- **QZ-07** : « Aucun diviseur de −1 (ni fraction ±p/q) n'annule le trinôme » devient, pour 4x² − 9, « Avant le tâtonnement, regardez les identités remarquables : 4x² et 9 sont des carrés. » (règle d de quiz.md, QZ-07 ; en F9, 6x² + 5x + 1, le tâtonnement en échec est la bonne réponse, QZ-05 : aucun refus).
 - **QZ-03, exemple 2.9 a** : la ligne du produit nul porte l'étiquette « produit nul » (D5).
 - **QZ-05** : « le tâtonnement s'applique » signifie « une racine entière existe ».
 
