@@ -888,6 +888,135 @@ factoriser (TATONNEMENT) · produit_nul ») ; la ligne ramenée ouvre la chaîne
 
 ## P4a — formes structurées
 
+### Plan
+
+Corrigé relu (`Id_rem.pdf` 2.9 k, l ; `tatonement.pdf` 2.12 e, h ; Az 4.1 d : énoncé seul, sans corrigé).
+
+1. **`second_degre`, chemin structuré** (section 7, nouvelle sous-section « P4a », sur le calcul de P1 : `Nombre`, `produit_nul`,
+   `redevelopper`, `verifier_solution` ; aucune méthode recalculée) : `resoudre_equation` essaie d'abord la structure quand
+   `forme_structuree` (P3, inchangée) est vraie ; une structure reconnue mais hors de ce que P4a écrit donne `non_traite` (message
+   clair, on ne développe pas : E1.3, option qui affiche le moins) ; sinon P3 (ramener, développer) comme avant.
+   - **Produit déjà nul** (E13, Az 4.1 d) : produit écrit (constante, monômes, sommes réduites de degré 1, carré d'une telle somme)
+     égal à 0 (ou 0 égal au produit : ligne ramenée « produit = 0 ») ; D24 : un carré est réécrit `(B)(B)` dans l'arbre de la saisie
+     (décimaux gardés) ; puis le produit nul de P2b, les facteurs écrits comme dans la saisie (`2 − x = 0`, D14 : ordre écrit).
+   - **Id. rem. sur une forme structurée** (E5, 2.9 k, l, 2.12 h) : termes (tout ramené à gauche, E1.3 « on soustrait le second
+     membre sans développer », constantes regroupées sur une 2e ligne s'il y en a plusieurs) = un carré k(B)² (B somme réduite de degré
+     1, √k rationnel) et une constante de signe opposé, ou deux carrés de signes opposés ; A = le terme positif, B = le négatif. B
+     constant peut être irrationnel (√5, D8) ; A constant, rationnel. Étiquette en marge (2.9 l, E5), ou ligne de texte « (car A² = …) »
+     quand √k ≠ 1 (2.9 k) ; A et B dans un seul cadre (D29, comme P2b). Lignes : `(A + B)(A − B)` avec les parenthèses du corrigé,
+     puis les parenthèses enlevées (seulement si un « − » précède une parenthèse ou si √k ≠ 1 : 2.9 l n'a pas cette ligne, 2.9 k et
+     2.12 h l'ont), puis les facteurs réduits (E5 : terme en x d'abord, sauf coefficient négatif et constante positive : `2 − 3x`) ;
+     pas de ME après coup ; P de degré 2 exigé (sinon `non_traite` : degré 1, P4b).
+   - **Facteur commun aux deux membres** (E3, 2.12 e) : un facteur de degré 1 **égal** (même polynôme) dans les deux membres, chaque
+     membre étant un produit écrit (ou une somme seule), le reste de chaque membre de degré ≤ 1 et leur différence de degré 1 ;
+     l'avertissement d'E3 mot pour mot, `g − d = 0`, `F[(G) − (H)] = 0` (ME), parenthèses enlevées, facteur réduit, produit nul.
+   - Garde-fou (principe 1) : chaque ligne écrite est relue dans Q(√m) (évaluateur des arbres écrits, nœuds `Groupe` et `Crochet`
+     compris) et doit donner ±P (P = gauche − droite) ; facteurs redéveloppés = P ; chaque solution annule P ; sinon `ne_conclut_pas`.
+   - Étapes (§ 5) : ramener (RAMENER, avertissement compris) · factoriser (IDREM_DIFF ou ME) · produit_nul ; pas de variante
+     « formule » sur une forme structurée (elle demanderait de développer, ce qu'E1.3 exclut ; option qui affiche le moins, notée).
+2. **Petits ajouts sans effet sur l'existant** : `_Contexte.ecrits` (facteurs écrits comme dans la saisie), `Produit` écrit un
+   `Crochet` sans parenthèses, constante « impossible » par `nb_exact` (identique pour un entier, seul cas de P2b/P3).
+3. **Tests** : `corpus_second_degre.P4A` (les 5 entrées « P4a » d'`A_VENIR` et d'autres formes), `RESOLUES += P4A`,
+   `PARTIES_FAITES = ("P3", "P4a")` (les 5 xfail stricts « P4a » passent, mêmes noms) ; `test_redaction_second_degre` : invariants,
+   oracle, D29, R12 sur `RESOLUES` ; textes rendus de 2.9 k, 2.9 l, 2.12 e, 2.12 h, Az 4.1 d et des autres formes ; garde-fou (ligne
+   faussée → `ne_conclut_pas`) ; formes structurées non écrites → `non_traite` ; `test_structures_laissees_a_p4a` devient
+   `test_structures_sans_developper` (justifié dans suivi.md) ; instantanés : entrées nouvelles seulement.
+4. Suite complète, dump, temps natif, commit.
+
+### Réalisé
+
+- **`moteur/second_degre.py`**, sous-section « P4a » de la section 7 (≈ 450 lignes ; aucun calcul de méthode refait : `Nombre`,
+  `produit_nul`, `redevelopper`, `verifier_solution`, `_ecrire_produit_nul` de P2b) :
+  - `resoudre_equation` : si `forme_structuree` (P3, inchangée), `_rediger_structure` (produit déjà nul, puis facteur commun, puis
+    Id. rem. structurée) ; None → `non_traite` (jamais développée) ; sinon P3 comme avant. Pas de variante sur une forme structurée.
+  - Nœuds de l'outil : `Groupe` (parenthèse du corrigé : ((x + 1) + 4)), `Crochet` ((x − 1)[(2 − x) − (x + 3)]), `Juxtaposition`
+    (un produit écrit côte à côte : expr.tex écrit « (x − 1)(2 − x) · (5 − 3x) », « 2x · (x − 3) », « \frac{1}{4} · (x + 1)² » ; « · »
+    seulement devant un nombre). `ecrire_enonce(g, d, x)` : l'énoncé d'une forme structurée en `Juxtaposition`, celui des autres
+    formes inchangé (instantanés de P2b et P3 identiques ; « \frac{3}{2} \cdot x^{2} » de P3 reste tel quel).
+  - Lecture : `_binome_ecrit` (somme écrite réduite de degré 1, termes dans l'ordre écrit), `_produit_ecrit` (k·xʲ·Π(Bᵢ)^eᵢ, eᵢ ≤ 2),
+    `_membre_en_facteurs`, `_carre_ecrit` (k(B)²), `_commun` (facteur **égal** dans les deux membres, restes de degré ≤ 1, différence
+    de degré 1).
+  - Écriture : `_ecrire_produit_ecrit` (D24 : `_sans_carres` dans l'arbre de la saisie, décimaux gardés), `_ecrire_commun`
+    (avertissement d'E3 mot pour mot, `g − d = 0` (ou `g + d` si la droite commence par « − »), crochet, parenthèses enlevées,
+    facteur réduit), `_ecrire_carres` (ligne `g − d`, constantes regroupées sur une 2e ligne s'il y en a plusieurs ; une constante nulle :
+    produit nul direct ; `_terme_idrem` pour A et B ; étiquette ou ligne « (car A² = … et B² = …) » quand √k ≠ 1 ; ligne des
+    parenthèses enlevées seulement si √k ≠ 1 ou si B est un carré, « − » devant une parenthèse : 2.9 l n'en a pas, 2.9 k et 2.12 h en
+    ont une), `_facteur_reduit` (E5 : 2 − 3x, mais −2x − 1 ; x + 1 − √5), `_ligne_produit` (un facteur monôme en tête : x(x + 2)).
+  - Garde-fou (`_Structuree`) : l'énoncé réécrit et chaque ligne sont relus dans Q(√m) (`_ecrit_en_nombres` : Nb, l'inconnue, Neg,
+    Op, Pow entier, √ d'une constante, nœuds de l'outil) et doivent valoir ±P (P = gauche − droite, `vers_polynome`) ; facteurs
+    redéveloppés = ±P ; chaque solution annule P ; sinon `_Incoherent` → `ne_conclut_pas`. Test : trois écritures faussées exprès
+    (facteur réduit, reste du facteur commun, énoncé) → `ne_conclut_pas` ; la 3e a fait ajouter la relecture de l'énoncé (oubliée au
+    premier jet : un `Juxtaposition` faux serait passé).
+  - Petites retouches sans effet sur l'existant : `_Contexte.ecrits` (facteurs écrits comme dans la saisie, None ailleurs) ; constante
+    « impossible » par `nb_exact` (entier : même `Nb`) ; ligne finale du produit nul sans doublon (« x = −1 » une fois, facteurs
+    proportionnels) ; paramètre `reecriture` de `_ecrire_produit_nul` (ligne D24 en tête de l'étape). **Écart au plan** : `Produit`
+    n'est pas modifié (les lignes de P4a sont des `Juxtaposition`).
+  - Étapes : ramener (RAMENER, `cote` « gauche », ou « droite » pour « 0 = produit » ; l'avertissement d'E3 en tête) · factoriser
+    (IDREM_DIFF : `parametres` {A, B (TeX), forme « structuree », facteurs} ; ME : {facteur, facteurs}) · produit_nul (la ligne D24
+    comprise).
+- **Tests** :
+  - `corpus_second_degre` : `P4A` (33 équations : les 5 « P4a » d'`A_VENIR` sous la même saisie, 9 produits déjà nuls, 11 Id. rem.
+    structurées, 8 facteurs communs), `RESOLUES = P2B + P3 + P4A`, `PARTIES_FAITES = ("P3", "P4a")`, `STRUCTURES_NON_ECRITES`
+    (10 formes, avec la raison).
+  - `test_redaction_second_degre` : `ENONCES` par `sd.ecrire_enonce` ; `TestStructures` (11 tests : textes rendus de 2.9 k, 2.9 l,
+    2.12 h, 2.12 e, Az 4.1 d comparés au corrigé ; autres produits, Id. rem. et facteurs communs ; aucune variante ni développement ;
+    énoncé ; chaque ligne relue et trois écritures faussées) ; `TestNonResolu.test_structures_laissees_a_p4a` devient
+    `test_structures_sans_developper` (mêmes formes, plus `STRUCTURES_NON_ECRITES` : résolues sans DEVELOPPER, ou `non_traite`) ;
+    invariants, oracle (`oracle.racines`), D29, R12 et C6 : sur `RESOLUES` (33 entrées de plus) ; les 5 `test_a_venir[P4a-…]`
+    passent (marque xfail retirée par `PARTIES_FAITES`, mêmes noms).
+  - Instantanés (`tests/python/donnees/equations-2e-degre/instantanes.json`) : **33 entrées nouvelles, aucune des 98 de P2b et P3
+    modifiée** (comparaison JSON entrée par entrée).
+  - `test_second_degre` : commentaire du corpus seulement.
+- **Arêtes** : aucune nouvelle (`comme_somme` vient d'`expr`, arête de P1).
+
+### Texte rendu de 2.9 k, 2.9 l, 2.12 e, 2.12 h et Az 4.1 d, comparé au corrigé
+
+Rangées de `textes(res)` (« lien | expr | étiquette » ; une ligne de texte seule), puis S.
+
+    2.9 k   | 4(x - 2)^{2} = 1 |
+            \iff | 4(x - 2)^{2} - 1 = 0 |
+            Id. rem. \(A^{2} - B^{2}\) avec \(\fbox{$A = 2(x - 2),\ B = 1$}\) (car \(A^{2} = 4(x - 2)^{2}\)).
+            \iff | (2(x - 2) + 1)(2(x - 2) - 1) = 0 |
+            \iff | (2x - 4 + 1)(2x - 4 - 1) = 0 |
+            \iff | (2x - 3)(2x - 5) = 0 |
+            \iff | 2x - 3 = 0 ou 2x - 5 = 0 | produit nul
+            \iff | x = 3/2 ou x = 5/2 |                                     S = {3/2 ; 5/2}
+    2.9 l   | (x + 1)^{2} = 16 |  \iff (x + 1)^{2} - 16 = 0
+            \iff | ((x + 1) + 4)((x + 1) - 4) = 0 | Id. rem. A² − B² avec ⟦A = x + 1, B = 4⟧
+            \iff (x + 5)(x - 3) = 0  \iff x + 5 = 0 ou x - 3 = 0 (produit nul)  \iff x = -5 ou x = 3         S = {−5 ; 3}
+    2.12 e  Attention : on ne divise pas par (x − 1), car ce facteur peut être nul ! On ramène tout dans le membre de gauche, puis on
+            met (x − 1) en évidence.
+            (x - 1)(2 - x) = (x - 1)(x + 3)  \iff (x - 1)(2 - x) - (x - 1)(x + 3) = 0
+            \iff (x - 1)[(2 - x) - (x + 3)] = 0 (ME)  \iff (x - 1)(2 - x - x - 3) = 0  \iff (x - 1)(-2x - 1) = 0
+            \iff x - 1 = 0 ou -2x - 1 = 0 (produit nul)  \iff x = 1 ou x = -1/2                           S = {−1/2 ; 1}
+    2.12 h  16 - (3x + 2)^{2} = 0  \iff (4 + (3x + 2))(4 - (3x + 2)) = 0 | Id. rem. A² − B² avec ⟦A = 4, B = 3x + 2⟧
+            \iff (4 + 3x + 2)(4 - 3x - 2) = 0  \iff (3x + 6)(2 - 3x) = 0
+            \iff 3x + 6 = 0 ou 2 - 3x = 0 (produit nul)  \iff x = -2 ou x = 2/3                             S = {−2 ; 2/3}
+    Az 4.1 d  (x - 1)(2 - x)(5 - 3x) = 0  \iff x - 1 = 0 ou 2 - x = 0 ou 5 - 3x = 0 (produit nul)
+            \iff x = 1 ou x = 2 ou x = 5/3                                                                 S = {1 ; 5/3 ; 2}
+
+**Comparaison** : mêmes lignes que le corrigé, dans le même ordre, pour 2.9 k, 2.9 l, 2.12 e (avertissement, crochet, « 2 − x − x − 3 »,
+−2x − 1, solutions dans l'ordre des facteurs) et 2.12 h (« 4 − 3x − 2 », (3x + 6)(2 − 3x), sans ME après coup). Écarts : étiquette
+« produit nul » (D5, voulu) ; A et B encadrés (D29, voulu) ; **2.12 h : A et B en étiquette en marge** (E5 : la ligne de texte n'est
+écrite que si A doit être justifié ; le corrigé en écrit une, « Id. rem. A² − B² avec A = 4 et B = 3x + 2. » : question 22 de
+suivi.md) ; « (car …) » avec « , » entre A et B dans le cadre (D29 : un seul cadre) au lieu de « et ». Az 4.1 d : énoncé seul dans la
+référence (pas de corrigé) ; produit nul direct (E13).
+
+### Suite d'avant commit et dump
+
+- `PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rapport S/rapports/P4a` : **code 0** (≈ 7 min de mur ; console
+  `S/rapports/P4a-console.log`). Python 1 652 collectés, 1 644 passés + 8 xfail (1 d'avant + 7 stricts P4b), 125 662 sous-tests,
+  100,4 s ; pages 151 passés, 2 435 sous-tests, 328,4 s. Aucun échec instable.
+- `comparer_listes.py S/rapports/P3 S/rapports/P4a` : 12 tests Python nouveaux (11 `TestStructures`, `test_structures_sans_developper`),
+  1 disparu par renommage (`test_structures_laissees_a_p4a`, justifié dans suivi.md, « Tests renommés ») ; les 5 `test_a_venir[P4a-…]`
+  passent de xfail à passé (mêmes noms) ; pages identiques nom par nom. Sous-tests : une baisse, `TestNonResolu::
+  test_formes_pas_encore_traitees` 11 → 6 (formes P4a résolues, justifiée dans suivi.md) ; hausses : instantanés et invariants
+  (+33 chacun), oracle 165 → 198, vouvoiement 6 139 → 6 651, `test_vocabulaire::test_litteraux_des_moteurs` 9 508 → 9 635, gardes
+  de memo (+1 chacune).
+- **Dump** : `dump_sorties.py S/dumps/P4a --processus 6` (17 fichiers, 4 148 sorties, 4 s), `diff -r --exclude=temps S/dumps/depart
+  S/dumps/P4a` : **code 0, aucune sortie** (invariant tenu).
+- xfail stricts : **5 retirés** (« P4a ») ; aucun ajouté ; restent 7 (« P4b »).
+
 ## P4b — degrés ≠ 2 et reste du corpus
 
 ## P5 — l'outil
@@ -898,6 +1027,7 @@ factoriser (TATONNEMENT) · produit_nul ») ; la ligne ramenée ouvre la chaîne
 - P1 `5f21ac0` : verifier ACCEPTÉ (Python 1 534 / 112 356 sous-tests, 1 baisse justifiée test_exp_log::…::test_aucun_texte_du_fichier_ne_tutoie 960 → 957 ; pages 145 / 2 421 identiques) ; rapide --depuis HEAD~1 : Python 1 489 passés + 1 xfail, 112 300 sous-tests (95 s), pages 145 passés, 1 256 sous-tests (306 s), mur 6 min 44 ; dump identique au départ (P1). Branche poussée.
 - P2a `5b9254c` : verifier ACCEPTÉ (Python 1 548 / 112 699 sous-tests, pages 151 / 2 435, ajouts seulement, baisse de P1 toujours justifiée) ; rapide --depuis HEAD~1 : Python 1 327 passés + 1 xfail, 97 492 sous-tests (89 s), pages 151 passés, 1 270 sous-tests (324 s), mur 6 min 55 ; dump identique au départ (P2a). Capture 390 clair regardée par le chef : cadres D29 lisibles, rien ne déborde. Branche poussée.
 - P2b `a52b58a` : verifier ACCEPTÉ (Python 1 607 collectés, 1 584 passés + 23 xfail dont 22 stricts P3/P4a/P4b, 122 989 sous-tests ; pages 151 / 2 435) ; rapide --depuis HEAD~1 : 385 passed, 23 xfailed, 28288 subtests passed in 25.14s ; 151 passed, 1270 subtests passed in 324.52s (0:05:24) (code=0 mur=351s) ; dump identique au départ (P2b). Texte rendu de 2.11 h (forme développée) relu par le chef : conforme au § 7 hors étape « ramener » (P3). Branche poussée.
+- P3 `8e838be` : verifier ACCEPTÉ (Python 1 641 collectés, 1 628 passés + 13 xfail, 124 615 sous-tests, 2 baisses justifiées ; pages 151 / 2 435 identiques) ; rapide --depuis HEAD~1 : 1003 passed, 13 xfailed, 97209 subtests passed in 79.13s (0:01:19) ; 151 passed, 1270 subtests passed in 324.21s (0:05:24) (code=0 mur=405s) ; dump identique au départ (P3). Branche poussée.
 
 ## Temps
 
@@ -922,6 +1052,12 @@ quand elle est proposée, et `blocs`) : 119 entrées (les 98 de `corpus_second_d
 11 de P4a/P4b répondent `non_traite`) **149 ms en tout** (3e tour), la plus longue **2,6 ms** (x² − x(x + 1) + 3x² = 4 : quatre lignes
 de développement, tâtonnement, variante) : bien sous 0,1 s par équation. Pire cas des bornes : x² + 999 999x − 499 997 = 0 **88 ms**
 (comme en P2b). Aucune hausse au-delà de 0,1 s (P2b : 77 ms pour 93 entrées sans l'analyse de la saisie ; la plus longue 1,6 ms).
+
+**P4a** (`S/tmp/temps_p4a.py`, même mesure que P3, python3 natif 3.14.4, 3 tours) : 162 entrées (les 131 de
+`corpus_second_degre.RESOLUES`, dont les 33 formes structurées de `P4A` ; les 21 formes `A_VENIR`, dont les 6 de P4b répondent
+`non_traite` ; les 10 `STRUCTURES_NON_ECRITES`, `non_traite`) **212 ms en tout** (3e tour), la plus longue **2,6 ms**
+(x² − x(x + 1) + 3x² = 4, comme en P3) : bien sous 0,1 s par équation. Pire cas des bornes : x² + 999 999x − 499 997 = 0 **98 ms**
+(P3 : 88 ms ; écart de mesure, chemin inchangé). Aucune hausse au-delà de 0,1 s.
 
 Temps natifs des outils existants au départ (`S/dumps/depart-p1/temps/temps.json`, `--processus 1`, sur b72fe2e ; somme des appels de
 `resoudre_json` et plus long appel ; 12,9 s de mur) :

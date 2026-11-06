@@ -33,7 +33,8 @@ def R(m):
 
 
 # Corpus du § 8, développé (P = 0, coefficients en ordre croissant). chemin : [(méthode, aboutit)] attendu (None : forme structurée,
-# P4a, dont le chemin sur l'arbre n'est pas encore écrit ; seules les solutions sont contrôlées). S : solutions exactes, croissantes.
+# résolue sur l'arbre en P4a, test_redaction_second_degre.TestStructures ; ici seules les solutions du développé sont contrôlées).
+# S : solutions exactes, croissantes.
 CORPUS = {
     "2.9 a": ([-6, 0, 6], [("ME", True), ("IDREM_DIFF", True)], [-1, 1]),
     "2.9 b": ([100, 20, 1], [("IDREM_PLUS", True)], [-10]),
@@ -235,7 +236,7 @@ class TestOracleCorpus(OracleMixin, unittest.TestCase):
                 if attendu is None:
                     self.assertIn(r["statut"], ("resolu", "hors_cours"))
                     if r["statut"] == "hors_cours":
-                        self.assertGreaterEqual(Polynome(P).degre, 3)        # le produit Az 4.1 d développé : P4a, sur l'arbre
+                        self.assertGreaterEqual(Polynome(P).degre, 3)        # le produit Az 4.1 d développé (sur l'arbre : P4a)
                         self.assertSolutionsOracle(P, [Nombre(x) for x in S], nom)
                         continue
                 else:

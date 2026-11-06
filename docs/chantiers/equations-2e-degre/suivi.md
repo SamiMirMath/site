@@ -16,7 +16,7 @@ au dump de départ (`/home/sami-ubuntu/nuits/equations-2e-degre/dumps/depart`) ;
 | P2a | Affichage commun : `tableau_essais`, encadré D29, options de `chaine.py` | faite (suite verte, dump identique) | voir `git log` |
 | P2b | Rédaction dans `second_degre` (§ 5), instantanés hors d'`instantanes/` | faite (suite verte, dump identique) | voir `git log` |
 | P3 | Saisie : E1, E2 (`second_degre.ramener`), `equations-2e-degre/equations.py` (`analyser`), `expr.a_des_decimaux` | faite (suite verte, dump identique) | voir `git log` |
-| P4a | Formes structurées, sur l'arbre | à faire | — |
+| P4a | Formes structurées, sur l'arbre (produit déjà nul, facteur commun, Id. rem. structurée ; E1.3) | faite (suite verte, dump identique) | voir `git log` |
 | P4b | Degrés ≠ 2 et reste du corpus | à faire | — |
 | P5 | L'outil (page, adaptateur, manifeste, registre sans filière, tests) | à faire | — |
 | P6 | Filières, carte de l'accueil (après relecture) | hors nuit | — |
@@ -80,7 +80,35 @@ Questions nouvelles de la nuit :
     lettre e est une inconnue comme une autre (e² = 4 se résout en e) ; chaque membre est borné (x⁸ = x⁹ − x⁹ + 1 : message des
     bornes). Arête de plus que le plan, à déclarer en P5 : `equations -> polynomes` (`const`).
 
+22. **P4a, 2.12 h** : A et B en **étiquette en marge** (« Id. rem. A² − B² avec ⟦A = 4, B = 3x + 2⟧ »), comme 2.9 l : E5 n'écrit
+    une ligne de texte avant la chaîne que si A doit être justifié (2.9 k, « (car A² = 4(x − 2)²) ») ; le corrigé de 2.12 h écrit une
+    ligne de texte sans « car ». Autre possibilité : une ligne de texte dès que A ou B est une somme.
+23. **P4a, ligne des parenthèses enlevées** (E5) : écrite seulement si un « − » précède une parenthèse ou si √k ≠ 1, comme le corrigé
+    (2.9 l passe de ((x + 1) + 4)((x + 1) − 4) à (x + 5)(x − 3) ; 2.9 k et 2.12 h ont la ligne).
+24. **P4a, structures non écrites** : une structure s'applique (E1.3 : on ne développe pas) mais P4a ne l'écrit pas → « non_traite »
+    (message clair) : facteurs seulement proportionnels (2(x − 1) = 3(1 − x)(x + 2)) ou écrit développé ((x − 1)(x + 2) = 2x − 2) ;
+    √k irrationnel (2(x + 1)² = 8) ; A constant irrationnel (−(x + 1)² + 5 = 0) ; cube ; facteur de degré 2 dans un produit
+    ((x² − 1)(x + 2) = 0, 3(x² − 4) = 0 : P4b) ; degré 1 une fois factorisée ((x + 1)² = (x − 3)² : P4b) ; facteur non réduit. Liste :
+    `corpus_second_degre.STRUCTURES_NON_ECRITES`. Question 18 revue : 3(x + 1)² = 0 et 4(x − 2)² = 1 sont maintenant résolues
+    (structures) ; 2(x + 1)(x + 3) = 5, k(B)² avec des termes en x, (x + 1)³ = 8 + x et 4(x − 2)² = −1 restent « non_traite » (hors
+    d'E2, pas une structure). Question 19 réglée par P4a.
+25. **P4a, pas de variante « formule »** sur une forme structurée : elle demanderait de développer, ce qu'E1.3 exclut.
+26. **P4a, E1.3 « on soustrait le second membre »** : tout reste à gauche, même si le coefficient de tête devient négatif
+    ((x + 1)² = (2x − 3)² ⇔ (x + 1)² − (2x − 3)² = 0) ; « 0 = produit » : la ligne « produit = 0 ». L'**énoncé** d'une forme structurée
+    a ses produits côte à côte (`second_degre.ecrire_enonce` : « (x − 1)(2 − x)(5 − 3x) », là où expr.tex écrit « (x − 1)(2 − x) ·
+    (5 − 3x) ») ; P5 : l'en-tête de la page devrait l'utiliser aussi. Les énoncés de P2b et P3 ne changent pas (« rac{3}{2} · x² »).
+27. **P4a, facteur commun** : seulement un facteur **égal** dans les deux membres, restes de degré ≤ 1 ; une droite « −(…) » s'ajoute
+    (« g + d = 0 », crochet « [(x + 2) + (x + 3)] ») ; une solution répétée (facteurs proportionnels) n'est écrite qu'une fois
+    (« ⇔ x = −1 ») : la ligne finale du produit nul sans doublon (aucune sortie de P2b/P3 ne change).
+28. **P4a, produit déjà nul** : la constante et le monôme passent en tête du produit nul (« 3 = 0 » impossible d'abord), même écrits
+    après ((x − 1) · 3 = 0) ; un facteur réduit monôme s'écrit en tête (x(x + 2), jamais « (x + 1)(x) ») ; un carré d'une somme est
+    réécrit (B)(B) (D24, « toujours »), un cube n'est pas écrit (question 24).
+
 ## À relire par l'enseignant
+
+- **P4a, instantanés de la rédaction** : 33 entrées **nouvelles** dans `tests/python/donnees/equations-2e-degre/instantanes.json`
+  (formes structurées : 2.9 k, 2.9 l, 2.12 e, 2.12 h, Az 4.1 d et 28 formes « E13 … », « E5 … », « E3 … ») ; **aucune** des 98 entrées
+  de P2b et P3 modifiée. Textes rendus des cinq exercices et comparaison au corrigé dans `journal.md`, P4a.
 
 - **P3, instantanés de la rédaction** : 26 entrées **nouvelles** dans `tests/python/donnees/equations-2e-degre/instantanes.json`
   (énoncés à ramener ou à développer : 2.9 d, 2.9 f, 2.10 h, 2.10 j, 2.11 f, 2.11 h, 2.11 j, 2.12 g, (x + 1)(x + 3) = 15 et 17 formes
@@ -111,7 +139,13 @@ Aucune pour l'instant (exceptions d'import, `architecture.md` § 5).
 Lue par `verifier`. Format, une ligne par test : `` - `<identifiant pytest complet>` : <avant> → <après> : <raison> ``.
 
 - `tests/python/test_exp_log.py::TestVouvoiement::test_aucun_texte_du_fichier_ne_tutoie` : 960 → 955 : P3, les deux littéraux (« __slots__ », « nom ») de `_a_des_decimaux` partent dans `moteur/expr.py` (`a_des_decimaux`, déplacement Q2, réexporté), contrôlés par `test_vocabulaire.TestVouvoiement.test_litteraux_des_moteurs` ; avant, P1 (960 → 957) : les docstrings de `_Hors`, `_racine_carree`, `_racine_entiere_exacte`, `_puissance_rationnelle_exacte` et `_const` partent avec leurs fonctions dans `moteur/polynomes.py` (déplacement Q2), dont les littéraux sont contrôlés par `test_vocabulaire.TestVouvoiement.test_litteraux_des_moteurs` (8812 → 9012).
-- `tests/python/test_redaction_second_degre.py::TestNonResolu::test_formes_pas_encore_traitees` : 21 → 11 : P3 (par rapport à P2b ; test absent de `tests/reference`), les 10 formes « P3 » d'`A_VENIR` sont maintenant résolues et contrôlées par `test_a_venir[P3-…]` (xfail retiré), par l'oracle et par les instantanés.
+- `tests/python/test_redaction_second_degre.py::TestNonResolu::test_formes_pas_encore_traitees` : 21 → 6 : P3 puis P4a (par rapport à P2b ; test absent de `tests/reference`), les 10 formes « P3 » puis les 5 formes « P4a » d'`A_VENIR` sont maintenant résolues et contrôlées par `test_a_venir[P3-…]` et `test_a_venir[P4a-…]` (xfail retiré), par l'oracle et par les instantanés.
+
+## Tests renommés
+
+- P4a : `tests/python/test_redaction_second_degre.py::TestNonResolu::test_structures_laissees_a_p4a` →
+  `::TestNonResolu::test_structures_sans_developper` (test de P3, absent de `tests/reference`) : les structures ne sont plus
+  « laissées à P4a » ; mêmes formes, qui sont maintenant résolues sans développer, plus `STRUCTURES_NON_ECRITES` (« non_traite »).
 
 ## Reprise après compactage
 

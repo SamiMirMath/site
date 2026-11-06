@@ -1,11 +1,15 @@
-"""Corpus des tests de la rédaction du 2e degré (chantier equations-2e-degre, P2b et P3 ; decisions.md §§ 6, 7, 8 et 13).
+"""Corpus des tests de la rédaction du 2e degré (chantier equations-2e-degre, P2b, P3 et P4a ; decisions.md §§ 6, 7, 8 et 13).
 
 - `P2B` : les équations que P2b résout, sous la forme « P = 0 » développée et ordonnée : le § 8 (2.9 à 2.12, Javet 2.17, Az 4.1),
   chaque exercice qui demande de ramener ou de développer pris sous sa forme développée (« (dév.) »), les cas limites du § 6, les
   exemples rédigés du § 7 et les précisions du § 13.4.
 - `P3` : les équations que P3 ramène à « P = 0 » (E1) ou développe d'abord (E2), de degré 2 : les exercices du § 8 sous leur forme
   d'énoncé (dont 2.11 h, l'exemple cible) et d'autres formes (côté droit, réduction, décimaux, fractions, « − » devant un produit…).
-- `RESOLUES` : `P2B` et `P3`.
+- `P4A` : les formes structurées que P4a résout sans développer (E1.3) : produit déjà nul (E13, Az 4.1 d), facteur commun aux deux
+  membres (E3, 2.12 e), Id. rem. sur la forme structurée (E5 : 2.9 k, 2.9 l, 2.12 h), et d'autres formes de chacune.
+- `RESOLUES` : `P2B`, `P3` et `P4A`.
+- `STRUCTURES_NON_ECRITES` : des formes où une structure s'applique (`forme_structuree`) mais que P4a n'écrit pas : « non_traite »,
+  sans développer (suivi.md, questions de P4a).
 - `A_VENIR` : les formes que P2b ne traitait pas, avec la partie qui les traite (P3 : ramener, développer ; P4a : formes
   structurées ; P4b : degrés ≠ 2, identité, bicarrée), leurs coefficients développés (ordre décroissant, pour l'oracle) et le S
   attendu quand l'oracle ne s'applique pas (S = ℝ). Les tests des parties pas encore faites (hors de `PARTIES_FAITES`) sont des xfail
@@ -124,9 +128,63 @@ P3 = {
     "E2 décimaux": "0,5(x+2)=x^2",
 }
 
-RESOLUES = {**P2B, **P3}
+P4A = {
+    # § 8 : Id. rem. sur la forme structurée (E5), facteur commun (E3), produit déjà nul (E13)
+    "2.9 k": "4(x-2)^2=1",
+    "2.9 l": "(x+1)^2=16",
+    "2.12 e": "(x-1)(2-x)=(x-1)(x+3)",
+    "2.12 h": "16-(3x+2)^2=0",
+    "Az 4.1 d": "(x-1)(2-x)(5-3x)=0",
+    # produit déjà nul : monôme, D24, constante « impossible », premier membre nul, décimaux, D20
+    "E13 monôme facteur": "x(x+1)=0",
+    "E13 monôme 2x": "2x(x-3)=0",
+    "E13 carré, D24": "(t+10)^2=0",
+    "E13 constante et carré": "3(x+1)^2=0",
+    "E13 −1 impossible": "-(x-1)(x+2)=0",
+    "E13 premier membre nul": "0=(x-3)(2x+1)",
+    "E13 carré et facteur": "(x+1)^2*(x-2)=0",
+    "E13 décimaux": "0,5(x-1)(x+2)=0",
+    "E13 D20": "(2x-1/3)(x+1)=0",
+    # Id. rem. sur la forme structurée
+    "E5 B irrationnel": "(x+1)^2=5",
+    "E5 car, B irrationnel": "4(x-2)^2=3",
+    "E5 A constant, écrit après": "-(x+1)^2+4=0",
+    "E5 deux carrés": "(x+1)^2=(2x-3)^2",
+    "E5 deux carrés, car": "4(x+1)^2=9(x-2)^2",
+    "E5 constantes regroupées": "(x+1)^2+3=19",
+    "E5 déjà = 0": "(x+1)^2-16=0",
+    "E5 fraction": "(1/4)(x+1)^2=1",
+    "E5 décimaux": "0,25(x+1)^2=1",
+    "E5 facteur monôme": "(x+1)^2=1",
+    "E5 constante nulle, D24": "(x+1)^2+3=3",
+    # facteur commun aux deux membres
+    "E3 somme seule à droite": "(x-1)(x+2)=x-1",
+    "E3 monôme et constante": "x(x-3)=2(x-3)",
+    "E3 carré du facteur": "(x+2)^2=3(x+2)",
+    "E3 « − » devant la droite": "(x-1)(x+2)=-(x-1)(x+3)",
+    "E3 deux facteurs communs": "(x-1)(x+2)=3(x-1)(x+2)",
+    "E3 facteur à droite d'abord": "3(x+1)=(x+1)(x-2)",
+    "E3 facteur monôme": "(x+1)^2=x+1",
+    "E3 solution répétée": "(x+1)^2=4(x+1)^2",
+}
 
-PARTIES_FAITES = ("P3",)
+RESOLUES = {**P2B, **P3, **P4A}
+
+PARTIES_FAITES = ("P3", "P4a")
+
+# saisie : ce qui manque (une structure s'applique, P4a ne l'écrit pas : « non_traite », jamais développée)
+STRUCTURES_NON_ECRITES = {
+    "2(x-1)=3(1-x)(x+2)": "facteurs seulement proportionnels (x − 1, 1 − x)",
+    "(x-1)(x+2)=2x-2": "facteur commun écrit développé à droite (2x − 2)",
+    "2(x+1)^2=8": "√k irrationnel (A = √2(x + 1))",
+    "-(x+1)^2+5=0": "A constant irrationnel (√5)",
+    "(x+1)^3=0": "cube",
+    "(x^2-1)(x+2)=0": "facteur de degré 2 dans un produit (P4b)",
+    "3(x^2-4)=0": "facteur de degré 2 dans un produit (P4b)",
+    "(x+1+2)(x-1)=0": "facteur non réduit",
+    "(x+1)^2=(x-3)^2": "degré 1 une fois factorisée (P4b)",
+    "(x-1)(x+2)=(x-1)(x+5)": "degré 1 une fois factorisée (P4b)",
+}
 
 # nom : (saisie, partie, coefficients développés (ordre décroissant) ou None, S attendu en TeX ou None, ce qui manque)
 A_VENIR = {

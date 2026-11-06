@@ -3917,6 +3917,74 @@
   },
   "saisie": "6x^2+16x-6=0"
  },
+ "2.12 e": {
+  "cours": {
+   "S": "S = \\{-\\frac{1}{2}\\,;\\,1\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "Attention : on ne divise pas par \\((x - 1)\\), car ce facteur peut être nul ! On ramène tout dans le membre de gauche, puis on met \\((x - 1)\\) en évidence."
+      },
+      {
+       "expr": "(x - 1)(2 - x) - (x - 1)(x + 3) = 0",
+       "gauche": "(x - 1)(2 - x) = (x - 1)(x + 3)",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(x - 1)[(2 - x) - (x + 3)] = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "expr": "(x - 1)(2 - x - x - 3) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(x - 1)(-2x - 1) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x - 1 = 0} \\text{ ou } \\allowbreak {-2x - 1 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 1} \\text{ ou } \\allowbreak {x = -\\frac{1}{2}}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-\\frac{1}{2}\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "(x - 1)(2 - x) = (x - 1)(x + 3)"
+    ],
+    [
+     "factoriser",
+     "ME",
+     "(x - 1)(2 - x) - (x - 1)(x + 3)"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x - 1)(-2x - 1)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x-1)(2-x)=(x-1)(x+3)"
+ },
  "2.12 e (dév.)": {
   "cours": {
    "S": "S = \\{-\\frac{1}{2}\\,;\\,1\\}",
@@ -4411,6 +4479,62 @@
    "variantes": []
   },
   "saisie": "x^2-16=0"
+ },
+ "2.12 h": {
+  "cours": {
+   "S": "S = \\{-2\\,;\\,\\frac{2}{3}\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "(4 + (3x + 2))(4 - (3x + 2)) = 0",
+       "gauche": "16 - (3x + 2)^{2} = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = 4,\\ B = 3x + 2$}\\)"
+      },
+      {
+       "expr": "(4 + 3x + 2)(4 - 3x - 2) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(3x + 6)(2 - 3x) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{3x + 6 = 0} \\text{ ou } \\allowbreak {2 - 3x = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = -2} \\text{ ou } \\allowbreak {x = \\frac{2}{3}}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-2\\,;\\,\\frac{2}{3}\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "16 - (3x + 2)^{2}"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(3x + 6)(2 - 3x)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "16-(3x+2)^2=0"
  },
  "2.12 h (dév.)": {
   "cours": {
@@ -5863,6 +5987,73 @@
   },
   "saisie": "x^2-5=0"
  },
+ "2.9 k": {
+  "cours": {
+   "S": "S = \\{\\frac{3}{2}\\,;\\,\\frac{5}{2}\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "4(x - 2)^{2} - 1 = 0",
+       "gauche": "4(x - 2)^{2} = 1",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = 2(x - 2),\\ B = 1$}\\) (car \\(A^{2} = 4(x - 2)^{2}\\))."
+      },
+      {
+       "expr": "(2(x - 2) + 1)(2(x - 2) - 1) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(2x - 4 + 1)(2x - 4 - 1) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(2x - 3)(2x - 5) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{2x - 3 = 0} \\text{ ou } \\allowbreak {2x - 5 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = \\frac{3}{2}} \\text{ ou } \\allowbreak {x = \\frac{5}{2}}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{\\frac{3}{2}\\,;\\,\\frac{5}{2}\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "4(x - 2)^{2} = 1"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "4(x - 2)^{2} - 1"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(2x - 3)(2x - 5)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "4(x-2)^2=1"
+ },
  "2.9 k (dév.)": {
   "cours": {
    "S": "S = \\{\\frac{3}{2}\\,;\\,\\frac{5}{2}\\}",
@@ -5922,6 +6113,67 @@
    "variantes": []
   },
   "saisie": "4x^2-16x+15=0"
+ },
+ "2.9 l": {
+  "cours": {
+   "S": "S = \\{-5\\,;\\,3\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "(x + 1)^{2} - 16 = 0",
+       "gauche": "(x + 1)^{2} = 16",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "((x + 1) + 4)((x + 1) - 4) = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x + 1,\\ B = 4$}\\)"
+      },
+      {
+       "expr": "(x + 5)(x - 3) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x + 5 = 0} \\text{ ou } \\allowbreak {x - 3 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = -5} \\text{ ou } \\allowbreak {x = 3}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-5\\,;\\,3\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "(x + 1)^{2} = 16"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "(x + 1)^{2} - 16"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x + 5)(x - 3)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x+1)^2=16"
  },
  "2.9 l (dév.)": {
   "cours": {
@@ -6205,6 +6457,44 @@
    "variantes": []
   },
   "saisie": "x^2+7x+12=0"
+ },
+ "Az 4.1 d": {
+  "cours": {
+   "S": "S = \\{1\\,;\\,\\frac{5}{3}\\,;\\,2\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "{x - 1 = 0} \\text{ ou } \\allowbreak {2 - x = 0} \\text{ ou } \\allowbreak {5 - 3x = 0}",
+       "gauche": "(x - 1)(2 - x)(5 - 3x) = 0",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 1} \\text{ ou } \\allowbreak {x = 2} \\text{ ou } \\allowbreak {x = \\frac{5}{3}}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{1\\,;\\,\\frac{5}{3}\\,;\\,2\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x - 1)(2 - x)(5 - 3x)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x-1)(2-x)(5-3x)=0"
  },
  "Az 4.1 e": {
   "cours": {
@@ -7055,6 +7345,373 @@
    "variantes": []
   },
   "saisie": "5+x^2-6x=0"
+ },
+ "E13 D20": {
+  "cours": {
+   "S": "S = \\{-1\\,;\\,\\frac{1}{6}\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "{2x - \\frac{1}{3} = 0} \\text{ ou } \\allowbreak {x + 1 = 0}",
+       "gauche": "\\left(2x - \\frac{1}{3}\\right)(x + 1) = 0",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{2x = \\frac{1}{3}} \\text{ ou } \\allowbreak {x = -1}",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x = \\frac{1}{6}} \\text{ ou } \\allowbreak {x = -1}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-1\\,;\\,\\frac{1}{6}\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "\\left(2x - \\frac{1}{3}\\right)(x + 1)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(2x-1/3)(x+1)=0"
+ },
+ "E13 carré et facteur": {
+  "cours": {
+   "S": "S = \\{-1\\,;\\,2\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "(x + 1)(x + 1)(x - 2) = 0",
+       "gauche": "(x + 1)^{2}(x - 2) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x + 1 = 0} \\text{ ou } \\allowbreak {x - 2 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = -1} \\text{ ou } \\allowbreak {x = 2}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-1\\,;\\,2\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x + 1)^{2}(x - 2)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x+1)^2*(x-2)=0"
+ },
+ "E13 carré, D24": {
+  "cours": {
+   "S": "S = \\{-10\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "(t + 10)(t + 10) = 0",
+       "gauche": "(t + 10)^{2} = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "t + 10 = 0",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "t = -10",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-10\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(t + 10)^{2}"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(t+10)^2=0"
+ },
+ "E13 constante et carré": {
+  "cours": {
+   "S": "S = \\{-1\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "3(x + 1)(x + 1) = 0",
+       "gauche": "3(x + 1)^{2} = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{\\underbrace{3 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x + 1 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "x = -1",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "3(x + 1)^{2}"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "3(x+1)^2=0"
+ },
+ "E13 décimaux": {
+  "cours": {
+   "S": "S = \\{-2\\,;\\,1\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "{\\underbrace{0{,}5 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x - 1 = 0} \\text{ ou } \\allowbreak {x + 2 = 0}",
+       "gauche": "0{,}5(x - 1)(x + 2) = 0",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 1} \\text{ ou } \\allowbreak {x = -2}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-2\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "0{,}5(x - 1)(x + 2)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "0,5(x-1)(x+2)=0"
+ },
+ "E13 monôme 2x": {
+  "cours": {
+   "S": "S = \\{0\\,;\\,3\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "{2x = 0} \\text{ ou } \\allowbreak {x - 3 = 0}",
+       "gauche": "2x(x - 3) = 0",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 3}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{0\\,;\\,3\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "2x(x - 3)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "2x(x-3)=0"
+ },
+ "E13 monôme facteur": {
+  "cours": {
+   "S": "S = \\{-1\\,;\\,0\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x + 1 = 0}",
+       "gauche": "x(x + 1) = 0",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -1}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-1\\,;\\,0\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "x(x + 1)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "x(x+1)=0"
+ },
+ "E13 premier membre nul": {
+  "cours": {
+   "S": "S = \\{-\\frac{1}{2}\\,;\\,3\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "(x - 3)(2x + 1) = 0",
+       "gauche": "0 = (x - 3)(2x + 1)",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x - 3 = 0} \\text{ ou } \\allowbreak {2x + 1 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 3} \\text{ ou } \\allowbreak {x = -\\frac{1}{2}}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-\\frac{1}{2}\\,;\\,3\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "0 = (x - 3)(2x + 1)"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x - 3)(2x + 1)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "0=(x-3)(2x+1)"
+ },
+ "E13 −1 impossible": {
+  "cours": {
+   "S": "S = \\{-2\\,;\\,1\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "{\\underbrace{-1 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x - 1 = 0} \\text{ ou } \\allowbreak {x + 2 = 0}",
+       "gauche": "-(x - 1)(x + 2) = 0",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 1} \\text{ ou } \\allowbreak {x = -2}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-2\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "-(x - 1)(x + 2)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "-(x-1)(x+2)=0"
  },
  "E2 Id. rem. (A + B)²": {
   "cours": {
@@ -8449,6 +9106,1245 @@
    "variantes": []
   },
   "saisie": "-(x+1)(x-2)=x"
+ },
+ "E3 carré du facteur": {
+  "cours": {
+   "S": "S = \\{-2\\,;\\,1\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "Attention : on ne divise pas par \\((x + 2)\\), car ce facteur peut être nul ! On ramène tout dans le membre de gauche, puis on met \\((x + 2)\\) en évidence."
+      },
+      {
+       "expr": "(x + 2)^{2} - 3(x + 2) = 0",
+       "gauche": "(x + 2)^{2} = 3(x + 2)",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(x + 2)[(x + 2) - 3] = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "expr": "(x + 2)(x + 2 - 3) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(x + 2)(x - 1) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x + 2 = 0} \\text{ ou } \\allowbreak {x - 1 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = -2} \\text{ ou } \\allowbreak {x = 1}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-2\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "(x + 2)^{2} = 3(x + 2)"
+    ],
+    [
+     "factoriser",
+     "ME",
+     "(x + 2)^{2} - 3(x + 2)"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x + 2)(x - 1)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x+2)^2=3(x+2)"
+ },
+ "E3 deux facteurs communs": {
+  "cours": {
+   "S": "S = \\{-2\\,;\\,1\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "Attention : on ne divise pas par \\((x - 1)\\), car ce facteur peut être nul ! On ramène tout dans le membre de gauche, puis on met \\((x - 1)\\) en évidence."
+      },
+      {
+       "expr": "(x - 1)(x + 2) - 3(x - 1)(x + 2) = 0",
+       "gauche": "(x - 1)(x + 2) = 3(x - 1)(x + 2)",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(x - 1)[(x + 2) - 3(x + 2)] = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "expr": "(x - 1)(x + 2 - 3x - 6) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(x - 1)(-2x - 4) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x - 1 = 0} \\text{ ou } \\allowbreak {-2x - 4 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 1} \\text{ ou } \\allowbreak {x = -2}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-2\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "(x - 1)(x + 2) = 3(x - 1)(x + 2)"
+    ],
+    [
+     "factoriser",
+     "ME",
+     "(x - 1)(x + 2) - 3(x - 1)(x + 2)"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x - 1)(-2x - 4)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x-1)(x+2)=3(x-1)(x+2)"
+ },
+ "E3 facteur monôme": {
+  "cours": {
+   "S": "S = \\{-1\\,;\\,0\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "Attention : on ne divise pas par \\((x + 1)\\), car ce facteur peut être nul ! On ramène tout dans le membre de gauche, puis on met \\((x + 1)\\) en évidence."
+      },
+      {
+       "expr": "(x + 1)^{2} - (x + 1) = 0",
+       "gauche": "(x + 1)^{2} = x + 1",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(x + 1)[(x + 1) - 1] = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "expr": "(x + 1)(x + 1 - 1) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "x(x + 1) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x + 1 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -1}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-1\\,;\\,0\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "(x + 1)^{2} = x + 1"
+    ],
+    [
+     "factoriser",
+     "ME",
+     "(x + 1)^{2} - (x + 1)"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "x(x + 1)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x+1)^2=x+1"
+ },
+ "E3 facteur à droite d'abord": {
+  "cours": {
+   "S": "S = \\{-1\\,;\\,5\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "Attention : on ne divise pas par \\((x + 1)\\), car ce facteur peut être nul ! On ramène tout dans le membre de gauche, puis on met \\((x + 1)\\) en évidence."
+      },
+      {
+       "expr": "3(x + 1) - (x + 1)(x - 2) = 0",
+       "gauche": "3(x + 1) = (x + 1)(x - 2)",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(x + 1)[3 - (x - 2)] = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "expr": "(x + 1)(3 - x + 2) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(x + 1)(5 - x) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x + 1 = 0} \\text{ ou } \\allowbreak {5 - x = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = -1} \\text{ ou } \\allowbreak {x = 5}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-1\\,;\\,5\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "3(x + 1) = (x + 1)(x - 2)"
+    ],
+    [
+     "factoriser",
+     "ME",
+     "3(x + 1) - (x + 1)(x - 2)"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x + 1)(5 - x)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "3(x+1)=(x+1)(x-2)"
+ },
+ "E3 monôme et constante": {
+  "cours": {
+   "S": "S = \\{2\\,;\\,3\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "Attention : on ne divise pas par \\((x - 3)\\), car ce facteur peut être nul ! On ramène tout dans le membre de gauche, puis on met \\((x - 3)\\) en évidence."
+      },
+      {
+       "expr": "x(x - 3) - 2(x - 3) = 0",
+       "gauche": "x(x - 3) = 2(x - 3)",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(x - 3)[x - 2] = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "expr": "(x - 3)(x - 2) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x - 3 = 0} \\text{ ou } \\allowbreak {x - 2 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 3} \\text{ ou } \\allowbreak {x = 2}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{2\\,;\\,3\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "x(x - 3) = 2(x - 3)"
+    ],
+    [
+     "factoriser",
+     "ME",
+     "x(x - 3) - 2(x - 3)"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x - 3)(x - 2)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "x(x-3)=2(x-3)"
+ },
+ "E3 solution répétée": {
+  "cours": {
+   "S": "S = \\{-1\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "Attention : on ne divise pas par \\((x + 1)\\), car ce facteur peut être nul ! On ramène tout dans le membre de gauche, puis on met \\((x + 1)\\) en évidence."
+      },
+      {
+       "expr": "(x + 1)^{2} - 4(x + 1)^{2} = 0",
+       "gauche": "(x + 1)^{2} = 4(x + 1)^{2}",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(x + 1)[(x + 1) - 4(x + 1)] = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "expr": "(x + 1)(x + 1 - 4x - 4) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(x + 1)(-3x - 3) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x + 1 = 0} \\text{ ou } \\allowbreak {-3x - 3 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "x = -1",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "(x + 1)^{2} = 4(x + 1)^{2}"
+    ],
+    [
+     "factoriser",
+     "ME",
+     "(x + 1)^{2} - 4(x + 1)^{2}"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x + 1)(-3x - 3)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x+1)^2=4(x+1)^2"
+ },
+ "E3 somme seule à droite": {
+  "cours": {
+   "S": "S = \\{-1\\,;\\,1\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "Attention : on ne divise pas par \\((x - 1)\\), car ce facteur peut être nul ! On ramène tout dans le membre de gauche, puis on met \\((x - 1)\\) en évidence."
+      },
+      {
+       "expr": "(x - 1)(x + 2) - (x - 1) = 0",
+       "gauche": "(x - 1)(x + 2) = x - 1",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(x - 1)[(x + 2) - 1] = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "expr": "(x - 1)(x + 2 - 1) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(x - 1)(x + 1) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x - 1 = 0} \\text{ ou } \\allowbreak {x + 1 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 1} \\text{ ou } \\allowbreak {x = -1}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-1\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "(x - 1)(x + 2) = x - 1"
+    ],
+    [
+     "factoriser",
+     "ME",
+     "(x - 1)(x + 2) - (x - 1)"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x - 1)(x + 1)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x-1)(x+2)=x-1"
+ },
+ "E3 « − » devant la droite": {
+  "cours": {
+   "S": "S = \\{-\\frac{5}{2}\\,;\\,1\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "Attention : on ne divise pas par \\((x - 1)\\), car ce facteur peut être nul ! On ramène tout dans le membre de gauche, puis on met \\((x - 1)\\) en évidence."
+      },
+      {
+       "expr": "(x - 1)(x + 2) + (x - 1)(x + 3) = 0",
+       "gauche": "(x - 1)(x + 2) = -(x - 1)(x + 3)",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(x - 1)[(x + 2) + (x + 3)] = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "expr": "(x - 1)(x + 2 + x + 3) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(x - 1)(2x + 5) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x - 1 = 0} \\text{ ou } \\allowbreak {2x + 5 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 1} \\text{ ou } \\allowbreak {x = -\\frac{5}{2}}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-\\frac{5}{2}\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "(x - 1)(x + 2) = -(x - 1)(x + 3)"
+    ],
+    [
+     "factoriser",
+     "ME",
+     "(x - 1)(x + 2) + (x - 1)(x + 3)"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x - 1)(2x + 5)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x-1)(x+2)=-(x-1)(x+3)"
+ },
+ "E5 A constant, écrit après": {
+  "cours": {
+   "S": "S = \\{-3\\,;\\,1\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "(2 + (x + 1))(2 - (x + 1)) = 0",
+       "gauche": "-(x + 1)^{2} + 4 = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = 2,\\ B = x + 1$}\\)"
+      },
+      {
+       "expr": "(2 + x + 1)(2 - x - 1) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(x + 3)(1 - x) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x + 3 = 0} \\text{ ou } \\allowbreak {1 - x = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = -3} \\text{ ou } \\allowbreak {x = 1}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-3\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "-(x + 1)^{2} + 4"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x + 3)(1 - x)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "-(x+1)^2+4=0"
+ },
+ "E5 B irrationnel": {
+  "cours": {
+   "S": "S = \\{-1 - \\sqrt{5}\\,;\\,-1 + \\sqrt{5}\\}",
+   "approx": "soit \\(x \\approx -3{,}236\\) ou \\(x \\approx 1{,}236\\)",
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "(x + 1)^{2} - 5 = 0",
+       "gauche": "(x + 1)^{2} = 5",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "((x + 1) + \\sqrt{5})((x + 1) - \\sqrt{5}) = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x + 1,\\ B = \\sqrt{5}$}\\)"
+      },
+      {
+       "expr": "(x + 1 + \\sqrt{5})(x + 1 - \\sqrt{5}) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x + 1 + \\sqrt{5} = 0} \\text{ ou } \\allowbreak {x + 1 - \\sqrt{5} = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = -1 - \\sqrt{5}} \\text{ ou } \\allowbreak {x = -1 + \\sqrt{5}}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-1 - \\sqrt{5}\\,;\\,-1 + \\sqrt{5}\\}",
+     "type": "resultat_lim"
+    },
+    {
+     "html": "soit \\(x \\approx -3{,}236\\) ou \\(x \\approx 1{,}236\\)",
+     "type": "texte"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "(x + 1)^{2} = 5"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "(x + 1)^{2} - 5"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x + 1 + \\sqrt{5})(x + 1 - \\sqrt{5})"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x+1)^2=5"
+ },
+ "E5 car, B irrationnel": {
+  "cours": {
+   "S": "S = \\{\\frac{4 - \\sqrt{3}}{2}\\,;\\,\\frac{4 + \\sqrt{3}}{2}\\}",
+   "approx": "soit \\(x \\approx 1{,}134\\) ou \\(x \\approx 2{,}866\\)",
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "4(x - 2)^{2} - 3 = 0",
+       "gauche": "4(x - 2)^{2} = 3",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = 2(x - 2),\\ B = \\sqrt{3}$}\\) (car \\(A^{2} = 4(x - 2)^{2}\\))."
+      },
+      {
+       "expr": "(2(x - 2) + \\sqrt{3})(2(x - 2) - \\sqrt{3}) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(2x - 4 + \\sqrt{3})(2x - 4 - \\sqrt{3}) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{2x - 4 + \\sqrt{3} = 0} \\text{ ou } \\allowbreak {2x - 4 - \\sqrt{3} = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{2x = 4 - \\sqrt{3}} \\text{ ou } \\allowbreak {2x = 4 + \\sqrt{3}}",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x = \\frac{4 - \\sqrt{3}}{2}} \\text{ ou } \\allowbreak {x = \\frac{4 + \\sqrt{3}}{2}}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{\\frac{4 - \\sqrt{3}}{2}\\,;\\,\\frac{4 + \\sqrt{3}}{2}\\}",
+     "type": "resultat_lim"
+    },
+    {
+     "html": "soit \\(x \\approx 1{,}134\\) ou \\(x \\approx 2{,}866\\)",
+     "type": "texte"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "4(x - 2)^{2} = 3"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "4(x - 2)^{2} - 3"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(2x - 4 + \\sqrt{3})(2x - 4 - \\sqrt{3})"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "4(x-2)^2=3"
+ },
+ "E5 constante nulle, D24": {
+  "cours": {
+   "S": "S = \\{-1\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "(x + 1)^{2} + 3 - 3 = 0",
+       "gauche": "(x + 1)^{2} + 3 = 3",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(x + 1)^{2} = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(x + 1)(x + 1) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "x + 1 = 0",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "x = -1",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "(x + 1)^{2} + 3 = 3"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x + 1)^{2}"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x+1)^2+3=3"
+ },
+ "E5 constantes regroupées": {
+  "cours": {
+   "S": "S = \\{-5\\,;\\,3\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "(x + 1)^{2} + 3 - 19 = 0",
+       "gauche": "(x + 1)^{2} + 3 = 19",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(x + 1)^{2} - 16 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "((x + 1) + 4)((x + 1) - 4) = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x + 1,\\ B = 4$}\\)"
+      },
+      {
+       "expr": "(x + 5)(x - 3) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x + 5 = 0} \\text{ ou } \\allowbreak {x - 3 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = -5} \\text{ ou } \\allowbreak {x = 3}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-5\\,;\\,3\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "(x + 1)^{2} + 3 = 19"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "(x + 1)^{2} - 16"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x + 5)(x - 3)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x+1)^2+3=19"
+ },
+ "E5 deux carrés": {
+  "cours": {
+   "S": "S = \\{\\frac{2}{3}\\,;\\,4\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "(x + 1)^{2} - (2x - 3)^{2} = 0",
+       "gauche": "(x + 1)^{2} = (2x - 3)^{2}",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "((x + 1) + (2x - 3))((x + 1) - (2x - 3)) = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x + 1,\\ B = 2x - 3$}\\)"
+      },
+      {
+       "expr": "(x + 1 + 2x - 3)(x + 1 - 2x + 3) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(3x - 2)(4 - x) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{3x - 2 = 0} \\text{ ou } \\allowbreak {4 - x = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = \\frac{2}{3}} \\text{ ou } \\allowbreak {x = 4}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{\\frac{2}{3}\\,;\\,4\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "(x + 1)^{2} = (2x - 3)^{2}"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "(x + 1)^{2} - (2x - 3)^{2}"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(3x - 2)(4 - x)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x+1)^2=(2x-3)^2"
+ },
+ "E5 deux carrés, car": {
+  "cours": {
+   "S": "S = \\{\\frac{4}{5}\\,;\\,8\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "4(x + 1)^{2} - 9(x - 2)^{2} = 0",
+       "gauche": "4(x + 1)^{2} = 9(x - 2)^{2}",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = 2(x + 1),\\ B = 3(x - 2)$}\\) (car \\(A^{2} = 4(x + 1)^{2}\\) et \\(B^{2} = 9(x - 2)^{2}\\))."
+      },
+      {
+       "expr": "(2(x + 1) + 3(x - 2))(2(x + 1) - 3(x - 2)) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(2x + 2 + 3x - 6)(2x + 2 - 3x + 6) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(5x - 4)(8 - x) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{5x - 4 = 0} \\text{ ou } \\allowbreak {8 - x = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = \\frac{4}{5}} \\text{ ou } \\allowbreak {x = 8}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{\\frac{4}{5}\\,;\\,8\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "4(x + 1)^{2} = 9(x - 2)^{2}"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "4(x + 1)^{2} - 9(x - 2)^{2}"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(5x - 4)(8 - x)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "4(x+1)^2=9(x-2)^2"
+ },
+ "E5 décimaux": {
+  "cours": {
+   "S": "S = \\{-3\\,;\\,1\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "0{,}25(x + 1)^{2} - 1 = 0",
+       "gauche": "0{,}25(x + 1)^{2} = 1",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = 0{,}5(x + 1),\\ B = 1$}\\) (car \\(A^{2} = 0{,}25(x + 1)^{2}\\))."
+      },
+      {
+       "expr": "(0{,}5(x + 1) + 1)(0{,}5(x + 1) - 1) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(0{,}5x + 0{,}5 + 1)(0{,}5x + 0{,}5 - 1) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(0{,}5x + 1{,}5)(0{,}5x - 0{,}5) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{0{,}5x + 1{,}5 = 0} \\text{ ou } \\allowbreak {0{,}5x - 0{,}5 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{0{,}5x = -1{,}5} \\text{ ou } \\allowbreak {0{,}5x = 0{,}5}",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x = -3} \\text{ ou } \\allowbreak {x = 1}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-3\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "0{,}25(x + 1)^{2} = 1"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "0{,}25(x + 1)^{2} - 1"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(0{,}5x + 1{,}5)(0{,}5x - 0{,}5)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "0,25(x+1)^2=1"
+ },
+ "E5 déjà = 0": {
+  "cours": {
+   "S": "S = \\{-5\\,;\\,3\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "((x + 1) + 4)((x + 1) - 4) = 0",
+       "gauche": "(x + 1)^{2} - 16 = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x + 1,\\ B = 4$}\\)"
+      },
+      {
+       "expr": "(x + 5)(x - 3) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x + 5 = 0} \\text{ ou } \\allowbreak {x - 3 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = -5} \\text{ ou } \\allowbreak {x = 3}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-5\\,;\\,3\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "(x + 1)^{2} - 16"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x + 5)(x - 3)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x+1)^2-16=0"
+ },
+ "E5 facteur monôme": {
+  "cours": {
+   "S": "S = \\{-2\\,;\\,0\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "(x + 1)^{2} - 1 = 0",
+       "gauche": "(x + 1)^{2} = 1",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "((x + 1) + 1)((x + 1) - 1) = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x + 1,\\ B = 1$}\\)"
+      },
+      {
+       "expr": "x(x + 2) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x + 2 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -2}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-2\\,;\\,0\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "(x + 1)^{2} = 1"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "(x + 1)^{2} - 1"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "x(x + 2)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x+1)^2=1"
+ },
+ "E5 fraction": {
+  "cours": {
+   "S": "S = \\{-3\\,;\\,1\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "\\frac{1}{4}(x + 1)^{2} - 1 = 0",
+       "gauche": "\\frac{1}{4}(x + 1)^{2} = 1",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = \\frac{1}{2}(x + 1),\\ B = 1$}\\) (car \\(A^{2} = \\frac{1}{4}(x + 1)^{2}\\))."
+      },
+      {
+       "expr": "\\left(\\frac{1}{2}(x + 1) + 1\\right)\\left(\\frac{1}{2}(x + 1) - 1\\right) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "\\left(\\frac{1}{2}x + \\frac{1}{2} + 1\\right)\\left(\\frac{1}{2}x + \\frac{1}{2} - 1\\right) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "\\left(\\frac{1}{2}x + \\frac{3}{2}\\right)\\left(\\frac{1}{2}x - \\frac{1}{2}\\right) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{\\frac{1}{2}x + \\frac{3}{2} = 0} \\text{ ou } \\allowbreak {\\frac{1}{2}x - \\frac{1}{2} = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{\\frac{1}{2}x = -\\frac{3}{2}} \\text{ ou } \\allowbreak {\\frac{1}{2}x = \\frac{1}{2}}",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x = -3} \\text{ ou } \\allowbreak {x = 1}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-3\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "\\frac{1}{4}(x + 1)^{2} = 1"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "\\frac{1}{4}(x + 1)^{2} - 1"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "\\left(\\frac{1}{2}x + \\frac{3}{2}\\right)\\left(\\frac{1}{2}x - \\frac{1}{2}\\right)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(1/4)(x+1)^2=1"
  },
  "Javet 2.17 a": {
   "cours": {

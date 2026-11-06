@@ -1,5 +1,5 @@
-"""Brique moteur/second_degre.py, P2b et P3 du chantier equations-2e-degre : la rédaction (decisions.md §§ 3, 5, 6, 7 et 13 ; plan,
-P2b et P3).
+"""Brique moteur/second_degre.py, P2b, P3 et P4a du chantier equations-2e-degre : la rédaction (decisions.md §§ 3, 5, 6, 7 et 13 ;
+plan, P2b, P3 et P4a).
 
 - Invariants du § 5 : le bloc affiché est `bloc_rangees(concaténation des lignes de toutes les étapes, membre_gauche=True)` (JSON) ;
   les segments des étapes, mis bout à bout, donnent les rangées de la chaîne entière (`rangees_chaine`) ; chaque segment commence
@@ -10,8 +10,11 @@ P2b et P3).
   du § 6 ; vouvoiement (R12) et vocabulaire (C6) de tout texte produit.
 - `nb_exact` sans état, croisé avec `exp_log._nb_exact` ; `appliquer` : s_applique ⇔ une étape, qui se redéveloppe.
 - P3 : E1 (ramener, réordonner, côté droit, phrase seulement avant une phrase de choix) et E2 (développer en montrant les produits,
-  « − (…) » puis sans parenthèses) ; les formes structurées (P4a) restent « non_traite ».
-- Ce qui n'est pas encore traité : xfail stricts nommés par leur partie (P4a, P4b)."""
+  « − (…) » puis sans parenthèses).
+- P4a : les formes structurées, sans développer (E1.3) : produit déjà nul (E13), facteur commun aux deux membres (E3), Id. rem. sur la
+  forme structurée (E5) ; textes rendus de 2.9 k, 2.9 l, 2.12 e, 2.12 h et Az 4.1 d comparés au corrigé ; chaque ligne relue ; une
+  structure que P4a n'écrit pas reste « non_traite ».
+- Ce qui n'est pas encore traité : xfail stricts nommés par leur partie (P4b)."""
 import json
 import re
 import unicodedata
@@ -31,7 +34,7 @@ import second_degre as sd
 import sortie
 from chaine import Chaine, Eq, LigneTexte, bloc_rangees, tex_element
 from aides_sortie import TUTOIEMENT
-from corpus_second_degre import A_VENIR, MESSAGE_BICARREE, P2B, P3, PARTIES_FAITES, RESOLUES
+from corpus_second_degre import A_VENIR, MESSAGE_BICARREE, P2B, P3, P4A, PARTIES_FAITES, RESOLUES, STRUCTURES_NON_ECRITES
 from expr import Nb
 from second_degre import Nombre
 from test_second_degre import GENERES, OracleMixin, egal_au_polynome, valeur_mp
@@ -90,7 +93,8 @@ def toutes():
 
 
 TOUTES = list(toutes())
-ENONCES = {nom: tex_element(Eq(*lire(RESOLUES[nom.replace(" (variante formule)", "")])[:2]), True, True) for nom, _ in TOUTES}
+ENONCES = {nom: tex_element(sd.ecrire_enonce(*lire(RESOLUES[nom.replace(" (variante formule)", "")])[:3]), True, True)
+           for nom, _ in TOUTES}
 GENERES_2 = [P for P in GENERES if P.degre == 2]
 
 
@@ -790,6 +794,203 @@ class TestRamener(unittest.TestCase):
         self.assertEqual(resoudre(P3["(x + 1)(x + 3) = 15"])["statut"], "resolu")
 
 
+# ---------------------------------------------------------------------------------------------------------------------------
+# P4a : formes structurées, sur l'arbre avant tout développement (E1.3, E3, E5, E13)
+# ---------------------------------------------------------------------------------------------------------------------------
+ATTENTION = (r"Attention : on ne divise pas par \(%s\), car ce facteur peut être nul ! On ramène tout dans le membre de gauche, "
+             r"puis on met \(%s\) en évidence.")
+
+
+class TestStructures(unittest.TestCase):
+
+    def test_2_9_k_car(self):
+        """Corrigé 2.9 k : ramener sans développer (E1.3) ; la ligne « Id. rem. … (car A² = 4(x − 2)²) » avant la chaîne (E5), A et B
+        dans un seul cadre (D29) ; (2(x − 2) + 1)(2(x − 2) − 1), puis les parenthèses enlevées, puis les facteurs réduits."""
+        res = resoudre(P4A["2.9 k"])
+        self.assertEqual(textes(res), [
+            r" | 4(x - 2)^{2} = 1 | ",
+            r"\iff | 4(x - 2)^{2} - 1 = 0 | ",
+            r"Id. rem. \(A^{2} - B^{2}\) avec \(\fbox{$A = 2(x - 2),\ B = 1$}\) (car \(A^{2} = 4(x - 2)^{2}\)).",
+            r"\iff | (2(x - 2) + 1)(2(x - 2) - 1) = 0 | ",
+            r"\iff | (2x - 4 + 1)(2x - 4 - 1) = 0 | ",
+            r"\iff | (2x - 3)(2x - 5) = 0 | ",
+            r"\iff | " + ou("2x - 3 = 0", "2x - 5 = 0") + " | produit nul",
+            r"\iff | " + ou(r"x = \frac{3}{2}", r"x = \frac{5}{2}") + " | "])
+        self.assertEqual(res["S"], r"S = \{\frac{3}{2}\,;\,\frac{5}{2}\}")
+        self.assertEqual([(e["phase"], e["methode"], e["cible"]) for e in res["etapes"]], [
+            ("ramener", "RAMENER", "4(x - 2)^{2} = 1"), ("factoriser", "IDREM_DIFF", "4(x - 2)^{2} - 1"),
+            ("produit_nul", "PRODUIT_NUL", "(2x - 3)(2x - 5)")])
+        p = res["etapes"][1]["parametres"]
+        self.assertEqual((p["A"], p["B"], p["forme"]), ("2(x - 2)", "1", "structuree"))
+        self.assertEqual(res["variantes"], [])
+
+    def test_2_9_l_etiquette_sans_ligne_intermediaire(self):
+        """Corrigé 2.9 l : étiquette en marge ; ((x + 1) + 4)((x + 1) − 4) donne directement (x + 5)(x − 3) (aucun « − » devant une
+        parenthèse, √k = 1)."""
+        self.assertEqual(textes(resoudre(P4A["2.9 l"])), [
+            r" | (x + 1)^{2} = 16 | ",
+            r"\iff | (x + 1)^{2} - 16 = 0 | ",
+            r"\iff | ((x + 1) + 4)((x + 1) - 4) = 0 | Id. rem. \(A^{2} - B^{2}\) avec \(\fbox{$A = x + 1,\ B = 4$}\)",
+            r"\iff | (x + 5)(x - 3) = 0 | ",
+            r"\iff | " + ou("x + 5 = 0", "x - 3 = 0") + " | produit nul",
+            r"\iff | " + ou("x = -5", "x = 3") + " | "])
+
+    def test_2_12_h_ordre_du_facteur_reduit(self):
+        """Corrigé 2.12 h : A = 4, B = 3x + 2 ; « 4 − (3x + 2) » puis « 4 − 3x − 2 » ; (3x + 6)(2 − 3x) (E5 : la constante d'abord
+        quand le coefficient de x est négatif et la constante positive), sans ME après coup ; second membre déjà nul : pas de ligne
+        ramenée. Écart au corrigé : A et B en étiquette (E5), pas en ligne de texte."""
+        res = resoudre(P4A["2.12 h"])
+        self.assertEqual(textes(res), [
+            r" | 16 - (3x + 2)^{2} = 0 | ",
+            r"\iff | (4 + (3x + 2))(4 - (3x + 2)) = 0 | Id. rem. \(A^{2} - B^{2}\) avec \(\fbox{$A = 4,\ B = 3x + 2$}\)",
+            r"\iff | (4 + 3x + 2)(4 - 3x - 2) = 0 | ",
+            r"\iff | (3x + 6)(2 - 3x) = 0 | ",
+            r"\iff | " + ou("3x + 6 = 0", "2 - 3x = 0") + " | produit nul",
+            r"\iff | " + ou("x = -2", r"x = \frac{2}{3}") + " | "])
+        self.assertEqual(res["etapes"][0]["phase"], "factoriser")
+
+    def test_2_12_e_facteur_commun(self):
+        """Corrigé 2.12 e : l'avertissement (E3), « g − d = 0 », la ME avec un crochet, les parenthèses enlevées, −2x − 1 (E5),
+        solutions dans l'ordre des facteurs (D14)."""
+        res = resoudre(P4A["2.12 e"])
+        self.assertEqual(textes(res), [
+            r" | (x - 1)(2 - x) = (x - 1)(x + 3) | ",
+            ATTENTION % ("(x - 1)", "(x - 1)"),
+            r"\iff | (x - 1)(2 - x) - (x - 1)(x + 3) = 0 | ",
+            r"\iff | (x - 1)[(2 - x) - (x + 3)] = 0 | ME",
+            r"\iff | (x - 1)(2 - x - x - 3) = 0 | ",
+            r"\iff | (x - 1)(-2x - 1) = 0 | ",
+            r"\iff | " + ou("x - 1 = 0", "-2x - 1 = 0") + " | produit nul",
+            r"\iff | " + ou("x = 1", r"x = -\frac{1}{2}") + " | "])
+        self.assertEqual(res["S"], r"S = \{-\frac{1}{2}\,;\,1\}")
+        self.assertEqual([(e["phase"], e["methode"]) for e in res["etapes"]], [
+            ("ramener", "RAMENER"), ("factoriser", "ME"), ("produit_nul", "PRODUIT_NUL")])
+        self.assertEqual(sd.blocs(res)[0]["rangees"][0], {"texte": ATTENTION % ("(x - 1)", "(x - 1)")})
+        self.assertEqual(sd.blocs(res)[0]["rangees"][1]["gauche"], "(x - 1)(2 - x) = (x - 1)(x + 3)")
+
+    def test_az_4_1_d_produit_deja_nul(self):
+        """E13 : produit nul direct, sans développer ; facteurs écrits comme dans la saisie (2 − x = 0), dans l'ordre écrit (D14) ;
+        les produits écrits côte à côte comme le corrigé (expr.tex écrirait « (x − 1)(2 − x) · (5 − 3x) »)."""
+        res = resoudre(P4A["Az 4.1 d"])
+        self.assertEqual(textes(res), [
+            r" | (x - 1)(2 - x)(5 - 3x) = 0 | ",
+            r"\iff | " + ou("x - 1 = 0", "2 - x = 0", "5 - 3x = 0") + " | produit nul",
+            r"\iff | " + ou("x = 1", "x = 2", r"x = \frac{5}{3}") + " | "])
+        self.assertEqual(res["S"], r"S = \{1\,;\,\frac{5}{3}\,;\,2\}")
+        self.assertEqual([(e["phase"], e["methode"]) for e in res["etapes"]], [("produit_nul", "PRODUIT_NUL")])
+
+    def test_produit_deja_nul_autres_formes(self):
+        """D24 (un carré réécrit (B)(B), le facteur une seule fois), constante « impossible » (−1, 0,5 de la saisie gardé), monôme
+        (D7), premier membre nul (E1), D20."""
+        self.assertEqual(textes(resoudre(P4A["E13 constante et carré"])), [
+            r" | 3(x + 1)^{2} = 0 | ", r"\iff | 3(x + 1)(x + 1) = 0 | ",
+            r"\iff | " + ou(IMP % "3", "x + 1 = 0") + " | produit nul", r"\iff | x = -1 | "])
+        self.assertEqual(textes(resoudre(P4A["E13 carré, D24"])),
+                         [r" | (t + 10)^{2} = 0 | ", r"\iff | (t + 10)(t + 10) = 0 | ", r"\iff | t + 10 = 0 | produit nul",
+                          r"\iff | t = -10 | "])
+        self.assertEqual(textes(resoudre(P4A["E13 −1 impossible"]))[1],
+                         r"\iff | " + ou(IMP % "-1", "x - 1 = 0", "x + 2 = 0") + " | produit nul")
+        self.assertEqual(textes(resoudre(P4A["E13 décimaux"]))[1],
+                         r"\iff | " + ou(IMP % "0{,}5", "x - 1 = 0", "x + 2 = 0") + " | produit nul")
+        self.assertEqual(textes(resoudre(P4A["E13 monôme 2x"]))[1:], [
+            r"\iff | " + ou("2x = 0", "x - 3 = 0") + " | produit nul", r"\iff | " + ou("x = 0", "x = 3") + " | "])
+        res = resoudre(P4A["E13 premier membre nul"])
+        self.assertEqual(textes(res)[:2], [r" | 0 = (x - 3)(2x + 1) | ", r"\iff | (x - 3)(2x + 1) = 0 | "])
+        self.assertEqual(res["etapes"][0]["parametres"]["cote"], "droite")
+        self.assertEqual(textes(resoudre(P4A["E13 D20"]))[2:], [
+            r"\iff | " + ou(r"2x = \frac{1}{3}", "x = -1") + " | ", r"\iff | " + ou(r"x = \frac{1}{6}", "x = -1") + " | "])
+        self.assertEqual(textes(resoudre(P4A["E13 carré et facteur"]))[1], r"\iff | (x + 1)(x + 1)(x - 2) = 0 | ")
+
+    def test_id_rem_structuree_autres_formes(self):
+        """B = √5 (D8) et ≈ (E14) ; B² justifié aussi (deux carrés) ; constantes regroupées sur leur ligne ; A constant écrit après
+        le carré ; un facteur réduit monôme écrit en tête (x(x + 2)) ; constante nulle : produit nul direct (D24)."""
+        res = resoudre(P4A["E5 B irrationnel"])
+        self.assertEqual(textes(res)[2:4], [
+            r"\iff | ((x + 1) + \sqrt{5})((x + 1) - \sqrt{5}) = 0 | Id. rem. \(A^{2} - B^{2}\) avec \(\fbox{$A = x + 1,\ B = \sqrt{5}$}\)",
+            r"\iff | (x + 1 + \sqrt{5})(x + 1 - \sqrt{5}) = 0 | "])
+        self.assertEqual(res["S"], r"S = \{-1 - \sqrt{5}\,;\,-1 + \sqrt{5}\}")
+        self.assertEqual(res["approx"], r"soit \(x \approx -3{,}236\) ou \(x \approx 1{,}236\)")
+        self.assertEqual(textes(resoudre(P4A["E5 deux carrés, car"]))[2:6], [
+            r"Id. rem. \(A^{2} - B^{2}\) avec \(\fbox{$A = 2(x + 1),\ B = 3(x - 2)$}\) (car \(A^{2} = 4(x + 1)^{2}\) et "
+            r"\(B^{2} = 9(x - 2)^{2}\)).",
+            r"\iff | (2(x + 1) + 3(x - 2))(2(x + 1) - 3(x - 2)) = 0 | ",
+            r"\iff | (2x + 2 + 3x - 6)(2x + 2 - 3x + 6) = 0 | ",
+            r"\iff | (5x - 4)(8 - x) = 0 | "])
+        self.assertEqual(textes(resoudre(P4A["E5 constantes regroupées"]))[:3], [
+            r" | (x + 1)^{2} + 3 = 19 | ", r"\iff | (x + 1)^{2} + 3 - 19 = 0 | ", r"\iff | (x + 1)^{2} - 16 = 0 | "])
+        self.assertEqual(textes(resoudre(P4A["E5 A constant, écrit après"]))[1],
+                         r"\iff | (2 + (x + 1))(2 - (x + 1)) = 0 | Id. rem. \(A^{2} - B^{2}\) avec \(\fbox{$A = 2,\ B = x + 1$}\)")
+        self.assertEqual(textes(resoudre(P4A["E5 facteur monôme"]))[3:], [
+            r"\iff | x(x + 2) = 0 | ", r"\iff | " + ou("x = 0", "x + 2 = 0") + " | produit nul",
+            r"\iff | " + ou("x = 0", "x = -2") + " | "])
+        self.assertEqual(textes(resoudre(P4A["E5 décimaux"]))[2],
+                         r"Id. rem. \(A^{2} - B^{2}\) avec \(\fbox{$A = 0{,}5(x + 1),\ B = 1$}\) (car \(A^{2} = 0{,}25(x + 1)^{2}\)).")
+        self.assertEqual(textes(resoudre(P4A["E5 constante nulle, D24"]))[2:], [
+            r"\iff | (x + 1)^{2} = 0 | ", r"\iff | (x + 1)(x + 1) = 0 | ", r"\iff | x + 1 = 0 | produit nul", r"\iff | x = -1 | "])
+
+    def test_facteur_commun_autres_formes(self):
+        """E3 : une somme seule à droite ; « − » devant la droite (on ajoute) ; un reste monôme (crochet sans parenthèses) ; la
+        solution répétée écrite une fois."""
+        self.assertEqual(textes(resoudre(P4A["E3 somme seule à droite"]))[2:5], [
+            r"\iff | (x - 1)(x + 2) - (x - 1) = 0 | ", r"\iff | (x - 1)[(x + 2) - 1] = 0 | ME", r"\iff | (x - 1)(x + 2 - 1) = 0 | "])
+        self.assertEqual(textes(resoudre(P4A["E3 « − » devant la droite"]))[2:4], [
+            r"\iff | (x - 1)(x + 2) + (x - 1)(x + 3) = 0 | ", r"\iff | (x - 1)[(x + 2) + (x + 3)] = 0 | ME"])
+        self.assertEqual(textes(resoudre(P4A["E3 monôme et constante"]))[3:5], [
+            r"\iff | (x - 3)[x - 2] = 0 | ME", r"\iff | (x - 3)(x - 2) = 0 | "])
+        self.assertEqual(textes(resoudre(P4A["E3 solution répétée"]))[-1], r"\iff | x = -1 | ")
+        self.assertEqual(textes(resoudre(P4A["E3 facteur à droite d'abord"]))[3:6], [
+            r"\iff | (x + 1)[3 - (x - 2)] = 0 | ME", r"\iff | (x + 1)(3 - x + 2) = 0 | ", r"\iff | (x + 1)(5 - x) = 0 | "])
+
+    def test_aucune_variante_ni_developpement(self):
+        """E1.3 : rien n'est développé (aucune étape DEVELOPPER) ; pas de variante « formule » (elle demanderait de développer)."""
+        for nom, saisie in P4A.items():
+            with self.subTest(nom=nom):
+                res = resoudre(saisie)
+                self.assertEqual(res["statut"], "resolu")
+                self.assertEqual(res["variantes"], [])
+                self.assertFalse(any(e["methode"] == "DEVELOPPER" for e in res["etapes"]))
+
+    def test_enonce_ecrit_comme_le_corrigé(self):
+        """Les produits de l'énoncé côte à côte (`Juxtaposition`) ; seulement sur une forme structurée (les énoncés de P2b et P3
+        restent ceux d'expr.tex, instantanés inchangés)."""
+        T = lambda s: tex_element(sd.ecrire_enonce(*lire(s)[:3]))
+        self.assertEqual(T("(x-1)(2-x)(5-3x)=0"), "(x - 1)(2 - x)(5 - 3x) = 0")
+        self.assertEqual(T("2x(x-3)=0"), "2x(x - 3) = 0")
+        self.assertEqual(T("(1/4)(x+1)^2=1"), r"\frac{1}{4}(x + 1)^{2} = 1")
+        self.assertEqual(T("x*3*(x+1)=0"), r"x \cdot 3(x + 1) = 0")
+        self.assertEqual(T("(3/2)x^2=4x+1"), expr.tex(lire("(3/2)x^2=4x+1")[0]) + " = 4x + 1")
+
+    def test_chaque_ligne_relue(self):
+        """Garde-fou (principe 1) : chaque ligne écrite (l'énoncé réécrit compris) est relue dans Q(√m) et vaut ±(gauche − droite) ;
+        une ligne faussée exprès (facteur réduit, reste du facteur commun, énoncé) donne « ne_conclut_pas » (jamais un résultat
+        douteux)."""
+        for nom, saisie in P4A.items():
+            g, d, x, _ = lire(saisie)
+            P = sd.en_nombres(polynome(saisie))
+            moins = sd.en_nombres([-c for c in P])
+            res = resoudre(saisie)
+            with self.subTest(nom=nom):
+                for e in res["etapes"]:
+                    seg = e["segment"]
+                    for el in (seg.elements if seg else []):            # l'énoncé (pivot du premier segment) compris
+                        if isinstance(el, Eq) and (e["phase"] != "produit_nul" or isinstance(el.g, sd.Juxtaposition)):
+                            D = sd._nadd(sd._ecrit_en_nombres(el.g, x), sd._ecrit_en_nombres(el.d, x), -1)
+                            self.assertIn(D, (P, moins), (nom, tex_element(el)))
+        for nom, cible in (("2.9 k", "_facteur_reduit"), ("2.12 e", "_reste_ecrit"), ("Az 4.1 d", "_juxtaposer")):
+            ancien = getattr(sd, cible)
+            fausse = {"_facteur_reduit": lambda f, X, dec: ancien(sd.en_nombres([f[0] + 1, f[1]]), X, dec),
+                      "_reste_ecrit": lambda lu, X, dec: ancien((lu[0] * 2,) + tuple(lu[1:]), X, dec),
+                      "_juxtaposer": lambda n: expr.Op("+", ancien(n), expr.Nb(1)) if isinstance(n, expr.Op) and n.op == "*"
+                      else ancien(n)}[cible]
+            with self.subTest(fausse=cible):
+                try:
+                    setattr(sd, cible, fausse)
+                    self.assertEqual(resoudre(P4A[nom])["statut"], "ne_conclut_pas")
+                finally:
+                    setattr(sd, cible, ancien)
+                self.assertEqual(resoudre(P4A[nom])["statut"], "resolu")
+
+
 class TestNonResolu(unittest.TestCase):
 
     def test_formes_pas_encore_traitees(self):
@@ -809,20 +1010,27 @@ class TestNonResolu(unittest.TestCase):
             g, d = expr.lire_membres(saisie)
             self.assertEqual(sd.resoudre_equation(g, d, "x")["statut"], "non_traite")
 
-    def test_structures_laissees_a_p4a(self):
+    def test_structures_sans_developper(self):
         """E1.3 : quand une structure s'applique sans développer (produit nul direct, facteur commun aux deux membres, Id. rem. sur
-        une forme structurée), P3 ne développe pas : « non_traite » jusqu'en P4a. Sinon, on développe (E2)."""
+        une forme structurée), on ne développe pas (`ramener` rend None) : P4a la résout, ou, s'il ne l'écrit pas, « non_traite »
+        (jamais développée). Sinon, on développe (E2)."""
         oui = ("4(x-2)^2=1", "(x+1)^2=16", "16-(3x+2)^2=0", "(x-1)(2-x)=(x-1)(x+3)", "(x-1)(2-x)(5-3x)=0", "x(x+1)=0",
                "3(x+1)^2=0", "(x+1)^2=(2x-3)^2", "(x-1)(x+2)=x-1", "-(x+1)^2+4=0", "(x+1)^2=5", "2(x-1)=3(1-x)(x+2)")
         non = ("(x+1)(x+3)=15", "(x+1)^2=-16", "(2x-1)^2-4x(x-1)=1", "x(x-4)=5", "(x+1)^2+(x-1)^2=10", "(x+1)^2=2x+14",
                "x^2+7x=18", "5-(x+1)(x+3)=0")
-        for saisie in oui + non:
+        for saisie in oui + non + tuple(STRUCTURES_NON_ECRITES):
             g, d, x, _ = lire(saisie)
             with self.subTest(saisie=saisie):
-                self.assertEqual(sd.forme_structuree(g, d, x), saisie in oui)
-                if saisie in oui:
-                    self.assertIsNone(sd.ramener(g, d, x))
-                    self.assertEqual(resoudre(saisie)["statut"], "non_traite")
+                self.assertEqual(sd.forme_structuree(g, d, x), saisie not in non)
+                if saisie in non:
+                    continue
+                self.assertIsNone(sd.ramener(g, d, x))
+                res = resoudre(saisie)
+                if saisie in STRUCTURES_NON_ECRITES:
+                    self.assertEqual((res["statut"], res["message"], res["etapes"]), ("non_traite", sd.MESSAGES["non_traite"], []))
+                else:
+                    self.assertEqual(res["statut"], "resolu")
+                    self.assertFalse(any(e["methode"] == "DEVELOPPER" for e in res["etapes"]))
 
     def test_hors_de_ce_que_e2_developpe(self):
         """E2 ne développe que nombre ou monôme × parenthèse, deux parenthèses, le carré d'un binôme ; le reste, et tout ce qui n'est
