@@ -25,7 +25,8 @@ def page_de(outil):
 
 
 # Entrées de page ajoutées au corpus des moteurs : une saisie invalide par outil (la carte d'erreur est un rendu à part entière).
-ERREURS = {"derivee-variations": ["ln("], "limites-asymptotes": ["ln("], "etude-complete": ["ln("]}
+ERREURS = {"derivee-variations": ["ln("], "limites-asymptotes": ["ln("], "etude-complete": ["ln("],
+           "equations-2e-degre": ["x^2+1"]}           # sans « = » : « Écrivez une équation, avec le signe « = ». » (x² + 1 = 0 donne S = ∅)
 
 # Corpus réduit (CI) : 3 entrées par outil, dont une erreur ; le corpus complet reste pour le local.
 REDUIT = {
@@ -36,6 +37,7 @@ REDUIT = {
     "factorisation": ["x^2+5x-14", "(a + b)^2 - 7(a + b)", "sqrt(x)"],
     "exponentielles-logarithmes": ["2^(x-1)=3^x", "log(5-x)=8", "x*2^x=8"],
     OUTIL_M: ["log(x)+log(x-1)=1", "4^x-2^x-6=0", "log(x-3)+log(1-x)=0"],
+    "equations-2e-degre": ["x^2-5x-36=0", "4x^2+2x=56", "x^2+1"],          # 2.10 a (S-P), 2.11 h (exemple cible), une erreur
 }
 
 

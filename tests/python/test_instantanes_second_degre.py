@@ -1,141 +1,59 @@
-"""Instantanés de la rédaction du 2e degré (chantier equations-2e-degre, dès P2b : decisions.md § 13.2 ; plan, P2b et P3).
+"""Instantanés de la rédaction du 2e degré (chantier equations-2e-degre, dès P2b : decisions.md § 13.2 ; plan, P2b à P5).
 
-Pour chaque équation de `corpus_second_degre.RESOLUES` (P2B ; P3 : énoncés à ramener ou à développer ; P4A : formes structurées ;
-P4B : degrés ≠ 2, identité) : la résolution de `second_degre.resoudre_equation` (statut, étapes : phase,
-méthode, cible ; S, ligne ≈, variantes) et ses blocs de moteur/sortie.py (`second_degre.blocs` : ce que la page affichera), plus la
-variante « formule » (E12) quand elle est proposée ; pour chaque entrée de `NON_RESOLUES` (P4b : bicarrée, hors du cours), le statut
-et le message. Chaque exercice du § 8 (`SECTION_8`) a son instantané. Comparés à une référence enregistrée **hors d'`instantanes/`** jusqu'en P5 :
-tests/python/donnees/equations-2e-degre/instantanes.json (dump_sorties.py et les contrôles d'`instantanes/` ne la voient pas
-encore : ce fichier contrôle donc lui-même le JSON strict et le vocabulaire).
-
-Une différence = un changement de rédaction. S'il est voulu, régénérer explicitement puis relire le diff git :
-
-    REGENERER=1 uv run -q --no-project --python 3.12 --with sympy==1.13.3 --with mpmath==1.3.0 --with pytest \\
-        python -m pytest tests/python/test_instantanes_second_degre.py
-"""
+Depuis P5, l'instantané est celui de l'outil : tests/python/instantanes/equations-2e-degre.json, figé par
+`test_instantanes.TestInstantanes.test_equations_2e_degre` (clé = la saisie ; `test_instantanes.instantane_equation` : la saisie lue
+par l'outil, la résolution de `second_degre.resoudre_equation` et ses blocs, la variante « formule » quand elle est proposée), lu
+par `dump_sorties.py` et contrôlé, comme les autres instantanés, par `test_json_strict` (JSON strict) et `test_vocabulaire` (C6,
+R12). Ce fichier garde ce que ces contrôles communs ne voient pas : chaque exercice du § 8 a son instantané, résolu ; chaque
+entrée du corpus (`RESOLUES`, `NON_RESOLUES`, `STRUCTURES_NON_ECRITES`) est figée avec son statut ; les blocs figés forment une
+sortie conforme au schéma commun."""
 import json
-import math
 import os
 import unittest
 
 import moteurs  # noqa: F401  (chemins des moteurs)
 
-import expr
-import second_degre as sd
 import sortie
-from aides_sortie import TUTOIEMENT
-from corpus_second_degre import NON_RESOLUES, RESOLUES, SECTION_8
-from test_instantanes import normaliser
-from test_vocabulaire import INTERDITS, chaines
+from corpus_second_degre import NON_RESOLUES, RESOLUES, SECTION_8, STRUCTURES_NON_ECRITES
+from test_instantanes import DOSSIER
 
-ICI = os.path.dirname(os.path.abspath(__file__))
-CHEMIN = os.path.join(ICI, "donnees", "equations-2e-degre", "instantanes.json")
-REGENERER = os.environ.get("REGENERER") == "1"
-
-
-def _decimaux(n):
-    if isinstance(n, expr.Nb):
-        return n.dec is not None
-    return any(_decimaux(getattr(n, s)) for s in getattr(n, "__slots__", ()) if isinstance(getattr(n, s), expr.Noeud))
-
-
-def resume(res):
-    """Ce qui est figé d'une résolution : tout ce que la page affichera (blocs), et la structure des étapes (§ 5)."""
-    r = {"statut": res["statut"], "message": res["message"], "variantes": res["variantes"]}
-    if res["statut"] == "resolu":
-        r.update(S=res["S"], approx=res["approx"], etapes=[[e["phase"], e["methode"], e["cible"]] for e in res["etapes"]],
-                 blocs=sd.blocs(res))
-    return r
-
-
-def instantane(saisie):
-    g, d = expr.lire_membres(saisie)
-    lettres = sorted(expr.variables(g) | expr.variables(d))
-    x, dec = lettres[0], _decimaux(g) or _decimaux(d)
-    res = sd.resoudre_equation(g, d, x, dec)
-    out = {"saisie": saisie, "cours": resume(res)}
-    if res["variantes"]:
-        out["formule"] = resume(sd.resoudre_equation(g, d, x, dec, sd.ORDRE_PAR_LA_FORMULE))
-    return normaliser(out)
-
-
-def calculer():
-    out = {nom: instantane(saisie) for nom, saisie in RESOLUES.items()}
-    out.update({nom: instantane(saisie) for nom, (saisie, _) in NON_RESOLUES.items()})
-    return out
-
-
-def refuse(constante):
-    raise AssertionError(f"constante JSON non standard : {constante}")
-
-
-def non_finis(o):
-    if isinstance(o, float):
-        return not math.isfinite(o)
-    if isinstance(o, dict):
-        return any(non_finis(v) for v in o.values())
-    if isinstance(o, list):
-        return any(non_finis(v) for v in o)
-    return False
+CHEMIN = os.path.join(DOSSIER, "equations-2e-degre.json")
 
 
 class TestInstantanesSecondDegre(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.actuel = calculer()
-
-    def test_instantanes(self):
-        if REGENERER:
-            os.makedirs(os.path.dirname(CHEMIN), exist_ok=True)
-            with open(CHEMIN, "w", encoding="utf-8") as f:
-                json.dump(self.actuel, f, ensure_ascii=False, indent=1, sort_keys=True, allow_nan=False)
-                f.write("\n")
-            self.skipTest(f"instantané régénéré : {CHEMIN}")
-        self.assertTrue(os.path.exists(CHEMIN), f"instantané absent : lancer avec REGENERER=1 ({CHEMIN})")
         with open(CHEMIN, encoding="utf-8") as f:
-            reference = json.load(f)
-        self.assertEqual(sorted(self.actuel), sorted(reference), "liste des entrées modifiée : régénérer avec REGENERER=1")
-        for nom in self.actuel:
-            with self.subTest(entree=nom):
-                self.assertEqual(self.actuel[nom], reference[nom])
+            cls.reference = json.load(f)
 
     def test_section_8_complete(self):
         """Chaque exercice du § 8 a un instantané (et il est résolu : l'oracle le contrôle dans test_redaction_second_degre)."""
-        with open(CHEMIN, encoding="utf-8") as f:
-            reference = json.load(f)
         for nom in SECTION_8:
             with self.subTest(nom=nom):
                 self.assertIn(nom, RESOLUES)
-                self.assertIn(nom, reference)
-                self.assertEqual(reference[nom]["cours"]["statut"], "resolu")
+                self.assertIn(RESOLUES[nom], self.reference)
+                self.assertEqual(self.reference[RESOLUES[nom]]["cours"]["statut"], "resolu")
         self.assertEqual(len(SECTION_8), 52)
 
-    def test_json_strict(self):
-        """Le fichier est du JSON strict (pas de NaN ni d'Infinity : la page appelle JSON.parse), comme test_json_strict."""
-        with open(CHEMIN, encoding="utf-8") as f:
-            data = json.loads(f.read(), parse_constant=refuse)
-        self.assertFalse(non_finis(data))
-        json.dumps(self.actuel, allow_nan=False)
+    def test_corpus_fige_avec_son_statut(self):
+        """Tout le corpus de la rédaction est figé (P2b à P4b), chaque entrée avec son statut : résolue, ou le message attendu."""
+        attendus = {s: "resolu" for s in RESOLUES.values()}
+        attendus.update({s: statut for s, statut in NON_RESOLUES.values()})
+        attendus.update({s: "forme_non_traitee" for s in STRUCTURES_NON_ECRITES})
+        for saisie, statut in attendus.items():
+            with self.subTest(saisie=saisie):
+                self.assertIn(saisie, self.reference)
+                self.assertEqual(self.reference[saisie]["cours"]["statut"], statut)
 
     def test_sorties_conformes(self):
         """Les blocs figés forment une sortie conforme au schéma commun (sortie.valider), dans une carte normale."""
-        for nom, v in self.actuel.items():
+        for saisie, v in self.reference.items():
             for cle in ("cours", "formule"):
                 if cle in v and v[cle]["statut"] == "resolu":
-                    with self.subTest(entree=nom, chemin=cle):
+                    with self.subTest(entree=saisie, chemin=cle):
                         s = sortie.sortie_ok("x", [sortie.carte("Résolution", v[cle]["blocs"])])
                         self.assertEqual(sortie.valider(s), [])
-
-    def test_vocabulaire(self):
-        """C6 et R12 (test_vocabulaire ne lit pas encore ce fichier) : aucun mot interdit, aucun tutoiement."""
-        with open(CHEMIN, encoding="utf-8") as f:
-            data = json.load(f)
-        for nom, v in data.items():
-            with self.subTest(entree=nom):
-                for t in chaines(v):
-                    self.assertIsNone(INTERDITS.search(t), t[:160])
-                    self.assertIsNone(TUTOIEMENT.search(t), t[:160])
 
 
 if __name__ == "__main__":

@@ -12,9 +12,10 @@
   dans un produit déjà nul, degré 1 une fois factorisée, identité).
 - `RESOLUES` : `P2B`, `P3`, `P4A` et `P4B`.
 - `NON_RESOLUES` : ce qui reçoit un message définitif (§ 4, § 13.5) : bicarrée (« pas_encore »), hors du cours (degré ≥ 3 que le
-  cours ne résout pas, et les formes que l'outil n'écrit pas : suivi.md, questions de P4b) ; avec le statut attendu.
-- `STRUCTURES_NON_ECRITES` : des formes où une structure s'applique (`forme_structuree`) mais que l'outil n'écrit pas : « hors du
-  cours », sans développer (suivi.md, questions de P4a et P4b).
+  cours ne résout pas, seulement quand c'est vrai : `second_degre.hors_du_cours`), forme non traitée par l'outil (les formes que
+  l'outil n'écrit pas et les degrés ≥ 3 douteux : P5, question 29 de suivi.md) ; avec le statut attendu.
+- `STRUCTURES_NON_ECRITES` : des formes où une structure s'applique (`forme_structuree`) mais que l'outil n'écrit pas : « forme non
+  traitée par l'outil » (P5), sans développer (suivi.md, questions de P4a, P4b et 29).
 - `SECTION_8` : les noms des exercices du § 8 (chacun a un instantané et le contrôle de l'oracle).
 - `A_VENIR` : les formes que P2b ne traitait pas, avec la partie qui les traite (P3 : ramener, développer ; P4a : formes
   structurées ; P4b : degrés ≠ 2, identité, bicarrée), leurs coefficients développés (ordre décroissant, pour l'oracle) et le S
@@ -229,23 +230,23 @@ NON_RESOLUES = {
     "bicarrée": ("x^4-5x^2+4=0", "pas_encore"),
     "bicarrée sans terme en x²": ("x^4+4=0", "pas_encore"),
     "bicarrée ramenée": ("x^4=5x^2-4", "pas_encore"),
-    "bicarrée après une ME (§ 13.4 à la lettre)": ("2x^4-10x^2+8=0", "hors_cours"),
+    "bicarrée après une ME (§ 13.4 à la lettre)": ("2x^4-10x^2+8=0", "forme_non_traitee"),
     "degré 3 sans ME ni Id. rem.": ("x^3=x+1", "hors_cours"),
     "Az 4.1 d développé": ("-3x^3+14x^2-21x+10=0", "hors_cours"),
-    "Id. rem., puis un facteur de degré 3": ("x^6-64=0", "hors_cours"),
-    "ME non entière en degré 3 (question 10)": ("0,5x^3-2x=0", "hors_cours"),
+    "Id. rem., puis un facteur de degré 3": ("x^6-64=0", "forme_non_traitee"),
+    "ME non entière en degré 3 (question 10)": ("0,5x^3-2x=0", "forme_non_traitee"),
     # ce que E2 ne développe pas (suivi.md, P3 et P4b)
-    "E2 nombre et deux parenthèses": ("2(x+1)(x+3)=5", "hors_cours"),
-    "E2 k(B)² et des termes en x": ("0,5(x+2)^2=x+3", "hors_cours"),
-    "E2 cube": ("(x+1)^3=8+x", "hors_cours"),
-    "E2 monôme écrit à l'envers": ("x*3+x^2=1", "hors_cours"),
-    "E2 carré d'un trinôme": ("(x^2+x+1)^2=x", "hors_cours"),
-    "E2 division par un nombre": ("x^2/2=1+x", "hors_cours"),
-    "Az 4.1 b": ("(3x-2)/6=(x+1)/4+5", "hors_cours"),
-    "Az 4.1 h": ("x^2+1-(10-x^2)/8=(6x-3)/4", "hors_cours"),
+    "E2 nombre et deux parenthèses": ("2(x+1)(x+3)=5", "forme_non_traitee"),
+    "E2 k(B)² et des termes en x": ("0,5(x+2)^2=x+3", "forme_non_traitee"),
+    "E2 cube": ("(x+1)^3=8+x", "forme_non_traitee"),
+    "E2 monôme écrit à l'envers": ("x*3+x^2=1", "forme_non_traitee"),
+    "E2 carré d'un trinôme": ("(x^2+x+1)^2=x", "forme_non_traitee"),
+    "E2 division par un nombre": ("x^2/2=1+x", "forme_non_traitee"),
+    "Az 4.1 b": ("(3x-2)/6=(x+1)/4+5", "forme_non_traitee"),
+    "Az 4.1 h": ("x^2+1-(10-x^2)/8=(6x-3)/4", "forme_non_traitee"),
 }
 
-# saisie : ce qui manque (une structure s'applique, l'outil ne l'écrit pas : « hors du cours », jamais développée)
+# saisie : ce qui manque (une structure s'applique, l'outil ne l'écrit pas : « forme_non_traitee », jamais développée)
 STRUCTURES_NON_ECRITES = {
     "2(x-1)=3(1-x)(x+2)": "facteurs seulement proportionnels (x − 1, 1 − x)",
     "(x-1)(x+2)=2x-2": "facteur commun écrit développé à droite (2x − 2)",

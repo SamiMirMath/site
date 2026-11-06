@@ -62,6 +62,7 @@ class TestDispositionDuClavier(unittest.TestCase):
         "ensemble-definition": FONCTION, "derivee-variations": FONCTION, "limites-asymptotes": FONCTION, "etude-complete": FONCTION,
         "factorisation": ["0", ",", "x"],
         "exponentielles-logarithmes": ["0", ",", "x", "=", "e", "ln(", "log(", "log_", "sqrt(", "%", "n", "t", "Q", "C", "V"],
+        "equations-2e-degre": ["0", ",", "x", "="],          # decisions.md § 13.3 (Q13) : pas de touche √ (point 7 du plan)
     }
 
     @staticmethod

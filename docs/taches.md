@@ -349,7 +349,7 @@ le simplexe existe déjà et fonctionne. Tâches **N01 à N26**, une par outil.
 | Tâche | Outil (#) | Niveau | Dépend | Remarque |
 |---|---|---|---|---|
 | N01 | Tangente en un point (6) | 2e Ms/Mr | prérequis, graphique | **Pilote** : petit, réutilise la dérivée ; premier outil entièrement natif, il valide T16 à T22 avant les gros chantiers |
-| N02 | Équations et inéquations (1) | 1re Ms/Mr | N01 | Crée l'analyse d'équations ; réutilise le tableau de signes et l'ensemble de définition |
+| N02 | Équations et inéquations (1) | 1re Ms/Mr | N01 | Crée l'analyse d'équations ; réutilise le tableau de signes et l'ensemble de définition. **Première pièce faite sans attendre N01** (chantier equations-2e-degre, D16, 05-06.11.2026) : la brique `moteur/second_degre.py` (équations polynomiales du 2e degré et ce qui s'y ramène, en Python pur : calcul exact, garde-fou, rédaction en étapes structurées pour le futur onglet « S'entraîner ») et l'outil « Équations du 2e degré » (`equations-2e-degre/` : lecture de la saisie `equations.py`, adaptateur `resoudre_eq.py`) ; au registre sans carte à l'accueil jusqu'à la relecture (P6). Restent : inéquations, systèmes, bicarrées, équations rationnelles et à racines |
 | N03 | Équations exponentielles et logarithmiques (5) | 2e Ms/Mr | N02 | ED d'abord, puis changement de variable comme en factorisation. **Version 3C faite avant, sous T33** (sans ED ; la version 2M reprendra le moteur de T33 et ajoutera l'ED) |
 | N04 | Tangente depuis un point extérieur (6, suite) | 2e Ms/Mr | N01, N02 | Étend N01 (équation en t) |
 | N05 | Optimisation (7) | 2e Ms/Mr | N01, N02 | **À valider** : forme de l'énoncé (fonction donnée sur un intervalle, ou contrainte à éliminer) |

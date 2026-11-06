@@ -30,6 +30,7 @@ de k√m/d, § 13.2).
                                       l'écrit (ecrire_enonce : l'énoncé, ses produits côte à côte comme le corrigé)
     resoudre_equation(g, d, x, …)     la résolution rédigée (§ 5) : {statut, etapes, solutions, S, approx, variantes, message}
     bicarree(P)                       ax⁴ + bx² + c sans ME ni Id. rem. : le message « bicarrée » (statut « pas_encore », § 4)
+    hors_du_cours(P, chemin)          « hors du cours » seulement s'il est vrai (P5) ; sinon « forme_non_traitee »
     appliquer(methode, P)             une méthode seule, rédigée (Etape), ou None si elle n'aboutit pas
     blocs(resolution)                 les blocs de moteur/sortie.py : la chaîne (bloc_rangees, membre de gauche), S encadré, la ligne ≈
     nb_exact, arbre_polynome,         l'écriture des valeurs exactes en arbres de moteur/expr.py (E11, E14 ; nombres.exact)
@@ -58,7 +59,7 @@ __all__ = ["Polynome", "Nombre", "HorsBornes", "vers_polynome", "mise_en_evidenc
            "verifier_solution", "approx_garantie", "ORDRE_DU_COURS", "ORDRE_PAR_LA_FORMULE", "METHODES",
            "resoudre_equation", "appliquer", "blocs", "nb_exact", "arbre_polynome", "arbre_nombre", "termes_developpes", "Produit",
            "SansLien", "rangees", "OPTIONS_CHAINE", "MESSAGES", "PHRASE_IDENTITE", "PHRASE_EGALITE_FAUSSE", "ramener",
-           "forme_structuree", "PHRASE_RAMENER", "ecrire_enonce", "Groupe", "Crochet", "Juxtaposition", "bicarree"]
+           "forme_structuree", "PHRASE_RAMENER", "ecrire_enonce", "Groupe", "Crochet", "Juxtaposition", "bicarree", "hors_du_cours"]
 
 ORDRE_DU_COURS = ("ME", "IDREM", "SP", "TATONNEMENT", "FORMULE")          # D28 : ordre fixe, même si a = 1
 ORDRE_PAR_LA_FORMULE = ("ME_PUISSANCE", "FORMULE")                       # E12 : seulement xʲ en évidence, puis la formule
@@ -718,6 +719,7 @@ MESSAGES = MappingProxyType({                                                   
     "ne_conclut_pas": "Le calcul ne permet pas de conclure avec certitude : cette équation n'est pas résolue ici.",
     "hors_bornes": "Cette équation dépasse ce que l'outil sait traiter.",
     "pas_encore": "Cette équation se ramène au 2e degré par un changement de variable : ce sera traité dans une prochaine version.",
+    "forme_non_traitee": "Cette forme d'équation n'est pas traitée par l'outil.",      # P5 (question 29) : vrai, là où « hors du cours » ne l'est pas
 })
 PHRASE_IDENTITE = "Cette égalité est vraie pour tout nombre réel."                  # celle d'Exp-log (§ 13.4), P4b
 PHRASE_EGALITE_FAUSSE = "Cette égalité est fausse : l'équation n'a aucune solution."    # celle d'Exp-log, P4b
@@ -1477,7 +1479,7 @@ def forme_structuree(gauche, droite, inconnue):
     monôme commun aux deux membres, à un facteur constant près (E3, 2.12 e) ; un carré de binôme k(B)² et des constantes de signe
     opposé ou nulles, ou deux carrés de signes opposés sans constante (Id. rem. sur une forme structurée, E5 : 2.9 k, l ; 2.12 h).
     P4a en écrit la résolution (`_rediger_structure`) ; une structure qu'il n'écrit pas (facteurs seulement proportionnels, √k
-    irrationnel, cube…) donne « hors_cours » : on ne la développe pas (P4b ; suivi.md)."""
+    irrationnel, cube…) donne « forme_non_traitee » : on ne la développe pas (P4b, P5 ; suivi.md)."""
     x = inconnue
     for a, b in ((gauche, droite), (droite, gauche)):
         if _est_zero(b) and _est_produit(a, x):
@@ -2093,7 +2095,7 @@ def _ecrire_identite_structuree(E, gauche, droite):
 def _rediger_structure(gauche, droite, x, dec):
     """P4a : la résolution d'une forme structurée (E1.3 : rien n'est développé), dans cet ordre : produit déjà nul (E13), facteur
     commun aux deux membres (E3), Id. rem. sur la forme structurée (E5) ; P4b : identité, facteur de degré 2 dans un produit, degré 1
-    une fois factorisée. None si l'outil ne l'écrit pas (« hors_cours »)."""
+    une fois factorisée. None si l'outil ne l'écrit pas (« forme_non_traitee », P5)."""
     P = vers_polynome(Op("-", gauche, droite), x)
     E = _Structuree(ecrire_enonce(gauche, droite, x), P, x, dec)
     if P.degre < 1:
@@ -2130,10 +2132,28 @@ def bicarree(P):
             and identite(P) is None)
 
 
+def hors_du_cours(P, ch):
+    """P5 (question 29 ; CLAUDE.md, rien de faux à l'écran) : « Cette équation ne se résout pas avec les méthodes du cours. » n'est
+    écrit que s'il est vrai : P (développé, `chemin` en « hors_cours ») est de degré ≥ 3, à coefficients entiers, n'est pas une
+    bicarrée, et aucune méthode du cours n'y aboutit (le chemin de D28 n'a fait au plus qu'une ME de constante : ni xʲ en évidence,
+    ni Id. rem.) ; le facteur qui reste n'est pas une bicarrée non plus. Sinon le cas est douteux (2x⁴ − 10x² + 8 : ME puis
+    bicarrée ; x⁶ − 64 : Id. rem. puis des facteurs de degré 3 ; 0,5x³ − 2x : ME refusée sur des coefficients non entiers) : le
+    message prudent « forme_non_traitee »."""
+    P = Polynome(P)
+    if P.degre < 3 or not P.entiers() or bicarree(P):
+        return False
+    reste = P
+    for e in ch["etapes"]:
+        if not (e["methode"] == "ME" and e["resultat"]["j"] == 0):
+            return False
+        reste = e["resultat"]["reste"]
+    return not bicarree(reste) and mise_en_evidence(reste) is None and identite(reste) is None
+
+
 def resoudre_equation(gauche, droite, inconnue, decimaux_enonce=False, methodes=ORDRE_DU_COURS):
     """La résolution rédigée de « gauche = droite » (arbres de moteur/expr.py) en l'inconnue (§ 5) :
 
-    {statut: "resolu" | "pas_encore" | "hors_cours" | "ne_conclut_pas" | "hors_bornes",
+    {statut: "resolu" | "pas_encore" | "hors_cours" | "forme_non_traitee" | "ne_conclut_pas" | "hors_bornes",
      etapes: [Etape], solutions: [Nombre] croissantes, S: TeX, approx: texte « soit … ≈ … » (TeX entre \\( et \\)) ou None,
      variantes: ["formule"] (E12 : le chemin du cours n'utilise pas la formule) ou [], message: texte pour un statut non résolu}
     Etape = {phase, methode, cible (TeX), parametres (calcul exact), lignes (rangées : triplets (lien, expr, prop) et `LigneTexte`),
@@ -2143,9 +2163,9 @@ def resoudre_equation(gauche, droite, inconnue, decimaux_enonce=False, methodes=
     facteur commun aux deux membres, Id. rem. sur la forme structurée ; chaque ligne relue, garde-fou exact), sans variante. P3 :
     sinon, l'équation est ramenée à « P = 0 » (E1, E2 : `ramener`, étapes de phase « ramener »). P4b : degré 2 et degré ≥ 3 par le
     chemin du cours (`chemin`, E13) ; degré 1 : on isole l'inconnue (D20) ; degré 0 : identité (S = ℝ) ou égalité fausse (S = ∅),
-    avec les phrases d'Exp-log. Degré ≥ 3 que le cours ne résout pas : « pas_encore » (bicarrée, `bicarree`) ou « hors_cours » ;
-    une forme que l'outil n'écrit pas (E2 hors de ce qu'il développe, structure non écrite) : « hors_cours » (option qui affiche le
-    moins, suivi.md). Le calcul est celui de `chemin` (garde-fou exact) ; une valeur écrite qui ne vérifie pas son calcul donne
+    avec les phrases d'Exp-log. Degré ≥ 3 que le cours ne résout pas : « pas_encore » (bicarrée, `bicarree`) ou « hors_cours »
+    (seulement s'il est vrai, `hors_du_cours`) ; une forme que l'outil n'écrit pas (E2 hors de ce qu'il développe, structure non
+    écrite) et un degré ≥ 3 douteux : « forme_non_traitee » (P5, question 29 de suivi.md). Le calcul est celui de `chemin` (garde-fou exact) ; une valeur écrite qui ne vérifie pas son calcul donne
     « ne_conclut_pas ». methodes=ORDRE_PAR_LA_FORMULE : la variante E12 (sans effet sur une forme structurée). Une autre lettre que
     l'inconnue : ValueError (la lecture de la saisie, equations-2e-degre/equations.py, la refuse avant)."""
     autres = (variables(gauche) | variables(droite)) - {inconnue}
@@ -2154,16 +2174,18 @@ def resoudre_equation(gauche, droite, inconnue, decimaux_enonce=False, methodes=
     try:
         if forme_structuree(gauche, droite, inconnue):
             res = _rediger_structure(gauche, droite, inconnue, decimaux_enonce)
-            return res if res is not None else _non_resolu("hors_cours")
+            return res if res is not None else _non_resolu("forme_non_traitee")
         prep = ramener(gauche, droite, inconnue, decimaux_enonce)
         if prep is None:
-            return _non_resolu("hors_cours")
+            return _non_resolu("forme_non_traitee")
         P = prep["P"]
         if P.degre <= 1:
             return _rediger_bas_degre(Eq(gauche, droite), P, prep, inconnue, decimaux_enonce)
         ch = chemin(P, methodes)
         if ch["statut"] == "hors_cours":
-            return _non_resolu("pas_encore" if bicarree(P) else "hors_cours")
+            if bicarree(P):
+                return _non_resolu("pas_encore")
+            return _non_resolu("hors_cours" if hors_du_cours(P, ch) else "forme_non_traitee")
         if ch["statut"] != "resolu":
             return _non_resolu(ch["statut"])
         res = _rediger(Eq(gauche, droite), P, ch, inconnue, decimaux_enonce, cours=methodes != ORDRE_PAR_LA_FORMULE, prep=prep)

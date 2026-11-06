@@ -54,7 +54,8 @@ class TestSourcesDesOutils(unittest.TestCase):
         """moteurs.py insère en tête de sys.path chaque dossier de dossiers_moteurs(), dans l'ordre : le dernier est le premier."""
         dossiers = outils_du_site.dossiers_moteurs()
         self.assertEqual(dossiers, ["ensemble-definition", "moteur", "derivee-variations", "limites-asymptotes", "etude-complete",
-                                    "factorisation", "exponentielles-logarithmes"])      # l'ordre d'avant F3 (butée explicite)
+                                    "factorisation", "exponentielles-logarithmes",
+                                    "equations-2e-degre"])      # l'ordre d'avant F3 (butée explicite), puis equations-2e-degre (P5)
         positions = [sys.path.index(os.path.join(RACINE, d)) for d in dossiers]
         self.assertEqual(positions, sorted(positions, reverse=True))
 

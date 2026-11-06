@@ -1193,9 +1193,11 @@ class TestDegres(OracleMixin, unittest.TestCase):
             g = sd.arbre_polynome(P, "x", i % 3 == 0)
             res = sd.resoudre_equation(g, Nb(0), "x", i % 3 == 0)
             with self.subTest(i=i, P=P):
-                self.assertIn(res["statut"], ("resolu", "hors_cours", "pas_encore"))
+                self.assertIn(res["statut"], ("resolu", "hors_cours", "pas_encore", "forme_non_traitee"))
                 if res["statut"] != "resolu":
                     self.assertEqual(res["statut"] == "pas_encore", sd.bicarree(P))
+                    if res["statut"] == "hors_cours":
+                        self.assertTrue(sd.hors_du_cours(P, sd.chemin(P)))
                     continue
                 self.assertSolutionsOracle(P, res["solutions"], f"généré {i}")
                 for x in res["solutions"]:
@@ -1234,11 +1236,11 @@ class TestNonResolu(unittest.TestCase):
         § 4 et du § 13.5 (bicarrée, hors du cours, ne conclut pas, bornes), sans étape ni S ; toutes les parties d'A_VENIR sont
         faites. Une autre lettre que l'inconnue (la saisie la refuse avant, P3) : ValueError."""
         self.assertNotIn("non_traite", sd.MESSAGES)
-        self.assertEqual(set(sd.MESSAGES), {"hors_cours", "ne_conclut_pas", "hors_bornes", "pas_encore"})
+        self.assertEqual(set(sd.MESSAGES), {"hors_cours", "ne_conclut_pas", "hors_bornes", "pas_encore", "forme_non_traitee"})
         self.assertEqual(sd.MESSAGES["pas_encore"], MESSAGE_BICARREE)
         self.assertEqual({partie for _, partie, _, _, _ in A_VENIR.values()} - set(PARTIES_FAITES), set())
         saisies = [(nom, s_, "resolu") for nom, s_ in RESOLUES.items()] + [(nom, s_, st) for nom, (s_, st) in NON_RESOLUES.items()]
-        saisies += [(s_, s_, "hors_cours") for s_ in STRUCTURES_NON_ECRITES]
+        saisies += [(s_, s_, "forme_non_traitee") for s_ in STRUCTURES_NON_ECRITES]
         for nom, saisie, statut in saisies:
             with self.subTest(nom=nom):
                 res = resoudre(saisie)
@@ -1271,28 +1273,57 @@ class TestNonResolu(unittest.TestCase):
                 self.assertIsNone(sd.ramener(g, d, x))
                 res = resoudre(saisie)
                 if saisie in STRUCTURES_NON_ECRITES:
-                    self.assertEqual((res["statut"], res["message"], res["etapes"]), ("hors_cours", sd.MESSAGES["hors_cours"], []))
+                    self.assertEqual((res["statut"], res["message"], res["etapes"]),
+                                     ("forme_non_traitee", sd.MESSAGES["forme_non_traitee"], []))
                 else:
                     self.assertEqual(res["statut"], "resolu")
                     self.assertFalse(any(e["methode"] == "DEVELOPPER" for e in res["etapes"]))
 
     def test_hors_de_ce_que_e2_developpe(self):
-        """E2 ne développe que nombre ou monôme × parenthèse, deux parenthèses, le carré d'un binôme ; le reste reçoit « hors du
-        cours », sans étape (option qui affiche le moins, suivi.md, P4b) ; un degré 3 sans ME ni Id. rem. aussi. Ce qui n'est pas de
-        degré 2 une fois ramené est résolu (P4b) : degré 1 (isoler), identité."""
+        """E2 ne développe que nombre ou monôme × parenthèse, deux parenthèses, le carré d'un binôme ; le reste reçoit « Cette forme
+        d'équation n'est pas traitée par l'outil. », sans étape (P5, question 29 de suivi.md : « hors du cours » y serait faux) ; un
+        degré 3 sans ME ni Id. rem. reçoit « hors du cours » (vrai). Ce qui n'est pas de degré 2 une fois ramené est résolu (P4b) :
+        degré 1 (isoler), identité."""
         for saisie in ("2(x+1)(x+3)=5", "0,5(x+2)^2=x+3", "(x+1)^3=8+x", "x*3+x^2=1", "(x^2+x+1)^2=x", "x^2/2=1+x", "x^3=x+1"):
             with self.subTest(saisie=saisie):
                 g, d, x, _ = lire(saisie)
                 if saisie != "x^3=x+1":
                     self.assertIsNone(sd.ramener(g, d, x))
                 res = resoudre(saisie)
-                self.assertEqual((res["statut"], res["etapes"]), ("hors_cours", []))
+                self.assertEqual((res["statut"], res["etapes"]), ("hors_cours" if saisie == "x^3=x+1" else "forme_non_traitee", []))
         for saisie, S in (("(x+1)(x+3)=x^2", r"S = \{-\frac{3}{4}\}"), ("x^2+1=x^2+x", r"S = \{1\}"),
                           ("(x+2)(x-2)=x^2-4", r"S = \mathbb{R}")):
             with self.subTest(saisie=saisie):
                 res = resoudre(saisie)
                 self.assertEqual((res["statut"], res["S"]), ("resolu", S))
                 self.assertEqual(res["etapes"][0]["methode"], "DEVELOPPER" if "(" in saisie else "RAMENER")
+
+    def test_hors_du_cours_seulement_si_vrai(self):
+        """P5 (question 29 ; CLAUDE.md, rien de faux à l'écran) : « hors du cours » seulement pour un polynôme développé de degré ≥ 3,
+        à coefficients entiers, qui n'est pas une bicarrée et sur lequel le chemin du cours (D28) n'a fait au plus qu'une ME de
+        constante, le reste n'étant pas une bicarrée ; tout cas douteux (ME de xʲ, Id. rem. puis un facteur de degré ≥ 3, ME puis
+        bicarrée, coefficients non entiers) et toute forme que l'outil n'écrit pas : « forme_non_traitee »."""
+        for P, attendu in (([-1, -1, 0, 1], True), ([2, 2, 0, 2], True), ([10, -21, 14, -3], True), ([8, 0, -10, 0, 2], False),
+                           ([-64, 0, 0, 0, 0, 0, 1], False), ([0, -2, 0, F(1, 2)], False), ([4, 0, -5, 0, 1], False),
+                           ([-4, 0, 5, 0, -1], False), ([0, 4, 0, -5, 0, 1], False), ([1, 1, 0, 0, 1], True), ([0, 1, 0, 0, 1], False)):
+            with self.subTest(P=P):
+                ch = sd.chemin(sd.Polynome(P))
+                self.assertEqual(ch["statut"], "hors_cours")
+                self.assertEqual(sd.hors_du_cours(P, ch), attendu)
+                g = sd.arbre_polynome(sd.Polynome(P), "x", False)
+                self.assertEqual(sd.resoudre_equation(g, Nb(0), "x")["statut"],
+                                 "pas_encore" if sd.bicarree(P) else "hors_cours" if attendu else "forme_non_traitee")
+        for nom, (saisie, statut) in NON_RESOLUES.items():
+            with self.subTest(nom=nom):
+                res = resoudre(saisie)
+                self.assertEqual(res["message"], sd.MESSAGES[statut])
+                if statut == "hors_cours":
+                    P = polynome(saisie)
+                    if P[-1] < 0:
+                        P = sd.Polynome([-c for c in P])
+                    self.assertTrue(P.degre >= 3 and P.entiers() and not sd.bicarree(P))
+                    self.assertTrue(all(e["methode"] == "ME" and e["resultat"]["j"] == 0 for e in sd.chemin(P)["etapes"]))
+        self.assertEqual(sd.MESSAGES["forme_non_traitee"], "Cette forme d'équation n'est pas traitée par l'outil.")
 
     def test_bornes(self):
         """§ 13.5 : un radicande trop grand pour la simplification (question 9 de suivi.md) donne le message des bornes."""

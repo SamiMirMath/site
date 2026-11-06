@@ -18,13 +18,16 @@ from cas_el import BATTERIE_M_VAR, entrees_el, entrees_el_m  # noqa: E402
 
 RACINE = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 CALCUL = {"ensemble-definition": "ln(x^2-4x)/(x-5)", "derivee-variations": "ln(x)/x", "limites-asymptotes": "(x^2-1)/(x-3)",
-          "etude-complete": "x^2*e^(-x)", "factorisation": "x^2+5x-14", "exponentielles-logarithmes": "2^(x-1)=3^x"}
+          "etude-complete": "x^2*e^(-x)", "factorisation": "x^2+5x-14", "exponentielles-logarithmes": "2^(x-1)=3^x",
+          "equations-2e-degre": "2x^2-4x-4=0"}      # Javet 2.17 c : la formule est sur le chemin du cours, donc pas de variante (test_t33)
 
 CHOISIS = [o for o in os.environ.get("OUTILS", "").split(",") if o] or OUTILS
 EXEMPLE = {"ensemble-definition": "ln(x-1)", "derivee-variations": "x^2", "limites-asymptotes": "1/x",
-           "etude-complete": "x^2", "factorisation": "x^2-1", "exponentielles-logarithmes": "3^(x+1)=27"}
+           "etude-complete": "x^2", "factorisation": "x^2-1", "exponentielles-logarithmes": "3^(x+1)=27",
+           "equations-2e-degre": "6x^2-6=0"}        # 2.9 a
 INVALIDE = {"ensemble-definition": "ln(", "derivee-variations": "ln(", "limites-asymptotes": "ln(",
-            "etude-complete": "ln(", "factorisation": "sqrt(x)", "exponentielles-logarithmes": "x<3"}
+            "etude-complete": "ln(", "factorisation": "sqrt(x)", "exponentielles-logarithmes": "x<3",
+            "equations-2e-degre": "x+y=1"}
 ANALYSE = ["ensemble-definition", "derivee-variations", "limites-asymptotes", "etude-complete"]
 
 

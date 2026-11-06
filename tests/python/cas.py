@@ -1,10 +1,12 @@
 """Entrées de test partagées : exemples et exercices lus dans les pages (pour suivre
 automatiquement toute modification des listes), cas limites des spécifications,
-batterie de factorisation (Algèbre 1M 2.11-2.16, Notions élémentaires d'algèbre §2.2)."""
+batterie de factorisation (Algèbre 1M 2.11-2.16, Notions élémentaires d'algèbre §2.2),
+équations du 2e degré (corpus de tests/python/corpus_second_degre.py)."""
 import os
 import re
 
 from moteurs import RACINE
+from corpus_second_degre import NON_RESOLUES, RESOLUES, SECTION_8, STRUCTURES_NON_ECRITES
 
 NIVEAUX = {"facile", "moyen", "difficile", "tresDifficile"}
 
@@ -41,7 +43,14 @@ CAS_LIMITES = {
         "e^((x^2+x-2)/(6x-12))", "e^(2/(x^2-4))",
         "1/(x^2-3x+2)",                       # R2 : dénominateur résolu par Somme-Produit (Q11), extremum en x = 3/2 calculé (Q41)
     ],
+    # equations-2e-degre (P5) : les exercices du § 8 de decisions.md, sous leur forme d'énoncé, et les cas limites du § 6 (corpus des
+    # tests de pages ; le corpus complet de la rédaction est entrees_equations())
+    "equations-2e-degre": [RESOLUES[nom] for nom in SECTION_8] + [s for nom, s in RESOLUES.items() if nom.startswith("§ 6 ")],
 }
+
+# equations-2e-degre : une saisie par message de la lecture (decisions.md, § 4 et § 13.5), dans l'ordre de priorité
+SAISIES_INVALIDES_EQ = ["", "x^2+", "x^2+1", "x<3", "2=2", "x+y=1", "2^x=8", "1/x=2", "sqrt(x)=2", "sqrt(2)x=1", "x^2=1/0",
+                        "x^9=1", "x^2+123456789012x=1"]
 
 FACTORISATION = {
     "Algèbre 1M 2.11": ["xy + y", "ma + ap", "a^3x^2 - a^2x^3", "3a^3b^4 - 12a^2b^3", "y(b - a) - x(b - a)",
@@ -103,3 +112,10 @@ def entrees_factorisation():
                 vues.add(e)
                 out.append(e)
     return out
+
+
+def entrees_equations():
+    """Équations du 2e degré (P5) : les exemples de la page, le § 8 et le § 6 (CAS_LIMITES), toute la rédaction du corpus (résolues,
+    non résolues, structures que l'outil n'écrit pas) et une saisie par message de la lecture ; sans doublon, dans cet ordre."""
+    return list(dict.fromkeys(entrees_page("equations-2e-degre") + CAS_LIMITES["equations-2e-degre"] + list(RESOLUES.values())
+                              + [s for s, _ in NON_RESOLUES.values()] + list(STRUCTURES_NON_ECRITES) + SAISIES_INVALIDES_EQ))

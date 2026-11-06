@@ -44,6 +44,13 @@
                    "moteur/sortie.py", "ensemble-definition/resoudre_ed.py", "moteur/polynomes.py", "exponentielles-logarithmes/exp_log.py",
                    "exponentielles-logarithmes/exp_log_m.py", "exponentielles-logarithmes/resoudre_el.py"],
       "fonctions": ["resoudre", "apercu", "exercice"]
+    },
+    "equations-2e-degre": {
+      "module": "resoudre_eq",
+      "fichiers": ["ensemble-definition/ensemble_def.py", "moteur/noyau.py", "moteur/nombres.py", "moteur/expr.py", "moteur/polynomes.py",
+                   "moteur/chaine.py", "moteur/sortie.py", "moteur/second_degre.py", "equations-2e-degre/equations.py",
+                   "equations-2e-degre/resoudre_eq.py"],
+      "fonctions": ["resoudre", "apercu"]
     }
   }
 }

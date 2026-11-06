@@ -56,9 +56,10 @@ class TestAccueil(unittest.TestCase):
 
     def test_le_registre_donne_16_liens(self):
         """Année I : 3 (C, Ms, Mr) ; année II : 4 (simplexe en C et Mr, Exponentielles et logarithmes en Ms et Mr) ; année III : 9 (4 outils × Ms, Mr + 1 en C)
-        = 16 cartes pour 7 outils distincts. Butée explicite, gardée telle quelle par le chantier fondations (F3, R1) alors que les autres
+        = 16 cartes pour 8 outils distincts (Équations du 2e degré, au registre sans filière ni carte jusqu'à la relecture : chantier
+        equations-2e-degre, decisions.md § 13.2, Q1). Butée explicite, gardée telle quelle par le chantier fondations (F3, R1) alors que les autres
         listes d'outils dérivent du registre : un nouvel outil met ces deux nombres à jour exprès."""
-        self.assertEqual((LIENS, len(REGISTRE["outils"])), (16, 7))
+        self.assertEqual((LIENS, len(REGISTRE["outils"])), (16, 8))
 
     def test_acc03_sans_javascript_tous_les_liens_sont_visibles(self):
         page = self.ouvrir()
@@ -72,7 +73,7 @@ class TestAccueil(unittest.TestCase):
         self.assertEqual(page.evaluer(ANNEES_VISIBLES), [True, True, True])
         hrefs = page.evaluer("[...document.querySelectorAll('.tool a')].map(a => a.getAttribute('href'))")
         attendus = {o["chemin"] + q for o in REGISTRE["outils"] for q in [""] + list(o.get("parametres", {}).values())}
-        self.assertEqual({h.split("?")[0] for h in hrefs}, {o["chemin"] for o in REGISTRE["outils"]})
+        self.assertEqual({h.split("?")[0] for h in hrefs}, {o["chemin"] for o in REGISTRE["outils"] if o["filieres"]})   # un outil sans filière n'a pas de carte (Q1)
         self.assertLessEqual(set(hrefs), attendus)                                    # chaque lien est un chemin du registre, avec la requête de sa filière s'il y en a une
         page.appel("Emulation.setScriptExecutionDisabled", value=False)
 

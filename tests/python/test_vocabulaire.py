@@ -14,7 +14,8 @@ import etude_complete as ec
 import factorisation as fa
 import limites_asymptotes as la
 import resoudre_el
-from cas import CAS_LIMITES, entrees_page, entrees_factorisation
+import resoudre_eq
+from cas import CAS_LIMITES, entrees_equations, entrees_page, entrees_factorisation
 from cas_el import entrees_el
 from aides_sortie import TUTOIEMENT, chaines_litterales
 
@@ -58,7 +59,8 @@ class TestVocabulaireEleve(unittest.TestCase):
     # méthodes vérifiées par test_outils_du_site.py)
     ANALYSES = {"ensemble-definition": ed.analyser, "derivee-variations": dv.etudier, "limites-asymptotes": la.etudier,
                 "etude-complete": ec.etudier}
-    METHODES = {"factorisation": "test_factorisation", "exponentielles-logarithmes": "test_exponentielles_logarithmes"}
+    METHODES = {"factorisation": "test_factorisation", "exponentielles-logarithmes": "test_exponentielles_logarithmes",
+                "equations-2e-degre": "test_equations_2e_degre"}
 
     def test_cas_limites_et_exemples_de_racines(self):
         for outil, fn in self.ANALYSES.items():
@@ -77,6 +79,14 @@ class TestVocabulaireEleve(unittest.TestCase):
             with self.subTest(entree=entree):
                 self.verifie(resoudre_el.resoudre(entree), f"exponentielles-logarithmes {entree}")
                 self.verifie(resoudre_el.apercu_json(entree), f"aperçu {entree}")
+
+    def test_equations_2e_degre(self):
+        """Équations du 2e degré (P5) : la sortie élève de l'adaptateur (cartes, variantes, erreurs) et l'aperçu ne contiennent aucun
+        mot interdit ni tutoiement."""
+        for entree in entrees_equations():
+            with self.subTest(entree=entree):
+                self.verifie(resoudre_eq.resoudre(entree), f"equations-2e-degre {entree}")
+                self.verifie(resoudre_eq.apercu_json(entree), f"aperçu {entree}")
 
     def test_erreurs_generiques_et_detail_a_part(self):
         # une erreur de condition : message générique, détail technique dans un champ à part (console)

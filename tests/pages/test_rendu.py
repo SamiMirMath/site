@@ -66,6 +66,9 @@ class TestRendu(unittest.TestCase):
     def test_exponentielles_logarithmes_filiere_m(self):
         self.verifier_outil(OUTIL_M)
 
+    def test_equations_2e_degre(self):
+        self.verifier_outil("equations-2e-degre")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Équations du 2e degré</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../commun/style.css">
+<link rel="stylesheet" href="../commun/composants.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script data-goatcounter="https://samimir.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <h1>Équations du 2<sup>e</sup> degré</h1>
+  <p class="lead">Écrivez une équation du 2<sup>e</sup> degré (inconnue <code>x</code> ou une autre lettre) : elle est résolue avec les méthodes du cours, dans leur ordre, étape par étape.</p>
+
+  <div class="narrow no-print">
+    <section class="card">
+      <div class="saisie">
+        <label for="entree">Résoudre :</label>
+        <input id="entree" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="x^2-5x-36=0">
+      </div>
+      <div class="apercu" id="apercu" aria-live="polite"><span class="muted">Aperçu de l'équation</span></div>
+      <div class="clavier" id="clavier">
+        <button data-t="7">7</button><button data-t="8">8</button><button data-t="9">9</button><button aria-label="parenthèse ouvrante" data-t="(">(</button><button aria-label="parenthèse fermante" data-t=")">)</button><button aria-label="effacer le dernier caractère" data-k="back">⌫</button>
+        <button data-t="4">4</button><button data-t="5">5</button><button data-t="6">6</button><button aria-label="fois" data-t="*">×</button><button aria-label="divisé par" data-t="/">÷</button><button aria-label="tout effacer" data-k="clear">C</button>
+        <button data-t="1">1</button><button data-t="2">2</button><button data-t="3">3</button><button aria-label="plus" data-t="+">+</button><button aria-label="moins" data-t="-">−</button><button aria-label="puissance" data-t="^">^</button>
+        <button data-t="0">0</button><button aria-label="virgule" data-t=",">,</button><button data-t="x">x</button><button aria-label="égal" data-t="=">=</button>
+      </div>
+      <button class="primary" id="calculer" disabled>Résoudre ▶</button>
+      <div class="etat" id="etat" aria-live="polite">Chargement de Python…</div>
+      <div class="hint" style="margin-top:8px">Saisie : <code>x^2-5x-36=0</code>, <code>4x^2+2x=56</code>, <code>(x+1)(x+3)=15</code>, <code>4(x-2)^2=1</code>. Autre lettre que x acceptée (<code>t^2+20t+100=0</code>). Fractions et décimaux : <code>t^2+t+1/4=0</code>, <code>0,5x^2-2=0</code>.</div>
+      <div class="exemples" id="exemples"></div>
+    </section>
+
+    <details class="card">
+      <summary>Rappel de la méthode</summary>
+      <p class="hint" style="margin:.4em 0 0">Pour factoriser, on procède dans l'ordre :</p>
+      <ol>
+        <li><b>Mise en évidence</b> (ME).</li>
+        <li><b>Identité remarquable</b> (Id. rem.) : \(A^2-B^2=(A+B)(A-B)\), \(A^2+2AB+B^2=(A+B)^2\), \(A^2-2AB+B^2=(A-B)^2\).</li>
+        <li><b>Somme-Produit</b> (S-P), si le trinôme est unitaire (\(a=1\)) : \(x^2+bx+c=(x+p)(x+q)\), où \(p\cdot q=c\) et \(p+q=b\).</li>
+        <li><b>Tâtonnement</b>, si \(a\neq1\) : on cherche une solution entière \(r\) parmi les diviseurs de \(c\) ; alors \(ax^2+bx+c=(x-r)(ax+\triangle)\), avec \((-r)\cdot\triangle=c\).</li>
+        <li><b>La formule</b> : \(\Delta=b^2-4ac\) ; si \(\Delta>0\), \(x_{1,2}=\dfrac{-b\pm\sqrt{\Delta}}{2a}\) ; si \(\Delta=0\), \(x=\dfrac{-b}{2a}\) ; si \(\Delta<0\), \(S=\varnothing\).</li>
+      </ol>
+      <p class="hint" style="margin:.6em 0 0">Puis : un produit est nul si et seulement si l'un des facteurs est nul.</p>
+    </details>
+  </div>
+
+  <section id="resultat" hidden>
+    <div class="barre no-print">
+      <span class="muted" id="progression"></span>
+      <span><button id="suivant" class="primary">Étape suivante ▶</button> <button id="tout">Tout afficher</button> <button id="pdf">Télécharger le corrigé (PDF) ⬇</button></span>
+    </div>
+    <div id="cartes"></div>
+  </section>
+</div>
+
+<script type="module">
+import { monterOutil } from "../commun/outil.js";
+const EXEMPLES=["6x^2-6=0","t^2+20t+100=0","x^2-5=0","x^2-5x-36=0","-y^2+10y-9=0","4x^2+2x=56","6x^2+5x+1=0","x^3-x=0","(x-1)(2-x)=(x-1)(x+3)","2x^2-4x-4=0"];
+monterOutil({
+  outil:"equations-2e-degre",
+  titrePdf:"Corrige-equations-2e-degre",
+  prefixe:"",
+  exemples:EXEMPLES
+});
+</script>
+</body>
+</html>

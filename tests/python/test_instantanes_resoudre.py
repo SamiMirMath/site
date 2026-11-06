@@ -11,7 +11,7 @@ import unittest
 
 import moteurs  # noqa: F401  (chemins des moteurs)
 from test_instantanes import normaliser, resumer_segments, REGENERER
-from cas import CAS_LIMITES, entrees_factorisation, entrees_page
+from cas import CAS_LIMITES, entrees_equations, entrees_factorisation, entrees_page
 from cas_el import entrees_el, entrees_el_m
 import resoudre_fa
 import resoudre_ed
@@ -19,6 +19,7 @@ import resoudre_dv
 import resoudre_la
 import resoudre_ec
 import resoudre_el
+import resoudre_eq
 
 DOSSIER = os.path.join(os.path.dirname(__file__), "instantanes", "resoudre")
 
@@ -30,6 +31,7 @@ OUTILS = {
     "factorisation": (resoudre_fa.resoudre, entrees_factorisation),
     "exponentielles-logarithmes": (resoudre_el.resoudre, entrees_el),
     "exponentielles-logarithmes-M": (lambda entree: resoudre_el.resoudre(entree, "M"), entrees_el_m),
+    "equations-2e-degre": (resoudre_eq.resoudre, entrees_equations),
 }
 
 
@@ -82,6 +84,9 @@ class TestInstantanesResoudre(unittest.TestCase):
 
     def test_exponentielles_logarithmes_filiere_m(self):
         self.verifier_outil("exponentielles-logarithmes-M")
+
+    def test_equations_2e_degre(self):
+        self.verifier_outil("equations-2e-degre")
 
 
 if __name__ == "__main__":

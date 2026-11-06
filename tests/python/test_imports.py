@@ -87,6 +87,18 @@ ARETES = {
     "resoudre_el -> sortie": "adaptateur : brique de sortie",
     "resoudre_el -> exp_log": "adaptateur : un moteur de son outil",
     "resoudre_el -> exp_log_m": "adaptateur : un moteur de son outil (filière M)",
+    # Équations du 2e degré (equations-2e-degre, P3 pour equations.py, déclarées en P5 quand l'outil entre au manifeste)
+    "equations -> expr": "moteur : la saisie « membre = membre » est lue par la brique des expressions (Lexique, lire_membres, "
+                         "variables, a_des_decimaux)",
+    "equations -> noyau": "moteur : la base par sa façade (ErreurSaisie, l'erreur de saisie commune)",
+    "equations -> polynomes": "moteur : constantes exactes de l'arbre (const : exposant, dénominateur nul ; P3, écart au plan noté)",
+    "equations -> second_degre": "moteur : la brique du 2e degré borne la saisie (vers_polynome, HorsBornes, § 13.5)",
+    "resoudre_eq -> equations": "adaptateur : le moteur de son outil (lecture et analyse de la saisie)",
+    "resoudre_eq -> second_degre": "adaptateur : la brique du 2e degré (resoudre_equation, blocs, ecrire_enonce)",
+    "resoudre_eq -> sortie": "adaptateur : brique de sortie",
+    "resoudre_eq -> chaine": "adaptateur : le TeX de l'énoncé (tex_element de l'équation écrite par ecrire_enonce)",
+    "resoudre_eq -> expr": "adaptateur : l'aperçu syntaxique pendant la frappe (lire_membres avec le lexique de l'outil, tex)",
+    "resoudre_eq -> noyau": "adaptateur : la base par sa façade (ErreurSaisie, json_strict)",
 }
 
 # Exceptions nommées : arêtes qui violent les couches (motif « couches ») ou qui sont sur un cycle (motif « cycle ») ; chaque motif

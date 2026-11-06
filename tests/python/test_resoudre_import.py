@@ -13,7 +13,7 @@ from moteurs import RACINE
 # fichiers et module de chaque outil : ceux du manifeste (outils_du_site, F3 ; plus de copie de ses listes de fichiers) ; ici, seulement
 # l'exemple résolu par outil (clés vérifiées par test_outils_du_site.py : chaque outil du manifeste)
 EXEMPLE = {"ensemble-definition": "ln(x-1)", "derivee-variations": "x^2", "limites-asymptotes": "1/x", "etude-complete": "1/x",
-           "factorisation": "x^2-1", "exponentielles-logarithmes": "3^(x+1)=27"}
+           "factorisation": "x^2-1", "exponentielles-logarithmes": "3^(x+1)=27", "equations-2e-degre": "x^2-5x-36=0"}
 OUTILS = {outil: (o["fichiers"], o["module"], EXEMPLE.get(outil)) for outil, o in outils_du_site.manifeste().items()}
 FILIERE_M = {"exponentielles-logarithmes": "log_x(256)=4"}      # outils qui ont une filière M : même import à plat, `resoudre(exemple, "M")`
 

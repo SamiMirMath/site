@@ -1139,6 +1139,156 @@ d'Az 4.1 g garde le « · » d'expr.tex (forme développée, P3 ; question 26 : 
 
 ## P5 — l'outil
 
+### Plan
+
+**0. Message vrai pour ce que l'outil n'écrit pas** (question 29, décision du chef ; CLAUDE.md « rien de faux » prime) : nouveau
+statut `forme_non_traitee`, message « Cette forme d'équation n'est pas traitée par l'outil. » (un statut de plus, le reste ne change
+pas : ce qui change le moins). Il remplace « hors du cours » pour : E2 hors de ce qu'il développe (`ramener` → None), structure non
+écrite (`_rediger_structure` → None), et tout degré ≥ 3 **douteux**. « Hors du cours » n'est gardé que s'il est vrai : polynôme
+développé de degré ≥ 3, coefficients entiers, pas une bicarrée, et aucune méthode du cours n'aboutit (le chemin de D28 n'a fait
+qu'une ME de constante, rien sur xʲ ni d'Id. rem.) et le facteur qui reste n'est pas une bicarrée. Instantanés concernés : liste
+avant / après ci-dessous et sous « À relire ». Question 29 laissée ouverte.
+
+**1. Liste à cocher du plan (section P5)** :
+
+- [x] `equations-2e-degre/index.html` (monterOutil ; `const EXEMPLES=[…]` des 10 entrées du § 13.3 ; GoatCounter ; `style.css` puis
+  `composants.css` ; aria-live ; `<details class="card">` « Rappel de la méthode » fermé (E15) ; clavier, dernière rangée `0 , x =` ;
+  aucun `exercicePython`)
+- [x] `equations-2e-degre/resoudre_eq.py` (`resoudre`, `resoudre_json`, `apercu_json` ; `apercu_json('x+1')` ok ; variante E12 par
+  `sortie_ok_variantes` ; l'énoncé par `second_degre.ecrire_enonce`, question 26) ; une carte « Résolution » (blocs de
+  `second_degre.blocs` : la chaîne, S encadré, la ligne ≈)
+- [x] `moteur/manifeste.json` (fichiers du plan ; fonctions `resoudre`, `apercu`)
+- [x] `commun/registre.json` (option A, `"filieres": {}`) ; `tests/pages/test_accueil.py` butée (16, 7) → (16, 8) (et ACC-03 : seuls
+  les outils à carte ont un lien)
+- [x] `test_imports.py` ARETES (`equations -> expr / noyau / second_degre / polynomes`, `resoudre_eq -> equations / sortie /
+  second_degre / chaine`…, chacune avec sa raison) ; `test_noyau.py` MOTEURS ; `test_outils_du_site.py` butée de sys.path
+- [x] instantanés : le JSON provisoire déplacé dans `tests/python/instantanes/equations-2e-degre.json` (clé = saisie ; entrée `OUTILS`
+  et méthode de `test_instantanes.py`), `test_instantanes_resoudre.py` + `instantanes/resoudre/equations-2e-degre.json`
+- [x] `cas.py` : `CAS_LIMITES["equations-2e-degre"]` (§ 8 et § 6) et `entrees_equations()` (corpus complet de la rédaction et
+  saisies invalides) ; `test_vocabulaire.METHODES` ; `test_json_strict` ; `test_resoudre_import.EXEMPLE` = `x^2-5x-36=0` ;
+  `test_source_unique.TestDispositionDuClavier.PAGES`
+- [x] pages : `rendu.py` REDUIT (2.10 a, 2.11 h, une saisie invalide) et ERREURS ; `test_comportement.py` (CALCUL = Javet 2.17 c,
+  EXEMPLE = 2.9 a, INVALIDE) ; `test_rendu.py::test_equations_2e_degre` ; `references/equations-2e-degre.json` par
+  `capturer_references.py`
+- [x] `docs/architecture.md` § 1, § 4, § 5 ; `docs/taches.md` (D16)
+- [x] vérifié sans rien écrire : `test_largeurs` (méthode générée, `CONNUS` vide), `test_style_commun`, `test_tableaux_css`, `MIGREES`,
+  `TestVouvoiement`, `test_memo_garde`, `captures.py`, `lancer.py`
+
+**2.** Le dossier provisoire `tests/python/donnees/equations-2e-degre/` retiré ; `test_instantanes_second_degre.py` garde ce qui
+n'est pas couvert ailleurs (§ 8 complet, sorties conformes), sur le nouveau fichier ; justifications dans suivi.md.
+
+**3.** Captures à 390 px (clair ; sombre pour 2.11 h) de 2.11 h, 2.10 a, Javet 2.17 c, 2.12 e, (x + 1)(x + 3) = 15 dans
+`S/captures/P5/`. **4.** Contrôle de la page (chargement, exemples, clavier, message d'erreur, variante E12). Puis suite complète,
+dump, temps natif, commit.
+
+### Réalisé
+
+- **0. Message vrai** (`moteur/second_degre.py`) : `MESSAGES["forme_non_traitee"]` = « Cette forme d'équation n'est pas traitée par
+  l'outil. » ; `hors_du_cours(P, chemin)` (public) ; `resoudre_equation` : `_rediger_structure` → None et `ramener` → None donnent
+  « forme_non_traitee » ; `chemin` en « hors_cours » : « pas_encore » si bicarrée, « hors_cours » si `hors_du_cours`, sinon
+  « forme_non_traitee ». Docstrings mises à jour. Tests : `corpus_second_degre.NON_RESOLUES` (11 statuts), `STRUCTURES_NON_ECRITES`
+  (« forme_non_traitee »), `test_aucun_statut_temporaire` (5 statuts), `test_structures_sans_developper`,
+  `test_hors_de_ce_que_e2_developpe`, `test_polynomes_generes_de_degre_3_et_4` (un « hors_cours » y est contrôlé par `hors_du_cours`),
+  nouveau `TestNonResolu.test_hors_du_cours_seulement_si_vrai` (11 polynômes : x³ − x − 1, 2x³ + 2x + 2, Az 4.1 d développé, x⁴ + x + 1
+  → hors du cours ; 2x⁴ − 10x² + 8, x⁶ − 64, 0,5x³ − 2x, −x⁴ + 5x² − 4, x⁵ − 5x³ + 4x, x⁴ + x → forme non traitée ; x⁴ − 5x² + 4 →
+  bicarrée ; puis chaque « hors_cours » du corpus relu : degré ≥ 3, entier, pas bicarrée, seulement une ME de constante).
+  **Instantanés modifiés (11, statut et message seulement ; avant : `hors_cours` / « Cette équation ne se résout pas avec les méthodes
+  du cours. » ; après : `forme_non_traitee` / « Cette forme d'équation n'est pas traitée par l'outil. »)** : Az 4.1 b
+  `(3x-2)/6=(x+1)/4+5`, Az 4.1 h `x^2+1-(10-x^2)/8=(6x-3)/4`, `(x^2+x+1)^2=x`, `(x+1)^3=8+x`, `x^2/2=1+x`, `0,5(x+2)^2=x+3`,
+  `x*3+x^2=1`, `2(x+1)(x+3)=5`, `x^6-64=0`, `0,5x^3-2x=0`, `2x^4-10x^2+8=0`. Gardés « hors du cours » (vrai) : `x^3=x+1`,
+  `-3x^3+14x^2-21x+10=0`. Les 8 `STRUCTURES_NON_ECRITES` (pas d'instantané avant P5) reçoivent aussi « forme_non_traitee ».
+  Comparaison entrée par entrée (`S/tmp/P5/comparer.py`) : les 183 entrées d'avant sont toutes là ; seules ces 11 changent ;
+  21 nouvelles (les 8 structures, 13 saisies invalides).
+- **`equations-2e-degre/resoudre_eq.py`** : `resoudre` (analyser → message ; statut non résolu → `sortie_erreur(message)` ; sinon une
+  carte « Résolution » = `second_degre.blocs`, énoncé `tex_element(ecrire_enonce(…))` ; variante E12 « Méthodes du cours » (défaut) /
+  « Par la formule » par `sortie_ok_variantes` quand `variantes == ["formule"]` et que la formule conclut), `resoudre_json`,
+  `apercu_json` (lecture seule ; « x+1 » : ok, `tex` de l'expression ; une équation que l'analyse accepte : l'énoncé de
+  `ecrire_enonce`, sinon « g = d »).
+- **`equations-2e-degre/index.html`** : `monterOutil({outil, titrePdf, prefixe: "", exemples})`, sans `exercicePython` ni `poids` ;
+  `const EXEMPLES` = 2.9 a, 2.9 b, 2.9 j, 2.10 a, 2.10 e, 2.11 h, 2.12 b, 2.12 c, 2.12 e, Javet 2.17 c (§ 13.3, Q6) ; balise GoatCounter ;
+  `style.css` puis `composants.css`, aucun `<style>` ; `aria-live` sur `#etat` et `#apercu` ; clavier commun, dernière rangée
+  `0 , x =` ; `<details class="card">` fermé « Rappel de la méthode » (E15, les cinq méthodes en liste numérotée, puis le produit nul).
+- **Manifeste** : `equations-2e-degre` (10 fichiers du plan, `resoudre`, `apercu`). **Registre** : entrée `"filieres": {}` (note du
+  registre complétée) ; `tests/pages/test_accueil.py` : butée (16, 8) et ACC-03 (les liens de l'accueil = les chemins des outils
+  **qui ont une filière** : un outil sans filière n'a pas de carte, Q1).
+- **Arêtes** (10, `test_imports.ARETES`, chacune avec sa raison) : `equations -> expr / noyau / polynomes / second_degre`,
+  `resoudre_eq -> equations / second_degre / sortie / chaine / expr / noyau`. **Écart au plan** : `resoudre_eq -> expr` (aperçu
+  syntaxique, `lire_membres` et `tex`) et `resoudre_eq -> noyau` (`ErreurSaisie`, `json_strict`) en plus des quatre du plan ; toutes
+  respectent les couches.
+- **Tests Python** : `test_noyau.MOTEURS` + `equations.py` ; `test_outils_du_site.test_ordre_de_sys_path` + `equations-2e-degre` ;
+  `cas.py` : `CAS_LIMITES["equations-2e-degre"]` (les 52 du § 8 et les 4 « § 6 », sous leur forme d'énoncé), `SAISIES_INVALIDES_EQ`
+  (13, une par message de la lecture), `entrees_equations()` (204 : page, § 8, § 6, `RESOLUES`, `NON_RESOLUES`,
+  `STRUCTURES_NON_ECRITES`, saisies invalides) ; `test_instantanes` : `resume_resolution`, `instantane_equation` (lecture par
+  `equations.analyser`, comme la page), `OUTILS` et `test_equations_2e_degre` → `instantanes/equations-2e-degre.json` (clé = saisie ;
+  le JSON provisoire déplacé, `REGENERER=1` sur ce seul test) ; `test_instantanes_resoudre` : entrée, méthode,
+  `instantanes/resoudre/equations-2e-degre.json` ; `test_json_strict` (`OUTILS_ENTREES`, `test_equations_2e_degre_json` : resoudre et
+  aperçu) ; `test_vocabulaire` (`METHODES`, `test_equations_2e_degre` : sortie et aperçu) ; `test_resoudre_import.EXEMPLE` =
+  `x^2-5x-36=0` ; `test_source_unique...PAGES` = `["0", ",", "x", "="]`.
+- **Dossier provisoire** `tests/python/donnees/equations-2e-degre/` retiré (git rm). `test_instantanes_second_degre.py` garde
+  `test_section_8_complete` et `test_sorties_conformes` (sur le nouveau fichier) et gagne `test_corpus_fige_avec_son_statut` ; ses
+  `test_instantanes`, `test_json_strict` et `test_vocabulaire` sont retirés (faits par `test_instantanes.test_equations_2e_degre`,
+  `test_json_strict.test_fichiers_d_instantanes_en_json_strict`, `test_vocabulaire.test_instantanes`, qui lisent
+  `instantanes/**.json`). Aucun contrôle perdu (oracle : `test_redaction_second_degre`, inchangé).
+- **Tests de pages** : `rendu.REDUIT` = 2.10 a, 2.11 h, `x^2+1` ; `rendu.ERREURS` = `x^2+1` (**vérifié** : sans « = », c'est bien une
+  erreur, « Écrivez une équation, avec le signe « = ». » ; x² + 1 = 0, lui, donne S = ∅) ; `test_comportement` : `CALCUL` = Javet
+  2.17 c (pas de variante), `EXEMPLE` = 2.9 a, `INVALIDE` = `x+y=1` ; `test_rendu.test_equations_2e_degre` ;
+  `references/equations-2e-degre.json` (57 entrées, `capturer_references.py equations-2e-degre`, 9 s) ; **nouveau**
+  `test_largeurs.test_equations_2e_degre_chaque_exemple` (les 10 exemples, chemin du cours et variante « Par la formule » : balayage
+  de 320 à 1100 px, aucune formule hors de sa carte, console vide), car le balayage généré ne lance que le premier exemple (2.9 a,
+  sans tableau S-P) et le § 6 demande le tableau S-P et une étiquette longue d'Id. rem.
+- **Vérifié sans rien écrire** : `test_largeurs.test_balayage_equations_2e_degre` (généré, `CONNUS` vide, vert) ; `test_style_commun`,
+  `test_tableaux_css`, `test_source_unique.MIGREES`, `TestVouvoiement` (page, littéraux de `resoudre_eq.py`), `test_memo_garde`,
+  `captures.py` (prend `CALCUL`), `lancer.py`, `dump_sorties.py` (lit manifeste, registre, instantanés et `rendu.entrees`) : rien
+  à changer, tous verts.
+- **Docs** : `architecture.md` § 1 (second_degre ; l'outil comme exemple des couches), § 4 (oublis relevés : balise et feuilles de la
+  page, butée de `sys.path`, `rendu.ERREURS`, registre dès que la page existe avec `"filieres": {}` et la butée du nombre d'outils,
+  `test_largeurs` qui ne lance que le premier exemple, `dump_sorties.py`), § 5 (le nouvel outil n'écrit ses nombres que par
+  `nombres.approx`/`exact`) ; `taches.md` : N02 (D16).
+
+### Contrôle de la page (`S/tmp/P5/captures_p5.py`, `S/tmp/P5/largeurs_p5.py`)
+
+- Chargement : « Chargement de Python… » puis « Prêt. » en 2,8 s (copie locale de Pyodide ; SymPy chargé après, Q7 accepté).
+- Exemples : les 10 boutons, dans l'ordre du § 13.3 ; un clic calcule. Rappel fermé au départ.
+- Clavier : 2 x ^ 2 = 8 écrit `2x^2=8`, aperçu `2x^{2} = 8`. Cibles : 44 px de haut au moins (clavier, exemples, Résoudre).
+- Messages (vouvoyés ou impersonnels) : `x^2+1` « Écrivez une équation, avec le signe « = ». » ; `x+y=1` « Écrivez une équation avec une
+  seule inconnue. » ; `2^x=8` « L'inconnue est en exposant : utilisez l'outil « Exponentielles et logarithmes ». » ;
+  `2(x+1)(x+3)=5` « Cette forme d'équation n'est pas traitée par l'outil. » ; `x^4-5x^2+4=0` bicarrée ; `x^3=x+1` hors du cours.
+- Variante E12 : 2.10 a affiche « Méthodes du cours » (pressé) et « Par la formule » ; un clic passe à la formule (Δ = 169…), puis
+  retour. Console : seulement le favicon absent (filtré par les tests).
+- Largeurs (JS du balayage commun) : 18 équations (les 10 exemples, (x + 1)(x + 3) = 15, x⁴ − 16, 2.12 h, 2.9 k, Az 4.1 d, x² + 1000x − 1,
+  Javet 2.17 d et e), chemin du cours et variante, 320 à 1100 px : **aucune faute**.
+- Aucune requête hors de la machine : les tests de pages passent par l'intercepteur (copies locales ; GoatCounter servi vide).
+
+### Captures à 390 px (`S/captures/P5/`)
+
+`2.11-h-390-clair.png`, `2.11-h-390-sombre.png`, `2.10-a-390-clair.png`, `javet-2.17-c-390-clair.png`, `2.12-e-390-clair.png`,
+`x+1-x+3-egal-15-390-clair.png` (carte « Résolution » seule, corrigé complet). Regardées : rien ne déborde (page sans défilement
+horizontal à 320, 360 et 390 px) ; cadres D29 lisibles en clair et en sombre (x = −4, △ = −7, ligne ✓ du S-P, Δ = 12, S) ; tableau
+S-P lisible (filets, ✓). **À juger** : à 390 px, la ligne de Δ de Javet 2.17 c se coupe dans « 4 · 1 · (−2) » et celle de √Δ après
+« √Δ = » (rangées sans lien, coupure de KaTeX : rien ne déborde) ; une seule carte, donc « Étape 1 / 1 » et « Étape suivante »
+grisé (questions 36 et 37 de suivi.md).
+
+### Suite d'avant commit et dump
+
+- `PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rapport S/rapports/P5` : **code 0** (console `S/rapports/P5-console.log`).
+  Python 1 667 collectés, 1 666 passés + 1 xfail (celui d'avant le chantier), 128 686 sous-tests, 94,0 s ; pages 154 passés,
+  2 520 sous-tests, 333,3 s. Aucun échec instable.
+- `comparer_listes.py S/rapports/P4b S/rapports/P5` : tests Python nouveaux (méthodes `test_equations_2e_degre` des instantanés, du JSON
+  strict et du vocabulaire, `test_hors_du_cours_seulement_si_vrai`, `test_corpus_fige_avec_son_statut`), 3 disparus
+  (`test_instantanes_second_degre` : `test_instantanes`, `test_json_strict`, `test_vocabulaire`, justifiés dans suivi.md, « Tests
+  renommés ») ; pages : 3 nouveaux (`test_balayage_equations_2e_degre`, `test_equations_2e_degre_chaque_exemple`,
+  `test_rendu::test_equations_2e_degre`). Sous-tests : **aucune baisse** (hausses : un outil de plus dans chaque test par outil ;
+  `test_vocabulaire::test_instantanes` 1 511 → 1 919).
+- **Dump** : `dump_sorties.py S/dumps/P5 --processus 6` (19 fichiers, 4 556 sorties, 4 s), `diff -r --exclude=temps S/dumps/depart
+  S/dumps/P5` : seulement `Only in …/P5/apercu: equations-2e-degre.txt`, `Only in …/P5/resoudre: equations-2e-degre.txt` et, dans
+  `index.txt`, les deux lignes de ces fichiers (204 entrées chacun) ; **aucune autre différence** (les 17 fichiers et 4 148 sorties
+  des outils existants identiques à l'octet).
+- xfail stricts : aucun ajouté, aucun retiré.
+
+### Temps
+
+Voir « Temps » ci-dessous (P5).
+
 ## Contrôles du chef d'orchestre
 
 - P0 `0fd0060` : verifier ACCEPTÉ (Python 1 494 / 106 768 sous-tests, pages 145 / 2 421, identiques à la nouvelle référence) ; rapide --depuis HEAD~1 : 23 passés, 245 sous-tests, 3 s (fumée + docs). Échec instable de `test_comportement::test_soc04_parametre_f` (ensemble-definition, `#cartes` absent : page pas encore chargée) au 1er lancement de référence : accepté par le chef comme instabilité de chargement (relancé seul vert, deux suites complètes vertes ensuite, aucune sortie en cause, Python vert) ; question 8 de suivi.md. Branche poussée.
@@ -1147,6 +1297,7 @@ d'Az 4.1 g garde le « · » d'expr.tex (forme développée, P3 ; question 26 : 
 - P2b `a52b58a` : verifier ACCEPTÉ (Python 1 607 collectés, 1 584 passés + 23 xfail dont 22 stricts P3/P4a/P4b, 122 989 sous-tests ; pages 151 / 2 435) ; rapide --depuis HEAD~1 : 385 passed, 23 xfailed, 28288 subtests passed in 25.14s ; 151 passed, 1270 subtests passed in 324.52s (0:05:24) (code=0 mur=351s) ; dump identique au départ (P2b). Texte rendu de 2.11 h (forme développée) relu par le chef : conforme au § 7 hors étape « ramener » (P3). Branche poussée.
 - P3 `8e838be` : verifier ACCEPTÉ (Python 1 641 collectés, 1 628 passés + 13 xfail, 124 615 sous-tests, 2 baisses justifiées ; pages 151 / 2 435 identiques) ; rapide --depuis HEAD~1 : 1003 passed, 13 xfailed, 97209 subtests passed in 79.13s (0:01:19) ; 151 passed, 1270 subtests passed in 324.21s (0:05:24) (code=0 mur=405s) ; dump identique au départ (P3). Branche poussée.
 - P4a `06f3daf` : verifier ACCEPTÉ (Python 1 652 collectés, 1 644 passés + 8 xfail, 125 662 sous-tests ; pages 151 / 2 435 identiques ; renommage justifié test_structures_laissees_a_p4a → test_structures_sans_developper, hors référence) ; rapide --depuis HEAD~1 : 445 passed, 8 xfailed, 30771 subtests passed in 26.08s ; 151 passed, 1270 subtests passed in 323.99s (0:05:23) (code=0 mur=351s) ; dump identique au départ (P4a). Branche poussée.
+- P4b `88ea64e` : verifier ACCEPTÉ (Python 1 664 collectés, 1 663 passés + 1 xfail d'avant le chantier, 127 242 sous-tests ; pages 151 / 2 435 identiques ; renommage justifié test_formes_pas_encore_traitees → test_aucun_statut_temporaire, hors référence) ; rapide --depuis HEAD~1 : 464 passed, 1 xfailed, 32295 subtests passed in 24.10s ; 151 passed, 1270 subtests passed in 324.85s (0:05:24) (code=0 mur=349s) ; dump identique au départ (P4b). Décision du chef sur la question 29 : le message « hors du cours » donné à des équations du cours que l'outil n'écrit pas serait faux à l'écran (CLAUDE.md, « rien de faux », prime sur decisions.md) ; corrigé en tête de P5 par un message vrai, question gardée pour l'enseignant. Branche poussée.
 
 ## Temps
 
@@ -1183,6 +1334,13 @@ de développement, tâtonnement, variante) : bien sous 0,1 s par équation. Pire
 `STRUCTURES_NON_ECRITES`, « hors_cours ») **301 ms en tout** (3e tour), la plus longue **3,9 ms** (2x⁴ + x³ − 28x² = 0 : ME de x²,
 tâtonnement, variante) : bien sous 0,1 s par équation. Pire cas des bornes : x² + 999 999x − 499 997 = 0 **88 ms** (P4a : 98 ms ;
 écart de mesure, chemin inchangé). Aucune hausse au-delà de 0,1 s (P4a : 212 ms pour 162 entrées, la plus longue 2,6 ms).
+
+**P5** (`S/tmp/temps_p5.py`, python3 natif 3.14.4, 3 tours, 3e tour) : `equations.analyser` + `resoudre_equation` sur le § 8 et le
+§ 6 (56 saisies) **67,8 ms en tout**, la plus longue 2,0 ms ((x − 1)(2 − x) = (x − 1)(x + 3)) ; `resoudre_eq.resoudre_json` (analyse,
+résolution, variante « formule », blocs, sortie, JSON) sur les mêmes 56 : **96,7 ms**, la plus longue 2,8 ms (x³ − x = 0) ; sur le
+corpus complet de l'outil (204 entrées, `cas.entrees_equations`) : **276 ms**, la plus longue **3,9 ms** (2x⁴ + x³ − 28x² = 0) ;
+`apercu_json` sur les 204 : 36 ms, la plus longue 0,3 ms. Pire cas des bornes (x² + 999 999x − 499 997 = 0, `resoudre`) : **89 ms**.
+Bien sous 0,1 s par équation ; aucune hausse (P4b : 301 ms pour 212 entrées, la plus longue 3,9 ms).
 
 Temps natifs des outils existants au départ (`S/dumps/depart-p1/temps/temps.json`, `--processus 1`, sur b72fe2e ; somme des appels de
 `resoudre_json` et plus long appel ; 12,9 s de mur) :

@@ -18,7 +18,7 @@ au dump de départ (`/home/sami-ubuntu/nuits/equations-2e-degre/dumps/depart`) ;
 | P3 | Saisie : E1, E2 (`second_degre.ramener`), `equations-2e-degre/equations.py` (`analyser`), `expr.a_des_decimaux` | faite (suite verte, dump identique) | voir `git log` |
 | P4a | Formes structurées, sur l'arbre (produit déjà nul, facteur commun, Id. rem. structurée ; E1.3) | faite (suite verte, dump identique) | voir `git log` |
 | P4b | Degrés ≠ 2 (ME de xᵏ, Id. rem. de A = x², E9), degré 1, identité, messages définitifs (bicarrée, hors du cours) ; plus de `non_traite` | faite (suite verte, dump identique) | voir `git log` |
-| P5 | L'outil (page, adaptateur, manifeste, registre sans filière, tests) | à faire | — |
+| P5 | L'outil (page, adaptateur, manifeste, registre sans filière, tests) ; message vrai « forme non traitée » (question 29) | faite (suite verte, dump : seuls ajouts du nouvel outil) | voir `git log` |
 | P6 | Filières, carte de l'accueil (après relecture) | hors nuit | — |
 
 ## Questions pour l'enseignant
@@ -108,6 +108,12 @@ Questions nouvelles de la nuit :
     avec les méthodes du cours. » : E2 hors de ce qu'il développe (2(x + 1)(x + 3) = 5, x²/2 = 1 + x, (x + 1)³ = 8 + x, **Az 4.1 b et
     h**, à fractions) et `STRUCTURES_NON_ECRITES` (2(x + 1)² = 8, (x² − 1)² = 0…). **Inexact pour elles** (elles sont du cours) :
     à trancher avant P6 (message propre, p. ex. « Cette forme d'équation n'est pas traitée par l'outil. », ou E2 étendu).
+    **Décision du chef d'orchestre, faite en P5** (CLAUDE.md, rien de faux, prime) : statut `forme_non_traitee`, « Cette forme
+    d'équation n'est pas traitée par l'outil. », pour ces formes et pour tout degré ≥ 3 douteux ; « hors du cours » seulement s'il est
+    vrai (`second_degre.hors_du_cours` : degré ≥ 3, coefficients entiers, pas bicarrée, au plus une ME de constante sur le chemin, reste
+    pas bicarré : x³ = x + 1, Az 4.1 d développé). Devenus « forme non traitée » parce que douteux : 2x⁴ − 10x² + 8 (ME puis bicarrée),
+    x⁶ − 64 (Id. rem. puis x³ ± 8), 0,5x³ − 2x (question 10). **Reste ouvert** : étendre E2 (2(x + 1)(x + 3), x²/2, fractions d'Az 4.1
+    b et h), écrire les structures non écrites, un autre texte, ou « bicarrée » après une ME (question 30).
 30. **P4b, bicarrée à la lettre** (§ 13.4) : x⁴ − 5x² + 4, x⁴ + 4, x⁴ − 5 → « bicarrée » ; 2x⁴ − 10x² + 8 et x⁵ − 5x³ + 4x (une ME
     s'applique) → « hors du cours ». Autre possibilité : « bicarrée » aussi après une ME.
 31. **P4b, ordre d'écriture** (x⁴ − 16) : l'Id. rem. de x² − 4 d'abord, puis le tableau S-P de x² + 4 en échec, juste avant le
@@ -124,7 +130,30 @@ Questions nouvelles de la nuit :
     (x + 1)(x − 1)(x + 2) = 0) ; avec un carré dans le même produit, ou (x² − 1)² = 0 : « hors du cours ». Une autre lettre que
     l'inconnue (refusée par la saisie avant) : `ValueError` dans `resoudre_equation`.
 
+36. **P5, une seule carte** : la page montre une carte « Résolution » (la chaîne entière : la concaténation des lignes de toutes les
+    étapes est la chaîne affichée, § 5), donc « Étape 1 / 1 » et « Étape suivante » grisé. Autre possibilité : une carte par étape
+    (la chaîne coupée en morceaux, ⇔ alignés carte par carte), à décider avec l'onglet « S'entraîner ».
+37. **P5, libellés de la variante E12** : « Méthodes du cours » (défaut) et « Par la formule » (D2) ; le choix est gardé d'une saisie
+    à l'autre (comportement commun d'`outil.js`, comme Exp-log). Pas de variante sur une forme structurée (question 25).
+38. **P5, aperçu** : seulement la lecture (syntaxe) ; « x+1 » s'affiche sans erreur (le message « pas de = » vient au calcul) ; une
+    équation que l'analyse accepte est écrite comme l'énoncé (`ecrire_enonce`). Erreurs de l'analyse (plusieurs lettres, 2^x…) :
+    seulement au calcul, comme Exp-log.
+39. **P5, accueil** : `test_acc03` (page) compare les liens de l'accueil aux chemins des outils **qui ont une filière** (option A :
+    l'outil est au registre sans carte) ; en P6, avec ses filières, il y revient de lui-même.
+
 ## À relire par l'enseignant
+
+- **P5, l'outil** : page `equations-2e-degre/index.html` (accroche, aide de saisie, rappel E15), captures à 390 px dans
+  `/home/sami-ubuntu/nuits/equations-2e-degre/captures/P5/` : `2.11-h-390-clair.png`, `2.11-h-390-sombre.png`, `2.10-a-390-clair.png`,
+  `javet-2.17-c-390-clair.png`, `2.12-e-390-clair.png`, `x+1-x+3-egal-15-390-clair.png`. À juger : ligne de Δ de Javet 2.17 c coupée
+  dans « 4 · 1 · (−2) » à 390 px (rien ne déborde) ; une seule carte (question 36).
+- **P5, instantanés** : le JSON provisoire devient `tests/python/instantanes/equations-2e-degre.json` (clé = la saisie, lue par
+  `equations.analyser` comme la page) ; **11 entrées modifiées** (statut et message seulement), avant `hors_cours` « Cette équation ne
+  se résout pas avec les méthodes du cours. » → après `forme_non_traitee` « Cette forme d'équation n'est pas traitée par l'outil. » :
+  Az 4.1 b, Az 4.1 h, (x² + x + 1)² = x, (x + 1)³ = 8 + x, x²/2 = 1 + x, 0,5(x + 2)² = x + 3, x·3 + x² = 1, 2(x + 1)(x + 3) = 5,
+  x⁶ − 64 = 0, 0,5x³ − 2x = 0, 2x⁴ − 10x² + 8 = 0 ; les 172 autres identiques ; 21 nouvelles (8 structures non écrites, 13 saisies
+  invalides). Nouveaux : `instantanes/resoudre/equations-2e-degre.json` (204 sorties de la page) et
+  `tests/pages/references/equations-2e-degre.json` (57 rendus). Aucun instantané d'un autre outil ne change (dump identique).
 
 - **P4b, instantanés de la rédaction** : 52 entrées **nouvelles** dans `tests/python/donnees/equations-2e-degre/instantanes.json`
   (36 de `P4B` : 2.12 c, Az 4.1 a, f, g, x⁴ − 16, degré 1, identités, formes structurées de P4b… ; 16 de `NON_RESOLUES` : statut et
@@ -167,6 +196,12 @@ Lue par `verifier`. Format, une ligne par test : `` - `<identifiant pytest compl
 - `tests/python/test_redaction_second_degre.py::TestNonResolu::test_formes_pas_encore_traitees` : 21 → 6 : P3 puis P4a (par rapport à P2b ; test absent de `tests/reference`), les 10 formes « P3 » puis les 5 formes « P4a » d'`A_VENIR` sont maintenant résolues et contrôlées par `test_a_venir[P3-…]` et `test_a_venir[P4a-…]` (xfail retiré), par l'oracle et par les instantanés.
 
 ## Tests renommés
+
+- P5 : `tests/python/test_instantanes_second_degre.py::TestInstantanesSecondDegre::test_instantanes`, `::test_json_strict` et
+  `::test_vocabulaire` retirés (tests de P2b, absents de `tests/reference`) : le JSON a quitté `tests/python/donnees/` pour
+  `tests/python/instantanes/equations-2e-degre.json`, que figent et contrôlent les tests communs `test_instantanes.py::TestInstantanes::test_equations_2e_degre`,
+  `test_json_strict.py::TestJsonStrict::test_fichiers_d_instantanes_en_json_strict` et `test_vocabulaire.py::TestVocabulaireEleve::test_instantanes` ;
+  `test_section_8_complete` et `test_sorties_conformes` restent (sur le nouveau fichier), `test_corpus_fige_avec_son_statut` s'ajoute.
 
 - P4b : `tests/python/test_redaction_second_degre.py::TestNonResolu::test_formes_pas_encore_traitees` →
   `::TestNonResolu::test_aucun_statut_temporaire` (test de P2b, absent de `tests/reference`) : le test d'attente est devenu vide

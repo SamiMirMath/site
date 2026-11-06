@@ -18,10 +18,39 @@ import derivee_variations as dv
 import memo  # sorties de l'outil Limites : cache explicite, copie profonde (tests-rapides T4 ; MEMO=0 le coupe)
 import etude_complete as ec
 import factorisation as fa
-from cas import CAS_LIMITES, entrees_page, entrees_factorisation
+import second_degre as sd
+from equations import analyser
+from noyau import ErreurSaisie
+from cas import CAS_LIMITES, entrees_equations, entrees_page, entrees_factorisation
 
 DOSSIER = os.path.join(os.path.dirname(__file__), "instantanes")
 REGENERER = os.environ.get("REGENERER") == "1"
+
+
+def resume_resolution(res):
+    """Ce qui est figé d'une résolution du 2e degré (second_degre.resoudre_equation) : tout ce que la page affiche (blocs) et la
+    structure des étapes (§ 5 de decisions.md : phase, méthode, cible)."""
+    r = {"statut": res["statut"], "message": res["message"], "variantes": res["variantes"]}
+    if res["statut"] == "resolu":
+        r.update(S=res["S"], approx=res["approx"], etapes=[[e["phase"], e["methode"], e["cible"]] for e in res["etapes"]],
+                 blocs=sd.blocs(res))
+    return r
+
+
+def instantane_equation(saisie):
+    """Équations du 2e degré (chantier equations-2e-degre ; P2b à P4b sous tests/python/donnees/, ici depuis P5) : la saisie lue par
+    l'outil (equations.analyser : son message d'erreur, ou l'équation), sa résolution par le chemin du cours et, quand elle est
+    proposée, la variante « formule » (E12)."""
+    try:
+        g, d, x, dec = analyser(saisie)
+    except ErreurSaisie as e:
+        return {"erreur": str(e)}
+    res = sd.resoudre_equation(g, d, x, dec)
+    out = {"cours": resume_resolution(res)}
+    if res["variantes"]:
+        out["formule"] = resume_resolution(sd.resoudre_equation(g, d, x, dec, sd.ORDRE_PAR_LA_FORMULE))
+    return out
+
 
 OUTILS = {
     "ensemble-definition": (ed.analyser, lambda: entrees_page("ensemble-definition") + CAS_LIMITES["ensemble-definition"]),
@@ -29,6 +58,7 @@ OUTILS = {
     "limites-asymptotes": (memo.etudier_la, lambda: entrees_page("limites-asymptotes") + CAS_LIMITES["limites-asymptotes"]),
     "etude-complete": (ec.etudier, lambda: entrees_page("etude-complete") + CAS_LIMITES["etude-complete"]),
     "factorisation": (fa.factoriser_expr, entrees_factorisation),
+    "equations-2e-degre": (instantane_equation, entrees_equations),
 }
 
 
@@ -116,6 +146,9 @@ class TestInstantanes(unittest.TestCase):
 
     def test_factorisation(self):
         self.verifier_outil("factorisation")
+
+    def test_equations_2e_degre(self):
+        self.verifier_outil("equations-2e-degre")
 
 
 if __name__ == "__main__":

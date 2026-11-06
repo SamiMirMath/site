@@ -28,6 +28,7 @@ MOTEURS = [
     "limites-asymptotes/redaction_bh.py",                # F4 (R6)
     "exponentielles-logarithmes/exp_log.py",             # F4 (R6)
     "exponentielles-logarithmes/exp_log_m.py",           # F4 (R6)
+    "equations-2e-degre/equations.py",                   # equations-2e-degre, P5
 ]
 # dossier de la base (ensemble_def.py) et de son adaptateur : ils la prennent directement, sans noyau (resoudre_ed, légitime)
 DOSSIER_DE_LA_BASE = "ensemble-definition"
