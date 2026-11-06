@@ -4,7 +4,7 @@
 fusionné sur `main` avec ses corrections R1 à R4 et P6, fournit déjà les étapes structurées du § 4.
 Dates : proposé le 04.11.2026 ; accepté sur le principe le 05.11.2026 ; mis à jour le 06.11.2026 (décisions du jour, alignement sur
 `decisions.md` et sur le code de `main`) ; points a à h réglés le 06.11.2026 (après-midi) ; spécification complète le 06.11.2026
-(fin d'après-midi).
+(fin d'après-midi) ; § 8 (tirage et examens, moteur sur serveur) ajouté le 06.11.2026 (soir).
 
 Décisions de l'enseignant :
 - 04.11.2026 : un onglet dans l'outil du 2e degré ; un quiz « évolutif » qui fait construire la résolution étape par étape ; QZ-05 (méthode
@@ -407,3 +407,40 @@ Décisions de l'enseignant du 06.11.2026 (fin d'après-midi) : **toutes les ques
   formule. » (sauf si la règle d s'applique d'abord) » (QZ-07).
 - Point a, liste fixe et famille : réglé, « Javet 2.17 c (2x² − 4x − 4 = 0) entre dans la liste fixe ; nouvelle famille F17 « échec sur
   un facteur après une ME » (générateur : ME d'une constante, puis un trinôme unitaire sans couple d'entiers) » (§ 3, § 5).
+
+## 8. Tirage et examens ; moteur sur serveur (06.11.2026, soir)
+
+**Règle (enseignant, 06.11.2026)** : un exercice tiré au sort ne doit jamais pouvoir tomber à l'examen (règle légale : on ne donne pas
+aux élèves un exercice de l'examen). Elle prime sur le § 3 (liste fixe, générateurs F1 à F17).
+
+**Ce qui ne marche pas, et pourquoi.**
+- Retirer l'exercice d'examen du tirage dans le code : le code est lu par les élèves, le retrait révèle l'exercice.
+- Rendre seulement le dépôt privé : la page télécharge le moteur dans le navigateur (Pyodide, `moteur/`, servi par samimir.ch) ; une
+  liste d'exclusion envoyée au navigateur reste lisible, même chiffrée ou hachée, et un générateur lancé mille fois montre ce qui manque.
+- Des bornes publiques du tirage, avec l'examen hors des bornes : refusé par l'enseignant (« un élève est sûr que telle ou telle
+  solution n'est jamais à l'examen »).
+
+**Orientation de l'enseignant** (à trancher au chantier « moteur-serveur », audit à faire) :
+- tout le moteur devient privé (aussi pour un accès réservé ou payant plus tard, à vérifier auprès de l'école) : les moteurs Python
+  tournent sur un serveur (Infomaniak envisagé), la page n'en reçoit que la sortie JSON ; le dépôt passe en privé une fois le moteur
+  retiré du site public (sans GitHub Pages, un dépôt privé est gratuit ; avec GitHub Pages, GitHub Pro est nécessaire, sinon le site
+  tombe) ;
+- l'onglet « S'entraîner » est construit **directement côté serveur**, après cette migration, et non dans le navigateur.
+
+**Principe du tirage côté serveur** (proposé, à valider avec le chantier « moteur-serveur ») :
+- le générateur et la liste des exercices d'examen ne quittent jamais le serveur ni le dépôt privé ; aucune donnée d'examen dans un
+  fichier servi par le site ;
+- une réserve d'exercices est tirée au hasard dans un très grand ensemble, avec une graine secrète, et les exercices d'examen en sont
+  retirés à la construction ; la réserve est renouvelée (par exemple chaque semestre) ;
+- les sujets d'examen restent hors de tout fichier public (`docs/reference/`, jamais commité, ou le dépôt privé).
+
+**Points à relire par l'enseignant** (mise à jour du 06.11.2026, fin d'après-midi) :
+- phrases de refus écrites pour la règle d, à relire : F3, x² − 5x, x² + 6x + 9, F11, F15, Az 4.1 d, et les deux nouveaux modèles
+  marqués « à relire » en QZ-07 (F8 « 2x² n'est pas un carré… », F4 « x², 6x et 4 n'ont pas de facteur commun. ») ;
+- phrase de F16 réordonnée pour la règle d : « Ramenez d'abord tout à gauche : le second membre, (x − 1)(x + 3), n'est pas nul. »
+  (forme validée : « Le second membre n'est pas nul : ramenez d'abord tout à gauche. ») ;
+- F10 : la phrase « … le S-P est plus rapide » est gardée, alors que le S-P y échoue aussi ;
+- cas sans modèle (aucune famille ne les tire ; `explication_refus` rendrait None) : « Formule (Δ) » à l'étape du produit nul hors E9 ;
+  S-P avec a = 1 et des coefficients non entiers, sans Id. rem. ;
+- `decisions.md` § 7 (exemples rédigés, dont Javet 2.17 c), § 10 et E9 gardent l'ancien texte « … : on utilise la formule. » (une
+  phrase, avant la ligne du produit nul) : à aligner sur D3, E6, E7 et § 13.5 (06.11.2026).
