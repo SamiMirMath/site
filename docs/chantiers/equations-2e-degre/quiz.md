@@ -3,14 +3,18 @@
 **Statut (mis à jour le 06.11.2026) : accepté sur le principe** ; l'onglet sera un chantier séparé (§ 6). Le chantier `equations-2e-degre`,
 fusionné sur `main` avec ses corrections R1 à R4 et P6, fournit déjà les étapes structurées du § 4.
 Dates : proposé le 04.11.2026 ; accepté sur le principe le 05.11.2026 ; mis à jour le 06.11.2026 (décisions du jour, alignement sur
-`decisions.md` et sur le code de `main`) ; points a à h réglés le 06.11.2026 (après-midi).
+`decisions.md` et sur le code de `main`) ; points a à h réglés le 06.11.2026 (après-midi) ; spécification complète le 06.11.2026
+(fin d'après-midi).
 
 Décisions de l'enseignant :
 - 04.11.2026 : un onglet dans l'outil du 2e degré ; un quiz « évolutif » qui fait construire la résolution étape par étape ; QZ-05 (méthode
   juste mais pas dans l'ordre), QZ-06 (deux essais) et « niveau 2 plus tard » (QZ-14) acceptées.
 - 06.11.2026 : une tentative en échec du chemin du cours est une bonne réponse (QZ-05, option a) ; familles F15 et F16 (§ 3). L'après-midi :
   « attendue » est toujours ce que le chemin du cours écrit ensuite ; points a à h du § 7 réglés ; trois choix validés (« Produit nul » dans
-  la phase `ramener`, remarque sans « aussi », « ramenez d'abord tout à gauche » pour F16).
+  la phase `ramener`, remarque sans « aussi », « ramenez d'abord tout à gauche » pour F16). En fin d'après-midi : point i (étapes sans
+  question), règle d généralisée en algorithme du moteur, « Développer » devant un produit nul accepté, phrase du tâtonnement à
+  coefficients non entiers, « Aucun couple ne convient. » et « On utilise la formule. » en deux phrases (D3, E6, E7, § 13.5 de
+  `decisions.md` mis à jour), E3 corrigé (le code fait foi), Javet 2.17 c dans la liste fixe et famille F17 (§ 7, tout réglé).
 
 Références. `decisions.md` fait foi (§§ 1 à 13, le § 13 prime) : ses décisions (Dn) et règles de rédaction (En) sont citées ici, pas
 recopiées. `suivi.md` : questions 11 (`s_applique`), 36 (une carte par étape, R1), 37 (les deux boutons, R3), 45 (tâtonnement avec
@@ -46,7 +50,10 @@ Conséquence : le quiz ne peut pas contredire la résolution, et les mêmes test
    avec ⟦□ = 2⟧ et 15 = 5 · △, donc ⟦△ = 3⟧. », question 45).
 4. La question suivante porte sur ce qui reste à faire : « Et pour x² − 1 ? », « Le produit est factorisé. Et maintenant ? » ; après une
    tentative en échec, « Aucun couple ne convient. Et maintenant ? » ou « Aucun diviseur de c n'est solution. Et maintenant ? » (QZ-05) ;
-   après un échec sur un facteur (E9), « Et pour <trinôme> = 0 ? » une fois le produit nul écrit (QZ-05, point a du § 7).
+   après un tableau S-P de plus de 12 lignes (§ 13.5 de `decisions.md`), « Il y a trop de couples à tester. Et maintenant ? » ; après
+   un échec sur un facteur (E9), « Et pour <trinôme> = 0 ? » une fois le produit nul écrit (QZ-05, point a du § 7 ; exemple : F17, § 3).
+   Les étapes sans question (réordonnancement, « supprimer les fractions », « isoler » ; QZ-04, point i du § 7) s'ajoutent d'office,
+   sans bouton, et la partie passe à la question suivante.
 5. La partie se termine sur la carte « Solution » (S encadré, ligne ≈ d'E14), avec le bilan (QZ-08) et les boutons « Nouvelle équation »
    et « Voir dans Résoudre ».
 
@@ -70,23 +77,30 @@ Exemple de référence (2.9 a ; chaque carte commence par l'équation d'arrivée
 
 - Les identités remarquables sont écrites en formules (KaTeX) sur les boutons.
 - « Développer » en phase `ramener` : bonne réponse de F15 et d'Az 4.1 g (E2, D27) ; ailleurs, acceptée (QZ-05) si `resoudre_equation`
-  résout la forme développée (F12, F16 ; point f du § 7). « Tout ramener à gauche » : bonne réponse de F12 et F16, acceptée en F15
+  résout la forme développée (F12, F16 ; point f du § 7), y compris devant un produit nul (phase `produit_nul`, QZ-05, QZ-07).
+  « Tout ramener à gauche » : bonne réponse de F12 et F16, acceptée en F15
   (point h). « Produit nul » est un bouton de la phase `ramener` (choix validé le 06.11.2026) : c'est le piège de F15 et de F16.
 - Quand il reste un facteur du 2e degré non factorisé (après « ME » sur x³ − 5x² + 6x, par exemple), la question suivante porte sur ce
   facteur seul (« Et pour x² − 5x + 6 ? ») avec les boutons de la phase `factoriser`.
-- Sans question : une ligne seulement réordonnée (E1, réponse 1 du § 7). Sans bouton prévu : l'étape « on multiplie par 12 » (méthode
-  `FRACTIONS`, R2) et la phase `isoler` (degré 1) ; aucune famille ne les tire (§ 7, question ouverte i).
+- **Étapes sans question** (point i du § 7, décision du 06.11.2026) : « « supprimer les fractions » et « isoler » sont des étapes sans
+  question, affichées d'office (comme la ligne de réordonnancement, réponse 1 du § 7). Aucune famille ne les vise. » Ce sont la ligne
+  seulement réordonnée (E1), l'étape « on multiplie par 12 » (méthode `FRACTIONS`, R2) et la phase `isoler` (degré 1) ; elles n'ont ni
+  question ni bouton, et ne comptent pas dans le bilan (QZ-08).
 - « Diviser par la constante » n'est **jamais** proposé : ce n'est pas la rédaction des 1M, 1C et 2C (le facteur constant passe par le
   produit nul, D7).
 
 **QZ-05. Attendue, juste pas dans l'ordre, erreur** (décisions du 06.11.2026 : tentatives en échec, puis points a à h du § 7).
 - **Attendue** : toujours ce que le chemin du cours (`chemin`, D28) écrit ensuite, **tentative en échec comprise**. Quand le S-P (D3) ou
   le tâtonnement (D1, E7) échoue, il est la bonne réponse : ses lignes s'ajoutent (phrase de choix ; tableau S-P sans ✓, puis « Aucun
-  couple ne convient. », ou « On teste les diviseurs de 1 (±1) : aucun n'est solution. »), puis la question « Aucun couple ne convient.
-  Et maintenant ? » (ou « Aucun diviseur de c n'est solution. Et maintenant ? ») attend « Formule (Δ) », dont l'étape commence par « On
-  utilise la formule. » (§ 4, points b et c).
+  couple ne convient. », ou « On teste les diviseurs de 1 (±1) : aucun n'est solution. » ; tableau de plus de 12 lignes : « Le trinôme
+  est unitaire, mais il y a trop de couples à tester. », § 13.5), puis la question « Aucun couple ne convient. Et maintenant ? » (ou
+  « Aucun diviseur de c n'est solution. Et maintenant ? », « Il y a trop de couples à tester. Et maintenant ? ») attend « Formule (Δ) »,
+  dont l'étape `FORMULE` commence par « On utilise la formule. » (§ 4, points b et c ; décision du 06.11.2026, fin d'après-midi : deux
+  phrases partout).
 - **Échec sur un facteur (E9, point a)** : le chemin écrit le produit nul avant Δ. « Et maintenant ? » attend donc « Produit nul » ; puis
-  « Et pour <trinôme> = 0 ? » attend « Formule (Δ) ». « Formule (Δ) » choisie tout de suite (à « Et maintenant ? ») est acceptée.
+  « Et pour <trinôme> = 0 ? » attend « Formule (Δ) », dont l'étape commence par « On utilise la formule. », écrite après la ligne du
+  produit nul (décision du 06.11.2026). « Formule (Δ) » choisie tout de suite (à « Et maintenant ? ») est acceptée. Exemple : Javet
+  2.17 c et F17 (§ 3).
 - **Acceptée** (« juste, pas dans l'ordre ») : tout autre bouton dont la méthode aboutit, c'est-à-dire dont le moteur résout la forme
   obtenue (point f). Le chantier « S'entraîner » ajoute une fonction de classement des boutons qui fait réellement le calcul, formes
   structurées comprises ; sur un polynôme développé, `s_applique(methode, P)` le fait déjà (§ 13.4 : « la méthode aboutit »). Ce
@@ -94,7 +108,9 @@ Exemple de référence (2.9 a ; chaque carte commence par l'équation d'arrivée
   « … l'identité remarquable vient avant … » ; choix validé : sans « aussi ») ; « Tout ramener à gauche » en F15 : « Cela marche, mais ici
   on développe d'abord le produit. » (point h). La partie continue **par le chemin du cours**, lignes de l'échec comprises ; l'étape est
   comptée « juste, pas dans l'ordre » (QZ-08). Exemples : la formule d'emblée là où le S-P échoue (F4, F5, F10) ; le S-P pour
-  t² + 20t + 100 (F7) ; « Développer » quand `resoudre_equation` résout la forme développée (F12, F16).
+  t² + 20t + 100 (F7) ; « Développer » quand `resoudre_equation` résout la forme développée (F12, F16) ; « Développer » devant un
+  produit nul (point f ; décision du 06.11.2026), avec la remarque « Cela marche, mais l'équation est déjà un produit égal à 0 : le
+  produit nul est plus rapide. ».
 - **Refusée** : tout autre bouton (QZ-06, QZ-07).
 - Ce que `s_applique` décide sur `main` (question 11 de `suivi.md`) : rien en degré < 2 ;
   - ME : coefficients entiers et facteur k·xʲ différent de 1 (−pgcd quand a < 0, −1 compris, D21) ; aucune ME avec des coefficients
@@ -118,37 +134,46 @@ est comptée « erreur ».
 Elles sont produites par le moteur avec l'étape, pas écrites dans la page. Une tentative en échec du chemin du cours n'est jamais une erreur
 (QZ-05).
 
-**Règle d** (06.11.2026, point d du § 7) : une explication de refus nomme d'abord la méthode du cours qui vient avant, si elle s'applique
-(4x² − 9 et tâtonnement : « Avant le tâtonnement, regardez les identités remarquables : 4x² et 9 sont des carrés. ») ; sinon, elle dit
-pourquoi le choix n'aboutit pas. Modèles :
+**Règle d** (point d du § 7, généralisée le 06.11.2026 en fin d'après-midi en algorithme du moteur, § 4) : « une explication de refus
+nomme d'abord, avec les nombres de l'équation, la première méthode du cours qui s'applique avant le choix (ME de −1 en F3, ME ou Id. rem.
+pour x² − 5x et x² + 6x + 9) ; sinon, elle dit pourquoi le choix n'aboutit pas. » Les méthodes « avant le choix » sont celles de l'ordre
+du cours (D28) : en phase `ramener`, ramener tout à gauche (ou développer, F15) ; puis ME, Id. rem. ; en phase `produit_nul`, le
+produit nul. Chaque ligne ci-dessous est un exemple de cette règle (colonne « Branche ») ; une explication commence par la méthode
+d'avant quand il y en a une.
 
-| Situation | Explication |
-|---|---|
-| Id. rem. ou S-P choisi alors qu'un facteur commun existe | « Avant tout, cherchez un facteur commun : 6x² et 6 sont tous les deux divisibles par 6. » |
-| Fausse Id. rem. (les carrés sont aux bouts, mais pas 2AB) | « x² et 4 sont des carrés (A = x, B = 2), mais 2AB = 2 · x · 2 = 4x ≠ 6x : ce n'est pas une identité remarquable. » |
-| Mauvaise des trois Id. rem. | « Le terme du milieu est négatif : c'est A² − 2AB + B². » ; « Il n'y a pas de terme en x : c'est A² − B². » |
-| Somme de deux carrés prise pour A² − B² | « x² + 4 est une somme : A² − B² demande une différence. » |
-| S-P choisi alors qu'une Id. rem. s'applique (F6, x² − 5 ; règle d, point h) | « Avant le S-P, regardez les identités remarquables : x² − 5 est une différence (A = x, B = √5). » |
-| S-P choisi alors que a ≠ 1 | « Le S-P ne s'utilise que si le trinôme est unitaire (a = 1) ; ici a = 2. » |
-| Tâtonnement choisi alors que a = 1 (refusé : on suit le code, a ≥ 2 ; point e) | « Le trinôme est unitaire (a = 1) : le S-P est plus rapide. » |
-| Tâtonnement choisi alors qu'une Id. rem. s'applique (4x² − 9 ; règle d) | « Avant le tâtonnement, regardez les identités remarquables : 4x² et 9 sont des carrés. » |
-| Formule choisie en degré 3 (F11, point h) | « La formule ne s'applique qu'à un trinôme (degré 2) ; ici le degré est 3 : cherchez d'abord un facteur commun. » |
-| Méthode de factorisation ou produit nul choisi avant de ramener à « … = 0 » (F12, F16 ; choix validé pour F16) | « Le second membre n'est pas nul : ramenez d'abord tout à gauche. » |
-| Produit nul choisi, produit égal à un nombre non nul (F15) | « Le produit vaut 15, pas 0 : le produit nul ne s'applique pas. Développez d'abord. » |
-| « Tout ramener à gauche » en F15 (acceptée, QZ-05 ; remarque, point h) | « Cela marche, mais ici on développe d'abord le produit. » |
-| Développer choisi devant un produit nul | « L'équation est déjà un produit égal à 0 : utilisez le produit nul. » |
-| Valeur de Δ fausse | l'erreur typique nommée : « Attention au signe : Δ = b² − 4ac = (−5)² − 4 · 1 · 6. » |
-| Nombre de solutions faux | « Δ = −3 < 0 : l'équation n'a aucune solution réelle. » |
+| Situation | Branche | Explication |
+|---|---|---|
+| Id. rem., S-P ou tâtonnement choisi alors qu'un facteur commun existe (2.9 a, F1) | ME d'avant | « Avant tout, cherchez un facteur commun : 6x² et 6 sont tous les deux divisibles par 6. » |
+| Tâtonnement choisi pour x² − 5x (a = 1, une ME vient avant) | ME d'avant | « Avant tout, cherchez un facteur commun : x² et 5x contiennent tous les deux x. » |
+| S-P ou tâtonnement choisi alors que a = −1 (F3, −x² + 5x − 6) | ME de −1 d'avant | « Avant le S-P, mettez −1 en évidence : ici a = −1, et le S-P demande un trinôme unitaire (a = 1). » (tâtonnement : « Avant le tâtonnement, mettez −1 en évidence : ici a = −1. ») |
+| Formule choisie en degré 3 (F11, x³ − x ; point h) | ME d'avant | « Avant tout, cherchez un facteur commun : x³ et x contiennent tous les deux x. La formule ne s'applique qu'à un trinôme (degré 2), et ici le degré est 3. » |
+| S-P choisi alors qu'une Id. rem. s'applique (F6, x² − 5 ; point h) | Id. rem. d'avant | « Avant le S-P, regardez les identités remarquables : x² − 5 est une différence (A = x, B = √5). » |
+| Tâtonnement choisi alors qu'une Id. rem. s'applique (4x² − 9) | Id. rem. d'avant | « Avant le tâtonnement, regardez les identités remarquables : 4x² et 9 sont des carrés. » |
+| Tâtonnement choisi pour x² + 6x + 9 (a = 1, une Id. rem. vient avant) | Id. rem. d'avant | « Avant le tâtonnement, regardez les identités remarquables : x² et 9 sont des carrés, et 2 · x · 3 = 6x. » |
+| Méthode de factorisation ou produit nul choisi avant de ramener à « … = 0 » (F12, F16 ; choix validé pour F16) | ramener d'avant | F16 : « Ramenez d'abord tout à gauche : le second membre, (x − 1)(x + 3), n'est pas nul. » ; F12 (4(x − 2)² = 1) : « Ramenez d'abord tout à gauche : le second membre, 1, n'est pas nul. » |
+| Produit nul choisi, produit égal à un nombre non nul (F15) | développer d'avant | « Avant le produit nul, développez (x + 1)(x + 3) : le produit vaut 15, pas 0. » |
+| Méthode de factorisation ou formule choisie en F15 | développer d'avant | « Avant tout, développez (x + 1)(x + 3) : le second membre vaut 15, pas 0. » |
+| Développer choisi devant un produit nul que `resoudre_equation` ne résout pas une fois développé (Az 4.1 d : la forme développée 3x³ − 14x² + 21x − 10 = 0 est `hors_cours` sur `main`) | produit nul d'avant | « Utilisez d'abord le produit nul : l'équation est déjà un produit égal à 0. » |
+| Fausse Id. rem. (F4 ; les carrés sont aux bouts, mais pas 2AB) | pourquoi | « x² et 4 sont des carrés (A = x, B = 2), mais 2AB = 2 · x · 2 = 4x ≠ 6x : ce n'est pas une identité remarquable. » |
+| Mauvaise des trois Id. rem. | pourquoi | « Le terme du milieu est négatif : c'est A² − 2AB + B². » ; « Il n'y a pas de terme en x : c'est A² − B². » |
+| Somme de deux carrés prise pour A² − B² (F5) | pourquoi | « x² + 4 est une somme : A² − B² demande une différence. » |
+| Id. rem. choisie, un terme des bouts n'est pas un carré (F8, 2x² + 13x + 15 ; nouveau modèle, à relire) | pourquoi | « 2x² n'est pas un carré : ce n'est pas une identité remarquable. » |
+| ME choisie sans facteur commun (F4, x² + 6x + 4 ; nouveau modèle, à relire) | pourquoi | « x², 6x et 4 n'ont pas de facteur commun. » |
+| S-P choisi alors que a ≠ 1, sans ME ni Id. rem. d'avant (F8, F9) | pourquoi | « Le S-P ne s'utilise que si le trinôme est unitaire (a = 1) ; ici a = 2. » |
+| Tâtonnement choisi alors que a = 1, sans ME ni Id. rem. d'avant (F10, F13 ; refusé : on suit le code, a ≥ 2 ; point e) | pourquoi | « Le trinôme est unitaire (a = 1) : le S-P est plus rapide. » |
+| Tâtonnement choisi, coefficients non entiers, sans méthode d'avant (Javet 2.17 e ; D22 ; décision du 06.11.2026) | pourquoi | « Le tâtonnement demande des coefficients entiers : il faut la formule. » |
+| Valeur de Δ fausse | pourquoi | l'erreur typique nommée : « Attention au signe : Δ = b² − 4ac = (−5)² − 4 · 1 · 6. » |
+| Nombre de solutions faux | pourquoi | « Δ = −3 < 0 : l'équation n'a aucune solution réelle. » |
 
-Lignes qui ne suivent pas encore la règle d ou le point f (non réécrites, à régler au chantier « S'entraîner ») :
-- « S-P choisi alors que a ≠ 1 » quand une ME vient avant (F3, a = −1 : la ME de −1 s'applique, § 3 dit « refusé : a = −1 ») ;
-- « Tâtonnement choisi alors que a = 1 » quand une ME ou une Id. rem. vient avant (x² − 5x, x² + 6x + 9) : la phrase du point e nomme le
-  S-P, qui vient après ;
-- « Produit nul choisi … (F15) » dit d'abord pourquoi, puis nomme « Développez d'abord » ; les méthodes de factorisation en F15 n'ont pas
-  de modèle (celui de « ramenez d'abord » nomme le ramener, alors que l'attendue est « Développer ») ;
-- « Développer choisi devant un produit nul » est refusé, alors que, par le point f, « Développer » est acceptée si `resoudre_equation`
-  résout la forme développée ;
-- sans modèle : le tâtonnement refusé pour des coefficients non entiers (D22), sans méthode d'avant qui s'applique.
+Remarques des choix acceptés (QZ-05 ; pas des refus) :
+- choix qui aboutit mais vient après l'attendue dans l'ordre du cours (la formule d'emblée en F4, le S-P en F7) : « Cela marche, mais le
+  S-P vient avant dans l'ordre du cours. » (de même « … l'identité remarquable vient avant … ») ;
+- « Tout ramener à gauche » en F15 (point h) : « Cela marche, mais ici on développe d'abord le produit. » ;
+- « Développer » devant un produit nul, quand `resoudre_equation` résout la forme développée (point f ; décision du 06.11.2026) : « Cela
+  marche, mais l'équation est déjà un produit égal à 0 : le produit nul est plus rapide. »
+
+Un refus pour lequel l'algorithme du § 4 ne trouve aucun modèle ne s'affiche jamais : l'équation n'est pas proposée (QZ-10), et le test
+de la famille échoue (§ 5).
 
 **QZ-08. Score et bilan.** Rien n'est enregistré (ni compte, ni `localStorage`). La page tient un compteur pour la session : « Étapes réussies du premier coup : 7 / 9 ».
 À la fin d'une partie, le bilan donne trois nombres : étapes réussies du premier coup (✓), étapes « justes, pas dans l'ordre » (QZ-05), erreurs (QZ-06).
@@ -182,14 +207,15 @@ Chaque famille est un générateur à coefficients au hasard (bornés : entiers 
 à 2.12 des corrigés comme liste fixe (réponse 3 du § 7). Le générateur **vérifie** que l'équation tirée a bien la propriété et le chemin de sa
 famille (sinon il retire, QZ-10). Tirage : familles équiprobables, jamais deux fois la même de suite.
 
-Liste fixe : les 40 exercices de 2.9 à 2.12 (§ 8 de `decisions.md`) sont tous résolus par l'outil sur `main`. Le chemin de **2.12 b**
-(6x² + 5x + 1 = 0) a changé : tâtonnement en échec (diviseurs ±1), puis la formule (Δ = 1), écart voulu au corrigé (D1).
+Liste fixe : les 40 exercices de 2.9 à 2.12 (§ 8 de `decisions.md`), plus **Javet 2.17 c** (2x² − 4x − 4 = 0 ; décision du 06.11.2026,
+point a du § 7), soit 41 équations, toutes résolues par l'outil sur `main`. Le chemin de **2.12 b** (6x² + 5x + 1 = 0) a changé :
+tâtonnement en échec (diviseurs ±1), puis la formule (Δ = 1), écart voulu au corrigé (D1).
 
 | # | Famille | Exemple | Chemin du cours | Choix piège (refusé, ou accepté avec QZ-05) |
 |---|---|---|---|---|
 | F1 | ME cachée devant une Id. rem. | 48z² − 216z + 243 = 0 | ME (3) → A² − 2AB + B² → produit nul | Id. rem. d'emblée (refusée : 48 n'est pas un carré) |
 | F2 | ME qui rend le trinôme unitaire | 2z² + 24z + 64 = 0 | ME (2) → S-P → produit nul | tâtonnement (accepté : r = −4 existe) |
-| F3 | a = −1 | −x² + 5x − 6 = 0 | ME (−1) → S-P → produit nul | S-P d'emblée (refusé : a = −1) |
+| F3 | a = −1 | −x² + 5x − 6 = 0 | ME (−1) → S-P → produit nul | S-P d'emblée (refusé : la ME de −1 vient avant, QZ-07) |
 | F4 | Fausse Id. rem. | x² + 6x + 4 = 0 | S-P en échec → formule (Δ = 20) | A² + 2AB + B² (refusée) ; formule d'emblée (acceptée) |
 | F5 | Somme de deux carrés | x² + 4 = 0 | S-P en échec → formule (Δ = −16 < 0, S = ∅) | A² − B² (refusée) ; formule d'emblée (acceptée) |
 | F6 | Id. rem. avec B = √k ou B fractionnaire | x² − 5 = 0 ; 9x² − 1/9 = 0 | A² − B² → produit nul | formule (acceptée) ; S-P pour x² − 5 (refusé, QZ-07, point h) |
@@ -203,6 +229,29 @@ Liste fixe : les 40 exercices de 2.9 à 2.12 (§ 8 de `decisions.md`) sont tous 
 | F14 | Δ = 0 sans Id. rem. visible | 4x² + 12x + 9 = 0 (Id. rem.) ; 2x² + 4x + 2 = 0 (ME puis Id. rem.) | selon le cas | formule (acceptée) |
 | F15 | Produit égal à un nombre non nul | (x + 1)(x + 3) = 15 | Développer (double distribution, E2) → ramener (x² + 4x − 12 = 0) → S-P → produit nul | Produit nul (refusé, QZ-07) ; « Tout ramener à gauche » (accepté, QZ-05, point h) |
 | F16 | Facteur commun aux deux membres (2.12 e) | (x − 1)(2 − x) = (x − 1)(x + 3) | ramener sans développer, avec l'avertissement « Attention : on ne divise pas par (x − 1) … » (E3) dans l'étape « ramener » (le code fait foi, point g) → ME de (x − 1) → produit nul | Produit nul (refusé : « ramenez d'abord tout à gauche », QZ-07) ; Développer (accepté si `resoudre_equation` résout la forme développée, point f) |
+| F17 | Échec sur un facteur après une ME (E9 ; décision du 06.11.2026, point a) | 2x² − 4x − 4 = 0 (Javet 2.17 c) ; 3x² + 6x − 3 = 0 ; 5x² + 5x + 5 = 0 ; −2x² + 4x + 2 = 0 | ME (constante) → S-P en échec → produit nul → formule sur le facteur (« Et pour x² − 2x − 2 = 0 ? ») | Formule (Δ) à « Aucun couple ne convient. Et maintenant ? » (acceptée, QZ-05) ; tâtonnement sur le facteur (refusé : a = 1) |
+
+**F17, générateur** : une constante k (2 ≤ |k|, k < 0 donnant la ME de −pgcd avec sa phrase, D21, E3), puis un trinôme unitaire
+x² + bx + c à coefficients entiers, c ≠ 0, **sans couple d'entiers** (b² − 4c n'est pas un carré parfait, Δ < 0 compris), qui n'est pas
+une Id. rem. (b ≠ 0 quand c < 0 : sinon A² − B² avec B = √|c|, D8) ; l'équation tirée est k(x² + bx + c) développée, coefficients
+bornés comme les autres familles (donc |c| ≤ 6 et le tableau S-P a au plus 2 lignes : jamais le cas « trop de couples »). Le générateur
+vérifie le chemin (ME, S-P avec `aboutit` faux, produit nul, formule) et le statut `resolu` (QZ-10).
+
+**F17, chemin vérifié sur `main`** (`resoudre_equation`, 06.11.2026) : sur 2x² − 4x − 4 = 0, 3x² + 6x − 3 = 0, 5x² + 5x + 5 = 0 et
+−2x² + 4x + 2 = 0, les étapes sont `factoriser`/ME, `factoriser`/SP (`aboutit` faux), `produit_nul`, `delta_valeur`, `delta_nombre` (statut
+`resolu` ; S = {1 − √3 ; 1 + √3}, {−1 − √2 ; −1 + √2}, ∅, {1 − √2 ; 1 + √2}). Sur `main`, l'étape S-P se termine par « Aucun couple ne
+convient : on utilise la formule. », avant la ligne du produit nul ; avec −2, la ME est précédée de « Le coefficient de x² est négatif
+(a = −2) : on met d'abord −2 en évidence. » ; avec Δ < 0, la dernière ligne est « Δ < 0 : x² + x + 1 = 0 n'a aucune solution réelle. ».
+Chemin du quiz (après les points b et c, § 4), sur Javet 2.17 c :
+
+| Question | Bonne réponse | Carte ajoutée |
+|---|---|---|
+| Par quoi commencez-vous ? | ME | `2x² − 4x − 4 = 0 ⇔ 2(x² − 2x − 2) = 0` · ME |
+| Et pour x² − 2x − 2 ? | S-P (tentative en échec, QZ-05) | « Le trinôme x² − 2x − 2 est unitaire : S-P. », « On cherche deux nombres dont le produit vaut −2 et la somme vaut −2 : », tableau d'une ligne (1 et −2, somme −1) sans ✓, « Aucun couple ne convient. » |
+| Aucun couple ne convient. Et maintenant ? | Produit nul (« Formule (Δ) » acceptée) | `⇔ 2 = 0 (impossible) ou x² − 2x − 2 = 0` · produit nul |
+| Et pour x² − 2x − 2 = 0 ? | Formule (Δ) | « On utilise la formule. » (première ligne de l'étape `FORMULE`, après la ligne du produit nul) |
+| valeur de Δ (`delta_valeur`) | 12 | `Δ = b² − 4ac = (−2)² − 4 · 1 · (−2) = 4 + 8 = 12` |
+| nombre de solutions (`delta_nombre`) | 2 | `Δ > 0 : deux solutions. √Δ = √12 = 2√3`, x₁, x₂, `⇔ x = 1 − √3 ou x = 1 + √3` ; puis la carte « Solution », `S = {1 − √3 ; 1 + √3}` |
 
 ## 4. Interface du moteur
 
@@ -225,9 +274,9 @@ Le quiz ajoute une fonction au manifeste, appelée **une seule fois par partie**
 ```
 quiz_json(exo)  ->  {"equation": tex, "etapes": [EtapeQuiz], "solutions": [tex], "S": tex}
 EtapeQuiz = champs de l'Etape (sauf segment), plus :
-  "question":   texte (« Et pour x² − 1 ? »)
-  "boutons":    [cle]                       # QZ-04, ordre fixe de la phase
-  "attendue":   cle                         # QZ-05 : ce que le chemin du cours écrit ensuite, tentative en échec comprise
+  "question":   texte (« Et pour x² − 1 ? ») | null    # null : étape sans question (FRACTIONS, ISOLER ; point i)
+  "boutons":    [cle]                       # QZ-04, ordre fixe de la phase ; [] pour une étape sans question
+  "attendue":   cle | null                  # QZ-05 : ce que le chemin du cours écrit ensuite, tentative en échec comprise
   "acceptees":  {cle: remarque}             # QZ-05 : la méthode aboutit (fonction de classement), pas l'attendue
   "refusees":   {cle: explication}          # QZ-06, QZ-07 : une explication par bouton refusé
   "sous_questions": []                      # QZ-14, vide en première version
@@ -235,17 +284,49 @@ EtapeQuiz = champs de l'Etape (sauf segment), plus :
 
 - `attendue` se lit dans `methode` : RAMENER → « Tout ramener à gauche », DEVELOPPER → « Développer », ME, les trois Id. rem., SP, TATONNEMENT,
   FORMULE → « Formule (Δ) », PRODUIT_NUL → « Produit nul ». Les étapes `delta_valeur` et `delta_nombre` ont leurs propres boutons (QZ-04).
-- Après une tentative en échec, le moteur de `main` passe directement à `delta_valeur` (une étape `factoriser` / `FORMULE` n'existe que pour
-  la formule choisie d'emblée, coefficients non entiers, D22). Points b et c (à faire dans le chantier « S'entraîner », première partie,
-  côté moteur) : la phrase « On utilise la formule. » devient la première ligne d'une étape `FORMULE` à part, qui porte la question « … Et
-  maintenant ? » ; l'étape de l'échec se termine sur « Aucun couple ne convient. » (ou la ligne des diviseurs). « Résoudre » garde le
-  même texte, coupé en deux phrases ; les instantanés modifiés sont listés pour l'enseignant.
-- Échec sur un facteur (E9, point a) : l'étape suivante est `produit_nul` (« Et maintenant ? »), puis l'étape `FORMULE` du trinôme
-  (« Et pour <trinôme> = 0 ? ») ; `acceptees` de la première contient « Formule (Δ) ».
+- **Étapes sans question** (point i, décision du 06.11.2026) : la ligne seulement réordonnée (E1 ; elle appartient à l'étape qui suit,
+  § 5 de `decisions.md`, et s'affiche d'office avant la question de cette étape), l'étape `ramener`/`FRACTIONS` (« on multiplie par
+  12 », R2) et l'étape `isoler`/`ISOLER` (degré 1) : `question` et `attendue` valent null, `boutons`, `acceptees` et `refusees` sont
+  vides ; la page ajoute la carte d'office et passe à l'étape suivante. Aucune famille ne les vise (§ 3).
+- **Étape `FORMULE` et ses premières lignes** (points b et c ; décisions du 06.11.2026, fin d'après-midi). Sur `main`, après une
+  tentative en échec, le moteur passe directement à `delta_valeur` (une étape `factoriser`/`FORMULE` n'existe que pour la formule
+  choisie d'emblée, coefficients non entiers, D22), et la phrase « … : on utilise la formule. » termine l'étape de l'échec
+  (`PHRASE_SP_ECHEC`, `PHRASE_SP_TROP`, ligne des diviseurs de `_ecrire_tatonnement`, `moteur/second_degre.py`). Au chantier
+  « S'entraîner », première partie, côté moteur, l'étape `FORMULE` existe à part, selon le cas :
+  - formule choisie d'emblée (coefficients non entiers, D22) : inchangée, la phrase de choix « Pas de ME, pas d'Id. rem. ; les
+    coefficients ne sont pas entiers : on utilise la formule. » (E4) ;
+  - après un S-P en échec : l'étape S-P se termine sur « Aucun couple ne convient. », l'étape `FORMULE` commence par « On utilise la
+    formule. » (D3, E6) ;
+  - après un tâtonnement en échec : l'étape se termine sur « On teste les diviseurs de 1 (±1) : aucun n'est solution. », l'étape
+    `FORMULE` commence par « On utilise la formule. » (E7) ;
+  - tableau S-P de plus de 12 lignes : l'étape S-P se termine sur « Le trinôme est unitaire, mais il y a trop de couples à tester. »,
+    puis l'étape `FORMULE` (§ 13.5) ;
+  - échec sur un facteur (E9, point a) : l'étape de l'échec se termine de même ; vient l'étape `produit_nul` (« Et maintenant ? »,
+    `acceptees` contient « Formule (Δ) »), puis l'étape `FORMULE` du trinôme (« Et pour <trinôme> = 0 ? »), dont « On utilise la
+    formule. » est la première ligne, **après** la ligne du produit nul (à faire dans `_ecrire_sp`, `_ecrire_tatonnement` et dans l'écriture
+    de la formule d'un facteur, qui suit `_ecrire_produit_nul`).
+  « Résoudre » écrit les mêmes lignes (invariant de concaténation) : même texte coupé en deux phrases, et, dans les cas E9, « On utilise
+  la formule. » après la ligne du produit nul ; les instantanés modifiés sont listés pour l'enseignant. C'est une règle à venir : `main`
+  écrit encore l'ancien texte.
 - Chaque bouton de `boutons` est dans exactement un des trois ensembles (`attendue`, `acceptees`, `refusees`) : vérifié par le validateur de sortie.
 - `s_applique(methode, P)` et `appliquer(methode, P)` (une méthode seule, rédigée, ou None) portent sur un `Polynome` développé ; ils existent et
   sont testés depuis P1 et P2b. Le chantier « S'entraîner » ajoute la fonction de classement des boutons (point f) : elle fait réellement le
   calcul, formes structurées comprises (« Développer » est acceptée si `resoudre_equation` résout la forme développée).
+- **Algorithme de la règle d** (QZ-07 ; fonction à écrire au chantier « S'entraîner », dans `moteur/second_degre.py`, appelée par
+  `quiz_json` pour chaque bouton refusé) : `explication_refus(etape, bouton, inconnue, decimaux_enonce) -> texte | None`.
+  - Prend : l'étape du chemin du cours où la question est posée (sa `phase`, sa `cible` : `Polynome` développé, ou équation structurée
+    en phase `ramener` et `produit_nul`), le bouton refusé (clé de QZ-04), l'inconnue et `decimaux_enonce` (pour écrire les nombres de
+    l'équation comme « Résoudre », E14).
+  - 1) Méthodes d'avant, dans l'ordre du cours (D28), seulement celles qui précèdent le bouton : en phase `ramener`, développer (produit
+    égal à un nombre non nul, F15) puis ramener tout à gauche ; en phase `factoriser`, la ME (`s_applique("ME", cible)`, −1 et −pgcd
+    compris, D21), puis l'Id. rem. (`s_applique` d'une des trois) ; en phase `produit_nul`, le produit nul. La première qui s'applique
+    donne l'explication, avec les nombres de l'équation (modèles « … d'avant » de QZ-07).
+  - 2) Sinon, la raison pour laquelle le bouton n'aboutit pas, lue sur la cible (modèles « pourquoi » de QZ-07) : a ≠ 1 (S-P), a = 1
+    (tâtonnement, on suit le code), coefficients non entiers (tâtonnement), degré 3 (formule), fausse Id. rem., mauvaise des trois, somme
+    de deux carrés, terme des bouts non carré, pas de facteur commun (ME) ; pour `delta_valeur` et `delta_nombre`, l'erreur typique.
+  - Rend : le texte (TeX en ligne, vouvoiement R12, sans nom de méthode interne), ou None si aucun modèle ne s'applique : `quiz_json`
+    rejette alors l'équation (QZ-10) ; le test de la famille le relève (§ 5). Le texte est recalculé à partir de la cible, jamais
+    écrit à la main (QZ-02) ; chaque nombre cité est relu sur le polynôme (garde-fou, « rien de faux à l'écran »).
 - La concaténation des `lignes` de toutes les étapes **est** la chaîne de `second_degre.blocs` (invariant du § 5, testé) ; les cartes du quiz
   sont celles de `second_degre.cartes` (R1), badges de `resoudre_eq.TITRES`.
 - L'onglet « Résoudre » et le quiz partagent donc `resoudre_equation` ; le quiz y ajoute seulement les questions, le classement des boutons et
@@ -257,9 +338,13 @@ EtapeQuiz = champs de l'Etape (sauf segment), plus :
   et chemin de la famille vérifiés ; chaque bouton classé dans exactement un ensemble ; `attendue` = la méthode du chemin du cours (tentatives en
   échec comprises) ; chaque méthode de `acceptees` aboutit réellement (le moteur résout la forme obtenue ; sur un polynôme développé, `appliquer`
   rend une factorisation qui se redéveloppe) ; aucune méthode de `refusees` n'aboutit ; la concaténation des `lignes` égale la chaîne de « Résoudre » pour la même équation, et les cartes celles de `cartes`.
-- **Rédaction** : instantanés `quiz_json` sur les exercices 2.9 à 2.12 et une graine par famille (F1 à F16) ; textes au vouvoiement (R12),
+- **Rédaction** : instantanés `quiz_json` sur la liste fixe (2.9 à 2.12, Javet 2.17 c) et une graine par famille (F1 à F17) ; une
+  équation avec une étape sans question (`FRACTIONS`, `isoler` ; point i) ; une explication de refus par branche de la règle d (QZ-07) ; textes au vouvoiement (R12),
   vocabulaire (SOC, 7c), notation suisse et ≈ (D13).
-- **Pages** : un parcours complet au clic (2.9 a) ; une tentative en échec puis « Formule (Δ) » (2.12 b) ; deux erreurs puis réponse donnée ;
+- **Python (règle d)** : pour chaque famille et chaque bouton refusé, `explication_refus` rend un texte (jamais None sur les familles) ;
+  quand une ME ou une Id. rem. s'applique avant le bouton, le texte la nomme.
+- **Pages** : un parcours complet au clic (2.9 a) ; une tentative en échec puis « Formule (Δ) » (2.12 b) ; un échec sur un facteur
+  (Javet 2.17 c : « Produit nul », puis « Formule (Δ) ») ; deux erreurs puis réponse donnée ;
   « juste, pas dans l'ordre » ; compteur ; « Voir dans Résoudre » ; `?onglet=entrainement&exo=…` ; navigation au clavier ; `test_largeurs`
   de 320 à 1100 px à chaque phase (`CONNUS` vide).
 
@@ -286,7 +371,8 @@ Points a à h (posés le 06.11.2026 au matin), **réglés (06.11.2026, après-mi
 chemin du cours écrit ensuite (QZ-05). Les trois choix du matin sont validés (QZ-04, QZ-05, QZ-07).
 
 - a. **Formule sur un facteur (E9 ; Javet 2.17 c, 2x² − 4x − 4 = 0 ; 4x² + 2x + 2 = 0)** : réglé, « Produit nul » puis la formule, formule
-  tout de suite acceptée (QZ-03, QZ-05, § 4). Aucune famille ne tire encore ce cas.
+  tout de suite acceptée (QZ-03, QZ-05, § 4) ; le 06.11.2026 en fin d'après-midi, Javet 2.17 c entre dans la liste fixe et la famille
+  F17 tire ce cas (§ 3).
 - b. **Réponse écrite avant la question** : réglé avec c, « On utilise la formule. » ouvre une étape `FORMULE` à part (§ 4, QZ-05).
 - c. **Pas d'étape « formule » à part après un échec** : réglé avec b, au chantier « S'entraîner », première partie, côté moteur (§ 4).
 - d. **« … : il faut la formule. » faux quand une méthode vient avant (4x² − 9)** : réglé par la règle d (QZ-07 ; exemple du § 9 de
@@ -297,6 +383,27 @@ chemin du cours écrit ensuite (QZ-05). Les trois choix du matin sont validés (
 - g. **Avertissement de F16** : réglé, il reste dans l'étape « ramener » (§ 3, F16).
 - h. **Explications sans modèle (F6, F11, F15)** : réglé, trois phrases ajoutées (QZ-07 ; QZ-05 pour F15 ; § 3).
 
-Question encore ouverte (à trancher au chantier « S'entraîner ») :
+Décisions de l'enseignant du 06.11.2026 (fin d'après-midi) : **toutes les questions sont réglées** ; la spécification est complète.
 
-- i. **Étapes sans bouton** : `FRACTIONS` (R2) et `isoler` (degré 1) (ancien point f du fichier du 06.11.2026 au matin).
+- i. **Étapes sans bouton** (`FRACTIONS`, R2, et `isoler`, degré 1 ; ancien point f du fichier du 06.11.2026 au matin) : réglé,
+  « « supprimer les fractions » et « isoler » sont des étapes sans question, affichées d'office (comme la ligne de réordonnancement,
+  réponse 1 du § 7). Aucune famille ne les vise. » (QZ-03, QZ-04, § 4, § 5).
+- b/c contre a : réglé, « Dans les cas E9, « On utilise la formule. » passe après la ligne du produit nul (première ligne de l'étape
+  FORMULE) ; ailleurs, même texte, coupé en deux phrases. » (QZ-05, § 3 F17, § 4).
+- b/c contre D3/E6 : réglé, « deux phrases partout, « Aucun couple ne convient. » puis « On utilise la formule. » ; tableau S-P de plus
+  de 12 lignes : « Le trinôme est unitaire, mais il y a trop de couples à tester. » puis l'étape FORMULE. » ; D3, E6, E7 et § 13.5 de
+  `decisions.md` mis à jour (QZ-03, QZ-05, § 4).
+- g contre E3 : réglé, « le code fait foi » ; E3 de `decisions.md` corrigé (l'avertissement de 2.12 e est dans l'étape « ramener » ;
+  § 3, F16).
+- Règle d généralisée : réglé, algorithme du moteur (QZ-07, § 4 ; fonction `explication_refus` au chantier « S'entraîner »).
+- QZ-07, « S-P choisi alors que a ≠ 1 » quand une ME vient avant : réglé, F3 nomme la ME de −1 avec les nombres (QZ-07, § 3).
+- QZ-07, « Tâtonnement choisi alors que a = 1 » quand une ME ou une Id. rem. vient avant (x² − 5x, x² + 6x + 9) : réglé, l'explication
+  nomme la ME ou l'Id. rem. ; la phrase du point e reste quand aucune ne s'applique (QZ-07).
+- QZ-07, F15 (« Produit nul » et méthodes de factorisation) : réglé, l'explication nomme d'abord « développez (x + 1)(x + 3) » (QZ-07).
+- QZ-07, F11 (formule en degré 3) : réglé, l'explication nomme d'abord le facteur commun (QZ-07).
+- QZ-07, « Développer » devant un produit nul : réglé, « accepté (f), « Cela marche, mais l'équation est déjà un produit égal à 0 : le
+  produit nul est plus rapide. » » (QZ-04, QZ-05, QZ-07) ; refusé seulement si `resoudre_equation` ne résout pas la forme développée.
+- QZ-07, tâtonnement avec des coefficients non entiers : réglé, « « Le tâtonnement demande des coefficients entiers : il faut la
+  formule. » (sauf si la règle d s'applique d'abord) » (QZ-07).
+- Point a, liste fixe et famille : réglé, « Javet 2.17 c (2x² − 4x − 4 = 0) entre dans la liste fixe ; nouvelle famille F17 « échec sur
+  un facteur après une ME » (générateur : ME d'une constante, puis un trinôme unitaire sans couple d'entiers) » (§ 3, § 5).

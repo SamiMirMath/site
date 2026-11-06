@@ -42,7 +42,7 @@ Les parties P1 et P2 de l'audit (extraction de la chaîne et du CSS) ne font don
 | D0 | Les PDF de référence vont dans `docs/reference/equations-2e-degre/`, contrôlés par `git check-ignore` avant le premier commit. Ils ne sont jamais commités. | P0 |
 | D1 | **Tâtonnement** (a ≠ 1, coefficients entiers) : on teste les **diviseurs entiers** de c. S'il y a une racine entière r, on l'affiche seule (2.11). Sinon, **une seule ligne** nomme les diviseurs testés, sans les calculs (décision du 05.11.2026), puis on passe **directement à la formule**, qui confirme le résultat (solutions non entières ou S = ∅). **Écart voulu au corrigé 2.12 b** (décision du 05.11.2026) : on ne cherche **pas** de solution fractionnaire. FA-09 reste valable pour l'outil Factorisation. | outil 2e degré |
 | D2 | La formule (Δ) est la 5e méthode, après ME, Id. rem., S-P et tâtonnement. Une **variante « Par la formule »** est proposée quand le chemin du cours ne passe pas déjà par la formule (E12). | outil |
-| D3 | **Échec du S-P** (a = 1, coefficients entiers, aucun couple) : le tableau **complet**, sans ✓, puis « Aucun couple ne convient : on utilise la formule. » | outil |
+| D3 | **Échec du S-P** (a = 1, coefficients entiers, aucun couple) : le tableau **complet**, sans ✓, puis **deux phrases** (06.11.2026) : « Aucun couple ne convient. », qui termine l'étape du S-P, puis « On utilise la formule. », première ligne de l'étape FORMULE ; dans les cas E9, « On utilise la formule. » vient après la ligne du produit nul (06.11.2026). Règle à venir : le code de `main` écrit encore l'ancien texte (« Aucun couple ne convient : on utilise la formule. », `PHRASE_SP_ECHEC`) ; le changement est fait au chantier « S'entraîner », première partie, avec la liste des instantanés modifiés pour l'enseignant. | outil |
 | D4 | Tableau S-P : un **type de bloc commun** (A4), avec constructeur dans `sortie.py`, schéma, rendu, CSS et test. | P2, P5 |
 | D5 | **Étiquettes** grises, sans parenthèses, comme le corrigé : « ME », « Id. rem. A² − B² avec A = …, B = … », « produit nul ». Le S-P, le tâtonnement et la formule n'ont pas d'étiquette : une phrase les annonce. **Écart voulu à R3** (mots entiers entre parenthèses), limité à cet outil. | outil |
 | D6 | « Vérification : 2AB = … ✓ » pour A² ± 2AB + B². | outil |
@@ -102,7 +102,7 @@ La forme impersonnelle est de règle (« on », R12). Les ⇔ sont alignés, une
 
 **E3. ME.**
 - Facteur commun : pgcd entier des coefficients × la plus grande puissance commune de x (`3x(x − 4)`, `x(x² − 1)`). Si a < 0 : −pgcd (D21), précédé de « Le trinôme n'est pas unitaire (a = −1) : on met d'abord −1 en évidence. » (2.10 e), ou, avec un pgcd, « Le coefficient de x² est négatif (a = −6) : on met d'abord −6 en évidence. ». Exemple : `−6x² + 12x − 6 = 0 ⇔ −6(x² − 2x + 1) = 0` (ME), puis la méthode suivante sur x² − 2x + 1, jusqu'à `−6 = 0 (impossible) ou x − 1 = 0`.
-- Facteur commun binôme aux deux membres (2.12 e) : phrase « Attention : on ne divise pas par (x − 1), car ce facteur peut être nul ! On ramène tout dans le membre de gauche, puis on met (x − 1) en évidence. »
+- Facteur commun binôme aux deux membres (2.12 e) : phrase « Attention : on ne divise pas par (x − 1), car ce facteur peut être nul ! On ramène tout dans le membre de gauche, puis on met (x − 1) en évidence. » Elle est écrite dans l'étape « ramener » (phase `ramener`, avant la ligne `(x − 1)(2 − x) − (x − 1)(x + 3) = 0`), pas dans l'étape de la ME : le code de `main` fait foi (`_phrase_attention`, appelée par l'étape « ramener » ; quiz.md § 7, point g) (06.11.2026).
 - Étiquette « ME ».
 - Le facteur restant est réduit sur ses propres lignes : `(x − 1)(2 − x − x − 3) = 0 ⇔ (x − 1)(−2x − 1) = 0`.
 
@@ -129,14 +129,14 @@ Rien avant une Id. rem., ni avant une ME (sauf quand a < 0, E3).
   - si c > 0, les deux nombres ont le signe de b (positifs si b = 0) ;
   - si c < 0, le plus grand en valeur absolue a le signe de b (à égalité, le négatif en premier).
 - On s'arrête à la ligne ✓. Les facteurs suivent l'ordre de cette ligne : (4, −9) donne (x + 4)(x − 9).
-- **Échec (D3)** : toutes les lignes, sans ✓, puis « Aucun couple ne convient : on utilise la formule. »
+- **Échec (D3)** : toutes les lignes, sans ✓, puis « Aucun couple ne convient. » ; « On utilise la formule. » est la première ligne de l'étape FORMULE qui suit, et, dans les cas E9, vient après la ligne du produit nul (06.11.2026 ; règle à venir : le code de `main` écrit encore l'ancien texte (`PHRASE_SP_ECHEC`) ; le changement est fait au chantier « S'entraîner », première partie, avec la liste des instantanés modifiés pour l'enseignant).
 
 **E7. Tâtonnement** (a > 1, coefficients entiers, après ME).
 - **Si une racine entière existe** : elle est unique, parce qu'après la ME le trinôme est primitif et a ≠ ±1. On écrit :
   - « x = −5 est solution, car 2 · (−5)² + 13 · (−5) + 15 = 50 − 65 + 15 = 0. » Après une ME : « x = −4 est solution de 2x² + x − 28 = 0, car … » ;
   - un terme b · r avec b = ±1 s'écrit directement (« 2 · (−4)² − 4 − 28 ») ;
   - « Donc 2x² + 13x + 15 = (x + 5)(2x + △) avec 5 · △ = 15, donc △ = 3. » (−r)·△ = c, où (−r) est écrit comme un nombre : `−12 · △ = −72`.
-- **Sinon (D1)** : une seule ligne, « On teste les diviseurs de 12 (±1, ±2, ±3, ±4, ±6, ±12) : aucun n'est solution. On utilise la formule. » Les diviseurs sont rangés par |d| croissant. Aucun calcul d'essai n'est écrit. L'affirmation est confirmée juste après : la formule donne des solutions non entières ou S = ∅, donc rien de non démontré ne reste à l'écran.
+- **Sinon (D1)** : une seule ligne, « On teste les diviseurs de 12 (±1, ±2, ±3, ±4, ±6, ±12) : aucun n'est solution. », qui termine l'étape du tâtonnement, puis « On utilise la formule. », première ligne de l'étape FORMULE ; dans les cas E9, « On utilise la formule. » vient après la ligne du produit nul (06.11.2026 ; règle à venir : le code de `main` écrit encore l'ancien texte (les deux phrases sur une ligne, `_ecrire_tatonnement`) ; le changement est fait au chantier « S'entraîner », première partie, avec la liste des instantanés modifiés pour l'enseignant). Les diviseurs sont rangés par |d| croissant. Aucun calcul d'essai n'est écrit. L'affirmation est confirmée juste après : la formule donne des solutions non entières ou S = ∅, donc rien de non démontré ne reste à l'écran.
 - On ne cherche jamais de fraction : pas de « Remarque. Pour éviter les fractions… ».
 
 **E8. Produit nul.**
@@ -601,7 +601,7 @@ P0 · P1 · **P2a** (affichage commun : `tableau_essais`, encadré D29, options 
 **Bornes.**
 - Degré maximal après développement : 8, comme EL-M.
 - Coefficients de plus de 9 chiffres (numérateur ou dénominateur) : message « Cette équation dépasse ce que l'outil sait traiter. »
-- Tableau S-P de plus de 12 lignes : pas de tableau. On écrit « Le trinôme est unitaire, mais il y a trop de couples à tester : on utilise la formule. »
+- Tableau S-P de plus de 12 lignes : pas de tableau. On écrit « Le trinôme est unitaire, mais il y a trop de couples à tester. » puis l'étape FORMULE (06.11.2026 ; règle à venir : le code de `main` écrit encore l'ancien texte (« … : on utilise la formule. », `PHRASE_SP_TROP`) ; le changement est fait au chantier « S'entraîner », première partie, avec la liste des instantanés modifiés pour l'enseignant).
 - La ligne des diviseurs du tâtonnement n'a pas de borne : elle passe à la ligne.
 
 **Messages, dans cet ordre de priorité :**
