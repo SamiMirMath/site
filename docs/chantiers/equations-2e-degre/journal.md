@@ -1695,6 +1695,72 @@ l'adaptateur pour l'afficher) et aux 37 variantes gagnées ; aucune hausse de pl
   seul `resoudre/equations-2e-degre.txt` change (les 45 entrées qui gagnent ou perdent la variante) ; l'aperçu est identique.
 - xfail stricts : aucun ajouté, aucun retiré.
 
+## P6 — registre et accueil
+
+### Plan
+
+Relu et validé par l'enseignant (06.11.2026). Public 1M (Ms et Mr), 1C, 2C (D10, mémoire de l'enseignant).
+
+1. `commun/registre.json` : `"filieres": {"1": ["C", "Ms", "Mr"], "2": ["C"]}` (clés = années I, II, III, comme `ANNEES` de
+   `tests/python/test_accueil.py`) ; aucun `parametres` (la page n'en lit pas) ; note du registre : la phrase « filières vides »
+   retirée (plus aucun outil sans carte). Place : l'entrée reste la dernière du registre (aucun ordre dérivé ne bouge) ; l'ordre des
+   cartes d'une cellule est celui du registre (ACC-01) : année I, après Factorisation (les cinq méthodes s'appuient sur la
+   factorisation, ordre du cours) ; année II (C), après Programmation linéaire (la carte existante garde sa place ; ordre du
+   programme de 2C non écrit dans le dépôt : question 43).
+2. `index.html` : quatre cartes écrites à la main (le registre n'en génère aucune : `test_acc01` compare le HTML au registre),
+   titre `Équations du 2<sup>e</sup> degré` (le texte lu par `test_acc01` est « Équations du 2e degré », comme le titre de la page).
+3. Tests : `tests/pages/test_accueil.py` butée (16, 8) → (20, 8), docstring ; nom `test_le_registre_donne_16_liens` gardé (un
+   renommage ferait refuser `verifier` : test disparu de la référence) ; `test_acc03` revient au test d'origine (question 39) ;
+   `test_acc04` : liens visibles Ms 1 + 1 + 4 → 2 + 1 + 4, C 1 + 1 + 1 → 2 + 2 + 1. `test_acc01` (Python) : dérivé du registre, rien
+   à écrire (il contrôle maintenant les quatre nouvelles cartes). Vérifier les autres compteurs : `test_largeurs` exclut l'accueil ;
+   aucune référence de page ni aucun instantané de l'accueil.
+4. Spec `docs/specifications/accueil.md` : 8 outils, 20 cartes ; ACC-03 « les 20 cartes ».
+5. Capture à 390 px (clair), années I et II, filière « tous » ; contrôle : rien ne déborde, cibles ≥ 44 px.
+6. Suite complète, dump (identique à R3 attendu), commit.
+
+### Réalisé
+
+- **Registre** : `"filieres": {"1": ["C", "Ms", "Mr"], "2": ["C"]}`, aucun `parametres` ni `descriptions` ; entrée laissée en dernier ;
+  description « ME, identités remarquables, … » → « Mise en évidence, identités remarquables, Somme-Produit, tâtonnement et formule,
+  étape par étape. » (ME n'est pas défini à l'accueil ; même début que la carte Factorisation ; la description n'était affichée
+  nulle part avant P6, vérifié par recherche) ; phrase « filières vides » retirée de `_note`.
+- **`index.html`** : quatre cartes `<div class="tool">` (I : C, Ms, Mr, après Factorisation ; II : C, après Programmation linéaire),
+  titre `Équations du 2<sup>e</sup> degré` (texte lu par `test_acc01` : « Équations du 2e degré », égal au registre).
+- **Tests** (`tests/pages/test_accueil.py`) : `test_le_registre_donne_16_liens` : (16, 8) → (20, 8), docstring (6 + 5 + 9 = 20), nom
+  gardé (un renommage serait un test disparu pour `verifier`) ; `test_acc03_sans_javascript_tous_les_liens_sont_visibles` : la
+  clause `if o["filieres"]` de P5 retirée (test d'origine, question 39 réglée) ; `test_acc04_choix_de_la_filiere` : liens visibles
+  Ms 1 + 1 + 4 → 2 + 1 + 4, C 1 + 1 + 1 → 2 + 2 + 1, commentaire de C. `tests/python/test_accueil.py::test_acc01` : dérivé du
+  registre, inchangé, contrôle maintenant les quatre cartes (vert). Aucun autre compteur : `test_largeurs` exclut l'accueil ; ni
+  référence de page ni instantané de l'accueil ; `test_vocabulaire.test_registre` et `TestVocabulairePages` (accueil compris) verts.
+  Avant / après des liens de l'accueil : 16 → 20 (I 3 → 6, II 4 → 5, III 9).
+- **Docs** : `docs/specifications/accueil.md` (8 outils, 20 cartes ; ACC-03 « les 20 cartes ») ; `docs/architecture.md` § recette
+  d'un outil (étapes 4 et 5 : la clause provisoire de `test_acc03` et son retrait) ; `docs/taches.md` N02.
+- **Contrôles** : `lancer.py rapide` (registre changé : dépendants d'`outils_du_site.py`) : 1 639 passés + 1 xfail, 132 451 sous-tests (pages
+  coupées par la limite de 5 min) ; `test_accueil.py` de pages seul : 7 tests OK.
+
+### Captures à 390 px (`S/captures/P6/`, clair ; `S/tmp/P6/captures_p6.py`)
+
+`accueil-tous-390-clair.png` (les trois années, filière « tous »), `accueil-C-390-clair.png`, `accueil-Ms-390-clair.png`. Aucun
+débordement à 320, 360 et 390 px (`scrollWidth` = largeur, aucun élément de `#content` hors de l'écran). Cartes : 104 px de haut
+(106 px pour Équations du 2e degré : l'exposant élargit la ligne du titre) ; lien du titre en ligne, 19 px de haut, comme toutes les
+cartes depuis T22 (question 44 de suivi.md, rien changé).
+
+### Temps
+
+Aucun moteur touché : temps natifs sans changement attendu (dump, `temps`, ci-dessous).
+
+### Suite d'avant commit et dump
+
+- `PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rapport S/rapports/P6` : **code 0** (console `S/rapports/P6-console.log`).
+  Python 1 684 collectés, 1 683 passés + 1 xfail (celui d'avant le chantier), 132 509 sous-tests, 99 s ; pages 157 passés, 2 529
+  sous-tests, 336 s. Aucun échec instable.
+- `comparer_listes.py S/rapports/R3 S/rapports/P6` : identique nom par nom (Python et pages), mêmes nombres de sous-tests (les tests
+  de l'accueil changent de valeurs attendues, pas de nombre de sous-tests). Aucun test ajouté, renommé ni retiré.
+- **Dump** : `dump_sorties.py S/dumps/P6 --processus 6` (19 fichiers, 4 598 sorties, 4 s) ; `diff -r --exclude=temps S/dumps/R3
+  S/dumps/P6` : **vide** (P6 ne change aucune sortie de moteur) ; par rapport au départ, seuls les deux fichiers du nouvel outil et
+  leurs deux lignes d'`index.txt`, comme en R3.
+- xfail stricts : aucun ajouté, aucun retiré.
+
 ## Contrôles du chef d'orchestre
 
 - P0 `0fd0060` : verifier ACCEPTÉ (Python 1 494 / 106 768 sous-tests, pages 145 / 2 421, identiques à la nouvelle référence) ; rapide --depuis HEAD~1 : 23 passés, 245 sous-tests, 3 s (fumée + docs). Échec instable de `test_comportement::test_soc04_parametre_f` (ensemble-definition, `#cartes` absent : page pas encore chargée) au 1er lancement de référence : accepté par le chef comme instabilité de chargement (relancé seul vert, deux suites complètes vertes ensuite, aucune sortie en cause, Python vert) ; question 8 de suivi.md. Branche poussée.
@@ -1708,6 +1774,7 @@ l'adaptateur pour l'afficher) et aux 37 variantes gagnées ; aucune hausse de pl
 - Fin, sur `f65131b` : `complet --rapport …/rapports/FIN` code 0 (Python 1 666 passés + 1 xfail, 128 686 sous-tests, 113 s ; pages 154 passés, 2 520 sous-tests, 332 s ; mur 7 min 28) ; verifier ACCEPTÉ ; `comparer_listes tests/reference FIN` : seulement des ajouts (173 tests Python, 9 de pages), des hausses de sous-tests et la baisse justifiée de `test_exp_log::…::test_aucun_texte_du_fichier_ne_tutoie` (960 → 955) ; `comparer_listes P5 FIN` : identique. Même suite avec `MEMO=0` (`…/rapports/FIN-memo0`) : code 0, verifier ACCEPTÉ, listes identiques à FIN nom par nom (Python 140 s, pages 331 s, mur 7 min 54). Dump FIN identique à P5 ; par rapport au départ, seuls `apercu/equations-2e-degre.txt`, `resoudre/equations-2e-degre.txt` et leurs deux lignes d'`index.txt` s'ajoutent.
 - R1 `ee52a47` : verifier ACCEPTÉ (Python 1 670 collectés, 1 669 passés + 1 xfail, 129 187 sous-tests ; pages 155 / 2 520) ; rapide --depuis HEAD~1 : 410 passed, 61727 subtests passed in 29.25s ; 155 passed, 1301 subtests passed in 332.36s (0:05:32) (code=0 mur=363s) ; dump : seul le nouvel outil diffère du départ. Capture 2.11 h « tout afficher » regardée par le chef : 5 cartes, rien ne déborde. Branche poussée.
 - R2 `88f44ee` : verifier ACCEPTÉ (Python 1 677 passés + 1 xfail, 130 986 sous-tests ; pages 156 / 2 528 ; 2 baisses justifiées, 1 renommage justifié) ; rapide --depuis HEAD~1 : 725 passed, 75315 subtests passed in 56.00s ; 156 passed, 1309 subtests passed in 331.07s (0:05:31) (code=0 mur=388s) ; dump : seul le nouvel outil diffère du départ. Branche poussée.
+- R3 `0fe59d3` : verifier ACCEPTÉ (Python 1 683 passés + 1 xfail, 132 509 sous-tests ; pages 157 / 2 529 ; 1 renommage justifié) ; rapide --depuis HEAD~1 : 424 passed, 65049 subtests passed in 29.27s ; 157 passed, 1310 subtests passed in 332.29s (0:05:32) (code=0 mur=363s) ; dump : seul le nouvel outil diffère du départ. Branche poussée.
 
 ## Temps
 

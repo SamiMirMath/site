@@ -1,5 +1,5 @@
 {
-  "_note": "Source unique de la liste des outils (T22). L'accueil (index.html) reste du HTML écrit à la main : tests/python/test_accueil.py vérifie qu'il contient exactement ces outils, dans cet ordre, pour chaque année et chaque filière (ACC-01). « filieres » : année (1, 2, 3) -> filières. Un outil de plus = une entrée ici + sa carte dans index.html. « parametres » (requête ajoutée au lien) et « descriptions » (texte propre à une filière) sont facultatifs, par filière : l'outil Exponentielles et logarithmes les utilise pour 2Ms et 2Mr (?filiere=M, T35) ; le simplexe les aura avec T27 (liens ?methode=…, ACC-08). « filieres » vide ({}) : page publiée sans carte à l'accueil (Équations du 2e degré, jusqu'à la relecture de l'enseignant : chantier equations-2e-degre, decisions.md § 13.2, Q1).",
+  "_note": "Source unique de la liste des outils (T22). L'accueil (index.html) reste du HTML écrit à la main : tests/python/test_accueil.py vérifie qu'il contient exactement ces outils, dans cet ordre, pour chaque année et chaque filière (ACC-01). « filieres » : année (1, 2, 3) -> filières. Un outil de plus = une entrée ici + sa carte dans index.html. « parametres » (requête ajoutée au lien) et « descriptions » (texte propre à une filière) sont facultatifs, par filière : l'outil Exponentielles et logarithmes les utilise pour 2Ms et 2Mr (?filiere=M, T35) ; le simplexe les aura avec T27 (liens ?methode=…, ACC-08).",
   "outils": [
     {
       "id": "factorisation",
@@ -57,8 +57,8 @@
       "id": "equations-2e-degre",
       "chemin": "equations-2e-degre/",
       "titre": "Équations du 2e degré",
-      "description": "ME, identités remarquables, Somme-Produit, tâtonnement et formule, étape par étape.",
-      "filieres": {}
+      "description": "Mise en évidence, identités remarquables, Somme-Produit, tâtonnement et formule, étape par étape.",
+      "filieres": {"1": ["C", "Ms", "Mr"], "2": ["C"]}
     }
   ]
 }

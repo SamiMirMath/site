@@ -88,8 +88,9 @@ nommée avec sa raison). Pour un outil à moteur Python, la liste devient :
 4. `commun/registre.json` dès que la page existe : `test_accueil.test_aucun_outil_oublie` réclame tout dossier à `index.html`, et
    `dump_sorties.py` tout outil du manifeste. Avant la relecture à l'écran, l'entrée a `"filieres": {}` (aucune carte à l'accueil :
    chantier equations-2e-degre, Q1) ; la butée « liens / outils » de `tests/pages/test_accueil.py` est mise à jour exprès (le nombre
-   d'outils) ;
-5. à la fin, après relecture à l'écran : les filières au registre, la carte de l'accueil, et le nombre de liens de la même butée.
+   d'outils), et `test_acc03` (page) exclut le temps de la relecture les outils sans filière (`if o["filieres"]`) ;
+5. à la fin, après relecture à l'écran : les filières au registre, la carte de l'accueil, le nombre de liens de la même butée, et
+   `test_acc03` revient à « les liens de l'accueil = tous les chemins du registre » (equations-2e-degre, P6).
 
 Rien à écrire, ces listes dérivent du registre ou du manifeste : `tests/lancer.py` (`DOSSIERS_MOTEURS`, `OUTILS_PAGES`, variantes de
 filière), `moteurs.py` (sys.path), `test_style_commun`, `test_tableaux_css`, `test_source_unique.MIGREES`, `test_vocabulaire` (dossiers

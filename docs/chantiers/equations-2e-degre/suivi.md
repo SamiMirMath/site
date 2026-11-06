@@ -26,7 +26,7 @@ d'un outil existant modifiés (détail : `journal.md`, « Contrôles du chef d'o
 | R1 | une carte par étape (question 36) | `ee52a47` | 7 min (Python 100 s, pages 335 s) | 3 Python, 1 de pages |
 | R2 | développer d'abord, fractions supprimées d'abord (question 29) | `88f44ee` | 7 min (Python 95 s, pages 334 s) | 8 Python (1 renommé), 1 de pages |
 | R3 | les deux boutons pour comparer (questions 37 et 25) | commit « R3 » de la branche | voir `journal.md`, R3 | 6 Python (1 renommé), 1 de pages |
-| P6 | filières, carte de l'accueil, butée de `test_accueil`, `test_acc01` | hors nuit, après relecture | — | — |
+| P6 | filières 1C, 1Ms, 1Mr, 2C au registre ; 4 cartes à l'accueil (16 → 20 liens) ; `test_acc03` d'origine (question 39) | commit « P6 » de la branche | voir `journal.md`, P6 | aucun (2 tests de pages mis à jour) |
 
 Suite finale (chef d'orchestre, sur `f65131b`, `PROCESSUS_PAGES=4`, `…/rapports/FIN`) : code 0 ; Python 1 666 passés + 1 xfail
 (celui d'avant le chantier), 128 686 sous-tests (113 s) ; pages 154 passés, 2 520 sous-tests (332 s) ; 7 min 28 de mur ; `verifier`
@@ -56,6 +56,8 @@ ordre et mêmes étapes (ramener · factoriser (ME) · factoriser (TATONNEMENT, 
 à celui de P3 (`journal.md`, P3, « Texte rendu de 2.11 h »).
 
 **À relire par l'enseignant** (détail : section « À relire » ci-dessous et `journal.md`) :
+- **P6** : l'accueil (4 cartes « Équations du 2e degré » : I C, Ms, Mr après Factorisation ; II C après Programmation linéaire),
+  description épelée « Mise en évidence, … » ; capture `/home/sami-ubuntu/nuits/equations-2e-degre/captures/P6/` ; questions 43, 44.
 - **R3** : 37 entrées gagnent la variante « Par la formule » (formes structurées, c = 0), 8 la perdent (degré ≥ 3) ; chemin du cours
   inchangé pour les 225 entrées ; captures `/home/sami-ubuntu/nuits/equations-2e-degre/captures/R3/` ; question 42.
 - **R2** : textes de 2(x + 1)² = 8, x²/2 = 1 + x, Az 4.1 b et h (`journal.md`, R2) ; les 16 instantanés changés (tous « forme non
@@ -74,7 +76,7 @@ ordre et mêmes étapes (ramener · factoriser (ME) · factoriser (TATONNEMENT, 
   (rien ne déborde ; `journal.md`, P5).
 - Renforcements et adaptations : oracle (`racines`, racine nulle retirée d'abord, P1) ; dette « 4 copies de k√m/d » (chantier
   « nombres partout ») dans `docs/architecture.md` § 5 ; `test_acc03` adapté (un outil sans filière n'a pas de carte, option A) et
-  butée de `test_accueil` à 16 liens / 8 outils (P5) ; 19 arêtes d'import nouvelles dans `test_imports` (`polynomes`, `second_degre`,
+  butée de `test_accueil` à 16 liens / 8 outils (P5), puis 20 / 8 et `test_acc03` revenu au test d'origine (P6) ; 19 arêtes d'import nouvelles dans `test_imports` (`polynomes`, `second_degre`,
   `equations`, `resoudre_eq`, `exp_log(_m) -> polynomes`), aucune exception (aucun import entre outils).
 - Les 7 points « Ce qui reste contradictoire » du plan, pris avec leur option par défaut et validés (questions 1 à 7 ci-dessous).
 
@@ -96,7 +98,9 @@ ordre et mêmes étapes (ramener · factoriser (ME) · factoriser (TATONNEMENT, 
 - 22 A et B de 2.12 h en marge ; 23 ligne des parenthèses enlevées ; 24 structures non écrites ; 25 pas de variante sur une forme
   structurée ; 26 E1.3 « on soustrait le second membre » ; 27 facteur commun ; 28 produit déjà nul (constante en tête).
 - 33 identité et égalité fausse ; 34 degré 1 toujours ramené ; 35 facteur de degré 2 dans un produit déjà nul.
-- 37 libellés de la variante E12 ; 38 aperçu (syntaxe seulement) ; 39 `test_acc03` et outil sans filière.
+- 37 libellés de la variante E12 ; 38 aperçu (syntaxe seulement) ; 39 `test_acc03` et outil sans filière (**réglée par P6**).
+- **43** (P6) place de la carte en 2C (après Programmation linéaire) ; **44** (P6) liens des cartes de l'accueil hauts de 19 px
+  (toutes les cartes, avant P6 aussi).
 - Pour mémoire (réglées pendant la nuit) : 14 (statut `non_traite`, disparu en P4b), 19 (réglée par P4a).
 
 Exceptions (`architecture.md`) : aucune. Variations de sous-tests : quatre lignes, section « Variations de sous-tests » (lue par
@@ -120,7 +124,7 @@ Fusion, par l'enseignant, une commande à la fois : `git checkout main && git me
 | R1 | Une carte par étape (question 36) ; invariant du § 5 adapté | faite (suite verte, dump : outils existants identiques au départ) | `ee52a47` |
 | R2 | Développer d'abord, fractions supprimées d'abord (question 29) | faite (suite verte, dump : outils existants identiques au départ) | `88f44ee` |
 | R3 | Les deux boutons pour comparer (questions 37 et 25) | faite (suite verte, dump : outils existants identiques au départ) | commit « R3 » |
-| P6 | Filières, carte de l'accueil, butée de `test_accueil`, `test_acc01` (après relecture) | hors nuit | — |
+| P6 | Filières 1C, 1Ms, 1Mr, 2C au registre, cartes de l'accueil, butée de `test_accueil` (20, 8), `test_acc03` d'origine | faite (suite verte, dump identique à R3) | commit « P6 » |
 
 ## Questions pour l'enseignant
 
@@ -254,7 +258,8 @@ Questions nouvelles de la nuit :
     équation que l'analyse accepte est écrite comme l'énoncé (`ecrire_enonce`). Erreurs de l'analyse (plusieurs lettres, 2^x…) :
     seulement au calcul, comme Exp-log.
 39. **P5, accueil** : `test_acc03` (page) compare les liens de l'accueil aux chemins des outils **qui ont une filière** (option A :
-    l'outil est au registre sans carte) ; en P6, avec ses filières, il y revient de lui-même.
+    l'outil est au registre sans carte) ; en P6, avec ses filières, il y revient de lui-même. **Réglée par P6** : `test_acc03`
+    revenu au test d'origine (les liens de l'accueil = tous les chemins du registre).
 
 40. **R1, une carte par étape** (question 36) : « Étape k » avec un badge court, comme Exp-log et Factorisation (noms du rappel de la
     page) : Ramener à 0, Développer, Isoler x, Mise en évidence, Identité remarquable, Somme-Produit, Tâtonnement, Formule,
@@ -301,7 +306,26 @@ Questions nouvelles de la nuit :
     - **garde-fou** : la variante n'est proposée que si elle conclut et a exactement les solutions du cours ; des solutions
       différentes donnent « Le calcul ne permet pas de conclure… » pour toute l'équation (jamais rencontré).
 
+43. **P6, ordre des cartes** : l'ordre d'une cellule est celui du registre (ACC-01) ; l'entrée reste la dernière du registre. Année I :
+    après Factorisation (les méthodes de résolution s'appuient sur la factorisation) ; année II, C : après Programmation linéaire
+    (la carte existante garde sa place ; l'ordre du programme de 2C n'est pas écrit dans le dépôt). Autre possibilité : placer
+    l'entrée avant le simplexe dans le registre (Équations en tête de la 2C, Factorisation restant avant en année I).
+
+44. **P6, cibles tactiles de l'accueil** : le lien d'une carte est le titre seul (`.tool a`, en ligne : 19 px de haut à 390 px), la
+    carte fait 104 px (106 px pour Équations du 2e degré, à cause du « e » en exposant) ; c'est le cas de toutes les cartes depuis
+    T22, P6 n'y change rien (option qui affiche le moins). Autre possibilité : rendre toute la carte cliquable (composant commun),
+    dans un chantier de l'accueil.
+
 ## À relire par l'enseignant
+
+- **P6, accueil** : `commun/registre.json` (`"filieres": {"1": ["C", "Ms", "Mr"], "2": ["C"]}`, aucun `parametres` ; description
+  « ME, … » devenue « Mise en évidence, identités remarquables, Somme-Produit, tâtonnement et formule, étape par étape. », comme
+  la carte Factorisation, ME n'étant pas défini à l'accueil) ; `index.html` : 4 cartes (titre « Équations du 2<sup>e</sup> degré »).
+  Tests changés : `tests/pages/test_accueil.py` (butée (16, 8) → (20, 8), nom gardé ; `test_acc03` d'origine ; `test_acc04` : Ms
+  1 + 1 + 4 → 2 + 1 + 4, C 1 + 1 + 1 → 2 + 2 + 1). Aucun instantané, aucune référence de page, aucun `test_largeurs` ne porte
+  sur l'accueil (vérifié) : rien d'autre à mettre à jour. Captures à 390 px (clair) :
+  `/home/sami-ubuntu/nuits/equations-2e-degre/captures/P6/accueil-tous-390-clair.png`, `accueil-C-390-clair.png`,
+  `accueil-Ms-390-clair.png` ; rien ne déborde à 320, 360 et 390 px ; questions 43 et 44.
 
 - **R3, les deux boutons pour comparer** (question 42) : instantanés du nouvel outil (`tests/python/instantanes/equations-2e-degre.json`,
   `tests/python/instantanes/resoudre/equations-2e-degre.json`) : 225 entrées, **chemin du cours identique pour toutes** (vérifié entrée
@@ -407,6 +431,8 @@ Lue par `verifier`. Format, une ligne par test : `` - `<identifiant pytest compl
 
 ## Reprise après compactage
 
+- **P6 faite** (06.11.2026, filières au registre et cartes de l'accueil) : détail dans `journal.md`, P6. **Chantier terminé** :
+  reste la fusion par l'enseignant (commande dans « Résumé »).
 - **R3 faite** (06.11.2026, les deux boutons pour comparer, questions 37 et 25) : détail dans `journal.md`, R3. Suivante : P6.
 - **R2 faite** (06.11.2026, développer d'abord, fractions supprimées d'abord, question 29) : détail dans `journal.md`, R2.
   Suivantes : R3 (questions 37 et 25), P6.
