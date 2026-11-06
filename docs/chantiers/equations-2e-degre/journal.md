@@ -1775,6 +1775,7 @@ Aucun moteur touché : temps natifs sans changement attendu (dump, `temps`, ci-d
 - R1 `ee52a47` : verifier ACCEPTÉ (Python 1 670 collectés, 1 669 passés + 1 xfail, 129 187 sous-tests ; pages 155 / 2 520) ; rapide --depuis HEAD~1 : 410 passed, 61727 subtests passed in 29.25s ; 155 passed, 1301 subtests passed in 332.36s (0:05:32) (code=0 mur=363s) ; dump : seul le nouvel outil diffère du départ. Capture 2.11 h « tout afficher » regardée par le chef : 5 cartes, rien ne déborde. Branche poussée.
 - R2 `88f44ee` : verifier ACCEPTÉ (Python 1 677 passés + 1 xfail, 130 986 sous-tests ; pages 156 / 2 528 ; 2 baisses justifiées, 1 renommage justifié) ; rapide --depuis HEAD~1 : 725 passed, 75315 subtests passed in 56.00s ; 156 passed, 1309 subtests passed in 331.07s (0:05:31) (code=0 mur=388s) ; dump : seul le nouvel outil diffère du départ. Branche poussée.
 - R3 `0fe59d3` : verifier ACCEPTÉ (Python 1 683 passés + 1 xfail, 132 509 sous-tests ; pages 157 / 2 529 ; 1 renommage justifié) ; rapide --depuis HEAD~1 : 424 passed, 65049 subtests passed in 29.27s ; 157 passed, 1310 subtests passed in 332.29s (0:05:32) (code=0 mur=363s) ; dump : seul le nouvel outil diffère du départ. Branche poussée.
+- P6 `bc306f9` : verifier ACCEPTÉ (Python 1 683 passés + 1 xfail, 132 509 sous-tests ; pages 157 / 2 529, identiques à R3) ; rapide --depuis HEAD~1 : 1639 passed, 1 xfailed, 132451 subtests passed in 99.69s (0:01:39) ; 157 passed, 1310 subtests passed in 332.18s (0:05:32) (code=0 mur=435s) ; dump identique à R3. Accueil : 16 → 20 liens. Branche poussée.
 
 ## Temps
 
