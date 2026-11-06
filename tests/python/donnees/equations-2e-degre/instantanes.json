@@ -3798,6 +3798,142 @@
   },
   "saisie": "6x^2+5x+1=0"
  },
+ "2.12 c": {
+  "cours": {
+   "S": "S = \\{-1\\,;\\,0\\,;\\,1\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x(x^{2} - 1) = 0",
+       "gauche": "x^{3} - x = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "expr": "x(x + 1)(x - 1) = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x,\\ B = 1$}\\)"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x + 1 = 0} \\text{ ou } \\allowbreak {x - 1 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -1} \\text{ ou } \\allowbreak {x = 1}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-1\\,;\\,0\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "ME",
+     "x^{3} - x"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "x^{2} - 1"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "x(x + 1)(x - 1)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-1\\,;\\,0\\,;\\,1\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x(x^{2} - 1) = 0",
+       "gauche": "x^{3} - x = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x^{2} - 1 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 1 \\cdot (-1) = \\fbox{$4$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 2",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2}{2} = -1",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2}{2} = 1",
+       "lien": ""
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -1} \\text{ ou } \\allowbreak {x = 1}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-1\\,;\\,0\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "ME",
+     "x^{3} - x"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} - 1"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "x(x^{2} - 1)"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} - 1"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} - 1"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "x^3-x=0"
+ },
  "2.12 d": {
   "cours": {
    "S": "S = \\{-3\\,;\\,\\frac{1}{3}\\}",
@@ -6313,6 +6449,61 @@
   },
   "saisie": "x^2+2x-15=0"
  },
+ "Az 4.1 a": {
+  "cours": {
+   "S": "S = \\{0\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "3x + 9 = 2x + 8 + 1",
+       "gauche": "3x + 9 = 2(x + 4) + 1",
+       "lien": "\\iff",
+       "prop": "distribution"
+      },
+      {
+       "expr": "3x + 9 = 2x + 9",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "x = 0",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{0\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "3x + 9 = 2(x + 4) + 1"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "3x + 9 = 2x + 9"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "3x+9=2(x+4)+1"
+ },
+ "Az 4.1 b": {
+  "cours": {
+   "message": "Cette équation ne se résout pas avec les méthodes du cours.",
+   "statut": "hors_cours",
+   "variantes": []
+  },
+  "saisie": "(3x-2)/6=(x+1)/4+5"
+ },
  "Az 4.1 c": {
   "cours": {
    "S": "S = \\{-4\\,;\\,-3\\}",
@@ -6496,6 +6687,14 @@
   },
   "saisie": "(x-1)(2-x)(5-3x)=0"
  },
+ "Az 4.1 d développé": {
+  "cours": {
+   "message": "Cette équation ne se résout pas avec les méthodes du cours.",
+   "statut": "hors_cours",
+   "variantes": []
+  },
+  "saisie": "-3x^3+14x^2-21x+10=0"
+ },
  "Az 4.1 e": {
   "cours": {
    "S": "S = \\varnothing",
@@ -6546,6 +6745,107 @@
    "variantes": []
   },
   "saisie": "3x^2+4=0"
+ },
+ "Az 4.1 f": {
+  "cours": {
+   "S": "S = \\{-8\\,;\\,0\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x^{2}(x + 8) = 0",
+       "gauche": "x^{3} + 8x^{2} = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "expr": "{x^{2} = 0} \\text{ ou } \\allowbreak {x + 8 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -8}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-8\\,;\\,0\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "ME",
+     "x^{3} + 8x^{2}"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "x^{2}(x + 8)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "x^3+8x^2=0"
+ },
+ "Az 4.1 g": {
+  "cours": {
+   "S": "S = \\mathbb{R}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "4x^{2} - 4x + 1 - (4x^{2} - 4x) = 1",
+       "gauche": "(2x - 1)^{2} - 4x \\cdot (x - 1) = 1",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\((A - B)^{2}\\) avec \\(A = 2x,\\ B = 1\\) ; distribution"
+      },
+      {
+       "expr": "4x^{2} - 4x + 1 - 4x^{2} + 4x = 1",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "1 = 1",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Cette égalité est vraie pour tout nombre réel."
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\mathbb{R}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "(2x - 1)^{2} - 4x \\cdot (x - 1) = 1"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(2x-1)^2-4x(x-1)=1"
+ },
+ "Az 4.1 h": {
+  "cours": {
+   "message": "Cette équation ne se résout pas avec les méthodes du cours.",
+   "statut": "hors_cours",
+   "variantes": []
+  },
+  "saisie": "x^2+1-(10-x^2)/8=(6x-3)/4"
  },
  "E1 côté droit, formule": {
   "cours": {
@@ -7514,6 +7814,54 @@
   },
   "saisie": "3(x+1)^2=0"
  },
+ "E13 constante et facteur de degré 2": {
+  "cours": {
+   "S": "S = \\{-2\\,;\\,2\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "3(x + 2)(x - 2) = 0",
+       "gauche": "3(x^{2} - 4) = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x,\\ B = 2$}\\)"
+      },
+      {
+       "expr": "{\\underbrace{3 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x + 2 = 0} \\text{ ou } \\allowbreak {x - 2 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = -2} \\text{ ou } \\allowbreak {x = 2}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-2\\,;\\,2\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "x^{2} - 4"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "3(x + 2)(x - 2)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "3(x^2-4)=0"
+ },
  "E13 décimaux": {
   "cours": {
    "S": "S = \\{-2\\,;\\,1\\}",
@@ -7551,6 +7899,314 @@
    "variantes": []
   },
   "saisie": "0,5(x-1)(x+2)=0"
+ },
+ "E13 facteur de degré 2, Id. rem.": {
+  "cours": {
+   "S": "S = \\{-2\\,;\\,-1\\,;\\,1\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "(x + 1)(x - 1)(x + 2) = 0",
+       "gauche": "(x^{2} - 1)(x + 2) = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x,\\ B = 1$}\\)"
+      },
+      {
+       "expr": "{x + 1 = 0} \\text{ ou } \\allowbreak {x - 1 = 0} \\text{ ou } \\allowbreak {x + 2 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = -1} \\text{ ou } \\allowbreak {x = 1} \\text{ ou } \\allowbreak {x = -2}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-2\\,;\\,-1\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "x^{2} - 1"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x + 1)(x - 1)(x + 2)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x^2-1)(x+2)=0"
+ },
+ "E13 facteur de degré 2, S-P en échec (E9)": {
+  "cours": {
+   "S": "S = \\{\\frac{-1 - \\sqrt{5}}{2}\\,;\\,\\frac{-1 + \\sqrt{5}}{2}\\}",
+   "approx": "soit \\(x_{1} \\approx -1{,}618\\) et \\(x_{2} \\approx 0{,}618\\)",
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "Le trinôme \\(x^{2} + x - 1\\) est unitaire : S-P."
+      },
+      {
+       "texte": "On cherche deux nombres dont le produit vaut \\(-1\\) et la somme vaut \\(1\\) :"
+      },
+      {
+       "bloc": {
+        "groupes": [
+         {
+          "colonnes": 2,
+          "titre": "produit \\(= -1\\)"
+         },
+         {
+          "colonnes": 1,
+          "titre": "somme"
+         }
+        ],
+        "lignes": [
+         {
+          "cases": [
+           "-1",
+           "1",
+           "0"
+          ]
+         }
+        ],
+        "type": "tableau_essais"
+       }
+      },
+      {
+       "texte": "Aucun couple ne convient : on utilise la formule."
+      },
+      {
+       "expr": "{\\underbrace{3 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x^{2} + x - 1 = 0}",
+       "gauche": "3(x^{2} + x - 1) = 0",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 1^{2} - 4 \\cdot 1 \\cdot (-1) = 1 + 4 = \\fbox{$5$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{5}",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-1 - \\sqrt{5}}{2}",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-1 + \\sqrt{5}}{2}",
+       "lien": ""
+      },
+      {
+       "expr": "{x = \\frac{-1 - \\sqrt{5}}{2}} \\text{ ou } \\allowbreak {x = \\frac{-1 + \\sqrt{5}}{2}}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{\\frac{-1 - \\sqrt{5}}{2}\\,;\\,\\frac{-1 + \\sqrt{5}}{2}\\}",
+     "type": "resultat_lim"
+    },
+    {
+     "html": "soit \\(x_{1} \\approx -1{,}618\\) et \\(x_{2} \\approx 0{,}618\\)",
+     "type": "texte"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "SP",
+     "x^{2} + x - 1"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "3(x^{2} + x - 1)"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} + x - 1"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} + x - 1"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "3(x^2+x-1)=0"
+ },
+ "E13 facteur de degré 2, a < 0": {
+  "cours": {
+   "S": "S = \\{-2\\,;\\,-1\\,;\\,2\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "Le trinôme n'est pas unitaire (\\(a = -1\\)) : on met d'abord \\(-1\\) en évidence."
+      },
+      {
+       "expr": "-(x^{2} - 4)(x + 1) = 0",
+       "gauche": "(4 - x^{2})(x + 1) = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "expr": "-(x + 2)(x - 2)(x + 1) = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x,\\ B = 2$}\\)"
+      },
+      {
+       "expr": "{\\underbrace{-1 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x + 2 = 0} \\text{ ou } \\allowbreak {x - 2 = 0} \\text{ ou } \\allowbreak {x + 1 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = -2} \\text{ ou } \\allowbreak {x = 2} \\text{ ou } \\allowbreak {x = -1}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-2\\,;\\,-1\\,;\\,2\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "ME",
+     "-x^{2} + 4"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "x^{2} - 4"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "-(x + 2)(x - 2)(x + 1)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(4-x^2)(x+1)=0"
+ },
+ "E13 facteur de degré 2, Δ < 0": {
+  "cours": {
+   "S": "S = \\{2\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "Le trinôme \\(x^{2} + 1\\) est unitaire : S-P."
+      },
+      {
+       "texte": "On cherche deux nombres dont le produit vaut \\(1\\) et la somme vaut \\(0\\) :"
+      },
+      {
+       "bloc": {
+        "groupes": [
+         {
+          "colonnes": 2,
+          "titre": "produit \\(= 1\\)"
+         },
+         {
+          "colonnes": 1,
+          "titre": "somme"
+         }
+        ],
+        "lignes": [
+         {
+          "cases": [
+           "1",
+           "1",
+           "2"
+          ]
+         }
+        ],
+        "type": "tableau_essais"
+       }
+      },
+      {
+       "texte": "Aucun couple ne convient : on utilise la formule."
+      },
+      {
+       "expr": "{x^{2} + 1 = 0} \\text{ ou } \\allowbreak {x - 2 = 0}",
+       "gauche": "(x^{2} + 1)(x - 2) = 0",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 1 \\cdot 1 = \\fbox{$-4$}",
+       "lien": ""
+      },
+      {
+       "texte": "\\(\\Delta < 0\\) : \\(x^{2} + 1 = 0\\) n'a aucune solution réelle."
+      },
+      {
+       "expr": "x = 2",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{2\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "SP",
+     "x^{2} + 1"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x^{2} + 1)(x - 2)"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} + 1"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} + 1"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x^2+1)(x-2)=0"
  },
  "E13 monôme 2x": {
   "cours": {
@@ -7674,6 +8330,63 @@
    "variantes": []
   },
   "saisie": "0=(x-3)(2x+1)"
+ },
+ "E13 premier membre nul, facteur de degré 2": {
+  "cours": {
+   "S": "S = \\{-2\\,;\\,0\\,;\\,2\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "(x^{2} - 4)x = 0",
+       "gauche": "0 = (x^{2} - 4)x",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "x(x + 2)(x - 2) = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x,\\ B = 2$}\\)"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x + 2 = 0} \\text{ ou } \\allowbreak {x - 2 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -2} \\text{ ou } \\allowbreak {x = 2}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-2\\,;\\,0\\,;\\,2\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "0 = (x^{2} - 4)x"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "x^{2} - 4"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "x(x + 2)(x - 2)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "0=(x^2-4)x"
  },
  "E13 −1 impossible": {
   "cours": {
@@ -8108,6 +8821,22 @@
   },
   "saisie": "(3-x)^2=1+x"
  },
+ "E2 carré d'un trinôme": {
+  "cours": {
+   "message": "Cette équation ne se résout pas avec les méthodes du cours.",
+   "statut": "hors_cours",
+   "variantes": []
+  },
+  "saisie": "(x^2+x+1)^2=x"
+ },
+ "E2 cube": {
+  "cours": {
+   "message": "Cette équation ne se résout pas avec les méthodes du cours.",
+   "statut": "hors_cours",
+   "variantes": []
+  },
+  "saisie": "(x+1)^3=8+x"
+ },
  "E2 distribution": {
   "cours": {
    "S": "S = \\{1 - \\sqrt{7}\\,;\\,1 + \\sqrt{7}\\}",
@@ -8402,6 +9131,14 @@
   },
   "saisie": "x(x-4)=5"
  },
+ "E2 division par un nombre": {
+  "cours": {
+   "message": "Cette équation ne se résout pas avec les méthodes du cours.",
+   "statut": "hors_cours",
+   "variantes": []
+  },
+  "saisie": "x^2/2=1+x"
+ },
  "E2 décimaux": {
   "cours": {
    "S": "S = \\{\\frac{1 - \\sqrt{17}}{4}\\,;\\,\\frac{1 + \\sqrt{17}}{4}\\}",
@@ -8485,6 +9222,30 @@
    "variantes": []
   },
   "saisie": "0,5(x+2)=x^2"
+ },
+ "E2 k(B)² et des termes en x": {
+  "cours": {
+   "message": "Cette équation ne se résout pas avec les méthodes du cours.",
+   "statut": "hors_cours",
+   "variantes": []
+  },
+  "saisie": "0,5(x+2)^2=x+3"
+ },
+ "E2 monôme écrit à l'envers": {
+  "cours": {
+   "message": "Cette équation ne se résout pas avec les méthodes du cours.",
+   "statut": "hors_cours",
+   "variantes": []
+  },
+  "saisie": "x*3+x^2=1"
+ },
+ "E2 nombre et deux parenthèses": {
+  "cours": {
+   "message": "Cette équation ne se résout pas avec les méthodes du cours.",
+   "statut": "hors_cours",
+   "variantes": []
+  },
+  "saisie": "2(x+1)(x+3)=5"
  },
  "E2 parenthèse précédée de « − »": {
   "cours": {
@@ -9242,6 +10003,74 @@
    "variantes": []
   },
   "saisie": "(x-1)(x+2)=3(x-1)(x+2)"
+ },
+ "E3 facteur commun, degré 1": {
+  "cours": {
+   "S": "S = \\{1\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "Attention : on ne divise pas par \\((x - 1)\\), car ce facteur peut être nul ! On ramène tout dans le membre de gauche, puis on met \\((x - 1)\\) en évidence."
+      },
+      {
+       "expr": "(x - 1)(x + 2) - (x - 1)(x + 5) = 0",
+       "gauche": "(x - 1)(x + 2) = (x - 1)(x + 5)",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(x - 1)[(x + 2) - (x + 5)] = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "expr": "(x - 1)(x + 2 - x - 5) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "-3(x - 1) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{\\underbrace{-3 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x - 1 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "x = 1",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "(x - 1)(x + 2) = (x - 1)(x + 5)"
+    ],
+    [
+     "factoriser",
+     "ME",
+     "(x - 1)(x + 2) - (x - 1)(x + 5)"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "-3(x - 1)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x-1)(x+2)=(x-1)(x+5)"
  },
  "E3 facteur monôme": {
   "cours": {
@@ -10091,6 +10920,71 @@
   },
   "saisie": "4(x+1)^2=9(x-2)^2"
  },
+ "E5 deux carrés, degré 1": {
+  "cours": {
+   "S": "S = \\{1\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "(x + 1)^{2} - (x - 3)^{2} = 0",
+       "gauche": "(x + 1)^{2} = (x - 3)^{2}",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "((x + 1) + (x - 3))((x + 1) - (x - 3)) = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x + 1,\\ B = x - 3$}\\)"
+      },
+      {
+       "expr": "(x + 1 + x - 3)(x + 1 - x + 3) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "4(2x - 2) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{\\underbrace{4 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {2x - 2 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "x = 1",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "(x + 1)^{2} = (x - 3)^{2}"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "(x + 1)^{2} - (x - 3)^{2}"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "4(2x - 2)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x+1)^2=(x-3)^2"
+ },
  "E5 décimaux": {
   "cours": {
    "S": "S = \\{-3\\,;\\,1\\}",
@@ -10345,6 +11239,323 @@
    "variantes": []
   },
   "saisie": "(1/4)(x+1)^2=1"
+ },
+ "Id. rem. de A = 2x², deux tâtonnements en échec": {
+  "cours": {
+   "S": "S = \\{-\\frac{\\sqrt{6}}{2}\\,;\\,\\frac{\\sqrt{6}}{2}\\}",
+   "approx": "soit \\(x_{1} \\approx -1{,}225\\) et \\(x_{2} \\approx 1{,}225\\)",
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "(2x^{2} + 3)(2x^{2} - 3) = 0",
+       "gauche": "4x^{4} - 9 = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = 2x^{2},\\ B = 3$}\\)"
+      },
+      {
+       "texte": "Le trinôme \\(2x^{2} + 3\\) n'est pas unitaire : tâtonnement."
+      },
+      {
+       "texte": "On teste les diviseurs de \\(3\\) (\\(\\pm 1\\), \\(\\pm 3\\)) : aucun n'est solution. On utilise la formule."
+      },
+      {
+       "texte": "Le trinôme \\(2x^{2} - 3\\) n'est pas unitaire : tâtonnement."
+      },
+      {
+       "texte": "On teste les diviseurs de \\(-3\\) (\\(\\pm 1\\), \\(\\pm 3\\)) : aucun n'est solution. On utilise la formule."
+      },
+      {
+       "expr": "{2x^{2} + 3 = 0} \\text{ ou } \\allowbreak {2x^{2} - 3 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 2 \\cdot 3 = \\fbox{$-24$}",
+       "lien": ""
+      },
+      {
+       "texte": "\\(\\Delta < 0\\) : \\(2x^{2} + 3 = 0\\) n'a aucune solution réelle."
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 2 \\cdot (-3) = \\fbox{$24$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{24} = 2\\sqrt{6}",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2\\sqrt{6}}{4} = -\\frac{\\sqrt{6}}{2}",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2\\sqrt{6}}{4} = \\frac{\\sqrt{6}}{2}",
+       "lien": ""
+      },
+      {
+       "expr": "{x = -\\frac{\\sqrt{6}}{2}} \\text{ ou } \\allowbreak {x = \\frac{\\sqrt{6}}{2}}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-\\frac{\\sqrt{6}}{2}\\,;\\,\\frac{\\sqrt{6}}{2}\\}",
+     "type": "resultat_lim"
+    },
+    {
+     "html": "soit \\(x_{1} \\approx -1{,}225\\) et \\(x_{2} \\approx 1{,}225\\)",
+     "type": "texte"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "4x^{4} - 9"
+    ],
+    [
+     "factoriser",
+     "TATONNEMENT",
+     "2x^{2} + 3"
+    ],
+    [
+     "factoriser",
+     "TATONNEMENT",
+     "2x^{2} - 3"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(2x^{2} + 3)(2x^{2} - 3)"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "2x^{2} + 3"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "2x^{2} + 3"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "2x^{2} - 3"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "2x^{2} - 3"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "4x^4-9=0"
+ },
+ "Id. rem. de A = x², carré, Δ < 0": {
+  "cours": {
+   "S": "S = \\varnothing",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "Id. rem. \\(A^{2} + 2AB + B^{2}\\) avec \\(\\fbox{$A = x^{2},\\ B = 1$}\\). Vérification : \\(2AB = 2 \\cdot x^{2} \\cdot 1 = 2x^{2}\\) \\(\\checkmark\\)"
+      },
+      {
+       "expr": "(x^{2} + 1)^{2} = 0",
+       "gauche": "x^{4} + 2x^{2} + 1 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(x^{2} + 1)(x^{2} + 1) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Le trinôme \\(x^{2} + 1\\) est unitaire : S-P."
+      },
+      {
+       "texte": "On cherche deux nombres dont le produit vaut \\(1\\) et la somme vaut \\(0\\) :"
+      },
+      {
+       "bloc": {
+        "groupes": [
+         {
+          "colonnes": 2,
+          "titre": "produit \\(= 1\\)"
+         },
+         {
+          "colonnes": 1,
+          "titre": "somme"
+         }
+        ],
+        "lignes": [
+         {
+          "cases": [
+           "1",
+           "1",
+           "2"
+          ]
+         }
+        ],
+        "type": "tableau_essais"
+       }
+      },
+      {
+       "texte": "Aucun couple ne convient : on utilise la formule."
+      },
+      {
+       "expr": "x^{2} + 1 = 0",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 1 \\cdot 1 = \\fbox{$-4$}",
+       "lien": ""
+      },
+      {
+       "texte": "\\(\\Delta < 0\\) : \\(x^{2} + 1 = 0\\) n'a aucune solution réelle."
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\varnothing",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "IDREM_PLUS",
+     "x^{4} + 2x^{2} + 1"
+    ],
+    [
+     "factoriser",
+     "SP",
+     "x^{2} + 1"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x^{2} + 1)(x^{2} + 1)"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} + 1"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} + 1"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "x^4+2x^2+1=0"
+ },
+ "Id. rem. de A = x², coefficients non entiers": {
+  "cours": {
+   "S": "S = \\{-\\frac{\\sqrt{2}}{2}\\,;\\,\\frac{\\sqrt{2}}{2}\\}",
+   "approx": "soit \\(x \\approx -0{,}707\\) ou \\(x \\approx 0{,}707\\)",
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "\\left(x^{2} + \\frac{1}{2}\\right)\\left(x^{2} - \\frac{1}{2}\\right) = 0",
+       "gauche": "x^{4} - \\frac{1}{4} = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x^{2},\\ B = \\frac{1}{2}$}\\)"
+      },
+      {
+       "expr": "\\left(x^{2} + \\frac{1}{2}\\right)\\left(x + \\frac{\\sqrt{2}}{2}\\right)\\left(x - \\frac{\\sqrt{2}}{2}\\right) = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x,\\ B = \\frac{\\sqrt{2}}{2}$}\\)"
+      },
+      {
+       "texte": "Les coefficients du trinôme \\(x^{2} + \\frac{1}{2}\\) ne sont pas entiers : on utilise la formule."
+      },
+      {
+       "expr": "{x^{2} + \\frac{1}{2} = 0} \\text{ ou } \\allowbreak {x + \\frac{\\sqrt{2}}{2} = 0} \\text{ ou } \\allowbreak {x - \\frac{\\sqrt{2}}{2} = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 1 \\cdot \\frac{1}{2} = \\fbox{$-2$}",
+       "lien": ""
+      },
+      {
+       "texte": "\\(\\Delta < 0\\) : \\(x^{2} + \\frac{1}{2} = 0\\) n'a aucune solution réelle."
+      },
+      {
+       "expr": "{x = -\\frac{\\sqrt{2}}{2}} \\text{ ou } \\allowbreak {x = \\frac{\\sqrt{2}}{2}}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-\\frac{\\sqrt{2}}{2}\\,;\\,\\frac{\\sqrt{2}}{2}\\}",
+     "type": "resultat_lim"
+    },
+    {
+     "html": "soit \\(x \\approx -0{,}707\\) ou \\(x \\approx 0{,}707\\)",
+     "type": "texte"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "x^{4} - \\frac{1}{4}"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "x^{2} - \\frac{1}{2}"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} + \\frac{1}{2}"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "\\left(x^{2} + \\frac{1}{2}\\right)\\left(x + \\frac{\\sqrt{2}}{2}\\right)\\left(x - \\frac{\\sqrt{2}}{2}\\right)"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} + \\frac{1}{2}"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} + \\frac{1}{2}"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "x^4-1/4=0"
+ },
+ "Id. rem., puis un facteur de degré 3": {
+  "cours": {
+   "message": "Cette équation ne se résout pas avec les méthodes du cours.",
+   "statut": "hors_cours",
+   "variantes": []
+  },
+  "saisie": "x^6-64=0"
  },
  "Javet 2.17 a": {
   "cours": {
@@ -10813,6 +12024,853 @@
   },
   "saisie": "(5/4)s^2+3s+1=0"
  },
+ "ME de 2x, puis Id. rem. (carré)": {
+  "cours": {
+   "S": "S = \\{0\\,;\\,1\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "2x(x^{2} - 2x + 1) = 0",
+       "gauche": "2x^{3} - 4x^{2} + 2x = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "texte": "Id. rem. \\(A^{2} - 2AB + B^{2}\\) avec \\(\\fbox{$A = x,\\ B = 1$}\\). Vérification : \\(2AB = 2 \\cdot x \\cdot 1 = 2x\\) \\(\\checkmark\\)"
+      },
+      {
+       "expr": "2x(x - 1)^{2} = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "2x(x - 1)(x - 1) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{2x = 0} \\text{ ou } \\allowbreak {x - 1 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 1}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{0\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "ME",
+     "2x^{3} - 4x^{2} + 2x"
+    ],
+    [
+     "factoriser",
+     "IDREM_MOINS",
+     "x^{2} - 2x + 1"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "2x(x - 1)(x - 1)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{0\\,;\\,1\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x(2x^{2} - 4x + 2) = 0",
+       "gauche": "2x^{3} - 4x^{2} + 2x = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {2x^{2} - 4x + 2 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = (-4)^{2} - 4 \\cdot 2 \\cdot 2 = 16 - 16 = \\fbox{$0$}",
+       "lien": ""
+      },
+      {
+       "texte": "\\(\\Delta = 0\\) : une seule solution."
+      },
+      {
+       "expr": "x = \\frac{-b}{2a} = \\frac{4}{4} = 1",
+       "lien": ""
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 1}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{0\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "ME",
+     "2x^{3} - 4x^{2} + 2x"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "2x^{2} - 4x + 2"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "x(2x^{2} - 4x + 2)"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "2x^{2} - 4x + 2"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "2x^{2} - 4x + 2"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "2x^3-4x^2+2x=0"
+ },
+ "ME de x, puis S-P": {
+  "cours": {
+   "S": "S = \\{0\\,;\\,2\\,;\\,3\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x(x^{2} - 5x + 6) = 0",
+       "gauche": "x^{3} - 5x^{2} + 6x = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "texte": "Le trinôme \\(x^{2} - 5x + 6\\) est unitaire : S-P."
+      },
+      {
+       "texte": "On cherche deux nombres dont le produit vaut \\(6\\) et la somme vaut \\(-5\\) :"
+      },
+      {
+       "bloc": {
+        "groupes": [
+         {
+          "colonnes": 2,
+          "titre": "produit \\(= 6\\)"
+         },
+         {
+          "colonnes": 1,
+          "titre": "somme"
+         }
+        ],
+        "lignes": [
+         {
+          "cases": [
+           "-1",
+           "-6",
+           "-7"
+          ]
+         },
+         {
+          "cases": [
+           "-2",
+           "-3",
+           "-5"
+          ],
+          "ok": true
+         }
+        ],
+        "type": "tableau_essais"
+       }
+      },
+      {
+       "expr": "x(x - 2)(x - 3) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x - 2 = 0} \\text{ ou } \\allowbreak {x - 3 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 2} \\text{ ou } \\allowbreak {x = 3}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{0\\,;\\,2\\,;\\,3\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "ME",
+     "x^{3} - 5x^{2} + 6x"
+    ],
+    [
+     "factoriser",
+     "SP",
+     "x^{2} - 5x + 6"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "x(x - 2)(x - 3)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{0\\,;\\,2\\,;\\,3\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x(x^{2} - 5x + 6) = 0",
+       "gauche": "x^{3} - 5x^{2} + 6x = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x^{2} - 5x + 6 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = (-5)^{2} - 4 \\cdot 1 \\cdot 6 = 25 - 24 = \\fbox{$1$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 1",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{5 - 1}{2} = 2",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{5 + 1}{2} = 3",
+       "lien": ""
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 2} \\text{ ou } \\allowbreak {x = 3}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{0\\,;\\,2\\,;\\,3\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "ME",
+     "x^{3} - 5x^{2} + 6x"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} - 5x + 6"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "x(x^{2} - 5x + 6)"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} - 5x + 6"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} - 5x + 6"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "x^3-5x^2+6x=0"
+ },
+ "ME de x, puis deux Id. rem.": {
+  "cours": {
+   "S": "S = \\{-2\\,;\\,0\\,;\\,2\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x(x^{4} - 16) = 0",
+       "gauche": "x^{5} - 16x = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "expr": "x(x^{2} + 4)(x^{2} - 4) = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x^{2},\\ B = 4$}\\)"
+      },
+      {
+       "expr": "x(x^{2} + 4)(x + 2)(x - 2) = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x,\\ B = 2$}\\)"
+      },
+      {
+       "texte": "Le trinôme \\(x^{2} + 4\\) est unitaire : S-P."
+      },
+      {
+       "texte": "On cherche deux nombres dont le produit vaut \\(4\\) et la somme vaut \\(0\\) :"
+      },
+      {
+       "bloc": {
+        "groupes": [
+         {
+          "colonnes": 2,
+          "titre": "produit \\(= 4\\)"
+         },
+         {
+          "colonnes": 1,
+          "titre": "somme"
+         }
+        ],
+        "lignes": [
+         {
+          "cases": [
+           "1",
+           "4",
+           "5"
+          ]
+         },
+         {
+          "cases": [
+           "2",
+           "2",
+           "4"
+          ]
+         }
+        ],
+        "type": "tableau_essais"
+       }
+      },
+      {
+       "texte": "Aucun couple ne convient : on utilise la formule."
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x^{2} + 4 = 0} \\text{ ou } \\allowbreak {x + 2 = 0} \\text{ ou } \\allowbreak {x - 2 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 1 \\cdot 4 = \\fbox{$-16$}",
+       "lien": ""
+      },
+      {
+       "texte": "\\(\\Delta < 0\\) : \\(x^{2} + 4 = 0\\) n'a aucune solution réelle."
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -2} \\text{ ou } \\allowbreak {x = 2}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-2\\,;\\,0\\,;\\,2\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "ME",
+     "x^{5} - 16x"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "x^{4} - 16"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "x^{2} - 4"
+    ],
+    [
+     "factoriser",
+     "SP",
+     "x^{2} + 4"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "x(x^{2} + 4)(x + 2)(x - 2)"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} + 4"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} + 4"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "x^5-16x=0"
+ },
+ "ME de x, puis formule (E9)": {
+  "cours": {
+   "S": "S = \\{1 - \\sqrt{3}\\,;\\,0\\,;\\,1 + \\sqrt{3}\\}",
+   "approx": "soit \\(x \\approx -0{,}732\\) ou \\(x = 0\\) ou \\(x \\approx 2{,}732\\)",
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x(x^{2} - 2x - 2) = 0",
+       "gauche": "x^{3} - 2x^{2} - 2x = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "texte": "Le trinôme \\(x^{2} - 2x - 2\\) est unitaire : S-P."
+      },
+      {
+       "texte": "On cherche deux nombres dont le produit vaut \\(-2\\) et la somme vaut \\(-2\\) :"
+      },
+      {
+       "bloc": {
+        "groupes": [
+         {
+          "colonnes": 2,
+          "titre": "produit \\(= -2\\)"
+         },
+         {
+          "colonnes": 1,
+          "titre": "somme"
+         }
+        ],
+        "lignes": [
+         {
+          "cases": [
+           "1",
+           "-2",
+           "-1"
+          ]
+         }
+        ],
+        "type": "tableau_essais"
+       }
+      },
+      {
+       "texte": "Aucun couple ne convient : on utilise la formule."
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x^{2} - 2x - 2 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = (-2)^{2} - 4 \\cdot 1 \\cdot (-2) = 4 + 8 = \\fbox{$12$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{12} = 2\\sqrt{3}",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{2 - 2\\sqrt{3}}{2} = 1 - \\sqrt{3}",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2 + 2\\sqrt{3}}{2} = 1 + \\sqrt{3}",
+       "lien": ""
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 1 - \\sqrt{3}} \\text{ ou } \\allowbreak {x = 1 + \\sqrt{3}}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{1 - \\sqrt{3}\\,;\\,0\\,;\\,1 + \\sqrt{3}\\}",
+     "type": "resultat_lim"
+    },
+    {
+     "html": "soit \\(x \\approx -0{,}732\\) ou \\(x = 0\\) ou \\(x \\approx 2{,}732\\)",
+     "type": "texte"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "ME",
+     "x^{3} - 2x^{2} - 2x"
+    ],
+    [
+     "factoriser",
+     "SP",
+     "x^{2} - 2x - 2"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "x(x^{2} - 2x - 2)"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} - 2x - 2"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} - 2x - 2"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "x^3-2x^2-2x=0"
+ },
+ "ME de x², puis tâtonnement": {
+  "cours": {
+   "S": "S = \\{-4\\,;\\,0\\,;\\,\\frac{7}{2}\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x^{2}(2x^{2} + x - 28) = 0",
+       "gauche": "2x^{4} + x^{3} - 28x^{2} = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "texte": "Le trinôme \\(2x^{2} + x - 28\\) n'est pas unitaire : tâtonnement."
+      },
+      {
+       "texte": "\\(\\fbox{$x = -4$}\\) est solution de \\(2x^{2} + x - 28 = 0\\), car \\(2 \\cdot (-4)^{2} - 4 - 28 = 32 - 4 - 28 = 0\\)."
+      },
+      {
+       "texte": "Donc \\(2x^{2} + x - 28 = (x + 4)(2x + \\triangle)\\) avec \\(4 \\cdot \\triangle = -28\\), donc \\(\\fbox{$\\triangle = -7$}\\)."
+      },
+      {
+       "expr": "x^{2}(x + 4)(2x - 7) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x^{2} = 0} \\text{ ou } \\allowbreak {x + 4 = 0} \\text{ ou } \\allowbreak {2x - 7 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -4} \\text{ ou } \\allowbreak {x = \\frac{7}{2}}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-4\\,;\\,0\\,;\\,\\frac{7}{2}\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "ME",
+     "2x^{4} + x^{3} - 28x^{2}"
+    ],
+    [
+     "factoriser",
+     "TATONNEMENT",
+     "2x^{2} + x - 28"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "x^{2}(x + 4)(2x - 7)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-4\\,;\\,0\\,;\\,\\frac{7}{2}\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x^{2}(2x^{2} + x - 28) = 0",
+       "gauche": "2x^{4} + x^{3} - 28x^{2} = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "expr": "{x^{2} = 0} \\text{ ou } \\allowbreak {2x^{2} + x - 28 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 1^{2} - 4 \\cdot 2 \\cdot (-28) = 1 + 224 = \\fbox{$225$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 15",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-1 - 15}{4} = -4",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-1 + 15}{4} = \\frac{7}{2}",
+       "lien": ""
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -4} \\text{ ou } \\allowbreak {x = \\frac{7}{2}}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-4\\,;\\,0\\,;\\,\\frac{7}{2}\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "ME",
+     "2x^{4} + x^{3} - 28x^{2}"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "2x^{2} + x - 28"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "x^{2}(2x^{2} + x - 28)"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "2x^{2} + x - 28"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "2x^{2} + x - 28"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "2x^4+x^3-28x^2=0"
+ },
+ "ME de −x en degré 3": {
+  "cours": {
+   "S": "S = \\{-1\\,;\\,0\\,;\\,1\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "Le coefficient de \\(x^{3}\\) est négatif : on met d'abord \\(-x\\) en évidence."
+      },
+      {
+       "expr": "-x(x^{2} - 1) = 0",
+       "gauche": "-x^{3} + x = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "expr": "-x(x + 1)(x - 1) = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x,\\ B = 1$}\\)"
+      },
+      {
+       "expr": "{-x = 0} \\text{ ou } \\allowbreak {x + 1 = 0} \\text{ ou } \\allowbreak {x - 1 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -1} \\text{ ou } \\allowbreak {x = 1}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-1\\,;\\,0\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "ME",
+     "-x^{3} + x"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "x^{2} - 1"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "-x(x + 1)(x - 1)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-1\\,;\\,0\\,;\\,1\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x(-x^{2} + 1) = 0",
+       "gauche": "-x^{3} + x = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {-x^{2} + 1 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot (-1) \\cdot 1 = \\fbox{$4$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 2",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2}{-2} = 1",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2}{-2} = -1",
+       "lien": ""
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 1} \\text{ ou } \\allowbreak {x = -1}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-1\\,;\\,0\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "ME",
+     "-x^{3} + x"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "-x^{2} + 1"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "x(-x^{2} + 1)"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "-x^{2} + 1"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "-x^{2} + 1"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "-x^3+x=0"
+ },
+ "ME non entière en degré 3 (question 10)": {
+  "cours": {
+   "message": "Cette équation ne se résout pas avec les méthodes du cours.",
+   "statut": "hors_cours",
+   "variantes": []
+  },
+  "saisie": "0,5x^3-2x=0"
+ },
  "a < 0, ME de −3": {
   "cours": {
    "S": "S = \\{-2\\,;\\,3\\}",
@@ -11014,6 +13072,447 @@
    "variantes": []
   },
   "saisie": "-x^2+5x=0"
+ },
+ "bicarrée": {
+  "cours": {
+   "message": "Cette équation se ramène au 2e degré par un changement de variable : ce sera traité dans une prochaine version.",
+   "statut": "pas_encore",
+   "variantes": []
+  },
+  "saisie": "x^4-5x^2+4=0"
+ },
+ "bicarrée après une ME (§ 13.4 à la lettre)": {
+  "cours": {
+   "message": "Cette équation ne se résout pas avec les méthodes du cours.",
+   "statut": "hors_cours",
+   "variantes": []
+  },
+  "saisie": "2x^4-10x^2+8=0"
+ },
+ "bicarrée ramenée": {
+  "cours": {
+   "message": "Cette équation se ramène au 2e degré par un changement de variable : ce sera traité dans une prochaine version.",
+   "statut": "pas_encore",
+   "variantes": []
+  },
+  "saisie": "x^4=5x^2-4"
+ },
+ "bicarrée sans terme en x²": {
+  "cours": {
+   "message": "Cette équation se ramène au 2e degré par un changement de variable : ce sera traité dans une prochaine version.",
+   "statut": "pas_encore",
+   "variantes": []
+  },
+  "saisie": "x^4+4=0"
+ },
+ "degré 1": {
+  "cours": {
+   "S": "S = \\{-2\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x = -2",
+       "gauche": "2x + 4 = 0",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-2\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "isoler",
+     "ISOLER",
+     "2x + 4"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "2x+4=0"
+ },
+ "degré 1, D20": {
+  "cours": {
+   "S": "S = \\{-\\frac{1}{9}\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "3x = -\\frac{1}{3}",
+       "gauche": "3x + \\frac{1}{3} = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "x = -\\frac{1}{9}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-\\frac{1}{9}\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "isoler",
+     "ISOLER",
+     "3x + \\frac{1}{3}"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "3x+1/3=0"
+ },
+ "degré 1, côté droit": {
+  "cours": {
+   "S": "S = \\{3\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "2x - 6 = 0",
+       "gauche": "x + 1 = 3x - 5",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "x = 3",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{3\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "x + 1 = 3x - 5"
+    ],
+    [
+     "isoler",
+     "ISOLER",
+     "2x - 6"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "x+1=3x-5"
+ },
+ "degré 1, double distribution": {
+  "cours": {
+   "S": "S = \\{-\\frac{3}{4}\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x^{2} + 3x + x + 3 = x^{2}",
+       "gauche": "(x + 1)(x + 3) = x^{2}",
+       "lien": "\\iff",
+       "prop": "double distribution"
+      },
+      {
+       "expr": "x^{2} + 4x + 3 = x^{2}",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "4x + 3 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "x = -\\frac{3}{4}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-\\frac{3}{4}\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "(x + 1)(x + 3) = x^{2}"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} + 4x + 3 = x^{2}"
+    ],
+    [
+     "isoler",
+     "ISOLER",
+     "4x + 3"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x+1)(x+3)=x^2"
+ },
+ "degré 1, décimaux, D20": {
+  "cours": {
+   "S": "S = \\{3\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "0{,}5x = 1{,}5",
+       "gauche": "0{,}5x - 1{,}5 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "x = 3",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{3\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "isoler",
+     "ISOLER",
+     "0{,}5x - 1{,}5"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "0,5x-1,5=0"
+ },
+ "degré 1, x² s'annule": {
+  "cours": {
+   "S": "S = \\{1\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x - 1 = 0",
+       "gauche": "x^{2} + 1 = x^{2} + x",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "x = 1",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} + 1 = x^{2} + x"
+    ],
+    [
+     "isoler",
+     "ISOLER",
+     "x - 1"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "x^2+1=x^2+x"
+ },
+ "degré 3 ramené": {
+  "cours": {
+   "S": "S = \\{-2\\,;\\,0\\,;\\,2\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x^{3} - 4x = 0",
+       "gauche": "x^{3} = 4x",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "x(x^{2} - 4) = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "expr": "x(x + 2)(x - 2) = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x,\\ B = 2$}\\)"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x + 2 = 0} \\text{ ou } \\allowbreak {x - 2 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -2} \\text{ ou } \\allowbreak {x = 2}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-2\\,;\\,0\\,;\\,2\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "x^{3} = 4x"
+    ],
+    [
+     "factoriser",
+     "ME",
+     "x^{3} - 4x"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "x^{2} - 4"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "x(x + 2)(x - 2)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-2\\,;\\,0\\,;\\,2\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x^{3} - 4x = 0",
+       "gauche": "x^{3} = 4x",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "x(x^{2} - 4) = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x^{2} - 4 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 1 \\cdot (-4) = \\fbox{$16$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 4",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-4}{2} = -2",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{4}{2} = 2",
+       "lien": ""
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -2} \\text{ ou } \\allowbreak {x = 2}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-2\\,;\\,0\\,;\\,2\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "x^{3} = 4x"
+    ],
+    [
+     "factoriser",
+     "ME",
+     "x^{3} - 4x"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} - 4"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "x(x^{2} - 4)"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} - 4"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} - 4"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "x^3=4x"
+ },
+ "degré 3 sans ME ni Id. rem.": {
+  "cours": {
+   "message": "Cette équation ne se résout pas avec les méthodes du cours.",
+   "statut": "hors_cours",
+   "variantes": []
+  },
+  "saisie": "x^3=x+1"
  },
  "décimaux, Id. rem.": {
   "cours": {
@@ -11291,6 +13790,172 @@
   },
   "saisie": "0,2x^2-0,5x-0,3=0"
  },
+ "identité": {
+  "cours": {
+   "S": "S = \\mathbb{R}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "1 = 1",
+       "gauche": "x + 1 = x + 1",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Cette égalité est vraie pour tout nombre réel."
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\mathbb{R}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "x + 1 = x + 1"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "x+1=x+1"
+ },
+ "identité structurée, deux carrés": {
+  "cours": {
+   "S": "S = \\mathbb{R}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "(x + 1)^{2} - (x + 1)^{2} = 0",
+       "gauche": "(x + 1)^{2} = (x + 1)^{2}",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "0 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Cette égalité est vraie pour tout nombre réel."
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\mathbb{R}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "(x + 1)^{2} = (x + 1)^{2}"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x+1)^2=(x+1)^2"
+ },
+ "identité structurée, facteur commun": {
+  "cours": {
+   "S": "S = \\mathbb{R}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "(x - 1)(x + 2) - (x - 1)(x + 2) = 0",
+       "gauche": "(x - 1)(x + 2) = (x - 1)(x + 2)",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "0 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Cette égalité est vraie pour tout nombre réel."
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\mathbb{R}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "(x - 1)(x + 2) = (x - 1)(x + 2)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x-1)(x+2)=(x-1)(x+2)"
+ },
+ "identité, double distribution": {
+  "cours": {
+   "S": "S = \\mathbb{R}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x^{2} - 2x + 2x - 4 = x^{2} - 4",
+       "gauche": "(x + 2)(x - 2) = x^{2} - 4",
+       "lien": "\\iff",
+       "prop": "double distribution"
+      },
+      {
+       "expr": "x^{2} - 4 = x^{2} - 4",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "-4 = -4",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Cette égalité est vraie pour tout nombre réel."
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\mathbb{R}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "(x + 2)(x - 2) = x^{2} - 4"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} - 4 = x^{2} - 4"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x+2)(x-2)=x^2-4"
+ },
  "x²": {
   "cours": {
    "S": "S = \\{0\\}",
@@ -11323,6 +13988,270 @@
    "variantes": []
   },
   "saisie": "x^2=0"
+ },
+ "x³ − 5x": {
+  "cours": {
+   "S": "S = \\{-\\sqrt{5}\\,;\\,0\\,;\\,\\sqrt{5}\\}",
+   "approx": "soit \\(x \\approx -2{,}236\\) ou \\(x = 0\\) ou \\(x \\approx 2{,}236\\)",
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x(x^{2} - 5) = 0",
+       "gauche": "x^{3} - 5x = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "expr": "x(x + \\sqrt{5})(x - \\sqrt{5}) = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x,\\ B = \\sqrt{5}$}\\)"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x + \\sqrt{5} = 0} \\text{ ou } \\allowbreak {x - \\sqrt{5} = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -\\sqrt{5}} \\text{ ou } \\allowbreak {x = \\sqrt{5}}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-\\sqrt{5}\\,;\\,0\\,;\\,\\sqrt{5}\\}",
+     "type": "resultat_lim"
+    },
+    {
+     "html": "soit \\(x \\approx -2{,}236\\) ou \\(x = 0\\) ou \\(x \\approx 2{,}236\\)",
+     "type": "texte"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "ME",
+     "x^{3} - 5x"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "x^{2} - 5"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "x(x + \\sqrt{5})(x - \\sqrt{5})"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-\\sqrt{5}\\,;\\,0\\,;\\,\\sqrt{5}\\}",
+   "approx": "soit \\(x \\approx -2{,}236\\) ou \\(x = 0\\) ou \\(x \\approx 2{,}236\\)",
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x(x^{2} - 5) = 0",
+       "gauche": "x^{3} - 5x = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x^{2} - 5 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 1 \\cdot (-5) = \\fbox{$20$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{20} = 2\\sqrt{5}",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2\\sqrt{5}}{2} = -\\sqrt{5}",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2\\sqrt{5}}{2} = \\sqrt{5}",
+       "lien": ""
+      },
+      {
+       "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -\\sqrt{5}} \\text{ ou } \\allowbreak {x = \\sqrt{5}}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-\\sqrt{5}\\,;\\,0\\,;\\,\\sqrt{5}\\}",
+     "type": "resultat_lim"
+    },
+    {
+     "html": "soit \\(x \\approx -2{,}236\\) ou \\(x = 0\\) ou \\(x \\approx 2{,}236\\)",
+     "type": "texte"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "ME",
+     "x^{3} - 5x"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} - 5"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "x(x^{2} - 5)"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} - 5"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} - 5"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "x^3-5x=0"
+ },
+ "x⁴ − 16": {
+  "cours": {
+   "S": "S = \\{-2\\,;\\,2\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "(x^{2} + 4)(x^{2} - 4) = 0",
+       "gauche": "x^{4} - 16 = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x^{2},\\ B = 4$}\\)"
+      },
+      {
+       "expr": "(x^{2} + 4)(x + 2)(x - 2) = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x,\\ B = 2$}\\)"
+      },
+      {
+       "texte": "Le trinôme \\(x^{2} + 4\\) est unitaire : S-P."
+      },
+      {
+       "texte": "On cherche deux nombres dont le produit vaut \\(4\\) et la somme vaut \\(0\\) :"
+      },
+      {
+       "bloc": {
+        "groupes": [
+         {
+          "colonnes": 2,
+          "titre": "produit \\(= 4\\)"
+         },
+         {
+          "colonnes": 1,
+          "titre": "somme"
+         }
+        ],
+        "lignes": [
+         {
+          "cases": [
+           "1",
+           "4",
+           "5"
+          ]
+         },
+         {
+          "cases": [
+           "2",
+           "2",
+           "4"
+          ]
+         }
+        ],
+        "type": "tableau_essais"
+       }
+      },
+      {
+       "texte": "Aucun couple ne convient : on utilise la formule."
+      },
+      {
+       "expr": "{x^{2} + 4 = 0} \\text{ ou } \\allowbreak {x + 2 = 0} \\text{ ou } \\allowbreak {x - 2 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 1 \\cdot 4 = \\fbox{$-16$}",
+       "lien": ""
+      },
+      {
+       "texte": "\\(\\Delta < 0\\) : \\(x^{2} + 4 = 0\\) n'a aucune solution réelle."
+      },
+      {
+       "expr": "{x = -2} \\text{ ou } \\allowbreak {x = 2}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-2\\,;\\,2\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "x^{4} - 16"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "x^{2} - 4"
+    ],
+    [
+     "factoriser",
+     "SP",
+     "x^{2} + 4"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x^{2} + 4)(x + 2)(x - 2)"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} + 4"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} + 4"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "x^4-16=0"
  },
  "§ 13.4 3x²": {
   "cours": {
@@ -12760,6 +15689,78 @@
    "variantes": []
   },
   "saisie": "x^2-x-42=0"
+ },
+ "égalité fausse": {
+  "cours": {
+   "S": "S = \\varnothing",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "1 = 2",
+       "gauche": "x^{2} + 1 = x^{2} + 2",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Cette égalité est fausse : l'équation n'a aucune solution."
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\varnothing",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} + 1 = x^{2} + 2"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "x^2+1=x^2+2"
+ },
+ "égalité fausse, réduction": {
+  "cours": {
+   "S": "S = \\varnothing",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "3 = 0",
+       "gauche": "2x + 3 - 2x = 0",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Cette égalité est fausse : l'équation n'a aucune solution."
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\varnothing",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "2x + 3 - 2x = 0"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "2x+3-2x=0"
  },
  "Δ = 0, coefficients non entiers": {
   "cours": {

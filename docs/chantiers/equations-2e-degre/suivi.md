@@ -17,7 +17,7 @@ au dump de départ (`/home/sami-ubuntu/nuits/equations-2e-degre/dumps/depart`) ;
 | P2b | Rédaction dans `second_degre` (§ 5), instantanés hors d'`instantanes/` | faite (suite verte, dump identique) | voir `git log` |
 | P3 | Saisie : E1, E2 (`second_degre.ramener`), `equations-2e-degre/equations.py` (`analyser`), `expr.a_des_decimaux` | faite (suite verte, dump identique) | voir `git log` |
 | P4a | Formes structurées, sur l'arbre (produit déjà nul, facteur commun, Id. rem. structurée ; E1.3) | faite (suite verte, dump identique) | voir `git log` |
-| P4b | Degrés ≠ 2 et reste du corpus | à faire | — |
+| P4b | Degrés ≠ 2 (ME de xᵏ, Id. rem. de A = x², E9), degré 1, identité, messages définitifs (bicarrée, hors du cours) ; plus de `non_traite` | faite (suite verte, dump identique) | voir `git log` |
 | P5 | L'outil (page, adaptateur, manifeste, registre sans filière, tests) | à faire | — |
 | P6 | Filières, carte de l'accueil (après relecture) | hors nuit | — |
 
@@ -104,7 +104,32 @@ Questions nouvelles de la nuit :
     après ((x − 1) · 3 = 0) ; un facteur réduit monôme s'écrit en tête (x(x + 2), jamais « (x + 1)(x) ») ; un carré d'une somme est
     réécrit (B)(B) (D24, « toujours »), un cube n'est pas écrit (question 24).
 
+29. **P4b, « hors du cours » par défaut** (consigne de la nuit) : ce que l'outil n'écrit pas reçoit « Cette équation ne se résout pas
+    avec les méthodes du cours. » : E2 hors de ce qu'il développe (2(x + 1)(x + 3) = 5, x²/2 = 1 + x, (x + 1)³ = 8 + x, **Az 4.1 b et
+    h**, à fractions) et `STRUCTURES_NON_ECRITES` (2(x + 1)² = 8, (x² − 1)² = 0…). **Inexact pour elles** (elles sont du cours) :
+    à trancher avant P6 (message propre, p. ex. « Cette forme d'équation n'est pas traitée par l'outil. », ou E2 étendu).
+30. **P4b, bicarrée à la lettre** (§ 13.4) : x⁴ − 5x² + 4, x⁴ + 4, x⁴ − 5 → « bicarrée » ; 2x⁴ − 10x² + 8 et x⁵ − 5x³ + 4x (une ME
+    s'applique) → « hors du cours ». Autre possibilité : « bicarrée » aussi après une ME.
+31. **P4b, ordre d'écriture** (x⁴ − 16) : l'Id. rem. de x² − 4 d'abord, puis le tableau S-P de x² + 4 en échec, juste avant le
+    produit nul et Δ (E9, comme Javet 2.17 c). Autre possibilité : l'ordre du calcul (le S-P en échec juste après la 1re Id. rem.).
+32. **P4b, petites phrases** : ME de a < 0 en degré ≠ 2, « Le coefficient de x³ est négatif : on met d'abord −x en évidence. » (sans
+    « trinôme » ni « a = ») ; formule d'emblée sur un facteur non entier, « Les coefficients du trinôme x² + 1/2 ne sont pas entiers :
+    on utilise la formule. » ; deux trinômes par la formule (4x⁴ − 9) : leurs lignes de Δ dans l'ordre du produit, sans en-tête.
+33. **P4b, identité et égalité fausse** : la ligne des constantes de chaque membre (« 1 = 1 », « 1 = 2 », « −4 = −4 », comme
+    Exp-log), pas « 0 = 0 » ramené ; la phrase termine la dernière étape (pas d'étape à elle) ; forme structurée : « g − d = 0 », puis
+    « 0 = 0 ».
+34. **P4b, degré 1** : toujours ramené (§ 13.4 à la lettre : x = 3 ⇔ x − 3 = 0 ⇔ x = 3) ; la ligne ramenée « x = 0 » suffit (Az 4.1 a) ;
+    « x = 0 » saisi seul : une seule ligne. Une fois factorisée : le facteur constant en tête, « 4(2x − 2) = 0 », « −3(x − 1) = 0 ».
+35. **P4b, facteur de degré 2 dans un produit déjà nul** : factorisé par le cours sur le produit écrit ((x² − 1)(x + 2) = 0 ⇔
+    (x + 1)(x − 1)(x + 2) = 0) ; avec un carré dans le même produit, ou (x² − 1)² = 0 : « hors du cours ». Une autre lettre que
+    l'inconnue (refusée par la saisie avant) : `ValueError` dans `resoudre_equation`.
+
 ## À relire par l'enseignant
+
+- **P4b, instantanés de la rédaction** : 52 entrées **nouvelles** dans `tests/python/donnees/equations-2e-degre/instantanes.json`
+  (36 de `P4B` : 2.12 c, Az 4.1 a, f, g, x⁴ − 16, degré 1, identités, formes structurées de P4b… ; 16 de `NON_RESOLUES` : statut et
+  message) ; **aucune** des 131 entrées de P2b à P4a modifiée. Textes rendus de 2.12 c, Az 4.1 f, Az 4.1 g et x⁴ − 16 comparés au
+  corrigé dans `journal.md`, P4b. Messages « hors du cours » : question 29.
 
 - **P4a, instantanés de la rédaction** : 33 entrées **nouvelles** dans `tests/python/donnees/equations-2e-degre/instantanes.json`
   (formes structurées : 2.9 k, 2.9 l, 2.12 e, 2.12 h, Az 4.1 d et 28 formes « E13 … », « E5 … », « E3 … ») ; **aucune** des 98 entrées
@@ -143,6 +168,10 @@ Lue par `verifier`. Format, une ligne par test : `` - `<identifiant pytest compl
 
 ## Tests renommés
 
+- P4b : `tests/python/test_redaction_second_degre.py::TestNonResolu::test_formes_pas_encore_traitees` →
+  `::TestNonResolu::test_aucun_statut_temporaire` (test de P2b, absent de `tests/reference`) : le test d'attente est devenu vide
+  (toutes les parties d'`A_VENIR` sont faites) ; il contrôle maintenant qu'aucune entrée (`RESOLUES`, `NON_RESOLUES`,
+  `STRUCTURES_NON_ECRITES`) n'a de statut temporaire, chacune avec son statut et son message définitifs.
 - P4a : `tests/python/test_redaction_second_degre.py::TestNonResolu::test_structures_laissees_a_p4a` →
   `::TestNonResolu::test_structures_sans_developper` (test de P3, absent de `tests/reference`) : les structures ne sont plus
   « laissées à P4a » ; mêmes formes, qui sont maintenant résolues sans développer, plus `STRUCTURES_NON_ECRITES` (« non_traite »).

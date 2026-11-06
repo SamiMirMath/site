@@ -1,8 +1,10 @@
 """Instantanés de la rédaction du 2e degré (chantier equations-2e-degre, dès P2b : decisions.md § 13.2 ; plan, P2b et P3).
 
-Pour chaque équation de `corpus_second_degre.RESOLUES` (P2B, et P3 : énoncés à ramener ou à développer) : la résolution de `second_degre.resoudre_equation` (statut, étapes : phase,
+Pour chaque équation de `corpus_second_degre.RESOLUES` (P2B ; P3 : énoncés à ramener ou à développer ; P4A : formes structurées ;
+P4B : degrés ≠ 2, identité) : la résolution de `second_degre.resoudre_equation` (statut, étapes : phase,
 méthode, cible ; S, ligne ≈, variantes) et ses blocs de moteur/sortie.py (`second_degre.blocs` : ce que la page affichera), plus la
-variante « formule » (E12) quand elle est proposée. Comparés à une référence enregistrée **hors d'`instantanes/`** jusqu'en P5 :
+variante « formule » (E12) quand elle est proposée ; pour chaque entrée de `NON_RESOLUES` (P4b : bicarrée, hors du cours), le statut
+et le message. Chaque exercice du § 8 (`SECTION_8`) a son instantané. Comparés à une référence enregistrée **hors d'`instantanes/`** jusqu'en P5 :
 tests/python/donnees/equations-2e-degre/instantanes.json (dump_sorties.py et les contrôles d'`instantanes/` ne la voient pas
 encore : ce fichier contrôle donc lui-même le JSON strict et le vocabulaire).
 
@@ -22,7 +24,7 @@ import expr
 import second_degre as sd
 import sortie
 from aides_sortie import TUTOIEMENT
-from corpus_second_degre import RESOLUES
+from corpus_second_degre import NON_RESOLUES, RESOLUES, SECTION_8
 from test_instantanes import normaliser
 from test_vocabulaire import INTERDITS, chaines
 
@@ -58,7 +60,9 @@ def instantane(saisie):
 
 
 def calculer():
-    return {nom: instantane(saisie) for nom, saisie in RESOLUES.items()}
+    out = {nom: instantane(saisie) for nom, saisie in RESOLUES.items()}
+    out.update({nom: instantane(saisie) for nom, (saisie, _) in NON_RESOLUES.items()})
+    return out
 
 
 def refuse(constante):
@@ -95,6 +99,17 @@ class TestInstantanesSecondDegre(unittest.TestCase):
         for nom in self.actuel:
             with self.subTest(entree=nom):
                 self.assertEqual(self.actuel[nom], reference[nom])
+
+    def test_section_8_complete(self):
+        """Chaque exercice du § 8 a un instantané (et il est résolu : l'oracle le contrôle dans test_redaction_second_degre)."""
+        with open(CHEMIN, encoding="utf-8") as f:
+            reference = json.load(f)
+        for nom in SECTION_8:
+            with self.subTest(nom=nom):
+                self.assertIn(nom, RESOLUES)
+                self.assertIn(nom, reference)
+                self.assertEqual(reference[nom]["cours"]["statut"], "resolu")
+        self.assertEqual(len(SECTION_8), 52)
 
     def test_json_strict(self):
         """Le fichier est du JSON strict (pas de NaN ni d'Infinity : la page appelle JSON.parse), comme test_json_strict."""

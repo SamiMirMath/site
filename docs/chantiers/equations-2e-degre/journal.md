@@ -1019,6 +1019,124 @@ référence (pas de corrigé) ; produit nul direct (E13).
 
 ## P4b — degrés ≠ 2 et reste du corpus
 
+### Plan
+
+Corrigé relu : `tatonement.pdf` 2.12 c (x³ − x = 0 ⇔ x(x² − 1) = 0 ME ⇔ x(x + 1)(x − 1) = 0 Id. rem. ⇔ x = 0 ou x + 1 = 0 ou
+x − 1 = 0 ⇔ x = 0 ou x = −1 ou x = 1) ; Az 4.1 a, f, g (énoncés seuls) ; x⁴ − 16 : § 13.4 et point 4 du plan (D28). Aucun calcul nouveau
+des méthodes : `chemin` (P1) traite déjà les degrés ≥ 3 (ME, Id. rem. de A = x², facteurs récursifs) ; P4b écrit ce calcul.
+
+1. **Degrés ≥ 3, chemin développé** (`_rediger`, sur `chemin`) :
+   - `_Contexte.courants` : les facteurs écrits du produit courant (après le préfixe k·xʲ de la ME) ; chaque factorisation d'un facteur
+     Q le remplace sur place par ses facteurs (ME : préfixe et reste ; Id. rem. A² − B² : (A + B)(A − B) ; A² ± 2AB + B² : le carré puis
+     D24 ; S-P et tâtonnement : leurs deux facteurs) ; chaque ligne écrite est redéveloppée et comparée à P (garde-fou). En degré 2,
+     `courants` = [Q] à chaque factorisation : mêmes lignes qu'avant (instantanés de P2b–P4a inchangés, contrôlé).
+   - Ordre d'écriture : les tentatives en échec et la formule d'un facteur (S-P ou tâtonnement en échec, formule) viennent après les
+     autres factorisations (x⁴ − 16 : Id. rem. de x² − 4, puis le tableau S-P de x² + 4 en échec, puis le produit nul et Δ, E9) ; en
+     degré 2, elles sont déjà les dernières.
+   - Phrase de choix sur un facteur : celle d'après une ME (« Le trinôme x² + 4 est unitaire : S-P. ») dès qu'une factorisation est
+     écrite ; formule d'emblée sur un facteur non entier : « Les coefficients du trinôme … ne sont pas entiers : on utilise la
+     formule. » ; ME de a < 0 en degré ≠ 2 : « Le coefficient de x³ est négatif : on met d'abord … en évidence. » (pas de « trinôme »).
+   - Produit nul (E8, E9) : plusieurs trinômes par la formule (leurs lignes de Δ dans l'ordre du produit), D20 avec un trinôme ; la
+     formule seule (sans ligne de produit nul) seulement si le trinôme est P.
+   - Variante E12 inchangée (proposée si elle a une formule : 2.12 c).
+2. **Degré 1** : ramener (E1), puis l'étape « isoler » (ISOLER) : x = … en une ligne, ou kx = … puis x = … (D20).
+3. **Identité, égalité fausse** (E13, § 13.4) : après E1/E2, la ligne des constantes (« 1 = 1 », « 1 = 2 ») au lieu de « 0 = 0 »
+   ramenée (Exp-log), puis la phrase d'Exp-log ; S = ℝ ou S = ∅. Sur une forme structurée (P nul) : « g − d = 0 », puis « 0 = 0 ».
+4. **Messages** : degré ≥ 3 que le cours ne résout pas : « bicarrée » (statut `pas_encore`) si P = ax⁴ + bx² + c (c ≠ 0) et que ni
+   ME ni Id. rem. ne s'applique (§ 13.4, à la lettre) ; sinon « hors du cours ». Le statut temporaire `non_traite` disparaît : une forme
+   que l'outil n'écrit pas (E2 hors de ce qu'il développe, structure non écrite) reçoit « hors du cours » (consigne de la nuit, option qui
+   affiche le moins ; question pour l'enseignant). Autres lettres que l'inconnue : ValueError (la saisie, P3, les refuse avant).
+5. **Formes structurées laissées à P4b** (`STRUCTURES_NON_ECRITES`, « (P4b) ») : facteur de degré 2 dans un produit déjà nul
+   ((x² − 1)(x + 2) = 0, 3(x² − 4) = 0 : le facteur factorisé par le cours, `courants`) ; degré 1 une fois factorisée ((x + 1)² = (x − 3)²,
+   (x − 1)(x + 2) = (x − 1)(x + 5) : le facteur constant écrit en tête, « 4 = 0 » impossible). Si ce n'est pas possible proprement :
+   « hors du cours », noté.
+6. **Tests** : `corpus_second_degre.P4B` (2.12 c, Az 4.1 f, Az 4.1 g, x⁴ − 16, x³ − 5x, degré 1, identités, égalités fausses, a < 0
+   en degré 3, Id. rem. de A = x², formes structurées de P4b), `NON_RESOLUES` (bicarrée, hors du cours), `SECTION_8` (les noms du § 8) ;
+   oracle sur `RESOLUES` (S = ℝ / ∅ contrôlés à part) ; instantanés de `RESOLUES` et `NON_RESOLUES` (entrées nouvelles seulement ;
+   toute entrée de P2b–P4a modifiée justifiée ici, avant / après) ; chaque entrée du § 8 a un instantané et l'oracle ; les 7 xfail
+   stricts « P4b » passent (marques retirées) ; `test_formes_pas_encore_traitees` (test d'attente devenu vide) remplacé.
+7. Suite complète, dump, temps natif, commit.
+
+### Réalisé
+
+- **`moteur/second_degre.py`** (aucun calcul de méthode nouveau : `chemin`, `produit_nul`, `racines_formule`, `identite`,
+  `mise_en_evidence` de P1) :
+  - `_Contexte.suivre`, `remplacer`, `deplier`, `produit_courant` : le produit écrit (préfixe k·xʲ et facteurs) ; chaque factorisation
+    remplace son facteur sur place ; chaque produit écrit est **relu dans Q(√m)** (`_ecrit_en_nombres`) et doit valoir ±P (garde-fou
+    nouveau pour les lignes de factorisation du chemin développé). `_ecrire_me`, `_ecrire_idrem`, `_ecrire_sp`, `_ecrire_tatonnement`
+    passent par `remplacer` (sans suivi, pour `appliquer` : mêmes lignes qu'avant).
+  - `_rediger` : `_ordre_d_ecriture` (tentatives en échec et formule d'un facteur en dernier), `_ecrire_chemin` (la boucle des
+    méthodes, partagée avec les formes structurées), produit nul sur les facteurs **dans l'ordre écrit** (contrôlé : mêmes solutions
+    que le chemin, produit = P), formule seule seulement si le trinôme est P ; `_noms_formule` (x₁, x₂ si une seule formule les nomme).
+  - `_ecrire_produit_nul` : plusieurs trinômes (E9, lignes de Δ dans l'ordre du produit), D20 avec un trinôme ; `_choix` : formule
+    d'emblée sur un facteur ; `_ecrire_me` : a < 0 en degré ≠ 2 sans « trinôme ».
+  - `ramener` : P de degré ≤ 0, la ligne des constantes (« 1 = 2 ») relue, sans changement de côté ; `_ecrire_isoler`,
+    `_rediger_bas_degre` (degré 1, identité, égalité fausse) ; `bicarree(P)` ; `MESSAGES` : `non_traite` retiré, `pas_encore` (le
+    message « bicarrée » du § 4) ajouté ; `resoudre_equation` : degré ≥ 3 par le chemin, `hors_cours` → `pas_encore` si bicarrée,
+    forme non écrite → `hors_cours`, autre lettre → `ValueError`.
+  - Formes structurées : `_trinome_ecrit`, `_produit_ecrit(…, trinomes=True)` et `_factoriser_produit_ecrit` (facteur de degré 2 d'un
+    produit déjà nul, factorisé par le cours sur le produit écrit) ; `_commun` (G − H constant) et `_ecrire_carres` (un facteur
+    constant) : degré 1 une fois factorisée, `_constante_reduite`, `_ligne_produit` (une constante en tête comme un monôme) ;
+    `_ecrire_identite_structuree` ; `_Structuree.fin` accepte S = ∅ (trinôme de Δ < 0) et nomme x₁, x₂ comme le chemin développé.
+  - **Écart au plan** : aucun (point 5 fait pour les quatre formes « (P4b) » de `STRUCTURES_NON_ECRITES` ; les six autres et deux
+    nouvelles restent « hors du cours », question 29).
+- **Tests** :
+  - `corpus_second_degre` : `P4B` (36), `NON_RESOLUES` (16, avec le statut attendu), `SECTION_8` (52 noms), `STRUCTURES_NON_ECRITES`
+    (8 : quatre formes résolues retirées, deux ajoutées), `PARTIES_FAITES = ("P3", "P4a", "P4b")`.
+  - `test_redaction_second_degre` : `TestDegres` (11 tests : 2.12 c comparé au corrigé, Az 4.1 f, x⁴ − 16 (D28, E9), degré 3, Id. rem.
+    de A = x², degré 1, identité et égalité fausse, formes structurées de P4b, messages, polynômes générés de degré 3 et 4 de P1 (44 :
+    oracle, invariants, sortie conforme), produits écrits relus et deux écritures faussées → « ne_conclut_pas ») ;
+    `TestOracle.test_corpus_et_variantes` : P de degré 0 contrôlé à part (S = ℝ ⇔ P nul, sinon ∅) ; `test_aucun_statut_temporaire`
+    (renommage, suivi.md) ; `test_structures_sans_developper` (+5 formes résolues ; non écrites : « hors_cours ») ;
+    `test_hors_de_ce_que_e2_developpe` (« hors_cours », degré 1 et identité résolus) ; `test_az_4_1_g_developpement` (S = ℝ) ;
+    les 6 `test_a_venir[P4b-…]` et `test_P4b_bicarree` passent : **7 xfail stricts retirés**, aucun ajouté ; il ne reste que l'xfail
+    d'avant le chantier.
+  - `test_instantanes_second_degre` : `RESOLUES` et `NON_RESOLUES` ; `test_section_8_complete` (chaque exercice du § 8 a un instantané,
+    résolu ; l'oracle les contrôle tous par `TestOracle`). JSON régénéré : **52 entrées nouvelles, aucune des 131 de P2b–P4a modifiée**
+    (comparaison JSON entrée par entrée).
+- **Arêtes** : aucune nouvelle.
+
+### Texte rendu de 2.12 c, Az 4.1 f, Az 4.1 g et x⁴ − 16, comparé au corrigé
+
+    2.12 c   | x^{3} - x = 0 |  \iff x(x^{2} - 1) = 0 (ME)
+             \iff x(x + 1)(x - 1) = 0 | Id. rem. A² − B² avec ⟦A = x, B = 1⟧
+             \iff x = 0 ou x + 1 = 0 ou x - 1 = 0 (produit nul)  \iff x = 0 ou x = -1 ou x = 1          S = {−1 ; 0 ; 1}
+    Az 4.1 f | x^{3} + 8x^{2} = 0 |  \iff x^{2}(x + 8) = 0 (ME)  \iff x² = 0 ou x + 8 = 0 (produit nul)  \iff x = 0 ou x = -8
+                                                                                                      S = {−8 ; 0}
+    Az 4.1 g | (2x - 1)^{2} - 4x \cdot (x - 1) = 1 |
+             \iff 4x² − 4x + 1 − (4x² − 4x) = 1 | Id. rem. (A − B)² avec A = 2x, B = 1 ; distribution
+             \iff 4x² − 4x + 1 − 4x² + 4x = 1  \iff 1 = 1
+             Cette égalité est vraie pour tout nombre réel.                                           S = ℝ
+    x⁴ − 16  | x^{4} - 16 = 0 |  \iff (x² + 4)(x² − 4) = 0 | Id. rem. A² − B² avec ⟦A = x², B = 4⟧
+             \iff (x² + 4)(x + 2)(x − 2) = 0 | Id. rem. A² − B² avec ⟦A = x, B = 2⟧
+             Le trinôme x² + 4 est unitaire : S-P.
+             On cherche deux nombres dont le produit vaut 4 et la somme vaut 0 :  [tableau 1 4 | 5 ; 2 2 | 4]
+             Aucun couple ne convient : on utilise la formule.
+             \iff x² + 4 = 0 ou x + 2 = 0 ou x − 2 = 0 (produit nul)
+             Δ = b² − 4ac = 0² − 4 · 1 · 4 = ⟦−16⟧
+             Δ < 0 : x² + 4 = 0 n'a aucune solution réelle.
+             \iff x = −2 ou x = 2                                                                    S = {−2 ; 2}
+
+**Comparaison** : 2.12 c a les lignes du corrigé (`tatonement.pdf`), dans le même ordre ; écarts voulus : étiquettes D5
+(« Id. rem. A² − B² avec … » au lieu de « Id. rem. A = x, B = 1 », « produit nul » sur la ligne des facteurs), A et B encadrés
+(D29). Az 4.1 f, g : énoncés seuls dans la référence ; Az 4.1 g suit l'exemple du § 7, avec la phrase d'Exp-log (§ 13.4) au lieu de
+« L'égalité est vraie pour tout réel x. ». x⁴ − 16 : § 13.4 et point 4 du plan (D28 puis E9) ; ordre d'écriture : question 31. L'énoncé
+d'Az 4.1 g garde le « · » d'expr.tex (forme développée, P3 ; question 26 : P5).
+
+### Suite d'avant commit et dump
+
+- `PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rapport S/rapports/P4b` : **code 0** (≈ 7 min 30 de mur ; console
+  `S/rapports/P4b-console.log`). Python 1 664 collectés, 1 663 passés + 1 xfail (celui d'avant le chantier), 127 242 sous-tests,
+  109,8 s ; pages 151 passés, 2 435 sous-tests, 328,1 s. Aucun échec instable.
+- `comparer_listes.py S/rapports/P4a S/rapports/P4b` : 13 tests Python nouveaux (11 `TestDegres`, `test_section_8_complete`,
+  `test_aucun_statut_temporaire`), 1 disparu par renommage (`test_formes_pas_encore_traitees`, justifié dans suivi.md, « Tests
+  renommés ») ; les 7 xfail stricts « P4b » passent (mêmes noms) ; pages identiques nom par nom. Sous-tests : **aucune baisse** ;
+  hausses : instantanés 131 → 183, invariants et oracle 394 → 437 et 198 → 241, `test_structures_sans_developper` 30 → 33,
+  vouvoiement 6 651 → 7 361, `test_vocabulaire::test_litteraux_des_moteurs` 9 635 → 9 691, lecture de la saisie 131 → 167.
+- **Dump** : `dump_sorties.py S/dumps/P4b --processus 6` (17 fichiers, 4 148 sorties, 4 s), `diff -r --exclude=temps S/dumps/depart
+  S/dumps/P4b` : **code 0, aucune sortie** (invariant tenu).
+- xfail stricts : **7 retirés** (« P4b ») ; aucun ajouté ; il n'en reste aucun du chantier.
+
 ## P5 — l'outil
 
 ## Contrôles du chef d'orchestre
@@ -1028,6 +1146,7 @@ référence (pas de corrigé) ; produit nul direct (E13).
 - P2a `5b9254c` : verifier ACCEPTÉ (Python 1 548 / 112 699 sous-tests, pages 151 / 2 435, ajouts seulement, baisse de P1 toujours justifiée) ; rapide --depuis HEAD~1 : Python 1 327 passés + 1 xfail, 97 492 sous-tests (89 s), pages 151 passés, 1 270 sous-tests (324 s), mur 6 min 55 ; dump identique au départ (P2a). Capture 390 clair regardée par le chef : cadres D29 lisibles, rien ne déborde. Branche poussée.
 - P2b `a52b58a` : verifier ACCEPTÉ (Python 1 607 collectés, 1 584 passés + 23 xfail dont 22 stricts P3/P4a/P4b, 122 989 sous-tests ; pages 151 / 2 435) ; rapide --depuis HEAD~1 : 385 passed, 23 xfailed, 28288 subtests passed in 25.14s ; 151 passed, 1270 subtests passed in 324.52s (0:05:24) (code=0 mur=351s) ; dump identique au départ (P2b). Texte rendu de 2.11 h (forme développée) relu par le chef : conforme au § 7 hors étape « ramener » (P3). Branche poussée.
 - P3 `8e838be` : verifier ACCEPTÉ (Python 1 641 collectés, 1 628 passés + 13 xfail, 124 615 sous-tests, 2 baisses justifiées ; pages 151 / 2 435 identiques) ; rapide --depuis HEAD~1 : 1003 passed, 13 xfailed, 97209 subtests passed in 79.13s (0:01:19) ; 151 passed, 1270 subtests passed in 324.21s (0:05:24) (code=0 mur=405s) ; dump identique au départ (P3). Branche poussée.
+- P4a `06f3daf` : verifier ACCEPTÉ (Python 1 652 collectés, 1 644 passés + 8 xfail, 125 662 sous-tests ; pages 151 / 2 435 identiques ; renommage justifié test_structures_laissees_a_p4a → test_structures_sans_developper, hors référence) ; rapide --depuis HEAD~1 : 445 passed, 8 xfailed, 30771 subtests passed in 26.08s ; 151 passed, 1270 subtests passed in 323.99s (0:05:23) (code=0 mur=351s) ; dump identique au départ (P4a). Branche poussée.
 
 ## Temps
 
@@ -1058,6 +1177,12 @@ de développement, tâtonnement, variante) : bien sous 0,1 s par équation. Pire
 `non_traite` ; les 10 `STRUCTURES_NON_ECRITES`, `non_traite`) **212 ms en tout** (3e tour), la plus longue **2,6 ms**
 (x² − x(x + 1) + 3x² = 4, comme en P3) : bien sous 0,1 s par équation. Pire cas des bornes : x² + 999 999x − 499 997 = 0 **98 ms**
 (P3 : 88 ms ; écart de mesure, chemin inchangé). Aucune hausse au-delà de 0,1 s.
+
+**P4b** (`S/tmp/temps_p4b.py`, même mesure que P4a, python3 natif 3.14.4, 3 tours) : 212 entrées (les 167 de
+`corpus_second_degre.RESOLUES`, dont les 36 de `P4B` ; les 16 `NON_RESOLUES` ; les 21 formes `A_VENIR`, toutes résolues ; les 8
+`STRUCTURES_NON_ECRITES`, « hors_cours ») **301 ms en tout** (3e tour), la plus longue **3,9 ms** (2x⁴ + x³ − 28x² = 0 : ME de x²,
+tâtonnement, variante) : bien sous 0,1 s par équation. Pire cas des bornes : x² + 999 999x − 499 997 = 0 **88 ms** (P4a : 98 ms ;
+écart de mesure, chemin inchangé). Aucune hausse au-delà de 0,1 s (P4a : 212 ms pour 162 entrées, la plus longue 2,6 ms).
 
 Temps natifs des outils existants au départ (`S/dumps/depart-p1/temps/temps.json`, `--processus 1`, sur b72fe2e ; somme des appels de
 `resoudre_json` et plus long appel ; 12,9 s de mur) :

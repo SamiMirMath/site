@@ -1,4 +1,4 @@
-"""Corpus des tests de la rédaction du 2e degré (chantier equations-2e-degre, P2b, P3 et P4a ; decisions.md §§ 6, 7, 8 et 13).
+"""Corpus des tests de la rédaction du 2e degré (chantier equations-2e-degre, P2b à P4b ; decisions.md §§ 6, 7, 8 et 13).
 
 - `P2B` : les équations que P2b résout, sous la forme « P = 0 » développée et ordonnée : le § 8 (2.9 à 2.12, Javet 2.17, Az 4.1),
   chaque exercice qui demande de ramener ou de développer pris sous sa forme développée (« (dév.) »), les cas limites du § 6, les
@@ -7,13 +7,18 @@
   d'énoncé (dont 2.11 h, l'exemple cible) et d'autres formes (côté droit, réduction, décimaux, fractions, « − » devant un produit…).
 - `P4A` : les formes structurées que P4a résout sans développer (E1.3) : produit déjà nul (E13, Az 4.1 d), facteur commun aux deux
   membres (E3, 2.12 e), Id. rem. sur la forme structurée (E5 : 2.9 k, 2.9 l, 2.12 h), et d'autres formes de chacune.
-- `RESOLUES` : `P2B`, `P3` et `P4A`.
-- `STRUCTURES_NON_ECRITES` : des formes où une structure s'applique (`forme_structuree`) mais que P4a n'écrit pas : « non_traite »,
-  sans développer (suivi.md, questions de P4a).
+- `P4B` : les degrés ≠ 2 (E13) : ME de xᵏ en degré ≥ 3 (2.12 c, Az 4.1 f), Id. rem. de A = x² (x⁴ − 16, D28 et E9), degré 1
+  (isoler, D20), identité et égalité fausse (Az 4.1 g, phrases d'Exp-log), et les formes structurées laissées à P4b (facteur de degré 2
+  dans un produit déjà nul, degré 1 une fois factorisée, identité).
+- `RESOLUES` : `P2B`, `P3`, `P4A` et `P4B`.
+- `NON_RESOLUES` : ce qui reçoit un message définitif (§ 4, § 13.5) : bicarrée (« pas_encore »), hors du cours (degré ≥ 3 que le
+  cours ne résout pas, et les formes que l'outil n'écrit pas : suivi.md, questions de P4b) ; avec le statut attendu.
+- `STRUCTURES_NON_ECRITES` : des formes où une structure s'applique (`forme_structuree`) mais que l'outil n'écrit pas : « hors du
+  cours », sans développer (suivi.md, questions de P4a et P4b).
+- `SECTION_8` : les noms des exercices du § 8 (chacun a un instantané et le contrôle de l'oracle).
 - `A_VENIR` : les formes que P2b ne traitait pas, avec la partie qui les traite (P3 : ramener, développer ; P4a : formes
   structurées ; P4b : degrés ≠ 2, identité, bicarrée), leurs coefficients développés (ordre décroissant, pour l'oracle) et le S
-  attendu quand l'oracle ne s'applique pas (S = ℝ). Les tests des parties pas encore faites (hors de `PARTIES_FAITES`) sont des xfail
-  stricts.
+  attendu quand l'oracle ne s'applique pas (S = ℝ). Toutes les parties sont faites (`PARTIES_FAITES`) : aucun xfail.
 
 Les saisies sont lues par `expr.lire_membres` (lexique commun) ; les décimaux de l'énoncé sont ceux de la saisie."""
 
@@ -168,23 +173,94 @@ P4A = {
     "E3 solution répétée": "(x+1)^2=4(x+1)^2",
 }
 
-RESOLUES = {**P2B, **P3, **P4A}
+P4B = {
+    # § 8 : degrés ≠ 2 (E13)
+    "2.12 c": "x^3-x=0",
+    "Az 4.1 f": "x^3+8x^2=0",
+    "Az 4.1 g": "(2x-1)^2-4x(x-1)=1",
+    # degré ≥ 3 : ME de xᵏ, puis la méthode suivante sur le facteur ; Id. rem. de A = x² (§ 13.4, D28, E9)
+    "x⁴ − 16": "x^4-16=0",
+    "x³ − 5x": "x^3-5x=0",
+    "ME de −x en degré 3": "-x^3+x=0",
+    "ME de x, puis S-P": "x^3-5x^2+6x=0",
+    "ME de x, puis formule (E9)": "x^3-2x^2-2x=0",
+    "ME de 2x, puis Id. rem. (carré)": "2x^3-4x^2+2x=0",
+    "ME de x², puis tâtonnement": "2x^4+x^3-28x^2=0",
+    "ME de x, puis deux Id. rem.": "x^5-16x=0",
+    "Id. rem. de A = x², carré, Δ < 0": "x^4+2x^2+1=0",
+    "Id. rem. de A = 2x², deux tâtonnements en échec": "4x^4-9=0",
+    "Id. rem. de A = x², coefficients non entiers": "x^4-1/4=0",
+    "degré 3 ramené": "x^3=4x",
+    # degré 1 : ramener, puis isoler (D20)
+    "degré 1": "2x+4=0",
+    "degré 1, D20": "3x+1/3=0",
+    "degré 1, décimaux, D20": "0,5x-1,5=0",
+    "degré 1, côté droit": "x+1=3x-5",
+    "degré 1, x² s'annule": "x^2+1=x^2+x",
+    "degré 1, double distribution": "(x+1)(x+3)=x^2",
+    "Az 4.1 a": "3x+9=2(x+4)+1",
+    # identité et égalité fausse (phrases d'Exp-log, § 13.4)
+    "identité": "x+1=x+1",
+    "identité, double distribution": "(x+2)(x-2)=x^2-4",
+    "égalité fausse": "x^2+1=x^2+2",
+    "égalité fausse, réduction": "2x+3-2x=0",
+    # formes structurées laissées à P4b : facteur de degré 2 dans un produit déjà nul, degré 1 une fois factorisée, identité
+    "E13 facteur de degré 2, Id. rem.": "(x^2-1)(x+2)=0",
+    "E13 constante et facteur de degré 2": "3(x^2-4)=0",
+    "E13 facteur de degré 2, a < 0": "(4-x^2)(x+1)=0",
+    "E13 facteur de degré 2, S-P en échec (E9)": "3(x^2+x-1)=0",
+    "E13 facteur de degré 2, Δ < 0": "(x^2+1)(x-2)=0",
+    "E13 premier membre nul, facteur de degré 2": "0=(x^2-4)x",
+    "E5 deux carrés, degré 1": "(x+1)^2=(x-3)^2",
+    "E3 facteur commun, degré 1": "(x-1)(x+2)=(x-1)(x+5)",
+    "identité structurée, deux carrés": "(x+1)^2=(x+1)^2",
+    "identité structurée, facteur commun": "(x-1)(x+2)=(x-1)(x+2)",
+}
 
-PARTIES_FAITES = ("P3", "P4a")
+RESOLUES = {**P2B, **P3, **P4A, **P4B}
 
-# saisie : ce qui manque (une structure s'applique, P4a ne l'écrit pas : « non_traite », jamais développée)
+PARTIES_FAITES = ("P3", "P4a", "P4b")
+
+MESSAGE_BICARREE = ("Cette équation se ramène au 2e degré par un changement de variable : ce sera traité dans une prochaine "
+                    "version.")
+
+# nom : (saisie, statut attendu) — des messages définitifs (§ 4, § 13.5), jamais un statut temporaire
+NON_RESOLUES = {
+    "bicarrée": ("x^4-5x^2+4=0", "pas_encore"),
+    "bicarrée sans terme en x²": ("x^4+4=0", "pas_encore"),
+    "bicarrée ramenée": ("x^4=5x^2-4", "pas_encore"),
+    "bicarrée après une ME (§ 13.4 à la lettre)": ("2x^4-10x^2+8=0", "hors_cours"),
+    "degré 3 sans ME ni Id. rem.": ("x^3=x+1", "hors_cours"),
+    "Az 4.1 d développé": ("-3x^3+14x^2-21x+10=0", "hors_cours"),
+    "Id. rem., puis un facteur de degré 3": ("x^6-64=0", "hors_cours"),
+    "ME non entière en degré 3 (question 10)": ("0,5x^3-2x=0", "hors_cours"),
+    # ce que E2 ne développe pas (suivi.md, P3 et P4b)
+    "E2 nombre et deux parenthèses": ("2(x+1)(x+3)=5", "hors_cours"),
+    "E2 k(B)² et des termes en x": ("0,5(x+2)^2=x+3", "hors_cours"),
+    "E2 cube": ("(x+1)^3=8+x", "hors_cours"),
+    "E2 monôme écrit à l'envers": ("x*3+x^2=1", "hors_cours"),
+    "E2 carré d'un trinôme": ("(x^2+x+1)^2=x", "hors_cours"),
+    "E2 division par un nombre": ("x^2/2=1+x", "hors_cours"),
+    "Az 4.1 b": ("(3x-2)/6=(x+1)/4+5", "hors_cours"),
+    "Az 4.1 h": ("x^2+1-(10-x^2)/8=(6x-3)/4", "hors_cours"),
+}
+
+# saisie : ce qui manque (une structure s'applique, l'outil ne l'écrit pas : « hors du cours », jamais développée)
 STRUCTURES_NON_ECRITES = {
     "2(x-1)=3(1-x)(x+2)": "facteurs seulement proportionnels (x − 1, 1 − x)",
     "(x-1)(x+2)=2x-2": "facteur commun écrit développé à droite (2x − 2)",
     "2(x+1)^2=8": "√k irrationnel (A = √2(x + 1))",
     "-(x+1)^2+5=0": "A constant irrationnel (√5)",
     "(x+1)^3=0": "cube",
-    "(x^2-1)(x+2)=0": "facteur de degré 2 dans un produit (P4b)",
-    "3(x^2-4)=0": "facteur de degré 2 dans un produit (P4b)",
     "(x+1+2)(x-1)=0": "facteur non réduit",
-    "(x+1)^2=(x-3)^2": "degré 1 une fois factorisée (P4b)",
-    "(x-1)(x+2)=(x-1)(x+5)": "degré 1 une fois factorisée (P4b)",
+    "(x^2-1)^2=0": "carré d'un facteur de degré 2 (D24 sur un produit déjà factorisé)",
+    "(x+1)^2*(x^2-4)=0": "carré et facteur de degré 2 dans le même produit",
 }
+
+# les exercices du § 8 (noms du corpus)
+SECTION_8 = (["2.9 " + c for c in "abcdefghijkl"] + ["2.10 " + c for c in "abcdefghij"] + ["2.11 " + c for c in "abcdefghij"]
+             + ["2.12 " + c for c in "abcdefgh"] + ["Javet 2.17 " + c for c in "abcdef"] + ["Az 4.1 " + c for c in "cdefg"]
+             + ["(x + 1)(x + 3) = 15"])
 
 # nom : (saisie, partie, coefficients développés (ordre décroissant) ou None, S attendu en TeX ou None, ce qui manque)
 A_VENIR = {
@@ -210,6 +286,3 @@ A_VENIR = {
     "degré 1": ("2x+4=0", "P4b", [2, 4], None, "isoler (D20, E13)"),
     "Az 4.1 g": ("(2x-1)^2-4x(x-1)=1", "P4b", None, r"S = \mathbb{R}", "développer puis identité (E13, § 13.4)"),
 }
-
-MESSAGE_BICARREE = ("Cette équation se ramène au 2e degré par un changement de variable : ce sera traité dans une prochaine "
-                    "version.")

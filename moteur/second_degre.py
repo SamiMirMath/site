@@ -4,8 +4,9 @@ second_degre.py — Brique commune : équations polynomiales du 2e degré (et ce
 Chantier equations-2e-degre (docs/chantiers/equations-2e-degre/decisions.md, § 13 en tête). **P1 : le calcul** (sections 1 à 6),
 **P2b : la rédaction** (section 7 : `resoudre_equation`, `appliquer`, étapes structurées du § 5), **P3 : ramener et développer**
 (E1, E2 : `ramener` ; la lecture de la saisie est dans equations-2e-degre/equations.py), **P4a : les formes structurées**
-(E1.3, E3, E5, E13 : produit déjà nul, facteur commun aux deux membres, Id. rem. sur la forme structurée, sans développer). Tout est
-exact :
+(E1.3, E3, E5, E13 : produit déjà nul, facteur commun aux deux membres, Id. rem. sur la forme structurée, sans développer), **P4b :
+les degrés ≠ 2** (E13 : degré ≥ 3 par le chemin du cours, le produit écrit suivi facteur par facteur ; degré 1 : isoler ; identité et
+égalité fausse ; messages « bicarrée » et « hors du cours »). Tout est exact :
 polynômes à coefficients `Fraction` (`Polynome`), nombres p + q√m (`Nombre`, sur `noyau.racine_q` : pas de nouvelle simplification
 de k√m/d, § 13.2).
 
@@ -28,6 +29,7 @@ de k√m/d, § 13.2).
                                       forme_structuree(g, d, x) : une structure s'applique sans développer (E1.3) ; P4a
                                       l'écrit (ecrire_enonce : l'énoncé, ses produits côte à côte comme le corrigé)
     resoudre_equation(g, d, x, …)     la résolution rédigée (§ 5) : {statut, etapes, solutions, S, approx, variantes, message}
+    bicarree(P)                       ax⁴ + bx² + c sans ME ni Id. rem. : le message « bicarrée » (statut « pas_encore », § 4)
     appliquer(methode, P)             une méthode seule, rédigée (Etape), ou None si elle n'aboutit pas
     blocs(resolution)                 les blocs de moteur/sortie.py : la chaîne (bloc_rangees, membre de gauche), S encadré, la ligne ≈
     nb_exact, arbre_polynome,         l'écriture des valeurs exactes en arbres de moteur/expr.py (E11, E14 ; nombres.exact)
@@ -56,7 +58,7 @@ __all__ = ["Polynome", "Nombre", "HorsBornes", "vers_polynome", "mise_en_evidenc
            "verifier_solution", "approx_garantie", "ORDRE_DU_COURS", "ORDRE_PAR_LA_FORMULE", "METHODES",
            "resoudre_equation", "appliquer", "blocs", "nb_exact", "arbre_polynome", "arbre_nombre", "termes_developpes", "Produit",
            "SansLien", "rangees", "OPTIONS_CHAINE", "MESSAGES", "PHRASE_IDENTITE", "PHRASE_EGALITE_FAUSSE", "ramener",
-           "forme_structuree", "PHRASE_RAMENER", "ecrire_enonce", "Groupe", "Crochet", "Juxtaposition"]
+           "forme_structuree", "PHRASE_RAMENER", "ecrire_enonce", "Groupe", "Crochet", "Juxtaposition", "bicarree"]
 
 ORDRE_DU_COURS = ("ME", "IDREM", "SP", "TATONNEMENT", "FORMULE")          # D28 : ordre fixe, même si a = 1
 ORDRE_PAR_LA_FORMULE = ("ME_PUISSANCE", "FORMULE")                       # E12 : seulement xʲ en évidence, puis la formule
@@ -715,10 +717,10 @@ MESSAGES = MappingProxyType({                                                   
     "hors_cours": "Cette équation ne se résout pas avec les méthodes du cours.",
     "ne_conclut_pas": "Le calcul ne permet pas de conclure avec certitude : cette équation n'est pas résolue ici.",
     "hors_bornes": "Cette équation dépasse ce que l'outil sait traiter.",
-    "non_traite": "Cette forme d'équation n'est pas encore traitée par l'outil.",
+    "pas_encore": "Cette équation se ramène au 2e degré par un changement de variable : ce sera traité dans une prochaine version.",
 })
-PHRASE_IDENTITE = "Cette égalité est vraie pour tout nombre réel."                  # celle d'Exp-log (§ 13.4), pour P4b
-PHRASE_EGALITE_FAUSSE = "Cette égalité est fausse : l'équation n'a aucune solution."    # celle d'Exp-log, pour P4b
+PHRASE_IDENTITE = "Cette égalité est vraie pour tout nombre réel."                  # celle d'Exp-log (§ 13.4), P4b
+PHRASE_EGALITE_FAUSSE = "Cette égalité est fausse : l'équation n'a aucune solution."    # celle d'Exp-log, P4b
 PHRASE_SP_TROP = "Le trinôme est unitaire, mais il y a trop de couples à tester : on utilise la formule."      # § 13.5
 PHRASE_SP_ECHEC = "Aucun couple ne convient : on utilise la formule."                                         # D3
 
@@ -978,10 +980,49 @@ class _Contexte:
         self.x, self.X, self.dec, self.cours = inconnue, Var(inconnue), decimaux_enonce, cours
         self.k, self.j, self.apres_me = F(1), 0, False
         self.ecrits = None
+        self.courants, self.P = None, None
+
+    def suivre(self, P, k=1, j=0, facteurs=None):
+        """P4b : suit le produit écrit (préfixe k·xʲ, facteurs [(tuple de Nombre, exposant)] ; par défaut P seul) pour que chaque
+        factorisation d'un facteur le remplace sur place (degré ≥ 3, facteurs de degré 2 d'un produit écrit) ; P : le polynôme de
+        l'équation (garde-fou de chaque ligne)."""
+        self.k, self.j, self.P = F(k), j, en_nombres(P)
+        self.courants = [(en_nombres(f), e) for f, e in facteurs] if facteurs is not None else [(en_nombres(P), 1)]
 
     def produit(self, facteurs):
         """L'équation « k·xʲ · facteurs = 0 »."""
         return Eq(Produit(self.k, self.j, self.x, facteurs), Nb(0))
+
+    def remplacer(self, Q, nouveaux):
+        """L'équation du produit écrit dont le facteur Q (chaque occurrence d'exposant 1) est remplacé par `nouveaux`
+        [(tuple de Nombre, exposant)] ; sans suivi (appliquer), les seuls `nouveaux`. Garde-fou : le produit écrit se redéveloppe
+        en ±P."""
+        if self.courants is None:
+            return self.produit([(self.facteur(f), e) for f, e in nouveaux])
+        Qn, out = en_nombres(Q), []
+        for f, e in self.courants:
+            out += [(en_nombres(g), h) for g, h in nouveaux] if (f, e) == (Qn, 1) else [(f, e)]
+        if out == self.courants:
+            raise _Incoherent("facteur introuvable dans le produit écrit")
+        self.courants = out
+        return self.produit_courant()
+
+    def deplier(self, f):
+        """D24 : le carré (f)² du produit écrit réécrit (f)(f)."""
+        fn = en_nombres(f)
+        out = []
+        for g, e in self.courants:
+            out += [(g, 1), (g, 1)] if (g, e) == (fn, 2) else [(g, e)]
+        self.courants = out
+        return self.produit_courant()
+
+    def produit_courant(self):
+        """L'équation du produit écrit, relue dans Q(√m) (garde-fou : l'arbre écrit vaut ±P)."""
+        eq = self.produit([(self.facteur(f), e) for f, e in self.courants])
+        r = _ecrit_en_nombres(eq.g, self.x)
+        if r != self.P and r != en_nombres([-c for c in self.P]):
+            raise _Incoherent("produit écrit")
+        return eq
 
     def poly(self, Q):
         return arbre_polynome(Q, self.x, self.dec)
@@ -1002,13 +1043,19 @@ def _ecrire_me(R, ctx, Q, r):
     R.etape("factoriser", "ME", _t(ctx.poly(Q)), {"facteur": r["facteur"], "k": r["k"], "j": r["j"], "reste": r["reste"],
                                                    "facteurs": r["facteurs"]})
     if r["k"] < 0:
-        if a == -1:
+        if Q.degre != 2:                                                # P4b : pas de « trinôme » ni de a en degré ≠ 2
+            R.texte(rf"Le coefficient de \({_t(_puissance(ctx.X, Q.degre))}\) est négatif : on met d'abord \({_t(facteur)}\) en "
+                    r"évidence.")
+        elif a == -1:
             R.texte(rf"Le trinôme n'est pas unitaire (\(a = -1\)) : on met d'abord \({_t(facteur)}\) en évidence.")
         else:
             R.texte(rf"Le coefficient de \({_t(_puissance(ctx.X, Q.degre))}\) est négatif (\(a = {exact(a)}\)) : on met d'abord "
                     rf"\({_t(facteur)}\) en évidence.")
     ctx.k, ctx.j, ctx.apres_me = ctx.k * r["k"], ctx.j + r["j"], True
-    R.equiv(ctx.produit([(ctx.poly(r["reste"]), 1)]), "ME")
+    if ctx.courants is None:
+        R.equiv(ctx.produit([(ctx.poly(r["reste"]), 1)]), "ME")
+    else:
+        R.equiv(ctx.remplacer(Q, [(r["reste"], 1)]), "ME")
 
 
 def _ecrire_idrem(R, ctx, Q, r):
@@ -1018,21 +1065,28 @@ def _ecrire_idrem(R, ctx, Q, r):
     A_tex, B_tex = _t(_monome_abs(k, j, ctx.X, ctx.dec)), _t(arbre_nombre(B, ctx.dec))
     R.etape("factoriser", r["methode"], _t(ctx.poly(Q)), {"A": (k, j), "B": B, "facteurs": r["facteurs"]})
     avec = rf"avec \(\fbox{{$A = {A_tex},\ B = {B_tex}$}}\)"
-    f1, f2 = (ctx.facteur(f) for f in r["facteurs"])
+    g1, g2 = r["facteurs"]
     if r["methode"] == "IDREM_DIFF":
-        R.equiv(ctx.produit([(f1, 1), (f2, 1)]), rf"Id. rem. \(A^{{2}} - B^{{2}}\) {avec}")
+        R.equiv(ctx.remplacer(Q, [(g1, 1), (g2, 1)]), rf"Id. rem. \(A^{{2}} - B^{{2}}\) {avec}")
+        ctx.apres_me = True                                             # P4b : un facteur se factorise ensuite (x⁴ − 16)
         return
     deux_ab = _t(_monome_abs(2 * k * B.p, j, ctx.X, ctx.dec))
     signe = "+" if r["methode"] == "IDREM_PLUS" else "-"
     R.texte(rf"Id. rem. \(A^{{2}} {signe} 2AB + B^{{2}}\) {avec}. Vérification : \(2AB = 2 \cdot {A_tex} \cdot {B_tex} = {deux_ab}\) "
             r"\(\checkmark\)")
-    R.equiv(ctx.produit([(f1, 2)]))
-    R.equiv(ctx.produit([(f1, 1), (f1, 1)]))
+    R.equiv(ctx.remplacer(Q, [(g1, 2)]))
+    if ctx.courants is None:
+        R.equiv(ctx.produit([(ctx.facteur(g1), 1), (ctx.facteur(g1), 1)]))
+    else:
+        R.equiv(ctx.deplier(g1))
+    ctx.apres_me = True
 
 
 def _choix(ctx, Q, unitaire, methode):
     """E4 (D19) : la phrase de choix, avant le S-P, le tâtonnement ou la formule (seulement sur le chemin du cours)."""
     if methode == "FORMULE":
+        if ctx.apres_me:                                                # P4b : un facteur d'une Id. rem. (x⁴ − 1/4)
+            return rf"Les coefficients du trinôme \({_t(ctx.poly(Q))}\) ne sont pas entiers : on utilise la formule."
         return "Pas de ME, pas d'Id. rem. ; les coefficients ne sont pas entiers : on utilise la formule."
     if ctx.apres_me:
         return rf"Le trinôme \({_t(ctx.poly(Q))}\) " + ("est unitaire : S-P." if unitaire else "n'est pas unitaire : tâtonnement.")
@@ -1066,7 +1120,7 @@ def _ecrire_sp(R, ctx, Q, etape):
     p, q, s = essais["lignes"][essais["ok"]]
     if (p * q, p + q) != (c, b) or (Nombre(p), Nombre(1)) != r["facteurs"][0] or (Nombre(q), Nombre(1)) != r["facteurs"][1]:
         raise _Incoherent("ligne ✓ et facteurs du S-P")
-    R.equiv(ctx.produit([(ctx.facteur(f), 1) for f in r["facteurs"]]))
+    R.equiv(ctx.remplacer(Q, [(f, 1) for f in r["facteurs"]]))
 
 
 def _tex_calcul_tatonnement(a, b, c, r):
@@ -1102,7 +1156,7 @@ def _ecrire_tatonnement(R, ctx, Q, etape):
     R.texte(rf"\(\fbox{{${_t(X)} = {exact(racine)}$}}\) est solution{de}, car \({_tex_calcul_tatonnement(a, b, c, racine)}\).")
     R.texte(rf"Donc \({P_tex} = ({_t(ctx.facteur(r['facteurs'][0]))})({_t(Op('*', Nb(a), X))} + \triangle)\) avec "
             rf"\({exact(-racine)} \cdot \triangle = {exact(c)}\), donc \(\fbox{{$\triangle = {exact(triangle)}$}}\).")
-    R.equiv(ctx.produit([(ctx.facteur(f), 1) for f in r["facteurs"]]))
+    R.equiv(ctx.remplacer(Q, [(f, 1) for f in r["facteurs"]]))
 
 
 def _delta_tex(f, dec):
@@ -1207,17 +1261,17 @@ def _ecrire_produit_nul(R, ctx, P, pn, formules, reecriture=None):
         else:
             Q = rationnel(f)
             nuls.append(Eq(ctx.poly(Q), Nb(0)))
-            trinomes.append(Q)
-            fo = formules[Q]
-            finals += [Eq(X, arbre_nombre(v, dec)) for v in ((fo["x1"], fo["x2"]) if fo["delta"] > 0 else
-                                                            (fo["x"],) if fo["delta"] == 0 else ())]
+            fo = formules.get(Q) or racines_formule(Q)
+            trinomes.append((Q, fo))
+            eqs = [Eq(X, arbre_nombre(v, dec)) for v in ((fo["x1"], fo["x2"]) if fo["delta"] > 0 else
+                                                        (fo["x"],) if fo["delta"] == 0 else ())]
+            milieu += eqs
+            finals += eqs
     if not seul:
         R.equiv(_une_ou_plusieurs(nuls), "produit nul")
-    if trinomes:
-        if len(trinomes) > 1 or besoin_milieu:
-            raise _Incoherent("plusieurs trinômes ou kx = … avec la formule (P4b)")
-        _ecrire_formule(R, ctx, trinomes[0], formules[trinomes[0]], sur_facteur=True)
-    elif besoin_milieu:
+    for Q, fo in trinomes:                                              # E9 ; P4b : plusieurs trinômes, dans l'ordre du produit
+        _ecrire_formule(R, ctx, Q, fo, sur_facteur=True)
+    if besoin_milieu and milieu:
         R.equiv(_une_ou_plusieurs(milieu))
     finals = list({_t_eq(e): e for e in finals}.values())             # x = −1 une seule fois (facteurs proportionnels, P4a)
     if finals:
@@ -1423,7 +1477,7 @@ def forme_structuree(gauche, droite, inconnue):
     monôme commun aux deux membres, à un facteur constant près (E3, 2.12 e) ; un carré de binôme k(B)² et des constantes de signe
     opposé ou nulles, ou deux carrés de signes opposés sans constante (Id. rem. sur une forme structurée, E5 : 2.9 k, l ; 2.12 h).
     P4a en écrit la résolution (`_rediger_structure`) ; une structure qu'il n'écrit pas (facteurs seulement proportionnels, √k
-    irrationnel, somme de degré 2 dans un produit, cube…) donne « non_traite » : on ne la développe pas."""
+    irrationnel, cube…) donne « hors_cours » : on ne la développe pas (P4b ; suivi.md)."""
     x = inconnue
     for a, b in ((gauche, droite), (droite, gauche)):
         if _est_zero(b) and _est_produit(a, x):
@@ -1489,11 +1543,17 @@ def ramener(gauche, droite, inconnue, decimaux_enonce=False):
             raise _Incoherent("développement")
     D = Polynome([a - b for a, b in zip(list(Pg) + [0] * len(Pd), list(Pd) + [0] * len(Pg))])
     cote = "gauche"
-    if not Pd.nul() and D[-1] < 0:                                              # E1.2 : coefficient de tête positif
-        D, cote = Polynome([-c for c in D]), "droite"
-    final = Eq(arbre_polynome(D, x, dec), Nb(0))
-    if _relire(final, x) != (D, Polynome()):
-        raise _Incoherent("ramener")
+    if D.degre <= 0:                                                            # P4b : identité, égalité fausse (Exp-log)
+        final = Eq(nb_exact(Pg[0], dec), nb_exact(Pd[0], dec))                  # les constantes de chaque membre : 1 = 1, 1 = 2
+        g_, d_ = _relire(final, x)
+        if Polynome([g_[0] - d_[0]]) != D:
+            raise _Incoherent("ramener")
+    else:
+        if not Pd.nul() and D[-1] < 0:                                          # E1.2 : coefficient de tête positif
+            D, cote = Polynome([-c for c in D]), "droite"
+        final = Eq(arbre_polynome(D, x, dec), Nb(0))
+        if _relire(final, x) != (D, Polynome()):
+            raise _Incoherent("ramener")
     derniere = (ligne_red or (lignes_dev[-1] if lignes_dev else None) or (Eq(gauche, droite), None))[0]
     a_ecrire = _t_element(final) != _t_element(derniere)
     pas, en_tete = [], None
@@ -1658,10 +1718,22 @@ def _binome_ecrit(n, x):
     return Polynome([c[0], c[1]]), t
 
 
-def _produit_ecrit(n, x):
+def _trinome_ecrit(n, x):
+    """P4b : une somme écrite réduite de degré 2 (x² − 1, 4 − x², x² + x − 1 : monômes de degrés différents, non nuls, au moins
+    deux) : (Polynome, termes signés) ; None sinon."""
+    if not (isinstance(n, Op) and n.op in "+-"):
+        return None
+    t = _monomes_signes(n, x)
+    if t is None or max(j for j, _ in t) != 2 or len({j for j, _ in t}) != len(t) or any(k == 0 for _, k in t):
+        return None
+    c = dict(t)
+    return Polynome([c.get(0, 0), c.get(1, 0), c[2]]), t
+
+
+def _produit_ecrit(n, x, trinomes=False):
     """Un produit écrit (E13) : (k, j, [(somme écrite, Polynome, exposant)]) pour k·xʲ·Π(Bᵢ)^eᵢ, les sommes dans l'ordre écrit —
-    constantes, monômes, sommes réduites de degré 1 (`_binome_ecrit`) et leurs carrés (D24) ; None sinon (une somme de degré 2, un
-    cube… : non écrit en P4a)."""
+    constantes, monômes, sommes réduites de degré 1 (`_binome_ecrit`) et leurs carrés (D24), et, si `trinomes` (P4b), des sommes
+    réduites de degré 2 (`_trinome_ecrit`, exposant 1) ; None sinon (un cube… : non écrit)."""
     k, j, facteurs, pile = F(1), 0, [], [(n, 1)]
     while pile:
         m, s = _sans_neg(*pile.pop())
@@ -1681,6 +1753,8 @@ def _produit_ecrit(n, x):
             continue
         base, e = (m.a, 2) if isinstance(m, Pow) and isinstance(m.b, Nb) and m.b.val == 2 else (m, 1)
         b = _binome_ecrit(base, x)
+        if b is None and trinomes and e == 1:
+            b = _trinome_ecrit(base, x)
         if b is None:
             return None
         facteurs.append((base, b[0], e))
@@ -1738,16 +1812,24 @@ def _facteur_reduit(f, X, dec):
     return _somme(constantes + terme_x if c1.p < 0 and c0.signe() > 0 else terme_x + constantes)
 
 
+def _constante_reduite(f, dec):
+    """P4b : un facteur constant d'une Id. rem. structurée ((x + 1)² = (x − 3)² : (x + 1 − x + 3) = 4), écrit sans son signe."""
+    if not f[0].rationnel:
+        raise _Incoherent("facteur constant irrationnel")
+    return nb_exact(abs(f[0].p), dec)
+
+
 def _ligne_produit(facteurs, X, dec):
     """La ligne des facteurs réduits [(tuple de Nombre, arbre écrit)] : (produit écrit, facteurs dans l'ordre de la ligne, D14) ; un
     seul facteur monôme k·x passe en tête, comme une ME (x(x + 1), −3x(x + 1), jamais « (x + 1)(x) »)."""
-    monomes = [f for f, _ in facteurs if len(f) == 2 and f[0] == 0]
+    monomes = [f for f, _ in facteurs if (len(f) == 2 and f[0] == 0) or len(f) == 1]      # P4b : une constante aussi (4(2x − 2))
     if len(monomes) != 1:
         return Juxtaposition([a for _, a in facteurs]), [f for f, _ in facteurs]
     m = monomes[0]
     autres = [(f, a) for f, a in facteurs if f != m]
-    j = Juxtaposition([_monome_abs(m[1].p, 1, X, dec)] + [a for _, a in autres])
-    return (Neg(j) if m[1].p < 0 else j), [m] + [f for f, _ in autres]
+    c = m[-1].p
+    j = Juxtaposition([_monome_abs(c, len(m) - 1, X, dec)] + [a for _, a in autres])
+    return (Neg(j) if c < 0 else j), [m] + [f for f, _ in autres]
 
 
 class _Structuree:
@@ -1787,26 +1869,53 @@ class _Structuree:
         for f, e in ecrits:
             self.ctx.ecrits.setdefault(en_nombres(f), e)
         pn = produit_nul(facteurs)
-        if not pn["solutions"] or not all(verifier_solution(self.P, s) for s in pn["solutions"]):
+        if not all(verifier_solution(self.P, s) for s in pn["solutions"]):
             raise _Incoherent("solutions d'une forme structurée")
         if reecriture is not None:
             self.relire(reecriture)
         _ecrire_produit_nul(self.R, self.ctx, redevelopper(facteurs), pn, {}, reecriture=reecriture)
         self.R.fermer()
         sols = pn["solutions"]
+        noms = _noms_formule([racines_formule(rationnel(f)) for f, genre, _ in pn["facteurs"] if genre == "formule"])
         return {"statut": "resolu", "etapes": self.R.etapes, "solutions": sols, "S": _tex_S(sols, self.dec),
-                "approx": _tex_approx(sols, {}, self.x, self.dec), "variantes": [], "message": None}
+                "approx": _tex_approx(sols, noms, self.x, self.dec), "variantes": [], "message": None}
 
 
 def _ecrire_produit_ecrit(E, arbre, lu):
     """E13 (Az 4.1 d) : un produit écrit égal à 0, produit nul direct ; D24 : un carré réécrit (B)(B) d'abord ; les facteurs écrits
     comme dans la saisie (2 − x = 0), dans l'ordre écrit (D14), la constante et le monôme en tête (« 3 = 0 » impossible, « 2x = 0 »)."""
     k, j, facteurs = lu
+    if any(P.degre == 2 for _, P, _ in facteurs):
+        return _factoriser_produit_ecrit(E, lu)
     liste = ([_monome_n(k, j)] if (k, j) != (1, 0) else []) + [en_nombres(P) for _, P, e in facteurs for _ in range(e)]
     reecriture = None
     if any(e == 2 for _, _, e in facteurs):
         reecriture = Eq(_juxtaposer(_sans_carres(arbre)), Nb(0))
     return E.fin(liste, [(P, b) for b, P, _ in facteurs], reecriture)
+
+
+def _factoriser_produit_ecrit(E, lu):
+    """P4b : un produit écrit égal à 0 dont un facteur est de degré 2 ((x² − 1)(x + 2) = 0, 3(x² − 4) = 0) : chaque trinôme est
+    factorisé par le chemin du cours (D28 : ME, Id. rem., S-P, tâtonnement, formule), sur le produit écrit (`_Contexte.suivre`), les
+    tentatives en échec et la formule en dernier ; puis le produit nul (E8, E9). None (« hors du cours ») si un carré accompagne le
+    trinôme (D24 sur un produit déjà factorisé : non écrit) ou si un trinôme ne se résout pas."""
+    k, j, facteurs = lu
+    if any(e != 1 for _, _, e in facteurs):
+        return None
+    ctx = E.ctx
+    for b, P, _ in facteurs:
+        ctx.ecrits.setdefault(en_nombres(P), b)
+    ctx.suivre(E.P, k, j, [(P, 1) for _, P, _ in facteurs])
+    ctx.apres_me = True                                                 # on travaille sur un facteur : il est nommé (E4)
+    etapes, vus = [], []
+    for _, P, _ in facteurs:
+        if P.degre == 2 and P not in vus:
+            vus.append(P)
+            if _factoriser(P, ORDRE_DU_COURS, etapes) is None:
+                return None
+    _ecrire_chemin(E.R, ctx, _ordre_d_ecriture(etapes), True)
+    liste = ([_monome_n(ctx.k, ctx.j)] if (ctx.k, ctx.j) != (1, 0) else []) + [f for f, e in ctx.courants for _ in range(e)]
+    return E.fin(liste, [])
 
 
 def _commun(gauche, droite, x):
@@ -1827,8 +1936,8 @@ def _commun(gauche, droite, x):
                 continue
             G, H = sans(lg, i), sans(ld, i2)
             pg, ph = rationnel(_poly_facteurs(*G)), rationnel(_poly_facteurs(*H))
-            if pg.degre <= 1 and ph.degre <= 1 and rationnel(_nadd(en_nombres(pg), en_nombres(ph), -1)).degre == 1:
-                return b, P, G, H
+            if pg.degre <= 1 and ph.degre <= 1 and not rationnel(_nadd(en_nombres(pg), en_nombres(ph), -1)).nul():
+                return b, P, G, H                                       # P4b : G − H constant (degré 1 une fois factorisée)
     return None
 
 
@@ -1857,7 +1966,7 @@ def _ecrire_commun(E, gauche, droite, c):
     E.ramener([Eq(diff, Nb(0))], phrase=_phrase_attention(_t(Groupe(b))))
     (sg, ag, tg), (sh, ah, th) = _reste_ecrit(G, X, dec), _reste_ecrit(H, X, dec)
     Q = rationnel(_nadd(_poly_facteurs(*G), _poly_facteurs(*H), -1))
-    reduit = _facteur_reduit(en_nombres(Q), X, dec)
+    reduit = _facteur_reduit(en_nombres(Q), X, dec) if Q.degre == 1 else nb_exact(abs(Q[0]), dec)
     E.R.etape("factoriser", "ME", _t(diff), {"facteur": P, "facteurs": [en_nombres(P), en_nombres(Q)]})
     crochet = Op("-" if sh > 0 else "+", Neg(ag) if sg < 0 else ag, ah)
     E.equiv(Eq(Juxtaposition([b, Crochet(crochet)]), Nb(0)), "ME")
@@ -1941,8 +2050,8 @@ def _ecrire_carres(E, gauche, droite):
     if A is None or B is None:
         return None
     f1, f2 = _nadd(A["poly"], B["poly"]), _nadd(A["poly"], B["poly"], -1)
-    if len(f1) != 2 or len(f2) != 2:
-        return None                                                     # un facteur constant : degré 1 (P4b)
+    if len(f1) > 2 or len(f2) > 2 or (len(f1), len(f2)) == (1, 1):
+        return None
     if lignes:
         E.ramener(lignes)
     a_tex, b_tex = _t(A["etiquette"]), _t(B["etiquette"])
@@ -1958,22 +2067,40 @@ def _ecrire_carres(E, gauche, droite):
     if A["r"] != 1 or B["r"] != 1 or B["carre"]:
         moins = [(-s, t) for s, t in B["termes"]]
         E.equiv(Eq(Juxtaposition([_somme(A["termes"] + B["termes"]), _somme(A["termes"] + moins)]), Nb(0)))
-    r1, r2 = _facteur_reduit(f1, X, dec), _facteur_reduit(f2, X, dec)
+    r1, r2 = (_facteur_reduit(f, X, dec) if len(f) == 2 else _constante_reduite(f, dec) for f in (f1, f2))
     ligne, facteurs = _ligne_produit([(f1, r1), (f2, r2)], X, dec)
     E.equiv(Eq(ligne, Nb(0)))
     return E.fin(facteurs, [(f1, r1), (f2, r2)])
 
 
+def _ecrire_identite_structuree(E, gauche, droite):
+    """P4b : une forme structurée dont les deux membres sont égaux ((x + 1)² = (x + 1)², (x − 1)(x + 2) = (x − 1)(x + 2)) : « g − d = 0 »
+    sans développer (E1.3), puis « 0 = 0 » et la phrase de l'identité (Exp-log) ; S = ℝ. (Une égalité fausse ne peut pas venir
+    d'une forme structurée : elle donnerait « c = 0 » et la phrase d'Exp-log.)"""
+    d, sd_ = _sans_neg(droite)
+    if sd_ < 0:
+        diff = Op("+", _juxtaposer(gauche), Groupe(d) if comme_somme(d) else _juxtaposer(d))
+    else:
+        diff = Op("-", _juxtaposer(gauche), Groupe(droite) if comme_somme(droite) else _juxtaposer(droite))
+    E.ramener([Eq(diff, Nb(0)), Eq(nb_exact(E.P[0], E.dec), Nb(0))])
+    E.R.texte(PHRASE_IDENTITE if E.P.nul() else PHRASE_EGALITE_FAUSSE)
+    E.R.fermer()
+    ensemble = "reels" if E.P.nul() else "vide"
+    return {"statut": "resolu", "etapes": E.R.etapes, "solutions": [], "S": _tex_S([], E.dec, ensemble), "approx": None,
+            "variantes": [], "message": None}
+
+
 def _rediger_structure(gauche, droite, x, dec):
     """P4a : la résolution d'une forme structurée (E1.3 : rien n'est développé), dans cet ordre : produit déjà nul (E13), facteur
-    commun aux deux membres (E3), Id. rem. sur la forme structurée (E5). None si P4a ne l'écrit pas (« non_traite »)."""
+    commun aux deux membres (E3), Id. rem. sur la forme structurée (E5) ; P4b : identité, facteur de degré 2 dans un produit, degré 1
+    une fois factorisée. None si l'outil ne l'écrit pas (« hors_cours »)."""
     P = vers_polynome(Op("-", gauche, droite), x)
-    if P.degre < 1:
-        return None                                                     # identité ou égalité fausse : P4b
     E = _Structuree(ecrire_enonce(gauche, droite, x), P, x, dec)
+    if P.degre < 1:
+        return _ecrire_identite_structuree(E, gauche, droite)
     for a, b, cote in ((gauche, droite, "gauche"), (droite, gauche, "droite")):
         if _est_zero(b) and _est_produit(a, x):
-            lu = _produit_ecrit(a, x)
+            lu = _produit_ecrit(a, x, trinomes=True)
             if lu is None:
                 return None
             if cote == "droite":
@@ -1994,32 +2121,49 @@ def _formule_utilisee(ch):
     return any(e["methode"] == "FORMULE" for e in ch["etapes"])
 
 
+def bicarree(P):
+    """§ 4, § 13.4 : P = ax⁴ + bx² + c (c ≠ 0) auquel ni la ME ni l'Id. rem. ne s'applique (x⁴ − 5x² + 4) : il se ramène au 2e degré
+    par un changement de variable (message « bicarrée », statut « pas_encore »). Pris à la lettre : x⁴ − 16 (Id. rem.) n'en est
+    pas une, 2x⁴ − 10x² + 8 (ME de 2) non plus (« hors du cours »)."""
+    P = Polynome(P)
+    return (P.degre == 4 and P[1] == 0 and P[3] == 0 and P[0] != 0 and mise_en_evidence(P) is None
+            and identite(P) is None)
+
+
 def resoudre_equation(gauche, droite, inconnue, decimaux_enonce=False, methodes=ORDRE_DU_COURS):
     """La résolution rédigée de « gauche = droite » (arbres de moteur/expr.py) en l'inconnue (§ 5) :
 
-    {statut: "resolu" | "non_traite" | "hors_cours" | "ne_conclut_pas" | "hors_bornes",
+    {statut: "resolu" | "pas_encore" | "hors_cours" | "ne_conclut_pas" | "hors_bornes",
      etapes: [Etape], solutions: [Nombre] croissantes, S: TeX, approx: texte « soit … ≈ … » (TeX entre \\( et \\)) ou None,
      variantes: ["formule"] (E12 : le chemin du cours n'utilise pas la formule) ou [], message: texte pour un statut non résolu}
     Etape = {phase, methode, cible (TeX), parametres (calcul exact), lignes (rangées : triplets (lien, expr, prop) et `LigneTexte`),
              segment (la `Chaine` de l'étape, pivot puis ⇔, ou None)}.
 
     P4a : une forme structurée (`forme_structuree`, E1.3) est résolue sans développer (`_rediger_structure` : produit déjà nul,
-    facteur commun aux deux membres, Id. rem. sur la forme structurée ; chaque ligne relue, garde-fou exact), sans variante ; une
-    structure que P4a n'écrit pas reste « non_traite » (message clair, jamais développée). P3 : sinon, l'équation est ramenée à
-    « P = 0 » (E1, E2 : `ramener`, étapes de phase « ramener ») ; un P de degré ≠ 2 (identité, degré 1, degré ≥ 3 : P4b) reste
-    « non_traite ». Le calcul est celui de `chemin` (garde-fou exact) ; une valeur écrite qui ne vérifie pas son calcul donne
-    « ne_conclut_pas ». methodes=ORDRE_PAR_LA_FORMULE : la variante E12 (sans effet sur une forme structurée)."""
-    if (variables(gauche) | variables(droite)) - {inconnue}:
-        return _non_resolu("non_traite")
+    facteur commun aux deux membres, Id. rem. sur la forme structurée ; chaque ligne relue, garde-fou exact), sans variante. P3 :
+    sinon, l'équation est ramenée à « P = 0 » (E1, E2 : `ramener`, étapes de phase « ramener »). P4b : degré 2 et degré ≥ 3 par le
+    chemin du cours (`chemin`, E13) ; degré 1 : on isole l'inconnue (D20) ; degré 0 : identité (S = ℝ) ou égalité fausse (S = ∅),
+    avec les phrases d'Exp-log. Degré ≥ 3 que le cours ne résout pas : « pas_encore » (bicarrée, `bicarree`) ou « hors_cours » ;
+    une forme que l'outil n'écrit pas (E2 hors de ce qu'il développe, structure non écrite) : « hors_cours » (option qui affiche le
+    moins, suivi.md). Le calcul est celui de `chemin` (garde-fou exact) ; une valeur écrite qui ne vérifie pas son calcul donne
+    « ne_conclut_pas ». methodes=ORDRE_PAR_LA_FORMULE : la variante E12 (sans effet sur une forme structurée). Une autre lettre que
+    l'inconnue : ValueError (la lecture de la saisie, equations-2e-degre/equations.py, la refuse avant)."""
+    autres = (variables(gauche) | variables(droite)) - {inconnue}
+    if autres:
+        raise ValueError(f"autres lettres que l'inconnue {inconnue} : {sorted(autres)}")
     try:
         if forme_structuree(gauche, droite, inconnue):
             res = _rediger_structure(gauche, droite, inconnue, decimaux_enonce)
-            return res if res is not None else _non_resolu("non_traite")
+            return res if res is not None else _non_resolu("hors_cours")
         prep = ramener(gauche, droite, inconnue, decimaux_enonce)
-        if prep is None or prep["P"].degre != 2:
-            return _non_resolu("non_traite")
+        if prep is None:
+            return _non_resolu("hors_cours")
         P = prep["P"]
+        if P.degre <= 1:
+            return _rediger_bas_degre(Eq(gauche, droite), P, prep, inconnue, decimaux_enonce)
         ch = chemin(P, methodes)
+        if ch["statut"] == "hors_cours":
+            return _non_resolu("pas_encore" if bicarree(P) else "hors_cours")
         if ch["statut"] != "resolu":
             return _non_resolu(ch["statut"])
         res = _rediger(Eq(gauche, droite), P, ch, inconnue, decimaux_enonce, cours=methodes != ORDRE_PAR_LA_FORMULE, prep=prep)
@@ -2033,12 +2177,92 @@ def resoudre_equation(gauche, droite, inconnue, decimaux_enonce=False, methodes=
         return _non_resolu("ne_conclut_pas")
 
 
+def _ecrire_isoler(R, ctx, P):
+    """Degré 1 (E13, § 13.4, D20) : x = … en une ligne, ou kx = … puis x = … quand le coefficient de x n'est pas ±1 et que la
+    constante n'est pas entière (comme le produit nul, E8). Chaque valeur écrite est recalculée."""
+    c0, c1 = P
+    x = Nombre(-c0 / c1)
+    if c1 * x.p + c0 != 0:
+        raise _Incoherent("isoler")
+    final = Eq(ctx.X, arbre_nombre(x, ctx.dec))
+    deja = _t_element(final) == _t_element(R.pivot)
+    if deja and R.etapes:
+        return [x]                                                      # « … ⇔ x = 0 » : la ligne ramenée suffit (Az 4.1 a)
+    R.etape("isoler", "ISOLER", _t(ctx.poly(P)), {"solution": x})
+    if deja:
+        R.rangee(_t_element(final))                                     # « x = 0 » saisi tel quel : rien à transformer
+        return [x]
+    if c1 not in (1, -1) and c0.denominator != 1:
+        R.equiv(Eq(ctx.monome(c1, 1), nb_exact(-c0, ctx.dec)))
+    R.equiv(final)
+    return [x]
+
+
+def _rediger_bas_degre(enonce, P, prep, inconnue, dec):
+    """P4b : degré 1 (isoler) ; degré 0 : identité (« Cette égalité est vraie pour tout nombre réel. », S = ℝ) ou égalité fausse
+    (« Cette égalité est fausse : l'équation n'a aucune solution. », S = ∅), après les lignes de `ramener` (Exp-log, Az 4.1 g)."""
+    R, ctx = _Redaction(enonce), _Contexte(inconnue, dec)
+    _ecrire_ramener(R, prep, phrase=False)
+    if P.degre == 1:
+        sols, ensemble = _ecrire_isoler(R, ctx, P), "fini"
+    else:
+        if not R.etapes:
+            raise _Incoherent("identité sans ligne écrite")
+        R.texte(PHRASE_IDENTITE if P.nul() else PHRASE_EGALITE_FAUSSE)
+        sols, ensemble = [], "reels" if P.nul() else "vide"
+    R.fermer()
+    if not all(verifier_solution(P, s) for s in sols):
+        raise _Incoherent("solution de degré 1")
+    return {"statut": "resolu", "etapes": R.etapes, "solutions": sols, "S": _tex_S(sols, dec, ensemble),
+            "approx": _tex_approx(sols, {}, inconnue, dec) if sols else None, "variantes": [], "message": None}
+
+
+def _en_echec(e):
+    """Une étape qui mène à la formule sur son trinôme : S-P ou tâtonnement en échec, ou la formule elle-même."""
+    return e["methode"] == "FORMULE" or (e["methode"] in ("SP", "TATONNEMENT") and not e["aboutit"])
+
+
 def _rediger(enonce, P, ch, inconnue, dec, cours, prep=None):
+    """La rédaction du chemin du cours (`chemin`) de « P = 0 », après les étapes « ramener » de `prep`. P4b : le produit écrit est
+    suivi (`_Contexte.suivre`) : chaque factorisation d'un facteur le remplace sur place (degré ≥ 3) ; les tentatives en échec et
+    la formule d'un facteur sont écrites après les autres factorisations (x⁴ − 16 : l'Id. rem. de x² − 4, puis le S-P de x² + 4 en
+    échec), juste avant le produit nul (E9) ; en degré 2 elles sont déjà les dernières (mêmes lignes qu'en P2b)."""
     R, ctx = _Redaction(enonce), _Contexte(inconnue, dec, cours)
+    ctx.suivre(P)
     formules = {e["cible"]: e["resultat"] for e in ch["etapes"] if e["methode"] == "FORMULE"}
-    etapes = ch["etapes"]
+    etapes = _ordre_d_ecriture(ch["etapes"])
     if prep is not None:
         _ecrire_ramener(R, prep, phrase=cours and bool(etapes) and etapes[0]["methode"] in ("SP", "TATONNEMENT", "FORMULE"))
+    _ecrire_chemin(R, ctx, etapes, cours)
+    ecrits = ([_monome_n(ctx.k, ctx.j)] if (ctx.k, ctx.j) != (1, 0) else []) + [f for f, e in ctx.courants for _ in range(e)]
+    pn = produit_nul(ecrits, formules)                                  # les facteurs dans l'ordre écrit (D14)
+    if pn["solutions"] != ch["produit_nul"]["solutions"] or redevelopper(ecrits) != en_nombres(P):
+        raise _Incoherent("produit écrit et chemin du cours")
+    seul = pn["facteurs"][0][0] if len(pn["facteurs"]) == 1 else None
+    if seul is not None and pn["facteurs"][0][1] == "formule" and rationnel(seul) == P:
+        _ecrire_formule(R, ctx, P, formules[P], sur_facteur=False)
+    else:
+        _ecrire_produit_nul(R, ctx, P, pn, formules)
+    R.fermer()
+    sols = pn["solutions"]
+    return {"statut": "resolu", "etapes": R.etapes, "solutions": sols, "S": _tex_S(sols, dec),
+            "approx": _tex_approx(sols, _noms_formule(formules.values()), inconnue, dec), "variantes": [], "message": None}
+
+
+def _noms_formule(formules):
+    """x₁, x₂ (E14) : seulement si une seule formule les nomme (Δ > 0)."""
+    positifs = [f for f in formules if f["delta"] > 0]
+    return {positifs[0]["x1"]: "x_{1}", positifs[0]["x2"]: "x_{2}"} if len(positifs) == 1 else {}
+
+
+def _ordre_d_ecriture(etapes):
+    """Les étapes du chemin dans l'ordre d'écriture : les tentatives en échec et la formule d'un facteur après les autres (P4b)."""
+    return [e for e in etapes if not _en_echec(e)] + [e for e in etapes if _en_echec(e)]
+
+
+def _ecrire_chemin(R, ctx, etapes, cours):
+    """Les étapes de factorisation du chemin du cours (ME, Id. rem., S-P, tâtonnement, formule choisie d'emblée), dans l'ordre
+    donné, sur le produit écrit suivi par ctx."""
     for i, e in enumerate(etapes):
         m, Q, r = e["methode"], e["cible"], e["resultat"]
         if m == "ME":
@@ -2050,29 +2274,15 @@ def _rediger(enonce, P, ch, inconnue, dec, cours, prep=None):
         elif m == "TATONNEMENT":
             _ecrire_tatonnement(R, ctx, Q, e)
         elif m == "FORMULE":
-            if i == 0 or etapes[i - 1]["methode"] not in ("SP", "TATONNEMENT"):      # formule choisie d'emblée (D22, ou E12)
-                R.etape("factoriser", "FORMULE", _t(ctx.poly(Q)), r)
+            precedente = etapes[i - 1] if i else None
+            if precedente is None or precedente["methode"] not in ("SP", "TATONNEMENT") or precedente["cible"] != Q:
+                R.etape("factoriser", "FORMULE", _t(ctx.poly(Q)), r)            # formule choisie d'emblée (D22, ou E12)
                 if cours:
-                    if Q.entiers() or ctx.apres_me:
+                    if Q.entiers():
                         raise _Incoherent("formule d'emblée sur un trinôme à coefficients entiers")
                     R.texte(_choix(ctx, Q, False, "FORMULE"))
         else:
-            raise _Incoherent(f"méthode {m} hors de P2b")
-    pn = ch["produit_nul"]
-    formule_seule = len(pn["facteurs"]) == 1 and pn["facteurs"][0][1] == "formule"
-    if formule_seule:
-        Q = rationnel(pn["facteurs"][0][0])
-        _ecrire_formule(R, ctx, Q, formules[Q], sur_facteur=False)
-    else:
-        _ecrire_produit_nul(R, ctx, P, pn, formules)
-    R.fermer()
-    noms = {}
-    for f in formules.values():
-        if f["delta"] > 0:
-            noms[f["x1"]], noms[f["x2"]] = "x_{1}", "x_{2}"
-    sols = pn["solutions"]
-    return {"statut": "resolu", "etapes": R.etapes, "solutions": sols, "S": _tex_S(sols, dec),
-            "approx": _tex_approx(sols, noms, inconnue, dec), "variantes": [], "message": None}
+            raise _Incoherent(f"méthode {m} hors du chemin du cours")
 
 
 def appliquer(methode, P, inconnue="x", decimaux_enonce=False):
