@@ -420,7 +420,7 @@ aux élèves un exercice de l'examen). Elle prime sur le § 3 (liste fixe, gén�
 - Des bornes publiques du tirage, avec l'examen hors des bornes : refusé par l'enseignant (« un élève est sûr que telle ou telle
   solution n'est jamais à l'examen »).
 
-**Orientation de l'enseignant** (à trancher au chantier « moteur-serveur », audit à faire) :
+**Décision de l'enseignant (06.11.2026, soir) : d'abord le chantier « moteur-serveur », puis « S'entraîner »** (`docs/chantiers/entrainement-2e-degre/decisions.md`, en attente, sera revu pour un tirage côté serveur). Orientation, dont les détails (hébergeur, découpage) sont à trancher au chantier « moteur-serveur » (audit à faire) :
 - tout le moteur devient privé (aussi pour un accès réservé ou payant plus tard, à vérifier auprès de l'école) : les moteurs Python
   tournent sur un serveur (Infomaniak envisagé), la page n'en reçoit que la sortie JSON ; le dépôt passe en privé une fois le moteur
   retiré du site public (sans GitHub Pages, un dépôt privé est gratuit ; avec GitHub Pages, GitHub Pro est nécessaire, sinon le site

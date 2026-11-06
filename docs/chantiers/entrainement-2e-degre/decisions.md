@@ -5,6 +5,8 @@
 (§§ 1 à 13) > `suivi.md` de ce chantier. Ce fichier ne recopie pas la spécification : il la complète (§ 2), la découpe (§ 3) et dit ce
 qui sera relu (§ 4).
 
+**En attente (décision de l'enseignant du 06.11.2026, soir) : ce chantier ne démarre qu'après le chantier « moteur-serveur ».** Règle des examens (`quiz.md` § 8) : un exercice tiré au sort ne doit jamais pouvoir tomber à l'examen ; le tirage se fera côté serveur (générateurs, graine et liste d'examen jamais publics). Ce fichier sera revu en conséquence avant l'exécution, en particulier QZ-13 (`exo` = `<famille>-<graine>`) et la partie E4 (générateurs).
+
 Dossier du chantier : `docs/chantiers/entrainement-2e-degre/` (ce fichier, `suivi.md`, `journal.md`).
 
 ---
